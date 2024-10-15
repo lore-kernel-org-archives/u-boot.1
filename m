@@ -4,71 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86310CFC27C
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:28:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30C6CD1D879
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:29:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 747DE88B5D;
-	Tue, 15 Oct 2024 17:28:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7BAB3889CA;
+	Tue, 15 Oct 2024 17:28:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UYdrFL/Q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gevB8fRl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF27088969; Tue, 15 Oct 2024 17:28:10 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 2255F88AC2; Tue, 15 Oct 2024 17:28:18 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4CA788AC2
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:28:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13F75889AA
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:28:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6cbe8119e21so44753146d6.1
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 08:28:08 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6cbce9e4598so36737666d6.2
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 08:28:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729006087; x=1729610887; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729006095; x=1729610895; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=R5eREgCnzBuwuMDrr+BI8UyW3R+9W+lYmu4ISd0JRMg=;
- b=UYdrFL/QBL2rXjX+mm470HzbOXCBX8lupkMBYgp+LNaFhwMSRst8/NW+k0BRpenNrG
- wCnduA+5YO7WT/P9+Srnk7ocnJX54YFWIn+DB8fjWBB8b+IiKNk6I4Ts6qw9Riyp35AD
- X24sC4e6NnlJfROk/ULpvCM8ptj/5pJrodA48=
+ bh=GW1tGj45ZlvKoLj8ls4DXSL7mKxgXXr2hdZohEsb1Fk=;
+ b=gevB8fRlK/ov2qjwfU8tJWIFoJu2bxs08N+OR2P/ZAIt11gGdWSJHBrqf0KLzYLfWf
+ J9GuRfOtEIJcFQkiSDD83PuuzdHyv9Ra6fZsO1QnIFIreSENWuUQSPQoG9J6IJKgfvYC
+ rJWCUeoj0El7vxrMBXVHIxUOKn1sK8v/PZnH0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729006087; x=1729610887;
+ d=1e100.net; s=20230601; t=1729006095; x=1729610895;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=R5eREgCnzBuwuMDrr+BI8UyW3R+9W+lYmu4ISd0JRMg=;
- b=urXNWG6eKG9N/umCgJd8uI+//UIR/5r8LVe/3sZQL++L5Zo52hEnljaOVNBK03s4dg
- NEjq81fOoKdVLmSpA3JxxGUadl478tpnRMwQu5fou20FFgI9nad/FLSgGoKjdUFrKMR4
- T4gie6KkhH6wtGbcgEnu/iTcRavuV/fTxiiSCsJYv5WIvnbxJbIYP07VjCQ+gzb/x5DJ
- jW3mptneFVI0eJSMX/tceDF3PKMJReA3tFTnzvBZ675G1pzpXoC/IrsNLoXEw6KQCn4A
- TREKJqb+uK8n+aR75KA3DgbleynNZQ4mgIW7lYj+SUv5Y8mj6h6rL8ODK5BV3xGjqAP/
- rjvg==
-X-Gm-Message-State: AOJu0YwEliNO/t3B7sRL2/fmfIusnGap0QU2ffb3PiToweAw3l+RJ+AV
- LmPd3wDV1VJrnC5ZSFjH7EfAENDDhnxByalcgp07eI2rxvQ33JPdI5SdL1KL/D6MDUaDP21FQAU
- +VwREJ4vm31F78dgBSqpjLKqAsmlv+0I5ILks
-X-Google-Smtp-Source: AGHT+IEHqQy9pOslFVttRC4nu30PzbtDdEP3pi0VJzZu3HdLoTvEMnF+RBmcM+XWKRn3vBmW2JJA8CGBVMFNE31tIiE=
-X-Received: by 2002:a05:6214:31a1:b0:6cb:eb0e:761f with SMTP id
- 6a1803df08f44-6cc2b8dc202mr10131066d6.27.1729006087552; Tue, 15 Oct 2024
- 08:28:07 -0700 (PDT)
+ bh=GW1tGj45ZlvKoLj8ls4DXSL7mKxgXXr2hdZohEsb1Fk=;
+ b=M7L7Uq5qYIqpBxnkYSIisuNPm201dFJIQ4OLVMlaU8foQHr2JP/UoSik5/aXi9LV4c
+ qYuW9RaEowQPwMN4pxc0m5HA/jL/by5WUW6ZjOBrpKuOaQVUgKIhtrwcieh6SRpLOaBG
+ IAVZn4Igp942TiDrDVQUE8Fk3YfVe+3zw1cLCpasm3Z7fpzDXKAKiZWT9BwmiVJkh/fn
+ nolja+Ku6SSY4BEcdg4RHKZ1E4rgVus7T9RavOhYqHHJuIQPGkmr1Nyg6/EOIb+NJOkR
+ XvFFmkW9fCrKiDpgYgdjUE5dsCx7EMg5T0KktL2pvfv5iKk2uJY6pSwzA55jjnceVZqu
+ w3ow==
+X-Gm-Message-State: AOJu0Yzbadrr/gdDKYT9oo5nusL/MtnMu5gywMLgke0Ws8HvYqrEbx08
+ C8YRUn3onHwV6hN2YY1UmCFBKeTsBohmTLzTMJWLRYRYskOg/VKb5GvAaaIpbZ1CVrH+23mcJYO
+ MylZtj4EktQ8Rq5Ug12fiuLX1z0fX5PfQIksT
+X-Google-Smtp-Source: AGHT+IFKRN1qneetaAgM7pBQHzS3Era5xDtl6vKREZOgy1COVT1bU/Qi3j7Zk7sQB8N8tOD1FMPvC2qUk6unQkoQgBc=
+X-Received: by 2002:a05:6214:3381:b0:6cb:f039:85a0 with SMTP id
+ 6a1803df08f44-6cbf9e9f2edmr160782446d6.40.1729006093502; Tue, 15 Oct 2024
+ 08:28:13 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241015133304.2874735-1-sjg@chromium.org>
- <20241015133304.2874735-4-sjg@chromium.org>
- <20241015143730.GN53053@bill-the-cat>
-In-Reply-To: <20241015143730.GN53053@bill-the-cat>
+ <20241015133304.2874735-3-sjg@chromium.org>
+ <CAC_iWjL5+LN4ReAo7LNhRrC1==V8ciCd4M73kUXktV7ufQEhng@mail.gmail.com>
+In-Reply-To: <CAC_iWjL5+LN4ReAo7LNhRrC1==V8ciCd4M73kUXktV7ufQEhng@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 15 Oct 2024 09:27:56 -0600
-Message-ID: <CAFLszTgpH-exrut_8A58sAU=x4yUy6rjUe1TwOBCONTPN6fo7g@mail.gmail.com>
-Subject: Re: [PATCH v3 3/7] am65x: Use map_to_sysmem() to convert from pointer
-To: Tom Rini <trini@konsulko.com>
+Date: Tue, 15 Oct 2024 09:28:02 -0600
+Message-ID: <CAFLszTibyH0jEbZ-G6VifrcmpXmxNq00TnZM3cEAxWpQGQpBZQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/7] common: Tidy up how malloc() is inited
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andrew Davis <afd@ti.com>, 
- Joao Paulo Goncalves <joao.goncalves@toradex.com>, Nishanth Menon <nm@ti.com>
+ Tom Rini <trini@konsulko.com>, Artur Rojek <artur@conclusive.pl>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
+ Eugene Uriev <eugeneuriev@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,75 +92,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ilias,
 
-On Tue, 15 Oct 2024 at 08:37, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 15 Oct 2024 at 07:38, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Tue, Oct 15, 2024 at 07:33:00AM -0600, Simon Glass wrote:
+> Hi Simon,
 >
-> > The board_init_f() function for am65x is a bit confusing, since it uses
-> > the variable name 'pool_addr' to hold a pointer. It then casts it to an
-> > address to pass to mem_alloc_init()
+> I did review enough of this series in v1 [0]. Please resend it with
+> the proper tags added. Did anything change and you dropped by r-b?
+> Because the changelog says no changes
+
+I collect tags with patman...it still doesn't see anything. Which
+patch are you referring to?
+
+>
+> On Tue, 15 Oct 2024 at 16:33, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Rename the variable and use mapmem to convert to an address.
+> > The call to malloc() is a bit strange. The naming of the arguments
+> > suggests that an address is passed, but in fact it is a pointer, at
+> > least in the board_init_r() function and SPL equivalent.
+> >
+> > Update it to work as described. Add a function comment as well.
+> >
+> > Note that this does adjustment does not extend into the malloc()
+> > implementation itself, apart from changing mem_malloc_init(), since
+> > there are lots of casts and pointers and integers are used
+> > interchangeably.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Reviewed-by: Tom Rini <trini@konsulko.com>
 > > ---
 > >
 > > (no changes since v1)
 > >
-> >  arch/arm/mach-k3/am65x/am654_init.c | 11 ++++++-----
-> >  1 file changed, 6 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/arch/arm/mach-k3/am65x/am654_init.c b/arch/arm/mach-k3/am65x/am654_init.c
-> > index a4f038029d7..ddcc1355210 100644
-> > --- a/arch/arm/mach-k3/am65x/am654_init.c
-> > +++ b/arch/arm/mach-k3/am65x/am654_init.c
-> > @@ -8,6 +8,7 @@
-> >
-> >  #include <fdt_support.h>
-> >  #include <init.h>
-> > +#include <mapmem.h>
-> >  #include <asm/global_data.h>
-> >  #include <asm/io.h>
-> >  #include <spl.h>
-> > @@ -165,7 +166,7 @@ void board_init_f(ulong dummy)
-> >  #if defined(CONFIG_K3_LOAD_SYSFW) || defined(CONFIG_K3_AM654_DDRSS)
-> >       struct udevice *dev;
-> >       size_t pool_size;
-> > -     void *pool_addr;
-> > +     void *pool;
-> >       int ret;
-> >  #endif
-> >       /*
-> > @@ -204,14 +205,14 @@ void board_init_f(ulong dummy)
-> >        * malloc pool of which we use all that's left.
-> >        */
-> >       pool_size = CONFIG_VAL(SYS_MALLOC_F_LEN) - gd->malloc_ptr;
-> > -     pool_addr = malloc(pool_size);
-> > -     if (!pool_addr)
-> > +     pool = malloc(pool_size);
-> > +     if (!pool)
-> >               panic("ERROR: Can't allocate full malloc pool!\n");
-> >
-> > -     mem_malloc_init((ulong)pool_addr, (ulong)pool_size);
-> > +     mem_malloc_init(map_to_sysmem(pool), (ulong)pool_size);
-> >       gd->flags |= GD_FLG_FULL_MALLOC_INIT;
-> >       debug("%s: initialized an early full malloc pool at 0x%08lx of 0x%lx bytes\n",
-> > -           __func__, (unsigned long)pool_addr, (unsigned long)pool_size);
-> > +           __func__, (unsigned long)pool, (unsigned long)pool_size);
-> >       /*
-> >        * Process pinctrl for the serial0 a.k.a. WKUP_UART0 module and continue
-> >        * regardless of the result of pinctrl. Do this without probing the
->
-> This covers half of what we talked about in v2. But map_to_sysmem() is a
-> sandbox thing that should not be called outside of (a) arch/sandbox or
-> (b) common code that runs on sandbox. And honestly, we should work to
-> hide that abstraction as much as we can, not start introducing it more.
-
-Yes that's right. Perhaps we should document that.
-
-We can drop this patch.
+> >  common/board_r.c  | 3 +--
+> >  common/dlmalloc.c | 8 +++++---
+> >  common/spl/spl.c  | 4 +---
+> >  include/malloc.h  | 8 ++++++++
+> >  4 files changed, 15 insertions(+), 8 deletions(-)
 
 Regards,
 Simon
