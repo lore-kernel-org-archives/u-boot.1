@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F4062D1D879
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:37:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1021CCFC27C
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:38:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 047F188753;
-	Tue, 15 Oct 2024 17:37:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7382988A47;
+	Tue, 15 Oct 2024 17:37:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 887558899C; Tue, 15 Oct 2024 17:37:44 +0200 (CEST)
+ id AB3A388730; Tue, 15 Oct 2024 17:37:47 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 505B688730
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:37:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id B7063889B3
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:37:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 63B5E1063;
- Tue, 15 Oct 2024 08:38:11 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C474C1477;
+ Tue, 15 Oct 2024 08:38:14 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E3A6F3F528;
- Tue, 15 Oct 2024 08:37:38 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 50E6E3F528;
+ Tue, 15 Oct 2024 08:37:42 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -33,9 +33,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 01/15] lmb: add versions of the lmb API with flags
-Date: Tue, 15 Oct 2024 21:07:03 +0530
-Message-Id: <20241015153717.401371-2-sughosh.ganu@linaro.org>
+Subject: [PATCH v4 02/15] lmb: add a flag to allow suppressing memory map
+ change notification
+Date: Tue, 15 Oct 2024 21:07:04 +0530
+Message-Id: <20241015153717.401371-3-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241015153717.401371-1-sughosh.ganu@linaro.org>
 References: <20241015153717.401371-1-sughosh.ganu@linaro.org>
@@ -57,222 +58,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LMB module is to be used as a backend for allocating and freeing
-up memory requested from other modules like EFI. These memory requests
-are different from the typical LMB reservations in that memory
-required by the EFI module cannot be overwritten, or re-requested. Add
-versions of the LMB API functions with flags for allocating and
-freeing up memory. The caller can then use these API's for specifying
-the type of memory that is required. For now, these functions will be
-used by the EFI memory module.
+Add a flag LMB_NONOTIFY that can be passed to the LMB API's for
+reserving memory. This will then result in no notification being sent
+from the LMB module for the changes to the LMB's memory map.
+
+While here, also add a description of the memory attributes that the
+flags signify.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-Changes since V3: None
+Changes since V3:
+* Add comments for the LMB_NOOVERWRITE and LMB_NONOTIFY flags
 
- include/lmb.h | 56 +++++++++++++++++++++++++++++++++
- lib/lmb.c     | 85 ++++++++++++++++++++++++++++++++++++++++++++++++++-
- 2 files changed, 140 insertions(+), 1 deletion(-)
+ include/lmb.h | 3 +++
+ lib/lmb.c     | 2 +-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/include/lmb.h b/include/lmb.h
-index aee2f9fcdaa..0e8426f4379 100644
+index 0e8426f4379..ec477c1f51d 100644
 --- a/include/lmb.h
 +++ b/include/lmb.h
-@@ -90,6 +90,50 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr);
- phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size);
- phys_size_t lmb_get_free_size(phys_addr_t addr);
- 
-+/**
-+ * lmb_alloc_flags() - Allocate memory region with specified attributes
-+ * @size: Size of the region requested
-+ * @align: Alignment of the memory region requested
-+ * @flags: Memory region attributes to be set
-+ *
-+ * Allocate a region of memory with the attributes specified through the
-+ * parameter.
-+ *
-+ * Return: base address on success, 0 on error
-+ */
-+phys_addr_t lmb_alloc_flags(phys_size_t size, ulong align, uint flags);
-+
-+/**
-+ * lmb_alloc_base_flags() - Allocate specified memory region with specified attributes
-+ * @size: Size of the region requested
-+ * @align: Alignment of the memory region requested
-+ * @max_addr: Maximum address of the requested region
-+ * @flags: Memory region attributes to be set
-+ *
-+ * Allocate a region of memory with the attributes specified through the
-+ * parameter. The max_addr parameter is used to specify the maximum address
-+ * below which the requested region should be allocated.
-+ *
-+ * Return: base address on success, 0 on error
-+ */
-+phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
-+				 phys_addr_t max_addr, uint flags);
-+
-+/**
-+ * lmb_alloc_addr_flags() - Allocate specified memory address with specified attributes
-+ * @base: Base Address requested
-+ * @size: Size of the region requested
-+ * @flags: Memory region attributes to be set
-+ *
-+ * Allocate a region of memory with the attributes specified through the
-+ * parameter. The base parameter is used to specify the base address
-+ * of the requested region.
-+ *
-+ * Return: base address on success, 0 on error
-+ */
-+phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
-+				 uint flags);
-+
- /**
-  * lmb_is_reserved_flags() - test if address is in reserved region with flag bits set
-  *
-@@ -102,6 +146,18 @@ phys_size_t lmb_get_free_size(phys_addr_t addr);
+@@ -18,11 +18,14 @@
+  * enum lmb_flags - definition of memory region attributes
+  * @LMB_NONE: no special request
+  * @LMB_NOMAP: don't add to mmu configuration
++ * @LMB_NOOVERWRITE: the memory region cannot be overwritten/re-reserved
++ * @LMB_NONOTIFY: do not notify other modules of changes to this memory region
   */
- int lmb_is_reserved_flags(phys_addr_t addr, int flags);
+ enum lmb_flags {
+ 	LMB_NONE		= 0,
+ 	LMB_NOMAP		= BIT(1),
+ 	LMB_NOOVERWRITE		= BIT(2),
++	LMB_NONOTIFY		= BIT(3),
+ };
  
-+/**
-+ * lmb_free_flags() - Free up a region of memory
-+ * @base: Base Address of region to be freed
-+ * @size: Size of the region to be freed
-+ * @flags: Memory region attributes
-+ *
-+ * Free up a region of memory.
-+ *
-+ * Return: 0 if successful, -1 on failure
-+ */
-+long lmb_free_flags(phys_addr_t base, phys_size_t size, uint flags);
-+
- long lmb_free(phys_addr_t base, phys_size_t size);
- 
- void lmb_dump_all(void);
+ /**
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 380d92a6718..a38537af9c3 100644
+index a38537af9c3..e1e616679f0 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -479,7 +479,7 @@ long lmb_add(phys_addr_t base, phys_size_t size)
- 	return lmb_add_region(lmb_rgn_lst, base, size);
- }
- 
--long lmb_free(phys_addr_t base, phys_size_t size)
-+static long __lmb_free(phys_addr_t base, phys_size_t size)
+@@ -30,7 +30,7 @@ static struct lmb lmb;
+ static void lmb_print_region_flags(enum lmb_flags flags)
  {
- 	struct lmb_region *rgn;
- 	struct alist *lmb_rgn_lst = &lmb.used_mem;
-@@ -530,6 +530,27 @@ long lmb_free(phys_addr_t base, phys_size_t size)
- 				    rgn[i].flags);
- }
+ 	u64 bitpos;
+-	const char *flag_str[] = { "none", "no-map", "no-overwrite" };
++	const char *flag_str[] = { "none", "no-map", "no-overwrite", "no-notify" };
  
-+long lmb_free(phys_addr_t base, phys_size_t size)
-+{
-+	return __lmb_free(base, size);
-+}
-+
-+/**
-+ * lmb_free_flags() - Free up a region of memory
-+ * @base: Base Address of region to be freed
-+ * @size: Size of the region to be freed
-+ * @flags: Memory region attributes
-+ *
-+ * Free up a region of memory.
-+ *
-+ * Return: 0 if successful, -1 on failure
-+ */
-+long lmb_free_flags(phys_addr_t base, phys_size_t size,
-+		    __always_unused uint flags)
-+{
-+	return __lmb_free(base, size);
-+}
-+
- long lmb_reserve_flags(phys_addr_t base, phys_size_t size, enum lmb_flags flags)
- {
- 	struct alist *lmb_rgn_lst = &lmb.used_mem;
-@@ -613,6 +634,23 @@ phys_addr_t lmb_alloc(phys_size_t size, ulong align)
- 	return lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE);
- }
- 
-+/**
-+ * lmb_alloc_flags() - Allocate memory region with specified attributes
-+ * @size: Size of the region requested
-+ * @align: Alignment of the memory region requested
-+ * @flags: Memory region attributes to be set
-+ *
-+ * Allocate a region of memory with the attributes specified through the
-+ * parameter.
-+ *
-+ * Return: base address on success, 0 on error
-+ */
-+phys_addr_t lmb_alloc_flags(phys_size_t size, ulong align, uint flags)
-+{
-+	return __lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE,
-+				flags);
-+}
-+
- phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
- {
- 	phys_addr_t alloc;
-@@ -626,6 +664,33 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
- 	return alloc;
- }
- 
-+/**
-+ * lmb_alloc_base_flags() - Allocate specified memory region with specified attributes
-+ * @size: Size of the region requested
-+ * @align: Alignment of the memory region requested
-+ * @max_addr: Maximum address of the requested region
-+ * @flags: Memory region attributes to be set
-+ *
-+ * Allocate a region of memory with the attributes specified through the
-+ * parameter. The max_addr parameter is used to specify the maximum address
-+ * below which the requested region should be allocated.
-+ *
-+ * Return: base address on success, 0 on error
-+ */
-+phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
-+				 phys_addr_t max_addr, uint flags)
-+{
-+	phys_addr_t alloc;
-+
-+	alloc = __lmb_alloc_base(size, align, max_addr, flags);
-+
-+	if (alloc == 0)
-+		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
-+		       (ulong)size, (ulong)max_addr);
-+
-+	return alloc;
-+}
-+
- static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
- 				    enum lmb_flags flags)
- {
-@@ -660,6 +725,24 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
- 	return __lmb_alloc_addr(base, size, LMB_NONE);
- }
- 
-+/**
-+ * lmb_alloc_addr_flags() - Allocate specified memory address with specified attributes
-+ * @base: Base Address requested
-+ * @size: Size of the region requested
-+ * @flags: Memory region attributes to be set
-+ *
-+ * Allocate a region of memory with the attributes specified through the
-+ * parameter. The base parameter is used to specify the base address
-+ * of the requested region.
-+ *
-+ * Return: base address on success, 0 on error
-+ */
-+phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
-+				 uint flags)
-+{
-+	return __lmb_alloc_addr(base, size, flags);
-+}
-+
- /* Return number of bytes from a given address that are free */
- phys_size_t lmb_get_free_size(phys_addr_t addr)
- {
+ 	do {
+ 		bitpos = flags ? fls(flags) - 1 : 0;
 -- 
 2.34.1
 
