@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1021CCFC27C
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:38:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C979CFC27C
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:38:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7382988A47;
-	Tue, 15 Oct 2024 17:37:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0429C889B3;
+	Tue, 15 Oct 2024 17:37:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB3A388730; Tue, 15 Oct 2024 17:37:47 +0200 (CEST)
+ id 8E65D889C3; Tue, 15 Oct 2024 17:37:52 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id B7063889B3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:37:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 2580988A24
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:37:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C474C1477;
- Tue, 15 Oct 2024 08:38:14 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 311F9153B;
+ Tue, 15 Oct 2024 08:38:18 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 50E6E3F528;
- Tue, 15 Oct 2024 08:37:42 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B26C43F528;
+ Tue, 15 Oct 2024 08:37:45 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -33,10 +33,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 02/15] lmb: add a flag to allow suppressing memory map
- change notification
-Date: Tue, 15 Oct 2024 21:07:04 +0530
-Message-Id: <20241015153717.401371-3-sughosh.ganu@linaro.org>
+Subject: [PATCH v4 03/15] lmb: add and reserve memory above ram_top
+Date: Tue, 15 Oct 2024 21:07:05 +0530
+Message-Id: <20241015153717.401371-4-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241015153717.401371-1-sughosh.ganu@linaro.org>
 References: <20241015153717.401371-1-sughosh.ganu@linaro.org>
@@ -58,54 +57,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a flag LMB_NONOTIFY that can be passed to the LMB API's for
-reserving memory. This will then result in no notification being sent
-from the LMB module for the changes to the LMB's memory map.
-
-While here, also add a description of the memory attributes that the
-flags signify.
+U-Boot does not use memory above ram_top. However, this memory does
+need to get registered as part of the memory map, so that subsystems
+like EFI pass it on to the operating system as part of the EFI memory
+map. Add memory above ram_top and reserve it with the LMB_NOOVERWRITE
+flag so that it does not get allocated or re-used.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Suggested-by: Mark Kettenis <kettenis@openbsd.org>
 ---
-Changes since V3:
-* Add comments for the LMB_NOOVERWRITE and LMB_NONOTIFY flags
+Changes since V3: New patch
 
- include/lmb.h | 3 +++
- lib/lmb.c     | 2 +-
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ lib/lmb.c | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/include/lmb.h b/include/lmb.h
-index 0e8426f4379..ec477c1f51d 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -18,11 +18,14 @@
-  * enum lmb_flags - definition of memory region attributes
-  * @LMB_NONE: no special request
-  * @LMB_NOMAP: don't add to mmu configuration
-+ * @LMB_NOOVERWRITE: the memory region cannot be overwritten/re-reserved
-+ * @LMB_NONOTIFY: do not notify other modules of changes to this memory region
-  */
- enum lmb_flags {
- 	LMB_NONE		= 0,
- 	LMB_NOMAP		= BIT(1),
- 	LMB_NOOVERWRITE		= BIT(2),
-+	LMB_NONOTIFY		= BIT(3),
- };
- 
- /**
 diff --git a/lib/lmb.c b/lib/lmb.c
-index a38537af9c3..e1e616679f0 100644
+index e1e616679f0..0504a7b3407 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -30,7 +30,7 @@ static struct lmb lmb;
- static void lmb_print_region_flags(enum lmb_flags flags)
+@@ -281,7 +281,6 @@ void lmb_add_memory(void)
  {
- 	u64 bitpos;
--	const char *flag_str[] = { "none", "no-map", "no-overwrite" };
-+	const char *flag_str[] = { "none", "no-map", "no-overwrite", "no-notify" };
+ 	int i;
+ 	phys_size_t size;
+-	phys_addr_t rgn_top;
+ 	u64 ram_top = gd->ram_top;
+ 	struct bd_info *bd = gd->bd;
  
- 	do {
- 		bitpos = flags ? fls(flags) - 1 : 0;
+@@ -292,16 +291,16 @@ void lmb_add_memory(void)
+ 	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+ 		size = bd->bi_dram[i].size;
+ 		if (size) {
+-			if (bd->bi_dram[i].start > ram_top)
+-				continue;
+-
+-			rgn_top = bd->bi_dram[i].start +
+-				bd->bi_dram[i].size;
+-
+-			if (rgn_top > ram_top)
+-				size -= rgn_top - ram_top;
+-
+ 			lmb_add(bd->bi_dram[i].start, size);
++
++			/*
++			 * Reserve memory above ram_top as
++			 * no-overwrite so that it cannot be
++			 * allocated
++			 */
++			if (bd->bi_dram[i].start >= ram_top)
++				lmb_reserve_flags(bd->bi_dram[i].start, size,
++						  LMB_NOOVERWRITE);
+ 		}
+ 	}
+ }
 -- 
 2.34.1
 
