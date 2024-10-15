@@ -4,77 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE80AD21699
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 12:49:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36187D21699
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 12:49:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D5F1881A5;
-	Tue, 15 Oct 2024 14:49:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ACA42884D2;
+	Tue, 15 Oct 2024 14:49:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mo6i5HOM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZWsqwpXc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB662882BE; Tue, 15 Oct 2024 14:49:07 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 7EC37884D2; Tue, 15 Oct 2024 14:49:14 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C83387FC7
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 14:49:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6347687FC7
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 14:49:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3e3e5c4a01cso3512748b6e.1
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 05:49:05 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6cbe9914487so36519636d6.1
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 05:49:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728996544; x=1729601344; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728996551; x=1729601351; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fI8teiX58FGmwoV/BB/WqnjD3dF8/Wun/hYVtip8eSE=;
- b=mo6i5HOM4LgArG+LBeZbhHiECInlyB09xQRJ4t9+fJE7SJaE8wc8JjSS7HQhywPW9S
- OqLrC4apqbPv0aBWnBk9or3j8npnnYLBgHPQpQxSA907vv0xs5nfwuwRP930hRfACMcG
- u/C71+bSMibM3rWwpwGUMVtWxQmLrPD0ipEt8=
+ bh=cE1f4hQM21oIS6hOdJ1+Pj+XGjw72Q3weaCMjRStOfA=;
+ b=ZWsqwpXcwXdiOpBvKAhqC5lPvFEVp6zakf1823a31TyGlcyKQEx4DBfIdKgH0eBdsD
+ qX6u5v8Qf2ov8WsqcEQ9iLcRXfwuHLYwdAvryOvp7QSfVnrtZAk37tP0tC9+Sgijf7Qr
+ Bp5mOVZn8m3YUlxQ87XeGOGIsrcCUqarJ1L8E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728996544; x=1729601344;
+ d=1e100.net; s=20230601; t=1728996551; x=1729601351;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fI8teiX58FGmwoV/BB/WqnjD3dF8/Wun/hYVtip8eSE=;
- b=IeyRYgVaEFU/cq+U/V75EbnD79zpdEvfaRz2k/rWyUUe8exnRnVb1fibwV5grua8HF
- w8ODkkqwQrvTBQEPpTRUgbnqYvDQh3GHq8xzRkR2EcUtiKTVUd5m7+v208CIbUpKQ7Z5
- T6CHz4wkRbRzFpv0LkyxW1UxxS1H3vxnbbagYE7BrS3+RxodSNc6wg8m781oMWnDWQNO
- m6l7/6TpkAvGB3ia7uBDQtj35o92GHceVxTRQtJ2/epBij5ueB6xbv5EYtvX8CTqLmME
- 63V59EnDLvVx29iwcpSNRwKZsNXTD4tFDJe/bBdrhe/cGiUDCbB1YuipWhFo78krCLOV
- RHUA==
-X-Gm-Message-State: AOJu0Yz9N+ZKlE3ljvslvQoXwneJpW8Nm8VtEEnxK+Pm9LoKbbh7VHas
- twLILB2Xpt0V+chyu4fiMiNHxEW/iqesap8FS+NBSYRGZ9FwMxoWfP6feQrnIHk75tmv4sJhEN4
- fXSc3zyGVWGFcazOk3P7Qvh55X68h9MekAU9u
-X-Google-Smtp-Source: AGHT+IFJvfoG7hilzS+j/+ydBne502BnGgilF1dzKFupHH4eD+lFi2mxWmvAydWCyI34AeiBVzXHqdN6NWB48LqrCNM=
-X-Received: by 2002:a05:6808:f91:b0:3e5:db5c:eb27 with SMTP id
- 5614622812f47-3e5f026413amr260360b6e.10.1728996544005; Tue, 15 Oct 2024
- 05:49:04 -0700 (PDT)
+ bh=cE1f4hQM21oIS6hOdJ1+Pj+XGjw72Q3weaCMjRStOfA=;
+ b=SGJoqjzDT70nSYTQBykuJTofjDEt2UYH4wcyqYQdIPLiXsoFWkxc66T5JgYcPqueZc
+ xPPz6JYWSMG+8hV/X4CmMb80RxyPxU6c3T/GE/GjhtvjQNjuDXQolovYTyFrXTyADDsC
+ y8+m8SA1/lW6e7FvC3TFUBhAxRvoVS8AxaW9HU+pZHBT7urVFpbgndYxPdpliT06SCZb
+ CfpetWlo/cJ+B/wufCxrDHtdgh76Ha45KlRherwdBAtNo+zqWuZtIDuXk7qZInV/EHFN
+ UIX9SNr/hE65ATFAIUonuU8Bm+F1NPwJbA1O9IrMDrZa0t2fJxvkBnblUSzLTytHxCHE
+ tDKg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUy6OXkxcAEr7zpzioKjdsYN1bFOxEitISa02FpNfXMxpQneKYd3xZO5oqTH0C7fAFizFH7GxU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxQM7wYyRfYeHvWUKGj15WTeWqPFuNZ9RxSOlZVXew29TqdU44B
+ SRs6OdQY1+U98BkaeQ/plUGDlYOAbUpCRwXb3a/WxknKZfd9z4ZZsjWiOi3AhGfP9n+U9y07rm3
+ 2pK2xqaM+TG+FRJV6skczrxkK5edxMNRP0Bdv
+X-Google-Smtp-Source: AGHT+IH8I7WXMwmiPRa/M0yRWlJ/l/av0lh197GTpBYqyTrizrh/EIIFPe5e3n1P+2iC9IdJHGZD4gkxU2PckUepu14=
+X-Received: by 2002:a05:6214:419d:b0:6cb:eca3:8e53 with SMTP id
+ 6a1803df08f44-6cbf0095627mr186507616d6.32.1728996551188; Tue, 15 Oct 2024
+ 05:49:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <fbed0251437b61a2f7a85596d7403b5b9c8237c1.1728306322.git.michal.simek@amd.com>
- <CAFLszTiBHjqc-xeqsC51hFUed8bigv8+WsC9hUnv_tEC2RahcQ@mail.gmail.com>
- <d2a8f534-a983-4092-8fc2-ce45b54de476@amd.com>
- <CAFLszTjYOoNcMc7MTA-RdR_mKwM+8t=yKRpuYZSfqOvVBA1_PA@mail.gmail.com>
- <a0077320-9c92-44ec-9614-3de1fc1d36a6@amd.com>
-In-Reply-To: <a0077320-9c92-44ec-9614-3de1fc1d36a6@amd.com>
+References: <20241009015020.25817-1-sjg@chromium.org>
+ <20241009015020.25817-7-sjg@chromium.org>
+ <CAC_iWjKh7_OKKMi9K6eMaiYUN-Nxf+ZQ0NuW9BYzK3u4F0Krcg@mail.gmail.com>
+ <CAFLszTjBQaoF9g0nky5mAA429gzA8QvzjxHxooDaRo1=BB+stg@mail.gmail.com>
+ <20241009223907.GN14210@bill-the-cat>
+ <CAC_iWjK8Bb16aLAKtmYB0Aof4CJP-AAdsMTEYvnFeMeXaiWM9w@mail.gmail.com>
+ <CAFLszThoXsWuPu=b+FT0wuURR1rxTE6RWZhUhET9mHbQ+j63ZA@mail.gmail.com>
+ <CAC_iWjKKqsJh7yUv-kRe5WiGA02c4YU4Yj83UXVXjki+CO9X1Q@mail.gmail.com>
+ <CAFLszTi_CqDY2+RMRo+hJLsCtn6vQHHoeBvT8g-czL7OQAXw0g@mail.gmail.com>
+ <20241014210707.GW53053@bill-the-cat>
+In-Reply-To: <20241014210707.GW53053@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 15 Oct 2024 06:48:53 -0600
-Message-ID: <CAFLszTjt6rrHUzg=evPS5-FyvMrZ1DocwyVc9x1Pq2K9XMokCg@mail.gmail.com>
-Subject: Re: [PATCH] binman: Add option for pointing to external description
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Andrew Davis <afd@ti.com>,
- Bryan Brattlof <bb@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Sean Anderson <sean.anderson@seco.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Date: Tue, 15 Oct 2024 06:49:00 -0600
+Message-ID: <CAFLszTigkFprX5KH3po9h+XqJ9-6_qcyCgM466srHgXMdGwoSg@mail.gmail.com>
+Subject: Re: [PATCH 6/6] cmd: Add a command to show the memory map
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>,
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,134 +103,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+Hi Tom,
 
-On Thu, 10 Oct 2024 at 07:03, Michal Simek <michal.simek@amd.com> wrote:
+On Mon, 14 Oct 2024 at 15:07, Tom Rini <trini@konsulko.com> wrote:
 >
->
->
-> On 10/9/24 23:14, Simon Glass wrote:
-> > Hi Michal,
+> On Mon, Oct 14, 2024 at 01:13:25PM -0600, Simon Glass wrote:
+> > Hi Ilias,
 > >
-> > On Wed, 9 Oct 2024 at 07:21, Michal Simek <michal.simek@amd.com> wrote:
-> >>
-> >> Hi,
-> >>
-> >> On 10/9/24 03:55, Simon Glass wrote:
-> >>> Hi Michal,
-> >>>
-> >>> On Mon, 7 Oct 2024 at 07:05, Michal Simek <michal.simek@amd.com> wrote:
-> >>>>
-> >>>> Adding binman node with target images description can be unwanted feature
-> >>>> but as of today there is no way to disable it.
-> >>>> Also on size constrained systems it is not useful to add binman description
-> >>>> to DTB.
-> >>>> Introduce BINMAN_EXTERNAL_DTB Kconfig symbol which allows separate DTB for
-> >>>> target from DTB for binman itself.
-> >>>>
-> >>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> >>>> ---
-> >>>>
-> >>>>    Makefile    |  2 +-
-> >>>>    lib/Kconfig | 10 ++++++++++
-> >>>>    2 files changed, 11 insertions(+), 1 deletion(-)
-> >>>>
-> >>>
-> >>> Doesn't this defeat one of the purposes of Binman, i.e. to document
-> >>> images? We do want the .dts to include the image description. What
-> >>> sort of problem is this causing?
-> >>
-> >> We have two boot flows.
-> >> The first one (default one) is using Xilinx FSBL for SOM initialization with fit
-> >> image (DTBS) + u-boot.elf + tfa.
-> >>
-> >> The second one is using U-Boot SPL instead of FSBL. This flow is used by
-> >> buildroot for example.
-> >>
-> >> In perfect world I should describe both of these flows. I sent description for
-> >> the second as RFC here.
-> >> https://lore.kernel.org/r/de1b8dbabd5ab7f20d7aac217ec4f5074d39f1da.1728462767.git.michal.simek@amd.com
+> > On Thu, 10 Oct 2024 at 09:27, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > >
+> > > On Thu, 10 Oct 2024 at 18:10, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi,
+> > > >
+> > > > On Thu, 10 Oct 2024 at 06:02, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > On Thu, 10 Oct 2024 at 01:39, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Wed, Oct 09, 2024 at 03:14:25PM -0600, Simon Glass wrote:
+> > > > > > > Hi Ilias,
+> > > > > > >
+> > > > > > > On Wed, 9 Oct 2024 at 04:41, Ilias Apalodimas
+> > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > >
+> > > > > > > > Hi Simon,
+> > > > > > > >
+> > > > > > > > We already have a mem info command, which is pretty useless. Can't we
+> > > > > > > > reuse that ?
+> > > > > > >
+> > > > > > > I am not too keen on using that as 'info' is pretty vague. We could
+> > > > > > > perhaps create a 'mem' command with 'info' as one subcommand and 'map'
+> > > > > > > as another?
+> > > > > >
+> > > > > > Are we talking about "meminfo" which literally only prints gd->ram_size?
+> > > > > > If so, I don't think it's worth worrying about enhancing that.
+> > > > >
+> > > > > Yes, that's the one
+> > > >
+> > > > So, you mean to just delete that command and make it show the memory
+> > > > map instead? Or show the memory size at the top, before the memory
+> > > > map?
+> > >
+> > > I meant the latter, but if you and Tom agree that we should leave it
+> > > as is, I don't mind adding a new command. I assume that the list above
+> > > is non exhaustive, so in the future we could expand it with lmb
+> > > reservations etc?
 > >
-> > OK I'll take a look.
-> >
-> >>
-> >> but it is also reasonable to describe the first flow but I really don't want
-> >> both descriptions ends up in the target image.
-> >
-> > Why not? Knowing what is in the firmware is one of the goals of Binman.
+> > I sent v2 with that done. The lmb reservations aren't that useful as
+> > there are no names attached.
 >
-> If this is single binary composition with clear layout then likely fine.
-> In our case where we target evaluation boards which can boot out of different
-> boot devices it will be more confusing.
-> For these I want to generated all images also for testing purpose not only
-> images which you will burn to qspi.
->
-> >>
-> >> The second part is if you look at RFC and how fit-dtb.blob is composed. It is
-> >> one DTB + DTBS which are composed from overlays.
-> >>
-> >> xilinx_zynqmp_kria_defconfig has
-> >> CONFIG_DEFAULT_DEVICE_TREE="zynqmp-smk-k26-revA"
-> >>
-> >> That's why binman node should go to this DTB but because other images are
-> >> composed with overlays binman node is spread to all DTBs inside FIT image.
-> >>
-> >> It means one binman description is in fit-dtb.blob 14 times which is far from
-> >> ideal.
-> >
-> > Yes, but I think what you are saying is that U-Boot doesn't need the
-> > description, so you don't need it to appear in the dtbs in the FIT. Is
-> > that right?
->
-> Yes.
-> I know that there is a code around it but as of now I don't want to use any of
-> this feature.
->
-> > If so, then I think we should add a way to remove it, in Binman,
-> > perhaps with a property in the top-level binman image.
->
-> Works for me but keep in your mind that for SOM this should be removed from all
-> combinations and for me it is easier not to add that description there instead
-> of adding it and removing it.
+> I disagree with names being needed to be useful in this dump.
 
-OK, I think you are saying that the description is repeated in each
-.dtb since each is built by U-Boot's build system and then they are
-added to the FIT.
-
-But what is to stop people from not bothering to fill in the binman
-description in U-Boot? I worry that vendors will have instructions
-like 'build U-Boot with the in-tree devicetree, which has no binman
-node, but pass this option to use this other file (not in mainline,
-just our special vendor branch), just for Binman's use',
-
-Where do you plan to keep this other file?
-
->
-> >>
-> >> Third part is that I can't see binman node in DT schema or bindings that's why I
-> >> expect this will be reported and I can't see any code which removes it before
-> >> handing off to OS which is required for System Ready IR.
-> >> And IIRC removing is also problematic for measured boot.
-> >
-> > I did start this e.g. [1] but have not got back to it. Help would be
-> > appreciated if it is important to you. I am not sure about System
-> > Ready IR, but we shouldn't need to remove this.
->
-> I have seen this description but this target only boot images inside MTD.
->
-> SR IR requires DT to pass dt-schema. It means make no sense to add binman node
-> to DT if this is going to be reported.
-
-We need to get the schema in, then. IMO that whole idea (or checking
-dt-schema) makes little sense, unless the schema includes firmware
-nodes. Is there somewhere that explains why this is useful?
-
->
-> > Also, please add an fdtmap somewhere so the image can be listed.
->
-> Thanks for reminder. I remember this option and will explore to see what it does.
-
-OK
+I'd like to show where the kernel, FDT and ramdisk are, with actual
+names for them.
 
 Regards,
 Simon
+
+
+>
+> --
+> Tom
