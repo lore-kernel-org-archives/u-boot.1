@@ -4,95 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 299BFD216BF
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 14:58:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7E78CFC277
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 14:58:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B698882BE;
+	by phobos.denx.de (Postfix) with ESMTP id DD77488618;
 	Tue, 15 Oct 2024 16:58:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gMjaFbWu";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U7RtKbwY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5F7888387; Tue, 15 Oct 2024 15:33:10 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id D5A9F87F19; Tue, 15 Oct 2024 16:08:39 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C19598811C
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:33:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF5DE88278
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 16:08:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-8354851fcabso222445139f.2
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:33:08 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2e2ed2230d8so3067226a91.0
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 07:08:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728999187; x=1729603987; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=MisQU+4fwHg6xVdYTM+lLkHhwIgxLtj7fCDr1EKI3ls=;
- b=gMjaFbWuNCth0NBSLMyLIEbCsniHt4KDfuauGkYxbAIAMIjWfWjMp3LHouKtMNMkxh
- FqIClwdedk72Lo+RIbBwCwoj2GvJMlGQxJdGJeKI9rd6l0VwxRXMyb3xpZZbbtabOYvZ
- lEdspz/35U9x7upsQ8NIFdGYNvBUr55LLou6M=
+ d=linaro.org; s=google; t=1729001315; x=1729606115; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Lh5l81B4pcJt5S2/tpImv0quRSxHwfQNl3DAAmFnCRk=;
+ b=U7RtKbwYyxIeoG9Wn9sguWeg9/jK4Ia8aiLYb1dvfs76coMjs3ovxre/pf0zfatIAP
+ DUZPXppr9qWHdqC9MpChc23WwLFHbR6dIMOjMPaR6ACEkoWdcHQeoAVOXGIF4Yn3E/dB
+ uEtjD9hIo5FPfzibRD1C7WQ6Q7JG7uvbLhtalpk1j+qwG6NgN5myWjl5p3Os99G9sjhp
+ nDJhopizQ6QYD3pK+BvQBSLbivj7Y8HCFwqHnIK7BruNv3rrzebkcEIoXsqPSVB2ptD0
+ TmQKytUD9zbZ7fdI0SuHv7Fem4N/VsB81J7x9M0O9YjcBQDAXgb/dCwfHap8mbuY+9Gh
+ hxTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728999187; x=1729603987;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1729001315; x=1729606115;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MisQU+4fwHg6xVdYTM+lLkHhwIgxLtj7fCDr1EKI3ls=;
- b=WX+peRLZH5XFdVxT4o8GlwGLXVCfTzm2m32+B74kMuREuEHkwns3TBoYTkNuf8Rx78
- QYCANPokqMrIILm3GaSUvD3KPuV0YFYxkEWPHf1jmDYPd+1/f2EMuGGs9nLIT9Cb75Uu
- odTQaYGe4BxfXsIlOiQmBvqfpYlkDRx9Fc84yGhKT1LMEkg0np62t64hjDiwAKwkbKeh
- +WSiI1ARNW3fLP6roOqPbFXB0ivGvmCNL5/I78znE8ds1g06JEyogYLN5v+eR83b9BnZ
- 8ZPGO3DlBP9FR2IEqR9d3bYo23WVnVHd9J9E428qj2HyfugKb1uUYp6ZTwMt9nZ0/Pl/
- Nv0Q==
-X-Gm-Message-State: AOJu0Yzs8znmkHA+nVP9ui+IxL1omRdIrgPc8j/BYJGm5NQheBV0nvMz
- JZ8KQGU3dNptarqy40p4pajLgTlaGq/vQczo54Oj0uURGe3Q52poOexmXVj1moTV096038pwmwP
- 0Fg==
-X-Google-Smtp-Source: AGHT+IHmiRiVOAVV8Itmo8I7s2gT78j4jwshyJhWtRTSCcZmJXT4mwndQsttY/YyiitXohDkJpdSYA==
-X-Received: by 2002:a05:6602:6410:b0:837:2815:825b with SMTP id
- ca18e2360f4ac-8379531ce60mr1221460339f.16.1728999187373; 
- Tue, 15 Oct 2024 06:33:07 -0700 (PDT)
-Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
- [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-83a8b28bed6sm29794939f.8.2024.10.15.06.33.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 06:33:06 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>, Andrew Davis <afd@ti.com>,
- Artur Rojek <artur@conclusive.pl>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Eddie James <eajames@linux.ibm.com>,
- Emil Kronborg <emil.kronborg@protonmail.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Eugene Uriev <eugeneuriev@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Joao Paulo Goncalves <joao.goncalves@toradex.com>,
- Johan Jonker <jbx6244@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Nishanth Menon <nm@ti.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-Subject: [PATCH v3 0/7] Allow showing the memory map
-Date: Tue, 15 Oct 2024 07:32:57 -0600
-Message-Id: <20241015133304.2874735-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
+ bh=Lh5l81B4pcJt5S2/tpImv0quRSxHwfQNl3DAAmFnCRk=;
+ b=PT0if/WQgdEzuN4ErrIo2c9oaHDti45Y+FbyuMwfu9KW56fye06YV0TVOr8OXVuPKm
+ nw5ingDWMC1+/Dv8y7KeQ+1NoS1vIa2VwC738IALjdlLOUzGhz+2A6DEjslWkbOM6fDT
+ GeNsMzBFzcRlUqATmVybR/wAUDT2YJzDH7XurL0V+tYU702cBKE51BuSvaoUSFjXw518
+ wZkd/tMsVhX9RAOwSIzhIbd+EUDsohyY4lNtP5PCtmDuk+StI2zJenX42Pn7TZp/oEsQ
+ Nl0cSHn2KE/aSbFXc+TavMUvDLzI3ZT2YKToVvA1NO6EXXnyFnamvJwNdwHsoz+JL1Jt
+ vEGw==
+X-Gm-Message-State: AOJu0YzED4flHpStwwyTHSl44JWKImiFQ1bdJE751HSlzzTQ6X5i35eE
+ O7mPV1vVyokQooadWbuHDlCLWmLjxqRCvAS9NrKPvedS5/+LK5c/snwBLhbE4kMPzZnREdXvvmL
+ 0CNosshgJujctp93OVqlqxmRxXcKQkoC8RrXdcQ==
+X-Google-Smtp-Source: AGHT+IH4F/FDgEcHVKLT6fB+tsTRzZeVSb6HVqIECTKgtaT1CEvJBlC8dVuH+15cwpmXTm4zlE9arj3ckuogG57YQ3A=
+X-Received: by 2002:a17:90a:ff17:b0:2e2:e530:508d with SMTP id
+ 98e67ed59e1d1-2e36e00c005mr6596963a91.19.1729001315283; Tue, 15 Oct 2024
+ 07:08:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241003215112.3103601-1-raymond.mao@linaro.org>
+ <20241015043008.GJ53053@bill-the-cat>
+In-Reply-To: <20241015043008.GJ53053@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Tue, 15 Oct 2024 10:08:23 -0400
+Message-ID: <CAEfUkULJ5Un5vYz_-FwMFRCLmB-mUtnztZ6gSorrMVmY=BaVNQ@mail.gmail.com>
+Subject: Re: [PATCH v8 00/27] Integrate MbedTLS v3.6 LTS with U-Boot
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Marek Vasut <marex@denx.de>, Linus Walleij <linus.walleij@linaro.org>, 
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Jonas Karlman <jonas@kwiboo.se>, Greg Malysa <greg.malysa@timesys.com>,
+ Kongyang Liu <seashell11234455@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Eddie James <eajames@linux.ibm.com>
 X-Mailman-Approved-At: Tue, 15 Oct 2024 16:58:22 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,48 +111,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This little series adds a new 'memmap' command, intended to show the
-layout of memory within U-Boot and how much memory is available for
-loading images.
+Hi Tom,
 
-Changes in v3:
-- Add a new Kconfig for the extra functionality
+On Tue, 15 Oct 2024 at 00:30, Tom Rini <trini@konsulko.com> wrote:
 
-Changes in v2:
-- Split into its own patch
-- Modify the existing 'meminfo' command instead
+> On Thu, Oct 03, 2024 at 02:50:13PM -0700, Raymond Mao wrote:
+>
+> > Integrate MbedTLS v3.6 LTS (currently v3.6.0) with U-Boot.
+> >
+> > Motivations:
+> > ------------
+> >
+> > 1. MbedTLS is well maintained with LTS versions.
+> > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
+> > 3. MbedTLS recently switched license back to GPLv2.
+> >
+> > Prerequisite:
+> > -------------
+> >
+> > This patch series requires mbedtls git repo to be added as a
+> > subtree to the main U-Boot repo via:
+> >     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
+> >           https://github.com/Mbed-TLS/mbedtls.git \
+> >           v3.6.0 --squash
+> > Moreover, due to the Windows-style files from mbedtls git repo,
+> > we need to convert the CRLF endings to LF and do a commit manually:
+> >     $ git add --renormalize .
+> >     $ git commit
+> >
+> > New Kconfig options:
+> > --------------------
+> >
+> > `MBEDTLS_LIB` is for MbedTLS general switch.
+> > `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto libs
+> with
+> > MbedTLS.
+> > `MBEDTLS_LIB_CRYPTO_ALT` is for using original U-Boot crypto libs as
+> > MbedTLS crypto alternatives.
+> > `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode, ASN1,
+> > and Pubkey parser with MbedTLS.
+> > By default `MBEDTLS_LIB_CRYPTO_ALT` and `MBEDTLS_LIB_X509` are selected
+> > when `MBEDTLS_LIB` is enabled.
+> > `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto library.
+> > `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
+> > `LEGACY_CRYPTO_CERT` is for the certificate related functionalities.
+> > For each of the algorithm, a pair of `<alg>_LEGACY` and `<alg>_MBEDTLS`
+> > Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options are
+> > introduced.
+> >
+> > In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509
+> > are by default enabled in qemu_arm64_defconfig and sandbox_defconfig
+> > for testing purpose.
+> >
+> > Patches for external MbedTLS project:
+> > -------------------------------------
+> >
+> > Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
+> > executables which is not supported by MbedTLS at the moment,
+> > addtional patches for MbedTLS are created to adapt with the EFI loader:
+> > 1. Decoding of Microsoft Authentication Code.
+> > 2. Decoding of PKCS#9 Authenticate Attributes.
+> > 3. Extending MbedTLS PKCS#7 lib to support multiple signer's
+> certificates.
+> > 4. MbedTLS native test suites for PKCS#7 signer's info.
+> >
+> > All above 4 patches (tagged with `mbedtls/external`) are submitted to
+> > MbedTLS project and being reviewed, eventually they should be part of
+> > MbedTLS LTS release.
+> > But before that, please merge them into U-Boot, otherwise the building
+> > will be broken when MBEDTLS_LIB_X509 is enabled.
+> >
+> > See below PR link for the reference:
+> > https://github.com/Mbed-TLS/mbedtls/pull/9001
+> >
+> > Miscellaneous:
+> > --------------
+> >
+> > Optimized MbedTLS library size by tailoring the config file
+> > and disabling all unnecessary features for EFI loader.
+> > From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1, sha256,
+> > sha512) are completely replaced when MbedTLS is enabled.
+> > From v3, the size-growth is slightly reduced by refactoring Hash
+> functions.
+> > From v6, smaller implementations for SHA256 and SHA512 are enabled and
+> > target size reduce significantly.
+> > Target(QEMU arm64) size-growth when enabling MbedTLS:
+> > v1: 6.03%
+> > v2: 4.66%
+> > v3 - v5: 4.55%
+> > v6: 2.90%
+> >
+> > Please see the latest output from buildman for size-growth on QEMU arm64,
+> > Sandbox and Nanopi A64. [1]
+> >
+> > Tests done:
+> > -----------
+> >
+> > EFI Secure Boot test (EFI variables loading and verifying, EFI signed
+> image
+> > verifying and booting) via U-Boot console.
+> > EFI Secure Boot and Capsule sandbox test passed.
+> >
+> > Known issues:
+> > -------------
+> >
+> > None.
+>
+> For the whole series, applied to u-boot/master. Thanks again for all the
+> hard work here.
+>
+> Thanks a lot for the time spent on reviewing, testing and all the
+suggestions.
 
-Simon Glass (7):
-  common: Fix up malloc() comment in reserve_noncached()
-  common: Tidy up how malloc() is inited
-  am65x: Use map_to_sysmem() to convert from pointer
-  global_data: Add some more accessors
-  bootstage: Allow counting memory without strings
-  cmd: Move meminfo command into its own file
-  cmd: Update the meminfo command to show the memory map
-
- arch/arm/mach-k3/am65x/am654_init.c |  11 +--
- cmd/Kconfig                         |  12 +++
- cmd/Makefile                        |   1 +
- cmd/mem.c                           |  19 -----
- cmd/meminfo.c                       |  75 ++++++++++++++++
- common/board_f.c                    |   8 +-
- common/board_r.c                    |   3 +-
- common/bootstage.c                  |  16 ++--
- common/dlmalloc.c                   |   8 +-
- common/spl/spl.c                    |   4 +-
- doc/usage/cmd/meminfo.rst           | 128 ++++++++++++++++++++++++++++
- doc/usage/index.rst                 |   1 +
- include/asm-generic/global_data.h   |  30 +++++++
- include/bootstage.h                 |   5 +-
- include/malloc.h                    |   8 ++
- test/cmd/Makefile                   |   3 +-
- test/cmd/meminfo.c                  |  38 +++++++++
- 17 files changed, 324 insertions(+), 46 deletions(-)
- create mode 100644 cmd/meminfo.c
- create mode 100644 doc/usage/cmd/meminfo.rst
- create mode 100644 test/cmd/meminfo.c
-
--- 
-2.34.1
-
+Raymond
