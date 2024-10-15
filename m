@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 159CAD1D879
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:40:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A38BD1D879
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:40:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6C1488D56;
-	Tue, 15 Oct 2024 17:38:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 29FF988D5C;
+	Tue, 15 Oct 2024 17:38:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C89588730; Tue, 15 Oct 2024 17:38:29 +0200 (CEST)
+ id 19E9E88730; Tue, 15 Oct 2024 17:38:32 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id BDE9688D39
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:38:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id E4E2288D97
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:38:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AD2C01756;
- Tue, 15 Oct 2024 08:38:55 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F27B7175D;
+ Tue, 15 Oct 2024 08:38:58 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1E8933F7A6;
- Tue, 15 Oct 2024 08:38:22 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7FD7B3F528;
+ Tue, 15 Oct 2024 08:38:26 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -33,10 +33,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 14/15] efi_memory: rename variable to highlight overlap
- with free memory
-Date: Tue, 15 Oct 2024 21:07:16 +0530
-Message-Id: <20241015153717.401371-15-sughosh.ganu@linaro.org>
+Subject: [PATCH v4 15/15] lmb: replace the double-underscore with
+ single-underscore for all functions
+Date: Tue, 15 Oct 2024 21:07:17 +0530
+Message-Id: <20241015153717.401371-16-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241015153717.401371-1-sughosh.ganu@linaro.org>
 References: <20241015153717.401371-1-sughosh.ganu@linaro.org>
@@ -58,160 +58,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The variable overlap_only_ram is used to specify that the new memory
-region that is being created needs to come from the free memory pool
--- this is done by carving out the memory region from the free
-memory. The name is a bit confusing though, as other allocated memory
-regions, like boot-services code and data are also part of the RAM
-memory. Rename the variable to overlap_conventional to highlight the
-fact that it is the free/conventional memory that is being referred to
-in this context.
+A bunch of static functions in the LMB module have used a
+double-undersore for the function names. It was suggested to use a
+single-underscore instead, as the double-underscore is usually used
+by library functions. Replace the double-underscore with
+single-underscore for all functions.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Suggested-by: Simon Glass <sjg@chromium.org>
 ---
 Changes since V3: None
 
- include/efi_loader.h        | 16 +++++++-----
- lib/efi_loader/efi_memory.c | 51 ++++++++++++++++++++-----------------
- 2 files changed, 37 insertions(+), 30 deletions(-)
+ lib/lmb.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 6b9a66a06c0..291eca5c077 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -788,15 +788,17 @@ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
- /**
-  * efi_add_memory_map_pg() - add pages to the memory map
-  *
-- * @start:		start address, must be a multiple of EFI_PAGE_SIZE
-- * @pages:		number of pages to add
-- * @memory_type:	type of memory added
-- * @overlap_only_ram:	region may only overlap RAM
-- * Return:		status code
-+ * @start:			start address, must be a multiple of
-+ *				EFI_PAGE_SIZE
-+ * @pages:			number of pages to add
-+ * @memory_type:		type of memory added
-+ * @overlap_conventional:	region may only overlap free(conventional)
-+ *				memory
-+ * Return:			status code
-  */
- efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
--					  int memory_type,
--					  bool overlap_only_ram);
-+				   int memory_type,
-+				   bool overlap_conventional);
+diff --git a/lib/lmb.c b/lib/lmb.c
+index f3a1d8ca256..78fe2d4de7c 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -496,7 +496,7 @@ long lmb_add(phys_addr_t base, phys_size_t size)
+ 	return 0;
+ }
  
- /* Called by board init to initialize the EFI drivers */
- efi_status_t efi_driver_init(void);
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index f59f7780e92..b63b5cca71e 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -173,17 +173,19 @@ static void efi_mem_sort(void)
- /**
-  * efi_mem_carve_out() - unmap memory region
-  *
-- * @map:		memory map
-- * @carve_desc:		memory region to unmap
-- * @overlap_only_ram:	the carved out region may only overlap RAM
-- * Return:		the number of overlapping pages which have been
-- *			removed from the map,
-- *			EFI_CARVE_NO_OVERLAP, if the regions don't overlap,
-- *			EFI_CARVE_OVERLAPS_NONRAM, if the carve and map overlap,
-- *			and the map contains anything but free ram
-- *			(only when overlap_only_ram is true),
-- *			EFI_CARVE_LOOP_AGAIN, if the mapping list should be
-- *			traversed again, as it has been altered.
-+ * @map:			memory map
-+ * @carve_desc:			memory region to unmap
-+ * @overlap_conventional:	the carved out region may only overlap free,
-+ *				or conventional memory
-+ * Return:			the number of overlapping pages which have been
-+ *				removed from the map,
-+ *				EFI_CARVE_NO_OVERLAP, if the regions don't
-+ *				overlap, EFI_CARVE_OVERLAPS_NONRAM, if the carve
-+ *				and map overlap, and the map contains anything
-+ *				but free ram(only when overlap_conventional is
-+ *				true),
-+ *				EFI_CARVE_LOOP_AGAIN, if the mapping list should
-+ *				be traversed again, as it has been altered.
-  *
-  * Unmaps all memory occupied by the carve_desc region from the list entry
-  * pointed to by map.
-@@ -193,7 +195,7 @@ static void efi_mem_sort(void)
-  */
- static s64 efi_mem_carve_out(struct efi_mem_list *map,
- 			     struct efi_mem_desc *carve_desc,
--			     bool overlap_only_ram)
-+			     bool overlap_conventional)
+-static long __lmb_free(phys_addr_t base, phys_size_t size)
++static long _lmb_free(phys_addr_t base, phys_size_t size)
  {
- 	struct efi_mem_list *newmap;
- 	struct efi_mem_desc *map_desc = &map->desc;
-@@ -208,7 +210,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
- 		return EFI_CARVE_NO_OVERLAP;
- 
- 	/* We're overlapping with non-RAM, warn the caller if desired */
--	if (overlap_only_ram && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
-+	if (overlap_conventional && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
- 		return EFI_CARVE_OVERLAPS_NONRAM;
- 
- 	/* Sanitize carve_start and carve_end to lie within our bounds */
-@@ -258,15 +260,17 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
- /**
-  * efi_add_memory_map_pg() - add pages to the memory map
-  *
-- * @start:		start address, must be a multiple of EFI_PAGE_SIZE
-- * @pages:		number of pages to add
-- * @memory_type:	type of memory added
-- * @overlap_only_ram:	region may only overlap RAM
-- * Return:		status code
-+ * @start:			start address, must be a multiple of
-+ *				EFI_PAGE_SIZE
-+ * @pages:			number of pages to add
-+ * @memory_type:		type of memory added
-+ * @overlap_conventional:	region may only overlap free(conventional)
-+ *				memory
-+ * Return:			status code
-  */
- efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
--					  int memory_type,
--					  bool overlap_only_ram)
-+				   int memory_type,
-+				   bool overlap_conventional)
+ 	struct lmb_region *rgn;
+ 	struct alist *lmb_rgn_lst = &lmb.used_mem;
+@@ -562,7 +562,7 @@ long lmb_free_flags(phys_addr_t base, phys_size_t size,
  {
- 	struct efi_mem_list *lmem;
- 	struct efi_mem_list *newlist;
-@@ -275,7 +279,8 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
- 	struct efi_event *evt;
+ 	long ret;
  
- 	EFI_PRINT("%s: 0x%llx 0x%llx %d %s\n", __func__,
--		  start, pages, memory_type, overlap_only_ram ? "yes" : "no");
-+		  start, pages, memory_type, overlap_conventional ?
-+		  "yes" : "no");
+-	ret = __lmb_free(base, size);
++	ret = _lmb_free(base, size);
+ 	if (ret < 0)
+ 		return ret;
  
- 	if (memory_type >= EFI_MAX_MEMORY_TYPE)
- 		return EFI_INVALID_PARAMETER;
-@@ -312,7 +317,7 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
- 			s64 r;
+@@ -618,7 +618,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+ 	return addr & ~(size - 1);
+ }
  
- 			r = efi_mem_carve_out(lmem, &newlist->desc,
--					      overlap_only_ram);
-+					      overlap_conventional);
- 			switch (r) {
- 			case EFI_CARVE_OUT_OF_RESOURCES:
- 				free(newlist);
-@@ -348,7 +353,7 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
- 		}
- 	} while (carve_again);
+-static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
++static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
+ 				    phys_addr_t max_addr, enum lmb_flags flags)
+ {
+ 	u8 op;
+@@ -692,15 +692,15 @@ phys_addr_t lmb_alloc(phys_size_t size, ulong align)
+  */
+ phys_addr_t lmb_alloc_flags(phys_size_t size, ulong align, uint flags)
+ {
+-	return __lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE,
+-				flags);
++	return _lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE,
++			       flags);
+ }
  
--	if (overlap_only_ram && (carved_pages != pages)) {
-+	if (overlap_conventional && (carved_pages != pages)) {
- 		/*
- 		 * The payload wanted to have RAM overlaps, but we overlapped
- 		 * with an unallocated region. Error out.
+ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+ {
+ 	phys_addr_t alloc;
+ 
+-	alloc = __lmb_alloc_base(size, align, max_addr, LMB_NONE);
++	alloc = _lmb_alloc_base(size, align, max_addr, LMB_NONE);
+ 
+ 	if (alloc == 0)
+ 		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
+@@ -727,7 +727,7 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
+ {
+ 	phys_addr_t alloc;
+ 
+-	alloc = __lmb_alloc_base(size, align, max_addr, flags);
++	alloc = _lmb_alloc_base(size, align, max_addr, flags);
+ 
+ 	if (alloc == 0)
+ 		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
+@@ -736,7 +736,7 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
+ 	return alloc;
+ }
+ 
+-static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
++static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size,
+ 				    enum lmb_flags flags)
+ {
+ 	long rgn;
+@@ -767,7 +767,7 @@ static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
+  */
+ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+ {
+-	return __lmb_alloc_addr(base, size, LMB_NONE);
++	return _lmb_alloc_addr(base, size, LMB_NONE);
+ }
+ 
+ /**
+@@ -785,7 +785,7 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+ phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
+ 				 uint flags)
+ {
+-	return __lmb_alloc_addr(base, size, flags);
++	return _lmb_alloc_addr(base, size, flags);
+ }
+ 
+ /* Return number of bytes from a given address that are free */
 -- 
 2.34.1
 
