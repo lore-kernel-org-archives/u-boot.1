@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 106A1D1D88D
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 17:00:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7126CD1D88B
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 17:01:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FF2188969;
-	Tue, 15 Oct 2024 19:00:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 04CF0889E9;
+	Tue, 15 Oct 2024 19:01:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DEWt8ntQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EalBAXUL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D016889B3; Tue, 15 Oct 2024 19:00:38 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 7496088969; Tue, 15 Oct 2024 19:01:40 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 685A888966
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 19:00:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DBD48878A
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 19:01:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2fb584a8f81so21443701fa.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 10:00:35 -0700 (PDT)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2fb388e64b0so37774541fa.0
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 10:01:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729011634; x=1729616434; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=l2jGzTmAzJJ6io0OfHlD5MZZm5kuXhYu/ESG8n3/gas=;
- b=DEWt8ntQgAaF1fWqqOKizmpIFG4ynVXMK9mArdFHj31l3o0/aSwYlAe8TpR6YJowLi
- PBEUvaTMkI2+eXsBfDbPi+2JtaSkYeVeUS4tiCskU7A4rMvgEEPOPjuaS4gcsj6VRhut
- Fn2stP0Eti3cC+NjY1vq0z5znbhizmy9kkBhoGOHCHrDYjcWFaCzGzLsDfec1mxTAkWj
- UAHlO4fDQfmL6+RgwPdxeSmQUO82UYtppS9Dxd8I7tZo5OKiHVUDQLy34IpBZLRQnF2L
- 8fNr9Gtch2r6F4uxxdpItMO61jbN6wnsC6FzstmosWTgv75bBZKYSs68+YEyoda5wgFU
- mnpg==
+ d=gmail.com; s=20230601; t=1729011697; x=1729616497; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Z4x7Do31dPl9EzOA0xUvWv2GlRAaXwidKGdA5jwu0MM=;
+ b=EalBAXULlYXkGt1tCk+FCZzFikqKNB8XgHlyZG28arXQgIkskSXpg8s5wuguT8YCXl
+ lQ9dmaOixiLKawOvwg7fCCGFZOEUEWP+cHNNBTMUlh5vQz/xeCkEYF0a6frexzrlIpDC
+ X6X6lLm6WZTy7F2DGgvEePCkOLCwLJbsHwMPwrDAPeYeSkeRsQ2xl96bJufNY/QfuQqT
+ NwK0WcjxP2XYLEktHB7SNso9BfaK0C2JnAgtYftJdXmpU0rjkLOYSHkeyKKXjxD0lecS
+ 98Q+Duq+IUVZ03YuLGjqHeHgDymzuna0SuVLIlubC4JzyNLbF4ovwzJGBLuW6opCE7pU
+ /diQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729011634; x=1729616434;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=l2jGzTmAzJJ6io0OfHlD5MZZm5kuXhYu/ESG8n3/gas=;
- b=cLVzKWd71+LtzLAB2bpoANPe6NG0c4PMasBRUblOEAZopGzD58NMtr38uTpTJMwmgn
- 0KB2d/1+kGXjViSaos0aX5fRF5ps96pnsSoYDIWCa4RQMgstjz0A+25KWhCIInWda1wm
- B+W5+AiioFr+emmDHBrN6TJLL6fbDilfNUlze69f+dgrkSBAYfxYaJZ+Baq9KgjJPZEr
- bBoRaXgYeRdqeP4RQA7/iDRlEcQVv1rBtDIYLT22hAXD0D0pHPzuNYNs+sAq/ozyh70S
- jwjcmZnB52kS1+Ut7sh9yn+ZJBg+zr0WsDIcUs0J/7zCQBq6ZrEo+eqncvxi0ZTKd930
- btKA==
-X-Gm-Message-State: AOJu0YwMxBg3iPYEf0JfUehObTaFhlf+9Wczghyii5rD6bJ9GeJlK9EW
- sPI8nNznpo55Mlp8fMMc2SnNNc9iPdccNdbbB7lN+RHWguv9/CV37FpaEar8ROMxeQ/8HVhTVK1
- joslMjorp5woM4r3KRYTSdTq3aEuu9k70
-X-Google-Smtp-Source: AGHT+IESXnIC1Oxds0UtBnDwhku0QUYhRJwACO36MQoiVDmwyahcYmuyDqbR+ZF8aQssyO5SA6cEE4Y+w4FatpKq2M4=
-X-Received: by 2002:a05:651c:b1f:b0:2fb:5168:1a0c with SMTP id
- 38308e7fff4ca-2fb61b559d1mr7269371fa.19.1729011634129; Tue, 15 Oct 2024
- 10:00:34 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729011697; x=1729616497;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Z4x7Do31dPl9EzOA0xUvWv2GlRAaXwidKGdA5jwu0MM=;
+ b=lOZNuqWb9HrSOrOWxEu1lgjWktLdPwYVdFH1DC2K+RWozfAkP8Y426tj6xiV22EAGZ
+ A8VTB+1mdRosKS4cihf2fAfXL1js55qLUbxfzWnPxcRxi1FUyw/9v4JFNx4EaJHDXwix
+ 7X49B9B9ZP2i/lNk+beP2vWvD+eksFi9PIbkwf4mo8cFU4WszV+HCvtn5oC+wpwckunK
+ 6j+cXWmlfZBG/Z8TaSBf52LtSj3+1oPVoXiyxLwWhVEMiKPmwTmvQjIuFc5DPNUp2vvq
+ Axk+/KsU42GqzYMHVPrhBi8PemDCk04XcNeBHnWRMfcBDOzPkNGMCVi07vH2IMyrxIkW
+ 1w5w==
+X-Gm-Message-State: AOJu0YxjhGUiSnNwNcxFPAfobAKj/vt6Zj3ebObTgBu/HsVwGF2HMPDh
+ OxCUcGh5KSTxTw/cJsPqSeTfBckgw8Ed7dZvSSR55ImhTY1u5gF+7nPBIFAFwQCU/SSOgTTv+8J
+ dSgDGPKUMxCtMO15eFOmxxtSs6WTDvQ==
+X-Google-Smtp-Source: AGHT+IF66Odxu4nVuA7UOvAfvlRjTkDvRkayIcxJavaE5d4eXLdc7EofqzCzqsknFxRJ8PsciUndEYhixYKylaXB5so=
+X-Received: by 2002:a2e:a543:0:b0:2fb:5c20:43e0 with SMTP id
+ 38308e7fff4ca-2fb5c204c70mr20943911fa.15.1729011696505; Tue, 15 Oct 2024
+ 10:01:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241014131152.267405-1-patrick.rudolph@9elements.com>
  <CALeDE9NkB1kNdnEbsXLyzfQ53PNvV2unnzeMcTgpTKtySh=XcA@mail.gmail.com>
  <CALNFmy3GcsOPcJ3Jxg+pXFjMG8gazyOz2wkd5HsX-rEKM3-Usg@mail.gmail.com>
 In-Reply-To: <CALNFmy3GcsOPcJ3Jxg+pXFjMG8gazyOz2wkd5HsX-rEKM3-Usg@mail.gmail.com>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 15 Oct 2024 18:00:22 +0100
-Message-ID: <CALeDE9NYCu1HM9XndKAeKoyHgLN0TX3j0QW38FNRav2fTga4kA@mail.gmail.com>
+Date: Tue, 15 Oct 2024 18:01:24 +0100
+Message-ID: <CALeDE9MDeXn2h4LT7i37nVdfRP=JcXSebAKTd_x6WcpEDEuKkg@mail.gmail.com>
 Subject: Re: [PATCH v8 00/37] Implement ACPI on aarch64
 To: Patrick Rudolph <patrick.rudolph@9elements.com>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,8 +89,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrick,
-
+On Tue, 15 Oct 2024 at 17:34, Patrick Rudolph
+<patrick.rudolph@9elements.com> wrote:
+>
+> Hi Peter,
+> On Tue, Oct 15, 2024 at 12:28=E2=80=AFPM Peter Robinson <pbrobinson@gmail=
+.com> wrote:
+> >
+> > On Mon, 14 Oct 2024 at 14:12, Patrick Rudolph
+> > <patrick.rudolph@9elements.com> wrote:
+> > >
 > > > Based on the existing work done by Simon Glass this series adds
 > > > support for booting aarch64 devices using ACPI only.
 > > > As first target QEMU SBSA support is added, which relies on ACPI
@@ -111,14 +121,16 @@ Hi Patrick,
 > > >                     -pflash secure-world.rom \
 > > >                     -pflash unsecure-world.rom
 > > >
-> > > qemu-system-aarch64 -machine raspi4b -kernel u-boot.bin -cpu cortex-a72 \
-> > > -smp 4 -m 2G -drive file=raspbian.img,format=raw,index=0 \
+> > > qemu-system-aarch64 -machine raspi4b -kernel u-boot.bin -cpu cortex-a=
+72 \
+> > > -smp 4 -m 2G -drive file=3Draspbian.img,format=3Draw,index=3D0 \
 > > > -dtb bcm2711-rpi-4-b.dtb -nographic
 > > >
 > > > Tested against FWTS V24.03.00.
 > > >
 > > > Known issues:
-> > > - The QEMU rpi4 support is currently limited as it doesn't emulate PCI,
+> > > - The QEMU rpi4 support is currently limited as it doesn't emulate PC=
+I,
 > > >   USB or ethernet devices!
 > > > - The SMP bringup doesn't work on RPi4, but works in QEMU (Possibly
 > > >   cache related).
@@ -138,11 +150,7 @@ Hi Patrick,
 > I don't see that those missing features are a *must* implement. It's
 > not EDK2. If you want to have all those
 > feature use EDK2 and your good.
-
-What you still haven't managed to provide is a reason why you'd use
-U-Boot over EDK2 for ACPI if you really want a labotomised RPi4
-platform.
-
+>
 > >
 > > Overall given RPi4 has massive limitations I think at the moment it
 > > should be dropped from the series so it doesn't block the
@@ -155,7 +163,10 @@ platform.
 > an additional possible
 > way to boot the OS. It might be limited to just booting, it might have
 > bugs, but it's still optional.
->
+
+That doesn't mean people won't try to use it and won't complain when
+it doesn't work.
+
 > > >   Linux kernel module doesn't support ACPI yet.
 > > >
 > > > Maximilian Brune (3):
@@ -288,7 +299,7 @@ platform.
 > > >  doc/develop/driver-model/virtio.rst           |   1 +
 > > >  drivers/ata/Kconfig                           |  12 +-
 > > >  drivers/ata/Makefile                          |   2 +-
-> > >  drivers/ata/{ahci_mvebu.c => ahci_generic.c}  |  17 +-
+> > >  drivers/ata/{ahci_mvebu.c =3D> ahci_generic.c}  |  17 +-
 > > >  drivers/core/acpi.c                           |  16 +
 > > >  drivers/cpu/Kconfig                           |   7 +
 > > >  drivers/cpu/Makefile                          |   2 +
@@ -309,7 +320,8 @@ platform.
 > > >  include/irq.h                                 |  14 +
 > > >  include/serial.h                              |   1 +
 > > >  lib/Kconfig                                   |  31 +-
-> > >  lib/acpi/acpi_table.c                         | 630 +++++++++++++++++-
+> > >  lib/acpi/acpi_table.c                         | 630 ++++++++++++++++=
++-
 > > >  lib/acpi/acpigen.c                            |  11 +
 > > >  test/dm/acpi.c                                |  43 ++
 > > >  test/dm/irq.c                                 |  15 +
@@ -323,11 +335,16 @@ platform.
 > > >  create mode 100644 arch/arm/mach-bcm283x/bcm2711_acpi.c
 > > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
 > > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836.h
-> > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpio.h
-> > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpu.h
-> > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_pwm.h
-> > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdhost.h
-> > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdio.h
+> > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_g=
+pio.h
+> > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_g=
+pu.h
+> > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_p=
+wm.h
+> > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_s=
+dhost.h
+> > >  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_s=
+dio.h
 > > >  create mode 100644 arch/sandbox/lib/acpi_table.c
 > > >  create mode 100644 board/emulation/qemu-sbsa/Kconfig
 > > >  create mode 100644 board/emulation/qemu-sbsa/Makefile
@@ -351,7 +368,7 @@ platform.
 > > >  create mode 100644 configs/qemu-arm-sbsa_defconfig
 > > >  create mode 100644 configs/rpi_4_acpi_defconfig
 > > >  create mode 100644 doc/board/emulation/qemu-sbsa.rst
-> > >  rename drivers/ata/{ahci_mvebu.c => ahci_generic.c} (71%)
+> > >  rename drivers/ata/{ahci_mvebu.c =3D> ahci_generic.c} (71%)
 > > >  create mode 100644 drivers/cpu/armv8_cpu.c
 > > >  create mode 100644 drivers/cpu/armv8_cpu.h
 > > >  create mode 100644 drivers/cpu/bcm283x_cpu.c
