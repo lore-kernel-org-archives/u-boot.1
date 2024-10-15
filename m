@@ -4,160 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3DE7D216A9
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 14:15:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C1DFD216AD
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 14:16:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0420A88001;
-	Tue, 15 Oct 2024 16:15:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 725068837D;
+	Tue, 15 Oct 2024 16:16:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="AcwPEY4h";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OhwyqKhy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E42D188278; Tue, 15 Oct 2024 16:15:46 +0200 (CEST)
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur03on20614.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260c::614])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1546C88387; Tue, 15 Oct 2024 16:16:46 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E820B87F19
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 16:15:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 24D0C87F19
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 16:16:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=k2I2XpI4s6Xw0sAcnBb5NwGVtgMruGNrs5dMXP97TKrICFiJCT5fEHa3bVvB+IWcZLXm/ioAdIGDNoLbXip+ErKvZ9/Mpvv5I6CG80roiODsjtobOUFyvC9kyX4CwiPeLkID+vJO6SXW3NbYthOF11tiF1tECCAF4rX/S+BXQSn19DGBQH7q+fFBKiWeZ4n1cHlZXZ+SQawVAqgS+wETiFT+DA0S5hMKNimO21bWee/eZC0C8wAwmP+AJj8VZaAqVl1o7zf4MF5RuV10+15iJowqKFt4qj4ceZK0qCBTZ6UDgs4L4BhJni80QAsPwx74iHG4GKKdNZljFDm5Vvux8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=izLEXvcpdQf1OfTyq8VrVctCM0Qxx5st+KOAcGvHouE=;
- b=m3eDHqOkL52xzW8pJQlXJt5D62eZn0CnSWdO9m0mh1jpGEs9XQq8QNPWKOS3/yL5D/en9mFg/XRb8rGZPitZH0f3U4YzfHBUyMWOAeNzWNvyejczlvax/1H3Cqp66ZBM4AyBgTz3esauc6Z1xRVIOHUy+Rnd2QUb3pXx06/z6FQFw+uNstzCIhH5TYOUx2J0ht7c2LVLyWzb8ax/4TT8ugKkFQjSPdWOIous5JCh1E+hZlfV+On1C62pOiL+Q6l4uKl/75BtBmSdJv/VOFtr6a5cJjQYLxpnubA8FTH7t/Y3gS6XqX0ndCuVggRkYpGWXwe1soj4+GtaNhIbeI0sVg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=izLEXvcpdQf1OfTyq8VrVctCM0Qxx5st+KOAcGvHouE=;
- b=AcwPEY4h4Q98V/lkAPZEnGsC/KdPnpVENMMpFHvUroMFhTRmV5J9+J7fEcv5o5ZB5GdS6ibZtxeDcd7A7V+4F0HuCWmt0D6vJ65MZWiGs09GrPcPzlwrNAZcfKS0+ucPL4ajGv6cKftWXeWb6N8JGdVl58nZH+r3hTaG0Fk/7sU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by DBBPR04MB7852.eurprd04.prod.outlook.com (2603:10a6:10:1ee::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.18; Tue, 15 Oct
- 2024 14:15:42 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8048.020; Tue, 15 Oct 2024
- 14:15:42 +0000
-Message-ID: <40ec686d-3615-4fa6-9b7b-d9c289b9cec3@cherry.de>
-Date: Tue, 15 Oct 2024 16:15:41 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] Revert "mmc: dw_mmc: Extract FIFO data transfer into a
- separate routine"
-To: Jonas Karlman <jonas@kwiboo.se>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Minkyu Kang <mk7.kang@samsung.com>
-Cc: u-boot@lists.denx.de
-References: <20241008191834.2190270-1-jonas@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20241008191834.2190270-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0114.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:bb::15) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6cbe700dcc3so41968686d6.3
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 07:16:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729001802; x=1729606602; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=JwghM59ba/0hJ3UzaxyIqz6My7MFik4Q1y6mOAOQsVU=;
+ b=OhwyqKhyi97UUAnKXLch4y1DAKO3tuz7Nnls+elhhGdT1Z0tGHfbFdxzOnigbP02WG
+ LevTVF+Zdp/TKTAQySQppON84W0Ccyjb6+DmC3LbH/WOK1PKgILnggu4uE1Gzkfi1ByL
+ Mc/7IIDWvQ9lkM7hJME8mtpLYabQ/0dH+86Is=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729001802; x=1729606602;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JwghM59ba/0hJ3UzaxyIqz6My7MFik4Q1y6mOAOQsVU=;
+ b=cGMXww51Jf+BHoogrbJDdF/y8ozefObGmDyuTI2Qm0RLsJbvkWKwAmzOatoFP1T627
+ Xd4BCW8Pytevxw6vc8ehLJ96umvsT1M+NnSo9P9Z3z6ktqYh+sTFHNRQGuyyOvMMN4DH
+ rbATPWC/QWzwQKlDjSL0DFPYWTetuh2xKXOvr/YEFh9OOjIGO5KnUh9RLaHd9YgjCkr6
+ 4BqmP7JojrI3gt21mFmBg7eiod8Reg+x5ublbGfxtwwhVQeovDF4Lpb0FyEA1JLusHIW
+ Ltd5tRAIAEAtRiLrLr6fni8shcTTRM/NKapfDQZdyoHH7zHhDE91Tf/iolcmPgl8qgtg
+ AKOQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXp1CejUijqP6DV2iocHNzTqqpxVEnHVoLail0qvN8Cdxm/OiJePP5449KukABsVOsz3i/YDQc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzxg/ntX3rpYJBGXXxgGUTKopNKa8puveb3OCUK0Hk3lfRYRxgl
+ zy+Mh8mnFG0wADVstuGvu0XUnErtfaPlTSQAmjhACdqr0UYKy9CVI4P1v8yu0Tc=
+X-Google-Smtp-Source: AGHT+IECYZ8jEOyNjfOo7v2ntBHyh3jZeaYenWNDpB+i/bm1yRYvi1SkFqWa6aL3zndnpAJKjepmTg==
+X-Received: by 2002:a05:6214:311c:b0:6cb:ef96:c79e with SMTP id
+ 6a1803df08f44-6cc2b919931mr7009476d6.34.1729001801862; 
+ Tue, 15 Oct 2024 07:16:41 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cc2290fa66sm7017986d6.26.2024.10.15.07.16.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Oct 2024 07:16:40 -0700 (PDT)
+Date: Tue, 15 Oct 2024 08:16:36 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, u-boot@lists.denx.de,
+ ilias.apalodimas@linaro.org
+Subject: Re: [PATCH v6 12/12] test: efi: boot: Add a test for the efi bootmeth
+Message-ID: <20241015141636.GL53053@bill-the-cat>
+References: <20240926220226.1265965-9-sjg@chromium.org>
+ <20240926220226.1265965-13-sjg@chromium.org>
+ <20241011223227.GA630742@bill-the-cat>
+ <CAFLszTgoxND_qi8WzdgC8-mQLf0e14Mt=KgXy=bqWkqo4svG9Q@mail.gmail.com>
+ <20241014035122.GE53053@bill-the-cat>
+ <CAFLszTiVsoTdKiKmPVugc9cLk-A+XM2EdiPUE0AFK=g8RPx+0g@mail.gmail.com>
+ <20241014211150.GX53053@bill-the-cat>
+ <87cyk1hdne.fsf@bloch.sibelius.xs4all.nl>
+ <23757cf3-c27a-498d-9e66-59261f060102@gmx.de>
+ <CAFLszTikKJ29TEzCQHBL1JfYz4b+O0eVps2Aa9_pMuwHBZgByA@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DBBPR04MB7852:EE_
-X-MS-Office365-Filtering-Correlation-Id: 47804d03-6883-4efd-de20-08dced23da6b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VFpReDdDRVRtSkdLSFhCQUdsZ3Q5TkYxY3BWa3VYWnZTK1NMb3NvV3N6eE9Z?=
- =?utf-8?B?cHJBaUZ6eVo5RWVacTV6ZGhzZkg3aU1nQ3VaM0RUYUtxNjV5Ym1wQlJFTlhz?=
- =?utf-8?B?ZnkydCs5MXVneXhXbyt1aEZtWHZpM0ZCUDJLWCtuUzJjVzl6REJiRjlVUmpr?=
- =?utf-8?B?UlpQY09FWEtHdjlJSlFzdDNxZHRmc3ptRVFwNnF1RE5nd0RhMHIzTC9MRUpY?=
- =?utf-8?B?SG9XMU9UTHg0b3c2ZXowLzd1aXVQZGROd1Z6NUdoUVk2WDJsQjhVV1VGSm9O?=
- =?utf-8?B?enJ2RExQL003ZHdtUkdQakxDN3d2Vm9IdURPR2lMc2lLL2hXdjZFRWo2ZFJh?=
- =?utf-8?B?aUd6Mmw1UEZ6ODQvcWc3eGJaWUIzdEUxOGhqa1pJSnFreURwR29IOEJiRkxx?=
- =?utf-8?B?UWVaeDFiZjZWMlBjRksySkw0QTJUOGJsVFdsZlUxWTl3L1JKMUk0bFpUdXBr?=
- =?utf-8?B?T3lqelhpaEdyeHZTUzBScktFdnd3U1BVK1o1K0MybEJYR1h6QWR0dzI3eG43?=
- =?utf-8?B?empibmdMV3M2RGxPNE56MkdZMWlXNVFDZWZzMWZYOHNzS1pIOG5HUmQ2SGpK?=
- =?utf-8?B?S1V2R3pOLzE4bFFSbGpGeE9yb1Jlb1Jzb1NJSitxWTBHcWt2SnBXcFRhQXhs?=
- =?utf-8?B?K1V1eEY2c2ZlRm5PbWE2a3JidjlkYk81V2FFRHlZQ3JYUGhTeEVZNStlTjJp?=
- =?utf-8?B?ZEZJbWEvWGpJYmNhSUQ4VzJBL2pqSlVIbFpQaWltZVlaUHpUaUFNb2t0ZkNL?=
- =?utf-8?B?YWpLT2lPcnNTTlRxMVVXSENGYlVvSGRJUHJmb1NWR3F1dE03TVIyc1lqYTk2?=
- =?utf-8?B?NHpLM20rTXB5OURFRXJ6d0N1UTdKbGJsekt0YmZIQTFBNlBoSXJxSHBONUJ3?=
- =?utf-8?B?RWZTY3oxWlB0Y1JJaW8vU05yWmlidTFpcEswOXlRaW5qd1c4R2IwSCtrczBO?=
- =?utf-8?B?UHozMkJaaHBhUmZGUnFIVzdXRnQzVlBQRUZKbHNpNzg4bVJ2OFVJTmtBUTJ4?=
- =?utf-8?B?QjdwMW01VHFteHJpZzFWeEh6UldqSUJtMHNHVm5ndGhHSE93NEI4Z1FRZGcz?=
- =?utf-8?B?TVJHdXZkTERVM3FxMGR4NHpXVU9QRDl5OGVjU1dHS1FkK3NsTFhSMUZ2SmdG?=
- =?utf-8?B?VFVpdEl6UkFsZnM5eHF1OCtqNXBaZDc5UTM2WDV0YkpFSzRraHFDNWNUL2Rh?=
- =?utf-8?B?ZllsMW1GSCs5QU1NUU53Y0wxYjBpWTIxU2RmaGFNWXRYL2tNZXIvaVhYTExU?=
- =?utf-8?B?bGVsOG5YVHkwOWxBZkpBcHFnRXloU1VRMXlNUGNJbE1FZjl5UVJ3cEI4czl2?=
- =?utf-8?B?eXF6RWpHdHJaQ01qNkc0UndSbXRvZXQ5Y3gydldzNjl5eDZSSWJQWE9Ma3FH?=
- =?utf-8?B?ZitLSWQwbmFuQjQraGpnYzVVT045YXUwRmpudDVJT1lXcVRYSzVuQjg2U2U2?=
- =?utf-8?B?ZFNyVWJGRjIzaGlVa3NxWlA4TkxoSytQT2w3cTVKWTk4cFNEMFV4MFRSbWY5?=
- =?utf-8?B?aDNOUjBaS0FEemMyZkZvZ3NnY2laUUxCM1RtUU5MM08zYzJ2SGl5T1ZzZVBJ?=
- =?utf-8?B?cVdJMHBvMWhSTTY2ZXVEaVdsREhTZStYSzB1QzlQMVNUekRWMUNES0xDdDh0?=
- =?utf-8?B?a2Y0MTZoWGVXTlNTWVVLWjVNR1BsUlJqc054alpnWnkwVE5qc0FZMG5TdXBu?=
- =?utf-8?B?MkM4MkgxU05kUXRTZ0pzQnJWS2FvdlRvT3BEUG1EZ3lLNkY5ZG9ocXNBPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MlZIM0JhTkRmdVB2MWpsdndaVlJicyswSk54MWh3eEM5bitUOGFFTnBleTFr?=
- =?utf-8?B?NVNCMkQ0UlB3NFEzbFRKZDZaOTM4czJBZEU2ditpREF4Y0pUY2RqaVpJV2hi?=
- =?utf-8?B?ZEtrYVJzbEpFdW1VUXovS2RzZHloM1N0ZWZPcmRZYkRGVktGS2ZDYXJCeENC?=
- =?utf-8?B?Nm90MzkrKy96YWllL051Rmt1TlRVRVBhQ0RaZlVEUmYrRjZlVXQzeGV4Tmp4?=
- =?utf-8?B?Ung4NkRBUjVUaTBpaHlueTcyc09TS3p0Qm5OVHZJY1ZmSmVkN1dqaXAzY3hU?=
- =?utf-8?B?T3I3ZmhnTStSZ0tRQXVpZmtNU1p1ZDFyYnd4R1hVOHNobGxiZ2tLZjlhb3Y2?=
- =?utf-8?B?bEhUWmpMVENLd0ZnTnpqemNwVThQNk9wQyt0VUUySDVpTElPU3dZRVB1TWFz?=
- =?utf-8?B?SVFxWVBUelVwUkZuNW0yYTYzbFZyN3lHdHVQZzVSRnVMM28xa3RaaEtqT3lI?=
- =?utf-8?B?MTdSWkY1STdaU2NPb1hsYXFJSERMMktxZ0I2VnU3UStjSGdncHhDRTFnT3BN?=
- =?utf-8?B?ckJNQnhZejFrdldhd1VXMUhvOFp6QWZRQXgyRFhISi9nTGNQWWJMbk9kbUFG?=
- =?utf-8?B?SGYzZlB5TE5hQWhsUUwvU3ZXdzFPVy9CS2VqcDVhcUlaUmRrN1lXS1Q2ZWJ5?=
- =?utf-8?B?eXBVOWhMaUlwQTJuV2JjUlJ2MG9ibW02ajdMRXd5N1FjZzYxNVNCMUJyRmlr?=
- =?utf-8?B?QjFRNEh3OXBWdVNLZU5vV0VRZjBUNlhaeUc0dDRtSnJCT2JjdFFwSlJZRUY2?=
- =?utf-8?B?aHVEblhMcGFsSzlqN0tQMVYxeExxYXJDNkNtQkJudjdQWTdha1NzSE1BUDhv?=
- =?utf-8?B?YVlRNmQ2R0Fsc2pZNzUyeklBTnRkQS9jRy9pWGNWS24rWi9XamdXWWZsTVJV?=
- =?utf-8?B?SmZ1enVvSEtMd01Lb1pPaFBBSDBTdENKVVFZaDBacHlPWDZvWGdTUmNkYm5j?=
- =?utf-8?B?Yld4Q1c1aUVVNUgxalcyRnJpS2FHNGN5YUYrTXJaYVVSby9lQ3ZZVzQyTTlj?=
- =?utf-8?B?UkVKb0xoNjlwa2RSRjJuQURLR09CZkgxU09DaVU2eUIyM0MrekZsZm1pejJG?=
- =?utf-8?B?czZqSUhFQlROMWdkZFB5RTNyaDhybzRpbVdsOUtBMjJpaWhWRktzNlRTZWlM?=
- =?utf-8?B?WXJqZHZDaFo1ZjFTNlVrdHFRaTVlcEhNQ1BjUXhjNHZIT3JNOFdkSEU5aG9B?=
- =?utf-8?B?WDlyZzgzL04ycU5HMUN4Uy9xWWxWWmR3NG15Y3RjMFQ3NkdCeEs5LysrOFdW?=
- =?utf-8?B?dElneXlhWlE4SjdWVkIxRVRZR1lNKzFsMWwvVVFsRko1WEEyeFcvQ2R4YzA2?=
- =?utf-8?B?RXhTMUFDd2VrM2JaaWJTMk1vaC9QeDJNakR0Z3duVXArY1V3dUhmZ29GTzFz?=
- =?utf-8?B?T2ZWenVqUkVSbi8yUUhTaVI3MUQ4TFdYNjdiblNSbTN2WWsxZlJmZTNpbmxR?=
- =?utf-8?B?RGErejZQYVdON1BqRjZ4eUIzYWdwYm5DN2pWUElyOEROVG02RlVSNW9Na0I4?=
- =?utf-8?B?QVhQOHlXM1NiUTRyM3NEcitiUWhxOXE5NjNsUDRYRk5jVmFPbEhITU9aUG9G?=
- =?utf-8?B?ZU0xdlVZLzNLMUJvUzY4NU4zWDROdGNHWGhFaVFYeFIwaVdTNngrYnlMdDdB?=
- =?utf-8?B?dDk1MlNReUdzT09CanluVnBaTG9lZmZqYWtuV001Y3lKa3FKM1JzWXNsRFJp?=
- =?utf-8?B?VlczS25BN1NpcFFGam5HbHBVdnowL3QrTmp5K2RRTFh5dytHR3dsNGFuUW1V?=
- =?utf-8?B?THgwVmgyZDBQbWplN0hPN2FqaVh3TVVTelpEM2VOc2JwVTRjTFlRT2J4cHU2?=
- =?utf-8?B?aEhGWnhqYlVlbE15cG5pWVAyOC9aN2xrSS90SG9pL2pHaytYVmpBSjhFVElF?=
- =?utf-8?B?dlpZZjRPc1MrTDJqS01tRUp3WWNnVDhPS2hkcjQzZS9qT25XdC8yTC90YVNQ?=
- =?utf-8?B?S3ZZY0FXU0QwdTViZFNWeitYYUg1WUV6NGs1Uk5kcWhXU2F4R2NIcnJUQmgw?=
- =?utf-8?B?akV6bTRJcUkvTG1zbnhsUWJZd1NmWU8vZmtGSVMwLzZTbnNhOXNhS2Vld3JH?=
- =?utf-8?B?bnBrb0RaYWVsVkZ2UGRuOTdtMVI0N05YVnBtRzcyNnhNQk0wVFNHRmJrSWVz?=
- =?utf-8?B?N3k5eG9NeXkyV1gvaFFxTXJwSjUwQldYODdXcWJ0VXJ2WmZCQzdYNmYzYzJH?=
- =?utf-8?B?cGc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 47804d03-6883-4efd-de20-08dced23da6b
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2024 14:15:42.7393 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: g320FDgVgRG3CLNBck8y0W+Y0kXu7gagIHceZ+XZ+bzNNYi1FPLOVsSXdk92fPQn5wmwTaoKfqprKsMwPQsMxcL6lsxghLz8S68vOa6wYXU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7852
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="FD3Otjqrw2jlZ1ok"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTikKJ29TEzCQHBL1JfYz4b+O0eVps2Aa9_pMuwHBZgByA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -174,38 +102,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
 
-On 10/8/24 9:18 PM, Jonas Karlman wrote:
-> The commit 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a
-> separate routine") unintentionally changed behavior of the FIFO data
-> transfer routine.
-> 
-> When data is read and size reaches 0 the original loop would wait on
-> DWMCI_INTMSK_DTO or timeout. The remaining size to read and buf position
-> is no longer tracked across dwmci_data_transfer_fifo() calls and because
-> of this an extra call to fifo() and dwmci_fifo_ready() may now trigger a
-> FIFO underflow timeout error and slows down FIFO reading.
-> 
->    Buswidth = 4, clock: 50000000
->    Sending CMD16
->    Sending CMD17
->    dwmci_fifo_ready: FIFO underflow timeout
->    Sending CMD16
->    Sending CMD18
->    dwmci_fifo_ready: FIFO underflow timeout
->    Sending CMD12
->    ## Checking hash(es) for config config-1 ... OK
-> 
-> This reverts commit 0252924ac6d4af69061bb9589d16b30c5bdb7178 to restore
-> the old working behavior.
-> 
-> Fixes: 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a separate routine")
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+--FD3Otjqrw2jlZ1ok
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This is fixing a VERY slow boot time on my RK3588 Tiger, so:
+On Tue, Oct 15, 2024 at 07:25:55AM -0600, Simon Glass wrote:
+> Hi Heinrich,
+>=20
+> On Tue, 15 Oct 2024 at 05:36, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
+> >
+> > On 15.10.24 12:19, Mark Kettenis wrote:
+> > >> Date: Mon, 14 Oct 2024 15:11:50 -0600
+> > >> From: Tom Rini <trini@konsulko.com>
+> > >>
+> > >> On Mon, Oct 14, 2024 at 01:13:41PM -0600, Simon Glass wrote:
+> > >>
+> > >> [snip]
+> > >>> Or perhaps just have a way to turn it off? I first sent this patch
+> > >>> last November. It is just wrong to generate output like this which =
+we
+> > >>> don't want. There isn't even a test for it, so just add a way to
+> > >>> disable it, and be done!
+> > >>
+> > >> I don't know that it's unwanted. As I'm trying to get Heinrich to
+> > >> explain, _why_ does efi_setup_console_size need to exist, and do wha=
+t it
+> > >> does? This isn't the case of color-coding the output of tests as they
+> > >> happen, there must be a reason we care about knowing the console siz=
+e.
+> > >> At that point we can figure out if the right answer is:
+> > >> - Don't generate that check on serial ports, it's somewhere between
+> > >>    misleading to wrong.
+> > >> - text-based tests just need to expect and skip it because there's a
+> > >>    good reason to need to know the console size and not just assume
+> > >>    80x24.
+> > >> - Something else we won't know until it's clearly explained why we do
+> > >>    this.
+> > >
+> > > Sadly this is a misfeature of UEFI.  The EFI_SIMPLE_TEXT_OUTPUT_PROTO=
+COL
+> > > is required if console devices are supported by the UEFI
+> > > implementation, and is built around the concept of "text mode" with a
+> > > fixed number of character rows and columns.  That pretty much assumes
+> > > there is some sort of terminal emulator on the other end.  And this is
+> > > pretty much incompatible with anything that just want to log serial
+> > > output.
+> > >
+> > > I think it is possible to do better though.  Instead of calling
+> > > efi_setup_console_size() in efi_init_obj_list(), we could postpone
+> > > this until the application makes a call that requires us to know the
+> > > size.  This would mean that a simple EFI application that just uses
+> > > EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.OutputString() (such as the Hello
+> > > world EFI application or the OpenBSD EFI bootloader) wouldn't have to
+> > > do the size query.
+> >
+> > The implementation of EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.OutputString()
+> > needs to know the output size to update the cursor position in
+> >
+> >    EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.MODE.CursorColumn
+> >    EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.MODE.CursorRow
+> >
+> > The EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL is passed to the entry point of any
+> > EFI application via the system table.
+> >
+> > We could delay the invocation of efi_setup_console_size() to the launch
+> > of the first EFI application (efi_start_image()).
 
-Tested-by: Quentin Schulz <quentin.schulz@cherry.de> # RK3588 Tiger
+This discussion I believe should continue as it does sound like we can
+be a bit better about when we do this required series of events.
 
-Thanks!
-Quentin
+> That's a start, but I think the right answer here is to use my flag
+> and in efi_setup_console_size() don't call query_console_serial() if
+> the flag is set. Then the default (80x25) will be returned, which is
+> fine for the test which is the subject of this series.
+
+No, your series, like other tests that already exist and have this
+escape code printed, should just swallow the escape sequence if it shows
+up because, sadly, there is reason for it. I wonder if we should have
+some test _for_ this sequence, or otherwise make sure we see it when we
+should see it?
+
+--=20
+Tom
+
+--FD3Otjqrw2jlZ1ok
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcOeUEACgkQFHw5/5Y0
+tyztXAwAgTWW36GKlrfkV84tbGT5Q+ipcaN5JRbBJTM108l/m6f6EVIBq7Dwav/W
+kxMFdtphPxbMBsv+DZVfDbbwUwwARJz+8NSEy0wmeDdbN5RvAP8TwNV+0xtom6XF
+nBjvxHnVK/ELelNxx6IyUuQAqC0XtmPRzCzFeg/SdfGg36htT32EFt8MG+br8kM6
+IW4o24x7AAtjUaDsWcarkqHT5cH8xgIIEsiUbUMerT/KYboVn+O9ET+NTvMqoon2
+xFEY5o9DgW6hAMAVSKs+yS5CrmDYMEOKCwjSFliCVkeSw642Twxf0k4Rb4j3GXs0
+XmXTQb+b50ZlAl7c+s0kobZnuGwmEXKCM8O2dUc++ANwZHa1SeWWl3nqiqOVcWZL
+CMqYDP6+Lop0bEl+1kKPt9UImMYSq/zM/f8gqfNJIK5atbnsC3+XHT74yU6s5kCK
+aJXabuYo9We8fbtfGVNYUWXvtfdSuU8T7LQFO+luTUCsmj42rsEkB60XVWn6eJKA
+3KpLXIGl
+=duK0
+-----END PGP SIGNATURE-----
+
+--FD3Otjqrw2jlZ1ok--
