@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17E86CFC299
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 11:59:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AC6CCFC293
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 12:10:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E12E87BF4;
-	Tue, 15 Oct 2024 13:59:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
+	by phobos.denx.de (Postfix) with ESMTP id A9B7F87FA7;
+	Tue, 15 Oct 2024 14:10:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="EOkaAW3q";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="C2ECOD6P";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="EOkaAW3q";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="C2ECOD6P";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Hv05vapR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7562387BF4; Tue, 15 Oct 2024 13:59:05 +0200 (CEST)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5104987DC7; Tue, 15 Oct 2024 14:10:18 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A21D88753
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 13:58:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A04687FA7
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 14:10:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=schwab@suse.de
-Received: from hawking.nue2.suse.org (unknown [10.168.4.11])
- by smtp-out2.suse.de (Postfix) with ESMTP id 0BD7F1FB9A
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 11:58:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1728993538; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
- mime-version:mime-version:content-type:content-type;
- bh=2qeuq7xVgcPhS3kZY/PcqHigVasWO4vGGuGCXK4u1uI=;
- b=EOkaAW3qbRkHETDxcD3Z2B7rM90kj/R9+t0+mo2yXlbEJumlsoVj+Jxp3W8ZFjCzYPV0wn
- /Bh5dBbYnAzJRj+hsK4OjQRuo4XcJr88LRbKGdWw2rx6IpOx8DjOA0BgKITTlnwh9Fuwdb
- 4UxlFILWNDSuyyNyGRxz/fGoE8ozDkE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1728993538;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
- mime-version:mime-version:content-type:content-type;
- bh=2qeuq7xVgcPhS3kZY/PcqHigVasWO4vGGuGCXK4u1uI=;
- b=C2ECOD6PVvvaXEZZpB2VelkhCEc7Hy49L5nTR0mqPyAFWv/06+tPcsTMngoD7O4d/9CQgc
- LBIgqS4uTV9wL9AA==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1728993538; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
- mime-version:mime-version:content-type:content-type;
- bh=2qeuq7xVgcPhS3kZY/PcqHigVasWO4vGGuGCXK4u1uI=;
- b=EOkaAW3qbRkHETDxcD3Z2B7rM90kj/R9+t0+mo2yXlbEJumlsoVj+Jxp3W8ZFjCzYPV0wn
- /Bh5dBbYnAzJRj+hsK4OjQRuo4XcJr88LRbKGdWw2rx6IpOx8DjOA0BgKITTlnwh9Fuwdb
- 4UxlFILWNDSuyyNyGRxz/fGoE8ozDkE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1728993538;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
- mime-version:mime-version:content-type:content-type;
- bh=2qeuq7xVgcPhS3kZY/PcqHigVasWO4vGGuGCXK4u1uI=;
- b=C2ECOD6PVvvaXEZZpB2VelkhCEc7Hy49L5nTR0mqPyAFWv/06+tPcsTMngoD7O4d/9CQgc
- LBIgqS4uTV9wL9AA==
-Received: by hawking.nue2.suse.org (Postfix, from userid 17005)
- id C7EC34A03D4; Tue, 15 Oct 2024 13:58:57 +0200 (CEST)
-From: Andreas Schwab <schwab@suse.de>
-To: u-boot@lists.denx.de
-Subject: 2024.10 fails to boot on starfive visionfive2
-X-Yow: Look!  A ladder!  Maybe it leads to heaven, or a sandwich!
-Date: Tue, 15 Oct 2024 13:58:57 +0200
-Message-ID: <mvmr08hy3um.fsf@suse.de>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-53a007743e7so627811e87.1
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 05:10:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728994215; x=1729599015;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=m3mlDMVujwPUGZ5GdWkLk3F5vF8r1ZxFSLF9nb7XUr4=;
+ b=Hv05vapREe4R5x23hWAUderzrFOf0vuIz1dVGLl6KEaqpIa1bG2lY2pajor/4J1a5p
+ t3KfwIEnArs6h9mRiQTdGYH65N+9KRIKr42rCMwc16T9odpJK/21YmcBUX/FUXb2FVot
+ NPCZB2GgQBsRZ3OdNBr6ArXX6hTdWJU2jVcMen4HiElR0D+yJNTl4bkUfgoZL2Py+ZN1
+ l0ndTJhWF+iystX8CKpqCt3lUznccZP183q9kgWMP8lIKCvKJaXBuTjyCKTYxpgvjI3o
+ X4/knwHEATmjkhhIu/ZhUAhua3UQHxq/enS+vmjdUOKBkgXojX0QGnerkt/D0maAcYnC
+ dAdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728994215; x=1729599015;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=m3mlDMVujwPUGZ5GdWkLk3F5vF8r1ZxFSLF9nb7XUr4=;
+ b=OzQI7j0P0Um4S3omeMFsCINqTdm/9RfGDKBLxZat4JwD0yzbVpEtz+ssSCdPSClwL8
+ dA1AC+cTXVl+nbnJqbuR0vuuRtTVgIQXf+mCB/xu43/pm0Vfn1L1bI+9ioV6+b+q2WXO
+ vEMVARA7IenVRe/HujEsP2BHrPNZ8Gvsw5poDF+UmVzU+UxFCuKbsOQOGPv+fFdf5gV/
+ ZUsOZ/wz5CcUX5ZfxNCe68zxrhbyMmWb4JMrOhUB4W1CMU9r+OnZW6gCMnbDLss9S9PI
+ twMz3qCRXnkoVzwb6moRduhGcVgrXPPRuuaUouExC5lckubqv6BMXKuCLyc4d+dlD6OV
+ 7Ung==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXoCInukzDh80N+WR4Zck3cpEgVSaxNkfHIakjGtinVMYceek5Xm4pFqViFnf+b/fPr9xCW22Y=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzy1QfXFzdJ/x93knyRc/sW+qCG9LksId9UuoOy9RAJHZx7woIc
+ 6vYEdfdkgGDmRefz2bJntKsWbvb5/nUJjAH36ARUUaRvL3pCm3H1Tz80oR8Q4dA=
+X-Google-Smtp-Source: AGHT+IF1qDwjzDccz+tNCo4hESciajreBSm/xzgQC9HBMzo5o2kTf9D4zY+/uepW6AMkkpKkSmgSUA==
+X-Received: by 2002:a05:6512:238b:b0:539:f7c1:5feb with SMTP id
+ 2adb3069b0e04-539f7c16172mr3354683e87.39.1728994214376; 
+ Tue, 15 Oct 2024 05:10:14 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4313f6b1f4csm15982555e9.30.2024.10.15.05.10.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Oct 2024 05:10:13 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>, Dmitry Rokosov
+ <ddrokosov@salutedevices.com>
+Cc: u-boot-amlogic@groups.io, Igor Opaniuk <igor.opaniuk@gmail.com>, Sam
+ Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>,
+ "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Mario Six <mario.six@gdsys.cc>,
+ u-boot@lists.denx.de, rockosov@gmail.com, kernel@salutedevices.com
+Subject: Re: [PATCH v3 2/6] treewide: bcb: move ab_select command to bcb
+ subcommands
+In-Reply-To: <CAFLszTgO5h1zdXJTk-PCcDWx6nAz3riV34K_sHcvnO4AYMNSqA@mail.gmail.com>
+References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
+ <20241008-android_ab_master-v3-2-f292c45a33e4@salutedevices.com>
+ <17FD691FA1477948.8140@groups.io> <87ed4mhgaw.fsf@baylibre.com>
+ <20241011180031.cgvuhks7zo772wl6@CAB-WSD-L081021>
+ <87frp1r9iz.fsf@baylibre.com>
+ <20241014203820.riljx72bkqw762v5@CAB-WSD-L081021>
+ <CAFLszTgO5h1zdXJTk-PCcDWx6nAz3riV34K_sHcvnO4AYMNSqA@mail.gmail.com>
+Date: Tue, 15 Oct 2024 14:10:10 +0200
+Message-ID: <87ikttzhwd.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Spamd-Result: default: False [-4.20 / 50.00]; BAYES_HAM(-3.00)[99.99%];
- NEURAL_HAM_LONG(-1.00)[-1.000];
- NEURAL_HAM_SHORT(-0.20)[-0.981]; MIME_GOOD(-0.10)[text/plain];
- RCVD_NO_TLS_LAST(0.10)[]; ARC_NA(0.00)[];
- RCPT_COUNT_ONE(0.00)[1]; MIME_TRACE(0.00)[0:+];
- RCVD_COUNT_ONE(0.00)[1]; MID_RHS_MATCH_FROM(0.00)[];
- FROM_HAS_DN(0.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
- FROM_EQ_ENVFROM(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- TO_DN_NONE(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:mid]
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,25 +102,267 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Trying to boot 2024.10 on the starfive visionfive2 1.2a board from flash
-fails:
+Hi Simon, Dmitry
 
-U-Boot SPL 2024.10 (Oct 08 2024 - 07:10:55 +0000)
-DDR version: dc2e84f0.
-Trying to boot from SPI
-SPI probe failed.
-SPL: failed to boot from all boot devices
-### ERROR ### Please RESET the board ###
+On lun., oct. 14, 2024 at 15:06, Simon Glass <sjg@chromium.org> wrote:
 
-I can boot 2024.10 successfully from SD card, but using it to flash
-u-boot (no matter which version) will produce a bad flash:
+> Hi Dmitry,
+>
+> On Mon, 14 Oct 2024 at 14:38, Dmitry Rokosov
+> <ddrokosov@salutedevices.com> wrote:
+>>
+>> Hello Mattijs,
+>>
+>> On Sat, Oct 12, 2024 at 10:49:08AM +0200, Mattijs Korpershoek wrote:
+>> > Hi Dmitry,
+>> >
+>> > On ven., oct. 11, 2024 at 21:00, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+>> >
+>> > > On Fri, Oct 11, 2024 at 04:20:39PM +0200, Mattijs Korpershoek wrote:
+>> > >> On ven., oct. 11, 2024 at 15:30, "Mattijs Korpershoek via groups.io" <mkorpershoek=baylibre.com@groups.io> wrote:
+>> > >>
+>> > >> > Hi Dmitry,
+>> > >> >
+>> > >> > Thank you for the patch.
+>> > >> >
+>> > >> > On mar., oct. 08, 2024 at 23:18, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+>> > >> >
+>> > >> >> To enhance code organization, it is beneficial to consolidate all A/B
+>> > >> >> BCB management routines into a single super-command.
+>> > >> >> The 'bcb' command is an excellent candidate for this purpose.
+>> > >> >>
+>> > >> >> This patch integrates the separate 'ab_select' command into the 'bcb'
+>> > >> >> group as the 'ab_select' subcommand, maintaining the same parameter list
+>> > >> >> for consistency.
+>> > >> >>
+>> > >> >> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+>> > >> >> ---
+>> > >> >>  MAINTAINERS                               |  1 -
+>> > >> >>  cmd/Kconfig                               | 15 +------
+>> > >> >>  cmd/Makefile                              |  1 -
+>> > >> >>  cmd/ab_select.c                           | 66 -------------------------------
+>> > >> >>  cmd/bcb.c                                 | 63 +++++++++++++++++++++++++++++
+>> > >> >>  configs/am57xx_hs_evm_usb_defconfig       |  1 -
+>> > >> >>  configs/khadas-vim3_android_ab_defconfig  |  1 -
+>> > >> >>  configs/khadas-vim3l_android_ab_defconfig |  1 -
+>> > >> >>  configs/sandbox64_defconfig               |  4 +-
+>> > >> >>  configs/sandbox_defconfig                 |  4 +-
+>> > >> >>  doc/android/ab.rst                        | 12 +++---
+>> > >> >>  include/configs/khadas-vim3_android.h     |  2 +-
+>> > >> >>  include/configs/khadas-vim3l_android.h    |  2 +-
+>> > >> >>  include/configs/meson64_android.h         |  4 +-
+>> > >> >>  include/configs/ti_omap5_common.h         |  4 +-
+>> > >> >>  test/py/tests/test_android/test_ab.py     |  8 ++--
+>> > >> >>  16 files changed, 85 insertions(+), 104 deletions(-)
+>> > >> >>
+>> > >> >> diff --git a/MAINTAINERS b/MAINTAINERS
+>> > >> >> index 7aefda93d017f07d616f0f6d191129914fbeb484..668ccec9ae6df47192b1af668e3fdbeb1dfa15ea 100644
+>> > >> >> --- a/MAINTAINERS
+>> > >> >> +++ b/MAINTAINERS
+>> > >> >> @@ -65,7 +65,6 @@ R:    Sam Protsenko <semen.protsenko@linaro.org>
+>> > >> >>  S:     Maintained
+>> > >> >>  T:     git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
+>> > >> >>  F:     boot/android_ab.c
+>> > >> >> -F:     cmd/ab_select.c
+>> > >> >>  F:     doc/android/ab.rst
+>> > >> >>  F:     include/android_ab.h
+>> > >> >>  F:     test/py/tests/test_android/test_ab.py
+>> > >> >> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>> > >> >> index dd33266cec70a2b134b7244acae1b7f098b921e8..11e8d363dc9b137723a86a240412d82dd0dbccc5 100644
+>> > >> >> --- a/cmd/Kconfig
+>> > >> >> +++ b/cmd/Kconfig
+>> > >> >> @@ -1067,6 +1067,7 @@ config CMD_ADC
+>> > >> >>  config CMD_BCB
+>> > >> >>         bool "bcb"
+>> > >> >>         depends on PARTITIONS
+>> > >> >> +       depends on ANDROID_AB
+>> > >> >
+>> > >> > When building with khadas-vim3_android_defconfig, we can see that CMD_BCB is no
+>> > >> > longer part of that build:
+>> > >> >
+>> > >> > $ grep CMD_BCB .config
+>> > >> > <empty>
+>> > >> >
+>> > >> > However, if we look at include/configs/meson64_android.h, we can see
+>> > >> > that the "bcb" command is not only used for checking the _slot suffix.
+>> > >> >
+>> > >> > It's also used for checking the bootloader reason. For example, in
+>> > >> > BOOTENV_DEV_FASTBOOT, we call:
+>> > >> >
+>> > >> >    "if bcb test command = bootonce-bootloader; then " \
+>> > >> >
+>> > >> > Since CMD_BCB is no longer part of the .config (due to this dependency),
+>> > >> > the boot script now shows errors:
+>> > >> >
+>> > >> > """
+>> > >> > U-Boot 2024.10-00796-g969325278805 (Oct 11 2024 - 14:46:00 +0200) khadas-vim3
+>> > >> >
+>> > >> > Model: Khadas VIM3
+>> > >> > SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
+>> > >> > DRAM:  2 GiB (effective 3.8 GiB)
+>> > >> > Core:  411 devices, 36 uclasses, devicetree: separate
+>> > >> > MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
+>> > >> > Loading Environment from MMC... fs uses incompatible features: 00020000, ignoring
+>> > >> > Reading from MMC(2)... *** Warning - bad CRC, using default environment
+>> > >> >
+>> > >> > In:    usbkbd,serial
+>> > >> > Out:   vidconsole,serial
+>> > >> > Err:   vidconsole,serial
+>> > >> > Net:   eth0: ethernet@ff3f0000
+>> > >> >
+>> > >> > Hit any key to stop autoboot:  0
+>> > >> > Verify GPT: success!
+>> > >> > Unknown command 'bcb' - try 'help'
+>> > >> > Warning: BCB is corrupted or does not exist
+>> > >> > dev: pinctrl@14
+>> > >> > dev: pinctrl@40
+>> > >> > gpio: pin 88 (gpio 88) value is 1
+>> > >> > Unknown command 'bcb' - try 'help'
+>> > >> > Warning: BCB is corrupted or does not exist
+>> > >> > Loading Android boot partition...
+>> > >> > switch to partitions #0, OK
+>> > >> > mmc2(part 0) is current device
+>> > >> > """
+>> > >> >
+>> > >> > I know we should not be using a boot script, nor non A/B configs but
+>> > >> > it's a bummer that this series breaks an upstream
+>> > >> > defconfig (khadas-vim3_android_defconfig)
+>> > >> >
+>> > >> > My recommendation:
+>> > >> >
+>> > >> > Make BCB_CMD_AB_SELECT implementation dependant on ANDROID_AB.
+>> > >> > This way, users can use CMD_BCB with and without ANDROID_AB being enabled.
+>> > >> >
+>> > >> > We could do:
+>> > >> > When ANDROID_AB=y, implement bcb ab_select subcommand
+>> > >> > When ANDROID_AB=n, command is not accessible.
+>> > >> >
+>> > >> > I'll send you a diff shortly for this.
+>> > >>
+>> > >> Here is an illustration on how that would work:
+>> > >>
+>> > >> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>> > >> index 861c31e26408..e1a4a97b042d 100644
+>> > >> --- a/cmd/Kconfig
+>> > >> +++ b/cmd/Kconfig
+>> > >> @@ -1055,7 +1055,6 @@ config CMD_ADC
+>> > >>  config CMD_BCB
+>> > >>    bool "bcb"
+>> > >>    depends on PARTITIONS
+>> > >> -  depends on ANDROID_AB
+>> > >>    help
+>> > >>      Read/modify/write the fields of Bootloader Control Block, usually
+>> > >>      stored on the flash "misc" partition with its structure defined in:
+>> > >> diff --git a/cmd/bcb.c b/cmd/bcb.c
+>> > >> index 4fd32186ae65..4fe634f14cc5 100644
+>> > >> --- a/cmd/bcb.c
+>> > >> +++ b/cmd/bcb.c
+>> > >> @@ -438,6 +438,9 @@ static int do_bcb_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
+>> > >>    char slot[2];
+>> > >>    bool dec_tries = true;
+>> > >>
+>> > >> +  if (!CONFIG_IS_ENABLED(AB_SELECT))
+>> > >> +          return CMD_RET_SUCCESS;
+>> > >> +
+>> > >>    for (int i = 4; i < argc; i++) {
+>> > >>            if (!strcmp(argv[i], "--no-dec"))
+>> > >>                    dec_tries = false;
+>> > >> @@ -474,6 +477,9 @@ static int do_bcb_ab_dump(struct cmd_tbl *cmdtp, int flag, int argc,
+>> > >>    struct blk_desc *dev_desc;
+>> > >>    struct disk_partition part_info;
+>> > >>
+>> > >> +  if (!CONFIG_IS_ENABLED(AB_SELECT))
+>> > >> +          return CMD_RET_SUCCESS;
+>> > >> +
+>> > >>    if (part_get_info_by_dev_and_name_or_num(argv[1], argv[2],
+>> > >>                                             &dev_desc, &part_info,
+>> > >>                                             false) < 0) {
+>> > >>
+>> > >
+>> > > We also need to include an #ifdef directive for the ab_select_slot()
+>> > > function usage; otherwise, the code will not compile successfully.
+>> >
+>> > Are you sure? Per my understanding, it's possible that the compiler
+>> > optimizes this out because CONFIG_IS_ENABLED(AB_SELECT)
+>> > is known as build time.
+>> >
+>> > When I tried this diff with khadas-vim3_android_defconfig I did not see
+>> > any build errors. I will try again early next week.
+>> >
+>>
+>> As I recall, the IS_ENABLED() mechanism serves as a runtime checker to
+>> determine whether specific CONFIG_* options are enabled. Consequently,
+>> all code paths under this mechanism are always compiled. I attempted to
+>> disable CONFIG_ANDROID_AB for the sandbox_defconfig, but it resulted in
+>> the expected linker error.
+>>
+>> /tmp/ccAvYrKL.ltrans25.ltrans.o: In function `do_bcb_ab_select':
+>> <artificial>:(.text+0x6d5d): undefined reference to `ab_select_slot'
+>> collect2: error: ld returned 1 exit status
+>> Makefile:1813: recipe for target 'u-boot' failed
+>> make: *** [u-boot] Error 1
+>>
+>> I have already prepared a new version using #ifdef directives. I will
+>> send it shortly.
+>
+> Something else is going on here, since we do this all the time and
+> rely on it. So long as the code is behind an if() the dead code should
+> be eliminated.
+>
 
-Main section boot fail,use backup section
+I have passed my diff (using CONFIG_IS_ENABLED) through the U-Boot CI:
+https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/22700
 
-In order to produce a working boot from flash I have to use u-boot
-2024.07 (or earlier) to reflash it.
+See the branch:
+https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commits/dmitry/ab-dump-v3
 
--- 
-Andreas Schwab, SUSE Labs, schwab@suse.de
-GPG Key fingerprint = 0196 BAD8 1CE9 1970 F4BE  1748 E4D4 88E3 0EEA B9D7
-"And now for something completely different."
+There are some test errors (sandbox test) but the "world build" stage
+finished sucessfully.
+
+I have also tested locally using the CI container:
+$ cd ~/work/upstream/u-boot
+$ git clean -xdf
+$ make mproper
+$ docker run -v $PWD:$PWD -it trini/u-boot-gitlab-ci-runner:jammy-20240227-14Mar2024 /bin/bash
+
+# In container
+uboot@0ba059e8b7af/$ cd /home/mkorpershoek/work/upstream/u-boot
+uboot@0ba059e8b7af:/home/mkorpershoek/work/upstream/u-boot$ pip install -r test/py/requirements.txt
+uboot@0ba059e8b7af:/home/mkorpershoek/work/upstream/u-boot$ ./test/py/test.py --bd sandbox --build -k test_ut
+
+No build errors either.
+
+Dmitry, can you clarify what compiler/build commands you've used to see
+that error?
+
+For reference, here is what buildman has in the CI container:
+
+uboot@0ba059e8b7af:/home/mkorpershoek/work/upstream/u-boot$ ./tools/buildman/buildman --list-tool-chains
+List of available toolchains (17):
+aarch64   : /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc
+arc       : /opt/gcc-13.2.0-nolibc/arc-linux/bin/arc-linux-gcc
+arm       : /opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-gcc
+c89       : /usr/bin/c89-gcc
+c99       : /usr/bin/c99-gcc
+i386      : /opt/gcc-13.2.0-nolibc/i386-linux/bin/i386-linux-gcc
+m68k      : /opt/gcc-13.2.0-nolibc/m68k-linux/bin/m68k-linux-gcc
+microblaze: /opt/gcc-13.2.0-nolibc/microblaze-linux/bin/microblaze-linux-gcc
+mips      : /opt/gcc-13.2.0-nolibc/mips-linux/bin/mips-linux-gcc
+nios2     : /opt/gcc-13.2.0-nolibc/nios2-linux/bin/nios2-linux-gcc
+powerpc   : /opt/gcc-13.2.0-nolibc/powerpc-linux/bin/powerpc-linux-gcc
+riscv32   : /opt/gcc-13.2.0-nolibc/riscv32-linux/bin/riscv32-linux-gcc
+riscv64   : /opt/gcc-13.2.0-nolibc/riscv64-linux/bin/riscv64-linux-gcc
+sandbox   : /usr/bin/cgcc
+sh2       : /opt/gcc-13.2.0-nolibc/sh2-linux/bin/sh2-linux-gcc
+x86_64    : /usr/bin/x86_64-linux-gnu-gcc
+xtensa    : /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-gcc
+
+I think we should use CONFIG_IS_ENABLED if possible
+
+
+>>
+>> [...]
+>>
+>
+> Regards,
+> Simon
