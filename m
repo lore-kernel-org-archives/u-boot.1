@@ -4,64 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E667BD1F9C5
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 20:22:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7EA0D1F9C5
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 20:29:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2293E87FED;
-	Tue, 15 Oct 2024 22:22:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3687988770;
+	Tue, 15 Oct 2024 22:29:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729023728;
-	bh=lVx4I9FeAsJoXU0o3Wqmsgujkd2+EArhzLBJZY7WS9o=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=bnCsB+UmbWq+5pKPgrKiiAjt30xhMUbYh9zpxrMKIFtrzsRE+mp3kgsymumsj0pGQ
-	 zbn2qLcvV7RyFV+YSbOVBijhA7DHXuK6iZ/WtTWJ+4TpLoNM9MAmq3gkex0CmXGS8l
-	 9xGsolmBpGjpOQ8w1xiyaBXmQH1zHMV8JaSXUpJpCekmTGLxIu45p2L+0RdfNqUyn3
-	 jqCGn8YQlg7uJRdyjGysYDiQ1TZaIKFZy5amjMYlJUW+nBSKu277BW26uD6xdeC9rv
-	 /BVZl7mePaDHNI3jb5LhK56vVKH6md9AqnXSTiNtfs8WdjIZpYJ235rvKtYpTCizZX
-	 PRy/sdrIOztOQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j1s+pjZb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3EEC385B66; Tue, 15 Oct 2024 22:29:40 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id C168487F19;
- Tue, 15 Oct 2024 22:22:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729023727;
- bh=lVx4I9FeAsJoXU0o3Wqmsgujkd2+EArhzLBJZY7WS9o=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=lJyUo/nThCp3HYXJBtOPUiCLqIjego/TUj8qwNsVOfHFkbj5qmnmxKBBhYJLAP25Y
- zWW6EVQYTBiWLg1ByNa9sa9HmgYIef15rvL08sGzVNm22Nx4EPsWpX5uxzL3rmxC7z
- Bqj/8NQ5oP4OnVBMfKiH5tbHbZQEbxRfo6/Fmwk/99UWfBAZDch2wFMY1sQk+HAeEM
- GYvH0kVI8qRvk0PxiW4NaKPWfeU9G6lWchzgy9PtD/g9P8dMC1cbCp+mrb1D6z65/1
- xmeRNNW9QsKHm0rCD1Zm2o1rzJX0qo1CXnD54t275YoJKqJh2emY8JRkC/5Awz2FmJ
- A/szOdM0F0m6w==
-Message-ID: <d87b9fc8-5bdb-4e16-a219-51d05230bc80@denx.de>
-Date: Tue, 15 Oct 2024 22:12:00 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 36F00889CA
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 22:29:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alexthreed@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-5389917ef34so6456733e87.2
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 13:29:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1729024176; x=1729628976; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2sLAKLrW5gHZLEvpHUVP4kNJ0S6AobuxiD8w9gaNX9Q=;
+ b=j1s+pjZb1ayUezmHETqncfgZTOVUhKdVOlpxSGij4RxUleRRG3C5dC2Da2O2F6+m3H
+ nwAI7c90SmBOE2b36aqRn4if7dxkKdE1Y5S1HHlZuQ+lT2C9gVEV5xsy4qXmFGJK1xCy
+ DbsryHkF5oiK5rBwWZGULLqNyOkxRKk2LqZiHx0A6WsnjhqyeGndtw+Mz5dgl9mZ2heu
+ nAzM+sbcgMQprlR8RDTFw+4nn5Je19SK/2DRM7ntBRFeLPkDSa0e30XFvPgW5NJ/dHYv
+ xDN/smbjl7NFhWflrc3u2zTcBx5uldGm5qh+ssm67jxeteiaBYxQfSKLcxyS8Moh6kfI
+ fDqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729024176; x=1729628976;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2sLAKLrW5gHZLEvpHUVP4kNJ0S6AobuxiD8w9gaNX9Q=;
+ b=ntJ3KcbgkbPScX3ywWGYhCPGhCAb8SByfUTkgQ2bPe9n/4HnM/GOUt1+QmlSKorudv
+ 9pkUmGOSuH2ydRi7Yw+7yamimNFawQsODTBGP9283cfSiD50WQhDCIGkzEMLWfc+NIaN
+ A2/tpPz+cmANTMqIzGwfKor7qgYPxO+wDv+tUCHD5DArDMh62kNLlHUBWyhRF0ky26Yl
+ PMtNfaKOftU1TcMJ3kIx/Nai4IEjEGJi0f2qtHZqqYBnIs8ic+Uncg8sFYvvCseRHYv3
+ nrRCRUX+5QVY4hUSENIpywv11SdMXhQ/rwKGahGPqr2u8GeF8t077LVJN2WBC2HUAH9T
+ LDaQ==
+X-Gm-Message-State: AOJu0YwFUAHmOwgNxo+Q5oBye2pl7X1mn84NTwi3JCNEEAYrXax53Z6F
+ wSZqjSY9ONZ6NFH75vYQ7v8p4dkWxRPFHyYoNPhLglGxrLOBH0v1m+4Frn7hfeg=
+X-Google-Smtp-Source: AGHT+IG9O3hrmiBBVnj6/BIyyBuglu3PYg0qgEB/l5Micn8qCv4Q1cq//tyfrQ6h6QrdbKPY7UcwUg==
+X-Received: by 2002:a05:6512:3402:b0:535:68ab:7fdd with SMTP id
+ 2adb3069b0e04-539e54f023amr6016864e87.19.1729024175648; 
+ Tue, 15 Oct 2024 13:29:35 -0700 (PDT)
+Received: from alex3d.netup (team.netup.ru. [91.213.249.1])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-539ffff3b2csm249543e87.124.2024.10.15.13.29.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Oct 2024 13:29:35 -0700 (PDT)
+From: Alex Shumsky <alexthreed@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Alex Shumsky <alexthreed@gmail.com>, Heiko Schocher <hs@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] i2c: i2c-gpio: add support for i2c-gpio,sda-output-only
+Date: Tue, 15 Oct 2024 23:29:31 +0300
+Message-Id: <20241015202931.15270-1-alexthreed@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/2] dts: Add ability to build fallback DTBOs from
- arch/$(ARCH)/dts
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Lothar Rubusch <l.rubusch@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass
- <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-References: <20241007120002.25690-1-marex@denx.de>
- <CAOMZO5BX3EvcGAJjKNt-vX9+9se9nzmf19_-4f4gfS59C9Q8Sg@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAOMZO5BX3EvcGAJjKNt-vX9+9se9nzmf19_-4f4gfS59C9Q8Sg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,28 +89,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/8/24 4:16 PM, Fabio Estevam wrote:
-> Hi Marek,
+Some I2C slave devices are read-only and don't even answer with NACK.
+For example FD65x segment LED controllers.
+Make them usable with i2c-gpio,sda-output-only that are already supported
+by Linux 6.3+.
 
-Hello again,
+Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+---
 
-> On Mon, Oct 7, 2024 at 9:00 AM Marek Vasut <marex@denx.de> wrote:
->>
->> Currently the enablement of OF_UPSTREAM results on the build system
->> searching for DTs only in dts/upstream/ . There are platforms which
->> use U-Boot specific DTBOs applied on top of U-Boot control DT during
->> SPL stage, and source DTs for these are located in arch/$(ARCH)/dtb.
->>
->> Add dedicated 'dtbos' target which builds only .dtbos and not .dtbs and
->> in case CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS is enabled, build
->> this target for arch/$(ARCH)/dtb to generate local U-Boot specific DTBOs.
->>
->> Adjust top level Makefile so binman would search for .dtb and .dtbo in
->> both OF_UPSTREAM specific paths and arch/$(ARCH)/dtb for the .dtbo case
->> in case CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS is enabled.
->>
->> Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
->> Signed-off-by: Marek Vasut <marex@denx.de>
-> 
-> This one no longer applies against the current u-boot/master.
-This should now apply on u-boot/master .
+ doc/device-tree-bindings/i2c/i2c-gpio.txt |  2 ++
+ drivers/i2c/i2c-gpio.c                    | 10 ++++++++--
+ 2 files changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/doc/device-tree-bindings/i2c/i2c-gpio.txt b/doc/device-tree-bindings/i2c/i2c-gpio.txt
+index b06b829933..bb00854f33 100644
+--- a/doc/device-tree-bindings/i2c/i2c-gpio.txt
++++ b/doc/device-tree-bindings/i2c/i2c-gpio.txt
+@@ -20,6 +20,8 @@ Optional:
+    Run deblocking sequence when the driver gets probed.
+ * i2c-gpio,scl-output-only;
+    Set if SCL is an output only
++* i2c-gpio,sda-output-only;
++   Set if SDA is an output only
+ 
+ Example:
+ 
+diff --git a/drivers/i2c/i2c-gpio.c b/drivers/i2c/i2c-gpio.c
+index e0a575fb4a..00aef40e34 100644
+--- a/drivers/i2c/i2c-gpio.c
++++ b/drivers/i2c/i2c-gpio.c
+@@ -101,7 +101,7 @@ static int i2c_gpio_read_bit(struct i2c_gpio_bus *bus, int delay)
+ 
+ 	bus->set_scl(bus, 1);
+ 	udelay(delay);
+-	value = bus->get_sda(bus);
++	value = bus->get_sda ? bus->get_sda(bus) : 0;
+ 	udelay(delay);
+ 	bus->set_scl(bus, 0);
+ 	udelay(2 * delay);
+@@ -256,6 +256,9 @@ static int i2c_gpio_read_data(struct i2c_gpio_bus *bus, uchar chip,
+ {
+ 	unsigned int delay = bus->udelay;
+ 
++	if (!bus->get_sda)
++		return -EOPNOTSUPP;
++
+ 	debug("%s: chip %x buffer: %p len %d\n", __func__, chip, buffer, len);
+ 
+ 	while (len-- > 0)
+@@ -353,7 +356,10 @@ static int i2c_gpio_of_to_plat(struct udevice *dev)
+ 	bus->udelay = dev_read_u32_default(dev, "i2c-gpio,delay-us",
+ 					   DEFAULT_UDELAY);
+ 
+-	bus->get_sda = i2c_gpio_sda_get;
++	if (dev_read_bool(dev, "i2c-gpio,sda-output-only"))
++		bus->get_sda = NULL;
++	else
++		bus->get_sda = i2c_gpio_sda_get;
+ 	bus->set_sda = i2c_gpio_sda_set;
+ 	if (dev_read_bool(dev, "i2c-gpio,scl-output-only"))
+ 		bus->set_scl = i2c_gpio_scl_set_output_only;
+-- 
+2.34.1
+
