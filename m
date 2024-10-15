@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41308D1D879
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:39:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B67DD1D879
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:39:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6607988D3A;
-	Tue, 15 Oct 2024 17:38:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 738D788753;
+	Tue, 15 Oct 2024 17:38:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F0CD88D56; Tue, 15 Oct 2024 17:38:22 +0200 (CEST)
+ id 42F3788730; Tue, 15 Oct 2024 17:38:25 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id B3C1188D5C
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:38:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 3B0D388753
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:38:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C2CC21758;
- Tue, 15 Oct 2024 08:38:48 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4A4C7175A;
+ Tue, 15 Oct 2024 08:38:52 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4F2A73F528;
- Tue, 15 Oct 2024 08:38:16 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B0E3D3F528;
+ Tue, 15 Oct 2024 08:38:19 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -33,9 +33,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 12/15] efi_memory: do not add RAM memory to the memory map
-Date: Tue, 15 Oct 2024 21:07:14 +0530
-Message-Id: <20241015153717.401371-13-sughosh.ganu@linaro.org>
+Subject: [PATCH v4 13/15] lmb: remove call to efi_lmb_reserve()
+Date: Tue, 15 Oct 2024 21:07:15 +0530
+Message-Id: <20241015153717.401371-14-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241015153717.401371-1-sughosh.ganu@linaro.org>
 References: <20241015153717.401371-1-sughosh.ganu@linaro.org>
@@ -57,146 +57,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI_CONVENTIONAL_MEMORY type, which is the usable RAM memory is
-now being managed by the LMB module. Remove the addition of this
-memory type to the EFI memory map. This memory now gets added to the
-EFI memory map as part of the LMB memory map update event handler.
+The EFI memory allocations are now being done through the LMB
+module. With this change, there is no need to get the EFI memory map
+and set aside EFI allocated memory.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 Changes since V3: None
 
- include/efi_loader.h        | 13 ++++---
- lib/efi_loader/efi_memory.c | 77 +++----------------------------------
- 2 files changed, 13 insertions(+), 77 deletions(-)
+ lib/lmb.c | 35 -----------------------------------
+ 1 file changed, 35 deletions(-)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index ac203957181..6b9a66a06c0 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -798,10 +798,6 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
- 					  int memory_type,
- 					  bool overlap_only_ram);
- 
--/* Adds a conventional range into the EFI memory map */
--efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
--					     u64 ram_top);
--
- /* Called by board init to initialize the EFI drivers */
- efi_status_t efi_driver_init(void);
- /* Called when a block device is added */
-@@ -1186,9 +1182,14 @@ efi_status_t efi_console_get_u16_string
- efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int size);
- 
- /**
-- * efi_add_known_memory() - add memory banks to EFI memory map
-+ * efi_add_known_memory() - add memory types to the EFI memory map
-+ *
-+ * This function is to be used to add different memory types other
-+ * than EFI_CONVENTIONAL_MEMORY to the EFI memory map. The conventional
-+ * memory is handled by the LMB module and gets added to the memory
-+ * map through the LMB module.
-  *
-- * This weak function may be overridden for specific architectures.
-+ * This function may be overridden for architectures specific purposes.
-  */
- void efi_add_known_memory(void);
- 
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 16e64987af7..f59f7780e92 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -783,82 +783,17 @@ efi_status_t efi_get_memory_map_alloc(efi_uintn_t *map_size,
+diff --git a/lib/lmb.c b/lib/lmb.c
+index ae69201d5b7..f3a1d8ca256 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -204,38 +204,6 @@ static void lmb_fix_over_lap_regions(struct alist *lmb_rgn_lst,
+ 	lmb_remove_region(lmb_rgn_lst, r2);
  }
  
- /**
-- * efi_add_conventional_memory_map() - add a RAM memory area to the map
-+ * efi_add_known_memory() - add memory types to the EFI memory map
-  *
-- * @ram_start:		start address of a RAM memory area
-- * @ram_end:		end address of a RAM memory area
-- * @ram_top:		max address to be used as conventional memory
-- * Return:		status code
+-/**
+- * efi_lmb_reserve() - add reservations for EFI memory
+- *
+- * Add reservations for all EFI memory areas that are not
+- * EFI_CONVENTIONAL_MEMORY.
+- *
+- * Return:	0 on success, 1 on failure
 - */
--efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
--					     u64 ram_top)
+-static __maybe_unused int efi_lmb_reserve(void)
 -{
--	u64 pages;
+-	struct efi_mem_desc *memmap = NULL, *map;
+-	efi_uintn_t i, map_size = 0;
+-	efi_status_t ret;
 -
--	/* Remove partial pages */
--	ram_end &= ~EFI_PAGE_MASK;
--	ram_start = (ram_start + EFI_PAGE_MASK) & ~EFI_PAGE_MASK;
+-	ret = efi_get_memory_map_alloc(&map_size, &memmap);
+-	if (ret != EFI_SUCCESS)
+-		return 1;
 -
--	if (ram_end <= ram_start) {
--		/* Invalid mapping */
--		return EFI_INVALID_PARAMETER;
+-	for (i = 0, map = memmap; i < map_size / sizeof(*map); ++map, ++i) {
+-		if (map->type != EFI_CONVENTIONAL_MEMORY) {
+-			lmb_reserve_flags(map_to_sysmem((void *)(uintptr_t)
+-							map->physical_start),
+-					  map->num_pages * EFI_PAGE_SIZE,
+-					  map->type == EFI_RESERVED_MEMORY_TYPE
+-					      ? LMB_NOMAP : LMB_NONE);
+-		}
 -	}
+-	efi_free_pool(memmap);
 -
--	pages = (ram_end - ram_start) >> EFI_PAGE_SHIFT;
--
--	efi_add_memory_map_pg(ram_start, pages,
--			      EFI_CONVENTIONAL_MEMORY, false);
--
--	/*
--	 * Boards may indicate to the U-Boot memory core that they
--	 * can not support memory above ram_top. Let's honor this
--	 * in the efi_loader subsystem too by declaring any memory
--	 * above ram_top as "already occupied by firmware".
--	 */
--	if (ram_top < ram_start) {
--		/* ram_top is before this region, reserve all */
--		efi_add_memory_map_pg(ram_start, pages,
--				      EFI_BOOT_SERVICES_DATA, true);
--	} else if (ram_top < ram_end) {
--		/* ram_top is inside this region, reserve parts */
--		pages = (ram_end - ram_top) >> EFI_PAGE_SHIFT;
--
--		efi_add_memory_map_pg(ram_top, pages,
--				      EFI_BOOT_SERVICES_DATA, true);
--	}
--
--	return EFI_SUCCESS;
+-	return 0;
 -}
 -
--/**
-- * efi_add_known_memory() - add memory banks to map
-+ * This function is to be used to add different memory types other
-+ * than EFI_CONVENTIONAL_MEMORY to the EFI memory map. The conventional
-+ * memory is handled by the LMB module and gets added to the memory
-+ * map through the LMB module.
-  *
-- * This function may be overridden for specific architectures.
-+ * This function may be overridden for architectures specific purposes.
-  */
- __weak void efi_add_known_memory(void)
+ static void lmb_reserve_uboot_region(void)
  {
--	u64 ram_top = gd->ram_top & ~EFI_PAGE_MASK;
--	int i;
+ 	int bank;
+@@ -282,9 +250,6 @@ static void lmb_reserve_common(void *fdt_blob)
+ 
+ 	if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
+ 		boot_fdt_add_mem_rsv_regions(fdt_blob);
 -
--	/*
--	 * ram_top is just outside mapped memory. So use an offset of one for
--	 * mapping the sandbox address.
--	 */
--	ram_top = (uintptr_t)map_sysmem(ram_top - 1, 0) + 1;
--
--	/* Fix for 32bit targets with ram_top at 4G */
--	if (!ram_top)
--		ram_top = 0x100000000ULL;
--
--	/* Add RAM */
--	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
--		u64 ram_end, ram_start;
--
--		ram_start = (uintptr_t)map_sysmem(gd->bd->bi_dram[i].start, 0);
--		ram_end = ram_start + gd->bd->bi_dram[i].size;
--
--		efi_add_conventional_memory_map(ram_start, ram_end, ram_top);
--	}
+-	if (CONFIG_IS_ENABLED(EFI_LOADER))
+-		efi_lmb_reserve();
  }
  
- /**
+ static __maybe_unused void lmb_reserve_common_spl(void)
 -- 
 2.34.1
 
