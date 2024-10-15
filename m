@@ -4,77 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E50DDD20683
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 22:42:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9204D20683
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 22:52:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57E7888A37;
-	Wed, 16 Oct 2024 00:42:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3FA128806A;
+	Wed, 16 Oct 2024 00:52:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NWOqnh4D";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g6IRokXi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAE41889CA; Wed, 16 Oct 2024 00:42:02 +0200 (CEST)
-Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
- [IPv6:2607:f8b0:4864:20::e30])
+ id C41B187F19; Wed, 16 Oct 2024 00:52:50 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2318D88A1B
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 00:41:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1890F88216
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 00:52:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-4a470d330a5so1693078137.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:41:59 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7b115d0d7f8so33534985a.0
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:52:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729032118; x=1729636918; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1729032767; x=1729637567; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KqdG9tdY6HWZAjQGrxLGs9eynjVMuaKBm+w/Y+SQx3o=;
- b=NWOqnh4Dd/autX/qqYvHmiic0Or/sPI3puBLyDXBD2uNLoPXr4fUer1ZzgMSpzGgv/
- z1ANZzR0ErPnG6khFJUab1szNNn4cL49HbBNQVL+DwhftL4LzK/xxxENrYDeqi1Ztdm/
- sbaVrkMsWOQZELGZ7Oz83npl46jqzKvz/Z/8Q=
+ bh=FY8C1CeAogn0+gLT7psVb27HEjVEe52fHJXiglhlTHU=;
+ b=g6IRokXiUQbRZSlo9luMgO6LIar767hDttJyz5EsH8c6Fwg5FTiOhGFS9THwqUAGU9
+ Jd4ANYa3RAr5oQL03seoaCzUiez1sH0BSgLtIqt4EtYrIYV6A/pzLaPkJ6LURtD7LMyM
+ gCTo3MfeHAXjA7DZabsFCJVnjsLzZxA/TqMVE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729032118; x=1729636918;
+ d=1e100.net; s=20230601; t=1729032767; x=1729637567;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KqdG9tdY6HWZAjQGrxLGs9eynjVMuaKBm+w/Y+SQx3o=;
- b=MMPkRxx6yYBwvnvBD1Y3VIkey9Am1X+nDfb0uwK/p6fgpcXRzQY5K7JLyM+8taYzYY
- H0DFkn1G+ZeWB+WBtWGf7Ze4jnYa5Bj+jL08UORz3J25xiKyfF+BjypnNUs3dFno2ruR
- O8ZhvqvC4M88dQoIsTLd5BQZzYoCn9J1WuvXz/Pv9kr9xwN3s5Rq3KyfR7Po5eJZ/cq6
- OMAzxQpbw3YJWofbqCGTfx0sVyzF7s/t/WapaeUTlowMMbNaxtdzGnRI7476BL9yfANA
- MvkuAAmOvqJP5vbfWfMzqm/fDEKmtzDxqcgqiZ+Tf4t3G0p2QTHgVxnCDd/uUaBnwyX3
- pcDQ==
-X-Gm-Message-State: AOJu0YzNe+eDCg7ulZ7Ir9b+bOgyApdhJ9L4+tk1jz3e4Iqtrw2c8FMT
- /GwefiBq/vtELr6ZzYplPBg1/brhpCCcn+z6F11hVcfi9PuMEMC1Zl1ta4kgJI8=
-X-Google-Smtp-Source: AGHT+IHcY/9Ei10y65hi5IOtRAJyn6yKc1fwxDruMX9ZmeBlMVvjGgTJQ8Fz5hA7hrIuGTSUtV5KKg==
-X-Received: by 2002:a05:6102:2ac9:b0:4a4:9541:e38c with SMTP id
- ada2fe7eead31-4a49541e4bbmr7627945137.0.1729032117864; 
- Tue, 15 Oct 2024 15:41:57 -0700 (PDT)
+ bh=FY8C1CeAogn0+gLT7psVb27HEjVEe52fHJXiglhlTHU=;
+ b=CWo0V7tbgbxyC3LNq8oeGdeNU8GJpoOWRHxRSLAHQ0oV3MCOGsoCZzBrLYhjfndkdx
+ A9iLvP7ljiAmzUMR3ccMSGqD3EFDyO2BdZCXgVyH0dTX+atgxvGvrS4Z8ENGOJ3dWf40
+ qDYVUVVKSZ6ucDZ7HJuyXGCPhhehkv/Tdd+xgyEP+xavWMbhGh7Fb3O63ebKF+YT1TkC
+ J2JD+KcXbHVwDNGPEehfmMekSG4ufzBoIfiFuxAFyeheB8MSWD48d5CabkNbUA2kzPuS
+ 9cu+yUcgCMzBQlH2oE+q2BdcFO825zCxi50sYENWTNEfs26jmsiNy48FygOMMXhxfBmu
+ tVoQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVwAmHESnZvhXjmV7MkUMee5pDUmgZeF3B5Sg134a9kieSm5rBKf7FCWchsX/1WkMY+8828znc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxryXweKNoiKpeJwEJ81EmIQPZmAcxJhApOVcSc21VmIv7VutN3
+ HjTMBMUbzJiTaDJMjb9/odYMPM43XyiuZx7akNAOaz8JQQCncz6YoaDMg7HWeEw=
+X-Google-Smtp-Source: AGHT+IFGoph4oC2GXqgyOoTaEsq7umkzGfdyeI3Km0um1JLd03Y42obuZWT+qrFuS19AmdhyAcRNRA==
+X-Received: by 2002:a05:620a:1910:b0:7b1:21c4:ecf8 with SMTP id
+ af79cd13be357-7b1405da312mr399969585a.28.1729032766646; 
+ Tue, 15 Oct 2024 15:52:46 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cc2290f983sm11351856d6.21.2024.10.15.15.41.55
+ af79cd13be357-7b1363b4fcfsm117573385a.112.2024.10.15.15.52.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 15:41:56 -0700 (PDT)
-Date: Tue, 15 Oct 2024 16:41:53 -0600
+ Tue, 15 Oct 2024 15:52:45 -0700 (PDT)
+Date: Tue, 15 Oct 2024 16:52:41 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>
-Subject: Re: [PATCH v12 00/21] Introduce the lwIP network stack
-Message-ID: <20241015224153.GA22599@bill-the-cat>
-References: <cover.1728482473.git.jerome.forissier@linaro.org>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [PATCH 1/2] Makefile: Drop SPL_FIT_SOURCE support
+Message-ID: <20241015225241.GA6412@bill-the-cat>
+References: <20241004230756.371153-1-marex@denx.de>
+ <172902143755.5381.3133865412226742988.b4-ty@konsulko.com>
+ <8cfc2a0f-dfef-4528-95fa-298bfc701ac7@kwiboo.se>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ScBf26Z2w530991X"
+ protocol="application/pgp-signature"; boundary="Q1Dsf2z0E0ogpZNo"
 Content-Disposition: inline
-In-Reply-To: <cover.1728482473.git.jerome.forissier@linaro.org>
+In-Reply-To: <8cfc2a0f-dfef-4528-95fa-298bfc701ac7@kwiboo.se>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,76 +107,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ScBf26Z2w530991X
+--Q1Dsf2z0E0ogpZNo
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 09, 2024 at 04:02:50PM +0200, Jerome Forissier wrote:
-
-> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-> library for the network stack" [1]. The goal is to introduce the lwIP TCP=
-/IP
-> stack [2] [3] as an alternative to the current implementation in net/,
-> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
-> reasons for doing so are:
-> - Make the support of HTTPS in the wget command easier. Javier T. and
-> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
-> so. With that it becomes possible to fetch and launch a distro installer
-> such as Debian etc. using a secure, authenticated connection directly
-> from the U-Boot shell. Several use cases:
->   * Authentication: prevent MITM attack (third party replacing the
-> binary with a different one)
->   * Confidentiality: prevent third parties from grabbing a copy of the
-> image as it is being downloaded
->   * Allow connection to servers that do not support plain HTTP anymore
-> (this is becoming more and more common on the Internet these days)
-> - Possibly benefit from additional features implemented in lwIP
-> - Less code to maintain in U-Boot
+On Tue, Oct 15, 2024 at 10:48:12PM +0200, Jonas Karlman wrote:
+> On 2024-10-15 21:43, Tom Rini wrote:
+> > On Sat, 05 Oct 2024 01:07:13 +0200, Marek Vasut wrote:
+> >=20
+> >> The SPL_FIT_SOURCE is long superseded by SPL_FIT_GENERATOR which
+> >> is long superseded by binman, drop SPL_FIT_SOURCE support as there
+> >> are no more users.
+> >>
+> >>
+> >=20
+> > Applied to u-boot/master, thanks!
+> >=20
 >=20
-> Prior to applying this series, the lwIP stack needs to be added as a
-> Git subtree with the following command:
+> Look like 5b9261fb0b1e ("Makefile: Drop SPL_FIT_GENERATOR support") may
+> have broken ARCH_ZYNQMP, it still seem to use a mkimage_fit_atf.sh and
+> CI pipeline now fails:
 >=20
->  $ git subtree add --squash --prefix lib/lwip/lwip \
->    https://github.com/lwip-tcpip/lwip.git  STABLE-2_2_0_RELEASE=20
+> https://source.denx.de/u-boot/u-boot/-/pipelines/22715
 
-Can you please rebase on top of current master and repost? For some
-reason after I add the subtree and go for a b4 shazam on the series I
-get:
-Applying: net: lwip: tftp: bind to TFTP port only when in server mode
-Using index info to reconstruct a base tree...
-A       lib/lwip/lwip/src/apps/tftp/tftp.c
-Falling back to patching base and 3-way merge...
-CONFLICT (modify/delete): lib/lwip/lwip/src/apps/tftp/tftp.c deleted in HEA=
-D and modified in net: lwip: tftp: bind to TFTP port only when in server mo=
-de. Version net: lwip: tftp: bind to TFTP port only when in server mode of =
-lib/lwip/lwip/src/apps/tftp/tftp.c left in tree.
-Patch failed at 0010 net: lwip: tftp: bind to TFTP port only when in server=
- mode
-When you have resolved this problem, run "git am --continue".
-If you prefer to skip this patch, run "git am --skip" instead.
-To restore the original branch and stop patching, run "git am --abort".
-error: Failed to merge in the changes.
+Sigh, thanks.
 
 --=20
 Tom
 
---ScBf26Z2w530991X
+--Q1Dsf2z0E0ogpZNo
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcO760ACgkQFHw5/5Y0
-tyzPwAv9F3oPjmmoCxThQsyA1vBtcGcLz4RFwhetFGpSJpL3Skv1WkYVqYTF+9O0
-T1xRgT6OgYo6e5b3dtxCDCjSADLzY59vnSWubcR+Q3MnnvTtRQjaAtipGIGi9LOy
-QfSdFWk3lwvlXEaAMcXnSQ2su2eMeB6MK2QHtns1i//Fi+BiW73r01n0ILyiaCSM
-HesQDDRL27Qk7QAT8+/xEI3+r8N6yD7kWsS1d4YJf0Z/wQRALqtjL5gEobqT8zhy
-JDWXhbDUTaodqqPecX9UeceIBwjU2NHphH+eO7Q20jUOstLOStfX4HxL01jugaZ3
-bbTRynUcfvMvD24bywJzcIfhVjkO8dq7hf6LlUhX8EDI/K3KAvcrRK9d9XGGzVJC
-QeosL4UcpSeAZahatAvQFu/CtJCSzXDdu89gAug7CEn2b4A8x60jGbf+QBclZ/DA
-StFdbPAaWTCSk6RB/AOqkGT2HWEl1E2sUUo8M9JjiuoPA4ALXL4CPIfY8FR8/r5j
-PM14hvb+
-=2qh5
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcO8jIACgkQFHw5/5Y0
+tyyhlwv/VOvw0q4JmMcSIm32/NQwL823WnnNONqV1ayCOAgSnP/+J+cABKn6/Svr
+NEcr3N/0U6P1swb2KW0wcrrPMX6nfpIslCS1yqhiQMeArxpdQH+jdU+zVbFaTMhU
+mKqIw3+fVn9E0+L1xEHvjk+FzAdmOYY3HmDC6S5iaQpQ/9s5bMDN/zgQgYCtN9wP
+5xqg64eyr/CnFKRVl6xmIFH1xaEE380iO9uCVdoeUDb8ZMaCeBBvDGf30z2WYEQj
+TqKRkSSZsMG35dEmhHwZOenbFIXWL5rQTLqgFa2Zokpcqv7VdiuSmclc/Nff2Wu4
+fyAshfopEWHUtOpmPxpn5yPN6bJFiNTisT2Qw60dJQT1AX07S9665fXDxsnHCuNH
+WJkOev95P+P7y2VCVkDoUwVaOcDRzLsrHcdzOcu1+m41HcTgJXvCLg3IAxBGp28L
+iyzwHrVdknfqs5Er5VJjm77P05HnE6iLXhAN83fOuj7vE1i2Viez+coOMZ9z3Rxe
+3OABcBfc
+=oBbH
 -----END PGP SIGNATURE-----
 
---ScBf26Z2w530991X--
+--Q1Dsf2z0E0ogpZNo--
