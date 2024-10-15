@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16F94CFC505
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 01:30:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA25CFC505
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 01:33:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85E6C890D4;
-	Tue, 15 Oct 2024 03:30:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 87BDC89235;
+	Tue, 15 Oct 2024 03:33:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="LC7EOL6E";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rv1MXP4K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9B8289159; Tue, 15 Oct 2024 03:30:32 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id EC6208923B; Tue, 15 Oct 2024 03:33:18 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FA3388D72
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 03:30:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FE5B8922B
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 03:33:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=moritzf@google.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-20ca4877690so342755ad.1
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 18:30:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6cbe9e8bbb1so30613716d6.1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 18:33:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1728955828; x=1729560628; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vllfM8E6Kaxnzbc0Hltfi8CdZgVV51rRD9kikxKKQY4=;
- b=LC7EOL6ET10pvclkOENZ9b7fpGqhXQCjdseSl/x+S5ovWMKWgTGd6OZ/Im7fKl9Z0Q
- qEGBZ7xtX99Rc9sy+5OVl/MhjVit9rk8l7J6l3NrItHVlHPPSD8QgjmBfiCEJZyqekr9
- EpfVt8h+JzSkZlXTxyb6sysGyFy6Eq7vPvwBwbVkBA8PqAt1mpFePvJPOlRVwbN8rNB1
- gPGS9a4okqjEWDUKMJLMtnh3yh3GvHc6rotX1LsktexH3/ouyKR/ZAfum9kYyBrjtHQ+
- J4HkCQnWWBVfQ9ZPIMLiF5ASpZtSQlCtYeROnl7tHAyU/JXA7X9LR2I79zKiI2xQhfVg
- KFrQ==
+ d=konsulko.com; s=google; t=1728955995; x=1729560795; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GArWgzDuXyjStFdNJGImbjT7TzGW2zsLpiZC/Aq/JBs=;
+ b=Rv1MXP4KLw/IS4sDnPOIA8tdL49bjpm0VaVFolwQo10nIm4f4/KsAcshFeGqmLnHRO
+ mdQl+aLS6sp9py82w0c5sTCRcwdg3FjBqvF/oA1CYBjrSQrwFIgYGwNv8keOH/H9CKIv
+ q5P1Zpfs+8hlF9q/9YHkV+FnTa+HZ299YGGgI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728955828; x=1729560628;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vllfM8E6Kaxnzbc0Hltfi8CdZgVV51rRD9kikxKKQY4=;
- b=H0R0jNrHWM7kG6uBut3kfeWBIPBL3rRlgsBf+N0RXzk0au+N/5qv2HQqxn3lw5sZ/9
- oyVgp6GqxyhydmAQCe0ojJh8W/oFdxAKgJMMNS6J0eeabMHtnwh/fbzN2I+ygUhFX3is
- cK7CXRej4koOHIRYaR9sJBWExyZSX3cyWXo/26yIWEOYBHSdfhDs7nDiKjhPJ17JqaPv
- TAjfur9oLduWoenQouDdVlzvmZwKI9okae8K8mauqdJ5WbCPfcbZYeCivKxgziHRJ8HF
- t71b+50AK+NtYysfiAaXJpBydYzJBSBoHDlHLp76OXhqpfrGxAweXxQO+mvkEHBstNNQ
- iQOA==
-X-Gm-Message-State: AOJu0Yz64J7RLRJgNRgZBC4AvEqGL4x8M9fugIacwJx5Br0JZXSUNhPp
- 0vcdl4rT7zAD596pwP+Co8ecujONkeXWEFKwFAb9gS+dRjIIG4TL/G8ImN/lDF2N8Zt2O8lLjR8
- Ci0CpqqRBbaTTgLLal56DpjEREhuF0grs2khy
-X-Google-Smtp-Source: AGHT+IFU7pGtg85AePAf0ggbcCTYZlKyfJFrLZ4ew2mefVyAZkTBLCqqzW0uRpPZncz104HMEjoT6iwzqj2dZMIMsE8=
-X-Received: by 2002:a17:902:e5c2:b0:20b:bf5a:c8 with SMTP id
- d9443c01a7336-20cbce22417mr5279405ad.10.1728955827897; Mon, 14 Oct 2024
- 18:30:27 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728955995; x=1729560795;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=GArWgzDuXyjStFdNJGImbjT7TzGW2zsLpiZC/Aq/JBs=;
+ b=L8mQeXYHvfDdwIA01hQB2mSWcrNOJEDc7OhBfHuDeBsSZGp3LEFrv5AqoFSZo1IbF+
+ 4H2sqWBXap50pI+xczc9j8WPM+0/U2ltOKM9bKmZK8h//kGx4HFlSfh0CVP7Ywz3s/2B
+ 0wQ5K+paPxyy0DHPDHx7NS/zys3e7jgjykSZYzEIjIk5PQa7uKKAbzdtm6zagKIZcBaX
+ okYVX0CixMsm18fo/E4+CJJYKPSwo5MaMQtEgOqzBZNOdxSLc7DYH2aFUWHaKfu7041i
+ bOXjxU7I5KCBc+AmNhnCY+CrVQu+vhrWxI8PtsD8tRS7UfbKPivRD4jctsyv7ZTbChbP
+ j5Lg==
+X-Gm-Message-State: AOJu0YwrqLvpfkAFlJ/SHTF18qW0CH0pRjZ+77edIULYQrVYloeGJwot
+ dvCaTvCDug8bNuP4FtethEMEQ2q+0jDSwYvvBOHiHpIEQpBIRue3Up+gvdLkvr5pR5iqCyVC5JN
+ r1yI=
+X-Google-Smtp-Source: AGHT+IHUyj4BAq/UobDRCjteVqywbbj0fsm0b0XdH+KUdzRnJTohnmtgQzeAFTQIeryRS7jXimx/lw==
+X-Received: by 2002:a05:6214:2e43:b0:6cb:e90c:7c6d with SMTP id
+ 6a1803df08f44-6cbf9d20b37mr168362096d6.14.1728955995364; 
+ Mon, 14 Oct 2024 18:33:15 -0700 (PDT)
+Received: from bill-the-cat.tail58a08.ts.net ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cc229654c4sm1358286d6.128.2024.10.14.18.33.13
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Oct 2024 18:33:14 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] Azure: Update to latest containers
+Date: Mon, 14 Oct 2024 19:33:10 -0600
+Message-ID: <20241015013310.289277-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20241014131152.267405-1-patrick.rudolph@9elements.com>
- <20241014131152.267405-21-patrick.rudolph@9elements.com>
-In-Reply-To: <20241014131152.267405-21-patrick.rudolph@9elements.com>
-From: Moritz Fischer <moritzf@google.com>
-Date: Mon, 14 Oct 2024 18:30:14 -0700
-Message-ID: <CAFyOScrFmRQ2LeCC3MRDE1M4cbAvbjoyE-b97gjYPdrWBNBtZQ@mail.gmail.com>
-Subject: Re: [PATCH v8 20/37] arm: gic-v3-its: Implement of_xlate
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, linux-kernel@vger.kernel.org, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,76 +85,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrick,
+Soon Azure will be removing the macOS-12 container in following their
+normal support schedule. Move us to macOS-14 so we won't have problems
+there for a while. At the same time, our Windows container is the oldest
+supported, so move to the newer option. Finally, Ubuntu 22.04 is the
+middle option currently, but 24.04 should be fine.
 
-On Mon, Oct 14, 2024 at 6:16=E2=80=AFAM Patrick Rudolph
-<patrick.rudolph@9elements.com> wrote:
->
-> Translate IRQs by implementing of_xlate() as required by
-> irq_get_by_index() to parse interrupt properties.
->
-> TEST: Booted on qemu sbsa-ref that has a GICV3.
->
-> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
-> Changelog v6:
-> - Update header order
->
-> ---
->  arch/arm/lib/gic-v3-its.c | 21 +++++++++++++++++++++
->  1 file changed, 21 insertions(+)
->
-> diff --git a/arch/arm/lib/gic-v3-its.c b/arch/arm/lib/gic-v3-its.c
-> index 22fa46a341..0d5545bfb2 100644
-> --- a/arch/arm/lib/gic-v3-its.c
-> +++ b/arch/arm/lib/gic-v3-its.c
-> @@ -4,6 +4,7 @@
->   */
->  #include <cpu_func.h>
->  #include <dm.h>
-> +#include <irq.h>
->  #include <asm/gic.h>
->  #include <asm/gic-v3.h>
->  #include <asm/io.h>
-> @@ -163,8 +164,28 @@ static const struct udevice_id gic_v3_ids[] =3D {
->         {}
->  };
->
-> +static int arm_gic_v3_of_xlate(struct irq *irq, struct ofnode_phandle_ar=
-gs *args)
-> +{
-> +       if (args->args_count > 2) {
-> +               log_debug("Invalid args_count: %d\n", args->args_count);
-> +               return -EINVAL;
-> +       }
-Aren't gicv3 at least #interrupt-cells =3D 3; to distinguish PPI / SPI?
-> +
-> +       if (args->args_count > 0)
-> +               irq->id =3D args->args[0];
-> +       if (args->args_count > 1)
-> +               irq->flags =3D args->args[1];
+Link: https://github.com/actions/runner-images/issues/10721
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+That issue is, as of this writing, the only place to list macOS-15, so
+I'm using 14 instead.
+---
+ .azure-pipelines.yml | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Don't you have to distinguish PPI and SPIs here? You'll use
-args->args[0] as PPI vs SPI and args[1] is either 1:1 (PPI) or offset
-by 32 for SPIs or am I misunderstanding something?
-> +
-> +       return 0;
-> +}
-> +
-> +static const struct irq_ops arm_gic_v3_ops =3D {
-> +       .of_xlate               =3D  arm_gic_v3_of_xlate,
-> +};
-> +
->  U_BOOT_DRIVER(arm_gic_v3) =3D {
->         .name           =3D "gic-v3",
->         .id             =3D UCLASS_IRQ,
->         .of_match       =3D gic_v3_ids,
-> +       .ops            =3D &arm_gic_v3_ops,
->  };
-> --
-> 2.46.2
->
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index b66d49a62ba0..18700c4cc7be 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -1,7 +1,7 @@
+ variables:
+-  windows_vm: windows-2019
+-  ubuntu_vm: ubuntu-22.04
+-  macos_vm: macOS-12
++  windows_vm: windows-2022
++  ubuntu_vm: ubuntu-24.04
++  macos_vm: macOS-14
+   ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20240808-21Aug2024
+   # Add '-u 0' options for Azure pipelines, otherwise we get "permission
+   # denied" error when it tries to "useradd -m -u 1001 vsts_azpcontainer",
+-- 
+2.43.0
 
-Cheers,
-Moritz
