@@ -4,76 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A84D20682
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 22:54:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2176D20682
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 23:30:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E64D889EF;
-	Wed, 16 Oct 2024 00:54:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8CC1888995;
+	Wed, 16 Oct 2024 01:30:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f48QqR+n";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9ACA0889EF; Wed, 16 Oct 2024 00:54:07 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1729035021;
+	bh=vslqs3vYEmcd3tB4op0RofMwhoj6zjj8XAtbxv39vv8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=YTVE3q9bvr04wmPkNd7+9+ljtTVIZlyHmA0nEXzyzmQNtJ9ioUf0R92UlGOHKanEo
+	 pI54vYOl9572ppX9hOrJ74vncitYZCVa5Yrx3zeHc3dCmp5+j1m3/Y5qzjIKocaMNt
+	 rxdzJLLBdAH4swODFrJJ2DzaZa8uMT34Ja0Q6Yqp5pgJI/km8Gk4BvAZbLTcl5i7oa
+	 TB722Hd/h9+Pm9k874K93EdChGazqac934jtrJTHpNoM6F+91NmUkxDW84MVa3sKvM
+	 DQfBVTfwM+T4wM1rW3vhpk+N31HRNqUtGHjbacwvaNbJLFfMg2YIOiy5P1K1ixeGii
+	 3Rm2ByTx02ArA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92FBE87F19
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 00:54:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6c5ab2de184so37443456d6.0
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:54:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729032844; x=1729637644; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TTxJljfO2kE5j9MxkVv934x4Is1w6OCqMpXb5HSLgWU=;
- b=f48QqR+nv8p6+2Cpq38ZlB9pIcJoAm6n7DX/WtciMbeCOjhr36zlP/bHLUdr9TTnkk
- yrnaE6EhzIl7jXkQADwlgEe1PrLELUuuc3FVxwljdZ3JXombWrQpMWsyHTGuhEVoSo29
- Ozm1FSE0JQ/h6oBQd4WBusfzORR5LmO0LG9zs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729032844; x=1729637644;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TTxJljfO2kE5j9MxkVv934x4Is1w6OCqMpXb5HSLgWU=;
- b=OBBBREc/WX0bonLyUMRjE7BTiTyVRkgmOsROXFnJcDEi6knkGtQxKQTIeQbxiCRaoe
- ojZYALKVHfMkk0aIjOiA46sRiCHssvDUGQC0YFOOJNVGuytKi08xW4yHxYE67xYFQJcv
- r4Phee9UhKg/PnpmcIE9hBKesoRIo8GhphD/3lSpnn4s9T1X2Fl/Dk6D3GSHX6X01bu7
- ACLaclMGgAcTI/hP68VmIyfbbQKs4eIBT7ERxgIOXNA2V8ajOoPShk8ZR7yrX7Nlt5as
- y4eSFSqmMlfJaDEMswVCKeCDfOSX47OVO7UZOUOJ4tgI0Zs/F7ynbcb++SkCZ+APMKVD
- H3aQ==
-X-Gm-Message-State: AOJu0Yz/2UkAUKhdTv6jsGT0T7OXWhfSU0WHEAAgQgUFNn4IyqyD/zRk
- Mak7K4y+JPNLNnXJYWwKrsB4rrtm1Ed/kWed6nYF7KCJMKfWli+ZEuxLbSWi67dqY72xIA4pj2n
- auQI=
-X-Google-Smtp-Source: AGHT+IEkcBe5B2O+6kc6i/XxsXaeVKlqIoaoUvmRqS2ylAZW7/dSWckufZmiUzaGr56lCAeDFv1Jeg==
-X-Received: by 2002:ad4:42c5:0:b0:6cb:f7dd:b6a8 with SMTP id
- 6a1803df08f44-6cbf7ddb70amr197856676d6.26.1729032844437; 
- Tue, 15 Oct 2024 15:54:04 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cc22990968sm11408356d6.139.2024.10.15.15.54.02
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 15:54:03 -0700 (PDT)
-Date: Tue, 15 Oct 2024 16:54:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: Re: [PATCH] CI: Do not test "sleep" in QEMU
-Message-ID: <20241015225400.GB6412@bill-the-cat>
-References: <20241015182934.353099-1-trini@konsulko.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id BFA8D88216;
+ Wed, 16 Oct 2024 01:30:17 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1729035019;
+ bh=vslqs3vYEmcd3tB4op0RofMwhoj6zjj8XAtbxv39vv8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=fV7QUj9WasW1lcVaA9huFkr+IMJCS/aqFqis8UKIHgv9SCWL8SbphXvd24XHp+EKf
+ 3R4dpk7MCqFR4aezWWyTXHjmWlgkCez7McD8rejAVUnzEZfmVaF4OrNdpN4taunwSr
+ kCsUyrRkkCTY2rfUsWmVCG/cg1wb7ayIFDfkd2q690FkQjIIaPPig+nVrh63ah9slF
+ 1vwOP67nNPW630GVkvXfjOjBAHJR31R5FRIcpWdsUPToM2d/664VkGZcBi9jFPM4im
+ e3WenmOcwlsO6i64Wa7JxeIyXFrBuK8hON+h1a6+cV1mw4exenP31sN3IDy5LPPVsA
+ jIxKtfDvf8YdQ==
+Message-ID: <13639f31-5ef4-49d7-a695-9cc064ef2371@denx.de>
+Date: Wed, 16 Oct 2024 01:27:27 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="giutu/qmvNegw7TG"
-Content-Disposition: inline
-In-Reply-To: <20241015182934.353099-1-trini@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] Makefile: Drop SPL_FIT_SOURCE support
+To: Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <20241004230756.371153-1-marex@denx.de>
+ <172902143755.5381.3133865412226742988.b4-ty@konsulko.com>
+ <8cfc2a0f-dfef-4528-95fa-298bfc701ac7@kwiboo.se>
+ <20241015225241.GA6412@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241015225241.GA6412@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,42 +83,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/16/24 12:52 AM, Tom Rini wrote:
+> On Tue, Oct 15, 2024 at 10:48:12PM +0200, Jonas Karlman wrote:
+>> On 2024-10-15 21:43, Tom Rini wrote:
+>>> On Sat, 05 Oct 2024 01:07:13 +0200, Marek Vasut wrote:
+>>>
+>>>> The SPL_FIT_SOURCE is long superseded by SPL_FIT_GENERATOR which
+>>>> is long superseded by binman, drop SPL_FIT_SOURCE support as there
+>>>> are no more users.
+>>>>
+>>>>
+>>>
+>>> Applied to u-boot/master, thanks!
+>>>
+>>
+>> Look like 5b9261fb0b1e ("Makefile: Drop SPL_FIT_GENERATOR support") may
+>> have broken ARCH_ZYNQMP, it still seem to use a mkimage_fit_atf.sh and
+>> CI pipeline now fails:
+>>
+>> https://source.denx.de/u-boot/u-boot/-/pipelines/22715
+> 
+> Sigh, thanks.
+And yes, I missed that, sorry.
 
---giutu/qmvNegw7TG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Oct 15, 2024 at 12:29:34PM -0600, Tom Rini wrote:
-
-> When we have platforms being emulated by QEMU we cannot rely on the
-> "sleep" command running for the expected wall-clock amount of time. Even
-> with our current allowance for deviation from expected time, it will
-> still fail from time to time. Exclude the sleep test here.
->=20
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---giutu/qmvNegw7TG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcO8ogACgkQFHw5/5Y0
-tyx0dAwAmojHzYHTO5Mdg6rvZWJiGMotrMxKnwZuqofQVdqZqDfIGBSZyksjOrAr
-Yl0xg6jVWsQ4sGFHOslWwgoVVpl5O35oMUVtfqDFMkhIhL7Fz+5KJCQzujR8UYmt
-bbpBOiZAS1zlhIFQ2nveTdENGKKHKuMrf0kTpT/vJEYU92Q8ZJAjvWW2T9Q2p9vC
-eHq9pcLu96lFdXvLJGfWK9tWHb3u95+K+rXlyUbr9UMGLWel1gljvWKUj53rR5Ln
-ME+4aWzBI14RTXAXAzb9stqslUD8/5EuFW/AJ1+FVoKsaLKvqd4TX7VXH877w7N2
-HCQPtQshO6LodCZWPW4+ROOjsg+qNO1FuN4Vy0LfyWvdk85BTc5Xeho1p5FeCpEj
-sA2qwmzlEqUl9EeS3x8wuHDOjuM2juN8O9h4/jK7uiPHpKNKvfW+hctzeB4MGjYF
-G2AyrUhQHlaNHu/6Brp4dALgNga5+p5e7182o+szx0mTQ4zJX1Nftcf1UlH79Gk3
-H9prPA5X
-=3sqz
------END PGP SIGNATURE-----
-
---giutu/qmvNegw7TG--
+Do you want a revert for 2/2 ?
