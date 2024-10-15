@@ -4,42 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A38BD1D879
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:40:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3A88D1D887
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 16:08:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29FF988D5C;
-	Tue, 15 Oct 2024 17:38:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 24EF088753;
+	Tue, 15 Oct 2024 18:08:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 19E9E88730; Tue, 15 Oct 2024 17:38:32 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E4E2288D97
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:38:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F27B7175D;
- Tue, 15 Oct 2024 08:38:58 -0700 (PDT)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7FD7B3F528;
- Tue, 15 Oct 2024 08:38:26 -0700 (PDT)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 15/15] lmb: replace the double-underscore with
- single-underscore for all functions
-Date: Tue, 15 Oct 2024 21:07:17 +0530
-Message-Id: <20241015153717.401371-16-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241015153717.401371-1-sughosh.ganu@linaro.org>
-References: <20241015153717.401371-1-sughosh.ganu@linaro.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1729008532;
+	bh=uJnNyvxc9iX213xqNEfkSY/CRizN+Q5AvquekKgQ0t0=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=fWD39ISi4u7vmaAXNLxaH9GYqhYjqzaSU6wPozi+ebHVZqwCsMIK7mID6NRKqvk7b
+	 f08m9Nf35cdP+lQZRt4r8KikqSzWLXGQrdEeHlirieHd+hbliqx43qxmwJTNbIZfX+
+	 1giKKG1QlW2k+anYGhltDshQcBMdB/rBFE//yM1fDyVuFlEpTy0RP5EuLp+0DN6cT0
+	 jXjtRnUCOqtrVV+luqcxVRdAKxD5eiVcfVXaIj/9fdIGlvyfxel92wN4LsJnpS2lSP
+	 bk7gsEscYPruArhHSdoEpWAh+VdxMwOLekZOg9r3sAMjSUBVNjfaZPixwz8gOAPZ8v
+	 0SMUu5wd9Ms+A==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id B6CC488770;
+ Tue, 15 Oct 2024 18:08:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1729008531;
+ bh=uJnNyvxc9iX213xqNEfkSY/CRizN+Q5AvquekKgQ0t0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=MeCdL/nHICGYhUnGQOYxDr5f6OoxUQLVcNfYKAw+OAFNk2KYxjYz1NRKhQj2MQhgC
+ 2stppyPVrD3r7+sgRL0Z9YXXA6SFYEvVT1Oz98DQh9KXptmobnmvWiB8Ic8BVSMCG8
+ 1hZ6ZlkRMnPAo4QKH6MFF2jQZjPkzK3VTvJO7lxYMmZ39IlDDaeOkJwrjQLabs5BKp
+ KLhJIrAL7NNsgudfnNHS2++KzTs8BIJValBChy33YXYzIOGg2gMMd6FYQH+WTYPkRV
+ Ye7omXBO16qFdKYKWVtcl9gq18yUEFH4yIRzAWV6rkabMT+Go3y4THuqVb5FVrKFCp
+ sBpyxK2+YRL+g==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marex@denx.de>, Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Godfrey Mwangi <godmwan@microsoft.com>
+Subject: [PULL] u-boot-usb/master
+Date: Tue, 15 Oct 2024 18:08:24 +0200
+Message-ID: <20241015160834.11017-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -58,106 +65,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A bunch of static functions in the LMB module have used a
-double-undersore for the function names. It was suggested to use a
-single-underscore instead, as the double-underscore is usually used
-by library functions. Replace the double-underscore with
-single-underscore for all functions.
+The following changes since commit c7aafb20ce9937f1e178ded46d8f22742f54c982:
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Suggested-by: Simon Glass <sjg@chromium.org>
----
-Changes since V3: None
+  Merge tag 'u-boot-ufs-next-20241014' of https://source.denx.de/u-boot/custodians/u-boot-ufs (2024-10-14 08:15:15 -0600)
 
- lib/lmb.c | 20 ++++++++++----------
- 1 file changed, 10 insertions(+), 10 deletions(-)
+are available in the Git repository at:
 
-diff --git a/lib/lmb.c b/lib/lmb.c
-index f3a1d8ca256..78fe2d4de7c 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -496,7 +496,7 @@ long lmb_add(phys_addr_t base, phys_size_t size)
- 	return 0;
- }
- 
--static long __lmb_free(phys_addr_t base, phys_size_t size)
-+static long _lmb_free(phys_addr_t base, phys_size_t size)
- {
- 	struct lmb_region *rgn;
- 	struct alist *lmb_rgn_lst = &lmb.used_mem;
-@@ -562,7 +562,7 @@ long lmb_free_flags(phys_addr_t base, phys_size_t size,
- {
- 	long ret;
- 
--	ret = __lmb_free(base, size);
-+	ret = _lmb_free(base, size);
- 	if (ret < 0)
- 		return ret;
- 
-@@ -618,7 +618,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
- 	return addr & ~(size - 1);
- }
- 
--static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
-+static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
- 				    phys_addr_t max_addr, enum lmb_flags flags)
- {
- 	u8 op;
-@@ -692,15 +692,15 @@ phys_addr_t lmb_alloc(phys_size_t size, ulong align)
-  */
- phys_addr_t lmb_alloc_flags(phys_size_t size, ulong align, uint flags)
- {
--	return __lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE,
--				flags);
-+	return _lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE,
-+			       flags);
- }
- 
- phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
- {
- 	phys_addr_t alloc;
- 
--	alloc = __lmb_alloc_base(size, align, max_addr, LMB_NONE);
-+	alloc = _lmb_alloc_base(size, align, max_addr, LMB_NONE);
- 
- 	if (alloc == 0)
- 		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
-@@ -727,7 +727,7 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
- {
- 	phys_addr_t alloc;
- 
--	alloc = __lmb_alloc_base(size, align, max_addr, flags);
-+	alloc = _lmb_alloc_base(size, align, max_addr, flags);
- 
- 	if (alloc == 0)
- 		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
-@@ -736,7 +736,7 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
- 	return alloc;
- }
- 
--static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
-+static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size,
- 				    enum lmb_flags flags)
- {
- 	long rgn;
-@@ -767,7 +767,7 @@ static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
-  */
- phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
- {
--	return __lmb_alloc_addr(base, size, LMB_NONE);
-+	return _lmb_alloc_addr(base, size, LMB_NONE);
- }
- 
- /**
-@@ -785,7 +785,7 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
- phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
- 				 uint flags)
- {
--	return __lmb_alloc_addr(base, size, flags);
-+	return _lmb_alloc_addr(base, size, flags);
- }
- 
- /* Return number of bytes from a given address that are free */
--- 
-2.34.1
+  git://source.denx.de/u-boot-usb.git master
 
+for you to fetch changes up to 3794bbf9e0e7ce2652935514cbfac49545c329a9:
+
+  usb: xhci: Define 'XHCI_MAX_HALT_USEC' macro only once (2024-10-14 22:17:51 +0200)
+
+----------------------------------------------------------------
+Bhupesh Sharma (1):
+      usb: xhci: Define 'XHCI_MAX_HALT_USEC' macro only once
+
+Godfrey Mwangi (1):
+      usb: xhci: pet watchdog during transfers
+
+ drivers/usb/host/xhci-ring.c | 3 +++
+ include/usb/xhci.h           | 2 --
+ 2 files changed, 3 insertions(+), 2 deletions(-)
