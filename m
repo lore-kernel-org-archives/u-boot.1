@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 801E4CFC27F
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 09:56:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 338C9CFC280
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 10:02:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECD1D88DED;
-	Tue, 15 Oct 2024 11:56:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5F69C8907E;
+	Tue, 15 Oct 2024 12:02:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PY6W68z0";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LrDZGSm6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DED488C7C; Tue, 15 Oct 2024 11:56:54 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 66C3F88E36; Tue, 15 Oct 2024 12:02:25 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13F0689079
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 11:56:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BA4488D54
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 12:02:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-43057f4a16eso45014505e9.1
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 02:56:51 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4311d972e3eso30096705e9.3
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 03:02:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728986210; x=1729591010;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728986543; x=1729591343;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=qBtp+F+IlaTbTpNlDp658bfu5QSihSpwxJ0eIIzsryM=;
- b=PY6W68z0c9e98BjzkaBAiWaAKHuEKbIlPdUvviQtGnEw5ln60aYDCCptux/a8Je+6x
- B6Hq+DwKsmcZ/GWL8ZsHQapRsZcwaVi7s4ajT+QgR7vSutlpIGFtMagzFmPBkxyRsBbq
- UWqEWsFIK9XqXmUE8H8C8rjlQUxlp4OQSg0TGeEp542THDe05ItKy3OG1tLGwk2WGfX4
- M+lGPar7WhJ0viCI5tJELTiJ29eiI7Nj3AwuLfbr+OCStOTyARPB+ACRFfgGRctmNJwx
- 0a9O2LUPTpsvdpv9u+3Fn8DzdCJnDtJna1UEXD1wMn+8ULYsldBAhkrThJYAsjyX5Qgc
- FEyA==
+ bh=QAGDzmbJsme3obHDeDPZfS4Zs/uLjzb8ndw4eKtjWp0=;
+ b=LrDZGSm6j48+DvIi7F3ZUiMtkqwd/Yqkb6K2peFAz9vzcZv+xFwquqsNs02pseHmOj
+ XPc8i2B9EVHBFeG3PhQ3HDoPD+mJ03XP783AcFtDNK1PtjbMe/AGSDjA9pyr9fmsWJOQ
+ PsA6DXNv09JLwR0aommnsyEnkRgKLN9MMVFsojVvI1t9MRVMpryricFlDn3E97Go7tWQ
+ TWPjKpL8u91ah7zK/LNj8mZIYbRclaxkHNoJJGOoqm8tPY7W2NdZQk7BdQv0cZPjYmdR
+ UUj3+6kB0m0hnhMA4cyoZLza3BsDxXx4tggR7PEf38lSrW1FfUItRX0hs2u7wLciCGD6
+ +zmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728986210; x=1729591010;
+ d=1e100.net; s=20230601; t=1728986543; x=1729591343;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qBtp+F+IlaTbTpNlDp658bfu5QSihSpwxJ0eIIzsryM=;
- b=LbzOcHbupLqknYhK32/n4CwZaTwPT+nYi2uVWSXn1TRkgAjBtR2d6EwiDmmKKFsiXV
- Gv5S5YxO5q4czsUxyByhCwsETM+GG2PGrDa6WRJgvdf6dYmfbIgz9aogw3E+5SPd0X5/
- D3WSbLTSjXbg4y/SvuuBfWjI0qu6vZc18m03H3CzGnykOEPFS+s9HjLndWL9n+caWwbm
- gX4v315LS4XE7ja+FhC5UB/74ooFhvfTXh6+gQt9/TTBg46pnf8czqPZJvO+SMvxDfLt
- 9TEgpDkhqS32KDjpReOBHuxSskYh2FvhtZqeRroHKDhwS9F5g5ZCij5y7ZIzG1Y3TcKF
- H/rg==
-X-Gm-Message-State: AOJu0YxZktJ2dsxig/9akZicFSfu8iMjkWHgxRnVf3aERzjrU3mBpJ2V
- FjSSuFrewNgb+F21G76Lf0W7zFHPpb+WJj9o5Wd8J2PBbWotUhazDnLcz35KnH4=
-X-Google-Smtp-Source: AGHT+IG1pix6341x+yFnDMOTsnB0hL4RZWeAb50zkwvtZSQwO6vHVmeVsHFUYNN7X1rjiv1neGkjYQ==
-X-Received: by 2002:a05:600c:4e8a:b0:42c:af06:718 with SMTP id
- 5b1f17b1804b1-4311df435e7mr134869265e9.28.1728986210456; 
- Tue, 15 Oct 2024 02:56:50 -0700 (PDT)
+ bh=QAGDzmbJsme3obHDeDPZfS4Zs/uLjzb8ndw4eKtjWp0=;
+ b=wZ0ES7g7KSrLHpCMZBE7UDf62efoSBM9qZ3ERDHZDZfmEnM6D/qiyGEWGjierKqnHX
+ nl9fDcYM1ZzJI6In+EoPA4M9dnedQ6irrmyhddUDOuVs0vo2A5l7zMIZKQMhIFT7XOa5
+ NO+2bqcEYgMco4TVe0AlbZn3KcFBJgXCJDD8RjNd2CCOp4C1gc3eCkGCIUO5dIn7ETbQ
+ 37YWiDrPo90M6pJIgb9g2Y8KAfLX/DVdM5xyqCYdHfU7GQoMfTIBP79anwokstK+xrM3
+ p6WvYbK9ojiBMwdmLjgfTEIn+7A5IZbdZX2zLzs3X41WNg1neCICEpWcpTc7LwJTxHnX
+ 72JQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUOikZpyF8bqNxpAyVh5Je2fCd08JmSRCkA7K+r/99oYJQaT6/Nd2qYpgTzwEotwmiUxTbaHCA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz3rWMhM4p1ITNM3nybPMW0SOWRYiuLt+dmEm12RlNjE5SVLdWK
+ yB8fMC74u1dy2eRYGByS2QI1jOd1CjvnZunPQa6//00/008r3/n5fWKNoRx+FhU=
+X-Google-Smtp-Source: AGHT+IHe7fZYJfDX9Su5piJRRhsktJdbTTT151JVWJuDfZVst32EJFdb10KQBvRnbdZiTiQtGkAlxA==
+X-Received: by 2002:a05:600c:8714:b0:426:6326:4cec with SMTP id
+ 5b1f17b1804b1-431256199cdmr93068025e9.29.1728986542658; 
+ Tue, 15 Oct 2024 03:02:22 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d7fa87d48sm1130732f8f.32.2024.10.15.02.56.49
+ 5b1f17b1804b1-4313f6c4a0dsm12802425e9.40.2024.10.15.03.02.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 02:56:50 -0700 (PDT)
+ Tue, 15 Oct 2024 03:02:22 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, Simon Holesch
- <simon@holesch.de>, Ion Agorria <ion@agorria.com>, Svyatoslav Ryhel
- <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/1] usb: ci_udc: don't use "advance" feature when
- setting address
-In-Reply-To: <20241013145820.85426-2-clamor95@gmail.com>
-References: <20241013145820.85426-1-clamor95@gmail.com>
- <20241013145820.85426-2-clamor95@gmail.com>
-Date: Tue, 15 Oct 2024 11:56:47 +0200
-Message-ID: <87sesxzo2o.fsf@baylibre.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Sean
+ Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH] test: Drop mention of old flags in a comment
+In-Reply-To: <20241014201753.1902999-1-sjg@chromium.org>
+References: <20241014201753.1902999-1-sjg@chromium.org>
+Date: Tue, 15 Oct 2024 12:02:19 +0200
+Message-ID: <87plo1zntg.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -93,122 +91,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Svyatoslav,
+Hi Simon,
 
 Thank you for the patch.
 
-On dim., oct. 13, 2024 at 17:58, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+On lun., oct. 14, 2024 at 14:17, Simon Glass <sjg@chromium.org> wrote:
 
-> From: Ion Agorria <ion@agorria.com>
+> A comment in test-main.c was not updated with the recent rename. Fix it.
 >
-> In the older USB controllers like for example in ChipIdea controller
-> used by the Tegra 2 the "USBADRA: Device Address Advance" bitflag
-> does not exist, so the new device address set during SET_ADDRESS
-> can't be deferred by hardware, which causes the host to not recognize
-> the device and give an error.
->
-> Instead store it until ep completes to apply the change into the hw
-> register as Linux kernel does. This should fix regression on old and
-> and be compatible with newer controllers.
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Since this is based on a linux commit, can we please mention the
-revision in the commit message?
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-Per my understanding, this would be:
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=ef15e5490edc7edf808d3477ab32e0e320792f65
-
->
-> Signed-off-by: Ion Agorria <ion@agorria.com>
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 > ---
->  drivers/usb/gadget/ci_udc.c | 24 +++++++++++++++++++++++-
->  drivers/usb/gadget/ci_udc.h |  1 +
->  2 files changed, 24 insertions(+), 1 deletion(-)
 >
-> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
-> index bbe03cfff1f..4bff75da759 100644
-> --- a/drivers/usb/gadget/ci_udc.c
-> +++ b/drivers/usb/gadget/ci_udc.c
-> @@ -649,12 +649,30 @@ static void flip_ep0_direction(void)
->  	}
->  }
+>  test/test-main.c | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
+>
+> diff --git a/test/test-main.c b/test/test-main.c
+> index 479dbb33b72..ed100eda847 100644
+> --- a/test/test-main.c
+> +++ b/test/test-main.c
+> @@ -294,27 +294,27 @@ static int test_pre_run(struct unit_test_state *uts, struct unit_test *test)
+>  	 * Remove any USB keyboard, so that we can add and remove USB devices
+>  	 * in tests.
+>  	 *
+> -	 * For UT_TESTF_DM tests, the old driver model state is saved and
+> +	 * For UTF_DM tests, the old driver model state is saved and
+>  	 * restored across each test. Within in each test there is therefore a
+>  	 * new driver model state, which means that any USB keyboard device in
+>  	 * stdio points to the old state.
+>  	 *
+> -	 * This is fine in most cases. But if a non-UT_TESTF_DM test starts up
+> +	 * This is fine in most cases. But if a non-UTF_DM test starts up
+>  	 * USB (thus creating a stdio record pointing to the USB keyboard
+>  	 * device) then when the test finishes, the new driver model state is
+>  	 * freed, meaning that there is now a stale pointer in stdio.
+>  	 *
+> -	 * This means that any future UT_TESTF_DM test which uses stdin will
+> +	 * This means that any future UTF_DM test which uses stdin will
+>  	 * cause the console system to call tstc() on the stale device pointer,
+>  	 * causing a crash.
+>  	 *
+> -	 * We don't want to fix this by enabling UT_TESTF_DM for all tests as
+> +	 * We don't want to fix this by enabling UTF_DM for all tests as
+>  	 * this causes other problems. For example, bootflow_efi relies on
+>  	 * U-Boot going through a proper init - without that we don't have the
+>  	 * TCG measurement working and get an error
+>  	 * 'tcg2 measurement fails(0x8000000000000007)'. Once we tidy up how EFI
+>  	 * runs tests (e.g. get rid of all the restarting of U-Boot) we could
+> -	 * potentially make the bootstd tests set UT_TESTF_DM, but other tests
+> +	 * potentially make the bootstd tests set UTF_DM, but other tests
+>  	 * might do the same thing.
+>  	 *
+>  	 * We could add a test flag to declare that USB is being used, but that
+> @@ -323,7 +323,7 @@ static int test_pre_run(struct unit_test_state *uts, struct unit_test *test)
+>  	 * pointers always.
+>  	 *
+>  	 * So just remove any USB keyboards from the console tables. This allows
+> -	 * UT_TESTF_DM and non-UT_TESTF_DM tests to coexist happily.
+> +	 * UTF_DM and non-UTF_DM tests to coexist happily.
+>  	 */
+>  	usb_kbd_remove_for_test();
 >  
-> +/*
-> + * This function explicitly sets the address, without the "USBADRA" (advance)
-> + * feature, which is not supported by older versions of the controller.
-> + */
-> +static void ci_set_address(struct ci_udc *udc, u8 address)
-> +{
-> +	DBG("%s %x\n", __func__, address);
-> +	writel(address << 25, &udc->devaddr);
-> +}
-> +
->  static void handle_ep_complete(struct ci_ep *ci_ep)
->  {
->  	struct ept_queue_item *item, *next_td;
->  	int num, in, len, j;
->  	struct ci_req *ci_req;
->  
-> +	/* Set the device address that was previously sent by SET_ADDRESS */
-> +	if (controller.next_device_address != 0) {
-> +		struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
-> +
-> +		ci_set_address(udc, controller.next_device_address);
-> +		controller.next_device_address = 0;
-> +	}
-> +
->  	num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
->  	in = (ci_ep->desc->bEndpointAddress & USB_DIR_IN) != 0;
->  	item = ci_get_qtd(num, in);
-> @@ -783,7 +801,7 @@ static void handle_setup(void)
->  		 * write address delayed (will take effect
->  		 * after the next IN txn)
->  		 */
-> -		writel((r.wValue << 25) | (1 << 24), &udc->devaddr);
-> +		controller.next_device_address = r.wValue;
->  		req->length = 0;
->  		usb_ep_queue(controller.gadget.ep0, req, 0);
->  		return;
-> @@ -814,6 +832,9 @@ static void stop_activity(void)
->  	int i, num, in;
->  	struct ept_queue_head *head;
->  	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
-> +
-> +	ci_set_address(udc, 0);
-> +
->  	writel(readl(&udc->epcomp), &udc->epcomp);
->  #ifdef CONFIG_CI_UDC_HAS_HOSTPC
->  	writel(readl(&udc->epsetupstat), &udc->epsetupstat);
-> @@ -934,6 +955,7 @@ static int ci_pullup(struct usb_gadget *gadget, int is_on)
->  	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
->  	if (is_on) {
->  		/* RESET */
-> +		controller.next_device_address = 0;
->  		writel(USBCMD_ITC(MICRO_8FRAME) | USBCMD_RST, &udc->usbcmd);
->  		udelay(200);
->  
-> diff --git a/drivers/usb/gadget/ci_udc.h b/drivers/usb/gadget/ci_udc.h
-> index bea2f9f3fe3..807f2084c1e 100644
-> --- a/drivers/usb/gadget/ci_udc.h
-> +++ b/drivers/usb/gadget/ci_udc.h
-> @@ -105,6 +105,7 @@ struct ci_drv {
->  	struct ept_queue_head		*epts;
->  	uint8_t				*items_mem;
->  	struct ci_ep			ep[NUM_ENDPOINTS];
-> +	u8				next_device_address;
-
-Comparing to
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=ef15e5490edc7edf808d3477ab32e0e320792f65,
-
-Can we please keep similar logic ?
-Having both:
-- bool setaddr
-- u8 address
-
-This way, we keep the diff with the linux driver a bit lower.
-
->  };
->  
->  struct ept_queue_head {
 > -- 
-> 2.43.0
+> 2.34.1
