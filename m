@@ -4,82 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94547CFC27C
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8416ECFC27C
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:28:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E3A988B0C;
-	Tue, 15 Oct 2024 17:27:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A315488A47;
+	Tue, 15 Oct 2024 17:28:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FFvh5+BJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n3w9R+lp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02DF88899C; Tue, 15 Oct 2024 17:27:30 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id BEDFC889B8; Tue, 15 Oct 2024 17:28:05 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BC2C88717
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:27:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BB9688BC2
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:28:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6c5ab2de184so34876476d6.0
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 08:27:26 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6cbcc2bd800so48434836d6.0
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 08:28:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729006045; x=1729610845; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729006082; x=1729610882; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vexqapnXa5rj8tgH2yWbNpaM89Pcs5uT8uOcWFvnUzM=;
- b=FFvh5+BJunp2KOm7VOxU9q9mp4q06GN/F4junZr9j9ls2XeFeG2TE0fAAJhDbpcdwZ
- wXNMF6QR64fceYhxzz/diMMkTTyvPjKKZ6FG3SPxoPy5RjqUG60r2ynhMe1ZsFIF86zO
- AWvMcoUOIsEV+szDsIY3ovpW5GN05wvg6skDU=
+ bh=48/0LfUH2dbnydNBOE5L/+6aORYrJtN4e6yrC1RXyl0=;
+ b=n3w9R+lp4pn6hknGTGCJzFfxziLOva8feHZoxUxNhogxd4hmO8KOD4WWbovum9852h
+ /aUs1LjD3zt+62JnjHTRtfjQ3bhfCgmNDvO6xRnuHqv8+HoBM+UbOuqc4QkYCINXXtd8
+ CpSWpoXbiL7cpIvtnWl9fCKBYQ3PgBAvDOWdg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729006045; x=1729610845;
+ d=1e100.net; s=20230601; t=1729006082; x=1729610882;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vexqapnXa5rj8tgH2yWbNpaM89Pcs5uT8uOcWFvnUzM=;
- b=mTdeEExGX34mjRQxwSC9QwpmrOPi0gCPC6enmR+g1bD4+SImP6R0YSpc9oKL1gUoEo
- JP/0+gOJe6G9C3B55qRmMUFaxmf3ED6egxRf24buE2krr4nKURa13ZfIo94cF8C5kjb+
- G+U3TsoNMVtZ4YkYi2n/rQiZQZaqXUUwxeRNrQp7AqqRQY9mrtxoqlQ0WPEkbbuq9Npe
- GTMAlmvZVamAEgfnKPFNeO8FWP939QfGi+JhrTMzmMl9AAWU03iNArXzbeyJkqoi3u4i
- J34YNjZYQwuYzgcLeEPJDEMuk03tU775+WlxBB8C7audAAOZR8Ixh9DfgbQ3PWnvqlb4
- XK8w==
+ bh=48/0LfUH2dbnydNBOE5L/+6aORYrJtN4e6yrC1RXyl0=;
+ b=sHYJhV+tTAEQyfiwZTcPlgPfUBmcVhGaGDTGlwCX5PR54xfeLhpYXkc4R7ouPX3O3d
+ pnzW0/szwpbvWutmuAe7V39jRLqogofyJJW6/8Oal/IbudKVhmB6olnblW0zQ56OQunb
+ AGyiRfe+yNRI9Cc/tGFMpkeJUIO85zavMTzvl/K1dR3AoLK+uESWT/rlIDXTTZbGD6ju
+ VVYs1rZ1BoQEcxq2UNGQMd69+HcnO3ZgqAcQxenOt15cBw9Vtd5/IygUo/vVGL+qk/Ym
+ yegBTwbsS55M4chQkOmBAUJN/0ua2Pf3H8rS3xSw7gxptL0kR/3Zc2BUsQw1C5V+9QUL
+ d0ew==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXmFPC4o+G7j/MOo64STP6lfk5gqaWSDfLh4wWvE9TyAkVqGLJdj3c9iVC5jhxdUD5doGqayNo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxGtyaF71wKnB7IsK9E77uN1gGnLutO3pgFigedPtrR/glLXWxD
- rQP9JG7NZ7EexntJ+xQjAJXTaxweO7MfPu8GewWMd1MojywSaB3czSYnuxHfgW1ILK3tT0MLp2f
- C54EsjxLZyL2LQFBIu09GrLTO+VxZ4qxF54bG
-X-Google-Smtp-Source: AGHT+IEiRQ+C9aYb8YkoL0FytZ/W7x6bmXdinZIl5Av6fbr9OS7KmC+eVo3sOVpTNfS2K4jrnSWnFIF91Pk3J24QRUY=
-X-Received: by 2002:a05:6214:3983:b0:6cb:fbb1:d1ba with SMTP id
- 6a1803df08f44-6cbfbb1d1c0mr161931926d6.9.1729006045291; Tue, 15 Oct 2024
- 08:27:25 -0700 (PDT)
+ AJvYcCUl32/e0eQTts3FwTW43TsUyhlWrtHfqX5Buwx05toLzgU+2MUzFi5HJFMJ/Xk3n+VYDQgJhwE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyueIU+zblTd7ypiJ3X6DXNogX/3nGh+s8D+PNneSLuZpB9+O5V
+ /xYCAw1QmmkYVx1YyxUr0gfE6ZmzIcx4qN3r5PaKQEB0l/s+nQyhEQ8zTShQWcLG//1SwH+bwaj
+ wiHGVABT8oDzNCTYktQa7slp3ndLDE+zNdw7M6vZIMsrjXY8=
+X-Google-Smtp-Source: AGHT+IEw5brrX7CZG02/lXplQjxFhuMlp2kl1csFsihp7y08IR1M2ka7zyren+f1r/ywVC9AvDwb/pPLgmi2sKrHBsc=
+X-Received: by 2002:a05:6214:2c12:b0:6c5:944f:ea5a with SMTP id
+ 6a1803df08f44-6cbefabadd8mr238647346d6.13.1729006082237; Tue, 15 Oct 2024
+ 08:28:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
- <20241008-android_ab_master-v3-2-f292c45a33e4@salutedevices.com>
- <17FD691FA1477948.8140@groups.io> <87ed4mhgaw.fsf@baylibre.com>
- <20241011180031.cgvuhks7zo772wl6@CAB-WSD-L081021>
- <87frp1r9iz.fsf@baylibre.com>
- <20241014203820.riljx72bkqw762v5@CAB-WSD-L081021>
- <CAFLszTgO5h1zdXJTk-PCcDWx6nAz3riV34K_sHcvnO4AYMNSqA@mail.gmail.com>
- <87ikttzhwd.fsf@baylibre.com>
- <20241015144245.e4zzhuuqguwnxafg@CAB-WSD-L081021>
-In-Reply-To: <20241015144245.e4zzhuuqguwnxafg@CAB-WSD-L081021>
+References: <20241014131152.267405-1-patrick.rudolph@9elements.com>
+ <CALeDE9NkB1kNdnEbsXLyzfQ53PNvV2unnzeMcTgpTKtySh=XcA@mail.gmail.com>
+ <CAFLszTg94CCWi=K8ViX=Oxqq1bmW2VuQ-eOqdD9QYEj5U=GLBQ@mail.gmail.com>
+ <CALeDE9P-80UYBd=y3FhA+Gnv+5Mz51p5SMRO+0MTGvvx4V_+Zw@mail.gmail.com>
+In-Reply-To: <CALeDE9P-80UYBd=y3FhA+Gnv+5Mz51p5SMRO+0MTGvvx4V_+Zw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 15 Oct 2024 09:27:14 -0600
-Message-ID: <CAFLszTjYYa_LO2eOj_5fFjGAMivq298g8n_U=-L20pKk6Tkw1Q@mail.gmail.com>
-Subject: Re: [PATCH v3 2/6] treewide: bcb: move ab_select command to bcb
- subcommands
-To: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot-amlogic@groups.io, 
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Tom Rini <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Mario Six <mario.six@gdsys.cc>,
- u-boot@lists.denx.de, rockosov@gmail.com, kernel@salutedevices.com
+Date: Tue, 15 Oct 2024 09:27:51 -0600
+Message-ID: <CAFLszTh+CeC8MUEM6a2gsCDEVPeN1QuKU_mPUMCR+vFkZSo4hQ@mail.gmail.com>
+Subject: Re: [PATCH v8 00/37] Implement ACPI on aarch64
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,360 +86,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dmitry,
+Hi Peter,
 
-On Tue, 15 Oct 2024 at 08:42, Dmitry Rokosov
-<ddrokosov@salutedevices.com> wrote:
+On Tue, 15 Oct 2024 at 07:34, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
-> Hi Mattijs, Simon,
->
-> On Tue, Oct 15, 2024 at 02:10:10PM +0200, Mattijs Korpershoek wrote:
-> > Hi Simon, Dmitry
+> On Tue, 15 Oct 2024 at 14:10, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On lun., oct. 14, 2024 at 15:06, Simon Glass <sjg@chromium.org> wrote:
+> > Hi Peter,
 > >
-> > > Hi Dmitry,
+> > On Tue, 15 Oct 2024 at 04:28, Peter Robinson <pbrobinson@gmail.com> wrote:
 > > >
-> > > On Mon, 14 Oct 2024 at 14:38, Dmitry Rokosov
-> > > <ddrokosov@salutedevices.com> wrote:
-> > >>
-> > >> Hello Mattijs,
-> > >>
-> > >> On Sat, Oct 12, 2024 at 10:49:08AM +0200, Mattijs Korpershoek wrote:
-> > >> > Hi Dmitry,
-> > >> >
-> > >> > On ven., oct. 11, 2024 at 21:00, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
-> > >> >
-> > >> > > On Fri, Oct 11, 2024 at 04:20:39PM +0200, Mattijs Korpershoek wrote:
-> > >> > >> On ven., oct. 11, 2024 at 15:30, "Mattijs Korpershoek via groups.io" <mkorpershoek=baylibre.com@groups.io> wrote:
-> > >> > >>
-> > >> > >> > Hi Dmitry,
-> > >> > >> >
-> > >> > >> > Thank you for the patch.
-> > >> > >> >
-> > >> > >> > On mar., oct. 08, 2024 at 23:18, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
-> > >> > >> >
-> > >> > >> >> To enhance code organization, it is beneficial to consolidate all A/B
-> > >> > >> >> BCB management routines into a single super-command.
-> > >> > >> >> The 'bcb' command is an excellent candidate for this purpose.
-> > >> > >> >>
-> > >> > >> >> This patch integrates the separate 'ab_select' command into the 'bcb'
-> > >> > >> >> group as the 'ab_select' subcommand, maintaining the same parameter list
-> > >> > >> >> for consistency.
-> > >> > >> >>
-> > >> > >> >> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
-> > >> > >> >> ---
-> > >> > >> >>  MAINTAINERS                               |  1 -
-> > >> > >> >>  cmd/Kconfig                               | 15 +------
-> > >> > >> >>  cmd/Makefile                              |  1 -
-> > >> > >> >>  cmd/ab_select.c                           | 66 -------------------------------
-> > >> > >> >>  cmd/bcb.c                                 | 63 +++++++++++++++++++++++++++++
-> > >> > >> >>  configs/am57xx_hs_evm_usb_defconfig       |  1 -
-> > >> > >> >>  configs/khadas-vim3_android_ab_defconfig  |  1 -
-> > >> > >> >>  configs/khadas-vim3l_android_ab_defconfig |  1 -
-> > >> > >> >>  configs/sandbox64_defconfig               |  4 +-
-> > >> > >> >>  configs/sandbox_defconfig                 |  4 +-
-> > >> > >> >>  doc/android/ab.rst                        | 12 +++---
-> > >> > >> >>  include/configs/khadas-vim3_android.h     |  2 +-
-> > >> > >> >>  include/configs/khadas-vim3l_android.h    |  2 +-
-> > >> > >> >>  include/configs/meson64_android.h         |  4 +-
-> > >> > >> >>  include/configs/ti_omap5_common.h         |  4 +-
-> > >> > >> >>  test/py/tests/test_android/test_ab.py     |  8 ++--
-> > >> > >> >>  16 files changed, 85 insertions(+), 104 deletions(-)
-> > >> > >> >>
-> > >> > >> >> diff --git a/MAINTAINERS b/MAINTAINERS
-> > >> > >> >> index 7aefda93d017f07d616f0f6d191129914fbeb484..668ccec9ae6df47192b1af668e3fdbeb1dfa15ea 100644
-> > >> > >> >> --- a/MAINTAINERS
-> > >> > >> >> +++ b/MAINTAINERS
-> > >> > >> >> @@ -65,7 +65,6 @@ R:    Sam Protsenko <semen.protsenko@linaro.org>
-> > >> > >> >>  S:     Maintained
-> > >> > >> >>  T:     git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
-> > >> > >> >>  F:     boot/android_ab.c
-> > >> > >> >> -F:     cmd/ab_select.c
-> > >> > >> >>  F:     doc/android/ab.rst
-> > >> > >> >>  F:     include/android_ab.h
-> > >> > >> >>  F:     test/py/tests/test_android/test_ab.py
-> > >> > >> >> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > >> > >> >> index dd33266cec70a2b134b7244acae1b7f098b921e8..11e8d363dc9b137723a86a240412d82dd0dbccc5 100644
-> > >> > >> >> --- a/cmd/Kconfig
-> > >> > >> >> +++ b/cmd/Kconfig
-> > >> > >> >> @@ -1067,6 +1067,7 @@ config CMD_ADC
-> > >> > >> >>  config CMD_BCB
-> > >> > >> >>         bool "bcb"
-> > >> > >> >>         depends on PARTITIONS
-> > >> > >> >> +       depends on ANDROID_AB
-> > >> > >> >
-> > >> > >> > When building with khadas-vim3_android_defconfig, we can see that CMD_BCB is no
-> > >> > >> > longer part of that build:
-> > >> > >> >
-> > >> > >> > $ grep CMD_BCB .config
-> > >> > >> > <empty>
-> > >> > >> >
-> > >> > >> > However, if we look at include/configs/meson64_android.h, we can see
-> > >> > >> > that the "bcb" command is not only used for checking the _slot suffix.
-> > >> > >> >
-> > >> > >> > It's also used for checking the bootloader reason. For example, in
-> > >> > >> > BOOTENV_DEV_FASTBOOT, we call:
-> > >> > >> >
-> > >> > >> >    "if bcb test command = bootonce-bootloader; then " \
-> > >> > >> >
-> > >> > >> > Since CMD_BCB is no longer part of the .config (due to this dependency),
-> > >> > >> > the boot script now shows errors:
-> > >> > >> >
-> > >> > >> > """
-> > >> > >> > U-Boot 2024.10-00796-g969325278805 (Oct 11 2024 - 14:46:00 +0200) khadas-vim3
-> > >> > >> >
-> > >> > >> > Model: Khadas VIM3
-> > >> > >> > SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
-> > >> > >> > DRAM:  2 GiB (effective 3.8 GiB)
-> > >> > >> > Core:  411 devices, 36 uclasses, devicetree: separate
-> > >> > >> > MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
-> > >> > >> > Loading Environment from MMC... fs uses incompatible features: 00020000, ignoring
-> > >> > >> > Reading from MMC(2)... *** Warning - bad CRC, using default environment
-> > >> > >> >
-> > >> > >> > In:    usbkbd,serial
-> > >> > >> > Out:   vidconsole,serial
-> > >> > >> > Err:   vidconsole,serial
-> > >> > >> > Net:   eth0: ethernet@ff3f0000
-> > >> > >> >
-> > >> > >> > Hit any key to stop autoboot:  0
-> > >> > >> > Verify GPT: success!
-> > >> > >> > Unknown command 'bcb' - try 'help'
-> > >> > >> > Warning: BCB is corrupted or does not exist
-> > >> > >> > dev: pinctrl@14
-> > >> > >> > dev: pinctrl@40
-> > >> > >> > gpio: pin 88 (gpio 88) value is 1
-> > >> > >> > Unknown command 'bcb' - try 'help'
-> > >> > >> > Warning: BCB is corrupted or does not exist
-> > >> > >> > Loading Android boot partition...
-> > >> > >> > switch to partitions #0, OK
-> > >> > >> > mmc2(part 0) is current device
-> > >> > >> > """
-> > >> > >> >
-> > >> > >> > I know we should not be using a boot script, nor non A/B configs but
-> > >> > >> > it's a bummer that this series breaks an upstream
-> > >> > >> > defconfig (khadas-vim3_android_defconfig)
-> > >> > >> >
-> > >> > >> > My recommendation:
-> > >> > >> >
-> > >> > >> > Make BCB_CMD_AB_SELECT implementation dependant on ANDROID_AB.
-> > >> > >> > This way, users can use CMD_BCB with and without ANDROID_AB being enabled.
-> > >> > >> >
-> > >> > >> > We could do:
-> > >> > >> > When ANDROID_AB=y, implement bcb ab_select subcommand
-> > >> > >> > When ANDROID_AB=n, command is not accessible.
-> > >> > >> >
-> > >> > >> > I'll send you a diff shortly for this.
-> > >> > >>
-> > >> > >> Here is an illustration on how that would work:
-> > >> > >>
-> > >> > >> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > >> > >> index 861c31e26408..e1a4a97b042d 100644
-> > >> > >> --- a/cmd/Kconfig
-> > >> > >> +++ b/cmd/Kconfig
-> > >> > >> @@ -1055,7 +1055,6 @@ config CMD_ADC
-> > >> > >>  config CMD_BCB
-> > >> > >>    bool "bcb"
-> > >> > >>    depends on PARTITIONS
-> > >> > >> -  depends on ANDROID_AB
-> > >> > >>    help
-> > >> > >>      Read/modify/write the fields of Bootloader Control Block, usually
-> > >> > >>      stored on the flash "misc" partition with its structure defined in:
-> > >> > >> diff --git a/cmd/bcb.c b/cmd/bcb.c
-> > >> > >> index 4fd32186ae65..4fe634f14cc5 100644
-> > >> > >> --- a/cmd/bcb.c
-> > >> > >> +++ b/cmd/bcb.c
-> > >> > >> @@ -438,6 +438,9 @@ static int do_bcb_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
-> > >> > >>    char slot[2];
-> > >> > >>    bool dec_tries = true;
-> > >> > >>
-> > >> > >> +  if (!CONFIG_IS_ENABLED(AB_SELECT))
-> > >> > >> +          return CMD_RET_SUCCESS;
-> > >> > >> +
-> > >> > >>    for (int i = 4; i < argc; i++) {
-> > >> > >>            if (!strcmp(argv[i], "--no-dec"))
-> > >> > >>                    dec_tries = false;
-> > >> > >> @@ -474,6 +477,9 @@ static int do_bcb_ab_dump(struct cmd_tbl *cmdtp, int flag, int argc,
-> > >> > >>    struct blk_desc *dev_desc;
-> > >> > >>    struct disk_partition part_info;
-> > >> > >>
-> > >> > >> +  if (!CONFIG_IS_ENABLED(AB_SELECT))
-> > >> > >> +          return CMD_RET_SUCCESS;
-> > >> > >> +
-> > >> > >>    if (part_get_info_by_dev_and_name_or_num(argv[1], argv[2],
-> > >> > >>                                             &dev_desc, &part_info,
-> > >> > >>                                             false) < 0) {
-> > >> > >>
-> > >> > >
-> > >> > > We also need to include an #ifdef directive for the ab_select_slot()
-> > >> > > function usage; otherwise, the code will not compile successfully.
-> > >> >
-> > >> > Are you sure? Per my understanding, it's possible that the compiler
-> > >> > optimizes this out because CONFIG_IS_ENABLED(AB_SELECT)
-> > >> > is known as build time.
-> > >> >
-> > >> > When I tried this diff with khadas-vim3_android_defconfig I did not see
-> > >> > any build errors. I will try again early next week.
-> > >> >
-> > >>
-> > >> As I recall, the IS_ENABLED() mechanism serves as a runtime checker to
-> > >> determine whether specific CONFIG_* options are enabled. Consequently,
-> > >> all code paths under this mechanism are always compiled. I attempted to
-> > >> disable CONFIG_ANDROID_AB for the sandbox_defconfig, but it resulted in
-> > >> the expected linker error.
-> > >>
-> > >> /tmp/ccAvYrKL.ltrans25.ltrans.o: In function `do_bcb_ab_select':
-> > >> <artificial>:(.text+0x6d5d): undefined reference to `ab_select_slot'
-> > >> collect2: error: ld returned 1 exit status
-> > >> Makefile:1813: recipe for target 'u-boot' failed
-> > >> make: *** [u-boot] Error 1
-> > >>
-> > >> I have already prepared a new version using #ifdef directives. I will
-> > >> send it shortly.
+> > > On Mon, 14 Oct 2024 at 14:12, Patrick Rudolph
+> > > <patrick.rudolph@9elements.com> wrote:
+> > > >
+> > > > Based on the existing work done by Simon Glass this series adds
+> > > > support for booting aarch64 devices using ACPI only.
+> > > > As first target QEMU SBSA support is added, which relies on ACPI
+> > > > only to boot an OS. As secondary target the Raspberry Pi4 was used,
+> > > > which is broadly available and allows easy testing of the proposed
+> > > > solution.
+> > > >
+> > > > The series is split into ACPI cleanups and code movements, adding
+> > > > Arm specific ACPI tables and finally SoC and mainboard related
+> > > > changes to boot a Linux on the QEMU SBSA and RPi4. Currently only the
+> > > > mandatory ACPI tables are supported, allowing to boot into Linux
+> > > > without errors.
+> > > >
+> > > > The QEMU SBSA support is feature complete and provides the same
+> > > > functionality as the EDK2 implementation.
+> > > >
+> > > > The changes were tested on real hardware as well on QEMU v9.0:
+> > > >
+> > > > qemu-system-aarch64 -machine sbsa-ref -nographic -cpu cortex-a57 \
+> > > >                     -pflash secure-world.rom \
+> > > >                     -pflash unsecure-world.rom
+> > > >
+> > > > qemu-system-aarch64 -machine raspi4b -kernel u-boot.bin -cpu cortex-a72 \
+> > > > -smp 4 -m 2G -drive file=raspbian.img,format=raw,index=0 \
+> > > > -dtb bcm2711-rpi-4-b.dtb -nographic
+> > > >
+> > > > Tested against FWTS V24.03.00.
+> > > >
+> > > > Known issues:
+> > > > - The QEMU rpi4 support is currently limited as it doesn't emulate PCI,
+> > > >   USB or ethernet devices!
+> > > > - The SMP bringup doesn't work on RPi4, but works in QEMU (Possibly
+> > > >   cache related).
+> > > > - PCI on RPI4 isn't working on real hardware since the pcie_brcmstb
 > > >
-> > > Something else is going on here, since we do this all the time and
-> > > rely on it. So long as the code is behind an if() the dead code should
-> > > be eliminated.
+> > > I believe the EDK2 version works by using the generic ACPI PCI driver,
+> > > why wouldn't this use the same driver?
 > > >
+> > > Overall given RPi4 has massive limitations I think at the moment it
+> > > should be dropped from the series so it doesn't block the
+> > > generic/qemu/bsa support landing. I feel it will be a support problem
+> > > with having such a reduced functionality device in mainline.
 > >
-> > I have passed my diff (using CONFIG_IS_ENABLED) through the U-Boot CI:
-> > https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/22700
-> >
-> > See the branch:
-> > https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commits/dmitry/ab-dump-v3
-> >
-> > There are some test errors (sandbox test) but the "world build" stage
-> > finished sucessfully.
-> >
-> > I have also tested locally using the CI container:
-> > $ cd ~/work/upstream/u-boot
-> > $ git clean -xdf
-> > $ make mproper
-> > $ docker run -v $PWD:$PWD -it trini/u-boot-gitlab-ci-runner:jammy-20240227-14Mar2024 /bin/bash
-> >
-> > # In container
-> > uboot@0ba059e8b7af/$ cd /home/mkorpershoek/work/upstream/u-boot
-> > uboot@0ba059e8b7af:/home/mkorpershoek/work/upstream/u-boot$ pip install -r test/py/requirements.txt
-> > uboot@0ba059e8b7af:/home/mkorpershoek/work/upstream/u-boot$ ./test/py/test.py --bd sandbox --build -k test_ut
-> >
-> > No build errors either.
-> >
-> > Dmitry, can you clarify what compiler/build commands you've used to see
-> > that error?
-> >
-> > For reference, here is what buildman has in the CI container:
-> >
-> > uboot@0ba059e8b7af:/home/mkorpershoek/work/upstream/u-boot$ ./tools/buildman/buildman --list-tool-chains
-> > List of available toolchains (17):
-> > aarch64   : /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc
-> > arc       : /opt/gcc-13.2.0-nolibc/arc-linux/bin/arc-linux-gcc
-> > arm       : /opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-gcc
-> > c89       : /usr/bin/c89-gcc
-> > c99       : /usr/bin/c99-gcc
-> > i386      : /opt/gcc-13.2.0-nolibc/i386-linux/bin/i386-linux-gcc
-> > m68k      : /opt/gcc-13.2.0-nolibc/m68k-linux/bin/m68k-linux-gcc
-> > microblaze: /opt/gcc-13.2.0-nolibc/microblaze-linux/bin/microblaze-linux-gcc
-> > mips      : /opt/gcc-13.2.0-nolibc/mips-linux/bin/mips-linux-gcc
-> > nios2     : /opt/gcc-13.2.0-nolibc/nios2-linux/bin/nios2-linux-gcc
-> > powerpc   : /opt/gcc-13.2.0-nolibc/powerpc-linux/bin/powerpc-linux-gcc
-> > riscv32   : /opt/gcc-13.2.0-nolibc/riscv32-linux/bin/riscv32-linux-gcc
-> > riscv64   : /opt/gcc-13.2.0-nolibc/riscv64-linux/bin/riscv64-linux-gcc
-> > sandbox   : /usr/bin/cgcc
-> > sh2       : /opt/gcc-13.2.0-nolibc/sh2-linux/bin/sh2-linux-gcc
-> > x86_64    : /usr/bin/x86_64-linux-gnu-gcc
-> > xtensa    : /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-gcc
-> >
-> > I think we should use CONFIG_IS_ENABLED if possible
+> > Perhaps this could be handled in a follow-up? We are on v8 here.
 >
-> What do you think if we replace
+> What exactly done in a follow up?
+
+Anything to do with the real rpi. It is far better to have a starting point.
+
 >
-> ```
-> #ifdef CONFIG_ANDROID_AB
-> ```
+> > Who is going to support this?
 >
-> with
+> Support what?
+
+You tell me? I didn't understand your question either.
+
 >
-> ```
-> #if IS_ENABLED(CONFIG_ANDROID_AB)
-
-That seems OK to some extent...but see comments:
-
-> ```
->
-> Like below:
->
-> ```
-> git --no-pager diff .
-> diff --git a/cmd/bcb.c b/cmd/bcb.c
-> index a0eff55c2ed4..82ea4f04659b 100644
-> --- a/cmd/bcb.c
-> +++ b/cmd/bcb.c
-> @@ -24,7 +24,7 @@ enum bcb_cmd {
->         BCB_CMD_FIELD_TEST,
->         BCB_CMD_FIELD_DUMP,
->         BCB_CMD_STORE,
-> -#ifdef CONFIG_ANDROID_AB
-> +#if IS_ENABLED(CONFIG_ANDROID_AB)
->         BCB_CMD_AB_SELECT,
->         BCB_CMD_AB_DUMP,
->  #endif
-
-We try to avoid this sort of thing, as it makes it impossible to use
-if() instead of #ifdef(). For the same reason, header files should
-always be included, not be behind #ifdefs
-
-> @@ -57,7 +57,7 @@ static int bcb_cmd_get(char *cmd)
->                 return BCB_CMD_STORE;
->         if (!strcmp(cmd, "dump"))
->                 return BCB_CMD_FIELD_DUMP;
-> -#ifdef CONFIG_ANDROID_AB
-> +#if IS_ENABLED(CONFIG_ANDROID_AB)
->         if (!strcmp(cmd, "ab_select"))
-
-if (IS_ENABLED(CONFIG_ANDROID_AB) && !strcmp(cmd, "ab_select"))
-
->                 return BCB_CMD_AB_SELECT;
->         if (!strcmp(cmd, "ab_dump"))
-> @@ -96,7 +96,7 @@ static int bcb_is_misused(int argc, char *const argv[])
->                 if (argc != 2)
->                         goto err;
->                 break;
-> -#ifdef CONFIG_ANDROID_AB
-> +#if IS_ENABLED(CONFIG_ANDROID_AB)
->         case BCB_CMD_AB_SELECT:
->                 if (argc != 4 && argc != 5)
->                         goto err;
-> @@ -435,7 +435,7 @@ void bcb_reset(void)
->         __bcb_reset();
->  }
->
-> -#ifdef CONFIG_ANDROID_AB
-> +#if IS_ENABLED(CONFIG_ANDROID_AB)
->  static int do_bcb_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
->                             char * const argv[])
->  {
-> @@ -504,7 +504,7 @@ static struct cmd_tbl cmd_bcb_sub[] = {
->         U_BOOT_CMD_MKENT(test, CONFIG_SYS_MAXARGS, 1, do_bcb_test, "", ""),
->         U_BOOT_CMD_MKENT(dump, CONFIG_SYS_MAXARGS, 1, do_bcb_dump, "", ""),
->         U_BOOT_CMD_MKENT(store, CONFIG_SYS_MAXARGS, 1, do_bcb_store, "", ""),
-> -#ifdef CONFIG_ANDROID_AB
-> +#if IS_ENABLED(CONFIG_ANDROID_AB)
->         U_BOOT_CMD_MKENT(ab_select, CONFIG_SYS_MAXARGS, 1,
->                          do_bcb_ab_select, "", ""),
->         U_BOOT_CMD_MKENT(ab_dump, CONFIG_SYS_MAXARGS, 1,
-> @@ -549,7 +549,7 @@ U_BOOT_CMD(
->         "bcb dump  <field>              - dump  BCB <field>\n"
->         "bcb store                      - store BCB back to <interface>\n"
->         "\n"
-> -#ifdef CONFIG_ANDROID_AB
-> +#if IS_ENABLED(CONFIG_ANDROID_AB)
->         "bcb ab_select -\n"
->         "    Select the slot used to boot from and register the boot attempt.\n"
->         "    <slot_var_name> <interface> <dev[:part|#part_name]> [--no-dec]\n"
-> ```
-
-Long help should use U_BOOT_LONGHELP, we normally handle this with
-#ifdef - see cmd/bootflow.c for example
+> > >
+> > > >   Linux kernel module doesn't support ACPI yet.
+> > > >
+> > > > Maximilian Brune (3):
+> > > >   acpi: x86: Move SPCR and DBG2 into common code
+> > > >   acpi: x86: Write FADT in common code
+> > > >   serial: serial_pl01x: Implement .getinfo() for PL01
+> > > >
+> >
+> > [..]
+> >
+> > Regards,
+> > Simon
 
 Regards,
 Simon
