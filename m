@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA36BD20698
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 03:42:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 767E1D20698
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 03:44:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB0BE85B66;
-	Wed, 16 Oct 2024 05:42:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 478E588BD2;
+	Wed, 16 Oct 2024 05:43:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lieZyNr+";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Rpxpfddh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17EF4889AA; Wed, 16 Oct 2024 05:42:42 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 3961D87CF8; Tue, 15 Oct 2024 23:02:18 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC97182BA7
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 05:42:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6A4380AE6
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:02:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7afc658810fso552708385a.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 20:42:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=wulfgarfr+ubdlist@gmail.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a9a0cee600aso348757866b.1
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 14:02:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729050159; x=1729654959; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3Xv6WVCXxE+VHfQ3GB52IJzF7xdIu69e1LG6ewaP5pk=;
- b=lieZyNr+/kA7PxhLQdJnyaP/8gZ0VNH+w+Qmd3/g31stlELq5QiJOJrDWIMf1oI70f
- QeuPjOhRP9UxVSX48ayq9qUD9X3m6YXyGMtmRhaJ03IK5NRHMRlM6ROqc5AlfiBZY61x
- rOygGU1uJeVRwFLCqFkw2uM7LdCjKOYA67wFM=
+ d=gmail.com; s=20230601; t=1729026135; x=1729630935; darn=lists.denx.de;
+ h=content-transfer-encoding:content-disposition:mime-version
+ :message-id:subject:to:from:date:sender:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+nZqkJPCjS53MlRsYbOUrraZ4FBgoKpFB4FTPunZihU=;
+ b=RpxpfddhYUd6jxNcEYTnmqA7GHA+5Vly+RL458aEBel7BasROjUv/vynIw87sZxMtj
+ ItOQjLTNXL3l0RnfjwDvn+pTSjXFSDQLL3tUILGmpwR1pm7QzSJlYnZ9V/Ci1bSxIB4u
+ kTbexkyX1imjP5yTGMd9AR0Xhz/aNjtGHN22Gwuj4en2IxjiwG8GrpbCGPBj8DNzzYR2
+ MbBTc2YVqNW8KedEkYZLyNcvNE2tMyxAkijs1GrxLKLbU4x9mbIrLeNfzJfCKcKTzzz1
+ CEPuX17i2rODVUuVHFV166oqfd2n908MFNL24Mp9bzAkAfEz2zjtLwl4ZmwLFKTcZeH0
+ Xamw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729050159; x=1729654959;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3Xv6WVCXxE+VHfQ3GB52IJzF7xdIu69e1LG6ewaP5pk=;
- b=lwgqL3gKcnqjSOVcPM5AgYvNa53/cFNaWV9NEgpuRKp6PjaEd2egVMhs4ugVl2LKVY
- MEP9sSNQISc5Zo4gN8SkZ6JAkBNBkRiKf1beQ4DABu7KxfSTcFMBTr9ll9NbCkew9+7w
- ByK7Zw1mtcXOdeYtn5hU/Fw3jItZA2KB8ESX0gonSLNOM2ja+8g7ykm1VOwJUQVohozD
- cq67j61OSMQQJMZkLHRmQ1r1N3ueT6QqyJk1zW3IBLutEhoO6Q9XHaT3iq4HPREVN2Gi
- P9pYKVhGOwlyohw7+4HLDknx/6+zEgWj2siCQtMkfPyPWqq6H302eTiqDaseAl1U4Cx4
- yIgQ==
-X-Gm-Message-State: AOJu0YwtmiqrVu0NSDFQRJLMkuWbfh2H+2jzRaSDjGBVdCdjRfs0sCoD
- M52mwsUXZnJsKlWKpZesrLFPQWdMYpRfZPCXUaaI/oXDTQ0BSeUazj84xhMHxDSS7NVe9Nb5m32
- TiDQ=
-X-Google-Smtp-Source: AGHT+IEJm5MLHDAWoFx0pw0dXwZHaTm+2xUjig+ZWiBTezysE+t9WJaZsf5V5UsCQzrYIIBKMGcoFw==
-X-Received: by 2002:a05:620a:2728:b0:7b1:448d:ea53 with SMTP id
- af79cd13be357-7b1448deadamr181549585a.21.1729050158528; 
- Tue, 15 Oct 2024 20:42:38 -0700 (PDT)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b136164dfbsm136470685a.21.2024.10.15.20.42.37
+ d=1e100.net; s=20230601; t=1729026135; x=1729630935;
+ h=content-transfer-encoding:content-disposition:mime-version
+ :message-id:subject:to:from:date:sender:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=+nZqkJPCjS53MlRsYbOUrraZ4FBgoKpFB4FTPunZihU=;
+ b=AN0ISFjXetuqw7KPUfzKUPX18/GR2q+BgEOxAWZdHemjq6YM43jK2cKc0WZHK2/quW
+ Jq9cOdepa/A80CHdA/KUxwvWOiAAvMJUfE5/ndNEj/Zuq3ywh8O34gHNyHTEIJV/RDya
+ ZrRIbjxlJ/WDVjP2S/E1PxHKYGZkRXyRrb1LsOjPT2qD3/E/v8RG/dpcfrMB9+TEccaH
+ zB0ICE0ryrA3o+344IK6ZVZvv0xTOiMZ9bcckoMtzAIz/oiZce0n/HvY7BOgVviism3E
+ FsooEnhHhZoyNPfA8lyqKqGWMaaw58s6qp5Kn3JfU0cbSvkSXv1HsZ3unvWaJyz/GMOh
+ wXxw==
+X-Gm-Message-State: AOJu0Yzuyeey8Rf287pLV2C36ht5QX9WhFn66N2rmZ3I0gE5dmEjCZtX
+ XNIXs+LtfvRsArtthf2sImTCoxTZ6aEiOPYQ/tkN0a8+UDc4YxwGXVT5Zg==
+X-Google-Smtp-Source: AGHT+IEUNtp6HNBGnQT+2XIrEcnbmb4+QBSh+CgzMFutO3y40OTBjB1Sy1jq63DB8eTzl8PA2pxpGg==
+X-Received: by 2002:a17:906:dc92:b0:a9a:90c:8bc with SMTP id
+ a640c23a62f3a-a9a090c0a28mr721917066b.12.1729026134826; 
+ Tue, 15 Oct 2024 14:02:14 -0700 (PDT)
+Received: from ryzendeb.home.arpa (ip-193-121-108-99.dsl.scarlet.be.
+ [193.121.108.99]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9a298446c3sm107423966b.169.2024.10.15.14.02.14
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 20:42:37 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
+ Tue, 15 Oct 2024 14:02:14 -0700 (PDT)
+Date: Tue, 15 Oct 2024 23:02:07 +0200
+From: wulfgarfr+ubdlist@gmail.com
 To: u-boot@lists.denx.de
-Cc: Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH] Revert "Makefile: Drop SPL_FIT_GENERATOR / SPL_FIT_SOURCE
- support" changes
-Date: Tue, 15 Oct 2024 21:42:35 -0600
-Message-ID: <20241016034235.89354-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+Subject: Assistance required - U-boot not working on Radxa Rock
+Message-ID: <Zw7YT/AO8HsbTf3X@ryzendeb.home.arpa>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 16 Oct 2024 05:43:56 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,116 +91,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-:hile we had hoped to be able to remove these options finally, it was
-missed that zynq still requires these currently.
+Hi,
 
-This reverts commit 5b9261fb0b1ed087387f2036d279fd3f4bb20a61 and
-commit 099b6df556c95f5d06864612e9199eab7ba50ed3.
+A little time ago I acquired a Radxa Rock (RK3188 SoC).
+While it is an aging board, it is still quite capable and yet low-power.
 
-Reported-by: Jonas Karlman <jonas@kwiboo.se>
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- Makefile                | 24 ++++++++++++++++++++++++
- boot/Kconfig            | 23 +++++++++++++++++++++++
- doc/usage/fit/howto.rst |  9 +++++++++
- 3 files changed, 56 insertions(+)
+However, the board I have is coming with a very old Linaro version on
+the built-in flash.
+Radxa does not really provide any recent builds, and the way the flash
+is setup it can't easily be upgraded to a newer kernel or distribution.
+The SD images provided on their website suffer the same problem.
 
-diff --git a/Makefile b/Makefile
-index 0005e999a657..3267fb1c469a 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1145,6 +1145,13 @@ ifeq ($(CONFIG_OF_EMBED)$(CONFIG_EFI_APP),y)
- 	@echo >&2 "CONFIG_OF_SEPARATE for boards in mainline."
- 	@echo >&2 "See doc/develop/devicetree/control.rst for more info."
- 	@echo >&2 "===================================================="
-+endif
-+ifneq ($(CONFIG_SPL_FIT_GENERATOR),)
-+	@echo >&2 "===================== WARNING ======================"
-+	@echo >&2 "This board uses CONFIG_SPL_FIT_GENERATOR. Please migrate"
-+	@echo >&2 "to binman instead, to avoid the proliferation of"
-+	@echo >&2 "arch-specific scripts with no tests."
-+	@echo >&2 "===================================================="
- endif
- 	$(call deprecated,CONFIG_WDT,DM watchdog,v2019.10,\
- 		$(CONFIG_WATCHDOG)$(CONFIG_HW_WATCHDOG))
-@@ -1412,6 +1419,23 @@ OBJCOPYFLAGS_u-boot.ldr.srec := -I binary -O srec
- u-boot.ldr.hex u-boot.ldr.srec: u-boot.ldr FORCE
- 	$(call if_changed,objcopy)
- 
-+# Boards with more complex image requirements can provide an .its source file
-+# or a generator script
-+# NOTE: Please do not use this. We are migrating away from Makefile rules to use
-+# binman instead.
-+ifneq ($(CONFIG_SPL_FIT_SOURCE),"")
-+U_BOOT_ITS := u-boot.its
-+$(U_BOOT_ITS): $(subst ",,$(CONFIG_SPL_FIT_SOURCE))
-+	$(call if_changed,copy)
-+else
-+ifneq ($(CONFIG_USE_SPL_FIT_GENERATOR),)
-+U_BOOT_ITS := u-boot.its
-+$(U_BOOT_ITS): $(U_BOOT_ITS_DEPS) FORCE
-+	$(srctree)/$(CONFIG_SPL_FIT_GENERATOR) \
-+	$(patsubst %,$(dt_dir)/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) > $@
-+endif
-+endif
-+
- ifdef CONFIG_SPL_LOAD_FIT
- MKIMAGEFLAGS_u-boot.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
- 	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 4314227d5f86..925afe06a19f 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -282,6 +282,29 @@ config SPL_FIT_IMAGE_POST_PROCESS
- 	  injected into the FIT creation (i.e. the blobs would have been pre-
- 	  processed before being added to the FIT image).
- 
-+config SPL_FIT_SOURCE
-+	string ".its source file for U-Boot FIT image"
-+	depends on SPL_FIT
-+	help
-+	  Specifies a (platform specific) FIT source file to generate the
-+	  U-Boot FIT image. This could specify further image to load and/or
-+	  execute.
-+
-+config USE_SPL_FIT_GENERATOR
-+	bool "Use a script to generate the .its script"
-+	depends on SPL_FIT
-+	default y if SPL_FIT && ARCH_ZYNQMP
-+
-+config SPL_FIT_GENERATOR
-+	string ".its file generator script for U-Boot FIT image"
-+	depends on USE_SPL_FIT_GENERATOR
-+	default "arch/arm/mach-zynqmp/mkimage_fit_atf.sh" if SPL_LOAD_FIT && ARCH_ZYNQMP
-+	help
-+	  Specifies a (platform specific) script file to generate the FIT
-+	  source file used to build the U-Boot FIT image file. This gets
-+	  passed a list of supported device tree file stub names to
-+	  include in the generated image.
-+
- if VPL
- 
- config VPL_FIT
-diff --git a/doc/usage/fit/howto.rst b/doc/usage/fit/howto.rst
-index 675c9aa5bb0f..b5097d4460bf 100644
---- a/doc/usage/fit/howto.rst
-+++ b/doc/usage/fit/howto.rst
-@@ -57,6 +57,15 @@ own subnode under the /images node, which should then be referenced from one or
- multiple /configurations subnodes. The required images must be enumerated in
- the "loadables" property as a list of strings.
- 
-+If a platform specific image source file (.its) is shipped with the U-Boot
-+source, it can be specified using the CONFIG_SPL_FIT_SOURCE Kconfig symbol.
-+In this case it will be automatically used by U-Boot's Makefile to generate
-+the image.
-+If a static source file is not flexible enough, CONFIG_SPL_FIT_GENERATOR
-+can point to a script which generates this image source file during
-+the build process. It gets passed a list of device tree files (taken from the
-+CONFIG_OF_LIST symbol).
-+
- The SPL also records to a DT all additional images (called loadables) which are
- loaded. The information about loadables locations is passed via the DT node with
- fit-images name.
--- 
-2.43.0
+The SBC is supported according to
+https://docs.u-boot.org/en/stable/board/rockchip/rockchip.html#rockchip-boards
+
+So I set out to build the latest U-boot release. And it build just fine.
+But when written to SD card, the board just boots to flash instead.
+It is capable of booting directly from SD (prioritized over flash boot),
+as tested with an old Radxa SD image that I downloaded.
+
+Apparently the built U-boot 2024.10 as written to SD is not recognized at
+all by the board.
+
+I would really appreciate any suggestions how to start troubleshooting,
+or how to adapt the build.
+
+Regards, Wolf
+
+
+[1] U-boot SDcard build setup:
+$ export CROSS_COMPILE=arm-linux-gnueabihf-
+$ make rock_defconfig
+$ make CROSS_COMPILE=arm-linux-gnueabihf-
+$ export SDCARD=/dev/mmcblk0
+$ sudo dd if=/dev/zero of=$SDCARD bs=1M count=1
+$ sudo dd if=u-boot-rockchip.bin of=SDCARD seek=64
+
+[2] Boot log with inserted U-boot 2024.10 SD card:
+$ picocom /dev/ttyUSB0 -b 115200 -e w q
+��� @� B�DDR Version 1.04 20130517
+In
+DDR3
+300MHz
+Bus Width=32 Col=10 Bank=8 Row=15 CS=2 Die Bus-Width=16 Size=2048MB
+Memory OK
+OUT
+BUILD=====2
+SdmmcInit=0 0
+FwPartOffset=0 , 0
+No.1 FLASH ID:2c 64 44 4b a9 0
+OK! 226110
+unsigned!
+SecureBootEn = 0 0
+Boot ver: 2013-12-02#2.08
+start_linux=====230997
+ 3431345 Starting kernel...@0x60408000
+
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Linux version 3.0.36+ (build@radxa-x1) (gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) ) #10 SMP PREEMPT Sat Aug 23 16:11:52 CST 2014
+[    0.000000] CPU: ARMv7 Processor [413fc090] revision 0 (ARMv7), cr=10c5387d
+...
 
