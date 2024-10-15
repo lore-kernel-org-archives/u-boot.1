@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77386D216A2
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 13:12:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B6A7D216A2
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 13:26:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05010880F4;
-	Tue, 15 Oct 2024 15:12:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E77DB88113;
+	Tue, 15 Oct 2024 15:26:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dfIDaOyq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I1rpRCjE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39F2D88113; Tue, 15 Oct 2024 15:12:36 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 5741A881A9; Tue, 15 Oct 2024 15:26:10 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B67A788009
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:12:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 168B6880F4
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:26:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6cbceb48613so33966276d6.2
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:12:33 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3e57872eb49so1818445b6e.0
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:26:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728997952; x=1729602752; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728998766; x=1729603566; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7UaatiupRmIAytCpvYm7FHoSq0pysXv1deyFWkGXtF8=;
- b=dfIDaOyqPvuPvObdPaGAgY44jQb6H1c3mu7Qgx85TprA3GjsNb6JuZOa1EZVa9Dop4
- iMQCnI8jf1GGdZ4Xqvt3o4J/hsaSfx+8fMEA4YRupTi/OcHPFOPVUs7Nx8+smmAfEw5I
- bw/8Z+g0PF++psaMrR7vrwJC7DXBk0A/CkMPI=
+ bh=TYufjr2VgAcKZTgKzGVGVm1a8gkjJ+WTwEuMsg737j8=;
+ b=I1rpRCjEmD/gncG81T07qZpYQQ5N8yJr4ObZJVkXKPXbIIwUgjurRxwL9CK1J2rB+5
+ lBbfl6b0Vys7HcrrkEatH/mWQzJG3g5gQ4p5Y/TtV9OpF1jZnMlb+SNk6jFtdZhOA4J5
+ U8xQi8stVDGv6U8kX34fmmIJwa/+iozi5wr9k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728997952; x=1729602752;
+ d=1e100.net; s=20230601; t=1728998766; x=1729603566;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7UaatiupRmIAytCpvYm7FHoSq0pysXv1deyFWkGXtF8=;
- b=Idzeql9IJO7rU9ygJs20iwMRuUYyY/+jPAaG7PTz+EA9P0V5zBgYphmBg8JniPwVga
- o5+rzpy0WfK8XUeTjHp8qs7Ymv7UZEBRjLFIKZVr+b2AvfLFFR5V+6ixt3at0NFTXNIz
- Ihn5XZFySv4VCuSzwj8QjD4ErTResCk/ZGQdfDvLbhTofq+V+Xh9ur+DnwM9src9TQPv
- Cpjo+olw4/w4y7vo/3YW3Bp9JaQv72YrRFwvQmV83In4f27eCxcSuW5j/PUDAjZK0p4K
- CdxPUXjQhtb0Mn5DYFdc+I2Ku9N3Ve1Su3Xxjah7jT//63GGGR1qhE02CEFQk92Y8gtv
- j3GQ==
+ bh=TYufjr2VgAcKZTgKzGVGVm1a8gkjJ+WTwEuMsg737j8=;
+ b=O2AO4EqeVfZzY/Po72n5CCVMvk8owyRS3+PRvzIS7uhrpAFPLvS8BbAFxETCSucyPh
+ fyo3IBt7QCbnSTdGWUF2qrmsm5XWIa4cZTlzRagYtFFNVBXB7kg/xMf/v64XTDhiFyiP
+ j/Mo97UXxWtjFINgZSlLkq7VtBS46YSvudF1336XzeOeDMkOWyNhKFwpGGduJpxAO540
+ u9uU+RFAiSkOvi4kJBITxTvuqDlw6IpqmTZEpq+LG49aVgMosFVPThwHTgy9AprnHOFC
+ FYUVSTvWvBs/JCA0wkTUEFId2B5xX1zAbEo4QCfqCZ7yNxSgIYfdK8U1hjdOfoKfxJKg
+ OmTQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/P1zAR7LJXZPDD9JcQK/aR3jp1WpZ5SuFTiL2rN8iynTiAAJI8T/Yq0PLey/SWmgPZauSU2w=@lists.denx.de
-X-Gm-Message-State: AOJu0YzNBpJBrl5lrTvDZV5qTphOdhZUdPINbF2MBWYtk7v+JhlnnhCL
- Ljaq8cWXbtBPsOwxCnjQEM98XCtXii2i3rTtOBZLMYAYsjqfaWp9qMBE2cd36SwBlKQyvAHoA+Q
- 1m4itdT0sigSkV5JnEvobuEXl2HbneHzdkD8oEr4DgwjCekQ=
-X-Google-Smtp-Source: AGHT+IFxjlTwNdo9zdNwqQ7hOiLjeVQ55VEbpnICZHWR4V7pjadmqEl940YGVcny71UXO18t67tD0WWta2VrakvDmTc=
-X-Received: by 2002:a05:6214:3198:b0:6cb:3b34:55d3 with SMTP id
- 6a1803df08f44-6cbf00890f6mr221299506d6.29.1728997952526; Tue, 15 Oct 2024
- 06:12:32 -0700 (PDT)
+ AJvYcCU22cX6zMBjklRKJKQ8kDPmSuwdHVK9s/+S3GH0r7FX/Ea7aQNF4umB9gumtpzF+umxRLkNvOs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxwxpwGgjM0nzLEwis81qADZDq1o9DZzLKOG9R7ikKPBjT3eyfd
+ SbLdOW6PlDJozErshOBXh7ebNENlulLMsYQE9dqVYFYQ2ARP6qq+VxwSObpz4oKfIsMQhGI877n
+ Mo8KUO2kRMjnYID/Cb2hESkDhO2ZI4IHS2pys6eNsXcliJ7U=
+X-Google-Smtp-Source: AGHT+IEXnefjnSgpJn4a5mjIsIpPyEeNqBgh6mJEO78dDLAVDsfFH90+2+pwzq5E5xBfNpivmN0c12O93kNvwU2zMJk=
+X-Received: by 2002:a05:6808:3996:b0:3e0:416e:24e8 with SMTP id
+ 5614622812f47-3e5c9128850mr12175963b6e.41.1728998766669; Tue, 15 Oct 2024
+ 06:26:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241011212126.747741-1-sjg@chromium.org>
- <20241011212126.747741-5-sjg@chromium.org>
- <71ECC011-77EC-4308-AFE5-0E301BC27F84@gmx.de>
- <20241012012716.GE14210@bill-the-cat>
- <CAC_iWjL_YQ24ZecbN7oC-37PRR6iuUiiui-a0VPqSSVRunepdQ@mail.gmail.com>
- <CAFLszTjzHBtR8vzk0wT-nNiwbsotqskVhVEX0ibh-Uea1+Da6Q@mail.gmail.com>
- <20241014214236.GB53053@bill-the-cat>
- <CAFLszTi8iJRMBVd79JLumPVz3VB0A8w1v_ZM2pP9D_cp_nx3yg@mail.gmail.com>
- <20241014215454.GF53053@bill-the-cat>
-In-Reply-To: <20241014215454.GF53053@bill-the-cat>
+References: <20240926220226.1265965-9-sjg@chromium.org>
+ <20240926220226.1265965-13-sjg@chromium.org>
+ <20241011223227.GA630742@bill-the-cat>
+ <CAFLszTgoxND_qi8WzdgC8-mQLf0e14Mt=KgXy=bqWkqo4svG9Q@mail.gmail.com>
+ <20241014035122.GE53053@bill-the-cat>
+ <CAFLszTiVsoTdKiKmPVugc9cLk-A+XM2EdiPUE0AFK=g8RPx+0g@mail.gmail.com>
+ <20241014211150.GX53053@bill-the-cat>
+ <87cyk1hdne.fsf@bloch.sibelius.xs4all.nl>
+ <23757cf3-c27a-498d-9e66-59261f060102@gmx.de>
+In-Reply-To: <23757cf3-c27a-498d-9e66-59261f060102@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 15 Oct 2024 07:12:21 -0600
-Message-ID: <CAFLszTiaO0NqK+-qqnEB28+iqH0jh7bW_uFWW-eNG8vBWG15Xg@mail.gmail.com>
-Subject: Re: [PATCH v4 4/5] efi: Reserve some memory for initial use
-To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>
+Date: Tue, 15 Oct 2024 07:25:55 -0600
+Message-ID: <CAFLszTikKJ29TEzCQHBL1JfYz4b+O0eVps2Aa9_pMuwHBZgByA@mail.gmail.com>
+Subject: Re: [PATCH v6 12/12] test: efi: boot: Add a test for the efi bootmeth
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, u-boot@lists.denx.de, 
+ ilias.apalodimas@linaro.org, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,92 +92,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Mon, 14 Oct 2024 at 15:55, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 15 Oct 2024 at 05:36, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On Mon, Oct 14, 2024 at 03:50:51PM -0600, Simon Glass wrote:
-> > Hi Tom,
+> On 15.10.24 12:19, Mark Kettenis wrote:
+> >> Date: Mon, 14 Oct 2024 15:11:50 -0600
+> >> From: Tom Rini <trini@konsulko.com>
+> >>
+> >> On Mon, Oct 14, 2024 at 01:13:41PM -0600, Simon Glass wrote:
+> >>
+> >> [snip]
+> >>> Or perhaps just have a way to turn it off? I first sent this patch
+> >>> last November. It is just wrong to generate output like this which we
+> >>> don't want. There isn't even a test for it, so just add a way to
+> >>> disable it, and be done!
+> >>
+> >> I don't know that it's unwanted. As I'm trying to get Heinrich to
+> >> explain, _why_ does efi_setup_console_size need to exist, and do what it
+> >> does? This isn't the case of color-coding the output of tests as they
+> >> happen, there must be a reason we care about knowing the console size.
+> >> At that point we can figure out if the right answer is:
+> >> - Don't generate that check on serial ports, it's somewhere between
+> >>    misleading to wrong.
+> >> - text-based tests just need to expect and skip it because there's a
+> >>    good reason to need to know the console size and not just assume
+> >>    80x24.
+> >> - Something else we won't know until it's clearly explained why we do
+> >>    this.
 > >
-> > On Mon, 14 Oct 2024 at 15:42, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Mon, Oct 14, 2024 at 02:19:56PM -0600, Simon Glass wrote:
-> > > > Hi,
-> > > >
-> > > > On Fri, 11 Oct 2024 at 23:47, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > Hi Tom
-> > > > >
-> > > > > On Sat, 12 Oct 2024 at 04:27, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sat, Oct 12, 2024 at 12:01:54AM +0200, Heinrich Schuchardt wrote:
-> > > > > > >
-> > > > > > >
-> > > > > > > Am 11. Oktober 2024 23:21:25 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> > > > > > > >The 'point of cooperation' is where U-Boot starts allowing EFI to use
-> > > > > > > >memory outside of the U-Boot region. Until that point, it is desirable
-> > > > > > > >to keep more below U-Boot free for loading images.
-> > > > > > > >
-> > > > > > > >Reserve a small region for this purpose.
-> > > > > > >
-> > > > > > > Your commit message provides no clue why this should be needed.
-> > > >
-> > > > Yes, I hadn't realised that people didn't understand what I was
-> > > > getting at. Tom asked the same question on irc.
-> > > >
-> > > > It allows us to separate the lmb allocations from the EFI allocations,
-> > > > so we don't need to have them both in sync. We use lmb for loading
-> > > > images, then EFI takes over and does what it likes, respecting the
-> > > > existing lmb reservations.
-> > >
-> > > But, again, LMB is not for loading of images. It's for dealing with
-> > > memory reservations of various types.
+> > Sadly this is a misfeature of UEFI.  The EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL
+> > is required if console devices are supported by the UEFI
+> > implementation, and is built around the concept of "text mode" with a
+> > fixed number of character rows and columns.  That pretty much assumes
+> > there is some sort of terminal emulator on the other end.  And this is
+> > pretty much incompatible with anything that just want to log serial
+> > output.
 > >
-> > Up until recently, I believe, my statement was true, but in any case,
-> > this isn't gemaine to the issue here.
-> >
-> > The point is, this is a useful distinction, allowing us to avoid the
-> > complexity of keeping them in sync, and avoid putting this pain on
-> > people who are not using EFI. We are either in U-Boot code, in which
-> > case lmb rules, or we are going into an app, in which case EFI rules
-> > (but must read in the lmb info).
-> >
-> > We are going to end up with people turning off EFI_LOADER because it
-> > behaves so badly.
+> > I think it is possible to do better though.  Instead of calling
+> > efi_setup_console_size() in efi_init_obj_list(), we could postpone
+> > this until the application makes a call that requires us to know the
+> > size.  This would mean that a simple EFI application that just uses
+> > EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.OutputString() (such as the Hello
+> > world EFI application or the OpenBSD EFI bootloader) wouldn't have to
+> > do the size query.
 >
-> Frankly, in hind sight I should not have agreed to split the LMB rework
-> between "everything else" and "EFI" in hopes that we would then be able
-> to get the "EFI" part of this agreed upon. It's "behaving badly" right
-> now because we merged half of the changes in the hopes that we could get
-> your agreement on the rest of them fairly quickly. This is not
-> happening, however.
+> The implementation of EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.OutputString()
+> needs to know the output size to update the cursor position in
+>
+>    EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.MODE.CursorColumn
+>    EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.MODE.CursorRow
+>
+> The EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL is passed to the entry point of any
+> EFI application via the system table.
+>
+> We could delay the invocation of efi_setup_console_size() to the launch
+> of the first EFI application (efi_start_image()).
 
-Well, another option would be to revert the problem patch (or two) and
-do this work with careful consideration of the impacts, taking account
-of my architectural objections. My main concern is using U-Boot's
-memory like a stack. Suddenly this is 'OK' and we apparently want to
-update U-Boot's docs to say so. It is just not a good idea!
-
-A good part of the reason that U-Boot solves the problems it does is
-that it mostly has a good design. The EFI_LOADER can be improved and
-it does not need to implement things in a particular way...it just
-needs to follow the spec. We are being far too rigid in saying that
-every memory allocation at every stage has to be handled the same way,
-etc.
-
-That said, I did not expect the first series to cause problems. If my
-EFI-test series had landed then we could perhaps have added a test for
-this case of the app requesting a chunk of memory. My hope is for that
-test to grow and cover some of these areas, I hope this lmb/efi thing
-doesn't cause further problems and I will be looking to ensure that
-this code does not affect non-EFI booting negatively.
-
-My series to solve this same problem (EFI's use of memory) have never
-been more than a few small patches. Please take a look at the current
-series[1], particularly patch 5.
+That's a start, but I think the right answer here is to use my flag
+and in efi_setup_console_size() don't call query_console_serial() if
+the flag is set. Then the default (80x25) will be returned, which is
+fine for the test which is the subject of this series.
 
 Regards,
 Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=427729
