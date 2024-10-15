@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9026ED216A2
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 13:33:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CF2DD216A2
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 13:34:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AAF5888BE;
+	by phobos.denx.de (Postfix) with ESMTP id C7604889AA;
 	Tue, 15 Oct 2024 15:33:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FNv4mAWP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C5QJp41e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D77A28837D; Tue, 15 Oct 2024 15:33:17 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 16D9688875; Tue, 15 Oct 2024 15:33:19 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3D4F88770
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:33:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CDD748878A
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:33:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-83a9317f93dso10803139f.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:33:15 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-8378db14280so276589639f.1
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:33:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728999194; x=1729603994; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728999195; x=1729603995; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NP1G0ykEyLjM8jqeNgbZDV28Sv5JVYcBgXWUbVmnPdg=;
- b=FNv4mAWP6/Si9gw/3bgDNI61Rp2v26Sko9eCcPI2oNEEgOIfwudV2pBVAQk2hRtSqh
- OZt1e3qN3b1IKzHNJVguGS7fW1STenCPXOfTEPFDhDn02fpRfKznXaupjiIS21WTLwLG
- IkVj9rMB1EMsX6zPiTpnssER25uWz6J0+eY4I=
+ bh=pj81dmftPRkBx5NJR1Io70OJU6U74m9lgfFwQnIFbiw=;
+ b=C5QJp41evWbUV305pmK0+zASRgcknHayFQqRB2Ywq6FXBhfMALWUcv6o12TKHxtzeC
+ F+QyKJu/8u8veWJjXDE1SymiNmdlUeG+fENp92DVyCT9GthFhrHYdj8Yv6MpaZMyy4FQ
+ wPTxyA4R5GwJCKXffDdYdmrsVrm40qYeTtFzI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728999194; x=1729603994;
+ d=1e100.net; s=20230601; t=1728999195; x=1729603995;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NP1G0ykEyLjM8jqeNgbZDV28Sv5JVYcBgXWUbVmnPdg=;
- b=M5GSiiYbrUmwa3joVHmRnKDmK0rEb4U5aJX+0KfHrarAfOMPAjEnfJrwymMLSRyOw3
- ddL2Qsbai2p7kH7CYdlHBfIWxa0MtQmzbntE+so4ocidP0sG7X8qUSI3OBOxYUkIItla
- rCRiqYQ6orDqzz2Lv5t7vqW06EcrrGqXXfDM0IMceFiMlMVoW+wVTXw6gZFvcTMFEaUy
- F0l3ibtsBcmIK4kRqOoJ6GhN7GUtwXVlMtFrW2jO6y7Z7EcIMOsQxQUsbGLbm0nu23/G
- OYzT5jjVl6QA++V1ALVCnRCj4LahhcTY+xkl9zcT0SUFFZBAsiVnoNZxSRmbkVWbs9QC
- KoJA==
-X-Gm-Message-State: AOJu0Yy0+R3jCH2luttOwBTARVBYQz4hT2fOy+PWdSCRG2xDAOp0LdSl
- kgmy92mQ4yr977+7fWw+VO2aLpTg5X3qra815McjtOF8YwJFFV5gQHvCTRFP8Selugum+JzIMOC
- Hiw==
-X-Google-Smtp-Source: AGHT+IHbOocnUWFeW4GKf9dlrJ72495sOxRa9e/yt40TOGA+ZFr1WHxeNUaMM6BeHc+HRdbDzy1Bew==
-X-Received: by 2002:a05:6602:2dc3:b0:82a:34da:72f7 with SMTP id
- ca18e2360f4ac-83a64db8b35mr728083239f.16.1728999194151; 
- Tue, 15 Oct 2024 06:33:14 -0700 (PDT)
+ bh=pj81dmftPRkBx5NJR1Io70OJU6U74m9lgfFwQnIFbiw=;
+ b=U9i6J0CuVSwYDUIj+iCVPJARDXogVA6+FdYWROY4hpWFwzcmqav1EesmPqAFbVDFvo
+ vIG12Q9xZuEeWDC/ukyP4hak78KcMDBeMHbXAaxCjx5kOx9C1HaQYVP4BSANkzZBdaJ5
+ eSElBgvSpdYtHS864L7qyGusjYXefuCqViEfrPLA6Xh/DAnJ0hxDAMRDoRLL0wYHJyyG
+ h00kxosw+I4liwgBK8KrXHYDQQBKBmB9SpvxtGEa/pXKjna/o1m/zju+Ufz/HSm6TSiX
+ YyNgj13SZWsh+zchlRViMJiSD4rrJ/vIT3T6jp4F2mjh6ObmBOiBXZaAAXKpwcHHkqtK
+ d6Fw==
+X-Gm-Message-State: AOJu0Yw8e2tWZzS7TsAJzMZqm+D4dmLusXjgT2sCAdCu0UMP7YmXrq20
+ wX+ioTwmSis2FQZGf23SIUEgLJy9q19KqrbgW1/maUJAfpjrIUa17BSeghxWA6gCtaS+5gniKw+
+ WCQ==
+X-Google-Smtp-Source: AGHT+IFutvo5uhr0LEi+UQVm8ZEHrKAsMF7sK2as5A9kS068gMRGZHFUaM3l7RH9QDLhU4xFR14BSw==
+X-Received: by 2002:a05:6602:482:b0:835:46cb:6747 with SMTP id
+ ca18e2360f4ac-83a9440a573mr80524639f.4.1728999195471; 
+ Tue, 15 Oct 2024 06:33:15 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-83a8b28bed6sm29794939f.8.2024.10.15.06.33.13
+ ca18e2360f4ac-83a8b28bed6sm29794939f.8.2024.10.15.06.33.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 06:33:13 -0700 (PDT)
+ Tue, 15 Oct 2024 06:33:15 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Devarsh Thakkar <devarsht@ti.com>, Jonas Karlman <jonas@kwiboo.se>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Johan Jonker <jbx6244@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: [PATCH v3 5/7] bootstage: Allow counting memory without strings
-Date: Tue, 15 Oct 2024 07:33:02 -0600
-Message-Id: <20241015133304.2874735-6-sjg@chromium.org>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Subject: [PATCH v3 6/7] cmd: Move meminfo command into its own file
+Date: Tue, 15 Oct 2024 07:33:03 -0600
+Message-Id: <20241015133304.2874735-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241015133304.2874735-1-sjg@chromium.org>
 References: <20241015133304.2874735-1-sjg@chromium.org>
@@ -95,94 +96,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bootstage array includes pointers to strings but not the strings
-themselves. The strings are added when stashing, but including them in
-the size calculation gives an inflated view of the amount of space used
-by the array.
-
-Update this function so it can return the amount of memory used by the
-bootstage structures themselves, without the strings which they point
-to.
+In preparation for expanding this command, move it into a separate file.
+Rename the function to remove the extra underscore. Update the number of
+arguments to 1, since 3 is incorrect.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- common/board_f.c    |  2 +-
- common/bootstage.c  | 16 +++++++++-------
- include/bootstage.h |  5 +++--
- 3 files changed, 13 insertions(+), 10 deletions(-)
+Changes in v2:
+- Split into its own patch
 
-diff --git a/common/board_f.c b/common/board_f.c
-index a87411ee350..98dc2591e1d 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -582,7 +582,7 @@ static int reserve_fdt(void)
- static int reserve_bootstage(void)
- {
- #ifdef CONFIG_BOOTSTAGE
--	int size = bootstage_get_size();
-+	int size = bootstage_get_size(true);
+ cmd/Kconfig   |  1 +
+ cmd/Makefile  |  1 +
+ cmd/mem.c     | 19 -------------------
+ cmd/meminfo.c | 26 ++++++++++++++++++++++++++
+ 4 files changed, 28 insertions(+), 19 deletions(-)
+ create mode 100644 cmd/meminfo.c
+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 37894eb80d6..2fd29e9fa88 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -878,6 +878,7 @@ config MD5SUM_VERIFY
  
- 	gd->start_addr_sp = reserve_stack_aligned(size);
- 	gd->boardf->new_bootstage = map_sysmem(gd->start_addr_sp, size);
-diff --git a/common/bootstage.c b/common/bootstage.c
-index dd6aed7c2fd..c7bb204501a 100644
---- a/common/bootstage.c
-+++ b/common/bootstage.c
-@@ -520,17 +520,19 @@ int _bootstage_unstash_default(void)
- }
+ config CMD_MEMINFO
+ 	bool "meminfo"
++	default y if SANDBOX
+ 	help
+ 	  Display memory information.
+ 
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 21d376309b9..b630756a629 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -110,6 +110,7 @@ obj-$(CONFIG_CMD_LOG) += log.o
+ obj-$(CONFIG_CMD_LSBLK) += lsblk.o
+ obj-$(CONFIG_CMD_MD5SUM) += md5sum.o
+ obj-$(CONFIG_CMD_MEMORY) += mem.o
++obj-$(CONFIG_CMD_MEMINFO) += meminfo.o
+ obj-$(CONFIG_CMD_IO) += io.o
+ obj-$(CONFIG_CMD_MII) += mii.o
+ obj-$(CONFIG_CMD_MISC) += misc.o
+diff --git a/cmd/mem.c b/cmd/mem.c
+index 4d6fde28531..9e716776393 100644
+--- a/cmd/mem.c
++++ b/cmd/mem.c
+@@ -1379,17 +1379,6 @@ U_BOOT_CMD(
+ 
  #endif
  
--int bootstage_get_size(void)
-+int bootstage_get_size(bool add_strings)
- {
--	struct bootstage_data *data = gd->bootstage;
--	struct bootstage_record *rec;
- 	int size;
--	int i;
+-#ifdef CONFIG_CMD_MEMINFO
+-static int do_mem_info(struct cmd_tbl *cmdtp, int flag, int argc,
+-		       char *const argv[])
+-{
+-	puts("DRAM:  ");
+-	print_size(gd->ram_size, "\n");
+-
+-	return 0;
+-}
+-#endif
+-
+ U_BOOT_CMD(
+ 	base,	2,	1,	do_mem_base,
+ 	"print or set address offset",
+@@ -1433,14 +1422,6 @@ U_BOOT_CMD(
+ );
+ #endif /* CONFIG_CMD_MX_CYCLIC */
  
- 	size = sizeof(struct bootstage_data);
--	for (rec = data->record, i = 0; i < data->rec_count;
--	     i++, rec++)
--		size += strlen(rec->name) + 1;
-+	if (add_strings) {
-+		struct bootstage_data *data = gd->bootstage;
-+		struct bootstage_record *rec;
-+		int i;
+-#ifdef CONFIG_CMD_MEMINFO
+-U_BOOT_CMD(
+-	meminfo,	3,	1,	do_mem_info,
+-	"display memory information",
+-	""
+-);
+-#endif
+-
+ #ifdef CONFIG_CMD_RANDOM
+ U_BOOT_CMD(
+ 	random,	4,	0,	do_random,
+diff --git a/cmd/meminfo.c b/cmd/meminfo.c
+new file mode 100644
+index 00000000000..bb9bcec2e3f
+--- /dev/null
++++ b/cmd/meminfo.c
+@@ -0,0 +1,26 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2024 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ */
 +
-+		for (rec = data->record, i = 0; i < data->rec_count; i++, rec++)
-+			size += strlen(rec->name) + 1;
-+	}
- 
- 	return size;
- }
-diff --git a/include/bootstage.h b/include/bootstage.h
-index 57792648c49..3300ca0248a 100644
---- a/include/bootstage.h
-+++ b/include/bootstage.h
-@@ -371,9 +371,10 @@ int bootstage_unstash(const void *base, int size);
- /**
-  * bootstage_get_size() - Get the size of the bootstage data
-  *
-+ * @add_strings: true to add the size of attached strings (for stashing)
-  * Return: size of boostage data in bytes
-  */
--int bootstage_get_size(void);
-+int bootstage_get_size(bool add_strings);
- 
- /**
-  * bootstage_init() - Prepare bootstage for use
-@@ -444,7 +445,7 @@ static inline int bootstage_unstash(const void *base, int size)
- 	return 0;	/* Pretend to succeed */
- }
- 
--static inline int bootstage_get_size(void)
-+static inline int bootstage_get_size(bool add_strings)
- {
- 	return 0;
- }
++#include <command.h>
++#include <display_options.h>
++#include <asm/global_data.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++static int do_meminfo(struct cmd_tbl *cmdtp, int flag, int argc,
++		       char *const argv[])
++{
++	puts("DRAM:  ");
++	print_size(gd->ram_size, "\n");
++
++	return 0;
++}
++
++U_BOOT_CMD(
++	meminfo,	1,	1,	do_meminfo,
++	"display memory information",
++	""
++);
 -- 
 2.34.1
 
