@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 338C9CFC280
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 10:02:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA90ECFC280
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 10:07:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F69C8907E;
-	Tue, 15 Oct 2024 12:02:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 398D488E36;
+	Tue, 15 Oct 2024 12:07:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LrDZGSm6";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="yuWPp/yv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66C3F88E36; Tue, 15 Oct 2024 12:02:25 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 4991588EA7; Tue, 15 Oct 2024 12:07:42 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BA4488D54
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 12:02:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4C2088D54
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 12:07:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4311d972e3eso30096705e9.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 03:02:23 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43115887867so35268555e9.0
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 03:07:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728986543; x=1729591343;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728986859; x=1729591659;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=QAGDzmbJsme3obHDeDPZfS4Zs/uLjzb8ndw4eKtjWp0=;
- b=LrDZGSm6j48+DvIi7F3ZUiMtkqwd/Yqkb6K2peFAz9vzcZv+xFwquqsNs02pseHmOj
- XPc8i2B9EVHBFeG3PhQ3HDoPD+mJ03XP783AcFtDNK1PtjbMe/AGSDjA9pyr9fmsWJOQ
- PsA6DXNv09JLwR0aommnsyEnkRgKLN9MMVFsojVvI1t9MRVMpryricFlDn3E97Go7tWQ
- TWPjKpL8u91ah7zK/LNj8mZIYbRclaxkHNoJJGOoqm8tPY7W2NdZQk7BdQv0cZPjYmdR
- UUj3+6kB0m0hnhMA4cyoZLza3BsDxXx4tggR7PEf38lSrW1FfUItRX0hs2u7wLciCGD6
- +zmw==
+ bh=YSXmGEx1JDlzXyiqRJNF6MJAOIWiiO9ZbThX+HFjQP0=;
+ b=yuWPp/yvPusVoMzhCHlRwt5ZSbenolEjx+HjGKo9ROfL7EcR8ukGW0UfaT3f1Tk7U7
+ 9MeD1GEwh+cVb3uGdygFUW5Zp+k27d6kQ1sLhAz3+xHySYjuagojJEzE/KXBmPWLLKah
+ Fx5637JUy9AGJ4rTKfyqf4sFgjNxCxq5pORDjXnqdNusva+i84uhHuZA6LbY6P4Zv7JS
+ gtMWJLV/WGVtkJrRyxMcNLpq17Ex5eeOBWECbMCmLxYcXuNJybD+WxmPPfnz9D7EOxPD
+ ebqyBTPDJ8sMn+dhPr49K/8JQlse2GITKyAO03KQFNYZ7HMQQTg3zPJQRLTFFdZAFXdq
+ Rqgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728986543; x=1729591343;
+ d=1e100.net; s=20230601; t=1728986859; x=1729591659;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QAGDzmbJsme3obHDeDPZfS4Zs/uLjzb8ndw4eKtjWp0=;
- b=wZ0ES7g7KSrLHpCMZBE7UDf62efoSBM9qZ3ERDHZDZfmEnM6D/qiyGEWGjierKqnHX
- nl9fDcYM1ZzJI6In+EoPA4M9dnedQ6irrmyhddUDOuVs0vo2A5l7zMIZKQMhIFT7XOa5
- NO+2bqcEYgMco4TVe0AlbZn3KcFBJgXCJDD8RjNd2CCOp4C1gc3eCkGCIUO5dIn7ETbQ
- 37YWiDrPo90M6pJIgb9g2Y8KAfLX/DVdM5xyqCYdHfU7GQoMfTIBP79anwokstK+xrM3
- p6WvYbK9ojiBMwdmLjgfTEIn+7A5IZbdZX2zLzs3X41WNg1neCICEpWcpTc7LwJTxHnX
- 72JQ==
+ bh=YSXmGEx1JDlzXyiqRJNF6MJAOIWiiO9ZbThX+HFjQP0=;
+ b=fjMT4faqTgOlZE/7xwcIUCdz/+DwqzssizZi6lSUM6x/CMEUhfpUMzGvBFhKrDn0OX
+ BMkK7B2+2WrEFuwT5ZXtnX68ni1Icru+i8VkUskUJ6Cq6I3I91DZmU7hIqEPMHBaWEFk
+ cI4g9AOFl9T9VaMRmifaU8HrRO/Zgj2R1dTn5z1SR9QyYvCgaZSWLUBm/R/IQ0O5srJG
+ Rpjo0zMVMaW5xnLu3f6V3ZePNywvDH+hryJIePQ4zlnjbbfIaQB9zGsjRtDwMJJkadSO
+ FMeg4DOYUQNCNKNrP79qov1G/L3W6kCbGzjWVFmDFifrPxo6nst1gisBbBjM6FjEaiGF
+ blHA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUOikZpyF8bqNxpAyVh5Je2fCd08JmSRCkA7K+r/99oYJQaT6/Nd2qYpgTzwEotwmiUxTbaHCA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz3rWMhM4p1ITNM3nybPMW0SOWRYiuLt+dmEm12RlNjE5SVLdWK
- yB8fMC74u1dy2eRYGByS2QI1jOd1CjvnZunPQa6//00/008r3/n5fWKNoRx+FhU=
-X-Google-Smtp-Source: AGHT+IHe7fZYJfDX9Su5piJRRhsktJdbTTT151JVWJuDfZVst32EJFdb10KQBvRnbdZiTiQtGkAlxA==
-X-Received: by 2002:a05:600c:8714:b0:426:6326:4cec with SMTP id
- 5b1f17b1804b1-431256199cdmr93068025e9.29.1728986542658; 
- Tue, 15 Oct 2024 03:02:22 -0700 (PDT)
+ AJvYcCVRs2OzY4BAxbFOy5lObrr0oCOc5hS2UxvwzLNQKTnT/tL79/EkmxsQ6tvjpS7l97NJRfAir9I=@lists.denx.de
+X-Gm-Message-State: AOJu0YyiHHTT1TZMvjbi48wVOwt97ofbnXVnxq7lJkxCExc6N2ppzI9V
+ texT7PcSSDu5d1H1kZ1/hFOP4iZGdzNv/9i0YoVT9pAgVDNUBfV/CeDDuJIkOV0=
+X-Google-Smtp-Source: AGHT+IGZL1cL+qSGNRWMgSMe+lpeGQ6nsEbNfEVX3p2rR29YUtmjN8NtDQWObQtIczyMbtpvoeUzVA==
+X-Received: by 2002:a05:600c:3505:b0:431:45b9:9983 with SMTP id
+ 5b1f17b1804b1-43145b9a1e8mr5621565e9.17.1728986859276; 
+ Tue, 15 Oct 2024 03:07:39 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4313f6c4a0dsm12802425e9.40.2024.10.15.03.02.21
+ 5b1f17b1804b1-4313f6c5d14sm12965705e9.41.2024.10.15.03.07.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 03:02:22 -0700 (PDT)
+ Tue, 15 Oct 2024 03:07:38 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Sean
- Anderson <seanga2@gmail.com>
-Subject: Re: [PATCH] test: Drop mention of old flags in a comment
-In-Reply-To: <20241014201753.1902999-1-sjg@chromium.org>
-References: <20241014201753.1902999-1-sjg@chromium.org>
-Date: Tue, 15 Oct 2024 12:02:19 +0200
-Message-ID: <87plo1zntg.fsf@baylibre.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Judith Mendez <jm@ti.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] TI: include: env: ti_common: move fdtoverlay_addr_r to
+ fix ramdisk size
+In-Reply-To: <20241015000250.GI53053@bill-the-cat>
+References: <20241011000322.538287-1-jm@ti.com>
+ <87zfnafy2e.fsf@baylibre.com> <20241015000250.GI53053@bill-the-cat>
+Date: Tue, 15 Oct 2024 12:07:33 +0200
+Message-ID: <87msj5znkq.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -91,68 +93,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Tom,
 
-Thank you for the patch.
+On lun., oct. 14, 2024 at 18:02, Tom Rini <trini@konsulko.com> wrote:
 
-On lun., oct. 14, 2024 at 14:17, Simon Glass <sjg@chromium.org> wrote:
-
-> A comment in test-main.c was not updated with the recent rename. Fix it.
+> On Fri, Oct 11, 2024 at 05:39:53PM +0200, Mattijs Korpershoek wrote:
+>> Hi Judith,
+>> 
+>> Thank you for sending this patch.
+>> 
+>> On jeu., oct. 10, 2024 at 19:03, Judith Mendez <jm@ti.com> wrote:
+>> 
+>> > From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> >
+>> > When booting Android with adtbo_idx set, we observe the
+>> > following crash:
+>> 
+>> In upstream/master, this is no such thing as adtbo_idx.
+>> 
+>> This is only present in TI's U-Boot fork, via commit [1]
+>> 
+>> [1] https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2024.04&id=1c6cf852b8b8f869d2c5e39eb071ec3025bf739a
+>> 
+>> >
+>> >    ** Booting bootflow 'mmc@fa10000.bootdev.whole' with android
+>> >    ## Booting Android Image at 0x82000000 ...
+>> >    Kernel load addr 0x92000000 size 20195 KiB
+>> >    Kernel extra command line: console=ttyS2,115200 cma=768M 8250.
+>> > 	nr_uarts=10 printk.devkmsg=on init=/init quiet firmware_class.
+>> > 	path=/vendor/firmware mem_sleep_default=deep bootconfig
+>> >    RAM disk load addr 0x88080000 size 16901 KiB
+>> >    "Synchronous Abort" handler, esr 0x96000005, far 0x155b104c8
+>> >    elr: 0000000080808560 lr : 0000000080808558 (reloc)
+>> >    elr: 00000000ffebf560 lr : 00000000ffebf558
+>> >    x0 : 00000000fff99000 x1 : 00000000fff9553c
+>> >    x2 : 000000000000000a x3 : 0000000002800000
+>> >    x4 : 0000000002800000 x5 : 0000000000000020
+>> >
+>> > This happens because the memory at fdtoverlay_addr_r is bogus.
+>> > In fact:
+>> >
+>> > => printenv fdtoverlay_addr_r
+>> > fdtoverlay_addr_r=0x89000000
+>> >
+>> > And the ramdisk address range is:
+>> > [0x88080000; 0x88080000 + 16901 KiB]
+>> >
+>> > Which is equal to:
+>> > [0x88080000; 0x89101400]
+>> >
+>> > So, if we represent the addresses:
+>> > fdtaddr             0x88000000
+>> > ramdisk             0x88080000
+>> > fdtoverlay_addr_r   0x89000000
+>> > ramisk (end)        0x89101400
+>> >
+>> > We see that fdtoverlay_addr_r in fact has been overridden by
+>> > the Android ramdisk.
+>> >
+>> > The maximum ramdisk size is 0x1080000 (15,5 MiB) and a compressed
+>> > Android vendor ramdisk is 15MiB:
+>> > $ file vendor_ramdisk.img
+>> > vendor_ramdisk.img: LZ4 compressed data (v0.1-v0.9)
+>> > $ du -sh vendor_ramdisk.img
+>> > 15M     vendor_ramdisk.img
+>> >
+>> > When it gets decompressed, it uses 16.5MiB, exceeding the
+>> > maximum ramdisk size.
+>> >
+>> > Increase the maximum ramdisk size to 20.5MiB by moving
+>> > fdtoverlay_addr_r higher up in the address space to fix the crash.
+>> 
+>> I do think that reserving more room between the fdtoverlay_addr_r and
+>> the ramdisk address is probably a good idea for Linux as well, but I
+>> think that the commit message might need a rewrite ?
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Sorry for the slow reply here. This is I think a case where someone
+> needs to step back and think about all of the addresses again, and how
+> much gap should be between areas, along with just how big some areas can
+> grow to be. There should be some upper reasonable bound on overlays, and
+> it will be safer long term I believe to have that above the device tree
+> and below the ramdisk. Placing things above the ramdisk always results
+> in pain as there's always some new larger image for some valid use case.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+ACK.
 
-> ---
 >
->  test/test-main.c | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
->
-> diff --git a/test/test-main.c b/test/test-main.c
-> index 479dbb33b72..ed100eda847 100644
-> --- a/test/test-main.c
-> +++ b/test/test-main.c
-> @@ -294,27 +294,27 @@ static int test_pre_run(struct unit_test_state *uts, struct unit_test *test)
->  	 * Remove any USB keyboard, so that we can add and remove USB devices
->  	 * in tests.
->  	 *
-> -	 * For UT_TESTF_DM tests, the old driver model state is saved and
-> +	 * For UTF_DM tests, the old driver model state is saved and
->  	 * restored across each test. Within in each test there is therefore a
->  	 * new driver model state, which means that any USB keyboard device in
->  	 * stdio points to the old state.
->  	 *
-> -	 * This is fine in most cases. But if a non-UT_TESTF_DM test starts up
-> +	 * This is fine in most cases. But if a non-UTF_DM test starts up
->  	 * USB (thus creating a stdio record pointing to the USB keyboard
->  	 * device) then when the test finishes, the new driver model state is
->  	 * freed, meaning that there is now a stale pointer in stdio.
->  	 *
-> -	 * This means that any future UT_TESTF_DM test which uses stdin will
-> +	 * This means that any future UTF_DM test which uses stdin will
->  	 * cause the console system to call tstc() on the stale device pointer,
->  	 * causing a crash.
->  	 *
-> -	 * We don't want to fix this by enabling UT_TESTF_DM for all tests as
-> +	 * We don't want to fix this by enabling UTF_DM for all tests as
->  	 * this causes other problems. For example, bootflow_efi relies on
->  	 * U-Boot going through a proper init - without that we don't have the
->  	 * TCG measurement working and get an error
->  	 * 'tcg2 measurement fails(0x8000000000000007)'. Once we tidy up how EFI
->  	 * runs tests (e.g. get rid of all the restarting of U-Boot) we could
-> -	 * potentially make the bootstd tests set UT_TESTF_DM, but other tests
-> +	 * potentially make the bootstd tests set UTF_DM, but other tests
->  	 * might do the same thing.
->  	 *
->  	 * We could add a test flag to declare that USB is being used, but that
-> @@ -323,7 +323,7 @@ static int test_pre_run(struct unit_test_state *uts, struct unit_test *test)
->  	 * pointers always.
->  	 *
->  	 * So just remove any USB keyboards from the console tables. This allows
-> -	 * UT_TESTF_DM and non-UT_TESTF_DM tests to coexist happily.
-> +	 * UTF_DM and non-UTF_DM tests to coexist happily.
->  	 */
->  	usb_kbd_remove_for_test();
->  
 > -- 
-> 2.34.1
+> Tom
