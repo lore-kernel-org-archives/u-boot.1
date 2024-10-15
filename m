@@ -4,92 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C8B5CFC264
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 03:47:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46119CFC263
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 04:09:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 778C388E89;
-	Tue, 15 Oct 2024 05:47:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7DF6588FA4;
+	Tue, 15 Oct 2024 06:09:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FIe0Y27j";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZYEN2ad1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D389288EFE; Tue, 15 Oct 2024 05:47:30 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 8EEC088FF6; Tue, 15 Oct 2024 06:09:12 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83CF788AE7
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 05:47:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0255988F24
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:09:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2e2c6bc4840so3483469a91.2
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 20:47:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=tkuw584924@gmail.com
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-20c70abba48so31898775ad.0
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 21:09:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728964047; x=1729568847; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aWrz6+b+God22Uc+ZtPtttLDAwcMitsBFmUPNGCiJgQ=;
- b=FIe0Y27j7ecqX1j9lpwc9k4PC8XlQu17zd+xrBLo2M1s3zNqHAPoxE1NObHAPX5Zpf
- Z/I1jf1tmMIKnBzBEP0kqsE2wJXlblwAMYmLcKGg7429Vp6SVXFc5XtBCDdWtgQ+qWsM
- YuL6xJ7eZI4y0sAJxWV2+1iyhjzT+jprQUjVlw3dLdwMPVgIGgPTKH2VOhBThoIOKab5
- 46SucPIbKWkr7+cAuOSW+uZQaOY6iMBeetZBoc77ePohYTwUUpGs8xKbuBhrNV5s1hdp
- Ub7VVPZgeayQ9EcB3QxJ2h1rP3xsKG2iXocLCAe5xIDdt26WF2NgSl/btohW3CwRZKeH
- +9Rg==
+ d=gmail.com; s=20230601; t=1728965348; x=1729570148; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sl9GY7CTADUe9fPzsEMnq9jRL9hwtz8uStu3jqzsWUQ=;
+ b=ZYEN2ad1WxkZbvjmZWeRv+YMndpFilywpDH8f/cbv6p+RcwCBr9dNWHevBHrlODEuM
+ 9Wv8hHBLrX/te+UMbAgog8zutLN+l+C2KghrjXJfyM+OzR/QKvkjhyEdm4zIrzCIMjjG
+ LAGxbH5TbgaM5bLBmkj5s83vYV3w7/QlKJ2H0lUZsyyVwqMk6sbcl7+SMJwgAx8f84q3
+ Xe05ZnJ4SjB48cTAQl65KR+eEzSflaz1nHtBanWqCZ+/7S02mmgLwmn/kqA4x57+4xvH
+ oDSX0Q1nuJMiUYU50OjxA9s6u6+yvPdar79wdNXxBhspTaeBlEjSHu1KQaVB7gG2FC0L
+ xY6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728964047; x=1729568847;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1728965348; x=1729570148;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aWrz6+b+God22Uc+ZtPtttLDAwcMitsBFmUPNGCiJgQ=;
- b=fGogVSuHZa+XuK29sffPdOXdRJnXTWZ/XH3BkZN78IwSlWP4re0Gq4nEJYHQ9feRq4
- Zdcoy4fA1ySshfdmoqrREbPFhK6JaIzVEbdR8Mw7SukuhWWIrwrZHWNuisYB6Kpz2XvM
- HNrfNNg64PjWZVJMzIfGYpeLBz5gumCFfdFuT0nru+th5K3dxo7bQxCUX3de5b+h3s6J
- QpWqSEA3yl5ZOqzpGLUzMAqLTaYn0zrSQLN4HBzw0vbyig8lDBX7Q8Hjcn8lu7h9Etxk
- ClWCDg9iA8JYuUAKNvM/Bc6CIG/gGraQO7pj5Gka9zmLzNdFQYfgSsGCbE+eQUDG4cox
- p+DA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXHZUv7sgargfbBtsuKHwRgtFr35wiKPSjF9wWywYmfQN2G7nC7SQxucnEdEOHKSYeK3UMb+B0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy4NFk3yk33Y3YikoXidkm5sFC3jxZu0ekD0eU+b4T7V+sImRQq
- 1SK9gcTrY/vBfWOJtAkjiLV9TwVZXckMosF9SGrZOBEUE/aE1W+xOXOSRp19v9GHaIMZN/PeYAo
- AsMqZdZk9Bw7bydxA2fTYdCKQDCsCL3HzMKhzOQ==
-X-Google-Smtp-Source: AGHT+IG2Y0ElBWk/T5DnGnbwFqptwOL5tBZjIT6zBkvibvPPVo7buyxxWZxEHXGc1ELytMKHCqvoztow+09MixRPMxA=
-X-Received: by 2002:a17:90b:4b8b:b0:2e2:9077:a3b4 with SMTP id
- 98e67ed59e1d1-2e3151b8a44mr13530127a91.7.1728964046875; Mon, 14 Oct 2024
- 20:47:26 -0700 (PDT)
+ bh=sl9GY7CTADUe9fPzsEMnq9jRL9hwtz8uStu3jqzsWUQ=;
+ b=C2S2pCaoqHEMHzWe6dKXgcijeOtNRku+s6w4tMWS2R0/RQgl+V3MYsKYmxUugHJIP/
+ YgoJyUfI72RFq9/wF8Hy+9TWkJcW5xT54JIoYRQ8j/mRFKt71Au0itBZCTPXAxP1jm78
+ 2qLSU7PFWlFjlXkKQoQP+ThsamJhb2nsYht9E27Er1z1S3PlYjdS4jfLv1Cp/LmZVeY/
+ DHNmFkx5JoDitsiOlUlep0yq69iOlh3HM4GlxhWVjNtSa/fgAqhlwEFSgYioTADXrm/e
+ aKCiCQnPNyxE2EFcoQwP8V3sLZpx44qPW/Qq7uQluebcU8cykAfWW+f60h7GLLGKVpCk
+ OgPg==
+X-Gm-Message-State: AOJu0YzP11awDAnEKKmwC+dYiaJrZcQXCkzBAmLYs47ysiiCGHUDLS+q
+ 4sUqVkWN/v1uUZvcqpCvs7Ij/O4bHn08CZnOplhuWPoseRSf18mu21h3NQIB
+X-Google-Smtp-Source: AGHT+IE8ea3W+pYG+helRO0QYXKxBtKSrEkWKJMDkxSbOKAsaYKCWUsW+Q7Fk2QMm2WD9opDTQMNKg==
+X-Received: by 2002:a17:902:d4cb:b0:20c:e2ff:4a2e with SMTP id
+ d9443c01a7336-20ce2ff4bcdmr119884365ad.53.1728965348405; 
+ Mon, 14 Oct 2024 21:09:08 -0700 (PDT)
+Received: from ISCN5CG2520RPD.infineon.com (sp49-98-220-86.msd.spmode.ne.jp.
+ [49.98.220.86]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-7ea9c6ba2a8sm357500a12.6.2024.10.14.21.09.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Oct 2024 21:09:07 -0700 (PDT)
+From: tkuw584924@gmail.com
+X-Google-Original-From: Takahiro.Kuwano@infineon.com
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, jagan@amarulasolutions.com, vigneshr@ti.com,
+ tudor.ambarus@linaro.org, pratyush@kernel.org, tkuw584924@gmail.com,
+ Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Subject: [PATCH v3 0/6] mtd: Make sure UBIFS does not do multi-pass page
+ programming on flashes that don't support it
+Date: Tue, 15 Oct 2024 13:08:30 +0900
+Message-Id: <cover.1728964655.git.Takahiro.Kuwano@infineon.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20241009015020.25817-1-sjg@chromium.org>
- <20241009015020.25817-7-sjg@chromium.org>
- <CAC_iWjKh7_OKKMi9K6eMaiYUN-Nxf+ZQ0NuW9BYzK3u4F0Krcg@mail.gmail.com>
- <CAFLszTjBQaoF9g0nky5mAA429gzA8QvzjxHxooDaRo1=BB+stg@mail.gmail.com>
- <20241009223907.GN14210@bill-the-cat>
- <CAC_iWjK8Bb16aLAKtmYB0Aof4CJP-AAdsMTEYvnFeMeXaiWM9w@mail.gmail.com>
- <CAFLszThoXsWuPu=b+FT0wuURR1rxTE6RWZhUhET9mHbQ+j63ZA@mail.gmail.com>
- <CAC_iWjKKqsJh7yUv-kRe5WiGA02c4YU4Yj83UXVXjki+CO9X1Q@mail.gmail.com>
- <CAFLszTi_CqDY2+RMRo+hJLsCtn6vQHHoeBvT8g-czL7OQAXw0g@mail.gmail.com>
- <20241014210707.GW53053@bill-the-cat>
-In-Reply-To: <20241014210707.GW53053@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 15 Oct 2024 06:46:50 +0300
-Message-ID: <CAC_iWjK4JXsTgbNHVryjkD0E+swcScn2rrsKTLedscf7dGmZTQ@mail.gmail.com>
-Subject: Re: [PATCH 6/6] cmd: Add a command to show the memory map
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>,
- Emil Kronborg <emil.kronborg@protonmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,62 +92,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Oct 2024 at 00:07, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Oct 14, 2024 at 01:13:25PM -0600, Simon Glass wrote:
-> > Hi Ilias,
-> >
-> > On Thu, 10 Oct 2024 at 09:27, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > >
-> > > On Thu, 10 Oct 2024 at 18:10, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi,
-> > > >
-> > > > On Thu, 10 Oct 2024 at 06:02, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > On Thu, 10 Oct 2024 at 01:39, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Wed, Oct 09, 2024 at 03:14:25PM -0600, Simon Glass wrote:
-> > > > > > > Hi Ilias,
-> > > > > > >
-> > > > > > > On Wed, 9 Oct 2024 at 04:41, Ilias Apalodimas
-> > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > >
-> > > > > > > > Hi Simon,
-> > > > > > > >
-> > > > > > > > We already have a mem info command, which is pretty useless. Can't we
-> > > > > > > > reuse that ?
-> > > > > > >
-> > > > > > > I am not too keen on using that as 'info' is pretty vague. We could
-> > > > > > > perhaps create a 'mem' command with 'info' as one subcommand and 'map'
-> > > > > > > as another?
-> > > > > >
-> > > > > > Are we talking about "meminfo" which literally only prints gd->ram_size?
-> > > > > > If so, I don't think it's worth worrying about enhancing that.
-> > > > >
-> > > > > Yes, that's the one
-> > > >
-> > > > So, you mean to just delete that command and make it show the memory
-> > > > map instead? Or show the memory size at the top, before the memory
-> > > > map?
-> > >
-> > > I meant the latter, but if you and Tom agree that we should leave it
-> > > as is, I don't mind adding a new command. I assume that the list above
-> > > is non exhaustive, so in the future we could expand it with lmb
-> > > reservations etc?
-> >
-> > I sent v2 with that done. The lmb reservations aren't that useful as
-> > there are no names attached.
->
-> I disagree with names being needed to be useful in this dump.
+From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-Yes, +1 here.
+This series is equivalent to the one for Linux MTD submitted by
+Pratyush Yadav.
 
->
-> --
-> Tom
+https://patchwork.ozlabs.org/project/linux-mtd/list/?series=217759&state=*
+
+Changes in v3:
+  - Rebase
+
+Changes in v2:
+  - Fix an issue in setting macronix_octal_fixups
+  - Rework fixup hooks
+
+Takahiro Kuwano (6):
+  mtd: ubi: Do not zero out EC and VID on ECC-ed NOR flashes
+  mtd: spi-nor: Allow flashes to specify MTD writesize
+  mtd: spi-nor: Check nor->info before setting macronix_octal_fixups
+  mtd: spi-nor: Replace default_init() hook with late_init()
+  mtd: spi-nor: Call spi_nor_post_sfdp_fixups() only after
+    spi_nor_parse_sfdp()
+  mtd: spi-nor: Set ECC unit size to MTD writesize in Infineon SEMPER
+    flashes
+
+ drivers/mtd/spi/spi-nor-core.c | 88 +++++++++++++++++++++-------------
+ drivers/mtd/ubi/build.c        |  4 +-
+ drivers/mtd/ubi/io.c           |  9 +++-
+ include/linux/mtd/spi-nor.h    |  1 +
+ 4 files changed, 65 insertions(+), 37 deletions(-)
+
+-- 
+2.34.1
+
