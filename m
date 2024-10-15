@@ -4,97 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C61FD216A9
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 13:56:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3DE7D216A9
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 14:15:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9C86882BE;
-	Tue, 15 Oct 2024 15:56:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0420A88001;
+	Tue, 15 Oct 2024 16:15:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GITBzIO8";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="AcwPEY4h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 785B3883D4; Tue, 15 Oct 2024 15:56:17 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E42D188278; Tue, 15 Oct 2024 16:15:46 +0200 (CEST)
+Received: from EUR03-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur03on20614.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260c::614])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F6FE87DC7
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:56:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E820B87F19
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 16:15:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7b115d0d7f8so384164385a.0
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:56:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729000574; x=1729605374; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0kxysnn7+QpAWB3xWEAU/XogkeVVJXf3blL+D2bfmXw=;
- b=GITBzIO89DwX7Cg8Z9xf6GHucdXTx8biMHKlP9nmjAtKEME4c856wHjSDHjp5aGZFS
- aif2qoMI/e8NQlMKr4nSVamn/pMPvneUw5mlSH7/k2frmQKp96qqdpYdSreWxWrAy0K/
- 9MeEYQGFZf/86wSJLvCJQI59RDXy6z6WHBXPo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729000574; x=1729605374;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0kxysnn7+QpAWB3xWEAU/XogkeVVJXf3blL+D2bfmXw=;
- b=WwqkyLe8Tdq5PqBx98w+ZJdflp1k3sO2TtDHiwEEn4rGd+dAp5OrR9wof/X348TiSa
- 6ItRylNRwf1Uh44jGAnq+g43CCPSkj86f76dQPEbMmi+0LzCSc1NwNw6/9MKgRqRDXDF
- 6LXpjMhjUQg11RxncKfwMTg/bHtzjm4OCOOhrTOdYd91HjNr3SA4Hi4BFAXILnjXvEaQ
- +XPZC489R2re1sdmFtUrhLgzXxZIhDE7hLx8yt9pI6RdIG7QYq2jKG9iT2irttaEFOEj
- BYhP3yB0cKk6oTpAz4KeELQoruRrmkrcWz8da4qO9BBlTcJfMC4fVpSQ2/nr3GCvdowG
- NDAw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVeBAFG0i1CI/3CZNNJSCIl4vMDCk3V5Vo284HFEytg+W3rJypR/Qjnl5GTr3ovx24yvIO6yqY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzfW9K2U70E8x/IO0YKNZe2d5IzbxT1uw3nL6baOBlp3hQQEIWo
- sAx+E9+g8oE+t0zeAnV4O/vqOAVpCz89mR3+fjbqUVQ5dBvYiG20xb2r7SuacJw=
-X-Google-Smtp-Source: AGHT+IE5WFMb1jwGXpHVSFu/Qn/zPkl81cH/TrQMmOj+baSXdz6JNGPCAvOgCLVUHw6+rz4Z00xbWw==
-X-Received: by 2002:a05:620a:1788:b0:7a9:a9be:2fc4 with SMTP id
- af79cd13be357-7b11a3c5a95mr2716690385a.29.1729000573972; 
- Tue, 15 Oct 2024 06:56:13 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b136164da6sm74533285a.16.2024.10.15.06.56.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 06:56:12 -0700 (PDT)
-Date: Tue, 15 Oct 2024 07:56:08 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
- Emil Kronborg <emil.kronborg@protonmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-Subject: Re: [PATCH 6/6] cmd: Add a command to show the memory map
-Message-ID: <20241015135608.GK53053@bill-the-cat>
-References: <20241009015020.25817-7-sjg@chromium.org>
- <CAC_iWjKh7_OKKMi9K6eMaiYUN-Nxf+ZQ0NuW9BYzK3u4F0Krcg@mail.gmail.com>
- <CAFLszTjBQaoF9g0nky5mAA429gzA8QvzjxHxooDaRo1=BB+stg@mail.gmail.com>
- <20241009223907.GN14210@bill-the-cat>
- <CAC_iWjK8Bb16aLAKtmYB0Aof4CJP-AAdsMTEYvnFeMeXaiWM9w@mail.gmail.com>
- <CAFLszThoXsWuPu=b+FT0wuURR1rxTE6RWZhUhET9mHbQ+j63ZA@mail.gmail.com>
- <CAC_iWjKKqsJh7yUv-kRe5WiGA02c4YU4Yj83UXVXjki+CO9X1Q@mail.gmail.com>
- <CAFLszTi_CqDY2+RMRo+hJLsCtn6vQHHoeBvT8g-czL7OQAXw0g@mail.gmail.com>
- <20241014210707.GW53053@bill-the-cat>
- <CAFLszTigkFprX5KH3po9h+XqJ9-6_qcyCgM466srHgXMdGwoSg@mail.gmail.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=k2I2XpI4s6Xw0sAcnBb5NwGVtgMruGNrs5dMXP97TKrICFiJCT5fEHa3bVvB+IWcZLXm/ioAdIGDNoLbXip+ErKvZ9/Mpvv5I6CG80roiODsjtobOUFyvC9kyX4CwiPeLkID+vJO6SXW3NbYthOF11tiF1tECCAF4rX/S+BXQSn19DGBQH7q+fFBKiWeZ4n1cHlZXZ+SQawVAqgS+wETiFT+DA0S5hMKNimO21bWee/eZC0C8wAwmP+AJj8VZaAqVl1o7zf4MF5RuV10+15iJowqKFt4qj4ceZK0qCBTZ6UDgs4L4BhJni80QAsPwx74iHG4GKKdNZljFDm5Vvux8g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=izLEXvcpdQf1OfTyq8VrVctCM0Qxx5st+KOAcGvHouE=;
+ b=m3eDHqOkL52xzW8pJQlXJt5D62eZn0CnSWdO9m0mh1jpGEs9XQq8QNPWKOS3/yL5D/en9mFg/XRb8rGZPitZH0f3U4YzfHBUyMWOAeNzWNvyejczlvax/1H3Cqp66ZBM4AyBgTz3esauc6Z1xRVIOHUy+Rnd2QUb3pXx06/z6FQFw+uNstzCIhH5TYOUx2J0ht7c2LVLyWzb8ax/4TT8ugKkFQjSPdWOIous5JCh1E+hZlfV+On1C62pOiL+Q6l4uKl/75BtBmSdJv/VOFtr6a5cJjQYLxpnubA8FTH7t/Y3gS6XqX0ndCuVggRkYpGWXwe1soj4+GtaNhIbeI0sVg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=izLEXvcpdQf1OfTyq8VrVctCM0Qxx5st+KOAcGvHouE=;
+ b=AcwPEY4h4Q98V/lkAPZEnGsC/KdPnpVENMMpFHvUroMFhTRmV5J9+J7fEcv5o5ZB5GdS6ibZtxeDcd7A7V+4F0HuCWmt0D6vJ65MZWiGs09GrPcPzlwrNAZcfKS0+ucPL4ajGv6cKftWXeWb6N8JGdVl58nZH+r3hTaG0Fk/7sU=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DBBPR04MB7852.eurprd04.prod.outlook.com (2603:10a6:10:1ee::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.18; Tue, 15 Oct
+ 2024 14:15:42 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8048.020; Tue, 15 Oct 2024
+ 14:15:42 +0000
+Message-ID: <40ec686d-3615-4fa6-9b7b-d9c289b9cec3@cherry.de>
+Date: Tue, 15 Oct 2024 16:15:41 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] Revert "mmc: dw_mmc: Extract FIFO data transfer into a
+ separate routine"
+To: Jonas Karlman <jonas@kwiboo.se>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Minkyu Kang <mk7.kang@samsung.com>
+Cc: u-boot@lists.denx.de
+References: <20241008191834.2190270-1-jonas@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20241008191834.2190270-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0114.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:bb::15) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0sKucGAu0oNzdISt"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTigkFprX5KH3po9h+XqJ9-6_qcyCgM466srHgXMdGwoSg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DBBPR04MB7852:EE_
+X-MS-Office365-Filtering-Correlation-Id: 47804d03-6883-4efd-de20-08dced23da6b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VFpReDdDRVRtSkdLSFhCQUdsZ3Q5TkYxY3BWa3VYWnZTK1NMb3NvV3N6eE9Z?=
+ =?utf-8?B?cHJBaUZ6eVo5RWVacTV6ZGhzZkg3aU1nQ3VaM0RUYUtxNjV5Ym1wQlJFTlhz?=
+ =?utf-8?B?ZnkydCs5MXVneXhXbyt1aEZtWHZpM0ZCUDJLWCtuUzJjVzl6REJiRjlVUmpr?=
+ =?utf-8?B?UlpQY09FWEtHdjlJSlFzdDNxZHRmc3ptRVFwNnF1RE5nd0RhMHIzTC9MRUpY?=
+ =?utf-8?B?SG9XMU9UTHg0b3c2ZXowLzd1aXVQZGROd1Z6NUdoUVk2WDJsQjhVV1VGSm9O?=
+ =?utf-8?B?enJ2RExQL003ZHdtUkdQakxDN3d2Vm9IdURPR2lMc2lLL2hXdjZFRWo2ZFJh?=
+ =?utf-8?B?aUd6Mmw1UEZ6ODQvcWc3eGJaWUIzdEUxOGhqa1pJSnFreURwR29IOEJiRkxx?=
+ =?utf-8?B?UWVaeDFiZjZWMlBjRksySkw0QTJUOGJsVFdsZlUxWTl3L1JKMUk0bFpUdXBr?=
+ =?utf-8?B?T3lqelhpaEdyeHZTUzBScktFdnd3U1BVK1o1K0MybEJYR1h6QWR0dzI3eG43?=
+ =?utf-8?B?empibmdMV3M2RGxPNE56MkdZMWlXNVFDZWZzMWZYOHNzS1pIOG5HUmQ2SGpK?=
+ =?utf-8?B?S1V2R3pOLzE4bFFSbGpGeE9yb1Jlb1Jzb1NJSitxWTBHcWt2SnBXcFRhQXhs?=
+ =?utf-8?B?K1V1eEY2c2ZlRm5PbWE2a3JidjlkYk81V2FFRHlZQ3JYUGhTeEVZNStlTjJp?=
+ =?utf-8?B?ZEZJbWEvWGpJYmNhSUQ4VzJBL2pqSlVIbFpQaWltZVlaUHpUaUFNb2t0ZkNL?=
+ =?utf-8?B?YWpLT2lPcnNTTlRxMVVXSENGYlVvSGRJUHJmb1NWR3F1dE03TVIyc1lqYTk2?=
+ =?utf-8?B?NHpLM20rTXB5OURFRXJ6d0N1UTdKbGJsekt0YmZIQTFBNlBoSXJxSHBONUJ3?=
+ =?utf-8?B?RWZTY3oxWlB0Y1JJaW8vU05yWmlidTFpcEswOXlRaW5qd1c4R2IwSCtrczBO?=
+ =?utf-8?B?UHozMkJaaHBhUmZGUnFIVzdXRnQzVlBQRUZKbHNpNzg4bVJ2OFVJTmtBUTJ4?=
+ =?utf-8?B?QjdwMW01VHFteHJpZzFWeEh6UldqSUJtMHNHVm5ndGhHSE93NEI4Z1FRZGcz?=
+ =?utf-8?B?TVJHdXZkTERVM3FxMGR4NHpXVU9QRDl5OGVjU1dHS1FkK3NsTFhSMUZ2SmdG?=
+ =?utf-8?B?VFVpdEl6UkFsZnM5eHF1OCtqNXBaZDc5UTM2WDV0YkpFSzRraHFDNWNUL2Rh?=
+ =?utf-8?B?ZllsMW1GSCs5QU1NUU53Y0wxYjBpWTIxU2RmaGFNWXRYL2tNZXIvaVhYTExU?=
+ =?utf-8?B?bGVsOG5YVHkwOWxBZkpBcHFnRXloU1VRMXlNUGNJbE1FZjl5UVJ3cEI4czl2?=
+ =?utf-8?B?eXF6RWpHdHJaQ01qNkc0UndSbXRvZXQ5Y3gydldzNjl5eDZSSWJQWE9Ma3FH?=
+ =?utf-8?B?ZitLSWQwbmFuQjQraGpnYzVVT045YXUwRmpudDVJT1lXcVRYSzVuQjg2U2U2?=
+ =?utf-8?B?ZFNyVWJGRjIzaGlVa3NxWlA4TkxoSytQT2w3cTVKWTk4cFNEMFV4MFRSbWY5?=
+ =?utf-8?B?aDNOUjBaS0FEemMyZkZvZ3NnY2laUUxCM1RtUU5MM08zYzJ2SGl5T1ZzZVBJ?=
+ =?utf-8?B?cVdJMHBvMWhSTTY2ZXVEaVdsREhTZStYSzB1QzlQMVNUekRWMUNES0xDdDh0?=
+ =?utf-8?B?a2Y0MTZoWGVXTlNTWVVLWjVNR1BsUlJqc054alpnWnkwVE5qc0FZMG5TdXBu?=
+ =?utf-8?B?MkM4MkgxU05kUXRTZ0pzQnJWS2FvdlRvT3BEUG1EZ3lLNkY5ZG9ocXNBPT0=?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MlZIM0JhTkRmdVB2MWpsdndaVlJicyswSk54MWh3eEM5bitUOGFFTnBleTFr?=
+ =?utf-8?B?NVNCMkQ0UlB3NFEzbFRKZDZaOTM4czJBZEU2ditpREF4Y0pUY2RqaVpJV2hi?=
+ =?utf-8?B?ZEtrYVJzbEpFdW1VUXovS2RzZHloM1N0ZWZPcmRZYkRGVktGS2ZDYXJCeENC?=
+ =?utf-8?B?Nm90MzkrKy96YWllL051Rmt1TlRVRVBhQ0RaZlVEUmYrRjZlVXQzeGV4Tmp4?=
+ =?utf-8?B?Ung4NkRBUjVUaTBpaHlueTcyc09TS3p0Qm5OVHZJY1ZmSmVkN1dqaXAzY3hU?=
+ =?utf-8?B?T3I3ZmhnTStSZ0tRQXVpZmtNU1p1ZDFyYnd4R1hVOHNobGxiZ2tLZjlhb3Y2?=
+ =?utf-8?B?bEhUWmpMVENLd0ZnTnpqemNwVThQNk9wQyt0VUUySDVpTElPU3dZRVB1TWFz?=
+ =?utf-8?B?SVFxWVBUelVwUkZuNW0yYTYzbFZyN3lHdHVQZzVSRnVMM28xa3RaaEtqT3lI?=
+ =?utf-8?B?MTdSWkY1STdaU2NPb1hsYXFJSERMMktxZ0I2VnU3UStjSGdncHhDRTFnT3BN?=
+ =?utf-8?B?ckJNQnhZejFrdldhd1VXMUhvOFp6QWZRQXgyRFhISi9nTGNQWWJMbk9kbUFG?=
+ =?utf-8?B?SGYzZlB5TE5hQWhsUUwvU3ZXdzFPVy9CS2VqcDVhcUlaUmRrN1lXS1Q2ZWJ5?=
+ =?utf-8?B?eXBVOWhMaUlwQTJuV2JjUlJ2MG9ibW02ajdMRXd5N1FjZzYxNVNCMUJyRmlr?=
+ =?utf-8?B?QjFRNEh3OXBWdVNLZU5vV0VRZjBUNlhaeUc0dDRtSnJCT2JjdFFwSlJZRUY2?=
+ =?utf-8?B?aHVEblhMcGFsSzlqN0tQMVYxeExxYXJDNkNtQkJudjdQWTdha1NzSE1BUDhv?=
+ =?utf-8?B?YVlRNmQ2R0Fsc2pZNzUyeklBTnRkQS9jRy9pWGNWS24rWi9XamdXWWZsTVJV?=
+ =?utf-8?B?SmZ1enVvSEtMd01Lb1pPaFBBSDBTdENKVVFZaDBacHlPWDZvWGdTUmNkYm5j?=
+ =?utf-8?B?Yld4Q1c1aUVVNUgxalcyRnJpS2FHNGN5YUYrTXJaYVVSby9lQ3ZZVzQyTTlj?=
+ =?utf-8?B?UkVKb0xoNjlwa2RSRjJuQURLR09CZkgxU09DaVU2eUIyM0MrekZsZm1pejJG?=
+ =?utf-8?B?czZqSUhFQlROMWdkZFB5RTNyaDhybzRpbVdsOUtBMjJpaWhWRktzNlRTZWlM?=
+ =?utf-8?B?WXJqZHZDaFo1ZjFTNlVrdHFRaTVlcEhNQ1BjUXhjNHZIT3JNOFdkSEU5aG9B?=
+ =?utf-8?B?WDlyZzgzL04ycU5HMUN4Uy9xWWxWWmR3NG15Y3RjMFQ3NkdCeEs5LysrOFdW?=
+ =?utf-8?B?dElneXlhWlE4SjdWVkIxRVRZR1lNKzFsMWwvVVFsRko1WEEyeFcvQ2R4YzA2?=
+ =?utf-8?B?RXhTMUFDd2VrM2JaaWJTMk1vaC9QeDJNakR0Z3duVXArY1V3dUhmZ29GTzFz?=
+ =?utf-8?B?T2ZWenVqUkVSbi8yUUhTaVI3MUQ4TFdYNjdiblNSbTN2WWsxZlJmZTNpbmxR?=
+ =?utf-8?B?RGErejZQYVdON1BqRjZ4eUIzYWdwYm5DN2pWUElyOEROVG02RlVSNW9Na0I4?=
+ =?utf-8?B?QVhQOHlXM1NiUTRyM3NEcitiUWhxOXE5NjNsUDRYRk5jVmFPbEhITU9aUG9G?=
+ =?utf-8?B?ZU0xdlVZLzNLMUJvUzY4NU4zWDROdGNHWGhFaVFYeFIwaVdTNngrYnlMdDdB?=
+ =?utf-8?B?dDk1MlNReUdzT09CanluVnBaTG9lZmZqYWtuV001Y3lKa3FKM1JzWXNsRFJp?=
+ =?utf-8?B?VlczS25BN1NpcFFGam5HbHBVdnowL3QrTmp5K2RRTFh5dytHR3dsNGFuUW1V?=
+ =?utf-8?B?THgwVmgyZDBQbWplN0hPN2FqaVh3TVVTelpEM2VOc2JwVTRjTFlRT2J4cHU2?=
+ =?utf-8?B?aEhGWnhqYlVlbE15cG5pWVAyOC9aN2xrSS90SG9pL2pHaytYVmpBSjhFVElF?=
+ =?utf-8?B?dlpZZjRPc1MrTDJqS01tRUp3WWNnVDhPS2hkcjQzZS9qT25XdC8yTC90YVNQ?=
+ =?utf-8?B?S3ZZY0FXU0QwdTViZFNWeitYYUg1WUV6NGs1Uk5kcWhXU2F4R2NIcnJUQmgw?=
+ =?utf-8?B?akV6bTRJcUkvTG1zbnhsUWJZd1NmWU8vZmtGSVMwLzZTbnNhOXNhS2Vld3JH?=
+ =?utf-8?B?bnBrb0RaYWVsVkZ2UGRuOTdtMVI0N05YVnBtRzcyNnhNQk0wVFNHRmJrSWVz?=
+ =?utf-8?B?N3k5eG9NeXkyV1gvaFFxTXJwSjUwQldYODdXcWJ0VXJ2WmZCQzdYNmYzYzJH?=
+ =?utf-8?B?cGc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 47804d03-6883-4efd-de20-08dced23da6b
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2024 14:15:42.7393 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: g320FDgVgRG3CLNBck8y0W+Y0kXu7gagIHceZ+XZ+bzNNYi1FPLOVsSXdk92fPQn5wmwTaoKfqprKsMwPQsMxcL6lsxghLz8S68vOa6wYXU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7852
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,101 +174,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
 
---0sKucGAu0oNzdISt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10/8/24 9:18 PM, Jonas Karlman wrote:
+> The commit 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a
+> separate routine") unintentionally changed behavior of the FIFO data
+> transfer routine.
+> 
+> When data is read and size reaches 0 the original loop would wait on
+> DWMCI_INTMSK_DTO or timeout. The remaining size to read and buf position
+> is no longer tracked across dwmci_data_transfer_fifo() calls and because
+> of this an extra call to fifo() and dwmci_fifo_ready() may now trigger a
+> FIFO underflow timeout error and slows down FIFO reading.
+> 
+>    Buswidth = 4, clock: 50000000
+>    Sending CMD16
+>    Sending CMD17
+>    dwmci_fifo_ready: FIFO underflow timeout
+>    Sending CMD16
+>    Sending CMD18
+>    dwmci_fifo_ready: FIFO underflow timeout
+>    Sending CMD12
+>    ## Checking hash(es) for config config-1 ... OK
+> 
+> This reverts commit 0252924ac6d4af69061bb9589d16b30c5bdb7178 to restore
+> the old working behavior.
+> 
+> Fixes: 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a separate routine")
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-On Tue, Oct 15, 2024 at 06:49:00AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 14 Oct 2024 at 15:07, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Oct 14, 2024 at 01:13:25PM -0600, Simon Glass wrote:
-> > > Hi Ilias,
-> > >
-> > > On Thu, 10 Oct 2024 at 09:27, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > > Hi Simon,
-> > > >
-> > > >
-> > > > On Thu, 10 Oct 2024 at 18:10, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi,
-> > > > >
-> > > > > On Thu, 10 Oct 2024 at 06:02, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >
-> > > > > > On Thu, 10 Oct 2024 at 01:39, Tom Rini <trini@konsulko.com> wro=
-te:
-> > > > > > >
-> > > > > > > On Wed, Oct 09, 2024 at 03:14:25PM -0600, Simon Glass wrote:
-> > > > > > > > Hi Ilias,
-> > > > > > > >
-> > > > > > > > On Wed, 9 Oct 2024 at 04:41, Ilias Apalodimas
-> > > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > > >
-> > > > > > > > > Hi Simon,
-> > > > > > > > >
-> > > > > > > > > We already have a mem info command, which is pretty usele=
-ss. Can't we
-> > > > > > > > > reuse that ?
-> > > > > > > >
-> > > > > > > > I am not too keen on using that as 'info' is pretty vague. =
-We could
-> > > > > > > > perhaps create a 'mem' command with 'info' as one subcomman=
-d and 'map'
-> > > > > > > > as another?
-> > > > > > >
-> > > > > > > Are we talking about "meminfo" which literally only prints gd=
-->ram_size?
-> > > > > > > If so, I don't think it's worth worrying about enhancing that.
-> > > > > >
-> > > > > > Yes, that's the one
-> > > > >
-> > > > > So, you mean to just delete that command and make it show the mem=
-ory
-> > > > > map instead? Or show the memory size at the top, before the memory
-> > > > > map?
-> > > >
-> > > > I meant the latter, but if you and Tom agree that we should leave it
-> > > > as is, I don't mind adding a new command. I assume that the list ab=
-ove
-> > > > is non exhaustive, so in the future we could expand it with lmb
-> > > > reservations etc?
-> > >
-> > > I sent v2 with that done. The lmb reservations aren't that useful as
-> > > there are no names attached.
-> >
-> > I disagree with names being needed to be useful in this dump.
->=20
-> I'd like to show where the kernel, FDT and ramdisk are, with actual
-> names for them.
+This is fixing a VERY slow boot time on my RK3588 Tiger, so:
 
-That's fine, but I don't see what that has to do with showing the LMBs
-that we know of as a starting point. Again, an LMB is not an image.
+Tested-by: Quentin Schulz <quentin.schulz@cherry.de> # RK3588 Tiger
 
---=20
-Tom
-
---0sKucGAu0oNzdISt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcOdHAACgkQFHw5/5Y0
-tyxJbwv/Vs1BdfMMVB7AkB07LfVMnARVsXAMAWnMxMPu89QSrBHfOn12z3ccihC1
-GJ0hynI/ndtduVUKYvj/UOSE0xWpBPT8KJ/8OAUIjStefzEXO6efCoXEra0frAOM
-kp/QMlM3/j/waEBdeGW8ErdtDCaNlSUBYe/g5gwRtA1OqraBOAJHF1jZPV6Y25VQ
-U+XYIM8X/8VN/2UBM8mH6jBbGBmud4/Q8Kd0YOA9p0tvTcvRrgxnThqMdUxhStSn
-3/Ow/5bzad+eiQ4+47xbZ5ZzgBsAKeyWhMcY2cmPH3nLv1CqSA4wYvisiTXRHf7L
-csSoaSQV1cA9D8Ooe2Vnqxeg543wtc/o2Gva+bWytBPI3/ccGoh71wyR94BqD6/w
-7vPmVTw/st7QMiads0+5ta65xXjgBTRedi/QD72/3mVRVLjomR3nVTAbkDA1IYG3
-IeKQnkPE90p5f4oNWnLy0+VB6AevLz+m5t588muP21QQCKfCKXwMyHPEk9HIp5K/
-iDDBy9bp
-=E0XI
------END PGP SIGNATURE-----
-
---0sKucGAu0oNzdISt--
+Thanks!
+Quentin
