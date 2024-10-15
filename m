@@ -4,81 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72EE1CFC279
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 09:32:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9A9CCFC27D
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 09:34:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B56EE89081;
-	Tue, 15 Oct 2024 11:32:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3AF7B886FD;
+	Tue, 15 Oct 2024 11:34:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="g7aFID5M";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="hmjiZ0A2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE80E8907E; Tue, 15 Oct 2024 11:32:19 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 02F2F88E36; Tue, 15 Oct 2024 11:34:15 +0200 (CEST)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on2061b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::61b])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21BE488581
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 11:32:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A83C588387
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 11:34:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-37d70df0b1aso1668780f8f.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 02:32:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728984735; x=1729589535;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=3Pz7LqPbPDmys25Hn5Y0YPst7GumIAp/inU395mkBHY=;
- b=g7aFID5MEZZIyODrvN6yhL13ai0bB0Ad8WhP3RM6/IE9A1SsIgSCo+sIUEWn6txODs
- 7VXv5VI2kOG2U+k6sPqYMsUqMRMdMKMw0U2sjjaYeke0GVXfjCIRQ+yUuexYkPsJ60Vk
- FmquAo413KRqqm/mYn2nJeJ3QiV81niF+uWoKtUsbrLG14A0XvledLgjuUjLKqBWV/iG
- MxEIyPjC3Hd9WM2ZyzA7ov+NLt03NcfpV3gqh0JeDVkJSFPa+pByc+NKx3aaAWta/xOs
- BSd/BYwo3PL8saQmH9+xIWbPgIHnPh19Aebtu5b5NIV6K9nYa8qfMIc6hWL+odpvqwgn
- qJgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728984735; x=1729589535;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3Pz7LqPbPDmys25Hn5Y0YPst7GumIAp/inU395mkBHY=;
- b=dtq67ODZjzV1EEdSQ4xDV09ka5J2qDCqGgxQ+mdO3FL8FvZzzqgd5gH+qicEJ9Udxh
- oR8AK6v/B6dqyGPg8ze4cpElw1JZz0N2YB7dyFAAwaXzAUyyfBU3f7eeg3D8Xy5yehpS
- i7tdNaLdSxOJOWaPMKRc7ta7dYuILseklqOVv+OosoWXpGlCRVvAtKts4ebGkRBNTqJg
- EFlrd8pq+UT1HgFsDneMKz342LROq8abqHR6DNvJwjlPPi/Wj4kjR7MFikTVZZKvoztY
- T06dI6k9SBvkEBGcXqlIOdzKAy2F3ob8LBdvyluO23J1LUmsixROUe1TVK3laH6/ZN5k
- cNhA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW8+gGjYOLmtJcWgUYxVsSi9VB59N7P5DVsjiDbhDCfBEWlhs+a84EHOLeQHdPsnIZiHT4FKQg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxSWlX11AMArpcZ6wdDImB3mtH4IowPHq6shWc+TDYSe7CWzQ/f
- LptqDsPIGXjezt/4GBkM8Xcy3Sxr9WJUnDBza7tWIWmPWEl7BsjRAtQPl/IZFlI=
-X-Google-Smtp-Source: AGHT+IHVF4gTZQd55Up1fFwhaepKxXKhTmNAFPnx4L/oF8NPCPWGY4XkwxQvSoMjFGosvTbWV+pWGg==
-X-Received: by 2002:a05:6000:4599:b0:37d:4647:154e with SMTP id
- ffacd0b85a97d-37d551ab470mr8155036f8f.9.1728984735294; 
- Tue, 15 Oct 2024 02:32:15 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d7fa9052esm1081715f8f.51.2024.10.15.02.32.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 02:32:14 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Lukasz Majewski
- <lukma@denx.de>, Caleb Connolly <caleb.connolly@linaro.org>, Neil
- Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-Subject: Re: [PATCH v4 1/4] dfu: add scsi backend
-In-Reply-To: <20241012-b4-qcom-capsule-updates-v4-1-abd05f15255f@linaro.org>
-References: <20241012-b4-qcom-capsule-updates-v4-0-abd05f15255f@linaro.org>
- <20241012-b4-qcom-capsule-updates-v4-1-abd05f15255f@linaro.org>
-Date: Tue, 15 Oct 2024 11:32:11 +0200
-Message-ID: <87v7xtzp7o.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FjSGN5LvCFFLRztOxHWmg8LY6hwazJz6yNSLC3Ru2m+VdFFxWlLscQBs/nNfeY4R0AvDoKwib93bJznZcMdgMLvVGFNsBWJelfFv+RszYY3D8InNagi/ELvaTaz95g01sY5O2rz1NmlI2QTLZLesw3vjCmhs0/aKlY5LEQdIwJsjtL7otTPhGdtj8yz2ZABOIpr5u8prvYgfPdLdZ6h1ZLe41VGWTSpeg5u8yTXuguxzpPQJrcOOVCh3FHCJcs7mJd+6gJU7uirm4uoTKU6NvJQn6D6wFQfC2DVnqdEMXVZzfg+lTUxmQKm3nbGJx6hqDyO1aPiKkprfpf9KrViq1Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KQHay7NGnG52e53phbUOEggnKZC0F491RbQu3xZDeuU=;
+ b=eXcQpBFBBgUc8+5I24+q5nrpIUr57Z7AjDRU0yWQUzGjb337wrAeg0kLDqP14hU3T0xqn4qCq0RMAyY5Sv2jq+gQZZsMeqsdepMLf/sTcN9LkBiQUnVO2uTYZiMqKlnGF0Jtv1waE+NWDNVzUQKoIQOrDlzuf2nfOQWNAHpXyzlXQV2z8HJ52ynbcYXUCB+xViJokRiLY49UxkMOD7fFtvpJ48NV938AT1VZtaoj3+fOF5OiQMx6/VwdaZ0Db3sCcf2QC8UDIvvJtJ4m2WtQsbWtpChwHv4fSkedlaT1fz9kb4I7AcEXC5zSSm5oUxpLYxvWqhZYFUnOtmpNBo+gVQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KQHay7NGnG52e53phbUOEggnKZC0F491RbQu3xZDeuU=;
+ b=hmjiZ0A2JRIBkbgWnCVj/GZrJAl3OE3EqaIJ4zIYL5QuXBDCmfCId9JxI9ii32t+u141BnTGdKVNFOqPiUZTvxE4haWBpKbwfn2HqlDrxGQ9lvOi3dqKY7s0y0pNFAknTZaZ+pcR0VShbjC9hUrqUOPtZWCPIfLcmLsOF3IYc6E=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by AM8PR04MB7811.eurprd04.prod.outlook.com (2603:10a6:20b:236::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.27; Tue, 15 Oct
+ 2024 09:34:09 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8048.020; Tue, 15 Oct 2024
+ 09:34:09 +0000
+Message-ID: <22953d33-b660-49ba-9664-845416bbc35b@cherry.de>
+Date: Tue, 15 Oct 2024 11:34:08 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] rockchip: board: Increase rng-seed size to make it
+ sufficient for modern Linux
+To: Alex Shumsky <alexthreed@gmail.com>, u-boot@lists.denx.de
+Cc: Dragan Simic <dsimic@manjaro.org>,
+ Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Chris Morgan <macromorgan@hotmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20241014221523.2912260-1-alexthreed@gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20241014221523.2912260-1-alexthreed@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0079.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:cd::9) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: text/plain
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM8PR04MB7811:EE_
+X-MS-Office365-Filtering-Correlation-Id: 47d8e6e1-3a24-41b8-a926-08dcecfc8550
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QlZmR2ZDYU5EVjBzQlJsamwreHBqQyt0Ym5JZjEvVUVtbW1SeFdRdlM4YTdE?=
+ =?utf-8?B?MFN1WGlua1QxV0RMcGZaemJ3eHJab0tVZGdJNkFNT3JON1JEQVBMY3RDY2ll?=
+ =?utf-8?B?UndYY1p4QTlIbVU4bmE0dXVsU2IrYkRmSkRYcXRrSTBkRURKZ0NKMTlTQVo4?=
+ =?utf-8?B?ajR1V3RQNnN5dVY2dHY0T1lSNW0yVHQ5VzFZSVNFamwyNlFmc2ZualFPeHBT?=
+ =?utf-8?B?UHYvK0tjUTN1QWpuWExoQmt4OUpDTlphNnRoTS81RDBWYkNseXNMcldJNzZi?=
+ =?utf-8?B?a3E4N3FXRGhRNVBrY1M2RjF6Wm9CNjBQWGdWNVBMZVBIeDVvcDlpK2c4NDN4?=
+ =?utf-8?B?NDdFeFZ0NmZsQytwTmJwekppSzFWRXFqY1c2bnpoSUQxYW5qT3A1ckJ4OFJm?=
+ =?utf-8?B?Rmt0cGJQVTg0WmFwSkdMbVhiazdGMnFXQ0NaTytRVjhXVW9vQXg4SGFlWWNB?=
+ =?utf-8?B?RXNpMm8vMG4vaW5YVUNkazFDblp2c1VRUzhWa3NuN01ZMmQvOHJmc3cvWUpl?=
+ =?utf-8?B?VHZ2YnE2VzUyT2dxM05Gbkg4SVFWTGJVcCtoNmRmNzJZYTdPQ29aYTNUbnda?=
+ =?utf-8?B?b2lyYWh4cW5OZTlGRkdYNkVZYWQyOGo2S3pjbVc4M1gyWHU0dUloV2hWems3?=
+ =?utf-8?B?NzJWMkN1WWJtcnBTckszTHdjUWh0NXk2QTRrc3R3QXAxZ1dteUFXNlc3cWd2?=
+ =?utf-8?B?TE9zU2RyOXlhenJyVWlqdi9SYTA4d1RBaEg1TENmWWxiTVhETjFpZXBRUEJT?=
+ =?utf-8?B?TkFwUGtRUWpPWDVjcG5HbUlYbmpsQUF1L2IrTTQvcG9IYllEeHlZTy8zSjZo?=
+ =?utf-8?B?MU4vT1NhYVVoeUNqL2ZnU2FweUlybW94bDZQU0U5M2tZNW40endBNm5oUXli?=
+ =?utf-8?B?eDVpQWhudzRDc3lSU2VjRzVjcnpFbnZhOE84VVdSTVNtVTF6Z21qbDU5RTVq?=
+ =?utf-8?B?NERiUkgyNlpzRGh6VkQrT3BVTmo5eGh2T3ZYQTFNN2l4bGd6Rnc0cGZEYlVL?=
+ =?utf-8?B?dlpueFJIYTRwei90RHFLbkF5bVpyY3R1WFlQWHQrOFdKVmdTOE5KdC80WEFG?=
+ =?utf-8?B?SHJJTXMva1JwcmhIMjVwYXF5UXdCNC9aU1dvNDc2TWNtaTlsbkFMb2NEcnI1?=
+ =?utf-8?B?Mk16T3FNTXpZTGtjTUEwRGMwTy9uREwzaTB0S2Nwak1GdnpjQVZxSnU2VU04?=
+ =?utf-8?B?c25pNnQvQk93c0ovNXY3M3hOaEFHK2ZTNURIcEJpYmNhUEUvWFZzVkdMZlFF?=
+ =?utf-8?B?ZTJtcCtEMmJrc3NFRzJFM2YraGY0VkR1cDdTcnNMQ0YrbmoyOTYrZ01YaXRU?=
+ =?utf-8?B?U1cvWjFuRjhub0FPeE4rZEhwWEJYVG9tZkk2YjhmMXlLRmFWZzI1bWFVN292?=
+ =?utf-8?B?UTVIQUdXSlBEUTNwem1vTUdCVlF2dHRiM2lzRFlkL1BlNGpGYXlIMjc0RG9C?=
+ =?utf-8?B?ekV5NWxNWm5MbUlJMFVTNEZpcmV6U2diU1hiSUYvajhtbWRia3cybE5rR2t2?=
+ =?utf-8?B?YmwwTWRDM1hrRzlza05EV2VNWGdsQzd5YmhjYThsYUdsUFFKbDdIaVRGYk9o?=
+ =?utf-8?B?aFRUN1RNVVU0aVoreW1IeU1QWWVySXJQQWFoTXFrSDJSWjFHUms1ZlZmNjd0?=
+ =?utf-8?B?Q2JhUDh0K0kvV0EwMDF6WnB5SlRoT1E9PQ==?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?R1F2QTZPYW5pRXF2U0M4cUhRczNXUHB6NG05OHVmZzhTOUVXZjRibjNrSmgy?=
+ =?utf-8?B?bWxpWFIrS1dmVTV1bVNhUlgrWHBJMXNkaTk4Mkxock1QK3RrYXZNMXpyYjVh?=
+ =?utf-8?B?eDl0bE92dzhKdkR6T0E3Uml3aTNWMmFkbTYyQVV0TFkrakszeHEwaWxpMnl6?=
+ =?utf-8?B?Wkh1aWdidld0WHViRnl0MUV5QkpKSUlSQTVNQ2Q3WGI5ZEdzUWh4dnliTzhZ?=
+ =?utf-8?B?Zm5BS2ZSOVB5bC9JQjFnb0ZpSzNmS04vY2JTT2U0eWtlSnJwY0d0VkdsOGg3?=
+ =?utf-8?B?RVV2bFFxTDlDUUZFU1JwZzVvL3JQaFlhS0tDNDhzNFZOVXArNVZUeDZEN0FB?=
+ =?utf-8?B?U2hzM0JCYnJyalNjUnRCc0RiYlo5cDIwaERXTSs3THRqVUx4aXNld3VPOWk2?=
+ =?utf-8?B?M3lnbWJITVA4U1FHUUw1ZWNNSkc0SWdPekRtNEUzTkRXRllJMlJDMG9MeHg2?=
+ =?utf-8?B?aUNvUXBpQjNJbXkxV1VqOEVpTGJXTW14T1RKcW8wMEllUWtNZmpXK1NyNTU3?=
+ =?utf-8?B?ak9ncW16Y096bWFDaGg0UmgwODl2bTZUTkNHYVhSUFVzTU00cUUwQUExYUpE?=
+ =?utf-8?B?OHNiTFB2UytKVjZ2RnVGOHArMWNqM2UwTVZHUWh3aDMrM0RwaWZwUmNBeFpn?=
+ =?utf-8?B?RG8wa0MwOG1kMlFpVDNrNGRmSk5PSUQwY0tFYWhOenRnTmxRNG16RG0xVDNP?=
+ =?utf-8?B?ZXo1b3I2UXVLNVFjb2lZR0E0TkNwTDRlMmtxODRLZzJBWU5KWmFQM29zRWhQ?=
+ =?utf-8?B?UFRQYU9XM1FQRE1rUStnWWhhbjQxdkZ2V05BTW10UnRtYWFPOVoxZXdrTEVx?=
+ =?utf-8?B?cHVhOE9QMkhPNFA1YXNVa0ErcTRpbW9VeEl2R2VOdkhKc0xaOUVFN284WkQx?=
+ =?utf-8?B?Si9RZ0FVVTZEOEJTV1JWQitvTFgySE5PN3hITnl6ZTRtaXFyQ0hhVTVycXFF?=
+ =?utf-8?B?TG1DVDR1TGwwc2tUZW0xTitVRi9iL0ZJdFpOWTh3QmFTNTQ5TEtNQlJMNEo3?=
+ =?utf-8?B?RWh3ZFNKMXkvUHRWZFBFUVRFT3NSeDZhZnRRdGJ6OWZTTXIrZW5LVHR3Q2Nr?=
+ =?utf-8?B?VHlTSklMUmo5dlFtSTBKZXU0U0phOWQ4amtVTmJRenJ2VWpETUJ4UEYwUVA0?=
+ =?utf-8?B?Z1I4YzVaaDBEeUo0Z29XNFdTWGFJSjFYUWYrek5KcjZzOTFyV0VXSExWUEV6?=
+ =?utf-8?B?NjE4SHRkTmdQMGl1cjd0UjRmaE9Ib3hpdllWYWQ0Q2I2Z0FpRUIyaGkzcXRT?=
+ =?utf-8?B?aURHQXpBY3RmamdwdTBBRVgrUDFYdDlTajI2bVE1Rm1KSEhnTXJzSE5GWW1h?=
+ =?utf-8?B?Vzl4bzlqUFRtazdhZGJKeVViTHpHQmJqQWNyV214enIrOHQxYUpWYllrU2d1?=
+ =?utf-8?B?K2hqZS80N1crVXEzUklnK0NiMmxMMHhBZ3padFA4QjMrRkoxek03NGFEMFh4?=
+ =?utf-8?B?eGloUnE2ZzN6R1NEdzZMaXFIRzRFeTRVUzFYQUlSclJTUzBVRmVWODE2dDk5?=
+ =?utf-8?B?ZWRNRG1jWFRiVlNqWTdkSUFUNndYNUFFY09rWUlvZUpCSmc2WEgyMnUzQnZS?=
+ =?utf-8?B?WG1YM2xDSCt6MENoQjcvVVo3dEo5c0dSbGtYbVlBYlAyNEluMVdBYzhTdkdp?=
+ =?utf-8?B?SmNwS1NacHlCWGVIeDc5OUgrcy9oUXo1citQQUlEN1lpUzNod3lZOVIvVmZy?=
+ =?utf-8?B?NXRJMlF3TWRsQzZCcjRCT201K0FlSnJraVkwM09LcEtGNXpKZnRRS3A4cmNC?=
+ =?utf-8?B?Z2NKdC9ZVmVtYTltalFpclRKZUVpL2ZwT29XWEkyRi9mQXJ5OGd6ekFLWnBi?=
+ =?utf-8?B?bDNEYW9ad0YrNUtHandZbmhabjdDWjlkbnBuYUpnMkFEeWpRRDY2RlY5Q1Nr?=
+ =?utf-8?B?REtObXF1MllnQ0hDU2N5b1ErdnJkeUpkV0puYXBweUNlQkFLK2hyaEQvdy9E?=
+ =?utf-8?B?MzZCb0xNQzl4SEp6QWw1L0pMSjZ6b0pqTXpPWUlyaEZyUUh4bFZzZmVkK2ZE?=
+ =?utf-8?B?SDZnMkFvdGVzMk5Ma0JiNVArYmxEbnpJbjBiVnU4WXFHT25nQUlrWHpMQURk?=
+ =?utf-8?B?aTFoNERXOTVjMmViMGNRenZDRGh6U2hvRy9yOU01R0tlUHoyaWNVbkVoeDVL?=
+ =?utf-8?B?Wk1zSmxjaFloWFVXS1RXaWZyeUJKMGFFMTBQQ0NNb1p5ZlQyV2VxNEQ4SlVU?=
+ =?utf-8?B?anc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 47d8e6e1-3a24-41b8-a926-08dcecfc8550
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2024 09:34:09.5804 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: XqGau2eBGjp25MJkV4hnIYYBRLh4LTjmxto4dgwXcdg8g+e/t+C41q+/EL3R68AuuoK1E3guBq8mSp+MX/nDEqnvd5H52fpAQEssIeBKMgo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7811
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,679 +176,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hi Alex,
 
-Thank you for the patch.
-
-On sam., oct. 12, 2024 at 15:57, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-
-> This is extremely similar to the MMC backend, but there are some notable
-> differences.
->
-> Works with a DFU string like
->
->     scsi 4=u-boot-bin part 11
->
-> Where "4" is the SCSI dev number (sequential LUN across all SCSI devices)
-> and "11" is the partition number.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+On 10/15/24 12:15 AM, Alex Shumsky wrote:
+> Increase rng-seed size to make Linux happy and initialize rng pool instantly.
+> Linux 5.19+ requires 32 bytes of entropy to initialize random pool, but u-boot
+> currently provides only 8 bytes.
+> Linux 5.18 and probably some versions before it used to require 64 bytes.
+> Bump min value to 64 bytes to be on a safe side.
+> 
+> Boot with 8 byte rng-seed (Linux 6.11):
+>      # dmesg | grep crng
+>      [   12.089286] random: crng init done
+> Boot with 32 byte rng-seed (Linux 6.11):
+>      # dmesg | grep crng
+>      [    0.000000] random: crng init done
+> 
+> Linux source references:
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/char/random.c?h=v5.19#n551
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/char/random.c?h=v5.18#n236
+> 
+> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+> Fixes: d2048bafae40 ("rockchip: board: Add board_rng_seed() for all Rockchip devices")
+> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 > ---
->  doc/usage/dfu.rst      |  32 ++++
->  drivers/dfu/Kconfig    |   7 +
->  drivers/dfu/Makefile   |   1 +
->  drivers/dfu/dfu.c      |   5 +-
->  drivers/dfu/dfu_scsi.c | 435 +++++++++++++++++++++++++++++++++++++++++++++++++
->  include/dfu.h          |  27 +++
->  6 files changed, 506 insertions(+), 1 deletion(-)
->
-> diff --git a/doc/usage/dfu.rst b/doc/usage/dfu.rst
-> index 8cc09c308d82..f497dcf137a4 100644
-> --- a/doc/usage/dfu.rst
-> +++ b/doc/usage/dfu.rst
-> @@ -21,8 +21,9 @@ U-Boot implements this DFU capability (CONFIG_DFU) with the command dfu
->  
->  Today the supported DFU backends are:
->  
->  - MMC (RAW or FAT / EXT2 / EXT3 / EXT4 file system / SKIP / SCRIPT)
-> +- SCSI (UFS, RAW partition, FAT / EXT2 / EXT3 / EXT4 file system / SKIP / SCRIPT)
->  - NAND
->  - RAM
->  - SF (serial flash)
->  - MTD (all MTD device: NAND, SPI-NOR, SPI-NAND,...)
-> @@ -166,8 +167,38 @@ mmc
->  
->      Please note that this means the user will be able to execute any
->      arbitrary commands just like in the u-boot's shell.
+> 
+> Changes in v4:
+> - fix typos and code style
+> 
+> Changes in v3:
+> - reword warning
+> - increase default rng_seed_size to support older linux as well
+> - reword commit message
+> 
+> Changes in v2:
+> - add env config knob rng_seed_size
+> - add warning for small rng_seed_size
+> - 12-character commit SHA in Fixes
+> 
+>   arch/arm/mach-rockchip/board.c | 11 ++++++++++-
+>   1 file changed, 10 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+> index 3fadf7e412..ca6404776f 100644
+> --- a/arch/arm/mach-rockchip/board.c
+> +++ b/arch/arm/mach-rockchip/board.c
+> @@ -472,9 +472,18 @@ __weak int misc_init_r(void)
+>   __weak int board_rng_seed(struct abuf *buf)
+>   {
+>   	struct udevice *dev;
+> -	size_t len = 0x8;
+> +	ulong len = env_get_ulong("rng_seed_size", 10, 64);
 
-Can we please add CONFIG_DFU_SCSI in "Configuration Options" section at
-the beginning of this document?
+I'm wondering if we have somewhere some documentation on the environment 
+variables that exist and what they used for because this would be a nice 
+addition. At the very least, we can mention this variable in:
+- include/fdt_support.h for the function
+- common/Kconfig for the symbol
 
-See:
-https://docs.u-boot.org/en/latest/usage/dfu.html#configuration-options
+I'm also a bit torn on the base though, I think the assumed base is 
+generally hex and not dec, so maybe we should rather have that?
 
-Note: I requested that on v3 here:
-https://lore.kernel.org/all/87zfs11999.fsf@baylibre.com/
+Looking good otherwise :)
 
-And on v2: here:
-https://lore.kernel.org/all/87o7a94pe1.fsf@baylibre.com/
-
-With above addressed, feel free to add:
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-And please take this through your tree:
-Acked-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
->  
-> +scsi
-> +    for UFS storage::
-> +
-> +        dfu 0 scsi <dev>
-> +
-> +    each element in *dfu_alt_info* being
-> +
-> +    * <name> raw <offset> <size>     raw access to SCSI LUN
-> +    * <name> part <part_id>          raw access to partition
-> +    * <name> fat <part_id>           file in FAT partition
-> +    * <name> ext4 <part_id>          file in EXT4 partition
-> +    * <name> skip 0 0                ignore flashed data
-> +    * <name> script 0 0              execute commands in shell
-> +
-> +    with
-> +
-> +    size
-> +        is the size of the access area (hexadecimal without "0x")
-> +        or 0 which means whole device
-> +    partid
-> +        is the GPT or DOS partition index.
-> +    dev
-> +        is the SCSI LU (Logical Unit) index (decimal only)
-> +
-> +    A value of environment variable *dfu_alt_info* for UFS could be::
-> +
-> +        u-boot part 4;bl2 raw 0x1e 0x1d
-> +
-> +    See mmc section above for details on the skip and script types.
-> +
->  nand
->      raw slc nand device::
->  
->           dfu 0 nand <dev>
-> @@ -277,8 +308,9 @@ alternate list separated by '&' with the same format for each <alt>::
->  
->      mmc <dev>=<alt1>;....;<altN>
->      nand <dev>=<alt1>;....;<altN>
->      ram <dev>=<alt1>;....;<altN>
-> +    scsi <dev>=<alt1>;....;<altN>
->      sf <dev>=<alt1>;....;<altN>
->      mtd <dev>=<alt1>;....;<altN>
->      virt <dev>=<alt1>;....;<altN>
->  
-> diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
-> index aadd7e8cf7f0..3f1a8c4617cd 100644
-> --- a/drivers/dfu/Kconfig
-> +++ b/drivers/dfu/Kconfig
-> @@ -87,8 +87,15 @@ config DFU_VIRT
->  	  This option enables using DFU to read and write to VIRTUAL device
->  	  used at board level to manage specific behavior
->  	  (OTP update for example).
->  
-> +config DFU_SCSI
-> +	bool "SCSI flash back end for DFU"
-> +	help
-> +	  This option enables using DFU to read and write to SCSI devices
-> +	  used at board level to manage specific behavior
-> +	  (OTP update for example).
-> +
->  config SET_DFU_ALT_INFO
->  	bool "Dynamic set of DFU alternate information"
->  	help
->  	  This option allows to call the function set_dfu_alt_info to
-> diff --git a/drivers/dfu/Makefile b/drivers/dfu/Makefile
-> index dfbf64da6677..3b3ba0994b3a 100644
-> --- a/drivers/dfu/Makefile
-> +++ b/drivers/dfu/Makefile
-> @@ -10,4 +10,5 @@ obj-$(CONFIG_$(SPL_)DFU_NAND) += dfu_nand.o
->  obj-$(CONFIG_$(SPL_)DFU_RAM) += dfu_ram.o
->  obj-$(CONFIG_$(SPL_)DFU_SF) += dfu_sf.o
->  obj-$(CONFIG_$(SPL_)DFU_WRITE_ALT) += dfu_alt.o
->  obj-$(CONFIG_$(SPL_)DFU_VIRT) += dfu_virt.o
-> +obj-$(CONFIG_$(SPL_)DFU_SCSI) += dfu_scsi.o
-> diff --git a/drivers/dfu/dfu.c b/drivers/dfu/dfu.c
-> index 7a4d7ba2a7ff..756569217bbb 100644
-> --- a/drivers/dfu/dfu.c
-> +++ b/drivers/dfu/dfu.c
-> @@ -563,8 +563,11 @@ static int dfu_fill_entity(struct dfu_entity *dfu, char *s, int alt,
->  			return -1;
->  	} else if (strcmp(interface, "virt") == 0) {
->  		if (dfu_fill_entity_virt(dfu, devstr, argv, argc))
->  			return -1;
-> +	} else if (strcmp(interface, "scsi") == 0) {
-> +		if (dfu_fill_entity_scsi(dfu, devstr, argv, argc))
-> +			return -1;
->  	} else {
->  		printf("%s: Device %s not (yet) supported!\n",
->  		       __func__,  interface);
->  		return -1;
-> @@ -659,9 +662,9 @@ int dfu_config_entities(char *env, char *interface, char *devstr)
->  
->  const char *dfu_get_dev_type(enum dfu_device_type t)
->  {
->  	const char *const dev_t[] = {NULL, "eMMC", "OneNAND", "NAND", "RAM",
-> -				     "SF", "MTD", "VIRT"};
-> +				     "SF", "MTD", "VIRT", "SCSI"};
->  	return dev_t[t];
->  }
->  
->  const char *dfu_get_layout(enum dfu_layout l)
-> diff --git a/drivers/dfu/dfu_scsi.c b/drivers/dfu/dfu_scsi.c
-> new file mode 100644
-> index 000000000000..9f95194784c1
-> --- /dev/null
-> +++ b/drivers/dfu/dfu_scsi.c
-> @@ -0,0 +1,435 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * DFU SCSI backend (based on MMC backend).
-> + *
-> + * Copyright (C) 2012 Samsung Electronics
-> + *   author: Lukasz Majewski <l.majewski@samsung.com>
-> + * Copyright (C) 2024 Linaro Ltd.
-> + */
-> +
-> +#include <log.h>
-> +#include <malloc.h>
-> +#include <errno.h>
-> +#include <div64.h>
-> +#include <dfu.h>
-> +#include <ext4fs.h>
-> +#include <fat.h>
-> +#include <scsi.h>
-> +#include <part.h>
-> +#include <command.h>
-> +#include <linux/printk.h>
-> +
-> +static unsigned char *dfu_file_buf;
-> +static u64 dfu_file_buf_len;
-> +static u64 dfu_file_buf_offset;
-> +
-> +#define scsi_get_blk_desc(dev) ((struct blk_desc *)dev_get_uclass_plat(dev))
-> +
-> +#define find_scsi_device(dev_num, scsi) blk_get_device(UCLASS_SCSI, dev_num, scsi)
-> +
-> +static int scsi_block_op(enum dfu_op op, struct dfu_entity *dfu, u64 offset, void *buf, long *len)
-> +{
-> +	struct udevice *scsi;
-> +	u32 blk_start, blk_count, n = 0;
-> +	int ret;
-> +
-> +	ret = find_scsi_device(dfu->data.scsi.lun, &scsi);
-> +	if (ret < 0) {
-> +		pr_err("Device scsi %d - not found!", dfu->data.scsi.lun);
-> +		return -ENODEV;
-> +	}
-> +
-> +	/*
-> +	 * We must ensure that we work in lba_blk_size chunks, so ALIGN
-> +	 * this value.
-> +	 */
-> +	*len = ALIGN(*len, dfu->data.scsi.lba_blk_size);
-> +
-> +	blk_start = dfu->data.scsi.lba_start + (u32)lldiv(offset, dfu->data.scsi.lba_blk_size);
-> +	blk_count = *len / dfu->data.scsi.lba_blk_size;
-> +	if (blk_start + blk_count > dfu->data.scsi.lba_start + dfu->data.scsi.lba_size) {
-> +		puts("Request would exceed designated area!\n");
-> +		return -EINVAL;
-> +	}
-> +
-> +	debug("%s: %s dev: %d start: %d cnt: %d buf: 0x%p\n", __func__,
-> +	      op == DFU_OP_READ ? "scsi READ" : "scsi WRITE", dfu->data.scsi.lun, blk_start,
-> +	      blk_count, buf);
-> +	switch (op) {
-> +	case DFU_OP_READ:
-> +		n = blk_dread(scsi_get_blk_desc(scsi), blk_start, blk_count, buf);
-> +		break;
-> +	case DFU_OP_WRITE:
-> +		n = blk_dwrite(scsi_get_blk_desc(scsi), blk_start, blk_count, buf);
-> +		break;
-> +	default:
-> +		pr_err("Operation not supported\n");
-> +	}
-> +
-> +	if (n != blk_count) {
-> +		pr_err("scsi block operation failed");
-> +		return -EIO;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int scsi_file_op(enum dfu_op op, struct dfu_entity *dfu, u64 offset, void *buf, u64 *len)
-> +{
-> +	char dev_part_str[8];
-> +	int ret;
-> +	int fstype;
-> +	loff_t size = 0;
-> +
-> +	switch (dfu->layout) {
-> +	case DFU_FS_FAT:
-> +		fstype = FS_TYPE_FAT;
-> +		break;
-> +	case DFU_FS_EXT4:
-> +		fstype = FS_TYPE_EXT;
-> +		break;
-> +	case DFU_SKIP:
-> +		return 0;
-> +	default:
-> +		printf("%s: Layout (%s) not (yet) supported!\n", __func__,
-> +		       dfu_get_layout(dfu->layout));
-> +		return -1;
-> +	}
-> +
-> +	snprintf(dev_part_str, sizeof(dev_part_str), "%d:%d", dfu->data.scsi.dev,
-> +		 dfu->data.scsi.part);
-> +
-> +	ret = fs_set_blk_dev("scsi", dev_part_str, fstype);
-> +	if (ret) {
-> +		puts("dfu: fs_set_blk_dev error!\n");
-> +		return ret;
-> +	}
-> +
-> +	switch (op) {
-> +	case DFU_OP_READ:
-> +		ret = fs_read(dfu->name, (size_t)buf, offset, *len, &size);
-> +		if (ret) {
-> +			puts("dfu: fs_read error!\n");
-> +			return ret;
-> +		}
-> +		*len = size;
-> +		break;
-> +	case DFU_OP_WRITE:
-> +		ret = fs_write(dfu->name, (size_t)buf, offset, *len, &size);
-> +		if (ret) {
-> +			puts("dfu: fs_write error!\n");
-> +			return ret;
-> +		}
-> +		break;
-> +	case DFU_OP_SIZE:
-> +		ret = fs_size(dfu->name, &size);
-> +		if (ret) {
-> +			puts("dfu: fs_size error!\n");
-> +			return ret;
-> +		}
-> +		*len = size;
-> +		break;
-> +	default:
-> +		return -1;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +static int scsi_file_buf_write(struct dfu_entity *dfu, u64 offset, void *buf, long *len)
-> +{
-> +	int ret = 0;
-> +
-> +	if (offset == 0) {
-> +		dfu_file_buf_len = 0;
-> +		dfu_file_buf_offset = 0;
-> +	}
-> +
-> +	/* Add to the current buffer. */
-> +	if (dfu_file_buf_len + *len > CONFIG_SYS_DFU_MAX_FILE_SIZE)
-> +		*len = CONFIG_SYS_DFU_MAX_FILE_SIZE - dfu_file_buf_len;
-> +	memcpy(dfu_file_buf + dfu_file_buf_len, buf, *len);
-> +	dfu_file_buf_len += *len;
-> +
-> +	if (dfu_file_buf_len == CONFIG_SYS_DFU_MAX_FILE_SIZE) {
-> +		ret = scsi_file_op(DFU_OP_WRITE, dfu, dfu_file_buf_offset, dfu_file_buf,
-> +				   &dfu_file_buf_len);
-> +		dfu_file_buf_offset += dfu_file_buf_len;
-> +		dfu_file_buf_len = 0;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +static int scsi_file_buf_write_finish(struct dfu_entity *dfu)
-> +{
-> +	int ret = scsi_file_op(DFU_OP_WRITE, dfu, dfu_file_buf_offset, dfu_file_buf,
-> +			       &dfu_file_buf_len);
-> +
-> +	/* Now that we're done */
-> +	dfu_file_buf_len = 0;
-> +	dfu_file_buf_offset = 0;
-> +
-> +	return ret;
-> +}
-> +
-> +int dfu_write_medium_scsi(struct dfu_entity *dfu, u64 offset, void *buf, long *len)
-> +{
-> +	int ret = -1;
-> +
-> +	switch (dfu->layout) {
-> +	case DFU_RAW_ADDR:
-> +		ret = scsi_block_op(DFU_OP_WRITE, dfu, offset, buf, len);
-> +		break;
-> +	case DFU_FS_FAT:
-> +	case DFU_FS_EXT4:
-> +		ret = scsi_file_buf_write(dfu, offset, buf, len);
-> +		break;
-> +	case DFU_SCRIPT:
-> +		ret = run_command_list(buf, *len, 0);
-> +		break;
-> +	case DFU_SKIP:
-> +		ret = 0;
-> +		break;
-> +	default:
-> +		printf("%s: Layout (%s) not (yet) supported!\n", __func__,
-> +		       dfu_get_layout(dfu->layout));
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +int dfu_flush_medium_scsi(struct dfu_entity *dfu)
-> +{
-> +	int ret = 0;
-> +
-> +	switch (dfu->layout) {
-> +	case DFU_FS_FAT:
-> +	case DFU_FS_EXT4:
-> +		ret = scsi_file_buf_write_finish(dfu);
-> +		break;
-> +	case DFU_SCRIPT:
-> +		/* script may have changed the dfu_alt_info */
-> +		dfu_reinit_needed = true;
-> +		break;
-> +	case DFU_RAW_ADDR:
-> +	case DFU_SKIP:
-> +		break;
-> +	default:
-> +		printf("%s: Layout (%s) not (yet) supported!\n", __func__,
-> +		       dfu_get_layout(dfu->layout));
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +int dfu_get_medium_size_scsi(struct dfu_entity *dfu, u64 *size)
-> +{
-> +	int ret;
-> +
-> +	switch (dfu->layout) {
-> +	case DFU_RAW_ADDR:
-> +		*size = dfu->data.scsi.lba_size * dfu->data.scsi.lba_blk_size;
-> +		return 0;
-> +	case DFU_FS_FAT:
-> +	case DFU_FS_EXT4:
-> +		ret = scsi_file_op(DFU_OP_SIZE, dfu, 0, NULL, size);
-> +		if (ret < 0)
-> +			return ret;
-> +		return 0;
-> +	case DFU_SCRIPT:
-> +	case DFU_SKIP:
-> +		return 0;
-> +	default:
-> +		printf("%s: Layout (%s) not (yet) supported!\n", __func__,
-> +		       dfu_get_layout(dfu->layout));
-> +		return -1;
-> +	}
-> +}
-> +
-> +static int scsi_file_buf_read(struct dfu_entity *dfu, u64 offset, void *buf, long *len)
-> +{
-> +	int ret;
-> +
-> +	if (offset == 0 || offset >= dfu_file_buf_offset + dfu_file_buf_len ||
-> +	    offset + *len < dfu_file_buf_offset) {
-> +		u64 file_len = CONFIG_SYS_DFU_MAX_FILE_SIZE;
-> +
-> +		ret = scsi_file_op(DFU_OP_READ, dfu, offset, dfu_file_buf, &file_len);
-> +		if (ret < 0)
-> +			return ret;
-> +		dfu_file_buf_len = file_len;
-> +		dfu_file_buf_offset = offset;
-> +	}
-> +	if (offset + *len > dfu_file_buf_offset + dfu_file_buf_len)
-> +		return -EINVAL;
-> +
-> +	/* Add to the current buffer. */
-> +	memcpy(buf, dfu_file_buf + offset - dfu_file_buf_offset, *len);
-> +
-> +	return 0;
-> +}
-> +
-> +int dfu_read_medium_scsi(struct dfu_entity *dfu, u64 offset, void *buf, long *len)
-> +{
-> +	int ret = -1;
-> +
-> +	switch (dfu->layout) {
-> +	case DFU_RAW_ADDR:
-> +		ret = scsi_block_op(DFU_OP_READ, dfu, offset, buf, len);
-> +		break;
-> +	case DFU_FS_FAT:
-> +	case DFU_FS_EXT4:
-> +		ret = scsi_file_buf_read(dfu, offset, buf, len);
-> +		break;
-> +	default:
-> +		printf("%s: Layout (%s) not (yet) supported!\n", __func__,
-> +		       dfu_get_layout(dfu->layout));
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +void dfu_free_entity_scsi(struct dfu_entity *dfu)
-> +{
-> +	if (dfu_file_buf) {
-> +		free(dfu_file_buf);
-> +		dfu_file_buf = NULL;
-> +	}
-> +}
-> +
-> +/*
-> + * @param s Parameter string containing space-separated arguments:
-> + *	1st:
-> + *		raw	(raw read/write)
-> + *		fat	(files)
-> + *		ext4	(^)
-> + *		part	(partition image)
-> + *	2nd and 3rd:
-> + *		lba_start and lba_size, for raw write
-> + *		scsi_dev and scsi_part, for filesystems and part
-> + */
-> +int dfu_fill_entity_scsi(struct dfu_entity *dfu, char *devstr, char **argv, int argc)
-> +{
-> +	const char *entity_type;
-> +	ssize_t second_arg;
-> +	ssize_t third_arg = -1;
-> +	struct udevice *scsi;
-> +	struct blk_desc *blk_dev;
-> +	int ret;
-> +	char *s;
-> +
-> +	if (argc < 2) {
-> +		pr_err("Need at least one argument\n");
-> +		return -EINVAL;
-> +	}
-> +
-> +	dfu->data.scsi.lun = dectoul(devstr, &s);
-> +	if (*s)
-> +		return -EINVAL;
-> +
-> +	entity_type = argv[0];
-> +	/*
-> +	 * Base 0 means we'll accept (prefixed with 0x or 0) base 16, 8,
-> +	 * with default 10.
-> +	 */
-> +	second_arg = simple_strtol(argv[1], &s, 0);
-> +	if (*s)
-> +		return -EINVAL;
-> +	if (argc >= 3) {
-> +		third_arg = simple_strtoul(argv[2], &s, 0);
-> +		if (*s)
-> +			return -EINVAL;
-> +	}
-> +
-> +	if (scsi_scan(false)) {
-> +		pr_err("Couldn't init scsi device.\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	ret = find_scsi_device(dfu->data.scsi.lun, &scsi);
-> +	if (ret < 0) {
-> +		pr_err("Couldn't find scsi device no. %d.\n", dfu->data.scsi.lun);
-> +		return -ENODEV;
-> +	}
-> +
-> +	blk_dev = scsi_get_blk_desc(scsi);
-> +	if (!blk_dev) {
-> +		pr_err("Couldn't get block device for scsi device no. %d.\n", dfu->data.scsi.lun);
-> +		return -ENODEV;
-> +	}
-> +
-> +	/* if it's NOT a raw write */
-> +	if (strcmp(entity_type, "raw")) {
-> +		dfu->data.scsi.dev = (second_arg != -1) ? second_arg : dfu->data.scsi.lun;
-> +		dfu->data.scsi.part = third_arg;
-> +	}
-> +
-> +	if (!strcmp(entity_type, "raw")) {
-> +		dfu->layout = DFU_RAW_ADDR;
-> +		dfu->data.scsi.lba_start = second_arg;
-> +		if (third_arg < 0) {
-> +			pr_err("raw requires two arguments\n");
-> +			return -EINVAL;
-> +		}
-> +		dfu->data.scsi.lba_size = third_arg;
-> +		dfu->data.scsi.lba_blk_size = blk_dev->blksz;
-> +
-> +		/*
-> +		 * In case the size is zero (i.e. scsi raw 0x10 0),
-> +		 * assume the user intends to use whole device.
-> +		 */
-> +		if (third_arg == 0)
-> +			dfu->data.scsi.lba_size = blk_dev->lba;
-> +
-> +	} else if (!strcmp(entity_type, "part")) {
-> +		struct disk_partition partinfo;
-> +		int scsipart = second_arg;
-> +
-> +		if (third_arg >= 0) {
-> +			pr_err("part only accepts one argument\n");
-> +			return -EINVAL;
-> +		}
-> +
-> +		if (part_get_info(blk_dev, scsipart, &partinfo) != 0) {
-> +			pr_err("Couldn't find part #%d on scsi device #%d\n", scsipart,
-> +			       dfu->data.scsi.lun);
-> +			return -ENODEV;
-> +		}
-> +
-> +		dfu->layout = DFU_RAW_ADDR;
-> +		dfu->data.scsi.lba_start = partinfo.start;
-> +		dfu->data.scsi.lba_size = partinfo.size;
-> +		dfu->data.scsi.lba_blk_size = partinfo.blksz;
-> +	} else if (!strcmp(entity_type, "fat")) {
-> +		dfu->layout = DFU_FS_FAT;
-> +	} else if (!strcmp(entity_type, "ext4")) {
-> +		dfu->layout = DFU_FS_EXT4;
-> +	} else if (!strcmp(entity_type, "skip")) {
-> +		dfu->layout = DFU_SKIP;
-> +	} else if (!strcmp(entity_type, "script")) {
-> +		dfu->layout = DFU_SCRIPT;
-> +	} else {
-> +		pr_err("Memory layout (%s) not supported!\n", entity_type);
-> +		return -ENODEV;
-> +	}
-> +
-> +	dfu->dev_type = DFU_DEV_SCSI;
-> +	dfu->get_medium_size = dfu_get_medium_size_scsi;
-> +	dfu->read_medium = dfu_read_medium_scsi;
-> +	dfu->write_medium = dfu_write_medium_scsi;
-> +	dfu->flush_medium = dfu_flush_medium_scsi;
-> +	dfu->inited = 0;
-> +	dfu->free_entity = dfu_free_entity_scsi;
-> +
-> +	/* Check if file buffer is ready */
-> +	if (!dfu_file_buf) {
-> +		dfu_file_buf = memalign(CONFIG_SYS_CACHELINE_SIZE, CONFIG_SYS_DFU_MAX_FILE_SIZE);
-> +		if (!dfu_file_buf) {
-> +			pr_err("Could not memalign 0x%x bytes\n", CONFIG_SYS_DFU_MAX_FILE_SIZE);
-> +			return -ENOMEM;
-> +		}
-> +	}
-> +
-> +	return 0;
-> +}
-> diff --git a/include/dfu.h b/include/dfu.h
-> index e25588c33cb8..12f9dfcdfcdf 100644
-> --- a/include/dfu.h
-> +++ b/include/dfu.h
-> @@ -23,8 +23,9 @@ enum dfu_device_type {
->  	DFU_DEV_RAM,
->  	DFU_DEV_SF,
->  	DFU_DEV_MTD,
->  	DFU_DEV_VIRT,
-> +	DFU_DEV_SCSI,
->  };
->  
->  enum dfu_layout {
->  	DFU_RAW_ADDR = 1,
-> @@ -98,8 +99,21 @@ struct sf_internal_data {
->  struct virt_internal_data {
->  	int dev_num;
->  };
->  
-> +struct scsi_internal_data {
-> +	int lun;
-> +
-> +	/* RAW programming */
-> +	unsigned int lba_start;
-> +	unsigned int lba_size;
-> +	unsigned int lba_blk_size;
-> +
-> +	/* FAT/EXT */
-> +	unsigned int dev; // Always 0???
-> +	unsigned int part;
-> +};
-> +
->  #if defined(CONFIG_DFU_NAME_MAX_SIZE)
->  #define DFU_NAME_SIZE			CONFIG_DFU_NAME_MAX_SIZE
->  #else
->  #define DFU_NAME_SIZE			32
-> @@ -125,8 +139,9 @@ struct dfu_entity {
->  		struct nand_internal_data nand;
->  		struct ram_internal_data ram;
->  		struct sf_internal_data sf;
->  		struct virt_internal_data virt;
-> +		struct scsi_internal_data scsi;
->  	} data;
->  
->  	int (*get_medium_size)(struct dfu_entity *dfu, u64 *size);
->  
-> @@ -515,8 +530,20 @@ static inline int dfu_fill_entity_virt(struct dfu_entity *dfu, char *devstr,
->  	return -1;
->  }
->  #endif
->  
-> +#if CONFIG_IS_ENABLED(DFU_SCSI)
-> +int dfu_fill_entity_scsi(struct dfu_entity *dfu, char *devstr,
-> +			 char **argv, int argc);
-> +#else
-> +static inline int dfu_fill_entity_scsi(struct dfu_entity *dfu, char *devstr,
-> +				       char **argv, int argc)
-> +{
-> +	puts("SCSI support not available!\n");
-> +	return -1;
-> +}
-> +#endif
-> +
->  extern bool dfu_reinit_needed;
->  extern bool dfu_alt_info_changed;
->  
->  #if CONFIG_IS_ENABLED(DFU_WRITE_ALT)
->
-> -- 
-> 2.46.2
+Cheers,
+Quentin
