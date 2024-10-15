@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF6F8CFC27C
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:38:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E2E8CFC27C
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 15:38:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BE9488A43;
-	Tue, 15 Oct 2024 17:37:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B730888C6D;
+	Tue, 15 Oct 2024 17:37:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5B4E88A43; Tue, 15 Oct 2024 17:37:54 +0200 (CEST)
+ id 4519888C3D; Tue, 15 Oct 2024 17:37:58 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 8135088730
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:37:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id DE3AD88730
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 17:37:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9695F1691;
- Tue, 15 Oct 2024 08:38:21 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 005D6169C;
+ Tue, 15 Oct 2024 08:38:25 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1F6D83F528;
- Tue, 15 Oct 2024 08:37:48 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 810D43F528;
+ Tue, 15 Oct 2024 08:37:52 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -33,10 +33,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 04/15] efi: memory: use the lmb API's for allocating and
- freeing memory
-Date: Tue, 15 Oct 2024 21:07:06 +0530
-Message-Id: <20241015153717.401371-5-sughosh.ganu@linaro.org>
+Subject: [PATCH v4 05/15] lmb: notify of any changes to the LMB memory map
+Date: Tue, 15 Oct 2024 21:07:07 +0530
+Message-Id: <20241015153717.401371-6-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241015153717.401371-1-sughosh.ganu@linaro.org>
 References: <20241015153717.401371-1-sughosh.ganu@linaro.org>
@@ -58,175 +57,288 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the LMB API's for allocating and freeing up memory. With this, the
-LMB module becomes the common backend for managing non U-Boot image
-memory that might be requested by other modules.
+In U-Boot, LMB and EFI are two primary modules who provide memory
+allocation and reservation API's. Both these modules operate with the
+same regions of memory for allocations. Use the LMB memory map update
+event to notify other interested listeners about a change in it's
+memory map. This can then be used by the other module to keep track of
+available and used memory.
+
+There is no need to send these notifications when the LMB module is
+being unit-tested. Add a flag to the lmb structure to indicate if the
+memory map is being used for tests, and suppress sending any
+notifications when running these unit tests.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since V3: None
+Changes since V3:
+* Drop use of is_addr_in_ram() function
+* Drop use of CONFIG_MEM_MAP_UPDATE_NOTIFY symbol to check if the
+  notification needs to be sent.
+* s/lmb_notify/lmb_should_notify
+* Put a check for EFI_LOADER in the lmb_should_notify() function
 
- lib/efi_loader/Kconfig      |  1 +
- lib/efi_loader/efi_memory.c | 77 +++++++++++--------------------------
- 2 files changed, 24 insertions(+), 54 deletions(-)
 
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 6f6fa8d629d..69b2c9360d8 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -20,6 +20,7 @@ config EFI_LOADER
- 	select DM_EVENT
- 	select EVENT_DYNAMIC
- 	select LIB_UUID
-+	select LMB
- 	imply PARTITION_UUIDS
- 	select REGEX
- 	imply FAT
+ include/efi_loader.h        |  14 +++++
+ include/lmb.h               |   2 +
+ lib/efi_loader/efi_memory.c |   2 +-
+ lib/lmb.c                   | 104 +++++++++++++++++++++++++++++++-----
+ 4 files changed, 109 insertions(+), 13 deletions(-)
+
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 511281e150e..ac203957181 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -784,6 +784,20 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
+ 				uint32_t *descriptor_version);
+ /* Adds a range into the EFI memory map */
+ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
++
++/**
++ * efi_add_memory_map_pg() - add pages to the memory map
++ *
++ * @start:		start address, must be a multiple of EFI_PAGE_SIZE
++ * @pages:		number of pages to add
++ * @memory_type:	type of memory added
++ * @overlap_only_ram:	region may only overlap RAM
++ * Return:		status code
++ */
++efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
++					  int memory_type,
++					  bool overlap_only_ram);
++
+ /* Adds a conventional range into the EFI memory map */
+ efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
+ 					     u64 ram_top);
+diff --git a/include/lmb.h b/include/lmb.h
+index ec477c1f51d..837002121d9 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -46,10 +46,12 @@ struct lmb_region {
+  *
+  * @free_mem:	List of free memory regions
+  * @used_mem:	List of used/reserved memory regions
++ * @test:	Is structure being used for LMB tests
+  */
+ struct lmb {
+ 	struct alist free_mem;
+ 	struct alist used_mem;
++	bool test;
+ };
+ 
+ /**
 diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index c6f1dd09456..aa1da21f9f9 100644
+index aa1da21f9f9..41501e9d41b 100644
 --- a/lib/efi_loader/efi_memory.c
 +++ b/lib/efi_loader/efi_memory.c
-@@ -9,6 +9,7 @@
+@@ -264,7 +264,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+  * @overlap_only_ram:	region may only overlap RAM
+  * Return:		status code
+  */
+-static efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
++efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+ 					  int memory_type,
+ 					  bool overlap_only_ram)
+ {
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 0504a7b3407..e7167f858f0 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -8,6 +8,7 @@
  
+ #include <alist.h>
  #include <efi_loader.h>
- #include <init.h>
-+#include <lmb.h>
- #include <log.h>
- #include <malloc.h>
++#include <event.h>
+ #include <image.h>
  #include <mapmem.h>
-@@ -432,53 +433,6 @@ static efi_status_t efi_check_allocated(u64 addr, bool must_be_allocated)
- 	return EFI_NOT_FOUND;
+ #include <lmb.h>
+@@ -22,11 +23,52 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++#define MAP_OP_RESERVE		(u8)0x1
++#define MAP_OP_FREE		(u8)0x2
++#define MAP_OP_ADD		(u8)0x3
++
+ #define LMB_ALLOC_ANYWHERE	0
+ #define LMB_ALIST_INITIAL_SIZE	4
+ 
+ static struct lmb lmb;
+ 
++static bool lmb_should_notify(enum lmb_flags flags)
++{
++	return !lmb.test && !(flags & LMB_NONOTIFY) &&
++		CONFIG_IS_ENABLED(EFI_LOADER);
++}
++
++static int __maybe_unused lmb_map_update_notify(phys_addr_t addr,
++						phys_size_t size,
++						u8 op)
++{
++	u64 efi_addr;
++	u64 pages;
++	efi_status_t status;
++
++	if (op != MAP_OP_RESERVE && op != MAP_OP_FREE && op != MAP_OP_ADD) {
++		log_err("Invalid map update op received (%d)\n", op);
++		return -1;
++	}
++
++	efi_addr = (uintptr_t)map_sysmem(addr, 0);
++	pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
++	efi_addr &= ~EFI_PAGE_MASK;
++
++	status = efi_add_memory_map_pg(efi_addr, pages,
++				       op == MAP_OP_RESERVE ?
++				       EFI_BOOT_SERVICES_DATA :
++				       EFI_CONVENTIONAL_MEMORY,
++				       false);
++	if (status != EFI_SUCCESS) {
++		log_err("%s: LMB Map notify failure %lu\n", __func__,
++			status & ~EFI_ERROR_MASK);
++		return -1;
++	} else {
++		return 0;
++	}
++}
++
+ static void lmb_print_region_flags(enum lmb_flags flags)
+ {
+ 	u64 bitpos;
+@@ -473,9 +515,17 @@ static long lmb_add_region(struct alist *lmb_rgn_lst, phys_addr_t base,
+ /* This routine may be called with relocation disabled. */
+ long lmb_add(phys_addr_t base, phys_size_t size)
+ {
++	long ret;
+ 	struct alist *lmb_rgn_lst = &lmb.free_mem;
+ 
+-	return lmb_add_region(lmb_rgn_lst, base, size);
++	ret = lmb_add_region(lmb_rgn_lst, base, size);
++	if (ret)
++		return ret;
++
++	if (lmb_should_notify(LMB_NONE))
++		return lmb_map_update_notify(base, size, MAP_OP_ADD);
++
++	return 0;
  }
  
--/**
-- * efi_find_free_memory() - find free memory pages
-- *
-- * @len:	size of memory area needed
-- * @max_addr:	highest address to allocate
-- * Return:	pointer to free memory area or 0
-- */
--static uint64_t efi_find_free_memory(uint64_t len, uint64_t max_addr)
+ static long __lmb_free(phys_addr_t base, phys_size_t size)
+@@ -529,11 +579,6 @@ static long __lmb_free(phys_addr_t base, phys_size_t size)
+ 				    rgn[i].flags);
+ }
+ 
+-long lmb_free(phys_addr_t base, phys_size_t size)
 -{
--	struct efi_mem_list *lmem;
--
--	/*
--	 * Prealign input max address, so we simplify our matching
--	 * logic below and can just reuse it as return pointer.
--	 */
--	max_addr &= ~EFI_PAGE_MASK;
--
--	list_for_each_entry(lmem, &efi_mem, link) {
--		struct efi_mem_desc *desc = &lmem->desc;
--		uint64_t desc_len = desc->num_pages << EFI_PAGE_SHIFT;
--		uint64_t desc_end = desc->physical_start + desc_len;
--		uint64_t curmax = min(max_addr, desc_end);
--		uint64_t ret = curmax - len;
--
--		/* We only take memory from free RAM */
--		if (desc->type != EFI_CONVENTIONAL_MEMORY)
--			continue;
--
--		/* Out of bounds for max_addr */
--		if ((ret + len) > max_addr)
--			continue;
--
--		/* Out of bounds for upper map limit */
--		if ((ret + len) > desc_end)
--			continue;
--
--		/* Out of bounds for lower map limit */
--		if (ret < desc->physical_start)
--			continue;
--
--		/* Return the highest address in this map within bounds */
--		return ret;
--	}
--
--	return 0;
+-	return __lmb_free(base, size);
 -}
 -
  /**
-  * efi_allocate_pages - allocate memory pages
-  *
-@@ -493,8 +447,9 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
- 				efi_uintn_t pages, uint64_t *memory)
- {
- 	u64 len;
-+	uint flags;
- 	efi_status_t ret;
--	uint64_t addr;
-+	phys_addr_t addr;
- 
- 	/* Check import parameters */
- 	if (memory_type >= EFI_PERSISTENT_MEMORY_TYPE &&
-@@ -508,33 +463,37 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
- 	    (len >> EFI_PAGE_SHIFT) != (u64)pages)
- 		return EFI_OUT_OF_RESOURCES;
- 
-+	flags = LMB_NOOVERWRITE | LMB_NONOTIFY;
- 	switch (type) {
- 	case EFI_ALLOCATE_ANY_PAGES:
- 		/* Any page */
--		addr = efi_find_free_memory(len, -1ULL);
-+		addr = (u64)lmb_alloc_flags(len, EFI_PAGE_SIZE, flags);
- 		if (!addr)
- 			return EFI_OUT_OF_RESOURCES;
- 		break;
- 	case EFI_ALLOCATE_MAX_ADDRESS:
- 		/* Max address */
--		addr = efi_find_free_memory(len, *memory);
-+		addr = map_to_sysmem((void *)(uintptr_t)*memory);
-+		addr = (u64)lmb_alloc_base_flags(len, EFI_PAGE_SIZE, addr,
-+						 flags);
- 		if (!addr)
- 			return EFI_OUT_OF_RESOURCES;
- 		break;
- 	case EFI_ALLOCATE_ADDRESS:
- 		if (*memory & EFI_PAGE_MASK)
- 			return EFI_NOT_FOUND;
--		/* Exact address, reserve it. The addr is already in *memory. */
--		ret = efi_check_allocated(*memory, false);
--		if (ret != EFI_SUCCESS)
-+
-+		addr = map_to_sysmem((void *)(uintptr_t)*memory);
-+		addr = (u64)lmb_alloc_addr_flags(addr, len, flags);
-+		if (!addr)
- 			return EFI_NOT_FOUND;
--		addr = *memory;
- 		break;
- 	default:
- 		/* UEFI doesn't specify other allocation types */
- 		return EFI_INVALID_PARAMETER;
- 	}
- 
-+	addr = (u64)(uintptr_t)map_sysmem(addr, 0);
- 	/* Reserve that map in our memory maps */
- 	ret = efi_add_memory_map_pg(addr, pages, memory_type, true);
- 	if (ret != EFI_SUCCESS)
-@@ -555,6 +514,9 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+  * lmb_free_flags() - Free up a region of memory
+  * @base: Base Address of region to be freed
+@@ -545,16 +590,38 @@ long lmb_free(phys_addr_t base, phys_size_t size)
+  * Return: 0 if successful, -1 on failure
   */
- efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages)
+ long lmb_free_flags(phys_addr_t base, phys_size_t size,
+-		    __always_unused uint flags)
++		    uint flags)
  {
-+	u64 len;
-+	uint flags;
-+	long status;
- 	efi_status_t ret;
+-	return __lmb_free(base, size);
++	long ret;
++
++	ret = __lmb_free(base, size);
++	if (ret < 0)
++		return ret;
++
++	if (lmb_should_notify(flags))
++		return lmb_map_update_notify(base, size, MAP_OP_FREE);
++
++	return ret;
++}
++
++long lmb_free(phys_addr_t base, phys_size_t size)
++{
++	return lmb_free_flags(base, size, LMB_NONE);
+ }
  
- 	ret = efi_check_allocated(memory, true);
-@@ -568,6 +530,13 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages)
- 		return EFI_INVALID_PARAMETER;
+ long lmb_reserve_flags(phys_addr_t base, phys_size_t size, enum lmb_flags flags)
+ {
++	long ret = 0;
+ 	struct alist *lmb_rgn_lst = &lmb.used_mem;
+ 
+-	return lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
++	ret = lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
++	if (ret < 0)
++		return -1;
++
++	if (lmb_should_notify(flags))
++		return lmb_map_update_notify(base, size, MAP_OP_RESERVE);
++
++	return ret;
+ }
+ 
+ long lmb_reserve(phys_addr_t base, phys_size_t size)
+@@ -586,6 +653,8 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+ static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
+ 				    phys_addr_t max_addr, enum lmb_flags flags)
+ {
++	u8 op;
++	int ret;
+ 	long i, rgn;
+ 	phys_addr_t base = 0;
+ 	phys_addr_t res_base;
+@@ -616,6 +685,15 @@ static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
+ 				if (lmb_add_region_flags(&lmb.used_mem, base,
+ 							 size, flags) < 0)
+ 					return 0;
++
++				if (lmb_should_notify(flags)) {
++					op = MAP_OP_RESERVE;
++					ret = lmb_map_update_notify(base, size,
++								    op);
++					if (ret)
++						return ret;
++				}
++
+ 				return base;
+ 			}
+ 
+@@ -785,7 +863,7 @@ int lmb_is_reserved_flags(phys_addr_t addr, int flags)
+ 	return 0;
+ }
+ 
+-static int lmb_setup(void)
++static int lmb_setup(bool test)
+ {
+ 	bool ret;
+ 
+@@ -803,6 +881,8 @@ static int lmb_setup(void)
+ 		return -ENOMEM;
  	}
  
-+	flags = LMB_NOOVERWRITE | LMB_NONOTIFY;
-+	len = (u64)pages << EFI_PAGE_SHIFT;
-+	status = lmb_free_flags(map_to_sysmem((void *)(uintptr_t)memory), len,
-+				flags);
-+	if (status)
-+		return EFI_NOT_FOUND;
++	lmb.test = test;
 +
- 	ret = efi_add_memory_map_pg(memory, pages, EFI_CONVENTIONAL_MEMORY,
- 				    false);
- 	if (ret != EFI_SUCCESS)
+ 	return 0;
+ }
+ 
+@@ -822,7 +902,7 @@ int lmb_init(void)
+ {
+ 	int ret;
+ 
+-	ret = lmb_setup();
++	ret = lmb_setup(false);
+ 	if (ret) {
+ 		log_info("Unable to init LMB\n");
+ 		return ret;
+@@ -850,7 +930,7 @@ int lmb_push(struct lmb *store)
+ 	int ret;
+ 
+ 	*store = lmb;
+-	ret = lmb_setup();
++	ret = lmb_setup(true);
+ 	if (ret)
+ 		return ret;
+ 
 -- 
 2.34.1
 
