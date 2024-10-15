@@ -4,53 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63C37D1D88D
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 16:55:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CC87D1D88B
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 16:55:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A53988966;
-	Tue, 15 Oct 2024 18:55:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 01599889E9;
+	Tue, 15 Oct 2024 18:55:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729011338;
-	bh=MJO1Y7Nlep2bW5A+LnUqZL3bSMOubmP+t72w9ITlkHQ=;
+	s=phobos-20191101; t=1729011339;
+	bh=9UdZQjaVvLg/ZT0wsQrGi9B20U7+K5wUW56Lz2Af0SI=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=LGjLS8iupdVsvDKf22/48zVBrEzrPjZD+ef83pxciLRx+gpSmws0FR2PsWKurFXp9
-	 /GGTO38otjLGC9+V1owlKpQkyzM46EXz3IxBx7zyOL5tUUOMI69EPxhzMtbzlc1/vN
-	 UZ9D+oS/IahebPwF3gbf1qVCNP3LiNol9LpvgVsH9x478kMrHlW1hK2ge7gkZHVslE
-	 CxsiXJEQWgO9czMaIhoKzGzLlvzYrFiFqoJMUvxq2jNOZmL0we3SuUj+6N3mrP1dPR
-	 0f0rVrtgszfN2seiAHjmIqW2TWz+Ow6e+hjoIF3prC3SxWWMuZFX+8AN+WhtX6REGE
-	 Gg1XN6TggoRhQ==
+	b=p9aHUiySJvZfXJDfEP0dFpKnZrWEMepO2F/mZuF2Lb0fIRfHWhHsarq0XGmxNvYU5
+	 ewNm4C0nHliQA8fFQ8OT+4UffEYEnF2/Ot5tQzJs6P13/eG3+Wxo3cTlMMCQq+sjyp
+	 mPwVLnR1jMJV5jbKvKYl1z0YmuyJfuHdTIU6WH9d25On3FtxWZQNaLSqwKl5e+FQDe
+	 yLId4DfrzGhFRwJVAv/EzAUYyt4PXpu9zSejgUB4fA+msfAVLtJc4zfnoi2bE2LyFp
+	 XmcCRtG70p1JhcFlfNoOFAe/wnG2QtYYqfTpWSbzmgWggZLxXmw7UMfCRUDXo+crEZ
+	 u+K3TaEdA0rCw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D0BAD88703;
- Tue, 15 Oct 2024 18:55:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 75E668878A;
+ Tue, 15 Oct 2024 18:55:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729011337;
- bh=MJO1Y7Nlep2bW5A+LnUqZL3bSMOubmP+t72w9ITlkHQ=;
+ s=phobos-20191101; t=1729011338;
+ bh=9UdZQjaVvLg/ZT0wsQrGi9B20U7+K5wUW56Lz2Af0SI=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=lKWxmggaxOd2dEfZWcverb1OjoTmyuYpj+dB0c1Fat/cj461q6kFByX2FPJ5jqY0s
- 9tf1XbJkws+lQeGnrzgCm3kCfXNAhYChLF9J4lnd0bSka87YpyE0h3ytgBi7GviyoQ
- dlS5/R8Dlk6+feRBKfjkBXNKw1vb7jpQPA9qwkEzAORPC6R4EmgTGpjkd76IfjKWA6
- Zrt/dV9A/rXEdx6mq4ioUZa/g1+DWNUw7MTeqZqijWRrxKRNuIP5CNyY+bF1fdiZor
- n8KkIs5HgNVQOapyOA6/AhX6lCJuNOKucvLSpkXX5WCiqJhin3QIsyTf5Z644fM3fr
- jDbw+EKCt/1mg==
-Message-ID: <f2859286-0e58-4373-b5ff-7121da452ddb@denx.de>
-Date: Tue, 15 Oct 2024 17:41:30 +0200
+ b=dal/jHn1LDQpw4nwntya3+hRIT2T3VZYeWzx3Qg8vJkI8EY8vlzFwb0yzHjT36QwY
+ uel4bpbdkt6noie+O41IWsVri0mEC4zjZahA2NUW5HOSmOaDLw5T+ck2w5N+2Z6N5R
+ IeRr5M9vlXflanQC37rg8GO95JDjCmbnVbK3Ji2O/OhXSUkriK+3n/lQa7Z1TQhQit
+ J8JH1+I2p2x79Txx2pXhLqo5HPTghzc8aMHrol6wn/R8WA+AuRh1+IXq6JNNhjQMBJ
+ bLpqPfznKmV2RuHubpSOyMXKUId8mzgTJZ96DS8pKh3wenJ1ab4cIxHXmy+14yqUj+
+ 9NfiqtfN6SuKw==
+Message-ID: <55d0d6bc-e18f-4ac4-b017-03c3e8bca36c@denx.de>
+Date: Tue, 15 Oct 2024 17:42:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: Fix test dependency on ext4write command
-To: Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>
-Cc: Love Kumar <love.kumar@amd.com>, Tom Rini <trini@konsulko.com>
-References: <20241015141737.1170669-1-andrew.goodbody@linaro.org>
+Subject: Re: [PATCH v7 6/6] MAINTAINERS: add TCPM section
+To: Sebastian Reichel <sebastian.reichel@collabora.com>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
+ Soeren Moch <smoch@web.de>
+Cc: Tim Harvey <tharvey@gateworks.com>, Kever Yang
+ <kever.yang@rock-chips.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Simon Glass <sjg@chromium.org>, Anand Moon <linux.amoon@gmail.com>,
+ Maxim Kiselev <bigunclemax@gmail.com>
+References: <20241015152719.88678-1-sebastian.reichel@collabora.com>
+ <20241015152719.88678-7-sebastian.reichel@collabora.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241015141737.1170669-1-andrew.goodbody@linaro.org>
+In-Reply-To: <20241015152719.88678-7-sebastian.reichel@collabora.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -69,50 +74,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/15/24 4:17 PM, Andrew Goodbody wrote:
-> The tests test_usb_ext4load_ext4write, test_usb_ext2load and
-> test_usb_load depend on the command ext4write being present not just
-> the feature of being able to write to an ext4 file system. So update
-> their dependencies to include the ext4write command itself. This will
-> prevent spurious test failures when running the USB tests against USB
-> storage with an ext2/ext4 partition but no ext4write command available.
+On 10/15/24 5:26 PM, Sebastian Reichel wrote:
+> Add new section for USB TypeC Port Manager (TCPM) support, which
+> is needed to figure out cable orientation of USB-C plus and to do
+> USB PD communication.
 > 
-> Fixes: 1c5b6edad381 ("test/py: usb: Add tests for USB device")
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
-> 
->   test/py/tests/test_usb.py | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/test/py/tests/test_usb.py b/test/py/tests/test_usb.py
-> index fb3d20f082..b86fc290c7 100644
-> --- a/test/py/tests/test_usb.py
-> +++ b/test/py/tests/test_usb.py
-> @@ -382,7 +382,7 @@ def test_usb_ext4ls(u_boot_console):
->   
->   @pytest.mark.buildconfigspec('cmd_usb')
->   @pytest.mark.buildconfigspec('cmd_ext4')
-> -@pytest.mark.buildconfigspec('ext4_write')
-> +@pytest.mark.buildconfigspec('cmd_ext4_write')
->   @pytest.mark.buildconfigspec('cmd_memory')
->   def test_usb_ext4load_ext4write(u_boot_console):
->       devices, controllers, storage_device = test_usb_part(u_boot_console)
-> @@ -469,7 +469,7 @@ def test_usb_ext2ls(u_boot_console):
->   @pytest.mark.buildconfigspec('cmd_usb')
->   @pytest.mark.buildconfigspec('cmd_ext2')
->   @pytest.mark.buildconfigspec('cmd_ext4')
-> -@pytest.mark.buildconfigspec('ext4_write')
-> +@pytest.mark.buildconfigspec('cmd_ext4_write')
->   @pytest.mark.buildconfigspec('cmd_memory')
->   def test_usb_ext2load(u_boot_console):
->       devices, controllers, storage_device = test_usb_part(u_boot_console)
-> @@ -543,6 +543,7 @@ def test_usb_ls(u_boot_console):
->           pytest.skip('No partition detected')
->   
->   @pytest.mark.buildconfigspec('cmd_usb')
-> +@pytest.mark.buildconfigspec('cmd_ext4_write')
->   @pytest.mark.buildconfigspec('cmd_fs_generic')
->   def test_usb_load(u_boot_console):
->       devices, controllers, storage_device = test_usb_part(u_boot_console)
+> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+Acked-by: Marek Vasut <marex@denx.de>
 
-+CC test expert Simon
+Thanks !
