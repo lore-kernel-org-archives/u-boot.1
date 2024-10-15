@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84705D1F9DA
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 21:55:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25413D20681
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 22:26:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBCC388966;
-	Tue, 15 Oct 2024 23:55:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 82E4A889C3;
+	Wed, 16 Oct 2024 00:26:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="TO5tQ9RG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jW52BWvM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9275C889E9; Tue, 15 Oct 2024 23:55:03 +0200 (CEST)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id 9EB1188966; Wed, 16 Oct 2024 00:26:13 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EFB388916
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:55:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89A81889AA
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 00:26:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e28fd8cdfb8so5336658276.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 14:55:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6cbf0e6414aso22118306d6.1
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:26:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1729029300; x=1729634100; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1729031170; x=1729635970; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7A+Ger5SD16saeKNXsnp96pPLFwVKPnn4G74GOoGiW0=;
- b=TO5tQ9RGnmLeFNv1R8sr4ebuGcHjw1pnzmYJVODuBaoYTBR0q0tCkBesLdWUHrsewm
- 4bB/k6ZvSTvsMzjAOiAEpWjYWD5bR2g5Cfq90wUPpxN0O/oroQ5Du+dlBRk/y7DfqrNj
- igm23HTXXCGwA393cmRIssor0cUg34dFsoCJKeFQ6MICf7wb3FTZx+tN728Emb5PIve8
- Df4UQ/5p4I/M4I4eSxe9H+t8cDz6iCkjP4Voodz3z8ayOOz0X1LWjnoyWOd5tSPPDpCJ
- 3PYxb+1wam4GW+CJIREOHcCejOf6RGe2IFrkdchlYkaJ0l2dmwSWD9gjsB7yropUkpEm
- 03PQ==
+ bh=LBmde6HPvFg3wkQvB7f/ymMqVTsD1t5AR0XgOYmyL2Q=;
+ b=jW52BWvMBUtbAaaTedF1bQViqUELFPaRqUhzJvrst/LXGkgFCAx1sH1Q+6whHQGt54
+ zj9jCLT3XKgch++tOawpZny57v95vkY4wNMwmEZybaZiF/wvn2tt9tZ4FTGCHzJ8g9g8
+ zLXkkyEvVRuaUYl+NFltTC+74rSd06f0EA3VQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729029300; x=1729634100;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1729031170; x=1729635970;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7A+Ger5SD16saeKNXsnp96pPLFwVKPnn4G74GOoGiW0=;
- b=UTfXBnlE9yrYCHIdls+Di5F7a7nlP/nLJ2jWnY/wliDafEYcLm9P5c6Cem/xXDowXu
- pzV5HWYiKvP+oU9S5pUMNp9+I/9kLSflExKKW/c+Fb10hgUU0Gh62pfJzlyYpoPCK79V
- /1z8rV7mJe4bEdZ/WZIfjEmXqxWLV99Mo6FAY7Q7QtROmtcA0R67MY3+Mnj7GnX6D+W4
- DKyZJc2SamL4JbmKwSc/iXHCkW8BFAc8aMkmB/TwBNTo1zOe3cfw3gQcMfATADOarR8+
- BQhRdkXjxwZvqHYMzc8n5sC6j051h+7Yt/WfwGM2KXpyOCuX7CoHFtmqI6GvCD9RhMpJ
- CC9g==
-X-Gm-Message-State: AOJu0YxdwG5qY74dJ2LLZsWdJOp9BD2QOaHH33LuU8BdW4qmfQf4mtr7
- yI6H/OHUyEvh8yfH/mb7prksBjcgui8tBMO/rkaXVThtQ2d4cXmO2rQ9DsokdQzNiitqNnC5O4t
- CwEL0vp//Ion2QTpMymCpmjFJGfM1yoNcijR6TN5q4+2FdRVtWdA=
-X-Google-Smtp-Source: AGHT+IEHZF2LZKKz1RwOWt8mxhbFhfX19D6zoonCrcGuwbGBkNlxJrarviHLnq9w5lex0cPQkBVI7t9UkrlYCDjhK70=
-X-Received: by 2002:a05:6902:1584:b0:e29:33d1:a3ac with SMTP id
- 3f1490d57ef6-e29782cce1bmr2055872276.11.1729029300124; Tue, 15 Oct 2024
- 14:55:00 -0700 (PDT)
+ bh=LBmde6HPvFg3wkQvB7f/ymMqVTsD1t5AR0XgOYmyL2Q=;
+ b=rj2V7zsoysGjGH1Wxcqq0Una2N4YbWeexD4PChW58CsjV06C7gYZ6DSnaNCjtRpXjx
+ s9uI0YvUvF5jOWxc0f6DCfJgd0hZI0kl0882G5loxb28bpeCZn3aNLL8ICuesQDzGjxi
+ S45rplMiTr3RI0YZT6a26lOFxZ4HYljZPeYk9yDxiJNz3DJLvPNiLiLN2XtGiUdJvUJL
+ jdRDAElI0SspTVIVjOEdGjUhfibA/npBEeMF02Qe4aZisy/Ne8dK3GYgbeQ4rnc9GWfa
+ VLrkCOojKrbI1fV4bTbQNTf/+rRt+KFHMHUuERrBDZA3YC1VWR/BaBSQXpDQAW5htPnS
+ CLrA==
+X-Gm-Message-State: AOJu0YwCNFnPbvVN3KRrx5TlRyuILNh8GjhA+gQh2h0Gg4vP7JkpYe8E
+ dq+GpVt/dCLLNfONWJ3GE27Z5srWGhAZ3tD0xgvXNwewFiQZ+WdeKkgqzbR9cv56egp5iNhz9Eg
+ t/Es=
+X-Google-Smtp-Source: AGHT+IG7m58jEkJjs2aPnV3w3Cm5VXJf/CPyMK6UwQ0Ex2qRonDFXDIaFSNlH9TbMDqfH6YmtiKiKw==
+X-Received: by 2002:a05:6214:328d:b0:6cb:c905:f380 with SMTP id
+ 6a1803df08f44-6cc2b8bc925mr26590466d6.2.1729031170200; 
+ Tue, 15 Oct 2024 15:26:10 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cc22959ae2sm11381076d6.93.2024.10.15.15.26.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Oct 2024 15:26:09 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
+ Mark Kettenis <kettenis@openbsd.org>
+In-Reply-To: <20241015153717.401371-1-sughosh.ganu@linaro.org>
+References: <20241015153717.401371-1-sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v4 00/15] Make EFI memory allocations synchronous with LMB
+Message-Id: <172903116836.20251.11081117115298191100.b4-ty@konsulko.com>
+Date: Tue, 15 Oct 2024 16:26:08 -0600
 MIME-Version: 1.0
-References: <CAJ+vNU3wz22Ni+Kqy=NuFiEYPdrRkzjRJDNhYGJcCdDsLpbvBQ@mail.gmail.com>
- <CAFLszThkQ4pVmko8PPK5Yyt5RXFQkSatMycjH7GU5eN-_8L7ZA@mail.gmail.com>
- <CAJ+vNU0auiPUeqbAAFy2K4LhVk3ufU586gJYsZJ4f06wedyfCA@mail.gmail.com>
- <CAFLszTgioVANXZVUTCzHip-gaAVUEyEgO0MsHczLwyNfoBQMqg@mail.gmail.com>
-In-Reply-To: <CAFLszTgioVANXZVUTCzHip-gaAVUEyEgO0MsHczLwyNfoBQMqg@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Tue, 15 Oct 2024 14:54:48 -0700
-Message-ID: <CAJ+vNU16wzb6jwiT3sZdZmR=xZytDHGZKk+S-8zJ0ZXiH-rkbA@mail.gmail.com>
-Subject: Re: modify live DT with OF_LIVE breaking phy_connect?
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,159 +92,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 14, 2024 at 1:20=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi Tim,
->
-> On Thu, 10 Oct 2024 at 16:05, Tim Harvey <tharvey@gateworks.com> wrote:
-> >
-> > On Tue, Oct 8, 2024 at 6:56=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
-rote:
-> > >
-> > > Hi Tim,
-> > >
-> > > On Mon, 7 Oct 2024 at 14:16, Tim Harvey <tharvey@gateworks.com> wrote=
-:
-> > > >
-> > > > Greetings,
-> > > >
-> > > > I have a need to adjust the U-Boot device-tree live with some board
-> > > > revision specific fixups. It would seem I need to enable OF_LIVE to=
- do
-> > > > so but when I do this on imx8mm U-Boot proper seems to fail
-> > > > phy_connect() called from the network device probe.
-> > > >
-> > > > The board I'm working with is an imx8mm-venice board and using
-> > > > imx8mm_venice_defconfig (without OF_LIVE) results in:
-> > > > U-Boot 2024.10-00735-gc530f6079c70 (Oct 07 2024 - 12:58:38 -0700)
-> > > >
-> > > > CPU:   Freescale i.MX8MMQ rev1.0 1600 MHz (running at 1200 MHz)
-> > > > CPU:   Industrial temperature grade (-40C to 105C) at 44C
-> > > > Reset cause: POR
-> > > > Model: Gateworks Venice GW73xx-0x i.MX8MM Development Kit
-> > > > DRAM:  4 GiB
-> > > > Core:  226 devices, 32 uclasses, devicetree: separate
-> > > > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s t=
-imeout)
-> > > > MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
-> > > > Loading Environment from MMC... Reading from redundant MMC(2)... OK
-> > > > In:    serial@30890000
-> > > > Out:   serial@30890000
-> > > > Err:   serial@30890000
-> > > > SEC0:  RNG instantiated
-> > > > Net:   GPY111 eth0: ethernet@30be0000 [PRIME]
-> > > > GSC     : boot watchdog disabled
-> > > > Thermal protection:enabled at 96C
-> > > > Hit any key to stop autoboot:  0
-> > > >
-> > > > Yet as soon as I enable OF_LIVE:
-> > > >
-> > > > U-Boot 2024.10-00735-gc530f6079c70 (Oct 07 2024 - 12:59:35 -0700)
-> > > >
-> > > > CPU:   Freescale i.MX8MMQ rev1.0 1600 MHz (running at 1200 MHz)
-> > > > CPU:   Industrial temperature grade (-40C to 105C) at 49C
-> > > > Reset cause: POR
-> > > > Model: Gateworks Venice GW73xx-0x i.MX8MM Development Kit
-> > > > DRAM:  4 GiB
-> > > > Core:  214 devices, 32 uclasses, devicetree: separate
-> > > > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s t=
-imeout)
-> > > > MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
-> > > > Loading Environment from MMC... Reading from redundant MMC(2)... OK
-> > > > In:    serial@30890000
-> > > > Out:   serial@30890000
-> > > > Err:   serial@30890000
-> > > > SEC0:  RNG instantiated
-> > > > Net:   Could not get PHY for mdio: addr 0
-> > > > Could not get PHY for FEC0: addr 0
-> > > > Could not get PHY for mdio: addr 0
-> > > > Could not get PHY for FEC0: addr 0
-> > > > No ethernet found.
-> > > > ^^^ phy_connect failing
-> > > >
-> > > > Any idea what I'm missing here?
-> > > >
-> > > > Are there other ways I should be modifying the live dt in U-Boot?
-> > >
-> >
-> > Hi Simon, thanks for the response.
-> >
-> > > I am not sure, but the best option would be to debug the PHY stuff an=
-d
-> > > try to see what is going wrong.
-> > >
-> > > Since the number of devices is smaller, I suspect that there is some
-> > > code which doesn't use the ofnode API. But it is hard to say what is
-> > > going on.
-> > >
-> >
-> > ok, I will look into that
-> >
+On Tue, 15 Oct 2024 21:07:02 +0530, Sughosh Ganu wrote:
 
-I did manage to get livetree working on imx8mm (the documentation in
-livetree.rst was very helpful). There are several imx drivers like
-pinctrl that need livetree conversion updates which I'll submit when I
-get a handle on this.
+> This is part two of the series to have the EFI and LMB modules have a
+> coherent view of memory. Part one of this goal was to change the LMB
+> module to have a global and persistent memory map. Those patches have
+> now been applied to the next branch.
+> 
+> These patches are changing the EFI memory allocation API's such that
+> they rely on the LMB module to allocate RAM memory. This fixes the
+> current scenario where the EFI memory module has no visibility of the
+> allocations/reservations made by the LMB module. One thing to note
+> here is that this is limited to the RAM memory region, i.e. the
+> EFI_CONVENTIONAL_MEMORY type. Any other memory type that is to be
+> added to the EFI memory map, still gets handled by the EFI memory
+> module.
+> 
+> [...]
 
-> > > For modifying the devicetree, you can do it just before relocation
-> > > using the flattree if you like. The reason livetree is better is that
-> > > the nodes don't move around when changes are made.
-> > >
-> >
-> > Where is relocation done in this case where I'm using SPL and U-Boot
-> > proper for imx8m based boards?
->
-> It is always done at the end of board_init_f() in U-Boot proper.
->
+Applied to u-boot/master, thanks!
 
-Is the reason modification needs to be done before relocation simply
-that it can't be expanded without relocating it again?
+-- 
+Tom
 
-> >
-> > If I want to utilize dt overlays in U-Boot proper can you point me to
-> > what is needed or some examples?
->
-> You could use a FIT in SPL and select the correct DT there, avoiding
-> needing to change it in U-Boot. But if it is really run-time behaviour
-> and not described by different models, then that won't work.
->
-> There is board_fix_fdt() where you can find some examples. We should
-> really tidy up all the DT stuff...
->
 
-ok thanks - I see good documentation in fdt-fixup.rst and several
-boards using this.
-
-> >
-> > I'm intending to detect the presence of an add-in card that has a port
-> > expander on it so as to allow that port expander to be accessed via
-> > U-Boot. As a bit of a hack I'm currently using flat dt (!OF_LIVE) and
-> > putting the port expander in the board dt and attempting to disable it
-> > via dt modification in board_init(). As a better approach I could
-> > attempt to add it to dt but using an overlay would make so much more
-> > sense.
->
-> Disabling it in board_init() seems OK to me. Unfortunately this is the
-> sort of problem which can be solved many ways.
->
-
-This method seems to make the most sense for my use case. However
-board_init() is called after relocation so I assume that is where you
-are saying you can only change it at this point if using livetree?
-
-If I add a normally disabled io-expander in the dt and during
-board_init() I enable it (using ofnode_path() and
-ofnode_set_enabled()) I find that when trying to probe it
-uclass_find_device_by_ofnode() won't find it as it thinks its
-disabled. If I instead enable the io-expander in the dt and
-dynamically disable it based on runtime-detection I find that the
-disabled gpio device is probed when a 'gpio status' is done which
-causes a failure.
-
-I assume what's going on is that the enabling/disabling needs to be
-done before the device bind but I'm not clear how to facilitate that.
-
-Thanks,
-
-Tim
