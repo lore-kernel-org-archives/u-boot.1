@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7524D21684
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 12:19:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86AEFD21696
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 12:42:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D5DC8841E;
-	Tue, 15 Oct 2024 14:19:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EA14387FA7;
+	Tue, 15 Oct 2024 14:42:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="byp8mF1w";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eO3J0ZwH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34EC688365; Tue, 15 Oct 2024 14:19:29 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 6AAF0881FD; Tue, 15 Oct 2024 14:42:18 +0200 (CEST)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C27B3881A5
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 14:19:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5693887FA7
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 14:42:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4311ae6426aso35171365e9.2
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 05:19:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=alexthreed@gmail.com
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3e5ea4cbcf9so300019b6e.2
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 05:42:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728994765; x=1729599565; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=T10Z1SjecXYUkSapfFtoSjw9zuWkWiGcHm62HYvDOtY=;
- b=byp8mF1wc18MSlJal4ebun3W8lGUn59jaT+xAfNv2ZKh+GNGOid2TIs2E0ExbgYFaL
- si8N3iINVLDzLnooC5e2cpMXIKNrQqxC5EHLheWLTkS2rzu7LqyMdBzfsVb78179+h9m
- f0VbmleZSN5vzm3uqae+OpEDfR4QF9305fohQV2+mvLCbQZ5uJeT4PqfOR/XLbrVDMTB
- M1Pm2ln/MiHe1FupsAeAul882bRGAP5KFPfdUhWjxlXMl+KFpPsa3s5J3m0K2iTfK7C3
- B/mrwT46tnisq8bazFdIlMJUuXr9UMrw4+vAbat/h7ZrVnBLT2MO8mXa44//Ws8jfL1f
- g0mA==
+ d=gmail.com; s=20230601; t=1728996135; x=1729600935; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6Y+WKZrLZgwVluY9dp7xakt+v+DPzX8OZomcmptwBVs=;
+ b=eO3J0ZwHg+6pB7ZaXuSessFzN/u6IAgtZXRs5Ej1BFH/yYS4y2CELiMyfNLBkm9O/I
+ 2sulB1Zh6/odLY8d6yku7jQexhPAtqtSZDIHKChnD8FuPh1FFrkqe9fdzUOgoMSx63QL
+ tLQjr3f0h1k1pOAlasB6/l3xPG+KzDOA26+t7P5DGwjl9jFkrTaeAEAnWmhLr57TcSNf
+ 5/nlbqMcTKVq2OsjV791YRXlUO3ZPNe4QhAGkO7aCCwntbD2RrdGbwnx8z43bCGKQp3b
+ jQPt4VPDgonjcSMqLR+6AAtxPCOy6iNxX35LNONvPKM6i+OKH7WowzNfEXZSZytgh25r
+ yfGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728994765; x=1729599565;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=T10Z1SjecXYUkSapfFtoSjw9zuWkWiGcHm62HYvDOtY=;
- b=QlTBp23qcu8q1S8A4p8tq/p04WpGsTGHArTv6a4ItFK5LEB2Et7BdZlu1RDYcqOaPy
- nQS1dpOOUcYawP8wrvRllMBfCNkwTQDRtKv+G+Es0SqVIEagDaPs9O2nRyUby69zNGVw
- ZcYaiednOFk4O5wrS7qpeUsfbWjC98kge1/cwUn0KwJrcOTfPe4ku/QTQIUMs7M8OXrZ
- 8eGr9dpgntwQDkuEaJwpoo7FNtZAjNg/xL82Dzl2JEheiB9v0THSKBuTNo7JosWQ5H5I
- 3k4lWaoKqldCuPIW5DtKZdhB/RRX2zdsmzbjdnCf5AJ7gGpA8cmLEBj0SLHrNAGqI5ty
- uGVQ==
-X-Gm-Message-State: AOJu0YzYv+uCHGvudnr0MB3FxMwbsr7ACbsltcErcY5TwHOPNLNNE3KG
- BlgR1SuFCmdU6nACSQywNtpwUeLYq5iGbw4tpMJnNOFbZDtX6gV8ZL2UFHTh85bj9Ut25WV09S/
- fWCw=
-X-Google-Smtp-Source: AGHT+IEBCYYIKr6gD7F2x0z3le8vRhy5tN4aiiiivxxAuPCBhE0VaSHClKGCxN2aqTRugScvA/p/pQ==
-X-Received: by 2002:adf:ea41:0:b0:37d:4cd6:6f2f with SMTP id
- ffacd0b85a97d-37d86ba83b6mr56070f8f.3.1728994765085; 
- Tue, 15 Oct 2024 05:19:25 -0700 (PDT)
-Received: from artemis2.broadband ([2a0a:ef40:edb:fc01:52f8:5161:22d9:48c2])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d7faa4085sm1453123f8f.65.2024.10.15.05.19.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 05:19:24 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Love Kumar <love.kumar@amd.com>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] usb: Fix test failure with multiple partitions
-Date: Tue, 15 Oct 2024 13:19:16 +0100
-Message-Id: <20241015121916.1155120-1-andrew.goodbody@linaro.org>
-X-Mailer: git-send-email 2.39.5
+ d=1e100.net; s=20230601; t=1728996135; x=1729600935;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6Y+WKZrLZgwVluY9dp7xakt+v+DPzX8OZomcmptwBVs=;
+ b=pJx0U2vKre7ZEoPCx6AxczTLC/RoE94cbU2fqCYVlgPUv2O2Twrk41qW4GTWkVlI8J
+ tPWbk8H/HGvelftSJyqAfCA3FJ3M0ck00UTKTAA/uG3oDgjCEXHEs6JDJka0psnVFWx8
+ ofFfBbqL3GYUfa8JOSE3SDIsDJNF8FIuh8UKWxCqBLKAWqsjybpgdaLkvl3LW9QO1I7a
+ cHShohXj++Zf9dII6a8TGCvs2tjrH9Ze4IFt2ths4/0rqJkKL/hKxZACSa74coHc219V
+ 7RgFIY0r6kVpcJpkD/7iCbxxsbYWeKaJkeZfuvv3OQ1TjUUqAgkXdcosw+RsIpdhsci/
+ qBfQ==
+X-Gm-Message-State: AOJu0YxgX5bDs/X5vUgeMDJud6O6CR/1qBvxj+MNCGlWqM7caPHkp8XD
+ hAE+x51un+GrKbrdS/plUFjxphSrO7C7YYCzygqItnOupn8KXIz1+gTXX7MsUJRpyfA0aoqSxM3
+ 6Wq4PXMpcgNjFfoLPq9s2yN0HZas=
+X-Google-Smtp-Source: AGHT+IFZNGn4NP7ydHiYW8FppzSowcJdZoh9viyAvn48M1zPIuLqvLIL+E3ZGwxlnNW0rcpmGLA/GDbpBWoiiHFm39g=
+X-Received: by 2002:a05:6808:1396:b0:3e0:4faf:242 with SMTP id
+ 5614622812f47-3e5d220ba98mr5995705b6e.19.1728996135028; Tue, 15 Oct 2024
+ 05:42:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241014221523.2912260-1-alexthreed@gmail.com>
+ <22953d33-b660-49ba-9664-845416bbc35b@cherry.de>
+In-Reply-To: <22953d33-b660-49ba-9664-845416bbc35b@cherry.de>
+From: Alex Shumsky <alexthreed@gmail.com>
+Date: Tue, 15 Oct 2024 15:42:04 +0300
+Message-ID: <CAF4oh-PepZmO6-8szWUgG76kuTi6F1w+avWvK8mswa6O0dUdUA@mail.gmail.com>
+Subject: Re: [PATCH v4] rockchip: board: Increase rng-seed size to make it
+ sufficient for modern Linux
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Dragan Simic <dsimic@manjaro.org>, 
+ Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Chris Morgan <macromorgan@hotmail.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marex@denx.de>, Peter Robinson <pbrobinson@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,255 +95,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When test_usb_load finds multiple partitions of the same type then
-it will cause a test failure. The call to write the test file will
-write a different test file to each partition but only return the
-name and size of the last one written. So the test then fails to
-load the test file from the first partition as it uses the name of
-a file on a different partition.
+On Tue, Oct 15, 2024 at 12:34=E2=80=AFPM Quentin Schulz
+<quentin.schulz@cherry.de> wrote:
+> I'm wondering if we have somewhere some documentation on the environment
+> variables that exist and what they used for because this would be a nice
+> addition. At the very least, we can mention this variable in:
+> - include/fdt_support.h for the function
+> - common/Kconfig for the symbol
 
-Refactor the code so that only one test file is written at a time
-and is written to only the partition being tested at that time. This
-allows the correct file name to always be available to the code that
-runs the load command. This reduces the number of files written and
-also the number of calls to crc32 needed.
+I'm not sure if we can expect that all boards can implement the rng_seed_si=
+ze
+config knob? Currently rockchip is the only board that implements
+board_rng_seed.
 
-Fixes: 1c5b6edad381 ("test/py: usb: Add tests for USB device")
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
+common/Kconfig BOARD_RNG_SEED description looks rather generic:
 
- test/py/tests/test_usb.py | 166 +++++++++++++++++++-------------------
- 1 file changed, 82 insertions(+), 84 deletions(-)
+It is up to the board code (and more generally the whole
+BSP) where and how to store (or generate) such a seed, how
+to ensure a given seed is only used once, how to create a
+new seed for use on subsequent boots, and whether or not the
+kernel should account any entropy from the given seed.
 
-diff --git a/test/py/tests/test_usb.py b/test/py/tests/test_usb.py
-index fb3d20f082..e7966cad2b 100644
---- a/test/py/tests/test_usb.py
-+++ b/test/py/tests/test_usb.py
-@@ -288,6 +288,47 @@ def test_usb_fatls_fatinfo(u_boot_console):
-     if not part_detect:
-         pytest.skip('No %s partition detected' % fs.upper())
- 
-+def usb_fatload_fatwrite(u_boot_console, fs, x, part):
-+    addr = u_boot_utils.find_ram_base(u_boot_console)
-+    size = random.randint(4, 1 * 1024 * 1024)
-+    output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
-+    m = re.search('==> (.+?)', output)
-+    if not m:
-+        pytest.fail('CRC32 failed')
-+    expected_crc32 = m.group(1)
-+
-+    file = '%s_%d' % ('uboot_test', size)
-+    output = u_boot_console.run_command(
-+        '%swrite usb %d:%s %x %s %x' % (fs, x, part, addr, file, size)
-+    )
-+    assert 'Unable to write' not in output
-+    assert 'Error' not in output
-+    assert 'overflow' not in output
-+    expected_text = '%d bytes written' % size
-+    assert expected_text in output
-+
-+    alignment = int(
-+        u_boot_console.config.buildconfig.get(
-+            'config_sys_cacheline_size', 128
-+        )
-+    )
-+    offset = random.randrange(alignment, 1024, alignment)
-+    output = u_boot_console.run_command(
-+        '%sload usb %d:%s %x %s' % (fs, x, part, addr + offset, file)
-+    )
-+    assert 'Invalid FAT entry' not in output
-+    assert 'Unable to read file' not in output
-+    assert 'Misaligned buffer address' not in output
-+    expected_text = '%d bytes read' % size
-+    assert expected_text in output
-+
-+    output = u_boot_console.run_command(
-+        'crc32 %x $filesize' % (addr + offset)
-+    )
-+    assert expected_crc32 in output
-+
-+    return file, size, expected_crc32
-+
- @pytest.mark.buildconfigspec('cmd_usb')
- @pytest.mark.buildconfigspec('cmd_fat')
- @pytest.mark.buildconfigspec('cmd_memory')
-@@ -309,49 +350,11 @@ def test_usb_fatload_fatwrite(u_boot_console):
- 
-             for part in partitions:
-                 part_detect = 1
--                addr = u_boot_utils.find_ram_base(u_boot_console)
--                size = random.randint(4, 1 * 1024 * 1024)
--                output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
--                m = re.search('==> (.+?)', output)
--                if not m:
--                    pytest.fail('CRC32 failed')
--                expected_crc32 = m.group(1)
--
--                file = '%s_%d' % ('uboot_test', size)
--                output = u_boot_console.run_command(
--                    '%swrite usb %d:%s %x %s %x' % (fs, x, part, addr, file, size)
--                )
--                assert 'Unable to write' not in output
--                assert 'Error' not in output
--                assert 'overflow' not in output
--                expected_text = '%d bytes written' % size
--                assert expected_text in output
--
--                alignment = int(
--                    u_boot_console.config.buildconfig.get(
--                        'config_sys_cacheline_size', 128
--                    )
--                )
--                offset = random.randrange(alignment, 1024, alignment)
--                output = u_boot_console.run_command(
--                    '%sload usb %d:%s %x %s' % (fs, x, part, addr + offset, file)
--                )
--                assert 'Invalid FAT entry' not in output
--                assert 'Unable to read file' not in output
--                assert 'Misaligned buffer address' not in output
--                expected_text = '%d bytes read' % size
--                assert expected_text in output
--
--                output = u_boot_console.run_command(
--                    'crc32 %x $filesize' % (addr + offset)
--                )
--                assert expected_crc32 in output
-+                usb_fatload_fatwrite(u_boot_console, fs, x, part)
- 
-     if not part_detect:
-         pytest.skip('No %s partition detected' % fs.upper())
- 
--    return file, size
--
- @pytest.mark.buildconfigspec('cmd_usb')
- @pytest.mark.buildconfigspec('cmd_ext4')
- def test_usb_ext4ls(u_boot_console):
-@@ -380,6 +383,39 @@ def test_usb_ext4ls(u_boot_console):
-     if not part_detect:
-         pytest.skip('No %s partition detected' % fs.upper())
- 
-+def usb_ext4load_ext4write(u_boot_console, fs, x, part):
-+    addr = u_boot_utils.find_ram_base(u_boot_console)
-+    size = random.randint(4, 1 * 1024 * 1024)
-+    output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
-+    m = re.search('==> (.+?)', output)
-+    if not m:
-+        pytest.fail('CRC32 failed')
-+    expected_crc32 = m.group(1)
-+    file = '%s_%d' % ('uboot_test', size)
-+
-+    output = u_boot_console.run_command(
-+        '%swrite usb %d:%s %x /%s %x' % (fs, x, part, addr, file, size)
-+    )
-+    assert 'Unable to write' not in output
-+    assert 'Error' not in output
-+    assert 'overflow' not in output
-+    expected_text = '%d bytes written' % size
-+    assert expected_text in output
-+
-+    offset = random.randrange(128, 1024, 128)
-+    output = u_boot_console.run_command(
-+        '%sload usb %d:%s %x /%s' % (fs, x, part, addr + offset, file)
-+    )
-+    expected_text = '%d bytes read' % size
-+    assert expected_text in output
-+
-+    output = u_boot_console.run_command(
-+        'crc32 %x $filesize' % (addr + offset)
-+    )
-+    assert expected_crc32 in output
-+
-+    return file, size, expected_crc32
-+
- @pytest.mark.buildconfigspec('cmd_usb')
- @pytest.mark.buildconfigspec('cmd_ext4')
- @pytest.mark.buildconfigspec('ext4_write')
-@@ -402,41 +438,11 @@ def test_usb_ext4load_ext4write(u_boot_console):
- 
-             for part in partitions:
-                 part_detect = 1
--                addr = u_boot_utils.find_ram_base(u_boot_console)
--                size = random.randint(4, 1 * 1024 * 1024)
--                output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
--                m = re.search('==> (.+?)', output)
--                if not m:
--                    pytest.fail('CRC32 failed')
--                expected_crc32 = m.group(1)
--                file = '%s_%d' % ('uboot_test', size)
--
--                output = u_boot_console.run_command(
--                    '%swrite usb %d:%s %x /%s %x' % (fs, x, part, addr, file, size)
--                )
--                assert 'Unable to write' not in output
--                assert 'Error' not in output
--                assert 'overflow' not in output
--                expected_text = '%d bytes written' % size
--                assert expected_text in output
--
--                offset = random.randrange(128, 1024, 128)
--                output = u_boot_console.run_command(
--                    '%sload usb %d:%s %x /%s' % (fs, x, part, addr + offset, file)
--                )
--                expected_text = '%d bytes read' % size
--                assert expected_text in output
--
--                output = u_boot_console.run_command(
--                    'crc32 %x $filesize' % (addr + offset)
--                )
--                assert expected_crc32 in output
-+                usb_ext4load_ext4write(u_boot_console, fs, x, part)
- 
-     if not part_detect:
-         pytest.skip('No %s partition detected' % fs.upper())
- 
--    return file, size
--
- @pytest.mark.buildconfigspec('cmd_usb')
- @pytest.mark.buildconfigspec('cmd_ext2')
- def test_usb_ext2ls(u_boot_console):
-@@ -473,7 +479,6 @@ def test_usb_ext2ls(u_boot_console):
- @pytest.mark.buildconfigspec('cmd_memory')
- def test_usb_ext2load(u_boot_console):
-     devices, controllers, storage_device = test_usb_part(u_boot_console)
--    file, size = test_usb_ext4load_ext4write(u_boot_console)
- 
-     if not devices:
-         pytest.skip('No devices detected')
-@@ -491,12 +496,9 @@ def test_usb_ext2load(u_boot_console):
- 
-             for part in partitions:
-                 part_detect = 1
-+                file, size, expected_crc32 = \
-+                    usb_ext4load_ext4write(u_boot_console, 'ext4', x, part)
-                 addr = u_boot_utils.find_ram_base(u_boot_console)
--                output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
--                m = re.search('==> (.+?)', output)
--                if not m:
--                    pytest.fail('CRC32 failed')
--                expected_crc32 = m.group(1)
- 
-                 offset = random.randrange(128, 1024, 128)
-                 output = u_boot_console.run_command(
-@@ -565,15 +567,11 @@ def test_usb_load(u_boot_console):
-                     addr = u_boot_utils.find_ram_base(u_boot_console)
- 
-                     if fs == 'fat':
--                        file, size = test_usb_fatload_fatwrite(u_boot_console)
-+                        file, size, expected_crc32 = \
-+                            usb_fatload_fatwrite(u_boot_console, fs, x, part)
-                     elif fs == 'ext4':
--                        file, size = test_usb_ext4load_ext4write(u_boot_console)
--
--                    output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
--                    m = re.search('==> (.+?)', output)
--                    if not m:
--                        pytest.fail('CRC32 failed')
--                    expected_crc32 = m.group(1)
-+                        file, size, expected_crc32 = \
-+                            usb_ext4load_ext4write(u_boot_console, fs, x, part)
- 
-                     offset = random.randrange(128, 1024, 128)
-                     output = u_boot_console.run_command(
--- 
-2.39.5
+> I'm also a bit torn on the base though, I think the assumed base is
+> generally hex and not dec, so maybe we should rather have that?
 
+We need a poll here )
+Marek Vasut prefers decimal.
