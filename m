@@ -4,76 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE05D1D898
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 18:31:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8CB2D1D89A
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 18:46:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C35E889E9;
-	Tue, 15 Oct 2024 20:31:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 114DF883D4;
+	Tue, 15 Oct 2024 20:46:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FZmNPdFa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ieRcVrG2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECE86889FC; Tue, 15 Oct 2024 20:31:48 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id 3CCF088753; Tue, 15 Oct 2024 20:46:14 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF1D58897F
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 20:31:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA5E387F7D
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 20:46:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-2884e6ed0daso2143358fac.0
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 11:31:46 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-716a6e6d5a3so3894197a34.2
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 11:46:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729017105; x=1729621905; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZCuiLNHGl44f/z3P6VVSmjvJxoS2n3q771c39SMmJ+I=;
- b=FZmNPdFaxzJ2rzL78QXqM/03RHYWB2u+M89LzYYA5VUg6Z0aXAKShS5uFKEzm429Ln
- wE6C5hwMGr//94+SRXjq5GRUyr8OJFOLiBDxpzBfVXdF6ghYzpeZFMCCjIMpX9hwLGyf
- icg63tUaOZQMDEw6h01gmDyWIViei+sYz0WEc=
+ d=chromium.org; s=google; t=1729017970; x=1729622770; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EqbzSfq+qmO/OMl5FCcoiiurKLrMguKo/g0ZmAPpJxk=;
+ b=ieRcVrG2PZmBa0OQ/5OpI1r/6lMr6ACpdfopaSpByAy6SPim7f9BJhDlOTS6Wtfhuj
+ ufqNevigdYL6mYM/5nf1mdK3X/6Mbag4rIIzVu++zgJ1Hg13DDwHTyJaEsRdYi1Hw8K5
+ A0efkUCn2pkGpo8hg4k1D3IUzMpeoMeS0odZc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729017105; x=1729621905;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZCuiLNHGl44f/z3P6VVSmjvJxoS2n3q771c39SMmJ+I=;
- b=jeKIMx/TimZsiqqwVE7s5RLJE5JnuW6oSvNSQUQk55TRqiT2DwPZVGb/2in0/eIZ4s
- 9IuFmjRyg5Lw0tYpXL3aC5kMM1J8sR2qaS6NIlM5nd+GB/4dxP8J9qOPoSQAoReoWE7x
- rU1mIYjzSUWRV42ceV4cwZ+Xd/pjCyNR+HqK5uzAiQl8t6dIMt6rrH0cnxd/waJxdJwm
- vmBOT2vhIqnTtXtYKGZ/0ra7ADdVeBUXPHH6hVAJwxpsY872QBi+0i72pO6CKHLRaIF5
- /nejvAUVBeRw6Tj9gHBhO9PTo6hcI5VtunEk+mbDS2+UVn8ynJnPy2fIriaws4S71E3Q
- h1yg==
-X-Gm-Message-State: AOJu0Yx1i4MuNLMyhkzbKSwcysMcOlxseCzugJm1mJK5a7sBQIZKevyd
- MV/7BPx0xUqc37d4SRgJqXcv5tg+xYTxhWHJxiTRCkrjPLGi8R4EVANKSg9BUCY=
-X-Google-Smtp-Source: AGHT+IE7wcDXlc67nxLa//4Y52w+qh4WZAtpF93kyw7aug3y/ONo3v4esYyIovTpBWTB70kU1382MQ==
-X-Received: by 2002:a05:6870:d38c:b0:260:f50e:923f with SMTP id
- 586e51a60fabf-288ee01e681mr1405544fac.42.1729017105674; 
- Tue, 15 Oct 2024 11:31:45 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b1361726cfsm99609385a.47.2024.10.15.11.31.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 11:31:44 -0700 (PDT)
-Date: Tue, 15 Oct 2024 12:31:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anand Moon <linux.amoon@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>
-Subject: Re: risc-v - efi_free_pool: illegal free
-Message-ID: <20241015183142.GQ53053@bill-the-cat>
-References: <CANAwSgRJO1=w40ybTHkq-BD78rPyf13JdWp_yL1qpu=xmO2V8Q@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1729017970; x=1729622770;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EqbzSfq+qmO/OMl5FCcoiiurKLrMguKo/g0ZmAPpJxk=;
+ b=vlRwLHfDRXaCXZ4XXPTaYZrDbM7HIXThAsJQIqtCJjbeMv4TeTBDPS38ka/6tqKqj3
+ ua+kQeCFqgyAUB+5USRcabozR6qUBP8gQ3GXixaNSYFInGtvKReZbFAZ2sHuuvq/+6lc
+ KSYNOAzxh9N6aRIexoCmJzCG6jRP2GZTAji+q+x9Ir2yqnCj7p7FWuhVWg9BBPEOb0S3
+ FKBvX90//RbrzTNBS3vawUx40dcOIc2uMCMGQXI8HkbVjwLTILHPTjSinDVul8685vZp
+ jn7nnmTCgvwoxAC6T8XpvyTYy3G/8wfRp9CNVWm9o+DlLkwmncR9kMls9pZMj65IPQZr
+ 6OHQ==
+X-Gm-Message-State: AOJu0Ywwo8iAL8gnMDIDCwlmofzlJW4iHDGT5rgwAzOL/xD+NTLkRh32
+ HTgc418bvtbM+vvFPtgcfmWIXH65ZsA5IUAQEIJAyl85InTyEVBRy+nKoTPQ1PXtt+nYY5Ry/YX
+ Ec6Uahjc/JvL+ngo++SnYc59k4Q7pCYA3iD89
+X-Google-Smtp-Source: AGHT+IHeUBG5I+onbKsV88AujHZtf5J4Atj8tnmrKFs4XTFrxbuTVbCmA0Un3whnN7QidPRJkVA/vJAxe3gWELcuEbk=
+X-Received: by 2002:a05:6830:6488:b0:70f:674c:116c with SMTP id
+ 46e09a7af769-718034da7ddmr1354470a34.24.1729017970561; Tue, 15 Oct 2024
+ 11:46:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="h5AKNueKW9y2/UX/"
-Content-Disposition: inline
-In-Reply-To: <CANAwSgRJO1=w40ybTHkq-BD78rPyf13JdWp_yL1qpu=xmO2V8Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241015153717.401371-1-sughosh.ganu@linaro.org>
+In-Reply-To: <20241015153717.401371-1-sughosh.ganu@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 15 Oct 2024 12:45:59 -0600
+Message-ID: <CAFLszThyzu=ADuijsLAamkhAfNGHE4WtssFwSKRBfU25EytbLQ@mail.gmail.com>
+Subject: Re: [PATCH v4 00/15] Make EFI memory allocations synchronous with LMB
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
+ Mark Kettenis <kettenis@openbsd.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,43 +84,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---h5AKNueKW9y2/UX/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 15 Oct 2024 at 09:37, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+>
+> This is part two of the series to have the EFI and LMB modules have a
+> coherent view of memory. Part one of this goal was to change the LMB
+> module to have a global and persistent memory map. Those patches have
+> now been applied to the next branch.
+>
+> These patches are changing the EFI memory allocation API's such that
+> they rely on the LMB module to allocate RAM memory. This fixes the
+> current scenario where the EFI memory module has no visibility of the
+> allocations/reservations made by the LMB module. One thing to note
+> here is that this is limited to the RAM memory region, i.e. the
+> EFI_CONVENTIONAL_MEMORY type. Any other memory type that is to be
+> added to the EFI memory map, still gets handled by the EFI memory
+> module.
+>
+>
+> Changes since V3:
+> * Add comments for the LMB_NOOVERWRITE and LMB_NONOTIFY flags
+> * Drop use of is_addr_in_ram() function
+> * Drop use of CONFIG_MEM_MAP_UPDATE_NOTIFY symbol to check if the
+>   notification needs to be sent.
+> * s/lmb_notify/lmb_should_notify
+> * Put a check for EFI_LOADER in the lmb_should_notify() function
+>
+>
+> Some test logs to highlight the issue that is being fixed by the series.
+>
+> Without patch series
+> --------------------
+>
+> lmb_dump_all:
+>  memory.count = 0x1
+>  memory[0]      [0x40000000-0x820fffff], 0x42100000 bytes flags: none
+>  reserved.count = 0x3
+>  reserved[0]    [0xe100000-0xeffffff], 0x00f00000 bytes flags: no-map
+>  reserved[1]    [0x42000000-0x421fffff], 0x00200000 bytes flags: no-map
+>  reserved[2]    [0x7f77da00-0x820fffff], 0x02982600 bytes flags: no-overwrite
+>
+>
+> => efidebug memmap -- does not show regions allocated by lmb
+>
+> Missing TPMv2 device for EFI_TCG_PROTOCOL
+> Type             Start            End              Attributes
+> ================ ================ ================ ==========
+> CONVENTIONAL     0000000040000000-000000007f751000 WB
+> BOOT DATA        000000007f751000-000000007f756000 WB
+> RUNTIME DATA     000000007f756000-000000007f757000 WB|RT
+> BOOT DATA        000000007f757000-000000007f758000 WB
+> RUNTIME DATA     000000007f758000-000000007f77a000 WB|RT
+> BOOT DATA        000000007f77a000-000000007f781000 WB
+> BOOT CODE        000000007f781000-00000000807b5000 WB
+> RUNTIME DATA     00000000807b5000-00000000807b6000 WB|RT
+> BOOT CODE        00000000807b6000-00000000817c0000 WB
+> RUNTIME CODE     00000000817c0000-00000000817d0000 WB|RT
+> BOOT CODE        00000000817d0000-0000000082100000 WB
+> =>
+>
+>
+> Trying to allocate EFI memory with already allocated region succeeds(should fail)
+> ---------------------------------------------------------------------------------
+>
+> => efi_mem alloc 2000 42000000
+> Address returned 0x42000000
+>
+> => efidebug memmap
+> Type             Start            End              Attributes
+> ================ ================ ================ ==========
+> CONVENTIONAL     0000000040000000-0000000042000000 WB
+> BOOT DATA        0000000042000000-0000000042002000 WB
+> CONVENTIONAL     0000000042002000-000000007f751000 WB
+> BOOT DATA        000000007f751000-000000007f756000 WB
+> RUNTIME DATA     000000007f756000-000000007f757000 WB|RT
+> BOOT DATA        000000007f757000-000000007f758000 WB
+> RUNTIME DATA     000000007f758000-000000007f77a000 WB|RT
+> BOOT DATA        000000007f77a000-000000007f781000 WB
+> BOOT CODE        000000007f781000-00000000807b5000 WB
+> RUNTIME DATA     00000000807b5000-00000000807b6000 WB|RT
+> BOOT CODE        00000000807b6000-00000000817c0000 WB
+> RUNTIME CODE     00000000817c0000-00000000817d0000 WB|RT
+> BOOT CODE        00000000817d0000-0000000082100000 WB
+> =>
+>
+>
+> With patch series
+> -----------------
+>
+> lmb_dump_all:
+>  memory.count = 0x1
+>  memory[0]      [0x40000000-0x820fffff], 0x42100000 bytes flags: none
+>  reserved.count = 0x4
+>  reserved[0]    [0xe100000-0xeffffff], 0x00f00000 bytes flags: no-map
+>  reserved[1]    [0x42000000-0x421fffff], 0x00200000 bytes flags: no-map
+>  reserved[2]    [0x7f74f000-0x7f77dfff], 0x0002f000 bytes flags: no-notify, no-overwrite
+>  reserved[3]    [0x7f77ea00-0x820fffff], 0x02981600 bytes flags: no-overwrite
+>
+>
+> => efidebug memmap
+> Type             Start            End              Attributes
+> ================ ================ ================ ==========
+> BOOT DATA        000000000e100000-000000000f000000 WB
+> CONVENTIONAL     0000000040000000-0000000042000000 WB
+> BOOT DATA        0000000042000000-0000000042200000 WB
+> CONVENTIONAL     0000000042200000-000000007f74e000 WB
+> BOOT DATA        000000007f74e000-000000007f753000 WB
+> RUNTIME DATA     000000007f753000-000000007f754000 WB|RT
+> BOOT DATA        000000007f754000-000000007f755000 WB
+> RUNTIME DATA     000000007f755000-000000007f777000 WB|RT
+> BOOT DATA        000000007f777000-00000000807b6000 WB
+> RUNTIME DATA     00000000807b6000-00000000807b7000 WB|RT
+> BOOT DATA        00000000807b7000-00000000817c0000 WB
+> RUNTIME CODE     00000000817c0000-00000000817d0000 WB|RT
+> BOOT DATA        00000000817d0000-0000000082100000 WB
+>
+>
+> Trying to allocate EFI memory with already allocated region fails
+> -----------------------------------------------------------------
+>
+> => efi_mem alloc 2000 42000000
+> efi_allocate_pages failed 800000000000000e
+> =>
+>
+> Trying to allocate EFI memory with non-allocated region succeeds
+> ----------------------------------------------------------------
+>
+> => efi_mem alloc 2000 42200000
+> Address returned 0x42200000
+>
+> => efidebug memmap
+> Type             Start            End              Attributes
+> ================ ================ ================ ==========
+> BOOT DATA        000000000e100000-000000000f000000 WB
+> CONVENTIONAL     0000000040000000-0000000042000000 WB
+> BOOT DATA        0000000042000000-0000000042202000 WB
+> CONVENTIONAL     0000000042202000-000000007f74d000 WB
+> BOOT DATA        000000007f74d000-000000007f752000 WB
+> RUNTIME DATA     000000007f752000-000000007f753000 WB|RT
+> BOOT DATA        000000007f753000-000000007f754000 WB
+> RUNTIME DATA     000000007f754000-000000007f776000 WB|RT
+> BOOT DATA        000000007f776000-00000000807b5000 WB
+> RUNTIME DATA     00000000807b5000-00000000807b6000 WB|RT
+> BOOT DATA        00000000807b6000-00000000817c0000 WB
+> RUNTIME CODE     00000000817c0000-00000000817d0000 WB|RT
+> BOOT DATA        00000000817d0000-0000000082100000 WB
+> =>
+>
+> lmb_dump_all:
+>  memory.count = 0x1
+>  memory[0]      [0x40000000-0x820fffff], 0x42100000 bytes flags: none
+>  reserved.count = 0x5
+>  reserved[0]    [0xe100000-0xeffffff], 0x00f00000 bytes flags: no-map
+>  reserved[1]    [0x42000000-0x421fffff], 0x00200000 bytes flags: no-map
+>  reserved[2]    [0x42200000-0x42201fff], 0x00002000 bytes flags: no-notify, no-overwrite
+>  reserved[3]    [0x7f74e000-0x7f77cfff], 0x0002f000 bytes flags: no-notify, no-overwrite
+>  reserved[4]    [0x7f77da00-0x820fffff], 0x02982600 bytes flags: no-overwrite
+>
+>
+> Sughosh Ganu (15):
+>   lmb: add versions of the lmb API with flags
+>   lmb: add a flag to allow suppressing memory map change notification
+>   lmb: add and reserve memory above ram_top
+>   efi: memory: use the lmb API's for allocating and freeing memory
+>   lmb: notify of any changes to the LMB memory map
+>   efi_memory: do not add U-Boot memory to the memory map
+>   ti: k3: remove efi_add_known_memory() function definition
+>   stm32mp: remove efi_add_known_memory() function definition
+>   lmb: allow for boards to specify memory map
+>   layerscape: use the lmb API's to add RAM memory
+>   x86: e820: use the lmb API for adding RAM memory
+>   efi_memory: do not add RAM memory to the memory map
+>   lmb: remove call to efi_lmb_reserve()
+>   efi_memory: rename variable to highlight overlap with free memory
+>   lmb: replace the double-underscore with single-underscore for all
+>     functions
+>
+>  arch/arm/cpu/armv8/fsl-layerscape/cpu.c |   8 +-
+>  arch/arm/mach-k3/common.c               |  11 --
+>  arch/arm/mach-stm32mp/dram_init.c       |  11 --
+>  arch/x86/lib/e820.c                     |  47 +++--
+>  include/efi_loader.h                    |  27 ++-
+>  include/lmb.h                           |  63 ++++++
+>  lib/Kconfig                             |  19 ++
+>  lib/efi_loader/Kconfig                  |   1 +
+>  lib/efi_loader/efi_memory.c             | 217 ++++++---------------
+>  lib/lmb.c                               | 242 ++++++++++++++++++------
+>  10 files changed, 389 insertions(+), 257 deletions(-)
+>
+> --
+> 2.34.1
+>
+>
 
-On Wed, Oct 16, 2024 at 12:00:01AM +0530, Anand Moon wrote:
+I have stated my objections and won't repeat them here. With -master
+currently broken for EFI, and many of the patches in this series being
+required even with my view of the world, I think the best thing is to
+apply this series now, and move on.
 
-> Hi All,
->=20
-> I am trying to create a RISC-V Archlinux image for the StarFive
-> VisionFive 2 v1.3B SBC.
-> Everything worked well initially, and I successfully until I upgraded
-> OpenSBI and U-Boot
-> to the latest versions.
-
-Sorry for the problems, this is known and will be fixed shortly.
-
---=20
-Tom
-
---h5AKNueKW9y2/UX/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcOtQMACgkQFHw5/5Y0
-tyzJEwwAlfALhcO07dzBCRhTkjrvUfoMHtsp7+cCAnro4ncd44VnFLnN9ZeQMKRx
-LtRtKmvpBxaTqhsFu26Py3xWhnLc2r9EXiOBtiXOOjUwgCorWgiJ7+ywy++K998f
-SVcKeEkxayO9Puj0XywLqiTm5L4EOCMp+PF/J0hmVI2LYVD1tfxtUTICkT6ZLWuH
-F/XYqg1YyRV31eVPwNGTImHETmSC/h5+T5OBpuDLavnlUyXO14XDgd2GRVxFgX9a
-fbKP0znglcM17kVJzTQxP6dN1yA1jSnYCahmlEvL5Ko3XPtUmbZPqw52KIy6FAzS
-CwVHQBD9C5uTgZ1Wr118xm1EKsjnSpZ+eBO8XDSeZoJ/b4zakOfg/w1hells2q66
-/OBBd/PGzNLBpCsvjfqbH9Z+RAw5rwxc41qVoY/du9MgZqc0LjZE0YirPdZZeVZN
-b+Ek8uiszViNRiL7H5PZR8zMWV7JLj8hc3VVa+Od9RPVVxCYMd8O2NQy6VbCLql/
-f8P1EPJI
-=4Fsb
------END PGP SIGNATURE-----
-
---h5AKNueKW9y2/UX/--
+Regards,
+SImon
