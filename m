@@ -4,71 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 536D0D2169C
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 13:11:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77386D216A2
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 13:12:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B3668811C;
-	Tue, 15 Oct 2024 15:10:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05010880F4;
+	Tue, 15 Oct 2024 15:12:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oOa+6lFb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dfIDaOyq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E3C38811C; Tue, 15 Oct 2024 15:10:48 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 39F2D88113; Tue, 15 Oct 2024 15:12:36 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE791880F4
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:10:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B67A788009
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:12:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6cb82317809so38148286d6.0
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:10:45 -0700 (PDT)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6cbceb48613so33966276d6.2
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:12:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728997844; x=1729602644; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728997952; x=1729602752; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=M5Gj09dvHpTmISFlAsvD7+Y+usk3ZctE5UIuUrldp2U=;
- b=oOa+6lFbIR2AO+2rqK15dekjdptCPLlqyiA0Fg137xOSu4rMrfib1BFUnNOM0gdHJc
- zhIdxNIkOE+Y9i32VnkMvhsn998/jVbMgAnuOcUGiNA8FezrOfhB1eGuI3YMzD05rrKp
- AY7LTOiBsD0xhbSAeWz9USzm6bVMPNYJmZ2Q4=
+ bh=7UaatiupRmIAytCpvYm7FHoSq0pysXv1deyFWkGXtF8=;
+ b=dfIDaOyqPvuPvObdPaGAgY44jQb6H1c3mu7Qgx85TprA3GjsNb6JuZOa1EZVa9Dop4
+ iMQCnI8jf1GGdZ4Xqvt3o4J/hsaSfx+8fMEA4YRupTi/OcHPFOPVUs7Nx8+smmAfEw5I
+ bw/8Z+g0PF++psaMrR7vrwJC7DXBk0A/CkMPI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728997844; x=1729602644;
+ d=1e100.net; s=20230601; t=1728997952; x=1729602752;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=M5Gj09dvHpTmISFlAsvD7+Y+usk3ZctE5UIuUrldp2U=;
- b=M0AscBjc6jgHIyqzAfaP5iS3sF8dqghjgCQFPYb/EsJBrAeMBemYu21I1qKbMF32La
- kZfDppPV/C8PQ+BoDJYwFSIu7WUSM9cFyMKNsbFaOjfQDM0lG7bfvpZiP0zGmdL9wEVz
- fLNVHSyluoDhW78zQjIoqDtpwFSRo4Juh4f/KUzX/Qoe4HcskisulzgxmCgSkaMv2CJD
- yCY2sNwfm5tJIwYO1JsIyRA7ZS47POt0a38NzYERchWxjofexFhYFyU0XnpXfqqqGdKY
- SCUYG4xohdQOWSeJgWlyuDVUU8g00Z8rDgguayFEcG8t4HJ/uF4951GvXItxA2inkpPI
- /WCg==
-X-Gm-Message-State: AOJu0Yx857r0LLeYqRjjg/YS+rstiTaYtte66Jw4yQtciJrKSTaTFqpP
- /LfGd3gyLu0WF/kV99NXa/GmQVCGCgmMd0j2PpcJj0GAW7kguPk00wwrEBCLEusGyJDJCKmuUFE
- PUCydbArXJGt/CDFCN9/29k4n61zEIbXFYzsu
-X-Google-Smtp-Source: AGHT+IH6GC+GJ1sfl+4wv71nD/hupPyRcy6De5JrV/AJgnJ+lpjZz2Iuc6zCjJ/fps9yB37T/PHJIziImBtraUa8/DA=
-X-Received: by 2002:a05:6214:418a:b0:6cb:f99d:5d71 with SMTP id
- 6a1803df08f44-6cbf9e95a32mr168676466d6.33.1728997844602; Tue, 15 Oct 2024
- 06:10:44 -0700 (PDT)
+ bh=7UaatiupRmIAytCpvYm7FHoSq0pysXv1deyFWkGXtF8=;
+ b=Idzeql9IJO7rU9ygJs20iwMRuUYyY/+jPAaG7PTz+EA9P0V5zBgYphmBg8JniPwVga
+ o5+rzpy0WfK8XUeTjHp8qs7Ymv7UZEBRjLFIKZVr+b2AvfLFFR5V+6ixt3at0NFTXNIz
+ Ihn5XZFySv4VCuSzwj8QjD4ErTResCk/ZGQdfDvLbhTofq+V+Xh9ur+DnwM9src9TQPv
+ Cpjo+olw4/w4y7vo/3YW3Bp9JaQv72YrRFwvQmV83In4f27eCxcSuW5j/PUDAjZK0p4K
+ CdxPUXjQhtb0Mn5DYFdc+I2Ku9N3Ve1Su3Xxjah7jT//63GGGR1qhE02CEFQk92Y8gtv
+ j3GQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX/P1zAR7LJXZPDD9JcQK/aR3jp1WpZ5SuFTiL2rN8iynTiAAJI8T/Yq0PLey/SWmgPZauSU2w=@lists.denx.de
+X-Gm-Message-State: AOJu0YzNBpJBrl5lrTvDZV5qTphOdhZUdPINbF2MBWYtk7v+JhlnnhCL
+ Ljaq8cWXbtBPsOwxCnjQEM98XCtXii2i3rTtOBZLMYAYsjqfaWp9qMBE2cd36SwBlKQyvAHoA+Q
+ 1m4itdT0sigSkV5JnEvobuEXl2HbneHzdkD8oEr4DgwjCekQ=
+X-Google-Smtp-Source: AGHT+IFxjlTwNdo9zdNwqQ7hOiLjeVQ55VEbpnICZHWR4V7pjadmqEl940YGVcny71UXO18t67tD0WWta2VrakvDmTc=
+X-Received: by 2002:a05:6214:3198:b0:6cb:3b34:55d3 with SMTP id
+ 6a1803df08f44-6cbf00890f6mr221299506d6.29.1728997952526; Tue, 15 Oct 2024
+ 06:12:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
- <20241013105522.391414-11-sughosh.ganu@linaro.org>
- <CAFLszThkoMSEgxnHQQBYEswbHcFHuDWn0RiJOCN6jV7g=Y+9Qg@mail.gmail.com>
- <CADg8p95iXsJP=oEuxwfzLm1oLDoJMfTfGH4pw1TV-rRF7vVLJw@mail.gmail.com>
-In-Reply-To: <CADg8p95iXsJP=oEuxwfzLm1oLDoJMfTfGH4pw1TV-rRF7vVLJw@mail.gmail.com>
+References: <20241011212126.747741-1-sjg@chromium.org>
+ <20241011212126.747741-5-sjg@chromium.org>
+ <71ECC011-77EC-4308-AFE5-0E301BC27F84@gmx.de>
+ <20241012012716.GE14210@bill-the-cat>
+ <CAC_iWjL_YQ24ZecbN7oC-37PRR6iuUiiui-a0VPqSSVRunepdQ@mail.gmail.com>
+ <CAFLszTjzHBtR8vzk0wT-nNiwbsotqskVhVEX0ibh-Uea1+Da6Q@mail.gmail.com>
+ <20241014214236.GB53053@bill-the-cat>
+ <CAFLszTi8iJRMBVd79JLumPVz3VB0A8w1v_ZM2pP9D_cp_nx3yg@mail.gmail.com>
+ <20241014215454.GF53053@bill-the-cat>
+In-Reply-To: <20241014215454.GF53053@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 15 Oct 2024 07:10:34 -0600
-Message-ID: <CAFLszTg6R=Yv=Og9Er3fvtdvsbPLYvuv78+j3=+9zy5=xqW8Sw@mail.gmail.com>
-Subject: Re: [PATCH v3 10/15] lmb: allow for boards to specify memory map
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
+Date: Tue, 15 Oct 2024 07:12:21 -0600
+Message-ID: <CAFLszTiaO0NqK+-qqnEB28+iqH0jh7bW_uFWW-eNG8vBWG15Xg@mail.gmail.com>
+Subject: Re: [PATCH v4 4/5] efi: Reserve some memory for initial use
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,54 +95,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi Tom,
 
-On Tue, 15 Oct 2024 at 03:31, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Mon, 14 Oct 2024 at 15:55, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, 14 Oct 2024 at 21:21, Simon Glass <sjg@chromium.org> wrote:
+> On Mon, Oct 14, 2024 at 03:50:51PM -0600, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > Hi Sughosh,
-> >
-> > On Sun, 13 Oct 2024 at 04:56, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > On Mon, 14 Oct 2024 at 15:42, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > Some architectures have special or unique aspects which need
-> > > consideration when adding memory ranges to the list of available
-> > > memory map. Enable this config in such scenarios which allow
-> > > architectures and boards to define their own memory map.
+> > > On Mon, Oct 14, 2024 at 02:19:56PM -0600, Simon Glass wrote:
+> > > > Hi,
+> > > >
+> > > > On Fri, 11 Oct 2024 at 23:47, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > Hi Tom
+> > > > >
+> > > > > On Sat, 12 Oct 2024 at 04:27, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Sat, Oct 12, 2024 at 12:01:54AM +0200, Heinrich Schuchardt wrote:
+> > > > > > >
+> > > > > > >
+> > > > > > > Am 11. Oktober 2024 23:21:25 MESZ schrieb Simon Glass <sjg@chromium.org>:
+> > > > > > > >The 'point of cooperation' is where U-Boot starts allowing EFI to use
+> > > > > > > >memory outside of the U-Boot region. Until that point, it is desirable
+> > > > > > > >to keep more below U-Boot free for loading images.
+> > > > > > > >
+> > > > > > > >Reserve a small region for this purpose.
+> > > > > > >
+> > > > > > > Your commit message provides no clue why this should be needed.
+> > > >
+> > > > Yes, I hadn't realised that people didn't understand what I was
+> > > > getting at. Tom asked the same question on irc.
+> > > >
+> > > > It allows us to separate the lmb allocations from the EFI allocations,
+> > > > so we don't need to have them both in sync. We use lmb for loading
+> > > > images, then EFI takes over and does what it likes, respecting the
+> > > > existing lmb reservations.
 > > >
-> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > ---
-> > > Changes since V2: None
-> > >
-> > >  include/lmb.h |  2 ++
-> > >  lib/Kconfig   | 18 ++++++++++++++++++
-> > >  lib/lmb.c     |  3 +++
-> > >  3 files changed, 23 insertions(+)
+> > > But, again, LMB is not for loading of images. It's for dealing with
+> > > memory reservations of various types.
 > >
-> > Since this is in addition to the existing LMB (which protects U-Boot's
-> > memory-region) I suggest emitting an event in initr_lmb() to add
-> > things to the LMB.
->
-> But I thought this approach had been agreed upon by you. I had shared
-> a branch with you earlier [1] which had this commit for your feedback,
-> and you got back saying that this approach is fine with you [2].
-
-If this is just for x86, then sure we can sort this out after this
-series. The x86 thing is strange as there are sometimes several tables
-involved.
-
-
->
-> -sughosh
->
-> [1] - https://lists.denx.de/pipermail/u-boot/2024-August/562690.html
-> [2] - https://lists.denx.de/pipermail/u-boot/2024-August/563498.html
->
+> > Up until recently, I believe, my statement was true, but in any case,
+> > this isn't gemaine to the issue here.
 > >
-> > But for SPL, this doesn't work, since we are trying not to add events
-> > for SPL. Perhaps I will discover this further on in this series, but
-> > which boards need to do something special in SPL?
+> > The point is, this is a useful distinction, allowing us to avoid the
+> > complexity of keeping them in sync, and avoid putting this pain on
+> > people who are not using EFI. We are either in U-Boot code, in which
+> > case lmb rules, or we are going into an app, in which case EFI rules
+> > (but must read in the lmb info).
 > >
+> > We are going to end up with people turning off EFI_LOADER because it
+> > behaves so badly.
+>
+> Frankly, in hind sight I should not have agreed to split the LMB rework
+> between "everything else" and "EFI" in hopes that we would then be able
+> to get the "EFI" part of this agreed upon. It's "behaving badly" right
+> now because we merged half of the changes in the hopes that we could get
+> your agreement on the rest of them fairly quickly. This is not
+> happening, however.
+
+Well, another option would be to revert the problem patch (or two) and
+do this work with careful consideration of the impacts, taking account
+of my architectural objections. My main concern is using U-Boot's
+memory like a stack. Suddenly this is 'OK' and we apparently want to
+update U-Boot's docs to say so. It is just not a good idea!
+
+A good part of the reason that U-Boot solves the problems it does is
+that it mostly has a good design. The EFI_LOADER can be improved and
+it does not need to implement things in a particular way...it just
+needs to follow the spec. We are being far too rigid in saying that
+every memory allocation at every stage has to be handled the same way,
+etc.
+
+That said, I did not expect the first series to cause problems. If my
+EFI-test series had landed then we could perhaps have added a test for
+this case of the app requesting a chunk of memory. My hope is for that
+test to grow and cover some of these areas, I hope this lmb/efi thing
+doesn't cause further problems and I will be looking to ensure that
+this code does not affect non-EFI booting negatively.
+
+My series to solve this same problem (EFI's use of memory) have never
+been more than a few small patches. Please take a look at the current
+series[1], particularly patch 5.
 
 Regards,
 Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=427729
