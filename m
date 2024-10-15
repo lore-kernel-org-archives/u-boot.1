@@ -4,90 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3E93D216B7
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 14:30:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44F7CD216B0
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 14:32:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2652D882BE;
-	Tue, 15 Oct 2024 16:30:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AE66087BF4;
+	Tue, 15 Oct 2024 16:32:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="drBS3LcX";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10F7E88009; Tue, 15 Oct 2024 16:30:46 +0200 (CEST)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E6D8088009; Tue, 15 Oct 2024 16:32:29 +0200 (CEST)
+Received: from smtp-8faf.mail.infomaniak.ch (smtp-8faf.mail.infomaniak.ch
+ [83.166.143.175])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C744488009
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 16:30:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89E0582BA7
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 16:32:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7b111535924so445015785a.2
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 07:30:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729002642; x=1729607442; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=l5nUZu5+JI43MXHvPO9gRjFKmW3r/R1MUL6ZmBJEpUg=;
- b=drBS3LcXOKeGAvn8jAAJsE3Y+tnFGDsofmzMdcJY4Rr9jMudin67jPHACpPLMS0rh4
- /cWuZnkaraIE/GyWWQ3OPfp7+OtSoJ3lNxbH5NSd68OOauKn500oTgRZJNvN6Xsmu//F
- zV7CcVA2LJCfX2w7+8mJSCy3EEVpy3j5MpE04=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729002642; x=1729607442;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l5nUZu5+JI43MXHvPO9gRjFKmW3r/R1MUL6ZmBJEpUg=;
- b=M6uUgkc2hnwA3CGjF4LBsa4sSIyiY598Dptoj0n+Yv0GZNwLTXFl2kHx+8Mi9is6JF
- 2+tHeYsJ7AzjKDMrBNMHxGXzyV1J0YuODfzWYj5fLs/UBqc8SyPWeFpiaL3+dzHLwL8e
- GloDiOMkdKOWFdbwgpC9tAU93u8YBJeiVMR5pscvidbXDGDAzMNUv4GOTaRcY/ABc57E
- X3nsYQkoo5dJwxpMJ5Nko1vDiWF5i3+bAFjeNON1IqW31EHgkScfe1vM1beApToqc5Js
- 17xLvhBxHe1k+K7xqv3ih3JjzXdgUZKciG3RlCSx22C+q+gJvjGB50ZO3YBR+pG3ZUIa
- l3nQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWgzWqjuN2or7MFzm0CLhMHO2WjN9Y3nzz1zR/fhKG0MOp/6H4GvPMzMg8q4XlYpczZePGsBFs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwF2vCbbtWx+lESxDq66WR/wjzgRuz/F2hjPIgMcwp+P12ZIyZq
- 2rXJRbUoLvG1n+JnmFv+qlHBSudVeOS3zbBqAq/wGtNdKBDzl/fXYwDTRhagvt0=
-X-Google-Smtp-Source: AGHT+IFDQnH7Tv1lEimv0yHh5XzIZQP+z+BK3ojWCx1mzo2Vm+ZbCzR2u9Kxd/2FhiwK/XSnmc3Cwg==
-X-Received: by 2002:a05:620a:468a:b0:7ae:d2d0:f86 with SMTP id
- af79cd13be357-7b11a396bfcmr2049840885a.38.1729002642345; 
- Tue, 15 Oct 2024 07:30:42 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b136164e4fsm76084785a.2.2024.10.15.07.30.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 07:30:41 -0700 (PDT)
-Date: Tue, 15 Oct 2024 08:30:38 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: Re: [PATCH v4 4/5] efi: Reserve some memory for initial use
-Message-ID: <20241015143038.GM53053@bill-the-cat>
-References: <20241011212126.747741-1-sjg@chromium.org>
- <20241011212126.747741-5-sjg@chromium.org>
- <71ECC011-77EC-4308-AFE5-0E301BC27F84@gmx.de>
- <20241012012716.GE14210@bill-the-cat>
- <CAC_iWjL_YQ24ZecbN7oC-37PRR6iuUiiui-a0VPqSSVRunepdQ@mail.gmail.com>
- <CAFLszTjzHBtR8vzk0wT-nNiwbsotqskVhVEX0ibh-Uea1+Da6Q@mail.gmail.com>
- <20241014214236.GB53053@bill-the-cat>
- <CAFLszTi8iJRMBVd79JLumPVz3VB0A8w1v_ZM2pP9D_cp_nx3yg@mail.gmail.com>
- <20241014215454.GF53053@bill-the-cat>
- <CAFLszTiaO0NqK+-qqnEB28+iqH0jh7bW_uFWW-eNG8vBWG15Xg@mail.gmail.com>
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4XSc4q1GTSz5YV;
+ Tue, 15 Oct 2024 16:32:27 +0200 (CEST)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4XSc4p3PQ5zbnh; Tue, 15 Oct 2024 16:32:26 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Tue, 15 Oct 2024 16:32:14 +0200
+Subject: [PATCH] dm: core: downgrade some dm_warn messages to log_debug()
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Jcuwzeu7hNLgwGN8"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTiaO0NqK+-qqnEB28+iqH0jh7bW_uFWW-eNG8vBWG15Xg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20241015-dm-debug-less-verbose-v1-1-366e8f00b556@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAO18DmcC/x3MSwqEMBBF0a1IjbvABD/YW5EeJOapBbZKCoMg7
+ t3g8AzuvUgRBUrf4qKIJCrbmmE+BQ2zWyewhGyypa1MaWoOfw7wx8QLVDkh+k3BtguV865txtp
+ TbveIUc732//u+wH2Mvh2ZwAAAA==
+X-Change-ID: 20241015-dm-debug-less-verbose-29d4aba76f5b
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Alexander Dahl <ada@thorsis.com>
+X-Mailer: b4 0.14.2
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,109 +61,534 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
---Jcuwzeu7hNLgwGN8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+People complained that enabling (SPL_)DM_WARN was now totally unusable
+due to the amount of messages printed on the console.
 
-On Tue, Oct 15, 2024 at 07:12:21AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 14 Oct 2024 at 15:55, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Oct 14, 2024 at 03:50:51PM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 14 Oct 2024 at 15:42, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Mon, Oct 14, 2024 at 02:19:56PM -0600, Simon Glass wrote:
-> > > > > Hi,
-> > > > >
-> > > > > On Fri, 11 Oct 2024 at 23:47, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >
-> > > > > > Hi Tom
-> > > > > >
-> > > > > > On Sat, 12 Oct 2024 at 04:27, Tom Rini <trini@konsulko.com> wro=
-te:
-> > > > > > >
-> > > > > > > On Sat, Oct 12, 2024 at 12:01:54AM +0200, Heinrich Schuchardt=
- wrote:
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > Am 11. Oktober 2024 23:21:25 MESZ schrieb Simon Glass <sjg@=
-chromium.org>:
-> > > > > > > > >The 'point of cooperation' is where U-Boot starts allowing=
- EFI to use
-> > > > > > > > >memory outside of the U-Boot region. Until that point, it =
-is desirable
-> > > > > > > > >to keep more below U-Boot free for loading images.
-> > > > > > > > >
-> > > > > > > > >Reserve a small region for this purpose.
-> > > > > > > >
-> > > > > > > > Your commit message provides no clue why this should be nee=
-ded.
-> > > > >
-> > > > > Yes, I hadn't realised that people didn't understand what I was
-> > > > > getting at. Tom asked the same question on irc.
-> > > > >
-> > > > > It allows us to separate the lmb allocations from the EFI allocat=
-ions,
-> > > > > so we don't need to have them both in sync. We use lmb for loading
-> > > > > images, then EFI takes over and does what it likes, respecting the
-> > > > > existing lmb reservations.
-> > > >
-> > > > But, again, LMB is not for loading of images. It's for dealing with
-> > > > memory reservations of various types.
-> > >
-> > > Up until recently, I believe, my statement was true, but in any case,
-> > > this isn't gemaine to the issue here.
-> > >
-> > > The point is, this is a useful distinction, allowing us to avoid the
-> > > complexity of keeping them in sync, and avoid putting this pain on
-> > > people who are not using EFI. We are either in U-Boot code, in which
-> > > case lmb rules, or we are going into an app, in which case EFI rules
-> > > (but must read in the lmb info).
-> > >
-> > > We are going to end up with people turning off EFI_LOADER because it
-> > > behaves so badly.
-> >
-> > Frankly, in hind sight I should not have agreed to split the LMB rework
-> > between "everything else" and "EFI" in hopes that we would then be able
-> > to get the "EFI" part of this agreed upon. It's "behaving badly" right
-> > now because we merged half of the changes in the hopes that we could get
-> > your agreement on the rest of them fairly quickly. This is not
-> > happening, however.
->=20
-> Well, another option would be to revert the problem patch (or two) and
-> do this work with careful consideration of the impacts, taking account
-> of my architectural objections.
+Let's downgrade the log level of some messages that are clearly not on
+the error path.
 
-Well, no. You have objections that no one else has agreed with and most
-of the active developers in the areas in question have objections to
-your designs. So no, I repeat myself. My mistake here was taking half of
-the work in, rather than all of the work in.
+Note that there's one pr_debug in there, because it is followed by
+pr_cont so it made sense to reuse the same family of functions.
 
---=20
-Tom
+Reported-by: Alexander Dahl <ada@thorsis.com>
+Fixes: 6afdb1585112 ("dm: core: migrate debug() messages to use dm_warn")
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Note that I am not entirely sure about the "not found" and "not large
+enough" changes there.
 
---Jcuwzeu7hNLgwGN8
-Content-Type: application/pgp-signature; name="signature.asc"
+Another note, %#x isn't handled by tinyprintf so it just prints "x"
+instead of the value.
 
------BEGIN PGP SIGNATURE-----
+Finally, I don't know how one can enable LOG_DEBUG level without
+enabling DEBUG which enables assert() so I just tested that by removing
+the #define DEBUG in include/log.h :)
+---
+ drivers/core/of_access.c | 36 ++++++++++++-------------
+ drivers/core/of_addr.c   | 26 +++++++++---------
+ drivers/core/of_extra.c  |  6 ++---
+ drivers/core/ofnode.c    | 68 ++++++++++++++++++++++++------------------------
+ 4 files changed, 68 insertions(+), 68 deletions(-)
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcOfIsACgkQFHw5/5Y0
-tyzf2wv8CBCwQIC7b4yvYICv1nRy9TLSHTgxPhfvMfkb7wHmOTYmfkwg78KaSwbG
-869QyKJsxT7XEVczxx8nTAC13JJ0z/MEyYvfJ2kGamxr6Wj0ub4PPI9+5dBzXMEh
-fj2S68st7AvbF3/Fh9yXnxW/pfgwtWs/SdoyTVvlThefAmEuMb6Wi7b7fgT10yMr
-SqjHcV885DQ4QWXhLgzq0z5lJcbGgxJ78F/ZLZvIQ65KeEoHhpG13bZAp3fX3miN
-rJ9n0VW97MGRwLRHaM1qE2UzkUTtyLmsDs3ISilsPG1E8YFaxysNhrs/b1+XXHvN
-gsf9ws6xvXw3O0gx7wsOGhOFNFuXQjFncQmNJtOZPS0B6XpAQVc2RbmN5YVZ4sr4
-fQwGsMt/tmtxrdoWwnMl8UedTtEyM4p8/ty5hlLDeOGYe5tevm7ysUi9xVGNBq5X
-42xcCFY9mP8v+luAgP0lsjn1NHMs4/z/loWuHaDtYX4S98nzjiXFbbFeqeXmzPFT
-IF3+VZ0f
-=3SzA
------END PGP SIGNATURE-----
+diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
+index d05be273e7bbb68c3ad82ef4c1c036ae7f68ae61..77acd76626257b6da95a27d107052ff8800c2b67 100644
+--- a/drivers/core/of_access.c
++++ b/drivers/core/of_access.c
+@@ -490,17 +490,17 @@ int of_read_u8(const struct device_node *np, const char *propname, u8 *outp)
+ {
+ 	const u8 *val;
+ 
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 	if (!np)
+ 		return -EINVAL;
+ 	val = of_find_property_value_of_size(np, propname, sizeof(*outp));
+ 	if (IS_ERR(val)) {
+-		dm_warn("(not found)\n");
++		log_debug("(not found)\n");
+ 		return PTR_ERR(val);
+ 	}
+ 
+ 	*outp = *val;
+-	dm_warn("%#x (%d)\n", *outp, *outp);
++	log_debug("%#x (%d)\n", *outp, *outp);
+ 
+ 	return 0;
+ }
+@@ -509,17 +509,17 @@ int of_read_u16(const struct device_node *np, const char *propname, u16 *outp)
+ {
+ 	const __be16 *val;
+ 
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 	if (!np)
+ 		return -EINVAL;
+ 	val = of_find_property_value_of_size(np, propname, sizeof(*outp));
+ 	if (IS_ERR(val)) {
+-		dm_warn("(not found)\n");
++		log_debug("(not found)\n");
+ 		return PTR_ERR(val);
+ 	}
+ 
+ 	*outp = be16_to_cpup(val);
+-	dm_warn("%#x (%d)\n", *outp, *outp);
++	log_debug("%#x (%d)\n", *outp, *outp);
+ 
+ 	return 0;
+ }
+@@ -534,14 +534,14 @@ int of_read_u32_array(const struct device_node *np, const char *propname,
+ {
+ 	const __be32 *val;
+ 
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 	val = of_find_property_value_of_size(np, propname,
+ 					     sz * sizeof(*out_values));
+ 
+ 	if (IS_ERR(val))
+ 		return PTR_ERR(val);
+ 
+-	dm_warn("size %zd\n", sz);
++	log_debug("size %zd\n", sz);
+ 	while (sz--)
+ 		*out_values++ = be32_to_cpup(val++);
+ 
+@@ -553,19 +553,19 @@ int of_read_u32_index(const struct device_node *np, const char *propname,
+ {
+ 	const __be32 *val;
+ 
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 	if (!np)
+ 		return -EINVAL;
+ 
+ 	val = of_find_property_value_of_size(np, propname,
+ 					     sizeof(*outp) * (index + 1));
+ 	if (IS_ERR(val)) {
+-		dm_warn("(not found)\n");
++		log_debug("(not found)\n");
+ 		return PTR_ERR(val);
+ 	}
+ 
+ 	*outp = be32_to_cpup(val + index);
+-	dm_warn("%#x (%d)\n", *outp, *outp);
++	log_debug("%#x (%d)\n", *outp, *outp);
+ 
+ 	return 0;
+ }
+@@ -575,20 +575,20 @@ int of_read_u64_index(const struct device_node *np, const char *propname,
+ {
+ 	const __be64 *val;
+ 
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 	if (!np)
+ 		return -EINVAL;
+ 
+ 	val = of_find_property_value_of_size(np, propname,
+ 					     sizeof(*outp) * (index + 1));
+ 	if (IS_ERR(val)) {
+-		dm_warn("(not found)\n");
++		log_debug("(not found)\n");
+ 		return PTR_ERR(val);
+ 	}
+ 
+ 	*outp = be64_to_cpup(val + index);
+-	dm_warn("%#llx (%lld)\n", (unsigned long long)*outp,
+-		(unsigned long long)*outp);
++	log_debug("%#llx (%lld)\n", (unsigned long long)*outp,
++		  (unsigned long long)*outp);
+ 
+ 	return 0;
+ }
+@@ -621,7 +621,7 @@ int of_property_match_string(const struct device_node *np, const char *propname,
+ 		l = strnlen(p, end - p) + 1;
+ 		if (p + l > end)
+ 			return -EILSEQ;
+-		dm_warn("comparing %s with %s\n", string, p);
++		log_debug("comparing %s with %s\n", string, p);
+ 		if (strcmp(string, p) == 0)
+ 			return i; /* Found it; return index */
+ 	}
+@@ -826,8 +826,8 @@ static void of_alias_add(struct alias_prop *ap, struct device_node *np,
+ 	strncpy(ap->stem, stem, stem_len);
+ 	ap->stem[stem_len] = 0;
+ 	list_add_tail(&ap->link, &aliases_lookup);
+-	dm_warn("adding DT alias:%s: stem=%s id=%i node=%s\n",
+-		ap->alias, ap->stem, ap->id, of_node_full_name(np));
++	log_debug("adding DT alias:%s: stem=%s id=%i node=%s\n",
++		  ap->alias, ap->stem, ap->id, of_node_full_name(np));
+ }
+ 
+ int of_alias_scan(void)
+diff --git a/drivers/core/of_addr.c b/drivers/core/of_addr.c
+index 6c7b4c97d6778e632e6c318ca094bd94cc6248d4..250dd175b55c053fb80c7fa34ccaa66f3a4a8a1f 100644
+--- a/drivers/core/of_addr.c
++++ b/drivers/core/of_addr.c
+@@ -27,7 +27,7 @@ static struct of_bus *of_match_bus(struct device_node *np);
+ #ifdef DEBUG
+ static void of_dump_addr(const char *s, const __be32 *addr, int na)
+ {
+-	dm_warn("%s", s);
++	pr_debug("%s", s);
+ 	while (na--)
+ 		pr_cont(" %08x", be32_to_cpu(*(addr++)));
+ 	pr_cont("\n");
+@@ -66,9 +66,9 @@ static u64 of_bus_default_map(__be32 *addr, const __be32 *range,
+ 	s  = of_read_number(range + na + pna, ns);
+ 	da = of_read_number(addr, na);
+ 
+-	dm_warn("default map, cp=%llx, s=%llx, da=%llx\n",
+-		(unsigned long long)cp, (unsigned long long)s,
+-		(unsigned long long)da);
++	log_debug("default map, cp=%llx, s=%llx, da=%llx\n",
++		  (unsigned long long)cp, (unsigned long long)s,
++		  (unsigned long long)da);
+ 
+ 	if (da < cp || da >= (cp + s))
+ 		return OF_BAD_ADDR;
+@@ -200,11 +200,11 @@ static int of_translate_one(const struct device_node *parent,
+ 	if (ranges == NULL || rlen == 0) {
+ 		offset = of_read_number(addr, na);
+ 		memset(addr, 0, pna * 4);
+-		dm_warn("empty ranges; 1:1 translation\n");
++		log_debug("empty ranges; 1:1 translation\n");
+ 		goto finish;
+ 	}
+ 
+-	dm_warn("walking ranges...\n");
++	log_debug("walking ranges...\n");
+ 
+ 	/* Now walk through the ranges */
+ 	rlen /= 4;
+@@ -222,7 +222,7 @@ static int of_translate_one(const struct device_node *parent,
+ 
+  finish:
+ 	of_dump_addr("parent translation for:", addr, pna);
+-	dm_warn("with offset: %llx\n", (unsigned long long)offset);
++	log_debug("with offset: %llx\n", (unsigned long long)offset);
+ 
+ 	/* Translate it into parent bus space */
+ 	return pbus->translate(addr, offset, pna);
+@@ -247,7 +247,7 @@ static u64 __of_translate_address(const struct device_node *dev,
+ 	int na, ns, pna, pns;
+ 	u64 result = OF_BAD_ADDR;
+ 
+-	dm_warn("** translation for device %s **\n", of_node_full_name(dev));
++	log_debug("** translation for device %s **\n", of_node_full_name(dev));
+ 
+ 	/* Increase refcount at current level */
+ 	(void)of_node_get(dev);
+@@ -266,8 +266,8 @@ static u64 __of_translate_address(const struct device_node *dev,
+ 	}
+ 	memcpy(addr, in_addr, na * 4);
+ 
+-	dm_warn("bus is %s (na=%d, ns=%d) on %s\n", bus->name, na, ns,
+-		of_node_full_name(parent));
++	log_debug("bus is %s (na=%d, ns=%d) on %s\n", bus->name, na, ns,
++		  of_node_full_name(parent));
+ 	of_dump_addr("translating address:", addr, na);
+ 
+ 	/* Translate */
+@@ -279,7 +279,7 @@ static u64 __of_translate_address(const struct device_node *dev,
+ 
+ 		/* If root, we have finished */
+ 		if (parent == NULL) {
+-			dm_warn("reached root node\n");
++			log_debug("reached root node\n");
+ 			result = of_read_number(addr, na);
+ 			break;
+ 		}
+@@ -293,8 +293,8 @@ static u64 __of_translate_address(const struct device_node *dev,
+ 			break;
+ 		}
+ 
+-		dm_warn("parent bus is %s (na=%d, ns=%d) on %s\n", pbus->name,
+-			pna, pns, of_node_full_name(parent));
++		log_debug("parent bus is %s (na=%d, ns=%d) on %s\n", pbus->name,
++			  pna, pns, of_node_full_name(parent));
+ 
+ 		/* Apply bus translation */
+ 		if (of_translate_one(dev, bus, pbus, addr, na, ns, pna, rprop))
+diff --git a/drivers/core/of_extra.c b/drivers/core/of_extra.c
+index bfc1e3441b1d63e3ef72352863842c9e49647db5..f49187dfc1ec2491b525be35d8deac0bd70a6c4e 100644
+--- a/drivers/core/of_extra.c
++++ b/drivers/core/of_extra.c
+@@ -58,7 +58,7 @@ int ofnode_decode_region(ofnode node, const char *prop_name, fdt_addr_t *basep,
+ 	const fdt_addr_t *cell;
+ 	int len;
+ 
+-	dm_warn("%s: %s: %s\n", __func__, ofnode_get_name(node), prop_name);
++	log_debug("%s: %s: %s\n", __func__, ofnode_get_name(node), prop_name);
+ 	cell = ofnode_get_property(node, prop_name, &len);
+ 	if (!cell || (len < sizeof(fdt_addr_t) * 2)) {
+ 		dm_warn("cell=%p, len=%d\n", cell, len);
+@@ -67,8 +67,8 @@ int ofnode_decode_region(ofnode node, const char *prop_name, fdt_addr_t *basep,
+ 
+ 	*basep = fdt_addr_to_cpu(*cell);
+ 	*sizep = fdt_size_to_cpu(cell[1]);
+-	dm_warn("%s: base=%08lx, size=%lx\n", __func__, (ulong)*basep,
+-		(ulong)*sizep);
++	log_debug("%s: base=%08lx, size=%lx\n", __func__, (ulong)*basep,
++		  (ulong)*sizep);
+ 
+ 	return 0;
+ }
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index 48ae8ce830ec5a37675900e4f537e087fcac37b7..950895e72a9949fff44222fd039a82a9351de714 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -315,7 +315,7 @@ int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
+ 	int len;
+ 
+ 	assert(ofnode_valid(node));
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 
+ 	if (ofnode_is_np(node))
+ 		return of_read_u8(ofnode_to_np(node), propname, outp);
+@@ -323,11 +323,11 @@ int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
+ 	cell = fdt_getprop(gd->fdt_blob, ofnode_to_offset(node), propname,
+ 			   &len);
+ 	if (!cell || len < sizeof(*cell)) {
+-		dm_warn("(not found)\n");
++		log_debug("(not found)\n");
+ 		return -EINVAL;
+ 	}
+ 	*outp = *cell;
+-	dm_warn("%#x (%u)\n", *outp, *outp);
++	log_debug("%#x (%u)\n", *outp, *outp);
+ 
+ 	return 0;
+ }
+@@ -346,7 +346,7 @@ int ofnode_read_u16(ofnode node, const char *propname, u16 *outp)
+ 	int len;
+ 
+ 	assert(ofnode_valid(node));
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 
+ 	if (ofnode_is_np(node))
+ 		return of_read_u16(ofnode_to_np(node), propname, outp);
+@@ -354,11 +354,11 @@ int ofnode_read_u16(ofnode node, const char *propname, u16 *outp)
+ 	cell = fdt_getprop(gd->fdt_blob, ofnode_to_offset(node), propname,
+ 			   &len);
+ 	if (!cell || len < sizeof(*cell)) {
+-		dm_warn("(not found)\n");
++		log_debug("(not found)\n");
+ 		return -EINVAL;
+ 	}
+ 	*outp = be16_to_cpup(cell);
+-	dm_warn("%#x (%u)\n", *outp, *outp);
++	log_debug("%#x (%u)\n", *outp, *outp);
+ 
+ 	return 0;
+ }
+@@ -391,7 +391,7 @@ int ofnode_read_u32_index(ofnode node, const char *propname, int index,
+ 	int len;
+ 
+ 	assert(ofnode_valid(node));
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 
+ 	if (ofnode_is_np(node))
+ 		return of_read_u32_index(ofnode_to_np(node), propname, index,
+@@ -400,17 +400,17 @@ int ofnode_read_u32_index(ofnode node, const char *propname, int index,
+ 	cell = fdt_getprop(ofnode_to_fdt(node), ofnode_to_offset(node),
+ 			   propname, &len);
+ 	if (!cell) {
+-		dm_warn("(not found)\n");
++		log_debug("(not found)\n");
+ 		return -EINVAL;
+ 	}
+ 
+ 	if (len < (sizeof(int) * (index + 1))) {
+-		dm_warn("(not large enough)\n");
++		log_debug("(not large enough)\n");
+ 		return -EOVERFLOW;
+ 	}
+ 
+ 	*outp = fdt32_to_cpu(cell[index]);
+-	dm_warn("%#x (%u)\n", *outp, *outp);
++	log_debug("%#x (%u)\n", *outp, *outp);
+ 
+ 	return 0;
+ }
+@@ -430,17 +430,17 @@ int ofnode_read_u64_index(ofnode node, const char *propname, int index,
+ 	cell = fdt_getprop(ofnode_to_fdt(node), ofnode_to_offset(node),
+ 			   propname, &len);
+ 	if (!cell) {
+-		dm_warn("(not found)\n");
++		log_debug("(not found)\n");
+ 		return -EINVAL;
+ 	}
+ 
+ 	if (len < (sizeof(u64) * (index + 1))) {
+-		dm_warn("(not large enough)\n");
++		log_debug("(not large enough)\n");
+ 		return -EOVERFLOW;
+ 	}
+ 
+ 	*outp = fdt64_to_cpu(cell[index]);
+-	dm_warn("%#llx (%llu)\n", *outp, *outp);
++	log_debug("%#llx (%llu)\n", *outp, *outp);
+ 
+ 	return 0;
+ }
+@@ -468,7 +468,7 @@ int ofnode_read_u64(ofnode node, const char *propname, u64 *outp)
+ 	int len;
+ 
+ 	assert(ofnode_valid(node));
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 
+ 	if (ofnode_is_np(node))
+ 		return of_read_u64(ofnode_to_np(node), propname, outp);
+@@ -476,12 +476,12 @@ int ofnode_read_u64(ofnode node, const char *propname, u64 *outp)
+ 	cell = fdt_getprop(ofnode_to_fdt(node), ofnode_to_offset(node),
+ 			   propname, &len);
+ 	if (!cell || len < sizeof(*cell)) {
+-		dm_warn("(not found)\n");
++		log_debug("(not found)\n");
+ 		return -EINVAL;
+ 	}
+ 	*outp = fdt64_to_cpu(cell[0]);
+-	dm_warn("%#llx (%llu)\n", (unsigned long long)*outp,
+-		(unsigned long long)*outp);
++	log_debug("%#llx (%llu)\n", (unsigned long long)*outp,
++		  (unsigned long long)*outp);
+ 
+ 	return 0;
+ }
+@@ -499,11 +499,11 @@ bool ofnode_read_bool(ofnode node, const char *propname)
+ 	bool prop;
+ 
+ 	assert(ofnode_valid(node));
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 
+ 	prop = ofnode_has_property(node, propname);
+ 
+-	dm_warn("%s\n", prop ? "true" : "false");
++	log_debug("%s\n", prop ? "true" : "false");
+ 
+ 	return prop ? true : false;
+ }
+@@ -514,7 +514,7 @@ const void *ofnode_read_prop(ofnode node, const char *propname, int *sizep)
+ 	int len;
+ 
+ 	assert(ofnode_valid(node));
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 
+ 	if (ofnode_is_np(node)) {
+ 		struct property *prop = of_find_property(
+@@ -529,7 +529,7 @@ const void *ofnode_read_prop(ofnode node, const char *propname, int *sizep)
+ 				  propname, &len);
+ 	}
+ 	if (!val) {
+-		dm_warn("<not found>\n");
++		log_debug("<not found>\n");
+ 		if (sizep)
+ 			*sizep = -FDT_ERR_NOTFOUND;
+ 		return NULL;
+@@ -553,7 +553,7 @@ const char *ofnode_read_string(ofnode node, const char *propname)
+ 		dm_warn("<invalid>\n");
+ 		return NULL;
+ 	}
+-	dm_warn("%s\n", str);
++	log_debug("%s\n", str);
+ 
+ 	return str;
+ }
+@@ -573,7 +573,7 @@ ofnode ofnode_find_subnode(ofnode node, const char *subnode_name)
+ 	ofnode subnode;
+ 
+ 	assert(ofnode_valid(node));
+-	dm_warn("%s: %s: ", __func__, subnode_name);
++	log_debug("%s: %s: ", __func__, subnode_name);
+ 
+ 	if (ofnode_is_np(node)) {
+ 		struct device_node *np = ofnode_to_np(node);
+@@ -588,8 +588,8 @@ ofnode ofnode_find_subnode(ofnode node, const char *subnode_name)
+ 				ofnode_to_offset(node), subnode_name);
+ 		subnode = noffset_to_ofnode(node, ooffset);
+ 	}
+-	dm_warn("%s\n", ofnode_valid(subnode) ?
+-		ofnode_get_name(subnode) : "<none>");
++	log_debug("%s\n", ofnode_valid(subnode) ?
++		  ofnode_get_name(subnode) : "<none>");
+ 
+ 	return subnode;
+ }
+@@ -598,7 +598,7 @@ int ofnode_read_u32_array(ofnode node, const char *propname,
+ 			  u32 *out_values, size_t sz)
+ {
+ 	assert(ofnode_valid(node));
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 
+ 	if (ofnode_is_np(node)) {
+ 		return of_read_u32_array(ofnode_to_np(node), propname,
+@@ -1032,7 +1032,7 @@ ofnode ofnode_get_aliases_node(const char *name)
+ 	if (!prop)
+ 		return ofnode_null();
+ 
+-	dm_warn("%s: node_path: %s\n", __func__, prop);
++	log_debug("%s: node_path: %s\n", __func__, prop);
+ 
+ 	return ofnode_path(prop);
+ }
+@@ -1301,7 +1301,7 @@ int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
+ 	int len;
+ 	int ret = -ENOENT;
+ 
+-	dm_warn("%s: %s: ", __func__, propname);
++	log_debug("%s: %s: ", __func__, propname);
+ 
+ 	/*
+ 	 * If we follow the pci bus bindings strictly, we should check
+@@ -1318,10 +1318,10 @@ int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
+ 		int i;
+ 
+ 		for (i = 0; i < num; i++) {
+-			dm_warn("pci address #%d: %08lx %08lx %08lx\n", i,
+-				(ulong)fdt32_to_cpu(cell[0]),
+-			      (ulong)fdt32_to_cpu(cell[1]),
+-			      (ulong)fdt32_to_cpu(cell[2]));
++			log_debug("pci address #%d: %08lx %08lx %08lx\n", i,
++				  (ulong)fdt32_to_cpu(cell[0]),
++				  (ulong)fdt32_to_cpu(cell[1]),
++				  (ulong)fdt32_to_cpu(cell[2]));
+ 			if ((fdt32_to_cpu(*cell) & type) == type) {
+ 				const unaligned_fdt64_t *ptr;
+ 
+@@ -1348,7 +1348,7 @@ int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
+ 	ret = -EINVAL;
+ 
+ fail:
+-	dm_warn("(not found)\n");
++	log_debug("(not found)\n");
+ 	return ret;
+ }
+ 
+@@ -1632,7 +1632,7 @@ int ofnode_write_string(ofnode node, const char *propname, const char *value)
+ {
+ 	assert(ofnode_valid(node));
+ 
+-	dm_warn("%s: %s = %s", __func__, propname, value);
++	log_debug("%s: %s = %s", __func__, propname, value);
+ 
+ 	return ofnode_write_prop(node, propname, value, strlen(value) + 1,
+ 				 false);
 
---Jcuwzeu7hNLgwGN8--
+---
+base-commit: d2061828a4c1b60b44cd2307b6a782ac2efbffbe
+change-id: 20241015-dm-debug-less-verbose-29d4aba76f5b
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
+
