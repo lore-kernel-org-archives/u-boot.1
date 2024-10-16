@@ -4,55 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB3B2D20686
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 23:45:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F21D3D2068A
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 01:22:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 397418899C;
-	Wed, 16 Oct 2024 01:45:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 383EE889CA;
+	Wed, 16 Oct 2024 03:22:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729035914;
-	bh=OijfXerhEiNYqx4IXkXV1ZENdgkpFviHeNQaTukLghU=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=XdkUDLroWi74PCW6KFO/TCimOjlZg4vbj9Yqusud8yMq9tiYN+od+vEqLvc3o/fa7
-	 dBQo3SnR0OaC0jc8hazsCA29+Vl75sQ34Ru4KzUIQEZbEI9T5/ioUc3LoAYBRSOL58
-	 v+/Sq/YwAol+O8dgVP1FO9v1QnKjYEMZzRZAMAc3SG7hmJJISRsHIk+9IALE7z4Fnm
-	 oUuVsaOgZizddsiFbzL2aUgV3IX4/cE5pS5knMVVhNr3DOrVr8KAqlsn9csxu8a8vs
-	 mig3pBuSVDmfzpMZ/L0Xda1TOAzcPqe7KksZOsgxS0dsvt8/1Gg50zCJN/yQZhYfRX
-	 KlanCF1LtqNug==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="WvlAtafH";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3B0B288B39; Wed, 16 Oct 2024 03:22:10 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id EB1F888216;
- Wed, 16 Oct 2024 01:45:11 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729035912;
- bh=OijfXerhEiNYqx4IXkXV1ZENdgkpFviHeNQaTukLghU=;
- h=From:To:Cc:Subject:Date:From;
- b=BD5EzEF6p5Xawwc/j2iXMZjj119k+eNVQhLL/Kuy/qHTwl2JpzbX2FWAay8JHS4UP
- 4OW6E6bcf5tJSQ3XKuCWsyldOxVh06XczDxpjVH+HJa/wUw6Q2REKvrmmnFsqyd8Ba
- 3LP/ky16z2EUtB0uqPY9uxOfnsaO+zq0oM4fyYGigYhedQBesMxtenW70H6uH1BRTY
- qN5fFIlblReVIO9WB4RpEUygFiA/rKZ4MO3iC+eeWnHPSMG9c+kfbhQf1E5358S+ti
- YsNYOUtbLjPw0QqVSdinEPI4/DpAEAmiLbCcH7bbztM2qOcHFV3yVwVI/S4bvwFrvF
- UZMFHbgZUNSjg==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Andreas Geisreiter <ageisreiter@dh-electronics.de>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Fabio Estevam <festevam@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com
-Subject: [PATCH] ARM: dts: imx6-dhcom: Remove fdt_high and initrd_high env
- variables
-Date: Wed, 16 Oct 2024 01:44:32 +0200
-Message-ID: <20241015234502.129086-1-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
+ by phobos.denx.de (Postfix) with ESMTPS id 5F31788A9D
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 03:22:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1729041726;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ItQjLwwZzStq4glFFYJ8b1gYUvEUWwB9Pa9FMtEe+hM=;
+ b=WvlAtafHj9vPHGl6fHJHSo/1rPGFH06i0K9tPC+y2/kqwsgA/9IOpwsXaz+7F9ZiZG8iWz
+ KdK7F4IKlYaBgV+XMWGUVzgMEaNHZJxgY2Hsg6cZ2us04IUJZWRI8znfvHgNrQqByfJoA5
+ Od5D5/bXSlchfUPSa+jgFDWKFI22IpuaMIcGCuUGDgiXe614TCpd5APlOdp3x74SNPcGLm
+ D11dQH5ERYTST++WpqrGa4B6ynZFapjXp6ZoSOe388LpLQm65W+6ZiTxwjyFU7ywxovvt2
+ dmabtZ2/fQ0oMcXtIN5NcJKlfPFTaBdhYWLymk5vjEk7m3YPv+OwNg+zFWnujw==
+Date: Wed, 16 Oct 2024 03:22:05 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Alex Shumsky <alexthreed@gmail.com>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, Ben Wolsieffer
+ <benwolsieffer@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, Chris
+ Morgan <macromorgan@hotmail.com>, Devarsh Thakkar <devarsht@ti.com>, Jagan
+ Teki <jagan@amarulasolutions.com>, Janne Grunau <j@jannau.net>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>, Joshua Watt
+ <jpewhacker@gmail.com>, Kever Yang <kever.yang@rock-chips.com>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass
+ <sjg@chromium.org>, Stefan Roese <sr@denx.de>, Tim Harvey
+ <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v5] rockchip: board: Increase rng-seed size to make it
+ sufficient for modern Linux
+In-Reply-To: <20241015212831.61229-1-alexthreed@gmail.com>
+References: <20241015212831.61229-1-alexthreed@gmail.com>
+Message-ID: <2aaf029095b1ee30d0b40f60787e1a8c@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,46 +80,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove both "fdt_high" and "initrd_high" environment variables
-in favor of "bootm_size" to safely contain a kernel, device tree
-and initrd for relocation inside of 256 MiB region of DRAM.
+Hello Alex,
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>
-Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Cc: Fabio Estevam <festevam@denx.de>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Tim Harvey <tharvey@gateworks.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
----
-NOTE: If mainline Linux does not boot, this is the prime suspect.
-      Non-8-byte aligned DT address is then a dead giveaway:
-      Booting using the fdt blob at 0x126d6bac
-                                             ^
----
- include/configs/dh_imx6.h | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+Thanks for the v5.  Please see a few comments below.
 
-diff --git a/include/configs/dh_imx6.h b/include/configs/dh_imx6.h
-index 9b6f03f6856..09354936d73 100644
---- a/include/configs/dh_imx6.h
-+++ b/include/configs/dh_imx6.h
-@@ -36,10 +36,9 @@
- #endif
- 
- #define CFG_EXTRA_ENV_SETTINGS	\
-+	"bootm_size=0x10000000\0"	\
- 	"console=ttymxc0,115200\0"	\
- 	"fdt_addr=0x18000000\0"		\
--	"fdt_high=0xffffffff\0"		\
--	"initrd_high=0xffffffff\0"	\
- 	"kernel_addr_r=0x10008000\0"	\
- 	"fdt_addr_r=0x13000000\0"	\
- 	"ramdisk_addr_r=0x18000000\0"	\
--- 
-2.45.2
+On 2024-10-15 23:28, Alex Shumsky wrote:
+> Increase rng-seed size to make Linux happy and initialize rng pool 
+> instantly.
+> Linux 5.19+ requires 32 bytes of entropy to initialize random pool, but 
+> u-boot
+> currently provides only 8 bytes.
+> Linux 5.18 and probably some versions before it used to require 64 
+> bytes.
+> Bump min value to 64 bytes to be on a safe side.
+> 
+> Boot with 8 byte rng-seed (Linux 6.11):
+>     # dmesg | grep crng
+>     [   12.089286] random: crng init done
+> Boot with 32 byte rng-seed (Linux 6.11):
+>     # dmesg | grep crng
+>     [    0.000000] random: crng init done
+> 
+> Linux source references:
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/char/random.c?h=v5.19#n551
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/char/random.c?h=v5.18#n236
+> 
+> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+> Fixes: d2048bafae40 ("rockchip: board: Add board_rng_seed() for all
+> Rockchip devices")
+> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+> Reviewed-by: Marek Vasut <marex@denx.de>
+> ---
+> 
+> Changes in v5:
+> - add docs
+> 
+> Changes in v4:
+> - fix typos and code style
+> 
+> Changes in v3:
+> - reword warning
+> - increase default rng_seed_size to support older linux as well
+> - reword commit message
+> 
+> Changes in v2:
+> - add env config knob rng_seed_size
+> - add warning for small rng_seed_size
+> - 12-character commit SHA in Fixes
+> 
+>  arch/arm/mach-rockchip/board.c | 11 ++++++++++-
+>  common/Kconfig                 |  3 +++
+>  doc/usage/environment.rst      |  5 +++++
+>  include/fdt_support.h          |  3 ++-
+>  4 files changed, 20 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/mach-rockchip/board.c 
+> b/arch/arm/mach-rockchip/board.c
+> index 3fadf7e412..ca6404776f 100644
+> --- a/arch/arm/mach-rockchip/board.c
+> +++ b/arch/arm/mach-rockchip/board.c
+> @@ -472,9 +472,18 @@ __weak int misc_init_r(void)
+>  __weak int board_rng_seed(struct abuf *buf)
+>  {
+>  	struct udevice *dev;
+> -	size_t len = 0x8;
+> +	ulong len = env_get_ulong("rng_seed_size", 10, 64);
+>  	u64 *data;
+> 
+> +	if (len < 64) {
+> +		/*
+> +		 * rng_seed_size should be at least 32 bytes for Linux 5.19+,
+> +		 * or 64 for older Linux kernel versions
+> +		 */
+> +		log_warning("Value for rng_seed_size too low (%lu) and likely
+> insufficient for the Linux RNG initialization\n",
 
+Please consider changing the message to:
+
+   "Value for rng_seed_size (%lu) too low, Linux kernel RNG
+   may fail to initialize early\n"
+
+It's more compact, which is always good, and should be a bit
+more precise that way.
+
+> +			    len);
+> +	}
+> +
+>  	data = malloc(len);
+>  	if (!data) {
+>  		printf("Out of memory\n");
+> diff --git a/common/Kconfig b/common/Kconfig
+> index 957de0c5c0..c1d06f5045 100644
+> --- a/common/Kconfig
+> +++ b/common/Kconfig
+> @@ -927,6 +927,9 @@ config BOARD_RNG_SEED
+>  	  new seed for use on subsequent boots, and whether or not the
+>  	  kernel should account any entropy from the given seed.
+> 
+> +	  Default seed size (64 bytes) can be overridden by a decimal 
+> environment
+> +	  variable rng_seed_size.
+
+Maybe reflow a bit to follow the column width above.
+
+> +
+>  endmenu
+> 
+>  menu "Update support"
+> diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
+> index cc33d3ec0f..253b25a002 100644
+> --- a/doc/usage/environment.rst
+> +++ b/doc/usage/environment.rst
+> @@ -323,6 +323,11 @@ netretry
+>      Useful on scripts which control the retry operation
+>      themselves.
+> 
+> +rng_seed_size
+> +    Size of random value added to device tree-node /chosen/rng-seed.
+> +    This variable is given as a hexadecimal number.
+
+We've come to a conclusion it's a decimal number, right? :)
+So, please s/hexadecimal/decimal/
+
+> +    If unset, 64 bytes is used as the default.
+> +
+>  silent_linux
+>      If set then Linux will be told to boot silently, by
+>      adding 'console=' to its command line. If "yes" it will be
+> diff --git a/include/fdt_support.h b/include/fdt_support.h
+> index 741e2360c2..02561eab15 100644
+> --- a/include/fdt_support.h
+> +++ b/include/fdt_support.h
+> @@ -202,7 +202,8 @@ int ft_board_setup(void *blob, struct bd_info *bd);
+>   *
+>   * This function is called if CONFIG_BOARD_RNG_SEED is set, and must
+>   * be provided by the board. It should return, via @buf, some suitable
+> - * seed value to pass to the kernel.
+> + * seed value to pass to the kernel. Seed size could be set in a 
+> decimal
+> + * environment variable rng_seed_size and defaulted to 64 bytes.
+
+s/defaulted/it defaults/
+
+>   *
+>   * @param buf         A struct abuf for returning the seed and its 
+> size.
+>   * @return            0 if ok, negative on error.
