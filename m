@@ -4,84 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66909D2A53E
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:42:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DF19D2A53E
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:44:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDB8888BBE;
-	Wed, 16 Oct 2024 20:42:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7FA0488DC7;
+	Wed, 16 Oct 2024 20:44:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PCvGqEZS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j3A2d4jY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62BFA88DC7; Wed, 16 Oct 2024 20:42:56 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 1871588DE5; Wed, 16 Oct 2024 20:44:42 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A88088B8F
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:42:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1519388DC7
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:44:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2fb584a8f81so1829991fa.3
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 11:42:54 -0700 (PDT)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2fb5743074bso924201fa.1
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 11:44:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729104174; x=1729708974; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1729104279; x=1729709079; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QUfohrmlL38p439DWBTlou4hatWmaFoG+6kU/ub9eVs=;
- b=PCvGqEZSgeY39iX8u5Pyp+BHt7plh7QKO2LlQ4FSk33xpZWOZEHJNvavSh7AsH4eSE
- cTxZudY3611QhIeJwfw34BgiZuWL5sPsz3E8UQalVG6xCZMSnCoKJ+5Bze38gt6K9/kh
- uAaS3rrQH7BMhgrZ2iz8ktfbWzgH9P2yLGO1sg9MpDj/23IZNFRSZiJVzhwc/JYABZBa
- mPP19DcvRU6kJ/7Q3bap5yrkbV7aJfMUEHrwynaBmTWN4ORBf6CwOtkLJI6LFexLWcjD
- 8Zp7q88koVgcFqX5Fa0D3Tyegh9gAUf0JPGMclebq36pZHvjvtXRNoNZ/x/gs4d9FeNX
- lHiw==
+ bh=dKlXuc5DNfZVVZatH6eXqmwpyzZY0K+q7bjz/DI2nfI=;
+ b=j3A2d4jY1lEaTwfsJO5CtmmCW6Ew6RQ1fq9zYzuh7vHhD0M5Ltm3ZKCwTVE6fVyS5H
+ D8NkZdVlya7baeRhKYhRKHkl3quej0CMxSDl6InmLDm/nH3GQgJTCDnMna2v5VLWq0he
+ XhzMfP/tVveNY+45LUxDfnSf0DOLO9HhMgPcTA4Y1Cz3M2U0Ifxw2IG+Ci/pvigl6vkh
+ oK4iIBm43h8DYgj7F9D6tnWpv2P0kDtTK+e43frGVYyyscQSp89op8Vq480T2mnVAUSe
+ dzahaFqST679GF7hMMTNr27E6hqN9rDKbSgCTJCOKE+483kn4kTyRbXvh8JRB3rsryk/
+ BZMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729104174; x=1729708974;
+ d=1e100.net; s=20230601; t=1729104279; x=1729709079;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QUfohrmlL38p439DWBTlou4hatWmaFoG+6kU/ub9eVs=;
- b=Gnk4Io+RL6hsSiKcmIHeEBgalpg3HSbX4lwaUnqOEwB5FIkC7FoaPPCnWQXKVopv/f
- /CNo4dP6dWhguUyZndeNDodaG1vADmkBAPqhLlMTgWfdd86BeOr5c0iQl4Vh+aQl+ST1
- hR5mNwVbT4nuakwieBSYOOsnOOUFabn9TgjJtFoWHx5V5gHDwNuR7voZupbTzFpz/MWy
- /y3EJXexyq6DYwajPDawkEo3ZlaIvw0rXFd1mjiqtOdtnMSIRwSN1pEHX0nN9Zm1yzez
- f0Y8eqPUj1knV5xfZovNUsQ1fV2QVzNWCZdS1RlZCBUTdd3Tvfo6fE4M9y0DOXRVSsdj
- pmHA==
-X-Gm-Message-State: AOJu0YzDRExDe0RRg0guyiXJHR6bYUU+fD+x3txc3NwZxgB3Ypz04to0
- CVfMlbgixC1gEVv0H5M0/93HoatgIVohyR6ZAnZ8aGXI2A7Rz9FwdeJX9NQkABQXJ2Sdy36irOr
- 7SKa/BzjagKBtz0zhe6iA9t2RT1k=
-X-Google-Smtp-Source: AGHT+IGapCDTHTYjjuc//5JvtaU5F/EQWOUfoOkyJf9F8DfF+o0nQeJOpkYW7iyLIvv3mozRqC9JuOG7mEQTa6g/JBU=
-X-Received: by 2002:a05:651c:504:b0:2fb:5f9d:c287 with SMTP id
- 38308e7fff4ca-2fb61ba31bcmr32504811fa.32.1729104173314; Wed, 16 Oct 2024
- 11:42:53 -0700 (PDT)
+ bh=dKlXuc5DNfZVVZatH6eXqmwpyzZY0K+q7bjz/DI2nfI=;
+ b=CK5EqPfZg7Ny5Ca/O1U4I/ELJBQ+rFSydCOQUMXgDvnZw+ZK4gsSTIZsyo20ohdgx8
+ apy2cYLPZQpZjA4QKe1x50JDEY8tioKIBWz8Dr7Xjer2Yf0qM4QyED4KNKOxRaGUJVAB
+ EczR7HrmPJ2wzzg1QBBKceIfzFTm1Vlyomn9Ss78VdD/hZidJRn0J9acTao3wl+uR2ib
+ mDGtIxJZneGZ0mGsyfuj295tmRLKOitIsUUbGzI8AbaqHW7ZO2zgbZGb59FgbWlpdf07
+ gtBgu5eb8hx0IJSuZezxmW/BxAJH0lIxvGRMTFk5A44OAHxF3+jMOmAyYKWqMbRbw8YQ
+ yLAQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX5wcgh2o//t9fEot7/FtFAViBJcmDHcZVJKOs4Jc2xW1mzloRr2Jla1WcpheDq12nVQ5NXdj0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwDpbW247pKMjKempHsJQIZfPtiHKvS+XmBfqeuQ9nCyMUfKhqA
+ tWausCSi8sbTGjLo/1ty3I0At3Aci+Prq6nlymrynLY7GTVMdu+OdDfjqP6XTz05xbHEcXDhPW4
+ Y9b153IVE7fbrek1Q13Kv/7MV+As=
+X-Google-Smtp-Source: AGHT+IFJW2NqnBNdXwTtXzUomEG9LmIUCNUrHd/bjiw8kLa8Cm52S16801Nzw7LSjzSgyN3t5tqoQ24qRZ0SigXofKQ=
+X-Received: by 2002:a2e:4a12:0:b0:2f7:5ca2:6d10 with SMTP id
+ 38308e7fff4ca-2fb6da109bbmr1583651fa.15.1729104279119; Wed, 16 Oct 2024
+ 11:44:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241007120002.25690-1-marex@denx.de>
- <CAOMZO5BX3EvcGAJjKNt-vX9+9se9nzmf19_-4f4gfS59C9Q8Sg@mail.gmail.com>
- <d87b9fc8-5bdb-4e16-a219-51d05230bc80@denx.de>
- <CAOMZO5CGjRXC8kqq8FhDW133Eiw0319we+D9rgjvrs14DMYk-A@mail.gmail.com>
-In-Reply-To: <CAOMZO5CGjRXC8kqq8FhDW133Eiw0319we+D9rgjvrs14DMYk-A@mail.gmail.com>
+References: <20241016151035.709351-1-ravi@prevas.dk>
+In-Reply-To: <20241016151035.709351-1-ravi@prevas.dk>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 16 Oct 2024 15:42:42 -0300
-Message-ID: <CAOMZO5DWaBG=XS+GyP-dCy0kXOBQzwq3BWh4P9uZgbJ6ivDagw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] dts: Add ability to build fallback DTBOs from
- arch/$(ARCH)/dts
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jonas Karlman <jonas@kwiboo.se>, Lothar Rubusch <l.rubusch@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass <sjg@chromium.org>, 
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com
+Date: Wed, 16 Oct 2024 15:44:27 -0300
+Message-ID: <CAOMZO5AOBX+bydadzHsj1Zn4xqOSyy9681879DvoJ_BZcaDhEg@mail.gmail.com>
+Subject: Re: [PATCH] envtools: make them build again
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, emkan@prevas.dk, 
+ Joe Hershberger <joe.hershberger@ni.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -100,14 +90,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 16, 2024 at 3:34=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+On Wed, Oct 16, 2024 at 12:10=E2=80=AFPM Rasmus Villemoes <ravi@prevas.dk> =
 wrote:
 >
-> On Tue, Oct 15, 2024 at 5:22=E2=80=AFPM Marek Vasut <marex@denx.de> wrote=
-:
+> In v2024.10, "make envtools" is broken for at least these defconfigs:
 >
-> > This should now apply on u-boot/master .
+>    am335x_evm_defconfig
+>    rpi_3_defconfig
+>    rpi_4_defconfig
+>    mx7dsabresd_defconfig
+>    wandboard_defconfig
+>    imx8mp_evk_defconfig
 >
-> Thanks for the heads up. This will be part of my next PR to Tom.
+> The only defconfig we use for which it is not broken is
+> stm32mp13_defconfig. They all work just fine in v2024.07.
+>
+> The symptoms are slightly different, but all related to the fact that
+> some transitively included header uses IS_ENABLED or CONFIG_IS_ENABLED
+> without linux/kconfig.h having already been included.
+>
+> A simple git bisect doesn't produce anything sensible, it ends up at
+> 3a9f642ca94 (crypto: nuvoton: npcm_sha: Support SHA 384/512) which
+> clearly has nothing to do with this. But digging deeper, one
+> eventually finds 0f92fa45603 ("env: Remove <common.h> and add needed
+> includes").
+>
+> So at first I tried adding "#include <linux/kconfig.h>" in
+> include/env_default.h and include/env_flags.h. That fixes it for some,
+> but not all, of the above. For example rpi_3_defconfig still fails,
+> then in log.h complaining about BIT() and u8 not being defined. At
+> least BIT() is should have gotten from bitops.h, except that that's
+> behind ifdef __KERNEL__, so not set for the envtools build.
+>
+> It turns out that the envtools source code in fw_env_private.h already
+> has some hackery to deal with all this, in the form of the __ASSEMBLY__
+> games it plays before including config.h. It seems that if we just
+> make sure to do that include early enough, so that config.h is indeed
+> parsed with that __ASSEMBLY__ hackery in place, everything builds
+> fine.
+>
+> Fixes: 0f92fa45603 ("env: Remove <common.h> and add needed includes")
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 
-Hmm, still fails to apply. Please check.
+Thanks for the fix.
+
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
