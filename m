@@ -4,97 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 551C7D1AD30
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 09:17:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD3A0D1AD33
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 09:25:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C473088D5A;
-	Wed, 16 Oct 2024 11:17:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A68188E81;
+	Wed, 16 Oct 2024 11:25:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="E2P644pi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xZixX6Ty";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08E2888CC9; Wed, 16 Oct 2024 11:17:21 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 6D45188E69; Wed, 16 Oct 2024 11:25:37 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FE7C88E81
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 11:17:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 601D788ECC
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 11:25:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-430558cddbeso4581695e9.1
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 02:17:19 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43124843b04so37791355e9.2
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 02:25:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729070238; x=1729675038; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729070735; x=1729675535; darn=lists.denx.de;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/8GtmWHppBcSxtUCLO/+/IhpHyZGG06NI70yZcTePuQ=;
- b=E2P644pioPbF4JgoLWh3P65cD84qVRI5ml7gcENkMZuVZh1Dx4yUWd2Up/JAMkluHc
- h0w7rum+fQ3dMyP9Y1FFbri2JdplISLunW0wIAEbRAEfsu3YNyT7f1xSmdfHmCEA6vyq
- xQW7NQRBNneExPXW6jHWK0568J1RIBhcYWGO9jJfMhFW2E1P22Ft9a3KJ5/MjkC7Ftmz
- wGR+L+pPcH9kiKH9xUBDp0nLdmd9EXfGMrNU6vIF2QZAuQZOWw5ezPuj5ySSG+GIKDgf
- GWv2tPEqJU8C4KNURe0qAPZbFg0ZS1MBKmTAfxYbfo4lOrrUJfowqjEnTVcw8iL2uqx7
- 9jOw==
+ bh=KN+NIntnJ7NJNYG4SzWr5IagW9pyFEVhnSjafdGhiac=;
+ b=xZixX6TyWZuwqFYBE9ug9xrMsnjtP2+YFJJ02FhBXKSX6WPfwmx33TQ7u+pXFXEAqR
+ miXh0GqA1PccPTxGvGstsYQnycPm7ep8HL9YjBJJE2PUjlaXpPqO7AAs54dfwKUj5mWT
+ Tjozi9lvU2pQ0b4WeqtJ2BJjZcOm0Xn110V0R75SNL0DDEIDOlljJRj2PZxMVjLI2kZ/
+ ZfQsCOPlJkGOHoeoLiLuoaOH5OQJISSmbkO6DGH1mAr5gnYuJWB85IBnm8NcaDKROqIh
+ xz7ougpf5nSyK87Z6TNE/sqJIhxL6E6JzIIELM+/SCszXwEYHEKEkcjdmYEhzNZeAFQs
+ FPKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729070238; x=1729675038;
+ d=1e100.net; s=20230601; t=1729070735; x=1729675535;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/8GtmWHppBcSxtUCLO/+/IhpHyZGG06NI70yZcTePuQ=;
- b=hXmMfdpUDY8EWpHovRDn7r1n99RUcfunXlYQ5I/xq1OMFeD/KMQBHrEDlENUNrMlPh
- am9BUNLuJNi1BLyUhdFB/GnHI3obaco55d9JsQkVH56qDD5Tq9JO3VMiT8Pw2nq+Vfw4
- nFoquczNyKVOYE7MYgWR6E796Gse/4q7FKIloIw6+xJdbUT8ZchO+k7tcTE+OLi64Qvr
- iqCNf1xXvw6zAPhXTgvs6VVEBAdbadArYndmG79GDe5kXwauRUb6uGarMrs7O5jvoDjs
- r4jTQkVtYD6uLa3vweJ4uW1y7pA/MaXXZe+AjUE2P9/P2dDrXj6XOsrF+IfzoqJKDL0J
- sRIg==
+ bh=KN+NIntnJ7NJNYG4SzWr5IagW9pyFEVhnSjafdGhiac=;
+ b=k3VLG4vwMo9Vmunsi9LiiCZDTmI/GakNYI3fIzCYJOgsq27CQNEBEJoaJn0LRJI/vm
+ xpBDt046E29xeEtJZkQMGYY86lH0iygTyuwDtLHmVV6ArOhz9GG+zeRpqEwxztTVCsd0
+ cii11261c8ZTNDbzephzHjHMGodnwdW7O4yjsaKQ0q32oAgZpemBz6f3ktiWAQwRt2wZ
+ bWpP2Jy6nvWUYXOQRdkeZrGtfvfz1URYslEKSARBVqOL+eSCoQ+vJsFifd89Gu/E1Yy7
+ fYNJJ6OFjt6T8XgSbgjK/r+Y7QW7jvUEbU8YCeB5WDhFbQbudaS8gmTHpLU6At8HJGGU
+ c4/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWmMyqHaTwnXXccH0JE0hgr1bQuAUiu7G73GNAvz1xaybmFK/YRYGIRIoB0sOlT50Lpa1XnGnY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxqXid7jr/q+WUlF6UHg7L86JI1PzpusVgR1HAFv90UgDDPXiyR
- a5c7WJTlAyyt3+YaX2MeFMxu0fBD2nsfnpFWN9vvaOXUEpO1mbvxXz8JRPt2sWU=
-X-Google-Smtp-Source: AGHT+IFB1mmo7u38teZ9VNAjTIWmVsi2Dig/AQmcO1132yLJZuNHAG4+AIHmHaY/ccbQk0iHvEv6LQ==
-X-Received: by 2002:a05:600c:4f05:b0:42f:84ec:3e0 with SMTP id
- 5b1f17b1804b1-4314a31d5cbmr28548045e9.9.1729070238468; 
- Wed, 16 Oct 2024 02:17:18 -0700 (PDT)
+ AJvYcCUlMHXI/WcODv4fzb6u5pmKhEa85ZHYuQKO9IwfZxhbI0UV3TvzT4TWoWgvOuLxdkSBiHuI1BA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzGrYoiT/LDMbToacTsrnkZczolZxtSszah/gFLBpSCNEhNkrNa
+ wypu7jdhXRFs2dh3QTlu8GuRFfORjWGBHcq/90yhxIQyQM33cFqIVVKvPPQk5SI=
+X-Google-Smtp-Source: AGHT+IG+CuA+vyU/P+/fQ04QLLJ0rTTbxBp46hwrzDmvWCuVQfsLPkTRTLTPYlhPWbw581mRQWSrsg==
+X-Received: by 2002:a05:6000:111:b0:37c:d537:9dc0 with SMTP id
+ ffacd0b85a97d-37d551847cfmr11732376f8f.12.1729070734785; 
+ Wed, 16 Oct 2024 02:25:34 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4313f55df34sm43638725e9.6.2024.10.16.02.17.17
+ 5b1f17b1804b1-43150469a35sm14997115e9.1.2024.10.16.02.25.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2024 02:17:18 -0700 (PDT)
+ Wed, 16 Oct 2024 02:25:34 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Wed, 16 Oct 2024 11:17:16 +0200
-Subject: [PATCH] mmc: msm_sdhci: enable vqmmc at probe if available
+Date: Wed, 16 Oct 2024 11:25:32 +0200
+Subject: [PATCH] ARM: mach-snapdragon: configure a larger default
+ SYS_MALLOC_LEN for fastboot
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241016-topic-sm8x50-mmc-vqmmc-v1-1-767af5351d37@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAJuED2cC/x2MSQqAMAwAvyI5G2jEDb8iHjRGzaEurRRB/LvVy
- 8AcZm7w4lQ8NMkNToJ63dYolCbAS7/OgjpGh8xkORkq8dx2ZfS2vgqD1jKG4+NQ8VRTVQoXBDH
- enUx6/eO2e54X2MKHLmgAAAA=
-To: Caleb Connolly <caleb.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Message-Id: <20241016-topic-sm8x50-bigger-malloc-len-v1-1-361b132ce7d4@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAIuGD2cC/x3NTQqEMAxA4atI1gYaqT8zV5FZ1BproLbSDiKId
+ 7e4/DbvXZA5CWf4VhckPiRLDAVUV2BXExyjzMXQqEaTog7/cReLeRvOVuEkznHCzXgfLXoO+CG
+ a2HRG6X6BEtkTL3K+g/F33w9E8/yxcAAAAA==
+To: Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1603;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=945;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=VMwvYlTzgoeigz6ub9LcdNP8Df1wgk0qQOjlnPSClR0=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnD4SdiPJRhAEj2vCB+D0R/iK3mDol1CZhvdkq/K/1
- iiBvsV2JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZw+EnQAKCRB33NvayMhJ0bKIEA
- CIXHF3hiFjaGBY623ABS6VojZ2MfLFOZ6sBFdDOKTk0NKizB+Z+Vo0ezi59Modunlgd7/Cag5r/PZ9
- rMoAWdQAFCyLbCnyu1xsvflT2sY/Tc/tvyoag11+/S1Fg791VsQIZi1vOEmBfDJNjOuwLwEmLsP7G3
- GbQr7OpvAJfVwQ+2Gy5ZrwtbTyvyhFj/XrwPBNsMVwiAtMtQ76GSeAD7fcSMWD9/Tq6jQXaceMUovX
- VpD7O/vdDJIScwr/IMrkXmKxV/lAOwhVQIy/SaKpw1Jpoq7YWIDGGcDKIkBtn0T42uTbjjXpqZKvNY
- qBSPe32PKe5CEwgfgLNbmSgUXz3n8OeRozVZyLomVEc3A0xz7e/CnYUGKaUG4KyC3eZ6vuMKHwNuhU
- pEd8rz54sqFrGmERw7dmOL5MPGjgGEPtP0QBXxWQ0LpSP5rnQLoHTUTj/xIyUjxZ7yW6wFqosHmEDX
- bIOgHIgUySN6WeML04MX1XImTijPlDZp6aUVPtSx8PRWnhV7zoGcpUkRWG+b9yo8IwVl1JaE5z+lPA
- dsvvWzZ0syf0GRMWd0cbKxsoXEWYsfXi728RUDzHGreUd4XVlCug14miWY7BtgnBCPyexu5HhEosYL
- ROs+9HhoImtiGDS5Y+sBQi6Katn4FCPhLi8pMAQkDHvxtyc/WZhikD1/jDiQ==
+ bh=Mjv5xc2PH8Z3Q++ru+s7oDgKTJNheGgC/rKJaaJSfrc=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnD4aNFG8eR7GAZBJ2PxvORLrqUPSBt4Zivz0ggCun
+ lvjq+neJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZw+GjQAKCRB33NvayMhJ0Y7LEA
+ CPrVa+eT3JPIHpVXGw0mrFB/fu3SsRE4/giJvd2sPOmRjxQ3dZFRUrnTZm+GIueTISYBXP0k9zlhxs
+ ZvK0EHDj3f0em3O4zL7GgrkPC8KRzVIIv8UrrVdaR4t5erjRqSDpD3OOYmddzR33BkL13UajC1OT3j
+ 0dyPl3UB4Q+BGMJhvN90WPXqLmVQDY67gk0wL/XzgsctQ2rBLjMV5MbOhX+ER1NLdEIqIzeG9Jzmzx
+ SOyS1OvM6VyoaO98ah6wxdzWsLQUY6h4cSBqjnUAimsMvpolhvrCGqkgQBvHQKJukXBm+5nbTVhupv
+ q1d0vKs8Q8J+UUmmDMgHmBq4IhZHrZzs/P/wo3gsa+yN02wxE4qQO9+5LBFKucwFu9VJyXfW2mqPV9
+ ZokS5S/JMifXVYHknCuGubAEB5LcHJr9MMRj6DGdOEjkdwzuiAj2xInr48WI/yz/mpHID+zzaYIXEa
+ t7RkeUl09CwV//0rRINWaltu88Yxk47mkdc3p1qVdJkuW68DaSYMAbkY6yda67q55ramkouGTI/PIb
+ NXtdzppZQNWjnKM9xBQQkRfYk7pEr+LKwphPg/WyCu6/MrCCXOcIhAEAdbwmqaLAdVfshj0p24/8/v
+ e7aEHO7QjME+OZanNlfEElckWbAjMMfQdMZletYsrkSys5mwhY3oBgh5oc3g==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -113,57 +114,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On earlier platforms, the vqmmc regulator was enabled by the
-previous bootloader, but on the newest (SM8650) it's not
-and we need vqmmc to be enabled in order to have the card
-to respond.
+Fastboot is very hungry when it flashes larges chunks, and 8MiB
+is way too small, allocate a much bigger size like other platforms
+using Fastboot.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/mmc/msm_sdhci.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ arch/arm/mach-snapdragon/Kconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-index 4e5c932c071..27bb7052fca 100644
---- a/drivers/mmc/msm_sdhci.c
-+++ b/drivers/mmc/msm_sdhci.c
-@@ -15,6 +15,7 @@
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
-+#include <power/regulator.h>
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index 536960b83c3..2985d9d3ca4 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -11,6 +11,9 @@ config SYS_VENDOR
+ 	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
+ 	  will be used as the custom board directory.
  
- /* Non-standard registers needed for SDHCI startup */
- #define SDCC_MCI_POWER   0x0
-@@ -43,6 +44,7 @@ struct msm_sdhc {
- 	struct sdhci_host host;
- 	void *base;
- 	struct clk_bulk clks;
-+	struct udevice *vqmmc;
- };
- 
- struct msm_sdhc_variant_info {
-@@ -163,6 +165,16 @@ static int msm_sdc_probe(struct udevice *dev)
- 	if (ret)
- 		return ret;
- 
-+	/* Get the vqmmc regulator and enable it if available */
-+	device_get_supply_regulator(dev, "vqmmc-supply", &prv->vqmmc);
-+	if (prv->vqmmc) {
-+		ret = regulator_set_enable_if_allowed(prv->vqmmc, true);
-+		if (ret) {
-+			printf("Failed to enable the VQMMC regulator\n");
-+			return ret;
-+		}
-+	}
++config SYS_MALLOC_LEN
++	default 0x10000000
 +
- 	var_info = (void *)dev_get_driver_data(dev);
- 	if (!var_info->mci_removed) {
- 		ret = msm_sdc_mci_init(prv);
+ config SYS_MALLOC_F_LEN
+ 	default 0x2000
+ 
 
 ---
 base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
-change-id: 20241016-topic-sm8x50-mmc-vqmmc-b7cf8176ec51
+change-id: 20241016-topic-sm8x50-bigger-malloc-len-911bea6a047f
 
 Best regards,
 -- 
