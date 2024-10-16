@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 892D1D2A538
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52A47D2A538
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:06:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0665B88D97;
-	Wed, 16 Oct 2024 20:01:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id CD42088D9A;
+	Wed, 16 Oct 2024 20:06:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="zciDodFe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n3bbEN7C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 550A988DBA; Wed, 16 Oct 2024 20:01:29 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5114D88D91; Wed, 16 Oct 2024 20:06:10 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F1DF88DA0
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:01:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52A0988DBA
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:06:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=0019cf4dfa=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49GFkeMp018446;
- Wed, 16 Oct 2024 20:01:15 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- nP/NXHa1Jev1Wz+CKtfdQVZGqpDBk2jPpwmnxag2jc0=; b=zciDodFe4sPkrB/j
- HrdbRDuejkJLkaxvf3h9Z7pfCzfacKxV9/XU/Pbxgm5NDpSpvFkOJ9B3+lGyGzFL
- FXCr6EZeLgx4bZSRJ2zDXy3ukRNm1OuNyQ+8YLUZhwFkTMGA6oA1LjWHFY/rERx6
- a3fJxmPhrVwreRm0uhJjKNgEz1Uz64+wl1Q0J0ckN1BMrOo1NbjCs+pUv52xHaaA
- vc9QHM+NpjfAlYTNgoZ0gD00hxqpoccbHRO9tShLOcj5LWbzp+bXblmu4U/70X6d
- 8wI83G70XqLvpj7U8HH9uaGx5wO42B+XkIlk4PfQTD9FhZoC6D+Kr3HCiVYaGA9f
- XVPG1g==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 42a8mvb675-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 16 Oct 2024 20:01:14 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 0D00B40044;
- Wed, 16 Oct 2024 20:00:19 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5E3E8267806;
- Wed, 16 Oct 2024 19:59:58 +0200 (CEST)
-Received: from [10.48.86.243] (10.48.86.243) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 16 Oct
- 2024 19:59:57 +0200
-Message-ID: <81cabd9f-2c4b-4b1f-a15b-0830b75a3df8@foss.st.com>
-Date: Wed, 16 Oct 2024 19:59:55 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b13b3fa372so8635185a.0
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 11:06:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729101965; x=1729706765; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LN1jRVLFsk87oe9QLdST/0NUZ6JdRWClw5WR3kcLQC8=;
+ b=n3bbEN7Cs73iMun6gOzRLVzOPIZS7yY3gxjLPMoPpuCLrjwRlhxjFz44U3yd3seThO
+ 6FbgSTbBh4Xk4VP3I/2WU1687C4d2YCXhfdyYmlnw/RNsuu1r5MpqPQ9wFQa4mc3xi0q
+ HXgXUOcL29w4ktJ6ysjoNLUXIyctGbBi6cAw8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729101965; x=1729706765;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LN1jRVLFsk87oe9QLdST/0NUZ6JdRWClw5WR3kcLQC8=;
+ b=NBC77fPNrJLW/ffe4Q2EJ0Rb4GwwAN7oiK9mgRXKmYOxBwsVomF2SHo8hU8Mw7oxZj
+ BBqsL1rwWHZzDT805/x7FCPBHfholoO0LkyBOVsxa2SB7123DZYgN05RUAo/aZ5oAmKk
+ Ab0OFu8x0DN9yB83txQL1kjwyVc4acDcirTOs+3m0eaHf7WtJBgyXCcYCs11nwjahFSj
+ /mNptnG8kEWBJBtYpszpt7yW7LC9XQdBbJhbQzJe0LsMqclP+jm/XhS+WFw6g245Ye9f
+ c3agBzckwrZHn+z2J0o8iFEWUyZf2pqOkbNWzWiVGXY4Tp1QsbdYkgUVC+LJd+PoXNnr
+ QFHQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUSi/bCSbE9K57K2kO2EBZX0FpQcbIuHgYB4E8tzX5FGTA+G3miOVZVydLnvLEd8Et/Lcquyas=@lists.denx.de
+X-Gm-Message-State: AOJu0YxaL5V4RJ/pD0CVhSpJ3lth3OhMrSCM/feZXSW2JKDWaXqVFHg7
+ joCV2gb/YsjQxBFMP0GqATRDtH4XLTrBBk5ZPtdh1LmJX1CNHMoPoqZ4obv3zeY=
+X-Google-Smtp-Source: AGHT+IEpnYddZ3GwW6bvkxicjzskvFfwZbMMA7Cchi8sC82ThC2pD3y3phd9zCl+oRh1tpC1uD/IOg==
+X-Received: by 2002:a05:620a:41c:b0:7b1:4579:80ea with SMTP id
+ af79cd13be357-7b145798123mr227599885a.60.1729101965064; 
+ Wed, 16 Oct 2024 11:06:05 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b1363952c9sm211039185a.97.2024.10.16.11.06.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Oct 2024 11:06:03 -0700 (PDT)
+Date: Wed, 16 Oct 2024 12:06:00 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Alice Guo <alice.guo@oss.nxp.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Marek Vasut <marex@denx.de>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Peng Fan <peng.fan@nxp.com>, Viorel Suman <viorel.suman@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>
+Subject: Re: [PATCH 01/17] mailbox: add i.MX95 Messaging Unit (MU) driver
+Message-ID: <20241016180600.GC4959@bill-the-cat>
+References: <20241016-imx95-v1-0-f640c8f3bc1b@oss.nxp.com>
+ <20241016-imx95-v1-1-f640c8f3bc1b@oss.nxp.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Add script to install U-Boot from SD/eMMC to
- SPI NOR on DH STM32MP15xx DHSOM
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini
- <trini@konsulko.com>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240930192343.59359-1-marex@denx.de>
- <dc0a0638-0724-46d1-99c7-ee8b84e5541b@foss.st.com>
- <92a9153c-c948-43bb-8542-163ec245c74d@denx.de>
-Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <92a9153c-c948-43bb-8542-163ec245c74d@denx.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.86.243]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="h2sYjJMC/R946mmm"
+Content-Disposition: inline
+In-Reply-To: <20241016-imx95-v1-1-f640c8f3bc1b@oss.nxp.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,126 +97,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 10/12/24 05:01, Marek Vasut wrote:
-> On 10/11/24 5:30 PM, Patrick DELAUNAY wrote:
->> Hi,
->
-> Hi,
->
->> On 9/30/24 21:23, Marek Vasut wrote:
->>> Make the dh_update_sd_to_sf script generic, rename it to 
->>> dh_update_sdmmc_to_sf
->>> and implement two specific dh_update_sd_to_sf and 
->>> dh_update_emmc_to_sf scripts
->>> which load U-Boot from either SD or eMMC and install it into SPI NOR.
->>>
->>> Signed-off-by: Marek Vasut <marex@denx.de>
->>> ---
->>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>> Cc: Tom Rini <trini@konsulko.com>
->>> Cc: u-boot@dh-electronics.com
->>> Cc: u-boot@lists.denx.de
->>> Cc: uboot-stm32@st-md-mailman.stormreply.com
->>> ---
->>>   include/configs/stm32mp15_dh_dhsom.h | 16 +++++++++++++---
->>>   1 file changed, 13 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/ 
->>> stm32mp15_dh_dhsom.h
->>> index de39b19219d..fa759c938b3 100644
->>> --- a/include/configs/stm32mp15_dh_dhsom.h
->>> +++ b/include/configs/stm32mp15_dh_dhsom.h
->>> @@ -38,16 +38,26 @@
->>>           "setenv loadaddr1 && "                    \
->>>           "setenv sblkcnt && "                    \
->>>           "setenv ublkcnt\0"                    \
->>> -    "dh_update_sd_to_sf=" /* Erase SPI NOR and install U-Boot from 
->>> SD */ \
->>> +    "dh_update_sdmmc_to_sf=" /* Erase SPI NOR and install U-Boot 
->>> from SD/eMMC */ \
->>>           "setexpr loadaddr1 ${loadaddr} + 0x1000000 && "        \
->>> -        "load mmc 0:4 ${loadaddr1} /boot/u-boot-spl.stm32 && "    \
->>> +        "load ${dh_update_iface} ${dh_update_dev} "        \
->>> +            "${loadaddr1} /boot/u-boot-spl.stm32 && "    \
->>>           "env set filesize1 ${filesize} && "            \
->>> -        "load mmc 0:4 ${loadaddr} /boot/u-boot.itb && "        \
->>> +        "load ${dh_update_iface} ${dh_update_dev} "        \
->>> +            "${loadaddr} /boot/u-boot.itb && " \
->>>           "sf probe && sf erase 0 0x200000 && "            \
->>>           "sf update ${loadaddr1} 0 ${filesize1} && "        \
->>>           "sf update ${loadaddr1} 0x40000 ${filesize1} && "    \
->>>           "sf update ${loadaddr} 0x80000 ${filesize} && "        \
->>>           "env set filesize1 && env set loadaddr1\0"        \
->>> +    "dh_update_sd_to_sf=" /* Erase SPI NOR and install U-Boot from 
->>> SD */ \
->>> +        "setenv dh_update_iface mmc && "            \
->>> +        "setenv dh_update_dev 0:4 && " \
->>> +        "run dh_update_sdmmc_to_sf\0"                \
->>> +    "dh_update_emmc_to_sf=" /* Erase SPI NOR and install U-Boot 
->>> from eMMC */ \
->>> +        "setenv dh_update_iface mmc && "            \
->>> +        "setenv dh_update_dev 1:4 && " \
->>> +        "run dh_update_sdmmc_to_sf\0"                \
->>>       "stdin=serial\0"                        \
->>>       "stdout=serial\0"                        \
->>>       "stderr=serial\0"                        \
->>>
->>
->> ok I will merge it as it
->>
->> with 2 minor question
->>
->> a)  it is strange to define interface variable for macro
->>      but use only with "mmc" device with
->>
->>> setenv dh_update_iface mmc
->>
->> it can be simplified with
->>
->> "load mmc ${dh_update_dev}
->>
->> or it is to prepare other device then "mmc" .....
->
-> The later, I now also renamed the script in V2 to make it more obvious.
+--h2sYjJMC/R946mmm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Oct 16, 2024 at 03:17:54PM +0800, Alice Guo wrote:
+> From: Peng Fan <peng.fan@nxp.com>
+>=20
+> i.MX95 Messaging Unit (MU) enables 2 processors on a chip to communicate
+> and coordinate by passing messages (e.g. frame information, event
+> notices and requests) through the MU interface. This patch provides a
+> driver for i.MX95 MU using the common mailbox framework. Currently, SCMI
+> exchanges on i.MX95 uses a mailbox transport with SMT format, and the
+> harware used is this MU.
+>=20
+> Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> Reviewed-by: Ye Li <ye.li@nxp.com>
+> ---
+>  drivers/mailbox/Kconfig       |   7 +
+>  drivers/mailbox/Makefile      |   1 +
+>  drivers/mailbox/imx-mailbox.c | 417 ++++++++++++++++++++++++++++++++++++=
+++++++
+>  3 files changed, 425 insertions(+)
 
-ok
+Fabio already noted the general MAINTAINERS missing part, but all of
+these new drivers and so forth should be covered under some entry as
+well in the top level MAINTAINERS file.
 
+--=20
+Tom
 
->
->> b) you are using "sf" command and not "mtd" to udpate SPI NOR ?
->>
->>
->> the MTD command allows to use the MTD partition name, defined in DT,
->> so no need to know offset in script (and avoid "sf probe")
->>
->> mtd erase fsbl1; mtd write fsbl1 ${loadaddr1} 0 ${filesize1} \
->> mtd erase fsbl2; mtd write fsbl2 ${loadaddr1} 0 ${filesize1} \
->> mtd erase uboot; mtd write uboot ${loadaddr} 0 ${filesize}
-> Can you also do 'sf update' alike operation with 'mtd' command? I 
-> don't think you can. The 'sf update' often does significantly speed up 
-> the SPI NOR update process, because SPI NOR erase operation is very 
-> slow, while SPI NOR read operation is fast, so if the update can read 
-> and then skip many blocks which are already in the SPI NOR and erase 
-> and write only the changed blocks, the update is often very fast too.
+--h2sYjJMC/R946mmm
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
-Good point....
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcQAIEACgkQFHw5/5Y0
+tyw4/gv/Z2HvEfCDYb5pNutv5HXGCFH2Oh6OgGNBcACG7j7otUtNa6lwT7Oe1Z+i
+SZN1lviWno78/spBOnCLi+wLGcw0//CIB2oyi2H/umeDRhgng/myjjQBo6jfqf/C
+Z5nfBSWYnhV4rVcuElSaOBBhnJeCm/TEJBJlOHiSD/dMavezHQprgtKYEylcEdWA
+oUw4RKULwSFqxVkn5W1gSYYahkDFjZdg3tQk3E4R6o5M6p9SGRSS9z4IZuOhE9ir
+bVM06YxvO1HQluNyZI/VVWlSO2ZVCnZXREPcmEGAd+CQfevzebUuCmcreKBvnRUs
+u8P5YO0iCC1BSU41Dup4qCwr1jbyUgAC2DN9G4wV988RR5IkY0vlYSvX+aHgq0xg
+O3Yt0dUPYJ0bd4+a2G+JDT8tkFxRQkIXkqiCr4YwKUGCD5aK4Vfq4EA9N7Nu3inU
+n16UlQnNTK08A1pRkEWLuOnBYqBqtHO+aHc4x+Tv8kJEjN1yrRBlum84/tKVa/CW
++73KNGXM
+=hot4
+-----END PGP SIGNATURE-----
 
-an improve place for MTD command
-
-I will try to propose something for mtd command
-
-
-and for the patch
-
-
-Applied to u-boot-stm/master, thanks!
-
-Regards
-Patrick
-
-
+--h2sYjJMC/R946mmm--
