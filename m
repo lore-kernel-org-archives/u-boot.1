@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9920D2069A
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:16:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31ADBD2069E
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:16:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F167288E17;
-	Wed, 16 Oct 2024 08:13:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6BE8C88E99;
+	Wed, 16 Oct 2024 08:13:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bvSbq7X3";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="ZjJ79OY0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C57788ED9; Wed, 16 Oct 2024 08:13:23 +0200 (CEST)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id C0DA988E8C; Wed, 16 Oct 2024 08:13:26 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A10A88E99
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:13:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D60A188ED7
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:13:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2e30fb8cb07so3011559a91.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:13:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-539e5c15fd3so3747700e87.3
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:13:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729059199; x=1729663999; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=9elements.com; s=google; t=1729059202; x=1729664002; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mE7XH4WcnnJTg0XR4kuo0ZtrQjvZBxKf7DedDMitUvQ=;
- b=bvSbq7X3H8IsuRboGj9ansZZT51pxdBnf6EECjf7vwPhdeIM89DFT/L2C+A2ksIYgE
- Tw9FS10XfpzBXRX4xtLjDelu0+DDTKCpflwklq771w0a8ysbfnluATKHEcSjttGaNDNi
- 19Z7GMV8cYhat4yPdbG9yvJjpsSv71NP8MaN5ZsULXe3UburpNqcCB3ye4Q5Q23uKffB
- KBgzUxVkOu/NbLRKjBhv9oVohAFXGUuv6x5W2p8yF3mWVpEdYtj5qfu5JorqHI+To5y5
- 2gRPNGMpEF96P9J+3YQW8z6Hl4oB9ryxOKq1OpAaq5dx8HQUQ2lISiqtN0A3xDfEW02g
- H3TA==
+ bh=evsjNvVAjn4RND0UVHkGmBkMGWiovUPn6tEzD9IhcTY=;
+ b=ZjJ79OY0goRcYCxAcd2O/9ESNX2uppXdWtUlae3Vfm8+Rq+QwC7Tvk6RPkxEdp5vGE
+ cG36jnH2bNH9uc+5WP7PHlLG/QgDyGPHfaN5xb6ny0m0NLD7T+GzWxkRl/++xgC1cryM
+ Od0Cjd9VYDWVL/25Ld4Y95o6CtKsXmajw8zp6MVDftGqdB0ppN+FT4s3X2J2PK4qJJsE
+ HfJzPzJXvZhw+wfol/TLJgMpnlogqJcHM+OZyr7vA0KS2U7iaeewlrgVKc00Fj2uqSji
+ zJcMoocJ5qMYCCzae7PI8nGVuy47SfofqZjHZOtdkZQHuSI3T7hKXhlqikMYZ1lsrwuW
+ gHxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729059199; x=1729663999;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1729059202; x=1729664002;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mE7XH4WcnnJTg0XR4kuo0ZtrQjvZBxKf7DedDMitUvQ=;
- b=qo8fTUInaqpihRWw9/Jsl6WLKYSp5q8mpu4YYGF+IEXrd6CCik0yzK8qBKIsSs1uRQ
- ZY6PWs3WF7Znjdf2Lgxzn5vj3y4rHDsakXIEcR4/9tPoI+fXwYb5ubLkefI81T+49/Mh
- zvTkjd+Ls7ELaHdUGvSZPasrDyz1DftHXa7WlNXZOKLTOh0MMsLy3eC1se4GBNl+Db/1
- ad9RKJUxK0XsxcXnw5n2Lvjqa2OeZM1tpAGVnXXUAQab+wG/bVsQNp23fNgg0Ijqn8Mf
- pKvGDWUZkH7ZaTmBzW5fhq+oKzfCdjhWOQPdsB4LHKkUsEw1KhrvMSzjqlVEbtmWYdkO
- vuCQ==
-X-Gm-Message-State: AOJu0Yxa0c55t8+60VDff+kNmsVxqYvDoMeWcpyKAYY+PQGnNxH9gOa+
- gNF9kJUbweab5Iw4q9Mgi/sKeCtzsMtJEY5ntbuwVYgY/rBS2NEHBkr6almL6vgEOLVpfTZR/N+
- 4Ln/9JrcqUYMldyPiPEb2W7lAvQsKC/MXpriqUA==
-X-Google-Smtp-Source: AGHT+IGCppZrJuKYGmIK7r1gGtJe1SZTL6rrzjt2msxoki4Y/zY2YFw7bjqpHm4GmkPblU5Rb0s50lC/+cygjVFiqhY=
-X-Received: by 2002:a17:90b:1b0d:b0:2e0:74c9:ecf1 with SMTP id
- 98e67ed59e1d1-2e2f0a992e9mr21562427a91.10.1729059198582; Tue, 15 Oct 2024
- 23:13:18 -0700 (PDT)
+ bh=evsjNvVAjn4RND0UVHkGmBkMGWiovUPn6tEzD9IhcTY=;
+ b=q1dTTmQ8FK9ihKml4GzXhe/tGF++X+ELxBNJhYImuPrqvUqt0xXWA/GWFquTBz7a5C
+ b+uzwv2gzhkbBFyvnyVx2z0adJlB+O00u6FXGKi0DPFEwNQJzb6VHm4xr1bG464xaCGh
+ f7jqV9/yoTwsFO6Nd++8+mOuN3o0KXjcHB1zeC2Qz0qam2LAU2AsoI1PbPErvpgFJZPT
+ GuXXsVs53hrQHIlexKLvAYxxs1aGGavDl3BWV43szWZKsL1ja3kHiXsSWSQHhTEH0syO
+ ntkCKyjPZQFURDWofMZgdzpGI/ozXfhroho7kNAyxCxUhAJK9g2GwL3BQgZ2uaKtiYdY
+ EalQ==
+X-Gm-Message-State: AOJu0YxUbqBPSSU0aNnRYmSn0IdzysQotIwowpLMichlBJJ+LAsptQdM
+ 95i1xZ0/3AclX8UMmJ8voBzEZpB6NQvRlx0a1xs5+D5A2bEzDKcIl0ILqP20TluEo+upZQn5QfH
+ 8
+X-Google-Smtp-Source: AGHT+IGirzeyqa2XBmwGiTeQ0WW4DI5unfFHzoqlBLeCj6ev7HPGBaDGa/ZIn7VJdVowiyD2X/eUMw==
+X-Received: by 2002:a05:6512:158b:b0:539:fcba:cc65 with SMTP id
+ 2adb3069b0e04-53a03f19aadmr1975458e87.17.1729059201899; 
+ Tue, 15 Oct 2024 23:13:21 -0700 (PDT)
+Received: from fedora.sec.9e.network
+ (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.13.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Oct 2024 23:13:21 -0700 (PDT)
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+To: u-boot@lists.denx.de,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Bin Meng <bmeng.cn@gmail.com>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v9 25/37] board: emulation: Add QEMU sbsa support
+Date: Wed, 16 Oct 2024 08:04:11 +0200
+Message-ID: <20241016060523.888804-26-patrick.rudolph@9elements.com>
+X-Mailer: git-send-email 2.46.2
+In-Reply-To: <20241016060523.888804-1-patrick.rudolph@9elements.com>
+References: <20241016060523.888804-1-patrick.rudolph@9elements.com>
 MIME-Version: 1.0
-References: <20241016034725.GD6412@bill-the-cat>
-In-Reply-To: <20241016034725.GD6412@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 16 Oct 2024 09:12:41 +0300
-Message-ID: <CAC_iWjJbGYCiAuWKAyp_kbowshne7+t2amzOARTA4v3+brkCzw@mail.gmail.com>
-Subject: Re: New Defects reported by Coverity Scan for Das U-Boot
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Vignesh R <vigneshr@ti.com>, 
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Tudor Ambarus <tudor.ambarus@linaro.org>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Pratyush Yadav <p.yadav@ti.com>, 
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Joakim Tjernlund <joakim.tjernlund@infinera.com>, 
- Raymond Mao <raymond.mao@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,742 +98,1831 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI Tom,
+Add support for Arm sbsa [1] v0.3+ that is supported by QEMU [2].
 
-We'll have a look on the mbedTLS reports later today
+Unlike other Arm based platforms the machine only provides a minimal
+FDT that contains number of CPUs, ammount of memory and machine-version.
+The boot firmware has to provide ACPI tables to the OS.
+Due to this design a full DTB is added here as well that allows U-Boot's
+driver to properly function. The DTB is appended at the end of the U-Boot
+image and will be merged with the QEMU provided DTB.
 
-Thanks
-/Ilias
+In addition provide documentation how to use, enable binman to fabricate both
+ROMs that are required to boot and add ACPI tables to make it full compatible
+to the EDK2 reference implementation.
 
-On Wed, 16 Oct 2024 at 06:47, Tom Rini <trini@konsulko.com> wrote:
->
-> Hey all, here's the latest report.
->
-> ---------- Forwarded message ---------
-> From: <scan-admin@coverity.com>
-> Date: Tue, Oct 15, 2024 at 5:06=E2=80=AFPM
-> Subject: New Defects reported by Coverity Scan for Das U-Boot
-> To: <tom.rini@gmail.com>
->
->
-> Hi,
->
-> Please find the latest report on new defect(s) introduced to Das
-> U-Boot found with Coverity Scan.
->
-> 22 new defect(s) introduced to Das U-Boot found with Coverity Scan.
->
->
-> New defect(s) Reported-by: Coverity Scan
-> Showing 20 of 22 defect(s)
->
->
-> ** CID 510813:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1652 in spi_nor_read()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510813:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1652 in spi_nor_read()
-> 1646                            goto read_err;
-> 1647                    }
-> 1648                    if (ret < 0)
-> 1649                            goto read_err;
-> 1650
-> 1651                    if (is_ofst_odd =3D=3D true) {
-> >>>     CID 510813:  Control flow issues  (DEADCODE)
-> >>>     Execution cannot reach this statement: "memmove(buf, buf + 1, len=
- -...".
-> 1652                            memmove(buf, (buf + 1), (len - 1));
-> 1653                            *retlen +=3D (ret - 1);
-> 1654                            buf +=3D ret - 1;
-> 1655                            is_ofst_odd =3D false;
-> 1656                    } else {
-> 1657                            *retlen +=3D ret;
->
-> ** CID 510812:    (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 3573 in spi_nor_select_erase()
-> /drivers/mtd/spi/spi-nor-core.c: 3584 in spi_nor_select_erase()
-> /drivers/mtd/spi/spi-nor-core.c: 3610 in spi_nor_select_erase()
-> /drivers/mtd/spi/spi-nor-core.c: 3597 in spi_nor_select_erase()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510812:    (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 3573 in spi_nor_select_erase()
-> 3567                    /*
-> 3568                     * In parallel-memories the erase operation is
-> 3569                     * performed on both the flashes simultaneously
-> 3570                     * so, double the erasesize.
-> 3571                     */
-> 3572                    if (nor->flags & SNOR_F_HAS_PARALLEL)
-> >>>     CID 510812:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "mtd->erasesize =3D 8192U;=
-".
-> 3573                            mtd->erasesize =3D 4096 * 2;
-> 3574                    else
-> 3575                            mtd->erasesize =3D 4096;
-> 3576            } else if (info->flags & SECT_4K_PMC) {
-> 3577                    nor->erase_opcode =3D SPINOR_OP_BE_4K_PMC;
-> 3578                    /*
-> /drivers/mtd/spi/spi-nor-core.c: 3584 in spi_nor_select_erase()
-> 3578                    /*
-> 3579                     * In parallel-memories the erase operation is
-> 3580                     * performed on both the flashes simultaneously
-> 3581                     * so, double the erasesize.
-> 3582                     */
-> 3583                    if (nor->flags & SNOR_F_HAS_PARALLEL)
-> >>>     CID 510812:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "mtd->erasesize =3D 8192U;=
-".
-> 3584                            mtd->erasesize =3D 4096 * 2;
-> 3585                    else
-> 3586                            mtd->erasesize =3D 4096;
-> 3587            } else
-> 3588     #endif
-> 3589            {
-> /drivers/mtd/spi/spi-nor-core.c: 3610 in spi_nor_select_erase()
-> 3604                    /*
-> 3605                     * In parallel-memories the erase operation is
-> 3606                     * performed on both the flashes simultaneously
-> 3607                     * so, double the erasesize.
-> 3608                     */
-> 3609                    if (nor->flags & SNOR_F_HAS_PARALLEL)
-> >>>     CID 510812:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "mtd->erasesize =3D 8192U;=
-".
-> 3610                            mtd->erasesize =3D 4096 * 2;
-> 3611                    else
-> 3612                            mtd->erasesize =3D 4096;
-> 3613            }
-> 3614
-> 3615            return 0;
-> /drivers/mtd/spi/spi-nor-core.c: 3597 in spi_nor_select_erase()
-> 3591                    /*
-> 3592                     * In parallel-memories the erase operation is
-> 3593                     * performed on both the flashes simultaneously
-> 3594                     * so, double the erasesize.
-> 3595                     */
-> 3596                    if (nor->flags & SNOR_F_HAS_PARALLEL)
-> >>>     CID 510812:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "mtd->erasesize =3D info->=
-sect...".
-> 3597                            mtd->erasesize =3D info->sector_size * 2;
-> 3598                    else
-> 3599                            mtd->erasesize =3D info->sector_size;
-> 3600            }
-> 3601
-> 3602            if ((JEDEC_MFR(info) =3D=3D SNOR_MFR_SST) && info->flags =
-&
-> SECT_4K) {
->
-> ** CID 510811:    (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1134 in spi_nor_erase()
-> /drivers/mtd/spi/spi-nor-core.c: 1137 in spi_nor_erase()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510811:    (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1134 in spi_nor_erase()
-> 1128                            addr_known =3D false;
-> 1129                            ret =3D -EINTR;
-> 1130                            goto erase_err;
-> 1131                    }
-> 1132                    offset =3D addr;
-> 1133                    if (nor->flags & SNOR_F_HAS_PARALLEL)
-> >>>     CID 510811:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "offset /=3D 2U;".
-> 1134                            offset /=3D 2;
-> 1135
-> 1136                    if (nor->flags & SNOR_F_HAS_STACKED) {
-> 1137                            if (offset >=3D (mtd->size / 2)) {
-> 1138                                    offset =3D offset - (mtd->size / =
-2);
-> 1139                                    nor->spi->flags |=3D SPI_XFER_U_P=
-AGE;
-> /drivers/mtd/spi/spi-nor-core.c: 1137 in spi_nor_erase()
-> 1131                    }
-> 1132                    offset =3D addr;
-> 1133                    if (nor->flags & SNOR_F_HAS_PARALLEL)
-> 1134                            offset /=3D 2;
-> 1135
-> 1136                    if (nor->flags & SNOR_F_HAS_STACKED) {
-> >>>     CID 510811:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "if (offset >=3D mtd->size=
- / 2...".
-> 1137                            if (offset >=3D (mtd->size / 2)) {
-> 1138                                    offset =3D offset - (mtd->size / =
-2);
-> 1139                                    nor->spi->flags |=3D SPI_XFER_U_P=
-AGE;
-> 1140                            } else {
-> 1141                                    nor->spi->flags &=3D ~SPI_XFER_U_=
-PAGE;
-> 1142                            }
->
-> ** CID 510810:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1556 in spi_nor_read_id()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510810:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1556 in spi_nor_read_id()
-> 1550     {
-> 1551            int                     tmp;
-> 1552            u8                      id[SPI_NOR_MAX_ID_LEN];
-> 1553            const struct flash_info *info;
-> 1554
-> 1555            if (nor->flags & SNOR_F_HAS_PARALLEL)
-> >>>     CID 510810:  Control flow issues  (DEADCODE)
-> >>>     Execution cannot reach this statement: "nor->spi->flags |=3D 0x10=
-0;".
-> 1556                    nor->spi->flags |=3D SPI_XFER_LOWER;
-> 1557
-> 1558            tmp =3D nor->read_reg(nor, SPINOR_OP_RDID, id,
-> SPI_NOR_MAX_ID_LEN);
-> 1559            if (tmp < 0) {
-> 1560                    dev_dbg(nor->dev, "error %d reading JEDEC ID\n", =
-tmp);
-> 1561                    return ERR_PTR(tmp);
->
-> ** CID 510809:  Resource leaks  (RESOURCE_LEAK)
-> /lib/mbedtls/pkcs7_parser.c: 385 in x509_populate_sinfo()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510809:  Resource leaks  (RESOURCE_LEAK)
-> /lib/mbedtls/pkcs7_parser.c: 385 in x509_populate_sinfo()
-> 379                                   signed_info);
-> 380             if (ret)
-> 381                     goto out_err_sinfo;
-> 382
-> 383     no_authattrs:
-> 384             *sinfo =3D signed_info;
-> >>>     CID 510809:  Resource leaks  (RESOURCE_LEAK)
-> >>>     Variable "mctx" going out of scope leaks the storage it points to=
-.
-> 385             return 0;
-> 386
-> 387     out_err_sinfo:
-> 388             pkcs7_free_sinfo_mbedtls_ctx(mctx);
-> 389     out_no_mctx:
-> 390             public_key_signature_free(s);
->
-> ** CID 510808:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 724 in spi_nor_set_4byte_opcodes()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510808:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 724 in spi_nor_set_4byte_opcodes()
-> 718     static void spi_nor_set_4byte_opcodes(struct spi_nor *nor,
-> 719                                           const struct flash_info *in=
-fo)
-> 720     {
-> 721             bool shift =3D 0;
-> 722
-> 723             if (nor->flags & SNOR_F_HAS_PARALLEL)
-> >>>     CID 510808:  Control flow issues  (DEADCODE)
-> >>>     Execution cannot reach this statement: "shift =3D true;".
-> 724                     shift =3D 1;
-> 725
-> 726             /* Do some manufacturer fixups first */
-> 727             switch (JEDEC_MFR(info)) {
-> 728             case SNOR_MFR_SPANSION:
-> 729                     /* No small sector erase for 4-byte command set *=
-/
->
-> ** CID 510807:  Control flow issues  (DEADCODE)
-> /lib/mbedtls/external/mbedtls/library/x509_crt.c: 2750 in x509_inet_pton_=
-ipv6()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510807:  Control flow issues  (DEADCODE)
-> /lib/mbedtls/external/mbedtls/library/x509_crt.c: 2750 in x509_inet_pton_=
-ipv6()
-> 2744                 MBEDTLS_PUT_UINT16_BE(group, addr, nonzero_groups);
-> 2745                 nonzero_groups++;
-> 2746                 if (*p =3D=3D '\0') {
-> 2747                     break;
-> 2748                 } else if (*p =3D=3D '.') {
-> 2749                     /* Don't accept IPv4 too early or late */
-> >>>     CID 510807:  Control flow issues  (DEADCODE)
-> >>>     Execution cannot reach the expression "zero_group_start =3D=3D -1=
-" inside this statement: "if ((nonzero_groups =3D=3D 0 &&...".
-> 2750                     if ((nonzero_groups =3D=3D 0 && zero_group_start=
- =3D=3D -1) ||
-> 2751                         nonzero_groups >=3D 7) {
-> 2752                         break;
-> 2753                     }
-> 2754
-> 2755                     /* Walk back to prior ':', then parse as IPv4-ma=
-pped */
->
-> ** CID 510806:  Control flow issues  (DEADCODE)
-> /lib/mbedtls/pkcs7_parser.c: 209 in authattrs_parse()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510806:  Control flow issues  (DEADCODE)
-> /lib/mbedtls/pkcs7_parser.c: 209 in authattrs_parse()
-> 203                                     return -EINVAL;
-> 204                     }
-> 205
-> 206                     p +=3D seq_len;
-> 207             }
-> 208
-> >>>     CID 510806:  Control flow issues  (DEADCODE)
-> >>>     Execution cannot reach the expression "ret !=3D -96" inside this =
-statement: "if (ret && ret !=3D -96)
->   re...".
-> 209             if (ret && ret !=3D  MBEDTLS_ERR_ASN1_OUT_OF_DATA)
-> 210                     return ret;
-> 211
-> 212             msg->have_authattrs =3D true;
-> 213
-> 214             /*
->
-> ** CID 510805:  Memory - illegal accesses  (OVERRUN)
-> /lib/rsa/rsa-keyprop.c: 678 in rsa_gen_key_prop()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510805:  Memory - illegal accesses  (OVERRUN)
-> /lib/rsa/rsa-keyprop.c: 678 in rsa_gen_key_prop()
-> 672             (*prop)->num_bits =3D (rsa_key.n_sz - i) * 8;
-> 673             (*prop)->modulus =3D malloc(rsa_key.n_sz - i);
-> 674             if (!(*prop)->modulus) {
-> 675                     ret =3D -ENOMEM;
-> 676                     goto out;
-> 677             }
-> >>>     CID 510805:  Memory - illegal accesses  (OVERRUN)
-> >>>     Overrunning dynamic array "rsa_key.n" at offset corresponding to =
-index variable "i".
-> 678             memcpy((void *)(*prop)->modulus, &rsa_key.n[i],
-> rsa_key.n_sz - i);
-> 679
-> 680             n =3D calloc(sizeof(uint32_t), 1 + ((*prop)->num_bits >> =
-5));
-> 681             rr =3D calloc(sizeof(uint32_t), 1 + (((*prop)->num_bits
-> * 2) >> 5));
-> 682             rrtmp =3D calloc(sizeof(uint32_t), 2 +
-> (((*prop)->num_bits * 2) >> 5));
-> 683             if (!n || !rr || !rrtmp) {
->
-> ** CID 510804:  Integer handling issues  (CONSTANT_EXPRESSION_RESULT)
-> /drivers/mtd/spi/spi-nor-core.c: 1556 in spi_nor_read_id()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510804:  Integer handling issues  (CONSTANT_EXPRESSION_RESULT)
-> /drivers/mtd/spi/spi-nor-core.c: 1556 in spi_nor_read_id()
-> 1550     {
-> 1551            int                     tmp;
-> 1552            u8                      id[SPI_NOR_MAX_ID_LEN];
-> 1553            const struct flash_info *info;
-> 1554
-> 1555            if (nor->flags & SNOR_F_HAS_PARALLEL)
-> >>>     CID 510804:  Integer handling issues  (CONSTANT_EXPRESSION_RESULT=
-)
-> >>>     In "nor->spi->flags |=3D 256 /* 1 << 8 */", wider "256 /* 1 << 8 =
-*/" has high-order bits (0x100) that don't affect the narrower left-hand si=
-de.
-> 1556                    nor->spi->flags |=3D SPI_XFER_LOWER;
-> 1557
-> 1558            tmp =3D nor->read_reg(nor, SPINOR_OP_RDID, id,
-> SPI_NOR_MAX_ID_LEN);
-> 1559            if (tmp < 0) {
-> 1560                    dev_dbg(nor->dev, "error %d reading JEDEC ID\n", =
-tmp);
-> 1561                    return ERR_PTR(tmp);
->
-> ** CID 510803:  Code maintainability issues  (UNUSED_VALUE)
-> /drivers/mtd/spi/spi-nor-core.c: 1138 in spi_nor_erase()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510803:  Code maintainability issues  (UNUSED_VALUE)
-> /drivers/mtd/spi/spi-nor-core.c: 1138 in spi_nor_erase()
-> 1132                    offset =3D addr;
-> 1133                    if (nor->flags & SNOR_F_HAS_PARALLEL)
-> 1134                            offset /=3D 2;
-> 1135
-> 1136                    if (nor->flags & SNOR_F_HAS_STACKED) {
-> 1137                            if (offset >=3D (mtd->size / 2)) {
-> >>>     CID 510803:  Code maintainability issues  (UNUSED_VALUE)
-> >>>     Assigning value from "offset - mtd->size / 2ULL" to "offset" here=
-, but that stored value is overwritten before it can be used.
-> 1138                                    offset =3D offset - (mtd->size / =
-2);
-> 1139                                    nor->spi->flags |=3D SPI_XFER_U_P=
-AGE;
-> 1140                            } else {
-> 1141                                    nor->spi->flags &=3D ~SPI_XFER_U_=
-PAGE;
-> 1142                            }
-> 1143                    }
->
-> ** CID 510802:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 504 in read_sr()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510802:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 504 in read_sr()
-> 498              * discard the second byte.
-> 499              */
-> 500             if (spi_nor_protocol_is_dtr(nor->reg_proto))
-> 501                     op.data.nbytes =3D 2;
-> 502
-> 503             if (nor->flags & SNOR_F_HAS_PARALLEL) {
-> >>>     CID 510802:  Control flow issues  (DEADCODE)
-> >>>     Execution cannot reach this statement: "op.data.nbytes =3D 2U;".
-> 504                     op.data.nbytes =3D 2;
-> 505                     ret =3D spi_nor_read_write_reg(nor, &op, &val[0])=
-;
-> 506                     if (ret < 0) {
-> 507                             pr_debug("error %d reading SR\n", (int)re=
-t);
-> 508                             return ret;
-> 509                     }
->
-> ** CID 510801:  Null pointer dereferences  (FORWARD_NULL)
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510801:  Null pointer dereferences  (FORWARD_NULL)
-> /lib/ecdsa/ecdsa-libcrypto.c: 365 in ecdsa_add_verify_data()
-> 359             struct signer ctx;
-> 360             int ret;
-> 361
-> 362             fdt_key_name =3D info->keyname ? info->keyname : "default=
--key";
-> 363             ret =3D prepare_ctx(&ctx, info);
-> 364             if (ret >=3D 0) {
-> >>>     CID 510801:  Null pointer dereferences  (FORWARD_NULL)
-> >>>     Passing "info" to "do_add", which dereferences null "info->keynam=
-e".
-> 365                     ret =3D do_add(&ctx, fdt, fdt_key_name, info);
-> 366                     if (ret < 0)
-> 367                             ret =3D ret =3D=3D -FDT_ERR_NOSPACE ? -EN=
-OSPC : -EIO;
-> 368             }
-> 369
-> 370             free_ctx(&ctx);
-> 371             return ret;
->
-> ** CID 510800:    (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1620 in spi_nor_read()
-> /drivers/mtd/spi/spi-nor-core.c: 1590 in spi_nor_read()
-> /drivers/mtd/spi/spi-nor-core.c: 1611 in spi_nor_read()
-> /drivers/mtd/spi/spi-nor-core.c: 1600 in spi_nor_read()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510800:    (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1620 in spi_nor_read()
-> 1614                            } else {
-> 1615                                    nor->spi->flags &=3D ~SPI_XFER_U_=
-PAGE;
-> 1616                            }
-> 1617                    }
-> 1618
-> 1619                    if (nor->flags & SNOR_F_HAS_PARALLEL)
-> >>>     CID 510800:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "offset /=3D 2LL;".
-> 1620                            offset /=3D 2;
-> 1621
-> 1622                    if (nor->addr_width =3D=3D 3) {
-> 1623     #ifdef CONFIG_SPI_FLASH_BAR
-> 1624                            ret =3D write_bar(nor, offset);
-> 1625                            if (ret < 0)
-> /drivers/mtd/spi/spi-nor-core.c: 1590 in spi_nor_read()
-> 1584            u32 rem_bank_len =3D 0;
-> 1585            u8 bank;
-> 1586            bool is_ofst_odd =3D false;
-> 1587
-> 1588            dev_dbg(nor->dev, "from 0x%08x, len %zd\n", (u32)from, le=
-n);
-> 1589
-> >>>     CID 510800:    (DEADCODE)
-> >>>     Execution cannot reach the expression "offset & 1LL" inside this =
-statement: "if (nor->flags & SNOR_F_HAS...".
-> 1590            if ((nor->flags & SNOR_F_HAS_PARALLEL) && (offset & 1)) {
-> 1591                /* We can hit this case when we use file system
-> like ubifs */
-> 1592                    from--;
-> 1593                    len++;
-> 1594                    is_ofst_odd =3D true;
-> 1595            }
-> /drivers/mtd/spi/spi-nor-core.c: 1611 in spi_nor_read()
-> 1605                                    rem_bank_len =3D (SZ_16M * (bank
-> + 1)) - from;
-> 1606                            }
-> 1607                    }
-> 1608                    offset =3D from;
-> 1609
-> 1610                    if (nor->flags & SNOR_F_HAS_STACKED) {
-> >>>     CID 510800:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "if (offset >=3D mtd->size=
- / 2...".
-> 1611                            if (offset >=3D (mtd->size / 2)) {
-> 1612                                    offset =3D offset - (mtd->size / =
-2);
-> 1613                                    nor->spi->flags |=3D SPI_XFER_U_P=
-AGE;
-> 1614                            } else {
-> 1615                                    nor->spi->flags &=3D ~SPI_XFER_U_=
-PAGE;
-> 1616                            }
-> /drivers/mtd/spi/spi-nor-core.c: 1600 in spi_nor_read()
-> 1594                    is_ofst_odd =3D true;
-> 1595            }
-> 1596
-> 1597            while (len) {
-> 1598                    if (nor->addr_width =3D=3D 3) {
-> 1599                            if (nor->flags & SNOR_F_HAS_PARALLEL) {
-> >>>     CID 510800:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "bank =3D (u32)from / 3355=
-4432U;".
-> 1600                                    bank =3D (u32)from / (SZ_16M << 0=
-x01);
-> 1601                                    rem_bank_len =3D ((SZ_16M << 0x01=
-) *
-> 1602                                            (bank + 1)) - from;
-> 1603                            } else {
-> 1604                                    bank =3D (u32)from / SZ_16M;
-> 1605                                    rem_bank_len =3D (SZ_16M * (bank
-> + 1)) - from;
->
-> ** CID 510799:    (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1971 in spi_nor_write()
-> /drivers/mtd/spi/spi-nor-core.c: 2007 in spi_nor_write()
-> /drivers/mtd/spi/spi-nor-core.c: 2004 in spi_nor_write()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510799:    (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1971 in spi_nor_write()
-> 1965                    return 0;
-> 1966
-> 1967            /*
-> 1968             * Cannot write to odd offset in parallel mode,
-> 1969             * so write 2 bytes first
-> 1970             */
-> >>>     CID 510799:    (DEADCODE)
-> >>>     Execution cannot reach the expression "to & 1LL" inside this stat=
-ement: "if (nor->flags & SNOR_F_HAS...".
-> 1971            if ((nor->flags & SNOR_F_HAS_PARALLEL) && (to & 1)) {
-> 1972                    u8 two[2] =3D {0xff, buf[0]};
-> 1973                    size_t local_retlen;
-> 1974
-> 1975                    ret =3D spi_nor_write(mtd, to & ~1, 2,
-> &local_retlen, two);
-> 1976                    if (ret < 0)
-> /drivers/mtd/spi/spi-nor-core.c: 2007 in spi_nor_write()
-> 2001                    }
-> 2002                    offset =3D (to + i);
-> 2003                    if (nor->flags & SNOR_F_HAS_PARALLEL)
-> 2004                            offset /=3D 2;
-> 2005
-> 2006                    if (nor->flags & SNOR_F_HAS_STACKED) {
-> >>>     CID 510799:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "if (offset >=3D mtd->size=
- / 2...".
-> 2007                            if (offset >=3D (mtd->size / 2)) {
-> 2008                                    offset =3D offset - (mtd->size / =
-2);
-> 2009                                    nor->spi->flags |=3D SPI_XFER_U_P=
-AGE;
-> 2010                            } else {
-> 2011                                    nor->spi->flags &=3D ~SPI_XFER_U_=
-PAGE;
-> 2012                            }
-> /drivers/mtd/spi/spi-nor-core.c: 2004 in spi_nor_write()
-> 1998                            u64 aux =3D addr;
-> 1999
-> 2000                            page_offset =3D do_div(aux, nor->page_siz=
-e);
-> 2001                    }
-> 2002                    offset =3D (to + i);
-> 2003                    if (nor->flags & SNOR_F_HAS_PARALLEL)
-> >>>     CID 510799:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "offset /=3D 2U;".
-> 2004                            offset /=3D 2;
-> 2005
-> 2006                    if (nor->flags & SNOR_F_HAS_STACKED) {
-> 2007                            if (offset >=3D (mtd->size / 2)) {
-> 2008                                    offset =3D offset - (mtd->size / =
-2);
-> 2009                                    nor->spi->flags |=3D SPI_XFER_U_P=
-AGE;
->
-> ** CID 510798:  Resource leaks  (RESOURCE_LEAK)
-> /lib/mbedtls/x509_cert_parser.c: 220 in x509_populate_signature_params()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510798:  Resource leaks  (RESOURCE_LEAK)
-> /lib/mbedtls/x509_cert_parser.c: 220 in x509_populate_signature_params()
-> 214             }
-> 215
-> 216             ret =3D hash_calculate(s->hash_algo, &region, 1, s->diges=
-t);
-> 217             if (!ret)
-> 218                     *sig =3D s;
-> 219
-> >>>     CID 510798:  Resource leaks  (RESOURCE_LEAK)
-> >>>     Variable "s" going out of scope leaks the storage it points to.
-> 220             return ret;
-> 221
-> 222     error_sig:
-> 223             public_key_signature_free(s);
-> 224             return ret;
-> 225     }
->
-> ** CID 510797:    (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 4628 in spi_nor_scan()
-> /drivers/mtd/spi/spi-nor-core.c: 4598 in spi_nor_scan()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510797:    (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 4628 in spi_nor_scan()
-> 4622            /* Send all the required SPI flash commands to
-> initialize device */
-> 4623            ret =3D spi_nor_init(nor);
-> 4624            if (ret)
-> 4625                    return ret;
-> 4626
-> 4627            if (nor->flags & SNOR_F_HAS_STACKED) {
-> >>>     CID 510797:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "nor->spi->flags |=3D 0x10=
-UL;".
-> 4628                    nor->spi->flags |=3D SPI_XFER_U_PAGE;
-> 4629                    ret =3D spi_nor_init(nor);
-> 4630                    if (ret)
-> 4631                            return ret;
-> 4632                    nor->spi->flags &=3D ~SPI_XFER_U_PAGE;
-> 4633            }
-> /drivers/mtd/spi/spi-nor-core.c: 4598 in spi_nor_scan()
-> 4592                    nor->addr_width =3D info->addr_width;
-> 4593            } else {
-> 4594                    nor->addr_width =3D 3;
-> 4595            }
-> 4596
-> 4597            if (nor->flags & (SNOR_F_HAS_PARALLEL | SNOR_F_HAS_STACKE=
-D))
-> >>>     CID 510797:    (DEADCODE)
-> >>>     Execution cannot reach this statement: "shift =3D true;".
-> 4598                    shift =3D 1;
-> 4599            if (nor->addr_width =3D=3D 3 && (mtd->size >> shift) > SZ=
-_16M) {
-> 4600     #ifndef CONFIG_SPI_FLASH_BAR
-> 4601                    /* enable 4-byte addressing if the device
-> exceeds 16MiB */
-> 4602                    nor->addr_width =3D 4;
-> 4603                    if (JEDEC_MFR(info) =3D=3D SNOR_MFR_SPANSION ||
->
-> ** CID 510796:  Insecure data handling  (TAINTED_SCALAR)
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510796:  Insecure data handling  (TAINTED_SCALAR)
-> /lib/mbedtls/external/mbedtls/library/rsa.c: 1316 in rsa_prepare_blinding=
-()
-> 1310             }
-> 1311
-> 1312             MBEDTLS_MPI_CHK(mbedtls_mpi_fill_random(&ctx->Vf,
-> ctx->len - 1, f_rng, p_rng));
-> 1313
-> 1314             /* Compute Vf^-1 as R * (R Vf)^-1 to avoid leaks from
-> inv_mod. */
-> 1315             MBEDTLS_MPI_CHK(mbedtls_mpi_fill_random(&R, ctx->len
-> - 1, f_rng, p_rng));
-> >>>     CID 510796:  Insecure data handling  (TAINTED_SCALAR)
-> >>>     Passing tainted expression "*ctx->Vf.p" to "mbedtls_mpi_mul_mpi",=
- which uses it as an offset.
-> 1316             MBEDTLS_MPI_CHK(mbedtls_mpi_mul_mpi(&ctx->Vi, &ctx->Vf, =
-&R));
-> 1317             MBEDTLS_MPI_CHK(mbedtls_mpi_mod_mpi(&ctx->Vi,
-> &ctx->Vi, &ctx->N));
-> 1318
-> 1319             /* At this point, Vi is invertible mod N if and only
-> if both Vf and R
-> 1320              * are invertible mod N. If one of them isn't, we
-> don't need to know
-> 1321              * which one, we just loop and choose new values for
-> both of them.
->
-> ** CID 510795:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 4271 in spi_nor_init()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510795:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 4271 in spi_nor_init()
-> 4265
-> 4266     static int spi_nor_init(struct spi_nor *nor)
-> 4267     {
-> 4268            int err;
-> 4269
-> 4270            if (nor->flags & SNOR_F_HAS_PARALLEL)
-> >>>     CID 510795:  Control flow issues  (DEADCODE)
-> >>>     Execution cannot reach this statement: "nor->spi->flags |=3D 3UL;=
-".
-> 4271                    nor->spi->flags |=3D SPI_NOR_ENABLE_MULTI_CS;
-> 4272
-> 4273            err =3D spi_nor_octal_dtr_enable(nor);
-> 4274            if (err) {
-> 4275                    dev_dbg(nor->dev, "Octal DTR mode not supported\n=
-");
-> 4276                    return err;
->
-> ** CID 510794:  Control flow issues  (NO_EFFECT)
-> /lib/mbedtls/x509_cert_parser.c: 78 in x509_populate_dn_name_string()
->
->
-> _________________________________________________________________________=
-_______________________________
-> *** CID 510794:  Control flow issues  (NO_EFFECT)
-> /lib/mbedtls/x509_cert_parser.c: 78 in x509_populate_dn_name_string()
-> 72      do {
-> 73              name_str =3D kzalloc(len, GFP_KERNEL);
-> 74              if (!name_str)
-> 75                      return NULL;
-> 76
-> 77              wb =3D mbedtls_x509_dn_gets(name_str, len, name);
-> >>>     CID 510794:  Control flow issues  (NO_EFFECT)
-> >>>     This less-than-zero comparison of an unsigned value is never true=
-. "wb < 0UL".
-> 78              if (wb < 0) {
-> 79                      pr_err("Get DN string failed, ret:-0x%04x\n",
-> 80                             (unsigned int)-wb);
-> 81                      kfree(name_str);
-> 82                      len =3D len * 2; /* Try with a bigger buffer */
-> 83              }
->
-> ----- End forwarded message -----
->
-> --
-> Tom
+The board was tested using Fedora 40 Aarch64 Workstation. It's able
+to boot from USB and AHCI or network.
+
+Tested and found working:
+- serial
+- PCI
+- xHCI
+- Bochs display
+- AHCI
+- network using e1000e
+- CPU init
+- Booting Fedora 40
+
+1: Server Base System Architecture (SBSA)
+2: https://www.qemu.org/docs/master/system/arm/sbsa.html
+
+Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+---
+Changelog v3:
+- Add GIC and GIC-ITS to devicetree
+- Select GICv3 driver
+- Drop acpi_fill_madt and use driver model instead
+Changelog v4:
+- Drop CPU platform code
+- Enhance the DT to allow MADT generation from DT
+Changelog v5:
+- Add full DT and place it at the end of U-Boot
+- Merge DT with QEMU's DT
+- Drop DT generation code
+- Fix flash region length
+- Drop enable_caches()
+- Support platforms that do not pass FDT in x0
+Changelog v6:
+- Update header order
+- Drop pad-byte from DT
+- select BINMAN_FDT
+- select E1000_NO_NVM
+- drop config.h include
+- drop a few CFG_ defines that were used for SPL
+Changelog v8:
+- Use /bits/ 64 in DT
+- Drop flash access helper functions
+- Add cfi-flash to DT
+- Mark secure-flash as no execute
+- Only use defines in DT when it's also used in other files
+Changelog v9:
+- Use interrupt-cells=3
+- Select BLOBLIST
+---
+ arch/arm/Kconfig                            |   3 +-
+ arch/arm/dts/qemu-sbsa.dts                  | 138 ++++++
+ arch/arm/include/asm/arch-qemu-sbsa/boot0.h |  34 ++
+ arch/arm/mach-qemu/Kconfig                  |  36 +-
+ board/emulation/qemu-arm/MAINTAINERS        |   2 +
+ board/emulation/qemu-sbsa/Kconfig           |  59 +++
+ board/emulation/qemu-sbsa/Makefile          |   8 +
+ board/emulation/qemu-sbsa/acpi.c            | 192 ++++++++
+ board/emulation/qemu-sbsa/dsdt.asl          | 483 ++++++++++++++++++++
+ board/emulation/qemu-sbsa/lowlevel_init.S   |  22 +
+ board/emulation/qemu-sbsa/qemu-sbsa.c       | 273 +++++++++++
+ board/emulation/qemu-sbsa/qemu-sbsa.env     |  14 +
+ board/emulation/qemu-sbsa/qemu-sbsa.h       |  38 ++
+ board/emulation/qemu-sbsa/smc.c             |  71 +++
+ configs/qemu-arm-sbsa_defconfig             |  10 +
+ doc/board/emulation/index.rst               |   1 +
+ doc/board/emulation/qemu-sbsa.rst           |  98 ++++
+ doc/develop/driver-model/virtio.rst         |   1 +
+ include/configs/qemu-sbsa.h                 |  89 ++++
+ 19 files changed, 1565 insertions(+), 7 deletions(-)
+ create mode 100644 arch/arm/dts/qemu-sbsa.dts
+ create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
+ create mode 100644 board/emulation/qemu-sbsa/Kconfig
+ create mode 100644 board/emulation/qemu-sbsa/Makefile
+ create mode 100644 board/emulation/qemu-sbsa/acpi.c
+ create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
+ create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
+ create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
+ create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
+ create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
+ create mode 100644 board/emulation/qemu-sbsa/smc.c
+ create mode 100644 configs/qemu-arm-sbsa_defconfig
+ create mode 100644 doc/board/emulation/qemu-sbsa.rst
+ create mode 100644 include/configs/qemu-sbsa.h
+
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 263f85b0d0..0d0c731dd0 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1054,7 +1054,7 @@ config ARCH_QEMU
+ 	imply DM_RNG
+ 	imply DM_RTC
+ 	imply RTC_PL031
+-	imply OF_HAS_PRIOR_STAGE
++	imply OF_HAS_PRIOR_STAGE if !TARGET_QEMU_ARM_SBSA
+ 	imply VIDEO
+ 	imply VIDEO_BOCHS
+ 	imply SYS_WHITE_ON_BLACK
+@@ -2381,6 +2381,7 @@ source "board/broadcom/bcmns3/Kconfig"
+ source "board/cavium/thunderx/Kconfig"
+ source "board/eets/pdu001/Kconfig"
+ source "board/emulation/qemu-arm/Kconfig"
++source "board/emulation/qemu-sbsa/Kconfig"
+ source "board/freescale/ls2080aqds/Kconfig"
+ source "board/freescale/ls2080ardb/Kconfig"
+ source "board/freescale/ls1088a/Kconfig"
+diff --git a/arch/arm/dts/qemu-sbsa.dts b/arch/arm/dts/qemu-sbsa.dts
+new file mode 100644
+index 0000000000..ed00e50136
+--- /dev/null
++++ b/arch/arm/dts/qemu-sbsa.dts
+@@ -0,0 +1,138 @@
++// SPDX-License-Identifier: GPL-2.0+ OR MIT
++/*
++ * Devicetree with onboard devices for qemu_sbsa-ref for internal use only!
++ * DO NOT PASS TO THE OS!
++ *
++ * As QEMU provides only a minimal devicetree this one is merged with
++ * it and then fixed at runtime.
++ *
++ * Copyright 2024 9elements GmbH
++ */
++#include "configs/qemu-sbsa.h"
++#include <dt-bindings/interrupt-controller/arm-gic.h>
++
++/dts-v1/;
++
++/ {
++	#address-cells = <2>;
++	#size-cells = <2>;
++	interrupt-parent = <&intc>;
++	compatible = "linux,sbsa-ref";
++
++	binman: binman {
++		multiple-images;
++	};
++
++	cpus {
++		/* Filled by fdtdec_board_setup() */
++	};
++
++	memory {
++		/* Filled by fdtdec_board_setup() */
++	};
++
++	soc {
++		compatible = "simple-bus";
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++
++		cfi_flash {
++			compatible = "cfi-flash";
++			reg = /bits/ 64 <SBSA_FLASH_BASE_ADDR
++					 SBSA_FLASH_LENGTH>;
++			status = "okay";
++		};
++
++		uart0 {
++			compatible = "arm,pl011";
++			status = "okay";
++			reg = /bits/ 64 <SBSA_UART_BASE_ADDR
++					 SBSA_UART_LENGTH>;
++		};
++
++		ahci {
++			compatible = "generic-ahci";
++			status = "okay";
++			reg = /bits/ 64 <0x60100000 0x00010000>;
++		};
++
++		xhci {
++			compatible = "generic-xhci";
++			status = "okay";
++			reg = /bits/ 64 <0x60110000 0x00010000>;
++		};
++
++		pci {
++			#address-cells = <3>;
++			#size-cells = <2>;
++			compatible = "pci-host-ecam-generic";
++			device_type = "pci";
++			status = "okay";
++			reg = /bits/ 64 <0xf0000000 0x10000000>;
++			bus-range = <0 0xff>;
++			ranges = /bits/ 32 <0x01000000>,
++				 /bits/ 64 <0
++					    SBSA_PIO_BASE_ADDR
++					    SBSA_PIO_LENGTH>,
++				 /bits/ 32 <0x02000000>,
++				 /bits/ 64 <SBSA_PCIE_MMIO_BASE_ADDR
++					    SBSA_PCIE_MMIO_BASE_ADDR
++					    SBSA_PCIE_MMIO_LENGTH>,
++				 /bits/ 32 <0x43000000>,
++				 /bits/ 64 <SBSA_PCIE_MMIO_HIGH_BASE_ADDR
++					    SBSA_PCIE_MMIO_HIGH_BASE_ADDR
++					    SBSA_PCIE_MMIO_HIGH_LENGTH>;
++		};
++	};
++
++	intc: interrupt-controller {
++		compatible = "arm,gic-v3";
++		#interrupt-cells = <3>;
++		status = "okay";
++		interrupt-controller;
++		interrupts = <GIC_SPI 9 IRQ_TYPE_LEVEL_HIGH>;
++		reg = /bits/ 64 <SBSA_GIC_DIST_BASE_ADDR SBSA_GIC_DIST_LENGTH>,
++		      /bits/ 64 <SBSA_GIC_REDIST_BASE_ADDR SBSA_GIC_REDIST_LENGTH>,
++		      /bits/ 64 <0 0>,
++		      /bits/ 64 <SBSA_GIC_HBASE_ADDR SBSA_GIC_HBASE_LENGTH>,
++		      /bits/ 64 <SBSA_GIC_VBASE_ADDR SBSA_GIC_VBASE_LENGTH>;
++	};
++
++	its {
++		compatible = "arm,gic-v3-its";
++		status = "disabled";
++	};
++};
++
++&binman {
++	secure-world {
++		filename = "secure-world.rom";
++		size = <SBSA_SECURE_FLASH_LENGTH>;
++
++		bl1 {
++			offset = <0x0>;
++			description = "ARM Trusted Firmware BL1";
++			filename = "bl1.bin";
++			type = "blob-ext";
++		};
++
++		fip {
++			offset = <0x12000>;
++			description = "ARM Trusted Firmware FIP";
++			filename = "fip.bin";
++			type = "blob-ext";
++		};
++	};
++
++	unsecure-world {
++		filename = "unsecure-world.rom";
++		size = <SBSA_FLASH_LENGTH>;
++
++		u-boot {
++		};
++		u-boot-dtb {
++			compress = "lz4";
++		};
++	};
++};
+diff --git a/arch/arm/include/asm/arch-qemu-sbsa/boot0.h b/arch/arm/include/asm/arch-qemu-sbsa/boot0.h
+new file mode 100644
+index 0000000000..4a1a254b92
+--- /dev/null
++++ b/arch/arm/include/asm/arch-qemu-sbsa/boot0.h
+@@ -0,0 +1,34 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * sbsa-ref starts U-Boot in XIP memory. Need to relocate U-Boot
++ * to DRAM which is already up. Instead of using SPL this simple loader
++ * is being used.
++ */
++relocate_check:
++	/* x0 contains the pointer to FDT provided by ATF */
++	adr	x1, _start		/* x1 <- Runtime value of _start */
++	ldr	x2, _TEXT_BASE		/* x2 <- Linked value of _start */
++	subs	x9, x1, x2		/* x9 <- Run-vs-link offset */
++	beq	reset
++
++	adrp	x1, __image_copy_start		/* x2 <- address bits [31:12] */
++	add	x1, x1, :lo12:__image_copy_start/* x2 <- address bits [11:00] */
++	adrp	x3, __image_copy_end		/* x3 <- address bits [31:12] */
++	add	x3, x3, :lo12:__image_copy_end	/* x3 <- address bits [11:00] */
++	add	x3, x3, #0x100000		/* 1 MiB for the DTB found at _end */
++
++copy_loop:
++	ldp	x10, x11, [x1], #16	/* copy from source address [x1] */
++	stp	x10, x11, [x2], #16	/* copy to   target address [x2] */
++	cmp	x1, x3			/* until source end address [x3] */
++	b.lo	copy_loop
++
++	isb
++	ldr	x2, _TEXT_BASE		/* x2 <- Linked value of _start */
++	br	x2			/* Jump to linked address */
++	/* Never reaches this point */
++1:
++	wfi
++	b 1b
++
++relocate_done:
+\ No newline at end of file
+diff --git a/arch/arm/mach-qemu/Kconfig b/arch/arm/mach-qemu/Kconfig
+index 186c3582eb..9c06c6a3a5 100644
+--- a/arch/arm/mach-qemu/Kconfig
++++ b/arch/arm/mach-qemu/Kconfig
+@@ -3,12 +3,6 @@ if ARCH_QEMU
+ config SYS_VENDOR
+ 	default "emulation"
+ 
+-config SYS_BOARD
+-	default "qemu-arm"
+-
+-config SYS_CONFIG_NAME
+-	default "qemu-arm"
+-
+ choice
+ 	prompt "QEMU ARM architecture"
+ 	default TARGET_QEMU_ARM_64BIT
+@@ -25,6 +19,36 @@ config TARGET_QEMU_ARM_64BIT
+ 	select ARM64
+ 	select BOARD_LATE_INIT
+ 
++config TARGET_QEMU_ARM_SBSA
++	bool "SBSA Reference"
++	select ARM64
++	select BINMAN
++	select BOARD_LATE_INIT
++	select ENABLE_ARM_SOC_BOOT0_HOOK
++	select MISC_INIT_R
+ endchoice
+ 
++if TARGET_QEMU_ARM_32BIT || TARGET_QEMU_ARM_64BIT
++
++config SYS_BOARD
++	default "qemu-arm"
++
++config SYS_CONFIG_NAME
++	default "qemu-arm"
++
++endif
++
++if TARGET_QEMU_ARM_SBSA
++
++config SYS_BOARD
++	default "qemu-sbsa"
++
++config SYS_CONFIG_NAME
++	default "qemu-sbsa"
++
++config SYS_SOC
++	default "qemu-sbsa"
++
++endif
++
+ endif
+diff --git a/board/emulation/qemu-arm/MAINTAINERS b/board/emulation/qemu-arm/MAINTAINERS
+index 5154262f29..7bc0ee698c 100644
+--- a/board/emulation/qemu-arm/MAINTAINERS
++++ b/board/emulation/qemu-arm/MAINTAINERS
+@@ -4,5 +4,7 @@ S:	Maintained
+ F:	board/emulation/qemu-arm/
+ F:	board/emulation/common/
+ F:	include/configs/qemu-arm.h
++F:	include/configs/qemu-sbsa.h
+ F:	configs/qemu_arm_defconfig
+ F:	configs/qemu_arm64_defconfig
++F:	configs/qemu-arm-sbsa_defconfig
+diff --git a/board/emulation/qemu-sbsa/Kconfig b/board/emulation/qemu-sbsa/Kconfig
+new file mode 100644
+index 0000000000..72c76b351f
+--- /dev/null
++++ b/board/emulation/qemu-sbsa/Kconfig
+@@ -0,0 +1,59 @@
++if TARGET_QEMU_ARM_SBSA
++
++config SYS_SOC
++	default "qemu-sbsa"
++
++config TEXT_BASE
++	default 0x10000100000
++
++config SYS_LOAD_ADDR
++	default 0x10000100000
++
++config PRE_CON_BUF_ADDR
++	default 0x100000FF000
++
++config DEFAULT_DEVICE_TREE
++	default "qemu-sbsa"
++
++config BOARD_SPECIFIC_OPTIONS # dummy
++	def_bool y
++	select AHCI
++	select ACPIGEN
++	select ACPI
++	select BLOBLIST
++	select CPU
++	select CPU_ARMV8
++	select DM
++	select DM_USB
++	select DM_MTD
++	select GENERATE_ACPI_TABLE
++	select HAS_ROM
++	select MTD
++	select OF_LIBFDT_OVERLAY
++	select OF_SEPARATE
++	select PCI
++	select PCIE_ECAM_GENERIC
++	select USB
++	select GIC_V3
++	select GIC_V3_ITS
++	select SYS_FLASH_CFI_WIDTH_16BIT
++	imply AHCI_GENERIC
++	imply USB_XHCI_HCD
++	imply USB_XHCI_GENERIC
++	imply USB_STORAGE
++	imply E1000
++	imply E1000_NO_NVM
++	imply NET_RANDOM_ETHADDR
++	imply VIDEO_BOCHS
++	imply CFI_FLASH
++	imply SYS_MTDPARTS_RUNTIME
++	imply SET_DFU_ALT_INFO
++
++if DEBUG_UART
++
++config DEBUG_UART_BASE
++	default 0x60000000
++endif
++
++source "board/emulation/common/Kconfig"
++endif
+diff --git a/board/emulation/qemu-sbsa/Makefile b/board/emulation/qemu-sbsa/Makefile
+new file mode 100644
+index 0000000000..bacae320e7
+--- /dev/null
++++ b/board/emulation/qemu-sbsa/Makefile
+@@ -0,0 +1,8 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++obj-y	+= qemu-sbsa.o
++obj-y	+= lowlevel_init.o
++obj-y	+= smc.o
++
++obj-$(CONFIG_GENERATE_ACPI_TABLE) += dsdt_generated.o
++obj-$(CONFIG_GENERATE_ACPI_TABLE) += acpi.o
+diff --git a/board/emulation/qemu-sbsa/acpi.c b/board/emulation/qemu-sbsa/acpi.c
+new file mode 100644
+index 0000000000..ba85e08fc7
+--- /dev/null
++++ b/board/emulation/qemu-sbsa/acpi.c
+@@ -0,0 +1,192 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024 9elements GmbH
++ */
++
++#include <cpu.h>
++#include <tables_csum.h>
++#include <string.h>
++#include <acpi/acpi_table.h>
++#include <asm/acpi_table.h>
++#include <asm/armv8/sec_firmware.h>
++#include <configs/qemu-sbsa.h>
++#include <dm/uclass.h>
++#include <dm/device.h>
++#include "qemu-sbsa.h"
++
++#define SBSAQEMU_MADT_GIC_VBASE          0x2c020000
++#define SBSAQEMU_MADT_GIC_HBASE          0x2c010000
++#define SBSAQEMU_MADT_GIC_PMU_IRQ        23
++
++#define SBSA_PLATFORM_WATCHDOG_COUNT    1
++#define SBSA_PLATFORM_TIMER_COUNT       (SBSA_PLATFORM_WATCHDOG_COUNT)
++
++#define L2_ATTRIBUTES (ACPI_PPTT_READ_ALLOC | ACPI_PPTT_WRITE_ALLOC | \
++			(ACPI_PPTT_CACHE_TYPE_UNIFIED << \
++			 ACPI_PPTT_CACHE_TYPE_SHIFT))
++#define L2_SIZE 0x80000
++#define L2_SETS 0x400
++#define L2_WAYS 8
++
++#define L1D_ATTRIBUTES (ACPI_PPTT_READ_ALLOC | ACPI_PPTT_WRITE_ALLOC | \
++			(ACPI_PPTT_CACHE_TYPE_DATA << \
++			 ACPI_PPTT_CACHE_TYPE_SHIFT))
++#define L1D_SIZE 0x8000
++#define L1D_SETS 0x100
++#define L1D_WAYS 2
++
++#define L1I_ATTRIBUTES (ACPI_PPTT_READ_ALLOC | \
++			(ACPI_PPTT_CACHE_TYPE_INSTR << \
++			 ACPI_PPTT_CACHE_TYPE_SHIFT))
++#define L1I_SIZE 0x8000
++#define L1I_SETS 0x100
++#define L1I_WAYS 2
++
++int acpi_fill_iort(struct acpi_ctx *ctx)
++{
++	u32 its_offset, smmu_offset;
++	u64 gic_its_base = 0;
++
++	smc_get_gic_its_base(&gic_its_base);
++	if (gic_its_base == 0)
++		return 0;
++
++	u32 identifiers[] = { 0 };
++
++	its_offset = acpi_iort_add_its_group(ctx, ARRAY_SIZE(identifiers),
++					     identifiers);
++
++	struct acpi_iort_id_mapping map_smmu[] = {{
++		0, 0xffff, 0, its_offset, 0
++	}};
++
++	smmu_offset = acpi_iort_add_smmu_v3(ctx,
++					    SBSA_SMMU_BASE_ADDR, // Base address
++					    ACPI_IORT_SMMU_V3_COHACC_OVERRIDE, // Flags
++					    0,  // VATOS address
++					    0,  // SMMUv3 Model
++					    74, // Event
++					    75, // Pri
++					    77, // Gerror
++					    76, // Sync
++					    0,  // Proximity domain
++					    1,  // DevIDMappingIndex
++					    ARRAY_SIZE(map_smmu),
++					    map_smmu);
++
++	struct acpi_iort_id_mapping map_rc[] = {{
++		0, 0xffff, 0, smmu_offset, 0
++	}};
++
++	acpi_iort_add_rc(ctx,
++			 BIT(0) | BIT(56),  // CacheCoherent + CPM
++			 0,  // AtsAttribute
++			 0,  // PciSegmentNumber
++			 64, // MemoryAddressSizeLimit
++			 ARRAY_SIZE(map_rc),
++			 map_rc);
++	return 0;
++}
++
++void acpi_fill_fadt(struct acpi_fadt *fadt)
++{
++	fadt->flags = ACPI_FADT_HW_REDUCED_ACPI | ACPI_FADT_LOW_PWR_IDLE_S0;
++	fadt->preferred_pm_profile = ACPI_PM_PERFORMANCE_SERVER;
++	fadt->arm_boot_arch = ACPI_ARM_PSCI_COMPLIANT;
++}
++
++int acpi_fill_mcfg(struct acpi_ctx *ctx)
++{
++	size_t size;
++
++	/* PCI Segment Group 0, Start Bus Number 0, End Bus Number is 255 */
++	size = acpi_create_mcfg_mmconfig((void *)ctx->current,
++					 SBSA_PCIE_ECAM_BASE_ADDR, 0, 0, 255);
++	acpi_inc(ctx, size);
++
++	return 0;
++}
++
++static int sbsa_write_gtdt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
++{
++	struct acpi_table_header *header;
++	struct acpi_gtdt *gtdt;
++
++	gtdt = ctx->current;
++	header = &gtdt->header;
++
++	memset(gtdt, '\0', sizeof(struct acpi_gtdt));
++
++	acpi_fill_header(header, "GTDT");
++	header->length = sizeof(struct acpi_gtdt);
++	header->revision = acpi_get_table_revision(ACPITAB_GTDT);
++
++	gtdt->cnt_ctrl_base = 0xFFFFFFFFFFFFFFFF;
++	gtdt->sec_el1_gsiv = 29;
++	gtdt->sec_el1_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->el1_gsiv = 30;
++	gtdt->el1_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->virt_el1_gsiv = 27;
++	gtdt->virt_el1_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->el2_gsiv = 26;
++	gtdt->el2_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->cnt_read_base = 0xffffffffffffffff;
++
++	// FIXME: VirtualPL2Timer
++	header->checksum = table_compute_checksum(header, header->length);
++
++	acpi_add_table(ctx, gtdt);
++
++	acpi_inc(ctx, sizeof(struct acpi_gtdt));
++
++	return 0;
++};
++
++ACPI_WRITER(5gtdt, "GTDT", sbsa_write_gtdt, 0);
++
++static int acpi_write_pptt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
++{
++	struct acpi_table_header *header;
++	int cluster_offset, l2_offset;
++	u32 offsets[2];
++
++	header = ctx->current;
++	ctx->tab_start = ctx->current;
++
++	memset(header, '\0', sizeof(struct acpi_table_header));
++
++	acpi_fill_header(header, "PPTT");
++	header->revision = acpi_get_table_revision(ACPITAB_PPTT);
++	acpi_inc(ctx, sizeof(*header));
++
++	cluster_offset = acpi_pptt_add_proc(ctx, ACPI_PPTT_PHYSICAL_PACKAGE |
++					    ACPI_PPTT_CHILDREN_IDENTICAL,
++					    0, 0, 0, NULL);
++
++	l2_offset = acpi_pptt_add_cache(ctx, ACPI_PPTT_ALL_VALID, 0, L2_SIZE,
++					L2_SETS, L2_WAYS, L2_ATTRIBUTES, 64);
++
++	offsets[0] = acpi_pptt_add_cache(ctx, ACPI_PPTT_ALL_VALID, l2_offset,
++					 L1D_SIZE, L1D_SETS, L1D_WAYS,
++					 L1D_ATTRIBUTES, 64);
++
++	offsets[1] = acpi_pptt_add_cache(ctx, ACPI_PPTT_ALL_BUT_WRITE_POL,
++					 l2_offset, L1I_SIZE, L1I_SETS,
++					 L1I_WAYS, L1I_ATTRIBUTES, 64);
++
++	for (int i = 0; i < uclass_id_count(UCLASS_CPU); i++) {
++		acpi_pptt_add_proc(ctx, ACPI_PPTT_CHILDREN_IDENTICAL |
++				   ACPI_PPTT_NODE_IS_LEAF | ACPI_PPTT_PROC_ID_VALID,
++				   cluster_offset, i, 2, offsets);
++	}
++
++	header->length = ctx->current - ctx->tab_start;
++	header->checksum = table_compute_checksum(header, header->length);
++
++	acpi_inc(ctx, header->length);
++	acpi_add_table(ctx, header);
++
++	return 0;
++};
++
++ACPI_WRITER(5pptt, "PPTT", acpi_write_pptt, 0);
+diff --git a/board/emulation/qemu-sbsa/dsdt.asl b/board/emulation/qemu-sbsa/dsdt.asl
+new file mode 100644
+index 0000000000..f12cca04e2
+--- /dev/null
++++ b/board/emulation/qemu-sbsa/dsdt.asl
+@@ -0,0 +1,483 @@
++/** @file
++*  Differentiated System Description Table Fields (DSDT).
++*
++*  Copyright (c) 2020, Linaro Ltd. All rights reserved.
++*
++*  SPDX-License-Identifier: BSD-2-Clause-Patent
++**/
++
++#include <configs/qemu-sbsa.h>
++
++#define LINK_DEVICE(Uid, LinkName, Irq)                                        \
++        Device (LinkName) {                                                    \
++            Name (_HID, EISAID("PNP0C0F"))                                     \
++            Name (_UID, Uid)                                                   \
++            Name (_PRS, ResourceTemplate() {                                   \
++                Interrupt (ResourceProducer, Level, ActiveHigh, Exclusive) { Irq } \
++            })                                                                 \
++            Method (_STA) {                                                    \
++              Return (0xF)                                                     \
++            }                                                                  \
++            Method (_CRS, 0) { Return (_PRS) }                                 \
++            Method (_SRS, 1) { }                                               \
++            Method (_DIS) { }                                                  \
++        }
++
++#define PRT_ENTRY(Address, Pin, Link)                                          \
++        Package (4) {                                                          \
++            Address, Pin, Link, Zero                                           \
++          }
++
++DefinitionBlock ("Dsdt.aml", "DSDT", 2, "U-Boot", "SBSAQEMU", 2) {
++  Scope (_SB) {
++    // UART PL011
++    Device (COM0) {
++      Name (_HID, "ARMH0011")
++      Name (_UID, Zero)
++      Name (_CRS, ResourceTemplate () {
++        Memory32Fixed (ReadWrite,
++                       SBSA_UART_BASE_ADDR,
++                       SBSA_UART_LENGTH)
++        Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { 33 }
++      })
++      Method (_STA) {
++        Return (0xF)
++      }
++    }
++
++    // AHCI Host Controller
++    Device (AHC0) {
++      Name (_HID, "LNRO001E")
++      Name (_CLS, Package (3) {
++        0x01,
++        0x06,
++        0x01,
++      })
++      Name (_CCA, 1)
++      Name (_CRS, ResourceTemplate() {
++        Memory32Fixed (ReadWrite,
++                       SBSA_AHCI_BASE_ADDR,
++                       SBSA_AHCI_LENGTH)
++        Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { 42 }
++      })
++      Method (_STA) {
++        Return (0xF)
++      }
++    }
++
++
++    // USB XHCI Host Controller
++    Device (USB0) {
++        Name (_HID, "PNP0D10")      // _HID: Hardware ID
++        Name (_UID, 0x00)            // _UID: Unique ID
++        Name (_CCA, 0x01)            // _CCA: Cache Coherency Attribute
++        Name (XHCI, 0xF)            // will be set using AcpiLib
++        Method (_STA) {
++          Return (XHCI)
++        }
++        Name (_CRS, ResourceTemplate() {
++            Memory32Fixed (ReadWrite,
++                           SBSA_XHCI_BASE_ADDR,
++                           SBSA_XHCI_LENGTH)
++            Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { 43 }
++        })
++
++        // Root Hub
++        Device (RHUB) {
++            Name (_ADR, 0x00000000)  // Address of Root Hub should be 0 as per ACPI 5.0 spec
++            Method (_STA) {
++              Return (0xF)
++            }
++
++            // Ports connected to Root Hub
++            Device (HUB1) {
++                Name (_ADR, 0x00000001)
++                Name (_UPC, Package() {
++                    0x00,       // Port is NOT connectable
++                    0xFF,       // Don't care
++                    0x00000000, // Reserved 0 must be zero
++                    0x00000000  // Reserved 1 must be zero
++                })
++                Method (_STA) {
++                  Return (0xF)
++                }
++
++                Device (PRT1) {
++                    Name (_ADR, 0x00000001)
++                    Name (_UPC, Package() {
++                        0xFF,        // Port is connectable
++                        0x00,        // Port connector is A
++                        0x00000000,
++                        0x00000000
++                    })
++                    Name (_PLD, Package() {
++                        Buffer(0x10) {
++                            0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
++                            0x31, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
++                        }
++                    })
++                    Method (_STA) {
++                      Return (0xF)
++                    }
++                } // USB0_RHUB_HUB1_PRT1
++                Device (PRT2) {
++                    Name (_ADR, 0x00000002)
++                    Name (_UPC, Package() {
++                        0xFF,        // Port is connectable
++                        0x00,        // Port connector is A
++                        0x00000000,
++                        0x00000000
++                    })
++                    Name (_PLD, Package() {
++                        Buffer(0x10) {
++                            0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
++                            0x31, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
++                        }
++                    })
++                    Method (_STA) {
++                      Return (0xF)
++                    }
++                } // USB0_RHUB_HUB1_PRT2
++
++                Device (PRT3) {
++                    Name (_ADR, 0x00000003)
++                    Name (_UPC, Package() {
++                        0xFF,        // Port is connectable
++                        0x09,        // Type C connector - USB2 and SS with Switch
++                        0x00000000,
++                        0x00000000
++                    })
++                    Name (_PLD, Package() {
++                        Buffer (0x10) {
++                            0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
++                            0x31, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
++                        }
++                    })
++                    Method (_STA) {
++                      Return (0xF)
++                    }
++                } // USB0_RHUB_HUB1_PRT3
++
++                Device (PRT4) {
++                    Name (_ADR, 0x00000004)
++                    Name (_UPC, Package() {
++                        0xFF,        // Port is connectable
++                        0x09,        // Type C connector - USB2 and SS with Switch
++                        0x00000000,
++                        0x00000000
++                    })
++                    Name (_PLD, Package() {
++                        Buffer (0x10){
++                            0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
++                            0x31, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
++                        }
++                    })
++                    Method (_STA) {
++                      Return (0xF)
++                    }
++                } // USB0_RHUB_HUB1_PRT4
++            } // USB0_RHUB_HUB1
++        } // USB0_RHUB
++    } // USB0
++
++    Device (PCI0)
++    {
++      Name (_HID, EISAID ("PNP0A08")) // PCI Express Root Bridge
++      Name (_CID, EISAID ("PNP0A03")) // Compatible PCI Root Bridge
++      Name (_SEG, Zero) // PCI Segment Group number
++      Name (_BBN, Zero) // PCI Base Bus Number
++      Name (_UID, "PCI0")
++      Name (_CCA, One)    // Initially mark the PCI coherent (for JunoR1)
++
++      Method (_STA) {
++        Return (0xF)
++      }
++
++      Method (_CBA, 0, NotSerialized) {
++          return (SBSA_PCIE_ECAM_BASE_ADDR)
++      }
++
++      LINK_DEVICE(0, GSI0, 0x23)
++      LINK_DEVICE(1, GSI1, 0x24)
++      LINK_DEVICE(2, GSI2, 0x25)
++      LINK_DEVICE(3, GSI3, 0x26)
++
++      Name (_PRT, Package ()  // _PRT: PCI Routing Table
++      {
++        PRT_ENTRY(0x0000FFFF, 0, GSI0),
++        PRT_ENTRY(0x0000FFFF, 0, GSI1),
++        PRT_ENTRY(0x0000FFFF, 0, GSI2),
++        PRT_ENTRY(0x0000FFFF, 0, GSI3),
++
++        PRT_ENTRY(0x0001FFFF, 0, GSI1),
++        PRT_ENTRY(0x0001FFFF, 1, GSI2),
++        PRT_ENTRY(0x0001FFFF, 2, GSI3),
++        PRT_ENTRY(0x0001FFFF, 3, GSI0),
++
++        PRT_ENTRY(0x0002FFFF, 0, GSI2),
++        PRT_ENTRY(0x0002FFFF, 1, GSI3),
++        PRT_ENTRY(0x0002FFFF, 2, GSI0),
++        PRT_ENTRY(0x0002FFFF, 3, GSI1),
++
++        PRT_ENTRY(0x0003FFFF, 0, GSI3),
++        PRT_ENTRY(0x0003FFFF, 1, GSI0),
++        PRT_ENTRY(0x0003FFFF, 2, GSI1),
++        PRT_ENTRY(0x0003FFFF, 3, GSI2),
++
++        PRT_ENTRY(0x0004FFFF, 0, GSI0),
++        PRT_ENTRY(0x0004FFFF, 1, GSI1),
++        PRT_ENTRY(0x0004FFFF, 2, GSI2),
++        PRT_ENTRY(0x0004FFFF, 3, GSI3),
++
++        PRT_ENTRY(0x0005FFFF, 0, GSI1),
++        PRT_ENTRY(0x0005FFFF, 1, GSI2),
++        PRT_ENTRY(0x0005FFFF, 2, GSI3),
++        PRT_ENTRY(0x0005FFFF, 3, GSI0),
++
++        PRT_ENTRY(0x0006FFFF, 0, GSI2),
++        PRT_ENTRY(0x0006FFFF, 1, GSI3),
++        PRT_ENTRY(0x0006FFFF, 2, GSI0),
++        PRT_ENTRY(0x0006FFFF, 3, GSI1),
++
++        PRT_ENTRY(0x0007FFFF, 0, GSI3),
++        PRT_ENTRY(0x0007FFFF, 1, GSI0),
++        PRT_ENTRY(0x0007FFFF, 2, GSI1),
++        PRT_ENTRY(0x0007FFFF, 3, GSI2),
++
++        PRT_ENTRY(0x0008FFFF, 0, GSI0),
++        PRT_ENTRY(0x0008FFFF, 1, GSI1),
++        PRT_ENTRY(0x0008FFFF, 2, GSI2),
++        PRT_ENTRY(0x0008FFFF, 3, GSI3),
++
++        PRT_ENTRY(0x0009FFFF, 0, GSI1),
++        PRT_ENTRY(0x0009FFFF, 1, GSI2),
++        PRT_ENTRY(0x0009FFFF, 2, GSI3),
++        PRT_ENTRY(0x0009FFFF, 3, GSI0),
++
++        PRT_ENTRY(0x000AFFFF, 0, GSI2),
++        PRT_ENTRY(0x000AFFFF, 1, GSI3),
++        PRT_ENTRY(0x000AFFFF, 2, GSI0),
++        PRT_ENTRY(0x000AFFFF, 3, GSI1),
++
++        PRT_ENTRY(0x000BFFFF, 0, GSI3),
++        PRT_ENTRY(0x000BFFFF, 1, GSI0),
++        PRT_ENTRY(0x000BFFFF, 2, GSI1),
++        PRT_ENTRY(0x000BFFFF, 3, GSI2),
++
++        PRT_ENTRY(0x000CFFFF, 0, GSI0),
++        PRT_ENTRY(0x000CFFFF, 1, GSI1),
++        PRT_ENTRY(0x000CFFFF, 2, GSI2),
++        PRT_ENTRY(0x000CFFFF, 3, GSI3),
++
++        PRT_ENTRY(0x000DFFFF, 0, GSI1),
++        PRT_ENTRY(0x000DFFFF, 1, GSI2),
++        PRT_ENTRY(0x000DFFFF, 2, GSI3),
++        PRT_ENTRY(0x000DFFFF, 3, GSI0),
++
++        PRT_ENTRY(0x000EFFFF, 0, GSI2),
++        PRT_ENTRY(0x000EFFFF, 1, GSI3),
++        PRT_ENTRY(0x000EFFFF, 2, GSI0),
++        PRT_ENTRY(0x000EFFFF, 3, GSI1),
++
++        PRT_ENTRY(0x000FFFFF, 0, GSI3),
++        PRT_ENTRY(0x000FFFFF, 1, GSI0),
++        PRT_ENTRY(0x000FFFFF, 2, GSI1),
++        PRT_ENTRY(0x000FFFFF, 3, GSI2),
++
++        PRT_ENTRY(0x0010FFFF, 0, GSI0),
++        PRT_ENTRY(0x0010FFFF, 1, GSI1),
++        PRT_ENTRY(0x0010FFFF, 2, GSI2),
++        PRT_ENTRY(0x0010FFFF, 3, GSI3),
++
++        PRT_ENTRY(0x0011FFFF, 0, GSI1),
++        PRT_ENTRY(0x0011FFFF, 1, GSI2),
++        PRT_ENTRY(0x0011FFFF, 2, GSI3),
++        PRT_ENTRY(0x0011FFFF, 3, GSI0),
++
++        PRT_ENTRY(0x0012FFFF, 0, GSI2),
++        PRT_ENTRY(0x0012FFFF, 1, GSI3),
++        PRT_ENTRY(0x0012FFFF, 2, GSI0),
++        PRT_ENTRY(0x0012FFFF, 3, GSI1),
++
++        PRT_ENTRY(0x0013FFFF, 0, GSI3),
++        PRT_ENTRY(0x0013FFFF, 1, GSI0),
++        PRT_ENTRY(0x0013FFFF, 2, GSI1),
++        PRT_ENTRY(0x0013FFFF, 3, GSI2),
++
++        PRT_ENTRY(0x0014FFFF, 0, GSI0),
++        PRT_ENTRY(0x0014FFFF, 1, GSI1),
++        PRT_ENTRY(0x0014FFFF, 2, GSI2),
++        PRT_ENTRY(0x0014FFFF, 3, GSI3),
++
++        PRT_ENTRY(0x0015FFFF, 0, GSI1),
++        PRT_ENTRY(0x0015FFFF, 1, GSI2),
++        PRT_ENTRY(0x0015FFFF, 2, GSI3),
++        PRT_ENTRY(0x0015FFFF, 3, GSI0),
++
++        PRT_ENTRY(0x0016FFFF, 0, GSI2),
++        PRT_ENTRY(0x0016FFFF, 1, GSI3),
++        PRT_ENTRY(0x0016FFFF, 2, GSI0),
++        PRT_ENTRY(0x0016FFFF, 3, GSI1),
++
++        PRT_ENTRY(0x0017FFFF, 0, GSI3),
++        PRT_ENTRY(0x0017FFFF, 1, GSI0),
++        PRT_ENTRY(0x0017FFFF, 2, GSI1),
++        PRT_ENTRY(0x0017FFFF, 3, GSI2),
++
++        PRT_ENTRY(0x0018FFFF, 0, GSI0),
++        PRT_ENTRY(0x0018FFFF, 1, GSI1),
++        PRT_ENTRY(0x0018FFFF, 2, GSI2),
++        PRT_ENTRY(0x0018FFFF, 3, GSI3),
++
++        PRT_ENTRY(0x0019FFFF, 0, GSI1),
++        PRT_ENTRY(0x0019FFFF, 1, GSI2),
++        PRT_ENTRY(0x0019FFFF, 2, GSI3),
++        PRT_ENTRY(0x0019FFFF, 3, GSI0),
++
++        PRT_ENTRY(0x001AFFFF, 0, GSI2),
++        PRT_ENTRY(0x001AFFFF, 1, GSI3),
++        PRT_ENTRY(0x001AFFFF, 2, GSI0),
++        PRT_ENTRY(0x001AFFFF, 3, GSI1),
++
++        PRT_ENTRY(0x001BFFFF, 0, GSI3),
++        PRT_ENTRY(0x001BFFFF, 1, GSI0),
++        PRT_ENTRY(0x001BFFFF, 2, GSI1),
++        PRT_ENTRY(0x001BFFFF, 3, GSI2),
++
++        PRT_ENTRY(0x001CFFFF, 0, GSI0),
++        PRT_ENTRY(0x001CFFFF, 1, GSI1),
++        PRT_ENTRY(0x001CFFFF, 2, GSI2),
++        PRT_ENTRY(0x001CFFFF, 3, GSI3),
++
++        PRT_ENTRY(0x001DFFFF, 0, GSI1),
++        PRT_ENTRY(0x001DFFFF, 1, GSI2),
++        PRT_ENTRY(0x001DFFFF, 2, GSI3),
++        PRT_ENTRY(0x001DFFFF, 3, GSI0),
++
++        PRT_ENTRY(0x001EFFFF, 0, GSI2),
++        PRT_ENTRY(0x001EFFFF, 1, GSI3),
++        PRT_ENTRY(0x001EFFFF, 2, GSI0),
++        PRT_ENTRY(0x001EFFFF, 3, GSI1),
++
++        PRT_ENTRY(0x001FFFFF, 0, GSI3),
++        PRT_ENTRY(0x001FFFFF, 1, GSI0),
++        PRT_ENTRY(0x001FFFFF, 2, GSI1),
++        PRT_ENTRY(0x001FFFFF, 3, GSI2),
++      })
++
++      // Root complex resources
++      Name (_CRS, ResourceTemplate () {
++        WordBusNumber ( // Bus numbers assigned to this root
++        ResourceProducer,
++        MinFixed, MaxFixed, PosDecode,
++        0,   // AddressGranularity
++        0,   // AddressMinimum - Minimum Bus Number
++        0xff,// AddressMaximum - Maximum Bus Number
++        0,   // AddressTranslation - Set to 0
++        256  // RangeLength - Number of Busses
++        )
++
++        // IO to mmio window
++        QWordIO (
++          ResourceProducer, MinFixed,
++          MaxFixed, PosDecode,
++          EntireRange,
++          0x00000000,                              // Granularity
++          0x0000,                                  // Min Base Address
++          0xffff,                                  // Max Base Address
++          SBSA_PIO_BASE_ADDR,                      // Translate
++          SBSA_PIO_LENGTH                          // Length
++        )
++
++        DWordMemory ( // 32-bit BAR Windows
++          ResourceProducer, PosDecode,
++          MinFixed, MaxFixed,
++          Cacheable, ReadWrite,
++          0x00000000,                              // Granularity
++          SBSA_PCIE_MMIO_BASE_ADDR,                // Min Base Address
++          SBSA_PCIE_MMIO_END,                      // Max Base Address
++          0,                                       // Translate
++          SBSA_PCIE_MMIO_LENGTH                    // Length
++          )
++
++        QWordMemory ( // 64-bit BAR Windows
++          ResourceProducer, PosDecode,
++          MinFixed, MaxFixed,
++          Cacheable, ReadWrite,
++          0x00000000,                              // Granularity
++          SBSA_PCIE_MMIO_HIGH_BASE_ADDR,           // Min Base Address
++          SBSA_PCIE_MMIO_HIGH_END,                 // Max Base Address
++          0,                                       // Translate
++          SBSA_PCIE_MMIO_HIGH_LENGTH               // Length
++          )
++      }) // Name(_CRS)
++
++      Device (RES0)
++      {
++        Name (_HID, "PNP0C02" /* PNP Motherboard Resources */)  // _HID: Hardware ID
++        Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
++        {
++           QWordMemory (ResourceProducer, PosDecode, MinFixed, MaxFixed, NonCacheable, ReadWrite,
++           0x0000000000000000,                       // Granularity
++           SBSA_PCIE_ECAM_BASE_ADDR,                 // Range Minimum
++           SBSA_PCIE_ECAM_END,                       // Range Maximum
++           0x0000000000000000,                       // Translation Offset
++           SBSA_PCIE_ECAM_LENGTH,                    // Length
++           ,, , AddressRangeMemory, TypeStatic)
++        })
++        Method (_STA) {
++          Return (0xF)
++        }
++      }
++
++      // OS Control Handoff
++      Name (SUPP, Zero) // PCI _OSC Support Field value
++      Name (CTRL, Zero) // PCI _OSC Control Field value
++
++      /*
++       * See [1] 6.2.10, [2] 4.5
++       */
++      Method (_OSC,4) {
++        // Check for proper UUID
++        If (Arg0 == ToUUID("33DB4D5B-1FF7-401C-9657-7441C03DD766")) {
++          // Create DWord-adressable fields from the Capabilities Buffer
++          CreateDWordField (Arg3,0,CDW1)
++          CreateDWordField (Arg3,4,CDW2)
++          CreateDWordField (Arg3,8,CDW3)
++
++          // Save Capabilities DWord2 & 3
++          Store (CDW2,SUPP)
++          Store (CDW3,CTRL)
++
++          // Only allow native hot plug control if OS supports:
++          // * ASPM
++          // * Clock PM
++          // * MSI/MSI-X
++          If ((SUPP & 0x16) != 0x16) {
++            CTRL &= 0x1E // Mask bit 0 (and undefined bits)
++          }
++
++          // Always allow native PME, AER (no dependencies)
++
++          // Never allow SHPC (no SHPC controller in this system)
++          CTRL &= 0x1D
++
++          If (Arg1 != One) {         // Unknown revision
++            CDW1 |= 0x08
++          }
++
++          If (CDW3 != CTRL) {        // Capabilities bits were masked
++            CDW1 |= 0x10
++          }
++
++          // Update DWORD3 in the buffer
++          Store (CTRL,CDW3)
++          Return (Arg3)
++        } Else {
++          CDW1 |= 4 // Unrecognized UUID
++          Return (Arg3)
++        }
++      } // End _OSC
++    }
++  } // Scope (_SB)
++}
+diff --git a/board/emulation/qemu-sbsa/lowlevel_init.S b/board/emulation/qemu-sbsa/lowlevel_init.S
+new file mode 100644
+index 0000000000..c997721af9
+--- /dev/null
++++ b/board/emulation/qemu-sbsa/lowlevel_init.S
+@@ -0,0 +1,22 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * (C) Copyright 2016
++ * Cédric Schieli <cschieli@gmail.com>
++ */
++
++#include <config.h>
++
++/*
++ * Routine: save_boot_params (called after reset from start.S)
++ * Description: save ATAG/FDT address provided by the firmware at boot time
++ */
++
++.global save_boot_params
++save_boot_params:
++	/* The firmware provided ATAG/FDT address can be found in r2/x0 */
++	adr	x8, fw_dtb_pointer
++	str	x0, [x8]
++
++
++	/* Returns */
++	b	save_boot_params_ret
+diff --git a/board/emulation/qemu-sbsa/qemu-sbsa.c b/board/emulation/qemu-sbsa/qemu-sbsa.c
+new file mode 100644
+index 0000000000..3943c92432
+--- /dev/null
++++ b/board/emulation/qemu-sbsa/qemu-sbsa.c
+@@ -0,0 +1,273 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2017 Tuomas Tynkkynen
++ */
++
++#include <cpu_func.h>
++#include <dm.h>
++#include <env.h>
++#include <fdtdec.h>
++#include <fdt_support.h>
++#include <init.h>
++#include <log.h>
++#include <usb.h>
++#include <asm/armv8/mmu.h>
++
++#include "qemu-sbsa.h"
++
++/* Assigned in lowlevel_init.S
++ * Push the variable into the .data section so that it
++ * does not get cleared later.
++ */
++unsigned long __section(".data") fw_dtb_pointer;
++
++static struct mm_region qemu_sbsa_mem_map[] = {
++	{
++		/* Secure flash */
++		.virt = SBSA_SECURE_FLASH_BASE_ADDR,
++		.phys = SBSA_SECURE_FLASH_BASE_ADDR,
++		.size = SBSA_SECURE_FLASH_LENGTH,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_INNER_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* Flash */
++		.virt = SBSA_FLASH_BASE_ADDR,
++		.phys = SBSA_FLASH_BASE_ADDR,
++		.size = SBSA_FLASH_LENGTH,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		/* Lowmem peripherals */
++		.virt = SBSA_PERIPH_BASE_ADDR,
++		.phys = SBSA_PERIPH_BASE_ADDR,
++		.size = SBSA_PCIE_MMIO_BASE_ADDR - SBSA_PERIPH_BASE_ADDR,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* 32-bit address PCIE MMIO space */
++		.virt = SBSA_PCIE_MMIO_BASE_ADDR,
++		.phys = SBSA_PCIE_MMIO_BASE_ADDR,
++		.size = SBSA_PCIE_MMIO_LENGTH,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* PCI-E ECAM memory area */
++		.virt = SBSA_PCIE_ECAM_BASE_ADDR,
++		.phys = SBSA_PCIE_ECAM_BASE_ADDR,
++		.size = SBSA_PCIE_ECAM_LENGTH,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* Highmem PCI-E MMIO memory area */
++		.virt = SBSA_PCIE_MMIO_HIGH_BASE_ADDR,
++		.phys = SBSA_PCIE_MMIO_HIGH_BASE_ADDR,
++		.size = SBSA_PCIE_MMIO_HIGH_LENGTH,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* DRAM */
++		.virt = SBSA_MEM_BASE_ADDR,
++		.phys = SBSA_MEM_BASE_ADDR,
++		.size = 0x800000000000ULL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		/* List terminator */
++		0,
++	}
++};
++
++struct mm_region *mem_map = qemu_sbsa_mem_map;
++
++int board_late_init(void)
++{
++	/* start usb so that usb keyboard can be used as input device */
++	if (CONFIG_IS_ENABLED(USB_KEYBOARD))
++		usb_init();
++
++	return 0;
++}
++
++int board_init(void)
++{
++	return 0;
++}
++
++/**
++ * dtb_dt_qemu - Return the address of the QEMU provided FDT.
++ *
++ * @return: Pointer to FDT or NULL on failure
++ */
++static void *dtb_dt_qemu(void)
++{
++	/* FDT might be at start of DRAM */
++	if (fdt_magic(SBSA_MEM_BASE_ADDR) == FDT_MAGIC)
++		return (void *)(u64)SBSA_MEM_BASE_ADDR;
++
++	/* When ARM_LINUX_KERNEL_AS_BL33 is enabled in ATF, it's passed in x0 */
++	if (fw_dtb_pointer >= SBSA_MEM_BASE_ADDR &&
++	    fdt_magic(fw_dtb_pointer) == FDT_MAGIC) {
++		return (void *)fw_dtb_pointer;
++	}
++
++	return NULL;
++}
++
++/*
++ * QEMU doesn't set compatible on cpus.
++ * Add them to make sure the U-Boot driver properly bind.
++ */
++static int fdtdec_fix_cpus(void *fdt_blob)
++{
++	int cpus_offset, off, ret;
++	u64 mpidr, i = 0;
++
++	cpus_offset = fdt_path_offset(fdt_blob, "/cpus");
++	if (cpus_offset < 0) {
++		puts("couldn't find /cpus node\n");
++		return cpus_offset;
++	}
++
++	fdt_for_each_subnode(off, fdt_blob, cpus_offset) {
++		if (strncmp(fdt_get_name(fdt_blob, off, NULL), "cpu@", 4))
++			continue;
++
++		mpidr = 0;
++		ret = smc_get_mpidr(i, &mpidr);
++		if (ret) {
++			log_warning("Failed to get MPIDR for processor %lld from SMC: %d\n",
++				    i, ret);
++			mpidr = i;
++		}
++
++		ret = fdt_setprop_string(fdt_blob, off, "compatible", "arm,armv8");
++		if (ret < 0)
++			return ret;
++
++		ret = fdt_setprop_string(fdt_blob, off, "device_type", "cpu");
++		if (ret < 0)
++			return ret;
++
++		ret = fdt_setprop_u64(fdt_blob, off, "reg", mpidr);
++		if (ret < 0)
++			return ret;
++		i++;
++	}
++	return 0;
++}
++
++/*
++ * Update the GIC node when necessary and add optional ITS when it has a
++ * non zero base-address.
++ */
++static int fdtdec_fix_gic(void *fdt)
++{
++	u64 gic_dist_base = SBSA_GIC_DIST_BASE_ADDR;
++	u64 gic_redist_base = SBSA_GIC_REDIST_BASE_ADDR;
++	u64 gic_its_base = 0;
++	int offs, ret;
++	u64 reg[10];
++
++	/* Invoke SMC to get real base-address */
++	smc_get_gic_dist_base(&gic_dist_base);
++	smc_get_gic_redist_base(&gic_redist_base);
++
++	if ((gic_dist_base != SBSA_GIC_DIST_BASE_ADDR) ||
++	    (gic_redist_base != SBSA_GIC_REDIST_BASE_ADDR)) {
++		offs = fdt_path_offset(fdt, "/interrupt-controller");
++		if (offs < 0) {
++			puts("couldn't find /interrupt-controller node\n");
++			return offs;
++		}
++
++		reg[0] = cpu_to_fdt64(gic_dist_base);
++		reg[1] = cpu_to_fdt64((u64)SBSA_GIC_DIST_LENGTH);
++		reg[2] = cpu_to_fdt64(gic_redist_base);
++		reg[3] = cpu_to_fdt64((u64)SBSA_GIC_REDIST_LENGTH);
++		reg[4] = cpu_to_fdt64(0);
++		reg[5] = cpu_to_fdt64(0);
++		reg[6] = cpu_to_fdt64(SBSA_GIC_HBASE_ADDR);
++		reg[7] = cpu_to_fdt64((u64)SBSA_GIC_HBASE_LENGTH);
++		reg[8] = cpu_to_fdt64(SBSA_GIC_VBASE_ADDR);
++		reg[9] = cpu_to_fdt64((u64)SBSA_GIC_VBASE_LENGTH);
++
++		ret = fdt_setprop_inplace(fdt, offs, "reg", reg, sizeof(reg));
++	}
++
++	smc_get_gic_its_base(&gic_its_base);
++
++	if (gic_its_base != 0) {
++		offs = fdt_path_offset(fdt, "/its");
++		if (offs < 0)
++			return offs;
++
++		ret = fdt_setprop_string(fdt, offs, "status", "okay");
++		if (ret < 0)
++			return ret;
++
++		reg[0] = cpu_to_fdt64(gic_its_base);
++		reg[1] = 0;
++
++		ret = fdt_setprop(fdt, offs, "reg", reg, sizeof(u64) * 2);
++		if (ret < 0)
++			return ret;
++	}
++
++	return 0;
++}
++
++int fdtdec_board_setup(const void *fdt_blob)
++{
++	void *qemu_fdt;
++	int ret;
++
++	/*
++	 * Locate the QEMU provided DTB that contains the CPUs and amount of DRAM.
++	 */
++	qemu_fdt = dtb_dt_qemu();
++	if (!qemu_fdt) {
++		log_err("QEMU FDT not found\n");
++		return -ENODEV;
++	}
++
++	ret = fdt_increase_size((void *)fdt_blob, 1024 + fdt_totalsize(qemu_fdt));
++	if (ret)
++		return -ENOMEM;
++
++	/*
++	 * Merge the QEMU DTB as overlay into the U-Boot provided DTB.
++	 */
++	ret = fdt_overlay_apply_node((void *)fdt_blob, 0, qemu_fdt, 0);
++	if (ret < 0)
++		log_err("Failed to apply overlay: %d\n", ret);
++
++	/* Fix QEMU nodes to make sure U-Boot drivers are properly working */
++	ret = fdtdec_fix_cpus((void *)fdt_blob);
++	if (ret < 0)
++		log_err("Failed to fix CPUs in FDT: %d\n", ret);
++
++	ret = fdtdec_fix_gic((void *)fdt_blob);
++	if (ret < 0)
++		log_err("Failed to fix INTC in FDT: %d\n", ret);
++
++	return 0;
++}
++
++int misc_init_r(void)
++{
++	return env_set_hex("fdt_addr", (uintptr_t)gd->fdt_blob);
++}
++
++void reset_cpu(void)
++{
++}
++
++int dram_init(void)
++{
++	return fdtdec_setup_mem_size_base();
++}
+\ No newline at end of file
+diff --git a/board/emulation/qemu-sbsa/qemu-sbsa.env b/board/emulation/qemu-sbsa/qemu-sbsa.env
+new file mode 100644
+index 0000000000..88fdb0ec1c
+--- /dev/null
++++ b/board/emulation/qemu-sbsa/qemu-sbsa.env
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++/* environment for qemu-arm and qemu-arm64 */
++
++stdin=serial,usbkbd
++stdout=serial,vidconsole
++stderr=serial,vidconsole
++fdt_high=0xffffffffffffffff
++initrd_high=0xffffffffffffffff
++scriptaddr=0x100000300000
++pxefile_addr_r=0x10000400000
++kernel_addr_r=0x10000200000
++ramdisk_addr_r=0x10001000000
++boot_targets=qfw usb scsi virtio nvme dhcp
+diff --git a/board/emulation/qemu-sbsa/qemu-sbsa.h b/board/emulation/qemu-sbsa/qemu-sbsa.h
+new file mode 100644
+index 0000000000..391a70bdc4
+--- /dev/null
++++ b/board/emulation/qemu-sbsa/qemu-sbsa.h
+@@ -0,0 +1,38 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2024 9elements GmbH
++ */
++
++/**
++ * smc_get_mpidr() - Call into SMC and get the MPIDR for given CPU
++ *
++ * @id:		CPU index
++ * @mpidr:	Pointer where to place the MPIDR
++ * @return 0 if OK, other -ve on error
++ */
++int smc_get_mpidr(unsigned long id, u64 *mpidr);
++
++/**
++ * smc_get_gic_dist_base() - Call into SMC and get GIC dist base address
++ *
++ * @mpidr:	Pointer where to place the base address
++ * @return 0 if OK, other -ve on error
++ */
++int smc_get_gic_dist_base(u64 *base);
++
++/**
++ * smc_get_gic_redist_base() - Call into SMC and get the GIC redistributor
++ *                             base address
++ *
++ * @mpidr:	Pointer where to place the base address
++ * @return 0 if OK, other -ve on error
++ */
++int smc_get_gic_redist_base(u64 *base);
++
++/**
++ * smc_get_gic_its_base() - Call into SMC and get the ITS base address
++ *
++ * @mpidr:	Pointer where to place the base address
++ * @return 0 if OK, other -ve on error
++ */
++int smc_get_gic_its_base(u64 *base);
+diff --git a/board/emulation/qemu-sbsa/smc.c b/board/emulation/qemu-sbsa/smc.c
+new file mode 100644
+index 0000000000..9a2d091bea
+--- /dev/null
++++ b/board/emulation/qemu-sbsa/smc.c
+@@ -0,0 +1,71 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024 9elements GmbH
++ */
++
++#include <cpu.h>
++#include <init.h>
++#include <log.h>
++#include <linux/arm-smccc.h>
++
++#define SMC_SIP_FUNCTION_ID(n)  (0xC2000000 | (n))
++
++#define SIP_SVC_VERSION        SMC_SIP_FUNCTION_ID(1)
++#define SIP_SVC_GET_GIC        SMC_SIP_FUNCTION_ID(100)
++#define SIP_SVC_GET_GIC_ITS    SMC_SIP_FUNCTION_ID(101)
++#define SIP_SVC_GET_CPU_COUNT  SMC_SIP_FUNCTION_ID(200)
++#define SIP_SVC_GET_CPU_NODE   SMC_SIP_FUNCTION_ID(201)
++#define SIP_SVC_GET_MEMORY_NODE_COUNT SMC_SIP_FUNCTION_ID(300)
++#define SIP_SVC_GET_MEMORY_NODE SMC_SIP_FUNCTION_ID(301)
++
++int smc_get_mpidr(unsigned long id, u64 *mpidr)
++{
++	struct arm_smccc_res res;
++
++	res.a0 = ~0;
++	arm_smccc_smc(SIP_SVC_GET_CPU_NODE, id, 0, 0, 0, 0, 0, 0, &res);
++
++	if (!res.a0)
++		*mpidr = res.a2;
++
++	return res.a0;
++}
++
++int smc_get_gic_dist_base(u64 *base)
++{
++	struct arm_smccc_res res;
++
++	res.a0 = ~0;
++	arm_smccc_smc(SIP_SVC_GET_GIC, 0, 0, 0, 0, 0, 0, 0, &res);
++
++	if (!res.a0)
++		*base = res.a1;
++
++	return res.a0;
++}
++
++int smc_get_gic_redist_base(u64 *base)
++{
++	struct arm_smccc_res res;
++
++	res.a0 = ~0;
++	arm_smccc_smc(SIP_SVC_GET_GIC, 0, 0, 0, 0, 0, 0, 0, &res);
++
++	if (!res.a0)
++		*base = res.a2;
++
++	return res.a0;
++}
++
++int smc_get_gic_its_base(u64 *base)
++{
++	struct arm_smccc_res res;
++
++	res.a0 = ~0;
++	arm_smccc_smc(SIP_SVC_GET_GIC_ITS, 0, 0, 0, 0, 0, 0, 0, &res);
++
++	if (!res.a0)
++		*base = res.a1;
++
++	return res.a0;
++}
+diff --git a/configs/qemu-arm-sbsa_defconfig b/configs/qemu-arm-sbsa_defconfig
+new file mode 100644
+index 0000000000..a58c3dec4c
+--- /dev/null
++++ b/configs/qemu-arm-sbsa_defconfig
+@@ -0,0 +1,10 @@
++CONFIG_ARM=y
++CONFIG_ARCH_QEMU=y
++CONFIG_TARGET_QEMU_ARM_SBSA=y
++CONFIG_USE_BOOTCOMMAND=y
++CONFIG_BOOTCOMMAND="bootflow scan"
++CONFIG_EFI_PARTITION=y
++CONFIG_PARTITION_TYPE_GUID=y
++CONFIG_EFI_MEDIA=y
++CONFIG_FS_FAT=y
++CONFIG_EFI_VARIABLE_NO_STORE=y
+diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
+index 98a0b26ad2..0419d72415 100644
+--- a/doc/board/emulation/index.rst
++++ b/doc/board/emulation/index.rst
+@@ -13,5 +13,6 @@ Emulation
+    qemu-mips
+    qemu-ppce500
+    qemu-riscv
++   qemu-sbsa
+    qemu-x86
+    qemu-xtensa
+diff --git a/doc/board/emulation/qemu-sbsa.rst b/doc/board/emulation/qemu-sbsa.rst
+new file mode 100644
+index 0000000000..fe1dc3249e
+--- /dev/null
++++ b/doc/board/emulation/qemu-sbsa.rst
+@@ -0,0 +1,98 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. Copyright (C) 2024, Patrick Rudolph <patrick.rudolph@9elements.com>
++
++QEMU ARM SBSA
++=============
++
++QEMU for ARM supports Arm Server Base System Architecture Reference board,
++short 'sbsa-ref' that utilizes ACPI over FDT. This document describes how to run
++U-Boot under it. Only AArch64 is supported.
++
++The 'sbsa' platform provides the following as the basic functionality:
++
++    - A freely configurable amount of CPU cores
++    - U-Boot loaded and executing in the emulated flash at address 0x10000000
++    - No device tree blob
++    - A freely configurable amount of RAM
++    - A PL011 serial port
++    - An ARMv7/ARMv8 architected timer
++    - PSCI for rebooting the system
++    - A generic ECAM-based PCI host controller
++
++Additionally, a number of optional peripherals can be added to the PCI bus.
++
++Compile ARM Trusted Firmware (ATF)
++----------------------------------
++
++Get and Build the ARM Trusted firmware
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++Get ATF from: https://github.com/ARM-software/arm-trusted-firmware
++
++.. code-block:: bash
++
++  git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git tfa
++  cd tfa
++  make CROSS_COMPILE=aarch64-linux-gnu- all fip \
++    ARM_LINUX_KERNEL_AS_BL33=1 DEBUG=1 PLAT=qemu_sbsa
++
++Copy the resulting FIP and BL1 binary
++
++.. code-block:: bash
++
++  cp build/qemu_sbsa/debug/fip.bin ../
++  cp build/qemu_sbsa/debug/bl1.bin ../
++
++Building U-Boot
++---------------
++Set the CROSS_COMPILE environment variable as usual, and run:
++
++.. code-block:: bash
++
++    make qemu-arm-sbsa_defconfig
++    make
++
++Running U-Boot
++--------------
++The minimal QEMU command line to get U-Boot up and running is:
++
++.. code-block:: bash
++
++    qemu-system-aarch64 -machine sbsa-ref -nographic -cpu cortex-a57 \
++                        -pflash secure-world.rom \
++                        -pflash unsecure-world.rom
++
++Note that for some odd reason qemu-system-aarch64 needs to be explicitly
++told to use a 64-bit CPU or it will boot in 32-bit mode. The -nographic argument
++ensures that output appears on the terminal. Use Ctrl-A X to quit.
++
++Booting distros
++---------------
++
++It is possible to install and boot a standard Linux distribution using
++sbsa by setting up a root disk::
++
++.. code-block:: bash
++
++    qemu-img create root.img 20G
++
++then using the installer to install. For example, with Debian 12::
++
++.. code-block:: bash
++
++    qemu-system-aarch64 \
++      -machine sbsa-ref -cpu cortex-a57 -m 4G -smp 4 \
++      -pflash secure-world.rom \
++      -pflash unsecure-world.rom \
++      -device virtio-rng-pci \
++      -device usb-kbd -device usb-tablet \
++      -cdrom debian-12.0.0-arm64-netinst.iso \
++      -hda root.img
++
++Debug UART
++----------
++
++The debug UART on the ARM sbsa board uses these settings::
++
++    CONFIG_DEBUG_UART=y
+diff --git a/doc/develop/driver-model/virtio.rst b/doc/develop/driver-model/virtio.rst
+index 8ac9c94caf..31b94d0467 100644
+--- a/doc/develop/driver-model/virtio.rst
++++ b/doc/develop/driver-model/virtio.rst
+@@ -34,6 +34,7 @@ The following QEMU targets are supported.
+ 
+   - qemu_arm_defconfig
+   - qemu_arm64_defconfig
++  - qemu-arm-sbsa_defconfig
+   - qemu-riscv32_defconfig
+   - qemu-riscv64_defconfig
+   - qemu-x86_defconfig
+diff --git a/include/configs/qemu-sbsa.h b/include/configs/qemu-sbsa.h
+new file mode 100644
+index 0000000000..aff78160e1
+--- /dev/null
++++ b/include/configs/qemu-sbsa.h
+@@ -0,0 +1,89 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2024 9elements GmbH
++ */
++
++#ifndef __CONFIG_H
++#define __CONFIG_H
++
++/* Physical memory map */
++
++/* SECURE_FLASH */
++#define SBSA_SECURE_FLASH_BASE_ADDR	0x00000000
++#define SBSA_SECURE_FLASH_LENGTH	0x10000000
++
++/* FLASH */
++#define SBSA_FLASH_BASE_ADDR		0x10000000
++#define SBSA_FLASH_LENGTH		0x10000000
++
++/* PERIPH */
++#define SBSA_PERIPH_BASE_ADDR		0x40000000
++
++/* GIC_DIST */
++#define SBSA_GIC_DIST_BASE_ADDR		0x40060000
++#define SBSA_GIC_DIST_LENGTH		0x00020000
++
++#define SBSA_GIC_VBASE_ADDR		0x2c020000
++#define SBSA_GIC_VBASE_LENGTH		0x00010000
++
++#define SBSA_GIC_HBASE_ADDR		0x2c010000
++#define SBSA_GIC_HBASE_LENGTH		0x00010000
++
++/* GIC_REDIST */
++#define SBSA_GIC_REDIST_BASE_ADDR	0x40080000
++#define SBSA_GIC_REDIST_LENGTH		0x04000000
++
++/* GIC_ITS */
++#define SBSA_GIC_ITS_BASE_ADDR		0x44081000
++
++/* UART */
++#define SBSA_UART_BASE_ADDR		0x60000000
++#define SBSA_UART_LENGTH		0x00001000
++
++/* SMMU */
++#define SBSA_SMMU_BASE_ADDR		0x60050000
++
++/* SATA */
++#define SBSA_AHCI_BASE_ADDR		0x60100000
++#define SBSA_AHCI_LENGTH		0x00010000
++
++/* xHCI */
++#define SBSA_XHCI_BASE_ADDR		0x60110000
++#define SBSA_XHCI_LENGTH		0x00010000
++
++/* PIO */
++#define SBSA_PIO_BASE_ADDR		0x7fff0000
++#define SBSA_PIO_LENGTH			0x00010000
++
++/* PCIE_MMIO */
++#define SBSA_PCIE_MMIO_BASE_ADDR	0x80000000
++#define SBSA_PCIE_MMIO_LENGTH		0x70000000
++#define SBSA_PCIE_MMIO_END		0xefffffff
++
++/* PCIE_ECAM */
++#define SBSA_PCIE_ECAM_BASE_ADDR	0xf0000000
++#define SBSA_PCIE_ECAM_LENGTH		0x10000000
++#define SBSA_PCIE_ECAM_END		0xffffffff
++
++/* PCIE_MMIO_HIGH */
++#ifdef __ACPI__
++#define SBSA_PCIE_MMIO_HIGH_BASE_ADDR	0x100000000
++#define SBSA_PCIE_MMIO_HIGH_LENGTH	0xFF00000000
++#define SBSA_PCIE_MMIO_HIGH_END		0xFFFFFFFFFF
++#else
++#define SBSA_PCIE_MMIO_HIGH_BASE_ADDR	0x100000000ULL
++#define SBSA_PCIE_MMIO_HIGH_LENGTH	0xFF00000000ULL
++#define SBSA_PCIE_MMIO_HIGH_END		0xFFFFFFFFFFULL
++#endif
++
++/* MEM */
++#ifdef __ACPI__
++#define SBSA_MEM_BASE_ADDR		0x10000000000
++#else
++#define SBSA_MEM_BASE_ADDR		0x10000000000ULL
++#endif
++
++#define CFG_SYS_INIT_RAM_ADDR		SBSA_MEM_BASE_ADDR
++#define CFG_SYS_INIT_RAM_SIZE		0x1000000
++
++#endif /* __CONFIG_H */
+-- 
+2.46.2
+
