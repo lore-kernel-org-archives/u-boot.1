@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23EE1D2069E
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:12:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ABF3D2069A
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:12:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E8C488CC5;
-	Wed, 16 Oct 2024 08:12:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C6D588CBB;
+	Wed, 16 Oct 2024 08:12:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="OGOt0xDQ";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="dhT9d3SO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2171D88B8F; Wed, 16 Oct 2024 08:12:37 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 07B0188A4C; Wed, 16 Oct 2024 08:12:39 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FAB288C7E
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:12:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A214F88A4C
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:12:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a7aa086b077so799894766b.0
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:12:34 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a9a26a5d6bfso258376466b.1
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:12:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729059154; x=1729663954; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729059156; x=1729663956; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qLPYsARtXaL/rh1N6pOT1aAY8lEs8CzE5zE4EUtX8zA=;
- b=OGOt0xDQZv87o25NitgpxEUia93F9oIjDMOWoZre7BfDzJvU9QsTs1kou7XiSk+vof
- PhViIr1y2mWYfZHE63+yg7+Sh808sHHRNcp8W8U8Y+7vW2x238Zu0DOyFNPMQ1isY4sS
- mM0t8V9KcILhY3AN4NbznLiLEm+qb9noNeR5lDFRNsOzqKjQmlNHHIX27Mf5/SIvmfSV
- uo1ITFzHlXrYhcCTg89ZrKQPOUzkCcPtZuScb34aQdG94PprJ0Fg3zeR2yjuS/3xpFHn
- 9HJOYIDFS0UQudh5gXENsGZSSo9Uns5NgYrGimra5kRMJ3Z8V0eYS9nz8CZUemaC0hcm
- TOsw==
+ bh=peUo5A6thsRshqx8nFuo7LE2JZhq/AlBXVIylb0f4RQ=;
+ b=dhT9d3SOBTuyhRATwjEpG7Lhref7nIeZhqHuOyV1UgV1BPdxY4ULqct9Xxd0djdwpg
+ y1PAAL7iJVJr5UfvwRVHrEDXKYTNAUyjkNrmfhbn0QlszWCzO4FkUg48m08HWKLlOPXV
+ DYcaeFNlsjzeDNvYmWv0y9tIrwRxOti5eXU0le+EoAzxfoMlz1J2HfqPoLFvTBqzAT7w
+ 6YGcijS+8ww/DgqdyihNhby+yjSd8e1OP3/nY0wK52drg/S3ukp5yyDQ7Is0nFPOOcao
+ vQT7rsho+zbES0Y1A2lCKx4GVpfk0Gk6elwJMpMTRygi8SryrOgACeOT2p91r1amhMuv
+ Yw1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729059154; x=1729663954;
+ d=1e100.net; s=20230601; t=1729059156; x=1729663956;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qLPYsARtXaL/rh1N6pOT1aAY8lEs8CzE5zE4EUtX8zA=;
- b=X4TzU110S++G9Fybx5b7n8F5eglnaBs9Vr76e+b60TdQdkbEpARpfh8VuhI9ty01Zg
- 6y1TypDYEbZpWrtsiE/pIG9rHFDytmIIN069Uai56X68WQXQKvt8//3LeDfm83aMu53o
- SPafmzE8SIoX1rkuiKg+AtYUqT+khmmGLWHfxPot813zOOOorndPdp6nZsxZ20b4IKkj
- lSt5aKGO8nVp1p/fhBQ35kGxFdZdMYoihqDugn4lnBD3zbe/A+WLLzuW410Hm8z3FfcY
- 2eAhMgFTvsCM6+oyh6LoAOft6eVrVI4BsZ77rgAb7hQlyL0G2Wqc5Abc23xoQ0jhvKQC
- JGPA==
-X-Gm-Message-State: AOJu0Yz1USCQeadL+/MFVTM1pLsjAC8hidlBhSvou77aq5qmRxf1Apt8
- +jfbsf0LkAGzPlOUWgpKoYkY/L2Ke713/8+uR9qymDrZjXXgZF+Yd7UG42mkUDMFy5LJ9RI1Suz
- /
-X-Google-Smtp-Source: AGHT+IHefH059hcTI0GpKSgqxBWT13eFP33TNEk/1G4Xgrvccy2IH8Kro3uc59KpgZh6WYmGbDI5Og==
-X-Received: by 2002:a17:907:74b:b0:a9a:222f:45bb with SMTP id
- a640c23a62f3a-a9a222f495bmr597460966b.35.1729059153579; 
- Tue, 15 Oct 2024 23:12:33 -0700 (PDT)
+ bh=peUo5A6thsRshqx8nFuo7LE2JZhq/AlBXVIylb0f4RQ=;
+ b=p32j3tApCWexqtxq3p74SzQfek0zvi+BBgdWUuHrsnZ8BlW0aWtWjYuELb/DApzfpn
+ fzJjE1p7KhJ3fWDIH43IG5Tpm8Ncl1nV5WVpYx2SYj1H7IESHiMkvx6L15gYRM8HRhSf
+ QuLOfHUFP0vf1VRUTFl6zULJmwBSJm0wKO8KEyZmoF6x/CJyhUgV5+M4MJMCWzozOFtw
+ /izYcM9tL1T6H2JEJSEIu7y5/c9Ms/FKKOdf9sC9S6fYJtfx/noQWgLjg5J4fVxbUf3P
+ MLXcehWCgaoL7rIWdlln7FUvXK5LtUcsmdu+fYxofUipg5X6Yg1LabPqDKp6O2SU/SBr
+ aSng==
+X-Gm-Message-State: AOJu0YzuOiSxAsm8Ce8/qivzrnup6nv3qRV/bZLH2G6aIzFsM8leWrDy
+ v1VvuA5jDQBnafaGg3C+vVdjHe+rei52uqateWG40nSJOeZL2244f2/px6yB3U9sCnRlI5t878/
+ T
+X-Google-Smtp-Source: AGHT+IF9dcGEQW1jquMZDa/DIRwKOnbHesQ07uvy10xcwbPjJ/fYZFVDqArdzfdkS09qxXTkg1t/Ew==
+X-Received: by 2002:a17:907:ea2:b0:a9a:33c:f6e1 with SMTP id
+ a640c23a62f3a-a9a033cf8b4mr1127800966b.5.1729059155823; 
+ Tue, 15 Oct 2024 23:12:35 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.12.32
+ a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.12.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 23:12:33 -0700 (PDT)
+ Tue, 15 Oct 2024 23:12:35 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
 Cc: Maximilian Brune <maximilian.brune@9elements.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v9 01/37] acpi: x86: Move SPCR and DBG2 into common code
-Date: Wed, 16 Oct 2024 08:03:47 +0200
-Message-ID: <20241016060523.888804-2-patrick.rudolph@9elements.com>
+Subject: [PATCH v9 02/37] acpi: x86: Write FADT in common code
+Date: Wed, 16 Oct 2024 08:03:48 +0200
+Message-ID: <20241016060523.888804-3-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241016060523.888804-1-patrick.rudolph@9elements.com>
 References: <20241016060523.888804-1-patrick.rudolph@9elements.com>
@@ -98,461 +98,357 @@ X-Virus-Status: Clean
 
 From: Maximilian Brune <maximilian.brune@9elements.com>
 
-This moves the SPCR and DBG2 table generation into common code, so that
-they can be used by architectures other than x86.
+Write the FADT in common code since it's used on all architectures.
+Since the FADT is mandatory all SoCs or mainboards must implement the
+introduced function acpi_fill_fadt() and properly update the FADT.
 
-Signed-off-by: Maximilian Brune <maximilian.brune@9elements.com>
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Cc: Simon Glass <sjg@chromium.org>
 Cc: Bin Meng <bmeng.cn@gmail.com>
 ---
-Changelog v2:
-- Do not add new features, just move code and make it compile on 64bit.
+Changelog v4:
+- Drop __weak attribute
 ---
- arch/x86/include/asm/acpi_table.h |  11 --
- arch/x86/lib/acpi_table.c         | 174 ----------------------------
- include/acpi/acpi_table.h         |  11 ++
- lib/acpi/acpi_table.c             | 184 ++++++++++++++++++++++++++++++
- 4 files changed, 195 insertions(+), 185 deletions(-)
+ arch/sandbox/lib/acpi_table.c     |  6 +++++
+ arch/x86/cpu/apollolake/acpi.c    | 20 ++++------------
+ arch/x86/cpu/baytrail/acpi.c      | 17 +-------------
+ arch/x86/cpu/quark/acpi.c         | 19 +---------------
+ arch/x86/cpu/tangier/acpi.c       | 25 ++------------------
+ arch/x86/include/asm/acpi_table.h | 12 ----------
+ arch/x86/lib/acpi_table.c         | 23 -------------------
+ include/acpi/acpi_table.h         |  9 ++++++++
+ lib/acpi/acpi_table.c             | 38 +++++++++++++++++++++++++++++++
+ 9 files changed, 61 insertions(+), 108 deletions(-)
+ create mode 100644 arch/sandbox/lib/acpi_table.c
 
+diff --git a/arch/sandbox/lib/acpi_table.c b/arch/sandbox/lib/acpi_table.c
+new file mode 100644
+index 0000000000..10b7ce441a
+--- /dev/null
++++ b/arch/sandbox/lib/acpi_table.c
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0+
++#include <acpi/acpi_table.h>
++
++void acpi_fill_fadt(struct acpi_fadt *fadt)
++{
++}
+\ No newline at end of file
+diff --git a/arch/x86/cpu/apollolake/acpi.c b/arch/x86/cpu/apollolake/acpi.c
+index 76230aea83..93040e7bb3 100644
+--- a/arch/x86/cpu/apollolake/acpi.c
++++ b/arch/x86/cpu/apollolake/acpi.c
+@@ -128,8 +128,10 @@ int arch_madt_sci_irq_polarity(int sci)
+ 	return MP_IRQ_POLARITY_LOW;
+ }
+ 
+-void fill_fadt(struct acpi_fadt *fadt)
++void acpi_fill_fadt(struct acpi_fadt *fadt)
+ {
++	intel_acpi_fill_fadt(fadt);
++
+ 	fadt->pm_tmr_blk = IOMAP_ACPI_BASE + PM1_TMR;
+ 
+ 	fadt->p_lvl2_lat = ACPI_FADT_C2_NOT_SUPPORTED;
+@@ -143,23 +145,9 @@ void fill_fadt(struct acpi_fadt *fadt)
+ 	fadt->x_pm_tmr_blk.space_id = 1;
+ 	fadt->x_pm_tmr_blk.bit_width = fadt->pm_tmr_len * 8;
+ 	fadt->x_pm_tmr_blk.addrl = IOMAP_ACPI_BASE + PM1_TMR;
+-}
+-
+-static int apl_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+-{
+-	struct acpi_table_header *header;
+-	struct acpi_fadt *fadt;
+-
+-	fadt = ctx->current;
+-	acpi_fadt_common(fadt, ctx->facs, ctx->dsdt);
+-	intel_acpi_fill_fadt(fadt);
+-	fill_fadt(fadt);
+-	header = &fadt->header;
+-	header->checksum = table_compute_checksum(fadt, header->length);
+ 
+-	return acpi_add_fadt(ctx, fadt);
++	fadt->preferred_pm_profile = ACPI_PM_MOBILE;
+ }
+-ACPI_WRITER(5fadt, "FADT", apl_write_fadt, 0);
+ 
+ int apl_acpi_fill_dmar(struct acpi_ctx *ctx)
+ {
+diff --git a/arch/x86/cpu/baytrail/acpi.c b/arch/x86/cpu/baytrail/acpi.c
+index 7821964f1f..7e1c2de3d3 100644
+--- a/arch/x86/cpu/baytrail/acpi.c
++++ b/arch/x86/cpu/baytrail/acpi.c
+@@ -15,20 +15,13 @@
+ #include <asm/arch/iomap.h>
+ #include <dm/uclass-internal.h>
+ 
+-static int baytrail_write_fadt(struct acpi_ctx *ctx,
+-			       const struct acpi_writer *entry)
++void acpi_fill_fadt(struct acpi_fadt *fadt)
+ {
+ 	struct acpi_table_header *header;
+-	struct acpi_fadt *fadt;
+ 
+-	fadt = ctx->current;
+ 	header = &fadt->header;
+ 	u16 pmbase = ACPI_BASE_ADDRESS;
+ 
+-	memset(fadt, '\0', sizeof(struct acpi_fadt));
+-
+-	acpi_fill_header(header, "FACP");
+-	header->length = sizeof(struct acpi_fadt);
+ 	header->revision = 4;
+ 
+ 	fadt->preferred_pm_profile = ACPI_PM_MOBILE;
+@@ -77,9 +70,6 @@ static int baytrail_write_fadt(struct acpi_ctx *ctx,
+ 	fadt->reset_reg.addrh = 0;
+ 	fadt->reset_value = SYS_RST | RST_CPU | FULL_RST;
+ 
+-	fadt->x_firmware_ctrl = map_to_sysmem(ctx->facs);
+-	fadt->x_dsdt = map_to_sysmem(ctx->dsdt);
+-
+ 	fadt->x_pm1a_evt_blk.space_id = ACPI_ADDRESS_SPACE_IO;
+ 	fadt->x_pm1a_evt_blk.bit_width = fadt->pm1_evt_len * 8;
+ 	fadt->x_pm1a_evt_blk.bit_offset = 0;
+@@ -135,12 +125,7 @@ static int baytrail_write_fadt(struct acpi_ctx *ctx,
+ 	fadt->x_gpe1_blk.access_size = 0;
+ 	fadt->x_gpe1_blk.addrl = 0x0;
+ 	fadt->x_gpe1_blk.addrh = 0x0;
+-
+-	header->checksum = table_compute_checksum(fadt, header->length);
+-
+-	return acpi_add_fadt(ctx, fadt);
+ }
+-ACPI_WRITER(5fadt, "FADT", baytrail_write_fadt, 0);
+ 
+ int acpi_create_gnvs(struct acpi_global_nvs *gnvs)
+ {
+diff --git a/arch/x86/cpu/quark/acpi.c b/arch/x86/cpu/quark/acpi.c
+index 80e94600fc..0fe5f2bafb 100644
+--- a/arch/x86/cpu/quark/acpi.c
++++ b/arch/x86/cpu/quark/acpi.c
+@@ -11,23 +11,14 @@
+ #include <asm/arch/iomap.h>
+ #include <linux/string.h>
+ 
+-static int quark_write_fadt(struct acpi_ctx *ctx,
+-			    const struct acpi_writer *entry)
++void acpi_fill_fadt(struct acpi_fadt *fadt)
+ {
+ 	u16 pmbase = ACPI_PM1_BASE_ADDRESS;
+ 	struct acpi_table_header *header;
+-	struct acpi_fadt *fadt;
+ 
+-	fadt = ctx->current;
+ 	header = &fadt->header;
+-
+-	memset(fadt, '\0', sizeof(struct acpi_fadt));
+-
+-	acpi_fill_header(header, "FACP");
+-	header->length = sizeof(struct acpi_fadt);
+ 	header->revision = 4;
+ 
+-	fadt->preferred_pm_profile = ACPI_PM_UNSPECIFIED;
+ 	fadt->sci_int = 9;
+ 	fadt->smi_cmd = 0;
+ 	fadt->acpi_enable = 0;
+@@ -73,9 +64,6 @@ static int quark_write_fadt(struct acpi_ctx *ctx,
+ 	fadt->reset_reg.addrh = 0;
+ 	fadt->reset_value = SYS_RST | RST_CPU | FULL_RST;
+ 
+-	fadt->x_firmware_ctrl = map_to_sysmem(ctx->facs);
+-	fadt->x_dsdt = map_to_sysmem(ctx->dsdt);
+-
+ 	fadt->x_pm1a_evt_blk.space_id = ACPI_ADDRESS_SPACE_IO;
+ 	fadt->x_pm1a_evt_blk.bit_width = fadt->pm1_evt_len * 8;
+ 	fadt->x_pm1a_evt_blk.bit_offset = 0;
+@@ -131,12 +119,7 @@ static int quark_write_fadt(struct acpi_ctx *ctx,
+ 	fadt->x_gpe1_blk.access_size = 0;
+ 	fadt->x_gpe1_blk.addrl = 0x0;
+ 	fadt->x_gpe1_blk.addrh = 0x0;
+-
+-	header->checksum = table_compute_checksum(fadt, header->length);
+-
+-	return acpi_add_fadt(ctx, fadt);
+ }
+-ACPI_WRITER(5fadt, "FADT", quark_write_fadt, 0);
+ 
+ int acpi_create_gnvs(struct acpi_global_nvs *gnvs)
+ {
+diff --git a/arch/x86/cpu/tangier/acpi.c b/arch/x86/cpu/tangier/acpi.c
+index d4d0ef6f85..1c73a9dbfe 100644
+--- a/arch/x86/cpu/tangier/acpi.c
++++ b/arch/x86/cpu/tangier/acpi.c
+@@ -16,21 +16,8 @@
+ #include <asm/arch/iomap.h>
+ #include <dm/uclass-internal.h>
+ 
+-static int tangier_write_fadt(struct acpi_ctx *ctx,
+-			      const struct acpi_writer *entry)
++void acpi_fill_fadt(struct acpi_fadt *fadt)
+ {
+-	struct acpi_table_header *header;
+-	struct acpi_fadt *fadt;
+-
+-	fadt = ctx->current;
+-	header = &fadt->header;
+-
+-	memset(fadt, '\0', sizeof(struct acpi_fadt));
+-
+-	acpi_fill_header(header, "FACP");
+-	header->length = sizeof(struct acpi_fadt);
+-	header->revision = 6;
+-
+ 	fadt->preferred_pm_profile = ACPI_PM_UNSPECIFIED;
+ 
+ 	fadt->iapc_boot_arch = ACPI_FADT_VGA_NOT_PRESENT |
+@@ -40,17 +27,9 @@ static int tangier_write_fadt(struct acpi_ctx *ctx,
+ 		ACPI_FADT_POWER_BUTTON | ACPI_FADT_SLEEP_BUTTON |
+ 		ACPI_FADT_SEALED_CASE | ACPI_FADT_HEADLESS |
+ 		ACPI_FADT_HW_REDUCED_ACPI;
+-
++	fadt->header.revision = 6;
+ 	fadt->minor_revision = 2;
+-
+-	fadt->x_firmware_ctrl = map_to_sysmem(ctx->facs);
+-	fadt->x_dsdt = map_to_sysmem(ctx->dsdt);
+-
+-	header->checksum = table_compute_checksum(fadt, header->length);
+-
+-	return acpi_add_fadt(ctx, fadt);
+ }
+-ACPI_WRITER(5fadt, "FADT", tangier_write_fadt, 0);
+ 
+ u32 acpi_fill_madt(u32 current)
+ {
 diff --git a/arch/x86/include/asm/acpi_table.h b/arch/x86/include/asm/acpi_table.h
-index 57e41654ce..e617524617 100644
+index e617524617..3988898f66 100644
 --- a/arch/x86/include/asm/acpi_table.h
 +++ b/arch/x86/include/asm/acpi_table.h
-@@ -45,17 +45,6 @@ int acpi_create_mcfg_mmconfig(struct acpi_mcfg_mmconfig *mmconfig, u32 base,
-  */
- int acpi_write_hpet(struct acpi_ctx *ctx);
+@@ -168,18 +168,6 @@ int acpi_create_dmar_ds_ioapic(struct acpi_ctx *ctx, uint enumeration_id,
+ int acpi_create_dmar_ds_msi_hpet(struct acpi_ctx *ctx, uint enumeration_id,
+ 				 pci_dev_t bdf);
  
 -/**
-- * acpi_write_dbg2_pci_uart() - Write out a DBG2 table
+- * acpi_fadt_common() - Handle common parts of filling out an FADT
 - *
-- * @ctx: Current ACPI context
-- * @dev: Debug UART device to describe
-- * @access_size: Access size for UART (e.g. ACPI_ACCESS_SIZE_DWORD_ACCESS)
-- * Return: 0 if OK, -ve on error
+- * This sets up the Fixed ACPI Description Table
+- *
+- * @fadt: Pointer to place to put FADT
+- * @facs: Pointer to the FACS
+- * @dsdt: Pointer to the DSDT
 - */
--int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, struct udevice *dev,
--			     uint access_size);
+-void acpi_fadt_common(struct acpi_fadt *fadt, struct acpi_facs *facs,
+-		      void *dsdt);
 -
  /**
-  * acpi_create_gnvs() - Create a GNVS (Global Non Volatile Storage) table
+  * intel_acpi_fill_fadt() - Set up the contents of the FADT
   *
 diff --git a/arch/x86/lib/acpi_table.c b/arch/x86/lib/acpi_table.c
-index e38ce19ff7..08fd1e54ce 100644
+index 08fd1e54ce..ff02ce80d1 100644
 --- a/arch/x86/lib/acpi_table.c
 +++ b/arch/x86/lib/acpi_table.c
-@@ -279,140 +279,6 @@ static int acpi_write_tpm2(struct acpi_ctx *ctx,
- }
- ACPI_WRITER(5tpm2, "TPM2", acpi_write_tpm2, 0);
- 
--int acpi_write_spcr(struct acpi_ctx *ctx, const struct acpi_writer *entry)
--{
--	struct serial_device_info serial_info = {0};
--	ulong serial_address, serial_offset;
--	struct acpi_table_header *header;
--	struct acpi_spcr *spcr;
--	struct udevice *dev;
--	uint serial_config;
--	uint serial_width;
--	int access_size;
--	int space_id;
--	int ret = -ENODEV;
--
--	spcr = ctx->current;
--	header = &spcr->header;
--
--	memset(spcr, '\0', sizeof(struct acpi_spcr));
--
--	/* Fill out header fields */
--	acpi_fill_header(header, "SPCR");
--	header->length = sizeof(struct acpi_spcr);
--	header->revision = 2;
--
--	/* Read the device once, here. It is reused below */
--	dev = gd->cur_serial_dev;
--	if (dev)
--		ret = serial_getinfo(dev, &serial_info);
--	if (ret)
--		serial_info.type = SERIAL_CHIP_UNKNOWN;
--
--	/* Encode chip type */
--	switch (serial_info.type) {
--	case SERIAL_CHIP_16550_COMPATIBLE:
--		spcr->interface_type = ACPI_DBG2_16550_COMPATIBLE;
--		break;
--	case SERIAL_CHIP_UNKNOWN:
--	default:
--		spcr->interface_type = ACPI_DBG2_UNKNOWN;
--		break;
--	}
--
--	/* Encode address space */
--	switch (serial_info.addr_space) {
--	case SERIAL_ADDRESS_SPACE_MEMORY:
--		space_id = ACPI_ADDRESS_SPACE_MEMORY;
--		break;
--	case SERIAL_ADDRESS_SPACE_IO:
--	default:
--		space_id = ACPI_ADDRESS_SPACE_IO;
--		break;
--	}
--
--	serial_width = serial_info.reg_width * 8;
--	serial_offset = serial_info.reg_offset << serial_info.reg_shift;
--	serial_address = serial_info.addr + serial_offset;
--
--	/* Encode register access size */
--	switch (serial_info.reg_shift) {
--	case 0:
--		access_size = ACPI_ACCESS_SIZE_BYTE_ACCESS;
--		break;
--	case 1:
--		access_size = ACPI_ACCESS_SIZE_WORD_ACCESS;
--		break;
--	case 2:
--		access_size = ACPI_ACCESS_SIZE_DWORD_ACCESS;
--		break;
--	case 3:
--		access_size = ACPI_ACCESS_SIZE_QWORD_ACCESS;
--		break;
--	default:
--		access_size = ACPI_ACCESS_SIZE_UNDEFINED;
--		break;
--	}
--
--	debug("UART type %u @ %lx\n", spcr->interface_type, serial_address);
--
--	/* Fill GAS */
--	spcr->serial_port.space_id = space_id;
--	spcr->serial_port.bit_width = serial_width;
--	spcr->serial_port.bit_offset = 0;
--	spcr->serial_port.access_size = access_size;
--	spcr->serial_port.addrl = lower_32_bits(serial_address);
--	spcr->serial_port.addrh = upper_32_bits(serial_address);
--
--	/* Encode baud rate */
--	switch (serial_info.baudrate) {
--	case 9600:
--		spcr->baud_rate = 3;
--		break;
--	case 19200:
--		spcr->baud_rate = 4;
--		break;
--	case 57600:
--		spcr->baud_rate = 6;
--		break;
--	case 115200:
--		spcr->baud_rate = 7;
--		break;
--	default:
--		spcr->baud_rate = 0;
--		break;
--	}
--
--	serial_config = SERIAL_DEFAULT_CONFIG;
--	if (dev)
--		ret = serial_getconfig(dev, &serial_config);
--
--	spcr->parity = SERIAL_GET_PARITY(serial_config);
--	spcr->stop_bits = SERIAL_GET_STOP(serial_config);
--
--	/* No PCI devices for now */
--	spcr->pci_device_id = 0xffff;
--	spcr->pci_vendor_id = 0xffff;
--
--	/*
--	 * SPCR has no clue if the UART base clock speed is different
--	 * to the default one. However, the SPCR 1.04 defines baud rate
--	 * 0 as a preconfigured state of UART and OS is supposed not
--	 * to touch the configuration of the serial device.
--	 */
--	if (serial_info.clock != SERIAL_DEFAULT_CLOCK)
--		spcr->baud_rate = 0;
--
--	/* Fix checksum */
--	header->checksum = table_compute_checksum((void *)spcr, header->length);
--
--	acpi_add_table(ctx, spcr);
--	acpi_inc(ctx, spcr->header.length);
--
--	return 0;
--}
--ACPI_WRITER(5spcr, "SPCR", acpi_write_spcr, 0);
--
- int acpi_write_gnvs(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- {
- 	ulong addr;
-@@ -515,46 +381,6 @@ int acpi_write_hpet(struct acpi_ctx *ctx)
+@@ -381,29 +381,6 @@ int acpi_write_hpet(struct acpi_ctx *ctx)
  	return 0;
  }
  
--int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, struct udevice *dev,
--			     uint access_size)
+-void acpi_fadt_common(struct acpi_fadt *fadt, struct acpi_facs *facs,
+-		      void *dsdt)
 -{
--	struct acpi_dbg2_header *dbg2 = ctx->current;
--	char path[ACPI_PATH_MAX];
--	struct acpi_gen_regaddr address;
--	phys_addr_t addr;
--	int ret;
+-	struct acpi_table_header *header = &fadt->header;
 -
--	if (!device_active(dev)) {
--		log_info("Device not enabled\n");
--		return -EACCES;
--	}
--	/*
--	 * PCI devices don't remember their resource allocation information in
--	 * U-Boot at present. We assume that MMIO is used for the UART and that
--	 * the address space is 32 bytes: ns16550 uses 8 registers of up to
--	 * 32-bits each. This is only for debugging so it is not a big deal.
--	 */
--	addr = dm_pci_read_bar32(dev, 0);
--	log_debug("UART addr %lx\n", (ulong)addr);
+-	memset((void *)fadt, '\0', sizeof(struct acpi_fadt));
 -
--	memset(&address, '\0', sizeof(address));
--	address.space_id = ACPI_ADDRESS_SPACE_MEMORY;
--	address.addrl = (uint32_t)addr;
--	address.addrh = (uint32_t)((addr >> 32) & 0xffffffff);
--	address.access_size = access_size;
+-	acpi_fill_header(header, "FACP");
+-	header->length = sizeof(struct acpi_fadt);
+-	header->revision = 4;
+-	memcpy(header->oem_id, OEM_ID, 6);
+-	memcpy(header->oem_table_id, OEM_TABLE_ID, 8);
+-	memcpy(header->creator_id, ASLC_ID, 4);
 -
--	ret = acpi_device_path(dev, path, sizeof(path));
--	if (ret)
--		return log_msg_ret("path", ret);
--	acpi_create_dbg2(dbg2, ACPI_DBG2_SERIAL_PORT,
--			 ACPI_DBG2_16550_COMPATIBLE, &address, 0x1000, path);
+-	fadt->x_firmware_ctrl = map_to_sysmem(facs);
+-	fadt->x_dsdt = map_to_sysmem(dsdt);
 -
--	acpi_inc_align(ctx, dbg2->header.length);
--	acpi_add_table(ctx, dbg2);
+-	fadt->preferred_pm_profile = ACPI_PM_MOBILE;
 -
--	return 0;
+-	/* Use ACPI 3.0 revision */
+-	fadt->header.revision = 4;
 -}
 -
- void acpi_fadt_common(struct acpi_fadt *fadt, struct acpi_facs *facs,
- 		      void *dsdt)
+ void acpi_create_dmar_drhd(struct acpi_ctx *ctx, uint flags, uint segment,
+ 			   u64 bar)
  {
 diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index 15fd61a51d..a372435492 100644
+index a372435492..19cf0fb43c 100644
 --- a/include/acpi/acpi_table.h
 +++ b/include/acpi/acpi_table.h
-@@ -913,6 +913,17 @@ static inline int acpi_add_fadt(struct acpi_ctx *ctx, struct acpi_fadt *fadt)
+@@ -954,6 +954,15 @@ void acpi_fill_header(struct acpi_table_header *header, char *signature);
+  */
+ int acpi_fill_csrt(struct acpi_ctx *ctx);
+ 
++/**
++ * acpi_fill_fadt() - Fill out the body of the FADT
++ *
++ * Must be implemented in SoC specific code or in mainboard code.
++ *
++ * @fadt: Pointer to FADT to update
++ */
++void acpi_fill_fadt(struct acpi_fadt *fadt);
++
+ /**
+  * acpi_get_rsdp_addr() - get ACPI RSDP table address
+  *
+diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
+index c9ddcca8cb..9eb0b507a0 100644
+--- a/lib/acpi/acpi_table.c
++++ b/lib/acpi/acpi_table.c
+@@ -202,6 +202,44 @@ int acpi_add_table(struct acpi_ctx *ctx, void *table)
  	return 0;
  }
  
-+/**
-+ * acpi_write_dbg2_pci_uart() - Write out a DBG2 table
-+ *
-+ * @ctx: Current ACPI context
-+ * @dev: Debug UART device to describe
-+ * @access_size: Access size for UART (e.g. ACPI_ACCESS_SIZE_DWORD_ACCESS)
-+ * Return: 0 if OK, -ve on error
-+ */
-+int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, struct udevice *dev,
-+			     uint access_size);
-+
- /**
-  * acpi_write_rsdp() - Write out an RSDP indicating where the ACPI tables are
-  *
-diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index 6dbfdb22de..c9ddcca8cb 100644
---- a/lib/acpi/acpi_table.c
-+++ b/lib/acpi/acpi_table.c
-@@ -10,8 +10,10 @@
- #include <log.h>
- #include <mapmem.h>
- #include <tables_csum.h>
-+#include <serial.h>
- #include <version_string.h>
- #include <acpi/acpi_table.h>
-+#include <acpi/acpi_device.h>
- #include <asm/global_data.h>
- #include <dm/acpi.h>
- 
-@@ -262,3 +264,185 @@ void acpi_create_dbg2(struct acpi_dbg2_header *dbg2,
- 	header->length = current - (uintptr_t)dbg2;
- 	header->checksum = table_compute_checksum(dbg2, header->length);
- }
-+
-+int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, struct udevice *dev,
-+			     uint access_size)
++int acpi_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
 +{
-+	struct acpi_dbg2_header *dbg2 = ctx->current;
-+	char path[ACPI_PATH_MAX];
-+	struct acpi_gen_regaddr address;
-+	u64 addr;
-+	int ret;
-+
-+	if (!device_active(dev)) {
-+		log_info("Device not enabled\n");
-+		return -EACCES;
-+	}
-+	/*
-+	 * PCI devices don't remember their resource allocation information in
-+	 * U-Boot at present. We assume that MMIO is used for the UART and that
-+	 * the address space is 32 bytes: ns16550 uses 8 registers of up to
-+	 * 32-bits each. This is only for debugging so it is not a big deal.
-+	 */
-+	addr = dm_pci_read_bar32(dev, 0);
-+	log_debug("UART addr %lx\n", (ulong)addr);
-+
-+	ret = acpi_device_path(dev, path, sizeof(path));
-+	if (ret)
-+		return log_msg_ret("path", ret);
-+
-+	memset(&address, '\0', sizeof(address));
-+	address.space_id = ACPI_ADDRESS_SPACE_MEMORY;
-+	address.addrl = (uint32_t)addr;
-+	address.addrh = (uint32_t)((addr >> 32) & 0xffffffff);
-+	address.access_size = access_size;
-+
-+	ret = acpi_device_path(dev, path, sizeof(path));
-+	if (ret)
-+		return log_msg_ret("path", ret);
-+	acpi_create_dbg2(dbg2, ACPI_DBG2_SERIAL_PORT,
-+			 ACPI_DBG2_16550_COMPATIBLE, &address, 0x1000, path);
-+
-+	acpi_inc_align(ctx, dbg2->header.length);
-+	acpi_add_table(ctx, dbg2);
-+
-+	return 0;
-+}
-+
-+static int acpi_write_spcr(struct acpi_ctx *ctx, const struct acpi_writer *entry)
-+{
-+	struct serial_device_info serial_info = {0};
-+	ulong serial_address, serial_offset;
 +	struct acpi_table_header *header;
-+	struct acpi_spcr *spcr;
-+	struct udevice *dev;
-+	uint serial_config;
-+	uint serial_width;
-+	int access_size;
-+	int space_id;
-+	int ret = -ENODEV;
++	struct acpi_fadt *fadt;
 +
-+	spcr = ctx->current;
-+	header = &spcr->header;
++	fadt = ctx->current;
++	header = &fadt->header;
 +
-+	memset(spcr, '\0', sizeof(struct acpi_spcr));
++	memset((void *)fadt, '\0', sizeof(struct acpi_fadt));
 +
-+	/* Fill out header fields */
-+	acpi_fill_header(header, "SPCR");
-+	header->length = sizeof(struct acpi_spcr);
-+	header->revision = 2;
++	acpi_fill_header(header, "FACP");
++	header->length = sizeof(struct acpi_fadt);
++	header->revision = acpi_get_table_revision(ACPITAB_FADT);
++	memcpy(header->oem_id, OEM_ID, 6);
++	memcpy(header->oem_table_id, OEM_TABLE_ID, 8);
++	memcpy(header->creator_id, ASLC_ID, 4);
++	header->creator_revision = 1;
 +
-+	/* Read the device once, here. It is reused below */
-+	dev = gd->cur_serial_dev;
-+	if (dev)
-+		ret = serial_getinfo(dev, &serial_info);
-+	if (ret)
-+		serial_info.type = SERIAL_CHIP_UNKNOWN;
++	fadt->x_firmware_ctrl = map_to_sysmem(ctx->facs);
++	fadt->x_dsdt = map_to_sysmem(ctx->dsdt);
 +
-+	/* Encode chip type */
-+	switch (serial_info.type) {
-+	case SERIAL_CHIP_16550_COMPATIBLE:
-+		spcr->interface_type = ACPI_DBG2_16550_COMPATIBLE;
-+		break;
-+	case SERIAL_CHIP_PL01X:
-+		spcr->interface_type = ACPI_DBG2_ARM_PL011;
-+		break;
-+	case SERIAL_CHIP_UNKNOWN:
-+	default:
-+		spcr->interface_type = ACPI_DBG2_UNKNOWN;
-+		break;
-+	}
++	if (fadt->x_firmware_ctrl < 0x100000000ULL)
++		fadt->firmware_ctrl = fadt->x_firmware_ctrl;
 +
-+	/* Encode address space */
-+	switch (serial_info.addr_space) {
-+	case SERIAL_ADDRESS_SPACE_MEMORY:
-+		space_id = ACPI_ADDRESS_SPACE_MEMORY;
-+		break;
-+	case SERIAL_ADDRESS_SPACE_IO:
-+	default:
-+		space_id = ACPI_ADDRESS_SPACE_IO;
-+		break;
-+	}
++	if (fadt->x_dsdt < 0x100000000ULL)
++		fadt->dsdt = fadt->x_dsdt;
 +
-+	serial_width = serial_info.reg_width * 8;
-+	serial_offset = serial_info.reg_offset << serial_info.reg_shift;
-+	serial_address = serial_info.addr + serial_offset;
++	fadt->preferred_pm_profile = ACPI_PM_UNSPECIFIED;
 +
-+	/* Encode register access size */
-+	switch (serial_info.reg_shift) {
-+	case 0:
-+		access_size = ACPI_ACCESS_SIZE_BYTE_ACCESS;
-+		break;
-+	case 1:
-+		access_size = ACPI_ACCESS_SIZE_WORD_ACCESS;
-+		break;
-+	case 2:
-+		access_size = ACPI_ACCESS_SIZE_DWORD_ACCESS;
-+		break;
-+	case 3:
-+		access_size = ACPI_ACCESS_SIZE_QWORD_ACCESS;
-+		break;
-+	default:
-+		access_size = ACPI_ACCESS_SIZE_UNDEFINED;
-+		break;
-+	}
++	acpi_fill_fadt(fadt);
 +
-+	debug("UART type %u @ %lx\n", spcr->interface_type, serial_address);
++	header->checksum = table_compute_checksum(fadt, header->length);
 +
-+	/* Fill GAS */
-+	spcr->serial_port.space_id = space_id;
-+	spcr->serial_port.bit_width = serial_width;
-+	spcr->serial_port.bit_offset = 0;
-+	spcr->serial_port.access_size = access_size;
-+	spcr->serial_port.addrl = lower_32_bits(serial_address);
-+	spcr->serial_port.addrh = upper_32_bits(serial_address);
-+
-+	/* Encode baud rate */
-+	switch (serial_info.baudrate) {
-+	case 9600:
-+		spcr->baud_rate = 3;
-+		break;
-+	case 19200:
-+		spcr->baud_rate = 4;
-+		break;
-+	case 57600:
-+		spcr->baud_rate = 6;
-+		break;
-+	case 115200:
-+		spcr->baud_rate = 7;
-+		break;
-+	default:
-+		spcr->baud_rate = 0;
-+		break;
-+	}
-+
-+	serial_config = SERIAL_DEFAULT_CONFIG;
-+	if (dev)
-+		ret = serial_getconfig(dev, &serial_config);
-+
-+	spcr->parity = SERIAL_GET_PARITY(serial_config);
-+	spcr->stop_bits = SERIAL_GET_STOP(serial_config);
-+
-+	/* No PCI devices for now */
-+	spcr->pci_device_id = 0xffff;
-+	spcr->pci_vendor_id = 0xffff;
-+
-+	/*
-+	 * SPCR has no clue if the UART base clock speed is different
-+	 * to the default one. However, the SPCR 1.04 defines baud rate
-+	 * 0 as a preconfigured state of UART and OS is supposed not
-+	 * to touch the configuration of the serial device.
-+	 */
-+	if (serial_info.clock != SERIAL_DEFAULT_CLOCK)
-+		spcr->baud_rate = 0;
-+
-+	/* Fix checksum */
-+	header->checksum = table_compute_checksum((void *)spcr, header->length);
-+
-+	acpi_add_table(ctx, spcr);
-+	acpi_inc(ctx, spcr->header.length);
-+
-+	return 0;
++	return acpi_add_fadt(ctx, fadt);
 +}
 +
-+ACPI_WRITER(5spcr, "SPCR", acpi_write_spcr, 0);
++ACPI_WRITER(5fadt, "FADT", acpi_write_fadt, 0);
++
+ void acpi_create_dbg2(struct acpi_dbg2_header *dbg2,
+ 		      int port_type, int port_subtype,
+ 		      struct acpi_gen_regaddr *address, u32 address_size,
 -- 
 2.46.2
 
