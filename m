@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E57D8D2069E
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:13:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A63ACD2069A
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:14:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69A7588D8D;
-	Wed, 16 Oct 2024 08:12:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D283D88DD1;
+	Wed, 16 Oct 2024 08:12:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Ewpy11vq";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="PlpuKR/Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7F3A88DB2; Wed, 16 Oct 2024 08:12:50 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id DFF6288D7E; Wed, 16 Oct 2024 08:12:51 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84F0688B0C
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:12:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DEBB288D7E
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:12:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-539e690479cso4101049e87.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:12:48 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9552d02e6so5839733a12.2
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:12:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729059167; x=1729663967; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729059169; x=1729663969; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jjGyMADI94CbW+LzQ72Y9xU4fuFmNgb1QFMuLN3r1Ws=;
- b=Ewpy11vqQUS/LefxmlEsBsevCqkgScnjvv9edKic23s6NVyRZbV4p1TZb3gSryy5oZ
- LuFt9Y5dpraFhmnDMbYcgHHkQmVPj/ZMP7IN8FK4rvLh1iom/vEVIdDnyRVc+o7zo2te
- 6D2eCFK5Jcu2ja5SmH5gBwb7uOYE3woEIIDVv435CUWZLofF2oZp+VephMkOMBE80huC
- sXfEA80TD9zSLxtqpuGCazdTfuJnVTQd4eIlCFqRIzZUFDyNeRt6F43SMiXqTOQ//XCo
- 1IpsHmhS/d3D1imgZV+Z8qoIHzWWIIDmUaudkIuj4WJnCWox+If5mNwvDgwNR6z+7kiL
- tpsQ==
+ bh=kOeZlTEURRuOUzJmfMfrtVLnNbwCgdwqbwXKpCNFyDM=;
+ b=PlpuKR/QjZze5cahJ/94q4g+T75fDqxaH/etFGS8gmUt2kHsEBWhW9F05XYK5ztMDM
+ uLS6jQPz/D9RAg/OpqrHr8Glb7mFm8qiBIwZtUaZldMVnRu1F9kUPh8Aw1QELvEF60yx
+ lxX7PVUXdeQa43jsDMxa2/yTJq2B6dO63+B6D0DpbH64cZkQyLY1wgopH8VIlqlC0R8U
+ 9UKFkhVdvL01gfUC0tXNCa+zyaweLipCfg44IdtknZmUtgq8J9Gp8aQLEAjGu74blboz
+ QOvogm2J5gnOnYbvXRUyht/7sr+l3WhaE14HSZ05d4n7SNSh/DZYL+T1bP+hA0G6jdO6
+ Vy2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729059167; x=1729663967;
+ d=1e100.net; s=20230601; t=1729059169; x=1729663969;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jjGyMADI94CbW+LzQ72Y9xU4fuFmNgb1QFMuLN3r1Ws=;
- b=oaWggFCmamKxuZ/qehDjXPggfwjrmG9uhJODQ/BqlYtHajRFbYUkS/yCucIeo8EStB
- M6tNNwqKK5KzsmB464jHjFnFLV4CRqydtDfpBpKdMIG0xWYFLtobxoNAYXawr+N9Svbk
- AaqPwHWjourJsPIsc4iZTUp/HaCTiXxO0dSNYSkTJrtFwu3dv1NniKn5mFtq4eP/LAix
- YzYZkJMtfg14YvOC+6vRTXPOfxJbDDnD0WWNNB5Sy4yWnFGfrrRfiLNaUJmg85+oJpnI
- gKqs/mv5KCk/CXoa40pQO3y5KI8ELjC6jE8/MKUswpNxIizx8H7TkI0ecRnWX49I6W+r
- P/3g==
-X-Gm-Message-State: AOJu0YznRULJyxzidzL1yhBN1bC1F9MXzE6NhFoavi0AW2DfURHnbn08
- q1tz/o/qUDzemapKBGoZ7y9FlaHZ68DF1HyU3IjeWXxUQmHfvBbVV57Y5jgpiwjtg557fE0jt8s
- Y
-X-Google-Smtp-Source: AGHT+IGxUm2Ye5RjBem9bV6PgBPi7k1VM5wriGLztTIXDXJ6Q6i1j7EeK32zccSF+95TZSCEoB8WQQ==
-X-Received: by 2002:ac2:4c46:0:b0:539:968a:91a8 with SMTP id
- 2adb3069b0e04-539e571da42mr8105614e87.47.1729059167328; 
- Tue, 15 Oct 2024 23:12:47 -0700 (PDT)
+ bh=kOeZlTEURRuOUzJmfMfrtVLnNbwCgdwqbwXKpCNFyDM=;
+ b=CVlsmV+aYXIBfIaL/xpZzF3KEQXqMls8TnTEPgx8ncmrQnxzk3e1RuAimOtZbpHxlQ
+ DTQPMBUNa6yExzN49zsYASGvIfO3bRAPmh6v/Q2WHq7j3nAWV96p3LTCGQodWZDtXDKU
+ JCvqNIphIaJuI6TPks9YeFykuMYWqfNACjKDrLtoSMcsbfyBK2uzgqw8v/2D26P+40xc
+ JlN47H4X/OtOzN5hBS39A1tbshHEgiCQQiJXpXRJilstdshp6ieB9y8Wie9JnRlt4e0p
+ NDJy3gctIx+GhyaBZpQ/n2E92z5QqM+j/ZnReRjTh5G44hjeW74uRmjhuo+LRT1UUHcb
+ e8hg==
+X-Gm-Message-State: AOJu0YyIX6QcHTcimKqybRu/b+OgFbq594nPvmPAsnI2M69cc87vJGYc
+ CHQpu/cwE5UtGrmgUZZWgFtHiK0dTis2AbuWYfGRF93oTXTSP7mwXbxhRiWC8plXbVlxDCn9Pzy
+ K
+X-Google-Smtp-Source: AGHT+IGWsYpNnbKirWKv38oIkg163LbwejLyMIqfy1WEbVle+YuXBfGQ4KhngkrM+jlkPVHmx/PL6A==
+X-Received: by 2002:a17:906:bc03:b0:a99:fb75:3ed7 with SMTP id
+ a640c23a62f3a-a9a34cbcf2emr207362866b.17.1729059169249; 
+ Tue, 15 Oct 2024 23:12:49 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.12.46
+ a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.12.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 23:12:47 -0700 (PDT)
+ Tue, 15 Oct 2024 23:12:48 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v9 08/37] acpi: Add fill_madt to acpi_ops
-Date: Wed, 16 Oct 2024 08:03:54 +0200
-Message-ID: <20241016060523.888804-9-patrick.rudolph@9elements.com>
+ Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v9 09/37] acpi: acpi_table: Bump revisions
+Date: Wed, 16 Oct 2024 08:03:55 +0200
+Message-ID: <20241016060523.888804-10-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241016060523.888804-1-patrick.rudolph@9elements.com>
 References: <20241016060523.888804-1-patrick.rudolph@9elements.com>
@@ -95,225 +95,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new method to acpi_ops to let drivers fill out ACPI MADT.
-The code is unused for now until drivers implement the new ops.
+The FADT structure found in U-Boot represents FADT revision 6 and the
+GICC and GICD structures defined in U-Boot are based on ACPI revision
+6.3.
 
-TEST: Booted on QEMU sbsa using driver model generated MADT.
+Bump the table revision to fix FWTS failures seen on aarch64.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Cc: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>
 ---
-Changelog v4:
-- Drop __weak attribute and make driver model mandatory on Arm
-Changelog v8:
-- Rebase on -next
----
- arch/arm/lib/acpi_table.c | 13 ++++++++++++
- drivers/core/acpi.c       | 16 +++++++++++++++
- include/dm/acpi.h         | 26 +++++++++++++++++++++++
- lib/acpi/acpi_table.c     |  2 +-
- test/dm/acpi.c            | 43 +++++++++++++++++++++++++++++++++++++++
- 5 files changed, 99 insertions(+), 1 deletion(-)
+ arch/x86/cpu/tangier/acpi.c | 2 --
+ include/acpi/acpi_table.h   | 3 ++-
+ lib/acpi/acpi_table.c       | 7 ++++---
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm/lib/acpi_table.c b/arch/arm/lib/acpi_table.c
-index 286ed7ceca..e0add04926 100644
---- a/arch/arm/lib/acpi_table.c
-+++ b/arch/arm/lib/acpi_table.c
-@@ -11,6 +11,8 @@
- #include <acpi/acpigen.h>
- #include <acpi/acpi_device.h>
- #include <acpi/acpi_table.h>
-+#include <dm/acpi.h>
-+#include <dm/uclass.h>
- 
- void acpi_write_madt_gicc(struct acpi_madt_gicc *gicc, uint cpu_num,
- 			  uint perf_gsiv, ulong phys_base, ulong gicv,
-@@ -112,3 +114,14 @@ int acpi_pptt_add_cache(struct acpi_ctx *ctx, const u32 flags,
- 
- 	return offset;
- }
-+
-+void *acpi_fill_madt(struct acpi_madt *madt, struct acpi_ctx *ctx)
-+{
-+	uclass_probe_all(UCLASS_CPU);
-+	uclass_probe_all(UCLASS_IRQ);
-+
-+	/* All SoCs must use the driver model */
-+	acpi_fill_madt_subtbl(ctx);
-+
-+	return ctx->current;
-+}
-diff --git a/drivers/core/acpi.c b/drivers/core/acpi.c
-index 9f78422892..4763963914 100644
---- a/drivers/core/acpi.c
-+++ b/drivers/core/acpi.c
-@@ -48,6 +48,7 @@ enum method_t {
- 	METHOD_FILL_SSDT,
- 	METHOD_INJECT_DSDT,
- 	METHOD_SETUP_NHLT,
-+	METHOD_FILL_MADT,
- };
- 
- /* Prototype for all methods */
-@@ -282,6 +283,8 @@ acpi_method acpi_get_method(struct udevice *dev, enum method_t method)
- 		switch (method) {
- 		case METHOD_WRITE_TABLES:
- 			return aops->write_tables;
-+		case METHOD_FILL_MADT:
-+			return aops->fill_madt;
- 		case METHOD_FILL_SSDT:
- 			return aops->fill_ssdt;
- 		case METHOD_INJECT_DSDT:
-@@ -328,6 +331,19 @@ int acpi_recurse_method(struct acpi_ctx *ctx, struct udevice *parent,
- 	return 0;
+diff --git a/arch/x86/cpu/tangier/acpi.c b/arch/x86/cpu/tangier/acpi.c
+index 3d11787861..8ea764f7cc 100644
+--- a/arch/x86/cpu/tangier/acpi.c
++++ b/arch/x86/cpu/tangier/acpi.c
+@@ -28,8 +28,6 @@ void acpi_fill_fadt(struct acpi_fadt *fadt)
+ 		ACPI_FADT_POWER_BUTTON | ACPI_FADT_SLEEP_BUTTON |
+ 		ACPI_FADT_SEALED_CASE | ACPI_FADT_HEADLESS |
+ 		ACPI_FADT_HW_REDUCED_ACPI;
+-	fadt->header.revision = 6;
+-	fadt->minor_revision = 2;
  }
  
-+int acpi_fill_madt_subtbl(struct acpi_ctx *ctx)
-+{
-+	int ret;
-+
-+	log_debug("Writing MADT table\n");
-+	ret = acpi_recurse_method(ctx, dm_root(), METHOD_FILL_MADT, TYPE_NONE);
-+	log_debug("Writing MADT finished, err=%d\n", ret);
-+	if (ret)
-+		return log_msg_ret("build", ret);
-+
-+	return ret;
-+}
-+
- int acpi_fill_ssdt(struct acpi_ctx *ctx)
- {
- 	void *start = ctx->current;
-diff --git a/include/dm/acpi.h b/include/dm/acpi.h
-index 3adfe21767..d6bc0c099a 100644
---- a/include/dm/acpi.h
-+++ b/include/dm/acpi.h
-@@ -146,6 +146,22 @@ struct acpi_ops {
- 	 */
- 	int (*write_tables)(const struct udevice *dev, struct acpi_ctx *ctx);
+ void *acpi_fill_madt(struct acpi_madt *madt, struct acpi_ctx *ctx)
+diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+index 7d994a985f..48f8ce248f 100644
+--- a/include/acpi/acpi_table.h
++++ b/include/acpi/acpi_table.h
+@@ -290,7 +290,8 @@ struct __packed acpi_fadt {
+ #define ACPI_MADT_REV_ACPI_3_0		2
+ #define ACPI_MADT_REV_ACPI_4_0		3
+ #define ACPI_MADT_REV_ACPI_5_0		3
+-#define ACPI_MADT_REV_ACPI_6_0		5
++#define ACPI_MADT_REV_ACPI_6_2		4
++#define ACPI_MADT_REV_ACPI_6_3		5
  
-+	/**
-+	 * fill_madt() - Generate MADT sub-tables for a device
-+	 *
-+	 * This is called to create the MADT table. The method should write out
-+	 * whatever sub-table is needed by this device. It will end up in the
-+	 * MADT table.
-+	 *
-+	 * Note that this is called 'fill' because the entire contents of the
-+	 * MADT is build by calling this method on all devices.
-+	 *
-+	 * @dev: Device to write
-+	 * @ctx: ACPI context to use
-+	 * @return 0 if OK, -ve on error
-+	 */
-+	int (*fill_madt)(const struct udevice *dev, struct acpi_ctx *ctx);
-+
- 	/**
- 	 * fill_ssdt() - Generate SSDT code for a device
- 	 *
-@@ -231,6 +247,16 @@ int acpi_copy_name(char *out_name, const char *name);
-  */
- int acpi_write_dev_tables(struct acpi_ctx *ctx);
+ #define ACPI_MCFG_REV_ACPI_3_0		1
  
-+/**
-+ * acpi_fill_madt_subtbl() - Generate ACPI tables for MADT
-+ *
-+ * This is called to create the MADT sub-tables for all devices.
-+ *
-+ * @ctx: ACPI context to use
-+ * Return: 0 if OK, -ve on error
-+ */
-+int acpi_fill_madt_subtbl(struct acpi_ctx *ctx);
-+
- /**
-  * acpi_fill_ssdt() - Generate ACPI tables for SSDT
-  *
 diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index 639d78125f..5b9b4d2f29 100644
+index 5b9b4d2f29..959cac9e2e 100644
 --- a/lib/acpi/acpi_table.c
 +++ b/lib/acpi/acpi_table.c
-@@ -257,11 +257,11 @@ int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- 	header->revision = ACPI_MADT_REV_ACPI_3_0;
+@@ -63,9 +63,9 @@ int acpi_get_table_revision(enum acpi_tables table)
+ {
+ 	switch (table) {
+ 	case ACPITAB_FADT:
+-		return ACPI_FADT_REV_ACPI_3_0;
++		return ACPI_FADT_REV_ACPI_6_0;
+ 	case ACPITAB_MADT:
+-		return ACPI_MADT_REV_ACPI_3_0;
++		return ACPI_MADT_REV_ACPI_6_2;
+ 	case ACPITAB_MCFG:
+ 		return ACPI_MCFG_REV_ACPI_3_0;
+ 	case ACPITAB_TCPA:
+@@ -219,6 +219,7 @@ int acpi_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ 	memcpy(header->oem_table_id, OEM_TABLE_ID, 8);
+ 	memcpy(header->creator_id, ASLC_ID, 4);
+ 	header->creator_revision = 1;
++	fadt->minor_revision = 2;
+ 
+ 	fadt->x_firmware_ctrl = map_to_sysmem(ctx->facs);
+ 	fadt->x_dsdt = map_to_sysmem(ctx->dsdt);
+@@ -254,7 +255,7 @@ int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ 	/* Fill out header fields */
+ 	acpi_fill_header(header, "APIC");
+ 	header->length = sizeof(struct acpi_madt);
+-	header->revision = ACPI_MADT_REV_ACPI_3_0;
++	header->revision = acpi_get_table_revision(ACPITAB_MADT);
  
  	acpi_inc(ctx, sizeof(struct acpi_madt));
-+	/* TODO: Get rid of acpi_fill_madt and use driver model */
- 	current = acpi_fill_madt(madt, ctx);
- 
- 	/* (Re)calculate length and checksum */
- 	header->length = (uintptr_t)current - (uintptr_t)madt;
--
- 	header->checksum = table_compute_checksum((void *)madt, header->length);
- 	acpi_add_table(ctx, madt);
- 	ctx->current = (void *)madt + madt->header.length;
-diff --git a/test/dm/acpi.c b/test/dm/acpi.c
-index 7ccd7f8d20..39a26bbb49 100644
---- a/test/dm/acpi.c
-+++ b/test/dm/acpi.c
-@@ -95,6 +95,21 @@ static int testacpi_get_name(const struct udevice *dev, char *out_name)
- 		return acpi_copy_name(out_name, ACPI_TEST_DEV_NAME);
- }
- 
-+static int testacpi_fill_madt(const struct udevice *dev, struct acpi_ctx *ctx)
-+{
-+	u64 *data = ctx->current;
-+
-+	/* Only fill madt once */
-+	if (device_get_uclass_id(dev->parent) != UCLASS_TEST_ACPI)
-+		return 0;
-+
-+	*data = 0xdeadbeef;
-+
-+	acpi_inc(ctx, sizeof(u64));
-+
-+	return 0;
-+}
-+
- static int testacpi_fill_ssdt(const struct udevice *dev, struct acpi_ctx *ctx)
- {
- 	const char *data;
-@@ -124,6 +139,7 @@ static int testacpi_inject_dsdt(const struct udevice *dev, struct acpi_ctx *ctx)
- struct acpi_ops testacpi_ops = {
- 	.get_name	= testacpi_get_name,
- 	.write_tables	= testacpi_write_tables,
-+	.fill_madt	= testacpi_fill_madt,
- 	.fill_ssdt	= testacpi_fill_ssdt,
- 	.inject_dsdt	= testacpi_inject_dsdt,
- };
-@@ -527,6 +543,33 @@ static int dm_test_acpi_fill_ssdt(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_acpi_fill_ssdt, UTF_SCAN_PDATA | UTF_SCAN_FDT);
- 
-+/* Test acpi_fill_madt() */
-+static int dm_test_acpi_fill_madt(struct unit_test_state *uts)
-+{
-+	struct acpi_ctx ctx;
-+	u64 *buf;
-+
-+	buf = malloc(BUF_SIZE);
-+	ut_assertnonnull(buf);
-+
-+	acpi_reset_items();
-+	ctx.current = buf;
-+	buf[1] = 'z';	/* sentinel */
-+	ut_assertok(acpi_fill_madt_subtbl(&ctx));
-+
-+	/*
-+	 * These values come from acpi-test2's acpi-ssdt-test-data property.
-+	 * This device comes first because of u-boot,acpi-ssdt-order
-+	 */
-+	ut_asserteq(0xdeadbeef, buf[0]);
-+
-+	ut_asserteq('z', buf[1]);
-+
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_acpi_fill_madt, UTF_SCAN_PDATA | UTF_SCAN_FDT);
-+
- /* Test acpi_inject_dsdt() */
- static int dm_test_acpi_inject_dsdt(struct unit_test_state *uts)
- {
+ 	/* TODO: Get rid of acpi_fill_madt and use driver model */
 -- 
 2.46.2
 
