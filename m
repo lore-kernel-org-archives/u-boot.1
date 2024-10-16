@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF05FD1AD3E
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 10:05:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0325D1AD3E
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 10:05:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1551B88FE2;
-	Wed, 16 Oct 2024 12:05:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7A2EF88FED;
+	Wed, 16 Oct 2024 12:05:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wAwU4KW1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Iqcmbf1i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7D7D88FD8; Wed, 16 Oct 2024 12:05:01 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 9ABB68900B; Wed, 16 Oct 2024 12:05:03 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BD7788FE2
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 12:04:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48FCC88FF1
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 12:04:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-43055b43604so61549325e9.3
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 03:04:59 -0700 (PDT)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-539f8490856so3392520e87.2
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 03:04:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729073099; x=1729677899; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729073095; x=1729677895; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Oq/ytua7g803f9pLufOWH8O9AXAp7Vi9C+sYz9GE3+M=;
- b=wAwU4KW1oqUwhOgburrpwVoF9hhwDet5Ulf0t4coLdsmwTqWUjI5TvqKsEy/Ojr7Oi
- oZ5CIV0ma3CwhcW9RHX3xD+9Mkgjs22R9QbBbp4WSIgrv3uI2GWds+8qUnfyOnE2QEkM
- sY1vEIqmVrn+GTLbZbs0c344p5lPROxH6Zoqt192UrHArSP95X2sgIQrymc4ZW/ywZwn
- Z3bKC3PBBYkKfk60d8YKiYQ9kfhkVQBK0F0q1/PH4Q/MFH942aCeaw2G8acfvodPDOTy
- nfIRdQrex9wsils+tHgSGKF+JLfSNGsJHkzwKGsdUle4hKtewV4DsJZRa2wJOQ5uqXRw
- YTbQ==
+ bh=faheA9ipuCMxyKpZyBroaFBcMuTa6BH6eUOSG4QJjNo=;
+ b=Iqcmbf1iKDzvEvw/v8jhyQRJ090j9hxCOjyg8nX4rxF89o1kwSG7Z6g7E5H5zOqeH9
+ C0/a68sd6erL7iGPfn3bfQpmxgq/E/aZCuQqwPG29Y4qVQlOQikrONvOO893r+lUVF9p
+ f1wWgISPWlQAe+YARKVnd3xWfeN8ThqGmFeQP0gj6drITkyQ1VYWArTHVg9BT3cEx6nD
+ Df8EGnzQDgifvcdHv/VxmbrX2jYKufGNt33MauYREnQbrxr2UutcF+JkKqz4a89KcSyh
+ xO8FLbw4cUV4NzTKI35f/rEFdS/cXn8jBbQuKGGAKw90w/RcaK7FLvJSDxihN/mabWed
+ BP1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729073099; x=1729677899;
+ d=1e100.net; s=20230601; t=1729073095; x=1729677895;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Oq/ytua7g803f9pLufOWH8O9AXAp7Vi9C+sYz9GE3+M=;
- b=OxDHPhOVJPD0RCxLJzPUwbWxDDPxCGwBksck3jUGVRWceLNf831X/QO6C/BLiPraT4
- qcjkMzV+3/hTkVTgN5RIn0+TlYZ6U9V7Er7pCKevPvsLUExVwEEcpQmuwRxO5NED9+4C
- kNY7Gst1tivXHhEFyufGbInHn3ZB87+FXiMxYo35pax1Vfe0TJWh0AgF1hP118eDVgcM
- ZRtHNS0Y6rzJGC1We7wcfScixxpH7vFr3jZ3FXG4DMsXydFwcHqgd9NlWCXJ+l6wLeHR
- btVxVvlqmuU0N4shm4I90qv031N1JdLD7zbqyObmlKOeAcPS37qp4VJYYZNnAsfQ+yDA
- jjDA==
-X-Gm-Message-State: AOJu0YzgeQ7/w3HvGMhkDKlSDYesW6EuFQTioVeNas4Vmx2/BAf69RIX
- NNfNjlrrAm1XaGAoMmM/gVjgTygGj03js0qkNjeBix9N1ns4JfH0YejdrWkxp9Ji78mcEzWkZMj
- lSB7LTn/+
-X-Google-Smtp-Source: AGHT+IHaDYP+15e71dmt3Vi2fVBNA03uef0jbfSW/SernBKHDkUI/S2OCidC4YLspqLxirhYNBrM/Q==
-X-Received: by 2002:a05:600c:45ce:b0:430:5356:ac92 with SMTP id
- 5b1f17b1804b1-4314a295475mr31046195e9.7.1729073098780; 
- Wed, 16 Oct 2024 03:04:58 -0700 (PDT)
+ bh=faheA9ipuCMxyKpZyBroaFBcMuTa6BH6eUOSG4QJjNo=;
+ b=ViclFH3Idnq9l9KTCaeUI0w4KTtWnQ5YtGatDG3qFUfTVKQ/fF0ONo8UzwRzQm/UTY
+ EAnj6nXl17x2LtFkn4sbIvhi/KoUL9nRyyRh/XfphVh3A4nsJ7OssOfOX5yICbJ9u0j0
+ xfVggMoWujrf5o5+YxyjNiR5hkHh7LAlEVChXOTY7QB0NoGzyudyMEwycRYpZg3iWeYn
+ 6L3fmBNedB9DdaFLaC/s8AiRpkE0Ze9rBiFCzbsaTzlMahZPTKDLY7DeG3A8eEuzcKGX
+ St9lUeG4koApo1tlzhyYkUROqZTb6QlZw70S41RYrH8o6u+1cqGYlK7PuETems4LC90H
+ DByQ==
+X-Gm-Message-State: AOJu0YzjFeXPBPDIEWSGVC8TCfvKOnGqFzIAKG2zOILcoFX34cLUBgBG
+ Ny0YbbUrykGOjINM2uPxe6XarhvFxm/G2wU1H0tHX8/cdJ8Q7hmGbxaEL4MWhr1yeLF9BRLQGy9
+ 5Xb6oqbQW
+X-Google-Smtp-Source: AGHT+IFjQ2tDOh2zPnRIlttObrmCv05m0nGkVUsBORQ1RMerKTzJBdF+PVDewGKJawekRvDzQTwmBg==
+X-Received: by 2002:a05:6512:114f:b0:535:6992:f2cb with SMTP id
+ 2adb3069b0e04-539da586e45mr8919786e87.42.1729073095199; 
+ Wed, 16 Oct 2024 03:04:55 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4313f56f241sm44634515e9.22.2024.10.16.03.04.57
+ 5b1f17b1804b1-4313f56f241sm44634515e9.22.2024.10.16.03.04.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2024 03:04:58 -0700 (PDT)
+ Wed, 16 Oct 2024 03:04:54 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -72,17 +72,11 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sean Anderson <seanga2@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v13 11/21] net: lwip: add TFTP support and tftpboot command
-Date: Wed, 16 Oct 2024 12:04:05 +0200
-Message-Id: <8c39fc77f1bf905645d701d21aee2482065f296c.1729070678.git.jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v13 10/21] net: lwip: tftp: bind to TFTP port only when in
+ server mode
+Date: Wed, 16 Oct 2024 12:04:04 +0200
+Message-Id: <5484ceb32b3ddbe7cafd997a45cfddec5c8acbbd.1729070678.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1729070678.git.jerome.forissier@linaro.org>
 References: <cover.1729070678.git.jerome.forissier@linaro.org>
@@ -104,457 +98,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement do_tftpb(). This implementation of the tftp command
-supports an optional port number. For example:
+The TFTP app should not bind to the TFTP server port when configured as
+a client. Instead, the local port should be chosen from the dynamic
+range (49152 ~ 65535) so that if the application is stopped and started
+again, the remote server will not consider the new packets as part of
+the same context (which would cause an error since a new RRQ would be
+unexpected).
 
- tftp 192.168.0.30:9069:file.bin
-
-It also supports taking the server IP from ${tftpserverip} if
-defined, before falling back to ${serverip}.
+Submitted upstream: https://savannah.nongnu.org/patch/?10480
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- cmd/Kconfig          |   3 +-
- cmd/net-lwip.c       |   8 ++
- include/net-common.h |   4 +
- include/net-lwip.h   |   4 +
- lib/binman.c         |   1 +
- net/lwip/dhcp.c      |  11 +-
- net/lwip/net-lwip.c  |  16 +++
- net/lwip/tftp.c      | 283 ++++++++++++++++++++++++++++++++++++++++++-
- 8 files changed, 324 insertions(+), 6 deletions(-)
+ lib/lwip/lwip/src/apps/tftp/tftp.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 211be398937..7173f3da0b0 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2110,10 +2110,9 @@ config CMD_MDIO
- config CMD_TFTPBOOT
- 	bool "tftp"
- 	select PROT_UDP_LWIP if NET_LWIP
--	default n
-+	default y
- 	help
- 	  tftpboot - load file via network using TFTP protocol
--	  Currently a placeholder (not implemented) when NET_LWIP=y.
+diff --git a/lib/lwip/lwip/src/apps/tftp/tftp.c b/lib/lwip/lwip/src/apps/tftp/tftp.c
+index ddfdbfc0c1b..74fc1fbe586 100644
+--- a/lib/lwip/lwip/src/apps/tftp/tftp.c
++++ b/lib/lwip/lwip/src/apps/tftp/tftp.c
+@@ -454,10 +454,12 @@ tftp_init_common(u8_t mode, const struct tftp_context *ctx)
+     return ERR_MEM;
+   }
  
- endif  # if CMD_NET
+-  ret = udp_bind(pcb, IP_ANY_TYPE, TFTP_PORT);
+-  if (ret != ERR_OK) {
+-    udp_remove(pcb);
+-    return ret;
++  if (mode == LWIP_TFTP_MODE_SERVER) {
++    ret = udp_bind(pcb, IP_ANY_TYPE, TFTP_PORT);
++    if (ret != ERR_OK) {
++      udp_remove(pcb);
++      return ret;
++    }
+   }
  
-diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
-index 82edb5fd2e6..80f0872bb8f 100644
---- a/cmd/net-lwip.c
-+++ b/cmd/net-lwip.c
-@@ -11,3 +11,11 @@ U_BOOT_CMD(
-         "[loadAddress] [[hostIPaddr:]bootfilename]"
- );
- #endif
-+
-+#if defined(CONFIG_CMD_TFTPBOOT)
-+U_BOOT_CMD(
-+	tftpboot,	3,	0,	do_tftpb,
-+	"boot image via network using TFTP protocol\n",
-+	"[loadAddress] [[hostIPaddr:]bootfilename]"
-+);
-+#endif
-diff --git a/include/net-common.h b/include/net-common.h
-index cbcac178c82..fd7c5e7b488 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -459,6 +459,10 @@ static inline struct in_addr env_get_ip(char *var)
- 
- int net_init(void);
- 
-+/* NET compatibility */
-+enum proto_t;
-+int net_loop(enum proto_t protocol);
-+
- /**
-  * dhcp_run() - Run DHCP on the current ethernet device
-  *
-diff --git a/include/net-lwip.h b/include/net-lwip.h
-index cfd06726577..37744b0e2cd 100644
---- a/include/net-lwip.h
-+++ b/include/net-lwip.h
-@@ -6,6 +6,10 @@
- #include <lwip/ip4.h>
- #include <lwip/netif.h>
- 
-+enum proto_t {
-+	TFTPGET
-+};
-+
- struct netif *net_lwip_new_netif(struct udevice *udev);
- struct netif *net_lwip_new_netif_noip(struct udevice *udev);
- void net_lwip_remove_netif(struct netif *netif);
-diff --git a/lib/binman.c b/lib/binman.c
-index 9047f5275f3..93d85548116 100644
---- a/lib/binman.c
-+++ b/lib/binman.c
-@@ -137,6 +137,7 @@ int binman_init(void)
- {
- 	int ret;
- 
-+	return 0;
- 	binman = malloc(sizeof(struct binman_info));
- 	if (!binman)
- 		return log_msg_ret("space for binman", -ENOMEM);
-diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-index a2cc25d88f5..23b56226921 100644
---- a/net/lwip/dhcp.c
-+++ b/net/lwip/dhcp.c
-@@ -119,11 +119,20 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- int dhcp_run(ulong addr, const char *fname, bool autoload)
- {
- 	char *dhcp_argv[] = {"dhcp", NULL, };
-+#ifdef CONFIG_CMD_TFTPBOOT
-+	char *tftp_argv[] = {"tftpboot", boot_file_name, NULL, };
-+#endif
- 	struct cmd_tbl cmdtp = {};	/* dummy */
- 
- 	if (autoload) {
--		/* Will be supported when TFTP is added */
-+#ifdef CONFIG_CMD_TFTPBOOT
-+		/* Assume DHCP was already performed */
-+		if (boot_file_name[0])
-+			return do_tftpb(&cmdtp, 0, 2, tftp_argv);
-+		return 0;
-+#else
- 		return -EOPNOTSUPP;
-+#endif
- 	}
- 
- 	return do_dhcp(&cmdtp, 0, 1, dhcp_argv);
-diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index 3b08ffe3b74..5c2bb2e0361 100644
---- a/net/lwip/net-lwip.c
-+++ b/net/lwip/net-lwip.c
-@@ -28,6 +28,7 @@ const u8 net_bcast_ethaddr[6] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
- char *pxelinux_configfile;
- /* Our IP addr (0 = unknown) */
- struct in_addr	net_ip;
-+char net_boot_file_name[1024];
- 
- static err_t linkoutput(struct netif *netif, struct pbuf *p)
- {
-@@ -283,6 +284,21 @@ void net_process_received_packet(uchar *in_packet, int len)
- #endif
- }
- 
-+int net_loop(enum proto_t protocol)
-+{
-+	char *argv[1];
-+
-+	switch (protocol) {
-+	case TFTPGET:
-+		argv[0] = "tftpboot";
-+		return do_tftpb(NULL, 0, 1, argv);
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	return -EINVAL;
-+}
-+
- u32_t sys_now(void)
- {
- 	return get_timer(0);
-diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-index 1fa246f55d9..26978643313 100644
---- a/net/lwip/tftp.c
-+++ b/net/lwip/tftp.c
-@@ -2,10 +2,287 @@
- /* Copyright (C) 2024 Linaro Ltd. */
- 
- #include <command.h>
--#include <net-lwip.h>
-+#include <console.h>
-+#include <display_options.h>
-+#include <dm/device.h>
-+#include <efi_loader.h>
-+#include <image.h>
-+#include <linux/delay.h>
-+#include <lwip/apps/tftp_client.h>
-+#include <lwip/timeouts.h>
-+#include <mapmem.h>
-+#include <net.h>
-+#include <time.h>
-+
-+#define PROGRESS_PRINT_STEP_BYTES (10 * 1024)
-+
-+enum done_state {
-+	NOT_DONE = 0,
-+	SUCCESS,
-+	FAILURE,
-+	ABORTED
-+};
-+
-+struct tftp_ctx {
-+	ulong daddr;
-+	ulong size;
-+	ulong block_count;
-+	ulong start_time;
-+	enum done_state done;
-+};
-+
-+static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
-+{
-+	return NULL;
-+}
-+
-+static void tftp_close(void *handle)
-+{
-+	struct tftp_ctx *ctx = handle;
-+	ulong elapsed;
-+
-+	if (ctx->done == FAILURE || ctx->done == ABORTED) {
-+		/* Closing after an error or Ctrl-C */
-+		return;
-+	}
-+	ctx->done = SUCCESS;
-+
-+	elapsed = get_timer(ctx->start_time);
-+	if (elapsed > 0) {
-+		puts("\n\t ");	/* Line up with "Loading: " */
-+		print_size(ctx->size / elapsed * 1000, "/s");
-+	}
-+	puts("\ndone\n");
-+	printf("Bytes transferred = %lu (%lx hex)\n", ctx->size, ctx->size);
-+
-+	if (env_set_hex("filesize", ctx->size)) {
-+		log_err("filesize not updated\n");
-+		return;
-+	}
-+}
-+
-+static int tftp_read(void *handle, void *buf, int bytes)
-+{
-+	return 0;
-+}
-+
-+static int tftp_write(void *handle, struct pbuf *p)
-+{
-+	struct tftp_ctx *ctx = handle;
-+	struct pbuf *q;
-+
-+	for (q = p; q != NULL; q = q->next) {
-+		memcpy((void *)ctx->daddr, q->payload, q->len);
-+		ctx->daddr += q->len;
-+		ctx->size += q->len;
-+		ctx->block_count++;
-+		if (ctx->block_count % 10 == 0) {
-+			putc('#');
-+			if (ctx->block_count % (65 * 10) == 0)
-+				puts("\n\t ");
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+static void tftp_error(void *handle, int err, const char *msg, int size)
-+{
-+	struct tftp_ctx *ctx = handle;
-+	char message[100];
-+
-+	ctx->done = FAILURE;
-+	memset(message, 0, sizeof(message));
-+	memcpy(message, msg, LWIP_MIN(sizeof(message) - 1, (size_t)size));
-+
-+	printf("\nTFTP error: %d (%s)\n", err, message);
-+}
-+
-+static const struct tftp_context tftp_context = {
-+	tftp_open,
-+	tftp_close,
-+	tftp_read,
-+	tftp_write,
-+	tftp_error
-+};
-+
-+static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
-+		     ip_addr_t srvip, uint16_t srvport)
-+{
-+	struct netif *netif;
-+	struct tftp_ctx ctx;
-+	err_t err;
-+
-+	if (!fname || addr == 0)
-+		return -1;
-+
-+	if (!srvport)
-+		srvport = TFTP_PORT;
-+
-+	netif = net_lwip_new_netif(udev);
-+	if (!netif)
-+		return -1;
-+
-+	ctx.done = NOT_DONE;
-+	ctx.size = 0;
-+	ctx.block_count = 0;
-+	ctx.daddr = addr;
-+
-+	printf("Using %s device\n", udev->name);
-+	printf("TFTP from server %s; our IP address is %s\n",
-+		 ip4addr_ntoa(&srvip), env_get("ipaddr"));
-+	printf("Filename '%s'.\n", fname);
-+	printf("Load address: 0x%lx\n", ctx.daddr);
-+	printf("Loading: ");
-+
-+	err = tftp_init_client(&tftp_context);
-+	if (!(err == ERR_OK || err == ERR_USE))
-+		log_err("tftp_init_client err: %d\n", err);
-+
-+	ctx.start_time = get_timer(0);
-+	err = tftp_get(&ctx, &srvip, srvport, fname, TFTP_MODE_OCTET);
-+	/* might return different errors, like routing problems */
-+	if (err != ERR_OK) {
-+		printf("tftp_get() error %d\n", err);
-+		net_lwip_remove_netif(netif);
-+		return -1;
-+	}
-+
-+	while (!ctx.done) {
-+		net_lwip_rx(udev, netif);
-+		sys_check_timeouts();
-+		if (ctrlc()) {
-+			printf("\nAbort\n");
-+			ctx.done = ABORTED;
-+			break;
-+		}
-+	}
-+
-+	tftp_cleanup();
-+
-+	net_lwip_remove_netif(netif);
-+
-+	if (ctx.done == SUCCESS) {
-+		if (env_set_hex("fileaddr", addr)) {
-+			log_err("fileaddr not updated\n");
-+			return -1;
-+		}
-+		efi_set_bootdev("Net", "", fname, map_sysmem(addr, 0),
-+				ctx.size);
-+		return 0;
-+	}
-+
-+	return -1;
-+}
- 
- int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
--	/* Not implemented */
--	return CMD_RET_FAILURE;
-+	int ret = CMD_RET_SUCCESS;
-+	char *arg = NULL;
-+	char *words[3] = { };
-+	char *fname = NULL;
-+	char *server_ip = NULL;
-+	char *server_port = NULL;
-+	char *end;
-+	ip_addr_t srvip;
-+	uint16_t port = TFTP_PORT;
-+	ulong laddr;
-+	ulong addr;
-+	int i;
-+
-+	laddr = env_get_ulong("loadaddr", 16, image_load_addr);
-+
-+	switch (argc) {
-+	case 1:
-+		fname = env_get("bootfile");
-+		break;
-+	case 2:
-+		/*
-+		 * Only one arg - accept two forms:
-+		 * Just load address, or just boot file name. The latter
-+		 * form must be written in a format which can not be
-+		 * mis-interpreted as a valid number.
-+		 */
-+		addr = hextoul(argv[1], &end);
-+		if (end == (argv[1] + strlen(argv[1]))) {
-+			laddr = addr;
-+			fname = env_get("bootfile");
-+		} else {
-+			arg = strdup(argv[1]);
-+		}
-+		break;
-+	case 3:
-+		laddr = hextoul(argv[1], NULL);
-+		arg = strdup(argv[2]);
-+		break;
-+	default:
-+		ret = CMD_RET_USAGE;
-+		goto out;
-+	}
-+
-+	if (!arg)
-+		arg = net_boot_file_name;
-+
-+	if (arg) {
-+		/* Parse [ip:[port:]]fname */
-+		i = 0;
-+		while ((*(words + i) = strsep(&arg,":")))
-+			i++;
-+
-+		switch (i) {
-+		case 3:
-+			server_ip = words[0];
-+			server_port = words[1];
-+			fname = words[2];
-+			break;
-+		case 2:
-+			server_ip = words[0];
-+			fname = words[1];
-+			break;
-+		case 1:
-+			fname = words[0];
-+			break;
-+		default:
-+			break;
-+		}
-+	}
-+
-+	if (!server_ip)
-+		server_ip = env_get("tftpserverip");
-+	if (!server_ip)
-+		server_ip = env_get("serverip");
-+	if (!server_ip) {
-+		log_err("error: tftpserverip/serverip has to be set\n");
-+		ret = CMD_RET_FAILURE;
-+		goto out;
-+	}
-+
-+	if (server_port)
-+		port = dectoul(server_port, NULL);
-+
-+	if (!ipaddr_aton(server_ip, &srvip)) {
-+		log_err("error: ipaddr_aton\n");
-+		ret = CMD_RET_FAILURE;
-+		goto out;
-+	}
-+
-+	if (!fname) {
-+		log_err("error: no file name\n");
-+		ret = CMD_RET_FAILURE;
-+		goto out;
-+	}
-+
-+	if (!laddr) {
-+		log_err("error: no load address\n");
-+		ret = CMD_RET_FAILURE;
-+		goto out;
-+	}
-+
-+	eth_set_current();
-+
-+	if (tftp_loop(eth_get_dev(), laddr, fname, srvip, port) < 0)
-+		ret = CMD_RET_FAILURE;
-+out:
-+	free(arg);
-+	return ret;
- }
+   tftp_state.handle    = NULL;
 -- 
 2.40.1
 
