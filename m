@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52A47D2A538
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:06:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CE52D2A538
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:07:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD42088D9A;
-	Wed, 16 Oct 2024 20:06:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B07D887D1A;
+	Wed, 16 Oct 2024 20:07:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n3bbEN7C";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qp1J48Ci";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5114D88D91; Wed, 16 Oct 2024 20:06:10 +0200 (CEST)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id 0596487D1A; Wed, 16 Oct 2024 20:07:26 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52A0988DBA
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:06:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D714188D91
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:07:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7b13b3fa372so8635185a.0
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 11:06:06 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6cbf2fc28feso757066d6.0
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 11:07:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729101965; x=1729706765; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1729102041; x=1729706841; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LN1jRVLFsk87oe9QLdST/0NUZ6JdRWClw5WR3kcLQC8=;
- b=n3bbEN7Cs73iMun6gOzRLVzOPIZS7yY3gxjLPMoPpuCLrjwRlhxjFz44U3yd3seThO
- 6FbgSTbBh4Xk4VP3I/2WU1687C4d2YCXhfdyYmlnw/RNsuu1r5MpqPQ9wFQa4mc3xi0q
- HXgXUOcL29w4ktJ6ysjoNLUXIyctGbBi6cAw8=
+ bh=mMAXUHfajEE2KjuMHDNzaqc59QUPylzAFhCKXzTx3Ic=;
+ b=Qp1J48Ci4j5dWGVvK1i1YkvWb1MvTIpvUpyf0gRFH7nyxhgGie4SLDkSjJCtCn9E+E
+ 3QvZeiGI3QAuuSWffKM/5MeRoCOQSfKeY5jtWsduj4FI70QyHgDPPOrzB+VeuShh4xOP
+ JzQq9EauMvSzTvKn51KN82qsgHjGJVrhiCaEg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729101965; x=1729706765;
+ d=1e100.net; s=20230601; t=1729102041; x=1729706841;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LN1jRVLFsk87oe9QLdST/0NUZ6JdRWClw5WR3kcLQC8=;
- b=NBC77fPNrJLW/ffe4Q2EJ0Rb4GwwAN7oiK9mgRXKmYOxBwsVomF2SHo8hU8Mw7oxZj
- BBqsL1rwWHZzDT805/x7FCPBHfholoO0LkyBOVsxa2SB7123DZYgN05RUAo/aZ5oAmKk
- Ab0OFu8x0DN9yB83txQL1kjwyVc4acDcirTOs+3m0eaHf7WtJBgyXCcYCs11nwjahFSj
- /mNptnG8kEWBJBtYpszpt7yW7LC9XQdBbJhbQzJe0LsMqclP+jm/XhS+WFw6g245Ye9f
- c3agBzckwrZHn+z2J0o8iFEWUyZf2pqOkbNWzWiVGXY4Tp1QsbdYkgUVC+LJd+PoXNnr
- QFHQ==
+ bh=mMAXUHfajEE2KjuMHDNzaqc59QUPylzAFhCKXzTx3Ic=;
+ b=vG6zwfxWbDia+fil+Ag+xWDkn530d6qBsNoA37PV+9qih5TfTX4CR4tLgu4YlR81Qq
+ BNxnjQJ4SaWuIaeGqTFrrptAbb7l2FbcTdI560/+gbKlTntZnrTmUcioo4juuhuLEs2s
+ KNGQjrB3Ol/dAw/Gp+hRO1DoyjcN2lARfabCgWX3Lf3altYQ2rcOpjViFZYOr5pVJmLS
+ Q1C89IcrH6YhJZY9naE/SUo/K87MJdwHdI/Lgwa+8CzjQV9/Wap9HcHma/Y9/CmNX+6q
+ yTmoBqQeOjjY9TcfTZ8WPFOumpIUXcE9GPvPuRYJwoULHRxr0yv9/R48a3+zBZhB2bLe
+ FZSQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUSi/bCSbE9K57K2kO2EBZX0FpQcbIuHgYB4E8tzX5FGTA+G3miOVZVydLnvLEd8Et/Lcquyas=@lists.denx.de
-X-Gm-Message-State: AOJu0YxaL5V4RJ/pD0CVhSpJ3lth3OhMrSCM/feZXSW2JKDWaXqVFHg7
- joCV2gb/YsjQxBFMP0GqATRDtH4XLTrBBk5ZPtdh1LmJX1CNHMoPoqZ4obv3zeY=
-X-Google-Smtp-Source: AGHT+IEpnYddZ3GwW6bvkxicjzskvFfwZbMMA7Cchi8sC82ThC2pD3y3phd9zCl+oRh1tpC1uD/IOg==
-X-Received: by 2002:a05:620a:41c:b0:7b1:4579:80ea with SMTP id
- af79cd13be357-7b145798123mr227599885a.60.1729101965064; 
- Wed, 16 Oct 2024 11:06:05 -0700 (PDT)
+ AJvYcCVsX7cRpjCI23tD0tDRSKZnn++KRUFeNTegqOGBFuO1Q+1aK0zFfPGBLV0FDvkjMCKoX7m+jGU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzoGenF2kIO7u9F2ZRYa8JiFgCcrD5ST0TJSlqcyT44iSh5x8ig
+ 4NfriSRHir91sMdZwv6S+fw93sGpP1nqHAAS5eSpLem1gJGeTuzGvKkmKHCN2Kc=
+X-Google-Smtp-Source: AGHT+IHIH6/JQrzBihXH78OuhRXdQCvwOhwtvTw+2a1o8tcZZqqYMcQaj7fPUsbR/tDJ85Izfq7dFg==
+X-Received: by 2002:a05:6214:428a:b0:6cb:e53d:dd7 with SMTP id
+ 6a1803df08f44-6cc2b8d1747mr68334396d6.19.1729102040574; 
+ Wed, 16 Oct 2024 11:07:20 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b1363952c9sm211039185a.97.2024.10.16.11.06.02
+ 6a1803df08f44-6cc22924381sm20319266d6.52.2024.10.16.11.07.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2024 11:06:03 -0700 (PDT)
-Date: Wed, 16 Oct 2024 12:06:00 -0600
+ Wed, 16 Oct 2024 11:07:19 -0700 (PDT)
+Date: Wed, 16 Oct 2024 12:07:16 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Alice Guo <alice.guo@oss.nxp.com>
 Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  Marek Vasut <marex@denx.de>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Peng Fan <peng.fan@nxp.com>, Viorel Suman <viorel.suman@nxp.com>,
- Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>
-Subject: Re: [PATCH 01/17] mailbox: add i.MX95 Messaging Unit (MU) driver
-Message-ID: <20241016180600.GC4959@bill-the-cat>
+ Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>
+Subject: Re: [PATCH 08/17] scmi_protocols: update struct
+ scmi_base_discover_list_protocols_out
+Message-ID: <20241016180716.GD4959@bill-the-cat>
 References: <20241016-imx95-v1-0-f640c8f3bc1b@oss.nxp.com>
- <20241016-imx95-v1-1-f640c8f3bc1b@oss.nxp.com>
+ <20241016-imx95-v1-8-f640c8f3bc1b@oss.nxp.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="h2sYjJMC/R946mmm"
+ protocol="application/pgp-signature"; boundary="PKQqzq0kaIi62nki"
 Content-Disposition: inline
-In-Reply-To: <20241016-imx95-v1-1-f640c8f3bc1b@oss.nxp.com>
+In-Reply-To: <20241016-imx95-v1-8-f640c8f3bc1b@oss.nxp.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,55 +98,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---h2sYjJMC/R946mmm
+--PKQqzq0kaIi62nki
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 16, 2024 at 03:17:54PM +0800, Alice Guo wrote:
-> From: Peng Fan <peng.fan@nxp.com>
+On Wed, Oct 16, 2024 at 03:18:01PM +0800, Alice Guo wrote:
+> From: Ye Li <ye.li@nxp.com>
 >=20
-> i.MX95 Messaging Unit (MU) enables 2 processors on a chip to communicate
-> and coordinate by passing messages (e.g. frame information, event
-> notices and requests) through the MU interface. This patch provides a
-> driver for i.MX95 MU using the common mailbox framework. Currently, SCMI
-> exchanges on i.MX95 uses a mailbox transport with SMT format, and the
-> harware used is this MU.
->=20
-> Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> Reviewed-by: Ye Li <ye.li@nxp.com>
-> ---
->  drivers/mailbox/Kconfig       |   7 +
->  drivers/mailbox/Makefile      |   1 +
->  drivers/mailbox/imx-mailbox.c | 417 ++++++++++++++++++++++++++++++++++++=
-++++++
->  3 files changed, 425 insertions(+)
+> @protocols is an array of protocol identifiers that are implemented,
+> excluding the Base protocol. The number of elements of @protocols is
+> specified by callee-side. Currently, set it to 4 is enough for i.MX95.
 
-Fabio already noted the general MAINTAINERS missing part, but all of
-these new drivers and so forth should be covered under some entry as
-well in the top level MAINTAINERS file.
+This needs to be in the file too for documentation generation to pick
+up, thanks.
 
 --=20
 Tom
 
---h2sYjJMC/R946mmm
+--PKQqzq0kaIi62nki
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcQAIEACgkQFHw5/5Y0
-tyw4/gv/Z2HvEfCDYb5pNutv5HXGCFH2Oh6OgGNBcACG7j7otUtNa6lwT7Oe1Z+i
-SZN1lviWno78/spBOnCLi+wLGcw0//CIB2oyi2H/umeDRhgng/myjjQBo6jfqf/C
-Z5nfBSWYnhV4rVcuElSaOBBhnJeCm/TEJBJlOHiSD/dMavezHQprgtKYEylcEdWA
-oUw4RKULwSFqxVkn5W1gSYYahkDFjZdg3tQk3E4R6o5M6p9SGRSS9z4IZuOhE9ir
-bVM06YxvO1HQluNyZI/VVWlSO2ZVCnZXREPcmEGAd+CQfevzebUuCmcreKBvnRUs
-u8P5YO0iCC1BSU41Dup4qCwr1jbyUgAC2DN9G4wV988RR5IkY0vlYSvX+aHgq0xg
-O3Yt0dUPYJ0bd4+a2G+JDT8tkFxRQkIXkqiCr4YwKUGCD5aK4Vfq4EA9N7Nu3inU
-n16UlQnNTK08A1pRkEWLuOnBYqBqtHO+aHc4x+Tv8kJEjN1yrRBlum84/tKVa/CW
-+73KNGXM
-=hot4
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcQANQACgkQFHw5/5Y0
+tyzRPgv9EqarB2suwDzbk9kWRAeN2GJ/M3vPJkWPjl33iUHrRkkhHi/qtaOatCVR
+AX9Wwt/QginLtUNRi4ON8ZcwwZtUVoetyXqQwthVNT8LVywDTr9Z5pHuTakcOzBF
+5ie1Y7yy+zQ71gBxwsSYQ4N0Au5+hAfwPtvqvv3JBpOGy6O2pjRP/glZGtEbb3pz
+Hp+JhdwV+w0uJR8tC4uwpOKDYUAjntpbdBjDWd0PcO02TjGBUSmH+xVeRJtz0957
+y8BAR91d4Dk5yiAUa1M/8y90X6AG8iInr/cn7GfqOawKzU2e377wvl1bDgAsXjxB
+rJgvCG+XlIaWtoXZurB4AxKvaI83NXE0Yu+AldXwb/dr5fQtnecs3dyyW9b/I3nE
+Eh7gl+neZXorO29TM64lFB4UE7+e0dIGubhWEhZZHUUPEegdsyzMzGHSCjNrSMqm
+wyaCkPppbUoTOg8TNz5ymm0qa25d5IDwxGfdj3E+Amej+OiuVABxF0nTo1dkOdeB
+c9elazV+
+=qWmJ
 -----END PGP SIGNATURE-----
 
---h2sYjJMC/R946mmm--
+--PKQqzq0kaIi62nki--
