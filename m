@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E21BD1AD55
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 13:28:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8695D1AD55
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 13:29:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7838388BC2;
-	Wed, 16 Oct 2024 15:28:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2595F88BC2;
+	Wed, 16 Oct 2024 15:29:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OmThnPzd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IG+W9mP/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BAEE88C05; Wed, 16 Oct 2024 15:28:50 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 43CEC88CA1; Wed, 16 Oct 2024 15:29:44 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0DAB88B99
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 15:28:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF56188B99
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 15:29:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2e2b549799eso4757086a91.3
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 06:28:47 -0700 (PDT)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-7ea78037b7eso3343993a12.0
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 06:29:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729085326; x=1729690126; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729085380; x=1729690180; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6bWM5Ln2aKqQb2piOcoGDbrJU4UlN6ByuzC2EAtHJp4=;
- b=OmThnPzd4/UBro8KHdoohXTku56BR5wM3x7x7J1cVSdbrYkQ3s+y4AD9Xnqc7FuRjH
- MEsX9ylpufTb6870/p2Ms/brPmen30ZtAq2e1ZvIzSN7tcQ1BsntBlMhdpKe3vl1jB1u
- AaKlv3X8WF0Y9g6gVfqGxpnXnXgW22x2spaOHTpUzKTzN5hq4t2l9wVmPz70TED3sGvl
- Ke+qDjyDNVH0jZnDzSM1pbiDXohQ2ZQyC/zFb6lVpPnXO42xnOmk5yaHOqIZ3J/EkMVT
- mRmemntqGXQeQErUH9iYzcSIaaSo7JeOZGSnk3geDxTZzVlegYKXcLNXTd4vbcxA35vK
- FduQ==
+ bh=OWAlJyakCOArnz904W5pOsrbluUrTU33YNamPIxDDes=;
+ b=IG+W9mP/cWesfiATzD9WGnBtRt7HSfGvu8IYyutUdf/E3kIob4eXKPqory+VAYj5+K
+ TQWRLHXXAJjvPAijP8RIpI+RHElEmUyvGh6TuO5ujk2m1iPL2D+6sIoMZkD3oOC8LgC0
+ ONG8ygFsw133nuf4dhINT0nb44kC1wQcBMRvYraNM9jOVPXnrnNMNJ2dafRvttjk/Ijo
+ 1rTBKPrJwxr026aUaJz215Avu3QHnK6Eeqor+gVO793dL6fKrYg/FWshcgXzhTKC8tTz
+ +OB7W2WQiLUMeY0YpOHq9y7rQKP+1sA/pPQbv52LjPOODY4IqESjClrzuOv/I8ZtnSp6
+ zXoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729085326; x=1729690126;
+ d=1e100.net; s=20230601; t=1729085380; x=1729690180;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6bWM5Ln2aKqQb2piOcoGDbrJU4UlN6ByuzC2EAtHJp4=;
- b=R+Mnc+1wk7fQUem668kTE45bcdjJqcKD9DxxqP5mVt0wIqYe9/T7vk4Ek2CtjOrBnl
- 37OS3XyrWrc6Ij3e2qZBZQL64Qkb51RKsczNDWsM1N0d60uEybCjluLJM5+cMtW/oSZi
- X7nZgDG7qcPgzL8rWHJathEANz+1L9koJLjRXCGGssGXUeUKFZf1xO3HG9xh5mgBULLv
- QIRfo56Q6OYUqwdrNLGslkoIifxorr6qpAFntj2g5v3WcBbEdp7Ynla3M4ET+Naws6g4
- mIMI33x0vbxZ6xTI+x0Jk1IFiZsRHLiCLm/+lXoolggacmAYDr3SLRegNggZL4mgXws8
- BG3Q==
-X-Gm-Message-State: AOJu0YwaKc2A1gGrZbWnNOSHrGSRL0SxKaSZH62tnhuH8bmRxqzHwIVt
- uiwR0krStfdqjWokAHGT0kG4TmVFkRFM+mNgGOxg5M77hAyXpYD50oMvDObyqN9ClM1PXf9V60m
- R2L6HC0whecBqbzwjkGgTkY+fvhGvSu0RqYdObQ==
-X-Google-Smtp-Source: AGHT+IEf+h7hFiUQivdksaBA05Q4o9U/21ykBw5U+nHnlD+BlfoTdhXWaMFlgwBBpERw1m5sXevHmN6BbMbr17jXB1s=
-X-Received: by 2002:a17:90a:a00f:b0:2e2:92fe:35d5 with SMTP id
- 98e67ed59e1d1-2e315356673mr19696093a91.31.1729085326081; Wed, 16 Oct 2024
- 06:28:46 -0700 (PDT)
+ bh=OWAlJyakCOArnz904W5pOsrbluUrTU33YNamPIxDDes=;
+ b=fMaqt37LK9i4mWcEWXuT07A2/ebHzB2rFCba2dFTdPSVyWPUiYUEBPhY4dv+t3KQF/
+ vEVH9DYEtTh4O5TAtY1pHPWFzkIPqgWDjuyS9ICuTSdd2Ce8WgSRh2eCVTmeoEKgmQZE
+ ExsXeohYPdxG0W5lL14yPXH2wxiMjRaZNsb66ZQbr/8VgeEPxBd3x4YZ/mMy6S5CRFty
+ tDhE5XtNuHv5iF5mPBx+6KvDWmyff4oCEmLitws66/NwQL5UG0b8JsQp0TqPFIx+9ULb
+ JoYe2rl+x0gqTHYQKzddkpf077dAoxuRUGC2jE/irJeZ7dHcT8YwZHMuPFxviP6F4yvO
+ k/uQ==
+X-Gm-Message-State: AOJu0YwMVo3xznBkm7MPM3KG1i3J+Dqs6RqZmOsbW9NarIqf0Z9ZIyUG
+ abF2rxCCjg8RHrOk2FweY56tIeU9SW9TzMssGIIEOKqBAZj0FXKYJpUlo+auL1fRoLk1acf0t0X
+ VEssJDVpdybuY9/CQ5yMTsEk8wPbc0EzzAMD1EQ==
+X-Google-Smtp-Source: AGHT+IFFkUZI77dRIbdAh2f9mt/v1qRfx3ShDRFAsykmf7bX+ePqEc4pCpGc1k7m50FLwEDanzJMahEeOhs2B9qklh8=
+X-Received: by 2002:a17:90a:fa84:b0:2e2:b922:492 with SMTP id
+ 98e67ed59e1d1-2e2f0affa8emr20289905a91.17.1729085380337; Wed, 16 Oct 2024
+ 06:29:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1729070678.git.jerome.forissier@linaro.org>
- <9e25008319d750258e6838fa193916a0351a8a0e.1729070678.git.jerome.forissier@linaro.org>
-In-Reply-To: <9e25008319d750258e6838fa193916a0351a8a0e.1729070678.git.jerome.forissier@linaro.org>
+ <631c3507a1b0e45ee86e40643864ead091e197d3.1729070678.git.jerome.forissier@linaro.org>
+In-Reply-To: <631c3507a1b0e45ee86e40643864ead091e197d3.1729070678.git.jerome.forissier@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 16 Oct 2024 16:28:09 +0300
-Message-ID: <CAC_iWjKeG=wS09AH2vUxPDoLxVpvEgq_8UaGuxw32oxC7viANw@mail.gmail.com>
-Subject: Re: [PATCH v13 15/21] net: lwip: add wget command
+Date: Wed, 16 Oct 2024 16:29:04 +0300
+Message-ID: <CAC_iWj+OVrnTQxWGNoNBOAoAaPL_dOJX_uNtbBjB8TwCBpaCRw@mail.gmail.com>
+Subject: Re: [PATCH v13 12/21] net: lwip: add ping command
 To: Jerome Forissier <jerome.forissier@linaro.org>
 Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
  Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
@@ -96,481 +96,270 @@ X-Virus-Status: Clean
 On Wed, 16 Oct 2024 at 13:05, Jerome Forissier
 <jerome.forissier@linaro.org> wrote:
 >
-> Add support for the wget command with NET_LWIP. The command normally
-> expects a URL: wget [loadaddr] url, but it also accepts the legacy
-> syntax: wget [loadaddr] [server:]file.
-> The server IP may alternatively be supplied via ${httpserverip} which
-> has higher priority than ${serverip}.
+> Add support for the the ping command with NET_LWIP. The implementation
+> is derived from lwIP's contrib/apps/ping/ping.c.
 >
-> Based on code initially developed by Maxim U.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Co-developed-by: Maxim Uvarov <muvarov@gmail.com>
-> Cc: Maxim Uvarov <muvarov@gmail.com>
 > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
->  cmd/Kconfig        |  18 ++-
->  cmd/net-lwip.c     |   8 +
->  include/net-lwip.h |  18 +++
+>  cmd/Kconfig        |  11 +--
+>  cmd/net-lwip.c     |   8 ++
+>  include/net-lwip.h |   1 +
 >  net/lwip/Makefile  |   1 +
->  net/lwip/wget.c    | 357 +++++++++++++++++++++++++++++++++++++++++++++
->  5 files changed, 394 insertions(+), 8 deletions(-)
->  create mode 100644 net/lwip/wget.c
+>  net/lwip/ping.c    | 177 +++++++++++++++++++++++++++++++++++++++++++++
+>  5 files changed, 193 insertions(+), 5 deletions(-)
+>  create mode 100644 net/lwip/ping.c
 >
 > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 2791ad5393c..8c677b1e486 100644
+> index 7173f3da0b0..b7d1dd028a1 100644
 > --- a/cmd/Kconfig
 > +++ b/cmd/Kconfig
-> @@ -2001,14 +2001,6 @@ config SYS_DISABLE_AUTOLOAD
->           is complete.  Enable this option to disable this behavior and instead
->           require files to be loaded over the network by subsequent commands.
+> @@ -2009,11 +2009,6 @@ config CMD_WGET
+>           wget is a simple command to download kernel, or other files,
+>           from a http server over TCP.
 >
-> -config CMD_WGET
-> -       bool "wget"
-> -       select PROT_TCP
-> -       default y if SANDBOX
+> -config CMD_PING
+> -       bool "ping"
 > -       help
-> -         wget is a simple command to download kernel, or other files,
-> -         from a http server over TCP.
+> -         Send ICMP ECHO_REQUEST to network host
 > -
 >  config CMD_PING6
 >         bool "ping6"
 >         depends on IPV6
-> @@ -2116,6 +2108,16 @@ config CMD_TFTPBOOT
->         help
->           tftpboot - load file via network using TFTP protocol
+> @@ -2107,6 +2102,12 @@ config CMD_MDIO
+>           The MDIO interface is orthogonal to the MII interface and extends
+>           it by adding access to more registers through indirect addressing.
 >
-> +config CMD_WGET
-> +       bool "wget"
-> +       default y if SANDBOX
-> +       select PROT_TCP if NET
-> +       select PROT_TCP_LWIP if NET_LWIP
-> +       select PROT_DNS_LWIP if NET_LWIP
+> +config CMD_PING
+> +       bool "ping"
+> +       select PROT_RAW_LWIP if NET_LWIP
 > +       help
-> +         wget is a simple command to download kernel, or other files,
-> +         from a http server over TCP.
+> +         Send ICMP ECHO_REQUEST to network host
 > +
->  endif  # if CMD_NET
->
->  config CMD_PXE
+>  config CMD_TFTPBOOT
+>         bool "tftp"
+>         select PROT_UDP_LWIP if NET_LWIP
 > diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
-> index c021da6a674..42f8bd6b259 100644
+> index 80f0872bb8f..feed719beef 100644
 > --- a/cmd/net-lwip.c
 > +++ b/cmd/net-lwip.c
-> @@ -35,3 +35,11 @@ U_BOOT_CMD(
->         "hostname [envvar]"
+> @@ -12,6 +12,14 @@ U_BOOT_CMD(
 >  );
 >  #endif
-> +
-> +#if defined(CONFIG_CMD_WGET)
+>
+> +#if defined(CONFIG_CMD_PING)
 > +U_BOOT_CMD(
-> +       wget,   3,      1,      do_wget,
-> +       "boot image via network using HTTP protocol",
-> +       "[loadAddress] URL"
+> +       ping,   2,      1,      do_ping,
+> +       "send ICMP ECHO_REQUEST to network host",
+> +       "pingAddress"
 > +);
 > +#endif
+> +
+>  #if defined(CONFIG_CMD_TFTPBOOT)
+>  U_BOOT_CMD(
+>         tftpboot,       3,      0,      do_tftpb,
 > diff --git a/include/net-lwip.h b/include/net-lwip.h
-> index ff9d03b23e8..1c3583f82a1 100644
+> index 37744b0e2cd..9aa371e962c 100644
 > --- a/include/net-lwip.h
 > +++ b/include/net-lwip.h
-> @@ -16,8 +16,26 @@ void net_lwip_remove_netif(struct netif *netif);
->  struct netif *net_lwip_get_netif(void);
+> @@ -17,5 +17,6 @@ struct netif *net_lwip_get_netif(void);
 >  int net_lwip_rx(struct udevice *udev, struct netif *netif);
 >
-> +/**
-> + * wget_with_dns() - runs dns host IP address resulution before wget
-> + *
-> + * @dst_addr:  destination address to download the file
-> + * @uri:       uri string of target file of wget
-> + * Return:     downloaded file size, negative if failed
-> + */
-> +
-> +int wget_with_dns(ulong dst_addr, char *uri);
-> +/**
-> + * wget_validate_uri() - varidate the uri
-> + *
-> + * @uri:       uri string of target file of wget
-> + * Return:     true if uri is valid, false if uri is invalid
-> + */
-> +bool wget_validate_uri(char *uri);
-> +
 >  int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
->  int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
->  int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-> +int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+> +int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
 >
 >  #endif /* __NET_LWIP_H__ */
 > diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-> index 645d8a8c457..f2558f8763a 100644
+> index 4e92a101ddb..b5af37a9b18 100644
 > --- a/net/lwip/Makefile
 > +++ b/net/lwip/Makefile
-> @@ -5,3 +5,4 @@ obj-$(CONFIG_CMD_DHCP) += dhcp.o
->  obj-$(CONFIG_CMD_DNS) += dns.o
->  obj-$(CONFIG_CMD_PING) += ping.o
+> @@ -2,4 +2,5 @@ ccflags-y += -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
+>
+>  obj-$(CONFIG_$(SPL_)DM_ETH) += net-lwip.o
+>  obj-$(CONFIG_CMD_DHCP) += dhcp.o
+> +obj-$(CONFIG_CMD_PING) += ping.o
 >  obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
-> +obj-$(CONFIG_CMD_WGET) += wget.o
-> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> diff --git a/net/lwip/ping.c b/net/lwip/ping.c
 > new file mode 100644
-> index 00000000000..b495ebd1aa9
+> index 00000000000..8dafa25959f
 > --- /dev/null
-> +++ b/net/lwip/wget.c
-> @@ -0,0 +1,357 @@
+> +++ b/net/lwip/ping.c
+> @@ -0,0 +1,177 @@
 > +// SPDX-License-Identifier: GPL-2.0+
 > +/* Copyright (C) 2024 Linaro Ltd. */
 > +
 > +#include <command.h>
 > +#include <console.h>
-> +#include <display_options.h>
-> +#include <efi_loader.h>
-> +#include <image.h>
-> +#include <lwip/apps/http_client.h>
+> +#include <dm/device.h>
+> +#include <linux/delay.h>
+> +#include <linux/errno.h>
+> +#include <lwip/icmp.h>
+> +#include <lwip/inet_chksum.h>
+> +#include <lwip/raw.h>
 > +#include <lwip/timeouts.h>
-> +#include <mapmem.h>
 > +#include <net.h>
 > +#include <time.h>
 > +
-> +#define SERVER_NAME_SIZE 200
-> +#define HTTP_PORT_DEFAULT 80
-> +#define PROGRESS_PRINT_STEP_BYTES (100 * 1024)
+> +#define PING_DELAY_MS 1000
+> +#define PING_COUNT 5
+> +/* Ping identifier - must fit on a u16_t */
+> +#define PING_ID 0xAFAF
 > +
-> +enum done_state {
-> +        NOT_DONE = 0,
-> +        SUCCESS = 1,
-> +        FAILURE = 2
+> +struct ping_ctx {
+> +       ip_addr_t target;
+> +       struct raw_pcb *pcb;
+> +       struct icmp_echo_hdr *iecho;
+> +       uint16_t seq_num;
+> +       bool alive;
 > +};
 > +
-> +struct wget_ctx {
-> +       char *path;
-> +       ulong daddr;
-> +       ulong saved_daddr;
-> +       ulong size;
-> +       ulong prevsize;
-> +       ulong start_time;
-> +       enum done_state done;
-> +};
-> +
-> +static int parse_url(char *url, char *host, u16 *port, char **path)
+> +static u8_t ping_recv(void *arg, struct raw_pcb *pcb, struct pbuf *p,
+> +                     const ip_addr_t *addr)
 > +{
-> +       char *p, *pp;
-> +       long lport;
+> +       struct ping_ctx *ctx = arg;
+> +       struct icmp_echo_hdr *iecho = ctx->iecho;
 > +
-> +       p = strstr(url, "http://");
-> +       if (!p) {
-> +               log_err("only http:// is supported\n");
-> +               return -EINVAL;
-> +       }
-> +
-> +       p += strlen("http://");
-> +
-> +       /* Parse hostname */
-> +       pp = strchr(p, ':');
-> +       if (!pp)
-> +               pp = strchr(p, '/');
-> +       if (!pp)
-> +               return -EINVAL;
-> +
-> +       if (p + SERVER_NAME_SIZE <= pp)
-> +               return -EINVAL;
-> +
-> +       memcpy(host, p, pp - p);
-> +       host[pp - p] = '\0';
-> +
-> +       if (*pp == ':') {
-> +               /* Parse port number */
-> +               p = pp + 1;
-> +               lport = simple_strtol(p, &pp, 10);
-> +               if (pp && *pp != '/')
-> +                       return -EINVAL;
-> +               if (lport > 65535)
-> +                       return -EINVAL;
-> +               *port = (u16)lport;
-> +       } else {
-> +               *port = HTTP_PORT_DEFAULT;
-> +       }
-> +       if (*pp != '/')
-> +               return -EINVAL;
-> +       *path = pp;
-> +
-> +       return 0;
-> +}
-> +
-> +/*
-> + * Legacy syntax support
-> + * Convert [<server_name_or_ip>:]filename into a URL if needed
-> + */
-> +static int parse_legacy_arg(char *arg, char *nurl, size_t rem)
-> +{
-> +       char *p = nurl;
-> +       size_t n;
-> +       char *col = strchr(arg, ':');
-> +       char *env;
-> +       char *server;
-> +       char *path;
-> +
-> +       if (strstr(arg, "http") == arg) {
-> +               n = snprintf(nurl, rem, "%s", arg);
-> +               if (n < 0 || n > rem)
-> +                       return -1;
+> +       if (addr->addr != ctx->target.addr)
 > +               return 0;
-> +       }
 > +
-> +       n = snprintf(p, rem, "%s", "http://");
-> +       if (n < 0 || n > rem)
-> +               return -1;
-> +       p += n;
-> +       rem -= n;
+> +       if ((p->tot_len >= (IP_HLEN + sizeof(struct icmp_echo_hdr))) &&
+> +           pbuf_remove_header(p, IP_HLEN) == 0) {
+> +               iecho = (struct icmp_echo_hdr *)p->payload;
 > +
-> +       if (col) {
-> +               n = col - arg;
-> +               server = arg;
-> +               path = col + 1;
-> +       } else {
-> +               env = env_get("httpserverip");
-> +               if (!env)
-> +                       env = env_get("serverip");
-> +               if (!env) {
-> +                       log_err("error: httpserver/serverip has to be set\n");
-> +                       return -1;
+> +               if ((iecho->id == PING_ID) &&
+> +                   (iecho->seqno == lwip_htons(ctx->seq_num))) {
+> +                       ctx->alive = true;
+> +                       printf("host %s is alive\n", ipaddr_ntoa(addr));
+> +                       pbuf_free(p);
+> +                       return 1; /* eat the packet */
 > +               }
-> +               n = strlen(env);
-> +               server = env;
-> +               path = arg;
+> +               /* not eaten, restore original packet */
+> +               pbuf_add_header(p, IP_HLEN);
 > +       }
 > +
-> +       if (rem < n)
-> +               return -1;
-> +       strncpy(p, server, n);
-> +       p += n;
-> +       rem -= n;
-> +       if (rem < 1)
-> +               return -1;
-> +       *p = '/';
-> +       p++;
-> +       rem--;
-> +       n = strlen(path);
-> +       if (rem < n)
-> +               return -1;
-> +       strncpy(p, path, n);
-> +       p += n;
-> +       rem -= n;
-> +       if (rem < 1)
-> +               return -1;
-> +       *p = '\0';
+> +       return 0; /* don't eat the packet */
+> +}
+> +
+> +static int ping_raw_init(struct ping_ctx *ctx)
+> +{
+> +       ctx->pcb = raw_new(IP_PROTO_ICMP);
+> +       if (!ctx->pcb)
+> +               return -ENOMEM;
+> +
+> +       raw_recv(ctx->pcb, ping_recv, ctx);
+> +       raw_bind(ctx->pcb, IP_ADDR_ANY);
 > +
 > +       return 0;
 > +}
 > +
-> +static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
-> +                          err_t err)
+> +static void ping_raw_stop(struct ping_ctx *ctx)
 > +{
-> +       struct wget_ctx *ctx = arg;
-> +       struct pbuf *buf;
-> +
-> +       if (!pbuf)
-> +               return ERR_BUF;
-> +
-> +       if (!ctx->start_time)
-> +               ctx->start_time = get_timer(0);
-> +
-> +       for (buf = pbuf; buf; buf = buf->next) {
-> +               memcpy((void *)ctx->daddr, buf->payload, buf->len);
-> +               ctx->daddr += buf->len;
-> +               ctx->size += buf->len;
-> +               if (ctx->size - ctx->prevsize > PROGRESS_PRINT_STEP_BYTES) {
-> +                       printf("#");
-> +                       ctx->prevsize = ctx->size;
-> +               }
-> +       }
-> +
-> +       altcp_recved(pcb, pbuf->tot_len);
-> +       pbuf_free(pbuf);
-> +       return ERR_OK;
+> +       if (ctx->pcb)
+> +               raw_remove(ctx->pcb);
 > +}
 > +
-> +static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
-> +                           u32_t rx_content_len, u32_t srv_res, err_t err)
+> +static void ping_prepare_echo(struct ping_ctx *ctx)
 > +{
-> +       struct wget_ctx *ctx = arg;
-> +       ulong elapsed;
+> +       struct icmp_echo_hdr *iecho = ctx->iecho;
 > +
-> +       if (httpc_result != HTTPC_RESULT_OK) {
-> +               log_err("\nHTTP client error %d\n", httpc_result);
-> +               ctx->done = FAILURE;
-> +               return;
-> +       }
-> +       if (srv_res != 200) {
-> +               log_err("\nHTTP server error %d\n", srv_res);
-> +               ctx->done = FAILURE;
-> +               return;
-> +       }
+> +       ICMPH_TYPE_SET(iecho, ICMP_ECHO);
+> +       ICMPH_CODE_SET(iecho, 0);
+> +       iecho->chksum = 0;
+> +       iecho->id = PING_ID;
+> +       iecho->seqno = lwip_htons(ctx->seq_num);
 > +
-> +       elapsed = get_timer(ctx->start_time);
-> +       if (!elapsed)
-> +               elapsed = 1;
-> +       if (rx_content_len > PROGRESS_PRINT_STEP_BYTES)
-> +               printf("\n");
-> +       printf("%u bytes transferred in %lu ms (", rx_content_len, elapsed);
-> +       print_size(rx_content_len / elapsed * 1000, "/s)\n");
-> +       printf("Bytes transferred = %lu (%lx hex)\n", ctx->size, ctx->size);
-> +       efi_set_bootdev("Net", "", ctx->path, map_sysmem(ctx->saved_daddr, 0),
-> +                       rx_content_len);
-> +       if (env_set_hex("filesize", rx_content_len) ||
-> +           env_set_hex("fileaddr", ctx->saved_daddr)) {
-> +               log_err("Could not set filesize or fileaddr\n");
-> +               ctx->done = FAILURE;
-> +               return;
-> +       }
-> +
-> +       ctx->done = SUCCESS;
+> +       iecho->chksum = inet_chksum(iecho, sizeof(*iecho));
 > +}
 > +
-> +static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+> +static void ping_send_icmp(struct ping_ctx *ctx)
 > +{
-> +       char server_name[SERVER_NAME_SIZE];
-> +       httpc_connection_t conn;
-> +       httpc_state_t *state;
+> +       struct pbuf *p;
+> +       size_t ping_size = sizeof(struct icmp_echo_hdr);
+> +
+> +       p = pbuf_alloc(PBUF_IP, (u16_t)ping_size, PBUF_RAM);
+> +       if (!p)
+> +               return;
+> +
+> +       if ((p->len == p->tot_len) && !p->next) {
+> +               ctx->iecho = (struct icmp_echo_hdr *)p->payload;
+> +               ping_prepare_echo(ctx);
+> +               raw_sendto(ctx->pcb, p, &ctx->target);
+> +       }
+> +
+> +       pbuf_free(p);
+> +}
+> +
+> +static void ping_send(void *arg)
+> +{
+> +       struct ping_ctx *ctx = arg;
+> +
+> +       ctx->seq_num++;
+> +       if (ctx->seq_num <= PING_COUNT) {
+> +               ping_send_icmp(ctx);
+> +               sys_timeout(PING_DELAY_MS, ping_send, ctx);
+> +       }
+> +}
+> +
+> +static int ping_loop(struct udevice *udev, const ip_addr_t* addr)
+> +{
+> +       struct ping_ctx ctx = {};
 > +       struct netif *netif;
-> +       struct wget_ctx ctx;
-> +       char *path;
-> +       u16 port;
-> +
-> +       ctx.daddr = dst_addr;
-> +       ctx.saved_daddr = dst_addr;
-> +       ctx.done = NOT_DONE;
-> +       ctx.size = 0;
-> +       ctx.prevsize = 0;
-> +       ctx.start_time = 0;
-> +
-> +       if (parse_url(uri, server_name, &port, &path))
-> +               return CMD_RET_USAGE;
+> +       int ret;
 > +
 > +       netif = net_lwip_new_netif(udev);
 > +       if (!netif)
-> +               return -1;
-> +
-> +       memset(&conn, 0, sizeof(conn));
-> +       conn.result_fn = httpc_result_cb;
-> +       ctx.path = path;
-> +       if (httpc_get_file_dns(server_name, port, path, &conn, httpc_recv_cb,
-> +                              &ctx, &state)) {
-> +               net_lwip_remove_netif(netif);
 > +               return CMD_RET_FAILURE;
+> +
+> +       printf("Using %s device\n", udev->name);
+> +
+> +       ret = ping_raw_init(&ctx);
+> +       if (ret < 0) {
+> +               net_lwip_remove_netif(netif);
+> +               return ret;
 > +       }
 > +
-> +       while (!ctx.done) {
-> +               net_lwip_rx(udev, netif);
+> +       ctx.target = *addr;
+> +
+> +       ping_send(&ctx);
+> +
+> +       do {
 > +               sys_check_timeouts();
-> +               if (ctrlc())
+> +               net_lwip_rx(udev, netif);
+> +               if (ctx.alive)
 > +                       break;
-> +       }
+> +               if (ctrlc()) {
+> +                       printf("\nAbort\n");
+> +                       break;
+> +               }
+> +       } while (ctx.seq_num <= PING_COUNT);
+> +
+> +       sys_untimeout(ping_send, &ctx);
+> +       ping_raw_stop(&ctx);
 > +
 > +       net_lwip_remove_netif(netif);
 > +
-> +       if (ctx.done == SUCCESS)
+> +       if (ctx.alive)
 > +               return 0;
 > +
+> +       printf("ping failed; host %s is not alive\n", ipaddr_ntoa(addr));
 > +       return -1;
 > +}
 > +
-> +int wget_with_dns(ulong dst_addr, char *uri)
+> +int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 > +{
-> +       eth_set_current();
+> +       ip_addr_t addr;
 > +
-> +       return wget_loop(eth_get_dev(), dst_addr, uri);
-> +}
-> +
-> +int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
-> +{
-> +       char *end;
-> +       char *url;
-> +       ulong dst_addr;
-> +       char nurl[1024];
-> +
-> +       if (argc < 2 || argc > 3)
+> +       if (argc < 2)
 > +               return CMD_RET_USAGE;
 > +
-> +       dst_addr = hextoul(argv[1], &end);
-> +        if (end == (argv[1] + strlen(argv[1]))) {
-> +               if (argc < 3)
-> +                       return CMD_RET_USAGE;
-> +               url = argv[2];
-> +       } else {
-> +               dst_addr = image_load_addr;
-> +               url = argv[1];
-> +       }
+> +       if (!ipaddr_aton(argv[1], &addr))
+> +               return CMD_RET_USAGE;
 > +
-> +       if (parse_legacy_arg(url, nurl, sizeof(nurl)))
-> +           return CMD_RET_FAILURE;
+> +       eth_set_current();
 > +
-> +       if (wget_with_dns(dst_addr, nurl))
+> +       if (ping_loop(eth_get_dev(), &addr) < 0)
 > +               return CMD_RET_FAILURE;
 > +
 > +       return CMD_RET_SUCCESS;
-> +}
-> +
-> +/**
-> + * wget_validate_uri() - validate the uri for wget
-> + *
-> + * @uri:       uri string
-> + *
-> + * This function follows the current U-Boot wget implementation.
-> + * scheme: only "http:" is supported
-> + * authority:
-> + *   - user information: not supported
-> + *   - host: supported
-> + *   - port: not supported(always use the default port)
-> + *
-> + * Uri is expected to be correctly percent encoded.
-> + * This is the minimum check, control codes(0x1-0x19, 0x7F, except '\0')
-> + * and space character(0x20) are not allowed.
-> + *
-> + * TODO: stricter uri conformance check
-> + *
-> + * Return:     true on success, false on failure
-> + */
-> +bool wget_validate_uri(char *uri)
-> +{
-> +       char c;
-> +       bool ret = true;
-> +       char *str_copy, *s, *authority;
-> +
-> +       for (c = 0x1; c < 0x21; c++) {
-> +               if (strchr(uri, c)) {
-> +                       log_err("invalid character is used\n");
-> +                       return false;
-> +               }
-> +       }
-> +       if (strchr(uri, 0x7f)) {
-> +               log_err("invalid character is used\n");
-> +               return false;
-> +       }
-> +
-> +       if (strncmp(uri, "http://", 7)) {
-> +               log_err("only http:// is supported\n");
-> +               return false;
-> +       }
-> +       str_copy = strdup(uri);
-> +       if (!str_copy)
-> +               return false;
-> +
-> +       s = str_copy + strlen("http://");
-> +       authority = strsep(&s, "/");
-> +       if (!s) {
-> +               log_err("invalid uri, no file path\n");
-> +               ret = false;
-> +               goto out;
-> +       }
-> +       s = strchr(authority, '@');
-> +       if (s) {
-> +               log_err("user information is not supported\n");
-> +               ret = false;
-> +               goto out;
-> +       }
-> +
-> +out:
-> +       free(str_copy);
-> +
-> +       return ret;
 > +}
 > --
 > 2.40.1
