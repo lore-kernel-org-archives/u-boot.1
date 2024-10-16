@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EEF9D1AD5A
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 13:34:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9A23D1AD59
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 13:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4803188DB6;
+	by phobos.denx.de (Postfix) with ESMTP id 9A74588E17;
 	Wed, 16 Oct 2024 15:33:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mr1Be53r";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a/L5K3qF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 091FA88995; Wed, 16 Oct 2024 13:25:15 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id D1D5888C3D; Wed, 16 Oct 2024 14:36:21 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FC58889C3
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 13:25:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B99A688AE8
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 14:36:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jelonek.jonas@gmail.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43152b79d25so4314815e9.1
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 04:25:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4314f38d274so11347155e9.1
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 05:36:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729077912; x=1729682712; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6GhKiJXqt+14xHQQDj7XYgzNvNbO/Xl0G6KhXYoXT8g=;
- b=mr1Be53rz3D+a8tWAcOQDN4d5lxM1ZYvVLrLr3CleCpUQysUIky14QraQ6tvIT5Wkq
- vHzUqgjEatBVRo4vBDsYlEeKfGZhB9UHFo8p1xZClVuYO01eD8Y1aHLWcbRbShnOiE1C
- azMwKg3DYgrNskTMqORLYbl/80vmdtGl6j1RyvRTjJYZ728ib5noPYrF0XAhSTsSFCPq
- 3gBFTTROk/hbjyq0/Dir5IRk+GAmWem5/WD3jOkMDt/tVrHz/QG7nK0wCwQvFjN4Zhme
- syhOZ+fT3hgyu/oP4Z3vZglCNjtreP1gMsashAwOUIVcBIbkTHJc72lCp0zI0zodtdDp
- f8FA==
+ d=linaro.org; s=google; t=1729082179; x=1729686979; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TdKYgEQq686nBwCY64OksgwiqTNXu2Btpp7h6Q6HWds=;
+ b=a/L5K3qF9m10dQGLQtKbJXOsOPHsMDuZFCpgIPhex+Epx/hPDCDK7jpJgTaoUeABAl
+ RwrkSz2pboKscNPGGeT8NcrQJHadMUNSN2Ux0l3II1R2w/73toMCbzdkfJuHqRgnu1CJ
+ 7QVbqEzKsvwravgtUlDYaBfy/chNnB5UKRVeK4iNGeufM/VQgUj9PARTL0mxBat7aXbb
+ omlpiNRSO4+4xpUvzhvLlsqmy76+yEjA7aDvZIDpeG4aVG01VoOC8CSii+XddlLfM1v/
+ RdTPN4lRYjC+NLMIBf+/n/8WHpRZpQu9D7LIcM/gqhGCMOeWkfx/JwzUO1AUARxdkmoO
+ EDrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729077912; x=1729682712;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6GhKiJXqt+14xHQQDj7XYgzNvNbO/Xl0G6KhXYoXT8g=;
- b=iLmp5nLUoJO05Smgdcm8x1nLrCCREWaQWmYOQjycguMz8WmUZ9+jUT//DgQV3PBE5n
- R9RuypL+EMdvIPzPOZWYzTQ0zSPosQEd6OFxXcSJN7ayvdj5hrlMTmGFUO/lIJ8wBXtA
- lyRUQgd3PjbT7WBk30pWFiq2UCVntEIpYaeQvYuOB5hRmyCvJxukgNYWyfzGCpiv168E
- jwU1T8KkdIoCf4fShjB4GCtyGCzsmvLwXLAHgcuGFp/RMl3QS5d0g9orxvz+z0b9VWOS
- ceVkZ+Z64RWAoEA8C8FPw8RFi8VR3osteqxeG8jLxgzX9dlWAPUW9DXNFUA6ZFwnUy8l
- 0RlA==
-X-Gm-Message-State: AOJu0YwlAK6tyBKa4M9Brc7rNQrHRXSao19ULHhadNb7gi/DHlL3ksbR
- 1RsfPqh18Env/J98W9lwHtKrUI7zCe2g1006rk5+UBX147PtruGJXdZhqA==
-X-Google-Smtp-Source: AGHT+IG6ODq+4yyAW686zvx8Q8EEySOBo4QqwO03fscxoRxuqGimKcQ7Akk8RMj0QVKq9ZoS5A5Wsg==
-X-Received: by 2002:a5d:4bd0:0:b0:37d:524e:9431 with SMTP id
- ffacd0b85a97d-37d552d3820mr10914315f8f.57.1729077911933; 
- Wed, 16 Oct 2024 04:25:11 -0700 (PDT)
-Received: from localhost.localdomain ([2a01:599:81c:8ff7:8cd1:2207:fa9d:5a1a])
+ d=1e100.net; s=20230601; t=1729082179; x=1729686979;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TdKYgEQq686nBwCY64OksgwiqTNXu2Btpp7h6Q6HWds=;
+ b=ISIj+097aom2Sjy/Pyk6KHmSrL4yCWwE31kh4C0PPKUCLXToK5tF0RQ7WPdXZ0BP55
+ I/ZFgd9wCxMRfs2b/IK2m/tICxNbfLTJl21BT3uiLxGOXhqsmRsQrmZ+DirmpVOqa4fo
+ VQH3x1R6E+OjTN1EAy0hkAqJspitCEGjYQzl2K7lmHwFShJ2DpuYIcnM5qMpYJKRrWXH
+ Lmsq/HPI2gax0Sa/HwpfyNz1rtNcZX4+i9qx2Y8gjl8LqYHlbYdIxLCmohOwFan3TMle
+ HA2gvOgnJGnHdNx6IZmkDixFc4Fa5OJVO/0DSiVYeWaWETnD+OATVd0wFOZ0olG8bcDO
+ xkVg==
+X-Gm-Message-State: AOJu0YyM4Z045D3Jj6osf7azfCuYGVw8JRjgTOSPx5UNU2nYb0gTtv6o
+ TaNi6t51PkcKSIO7ZPqri1G61AtcXb8hJmRbb2tbiCRrQ08s0EkLUTxCS58CFMusTwDR6WjaY/L
+ imZg=
+X-Google-Smtp-Source: AGHT+IHufwUcMxeXMZsUjlKZqtmQfDRu5CuRMsJz8jGM0esvymdlBFtzP4swRijEDGo83YJp+iB7bA==
+X-Received: by 2002:a05:600c:1c13:b0:426:6e9a:7a1e with SMTP id
+ 5b1f17b1804b1-43125617834mr146965415e9.35.1729082179018; 
+ Wed, 16 Oct 2024 05:36:19 -0700 (PDT)
+Received: from eugen-station.. ([82.76.24.202])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d7fa7a23csm4092572f8f.18.2024.10.16.04.25.11
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 16 Oct 2024 04:25:11 -0700 (PDT)
-From: Jonas Jelonek <jelonek.jonas@gmail.com>
+ 5b1f17b1804b1-4314b32e3c9sm32015235e9.36.2024.10.16.05.36.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Oct 2024 05:36:18 -0700 (PDT)
+From: Eugen Hristev <eugen.hristev@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Jonas Jelonek <jelonek.jonas@gmail.com>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/1] arm: provide noncached_set_region prototype to fix build
-Date: Wed, 16 Oct 2024 13:24:55 +0200
-Message-Id: <20241016112455.35700-2-jelonek.jonas@gmail.com>
-X-Mailer: git-send-email 2.39.5 (Apple Git-154)
-In-Reply-To: <20241016112455.35700-1-jelonek.jonas@gmail.com>
-References: <20241016112455.35700-1-jelonek.jonas@gmail.com>
+Cc: trini@konsulko.com,
+	Eugen Hristev <eugen.hristev@linaro.org>
+Subject: [PATCH] .mailmap: update e-mail address for Eugen Hristev
+Date: Wed, 16 Oct 2024 15:36:05 +0300
+Message-ID: <20241016123605.97709-1-eugen.hristev@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 16 Oct 2024 15:33:18 +0200
@@ -93,55 +91,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Due to the removal of weak functions in 7d6cee2cd0 ("cmd: cache: Remove
-weak function"), uboot fails to compile after updating to v2024.10 for
-mediatek target in OpenWrt with GCC-14 with error:
-cmd/cache.c: In function 'do_dcache':
-cmd/cache.c:57:25: error: implicit declaration of function
-	'noncached_set_region' [-Wimplicit-function-declaration]
+Update e-mail address.
 
-Thus, provide a prototype in arm's include/asm/system.h to fix a build
-error in cmd/cache.c, since related prototypes are also located there.
-Also add an include of asm/system.h in cmd/cache.c to have the function
-available there.
-
-The issue occured after the update of uboot-mediatek in OpenWrt to
-v2024.10, in combination with GCC-14 toolchain. It was reported and
-discussed in https://github.com/openwrt/openwrt/issues/16697, and
-temporarily fixed with
-https://github.com/openwrt/openwrt/commit/92ca322dd1f48158b8829fec59319a12e4ae4295.
-
-Signed-off-by: Jonas Jelonek <jelonek.jonas@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
+Signed-off-by: Eugen Hristev <eugen.hristev@linaro.org>
 ---
- arch/arm/include/asm/system.h | 1 +
- cmd/cache.c                   | 1 +
- 2 files changed, 2 insertions(+)
+ .mailmap       | 3 ++-
+ doc/git-mailrc | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
-index 2237d7d006..0100096202 100644
---- a/arch/arm/include/asm/system.h
-+++ b/arch/arm/include/asm/system.h
-@@ -668,6 +668,7 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
-  * Return: 0 if OK
-  */
- int noncached_init(void);
-+void noncached_set_region(void);
- 
- phys_addr_t noncached_alloc(size_t size, size_t align);
- #endif /* CONFIG_SYS_NONCACHED_MEMORY */
-diff --git a/cmd/cache.c b/cmd/cache.c
-index 3049f5c305..f873f2c8fb 100644
---- a/cmd/cache.c
-+++ b/cmd/cache.c
-@@ -10,6 +10,7 @@
- #include <command.h>
- #include <cpu_func.h>
- #include <linux/compiler.h>
-+#include <asm/system.h>
- 
- static int parse_argv(const char *);
- 
+diff --git a/.mailmap b/.mailmap
+index 952e1dac4b20..4d48349f0e9f 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -38,7 +38,8 @@ Boris Brezillon <bbrezillon@kernel.org> <boris.brezillon@free-electrons.com>
+ Christian Kohn <chris.kohn@amd.com> <christian.kohn@xilinx.com>
+ Dirk Behme <dirk.behme@googlemail.com>
+ Durga Challa <durga.challa@amd.com> <vnsl.durga.challa@xilinx.com>
+-Eugen Hristev <eugen.hristev@collabora.com> <eugen.hristev@microchip.com>
++Eugen Hristev <eugen.hristev@linaro.org> <eugen.hristev@microchip.com>
++Eugen Hristev <eugen.hristev@linaro.org> <eugen.hristev@collabora.com>
+ Fabio Estevam <fabio.estevam@nxp.com>
+ Harini Katakam <harini.katakam@amd.com> <harini.katakam@xilinx.com>
+ Harsha <harsha.harsha@amd.com> <harsha.harsha@xilinx.com>
+diff --git a/doc/git-mailrc b/doc/git-mailrc
+index ca2f67a3b6e2..1177e42df2f5 100644
+--- a/doc/git-mailrc
++++ b/doc/git-mailrc
+@@ -22,7 +22,7 @@ alias apritzel       Andre Przywara <andre.przywara@arm.com>
+ alias bmeng          Bin Meng <bmeng.cn@gmail.com>
+ alias danielschwierzeck Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+ alias dinh           Dinh Nguyen <dinguyen@kernel.org>
+-alias ehristev       Eugen Hristev <eugen.hristev@collabora.com>
++alias ehristev       Eugen Hristev <eugen.hristev@linaro.org>
+ alias hs             Heiko Schocher <hs@denx.de>
+ alias freenix        Peng Fan <peng.fan@nxp.com>
+ alias iwamatsu       Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 -- 
-2.39.5 (Apple Git-154)
+2.43.0
 
