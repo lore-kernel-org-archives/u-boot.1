@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 450BAD2A555
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 19:46:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B270DD2A555
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 20:07:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C432B88DDC;
-	Wed, 16 Oct 2024 21:46:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 27EC588DE1;
+	Wed, 16 Oct 2024 22:07:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="au6YEzdT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="faa0eS++";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3949A88DB6; Wed, 16 Oct 2024 21:46:37 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id 64A1D88DE6; Wed, 16 Oct 2024 22:07:51 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE6DE88DDC
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 21:46:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 215CA88DD1
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 22:07:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2fb5fa911aaso3172731fa.2
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 12:46:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6cbf2fc28feso1395376d6.0
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 13:07:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729107994; x=1729712794; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1729109267; x=1729714067; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cW3xWQxYOJ3e5pVBfeNg2hDFUdCLXtwclaTNAduEE1o=;
- b=au6YEzdTjW9zvLZeauW51gPYBPgbvhsE6toPcoVhWFYdIAeQGIaOacUW+I7ANUymjZ
- g0ICrK619rG8h/FYz3bAQy6aNSIZUyPgpzTRBAYRW9l0TL6V+k9NJcBt511M+HsIvOaW
- OzqF1Q/4CucHryfahxPFjqe4k6xflrLyST/9OWbKrB6DIf29u4KqN7Ernb1g3fCbajEw
- ogLZupqBtL2ckn9/ev34mHZthcwpy3Y+YIOWyfDU4qJXhE6dUbDC4HquMYxKVueKNEkX
- I8e1PiaoGD33MuFJh9XIM6QlX4zLeAtOmYniINfL+LQPzne5U6OTsr8uLk9DhXP5k3Wt
- NXiQ==
+ bh=VQRWXmP7PGfkfL+QSm2LKCvzxvlsPWVzPg0VyYxSWhU=;
+ b=faa0eS++NyaV2+jLvaGUSaAn0ZOmTt9W4Q9gYaoXgCFTNhdbo4HNn4Qje3y+iH00fA
+ h/4P1TZ6l+Ljf/NXSccVyDBx8M3oqR1bu/P0rubcK3NvsziaIVuohoUd3RDIVVk/t6mA
+ Nf4I+7bguLCbLdMCq1SvisdDePZkc9hgMJjAk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729107994; x=1729712794;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1729109267; x=1729714067;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cW3xWQxYOJ3e5pVBfeNg2hDFUdCLXtwclaTNAduEE1o=;
- b=Ytsy+XHnS2OyWl/dsNh3flwCZvWZ8whWXnglejn7z6lReiNdml2Yb3SDSwpPnw1xko
- NKONgI5RtSmStGB5pwLSe16gVlxLPvKFRGqpw4S1EZT1KOad7M7RVagwcV4WK3YeKq8U
- 5Z02MoamdHskly+8E9QQY/MpOlhNP2sUJR89e2W1jLd3Dbrut8GRr289RBtAo47Usik7
- Ahi/KIg18rWkX4BX+GWI/7AYTcQbi8X6GZLXOnPK+yWesAS8r0PkSgmZKoj6y0YIXxYn
- TKnoeE2H13APc0jGbMTC4VkcipJIrY8Lvb6eD18f0AWk8Pb3wP7KTMir7UMsb+sUnRFa
- iclQ==
-X-Gm-Message-State: AOJu0Yx2UBqVY3G+ydPk3M2TFvdhv75T1Ep92CrtrWF8y5izC7VcxW5d
- /rm+6WJbW42LiYEAwSXF3Y59Q9S1fIatbVavTDUbkjHhb2Dd+Ky+9v2OpTv9yJK+d/rLnVfPfj5
- 1MfFZWDuSnFtWkV5b43z1oQAosuk=
-X-Google-Smtp-Source: AGHT+IEwEKQLbMU6NuCAhtNAO5ci34+O9lTh0Wy18xjK0gRqrB1mQ0wUdEDs9c1nCOqCaSeE2RTrdyL0u0lsIprzppw=
-X-Received: by 2002:a2e:4c19:0:b0:2f7:6653:8053 with SMTP id
- 38308e7fff4ca-2fb3f1adfa0mr78424251fa.18.1729107994025; Wed, 16 Oct 2024
- 12:46:34 -0700 (PDT)
+ bh=VQRWXmP7PGfkfL+QSm2LKCvzxvlsPWVzPg0VyYxSWhU=;
+ b=gv/e5+tKb/TGCyjqf6sdO9WiNSn5+uFjzYwRSej25zR9qjRcDKaKW3fGi9tpMfSG+d
+ MjcoPzsbO5+PR5EKEisVt8V1m7rVCMFL1OyzJFORqNV7MTzZggqa2iDvDm8gnNoMrjhb
+ yMVkAUeEI5FxbisoBAH5ezZLhExV0JTa3XDIKENcoBvbtgnPbygkZzUCO6t8dpZI532M
+ TvxxwJbFKJQBQUUpIONmP6caJXjHox/YqoQReKo9QvYcerQiMSxuW6cyyHimdMFQvzOg
+ ooVavXHFos7OTSpinKmNbiSiLdbl3E3mwceq578VmOE0n3h6n8IKXOwPLIASU0Q4wJHa
+ NFwA==
+X-Gm-Message-State: AOJu0YzAiuin8IB4IMsMKtwpsGYr3F4sYJ8zV97R53i+Sgefq2fOtZ2u
+ 4ii3IrMtsI/31Hj2roYCdHvMMVrL34KoBA7pRqHEzyfCdz/ohwytWGDmfGnwNhk=
+X-Google-Smtp-Source: AGHT+IF3Vj0PzA9D2fRI2iRsTwnf4VuaYVP9/3aQOzSsh/OeYa1r8lsZ2YowJDmYltmQlGNUeC47Zw==
+X-Received: by 2002:a05:6214:4303:b0:6cb:e9eb:1b24 with SMTP id
+ 6a1803df08f44-6cc2b8d523cmr68225626d6.24.1729109267212; 
+ Wed, 16 Oct 2024 13:07:47 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cc22959be8sm21338836d6.87.2024.10.16.13.07.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Oct 2024 13:07:46 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Anton Antonov <Anton.Antonov@arm.com>
+In-Reply-To: <cover.1729070678.git.jerome.forissier@linaro.org>
+References: <cover.1729070678.git.jerome.forissier@linaro.org>
+Subject: Re: [PATCH v13 00/21] Introduce the lwIP network stack
+Message-Id: <172910926540.24133.2953899765717446506.b4-ty@konsulko.com>
+Date: Wed, 16 Oct 2024 14:07:45 -0600
 MIME-Version: 1.0
-References: <20241015002505.1243-1-egyszeregy@freemail.hu>
- <CAOMZO5B+EpaaP1YXNxWsk+6m4qU347cYBC-cMFYjiZTaB1s-kw@mail.gmail.com>
- <6e52a56d-ad56-4314-babb-4a290db1c8df@freemail.hu>
-In-Reply-To: <6e52a56d-ad56-4314-babb-4a290db1c8df@freemail.hu>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 16 Oct 2024 16:46:22 -0300
-Message-ID: <CAOMZO5DMU9YQjKuZvgC6EzPzLtM4yviqAm9iaNFmDqXv921acQ@mail.gmail.com>
-Subject: Re: [PATCH] pico-imx7d: increase ODT resistor value from 60 to 120
- ohm to improve DRAM stability
-To: =?UTF-8?Q?Sz=C5=91ke_Benjamin?= <egyszeregy@freemail.hu>
-Cc: u-boot@lists.denx.de, sbabic@denx.de, otavio@ossystems.com.br, 
- Ray Chang <ray.chang@technexion.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,34 +91,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 16, 2024 at 4:35=E2=80=AFPM Sz=C5=91ke Benjamin <egyszeregy@fre=
-email.hu> wrote:
+On Wed, 16 Oct 2024 11:56:22 +0200, Jerome Forissier wrote:
 
-> I am not the author of this patch why i need to Signed-off it? It is a DD=
-R calib
+> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+> stack [2] [3] as an alternative to the current implementation in net/,
+> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+> reasons for doing so are:
+> - Make the support of HTTPS in the wget command easier. Javier T. and
+> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+> so. With that it becomes possible to fetch and launch a distro installer
+> such as Debian etc. using a secure, authenticated connection directly
+> from the U-Boot shell. Several use cases:
+>   * Authentication: prevent MITM attack (third party replacing the
+> binary with a different one)
+>   * Confidentiality: prevent third parties from grabbing a copy of the
+> image as it is being downloaded
+>   * Allow connection to servers that do not support plain HTTP anymore
+> (this is becoming more and more common on the Internet these days)
+> - Possibly benefit from additional features implemented in lwIP
+> - Less code to maintain in U-Boot
+> 
+> [...]
 
-Because you are in the delivery path of someone else patch. This is
-explained at:
+Applied to u-boot/master, thanks!
 
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Doc=
-umentation/process/submitting-patches.rst?h=3Dv6.12-rc3#n459
+-- 
+Tom
 
-"The Signed-off-by: tag indicates that the signer was involved in the
-development of the patch, or that he/she was in the patch's delivery path."
 
-> optimisation from u-boot-tn-imx repo for pico-imx7d by Technexion maintai=
-ners. I
-> can not share any more info why it is needed.
->
-> https://github.com/TechNexion/u-boot-tn-imx/commit/8a00e57b697c6f7d3d3abc=
-fc552550ac7d8cc96d
-
-Like I said earlier, write a short explanation as the commit log like
-the text below:
-
-"Increase ODT resistor value from 60 to 120 ohm to improve DRAM stability.
-
-Based on the following commit from TechNexion U-Boot:
-https://github.com/TechNexion/u-boot-tn-imx/commit/8a00e57b697c6f7d3d3abcfc=
-552550ac7d8cc96d
-"
