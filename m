@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DBD1D2069E
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:15:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBD45D2069A
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:16:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7E9688E2D;
-	Wed, 16 Oct 2024 08:13:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55E9488E26;
+	Wed, 16 Oct 2024 08:13:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="AaRWpgSL";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Lo8jXBIq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 084C788E8E; Wed, 16 Oct 2024 08:13:14 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 2B5F888E17; Wed, 16 Oct 2024 08:13:16 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1657588E49
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:13:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5C5C88E8C
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:13:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a99543ab209so947519066b.2
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:13:12 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a9a0ef5179dso400008866b.1
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:13:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729059191; x=1729663991; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729059193; x=1729663993; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=StS7Bd9wyPSpg655xcrWiCkyycmPYijDXix7NMpAQ1k=;
- b=AaRWpgSLf9/I/MazENNtWlFwVnubLZUe0WPmjWyXvAoiyH6tFl8jd9boNjALVNH8CE
- a37ikr9YeH7NrLBDoKPkBWBl//uAzD/WV/Yh+vEDbWRCzjJz/TLB6Dliak45mNVEtDxI
- +4H64do+NqD/D5Vcc3aKe9ipYGIrHXedbS3W5KQXpna7eMOu4R23PVJRKwShjRmxNiaB
- E/4PwFmOIkKb2NKSggXgARr3jTtj+MjGoKAZ4jcFS6MltdTkcR0C9OJ1cJKtdW1HjTax
- k39U0em5BeLUUWnYIClP3j+R3nnOSbAsPQx9DcKxnkRCcitm5G2fceLaqmDi/uazq9K0
- inFg==
+ bh=lDqKR+oJFEGtwrILszjJtuAprSpXpYQvSBfc/SkaPm8=;
+ b=Lo8jXBIqX0I4CmYoEE+5qI64vgxXis9nMferHrkm4WqWwcmzI3HjHUCpKWu13WktX2
+ +YPQKyyUVgMn9qFa2W9uUNB+yU7ZDPR8Vc/FSZqkCWZuxJVpRegQxeGN4luVzqYGGl79
+ GfhfALXMH6e1AzjoUJ4k/XYJAvMPt2MrFiIs4gmaDgp0hV18C+qHMZLEXee7mpuZWG6i
+ uwDytzkaTP2EuTWloGnVLz8boe3V4WuACcETLlen8bkA0o5/bzTWuB42WyNgFG16Qz3N
+ c+OD8zAyGP7Hhpth/i7mUPeTL8ZP3G93tJGnEIR9SrzHnS2ofCqzMSgUA2OY9zmaaX5U
+ a6hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729059191; x=1729663991;
+ d=1e100.net; s=20230601; t=1729059193; x=1729663993;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=StS7Bd9wyPSpg655xcrWiCkyycmPYijDXix7NMpAQ1k=;
- b=tQg9f+0TGVqgBI43I8zMwcmZaV3uQVcXm8c0QqD4OtTRGIrTDZTSRCnBjKvMO6iefa
- 9001Etaegl0Q1+iPi+6wlYS0PGURYoU3n6bs59o6j1QFCQrUPn1SY7RRv16x//VC47XR
- REIMyrvyCeH2CAJX0jkyBNWhfWzRSlIdUkGbK9k3rlOVlsO3wLJbgBZyrVXHPBo9zHMG
- iFwHHxFaBQ1r0FcE+cBK5yTqoiSVH7/M33caq6G8PkwT0KD7tFHQXYG40Goy5Crmcnpv
- xxWjBD6pmnG7pfOMKl6itaLWOXP1XGOFVINVJA6WWSCxqGGXEN78WjbKBycmJD+G781y
- FpSQ==
-X-Gm-Message-State: AOJu0YxExIPxFdZ6ILyCgb71myNSOTjq1H6zh50vPNuD+/rT2RC1///9
- zJOa9NxWhGx7isvHseYb9ZMSDWWiJZDeVVX7DyXYHaYXXZrnAC4BaMmZHqIGagTF51Ljd71H1Ur
- u
-X-Google-Smtp-Source: AGHT+IFmR5oPcuSaLmdqQM+ujKJxxJ/XTNRbE8R9d0OwdjvSr2XYhYTzoakGgRMlb6bDJUr6CFH6IQ==
-X-Received: by 2002:a17:907:9288:b0:a99:f167:47c7 with SMTP id
- a640c23a62f3a-a9a34e275a6mr221987266b.55.1729059191479; 
- Tue, 15 Oct 2024 23:13:11 -0700 (PDT)
+ bh=lDqKR+oJFEGtwrILszjJtuAprSpXpYQvSBfc/SkaPm8=;
+ b=xFjZU9wsnF6bpKMLaPkQzkTgBj2bVpsak7231FFEddP14rqNstXej8g4M6HlNTuc+i
+ 9hqqcEX3BUIPHk6bUDLGuTQF5veJgu6yJ7PexwLUFbYBr/6/8NNNxEI1l4yFYNYSqECI
+ NOcf8Mgh3SZ9E5aTW8z4ZrwYHu7ARs9RflRdC1PyYRW2Go0aywCwTjJDoR55qw6W6OqI
+ b0v5haha4J5kNZdr6aQS/ftfVfI6ZyHR9IUG8gEp8KzNBHp0uhLKBVN3C6Q90DMv9/PK
+ NOl3jeX73NF8cz/qq4Js4wFPH0+cPsxuBnrSzxQHGbeawmGt1ue55kTfMGiIYqjiFAjG
+ ss5Q==
+X-Gm-Message-State: AOJu0YxUjz+2Pp0xWy8a45PhrQlC1pU5SfaOlcGNgaOMQzUapd3R7Hkd
+ 3dgYfDv3/D8uH+7oYuYucJT89nBmA5bVOMPRWWefSB9TuBg8BhnfGoyvyFo+xBEgM00eYNffKvI
+ X
+X-Google-Smtp-Source: AGHT+IEy9ZXCma53Yx4jTol285/AwKdd9S2spw6fcfzybhxzzEoBfbEPrUTL7msYvqNYm+b5D3cWKQ==
+X-Received: by 2002:a17:907:efd3:b0:a9a:421:720 with SMTP id
+ a640c23a62f3a-a9a34dfb311mr204474966b.46.1729059193361; 
+ Tue, 15 Oct 2024 23:13:13 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.13.10
+ a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.13.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 23:13:11 -0700 (PDT)
+ Tue, 15 Oct 2024 23:13:13 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
-	linux-kernel@vger.kernel.org
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v9 20/37] arm: gic-v3-its: Implement of_xlate
-Date: Wed, 16 Oct 2024 08:04:06 +0200
-Message-ID: <20241016060523.888804-21-patrick.rudolph@9elements.com>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>
+Subject: [PATCH v9 21/37] arm: lib: Add GICV2 driver
+Date: Wed, 16 Oct 2024 08:04:07 +0200
+Message-ID: <20241016060523.888804-22-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241016060523.888804-1-patrick.rudolph@9elements.com>
 References: <20241016060523.888804-1-patrick.rudolph@9elements.com>
@@ -95,54 +95,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Translate IRQs by implementing of_xlate() as required by
-irq_get_by_index() to parse interrupt properties.
+Add a generic GICV2 driver that:
+- parses the DT and generates the ACPI MADT subtables
+- implement of_xlate() and allows irq_get_by_index() to return the
+  correct interrupt mappings
 
-Map DT interrupts to ARM GIC interrupts as follows:
+Map DT interrupts to ARM GIC interrupts	as follows:
 
 - Interrupt numbers ID32-ID1019 are used for SPIs
 - ID0-ID15 are used for SGIs
 - ID16-ID31 are used for PPIs
 
-TEST: Booted on qemu sbsa-ref that has a GICV3.
+TEST: Booted on QEMU raspb4 using GICV2 driver model generated MADT.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 ---
+Changelog v6:
+- Update header order
 Changelog v9:
-- Require at least 3 interrupt-cells
 - Map SPI interrupts to ID32+
 - Map PPI interrupts to ID16+
 ---
- arch/arm/lib/gic-v3-its.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ arch/arm/Kconfig      |  7 ++++
+ arch/arm/lib/Makefile |  1 +
+ arch/arm/lib/gic-v2.c | 89 +++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 97 insertions(+)
+ create mode 100644 arch/arm/lib/gic-v2.c
 
-diff --git a/arch/arm/lib/gic-v3-its.c b/arch/arm/lib/gic-v3-its.c
-index 22fa46a341..58f8bf864f 100644
---- a/arch/arm/lib/gic-v3-its.c
-+++ b/arch/arm/lib/gic-v3-its.c
-@@ -4,9 +4,11 @@
-  */
- #include <cpu_func.h>
- #include <dm.h>
-+#include <irq.h>
- #include <asm/gic.h>
- #include <asm/gic-v3.h>
- #include <asm/io.h>
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
- #include <linux/bitops.h>
- #include <linux/printk.h>
- #include <linux/sizes.h>
-@@ -163,8 +165,30 @@ static const struct udevice_id gic_v3_ids[] = {
- 	{}
- };
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 060636e9e2..263f85b0d0 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -113,6 +113,13 @@ config GICV2
+ config GICV3
+ 	bool
  
-+static int arm_gic_v3_of_xlate(struct irq *irq, struct ofnode_phandle_args *args)
++config DRIVER_GICV2
++	bool "ARM GICV2 driver"
++	select IRQ
++	help
++	  ARM GICV2 driver.
++	  Basic support for parsing the GICV2 node and generate ACPI tables.
++
+ config GIC_V3_ITS
+ 	bool "ARM GICV3 ITS"
+ 	select IRQ
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index a7efed6771..cf76051450 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -68,6 +68,7 @@ obj-$(CONFIG_FSL_LAYERSCAPE) += ccn504.o
+ ifneq ($(CONFIG_GICV2)$(CONFIG_GICV3),)
+ obj-y	+= gic_64.o
+ endif
++obj-$(CONFIG_DRIVER_GICV2)	+= gic-v2.o
+ obj-$(CONFIG_GIC_V3_ITS)	+= gic-v3-its.o
+ obj-y	+= interrupts_64.o
+ else
+diff --git a/arch/arm/lib/gic-v2.c b/arch/arm/lib/gic-v2.c
+new file mode 100644
+index 0000000000..b70434a45d
+--- /dev/null
++++ b/arch/arm/lib/gic-v2.c
+@@ -0,0 +1,89 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2019 Broadcom.
++ */
++#include <dm.h>
++#include <irq.h>
++#include <asm/gic.h>
++#include <asm/acpi_table.h>
++#include <cpu_func.h>
++#include <dm/acpi.h>
++#include <dt-bindings/interrupt-controller/arm-gic.h>
++
++#ifdef CONFIG_ACPIGEN
++/**
++ * acpi_gicv2_fill_madt() - Fill out the body of the MADT
++ *
++ * Write GICD and GICR tables based on collected devicetree data.
++ *
++ * @dev: Device to write ACPI tables for
++ * @ctx: ACPI context to write MADT sub-tables to
++ * Return: 0 if OK
++ */
++static int acpi_gicv2_fill_madt(const struct udevice *dev, struct acpi_ctx *ctx)
 +{
-+	if (args->args_count < 3) {
++	struct acpi_madt_gicd *gicd;
++	fdt_addr_t addr;
++
++	addr = dev_read_addr_index(dev, 0);
++	if (addr == FDT_ADDR_T_NONE) {
++		pr_err("%s: failed to get GICD address\n", __func__);
++		return -EINVAL;
++	}
++
++	gicd = ctx->current;
++	acpi_write_madt_gicd(gicd, dev_seq(dev), addr, 2);
++	acpi_inc(ctx, gicd->length);
++
++	return 0;
++}
++
++static struct acpi_ops gic_v2_acpi_ops = {
++	.fill_madt	= acpi_gicv2_fill_madt,
++};
++#endif
++
++static const struct udevice_id gic_v2_ids[] = {
++	{ .compatible = "arm,arm11mp-gic" },
++	{ .compatible = "arm,cortex-a15-gic" },
++	{ .compatible = "arm,cortex-a7-gic" },
++	{ .compatible = "arm,cortex-a5-gic" },
++	{ .compatible = "arm,cortex-a9-gic" },
++	{ .compatible = "arm,eb11mp-gic" },
++	{ .compatible = "arm,gic-400" },
++	{ .compatible = "arm,pl390" },
++	{ .compatible = "arm,tc11mp-gic" },
++	{ .compatible = "qcom,msm-8660-qgic" },
++	{ .compatible = "qcom,msm-qgic2" },
++	{}
++};
++
++static int arm_gic_v2_of_xlate(struct irq *irq, struct ofnode_phandle_args *args)
++{
++	if (args->args_count != 3) {
 +		log_debug("Invalid args_count: %d\n", args->args_count);
 +		return -EINVAL;
 +	}
 +
++	/* ARM Generic Interrupt Controller v1 and v2 */
 +	if (args->args[0] == GIC_SPI)
 +		irq->id = args->args[1] + 32;
 +	else
@@ -153,16 +236,17 @@ index 22fa46a341..58f8bf864f 100644
 +	return 0;
 +}
 +
-+static const struct irq_ops arm_gic_v3_ops = {
-+	.of_xlate		=  arm_gic_v3_of_xlate,
++static const struct irq_ops arm_gic_v2_ops = {
++	.of_xlate		=  arm_gic_v2_of_xlate,
 +};
 +
- U_BOOT_DRIVER(arm_gic_v3) = {
- 	.name		= "gic-v3",
- 	.id		= UCLASS_IRQ,
- 	.of_match	= gic_v3_ids,
-+	.ops		= &arm_gic_v3_ops,
- };
++U_BOOT_DRIVER(arm_gic_v2) = {
++	.name		= "gic-v2",
++	.id		= UCLASS_IRQ,
++	.of_match	= gic_v2_ids,
++	.ops		= &arm_gic_v2_ops,
++	ACPI_OPS_PTR(&gic_v2_acpi_ops)
++};
 -- 
 2.46.2
 
