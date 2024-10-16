@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8458ED2069A
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:14:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFEA8D2069E
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:14:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F418988DF1;
-	Wed, 16 Oct 2024 08:13:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6DBB288E36;
+	Wed, 16 Oct 2024 08:13:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Klzfb7cC";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="acvGP2ME";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C15288D7E; Wed, 16 Oct 2024 08:13:00 +0200 (CEST)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id A412588D9A; Wed, 16 Oct 2024 08:13:01 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23A8388B0C
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:12:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5CD788DE6
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:12:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2fb51e00c05so39181001fa.0
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:12:58 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a9932aa108cso925018666b.2
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:12:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729059177; x=1729663977; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729059179; x=1729663979; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LgUH/j7Y4ssXH4OFnj8ziNsgQJMqug2+57e7KEKxB7E=;
- b=Klzfb7cCxGvaqcdbxwLffpHlYMQWsDUCyrk2sxwFW+p37uXAC99HeIGl3x7AoKs0uo
- PBWEsCZjPxmlI1PNzyL05Q0IZekeNiyCopUKF6e0xxDKGbLCu+Z0oOXr9rjlQW3XkbjC
- RvQZj8QPi28Z+SDVlkWxMRMxlNT4TU193+jmcUeAClNrux23ndtbjOIjwZLBCcgfPqPn
- 3ceo9Snew24VR7CtOFuPkNCI7wY8bVhnAIVTxGlILIJa7nCuDkMB6pTlxzsfget8G+Ok
- zHIhfz+7cl1w+X1ZGitkBG+4ifS1VqpXkhNaEbrwzIxQQEn6h9AM3qMvdybpoKLXRcg8
- 8Bbg==
+ bh=kSrBg6WNCv5eafqaOHFIM/ODz+4dLDBi/SoKmXvfzdo=;
+ b=acvGP2MEc0KnleNQmbEibthaVBSQTFCyOGWgZBMT8tJGacrrVFOuvoQN6MOzQTkNA2
+ Qm+eqm0mFn2WCtryTg2mgR1a7W7EK/gQEWGvRQdsCdiqPFditge6yK49nUIczuWRwah0
+ VbcMQ65zsOoZPSBUewWmmdM1CZfsiSIg8wVNrRxJNRIhMVAwZevuiFTBfxXRoGjmWDnB
+ DSAzf9aea3/0nZoCGiJbsOP/6yL7XHJMTUgBpVx19IfTEbyvKnSquoFKyjhtBFKNfsjU
+ h/AKftSBttYv02zGsU2PI6HO9Qa2Zr326D78T3/tgzXY9w9dTQJU2UkY2suhMyeie94p
+ gqSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729059177; x=1729663977;
+ d=1e100.net; s=20230601; t=1729059179; x=1729663979;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LgUH/j7Y4ssXH4OFnj8ziNsgQJMqug2+57e7KEKxB7E=;
- b=fWgbKWwY4IPaBfUx9goK5ppX7tDy6EhB9D5jxTyjkTyf0PcxRa+sMeOX4OMG+9pkjf
- lQrMg+ozkcl+HAf1i5IRfszN1Etxu7Fyd41NOz2C4g56u0jcbSDQ//BOld6o0we+qyjP
- DhXcFqVbhW/JtufoQWTsmqI0fDJnj2whlnewGSSS2SRo7CW5Gh1O1s242iruJJGwROEP
- 3IjawzSm7UX2/SLIOxb9peSwt92z88EJCT6r/+H7+rityVoyyqnq55/e0HNAf5oJka3j
- M2LW5z3DCe0V4THuAJmQdlKeLPFskAjYdnlKQM5NiR6WwEV3OEImIWEcCDlhnKnWdyPj
- iV0g==
-X-Gm-Message-State: AOJu0Yw16mVjk26/c3kc8jSUPa7We++CnuEn0538T5KLmUZY+6AtXnSn
- QhRbIuavT571hEetRpfCv0rtSfaSIvSold4v8+7SZ1yvD0Hy13SwBmdMCMN6TZYqDbqgHsRHo2v
- l
-X-Google-Smtp-Source: AGHT+IGprIS5ihOKrxhWnjFKBcBb5HHlD95qAGLLkfPISOpLbRdm0M6ORBWKvMx6tUfEq7r3yw687Q==
-X-Received: by 2002:a2e:be8c:0:b0:2fa:d7ea:a219 with SMTP id
- 38308e7fff4ca-2fb3f2edd5amr89697941fa.37.1729059177260; 
- Tue, 15 Oct 2024 23:12:57 -0700 (PDT)
+ bh=kSrBg6WNCv5eafqaOHFIM/ODz+4dLDBi/SoKmXvfzdo=;
+ b=cjgsK0keABR9CKRWsY6QpdItHSirJkSisaScNRglF5AmKmttE8gG3JNifaonievJnw
+ o2+itZjWR3OuUW8lU9smnnmNIIQxfAmaahQX7Bf3R0WdM1PCycZFq3UsiUX2BTZFVCi4
+ xXcCa2i3tuyoMgrV/KMv+4//cT7WAwYV+5GeK+DeeLby7v+RN82G/pSvhvCTsBaZhkPX
+ SbXH6lb8vSpJFCDm4FNjAIdVE3dc2KkpW6/XYgNjIftb4lQ3/WYaLaGZMQYtpp3P9LiY
+ Z6SbxGEg8okzYJeot2lER8oLP/oBgJJhzy6rGWZJgmIeJEERAsbjumDIJo6LtmglbFkJ
+ UZOg==
+X-Gm-Message-State: AOJu0Yye4uSgixMNXDNZbV4KTvQOHa8oYTUwpqIK4AmUXviApkxHAAlj
+ n9nuO+5FIPrYWERykOkb5opeVwEEpGLBURfHPHhHVScOSdp4QXcMO+t6dWQoMMk5Kw9BpTUFWV0
+ y
+X-Google-Smtp-Source: AGHT+IEU3WEgl0STrcytFkgz6Xe0v8j89ABo1nYlXGTfdUc3AK6C/yqXfR8z44XYMY2J685f10V9+w==
+X-Received: by 2002:a17:906:dc92:b0:a9a:90c:8bc with SMTP id
+ a640c23a62f3a-a9a090c0a28mr820112566b.12.1729059179041; 
+ Tue, 15 Oct 2024 23:12:59 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.12.56
+ a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.12.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 23:12:56 -0700 (PDT)
+ Tue, 15 Oct 2024 23:12:58 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v9 13/37] acpi_table: Support platforms with unusable RSDT
-Date: Wed, 16 Oct 2024 08:03:59 +0200
-Message-ID: <20241016060523.888804-14-patrick.rudolph@9elements.com>
+Subject: [PATCH v9 14/37] acpi: Allocate and write ACPI tables
+Date: Wed, 16 Oct 2024 08:04:00 +0200
+Message-ID: <20241016060523.888804-15-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241016060523.888804-1-patrick.rudolph@9elements.com>
 References: <20241016060523.888804-1-patrick.rudolph@9elements.com>
@@ -95,141 +95,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since ACPI 2.0 the RSDT is deprecated and the XSDT should be preferred.
-Until now the RSDT and XSDT entries were keept in sync as all platforms
-that installed ACPI tables placed them below 4GiB and thus the address
-would fit into the 32bit RSDT.
+Allocate memory for ACPI tables in generic acpi code. When ACPI wasn't
+installed in other places, install the ACPI table using BLOBLISTs.
 
-On platforms that do not have usable DRAM below 4GiB, like QEMU sbsa,
-the RSDT cannot be used. Allow both RSDT and XSDT to be null and only
-fill those tables that are present in acpi_add_table().
+This allows non x86 platforms to boot using ACPI only in case the
+EFI loader is being used, since EFI is necessary to advertise the location
+of the ACPI tables in memory.
 
-TEST: Fixes a crash on QEMU sbsa and allows to boot on QEMU sbsa.
+TEST: Booted QEMU SBSA (no QFW) using EFI and ACPI only.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 ---
-Changelog v4:
-- Updated commit message and better explain why this change is needed
+Changelog v8:
+- Only use bloblist to store tables on arm
 ---
- lib/acpi/acpi_table.c | 95 ++++++++++++++++++++++++++-----------------
- 1 file changed, 57 insertions(+), 38 deletions(-)
+ lib/acpi/acpi_table.c            | 66 +++++++++++++++++++++++++++++++-
+ test/py/tests/test_event_dump.py |  1 +
+ 2 files changed, 66 insertions(+), 1 deletion(-)
 
 diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index 9d9c8befe8..d6357bdc4d 100644
+index d6357bdc4d..e6ebffcf1b 100644
 --- a/lib/acpi/acpi_table.c
 +++ b/lib/acpi/acpi_table.c
-@@ -157,51 +157,70 @@ int acpi_add_table(struct acpi_ctx *ctx, void *table)
- 	struct acpi_rsdt *rsdt;
- 	struct acpi_xsdt *xsdt;
+@@ -5,8 +5,11 @@
+  * Copyright 2019 Google LLC
+  */
  
--	/* The RSDT is mandatory while the XSDT is not */
--	rsdt = ctx->rsdt;
--
--	/* This should always be MAX_ACPI_TABLES */
--	entries_num = ARRAY_SIZE(rsdt->entry);
--
--	for (i = 0; i < entries_num; i++) {
--		if (rsdt->entry[i] == 0)
--			break;
--	}
--
--	if (i >= entries_num) {
--		log_err("ACPI: Error: too many tables\n");
--		return -E2BIG;
--	}
-+	/* On legacy x86 platforms the RSDT is mandatory while the XSDT is not.
-+	 * On other platforms there might be no memory below 4GiB, thus RSDT is NULL.
-+	 */
-+	if (ctx->rsdt) {
-+		rsdt = ctx->rsdt;
- 
--	/* Add table to the RSDT */
--	rsdt->entry[i] = nomap_to_sysmem(table);
-+		/* This should always be MAX_ACPI_TABLES */
-+		entries_num = ARRAY_SIZE(rsdt->entry);
- 
--	/* Fix RSDT length or the kernel will assume invalid entries */
--	rsdt->header.length = sizeof(struct acpi_table_header) +
--				(sizeof(u32) * (i + 1));
-+		for (i = 0; i < entries_num; i++) {
-+			if (rsdt->entry[i] == 0)
-+				break;
-+		}
- 
--	/* Re-calculate checksum */
--	rsdt->header.checksum = 0;
--	rsdt->header.checksum = table_compute_checksum((u8 *)rsdt,
--						       rsdt->header.length);
-+		if (i >= entries_num) {
-+			log_err("ACPI: Error: too many tables\n");
-+			return -E2BIG;
-+		}
- 
--	/*
--	 * And now the same thing for the XSDT. We use the same index as for
--	 * now we want the XSDT and RSDT to always be in sync in U-Boot
--	 */
--	xsdt = ctx->xsdt;
-+		/* Add table to the RSDT */
-+		rsdt->entry[i] = nomap_to_sysmem(table);
- 
--	/* Add table to the XSDT */
--	xsdt->entry[i] = nomap_to_sysmem(table);
-+		/* Fix RSDT length or the kernel will assume invalid entries */
-+		rsdt->header.length = sizeof(struct acpi_table_header) +
-+					(sizeof(u32) * (i + 1));
- 
--	/* Fix XSDT length */
--	xsdt->header.length = sizeof(struct acpi_table_header) +
--				(sizeof(u64) * (i + 1));
-+		/* Re-calculate checksum */
-+		rsdt->header.checksum = 0;
-+		rsdt->header.checksum = table_compute_checksum((u8 *)rsdt,
-+							       rsdt->header.length);
-+	}
- 
--	/* Re-calculate checksum */
--	xsdt->header.checksum = 0;
--	xsdt->header.checksum = table_compute_checksum((u8 *)xsdt,
--						       xsdt->header.length);
-+	if (ctx->xsdt) {
-+		/*
-+		 * And now the same thing for the XSDT. We use the same index as for
-+		 * now we want the XSDT and RSDT to always be in sync in U-Boot
-+		 */
-+		xsdt = ctx->xsdt;
+-#include <dm.h>
++#include <bloblist.h>
+ #include <cpu.h>
++#include <dm.h>
++#include <efi_api.h>
++#include <efi_loader.h>
+ #include <log.h>
+ #include <mapmem.h>
+ #include <tables_csum.h>
+@@ -16,6 +19,14 @@
+ #include <acpi/acpi_device.h>
+ #include <asm/global_data.h>
+ #include <dm/acpi.h>
++#include <linux/sizes.h>
++#include <linux/log2.h>
 +
-+		/* This should always be MAX_ACPI_TABLES */
-+		entries_num = ARRAY_SIZE(xsdt->entry);
++enum {
++	TABLE_SIZE	= SZ_64K,
++};
 +
-+		for (i = 0; i < entries_num; i++) {
-+			if (xsdt->entry[i] == 0)
-+				break;
-+		}
-+
-+		if (i >= entries_num) {
-+			log_err("ACPI: Error: too many tables\n");
-+			return -E2BIG;
-+		}
-+
-+		/* Add table to the XSDT */
-+		xsdt->entry[i] = nomap_to_sysmem(table);
-+
-+		/* Fix XSDT length */
-+		xsdt->header.length = sizeof(struct acpi_table_header) +
-+					(sizeof(u64) * (i + 1));
-+
-+		/* Re-calculate checksum */
-+		xsdt->header.checksum = 0;
-+		xsdt->header.checksum = table_compute_checksum((u8 *)xsdt,
-+							       xsdt->header.length);
-+	}
++DECLARE_GLOBAL_DATA_PTR;
  
- 	return 0;
+ /*
+  * OEM_REVISION is 32-bit unsigned number. It should be increased only when
+@@ -752,3 +763,56 @@ static int acpi_write_iort(struct acpi_ctx *ctx, const struct acpi_writer *entry
  }
+ 
+ ACPI_WRITER(5iort, "IORT", acpi_write_iort, 0);
++
++/*
++ * Allocate memory for ACPI tables and write ACPI tables to the
++ * allocated buffer.
++ *
++ * Return:	status code
++ */
++static int alloc_write_acpi_tables(void)
++{
++	u64 table_end;
++	void *addr;
++
++	if (IS_ENABLED(CONFIG_X86) ||
++	    IS_ENABLED(CONFIG_QFW_ACPI) ||
++	    IS_ENABLED(CONFIG_SANDBOX)) {
++		log_debug("Skipping writing ACPI tables as already done\n");
++		return 0;
++	}
++
++	if (!IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
++		log_debug("Skipping writing ACPI tables as BLOBLIST_TABLES is not selected\n");
++		return 0;
++	}
++
++	/* Align the table to a 4KB boundary to keep EFI happy */
++	addr = bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SIZE,
++			    ilog2(SZ_4K));
++
++	if (!addr)
++		return log_msg_ret("mem", -ENOMEM);
++
++	gd->arch.table_start_high = virt_to_phys(addr);
++	gd->arch.table_end_high = gd->arch.table_start_high + TABLE_SIZE;
++
++	table_end = write_acpi_tables(gd->arch.table_start_high);
++	if (!table_end) {
++		log_err("Can't create ACPI configuration table\n");
++		return -EINTR;
++	}
++
++	log_debug("- wrote 'acpi' to %lx, end %llx\n", gd->arch.table_start_high, table_end);
++	if (table_end > gd->arch.table_end_high) {
++		log_err("Out of space for configuration tables: need %llx, have %x\n",
++			table_end - gd->arch.table_start_high, TABLE_SIZE);
++		return log_msg_ret("acpi", -ENOSPC);
++	}
++
++	log_debug("- done writing tables\n");
++
++	return 0;
++}
++
++EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, alloc_write_acpi_tables);
+diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
+index e282c67335..45143c1c7d 100644
+--- a/test/py/tests/test_event_dump.py
++++ b/test/py/tests/test_event_dump.py
+@@ -18,6 +18,7 @@ def test_event_dump(u_boot_console):
+ --------------------  ------------------------------  ------------------------------
+ EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_request.c:.*
+ EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
++EVT_LAST_STAGE_INIT   alloc_write_acpi_tables         .*lib/acpi/acpi_table.c:.*
+ EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader/efi_smbios.c:.*
+ EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/cpu/start.c:.*
+ EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
 -- 
 2.46.2
 
