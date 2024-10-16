@@ -4,142 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CA7FD2A526
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 15:10:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E96D2A528
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 15:23:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59C2D88C05;
-	Wed, 16 Oct 2024 17:10:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id D452088C05;
+	Wed, 16 Oct 2024 17:23:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="RNTcQ5v2";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fw5vdzMc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 198C388CC5; Wed, 16 Oct 2024 17:10:38 +0200 (CEST)
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur02on2060d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2607::60d])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 96A5B88D14; Wed, 16 Oct 2024 17:23:19 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B07FF88BC2
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 17:10:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D51888BC2
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 17:23:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Iawevd/cbzUV7aoSUZzjHba3qm9iupOAp7xEOOdSmYuyTq3naNcKe3AEuwUra7R6UO9yN5dTtcHzL8g3YkBSLfL0x1csQVjO8YkMG7cDvamBwQCNxZknnjDABx2iMvmfYCCrSIkepeBy8NzO7K9KnlPSbIavYOMjIphnqx4GBxleijoyZzGkXEzWv2duZqSHDuZ8zIQ87dNEdTEH/vRAibEgS9ha2UIDhKJukiedkV9R1nrH/qpaj2QNq/z6PrdG/eHCa5NftpwWSqGV55b5Iac7j4xeyARQrDuNc4N2PdYXzsrnJ3NFbU68tBlUubQFsxhok6lS6PEk1j2mNDbVYg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IQd4isQv47yuK0XG3U1JDFsWyzFKYpbWnXPIrGs2Q4Y=;
- b=DWfbDmYUPfX6DGr/43ajIowtrFVdlYUJC8zUjGVMVYFDm1fA5/lK4hWrjV3NfAUOelrm6j3iBUszVE1OYCpgRGSf2W75Jo7iJmNRvRw8Rh/YeBLFmt0ta5QUlAnySJUftKkxAMuGRmePG4MUcP07P3TXgUdwlURjxx7pIaPJ/NMbpsPJx7hmOmuf/tSur5FSoxnWRxDkI8DzhJORIxVZu1q6fr8XNDDepAqtDoSKm+DrdRzZGmSxTPdgn1Gi3W6BK6LjKscVquADp+IamQB69Kne+k2z2qzKRR1Z7X4QhwuMhukvHY1UFEmTiV5cu7y6JwRTi4fcCkNr6FifedG85Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IQd4isQv47yuK0XG3U1JDFsWyzFKYpbWnXPIrGs2Q4Y=;
- b=RNTcQ5v2nUwbzKoyC2bVR3SHL9+90vQthSJcaVNdcUZngUjf4nPHz2Qd5gn+/275wBR/nLiR6mZHrxV2k3AxprB0z7QWo432aQkBO9wToSxBCpY55bl3hS4cdiwpdJ4i1Cqm1ufHrKa9rmzb1fpRXUhG6iHat13BWsYuggM2K3E=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by AS8PR10MB5927.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:529::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.17; Wed, 16 Oct
- 2024 15:10:33 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691%3]) with mapi id 15.20.8069.016; Wed, 16 Oct 2024
- 15:10:33 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Cc: emkan@prevas.dk, Joe Hershberger <joe.hershberger@ni.com>,
- Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH] envtools: make them build again
-Date: Wed, 16 Oct 2024 17:10:35 +0200
-Message-ID: <20241016151035.709351-1-ravi@prevas.dk>
-X-Mailer: git-send-email 2.47.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0098.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:9::30) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2e3d523a24dso238513a91.0
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:23:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729092195; x=1729696995; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jEileMepHtco8SorJVErU5x1EUvMv/NJgToviLZfMK8=;
+ b=Fw5vdzMchdUaHw5yD3OJp5B6/g3lYN4BnKihNbo93sdSO6pQZM+rIr4ktczFb39Ls6
+ /yMvkvszr/mgW2VCPxEmfRcIXYeT8+2ii3emjvlxinSHP5gd7sEMSKkwXpjiD9EFYLA7
+ 1XYRar3BjpJOMe/aLmPvyuGQ0dS3KbQleLaXx8rIEflwKjR6J4fZw7fVgQiHUox85Qlp
+ aLJgZY2p0hYquIxzZUvhHpKH7VTbz95zI1NnmPCZPuebJBz+Y0dc1sXdSxly2JzpXOkB
+ nqH8D8uA9O5wdRJWjvAujpcI3NOR7QcvetAT6ixS7HlJcLuchubkTb6soC9BOnJLusjE
+ Bj2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729092195; x=1729696995;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jEileMepHtco8SorJVErU5x1EUvMv/NJgToviLZfMK8=;
+ b=Snsxbe5fxOjOvdPvfwMYX8E3iCdLGNgiIzoysoqh1InuHcfHJWXW+DyQa3OdlZWlvy
+ yTcol7sf6o8nQSPmrzrg5Q7I4wVwK2anEHQSjsnLpBY8p60xqPFDq5ljnoO0WH14WVOD
+ 0Re3XgnljHDwvpOU2nADcD1apzbufx454Z1Lm9JyKFEZxVe8I3mIeSQg1LRQpKD9MeUd
+ jHVxBjjZJowDX3FbBDYiJrAlAHftq2Du8gl7zEtZ8+wn/1gCVvHH4ukf8zbK0TEMV/lU
+ beqebuGIT2fPBZPoZmWfvmDE8s/vlr5q9aXUv2a/M1/tz3er23vVvSQdJFLgesQ6+IVT
+ hcCw==
+X-Gm-Message-State: AOJu0YyFd/w6/wIu4eSIhIzo69SWijaDwP9UUKalwj1JXoQnhdnmcEUS
+ b9KX5lAid9XFwIQC5kdJMD0goKsGMz9Rg6jEk6XN4Gj0y5uMnQiiq/vjii6riCkPWfmk/K1VZyI
+ FTX9Ti6bdSTn8TyIxNiWhE+mT231or3FJNHUA2g==
+X-Google-Smtp-Source: AGHT+IHgv4fkPnnVl1eiUaWqpTddgfEMnZnvuws+Bb+hxLfadUbL/0MROQOhvOKnk6JZueXj/vBS+CCC6H4odhkNa2A=
+X-Received: by 2002:a17:90a:9a9:b0:2e2:c6a6:84da with SMTP id
+ 98e67ed59e1d1-2e3ab8e7c1dmr4347274a91.34.1729092194836; Wed, 16 Oct 2024
+ 08:23:14 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|AS8PR10MB5927:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9f0aad08-613f-4909-bdc0-08dcedf4ae96
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|52116014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4vKxuVo8BX01mMidvB7uscY39cm9kr5dc3s+I49CBX/R1MOMziNVdpfNwL4u?=
- =?us-ascii?Q?p5UZSbF9xvE2w2rzMKeXoGPrCNCXMum0zrP5saqe6WVYRCfrVKths+rZIuXb?=
- =?us-ascii?Q?uO7pf2UlKUop4FMcN0xRwkY9Pj+7opouAKHCl/OzeotFuy1mj/tG1MP2XFGe?=
- =?us-ascii?Q?ZM6qVjLhXjMQS0FwGWTkckbbSN5HkRXmdXn65A1HWCyCOGAy9PrB9wQCW21h?=
- =?us-ascii?Q?0UV6pqpJlNAUaQyrKdPNbJK8HrkSjLEt/LTxhm9spMl9qgAH8GwjE2RpO65T?=
- =?us-ascii?Q?4JjLJ6HX2NMSPLlXMPb2hj1LbtZjwCjozsPZrZBbt739BN7nfxiQHx0ylHRw?=
- =?us-ascii?Q?cBQMamqqa3e/pCB1Q/V1NnR3xRHdW8SCP8+AfYzP5/efrohn2iJtoXlRrKJ/?=
- =?us-ascii?Q?1zuLz7q1jmos9sKsv7GvnrQbL+emiGKMw8eYEQAKFC5nNS3B4eaV/cnbcPOd?=
- =?us-ascii?Q?6zwCzw419o1euIo/LOVCDFvFnL7pmUf+0OtQlgumThfOsTQOkeknDolrnirr?=
- =?us-ascii?Q?XIVW+/2ySIc3j0vYaUTO7NZxuUfCuzIf1fPQciihp0FNPTx3lebRrNCzCAFo?=
- =?us-ascii?Q?D+ec/H38VOGqarpcfCqlfDMgar4CKlWIwx2+Ftol+kViMZwoZS57reQwYNod?=
- =?us-ascii?Q?y1SYA8g6KrdvASVmh6Yo6csmeSB4KPKMJyIQuQwPENfl4ZFz4rrvBvbdq4wR?=
- =?us-ascii?Q?wWGTOfOtf0wj9FpGM9KpsaTeMlR++0wMiTFLJ6WsouaZZaEXNF4gK4b4Jkz7?=
- =?us-ascii?Q?6jBdDY5qH95EIbYucahXbfGoe/MNaHOPfgTm6QJtF5jXavB0fJGHsQz2smfl?=
- =?us-ascii?Q?dRaE2qGDV75QzFwVzSaX6+EFMolL9IWLkLZuZQeOKBrlZJgkzPdCnSzDI4R1?=
- =?us-ascii?Q?5ehJfBQPsyegsncufCfifIGHUU9W3eMOfBLT/tOWT/FxqiaCLx61bNyhc0v3?=
- =?us-ascii?Q?EQ3TrlH2J9Ts0wgfnB74Qn97DCkrSW0WVk70djIDNwraTC4SxEavVWzh29LF?=
- =?us-ascii?Q?cR4gMNC4Ha8/eTP3/cxrILgW0sxbujYZaHZuAeXyATjZUNfIIHgh2RSwC3mU?=
- =?us-ascii?Q?tiGmaBGmeLEFbujBKDwAbvN86Lq1R1340+H9RxFZpjRj655M4qfK1BxTz9UP?=
- =?us-ascii?Q?5NdJnyiEOS3AHhcEjVPzfdxXIqsxi/n48wzj689gWVARfkoUu01P8/Fo7lEd?=
- =?us-ascii?Q?nB5ioXdQQrs9PYdvenuQCzIylp9q3iT4RTNklefgdleeS78rZCax+gG6deG0?=
- =?us-ascii?Q?G2/d4V3hl5smpfdopxp6MrWJKlYHRyreTtsjVhiX5a9qCQs/99GO/6jD/fKx?=
- =?us-ascii?Q?BvGZ1UwGokdiTLa9KaGJhxkYljpmzdmSTMxqOEM9Bh2y0A=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?+9lzHKPb8Gm6oIs44X+0ExpJiGN7f9VqgG8mfGczT1/X3k/5vcvmgK8qPQtj?=
- =?us-ascii?Q?0uN3HRI1MHSHDPbVouds3mFuCazdZUEHSYObDH6JAqoFruA9wqvJmrkvVh5Z?=
- =?us-ascii?Q?tgyyEsYam8YhwezlTS98e2GLCcfqWuc9RTJ/PN2gH+NKo/Dmvil35Salyz4o?=
- =?us-ascii?Q?fF2/0qiDFgxr+JOVAs1IcqPmgc4zwqBzi9vub3QvbwQtxsgXSdctPcWQE1J6?=
- =?us-ascii?Q?RCMgImD+rSq3KMlesFaEKjd6a8vf5pWwlEik0grEYjU6WDgGh/EmB9cAFZhU?=
- =?us-ascii?Q?08QOfzsIFomwiamH6jGYIdW0Rv6659Z1OKxh0x5Ud2ws2SnpELZtABLle1uW?=
- =?us-ascii?Q?DO2eDc4f5T977bnxorTm4ydiETjJW2LuqJU5L2TyI4Boet6zgTWtIumrEbvs?=
- =?us-ascii?Q?f82McQ57cAhswVQrdsj8xyCmESX5RvidXrkBOCrOogobUar5Tj7eoB4JV6jp?=
- =?us-ascii?Q?zNh2ZOCcQBNScQ0tlPxkqBFSBOaVF+v+4CE+DT/Z8yCbC8ove18QOShabyWr?=
- =?us-ascii?Q?3ta2YxOksnlHh+TvJ1vMkiDZIfuI08bt0xhqRlDUeMbehnDnuYwOh5bEgm2/?=
- =?us-ascii?Q?ABA7jUOkaPGIvE0GWzz9pTtclayHcLgPiRzScgRLdTVqPJGaqFZUsKFd8RKf?=
- =?us-ascii?Q?mA91o5pZLYqdJzPxO4J+UujneEsZsesbvJYP2erJF06wtSUuhaleslWrJFs5?=
- =?us-ascii?Q?+O5rPShjJN9Ue+dNZvInt4UhguviMjED1jihfFVP5GYHcSqn758JmJQH035x?=
- =?us-ascii?Q?iW14S3/RwYmltFxp+9aOdjBCJb3ZHCi+QEoC/CixZbIGeLh9Tk9/HegofWZ1?=
- =?us-ascii?Q?BqdAN2oNAvEeLRqTaSj6qLpbAUt5KlAwJCNNToBa13wkiJztqhbuXid90zok?=
- =?us-ascii?Q?/DHcQsFEKuREIZJGy1ayIb2asJRmSjcgeClBA0FJybCsYOk/WHsMO5uP6lZA?=
- =?us-ascii?Q?EogzAMBVQNaN98G3lkh0JMM1ZxWrm23gnbMxxkagGvaYLW51aDFlUsaQXT3z?=
- =?us-ascii?Q?A0DEio4u/dNEjDwy9jAcsmlRSqk5/aRI/NimR9E5SiWFp9OMeL4ctbZVaREp?=
- =?us-ascii?Q?O9sD47HFhou7QU+M8Y75MtPtuLa6CjI5gRVjSpgdwcmBYAYpIsx1khPZhTX1?=
- =?us-ascii?Q?ekoewDrvqKWaGzLzlAeK6CQhlg0SJ4Wrxcdx02Io/3ZyDIPJahmGWuTF9RBe?=
- =?us-ascii?Q?JRFOx9+IbfnYyzOXc24dOuHprxoUb/1ZBXhg85fzLWdBE72dJFjYGnIfR/Qi?=
- =?us-ascii?Q?wgBm14znY+iUIpP3zfChC1XK1OV266djFvIuo9lwZz2Frtl156URuNpV+ink?=
- =?us-ascii?Q?tLggszdjcE1rsqlM4wc4FuI8og4Li+sEFRB9w5kSf5COin7gR/hi36PBSIX/?=
- =?us-ascii?Q?lkq4Qbe+aM1bJ6LKSzoaZjpwP6L3t3oZYYofUKrbPZxWK67Ffb4iUhjRz7N2?=
- =?us-ascii?Q?F6K6qSPIMNarhBDG40xOlcAGEXdEQtGxz7MoXPjV98876whMG1jIJ1FLHlOd?=
- =?us-ascii?Q?W+DCzLywx5gqk5+DHtkHT0Nlr7mfc7M191N6di0OmJc1RqcoWARc6HB88F9T?=
- =?us-ascii?Q?AebUwyDfJMFJwcVxvGsfnsZL56xrWSNTmTnqv2hGY0gb4GVCL5yF+cKbdrFK?=
- =?us-ascii?Q?2w=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9f0aad08-613f-4909-bdc0-08dcedf4ae96
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2024 15:10:33.7701 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ndSlk5+xeMIJGv7QhYBLoud3f6EP/EYoahY8kPXSSZ5FhiEMq7NcXW/TAadhsV2RSa/Lkw/aB+SMHIrhHL9xVVTAgUQ2yc+OyveUPF8ZhWA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB5927
+References: <20241016034725.GD6412@bill-the-cat>
+In-Reply-To: <20241016034725.GD6412@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 16 Oct 2024 11:23:02 -0400
+Message-ID: <CAEfUkUJ4Z5eb7oQxSYz-N8UQ9VT8Hs=RvajNcB7dWS1zyLLV-Q@mail.gmail.com>
+Subject: Re: New Defects reported by Coverity Scan for Das U-Boot
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Vignesh R <vigneshr@ti.com>, 
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Tudor Ambarus <tudor.ambarus@linaro.org>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Pratyush Yadav <p.yadav@ti.com>, 
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Joakim Tjernlund <joakim.tjernlund@infinera.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,72 +94,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In v2024.10, "make envtools" is broken for at least these defconfigs:
+Hi Tom,
 
-   am335x_evm_defconfig
-   rpi_3_defconfig
-   rpi_4_defconfig
-   mx7dsabresd_defconfig
-   wandboard_defconfig
-   imx8mp_evk_defconfig
+On Tue, 15 Oct 2024 at 23:47, Tom Rini <trini@konsulko.com> wrote:
 
-The only defconfig we use for which it is not broken is
-stm32mp13_defconfig. They all work just fine in v2024.07.
+> Hey all, here's the latest report.
+>
+> ---------- Forwarded message ---------
+> From: <scan-admin@coverity.com>
+> Date: Tue, Oct 15, 2024 at 5:06=E2=80=AFPM
+> Subject: New Defects reported by Coverity Scan for Das U-Boot
+> To: <tom.rini@gmail.com>
+>
+>
+> Hi,
+>
+> Please find the latest report on new defect(s) introduced to Das
+> U-Boot found with Coverity Scan.
+>
+> 22 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+>
+>
+> New defect(s) Reported-by: Coverity Scan
+> Showing 20 of 22 defect(s)
+>
+> [snip]
 
-The symptoms are slightly different, but all related to the fact that
-some transitively included header uses IS_ENABLED or CONFIG_IS_ENABLED
-without linux/kconfig.h having already been included.
 
-A simple git bisect doesn't produce anything sensible, it ends up at
-3a9f642ca94 (crypto: nuvoton: npcm_sha: Support SHA 384/512) which
-clearly has nothing to do with this. But digging deeper, one
-eventually finds 0f92fa45603 ("env: Remove <common.h> and add needed
-includes").
+>
+> *** CID 510809:  Resource leaks  (RESOURCE_LEAK)
+> /lib/mbedtls/pkcs7_parser.c: 385 in x509_populate_sinfo()
+> 379                                   signed_info);
+> 380             if (ret)
+> 381                     goto out_err_sinfo;
+> 382
+> 383     no_authattrs:
+> 384             *sinfo =3D signed_info;
+> >>>     CID 510809:  Resource leaks  (RESOURCE_LEAK)
+> >>>     Variable "mctx" going out of scope leaks the storage it points to=
+.
+> 385             return 0;
+> 386
+> 387     out_err_sinfo:
+> 388             pkcs7_free_sinfo_mbedtls_ctx(mctx);
+> 389     out_no_mctx:
+> 390             public_key_signature_free(s);
+>
+> I will post a patch to fix this defect  .
+[snip]
 
-So at first I tried adding "#include <linux/kconfig.h>" in
-include/env_default.h and include/env_flags.h. That fixes it for some,
-but not all, of the above. For example rpi_3_defconfig still fails,
-then in log.h complaining about BIT() and u8 not being defined. At
-least BIT() is should have gotten from bitops.h, except that that's
-behind ifdef __KERNEL__, so not set for the envtools build.
 
-It turns out that the envtools source code in fw_env_private.h already
-has some hackery to deal with all this, in the form of the __ASSEMBLY__
-games it plays before including config.h. It seems that if we just
-make sure to do that include early enough, so that config.h is indeed
-parsed with that __ASSEMBLY__ hackery in place, everything builds
-fine.
+> *** CID 510807:  Control flow issues  (DEADCODE)
+> /lib/mbedtls/external/mbedtls/library/x509_crt.c: 2750 in
+> x509_inet_pton_ipv6()
+> 2744                 MBEDTLS_PUT_UINT16_BE(group, addr, nonzero_groups);
+> 2745                 nonzero_groups++;
+> 2746                 if (*p =3D=3D '\0') {
+> 2747                     break;
+> 2748                 } else if (*p =3D=3D '.') {
+> 2749                     /* Don't accept IPv4 too early or late */
+> >>>     CID 510807:  Control flow issues  (DEADCODE)
+> >>>     Execution cannot reach the expression "zero_group_start =3D=3D -1=
+"
+> inside this statement: "if ((nonzero_groups =3D=3D 0 &&...".
+> 2750                     if ((nonzero_groups =3D=3D 0 && zero_group_start=
+ =3D=3D
+> -1) ||
+> 2751                         nonzero_groups >=3D 7) {
+> 2752                         break;
+> 2753                     }
+> 2754
+> 2755                     /* Walk back to prior ':', then parse as
+> IPv4-mapped */
+>
+> This one belongs to MbedTLS lib itself, I will send a separate patch to
+the MbedTLS project.
+[snip]
 
-Fixes: 0f92fa45603 ("env: Remove <common.h> and add needed includes")
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
-Resending because I failed to send to the list the first time
-around. Sorry for the noise.
+*** CID 510806:  Control flow issues  (DEADCODE)
+> /lib/mbedtls/pkcs7_parser.c: 209 in authattrs_parse()
+> 203                                     return -EINVAL;
+> 204                     }
+> 205
+> 206                     p +=3D seq_len;
+> 207             }
+> 208
+> >>>     CID 510806:  Control flow issues  (DEADCODE)
+> >>>     Execution cannot reach the expression "ret !=3D -96" inside this
+> statement: "if (ret && ret !=3D -96)
+>   re...".
+> 209             if (ret && ret !=3D  MBEDTLS_ERR_ASN1_OUT_OF_DATA)
+> 210                     return ret;
+> 211
+> 212             msg->have_authattrs =3D true;
+> 213
+> 214             /*
+>
+> I will post a patch to fix this defect  .
+[snip]
 
- tools/env/fw_env.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/tools/env/fw_env.c b/tools/env/fw_env.c
-index 74451ecb945..425faf380fb 100644
---- a/tools/env/fw_env.c
-+++ b/tools/env/fw_env.c
-@@ -9,6 +9,8 @@
- 
- #define _GNU_SOURCE
- 
-+#include "fw_env_private.h"
-+
- #include <compiler.h>
- #include <env.h>
- #include <errno.h>
-@@ -39,7 +41,6 @@
- 
- #include <mtd/ubi-user.h>
- 
--#include "fw_env_private.h"
- #include "fw_env.h"
- 
- struct env_opts default_opts = {
--- 
-2.47.0
+> *** CID 510798:  Resource leaks  (RESOURCE_LEAK)
+> /lib/mbedtls/x509_cert_parser.c: 220 in x509_populate_signature_params()
+> 214             }
+> 215
+> 216             ret =3D hash_calculate(s->hash_algo, &region, 1, s->diges=
+t);
+> 217             if (!ret)
+> 218                     *sig =3D s;
+> 219
+> >>>     CID 510798:  Resource leaks  (RESOURCE_LEAK)
+> >>>     Variable "s" going out of scope leaks the storage it points to.
+> 220             return ret;
+> 221
+> 222     error_sig:
+> 223             public_key_signature_free(s);
+> 224             return ret;
+> 225     }
+>
+> This is false-positive, we need to keep the memory pointed by 's' as the
+signature
+returned to the caller.
+[snip]
 
+*** CID 510796:  Insecure data handling  (TAINTED_SCALAR)
+> /lib/mbedtls/external/mbedtls/library/rsa.c: 1316 in rsa_prepare_blinding=
+()
+> 1310             }
+> 1311
+> 1312             MBEDTLS_MPI_CHK(mbedtls_mpi_fill_random(&ctx->Vf,
+> ctx->len - 1, f_rng, p_rng));
+> 1313
+> 1314             /* Compute Vf^-1 as R * (R Vf)^-1 to avoid leaks from
+> inv_mod. */
+> 1315             MBEDTLS_MPI_CHK(mbedtls_mpi_fill_random(&R, ctx->len
+> - 1, f_rng, p_rng));
+> >>>     CID 510796:  Insecure data handling  (TAINTED_SCALAR)
+> >>>     Passing tainted expression "*ctx->Vf.p" to "mbedtls_mpi_mul_mpi",
+> which uses it as an offset.
+> 1316             MBEDTLS_MPI_CHK(mbedtls_mpi_mul_mpi(&ctx->Vi, &ctx->Vf,
+> &R));
+> 1317             MBEDTLS_MPI_CHK(mbedtls_mpi_mod_mpi(&ctx->Vi,
+> &ctx->Vi, &ctx->N));
+> 1318
+> 1319             /* At this point, Vi is invertible mod N if and only
+> if both Vf and R
+> 1320              * are invertible mod N. If one of them isn't, we
+> don't need to know
+> 1321              * which one, we just loop and choose new values for
+> both of them.
+>
+> This one belongs to MbedTLS lib itself, I will send a separate patch to
+the MbedTLS project.
+[snip]
+
+*** CID 510794:  Control flow issues  (NO_EFFECT)
+> /lib/mbedtls/x509_cert_parser.c: 78 in x509_populate_dn_name_string()
+> 72      do {
+> 73              name_str =3D kzalloc(len, GFP_KERNEL);
+> 74              if (!name_str)
+> 75                      return NULL;
+> 76
+> 77              wb =3D mbedtls_x509_dn_gets(name_str, len, name);
+> >>>     CID 510794:  Control flow issues  (NO_EFFECT)
+> >>>     This less-than-zero comparison of an unsigned value is never true=
+.
+> "wb < 0UL".
+> 78              if (wb < 0) {
+> 79                      pr_err("Get DN string failed, ret:-0x%04x\n",
+> 80                             (unsigned int)-wb);
+> 81                      kfree(name_str);
+> 82                      len =3D len * 2; /* Try with a bigger buffer */
+> 83              }
+>
+> I will post a patch to fix this defect.
+
+Thanks a lot for the report.
+
+Regards,
+Raymond
