@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DACA4D2069A
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:14:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA84D2069E
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:14:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46D8988E00;
-	Wed, 16 Oct 2024 08:12:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A51B88DD4;
+	Wed, 16 Oct 2024 08:12:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="MxTuOwNW";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="CI6drPnk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CFB188DF1; Wed, 16 Oct 2024 08:12:54 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 0E44988D7E; Wed, 16 Oct 2024 08:12:57 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B52988D7E
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:12:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A760D88DF1
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:12:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9932aa108cso925006066b.2
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:12:52 -0700 (PDT)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-5366fd6fdf1so7367287e87.0
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:12:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729059172; x=1729663972; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729059174; x=1729663974; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bhKl0+27wwnmWUfvyWSNiYNJopYPLhW2o3uTph2q/y8=;
- b=MxTuOwNWO9lLjnslynGweLnnFj2gZFSIaoPBY2xwPvRpKqRZoadOEm0buhAKhlyShq
- oMpWOP9Dzgs/LGx3EixSomj3UADObx/7spVEQc/dkLkzR6IXMWGa/IrtsJNgvbe/Dr8T
- 4PsdPa+w0G8up0g2CSB6C/2XbNXuEsNxViXStFkffhFwOFCUL9fPCz/GJpsG+WsTLOhb
- G46rQ25Ka4kpwFggGf1/I4UVhqgIZd15OHFsrN8HNAnH/Mjiv/POnz85goIyzlA2+GKW
- 6Tjlb7XXOcPG2tZo/J/bHM2UUl7ufgEmj6vUUfHoQd3VXAjReRjH+3IfviINmaUZsUV8
- LqrQ==
+ bh=FqRECFgk6tuYFi72/zED0kcJ9EaMvihoJN1B/+Yl4IY=;
+ b=CI6drPnkznIaWqxX7wplGfKT525YW0UkyxMQHWyUqn1yfgDao1WKJL4izjg0RHdFVn
+ Zd9q9zLfZ4xU2ydhthmhgBgfb+jI++HqSrhSokocXjmpybDMLyYBxvf7fwRn0ydzjoaH
+ FMGXmxyjRZNDyg3jV5aBRniOjQh+E+JfQhSPN5ClW+zZl6fRzELF7LraH1IyGQaNYopm
+ 8EgeYLHSLbDdgLi4chupYZm7kreExg6Y0QQVgrUzYErLfGo2k717Iy/JnF0vBekiwv/y
+ 7YtqERy6u1drRiUtcXgXPwYged3rUhLUkyC7YkpEilXXFGhGWDWiWfTydFjLIsuE+GZo
+ vyhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729059172; x=1729663972;
+ d=1e100.net; s=20230601; t=1729059174; x=1729663974;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bhKl0+27wwnmWUfvyWSNiYNJopYPLhW2o3uTph2q/y8=;
- b=NQUGP2p6uh2s0vTjRT4jygTVnz5xlSTAMbh5gau8WU7iWq5Sgt/6rBrZ6uygeZ3I6W
- p3xkK8n/UCOSTNGo2IK8+ZI4JRBU0MJjqY724i4H17h2C2wiKugSgSU7SbMPwiMYaWxU
- VHgZ/ERUG/ABuIxV0qlZb3fC+3DQdUmAzrg3e7EAu++odi+35ais1hyNQ11tZcX3wabG
- +kvw52FR0Wy2iazWJlrJvhiKDVNlBh5b0Yc1Hi+rEqdxhTSQVCdfsmcyzMkl8brruOUo
- KJMIcmN4azWAbiPThUoO8hY48EWsK7oekoAmC289k70sK4vTuEZ0R2HjIkCYPWmHfSS+
- nI0Q==
-X-Gm-Message-State: AOJu0YyU1dxtosdl8OMTfx/Tn4wuYJWUO7lGDA6mZGBMi1I4bJBJ9qYK
- a2pP10qCBePUwHS0cS6knbbwz5sGpYoBf0xpD9mpdC6GfVc+PsTjI20YKM0MA/AVPp6EI0HDS48
- t
-X-Google-Smtp-Source: AGHT+IHuBFvgEsJjcOoy+cGQakNSQyudVQehOfaEUIGaCptcjHrFzo8OUfphrWRac+lgGp7eTz0qNg==
-X-Received: by 2002:a17:907:7f89:b0:a99:f14e:7b11 with SMTP id
- a640c23a62f3a-a99f14e7b73mr1159777466b.10.1729059171768; 
- Tue, 15 Oct 2024 23:12:51 -0700 (PDT)
+ bh=FqRECFgk6tuYFi72/zED0kcJ9EaMvihoJN1B/+Yl4IY=;
+ b=lT1wt2JpMR/jBkiPpcKIBCzb26sjaOXRLMjsL7YKF4tekjzL+CoBSq6qCxscEypov4
+ I9g0fgosSbjT9XAFjtXNJyFBzU6oPNN5Xym6GyLJq0BfF+NKli/iSK8tXFvfyaLkBocp
+ t7WUixdJGkxSO54CFZ96yfrQbglyIPUOUrMzEZvxoLzKEy0BrwS/pXBp4Xrvn6TEBMQI
+ mNA697jqPFPOJlsodVysB1VUk3XQtdxWBKDgR/PL4xkgjD/CkAxBNm7eapUSZF1055+U
+ 28+Vc0d1QAX9B0u2KtunAv5daewT/VtaC1Okag7VpEp6Gn1HpveMQrgfk3N8W2yt0TLC
+ zX5g==
+X-Gm-Message-State: AOJu0YzvzZ6mTPoTEJcNADq4etsF/HgWEV6qDWHJEu/IYzWDWaD/NPNF
+ K6X/nAfWV7Bj5MLN/D4uLIGAJvRTK334OU8VwdyjcChczgnEi1pmrPWREak0VguXnRUMZrEfTK5
+ V
+X-Google-Smtp-Source: AGHT+IFpfYpkZIPMHWsSqiWs5Lrzftc9B8NavTPL/xQUJsCBEoubk3wpJAMzvMwvGue2K/FcR5OgLw==
+X-Received: by 2002:a05:6512:68a:b0:539:e776:71f2 with SMTP id
+ 2adb3069b0e04-53a03f82444mr1705544e87.52.1729059173618; 
+ Tue, 15 Oct 2024 23:12:53 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.12.50
+ a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.12.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 23:12:50 -0700 (PDT)
+ Tue, 15 Oct 2024 23:12:53 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v9 10/37] acpi: Add ACPITAB for PPTT and GTDT
-Date: Wed, 16 Oct 2024 08:03:56 +0200
-Message-ID: <20241016060523.888804-11-patrick.rudolph@9elements.com>
+Subject: [PATCH v9 11/37] acpi: acpi_table: Add IORT support
+Date: Wed, 16 Oct 2024 08:03:57 +0200
+Message-ID: <20241016060523.888804-12-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241016060523.888804-1-patrick.rudolph@9elements.com>
 References: <20241016060523.888804-1-patrick.rudolph@9elements.com>
@@ -95,51 +95,471 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Return the ACPI table revision in acpi_get_table_revision() for
-PPTT and GTDT. Match both to ACPI 6.2.
+The SoC can implement acpi_fill_iort to update the IORT table.
+Add a helper function to fill out the NAMED_COMPONENT node.
+
+TEST=Run FWTS V24.03.00 on RPi4 and round no problems.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Cc: Simon Glass <sjg@chromium.org>
 ---
- include/acpi/acpi_table.h | 2 ++
- lib/acpi/acpi_table.c     | 4 ++++
- 2 files changed, 6 insertions(+)
+ include/acpi/acpi_table.h | 213 ++++++++++++++++++++++++++++++++++++++
+ lib/acpi/acpi_table.c     | 213 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 426 insertions(+)
 
 diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index 48f8ce248f..7ee3248ff6 100644
+index 7ee3248ff6..5a30465ad2 100644
 --- a/include/acpi/acpi_table.h
 +++ b/include/acpi/acpi_table.h
-@@ -841,12 +841,14 @@ enum acpi_tables {
- 	ACPITAB_ECDT,
- 	ACPITAB_FACS,
- 	ACPITAB_FADT,
-+	ACPITAB_GTDT,
- 	ACPITAB_HEST,
- 	ACPITAB_HPET,
- 	ACPITAB_IVRS,
- 	ACPITAB_MADT,
- 	ACPITAB_MCFG,
- 	ACPITAB_NHLT,
-+	ACPITAB_PPTT,
- 	ACPITAB_RSDP,
- 	ACPITAB_RSDT,
- 	ACPITAB_SLIT,
+@@ -832,6 +832,117 @@ struct acpi_pptt_cache {
+ 	u16 line_size;
+ } __packed;
+ 
++/** IORT - IO Remapping Table revision 6
++ * Document number: ARM DEN 0049E.e, Sep 2022
++ */
++struct acpi_table_iort {
++	struct acpi_table_header header;
++	u32 node_count;
++	u32 node_offset;
++	u32 reserved;
++} __packed;
++
++/*
++ * IORT subtables
++ */
++struct acpi_iort_node {
++	u8 type;
++	u16 length;
++	u8 revision;
++	u32 identifier;
++	u32 mapping_count;
++	u32 mapping_offset;
++	char node_data[];
++} __packed;
++
++/* Values for subtable Type above */
++enum acpi_iort_node_type {
++	ACPI_IORT_NODE_ITS_GROUP = 0x00,
++	ACPI_IORT_NODE_NAMED_COMPONENT = 0x01,
++	ACPI_IORT_NODE_PCI_ROOT_COMPLEX = 0x02,
++	ACPI_IORT_NODE_SMMU = 0x03,
++	ACPI_IORT_NODE_SMMU_V3 = 0x04,
++	ACPI_IORT_NODE_PMCG = 0x05,
++	ACPI_IORT_NODE_RMR = 0x06,
++};
++
++/* ITS Group revision 1 */
++struct acpi_iort_its_group {
++	u32 its_count;
++	u32 identifiers[];	/* GIC ITS identifier array */
++} __packed;
++
++/* PCI root complex node revision 2 */
++struct acpi_iort_rc {
++	u64 mem_access_properties;
++	u32 ats_attributes;
++	u32 pci_segment_number;
++	u8 memory_address_size_limit;
++	u8 reserved[3];
++} __packed;
++
++/* SMMUv3 revision 5 */
++struct acpi_iort_smmu_v3 {
++	u64 base_address;	/* SMMUv3 base address */
++	u32 flags;
++	u32 reserved;
++	u64 vatos_address;
++	u32 model;
++	u32 event_gsiv;
++	u32 pri_gsiv;
++	u32 gerr_gsiv;
++	u32 sync_gsiv;
++	u32 pxm;
++	u32 id_mapping_index;
++} __packed;
++
++/* Masks for Flags field above */
++#define ACPI_IORT_SMMU_V3_COHACC_OVERRIDE   (1)
++#define ACPI_IORT_SMMU_V3_HTTU_OVERRIDE     (3 << 1)
++#define ACPI_IORT_SMMU_V3_PXM_VALID         (1 << 3)
++#define ACPI_IORT_SMMU_V3_DEVICEID_VALID    (1 << 4)
++
++struct acpi_iort_id_mapping {
++	u32 input_base;		/* Lowest value in input range */
++	u32 id_count;		/* Number of IDs */
++	u32 output_base;	/* Lowest value in output range */
++	u32 output_reference;	/* A reference to the output node */
++	u32 flags;
++} __packed;
++
++/* Masks for Flags field above for IORT subtable */
++#define ACPI_IORT_ID_SINGLE_MAPPING (1)
++
++/* Named Component revision 4 */
++struct acpi_iort_named_component {
++	u32 node_flags;
++	u64 memory_properties;	/* Memory access properties */
++	u8 memory_address_limit;	/* Memory address size limit */
++	char device_name[];	/* Path of namespace object */
++} __packed;
++
++/* Masks for Flags field above */
++#define ACPI_IORT_NC_STALL_SUPPORTED    (1)
++#define ACPI_IORT_NC_PASID_BITS         (31 << 1)
++
++struct acpi_iort_root_complex {
++	u64 memory_properties;	/* Memory access properties */
++	u32 ats_attribute;
++	u32 pci_segment_number;
++	u8 memory_address_limit;/* Memory address size limit */
++	u16 pasid_capabilities;	/* PASID Capabilities */
++	u8 reserved;		/* Reserved, must be zero */
++	u32 flags;		/* Flags */
++} __packed;
++
++/* Masks for ats_attribute field above */
++#define ACPI_IORT_ATS_SUPPORTED         (1)		/* The root complex ATS support */
++#define ACPI_IORT_PRI_SUPPORTED         (1 << 1)	/* The root complex PRI support */
++#define ACPI_IORT_PASID_FWD_SUPPORTED   (1 << 2)	/* The root complex PASID forward support */
++
++/* Masks for pasid_capabilities field above */
++#define ACPI_IORT_PASID_MAX_WIDTH       (0x1F)	/* Bits 0-4 */
++
+ /* Tables defined/reserved by ACPI and generated by U-Boot */
+ enum acpi_tables {
+ 	ACPITAB_BERT,
+@@ -1000,6 +1111,108 @@ int acpi_fill_csrt(struct acpi_ctx *ctx);
+  */
+ void acpi_fill_fadt(struct acpi_fadt *fadt);
+ 
++/**
++ * acpi_fill_iort() - Fill out the body of the IORT table
++ *
++ * Should be implemented in SoC specific code.
++ *
++ * @ctx: ACPI context to write to
++ * @offset: Offset from the start of the IORT
++ */
++int acpi_fill_iort(struct acpi_ctx *ctx);
++
++/**
++ * acpi_iort_add_its_group() - Add ITS group node to IORT table
++ *
++ * Called by SoC specific code within acpi_fill_iort().
++ *
++ * @ctx: ACPI context to write to
++ * @its_count: Elements in identifiers
++ * @identifiers: The array of ITS identifiers. These IDs must match the value
++ *               used in the Multiple APIC Description Table (MADT) GIC ITS
++ *               structure for each relevant ITS unit.
++ * @return Offset of table within parent
++ */
++int acpi_iort_add_its_group(struct acpi_ctx *ctx,
++			    const u32 its_count,
++			    const u32 *identifiers);
++
++/**
++ * acpi_iort_add_named_component() - Add named component to IORT table
++ *
++ * Called by SoC specific code within acpi_fill_iort().
++ *
++ * @ctx: ACPI context to write to
++ * @node_flags: Node flags
++ * @memory_properties: Memory properties
++ * @memory_address_limit: Memory address limit
++ * @device_name: ACPI device path
++ * @return Offset of table within parent
++ */
++int acpi_iort_add_named_component(struct acpi_ctx *ctx,
++				  const u32 node_flags,
++				  const u64 memory_properties,
++				  const u8 memory_address_limit,
++				  const char *device_name);
++
++/**
++ * acpi_iort_add_rc() - Add PCI root complex node to IORT table
++ *
++ * Called by SoC specific code within acpi_fill_iort().
++ *
++ * @ctx: ACPI context to write to
++ * @mem_access_properties: Memory access properties
++ * @ats_attributes: Support for ATS and its ancillary feature
++ * @pci_segment_number: The PCI segment number, as in MCFG
++ * @memory_address_size_limit: The number of address bits, starting from LSB
++ * @num_mappings: Number of elements in map
++ * @map: ID mappings for this node
++ * @return Offset of table within parent
++ */
++int acpi_iort_add_rc(struct acpi_ctx *ctx,
++		     const u64 mem_access_properties,
++		     const u32 ats_attributes,
++		     const u32 pci_segment_number,
++		     const u8 memory_address_size_limit,
++		     const int num_mappings,
++		     const struct acpi_iort_id_mapping *map);
++
++/**
++ * acpi_iort_add_smmu_v3() - Add PCI root complex node to IORT table
++ *
++ * Called by SoC specific code within acpi_fill_iort().
++ *
++ * @ctx: ACPI context to write to
++ * @base_address: Base address of SMMU
++ * @flags: SMMUv3 flags
++ * @vatos_address: Optional, set to zero if not supported
++ * @model: Model ID
++ * @event_gsiv: GSIV of the Event interrupt if SPI based
++ * @pri_gsiv: GSIV of the PRI interrupt if SPI based
++ * @gerr_gsiv: GSIV of the GERR interrupt if GSIV based
++ * @sync_gsiv: TGSIV of the Sync interrupt if GSIV based
++ * @pxm: Proximity Domain
++ * @id_mapping_index: If all the SMMU control interrupts are GSIV based,
++ *                    this field is ignored. Index into the array of ID
++ *                    mapping otherwise.
++ * @num_mappings: Number of elements in map
++ * @map: ID mappings for this node
++ * @return Offset of table within parent
++ */
++int acpi_iort_add_smmu_v3(struct acpi_ctx *ctx,
++			  const u64 base_address,
++			  const u32 flags,
++			  const u64 vatos_address,
++			  const u32 model,
++			  const u32 event_gsiv,
++			  const u32 pri_gsiv,
++			  const u32 gerr_gsiv,
++			  const u32 sync_gsiv,
++			  const u32 pxm,
++			  const u32 id_mapping_index,
++			  const int num_mappings,
++			  const struct acpi_iort_id_mapping *map);
++
+ /**
+  * acpi_fill_madt() - Fill out the body of the MADT
+  *
 diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index 959cac9e2e..2dc7b998e2 100644
+index 2dc7b998e2..9d9c8befe8 100644
 --- a/lib/acpi/acpi_table.c
 +++ b/lib/acpi/acpi_table.c
-@@ -107,6 +107,10 @@ int acpi_get_table_revision(enum acpi_tables table)
- 		return 1;
- 	case ACPITAB_SPCR:
- 		return 2;
-+	case ACPITAB_PPTT: /* ACPI 6.2: 1 */
-+		return 1;
-+	case ACPITAB_GTDT: /* ACPI 6.2: 2, ACPI 6.3: 3 */
-+		return 2;
- 	default:
- 		return -EINVAL;
- 	}
+@@ -520,3 +520,216 @@ static int acpi_write_spcr(struct acpi_ctx *ctx, const struct acpi_writer *entry
+ }
+ 
+ ACPI_WRITER(5spcr, "SPCR", acpi_write_spcr, 0);
++
++__weak int acpi_fill_iort(struct acpi_ctx *ctx)
++{
++	return 0;
++}
++
++int acpi_iort_add_its_group(struct acpi_ctx *ctx,
++			    const u32 its_count,
++			    const u32 *identifiers)
++{
++	struct acpi_iort_node *node;
++	struct acpi_iort_its_group *group;
++	int offset;
++
++	offset = ctx->current - ctx->tab_start;
++
++	node = ctx->current;
++	memset(node, '\0', sizeof(struct acpi_iort_node));
++
++	node->type = ACPI_IORT_NODE_ITS_GROUP;
++	node->revision = 1;
++
++	node->length = sizeof(struct acpi_iort_node);
++	node->length += sizeof(struct acpi_iort_its_group);
++	node->length += sizeof(u32) * its_count;
++
++	group = (struct acpi_iort_its_group *)node->node_data;
++	group->its_count = its_count;
++	memcpy(&group->identifiers, identifiers, sizeof(u32) * its_count);
++
++	ctx->current += node->length;
++
++	return offset;
++}
++
++int acpi_iort_add_named_component(struct acpi_ctx *ctx,
++				  const u32 node_flags,
++				  const u64 memory_properties,
++				  const u8 memory_address_limit,
++				  const char *device_name)
++{
++	struct acpi_iort_node *node;
++	struct acpi_iort_named_component *comp;
++	int offset;
++
++	offset = ctx->current - ctx->tab_start;
++
++	node = ctx->current;
++	memset(node, '\0', sizeof(struct acpi_iort_node));
++
++	node->type = ACPI_IORT_NODE_NAMED_COMPONENT;
++	node->revision = 4;
++	node->length = sizeof(struct acpi_iort_node);
++	node->length += sizeof(struct acpi_iort_named_component);
++	node->length += strlen(device_name) + 1;
++
++	comp = (struct acpi_iort_named_component *)node->node_data;
++
++	comp->node_flags = node_flags;
++	comp->memory_properties = memory_properties;
++	comp->memory_address_limit = memory_address_limit;
++	memcpy(comp->device_name, device_name, strlen(device_name) + 1);
++
++	ctx->current += node->length;
++
++	return offset;
++}
++
++int acpi_iort_add_rc(struct acpi_ctx *ctx,
++		     const u64 mem_access_properties,
++		     const u32 ats_attributes,
++		     const u32 pci_segment_number,
++		     const u8 memory_address_size_limit,
++		     const int num_mappings,
++		     const struct acpi_iort_id_mapping *map)
++{
++	struct acpi_iort_id_mapping *mapping;
++	struct acpi_iort_node *node;
++	struct acpi_iort_rc *rc;
++	int offset;
++
++	offset = ctx->current - ctx->tab_start;
++
++	node = ctx->current;
++	memset(node, '\0', sizeof(struct acpi_iort_node));
++
++	node->type = ACPI_IORT_NODE_PCI_ROOT_COMPLEX;
++	node->revision = 2;
++
++	node->length = sizeof(struct acpi_iort_node);
++	node->length += sizeof(struct acpi_iort_rc);
++	node->length += sizeof(struct acpi_iort_id_mapping) * num_mappings;
++
++	rc = (struct acpi_iort_rc *)node->node_data;
++	rc->mem_access_properties = mem_access_properties;
++	rc->ats_attributes = ats_attributes;
++	rc->pci_segment_number = pci_segment_number;
++	rc->memory_address_size_limit = memory_address_size_limit;
++
++	mapping = (struct acpi_iort_id_mapping *)(rc + 1);
++	for (int i = 0; i < num_mappings; i++) {
++		memcpy(mapping, &map[i], sizeof(struct acpi_iort_id_mapping));
++		mapping++;
++	}
++
++	ctx->current += node->length;
++
++	return offset;
++}
++
++int acpi_iort_add_smmu_v3(struct acpi_ctx *ctx,
++			  const u64 base_address,
++			  const u32 flags,
++			  const u64 vatos_address,
++			  const u32 model,
++			  const u32 event_gsiv,
++			  const u32 pri_gsiv,
++			  const u32 gerr_gsiv,
++			  const u32 sync_gsiv,
++			  const u32 pxm,
++			  const u32 id_mapping_index,
++			  const int num_mappings,
++			  const struct acpi_iort_id_mapping *map)
++{
++	struct acpi_iort_node *node;
++	struct acpi_iort_smmu_v3 *smmu;
++	struct acpi_iort_id_mapping *mapping;
++	int offset;
++
++	offset = ctx->current - ctx->tab_start;
++
++	node = ctx->current;
++	memset(node, '\0', sizeof(struct acpi_iort_node));
++
++	node->type = ACPI_IORT_NODE_SMMU_V3;
++	node->revision = 5;
++	node->mapping_count = num_mappings;
++	node->mapping_offset = sizeof(struct acpi_iort_node) + sizeof(struct acpi_iort_smmu_v3);
++
++	node->length = sizeof(struct acpi_iort_node);
++	node->length += sizeof(struct acpi_iort_smmu_v3);
++	node->length += sizeof(struct acpi_iort_id_mapping) * num_mappings;
++
++	smmu = (struct acpi_iort_smmu_v3 *)node->node_data;
++
++	smmu->base_address = base_address;
++	smmu->flags = flags;
++	smmu->vatos_address = vatos_address;
++	smmu->model = model;
++	smmu->event_gsiv = event_gsiv;
++	smmu->pri_gsiv = pri_gsiv;
++	smmu->gerr_gsiv = gerr_gsiv;
++	smmu->sync_gsiv = sync_gsiv;
++	smmu->pxm = pxm;
++	smmu->id_mapping_index = id_mapping_index;
++
++	mapping = (struct acpi_iort_id_mapping *)(smmu + 1);
++	for (int i = 0; i < num_mappings; i++) {
++		memcpy(mapping, &map[i], sizeof(struct acpi_iort_id_mapping));
++		mapping++;
++	}
++
++	ctx->current += node->length;
++
++	return offset;
++}
++
++static int acpi_write_iort(struct acpi_ctx *ctx, const struct acpi_writer *entry)
++{
++	struct acpi_table_iort *iort;
++	struct acpi_iort_node *node;
++	u32 offset;
++	int ret;
++
++	iort = ctx->current;
++	ctx->tab_start = ctx->current;
++	memset(iort, '\0', sizeof(struct acpi_table_iort));
++
++	acpi_fill_header(&iort->header, "IORT");
++	iort->header.revision = 1;
++	iort->header.creator_revision = 1;
++	iort->header.length = sizeof(struct acpi_table_iort);
++	iort->node_offset = sizeof(struct acpi_table_iort);
++
++	acpi_inc(ctx, sizeof(struct acpi_table_iort));
++
++	offset = sizeof(struct acpi_table_iort);
++	ret = acpi_fill_iort(ctx);
++	if (ret) {
++		ctx->current = iort;
++		return log_msg_ret("fill", ret);
++	}
++
++	/* Count nodes filled in */
++	for (node = (void *)iort + iort->node_offset;
++	     node->length > 0 && (void *)node < ctx->current;
++	     node = (void *)node + node->length)
++		iort->node_count++;
++
++	/* (Re)calculate length and checksum */
++	iort->header.length = ctx->current - (void *)iort;
++	iort->header.checksum = table_compute_checksum((void *)iort, iort->header.length);
++	log_debug("IORT at %p, length %x\n", iort, iort->header.length);
++
++	/* Drop the table if it is empty */
++	if (iort->header.length == sizeof(struct acpi_table_iort))
++		return log_msg_ret("fill", -ENOENT);
++	acpi_add_table(ctx, iort);
++
++	return 0;
++}
++
++ACPI_WRITER(5iort, "IORT", acpi_write_iort, 0);
 -- 
 2.46.2
 
