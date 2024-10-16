@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B74A2D2069E
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:15:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DBD1D2069E
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 06:15:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8841188E88;
-	Wed, 16 Oct 2024 08:13:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7E9688E2D;
+	Wed, 16 Oct 2024 08:13:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="BeN91XV0";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="AaRWpgSL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23EA488E5F; Wed, 16 Oct 2024 08:13:12 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 084C788E8E; Wed, 16 Oct 2024 08:13:14 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CC7F88E26
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:13:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1657588E49
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 08:13:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a99650da839so1027584166b.2
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:13:10 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a99543ab209so947519066b.2
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 23:13:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729059190; x=1729663990; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729059191; x=1729663991; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/SaYY+AtVB7em+W4exLN3hxNWJekHWEFD8Olho91rT8=;
- b=BeN91XV0edWFvegBN10e2OIlPOEoqoJ/H8977sRGJEYmGyPwAmPnULJmxmrfk/6o89
- 58eFhmbXRNNUJFAqQ2RkIITRbqAVCZyMBvme/tKTCw+7aQQ5/J9CGAJy5RgxT6Pxdb6M
- iorb2gLRritUcgrlCzSsBYjUbk6upekBcW0pyggOZoPgKv+sAIKtHQZECRoG8YF+tGEt
- iLIAfOE12rG78BY4buz3XceBCGFjiG5r+uC3znKJDjzqB5F4joSEiu2ybQewRFDnBb0z
- 5vHwC6xM/nr32nMbUR8OXqXFFaN9jbu0ld8R2LDJr/FM0zoJmiDoCA9zo2Igr0aLTIC1
- yoHw==
+ bh=StS7Bd9wyPSpg655xcrWiCkyycmPYijDXix7NMpAQ1k=;
+ b=AaRWpgSLf9/I/MazENNtWlFwVnubLZUe0WPmjWyXvAoiyH6tFl8jd9boNjALVNH8CE
+ a37ikr9YeH7NrLBDoKPkBWBl//uAzD/WV/Yh+vEDbWRCzjJz/TLB6Dliak45mNVEtDxI
+ +4H64do+NqD/D5Vcc3aKe9ipYGIrHXedbS3W5KQXpna7eMOu4R23PVJRKwShjRmxNiaB
+ E/4PwFmOIkKb2NKSggXgARr3jTtj+MjGoKAZ4jcFS6MltdTkcR0C9OJ1cJKtdW1HjTax
+ k39U0em5BeLUUWnYIClP3j+R3nnOSbAsPQx9DcKxnkRCcitm5G2fceLaqmDi/uazq9K0
+ inFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729059190; x=1729663990;
+ d=1e100.net; s=20230601; t=1729059191; x=1729663991;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/SaYY+AtVB7em+W4exLN3hxNWJekHWEFD8Olho91rT8=;
- b=BlJCad2OgjqiA6BPVQWXDEJiHh5qYEZidlDlfbG14T3M9EdkTQsiRZyum4WhuQw+X5
- h6uJOo0oInfadr0PPI/XYe3T3Y32TrZnGvLLILAXXhIGW/b+aoIAqSa9jzd6Pt4hm9py
- 7AT1ndAdh+ubOyBi4lx//XuBZGWhY5y08n0YBu49kL4TMIAxH8j8o7D/Wgi/XKt+VrqE
- n45hlnE+ZSW72PD6nbqNbyrlMds1hD6QXQ3PF9MyQu19Cy4W3KetmtirIGQnPHeDZsyI
- wNasoLBQfXrxnwBOEpDRpXCixjX2B1lmNJnfSBYheMSRNmzoxfd7FeqlmaKZ6qfmyY6h
- 38oQ==
-X-Gm-Message-State: AOJu0YwxIwd+rTFNhvZ3cRpdt3kvWlGNj7AxV9YJyghFseFsYDMlPKj3
- BXM6B5xTx40BIMPJX6Awdxq9Xy3Ujfen18VAP2zFV5AuO6lWT9xCfvlZnWc4Qtjv9b1+TJWTK8I
- H
-X-Google-Smtp-Source: AGHT+IG2NpelhH4v4HTQLWiJ5/W6ThQ01CMfaPPeKP0GgiWZ3F0R8evbiVt/jDL9gbMyPpo35R3zNg==
-X-Received: by 2002:a17:907:7296:b0:a91:158f:6693 with SMTP id
- a640c23a62f3a-a99e39cfc56mr1323651166b.9.1729059189698; 
- Tue, 15 Oct 2024 23:13:09 -0700 (PDT)
+ bh=StS7Bd9wyPSpg655xcrWiCkyycmPYijDXix7NMpAQ1k=;
+ b=tQg9f+0TGVqgBI43I8zMwcmZaV3uQVcXm8c0QqD4OtTRGIrTDZTSRCnBjKvMO6iefa
+ 9001Etaegl0Q1+iPi+6wlYS0PGURYoU3n6bs59o6j1QFCQrUPn1SY7RRv16x//VC47XR
+ REIMyrvyCeH2CAJX0jkyBNWhfWzRSlIdUkGbK9k3rlOVlsO3wLJbgBZyrVXHPBo9zHMG
+ iFwHHxFaBQ1r0FcE+cBK5yTqoiSVH7/M33caq6G8PkwT0KD7tFHQXYG40Goy5Crmcnpv
+ xxWjBD6pmnG7pfOMKl6itaLWOXP1XGOFVINVJA6WWSCxqGGXEN78WjbKBycmJD+G781y
+ FpSQ==
+X-Gm-Message-State: AOJu0YxExIPxFdZ6ILyCgb71myNSOTjq1H6zh50vPNuD+/rT2RC1///9
+ zJOa9NxWhGx7isvHseYb9ZMSDWWiJZDeVVX7DyXYHaYXXZrnAC4BaMmZHqIGagTF51Ljd71H1Ur
+ u
+X-Google-Smtp-Source: AGHT+IFmR5oPcuSaLmdqQM+ujKJxxJ/XTNRbE8R9d0OwdjvSr2XYhYTzoakGgRMlb6bDJUr6CFH6IQ==
+X-Received: by 2002:a17:907:9288:b0:a99:f167:47c7 with SMTP id
+ a640c23a62f3a-a9a34e275a6mr221987266b.55.1729059191479; 
+ Tue, 15 Oct 2024 23:13:11 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.13.09
+ a640c23a62f3a-a9a2981702bsm141743466b.112.2024.10.15.23.13.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 23:13:09 -0700 (PDT)
+ Tue, 15 Oct 2024 23:13:11 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	linux-kernel@vger.kernel.org
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v9 19/37] arm: gic-v3-its: Rename objects
-Date: Wed, 16 Oct 2024 08:04:05 +0200
-Message-ID: <20241016060523.888804-20-patrick.rudolph@9elements.com>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v9 20/37] arm: gic-v3-its: Implement of_xlate
+Date: Wed, 16 Oct 2024 08:04:06 +0200
+Message-ID: <20241016060523.888804-21-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241016060523.888804-1-patrick.rudolph@9elements.com>
 References: <20241016060523.888804-1-patrick.rudolph@9elements.com>
@@ -95,50 +95,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The code accesses the gic-v3 node, but not the gic-v3-its node,
-thus rename the objects to clarify which node it operates on.
+Translate IRQs by implementing of_xlate() as required by
+irq_get_by_index() to parse interrupt properties.
 
-The following commit will make use of the gic-v3-its node for real.
+Map DT interrupts to ARM GIC interrupts as follows:
+
+- Interrupt numbers ID32-ID1019 are used for SPIs
+- ID0-ID15 are used for SGIs
+- ID16-ID31 are used for PPIs
+
+TEST: Booted on qemu sbsa-ref that has a GICV3.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/lib/gic-v3-its.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Changelog v9:
+- Require at least 3 interrupt-cells
+- Map SPI interrupts to ID32+
+- Map PPI interrupts to ID16+
+---
+ arch/arm/lib/gic-v3-its.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
 diff --git a/arch/arm/lib/gic-v3-its.c b/arch/arm/lib/gic-v3-its.c
-index 2cc0a32f9d..22fa46a341 100644
+index 22fa46a341..58f8bf864f 100644
 --- a/arch/arm/lib/gic-v3-its.c
 +++ b/arch/arm/lib/gic-v3-its.c
-@@ -35,10 +35,10 @@ static int gic_v3_its_get_gic_addr(struct gic_v3_its_priv *priv)
- 	int ret;
- 
- 	ret = uclass_get_device_by_driver(UCLASS_IRQ,
--					  DM_DRIVER_GET(arm_gic_v3_its), &dev);
-+					  DM_DRIVER_GET(arm_gic_v3), &dev);
- 	if (ret) {
- 		pr_err("%s: failed to get %s irq device\n", __func__,
--		       DM_DRIVER_GET(arm_gic_v3_its)->name);
-+		       DM_DRIVER_GET(arm_gic_v3)->name);
- 		return ret;
- 	}
- 
-@@ -158,13 +158,13 @@ int gic_lpi_tables_init(u64 base, u32 num_redist)
- 	return 0;
- }
- 
--static const struct udevice_id gic_v3_its_ids[] = {
-+static const struct udevice_id gic_v3_ids[] = {
- 	{ .compatible = "arm,gic-v3" },
+@@ -4,9 +4,11 @@
+  */
+ #include <cpu_func.h>
+ #include <dm.h>
++#include <irq.h>
+ #include <asm/gic.h>
+ #include <asm/gic-v3.h>
+ #include <asm/io.h>
++#include <dt-bindings/interrupt-controller/arm-gic.h>
+ #include <linux/bitops.h>
+ #include <linux/printk.h>
+ #include <linux/sizes.h>
+@@ -163,8 +165,30 @@ static const struct udevice_id gic_v3_ids[] = {
  	{}
  };
  
--U_BOOT_DRIVER(arm_gic_v3_its) = {
-+U_BOOT_DRIVER(arm_gic_v3) = {
++static int arm_gic_v3_of_xlate(struct irq *irq, struct ofnode_phandle_args *args)
++{
++	if (args->args_count < 3) {
++		log_debug("Invalid args_count: %d\n", args->args_count);
++		return -EINVAL;
++	}
++
++	if (args->args[0] == GIC_SPI)
++		irq->id = args->args[1] + 32;
++	else
++		irq->id = args->args[1] + 16;
++
++	irq->flags = args->args[2];
++
++	return 0;
++}
++
++static const struct irq_ops arm_gic_v3_ops = {
++	.of_xlate		=  arm_gic_v3_of_xlate,
++};
++
+ U_BOOT_DRIVER(arm_gic_v3) = {
  	.name		= "gic-v3",
  	.id		= UCLASS_IRQ,
--	.of_match	= gic_v3_its_ids,
-+	.of_match	= gic_v3_ids,
+ 	.of_match	= gic_v3_ids,
++	.ops		= &arm_gic_v3_ops,
  };
 -- 
 2.46.2
