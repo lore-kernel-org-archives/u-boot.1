@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E6C8D2A538
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:19:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42E20D2A53C
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:19:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5ED6C88DE5;
-	Wed, 16 Oct 2024 20:19:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D5FDA88DD4;
+	Wed, 16 Oct 2024 20:19:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="5TS5nmuD";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="50ZK/NT4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A433488DD1; Wed, 16 Oct 2024 20:19:01 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id 57EE388DDC; Wed, 16 Oct 2024 20:19:11 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D03088DDC
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:18:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6427F88DD4
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:19:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=0019cf4dfa=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49GCuhRh018118;
- Wed, 16 Oct 2024 20:18:47 +0200
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49GDWlXk011442;
+ Wed, 16 Oct 2024 20:18:56 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- ao3CsPhF4oyDM7f+tidgYIPClyLxjxGFj6rxwuraA/g=; b=5TS5nmuD9FgJaPH+
- 0QsVZ6f0v2/2rnO3Dl2kZlWSTDMqa8Y9TGEWOOX6Q+2xQy4MyXNmw9DS2tDsrAVa
- i1YXvHjsXXMAbTQU364DYl7aOuQpzY8ud8Ol4glESGSWGvrVahRavBJTo0vH4hrW
- iHSTEL2r60fZlefr7qOnbv5YhkXBFHpbSwCCgGSFEfsGiXFpJxBsdPgrLVbJePs0
- tkMsckYote93GQEPH0Uq6JekxPCJkSskXJvyv11B/W+Ysr3fJCJcAeN7NQrtb88l
- bEMyyVPMHL0YT2s2+O5WjskbGPtXDZ+dwTecbK581OsydiaIFpEp1kdQ4gIGZozQ
- ySx6ug==
+ UOhz6TaqMQJKfNF2jOZ0xgysoE5O7+DZGplRdIL+xrM=; b=50ZK/NT4LEu/PYWO
+ WNYJzTB2Ogq0OosczAS8h6IxVXnWfU/ID1YUhVRy4nO5fUhtwM2kRioDoFMz3e/K
+ aOXgQeiGH/JvHXLexDYdHvTkcBvhUceshOhU+3Xx6SwvW6JEESNJFOxiQFvd3ek2
+ SRKlRPjXGpatKz0bvEHsIubPErtptleGvrcdbDeUsQinbDqWuIdzbuk0ykEI6g0d
+ jyHwsqlyoY8DfEVEZNcURPMt9eyTvMN/o2PwCVnAg2gsw207VXBzjJLjWsE4Rt8R
+ BKuMhxk0ZUQhrMOpLI73x7dPdxqm4wqSgLkYVTBizH56PXaxdpscy/AujdZoo/PT
+ Lytofw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 42842jh81x-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 429qybex57-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 16 Oct 2024 20:18:46 +0200 (MEST)
+ Wed, 16 Oct 2024 20:18:56 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 83F924009C;
- Wed, 16 Oct 2024 20:17:24 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id EB842400B9;
+ Wed, 16 Oct 2024 20:17:36 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 22BDF26B63D;
- Wed, 16 Oct 2024 20:15:38 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0839E26E52A;
+ Wed, 16 Oct 2024 20:16:08 +0200 (CEST)
 Received: from [10.48.86.243] (10.48.86.243) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 16 Oct
- 2024 20:15:37 +0200
-Message-ID: <3a4f1296-307d-401e-ace2-4bfd6729bd2e@foss.st.com>
-Date: Wed, 16 Oct 2024 20:15:35 +0200
+ 2024 20:16:07 +0200
+Message-ID: <e80ce86a-cfba-451c-be7e-f6c498cc66c6@foss.st.com>
+Date: Wed, 16 Oct 2024 20:16:06 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] ARM: dts: stm32: Generate u-boot.itb using binman
- on DH STM32 DHSOM
+Subject: Re: [PATCH v2 1/3] ARM: dts: stm32: Duplicate cpu0-opp-table node
+ into stm32mp15-u-boot.dtsi
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
 To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
 CC: Patrice Chotard <patrice.chotard@foss.st.com>, Sean Anderson
@@ -66,10 +66,9 @@ CC: Patrice Chotard <patrice.chotard@foss.st.com>, Sean Anderson
  <trini@konsulko.com>, <u-boot@dh-electronics.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20241005011647.436456-1-marex@denx.de>
- <20241005011647.436456-3-marex@denx.de>
- <55842cb0-5199-429a-8e92-5bac71dea67c@foss.st.com>
+ <4c1eabf9-5919-4a45-ba2d-4441e76a9bd6@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <55842cb0-5199-429a-8e92-5bac71dea67c@foss.st.com>
+In-Reply-To: <4c1eabf9-5919-4a45-ba2d-4441e76a9bd6@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.48.86.243]
@@ -96,30 +95,23 @@ X-Virus-Status: Clean
 
 Hi,
 
-On 10/11/24 20:15, Patrick DELAUNAY wrote:
+On 10/11/24 19:57, Patrick DELAUNAY wrote:
 > Hi,
 >
 > On 10/5/24 03:15, Marek Vasut wrote:
->> Describe the u-boot.its generation in stm32mp15xx-dhsom-u-boot.dtsi
->> binman {} DT node as a replacement for current CONFIG_SPL_FIT_SOURCE
->> use, dispose of both u-boot-dhcom.its and u-boot-dhcor.its.
->>
->> Use fdt-SEQ/config-SEQ to generate a list of fdt-N fitImage images {} 
->> and
->> matching configuration {} node entries. The configuration node entry 
->> names
->> no longer encode _somrevN_boardrevN suffix, which was never really 
->> used, so
->> drop this functionality by default. Rework 
->> board_fit_config_name_match() to
->> match on the new configuration node entry names.
->>
->> Users who do need the match on _somrevN_boardrevN can either replace the
->> fdt-SEQ/config-SEQ with fixed fdt-N/config-N nodes which each encode the
->> matching 'description = "NAME_somrevN_boardrevN"' to restore the old
->> behavior verbatim, or better use SPL DT overlays for U-Boot control DT
->> the same way e.g. i.MX8MP DHCOM does to support multiple SoM and board
->> variants.
+>> The cpu0-opp-table {} node does not exist in upstream Linux 
+>> stm32mp151.dtsi
+>> file, in order to enable conversion to OF_UPSTREAM, duplicate the 
+>> node from
+>> current U-Boot stm32mp151.dtsi into stm32mp15-u-boot.dtsi. This makes 
+>> STM32
+>> DTs buildable even with OF_UPSTREAM enabled. No functional change, 
+>> since the
+>> current U-Boot stm32mp151.dtsi already contains the cpu0-opp-table {} 
+>> node,
+>> stm32mp15-u-boot.dtsi is applied at the end, and does not bring in 
+>> any new
+>> content.
 >>
 >> Signed-off-by: Marek Vasut <marex@denx.de>
 >> ---
@@ -134,35 +126,29 @@ On 10/11/24 20:15, Patrick DELAUNAY wrote:
 >> ---
 >> V2: No change
 >> ---
->>   arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi    |  1 +
->>   arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi    |  1 +
->>   arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi    | 53 +++++++++++
->>   board/dhelectronics/dh_stm32mp1/board.c       | 19 +++-
->>   .../dh_stm32mp1/u-boot-dhcom.its              | 91 -------------------
->>   .../dh_stm32mp1/u-boot-dhcor.its              | 70 --------------
->>   configs/stm32mp15_dhcom_basic_defconfig       |  2 -
->>   configs/stm32mp15_dhcor_basic_defconfig       |  2 -
->>   8 files changed, 70 insertions(+), 169 deletions(-)
->>   create mode 100644 arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi
->>   delete mode 100644 board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its
->>   delete mode 100644 board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its
+>>   arch/arm/dts/stm32mp15-u-boot.dtsi | 30 ++++++++++++++++++++++--------
+>>   1 file changed, 22 insertions(+), 8 deletions(-)
 >>
+> ....
 >
-> Nice,
-> I discover the binman FIT Substitutions with N / SEQ
+>
+> Sorry for previous message,
+>
+> Re: [PATCH 1/3] ARM: dts: stm32: Duplicate cpu0-opp-table node into 
+> stm32mp15-u-boot.dtsi
+>
+> I answered on V1 by error.
+>
 >
 >
 > Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 >
 > Thanks
 > Patrick
->
->
+
 
 Applied to u-boot-stm/master, thanks!
 
 Regards
 Patrick
 
->
->
