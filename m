@@ -4,65 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E6EFD2A559
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 20:31:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A22D2A559
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 20:34:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1871A88DE1;
-	Wed, 16 Oct 2024 22:31:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B27CF88D5C;
+	Wed, 16 Oct 2024 22:33:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oro5T7GE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L89J7+hr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15ED188DED; Wed, 16 Oct 2024 22:31:15 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B02B788DE1; Wed, 16 Oct 2024 22:33:58 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEA8288D5C
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 22:31:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F32F889C5
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 22:33:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49GKV9tV103689;
- Wed, 16 Oct 2024 15:31:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729110669;
- bh=EXuC283ed075xvqXo0/iENbYBrwfu3O07dTm0ti6BcA=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=oro5T7GEOVcIsY9j/6Kwb8p/6jt3rLxByl4PQ3b2SCjKlX1rltB/J6MIfQW02989f
- 3585gdq5ubkPKs9Cff28CIoLF4bMB0vcxdHf/6wsWGKokpaO7pQDuWBAYUDdSSW6fF
- XWlNaSHhZCx+RksrXeizyGlwSxOpBa9vPtCvm90k=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49GKV9US001850;
- Wed, 16 Oct 2024 15:31:09 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
- Oct 2024 15:31:08 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 16 Oct 2024 15:31:08 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49GKV8t2105540;
- Wed, 16 Oct 2024 15:31:08 -0500
-Date: Wed, 16 Oct 2024 15:31:08 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Vaishnav Achath <vaishnav.a@ti.com>
-CC: <trini@konsulko.com>, <u-boot@lists.denx.de>,
- <francesco.dolcini@toradex.com>, <nm@ti.com>, <u-kumar1@ti.com>,
- <n-francis@ti.com>
-Subject: Re: [PATCH] arm: dts: k3-j722s-r5-evm: Add LPDDR4 4000 MT/s configs
-Message-ID: <20241016203108.gnzfwcd5r2ilwy2u@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20241016074048.1363067-1-vaishnav.a@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6cbf347dc66so1240746d6.3
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 13:33:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729110835; x=1729715635; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gzqr1CZ/CLWH23Pvg8zgD33mMX6r3gvcBJn4ke4VSUM=;
+ b=L89J7+hrtaRYyC+3XniCwYDn2l5cBVdcPY+C+hhIn8s8wFcWTL/eO7YtJ7VkTg9RaK
+ 2ntf8OvsqNp48qQv7DNczWFsqZt03RwqPUdrWS+iBM6AyppwzJjjvQMiIQyC4TPE7DG4
+ nDkTfy5rgzEubj2DcbBLFxU2/3JnJQiisMcvs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729110835; x=1729715635;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gzqr1CZ/CLWH23Pvg8zgD33mMX6r3gvcBJn4ke4VSUM=;
+ b=cQgucDQdzpvF/0PkfClmnVOPAIPvXfAmnx+d313ztFkkPDPOUhjQ2L4FBy+S7TyPAV
+ eGPst8SbTiaVtv+VlNj0Agvlh8cE+EV+OBHT6EegTJXwSokOrOlllDUfgQkkhcj4+lEO
+ WYTGAfMt+/n+YJGGUpRiiWEYJjEmQ1sLvZWCB8ThaaX54Wcn5lfTK4XSZBYSANhk4K0i
+ 5f7feLj/wyn32aabqlUERsQSbI8G2khJqFXx/Xz7p7ye3WYpNhSmR5wnt36+KUhMYBKe
+ YVZDdJEMAmaMVqnIlM2cXeESTOZrUnVRvYmhZ767o7ztNhQmJD/FA9OIUKwySua6nw3/
+ 0psw==
+X-Gm-Message-State: AOJu0YwU3O2IxB2CQbxryJz1kApESHwYmzRZc57WdGPqltkEh47PAApc
+ sZZfeSD+QrWxdrBcLR+UHz5iQYnAqd/iAAyrEWEunjDcehyIpgrrhUx1cNFtmmbiyMgoSHy9HqI
+ 4FEM=
+X-Google-Smtp-Source: AGHT+IHyhG9vKvRqhgKSoJ7LUlomcl745LrDSd2U6hlNwq+RZjhz4Ue6GC6KtaqPxkcH8re1r61RQw==
+X-Received: by 2002:a05:6214:4489:b0:6cb:ee38:1bf8 with SMTP id
+ 6a1803df08f44-6cbf9d1f81emr276104596d6.13.1729110835470; 
+ Wed, 16 Oct 2024 13:33:55 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cc2295a31bsm21104536d6.101.2024.10.16.13.33.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Oct 2024 13:33:54 -0700 (PDT)
+Date: Wed, 16 Oct 2024 14:33:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Anton Antonov <Anton.Antonov@arm.com>
+Subject: Re: [PATCH v13 00/21] Introduce the lwIP network stack
+Message-ID: <20241016203351.GH4959@bill-the-cat>
+References: <cover.1729070678.git.jerome.forissier@linaro.org>
+ <172910926540.24133.2953899765717446506.b4-ty@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DhzEkc5APECEgctf"
 Content-Disposition: inline
-In-Reply-To: <20241016074048.1363067-1-vaishnav.a@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+In-Reply-To: <172910926540.24133.2953899765717446506.b4-ty@konsulko.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,44 +94,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Vaishnav!
 
-On October 16, 2024 thus sayeth Vaishnav Achath:
-> Add the latest 4000 MT/s DDR config generated by
-> Jacinto7_DDRSS_RegConfigTool Rev 0.11 for J722S , make it the
-> default config and update A53 default clock to 1.4 GHz matching
-> the default speed grade (K).
-> 
-> Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
-> ---
-> 
-> memtester logs on J722S EVM:
-> 	https://gist.github.com/vaishnavachath/4174d02e0338e53594015dfdd321a8ef
-> The max frequency was not bumped up to 4000 MT/s initially
-> since the characterization results were not available.
-> All the devices populated on J722S EVM and Beagle Y AI is speed
-> grade K.
-> 
->  arch/arm/dts/k3-j722s-ddr-lp4-50-4000.dtsi | 2797 ++++++++++++++++++++
->  arch/arm/dts/k3-j722s-r5-evm.dts           |    4 +-
->  2 files changed, 2799 insertions(+), 2 deletions(-)
->  create mode 100644 arch/arm/dts/k3-j722s-ddr-lp4-50-4000.dtsi
-> 
+--DhzEkc5APECEgctf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-...
+On Wed, Oct 16, 2024 at 02:07:45PM -0600, Tom Rini wrote:
+> On Wed, 16 Oct 2024 11:56:22 +0200, Jerome Forissier wrote:
+>=20
+> > This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+> > library for the network stack" [1]. The goal is to introduce the lwIP T=
+CP/IP
+> > stack [2] [3] as an alternative to the current implementation in net/,
+> > selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+> > reasons for doing so are:
+> > - Make the support of HTTPS in the wget command easier. Javier T. and
+> > Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+> > so. With that it becomes possible to fetch and launch a distro installer
+> > such as Debian etc. using a secure, authenticated connection directly
+> > from the U-Boot shell. Several use cases:
+> >   * Authentication: prevent MITM attack (third party replacing the
+> > binary with a different one)
+> >   * Confidentiality: prevent third parties from grabbing a copy of the
+> > image as it is being downloaded
+> >   * Allow connection to servers that do not support plain HTTP anymore
+> > (this is becoming more and more common on the Internet these days)
+> > - Possibly benefit from additional features implemented in lwIP
+> > - Less code to maintain in U-Boot
+> >=20
+> > [...]
+>=20
+> Applied to u-boot/master, thanks!
 
-> diff --git a/arch/arm/dts/k3-j722s-r5-evm.dts 
-> b/arch/arm/dts/k3-j722s-r5-evm.dts
-> index aff83cd5d9..46f420d510 100644
-> --- a/arch/arm/dts/k3-j722s-r5-evm.dts
-> +++ b/arch/arm/dts/k3-j722s-r5-evm.dts
-> @@ -7,7 +7,7 @@
->  #include "k3-j722s-evm.dts"
->  #include "k3-j722s-evm-u-boot.dtsi"
->  
-> -#include "k3-j722s-ddr-lp4-50-3733.dtsi"
-> +#include "k3-j722s-ddr-lp4-50-4000.dtsi"
+With that said, checkpatch.pl finds a number of style errors under the
+new U-Boot code, please address those shortly, thanks.
 
-Do we need to keep the 3733MT/s config around anymore?
+--=20
+Tom
 
-~Bryan
+--DhzEkc5APECEgctf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcQIywACgkQFHw5/5Y0
+tywxpgv7BvH74avZexwlrCyNHK1yQhZgIH0b0ZZ0puL4k/gTshXO6sS0c/w6lO++
+R/psgKZjJIgcoXW1reU6mGvHKZR2mfCD97o516EQtDBntWOL+Q3BXyN8tjnMfPDd
+xKMYlrkzVAnZWZpIhYmkwjqN06co53NuIWZOavbZqEUMCQ1QKhAOMYZb6fp38Dj8
+30p/8X6WQecOZO9D04aAUwpG5oEAPOT5ng+dYdHaNaDP3LWtULrM3bY0LTP3vZzf
+TmbhRkeuA3DnYcagW6XCb8+gML9MDVgeWR1Sa9JuD101bXKKhwtTq9qiH9+NHv5r
+OEC9O6N7lBCdkY1Cwjs9T7/+IudLFzBTh8PyCDsDU3fyd5c2h4VCHOHqCgOrNMs7
+BvUrPp0rRur8WPxu57cu4g+/aAJjR/oAnKIt1qqphfdvglnwhPMLUJuTPSO4en5y
+IVNIEdnqJe5z9qQgnSSUxSurXwxSy3/sza3m4GAPn+9OviNavgGIC3Ilpvyv6KFU
+TzlRbVBj
+=/E+6
+-----END PGP SIGNATURE-----
+
+--DhzEkc5APECEgctf--
