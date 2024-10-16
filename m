@@ -4,60 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71E14D1AD53
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 12:53:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E21BD1AD55
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 13:28:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15AC988D1C;
-	Wed, 16 Oct 2024 14:53:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7838388BC2;
+	Wed, 16 Oct 2024 15:28:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729083226;
-	bh=MyFkjdfmUD5+PgKrl7igmEuZGoJzBz4TZhAlMYjA/mQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=S5oaOTrJYGnTYEmCaVwytDT0GjRNeCF1+979GXNFc2dQKYv2kSXibdMQ9gR8uXAlA
-	 auoD8yE01SoGI3KdVXl6tKbKo0U/A6v7coiT86h5RJAmQkW6uWXED5ld6CvJXERP81
-	 u7MKO/a1+Rb5Ma7QY8iymCbYhCfh/+wBYBOcMCwGUgeuRn2FGTCvvurFn3Qx0M0or6
-	 Fn92s7AAg3SnofbWuIKH9FTfvgtnTllmz5gi+eqPWT0W12x+s+ah68m9VTOKtC8dhJ
-	 ZRZLpm6Sd3GJPSGCrmm6mWQA6GlSgmli2IO1cLbESeT2unnYE/QNElNopKzVyBHT3e
-	 bf5EJQG327qkQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OmThnPzd";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4BAEE88C05; Wed, 16 Oct 2024 15:28:50 +0200 (CEST)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 5228B88B0C;
- Wed, 16 Oct 2024 14:53:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729083224;
- bh=MyFkjdfmUD5+PgKrl7igmEuZGoJzBz4TZhAlMYjA/mQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=EM7tX3OJGdlks0CTEMq12Y8/Te1ea8RhQEnUh86JgF6ea7f/0eriX98kg8Ka047qc
- G03AoiyzoxW0xiqTIJXf12jH8JiLosMrA+KgRgrnrKp5mXPh+HgIfnyahsalTzmLCD
- gPcdeDinb9Lrq8OhV/dCMclNBxrD2lQuUbDwsXmbDGVG+Evf1Atyx7cef/b0kgGz/3
- qiwXxwIBkpVRFVWnF4w3/Gnf1XMyBOMnfb/sbFix480LpGm4Or8nkYGoy2zyb/QlSK
- f66DUhb8rrKDPxJlyo377QwyrxHyTjrtRcb2TWeG+K/N012jy8CC+fCUakPjJG5Ip6
- T5W8osMRirYvA==
-Message-ID: <504ec0bf-c3be-4663-ac79-1f8a332d8232@denx.de>
-Date: Wed, 16 Oct 2024 14:15:42 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id A0DAB88B99
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 15:28:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-2e2b549799eso4757086a91.3
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 06:28:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729085326; x=1729690126; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6bWM5Ln2aKqQb2piOcoGDbrJU4UlN6ByuzC2EAtHJp4=;
+ b=OmThnPzd4/UBro8KHdoohXTku56BR5wM3x7x7J1cVSdbrYkQ3s+y4AD9Xnqc7FuRjH
+ MEsX9ylpufTb6870/p2Ms/brPmen30ZtAq2e1ZvIzSN7tcQ1BsntBlMhdpKe3vl1jB1u
+ AaKlv3X8WF0Y9g6gVfqGxpnXnXgW22x2spaOHTpUzKTzN5hq4t2l9wVmPz70TED3sGvl
+ Ke+qDjyDNVH0jZnDzSM1pbiDXohQ2ZQyC/zFb6lVpPnXO42xnOmk5yaHOqIZ3J/EkMVT
+ mRmemntqGXQeQErUH9iYzcSIaaSo7JeOZGSnk3geDxTZzVlegYKXcLNXTd4vbcxA35vK
+ FduQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729085326; x=1729690126;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6bWM5Ln2aKqQb2piOcoGDbrJU4UlN6ByuzC2EAtHJp4=;
+ b=R+Mnc+1wk7fQUem668kTE45bcdjJqcKD9DxxqP5mVt0wIqYe9/T7vk4Ek2CtjOrBnl
+ 37OS3XyrWrc6Ij3e2qZBZQL64Qkb51RKsczNDWsM1N0d60uEybCjluLJM5+cMtW/oSZi
+ X7nZgDG7qcPgzL8rWHJathEANz+1L9koJLjRXCGGssGXUeUKFZf1xO3HG9xh5mgBULLv
+ QIRfo56Q6OYUqwdrNLGslkoIifxorr6qpAFntj2g5v3WcBbEdp7Ynla3M4ET+Naws6g4
+ mIMI33x0vbxZ6xTI+x0Jk1IFiZsRHLiCLm/+lXoolggacmAYDr3SLRegNggZL4mgXws8
+ BG3Q==
+X-Gm-Message-State: AOJu0YwaKc2A1gGrZbWnNOSHrGSRL0SxKaSZH62tnhuH8bmRxqzHwIVt
+ uiwR0krStfdqjWokAHGT0kG4TmVFkRFM+mNgGOxg5M77hAyXpYD50oMvDObyqN9ClM1PXf9V60m
+ R2L6HC0whecBqbzwjkGgTkY+fvhGvSu0RqYdObQ==
+X-Google-Smtp-Source: AGHT+IEf+h7hFiUQivdksaBA05Q4o9U/21ykBw5U+nHnlD+BlfoTdhXWaMFlgwBBpERw1m5sXevHmN6BbMbr17jXB1s=
+X-Received: by 2002:a17:90a:a00f:b0:2e2:92fe:35d5 with SMTP id
+ 98e67ed59e1d1-2e315356673mr19696093a91.31.1729085326081; Wed, 16 Oct 2024
+ 06:28:46 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] arm64: imx8mp: Read MAC address from M24C32-D
- write-lockable page on DH i.MX8MP DHCOM if available
-To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
-References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
- <9b2f1914-ed29-429b-8c0a-e2a25a1172a9@denx.de>
- <62b02b850c194dc080684db8d00cf413@dh-electronics.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <62b02b850c194dc080684db8d00cf413@dh-electronics.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <cover.1729070678.git.jerome.forissier@linaro.org>
+ <9e25008319d750258e6838fa193916a0351a8a0e.1729070678.git.jerome.forissier@linaro.org>
+In-Reply-To: <9e25008319d750258e6838fa193916a0351a8a0e.1729070678.git.jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 16 Oct 2024 16:28:09 +0300
+Message-ID: <CAC_iWjKeG=wS09AH2vUxPDoLxVpvEgq_8UaGuxw32oxC7viANw@mail.gmail.com>
+Subject: Re: [PATCH v13 15/21] net: lwip: add wget command
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Anton Antonov <Anton.Antonov@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,71 +93,487 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/16/24 1:57 PM, Christoph Niedermaier wrote:
-> From: Marek Vasut <marex@denx.de>
-> Sent: Saturday, October 12, 2024 10:43 PM
->> On 10/10/24 3:23 PM, Christoph Niedermaier wrote:
->>> The i.MX8M Plus DHCOM currently supports parsing ethernet MAC address
->>> from multiple sources in the following priority order:
->>>
->>> 1) U-Boot environment 'ethaddr'/'eth1addr' environment variable
->>> 2) SoC OTP fuses
->>> 3) On-SoM EEPROM
->>>
->>> The new i.MX8M Plus DHCOM rev.200 is populated with M24C32-D EEPROM
->>> which contains additional write-lockable page, which can also be
->>> populated with a structure containing ethernet MAC address.
->>>
->>> Add support for parsing the content of this new write-lockable page
->>> and place it between 2) and 3) on the priority list. The new entry is
->>> 2.5) On-SoM EEPROM write-lockable page
->>>
->>> Because the write-lockable page is not present on rev.100 i.MX8MP DHCOM
->>> SoM, test whether EEPROM ID page exists in DT and whether it is enabled
->>> first. If so, read the entire ID page out, validate it, and determine
->>> whether EEPROM MAC address is populated in it in DH specific format. If
->>> so, use the MAC address. There may be multiple EEPROMs with an ID page
->>> on this platform, always use the first one.
->>>
->>> Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
->>> ---
->>> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
->>> Cc: Marek Vasut <marex@denx.de>
->>> Cc: Fabio Estevam <festevam@gmail.com>
->>> Cc: Stefano Babic <sbabic@denx.de>
->>> Cc: Tom Rini <trini@konsulko.com>
->>> Cc: u-boot@dh-electronics.com
->>> ---
->>>    board/dhelectronics/common/dh_common.c        | 113 ++++++++++++++++++
->>>    board/dhelectronics/common/dh_common.h        |  23 ++++
->>>    .../dh_imx8mp/imx8mp_dhcom_pdk2.c             |   6 +
->>>    3 files changed, 142 insertions(+)
->>>
->>> diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
->>> index 32c50b4f0f..8ea70fc984 100644
->>> --- a/board/dhelectronics/common/dh_common.c
->>> +++ b/board/dhelectronics/common/dh_common.c
->>> @@ -7,9 +7,22 @@
->>>    #include <dm.h>
->>>    #include <i2c_eeprom.h>
->>>    #include <net.h>
->>> +#include <u-boot/crc.h>
->>>
->>>    #include "dh_common.h"
->>>
->>> +struct eeprom_id_page {
->>> +     u8      id[3];          /* Identifier 'D', 'H', 'E' - 'D' is at index 0 */
->>> +     u8      version;        /* 0x10 -- Version 1.0 */
->>> +     u8      data_crc16[2];  /* [1] is MSbyte */
->>> +     u8      header_crc8;
->>> +     u8      mac0[6];
->>> +     u8      mac1[6];
->>> +     u8      item_prefix;    /* H/F is coded in MSbits, Vendor coding starts at LSbits */
->>> +     u8      item_num[3];    /* [2] is MSbyte */
->>> +     u8      serial[9];      /* [8] is MSbyte */
->>> +} __packed;
->>
->> Is __packed needed ?
-> 
-> I want to avoid padding in any case.
-Every single field is u8, do you observe any padding ?
+On Wed, 16 Oct 2024 at 13:05, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Add support for the wget command with NET_LWIP. The command normally
+> expects a URL: wget [loadaddr] url, but it also accepts the legacy
+> syntax: wget [loadaddr] [server:]file.
+> The server IP may alternatively be supplied via ${httpserverip} which
+> has higher priority than ${serverip}.
+>
+> Based on code initially developed by Maxim U.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Co-developed-by: Maxim Uvarov <muvarov@gmail.com>
+> Cc: Maxim Uvarov <muvarov@gmail.com>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  cmd/Kconfig        |  18 ++-
+>  cmd/net-lwip.c     |   8 +
+>  include/net-lwip.h |  18 +++
+>  net/lwip/Makefile  |   1 +
+>  net/lwip/wget.c    | 357 +++++++++++++++++++++++++++++++++++++++++++++
+>  5 files changed, 394 insertions(+), 8 deletions(-)
+>  create mode 100644 net/lwip/wget.c
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 2791ad5393c..8c677b1e486 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2001,14 +2001,6 @@ config SYS_DISABLE_AUTOLOAD
+>           is complete.  Enable this option to disable this behavior and instead
+>           require files to be loaded over the network by subsequent commands.
+>
+> -config CMD_WGET
+> -       bool "wget"
+> -       select PROT_TCP
+> -       default y if SANDBOX
+> -       help
+> -         wget is a simple command to download kernel, or other files,
+> -         from a http server over TCP.
+> -
+>  config CMD_PING6
+>         bool "ping6"
+>         depends on IPV6
+> @@ -2116,6 +2108,16 @@ config CMD_TFTPBOOT
+>         help
+>           tftpboot - load file via network using TFTP protocol
+>
+> +config CMD_WGET
+> +       bool "wget"
+> +       default y if SANDBOX
+> +       select PROT_TCP if NET
+> +       select PROT_TCP_LWIP if NET_LWIP
+> +       select PROT_DNS_LWIP if NET_LWIP
+> +       help
+> +         wget is a simple command to download kernel, or other files,
+> +         from a http server over TCP.
+> +
+>  endif  # if CMD_NET
+>
+>  config CMD_PXE
+> diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
+> index c021da6a674..42f8bd6b259 100644
+> --- a/cmd/net-lwip.c
+> +++ b/cmd/net-lwip.c
+> @@ -35,3 +35,11 @@ U_BOOT_CMD(
+>         "hostname [envvar]"
+>  );
+>  #endif
+> +
+> +#if defined(CONFIG_CMD_WGET)
+> +U_BOOT_CMD(
+> +       wget,   3,      1,      do_wget,
+> +       "boot image via network using HTTP protocol",
+> +       "[loadAddress] URL"
+> +);
+> +#endif
+> diff --git a/include/net-lwip.h b/include/net-lwip.h
+> index ff9d03b23e8..1c3583f82a1 100644
+> --- a/include/net-lwip.h
+> +++ b/include/net-lwip.h
+> @@ -16,8 +16,26 @@ void net_lwip_remove_netif(struct netif *netif);
+>  struct netif *net_lwip_get_netif(void);
+>  int net_lwip_rx(struct udevice *udev, struct netif *netif);
+>
+> +/**
+> + * wget_with_dns() - runs dns host IP address resulution before wget
+> + *
+> + * @dst_addr:  destination address to download the file
+> + * @uri:       uri string of target file of wget
+> + * Return:     downloaded file size, negative if failed
+> + */
+> +
+> +int wget_with_dns(ulong dst_addr, char *uri);
+> +/**
+> + * wget_validate_uri() - varidate the uri
+> + *
+> + * @uri:       uri string of target file of wget
+> + * Return:     true if uri is valid, false if uri is invalid
+> + */
+> +bool wget_validate_uri(char *uri);
+> +
+>  int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>  int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>  int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+> +int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+>
+>  #endif /* __NET_LWIP_H__ */
+> diff --git a/net/lwip/Makefile b/net/lwip/Makefile
+> index 645d8a8c457..f2558f8763a 100644
+> --- a/net/lwip/Makefile
+> +++ b/net/lwip/Makefile
+> @@ -5,3 +5,4 @@ obj-$(CONFIG_CMD_DHCP) += dhcp.o
+>  obj-$(CONFIG_CMD_DNS) += dns.o
+>  obj-$(CONFIG_CMD_PING) += ping.o
+>  obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+> +obj-$(CONFIG_CMD_WGET) += wget.o
+> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> new file mode 100644
+> index 00000000000..b495ebd1aa9
+> --- /dev/null
+> +++ b/net/lwip/wget.c
+> @@ -0,0 +1,357 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/* Copyright (C) 2024 Linaro Ltd. */
+> +
+> +#include <command.h>
+> +#include <console.h>
+> +#include <display_options.h>
+> +#include <efi_loader.h>
+> +#include <image.h>
+> +#include <lwip/apps/http_client.h>
+> +#include <lwip/timeouts.h>
+> +#include <mapmem.h>
+> +#include <net.h>
+> +#include <time.h>
+> +
+> +#define SERVER_NAME_SIZE 200
+> +#define HTTP_PORT_DEFAULT 80
+> +#define PROGRESS_PRINT_STEP_BYTES (100 * 1024)
+> +
+> +enum done_state {
+> +        NOT_DONE = 0,
+> +        SUCCESS = 1,
+> +        FAILURE = 2
+> +};
+> +
+> +struct wget_ctx {
+> +       char *path;
+> +       ulong daddr;
+> +       ulong saved_daddr;
+> +       ulong size;
+> +       ulong prevsize;
+> +       ulong start_time;
+> +       enum done_state done;
+> +};
+> +
+> +static int parse_url(char *url, char *host, u16 *port, char **path)
+> +{
+> +       char *p, *pp;
+> +       long lport;
+> +
+> +       p = strstr(url, "http://");
+> +       if (!p) {
+> +               log_err("only http:// is supported\n");
+> +               return -EINVAL;
+> +       }
+> +
+> +       p += strlen("http://");
+> +
+> +       /* Parse hostname */
+> +       pp = strchr(p, ':');
+> +       if (!pp)
+> +               pp = strchr(p, '/');
+> +       if (!pp)
+> +               return -EINVAL;
+> +
+> +       if (p + SERVER_NAME_SIZE <= pp)
+> +               return -EINVAL;
+> +
+> +       memcpy(host, p, pp - p);
+> +       host[pp - p] = '\0';
+> +
+> +       if (*pp == ':') {
+> +               /* Parse port number */
+> +               p = pp + 1;
+> +               lport = simple_strtol(p, &pp, 10);
+> +               if (pp && *pp != '/')
+> +                       return -EINVAL;
+> +               if (lport > 65535)
+> +                       return -EINVAL;
+> +               *port = (u16)lport;
+> +       } else {
+> +               *port = HTTP_PORT_DEFAULT;
+> +       }
+> +       if (*pp != '/')
+> +               return -EINVAL;
+> +       *path = pp;
+> +
+> +       return 0;
+> +}
+> +
+> +/*
+> + * Legacy syntax support
+> + * Convert [<server_name_or_ip>:]filename into a URL if needed
+> + */
+> +static int parse_legacy_arg(char *arg, char *nurl, size_t rem)
+> +{
+> +       char *p = nurl;
+> +       size_t n;
+> +       char *col = strchr(arg, ':');
+> +       char *env;
+> +       char *server;
+> +       char *path;
+> +
+> +       if (strstr(arg, "http") == arg) {
+> +               n = snprintf(nurl, rem, "%s", arg);
+> +               if (n < 0 || n > rem)
+> +                       return -1;
+> +               return 0;
+> +       }
+> +
+> +       n = snprintf(p, rem, "%s", "http://");
+> +       if (n < 0 || n > rem)
+> +               return -1;
+> +       p += n;
+> +       rem -= n;
+> +
+> +       if (col) {
+> +               n = col - arg;
+> +               server = arg;
+> +               path = col + 1;
+> +       } else {
+> +               env = env_get("httpserverip");
+> +               if (!env)
+> +                       env = env_get("serverip");
+> +               if (!env) {
+> +                       log_err("error: httpserver/serverip has to be set\n");
+> +                       return -1;
+> +               }
+> +               n = strlen(env);
+> +               server = env;
+> +               path = arg;
+> +       }
+> +
+> +       if (rem < n)
+> +               return -1;
+> +       strncpy(p, server, n);
+> +       p += n;
+> +       rem -= n;
+> +       if (rem < 1)
+> +               return -1;
+> +       *p = '/';
+> +       p++;
+> +       rem--;
+> +       n = strlen(path);
+> +       if (rem < n)
+> +               return -1;
+> +       strncpy(p, path, n);
+> +       p += n;
+> +       rem -= n;
+> +       if (rem < 1)
+> +               return -1;
+> +       *p = '\0';
+> +
+> +       return 0;
+> +}
+> +
+> +static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
+> +                          err_t err)
+> +{
+> +       struct wget_ctx *ctx = arg;
+> +       struct pbuf *buf;
+> +
+> +       if (!pbuf)
+> +               return ERR_BUF;
+> +
+> +       if (!ctx->start_time)
+> +               ctx->start_time = get_timer(0);
+> +
+> +       for (buf = pbuf; buf; buf = buf->next) {
+> +               memcpy((void *)ctx->daddr, buf->payload, buf->len);
+> +               ctx->daddr += buf->len;
+> +               ctx->size += buf->len;
+> +               if (ctx->size - ctx->prevsize > PROGRESS_PRINT_STEP_BYTES) {
+> +                       printf("#");
+> +                       ctx->prevsize = ctx->size;
+> +               }
+> +       }
+> +
+> +       altcp_recved(pcb, pbuf->tot_len);
+> +       pbuf_free(pbuf);
+> +       return ERR_OK;
+> +}
+> +
+> +static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
+> +                           u32_t rx_content_len, u32_t srv_res, err_t err)
+> +{
+> +       struct wget_ctx *ctx = arg;
+> +       ulong elapsed;
+> +
+> +       if (httpc_result != HTTPC_RESULT_OK) {
+> +               log_err("\nHTTP client error %d\n", httpc_result);
+> +               ctx->done = FAILURE;
+> +               return;
+> +       }
+> +       if (srv_res != 200) {
+> +               log_err("\nHTTP server error %d\n", srv_res);
+> +               ctx->done = FAILURE;
+> +               return;
+> +       }
+> +
+> +       elapsed = get_timer(ctx->start_time);
+> +       if (!elapsed)
+> +               elapsed = 1;
+> +       if (rx_content_len > PROGRESS_PRINT_STEP_BYTES)
+> +               printf("\n");
+> +       printf("%u bytes transferred in %lu ms (", rx_content_len, elapsed);
+> +       print_size(rx_content_len / elapsed * 1000, "/s)\n");
+> +       printf("Bytes transferred = %lu (%lx hex)\n", ctx->size, ctx->size);
+> +       efi_set_bootdev("Net", "", ctx->path, map_sysmem(ctx->saved_daddr, 0),
+> +                       rx_content_len);
+> +       if (env_set_hex("filesize", rx_content_len) ||
+> +           env_set_hex("fileaddr", ctx->saved_daddr)) {
+> +               log_err("Could not set filesize or fileaddr\n");
+> +               ctx->done = FAILURE;
+> +               return;
+> +       }
+> +
+> +       ctx->done = SUCCESS;
+> +}
+> +
+> +static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+> +{
+> +       char server_name[SERVER_NAME_SIZE];
+> +       httpc_connection_t conn;
+> +       httpc_state_t *state;
+> +       struct netif *netif;
+> +       struct wget_ctx ctx;
+> +       char *path;
+> +       u16 port;
+> +
+> +       ctx.daddr = dst_addr;
+> +       ctx.saved_daddr = dst_addr;
+> +       ctx.done = NOT_DONE;
+> +       ctx.size = 0;
+> +       ctx.prevsize = 0;
+> +       ctx.start_time = 0;
+> +
+> +       if (parse_url(uri, server_name, &port, &path))
+> +               return CMD_RET_USAGE;
+> +
+> +       netif = net_lwip_new_netif(udev);
+> +       if (!netif)
+> +               return -1;
+> +
+> +       memset(&conn, 0, sizeof(conn));
+> +       conn.result_fn = httpc_result_cb;
+> +       ctx.path = path;
+> +       if (httpc_get_file_dns(server_name, port, path, &conn, httpc_recv_cb,
+> +                              &ctx, &state)) {
+> +               net_lwip_remove_netif(netif);
+> +               return CMD_RET_FAILURE;
+> +       }
+> +
+> +       while (!ctx.done) {
+> +               net_lwip_rx(udev, netif);
+> +               sys_check_timeouts();
+> +               if (ctrlc())
+> +                       break;
+> +       }
+> +
+> +       net_lwip_remove_netif(netif);
+> +
+> +       if (ctx.done == SUCCESS)
+> +               return 0;
+> +
+> +       return -1;
+> +}
+> +
+> +int wget_with_dns(ulong dst_addr, char *uri)
+> +{
+> +       eth_set_current();
+> +
+> +       return wget_loop(eth_get_dev(), dst_addr, uri);
+> +}
+> +
+> +int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+> +{
+> +       char *end;
+> +       char *url;
+> +       ulong dst_addr;
+> +       char nurl[1024];
+> +
+> +       if (argc < 2 || argc > 3)
+> +               return CMD_RET_USAGE;
+> +
+> +       dst_addr = hextoul(argv[1], &end);
+> +        if (end == (argv[1] + strlen(argv[1]))) {
+> +               if (argc < 3)
+> +                       return CMD_RET_USAGE;
+> +               url = argv[2];
+> +       } else {
+> +               dst_addr = image_load_addr;
+> +               url = argv[1];
+> +       }
+> +
+> +       if (parse_legacy_arg(url, nurl, sizeof(nurl)))
+> +           return CMD_RET_FAILURE;
+> +
+> +       if (wget_with_dns(dst_addr, nurl))
+> +               return CMD_RET_FAILURE;
+> +
+> +       return CMD_RET_SUCCESS;
+> +}
+> +
+> +/**
+> + * wget_validate_uri() - validate the uri for wget
+> + *
+> + * @uri:       uri string
+> + *
+> + * This function follows the current U-Boot wget implementation.
+> + * scheme: only "http:" is supported
+> + * authority:
+> + *   - user information: not supported
+> + *   - host: supported
+> + *   - port: not supported(always use the default port)
+> + *
+> + * Uri is expected to be correctly percent encoded.
+> + * This is the minimum check, control codes(0x1-0x19, 0x7F, except '\0')
+> + * and space character(0x20) are not allowed.
+> + *
+> + * TODO: stricter uri conformance check
+> + *
+> + * Return:     true on success, false on failure
+> + */
+> +bool wget_validate_uri(char *uri)
+> +{
+> +       char c;
+> +       bool ret = true;
+> +       char *str_copy, *s, *authority;
+> +
+> +       for (c = 0x1; c < 0x21; c++) {
+> +               if (strchr(uri, c)) {
+> +                       log_err("invalid character is used\n");
+> +                       return false;
+> +               }
+> +       }
+> +       if (strchr(uri, 0x7f)) {
+> +               log_err("invalid character is used\n");
+> +               return false;
+> +       }
+> +
+> +       if (strncmp(uri, "http://", 7)) {
+> +               log_err("only http:// is supported\n");
+> +               return false;
+> +       }
+> +       str_copy = strdup(uri);
+> +       if (!str_copy)
+> +               return false;
+> +
+> +       s = str_copy + strlen("http://");
+> +       authority = strsep(&s, "/");
+> +       if (!s) {
+> +               log_err("invalid uri, no file path\n");
+> +               ret = false;
+> +               goto out;
+> +       }
+> +       s = strchr(authority, '@');
+> +       if (s) {
+> +               log_err("user information is not supported\n");
+> +               ret = false;
+> +               goto out;
+> +       }
+> +
+> +out:
+> +       free(str_copy);
+> +
+> +       return ret;
+> +}
+> --
+> 2.40.1
+>
+
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
