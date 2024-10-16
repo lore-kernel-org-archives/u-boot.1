@@ -4,56 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A136DD2A555
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 20:17:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E6EFD2A559
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 20:31:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36F8388DE6;
-	Wed, 16 Oct 2024 22:17:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
+	by phobos.denx.de (Postfix) with ESMTP id 1871A88DE1;
+	Wed, 16 Oct 2024 22:31:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="ZrXnUiJi";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oro5T7GE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92A2088DE1; Wed, 16 Oct 2024 22:17:25 +0200 (CEST)
-Received: from smtp-out.freemail.hu (fmfe38.freemail.hu [46.107.16.243])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 15ED188DED; Wed, 16 Oct 2024 22:31:15 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FE2088DE6
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 22:17:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BEA8288D5C
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 22:31:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=freemail.hu
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=egyszeregy@freemail.hu
-Received: from localhost.localdomain
- (catv-178-48-208-49.catv.fixed.vodafone.hu [178.48.208.49])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp.freemail.hu (Postfix) with ESMTPSA id 4XTMhL3HkqzFmx;
- Wed, 16 Oct 2024 22:17:22 +0200 (CEST)
-From: egyszeregy@freemail.hu
-To: u-boot@lists.denx.de
-Cc: sbabic@denx.de, festevam@gmail.com, otavio@ossystems.com.br,
- Ray Chang <ray.chang@technexion.com>,
- =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
-Subject: [PATCH v2] pico-imx7d: Increase ODT resistor value
-Date: Wed, 16 Oct 2024 22:15:36 +0200
-Message-ID: <20241016201536.2032-1-egyszeregy@freemail.hu>
-X-Mailer: git-send-email 2.47.0.windows.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49GKV9tV103689;
+ Wed, 16 Oct 2024 15:31:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1729110669;
+ bh=EXuC283ed075xvqXo0/iENbYBrwfu3O07dTm0ti6BcA=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=oro5T7GEOVcIsY9j/6Kwb8p/6jt3rLxByl4PQ3b2SCjKlX1rltB/J6MIfQW02989f
+ 3585gdq5ubkPKs9Cff28CIoLF4bMB0vcxdHf/6wsWGKokpaO7pQDuWBAYUDdSSW6fF
+ XWlNaSHhZCx+RksrXeizyGlwSxOpBa9vPtCvm90k=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49GKV9US001850;
+ Wed, 16 Oct 2024 15:31:09 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
+ Oct 2024 15:31:08 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 16 Oct 2024 15:31:08 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49GKV8t2105540;
+ Wed, 16 Oct 2024 15:31:08 -0500
+Date: Wed, 16 Oct 2024 15:31:08 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Vaishnav Achath <vaishnav.a@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>,
+ <francesco.dolcini@toradex.com>, <nm@ti.com>, <u-kumar1@ti.com>,
+ <n-francis@ti.com>
+Subject: Re: [PATCH] arm: dts: k3-j722s-r5-evm: Add LPDDR4 4000 MT/s configs
+Message-ID: <20241016203108.gnzfwcd5r2ilwy2u@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20241016074048.1363067-1-vaishnav.a@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1729109842; 
- s=20181004; d=freemail.hu;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
- l=1020; bh=+floIsiXm8WS5GMgA6V37Ck26MP8/xz8yx+kSeGBdYM=;
- b=ZrXnUiJi95XJmOz8kb1E6BaSpBj6m4gPyFGfsZetRYqQgEjUwJhmuzoAUXuGKE/V
- Q53N/bjXgx6MDbjfFcIqHNOIEltXYU5gRYEhtYqiVOWw8wwonKaKLmfOczLEUvv7xTC
- cXrrMBArc8UI2s33xSEuCzudkHX4JWzyFYLvp4kD+byECm7fs75NluFoxTtmbQ2+T5X
- ry5VhTRW2kBPsO6hIPGfK00b9jFQbjpudZ3lwNKukEdfPaTBJ0lEPBz3jSPabGrlITW
- f+j1OoEC5t2+cDO+XenLruWH5tGv4mXmR6ZG44YDkSpASeeQqsxYdVcefoob4UhbMMa
- ksFVmTRAhg==
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20241016074048.1363067-1-vaishnav.a@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,40 +79,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ray Chang <ray.chang@technexion.com>
+Hi Vaishnav!
 
-Increase ODT resistor value from 60 to 120 ohm to improve DRAM stability.
+On October 16, 2024 thus sayeth Vaishnav Achath:
+> Add the latest 4000 MT/s DDR config generated by
+> Jacinto7_DDRSS_RegConfigTool Rev 0.11 for J722S , make it the
+> default config and update A53 default clock to 1.4 GHz matching
+> the default speed grade (K).
+> 
+> Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+> ---
+> 
+> memtester logs on J722S EVM:
+> 	https://gist.github.com/vaishnavachath/4174d02e0338e53594015dfdd321a8ef
+> The max frequency was not bumped up to 4000 MT/s initially
+> since the characterization results were not available.
+> All the devices populated on J722S EVM and Beagle Y AI is speed
+> grade K.
+> 
+>  arch/arm/dts/k3-j722s-ddr-lp4-50-4000.dtsi | 2797 ++++++++++++++++++++
+>  arch/arm/dts/k3-j722s-r5-evm.dts           |    4 +-
+>  2 files changed, 2799 insertions(+), 2 deletions(-)
+>  create mode 100644 arch/arm/dts/k3-j722s-ddr-lp4-50-4000.dtsi
+> 
 
-Based on the following commit from TechNexion U-Boot:
-https://github.com/TechNexion/u-boot-tn-imx/commit/8a00e57b697c6f7d3d3abcfc552550ac7d8cc96d
+...
 
-Signed-off-by: Ray Chang <ray.chang@technexion.com>
-Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
----
- board/technexion/pico-imx7d/spl.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+> diff --git a/arch/arm/dts/k3-j722s-r5-evm.dts 
+> b/arch/arm/dts/k3-j722s-r5-evm.dts
+> index aff83cd5d9..46f420d510 100644
+> --- a/arch/arm/dts/k3-j722s-r5-evm.dts
+> +++ b/arch/arm/dts/k3-j722s-r5-evm.dts
+> @@ -7,7 +7,7 @@
+>  #include "k3-j722s-evm.dts"
+>  #include "k3-j722s-evm-u-boot.dtsi"
+>  
+> -#include "k3-j722s-ddr-lp4-50-3733.dtsi"
+> +#include "k3-j722s-ddr-lp4-50-4000.dtsi"
 
-diff --git a/board/technexion/pico-imx7d/spl.c b/board/technexion/pico-imx7d/spl.c
-index cb60d3be42..fc97c58ae1 100644
---- a/board/technexion/pico-imx7d/spl.c
-+++ b/board/technexion/pico-imx7d/spl.c
-@@ -89,11 +89,11 @@ static struct ddr_phy ddr_phy_regs_val = {
- static struct mx7_calibration calib_param = {
- 	.num_val	= 5,
- 	.values		= {
--		0x0E407304,
--		0x0E447304,
--		0x0E447306,
--		0x0E447304,
--		0x0E447304,
-+		0x0E207304,
-+		0x0E247304,
-+		0x0E247306,
-+		0x0E247304,
-+		0x0E207304,
- 	},
- };
- 
--- 
-2.47.0.windows.1
+Do we need to keep the 3733MT/s config around anymore?
 
+~Bryan
