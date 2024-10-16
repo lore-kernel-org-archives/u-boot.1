@@ -4,108 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63FABD206A2
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 07:07:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA56BD206A5
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 07:16:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEF9788B0C;
-	Wed, 16 Oct 2024 09:07:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1374E87D1A;
+	Wed, 16 Oct 2024 09:16:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C3Fr2qc3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WD4TKYsl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0419788AE4; Wed, 16 Oct 2024 09:07:19 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id BD71C88B16; Wed, 16 Oct 2024 09:16:23 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EED4C88D3A
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 09:07:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE38380AE6
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 09:16:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4311420b63fso47224515e9.2
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 00:07:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2e3010478e6so4006679a91.1
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 00:16:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729062434; x=1729667234; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=Y5G0CM1uxp7bFHR7SjxdD9Sh1TIkGjkf3y9snzggQ2w=;
- b=C3Fr2qc3bNb4HSXgJqwZM0ZslQPpXxQs2Ebk8nARTqkcip/IAmlXX+0G9k36269fio
- mqxS4t+7Ia9/NRgzi6RjPzBJhK3nUpQg7ps+w9cv1wVirI/hhAFRlvrHLRDh+cw8oOFO
- HpdssPZ49tOx68Juo9PVT93yJn00MFDzS4GpSN+IZOGMz2cy4DlEGrgbJ/0CQYLtPE8Z
- WCHoaKYlhOI76d/4rBDYT0+LwZyWp/qOA7UEGL3u7m9J1QpeXgCeioToGWGl/qiN7XK+
- IzWNNI6Z0SK9EUsWNItPu974Mk9su7ThvZSX62ZoTV7oftcYS1r6QUPD8y6pxNSxwH9u
- RC3Q==
+ d=linaro.org; s=google; t=1729062979; x=1729667779; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4+P89Dshf2Ez0ElCroT2/j83i8jPLoZ5OqR4lZObiy4=;
+ b=WD4TKYsljNc/UGwKjf4OnJbBboAhOixN11SDLX204tCZC5uXpPg20MitcskfgLJ8C5
+ stseY/yCDybYR8r4SZnd2SR8acYLCmfo+jFU/5it/VAIAj8r+GozTwQ5LOP8czWRO2L6
+ p5iCxlLQ/4fU3Xlsjqk82fRl+RMUen2mqjT3PSF4PwpTHCJEAQ+yzx66mKlsc3bDqU6p
+ zY8Dxv4DGeOCdSMg4I5Y7vktDlfV1n6qHC49hp8M3XexCaS6m9qDg9wpiZMeIGLsxyod
+ Wp7FLTdSZ1K5BympFouzxwZtkwMSmVEeAoT6QG4Wx2qI1a5h+uEFDF+IG9m+Sgdufs6G
+ ntag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729062434; x=1729667234;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Y5G0CM1uxp7bFHR7SjxdD9Sh1TIkGjkf3y9snzggQ2w=;
- b=R9k/fAi2dYdCvaSN6FOkPaBocGdYVAf6L9ghB54cew6MjB4Qj2i9U9rY4Ta1qmEyl/
- atKF8PzLXemVHhIqTKPEHN6mG1/Mks4YAIcBd3fYulE2KKxKa8YhNQl9ERinpYLTEFtm
- RxbsvQiIKvXVMBymCEfuA/TxKTimMWb8qBZOvFuEd5O3LsAKVTsoHWApeV0prD2EUWOZ
- eF54sl0TfE4h2Ks22kY296QLWPbgxy4s6BCvTtjBjJGhNTJow6ZHGfI0H633sAb8Pwp0
- cctCIbCJ1h1WnHqamXveSATcB3B+t9f38BqvWVX4aDv1VIumxqyedWXt7NgQ713KIIw6
- b5rQ==
-X-Gm-Message-State: AOJu0Yx6knJBLwk3eX776ehLDzxlsEM3m1YiefhChzLy29QqShbFD7Nm
- 6m1oG5iV/hIrXgkhbVV9lMsF+JLQ6IS+tLGMEp4WDUPvocIaS0sSJZGEqKECATA=
-X-Google-Smtp-Source: AGHT+IFmfmn7PIP9RvKf7o7y1owCE5sKNQIfvbFeWm/fPx51b0XCmkCkgC8g4dAelBTbeopVBM9jyA==
-X-Received: by 2002:a05:600c:1d8c:b0:424:ad14:6b79 with SMTP id
- 5b1f17b1804b1-431255dc78bmr112127325e9.8.1729062434390; 
- Wed, 16 Oct 2024 00:07:14 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:fd09:f78e:726a:6fa2?
- ([2a01:e0a:982:cbb0:fd09:f78e:726a:6fa2])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-431503c0214sm12971815e9.29.2024.10.16.00.07.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Oct 2024 00:07:13 -0700 (PDT)
-Message-ID: <4d5d502d-149c-4abc-b6ea-13d67a6e2d18@linaro.org>
-Date: Wed, 16 Oct 2024 09:07:12 +0200
+ d=1e100.net; s=20230601; t=1729062979; x=1729667779;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4+P89Dshf2Ez0ElCroT2/j83i8jPLoZ5OqR4lZObiy4=;
+ b=bqDSMEhP3bQJ38CtRcekyUHMrpQQ0cc4RcBnPnTTPLVdB/PGKVWL4E+3rTrsKg2DFM
+ fkMLXGCYJzNcNAY17uLNLORgAL/K9RnJxL9AEmvZ4sPlNweR8IBGPB/k8l88YQFvZHYf
+ tPVWEPIE9dL+Bosu5OcXXQ0WyhzvSHEwT7FlVSYlgWEMLeSEDuuCEzjJD9dRvbxGfWLv
+ SYONogCmTSymHc1wgcnOCvSsiGI42MjqknN53GyyA3BWhcaMWGGGM4Tqtpobw8n4+cOw
+ j6zP0TZ8uiUgNFSfJPMEvhbTGicTPyxe1gcJaadFZ38AirMrwY4jdSpeiZHzDg85GyKj
+ q1PA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWLQ7nEE7A3ecMlGvh1oNlX6wjO6sr1KK1Lwo07WEf970IQTG+xhCqi9ruWOWMK04r0UlURqjA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwhpxLe5lj2HF3FYT60yCXP3/Saba6V3nd5L3vOS7BcjYO42r9o
+ 7gINd6uqRxXRc0QN6PP+sBKcZ6ZtkRJQNvviAHMkjQxELnRX/2eQYpJCd831uLkkykwKm+Xv12M
+ 9l4a3TeAnfUIetKpeLMPqNJTuVUs30/YkMeBYhA==
+X-Google-Smtp-Source: AGHT+IGbZBSMCcB5UMN9UY8/mDCzLRXgm9d6RuoEYwOMXkdG5kJ5MVogaqj9NlvRn3c8otkYAvZ9EtcPmoTVCs/tRmQ=
+X-Received: by 2002:a17:90b:3b90:b0:2e2:cd6b:c6ca with SMTP id
+ 98e67ed59e1d1-2e3153589c9mr17228230a91.25.1729062979278; Wed, 16 Oct 2024
+ 00:16:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] phy: qcom: ufs: add sc7280
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, Sumit Garg
- <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20241012132251.1840147-1-caleb.connolly@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20241012132251.1840147-1-caleb.connolly@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240920-u-boot-topic-libre-computer-solitude-alta-v1-0-8915b108840b@linaro.org>
+ <20240920-u-boot-topic-libre-computer-solitude-alta-v1-2-8915b108840b@linaro.org>
+In-Reply-To: <20240920-u-boot-topic-libre-computer-solitude-alta-v1-2-8915b108840b@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 16 Oct 2024 10:15:43 +0300
+Message-ID: <CAC_iWj+myZ3MtLyHyF1xJUG8_FaA4qK6LFisAxA+JzHQJ71nUw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] ARM: meson: add support for Libre Computer
+ aml-s905d3-cc
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot-amlogic@groups.io,
+ u-boot@lists.denx.de, da@libre.computer
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,192 +85,339 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/10/2024 15:22, Caleb Connolly wrote:
-> Add configuration for the SC7280, copied from Linux 6.11
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+On Fri, 20 Sept 2024 at 16:33, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+>
+> Add support for the Libre Computer aml-s905d3-cc "Solitude" board:
+> https://libre.computer/products/aml-s905d3-cc/
+>
+> The Solitude board has a Credit Card form factor, similar to the
+> the previous "Le Potato" card, but with the Amlogic A311D SoC,
+> MIPI DSI and CSI connectors. PoE header and a single USB2 Type-C
+> connector replacing the microUSB one for power and USB 2.0.
+>
+> The board has an embedded SPI NOR flash, and EFI Capsule support
+> is added.
+>
+> The GUID is dynamically generated for the board, to get it:
+> => efidebug capsule esrt
+> ========================================
+> ESRT: fw_resource_count=1
+> ESRT: fw_resource_count_max=1
+> ESRT: fw_resource_version=1
+> [entry 0]==============================
+> ESRT: fw_class=4302C3CB-2502-5EFE-87E0-894A8A322893
+> ESRT: fw_type=unknown
+> ESRT: fw_version=0
+> ESRT: lowest_supported_fw_version=0
+> ESRT: capsule_flags=0
+> ESRT: last_attempt_version=0
+> ESRT: last_attempt_status=success
+> ========================================
+>
+> On the host (with the aml_encrypt_g12a result binary):
+> $ eficapsule --guid 4302C3CB-2502-5EFE-87E0-894A8A322893 -i 1 u-boot.bin u-boot.cap
+>
+> On the board (from USB disk containing u-boot.cap at root):
+> => load usb 0:1 $kernel_addr_r u-boot.cap
+> => efidebug capsule update $kernel_addr_r
+>
+> The binary will then be flashed on the SPI.
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 > ---
->   drivers/phy/qcom/phy-qcom-qmp-ufs.c | 142 ++++++++++++++++++++++++++++
->   1 file changed, 142 insertions(+)
-> 
-> diff --git a/drivers/phy/qcom/phy-qcom-qmp-ufs.c b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> index 8908a34df548..f6a5354a5aa2 100644
-> --- a/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> +++ b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> @@ -460,8 +460,114 @@ static const struct qmp_ufs_init_tbl sm8650_ufsphy_pcs[] = {
->   	QMP_PHY_INIT_CFG(QPHY_V6_PCS_UFS_RX_HS_G5_SYNC_LENGTH_CAPABILITY, 0x4d),
->   	QMP_PHY_INIT_CFG(QPHY_V6_PCS_UFS_RX_HSG5_SYNC_WAIT_TIME, 0x9e),
->   };
->   
+>  .../dts/meson-sm1-s905d3-libretech-cc-u-boot.dtsi  |  15 +++
+>  board/libre-computer/aml-s905d3-cc/MAINTAINERS     |   7 ++
+>  board/libre-computer/aml-s905d3-cc/Makefile        |   6 ++
+>  board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c |  44 +++++++++
+>  configs/aml-s905d3-cc_defconfig                    | 108 +++++++++++++++++++++
+>  doc/board/amlogic/aml-s905d3-cc.rst                |  46 +++++++++
+>  doc/board/amlogic/index.rst                        |   1 +
+>  7 files changed, 227 insertions(+)
+>
+> diff --git a/arch/arm/dts/meson-sm1-s905d3-libretech-cc-u-boot.dtsi b/arch/arm/dts/meson-sm1-s905d3-libretech-cc-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..1c4f019120f
+> --- /dev/null
+> +++ b/arch/arm/dts/meson-sm1-s905d3-libretech-cc-u-boot.dtsi
+> @@ -0,0 +1,15 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (c) 2023 Neil Armstrong <neil.armstrong@linaro.org>
+> + */
 > +
-> +static const struct qmp_ufs_init_tbl sc7280_ufsphy_tx[] = {
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_TX_PWM_GEAR_1_DIVIDER_BAND0_1, 0x06),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_TX_PWM_GEAR_2_DIVIDER_BAND0_1, 0x03),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_TX_PWM_GEAR_3_DIVIDER_BAND0_1, 0x01),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_TX_PWM_GEAR_4_DIVIDER_BAND0_1, 0x00),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_TX_LANE_MODE_1, 0x35),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_TX_TRAN_DRVR_EMP_EN, 0x0c),
+> +#include "meson-g12-common-u-boot.dtsi"
+> +
+> +&sd_emmc_c {
+> +       pinctrl-0 = <&emmc_ctrl_pins>, <&emmc_data_4b_pins>, <&emmc_ds_pins>;
+> +       bus-width = <4>;
 > +};
 > +
-> +static const struct qmp_ufs_init_tbl sc7280_ufsphy_rx[] = {
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_SIGDET_LVL, 0x24),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_SIGDET_CNTRL, 0x0f),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_SIGDET_DEGLITCH_CNTRL, 0x1e),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_BAND, 0x18),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_FASTLOCK_FO_GAIN, 0x0a),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_SO_SATURATION_AND_ENABLE, 0x5a),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_PI_CONTROLS, 0xf1),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_FASTLOCK_COUNT_LOW, 0x80),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_PI_CTRL2, 0x80),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_FO_GAIN, 0x0e),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_SO_GAIN, 0x04),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_TERM_BW, 0x1b),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_EQU_ADAPTOR_CNTRL2, 0x06),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_EQU_ADAPTOR_CNTRL3, 0x04),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_EQU_ADAPTOR_CNTRL4, 0x1d),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_OFFSET_ADAPTOR_CNTRL2, 0x00),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_IDAC_MEASURE_TIME, 0x10),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_IDAC_TSETTLE_LOW, 0xc0),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_IDAC_TSETTLE_HIGH, 0x00),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_LOW, 0x6d),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH, 0x6d),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH2, 0xed),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH3, 0x3b),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH4, 0x3c),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_LOW, 0xe0),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH, 0xc8),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH2, 0xc8),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH3, 0x3b),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH4, 0xb1),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_10_LOW, 0xe0),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_10_HIGH, 0xc8),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_10_HIGH2, 0xc8),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_10_HIGH3, 0x3b),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_10_HIGH4, 0xb1),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_DCC_CTRL1, 0x0c),
+> +&spifc {
+> +       status = "okay";
+> +};
+> diff --git a/board/libre-computer/aml-s905d3-cc/MAINTAINERS b/board/libre-computer/aml-s905d3-cc/MAINTAINERS
+> new file mode 100644
+> index 00000000000..4b75c815c07
+> --- /dev/null
+> +++ b/board/libre-computer/aml-s905d3-cc/MAINTAINERS
+> @@ -0,0 +1,7 @@
+> +LIBRE-COMPUTER AML-S905D3-CC
+> +M:     Neil Armstrong <neil.armstrong@linaro.org>
+> +S:     Maintained
+> +L:     u-boot-amlogic@groups.io
+> +F:     board/amlogic/aml-s905d3-cc/
+> +F:     configs/aml-s905d3-cc_defconfig
+> +F:     doc/board/amlogic/aml-s905d3-cc.rst
+> diff --git a/board/libre-computer/aml-s905d3-cc/Makefile b/board/libre-computer/aml-s905d3-cc/Makefile
+> new file mode 100644
+> index 00000000000..7d2c41e6436
+> --- /dev/null
+> +++ b/board/libre-computer/aml-s905d3-cc/Makefile
+> @@ -0,0 +1,6 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +#
+> +# (C) Copyright 2016 BayLibre, SAS
+> +# Author: Neil Armstrong <narmstrong@baylibre.com>
+> +
+> +obj-y  := aml-s905d3-cc.o
+> diff --git a/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c b/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
+> new file mode 100644
+> index 00000000000..f641db5a494
+> --- /dev/null
+> +++ b/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
+> @@ -0,0 +1,44 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2016 BayLibre, SAS
+> + * Author: Neil Armstrong <narmstrong@baylibre.com>
+> + */
+> +
+> +#include <dm.h>
+> +#include <env.h>
+> +#include <init.h>
+> +#include <net.h>
+> +#include <efi_loader.h>
+> +#include <asm/io.h>
+> +#include <asm/arch/eth.h>
+> +
+> +struct efi_fw_image fw_images[] = {
+> +       {
+> +               .fw_name = u"AML_S905D3_CC_BOOT",
+> +               .image_index = 1,
+> +       },
 > +};
 > +
-> +static const struct qmp_ufs_init_tbl sc7280_ufsphy_pcs[] = {
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_RX_SIGDET_CTRL2, 0x6d),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_TX_LARGE_AMP_DRV_LVL, 0x0a),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_TX_SMALL_AMP_DRV_LVL, 0x02),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_TX_MID_TERM_CTRL1, 0x43),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_DEBUG_BUS_CLKSEL, 0x1f),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_RX_MIN_HIBERN8_TIME, 0xff),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_MULTI_LANE_CTRL1, 0x02),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_PLL_CNTL, 0x03),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_TIMER_20US_CORECLK_STEPS_MSB, 0x16),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_TIMER_20US_CORECLK_STEPS_LSB, 0xd8),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_TX_PWM_GEAR_BAND, 0xaa),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_TX_HS_GEAR_BAND, 0x06),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_TX_HSGEAR_CAPABILITY, 0x03),
-> +	QMP_PHY_INIT_CFG(QPHY_V4_PCS_UFS_RX_HSGEAR_CAPABILITY, 0x03),
+> +struct efi_capsule_update_info update_info = {
+> +       .dfu_string = "sf 0:0=u-boot-bin raw 0 0x10000",
+> +       .num_images = ARRAY_SIZE(fw_images),
+> +       .images = fw_images,
 > +};
 > +
-> +static const struct qmp_ufs_init_tbl sc7280_ufsphy_hs_g4_rx[] = {
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_SIGDET_LVL, 0x24),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_SIGDET_CNTRL, 0x0f),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_SIGDET_DEGLITCH_CNTRL, 0x1e),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_BAND, 0x18),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_FASTLOCK_FO_GAIN, 0x0a),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_SO_SATURATION_AND_ENABLE, 0x5a),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_PI_CONTROLS, 0xf1),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_FASTLOCK_COUNT_LOW, 0x80),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_PI_CTRL2, 0x81),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_FO_GAIN, 0x0e),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_SO_GAIN, 0x04),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_TERM_BW, 0x6f),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_EQU_ADAPTOR_CNTRL1, 0x04),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_EQU_ADAPTOR_CNTRL2, 0x00),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_EQU_ADAPTOR_CNTRL3, 0x09),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_EQU_ADAPTOR_CNTRL4, 0x07),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_EQ_OFFSET_ADAPTOR_CNTRL1, 0x17),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_OFFSET_ADAPTOR_CNTRL2, 0x00),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_IDAC_MEASURE_TIME, 0x20),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_IDAC_TSETTLE_LOW, 0x80),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_IDAC_TSETTLE_HIGH, 0x01),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_LOW, 0x3f),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH, 0xff),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH2, 0xff),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH3, 0x7f),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH4, 0x2c),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_LOW, 0x6d),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH, 0x6d),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH2, 0xed),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH3, 0x3b),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH4, 0x3c),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_10_LOW, 0xe0),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_10_HIGH, 0xc8),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_10_HIGH2, 0xc8),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_10_HIGH3, 0x3b),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_10_HIGH4, 0xb1),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_DCC_CTRL1, 0x0c),
-> +	QMP_PHY_INIT_CFG(QSERDES_V4_RX_GM_CAL, 0x0f),
-> +};
 > +
->   struct qmp_ufs_offsets {
->   	u16 serdes;
->   	u16 pcs;
->   	u16 tx;
-> @@ -712,8 +818,43 @@ static const struct qmp_ufs_cfg sm8650_ufsphy_cfg = {
->   
->   	.no_pcs_sw_reset	= false,
->   };
->   
+> +#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
+> +void set_dfu_alt_info(char *interface, char *devstr)
+> +{
+> +       if (strcmp(interface, "ram") == 0)
+> +               env_set("dfu_alt_info", "fitimage ram 0x08080000 0x4000000");
+> +       else if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
+> +               env_set("dfu_alt_info", update_info.dfu_string);
+> +}
+> +#endif
 > +
-> +static const struct qmp_ufs_cfg sc7280_ufsphy_cfg = {
-> +	.lanes			= 2,
+> +int misc_init_r(void)
+> +{
+> +       meson_generate_serial_ethaddr();
 > +
-> +	.offsets		= &qmp_ufs_offsets,
+> +       return 0;
+> +}
+> diff --git a/configs/aml-s905d3-cc_defconfig b/configs/aml-s905d3-cc_defconfig
+> new file mode 100644
+> index 00000000000..a6e5d584c0a
+> --- /dev/null
+> +++ b/configs/aml-s905d3-cc_defconfig
+> @@ -0,0 +1,108 @@
+> +CONFIG_ARM=y
+> +CONFIG_SYS_VENDOR="libre-computer"
+> +CONFIG_SYS_BOARD="aml-s905d3-cc"
+> +CONFIG_ARCH_MESON=y
+> +CONFIG_TEXT_BASE=0x01000000
+> +CONFIG_NR_DRAM_BANKS=1
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20000000
+> +CONFIG_ENV_SIZE=0x2000
+> +CONFIG_ENV_OFFSET=0xFFFF0000
+> +CONFIG_ENV_SECT_SIZE=0x10000
+> +CONFIG_DM_GPIO=y
+> +CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-sm1-s905d3-libretech-cc"
+> +CONFIG_OF_LIBFDT_OVERLAY=y
+> +CONFIG_DM_RESET=y
+> +CONFIG_MESON_G12A=y
+> +CONFIG_DEBUG_UART_BASE=0xff803000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_IDENT_STRING="aml-s905d3-cc"
+> +CONFIG_SYS_LOAD_ADDR=0x1000000
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_REMAKE_ELF=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_SIGNATURE=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_OF_BOARD_SETUP=y
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_MISC_INIT_R=y
+> +CONFIG_SYS_MAXARGS=32
+> +# CONFIG_CMD_BDI is not set
+> +# CONFIG_CMD_IMI is not set
+> +CONFIG_CMD_DFU=y
+> +CONFIG_CMD_NVEDIT_EFI=y
+> +CONFIG_CMD_GPIO=y
+> +# CONFIG_CMD_LOADS is not set
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_SF_TEST=y
+> +CONFIG_CMD_SPI=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+> +CONFIG_CMD_EFIDEBUG=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_REGULATOR=y
+> +CONFIG_OF_CONTROL=y
+> +CONFIG_ENV_IS_IN_SPI_FLASH=y
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_ADC=y
+> +CONFIG_SARADC_MESON=y
+> +CONFIG_BUTTON=y
+> +CONFIG_BUTTON_ADC=y
+> +CONFIG_DFU_RAM=y
+> +CONFIG_DFU_SF=y
+> +CONFIG_SET_DFU_ALT_INFO=y
+> +CONFIG_MMC_MESON_GX=y
+> +CONFIG_MTD=y
+> +CONFIG_DM_MTD=y
+> +CONFIG_DM_SPI_FLASH=y
+> +CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_SPI_FLASH_SPANSION=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DM_MDIO=y
+> +CONFIG_DM_MDIO_MUX=y
+> +CONFIG_ETH_DESIGNWARE_MESON8B=y
+> +CONFIG_MDIO_MUX_MESON_G12A=y
+> +CONFIG_MESON_G12A_USB_PHY=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_PINCTRL_MESON_G12A=y
+> +CONFIG_POWER_DOMAIN=y
+> +CONFIG_MESON_EE_POWER_DOMAIN=y
+> +CONFIG_DM_REGULATOR=y
+> +CONFIG_DM_REGULATOR_FIXED=y
+> +CONFIG_DEBUG_UART_ANNOUNCE=y
+> +CONFIG_DEBUG_UART_SKIP_INIT=y
+> +CONFIG_MESON_SERIAL=y
+> +CONFIG_SPI=y
+> +CONFIG_DM_SPI=y
+> +CONFIG_MESON_SPIFC=y
+> +CONFIG_SYSINFO=y
+> +CONFIG_SYSINFO_SMBIOS=y
+> +CONFIG_USB=y
+> +CONFIG_DM_USB_GADGET=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_XHCI_DWC3=y
+> +CONFIG_USB_DWC3=y
+> +# CONFIG_USB_DWC3_GADGET is not set
+> +CONFIG_USB_DWC3_MESON_G12A=y
+> +CONFIG_USB_KEYBOARD=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_VENDOR_NUM=0x1b8e
+> +CONFIG_USB_GADGET_PRODUCT_NUM=0xfada
+> +CONFIG_USB_GADGET_DWC2_OTG=y
+> +CONFIG_USB_GADGET_DWC2_OTG_PHY_BUS_WIDTH_8=y
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +CONFIG_VIDEO=y
+> +# CONFIG_VIDEO_BPP8 is not set
+> +# CONFIG_VIDEO_BPP16 is not set
+> +CONFIG_SYS_WHITE_ON_BLACK=y
+> +CONFIG_VIDEO_MESON=y
+> +CONFIG_VIDEO_DT_SIMPLEFB=y
+> +CONFIG_SPLASH_SCREEN=y
+> +CONFIG_SPLASH_SCREEN_ALIGN=y
+> +CONFIG_VIDEO_BMP_RLE8=y
+> +CONFIG_BMP_16BPP=y
+> +CONFIG_BMP_24BPP=y
+> +CONFIG_BMP_32BPP=y
+> +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+> +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> diff --git a/doc/board/amlogic/aml-s905d3-cc.rst b/doc/board/amlogic/aml-s905d3-cc.rst
+> new file mode 100644
+> index 00000000000..083a591fc52
+> --- /dev/null
+> +++ b/doc/board/amlogic/aml-s905d3-cc.rst
+> @@ -0,0 +1,46 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
 > +
-> +	.tbls = {
-> +		.serdes		= sm8150_ufsphy_serdes,
-> +		.serdes_num	= ARRAY_SIZE(sm8150_ufsphy_serdes),
-> +		.tx		= sc7280_ufsphy_tx,
-> +		.tx_num		= ARRAY_SIZE(sc7280_ufsphy_tx),
-> +		.rx		= sc7280_ufsphy_rx,
-> +		.rx_num		= ARRAY_SIZE(sc7280_ufsphy_rx),
-> +		.pcs		= sc7280_ufsphy_pcs,
-> +		.pcs_num	= ARRAY_SIZE(sc7280_ufsphy_pcs),
-> +	},
-> +	.tbls_hs_b = {
-> +		.serdes		= sm8150_ufsphy_hs_b_serdes,
-> +		.serdes_num	= ARRAY_SIZE(sm8150_ufsphy_hs_b_serdes),
-> +	},
-> +	.tbls_hs_g4		= {
-> +		.tx		= sm8250_ufsphy_hs_g4_tx,
-> +		.tx_num		= ARRAY_SIZE(sm8250_ufsphy_hs_g4_tx),
-> +		.rx		= sc7280_ufsphy_hs_g4_rx,
-> +		.rx_num		= ARRAY_SIZE(sc7280_ufsphy_hs_g4_rx),
-> +		.pcs		= sm8150_ufsphy_hs_g4_pcs,
-> +		.pcs_num	= ARRAY_SIZE(sm8150_ufsphy_hs_g4_pcs),
-> +	},
-> +	.clk_list		= sdm845_ufs_phy_clk_l,
-> +	.num_clks		= ARRAY_SIZE(sdm845_ufs_phy_clk_l),
-> +	.vreg_list		= qmp_ufs_vreg_l,
-> +	.num_vregs		= ARRAY_SIZE(qmp_ufs_vreg_l),
-> +	.regs			= ufsphy_v4_regs_layout,
-> +};
+> +U-Boot for Libre Computer AML-S905D3-CC 'Solitude' (S905D3)
+> +===========================================================
 > +
->   static void qmp_ufs_configure_lane(void __iomem *base,
->   					const struct qmp_ufs_init_tbl tbl[],
->   					int num,
->   					u8 lane_mask)
-> @@ -1102,8 +1243,9 @@ static const struct udevice_id qmp_ufs_ids[] = {
->   	{ .compatible = "qcom,sdm845-qmp-ufs-phy", .data = (ulong)&sdm845_ufsphy_cfg },
->   	{ .compatible = "qcom,sm8250-qmp-ufs-phy", .data = (ulong)&sm8250_ufsphy_cfg },
->   	{ .compatible = "qcom,sm8550-qmp-ufs-phy", .data = (ulong)&sm8550_ufsphy_cfg },
->   	{ .compatible = "qcom,sm8650-qmp-ufs-phy", .data = (ulong)&sm8650_ufsphy_cfg },
-> +	{ .compatible = "qcom,sc7280-qmp-ufs-phy", .data = (ulong)&sc7280_ufsphy_cfg, },
->   	{ }
->   };
->   
->   U_BOOT_DRIVER(qcom_qmp_ufs) = {
+> +AML-S905D3-CC is a Single Board Computer manufactured by Libre Computer Technology with
+> +the following specifications:
+> +
+> + - Amlogic S905D3 Cortex-A55 quad-core SoC
+> + - 2 or 4GB LPDDR4 SDRAM
+> + - Gigabit Ethernet
+> + - HDMI 2.1 display
+> + - 40-pin GPIO header
+> + - 4 x USB 3.0 Host, 1 x USB 2.0 Type-C
+> + - eMMC 5.x SM Interface for Libre Computer Modules
+> + - microSD
+> + - Infrared receiver
+> +
+> +Schematics are available on the manufacturer website.
+> +
+> +U-Boot Compilation
+> +------------------
+> +
+> +.. code-block:: bash
+> +
+> +    $ export CROSS_COMPILE=aarch64-none-elf-
+> +    $ make aml-s905d3-cc_defconfig
+> +    $ make
+> +
+> +U-Boot Signing with Pre-Built FIP repo
+> +--------------------------------------
+> +
+> +.. code-block:: bash
+> +
+> +    $ git clone https://github.com/LibreELEC/amlogic-boot-fip --depth=1
+> +    $ cd amlogic-boot-fip
+> +    $ mkdir my-output-dir
+> +    $ ./build-fip.sh aml-s905d3-cc /path/to/u-boot/u-boot.bin my-output-dir
+> +
+> +Then write U-Boot to SD or eMMC with:
+> +
+> +.. code-block:: bash
+> +
+> +    $ DEV=/dev/boot_device
+> +    $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=512 skip=1 seek=1
+> +    $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=1 count=440
+> diff --git a/doc/board/amlogic/index.rst b/doc/board/amlogic/index.rst
+> index de91b21f977..dcd935224ac 100644
+> --- a/doc/board/amlogic/index.rst
+> +++ b/doc/board/amlogic/index.rst
+> @@ -86,6 +86,7 @@ Board Documentation
+>     :maxdepth: 1
+>
+>     aml-a311d-cc
+> +   aml-s905d3-cc
+>     bananapi-cm4io
+>     bananapi-m2pro
+>     bananapi-m2s
+>
+> --
+> 2.34.1
+>
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Tested basic booting of debian and yocto.
+
+Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
