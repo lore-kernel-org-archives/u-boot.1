@@ -4,100 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD3A0D1AD33
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 09:25:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0673ED1AD39
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 09:50:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A68188E81;
-	Wed, 16 Oct 2024 11:25:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F3A488ED9;
+	Wed, 16 Oct 2024 11:50:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xZixX6Ty";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Fuohgu/A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D45188E69; Wed, 16 Oct 2024 11:25:37 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AC7A688F35; Wed, 16 Oct 2024 11:50:49 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 601D788ECC
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 11:25:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1E3F88EE0
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 11:50:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43124843b04so37791355e9.2
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 02:25:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729070735; x=1729675535; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KN+NIntnJ7NJNYG4SzWr5IagW9pyFEVhnSjafdGhiac=;
- b=xZixX6TyWZuwqFYBE9ug9xrMsnjtP2+YFJJ02FhBXKSX6WPfwmx33TQ7u+pXFXEAqR
- miXh0GqA1PccPTxGvGstsYQnycPm7ep8HL9YjBJJE2PUjlaXpPqO7AAs54dfwKUj5mWT
- Tjozi9lvU2pQ0b4WeqtJ2BJjZcOm0Xn110V0R75SNL0DDEIDOlljJRj2PZxMVjLI2kZ/
- ZfQsCOPlJkGOHoeoLiLuoaOH5OQJISSmbkO6DGH1mAr5gnYuJWB85IBnm8NcaDKROqIh
- xz7ougpf5nSyK87Z6TNE/sqJIhxL6E6JzIIELM+/SCszXwEYHEKEkcjdmYEhzNZeAFQs
- FPKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729070735; x=1729675535;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KN+NIntnJ7NJNYG4SzWr5IagW9pyFEVhnSjafdGhiac=;
- b=k3VLG4vwMo9Vmunsi9LiiCZDTmI/GakNYI3fIzCYJOgsq27CQNEBEJoaJn0LRJI/vm
- xpBDt046E29xeEtJZkQMGYY86lH0iygTyuwDtLHmVV6ArOhz9GG+zeRpqEwxztTVCsd0
- cii11261c8ZTNDbzephzHjHMGodnwdW7O4yjsaKQ0q32oAgZpemBz6f3ktiWAQwRt2wZ
- bWpP2Jy6nvWUYXOQRdkeZrGtfvfz1URYslEKSARBVqOL+eSCoQ+vJsFifd89Gu/E1Yy7
- fYNJJ6OFjt6T8XgSbgjK/r+Y7QW7jvUEbU8YCeB5WDhFbQbudaS8gmTHpLU6At8HJGGU
- c4/w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUlMHXI/WcODv4fzb6u5pmKhEa85ZHYuQKO9IwfZxhbI0UV3TvzT4TWoWgvOuLxdkSBiHuI1BA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzGrYoiT/LDMbToacTsrnkZczolZxtSszah/gFLBpSCNEhNkrNa
- wypu7jdhXRFs2dh3QTlu8GuRFfORjWGBHcq/90yhxIQyQM33cFqIVVKvPPQk5SI=
-X-Google-Smtp-Source: AGHT+IG+CuA+vyU/P+/fQ04QLLJ0rTTbxBp46hwrzDmvWCuVQfsLPkTRTLTPYlhPWbw581mRQWSrsg==
-X-Received: by 2002:a05:6000:111:b0:37c:d537:9dc0 with SMTP id
- ffacd0b85a97d-37d551847cfmr11732376f8f.12.1729070734785; 
- Wed, 16 Oct 2024 02:25:34 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43150469a35sm14997115e9.1.2024.10.16.02.25.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2024 02:25:34 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Wed, 16 Oct 2024 11:25:32 +0200
-Subject: [PATCH] ARM: mach-snapdragon: configure a larger default
- SYS_MALLOC_LEN for fastboot
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 95F04405CD; 
+ Wed, 16 Oct 2024 09:50:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1729072246;
+ bh=sITkICSvSNQVtwu4tkgeZ0lPP4LYMF3xAKPmAvTcihA=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Fuohgu/AqXOgoSbwF6ne8zypBEn1enu2c67Fd4hHtve+46UY69KsDqS9KSB54Xejk
+ wZzihJvMs17i78wzkLvTAjiiYMfxJpaG4uIHJkDccdfKC6A5ALZWZh741Mo75O98rf
+ fzRvairoXUjIhxdsHF7n8y7LUrdRA0CJ1M1ABY9pwR6CSjtWiwIhIGMe7ENQ2x4nnG
+ JD7CX/0/nmjU8wRry48Ytx69LD3wDUqoHPNfMsu6SofoFwnrIJqVj6EDtCBQ8/zUEU
+ 0hYTFIsts1LIsr/igIQNWb6nOhLCKXNlQgZdEUPrT/nYjTObxyZiM3RRBs5k8Vndkq
+ 3T7xqDpInkxSw==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] cmd: wget: CONFIG_CMD_WGET must depend on CONFIG_CMD_NET
+Date: Wed, 16 Oct 2024 11:50:39 +0200
+Message-ID: <20241016095039.43106-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241016-topic-sm8x50-bigger-malloc-len-v1-1-361b132ce7d4@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAIuGD2cC/x3NTQqEMAxA4atI1gYaqT8zV5FZ1BproLbSDiKId
- 7e4/DbvXZA5CWf4VhckPiRLDAVUV2BXExyjzMXQqEaTog7/cReLeRvOVuEkznHCzXgfLXoO+CG
- a2HRG6X6BEtkTL3K+g/F33w9E8/yxcAAAAA==
-To: Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=945;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=Mjv5xc2PH8Z3Q++ru+s7oDgKTJNheGgC/rKJaaJSfrc=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnD4aNFG8eR7GAZBJ2PxvORLrqUPSBt4Zivz0ggCun
- lvjq+neJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZw+GjQAKCRB33NvayMhJ0Y7LEA
- CPrVa+eT3JPIHpVXGw0mrFB/fu3SsRE4/giJvd2sPOmRjxQ3dZFRUrnTZm+GIueTISYBXP0k9zlhxs
- ZvK0EHDj3f0em3O4zL7GgrkPC8KRzVIIv8UrrVdaR4t5erjRqSDpD3OOYmddzR33BkL13UajC1OT3j
- 0dyPl3UB4Q+BGMJhvN90WPXqLmVQDY67gk0wL/XzgsctQ2rBLjMV5MbOhX+ER1NLdEIqIzeG9Jzmzx
- SOyS1OvM6VyoaO98ah6wxdzWsLQUY6h4cSBqjnUAimsMvpolhvrCGqkgQBvHQKJukXBm+5nbTVhupv
- q1d0vKs8Q8J+UUmmDMgHmBq4IhZHrZzs/P/wo3gsa+yN02wxE4qQO9+5LBFKucwFu9VJyXfW2mqPV9
- ZokS5S/JMifXVYHknCuGubAEB5LcHJr9MMRj6DGdOEjkdwzuiAj2xInr48WI/yz/mpHID+zzaYIXEa
- t7RkeUl09CwV//0rRINWaltu88Yxk47mkdc3p1qVdJkuW68DaSYMAbkY6yda67q55ramkouGTI/PIb
- NXtdzppZQNWjnKM9xBQQkRfYk7pEr+LKwphPg/WyCu6/MrCCXOcIhAEAdbwmqaLAdVfshj0p24/8/v
- e7aEHO7QjME+OZanNlfEElckWbAjMMfQdMZletYsrkSys5mwhY3oBgh5oc3g==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,35 +76,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fastboot is very hungry when it flashes larges chunks, and 8MiB
-is way too small, allocate a much bigger size like other platforms
-using Fastboot.
+do_wget is defined in cmd/net.c.
+cmd/net.c is not compiled if CONFIG_CMD_NET=n.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- arch/arm/mach-snapdragon/Kconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ cmd/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index 536960b83c3..2985d9d3ca4 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -11,6 +11,9 @@ config SYS_VENDOR
- 	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
- 	  will be used as the custom board directory.
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 37894eb80d6..049a672100f 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2010,6 +2010,7 @@ config SYS_DISABLE_AUTOLOAD
  
-+config SYS_MALLOC_LEN
-+	default 0x10000000
-+
- config SYS_MALLOC_F_LEN
- 	default 0x2000
- 
-
----
-base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
-change-id: 20241016-topic-sm8x50-bigger-malloc-len-911bea6a047f
-
-Best regards,
+ config CMD_WGET
+ 	bool "wget"
++	depends on CMD_NET
+ 	select PROT_TCP
+ 	default y if SANDBOX
+ 	help
 -- 
-Neil Armstrong <neil.armstrong@linaro.org>
+2.45.2
 
