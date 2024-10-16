@@ -4,81 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F83BD1AD48
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 11:36:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B10EED1AD4E
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 11:57:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABD2288C98;
-	Wed, 16 Oct 2024 13:36:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D882988B70;
+	Wed, 16 Oct 2024 13:57:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iCUZZ0WM";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="PI0ViS4s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B323F88C7E; Wed, 16 Oct 2024 13:36:28 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 37E1B88BD2; Wed, 16 Oct 2024 13:57:56 +0200 (CEST)
+Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BD0488C98
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 13:36:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42B7E88B39
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 13:57:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2fb5f647538so9297521fa.0
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 04:36:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729078585; x=1729683385; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ceiv9zrcE55EZcomQiLYKxcBnJ1I0S0oRzeAnRlCWWw=;
- b=iCUZZ0WMRZ1HZ8Pe0r6Yj4A4yhkEw2g2E82Vbbi1gOtT7Ty5rqXK+GwJiE/rkwWTMC
- I54dHO/N+pbfuU1lY0wmsgC4bK8JkkADOfHRVocRvK0JSL+83CY/ySZH3KAK0owdSHQ3
- yP4DZcvFtL+vPwdo5aDcrF4EnDGYNynD2tsAOUyH8vEX9LGwcjMW7wJH7LqP5QFa+nzY
- mvsFdnrYIkAOIcnIapHAlzGJdL3bPXx7QG7aWjGeQF5BYEHy1eFZl98C4YFGXijCs1yH
- FaCgX3//d6afuJ+Cgw93dRjjbjQ5OV9bXQlXJ6W6k9N4rEvQETu/mSQ0Ot/1vo+bYA7o
- maqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729078585; x=1729683385;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ceiv9zrcE55EZcomQiLYKxcBnJ1I0S0oRzeAnRlCWWw=;
- b=bUGzb7I9qrEG9jG7r9CbSziaJOw7lxmKnI2HWZhZYGKgO8S/HsCZAywwpEd+prxRNQ
- 1vW/txpVFUCrFuPcTB1IAZ5MkhAwXj9zzM19UT2PsD7lcPJZsVYf+jq2KVhvu3f2nk1/
- ZJj7o1zneafqcox01n9OhFmSLqLpA2rVUjgEkn1posniB9BAcnLoJ7g9dODMMoFqqFRs
- 05QP+6PPyrTTToIIBoodN8VUY6zsqgCLEQJHWrzVz2Srz9BTY7sc+dKDBVLiVjKvRILf
- x4Rjl1CrAzLzJecFUYdzqc0Ejvzrl69IUeigq06Epzd62s7otj7zLZUkD0I9KDjVloya
- XNUA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVlX2QDYDJRc9d38Z9Jm/GZ7p1xF5phI+0CqkqJeHW9CxDGiZk/Fsyj9otb+QPHjfO0HOnqxG4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmbmxP83pQQwZF/P5BlYMtZ5KA/Mub8Bq1aWvS7zV/8WaFJEEz
- u54a5DXzw+xWC5qpd+x/lhS4Ki0qGC2vzktDhIyGHyU9kzf02PxISKrUAZfRok3Syo+IWVUIFOO
- vtYzpDR1tw7OYr6pS39WZBEWwxSA=
-X-Google-Smtp-Source: AGHT+IF128u7P8y+4pgI20opkyG1ESTuA3KRdX6aG/iOlXovlTmKu2iJMXjJjnn4L56/fxslGgNJt5s2X1TJPsoXOhI=
-X-Received: by 2002:a2e:9a13:0:b0:2fa:d086:bca0 with SMTP id
- 38308e7fff4ca-2fb61b4e6e0mr12368251fa.10.1729078584269; Wed, 16 Oct 2024
- 04:36:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1729079867;
+ bh=Maw3ZBxk2ZsFIWaOuzm38j5sUCSPHCF5eMzG73+t1LA=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=PI0ViS4sifmvbSyXSlWlPvm11PTB9UBzqOrFrn3IQJyNMDNm+NxFXmb0KdSlBYMHK
+ UjiC6bSf1Q2ilo+vYkPMGkOtJa/fV3mZhfZi8aYh/8nukHMD6RF3kmwDfkXZxZyXjD
+ T8hMJ3bRHm291PR7O70rY/X7azwEhWD/JmwpABhEJ6xzpken48qKA9aEa+goxwTOCc
+ dScixoASCPeGxNkE9+ZdFwb5pTGaaKBM3J9mw/A6u8w1oZ4Wf0teTH9oRBqC7sijmC
+ kJ0Py77Rh5CEOkSbcp1fxVbfLapKoebwU5sJyVYMWohnxAQu51IynT/us34dW4EWK7
+ AjjPzZT5BbbOA==
+X-secureTransport-forwarded: yes
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Fabio Estevam
+ <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
+ <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
+Subject: RE: [PATCH 1/2] arm64: imx8mp: Read MAC address from M24C32-D
+ write-lockable page on DH i.MX8MP DHCOM if available
+Thread-Topic: [PATCH 1/2] arm64: imx8mp: Read MAC address from M24C32-D
+ write-lockable page on DH i.MX8MP DHCOM if available
+Thread-Index: AQHbGxfGhQwPx5oDdEKUB8iQmKl/XLKDdt0AgAXWXZA=
+Date: Wed, 16 Oct 2024 11:57:36 +0000
+Message-ID: <62b02b850c194dc080684db8d00cf413@dh-electronics.com>
+References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
+ <9b2f1914-ed29-429b-8c0a-e2a25a1172a9@denx.de>
+In-Reply-To: <9b2f1914-ed29-429b-8c0a-e2a25a1172a9@denx.de>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20241016-imx95-v1-0-f640c8f3bc1b@oss.nxp.com>
- <20241016-imx95-v1-14-f640c8f3bc1b@oss.nxp.com>
-In-Reply-To: <20241016-imx95-v1-14-f640c8f3bc1b@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 16 Oct 2024 08:36:12 -0300
-Message-ID: <CAOMZO5DY7LeLvp33cnocTuW4UgA7tnmJdeUX1e3Y6wqusahBDQ@mail.gmail.com>
-Subject: Re: [PATCH 14/17] imx95_evk: add i.MX95 19x19 EVK board basic support
-To: Alice Guo <alice.guo@oss.nxp.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Stefano Babic <sbabic@denx.de>, Marek Vasut <marex@denx.de>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Ye Li <ye.li@nxp.com>, 
- Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,207 +75,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice,
-
-On Wed, Oct 16, 2024 at 4:19=E2=80=AFAM Alice Guo <alice.guo@oss.nxp.com> w=
-rote:
->
-> From: Ye Li <ye.li@nxp.com>
->
-> This patch adds i.MX95 19x19 EVK board basic support.
->
-> Signed-off-by: Ye Li <ye.li@nxp.com>
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
-
-A MAINTAINERS file is missing. CI flags this as an error.
-
-Please make sure to run the series through CI before posting v2.
-
-A general question: how is the flash.bin generated?
-
-I don't see binman support here. Why?
-
-We also need a doc/board/nxp/imx95_evk.rts file that explains how to
-build and boot the board,
-the firmware files it needs, etc.
-
-> +++ b/board/freescale/imx95_evk/imx95_evk.c
-> @@ -0,0 +1,75 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright 2023 NXP
-> + */
-> +
-> +#include <env.h>
-> +#include <init.h>
-> +#include <asm/global_data.h>
-> +#include <asm/arch-imx9/ccm_regs.h>
-> +#include <asm/arch/clock.h>
-> +#include <fdt_support.h>
-> +#include <usb.h>
-> +#include <dwc3-uboot.h>
-
-Why do you add USB headers if there is no USB support?
-
-> +#ifdef CONFIG_SCMI_FIRMWARE
-
-Remove the ifdef and include the headers unconditionally.
-
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +int board_early_init_f(void)
-> +{
-> +       /* UART1: A55, UART2: M33, UART3: M7 */
-> +       init_uart_clk(0);
-
-Shouldn't DM_SERIAL enable the UART clock?
-
-> +#if CONFIG_IS_ENABLED(NET)
-> +int board_phy_config(struct phy_device *phydev)
-> +{
-> +       if (phydev->drv->config)
-> +               phydev->drv->config(phydev);
-> +       return 0;
-
-Is this needed?
-
-> +
-> +#ifdef CONFIG_OF_BOARD_SETUP
-> +int ft_board_setup(void *blob, struct bd_info *bd)
-> +{
-> +       return 0;
-
-This function is not useful and can be removed.
-> +extern int imx9_probe_mu(void);
-
-No extern in C files, please.
-
-> +       printf("SOC: 0x%x\n", gd->arch.soc_rev);
-> +       printf("LC: 0x%x\n", gd->arch.lifecycle);
-
-Make this debug() instead.
-
-> +CONFIG_SPL_POWER=3Dy
-> +CONFIG_SDP_LOADADDR=3D0x90400000
-> +
-
-No blank lines in defconfig, please.
-
-Generate the defconfig via 'make savedefconfig'
-
-
-> +/* Initial environment variables */
-> +#define CFG_EXTRA_ENV_SETTINGS         \
-> +       BOOTENV \
-> +       AHAB_ENV \
-> +       "initrd_addr=3D0x93800000\0" \
-> +       "initrd_high=3D0xffffffffffffffff\0" \
-> +       "emmc_dev=3D0\0"\
-> +       "sd_dev=3D1\0" \
-> +       "prepare_mcore=3Dsetenv mcore_clk clk-imx95.mcore_booted;\0" \
-> +       "scriptaddr=3D0x93500000\0" \
-> +       "kernel_addr_r=3D" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
-> +       "image=3DImage\0" \
-> +       "splashimage=3D0xA0000000\0" \
-> +       "console=3DttyLP0,115200 earlycon\0" \
-> +       "fdt_addr_r=3D0x93000000\0"                       \
-> +       "fdt_addr=3D0x93000000\0"                 \
-> +       "fdt_high=3D0xffffffffffffffff\0"         \
-> +       "cntr_addr=3D0xA8000000\0"                        \
-> +       "cntr_file=3Dos_cntr_signed.bin\0" \
-> +       "boot_fit=3Dno\0" \
-> +       "fdtfile=3D" CONFIG_DEFAULT_FDT_FILE "\0" \
-> +       "bootm_size=3D0x10000000\0" \
-> +       "mmcdev=3D" __stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
-> +       "mmcpart=3D1\0" \
-> +       "mmcroot=3D/dev/mmcblk1p2 rootwait rw\0" \
-> +       "mmcautodetect=3Dyes\0" \
-> +       "mmcargs=3Dsetenv bootargs ${mcore_clk} console=3D${console} root=
-=3D${mmcroot}\0 " \
-> +       "loadbootscript=3Dfatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${=
-script};\0" \
-> +       "bootscript=3Decho Running bootscript from mmc ...; " \
-> +               "source\0" \
-> +       "loadimage=3Dfatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image=
-}\0" \
-> +       "loadfdt=3Dfatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfi=
-le}\0" \
-> +       "loadcntr=3Dfatload mmc ${mmcdev}:${mmcpart} ${cntr_addr} ${cntr_=
-file}\0" \
-> +       "auth_os=3Dauth_cntr ${cntr_addr}\0" \
-> +       "boot_os=3Dbooti ${loadaddr} - ${fdt_addr_r};\0" \
-> +       "mmcboot=3Decho Booting from mmc ...; " \
-> +               "run mmcargs; " \
-> +               "if test ${sec_boot} =3D yes; then " \
-> +                       "if run auth_os; then " \
-> +                               "run boot_os; " \
-> +                       "else " \
-> +                               "echo ERR: failed to authenticate; " \
-> +                       "fi; " \
-> +               "else " \
-> +                       "if test ${boot_fit} =3D yes || test ${boot_fit} =
-=3D try; then " \
-> +                               "bootm ${loadaddr}; " \
-> +                       "else " \
-> +                               "if run loadfdt; then " \
-> +                                       "run boot_os; " \
-> +                               "else " \
-> +                                       "echo WARN: Cannot load the DT; "=
- \
-> +                               "fi; " \
-> +                       "fi;" \
-> +               "fi;\0" \
-> +       "netargs=3Dsetenv bootargs ${mcore_clk} console=3D${console} " \
-> +               "root=3D/dev/nfs " \
-> +               "ip=3Ddhcp nfsroot=3D${serverip}:${nfsroot},v3,tcp\0" \
-> +       "netboot=3Decho Booting from net ...; " \
-> +               "run netargs;  " \
-> +               "if test ${ip_dyn} =3D yes; then " \
-> +                       "setenv get_cmd dhcp; " \
-> +               "else " \
-> +                       "setenv get_cmd tftp; " \
-> +               "fi; " \
-> +               "if test ${sec_boot} =3D yes; then " \
-> +                       "${get_cmd} ${cntr_addr} ${cntr_file}; " \
-> +                       "if run auth_os; then " \
-> +                               "run boot_os; " \
-> +                       "else " \
-> +                               "echo ERR: failed to authenticate; " \
-> +                       "fi; " \
-> +               "else " \
-> +                       "${get_cmd} ${loadaddr} ${image}; " \
-> +                       "if test ${boot_fit} =3D yes || test ${boot_fit} =
-=3D try; then " \
-> +                               "bootm ${loadaddr}; " \
-> +                       "else " \
-> +                               "if ${get_cmd} ${fdt_addr_r} ${fdtfile}; =
-then " \
-> +                                       "run boot_os; " \
-> +                               "else " \
-> +                                       "echo WARN: Cannot load the DT; "=
- \
-> +                               "fi; " \
-> +                       "fi;" \
-> +               "fi;\0" \
-> +       "bsp_bootcmd=3Decho Running BSP bootcmd ...; " \
-> +               "mmc dev ${mmcdev}; if mmc rescan; then " \
-> +                  "if run loadbootscript; then " \
-> +                          "run bootscript; " \
-> +                  "else " \
-> +                          "if test ${sec_boot} =3D yes; then " \
-> +                                  "if run loadcntr; then " \
-> +                                          "run mmcboot; " \
-> +                                  "else run netboot; " \
-> +                                  "fi; " \
-> +                           "else " \
-> +                                  "if run loadimage; then " \
-> +                                          "run mmcboot; " \
-> +                                  "else run netboot; " \
-> +                                  "fi; " \
-> +                               "fi; " \
-> +                  "fi; " \
-> +          "fi;"
-
-Move this to board/freescale/imx95_evk/imx95_evk.env
+RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQpTZW50OiBTYXR1cmRheSwgT2N0b2Jl
+ciAxMiwgMjAyNCAxMDo0MyBQTQ0KPiBPbiAxMC8xMC8yNCAzOjIzIFBNLCBDaHJpc3RvcGggTmll
+ZGVybWFpZXIgd3JvdGU6DQo+PiBUaGUgaS5NWDhNIFBsdXMgREhDT00gY3VycmVudGx5IHN1cHBv
+cnRzIHBhcnNpbmcgZXRoZXJuZXQgTUFDIGFkZHJlc3MNCj4+IGZyb20gbXVsdGlwbGUgc291cmNl
+cyBpbiB0aGUgZm9sbG93aW5nIHByaW9yaXR5IG9yZGVyOg0KPj4NCj4+IDEpIFUtQm9vdCBlbnZp
+cm9ubWVudCAnZXRoYWRkcicvJ2V0aDFhZGRyJyBlbnZpcm9ubWVudCB2YXJpYWJsZQ0KPj4gMikg
+U29DIE9UUCBmdXNlcw0KPj4gMykgT24tU29NIEVFUFJPTQ0KPj4NCj4+IFRoZSBuZXcgaS5NWDhN
+IFBsdXMgREhDT00gcmV2LjIwMCBpcyBwb3B1bGF0ZWQgd2l0aCBNMjRDMzItRCBFRVBST00NCj4+
+IHdoaWNoIGNvbnRhaW5zIGFkZGl0aW9uYWwgd3JpdGUtbG9ja2FibGUgcGFnZSwgd2hpY2ggY2Fu
+IGFsc28gYmUNCj4+IHBvcHVsYXRlZCB3aXRoIGEgc3RydWN0dXJlIGNvbnRhaW5pbmcgZXRoZXJu
+ZXQgTUFDIGFkZHJlc3MuDQo+Pg0KPj4gQWRkIHN1cHBvcnQgZm9yIHBhcnNpbmcgdGhlIGNvbnRl
+bnQgb2YgdGhpcyBuZXcgd3JpdGUtbG9ja2FibGUgcGFnZQ0KPj4gYW5kIHBsYWNlIGl0IGJldHdl
+ZW4gMikgYW5kIDMpIG9uIHRoZSBwcmlvcml0eSBsaXN0LiBUaGUgbmV3IGVudHJ5IGlzDQo+PiAy
+LjUpIE9uLVNvTSBFRVBST00gd3JpdGUtbG9ja2FibGUgcGFnZQ0KPj4NCj4+IEJlY2F1c2UgdGhl
+IHdyaXRlLWxvY2thYmxlIHBhZ2UgaXMgbm90IHByZXNlbnQgb24gcmV2LjEwMCBpLk1YOE1QIERI
+Q09NDQo+PiBTb00sIHRlc3Qgd2hldGhlciBFRVBST00gSUQgcGFnZSBleGlzdHMgaW4gRFQgYW5k
+IHdoZXRoZXIgaXQgaXMgZW5hYmxlZA0KPj4gZmlyc3QuIElmIHNvLCByZWFkIHRoZSBlbnRpcmUg
+SUQgcGFnZSBvdXQsIHZhbGlkYXRlIGl0LCBhbmQgZGV0ZXJtaW5lDQo+PiB3aGV0aGVyIEVFUFJP
+TSBNQUMgYWRkcmVzcyBpcyBwb3B1bGF0ZWQgaW4gaXQgaW4gREggc3BlY2lmaWMgZm9ybWF0LiBJ
+Zg0KPj4gc28sIHVzZSB0aGUgTUFDIGFkZHJlc3MuIFRoZXJlIG1heSBiZSBtdWx0aXBsZSBFRVBS
+T01zIHdpdGggYW4gSUQgcGFnZQ0KPj4gb24gdGhpcyBwbGF0Zm9ybSwgYWx3YXlzIHVzZSB0aGUg
+Zmlyc3Qgb25lLg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IENocmlzdG9waCBOaWVkZXJtYWllciA8
+Y25pZWRlcm1haWVyQGRoLWVsZWN0cm9uaWNzLmNvbT4NCj4+IC0tLQ0KPj4gQ2M6ICJOWFAgaS5N
+WCBVLUJvb3QgVGVhbSIgPHVib290LWlteEBueHAuY29tPg0KPj4gQ2M6IE1hcmVrIFZhc3V0IDxt
+YXJleEBkZW54LmRlPg0KPj4gQ2M6IEZhYmlvIEVzdGV2YW0gPGZlc3RldmFtQGdtYWlsLmNvbT4N
+Cj4+IENjOiBTdGVmYW5vIEJhYmljIDxzYmFiaWNAZGVueC5kZT4NCj4+IENjOiBUb20gUmluaSA8
+dHJpbmlAa29uc3Vsa28uY29tPg0KPj4gQ2M6IHUtYm9vdEBkaC1lbGVjdHJvbmljcy5jb20NCj4+
+IC0tLQ0KPj4gICBib2FyZC9kaGVsZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21tb24uYyAgICAgICAg
+fCAxMTMgKysrKysrKysrKysrKysrKysrDQo+PiAgIGJvYXJkL2RoZWxlY3Ryb25pY3MvY29tbW9u
+L2RoX2NvbW1vbi5oICAgICAgICB8ICAyMyArKysrDQo+PiAgIC4uLi9kaF9pbXg4bXAvaW14OG1w
+X2RoY29tX3BkazIuYyAgICAgICAgICAgICB8ICAgNiArDQo+PiAgIDMgZmlsZXMgY2hhbmdlZCwg
+MTQyIGluc2VydGlvbnMoKykNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvYm9hcmQvZGhlbGVjdHJvbmlj
+cy9jb21tb24vZGhfY29tbW9uLmMgYi9ib2FyZC9kaGVsZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21t
+b24uYw0KPj4gaW5kZXggMzJjNTBiNGYwZi4uOGVhNzBmYzk4NCAxMDA2NDQNCj4+IC0tLSBhL2Jv
+YXJkL2RoZWxlY3Ryb25pY3MvY29tbW9uL2RoX2NvbW1vbi5jDQo+PiArKysgYi9ib2FyZC9kaGVs
+ZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21tb24uYw0KPj4gQEAgLTcsOSArNywyMiBAQA0KPj4gICAj
+aW5jbHVkZSA8ZG0uaD4NCj4+ICAgI2luY2x1ZGUgPGkyY19lZXByb20uaD4NCj4+ICAgI2luY2x1
+ZGUgPG5ldC5oPg0KPj4gKyNpbmNsdWRlIDx1LWJvb3QvY3JjLmg+DQo+Pg0KPj4gICAjaW5jbHVk
+ZSAiZGhfY29tbW9uLmgiDQo+Pg0KPj4gK3N0cnVjdCBlZXByb21faWRfcGFnZSB7DQo+PiArICAg
+ICB1OCAgICAgIGlkWzNdOyAgICAgICAgICAvKiBJZGVudGlmaWVyICdEJywgJ0gnLCAnRScgLSAn
+RCcgaXMgYXQgaW5kZXggMCAqLw0KPj4gKyAgICAgdTggICAgICB2ZXJzaW9uOyAgICAgICAgLyog
+MHgxMCAtLSBWZXJzaW9uIDEuMCAqLw0KPj4gKyAgICAgdTggICAgICBkYXRhX2NyYzE2WzJdOyAg
+LyogWzFdIGlzIE1TYnl0ZSAqLw0KPj4gKyAgICAgdTggICAgICBoZWFkZXJfY3JjODsNCj4+ICsg
+ICAgIHU4ICAgICAgbWFjMFs2XTsNCj4+ICsgICAgIHU4ICAgICAgbWFjMVs2XTsNCj4+ICsgICAg
+IHU4ICAgICAgaXRlbV9wcmVmaXg7ICAgIC8qIEgvRiBpcyBjb2RlZCBpbiBNU2JpdHMsIFZlbmRv
+ciBjb2Rpbmcgc3RhcnRzIGF0IExTYml0cyAqLw0KPj4gKyAgICAgdTggICAgICBpdGVtX251bVsz
+XTsgICAgLyogWzJdIGlzIE1TYnl0ZSAqLw0KPj4gKyAgICAgdTggICAgICBzZXJpYWxbOV07ICAg
+ICAgLyogWzhdIGlzIE1TYnl0ZSAqLw0KPj4gK30gX19wYWNrZWQ7DQo+IA0KPiBJcyBfX3BhY2tl
+ZCBuZWVkZWQgPw0KDQpJIHdhbnQgdG8gYXZvaWQgcGFkZGluZyBpbiBhbnkgY2FzZS4NCg0KUmVn
+YXJkcw0KQ2hyaXN0b3BoDQo=
