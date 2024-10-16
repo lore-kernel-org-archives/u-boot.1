@@ -4,73 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA29D2069A
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 05:05:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87232D2069A
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 05:36:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8364688BAC;
-	Wed, 16 Oct 2024 07:05:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B75488001;
+	Wed, 16 Oct 2024 07:36:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OSx7lTtf";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E64C88B1F; Wed, 16 Oct 2024 07:05:44 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1729056983;
+	bh=c2XtzurvdWJ4h0KIhD9SSxb1H2xiBystayvX1CuBbWE=;
+	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=ehOdF8MiEdjC/0J7ltN6uXJVOf5reNVs43W4Q/9zw1lrOSdSBlMvnPrx58UjUNSF2
+	 +BmpwX5wRK7icc+/4r+BU+ixv10+jpuS0QNz/0yAgo7zrYV6o+lCsHVMhByJ1WnKF4
+	 g795Ev7V28wQV1T7heUSkcjZQi1q/HA8du4687NYq459ek9/qMc/+mPlZbsHhJe0vj
+	 csWRKXNkshqR5gaJpDWxrPSI/3wBK+E0y0oVMSBuJytCNxgcFrpQcFdc0OkPqJVKkx
+	 K3pLISEXqZkXdbo+TJwCclwormENwxxhOJ9Re1ShZNz3mc0a8uMZGW2cKAjoiDnQVg
+	 VV5gqUTWah6Vg==
+Received: from [192.168.1.107] (87-97-107-160.pool.digikabel.hu
+ [87.97.107.160])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6485488B5D
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 07:05:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-5eb5ea185daso183238eaf.2
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 22:05:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729055141; x=1729659941; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/uGN6V1Bjrvv7MHlEFg4e2xH9UVu/qMnPBsuzZOfklk=;
- b=OSx7lTtfCGaf5vZPhe3SB9rPG4WwqodcBs9dEQEt9ZLkBCplR5XkYx6gAEIkSP9O4F
- AkZkzuq5uPL/Uj+I+hC3hikUbWjaccsQ94MqD9HH+DOlOVIQhXRK05ndlIko0lKpwYgm
- vsiTuGM2XcYB/iaCTwnINvibxkJjSuG1R8pkMrf+W0nkg925nqTXaz0r2s7YiW4f8AxR
- TP6G5dHw2NMmjAUbh9AYQ+RWJPd92W6jbi4+d7aqM8UoICUZDsBwAshqghE0ats8MXRr
- mjexZ6zgx2Rnfkp6+k6MRgLhNH4CBQxVVp+JF71RLyOECDcLePsyI4FRz4H+zOIAXDz6
- OV+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729055141; x=1729659941;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/uGN6V1Bjrvv7MHlEFg4e2xH9UVu/qMnPBsuzZOfklk=;
- b=IOD/vCIHRtJQl529K239pM9FmPZCq5MtQc082pD11kBf4X3byfpDMiQCliv/R7gLKD
- NjfcIqYlysYW+9Ut+rod3MqB4X6g+6XCsX9YDSsTFgeiw9LqsFkJMQe1x42pTwRPlxGP
- 2W1v/5X+b70s9Q5hXl1ccAWt3tjqRrPYGjLPtqPLIG+8uILYw7EqsHF6v7BypyHKt2HB
- Ho5IoYgHqiL6iaLQSrbTh94ink43j0CPWeFDVOy0bDBkyOTFe7o1n/7SjvO+5LYqHLD7
- BaEkQw3W2O9LyvVRM9+wZV4YY7Tyb+QdFRUkJOIrBRXBrWzwxhAPP68pvoETrqZJnQBD
- SYoA==
-X-Gm-Message-State: AOJu0Yz+gCP2n3g26ccO99Y8PrvHxjfLcdgg9SzBABx7AQumKAapt/OK
- GMEmQ8cVi6/k1FF3+1yupjfO1U0V5gmUipOotqMLW+TjUc9kyKRdAVCnVCJdTTmSWfrQYHM2tf3
- Spw5tYBt/EFBFAb33MFRJb60fN50fAw==
-X-Google-Smtp-Source: AGHT+IH3ns6b7eIkC0pgpRN6FYbMYsADTonr4DniS9kE80Bslc2wdXWZujsaOuPeYrNAxCDjRzdvdY6b72BC6AOndIc=
-X-Received: by 2002:a05:6870:1594:b0:268:9f88:18ef with SMTP id
- 586e51a60fabf-288ede37d18mr2025964fac.13.1729055141098; Tue, 15 Oct 2024
- 22:05:41 -0700 (PDT)
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 15DE386BF1;
+ Wed, 16 Oct 2024 07:36:20 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1729056981;
+ bh=c2XtzurvdWJ4h0KIhD9SSxb1H2xiBystayvX1CuBbWE=;
+ h=Date:To:Cc:Reply-To:From:Subject:From;
+ b=jvWKIg20VvkQWvrkmLIW9EtcGFSIuW+kLKTBkn0R8oMVwPmG5uV5V44pGq2UqIE0R
+ LZpiQlmWIUVhEGpaukUvlqnIWSvCRcJbQ6PxvUPidiwQbrly2K3gblG7BrorBPXjqP
+ ZV2gGWyDHctdWhNIb8Bwpska/7Fu/u21KjETwqWhK21Gbxx5/wCbhXFG7Bl9CWjXAB
+ tcWb6Nk563HUuPp/BvYfcc9GoyyHPbHnzMBg6k5lTYrL1qojyrq/TNkRDpAg8qUihM
+ RZJKtKmYVAn1KkWMaVbS6Bs9cRo1nWKANcutlihWFsFdQ7pFv/DkktUD1mANDQ2lTZ
+ FWhQlNLIveiNQ==
+Message-ID: <67ebc675-d681-3b63-b642-f32f5e6a6b38@denx.de>
+Date: Wed, 16 Oct 2024 07:34:09 +0200
 MIME-Version: 1.0
-References: <CANAwSgRJO1=w40ybTHkq-BD78rPyf13JdWp_yL1qpu=xmO2V8Q@mail.gmail.com>
- <20241015183142.GQ53053@bill-the-cat>
-In-Reply-To: <20241015183142.GQ53053@bill-the-cat>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Wed, 16 Oct 2024 10:35:24 +0530
-Message-ID: <CANAwSgT0ng5R73D8jWS9MzeBJBcZT6vjgmade_d5Zoyuoe-C_A@mail.gmail.com>
-Subject: Re: risc-v - efi_free_pool: illegal free
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Jonas Karlman <jonas@kwiboo.se>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Content-Language: en-US
+To: Peng Fan <peng.fan@nxp.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "Leto, Enrico" <enrico.leto@siemens.com>
+From: Heiko Schocher <hs@denx.de>
+Subject: imx8qxp: deneb board fails with current HEAD
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,32 +62,120 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom.
+Hello Peng,
 
-On Wed, 16 Oct 2024 at 00:01, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Oct 16, 2024 at 12:00:01AM +0530, Anand Moon wrote:
->
-> > Hi All,
-> >
-> > I am trying to create a RISC-V Archlinux image for the StarFive
-> > VisionFive 2 v1.3B SBC.
-> > Everything worked well initially, and I successfully until I upgraded
-> > OpenSBI and U-Boot
-> > to the latest versions.
->
-> Sorry for the problems, this is known and will be fixed shortly.
->
-Just wanted to submit a report.
-> --
-> Tom
+I just rebased my current work on siemens deneb board with current
+master:
 
-I have tried to build a u-boot with tag v2024.10, it's a success.
+* d5cab0d6ad - (HEAD -> master, origin/master, origin/WIP/15Oct2024, origin/HEAD) Revert "Makefile: 
+Drop SPL_FIT_GENERATOR / SPL_FIT_SOURCE support" changes (vor 3 Stunden) <Tom Rini>
 
-Thanks
--Anand
+And see:
+"""
+U-Boot SPL 2024.10-01044-g91b1263d96d9 (Oct 16 2024 - 07:10:25 +0200)
+Normal Boot
+Trying to boot from MMC1
+__imx8_clk_enable(Invalid clk ID #0)
+fsl_esdhc usdhc@5b010000: Failed to enable clks: -22
+__imx8_clk_enable(Invalid clk ID #0)
+fsl_esdhc usdhc@5b010000: Failed to enable clks: -22
+spl: could not initialize mmc. error: -22
+SPL: failed to boot from all boot devices
+### ERROR ### Please RESET the board ###
+"""
+
+Looking around the changes I found your commit:
+
+
+commit 76332fae769acbba49751827ce126b0cb1014b48
+Author: Peng Fan <peng.fan@nxp.com>
+Date:   Tue Oct 1 21:07:53 2024 +0800
+
+     mmc: fsl_esdhc_imx: Enable AHB/IPG clk with clk bulk API
+
+     With partition reset supported for i.MX8QM/QXP/95 and etc, when linux
+     mmc runtime suspended, the mmc clks are gated off. While at same time
+     system controller reset Cortex-A cores because of various reasons(
+     WDOG timeout and etc), with SPL run again, only enable PER clk is not
+     enough, also need to enable AHB/IPG clk, here use clk bulk API to enable
+     all the clocks.
+
+     Signed-off-by: Peng Fan <peng.fan@nxp.com>
+
+
+reverting it, and board boots fine again!
+
+May you have an idea? I try to look deeper soon.
+
+(A fast look as I wondered about clk id 0):
+
+./include/dt-bindings/clock/imx8qxp-clock.h
+#define IMX8QXP_CLK_DUMMY                                       0
+
+and ./arch/arm/dts/fsl-imx8dx.dtsi
+512         usdhc2: usdhc@5b020000 {
+513                 compatible = "fsl,imx8qm-usdhc", "fsl,imx6sl-usdhc";
+[...]
+517                 clocks = <&clk IMX8QXP_SDHC1_IPG_CLK>,
+518                         <&clk IMX8QXP_SDHC1_CLK>,
+519                         <&clk IMX8QXP_CLK_DUMMY>;
+520                 clock-names = "ipg", "per", "ahb";
+
+So this explains ID 0 ... and with drivers/clk/imx/clk-imx8qxp.c
+242 int __imx8_clk_enable(struct clk *clk, bool enable)
+243 {
+[...]
+250         switch (clk->id) {
+251         case IMX8QXP_I2C0_CLK:
+
+no entry for IMX8QXP_CLK_DUMMY ...
+
+So I wonder how this can work ...
+
+Thanks!
+
+bye,
+Heiko
+[1]
+U-Boot SPL 2024.10-01045-g0a08358303ba (Oct 16 2024 - 07:18:23 +0200)
+Normal Boot
+Trying to boot from MMC1
+Primary set selected
+Load image from MMC/SD 0x47800
+
+
+U-Boot 2024.10-01045-g0a08358303ba (Oct 16 2024 - 07:18:23 +0200) ##v01.06
+
+CPU:   NXP i.MX8QXP RevC A35 at 1200 MHz at 31C
+Model: Siemens CXG3
+Board: Capricorn
+Build: SCFW 042ba867, SECO-FW c9de51c0, ATF 2ba2c83
+Boot:  MMC0
+Reset cause: POR
+DRAM:  2 GiB
+HW Version: v04.03
+Core:  94 devices, 23 uclasses, devicetree: separate
+WDT:   Started scu-wdt without servicing  (60s timeout)
+MMC:   FSL_SDHC: 0
+Loading Environment from MMC... *** Warning - bad CRC, using default environment
+
+Reading from MMC(0)... In:    serial@5a080000
+Out:   serial@5a080000
+Err:   serial@5a080000
+ERROR: PCA9552 probe failed
+I2C LED init failed
+Net:   eth1: ethernet@5b050000 [PRIME]
+Autobooting in 3 seconds, press "<Esc><Esc>" to stop
+U-Boot#
+U-Boot#
+
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
