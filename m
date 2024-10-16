@@ -4,157 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D657D1AD43
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 11:31:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F83BD1AD48
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 11:36:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6F2888B99;
-	Wed, 16 Oct 2024 13:31:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id ABD2288C98;
+	Wed, 16 Oct 2024 13:36:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="VTIgcQBs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iCUZZ0WM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBF4888BAC; Wed, 16 Oct 2024 13:31:36 +0200 (CEST)
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur02on2062f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2607::62f])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B323F88C7E; Wed, 16 Oct 2024 13:36:28 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E374388B16
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 13:31:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 6BD0488C98
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 13:36:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nLjwYnDSDU249ntHjJ1KTeubiqIwfKUGqQqop4W6qjV2a7h2+n6h6btr9n/OIPcQbjassmYRh4IidQR4bq2U51Ighw0bKOWqqzr97U+XwdUmrcba6LFrnczNQHb84ahrAy3pBdtA3QdWXpGM8NN26rY2WsTDNE/+Wt8SooOy2OLSV7ub/r5ludxrBDKiTuHF/TlamdRh7+4Sp+D03BsLo3IKXfss35xXlblbceL48Mdij2/4mIieMMxW3wJFffXtco9hYmtsCP2WpHfdAwFOlLLSVdGPcBfKmge2igcHqiL8yVrcEC0iptlX7jvyL7GJJDTow9UfbEjYuHORut/nvg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PgCiWU7tDvjy4K4AP+JlRFiao4mf/kRt8I8OU8/TLEI=;
- b=TqKxol1qwnXyTGhRQWWb3wAp3IvT+q5aHRH5/ac60K8OS98STGC24XHskfXDkxMtPRE6GrO5ZVnGX5A3uwcIH4Rl+5AdWf+kZoO3AIRY1xxX++/EcXgk0rsopawgnDT8MSjY+1NrIHJEFbFeqTMiMIAi72QNzZzVwrZcvWn2RbT2h3/L9rrIpgLG8keNT6s6zy+8L6dPEdErPwNYSd9MxV3VK5m7yNYwPtOO9nIXYaui79KIw+u2QwilyBvJCi5hRwBX2sgBgLoyt5Qb1dIX2wmS6Mc1BSzz57kVfhwRvH7WB4q0NIZUmR5/n4mnfWRbl4JdA1JLZGJQpFlH8R11DA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PgCiWU7tDvjy4K4AP+JlRFiao4mf/kRt8I8OU8/TLEI=;
- b=VTIgcQBsQwHh0JsORFzlYuoq1TVwL7sauV6wh2S1GPCrILpyWhoDs7uAbsABIQbdHsXUkGMyB3CWWNEdgay7Ztljv/ABQykth8YYqohK5DAmuHgyS1C0BUSQWvQL/GwXoDmHGTvCqkujB3/I0jZ62x29SDsp8ltmmm/qBGirwRY=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by VI0PR04MB10736.eurprd04.prod.outlook.com (2603:10a6:800:25c::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.26; Wed, 16 Oct
- 2024 11:31:31 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8048.020; Wed, 16 Oct 2024
- 11:31:31 +0000
-Message-ID: <0f0124fb-b324-4110-9c42-433233fad83d@cherry.de>
-Date: Wed, 16 Oct 2024 13:31:30 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dm: core: downgrade some dm_warn messages to log_debug()
-To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Alexander Dahl <ada@thorsis.com>
-References: <20241015-dm-debug-less-verbose-v1-1-366e8f00b556@cherry.de>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20241015-dm-debug-less-verbose-v1-1-366e8f00b556@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0171.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:99::16) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2fb5f647538so9297521fa.0
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 04:36:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1729078585; x=1729683385; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ceiv9zrcE55EZcomQiLYKxcBnJ1I0S0oRzeAnRlCWWw=;
+ b=iCUZZ0WMRZ1HZ8Pe0r6Yj4A4yhkEw2g2E82Vbbi1gOtT7Ty5rqXK+GwJiE/rkwWTMC
+ I54dHO/N+pbfuU1lY0wmsgC4bK8JkkADOfHRVocRvK0JSL+83CY/ySZH3KAK0owdSHQ3
+ yP4DZcvFtL+vPwdo5aDcrF4EnDGYNynD2tsAOUyH8vEX9LGwcjMW7wJH7LqP5QFa+nzY
+ mvsFdnrYIkAOIcnIapHAlzGJdL3bPXx7QG7aWjGeQF5BYEHy1eFZl98C4YFGXijCs1yH
+ FaCgX3//d6afuJ+Cgw93dRjjbjQ5OV9bXQlXJ6W6k9N4rEvQETu/mSQ0Ot/1vo+bYA7o
+ maqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729078585; x=1729683385;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ceiv9zrcE55EZcomQiLYKxcBnJ1I0S0oRzeAnRlCWWw=;
+ b=bUGzb7I9qrEG9jG7r9CbSziaJOw7lxmKnI2HWZhZYGKgO8S/HsCZAywwpEd+prxRNQ
+ 1vW/txpVFUCrFuPcTB1IAZ5MkhAwXj9zzM19UT2PsD7lcPJZsVYf+jq2KVhvu3f2nk1/
+ ZJj7o1zneafqcox01n9OhFmSLqLpA2rVUjgEkn1posniB9BAcnLoJ7g9dODMMoFqqFRs
+ 05QP+6PPyrTTToIIBoodN8VUY6zsqgCLEQJHWrzVz2Srz9BTY7sc+dKDBVLiVjKvRILf
+ x4Rjl1CrAzLzJecFUYdzqc0Ejvzrl69IUeigq06Epzd62s7otj7zLZUkD0I9KDjVloya
+ XNUA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVlX2QDYDJRc9d38Z9Jm/GZ7p1xF5phI+0CqkqJeHW9CxDGiZk/Fsyj9otb+QPHjfO0HOnqxG4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzmbmxP83pQQwZF/P5BlYMtZ5KA/Mub8Bq1aWvS7zV/8WaFJEEz
+ u54a5DXzw+xWC5qpd+x/lhS4Ki0qGC2vzktDhIyGHyU9kzf02PxISKrUAZfRok3Syo+IWVUIFOO
+ vtYzpDR1tw7OYr6pS39WZBEWwxSA=
+X-Google-Smtp-Source: AGHT+IF128u7P8y+4pgI20opkyG1ESTuA3KRdX6aG/iOlXovlTmKu2iJMXjJjnn4L56/fxslGgNJt5s2X1TJPsoXOhI=
+X-Received: by 2002:a2e:9a13:0:b0:2fa:d086:bca0 with SMTP id
+ 38308e7fff4ca-2fb61b4e6e0mr12368251fa.10.1729078584269; Wed, 16 Oct 2024
+ 04:36:24 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI0PR04MB10736:EE_
-X-MS-Office365-Filtering-Correlation-Id: dcd59ba1-c855-453d-6606-08dcedd614e2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0; ARA:13230040|376014|366016|10070799003|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dFpPdWdTNmhla3BYeTlTME5ickk2bTBDRHh3Vkp2dGZHQ2JxRUt1OEVQeXlP?=
- =?utf-8?B?WnN5V1dKT2FReUhweE9sYkN5Z1d5cWtsejI0TUNXUlQ5QnI5TjNtWEpUZHpX?=
- =?utf-8?B?QnBpeUFuUG45S0c4VXJ0ZVpOZlV3M2d6S2tEbE9GbGNybFZMUHN2MG9xTVJZ?=
- =?utf-8?B?ZXptNGRrV1lJb3hKUnZIaHJUUDh3QlBJN3MxNVBYMTB6M1lPNDhrM0ErQkNm?=
- =?utf-8?B?aEZ5RFl5eFFvTWhyMk1DMEVscnNhQ2ZubkZpUE5EaXR0OGZxWWtnZk5ucG9k?=
- =?utf-8?B?YXY4T2F3TGZHMytiWFZrNEdyN045Vk81ZnZLNnR1VmJWMW5NYjliY2czaDFq?=
- =?utf-8?B?UFlxanVhZjdLWTg1Q2VIM1hrb0pGdXBFcFNCOVgwSXdhSXpXUWtNWXJ6NTJ3?=
- =?utf-8?B?SW5wUnFoL0c3anBSWG9rQ010YXBxNWNqYlZxOTE0bThscTh2TFlxam1EL1Mr?=
- =?utf-8?B?OG9neUoxWFZjVFJPT2FBUlpTRmtvZUJXcyttR1QvNEVUekFxcm5CZGNRbnJ4?=
- =?utf-8?B?NmdWRU9CdlY0ZkVXUEVxYU1rZ1gvQndIV1Q2UlZ6Q1c4OUhvcUpadi93bmI5?=
- =?utf-8?B?U1lseUY1VXplT0YyY1htTHRzVmNXWER1alUrU2Fpd3d2ZndQb2RYM2wwNkVG?=
- =?utf-8?B?aURnam5JYjFUMDdkZlEzcU1uUVcxU3d2NWk5d0hBbEptZGwrT3lWNDJ0SVlp?=
- =?utf-8?B?V1lxd3NPZElmL3VOMDNOa3dNMmFRSWJUajJGaHo2Q2dnZGJlVEtPZExVOHBL?=
- =?utf-8?B?dGtOQWExR1lwQmpabGJva2w3OXYvckROVGJFYWptK1ZJQnFqaHRhaUhzVEx0?=
- =?utf-8?B?UlFXL0pFV1RWM0h1NE1FTDN6aGo3bTBidFh0TVZFMjlGL3IyV08yUFNIOVVl?=
- =?utf-8?B?RFlvN2VSOWlmT3NYS2hvc3FsRXpHaGdkSWoxVkF4M1N2bzBYc1hnN21jWFJY?=
- =?utf-8?B?WTlEV1JralFManpEek1wSThRd3NnejAyUmpraWkzenBEOVBDK01rVnhKYUV0?=
- =?utf-8?B?b0NCbE1ZRkpHYlE3R0hGTjB5eldGVmpDZmxLSjBKd1NOb3l6SXNjUklxU0tr?=
- =?utf-8?B?UXFxR1phaHZ6UHFjVjFiMHkxMmo2eEoyUmZ4cEhZM0FyVG82ZlVYWTFDcGpr?=
- =?utf-8?B?SitwTzEzUXJ3WWp4MUFvWHVoRnMxcFp1SEc5STl1amhEVGlPbUtVOEJQeTNG?=
- =?utf-8?B?SmZOSWdiaTBqMjdUUzREVW91dDhadVNZbVh5WXNTUnFSN2M5ZUl6Lzh2RzAv?=
- =?utf-8?B?NkJ1Vjc1Qy9Nb0Z5QUt1NlVnSW8yTGpmV0VvZzI0S3ZsVkVLRXpzd2FzVEd1?=
- =?utf-8?B?cGtqWDVlbitFUm1CM1pZa1N5K2xCRFNaTnRlRC8yYkpMYWV6T1hUVGRMN1cr?=
- =?utf-8?B?ZDEzT2ovN3h1Ukk0RGhNanZweEJZWEtBeWZucU5EK2toQnlsNUk3VmFRa2JY?=
- =?utf-8?B?Q1V0QW9raFQ2aHVnb3hJMkcvS0VpWW5JT0NZL3F5TVNBUHV3aTlSSzEvejJl?=
- =?utf-8?B?aUlTTTVjYW1qR0tRWE52M1VJdy9Ob25Wd3Y2Q0ovZ0tJTEUwSmMyQXM5ODl0?=
- =?utf-8?B?VHhlWGkxZHBSc1MzNjFsVTBjalB2bkMyYzFrTjllaXpncnl3NUxsc1pPWmF1?=
- =?utf-8?B?RlM4Q0ExM0lBTUtqNlgvTzh2TmNWbGZGRzV2M3FoYTMwU0pmUlBRWll2bWpY?=
- =?utf-8?B?MG9TUGFTcnpGbXVucWNJNmZlVmdoVGwzSEI5ZjhBWHhsYzJkc0RiTjJBPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(10070799003)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NkJBRktSNVJzWUgwTHNBU1ZYVXBDTU94OTQyTEJXL2tZOFhwSjBXRWRPaDRS?=
- =?utf-8?B?cXRmL3k5dVVBdnNKQ1JtZWYxM2tWM1NWMUZjb1l5YThuaTRLd1JLOXJLT2M4?=
- =?utf-8?B?dVVIZzF4blhwbFdhMGl6d2VoZFpFUlFDc29oK2dnaU9IdS8rQ1d1b0lCZW12?=
- =?utf-8?B?Sk43ZXlISHpZUFpQMVpvWkRrbXdzMEUxSzJ0Zk9waDdtc0VaLytEY3lSaHVS?=
- =?utf-8?B?RE1INjdwUUhGd2dpcG5weGw3ZEd2VlFBci9BekVWL1dhcmYvZ3FxK001M3lj?=
- =?utf-8?B?VVBwbjhCSUVlS2lHR2RGR05rVWc1cFl5ekJlcHVPd3Z4RFkvbFZhamRmSFVP?=
- =?utf-8?B?UWFkaFo1aHdGNXpLN0FoZzhZZTk2NStwWXlWRld2aEprUHJUTjgxMVRlcFBH?=
- =?utf-8?B?UVdyOWwzaU5wNTh0MnBRUnVDSDV2TWVqNzBOQ1pKZmlmYmFWWUx0eC9CY3dM?=
- =?utf-8?B?TGdrV0RjUkFDY0xSdE5wTmRXSEE4OFRDaVJsSlpKS2tGbmJtSEVJMnFON3dR?=
- =?utf-8?B?c3NNYm1memh1TFY2VzVoVW9SSXI2Mjk4cDZvZHlzY1dFVVd6NXFJNzFTemNl?=
- =?utf-8?B?dkd1V0VuTVBLVlVZSzZ0Mzh5bFVKRDl4Ky9WRlB2L1JydmI0SjU3cEJJUkls?=
- =?utf-8?B?YzFPYkw3N2Z2T0V4L1pCQ1JjcHdOelgydmxVNXNyYW5MK05tekkrY3Bmam1H?=
- =?utf-8?B?SnpCSkhZYU5TYS9wWXFpckwzODMyQVBmY0xqbXo3cnhVR05BOUwySktUMXFm?=
- =?utf-8?B?dk1WeTRpYjYwQWpPTXZWdlZKaFhRaTNTcU12Q1FwWkhsaGVWNVo0bC9pQWoz?=
- =?utf-8?B?OTI0YVZGSDEvM05XK0dNVHB0V3VJL3JvVGJ4a1pTN3JaekNoQjQxMTZqd2J2?=
- =?utf-8?B?L1JsTlJVKzhzc3d1b1RIM25aekNLcWtyUVc3b24wWmdqb0FyalF4WldWVmRy?=
- =?utf-8?B?dlN2Zml5MlNYbEFYMVYzNENSOVhDb21wT3hPRDgvVFhoekxCTlZrUjhOY1Rm?=
- =?utf-8?B?ampxKy85L3NlZk5maUtlaExwNWF6bTRyZS9XcVY0Q2ZOaFkzMzk2NXlPY1pw?=
- =?utf-8?B?Qm5QRWFFTndRY2FWT3NONk11SnNxanNwUm02UVlIVmNOTEVQd2Y1VjlPR2N2?=
- =?utf-8?B?ank2bUZZekwxcGZSY0UrdXhRdS9qaHM4dk5KckdVQUd5MkU3Q2k0dlYreE0y?=
- =?utf-8?B?MkRRc3ZZNHN1WHBMTmJNa1F6dzBsVTNQNndIeHpsMWM2Wm9tWFErL2ZZcnVq?=
- =?utf-8?B?Y3ptUm9qU0xXY0dVUkpoa01DVVVkZXVVeWY3V3hrNlN0WWFpRkRyTlFKL1ZY?=
- =?utf-8?B?Z3lxYmE1cFVuTnFmTDNlYnFwb2t3RTl0VHFZWjlqYlp4NkxRV2F2VXhuV2o5?=
- =?utf-8?B?ZFZGRXdKb2UyZVdzbnpRT2pOb01URUVmU083L0FTd0hJYVVDc0dqMFJvbHcz?=
- =?utf-8?B?K3YvaWpJV3A5dUZoVUZUVy9CdHRWczdTR3QrRnRSQ1cwbStRVnZkTWhyQlFp?=
- =?utf-8?B?NjQzQm5RRzhnZ29qMDR6T2dFZ000MnFyc1NDQWFKb1R0d2lVR201eGFBVjE5?=
- =?utf-8?B?bW9jRlpudlBlQ3JuMmZkWWlnRDFnUVVpcjhhcDh4bVpmcWVONlNYVDg2ZFRX?=
- =?utf-8?B?NGRkcCtkeUlPd3lmL1FqWTZUQklUaXBKWjJjdXRJSFhUcDgzNzRCaWp4ek5D?=
- =?utf-8?B?aytYTWpRYmJUYUxSVWd3NW1lRzZkYTJGZWFYTFdLdXRwazZEc2xYMjNna3o5?=
- =?utf-8?B?NHJ0QkhtKzVweXQ2U015UmhDWkxpbWRyb0lGMmFZcVZLNE5JSTl5dzloMmVP?=
- =?utf-8?B?THJvNXowaXRsTXJlVDFqajRaTlF4SWxLVlN4elFGUHIzMXVkTHRab09DZ3Vh?=
- =?utf-8?B?eElVY213TVFHSDBCYjdacXFIVWdEamljTVp0dWZ2TzZUNnJ1WXJDVkgwTFJG?=
- =?utf-8?B?ak11c0tzVVlDQ3d1bVlZRWk4YXY4SXVLa3FBSmNQcVU5VUYwNlM4RXpnQ0tM?=
- =?utf-8?B?cnpHYTlNMFQyUnlkdXBvbDVYQVU2ZllPTGVJc3hYK1grS1VBemNaOFpFRWVY?=
- =?utf-8?B?NXBDaW5od05XaEkwTEg5ZW1Nclp0blRZQzcwelBnVWcyY25rQVZ6bHJmb3Nq?=
- =?utf-8?B?TWhnRUV5enNUaVNCcG9HYW1vNUlHLzZLMzhhYVdjQlkvS2xCWEt5UzJvbnB2?=
- =?utf-8?Q?j4TW5cnbcmBj2O3IDblcADA=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: dcd59ba1-c855-453d-6606-08dcedd614e2
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2024 11:31:31.0414 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YOy3ToMnmwRVemWiFG6LBe3H38DZkmwy2tcmfePTGgyCgH1DT9oOvmir8EcEAS7LKUpMoME6O+i7BSgAyWJOX/kAxgHKzIm/gJVhL/ntH4Y=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10736
+References: <20241016-imx95-v1-0-f640c8f3bc1b@oss.nxp.com>
+ <20241016-imx95-v1-14-f640c8f3bc1b@oss.nxp.com>
+In-Reply-To: <20241016-imx95-v1-14-f640c8f3bc1b@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 16 Oct 2024 08:36:12 -0300
+Message-ID: <CAOMZO5DY7LeLvp33cnocTuW4UgA7tnmJdeUX1e3Y6wqusahBDQ@mail.gmail.com>
+Subject: Re: [PATCH 14/17] imx95_evk: add i.MX95 19x19 EVK board basic support
+To: Alice Guo <alice.guo@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Stefano Babic <sbabic@denx.de>, Marek Vasut <marex@denx.de>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Ye Li <ye.li@nxp.com>, 
+ Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,43 +95,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Alice,
+
+On Wed, Oct 16, 2024 at 4:19=E2=80=AFAM Alice Guo <alice.guo@oss.nxp.com> w=
+rote:
+>
+> From: Ye Li <ye.li@nxp.com>
+>
+> This patch adds i.MX95 19x19 EVK board basic support.
+>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+
+A MAINTAINERS file is missing. CI flags this as an error.
+
+Please make sure to run the series through CI before posting v2.
+
+A general question: how is the flash.bin generated?
+
+I don't see binman support here. Why?
+
+We also need a doc/board/nxp/imx95_evk.rts file that explains how to
+build and boot the board,
+the firmware files it needs, etc.
+
+> +++ b/board/freescale/imx95_evk/imx95_evk.c
+> @@ -0,0 +1,75 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2023 NXP
+> + */
+> +
+> +#include <env.h>
+> +#include <init.h>
+> +#include <asm/global_data.h>
+> +#include <asm/arch-imx9/ccm_regs.h>
+> +#include <asm/arch/clock.h>
+> +#include <fdt_support.h>
+> +#include <usb.h>
+> +#include <dwc3-uboot.h>
+
+Why do you add USB headers if there is no USB support?
+
+> +#ifdef CONFIG_SCMI_FIRMWARE
+
+Remove the ifdef and include the headers unconditionally.
+
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +int board_early_init_f(void)
+> +{
+> +       /* UART1: A55, UART2: M33, UART3: M7 */
+> +       init_uart_clk(0);
+
+Shouldn't DM_SERIAL enable the UART clock?
+
+> +#if CONFIG_IS_ENABLED(NET)
+> +int board_phy_config(struct phy_device *phydev)
+> +{
+> +       if (phydev->drv->config)
+> +               phydev->drv->config(phydev);
+> +       return 0;
+
+Is this needed?
+
+> +
+> +#ifdef CONFIG_OF_BOARD_SETUP
+> +int ft_board_setup(void *blob, struct bd_info *bd)
+> +{
+> +       return 0;
+
+This function is not useful and can be removed.
+> +extern int imx9_probe_mu(void);
+
+No extern in C files, please.
+
+> +       printf("SOC: 0x%x\n", gd->arch.soc_rev);
+> +       printf("LC: 0x%x\n", gd->arch.lifecycle);
+
+Make this debug() instead.
+
+> +CONFIG_SPL_POWER=3Dy
+> +CONFIG_SDP_LOADADDR=3D0x90400000
+> +
+
+No blank lines in defconfig, please.
+
+Generate the defconfig via 'make savedefconfig'
 
 
-On 10/15/24 4:32 PM, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> People complained that enabling (SPL_)DM_WARN was now totally unusable
-> due to the amount of messages printed on the console.
-> 
-> Let's downgrade the log level of some messages that are clearly not on
-> the error path.
-> 
-> Note that there's one pr_debug in there, because it is followed by
-> pr_cont so it made sense to reuse the same family of functions.
-> 
-> Reported-by: Alexander Dahl <ada@thorsis.com>
-> Fixes: 6afdb1585112 ("dm: core: migrate debug() messages to use dm_warn")
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
-> Note that I am not entirely sure about the "not found" and "not large
-> enough" changes there.
-> 
-> Another note, %#x isn't handled by tinyprintf so it just prints "x"
-> instead of the value.
-> 
-> Finally, I don't know how one can enable LOG_DEBUG level without
-> enabling DEBUG which enables assert() so I just tested that by removing
-> the #define DEBUG in include/log.h :)
+> +/* Initial environment variables */
+> +#define CFG_EXTRA_ENV_SETTINGS         \
+> +       BOOTENV \
+> +       AHAB_ENV \
+> +       "initrd_addr=3D0x93800000\0" \
+> +       "initrd_high=3D0xffffffffffffffff\0" \
+> +       "emmc_dev=3D0\0"\
+> +       "sd_dev=3D1\0" \
+> +       "prepare_mcore=3Dsetenv mcore_clk clk-imx95.mcore_booted;\0" \
+> +       "scriptaddr=3D0x93500000\0" \
+> +       "kernel_addr_r=3D" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
+> +       "image=3DImage\0" \
+> +       "splashimage=3D0xA0000000\0" \
+> +       "console=3DttyLP0,115200 earlycon\0" \
+> +       "fdt_addr_r=3D0x93000000\0"                       \
+> +       "fdt_addr=3D0x93000000\0"                 \
+> +       "fdt_high=3D0xffffffffffffffff\0"         \
+> +       "cntr_addr=3D0xA8000000\0"                        \
+> +       "cntr_file=3Dos_cntr_signed.bin\0" \
+> +       "boot_fit=3Dno\0" \
+> +       "fdtfile=3D" CONFIG_DEFAULT_FDT_FILE "\0" \
+> +       "bootm_size=3D0x10000000\0" \
+> +       "mmcdev=3D" __stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
+> +       "mmcpart=3D1\0" \
+> +       "mmcroot=3D/dev/mmcblk1p2 rootwait rw\0" \
+> +       "mmcautodetect=3Dyes\0" \
+> +       "mmcargs=3Dsetenv bootargs ${mcore_clk} console=3D${console} root=
+=3D${mmcroot}\0 " \
+> +       "loadbootscript=3Dfatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${=
+script};\0" \
+> +       "bootscript=3Decho Running bootscript from mmc ...; " \
+> +               "source\0" \
+> +       "loadimage=3Dfatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image=
+}\0" \
+> +       "loadfdt=3Dfatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfi=
+le}\0" \
+> +       "loadcntr=3Dfatload mmc ${mmcdev}:${mmcpart} ${cntr_addr} ${cntr_=
+file}\0" \
+> +       "auth_os=3Dauth_cntr ${cntr_addr}\0" \
+> +       "boot_os=3Dbooti ${loadaddr} - ${fdt_addr_r};\0" \
+> +       "mmcboot=3Decho Booting from mmc ...; " \
+> +               "run mmcargs; " \
+> +               "if test ${sec_boot} =3D yes; then " \
+> +                       "if run auth_os; then " \
+> +                               "run boot_os; " \
+> +                       "else " \
+> +                               "echo ERR: failed to authenticate; " \
+> +                       "fi; " \
+> +               "else " \
+> +                       "if test ${boot_fit} =3D yes || test ${boot_fit} =
+=3D try; then " \
+> +                               "bootm ${loadaddr}; " \
+> +                       "else " \
+> +                               "if run loadfdt; then " \
+> +                                       "run boot_os; " \
+> +                               "else " \
+> +                                       "echo WARN: Cannot load the DT; "=
+ \
+> +                               "fi; " \
+> +                       "fi;" \
+> +               "fi;\0" \
+> +       "netargs=3Dsetenv bootargs ${mcore_clk} console=3D${console} " \
+> +               "root=3D/dev/nfs " \
+> +               "ip=3Ddhcp nfsroot=3D${serverip}:${nfsroot},v3,tcp\0" \
+> +       "netboot=3Decho Booting from net ...; " \
+> +               "run netargs;  " \
+> +               "if test ${ip_dyn} =3D yes; then " \
+> +                       "setenv get_cmd dhcp; " \
+> +               "else " \
+> +                       "setenv get_cmd tftp; " \
+> +               "fi; " \
+> +               "if test ${sec_boot} =3D yes; then " \
+> +                       "${get_cmd} ${cntr_addr} ${cntr_file}; " \
+> +                       "if run auth_os; then " \
+> +                               "run boot_os; " \
+> +                       "else " \
+> +                               "echo ERR: failed to authenticate; " \
+> +                       "fi; " \
+> +               "else " \
+> +                       "${get_cmd} ${loadaddr} ${image}; " \
+> +                       "if test ${boot_fit} =3D yes || test ${boot_fit} =
+=3D try; then " \
+> +                               "bootm ${loadaddr}; " \
+> +                       "else " \
+> +                               "if ${get_cmd} ${fdt_addr_r} ${fdtfile}; =
+then " \
+> +                                       "run boot_os; " \
+> +                               "else " \
+> +                                       "echo WARN: Cannot load the DT; "=
+ \
+> +                               "fi; " \
+> +                       "fi;" \
+> +               "fi;\0" \
+> +       "bsp_bootcmd=3Decho Running BSP bootcmd ...; " \
+> +               "mmc dev ${mmcdev}; if mmc rescan; then " \
+> +                  "if run loadbootscript; then " \
+> +                          "run bootscript; " \
+> +                  "else " \
+> +                          "if test ${sec_boot} =3D yes; then " \
+> +                                  "if run loadcntr; then " \
+> +                                          "run mmcboot; " \
+> +                                  "else run netboot; " \
+> +                                  "fi; " \
+> +                           "else " \
+> +                                  "if run loadimage; then " \
+> +                                          "run mmcboot; " \
+> +                                  "else run netboot; " \
+> +                                  "fi; " \
+> +                               "fi; " \
+> +                  "fi; " \
+> +          "fi;"
 
-Ah, and I was also wondering if we shouldn't actually use
-
-log(LOGC_DM, LOGL_DEBUG, ...)
-
-instead of log_debug() (which uses LOGL_CATEGORY, set by UCLASSes or 
-drivers usually as far as I could tell?)
-
-If we do, then maybe having dm_debug() similarly to dm_warn() would make 
-sense?
-
-Cheers,
-Quentin
+Move this to board/freescale/imx95_evk/imx95_evk.env
