@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3DC6D1AD3B
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 10:06:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C316D1AD3E
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 10:06:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8858A89013;
+	by phobos.denx.de (Postfix) with ESMTP id EA4D289034;
 	Wed, 16 Oct 2024 12:05:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Sl1tX3jQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EX8J3Na/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D391089041; Wed, 16 Oct 2024 12:05:12 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 5F6E288F35; Wed, 16 Oct 2024 12:05:13 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A300189035
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 12:05:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 969AB88D1B
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 12:05:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43117ed8adbso72469765e9.2
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 03:05:09 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-37d533b5412so3254302f8f.2
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 03:05:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729073109; x=1729677909; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729073110; x=1729677910; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+9X+r8Q8NFzSd6Hb1M2hwnGKuGR3j9GDjlrMCZXXI9M=;
- b=Sl1tX3jQYu3v5IRD2n0DEM6B+My6rdVygHnxlARTHySiusaLyauI9E8dRBQETfrfNf
- nIFPX6sDuJNdExCI3bGBuhKxTsg8nE3Q7itGvZ3YQXS/YWkvIFs0sC9xcycWJVd0QAZi
- RgkFWqamfFCp+qDqMjeLXQigHbTdAaw0uS2EZHfPkp4/IOdc5EPQrvDniHUc/j9iMT3n
- se2jWEgo+6r0hJnqCUdB6Ak8SCpNorVw96bdc6z6Akye+7Nfe08QwUvaHvimW1EP/6/W
- 0nd+sWem/6EyS3TGsCMBqlb6XYqzGsqJgWKMXZMlYJFZQlUaMg2mnZRrCdKty1m2uljp
- F4DQ==
+ bh=8WNv4mpJ6VyNsS2SIbAVCWQUZxVTVTsg01B6GTJaE+A=;
+ b=EX8J3Na/Jgp1Si+4O7kQ3O9ci02ZzPJ2MbBKVKQeXr6bV4rxA5XUMQHhnq+q2rKAD7
+ GYO40wsOfb4xDoDXDK7Fbt0EveJLvL2cwUQxm2xOraHvCQUM1SJJb6dI7x/dIr+aBhJS
+ dY2JQOL1GgQGnZUogLnvAc6KeX3mTv/s574dAllOzsM8fcv5ozqLtS868tepuiIG7y41
+ NlIgmLt0v/X4apWkChYDOIuzoz+pECvknnmCNZM5jd6etiP5Bt2WJ01OZi7W+3rEcb7V
+ Ghm2v+jGYy20BkS3PQf9ba/r9eSOtFMEuHJsd9tA8t+djkS9GeTXzFV0TyNHidxe7/j+
+ 2tYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729073109; x=1729677909;
+ d=1e100.net; s=20230601; t=1729073110; x=1729677910;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+9X+r8Q8NFzSd6Hb1M2hwnGKuGR3j9GDjlrMCZXXI9M=;
- b=YCs5z95LZprzjkyIAQW2pZ7nIZiEcxY+FYjQ0aZml+yZ3iDUPZ6+DJAfpYxGYTsJWU
- WGj7qUOVDvs5DmVJFKV9SRXhtUHwsTZtnGWBvt9RSCwwQ3HaBBUnWiH0A/DUscnOZ18s
- 1vjh+1wQtseLFQG03twBrzzNLED/Dlozg4LlptUrEL3L6EsnjVVS7ggu2IpeSLP1osRl
- Jc/4gtbTqoKf1Sd+TXyD58qxL/7lThixGnP0OvcE/9+2a/Y41cF5aCKV5l0izY/YV8CW
- tGhn2uxvJMv8spDJKCkg21H5u1sAOrPkaV6fCn/FUtcP108TjTU9KXQukIYz3JgnY+au
- o7TQ==
-X-Gm-Message-State: AOJu0YyPeRfoJtZbptcXs8ZYJo++BnG+aH5d6FWqCPIT9xOOoD6iQ8Ue
- +lGkG/pzGb5HME6egtX5RKxpLP3vZY/xcZ/iZXfhgVYxPlESsaMj/u8lrLSelqVCFCcAue5onHG
- x48y3OG8T
-X-Google-Smtp-Source: AGHT+IErARqLkO2f4+0YOhotE1bKNNNE7bAl9X/1TZUrYEcg+MCxWjbaZWU7ZXKtGg4hqKL7F6e7Rw==
-X-Received: by 2002:a05:600c:4f4f:b0:431:518a:6826 with SMTP id
- 5b1f17b1804b1-431518a6994mr12682345e9.19.1729073108885; 
- Wed, 16 Oct 2024 03:05:08 -0700 (PDT)
+ bh=8WNv4mpJ6VyNsS2SIbAVCWQUZxVTVTsg01B6GTJaE+A=;
+ b=Qa/0kdKIhLjM64ylT7WFZl8u03wP+8uIO80s/C/YzguMiyzOxKaSNVPwLR+M08Ly2p
+ lCbSMHyCwe6kYO5eN+Ms5DUFB0/pyX9dcuwGWU5U9+Tdqt5KROw8X37PlHC/4e/QRqOG
+ s3M61CJV5kXkkTNNcOSZDWB71GPlcmKWzkmCmUy3D1TVEl1AyR6pBCf9jsxpvegLQjU2
+ IXLIYHedCRJaOxJz6NjV/ckMcufeiU8/94dkgCanVfYWF4q4PfFn4SSYu/8mpLmv8iMR
+ WuEfkysAIXemrxXzcc1aMXDUOJOtQ/r0z5K/ovVqUAkHQxn92IN/WVGSBxX/ArbT6AlE
+ +wVQ==
+X-Gm-Message-State: AOJu0YwxnYcryTo9rlpxYCbEJjldA+t2OEY0cUiB18Acka3ZLNO2UHb9
+ xsTo3TU4sW+UTcBa1N17ZDhtXavbfWRDhWPD0LwimxYZxIyLWNkVeYb198RDitds2/HLmfCnNNw
+ aacD0huU6
+X-Google-Smtp-Source: AGHT+IFgC74tGk3TKeDig6VxFUcnLtlGefEjgM9qPU963kqSlfgZjn4b57+yUePBoX5jFEpjEuxlCA==
+X-Received: by 2002:a5d:5f93:0:b0:374:c640:8596 with SMTP id
+ ffacd0b85a97d-37d86be330dmr2667582f8f.32.1729073109849; 
+ Wed, 16 Oct 2024 03:05:09 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4313f56f241sm44634515e9.22.2024.10.16.03.05.08
+ 5b1f17b1804b1-4313f56f241sm44634515e9.22.2024.10.16.03.05.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2024 03:05:08 -0700 (PDT)
+ Wed, 16 Oct 2024 03:05:09 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -72,12 +72,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v13 16/21] cmd: bdinfo: enable -e when CONFIG_CMD_NET_LWIP=y
-Date: Wed, 16 Oct 2024 12:04:10 +0200
-Message-Id: <190ec5f585a987b350b62ef9a89b68cf942b54a1.1729070678.git.jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v13 17/21] configs: add qemu_arm64_lwip_defconfig
+Date: Wed, 16 Oct 2024 12:04:11 +0200
+Message-Id: <9f5ecedd572dea342ec8668b2712d8ea24037b64.1729070678.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1729070678.git.jerome.forissier@linaro.org>
 References: <cover.1729070678.git.jerome.forissier@linaro.org>
@@ -99,38 +97,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Support "bdinfo -e" when lwIP is selected.
+Add qemu_arm64_lwip_defconfig which #include's qemu_arm64_defconfig and
+selects NET_LWIP instead of NET. This config has all the supported net
+commands enabled.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- cmd/bdinfo.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ configs/qemu_arm64_lwip_defconfig | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 configs/qemu_arm64_lwip_defconfig
 
-diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
-index f6e534dd5bb..4c0e2adabc3 100644
---- a/cmd/bdinfo.c
-+++ b/cmd/bdinfo.c
-@@ -151,7 +151,7 @@ static int bdinfo_print_all(struct bd_info *bd)
- 	bdinfo_print_num_l("relocaddr", gd->relocaddr);
- 	bdinfo_print_num_l("reloc off", gd->reloc_off);
- 	printf("%-12s= %u-bit\n", "Build", (uint)sizeof(void *) * 8);
--	if (IS_ENABLED(CONFIG_CMD_NET))
-+	if (IS_ENABLED(CONFIG_CMD_NET) || IS_ENABLED(CONFIG_CMD_NET_LWIP))
- 		print_eth();
- 	bdinfo_print_num_l("fdt_blob", (ulong)map_to_sysmem(gd->fdt_blob));
- 	if (IS_ENABLED(CONFIG_VIDEO))
-@@ -192,7 +192,8 @@ int do_bdinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		case 'a':
- 			return bdinfo_print_all(bd);
- 		case 'e':
--			if (!IS_ENABLED(CONFIG_CMD_NET))
-+			if (!IS_ENABLED(CONFIG_CMD_NET) &&
-+			    !IS_ENABLED(CONFIG_CMD_NET_LWIP))
- 				return CMD_RET_USAGE;
- 			print_eth();
- 			return CMD_RET_SUCCESS;
+diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
+new file mode 100644
+index 00000000000..d3d8ef16e66
+--- /dev/null
++++ b/configs/qemu_arm64_lwip_defconfig
+@@ -0,0 +1,9 @@
++#include <configs/qemu_arm64_defconfig>
++
++CONFIG_ARM=y
++CONFIG_ARCH_QEMU=y
++
++CONFIG_NET_LWIP=y
++CONFIG_CMD_DNS=y
++CONFIG_CMD_WGET=y
++CONFIG_EFI_HTTP_BOOT=y
 -- 
 2.40.1
 
