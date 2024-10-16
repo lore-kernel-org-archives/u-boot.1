@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 898DED2A53C
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:14:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75F56D2A53C
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:19:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1621088DA0;
-	Wed, 16 Oct 2024 20:14:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D38AB88DA0;
+	Wed, 16 Oct 2024 20:19:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="FExfeTYB";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="a714+TX4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3257688DB8; Wed, 16 Oct 2024 20:14:53 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id A883488DE1; Wed, 16 Oct 2024 20:18:59 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56A6888D90
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:14:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A4E4888D91
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:18:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=0019cf4dfa=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49GCuhRT018118;
- Wed, 16 Oct 2024 20:14:41 +0200
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49GDCXBb005336;
+ Wed, 16 Oct 2024 20:18:47 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- OEl6NIhm3Flf80Mi9I9JOvARdGebMh+woEiE+It/oGI=; b=FExfeTYBjApj0rxO
- rgiZILDJd1Mpyn+IqJBa3+t3vYf6L1YgbmFEMzyFXhnCjMIsIxR4xNc2+crLUC2k
- d72Ntw81Az0k9SACujMqK83UBzAm/UgNmn9ON+fkKxeJ2jHzoWpMWwKi8LtVeCLK
- zrDHNW3xyZ1+w6CaQ8V44liOiFfEoTQbw9PDeqdbkofjETriUrett7kzv/ZJ+xbR
- 5wPAXeDhVX+UxxYt7Cg8XnK2eSF9q0tR3SI7ACd1tVf4k39Z2jWe2rDqgVclbeMf
- x55AYjptc0fU6hd/lfWFGCVWjB6BfwIxAj+R+xhosputHFrXfvu4yNxZP+wu2Ins
- +t1BMg==
+ +PxEzDAXe02bNGcY/2st1+YkLtJzg7NCqVd0Yfp3W5U=; b=a714+TX4mb+PGY5M
+ CWNGysJT3IP1WCrs1u0Wal7NbOA4IMf3daO12OG/75iZVhsXCUqXJLLOvT3R9HoY
+ zn45Zy7pqzUoni0lMdaZqyCNMEbZt0smkDUWDXb2rquCcGd+Dxvp1w5hHZNHAR48
+ ldaSfODghd3a18wBPq5L7mKIvTjeS91NoXgOPB+3VCq/pEoBOC+5Ob8LGcxkN0Ke
+ cJdaSloX61VkSo8Wq7W3IceoAunoteB7JGlXVWoettyWH1uj6ei+BHHk2DVP5NXV
+ XLjm0zzFzyWo/eeHdR37ule5w7spOJ5flvAlJTK226rHZBqw3CKu1TNrU9SwdOZY
+ K84FfA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 42842jh7qe-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 427ehgcnbx-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 16 Oct 2024 20:14:41 +0200 (MEST)
+ Wed, 16 Oct 2024 20:18:46 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 37A0140060;
- Wed, 16 Oct 2024 20:13:47 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1B0774007C;
+ Wed, 16 Oct 2024 20:17:13 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 92C66267F5D;
- Wed, 16 Oct 2024 20:13:42 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D922A263876;
+ Wed, 16 Oct 2024 20:15:12 +0200 (CEST)
 Received: from [10.48.86.243] (10.48.86.243) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 16 Oct
- 2024 20:13:42 +0200
-Message-ID: <249ca8aa-d835-4b4f-901c-5c922bb23673@foss.st.com>
-Date: Wed, 16 Oct 2024 20:13:40 +0200
+ 2024 20:15:12 +0200
+Message-ID: <4c5e694c-a541-42ee-8bea-26dc3f9d2737@foss.st.com>
+Date: Wed, 16 Oct 2024 20:15:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] ARM: stm32: Update MAINTAINERS file globs for STM32MP
- DHSOM
+Subject: Re: [PATCH v2 2/3] ARM: dts: stm32: Switch to using upstream DT on DH
+ STM32 DHSOM
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
 To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini
+CC: Patrice Chotard <patrice.chotard@foss.st.com>, Sean Anderson
+ <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Tom Rini
  <trini@konsulko.com>, <u-boot@dh-electronics.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20241004235641.395703-1-marex@denx.de>
+References: <20241005011647.436456-1-marex@denx.de>
+ <20241005011647.436456-2-marex@denx.de>
+ <1d544619-8155-4254-83ff-7c88468f738f@foss.st.com>
 Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20241004235641.395703-1-marex@denx.de>
+In-Reply-To: <1d544619-8155-4254-83ff-7c88468f738f@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.48.86.243]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
  (10.75.129.71)
@@ -93,22 +96,102 @@ X-Virus-Status: Clean
 
 Hi,
 
-
-On 10/5/24 01:56, Marek Vasut wrote:
-> Update the MAINTAINERS file glob to cover all of STM32MP DHSOM related files.
+On 10/11/24 19:54, Patrick DELAUNAY wrote:
+> Hi,
 >
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
-> V2: Use multiple N: instead of multiple F:
-> ---
->   board/dhelectronics/dh_stm32mp1/MAINTAINERS | 7 ++-----
->   1 file changed, 2 insertions(+), 5 deletions(-)
+> On 10/5/24 03:15, Marek Vasut wrote:
+>> Enable OF_UPSTREAM to use upstream DT and add st/ prefix to the
+>> DEFAULT_DEVICE_TREE. And thereby directly build DTB from 
+>> dts/upstream/src/
+>> including *-u-boot.dtsi from arch/$(ARCH)/dts/ directory.
+>>
+>> The previous setup used generic SoC prefix like stm32mp15xx-dhco* for
+>> generic DTs which could be used on any STM32MP15xx DHSOM variant. The
+>> new setup uses specific SoC prefix stm32mp157c-dhco* to match Linux DT
+>> names. Since the hardware present on STM32MP153 and STM32MP157 is not
+>> enabled in the board configuration and not supported by U-Boot except
+>> for the DSI host, using the existing Linux DTs poses no issue even on
+>> plain STM32MP151A based SoMs.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: Sean Anderson <seanga2@gmail.com>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@dh-electronics.com
+>> Cc: u-boot@lists.denx.de
+>> Cc: uboot-stm32@st-md-mailman.stormreply.com
+>> ---
+>> V2: - Drop arch/arm/dts/Makefile entries
+>>      - Convert stm32mp135f-dhcom-dhsbc
+>> ---
+>>   arch/arm/dts/Makefile                         |   9 +-
+>>   arch/arm/dts/stm32mp135f-dhcor-dhsbc.dts      | 383 ------------
+>>   ...> stm32mp151a-dhcor-testbench-u-boot.dtsi} |   0
+>>   ...si => stm32mp153c-dhcom-drc02-u-boot.dtsi} |   0
+>>   ...stm32mp153c-dhcor-drc-compact-u-boot.dtsi} |   0
+>>   ...> stm32mp157a-dhcor-avenger96-u-boot.dtsi} |   0
+>>   ...tsi => stm32mp157c-dhcom-pdk2-u-boot.dtsi} |   0
+>>   ... => stm32mp157c-dhcom-picoitx-u-boot.dtsi} |   0
+>>   arch/arm/dts/stm32mp15xx-dhcom-drc02.dts      |  17 -
+>>   arch/arm/dts/stm32mp15xx-dhcom-drc02.dtsi     | 169 ------
+>>   arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts       |  17 -
+>>   arch/arm/dts/stm32mp15xx-dhcom-pdk2.dtsi      | 329 -----------
+>>   arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts    |  17 -
+>>   arch/arm/dts/stm32mp15xx-dhcom-picoitx.dtsi   | 151 -----
+>>   arch/arm/dts/stm32mp15xx-dhcom-som.dtsi       | 544 ------------------
+>>   arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts  |  20 -
+>>   arch/arm/dts/stm32mp15xx-dhcor-avenger96.dtsi | 437 --------------
+>>   .../arm/dts/stm32mp15xx-dhcor-drc-compact.dts |  18 -
+>>   .../dts/stm32mp15xx-dhcor-drc-compact.dtsi    | 326 -----------
+>>   arch/arm/dts/stm32mp15xx-dhcor-io1v8.dtsi     |  28 -
+>>   arch/arm/dts/stm32mp15xx-dhcor-som.dtsi       | 221 -------
+>>   arch/arm/dts/stm32mp15xx-dhcor-testbench.dts  | 180 ------
+>>   .../dh_stm32mp1/u-boot-dhcom.its              |  18 +-
+>>   .../dh_stm32mp1/u-boot-dhcor.its              |  12 +-
+>>   configs/stm32mp13_dhcor_defconfig             |   3 +-
+>>   configs/stm32mp15_dhcom_basic_defconfig       |   5 +-
+>>   configs/stm32mp15_dhcor_basic_defconfig       |   5 +-
+>>   27 files changed, 24 insertions(+), 2885 deletions(-)
+>>   delete mode 100644 arch/arm/dts/stm32mp135f-dhcor-dhsbc.dts
+>>   rename arch/arm/dts/{stm32mp15xx-dhcor-testbench-u-boot.dtsi => 
+>> stm32mp151a-dhcor-testbench-u-boot.dtsi} (100%)
+>>   rename arch/arm/dts/{stm32mp15xx-dhcom-drc02-u-boot.dtsi => 
+>> stm32mp153c-dhcom-drc02-u-boot.dtsi} (100%)
+>>   rename arch/arm/dts/{stm32mp15xx-dhcor-drc-compact-u-boot.dtsi => 
+>> stm32mp153c-dhcor-drc-compact-u-boot.dtsi} (100%)
+>>   rename arch/arm/dts/{stm32mp15xx-dhcor-avenger96-u-boot.dtsi => 
+>> stm32mp157a-dhcor-avenger96-u-boot.dtsi} (100%)
+>>   rename arch/arm/dts/{stm32mp15xx-dhcom-pdk2-u-boot.dtsi => 
+>> stm32mp157c-dhcom-pdk2-u-boot.dtsi} (100%)
+>>   rename arch/arm/dts/{stm32mp15xx-dhcom-picoitx-u-boot.dtsi => 
+>> stm32mp157c-dhcom-picoitx-u-boot.dtsi} (100%)
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcom-drc02.dtsi
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcom-pdk2.dtsi
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcom-picoitx.dtsi
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcom-som.dtsi
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcor-avenger96.dtsi
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dtsi
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcor-io1v8.dtsi
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcor-som.dtsi
+>>   delete mode 100644 arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
+>>
+>
+> Nice.
+>
+>
+>
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>
+> Thanks
+> Patrick
 >
 
 Applied to u-boot-stm/master, thanks!
