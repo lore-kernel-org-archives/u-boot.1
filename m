@@ -4,81 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43DEAD1AD55
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 13:32:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5889D1AD5A
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 13:33:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB77588B99;
-	Wed, 16 Oct 2024 15:32:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 474F488D5A;
+	Wed, 16 Oct 2024 15:33:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tFEeANDu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DHNZKnxL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D0AC88D54; Wed, 16 Oct 2024 15:32:47 +0200 (CEST)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
+ id 4E89888BC2; Wed, 16 Oct 2024 07:56:26 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCFF188B99
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 15:32:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B99E688B0C
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 07:56:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-7e6ed072cdaso4274965a12.0
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 06:32:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-37d3e8d923fso4217188f8f.0
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 22:56:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729085563; x=1729690363; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=K5bLIRpAet22h9MteD53rhXgi9tJfA+zBj08HQWxYFk=;
- b=tFEeANDufwEsGlo+QNt46K60RP3OYJwbu9cpbM4ngPWuTtHWxXbjs88boTljLEpfYT
- nO2H2bzzcnM+2jKucxACmf8atESe/S4yCNQzD2zBfTjk5IxChPMhGeZy0Mfgv/dKugrS
- Dk5cUpUkoUtYjb5VGFvzaMGXSN5EFHH1ps2SL/9pPhTAXAV/2aXIFo3B18xsKN6qA4HJ
- QNGMJ1FAd+Ehg27ucIkcPfqfPziQA/ed1HufMHDVIZeuT99ePNsfiOdIv7b4JjOq4PFg
- PXkWBlSJc6NtYgCk2RvmIfkpzDUSgXVbuNUGRDAjaIjUeqXDHC66GJF3Bx2NTWRQqrqj
- HFqA==
+ d=linaro.org; s=google; t=1729058183; x=1729662983; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ivUSTxxF0ik5EngtLOdWwIkugmrRwQkkWFCH/cvN/tE=;
+ b=DHNZKnxLGo7XDQLTK1n45O//UdQXozQp3NOismLwukORoMyvHyeWAlAhHTEKntQcnB
+ FQDDdXpTPE3RAvyX/GFcUvT9+b/Zxkqoq2JFHN6q5h/8IQ06X3fYs4IlU4gackk57MAm
+ MRirN50BTqfyORv27ustzwlTv2zu6+Wql642w/V/zB+LU6tKeh3NJEnFjRi9wlHyHrZ5
+ d4wdkykagZggXN4Ginn0sgd9oUpohTdkrC+hRaz80TecnA9YqecOlJK/KWldYZInOjvn
+ NM1dbbWsSGAePmpZKencwoHz/HqzmrVCGMS/SY3YzOwDjz5If0n0TzBjR1Zj26zCji9B
+ +T9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729085563; x=1729690363;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=K5bLIRpAet22h9MteD53rhXgi9tJfA+zBj08HQWxYFk=;
- b=nUTSSaNQhLULO/mRfW6cEdUyZmY6FS2YUo5hygNt12YyNKKQlBf3YbsWjHZi1VZ03D
- OKEuwppYSVKZ5smPPog3rk2VlkJPej89tyIanXRr3dfdR7OOQQGie31/C1oU6lAEZQ0z
- F0nrMy2Ow2iwYK9eU8T9CWSgFIpckTg2YiFds5E7wVYgz27uENvViuJsYO2005QGOVqG
- FA4nGFaxSTmnP6iN9bGbtLBRM3RFeLN4+6QRJJ2Q79NadEfaBoi4/N/4u8HyZEQHx87H
- P059sku3amkTVwWhDQ6kdDIaLP+SKb24/A9EjakNjv6KENJ5l86rmYQrZsZDVthZnWNU
- cSPw==
-X-Gm-Message-State: AOJu0YyB6E3bWuHwsyEclIZAlSKxd7HyqZF/CsPtl9TB1KjNqDTH2CcV
- HNwnI5F0XDBUgv4zk0EtzXfmkBARnT4DpUri8WAcscJ4mF9Tkmcgi9GCk62mE0d1toEAR28c/OG
- ww/cJFrG2hLBtnDZIjiZYXqrADBrr6Af15f/ZkA==
-X-Google-Smtp-Source: AGHT+IETS0aTQrTYpLoLsmNkj0Cj7I/aGXd0Ktva/XG13tGPMwMMPXM2r5YC9JQmSCGPqNWC5YBc/B4GJ6PgTebX0Ys=
-X-Received: by 2002:a17:90b:3751:b0:2e2:de27:db08 with SMTP id
- 98e67ed59e1d1-2e3152e9b91mr18968638a91.23.1729085563238; Wed, 16 Oct 2024
- 06:32:43 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729058183; x=1729662983;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ivUSTxxF0ik5EngtLOdWwIkugmrRwQkkWFCH/cvN/tE=;
+ b=wTWZDwm+09+GtPmSUyKrIrYBIFKUCwFQF2CC5OH78R61jQeAzkG51scWrXIludmDFS
+ Uhqhd/fN5oDnD4+S8LJHM+9vw7wLqrPaGjDxLo0+8ms0TmGwsbeRYRPntc10+jXRcZfN
+ 9O/hyf0dUCjdGphPU2k7xm4x1N0GFmeYWVNUc8K49ssRfuyFHRKczl3YHDy81m9a9LDx
+ dz8dWUWcTe6HmQax85s4ejy33Zc/kTngr1wJLKVKgrFPUa4mpPjLtBMfpB8Ij4e5nJwZ
+ iUsqi8sVoyrGYsBNKXssuf+uSutiPixwOICcuPGkSrV7Jd4TZQhlHB8R7hZ/W5XEzaOi
+ RNwQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU+g5S7p5ps2aKLYO9vITjmVUkS/YUSxmtPuWqBaEdMIIGKB4IZrOagDBcSq3W/M/Ro67EYJPo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxje1lljRFVz8XsliHPLiIKQsBguQMpBmv11bUJhIywDCGU0408
+ LsIU9KSfCjgmfsUbCaEEfg5Ah/hKz826ARriaJfXbGwZaw47enLU9FwIlGBmNyU=
+X-Google-Smtp-Source: AGHT+IGV2jwUkmiPqk8HwpI85y2niLQMBE7JlzlVHSP+uqwagDRu8WOcHNVoe4FOx4CVdBYQbTTwsA==
+X-Received: by 2002:a5d:4244:0:b0:37c:cec2:23c6 with SMTP id
+ ffacd0b85a97d-37d86d6fdfdmr1713345f8f.57.1729058183102; 
+ Tue, 15 Oct 2024 22:56:23 -0700 (PDT)
+Received: from [192.168.0.157] ([82.76.204.4])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37d7fa7a124sm3370406f8f.17.2024.10.15.22.56.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 15 Oct 2024 22:56:22 -0700 (PDT)
+Message-ID: <9c105998-dd44-4bc0-bb28-f0bc1e739b64@linaro.org>
+Date: Wed, 16 Oct 2024 06:56:20 +0100
 MIME-Version: 1.0
-References: <cover.1729070678.git.jerome.forissier@linaro.org>
- <c3e956e94127fb826afbfd8218257626a156e371.1729070678.git.jerome.forissier@linaro.org>
-In-Reply-To: <c3e956e94127fb826afbfd8218257626a156e371.1729070678.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 16 Oct 2024 16:32:07 +0300
-Message-ID: <CAC_iWjJ=zjecYhdXJc4pCAeC5zxct4Mq0333nn9-XfT6G3yv6w@mail.gmail.com>
-Subject: Re: [PATCH v13 07/21] net: eth-uclass: add function eth_start_udev()
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
- Tim Harvey <tharvey@gateworks.com>, Anton Antonov <Anton.Antonov@arm.com>, 
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, Fabio Estevam <festevam@denx.de>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Amit Kumar Mahapatra <amit.kumar-mahapatra@amd.com>
+Cc: Vignesh R <vigneshr@ti.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Pratyush Yadav <p.yadav@ti.com>, Ashok Reddy Soma
+ <ashok.reddy.soma@amd.com>, Joakim Tjernlund
+ <joakim.tjernlund@infinera.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20241016034725.GD6412@bill-the-cat>
+Content-Language: en-US
+From: Tudor Ambarus <tudor.ambarus@linaro.org>
+In-Reply-To: <20241016034725.GD6412@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Wed, 16 Oct 2024 15:33:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,88 +103,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 16 Oct 2024 at 13:04, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Add a function to start a given network device, and update eth_init()
-> to use it.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  include/net-common.h |  1 +
->  net/eth-uclass.c     | 38 +++++++++++++++++++++++++-------------
->  2 files changed, 26 insertions(+), 13 deletions(-)
->
-> diff --git a/include/net-common.h b/include/net-common.h
-> index 543f528a4a4..6bc76658d9d 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -192,6 +192,7 @@ int eth_env_set_enetaddr_by_index(const char *base_name, int index,
->  int usb_ether_init(void);
->
->  int eth_init(void);                    /* Initialize the device */
-> +int eth_start_udev(struct udevice *dev); /* ->start() if not already running */
->  int eth_send(void *packet, int length);           /* Send a packet */
->  #if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
->  int eth_receive(void *packet, int length); /* Receive a packet*/
-> diff --git a/net/eth-uclass.c b/net/eth-uclass.c
-> index e34d7af0229..5555f82f23e 100644
-> --- a/net/eth-uclass.c
-> +++ b/net/eth-uclass.c
-> @@ -284,6 +284,27 @@ static int on_ethaddr(const char *name, const char *value, enum env_op op,
->  }
->  U_BOOT_ENV_CALLBACK(ethaddr, on_ethaddr);
->
-> +int eth_start_udev(struct udevice *dev)
-> +{
-> +       struct eth_device_priv *priv = dev_get_uclass_priv(dev);
-> +       int ret;
-> +
-> +       if (priv->running)
-> +               return 0;
-> +
-> +       if (!device_active(dev))
-> +               return -EINVAL;
-> +
-> +       ret = eth_get_ops(dev)->start(dev);
-> +       if (ret < 0)
-> +               return ret;
-> +
-> +       priv->state = ETH_STATE_ACTIVE;
-> +       priv->running = true;
-> +
-> +       return 0;
-> +}
-> +
->  int eth_init(void)
->  {
->         struct udevice *current = NULL;
-> @@ -328,20 +349,11 @@ int eth_init(void)
->                 if (current) {
->                         debug("Trying %s\n", current->name);
->
-> -                       if (device_active(current)) {
-> -                               ret = eth_get_ops(current)->start(current);
-> -                               if (ret >= 0) {
-> -                                       struct eth_device_priv *priv =
-> -                                               dev_get_uclass_priv(current);
-> -
-> -                                       priv->state = ETH_STATE_ACTIVE;
-> -                                       priv->running = true;
-> -                                       ret = 0;
-> -                                       goto end;
-> -                               }
-> -                       } else {
-> +                       ret = eth_start_udev(current);
-> +                       if (ret < 0)
->                                 ret = eth_errno;
-> -                       }
-> +                       else
-> +                               break;
->
->                         debug("FAIL\n");
->                 } else {
-> --
-> 2.40.1
->
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
++ Amit
+
+ugh, the parallel/stacked SPI NOR thingy was applied in u-boot. We
+rejected it in linux, this support shall be above SPI NOR. How about
+reverting the support until we have an agreement in linux?
+
+Or, if we want to still keep it until we come with a better approach, it
+would be good if Amit (now in To:) fixes all the bugs introduced.
