@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBD2ED2A53C
-	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:23:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27D1FD2A53D
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 18:23:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F04188DA0;
-	Wed, 16 Oct 2024 20:23:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id ABED088E11;
+	Wed, 16 Oct 2024 20:23:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b4C7s6Cr";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="UTXuCxK1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0AB888D40; Wed, 16 Oct 2024 20:23:13 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 61B7F88E00; Wed, 16 Oct 2024 20:23:44 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA63188DA0
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:23:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7822388DE5
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:23:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-539ee1acb86so160775e87.0
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 11:23:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729102991; x=1729707791; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TKsrXWxVenlhDTT0SMN/QsB4LCSx1PKfkAMVL0EVd90=;
- b=b4C7s6CreiIBv8c1LqAZAc5gby7KpIixTczrbHQe6HgEMMrtQiTnIZCOwaXiz5I9NK
- 0y2XmB6uGjB8pLHEBm+xw+r8GflOoju5Oy9aMDoeWeomrFxb2qhNLYo465GgQRbBe0rW
- MHNjc3iOKKdv6KlyouECAAPvv/rwrhplYbpefh9oZQYCtx+uWgQ5DlrfmL0nOqF5KsEK
- 9MqdkQHfG0jlsy/emW4hVKjn2OIl242fii3TQ+LfO9JoapxK6Xj5eJ7uGjNzfe5irBnB
- u4nJVeRiMZoV1dU5dhffH6keEB0JzKDg2TfJvZtlSUlsr7rAiNPbkEn1oCeOZ0pc8914
- 59QA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729102991; x=1729707791;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TKsrXWxVenlhDTT0SMN/QsB4LCSx1PKfkAMVL0EVd90=;
- b=LyX08UOFrfrcLdtpuBelGZbNpi+d8UleYRd5bLpXcWA61IWknz+ve4muJy9uajt5w3
- dyu8carNxGLFFXRTjh/IUoZqw7di/D891+L/w3NA3pTabFg6nI+CYSv1JvOAkNkyyBv+
- De1rswn8QWdB7B8IsRRuRg7jk/fHLn9IvNWXjrGi2WqNOn3/Bu+Cufa5K77K0s/6nJ9h
- 5iEk1B/pvbNr58HDW5O1VBc2ly3E7yKnDGILQ7ZqOiB/2f8gUhdUUvrP8nCNoR/D75Zj
- vrvwsCrhcekEOVIb+9zSrKFa33b2HoZIq1L+NW9MSmwSqSa1S+7EKQSQVizx/lB0K8f9
- mX3Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWCGlMrrNHG/XZH5B45OwYTIC53u+bPXAMPk78QlKjpoX6GpgP02ILWAzVf9uh+nuTlySeE3iY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyPm9cT+qop/NERYIK9R8lM7RlOlUdXodN2x2VXVVOaIxGo2PEE
- aWPNFLX/EW2EDKtvRI5BIOz6esLIDBsFJ9WpXK2iBIX5GZcYvwXm7DPtixM8T9UigTE0BbuRCAw
- FsCZt+gQ0aA+7lpQ5uYw09qu9DV4=
-X-Google-Smtp-Source: AGHT+IGadMlYfPvrNAawJg9OtkHSGLRYZvl+VWvEEsddLWLhhiZvlWqfoJKaPr5tidl+VLrNvCkSAEP6EpiKVppOXTE=
-X-Received: by 2002:ac2:4e08:0:b0:539:e3cc:721a with SMTP id
- 2adb3069b0e04-539e57316d9mr9298657e87.47.1729102989296; Wed, 16 Oct 2024
- 11:23:09 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0019cf4dfa=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49GFP7YX018493;
+ Wed, 16 Oct 2024 20:23:32 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ nAUemeP2Pc7ve7WPgwEJO8w0NyQWSt/1FXp3wyIDVqs=; b=UTXuCxK13+CGx3e3
+ zK5QOq3dbtWKjw+DRncMRkkkRq3feSXWE/l75/8tLOGgGkPvkxS8RTBxjF6nG3jQ
+ 9rSuxn9NMRzbxMceQbP9WFptueIE0x3aLq5+mJb1CNllIFwjo0ewWK9qdmdSxYpr
+ NSC4F0xo/0gQVkvwvXQf05mnF8yw0DtYIGavCP9YYUYvUwKmaUWFhCPp0cBCcaFv
+ G7+NcsY5KV+kp9uHA1yvH88RSXn44o6MNa90lS3/QLTG5oowEsmDGQbXJzHe2Jkb
+ 97pemv+b/agz3bkZyBLeSbGLYNj1mvY+Bc9Ev7X3BMbjex5Zs978nF7r8M5upwNt
+ l9SFGQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 42a8mvb82b-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 16 Oct 2024 20:23:32 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id F1AAD400C4;
+ Wed, 16 Oct 2024 20:22:24 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D6A7F26D09B;
+ Wed, 16 Oct 2024 20:21:55 +0200 (CEST)
+Received: from [10.48.86.243] (10.48.86.243) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 16 Oct
+ 2024 20:21:55 +0200
+Message-ID: <e772cfa7-0259-4bf2-a756-88d1fa5b6858@foss.st.com>
+Date: Wed, 16 Oct 2024 20:21:52 +0200
 MIME-Version: 1.0
-References: <20241011105827.7729-1-peng.fan@oss.nxp.com>
- <20241011165616.GW14210@bill-the-cat>
-In-Reply-To: <20241011165616.GW14210@bill-the-cat>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 16 Oct 2024 15:22:57 -0300
-Message-ID: <CAOMZO5AAV+aHwn0Yc8yrojpvnHzrSsXGXbhi4WDHq0JBkgtHvw@mail.gmail.com>
-Subject: Re: [PATCH] cpu: imx8_cpu: Avoid revision to corrupt device tree
-To: Tom Rini <trini@konsulko.com>
-Cc: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Simon Glass <sjg@chromium.org>,
- sbabic@denx.de, 
- u-boot@lists.denx.de, uboot-imx@nxp.com, gilles.talis@nxp.com, 
- Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] ARM: stm32: Add script to install U-Boot from SD/eMMC
+ to SPI NOR on DH STM32MP15xx DHSOM
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20241012025451.224551-1-marex@denx.de>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20241012025451.224551-1-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.86.243]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,14 +91,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+Hi,
 
-On Fri, Oct 11, 2024 at 1:56=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
+On 10/12/24 04:54, Marek Vasut wrote:
+> Make the dh_update_sd_to_sf script generic, rename it to dh_update_block_to_sf
+> and implement two specific dh_update_sd_to_sf and dh_update_emmc_to_sf scripts
+> which load U-Boot from either SD or eMMC and install it into SPI NOR.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+> V2: Rename dh_update_sdmmc_to_sf to dh_update_block_to_sf
+> ---
+>   include/configs/stm32mp15_dh_dhsom.h | 16 +++++++++++++---
+>   1 file changed, 13 insertions(+), 3 deletions(-)
+>
 
-> Why isn't this padding and alignment with the BSS being taken care of in
-> either the linker script or the binman dts?
 
-I have the same concern as Tom. This fix looks fragile.
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Can you propose another solution?
+Thanks
+Patrick
+
+
