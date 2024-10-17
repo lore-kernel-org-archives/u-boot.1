@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C70DED3C533
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:18:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FD12D3C538
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:18:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 085AA891BE;
+	by phobos.denx.de (Postfix) with ESMTP id 68B3A891C2;
 	Fri, 18 Oct 2024 01:12:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AUQbgC7r";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e9DlBC6c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E96E89170; Fri, 18 Oct 2024 01:12:24 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 0AE6F8915F; Fri, 18 Oct 2024 01:12:26 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18E4A89123
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:12:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 424BD8912B
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:12:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6cc1b20ce54so12426026d6.0
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:12:22 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6cc2ea27a50so20386786d6.0
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:12:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729206741; x=1729811541; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729206742; x=1729811542; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=J2SivWwkmoUuRRg4u4xSlOP4kOeUkfeBMEL5PidXhNo=;
- b=AUQbgC7rycASllZWr1/cXyHdCsdNiklIppE+2anElca4qqRz3aWRdkcEHS2OKbQVM6
- TXihSFZ5ywrKMl2vRhN91nPkO1vE9ZQshpNCkPQVArsS21onW4hfDeMaBRSgQ4KeSWa5
- sbvc2oqetjnTHi3ekUTnCYlv+UA4YEU/VFi+s=
+ bh=uUHqQfVU4RrDUYRW64e+JFspV3BUcd/tfMKrRF22fN0=;
+ b=e9DlBC6ci/0HDFR+Sq9fdcmxyS98w2bPW8qJ9fUD1YzwGnLbJsJ0fhJ8XsXc1QI/lz
+ 3vtuGniIMIgLmCKMt3XzCqhqxGQqiLBLJUCqlqmmup91Syx2RDuuieMRFtf1W4mgoBy5
+ nbuvt5qQQp0l30Mv0uIO3oys+HqSkHZbxFXuQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729206741; x=1729811541;
+ d=1e100.net; s=20230601; t=1729206742; x=1729811542;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=J2SivWwkmoUuRRg4u4xSlOP4kOeUkfeBMEL5PidXhNo=;
- b=NVv5PH7LEKGbk/65MlnYL4Iaa/wCKJkJi4/HlQfuWrRhE6L+HtmGEUqBL7c8vpGI5q
- N2tAoBHW9xzr47jNF/H9KPFH1b9xiQPJ3mIq//TfRSh0hk2/DtA9e3CWhhCWi8pCoJLT
- ECtL79+OfSp151dmSDWV06CyH9yqi1DFw2lJTLEzIt7vwJLhg9gIj3WnLx9NqyHbf0ob
- o9LfUzMAi8yIEBZ24RdQEnt4TN6QZxC9ctdFDEpURPfNBY1qb7nIxi3K4QeytuKYxcn2
- 48kHmFVh/VF9FZKt/kneUm+wt7FI7l8ym7yqobSx9v2dw5t/va1kgv92Imo8UjYNS2RO
- MeNw==
+ bh=uUHqQfVU4RrDUYRW64e+JFspV3BUcd/tfMKrRF22fN0=;
+ b=R/8PekxIWxdHUVFBdLHsKwuDAbJMyg2mOwqbiTlQaLfgzX9xOu3blax1lwJeSTOuQU
+ 8Fh39YaSW0Epr4UBY9ouwcQriHykcfyQbw3v8zgwwOQ9QTSJyUwAGmgL9f4teMfmQ5ol
+ QpGLrIV8D0DYSEri4QwUDxGzfSO0DN/zabt4mL8a4nDjIeE/BsnLmgrnrvv3g5NV3z7W
+ k+yNeMHVSSe6J9xMigOe6dZ4Hs4+NnJTaONp57y2fC8DyHi7hZUh9R3OuBObN864oysQ
+ 9ItWNUNyDor26uGHsv+0K0eKDFFivlGzmla7ExQYVpOFWxIm/ciY2LThpMEIe86EibIP
+ 9v1g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVogojIZts/MKi4IMjLnvec6cPeK7FHVSjAX4WXuW+DCRB804BHAbHRec6Wr2Pu0SRTSuQ0G0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzx7V53M4LgZXLXesv4TBKCS6lA+JGy9ZbviWnROz4zTS+/cXN3
- jV0dqFwRonp8mbV3/q7dF3QfJ+LKJYAyG8Fnd8Akg6wkjZa8DxE87aj1926/KkEMMdKJCtbJ+9j
- IjKog49OAidJ+C+VZ4ODPX7ZK+BVPXAxNkgFI
-X-Google-Smtp-Source: AGHT+IEa+zONQocv7RTIVlZlATLIlh8bFA/yJiNEsL8pR3Imggo8lYHqsVHDoAn7F4qa204teQVa2khgrrRtdjj53BU=
-X-Received: by 2002:a05:6214:5543:b0:6cb:ecb1:e6c1 with SMTP id
- 6a1803df08f44-6cde1508007mr8096976d6.17.1729206740965; Thu, 17 Oct 2024
- 16:12:20 -0700 (PDT)
+ AJvYcCVyolcmmzuC52hyEzfFprWPzbiHIKPGeKlYQEJSgfPXcYuDXjbxVs5COMhf0VuOQvC6yWOyRC4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw8ZDEE8UBLvr1NLFKc5oF9aDgK6glEOMKjyKmtFpw56mbR6Oby
+ co7tf8HRqjRGngY1ZUkFemRFBPJcW3ucMt2rtmGk7mcVXXARsGK2G0+Q2SIL3FFOHrceSmBfEN9
+ Rrtcro68ox7m9H5DQ3+ng04noELIt6kGHUUPI
+X-Google-Smtp-Source: AGHT+IE9X5En0i5CPXnu0BsNYBauTOq0AhQ63DW6jNMtUIWLh2nHb75VmxB31kCVy4TabDV60isA+f59aQkI+fs9ocw=
+X-Received: by 2002:a05:6214:5781:b0:6cc:44b:105a with SMTP id
+ 6a1803df08f44-6cde1b5d08dmr6111626d6.20.1729206742206; Thu, 17 Oct 2024
+ 16:12:22 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 16:12:20 -0700
+ HTTPREST; Thu, 17 Oct 2024 16:12:21 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240122143512.196907-1-trini@konsulko.com>
-References: <20240122143512.196907-1-trini@konsulko.com>
-Date: Thu, 17 Oct 2024 16:12:20 -0700
-X-Google-Sender-Auth: nzyG-PZ7CbCzpU9NF7lQdEN1oK0
-Message-ID: <CAFLszThrqdwc24PaTnSdZCFTuorw4cKMwNLnn97cxz0O7um7Kg@mail.gmail.com>
-Subject: Re: [PATCH] x86: Make default_print_cpuinfo be a weak alias for
- print_cpuinfo
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
+In-Reply-To: <20240108001455.35638-1-sjg@chromium.org>
+References: <20240108001455.35638-1-sjg@chromium.org>
+Date: Thu, 17 Oct 2024 16:12:21 -0700
+X-Google-Sender-Auth: fg4VAo6YwjNylHQtVtaE3O0ijNg
+Message-ID: <CAFLszTjqib7JkoRAONrMk_DXjW4iQmgi9fac7XPyGBKBOE3=1g@mail.gmail.com>
+Subject: Re: [PATCH 1/2] video: Allow querying the font size
+To: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,24 +87,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While a few SoCs have a unique print_cpuinfo function, a number of them
-just use default_print_cpuinfo. Make default_print_cpuinfo have a weak
-alias to provie print_cpuinfo.
+All the font size to be queried using the 'font size' command.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
-This will make re-using arch/x86/cpu/efi/ as a generic set of support
-code for U-Boot as EFI payload/app a little bit easier.
 
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>
----
- arch/x86/cpu/coreboot/coreboot.c             | 5 -----
- arch/x86/cpu/cpu.c                           | 2 ++
- arch/x86/cpu/efi/app.c                       | 5 -----
- arch/x86/cpu/efi/payload.c                   | 5 -----
- arch/x86/cpu/slimbootloader/slimbootloader.c | 5 -----
- arch/x86/cpu/tangier/tangier.c               | 5 -----
- 6 files changed, 2 insertions(+), 25 deletions(-)
+ cmd/font.c             | 17 +++++++++--------
+ doc/usage/cmd/font.rst |  6 ++++--
+ test/cmd/font.c        |  9 +++++++++
+ 3 files changed, 22 insertions(+), 10 deletions(-)
 
 Applied to u-boot-dm, thanks!
