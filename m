@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A9FD3C52C
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 20:01:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DBABD3C530
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 20:01:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2E31890CE;
-	Thu, 17 Oct 2024 22:01:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C2C6890CD;
+	Thu, 17 Oct 2024 22:01:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="vChtcqEL";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="x6+MBQPo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EC2F890BE; Thu, 17 Oct 2024 22:01:10 +0200 (CEST)
+ id 4620B890BF; Thu, 17 Oct 2024 22:01:14 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9082789099
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 22:01:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E2BD89099
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 22:01:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,21 +28,21 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1729195258; bh=NyZnlvVt1wPgtI+nPHMBVNC9S2WILG58vMjSRZpr+Hg=;
- b=vChtcqELH7G4aI4pIuGytrr0Xx6cFG78RAtaSTv1NXC65Mm8Ygfy4qESDz0uSiRr2lUnCILCB
- GPPxQbSN2Ky4S6vJXsZZsILZOKlyonQbd3RDEb1sZvnG8svG9W0J/k2ZCRYjDX7qqn6ETZO2t8c
- UPWKQsuYIWjO1qaLU10NRm52eZs5Y5ZpnT+w8DhrJCzE+M/3H+N505pp2gsaFMzVskaM3gkFvKS
- KfyC+NUQk2pqg8nOe1mKpbts5No/2w0kXlXCyeEBYr/poMh1TF2p9vBvEj4ir3/qF6hxT82+FS/
- PF50bNfXrC2gY1r5J5MOusKpg2F3OoMogJV5Bq55sqRA==
+ t=1729195263; bh=OJ57kb7IjyoFoolbnE8cxv+pBKzphE2zcnWsdqGTohU=;
+ b=x6+MBQPoyZPgt1JWv2qJliv8B470u302TKRbazi57ZPrVeRG0j/KwDzE74pOP6kLQcFJZWJ4k
+ 18TLiXvNiekAENLFiSZ4CL8KPzWyCnxgb4GormI0kGGXrc2sZLURxSjRvuOQuHUR/20TWu662jw
+ 9Szhv8JB91cLspOuloeAuxUyi+bxUNf8EUiO8JN7kqlo8ueC8RNe44ktKpzAbsf4C3uEabF27Dy
+ PXa/0JsGRQR26bLY8NUn+wHN09wqfyS75A0RU69yMxPIg6TeOsQU9rm5TrhSpQuW21eKXV8rf20
+ uIetUu2ZiP3fcl91J11Y6L+p82k5EjYAJvcB8n7hJ5fw==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>,
  Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, u-boot@lists.denx.de,
  Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH 3/8] arm64: dts: rockchip: add NanoPC-T6 LTS
-Date: Thu, 17 Oct 2024 20:00:22 +0000
-Message-ID: <20241017200039.1235524-4-jonas@kwiboo.se>
+Subject: [PATCH 4/8] arm64: dts: rockchip: add SPI flash on NanoPC-T6
+Date: Thu, 17 Oct 2024 20:00:23 +0000
+Message-ID: <20241017200039.1235524-5-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241017200039.1235524-1-jonas@kwiboo.se>
 References: <20241017200039.1235524-1-jonas@kwiboo.se>
@@ -54,7 +54,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  207.246.76.47
-X-ForwardEmail-ID: 67116cf86385e073f5ab13c9
+X-ForwardEmail-ID: 67116cfb6385e073f5ab13e0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,96 +73,48 @@ X-Virus-Status: Clean
 
 From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 
-In the LTS (2310) version the miniPCIe slot got removed and USB 2.0
-setup has changed. There are two external accessible ports and two ports
-on the internal header.
-
-There is an on-board USB hub which provides:
-- one external connector (bottom one)
-- two internal ports on pin header
-- one port for m.2 E connector
-
-The top USB 2.0 connector comes directly from the SoC.
+FriendlyELEC NanoPC-T6 has optional SPI flash chip on-board.
+It is populated with 32MB one on LTS version.
 
 Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Link: https://lore.kernel.org/r/20240829-friendlyelec-nanopc-t6-lts-v6-4-edff247e8c02@linaro.org
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+Link: https://lore.kernel.org/r/20240829-friendlyelec-nanopc-t6-lts-v6-5-edff247e8c02@linaro.org
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-[ upstream commit: db1dcbe5f752d423421f77d54d246398b196f670 ]
+[ upstream commit: a22a629c63b1addcf2d81eaf30383c1deca5b7a9 ]
 
-(cherry picked from commit f4a834fbc8cdb40fddd63d083e8d1c6189ba62dc)
+(cherry picked from commit 7588da65fdf09c7de9f903780c212a8ae96f2866)
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- .../arm64/rockchip/rk3588-nanopc-t6-lts.dts   | 60 +++++++++++++++++++
- 1 file changed, 60 insertions(+)
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6-lts.dts
+ .../src/arm64/rockchip/rk3588-nanopc-t6.dtsi      | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6-lts.dts b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6-lts.dts
-new file mode 100644
-index 000000000000..2d92bbb4027d
---- /dev/null
-+++ b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6-lts.dts
-@@ -0,0 +1,60 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2021 Rockchip Electronics Co., Ltd.
-+ * Copyright (c) 2023 Thomas McKahan
-+ * Copyright (c) 2024 Linaro Ltd.
-+ *
-+ */
+diff --git a/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi
+index d199f51a220c..77580c671b36 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi
++++ b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi
+@@ -560,6 +560,21 @@
+ 	status = "okay";
+ };
+ 
++/* optional on non-LTS, populated on LTS version */
++&sfc {
++	pinctrl-names = "default";
++	pinctrl-0 = <&fspim1_pins>;
++	status = "okay";
 +
-+/dts-v1/;
-+
-+#include "rk3588-nanopc-t6.dtsi"
-+
-+/ {
-+	model = "FriendlyElec NanoPC-T6 LTS";
-+	compatible = "friendlyarm,nanopc-t6-lts", "rockchip,rk3588";
-+
-+	/* provide power for on-board USB 2.0 hub */
-+	vcc5v0_usb20_host: vcc5v0-usb20-host-regulator {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpio = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
-+		pinctrl-0 = <&usb20_host_pwren>;
-+		pinctrl-names = "default";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-name = "vcc5v0_usb20_host";
-+		vin-supply = <&vcc5v0_sys>;
++	flash@0 {
++		compatible = "jedec,spi-nor";
++		reg = <0>;
++		spi-max-frequency = <104000000>;
++		spi-rx-bus-width = <4>;
++		spi-tx-bus-width = <1>;
 +	};
 +};
 +
-+&pinctrl {
-+	usb {
-+		usb20_host_pwren: usb20-host-pwren {
-+			rockchip,pins = <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+};
-+
-+&u2phy1 {
-+	status = "okay";
-+};
-+
-+&u2phy1_otg {
-+	status = "okay";
-+};
-+
-+&u2phy2_host {
-+	phy-supply = <&vcc5v0_usb20_host>;
-+};
-+
-+&usbdp_phy1 {
-+	status = "okay";
-+};
-+
-+&usb_host1_xhci {
-+	dr_mode = "host";
-+	status = "okay";
-+};
+ &spi2 {
+ 	status = "okay";
+ 	assigned-clocks = <&cru CLK_SPI2>;
 -- 
 2.46.2
 
