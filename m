@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A81D7D3C538
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F2BD3C533
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:13:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E4358913C;
+	by phobos.denx.de (Postfix) with ESMTP id 8AF71890FD;
 	Fri, 18 Oct 2024 01:11:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KkaKNCaX";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y1iGrzM5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82DC189059; Fri, 18 Oct 2024 01:11:50 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 5E3CA89103; Fri, 18 Oct 2024 01:11:52 +0200 (CEST)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FAB2890C1
+ by phobos.denx.de (Postfix) with ESMTPS id 7BAF188DA0
  for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7180d9d0dcbso695787a34.3
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6cbe9e8bbb1so10334256d6.1
  for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1729206707; x=1729811507; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Q2d4s3I7r0xYKVrwNO8Kxb4rhST3TzPIdXLx+ZyAxbU=;
- b=KkaKNCaX3MZtvnfXFCY4M4nzZsC+ASPforvpH38mFfBmzk5sMetpX08p1hIpQyFWmK
- 1Lpy35jsNqbhXUOzhk2qq1YROrAxERqQQUul6hdWi5AdZI8/25ZcWN0Re72NEXSeryyv
- m82NgPvUt/uOnRlZmjnUdUGB2MB52uoieRMds=
+ bh=JrEGeSig1YoY8bRU2lHMG3se9opeY+SXTvFxzL2ksb8=;
+ b=Y1iGrzM5LHPQ4SrvMVF3HxJl3NEHdKI/xz5xdl0MXdPcGhJpFH1WuMSrTrQ6+V8u41
+ 8eELJV0gu8d0bps+pLAeHWJo4EWqDzQsZ/WCjueAqFg7hE6WYUkqK9sgefs/BO7ljFlo
+ cl4VFqQ6fTb/+iJk4tFcSot2VeN2+js+KhcbA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1729206707; x=1729811507;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Q2d4s3I7r0xYKVrwNO8Kxb4rhST3TzPIdXLx+ZyAxbU=;
- b=eFjj7qQ9+P3zHa9VXPbHBdioQQeHvjBUNcC8HogdT0HXB82ADFub/fckZm/YTv72xb
- KpQ/SVUtPWlTTcdK8qQcYrUVZMdO74qSfAiDI3pdqZtx/8faljqM7tqdADZaedcYLy3i
- 3b6fpHYQ5gThkah4giwd5UGTd0g/EUQKec7cZlC/UKuiwo2y2gIKGRmVhjHQE0OP0IU4
- u7IoZMSMvN/xnzRsyQojJJli56wJTjvKIU9b4E3YaQH9D9f/7N9XY3kI5l3TaBfvCf+0
- vPLE+4PU7ZQlXYPKcxNPBtsX/FYnWDnik0wNiTsO3giKjBDuxZ/UONpJaymfdTbNIt0v
- 9VXA==
+ bh=JrEGeSig1YoY8bRU2lHMG3se9opeY+SXTvFxzL2ksb8=;
+ b=ElsI4ZEZDq1sW7EFvowgd+R1tcT4H31rwOrRp8u6orXj6Xk1dfJS0MF4iaMYcN84Ze
+ IooSS/Lo9Lzj2FcPSbpD9VuBxI2xBVmZmWxBRYtNfJ8nXPR1XsPWesBNVJ/MbgNh9uIO
+ hOu2azEKBHKfY2phSf7HKI9CnUnlurF1CcdS9VlCMAdnXvFP3+7Hj3QnAr6ZIyJNkNq5
+ yXrRs7My99K7xY2fkFJ0TUujjFfGEz+8uR4YaF9Fp70GlrGm6jozffrVAcWNVIPcyDtA
+ IdwvYw5PLWp7fiyogPyOF+mxIQmt6vfWbJDKcHAm+Rpixb7pNpxtV9xsCK3Gv4PGEKU9
+ 0UXQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV3k+4wcax7gmSishWPxWnQ/eKFJ4qympx5ObtkUOlu7OAFIAjg6VsB5EIPJdJtfb9OAkceqvw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1tvZJXA7sDVuzj2VFU/VwgFbVb9b5xZnNSdYVGSYLxVo+FNa0
- Jjk7Up0T6/f7azZuHqDg+3pcwbTa+bZQvoofu89yescf8zkDmyjAv+CwIUFyixCH1jVbStneN1X
- orR1VuVo61WKF511LWtWcbN7QD/ZnatU0mmjD
-X-Google-Smtp-Source: AGHT+IHrt7R3OgqccGEE3YQE75O5jgdr0ZAdVVuFAMJ6e+j7p1uhpVU5bNz6maUt34bW6QJgP+PKJWA/qxBS+3pZBMo=
-X-Received: by 2002:a05:6830:f96:b0:715:4e38:a1ab with SMTP id
- 46e09a7af769-7181a89affemr281057a34.22.1729206707147; Thu, 17 Oct 2024
+ AJvYcCWR9hkTi20rvTluzb0ZKWQ2Rnd0JfnTQHbQXNgpyZebOmszKLHgRP+p9jF0PrFK3ZauzlNcuac=@lists.denx.de
+X-Gm-Message-State: AOJu0YxYfj1OnGCPFD939uSzEUyrd50RBPHmypSQMhTglcQdvC9YRBaT
+ gMpqlLNfM1py61J9dHwliMnbl8CEyWOSDCK886Dprbedmh5u2n6zQzUbackxR+mALqwimRBsk+S
+ B9FAzJGhOyvvLS8L6SVQ6X2DfkTdkDL+0Xteu
+X-Google-Smtp-Source: AGHT+IGmZIfs0l14mBbb6Lv+zi4uddpS4RbXanD6BCq6bwTpJgam4qm722mH4U5VeYP+NBluUlegoksM1dcEQSifuww=
+X-Received: by 2002:a05:6214:3c9e:b0:6cc:2416:c247 with SMTP id
+ 6a1803df08f44-6cde167f083mr8889976d6.49.1729206707458; Thu, 17 Oct 2024
  16:11:47 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 16:11:46 -0700
+ HTTPREST; Thu, 17 Oct 2024 16:11:47 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241014223212.2212442-3-sjg@chromium.org>
-References: <20241014223212.2212442-3-sjg@chromium.org>
+In-Reply-To: <20241014223212.2212442-2-sjg@chromium.org>
+References: <20241014223212.2212442-2-sjg@chromium.org>
  <20241014223212.2212442-1-sjg@chromium.org>
-Date: Thu, 17 Oct 2024 16:11:46 -0700
-X-Google-Sender-Auth: p_kqkVoPDsLvR9gMaBj1-UOUDvs
-Message-ID: <CAFLszTh5+3BKk-y26A_o7JbYE-qgwP83DYkPyiQY9U=35anBvw@mail.gmail.com>
-Subject: Re: [PATCH v3 02/20] video: Avoid starting a new line to close to the
- bottom
+Date: Thu, 17 Oct 2024 16:11:47 -0700
+X-Google-Sender-Auth: z_hKaab_Cq6p4JV5H9dgTHCVqco
+Message-ID: <CAFLszThwDCinVqA25g5XufdMVZqwcZkxMom1X1Dcmj6VG3PtVQ@mail.gmail.com>
+Subject: Re: [PATCH v3 01/20] video: Add a dark-grey console colour
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  Bin Meng <bmeng.cn@gmail.com>, 
- Janne Grunau <j@jannau.net>, Peter Robinson <pbrobinson@gmail.com>, 
+ Devarsh Thakkar <devarsht@ti.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -91,25 +92,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When starting a new text line, an assumption is made that the current
-vertical position is a multiple of the character height. When this is
-not true, characters can be written after the end of the framebuffer.
-
-This can causes crashes and strange errors from QEMU.
-
-Adjust the scrolling check when processing a newline character, to
-avoid any problems.
-
-Add some comments to make things a little clearer.
+This is useful for highlighting something with a black background, as
+is needed with cedit when using a white-on-black console. Add this as
+a new colour.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- drivers/video/vidconsole-uclass.c | 4 +++-
- include/video.h                   | 3 ++-
- include/video_console.h           | 8 ++++++++
- 3 files changed, 13 insertions(+), 2 deletions(-)
+ boot/scene.c                 | 2 +-
+ drivers/video/video-uclass.c | 3 +++
+ include/video.h              | 1 +
+ 3 files changed, 5 insertions(+), 1 deletion(-)
 
 Applied to u-boot-dm, thanks!
