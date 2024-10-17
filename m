@@ -4,164 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EFF6D37485
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 12:52:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 018C2D37487
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 13:02:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8667C88FFD;
-	Thu, 17 Oct 2024 14:52:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 6401688E32;
+	Thu, 17 Oct 2024 15:02:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="33oJVKaT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KTPpZkaM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32EBE88EE3; Thu, 17 Oct 2024 10:51:49 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20617.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::617])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BEC0188ECE; Thu, 17 Oct 2024 15:02:44 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7A4F88B0B
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 10:51:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
+ by phobos.denx.de (Postfix) with ESMTPS id 564D588E32
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 15:02:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Manikandan.M@microchip.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Uu3+yCoQ4Pzx93W/4F5iTt/mhuNaaAswcX48R0GzbNJTHZ6IOcwKKRKbLmZ8GKPrAiRVu73ENuIU47+/u3pJkHolIKk2mKQSmnPpqAGlXuVD/RbS6lGs7HmXLavt5Mz6yvKou+FEHz4p7xErO4B//sIecno36tuJaNTonQH1Yg+fke4nygw5ICtSEDqvbqeq9fkGVb8f9zlzmrxqq0Lyjk7PBYAcRp1XZKRyIvClYtKjo7pBJTunSarJuZnC5QhI6eXwsjZT6L7GsogshUp2dFk3hCZy36IT0UngQ3xBqXMN8iTBeScQuyC65bxVefWzEW85q3IegUpRvu7GikL3wg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ror0e+2TZ0kH1EOp66KRua8zH2/wkdCygMIMze+25yI=;
- b=OLdyCQGz/CB5LLaLmkgEUKLmcRFN0XitlmwMB67+BAeOmWGh7Q4agGlBQSbg9gUAiJmKUongXcHpSCpecveQKEkfsMVBNKaOjSWD6VkPhGY7A/Eryv9JD20T/2kKdMVjm/T32EXVpAk7L/OQJZxutFhP2Aqs8o5LpDl6SWqih7LbWHhQyWTdd3Tuve1BTJ3FiJsTeDsLT8qAMQNWWF2DQnCo89p1CxYdx+EBdT4lci+y58tOQP0BNrDiJEQmX74WRAXmm2M3L0v0rAyKtPi/zAVboQVK9yJ+JzGnkZIh4cIwIYu/Jr6GIPl9TfoEodaons0x07GXbxbHFXSPtVEzWg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microchip.com; dmarc=pass action=none
- header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microchip.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ror0e+2TZ0kH1EOp66KRua8zH2/wkdCygMIMze+25yI=;
- b=33oJVKaTZiiD8wL+zThqkITxUGX+yH+WUrL0LRuzC+AAAB6Z+G7pDZ2JkQyCUAvlFH/GYEMkxPq7hYRUBZPsARDXGz2l1MdUPpvQ9Rx6s9pOWNgIQKNnziGizwpxdB+DeXcEuA2oL31dWGvKDYN4RaJCeVN4reWui2wTE0NdlG4ocTnGd/x6vpV5FGA0rxeqO6S348SghDqY/l7NloI3iEEzKltjhH7feacRh08hzB+uToNnA5djT1NjoDFCBuHhChOMWiEIgkCjPYS7edmiuDWQdUkJuAVyBM3VGGU925K9vsUtf/K51QnE8RS9XAXT+ZkG1LTemaDnApFhTbwKzA==
-Received: from PH8PR11MB6609.namprd11.prod.outlook.com (2603:10b6:510:1cc::16)
- by DS0PR11MB8184.namprd11.prod.outlook.com (2603:10b6:8:160::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.18; Thu, 17 Oct
- 2024 08:51:41 +0000
-Received: from PH8PR11MB6609.namprd11.prod.outlook.com
- ([fe80::ebc1:5d63:a07c:60d]) by PH8PR11MB6609.namprd11.prod.outlook.com
- ([fe80::ebc1:5d63:a07c:60d%5]) with mapi id 15.20.8069.020; Thu, 17 Oct 2024
- 08:51:41 +0000
-From: <Manikandan.M@microchip.com>
-To: <alexey@all4bambi.com>, <u-boot@lists.denx.de>
-CC: <Varshini.Rajendran@microchip.com>, <Hari.PrasathGE@microchip.com>
-Subject: Re: [PATCH 1/1] Fixed sama5d3 dts file so PIO sections are inside
- pinctrl as in kernel dts
-Thread-Topic: [PATCH 1/1] Fixed sama5d3 dts file so PIO sections are inside
- pinctrl as in kernel dts
-Thread-Index: AQHbIHHIjJjcFcSOAUC5zUTn8g7/iA==
-Date: Thu, 17 Oct 2024 08:51:41 +0000
-Message-ID: <60f174bc-dd15-403c-9606-5e18fd183754@microchip.com>
-References: <20241015145307.118784-1-alexey@all4bambi.com>
- <20241015145307.118784-2-alexey@all4bambi.com>
-In-Reply-To: <20241015145307.118784-2-alexey@all4bambi.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-GB
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=microchip.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH8PR11MB6609:EE_|DS0PR11MB8184:EE_
-x-ms-office365-filtering-correlation-id: a5f596bc-af07-43cb-9f06-08dcee88eb63
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH8PR11MB6609.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?RUlSOUJuS2dTVi9yaHpRb2h1UlkwNCtmWjhvS3EydzNCT1ZqVjZWWWxTNm1r?=
- =?utf-8?B?ZDdJeHJXaVgydGFZTkthRzBaQ2NnTWJWK3ZQUy82dTVXWTJlaW1SeTgzK2Rp?=
- =?utf-8?B?TGt6UkRjbURLbElVR1BlMVVrbk82UU4rU3luc0trSVFnYjgyYlF1ZFFiaFBl?=
- =?utf-8?B?b01MWm02aUxOQWcyK05LbXJ6cjdwRCt2b3pFZUFqTThKaEV1Q1Y4UWxVUVkv?=
- =?utf-8?B?b0R6S2V4ZnJmTGoyMjBjTCszRC8yOEQyaUY4UlVibHlIUExta2FQTlRLQnJO?=
- =?utf-8?B?elgzNE80V1J5Z3Vzc0lzdHdxbkxscy9DVHRDaFhVbzdoYmN0am8yWm5aWU1C?=
- =?utf-8?B?Y1UyK2k5d3NaTzZSdll3aktGSk1UZHV6M3l1L0hDTnQ5NDJsQm8vWmlhRU9P?=
- =?utf-8?B?Y3pJTS9FZUM2TENCRFpSbW51VGJpZDg4NzFJM0tkdXM1eC9BS3hndFp1QzNF?=
- =?utf-8?B?Tk1TZzA1VU1yQ0Q1dnZtUnRHQjFucUJoOXhYVVN5N2s1UzAydDU0UklyKzUx?=
- =?utf-8?B?MmY0amdLM3VVOFNPU1hVdFRNSHV2NVJRS2dRS09LL1ltVnBEemQvRm5rcDhN?=
- =?utf-8?B?Y2toMXl4MDgvUmwwVis4NXdPNkFha3hmRHV4NmQ4SEJCV1FMcjRjcm9wQm93?=
- =?utf-8?B?OWc4VmJ4bU0zOVRiQ1RiREQxamZoZE1rWDY4V2g2S0g0b041eFJaNCtEMm9r?=
- =?utf-8?B?cFVzR3JwQnBvcXVBQ2ZuQzIzU0pUNFBacDV5WFFGTlZ4Rmh3S1FyMzZWSG9E?=
- =?utf-8?B?dFlCamp2bGxua3NqdmwxR3dnZjRGVjU0alV6bGE2cGd6dzJTSVQ5TGpVelZZ?=
- =?utf-8?B?cmhsUjdFa01qZ2VVTTk3NkJqRm5vMEFWVTZ5aXRrRDlVNUhhVmtPSHEzNFNu?=
- =?utf-8?B?OTBGVkpoTFh5aGlxb0VRY2pkdmV0QnlVSUpEZDVMNW9FdENLNmJHMTJ4U0E5?=
- =?utf-8?B?UWRZazI2cmVVajl3RmtsZHZQM2JBNnNsam55SFFKQ05WM1BlU3l1TE9LMStM?=
- =?utf-8?B?eFpRaXRhMHVCVlRJVy9oaTV5OEFPWUVOS2t3anRlWjZCWmRjOEVPc0tCbG51?=
- =?utf-8?B?UjF0R2dnK2U2VXU0NjlFckpyQ2FtUGc0cFJpdXh1UmJiYU1iZGpVVmNHNWUr?=
- =?utf-8?B?U0JsYk8rL3A1bFZ3VHRJeEUrbVUxenZoQU5GSU5HRGVVeEIyNSs2TjhNay9I?=
- =?utf-8?B?djVTdW9sWThncjVqMXpNRXNWNFZnVkxKS1RlbGk2RkUwZ2UxYVlnc1ZPeHh5?=
- =?utf-8?B?djY0cUFwckpNa2xqVy9jMUo3ZzdqN0NDWHZUTjh2L1ZBbzBSWVBWamxjdngw?=
- =?utf-8?B?VmYzc05FcE9POVlmb0FlaEFpdkVCTThXM0ZXTkVwSmtTY000eVFVK2RLa2x6?=
- =?utf-8?B?bHBCcmdVWFhDWWpOcUdvcTFjMDg2WmZOMktVaWt3Smo2ZGxnOVdjclVXZFdP?=
- =?utf-8?B?V2tjQmkzQU9tYTFQVUVuams2R2ViZWNGZDI1L1VMVlViK1Z1V1dhdFAvSGlB?=
- =?utf-8?B?R3U2ZlU2RFV3cXE2T3dONncrbUFwZmVyMUFBNWN6d1pDRXRISlFCMGFBVE9C?=
- =?utf-8?B?azFKampneGdLaW1vQzNTUXV0UHlpRFhvWDdwMDd5K29QRVo5bzNXNUZXTWxv?=
- =?utf-8?B?ajFyTjVsdll3TFVBM0tJOGtGa2g1TktNa2JjUG1ocGpaMUU0YzN5eGh1QVlV?=
- =?utf-8?B?S3pOczFFVDZ0bytlVTc0U1VaelVJNnlrZkhTMWpEQ0RhdWdYQkV4amZrbUFX?=
- =?utf-8?B?ZEpPT3BUSFdCZDZUdFNCK2JrOWNIVTRMUE5OOFJXMEVTeG9WeDZRQmpSRDlt?=
- =?utf-8?Q?EKbut3B8n66BBlbJ8vCSRklTXfUU6tfPnhHi8=3D?=
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?L0pEY3hKV1U3SGhSQUQrL25wVEpHMnVxQnNIOFBqTi8wYnJBUFZMS0ZLSDVt?=
- =?utf-8?B?YW5OYndUTGZ1bkVXVVlvRTJVbmwxejRic1RoUElKNXdScnpGcjlSaE9GeEJQ?=
- =?utf-8?B?eGFZUFV1RlJ3cE1acTRMMWpEY1ZGU2xZR1h6am84SFFDMlpLdUJ3RUd6WHFG?=
- =?utf-8?B?ZGdoOE9UUUZ2T0h5TlY5V1p0QjZKdTl4Z3cwWmRRbzlwajNRSndjYjRtL3ZM?=
- =?utf-8?B?dU9pZmI4NjhZT3M3YXJBYXhRRGNxSzlPTDBkcVhYWXUzanMxbjU5bTVFKzll?=
- =?utf-8?B?UDVkdytqa3FOaWZSQ25tT051dHR6QjVBMlkyT0JQTytEMWNiSnVqM3V5eXJP?=
- =?utf-8?B?b1pQbU1GWDdTMFJ5alhNTE10WUlrNUt4ZXYxMVhiTmRUbVdyek5xbGpzSk5q?=
- =?utf-8?B?VVpmVzNyZEE5ZGJ6dXEvMEczakFzdkhvUVU4VytLRTNVVXd0K3Jvai9iWVlm?=
- =?utf-8?B?R21RZnFqWkw0QkFad2paT01RaXBHUmhEV3pCVGxjTysyUGE1QXJDMWlETDkv?=
- =?utf-8?B?bm1KU3N4RGtyL2lWNFE3RkRwbUhxQlR6UEpKTGw2QTlzWmowK0tnVUZPOG9a?=
- =?utf-8?B?dEF0R0VYcGdWai85c3BvaWluZXBDOTFhY2dUVWN1enhZeTZJOXkvTjFPUCtT?=
- =?utf-8?B?STVibXFiN3hIVnpydWxCNXZObkUzbXlIVGltZzcraW5RTCtaMDlNQmR1WXkx?=
- =?utf-8?B?N1JLSVd3a2wzQ1I2R1JZYjBwQThHZDRTYjNkN1hMb3dmNjdWUTBoRTBBemw4?=
- =?utf-8?B?N2l1N1JReTJrZzVHQ2kzK2dhMjJGK3RtdHFTZ1IxaFMzMHdOcmpkYVJISCt3?=
- =?utf-8?B?THh5Slh1aUFzb1NtRlhKcGxET284RDlMVFRSTFVzK1AvOTRQNFpHcTF3dk44?=
- =?utf-8?B?TU11WTAzaDlJaWdiRnpWbWJ5QzlaMFFKSCtPVUdjZHFvdEtDR0JxTjh4Ylpn?=
- =?utf-8?B?bkFDU3B6cllmV3pzRzI2QzEweUd3YitPWGJ2WVQxb1QvQTVUNkd2eXFvSjMz?=
- =?utf-8?B?QTVZWGV3aHh3T3Q3NC9teDNDeElKekVQc05ZYi9YOHNUU1JFMXNpMVdqWGhF?=
- =?utf-8?B?YWhqanlTWXphZS8rNVRaVjFFSzVvVHhWNisrbmZVdS9OdVk1U0ZJQmNKSGxh?=
- =?utf-8?B?QmhDWFBpT3dTOXN0M1BWYlBtaGRXQ0NoTVhMQzdIb0YzUDN5UkRYT2pzaDdP?=
- =?utf-8?B?cXRZUjVjbU1YVDA0OEdScHBoUnF3K1U2K1ZjeXZIdmtrMm1SallaSzlKQjRU?=
- =?utf-8?B?NVQxZ01MekFIWkdZRDk2aTFQSkVFck9jMkowR2tlQkxPcUlJT3c5ZWd2TFZo?=
- =?utf-8?B?RUlxRUpnbEpwWWV6RHNjQlltQy9pWVk0QXI3ejRzLzk4a0pON3dHK2JBY2Zs?=
- =?utf-8?B?SnR2aXI0aXd4M3VBWHE4dmRWRm9DdXJtazlzOVVsdHNpWHdjSzVnSm45d01E?=
- =?utf-8?B?ejV3c2p5VWY4bENXV1QzajhiemdrRk5ZZlF2ZGJ4czI2cG5zVkFPS0daSE1k?=
- =?utf-8?B?dHRTUjFKMktDdmlpVU80dEVuT01EdEpiUHpCY1hDOEQrNUxHZ0hLK0NDc1Fv?=
- =?utf-8?B?bit1VFp0SWhIdkN1c0VVMFBLeTBSZE9kb2UyVHZRdGgrc1hhRXE0enVOUFlq?=
- =?utf-8?B?RXZXWmRLWHk0aGhLY0x0UmNsZ0NxTmJiaDF5YmVZdkN1eXZsUnpaS1I5ZXUr?=
- =?utf-8?B?cjBacVN3dVE3TmNGb1UzbW5IZ3cwbUt0NHM0cUdiQzE0UnYzMEw5emcrMjY5?=
- =?utf-8?B?Uk55Q09zeWJTMHQwWS9acnliVVMvYWJMZ2xLS2tOam1pT3BoR3dSYmYwMTBS?=
- =?utf-8?B?QytxdkFpMVJtbjVzSkk1YUptcmZvZ2Q0clk4aXlZM3ZTYzUyclhSSVp6WkFu?=
- =?utf-8?B?a21YcmZRMzFneWZOVkZHdTV5NzNkSmRkVFFQaTYvRGlsTUhJK0ZKS1Ztekw4?=
- =?utf-8?B?NUtIdWFLVXgrT01XT2dyNW52T21pdWJabkMwbTREa2RqN3pUNjVFNU52Yk1u?=
- =?utf-8?B?U0t2UnMvN0FBMVlwMjlYSWN5R2tMZ09iNnFwSFd4M1dybVdxbVpFOXdnY1pj?=
- =?utf-8?B?d3puTHgycTJ5UXBwRHROU09QK2FxLzYrUHdqVVFGOTRLOXhyVzdMS3BSNnI0?=
- =?utf-8?Q?DGN5SiL/yTcW2l7wXUuZcK9wz?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <8345E55BB3B6B943B87AB2312FC120EC@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4315c1c7392so5219555e9.1
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 06:02:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1729170160; x=1729774960; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aqb3KNoYqC0xMYZc4SYoxWs4YvpfQzDLu7tT+zO/3q8=;
+ b=KTPpZkaM2oVj1/TPKFN8UyE+Y2RsLi74/Kdxz3kJVlsOV5YEEjZYt1LdX0a4YvEkyH
+ Z763chJPg5e0TeNi/6QO6wZSdmUxKfrOD8Xj+DIkq4EepD5by2f0D3s8yOjWOUX/ql8f
+ vsRFhNwWpd3CVHVNUy0oibXG7P6yDVG4E2TnGxKASdAcNOsIPvkj1eAztT4RY3eu0ICm
+ S/Xio7Awmd28gzXnoBsHu1ccIHHBed7SpYSyWY5pRmzTwssP80e6DG+cQajdVP8wQtqi
+ o15xoFPfmSmy1bAskuD0pffosf/XlXfi5tTsSiBR24+0RBu4ifDYgYx8jk2A8y7M2dUM
+ Jubw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729170160; x=1729774960;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aqb3KNoYqC0xMYZc4SYoxWs4YvpfQzDLu7tT+zO/3q8=;
+ b=O2VmQq5KUfXzxVt5kgZ0dpcIqF04dsxVQSj711t54/2Vku1NFfYGAb/Oa2to8O0l2U
+ Zb002AI+7YbHCmIOpcHjOF9N5a/OyTAlhJNFB8d3L3yewEgsOdLuv+TBub/bMYfUrjmD
+ jDk2gly9cx7z2YObiY0d57ZhrxroWvgMyG+x2UyZ8l5iAHw6Qicd5F3/lozqHMOdrI8A
+ YyKDhzuaNKXxUKiijyAHgT1djR4QBNn5xOB1z8yPqBsZgKq43uyxkl6PeagNVVzlblhX
+ HdS8pPDsF7oIb7n7kEf/dqSkTMOF001SXB85oYH49x7Hlff4jQdoQbqoEc/03/8T2GR/
+ eQYg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXdMIheYkOOwYN/xkUtQtRlgn+vcUXlhtIrwkOT0MS689azZ7/k6/HUA9dzgMQLc4pWU2a9GOI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw78pLX6IkN+2FcSVPvL/R9ebrPDoR+hR9OZwPgInXnTEiWCmTH
+ escSEkp0TIC4oXc9iFhRBWzacZlUCs9zkgQMUxwfQ/HdKBoX+De+OKi0XbpLU7GyO5sr28cD89s
+ nfuS9XYz0zOsK0XacoTc7gf4EIB8=
+X-Google-Smtp-Source: AGHT+IEDcdTlhCrh8QgvlriCJHilDhndGggkT9b7TTUP/rztEU8j5WkHbLMy9Ce4TNWpJ0y9d1rdmpV8gKF1CvrYsTU=
+X-Received: by 2002:a05:600c:4f07:b0:426:6308:e2f0 with SMTP id
+ 5b1f17b1804b1-4312560975amr153955725e9.26.1729170158746; Thu, 17 Oct 2024
+ 06:02:38 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: microchip.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH8PR11MB6609.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a5f596bc-af07-43cb-9f06-08dcee88eb63
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Oct 2024 08:51:41.1370 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: PIGEqWxaGuvn6oC/oOwo300U6XSrvyeuz2RMbh6ywYx8J+jrWZU1S4EjHFl4OF+VsjENUvRNwzBVJJKIG9YWz5ZsLU9AyNlGsXwkQuXiwSk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB8184
-X-Mailman-Approved-At: Thu, 17 Oct 2024 14:52:24 +0200
+References: <20241013145820.85426-1-clamor95@gmail.com>
+ <20241013145820.85426-2-clamor95@gmail.com>
+ <87sesxzo2o.fsf@baylibre.com>
+ <CAACy2-ai7EhrG0iwqnoQbpyzokb=-aEDPtQuiSv6nmF35qUJ_Q@mail.gmail.com>
+ <87sesu2a3m.fsf@baylibre.com>
+In-Reply-To: <87sesu2a3m.fsf@baylibre.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Thu, 17 Oct 2024 16:02:27 +0300
+Message-ID: <CAPVz0n1-gWBsHWEkNfrynNrPXc84YrsksLj_KDJgJVcRQJnQEg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] usb: ci_udc: don't use "advance" feature when
+ setting address
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Ion Agorria <ionpl9@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Simon Holesch <simon@holesch.de>,
+ Ion Agorria <ion@agorria.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,85 +97,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgQWxleGV5LA0KDQpPbiAxNS8xMC8yNCA4OjIzIHBtLCBBbGV4ZXkgVHNpcmxpbiB3cm90ZToN
-Cj4gVGhpcyBhbGxvd3Mgc2V0dGluZyB0aGUgR1BJTyBwYXJhbWV0ZXJzIGZyb20gZGV2aWNlIHRy
-ZWUsIG90aGVyd2lzZSB0aGUNCj4gYXQ5MV9waW5fY2hlY2tfY29uZmlnIHdpbGwgZmFpbCBiZWNh
-dXNlIHRoZSBwcml2LT5uYmFua3MgZXF1YWwgdG8gemVybw0KPiANCj4gU2lnbmVkLW9mZi1ieTog
-QWxleGV5IFRzaXJsaW4gPGFsZXhleUBhbGw0YmFtYmkuY29tPg0KPiAtLS0NCj4gDQo+ICAgYXJj
-aC9hcm0vZHRzL3NhbWE1ZDMuZHRzaSB8IDExMSArKysrKysrKysrKysrKysrKysrLS0tLS0tLS0t
-LS0tLS0tLS0tLQ0KPiAgIDEgZmlsZSBjaGFuZ2VkLCA1NiBpbnNlcnRpb25zKCspLCA1NSBkZWxl
-dGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9hcmNoL2FybS9kdHMvc2FtYTVkMy5kdHNpIGIv
-YXJjaC9hcm0vZHRzL3NhbWE1ZDMuZHRzaQ0KPiBpbmRleCA0YzAzYTMwMmVjLi5jNjcxZWE0MmYy
-IDEwMDY0NA0KPiAtLS0gYS9hcmNoL2FybS9kdHMvc2FtYTVkMy5kdHNpDQo+ICsrKyBiL2FyY2gv
-YXJtL2R0cy9zYW1hNWQzLmR0c2kNCj4gQEAgLTg3Myw2NiArODczLDY3IEBADQo+ICAgCQkJCQkJ
-CSBBVDkxX1BJT0UgMTcgQVQ5MV9QRVJJUEhfQiBBVDkxX1BJTkNUUkxfTk9ORT47CS8qIFBFMTcg
-cGVyaXBoIEIsIGNvbmZsaWN0cyB3aXRoIEExNyAqLw0KPiAgIAkJCQkJfTsNCj4gICAJCQkJfTsN
-Cj4gLQkJCX07DQo+ICAgDQo+IC0JCQlwaW9BOiBncGlvQGZmZmZmMjAwIHsNCj4gLQkJCQljb21w
-YXRpYmxlID0gImF0bWVsLGF0OTFzYW05eDUtZ3BpbyIsICJhdG1lbCxhdDkxcm05MjAwLWdwaW8i
-Ow0KPiAtCQkJCXJlZyA9IDwweGZmZmZmMjAwIDB4MTAwPjsNCj4gLQkJCQlpbnRlcnJ1cHRzID0g
-PDYgSVJRX1RZUEVfTEVWRUxfSElHSCAxPjsNCj4gLQkJCQkjZ3Bpby1jZWxscyA9IDwyPjsNCj4g
-LQkJCQlncGlvLWNvbnRyb2xsZXI7DQo+IC0JCQkJaW50ZXJydXB0LWNvbnRyb2xsZXI7aGFyDQo+
-IC0JCQkJI2ludGVycnVwdC1jZWxscyA9IDwyPjsNCj4gLQkJCQljbG9ja3MgPSA8JnBpb0FfY2xr
-PjsNCj4gLQkJCQlib290cGgtYWxsOw0KPiAtCQkJfTsNCj4gKwkJCQlwaW9BOiBncGlvQGZmZmZm
-MjAwIHsNCj4gKwkJCQkgICAgICBjb21wYXRpYmxlID0gImF0bWVsLGF0OTFzYW05eDUtZ3BpbyIs
-ICJhdG1lbCxhdDkxcm05MjAwLWdwaW8iOw0KU3BhY2VzIGluc3RlYWQgb2YgdGFiIGJlZm9yZSAn
-Y29tcGF0aWJsZScsIHNob3VsZCBiZSBjb25zaXN0ZW50IHdpdGggdGhlIA0KcmVtYWluaW5nIHBy
-b3BlcnRpZXMgb2YgcGlvQSBub2RlLg0KPiArCQkJCQlyZWcgPSA8MHhmZmZmZjIwMCAweDEwMD47
-DQo+ICsJCQkJCWludGVycnVwdHMgPSA8NiBJUlFfVFlQRV9MRVZFTF9ISUdIIDE+Ow0KPiArCQkJ
-CQkjZ3Bpby1jZWxscyA9IDwyPjsNCj4gKwkJCQkJZ3Bpby1jb250cm9sbGVyOw0KPiArCQkJCQlp
-bnRlcnJ1cHQtY29udHJvbGxlcjsNCj4gKwkJCQkJI2ludGVycnVwdC1jZWxscyA9IDwyPjsNCj4g
-KwkJCQkJY2xvY2tzID0gPCZwaW9BX2Nsaz47DQo+ICsJCQkJCWJvb3RwaC1hbGw7DQo+ICsJCQkJ
-fTsNCj4gICANCj4gLQkJCXBpb0I6IGdwaW9AZmZmZmY0MDAgew0KPiAtCQkJCWNvbXBhdGlibGUg
-PSAiYXRtZWwsYXQ5MXNhbTl4NS1ncGlvIiwgImF0bWVsLGF0OTFybTkyMDAtZ3BpbyI7DQo+IC0J
-CQkJcmVnID0gPDB4ZmZmZmY0MDAgMHgxMDA+Ow0KPiAtCQkJCWludGVycnVwdHMgPSA8NyBJUlFf
-VFlQRV9MRVZFTF9ISUdIIDE+Ow0KPiAtCQkJCSNncGlvLWNlbGxzID0gPDI+Ow0KPiAtCQkJCWdw
-aW8tY29udHJvbGxlcjsNCj4gLQkJCQlpbnRlcnJ1cHQtY29udHJvbGxlcjsNCj4gLQkJCQkjaW50
-ZXJydXB0LWNlbGxzID0gPDI+Ow0KPiAtCQkJCWNsb2NrcyA9IDwmcGlvQl9jbGs+Ow0KPiAtCQkJ
-CWJvb3RwaC1hbGw7DQo+IC0JCQl9Ow0KPiArCQkJCXBpb0I6IGdwaW9AZmZmZmY0MDAgew0KPiAr
-CQkJCSAgICAgIGNvbXBhdGlibGUgPSAiYXRtZWwsYXQ5MXNhbTl4NS1ncGlvIiwgImF0bWVsLGF0
-OTFybTkyMDAtZ3BpbyI7DQpEaXR0bw0KPiArCQkJCQlyZWcgPSA8MHhmZmZmZjQwMCAweDEwMD47
-DQo+ICsJCQkJCWludGVycnVwdHMgPSA8NyBJUlFfVFlQRV9MRVZFTF9ISUdIIDE+Ow0KPiArCQkJ
-CQkjZ3Bpby1jZWxscyA9IDwyPjsNCj4gKwkJCQkJZ3Bpby1jb250cm9sbGVyOw0KPiArCQkJCQlp
-bnRlcnJ1cHQtY29udHJvbGxlcjsNCj4gKwkJCQkJI2ludGVycnVwdC1jZWxscyA9IDwyPjsNCj4g
-KwkJCQkJY2xvY2tzID0gPCZwaW9CX2Nsaz47DQo+ICsJCQkJCWJvb3RwaC1hbGw7DQo+ICsJCQkJ
-fTsNCj4gICANCj4gLQkJCXBpb0M6IGdwaW9AZmZmZmY2MDAgew0KPiAtCQkJCWNvbXBhdGlibGUg
-PSAiYXRtZWwsYXQ5MXNhbTl4NS1ncGlvIiwgImF0bWVsLGF0OTFybTkyMDAtZ3BpbyI7DQo+IC0J
-CQkJcmVnID0gPDB4ZmZmZmY2MDAgMHgxMDA+Ow0KPiAtCQkJCWludGVycnVwdHMgPSA8OCBJUlFf
-VFlQRV9MRVZFTF9ISUdIIDE+Ow0KPiAtCQkJCSNncGlvLWNlbGxzID0gPDI+Ow0KPiAtCQkJCWdw
-aW8tY29udHJvbGxlcjsNCj4gLQkJCQlpbnRlcnJ1cHQtY29udHJvbGxlcjsNCj4gLQkJCQkjaW50
-ZXJydXB0LWNlbGxzID0gPDI+Ow0KPiAtCQkJCWNsb2NrcyA9IDwmcGlvQ19jbGs+Ow0KPiAtCQkJ
-CWJvb3RwaC1hbGw7DQo+IC0JCQl9Ow0KPiArCQkJCXBpb0M6IGdwaW9AZmZmZmY2MDAgew0KPiAr
-CQkJCSAgICAgIGNvbXBhdGlibGUgPSAiYXRtZWwsYXQ5MXNhbTl4NS1ncGlvIiwgImF0bWVsLGF0
-OTFybTkyMDAtZ3BpbyI7DQpEaXR0bw0KPiArCQkJCQlyZWcgPSA8MHhmZmZmZjYwMCAweDEwMD47
-DQo+ICsJCQkJCWludGVycnVwdHMgPSA8OCBJUlFfVFlQRV9MRVZFTF9ISUdIIDE+Ow0KPiArCQkJ
-CQkjZ3Bpby1jZWxscyA9IDwyPjsNCj4gKwkJCQkJZ3Bpby1jb250cm9sbGVyOw0KPiArCQkJCQlp
-bnRlcnJ1cHQtY29udHJvbGxlcjsNCj4gKwkJCQkJI2ludGVycnVwdC1jZWxscyA9IDwyPjsNCj4g
-KwkJCQkJY2xvY2tzID0gPCZwaW9DX2Nsaz47DQo+ICsJCQkJCWJvb3RwaC1hbGw7DQo+ICsJCQkJ
-fTsNCj4gICANCj4gLQkJCXBpb0Q6IGdwaW9AZmZmZmY4MDAgew0KPiAtCQkJCWNvbXBhdGlibGUg
-PSAiYXRtZWwsYXQ5MXNhbTl4NS1ncGlvIiwgImF0bWVsLGF0OTFybTkyMDAtZ3BpbyI7DQo+IC0J
-CQkJcmVnID0gPDB4ZmZmZmY4MDAgMHgxMDA+Ow0KPiAtCQkJCWludGVycnVwdHMgPSA8OSBJUlFf
-VFlQRV9MRVZFTF9ISUdIIDE+Ow0KPiAtCQkJCSNncGlvLWNlbGxzID0gPDI+Ow0KPiAtCQkJCWdw
-aW8tY29udHJvbGxlcjsNCj4gLQkJCQlpbnRlcnJ1cHQtY29udHJvbGxlcjsNCj4gLQkJCQkjaW50
-ZXJydXB0LWNlbGxzID0gPDI+Ow0KPiAtCQkJCWNsb2NrcyA9IDwmcGlvRF9jbGs+Ow0KPiAtCQkJ
-CWJvb3RwaC1hbGw7DQo+IC0JCQl9Ow0KPiArCQkJCXBpb0Q6IGdwaW9AZmZmZmY4MDAgew0KPiAr
-CQkJCSAgICAgIGNvbXBhdGlibGUgPSAiYXRtZWwsYXQ5MXNhbTl4NS1ncGlvIiwgImF0bWVsLGF0
-OTFybTkyMDAtZ3BpbyI7DQpEaXR0bw0KPiArCQkJCQlyZWcgPSA8MHhmZmZmZjgwMCAweDEwMD47
-DQo+ICsJCQkJCWludGVycnVwdHMgPSA8OSBJUlFfVFlQRV9MRVZFTF9ISUdIIDE+Ow0KPiArCQkJ
-CQkjZ3Bpby1jZWxscyA9IDwyPjsNCj4gKwkJCQkJZ3Bpby1jb250cm9sbGVyOw0KPiArCQkJCQlp
-bnRlcnJ1cHQtY29udHJvbGxlcjsNCj4gKwkJCQkJI2ludGVycnVwdC1jZWxscyA9IDwyPjsNCj4g
-KwkJCQkJY2xvY2tzID0gPCZwaW9EX2Nsaz47DQo+ICsJCQkJCWJvb3RwaC1hbGw7DQo+ICsJCQkJ
-fTsNCj4gKw0KPiArCQkJCXBpb0U6IGdwaW9AZmZmZmZhMDAgew0KPiArCQkJCSAgICAgIGNvbXBh
-dGlibGUgPSAiYXRtZWwsYXQ5MXNhbTl4NS1ncGlvIiwgImF0bWVsLGF0OTFybTkyMDAtZ3BpbyI7
-DQpEaXR0bw0KPiArCQkJCQlyZWcgPSA8MHhmZmZmZmEwMCAweDEwMD47DQo+ICsJCQkJCWludGVy
-cnVwdHMgPSA8MTAgSVJRX1RZUEVfTEVWRUxfSElHSCAxPjsNCj4gKwkJCQkJI2dwaW8tY2VsbHMg
-PSA8Mj47DQo+ICsJCQkJCWdwaW8tY29udHJvbGxlcjsNCj4gKwkJCQkJaW50ZXJydXB0LWNvbnRy
-b2xsZXI7DQo+ICsJCQkJCSNpbnRlcnJ1cHQtY2VsbHMgPSA8Mj47DQo+ICsJCQkJCWNsb2NrcyA9
-IDwmcGlvRV9jbGs+Ow0KPiArCQkJCQlib290cGgtYWxsOw0KPiArCQkJCX07DQo+ICAgDQpFeHRy
-YSBsaW5lDQo+IC0JCQlwaW9FOiBncGlvQGZmZmZmYTAwIHsNCj4gLQkJCQljb21wYXRpYmxlID0g
-ImF0bWVsLGF0OTFzYW05eDUtZ3BpbyIsICJhdG1lbCxhdDkxcm05MjAwLWdwaW8iOw0KPiAtCQkJ
-CXJlZyA9IDwweGZmZmZmYTAwIDB4MTAwPjsNCj4gLQkJCQlpbnRlcnJ1cHRzID0gPDEwIElSUV9U
-WVBFX0xFVkVMX0hJR0ggMT47DQo+IC0JCQkJI2dwaW8tY2VsbHMgPSA8Mj47DQo+IC0JCQkJZ3Bp
-by1jb250cm9sbGVyOw0KPiAtCQkJCWludGVycnVwdC1jb250cm9sbGVyOw0KPiAtCQkJCSNpbnRl
-cnJ1cHQtY2VsbHMgPSA8Mj47DQo+IC0JCQkJY2xvY2tzID0gPCZwaW9FX2Nsaz47DQo+IC0JCQkJ
-Ym9vdHBoLWFsbDsNCj4gICAJCQl9Ow0KPiAgIA0KPiAgIAkJCXBtYzogcG1jQGZmZmZmYzAwIHsN
-Cg0KLS0gDQpUaGFua3MgYW5kIFJlZ2FyZHMsDQpNYW5pa2FuZGFuIE0uDQoNCg==
+=D1=87=D1=82, 17 =D0=B6=D0=BE=D0=B2=D1=82. 2024=E2=80=AF=D1=80. =D0=BE 15:2=
+1 Mattijs Korpershoek
+<mkorpershoek@baylibre.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> Hi,
+>
+> On mer., oct. 16, 2024 at 21:57, Ion Agorria <ionpl9@gmail.com> wrote:
+>
+> > Hello,
+> >
+> > Yes that's the correct commit I found when researching why the issue
+> > didn't happen in Linux, I already found that Tegra 2 reference docs
+> > had a different information about the register compared to Tegra 3.
+> >
+> > I consider that a single variable is enough since the value is only
+> > non-zero when we want to set a new address. But if is necessary i can
+> > copy like Linux does.
+>
+> You are right, a single variable is enough. I'd still prefer to have
+> what Linux does because it will make it easier to compare with the Linux
+> driver in the future,
+>
+
+Hello!
+
+Proposed patch already does what Linux changes do. Your request to
+make it "same" as Linux is impossible to achieve since the u-boot
+driver itself does not descend from Linux, nor it is similar to Linux
+one. There is nothing to compare with Linux in the future.
+
+Best regards,
+Svyatoslav R.
+
+> Thanks
+> Mattijs
+>
+> >
+> > Regards,
+> > Ion Agorria
+> >
+> > El mar, 15 oct 2024 a las 11:56, Mattijs Korpershoek
+> > (<mkorpershoek@baylibre.com>) escribi=C3=B3:
+> >>
+> >> Hi Svyatoslav,
+> >>
+> >> Thank you for the patch.
+> >>
+> >> On dim., oct. 13, 2024 at 17:58, Svyatoslav Ryhel <clamor95@gmail.com>=
+ wrote:
+> >>
+> >> > From: Ion Agorria <ion@agorria.com>
+> >> >
+> >> > In the older USB controllers like for example in ChipIdea controller
+> >> > used by the Tegra 2 the "USBADRA: Device Address Advance" bitflag
+> >> > does not exist, so the new device address set during SET_ADDRESS
+> >> > can't be deferred by hardware, which causes the host to not recogniz=
+e
+> >> > the device and give an error.
+> >> >
+> >> > Instead store it until ep completes to apply the change into the hw
+> >> > register as Linux kernel does. This should fix regression on old and
+> >> > and be compatible with newer controllers.
+> >>
+> >> Since this is based on a linux commit, can we please mention the
+> >> revision in the commit message?
+> >>
+> >> Per my understanding, this would be:
+> >> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/com=
+mit/?id=3Def15e5490edc7edf808d3477ab32e0e320792f65
+> >>
+> >> >
+> >> > Signed-off-by: Ion Agorria <ion@agorria.com>
+> >> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> >> > ---
+> >> >  drivers/usb/gadget/ci_udc.c | 24 +++++++++++++++++++++++-
+> >> >  drivers/usb/gadget/ci_udc.h |  1 +
+> >> >  2 files changed, 24 insertions(+), 1 deletion(-)
+> >> >
+> >> > diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc=
+.c
+> >> > index bbe03cfff1f..4bff75da759 100644
+> >> > --- a/drivers/usb/gadget/ci_udc.c
+> >> > +++ b/drivers/usb/gadget/ci_udc.c
+> >> > @@ -649,12 +649,30 @@ static void flip_ep0_direction(void)
+> >> >       }
+> >> >  }
+> >> >
+> >> > +/*
+> >> > + * This function explicitly sets the address, without the "USBADRA"=
+ (advance)
+> >> > + * feature, which is not supported by older versions of the control=
+ler.
+> >> > + */
+> >> > +static void ci_set_address(struct ci_udc *udc, u8 address)
+> >> > +{
+> >> > +     DBG("%s %x\n", __func__, address);
+> >> > +     writel(address << 25, &udc->devaddr);
+> >> > +}
+> >> > +
+> >> >  static void handle_ep_complete(struct ci_ep *ci_ep)
+> >> >  {
+> >> >       struct ept_queue_item *item, *next_td;
+> >> >       int num, in, len, j;
+> >> >       struct ci_req *ci_req;
+> >> >
+> >> > +     /* Set the device address that was previously sent by SET_ADDR=
+ESS */
+> >> > +     if (controller.next_device_address !=3D 0) {
+> >> > +             struct ci_udc *udc =3D (struct ci_udc *)controller.ctr=
+l->hcor;
+> >> > +
+> >> > +             ci_set_address(udc, controller.next_device_address);
+> >> > +             controller.next_device_address =3D 0;
+> >> > +     }
+> >> > +
+> >> >       num =3D ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MA=
+SK;
+> >> >       in =3D (ci_ep->desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
+> >> >       item =3D ci_get_qtd(num, in);
+> >> > @@ -783,7 +801,7 @@ static void handle_setup(void)
+> >> >                * write address delayed (will take effect
+> >> >                * after the next IN txn)
+> >> >                */
+> >> > -             writel((r.wValue << 25) | (1 << 24), &udc->devaddr);
+> >> > +             controller.next_device_address =3D r.wValue;
+> >> >               req->length =3D 0;
+> >> >               usb_ep_queue(controller.gadget.ep0, req, 0);
+> >> >               return;
+> >> > @@ -814,6 +832,9 @@ static void stop_activity(void)
+> >> >       int i, num, in;
+> >> >       struct ept_queue_head *head;
+> >> >       struct ci_udc *udc =3D (struct ci_udc *)controller.ctrl->hcor;
+> >> > +
+> >> > +     ci_set_address(udc, 0);
+> >> > +
+> >> >       writel(readl(&udc->epcomp), &udc->epcomp);
+> >> >  #ifdef CONFIG_CI_UDC_HAS_HOSTPC
+> >> >       writel(readl(&udc->epsetupstat), &udc->epsetupstat);
+> >> > @@ -934,6 +955,7 @@ static int ci_pullup(struct usb_gadget *gadget, =
+int is_on)
+> >> >       struct ci_udc *udc =3D (struct ci_udc *)controller.ctrl->hcor;
+> >> >       if (is_on) {
+> >> >               /* RESET */
+> >> > +             controller.next_device_address =3D 0;
+> >> >               writel(USBCMD_ITC(MICRO_8FRAME) | USBCMD_RST, &udc->us=
+bcmd);
+> >> >               udelay(200);
+> >> >
+> >> > diff --git a/drivers/usb/gadget/ci_udc.h b/drivers/usb/gadget/ci_udc=
+.h
+> >> > index bea2f9f3fe3..807f2084c1e 100644
+> >> > --- a/drivers/usb/gadget/ci_udc.h
+> >> > +++ b/drivers/usb/gadget/ci_udc.h
+> >> > @@ -105,6 +105,7 @@ struct ci_drv {
+> >> >       struct ept_queue_head           *epts;
+> >> >       uint8_t                         *items_mem;
+> >> >       struct ci_ep                    ep[NUM_ENDPOINTS];
+> >> > +     u8                              next_device_address;
+> >>
+> >> Comparing to
+> >> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/com=
+mit/?id=3Def15e5490edc7edf808d3477ab32e0e320792f65,
+> >>
+> >> Can we please keep similar logic ?
+> >> Having both:
+> >> - bool setaddr
+> >> - u8 address
+> >>
+> >> This way, we keep the diff with the linux driver a bit lower.
+> >>
+> >> >  };
+> >> >
+> >> >  struct ept_queue_head {
+> >> > --
+> >> > 2.43.0
