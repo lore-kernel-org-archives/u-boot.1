@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 294C6D2F7EF
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 06:37:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5913CD2F7EF
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 06:37:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BF2288C05;
-	Thu, 17 Oct 2024 08:37:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B45A988EAE;
+	Thu, 17 Oct 2024 08:37:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aU0DIaEh";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jdTXu7WN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A21E88D5B; Thu, 17 Oct 2024 08:37:25 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id B6C6288EF7; Thu, 17 Oct 2024 08:37:40 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D59888B8F
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 08:37:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A26A88EE3
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 08:37:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49H6bIlu025543;
- Thu, 17 Oct 2024 01:37:18 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49H6bXnB042403;
+ Thu, 17 Oct 2024 01:37:33 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729147038;
- bh=tn/yOZdESwgNqvIO8ldow/TnHfN4aFZKWplKyfobYe4=;
- h=From:To:CC:Subject:Date;
- b=aU0DIaEhneQISpVRqfkxCnq0rn7VArav3LINlwzM8bN8LKCaY2CpXqBcfHr97GYrw
- lXUjTdOlfngrB+QqYvqPa03liW6OUeOhLtWyqxdfMyZg8LmLZnkrgCJjwX/ngcDCYF
- B4wuV7Kp5kDxWY70xJ2+Ez8m9J1wbPnYHaip+Mc4=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49H6bIB1028552
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 17 Oct 2024 01:37:18 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ s=ti-com-17Q1; t=1729147053;
+ bh=kiIEgL0gbTO+/E63yHnTmTlQOzY6zl5GqUMT7O+n0Wg=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=jdTXu7WNzpeAmwFWKyzkO/LipZamFw6h2LUb2PE/M+5AGs+YPocGo0e634qZgpaUh
+ M/v2v/F7F68nMkwK3GetWQ/+ywqh5+iPZtdC9XZ2T532jhqPG8q094luV1vHlT/Ci2
+ 1MpfEKgtmDTQ6KBSD8bXyCzyWYdnJ5VE5eLt+Bp4=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49H6bXoR095258;
+ Thu, 17 Oct 2024 01:37:33 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 17
- Oct 2024 01:37:18 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2024 01:37:33 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 17 Oct 2024 01:37:18 -0500
+ Frontend Transport; Thu, 17 Oct 2024 01:37:33 -0500
 Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
  [172.24.227.91])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49H6bFOT090460;
- Thu, 17 Oct 2024 01:37:16 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49H6bFOU090460;
+ Thu, 17 Oct 2024 01:37:31 -0500
 From: Aniket Limaye <a-limaye@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>
 CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>,
  Aniket Limaye <a-limaye@ti.com>
-Subject: [PATCH 0/6] Add OPP_LOW support for J7200
-Date: Thu, 17 Oct 2024 11:59:07 +0530
-Message-ID: <20241017062911.2241167-1-a-limaye@ti.com>
+Subject: [PATCH 1/6] arm: dts: k3-j7200-r5-common: Add msmc clk to a72 node
+Date: Thu, 17 Oct 2024 11:59:08 +0530
+Message-ID: <20241017062911.2241167-2-a-limaye@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241017062911.2241167-1-a-limaye@ti.com>
+References: <20241017062911.2241167-1-a-limaye@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -78,49 +79,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds OPP_LOW spec data in k3_avs driver and enables a config
-option to select the OPP_LOW performance point.
+From: Reid Tonking <reidt@ti.com>
 
-AVS test logs (CONFIG_K3_OPP_LOW enabled and dummy efuse value):
-https://gist.github.com/aniket-l/3bdb454d2416e1900dce795ce6090507
+Define the MSMC clk in the a72 node
 
-J7200 SOC supports OPP_LOW and OPP_NOM as two Operating Performance
-Points as per (7.5 Operating Performance Points) section in the
-Datasheet [0].
-- A72SS/MSMC at 2 GHz/1GHz operation must use OPP_NOM.
-- A72SS/MSMC at 1 GHz/500 MHz operation can use OPP_NOM or OPP_LOW
-  voltage (though OPP_LOW voltage is recommended to reduce power
-  consumption).
+Signed-off-by: Reid Tonking <reidt@ti.com>
+Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+---
+ arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-The actual OPP voltage for the device is read from the efuse and
-updated in k3_avs_probe().
-
-The default j7200 devicetree and k3_avs driver set OPP_NOM spec
-frequency and voltage.
-
-In the board init file, if K3_OPP_LOW config is enabled, Check if
-OPP_LOW AVS voltage read from efuse is valid and update frequency and
-voltage as per the OPP_LOW spec.
-
-[0]: https://www.ti.com/lit/gpn/dra821u  (J7200 Datasheet)
-
-
-Reid Tonking (6):
-  arm: dts: k3-j7200-r5-common: Add msmc clk to a72 node
-  misc: k3_avs: Add OPP_LOW voltage and frequency to vd_data
-  misc: k3_avs: Add k3_check_opp function
-  arm: mach-k3: j721e-init.c: J7200: Add support for CONFIG_K3_OPP_LOW
-  configs: j7200_evm_r5_defconfig: Define K3_OPP_LOW
-  DONOTMERGE: For testing only
-
- .../arm/dts/k3-j7200-r5-common-proc-board.dts | 10 ++--
- arch/arm/mach-k3/Kconfig                      |  6 +++
- arch/arm/mach-k3/j721e/j721e_init.c           | 54 ++++++++++++++++++-
- configs/j7200_evm_r5_defconfig                |  1 +
- drivers/misc/k3_avs.c                         | 36 +++++++++++++
- include/k3-avs.h                              |  2 +
- 6 files changed, 103 insertions(+), 6 deletions(-)
-
+diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+index f096b102793..759a1e83456 100644
+--- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
++++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+@@ -23,11 +23,11 @@
+ 				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
+ 				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+ 		resets = <&k3_reset 202 0>;
+-		clocks = <&k3_clks 61 1>, <&k3_clks 202 2>;
+-		clock-names = "gtc", "core";
+-		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 323 0>;
+-		assigned-clock-parents= <0>, <0>, <&k3_clks 323 2>;
+-		assigned-clock-rates = <2000000000>, <200000000>;
++		clocks = <&k3_clks 61 1>, <&k3_clks 4 1>, <&k3_clks 202 2> ;
++		clock-names = "gtc", "msmc", "core";
++		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 4 1>, <&k3_clks 323 0>;
++		assigned-clock-parents= <0>, <0>, <0>, <&k3_clks 323 2>;
++		assigned-clock-rates = <2000000000>, <200000000>, <1000000000>;
+ 		ti,sci = <&dmsc>;
+ 		ti,sci-proc-id = <32>;
+ 		ti,sci-host-id = <10>;
 -- 
 2.34.1
 
