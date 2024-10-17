@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DADD374A0
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 14:13:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBB53D3749A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 14:13:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BACE789015;
-	Thu, 17 Oct 2024 16:12:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CEE389035;
+	Thu, 17 Oct 2024 16:12:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="hMXI/FYv";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Pp0v4KCZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7834E88FFB; Thu, 17 Oct 2024 16:12:29 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ id 9910288FFB; Thu, 17 Oct 2024 16:12:29 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F342489009
+ by phobos.denx.de (Postfix) with ESMTPS id 9E81988FF6
  for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:12:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 79796100016;
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 219D512000C;
  Thu, 17 Oct 2024 17:12:16 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 79796100016
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 219D512000C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
  s=mail; t=1729174336;
- bh=IuEuIj1t02rLDW2Nwn3gMvwNPtsNRBYug0I7lrCYtss=;
+ bh=tip4cqj+ZFXCQBmpVIVEZdnebpTCZBNomTy/zGXky9I=;
  h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:To:From;
- b=hMXI/FYvBBIih9g42nj/GkeJUXyHJjSpnubYd+g2eudo85uP3+2XerDoTepvSJfL/
- rAUyCC/suhhtro7cn3y9aJwpl1EpPfquH1JJP20GUxhyZQvuJibf6aa9lMAlkk02ZL
- GtaFOjAdOrvFHXRngoGn/hZSIZwM9BT06kCtxpDXp3iJSBWlo4ZTyLHZCQT3EOg8OM
- Bh4ZdwUNQENAgztyNs5nsMmR8uenwvoU8cm6nkWzqb/kpWTzqSGsr3WnM5Ii+MvZaz
- VudlrTJgKiVaUS2UjFM/l0zIy7SnZuV8B7aObIJew8np6t+zUqi+o9/5zpmAaNxB4/
- NyJFg1TwXeMLw==
+ b=Pp0v4KCZWgjZ7dH8yaWdQtFRZEsYdHf5z2+mtPCqBmqdbIbBr8kkRN2wycbGI1Q0S
+ pn4lNRPzKSflOAJ1cB1KIs19cJAi7uxmDOHa+JXI7X7BWV+Z/J6mO2AMhy1U/AP+i+
+ H/nXDvZEhOitawji1ENOBCYZsKJsBgfRrYMnv4aQ//7eLz5C+rlhYOiWNgXPw+M1NT
+ BUkZzwN+yN3GKSQffR6RrmWqeViJAiCYxXGdOHTyn/LPaHhOU88jd6qyWK2QIayhNN
+ 1BFAiVKpKDy24u4e95lpR3gUpBfZxIqajmQN/o1dB80N7itt+3cFKf9tGATLsHf22O
+ Hb6LVuVs74u4A==
 Received: from smtp.sberdevices.ru (unknown [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 17 Oct 2024 17:12:16 +0300 (MSK)
+ Thu, 17 Oct 2024 17:12:15 +0300 (MSK)
 From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Date: Thu, 17 Oct 2024 17:12:09 +0300
-Subject: [PATCH v5 4/6] cmd: bcb: change strcmp() usage style in the
- do_bcb_ab_select()
+Date: Thu, 17 Oct 2024 17:12:07 +0300
+Subject: [PATCH v5 2/6] cmd: bcb: rework the command to U_BOOT_LONGHELP
+ approach
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20241017-android_ab_master-v5-4-43bfcc096d95@salutedevices.com>
+Message-ID: <20241017-android_ab_master-v5-2-43bfcc096d95@salutedevices.com>
 References: <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>
 In-Reply-To: <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>
 To: Igor Opaniuk <igor.opaniuk@gmail.com>, Mattijs Korpershoek
@@ -60,14 +60,13 @@ To: Igor Opaniuk <igor.opaniuk@gmail.com>, Mattijs Korpershoek
  <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, Mario Six
  <mario.six@gdsys.cc>
 CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, <rockosov@gmail.com>, 
- <kernel@salutedevices.com>, Dmitry Rokosov <ddrokosov@salutedevices.com>, 
- Guillaume La Roque <glaroque@baylibre.com>
+ <kernel@salutedevices.com>, Dmitry Rokosov <ddrokosov@salutedevices.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1729174334; l=967;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1729174334; l=6299;
  i=ddrokosov@salutedevices.com; s=20241008; h=from:subject:message-id;
- bh=VK5iG2fSRlyo1r56wPsrow15PEDp4txWFTRXVwa5sPs=;
- b=hwMwCIMse0IBNT6sc8aAU1Ddz8F4kihPn3002zIlCzzcpjKtcnZdB/G77bekMDAvmEJKL6FcJ
- jkh6lRNbHc8CwkTXp5tp7y2OxA7TSsJifS/Linq8ewdMTbpz9jPtmoR
+ bh=yzLPKtRigdKL53kJ25P8BaIRdoD4e6OOC8vzL2hnex0=;
+ b=LxcxvvHTyWfxCK5Wi7sfnuOwIKQlTUeeOpeAL7LLeGU532HFtYX+NIvRZgZgrxKtH89MZyHDW
+ 5KEh8q/ZBTPDFLsMiD/euDXYUC9L2S4Z73MJSPGjRP8O/XdVMv/3NYw
 X-Developer-Key: i=ddrokosov@salutedevices.com; a=ed25519;
  pk=J6t8z4aofCVwzR1Xs7royc+IGyQcL0cTby92cz3i8B4=
 X-Originating-IP: [172.28.226.150]
@@ -84,9 +83,9 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 40 0.3.40
  cefee68357d12c80cb9cf2bdcf92256b1d238d22,
- {Tracking_from_domain_doesnt_match_to},
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
- smtp.sberdevices.ru:5.0.1,7.1.1; 127.0.0.199:7.1.2, FromAlignment: s
+ {Tracking_from_domain_doesnt_match_to}, smtp.sberdevices.ru:5.0.1,7.1.1;
+ salutedevices.com:7.1.1; 127.0.0.199:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean
@@ -110,31 +109,243 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the entire cmd/bcb.c file, the return value of strcmp() is not
-directly compared to 0. Therefore, it would be better to maintain this
-style in the new do_bcb_ab_select() function as well.
+U_BOOT_LONGHELP and U_BOOT_CMD_WITH_SUBCMDS offer numerous advantages,
+including:
+- common argument restrictions checking
+- automatic subcommand matching
+- improved usage and help handling
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Tested-by: Guillaume La Roque <glaroque@baylibre.com>
+By utilizing the U_BOOT_LONGHELP approach, we can reduce the amount of
+command management code and describe commands more succinctly.
+
 Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
 ---
- cmd/bcb.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ cmd/bcb.c | 151 ++++++++++++++++++--------------------------------------------
+ 1 file changed, 43 insertions(+), 108 deletions(-)
 
 diff --git a/cmd/bcb.c b/cmd/bcb.c
-index 2854408e5669b0d7d2a06073fa81158b21834b99..b33c046af0385a112fd40634ab7f48e05542ca48 100644
+index 97a96c009641cc094645607ef833575f3c03fe4b..98b2a71087a27b1721f4bed4160095d65ec75402 100644
 --- a/cmd/bcb.c
 +++ b/cmd/bcb.c
-@@ -391,7 +391,7 @@ __maybe_unused static int do_bcb_ab_select(struct cmd_tbl *cmdtp,
- 		return CMD_RET_USAGE;
+@@ -16,15 +16,6 @@
+ #include <vsprintf.h>
+ #include <linux/err.h>
  
- 	for (int i = 4; i < argc; i++) {
--		if (strcmp(argv[i], "--no-dec") == 0)
-+		if (!strcmp(argv[i], "--no-dec"))
- 			dec_tries = false;
- 		else
- 			return CMD_RET_USAGE;
+-enum bcb_cmd {
+-	BCB_CMD_LOAD,
+-	BCB_CMD_FIELD_SET,
+-	BCB_CMD_FIELD_CLEAR,
+-	BCB_CMD_FIELD_TEST,
+-	BCB_CMD_FIELD_DUMP,
+-	BCB_CMD_STORE,
+-};
+-
+ static const char * const fields[] = {
+ 	"command",
+ 	"status",
+@@ -38,67 +29,9 @@ static struct disk_partition partition_data;
+ static struct blk_desc *block;
+ static struct disk_partition *partition = &partition_data;
+ 
+-static int bcb_cmd_get(char *cmd)
+-{
+-	if (!strcmp(cmd, "load"))
+-		return BCB_CMD_LOAD;
+-	if (!strcmp(cmd, "set"))
+-		return BCB_CMD_FIELD_SET;
+-	if (!strcmp(cmd, "clear"))
+-		return BCB_CMD_FIELD_CLEAR;
+-	if (!strcmp(cmd, "test"))
+-		return BCB_CMD_FIELD_TEST;
+-	if (!strcmp(cmd, "store"))
+-		return BCB_CMD_STORE;
+-	if (!strcmp(cmd, "dump"))
+-		return BCB_CMD_FIELD_DUMP;
+-	else
+-		return -1;
+-}
+-
+-static int bcb_is_misused(int argc, char *const argv[])
++static int bcb_not_loaded(void)
+ {
+-	int cmd = bcb_cmd_get(argv[0]);
+-
+-	switch (cmd) {
+-	case BCB_CMD_LOAD:
+-		if (argc != 3 && argc != 4)
+-			goto err;
+-		break;
+-	case BCB_CMD_FIELD_SET:
+-		if (argc != 3)
+-			goto err;
+-		break;
+-	case BCB_CMD_FIELD_TEST:
+-		if (argc != 4)
+-			goto err;
+-		break;
+-	case BCB_CMD_FIELD_CLEAR:
+-		if (argc != 1 && argc != 2)
+-			goto err;
+-		break;
+-	case BCB_CMD_STORE:
+-		if (argc != 1)
+-			goto err;
+-		break;
+-	case BCB_CMD_FIELD_DUMP:
+-		if (argc != 2)
+-			goto err;
+-		break;
+-	default:
+-		printf("Error: 'bcb %s' not supported\n", argv[0]);
+-		return -1;
+-	}
+-
+-	if (cmd != BCB_CMD_LOAD && !block) {
+-		printf("Error: Please, load BCB first!\n");
+-		return -1;
+-	}
+-
+-	return 0;
+-err:
+-	printf("Error: Bad usage of 'bcb %s'\n", argv[0]);
+-
++	printf("Error: Please, load BCB first!\n");
+ 	return -1;
+ }
+ 
+@@ -216,6 +149,9 @@ static int do_bcb_load(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	char *endp;
+ 	char *iface = "mmc";
+ 
++	if (argc < 3)
++		return CMD_RET_USAGE;
++
+ 	if (argc == 4) {
+ 		iface = argv[1];
+ 		argc--;
+@@ -270,6 +206,12 @@ static int __bcb_set(const char *fieldp, const char *valp)
+ static int do_bcb_set(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		      char * const argv[])
+ {
++	if (argc < 3)
++		return CMD_RET_USAGE;
++
++	if (!block)
++		return bcb_not_loaded();
++
+ 	return __bcb_set(argv[1], argv[2]);
+ }
+ 
+@@ -279,6 +221,9 @@ static int do_bcb_clear(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	int size;
+ 	char *field;
+ 
++	if (!block)
++		return bcb_not_loaded();
++
+ 	if (argc == 1) {
+ 		memset(&bcb, 0, sizeof(bcb));
+ 		return CMD_RET_SUCCESS;
+@@ -297,7 +242,15 @@ static int do_bcb_test(struct cmd_tbl *cmdtp, int flag, int argc,
+ {
+ 	int size;
+ 	char *field;
+-	char *op = argv[2];
++	char *op;
++
++	if (argc < 4)
++		return CMD_RET_USAGE;
++
++	if (!block)
++		return bcb_not_loaded();
++
++	op = argv[2];
+ 
+ 	if (bcb_field_get(argv[1], &field, &size))
+ 		return CMD_RET_FAILURE;
+@@ -325,6 +278,12 @@ static int do_bcb_dump(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	int size;
+ 	char *field;
+ 
++	if (argc < 2)
++		return CMD_RET_USAGE;
++
++	if (!block)
++		return bcb_not_loaded();
++
+ 	if (bcb_field_get(argv[1], &field, &size))
+ 		return CMD_RET_FAILURE;
+ 
+@@ -356,6 +315,9 @@ err:
+ static int do_bcb_store(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			char * const argv[])
+ {
++	if (!block)
++		return bcb_not_loaded();
++
+ 	return __bcb_store();
+ }
+ 
+@@ -414,44 +376,7 @@ void bcb_reset(void)
+ 	__bcb_reset();
+ }
+ 
+-static struct cmd_tbl cmd_bcb_sub[] = {
+-	U_BOOT_CMD_MKENT(load, CONFIG_SYS_MAXARGS, 1, do_bcb_load, "", ""),
+-	U_BOOT_CMD_MKENT(set, CONFIG_SYS_MAXARGS, 1, do_bcb_set, "", ""),
+-	U_BOOT_CMD_MKENT(clear, CONFIG_SYS_MAXARGS, 1, do_bcb_clear, "", ""),
+-	U_BOOT_CMD_MKENT(test, CONFIG_SYS_MAXARGS, 1, do_bcb_test, "", ""),
+-	U_BOOT_CMD_MKENT(dump, CONFIG_SYS_MAXARGS, 1, do_bcb_dump, "", ""),
+-	U_BOOT_CMD_MKENT(store, CONFIG_SYS_MAXARGS, 1, do_bcb_store, "", ""),
+-};
+-
+-static int do_bcb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-{
+-	struct cmd_tbl *c;
+-
+-	if (argc < 2)
+-		return CMD_RET_USAGE;
+-
+-	argc--;
+-	argv++;
+-
+-	c = find_cmd_tbl(argv[0], cmd_bcb_sub, ARRAY_SIZE(cmd_bcb_sub));
+-	if (!c)
+-		return CMD_RET_USAGE;
+-
+-	if (bcb_is_misused(argc, argv)) {
+-		/*
+-		 * We try to improve the user experience by reporting the
+-		 * root-cause of misusage, so don't return CMD_RET_USAGE,
+-		 * since the latter prints out the full-blown help text
+-		 */
+-		return CMD_RET_FAILURE;
+-	}
+-
+-	return c->cmd(cmdtp, flag, argc, argv);
+-}
+-
+-U_BOOT_CMD(
+-	bcb, CONFIG_SYS_MAXARGS, 1, do_bcb,
+-	"Load/set/clear/test/dump/store Android BCB fields",
++U_BOOT_LONGHELP(bcb,
+ 	"load <interface> <dev> <part>  - load  BCB from <interface> <dev>:<part>\n"
+ 	"load <dev> <part>              - load  BCB from mmc <dev>:<part>\n"
+ 	"bcb set   <field> <val>        - set   BCB <field> to <val>\n"
+@@ -472,3 +397,13 @@ U_BOOT_CMD(
+ 	"              NOTE: any ':' character in <val> will be replaced by line feed\n"
+ 	"              during 'bcb set' and used as separator by upper layers\n"
+ );
++
++U_BOOT_CMD_WITH_SUBCMDS(bcb,
++	"Load/set/clear/test/dump/store Android BCB fields", bcb_help_text,
++	U_BOOT_SUBCMD_MKENT(load, 4, 1, do_bcb_load),
++	U_BOOT_SUBCMD_MKENT(set, 3, 1, do_bcb_set),
++	U_BOOT_SUBCMD_MKENT(clear, 2, 1, do_bcb_clear),
++	U_BOOT_SUBCMD_MKENT(test, 4, 1, do_bcb_test),
++	U_BOOT_SUBCMD_MKENT(dump, 2, 1, do_bcb_dump),
++	U_BOOT_SUBCMD_MKENT(store, 1, 1, do_bcb_store),
++);
 
 -- 
 2.43.0
