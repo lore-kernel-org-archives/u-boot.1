@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD07D374BF
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 16:11:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B570D374BA
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 16:11:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D50C89065;
+	by phobos.denx.de (Postfix) with ESMTP id C37958907E;
 	Thu, 17 Oct 2024 18:10:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Wez2e70V";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rOMVgc9+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BE048907E; Thu, 17 Oct 2024 18:10:54 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 5F93D89057; Thu, 17 Oct 2024 18:10:54 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DD6489059
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 18:10:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54D3B89067
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 18:10:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-37d4c1b1455so901160f8f.3
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 09:10:48 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-37d4fd00574so791011f8f.0
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 09:10:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729181447; x=1729786247;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729181449; x=1729786249;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=eek7gRBW6g+Iapx/5zEf6sS/TBDPdHF5a1htgBIWQQg=;
- b=Wez2e70VFF9vib70OZksvdZNsXyjEtWraEfx6kusTDD8/xfvhYGIO+nwVpKcrdjsgD
- gGycNZ00cVe82FzemYBz9rbQsJlvw1pIch4dXNLzsJUg7TC75zjSFrFfB3LaSmJWxKnv
- OH1hmPiO/+Ughdu8yHovD/Zjy+bHr3uuiLtRbpSbzhfJ1vxX/pIYB8P3qR72ofXZsQPF
- l7bWrz7cvi2CU0XYQCcAEm7YP8pRCtSPu5dYP/oKyzl1fOZT+m35HncZEZaAexIPbuPF
- MBAp8oaMd7CIjTCqMJjuKOVf6Jee5D+mneifvWMRVLjBrisszOVa835AayExrTxspLKi
- Em2Q==
+ :reply-to; bh=5jMPduaHSnMoSJU1wxTBgjV7EM8SwG+3sbFMb1YVjfM=;
+ b=rOMVgc9+/rX/yKfLvx3YK6fwOIM0qqtpIR9w2R4kAEVMJav5wjzZ59AJzB203InqFr
+ YYFH/YLNyWr5zs/lM9e1j7m7r4Zm4BL1xZ1blzLQqNS/UMkbets024ifrLOM8PxSK7y3
+ d+lxh8zbihLM+awhd5lKkcpQrhORDY6EifGhbGmuvOYBpH5e2QfaECnJuTOnCln2czP+
+ KspNRgvLQ7MFKeMg27rNwglmD21t9rIklleSnfqeii0fFBoBDDTLp8odwAjFxDXFVcXY
+ GPb6ZnG1WTkZYrXImwiVFLU+lczD1PXdsXQKjOLu3+gKAThSLmZ8yIYQ+RMo+IdFDTub
+ WNbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729181447; x=1729786247;
+ d=1e100.net; s=20230601; t=1729181449; x=1729786249;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eek7gRBW6g+Iapx/5zEf6sS/TBDPdHF5a1htgBIWQQg=;
- b=cfJ8tHXxPNfhpCCJh0u60A/GEDeia7MRub49PYgoF1If9sg3SQHbRmu74gcgeontTB
- WZziMhwD3DhYHYzfzMev+UUx/z2nq/tPLRD7ZhbvNxRyALgFwH5Xqz5lGO2hJpYh+FIl
- w71iD/tLowEvEmmxdXLzcjb126mDr71BHW0V0LeUAb0CGMhN6M8qgdcSas2YFbHrJo1A
- MSNKDQw+ST8IC5m/sKJYQOldQSloFM1xhsVaLXS6H3cjOIFXGnntLzf+JVAfZa2l8dLJ
- O3ViGTAgb+bPGvYkA+vhP+S7BX8lnEBp1ycJkUjlgDkQArb0e6rS1e9NjN6mdp7u80Z9
- e4dA==
-X-Gm-Message-State: AOJu0YxV1Ni6+YOHMQSmXGYDGzDvX3g+ymS6WQNb1mGmq4rQgTuKFJYI
- oafR23Id9iYcP8ruSFpW7jG8fb348j9qPnEgZ9WMu0jWR35EzQCq2SHyO/t+o/aLIGaqlXSLXxh
- y
-X-Google-Smtp-Source: AGHT+IHLxEIBMQzPy2d9LZ5WMJTJFVui5jEuVkjRgsMH4DB4Qlx0CqgWUHdQwrTv7wwYrhLDqW8ARQ==
-X-Received: by 2002:adf:e908:0:b0:37d:33a3:de1c with SMTP id
- ffacd0b85a97d-37d55262ad2mr15901805f8f.38.1729181447313; 
- Thu, 17 Oct 2024 09:10:47 -0700 (PDT)
+ bh=5jMPduaHSnMoSJU1wxTBgjV7EM8SwG+3sbFMb1YVjfM=;
+ b=gGdy8PHiDbKu8jtbFDPi7MWjdGzXeSur138vTD6L+uildiT5IC02VwevMg/h39SJ65
+ l/RfEXNUis2xMww3tM4xFHTvrlWUn9j2oy4O/UWB19eB4WWBZNEj+QP8tei2ZF1bsUPS
+ ETHf8l2xQpLOfehtgpRbawIvvEG9WTCW8SjYSWTzKzXdNPgDXkYNlsxjZE9uS8coM2k5
+ q2WUX7NCJFrf9/q6odBr/3/Il3sGyLCgnZPAMugNqP9ao3as49ez4FQ9VKxdJuv9pAB2
+ vcRDN0OrOzHyDQFPkTk4y0dRePOSqnF8FwRpTy31JO1gs2iwNF99lRYVc1pomRYqT+LX
+ acig==
+X-Gm-Message-State: AOJu0Yz+oC5ff5TgkNrBztfbYBbVw30136Pbtx5ncTEs4oSUex5RhvRe
+ cXm6ymAF5O+ypFwZRbKZYXSLblwGwdUSCFoIcT4jnQo03IC7UtB/Q26kmtQmErM4zoHs8hEdO2d
+ 5
+X-Google-Smtp-Source: AGHT+IEDxzKg/75P+DbakFyTokzsakG6zyx488jXHOowit/cI4jtM/5UmIZi1jmkhFuryt2+xomcrA==
+X-Received: by 2002:adf:a192:0:b0:37c:ffdd:6d5a with SMTP id
+ ffacd0b85a97d-37d93dcc0e0mr2828546f8f.6.1729181449350; 
+ Thu, 17 Oct 2024 09:10:49 -0700 (PDT)
 Received: from [127.0.1.1] ([2a05:6e02:10a5:e010:4754:2b9f:eb4f:125])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d7fc42160sm7653993f8f.112.2024.10.17.09.10.46
+ ffacd0b85a97d-37d7fc42160sm7653993f8f.112.2024.10.17.09.10.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Oct 2024 09:10:46 -0700 (PDT)
+ Thu, 17 Oct 2024 09:10:49 -0700 (PDT)
 From: Guillaume La Roque <glaroque@baylibre.com>
-Date: Thu, 17 Oct 2024 18:10:27 +0200
-Subject: [PATCH 3/6] configs: khadas-vim3{l}: fix userdata size
+Date: Thu, 17 Oct 2024 18:10:29 +0200
+Subject: [PATCH 5/6] configs: khadas-vim3_android{_ab}: move on bootmeth
+ android
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241017-adnroidv2-v1-3-781c939902c9@baylibre.com>
+Message-Id: <20241017-adnroidv2-v1-5-781c939902c9@baylibre.com>
 References: <20241017-adnroidv2-v1-0-781c939902c9@baylibre.com>
 In-Reply-To: <20241017-adnroidv2-v1-0-781c939902c9@baylibre.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
@@ -98,65 +99,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After increase boot and recovery partition userdata was not resize.
-so on VIM3 16GB and VIM3L `fastboot oem format` or `gpt write mmc 2
-$partitions` fail because end of last partition is outside of eMMC
-size.
+Actually khadas vim3 use distro command to boot android image.
+Move on new bootmeth android for A/B and non-A/B vim3 android.
 
-Remove 64MB on userdata partitions to fix it.
-
-Fixes: ce138d9742bf ("configs: khadas-vim3{l}: Increase boot/recovery
-partition size")
 Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
 ---
- include/configs/khadas-vim3_android.h  | 4 ++--
- include/configs/khadas-vim3l_android.h | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ configs/khadas-vim3_android_ab_defconfig |  7 ++++++-
+ configs/khadas-vim3_android_defconfig    |  7 ++++++-
+ include/configs/khadas-vim3_android.h    | 27 +++++++++++++++++++++++----
+ 3 files changed, 35 insertions(+), 6 deletions(-)
 
+diff --git a/configs/khadas-vim3_android_ab_defconfig b/configs/khadas-vim3_android_ab_defconfig
+index de5357c45cbf..a078c5d363ae 100644
+--- a/configs/khadas-vim3_android_ab_defconfig
++++ b/configs/khadas-vim3_android_ab_defconfig
+@@ -24,6 +24,12 @@ CONFIG_REMAKE_ELF=y
+ CONFIG_FIT=y
+ CONFIG_FIT_SIGNATURE=y
+ CONFIG_FIT_VERBOSE=y
++CONFIG_BOOTMETH_ANDROID=y
++# CONFIG_BOOTMETH_EXTLINUX is not set
++# CONFIG_BOOTMETH_EXTLINUX_PXE is not set
++# CONFIG_BOOTMETH_EFILOADER is not set
++# CONFIG_BOOTMETH_EFI_BOOTMGR is not set
++# CONFIG_BOOTMETH_VBE is not set
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_OF_BOARD_SETUP=y
+ # CONFIG_DISPLAY_CPUINFO is not set
+@@ -35,7 +41,6 @@ CONFIG_SYS_MAXARGS=32
+ CONFIG_CMD_ADTIMG=y
+ CONFIG_CMD_ABOOTIMG=y
+ # CONFIG_CMD_IMI is not set
+-CONFIG_CMD_BCB=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+diff --git a/configs/khadas-vim3_android_defconfig b/configs/khadas-vim3_android_defconfig
+index a0d9c423c3c3..b77a44ce859b 100644
+--- a/configs/khadas-vim3_android_defconfig
++++ b/configs/khadas-vim3_android_defconfig
+@@ -24,6 +24,12 @@ CONFIG_REMAKE_ELF=y
+ CONFIG_FIT=y
+ CONFIG_FIT_SIGNATURE=y
+ CONFIG_FIT_VERBOSE=y
++CONFIG_BOOTMETH_ANDROID=y
++# CONFIG_BOOTMETH_EXTLINUX is not set
++# CONFIG_BOOTMETH_EXTLINUX_PXE is not set
++# CONFIG_BOOTMETH_EFILOADER is not set
++# CONFIG_BOOTMETH_EFI_BOOTMGR is not set
++# CONFIG_BOOTMETH_VBE is not set
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_OF_BOARD_SETUP=y
+ # CONFIG_DISPLAY_CPUINFO is not set
+@@ -34,7 +40,6 @@ CONFIG_SYS_MAXARGS=32
+ CONFIG_CMD_ADTIMG=y
+ CONFIG_CMD_ABOOTIMG=y
+ # CONFIG_CMD_IMI is not set
+-CONFIG_CMD_BCB=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
 diff --git a/include/configs/khadas-vim3_android.h b/include/configs/khadas-vim3_android.h
-index fc89efb4c36e..0e2953fe71b3 100644
+index 0e2953fe71b3..498afd0287f4 100644
 --- a/include/configs/khadas-vim3_android.h
 +++ b/include/configs/khadas-vim3_android.h
-@@ -24,7 +24,7 @@
- 	"name=boot_a,size=64M,bootable,uuid=${uuid_gpt_boot_a};" \
- 	"name=boot_b,size=64M,bootable,uuid=${uuid_gpt_boot_b};" \
- 	"name=super,size=3072M,uuid=${uuid_gpt_super};" \
--	"name=userdata,size=11282M,uuid=${uuid_gpt_userdata};" \
-+	"name=userdata,size=11218M,uuid=${uuid_gpt_userdata};" \
- 	"name=rootfs,size=-,uuid=" ROOT_UUID
- #else
- #define PARTS_DEFAULT \
-@@ -37,7 +37,7 @@
- 	"name=recovery,size=64M,uuid=${uuid_gpt_recovery};" \
- 	"name=cache,size=256M,uuid=${uuid_gpt_cache};" \
- 	"name=super,size=1792M,uuid=${uuid_gpt_super};" \
--	"name=userdata,size=12786M,uuid=${uuid_gpt_userdata};" \
-+	"name=userdata,size=12722M,uuid=${uuid_gpt_userdata};" \
+@@ -41,10 +41,29 @@
  	"name=rootfs,size=-,uuid=" ROOT_UUID
  #endif
  
-diff --git a/include/configs/khadas-vim3l_android.h b/include/configs/khadas-vim3l_android.h
-index 5b2aed1cf62a..f39a3782d663 100644
---- a/include/configs/khadas-vim3l_android.h
-+++ b/include/configs/khadas-vim3l_android.h
-@@ -24,7 +24,7 @@
- 	"name=boot_a,size=64M,bootable,uuid=${uuid_gpt_boot_a};" \
- 	"name=boot_b,size=64M,bootable,uuid=${uuid_gpt_boot_b};" \
- 	"name=super,size=3072M,uuid=${uuid_gpt_super};" \
--	"name=userdata,size=11282M,uuid=${uuid_gpt_userdata};" \
-+	"name=userdata,size=11218M,uuid=${uuid_gpt_userdata};" \
- 	"name=rootfs,size=-,uuid=" ROOT_UUID
- #else
- #define PARTS_DEFAULT \
-@@ -37,7 +37,7 @@
- 	"name=recovery,size=64M,uuid=${uuid_gpt_recovery};" \
- 	"name=cache,size=256M,uuid=${uuid_gpt_cache};" \
- 	"name=super,size=1792M,uuid=${uuid_gpt_super};" \
--	"name=userdata,size=12786M,uuid=${uuid_gpt_userdata};" \
-+	"name=userdata,size=12722M,uuid=${uuid_gpt_userdata};" \
- 	"name=rootfs,size=-,uuid=" ROOT_UUID
- #endif
+-#define EXTRA_ANDROID_ENV_SETTINGS \
+-	"board=vim3\0" \
+-	"board_name=vim3\0" \
++#define CFG_EXTRA_ENV_SETTINGS                                    \
++	"board=vim3\0"                                               \
++	"board_name=vim3\0"                                          \
++	"bootmeths=android\0"                                         \
++	"bootcmd=bootflow scan\0"                                     \
++	"adtb_idx=3\0"                                                \
++	"partitions=" PARTS_DEFAULT "\0"                              \
++	"mmcdev=2\0"                                                  \
++	"fastboot_raw_partition_bootloader=0x1 0xfff mmcpart 1\0"     \
++	"fastboot_raw_partition_bootenv=0x0 0xfff mmcpart 2\0"        \
++	"gpio_recovery=88\0"                                          \
++	"check_button=gpio input ${gpio_recovery};test $? -eq 0;\0"   \
++	"stdin=" STDIN_CFG "\0"                                       \
++	"stdout=" STDOUT_CFG "\0"                                     \
++	"stderr=" STDOUT_CFG "\0"                                     \
++	"dtboaddr=0x08200000\0"                                       \
++	"loadaddr=0x01080000\0"                                       \
++	"fdt_addr_r=0x01000000\0"                                     \
++	"scriptaddr=0x08000000\0"                                     \
++	"kernel_addr_r=0x01080000\0"                                  \
++	"pxefile_addr_r=0x01080000\0"                                 \
++	"ramdisk_addr_r=0x13000000\0"                                 \
  
+-#include <configs/meson64_android.h>
++#include <configs/meson64.h>
+ 
+ #endif /* __CONFIG_H */
 
 -- 
 2.34.1
