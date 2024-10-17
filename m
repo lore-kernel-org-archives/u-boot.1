@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B773D3C533
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 752C4D3C538
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:28:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5F74891E5;
-	Fri, 18 Oct 2024 01:25:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4AEA689255;
+	Fri, 18 Oct 2024 01:25:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="erh9fuLE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l8fN9RPm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E18DF8925B; Fri, 18 Oct 2024 01:25:07 +0200 (CEST)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id 4542489275; Fri, 18 Oct 2024 01:25:09 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1933B891E3
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:25:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8039B8921E
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:25:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-3a39cabb9b8so5628915ab.1
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:25:05 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-8323b555a6aso88025939f.3
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:25:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729207504; x=1729812304; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729207505; x=1729812305; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LZrXiWmib5t7dXbxlkKVf0HEL2wYfFeUYZCILYkhFLU=;
- b=erh9fuLEWCpqusDXvCrc3mws/ILNh1roFQL8uwuzvJUKCop8KBXZUf7PYUKAzsEf0c
- zT6sjjQ+nJLGE+xT9UM16fLtir4KbdKzacb8ckoqgUhvf6l+za5xk3I8hAdI0HLZUgJ9
- TorTOp47KjQD/kGg2siSUNRG80jcF71rvWnxI=
+ bh=7NAnRtxqtgYW50bSnZp5kCnSeaLZQIJqHTBmbASu/I0=;
+ b=l8fN9RPmBfDmZRzQswaQczHPwqE08NGATq92gGthxZ3iTmMgyNeEFuRbsTlg0Tk/Qh
+ 3HL2nirvqrT4awS1KTBdx6JLW4iwG0mamtTPnj6rIaqAREzy2c4c7jXxEB/yAjAAKTvY
+ rUSr35ga5zvgJpdmwu46y0yarf3SGkTqPWbU8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729207504; x=1729812304;
+ d=1e100.net; s=20230601; t=1729207505; x=1729812305;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LZrXiWmib5t7dXbxlkKVf0HEL2wYfFeUYZCILYkhFLU=;
- b=T08aPacFfu1Bnv08Sl1jkkfsrp4uVuT29LKvoxHezbhXzgiC85zuNNMgDUuPcvvR67
- XWeBIWXj+h2AX2SAFdeBtwvwe3e1TVFMUE3bg10FBJM2UIi6LEdrBPGZBO3L7NN7KIuv
- KDHE8VjcU0dG3G9sBm3UVHtt71PyMLhAy5Ekma5pAfKHP5490Db2irwKt4OPKhIBMVqZ
- 3FfjgnYXycZ3dRgx1ZZwfjCVYt2CSzy+mvJcuoi0z3R1D5YUSTja/lz6msjzUKBX4KsF
- gplADMcpAyojrkwMlojEZCMwlSVrZjOMoW1GRm/t0szMwt427ppeP8P5ovPxK0gHXOoM
- gXVA==
-X-Gm-Message-State: AOJu0YyfyFNWWHgLwbVSAG8xuFUaYn/JMITGlTNqaSkqC00uB9JzZ6Qb
- mdQUBEfbYuIhIn9uQAkDeBusEq8TwbRdk+Ihuto8CpDZ2cUhdiAO9sJQQBwJf8mSlZ7GjoE13qg
+ bh=7NAnRtxqtgYW50bSnZp5kCnSeaLZQIJqHTBmbASu/I0=;
+ b=DJbboZcuMtM0qQoQHL7U4yPFdEXJSv2Or8cyfBSCOrmk7J7OYY1BnEchoQ5RxtUwU0
+ z5ph2ZH/tZXvWrz4C1weiyjBiN2tk2PxNNx29yNwhHQ3+gkQB5wJLfAc3roWGUX1H7N8
+ y3NsfQBYMVqQi0MySh/nKw+wq+5PfMi5vGbvjay5yNqvkonE6Zhnj0FSGL7ra4kNp3cF
+ SA/y334RM3UtR9BIgQQx7GWtjvpiG3mxgoHppzJSUnCtPz9dZeJLI/udeoAmpCpcYFWv
+ FDrFMaJtiYrmcHxU55SifjsjmsTVqFgnIXoffxyMvgGD8UkYgWO8ype4az+gZCT+GdsI
+ 4Crw==
+X-Gm-Message-State: AOJu0YwrJ1VnAQicqrZQ5EMleWhWm8305Ug/eGv6RHL8HtUMPZfsT36B
+ b6J53C70cs06vt672N2Wt2bcfomloTufzHlr2bs3SYkBEsHY0x30KsO28OBoks4uSVPiEtlZda0
  =
-X-Google-Smtp-Source: AGHT+IHI9sBaLbbABzBnHdFtWmQBZSdrulei28X2SRi1kPHoOp33u75Fx4Qpjv1eGjOIiMXiST/WHg==
-X-Received: by 2002:a05:6e02:1d97:b0:3a0:a0bd:f92b with SMTP id
- e9e14a558f8ab-3a3f405e45dmr4318675ab.10.1729207503694; 
- Thu, 17 Oct 2024 16:25:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHGivDgTKf1bO6VVUwjRMWmmWJF48AAnudX6IMR6uBkZcoMJY9chU6fx1OtykW9MZWLbt/bhA==
+X-Received: by 2002:a05:6e02:154c:b0:3a3:972a:3991 with SMTP id
+ e9e14a558f8ab-3a3f40a859dmr5482105ab.16.1729207505114; 
+ Thu, 17 Oct 2024 16:25:05 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dc10ba3454sm117117173.79.2024.10.17.16.25.02
+ 8926c6da1cb9f-4dc10ba3454sm117117173.79.2024.10.17.16.25.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Oct 2024 16:25:03 -0700 (PDT)
+ Thu, 17 Oct 2024 16:25:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Ion Agorria <ion@agorria.com>,
  Julien Masson <jmasson@baylibre.com>,
+ Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Shantur Rathore <i@shantur.com>
-Subject: [PATCH 23/34] bootstd: Maintain a list of images
-Date: Thu, 17 Oct 2024 17:24:02 -0600
-Message-Id: <20241017232413.724808-24-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH 24/34] bootstd: Update bootmeth_alloc_file() to record images
+Date: Thu, 17 Oct 2024 17:24:03 -0600
+Message-Id: <20241017232413.724808-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241017232413.724808-1-sjg@chromium.org>
 References: <20241017232413.724808-1-sjg@chromium.org>
@@ -94,96 +95,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We want to keep track of images which are loaded, or those which could
-perhaps be loaded. This will make it easier to manage memory allocation,
-as well as permit removal of the EFI set_efi_bootdev() hack.
-
-Add a list of these, attached to the bootflow. For now the list is
-empty.
+As a first step to recording images and where they came from, update
+this function to do so, since it is used by two bootmeths
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootflow.c    |  7 +++++++
- include/bootflow.h | 21 +++++++++++++++++++++
- 2 files changed, 28 insertions(+)
+ boot/bootmeth-uclass.c   | 17 ++++++++++++++++-
+ boot/bootmeth_extlinux.c |  2 +-
+ boot/bootmeth_script.c   |  3 ++-
+ include/bootmeth.h       |  5 ++++-
+ 4 files changed, 23 insertions(+), 4 deletions(-)
 
-diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 72b51ebd49b..10bda8eac79 100644
---- a/boot/bootflow.c
-+++ b/boot/bootflow.c
-@@ -455,10 +455,13 @@ void bootflow_init(struct bootflow *bflow, struct udevice *bootdev,
- 	bflow->dev = bootdev;
- 	bflow->method = meth;
- 	bflow->state = BOOTFLOWST_BASE;
-+	alist_init_struct(&bflow->images, struct bootflow_img);
- }
+diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
+index 5b5fea39b3b..34fff004b43 100644
+--- a/boot/bootmeth-uclass.c
++++ b/boot/bootmeth-uclass.c
+@@ -6,6 +6,7 @@
  
- void bootflow_free(struct bootflow *bflow)
- {
-+	struct bootflow_img *img;
-+
- 	free(bflow->name);
- 	free(bflow->subdir);
- 	free(bflow->fname);
-@@ -467,6 +470,10 @@ void bootflow_free(struct bootflow *bflow)
- 	free(bflow->os_name);
- 	free(bflow->fdt_fname);
- 	free(bflow->bootmeth_priv);
-+
-+	alist_for_each(img, &bflow->images)
-+		free(img->fname);
-+	alist_empty(&bflow->images);
- }
- 
- void bootflow_remove(struct bootflow *bflow)
-diff --git a/include/bootflow.h b/include/bootflow.h
-index 9b24fb5c3eb..3d9a9e2025a 100644
---- a/include/bootflow.h
-+++ b/include/bootflow.h
-@@ -7,7 +7,9 @@
- #ifndef __bootflow_h
- #define __bootflow_h
+ #define LOG_CATEGORY UCLASS_BOOTSTD
  
 +#include <alist.h>
- #include <bootdev.h>
-+#include <image.h>
- #include <dm/ofnode_decl.h>
- #include <linux/list.h>
+ #include <blk.h>
+ #include <bootflow.h>
+ #include <bootmeth.h>
+@@ -326,8 +327,11 @@ int bootmeth_try_file(struct bootflow *bflow, struct blk_desc *desc,
+ 	return 0;
+ }
  
-@@ -85,6 +87,7 @@ enum bootflow_flags_t {
-  * @cmdline: OS command line, or NULL if not known (allocated)
-  * @x86_setup: Pointer to x86 setup block inside @buf, NULL if not present
-  * @bootmeth_priv: Private data for the bootmeth
-+ * @images: List of loaded images (struct bootstd_img)
-  */
- struct bootflow {
- 	struct udevice *dev;
-@@ -109,6 +112,24 @@ struct bootflow {
- 	char *cmdline;
- 	void *x86_setup;
- 	void *bootmeth_priv;
-+	struct alist images;
-+};
-+
-+/**
-+ * struct bootflow_img - Information about an image which has been loaded
-+ *
-+ * This keeps track of a single, loaded image.
-+ *
-+ * @fname: Filename used to load the image (allocated)
-+ * @type: Image type (IH_TYPE_...)
-+ * @addr: Address to which the image was loaded, 0 if not yet loaded
-+ * @size: Size of the image
-+ */
-+struct bootflow_img {
+-int bootmeth_alloc_file(struct bootflow *bflow, uint size_limit, uint align)
++int bootmeth_alloc_file(struct bootflow *bflow, uint size_limit, uint align,
++			enum image_type_t type)
+ {
++	struct bootflow_img *img;
 +	char *fname;
-+	enum image_type_t type;
-+	ulong addr;
-+	ulong size;
- };
+ 	void *buf;
+ 	uint size;
+ 	int ret;
+@@ -344,6 +348,17 @@ int bootmeth_alloc_file(struct bootflow *bflow, uint size_limit, uint align)
+ 	bflow->state = BOOTFLOWST_READY;
+ 	bflow->buf = buf;
+ 
++	fname = strdup(bflow->fname);
++	if (!fname)
++		return log_msg_ret("alf", -ENOMEM);
++	img = alist_add_placeholder(&bflow->images);
++	if (!img)
++		return log_msg_ret("als", -ENOMEM);
++	img->fname = fname;
++	img->type = type;
++	img->addr = map_to_sysmem(buf);
++	img->size = size;
++
+ 	return 0;
+ }
+ 
+diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
+index be8fbf4df63..755a80350d9 100644
+--- a/boot/bootmeth_extlinux.c
++++ b/boot/bootmeth_extlinux.c
+@@ -159,7 +159,7 @@ static int extlinux_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+ 		return log_msg_ret("try", ret);
+ 	size = bflow->size;
+ 
+-	ret = bootmeth_alloc_file(bflow, 0x10000, 1);
++	ret = bootmeth_alloc_file(bflow, 0x10000, 1, IH_TYPE_EXTLINUX_CFG);
+ 	if (ret)
+ 		return log_msg_ret("read", ret);
+ 
+diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
+index c5cbf18c2e6..f01b22b064d 100644
+--- a/boot/bootmeth_script.c
++++ b/boot/bootmeth_script.c
+@@ -98,7 +98,8 @@ static int script_read_bootflow_file(struct udevice *bootstd,
+ 	if (!bflow->subdir)
+ 		return log_msg_ret("prefix", -ENOMEM);
+ 
+-	ret = bootmeth_alloc_file(bflow, 0x10000, ARCH_DMA_MINALIGN);
++	ret = bootmeth_alloc_file(bflow, 0x10000, ARCH_DMA_MINALIGN,
++				  IH_TYPE_SCRIPT);
+ 	if (ret)
+ 		return log_msg_ret("read", ret);
+ 
+diff --git a/include/bootmeth.h b/include/bootmeth.h
+index a08ebf005ad..322169c6b2e 100644
+--- a/include/bootmeth.h
++++ b/include/bootmeth.h
+@@ -7,6 +7,7 @@
+ #ifndef __bootmeth_h
+ #define __bootmeth_h
+ 
++#include <image.h>
+ #include <linux/bitops.h>
+ 
+ struct blk_desc;
+@@ -365,10 +366,12 @@ int bootmeth_try_file(struct bootflow *bflow, struct blk_desc *desc,
+  * @bflow: Information about file to read
+  * @size_limit: Maximum file size to permit
+  * @align: Allocation alignment (1 for unaligned)
++ * @type: File type (IH_TYPE_...)
+  * Return: 0 if OK, -E2BIG if file is too large, -ENOMEM if out of memory,
+  *	other -ve on other error
+  */
+-int bootmeth_alloc_file(struct bootflow *bflow, uint size_limit, uint align);
++int bootmeth_alloc_file(struct bootflow *bflow, uint size_limit, uint align,
++			enum image_type_t type);
  
  /**
+  * bootmeth_alloc_other() - Allocate and read a file for a bootflow
 -- 
 2.34.1
 
