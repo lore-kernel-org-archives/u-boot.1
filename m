@@ -4,87 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E838D3C538
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:15:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 797D2D3C533
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:15:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 360AB89128;
+	by phobos.denx.de (Postfix) with ESMTP id A559D890FE;
 	Fri, 18 Oct 2024 01:12:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jj1uzlCB";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FDcYgaL9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F343890F4; Fri, 18 Oct 2024 01:11:58 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id 680778913A; Fri, 18 Oct 2024 01:12:00 +0200 (CEST)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E767789130
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5610E89121
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6cbd57cc35bso21216806d6.1
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:53 -0700 (PDT)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7b147a2ff04so128644685a.3
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729206713; x=1729811513; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729206717; x=1729811517; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dK80skieZj5l6KzUVv+OmxHLAJvkB6aA+TyPhZRmjSU=;
- b=jj1uzlCBhmpH4xvrwFYiiwwvtotkvaxI42wfh9ImZtgvL6T2OX31oryI3kvbkZThuX
- 8RBb5ORVNxei7PeQj+rfQHwxOhNTZkMFQBnlVjTGodJ6kF8iuK7XSKn2lovg50pBdWrd
- Jk6ySIDRdYvASQeWPF76sqJEoxwIsVPJtglDk=
+ bh=7AHwDJz28tHMY+YSBVqd1ORbdBuhznVN8k+RiC5yvbs=;
+ b=FDcYgaL92dOwTFTWSFHRGRbfltRLlgWDF7J8ZZZ77l2r8bgdokbefIJ4WF+2Krg0jJ
+ IAiotjXCpNH47cVJ4c79FnZKwB9rf4CGQ4bRe0r7ZC2B293Mb2EXAojqxn4V/RiuReEq
+ cQ208cibanR2bd95LbBGqkKcbDg2uqMYsVhAU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729206713; x=1729811513;
+ d=1e100.net; s=20230601; t=1729206717; x=1729811517;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dK80skieZj5l6KzUVv+OmxHLAJvkB6aA+TyPhZRmjSU=;
- b=NJxmBIrLcW7/PuqGDoPCZcrQFvc2Ucg8MM9FSzyof1U9vidpyFHRSDxeto96Tq2gWz
- rQ7Nu6+aADQtxh9ceSrH1SweLkuqYudqKl6OhKkqP01H3NW5UDpoKJATmYLSbVRXah5+
- I6ESR1qXLqhgvmZFRJC4CzgNjTOyNzuf1isyf03h7hhMPaRk0vTy2Q28t1W7PXv2PRPd
- vShVl7IT9+lFjA/oYoUVYcJmBYoKIz+d5aX5Ai5h5wu2I01zuxM7HZoRuND9hR2SjA8U
- Msdh9Dk1gVcqmXc4C2pLTRUVlUhG687kXwXokr+Am3RL82GON5kt7L9B6SCXH//S0lTU
- QjZA==
+ bh=7AHwDJz28tHMY+YSBVqd1ORbdBuhznVN8k+RiC5yvbs=;
+ b=L8aErwqspq3tUcj9Nsv+dEKcPLthCU+gG6zLOgRLYAfR1VVvdHSSLoZ+yv8KtKoRm6
+ bJoIucCBx10B377JfmMR6elapBXZMibnIUIQNYJCePYh9u36ti6spZ9R+xYKtdsmOLO4
+ T+6WJgq6ki+DSBLhFRj0PYb98w3qoQNZUYEgoAE1snZgSw7pcgKFCoyR4mJAGzvIJqrf
+ c+faZRMLTJ7fYishF95EXh/GGGJllElLKkIi9QxGVJTF2zPvb6QKpcC2zewGkV3LpiG6
+ aveDLinorB0x1CgH72CLoSlNhaoe5M0mSWmwyh0MBkbdNtcYiZ10s7Qraa9lX9Z1mwyT
+ +LHw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVoC9gXbdhahE4sd2AQuFRv8HZbFL53IaaG2Tu5aYpkliDyu/Dz/g4bYXfvekRBjjOH6leU3ck=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz72AcKM7mYirQ65+F+Hi1ZvP156cFES2DG7RkBXpiU/WOROWus
- Whz5LjDWa4Yze19thZALT5jAGJVetEBZlXOP75G0xiKkxVKditRJe49XsJk97Blod41sq1gMR8G
- ez6ahpxucPm357aehzP8L6RLsesM6V41uYDo8
-X-Google-Smtp-Source: AGHT+IEO1M9Jh42lIYhzmu5na8ZuAB6AYDEDr4U2MBlF00gg1RaCm7MKBUK3K9hD5YMx+iOhvpOrq/3SMftYAnJxfNA=
-X-Received: by 2002:a05:6214:5781:b0:6cc:44b:105a with SMTP id
- 6a1803df08f44-6cde1b5d08dmr6091036d6.20.1729206712798; Thu, 17 Oct 2024
- 16:11:52 -0700 (PDT)
+ AJvYcCWS/xiDiigyW8SWbIRuaPzsLg67KlvhMmVtawccg9Ygopt2yhSS2sraCfl4cqEBzm3V3DyW7SQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQiXKC6Yt8mOV7HPEvtMta9IBCp5uyGb5GhychjIAAkUmTzpsJ
+ /HizTEMgvfsEjUkdlhqAAiwMkXu8PNTZ+LyGTzTsWoxttcrUfblJCJpk6OhBxJLmhS1u4xvNU4V
+ znbhwhncXIWStBQ84jc05kLSgKh93X0S2euQC
+X-Google-Smtp-Source: AGHT+IGbCzXn2HybrPYuMJixNf/haCifWP7SmZ5n6mRTPwdwcIF3krripC0QZOM/R2LLsKLzvF8X+xGg5dx6WBg1urA=
+X-Received: by 2002:a05:6214:3289:b0:6cb:cd05:cddd with SMTP id
+ 6a1803df08f44-6cde154de07mr7697406d6.26.1729206717324; Thu, 17 Oct 2024
+ 16:11:57 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 16:11:52 -0700
+ HTTPREST; Thu, 17 Oct 2024 23:11:57 +0000
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <87frp6g2ks.fsf@baylibre.com>
-References: <87frp6g2ks.fsf@baylibre.com>
+In-Reply-To: <20240930185139.2185983-2-sjg@chromium.org>
+References: <20240930185139.2185983-2-sjg@chromium.org>
  <20240930185139.2185983-1-sjg@chromium.org>
- <20240930185139.2185983-3-sjg@chromium.org>
-Date: Thu, 17 Oct 2024 16:11:52 -0700
-X-Google-Sender-Auth: XpXI7E1Li5mESkmdZARu2a-oS90
-Message-ID: <CAFLszTg0PireMoyj71BVTGZeBdaqvisoY5oahmesaQY3YhdHBA@mail.gmail.com>
-Subject: Re: [PATCH 3/3] binman: Add a tutorial on resolving test-coverage bugs
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Date: Thu, 17 Oct 2024 23:11:56 +0000
+X-Google-Sender-Auth: jzzxsnugacwdUE4bdLuMUTCcWuQ
+Message-ID: <CAFLszTiNYHuVRZSkyfAu6OWPvuKbp3AJtGuDnmJ=SGf3bbjTrg@mail.gmail.com>
+Subject: Re: [PATCH 2/3] binman: Support getting test-coverage on just one test
+To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Brian Ruley <brian.ruley@gehealthcare.com>, 
- Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- Alexander Dahl <ada@thorsis.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
+ Marek Vasut <marex@denx.de>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joao Marcos Costa <jmcosta944@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Peng Fan <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>, 
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Sumit Garg <sumit.garg@linaro.org>, 
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -103,26 +93,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Pass the arguments through to test_util so that a single test can be
+used.
 
-Thank you for the patch.
+Update the docs and add some missing backquotes in the same section.
 
-It's really great to have this documented.
-I found a couple of small typos, hope that helps.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-On lun., sept. 30, 2024 at 12:51, Simon Glass <sjg@chromium.org> wrote:
+ tools/binman/binman.rst | 5 ++++-
+ tools/binman/main.py    | 6 +++---
+ 2 files changed, 7 insertions(+), 4 deletions(-)
 
-> Provide a short description of how tests work, why they are so critical
-> and how to resolve gaps in Binman's test coverage.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
->  MAINTAINERS                  |   1 +
->  doc/develop/binman_tests.rst | 734 +++++++++++++++++++++++++++++++++++
->  doc/develop/index.rst        |   1 +
->  tools/binman/binman.rst      |   5 +
->  4 files changed, 741 insertions(+)
->  create mode 100644 doc/develop/binman_tests.rst
->
 Applied to u-boot-dm, thanks!
