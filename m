@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B91D21275
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 10:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7401ED21279
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 10:54:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BE8688F57;
-	Thu, 17 Oct 2024 12:45:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ABEF488EF7;
+	Thu, 17 Oct 2024 12:54:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VoyHzik3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QNnt0vAp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB64B88F69; Thu, 17 Oct 2024 12:45:11 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 5CC2188EAE; Thu, 17 Oct 2024 12:54:55 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD4A488D1B
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 12:45:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 825D088B16
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 12:54:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a991fedbd04so47561466b.3
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 03:45:07 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a9a26a5d6bfso124713466b.1
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 03:54:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729161907; x=1729766707; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729162491; x=1729767291; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=/6qL4K1B4vobDk7ICRhow/AbLxAF8v7aMYLSrSawvAU=;
- b=VoyHzik3oOhqJvRKmuURgSVWmHgMQx22LbaIL5RX/701/E59rR/3saKv4NbMT+ebfa
- WDjdUAzSf7fdQeaeHsVAykmPr3Tj2SpOgvFNI7M96gqA8ECEhEF2nSwBZ2yKLacAdMYh
- Zjs5bNRtxtGbml/07wtkcUddHowpiXLz9/nutWUzcgvl8t61FkiEegd41jnfwA3w/NEh
- NeFdo61HijKKw9EiUe4e9QT2kHfIdqapPcBgf1Y/tUf+kMOJvbVXFeXtH9QrAXQRfp6/
- LD/dPgKcboToAvrSDfgBcKReP471N+0/swO64B62EHKD0F8idLfH98e4Szpsn6Zk0Miz
- CT5g==
+ bh=+sLsjHzLgDvC7zkeKbWrtZmkEE6o6/cnLqqTgdJLtic=;
+ b=QNnt0vApTPNulQuCawmJYi29yFoV1v8FJMLhIm5kUWO5aSLxQez4HDTvtPTQyVi3FG
+ M/GaMjpwwdNKkcoxXQtzEZZMB0QWEd2kQk09M0dte7dlO0Y0CcEzfQyEpNs2yKv3Lecw
+ 4S6+WAtMZ57z9Pti70YMIGLte80Ul751mDJvUqP78RjaaKUJVpKeLah7XXmKZrlE+KrP
+ 4EKBCB/yFF72TlPWq6rNvty58IsqIxtsFHXfEEj68NhhvVgrzZe/3zMWY8t6+BM7V3Yo
+ IoBeGTJrbsWJ2eraEfJkx2LlzsFYelsgwP2LJyYUAyeCVAZbTLS/i65uZ/eiRMPHCCDL
+ YbAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729161907; x=1729766707;
+ d=1e100.net; s=20230601; t=1729162491; x=1729767291;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/6qL4K1B4vobDk7ICRhow/AbLxAF8v7aMYLSrSawvAU=;
- b=eyKCheLiFAlsMGaNzbsvd+QnU1kk2chy2N4GdvpmUp6SnJF5uoLxhOrmPVCvNv4P9c
- CCUFleYN6372bztNOWLtIQPQCtojg9C9tMzQYcGd9S5YNyqT1x+k9wW4/ogv3xbg4OQK
- 1qcEQHB+1O2PR0A2VJuoEUvjZ6E0vMZ+e6mDdZHunyM234/B/pTmpXXqi/ItOF2U9C39
- 2U8mfqLjPzVO6GFc+sYNqmYNtCwYJ7QJm4gOwDaeUxNjXEWXZ7R5bw/JfRnYlw1so0p9
- p0V2qYQWldN2J2zuJnn+6caUTLst8Ig6PHpWDXoYPfA7N88A8QrnPomV6cjK8EKsYwWS
- ICDA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWngfNiC4TD1rQSox7I3cwQhPlcJ0bWtoWx52E4T2Cr/1x7XM0ER9Q0EThZ35QYGXwq62GW3QQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxXTjgDRrOCG2wuBfoB791Uag2lX9nrIP//9/x5c0V0n8qzu3gj
- 2Vd8xidyZ9wpg3hClOcjyRpKRt35P1o//qxcLbhWQxh7AIZfD2Gfohpb6z1PIAXlJWMUQBGtBU0
- o
-X-Google-Smtp-Source: AGHT+IF0/r9IwVVTmga78KQj3S/JAQkscYZHN8AW56KTaRIrFbMMwHeFpbBXJTHmraakkoVnN26POA==
-X-Received: by 2002:a05:6402:26d1:b0:5c5:da5e:68e with SMTP id
- 4fb4d7f45d1cf-5c95ac09876mr24893582a12.3.1729161907137; 
- Thu, 17 Oct 2024 03:45:07 -0700 (PDT)
+ bh=+sLsjHzLgDvC7zkeKbWrtZmkEE6o6/cnLqqTgdJLtic=;
+ b=j+stLhcfHHsRZ5w8CqrStFFCCVbTaaos4IzHrtjdK+tVsijxSM73dXPmQcNLkFLzov
+ pP0dlAhQLvDWKCHmb56h+MsWsKQo6lxBTyRDJZLtRNMyQRiMah2ZBv++BAIvoLEB1JsG
+ v6hDvvXZI7yNlGLBIQJpANH4KKjSfz8P4OD34QQsZjLbhyjgFLtBTg8wKr8Wrg+QT0K1
+ iVKR7wnMBOFtSWpiR21vZ/6R0F1flp/gbpik+tSBAyeRmqeQtHEmZqB1oN3qoQt5jrV+
+ phcoyZL+7oojqnI0+X+sP7iVdFMQl7HyHdjuQqHPKSjSuIDVzFQdwT8sn/WIk703cvdg
+ zgVA==
+X-Gm-Message-State: AOJu0YxE4KF5mBbvRHG+AK7Yg8kcDK++Xu+2r0fNG4a2+fYQxrx8znux
+ Upg9JPbbQ9CVn7eFSZKYmh5EqZ6OvCnOC7jdH4FkN4j3YWowE/uSTY507BUizoE=
+X-Google-Smtp-Source: AGHT+IHGW1NIC4M9uyQu5FL1XfvMl8w3Cys/VIGfziBNYJSKyWP6HPPiLEoVIkjl8yd1Bpni8fO92Q==
+X-Received: by 2002:a17:907:f760:b0:a99:87ea:de57 with SMTP id
+ a640c23a62f3a-a99e3b21443mr1754155166b.2.1729162490874; 
+ Thu, 17 Oct 2024 03:54:50 -0700 (PDT)
 Received: from ?IPV6:2a02:8109:888d:ff00::2? ([2a02:8109:888d:ff00::2])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c98d4f97f1sm2656693a12.31.2024.10.17.03.45.04
+ a640c23a62f3a-a9a29895ccbsm283302266b.219.2024.10.17.03.54.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 17 Oct 2024 03:45:05 -0700 (PDT)
-Message-ID: <9f14f57d-3367-48b1-8a7c-f68087f52580@linaro.org>
-Date: Thu, 17 Oct 2024 12:45:04 +0200
+ Thu, 17 Oct 2024 03:54:50 -0700 (PDT)
+Message-ID: <2a7a7858-939c-42bf-9c91-55ef59bb09df@linaro.org>
+Date: Thu, 17 Oct 2024 12:54:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] qcom_defconfig: enable PINCONF
-To: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20241017-topic-sm8x50-enable-pinconf-v1-1-a70ddf492e87@linaro.org>
+Subject: Re: [PATCH] dt-bindings: remove phy/phy-qcom-qmp.h in favor of
+ dts/upstream
+To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20241016-topic-sm8x50-drop-phy-qcom-qmp-local-bindings-v1-1-7928f9cbe8f0@linaro.org>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20241017-topic-sm8x50-enable-pinconf-v1-1-a70ddf492e87@linaro.org>
+In-Reply-To: <20241016-topic-sm8x50-drop-phy-qcom-qmp-local-bindings-v1-1-7928f9cbe8f0@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,33 +97,47 @@ X-Virus-Status: Clean
 
 
 
-On 17/10/2024 10:04, Neil Armstrong wrote:
-> The SM8550 and SM8650 SoCs requires PINCONF to properly
-> setup SDC pins in order to function correctly.
+On 16/10/2024 09:37, Neil Armstrong wrote:
+> The upstream version has new defines use to build DT, drop
+> it in favor of the dts/upstream more recent one.
 > 
 > Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 
 Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   configs/qcom_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+>   include/dt-bindings/phy/phy-qcom-qmp.h | 20 --------------------
+>   1 file changed, 20 deletions(-)
 > 
-> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-> index ea0dd3e58018c8bf08e4a455a47e29cf1bbd3c60..3ffc650c77191b224c7b2322fa4e1fbe1a1a97a5 100644
-> --- a/configs/qcom_defconfig
-> +++ b/configs/qcom_defconfig
-> @@ -81,6 +81,7 @@ CONFIG_PHY_QCOM_QUSB2=y
->   CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
->   CONFIG_PHY_QCOM_SNPS_EUSB2=y
->   CONFIG_PINCTRL=y
-> +CONFIG_PINCONF=y
->   CONFIG_PINCTRL_QCOM_APQ8016=y
->   CONFIG_PINCTRL_QCOM_APQ8096=y
->   CONFIG_PINCTRL_QCOM_QCM2290=y
+> diff --git a/include/dt-bindings/phy/phy-qcom-qmp.h b/include/dt-bindings/phy/phy-qcom-qmp.h
+> deleted file mode 100644
+> index 4edec4c5b22..00000000000
+> --- a/include/dt-bindings/phy/phy-qcom-qmp.h
+> +++ /dev/null
+> @@ -1,20 +0,0 @@
+> -/* SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause) */
+> -/*
+> - * Qualcomm QMP PHY constants
+> - *
+> - * Copyright (C) 2022 Linaro Limited
+> - */
+> -
+> -#ifndef _DT_BINDINGS_PHY_QMP
+> -#define _DT_BINDINGS_PHY_QMP
+> -
+> -/* QMP USB4-USB3-DP clocks */
+> -#define QMP_USB43DP_USB3_PIPE_CLK	0
+> -#define QMP_USB43DP_DP_LINK_CLK		1
+> -#define QMP_USB43DP_DP_VCO_DIV_CLK	2
+> -
+> -/* QMP USB4-USB3-DP PHYs */
+> -#define QMP_USB43DP_USB3_PHY		0
+> -#define QMP_USB43DP_DP_PHY		1
+> -
+> -#endif /* _DT_BINDINGS_PHY_QMP */
 > 
 > ---
 > base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
-> change-id: 20241017-topic-sm8x50-enable-pinconf-58ae8e77cd36
+> change-id: 20241016-topic-sm8x50-drop-phy-qcom-qmp-local-bindings-f036014e174e
 > 
 > Best regards,
 
