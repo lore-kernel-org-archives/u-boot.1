@@ -4,60 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 260ACD2F7D7
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 01:09:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB67CD2F7D8
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 01:10:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ACFD88DF1;
-	Thu, 17 Oct 2024 03:09:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 414E088DDE;
+	Thu, 17 Oct 2024 03:10:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729127350;
-	bh=kllVk0V6WinEngMhNKArHQmIi3hcz35j/i1XARHAE64=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=H1JfnLj7C3rcJr1FiXxZ5saNiGDYcZOLY09pOxlAEu0uptgaH7ddD99IWiGJ6EdTi
-	 T6Yn+/nfEplxR0gOiCFsYA2k8BrHBP6FresweW0L/l8G74AR43nFD6u6TCdj16FiPn
-	 Sn7RsxSb2yBd4/70Vlz1DkCcu+2rWL4eeDwnVmC20320jqnT33ZTc1MHatoz5p6Iwb
-	 nHpR2dkNj39KOKEnsv/ruG/62RmDblG84udYyNK67UiTKkFcdQCdlF/m4K9CbUyUoF
-	 s+pUGW7fi3f4rCahI+yz3h8d3VrQY6HhTjHUKCkFgL3jKsp8okXuaTP56FiAzj3QbP
-	 2Cs59hAhKY31w==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="H+vTyX58";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D9FC388DE6; Thu, 17 Oct 2024 03:10:06 +0200 (CEST)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 405BA88D7E;
- Thu, 17 Oct 2024 03:09:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729127348;
- bh=kllVk0V6WinEngMhNKArHQmIi3hcz35j/i1XARHAE64=;
- h=From:To:Cc:Subject:Date:From;
- b=eKtGBI48m6BcI8uvKnUddYg+KqyLWPDnbuLtAzBP9XrRui9qT+Wc3kekrAnBx3voI
- aj3m47pJnpJxRbrAym0t86liZ44vTLRyKnCBrnHGtdrMxUbQnqDQBYab1Bf2HDGLr1
- 9ljwOqOPJA6F5TeKEkZiUobg8g/tuOvdNR2mRwkQU55+I2HKjfMa5XlwT0/8/ygq16
- /tOZfCyeiYybmA259MXFJwPRxsHDKxDrQIpqu5szmMKiKXqfTIHOnd9JK3DsVzbXTG
- nyCR9Ro7y1TWAbeQ0RmxwglCqxVEu/f7lYPMjywpQJnA+MRluNwtk701X3dudVxzKz
- 9Cbpj3nLVj49g==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Fabio Estevam <festevam@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Lothar Rubusch <l.rubusch@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-Subject: [PATCH v4] dts: Add ability to build fallback DTBOs from
- arch/$(ARCH)/dts
-Date: Thu, 17 Oct 2024 03:08:40 +0200
-Message-ID: <20241017010856.152764-1-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
+ by phobos.denx.de (Postfix) with ESMTPS id 99B7D88DDE
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 03:10:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jgScvvpPd7z5J6PESFsJq7YMIx0MOKrno/QlHbhTLfMOK2QTCHoFuz2/rl+dWh6CbxwvUP5tkZDgm99vt0082K0vh9/jjmmsqZy1RpnCew56ZQQV/SRoW5pRb08T0ov6ftX/nxiz0FP+1VZCmag2vVEEwBmUQYc2g+Nw3YLKTw4yhvFyWbJrP7FX06lXpAM520awbwqv1F1JHuyM1FepeCvHUK1xGjSfFRQ/ZonVEpfh0tC/sUFAe7sMBIMMAtGT5qRconk5fliaSageSn2jRwJpzHlLuBxXqQ/T4js6tnjOSF2SXoNz9d5zo5Y2JYfdAfhN6CbcYlNrsX2vwA1b6g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/502Wd4ge2kfsiiJQsio/8DCa331ksUL3rPimJs7hI8=;
+ b=dpqhW78n8zykMMiff2NwZcqxn4dwM0q+VOJf1Rn4ILGuH1zQ4oi/w+9TYAUIUx0dJiKt4pF0pLJWoo/pkLD8zxGSn4bxUHPETnw74kjMYcGLzkCPKuaF3kJZJUlSfrRVX15Ax31W6AQuYWfUg3iW3Z/vwcJU9NpBIu5haH1mYf13OSnYxSLNGqT1/m+N1dFCacsZShVS1Woo8IFAM6ziYW44v6TJNkhrulSMRGFqtlJfLCYv8mBt8ryrVLMzhzmsyMXW7dcFzKP2vgHeFQaEnLFI6HRT1J49nBB/hjG3XGsFmeF6EVA84A2pJaNI1R4tBgkozA2F3f69nQdug5Y9Fg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/502Wd4ge2kfsiiJQsio/8DCa331ksUL3rPimJs7hI8=;
+ b=H+vTyX58blBHJW/PHl3vcSpvgpE8vu7GGevOvwO4xh/8hO+3qTeLq4b7YqasPyu2u/Edn/Sq9a/zhrMuz6uUWWRRx6d+UYwn287OT5rOM9EnG+dW6uXcvaDEI66ZjGsd+TcaSkbLoYEELsJKhsKu20v3cg837kYkZ+Fmgvf+VN4+TLc9FVQt9lkbMQgVj+ZM+U5Lt5+3K331wdLNBRjyfIyhQKBObO5qrhIl48e05O2/iqXRf3qTVm5U03EOx8unOn/R6wvoJ1V4x1/8P3eaabawbHfRPay8wdjg2Xx8WnY88x6V23RxWa3yz6E6VkerpUeYkZlvQs9CmNJsjD/SMQ==
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by PA2PR04MB10130.eurprd04.prod.outlook.com (2603:10a6:102:408::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.18; Thu, 17 Oct
+ 2024 01:10:02 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.8069.016; Thu, 17 Oct 2024
+ 01:10:02 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Fabio Estevam <festevam@gmail.com>, "Peng Fan (OSS)"
+ <peng.fan@oss.nxp.com>, Simon Glass <sjg@chromium.org>, "sbabic@denx.de"
+ <sbabic@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>, dl-uboot-imx
+ <uboot-imx@nxp.com>, Gilles Talis <gilles.talis@nxp.com>
+Subject: RE: [PATCH] cpu: imx8_cpu: Avoid revision to corrupt device tree
+Thread-Topic: [PATCH] cpu: imx8_cpu: Avoid revision to corrupt device tree
+Thread-Index: AQHbG8OV2ytJDPNYZkWDYfI8Ze6VULKBxXEAgAATiACAAGYkoIAHgIyAgABqvEA=
+Date: Thu, 17 Oct 2024 01:10:02 +0000
+Message-ID: <PAXPR04MB845987E412CB6526FAC7D7F188472@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <20241011105827.7729-1-peng.fan@oss.nxp.com>
+ <20241011165616.GW14210@bill-the-cat>
+ <CAOMZO5CSK74_TcubtN1W1MpVmTwTmbv_XfhaOexpdvoc5WGb=w@mail.gmail.com>
+ <PAXPR04MB845979AC895A90D969E5F216887A2@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <20241016184539.GF4959@bill-the-cat>
+In-Reply-To: <20241016184539.GF4959@bill-the-cat>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|PA2PR04MB10130:EE_
+x-ms-office365-filtering-correlation-id: a4dbbdbf-6273-42dd-8d31-08dcee486d87
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?tFdh/fUp8oBT0z3RXSpGWa0u1jAfo9z3sFO0OMi5xldBnNbW3jRzjqgxJW4j?=
+ =?us-ascii?Q?j6OMMzXrxfoY8yvIPKGck9OYXlQAbUidgoV0r441JrvUWI2UYbOaq+Jc+Ary?=
+ =?us-ascii?Q?2P2rccdkGKiWk9muKcH4enxX/55MV9ZWRDIUcfxW/tKkxA2fNLquUNjwmcPJ?=
+ =?us-ascii?Q?R4Nf7SmvQuO7HtGA20Q6pMB31HagQGP9tajiWHSC96/vjh01Nbpa8GT/2DGF?=
+ =?us-ascii?Q?nLeKJYx8aAga4nGoeW0ss8ONx9ydNIYx2Ky0E1GqCf+OUDpUfWWgmWjt5J1z?=
+ =?us-ascii?Q?CkXq3wgboCiribxPqDysRdfNVo4mHLSVUiUOyRqfR525OMNTDXns+Tj/Cgh+?=
+ =?us-ascii?Q?qJfwJ60un7sElWxKbANNjjSKEUMS9LwVitMAhFt+saq+ikKZ1u/gzP5JztQ/?=
+ =?us-ascii?Q?G0W+0DN11g040ULVHmYqeIibcrx9lGkcdB278b8/RgRPZEt8DzrtLG79YxrA?=
+ =?us-ascii?Q?ETXk5wbhZGQM4pQAbk6AJgJJVbX6frVUincQbZTqahX4KJECOma11+3dMqx0?=
+ =?us-ascii?Q?XTWRQVSgDJfceVqYnziM/c4+9BjpJ+a0UYNxW4Hxbf2y1YPaHL1y3VrYbFOh?=
+ =?us-ascii?Q?9hokHZwZLx98DgoO47okp5wVYqGP08DQckdvrT8MImcIhzYHSs1rk0kv1+tF?=
+ =?us-ascii?Q?14sayYodAyFoWTkVXf6gZkb49DAJoqndM7TgdqKEoJX3u+tUkWtHWlnnhk4Y?=
+ =?us-ascii?Q?HvdhQeB6qielHNgz3kbejS0wpVkcIO+O9awk6ydzp4r1n5RHkjt4acXFtA8x?=
+ =?us-ascii?Q?lK/G3q36FCXZa5YS+1OswIEpwnQCd1FAPd6dpIqWdjkY9Gio4OvWrfXWMsW7?=
+ =?us-ascii?Q?akh84HX2bcHPmQHp9qtVnQUD9mK0psoQKPZp7vkOUeeVfnVBRoJ3yArWRbMo?=
+ =?us-ascii?Q?lRm1Gon/VS41GkG86z/po4YA/E4q1IDXcvbjCEeVN79YLPfuKVOUt3ZlWkdW?=
+ =?us-ascii?Q?IfpTgWk9mGFifamhyq6xLJUZEL4c+9Ftqv3NErmvRTe3egIgsd3HFVCBuG4f?=
+ =?us-ascii?Q?hZDcHoB3SVXR1czoujQWlIb8h3TgJf+MQ28xu4YuRPkGGaTNDGZO5jOIJTQW?=
+ =?us-ascii?Q?zt3pSrA/yf3dQW79deOhxe9Yd8+uRwCtS0fd/LLy4J1V5E8pueRri/gj6CVG?=
+ =?us-ascii?Q?SYBAT59xblnrEWnFG0nJMv+5COyU/r+OGQWi+xyjtsc5/aOlvz8dtiUTkmUN?=
+ =?us-ascii?Q?e9V52NggOOaRofk+gUvX96makmWZCm+ujlp1okm8Dsmgw+IY58BRdAU84T0s?=
+ =?us-ascii?Q?ve8OkBV8Bq/MN4d840hDaDpCJcwtIoYUN2tPqBRFOHe1SptXLDMnwP3sNPxZ?=
+ =?us-ascii?Q?SzBUPOo/+tcGP10m3Sy/Gd6e+aLw5DSfSV445sGksweUhjA56142zw+ZjWDa?=
+ =?us-ascii?Q?U6KyJro=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?+U/1HSihstQtTaCXwU8Rypu7I9yuEirn+NFBE5X0jgNPtibM83b++a07jtiF?=
+ =?us-ascii?Q?pTJYxcmN3taYXQ8tibl/ur5i0v0aPxJucrWbe/lJcLTJmaIiUTcFq3DRvIMz?=
+ =?us-ascii?Q?51HCTpdktxBqd74GkK4EwywDnj3hOdtIM7eUCYfnutbV7qWRTf5PD2Foc6Dj?=
+ =?us-ascii?Q?3P8gP7NkTpH+J0E9xij+i8IQMG0Pp//femEVAaES9lGTh9F8jpyg94c0cCrw?=
+ =?us-ascii?Q?9HX2bYpNGpchU0IxscRdPji2eS/eRfMWbUfSpHCeDyCuJ0UfsP4KZQW6GIua?=
+ =?us-ascii?Q?0kFIfoB6JAX8vgWCU4xe6xyR+ixIZ8/RYyiehdpG40hhkoGFBRFkIfQvdrgs?=
+ =?us-ascii?Q?/jHoTkp83mBHWRxZPL5yzkCzztVLF5Izii13acpgjsRltpMKE8T3jF0YhIMA?=
+ =?us-ascii?Q?eKU5Rb18IwRf6r6Zf11kx6g1ppxmrB+wMQylAvCWe4kW9JAMHHayo7kfKM4k?=
+ =?us-ascii?Q?t9t87AzIRGK+NBphjrjghuiwQbYphsZoXVc1T6cWcQrHK68GH900cYllA1t4?=
+ =?us-ascii?Q?ypYb2MrrgQsQw5w9qIYGwJMf3R2kcsRB1roNLukDhDauHZ90dz3u/Z81vFlh?=
+ =?us-ascii?Q?X2UYbNnMCZtPFKlP9JE1FxKjGYJsixqY2P3jwgWeVzkYXeQ4q45agBi53BHd?=
+ =?us-ascii?Q?gG8Zs9cD+jVWv9P95syMszxcaHNSy7WBkyzcwGFqxXMTVj69sUpZZPSMhhiG?=
+ =?us-ascii?Q?Q0iaWyFZEal78PNgobhyZdqTmTsua4ay99Dvu/SI4kWkx0/6dgWg2CyQumP7?=
+ =?us-ascii?Q?cucS4gXpKYJ6J0J6G3OZfAijyEPl8zTJMVTZE00szv9Rbch3GlqTWOmwQ2sd?=
+ =?us-ascii?Q?IkRXW+UXczRWcz4P1+WIeKTfIVH+1B6+R6IyFVugv6frnWPNLEOr2z2WRxys?=
+ =?us-ascii?Q?CzTDACZUTEadqhHPPtrzurd3/wBsNIopRJoMJpeuYFwg3omoJeMNpFLT2jEW?=
+ =?us-ascii?Q?+BkD/l35Q13nQtY0DiQBbezIWnmQWfPPFH1dPxiJAxtbV28uyzaL8wRbJJwN?=
+ =?us-ascii?Q?H/bR7Oi1aKHrvBZvqgaSn7lTKlxWfnOGR9Fuw2PKuwj+xPZLr5NIdryKNPDy?=
+ =?us-ascii?Q?GPjTwPsrr4EiKs3xeIjXY2IyaF11hXe8MYxtgSzj8qVVC0rdH5S6pOHaE0DR?=
+ =?us-ascii?Q?xMGDXlIECXIVOhzjCNje+8LxO6XsE7MYIEC0+5a/cyO8nSAFFn+1NqE/LfE6?=
+ =?us-ascii?Q?ZD5nsae8c5lFBR4CjcunNWPoqxRaYFx/whGdmU7iqsEw+eCHf4Y21CEKoa6L?=
+ =?us-ascii?Q?aw741fdbfAr6k9w2fWIizZiWxGi/uEtOd4KMYKxVVv0TjhpqAMsyuSBND8ZH?=
+ =?us-ascii?Q?6TiPoT8J2SaIaCT34wRPaBQ+v18aLRzkgzC4KsqOYCOnoLyhl/QkZBRnMM1T?=
+ =?us-ascii?Q?SIpwiV5X1qZ2ng6grRZEuxeZ6zg4/TFzEisxng1QXICbZtN60l0rQamjx0H7?=
+ =?us-ascii?Q?JG65ooudjZXti1iq1ST7Ayvu9cbQAtqQz4i09FIAWaOCK+bU+1qL+CZU+BA3?=
+ =?us-ascii?Q?zsV9/lEw0on/Bq4VEviexYrmoDrsYtFZYDBM7enP/kRKT0FAxVbLbELTms1K?=
+ =?us-ascii?Q?DsXEDo+OCcpcCezp5CY=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a4dbbdbf-6273-42dd-8d31-08dcee486d87
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Oct 2024 01:10:02.1825 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: DYqnTUVV1iUuYaCGBQz20ytyxEn4xzLRshAzqV9U9jNAvFRFWZgZ76QK8tag3eNNdIvfRL/SQ4/1ZtfQRPeNjw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR04MB10130
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,147 +162,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently the enablement of OF_UPSTREAM results on the build system
-searching for DTs only in dts/upstream/ . There are platforms which
-use U-Boot specific DTBOs applied on top of U-Boot control DT during
-SPL stage, and source DTs for these are located in arch/$(ARCH)/dtb.
+> Subject: Re: [PATCH] cpu: imx8_cpu: Avoid revision to corrupt device
+> tree
+>=20
+> On Sat, Oct 12, 2024 at 12:16:14AM +0000, Peng Fan wrote:
+> > > Subject: Re: [PATCH] cpu: imx8_cpu: Avoid revision to corrupt
+> device
+> > > tree
+> > >
+> > > > Why isn't this padding and alignment with the BSS being taken
+> care
+> > > of
+> > > > in either the linker script or the binman dts?
+> >
+> > Sorry, I am not sure what you mean.
+>=20
+> I mean, why are things placed in this position to start with? Why is the
+> device tree not already in a place where we aren't smashing it at run
+> time? Is this a problem of the alignment / placement of items in a blob?
+> A runtime placement problem? What?
 
-Add dedicated 'dtbos' target which builds only .dtbos and not .dtbs and
-in case CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS is enabled, build
-this target for arch/$(ARCH)/dtb to generate local U-Boot specific DTBOs.
+Whether binman or not. I think u-boot.dtb is padded just end
+of u-boot-nodtb.bin. Not alignment or else.
 
-Adjust top level Makefile so binman would search for .dtb and .dtbo in
-both OF_UPSTREAM specific paths and arch/$(ARCH)/dtb for the .dtbo case
-in case CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS is enabled.
+This is a common issue, bss should not be written before reloc_fdt.
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Jonas Karlman <jonas@kwiboo.se>
-Cc: Lothar Rubusch <l.rubusch@gmail.com>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
----
-V2: Gate this functionality behind CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS
-V3: - Unnest CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS
-    - Add RB from from Sumit
-V4: Rebase on u-boot/master
----
- Makefile             |  4 ++++
- dts/Kconfig          | 16 ++++++++++++++++
- dts/Makefile         | 14 +++++++++++++-
- scripts/Makefile.dts |  6 ++++++
- 4 files changed, 39 insertions(+), 1 deletion(-)
+Regards,
+Peng.
 
-diff --git a/Makefile b/Makefile
-index a2e9435c4f8..2e0a2e9f90c 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1383,7 +1383,11 @@ of_list := "$(ext_dtb_list)"
- of_list_dirs := $(dir $(EXT_DTB))
- else
- of_list := $(CONFIG_OF_LIST)
-+ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
-+of_list_dirs := $(dt_dir) arch/$(ARCH)/dts
-+else
- of_list_dirs := $(dt_dir)
-+endif
- default_dt := $(if $(DEVICE_TREE),$(DEVICE_TREE),$(CONFIG_DEFAULT_DEVICE_TREE))
- endif
- 
-diff --git a/dts/Kconfig b/dts/Kconfig
-index 569d4be338e..385058b429f 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -125,6 +125,22 @@ config OF_UPSTREAM_VENDOR
- 	help
- 	  Select the vendor to build all devicetree files for.
- 
-+config OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS
-+	bool "Build local DTBOs as fallback for DTBOs missing upstream"
-+	default n
-+	depends on OF_UPSTREAM
-+	help
-+	  Enable building DTBOs from arch/$(ARCH)/dts as a fallback for
-+	  DTBOs which are not part of Linux kernel upstream yet. This is
-+	  a stopgap measure to expedite OF_UPSTREAM switch for platforms
-+	  which already have main DT in Linux kernel upstream, but still
-+	  have leftover DTBOs in U-Boot tree.
-+
-+	  Do not use this option, upstream your DTs and DTBOs instead.
-+	  If the upstreaming is in progress, use with utmost caution.
-+
-+	  If unsure, say N.
-+
- choice
- 	prompt "Provider of DTB for DT control"
- 	depends on OF_CONTROL
-diff --git a/dts/Makefile b/dts/Makefile
-index 62a65688cf5..86bf8dc2156 100644
---- a/dts/Makefile
-+++ b/dts/Makefile
-@@ -20,6 +20,12 @@ else
- dt_dir := arch/$(ARCH)/dts
- endif
- 
-+ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
-+local_dtbos := local-dtbos
-+else
-+local_dtbos :=
-+endif
-+
- ifneq ($(EXT_DTB),)
- DTB := $(EXT_DTB)
- else
-@@ -40,7 +46,7 @@ endif
- 
- targets += dt.dtb
- 
--$(DTB): arch-dtbs
-+$(DTB): arch-dtbs $(local_dtbos)
- 	$(Q)test -e $@ || (						\
- 	echo >&2;							\
- 	echo >&2 "Device Tree Source ($@) is not correctly specified.";	\
-@@ -53,6 +59,12 @@ PHONY += arch-dtbs
- arch-dtbs:
- 	$(Q)$(MAKE) $(build)=$(dt_dir) dtbs
- 
-+ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
-+PHONY += local-dtbos
-+local-dtbos:
-+	$(Q)$(MAKE) $(build)=arch/$(ARCH)/dts dtbos
-+endif
-+
- ifeq ($(CONFIG_XPL_BUILD),y)
- obj-$(CONFIG_OF_EMBED) := dt-spl.dtb.o
- # support "out-of-tree" build for dtb-spl
-diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
-index 1fe142f2bbf..3ab67b3c247 100644
---- a/scripts/Makefile.dts
-+++ b/scripts/Makefile.dts
-@@ -21,4 +21,10 @@ PHONY += dtbs
- dtbs: $(addprefix $(obj)/, $(dtb-y))
- 	@:
- 
-+ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
-+PHONY += dtbos
-+dtbos: $(addprefix $(obj)/, $(filter-out %.dtb,$(dtb-y)))
-+	@:
-+endif
-+
- clean-files := *.dtb *.dtbo */*.dtb */*.dtbo *_HS
--- 
-2.45.2
-
+>=20
+> --
+> Tom
