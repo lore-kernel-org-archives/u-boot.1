@@ -4,66 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0FA6D2F7F2
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 06:38:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 594E2D2F7EF
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 06:47:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C305B88FA4;
-	Thu, 17 Oct 2024 08:37:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C697088E17;
+	Thu, 17 Oct 2024 08:47:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vfnkH39/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gDc6KJcQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FD9488FA4; Thu, 17 Oct 2024 08:37:51 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6096B88E8C; Thu, 17 Oct 2024 08:47:06 +0200 (CEST)
+Received: from mail-ua1-x936.google.com (mail-ua1-x936.google.com
+ [IPv6:2607:f8b0:4864:20::936])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 951E488EFA
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 08:37:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53A6888C05
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 08:47:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49H6bjT2042446;
- Thu, 17 Oct 2024 01:37:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729147065;
- bh=ZXfcSdowm1pIO6EAZ61DqFuDtTBKuaibx4dBOoUhF1U=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=vfnkH39/KtHA3SK8EuL5ZtHVsxv6LmUCGg1dSkGKSNyVcbDqo78SmdH95UXaZ51R9
- FtTeUhWVgm+brsMzXZckkUXPvNZOAHUpc6oIv3NOuG8Y2pvPh7nlKS6cNSWtDp81Q7
- cYy1rByzXo/3c10HLazBsayIAJlqzhxQmIM2psYg=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49H6bjOQ011952
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 17 Oct 2024 01:37:45 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 17
- Oct 2024 01:37:44 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 17 Oct 2024 01:37:45 -0500
-Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
- [172.24.227.91])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49H6bFOZ090460;
- Thu, 17 Oct 2024 01:37:43 -0500
-From: Aniket Limaye <a-limaye@ti.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>
-CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>,
- Aniket Limaye <a-limaye@ti.com>
-Subject: [PATCH 6/6] DONOTMERGE: For testing only
-Date: Thu, 17 Oct 2024 11:59:13 +0530
-Message-ID: <20241017062911.2241167-7-a-limaye@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241017062911.2241167-1-a-limaye@ti.com>
-References: <20241017062911.2241167-1-a-limaye@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x936.google.com with SMTP id
+ a1e0cc1a2514c-84fe1bc5284so214826241.0
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 23:47:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729147621; x=1729752421; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lb7Juep2N0YEYTsKd7SQ/Rn2owmAqsVflSsrmumFaB0=;
+ b=gDc6KJcQDgG00nzQu3tBIkNlERDQU8idIOpYqUY6YVdh8B3Ku+YS0cc66ZHAkDF31A
+ CjLSvFSPEoKd/SvXcXA8mueAE6hZnFHVQ1thOdDqC509V3f9AycRQy4w8ECOSacwzlpk
+ wlnH8bPzHRfBW3fLPo1eH+2AfIAlEOmS3gnptaT4abvWGgXKu5HkQmrG80CgAYcEwjHf
+ Oid1yFv4rn8QHYVHobl+4fxxVgbQp6FdPOOy8Fy8mx1tzWVxaBQbQn6HjKFI8jifcT7c
+ UGVzKUXkb/nmIbMox6Q9RiVm620N5+U/M72Qhki7klxKjtfg4Tdqk87e8X5JHqTAOMyy
+ /olQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729147621; x=1729752421;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lb7Juep2N0YEYTsKd7SQ/Rn2owmAqsVflSsrmumFaB0=;
+ b=Os6HeH9t3ZnzsVLrpWFMDCwfKCNK42DrLrTzOsfprkU58aI6euVX64l0Y0QaEs3E5V
+ eakeeXogOclvQ11BGGVblQ/I7vgUssRgot9JKL+gADul0Pjbq9+7mcygU/fwvB2zSToT
+ 9rWETzEVYSFiXe66Fklnm9CgEJiQEeMkitNjOTzlZ2n06YLLIGqwwqZzc8jXbAfaZWwc
+ 0MO6SVGUfwVBvu0x/XGtzBQcUIAe781t3GXMYodLz7D6V/VCQGdUHLw1/kQ0myyTyMrI
+ hP2LJ4fYX3UikCaPccnC4J5kxuRM4Ap6U/Ic6amYDU17xYaDx7uAde/YmqVa8zYHHTuZ
+ PtpQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWMNJ8qT2bVrZs1gKw1ExEfFE5UM7jrW2FI5BW+a2d05fP2bed718xQTMEBkZKgf7ZiUr7xzS8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyysoWoGuT5XupYBPNKSVV2fhoy89hzJgOQDb6slbrA+P+dmRbd
+ /Y85+n3AjFE/yTHDNWqhHQDFuv3AZtV0Bn8+Fvr9RO8gJiD6Tf145mU9bnPqfC/uA7jyKBVKf9I
+ JuJit4F1QEweyrmAknz7b1A09bxJy/2TFfo/0xA==
+X-Google-Smtp-Source: AGHT+IGFicrg0IWpcFcQwiF5s7RYOwqMHd7pqgY9UnNFo/4aE3hAcPcrg9FDYq8DqE+TLlQkOU7t542estByeBvAwMo=
+X-Received: by 2002:a05:6102:6c6:b0:492:a93d:7cab with SMTP id
+ ada2fe7eead31-4a475f12a2cmr13337307137.1.1729147621034; Wed, 16 Oct 2024
+ 23:47:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241016-topic-sm8x50-drop-phy-qcom-qmp-local-bindings-v1-1-7928f9cbe8f0@linaro.org>
+In-Reply-To: <20241016-topic-sm8x50-drop-phy-qcom-qmp-local-bindings-v1-1-7928f9cbe8f0@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Thu, 17 Oct 2024 12:16:50 +0530
+Message-ID: <CAFA6WYNNedfr2sL5xxWsxYqa1_zt5kxuznCYi1a71e+dz0ZNMA@mail.gmail.com>
+Subject: Re: [PATCH] dt-bindings: remove phy/phy-qcom-qmp.h in favor of
+ dts/upstream
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,90 +89,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Reid Tonking <reidt@ti.com>
+On Wed, 16 Oct 2024 at 13:07, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+>
+> The upstream version has new defines use to build DT, drop
+> it in favor of the dts/upstream more recent one.
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>  include/dt-bindings/phy/phy-qcom-qmp.h | 20 --------------------
+>  1 file changed, 20 deletions(-)
+>
 
-This just provides some useful print outs and the proper config to
-test the functionality. For J7200 boards that do not have efuse
-burned in, the hardcoded 760000 is needed in the vd_data, since
-it would be populated otherwise
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
-Signed-off-by: Reid Tonking <reidt@ti.com>
-Signed-off-by: Aniket Limaye <a-limaye@ti.com>
----
- arch/arm/mach-k3/j721e/j721e_init.c | 9 +++++++++
- configs/j7200_evm_r5_defconfig      | 2 +-
- drivers/misc/k3_avs.c               | 4 +++-
- 3 files changed, 13 insertions(+), 2 deletions(-)
+-Sumit
 
-diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
-index 0620759c36c..19865f7dd40 100644
---- a/arch/arm/mach-k3/j721e/j721e_init.c
-+++ b/arch/arm/mach-k3/j721e/j721e_init.c
-@@ -152,6 +152,8 @@ int fix_freq(const void *fdt)
- {
- 		int node, ret;
- 		u32 opp_low_freq[3];
-+		int len;
-+		const u32 *reg;
- 
- 		node = fdt_node_offset_by_compatible(fdt, -1, "ti,am654-rproc");
- 			if (node < 0) {
-@@ -159,6 +161,11 @@ int fix_freq(const void *fdt)
- 				return node;
- 			}
- 
-+		/* check freqs */
-+		reg = fdt_getprop(fdt, node, "assigned-clock-rates", &len);
-+		printf("OPP_NOM: arm_clk:%d | gtc_clk:%d | msmc_clk:%d\n",
-+				fdt32_to_cpu(reg[0]), fdt32_to_cpu(reg[1]), fdt32_to_cpu(reg[2]));
-+
- 		/* j7200 opp low values according to data sheet */
- 		opp_low_freq[0] = cpu_to_fdt32(1000000000); /* 202-2 -> A72SS0_CORE0_0_ARM_CLK */
- 		opp_low_freq[1] = cpu_to_fdt32(200000000); /* 61-1 -> GTC0_GTC_CLK */
-@@ -170,6 +177,8 @@ int fix_freq(const void *fdt)
- 				printf("%s: Can not set value\n", __func__);
- 				return ret;
- 			}
-+		printf("OPP_LOW: arm_clk:%d | gtc_clk:%d | msmc_clk:%d\n",
-+				fdt32_to_cpu(opp_low_freq[0]), fdt32_to_cpu(opp_low_freq[1]), fdt32_to_cpu(opp_low_freq[2]));
- 
- 		return 0;
- }
-diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
-index 7d43d8d702a..6fdf34c9644 100644
---- a/configs/j7200_evm_r5_defconfig
-+++ b/configs/j7200_evm_r5_defconfig
-@@ -103,7 +103,7 @@ CONFIG_K3_SEC_PROXY=y
- CONFIG_FS_LOADER=y
- CONFIG_SPL_FS_LOADER=y
- CONFIG_K3_AVS0=y
--# CONFIG_K3_OPP_LOW is not set
-+CONFIG_K3_OPP_LOW=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_SPL_MMC_HS400_SUPPORT=y
- CONFIG_MMC_SDHCI=y
-diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
-index 932b355a5c1..e93aa267d51 100644
---- a/drivers/misc/k3_avs.c
-+++ b/drivers/misc/k3_avs.c
-@@ -121,6 +121,8 @@ static int k3_avs_program_voltage(struct k3_avs_privdata *priv,
- 	if (!vd->supply)
- 		return -ENODEV;
- 
-+  printf("Program voltage: opp_id:%d | opp_volt:%d\n", opp_id, volt);
-+
- 	if (!volt) {
- 		dev_err(priv->dev, "Fuse is not set for selected opp %d\n", opp_id);
- 		return -EINVAL;
-@@ -532,7 +534,7 @@ static struct vd_data j721e_vd_data[] = {
- 		.clk_id = 2, /* ARM clock */
- 		.opps = {
- 			[AM6_OPP_LOW] = {
--				.volt = 0, /* voltage TBD after OPP fuse reading */
-+				.volt = 760000, /* voltage TBD after OPP fuse reading */
- 				.freq = 1000000000,
- 			},
- 			[AM6_OPP_NOM] = {
--- 
-2.34.1
-
+> diff --git a/include/dt-bindings/phy/phy-qcom-qmp.h b/include/dt-bindings/phy/phy-qcom-qmp.h
+> deleted file mode 100644
+> index 4edec4c5b22..00000000000
+> --- a/include/dt-bindings/phy/phy-qcom-qmp.h
+> +++ /dev/null
+> @@ -1,20 +0,0 @@
+> -/* SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause) */
+> -/*
+> - * Qualcomm QMP PHY constants
+> - *
+> - * Copyright (C) 2022 Linaro Limited
+> - */
+> -
+> -#ifndef _DT_BINDINGS_PHY_QMP
+> -#define _DT_BINDINGS_PHY_QMP
+> -
+> -/* QMP USB4-USB3-DP clocks */
+> -#define QMP_USB43DP_USB3_PIPE_CLK      0
+> -#define QMP_USB43DP_DP_LINK_CLK                1
+> -#define QMP_USB43DP_DP_VCO_DIV_CLK     2
+> -
+> -/* QMP USB4-USB3-DP PHYs */
+> -#define QMP_USB43DP_USB3_PHY           0
+> -#define QMP_USB43DP_DP_PHY             1
+> -
+> -#endif /* _DT_BINDINGS_PHY_QMP */
+>
+> ---
+> base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
+> change-id: 20241016-topic-sm8x50-drop-phy-qcom-qmp-local-bindings-f036014e174e
+>
+> Best regards,
+> --
+> Neil Armstrong <neil.armstrong@linaro.org>
+>
