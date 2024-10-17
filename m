@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 436A2D3C538
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:12:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D86BD3C538
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:12:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A73889089;
+	by phobos.denx.de (Postfix) with ESMTP id ECC18890C2;
 	Fri, 18 Oct 2024 01:11:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dsuom+7V";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BbsQM7YU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3170B89089; Fri, 18 Oct 2024 01:11:40 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 476F889059; Fri, 18 Oct 2024 01:11:40 +0200 (CEST)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 769A1890AF
+ by phobos.denx.de (Postfix) with ESMTPS id 6D2F48909E
  for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b1343e8042so144655385a.0
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6cbe68f787dso8163016d6.2
  for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1729206696; x=1729811496; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3QHmgRlURtGjqwRMZQXOj09XLIxkiKv0+HaadFWlViE=;
- b=Dsuom+7VfHcfrTkPL7eCInqiCtpj17JBnnjM8W5wxMJ7DYuNfEzbPsMgh4fYcoIYW+
- gVPu4pmvgK3gxrxyc7rPpw2m9bNz0N+CvNT49ch0AGtWk0mTdP6HqDxD50hoiVML9i5F
- 2UBVgPMh4CIT/mo1bEu7/5AqVAOYPQ4l0WEg0=
+ bh=8SmaijM7rBx1T5/mwfng2rd7HXr/P6Cq1wtz3EirfWo=;
+ b=BbsQM7YUOBrWZ+TkL6lE7l19jkC+ZnUVEFtV/QwMgHbnwE7nUmyo3qPFsSDA+1Rla3
+ ZA9RybKzzSrU5/csfwQggOiTLSPpXfKKCa1RBCZ7Ng7eWt5Mxj9/QuCM4rwioUJAVQar
+ 16fisu4jo663P+HR9l1UohNDFdWifka7P5p9g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1729206696; x=1729811496;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3QHmgRlURtGjqwRMZQXOj09XLIxkiKv0+HaadFWlViE=;
- b=eU23/nzqDS59Be6GYa9z6gGLyOXwXdIpmy7Ues3R4oIK4ZwKYXSAx3kK81F5iN5eUf
- XKfXJaA1JxPl+JIKs1B8pvkm7uVuCLtxbuDj829gbB9GZiR1JDxAIYL6gtyFQK7DOH1M
- ZgqciE3XM+/7iGU5dP/3tIAtvrReWVZmwz7uuIlrik03qNdB19HLBRcPsxHICPBswCzb
- jfCrtIzXQrrT7LgwgRYVx5TfFyKewIoNkOG4iAhM4twHonY92rG8s+Jlf2bb7p0TdMLV
- 38HpR7g/xO4hYsm7T9y7y3ZrFIvbeZ5ETGCVqjcIZj6+RXG4cvgmdxLR5MjAk/O0feOK
- EUCw==
+ bh=8SmaijM7rBx1T5/mwfng2rd7HXr/P6Cq1wtz3EirfWo=;
+ b=LuCFOh4fLPnAUSzWrinyO+e5uNcIS14xkvmJUQ0oUSOrRsN1AkcTzNT4I7gLAnhpHT
+ JCBEfitCnOx4cvmYxUIAW5t6g9GttK3gxdPZ9yOZ0MVqbWfgn4niN3MBw9y+ZQoanHs9
+ J4VQVSLj/JfhZz4pSZCpSfbi6cL4hiZzQ/qSfVdE4m4XM/hEB7aTeFna1V89qVax1bcr
+ iyIS88FcfjImiA8iCp0AiPExmpMGhvGVkAJksHfooBh23vwXxKDQ9v639JQ72m8ff7zj
+ u484OnDajmhH/S/V/YsoJ/AN3MGSpazl0E7DRWoqn0fDSiiH6y/Zj0drRgy0x94jFEa6
+ gd2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXq6kMfDVrU/4TI89tjjuiqlHtXsy173I3pPptRg37xlKdb2+T9aIam5aL6Pskh/ZVDHsqg4Sc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2rvpwEAsUmBvsjl+3FYTC9PVB1xHsVkwo+4PlcWze+CNj0cIR
- hVUu8SqJ+yWpl0aMnbPz9MjVD3RPGVGVtGBCUilvkTUGDSBAqQw6OF7wHM8dX0ADjkDL1U6RYVS
- cw3iriiw++RQ0vvYVATZMT6oIgQrva5duNGi3
-X-Google-Smtp-Source: AGHT+IHhFK4w0dAYD7oH4/C6jc6a1LUOB643CjdHOyES394KT14GVhU+p9awXqcbzVs5i6+7lalXbevtQXAJkWZzjms=
-X-Received: by 2002:a05:6214:3bc6:b0:6cb:bfb5:6fc with SMTP id
- 6a1803df08f44-6cde1538c5amr8903026d6.25.1729206695430; Thu, 17 Oct 2024
+ AJvYcCVFKXk8/B/BdAVfFVuRSPflPzAORZ4/r51It/Wgg5EPPLSmRcQkOPFSPKc+aJDk5e9pSj1igc0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwC0f3EQIlFIKQ3yBlPNrcvgeOV/RGkBBZYDhZGx9ddFFCv8aVn
+ AEK4eKf4bk1SmiTDRDuR17OQNYKiPJ2UtKzHYHlDwRVm3TzG8GP3twOTKWb0xHovYNOkp0dBpRv
+ f+eNfNw8eiwMOoZ7xkPIj/zgLKTr3SS6+DhmL
+X-Google-Smtp-Source: AGHT+IFjfBQqQTOQeFxFx6PmnaSiFKpqbvUKgLy8Nly/427EZuJE6TXf9a7zGO4pfxJizy+OOLNtzHxVpvzJzgAKxGI=
+X-Received: by 2002:a05:6214:3a01:b0:6cb:e860:eae6 with SMTP id
+ 6a1803df08f44-6cde14b8d46mr5006776d6.5.1729206695901; Thu, 17 Oct 2024
  16:11:35 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
  HTTPREST; Thu, 17 Oct 2024 16:11:35 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241014223212.2212442-11-sjg@chromium.org>
-References: <20241014223212.2212442-11-sjg@chromium.org>
+In-Reply-To: <20241014223212.2212442-10-sjg@chromium.org>
+References: <20241014223212.2212442-10-sjg@chromium.org>
  <20241014223212.2212442-1-sjg@chromium.org>
 Date: Thu, 17 Oct 2024 16:11:35 -0700
-X-Google-Sender-Auth: vNmiHZuGbLNnS5dNCZDX2v4XpZc
-Message-ID: <CAFLszTick8j1+5uOfuTHJ0JV35MF4qKAdDJokY4dSvPu+_nyFg@mail.gmail.com>
-Subject: Re: [PATCH v3 10/20] expo: Drop scene_title_set()
+X-Google-Sender-Auth: 1luA0mdQJr9LeVHNorO9n1PDLaE
+Message-ID: <CAFLszThxR4wm9zKYEXzU5t+TU-86L+F6P9DUxBtqf2R12bj6hA@mail.gmail.com>
+Subject: Re: [PATCH v3 09/20] expo: Drop unneceesary calls to expo_str()
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+ Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,18 +88,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is really just an assignment, so serves no useful
-purpose. Drop it.
+The scene_txt_str() function calls expo_str() so there is no need to
+call it beforehand. Drop this unnecessary code.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/expo_build.c | 4 ++--
- boot/scene.c      | 7 -------
- include/expo.h    | 9 ---------
- test/boot/expo.c  | 2 +-
- 4 files changed, 3 insertions(+), 19 deletions(-)
+ boot/expo_build.c | 16 ++--------------
+ 1 file changed, 2 insertions(+), 14 deletions(-)
 
 Applied to u-boot-dm, thanks!
