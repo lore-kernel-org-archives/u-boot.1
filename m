@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8668D3C538
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:13:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0735D3C533
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:13:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A0D48911E;
+	by phobos.denx.de (Postfix) with ESMTP id BE1CE890F7;
 	Fri, 18 Oct 2024 01:11:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C+pwsrad";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TjbHNpuj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B61B5890C1; Fri, 18 Oct 2024 01:11:46 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 4F8BA88DA0; Fri, 18 Oct 2024 01:11:48 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FECB8910B
+ by phobos.denx.de (Postfix) with ESMTPS id 97C7A89117
  for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6cc250bbc9eso9417366d6.2
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6cc2ea27a50so20383586d6.0
  for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1729206702; x=1729811502; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qU0izWqtNwqELxv1BTmxHlV/fT5YT9JlBGFA6aOK7iA=;
- b=C+pwsrad4r1VeboUtCrs7ELanoDifXQQemmoWgbCQ6ftjxYyqgBFLQq0/Qbk6nhwPw
- r3mK/5cfB0AUn3NS6wZdEJLyov+FeKyk753L2K+zhlibnEmUDESZql2gbAdXVwCR4Mb8
- VZqGByZuIkuO00r4dNsKitOz+by2t/bscNMJk=
+ bh=smPPqa9xo0y6VRQwj6CkGasMibxH/uVmRP3pTdu/L8w=;
+ b=TjbHNpujk6veZsmAK6bli7dxszlFn4nMxX+KExhYUCQuT6WUs5I01vS9Htmmk90yhI
+ dQ5RUzHt0q7Zd9MPVW7vzvksMLXUKoVHBgfWKMXYo7Wycuf+O++SjG4ihnbtkAToKxD7
+ Qlx/VA7IGZ1BaMm/As2K/ELDHa30KmdNxEKIk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1729206702; x=1729811502;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qU0izWqtNwqELxv1BTmxHlV/fT5YT9JlBGFA6aOK7iA=;
- b=uqBUVQwb26irB/hyq+aG3VrmbwhLbqles1GZSOu7msNi/iFKWa3qfNgnKTANCclh0Q
- PRG+Lf8dq9Ldot/FqfS+pwTdtdONlivhINGWlhH3e4iPIIu27oV9DtiDoCITuTNQGcOI
- Szh9NE36rBiw96lu87pmOnXU5b4BIQJZLvuxNASq08HUiXIryD8+UeWPxtNKwGdkMzqe
- T/UInFRfIJiIhDyFmbKay9t91Kj9pjvSImu9lE8/YIxuk5fPywzl3wbT8MY6xVaCeJ9C
- AtWp2Vo/HkTDJnw4kyGZE9AW0VnM9+STRkFkEikStgUScqVjC1fwE08nQWjmd+t4xAK0
- i4ag==
+ bh=smPPqa9xo0y6VRQwj6CkGasMibxH/uVmRP3pTdu/L8w=;
+ b=iEPtrtipr5IKQstWYC1UVtGo8sot70XSTijEFcD7M8269Or9RqKhTO0mJnNFJ0TtYx
+ emPr92iqXLHu89xH673mX+t5QVxML1VBlQbwRrEWeQIR/U+nLErh5rv7ULYPz7iyw0kO
+ Ogme4B//FOvgwrtKzLj/70Ta8IiZudXM5H2jqxcWhMuafoRA6PQ70v5xMz3SKEGHLusj
+ N8hKzNjxKFhx5y9ZmJGc0DYvWUwEX5SoTZ1ayf9I90MpSLTzQJOewxD2otnwBV4jpfOC
+ pK63WtHh5SJ1x1q8evSjXIRF8zQWOa/hc0B+xU6bt/1Zax1M4rwWz3wDaI34hN1i/h9A
+ FWJw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVeCLMKoLnA23OOXBZ2Te+qfhDo4bOTQFDU15E5YLFX1ZY0KlrkZSfO1VAD4dHXoXJL/8Fme1U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyq+54weMgxBaT4ZwkEJ5Aa5x7LGstbkmPQZhYRico2hkPsBVYe
- rXHrt6RqanTcVS73El99VbZyDsNxyym8xQVL6fBFDhHMCeHFdAFbSxUAdCSHJ4aaCFvKdAPqS9t
- M4umHmPQUgi76vLw6Y+URlDK6LoUXDKak9dbJ
-X-Google-Smtp-Source: AGHT+IHqQjePZDLFLHC/V84G1LL70ghtCj5O6tPxE4ZjCY/c/LC/OealQJF8X1ye8HEkwoCQn7RoY/nNFGcWVMKCGd4=
-X-Received: by 2002:a05:6214:3110:b0:6cb:5d17:62df with SMTP id
- 6a1803df08f44-6cde152e3b0mr6801136d6.26.1729206702091; Thu, 17 Oct 2024
+ AJvYcCVygv8wR4MNWl/uf1MVwp+Ooy5CBzVCDiERoHOWGuWUFlGn/VIV/7z95Vas6/hLV9s/hXcTmnc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwpcoYEX8ZZJm9DmKHTYy0soLbpVpHXQ7Iu9hWByj9Z9vkSpu8k
+ mida0kkGDOh71U7x5oll0DKqo9zkPTbrSh7cXSaD2Dn7P+m3NmiEawnLht0z26VEch7pvCu+qSv
+ bFLthR61qC4vdYGN+eLmA8VdJbN7MkWtNCNUks+OOhmTgmhs=
+X-Google-Smtp-Source: AGHT+IHFaY0rp8C/vw6/cPPnBpMXhNEnJK0JvPMEZ8bdW06X1q2WrLK3yF8lP8cJibFYCg40jQIx3MMBCuXz/Hmcxa4=
+X-Received: by 2002:a05:6214:e83:b0:6c3:6344:d4e1 with SMTP id
+ 6a1803df08f44-6cc378ab19dmr83112036d6.20.1729206702551; Thu, 17 Oct 2024
  16:11:42 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 16:11:41 -0700
+ HTTPREST; Thu, 17 Oct 2024 16:11:42 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241014223212.2212442-5-sjg@chromium.org>
-References: <20241014223212.2212442-5-sjg@chromium.org>
+In-Reply-To: <20241014223212.2212442-4-sjg@chromium.org>
+References: <20241014223212.2212442-4-sjg@chromium.org>
  <20241014223212.2212442-1-sjg@chromium.org>
-Date: Thu, 17 Oct 2024 16:11:41 -0700
-X-Google-Sender-Auth: 8Vmx-YGmhCBQsQ7oDZDhwQA-kIA
-Message-ID: <CAFLszTgp9_4WcCMUNHSYw=bt_Dk_QgPNY-qeYoMpgFHR5HWEew@mail.gmail.com>
-Subject: Re: [PATCH v3 04/20] expo: Set the initial next_id to 1
+Date: Thu, 17 Oct 2024 16:11:42 -0700
+X-Google-Sender-Auth: s7Aek-hvzCZnbLAruesvp1X5f9I
+Message-ID: <CAFLszTiUubDHV2UhJ0JoWUvQpvRL4PjhY3FF-HsuaCN5pW4BnA@mail.gmail.com>
+Subject: Re: [PATCH v3 03/20] expo: Place menu items to the right of all labels
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -91,19 +90,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If expo_set_dynamic_start() is never called, the first scene created
-will have an ID of 0, which is invalid. Correct this by setting a
-default value.
+At present a fixed position is used for menu items, 200 pixels to the
+right of the left side of the labels. This means that a menu item with
+a very long label may overlap the items.
 
-Add a test to check this.
+It seems better to calculate the maximum label width and then place the
+items to the right of all of them.
+
+To implement this, add a new struct to containing arrangement
+information. Calculate it before doing the actual arrangement. Add a
+new style item which sets the amount of space from the right side of
+the labels to left side of the items.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/expo.c      |  1 +
- test/boot/expo.c | 23 +++++++++++++++++++++--
- 2 files changed, 22 insertions(+), 2 deletions(-)
+ boot/cedit.c          | 13 ++++++++---
+ boot/expo.c           |  2 ++
+ boot/scene.c          | 52 +++++++++++++++++++++++++++++++++++++++++--
+ boot/scene_internal.h | 20 +++++++++++++++--
+ boot/scene_menu.c     |  9 +++++---
+ boot/scene_textline.c |  3 ++-
+ doc/develop/expo.rst  |  4 ++++
+ include/expo.h        | 12 ++++++++++
+ 8 files changed, 104 insertions(+), 11 deletions(-)
 
 Applied to u-boot-dm, thanks!
