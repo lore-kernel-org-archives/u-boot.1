@@ -4,54 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAD3ED374A4
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 14:56:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59B72D374A4
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 15:09:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 568AA88FF6;
-	Thu, 17 Oct 2024 16:56:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id AF79389013;
+	Thu, 17 Oct 2024 17:09:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="jHl6IoOp";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="hmnI/TWx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 115368901D; Thu, 17 Oct 2024 16:56:16 +0200 (CEST)
-Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EA6F88900A; Thu, 17 Oct 2024 17:09:51 +0200 (CEST)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20625.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::625])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E85B288B0C
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:56:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4DAC8901D
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 17:09:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 6565C14863DD; Thu, 17 Oct 2024 16:56:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1729176970; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=fKBFpe646Jzr3Lf11cxy/lBqCCbf9eZH+ihP4ljaK4c=;
- b=jHl6IoOpLjWP0AXF3+s4NhNoDe9bpK67BGs3khfnzxrjaK0akkNmm+bkFEpeKbX4fhWa1E
- wusODuVi9KstOKhGcvt9k+27UtKCq6ztZADvfZlgi8RESRloWk7D5fWBg9e9gGz0OT2nu2
- JqTzLa+LQAuIDf2v9SkJkY0GyJDR5me1D1ETSmkFpIvRaCiiRCqzQXyLtQFec4jRsnKjMa
- vinFLqfv3tpLEZeTUHYPdZkDO3+hDYge46skBTxa074VWTtSnwAkYRvh25KefOoGbwnqdh
- IlUbfuaBwGP/7msYCzjFuevMSAIkHUreUanSWPdtI4ewOCUBtqhSyeP6+OK4Ig==
-Date: Thu, 17 Oct 2024 16:56:08 +0200
-From: Alexander Dahl <ada@thorsis.com>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
- Alexander Dahl <ada@thorsis.com>
+ header.from=cherry.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=BiQQ8aLsGwSMr6JQB3wot1RvZ38M0EKpuPsP14XZuQQwEyAN9vzNQUdR87s9h9obkysnKznIuPebCi7Hvqq3b7EmxkgAu0KHCKme6YIUngWapRBgZUyiWQmTl2r7K0cVlomrJLzW6OkKfB74m6CQMRUL5JLaxQXPgM4i9X+eJ85AGlo+Q0X24lPOIhRyT/bznwXB058eG6Xhc2bHY0LppVXoIHJ80kuetuk8bJi14CcDB/WsCoSUWHEsqqbjKEzCroYycNsRJipmbZ7QQAi6WUfTcFnRk5oiDrJmgjKxSSFYOpgQ7X0B1xj/nSnrFDv6rktixiCw8WZI4+4M59a8sQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=LtxEcq8/rrik0Wzr48GC89XrcrhsXRwtc+txb7k+RT0=;
+ b=uP3oBMuj0shTfyBevqdx9iuugbp8+4nYsoZpjqS9qIW4e9BgJ4NJGRNFLiA+0A1pGf6ZoKT2k9BKSh/8V8JFKIBX4NkyMcch5xUl4t4HsWFr5uOZVwvmDYQ6dxDb1NSjL300zxzRcdUwOGyzgJeBGIubN9OLKpw/GNPeuTEAExB2Xt6YWV2c5VQ00siyWPDJNRmNHjP8ON9pmnrDELClzx1jHsoBRPiKOcxgh9ziO8D+zjtZfEE6C0o+/QS4sxEwAl/BdEWTydJEwRigByA+SUr9eH4bSSP8merLOAQPj4Gu68k1TRlEeF8ngjmWlOUqSJbTZFjhpLzY+QbRW6TCLw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LtxEcq8/rrik0Wzr48GC89XrcrhsXRwtc+txb7k+RT0=;
+ b=hmnI/TWxp95EGxVCWzqHrCY+AHaQvb04QNBuIrKnzr15d96OTQdif5XWDXlUnh6KbHpn99PDr0QgmLQ65DfVbrefzZe6QWoiJSOuLYs/83PlOLX/JsPZgkXgGdRtxT01R/Grjm9fOAyhnzC8A5mCKKlh/wmfwE1+KuJ5oBhOTAc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by GVXPR04MB10705.eurprd04.prod.outlook.com (2603:10a6:150:223::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.18; Thu, 17 Oct
+ 2024 15:09:44 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8069.016; Thu, 17 Oct 2024
+ 15:09:44 +0000
+Message-ID: <b62ddc9c-ef61-4ab9-a00d-5ea4a60e40c0@cherry.de>
+Date: Thu, 17 Oct 2024 17:09:43 +0200
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] dm: core: downgrade some dm_warn messages to log_debug()
-Message-ID: <20241017-clambake-trekker-048460185316@thorsis.com>
-Mail-Followup-To: Quentin Schulz <foss+uboot@0leil.net>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 References: <20241015-dm-debug-less-verbose-v1-1-366e8f00b556@cherry.de>
+ <20241017-clambake-trekker-048460185316@thorsis.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20241017-clambake-trekker-048460185316@thorsis.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0167.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:99::15) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241015-dm-debug-less-verbose-v1-1-366e8f00b556@cherry.de>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GVXPR04MB10705:EE_
+X-MS-Office365-Filtering-Correlation-Id: 72a051ff-5fe6-425a-ad1f-08dceebdbb44
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?b2tIWFNYZ1JrMDlrM2xVT1p5STk2aGg5cUV1Nnh3cjE0enRTZmhYUFNCaDRS?=
+ =?utf-8?B?N2YwRUxvMyt1aWxrRGgrZHlNQlhJbVZUcnIwbzY0djU5cGNjaHhKMXc3aS84?=
+ =?utf-8?B?SGFKVTEvTmxDOEdOWmk0SDc1dWl5M0E0bWFKL3pvVzZtbWxFVTlaeGpqMXp2?=
+ =?utf-8?B?ZEU0dWlJYVMrem5lMWdRRTdwRHFXeVVpd1FaL0drMFViY0dRMEhPbTJwTk1p?=
+ =?utf-8?B?OUgzNW1OY1ZCRFRIQnNvRFpVMEY0UTZrWjFNdkZ6eEEzT3NubjFyK01DVkxu?=
+ =?utf-8?B?NURSb1lmREZwZGlYb2dXMFJoa1k4T0x4bzVGTEhRSWN0U1U4RUpUbWtkb2RN?=
+ =?utf-8?B?b1Y0NTdYcFdHRWJWamtFdXdtZ1FOWDRidDlvK0F2THcya3ozcG5ab2srV1cx?=
+ =?utf-8?B?VFBhRnVNSVg4b2p1VTlxTVUvNXEwd2xRNEJLbTA5L2hOczR0T2EwWi85OVNi?=
+ =?utf-8?B?WjFnczdNMFM1dVN1czRSUVVnZTZyOEsxZjl1TFpFSGJzMjVuajk5Zkhvcnp6?=
+ =?utf-8?B?aTdkeldqNHgzQXUvcnZFLzlXdHBXZzYrdFVITWFQUkNBWFVQbzF1YlliMU5k?=
+ =?utf-8?B?VnZsY1RDZFdiMUZTWHh0ZHNjcWVRYnJHeFR6dmpaYlhmS3NtcTkyYlNZUmNT?=
+ =?utf-8?B?cXVwUHVGN09NY3BHdFRObzBtRkd1RGpKNlM0MGxqd2lJRDFvMWh6K1NRbVBG?=
+ =?utf-8?B?aEdCVFVyTnYwTWpucHMxNDZkblpTU2RZSDEveWdIRkJlbjA5ai8xSTY5NGc1?=
+ =?utf-8?B?ckc2TVFOMjcxdWJJU2FXUE1va1lEb2dXd3duS0t5cC9yNURlYTdzMk5WTFp0?=
+ =?utf-8?B?dTFHWWNyMFNYYmp4YWNoUzd0d2VVT2RvY2thazV5Y3FJZHlqNERqNDVFZWNW?=
+ =?utf-8?B?VHlUMjlaL013dDNBejEvRXA2NW96cTJsWjhsL3JhSndPWEpWTkorc3JCRGZn?=
+ =?utf-8?B?ZjVsUE9QVktxOFZSZjMrYmlkSSsvMXZuaGNqZ2RpVzNSMm85NDBDanViaGlt?=
+ =?utf-8?B?SjFJQmRVQlFiT2xvYlViNVNEN2FBR0paaFcyV3ZFaXNselJGd05LYVpGNTdn?=
+ =?utf-8?B?NkdySlVmb01qbklJSHlLU1VQTWVTRUc0YmFQNklWQzRTZUZsTlI5dUFTRk04?=
+ =?utf-8?B?Sm9nNHJyMDFPdHNnbHE0VzU5YmZWUkV6R0R1SG5obkRJZnB1RndBMTRSaUVS?=
+ =?utf-8?B?aHU1NkZrUVNUNThNQk9YbzlCaFp0TVJDSlFFbUwwcS9NdENIdkdZb2R5OXhH?=
+ =?utf-8?B?RjlqRzk0OThVL0JCdjZqVnc3Zk53b3dQelRwNzg4cWVza0kwVWRCT2lWaDRq?=
+ =?utf-8?B?M1ozcXdhVXdEWGRiZExVMGhGY1hPWnFUeXlsb2dkMTNNNjhYblhOV0RxVHlM?=
+ =?utf-8?B?dUpncXFLaTdERGVHTzdlVDNVWjM3WkMrY3NQYXk3QmNLUzRWWi9BM1dxZGhq?=
+ =?utf-8?B?RFYzQWpvaTVSVTJpSW5oQkNEQ2Z4bmFJV05UOUJUWk1oWlF1UUR4QWRiT28y?=
+ =?utf-8?B?SjJFTkZ0bFBLQ2x3VnVlNENiYVcxbndpV1dBVmp6amxkRmRRRERFUzVSdnVO?=
+ =?utf-8?B?N1ZhMitES2dvZkRNaVZtVGRGWXBWeGJMK3RiQ3NzNUJPWEpYbkQ1S2ZOS25O?=
+ =?utf-8?B?WHc5TE1YZExRdndwQlVrblluVjg1aGt3Vm12MVlKWTd0SWtnSVpMNzVUR2Zt?=
+ =?utf-8?B?REFPS2xUQmVPNitqcEx4VjZjbDUrbE1vdjZheFBucFVBR3M5cFM3OVNhQTBQ?=
+ =?utf-8?Q?XO8v7MsfZvrNSQ91wGOpFa9mO4w6DeNL/hCcEfg?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZjBqYmo0c3B1Q29kT2ZQMVBtZUhVeW5aZVVmL2VUQVJpc3RKaTdTR01sUHlS?=
+ =?utf-8?B?bnovdFZEcC9TbnQ5TTBlRW5uUElEUDFuU0JxODFvNzQwWUgxWE92blZ5R3E2?=
+ =?utf-8?B?Z0N6M3JHNHVzc0h4WnFnTVhGMTFOUnpjVE9kUDJCODN3QjNMYzVJK1hZOW13?=
+ =?utf-8?B?NGtvcGZIWnlXWmpyOGlqOEtBTCszVDExK1FCYTBLQ1U1SjlUVlUrZjhsazRj?=
+ =?utf-8?B?bzI1RXFqYmoxZXFuU2ZTQXZhcnpjRG5tTk5EWkFxUWRHREdiaTNOcTRZbWRo?=
+ =?utf-8?B?ZFAzVTgwdVp4MU5KYkppMmlXc3Frd0U2Z2NlV25yYm5Lb0NacTdnU1hoRlVE?=
+ =?utf-8?B?V0JpTElRVVN3RVNGR1lzRFh4MmxkY1ZGckR2VjZKckRhM2ZFM29qS0dlblQv?=
+ =?utf-8?B?bmdrc1ZudGIwYnkyRDJFdVN0Nk43dnFpSURIM1ZXUXhiUC9ldmh2UXBwSDlF?=
+ =?utf-8?B?NUFzNE5JS1VVM3p6aE0rck9NdFM5NUs2Uis1eWl3UlB1OWxTYVpwaTRiLzJh?=
+ =?utf-8?B?TEpJVEl2TE5xbXpteFRWWEsreVZ5Z1B5TkJrZEVmekJOQnZsWGlwUVlyWmJY?=
+ =?utf-8?B?RzAzQUtFVjJYTUhIemdSZWg1VGdGYUlTRWZ0Wnp1bFVSMjRSZ0pwd2JHcytr?=
+ =?utf-8?B?WExOajdGTUhTSlNXTzVVNjU4b1pyM296dGt5akNRWDdGVHNNY2VLdEtZUkVn?=
+ =?utf-8?B?QXNsc2hLK2xIKzQwRlN3Ulp4VkQxRDlDZFAxMjA3VCtQM0kzUVBvbnJHOUVR?=
+ =?utf-8?B?NUpTMStrZ1MycjNOb3Q4RW8zOXlGVlVzMUt1R2pzZDAxbTN3R01aQi9KcnpS?=
+ =?utf-8?B?MUJrOW0yU3ArQnpQYVFFS2MvYUdMbmtUWUlXWUhOWUllcjEzUEJCVVk4d2Jt?=
+ =?utf-8?B?K0pWc2pCUkY1ZUNncURucERXZTFTNHM1MmdsTWozZHFua25FdzdYM2N5QUk4?=
+ =?utf-8?B?b2hlVW9aRnhiM0N6K21lT3d3aytDcS9mOXpxNkx0azdiNnIwaHhBTHFTdGhx?=
+ =?utf-8?B?Y1d5SVhYOWx3TExFTU92eGhNZVc1RVZpUTJESHZNTTdIOVVlSEtvNE9PaXIw?=
+ =?utf-8?B?WGJxZ0tQSldpSmUrQUFtcFZpQU9qMEg2VmRJcjFvbkdhWHJtakZNMVU2NjBO?=
+ =?utf-8?B?QnEyVGZJd0czQjdxY0d2QVBpTUEwZ1dGNHlvdnlTK013YjF2WURodWRuSHF2?=
+ =?utf-8?B?VVU1SHMvRTlkV2pGWW5WcjdOanVwTEhEekN5dTVrZCtnWGVmRk83dU9rcVo5?=
+ =?utf-8?B?a2ZoeGZGVXRNMU5BNC93eGZpNGNYV0NJb3BOUlFqOXdSVmpOakVJVWRHS3U3?=
+ =?utf-8?B?LzA2d2tsNTlEQmVPWFdLLy9lOFhRcm1USGdGbWNHYUlHQTNlblVXNFMxVGpy?=
+ =?utf-8?B?T21OSG43VXAvc25MN2w2b1Q3UzNvL2pHR1p2LzZpOUpLcmE2ODFBdFYzOFNa?=
+ =?utf-8?B?VkVZL0hRUUh0RE14ai9HRVZnWHp2M25ZakVJdmZ4QUs4bk8rVmV4TnRXV1Y3?=
+ =?utf-8?B?c243ekNwZWxYdWVJOU1VSkVxcVR4MTdZQ2libis1TUp3NGYxZXZxWFNJeXp0?=
+ =?utf-8?B?aHFqZEVSZCtBbWRTZk14QS9sWU9QYlBwYlRuY1JLOThBL241QVF1cS9rbEhD?=
+ =?utf-8?B?UThXSHZaWEJ6VE1SejVLay93STRlMnJrOUxydXI1U3FmRzZZWXUwNUlXSXBZ?=
+ =?utf-8?B?RFJkdm11cnhhYzljbHlzb1NpaTRHUzdZbVlNZ09zQkVSLzRHa3l3UUU4bkln?=
+ =?utf-8?B?UjU4aWpMMXFmM2ExTU1qRTZvVDJLQS9FM3U2dFRLSG8wWEd5TFV2MGoxc0hZ?=
+ =?utf-8?B?NVFoaldUWVpHbEZRb3pnK1ZJeE9aWWFYK1ZqQWdhWG9vZkgyeFBOdGd6OU9q?=
+ =?utf-8?B?WjFFRjFvTWhwN0k2RmNUSHl5WG4xalpwYjNnS2M2eHcwVjQrQU5sWUhTWXZx?=
+ =?utf-8?B?NWxFRWw1a2FEQmR4bnVXVFppanMwS1oyZk8vemJRbEdxRFIvTWhaeEdhMlJJ?=
+ =?utf-8?B?VURZZUtXWE5EUkpCTitxaURwR2xaemI2dWhJRDhLQVVvWi9mN1ZONmRxSWxT?=
+ =?utf-8?B?TzJGV0J4ZTg0QnBTN2o3dU4xeUxDK3VPdEFXNUhoTExVVnJUNTNORFkvY0xF?=
+ =?utf-8?B?ODQvYW41V04vK3p2ZkcwNXFxMzNxdW1paUVvb3NvZWROS3c5WG0wV2pEMmwz?=
+ =?utf-8?B?TEE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 72a051ff-5fe6-425a-ad1f-08dceebdbb44
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2024 15:09:43.9278 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 18lbGTMsfj1j/KBdePGhCzbb4P3quys5MM6FezxCKLvTZ+dPdFxsPyvFlzJoeybL8mdyc5apYZuD54QdONKBmfFN4+x3ECWYMJJkVwDHePs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10705
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,548 +172,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Quentin,
+Hi Alex,
 
-Am Tue, Oct 15, 2024 at 04:32:14PM +0200 schrieb Quentin Schulz:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On 10/17/24 4:56 PM, Alexander Dahl wrote:
+> Hello Quentin,
 > 
-> People complained that enabling (SPL_)DM_WARN was now totally unusable
-> due to the amount of messages printed on the console.
+> Am Tue, Oct 15, 2024 at 04:32:14PM +0200 schrieb Quentin Schulz:
+>> From: Quentin Schulz <quentin.schulz@cherry.de>
+>>
+>> People complained that enabling (SPL_)DM_WARN was now totally unusable
+>> due to the amount of messages printed on the console.
+>>
+>> Let's downgrade the log level of some messages that are clearly not on
+>> the error path.
+>>
+>> Note that there's one pr_debug in there, because it is followed by
+>> pr_cont so it made sense to reuse the same family of functions.
+>>
+>> Reported-by: Alexander Dahl <ada@thorsis.com>
+>> Fixes: 6afdb1585112 ("dm: core: migrate debug() messages to use dm_warn")
+>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>> ---
+>> Note that I am not entirely sure about the "not found" and "not large
+>> enough" changes there.
+>>
+>> Another note, %#x isn't handled by tinyprintf so it just prints "x"
+>> instead of the value.
+>>
+>> Finally, I don't know how one can enable LOG_DEBUG level without
+>> enabling DEBUG which enables assert() so I just tested that by removing
+>> the #define DEBUG in include/log.h :)
+>> ---
+>>   drivers/core/of_access.c | 36 ++++++++++++-------------
+>>   drivers/core/of_addr.c   | 26 +++++++++---------
+>>   drivers/core/of_extra.c  |  6 ++---
+>>   drivers/core/ofnode.c    | 68 ++++++++++++++++++++++++------------------------
+>>   4 files changed, 68 insertions(+), 68 deletions(-)
+>>
+>> diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
+>> index d05be273e7bbb68c3ad82ef4c1c036ae7f68ae61..77acd76626257b6da95a27d107052ff8800c2b67 100644
+>> --- a/drivers/core/of_access.c
+>> +++ b/drivers/core/of_access.c
+>> @@ -490,17 +490,17 @@ int of_read_u8(const struct device_node *np, const char *propname, u8 *outp)
+>>   {
+>>   	const u8 *val;
+>>   
+>> -	dm_warn("%s: %s: ", __func__, propname);
+>> +	log_debug("%s: %s: ", __func__, propname);
 > 
-> Let's downgrade the log level of some messages that are clearly not on
-> the error path.
+> Printing __func__ when using log_* functions, is redundant, isn't it?
+> You can enabling printing the function name through the logging
+> framework, right?
 > 
-> Note that there's one pr_debug in there, because it is followed by
-> pr_cont so it made sense to reuse the same family of functions.
-> 
-> Reported-by: Alexander Dahl <ada@thorsis.com>
-> Fixes: 6afdb1585112 ("dm: core: migrate debug() messages to use dm_warn")
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
-> Note that I am not entirely sure about the "not found" and "not large
-> enough" changes there.
-> 
-> Another note, %#x isn't handled by tinyprintf so it just prints "x"
-> instead of the value.
-> 
-> Finally, I don't know how one can enable LOG_DEBUG level without
-> enabling DEBUG which enables assert() so I just tested that by removing
-> the #define DEBUG in include/log.h :)
-> ---
->  drivers/core/of_access.c | 36 ++++++++++++-------------
->  drivers/core/of_addr.c   | 26 +++++++++---------
->  drivers/core/of_extra.c  |  6 ++---
->  drivers/core/ofnode.c    | 68 ++++++++++++++++++++++++------------------------
->  4 files changed, 68 insertions(+), 68 deletions(-)
-> 
-> diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
-> index d05be273e7bbb68c3ad82ef4c1c036ae7f68ae61..77acd76626257b6da95a27d107052ff8800c2b67 100644
-> --- a/drivers/core/of_access.c
-> +++ b/drivers/core/of_access.c
-> @@ -490,17 +490,17 @@ int of_read_u8(const struct device_node *np, const char *propname, u8 *outp)
->  {
->  	const u8 *val;
->  
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
 
-Printing __func__ when using log_* functions, is redundant, isn't it?
-You can enabling printing the function name through the logging
-framework, right?
+Only if LOGF_FUNC symbol is enabled, if I understood correctly. Not an 
+excuse but:
 
->  	if (!np)
->  		return -EINVAL;
->  	val = of_find_property_value_of_size(np, propname, sizeof(*outp));
->  	if (IS_ERR(val)) {
-> -		dm_warn("(not found)\n");
-> +		log_debug("(not found)\n");
->  		return PTR_ERR(val);
+$ git grep -o "log.*__func__" | wc -l
+202
 
-What about using log_msg_ret() instead in these cases?
+So there are a "few" other places doing that. Will let Simon decide on 
+that one, no personal opinion.
 
-Greets
-Alex
-
->  	}
->  
->  	*outp = *val;
-> -	dm_warn("%#x (%d)\n", *outp, *outp);
-> +	log_debug("%#x (%d)\n", *outp, *outp);
->  
->  	return 0;
->  }
-> @@ -509,17 +509,17 @@ int of_read_u16(const struct device_node *np, const char *propname, u16 *outp)
->  {
->  	const __be16 *val;
->  
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  	if (!np)
->  		return -EINVAL;
->  	val = of_find_property_value_of_size(np, propname, sizeof(*outp));
->  	if (IS_ERR(val)) {
-> -		dm_warn("(not found)\n");
-> +		log_debug("(not found)\n");
->  		return PTR_ERR(val);
->  	}
->  
->  	*outp = be16_to_cpup(val);
-> -	dm_warn("%#x (%d)\n", *outp, *outp);
-> +	log_debug("%#x (%d)\n", *outp, *outp);
->  
->  	return 0;
->  }
-> @@ -534,14 +534,14 @@ int of_read_u32_array(const struct device_node *np, const char *propname,
->  {
->  	const __be32 *val;
->  
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  	val = of_find_property_value_of_size(np, propname,
->  					     sz * sizeof(*out_values));
->  
->  	if (IS_ERR(val))
->  		return PTR_ERR(val);
->  
-> -	dm_warn("size %zd\n", sz);
-> +	log_debug("size %zd\n", sz);
->  	while (sz--)
->  		*out_values++ = be32_to_cpup(val++);
->  
-> @@ -553,19 +553,19 @@ int of_read_u32_index(const struct device_node *np, const char *propname,
->  {
->  	const __be32 *val;
->  
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  	if (!np)
->  		return -EINVAL;
->  
->  	val = of_find_property_value_of_size(np, propname,
->  					     sizeof(*outp) * (index + 1));
->  	if (IS_ERR(val)) {
-> -		dm_warn("(not found)\n");
-> +		log_debug("(not found)\n");
->  		return PTR_ERR(val);
->  	}
->  
->  	*outp = be32_to_cpup(val + index);
-> -	dm_warn("%#x (%d)\n", *outp, *outp);
-> +	log_debug("%#x (%d)\n", *outp, *outp);
->  
->  	return 0;
->  }
-> @@ -575,20 +575,20 @@ int of_read_u64_index(const struct device_node *np, const char *propname,
->  {
->  	const __be64 *val;
->  
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  	if (!np)
->  		return -EINVAL;
->  
->  	val = of_find_property_value_of_size(np, propname,
->  					     sizeof(*outp) * (index + 1));
->  	if (IS_ERR(val)) {
-> -		dm_warn("(not found)\n");
-> +		log_debug("(not found)\n");
->  		return PTR_ERR(val);
->  	}
->  
->  	*outp = be64_to_cpup(val + index);
-> -	dm_warn("%#llx (%lld)\n", (unsigned long long)*outp,
-> -		(unsigned long long)*outp);
-> +	log_debug("%#llx (%lld)\n", (unsigned long long)*outp,
-> +		  (unsigned long long)*outp);
->  
->  	return 0;
->  }
-> @@ -621,7 +621,7 @@ int of_property_match_string(const struct device_node *np, const char *propname,
->  		l = strnlen(p, end - p) + 1;
->  		if (p + l > end)
->  			return -EILSEQ;
-> -		dm_warn("comparing %s with %s\n", string, p);
-> +		log_debug("comparing %s with %s\n", string, p);
->  		if (strcmp(string, p) == 0)
->  			return i; /* Found it; return index */
->  	}
-> @@ -826,8 +826,8 @@ static void of_alias_add(struct alias_prop *ap, struct device_node *np,
->  	strncpy(ap->stem, stem, stem_len);
->  	ap->stem[stem_len] = 0;
->  	list_add_tail(&ap->link, &aliases_lookup);
-> -	dm_warn("adding DT alias:%s: stem=%s id=%i node=%s\n",
-> -		ap->alias, ap->stem, ap->id, of_node_full_name(np));
-> +	log_debug("adding DT alias:%s: stem=%s id=%i node=%s\n",
-> +		  ap->alias, ap->stem, ap->id, of_node_full_name(np));
->  }
->  
->  int of_alias_scan(void)
-> diff --git a/drivers/core/of_addr.c b/drivers/core/of_addr.c
-> index 6c7b4c97d6778e632e6c318ca094bd94cc6248d4..250dd175b55c053fb80c7fa34ccaa66f3a4a8a1f 100644
-> --- a/drivers/core/of_addr.c
-> +++ b/drivers/core/of_addr.c
-> @@ -27,7 +27,7 @@ static struct of_bus *of_match_bus(struct device_node *np);
->  #ifdef DEBUG
->  static void of_dump_addr(const char *s, const __be32 *addr, int na)
->  {
-> -	dm_warn("%s", s);
-> +	pr_debug("%s", s);
->  	while (na--)
->  		pr_cont(" %08x", be32_to_cpu(*(addr++)));
->  	pr_cont("\n");
-> @@ -66,9 +66,9 @@ static u64 of_bus_default_map(__be32 *addr, const __be32 *range,
->  	s  = of_read_number(range + na + pna, ns);
->  	da = of_read_number(addr, na);
->  
-> -	dm_warn("default map, cp=%llx, s=%llx, da=%llx\n",
-> -		(unsigned long long)cp, (unsigned long long)s,
-> -		(unsigned long long)da);
-> +	log_debug("default map, cp=%llx, s=%llx, da=%llx\n",
-> +		  (unsigned long long)cp, (unsigned long long)s,
-> +		  (unsigned long long)da);
->  
->  	if (da < cp || da >= (cp + s))
->  		return OF_BAD_ADDR;
-> @@ -200,11 +200,11 @@ static int of_translate_one(const struct device_node *parent,
->  	if (ranges == NULL || rlen == 0) {
->  		offset = of_read_number(addr, na);
->  		memset(addr, 0, pna * 4);
-> -		dm_warn("empty ranges; 1:1 translation\n");
-> +		log_debug("empty ranges; 1:1 translation\n");
->  		goto finish;
->  	}
->  
-> -	dm_warn("walking ranges...\n");
-> +	log_debug("walking ranges...\n");
->  
->  	/* Now walk through the ranges */
->  	rlen /= 4;
-> @@ -222,7 +222,7 @@ static int of_translate_one(const struct device_node *parent,
->  
->   finish:
->  	of_dump_addr("parent translation for:", addr, pna);
-> -	dm_warn("with offset: %llx\n", (unsigned long long)offset);
-> +	log_debug("with offset: %llx\n", (unsigned long long)offset);
->  
->  	/* Translate it into parent bus space */
->  	return pbus->translate(addr, offset, pna);
-> @@ -247,7 +247,7 @@ static u64 __of_translate_address(const struct device_node *dev,
->  	int na, ns, pna, pns;
->  	u64 result = OF_BAD_ADDR;
->  
-> -	dm_warn("** translation for device %s **\n", of_node_full_name(dev));
-> +	log_debug("** translation for device %s **\n", of_node_full_name(dev));
->  
->  	/* Increase refcount at current level */
->  	(void)of_node_get(dev);
-> @@ -266,8 +266,8 @@ static u64 __of_translate_address(const struct device_node *dev,
->  	}
->  	memcpy(addr, in_addr, na * 4);
->  
-> -	dm_warn("bus is %s (na=%d, ns=%d) on %s\n", bus->name, na, ns,
-> -		of_node_full_name(parent));
-> +	log_debug("bus is %s (na=%d, ns=%d) on %s\n", bus->name, na, ns,
-> +		  of_node_full_name(parent));
->  	of_dump_addr("translating address:", addr, na);
->  
->  	/* Translate */
-> @@ -279,7 +279,7 @@ static u64 __of_translate_address(const struct device_node *dev,
->  
->  		/* If root, we have finished */
->  		if (parent == NULL) {
-> -			dm_warn("reached root node\n");
-> +			log_debug("reached root node\n");
->  			result = of_read_number(addr, na);
->  			break;
->  		}
-> @@ -293,8 +293,8 @@ static u64 __of_translate_address(const struct device_node *dev,
->  			break;
->  		}
->  
-> -		dm_warn("parent bus is %s (na=%d, ns=%d) on %s\n", pbus->name,
-> -			pna, pns, of_node_full_name(parent));
-> +		log_debug("parent bus is %s (na=%d, ns=%d) on %s\n", pbus->name,
-> +			  pna, pns, of_node_full_name(parent));
->  
->  		/* Apply bus translation */
->  		if (of_translate_one(dev, bus, pbus, addr, na, ns, pna, rprop))
-> diff --git a/drivers/core/of_extra.c b/drivers/core/of_extra.c
-> index bfc1e3441b1d63e3ef72352863842c9e49647db5..f49187dfc1ec2491b525be35d8deac0bd70a6c4e 100644
-> --- a/drivers/core/of_extra.c
-> +++ b/drivers/core/of_extra.c
-> @@ -58,7 +58,7 @@ int ofnode_decode_region(ofnode node, const char *prop_name, fdt_addr_t *basep,
->  	const fdt_addr_t *cell;
->  	int len;
->  
-> -	dm_warn("%s: %s: %s\n", __func__, ofnode_get_name(node), prop_name);
-> +	log_debug("%s: %s: %s\n", __func__, ofnode_get_name(node), prop_name);
->  	cell = ofnode_get_property(node, prop_name, &len);
->  	if (!cell || (len < sizeof(fdt_addr_t) * 2)) {
->  		dm_warn("cell=%p, len=%d\n", cell, len);
-> @@ -67,8 +67,8 @@ int ofnode_decode_region(ofnode node, const char *prop_name, fdt_addr_t *basep,
->  
->  	*basep = fdt_addr_to_cpu(*cell);
->  	*sizep = fdt_size_to_cpu(cell[1]);
-> -	dm_warn("%s: base=%08lx, size=%lx\n", __func__, (ulong)*basep,
-> -		(ulong)*sizep);
-> +	log_debug("%s: base=%08lx, size=%lx\n", __func__, (ulong)*basep,
-> +		  (ulong)*sizep);
->  
->  	return 0;
->  }
-> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> index 48ae8ce830ec5a37675900e4f537e087fcac37b7..950895e72a9949fff44222fd039a82a9351de714 100644
-> --- a/drivers/core/ofnode.c
-> +++ b/drivers/core/ofnode.c
-> @@ -315,7 +315,7 @@ int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
->  	int len;
->  
->  	assert(ofnode_valid(node));
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  
->  	if (ofnode_is_np(node))
->  		return of_read_u8(ofnode_to_np(node), propname, outp);
-> @@ -323,11 +323,11 @@ int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
->  	cell = fdt_getprop(gd->fdt_blob, ofnode_to_offset(node), propname,
->  			   &len);
->  	if (!cell || len < sizeof(*cell)) {
-> -		dm_warn("(not found)\n");
-> +		log_debug("(not found)\n");
->  		return -EINVAL;
->  	}
->  	*outp = *cell;
-> -	dm_warn("%#x (%u)\n", *outp, *outp);
-> +	log_debug("%#x (%u)\n", *outp, *outp);
->  
->  	return 0;
->  }
-> @@ -346,7 +346,7 @@ int ofnode_read_u16(ofnode node, const char *propname, u16 *outp)
->  	int len;
->  
->  	assert(ofnode_valid(node));
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  
->  	if (ofnode_is_np(node))
->  		return of_read_u16(ofnode_to_np(node), propname, outp);
-> @@ -354,11 +354,11 @@ int ofnode_read_u16(ofnode node, const char *propname, u16 *outp)
->  	cell = fdt_getprop(gd->fdt_blob, ofnode_to_offset(node), propname,
->  			   &len);
->  	if (!cell || len < sizeof(*cell)) {
-> -		dm_warn("(not found)\n");
-> +		log_debug("(not found)\n");
->  		return -EINVAL;
->  	}
->  	*outp = be16_to_cpup(cell);
-> -	dm_warn("%#x (%u)\n", *outp, *outp);
-> +	log_debug("%#x (%u)\n", *outp, *outp);
->  
->  	return 0;
->  }
-> @@ -391,7 +391,7 @@ int ofnode_read_u32_index(ofnode node, const char *propname, int index,
->  	int len;
->  
->  	assert(ofnode_valid(node));
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  
->  	if (ofnode_is_np(node))
->  		return of_read_u32_index(ofnode_to_np(node), propname, index,
-> @@ -400,17 +400,17 @@ int ofnode_read_u32_index(ofnode node, const char *propname, int index,
->  	cell = fdt_getprop(ofnode_to_fdt(node), ofnode_to_offset(node),
->  			   propname, &len);
->  	if (!cell) {
-> -		dm_warn("(not found)\n");
-> +		log_debug("(not found)\n");
->  		return -EINVAL;
->  	}
->  
->  	if (len < (sizeof(int) * (index + 1))) {
-> -		dm_warn("(not large enough)\n");
-> +		log_debug("(not large enough)\n");
->  		return -EOVERFLOW;
->  	}
->  
->  	*outp = fdt32_to_cpu(cell[index]);
-> -	dm_warn("%#x (%u)\n", *outp, *outp);
-> +	log_debug("%#x (%u)\n", *outp, *outp);
->  
->  	return 0;
->  }
-> @@ -430,17 +430,17 @@ int ofnode_read_u64_index(ofnode node, const char *propname, int index,
->  	cell = fdt_getprop(ofnode_to_fdt(node), ofnode_to_offset(node),
->  			   propname, &len);
->  	if (!cell) {
-> -		dm_warn("(not found)\n");
-> +		log_debug("(not found)\n");
->  		return -EINVAL;
->  	}
->  
->  	if (len < (sizeof(u64) * (index + 1))) {
-> -		dm_warn("(not large enough)\n");
-> +		log_debug("(not large enough)\n");
->  		return -EOVERFLOW;
->  	}
->  
->  	*outp = fdt64_to_cpu(cell[index]);
-> -	dm_warn("%#llx (%llu)\n", *outp, *outp);
-> +	log_debug("%#llx (%llu)\n", *outp, *outp);
->  
->  	return 0;
->  }
-> @@ -468,7 +468,7 @@ int ofnode_read_u64(ofnode node, const char *propname, u64 *outp)
->  	int len;
->  
->  	assert(ofnode_valid(node));
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  
->  	if (ofnode_is_np(node))
->  		return of_read_u64(ofnode_to_np(node), propname, outp);
-> @@ -476,12 +476,12 @@ int ofnode_read_u64(ofnode node, const char *propname, u64 *outp)
->  	cell = fdt_getprop(ofnode_to_fdt(node), ofnode_to_offset(node),
->  			   propname, &len);
->  	if (!cell || len < sizeof(*cell)) {
-> -		dm_warn("(not found)\n");
-> +		log_debug("(not found)\n");
->  		return -EINVAL;
->  	}
->  	*outp = fdt64_to_cpu(cell[0]);
-> -	dm_warn("%#llx (%llu)\n", (unsigned long long)*outp,
-> -		(unsigned long long)*outp);
-> +	log_debug("%#llx (%llu)\n", (unsigned long long)*outp,
-> +		  (unsigned long long)*outp);
->  
->  	return 0;
->  }
-> @@ -499,11 +499,11 @@ bool ofnode_read_bool(ofnode node, const char *propname)
->  	bool prop;
->  
->  	assert(ofnode_valid(node));
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  
->  	prop = ofnode_has_property(node, propname);
->  
-> -	dm_warn("%s\n", prop ? "true" : "false");
-> +	log_debug("%s\n", prop ? "true" : "false");
->  
->  	return prop ? true : false;
->  }
-> @@ -514,7 +514,7 @@ const void *ofnode_read_prop(ofnode node, const char *propname, int *sizep)
->  	int len;
->  
->  	assert(ofnode_valid(node));
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  
->  	if (ofnode_is_np(node)) {
->  		struct property *prop = of_find_property(
-> @@ -529,7 +529,7 @@ const void *ofnode_read_prop(ofnode node, const char *propname, int *sizep)
->  				  propname, &len);
->  	}
->  	if (!val) {
-> -		dm_warn("<not found>\n");
-> +		log_debug("<not found>\n");
->  		if (sizep)
->  			*sizep = -FDT_ERR_NOTFOUND;
->  		return NULL;
-> @@ -553,7 +553,7 @@ const char *ofnode_read_string(ofnode node, const char *propname)
->  		dm_warn("<invalid>\n");
->  		return NULL;
->  	}
-> -	dm_warn("%s\n", str);
-> +	log_debug("%s\n", str);
->  
->  	return str;
->  }
-> @@ -573,7 +573,7 @@ ofnode ofnode_find_subnode(ofnode node, const char *subnode_name)
->  	ofnode subnode;
->  
->  	assert(ofnode_valid(node));
-> -	dm_warn("%s: %s: ", __func__, subnode_name);
-> +	log_debug("%s: %s: ", __func__, subnode_name);
->  
->  	if (ofnode_is_np(node)) {
->  		struct device_node *np = ofnode_to_np(node);
-> @@ -588,8 +588,8 @@ ofnode ofnode_find_subnode(ofnode node, const char *subnode_name)
->  				ofnode_to_offset(node), subnode_name);
->  		subnode = noffset_to_ofnode(node, ooffset);
->  	}
-> -	dm_warn("%s\n", ofnode_valid(subnode) ?
-> -		ofnode_get_name(subnode) : "<none>");
-> +	log_debug("%s\n", ofnode_valid(subnode) ?
-> +		  ofnode_get_name(subnode) : "<none>");
->  
->  	return subnode;
->  }
-> @@ -598,7 +598,7 @@ int ofnode_read_u32_array(ofnode node, const char *propname,
->  			  u32 *out_values, size_t sz)
->  {
->  	assert(ofnode_valid(node));
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  
->  	if (ofnode_is_np(node)) {
->  		return of_read_u32_array(ofnode_to_np(node), propname,
-> @@ -1032,7 +1032,7 @@ ofnode ofnode_get_aliases_node(const char *name)
->  	if (!prop)
->  		return ofnode_null();
->  
-> -	dm_warn("%s: node_path: %s\n", __func__, prop);
-> +	log_debug("%s: node_path: %s\n", __func__, prop);
->  
->  	return ofnode_path(prop);
->  }
-> @@ -1301,7 +1301,7 @@ int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
->  	int len;
->  	int ret = -ENOENT;
->  
-> -	dm_warn("%s: %s: ", __func__, propname);
-> +	log_debug("%s: %s: ", __func__, propname);
->  
->  	/*
->  	 * If we follow the pci bus bindings strictly, we should check
-> @@ -1318,10 +1318,10 @@ int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
->  		int i;
->  
->  		for (i = 0; i < num; i++) {
-> -			dm_warn("pci address #%d: %08lx %08lx %08lx\n", i,
-> -				(ulong)fdt32_to_cpu(cell[0]),
-> -			      (ulong)fdt32_to_cpu(cell[1]),
-> -			      (ulong)fdt32_to_cpu(cell[2]));
-> +			log_debug("pci address #%d: %08lx %08lx %08lx\n", i,
-> +				  (ulong)fdt32_to_cpu(cell[0]),
-> +				  (ulong)fdt32_to_cpu(cell[1]),
-> +				  (ulong)fdt32_to_cpu(cell[2]));
->  			if ((fdt32_to_cpu(*cell) & type) == type) {
->  				const unaligned_fdt64_t *ptr;
->  
-> @@ -1348,7 +1348,7 @@ int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
->  	ret = -EINVAL;
->  
->  fail:
-> -	dm_warn("(not found)\n");
-> +	log_debug("(not found)\n");
->  	return ret;
->  }
->  
-> @@ -1632,7 +1632,7 @@ int ofnode_write_string(ofnode node, const char *propname, const char *value)
->  {
->  	assert(ofnode_valid(node));
->  
-> -	dm_warn("%s: %s = %s", __func__, propname, value);
-> +	log_debug("%s: %s = %s", __func__, propname, value);
->  
->  	return ofnode_write_prop(node, propname, value, strlen(value) + 1,
->  				 false);
+>>   	if (!np)
+>>   		return -EINVAL;
+>>   	val = of_find_property_value_of_size(np, propname, sizeof(*outp));
+>>   	if (IS_ERR(val)) {
+>> -		dm_warn("(not found)\n");
+>> +		log_debug("(not found)\n");
+>>   		return PTR_ERR(val);
 > 
-> ---
-> base-commit: d2061828a4c1b60b44cd2307b6a782ac2efbffbe
-> change-id: 20241015-dm-debug-less-verbose-29d4aba76f5b
+> What about using log_msg_ret() instead in these cases?
 > 
-> Best regards,
-> -- 
-> Quentin Schulz <quentin.schulz@cherry.de>
-> 
+
+log_msg_ret will log with LOGL_ERR and not LOGL_DEBUG if 
+LOG_ERROR_RETURN symbol is enabled, otherwise it'll simply not be 
+printed. It's a change of behavior/expectation here.
+
+If we go this route we should at least make this a bit more useful by 
+adding the propname to the error message since it would be printed with 
+log_debug() at the beginning of the function, and the log level wouldn't 
+match. Also, this means that enabling debug log level but not enabling 
+LOG_ERROR_RETURN would basically print the first log_debug() and nothing 
+else in case it fails. A choice to be made but it's a bit more complex 
+than the one above.
+
+Cheers,
+Quentin
