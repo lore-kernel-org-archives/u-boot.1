@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 242C9D3C533
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:11:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0897BD3C538
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:11:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52EC28907B;
+	by phobos.denx.de (Postfix) with ESMTP id AECBE890CA;
 	Fri, 18 Oct 2024 01:11:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N7NrrrBa";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lxM5Cjws";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B831890BD; Fri, 18 Oct 2024 01:11:36 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id 6550189059; Fri, 18 Oct 2024 01:11:36 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18FFC89059
+ by phobos.denx.de (Postfix) with ESMTPS id 7307A89080
  for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6cc03b649f2so9653356d6.3
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6cbd1ae26a6so10305976d6.1
  for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1729206692; x=1729811492; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PT10qKgUwnNsrKgoNoNCkg+jpmwE9+nvcFwPSfpWcQI=;
- b=N7NrrrBa9SDFLPiiwv8veQKWxSBpHOHQy+0MrJfr4n7h2QScRbe9RWKKxAXbzaPBTS
- tEOwaNa7v7jTb2w64Sn/dCg5WqMBT5Z9RoLVKUHGl28yK9t0r/NXjrizgjx2QFzWHVWN
- jb37OHp16S5zQXZERj5xwnKSMi2kJLwfS2w2E=
+ bh=aO2lyzxQzWLA5ouXr8bqKPGkwg6mV0j4fDe5TILFUHc=;
+ b=lxM5CjwscL1B9RYpxXrfIasFe4jb7jY4cqt+aV7dr/MORVzZ6TrTu1a6TFtinF1kl3
+ wgPWtjCB4C6oXi4ZHBrg0hlHdR0I2xFfA9ZMXGoaH2Ia/Y3vKr/Om6Cdx+OEUuLQDO8S
+ AMeaecRHCVOotmHyFnutmgczEPzRvF/4oBfyI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1729206692; x=1729811492;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PT10qKgUwnNsrKgoNoNCkg+jpmwE9+nvcFwPSfpWcQI=;
- b=foGhfnP9tm2xy9FxcwFGQAGJVfG96Ps3XmqCun79u71ggiS0HjDfEAtmdAMRMwPl9g
- moKIQYX7BxgUDVy1zD9rqYqqSSFrUykCzcjCUpPmNjX3PgJtDQSkw/gjcylg6Udu2Pzc
- BgaJV2ylfyRLC6phsMMl5LRNIr4ul5Zv4Dlb/FhBLIgR4huYP7br9CjNSFBomed27fIr
- 1C5DvhFHZvr6s/JVobTUbtF99SEWkvp/px1HYi2Rc5mTOm8BJcKNDEDGaRWwz9pHHKPM
- DPGK6cFZfwMHRF18SnAygJgVojYoAhguVQj4VSmn6qdHbogmVhb2EtWIT9ex8ZjNLDV0
- rixQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVXh/uj660Okdz9HrBAiCZ8+/OPJa83mtZUVwf3aKci8XJDZIzciv/ZaTMEKG3X+MOmbnrGV3c=@lists.denx.de
-X-Gm-Message-State: AOJu0YyKjmiAq5tIgEFk76AeCKAKTIFi7bAFqx0+MEQHRTk71XOTNprk
- xHwP29LBJjP8qU5Tr2QVNlSuQe6YNJntaqZktXoePMzOFmbqgzUxXq6mtkILz4uJv1hlaioAOxI
- +xbbPi6WzjAtbyy9A9cCeuBAMAXXg4F9WUKdVe7utgjFTAyg=
-X-Google-Smtp-Source: AGHT+IGGnLmblqqQp7PcK7twVhOBLwoZepRih/JQRfDYZIhuV3w3uSEv7vUKOX5bI1R9mAr2OzPL2NR91+tKuHytDaU=
-X-Received: by 2002:a05:6214:2f05:b0:6cd:ac54:7991 with SMTP id
- 6a1803df08f44-6cde14d26dbmr5553466d6.17.1729206691883; Thu, 17 Oct 2024
- 16:11:31 -0700 (PDT)
+ bh=aO2lyzxQzWLA5ouXr8bqKPGkwg6mV0j4fDe5TILFUHc=;
+ b=vOxuFVgKk7Ztf34qTzFHwq2Ej6egQ8NYqzjJ/2SzMILaNbJE6Ty2VKU6SR0mkkduIl
+ M2d0zQKkn6dsONLsCEVPPgA7PuMZOULt+37ovg0cKe7MyknL0ugdNBDVk8GThTtFXA/q
+ FLFtiWOZmk3OOqGAASiNRtVs5zD6MfY0gpLr8C8U6RgsHUKqp/jqwWIrX16CeyUiPMh2
+ oGbr1amvSJGUt3bZsi3t50+IdG5/u6dmuODnU69pAmIIEbk2K3ARXfmRNx1XcXYaAApw
+ udK/otwNpxJButcLJBFzWXgwQZqO1pkO/uJAGJEvAiXnoFyYDMMNCBjSXXOaGXtyqY04
+ mzhQ==
+X-Gm-Message-State: AOJu0Yx+vGbcFXaWTETtQhKgNkZetbE+qsRo4hxDuQvkNMQwx2wVzwQa
+ mZ1YfUbRlHT/spCRXCsy1Y9/lLYxynNCPDfm1fHRS7oXfPcjLZTsYznAFxBJOaF6+1B8q+Oajsz
+ QxASpfdCL0mTXNKWNxs9kZAW5nVfLeKSZwS5Y
+X-Google-Smtp-Source: AGHT+IGMUGCOCV6Tfg9U/b2XJAt30No5DU/6Y9FtwbcFczBvRpfzBNeNj/NVHRnjeBkF7QPg9B/+/kKogzcYqhewZHs=
+X-Received: by 2002:a05:6214:4607:b0:6c3:6c66:af6e with SMTP id
+ 6a1803df08f44-6cde162cf73mr7599946d6.47.1729206692403; Thu, 17 Oct 2024
+ 16:11:32 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 16:11:31 -0700
+ HTTPREST; Thu, 17 Oct 2024 23:11:32 +0000
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241014223212.2212442-15-sjg@chromium.org>
-References: <20241014223212.2212442-15-sjg@chromium.org>
+In-Reply-To: <20241015163454.GP53053@bill-the-cat>
+References: <20241015163454.GP53053@bill-the-cat>
  <20241014223212.2212442-1-sjg@chromium.org>
-Date: Thu, 17 Oct 2024 16:11:31 -0700
-X-Google-Sender-Auth: 4yHqR6L6cp0lUf80Lt_1DsZ8DfY
-Message-ID: <CAFLszTjqg4KDJU3sVovyot_eEvy-j2V12UUDZZfv_gRSYJS_EQ@mail.gmail.com>
-Subject: Re: [PATCH v3 14/20] doc: Update coreboot's CI information
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+ <20241014223212.2212442-14-sjg@chromium.org>
+Date: Thu, 17 Oct 2024 23:11:32 +0000
+X-Google-Sender-Auth: ymjgzLSESKZhRzArMj7TrMNeXyQ
+Message-ID: <CAFLszTiFbCyDykZst2ro9bRmQAn_o0Sn9e37cpwUZLDkg5nV9w@mail.gmail.com>
+Subject: Re: [PATCH v3 13/20] docker: Update coreboot
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,14 +88,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is in the Dockerfile now, so update this section of the docs.
+On Mon, Oct 14, 2024 at 04:32:05PM -0600, Simon Glass wrote:
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+> Update to a newer version which supports settings in CMOS RAM and
+> linear framebuffer.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-(no changes since v1)
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
- doc/board/coreboot/coreboot.rst | 14 +-------------
- 1 file changed, 1 insertion(+), 13 deletions(-)
+-- 
+Tom
 
 Applied to u-boot-dm, thanks!
