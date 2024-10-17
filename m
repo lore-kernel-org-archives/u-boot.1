@@ -4,77 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB4CED3C538
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:31:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42358D3C533
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:31:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 737EB8912C;
-	Fri, 18 Oct 2024 01:25:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DA967892CE;
+	Fri, 18 Oct 2024 01:26:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FQnnljz7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cYVtxAUR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB06C892DC; Fri, 18 Oct 2024 01:25:47 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 7DAAB890C2; Fri, 18 Oct 2024 01:24:24 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D625890CE
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:25:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26726891EF
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:24:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-835496c8cefso70285439f.0
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:25:45 -0700 (PDT)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-82cd93a6617so52773739f.3
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:24:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729207544; x=1729812344; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ikf8xXlbgP/WO8sFWfPuVth52eCCxksr0KFbiHoi330=;
- b=FQnnljz7JsAfhJq5YtZ2DtzDY57LnsuZqIjz++FmTrojK5e8WHMHitE+ok5gDOmdwm
- XdpWeifl6+a6cwzZcHDq12gzNQ+IEEXBq9YlYtdWaThxvX6mwix0azIrWItMYNfH6aha
- 8HzWuof5P89hsZ7z02Xsj1NWcYlVQqlrIJVkM=
+ d=chromium.org; s=google; t=1729207459; x=1729812259; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BpjMH2UDzGiCT8wgPMvgicJu7x0iI/OphHk3IJ8HdsM=;
+ b=cYVtxAURYGsu88mZiMOiRDUG7BVGvFlo/l8LvdP+rZh6SxZ4Iy3KhqoOkk3yLqtHqH
+ Ct6YSU2XUMA8s9fdTYL6/fp6HBuTmrevpbTNSy8aNuxD5M1pbQR6EaBvm6UbQMBTDe/z
+ uBJRBoUM825wblxVLLEo+bHAuEzfXIawDpzhg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729207544; x=1729812344;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ikf8xXlbgP/WO8sFWfPuVth52eCCxksr0KFbiHoi330=;
- b=UIDC2PX+9I7zLAVZztc+3zVjvolpoxafu1h0MN8pKUzmALFn8L4mQTOBWYSePaPhFT
- I6MeLPrJzGA4uyVEY255EDhFhGKA0wPCUBd2sVzbyH0gJoI5USMpSLYe4XLgLX+ZsFTZ
- Qa/8ciUp2By6a2/h47imOCsXUmxsWTXHlgI6ngdpoSj8AOOSCmeVsu6+YnYIzFKThO4d
- BuD2zOUbR5b5cILOv90Ye5apmhpUDkpeTCFaUGnF0wBXNBpcufaUOC+sXv2UydeYXrpb
- nT6HORUull4cyHhUg+aq+QusrE1PWevqqiW4cwdgOlzGFfNpJxseTrEfw6H945JID+yI
- gyYw==
-X-Gm-Message-State: AOJu0Yz4s/xQ9GN8MxDrsE/JlH9+z4wrMMk3HT7kmoifavic8G8761e4
- /zc2BRZVTIfILUHXP0Brnszoii9EMNf4LqY36LeJiOaiBOznxgajQ52/9uC2Clm/pWvG4ZWazVc
+ d=1e100.net; s=20230601; t=1729207459; x=1729812259;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BpjMH2UDzGiCT8wgPMvgicJu7x0iI/OphHk3IJ8HdsM=;
+ b=oUEwRmYlXbobb+GvVmRtOZd2lbA03p/O5wNah/iIyzye1qYJ1KgECNQG9xjzRklYZ7
+ G34WnOp4eI5T0ajVNd0vAPnNXRX2rxzkGpGxw5E68nxGRD1zApIzNvW6qyGiFedzw5tM
+ 583DAu+dZqEnElTYjgmJIx73xkGnRjboKs2LuE/ZOnQWoGOfYKXNTtU4vyFPeg3b1fvG
+ mtSibRJTnmZbb44v9z/GljhbXwEJ+DWd2cLhgJr/QjU0162uzTCxhriDUejhxvTn4gAQ
+ dVPh9oXf8WnA2cNIOBaFUd3iAnJXO04puZrAKUFxfQmU8AbUs0tDq7HgvbPW4mzzgqGs
+ z5pQ==
+X-Gm-Message-State: AOJu0Yw4SB4vx8EL4/eqkSETNKvpDkGeh64DmZwNtwiSOSa5jGdXunRG
+ ObUfjjghbVgEsfMhobDrbDC2yUgN5oLgUYai7NcvmD+XUps3wUYVZ81Bx8fYzdqU5uYyrbsk1DE
  =
-X-Google-Smtp-Source: AGHT+IHDqOFETDqGOoDSVWFPGiGC37RY/gwCcFfzdoK+QDFx9IprQWni0no/DOJqnC/OpuvBfYomNw==
-X-Received: by 2002:a05:6e02:1ca5:b0:3a3:b559:5b92 with SMTP id
- e9e14a558f8ab-3a3f4060be5mr3911885ab.14.1729207543853; 
- Thu, 17 Oct 2024 16:25:43 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF1+0EKtKidzi1OIXR048MqulWeDKR+Htx451QP/06E0/MeO4DbYJ1ommCkjn0e4zFZvmiXXw==
+X-Received: by 2002:a05:6602:2b8d:b0:83a:b149:fcf9 with SMTP id
+ ca18e2360f4ac-83aba63bc11mr41188839f.11.1729207458643; 
+ Thu, 17 Oct 2024 16:24:18 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dc10b5ac9csm122057173.29.2024.10.17.16.25.43
+ 8926c6da1cb9f-4dc10ba3454sm117117173.79.2024.10.17.16.24.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Oct 2024 16:25:43 -0700 (PDT)
+ Thu, 17 Oct 2024 16:24:18 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Hans de Goede <hdegoede@redhat.com>
-Subject: [PATCH v4 8/8] sunxi: Move to text environment
-Date: Thu, 17 Oct 2024 17:25:31 -0600
-Message-Id: <20241017232531.726559-9-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Alexander Gendin <agendin@matrox.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dragan Simic <dsimic@manjaro.org>, Eddie James <eajames@linux.ibm.com>,
+ Emil Kronborg <emil.kronborg@protonmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ion Agorria <ion@agorria.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Johan Jonker <jbx6244@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Nam Cao <namcao@linutronix.de>, Pavel Herrmann <morpheus.ibis@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, Sean Anderson <seanga2@gmail.com>,
+ Sean Edmond <seanedmond@microsoft.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Shantur Rathore <i@shantur.com>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+ Tim Harvey <tharvey@gateworks.com>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Tony Dinh <mibodhi@gmail.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH 00/34] bootstd: Support recording images
+Date: Thu, 17 Oct 2024 17:23:39 -0600
+Message-Id: <20241017232413.724808-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241017232531.726559-1-sjg@chromium.org>
-References: <20241017232531.726559-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 18 Oct 2024 01:26:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,351 +120,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Convert these boards to use a text environment.
+This series provides a way to keep track of the images used in bootstd,
+including the type of each image.
 
-For the boards check, the only differences are extra spaces after the
-semicolons in 'dfu_alt_info_ram' and 'partitions', both of which are
-permitted.
+At present this is sort-of handled by struct bootflow but in quite an
+ad-hoc way. The structure has become quite large and is hard to query.
+Future work will be able to reduce its size.
 
-Add in the special boot command for old kernels, dropping the
-unnecessary and confusing hex prefixes.
+Ultimately the 'bootflow info' command may change to also show images as
+a list, but that is left for later, as this series is already fairly
+long. So for now, just introduce the concept and adjust bootstd to use
+it, with a simple command to list the images.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+This series includes various alist enhancements, to make use of this new
+data structure a little easier.
 
-Changes in v4:
-- Drop UUID_GPT_SYSTEM and UUID_GPT_ESP definitions
-- Drop special case for ARM64's devicetree subdir
-- Drop unwanted quotations and indentation in KERNEL_COMPAT path
 
-Changes in v2:
-- Keep bootcmd_sunxi_compat if OLD_SUNXI_KERNEL_COMPAT is enabled
+Simon Glass (34):
+  alist: Mention the error condition in alist_add_placeholder()
+  alist: Add a comment for alist_init_struct()
+  alist: Expand the comment for alist_get()
+  alist: Add a way to get the next element
+  alist: Add for-loop helpers
+  alist: Add a function to empty the list
+  alist: Add a way to efficiently filter an alist
+  dm: core: Add a function to see if a device exists
+  test: boot: Use a consistent name for the script bootmeth
+  bootstd: Move bootflow-adding to bootstd
+  bootstd: Move bootflow-clearing to bootstd
+  bootstd: Add a function to get bootstd only if available
+  bootstd: Drop the bootdev-specific list of bootflows
+  bootstd: Move the bootflow list into an alist
+  image: Add a new type for extlinux
+  image: Add a new type for EFI apps
+  image: Add a new type for logo images
+  image: Add a new type for a command-line string
+  test: Expand implementation of ut_list_has_dm_tests()
+  test: Drop the duplicate line in setup_bootmenu_image()
+  test: boot: Update bootflow_iter() for console checking
+  bootstd: cros: Correct the x86-setup address
+  bootstd: Maintain a list of images
+  bootstd: Update bootmeth_alloc_file() to record images
+  boot: pxe: Drop the duplicate comment on get_pxe_file()
+  efi: Simplify reading files by using the common function
+  bootmeth: Update the read_file() method to include a type
+  efi: Check the filename-allocation in the network path
+  boot: Update extlinux pxe_getfile_func() to include type
+  boot: Update pxe bootmeth to record images
+  Update bootmeth_alloc_other() to record images
+  bootstd: Avoid showing an invalid buffer address
+  bootstd: Update cros bootmeth to record images
+  bootstd: Add a simple command to list images
 
- board/sunxi/sunxi.env          | 140 ++++++++++++++++++++++++++++
- include/configs/sunxi-common.h | 165 ---------------------------------
- 2 files changed, 140 insertions(+), 165 deletions(-)
- create mode 100644 board/sunxi/sunxi.env
+ boot/bootdev-uclass.c            |  76 +++-------
+ boot/bootflow.c                  |  37 +++--
+ boot/bootmeth-uclass.c           |  54 ++++++-
+ boot/bootmeth_android.c          |   3 +-
+ boot/bootmeth_cros.c             |  33 +++-
+ boot/bootmeth_efi.c              |  16 +-
+ boot/bootmeth_efi_mgr.c          |   3 +-
+ boot/bootmeth_extlinux.c         |   7 +-
+ boot/bootmeth_pxe.c              |  21 ++-
+ boot/bootmeth_qfw.c              |   3 +-
+ boot/bootmeth_sandbox.c          |   3 +-
+ boot/bootmeth_script.c           |   7 +-
+ boot/bootstd-uclass.c            |  59 ++++++-
+ boot/image.c                     |   4 +
+ boot/pxe_utils.c                 |  36 ++---
+ boot/vbe_simple.c                |   5 +-
+ cmd/Kconfig                      |   9 ++
+ cmd/Makefile                     |   1 +
+ cmd/bootdev.c                    |   2 +-
+ cmd/bootflow.c                   |  13 +-
+ cmd/bootstd.c                    |  65 ++++++++
+ cmd/pxe.c                        |   2 +-
+ cmd/sysboot.c                    |   6 +-
+ doc/develop/bootstd/overview.rst |  21 ++-
+ doc/usage/cmd/bootstd.rst        |  79 ++++++++++
+ doc/usage/index.rst              |   1 +
+ drivers/core/uclass.c            |  11 ++
+ include/alist.h                  | 139 ++++++++++++++++-
+ include/bootdev.h                |  27 ----
+ include/bootflow.h               |  44 ++++--
+ include/bootmeth.h               |  20 ++-
+ include/bootstd.h                |  50 +++++-
+ include/dm/uclass.h              |  11 ++
+ include/image.h                  |   4 +
+ include/pxe_utils.h              |  14 +-
+ lib/alist.c                      |  41 +++++
+ test/boot/bootflow.c             | 110 +++++++++++++-
+ test/dm/core.c                   |  22 +++
+ test/lib/alist.c                 | 253 +++++++++++++++++++++++++++++++
+ test/py/tests/test_ut.py         |   5 +-
+ test/test-main.c                 |  18 ++-
+ 41 files changed, 1143 insertions(+), 192 deletions(-)
+ create mode 100644 cmd/bootstd.c
+ create mode 100644 doc/usage/cmd/bootstd.rst
 
-diff --git a/board/sunxi/sunxi.env b/board/sunxi/sunxi.env
-new file mode 100644
-index 00000000000..ec6e07c228f
---- /dev/null
-+++ b/board/sunxi/sunxi.env
-@@ -0,0 +1,140 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Common sunxi environment
-+ *
-+ * Copyright 2024 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ /
-+
-+/****************************************************************************
-+ *           environment variables holding default load addresses           *
-+ ****************************************************************************/
-+/*
-+ * We cannot use expressions here, because expressions won't be evaluated in
-+ * autoconf.mk.
-+ */
-+#ifdef CONFIG_ARM64
-+/*
-+ * Boards seem to come with at least 512MB of DRAM.
-+ * The kernel should go at 512K, which is the default text offset (that will
-+ * be adjusted at runtime if needed).
-+ * There is no compression for arm64 kernels (yet), so leave some space
-+ * for really big kernels, say 256MB for now.
-+ * Scripts, PXE and DTBs should go afterwards, leaving the rest for the initrd.
-+ */
-+#define BOOTM_SIZE        0xa000000
-+#define KERNEL_ADDR_R     SDRAM_OFFSET(0080000)
-+#define KERNEL_COMP_ADDR_R SDRAM_OFFSET(4000000)
-+#define KERNEL_COMP_SIZE  0xb000000
-+#define FDT_ADDR_R        SDRAM_OFFSET(FA00000)
-+#define SCRIPT_ADDR_R     SDRAM_OFFSET(FC00000)
-+#define PXEFILE_ADDR_R    SDRAM_OFFSET(FD00000)
-+#define FDTOVERLAY_ADDR_R SDRAM_OFFSET(FE00000)
-+#define RAMDISK_ADDR_R    SDRAM_OFFSET(FF00000)
-+
-+#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 256)
-+/*
-+ * 160M RAM (256M minimum minus 64MB heap + 32MB for u-boot, stack, fb, etc.
-+ * 32M uncompressed kernel, 16M compressed kernel, 1M fdt,
-+ * 1M script, 1M pxe, 1M dt overlay and the ramdisk at the end.
-+ */
-+#define BOOTM_SIZE        0xa000000
-+#define KERNEL_ADDR_R     SDRAM_OFFSET(2000000)
-+#define FDT_ADDR_R        SDRAM_OFFSET(3000000)
-+#define SCRIPT_ADDR_R     SDRAM_OFFSET(3100000)
-+#define PXEFILE_ADDR_R    SDRAM_OFFSET(3200000)
-+#define FDTOVERLAY_ADDR_R SDRAM_OFFSET(3300000)
-+#define RAMDISK_ADDR_R    SDRAM_OFFSET(3400000)
-+
-+#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 64)
-+/*
-+ * 64M RAM minus 2MB heap + 16MB for u-boot, stack, fb, etc.
-+ * 16M uncompressed kernel, 8M compressed kernel, 1M fdt,
-+ * 1M script, 1M pxe, 1M dt overlay and the ramdisk at the end.
-+ */
-+#define BOOTM_SIZE        0x2e00000
-+#define KERNEL_ADDR_R     SDRAM_OFFSET(1000000)
-+#define FDT_ADDR_R        SDRAM_OFFSET(1800000)
-+#define SCRIPT_ADDR_R     SDRAM_OFFSET(1900000)
-+#define PXEFILE_ADDR_R    SDRAM_OFFSET(1A00000)
-+#define FDTOVERLAY_ADDR_R SDRAM_OFFSET(1B00000)
-+#define RAMDISK_ADDR_R    SDRAM_OFFSET(1C00000)
-+
-+#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 32)
-+/*
-+ * 32M RAM minus 2.5MB for u-boot, heap, stack, etc.
-+ * 16M uncompressed kernel, 7M compressed kernel, 128K fdt, 64K script,
-+ * 128K DT overlay, 128K PXE and the ramdisk in the rest (max. 5MB)
-+ */
-+#define BOOTM_SIZE        0x1700000
-+#define KERNEL_ADDR_R     SDRAM_OFFSET(1000000)
-+#define FDT_ADDR_R        SDRAM_OFFSET(1d50000)
-+#define SCRIPT_ADDR_R     SDRAM_OFFSET(1d40000)
-+#define PXEFILE_ADDR_R    SDRAM_OFFSET(1d00000)
-+#define FDTOVERLAY_ADDR_R SDRAM_OFFSET(1d20000)
-+#define RAMDISK_ADDR_R    SDRAM_OFFSET(1800000)
-+
-+#else
-+#error Need at least 32MB of DRAM. Please adjust load addresses.
-+#endif
-+
-+stdin=serial
-+#ifdef CONFIG_USB_KEYBOARD
-+stdin+=,usbkbd
-+#endif
-+
-+stdout=serial
-+stderr=serial
-+#ifdef CONFIG_VIDEO
-+stdout+=,vidconsole
-+stderr+=,vidconsole
-+#endif
-+
-+bootm_size=BOOTM_SIZE
-+kernel_addr_r=KERNEL_ADDR_R
-+fdt_addr_r=FDT_ADDR_R
-+scriptaddr=SCRIPT_ADDR_R
-+pxefile_addr_r=PXEFILE_ADDR_R
-+fdtoverlay_addr_r=FDTOVERLAY_ADDR_R
-+ramdisk_addr_r=RAMDISK_ADDR_R
-+
-+#ifdef CONFIG_ARM64
-+kernel_comp_addr_r=KERNEL_COMP_ADDR_R
-+kernel_comp_size=KERNEL_COMP_SIZE
-+#endif
-+
-+dfu_alt_info_ram=
-+  kernel ram KERNEL_ADDR_R 0x1000000;
-+  fdt ram FDT_ADDR_R 0x100000;
-+  ramdisk ram RAMDISK_ADDR_R 0x4000000
-+
-+fdtfile=DEFAULT_DEVICE_TREE.dtb
-+
-+console=ttyS0,115200
-+
-+uuid_gpt_esp=c12a7328-f81f-11d2-ba4b-00a0c93ec93b
-+#ifdef CONFIG_ARM64
-+uuid_gpt_system=b921b045-1df0-41c3-af44-4c6f280d3fae
-+#else
-+uuid_gpt_system=69dad710-2ce4-4e3c-b16c-21a1d49abed3
-+#endif
-+
-+partitions=
-+  name=loader1,start=8k,size=32k,uuid=${uuid_gpt_loader1};
-+  name=loader2,size=984k,uuid=${uuid_gpt_loader2};
-+  name=esp,size=128M,bootable,uuid=${uuid_gpt_esp};
-+  name=system,size=-,uuid=${uuid_gpt_system};
-+
-+/* support booting a very old kernel */
-+#ifdef CONFIG_OLD_SUNXI_KERNEL_COMPAT
-+bootcmd_sunxi_compat=
-+  setenv root /dev/mmcblk0p3 rootwait;
-+  if ext2load mmc 0 44000000 uEnv.txt; then
-+    echo Loaded environment from uEnv.txt;
-+    env import -t 44000000 ${filesize};
-+  fi;
-+  setenv bootargs console=${console} root=${root} ${extraargs};
-+  ext2load mmc 0 43000000 script.bin &&
-+  ext2load mmc 0 48000000 uImage &&
-+  bootm 48000000
-+#endif
-diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
-index 666553ccadb..ceea26494ad 100644
---- a/include/configs/sunxi-common.h
-+++ b/include/configs/sunxi-common.h
-@@ -61,169 +61,4 @@
- #define PHYS_SDRAM_0			CFG_SYS_SDRAM_BASE
- #define PHYS_SDRAM_0_SIZE		0x80000000 /* 2 GiB */
- 
--/****************************************************************************
-- *           environment variables holding default load addresses           *
-- ****************************************************************************/
--/*
-- * We cannot use expressions here, because expressions won't be evaluated in
-- * autoconf.mk.
-- */
--#ifdef CONFIG_ARM64
--/*
-- * Boards seem to come with at least 512MB of DRAM.
-- * The kernel should go at 512K, which is the default text offset (that will
-- * be adjusted at runtime if needed).
-- * There is no compression for arm64 kernels (yet), so leave some space
-- * for really big kernels, say 256MB for now.
-- * Scripts, PXE and DTBs should go afterwards, leaving the rest for the initrd.
-- */
--#define BOOTM_SIZE        __stringify(0xa000000)
--#define KERNEL_ADDR_R     __stringify(SDRAM_OFFSET(0080000))
--#define KERNEL_COMP_ADDR_R __stringify(SDRAM_OFFSET(4000000))
--#define KERNEL_COMP_SIZE  __stringify(0xb000000)
--#define FDT_ADDR_R        __stringify(SDRAM_OFFSET(FA00000))
--#define SCRIPT_ADDR_R     __stringify(SDRAM_OFFSET(FC00000))
--#define PXEFILE_ADDR_R    __stringify(SDRAM_OFFSET(FD00000))
--#define FDTOVERLAY_ADDR_R __stringify(SDRAM_OFFSET(FE00000))
--#define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(FF00000))
--
--#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 256)
--/*
-- * 160M RAM (256M minimum minus 64MB heap + 32MB for u-boot, stack, fb, etc.
-- * 32M uncompressed kernel, 16M compressed kernel, 1M fdt,
-- * 1M script, 1M pxe, 1M dt overlay and the ramdisk at the end.
-- */
--#define BOOTM_SIZE        __stringify(0xa000000)
--#define KERNEL_ADDR_R     __stringify(SDRAM_OFFSET(2000000))
--#define FDT_ADDR_R        __stringify(SDRAM_OFFSET(3000000))
--#define SCRIPT_ADDR_R     __stringify(SDRAM_OFFSET(3100000))
--#define PXEFILE_ADDR_R    __stringify(SDRAM_OFFSET(3200000))
--#define FDTOVERLAY_ADDR_R __stringify(SDRAM_OFFSET(3300000))
--#define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(3400000))
--
--#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 64)
--/*
-- * 64M RAM minus 2MB heap + 16MB for u-boot, stack, fb, etc.
-- * 16M uncompressed kernel, 8M compressed kernel, 1M fdt,
-- * 1M script, 1M pxe, 1M dt overlay and the ramdisk at the end.
-- */
--#define BOOTM_SIZE        __stringify(0x2e00000)
--#define KERNEL_ADDR_R     __stringify(SDRAM_OFFSET(1000000))
--#define FDT_ADDR_R        __stringify(SDRAM_OFFSET(1800000))
--#define SCRIPT_ADDR_R     __stringify(SDRAM_OFFSET(1900000))
--#define PXEFILE_ADDR_R    __stringify(SDRAM_OFFSET(1A00000))
--#define FDTOVERLAY_ADDR_R __stringify(SDRAM_OFFSET(1B00000))
--#define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(1C00000))
--
--#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 32)
--/*
-- * 32M RAM minus 2.5MB for u-boot, heap, stack, etc.
-- * 16M uncompressed kernel, 7M compressed kernel, 128K fdt, 64K script,
-- * 128K DT overlay, 128K PXE and the ramdisk in the rest (max. 5MB)
-- */
--#define BOOTM_SIZE        __stringify(0x1700000)
--#define KERNEL_ADDR_R     __stringify(SDRAM_OFFSET(1000000))
--#define FDT_ADDR_R        __stringify(SDRAM_OFFSET(1d50000))
--#define SCRIPT_ADDR_R     __stringify(SDRAM_OFFSET(1d40000))
--#define PXEFILE_ADDR_R    __stringify(SDRAM_OFFSET(1d00000))
--#define FDTOVERLAY_ADDR_R __stringify(SDRAM_OFFSET(1d20000))
--#define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(1800000))
--
--#else
--#error Need at least 32MB of DRAM. Please adjust load addresses.
--#endif
--
--#define MEM_LAYOUT_ENV_SETTINGS \
--	"bootm_size=" BOOTM_SIZE "\0" \
--	"kernel_addr_r=" KERNEL_ADDR_R "\0" \
--	"fdt_addr_r=" FDT_ADDR_R "\0" \
--	"scriptaddr=" SCRIPT_ADDR_R "\0" \
--	"pxefile_addr_r=" PXEFILE_ADDR_R "\0" \
--	"fdtoverlay_addr_r=" FDTOVERLAY_ADDR_R "\0" \
--	"ramdisk_addr_r=" RAMDISK_ADDR_R "\0"
--
--#ifdef CONFIG_ARM64
--#define MEM_LAYOUT_ENV_EXTRA_SETTINGS \
--	"kernel_comp_addr_r=" KERNEL_COMP_ADDR_R "\0" \
--	"kernel_comp_size=" KERNEL_COMP_SIZE "\0"
--#else
--#define MEM_LAYOUT_ENV_EXTRA_SETTINGS ""
--#endif
--
--#define DFU_ALT_INFO_RAM \
--	"dfu_alt_info_ram=" \
--	"kernel ram " KERNEL_ADDR_R " 0x1000000;" \
--	"fdt ram " FDT_ADDR_R " 0x100000;" \
--	"ramdisk ram " RAMDISK_ADDR_R " 0x4000000\0"
--
--#ifdef CONFIG_OLD_SUNXI_KERNEL_COMPAT
--#define BOOTCMD_SUNXI_COMPAT \
--	"bootcmd_sunxi_compat=" \
--		"setenv root /dev/mmcblk0p3 rootwait; " \
--		"if ext2load mmc 0 0x44000000 uEnv.txt; then " \
--			"echo Loaded environment from uEnv.txt; " \
--			"env import -t 0x44000000 ${filesize}; " \
--		"fi; " \
--		"setenv bootargs console=${console} root=${root} ${extraargs}; " \
--		"ext2load mmc 0 0x43000000 script.bin && " \
--		"ext2load mmc 0 0x48000000 uImage && " \
--		"bootm 0x48000000\0"
--#else
--#define BOOTCMD_SUNXI_COMPAT
--#endif
--
--#ifdef CONFIG_USB_KEYBOARD
--#define CONSOLE_STDIN_SETTINGS \
--	"stdin=serial,usbkbd\0"
--#else
--#define CONSOLE_STDIN_SETTINGS \
--	"stdin=serial\0"
--#endif
--
--#ifdef CONFIG_VIDEO
--#define CONSOLE_STDOUT_SETTINGS \
--	"stdout=serial,vidconsole\0" \
--	"stderr=serial,vidconsole\0"
--#else
--#define CONSOLE_STDOUT_SETTINGS \
--	"stdout=serial\0" \
--	"stderr=serial\0"
--#endif
--
--#define PARTS_DEFAULT \
--	"name=loader1,start=8k,size=32k,uuid=${uuid_gpt_loader1};" \
--	"name=loader2,size=984k,uuid=${uuid_gpt_loader2};" \
--	"name=esp,size=128M,bootable,uuid=${uuid_gpt_esp};" \
--	"name=system,size=-,uuid=${uuid_gpt_system};"
--
--#define UUID_GPT_ESP "c12a7328-f81f-11d2-ba4b-00a0c93ec93b"
--
--#ifdef CONFIG_ARM64
--#define UUID_GPT_SYSTEM "b921b045-1df0-41c3-af44-4c6f280d3fae"
--#else
--#define UUID_GPT_SYSTEM "69dad710-2ce4-4e3c-b16c-21a1d49abed3"
--#endif
--
--#define CONSOLE_ENV_SETTINGS \
--	CONSOLE_STDIN_SETTINGS \
--	CONSOLE_STDOUT_SETTINGS
--
--#ifdef CONFIG_ARM64
--#define FDTFILE "allwinner/" CONFIG_DEFAULT_DEVICE_TREE ".dtb"
--#else
--#define FDTFILE CONFIG_DEFAULT_DEVICE_TREE ".dtb"
--#endif
--
--#define CFG_EXTRA_ENV_SETTINGS \
--	CONSOLE_ENV_SETTINGS \
--	MEM_LAYOUT_ENV_SETTINGS \
--	MEM_LAYOUT_ENV_EXTRA_SETTINGS \
--	DFU_ALT_INFO_RAM \
--	"fdtfile=" FDTFILE "\0" \
--	"console=ttyS0,115200\0" \
--	"uuid_gpt_esp=" UUID_GPT_ESP "\0" \
--	"uuid_gpt_system=" UUID_GPT_SYSTEM "\0" \
--	"partitions=" PARTS_DEFAULT "\0" \
--	BOOTCMD_SUNXI_COMPAT
--
- #endif /* _SUNXI_COMMON_CONFIG_H */
 -- 
 2.34.1
 
