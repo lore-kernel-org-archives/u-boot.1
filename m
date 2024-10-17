@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C251AD3C538
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:18:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C70DED3C533
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:18:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F2C3891B8;
-	Fri, 18 Oct 2024 01:12:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 085AA891BE;
+	Fri, 18 Oct 2024 01:12:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f2XHx3PA";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AUQbgC7r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 166D189121; Fri, 18 Oct 2024 01:12:22 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 2E96E89170; Fri, 18 Oct 2024 01:12:24 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A37289143
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:12:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18E4A89123
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:12:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6cbe8119e21so10520876d6.1
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:12:19 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6cc1b20ce54so12426026d6.0
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:12:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729206738; x=1729811538; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729206741; x=1729811541; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=J5rOyK2lk5fSEtvVVXrj5DLV6m+k/VU7JMMHPAEQCR0=;
- b=f2XHx3PAD5zBD5N91fA8H070vWcn/+Hhy5J+VUM6LiHYT4CUS6qDIws0dL7yiGhK6T
- /kKMSeITMyHfqQhbDjnWm+meJHQMvGWTAwVdyVAZ4rMFX26KjEE2pKK0I8+6ALvBYCjU
- cciMwhXK6CfHY6Q642X5PkP44r8LyPagJaFOA=
+ bh=J2SivWwkmoUuRRg4u4xSlOP4kOeUkfeBMEL5PidXhNo=;
+ b=AUQbgC7rycASllZWr1/cXyHdCsdNiklIppE+2anElca4qqRz3aWRdkcEHS2OKbQVM6
+ TXihSFZ5ywrKMl2vRhN91nPkO1vE9ZQshpNCkPQVArsS21onW4hfDeMaBRSgQ4KeSWa5
+ sbvc2oqetjnTHi3ekUTnCYlv+UA4YEU/VFi+s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729206738; x=1729811538;
+ d=1e100.net; s=20230601; t=1729206741; x=1729811541;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=J5rOyK2lk5fSEtvVVXrj5DLV6m+k/VU7JMMHPAEQCR0=;
- b=fuTwl6GiQzSFqRbSSet/22QA7nWde7am+dN75qhOf//6VyIb/4PrmQA8F45n5UzCbr
- MZL/OpToWCKi9c3C1uwLoHgIg//WXh5dw8vMmqJyfTGaop6yhI1ad8AevtzSf9oufOph
- TmEcWjCGadlHGdlc6cWlduc6zw1tDWZaoLNzpDtF/ThcmUImNvSEZRYX/5EODyCI6gxT
- 7rxYJIsAk+2a9QNLfRq15Qshryrf6kqiaBqnXKXOoOzKaWjl7fCeG/XdWGkJy0NOsdID
- Vu7Db1iYPpWiTy5UGfQSrnhUrS2S0p1ShzdFQ3BzMd9IdvZ0+bSjMRhAOPo9V8esaq8z
- bgcw==
+ bh=J2SivWwkmoUuRRg4u4xSlOP4kOeUkfeBMEL5PidXhNo=;
+ b=NVv5PH7LEKGbk/65MlnYL4Iaa/wCKJkJi4/HlQfuWrRhE6L+HtmGEUqBL7c8vpGI5q
+ N2tAoBHW9xzr47jNF/H9KPFH1b9xiQPJ3mIq//TfRSh0hk2/DtA9e3CWhhCWi8pCoJLT
+ ECtL79+OfSp151dmSDWV06CyH9yqi1DFw2lJTLEzIt7vwJLhg9gIj3WnLx9NqyHbf0ob
+ o9LfUzMAi8yIEBZ24RdQEnt4TN6QZxC9ctdFDEpURPfNBY1qb7nIxi3K4QeytuKYxcn2
+ 48kHmFVh/VF9FZKt/kneUm+wt7FI7l8ym7yqobSx9v2dw5t/va1kgv92Imo8UjYNS2RO
+ MeNw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+//yZpqOlKQJlvOrniBIXNw7Ih6BTJmia4mvUxvHULKtTctm2FS65+cnHiaCoVu3PKtf5mSs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxaDjUOjNLOqRb9j58htV4QmQ1n4e7HAaI6LnT0kFd8hNfqAUFz
- 5XXptqNBl7ZGqA5Qd0fbRuXUrU3ARb5GYkM6MQdk7U3+f5DFIq3JRuuWZEEZlxe0VAu3Qlr07Z7
- Eri9ewk2QWftKmcwkW3BODY+8UMLIF53ZHVF7mvweFoh01qE=
-X-Google-Smtp-Source: AGHT+IH73b6/ecGK0Fr9oStz+wXVy0kuclVIwDIqVR6zRjI5xJ7GcVlV5MSxAlxC0jgVlCUMZGnz8dJG88zM3wqz93E=
-X-Received: by 2002:a05:6214:3f93:b0:6cb:fb94:d435 with SMTP id
- 6a1803df08f44-6cde15d8888mr9526286d6.36.1729206738511; Thu, 17 Oct 2024
- 16:12:18 -0700 (PDT)
+ AJvYcCVVogojIZts/MKi4IMjLnvec6cPeK7FHVSjAX4WXuW+DCRB804BHAbHRec6Wr2Pu0SRTSuQ0G0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzx7V53M4LgZXLXesv4TBKCS6lA+JGy9ZbviWnROz4zTS+/cXN3
+ jV0dqFwRonp8mbV3/q7dF3QfJ+LKJYAyG8Fnd8Akg6wkjZa8DxE87aj1926/KkEMMdKJCtbJ+9j
+ IjKog49OAidJ+C+VZ4ODPX7ZK+BVPXAxNkgFI
+X-Google-Smtp-Source: AGHT+IEa+zONQocv7RTIVlZlATLIlh8bFA/yJiNEsL8pR3Imggo8lYHqsVHDoAn7F4qa204teQVa2khgrrRtdjj53BU=
+X-Received: by 2002:a05:6214:5543:b0:6cb:ecb1:e6c1 with SMTP id
+ 6a1803df08f44-6cde1508007mr8096976d6.17.1729206740965; Thu, 17 Oct 2024
+ 16:12:20 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 16:12:18 -0700
+ HTTPREST; Thu, 17 Oct 2024 16:12:20 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <87wmpcffeb.fsf@baylibre.com>
-References: <87wmpcffeb.fsf@baylibre.com>
- <20240306185921.1854109-1-dimorinny@google.com>
-Date: Thu, 17 Oct 2024 16:12:18 -0700
-X-Google-Sender-Auth: BcdCzpkJU7yVQPUece-epoHpKC8
-Message-ID: <CAFLszThkvvbK-BmjnO+0rAyq=sSZ8vgz=ZvSASiAA6V5pwoKfQ@mail.gmail.com>
-Subject: Re: [PATCH 1/4] virtio: blk: introduce virtio-block erase support
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: rammuthiah@google.com, Dmitrii Merkurev <dimorinny@google.com>, 
- Cody Schuffelen <schuffelen@google.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Simon Glass <sjg@chromium.org>, Ying-Chun Liu <paul.liu@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
+In-Reply-To: <20240122143512.196907-1-trini@konsulko.com>
+References: <20240122143512.196907-1-trini@konsulko.com>
+Date: Thu, 17 Oct 2024 16:12:20 -0700
+X-Google-Sender-Auth: nzyG-PZ7CbCzpU9NF7lQdEN1oK0
+Message-ID: <CAFLszThrqdwc24PaTnSdZCFTuorw4cKMwNLnn97cxz0O7um7Kg@mail.gmail.com>
+Subject: Re: [PATCH] x86: Make default_print_cpuinfo be a weak alias for
+ print_cpuinfo
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,78 +88,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dmitrii,
+While a few SoCs have a unique print_cpuinfo function, a number of them
+just use default_print_cpuinfo. Make default_print_cpuinfo have a weak
+alias to provie print_cpuinfo.
 
-Thank you for the patch.
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+This will make re-using arch/x86/cpu/efi/ as a generic set of support
+code for U-Boot as EFI payload/app a little bit easier.
 
-I'm not the virtio maintainer in U-Boot:
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+---
+ arch/x86/cpu/coreboot/coreboot.c             | 5 -----
+ arch/x86/cpu/cpu.c                           | 2 ++
+ arch/x86/cpu/efi/app.c                       | 5 -----
+ arch/x86/cpu/efi/payload.c                   | 5 -----
+ arch/x86/cpu/slimbootloader/slimbootloader.c | 5 -----
+ arch/x86/cpu/tangier/tangier.c               | 5 -----
+ 6 files changed, 2 insertions(+), 25 deletions(-)
 
-/mnt/work/upstream/u-boot/ $ ./scripts/get_maintainer.pl drivers/virtio/
-Bin Meng <bmeng.cn@gmail.com> (maintainer:VirtIO)
-[...]
-
-I've added Bin to the Cc list, please include him if you re-submit.
-
-On mer., mars 06, 2024 at 18:59, Dmitrii Merkurev <dimorinny@google.com> wrote:
-
-> Co-developed-by: Cody Schuffelen <schuffelen@google.com>
-> Signed-off-by: Cody Schuffelen <schuffelen@google.com>
-> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
-> Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-
-I'm not super familiar with virtio, so I've not reviewed this.
-
-However, I tested the sandbox unit tests:
-
-uboot@db354723333a:/mnt/work/upstream/u-boot$ ./u-boot -T -c "ut dm virtio*"
-Bloblist at b000 not found (err=-2)
-sandbox_serial serial: pinctrl_select_state_full:
-uclass_get_device_by_phandle_id: err=-19
-
-
-U-Boot 2024.04-00137-g075feb52299 (Apr 05 2024 - 07:12:35 +0000)
-
-Reset Status: WARM Reset Status: COLD
-Model: sandbox
-DRAM:  256 MiB
-[nvmxip-qspi1@08000000]: the block device blk#2 ready for use
-[nvmxip-qspi2@08200000]: the block device blk#2 ready for use
-Core:  286 devices, 101 uclasses, devicetree: board
-WDT:   Not starting wdt-gpio-toggle
-WDT:   Not starting wdt-gpio-level
-WDT:   Not starting wdt@0
-NAND:  4100 MiB
-MMC:   mmc2: 2 (SD), mmc1: 1 (SD), mmc0: 0 (SD)
-Loading Environment from nowhere... OK
-In:    serial,cros-ec-keyb,usbkbd
-Out:   serial,vidconsole
-Err:   serial,vidconsole
-Model: sandbox
-Net:   eth0: eth@10002000, eth5: eth@10003000, eth3: sbe5, eth6:
-eth@10004000, eth8: phy-test-eth, eth4: dsa-test-eth, eth2: lan0,
-eth7: lan1
-Test: dm_test_virtio_all_ops: virtio_device.c
-Test: dm_test_virtio_all_ops: virtio_device.c (flat tree)
-Test: dm_test_virtio_base: virtio_device.c
-Test: dm_test_virtio_base: virtio_device.c (flat tree)
-Test: dm_test_virtio_missing_ops: virtio.c
-Test: dm_test_virtio_missing_ops: virtio.c (flat tree)
-Test: dm_test_virtio_remove: virtio_device.c
-Test: dm_test_virtio_remove: virtio_device.c (flat tree)
-Test: dm_test_virtio_ring: virtio_device.c
-Test: dm_test_virtio_ring: virtio_device.c (flat tree)
-Test: dm_test_virtio_rng_check_len: virtio_rng.c
-Test: dm_test_virtio_rng_check_len: virtio_rng.c (flat tree)
-Failures: 0
-
-Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # sandbox
-
-> ---
->  drivers/virtio/virtio_blk.c | 91 +++++++++++++++++++++++++++++++------
->  drivers/virtio/virtio_blk.h | 47 +++++++++++++++++++
->  2 files changed, 124 insertions(+), 14 deletions(-)
->
 Applied to u-boot-dm, thanks!
