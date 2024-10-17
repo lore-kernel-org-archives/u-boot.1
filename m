@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ADE8D374A3
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 14:45:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7DBD374A3
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 14:45:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D18DF89023;
-	Thu, 17 Oct 2024 16:44:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E01089010;
+	Thu, 17 Oct 2024 16:44:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fONKu6lw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kN6VwXXy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BDDA889EB; Thu, 17 Oct 2024 16:44:51 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 180188902E; Thu, 17 Oct 2024 16:44:54 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BDB188FF6
+ by phobos.denx.de (Postfix) with ESMTPS id ED0FA8900B
  for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:44:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4314311959aso9442085e9.1
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4315abed18aso7012525e9.2
  for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 07:44:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1729176287; x=1729781087; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=gQYY5frZBxHo84ChtJ9RZ/UNM3wDdkWaFRjHDGXXJ8Y=;
- b=fONKu6lw7c73KKVSVNg8YGscuvuhw2yPXEvWwImGLIGKJXI0JIk+dNA36WrbwTq6m1
- 9zpVm+xYpSigsVZnZCBkhAzlNypVxvEIus7JKFuxriQPdmq26p4Ky82vXQcDFUF4yaLg
- ipCs9h2fT4khNteHwYBLZEy6XIY5J1GCm2IPnKB65yxafExPvFK0Y4Ofs/oQiwqs8mzV
- 97/1fQ8fqE2V9tIk+kYwVRZ4VWmKFmqQLF50zdJiVLGtOSAbb1d727qlOQNXfXwmLTAg
- mgRWdvV3pIUeOY5g49efkXeuE76MOKUuZy3tPKAp+lHFS7u/gPoWCZzPbzfsJ/90wjRQ
- dRIA==
+ :reply-to; bh=E55KgvjEq6ZvKO5NADnCK5xx/g2VloRvKzw2CbvnhlU=;
+ b=kN6VwXXyb0tIwSF5r6eNkhJLe1xtEKpFcShUtNhaBtuLbihg0RsHRdLGvS8l9HxfsT
+ bvcd38rW+eL8AZrdprUAASP3p0+EXLpi+erI1WLyQlqtF2D0pMKXl3nEQ4VcFPZX1PTc
+ JJy9EITeDD9r0hhMONoT6PWc8sVf6Au25/njto+p9RHKtR2Kzb1OOIsxVb5l2+u5rY4j
+ Vb04Hftup8ogppHkTqSWeG+TFuXtuGiUAstD0o1bnosqjt0tF9n5Ma9yPQ8PbIo52EWJ
+ YLL5K8qyDHHIUXAMFAa6MB/b+UG9Am20DMy4iDdD9FxNo6ulBH8WimJpi7v1AiUuaMhM
+ Mcew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1729176287; x=1729781087;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gQYY5frZBxHo84ChtJ9RZ/UNM3wDdkWaFRjHDGXXJ8Y=;
- b=SHJWLW21RssnTyLW0Oqst6haTsQJ6CkbHkiqgFSlzZddEMy9xioK/eCobNvUdx4U6K
- nXFsn2+S7Ss1fW2loyIXj9tN2XO4G8qIKRaycQB/ux4Qn3IqglVDEw1bbjcr+VYDS3U0
- SgsHLPGQ9OuXG6kdU/hIu9uynfE87j0Dcy+PYRsivFkv80y/rd3VlYK4l2iOky7RC4z+
- Y/IDDdbfSqZedO05WpVpRzMPljFzLJi91Vv/DcVrSiEvF8a+GlUoVyv7frN88KnYcaN5
- l83HG94PNaZM5PSeqfsPJ0utrcXJVBWny1fW2ojjOeyFYOwm8H+zuM4AlW9xvqqtL0Vm
- pHzw==
+ bh=E55KgvjEq6ZvKO5NADnCK5xx/g2VloRvKzw2CbvnhlU=;
+ b=n+7h/SrhdrXhiqDIyxFDw4NmmV7/4kOU71o0KkvRCdrenFy8wa+B7RpJIpBi9f3aK0
+ qGo5K6D2JFlrXIJRRJFoB3Gdg7cndmoe2C928zu2EJW0Xy6AQVZnK2snSB9FqzHjzyVe
+ vNosqqoOesvZ1nAMRDfIJV0kIhOFJ6mQ2a2tufx8pDXn/eW05acwzFLhdm0VxBVYJGlz
+ f4H5+RUwu9WL4wQxdHEWewrJwxMEKlaWL1Tpw3xoEMDhPQ1rK4qCsW+frlo8wdYEi/ec
+ /mep0RVFWKc9qjqq8hVa5M8ENDjC2w8r4T+aBNS+TxmG1kpweYdPPy81aiftKWi/3nAJ
+ HOKQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7JmnZnrc+TO4IgJXopISi5Df+d0ne9ZjJkMfxCjmV5NQ7QqQgsOwzLQ/33xe8DzeQw0+BJzI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxYiKjnbpSwsgsnmS+p4bIo/8zX7t0bSjPxhJEF5qvr7Ptawmiq
- TFzVV6I1nj5DxmZY02brerpzPeJxdkh7p/Sd49RQXXPA3/lxqcGvdEXsCXbQ0OMPFDv0ERXXTRR
- EymI=
-X-Google-Smtp-Source: AGHT+IFIDc2mKwCEmBQ88icj5NJHAi88+0N/2CM/jR8OK3Gd/eco6d49mLWvjsmc9f+yW7nBXJCZXA==
-X-Received: by 2002:a05:600c:3d89:b0:42c:b2fa:1c15 with SMTP id
- 5b1f17b1804b1-431255e2cafmr152976455e9.15.1729176286530; 
- Thu, 17 Oct 2024 07:44:46 -0700 (PDT)
+ AJvYcCWqKRD+nnI7vcXdUAu7jS1qUXBxRfcDwSoMV+2ic70DjM0Lu2NPzYm9kbhaJqwV64hZV2kRHaM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwKQpfVXjSxpPLk4XhjgdG9xHSreePMQp2oII4AsF0gNeyFQ0fX
+ rb4lgGpYPvKwgDciSCVw66t2USsQdQK0cwsJcM1a4wM6KxJCgdcCyz1qyNamzBQ=
+X-Google-Smtp-Source: AGHT+IGVUrg50ZD26BgxpWXW7UeFP7WEfMirNK8Dbk6z5/5B7rwJgS0qtnHmRZ8zEFBV8i8eQrR0ew==
+X-Received: by 2002:a05:600c:1c9c:b0:430:563a:b20a with SMTP id
+ 5b1f17b1804b1-431255dc851mr155656735e9.11.1729176287354; 
+ Thu, 17 Oct 2024 07:44:47 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43158c37fbesm28923195e9.8.2024.10.17.07.44.45
+ 5b1f17b1804b1-43158c37fbesm28923195e9.8.2024.10.17.07.44.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 17 Oct 2024 07:44:46 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Thu, 17 Oct 2024 16:44:42 +0200
-Subject: [PATCH v2 1/3] image: android: use ulong for kernel address
+Date: Thu, 17 Oct 2024 16:44:43 +0200
+Subject: [PATCH v2 2/3] image: android: do not boot XIP when kernel is
+ compressed
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241017-topic-fastboot-fixes-mkbootimg-v2-1-c3927102d931@linaro.org>
+Message-Id: <20241017-topic-fastboot-fixes-mkbootimg-v2-2-c3927102d931@linaro.org>
 References: <20241017-topic-fastboot-fixes-mkbootimg-v2-0-c3927102d931@linaro.org>
 In-Reply-To: <20241017-topic-fastboot-fixes-mkbootimg-v2-0-c3927102d931@linaro.org>
 To: Tom Rini <trini@konsulko.com>
@@ -81,20 +81,20 @@ Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1906;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2625;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=X7ZHztPg6fZqYVFEgR25qte+6Ywvk/GfINxsOSd4KGY=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnESLbOTMpjLJAf9RS2jDcXNLBhfF9kwW1uaTnt0wL
- MKs+S5qJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZxEi2wAKCRB33NvayMhJ0ZwoD/
- 95Dmp7+PcoeNakGSpKzZlElzdlMslUiJVgZmQE6sJFscEa4ADXYETpMBChYUuykPAR1VS08UfKdkIK
- MKZBMwoIjNhmLmhDbYgUTzG0JORFcqLpj4568qBrd92F60nRPiG2Va79Zdch0UhukLs3gQ3j8/qgvh
- CT8kvhzFH+TU982o7GY55vPPfdUcwlrB7ACvmEzTyidagrYtFqiH+zg+tXigsNk/SgW4ncjsLl2Ccd
- XDxtAhHRZZB/XhnVFYozxyNewbtlbr5EHq2cqQdVXugyfQ9/GAXl2wNRcHnE+af2fKduDnmhVz2kwY
- gYz5lGoYJk7tfaWwYTQC4/v00UNbFTO6vq+pdGR2vB5NolqxsHuG22qZfjXi+Ie/qSmPzAeYw+p96R
- uHdd3vC+p0kOzGj9bk+pX7yyVXjqiPg6ubnj/DnKyAAgzUs/1KXZ5cMqRvv90DHMCXYA0M7D1aH6ex
- 09RvrQVanKa1c4XpolD2FTn4yUbjPAWZMyrhwEGGW3AifgbfPuNczsX/BjMuzmYEbz9SeeXMUpQmij
- VVa1nkRDif7CjGv0rr8ciLlapNXO5xYRXBVtzHi5mqKYR89G1BRbdjP5vtOViyiKrpAQbgVQ4cjpKt
- JF675xaxuM5CTfvNNHwvGt7bK5VzyXCJ+CsZENvxltqkHlgGJaPXEEQt7x6w==
+ bh=aF8xM9sCZGgIvtKbwtbcWSVIp3oIbPcNIUcWWyzrU40=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnESLcv50SOriFtw1GWstbBob806gcaPUdwBk2hEmf
+ RRFyGkiJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZxEi3AAKCRB33NvayMhJ0aidEA
+ C/uXTXQPGggHP9vxN0jd5BaE5Y+WNp3tPY94FcPlxIoUpjrdFY3Qe2AI3vNFZCc0qATwHSA4OQbaX/
+ z9ylCCiQjNjB3T4sc4EijS0IS2jGddiviHGOVkX35+uxJitiP+ZskVTrEsVvokia/Bfv0J4agyAqBq
+ aXuILcXL2o76RDpZv9XdgJTOVgezlbvbyH+y0uiGs1JFzwyN1TgeQgt7UiiAgSFK3I80C2IopVOO4d
+ dCNrHynUmqnlvps+U1mY82Ickj0jXZ264crLrC86wdBWWqviqJgjeWvgyXgkkSkquBRyIrEZkBtl7Q
+ nAol7aNWMGi/tDZRHbUORwKYUmzn1mUlEPTlwiKn9Q1232oTnVc/ACP0MehzOlcb9NvuRD1Pl6u/XQ
+ 5kYwY5AJNJix7Yi1aZQQj8QMD2FtFiY3Llz5CS4jRRDPSOs4YM7tlGvLlsurCJV2/7JYwqIx4JJdO2
+ wuiNlXf0Ex5hmBz8/QIEka3HNnpz6BaZp7sFrXrshG6GSPDxpQxj25vYx1LMHL8z5LIdEnwLSOPho8
+ XJK7krOzvYb8C1VEii6xNHxF8EtzRtxBtrVDr4HkQfU3Hxc+83DxqAPTMZEN+9Ld2612GVITzUFC/+
+ K5K/dp0z4i249zioysFf2eJafJ7c279NEMNL808Xx+03L4kkF2YrFq3ZXbOA==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -113,53 +113,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When booting with platforms having > 4GiB of memory,
-the kernel physical address can be more than 32bits.
+When trying to boot an android boot image with a compressed
+kernel, if the kernel is used in-place because it was created
+with mkbootimg, the space will be too small to properly
+uncompress.
 
-Use ulong like all the other addresses, and fix the
-print to show the > 32bits address numbers.
+Take in account the compressed state, and if compressed
+use the kernel_addr_r which should be big enough.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- boot/image-android.c    | 4 ++--
- include/android_image.h | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ boot/image-android.c | 20 +++++++++++++++-----
+ 1 file changed, 15 insertions(+), 5 deletions(-)
 
 diff --git a/boot/image-android.c b/boot/image-android.c
-index e74dd498a305566e42aa235b45c22995e21ca64b..bb5f4f84487d40e0cf24dc3b57042993967e66d5 100644
+index bb5f4f84487d40e0cf24dc3b57042993967e66d5..3adcc69a392f74ae64f3fbcf1b85204f60ac9aff 100644
 --- a/boot/image-android.c
 +++ b/boot/image-android.c
-@@ -256,7 +256,7 @@ int android_image_get_kernel(const void *hdr,
- 			     ulong *os_data, ulong *os_len)
+@@ -208,7 +208,8 @@ bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
+ 	return true;
+ }
+ 
+-static ulong android_image_get_kernel_addr(struct andr_image_data *img_data)
++static ulong android_image_get_kernel_addr(struct andr_image_data *img_data,
++					   ulong comp)
  {
+ 	/*
+ 	 * All the Android tools that generate a boot.img use this
+@@ -221,8 +222,11 @@ static ulong android_image_get_kernel_addr(struct andr_image_data *img_data)
+ 	 *
+ 	 * Otherwise, we will return the actual value set by the user.
+ 	 */
+-	if (img_data->kernel_addr  == ANDROID_IMAGE_DEFAULT_KERNEL_ADDR)
+-		return img_data->kernel_ptr;
++	if (img_data->kernel_addr  == ANDROID_IMAGE_DEFAULT_KERNEL_ADDR) {
++		if (comp == IH_COMP_NONE)
++			return img_data->kernel_ptr;
++		return env_get_ulong("kernel_addr_r", 16, 0);
++	}
+ 
+ 	/*
+ 	 * abootimg creates images where all load addresses are 0
+@@ -258,11 +262,14 @@ int android_image_get_kernel(const void *hdr,
  	struct andr_image_data img_data = {0};
--	u32 kernel_addr;
-+	ulong kernel_addr;
+ 	ulong kernel_addr;
  	const struct legacy_img_hdr *ihdr;
++	ulong comp;
  
  	if (!android_image_get_data(hdr, vendor_boot_img, &img_data))
-@@ -275,7 +275,7 @@ int android_image_get_kernel(const void *hdr,
- 	if (strlen(andr_tmp_str))
- 		printf("Android's image name: %s\n", andr_tmp_str);
+ 		return -EINVAL;
  
--	printf("Kernel load addr 0x%08x size %u KiB\n",
-+	printf("Kernel load addr 0x%08lx size %u KiB\n",
- 	       kernel_addr, DIV_ROUND_UP(img_data.kernel_size, 1024));
+-	kernel_addr = android_image_get_kernel_addr(&img_data);
++	comp = android_image_get_kcomp(hdr, vendor_boot_img);
++
++	kernel_addr = android_image_get_kernel_addr(&img_data, comp);
+ 	ihdr = (const struct legacy_img_hdr *)img_data.kernel_ptr;
  
- 	int len = 0;
-diff --git a/include/android_image.h b/include/android_image.h
-index d503c980b233bf31cd12a246ff1570544597a1c7..96820709b42830c7ce4cb753687da373936253a7 100644
---- a/include/android_image.h
-+++ b/include/android_image.h
-@@ -348,7 +348,7 @@ struct andr_image_data {
- 	ulong bootconfig_addr;  /* bootconfig image address */
- 	ulong bootconfig_size;  /* bootconfig image size */
+ 	/*
+@@ -359,11 +366,14 @@ ulong android_image_get_kload(const void *hdr,
+ 			      const void *vendor_boot_img)
+ {
+ 	struct andr_image_data img_data;
++	ulong comp;
  
--	u32 kernel_addr;  /* physical load addr */
-+	ulong kernel_addr;  /* physical load addr */
- 	ulong ramdisk_addr;  /* physical load addr */
- 	ulong ramdisk_ptr;  /* ramdisk address */
- 	ulong dtb_load_addr;  /* physical load address for DTB image */
+ 	if (!android_image_get_data(hdr, vendor_boot_img, &img_data))
+ 		return -EINVAL;
+ 
+-	return android_image_get_kernel_addr(&img_data);
++	comp = android_image_get_kcomp(hdr, vendor_boot_img);
++
++	return android_image_get_kernel_addr(&img_data, comp);
+ }
+ 
+ ulong android_image_get_kcomp(const void *hdr,
 
 -- 
 2.34.1
