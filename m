@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89DC8D3C533
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:14:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8D4FD3C538
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:14:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B54C389100;
-	Fri, 18 Oct 2024 01:11:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3869D890E9;
+	Fri, 18 Oct 2024 01:12:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oA2dKHm/";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Tp9azLmD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49D0A89139; Fri, 18 Oct 2024 01:11:54 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 40E598914F; Fri, 18 Oct 2024 01:11:56 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31E9789065
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25677890F8
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6cbd005d0f9so10594836d6.3
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:52 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6cbd00dd21cso8463906d6.3
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729206711; x=1729811511; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729206712; x=1729811512; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:references
  :in-reply-to:from:sender:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/thQMT9ITRj7D8EkZPBaHyECj8EHtwEOHvZhDfkszOk=;
- b=oA2dKHm/Sb6TcWWi54N5eOLODOzdUHiVtzrHXqaPQd4jC7L87+PQotQY5kxtzH7V76
- C00uaXzNCeuuRuBJoc2Kx7/r2B/1Fru1L4i64D9yAg0f6wL0/HKrYBKAj6rO9wKA/8C+
- 1yfYbNTQvfNfu5OLE8kCaU3pl1ntLisXDMZyI=
+ bh=hr03DqarslHGGcbvLurFvMlPbWOGKpQdKAUSK3YMhxY=;
+ b=Tp9azLmDMsTpIz8rRByIj7rbCMolyRk0oQlnUwstIUifxe12UIqOtNbS5Unrj+WxR9
+ eGFyUfHvCJdsIQxpjDP+juxcsDKYYJuXiGPb9lyStClJqZiQg+6E1G109wGi4NZ+z0TY
+ jGXZmegj4uH5sf5cGXEijk4awFfAApzq9zuhM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729206711; x=1729811511;
+ d=1e100.net; s=20230601; t=1729206712; x=1729811512;
  h=content-transfer-encoding:cc:to:subject:message-id:date:references
  :in-reply-to:from:sender:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/thQMT9ITRj7D8EkZPBaHyECj8EHtwEOHvZhDfkszOk=;
- b=oYDhljuVr0+0cboChpMIiKT48RP9SldVL+6uCCvyl6SQKm9o+s1qo5lLQ3E+20vJRt
- VGBA9cxE4d1BQnRh2gaUUA8tUPtW53cbob5WSL2nmcgBT+iOPUKbEAxur0pIw+GJ15Z7
- /GnBItfc7UiRfaBGs9C9MmIzv5Z2sOcqgNLZrF/i8xmH8mv2puLLadCxr3lq5ZC6wYrf
- WYsqMLi1cn7sZIKfBj4Vlhv3Q4C71F0d3oUmJbLQDdg82dcGrqCppeje9vpyR8dSkD+k
- gWspaxmKyTO2BnfAvt4+LX14z6IMPzWgEQI0lnxxuiFRMcQSccmxQ8oWFySCtgTUV5e+
- yGYQ==
+ bh=hr03DqarslHGGcbvLurFvMlPbWOGKpQdKAUSK3YMhxY=;
+ b=sggSDkeZeTgT2V9wFtxWQyt+V1/SZFZuXKICTiwNgiROEAc5dEJPdTkAiLzbe9w4r8
+ zF++Fznk043nJBNVeak0K2tPx8sDg1SDGJ7gcMgIgErmZaUztvwsNn+kmYZYLq7U+JCM
+ xy5YpLm4EaFGugx99Ug4BN60zEp5uh7rIlAPqyi0t4UYe6vdSi1CghGMPtCVTK68zZKu
+ C1Op1zr0alXPzGnleDZaYlN2cK5/f6CAhDRP0Qd0/zJxzxxm7Njtw5seT/bP6Ky4XoeU
+ vqIB9HjAFZnAj2xcJshYrda91qfI/X8jsR5aWQolSkNyQAjWLR3Bj8pDfb6Q65+ShIZW
+ M6Ow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUHjwm5GU2bBBfKXR0HHDjm9dVhLmn+BspsZq1N5njFcP+D1EU9emlseYbDCA4OFflFtR4cOxQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLvhXJeOeaI2nXOvzWoAg7WmRR9tJFGkgQLWdmtMrkA//uHzhs
- dpxOS+8atIrSMKiCFZdaIZRJlDDbAYYTjRizOCg3FP4W9+5mU6X8FTXvtUykXm0lOmkaQGAJDgN
- F7X9mZEIyQ0HV4FF46qWaZQBSOFib0yturR/i
-X-Google-Smtp-Source: AGHT+IFwEhb8g1lpDuUvFs0GSsI8B8KGM3BYCSTdYvxA7vaUSbJS4CFC9GSsQVy9dM476JW6qWGRNECbelK0wM/6NBY=
-X-Received: by 2002:a05:6214:5d0d:b0:6cb:e770:f50b with SMTP id
- 6a1803df08f44-6cde15ec09dmr5750906d6.33.1729206711172; Thu, 17 Oct 2024
+ AJvYcCUrn40PbLO3D2JoBPmhV/++tT7E7xzh1LBRXbSkQVusphmYca6gpgukKGTD4TMcTZrUJIJG1HQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwiEAthW/BtwL8AbQTvKCgVAgoj96h8WQDNMCtMXlEkRlyRK2+d
+ 6UhyGgfA8pStZKYUI/cso+YYN6l4/XIUnEMAYE1ncXvtHjbur2d3wgakEXjmMDm4Iu2JLIrRbAx
+ WBxc7paNfJ7VW4ceQPGSOiHXo9eKTxSR84tgw0hccXabXrlk=
+X-Google-Smtp-Source: AGHT+IF8fruQE/tqJ0WlTo9/j9YbZid05KTWLLQU1dWQH7jnhJlcDG4Fd9Xrw4a9mWmO+vM/dRnLn2xh1cwGEYGwAao=
+X-Received: by 2002:a05:6214:3104:b0:6cc:376f:f3af with SMTP id
+ 6a1803df08f44-6cde164b152mr4540736d6.50.1729206711834; Thu, 17 Oct 2024
  16:11:51 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 16:11:50 -0700
+ HTTPREST; Thu, 17 Oct 2024 16:11:51 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszTiddxkR3sUj2aZyLf8xe8gQBj-PyuaiDibTQg1skV6VEw@mail.gmail.com>
-References: <CAFLszTiddxkR3sUj2aZyLf8xe8gQBj-PyuaiDibTQg1skV6VEw@mail.gmail.com>
+In-Reply-To: <CAFLszTjsQO6eW0CJCB12X-2pEj_N3UKudcZ9KRkdXBFzF3O8jQ@mail.gmail.com>
+References: <CAFLszTjsQO6eW0CJCB12X-2pEj_N3UKudcZ9KRkdXBFzF3O8jQ@mail.gmail.com>
  <20241005191353.1927660-1-andriy.shevchenko@linux.intel.com>
- <20241005191353.1927660-3-andriy.shevchenko@linux.intel.com>
-Date: Thu, 17 Oct 2024 16:11:50 -0700
-X-Google-Sender-Auth: k3u78KO9Hk4fXrfH4idguTsElYk
-Message-ID: <CAFLszTgmhe4QtowWF0_CZURMCbs+kxvqZnj0EhvG-UXb9U+xzQ@mail.gmail.com>
-Subject: Re: [PATCH v1 2/4] x86: cpu: Mark a few functions static
+ <20241005191353.1927660-2-andriy.shevchenko@linux.intel.com>
+ <CAFLszTivZ-2fExaAkkc+gK3tq5dYwf4uxUXjkj2dhpkpopJKqw@mail.gmail.com>
+ <ZwaN8GRyySFaMJm1@black.fi.intel.com>
+Date: Thu, 17 Oct 2024 16:11:51 -0700
+X-Google-Sender-Auth: vBRR5Qn2iejhBpty25YcvClaszg
+Message-ID: <CAFLszTiOMgnB_sdZz2JM3AOQb4ZkcTYX-4fjAu7LpmiKL4sOTQ@mail.gmail.com>
+Subject: Re: [PATCH v1 1/4] x86: cpu: Use default print_cpuinfo() for all
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  Bin Meng <bmeng.cn@gmail.com>, 
@@ -92,28 +94,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 5 Oct 2024 at 13:14, Andy Shevchenko
+Hi Andy,
+
+On Wed, 9 Oct 2024 at 08:06, Andy Shevchenko
 <andriy.shevchenko@linux.intel.com> wrote:
 >
-> Some functions are not used anywhere except the same file
-> where they are defined. Mark them static. This helps avoiding
-> the compiler warnings:
+> On Tue, Oct 08, 2024 at 07:56:43PM -0600, Simon Glass wrote:
+> > On Sat, 5 Oct 2024 at 13:14, Andy Shevchenko
+> > <andriy.shevchenko@linux.intel.com> wrote:
+> > >
+> > > Most of the copies of the print_cpuinfo() call the default method.
+> > > Remove all of those in order to have only the default one when
+> > > no `cpu` command is compiled.
+> > >
+> > > This also helps avoiding compiler warning, e.g.:
+> > >
+> > >   arch/x86/cpu/tangier/tangier.c:23:5: warning: no previous prototype=
+ for =E2=80=98print_cpuinfo=E2=80=99 [-Wmissing-prototypes]
+> > >
+> > > Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> > > ---
+> > >  arch/x86/cpu/broadwell/cpu.c                 | 12 ------------
+> > >  arch/x86/cpu/coreboot/coreboot.c             |  5 -----
+> > >  arch/x86/cpu/cpu.c                           |  6 +++++-
+> > >  arch/x86/cpu/efi/app.c                       |  5 -----
+> > >  arch/x86/cpu/efi/payload.c                   |  5 -----
+> > >  arch/x86/cpu/ivybridge/cpu.c                 | 14 --------------
+> > >  arch/x86/cpu/qemu/qemu.c                     |  6 ------
+> > >  arch/x86/cpu/quark/quark.c                   |  6 ------
+> > >  arch/x86/cpu/slimbootloader/slimbootloader.c |  5 -----
+> > >  arch/x86/cpu/tangier/tangier.c               |  5 -----
+> > >  arch/x86/cpu/x86_64/misc.c                   |  5 -----
+> > >  arch/x86/include/asm/u-boot-x86.h            |  1 -
+> > >  arch/x86/lib/fsp/fsp_common.c                |  6 ------
+> > >  13 files changed, 5 insertions(+), 76 deletions(-)
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
 >
->   arch/x86/cpu/cpu.c:343:6: warning: no previous prototype for =E2=80=98d=
-etect_coreboot_table_at=E2=80=99 [-Wmissing-prototypes]
->   arch/x86/cpu/mtrr.c:90:6: warning: no previous prototype for =E2=80=98m=
-trr_write_all=E2=80=99 [-Wmissing-prototypes]
->   arch/x86/cpu/i386/interrupt.c:240:6: warning: no previous prototype for=
- =E2=80=98__do_irq=E2=80=99 [-Wmissing-prototypes]
+> Thanks!
 >
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-> ---
->  arch/x86/cpu/cpu.c            | 2 +-
->  arch/x86/cpu/i386/interrupt.c | 2 +-
->  arch/x86/cpu/mtrr.c           | 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
+> > BTW, this function is deprecated...since with CONFIG_CPU it is shown
+> > by the CPU driver.
 >
+> Is it docemented somewhere? In any case this patch I think is good on
+> its own as it drastically reduces the possible churn in the future.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Documentation for uclasses is generally in the code. But there is
+nothing much here. In this case the code is print_cpuinfo() in
+board_f.c
+
+Regards,
+Simon
 
 Applied to u-boot-dm, thanks!
