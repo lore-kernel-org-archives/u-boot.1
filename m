@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31BF7D3C533
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:17:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61D7CD3C538
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:18:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE838890CA;
-	Fri, 18 Oct 2024 01:12:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 64F5C89185;
+	Fri, 18 Oct 2024 01:12:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jI2mDqKe";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bzOQvy6H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 074078912B; Fri, 18 Oct 2024 01:12:17 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 0613389160; Fri, 18 Oct 2024 01:12:20 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A99C78916E
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:12:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE44789121
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:12:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6cbe90c7c95so11722876d6.1
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:12:13 -0700 (PDT)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6cbceb48613so8769366d6.2
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:12:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729206732; x=1729811532; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729206737; x=1729811537; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=N3CPcx6JSBmEA7AerCOJUe84RVb26i+nhDRZDVyniIM=;
- b=jI2mDqKeo5eAbi5P/cJXgA6n/ZRNkypuRfHhKOWHn/YZSESuyV7fww9e3KjBd+puq7
- 0DqZzUEXZigos4HhS7LVXTST4ZTM8fNGS9BYiBYJPrEo8vx9pJJ25nxSzKE3cJSl2p4J
- KlMQiUSVDEX8t/n4n4eSKwkVh9jNzfgY7Sik0=
+ bh=Yv2YzTPMWG1LI3FjAusM+MIycI8jf8ukBpngvHqgUxQ=;
+ b=bzOQvy6HuvnudMCkL2eE7VUM4FAgFdPGYIOMmnnkL2LwRf3L6Zh7KxLU/nE42NWOld
+ owWWv5W7CSPqe3ttd5hjRUFAgv7vK8obpoEP8h8/OhljRb7fMepIvoOUnq466fJMl9dt
+ GNhu78TGm7D+QOXeZ5BC5p/36/j9n4hGxI+BI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729206732; x=1729811532;
+ d=1e100.net; s=20230601; t=1729206737; x=1729811537;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=N3CPcx6JSBmEA7AerCOJUe84RVb26i+nhDRZDVyniIM=;
- b=tTkPg44wjSqoYzEaNjYW0/bvw0iv65gQhcIWIiTW4qxxExMvO6IKMgU9wKGb3P8Hs1
- YOKLeUHlO/VtdtNTb0i1CNp06fXqFPrfNzJq9jY073xb8i5ArIGo6mzQL6NDQEbn3OxO
- njblx889tGQfkNTe0UwxNRdqUzrVPFhSmiW5zenv1evDrR+13/lh8c0aqpKQhl+TVYrN
- xVvhivKtDgta2k0pP54K7sY9+DY1ZvgnwIyJ2rSMdVf1h2toOqW066jLWzB6AehDWb+7
- SoY/uf/GLvAQttIhggS9dfTbM37+Whl80uKBsAHSxdr4SsBqdi88fJCwXptrgg5U87N8
- k6yA==
+ bh=Yv2YzTPMWG1LI3FjAusM+MIycI8jf8ukBpngvHqgUxQ=;
+ b=Sc2afcreRU6fdHTg+yQCIHZf4L01ohKSmi+0IbilXy0VJNuodkNNKiGley5Igq23na
+ D7BmUfkSGwcR75Dg/57qG1tPbFMalUN35Jqaik/QHUJEUrdKuGv8dYAICOeL2Dll64gk
+ A5/1d/hCupbtrUboQbsxd362FQexk++kVlLTgNpD9gc0nqfXyGgqTUxXegq54R/oQgp6
+ JBam7k92R4vT9u4ChBteR/1ze2Mkzftu2SM0wxtKziC5m3SpDOrIhdt2SYClqW6hk8vv
+ Q/tnM/SxmDgXRfaT9eeaHdW0iktlI/Uea8yzUkc1OffXsM5N768UXFriOUw53IrA3mui
+ RmWA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWkF49IMoESr81b0cZ9hdOZ9RF2Ht6lZ967JuN3DsOaXjpc8rVf0aTneLeEmp0toIgCQ3xEur4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyOmvNq6j8H/2Q/twmfn3pwa7VSNv4c8UyjsIEvXWAbSfJFCL4G
- o8X6zO3FLPwUMyEf1NTOnNKUHN33Z6cwSwuvoFVMmZLJvwCgGP7Lnbwf84o8zO0yXPocV5IQXf/
- 9DZynPuNM0FrfAeX9sRoZA+zK8f6G9Q3nYzai
-X-Google-Smtp-Source: AGHT+IHPlvAxwdUAU6JMPcMhjfCZ+Tz7bXvpeuNhOTU9pySxFySjraVjMMLz1zDiccm8X2Pa+j1mwlADB0UJ0vBzGvQ=
-X-Received: by 2002:a05:6214:448b:b0:6cb:9a5c:8265 with SMTP id
- 6a1803df08f44-6cde164f4f0mr8587986d6.50.1729206732648; Thu, 17 Oct 2024
- 16:12:12 -0700 (PDT)
+ AJvYcCXX82fKfesn25VGSxJoPhVR+urO8v3TaUbUE2Uk034JBbI9TY1g4V229eUaX5c8zkl11gT4Ea4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yykx74hd8IAaOSOpxt5lU2m8yKqNmEfuRJ6HtTnuDBirUl/pzEj
+ kp83Whxjc4QdQryuBX0AUs2HewX8uaeqyVKta0ckMBn+MEncs81jh7pZTW9hCb0MeWXsvTmpHnK
+ emrxfJs+fgYe13sGYt5JXE9H+HbQn+Elv0rgs
+X-Google-Smtp-Source: AGHT+IFsT9Wiw97O0XfHf0i85VckLWlvvOo9ARl1sBNFLBn55ZC3MOmhf7LiE29Z15dN9YbLPQQwIb/dwwLRB/CgkCo=
+X-Received: by 2002:a05:6214:328e:b0:6cb:f561:2a83 with SMTP id
+ 6a1803df08f44-6cde1632fd2mr6054586d6.43.1729206736890; Thu, 17 Oct 2024
+ 16:12:16 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 16:12:12 -0700
+ HTTPREST; Thu, 17 Oct 2024 16:12:16 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240828014429.3320011-5-sjg@chromium.org>
-References: <20240828014429.3320011-5-sjg@chromium.org>
+In-Reply-To: <20240828014429.3320011-4-sjg@chromium.org>
+References: <20240828014429.3320011-4-sjg@chromium.org>
  <20240828014429.3320011-1-sjg@chromium.org>
-Date: Thu, 17 Oct 2024 16:12:12 -0700
-X-Google-Sender-Auth: v5t4ZvSJdr7DeMkNIMSnWZjm69I
-Message-ID: <CAFLszTjhkf8w3s8+rGLr-UsN2sDmGt=YKukgB+SNOq0yt4C2-g@mail.gmail.com>
-Subject: Re: [PATCH 4/6] x86: Sync up tsc_timer with Linux
+Date: Thu, 17 Oct 2024 16:12:16 -0700
+X-Google-Sender-Auth: _-5sOhI9DAAqntuht7VXGPbRwqc
+Message-ID: <CAFLszTg_UWt3Gs6SL89Jbmynz3xPXBwPaUr57hF3YfQ2Q0WkNQ@mail.gmail.com>
+Subject: Re: [PATCH 3/6] x86: Avoid timer-clock overflow
 To: Simon Glass <sjg@chromium.org>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
@@ -88,13 +88,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since we are using the code from Linux, update it to the newer version
-in v6.11
+When the clock speed is above about 4GHz, e.g. on modern PC hardware,
+the timer overflows, resulting in a much lower frequency than expected.
+Deal with this by capping the clock speed.
+
+It would be possible to move to a 64-bit value for the clock, but that
+is a pain to deal with. A better approach might be to express the clock
+in MHz but that is left for later consideration.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/timer/tsc_timer.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ drivers/timer/tsc_timer.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 Applied to u-boot-dm, thanks!
