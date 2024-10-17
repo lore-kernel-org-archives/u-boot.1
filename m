@@ -4,71 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEA83D3C533
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:16:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F6E5D3C538
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:16:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B3078918B;
+	by phobos.denx.de (Postfix) with ESMTP id 7D00A8916C;
 	Fri, 18 Oct 2024 01:12:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cnd7Lbmb";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jHHNrKJI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BC05890E9; Fri, 18 Oct 2024 01:12:07 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 71F8B88F23; Fri, 18 Oct 2024 01:12:08 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5694289128
+ by phobos.denx.de (Postfix) with ESMTPS id 908EC8912B
  for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:12:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6cc250bbc9eso9418916d6.2
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6cbd1ae26a6so10308556d6.1
  for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:12:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1729206722; x=1729811522; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kldVsk6Z54eErWUmX33ZtFH0jYNUr9QX5fbn+FrFqNI=;
- b=cnd7LbmbUQoiBRwCq4sEWSVV0twJdK17ChHD9crEf/4kk+yTfFlYKfzJXCH+XsUgux
- uJz9C77xRuo2QFO/lRS2LFYbFBDJPnTHnz384Pq0mnv6ym2+zHctVGY2iXbYOEr0Ryc6
- WDQda3eWNfE80xqmItGJvIFKqMRDCOYXShTTc=
+ bh=x9LnxrxaRFkthNDuSl0he+jfWzB99vTiytD/7gS3+E4=;
+ b=jHHNrKJIojJGN9V5JOg7kVPpgiJlUoUDJhDprCgVw2JSvlSM9+0HU0rjDSnv6yEVkd
+ GfP4xUCR25AyATq8jbT+XxFJviczvvntwTii6gHowQL1yaLrScg2iuSKLxbvH5yfcDnf
+ byhTH6zXWRvxdM6jOXmvPCbEhaXuNsZqZUdps=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1729206722; x=1729811522;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kldVsk6Z54eErWUmX33ZtFH0jYNUr9QX5fbn+FrFqNI=;
- b=ikPmtyrYqFgnBqJzdp2lTvZUo9KAR5nfpYEQ6IzUBlHCbIdtx6XGo2oX2ct3f0a4X+
- QSkH3xBSXd8+CwreqykNRITtjZEOCeRDRsEa0x6EDxMNR4RkV64uxoR+MJ18KP+jZ/y2
- 0vlPhiOi/NzDsYnhnu4CeAaBgcGwsWUaqDMcq2uoe6J+dHZkInFHIWDfhScT0FVW3VQi
- qW75XEYA/7yJYJK/6eDWd897zFU9I3whD58h4tjzlEtb8rRUivVXDDRctYnDudI+w3Sv
- YvVIx5XlEH5P8nqcYv2Whr+KTe7uwVcaafzctis0D2qoQLu9gVYL0yA7CL46GlbmVmeH
- dOxQ==
-X-Gm-Message-State: AOJu0YxBIq9gX5ekuW8zyT+5F1KNHC/DVbMIu5iRfzRKhv9F3Yxt28Dq
- uasGeHFZlN7TluslvA87fpzORSNPK80+Tai+duJz7cUaaYBX6JXj4m2gm/sFbPzDDSjccoB9rjo
- 3LGoKiAB1R8Fl5aCjwcLhPWCDR2L9IPcYJuBw
-X-Google-Smtp-Source: AGHT+IEYOBSsZrtav4vIGf23vJc3BTPkLHdF26BHFTx0N346YZ0Qhyvq0LU/xocD2PykZ6Co925V09yKaCHIJGCEDyc=
-X-Received: by 2002:a05:6214:2d44:b0:6cb:e813:523a with SMTP id
- 6a1803df08f44-6cde14b6b2dmr5445616d6.4.1729206722149; Thu, 17 Oct 2024
+ bh=x9LnxrxaRFkthNDuSl0he+jfWzB99vTiytD/7gS3+E4=;
+ b=hYdxlegyFHD7Eg6Gll+BPj0RkZTel5057i7iCgyujkzKkqCzjad/ujBXP045a6nJyG
+ 2h/4vx/+O6VITBFHbFRyi0q2SG4yXiAMx9uDq0RCWfJ7gh0SUsNbs+5HNr1Em0MYQUAU
+ /bixIz/A/OihTV7tCz1VOp+jm0Cw1hN6BRz66Iakis8uTZyJS5sB9if3G2QNexSwHjr6
+ P8Akqqqok5V6OUzOcqeY+2IOlBiXatJSWYixhMWFt1OPROFYSH1pWVGA94OPoS2/6M2m
+ Wju/ZULjXHqnnhV6lfUwNKM7oAXD5znGXgdqiFR1X/l8DCqLK0EHz5RVYVUzTsmJuXlE
+ hOyg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVXE7cXI1+OVPXtGETngbj1ZFnHMpgQ41pdz2zPalKPZEZjj3KRLaFmCE9wWL1mV5VRPJYKRiA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwdCqmYPpMcYOL51VJJ1r8PKKxXudR4hFuDabHrMmXC0oXNraZQ
+ ao9kKOCQ+GRTMFiT61gwwXtpS0vNqZ+Bd1i8FLR/xGhAHxQ7tlu8PsiQBVQZYnGUEkD4jiIbxuV
+ OBL/QBMuvtaF4Zou+Orm8T0UstKfChXNKalEJ
+X-Google-Smtp-Source: AGHT+IEOwJlIbXd2YmJlgtzh/IhgmEQO34G4FaisLsDNClnLCaWVe7WLpHzf9OiksaH/UtIM5R2c6Xi7h0nPJXqLoKU=
+X-Received: by 2002:a05:6214:5b03:b0:6c7:c7ff:958e with SMTP id
+ 6a1803df08f44-6cde150789amr8335666d6.18.1729206722476; Thu, 17 Oct 2024
  16:12:02 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 23:12:01 +0000
+ HTTPREST; Thu, 17 Oct 2024 16:12:02 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszTjFVU=M42bj93PiNt1iOd29gUNn4YeV=zGmgLt-3qPOmA@mail.gmail.com>
-References: <CAFLszTjFVU=M42bj93PiNt1iOd29gUNn4YeV=zGmgLt-3qPOmA@mail.gmail.com>
- <20240916082446.32082-1-al.kochet@gmail.com>
- <20240916082446.32082-2-al.kochet@gmail.com>
-Date: Thu, 17 Oct 2024 23:12:01 +0000
-X-Google-Sender-Auth: CDfpQOD42syiFtr-ogj-xuD3NwA
-Message-ID: <CAFLszTh2udj=Qyf_2rzTd26Ywk81WuYRsbGKpqA5u4JMTiWMKg@mail.gmail.com>
-Subject: Re: [PATCH 1/3] binman: fix passing loadables to mkimage on first run
+In-Reply-To: <20240901222734.462334-4-sjg@chromium.org>
+References: <20240901222734.462334-4-sjg@chromium.org>
+ <20240901222734.462334-1-sjg@chromium.org>
+Date: Thu, 17 Oct 2024 16:12:02 -0700
+X-Google-Sender-Auth: m0E7_6-kal3wSHmL6OFWnGUC7VQ
+Message-ID: <CAFLszTivbDM10hCKTvnhKdWXsd6Xc8uMkt8PHt2nw3a1jASgnQ@mail.gmail.com>
+Subject: Re: [PATCH v3 3/8] bootstd: Avoid depending on BLK
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Alexander Kochetkov <al.kochet@gmail.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,30 +90,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 16 Sept 2024 at 02:25, <al.kochet@gmail.com> wrote:
->
-> From: Alexander Kochetkov <al.kochet@gmail.com>
->
-> FIT use mkimage from BuildSectionData() to build FIT entry contents.
-> BuildSectionData() get called several times during building FIT image.
->
-> Currently when fit inserts loadables, it use self._loadables property that
-> contain loadables computed during previuos BuildSectionData() invocation.
-> So for the first run it use empty list and pass no loadables to mkimage.
->
-> That makes problem for adding signature to FIT image because mkimage
-> fails to add signature and aborts building FIT if no loadables provided.
->
-> The patch fixes described behaviour in a way that BuildSectionData() uses
-> recently calculated loadables value, not previosly calculated.
->
-> Signed-off-by: Alexander Kochetkov <al.kochet@gmail.com>
-> ---
->  tools/binman/etype/fit.py | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+In principle bootstd can work without block devices, even if it does
+require driver model to be enabled in that case.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+The use of a 'depends on BLK' for BOOTSTD conflicts with the way 'BLK'
+is now defined, producing recursive errors through multiple different
+paths, one of which is this (with Linksprite_pcDuino3 and
+BOOTSTD_DEFAULTS enabled):
 
+  arch/arm/Kconfig:7:error: recursive dependency detected!
+  arch/arm/Kconfig:7: symbol ARM64 is selected by ARCH_UNIPHIER_V8_MULTI
+  arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
+     part of choice <choice>
+  arch/arm/mach-uniphier/Kconfig:6: choice <choice> contains symbol
+     ARCH_UNIPHIER_V8_MULTI
+  arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
+     part of choice SPL
+  arch/arm/mach-stm32mp/Kconfig:3: symbol SPL depends on SUPPORT_SPL
+  common/spl/Kconfig:1: symbol SUPPORT_SPL is selected by ASPEED_AST2600
+  arch/arm/mach-aspeed/Kconfig:26: symbol ASPEED_AST2600 is part of
+     choice <choice>
+  arch/arm/mach-aspeed/Kconfig:12: choice <choice> contains symbol
+     ASPEED_AST2500
+  arch/arm/mach-aspeed/Kconfig:17: symbol ASPEED_AST2500 is part of
+     choice DM_RESET
+  arch/arm/mach-renesas/Kconfig.rcar3:197: symbol DM_RESET is selected
+     by CLK_RCAR_GEN3
+  drivers/clk/renesas/Kconfig:53: symbol CLK_RCAR_GEN3 depends on
+     CLK_RENESAS
+  drivers/clk/renesas/Kconfig:1: symbol CLK_RENESAS depends on CLK
+  drivers/clk/Kconfig:3: symbol CLK is selected by IMX8M_POWER_DOMAIN
+  drivers/power/domain/Kconfig:35: symbol IMX8M_POWER_DOMAIN depends on
+     POWER_DOMAIN
+  drivers/power/domain/Kconfig:3: symbol POWER_DOMAIN is selected by
+     BCM6318_USBH_PHY
+  drivers/phy/Kconfig:83: symbol BCM6318_USBH_PHY depends on PHY
+  drivers/phy/Kconfig:4: symbol PHY is selected by USB_EHCI_MX7
+  drivers/usb/host/Kconfig:211: symbol USB_EHCI_MX7 depends on USB
+  drivers/usb/Kconfig:1: symbol USB is selected by BOOTSTD_DEFAULTS
+  boot/Kconfig:455: symbol BOOTSTD_DEFAULTS depends on BOOTSTD
+  boot/Kconfig:398: symbol BOOTSTD depends on BLK
+  drivers/block/Kconfig:1: symbol BLK is selected by PVBLOCK
+  drivers/xen/Kconfig:1: symbol PVBLOCK depends on XEN
+  Kconfig:176: symbol XEN depends on ARM64
 
->
+We don't want to revert the change to BLK, which has been in place for
+a year now. We don't want to select BLK in BOOTSTD since it should
+support booting without block devices. The only realistic option is to
+remove BOOTSTD's dependency on BLK.
+
+Disable standard boot on the one board which fails.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+Changes in v3:
+- Drop wip (work-in-progress) comment in commit
+
+Changes in v2:
+- Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
+
+ boot/Kconfig                                   | 2 +-
+ configs/gardena-smart-gateway-mt7688_defconfig | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
 Applied to u-boot-dm, thanks!
