@@ -4,77 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BC81D2127F
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 11:36:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 747E2D2127F
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 11:41:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 976E988F57;
-	Thu, 17 Oct 2024 13:36:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B170C88FA4;
+	Thu, 17 Oct 2024 13:41:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OFpGI8zr";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="T7svPaOq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91BA688FBA; Thu, 17 Oct 2024 13:36:19 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 8A9C488FD2; Thu, 17 Oct 2024 13:41:43 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B50288E5C
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 13:36:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5415488F57
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 13:41:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4314a26002bso9524635e9.0
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 04:36:15 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-37d495d217bso732757f8f.0
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 04:41:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729164975; x=1729769775;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729165299; x=1729770099;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=kZcXenYJkJ6I1w/gnkSsEhjpCMCa2zdURaWktGPMr08=;
- b=OFpGI8zrfiBLert0pNaN5Ujs9Xcsg85He8HsqMDHe3uRiczfCwxrBucmVetuC+nlJr
- ECcLFzvAhHXaUrhrUockI9zrVNKhwxsRxbjRn+rfC2QwZbUyLIYQzV8RELaHBTKMz2YR
- TJPjlGZWp7qD1BrTq+qmw3gN2FB+dNg0bnKHRFeow1d/f4f1NuUGLb0c/yG7WC+1k+3E
- aBSRI8/+l4/cF2BjXlRIl21DbTcW0633g9ETH2Hncbfh7I9Sdu+K9Kl6LURKNB0BuZ83
- Ki2ZHf6ok+ZFkYXStoeL71akm8LEc5zqMPMpn8GAtIbWs+wxZ11UQZcsZLkO0zuOeDZe
- RSUQ==
+ bh=aROGsa4qf+z9vHN3EbDPXJFucg6RZQKdlYgqfKaO0ts=;
+ b=T7svPaOqE7KwxkdkskFayQVc9MW0o2bd7x0v3mQF/+gZtdADJ/L8Crm+t9pZHNv60l
+ n1nTRKJExyvBLps/MuzU91zTvh9dGxPAsOvrwprCffxmQWz8IZIUObiKFOdk0p1kRlTb
+ uR9CwXnep8uQHVtexXjlxkaTWqBULWHDai67xMQMx3SdmJTlc3HCRA8Q5ulx2UxCHV/n
+ axmNNdzYha3oRXqO8gBfx06jsNkwiZJ1weNQEgJUAn8AzO/YD9/bSrKe7+hJC5ZY5BeI
+ 3KXsRxbjjeUR08tdiZYTePcdy1btagQ1DNlJ5VTftShN2y6UarV1HzJ46MNph3JBAmBa
+ dJKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729164975; x=1729769775;
+ d=1e100.net; s=20230601; t=1729165299; x=1729770099;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kZcXenYJkJ6I1w/gnkSsEhjpCMCa2zdURaWktGPMr08=;
- b=POn99vo7DhI4irQUg9tuvu+bQn+fg3Esv4tCJiuaNrYdqAN05jyYxB75o+/Zcm3V/R
- c5CI0YtmrGhid5S5u73cnpdO80tQn25cv0xqez0+X5XfDfhe4Majfzo6mfmrb1B4DMmR
- oa0BAsYzNwnt1q9TFLJKwBIXGM78DE6Fc+mJYudrOcOy+E7Asot2eXMQ9YiERz6GEJgo
- fpmf4Vll5L4gSfDSJu0zVCBMSlomfwnMoiOh5XB6K98e0jG5m/luGK/XFDmujMtZTNyJ
- O98LpN9DCwIgv70iDEQEo0BkmabIKvZov1x4va/UVCJyAHlpUs5+VPa0b10O782Xmz8N
- zVlA==
+ bh=aROGsa4qf+z9vHN3EbDPXJFucg6RZQKdlYgqfKaO0ts=;
+ b=bmYB15tZf4b9Ycq59qYkKArHkjSA2kaa7lWvCvB0aCP2sLxziRNutc945rnHR1QVxR
+ B2c4Lpa3se9Lped5YBzvv+iWv/j0NkizatmU9pDqu/XfpAxSgr1tmDjVSQK5pZBGtgQA
+ bRB2d9s10hPg4UKpjmX36nklCdTfmKoROK/LbTJHJLdBfvRpq9CkEauKP+1X/xpnBj3K
+ nbQ9lXf9oGfKs/Gi8vcNPzAyBRzdPiCCsPvQrxhZANZBGBeYXnmmukYjRa6yXDXidXf1
+ BLTVaDWJv6HYJ+E60KL3NykjU9xy5Bn1VQ5ByunEDjdPscLQjTLOiJaT0/yqPIMHoDTa
+ ZDDw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW2Z/+kfIf0/e0jUdhAP6V4m0I2rOMyuKOkvUwzMR2W2e1IO6OCb6bWwVBF6aO1+arQCA44gPQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxUD67EGEXjbWhFTqgryvG67b/PWGBeWAdEwzzN4EY6J5TRzbpY
- AargkZeedQJAnMLz+z8Bad08xGXFtBVrqIZNjt3jbhF7E78unTbT/niJodAm6Zo=
-X-Google-Smtp-Source: AGHT+IFLJ/ieo61mDQ/iBcdWCWLogSgzgf0pnqzWSQpGZSVPUEIr6XXfxoJUs3aUg9XRMWdVJkbf+g==
-X-Received: by 2002:a05:600c:45ce:b0:42c:ba83:3f0e with SMTP id
- 5b1f17b1804b1-4314a283c8fmr65768185e9.7.1729164974716; 
- Thu, 17 Oct 2024 04:36:14 -0700 (PDT)
+ AJvYcCXGpXwSpDbTkPKx0pMrNL+DdX+POYR4tR7IA9hvSaMldln7mqvu6KoPgvnkGxmY6/jIRWNUfSQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZSR2pmUk0In/TUEhKueHw8O3597DmgDZFWIaB32gKarc/Yvl4
+ wz/dv2ZqWsahlnWPPMZOp2jmDHj9m08Xxm/krHeF/QTi8s+pQ6nkeaRCviSc2No=
+X-Google-Smtp-Source: AGHT+IHGpRZE68/LINUIX56UATrxqK4rqGNHoSmJB0LcMGKT4WBkNVXkqnit23ePNlIHnSGyrVxVCg==
+X-Received: by 2002:a05:6000:e85:b0:37d:3f5f:9191 with SMTP id
+ ffacd0b85a97d-37d5ffb3301mr16395883f8f.33.1729165298723; 
+ Thu, 17 Oct 2024 04:41:38 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43150455e1esm33735565e9.1.2024.10.17.04.36.13
+ ffacd0b85a97d-37d7fa7a584sm7006756f8f.20.2024.10.17.04.41.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Oct 2024 04:36:14 -0700 (PDT)
+ Thu, 17 Oct 2024 04:41:38 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: Guillaume La Roque <glaroque@baylibre.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 3/3] image: android: handle ramdisk default address
-In-Reply-To: <20241016-topic-fastboot-fixes-mkbootimg-v1-3-94fd9340722b@linaro.org>
-References: <20241016-topic-fastboot-fixes-mkbootimg-v1-0-94fd9340722b@linaro.org>
- <20241016-topic-fastboot-fixes-mkbootimg-v1-3-94fd9340722b@linaro.org>
-Date: Thu, 17 Oct 2024 13:36:12 +0200
-Message-ID: <87bjzj2c7n.fsf@baylibre.com>
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot-amlogic@groups.io, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, Tom
+ Rini <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Mario Six <mario.six@gdsys.cc>,
+ u-boot@lists.denx.de, rockosov@gmail.com, kernel@salutedevices.com
+Subject: Re: [PATCH v3 2/6] treewide: bcb: move ab_select command to bcb
+ subcommands
+In-Reply-To: <20241016140654.mxms6m4g2rr3vncz@CAB-WSD-L081021>
+References: <20241008-android_ab_master-v3-2-f292c45a33e4@salutedevices.com>
+ <17FD691FA1477948.8140@groups.io> <87ed4mhgaw.fsf@baylibre.com>
+ <20241011180031.cgvuhks7zo772wl6@CAB-WSD-L081021>
+ <87frp1r9iz.fsf@baylibre.com>
+ <20241014203820.riljx72bkqw762v5@CAB-WSD-L081021>
+ <CAFLszTgO5h1zdXJTk-PCcDWx6nAz3riV34K_sHcvnO4AYMNSqA@mail.gmail.com>
+ <87ikttzhwd.fsf@baylibre.com>
+ <20241015132631.qnnbrmnuwp6zr7r5@CAB-WSD-L081021>
+ <87cyk1z8sy.fsf@baylibre.com>
+ <20241016140654.mxms6m4g2rr3vncz@CAB-WSD-L081021>
+Date: Thu, 17 Oct 2024 13:41:35 +0200
+Message-ID: <878qun2byo.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -93,122 +104,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
+Hi Dmitry,
 
-Thank you for the patch.
+On mer., oct. 16, 2024 at 17:06, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
 
-On mer., oct. 16, 2024 at 17:46, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+[...]
 
-> The two tools that create android boot images, mkbootimg and the fastboot
-> client, set the kernel address by default to 0x11008000.
+>> >
+>> > I just run build on the my x86 Ubuntu machine.
+>> >
+>> > $ cd uboot
+>> > $ make mproper
+>> > $ make sandbox_defconfig
+>> > $ make -j$(nproc)
+>> 
+>> I tried these commands:
+>> Here is the successfull build output:
+>> 
+>> https://paste.debian.net/1332378/
+>> 
+>> I use:
+>> $ ~/work/upstream/u-boot-dfu/ dmitry/ab-dump-v3* gcc --version
+>> gcc (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)
+>> Copyright (C) 2024 Free Software Foundation, Inc.
+>> This is free software; see the source for copying conditions.  There is NO
+>> warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+>> 
+>> $ ~/work/upstream/u-boot-dfu/ dmitry/ab-dump-v3* ld --version
+>> GNU ld version 2.41-37.fc40
+>> Copyright (C) 2023 Free Software Foundation, Inc.
+>> This program is free software; you may redistribute it under the terms of
+>> the GNU General Public License version 3 or (at your option) a later version.
+>> This program has absolutely no warranty.
+>> 
+>> What toolchains do you use?
+>> 
 >
-> U-boot always honors this field, and will try to copy the ramdisk to
-> whatever value is set in the header, which won't be mapped to the actual RAM on
-> most platforms, resulting in the kernel obviously not booting.
+> By default, my machine, which I typically use for cross-compilation, has
+> an outdated toolchain version:
 >
-> All the targets in U-Boot right now will download the android boot image to
-> CONFIG_SYS_LOAD_ADDR, which means that it will already have been downloaded to
-> some location that is suitable to use the ramdisk in-place for header
-> version 0 to 2. For header version 3 and later, the ramdisk can't be
-> used in-place to use ramdisk_addr_r in this case.
-
-Is said in [1] I found some boot issues on Beagle Play with boot image
-v4.
-
-If a new series need to be send, please also adapt the commit message a
-bit as it fails checkpatch:
-
-$ ~/work/amlogic/u-boot/ neil/android-fixes ./scripts/checkpatch.pl --strict --u-boot --git HEAD^..HEAD
-WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)
-#10: 
-whatever value is set in the header, which won't be mapped to the actual RAM on
-
-total: 0 errors, 1 warnings, 0 checks, 59 lines checked
-
-NOTE: For some of the reported defects, checkpatch may be able to
-      mechanically convert to the typical style using --fix or --fix-inplace.
-
-Commit 19a75a41096f ("image: android: handle ramdisk default address") has style problems, please review.
-
-NOTE: Ignored message types: COMPLEX_MACRO CONSIDER_KSTRTO ENOSYS MINMAX MULTISTATEMENT_MACRO_USE_DO_WHILE NETWORKING_BLOCK_COMMENT_STYLE PREFER_ETHER_ADDR_COPY USLEEP_RANGE
-
-NOTE: If any of the errors are false positives, please report
-      them to the maintainer, see CHECKPATCH in MAINTAINERS.
-
-
-[1] https://lore.kernel.org/r/all/87ed4f2ccc.fsf@baylibre.com/
+> $ gcc --version
+> gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+> Copyright (C) 2017 Free Software Foundation, Inc.
+> This is free software; see the source for copying conditions.  There is NO
+> warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 >
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-> ---
->  boot/image-android.c | 36 +++++++++++++++++++++++++++++-------
->  1 file changed, 29 insertions(+), 7 deletions(-)
+> $ ld --version
+> GNU ld (GNU Binutils for Ubuntu) 2.30
+> Copyright (C) 2018 Free Software Foundation, Inc.
+> This program is free software; you may redistribute it under the terms of
+> the GNU General Public License version 3 or (at your option) a later version.
+> This program has absolutely no warranty.
 >
-> diff --git a/boot/image-android.c b/boot/image-android.c
-> index 3adcc69a392..a261bb63999 100644
-> --- a/boot/image-android.c
-> +++ b/boot/image-android.c
-> @@ -14,6 +14,7 @@
->  #include <linux/libfdt.h>
->  
->  #define ANDROID_IMAGE_DEFAULT_KERNEL_ADDR	0x10008000
-> +#define ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR	0x11000000
->  
->  static char andr_tmp_str[ANDR_BOOT_ARGS_SIZE + 1];
->  
-> @@ -405,9 +406,24 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
->  
->  	if (!img_data.ramdisk_size)
->  		return -ENOENT;
-> -
-> +	/*
-> +	 * Android tools can generate a boot.img with default load address
-> +	 * or 0, even though it doesn't really make a lot of sense, and it
-> +	 * might be valid on some platforms, we treat that address as
-> +	 * the default value for this field, and try to pass ramdisk
-> +	 * in place if possible.
-> +	 */
->  	if (img_data.header_version > 2) {
-> -		ramdisk_ptr = img_data.ramdisk_addr;
-> +		/* Ramdisk can't be used in-place, copy it to ramdisk_addr_r */
-> +		if (img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
-> +			ramdisk_ptr = env_get_ulong("ramdisk_addr_r", 16, 0);
-> +			if (!ramdisk_ptr) {
-> +				printf("Invalid ramdisk_addr_r to copy ramdisk into\n");
-> +				return -EINVAL;
-> +			}
-> +		} else {
-> +			ramdisk_ptr = img_data.ramdisk_addr;
-> +		}
->  		memcpy((void *)(ramdisk_ptr), (void *)img_data.vendor_ramdisk_ptr,
->  		       img_data.vendor_ramdisk_size);
->  		ramdisk_ptr += img_data.vendor_ramdisk_size;
-> @@ -420,15 +436,21 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
->  			       img_data.bootconfig_size);
->  		}
->  	} else {
-> -		ramdisk_ptr = img_data.ramdisk_addr;
-> -		memcpy((void *)(ramdisk_ptr), (void *)img_data.ramdisk_ptr,
-> -		       img_data.ramdisk_size);
-> +		/* Ramdisk can be used in-place, use current ptr */
-> +		if (img_data.ramdisk_addr == 0 ||
-> +		    img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
-> +			ramdisk_ptr = img_data.ramdisk_ptr;
-> +		} else {
-> +			ramdisk_ptr = img_data.ramdisk_addr;
-> +			memcpy((void *)(ramdisk_ptr), (void *)img_data.ramdisk_ptr,
-> +			       img_data.ramdisk_size);
-> +		}
->  	}
->  
->  	printf("RAM disk load addr 0x%08lx size %u KiB\n",
-> -	       img_data.ramdisk_addr, DIV_ROUND_UP(img_data.ramdisk_size, 1024));
-> +	       ramdisk_ptr, DIV_ROUND_UP(img_data.ramdisk_size, 1024));
->  
-> -	*rd_data = img_data.ramdisk_addr;
-> +	*rd_data = ramdisk_ptr;
->  
->  	*rd_len = img_data.ramdisk_size;
->  	return 0;
+
+Thank you for sharing. that looks indeed very old and would explain why
+we see different results when building sandbox.
+
+According to this commit [1], you should use gcc 13.0.2 at least
+Would it be possible to update?
+
+[1] https://source.denx.de/u-boot/u-boot/-/commit/11934281526bda3be51783380b55c332804d043d
+
+>> >
+>> > That's all.
+>> >
+>> > I've already sent the v4 patch with #ifdef. I can prepare the v5 patch
+>> > using the IS_ENABLED() macro and will aim to send it today.
+>> >
+>> > But I have one question:
+>> >
+>> > Do we really want to display the ab_select and ab_dump subcommands to
+>> > users if these commands are just stubs? Perhaps we should consider
+>> > adding #ifdef directives to the subcommand arrays.
+>> 
+>> That's a valid concern. I don't think we should display
+>> the ab_select and ab_dump commands to the users but I still want to have
+>> IS_ENABLED wherever possible to keep the code simple.
 >
 > -- 
-> 2.34.1
+> Thank you,
+> Dmitry
