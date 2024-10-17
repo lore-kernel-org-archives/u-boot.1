@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36D87D3C533
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:17:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 908F4D3C533
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:17:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C1E58917A;
-	Fri, 18 Oct 2024 01:12:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 30754891A5;
+	Fri, 18 Oct 2024 01:12:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SvWuOmFC";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vc+S38y+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 365B589157; Fri, 18 Oct 2024 01:12:15 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id 1FD638918D; Fri, 18 Oct 2024 01:12:16 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEE4E8915D
+ by phobos.denx.de (Postfix) with ESMTPS id 600F98915B
  for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:12:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6c5acb785f2so8151676d6.0
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6cbcc2bd800so12200626d6.0
  for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:12:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729206732; x=1729811532; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729206731; x=1729811531; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Qf1zPA/2yzUeayMoo4FeHkvO4U7KDJlvDGugN0wODRk=;
- b=SvWuOmFCLJuI0t9IEZe74TyjCC6OMpMYdRLdBi02QtnNvEfqmhyq6KEdp2CXzdmrQN
- K/6YhEi+H9r6lDzCH0eW757IsPLD9oeAPOhRXph1H7S5XxkUy/kAzSXKQ0IsdJVqk2yT
- iCsHAcwZhNfR99FHgFqSUohrcCVH0M5MKZqos=
+ bh=jYckMBaqkhY1Bs15zXr2caEshYCnRthoP8ibTGRAGvc=;
+ b=Vc+S38y+GBEVykXVm7YED2//Fq+WLoeP1CD3T3vDPN59Z0WW+fYFlgu9khvhGww7Tk
+ T6i+x4HoBaeLWKB/U1NNAkhM931LjePKWHwWZyIHewILjt+2S4B3o8R3ddr33ttCpVIY
+ 3uw8uIKXFKcGstO2+HnRyezHRuvuLg8fsAZWU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729206732; x=1729811532;
+ d=1e100.net; s=20230601; t=1729206731; x=1729811531;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Qf1zPA/2yzUeayMoo4FeHkvO4U7KDJlvDGugN0wODRk=;
- b=P6RtVi8CCYD6G7xYxURfUACr7cGvHRd2A7ToQZZ25K6BQBA55YE1VaOEtjzyyAD3ir
- y/fl1U8M5XXmgAgY9WkvPEgRVlYcQN24vY6qGTfuTfjNY8sy55rd54mGGGqPYxHSIp7M
- B8Zrd3Ly3LP+F99l8EqPe9SENqSoed1A7Gmazeh1FBDBQF41hqUrbFsmhsVbrLdoNTdu
- OXGvAp+uBZxdNK6cBQM5wYO9b6gEyvK2v3Q1iGTkQHIBJCaeRfcA9ASdSqX5KB/qDbVP
- n1naTc0yay+mn5VPym297MzirmjEIxHq8KYXZRtWCBT4BtoCre1ETcMRghOvDCtJEqdP
- 3MgA==
+ bh=jYckMBaqkhY1Bs15zXr2caEshYCnRthoP8ibTGRAGvc=;
+ b=IJXZy883Hy0dNMihzXWb+a07+rmnl74MiLSR7+KaLieJZ2VmwXNnp8TEvFpUt19GuJ
+ /jXFca5/ov9MSTv1122X6kEbyUNesRjx1x4LaCyNKMyBwYUbp3GHp+QX+ZQrhRAm2ySm
+ t4qthoKk9vPsWAVOCfUIJpAbVEP0uQXrbSutsfoZs8OR5bwdi3StJXBpl0lbJNF9cuqH
+ sDI4Dm1/OjLdfNZQFT3yuEjraXWDksC1xYXYYVLFF0xW/PZRt5qqzdVuEAxIJmxX7SX7
+ OQsd54NdhpYJigWttpzSnfKfb5WmIwKPJOl5XQ1posgrIZjTshGzcGUz4BWjJbHOkcge
+ JDow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXwcGIR+QLrqKyYwVTeHI1TZnIm0UmsVjDLfS/fLZd3NGJzNNRLwq64yev5Lk/9xXi/STr6jWM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyyUYR15KRfFJ+OBpgSuRYKJTurlIVlPprJdBI28KsZsZ9W68GA
- 3qxhdrnA8MdPKha2JieZIdU0cULKPlIeHBpMVF4MclLl6v/N21fPSsMLrDh6WA6l9hUVCYX/bfp
- agyuryI1XlnZyUzr8WXx4nlwpuvmma7IplXhC
-X-Google-Smtp-Source: AGHT+IEh7YSAbLqjrMkeSmqlIAZypa4/DUj7g96IDFMMqOD2971RSmh+xnmesDy7Ik1FwiXqrEJ/QDABLYNijb9dSM8=
-X-Received: by 2002:a05:6214:5b0d:b0:6cb:c9d0:df32 with SMTP id
- 6a1803df08f44-6cde14c2822mr6762626d6.11.1729206731954; Thu, 17 Oct 2024
+ AJvYcCWZXQ1hmIPeAyADECl5kIfGfCPiVPM0H+las7qodm9Wt6RNk1OeLajeq8gHOFwASJYyNU3n7kQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTPapO1CPOONfi5YPY3IANQF4Y6ruWkqKEDAHgPnnL7uy+Fhgo
+ +QfD5mJ7aIL00hjmirH1APkS2SncnDFFQmDardlSVP6P2GeY79vWFMYFaGrHSs2129YG8BjAP4D
+ Gunw115cbr+/yejTi9ZMaE3tQa+8GYDADiYPS
+X-Google-Smtp-Source: AGHT+IHvy1RtBOT07FurjLR5W4OMEqX1xJGDU3BLOyLLJxlU/Y0LlDZqkGrvyllwsZxjFLwzsMk6Cg/UA3/2450f3M0=
+X-Received: by 2002:ad4:5f4f:0:b0:6c3:6477:16e7 with SMTP id
+ 6a1803df08f44-6cc3785617dmr83841586d6.11.1729206731323; Thu, 17 Oct 2024
  16:12:11 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
  HTTPREST; Thu, 17 Oct 2024 16:12:11 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240828014429.3320011-7-sjg@chromium.org>
-References: <20240828014429.3320011-7-sjg@chromium.org>
- <20240828014429.3320011-1-sjg@chromium.org>
+In-Reply-To: <20240828201355.1111764-1-sjg@chromium.org>
+References: <20240828201355.1111764-1-sjg@chromium.org>
 Date: Thu, 17 Oct 2024 16:12:11 -0700
-X-Google-Sender-Auth: y2gyrR0_W7m8oI76mBvBC_cPc1A
-Message-ID: <CAFLszTi88+eazT0X=ADKh5_s=gQD=+pxukSPr=QyhYqyRj-TEA@mail.gmail.com>
-Subject: Re: [PATCH 6/6] x86: Add msr command
+X-Google-Sender-Auth: hbhlGcAGRO07-6B3t8ltGHt67uk
+Message-ID: <CAFLszTgMqcKtoYNO7u5s_R5JGY5UyaEphF_=HAOkXwgom=LiAg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] x86: coreboot: Update the timestamp code to use
+ sysinfo
 To: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, Eddie James <eajames@linux.ibm.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Joshua Watt <jpewhacker@gmail.com>, Maxim Moskalets <maximmosk4@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, 
+Cc: Jonas Karlman <jonas@kwiboo.se>, Bin Meng <bmeng.cn@gmail.com>,
  Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -96,21 +88,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is useful to obtain the results of MSR queries as well as to update
-MSR registers, so add a command these tasks.
+Rather than using a special variable, get the timestamp info from the
+coreboot sysinfo struct. Return a proper error as well.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/x86/Makefile      |  2 +-
- cmd/x86/msr.c         | 52 ++++++++++++++++++++++++++++++++++++
- doc/usage/cmd/msr.rst | 61 +++++++++++++++++++++++++++++++++++++++++++
- doc/usage/index.rst   |  1 +
- test/cmd/Makefile     |  2 +-
- test/cmd/msr.c        | 38 +++++++++++++++++++++++++++
- 6 files changed, 154 insertions(+), 2 deletions(-)
- create mode 100644 cmd/x86/msr.c
- create mode 100644 doc/usage/cmd/msr.rst
- create mode 100644 test/cmd/msr.c
+ arch/x86/cpu/coreboot/timestamp.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
 Applied to u-boot-dm, thanks!
