@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3661D3C538
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:15:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A84BD3C533
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:15:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 760D688F23;
+	by phobos.denx.de (Postfix) with ESMTP id D649C89177;
 	Fri, 18 Oct 2024 01:12:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CNdYljtk";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JzmQHPUV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C90DF89068; Fri, 18 Oct 2024 01:12:01 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id DE761890F4; Fri, 18 Oct 2024 01:12:01 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA24989128
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAFBF8912E
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6c5acb785f2so8150726d6.0
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:58 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6cbd12b38b4so10141686d6.2
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729206717; x=1729811517; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729206718; x=1729811518; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FWKDOr0DeM9Ln0D6OsdVfUHFyV5S1usUD8inw977icc=;
- b=CNdYljtk/kzPhDtVVxNVIxCMLerUiuLfB9d4hGMs1mQMA2gSMh4bA+WKjAhWjKB17f
- hkejhj+HrcxjcP0BX8mgzT240qZ+GMnlFlXJRkEFtL5wDcGBrkF58bvGRvZuhACXQdxe
- QLtHlQn5Z7IXgxEtDxN2Yvn+uJJhJcYWf9DLo=
+ bh=eYl2Z/pHp6SkGtmStf6PThIqrfN7iBouB1a8pq33j0c=;
+ b=JzmQHPUVePT+cb8wqPme2YhNJj4Ja0ydVE86Unnht/G69y5pzBNCeSj1e08XxPExOx
+ 9XRaPsCcsVV6VOkNCKgukSwi/2uUa9U2WBdzBhJ1DCX1dIeJcCyx/LjVmkSNPXgh3eZN
+ QCRv9Ko3jtc7rcqPLIzZWvEcRbVssTU8D3ZmQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729206717; x=1729811517;
+ d=1e100.net; s=20230601; t=1729206718; x=1729811518;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FWKDOr0DeM9Ln0D6OsdVfUHFyV5S1usUD8inw977icc=;
- b=A5AZWqIPNWl9C0P7nMBNbxsewgH3GLYaWLDq6Ht2yo7dOtWa9m7E9GQbJtHawnVN0d
- QYdNNGYMUqn6UGFWCenv+LuEoxqChTByvK3HqJ0rixqFJNMrRAJgZpor7oWFu7Ssugge
- Zph0ChTfbnxgddA9m/vAIZ7hF5GrDINdaQoCEFpo9+muQItlSQ0w4LfLyS+P+V+6rwzK
- 5RA3aS9CYz948iUGaZEwQ0M7WfHYhY7zSkupu9imP8LEyNS6BZyMVhI9BisXYEDmJ0tI
- r+YuMvKMvFxAAzEkI2QcItmtEcB+0pgd6ChzdPuQGOiDN+BSWM80WkKgqnV+OQZ2mh0H
- TrEA==
+ bh=eYl2Z/pHp6SkGtmStf6PThIqrfN7iBouB1a8pq33j0c=;
+ b=lR6Ue0Y60IJtb9ZrGa5C5DAPOk0NLEgE0mpdMMAYPuGImQdZBOIMuZ94UMUqjE/m/B
+ mb1xWQe8fDmve4EkEFnPMeurgmqCilGKWTtn8PEj7eHba2KwYQpmlgOOycjXWaetTeKi
+ DtK8LqbskUgt04VJEVztYXytQLr8ag9EQp7w7ZfngAxCnOFGcTJHDBQQDGEqR+ajIQCh
+ L6j5SMp0QSf0cXc6XkGqTd3YNA+lBvBKnYP5hXsfGg6tcuwsfEdHlQ2xUL9KQWAmaqgZ
+ GjuF9xXwxAbQZBcDilli0kXUjdifUlM3ge0YKw3KpyKK1TLhisjs5A6Rpx+7CmvlQ3fs
+ 3/hA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWcRjYTVyOJD1THxjje+aQSH6K2LTNVt6b8wiTHRFMeFP72pi4or/zav8eRteuydxLOhKTdFfQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwdiW3P6Qqef25WpF3fbsdOtDtmKvImdEOfUIt/oM+CBf8z6pWt
- ptYu11VD222p2xVl9gZkcSYlroL8upWPfY5jRY37prfHsEVHOnFD6Olv6HMILzOCKtNEAu+pjbg
- dhFtKc3VUZg8xTqbe7yRNMrhjP2OlimSv55L3
-X-Google-Smtp-Source: AGHT+IFiMv0thakwycFw6B/Sez/djjVi4turqE3Y4CD4kkvUG87UAGZ3Nc4lm+9zsQPUSAK7SORAFJORkuNb/iS2VCo=
-X-Received: by 2002:a05:6214:3c86:b0:6cb:c487:24b5 with SMTP id
- 6a1803df08f44-6cde15f1700mr7947586d6.32.1729206717714; Thu, 17 Oct 2024
- 16:11:57 -0700 (PDT)
+ AJvYcCVDZJ2y7OQ0zxaNv0F15txO6hgJjIIhjdgKxVUmB5UjJvZBFXfQGRrlbAhXEMZ9Tb0ByCjtfOA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzhI9FFC5uHyIH0DYpeXozBZZiTxK4nMxiFgMmQ5JfXIP/+1AZh
+ o/lR0Kmz8WB+VYePcehYKj5beZyjG8LTECzm9oWfxMWSzXqXVye4VpM0dElSYkHPjGUE9l59Iul
+ AYMaESKA92Wb/C6UjiJjjpMT6xcPEaWcabUNm
+X-Google-Smtp-Source: AGHT+IFFS1J3JUupfBSIy8c0CZB4oMeLNUQrMEgWynUbFHW9CfyiM6l5P8vUX6JA6QlCArgV6kIYHebFFkIVUWoJdJU=
+X-Received: by 2002:a05:6214:4b13:b0:6cd:4972:59b1 with SMTP id
+ 6a1803df08f44-6cde153abd9mr8787896d6.27.1729206718622; Thu, 17 Oct 2024
+ 16:11:58 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 16:11:57 -0700
+ HTTPREST; Thu, 17 Oct 2024 16:11:58 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240930185139.2185983-1-sjg@chromium.org>
-References: <20240930185139.2185983-1-sjg@chromium.org>
-Date: Thu, 17 Oct 2024 16:11:57 -0700
-X-Google-Sender-Auth: 6CpL2eSq5-q1xb02jCKycmEm8nY
-Message-ID: <CAFLszTjud93xNB5cbvDJVJBQyGEzrhpeTP6witQeCpL3y-QO9w@mail.gmail.com>
-Subject: Re: [PATCH 1/3] u_boot_pylib: Support running coverage on selected
- functions
+In-Reply-To: <20240921175800.437341-1-sjg@chromium.org>
+References: <20240921175800.437341-1-sjg@chromium.org>
+Date: Thu, 17 Oct 2024 16:11:58 -0700
+X-Google-Sender-Auth: z4zCugpBG5g9nVPWkJbi_yQD3UQ
+Message-ID: <CAFLszThKsV2T5yGaifYTPmouvA_U8XzhSJF4=OJ3m2AEyw3jAA@mail.gmail.com>
+Subject: Re: [PATCH] buildman: Correct some warnings about regex strings
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Brian Ruley <brian.ruley@gehealthcare.com>, 
- Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,15 +87,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present run_test_coverage() assumes you want code coverage for the
-entire code base. This is the normal situation, but sometimes it is
-useful to see the coverage provided by just a single test. Add support
-for this.
+With Python 3.12 some warnings have cropped up. Fix them.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/u_boot_pylib/test_util.py | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+ tools/buildman/builder.py   | 6 +++---
+ tools/buildman/toolchain.py | 8 ++++----
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
 Applied to u-boot-dm, thanks!
