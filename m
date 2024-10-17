@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD807D3C533
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:19:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F287FD3C538
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:19:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0F55891C7;
-	Fri, 18 Oct 2024 01:12:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8164789157;
+	Fri, 18 Oct 2024 01:18:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SolTCLai";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A/WRE6v0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BB1989170; Fri, 18 Oct 2024 01:12:26 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 94D79891CC; Fri, 18 Oct 2024 01:18:18 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81FC389165
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:12:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 693FF88FA4
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:18:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6cc2ea27a50so20386816d6.0
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:12:23 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6cc03b649f2so9687556d6.3
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:18:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729206742; x=1729811542; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:references
- :in-reply-to:from:sender:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Zfmm7KLKt/ue6PkZyYLPDgn605+XpVRD5+Pa+tfXlJQ=;
- b=SolTCLaiwJHgoUE0d/xtDXd6/THhI7DXhjsyuLzhMYKbSm1xwtK0DDN4qed9d2ttKW
- BuxZn42zQcvrGz6/xhcPnOH4qAfWfLNBc1JLh7CsKEwz2o52fwH08W4OXlfTRgtbAccT
- bGGHqY/+WKMINn+LL33u+1IzFK3hs+6Yuew8g=
+ d=chromium.org; s=google; t=1729207095; x=1729811895; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=k9ozN0YofCT8qt5UW/J9xXrtmRflOSpaecwV6VAVadE=;
+ b=A/WRE6v0TUtuX+mzF5L5VqajzDiaDDqI/PNEOo7JQa7ln5b3RzbsIrn51GS37oOnxp
+ AVxtEp3iG2cIDPAHqgWzHQ0Rycc5HJJKIyRtLTwib9SjseWUFfzbExzLZ4p+HX8v7Ujv
+ 0/8plTZqXxWR2ijV02HkyxwU3MTkr8NLP98kY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729206742; x=1729811542;
- h=content-transfer-encoding:cc:to:subject:message-id:date:references
- :in-reply-to:from:sender:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Zfmm7KLKt/ue6PkZyYLPDgn605+XpVRD5+Pa+tfXlJQ=;
- b=GEmb26r8oe/ovAVnJ4h3w/IRNJLkIjfGk6e72roSW6ACjSZlG/NvqVNq/OC4gn/3BS
- CMJgvY0UJcyYRI2TJQawOlrunP2zb3hnuzwEZC/rBRLf2HzXTfIq9qeeQfK4g0m3ymdH
- j1VYTDNyWXqfQ3PzHunEItHYpVjvwLww0uzHa7qoKXrBsQZIPmuSLek2v1kDQ384XoTG
- Iu6SfD7x36obnTtMK2lPug7tvpYj/AykGAvDBZ7gSiMlEIgGLm8a2w1ed20BAWHFAnZ2
- cL+ch1xsq4tCZcPnVb4G/VYr1Bqcwq5YjG8HXtY4y9dybN5qu+y9cszA7btRjsSyGCxq
- DrxQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWxQTIoFnzBwPEEnbJTfGcTVLiqyRuLOAbcI4l/jCtg3cPAaB/EErt4hs0RN6BqV4k48AZvswo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxXem1+BwHPT9k4bCflHCSgu1fpdPpBK3lfDCL52b3H12RBQ0C6
- kY2UmYdcuyg4W8YP0N9Eni1VXp1bYCeFeYQBLX06zoTsQDUUNWy1Lmv/tR0+BSE7OEzHicjn1aR
- mX1CuhVFFG/0at6VYM63iXRnM+zeQ42m+vD2kV+TqNlb4Yms=
-X-Google-Smtp-Source: AGHT+IFWNckXtg6A52FQTNISUe2orvHHtr0u/0iRVQQCSBfdUpK8H0urEkoBZqp88JpbftBxXnlvQJBRLs9eJnMn5c0=
-X-Received: by 2002:a05:6214:3bc6:b0:6cb:f72e:4eb9 with SMTP id
- 6a1803df08f44-6cde18d01a4mr8170116d6.11.1729206742461; Thu, 17 Oct 2024
- 16:12:22 -0700 (PDT)
-Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 16:12:21 -0700
+ d=1e100.net; s=20230601; t=1729207095; x=1729811895;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=k9ozN0YofCT8qt5UW/J9xXrtmRflOSpaecwV6VAVadE=;
+ b=vouX5XFPDj0ZgGKEaynrk1uOnOzIspPJXADt2LWJPhmYqjv9gcslZgE+jqIrv5AONC
+ SN5sg5Er6rinPM6b3JQBNVOaP1Zj19l/JTvnOV+j2n6lYVfe6fq1GEe7fG8RfjQ5m6LI
+ U8BvmSxGYjaG2NjvV5qwvMhTujji2hmb4KEsWqSDujdZKJQm6i8mgGYmXpVjkFH3D4l4
+ +6D7C+f+B+g7nTL82rrZy5J/I+faLyXebPL6qXdeNpTa3GUewmBMYogkTumHJqdkBKPl
+ hGHOGY+Ux+OiOtmYSq21ARkN0VDuL4cA2JQnmoN+7ggE2N5s7Kv0MHNM/F7vv9bs9QKt
+ Bp/Q==
+X-Gm-Message-State: AOJu0YyW0OM/qfku9ltOeR2G5hnnVUMAvSEtzMYkCTXewJJ/R69zXCxO
+ wrd493r0ETCm0aNQTuqZsHvloozbjZeB/owvk3uWOU7gdyeA7lB2lwI0EdU1WCW+D+qtqrrEP+n
+ V+LB0Q+I7CFA2YxmJjyWd2eSO59MYCLrc7YPq
+X-Google-Smtp-Source: AGHT+IHfSl/5D76xjSxRp3qwt5nyyzeYUaPV3wa+H8er+X/1fnzCG9eIwspmWEz1InthmsuaISDWbPxs5QQKpDCfNF8=
+X-Received: by 2002:a05:6214:2b83:b0:6cb:e952:8096 with SMTP id
+ 6a1803df08f44-6cde160bcd0mr4635646d6.50.1729207095331; Thu, 17 Oct 2024
+ 16:18:15 -0700 (PDT)
 MIME-Version: 1.0
+References: <20241015133304.2874735-1-sjg@chromium.org>
+ <20241015133304.2874735-3-sjg@chromium.org>
+ <CAC_iWjL5+LN4ReAo7LNhRrC1==V8ciCd4M73kUXktV7ufQEhng@mail.gmail.com>
+ <CAFLszTibyH0jEbZ-G6VifrcmpXmxNq00TnZM3cEAxWpQGQpBZQ@mail.gmail.com>
+ <CAC_iWjJBq58rY=3Pv90dy7RFGVu2-Z4EwbLsfvy+sAA6ibK=yw@mail.gmail.com>
+In-Reply-To: <CAC_iWjJBq58rY=3Pv90dy7RFGVu2-Z4EwbLsfvy+sAA6ibK=yw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240108153816.GE1610741@bill-the-cat>
-References: <20240108153816.GE1610741@bill-the-cat>
- <20240108001455.35638-1-sjg@chromium.org>
- <20240108001455.35638-2-sjg@chromium.org>
- <874jfouq9e.fsf@bloch.sibelius.xs4all.nl>
- <6beec0824542ac0608a5dfad9b88d32a@manjaro.org>
- <CAEUhbmVc06RydZavZHAXS2oBZC=cRt0C801+dxYVYr9qZRvBVA@mail.gmail.com>
-Date: Thu, 17 Oct 2024 16:12:21 -0700
-X-Google-Sender-Auth: MPLK10dC7-SNgsCg4nwikta5kF8
-Message-ID: <CAFLszTh=J7L2yekkhbqZDJxC=zy3T0WiaED+UxDnv8oeccBxDw@mail.gmail.com>
-Subject: Re: [PATCH 2/2] coreboot: Switch to a monospaced font
-To: Tom Rini <trini@konsulko.com>
-Cc: Dragan Simic <dsimic@manjaro.org>, Anatolij Gustschin <agust@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 17 Oct 2024 17:18:04 -0600
+Message-ID: <CAFLszTikQvs9yWjuVSzLmRnye1k8LQmiNxYJpGvLkwYPuPRLPA@mail.gmail.com>
+Subject: Re: [PATCH v3 2/7] common: Tidy up how malloc() is inited
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Artur Rojek <artur@conclusive.pl>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
+ Eugene Uriev <eugeneuriev@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,39 +94,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 08, 2024 at 09:09:39PM +0800, Bin Meng wrote:
-> + Tom and Anatolij,
+Hi Ilias,
+
+On Tue, 15 Oct 2024 at 13:24, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Mon, Jan 8, 2024 at 5:33=E2=80=AFPM Dragan Simic <dsimic@manjaro.org> =
-wrote:
+> Simon,
+>
+> On Tue, 15 Oct 2024 at 18:28, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On 2024-01-08 10:29, Mark Kettenis wrote:
-> > >> From: Simon Glass <sjg@chromium.org>
-> > >> Date: Sun,  7 Jan 2024 17:14:55 -0700
-> > >>
-> > >> The default font is proportional, with different character widths.
-> > >> Select a monospace font for coreboot so that the 'dm tree' output
-> > >> lines
-> > >> up correctly.
-> > >>
-> > >> Update the coreboot tests to match.
+> > Hi Ilias,
+> >
+> > On Tue, 15 Oct 2024 at 07:38, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
 > > >
-> > > To be honest, I think defaulting to a proportional font is wrong as a
-> > > default for something like U-Boot.
+> > > Hi Simon,
+> > >
+> > > I did review enough of this series in v1 [0]. Please resend it with
+> > > the proper tags added. Did anything change and you dropped by r-b?
+> > > Because the changelog says no changes
 > >
-> > I agree, it makes very little sense to default to a proportional font.
-> >
+> > I collect tags with patman...it still doesn't see anything. Which
+> > patch are you referring to?
 >
-> So we should revert
->
-> commit b093753471c1a30d680868a9f4d9f6db090bf0b7 ("video: Add a default
-> TrueType font")
+> It's in my response
 
-Well, I would "fixes" that commit and drop default y there and instead
-make the monospace font the default and explain why the switch, rather
-than revert.
+Oh I see, I missed it from the v1 series. Well, this is on hold for
+now as Tom has asked for lmb in the memory-map listing. But I've
+collected your tags.
 
---=20
-Tom
-
-Applied to u-boot-dm, thanks!
+Regards,
+Simon
