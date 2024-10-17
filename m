@@ -4,70 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1777ED21275
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 10:40:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5537D21275
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 10:44:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50B4E88D1B;
-	Thu, 17 Oct 2024 12:40:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D44788D8D;
+	Thu, 17 Oct 2024 12:44:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NZ9zWShc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N+sX8JVO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51B3C88EEB; Thu, 17 Oct 2024 12:40:44 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 25CB088F71; Thu, 17 Oct 2024 12:44:44 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6430C88C60
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 12:40:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CF3088DD0
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 12:44:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49HAecab029723;
- Thu, 17 Oct 2024 05:40:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729161638;
- bh=eY2sbaHX1qhXculEmXbn/2/bPHA7Fk57rznfWk/aG5Q=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=NZ9zWShck8I1mMJCN2rnIVjVIDsXuuKbn16zN3bti0QTt/MGha5iEWW5q4K9qz9pS
- uFioDC64akL+ETRy076WeD1Odp7jRNL+zO2aaedbguUz/cbfsE/wG6j/dfLG8kqliX
- dcRZAc7R9Fuac66m2OOWJTmZ7iYwBzVPsEnLvvN4=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49HAecCX027920
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 17 Oct 2024 05:40:38 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 17
- Oct 2024 05:40:38 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 17 Oct 2024 05:40:38 -0500
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
- (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49HAeZGZ024351;
- Thu, 17 Oct 2024 05:40:36 -0500
-Message-ID: <e05c19c9-47ef-4a39-896b-c8d936c6eca4@ti.com>
-Date: Thu, 17 Oct 2024 16:10:35 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-539f4d8ef84so858683e87.0
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 03:44:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729161879; x=1729766679; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Cw53JRMcSS7YebZAqmcvmOKfgiiNontSuO9KcPu+zZE=;
+ b=N+sX8JVOo2F33fY8IFLOaEGuqVv9ajtd/d7elbuCNttIU2ubJCu97/TBYC/cToj0Kg
+ 04TPjMQIue3g2Qy4ryhBM09F19XWDB/hWdMrRkjCL5u55/iIiDzi3wdu8vMRhcfy9E2v
+ /JivA3xjDOd50ybr+/tbpXPUBK7XpPn1RFHi+27vUBDse44zIFKW98Lc/gER3xqSVGtJ
+ OHRhqae7qkLZ2D+PBhELY8IF57Gx7wi01uLfaSbGyX2Y8GPrCIxQcpHj0GNN0CSZeqVk
+ Uz/3SgOCezH7SwXutCGHpbJC5TEzm2DJEFrCruy6JGWuDUZLfh3pHuTK0i2NpBuw1Q7Z
+ f85A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729161879; x=1729766679;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Cw53JRMcSS7YebZAqmcvmOKfgiiNontSuO9KcPu+zZE=;
+ b=LE7+XKV+cn/tA14Y6OQJVKBD/4iNDFd1UVKqGsDBIykbbz5NIaVbHXxaHBA1O2dBNb
+ enY7aD3JpKELbnn8YDbLfFGVC7egKcDyQysu11juad9GmHWLRpSwPKSKq/IwZDYErr0o
+ 44xXhEI2anywg/EovYnFb02/+4iYmK5pQe89/pnlUy33n3xKHrmyVQGDY6eijh65Ke3M
+ VaUuy6VAvLC+fXhj9wmE8lJOjCWYoGi+6D+pHS4GcZkdAuPGuYxoGkO7U6dEhrA0meT7
+ LPuVdLLqrSZWSEf96iOeIMDjomTG80Z7Itp2guyQH0udEPXFvZTZjsLIiT5rgorR7FSv
+ AxMA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU28NYmBCeX/TdQwzCd6fNGWJJAho1O4OA18ZMyR1DVVb1BQCKdKSvDA3Fov0PKjuUEyv3Kh74=@lists.denx.de
+X-Gm-Message-State: AOJu0YybzT+eFqyIunr8uiD4LAn+CTTRJMh+fdvUMF8ZfzGqtBe7qfXS
+ MTQtgLcuQwapjbKJsnHX2Nqr2GnCakMEudHKkTm0qztS/raLBjSDMo5TToFYJKk=
+X-Google-Smtp-Source: AGHT+IEgxbOG6l+hVB4OPkn4QBEqM2sZhTOZ5WYdxDIptQh28caUZIupWhZxcS/BkH1i54apTmt3JQ==
+X-Received: by 2002:a05:6512:1242:b0:539:f23b:59c3 with SMTP id
+ 2adb3069b0e04-539f23b5b5bmr7159608e87.34.1729161879349; 
+ Thu, 17 Oct 2024 03:44:39 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:888d:ff00::2? ([2a02:8109:888d:ff00::2])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9a29749962sm281859566b.79.2024.10.17.03.44.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 17 Oct 2024 03:44:38 -0700 (PDT)
+Message-ID: <a6e93069-e84a-484a-b93f-672bed7f6bb2@linaro.org>
+Date: Thu, 17 Oct 2024 12:44:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] arm: mach-k3: j721e-init.c: J7200: Add support for
- CONFIG_K3_OPP_LOW
-To: Aniket Limaye <a-limaye@ti.com>, <u-boot@lists.denx.de>,
- <trini@konsulko.com>
-CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>
-References: <20241017062911.2241167-1-a-limaye@ti.com>
- <20241017062911.2241167-5-a-limaye@ti.com>
+Subject: Re: [PATCH] phy: qcom: ufs: drop unused ufsphy_v2_regs_layout
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20241016-topic-ufs-phy-drop-v2-regs-layout-v1-1-af804ce47060@linaro.org>
 Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20241017062911.2241167-5-a-limaye@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20241016-topic-ufs-phy-drop-v2-regs-layout-v1-1-af804ce47060@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,122 +96,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aniket
 
-On 17/10/24 11:59, Aniket Limaye wrote:
-> From: Reid Tonking <reidt@ti.com>
+
+On 16/10/2024 09:43, Neil Armstrong wrote:
+> The ufsphy_v2_regs_layout is not used, drop it and fix:
+> phy-qcom-qmp-ufs.c:87:27: warning: ‘ufsphy_v2_regs_layout’ defined but not used [-Wunused-const-variable=]
 > 
-> The default j7200 devicetree and k3_avs driver set 2GHz/1GHz frequency
-> for A72/MSMC clks and the OPP_NOM voltage.
-> 
-> J7200 SOCs may support OPP_LOW Operating Performance Point:
-> 1GHz/500MHz clks for A72/MSMC and OPP_LOW AVS voltage read from efuse.
-> 
-> Hence, add a config check to select OPP_LOW specs:
-> - Check if OPP_LOW AVS voltage read from efuse is valid.
-> - Update the clock frequencies in devicetree.
-> - Program the OPP_LOW AVS voltage for VDD_CPU.
-> 
-> Signed-off-by: Reid Tonking <reidt@ti.com>
-> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   arch/arm/mach-k3/j721e/j721e_init.c | 45 ++++++++++++++++++++++++++++-
->   drivers/misc/k3_avs.c               |  5 ++++
->   2 files changed, 49 insertions(+), 1 deletion(-)
+>   drivers/phy/qcom/phy-qcom-qmp-ufs.c | 6 ------
+>   1 file changed, 6 deletions(-)
 > 
-> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
-> index e9ed8cb267c..0620759c36c 100644
-> --- a/arch/arm/mach-k3/j721e/j721e_init.c
-> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
-> @@ -19,6 +19,7 @@
->   #include <fdtdec.h>
->   #include <mmc.h>
->   #include <remoteproc.h>
-> +#include <k3-avs.h>
+> diff --git a/drivers/phy/qcom/phy-qcom-qmp-ufs.c b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
+> index 8908a34df54..5b17f3aee67 100644
+> --- a/drivers/phy/qcom/phy-qcom-qmp-ufs.c
+> +++ b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
+> @@ -84,12 +84,6 @@ enum qphy_reg_layout {
+>   	QPHY_LAYOUT_SIZE
+>   };
 >   
->   #include "../sysfw-loader.h"
->   #include "../common.h"
-> @@ -147,6 +148,32 @@ static void setup_navss_nb(void)
->   	writel(NB_THREADMAP_BIT1, (uintptr_t)NAVSS0_NBSS_NB1_CFG_NB_THREADMAP);
->   }
->   
-> +int fix_freq(const void *fdt)
-> +{
-> +		int node, ret;
-> +		u32 opp_low_freq[3];
-> +
-> +		node = fdt_node_offset_by_compatible(fdt, -1, "ti,am654-rproc");
-> +			if (node < 0) {
-> +				printf("%s: A72 not found\n", __func__);
-> +				return node;
-> +			}
-
-Indentation seems to be off.
-
-> +
-> +		/* j7200 opp low values according to data sheet */
-> +		opp_low_freq[0] = cpu_to_fdt32(1000000000); /* 202-2 -> A72SS0_CORE0_0_ARM_CLK */
-> +		opp_low_freq[1] = cpu_to_fdt32(200000000); /* 61-1 -> GTC0_GTC_CLK */
-> +		opp_low_freq[2] = cpu_to_fdt32(500000000); /* 4-1 -> A72SS0_CORE0_MSMC_CLK */
-> +
-> +		ret = fdt_setprop((void *)fdt, node, "assigned-clock-rates",
-> +				  opp_low_freq, sizeof(opp_low_freq));
-> +			if (ret) {
-> +				printf("%s: Can not set value\n", __func__);
-> +				return ret;
-> +			}
-> +
-> +		return 0;
-> +}
-> +
->   /*
->    * This uninitialized global variable would normal end up in the .bss section,
->    * but the .bss is cleared between writing and reading this variable, so move
-> @@ -301,8 +328,24 @@ void board_init_f(ulong dummy)
->   #if defined(CONFIG_CPU_V7R) && defined(CONFIG_K3_AVS0)
->   	ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
->   					  &dev);
-> -	if (ret)
-> +	if (!ret) {
-> +		if (IS_ENABLED(CONFIG_K3_OPP_LOW)) {
-> +			ret = k3_check_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
-> +			if (!ret) {
-> +				ret = fix_freq(gd->fdt_blob);
-> +				if (ret)
-> +					printf("Failed to set OPP_LOW frequency\n");
-> +
-> +				ret = k3_avs_set_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
-> +				if (ret)
-> +					printf("Failed to set OPP_LOW voltage\n");
-> +			} else {
-> +				printf("Failed to enable K3_OPP_LOW\n");
-> +			}
-> +		}
-> +	} else {
->   		printf("AVS init failed: %d\n", ret);
-> +	}
->   #endif
->   
->   #if defined(CONFIG_K3_J721E_DDRSS)
-> diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
-> index 90cd9dfe7f9..932b355a5c1 100644
-> --- a/drivers/misc/k3_avs.c
-> +++ b/drivers/misc/k3_avs.c
-> @@ -121,6 +121,11 @@ static int k3_avs_program_voltage(struct k3_avs_privdata *priv,
->   	if (!vd->supply)
->   		return -ENODEV;
->   
-> +	if (!volt) {
-> +		dev_err(priv->dev, "Fuse is not set for selected opp %d\n", opp_id);
-
-s/Fuse/Efuse
-> +		return -EINVAL;
-> +	}
-> +
->   	vd->opp = opp_id;
->   	vd->flags |= VD_FLAG_INIT_DONE;
->   
+> -static const unsigned int ufsphy_v2_regs_layout[QPHY_LAYOUT_SIZE] = {
+> -	[QPHY_START_CTRL]		= QPHY_V2_PCS_UFS_PHY_START,
+> -	[QPHY_PCS_READY_STATUS]		= QPHY_V2_PCS_UFS_READY_STATUS,
+> -	[QPHY_PCS_POWER_DOWN_CONTROL]	= QPHY_V2_PCS_UFS_POWER_DOWN_CONTROL,
+> -};
+> -
+>   static const unsigned int ufsphy_v3_regs_layout[QPHY_LAYOUT_SIZE] = {
+>   	[QPHY_START_CTRL]		= QPHY_V3_PCS_UFS_PHY_START,
+>   	[QPHY_PCS_READY_STATUS]		= QPHY_V3_PCS_UFS_READY_STATUS,
+> 
+> ---
+> base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
+> change-id: 20241016-topic-ufs-phy-drop-v2-regs-layout-fc269a6d1d0c
+> 
+> Best regards,
 
 -- 
-Thanking You
-Neha Malcom Francis
+// Caleb (they/them)
+
