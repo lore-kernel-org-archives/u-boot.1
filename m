@@ -4,83 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E597BD2F7E5
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 03:45:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84DD5D2F7EA
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 04:31:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5197788E5C;
-	Thu, 17 Oct 2024 05:45:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C080588E43;
+	Thu, 17 Oct 2024 06:31:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sX1sBlNk";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Jbggrr8i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45B7388E14; Thu, 17 Oct 2024 05:45:18 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A4D8188E7B; Thu, 17 Oct 2024 06:31:41 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EE1688E78
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 05:45:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A6C988C60
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 06:31:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6cbd12b38b4so3742376d6.2
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 20:45:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729136712; x=1729741512; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KfxnRqlPBXogdr+dgqhYzopCD8yfM9F6y9iTjo6/8do=;
- b=sX1sBlNkD3Jd96buKVKl0ev6WIhXI6iEUgVn7Acmmv2mN/aKTzY4WZ41ai26WXt3Yn
- G4G1liZ9nXVmjNbd5j/wfIMhzt3oz0hK7XIt6aR8J2qFGjgVr68RUWAS1+DBmR2qURHo
- TluNEY0SPhUCWNzd9XkQhrOBcm1Kv+RCq1r+c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729136712; x=1729741512;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KfxnRqlPBXogdr+dgqhYzopCD8yfM9F6y9iTjo6/8do=;
- b=qNxGueiyThjQaAn9EerEjWsqqDtBmt8Us0DfeAyn+D7UaA8uHBDu9X+mltowoEAH8b
- Ge3+tLrGI34hYvG6+4RafhI7eEByxXK5t5E/BGkNxFx/Wz59vy6RU/wJScF+9hCxRhtO
- wMsiS/MQed/ckdKDtvs0H1D5fvWHgTNYg86BKHa0pkHYUtHE/64SfOg2Zc831pC1O9hM
- p0C8zt8M4fP6RRBV1CmVWaeSz2mcqlN6WPLkT4qQ+yIwQ0PfIAJi6iv1R5ixYlXlM7tb
- fIAteTJ4vazrfyO2NsAKqrMQZWQ33lVnbljvwLfYy39i1HIRMJ8wwE4R40ZO5IdkAjHh
- k8WA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX+6/fDuCxL7zsglhT5gHPMY3R0P4o3I+tnT/byGUk6zf38fASlMnBlqw2tJ3j2CGSWb5chbcw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzr1tDOIxS1WFShtB3dQfYQeFEn2jDjVZlgg7xARuonU61XE5zy
- bvZt343WW4yG0IbtplCaQY6amPqMRTtzXFNjT9SPpyAwJRx7ZBV1J4HELYRIuW8=
-X-Google-Smtp-Source: AGHT+IF/9ySJ6/g/KRTkA0DMh2crxn6uOTW/c+RmvbcM2r7dknTH0Ddzv6xfMrtswSJz7acA1SFeGw==
-X-Received: by 2002:a05:6214:3b84:b0:6cb:c54c:b782 with SMTP id
- 6a1803df08f44-6cc2b91a5d2mr77298056d6.32.1729136711910; 
- Wed, 16 Oct 2024 20:45:11 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cc2299043dsm24332036d6.136.2024.10.16.20.45.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2024 20:45:10 -0700 (PDT)
-Date: Wed, 16 Oct 2024 21:45:07 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@nxp.com>
-Cc: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
- "festevam@gmail.com" <festevam@gmail.com>,
- "sbabic@denx.de" <sbabic@denx.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- dl-uboot-imx <uboot-imx@nxp.com>, Gilles Talis <gilles.talis@nxp.com>
-Subject: Re: [PATCH] cpu: imx8_cpu: Avoid revision to corrupt device tree
-Message-ID: <20241017034507.GJ4959@bill-the-cat>
-References: <20241011105827.7729-1-peng.fan@oss.nxp.com>
- <20241017031106.GA55137@bill-the-cat>
- <PAXPR04MB845984549FD1762C0A3AC90888472@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49H4VZsK014053;
+ Wed, 16 Oct 2024 23:31:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1729139495;
+ bh=hM7j7oPp7baHm3q7V9H1jzmGHfooYnpJBQudLZLRk+Y=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Jbggrr8ibHMn2zlyGcq+XGlwbXRIwNd3lalYHQvY3fU9faX8piMIE92cUeoDnXLIP
+ ZoE3X1gSX/XOwC0Xvl6V1y/rh5HlMzbtZwRJBiyaIqYImQjyWxT2GsyXBNAqaloOXt
+ U2SDukxO0rL9fz5Nbk98nhB66xgnYsjJJQTBu1IY=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49H4VZQR010930
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 16 Oct 2024 23:31:35 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
+ Oct 2024 23:31:34 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 16 Oct 2024 23:31:34 -0500
+Received: from [172.24.22.119] (lt5cd2489kgj.dhcp.ti.com [172.24.22.119])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49H4VWow127489;
+ Wed, 16 Oct 2024 23:31:32 -0500
+Message-ID: <ecb82673-b1c0-41b3-b515-5c09e25e8268@ti.com>
+Date: Thu, 17 Oct 2024 10:01:31 +0530
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0+R8s9qIqIPt9KbP"
-Content-Disposition: inline
-In-Reply-To: <PAXPR04MB845984549FD1762C0A3AC90888472@PAXPR04MB8459.eurprd04.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: k3-j722s-r5-evm: Add LPDDR4 4000 MT/s configs
+To: Bryan Brattlof <bb@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>,
+ <francesco.dolcini@toradex.com>, <nm@ti.com>, <n-francis@ti.com>,
+ <u-kumar1@ti.com>
+References: <20241016074048.1363067-1-vaishnav.a@ti.com>
+ <20241016203108.gnzfwcd5r2ilwy2u@bryanbrattlof.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20241016203108.gnzfwcd5r2ilwy2u@bryanbrattlof.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,74 +83,50 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---0+R8s9qIqIPt9KbP
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10/17/2024 2:01 AM, Bryan Brattlof wrote:
+> Hi Vaishnav!
+>
+> On October 16, 2024 thus sayeth Vaishnav Achath:
+>> Add the latest 4000 MT/s DDR config generated by
+>> Jacinto7_DDRSS_RegConfigTool Rev 0.11 for J722S , make it the
+>> default config and update A53 default clock to 1.4 GHz matching
+>> the default speed grade (K).
+>>
+>> Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+>> ---
+>>
+>> memtester logs on J722S EVM:
+>> 	https://gist.github.com/vaishnavachath/4174d02e0338e53594015dfdd321a8ef
+>> The max frequency was not bumped up to 4000 MT/s initially
+>> since the characterization results were not available.
+>> All the devices populated on J722S EVM and Beagle Y AI is speed
+>> grade K.
+>>
+>>   arch/arm/dts/k3-j722s-ddr-lp4-50-4000.dtsi | 2797 ++++++++++++++++++++
+>>   arch/arm/dts/k3-j722s-r5-evm.dts           |    4 +-
+>>   2 files changed, 2799 insertions(+), 2 deletions(-)
+>>   create mode 100644 arch/arm/dts/k3-j722s-ddr-lp4-50-4000.dtsi
+>>
+> ...
+>
+>> diff --git a/arch/arm/dts/k3-j722s-r5-evm.dts
+>> b/arch/arm/dts/k3-j722s-r5-evm.dts
+>> index aff83cd5d9..46f420d510 100644
+>> --- a/arch/arm/dts/k3-j722s-r5-evm.dts
+>> +++ b/arch/arm/dts/k3-j722s-r5-evm.dts
+>> @@ -7,7 +7,7 @@
+>>   #include "k3-j722s-evm.dts"
+>>   #include "k3-j722s-evm-u-boot.dtsi"
+>>   
+>> -#include "k3-j722s-ddr-lp4-50-3733.dtsi"
+>> +#include "k3-j722s-ddr-lp4-50-4000.dtsi"
+> Do we need to keep the 3733MT/s config around anymore?
 
-On Thu, Oct 17, 2024 at 03:14:46AM +0000, Peng Fan wrote:
-> > Subject: Re: [PATCH] cpu: imx8_cpu: Avoid revision to corrupt device
-> > tree
-> >=20
-> > On Fri, Oct 11, 2024 at 06:58:27PM +0800, Peng Fan (OSS) wrote:
-> >=20
-> > > From: Peng Fan <peng.fan@nxp.com>
-> > >
-> > > U-Boot device tree is padded just after U-Boot proper. After the
-> > whole
-> > > stuff loaded to DRAM space, the device tree area is conflict with BSS
-> > > region before U-Boot relocation. So any write to BSS area before
-> > > reloc_fdt will corrupt the device tree. Without the fix, there is
-> > > issue that =E2=80=9Cbinman_init failed:-2=E2=80=9D on i.MX8MP-EVK boa=
-rd.
-> > >
-> > > Move the variable to data section to fix the issue
-> > >
-> > > Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> > > ---
-> > >  drivers/cpu/imx8_cpu.c | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/drivers/cpu/imx8_cpu.c b/drivers/cpu/imx8_cpu.c index
-> > > 6c0a8c0cbe4..19c65c7ce47 100644
-> > > --- a/drivers/cpu/imx8_cpu.c
-> > > +++ b/drivers/cpu/imx8_cpu.c
-> > > @@ -71,7 +71,7 @@ static const char *get_imx_type_str(u32
-> > imxtype)
-> > >
-> > >  static const char *get_imx_rev_str(u32 rev)  {
-> > > -	static char revision[4];
-> > > +	static char revision[4] __section(".data");
-> >=20
-> > After my last mail, I pulled up the patch itself and started looking at=
- the
-> > driver. Why is "revision" being done like this? This is not a good
-> > common practice.
->=20
-> Since the function returns a pointer to a string, so ...
-> We could move it to malloc area.
+I suggest to keep this, in case someone want to use lower grade SOC
 
-Yes, something like that sounds better, thanks.
+then they can just change #include instead of doing regeneration of 
+whole config
 
---=20
-Tom
 
---0+R8s9qIqIPt9KbP
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcQiD8ACgkQFHw5/5Y0
-tyx2sgwAirCjFKDm2uUG1+jgRPWckqcv69uFkhxSP/+Rb6DOTTjmmJRmUXqHfisZ
-PdCPzg8XZAx0dk1eN/lAJ+sq2aUrajEdj5IaWdRVu+U0MC+ZB3jjmWYNbH9kMkFq
-WiIjuvwiBfgLasEQWWx1e/vZ/X40v0LYtfL8c4/caLJ/v6+cyBQrI2dwqAM9Dl1S
-qnCW2TiJyXl1EcG6ZSYfqW4G8xPUznntFW36xEVFmJjRMFwZN2IQhDRP5PI8ZJy0
-jgsAzSbkfjJd2/wUJM9C/cl37wbyqQ+lRsrGLuoSRMzF10iyJ+Nf5a7pAXV/wixL
-KEy7gcQoJLkH8UrB4WcMK7OClnZivPqOLS/HILXALa4d9k/j1P3CUPtjS5BzkZ2l
-YBR3UPTstxPZCpXFcvKa+OsaIMSd6giOBhHKgbYrfmOBg9RhO+uEXwKSdgtowF3u
-S3V5idKG2pzIhjEF1e/p4HtuaCHVHBTclGs9nPheDimAAzMA2+4sFxU8A6y08Cz3
-ShopZ6jh
-=4V5n
------END PGP SIGNATURE-----
-
---0+R8s9qIqIPt9KbP--
+>
+> ~Bryan
