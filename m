@@ -4,64 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53190D2F7CE
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 11:55:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0670DD2A53A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 11:58:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 988AD88C60;
-	Thu, 17 Oct 2024 13:55:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 6491088C60;
+	Thu, 17 Oct 2024 13:58:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="tpFRuyEB";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="YswZroC2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D976C88E5C; Thu, 17 Oct 2024 13:55:56 +0200 (CEST)
-Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F22D088F57; Thu, 17 Oct 2024 13:58:16 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0FD688B16
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 13:55:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9D6EF88B8F
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 13:58:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1729166145;
- bh=ZevuNtEiJEmgh4K+7+Tw7iq5BkTzxYVljvmt55Dw7oA=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=tpFRuyEBaRnPlEAtp4mJ3xR4O6+Pui+358hyDwnncU97wwHrznvgk9jCqa4+d3U5F
- w1pz6AOliGQXeUAd0BYVhlA6iqh61rHiSvr4GUqcYrHabSqygbq4RQLTUp4sAayFno
- woUsYPpV2y9GbS7ou6Qa+noUe26ueO+R+z45Rh4j/YryLbIndGpE6spYCymOqwjGep
- QwpQ4hVx+T/7MHnpZ+Y9AcwIUvgbCjZOIoYLVN1TLoMQMvXkP683D2XUM9vg18YwUH
- n8UYMQ2vyvg5iyirDNtuY2c8i2pePzuUl+/OItGCfHVKMtxAHTHPrd0TheQ4AtjSW4
- tf+Khsw8ZRSRA==
-X-secureTransport-forwarded: yes
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Fabio Estevam
- <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
- <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
-Subject: RE: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
- EEPROM ID page on DH i.MX8MP DHCOM
-Thread-Topic: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
- EEPROM ID page on DH i.MX8MP DHCOM
-Thread-Index: AQHbGxfHmD5+3BWcGkWm07IML/aPr7KDeoyAgAXUiUCAAK5vAIAA1rQQ
-Date: Thu, 17 Oct 2024 11:55:43 +0000
-Message-ID: <73ccb69b85094e24be2343d5cbc8879a@dh-electronics.com>
-References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
- <20241010132337.3259-2-cniedermaier@dh-electronics.com>
- <934d25c2-39d8-4f51-b29e-8f20feb7431f@denx.de>
- <a305b1455a984fca83de5a6c0d4b8dfc@dh-electronics.com>
- <74bd0a6b-fe12-4e2c-af79-c1f8ffb7d484@denx.de>
-In-Reply-To: <74bd0a6b-fe12-4e2c-af79-c1f8ffb7d484@denx.de>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43152b79d25so8715155e9.1
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 04:58:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729166292; x=1729771092;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5kPxk/rf9H4EyCzYqtz4ZVvdvCvvaH8nghW+vxc2oUc=;
+ b=YswZroC2x5l0m5qvv16niYd3ra3RAM8MMtp9c6Wt2FGztYF0aPeMya7DGDaTQlmJ+1
+ GqKeigWWVJeuWbQKEqvi2GnYscnScRYFbKmeX4tpUCLTK+MRmqzaAr5hlpZTwHtI18Z3
+ h4gKINiPzVN35at3ZYudTh32hLsekkJvpKLqA8K7JfYhOa4sss/g44CovJd+KVUvTrzQ
+ YyySDxYoCkcc9yVHndlPpFJv2jbRMqIjI4DqOQhVmMREyvH1mHhZx2yJ8irjagAz0XWM
+ 5fzX9NYEZSlxr8yybvmDZMU6eh/4qi9prMalc9pqP4UAsIfhOgWgFPClZJiyaV60o2gv
+ sYag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729166292; x=1729771092;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5kPxk/rf9H4EyCzYqtz4ZVvdvCvvaH8nghW+vxc2oUc=;
+ b=OAiTUOKYb+rw5sCbh5lKs7ePiN6jX5FhmDj/8zfmbw7CNWiWNFbcnOaSlymeDCrMfD
+ HKidswkVUhHzlyIXXZeeLyBSb4GCADBJqAv2c+XIxrtbSUhmy4ibUa7ogXR15B7kWgzT
+ pp47n0PtuGt6PFLVCg1qlVeVRthEjQssHftlYFcEMLqC1o+SwNAiuTKsXCsCSBrBy7l+
+ il0TliHDj/EgBQsOrHKaTRRLYHd4IJuDsLgfOS2TNX7cw+8+0U2C6NOwq7J1CIQ13D7l
+ WZhCR6ekqqCoesjqXRa5v4Y7VbYY3TW7ClVKmY37SbdSd85mHEE649TdgsG9Dgnt98tw
+ 2QNg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUWkUN6vH9o9MWZQuM9UiRxvgZGi9sBQv+NYKvcFKZM7keWKDEgN+bqG2lzMvbpgFWc1cG+CN0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxId/dhV8llsV+/ReUNKGmPIKltcHBrf/OvH10Ws7kssVFrooii
+ TDTvbxxWGGFWqv2GiwkjsOC5ABQ2iwhAGz85U5lP4COQR1omHlmXO4K4HXfFQzM=
+X-Google-Smtp-Source: AGHT+IF7hqVQU8f7zq5bMtEiAYwghm/QLqz124Dq3sndfazpQ8sEYgMz2fPBWj0+1MbR30ZgQNjx5Q==
+X-Received: by 2002:a05:600c:34d3:b0:431:58b3:affa with SMTP id
+ 5b1f17b1804b1-43158b3b0a0mr20123965e9.9.1729166291986; 
+ Thu, 17 Oct 2024 04:58:11 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43158c40228sm24001205e9.21.2024.10.17.04.58.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Oct 2024 04:58:11 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: Guillaume La Roque <glaroque@baylibre.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 0/3] image: android: misc fixes when using on Qualcomm
+ platforms
+In-Reply-To: <87ed4f2ccc.fsf@baylibre.com>
+References: <20241016-topic-fastboot-fixes-mkbootimg-v1-0-94fd9340722b@linaro.org>
+ <87ed4f2ccc.fsf@baylibre.com>
+Date: Thu, 17 Oct 2024 13:58:09 +0200
+Message-ID: <871q0f2b72.fsf@baylibre.com>
 MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,64 +94,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQpTZW50OiBUaHVyc2RheSwgT2N0b2Jl
-ciAxNywgMjAyNCAyOjIyIEFNDQo+IE9uIDEwLzE2LzI0IDI6MzEgUE0sIENocmlzdG9waCBOaWVk
-ZXJtYWllciB3cm90ZToNCj4gDQo+IFsuLi5dDQo+IA0KPj4+PiBkaWZmIC0tZ2l0IGEvYm9hcmQv
-ZGhlbGVjdHJvbmljcy9jb21tb24vZGhfY29tbW9uLmggYi9ib2FyZC9kaGVsZWN0cm9uaWNzL2Nv
-bW1vbi9kaF9jb21tb24uaA0KPj4+PiBpbmRleCA0YzIyZWNlNDM1Li4xYmFhNDVlMzQwIDEwMDY0
-NA0KPj4+PiAtLS0gYS9ib2FyZC9kaGVsZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21tb24uaA0KPj4+
-PiArKysgYi9ib2FyZC9kaGVsZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21tb24uaA0KPj4+PiBAQCAt
-Niw2ICs2LDggQEANCj4+Pj4gICAgZW51bSBlaXBfcmVxdWVzdF92YWx1ZXMgew0KPj4+PiAgICAg
-ICAgTUFDMCwNCj4+Pj4gICAgICAgIE1BQzEsDQo+Pj4+ICsgICAgIElURU1fTlVNQkVSLA0KPj4+
-PiArICAgICBTTiwNCj4+Pg0KPj4+IFdoeSBpcyB0aGlzIHBhdGNoIG5vdCBzcXVhc2hlZCBpbnRv
-IDEvMiA/IEl0IHNlZW1zIHRvIGJlIGNoYW5naW5nIHRoZQ0KPj4+IHNhbWUgY29kZS4NCj4+DQo+
-PiBUaGUgZmlyc3QgcGF0Y2ggYWRkIHRoZSByZWFkaW5nIGZvciBNQUMgYWRkcmVzcyBmcm9tIHRo
-ZSBFRVBST00gSUQNCj4+IHBhZ2UgYW5kIGFkZCB0aGUgdXNlIG9mIHRoYXQgYWRkcmVzc2VzLiBU
-aGUgc2Vjb25kIGV4dGVuZHMgdGhlIHJlYWRpbmcNCj4+IHRvIHRoZSBzZXJpYWwgbnVtYmVyIGFu
-ZCB0aGUgaXRlbSBudW1iZXIuIFNvIHRoYXQgdGhlIHBhdGNoIGRvZXNuJ3QNCj4+IGdldCB0b28g
-YmlnIEkgZm91bmQgaXQgdXNlZnVsIHRvIHNwbGl0IGl0IGludG8gdHdvLiBEbyB5b3Ugd2FudCBt
-ZSB0bw0KPj4gbWFrZSBvbmUgcGF0Y2ggb3V0IG9mIGl0Pw0KPiANCj4gWWVzIHBsZWFzZS4gT25j
-ZSB5b3UgY2FjaGUgdGhlIEVFUFJPTSBjb250ZW50LCB0aGUgcGF0Y2ggd291bGQgbGlrZWx5DQo+
-IGdldCBzaW1wbGVyIGFueXdheS4NCg0KV2lsbCBiZSBkb25lIGluIHYyLg0KDQo+IA0KPiBbLi4u
-XQ0KPiANCj4+Pj4gKyAgICAgcmV0ID0gZGhfZ2V0X3ZhbHVlX2Zyb21fZWVwcm9tX2lkX3BhZ2Uo
-SVRFTV9OVU1CRVIsIGl0ZW1fbnVtYmVyLCBzaXplb2YoaXRlbV9udW1iZXIpLA0KPj4+PiArICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiZWVwcm9tMCIpOw0KPj4+
-PiArICAgICBpZiAocmV0KSB7DQo+Pj4+ICsgICAgICAgICAgICAgLyoNCj4+Pj4gKyAgICAgICAg
-ICAgICAgKiBUaGUgZnVuY3Rpb24gb25seSByZXR1cm5zIHRoZSB2YWx1ZSAtRU5PRU5UIGZvciBT
-b00gcmV2LjEwMCwgYmVjYXVzZQ0KPj4+PiArICAgICAgICAgICAgICAqIHRoZSBFRVBST00gSUQg
-cGFnZSBpc24ndCBhdmFpbGFibGUgdGhlcmUuIFRoZXJlZm9yZSB0aGUgb3V0cHV0IG1ha2VzDQo+
-Pj4+ICsgICAgICAgICAgICAgICogbm8gc2Vuc2UgYW5kIHdpbGwgYmUgc3VwcHJlc3NlZCBoZXJl
-Lg0KPj4+PiArICAgICAgICAgICAgICAqLw0KPj4+PiArICAgICAgICAgICAgIGlmIChyZXQgIT0g
-LUVOT0VOVCkNCj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgIHByaW50ZigiJXM6IFVuYWJsZSB0
-byBnZXQgaXRlbSBudW1iZXIgZm9ybSBFRVBST00gSUQgcGFnZSEgcmV0ID0gJWRcbiIsDQo+IA0K
-PiAnZm9ybScgdHlwbw0KDQpXaWxsIGJlIGZpeGVkIGluIHYyLg0KDQo+Pj4+ICsgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgX19mdW5jX18sIHJldCk7DQo+Pj4NCj4+PiBUaGlzIHdpbGwgYmUg
-cHJpbnRlZCBvbiBldmVyeSBkZXZpY2UsIGV2ZW4gdGhlIG9uZXMgd2l0aG91dCBJRCBFRVBST00s
-DQo+Pj4gY29ycmVjdCA/IFRoaXMgc2hvdWxkIG5vdCBiZSBwcmludGVkIG9uIGRldmljZXMgd2l0
-aG91dCBJRCBFRVBST00uIEFsc28sDQo+Pg0KPj4gVGhpcyBpcyBzdXBwcmVzc2VkIGJ5IHRoZSAt
-RU5PRU5UIGNoZWNrLg0KPiANCj4gRG9lcyBpMmNfZWVwcm9tX3JlYWQoKSBpbiBkaF9nZXRfdmFs
-dWVfZnJvbV9lZXByb21faWRfcGFnZSgpIHJldHVybg0KPiAtRU5PRU5UIGluIGNhc2UgdGhlIEVF
-UFJPTSBpcyBkZXNjcmliZWQgaW4gRFQsIGJ1dCBub3QgcG9wdWxhdGVkIG9uIHRoZQ0KPiBib2Fy
-ZCA/IEkgc3VzcGVjdCBpdCByZXR1cm5zIHNvbWUgb3RoZXIgZXJyb3IgY29kZSwgLUVUSU1FRE9V
-VCBvcg0KPiAtRUlOVkFMIG1heWJlID8NCg0KSXQgY291bGQgb25seSBiZSBwb3NzaWJsZSBpZiB0
-aGUgRFRPIGZvciBoYXJkd2FyZSByZXYuIDEwMCAod2hpY2ggaGFzIG5vDQpFRVBST00gSUQgcGFn
-ZSkgaXMgbm90IGxvYWRlZC4gVGhlIHJldHVybiB2YWx1ZSB0aGVuIGlzIC1FTk9ERVYuDQpJIHdp
-bGwgaW5jbHVkZWQgdGhpcyBpbiB2Mi4NCg0KPj4+IGlmIChyZXQgJiYgcmV0ICE9IC1FTk9FTlQp
-IHt9DQo+Pj4NCj4+PiB3b3JrcyBlcXVhbGx5IHdlbGwgd2l0aG91dCB0aGUgZXh0cmEgaW5kZW50
-Lg0KPj4NCj4+IEkgaGF2ZSBhbiBlbHNlIHRvIChyZXQpIGhlcmUgbm90IHRvIChyZXQgJiYgcmV0
-ICE9IC1FTk9FTlQpLg0KPj4gVGhpcyB3b3VsZCBjaGFuZ2UgdGhlIGxvZ2ljLg0KPiANCj4gfSBl
-bHNlIGlmICghcmV0KSB7IG9yIHNpbWlsYXIgc2hvdWxkIGZpeCB0aGF0LCByaWdodCA/DQo+IA0K
-PiBCYXNpY2FsbHksIHRoZSBxdWVzdGlvbiBpcywgY2FuIHdlIGF2b2lkIHRoaXMgdHdvIGxldmVs
-IGRlZXAgaW5kZW50ID8gSQ0KPiB0aGluayB5ZXMgPw0KDQpJIHdhbnQgdG8gdHJ5IGl0IGluIHYy
-Lg0KDQo+IFsuLi5dDQo+IA0KPj4+IEFsc28sIHRoaXMgc2hvdWxkbid0IGJlIHJlcGVhdGVkbHkg
-cmVhZGluZyB0aGUgRUVQUk9NLCB0aGUgRUVQUk9NIHJlYWQNCj4+PiBvcGVyYXRpb24gaXMgdGhl
-IHNsb3cgcGFydCwgdGhlIEVFUFJPTSBpcyAzMiBieXRlcywgc28gdGhlIEVFUFJPTSBzaG91bGQN
-Cj4+PiBiZSByZWFkIG9uY2UgYW5kIGNhY2hlZCwgYW5kIG9uY2UgdGhlIGNhY2hlIGlzIHBvcHVs
-YXRlZCBhbGwgcmVhZA0KPj4+IGFjY2Vzc2VzIHRvIHRoZSBFRVBST00gc2hvdWxkIHVzZSB0aGUg
-Y2FjaGUuDQo+Pg0KPj4gVGhpcyBpcyBhbHJlYWR5IGNvdmVyZWQgaW4gZnVuY3Rpb24gZGhfZ2V0
-X3ZhbHVlX2Zyb21fZWVwcm9tX2lkX3BhZ2UoKS4NCj4gSXQgc2VlbXMgdGhhdCBmdW5jdGlvbiBh
-bHdheXMgY2FsbHMNCj4gcmV0ID0gaTJjX2VlcHJvbV9yZWFkKGRldiwgMHgwLCBlaXBhLCBzaXpl
-b2YoZWlwYSkpOw0KPiA/DQoNClRoZSAzMiBieXRlcyBhcmUgcmVhZCBpbnRvIGEgc3RhdGljIHZh
-cmlhYmxlLiBJZiB0aGUgSUQgKERIRSkgYWxyZWFkeSBleGlzdHMNCmluIGl0LCB0aGUgaTJjX2Vl
-cHJvbV9yZWFkKCkgZnVuY3Rpb24gaXMgbm8gbG9uZ2VyIGNhbGxlZC4NCg0KDQpSZWdhcmRzDQpD
-aHJpc3RvcGgNCg==
+Hi Neil,
+
+On jeu., oct. 17, 2024 at 13:33, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+
+> Hi Neil,
+>
+> Thank you for the series.
+>
+> On mer., oct. 16, 2024 at 17:46, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+>
+>> When trying to use the Android boot image with header version 2
+>> on recent Qualcomm platforms, we get into some troubles.
+>>
+>> First the kernel in-place address can be > 32bit, then since
+>> we use the Android mkbootimg, it uses the default load address
+>> which isn't big enough to uncompress the kernel.
+>>
+>> Finally, the ramdisk also uses a default load address, and
+>> it should be taken in account like for the kernel address.
+>>
+>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> ---
+>> Neil Armstrong (3):
+>>       image: android: use ulong for kernel address
+>>       boot: image-android: do not boot XIP when kernel is compressed
+>>       image: android: handle ramdisk default address
+>
+> I have boot tested aosp/main on Khadas VIM3 using
+> khadas_vim3_android_defconfig
+>
+> This ensures that boot image v2 still works.
+>
+> I also tried to boot test the Beagle Play board (which runs Android 14
+> with boot image v4).
+>
+> Unfortunetly, that does not boot. The kernel starts but then I see:
+>
+> [    0.434360][    T1] /dev/root: Can't open blockdev
+> [    0.439587][    T1] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
+>
+> Full boot logs:
+> https://paste.debian.net/1332547/
+>
+> Full boot logs on master:
+> https://paste.debian.net/1332548/
+>
+> It seems that somehow, the bootconfig section is no longer present.
+>
+> I'll try to identify the offending patch and help debug this.
+
+Offending patch is
+  [PATCH 3/3] image: android: handle ramdisk default address
+
+The following (invalid) diff "fixes it"
+
+modified   boot/image-android.c
+@@ -448,9 +448,9 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+ 	}
+ 
+ 	printf("RAM disk load addr 0x%08lx size %u KiB\n",
+-	       ramdisk_ptr, DIV_ROUND_UP(img_data.ramdisk_size, 1024));
++	       img_data.ramdisk_addr, DIV_ROUND_UP(img_data.ramdisk_size, 1024));
+ 
+-	*rd_data = ramdisk_ptr;
++	*rd_data = img_data.ramdisk_addr;
+ 
+ 	*rd_len = img_data.ramdisk_size;
+ 	return 0;
+
+I'll debug a bit more.
+
+>
+>>
+>>  boot/image-android.c    | 60 +++++++++++++++++++++++++++++++++++++------------
+>>  include/android_image.h |  2 +-
+>>  2 files changed, 47 insertions(+), 15 deletions(-)
+>> ---
+>> base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
+>> change-id: 20241016-topic-fastboot-fixes-mkbootimg-8d73ab93db3d
+>>
+>> Best regards,
+>> -- 
+>> Neil Armstrong <neil.armstrong@linaro.org>
