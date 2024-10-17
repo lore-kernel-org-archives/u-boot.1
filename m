@@ -4,81 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED8C6D21274
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 11:07:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A162ED21272
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 11:09:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 576F088EDA;
-	Thu, 17 Oct 2024 13:07:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2609688DC6;
+	Thu, 17 Oct 2024 13:09:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kYvX6pgQ";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="Ngjfzu9w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BFCD88DC6; Thu, 17 Oct 2024 13:07:42 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2F5E788B16; Thu, 17 Oct 2024 13:09:37 +0200 (CEST)
+Received: from mx3.securetransport.de (mx3.securetransport.de
+ [IPv6:2a01:4f8:c0c:92be::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FCDB88EDD
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 13:07:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A20F188EDA
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 13:09:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a99f629a7aaso140084466b.1
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 04:07:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729163256; x=1729768056; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=bEwrKMDWbzbfXaozwAUpUeomk/EmCv5lWCHvwE+fvLA=;
- b=kYvX6pgQNx8lBR15ZAmeJsB8dbzlLj6F6wdV8/HXBg+xf4nsEetKf2dcCsUhLhdrCg
- JM6D4s9TTHRb7aYUGaZA7VvtkeU7Ab2g3FK0KueV/GQ/E+OmVF/yK2583ID+aqwM9LvY
- 0actsZSHd6o4QnoHtnCudoEcCfniVuoV8C6Mx70P0bjzuA1Jb4N+YKw/lqwJRFkQzwEC
- 8JQ1LBnS4fnvmsZNYdwQJq0OUATIC/AZI7eW+7OgPBfGxCpy+hns7SGhevb1VU5o0sQP
- eNhxKvvtlzapE2P001r5Vjo+uw2uacZCaXk5vUkKdteXJEUA7269QoqUjHr0wfwE8qXe
- mDlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729163256; x=1729768056;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bEwrKMDWbzbfXaozwAUpUeomk/EmCv5lWCHvwE+fvLA=;
- b=YlsG9BLPCTBjL6MgaQeApKidImtKmRZRUGYniNbP/GtSLoZ8Bpgli9xXkhlQSwrggU
- Q8bxjh0c0VHgy/ccF876kxyHWQELhebEup+jMYiROd5LxY8NBMLypF+20kj7PZt6nAPU
- U0rAalMHzstZp1F+5L0pM97VRQEaiv2MVRsVUzqEiauxx/37Wqzv53I/bKIjJQRQLCn5
- nNpUWTim79ADC+0ty9lcKvkKd0nMBQc1z8AWU+TK6LGMfwsQdaSLEC0ELt0mEF118iev
- 0N21sQhL0aZiJk3cOphR5MdXd5hv1EWi03cY2Q6AuHYJp2hsj6u4EihItwErM1mg9ACW
- gLTQ==
-X-Gm-Message-State: AOJu0Ywbkz/EERZspvpY04i9meDbrJN9wArfJTUCgWsI7Kx9/iwS6Mu0
- zQRVABNeN6fqsKknfTRtuU4pLEKZDJsbubO4WcxLWjWkLOHzkT9C9bH2GUxsaDg=
-X-Google-Smtp-Source: AGHT+IH0C+2zH2bMsO9DfOiYCqYJgKZ90tQyLDqO51612wLxi1hS8N5dL72OoKCMvmpGHxLXi2gNcQ==
-X-Received: by 2002:a17:907:7213:b0:a99:4112:5e6e with SMTP id
- a640c23a62f3a-a9a4c2c5301mr314354566b.3.1729163256299; 
- Thu, 17 Oct 2024 04:07:36 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:888d:ff00::2? ([2a02:8109:888d:ff00::2])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a2976f15esm284142066b.94.2024.10.17.04.07.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 17 Oct 2024 04:07:35 -0700 (PDT)
-Message-ID: <c6b7e22d-2d84-4577-a2e4-d15363a45993@linaro.org>
-Date: Thu, 17 Oct 2024 13:07:34 +0200
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1729163366;
+ bh=O+B7lbj+rdVuVpnmSXGjG2Nm5OiE4hU+D/B36x96TU8=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=Ngjfzu9wxlIJhCDAxGPC7N/VAgeyW57FH9DLYerShiKjTnmEsishKqQl/o6AGA0l1
+ EUoUglLnbx52BkaPuEsB9iTsCe0ADvB1fjZz1Eve08X4E247pSc7UlPsjXmJUxATme
+ NtCJRF5Z+8W+nE1CLYPKuMYwuuA+12RL5R5Gry0WaWKhA6yQLmK8mfI1bh0ovkX8pQ
+ N22q78L8zrFNf1o5dCt3AlGK8q+7/u2dRdH0vQGZT9bnl69ioQAJK9uk0fmrPT6i7W
+ KNSz3rVZZnmZpLdQL0oBilYIK0QQd20XPyYz24q1xPjEGUJ3ShaJyjTIfuiSfsr1bj
+ wgIqYk+fFzB4Q==
+X-secureTransport-forwarded: yes
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Fabio Estevam
+ <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
+ <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
+Subject: RE: [PATCH 1/2] arm64: imx8mp: Read MAC address from M24C32-D
+ write-lockable page on DH i.MX8MP DHCOM if available
+Thread-Topic: [PATCH 1/2] arm64: imx8mp: Read MAC address from M24C32-D
+ write-lockable page on DH i.MX8MP DHCOM if available
+Thread-Index: AQHbGxfGhQwPx5oDdEKUB8iQmKl/XLKDdt0AgAXWXZD//+VMAIABgMfw
+Date: Thu, 17 Oct 2024 11:09:24 +0000
+Message-ID: <02e526c3714e46ec88432ac2d1f38bfb@dh-electronics.com>
+References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
+ <9b2f1914-ed29-429b-8c0a-e2a25a1172a9@denx.de>
+ <62b02b850c194dc080684db8d00cf413@dh-electronics.com>
+ <504ec0bf-c3be-4663-ac79-1f8a332d8232@denx.de>
+In-Reply-To: <504ec0bf-c3be-4663-ac79-1f8a332d8232@denx.de>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: dwc3-generic: use DR_MODE_OTG when dr_mode isn't
- specified
-To: u-boot-qcom@groups.io, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
-References: <20241016-topic-usb-dwc3-dr-mode-otg-v1-1-4fda56072723@linaro.org>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20241016-topic-usb-dwc3-dr-mode-otg-v1-1-4fda56072723@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,70 +78,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 16/10/2024 10:26, Neil Armstrong via groups.io wrote:
-> The USB DRD bindingsa at [1] are clear, if not specified the dr_mode
-> property defaults to otg, and this is how Linux behaves.
-
-I guess this is (kind of?) a subset of
-
-https://lore.kernel.org/u-boot/20240621021135.1600847-2-caleb.connolly@linaro.org/
-
-I need to respin that one...
-> 
-> A cleanup is ongoing on the Linux Device Trees to remove dr_mode when
-> set to "otg", so take this in account and do not fail anymore when
-> dr_mode isn't specified in the glue or dwc3 node.
-
-Definitely an improvement over the status quo heh
-
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> 
-> [1] https://www.kernel.org/doc/Documentation/devicetree/bindings/usb/usb-drd.yaml
-> 
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-> ---
->   drivers/usb/dwc3/dwc3-generic.c | 12 ++++++++----
->   1 file changed, 8 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-> index 2ab41cbae45..d62d687ece3 100644
-> --- a/drivers/usb/dwc3/dwc3-generic.c
-> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> @@ -183,10 +183,10 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
->   		/* might be a leaf so check the parent for mode */
->   		node = dev_ofnode(dev->parent);
->   		plat->dr_mode = usb_get_dr_mode(node);
-> -		if (plat->dr_mode == USB_DR_MODE_UNKNOWN) {
-> -			pr_err("Invalid usb mode setup\n");
-> -			return -ENODEV;
-> -		}
-> +
-> +		/* If none of the nodes have dr_mode, bindings says default is OTG */
-> +		if (!plat->dr_mode)
-> +			plat->dr_mode = USB_DR_MODE_OTG;
->   	}
->   
->   	return 0;
-> @@ -527,6 +527,10 @@ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
->   	if (!dr_mode)
->   		dr_mode = usb_get_dr_mode(node);
->   
-> +	/* If none of the nodes have dr_mode, bindings says default is OTG */
-> +	if (!dr_mode)
-> +		dr_mode = USB_DR_MODE_OTG;
-> +
->   	if (CONFIG_IS_ENABLED(DM_USB_GADGET) &&
->   	    (dr_mode == USB_DR_MODE_PERIPHERAL || dr_mode == USB_DR_MODE_OTG)) {
->   		debug("%s: dr_mode: OTG or Peripheral\n", __func__);
-> 
-> ---
-> base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
-> change-id: 20241016-topic-usb-dwc3-dr-mode-otg-88ec307e0970
-> 
-> Best regards,
-
--- 
-// Caleb (they/them)
-
+RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQpTZW50OiBXZWRuZXNkYXksIE9jdG9i
+ZXIgMTYsIDIwMjQgMjoxNiBQTQ0KPiBPbiAxMC8xNi8yNCAxOjU3IFBNLCBDaHJpc3RvcGggTmll
+ZGVybWFpZXIgd3JvdGU6DQo+PiBGcm9tOiBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5kZT4NCj4+
+IFNlbnQ6IFNhdHVyZGF5LCBPY3RvYmVyIDEyLCAyMDI0IDEwOjQzIFBNDQo+Pj4gT24gMTAvMTAv
+MjQgMzoyMyBQTSwgQ2hyaXN0b3BoIE5pZWRlcm1haWVyIHdyb3RlOg0KPj4+PiBUaGUgaS5NWDhN
+IFBsdXMgREhDT00gY3VycmVudGx5IHN1cHBvcnRzIHBhcnNpbmcgZXRoZXJuZXQgTUFDIGFkZHJl
+c3MNCj4+Pj4gZnJvbSBtdWx0aXBsZSBzb3VyY2VzIGluIHRoZSBmb2xsb3dpbmcgcHJpb3JpdHkg
+b3JkZXI6DQo+Pj4+DQo+Pj4+IDEpIFUtQm9vdCBlbnZpcm9ubWVudCAnZXRoYWRkcicvJ2V0aDFh
+ZGRyJyBlbnZpcm9ubWVudCB2YXJpYWJsZQ0KPj4+PiAyKSBTb0MgT1RQIGZ1c2VzDQo+Pj4+IDMp
+IE9uLVNvTSBFRVBST00NCj4+Pj4NCj4+Pj4gVGhlIG5ldyBpLk1YOE0gUGx1cyBESENPTSByZXYu
+MjAwIGlzIHBvcHVsYXRlZCB3aXRoIE0yNEMzMi1EIEVFUFJPTQ0KPj4+PiB3aGljaCBjb250YWlu
+cyBhZGRpdGlvbmFsIHdyaXRlLWxvY2thYmxlIHBhZ2UsIHdoaWNoIGNhbiBhbHNvIGJlDQo+Pj4+
+IHBvcHVsYXRlZCB3aXRoIGEgc3RydWN0dXJlIGNvbnRhaW5pbmcgZXRoZXJuZXQgTUFDIGFkZHJl
+c3MuDQo+Pj4+DQo+Pj4+IEFkZCBzdXBwb3J0IGZvciBwYXJzaW5nIHRoZSBjb250ZW50IG9mIHRo
+aXMgbmV3IHdyaXRlLWxvY2thYmxlIHBhZ2UNCj4+Pj4gYW5kIHBsYWNlIGl0IGJldHdlZW4gMikg
+YW5kIDMpIG9uIHRoZSBwcmlvcml0eSBsaXN0LiBUaGUgbmV3IGVudHJ5IGlzDQo+Pj4+IDIuNSkg
+T24tU29NIEVFUFJPTSB3cml0ZS1sb2NrYWJsZSBwYWdlDQo+Pj4+DQo+Pj4+IEJlY2F1c2UgdGhl
+IHdyaXRlLWxvY2thYmxlIHBhZ2UgaXMgbm90IHByZXNlbnQgb24gcmV2LjEwMCBpLk1YOE1QIERI
+Q09NDQo+Pj4+IFNvTSwgdGVzdCB3aGV0aGVyIEVFUFJPTSBJRCBwYWdlIGV4aXN0cyBpbiBEVCBh
+bmQgd2hldGhlciBpdCBpcyBlbmFibGVkDQo+Pj4+IGZpcnN0LiBJZiBzbywgcmVhZCB0aGUgZW50
+aXJlIElEIHBhZ2Ugb3V0LCB2YWxpZGF0ZSBpdCwgYW5kIGRldGVybWluZQ0KPj4+PiB3aGV0aGVy
+IEVFUFJPTSBNQUMgYWRkcmVzcyBpcyBwb3B1bGF0ZWQgaW4gaXQgaW4gREggc3BlY2lmaWMgZm9y
+bWF0LiBJZg0KPj4+PiBzbywgdXNlIHRoZSBNQUMgYWRkcmVzcy4gVGhlcmUgbWF5IGJlIG11bHRp
+cGxlIEVFUFJPTXMgd2l0aCBhbiBJRCBwYWdlDQo+Pj4+IG9uIHRoaXMgcGxhdGZvcm0sIGFsd2F5
+cyB1c2UgdGhlIGZpcnN0IG9uZS4NCj4+Pj4NCj4+Pj4gU2lnbmVkLW9mZi1ieTogQ2hyaXN0b3Bo
+IE5pZWRlcm1haWVyIDxjbmllZGVybWFpZXJAZGgtZWxlY3Ryb25pY3MuY29tPg0KPj4+PiAtLS0N
+Cj4+Pj4gQ2M6ICJOWFAgaS5NWCBVLUJvb3QgVGVhbSIgPHVib290LWlteEBueHAuY29tPg0KPj4+
+PiBDYzogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQo+Pj4+IENjOiBGYWJpbyBFc3RldmFt
+IDxmZXN0ZXZhbUBnbWFpbC5jb20+DQo+Pj4+IENjOiBTdGVmYW5vIEJhYmljIDxzYmFiaWNAZGVu
+eC5kZT4NCj4+Pj4gQ2M6IFRvbSBSaW5pIDx0cmluaUBrb25zdWxrby5jb20+DQo+Pj4+IENjOiB1
+LWJvb3RAZGgtZWxlY3Ryb25pY3MuY29tDQo+Pj4+IC0tLQ0KPj4+PiAgICBib2FyZC9kaGVsZWN0
+cm9uaWNzL2NvbW1vbi9kaF9jb21tb24uYyAgICAgICAgfCAxMTMgKysrKysrKysrKysrKysrKysr
+DQo+Pj4+ICAgIGJvYXJkL2RoZWxlY3Ryb25pY3MvY29tbW9uL2RoX2NvbW1vbi5oICAgICAgICB8
+ICAyMyArKysrDQo+Pj4+ICAgIC4uLi9kaF9pbXg4bXAvaW14OG1wX2RoY29tX3BkazIuYyAgICAg
+ICAgICAgICB8ICAgNiArDQo+Pj4+ICAgIDMgZmlsZXMgY2hhbmdlZCwgMTQyIGluc2VydGlvbnMo
+KykNCj4+Pj4NCj4+Pj4gZGlmZiAtLWdpdCBhL2JvYXJkL2RoZWxlY3Ryb25pY3MvY29tbW9uL2Ro
+X2NvbW1vbi5jIGIvYm9hcmQvZGhlbGVjdHJvbmljcy9jb21tb24vZGhfY29tbW9uLmMNCj4+Pj4g
+aW5kZXggMzJjNTBiNGYwZi4uOGVhNzBmYzk4NCAxMDA2NDQNCj4+Pj4gLS0tIGEvYm9hcmQvZGhl
+bGVjdHJvbmljcy9jb21tb24vZGhfY29tbW9uLmMNCj4+Pj4gKysrIGIvYm9hcmQvZGhlbGVjdHJv
+bmljcy9jb21tb24vZGhfY29tbW9uLmMNCj4+Pj4gQEAgLTcsOSArNywyMiBAQA0KPj4+PiAgICAj
+aW5jbHVkZSA8ZG0uaD4NCj4+Pj4gICAgI2luY2x1ZGUgPGkyY19lZXByb20uaD4NCj4+Pj4gICAg
+I2luY2x1ZGUgPG5ldC5oPg0KPj4+PiArI2luY2x1ZGUgPHUtYm9vdC9jcmMuaD4NCj4+Pj4NCj4+
+Pj4gICAgI2luY2x1ZGUgImRoX2NvbW1vbi5oIg0KPj4+Pg0KPj4+PiArc3RydWN0IGVlcHJvbV9p
+ZF9wYWdlIHsNCj4+Pj4gKyAgICAgdTggICAgICBpZFszXTsgICAgICAgICAgLyogSWRlbnRpZmll
+ciAnRCcsICdIJywgJ0UnIC0gJ0QnIGlzIGF0IGluZGV4IDAgKi8NCj4+Pj4gKyAgICAgdTggICAg
+ICB2ZXJzaW9uOyAgICAgICAgLyogMHgxMCAtLSBWZXJzaW9uIDEuMCAqLw0KPj4+PiArICAgICB1
+OCAgICAgIGRhdGFfY3JjMTZbMl07ICAvKiBbMV0gaXMgTVNieXRlICovDQo+Pj4+ICsgICAgIHU4
+ICAgICAgaGVhZGVyX2NyYzg7DQo+Pj4+ICsgICAgIHU4ICAgICAgbWFjMFs2XTsNCj4+Pj4gKyAg
+ICAgdTggICAgICBtYWMxWzZdOw0KPj4+PiArICAgICB1OCAgICAgIGl0ZW1fcHJlZml4OyAgICAv
+KiBIL0YgaXMgY29kZWQgaW4gTVNiaXRzLCBWZW5kb3IgY29kaW5nIHN0YXJ0cyBhdCBMU2JpdHMg
+Ki8NCj4+Pj4gKyAgICAgdTggICAgICBpdGVtX251bVszXTsgICAgLyogWzJdIGlzIE1TYnl0ZSAq
+Lw0KPj4+PiArICAgICB1OCAgICAgIHNlcmlhbFs5XTsgICAgICAvKiBbOF0gaXMgTVNieXRlICov
+DQo+Pj4+ICt9IF9fcGFja2VkOw0KPj4+DQo+Pj4gSXMgX19wYWNrZWQgbmVlZGVkID8NCj4+DQo+
+PiBJIHdhbnQgdG8gYXZvaWQgcGFkZGluZyBpbiBhbnkgY2FzZS4NCj4gRXZlcnkgc2luZ2xlIGZp
+ZWxkIGlzIHU4LCBkbyB5b3Ugb2JzZXJ2ZSBhbnkgcGFkZGluZyA/DQoNCkluIHRoaXMgY2FzZSwg
+SSBkb24ndCBleHBlY3QgcGFkZGluZywgYnV0IGlmIHRoZSBzdHJ1Y3QgaXMgZXh0ZW5kZWQsDQpw
+YWRkaW5nIGNvdWxkIGJlIHBvc3NpYmxlLiBUaGlzIHN0cnVjdCBpcyBmb3IgYW4gRUVQUk9NIGFu
+ZCB0aGVyZWZvcmUNCml0IHNob3VsZCBiZSBkZWZpbmVkIHdpdGggbm8gcGFkZGluZy4gSSBkb24n
+dCB3YW50IHRvIGdpdmUgdGhlIGNvbXBpbGUNCnRoZSBjaGFuZ2UgdG8gYWRkIHBhZGRpbmcgaWYg
+c29tZXRoaW5nIGNoYW5nZWQgaW4gdGhlIHN0cnVjdC4NCldoYXQgYXJlIHRoZSBkaXNhZHZhbnRh
+Z2VzIG9mIGtlZXBpbmcgX19wYWNrZWQgaGVyZT8NCg0KUmVnYXJkcw0KQ2hyaXN0b3BoDQo=
