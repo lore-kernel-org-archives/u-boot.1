@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A30B1D21271
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 16:11:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD07D374BF
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 16:11:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7F9A8904B;
-	Thu, 17 Oct 2024 18:10:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5D50C89065;
+	Thu, 17 Oct 2024 18:10:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="w4FEYilV";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Wez2e70V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 589EE89080; Thu, 17 Oct 2024 18:10:54 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 5BE048907E; Thu, 17 Oct 2024 18:10:54 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BFD789051
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 18:10:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DD6489059
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 18:10:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-37d50fad249so805686f8f.1
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 09:10:47 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-37d4c1b1455so901160f8f.3
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 09:10:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729181446; x=1729786246;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729181447; x=1729786247;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=rI865ORU5M3+h8g6Id1rOMoKVljvk5cflOPVUidj2Ok=;
- b=w4FEYilV5eYngKgsWeM90e0/sD0wV1I3mbiY4L66aRLbBf5nyuQzyR0utfSKBss31m
- WsTy8VDmf4HcyaOANfOFOINqaAI56Y2WqQNh8uRn7u3tV5UhsrV8ijJA54fMIZWMgtP7
- yHhrg/pG9wgKrJYNlI3eVq7KVe7UYj06Gs5fFWZhTvmA4VDpLu/JBvXwXrX6fGcIReQ6
- UB92H3qOR8RrGOkjJrJwL0kZ7CrEfa6yPkRzSxKwi17w/5oi85t5t4tSkTyYGvwWsWxY
- pxG9/hqCS9hfhCZAnWhAcMqOczkNLgPxJIHQDwJIX8OJMh4S2+e+rrHinRYNZlVOvJNZ
- od1w==
+ :reply-to; bh=eek7gRBW6g+Iapx/5zEf6sS/TBDPdHF5a1htgBIWQQg=;
+ b=Wez2e70VFF9vib70OZksvdZNsXyjEtWraEfx6kusTDD8/xfvhYGIO+nwVpKcrdjsgD
+ gGycNZ00cVe82FzemYBz9rbQsJlvw1pIch4dXNLzsJUg7TC75zjSFrFfB3LaSmJWxKnv
+ OH1hmPiO/+Ughdu8yHovD/Zjy+bHr3uuiLtRbpSbzhfJ1vxX/pIYB8P3qR72ofXZsQPF
+ l7bWrz7cvi2CU0XYQCcAEm7YP8pRCtSPu5dYP/oKyzl1fOZT+m35HncZEZaAexIPbuPF
+ MBAp8oaMd7CIjTCqMJjuKOVf6Jee5D+mneifvWMRVLjBrisszOVa835AayExrTxspLKi
+ Em2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729181446; x=1729786246;
+ d=1e100.net; s=20230601; t=1729181447; x=1729786247;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rI865ORU5M3+h8g6Id1rOMoKVljvk5cflOPVUidj2Ok=;
- b=fpDYc+iB+RN7LE602yEHYmuSroo3NR7U+QOqph3AbXQQ3eBaz7uSrotZXPev4QFfK8
- 6VBpJs1sDo1MEXlUPIrcjJhk53JAsKgf2BmZytwW+QqcElE3D+rF6O3Dqbrys4N20gRg
- KYMRVDF7xFYvLqLrJ7k3PIEAyRruLelQzKxrwpco65vIrA2SuGjvCILxVCu+x7zvosMT
- CFb//cNvETSU2wuovcv9IUX1eJgfvnQXPgjUvTRjL7FLgJkbKoQZWZDq/soHNGdjvaek
- xMyI7F9bU7RIUo6zripiZiGLC/LnxGLIzNKcwiA7RVy6sh/TilL/FCFOWSTpOKReeRdx
- sgiA==
-X-Gm-Message-State: AOJu0YzgGwZ0F9XCKsWdOQMyintANqYb/7JE7YamZOwKqQCU8wkuqq7W
- yf9LwCyf86jJR02bCb5ieDjKv9T3jmAWmNOkdHRx08/vByNEw/WCoE7hpgWUj/iq/4He0BY7bLj
- D
-X-Google-Smtp-Source: AGHT+IFZ+ZgyMCO9Hm1RZf07wJLvzl+dqzIpsknhtVKFghTdbv9eqzeRBtJOMdk0OSwUna7qM1l4iw==
-X-Received: by 2002:a5d:64e1:0:b0:37d:3a2d:8577 with SMTP id
- ffacd0b85a97d-37d86c03b05mr5909717f8f.33.1729181446339; 
- Thu, 17 Oct 2024 09:10:46 -0700 (PDT)
+ bh=eek7gRBW6g+Iapx/5zEf6sS/TBDPdHF5a1htgBIWQQg=;
+ b=cfJ8tHXxPNfhpCCJh0u60A/GEDeia7MRub49PYgoF1If9sg3SQHbRmu74gcgeontTB
+ WZziMhwD3DhYHYzfzMev+UUx/z2nq/tPLRD7ZhbvNxRyALgFwH5Xqz5lGO2hJpYh+FIl
+ w71iD/tLowEvEmmxdXLzcjb126mDr71BHW0V0LeUAb0CGMhN6M8qgdcSas2YFbHrJo1A
+ MSNKDQw+ST8IC5m/sKJYQOldQSloFM1xhsVaLXS6H3cjOIFXGnntLzf+JVAfZa2l8dLJ
+ O3ViGTAgb+bPGvYkA+vhP+S7BX8lnEBp1ycJkUjlgDkQArb0e6rS1e9NjN6mdp7u80Z9
+ e4dA==
+X-Gm-Message-State: AOJu0YxV1Ni6+YOHMQSmXGYDGzDvX3g+ymS6WQNb1mGmq4rQgTuKFJYI
+ oafR23Id9iYcP8ruSFpW7jG8fb348j9qPnEgZ9WMu0jWR35EzQCq2SHyO/t+o/aLIGaqlXSLXxh
+ y
+X-Google-Smtp-Source: AGHT+IHLxEIBMQzPy2d9LZ5WMJTJFVui5jEuVkjRgsMH4DB4Qlx0CqgWUHdQwrTv7wwYrhLDqW8ARQ==
+X-Received: by 2002:adf:e908:0:b0:37d:33a3:de1c with SMTP id
+ ffacd0b85a97d-37d55262ad2mr15901805f8f.38.1729181447313; 
+ Thu, 17 Oct 2024 09:10:47 -0700 (PDT)
 Received: from [127.0.1.1] ([2a05:6e02:10a5:e010:4754:2b9f:eb4f:125])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d7fc42160sm7653993f8f.112.2024.10.17.09.10.45
+ ffacd0b85a97d-37d7fc42160sm7653993f8f.112.2024.10.17.09.10.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Oct 2024 09:10:45 -0700 (PDT)
+ Thu, 17 Oct 2024 09:10:46 -0700 (PDT)
 From: Guillaume La Roque <glaroque@baylibre.com>
-Date: Thu, 17 Oct 2024 18:10:26 +0200
-Subject: [PATCH 2/6] bootstd: android: add non-A/B image support
+Date: Thu, 17 Oct 2024 18:10:27 +0200
+Subject: [PATCH 3/6] configs: khadas-vim3{l}: fix userdata size
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241017-adnroidv2-v1-2-781c939902c9@baylibre.com>
+Message-Id: <20241017-adnroidv2-v1-3-781c939902c9@baylibre.com>
 References: <20241017-adnroidv2-v1-0-781c939902c9@baylibre.com>
 In-Reply-To: <20241017-adnroidv2-v1-0-781c939902c9@baylibre.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
@@ -98,206 +98,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update android bootmeth to support non-A/B image.
-Enable AB support only when ANDROID_AB is enabled.
+After increase boot and recovery partition userdata was not resize.
+so on VIM3 16GB and VIM3L `fastboot oem format` or `gpt write mmc 2
+$partitions` fail because end of last partition is outside of eMMC
+size.
 
+Remove 64MB on userdata partitions to fix it.
+
+Fixes: ce138d9742bf ("configs: khadas-vim3{l}: Increase boot/recovery
+partition size")
 Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
 ---
- boot/Kconfig                     |  1 -
- boot/bootmeth_android.c          | 53 ++++++++++++++++++++++++++++++++++------
- configs/am62x_a53_android.config |  1 +
- configs/sandbox_defconfig        |  1 +
- 4 files changed, 47 insertions(+), 9 deletions(-)
+ include/configs/khadas-vim3_android.h  | 4 ++--
+ include/configs/khadas-vim3l_android.h | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 1d50a83a2d2f..fa0739ff05dd 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -500,7 +500,6 @@ config BOOTMETH_ANDROID
- 	bool "Bootdev support for Android"
- 	depends on X86 || ARM || SANDBOX
- 	depends on CMDLINE
--	select ANDROID_AB
- 	select ANDROID_BOOT_IMAGE
- 	select CMD_BCB
- 	imply CMD_FASTBOOT
-diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index 2e7f85e4a708..8fa4952df3f2 100644
---- a/boot/bootmeth_android.c
-+++ b/boot/bootmeth_android.c
-@@ -29,6 +29,7 @@
- #define BCB_PART_NAME "misc"
- #define BOOT_PART_NAME "boot"
- #define VENDOR_BOOT_PART_NAME "vendor_boot"
-+#define SLOT_LEN 2
- 
- /**
-  * struct android_priv - Private data
-@@ -42,7 +43,7 @@
-  */
- struct android_priv {
- 	enum android_boot_mode boot_mode;
--	char slot[2];
-+	char *slot;
- 	u32 header_version;
- };
- 
-@@ -71,7 +72,11 @@ static int scan_boot_part(struct udevice *blk, struct android_priv *priv)
- 	char *buf;
- 	int ret;
- 
--	sprintf(partname, BOOT_PART_NAME "_%s", priv->slot);
-+	if (priv->slot)
-+		sprintf(partname, BOOT_PART_NAME "_%s", priv->slot);
-+	else
-+		sprintf(partname, BOOT_PART_NAME);
-+
- 	ret = part_get_info_by_name(desc, partname, &partition);
- 	if (ret < 0)
- 		return log_msg_ret("part info", ret);
-@@ -108,7 +113,11 @@ static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
- 	char *buf;
- 	int ret;
- 
--	sprintf(partname, VENDOR_BOOT_PART_NAME "_%s", priv->slot);
-+	if (priv->slot)
-+		sprintf(partname, VENDOR_BOOT_PART_NAME "_%s", priv->slot);
-+	else
-+		sprintf(partname, VENDOR_BOOT_PART_NAME);
-+
- 	ret = part_get_info_by_name(desc, partname, &partition);
- 	if (ret < 0)
- 		return log_msg_ret("part info", ret);
-@@ -142,6 +151,11 @@ static int android_read_slot_from_bcb(struct bootflow *bflow, bool decrement)
- 	char slot_suffix[3];
- 	int ret;
- 
-+	if (!CONFIG_IS_ENABLED(ANDROID_AB)) {
-+		priv->slot = NULL;
-+		return 0;
-+	}
-+
- 	ret = part_get_info_by_name(desc, BCB_PART_NAME, &misc);
- 	if (ret < 0)
- 		return log_msg_ret("part", ret);
-@@ -150,6 +164,7 @@ static int android_read_slot_from_bcb(struct bootflow *bflow, bool decrement)
- 	if (ret < 0)
- 		return log_msg_ret("slot", ret);
- 
-+	priv->slot = malloc(SLOT_LEN);
- 	priv->slot[0] = BOOT_SLOT_NAME(ret);
- 	priv->slot[1] = '\0';
- 
-@@ -274,7 +289,7 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- 	configure_serialno(bflow);
- 	configure_bootloader_version(bflow);
- 
--	if (priv->boot_mode == ANDROID_BOOT_MODE_NORMAL) {
-+	if (priv->boot_mode == ANDROID_BOOT_MODE_NORMAL && priv->slot) {
- 		ret = bootflow_cmdline_set_arg(bflow, "androidboot.force_normal_boot",
- 					       "1", false);
- 		if (ret < 0) {
-@@ -323,14 +338,24 @@ static int read_slotted_partition(struct blk_desc *desc, const char *const name,
- {
- 	struct disk_partition partition;
- 	char partname[PART_NAME_LEN];
-+	int partname_len;
- 	int ret;
- 	u32 n;
- 
- 	/* Ensure name fits in partname it should be: <name>_<slot>\0 */
--	if (strlen(name) > (PART_NAME_LEN - 2 - 1))
-+	if (CONFIG_IS_ENABLED(ANDROID_AB))
-+		partname_len = PART_NAME_LEN - 2 - 1;
-+	else
-+		partname_len = PART_NAME_LEN - 1;
-+
-+	if (strlen(name) > partname_len)
- 		return log_msg_ret("name too long", -EINVAL);
- 
--	sprintf(partname, "%s_%s", name, slot);
-+	if (slot)
-+		sprintf(partname, "%s_%s", name, slot);
-+	else
-+		sprintf(partname, "%s", name);
-+
- 	ret = part_get_info_by_name(desc, partname, &partition);
- 	if (ret < 0)
- 		return log_msg_ret("part", ret);
-@@ -382,7 +407,7 @@ static int run_avb_verification(struct bootflow *bflow)
- 	AvbSlotVerifyData *out_data;
- 	enum avb_boot_state boot_state;
- 	char *extra_args;
--	char slot_suffix[3];
-+	char *slot_suffix = "";
- 	bool unlocked = false;
- 	int ret;
- 
-@@ -390,7 +415,10 @@ static int run_avb_verification(struct bootflow *bflow)
- 	if (!avb_ops)
- 		return log_msg_ret("avb ops", -ENOMEM);
- 
--	sprintf(slot_suffix, "_%s", priv->slot);
-+	if (priv->slot) {
-+		slot_suffix = malloc(3);
-+		sprintf(slot_suffix, "_%s", priv->slot);
-+	}
- 
- 	ret = avb_ops->read_is_device_unlocked(avb_ops, &unlocked);
- 	if (ret != AVB_IO_RESULT_OK)
-@@ -427,12 +455,18 @@ static int run_avb_verification(struct bootflow *bflow)
- 	if (ret < 0)
- 		goto free_out_data;
- 
-+	if (priv->slot)
-+		free(slot_suffix);
-+
- 	return 0;
- 
-  free_out_data:
- 	if (out_data)
- 		avb_slot_verify_data_free(out_data);
- 
-+	if (priv->slot)
-+		free(slot_suffix);
-+
- 	return log_msg_ret("avb cmdline", ret);
- }
+diff --git a/include/configs/khadas-vim3_android.h b/include/configs/khadas-vim3_android.h
+index fc89efb4c36e..0e2953fe71b3 100644
+--- a/include/configs/khadas-vim3_android.h
++++ b/include/configs/khadas-vim3_android.h
+@@ -24,7 +24,7 @@
+ 	"name=boot_a,size=64M,bootable,uuid=${uuid_gpt_boot_a};" \
+ 	"name=boot_b,size=64M,bootable,uuid=${uuid_gpt_boot_b};" \
+ 	"name=super,size=3072M,uuid=${uuid_gpt_super};" \
+-	"name=userdata,size=11282M,uuid=${uuid_gpt_userdata};" \
++	"name=userdata,size=11218M,uuid=${uuid_gpt_userdata};" \
+ 	"name=rootfs,size=-,uuid=" ROOT_UUID
  #else
-@@ -480,6 +514,9 @@ static int boot_android_normal(struct bootflow *bflow)
- 	}
- 	set_abootimg_addr(loadaddr);
+ #define PARTS_DEFAULT \
+@@ -37,7 +37,7 @@
+ 	"name=recovery,size=64M,uuid=${uuid_gpt_recovery};" \
+ 	"name=cache,size=256M,uuid=${uuid_gpt_cache};" \
+ 	"name=super,size=1792M,uuid=${uuid_gpt_super};" \
+-	"name=userdata,size=12786M,uuid=${uuid_gpt_userdata};" \
++	"name=userdata,size=12722M,uuid=${uuid_gpt_userdata};" \
+ 	"name=rootfs,size=-,uuid=" ROOT_UUID
+ #endif
  
-+	if (priv->slot)
-+		free(priv->slot);
-+
- 	ret = bootm_boot_start(loadaddr, bflow->cmdline);
+diff --git a/include/configs/khadas-vim3l_android.h b/include/configs/khadas-vim3l_android.h
+index 5b2aed1cf62a..f39a3782d663 100644
+--- a/include/configs/khadas-vim3l_android.h
++++ b/include/configs/khadas-vim3l_android.h
+@@ -24,7 +24,7 @@
+ 	"name=boot_a,size=64M,bootable,uuid=${uuid_gpt_boot_a};" \
+ 	"name=boot_b,size=64M,bootable,uuid=${uuid_gpt_boot_b};" \
+ 	"name=super,size=3072M,uuid=${uuid_gpt_super};" \
+-	"name=userdata,size=11282M,uuid=${uuid_gpt_userdata};" \
++	"name=userdata,size=11218M,uuid=${uuid_gpt_userdata};" \
+ 	"name=rootfs,size=-,uuid=" ROOT_UUID
+ #else
+ #define PARTS_DEFAULT \
+@@ -37,7 +37,7 @@
+ 	"name=recovery,size=64M,uuid=${uuid_gpt_recovery};" \
+ 	"name=cache,size=256M,uuid=${uuid_gpt_cache};" \
+ 	"name=super,size=1792M,uuid=${uuid_gpt_super};" \
+-	"name=userdata,size=12786M,uuid=${uuid_gpt_userdata};" \
++	"name=userdata,size=12722M,uuid=${uuid_gpt_userdata};" \
+ 	"name=rootfs,size=-,uuid=" ROOT_UUID
+ #endif
  
- 	return log_msg_ret("boot", ret);
-diff --git a/configs/am62x_a53_android.config b/configs/am62x_a53_android.config
-index adbe2b8e126f..2aca51e3a107 100644
---- a/configs/am62x_a53_android.config
-+++ b/configs/am62x_a53_android.config
-@@ -11,6 +11,7 @@ CONFIG_RANDOM_UUID=y # Needed for FASTBOOT_CMD_OEM_FORMAT
- CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- # Enable Android boot flow
- CONFIG_BOOTMETH_ANDROID=y
-+CONFIG_ANDROID_AB=y
- CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_MALLOC_LEN=0x08000000
- CONFIG_AVB_VERIFY=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index d111858082d5..6b8dedf20712 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -50,6 +50,7 @@ CONFIG_LOG_DEFAULT_LEVEL=6
- CONFIG_LOGF_FUNC=y
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_STACKPROTECTOR=y
-+CONFIG_ANDROID_AB=y
- CONFIG_CMD_CPU=y
- CONFIG_CMD_LICENSE=y
- CONFIG_CMD_SMBIOS=y
 
 -- 
 2.34.1
