@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F2BD3C533
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:13:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14113D3C538
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 23:14:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AF71890FD;
+	by phobos.denx.de (Postfix) with ESMTP id DDEEB89145;
 	Fri, 18 Oct 2024 01:11:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y1iGrzM5";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sgq+H/CS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E3CA89103; Fri, 18 Oct 2024 01:11:52 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 713D988DA0; Fri, 18 Oct 2024 01:11:52 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BAF188DA0
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF81189110
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:11:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6cbe9e8bbb1so10334256d6.1
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:48 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6cd7a2ed34bso1477346d6.2
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 16:11:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729206707; x=1729811507; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JrEGeSig1YoY8bRU2lHMG3se9opeY+SXTvFxzL2ksb8=;
- b=Y1iGrzM5LHPQ4SrvMVF3HxJl3NEHdKI/xz5xdl0MXdPcGhJpFH1WuMSrTrQ6+V8u41
- 8eELJV0gu8d0bps+pLAeHWJo4EWqDzQsZ/WCjueAqFg7hE6WYUkqK9sgefs/BO7ljFlo
- cl4VFqQ6fTb/+iJk4tFcSot2VeN2+js+KhcbA=
+ d=chromium.org; s=google; t=1729206708; x=1729811508; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:references
+ :in-reply-to:from:sender:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6v/txnv9vdL9mbBd2nIbB0j23Tr0cwstIumht+/MYB4=;
+ b=Sgq+H/CS35QdMMiWNylfiY0jxu4aDFe7ijsv88HeNAwHZXOP6N14/89i2urLnG5U/a
+ iAjuZYEYtCa9HJZNMx9EzRk3BvuDF/cz40Rlp4VliX/HWnsx13g1BUv2bPGakEu4xmss
+ 41eEYAM2hZHVpWlWNn7LyDKokpb5b+TaaEbIw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729206707; x=1729811507;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JrEGeSig1YoY8bRU2lHMG3se9opeY+SXTvFxzL2ksb8=;
- b=ElsI4ZEZDq1sW7EFvowgd+R1tcT4H31rwOrRp8u6orXj6Xk1dfJS0MF4iaMYcN84Ze
- IooSS/Lo9Lzj2FcPSbpD9VuBxI2xBVmZmWxBRYtNfJ8nXPR1XsPWesBNVJ/MbgNh9uIO
- hOu2azEKBHKfY2phSf7HKI9CnUnlurF1CcdS9VlCMAdnXvFP3+7Hj3QnAr6ZIyJNkNq5
- yXrRs7My99K7xY2fkFJ0TUujjFfGEz+8uR4YaF9Fp70GlrGm6jozffrVAcWNVIPcyDtA
- IdwvYw5PLWp7fiyogPyOF+mxIQmt6vfWbJDKcHAm+Rpixb7pNpxtV9xsCK3Gv4PGEKU9
- 0UXQ==
+ d=1e100.net; s=20230601; t=1729206708; x=1729811508;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:references
+ :in-reply-to:from:sender:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6v/txnv9vdL9mbBd2nIbB0j23Tr0cwstIumht+/MYB4=;
+ b=vdWce8Zzs4gJzlanxHovkUnB8xqoccSpoOMOnEQcmMxPjnIetihDR86B+9THemNzit
+ sXRUtfc7//l3iuE93sfPOFVOxGSAclAGdDEl+UnqCgjSgA/rmjVkInsy9VUlf8V8NP5m
+ BDQzqq+OHofhibf+TQGKvUK3VJzypGM1UevznKu6fNK92EFDgtdbobJ1ru3e6hllpzxL
+ MAEVhxAtY4+MhR6zsOU/RgBs1MWWAM7P/wlDygu1UJp7qT/o9xcgGDdD+jXQX8kNJht5
+ YPlcX04Uz4Co4XusgpSUcQC3Ol/vG8o1v1W9zVt/YsXTJUggtdRbdEQItLFzsqrOIDSw
+ 7qUA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWR9hkTi20rvTluzb0ZKWQ2Rnd0JfnTQHbQXNgpyZebOmszKLHgRP+p9jF0PrFK3ZauzlNcuac=@lists.denx.de
-X-Gm-Message-State: AOJu0YxYfj1OnGCPFD939uSzEUyrd50RBPHmypSQMhTglcQdvC9YRBaT
- gMpqlLNfM1py61J9dHwliMnbl8CEyWOSDCK886Dprbedmh5u2n6zQzUbackxR+mALqwimRBsk+S
- B9FAzJGhOyvvLS8L6SVQ6X2DfkTdkDL+0Xteu
-X-Google-Smtp-Source: AGHT+IGmZIfs0l14mBbb6Lv+zi4uddpS4RbXanD6BCq6bwTpJgam4qm722mH4U5VeYP+NBluUlegoksM1dcEQSifuww=
-X-Received: by 2002:a05:6214:3c9e:b0:6cc:2416:c247 with SMTP id
- 6a1803df08f44-6cde167f083mr8889976d6.49.1729206707458; Thu, 17 Oct 2024
- 16:11:47 -0700 (PDT)
+ AJvYcCV8TogOxNLfPtNIA041PHcyYOcob8M+lagdVPk4mCsWsLoVudJ48693HLzYe3C7j6KV554ReKk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwziJmUnyBdRwoJYwi5S5i29WeZS/ZfN4WQnGo/vwMLKMhHPiZn
+ RzNlm+sIYd1U1BBH92xK6yJTrL/uR5sR6ZiQEUCj+UdRNsV8JkP+ab7eCrM4px+z+Zuu2uXpxqu
+ e4KJrzyjcAdDS7UYAGY+ENcQAcwx3Dabmkhs7
+X-Google-Smtp-Source: AGHT+IF+WlOzRGJWBAWZOLxVP2JZ+5PX0Y5EDXBCYUfGsXea2Kz8SBx+h8XFJ0vo5IMygK0+xybn0K8gWq8W25e80Vs=
+X-Received: by 2002:a05:6214:4902:b0:6cc:458:8128 with SMTP id
+ 6a1803df08f44-6cde1662565mr5460476d6.53.1729206708604; Thu, 17 Oct 2024
+ 16:11:48 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 17 Oct 2024 16:11:47 -0700
+ HTTPREST; Thu, 17 Oct 2024 16:11:48 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241014223212.2212442-2-sjg@chromium.org>
-References: <20241014223212.2212442-2-sjg@chromium.org>
- <20241014223212.2212442-1-sjg@chromium.org>
-Date: Thu, 17 Oct 2024 16:11:47 -0700
-X-Google-Sender-Auth: z_hKaab_Cq6p4JV5H9dgTHCVqco
-Message-ID: <CAFLszThwDCinVqA25g5XufdMVZqwcZkxMom1X1Dcmj6VG3PtVQ@mail.gmail.com>
-Subject: Re: [PATCH v3 01/20] video: Add a dark-grey console colour
+In-Reply-To: <CAFLszThN1GbLJerc_4GST7iLORCK1E+jLR9kBRhpXGak_f-q2Q@mail.gmail.com>
+References: <CAFLszThN1GbLJerc_4GST7iLORCK1E+jLR9kBRhpXGak_f-q2Q@mail.gmail.com>
+ <20241005191353.1927660-1-andriy.shevchenko@linux.intel.com>
+ <20241005191353.1927660-4-andriy.shevchenko@linux.intel.com>
+ <CAFLszTjff52keqouqR3WK=cM=PX+EiTJQqz+YWBbDe3dSTYY8g@mail.gmail.com>
+ <ZwaOPy9NTV4PmY5E@black.fi.intel.com>
+Date: Thu, 17 Oct 2024 16:11:48 -0700
+X-Google-Sender-Auth: IGCS3Jo_76ABXXJuWgFyfXe8SGI
+Message-ID: <CAFLszTiL8uA7tRkeK3+KTnVD1uTs32cx0kMWfamZBhd5LoBQdQ@mail.gmail.com>
+Subject: Re: [PATCH v1 3/4] x86: cpu: Add a few prototypes to the header file
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  Bin Meng <bmeng.cn@gmail.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Nikhil M Jain <n-jain1@ti.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,18 +94,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is useful for highlighting something with a black background, as
-is needed with cedit when using a white-on-black console. Add this as
-a new colour.
+Hi Andy,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Wed, 9 Oct 2024 at 08:08, Andy Shevchenko
+<andriy.shevchenko@linux.intel.com> wrote:
+>
+> On Tue, Oct 08, 2024 at 07:55:33PM -0600, Simon Glass wrote:
+> > On Sat, 5 Oct 2024 at 13:14, Andy Shevchenko
+> > <andriy.shevchenko@linux.intel.com> wrote:
+> > >
+> > > The compiler is not happy to have no prototypes for the functions tha=
+t
+> > > are not defined static. Add them. This helps avoiding the compiler wa=
+rnings:
+> > >
+> > >   arch/x86/cpu/cpu.c:197:13: warning: no previous prototype for =E2=
+=80=98board_final_init=E2=80=99 [-Wmissing-prototypes]
+> > >   arch/x86/cpu/cpu.c:205:13: warning: no previous prototype for =E2=
+=80=98board_final_cleanup=E2=80=99 [-Wmissing-prototypes]
+> > >   arch/x86/cpu/cpu.c:307:5: warning: no previous prototype for =E2=80=
+=98reserve_arch=E2=80=99 [-Wmissing-prototypes]
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> Thanks!
+>
+> > OK, but could you add proper comments for these?
+>
+> Any proposed texts for them? The comments were out of scope of my patch,
+> but I may add anything that is provided as a template.
 
-(no changes since v1)
+I found some comments in one of the files, so you could use these as a
+base. Whenever you change code, you should make sure it has function
+comments, follows style, etc. That way things slowly get better.
 
- boot/scene.c                 | 2 +-
- drivers/video/video-uclass.c | 3 +++
- include/video.h              | 1 +
- 3 files changed, 5 insertions(+), 1 deletion(-)
+/*
+ * Implement a weak default function for boards that need to do some final =
+init
+ * before the system is ready.
+ */
+__weak void board_final_init(void)
+{
+}
+
+/*
+ * Implement a weak default function for boards that need to do some final
+ * processing before booting the OS.
+ */
+__weak void board_final_cleanup(void)
+{
+}
+
+Regards,
+Simon
 
 Applied to u-boot-dm, thanks!
