@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37CB8D2F7D7
-	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 00:24:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F93BD2F7D8
+	for <u-boot@archiver.kernel.org>; Thu, 17 Oct 2024 00:24:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8DD188E43;
-	Thu, 17 Oct 2024 02:24:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 209EB88E36;
+	Thu, 17 Oct 2024 02:24:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729124686;
-	bh=zy6Xe+Tosn7fu0i2WWjUUi/eF4/VMc7tUjlp+YHzLkc=;
+	s=phobos-20191101; t=1729124689;
+	bh=8Z3ETCYCLOh/kaKu5K1FGHRxW/6ZVFJNi9PErTAP0Gs=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Hoi1bg4+nNct8UUwxD5Ne8JUu9SwNm3YNvTTo5trXQmgUC6TQaDL+rnDes73YKAzm
-	 kge7YNo52gmOTOAquYNXJSOrUwylVGuNbW6wXQ2Oh7nQ6ooKzRFrKKHRBZsf+3rRLR
-	 EPAKtZMdshpT5cEJAxCEMWUvuhnGDRJuP9PlMhAAMHqylcQHyeCmMOlyeC7CA428su
-	 HVDaEBljgJmczyTfPfkKbp9Y0PP9rzwDHqpiFBASLe1wS7mlegtQ49u0IHCKYTzikS
-	 SqiZ1WY+m9iW7h7DQ9b2sv+ym2udnOJTSQArxwlpE1XXyM7txLXn+Vz965FIpxNkEo
-	 l8jrZ7FW7xHeA==
+	b=N7ps//uT+4UOTgpQSqp4VFhSpSEz8lEaEjYg7gX5UgZ+EBNwSw22Ob/KJFiTZHVJ4
+	 6d5ex0z4FDpShYZgRCMYRE2vW7T03BU/7/a+trQs19d+ZuXAwlUVgkhBfzla1iv+Zb
+	 e7xbRd/I6wOBSvag1LFuSzhdGhHJtByNrBNHkFBjgT+tw2nPTERpJwqgitPtkxInd3
+	 8OyXXVCvCB8HGTx0nCvGMgjoo5Rx97QSEoO5QR5YkeANich7bVMDmipj8uNSlkMjH4
+	 bCHaz2GIJT1989KeCveT0CyahQGkimD25j6IJU8aNggtN/sm1K2TvzRR0zTHCtEEaY
+	 2nC4HCvltZiiA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id EDE4388E21;
- Thu, 17 Oct 2024 02:24:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id A274288E2B;
+ Thu, 17 Oct 2024 02:24:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729124685;
- bh=zy6Xe+Tosn7fu0i2WWjUUi/eF4/VMc7tUjlp+YHzLkc=;
+ s=phobos-20191101; t=1729124686;
+ bh=8Z3ETCYCLOh/kaKu5K1FGHRxW/6ZVFJNi9PErTAP0Gs=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=bK58j7Tvfnn1aL2ZdZVaofTcvL5IHdvQomISRgC9nwlcA9p766WybkiTVqOS9Iseh
- mm7yfyXbur3wid1yVdH6SoNSh123vkNudxs0VFoZH37NdxYfTvGVWJvI0f7AY0lRNT
- WFOUHscUL5LTd8QFGH7iPFhLGr2BOvOGlokHg7TAGMZCExxK8783wcIsee505soH+s
- DcNBsyfgyIm7i9J9SOsNtCdd39hoKZESiB5aMfnBYt20W/hkZqCbrdp4AKOs+alesV
- 1GunzwP7NzucBEzE8dkJuD0f22IKnbe1WHzNIvuTmiZ5sBLGFKxf0TD/RPNzjgEahj
- VRasyLL6LgkRg==
-Message-ID: <26054b3d-c86c-458d-ba23-11f49843787a@denx.de>
-Date: Thu, 17 Oct 2024 02:14:24 +0200
+ b=G4TrsgkkfRd3fuetUl9gyOlgF+k9XKgwAqjNCye4mgVxUxCk8JkRvkJcf1KBSbnrd
+ c0snti+I+zwM1HSeZT4aVERriDLQ2VSycPYsjfNmd22KHeeFkedBRAuIc84gmeuLss
+ 9dPM+KD+7mn087PbznpBhknIxB4YdPDcF7yr5PA/OE8z7fX8IyfbNxSnrK2pSKba6Y
+ 3BuX4tyuwmC4aFtmZR52ubScfsTJYwVsUvHdrtaX1bwYUIYhqwaRUnRmmqpKjo0HAM
+ P4DyEmk+PQGCssg6VErqc9STBjy+K9DPCZyOJfjMG6Fdd87wbu1Qa5s50Aezuqje5s
+ hNkS9rhB+Np8w==
+Message-ID: <74bd0a6b-fe12-4e2c-af79-c1f8ffb7d484@denx.de>
+Date: Thu, 17 Oct 2024 02:22:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Add script to install U-Boot from SD/eMMC to
- SPI NOR on DH STM32MP15xx DHSOM
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20240930192343.59359-1-marex@denx.de>
- <dc0a0638-0724-46d1-99c7-ee8b84e5541b@foss.st.com>
- <92a9153c-c948-43bb-8542-163ec245c74d@denx.de>
- <81cabd9f-2c4b-4b1f-a15b-0830b75a3df8@foss.st.com>
+Subject: Re: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
+ EEPROM ID page on DH i.MX8MP DHCOM
+To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
+References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
+ <20241010132337.3259-2-cniedermaier@dh-electronics.com>
+ <934d25c2-39d8-4f51-b29e-8f20feb7431f@denx.de>
+ <a305b1455a984fca83de5a6c0d4b8dfc@dh-electronics.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <81cabd9f-2c4b-4b1f-a15b-0830b75a3df8@foss.st.com>
+In-Reply-To: <a305b1455a984fca83de5a6c0d4b8dfc@dh-electronics.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,40 +75,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/16/24 7:59 PM, Patrick DELAUNAY wrote:
+On 10/16/24 2:31 PM, Christoph Niedermaier wrote:
 
-Hello Patrick,
+[...]
 
->>> b) you are using "sf" command and not "mtd" to udpate SPI NOR ?
->>>
->>>
->>> the MTD command allows to use the MTD partition name, defined in DT,
->>> so no need to know offset in script (and avoid "sf probe")
->>>
->>> mtd erase fsbl1; mtd write fsbl1 ${loadaddr1} 0 ${filesize1} \
->>> mtd erase fsbl2; mtd write fsbl2 ${loadaddr1} 0 ${filesize1} \
->>> mtd erase uboot; mtd write uboot ${loadaddr} 0 ${filesize}
->> Can you also do 'sf update' alike operation with 'mtd' command? I 
->> don't think you can. The 'sf update' often does significantly speed up 
->> the SPI NOR update process, because SPI NOR erase operation is very 
->> slow, while SPI NOR read operation is fast, so if the update can read 
->> and then skip many blocks which are already in the SPI NOR and erase 
->> and write only the changed blocks, the update is often very fast too.
+>>> diff --git a/board/dhelectronics/common/dh_common.h b/board/dhelectronics/common/dh_common.h
+>>> index 4c22ece435..1baa45e340 100644
+>>> --- a/board/dhelectronics/common/dh_common.h
+>>> +++ b/board/dhelectronics/common/dh_common.h
+>>> @@ -6,6 +6,8 @@
+>>>    enum eip_request_values {
+>>>        MAC0,
+>>>        MAC1,
+>>> +     ITEM_NUMBER,
+>>> +     SN,
+>>
+>> Why is this patch not squashed into 1/2 ? It seems to be changing the
+>> same code.
 > 
+> The first patch add the reading for MAC address from the EEPROM ID
+> page and add the use of that addresses. The second extends the reading
+> to the serial number and the item number. So that the patch doesn't
+> get too big I found it useful to split it into two. Do you want me to
+> make one patch out of it?
+
+Yes please. Once you cache the EEPROM content, the patch would likely 
+get simpler anyway.
+
+[...]
+
+>>> +     ret = dh_get_value_from_eeprom_id_page(ITEM_NUMBER, item_number, sizeof(item_number),
+>>> +                                            "eeprom0");
+>>> +     if (ret) {
+>>> +             /*
+>>> +              * The function only returns the value -ENOENT for SoM rev.100, because
+>>> +              * the EEPROM ID page isn't available there. Therefore the output makes
+>>> +              * no sense and will be suppressed here.
+>>> +              */
+>>> +             if (ret != -ENOENT)
+>>> +                     printf("%s: Unable to get item number form EEPROM ID page! ret = %d\n",
+
+'form' typo
+
+>>> +                            __func__, ret);
+>>
+>> This will be printed on every device, even the ones without ID EEPROM,
+>> correct ? This should not be printed on devices without ID EEPROM. Also,
 > 
-> Good point....
+> This is suppressed by the -ENOENT check.
+
+Does i2c_eeprom_read() in dh_get_value_from_eeprom_id_page() return 
+-ENOENT in case the EEPROM is described in DT, but not populated on the 
+board ? I suspect it returns some other error code, -ETIMEDOUT or 
+-EINVAL maybe ?
+
+>> if (ret && ret != -ENOENT) {}
+>>
+>> works equally well without the extra indent.
 > 
-> an improve place for MTD command
+> I have an else to (ret) here not to (ret && ret != -ENOENT).
+> This would change the logic.
+
+} else if (!ret) { or similar should fix that, right ?
+
+Basically, the question is, can we avoid this two level deep indent ? I 
+think yes ?
+
+[...]
+
+>> Also, this shouldn't be repeatedly reading the EEPROM, the EEPROM read
+>> operation is the slow part, the EEPROM is 32 bytes, so the EEPROM should
+>> be read once and cached, and once the cache is populated all read
+>> accesses to the EEPROM should use the cache.
 > 
-> I will try to propose something for mtd command
-> 
-> 
-> and for the patch
-> 
-> 
-> Applied to u-boot-stm/master, thanks!
-btw look at doc/README.dfutftp , I use that to update R-Car boards which 
-also require multiple blobs at various offsets in HyperFlash (HF behaves 
-like a regular Parallel NOR). I can generate a fitImage which contains 
-the blobs and their offsets and then run dfu tftp to download the 
-fitImage from TFTP server and install the blobs automatically.
+> This is already covered in function dh_get_value_from_eeprom_id_page().
+It seems that function always calls
+ret = i2c_eeprom_read(dev, 0x0, eipa, sizeof(eipa));
+?
