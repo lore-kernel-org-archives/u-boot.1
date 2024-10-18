@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B459D3DEA4
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 17:56:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CD25D3DEA4
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 17:56:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A35DE88D9F;
-	Fri, 18 Oct 2024 19:55:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4123188C4D;
+	Fri, 18 Oct 2024 19:56:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QI1mKPvn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dPVYARoB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6D5488BEF; Fri, 18 Oct 2024 19:55:58 +0200 (CEST)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id 0EA7388DDE; Fri, 18 Oct 2024 19:56:01 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9635A88C4D
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 19:55:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E430E88C4D
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 19:55:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-7ea8d7341e6so1828825a12.3
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 10:55:56 -0700 (PDT)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-71ea2643545so984766b3a.3
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 10:55:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729274155; x=1729878955; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3ziPaQdDmEEK+UWukYnKF0HVAbQ7fTQ+5IoSkGiofLE=;
- b=QI1mKPvnTHdtC6BiwURGOLyQnKqgAdUQvD1c7YvP2nfC8fBu8j0xdiXtOJFt73a1hZ
- wpbnmQagAu/uEKwwf6AGCA921mNV9HOoRR2W2nQ09NN9QYY0WzAz8++cXVCP4lihyjmt
- iNxGYTYeSjEuoj0Cr+lwTrgf6pEagqnsP0tVW1v3uTFfYKG0iD3VlYfYaco4FcRRQcMu
- v8k2o5EDYWAIwMjveU8eLqAiRS7aL4YdSouZi7UFesSCvjuwL/1rLS+jRdD7HggB2UBP
- /qfGYf9kt/m+yQR5WZgYXtVQdOjhLaRffYDN454CKmn8rdHPO8WMQGFPaRz7KO2toUZT
- dqwQ==
+ d=gmail.com; s=20230601; t=1729274157; x=1729878957; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=alZnvxSfKa2LVhe7N6UnvTw94sAdT38ZFVvhSNGcAzk=;
+ b=dPVYARoBTZKMRKbMuNnS5F1LgAm+OpIX85qDDWq8NWC8jMKT3QMLd2+IOYg8EVc60O
+ KrFRdm0gnEewrh7O2irmBOgroWEJ5u58D43zgL79U1xO+h3pZRGnAsYE4HGgDZgBOiKe
+ A0StzPBm4rFkhWh8tTTCUrmPZEZoCdkIuKhcrvgVXqN/vuHtN79NVYqgzF6oyH/pjZg7
+ w0ixBjK3VPRG2edF6N1+YhV5f/UImG6/SN2Bjig1/jg7zIS4hK7X6ZzS8PIfPhbu0dEO
+ 6XQzbgVoMQLL27YvKOxjwvlDgD3SwwKFTHIj1mkvZj9r+ZtydtCmDTMxczo4DBcw0Qn0
+ bwtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729274155; x=1729878955;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3ziPaQdDmEEK+UWukYnKF0HVAbQ7fTQ+5IoSkGiofLE=;
- b=kvHx2dYpD9UWs0ljkqQ0V1yei73U4tx7z9xZ3vTyf9c/9ljcbsWRdzd4TLi/iiddQe
- NyxynOucjQ0WEuLx9GMpg2uTMr3v2rreWfyORTJRS9XIxHkcP//WmcY5LBLeStWR2JO2
- ncL37vXoT5YWnbSR7mwU+u1Q6ZGEe4dky1KyiLClihonoNRNu6ep4PjPfreQBdm9vq3m
- hGffNG3dMFeAMRzKbs2LRFuns2ijLh1Ybojhj5mDJF2MY+7ruLZ+VPmB+c1ZrWym1Cw1
- KP1FPAWo98Gnz1wg1yJgguUat+V2aa/n7ASujcA2M33wjPdlxY/vQqNAqGRtN9DKBe6g
- 0zBA==
-X-Gm-Message-State: AOJu0Yz5a5LPnGAgixGJ44KbN9zKTjj/T16Pq7/gjcBjGny98n8qLPxs
- 3ZVpyVEGYTwryagGCjG/s44d0mb5TFW+CfbueiMsPzgv02MeLpXs
-X-Google-Smtp-Source: AGHT+IFmZ8JbEv1IH6SLN6MRgYQidobUQFeRQR2IST0J0p/gGyW19K6sWi8Y7xAxJCAPhdxLqhoImQ==
-X-Received: by 2002:a05:6a20:b908:b0:1d9:2659:5da9 with SMTP id
- adf61e73a8af0-1d92c4dfc42mr3702042637.18.1729274155068; 
- Fri, 18 Oct 2024 10:55:55 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729274157; x=1729878957;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=alZnvxSfKa2LVhe7N6UnvTw94sAdT38ZFVvhSNGcAzk=;
+ b=mc2e4+Mbwp8facL9xc1DTTnzbsuds6/0R+F7keFIEPSmvivcmokfmtWxdVxTCej6pm
+ GjVmv2SGFdjTlncd4otVymJ/imzpjmB4SGt39WaLcN2qkM5NMB9M+J9PNGyP3OdCJkl6
+ cP+D+f8B8XGrv8aAvKDaqu5uQLJ4ujwf1XIB87kACKNpgBjLz86poCbNbzD8PIb2SdVD
+ 5wTiWyTCN3wlbF3HK7k/WQEMGJyPcmny7IVUySdNmIpjwGWbIjGL44plNhpaGSr7SuUV
+ zilxA/W7QCMOLpQm4S9XqRPWkdQoXVFICQDLQQIRejk85bi2gvGd1GRMcXRk+M0P43QP
+ kHZg==
+X-Gm-Message-State: AOJu0YxbM96gDbrqm1u/9xihwkrSzX7G/RGk7KZoVcDTnMJhtUVGhZ00
+ UUssNubHctFCdFXVMqyZrrG36h9tOxXG8BaJxbCzg1M6GFlCRHq89Vx4+w==
+X-Google-Smtp-Source: AGHT+IFhjHYZNMWf4IVj2HYkeT2irTgADEZf6ImQSdv8hRmQed1LhySoMn8Nli1eCxmV7s3Be5W1zg==
+X-Received: by 2002:a05:6a00:2302:b0:71e:5a1d:ecdc with SMTP id
+ d2e1a72fcca58-71ea31d2c22mr4663689b3a.17.1729274157229; 
+ Fri, 18 Oct 2024 10:55:57 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:ad3c:ece1:18ac:9bc9])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7eacc20d1bcsm1428408a12.9.2024.10.18.10.55.52
+ 41be03b00d2f7-7eacc20d1bcsm1428408a12.9.2024.10.18.10.55.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Oct 2024 10:55:54 -0700 (PDT)
+ Fri, 18 Oct 2024 10:55:56 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: peng.fan@nxp.com
 Cc: u-boot@lists.denx.de,
 	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH 1/2] mx6ul_14x14_evk: Remove unneeded USB board code
-Date: Fri, 18 Oct 2024 14:55:48 -0300
-Message-Id: <20241018175549.361096-1-festevam@gmail.com>
+Subject: [PATCH 2/2] mx6ul_14x14_evk: Convert to watchdog driver model
+Date: Fri, 18 Oct 2024 14:55:49 -0300
+Message-Id: <20241018175549.361096-2-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241018175549.361096-1-festevam@gmail.com>
+References: <20241018175549.361096-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,108 +94,36 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@denx.de>
 
-With CONFIG_DM_USB, there is no longer the need for any USB board code
-anymore.
-
-Remove the unneeded USB board code.
-
-While at it, also remove the uneeeded CONFIG_USB_MAX_CONTROLLER_COUNT
-option.
+Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+the 'reset' command in U-Boot to not cause a board reset.
+    
+Fix it by switching to the watchdog driver model via sysreset, which
+is the preferred method for implementing the watchdog reset.
 
 Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
- .../mx6ul_14x14_evk/mx6ul_14x14_evk.c         | 51 -------------------
- configs/mx6ul_14x14_evk_defconfig             |  1 -
- 2 files changed, 52 deletions(-)
+ configs/mx6ul_14x14_evk_defconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/board/freescale/mx6ul_14x14_evk/mx6ul_14x14_evk.c b/board/freescale/mx6ul_14x14_evk/mx6ul_14x14_evk.c
-index c4ab59da78c7..fbb5a12212d7 100644
---- a/board/freescale/mx6ul_14x14_evk/mx6ul_14x14_evk.c
-+++ b/board/freescale/mx6ul_14x14_evk/mx6ul_14x14_evk.c
-@@ -31,8 +31,6 @@
- #include <power/pmic.h>
- #include <power/pfuze3000_pmic.h>
- #include "../common/pfuze.h"
--#include <usb.h>
--#include <usb/ehci-ci.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -155,49 +153,6 @@ int board_mmc_init(struct bd_info *bis)
- }
- #endif
- 
--#ifdef CONFIG_USB_EHCI_MX6
--#ifndef CONFIG_DM_USB
--
--#define USB_OTHERREGS_OFFSET	0x800
--#define UCTRL_PWR_POL		(1 << 9)
--
--static iomux_v3_cfg_t const usb_otg_pads[] = {
--	MX6_PAD_GPIO1_IO00__ANATOP_OTG1_ID | MUX_PAD_CTRL(OTG_ID_PAD_CTRL),
--};
--
--/* At default the 3v3 enables the MIC2026 for VBUS power */
--static void setup_usb(void)
--{
--	imx_iomux_v3_setup_multiple_pads(usb_otg_pads,
--					 ARRAY_SIZE(usb_otg_pads));
--}
--
--int board_usb_phy_mode(int port)
--{
--	if (port == 1)
--		return USB_INIT_HOST;
--	else
--		return usb_phy_mode(port);
--}
--
--int board_ehci_hcd_init(int port)
--{
--	u32 *usbnc_usb_ctrl;
--
--	if (port > 1)
--		return -EINVAL;
--
--	usbnc_usb_ctrl = (u32 *)(USB_BASE_ADDR + USB_OTHERREGS_OFFSET +
--				 port * 4);
--
--	/* Set Power polarity */
--	setbits_le32(usbnc_usb_ctrl, UCTRL_PWR_POL);
--
--	return 0;
--}
--#endif
--#endif
--
- #ifdef CONFIG_FEC_MXC
- static int setup_fec(int fec_id)
- {
-@@ -284,12 +239,6 @@ int board_init(void)
- 	setup_fec(CFG_FEC_ENET_DEV);
- #endif
- 
--#ifdef CONFIG_USB_EHCI_MX6
--#ifndef CONFIG_DM_USB
--	setup_usb();
--#endif
--#endif
--
- #ifdef CONFIG_FSL_QSPI
- 	board_qspi_init();
- #endif
 diff --git a/configs/mx6ul_14x14_evk_defconfig b/configs/mx6ul_14x14_evk_defconfig
-index bbeb364e256c..522c5660d72c 100644
+index 522c5660d72c..9fbd2c648bc7 100644
 --- a/configs/mx6ul_14x14_evk_defconfig
 +++ b/configs/mx6ul_14x14_evk_defconfig
-@@ -92,7 +92,6 @@ CONFIG_SOFT_SPI=y
+@@ -89,6 +89,9 @@ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_FSL_QSPI=y
+ CONFIG_SOFT_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_WATCHDOG=y
++CONFIG_SYSRESET_WATCHDOG_AUTO=y
  CONFIG_IMX_THERMAL=y
  CONFIG_USB=y
  CONFIG_SPL_USB_HOST=y
--CONFIG_USB_MAX_CONTROLLER_COUNT=2
- CONFIG_USB_STORAGE=y
- CONFIG_USB_GADGET=y
- CONFIG_SPL_USB_GADGET=y
+@@ -107,3 +110,4 @@ CONFIG_VIDEO_MXS=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_IMX_WATCHDOG=y
 -- 
 2.34.1
 
