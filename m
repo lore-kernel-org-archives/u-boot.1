@@ -4,74 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43CE5D30004
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 13:00:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6307D30006
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 13:11:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DD6088FB9;
-	Fri, 18 Oct 2024 15:00:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0CEFB88FB9;
+	Fri, 18 Oct 2024 15:11:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GG3FhahW";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="qBwXaIZ7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D097E88FBA; Fri, 18 Oct 2024 15:00:14 +0200 (CEST)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F3D0488FBA; Fri, 18 Oct 2024 15:11:28 +0200 (CEST)
+Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 561E288FA4
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 15:00:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2e06acff261so1504987a91.2
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 06:00:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729256411; x=1729861211; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mtGmOpYSJdpkPGFfzC8uNJ2InbfvlPBMC27qj1NzGkI=;
- b=GG3FhahWdKd5asSkITcVDYxVQYH3Du5tUN3aFBOp3DaBbrRVf4Xnee6KE3iUJxEN1Y
- YhG7yieZaX4Du2mYaUrOoUOBc06NYhF+aHO+0l3U1FgUJIPzpsBzIgIaszOnFN1joOCp
- 9Fzl+G/y/7sAmgdWkzbTk3BGNDBo7agOaq1OnvflYbC5iQUNfEwcmNSTZ8He+6onvLuP
- 94FJoYuU/r5O42McvrIidLL9J/hmSX9stzwdCbC3Qunv1o3Do4O01BaclsS1D9dKYTrB
- V68xjaXllUvDmxfHP9eSnQVeV3MbQcwP3Y8n+4EIhReUQ9bTkc2epvZcY4x7auvwPzLV
- zwKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729256411; x=1729861211;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mtGmOpYSJdpkPGFfzC8uNJ2InbfvlPBMC27qj1NzGkI=;
- b=wdAu09n79q4fGy99Hru61igJ5+cZrFC3XuTxYD6L2DjZb0iAdyuFjtIGyFNLshm9fZ
- ty/J0gheopeIVCbgayIh0+ijR8MXe7Fx2Xr4s7YgEokJExr7yJzf0CpRRTL8yz3m2xn1
- vnDFwYJlyw+VLZb7AxPAdOOARKL2m3l4DdSwBo2U1303iq50+6K7SRRDr7zaPHyYiU9G
- PDC1N3Ik+03gzrPSiQaVXZZa/hF6pdE7lWh7cei41kO00Ic9gCVe21VSXrkJsGks93BJ
- 7+a/kP84NplgnFrtIa3zvTsokF/MMCcuep7NBTqBQS3JVYWarVVNRDcnQAq0ZbhtGo2o
- swYg==
-X-Gm-Message-State: AOJu0YyyD3+IWGHGO8d7UFCRthBt5yBEntodBZNdm6taRn4vzrXJANgb
- 5l1Z5YKkUkrpBFhokAwmgHPJDclH8F8GW/eKJhjXmlTGtxFQfVEQ
-X-Google-Smtp-Source: AGHT+IGvNYQMpawEFBFsyeEzbAxyHWVhm551B3sIyD/OGGvct1to9u25u1FN6j9q/WU6gTTVxu8zRg==
-X-Received: by 2002:a17:90b:4a0c:b0:2e2:b3f8:b549 with SMTP id
- 98e67ed59e1d1-2e561650b59mr3022124a91.23.1729256410691; 
- Fri, 18 Oct 2024 06:00:10 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:96e7:fa57:5ef0:9a46:ef82])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e5611d601esm1788497a91.21.2024.10.18.06.00.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Oct 2024 06:00:10 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL v2] Please pull u-boot-imx-master-20241018a
-Date: Fri, 18 Oct 2024 10:00:06 -0300
-Message-Id: <20241018130006.257215-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id EDB9088D47
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 15:11:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 095D5148AC13; Fri, 18 Oct 2024 15:11:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
+ t=1729257086; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=Jh+pWc88OJbme/PpZal2QO3omVvP9asa+zrWpG4k1Fs=;
+ b=qBwXaIZ7PmqE4sEqOyd54dVIErq5to1TCH7WBiO8pmKNvfh+/KMmqNJ4tkarKuYJPqgKMM
+ YKxnJk+ccBvUsuiLCKXqvgNgm0uZvuOk3NNTIfopDCMO9ZGD7lbsrvpCkQP8hbiFe6Bd0l
+ tD1qkRfi3EenxBlWjgtmNyUPcwlvw/1Q9pzj1rurmziclMH12Fn1FQceyIPiqH6IbshYAY
+ tJOZ1v3i1TP+H+jU4dZ9YkAXhdfV0lKi4zf3VBflNZGrRX/QCl9KiuK8LyqG3raCIw/sLD
+ KNyyJ8j5p7A9kexSJFyRk176qugcmXlk1JEvsjVbGGwESifVrgMqXjvmTSsAVQ==
+Date: Fri, 18 Oct 2024 15:11:20 +0200
+From: Alexander Dahl <ada@thorsis.com>
+To: Benedikt Spranger <b.spranger@linutronix.de>
+Cc: u-boot@lists.denx.de, John Ogness <john.ogness@linutronix.de>
+Subject: Re: [PATCH 0/5] collected fallout of porting an ATSAMA5D27 based board
+Message-ID: <20241018-unsubtle-yield-8ac617356e92@thorsis.com>
+Mail-Followup-To: Benedikt Spranger <b.spranger@linutronix.de>,
+ u-boot@lists.denx.de, John Ogness <john.ogness@linutronix.de>
+References: <20241018083006.10349-1-b.spranger@linutronix.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241018083006.10349-1-b.spranger@linutronix.de>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,60 +65,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hello Benedikt,
 
-Please pull from u-boot-imx/master, thanks.
+Am Fri, Oct 18, 2024 at 10:30:00AM +0200 schrieb Benedikt Spranger:
+> Hi,
+> 
+> while porting an ATSAMA5D2 based board (booting from NAND flash with UBI)
+> I stumbled over generic, NAND- and UBI related asperity:
+> 
+> 1. tiny-printf does not handle NULL arguments to '%s' in a proper way
+> 2. vtbl_check() has an useless debug output due to a typo
+> 3. NAND: An informative output fails badly, if the NAND vendor is unknown
+> 4. the nand_atmel driver lacks a vital initialisation
+> 
+> OK, you might say the nand_atmel NAND driver is obsolete, but it was the
+> only solution to get booting from NAND running. The new DM based NAND driver
+> refused to do anything usefull, so I dropped it after spending a couple of
+> days debugging it:
 
-The following changes since commit 608a31bdec6284ad6f821226e4c62c9cd3052874:
+Strange.  I have at least three different boards with SAMA5D27
+successfully booting from NAND flash with the new DM based driver
+(unfortunately none of them upstreamed, which also won't change in the
+foreseeable future, sorry).
 
-  Merge patch series "Introduce the lwIP network stack" (2024-10-16 11:11:57 -0600)
+Do you use at91bootstrap as 2nd level bootloader like me or something
+else?  For me it was basically getting the dts for U-Boot correct, but
+I got that running with all U-Boot releases since 2023.04 up to
+2024.10.  Could you share some more detail?
 
-are available in the Git repository at:
+> <RANT>brilliant!</RANT>
 
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20241018a
+Did you talk with Microchip about it?
 
-for you to fetch changes up to 9b1cecdd9b6eaf22c4fa268430669ceff0c48786:
+Greets
+Alex
 
-  cpu: imx8_cpu: Avoid revision to corrupt device tree (2024-10-18 09:41:09 -0300)
-
-u-boot-imx-master-20241018a
----------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/22796
-
-- Switch to using upstream DT on DH i.MX8MP DHCOM PDK2/PDK3.
-- Add ability to build fallback DTBOs from arch/$(ARCH)/dts.
-- Remove fdt_high and initrd_high env variables from imx6-dhcom.
-- Add dummy clk for imx8.
-- Fix DT corruption in imx8_cpu.
-- Improve DDR stability on pico-imx7d.
-----------------------------------------------------------------
-Marek Vasut (3):
-      dts: Add ability to build fallback DTBOs from arch/$(ARCH)/dts
-      arm64: dts: imx: Switch to using upstream DT on DH i.MX8MP DHCOM PDK2/PDK3
-      ARM: dts: imx6-dhcom: Remove fdt_high and initrd_high env variables
-
-Peng Fan (2):
-      clk: imx8: Add dummy clk
-      cpu: imx8_cpu: Avoid revision to corrupt device tree
-
-Ray Chang (1):
-      pico-imx7d: Increase ODT resistor value
-
- Makefile                            |   4 +
- arch/arm/dts/Makefile               |   2 -
- arch/arm/dts/imx8mp-dhcom-pdk2.dts  | 158 ------------------
- arch/arm/dts/imx8mp-dhcom-pdk3.dts  | 317 ------------------------------------
- board/technexion/pico-imx7d/spl.c   |  10 +-
- configs/imx8mp_dhcom_pdk2_defconfig |   6 +-
- configs/imx8mp_dhcom_pdk3_defconfig |   6 +-
- drivers/clk/imx/clk-imx8qm.c        |   4 +
- drivers/clk/imx/clk-imx8qxp.c       |   4 +
- drivers/cpu/imx8_cpu.c              |  32 ++--
- dts/Kconfig                         |  16 ++
- dts/Makefile                        |  14 +-
- include/configs/dh_imx6.h           |   3 +-
- scripts/Makefile.dts                |   6 +
- 14 files changed, 78 insertions(+), 504 deletions(-)
- delete mode 100644 arch/arm/dts/imx8mp-dhcom-pdk2.dts
- delete mode 100644 arch/arm/dts/imx8mp-dhcom-pdk3.dts
+> 
+> 
+> 
+> regards
+>     Benedikt Spranger
+> 
+> Benedikt Spranger (5):
+>   tiny-printf: Handle NULL pointer argument to %s
+>   drivers/mtd/ubispl/ubispl.c: Fix error message
+>   mtd: nand: raw: Fix potential NULL pointer dereference
+>   mtd: nand: Update NAND manufacturer Ids
+>   mtd: nand: raw: atmel_nand: Add missing nand_scan_ident()
+> 
+>  drivers/mtd/nand/raw/atmel_nand.c |  4 ++++
+>  drivers/mtd/nand/raw/nand_base.c  |  8 ++++----
+>  drivers/mtd/nand/raw/nand_ids.c   | 22 ++++++++++++----------
+>  drivers/mtd/ubispl/ubispl.c       |  2 +-
+>  include/linux/mtd/rawnand.h       | 23 +++++++++++++----------
+>  lib/tiny-printf.c                 |  2 +-
+>  6 files changed, 35 insertions(+), 26 deletions(-)
+> 
+> -- 
+> 2.45.2
+> 
