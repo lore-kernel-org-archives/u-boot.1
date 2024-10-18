@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B7D6D30016
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 15:01:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C700DD30016
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 15:03:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD2EF892A2;
-	Fri, 18 Oct 2024 17:01:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4CF14891F8;
+	Fri, 18 Oct 2024 17:03:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mh0WXxif";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bD2JGvIu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 720F589262; Fri, 18 Oct 2024 17:01:29 +0200 (CEST)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id 9DA6E891F8; Fri, 18 Oct 2024 17:03:09 +0200 (CEST)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6180B89261
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 17:01:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3FC889057
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 17:02:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2e2dc61bc41so1594250a91.1
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 08:01:18 -0700 (PDT)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-20ceb8bd22fso19395285ad.3
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 08:02:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729263677; x=1729868477; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729263778; x=1729868578; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=okRYT8hBSezbWqePoELOLAE40+eUg2XZ5B8BmGIaFkw=;
- b=mh0WXxifVeq4ZMaZHwLcQtuXzSxNlf0ckfngVJrBFuWYDiiSXqo9pMEZKm48uyeHCA
- O4Nvnf0RqT2V7v45kz8o2mrYn3yR4N2WjMdqp0plvRx5xRfCcvo8WE5fucTEApLDVism
- zMvWaN1OJDIi03eDybzY/7aMOtcuAYzdl72B4=
+ bh=7uS8o8mUxjW0Zui+76BUGkhwAcJAH7BQnIx7GZmqPP0=;
+ b=bD2JGvIuAL3XwU8KdbHaYrdHDePwRiCXdKSDeyEoIvOXC3sPGCL9CjJJB2HcWESNIZ
+ k7XXPbtIYiVMinROot3XOGnx6ydItmTTbhiJLHybwIibXLSs/oXLfjcxhfJ7yaDaME3F
+ YDTWUEimoWEoZ+MpSmn6V9UOYwdozfA/vGCD0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729263677; x=1729868477;
+ d=1e100.net; s=20230601; t=1729263778; x=1729868578;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=okRYT8hBSezbWqePoELOLAE40+eUg2XZ5B8BmGIaFkw=;
- b=ZEn0hh1b3+ucIEWvhPWNeoWtccANOjRbhdd6xAvVKVT5NLz2OAaqh6LjAAER+8qzX5
- DAqpcO1hdXKxqbuXHnoTC/nw5qfQe5IznI/fLz1gzohSXu7Mm6YqhNCpfQHL0eYrE123
- GLsA62gzfLjLyuHxhpaWSjZ9TTv/BAp49lXr8JkbHkqjFWdDl1dTP8xAPgJfhwFgYjvx
- IjaggzTxDRbwJTg+Rt6M5EsXAdgDTiSumgSl4UyIgh3IpaiIaZmgxfzCb4zlgqlhkJh8
- it3xECyaulXv9M9ewE7bvK9oXB3MVeBQ8alyulrVg9UmRKSw4XNpbdFAVTYbHdCC+/pW
- 9Vrw==
-X-Gm-Message-State: AOJu0YwoCcqZnWAvvovhhT05IyYal1zG7LJeRLP1q7nDOIy0jKr7t97z
- Ab0gWH8boF7LJMseRaWTq2zEyqhu4bv0TC8IfK5H4bhmmjCdywy4AmfkkbBnom8YUPcfmyxyk5J
- cAg+Vbv2yvZaZlb+zZJaeLIBUTXN1BUIgcSOW
-X-Google-Smtp-Source: AGHT+IEgTWNFH4ijnIKo2ox0Zj9YKOVOv7F4unEvR89L+bFTJkDp5FN5e+1GgSeugahua7Qn65bIq6IYfV0Bu+TrhzM=
-X-Received: by 2002:a17:90b:3bcd:b0:2e2:d3f6:6efc with SMTP id
- 98e67ed59e1d1-2e5618cec6amr3168075a91.28.1729263676817; Fri, 18 Oct 2024
- 08:01:16 -0700 (PDT)
+ bh=7uS8o8mUxjW0Zui+76BUGkhwAcJAH7BQnIx7GZmqPP0=;
+ b=Tz22d9CxuVDqO5bNlYTigS7Z3GSfBsFJ4MmUU7E31VU7WWo1iJ5c1Ccn8A3IX5GCqs
+ hNWS/SxIw5pDShHFYjCW5qogX6lsohYt2YPqr/myM8mO8Rpy76DpG/Utn0baHCg4l2Ow
+ wEFTlT7K6Q++rqIj1mFF7kSoLg7iyRQ9keVLPGDylpmvmeWhl9u7f3lotnicDb4zWgNv
+ 3TVyGC+SkaYzTX/gZVvC9BZ/jox0biZS0BNj7j0uBE9Gz1iu+go+AKSGLSKnSvYX0DyD
+ hyLSOg/8Ta0hmVMGgOEuyWX4Aef5v3wkakxC/DYwEgnIqICsBYRVMFMROlOSBKGgiIHO
+ 26Fg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXU+cCdFQAsdTj683UMui1UPj6VlxtpcVsPvsjgqA07alJt8BS3UNsjohCiYoCZthnF+5e02XY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyh6wvsm5I0WNT0Ur7zNSQy8o5YzX4xGoyk7Lh5NdQraELLJoMD
+ VPBJc1ES7HboP4xyw3aRd/l6fYr/CAubIdsH8wtfWKqq/VOXWQYTtNwFL4PvbcoMfAc9X7e5InM
+ f5lRk++WLsOUimg9L9iWEAbVs+p8Th50tvO4I
+X-Google-Smtp-Source: AGHT+IEx4vKwBn5k9gEWQ8hpvoosHflKD+W44teVajCfJ5GpVf8f72ZlTXJUKUmnTmEygi+vLnJ8cMtkgqP1hz/z7v0=
+X-Received: by 2002:a17:90b:120c:b0:2e5:5ff9:bee1 with SMTP id
+ 98e67ed59e1d1-2e5618d0e13mr2847504a91.29.1729263778249; Fri, 18 Oct 2024
+ 08:02:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241017232413.724808-1-sjg@chromium.org>
- <20241017232413.724808-24-sjg@chromium.org>
- <0B48F871-BDD8-4810-ADA3-4F6C4E403B0C@gmx.de>
-In-Reply-To: <0B48F871-BDD8-4810-ADA3-4F6C4E403B0C@gmx.de>
+References: <20240926215950.1265143-1-sjg@chromium.org>
+ <20240926215950.1265143-7-sjg@chromium.org>
+ <56ceb77c-efcb-40cb-a497-0952a8457950@gmx.de>
+ <CAFLszThLt96h=+28HaD3LmUk-wgj6mnQFav40ndxTxXVZDQw7g@mail.gmail.com>
+ <20241018001734.GR4959@bill-the-cat>
+ <CAFLszThZY6fOOYovYV2KdQHpZ-1q9RK1HyZxrCY8AJ8MYceeXA@mail.gmail.com>
+ <F7608772-31A8-4F25-9FAB-3D4E194C0E88@gmx.de>
+In-Reply-To: <F7608772-31A8-4F25-9FAB-3D4E194C0E88@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 18 Oct 2024 09:01:03 -0600
-Message-ID: <CAFLszTjF-kg5E+sV+CkFjStmS2YyJiPa59zOWWZxd2J5yOwftA@mail.gmail.com>
-Subject: Re: [PATCH 23/34] bootstd: Maintain a list of images
+Date: Fri, 18 Oct 2024 09:02:47 -0600
+Message-ID: <CAFLszThoC_wQwx_VYDF+86gp6YByZdvaPrfugwpKi94oCxK=vA@mail.gmail.com>
+Subject: Re: [PATCH v6 06/12] efi: Use the same filename for all sandbox builds
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Julien Masson <jmasson@baylibre.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Nam Cao <namcao@linutronix.de>,
- Quentin Schulz <quentin.schulz@cherry.de>, Shantur Rathore <i@shantur.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,124 +93,121 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Thu, 17 Oct 2024 at 22:07, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Thu, 17 Oct 2024 at 21:45, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 >
 >
-> Am 18. Oktober 2024 01:24:02 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> >We want to keep track of images which are loaded, or those which could
-> >perhaps be loaded. This will make it easier to manage memory allocation,
-> >as well as permit removal of the EFI set_efi_bootdev() hack.
+> Am 18. Oktober 2024 05:05:08 MESZ schrieb Simon Glass <sjg@chromium.org>:
+> >Hi Tom,
+> >
+> >On Thu, 17 Oct 2024 at 18:17, Tom Rini <trini@konsulko.com> wrote:
+> >>
+> >> On Thu, Oct 17, 2024 at 05:23:19PM -0600, Simon Glass wrote:
+> >> > Hi Heinrich,
+> >> >
+> >> > On Mon, 30 Sept 2024 at 17:23, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >> > >
+> >> > > On 26.09.24 23:59, Simon Glass wrote:
+> >> > > > Sandbox is not a real architecture, but within U-Boot it is real enough.
+> >> > > > We should not need to pretend it is x86 or ARM anywhere in the code.
+> >> > > >
+> >> > > > Also we want to be able to locate the sandbox app using a single
+> >> > > > filename, 'bootsbox.efi', to avoid needing tests to produce different
+> >> > > > files on each host architecture.
+> >> > > >
+> >> > > > Drop the confusing use of host architecture and just let sandbox be
+> >> > > > sandbox.
+> >> > >
+> >> > > As I already wrote in
+> >> > > https://lore.kernel.org/u-boot/ae1cf1fa-766e-46a0-8ef9-2c2c7af73d9e@gmx.de/
+> >> > > this patch should not be merged.
+> >> > >
+> >> > > bootsbx.efi does not exist in the UEFI specification.
+> >> >
+> >> > If that is of concern I can get it added. Let me know.
+> >> >
+> >> > >
+> >> > > Without this patch I can test that shim work and grub are correctly
+> >> > > loaded from a distro image. This patch makes the sandbox misbehave.
+> >> >
+> >> > Why don't you do that with QEMU?
+> >> >
+> >> > If we want sandbox to do this, I could add a way for sandbox to select
+> >> > its architecture. But this patch is correct, sorry. It is basically a
+> >> > revert of your patch:
+> >> >
+> >> > 3a0654ecd0d efi_loader: correctly identify binary name
+> >> >
+> >> > Let me know if you would like a selection mechanism and I'll see what I can do.
+> >>
+> >> I'm confused. It sounds like Heinrich is using sandbox to test on
+> >> various hosts, how U-Boot behaves, without relying on "just test in
+> >> QEMU". I don't see how this disconnects from your usual request on how
+> >> to use sandbox for further testing. What is breaking for you, Simon, by
+> >> us saying that the host instruction set determines what we load and run
+> >> (and so, is portable whereas saying "sandbox" is not, between x86 hosts,
+> >> arm64 hosts and riscv64 hosts).
+> >
+> >This:
+> >
+> >Also we want to be able to locate the sandbox app using a single
+> >filename, 'bootsbox.efi', to avoid needing tests to produce different
+> >files on each host architecture.
+>
+> As I wrote before:
+>
+> The UEFI specification prescribes the naming of the default boot binary. Deviating from the specification should be avoided.
 
-I'll change this 'hack' to 'feature'.
+As I said before, I'm happy to get this added to the spec, if it
+helps. It is a real use case.
 
 >
-> Please, keep in mind that files can be loaded manually, e.g. via the dhcp, the wget, and the loady commands. These are outside bootflows.
+> Anyway you need different images per host architecture. Writing a single switch statement to derive the default EFI binary name from the OS architecture does not look like an undue burden.
 
-Yes, this series is only going to help if bootstd is used. For ad-hoc
-use, EFI will need to rely on the above feature, at least until
-someone can think of another solution.
+Yes, it is easy, but it is taking sandbox in a strange direction. It
+becomes a hybrid of a host architecture and a U-Boot architecture,
+which is then going to lead to all sorts of strange conversations. At
+present it is pretty clear. So I want to head this off at the pass.
+
+I did not get a chance to review the original patch, of which this is
+essentially a revert. It has actually bitten me in a few areas.
 
 >
-> No matter how an EFI binary is loaded, we have to create the matching device path. This requires knowledge of the source device and the  filepath or URL. Please, ensure that you gather all necessary information.
+> The sandbox should remain able to start GRUB from a distro image for the host architecture.
+>
+> The sandbox is not a fake architecture but can be considered a valid testbed for host native EFI binaries including GRUB, the kernel stub, the stubs of UKI images, and the EFI SCT.
 
-OK I'll send a little series which shows how this can work. I had
-thought it was understood already, but your comment helps explain why
-no one has done it yet. In brief, the main advantage of bootstd over
-the scripts is that it has a full understanding of what is going on.
+I have to say that I wrote sandbox and I know what it is for. It
+wasn't designed to run binaries built outside of U-Boot, or anything
+of the sort. That said, as I mentioned, I should be able to make
+something work here.
+
+To help me come up with a solution, can you please send your workflow
+/ commands for the testing you do? Also, what architectures do you do
+this with?
+
+My approach to U-Boot is that code needs to land, one way or another,
+perhaps with some changes for the use case that is thrown up, or
+perhaps done another way. But please try to consider this approach to
+Open Source too.
+
+Regards,
+Simon
+
 
 >
 > Best regards
 >
 > Heinrich
 >
+>
 > >
-> >Add a list of these, attached to the bootflow. For now the list is
-> >empty.
+> >The idea of using sandbox to run native EFI apps is new to me, but it
+> >sounds great, if it will get us more tests in this area.
 > >
-> >Signed-off-by: Simon Glass <sjg@chromium.org>
-> >---
-> >
-> > boot/bootflow.c    |  7 +++++++
-> > include/bootflow.h | 21 +++++++++++++++++++++
-> > 2 files changed, 28 insertions(+)
-> >
-> >diff --git a/boot/bootflow.c b/boot/bootflow.c
-> >index 72b51ebd49b..10bda8eac79 100644
-> >--- a/boot/bootflow.c
-> >+++ b/boot/bootflow.c
-> >@@ -455,10 +455,13 @@ void bootflow_init(struct bootflow *bflow, struct udevice *bootdev,
-> > bflow->dev = bootdev;
-> > bflow->method = meth;
-> > bflow->state = BOOTFLOWST_BASE;
-> >+ alist_init_struct(&bflow->images, struct bootflow_img);
-> > }
-> >
-> > void bootflow_free(struct bootflow *bflow)
-> > {
-> >+ struct bootflow_img *img;
-> >+
-> > free(bflow->name);
-> > free(bflow->subdir);
-> > free(bflow->fname);
-> >@@ -467,6 +470,10 @@ void bootflow_free(struct bootflow *bflow)
-> > free(bflow->os_name);
-> > free(bflow->fdt_fname);
-> > free(bflow->bootmeth_priv);
-> >+
-> >+ alist_for_each(img, &bflow->images)
-> >+ free(img->fname);
-> >+ alist_empty(&bflow->images);
-> > }
-> >
-> > void bootflow_remove(struct bootflow *bflow)
-> >diff --git a/include/bootflow.h b/include/bootflow.h
-> >index 9b24fb5c3eb..3d9a9e2025a 100644
-> >--- a/include/bootflow.h
-> >+++ b/include/bootflow.h
-> >@@ -7,7 +7,9 @@
-> > #ifndef __bootflow_h
-> > #define __bootflow_h
-> >
-> >+#include <alist.h>
-> > #include <bootdev.h>
-> >+#include <image.h>
-> > #include <dm/ofnode_decl.h>
-> > #include <linux/list.h>
-> >
-> >@@ -85,6 +87,7 @@ enum bootflow_flags_t {
-> >  * @cmdline: OS command line, or NULL if not known (allocated)
-> >  * @x86_setup: Pointer to x86 setup block inside @buf, NULL if not present
-> >  * @bootmeth_priv: Private data for the bootmeth
-> >+ * @images: List of loaded images (struct bootstd_img)
-> >  */
-> > struct bootflow {
-> > struct udevice *dev;
-> >@@ -109,6 +112,24 @@ struct bootflow {
-> > char *cmdline;
-> > void *x86_setup;
-> > void *bootmeth_priv;
-> >+ struct alist images;
-> >+};
-> >+
-> >+/**
-> >+ * struct bootflow_img - Information about an image which has been loaded
-> >+ *
-> >+ * This keeps track of a single, loaded image.
-> >+ *
-> >+ * @fname: Filename used to load the image (allocated)
-> >+ * @type: Image type (IH_TYPE_...)
-> >+ * @addr: Address to which the image was loaded, 0 if not yet loaded
-> >+ * @size: Size of the image
-> >+ */
-> >+struct bootflow_img {
-> >+ char *fname;
-> >+ enum image_type_t type;
-> >+ ulong addr;
-> >+ ulong size;
-> > };
-> >
-> > /**
+> >But sandbox is sandbox. It is not (x86, arm, riscv). It is a fake
+> >architecture that we use in U-Boot. I've offered to create a way to
+> >get the behaviour that Heinrich wants, so let's see what he says.
 
 Regards,
 SImon
