@@ -4,57 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3096D3C54D
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 05:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51BBDD3C54C
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 05:49:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BB4A891E0;
-	Fri, 18 Oct 2024 07:35:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 965E68904B;
+	Fri, 18 Oct 2024 07:49:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="Q7GOcJ/x";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="A9cgzwaP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A90089231; Fri, 18 Oct 2024 07:35:29 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7028588E6B; Fri, 18 Oct 2024 07:49:48 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C60A891A5
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 07:35:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 0AF278904B
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 07:49:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43163667f0eso743405e9.0
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 22:49:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729230585; x=1729835385;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JmDZiUEAjKmOthJoJ/EcxqklVPkFxlDcCooGM0X1zso=;
+ b=A9cgzwaPwf0smETx/EZjKCwUIl5Me0f6wbTG+jMDRCVs1myB2yW5n/NgFGWKikutx1
+ PcfW3d0K679KLfnweMGhnh+oehR3DNIeIfDXqdCrk5mmvW8IOgfT2WI81vShvBveHvX0
+ 5UBqqgx8NVdHKHrsSZj/KA+IEuarjugMEDcj/HnphzG0niOHq7rd83C54QC/6/xmnlJQ
+ X079s1AsJ6x6bwDW8P2r7sa8d7ZDiHMf+xmKa5ZWDpuVRWk8fpdP2CVJiBEr/BlWz0Tq
+ mWrDprNy+eDjR81LUZjpm7EBXdXhV/cDK/qQYpPoYaR0YXHp/peTSWDvWpF1fWcsc5ZW
+ H2Ww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729230585; x=1729835385;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JmDZiUEAjKmOthJoJ/EcxqklVPkFxlDcCooGM0X1zso=;
+ b=b58Vt8xUPwKNLXQWQcEGR63xLqa7xADINf7of1rm/H5WPO6rNhYSk928HbWAwcDZac
+ qRkYA8MF04MGR2/F3xJl9ZSHnJ5Yh4p4ZkRGO5F/Ln1/a/B/UTUdde8/QOHBcFWCMK9T
+ VznJnmixpDMJJ2H3SlW+Wu4oYBXMrgAKKEQFLKuem8Xl5sSPL5haTscYxo4lzUaYP0yB
+ Z6VuePsKNgW8UHZ9SzL1MiCo6lrsYIjlfBHoIhVVuJ6vsBgTbPsR4y6C30rhWdh7tSAL
+ uddXywHTr8dSm7QgdhMIgmfnFfx03JQSRjV8u0segxTgACFwujH7LmJqEJs96ouA1KR2
+ JrlA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWI5M84LAbJTVpPh/A+HSXWWHMlFy1W5kAqtdTEEB0a0yTEnDqrbDxCPL1Z5tiwcCC+c0ZzYhA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxbN0Oqche/vBZSaGOHB2ted6sj/+48g9S/ewbg2U4hRS9JLn3s
+ B5z1FxYTN+cA2Yd+k/84FPgRgL70dAoR1DaP3pyQ2AP5ddZIcUEfxWd3iKirV+c=
+X-Google-Smtp-Source: AGHT+IE8wULt/scUye4VCjlRGbMwu3VnBZXkv5JsicnTNwKyfWxx/Sbr5bfsuKDfCHNteI5e9cGvxA==
+X-Received: by 2002:a05:600c:354e:b0:42f:8fcd:486c with SMTP id
+ 5b1f17b1804b1-431616a3c84mr6242635e9.33.1729230585463; 
+ Thu, 17 Oct 2024 22:49:45 -0700 (PDT)
+Received: from ?IPV6:2a05:6e02:10a5:e010:9522:f79c:d512:33d7?
+ ([2a05:6e02:10a5:e010:9522:f79c:d512:33d7])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43160e0a87csm13663605e9.25.2024.10.17.22.49.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 17 Oct 2024 22:49:45 -0700 (PDT)
+Message-ID: <29e5d4b3-ce3b-46a3-96f5-1dd6148ae712@baylibre.com>
+Date: Fri, 18 Oct 2024 07:49:44 +0200
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1729229726;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=MBaJYlSjYY3ZGUrQNVRiikhy/ZWrT7IR5GQ0p7t/UKI=;
- b=Q7GOcJ/xvvlpUDEkLyiUmONpzKfGWXKl7rmUYcp1g2ot5+HwjdDKja14qi9oscbVBwH6rv
- CkOEGT5Lifat+48acV7E52XuQB/pffF+DAA2tv7WBgUROIiWY4b1bfrbwM7L7r7tyZg/NE
- G/odaOSrkIWkjiBWu894SNsF41CAW6eqVq9pcCqr6CkvGQ3bGrK6DytoVa4qipfIZqzyvh
- OPSWQ/WNH6//MUo7/QCIndYgQo3xwoXk7+emuqwOQ7NAPtdIzT2yTJhguzq+E2dvztK0gD
- efGoznvj0JtevslKtFFGH1XmzXurE1Sl4nIh3xfkHcssMSUOsQhPfK+JbxqcUA==
-Date: Fri, 18 Oct 2024 07:35:26 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>,
- Tom Rini <trini@konsulko.com>, Marcin Juszkiewicz
- <marcin.juszkiewicz@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 0/8] rockchip: Add support for FriendlyElec NanoPC-T6 LTS
-In-Reply-To: <20241017200039.1235524-1-jonas@kwiboo.se>
-References: <20241017200039.1235524-1-jonas@kwiboo.se>
-Message-ID: <b103c7b4d3b5a21cb3379cad12f40ef5@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/3] image: android: misc fixes when using on Qualcomm
+ platforms
+To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+References: <20241017-topic-fastboot-fixes-mkbootimg-v2-0-c3927102d931@linaro.org>
+Content-Language: en-US
+From: Guillaume LA ROQUE <glaroque@baylibre.com>
+In-Reply-To: <20241017-topic-fastboot-fixes-mkbootimg-v2-0-c3927102d931@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,60 +100,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jonas and Marcin,
+Hi,
 
-On 2024-10-17 22:00, Jonas Karlman wrote:
-> This series picks minimum required commits from v6.12-rc1-dts to add
-> initial support for the FriendlyElec NanoPC-T6 LTS variant.
-> 
-> The adc-uclass and rockchip-saradc drivers are adopted to support cases
-> when DM_REGULATOR is disabled and using a fallback voltage reference
-> from the vdd-microvolts prop in DT.
-> 
-> Finally board specific code is added to help detect non-LTS vs LTS
-> variant at runtime and nanopc-t6-rk3588_defconfig is extended to enable
-> Kconfig options for updated DTs.
-> 
-> Please note that this has only been runtime tested on a non-LTS variant
-> of a NanoPC-T6 board.
+thanks for this fixes.
+I just test this series on Khadas VIM3 with android image version 2 non 
+A/B  and AB,
+on TI AM62P with android image version 4 with AB, both boards boot fine.
 
-Could you, please, have a look at my patch that I recently
-submitted to the linux-rockchip mailing list? [1]
+Tested-by: Guillaume La Roque <glaroque@baylibre.com>
 
-To sum it up, my patch does some of the same work you did in
-this series, by resolving the troublesome inclusion of all
-Rockchip board dts files in one fell swoop, and I'd appreciate
-if you could review those changes.
+Guillaume
 
-[1] 
-https://lore.kernel.org/linux-rockchip/f3d789c14fe34a53327cac03cd3837e530e21f5c.1728937091.git.dsimic@manjaro.org/T/#u
+Le 17/10/2024 à 16:44, Neil Armstrong a écrit :
+> When trying to use the Android boot image with header version 2
+> on recent Qualcomm platforms, we get into some troubles.
+>
+> First the kernel in-place address can be > 32bit, then since
+> we use the Android mkbootimg, it uses the default load address
+> which isn't big enough to uncompress the kernel.
+>
+> Finally, the ramdisk also uses a default load address, and
+> it should be taken in account like for the kernel address.
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+> Changes in v2:
+> - Fix patch 2 prefix
+> - Fix patch 3 commit msg
+> - Fix patch 3 behavior when using boot image header version > 2, use the original ramdisk_ptr
+> - Link to v1: https://lore.kernel.org/r/20241016-topic-fastboot-fixes-mkbootimg-v1-0-94fd9340722b@linaro.org
+>
+> ---
+> Neil Armstrong (3):
+>        image: android: use ulong for kernel address
+>        image: android: do not boot XIP when kernel is compressed
+>        image: android: handle ramdisk default address
+>
+>   boot/image-android.c    | 62 +++++++++++++++++++++++++++++++++++++------------
+>   include/android_image.h |  2 +-
+>   2 files changed, 48 insertions(+), 16 deletions(-)
+> ---
+> base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
+> change-id: 20241016-topic-fastboot-fixes-mkbootimg-8d73ab93db3d
+>
+> Best regards,
 
-> Jonas Karlman (4):
->   rockchip: rk3588-nanopc-t6: Drop upstream props from u-boot.dtsi
->   adc: Allow use of adc with DM_REGULATOR disabled
->   adc: rockchip-saradc: Use vdd-microvolts prop as fallback
->   rockchip: rk3588-nanopc-t6: Add support for NanoPC-T6 LTS
-> 
-> Marcin Juszkiewicz (4):
->   arm64: dts: rockchip: prepare NanoPC-T6 for LTS board
->   arm64: dts: rockchip: move NanoPC-T6 parts to DTS
->   arm64: dts: rockchip: add NanoPC-T6 LTS
->   arm64: dts: rockchip: add SPI flash on NanoPC-T6
-> 
->  arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi     |  16 +-
->  board/friendlyelec/nanopc-t6-rk3588/Makefile  |   3 +
->  .../nanopc-t6-rk3588/nanopc-t6-rk3588.c       |  59 ++
->  configs/nanopc-t6-rk3588_defconfig            |  12 +
->  drivers/adc/adc-uclass.c                      |   4 +-
->  drivers/adc/rockchip-saradc.c                 |   9 +-
->  .../arm64/rockchip/rk3588-nanopc-t6-lts.dts   |  60 ++
->  .../src/arm64/rockchip/rk3588-nanopc-t6.dts   | 909 +----------------
->  .../src/arm64/rockchip/rk3588-nanopc-t6.dtsi  | 943 ++++++++++++++++++
->  9 files changed, 1092 insertions(+), 923 deletions(-)
->  create mode 100644 board/friendlyelec/nanopc-t6-rk3588/Makefile
->  create mode 100644 
-> board/friendlyelec/nanopc-t6-rk3588/nanopc-t6-rk3588.c
->  create mode 100644 
-> dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6-lts.dts
->  create mode 100644 
-> dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi
+
