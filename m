@@ -4,86 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 173DCD30016
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 16:33:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A93EFD30016
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 16:34:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D84588DA0;
-	Fri, 18 Oct 2024 18:33:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0580488C4D;
+	Fri, 18 Oct 2024 18:34:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OeoVsvAo";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Bpi1cO2E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 285B688D9F; Fri, 18 Oct 2024 18:33:11 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D334088DFF; Fri, 18 Oct 2024 18:34:41 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6AAF8657F
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 18:33:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94D7188D9F
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 18:34:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6cbd005d0f9so15442426d6.3
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 09:33:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729269188; x=1729873988; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5UQzTwmR515dzIon5srrptXRBXu8cGU2jTWwfFTaHW4=;
- b=OeoVsvAoS8eIJ8RW7ew+d4tH0dyxkX5opv0HVm79JGaodz2oiWu3VARPab6zloxRLm
- 6tFeL+J44bVjsWAls1OIBkEoOuQBPZizTKiYj2/cLgpSIosezqPWxcmAI3e63r5DAMo7
- YfYzAHymORUtEsPBJGHLF/AslRASmx466yKIE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729269188; x=1729873988;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5UQzTwmR515dzIon5srrptXRBXu8cGU2jTWwfFTaHW4=;
- b=WYKZPgaytHf87ZhKowQ9qRqfB0iAoTu8FZ7hIR3R2wXye3ZRnEwZVgyzfeSQji85WN
- dcIK/AJbt1vFm9axrU99rRTbkX0Jsnp47peVZnz30LYg2JFpPj9HWk/fd5S8sfpAhtxF
- BVDX9VSV0C26aakdsbUodtcjRFtulWPP1PCHybliIaMTfGddCAKBDDkRctQpjX38D/PV
- fzFp2uT89ckImDYeOnHHHSgenCtNBLP1xq6iaeqrE/MxeUASB+Jj5+aS1EUZy60J1Bxl
- gEKsGDlJ/DfWj7LTeL5ECvUKclQRyKMIc6hX64SQ9KmSR244PWIc/A8BN76xenstsgHC
- YPqQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCJ2TOGA/EuVfIJPr6uV8VrqmNmDae+Jk0Ft9wIG9yeYSMG6yUt6MwWUfP4DN8kinYykQ4MEY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwWBKbOZVMxdSqeRTK+vvjlHHWOPjxEGQKbSNjse7IfyiQl/oBr
- 1L6yaMnf1NQEG927kZMaz3GGew3zUFwcINC6nuXhIo2VvD5ljoClByTn4pVFSAY=
-X-Google-Smtp-Source: AGHT+IHE5wpofebEZyJ018bx2Q87TRfDH3FVksopzo1LJxnwypLP5B61VXcAQ2fTHDU8bt7MSn14sQ==
-X-Received: by 2002:a05:6214:3d9f:b0:6cb:fa1e:5202 with SMTP id
- 6a1803df08f44-6cde14bdf0bmr37317886d6.4.1729269187823; 
- Fri, 18 Oct 2024 09:33:07 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cde12301c4sm8351906d6.88.2024.10.18.09.33.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Oct 2024 09:33:06 -0700 (PDT)
-Date: Fri, 18 Oct 2024 10:33:03 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Shantur Rathore <i@shantur.com>
-Subject: Re: [PATCH 23/34] bootstd: Maintain a list of images
-Message-ID: <20241018163303.GZ4959@bill-the-cat>
-References: <20241017232413.724808-1-sjg@chromium.org>
- <20241017232413.724808-24-sjg@chromium.org>
- <0B48F871-BDD8-4810-ADA3-4F6C4E403B0C@gmx.de>
- <CAFLszTjF-kg5E+sV+CkFjStmS2YyJiPa59zOWWZxd2J5yOwftA@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=9e6c=RP=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1729269270;
+ bh=+z1N6P7RdA1gKSddjQyetKrQNXp5moWluKHHND6gvJc=;
+ b=Bpi1cO2ExofNFPZ3s2n2hsLn59DdCMqhLB8z4koSktUlgba3hTeJYASQtwdC+agR4FMYjbCQm
+ +h1Th+ZmAzBRS/QCoVnfQXWUjn8qQmssVvRBGHQbvqRsHbRbUeSiAHd6pSrFhWbW+yE7ivM3f2H
+ wGmB4E3Zr/wgQCr83b+hOIRdZmkR1+V29KIJsEMlFf57LGX/6jB9M3isp6rbOyY6hQn9JIF1h5e
+ qfPo/bOct8En5YrTm1o709zSmNkZ+6axmf8WAyvjG0X4gP6t6AL+lYR/ihdmLdJ7D3SgBj/0zA4
+ /s4mBF8QajgjwW/c7gh8mwd0+UTkr1jymI29Wpfa0uUw==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Dragan Simic <dsimic@manjaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/2] rockchip: rk35xx: Implement checkboard() to print SoC
+ variant
+Date: Fri, 18 Oct 2024 16:34:16 +0000
+Message-ID: <20241018163423.1562287-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dnX2JHlyy7d/g8Sk"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjF-kg5E+sV+CkFjStmS2YyJiPa59zOWWZxd2J5yOwftA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-ForwardEmail-ID: 67128e153b4db30540b6b5bb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,64 +70,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Information about what SoC model, variant and version can be found in
+OTP. This series use this information in checkboard() to print out the
+running SoC model, variant and version.
 
---dnX2JHlyy7d/g8Sk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+There are some asumptions taken on how some of the OTP values are
+encoded, however for my boards this seem to match and something like
+the following is shown with this applied:
 
-On Fri, Oct 18, 2024 at 09:01:03AM -0600, Simon Glass wrote:
-> Hi Heinrich,
->=20
-> On Thu, 17 Oct 2024 at 22:07, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
-ote:
-> >
-> >
-> >
-> > Am 18. Oktober 2024 01:24:02 MESZ schrieb Simon Glass <sjg@chromium.org=
->:
-> > >We want to keep track of images which are loaded, or those which could
-> > >perhaps be loaded. This will make it easier to manage memory allocatio=
-n,
-> > >as well as permit removal of the EFI set_efi_bootdev() hack.
->=20
-> I'll change this 'hack' to 'feature'.
->=20
-> >
-> > Please, keep in mind that files can be loaded manually, e.g. via the dh=
-cp, the wget, and the loady commands. These are outside bootflows.
->=20
-> Yes, this series is only going to help if bootstd is used. For ad-hoc
-> use, EFI will need to rely on the above feature, at least until
-> someone can think of another solution.
+  SoC:   RK3566 v1
+  SoC:   RK3566 v2
+  SoC:   RK3566T v2
+  SoC:   RK3568 v2
+  SoC:   RK3568B2 v2
+  SoC:   RK3568J v2
 
-Perhaps I need to try and be clearer here than I might have been in the
-past. The consensus among off the shelf free software operating systems
-is "just give me an EFI interface". This simplifies things on their end
-if regardless of architecture it's the same interface. This means that
-in U-Boot we need to treat EFI as one of the primary interfaces. Not a
-novelty. Not a "some people might use". It is a frequent and commonly
-used feature.
+  SoC:   RK3582 v1
+  SoC:   RK3588 v0
+  SoC:   RK3588 v1
+  SoC:   RK3588S v0
+  SoC:   RK3588S v1
+  SoC:   RK3588S2 v1
 
---=20
-Tom
+Jonas Karlman (2):
+  rockchip: rk356x: Implement checkboard() to print SoC variant
+  rockchip: rk3588: Implement checkboard() to print SoC variant
 
---dnX2JHlyy7d/g8Sk
-Content-Type: application/pgp-signature; name="signature.asc"
+ arch/arm/dts/rk356x-u-boot.dtsi        |  4 ++
+ arch/arm/dts/rk3588s-u-boot.dtsi       |  4 ++
+ arch/arm/mach-rockchip/rk3568/rk3568.c | 65 ++++++++++++++++++++++++++
+ arch/arm/mach-rockchip/rk3588/rk3588.c | 56 ++++++++++++++++++++++
+ configs/generic-rk3568_defconfig       |  2 +-
+ configs/generic-rk3588_defconfig       |  2 +-
+ 6 files changed, 131 insertions(+), 2 deletions(-)
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.46.2
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcSjbcACgkQFHw5/5Y0
-tyyBGAv/QhxNGFfiRcdYfEJ1pmqWCKHWnIlodn17cMgAnssrauU3e7bkJ6wwJkqx
-eBYW2WDKUlO+x4HsFq00BnJvlSDvFpLQ0ZwYOEh6s7uWiT9DINbi+X1XS5BT8zL0
-QZckWWwTZgCqZAKvjQGVgEBgR1BoqPIhilBnDP3ZyLvblyJqSBmMlVPHAQTXU43D
-WKcqwoo4LjEVc1w7JLcxupa7wKjPFQStDLIvt3/GCxOc3tZsHqe65dxW9z7vrbZB
-5LSWqJ4Vsc2bdf7KYti3Zftqr0NLrXuqAf3+TjuPe+JdfUJrg5p+iPq4L2uwDgbU
-vgeAI2dY7Zzqm83VP8e0VhpBAyimB95GSzZQBXqHjWdyEnXkuEo5+hmhud2ZLkbv
-/zQ36hheozIrL25bfomh3NGRWoEnxIhQ784EaP+GIYRCtnTU/AzlwTKdPMsvDomq
-8eegVsWxZ6uyghOVtfuBgSR7GYkPKMiCI5mWUDnvuIs2PafEWb16MPd7f9nq/uG5
-OBuPo47c
-=IdcD
------END PGP SIGNATURE-----
-
---dnX2JHlyy7d/g8Sk--
