@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A0C6D2127B
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 08:30:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72C8ED2127B
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 08:30:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 777B4891B1;
+	by phobos.denx.de (Postfix) with ESMTP id E3DB489254;
 	Fri, 18 Oct 2024 10:30:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="cqs9LsXg";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="lOLy8abM";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="SKRhAEO5";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="Ty7dhM4H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B772D8912B; Fri, 18 Oct 2024 10:30:16 +0200 (CEST)
+ id C832289139; Fri, 18 Oct 2024 10:30:16 +0200 (CEST)
 Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C81B89175
+ by phobos.denx.de (Postfix) with ESMTPS id C2C968917E
  for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 10:30:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linutronix.de
@@ -33,26 +33,26 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HJiCOWtBkiXxNucm8mSAf3ZuS/cjqvgO9lUGRM5luP4=;
- b=cqs9LsXgjFGVvBVg0g1vvWrc6sL6mONVmPMqcEgelheUEqKzONRhbT2F6sRUUpsT/lEfj9
- jbifguok/8WHZ+OxEV8A/7esfZrZaM20JIUTgFUfRD04jp78g8Jz5gsA/2N7pBkhF9O87B
- SEC8ZxZvDFpJ51BAwndYJ40+xNkTgzWCP05+jhv3ScOHZELx8GZcJ+eBUegMOLv/Tb1Gcn
- LE2SHkVgaffXQamsRsjDn2y6m1jNj5JmX7IW3yR4Wsi80EbVcejmhXOsuH5K/lOMiWapA+
- IINU9fIHiyvDIePjl0aszefo0b/w6i/OLtH3CFSwVotrAS3+J6+I5UmvIrxbYg==
+ bh=vXlIWlaN6pq3omPm91KlLaODADD8Ht90RZvPTK1/spk=;
+ b=SKRhAEO5QiX9XKAEGovxLvKYt9o8zRzqfeH9nzF5rKcyo+RY3zhgnO3ch1cZlId+BKEGIa
+ TcR8NACBHX1w1vBbS+OFfIaBGR1Xh3TTqJStBhxOzUzIn7MuurZ8IIAPnUiN6IXP2BnkDF
+ CaoMLUYSpFdIWW3NPXdhzsyplWdk4083zw4PJ193M49W8HGSpg/ScL116biUQlsF23rjtS
+ iYH6/JpNbjZhSoJQswDGS3tL/c4ppFmcAfXYtHjJ4cj4hWkgLeOhYHv39if7718aJWP6Gw
+ H+llBUzqcTPdVUxGOG031NoyhRMit/MhUlkkujnncnGrAlrB+ZzdyHHYZXrrPw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
  s=2020e; t=1729240213;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HJiCOWtBkiXxNucm8mSAf3ZuS/cjqvgO9lUGRM5luP4=;
- b=lOLy8abMcBpUcFbiLqglBpVUyLrjdTs66aXlDtJ3rzeEqfqQR81kE9DIDawmo6h1eGwDHt
- FFBnr5bQcSzdOyCQ==
+ bh=vXlIWlaN6pq3omPm91KlLaODADD8Ht90RZvPTK1/spk=;
+ b=Ty7dhM4H/c7MirRvnSeImOuaMvEO/834n0yJdAQZG1l7KUTEezeSHRj0C8/7S96ICye0x8
+ bI9o/0+kI5sXx9Dw==
 To: u-boot@lists.denx.de
 Cc: John Ogness <john.ogness@linutronix.de>
-Subject: [PATCH 2/5] drivers/mtd/ubispl/ubispl.c: Fix error message
-Date: Fri, 18 Oct 2024 10:30:03 +0200
-Message-ID: <20241018083006.10349-4-b.spranger@linutronix.de>
+Subject: [PATCH 3/5] mtd: nand: raw: Fix potential NULL pointer dereference
+Date: Fri, 18 Oct 2024 10:30:04 +0200
+Message-ID: <20241018083006.10349-5-b.spranger@linutronix.de>
 In-Reply-To: <20241018083006.10349-1-b.spranger@linutronix.de>
 References: <20241018083006.10349-1-b.spranger@linutronix.de>
 MIME-Version: 1.0
@@ -73,33 +73,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bad CRC error message has transposed characters, which render the
-output useless:
-
-"bad CRC at record 213: #08x, not #08x" instead of
-"bad CRC at record 213: #00000000, not #4be31f4d"
-
-Fix the error message.
+A NAND manufacture ID may not be found in nand_manuf_ids[] database.
+In case of an ONFI or JEDEC NAND a crutial NULL pointer check is missing
+and printing out the manufacture name result in a NULL pointer
+dereference. Instead of adding additional NULL pointer checks ensure
+a valid nand_menufacture_desc and remove the checks entirely.
 
 Signed-off-by: Benedikt Spranger <b.spranger@linutronix.de>
 Reviewed-by: John Ogness <john.ogness@linutronix.de>
 ---
- drivers/mtd/ubispl/ubispl.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/mtd/nand/raw/nand_base.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/mtd/ubispl/ubispl.c b/drivers/mtd/ubispl/ubispl.c
-index 90a7c4c6f9e..9face5fae15 100644
---- a/drivers/mtd/ubispl/ubispl.c
-+++ b/drivers/mtd/ubispl/ubispl.c
-@@ -113,7 +113,7 @@ static int vtbl_check(struct ubi_scan_info *ubi,
+diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
+index 4401bdcdb90..5dbc47bfe5f 100644
+--- a/drivers/mtd/nand/raw/nand_base.c
++++ b/drivers/mtd/nand/raw/nand_base.c
+@@ -4241,7 +4241,7 @@ static bool find_full_id_nand(struct mtd_info *mtd, struct nand_chip *chip,
+  * @id: manufacturer ID
+  *
+  * Returns a nand_manufacturer_desc object if the manufacturer is defined
+- * in the NAND manufacturers database, NULL otherwise.
++ * in the NAND manufacturers database, "Unknown" entry otherwise.
+  */
+ static const struct nand_manufacturer *nand_get_manufacturer_desc(u8 id)
+ {
+@@ -4252,7 +4252,7 @@ static const struct nand_manufacturer *nand_get_manufacturer_desc(u8 id)
+ 			return &nand_manuf_ids[i];
+ 	}
  
- 		crc = crc32(UBI_CRC32_INIT, &vtbl[i], UBI_VTBL_RECORD_SIZE_CRC);
- 		if (be32_to_cpu(vtbl[i].crc) != crc) {
--			ubi_err("bad CRC at record %u: %#08x, not %#08x",
-+			ubi_err("bad CRC at record %u: #%08x, not #%08x",
- 				i, crc, be32_to_cpu(vtbl[i].crc));
- 			ubi_dump_vtbl_record(&vtbl[i], i);
- 			return 1;
+-	return NULL;
++	return &nand_manuf_ids[i];
+ }
+ 
+ /*
+@@ -4425,13 +4425,13 @@ ident_done:
+ 	else if (chip->jedec_version)
+ 		pr_info("%s %s\n", manufacturer_desc->name,
+ 			chip->jedec_params.model);
+-	else if (manufacturer_desc)
++	else
+ 		pr_info("%s %s\n", manufacturer_desc->name, type->name);
+ #else
+ 	if (chip->jedec_version)
+ 		pr_info("%s %s\n", manufacturer_desc->name,
+ 			chip->jedec_params.model);
+-	else if (manufacturer_desc)
++	else
+ 		pr_info("%s %s\n", manufacturer_desc->name, type->name);
+ #endif
+ 
 -- 
 2.45.2
 
