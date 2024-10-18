@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 183DFD2FFFD
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 12:33:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48D72D2FFFD
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 12:33:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9996489145;
-	Fri, 18 Oct 2024 14:32:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C44289166;
+	Fri, 18 Oct 2024 14:32:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=all4bambi.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YHpGxJa6";
+	dkim=pass (2048-bit key; unprotected) header.d=all4bambi-com.20230601.gappssmtp.com header.i=@all4bambi-com.20230601.gappssmtp.com header.b="N90RF/IB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB97089289; Fri, 18 Oct 2024 09:39:35 +0200 (CEST)
-Received: from mail-yb1-xb43.google.com (mail-yb1-xb43.google.com
- [IPv6:2607:f8b0:4864:20::b43])
+ id 32AE0891C7; Fri, 18 Oct 2024 09:51:39 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AA8D88E65
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 09:39:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E15BA8910A
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 09:51:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=all4bambi.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aibaykaro@gmail.com
-Received: by mail-yb1-xb43.google.com with SMTP id
- 3f1490d57ef6-e291cbbf05bso1933455276.2
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 00:39:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=alexey@all4bambi.com
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-37d3e8d923fso1342281f8f.0
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 00:51:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729237172; x=1729841972; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Gm264xFIuNPcLNlrCrdS/TbJhZ6SVWv3qL9FJr3euUE=;
- b=YHpGxJa6ZcLPZv0hy61UqjtZIRAbJGZsbr4qy69NDKf8c+8wg2mCIs/LaMc229kK4+
- Y+BoxzUcPvXZZ9u/iQs1VefkSJKx8KNcFT0vRdrfnbO/+tDe9S7mWb2j2wFVEbm6oTLq
- In7Z+iC+oVf0dUJ/+9b+fPhhVsz+4Zhw5OgCMBroLsY2sbPeYum361Cbr3MuWRU5BRc1
- ViopiL9Qkc41DAvthZ/vOqrg5A2UQOhfCVNKhwKsawoOB2u0cd6REuIWF80SBo8B6+h1
- oBXAvsU10XNH5addo4W/qNdXtCBcrDZ47ax2/KeLtAX4K6AHsUpGFbb3f4xcznpSeZYp
- E9YA==
+ d=all4bambi-com.20230601.gappssmtp.com; s=20230601; t=1729237896; x=1729842696;
+ darn=lists.denx.de; 
+ h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
+ :from:content-transfer-encoding:from:to:cc:subject:date:message-id
+ :reply-to; bh=/H8+oDwBWBa20JBJpcQagXLs095zJH4AICzc6alXUvM=;
+ b=N90RF/IBJJa/Ir4KUy1UzSGU77MXcHsesUXEkaEtRerYkoDHX3nJxeQzsC5LNImE2f
+ 4X/us6mOUnwG4DQRYmyNlGjIz3UqucpUXO754+ZKKkmKfn+Ag9h9eXQCPpCsoJxW3SWD
+ h3Mau0s4+diLWh6D9wM6qKIyeFESusDzVpsRDEojTWVUJqmKwaElNITcGARkUOj2PwBK
+ q17nYgjhwXtxJ4DlGpsA8Rcp+m8omveFMjh5b3EWNxWnE8VT/igHRentZNAovTJ4QM1Q
+ CZYOrLTlK7JVaRrw7N0BPo/Km7IwmWuKAuhrGZ+ie2IHyl73zHyo7WZRBGevihjwApYC
+ 2kSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729237172; x=1729841972;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Gm264xFIuNPcLNlrCrdS/TbJhZ6SVWv3qL9FJr3euUE=;
- b=mlInI+JcKBHoPookDeki+8ug/aVIczJxx02hJC5Yy3Zdwrk4nqDArKeEQ8IIM11UtJ
- zBV65NLzLHlalz5Kw/Mgt4gK4OH/NknF8wG6Z9YmIz5+/HNKhwQiRFRGwV+VIsh6f5/n
- Ffy/jPN77x5F1NmXnYakkGA5VkYI8sO3sUxqmWiC2wzf/wv8n4RRiOdekNI2B/NqydYy
- GI8gYVmHT4/aY1Q2GjLO2L4wLXO99QxsM3S5How6waHRVbaTKqbUkZf5HIc8DFlfhCRQ
- tx5dYMIw3hTIjrSo0ICQqfmP14q55/84MGoGa+53kvTXboza3e8ZhQZlLV3mAvEGFTpF
- mRIw==
-X-Gm-Message-State: AOJu0YxbFaNph+vT9RthTRQG/RMwQVY4pmUgp9DBp4oy0I0x9Byrpni+
- KFdzMEmpV8oPuZxcSKB3mg7cfXRNUfgZvAqj4VIVCmXyDQ0PpTTeu/wT60GcUJBVNdT0dfdvwoZ
- ici2tarjPIDq5vb/vaK7JuXlhytt2K+EFEt8=
-X-Google-Smtp-Source: AGHT+IEWISaG2kYvUVgeCxLaXMiGNwGG/GGbwC+DvQBJyE3TxsaeiVS2ZAdeT8sOoEgbTE9cMCSJ2WcANZkxQ3m43qU=
-X-Received: by 2002:a25:60d4:0:b0:e2b:add4:cd2 with SMTP id
- 3f1490d57ef6-e2bb1692a90mr1200122276.46.1729237171891; Fri, 18 Oct 2024
- 00:39:31 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAMhyRsAMfYeMKVjGRLHM3DFymHxnxVO0YNM_2G=CYvGmTJoYNw@mail.gmail.com>
- <CAFLszTjnye2UYPxEQhGREuG-x5G3PA9ejAMSJi2SWZK_nz7m4w@mail.gmail.com>
- <CAMhyRsBwo2Km+7TroT9+j5zYsSFhs6O4MfqZJ2JSNE8yhvtquQ@mail.gmail.com>
- <CAMhyRsDi2d6PVvEcter3w4BaMt_58kFo5ZChhoVkYkeMSGoK3g@mail.gmail.com>
- <CAFLszTjBz16y=H+czO53QMB8mL_EOzzZ+vK3QFdS+pRCJ=YdrQ@mail.gmail.com>
-In-Reply-To: <CAFLszTjBz16y=H+czO53QMB8mL_EOzzZ+vK3QFdS+pRCJ=YdrQ@mail.gmail.com>
-From: Osman <aibaykaro@gmail.com>
-Date: Fri, 18 Oct 2024 10:39:21 +0300
-Message-ID: <CAMhyRsA4NuUOef9KY0axu_ZSVjE4dPRDa0UeiUM16UwMWU3OgQ@mail.gmail.com>
-Subject: Re: ll_entry_count returns 0 even though the linker list has 5 entries
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-X-Mailman-Approved-At: Fri, 18 Oct 2024 14:32:49 +0200
-Content-Type: text/plain; charset="UTF-8"
+ d=1e100.net; s=20230601; t=1729237896; x=1729842696;
+ h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
+ :from:content-transfer-encoding:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/H8+oDwBWBa20JBJpcQagXLs095zJH4AICzc6alXUvM=;
+ b=nHr8iq/CHOm9U9kllYPU95bUlqw3OUM/Q2wwDk7o2A3etb7nDWjRZ+L7NE4M4DcohM
+ q+dAPD86t9qii64brFm6An/H+Krkdw8cUgoQ6e9Ede1RRnyMaitzN8+xHv0H5oV7hbwW
+ WLcs/jdsXkXWjt0HFbE4Fl6n7munlbFG4BzoQ6HrTw87zSopUgHMYIg76+pPmRe42VAR
+ izYfF7IWQJtQiv1H3kwuc/6RzIoHd43agh/rjZqTlPpgOE+aMlvHOGjjXplhzbPXjb8f
+ UwbKxwM6NzRlYA+WlLUm0/txFPtuL7E9TOIod07J/zFpaDENznFR8HyvLZs3NDu4Tg0k
+ vTHQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWwD/aEFY2KMYKW0nVju7TfPexPz3xRBbdtSZJggnRX2loIt+M/jUSdspK6EjBlDmT5yyOC0hM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzmvpcgvmspXEbHLAaqEGGy5CkrS2ZV53F+ckmloBZlLZ/qVR8i
+ P9/phl55Pk6nrJtGIeAgmSzbObuJ4QWMJnedU18JqJHiybotobR4BnMJ+e41CIA=
+X-Google-Smtp-Source: AGHT+IHHSK0FIuGx3w0rzFS0iqBuJNNsAXaLkKfMBQX3GgK8rKFa2BOZTxwjt+4nWtr5x5yLqboYyA==
+X-Received: by 2002:a05:6000:1366:b0:37d:47b7:f2f5 with SMTP id
+ ffacd0b85a97d-37ea21de07dmr1069460f8f.4.1729237896122; 
+ Fri, 18 Oct 2024 00:51:36 -0700 (PDT)
+Received: from smtpclient.apple ([2a0d:6fc7:242:6b9f:920:89c7:19fe:f003])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37ecf085302sm1210686f8f.55.2024.10.18.00.51.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 18 Oct 2024 00:51:35 -0700 (PDT)
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+From: Tsirlin Alexey <alexey@all4bambi.com>
+Mime-Version: 1.0 (1.0)
+Subject: Re: [PATCH 1/1] Fixed sama5d3 dts file so PIO sections are inside
+ pinctrl as in kernel dts
+Date: Fri, 18 Oct 2024 10:51:24 +0300
+Message-Id: <95AD5B21-D033-43D4-95AA-84BA9EF9BA1B@all4bambi.com>
+References: <c97e8bc6-f2f5-4c62-8d92-0ccbd9caf278@linaro.org>
+Cc: Manikandan.M@microchip.com, u-boot@lists.denx.de,
+ Varshini.Rajendran@microchip.com, Hari.PrasathGE@microchip.com
+In-Reply-To: <c97e8bc6-f2f5-4c62-8d92-0ccbd9caf278@linaro.org>
+To: Eugen Hristev <eugen.hristev@linaro.org>
+X-Mailer: iPhone Mail (22A3370)
+X-Mailman-Approved-At: Fri, 18 Oct 2024 14:32:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,154 +97,185 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Simon,
+Hi Eugen,
+I will fix the subject as required. Just wanted to tell that I didn=E2=80=99=
+t test the gpio commands in uboot. The part that interested me was the pinct=
+l and that it is unable to set the correct peripheral function from DTS. The=
+ function that interested me was Ethernet. I will also check the gpio functi=
+onality than I am back to office on Sunday.=20
 
-I am not sure, the problem is with the rodata as the linker list looks fine
-and execution finds the start and end of the list correctly. The wrong
-thing is the size value it uses located at the rodata. This is the region
-in u-boot-spl.lds that links the rodata:
+Thanks!
+Alexey.=20
 
-. =3D ALIGN(4);
-.rodata : {
-*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
-} > .spl_mem
+> On 18 Oct 2024, at 10:15, Eugen Hristev <eugen.hristev@linaro.org> wrote:
+>=20
+> =EF=BB=BFHello Alexey,
+>=20
+> Please fix the subject to adhere to the rules ARM: dts: .... etc,
+> if you are unsure, please follow previous commits that touched this file.
+>=20
+>> On 10/17/24 11:51, Manikandan.M@microchip.com wrote:
+>> Hi Alexey,
+>>> On 15/10/24 8:23 pm, Alexey Tsirlin wrote:
+>>> This allows setting the GPIO parameters from device tree, otherwise the
+>>> at91_pin_check_config will fail because the priv->nbanks equal to zero
+>=20
+> I remember these pin banks are outside of the pinctrl because the driver f=
+ails to probe them if they are inside.
+> Is this no longer true ?
+>=20
+> Manikandan, is it possible to test this on the board? and use the gpio com=
+mand in U-boot to toggle the pins , like e.g. for the LEDs and see if there i=
+s no regression ?
+>=20
+> Thanks,
+> Eugen
+>>>=20
+>>> Signed-off-by: Alexey Tsirlin <alexey@all4bambi.com>
+>>> ---
+>>>=20
+>>>   arch/arm/dts/sama5d3.dtsi | 111 +++++++++++++++++++-------------------=
 
-I am not sure where it looks for the alignment of this value. Normally the
-field which spl looks in rodata should contain the multiplicative inverse
-of the size of struct driver and from what i can tell from assembly it is
-shifted as well. Where does the linker look for the alignment of a value
-like this?
-
-Regards,
-Osman
-
-Simon Glass <sjg@chromium.org>, 18 Eki 2024 Cum, 02:18 tarihinde =C5=9Funu =
-yazd=C4=B1:
-
-> +U-Boot Mailing List
->
-> On Thu, 17 Oct 2024 at 03:03, Osman <aibaykaro@gmail.com> wrote:
-> >
-> > Hello Simon,
-> >
-> > The problem is solved after enabling SPL_OPENSBI in my case, it would
-> have been better if I knew the reason for it but I can't see how the link=
-er
-> list is related to opensbi configuration. Thank you for your time.
-> >
-> > By the way I made sure to try the spl by only disabling spl_opensbi
-> configuration to make sure other changes are not affecting it but disabli=
-ng
-> really causes it to fail again.
->
-> I wonder if this has something to do with alignment?
->
-> Regards,
-> Simon
->
->
-> >
-> > Regards,
-> >
-> > Osman
-> >
-> > Osman <aibaykaro@gmail.com>, 15 Eki 2024 Sal, 14:17 tarihinde =C5=9Funu
-> yazd=C4=B1:
-> >>
-> >> Hi Simon,
-> >>
-> >> This is a 64 bit RISC-V platform, i don't have LINKER_LIST_ALIGN in my
-> defconfig so it should be 4 by default however it's not a problem with
-> linker list alignment i suppose. After debugging it in assembly I found o=
-ut
-> that it successfully calculates the length between the start and end of t=
-he
-> linker list, it just divides incorrectly because the inverse value of the
-> size of struct driver is wrong. The rodata section which contains that si=
-ze
-> value is filled with zeros. For reference this is the location it looks f=
-or
-> the size value:
-> >>
-> >> u-boot-spl.map:
-> >>  .rodata.cst8   0x0000000080007eb0        0x8 drivers/core/lists.o
-> >>
-> >>  and this is what i see while debugging:
-> >>
-> >>  (gdb) x /x 0x0000000080007eb0
-> >> 0x80007eb0:     0x00000000
-> >>
-> >> it should be something like 0xEEEEEEEF for it to work correctly.
-> >> Actually there are a lot of spaces that are filled with zeros is this
-> normal?:
-> >>
-> >> (gdb) x /64w 0x0000000080007e60
-> >> 0x80007e60:     0x69797254      0x7420676e      0x6f62206f
-> 0x6620746f
-> >> 0x80007e70:     0x206d6f72      0x000a7325      0x3a4c5053
-> 0x736e5520
-> >> 0x80007e80:     0x6f707075      0x64657472      0x6f6f4220
-> 0x65442074
-> >> 0x80007e90:     0x00000000      0x00000000      0x00000000
-> 0x00000000
-> >> 0x80007ea0:     0x00000000      0x00000000      0x00000000
-> 0x00000000
-> >> 0x80007eb0:     0x00000000      0x00000000      0x00000000
-> 0x00000000
-> >> 0x80007ec0:     0x00000000      0x00000000      0x00000000
-> 0x00000000
-> >> 0x80007ed0:     0x00000000      0x00000000      0x00000000
-> 0x00000000
-> >> 0x80007ee0:     0x00000000      0x00000000      0x00000000
-> 0x00000000
-> >> 0x80007ef0:     0x00000000      0x00000000      0x00000000
-> 0x00000000
-> >> 0x80007f00:     0x00000000      0x00000000      0x00000000
-> 0x00000000
-> >> 0x80007f10:     0x00000000      0x00000000      0x00000000
-> 0x00000000
-> >> 0x80007f20:     0x00000000      0x00000000      0x00000000
-> 0x00000000
-> >> 0x80007f30:     0x00000000      0x00000000      0x00000000
-> 0x00000000
-> >> 0x80007f40:     0x00000000      0x00000000      0x80007f48
-> 0x00000000
-> >> 0x80007f50:     0x80007f48      0x00000000      0x80007f48
-> 0x00000000
-> >>
-> >> u-boot-spl.map:
-> >>  .rodata.boot_from_devices.str1.8
-> >>                 0x0000000080007e60       0x39 common/spl/spl.o
-> >>  *fill*         0x0000000080007e99        0x7
-> >>  .rodata.cst8   0x0000000080007ea0        0x8 common/spl/spl.o
-> >>  .rodata.cst8   0x0000000080007ea8        0x8 lib/tiny-printf.o
-> >>  .rodata.cst8   0x0000000080007eb0        0x8 drivers/core/lists.o
-> >>  .rodata.devfdt_get_addr_index.str1.8
-> >>                 0x0000000080007eb8        0x4 drivers/core/fdtaddr.o
-> >>  .rodata.dm_extended_scan.str1.8
-> >>                 0x0000000080007eb8       0x12 drivers/core/root.o
-> >>                                          0x1a (size before relaxing)
-> >>  *fill*         0x0000000080007eca        0x6
-> >>  .rodata.do_reset.str1.8
-> >>                 0x0000000080007ed0       0x29 arch/riscv/lib/reset.o
-> >>  *fill*         0x0000000080007ef9        0x7
-> >>  .rodata.fdt_address_cells.str1.8
-> >>                 0x0000000080007f00        0xf lib/libfdt/fdt_addresses=
-.o
-> >>  *fill*         0x0000000080007f0f        0x1
-> >>  .rodata.fdt_find_or_add_subnode.str1.8
-> >>                 0x0000000080007f10        0xc common/fdt_support.o
-> >>  *fill*         0x0000000080007f1c        0x4
-> >>  .rodata.fdt_fixup_memory_banks.str1.8
-> >>                 0x0000000080007f20       0x9c common/fdt_support.o
-> >>  *fill*         0x0000000080007fbc        0x4
-> >>  .rodata.fdt_get_alias_namelen.str1.8
-> >>                 0x0000000080007fc0        0x9 lib/libfdt/fdt_ro.o
-> >>
-> >>  I am not sure what is happening here, is there a way to check how a
-> specific rodata region is filled?
-> >>
-> >>  Regards,
-> >>
-> >>  Osman
->
+>>>   1 file changed, 56 insertions(+), 55 deletions(-)
+>>>=20
+>>> diff --git a/arch/arm/dts/sama5d3.dtsi b/arch/arm/dts/sama5d3.dtsi
+>>> index 4c03a302ec..c671ea42f2 100644
+>>> --- a/arch/arm/dts/sama5d3.dtsi
+>>> +++ b/arch/arm/dts/sama5d3.dtsi
+>>> @@ -873,66 +873,67 @@
+>>>                                AT91_PIOE 17 AT91_PERIPH_B AT91_PINCTRL_N=
+ONE>;    /* PE17 periph B, conflicts with A17 */
+>>>                       };
+>>>                   };
+>>> -            };
+>>>   -            pioA: gpio@fffff200 {
+>>> -                compatible =3D "atmel,at91sam9x5-gpio", "atmel,at91rm92=
+00-gpio";
+>>> -                reg =3D <0xfffff200 0x100>;
+>>> -                interrupts =3D <6 IRQ_TYPE_LEVEL_HIGH 1>;
+>>> -                #gpio-cells =3D <2>;
+>>> -                gpio-controller;
+>>> -                interrupt-controller;har
+>>> -                #interrupt-cells =3D <2>;
+>>> -                clocks =3D <&pioA_clk>;
+>>> -                bootph-all;
+>>> -            };
+>>> +                pioA: gpio@fffff200 {
+>>> +                      compatible =3D "atmel,at91sam9x5-gpio", "atmel,at=
+91rm9200-gpio";
+>> Spaces instead of tab before 'compatible', should be consistent with the
+>> remaining properties of pioA node.
+>>> +                    reg =3D <0xfffff200 0x100>;
+>>> +                    interrupts =3D <6 IRQ_TYPE_LEVEL_HIGH 1>;
+>>> +                    #gpio-cells =3D <2>;
+>>> +                    gpio-controller;
+>>> +                    interrupt-controller;
+>>> +                    #interrupt-cells =3D <2>;
+>>> +                    clocks =3D <&pioA_clk>;
+>>> +                    bootph-all;
+>>> +                };
+>>>   -            pioB: gpio@fffff400 {
+>>> -                compatible =3D "atmel,at91sam9x5-gpio", "atmel,at91rm92=
+00-gpio";
+>>> -                reg =3D <0xfffff400 0x100>;
+>>> -                interrupts =3D <7 IRQ_TYPE_LEVEL_HIGH 1>;
+>>> -                #gpio-cells =3D <2>;
+>>> -                gpio-controller;
+>>> -                interrupt-controller;
+>>> -                #interrupt-cells =3D <2>;
+>>> -                clocks =3D <&pioB_clk>;
+>>> -                bootph-all;
+>>> -            };
+>>> +                pioB: gpio@fffff400 {
+>>> +                      compatible =3D "atmel,at91sam9x5-gpio", "atmel,at=
+91rm9200-gpio";
+>> Ditto
+>>> +                    reg =3D <0xfffff400 0x100>;
+>>> +                    interrupts =3D <7 IRQ_TYPE_LEVEL_HIGH 1>;
+>>> +                    #gpio-cells =3D <2>;
+>>> +                    gpio-controller;
+>>> +                    interrupt-controller;
+>>> +                    #interrupt-cells =3D <2>;
+>>> +                    clocks =3D <&pioB_clk>;
+>>> +                    bootph-all;
+>>> +                };
+>>>   -            pioC: gpio@fffff600 {
+>>> -                compatible =3D "atmel,at91sam9x5-gpio", "atmel,at91rm92=
+00-gpio";
+>>> -                reg =3D <0xfffff600 0x100>;
+>>> -                interrupts =3D <8 IRQ_TYPE_LEVEL_HIGH 1>;
+>>> -                #gpio-cells =3D <2>;
+>>> -                gpio-controller;
+>>> -                interrupt-controller;
+>>> -                #interrupt-cells =3D <2>;
+>>> -                clocks =3D <&pioC_clk>;
+>>> -                bootph-all;
+>>> -            };
+>>> +                pioC: gpio@fffff600 {
+>>> +                      compatible =3D "atmel,at91sam9x5-gpio", "atmel,at=
+91rm9200-gpio";
+>> Ditto
+>>> +                    reg =3D <0xfffff600 0x100>;
+>>> +                    interrupts =3D <8 IRQ_TYPE_LEVEL_HIGH 1>;
+>>> +                    #gpio-cells =3D <2>;
+>>> +                    gpio-controller;
+>>> +                    interrupt-controller;
+>>> +                    #interrupt-cells =3D <2>;
+>>> +                    clocks =3D <&pioC_clk>;
+>>> +                    bootph-all;
+>>> +                };
+>>>   -            pioD: gpio@fffff800 {
+>>> -                compatible =3D "atmel,at91sam9x5-gpio", "atmel,at91rm92=
+00-gpio";
+>>> -                reg =3D <0xfffff800 0x100>;
+>>> -                interrupts =3D <9 IRQ_TYPE_LEVEL_HIGH 1>;
+>>> -                #gpio-cells =3D <2>;
+>>> -                gpio-controller;
+>>> -                interrupt-controller;
+>>> -                #interrupt-cells =3D <2>;
+>>> -                clocks =3D <&pioD_clk>;
+>>> -                bootph-all;
+>>> -            };
+>>> +                pioD: gpio@fffff800 {
+>>> +                      compatible =3D "atmel,at91sam9x5-gpio", "atmel,at=
+91rm9200-gpio";
+>> Ditto
+>>> +                    reg =3D <0xfffff800 0x100>;
+>>> +                    interrupts =3D <9 IRQ_TYPE_LEVEL_HIGH 1>;
+>>> +                    #gpio-cells =3D <2>;
+>>> +                    gpio-controller;
+>>> +                    interrupt-controller;
+>>> +                    #interrupt-cells =3D <2>;
+>>> +                    clocks =3D <&pioD_clk>;
+>>> +                    bootph-all;
+>>> +                };
+>>> +
+>>> +                pioE: gpio@fffffa00 {
+>>> +                      compatible =3D "atmel,at91sam9x5-gpio", "atmel,at=
+91rm9200-gpio";
+>> Ditto
+>>> +                    reg =3D <0xfffffa00 0x100>;
+>>> +                    interrupts =3D <10 IRQ_TYPE_LEVEL_HIGH 1>;
+>>> +                    #gpio-cells =3D <2>;
+>>> +                    gpio-controller;
+>>> +                    interrupt-controller;
+>>> +                    #interrupt-cells =3D <2>;
+>>> +                    clocks =3D <&pioE_clk>;
+>>> +                    bootph-all;
+>>> +                };
+>>>  =20
+>> Extra line
+>>> -            pioE: gpio@fffffa00 {
+>>> -                compatible =3D "atmel,at91sam9x5-gpio", "atmel,at91rm92=
+00-gpio";
+>>> -                reg =3D <0xfffffa00 0x100>;
+>>> -                interrupts =3D <10 IRQ_TYPE_LEVEL_HIGH 1>;
+>>> -                #gpio-cells =3D <2>;
+>>> -                gpio-controller;
+>>> -                interrupt-controller;
+>>> -                #interrupt-cells =3D <2>;
+>>> -                clocks =3D <&pioE_clk>;
+>>> -                bootph-all;
+>>>               };
+>>>                  pmc: pmc@fffffc00 {
+>=20
