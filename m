@@ -4,86 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38538D30016
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 14:58:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8AC6D30011
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 14:59:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7887892D2;
-	Fri, 18 Oct 2024 16:58:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F90A89285;
+	Fri, 18 Oct 2024 16:59:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aupvwMjm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EdfiycJS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A310C89227; Fri, 18 Oct 2024 16:58:51 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 41DF78921C; Fri, 18 Oct 2024 16:59:13 +0200 (CEST)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D027892B7
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 16:56:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 370088922D
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 16:57:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7181885ac34so616546a34.3
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 07:56:03 -0700 (PDT)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6cbe68f787dso12042616d6.2
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 07:57:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729263362; x=1729868162; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729263434; x=1729868234; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Mr/U29cUQCuGPbzEnrMggtsU9WF2C85lTH11lbrPR+I=;
- b=aupvwMjmjkeBnvDY76C7Q+PCnxDwlnud42Ih6xaG8MpAYIB9RxK00RGADBnbX901gV
- XQZnr47uQvJiXst+a4dJyrGpZYQGUpT5+UuLb0aDrGpGgcbHTFAdmgfiC+Dnb4zHFSgq
- P8vMrHq7hMK/6ifPGm0wlv4E247peF++ClprM=
+ bh=xVNIWs1s0EpbpFuiVknDKEq6ikvsEwxX0PLGGHM6COg=;
+ b=EdfiycJSy2RZJseRRqJG1fAz3sq4KTZcgRpKSUPonbUCL+dgHgrp/T/7wOsoKVH7g2
+ My8ycb8tX581vgGfcW/AelGlu4eCPU8VVoAHwwUUMmUXy2ME/Tj7owWGZYne5gpTrB71
+ 5+Phmg7FpZ7Elx8F9Jt/ljs6IYA1DB/Q04Omo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729263362; x=1729868162;
+ d=1e100.net; s=20230601; t=1729263434; x=1729868234;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Mr/U29cUQCuGPbzEnrMggtsU9WF2C85lTH11lbrPR+I=;
- b=a+deJskiIX0foB3xl21H0mN0dNKjnCidZ+TzwHE1peJY0IwP2HsG6ATX9VQHLj9C8W
- +YoCbrHNZsTmF3UbXfbHcm+T+izCnnf65vnMYhrC5qQx1cvT8Km+JXjWzHVtjaz2b/Ej
- Y9VJUz6Xqckv29qTT23SiJ7tVsiDyoDrfJW44sYMyDw1GfwN8O3kfGkLiMq2MT2R5tZO
- wc0HgUok9nuGnF0cnQgECMmldqhiH8RT8Rhn2oYFmAbL13MPVLv1Z/oc8mVT/248s23b
- zTLfxUb7D7cS/pw80AVHtCxnyNFO6Ch6QRZeTLBbBO+AxpUb2chcfTi4SUwju1L7YR11
- 7OiQ==
-X-Gm-Message-State: AOJu0Yz0V7vqpNUNHFY82dN0U9V340b2T9XiJeYtQaqGpODqDGCBfihk
- O3eNENi+RBqn3AQFWifGWIGyEcNjsoNX8WoNJtV04A+WqsOVMfUHW/rXC/BKpKZDKPIaoF4hvj/
- wYY10w0mf2q5qvPSmw+ImcONwLlbtY7Vo7Mi0
-X-Google-Smtp-Source: AGHT+IGxuRSIM/GxMRQjZFR2cyrweNbCVgzhtpLk8k036ESL0QGdjxbSfd5uIOKpqtulwIcskCkpcAAm3x2Gu9QADUk=
-X-Received: by 2002:a05:6830:91b:b0:710:dab2:684 with SMTP id
- 46e09a7af769-7181a89f09fmr2035648a34.25.1729263361981; Fri, 18 Oct 2024
- 07:56:01 -0700 (PDT)
+ bh=xVNIWs1s0EpbpFuiVknDKEq6ikvsEwxX0PLGGHM6COg=;
+ b=w01D8EboYx3tFcqzc6rmm1fbroW107lzNfcNOWP2pHc4yGQL/plZF0zx0u1hWr6OxT
+ mYD7jTqoti4gfYDzI+qnDUcGwovBq6zMBicmd7koph3hDDuEJkIkuIVHBQfRSyTdGuK+
+ BvEQdbbh6K5iGH4uQlxCMeSb03qgYgiCZ5DgEKi5pqWb3zf+qM0zvspJ5FWCEzI84otM
+ 1sfo6H7ujFQFxY62AjkwfCgsAXEQVrjdmizyX2t06EAziceGOdJiW2twiQ802R28HRgw
+ kGeR8XZeBhlUI20YvKASs4qWseByJs0iGASyD9KssJ5XiNP11WigfFlHBfHi/NU++cxM
+ MmMw==
+X-Gm-Message-State: AOJu0YyZbIp5Pa023oRpN9Erojog2MU4K0ERQCYim1JNFwWq9AheQagh
+ zFCoG3s/QF+dfjDxzihMryO+u163zw5JKh98p0b3+YgBlLk7ORoZ9oonl+MLNuQ7AeeVOc2TR1q
+ X8EKNZyUfI6SJDcz/IOivmSXtc6x69uMUFgsI
+X-Google-Smtp-Source: AGHT+IG8qYZeyPYtYiS3Aj1FOLfAW4kfhGE4ocKHuQIfpuAkliJzcAWAmF+PkEW79xSvSg300dE4hG09lNBvy5QUq3E=
+X-Received: by 2002:a05:6214:2dca:b0:6cc:380:b04f with SMTP id
+ 6a1803df08f44-6cde14b82f7mr33493856d6.6.1729263434108; Fri, 18 Oct 2024
+ 07:57:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241018030027.842749-1-sjg@chromium.org>
- <87jze5ao26.fsf@prevas.dk>
-In-Reply-To: <87jze5ao26.fsf@prevas.dk>
+References: <20241017232413.724808-1-sjg@chromium.org>
+ <20241017232413.724808-16-sjg@chromium.org>
+ <20241018031455.GU4959@bill-the-cat>
+In-Reply-To: <20241018031455.GU4959@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 18 Oct 2024 08:55:51 -0600
-Message-ID: <CAFLszThFNXxM2cWdMHWFP8NsH5x6-X9u7aWNpPokgLWRAA55=g@mail.gmail.com>
-Subject: Re: [PATCH 0/8] membuff: Add tests and update to support a flag for
- empty/full
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Date: Fri, 18 Oct 2024 08:57:02 -0600
+Message-ID: <CAFLszTiELZL3ZAm38z9y0yLx+XEU-EUuV5GVfjU=-3WdpkTUDA@mail.gmail.com>
+Subject: Re: [PATCH 15/34] image: Add a new type for extlinux
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ion Agorria <ion@agorria.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
- Marek Vasut <marex@denx.de>, Martyn Welch <martyn.welch@collabora.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Raymond Mao <raymond.mao@linaro.org>, Robert Marko <robert.marko@sartura.hr>, 
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Tom Rini <trini@konsulko.com>
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Raymond Mao <raymond.mao@linaro.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,52 +88,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+Hi Tom,
 
-On Fri, 18 Oct 2024 at 01:05, Rasmus Villemoes <ravi@prevas.dk> wrote:
+On Thu, 17 Oct 2024 at 21:14, Tom Rini <trini@konsulko.com> wrote:
 >
-> On tor, okt 17 2024, Simon Glass <sjg@chromium.org> wrote:
+> On Thu, Oct 17, 2024 at 05:23:54PM -0600, Simon Glass wrote:
 >
+> > Add an image type for the extlinux.cfg file, which U-Boot supports
+> > reading.
 > >
-> >   membuf: Support a flag for being full
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >
+> >  boot/image.c    | 1 +
+> >  include/image.h | 1 +
+> >  2 files changed, 2 insertions(+)
+> >
+> > diff --git a/boot/image.c b/boot/image.c
+> > index abac254e026..cf16fb7fbf7 100644
+> > --- a/boot/image.c
+> > +++ b/boot/image.c
+> > @@ -183,6 +183,7 @@ static const table_entry_t uimage_type[] = {
+> >       {       IH_TYPE_FDT_LEGACY, "fdt_legacy", "legacy Image with Flat Device Tree ", },
+> >       {       IH_TYPE_RENESAS_SPKG, "spkgimage", "Renesas SPKG Image" },
+> >       {       IH_TYPE_STARFIVE_SPL, "sfspl", "StarFive SPL Image" },
+> > +     {       IH_TYPE_EXTLINUX_CFG, "extlinux_cfg", "Extlinux configuration" },
+> >       {       -1,                 "",           "",                   },
+> >  };
 >
-> No, that is the worst of all worlds, especially with it being a
-> build-time flag. The right implementation is the one where the head and
-> tail indices are free-running, where you get such a "flag" for
-> free, because you're not wasting the top bits of the indices.
->
-> https://www.snellman.net/blog/archive/2016-12-13-ring-buffers/
+> This whole part of the series feels like we're abusing IH_TYPE_ far past
+> what it's used for. Especially the command line string one. It seems
+> like the main use is to be able to later on print something human
+> friendly. Please try and figure out some other way to do that. Thanks.
 
-Thanks for the link. It is an interesting read, including the
-comments. I've only written one ring buffer in my life and this is it
-:-)
+Yes I had the same thought, particularly with cmdline, as you say.
 
-Which option do you suggest? We don't currently restrict the size to a
-power of two and that does seem like a strange restriction. It will
-make it less useful, e.g. in extlinux_fill_info() and potentially
-replacing memgets().
+The obvious alternative is to just have a string which communicates
+the type. Then I can use IH_TYPE_INVALID, perhaps, with an extra
+string indicating what it really is.
 
-We actually don't have to worry (today) about threading, so option two
-could work, I suppose. I don't like the 'length' field any more than
-the author, but we could have a simple function to turn it into
-(pointer plus an empty/full flag)
-
-The power-of-two restriction could be lifted by use division instead
-of masking and making sure that the indexes keep to reasonable values
-(say no more than twice the buffer size). In fact with the limit, we
-could just subtract the length from the index when accessing it, if
-needed.
-
-But overall I think I'm with Chris.
-
->
-> If you want to do the churn of renaming anyway, I suggest doing it by
-> adding an implementation using the proper scheme under the new name,
-> switch users over, and dropping the old. IMO, this series as-is brings
-> no value (except for the tests, of course).
-
-OK. Do you think this series gets us closer to that, or further away?
+But one advantage of the approach in this patch is that, for bootmeths
+which include a cmdline, it can be identified and added as a file.
+That includes zimage and ChromiumOS, but not EFI. It will allow me to
+get rid of the cmdline in struct bootflow, perhaps.
 
 Regards,
 Simon
