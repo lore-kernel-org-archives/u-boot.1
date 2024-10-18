@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 954ECD3C548
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 04:02:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36002D3C549
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 04:39:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED63989169;
-	Fri, 18 Oct 2024 06:01:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 34664891FD;
+	Fri, 18 Oct 2024 06:39:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="CoGPieHS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tsL63J/b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18A0389185; Fri, 18 Oct 2024 06:01:57 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7DD2589215; Fri, 18 Oct 2024 06:39:07 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F02D889141
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 06:01:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF147891A4
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 06:39:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1729224112; x=1729828912; i=xypron.glpk@gmx.de;
- bh=4FUGcBRunXwDPb/7iZcVz0REslAWfJPkRzx0oq23Msg=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=CoGPieHSqcRotIXln4tEMrKuJbloL2D3fSB/1dVDECAwXOm6UFY0wi3c3H9XlRhH
- icFuYxPD91aCkmHlc3tJqo9ctvAp391oS+0kgHRRlKFOjzP6e1CCB17VvEtA0V0BM
- O4QUzkjoLLIcJWdPKXDjsqrpBwGCOGeqE6z8zRgLw3RH7wLVnpUW3/HK/lP7bhqvq
- DQK04PieMQqUn4XhGoMwRmepQoFMakLJ3grLrXwfJ/qI6qg9qkElNIw2+/Eejiczn
- hBdl7XI2Wy4qG9EO//WwTNuywTGq8T3hJI52syeBFSaFVLYdkon8XUL51lHEupHzE
- V0Q1afl9ogObSKIE2Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MxUs7-1tpjfF0O65-0159sw; Fri, 18
- Oct 2024 06:01:52 +0200
-Date: Fri, 18 Oct 2024 06:01:50 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Guillaume La Roque <glaroque@baylibre.com>, 
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Shantur Rathore <i@shantur.com>
-Subject: Re: [PATCH 23/34] bootstd: Maintain a list of images
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20241017232413.724808-24-sjg@chromium.org>
-References: <20241017232413.724808-1-sjg@chromium.org>
- <20241017232413.724808-24-sjg@chromium.org>
-Message-ID: <0B48F871-BDD8-4810-ADA3-4F6C4E403B0C@gmx.de>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b154f71885so71492985a.0
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 21:39:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729226343; x=1729831143; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=nMP+dmEtttaEJMCJ8eXqJ+6DW9a9aVs/C/UMWZvV/Is=;
+ b=tsL63J/b1WUdV/v/LAZ4FR95h9cF4+dcbvzMHqmpEH2wbs/uFqDW8X8cqhdA37V0LI
+ u2Cnwfzybwtm4JHzaxJSLmS+34YVwjT3YgFz58YfCB9oNMqki0Ou9+y8yjAoOOFmU5BA
+ Fg3OzvBBKSrWHHQk1LlTq/YiQ08m4N/StTk6o=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729226343; x=1729831143;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nMP+dmEtttaEJMCJ8eXqJ+6DW9a9aVs/C/UMWZvV/Is=;
+ b=mC/+U/N6P5c5iP1n2fBVzDt2Ofwj2sJip8N5u7BOFVTwfs5x2H+FPRZhhQ6qTuTn+9
+ U0WX7Z8UGoo+2+aualNSm6EvCCJYh5q+qo1iJ5ksDIzukXhs2b7eBdlEXZJD294WV1AL
+ F7K80LvqqxZ4ImatPAiQ9YZh4m4X3Up0rPgRwnGSkrQf1iDWiP7rYYrbehkmDsvuifKX
+ JFO1VBPzgimVZvnhf1N3myLtPdvB4772HBATl9Mjq/JNoYjzucRlqhTaVhsH+HOrV4Eu
+ anaPMpwXnRKq4ppCq0znAaShN0zcCdHj3Owi6pVYQSkf8nwkg1SvJD5EVRQ9VOXs1lPv
+ xulg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXucNsrme87pT3X/8FzQrBDrEgtYug/FrRGfm8xOq0Dd4xnU7rwlJ6uHFxaHHu/E3ztm/6zais=@lists.denx.de
+X-Gm-Message-State: AOJu0YwC09yxbA8eDbBNLBKMRj/INrEPi08nOvIpyj32xZ1u6V9Gr+v2
+ uUgS8DT123r647If0XYY9OolDsPEWUXLd7eblvCLugLuO+VG4hCB5h7dkCAwrh8=
+X-Google-Smtp-Source: AGHT+IHScQYJeod6YTcW9vWVLHGFkzeECfnaAM31/lJs9c6zMm954DskwE30P0CL6+7OJDgLkCnFyQ==
+X-Received: by 2002:a05:620a:4620:b0:7b1:43a8:3fe9 with SMTP id
+ af79cd13be357-7b157bdfb46mr111512385a.46.1729226342745; 
+ Thu, 17 Oct 2024 21:39:02 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b156fe5b4bsm35638085a.88.2024.10.17.21.39.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Oct 2024 21:39:01 -0700 (PDT)
+Date: Thu, 17 Oct 2024 22:38:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 3/8] bootstd: Avoid depending on BLK
+Message-ID: <20241018043858.GV4959@bill-the-cat>
+References: <20240901222734.462334-4-sjg@chromium.org>
+ <20240901222734.462334-1-sjg@chromium.org>
+ <CAFLszTivbDM10hCKTvnhKdWXsd6Xc8uMkt8PHt2nw3a1jASgnQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:DA2CAM6nkLCVqat5jHtJeHv8XYRAsnlZ3I2lnR886TfiBz1A7mT
- p9J39/ez6h+E+4TmSVryTTMSoyYH9onekeAssXxl6q57pPBhy7YrpFXyG4bpmcIiaw3b/V5
- JdGtIOsDrRk7RlYCDnOu6wYpYQr7YwHFc3J8ypX5C211BhuM8xcmUftv1ozLBIxXYnaTPie
- XhNaiqM9I6Qx1pEGTONvw==
-UI-OutboundReport: notjunk:1;M01:P0:CXP6WINYADY=;5RhHE9FuA1CWqyK8sBMlQb9mIAx
- pu+kgj56Fao0t/QP7pXucC9dsTV33oBN5bWY1hybs/rVxBTfJIAIeRh2O95Eeyz78x0IV/sQy
- Chpl0Y978fgvOyXng14Oq/iXwojPwW1vZNJf2KUG5ILoVLFBkaqoOPS+/9d5I+WS/vzb3ogX1
- L+MnNcof15ZGHSW8SBGYwPkGb89OIIYFfpCqfGc96WoAMIHeyeLstGvc53NCe8fFkzexhSX3f
- J6XshdUsnwSaX8QSpCV/LAMDfX7hmxD+HDnfnVH/sd2C6lSEEST/nPwB6j1HMI1Mr3Ybmixtg
- cyJfRbjuxzNTXgYW0F706Y/HbdguiMwNLeqS0Ixgx8rDFZx4E5C6tPCVO2pOzO2CdOgAi5vqR
- 94AwOrgzjkuEc7D3GFT2WD5gpQVTq4J8mYcAHCrfcPLEvH/P+8QxfZH70IBffPssHhNBeQs9c
- fw6Xfz2jA1oce8tiq+UiCN9wZoigZN6x8rPHjoAy2WM3IeIi597ROuHStsK94t7vQZjTLoPE/
- Vn44GVUxeO28xkBRuG1YtzD8gv62jSFuoykSpS1i9y/OvgVvbrCgu9EI7/RdMbiVh15+06JBE
- E1neLu+4Knwu9+1CY4oMc9EDSUhQpTQOKJTDOxy0ll79mFKMhsgtbopixu3MDh9J0ur0aI4S1
- 4W9xKYZn9UJhdaEggR2S1uLcuTWem4rCKZZJgAWtUAOjR1+FFTPmFXj8Vz4yorz5TfMbffaBJ
- BRXvTW4SKwCPx9/kvV7JoY/sZGaQmfIRPjz4kv6Gf579TbnDKa7IeFHj+Cg4jmp5We79z1KIc
- fjupBrShs9xNxdWsZUXmW+OQ==
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9l9lkNgwLlDxALHe"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTivbDM10hCKTvnhKdWXsd6Xc8uMkt8PHt2nw3a1jASgnQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,112 +97,101 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--9l9lkNgwLlDxALHe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Am 18=2E Oktober 2024 01:24:02 MESZ schrieb Simon Glass <sjg@chromium=2Eor=
-g>:
->We want to keep track of images which are loaded, or those which could
->perhaps be loaded=2E This will make it easier to manage memory allocation=
-,
->as well as permit removal of the EFI set_efi_bootdev() hack=2E
+On Thu, Oct 17, 2024 at 04:12:02PM -0700, Simon Glass wrote:
 
-Please, keep in mind that files can be loaded manually, e=2Eg=2E via the d=
-hcp, the wget, and the loady commands=2E These are outside bootflows=2E
-
-No matter how an EFI binary is loaded, we have to create the matching devi=
-ce path=2E This requires knowledge of the source device and the  filepath o=
-r URL=2E Please, ensure that you gather all necessary information=2E
-
-Best regards
-
-Heinrich
-
->
->Add a list of these, attached to the bootflow=2E For now the list is
->empty=2E
->
->Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
->---
->
-> boot/bootflow=2Ec    |  7 +++++++
-> include/bootflow=2Eh | 21 +++++++++++++++++++++
-> 2 files changed, 28 insertions(+)
->
->diff --git a/boot/bootflow=2Ec b/boot/bootflow=2Ec
->index 72b51ebd49b=2E=2E10bda8eac79 100644
->--- a/boot/bootflow=2Ec
->+++ b/boot/bootflow=2Ec
->@@ -455,10 +455,13 @@ void bootflow_init(struct bootflow *bflow, struct u=
-device *bootdev,
-> 	bflow->dev =3D bootdev;
-> 	bflow->method =3D meth;
-> 	bflow->state =3D BOOTFLOWST_BASE;
->+	alist_init_struct(&bflow->images, struct bootflow_img);
-> }
+> In principle bootstd can work without block devices, even if it does
+> require driver model to be enabled in that case.
 >=20
-> void bootflow_free(struct bootflow *bflow)
-> {
->+	struct bootflow_img *img;
->+
-> 	free(bflow->name);
-> 	free(bflow->subdir);
-> 	free(bflow->fname);
->@@ -467,6 +470,10 @@ void bootflow_free(struct bootflow *bflow)
-> 	free(bflow->os_name);
-> 	free(bflow->fdt_fname);
-> 	free(bflow->bootmeth_priv);
->+
->+	alist_for_each(img, &bflow->images)
->+		free(img->fname);
->+	alist_empty(&bflow->images);
-> }
+> The use of a 'depends on BLK' for BOOTSTD conflicts with the way 'BLK'
+> is now defined, producing recursive errors through multiple different
+> paths, one of which is this (with Linksprite_pcDuino3 and
+> BOOTSTD_DEFAULTS enabled):
 >=20
-> void bootflow_remove(struct bootflow *bflow)
->diff --git a/include/bootflow=2Eh b/include/bootflow=2Eh
->index 9b24fb5c3eb=2E=2E3d9a9e2025a 100644
->--- a/include/bootflow=2Eh
->+++ b/include/bootflow=2Eh
->@@ -7,7 +7,9 @@
-> #ifndef __bootflow_h
-> #define __bootflow_h
+>   arch/arm/Kconfig:7:error: recursive dependency detected!
+>   arch/arm/Kconfig:7: symbol ARM64 is selected by ARCH_UNIPHIER_V8_MULTI
+>   arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
+>      part of choice <choice>
+>   arch/arm/mach-uniphier/Kconfig:6: choice <choice> contains symbol
+>      ARCH_UNIPHIER_V8_MULTI
+>   arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
+>      part of choice SPL
+>   arch/arm/mach-stm32mp/Kconfig:3: symbol SPL depends on SUPPORT_SPL
+>   common/spl/Kconfig:1: symbol SUPPORT_SPL is selected by ASPEED_AST2600
+>   arch/arm/mach-aspeed/Kconfig:26: symbol ASPEED_AST2600 is part of
+>      choice <choice>
+>   arch/arm/mach-aspeed/Kconfig:12: choice <choice> contains symbol
+>      ASPEED_AST2500
+>   arch/arm/mach-aspeed/Kconfig:17: symbol ASPEED_AST2500 is part of
+>      choice DM_RESET
+>   arch/arm/mach-renesas/Kconfig.rcar3:197: symbol DM_RESET is selected
+>      by CLK_RCAR_GEN3
+>   drivers/clk/renesas/Kconfig:53: symbol CLK_RCAR_GEN3 depends on
+>      CLK_RENESAS
+>   drivers/clk/renesas/Kconfig:1: symbol CLK_RENESAS depends on CLK
+>   drivers/clk/Kconfig:3: symbol CLK is selected by IMX8M_POWER_DOMAIN
+>   drivers/power/domain/Kconfig:35: symbol IMX8M_POWER_DOMAIN depends on
+>      POWER_DOMAIN
+>   drivers/power/domain/Kconfig:3: symbol POWER_DOMAIN is selected by
+>      BCM6318_USBH_PHY
+>   drivers/phy/Kconfig:83: symbol BCM6318_USBH_PHY depends on PHY
+>   drivers/phy/Kconfig:4: symbol PHY is selected by USB_EHCI_MX7
+>   drivers/usb/host/Kconfig:211: symbol USB_EHCI_MX7 depends on USB
+>   drivers/usb/Kconfig:1: symbol USB is selected by BOOTSTD_DEFAULTS
+>   boot/Kconfig:455: symbol BOOTSTD_DEFAULTS depends on BOOTSTD
+>   boot/Kconfig:398: symbol BOOTSTD depends on BLK
+>   drivers/block/Kconfig:1: symbol BLK is selected by PVBLOCK
+>   drivers/xen/Kconfig:1: symbol PVBLOCK depends on XEN
+>   Kconfig:176: symbol XEN depends on ARM64
 >=20
->+#include <alist=2Eh>
-> #include <bootdev=2Eh>
->+#include <image=2Eh>
-> #include <dm/ofnode_decl=2Eh>
-> #include <linux/list=2Eh>
+> We don't want to revert the change to BLK, which has been in place for
+> a year now. We don't want to select BLK in BOOTSTD since it should
+> support booting without block devices. The only realistic option is to
+> remove BOOTSTD's dependency on BLK.
 >=20
->@@ -85,6 +87,7 @@ enum bootflow_flags_t {
->  * @cmdline: OS command line, or NULL if not known (allocated)
->  * @x86_setup: Pointer to x86 setup block inside @buf, NULL if not prese=
-nt
->  * @bootmeth_priv: Private data for the bootmeth
->+ * @images: List of loaded images (struct bootstd_img)
->  */
-> struct bootflow {
-> 	struct udevice *dev;
->@@ -109,6 +112,24 @@ struct bootflow {
-> 	char *cmdline;
-> 	void *x86_setup;
-> 	void *bootmeth_priv;
->+	struct alist images;
->+};
->+
->+/**
->+ * struct bootflow_img - Information about an image which has been loade=
-d
->+ *
->+ * This keeps track of a single, loaded image=2E
->+ *
->+ * @fname: Filename used to load the image (allocated)
->+ * @type: Image type (IH_TYPE_=2E=2E=2E)
->+ * @addr: Address to which the image was loaded, 0 if not yet loaded
->+ * @size: Size of the image
->+ */
->+struct bootflow_img {
->+	char *fname;
->+	enum image_type_t type;
->+	ulong addr;
->+	ulong size;
-> };
+> Disable standard boot on the one board which fails.
 >=20
-> /**
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+> Changes in v3:
+> - Drop wip (work-in-progress) comment in commit
+>=20
+> Changes in v2:
+> - Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
+>=20
+>  boot/Kconfig                                   | 2 +-
+>  configs/gardena-smart-gateway-mt7688_defconfig | 1 +
+>  2 files changed, 2 insertions(+), 1 deletion(-)
+>=20
+> Applied to u-boot-dm, thanks!
+
+No, this is wrong, it's pulling in BOOTSTD on a ton of platforms that
+didn't have it before.
+
+--=20
+Tom
+
+--9l9lkNgwLlDxALHe
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcR5l4ACgkQFHw5/5Y0
+tywGgAwAtffCwTp8ozekMoIvsYevmr0SRHUETwMjrcH0s6VoTfeHMk9NnbVJWDHj
+oZVkxuASXaBOnvh1cm2aXQuU2N/6xYxTbizMjb51SgxTp5c4ocUpmq33iEvm0stC
+LS6KbyMuvlcFUcASGoy9A1mYVboCTlX/4qKSd9KMAf/YafdAKZU+OxL2hU7G0xqf
+tpO1UAa9e2VSXzOW/E6nJD3CnFrOtHT+HdS8Fgjo/SaTrSoOxIv/jo4y1qOmhfeB
+3xQP8CFK+5+J2HWcZtwah1WkPs2IrvbtRt9n2TyZ/cEhrccrs4EXcRg8gW0Xml/F
+FB3evWBsSFQDJ1/V6MqmttMSnMFZFZPSPMNoYm+6QzAU7pwlP5hFEvbYu8xDqu8K
+chzu0eLny8c+00mDZp0PKq9+ctaMTDtpbb6bzTAB2OdAKnU6VE29p7t8Urm9W/Hw
+5oLqDrbbaSfv37SFHcf+AcpW5cxy3+6GQtphtjwvHGKar1amaJSur7+0xQNKDQKI
+dV20oTGw
+=J3y1
+-----END PGP SIGNATURE-----
+
+--9l9lkNgwLlDxALHe--
