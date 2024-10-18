@@ -4,76 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327ABD3C549
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 04:40:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F625D3C537
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 04:51:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E0B489215;
-	Fri, 18 Oct 2024 06:40:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0AB5F89214;
+	Fri, 18 Oct 2024 06:51:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TZEJ0nfD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DVLGqlWS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55B4389215; Fri, 18 Oct 2024 06:40:54 +0200 (CEST)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C543789229; Fri, 18 Oct 2024 06:51:52 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7DE8891A4
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 06:40:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D719891A4
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 06:51:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-4606347c791so13727391cf.2
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 21:40:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729226450; x=1729831250; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1Trf73c1113QZYiaGbyoPYgCsOqQGscEz7iFaIE1Mxk=;
- b=TZEJ0nfDQeOd0uEVVnv4KaSdHghDRH7nDqh4qFig8MiUERoB/ENW46YnfCYitRqVM1
- swdlTF1Q3pk1sldRdmlaaNh+tSpPAgnP5RQL2p8W1uJNKMeKctPoN/esgYuscFllsq9S
- 3+ETdoSItExFoUoVGGCYRio95gNuyXnRnUkiw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729226450; x=1729831250;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1Trf73c1113QZYiaGbyoPYgCsOqQGscEz7iFaIE1Mxk=;
- b=vxhkwC6tFcYSISrxkcjWUlaY94vbF8hRGVynI5Fo6etuzy+hlZBjhgPsZLwdSSjWUG
- 2RcLCd8thAnjTf8DZGm/1SEmBl+j7rzR0Nv1dwm+K7ZD6MXeGF6F9RCo//vC8C0d7vjL
- C7GC6rmGr/x+CU0qJhaVNnXGaJFNZnd0FXuCQ4azUnd9fdGpKunhKAb+wwdaOhqatsjO
- cJiFu5KkdETlj0C2iCxZNw4GkCaJT+S/N4ukYuhK2axt7uHKBDGWEwdHvi2p6gDmaFwC
- rWvy81FJLZGS/Ey1xhYfJsrSRtI2XxvVt0xYZjl1Z6Z/pXZeH5S5swovv2HmlR4eLHFy
- xuBA==
-X-Gm-Message-State: AOJu0YyVCXOONUntXwDdCMJY3zMQJVts8Jv9gcESuQWpxcs3MmeoWPUC
- fvFtJbGV+8joklLnKr0NnkentkTmX0QDYKG4I97fjqMWBiJPErqBaOL4iX2o956KxWCv4ebkUTb
- HXTY=
-X-Google-Smtp-Source: AGHT+IHHWyj+xkrNVf1SNvLcM6Bg+sq1B0TGOQv5TCLPalUcLAuphfHMuDZRTLWOzI2U30oVKOQYVA==
-X-Received: by 2002:a05:622a:60a:b0:458:217d:be48 with SMTP id
- d75a77b69052e-460aed41f73mr17707771cf.14.1729226450540; 
- Thu, 17 Oct 2024 21:40:50 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-460ae96d7e9sm3605021cf.33.2024.10.17.21.40.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Oct 2024 21:40:49 -0700 (PDT)
-Date: Thu, 17 Oct 2024 22:40:46 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Please pull u-boot-dm
-Message-ID: <20241018044046.GW4959@bill-the-cat>
-References: <CAFLszTiu=mRQLfG35HMYd004Res6-SNFVBU8qosZjzFY8q9AsA@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49I4plbt102374;
+ Thu, 17 Oct 2024 23:51:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1729227107;
+ bh=mBAcVXcEfJW0UUzGZw8Ct4hblaUDx8teOyu4/TUKCNc=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=DVLGqlWSNDO58d5mFgxDlxr7Iypdd8Db44tNPZtCqkYcXt2BTp00992+pKwjijMKF
+ OEPpDYD7vQ1YekAuzBx7mUF/7lcLQLPlYr7n0HXXbFZ5YL7MgNxK1+VR+6u1T7TCyy
+ Inc6ay11o69r6Dt9max0byc+CmgE06RNEEHw8584=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49I4plcS021174
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 17 Oct 2024 23:51:47 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 17
+ Oct 2024 23:51:47 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 17 Oct 2024 23:51:47 -0500
+Received: from [172.24.227.91] (psdkl-workstation0.dhcp.ti.com [172.24.227.91])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49I4pjM0065977;
+ Thu, 17 Oct 2024 23:51:45 -0500
+Message-ID: <1edf9e5d-f66e-4e8f-ba34-a06cd309dc9c@ti.com>
+Date: Fri, 18 Oct 2024 10:21:44 +0530
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="l8E7pKIvD7doPppY"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTiu=mRQLfG35HMYd004Res6-SNFVBU8qosZjzFY8q9AsA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 6/6] DONOTMERGE: For testing only
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <reidt@ti.com>,
+ <m-chawdhry@ti.com>, <nm@ti.com>
+References: <20241017062911.2241167-1-a-limaye@ti.com>
+ <20241017062911.2241167-7-a-limaye@ti.com>
+ <20241017175448.GO4959@bill-the-cat>
+Content-Language: en-US
+From: Aniket Limaye <a-limaye@ti.com>
+In-Reply-To: <20241017175448.GO4959@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,64 +83,27 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---l8E7pKIvD7doPppY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 17, 2024 at 05:23:40PM -0600, Simon Glass wrote:
+On 17/10/24 23:24, Tom Rini wrote:
+> On Thu, Oct 17, 2024 at 11:59:13AM +0530, Aniket Limaye wrote:
+> 
+>> From: Reid Tonking <reidt@ti.com>
+>>
+>> This just provides some useful print outs and the proper config to
+>> test the functionality. For J7200 boards that do not have efuse
+>> burned in, the hardcoded 760000 is needed in the vd_data, since
+>> it would be populated otherwise
+>>
+>> Signed-off-by: Reid Tonking <reidt@ti.com>
+>> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+> 
+> I can usually remember to use "b4 shazam -P ..." to omit these patches,
+> but it's generally best to not include them and either mark the whole
+> series as RFC instead if anyone else is likely to use them, thanks.
+> 
 
-> Hi Tom,
->=20
-> I have kept back some of the coreboot patches until the docker change
-> is applied. It needs a newer version of coreboot.
->=20
-> - Simon
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/22775
-> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D69&view=
-=3Dresults
->=20
-> The following changes since commit 8efc954fc77eaa734b9fe0cba4b33b75b6e8db=
-b8:
->=20
->   Makefile: Drop SPL_FIT_SOURCE support (2024-10-17 08:36:10 -0600)
->=20
-> are available in the Git repository at:
->=20
->   git://git.denx.de/u-boot-dm.git tags/dm-pull-17oct24
->=20
-> for you to fetch changes up to d9cfa1e3a3d6977feb8265703a6612f1477e9508:
->=20
->   x86: cpu: Add missing header inclusion (2024-10-17 14:36:23 -0600)
->=20
-> ----------------------------------------------------------------
-> A few new x86 commands and minor improvements
-> expo improvements
-> binman support for signing FIT images
+That makes sense. Got it, will remember to do that in the future.
 
-Please re-send with the patch I just objected to (and anything else that
-now needs to come out) dropped, thanks.
+Thanks,
+Aniket
 
---=20
-Tom
-
---l8E7pKIvD7doPppY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcR5s4ACgkQFHw5/5Y0
-tyzq7gv/Tm1ZBrMjNX6CYnb0oBNlUBtr0GKm8VW1X39boTvmxJVWhZRJPO5q5Nll
-eszbR4j3Y+HOnr9Lol/SjnikvWxueTbsSZSSzl2qYCO80YMA52gJW3vkMr+EGiJq
-Hz2KfmbIpbwXYlujIJdcOsL8GwUTnzAcu81Q47YwSI1Zh0Hbbaqr2gn4LUC93hHK
-ZderxhO2YdzmsX1bkqY6OkOQeL9eBI7gmWWYzqCdM80dOXbtwzvBKwxnn6x2/KNr
-saUX8y/DEupr4G9xbbDUWPjg/sLXokxTTynj2H+S8RJjV9P3Y7NK6EOuv40CEnr6
-jbZAwbjG/tLG53XNCzty5wsMtHRsLxCEBZemV1JwwA/elvjRli9awAXS2/hrpiKM
-E7wTDXpQG0OZzyiZdbimwFsSxQF4vxQ+d7UEu1RiEE28thpOkJNqGOWHApfXPNYB
-w3gkkzdxZYKCG+Tu6IdbSzrLxuDo7gVr991SBRu14/vZJvwI8ZNMDoPA8EBGM378
-aZv0uqK5
-=yqLJ
------END PGP SIGNATURE-----
-
---l8E7pKIvD7doPppY--
