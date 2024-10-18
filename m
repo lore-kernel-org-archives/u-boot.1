@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F5AAD30016
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 15:01:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B7D6D30016
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 15:01:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C4C689234;
-	Fri, 18 Oct 2024 17:01:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AD2EF892A2;
+	Fri, 18 Oct 2024 17:01:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L5qpg0lM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mh0WXxif";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65FF989169; Fri, 18 Oct 2024 17:01:22 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 720F589262; Fri, 18 Oct 2024 17:01:29 +0200 (CEST)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E30089234
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 17:01:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6180B89261
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 17:01:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6cbcc2bd800so18021316d6.0
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 08:01:11 -0700 (PDT)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-2e2dc61bc41so1594250a91.1
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 08:01:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729263670; x=1729868470; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729263677; x=1729868477; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7rTso333YvMlqq03REfldGj8wSbD08xdDGwnkITrCtE=;
- b=L5qpg0lMOe/Rlqc07IDPRQBcC8qw8nBVdgS5mJfO6i6VA/H925uSeHNMIYGJ0EVie+
- YhLtQIoGMzpSPtRJ00/SKTRPrqBQ4GMr+Sf4F9XHto4GXdmM9IuIBDWGit+FPSbY40wA
- D1biMSS8NnO/6l6x7yip0PdBp8OY9z+/GmoRQ=
+ bh=okRYT8hBSezbWqePoELOLAE40+eUg2XZ5B8BmGIaFkw=;
+ b=mh0WXxifVeq4ZMaZHwLcQtuXzSxNlf0ckfngVJrBFuWYDiiSXqo9pMEZKm48uyeHCA
+ O4Nvnf0RqT2V7v45kz8o2mrYn3yR4N2WjMdqp0plvRx5xRfCcvo8WE5fucTEApLDVism
+ zMvWaN1OJDIi03eDybzY/7aMOtcuAYzdl72B4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729263670; x=1729868470;
+ d=1e100.net; s=20230601; t=1729263677; x=1729868477;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7rTso333YvMlqq03REfldGj8wSbD08xdDGwnkITrCtE=;
- b=KEG6K/GnwzCLwjynv/vF8Dwtm9gQkvSa57GN+SIfmg8eJ69RqedvgxHCGLQmppUsrU
- 6qizL0eF2kEWKw1h31ABPb0F0PuaGEVP7AcvEkYATw0J6YQ2LQ5sSWWo7RBWbnHqd04s
- Z7KMbAyutcClrykmcxi+RhnX02RzJxFLOK0XheDgtzEOW3b1k38wqy6t8nzCBNUQwKch
- tkj/FLC00TGYNz2B4Md4nNs3HJi9e2vxEo/Gqc3Nbc7OAyLeK2ehkqe5AsOJj3aBJVO0
- T8fdr7qiqcjS0CtOV2i6AuDx+uH+9gO5EUyawW/66zIdYgN1tbJvNSMIKo+3wOWPAQD3
- qwRg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXKe/cQUfT9+vKLfAAJ/JmKyr9hBRpdZt/k50xEO2AepjXeQbfPAyWj5dxZminvqiCTvva1EyQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxy10Sog8sSyadjTwxso5HodIbbxiqViCsfc21yKTwnQZiTElKt
- y+eyMRlm9u3Vyje5rwxLQbHQfTMiSiP5oEz+tn+VOPHUrHEW2/szyA6H+2OGUeZxg2xqk4ksk2P
- WV6dmclWPtAiLMmsTtz1w4WQUPzA7VxNYZdbh
-X-Google-Smtp-Source: AGHT+IGrtaXOGpbiDgxontGzQk8WeKrluxRyFnqNtsgZzNyQpEolRn+bLU2zbQgMLkVyibbOVJNTfKl26brF+6cZs1o=
-X-Received: by 2002:a05:6214:1d25:b0:6cb:5ef6:93e9 with SMTP id
- 6a1803df08f44-6cc37851786mr115821506d6.9.1729263670148; Fri, 18 Oct 2024
- 08:01:10 -0700 (PDT)
+ bh=okRYT8hBSezbWqePoELOLAE40+eUg2XZ5B8BmGIaFkw=;
+ b=ZEn0hh1b3+ucIEWvhPWNeoWtccANOjRbhdd6xAvVKVT5NLz2OAaqh6LjAAER+8qzX5
+ DAqpcO1hdXKxqbuXHnoTC/nw5qfQe5IznI/fLz1gzohSXu7Mm6YqhNCpfQHL0eYrE123
+ GLsA62gzfLjLyuHxhpaWSjZ9TTv/BAp49lXr8JkbHkqjFWdDl1dTP8xAPgJfhwFgYjvx
+ IjaggzTxDRbwJTg+Rt6M5EsXAdgDTiSumgSl4UyIgh3IpaiIaZmgxfzCb4zlgqlhkJh8
+ it3xECyaulXv9M9ewE7bvK9oXB3MVeBQ8alyulrVg9UmRKSw4XNpbdFAVTYbHdCC+/pW
+ 9Vrw==
+X-Gm-Message-State: AOJu0YwoCcqZnWAvvovhhT05IyYal1zG7LJeRLP1q7nDOIy0jKr7t97z
+ Ab0gWH8boF7LJMseRaWTq2zEyqhu4bv0TC8IfK5H4bhmmjCdywy4AmfkkbBnom8YUPcfmyxyk5J
+ cAg+Vbv2yvZaZlb+zZJaeLIBUTXN1BUIgcSOW
+X-Google-Smtp-Source: AGHT+IEgTWNFH4ijnIKo2ox0Zj9YKOVOv7F4unEvR89L+bFTJkDp5FN5e+1GgSeugahua7Qn65bIq6IYfV0Bu+TrhzM=
+X-Received: by 2002:a17:90b:3bcd:b0:2e2:d3f6:6efc with SMTP id
+ 98e67ed59e1d1-2e5618cec6amr3168075a91.28.1729263676817; Fri, 18 Oct 2024
+ 08:01:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240901222734.462334-4-sjg@chromium.org>
- <20240901222734.462334-1-sjg@chromium.org>
- <CAFLszTivbDM10hCKTvnhKdWXsd6Xc8uMkt8PHt2nw3a1jASgnQ@mail.gmail.com>
- <20241018043858.GV4959@bill-the-cat>
-In-Reply-To: <20241018043858.GV4959@bill-the-cat>
+References: <20241017232413.724808-1-sjg@chromium.org>
+ <20241017232413.724808-24-sjg@chromium.org>
+ <0B48F871-BDD8-4810-ADA3-4F6C4E403B0C@gmx.de>
+In-Reply-To: <0B48F871-BDD8-4810-ADA3-4F6C4E403B0C@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 18 Oct 2024 09:00:49 -0600
-Message-ID: <CAFLszTjDeYRPoTneoKOkB1dRaSNM3AUEApGc+rmxKmLvQVvEqA@mail.gmail.com>
-Subject: Re: [PATCH v3 3/8] bootstd: Avoid depending on BLK
-To: Tom Rini <trini@konsulko.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Fri, 18 Oct 2024 09:01:03 -0600
+Message-ID: <CAFLszTjF-kg5E+sV+CkFjStmS2YyJiPa59zOWWZxd2J5yOwftA@mail.gmail.com>
+Subject: Re: [PATCH 23/34] bootstd: Maintain a list of images
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Julien Masson <jmasson@baylibre.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Nam Cao <namcao@linutronix.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Shantur Rathore <i@shantur.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,111 +87,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Thu, 17 Oct 2024 at 22:39, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 17 Oct 2024 at 22:07, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On Thu, Oct 17, 2024 at 04:12:02PM -0700, Simon Glass wrote:
 >
-> > In principle bootstd can work without block devices, even if it does
-> > require driver model to be enabled in that case.
-> >
-> > The use of a 'depends on BLK' for BOOTSTD conflicts with the way 'BLK'
-> > is now defined, producing recursive errors through multiple different
-> > paths, one of which is this (with Linksprite_pcDuino3 and
-> > BOOTSTD_DEFAULTS enabled):
-> >
-> >   arch/arm/Kconfig:7:error: recursive dependency detected!
-> >   arch/arm/Kconfig:7: symbol ARM64 is selected by ARCH_UNIPHIER_V8_MULTI
-> >   arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
-> >      part of choice <choice>
-> >   arch/arm/mach-uniphier/Kconfig:6: choice <choice> contains symbol
-> >      ARCH_UNIPHIER_V8_MULTI
-> >   arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
-> >      part of choice SPL
-> >   arch/arm/mach-stm32mp/Kconfig:3: symbol SPL depends on SUPPORT_SPL
-> >   common/spl/Kconfig:1: symbol SUPPORT_SPL is selected by ASPEED_AST2600
-> >   arch/arm/mach-aspeed/Kconfig:26: symbol ASPEED_AST2600 is part of
-> >      choice <choice>
-> >   arch/arm/mach-aspeed/Kconfig:12: choice <choice> contains symbol
-> >      ASPEED_AST2500
-> >   arch/arm/mach-aspeed/Kconfig:17: symbol ASPEED_AST2500 is part of
-> >      choice DM_RESET
-> >   arch/arm/mach-renesas/Kconfig.rcar3:197: symbol DM_RESET is selected
-> >      by CLK_RCAR_GEN3
-> >   drivers/clk/renesas/Kconfig:53: symbol CLK_RCAR_GEN3 depends on
-> >      CLK_RENESAS
-> >   drivers/clk/renesas/Kconfig:1: symbol CLK_RENESAS depends on CLK
-> >   drivers/clk/Kconfig:3: symbol CLK is selected by IMX8M_POWER_DOMAIN
-> >   drivers/power/domain/Kconfig:35: symbol IMX8M_POWER_DOMAIN depends on
-> >      POWER_DOMAIN
-> >   drivers/power/domain/Kconfig:3: symbol POWER_DOMAIN is selected by
-> >      BCM6318_USBH_PHY
-> >   drivers/phy/Kconfig:83: symbol BCM6318_USBH_PHY depends on PHY
-> >   drivers/phy/Kconfig:4: symbol PHY is selected by USB_EHCI_MX7
-> >   drivers/usb/host/Kconfig:211: symbol USB_EHCI_MX7 depends on USB
-> >   drivers/usb/Kconfig:1: symbol USB is selected by BOOTSTD_DEFAULTS
-> >   boot/Kconfig:455: symbol BOOTSTD_DEFAULTS depends on BOOTSTD
-> >   boot/Kconfig:398: symbol BOOTSTD depends on BLK
-> >   drivers/block/Kconfig:1: symbol BLK is selected by PVBLOCK
-> >   drivers/xen/Kconfig:1: symbol PVBLOCK depends on XEN
-> >   Kconfig:176: symbol XEN depends on ARM64
-> >
-> > We don't want to revert the change to BLK, which has been in place for
-> > a year now. We don't want to select BLK in BOOTSTD since it should
-> > support booting without block devices. The only realistic option is to
-> > remove BOOTSTD's dependency on BLK.
-> >
-> > Disable standard boot on the one board which fails.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v3:
-> > - Drop wip (work-in-progress) comment in commit
-> >
-> > Changes in v2:
-> > - Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
-> >
-> >  boot/Kconfig                                   | 2 +-
-> >  configs/gardena-smart-gateway-mt7688_defconfig | 1 +
-> >  2 files changed, 2 insertions(+), 1 deletion(-)
-> >
-> > Applied to u-boot-dm, thanks!
 >
-> No, this is wrong, it's pulling in BOOTSTD on a ton of platforms that
-> didn't have it before.
+> Am 18. Oktober 2024 01:24:02 MESZ schrieb Simon Glass <sjg@chromium.org>:
+> >We want to keep track of images which are loaded, or those which could
+> >perhaps be loaded. This will make it easier to manage memory allocation,
+> >as well as permit removal of the EFI set_efi_bootdev() hack.
 
-This affects 103 boards and the size growth is considerable:
+I'll change this 'hack' to 'feature'.
 
-   aarch64: (for 22/22 boards) all +15697.0 bss +26.2 data +710.9
-rodata +1822.1 text +13137.8
-       arc: (for 4/4 boards) all +15338.0 bss +4.0 data +526.0 rodata
-+2096.0 text +12712.0
-       arm: (for 26/26 boards) all +18882.8 data +619.2 rodata +1998.8
-text +16264.8
-      m68k: (for 17/17 boards) all +23859.9 bss +3.5 data +1595.8
-rodata +1722.8 text +20537.8
-microblaze: (for 1/1 boards) all +24713.0 bss -88.0 data +1248.0
-rodata +2288.0 text +21265.0
-      mips: (for 23/23 boards) all +21659.1 bss +39.5 data +746.6
-rodata +2155.7 text +18717.4
-     nios2: (for 2/2 boards) all +24856.0 bss +4.0 data +704.0 text +24148.0
-   powerpc: (for 13/13 boards) all +21746.6 data +836.3 rodata +807.2
-text +20103.2
+>
+> Please, keep in mind that files can be loaded manually, e.g. via the dhcp, the wget, and the loady commands. These are outside bootflows.
 
-Added options are:
+Yes, this series is only going to help if bootstd is used. For ad-hoc
+use, EFI will need to rely on the above feature, at least until
+someone can think of another solution.
 
-   + all: CONFIG_BOOTDEV_ETH=1 CONFIG_BOOTMETH_EXTLINUX=1
-CONFIG_BOOTMETH_GLOBAL=1 CONFIG_BOOTMETH_VBE=1
-CONFIG_BOOTMETH_VBE_REQUEST=1 CONFIG_BOOTMETH_VBE_SIMPLE=1
-CONFIG_BOOTMETH_VBE_SIMPLE_OS=1 CONFIG_BOOTSTD=1
-CONFIG_BOOTSTD_BOOTCOMMAND=1 CONFIG_CMD_BOOTFLOW=1 CONFIG_MENU=1
-CONFIG_PXE_UTILS=1
+>
+> No matter how an EFI binary is loaded, we have to create the matching device path. This requires knowledge of the source device and the  filepath or URL. Please, ensure that you gather all necessary information.
 
-Should I manually disable it on those platforms? I've reached the
-point where bootstd needs to be available when BLK is not enabled, so
-need some sort of solution.
+OK I'll send a little series which shows how this can work. I had
+thought it was understood already, but your comment helps explain why
+no one has done it yet. In brief, the main advantage of bootstd over
+the scripts is that it has a full understanding of what is going on.
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> >Add a list of these, attached to the bootflow. For now the list is
+> >empty.
+> >
+> >Signed-off-by: Simon Glass <sjg@chromium.org>
+> >---
+> >
+> > boot/bootflow.c    |  7 +++++++
+> > include/bootflow.h | 21 +++++++++++++++++++++
+> > 2 files changed, 28 insertions(+)
+> >
+> >diff --git a/boot/bootflow.c b/boot/bootflow.c
+> >index 72b51ebd49b..10bda8eac79 100644
+> >--- a/boot/bootflow.c
+> >+++ b/boot/bootflow.c
+> >@@ -455,10 +455,13 @@ void bootflow_init(struct bootflow *bflow, struct udevice *bootdev,
+> > bflow->dev = bootdev;
+> > bflow->method = meth;
+> > bflow->state = BOOTFLOWST_BASE;
+> >+ alist_init_struct(&bflow->images, struct bootflow_img);
+> > }
+> >
+> > void bootflow_free(struct bootflow *bflow)
+> > {
+> >+ struct bootflow_img *img;
+> >+
+> > free(bflow->name);
+> > free(bflow->subdir);
+> > free(bflow->fname);
+> >@@ -467,6 +470,10 @@ void bootflow_free(struct bootflow *bflow)
+> > free(bflow->os_name);
+> > free(bflow->fdt_fname);
+> > free(bflow->bootmeth_priv);
+> >+
+> >+ alist_for_each(img, &bflow->images)
+> >+ free(img->fname);
+> >+ alist_empty(&bflow->images);
+> > }
+> >
+> > void bootflow_remove(struct bootflow *bflow)
+> >diff --git a/include/bootflow.h b/include/bootflow.h
+> >index 9b24fb5c3eb..3d9a9e2025a 100644
+> >--- a/include/bootflow.h
+> >+++ b/include/bootflow.h
+> >@@ -7,7 +7,9 @@
+> > #ifndef __bootflow_h
+> > #define __bootflow_h
+> >
+> >+#include <alist.h>
+> > #include <bootdev.h>
+> >+#include <image.h>
+> > #include <dm/ofnode_decl.h>
+> > #include <linux/list.h>
+> >
+> >@@ -85,6 +87,7 @@ enum bootflow_flags_t {
+> >  * @cmdline: OS command line, or NULL if not known (allocated)
+> >  * @x86_setup: Pointer to x86 setup block inside @buf, NULL if not present
+> >  * @bootmeth_priv: Private data for the bootmeth
+> >+ * @images: List of loaded images (struct bootstd_img)
+> >  */
+> > struct bootflow {
+> > struct udevice *dev;
+> >@@ -109,6 +112,24 @@ struct bootflow {
+> > char *cmdline;
+> > void *x86_setup;
+> > void *bootmeth_priv;
+> >+ struct alist images;
+> >+};
+> >+
+> >+/**
+> >+ * struct bootflow_img - Information about an image which has been loaded
+> >+ *
+> >+ * This keeps track of a single, loaded image.
+> >+ *
+> >+ * @fname: Filename used to load the image (allocated)
+> >+ * @type: Image type (IH_TYPE_...)
+> >+ * @addr: Address to which the image was loaded, 0 if not yet loaded
+> >+ * @size: Size of the image
+> >+ */
+> >+struct bootflow_img {
+> >+ char *fname;
+> >+ enum image_type_t type;
+> >+ ulong addr;
+> >+ ulong size;
+> > };
+> >
+> > /**
 
 Regards,
-Simon
+SImon
