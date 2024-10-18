@@ -4,75 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50A22D3F29E
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 21:20:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53DE1D3F29F
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 21:30:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79D8888DA0;
-	Fri, 18 Oct 2024 23:20:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=balister.org
+	by phobos.denx.de (Postfix) with ESMTP id 8D43388DC6;
+	Fri, 18 Oct 2024 23:30:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VBlrcgY8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fA1UPemI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B2FB88DC6; Fri, 18 Oct 2024 23:20:06 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id 7764C88DC6; Fri, 18 Oct 2024 23:30:31 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF89A88D61
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 23:20:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FA9988D61
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 23:30:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=balister.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philip.balister@gmail.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e2903a48ef7so2643470276.2
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 14:20:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6cbe3ea8e3fso14349136d6.0
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 14:30:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729286402; x=1729891202; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
- bh=5zlkslus+ar7PpbF1b/wpfHmHSbUY2CK6PS+f55Vqrk=;
- b=VBlrcgY8YagBeMkgHfnoXG05QqZwu1+fgG2ZXZBH5VoJmt5fOkYmNfRWrEb0q9yja8
- xsbEJPYgvRm/RruurfFeid47foQGWRZUl8iUjgtAiUc3Z25IsvTFjEHf05na8+IFxN8s
- ZHeajwR+PIWkNioHJXrkgShoviAlEGHbkXFpdisvs94fxnwBW7i7gJkswc1qCHqi7ysF
- PhHmvPFFuTOmawX1d4Mu3WCFXzE2wQ1n9G29l3BVpjD2/5hOZX63rzejWfEOUiI1hvoC
- u0Gc+w2ZqRbexl/A464jfjsoLnXAKvsYuqhNdHTPnzWSFiQczce9tP6ky6SlaRfB7LYo
- rPww==
+ d=konsulko.com; s=google; t=1729287028; x=1729891828; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=mDuGqPuk/pvIvRN15zftgMtOPPjeuMorhJJ5JNlsYsc=;
+ b=fA1UPemI9hUJ8yGuTLDNXhWyPOuPUYn2wK5oGMkAoAOrnVEWU3LrF8sQtTy2Vvb2yH
+ CtRDK/1sdYNsre9EOWOFuxeEhx71y9c5jJPe+aFkVXsvc45eNJNTMJ3i0EQqtVKaNqWB
+ VQY/dv4kreL5fWQOSztfgS5mP50Hg4vBfs9Vs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729286402; x=1729891202;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:sender:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1729287028; x=1729891828;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5zlkslus+ar7PpbF1b/wpfHmHSbUY2CK6PS+f55Vqrk=;
- b=rryDt4jY7SzjUCPN9vY2HLI/3jCrequ0ydb8gsYo9qzDcaNl6ZPt88GIItgMId4g/p
- OzEzbgbjhpn+Azfi/EMqQ2prLZCIaqVDKJ9brfXm1Z/kM3CIx6nxU3ADoCjaklWs1Vz1
- mg5B+hR8RnI+QZByj6AWBBwPRP4ZKKoNh3RvcdGsx5zcMksB7LWN6vH+m9lWMyhfuii6
- yLuW/ZF3ieW2Enfd1PyF7h7bLBft9gGdmq+NwRm4FFoe3pJgk9khJjLFbP4PMpklXE8H
- MF4O6yEefD/nIirLflba8cSJ3D40eCim36M7JkR1ezWTmWP8APTzNRB1CdYNWot+Kul9
- E+ag==
-X-Gm-Message-State: AOJu0YwtJToxaNumchkNUQUyB4DjhRXfnd4rAiANZn+zWK8G5k5gjrGj
- CaNrcuM6hiXmpRRyKtfA4612whwXHF03DZHUDO/i4UvxgsK+6FdjUEe2og==
-X-Google-Smtp-Source: AGHT+IEHRMbqWQuwX73NxHmBkijXVIsonSVP/BQNOdCOYQjZN2WfexPyC+YG3YzMwqd8P2XAwZnvMQ==
-X-Received: by 2002:a05:6902:2d08:b0:e28:f402:cc6f with SMTP id
- 3f1490d57ef6-e2bb1697364mr4132136276.46.1729286401948; 
- Fri, 18 Oct 2024 14:20:01 -0700 (PDT)
-Received: from dublin.hsd1.va.comcast.net
- ([2601:5c0:c200:483f:d85e:cf85:5150:cedd])
+ bh=mDuGqPuk/pvIvRN15zftgMtOPPjeuMorhJJ5JNlsYsc=;
+ b=XttHpayE5ah6ONICQFINHIlX0DW87xzkH6rBmXzxLi2LOyhKlOlatvj52n85CJ8Lmq
+ 6tpF4QG7etdp10DHBd/IvNdDxWYiRD31t9XPfURGyFeNlFZTJFW9jfdDh6Rwr94B7a45
+ jQ2C7HNZGXNVvdRkEBduRmPji59gqrxlycPoagKaLKgUGJj5AIZSrc1sXZmKhNLE6nXZ
+ 8uTpSS4Firg4t6dBQPrdZiZDmsKqxl/Wv95lCiEDbS4d4H+YKApSvUpBp7LyXB7Lc56N
+ nNQojvfEiQbg11yN3vUeSWGwE0Q3n4saW83gN+Oi4iV/7PDJnAh/j/WsQfsTqvoYGneV
+ Wbkg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUKbrrdq/IS2AyMX5mAbZD61dnHsmi57pGEZsIGzs/wKHq3tcGYcSQbjF1huK12VEJh0B9lSio=@lists.denx.de
+X-Gm-Message-State: AOJu0YxrumnBZ79vwSzXY0L3MdiA68WEwpWe1te0fCvwVT5zzoCfMUKU
+ nP9yetAJ63nkxbSGCDCes0pD/eEkxsjl8XOpJH10HU5Aqxj2mH/0Fik04s1xqkv++zx0EVGZr3L
+ 9FXU=
+X-Google-Smtp-Source: AGHT+IETz7acAvfn+BqavEOZZ5grUCsz9lxximTk+4wI7p1kItDqprghTisFZasCrMhY4FcAVGU40w==
+X-Received: by 2002:a05:6214:4a0a:b0:6cb:fa1c:87da with SMTP id
+ 6a1803df08f44-6cde159f3f5mr50113786d6.38.1729287027996; 
+ Fri, 18 Oct 2024 14:30:27 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-460ae94759fsm10858691cf.19.2024.10.18.14.20.00
+ 6a1803df08f44-6cde1364e92sm10593416d6.109.2024.10.18.14.30.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Oct 2024 14:20:01 -0700 (PDT)
-From: Philip Balister <philip@balister.org>
-To: u-boot@lists.denx.de
-Cc: Philip Balister <philip@balister.org>
-Subject: [PATCH] mcp230xx_gpio.c: Add a missing include file.
-Date: Fri, 18 Oct 2024 17:19:57 -0400
-Message-ID: <20241018211957.163051-1-philip@balister.org>
-X-Mailer: git-send-email 2.46.2
+ Fri, 18 Oct 2024 14:30:26 -0700 (PDT)
+Date: Fri, 18 Oct 2024 15:30:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Shantur Rathore <i@shantur.com>
+Subject: Re: [PATCH 23/34] bootstd: Maintain a list of images
+Message-ID: <20241018213022.GL4959@bill-the-cat>
+References: <20241017232413.724808-1-sjg@chromium.org>
+ <20241017232413.724808-24-sjg@chromium.org>
+ <0B48F871-BDD8-4810-ADA3-4F6C4E403B0C@gmx.de>
+ <CAFLszTjF-kg5E+sV+CkFjStmS2YyJiPa59zOWWZxd2J5yOwftA@mail.gmail.com>
+ <20241018163303.GZ4959@bill-the-cat>
+ <CAFLszTi2+2si4bq-iZK5fncnUnBHVLnpp6kqJAGFyK5Lis9OZg@mail.gmail.com>
+ <20241018180439.GD4959@bill-the-cat>
+ <CAFLszTjEvoPLiq5iuCRk8q3iA50q-UHGF4GBJJeNNWwqMXD_aw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="NxulHm9j9nQ1qjL5"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjEvoPLiq5iuCRk8q3iA50q-UHGF4GBJJeNNWwqMXD_aw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,25 +105,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
- * Fixes a warning about implicit declaration of udelay.
 
-Signed-off-by: Philip Balister <philip@balister.org>
----
- drivers/gpio/mcp230xx_gpio.c | 1 +
- 1 file changed, 1 insertion(+)
+--NxulHm9j9nQ1qjL5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/gpio/mcp230xx_gpio.c b/drivers/gpio/mcp230xx_gpio.c
-index 42e7fe9d474..b6f533b1306 100644
---- a/drivers/gpio/mcp230xx_gpio.c
-+++ b/drivers/gpio/mcp230xx_gpio.c
-@@ -14,6 +14,7 @@
- #include <asm/gpio.h>
- #include <dm/device_compat.h>
- #include <dt-bindings/gpio/gpio.h>
-+#include <linux/delay.h>
- 
- enum mcp230xx_type {
- 	UNKNOWN = 0,
--- 
-2.46.2
+On Fri, Oct 18, 2024 at 12:48:31PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 18 Oct 2024 at 12:04, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Oct 18, 2024 at 11:20:52AM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Fri, 18 Oct 2024 at 10:33, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Fri, Oct 18, 2024 at 09:01:03AM -0600, Simon Glass wrote:
+> > > > > Hi Heinrich,
+> > > > >
+> > > > > On Thu, 17 Oct 2024 at 22:07, Heinrich Schuchardt <xypron.glpk@gm=
+x.de> wrote:
+> > > > > >
+> > > > > >
+> > > > > >
+> > > > > > Am 18. Oktober 2024 01:24:02 MESZ schrieb Simon Glass <sjg@chro=
+mium.org>:
+> > > > > > >We want to keep track of images which are loaded, or those whi=
+ch could
+> > > > > > >perhaps be loaded. This will make it easier to manage memory a=
+llocation,
+> > > > > > >as well as permit removal of the EFI set_efi_bootdev() hack.
+> > > > >
+> > > > > I'll change this 'hack' to 'feature'.
+> > > > >
+> > > > > >
+> > > > > > Please, keep in mind that files can be loaded manually, e.g. vi=
+a the dhcp, the wget, and the loady commands. These are outside bootflows.
+> > > > >
+> > > > > Yes, this series is only going to help if bootstd is used. For ad=
+-hoc
+> > > > > use, EFI will need to rely on the above feature, at least until
+> > > > > someone can think of another solution.
+> > > >
+> > > > Perhaps I need to try and be clearer here than I might have been in=
+ the
+> > > > past. The consensus among off the shelf free software operating sys=
+tems
+> > > > is "just give me an EFI interface". This simplifies things on their=
+ end
+> > > > if regardless of architecture it's the same interface. This means t=
+hat
+> > > > in U-Boot we need to treat EFI as one of the primary interfaces. No=
+t a
+> > > > novelty. Not a "some people might use". It is a frequent and common=
+ly
+> > > > used feature.
+> > >
+> > > Yes, EFI is everywhere and growing. All the more reason to tidy up
+> > > this piece. I would like to see bootmgr use this new API, for example.
+> > >
+> > > But how does this comment affect this patch?
+> >
+> > Because at the very high level, I wonder if I made a mistake a few years
+> > back. As I understand it, the nominal case is "bootefi bootmgr". I was
+> > saying at the time that perhaps bootstd can just fire that off, and move
+> > on. Now it seems like we're going along the path of re-inventing that,
+> > and not integrating well with it either.
+>=20
+> In what way are we re-inventing that? bootstd supports lots of
+> different ways of booting, not just EFI.
 
+At the high level, bootflow scan is re-implementing "bootefi bootmgr".
+but handling non-EFI payloads.
+
+> Also I hope that one day EFI
+> will be implemented more as part of U-Boot than as a bolt-on, so will
+> make use of bootflows, etc.
+
+And stuff like that is why I said what I said in here first. To me it
+sounds like you keep implying it's a hack that's not well integrated.
+When it's honestly at this point gotten more traction than FIT images
+have I think (as much as I wish FIT images had "won", it's like VHS vs
+Betamax, to bring in another technology metaphor).
+
+> > So, to try and bring things back together. If U-Boot decides to load
+> > $FOO from device $BAR, at that common point is where we need to:
+> > - Is there an lmb for the location this is supposed to go to (for the if
+> >   we know it, entire size)?
+> > - Note down everything else we know, now.
+>=20
+> Yes.
+>=20
+> >
+> > This means that we can note down enough stuff so that EFI can construct
+> > the path it needs. And if we're being told a filesystem, that filename
+> > is good enough for the IH_TYPE thing you're wanting, or at least a good
+> > chunk of it I hope.
+>=20
+> You want me to ignore the type that I know (kernel, ramdisk, logo,
+> etc.) and infer the type from a filename? Why?
+
+No, I want you to save and display the filename. That's probably much
+more useful when debugging than "kernel". If you actually know some
+other type information (ie extlinux.conf says ...) then yes, it too can
+be stored as that's useful too.
+
+> For EFI there is only an EFI application. It will always just be a PE
+> file. We don't really know what it is, as someone pointed out earlier.
+> Maybe one day we will check to see if it is a UKI and pull things out
+> of it. But then, it would be component parts (kernel, ramdisk, etc.)
+> so I would want to add them as images.
+
+I don't see why yet, honestly.
+
+> > It also means that since it's at the most common point, it doesn't
+> > matter if we were in an EFI application, a boot script, a bootmeth or
+> > someone at the cmdline doing "load mmc 0:1 /boot/Image $kernel_addr_r".
+>=20
+> For that case (at the cmdline), bootstd is not currently running. Are
+> you suggesting that bootstd could pick up these things and record
+> them? If so, then yes, definitely, I want to do that. This series is
+> the starting point for that. If you are suggesting something else,
+> then I think I have lost you at this point.
+
+Yes, I think I lost you somewhere, but I'm not sure how. What I am
+saying is that since everything at some point calls down to say
+fs_read() to read a file, that is the common point to note what
+we're doing. Not the load command, not the bootmeth, not the EFI_LOADER
+call.
+
+--=20
+Tom
+
+--NxulHm9j9nQ1qjL5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcS02oACgkQFHw5/5Y0
+tyzbngv/eD0U2VxKOyUEoEmn1YRCNepa4gZJNerfhdhZqnJhPLDJfZViIka1OcJ4
+VsgkCTBQ8up8K/iTehaqsO0ogfU4pbZOqUmSviIJSaAwd7x1bYDkvDxMDKKky0D6
+PHnmezhSmgscWeR6t/iEqT7HNzwZS6Ij9gG/I28DlS12CWcSkZ4ACGkjkDj5ecLd
++SZhwkiGEsbn9YEB8pRMSn73YOpq8EKnKut27eYLxaXoBCj5BO4IHrFT94bI5B/o
+qIpkq+ziX0tr5qen92Fspe43bG0FvWdL8ZR4uVlDv2Gn79aSRJ10A2gbfDmrjXCf
+QfnkcDWNVyuI+DdYj3igyt0X7JXK3BCOMy3QGtQjLCHe/mNN9P3kqy4WspjCrGYo
+xBlnMtRPNZccW4OqH17cwP+zrDBzAzCWHtDx8F8n0CpnTOzEUbCruDqV7CGPTOY7
+uJ9eFl1illy+FqXTuGVN1WFrFCdI7A9WQsnnWaYeKxvzwnG557WCgVlBLuhfF51H
+rzjkGia4
+=rCo5
+-----END PGP SIGNATURE-----
+
+--NxulHm9j9nQ1qjL5--
