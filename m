@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42A2ED3E19B
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 02:22:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16F54D3E1AC
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 04:39:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A0FE88F27;
-	Sat, 19 Oct 2024 04:21:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 290C988D5B;
+	Sat, 19 Oct 2024 06:39:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c153cZzH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PBjUTYBk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CED188F23; Sat, 19 Oct 2024 04:21:41 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id D791588995; Fri, 18 Oct 2024 23:48:14 +0200 (CEST)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87F5B88E33
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 04:21:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C847588B23
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 23:48:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6c5ab2de184so15513556d6.0
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 19:21:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=l.rubusch@gmail.com
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-e29747b7532so372736276.3
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 14:48:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729304498; x=1729909298; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1729288091; x=1729892891; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TJuwliEBIGXe4Y5NH04I29ZUdJI9ffpi88CeNOr4n40=;
- b=c153cZzH3bZZYIAkqq+A9oCRSfY9DER4NGSp7emAeYNCT6JYZZvQffvbtojtQ//OLO
- QhuogYuPTyl7ViN1gOXZyggR5DfE8JgOPwAAd/d9QXMqXtZwOkfhhIVwG3acz9ZYmxBk
- 0m4lJbThJmMDBYTM0MvoPUEm5V9b4rDxJgOto=
+ bh=NbB+X3UY8BaIONAC/GZNs5O5zTmzdE5U5TW42xCxUzA=;
+ b=PBjUTYBk3/d2YmFf79E4IRGkSnXffaJoN0rSINV2Zy2Uadre5R5T7shxtkX5ckMq2R
+ 10wuiwUS/kBHLOVmjtk7H8iIuc7qkSFC7LB1JwDjqKlY3K1MIF3oDq6idYw0s7F1Bdpv
+ Wq8w2nW/MOSOqJtK+X9UcF+W5ILMeQaZW/YFd6tQQzHuwXHgAzQA39P4cg87E1DFmBVx
+ AE/14Of6K/Mww9u1h+T59UEqOYMDOLTnsRY86zksOKT7DO0llwAGF9tDRNXKp9E4hwSS
+ zy9dxc1dVImL4FXxDFIKl7i7HG8dNjj2dhrYvPaDfv3f/chyOypJvjf482RxQMqmmo56
+ p5Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729304498; x=1729909298;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1729288091; x=1729892891;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TJuwliEBIGXe4Y5NH04I29ZUdJI9ffpi88CeNOr4n40=;
- b=Too4SizzCJvtEH8pHgM4fKBLl/w1iZ/q8Z0nKoiwz/cwWMeFxzPquLnliQICd7RSap
- ezzOZKL66XMowlghHtECJWdg1oCAO2XGvkVnJX9IgjE/zrRIGKN6RbPz45afmj8Atm3Z
- CtsISa38hnXJpZU+gv7BA71Bw7rZrHIIpedgsWc6CojJRhZppvN8wpkogj72MmtWO/vA
- GFeEi3F0R6IcBY0tCxSGDUTIZ/L/dLkZDwML4g1jgb98tqSlzY+9IlwHFvzRwscttjj2
- msNypwj4DErm5ZH5jYYgBpMMCigasMvgVmKefhX6zbXgg8HIZ/rmt0fgihGtZonIon1g
- zxQQ==
-X-Gm-Message-State: AOJu0YzqIKzDFj5lxZx/jSsSaXeTHPFCV2HubLLPmTtwRVlXKlBYAfc5
- DIwtAVsZ7Jvl1rfCRauKgRt4pgJ9c0Y9sySXrFUUl8K8PQAZUUH7MWCD7ZYSVwFu8quugdNqvXZ
- UzVg=
-X-Google-Smtp-Source: AGHT+IFmT6xwLGKAQYju7WqLvEZ6aEjF2824U66eSeJH8InZfrjmSWfs82dfE+bTnO+Dv1a/F2tuLQ==
-X-Received: by 2002:a05:6214:5784:b0:6c3:5496:3e06 with SMTP id
- 6a1803df08f44-6cde14b89e9mr56742106d6.10.1729304498515; 
- Fri, 18 Oct 2024 19:21:38 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cde138fde7sm12521016d6.143.2024.10.18.19.21.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Oct 2024 19:21:37 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
-Cc: Hai Pham <hai.pham.ud@renesas.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jagan Teki <jagan@amarulasolutions.com>, 
- Johann Neuhauser <jneuhauser@dh-electronics.com>, 
- Simon Glass <sjg@chromium.org>, 
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
- Vignesh R <vigneshr@ti.com>
-In-Reply-To: <20241015201513.21836-1-marex@denx.de>
-References: <20241015201513.21836-1-marex@denx.de>
-Subject: Re: [PATCH] mtd: spi-nor: Move SR3 WPS bit definition in the
- correct location
-Message-Id: <172930449623.2505436.12599041852628693774.b4-ty@konsulko.com>
-Date: Fri, 18 Oct 2024 20:21:36 -0600
+ bh=NbB+X3UY8BaIONAC/GZNs5O5zTmzdE5U5TW42xCxUzA=;
+ b=Z1BKTqdQsz3xunnkX9+TQmHXz3LJuhDrt2+zrlT6w0FSChptdJEczp/SpiqLOWSJRb
+ /hk/ovRusZXlAuPWuqTXMeq4pYkBosn6RwTogKsTOumQnGfk8yythz9qYT9HQz7zgsG+
+ cc/QQD4ITR4C4xaEH/3sNqx3Q7IPhJ/EwK4dDWThQmC7dXLfzwXyYeQdao/UcJCCi8c5
+ zILN1pu5cOHph9FJGXvseNR5pihA7qawEUp9O/bsVu+N5hV32xLPbUjoiGDuRZRw3bWc
+ AldgdLDZ7A9P3zXaoUkAKQCAxo/c9lDIHOtz1InptL17BeQFt2yY9ioROSggYI9TYNzV
+ uSDQ==
+X-Gm-Message-State: AOJu0YwreOd8SHS+ii1iygeQTARF6k4hOb/Bn/r8xNbnlyxpEW/uaAtk
+ +HowdIbeI1rjpEF9ZyuSXtxTfxZtCzL5JccwVp+7Tcq3V6c+UzHu3ZY6XOJwxPaeFps0o5h3SkC
+ iMCN65fVMc/DQ01axr1SoF2uxwiM=
+X-Google-Smtp-Source: AGHT+IHBOTnknVYKiUTL1txKTeW2Xio/rnjJMOsy3R3qp+S2sW3ODSHzvrlGGheh0PlgI2Y1gJsKaDVqZpyIm9v4pJ8=
+X-Received: by 2002:a05:690c:385:b0:6e2:c13e:2082 with SMTP id
+ 00721157ae682-6e5bf73ca9cmr19198667b3.1.1729288091585; Fri, 18 Oct 2024
+ 14:48:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20241013143232.2090645-1-l.rubusch@gmail.com>
+ <20241013143232.2090645-3-l.rubusch@gmail.com>
+ <ce29c957-4198-4947-b7de-7e10ed385eab@denx.de>
+In-Reply-To: <ce29c957-4198-4947-b7de-7e10ed385eab@denx.de>
+From: Lothar Rubusch <l.rubusch@gmail.com>
+Date: Fri, 18 Oct 2024 23:47:35 +0200
+Message-ID: <CAFXKEHZLwbU=w4LH4iiZeo4ycwOKjgi5YZesHHgxzy6Ac+TOUA@mail.gmail.com>
+Subject: Re: [PATCH 02/10] ARM: socfpga: add Mercury+ AA1 SoM support
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, simon.k.r.goldschmidt@gmail.com, 
+ tien.fong.chee@intel.com, sumit.garg@linaro.org, sjg@chromium.org, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, jit.loon.lim@intel.com, 
+ barnas@google.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 19 Oct 2024 06:39:29 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,16 +93,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Oct 2024 22:14:53 +0200, Marek Vasut wrote:
+On Mon, Oct 14, 2024 at 8:42=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 
-> Move the SR3 bit definition in the right place. Fix
-> what is likely a rebase artifact. No functional change.
-> 
-> 
+[...]
 
-Applied to u-boot/master, thanks!
+> > diff --git a/board/enclustra/mercury_aa1/fpga.its b/board/enclustra/mer=
+cury_aa1/fpga.its
+> > new file mode 100644
+> > index 0000000000..cb42d61fbd
+> > --- /dev/null
+> > +++ b/board/enclustra/mercury_aa1/fpga.its
+> > @@ -0,0 +1,32 @@
+> > +/dts-v1/;
+> > +
+> > +/ {
+> > +     description =3D "FIT image with FPGA bistream";
+> > +     #address-cells =3D <1>;
+> > +
+> > +     images {
+> > +             fpga-periph-1 {
+> > +                     description =3D "FPGA peripheral bitstream";
+> > +                     data =3D /incbin/("../../../bitstream.periph.rbf"=
+);
+> > +                     type =3D "fpga";
+> > +                     arch =3D "arm";
+> > +                     compression =3D "none";
+> > +             };
+> > +
+> > +             fpga-core-1 {
+> > +                     description =3D "FPGA core bitstream";
+> > +                     data =3D /incbin/("../../../bitstream.core.rbf");
+> > +                     type =3D "fpga";
+> > +                     arch =3D "arm";
+> > +                     compression =3D "none";
+> > +             };
+> > +     };
+> > +
+> > +     configurations {
+> > +             default =3D "config-1";
+> > +             config-1 {
+> > +                     description =3D "Boot with FPGA early IO release =
+config";
+> > +                     fpga =3D "fpga-periph-1", "fpga-core-1";
+> > +             };
+> > +     };
+> > +};
+>
+> Can this be generated using binman instead ?
 
--- 
-Tom
-
-
+This would a oportunity for me to learn the binman tool. Great idea! I
+need to read a bit more on binman to get a better understanding. I'll
+give it a try and let you know. Thank you.
