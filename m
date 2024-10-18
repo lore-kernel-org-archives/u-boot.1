@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7CABD2F7E1
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 08:30:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FA2DD2F7E1
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 08:30:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15FB68912A;
+	by phobos.denx.de (Postfix) with ESMTP id 8B605891E1;
 	Fri, 18 Oct 2024 10:30:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="yPlTd/t8";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="liVEcB6a";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="4qgv99bK";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="G2lT4ddm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC722891B6; Fri, 18 Oct 2024 10:30:14 +0200 (CEST)
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ id 09940891B6; Fri, 18 Oct 2024 10:30:15 +0200 (CEST)
+Received: from galois.linutronix.de (Galois.linutronix.de
+ [IPv6:2a0a:51c0:0:12e:550::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E348989099
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 10:30:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24EE889119
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 10:30:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de;
@@ -31,26 +32,30 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
  s=2020; t=1729240212;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=IE1AIFTW+44APSPSUCPo8Hi5MZwAmVqnO/2p9slrhfc=;
- b=yPlTd/t8+i2rgG6qEoaD9E04+ihL/7ofHKQKd0zAuQ7KerFAcZj/o53469RZLtN7flcqfJ
- WK3rVn5FisTx711HMv99HrtOPdA4dTirlnjCnpv8/l7DBiAdxZMoUQhzeaq5yJmxD8Lb5B
- l2d6BOF+THPrNfo0RrDnyKuVjkkY/siXVQVtHu5pTDVBsxTEm7UYk6Ui7pL17jdaLgnI/a
- 94uMdpIQAv3usU58Hzz1HSGFOac9X/jwRNpN5bIUgzuPTnejLLohhMHH2touZ5AKHykauq
- Ff4STm3z93W5/B2UuiwrW4igRlnKH3I7Vqqx75BNNe9AFMTpxAvZbCTbohIOyg==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xiU4Kmkw/feW7jTVJ8dvuMf6L0Yu0nKK2fHCtPWRxNA=;
+ b=4qgv99bK0HYPTeWD2ESojGCzBISpvsMPJO6Uu/Fr4ltSTunRk3OyadqCjKZXRSCrIIh5fV
+ hGgQviqIap0+vhdFdx+Z3++fdJqmDITpWFHq/sqUoIxmmJFwlq30po1Btd62j9fdI0k+0F
+ McMEX4qi1KMjH5LQHFhM35AkwIySFe3rP2zpiWbeV+I++sSCrI+cRm/RGj56xWwGY9w8UO
+ Cd4xtRif9EFUJC0F7nudRVb9/GuP5/DFFv+VD5EEf3hc9EBZ7XQmF9AF4jE782HcQCyrAy
+ I2JsFhamJjgSAqGAJ+N/vKMXP+BNvC9He9zmcmFmUHeNr6wPptkjGfaXYLnncA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
  s=2020e; t=1729240212;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=IE1AIFTW+44APSPSUCPo8Hi5MZwAmVqnO/2p9slrhfc=;
- b=liVEcB6aEDIPb5xhUcHdTlg7O0B3uvpjkd14Yeh1aPQPsMOSMwMunOn+W1Dkzy+mRSn5NC
- mPm7n+L3uy+jBsCQ==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xiU4Kmkw/feW7jTVJ8dvuMf6L0Yu0nKK2fHCtPWRxNA=;
+ b=G2lT4ddmAZSZ5OuZHqTqFzLJFPtGRKAO3dgzF6enck9q7fQH9495RyQ28mrwO/w/pvPLOL
+ r9tPEn2DSl1J70BQ==
 To: u-boot@lists.denx.de
 Cc: John Ogness <john.ogness@linutronix.de>
-Subject: [PATCH 0/5] collected fallout of porting an ATSAMA5D27 based board
-Date: Fri, 18 Oct 2024 10:30:00 +0200
-Message-ID: <20241018083006.10349-1-b.spranger@linutronix.de>
+Subject: [PATCH 0/5] collected fallout of porting an ATSAMA5D2 based board
+Date: Fri, 18 Oct 2024 10:30:01 +0200
+Message-ID: <20241018083006.10349-2-b.spranger@linutronix.de>
+In-Reply-To: <20241018083006.10349-1-b.spranger@linutronix.de>
+References: <20241018083006.10349-1-b.spranger@linutronix.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -85,8 +90,6 @@ refused to do anything usefull, so I dropped it after spending a couple of
 days debugging it:
 
 <RANT>brilliant!</RANT>
-
-
 
 regards
     Benedikt Spranger
