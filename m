@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48D72D2FFFD
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 12:33:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37EF5D2FFFD
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 12:33:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C44289166;
+	by phobos.denx.de (Postfix) with ESMTP id 76DB38916E;
 	Fri, 18 Oct 2024 14:32:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=all4bambi.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=all4bambi-com.20230601.gappssmtp.com header.i=@all4bambi-com.20230601.gappssmtp.com header.b="N90RF/IB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GJTBix7G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32AE0891C7; Fri, 18 Oct 2024 09:51:39 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 6E0FC89241; Fri, 18 Oct 2024 11:55:20 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E15BA8910A
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 09:51:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2019B89215
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 11:55:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=all4bambi.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexey@all4bambi.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-37d3e8d923fso1342281f8f.0
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 00:51:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43055b43604so20135915e9.3
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 02:55:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=all4bambi-com.20230601.gappssmtp.com; s=20230601; t=1729237896; x=1729842696;
- darn=lists.denx.de; 
- h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
- :from:content-transfer-encoding:from:to:cc:subject:date:message-id
- :reply-to; bh=/H8+oDwBWBa20JBJpcQagXLs095zJH4AICzc6alXUvM=;
- b=N90RF/IBJJa/Ir4KUy1UzSGU77MXcHsesUXEkaEtRerYkoDHX3nJxeQzsC5LNImE2f
- 4X/us6mOUnwG4DQRYmyNlGjIz3UqucpUXO754+ZKKkmKfn+Ag9h9eXQCPpCsoJxW3SWD
- h3Mau0s4+diLWh6D9wM6qKIyeFESusDzVpsRDEojTWVUJqmKwaElNITcGARkUOj2PwBK
- q17nYgjhwXtxJ4DlGpsA8Rcp+m8omveFMjh5b3EWNxWnE8VT/igHRentZNAovTJ4QM1Q
- CZYOrLTlK7JVaRrw7N0BPo/Km7IwmWuKAuhrGZ+ie2IHyl73zHyo7WZRBGevihjwApYC
- 2kSw==
+ d=linaro.org; s=google; t=1729245317; x=1729850117; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8WgsBQTo+Bdgu1eIFOd8b0KLpQMJ7vYtvZjTI2EOl7U=;
+ b=GJTBix7GQlI8v51t8FKP36UsrS4TaLawMls7q12QSMk/tLfAbqRMVKAkLSPNUfPtY2
+ REKmyhSxOJ8y1Yf8QM9bbVPDfFx8amINJxgVo7rKCm76FLfBtp23G6Jw1O/1H1HrfBMp
+ st3ctWQtWvKX4ZxNHYz69lQ007Gddnukvsm6vsVAkjwy0XIt/vdhXlke2rD5FdEDEdFr
+ X/L+JBXOSud9foP6NKahLj9kDbvw/b3slDH8eMdLsSe0I/zJekPulGv6HmHhqlPNfJww
+ nQLxEXAvYYPz2JLNCWTKIvE2UhXg7BHcvV02D+SPZ2vz+SXefGUw1TAwPRPYuHwt1J67
+ u/Xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729237896; x=1729842696;
- h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
- :from:content-transfer-encoding:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/H8+oDwBWBa20JBJpcQagXLs095zJH4AICzc6alXUvM=;
- b=nHr8iq/CHOm9U9kllYPU95bUlqw3OUM/Q2wwDk7o2A3etb7nDWjRZ+L7NE4M4DcohM
- q+dAPD86t9qii64brFm6An/H+Krkdw8cUgoQ6e9Ede1RRnyMaitzN8+xHv0H5oV7hbwW
- WLcs/jdsXkXWjt0HFbE4Fl6n7munlbFG4BzoQ6HrTw87zSopUgHMYIg76+pPmRe42VAR
- izYfF7IWQJtQiv1H3kwuc/6RzIoHd43agh/rjZqTlPpgOE+aMlvHOGjjXplhzbPXjb8f
- UwbKxwM6NzRlYA+WlLUm0/txFPtuL7E9TOIod07J/zFpaDENznFR8HyvLZs3NDu4Tg0k
- vTHQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWwD/aEFY2KMYKW0nVju7TfPexPz3xRBbdtSZJggnRX2loIt+M/jUSdspK6EjBlDmT5yyOC0hM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmvpcgvmspXEbHLAaqEGGy5CkrS2ZV53F+ckmloBZlLZ/qVR8i
- P9/phl55Pk6nrJtGIeAgmSzbObuJ4QWMJnedU18JqJHiybotobR4BnMJ+e41CIA=
-X-Google-Smtp-Source: AGHT+IHHSK0FIuGx3w0rzFS0iqBuJNNsAXaLkKfMBQX3GgK8rKFa2BOZTxwjt+4nWtr5x5yLqboYyA==
-X-Received: by 2002:a05:6000:1366:b0:37d:47b7:f2f5 with SMTP id
- ffacd0b85a97d-37ea21de07dmr1069460f8f.4.1729237896122; 
- Fri, 18 Oct 2024 00:51:36 -0700 (PDT)
-Received: from smtpclient.apple ([2a0d:6fc7:242:6b9f:920:89c7:19fe:f003])
+ d=1e100.net; s=20230601; t=1729245317; x=1729850117;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=8WgsBQTo+Bdgu1eIFOd8b0KLpQMJ7vYtvZjTI2EOl7U=;
+ b=Uw25Tfne4PMIR80z5XGLL4Lgl1Ls5nYJGR3GcZPJb3185XqCkEBXdoNU4yKgVAKDi0
+ uoJVbYK4zgaz+NpHn2OVLqYl++qPrd+FlkpnWMiOpJ7dv/bAGcAswBadOQsjCJYZ6psZ
+ U0RpxoB2s6GmLqy+9/AxNGSyRHvP6B8NTtmcCZibyfCmQJ03fIOczoIofejhcnqF+5AV
+ cZ68VorGND9PguG7+VPkwrbbOvOiQayzyCMYYnCw/msZE9IgwEnbLMUZDE8He2YKx621
+ 9VMdRqP6EcXgHkwodpNPACl9nDMJPfWzw21R3qJ8TBvuWpVH52ojf9gaGIO5ioLWchFc
+ nC9A==
+X-Gm-Message-State: AOJu0YwSQzD+XtD9LgnsbV0VBATtbSh6TPIMrIuYmTzhdtqrI6CuP+a5
+ 6lJcST4W4gnBdT7gU5ntn4I37FU7CyeULSWIMiRF3WdIRwb/E5O/hkQgGgRWuoI=
+X-Google-Smtp-Source: AGHT+IG0CSwI6CO+h3wzTZP/yttpa/m4YYZ+LtQaZlzvp6XIJegYdFhalXKNpINrfK5/TXJTo+SD8A==
+X-Received: by 2002:a05:600c:1e28:b0:42c:b750:1a1e with SMTP id
+ 5b1f17b1804b1-431615991f4mr14275135e9.0.1729245317353; 
+ Fri, 18 Oct 2024 02:55:17 -0700 (PDT)
+Received: from [192.168.0.140] ([82.76.24.202])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37ecf085302sm1210686f8f.55.2024.10.18.00.51.35
+ ffacd0b85a97d-37ecf0ed791sm1479948f8f.77.2024.10.18.02.55.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Oct 2024 00:51:35 -0700 (PDT)
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-From: Tsirlin Alexey <alexey@all4bambi.com>
-Mime-Version: 1.0 (1.0)
-Subject: Re: [PATCH 1/1] Fixed sama5d3 dts file so PIO sections are inside
- pinctrl as in kernel dts
-Date: Fri, 18 Oct 2024 10:51:24 +0300
-Message-Id: <95AD5B21-D033-43D4-95AA-84BA9EF9BA1B@all4bambi.com>
-References: <c97e8bc6-f2f5-4c62-8d92-0ccbd9caf278@linaro.org>
-Cc: Manikandan.M@microchip.com, u-boot@lists.denx.de,
- Varshini.Rajendran@microchip.com, Hari.PrasathGE@microchip.com
-In-Reply-To: <c97e8bc6-f2f5-4c62-8d92-0ccbd9caf278@linaro.org>
-To: Eugen Hristev <eugen.hristev@linaro.org>
-X-Mailer: iPhone Mail (22A3370)
+ Fri, 18 Oct 2024 02:55:16 -0700 (PDT)
+Message-ID: <4cfd93f1-84c4-445d-82e3-73ade26afd4c@linaro.org>
+Date: Fri, 18 Oct 2024 12:55:16 +0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+From: Eugen Hristev <eugen.hristev@linaro.org>
+Subject: [PULL] u-boot-at91-fixes-2025.01-a
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Fri, 18 Oct 2024 14:32:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,185 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Eugen,
-I will fix the subject as required. Just wanted to tell that I didn=E2=80=99=
-t test the gpio commands in uboot. The part that interested me was the pinct=
-l and that it is unable to set the correct peripheral function from DTS. The=
- function that interested me was Ethernet. I will also check the gpio functi=
-onality than I am back to office on Sunday.=20
 
-Thanks!
-Alexey.=20
+Hello Tom,
 
-> On 18 Oct 2024, at 10:15, Eugen Hristev <eugen.hristev@linaro.org> wrote:
->=20
-> =EF=BB=BFHello Alexey,
->=20
-> Please fix the subject to adhere to the rules ARM: dts: .... etc,
-> if you are unsure, please follow previous commits that touched this file.
->=20
->> On 10/17/24 11:51, Manikandan.M@microchip.com wrote:
->> Hi Alexey,
->>> On 15/10/24 8:23 pm, Alexey Tsirlin wrote:
->>> This allows setting the GPIO parameters from device tree, otherwise the
->>> at91_pin_check_config will fail because the priv->nbanks equal to zero
->=20
-> I remember these pin banks are outside of the pinctrl because the driver f=
-ails to probe them if they are inside.
-> Is this no longer true ?
->=20
-> Manikandan, is it possible to test this on the board? and use the gpio com=
-mand in U-boot to toggle the pins , like e.g. for the LEDs and see if there i=
-s no regression ?
->=20
-> Thanks,
-> Eugen
->>>=20
->>> Signed-off-by: Alexey Tsirlin <alexey@all4bambi.com>
->>> ---
->>>=20
->>>   arch/arm/dts/sama5d3.dtsi | 111 +++++++++++++++++++-------------------=
+Please pull tag u-boot-at91-fixes-2025.01-a , the first set of fixes for 
+the 2025.01 cycle.
+This small set includes the maintainer e-mail update and a missing 
+header that was causing some build issues.
 
->>>   1 file changed, 56 insertions(+), 55 deletions(-)
->>>=20
->>> diff --git a/arch/arm/dts/sama5d3.dtsi b/arch/arm/dts/sama5d3.dtsi
->>> index 4c03a302ec..c671ea42f2 100644
->>> --- a/arch/arm/dts/sama5d3.dtsi
->>> +++ b/arch/arm/dts/sama5d3.dtsi
->>> @@ -873,66 +873,67 @@
->>>                                AT91_PIOE 17 AT91_PERIPH_B AT91_PINCTRL_N=
-ONE>;    /* PE17 periph B, conflicts with A17 */
->>>                       };
->>>                   };
->>> -            };
->>>   -            pioA: gpio@fffff200 {
->>> -                compatible =3D "atmel,at91sam9x5-gpio", "atmel,at91rm92=
-00-gpio";
->>> -                reg =3D <0xfffff200 0x100>;
->>> -                interrupts =3D <6 IRQ_TYPE_LEVEL_HIGH 1>;
->>> -                #gpio-cells =3D <2>;
->>> -                gpio-controller;
->>> -                interrupt-controller;har
->>> -                #interrupt-cells =3D <2>;
->>> -                clocks =3D <&pioA_clk>;
->>> -                bootph-all;
->>> -            };
->>> +                pioA: gpio@fffff200 {
->>> +                      compatible =3D "atmel,at91sam9x5-gpio", "atmel,at=
-91rm9200-gpio";
->> Spaces instead of tab before 'compatible', should be consistent with the
->> remaining properties of pioA node.
->>> +                    reg =3D <0xfffff200 0x100>;
->>> +                    interrupts =3D <6 IRQ_TYPE_LEVEL_HIGH 1>;
->>> +                    #gpio-cells =3D <2>;
->>> +                    gpio-controller;
->>> +                    interrupt-controller;
->>> +                    #interrupt-cells =3D <2>;
->>> +                    clocks =3D <&pioA_clk>;
->>> +                    bootph-all;
->>> +                };
->>>   -            pioB: gpio@fffff400 {
->>> -                compatible =3D "atmel,at91sam9x5-gpio", "atmel,at91rm92=
-00-gpio";
->>> -                reg =3D <0xfffff400 0x100>;
->>> -                interrupts =3D <7 IRQ_TYPE_LEVEL_HIGH 1>;
->>> -                #gpio-cells =3D <2>;
->>> -                gpio-controller;
->>> -                interrupt-controller;
->>> -                #interrupt-cells =3D <2>;
->>> -                clocks =3D <&pioB_clk>;
->>> -                bootph-all;
->>> -            };
->>> +                pioB: gpio@fffff400 {
->>> +                      compatible =3D "atmel,at91sam9x5-gpio", "atmel,at=
-91rm9200-gpio";
->> Ditto
->>> +                    reg =3D <0xfffff400 0x100>;
->>> +                    interrupts =3D <7 IRQ_TYPE_LEVEL_HIGH 1>;
->>> +                    #gpio-cells =3D <2>;
->>> +                    gpio-controller;
->>> +                    interrupt-controller;
->>> +                    #interrupt-cells =3D <2>;
->>> +                    clocks =3D <&pioB_clk>;
->>> +                    bootph-all;
->>> +                };
->>>   -            pioC: gpio@fffff600 {
->>> -                compatible =3D "atmel,at91sam9x5-gpio", "atmel,at91rm92=
-00-gpio";
->>> -                reg =3D <0xfffff600 0x100>;
->>> -                interrupts =3D <8 IRQ_TYPE_LEVEL_HIGH 1>;
->>> -                #gpio-cells =3D <2>;
->>> -                gpio-controller;
->>> -                interrupt-controller;
->>> -                #interrupt-cells =3D <2>;
->>> -                clocks =3D <&pioC_clk>;
->>> -                bootph-all;
->>> -            };
->>> +                pioC: gpio@fffff600 {
->>> +                      compatible =3D "atmel,at91sam9x5-gpio", "atmel,at=
-91rm9200-gpio";
->> Ditto
->>> +                    reg =3D <0xfffff600 0x100>;
->>> +                    interrupts =3D <8 IRQ_TYPE_LEVEL_HIGH 1>;
->>> +                    #gpio-cells =3D <2>;
->>> +                    gpio-controller;
->>> +                    interrupt-controller;
->>> +                    #interrupt-cells =3D <2>;
->>> +                    clocks =3D <&pioC_clk>;
->>> +                    bootph-all;
->>> +                };
->>>   -            pioD: gpio@fffff800 {
->>> -                compatible =3D "atmel,at91sam9x5-gpio", "atmel,at91rm92=
-00-gpio";
->>> -                reg =3D <0xfffff800 0x100>;
->>> -                interrupts =3D <9 IRQ_TYPE_LEVEL_HIGH 1>;
->>> -                #gpio-cells =3D <2>;
->>> -                gpio-controller;
->>> -                interrupt-controller;
->>> -                #interrupt-cells =3D <2>;
->>> -                clocks =3D <&pioD_clk>;
->>> -                bootph-all;
->>> -            };
->>> +                pioD: gpio@fffff800 {
->>> +                      compatible =3D "atmel,at91sam9x5-gpio", "atmel,at=
-91rm9200-gpio";
->> Ditto
->>> +                    reg =3D <0xfffff800 0x100>;
->>> +                    interrupts =3D <9 IRQ_TYPE_LEVEL_HIGH 1>;
->>> +                    #gpio-cells =3D <2>;
->>> +                    gpio-controller;
->>> +                    interrupt-controller;
->>> +                    #interrupt-cells =3D <2>;
->>> +                    clocks =3D <&pioD_clk>;
->>> +                    bootph-all;
->>> +                };
->>> +
->>> +                pioE: gpio@fffffa00 {
->>> +                      compatible =3D "atmel,at91sam9x5-gpio", "atmel,at=
-91rm9200-gpio";
->> Ditto
->>> +                    reg =3D <0xfffffa00 0x100>;
->>> +                    interrupts =3D <10 IRQ_TYPE_LEVEL_HIGH 1>;
->>> +                    #gpio-cells =3D <2>;
->>> +                    gpio-controller;
->>> +                    interrupt-controller;
->>> +                    #interrupt-cells =3D <2>;
->>> +                    clocks =3D <&pioE_clk>;
->>> +                    bootph-all;
->>> +                };
->>>  =20
->> Extra line
->>> -            pioE: gpio@fffffa00 {
->>> -                compatible =3D "atmel,at91sam9x5-gpio", "atmel,at91rm92=
-00-gpio";
->>> -                reg =3D <0xfffffa00 0x100>;
->>> -                interrupts =3D <10 IRQ_TYPE_LEVEL_HIGH 1>;
->>> -                #gpio-cells =3D <2>;
->>> -                gpio-controller;
->>> -                interrupt-controller;
->>> -                #interrupt-cells =3D <2>;
->>> -                clocks =3D <&pioE_clk>;
->>> -                bootph-all;
->>>               };
->>>                  pmc: pmc@fffffc00 {
->=20
+Thanks,
+Eugen
+
+
+The following changes since commit d2061828a4c1b60b44cd2307b6a782ac2efbffbe:
+
+   dts: Deduplicate dtbs target (2024-10-14 19:32:04 -0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-at91.git 
+tags/u-boot-at91-fixes-2025.01-a
+
+for you to fetch changes up to 684939089a31b8a5bedbbb4c2f2bcf935da7d9c6:
+
+   ARM: at91: clock: Add missing include of asm/io.h (2024-10-18 
+10:10:41 +0300)
+
+----------------------------------------------------------------
+First set of u-boot-at91 fixes for the 2025.01 cycle
+
+----------------------------------------------------------------
+Alexander Dahl (1):
+       ARM: at91: clock: Add missing include of asm/io.h
+
+Eugen Hristev (1):
+       .mailmap: update e-mail address for Eugen Hristev
+
+  .mailmap                              | 3 ++-
+  arch/arm/mach-at91/include/mach/clk.h | 1 +
+  doc/git-mailrc                        | 2 +-
+  3 files changed, 4 insertions(+), 2 deletions(-)
