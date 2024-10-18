@@ -4,58 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5151ED374BF
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 16:35:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F892D374BF
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 16:39:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF31988E33;
-	Fri, 18 Oct 2024 18:34:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id AAFC3885C5;
+	Fri, 18 Oct 2024 18:39:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="lakn2rVE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EnzwO0jU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A28C288E33; Fri, 18 Oct 2024 18:34:55 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0159F88B16; Fri, 18 Oct 2024 18:39:24 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 573AB88DF8
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 18:34:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91B9F8657F
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 18:39:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=9e6c=RP=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1729269281; bh=0UeqtiCYWTmGxo73lRQ6tEe6rzKlYK3AEGW0vZjc1eo=;
- b=lakn2rVEE5PhW7j6dXE3rLAXXbibmYMt6IayTCmLtl3EpjkTEk0ajneeI1UyQgd5w782cCv0z
- iilgCK3a/ApO+LIYxOB9xbZDMPr3xmi3db95aRdzb+2lsP5eE4watMxnmB7SvkoRjJLNn2wB+68
- sJZZuggd9st2vPiMII8U/b09h2s4WsDSCDINOAGM0gPppIK5KDzWLm9gKNuOkKvG/VN2zN5o2k1
- xcCgEnl2RZEqbSXrFj8gpM3RipMFoDLXGwXN261WReQOVJnpOwFW0Bij3sHMClfE0gP+yAPPtXO
- DgUTUXeeTiDvQPig0V7snhfpZoiB7pV4vCXjL3NopS6g==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: Dragan Simic <dsimic@manjaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Subject: [PATCH 2/2] rockchip: rk3588: Implement checkboard() to print SoC
- variant
-Date: Fri, 18 Oct 2024 16:34:18 +0000
-Message-ID: <20241018163423.1562287-3-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.46.2
-In-Reply-To: <20241018163423.1562287-1-jonas@kwiboo.se>
-References: <20241018163423.1562287-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6cbceb321b3so15946976d6.3
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 09:39:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729269560; x=1729874360; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UggB8AJ5E3HemnHlfoRIc54A6XCek4iuQwZbcVrha/0=;
+ b=EnzwO0jUMNb2FezaFQT/OKnu8NprrfHbCe6oL/gEaGxpicCs0w+PBA/utzeABHnNFY
+ UX3Nu0WVU663sTRWsZnmVgnBbqctO9el708iEz9poUjYMx4tSSz4TPe/CSFl8AnUueGc
+ ti6tVBHGZvd+fRNWXGyLsQXAspt3dk++6m//E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729269560; x=1729874360;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UggB8AJ5E3HemnHlfoRIc54A6XCek4iuQwZbcVrha/0=;
+ b=UhYpw0ts675qf4jf3mi9QPj6N4P7YAh+toF8n4uvOXe6XKeXFNHiyiLU8Ao2O9aBr/
+ 77rX/prcabnrS/aVur5NdGw+YCcAa5d+As4KPNHKO8cRnItpAVZDozZe6WLnc7Ps+Y9u
+ wBZKoGhWEnWLp1vzjQmu5V9GQ+ddnkGE+uTPle72b127DpBMZl5dNoYx6yJHB6H+v4Qs
+ JOACpcenntDP6BVMtT0EeQ00HbH0/kqgm0Aq0g4EGEpYmGtbXvDBGV/x97n7kxnXU9MM
+ 084sR+0HuXmUngttKWYRTNyvu05KQKOJd7T9NC/h+gs3v7bBQwqB/M3mOdeQEueh/SCS
+ XVSg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWbC0phJZ7wPhCisShY7GYIkCi9FzhncdCKG+asL5CRbXYGqHLxXbs38wQ8iMSSUVuyZp99Co8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdhOh5zM0cCIRfIMBBw5ydGxp1hfjpOlAJS137SZva64gDsiHd
+ Y1SLcBl/ylOBTJWkUejhDF1ULkl8YsV7fPn/T0KRTY302lrqRPPHQto3yzo0YL4=
+X-Google-Smtp-Source: AGHT+IHJGJqPZfy6VKjdgxE7BUbSyVC9gISQI7sTkgh2z/CTVZSFJAh6bXSoVMA+7564xed4v0M9NQ==
+X-Received: by 2002:a05:6214:4403:b0:6cb:ef1b:33d2 with SMTP id
+ 6a1803df08f44-6cde14b965emr36597546d6.3.1729269560423; 
+ Fri, 18 Oct 2024 09:39:20 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cde122b078sm8474566d6.77.2024.10.18.09.39.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Oct 2024 09:39:19 -0700 (PDT)
+Date: Fri, 18 Oct 2024 10:39:16 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Stefan Roese <sr@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 2/3] x86: coreboot: Add timestamps from coreboot to
+ bootstage
+Message-ID: <20241018163916.GA4959@bill-the-cat>
+References: <20240828201355.1111764-2-sjg@chromium.org>
+ <20240828201355.1111764-1-sjg@chromium.org>
+ <CAFLszTjk+LtGFUBb-Xgn_QX-W-QP+yCJ+E1C=V04VGcpi0mVng@mail.gmail.com>
+ <f6cfcdee-e7a2-4564-a1f3-473fb47cb3cb@kwiboo.se>
+ <CAFLszTi9U=QFqekG93SoQmDrCE=vH3=N3BvZ8sQ8_yFBkv62RQ@mail.gmail.com>
+ <c3fa880f-989d-4283-b0ed-5719562dc154@kwiboo.se>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-ForwardEmail-ID: 67128e1f3b4db30540b6b5f5
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QWokHM997LOXN904"
+Content-Disposition: inline
+In-Reply-To: <c3fa880f-989d-4283-b0ed-5719562dc154@kwiboo.se>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,131 +99,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement checkboard() to print current SoC model, e.g. one of:
 
-  SoC:   RK3582 v1
-  SoC:   RK3588 v0
-  SoC:   RK3588 v1
-  SoC:   RK3588S v0
-  SoC:   RK3588S v1
-  SoC:   RK3588S2 v1
+--QWokHM997LOXN904
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-when U-Boot proper is started.
+On Fri, Oct 18, 2024 at 06:30:54PM +0200, Jonas Karlman wrote:
+> Hi Simon,
+>=20
+> On 2024-10-18 16:59, Simon Glass wrote:
+> > Hi Jonas,
+> >=20
+> > On Fri, 18 Oct 2024 at 01:44, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >>
+> >> Hi Simon,
+> >>
+> >> On 2024-10-18 01:12, Simon Glass wrote:
+> >>> Receiving timestamps from coreboot was unceremoniously dropped some t=
+ime
+> >>> ago. Add it back.
+> >>>
+> >>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >>> Fixes: 8ad01ce36f7 ("x86: Remove x86 specific GD flags as they are...=
+")
+> >>> ---
+> >>>
+> >>>  arch/x86/cpu/coreboot/coreboot.c | 2 ++
+> >>>  1 file changed, 2 insertions(+)
+> >>>
+> >>> Applied to u-boot-dm, thanks!
+> >>
+> >> I was under the impression that you would rework this to prepend the
+> >> coreboot bootstage records instead of adding the preceding coreboot
+> >> records in the middle of existing U-Boot records.
+> >>
+> >> Or did I misinterpret your response [1] to my "bootstage: Do not sort
+> >> records" patch [2] and you instead wanted me to do this?
+> >=20
+> > I decided to worry about this later. There is a coreboot update as
+> > well in this lot of patches. Once that is applied I have some more
+> > pending patches and I will take a look at this.
+> >=20
+> > I sort-of agree that sorting shouldn't be necessary...it's just that
+> > with the boot sequence getting so complicated these days, I'm not
+> > sure. But let's go with unsorted and worry about it later when we have
+> > other cases (i.e. other than a prior stage) to worry about.
+>=20
+> Does that mean you will merge my patch [2] to remove the sorting? It is
+> currently marked as 'Changes Requested', yet there is no request to
+> change anything. Only a request to insert the coreboot records in
+> correct order, something that is more related to this patch in my mind.
+>=20
+> Regards,
+> Jonas
+>=20
+> >=20
+> > Regards,
+> > Simon
+> >=20
+> >=20
+> >=20
+> >>
+> >> [1] https://lore.kernel.org/u-boot/CAFLszTjz9dX2UzUHgbmsr2no4seK07oo2P=
+C++hS2t7CP7z8khA@mail.gmail.com/
+> >> [2] https://patchwork.ozlabs.org/project/uboot/patch/20240803124149.29=
+16030-3-jonas@kwiboo.se/
 
-Information about what SoC model, variant and version is read from OTP.
+Moving this patch back to "New" for now so it's not so easily lost, I'm
+sure I marked it as Changes Requested at the time based on how the
+thread was reading to me then.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/dts/rk3588s-u-boot.dtsi       |  4 ++
- arch/arm/mach-rockchip/rk3588/rk3588.c | 56 ++++++++++++++++++++++++++
- configs/generic-rk3588_defconfig       |  2 +-
- 3 files changed, 61 insertions(+), 1 deletion(-)
+--=20
+Tom
 
-diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
-index 09d8b311cec5..8880d162b11c 100644
---- a/arch/arm/dts/rk3588s-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-@@ -69,6 +69,10 @@
- 	bootph-all;
- };
- 
-+&otp {
-+	bootph-some-ram;
-+};
-+
- &pcfg_pull_down {
- 	bootph-all;
- };
-diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-index e2dac2a5b806..6317fabd5de3 100644
---- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-+++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-@@ -4,6 +4,8 @@
-  * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
-  */
- 
-+#include <dm.h>
-+#include <misc.h>
- #include <spl.h>
- #include <asm/armv8/mmu.h>
- #include <asm/arch-rockchip/bootrom.h>
-@@ -178,3 +180,57 @@ int arch_cpu_init(void)
- 	return 0;
- }
- #endif
-+
-+#define RK3588_OTP_CPU_CODE_OFFSET		0x02
-+#define RK3588_OTP_SPECIFICATION_OFFSET		0x06
-+#define RK3588_OTP_CPU_VERSION_OFFSET		0x1c
-+
-+int checkboard(void)
-+{
-+	u8 cpu_code[2], specification, package, cpu_version;
-+	struct udevice *dev;
-+	char suffix[3];
-+	int ret;
-+
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_DRIVER_GET(rockchip_otp), &dev);
-+	if (ret) {
-+		debug("%s: could not find otp device, ret=%d\n", __func__, ret);
-+		return 0;
-+	}
-+
-+	/* cpu-code: SoC model, 0x35 0x82 or 0x35 0x88 */
-+	ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
-+	if (ret < 0) {
-+		debug("%s: could not read cpu-code, ret=%d\n", __func__, ret);
-+		return 0;
-+	}
-+
-+	/* specification: SoC variant, 0x2 for RK3588S and RK3588S2 */
-+	ret = misc_read(dev, RK3588_OTP_SPECIFICATION_OFFSET, &specification, 1);
-+	if (ret < 0) {
-+		debug("%s: could not read specification, ret=%d\n", __func__, ret);
-+		return 0;
-+	}
-+	/* package: likely SoC variant revision, 0x2 for RK3588S2 */
-+	package = specification >> 5;
-+	specification &= 0x1f;
-+
-+	/* cpu-version: chip version, e.g. second letter of lot number */
-+	ret = misc_read(dev, RK3588_OTP_CPU_VERSION_OFFSET, &cpu_version, 1);
-+	if (ret < 0) {
-+		debug("%s: could not read cpu-version, ret=%d\n", __func__, ret);
-+		return 0;
-+	}
-+	cpu_version >>= 3;
-+	cpu_version &= 0x7;
-+
-+	suffix[0] = specification > 1 ? '@' + specification : 0;
-+	suffix[1] = package > 1 ? '0' + package : 0;
-+	suffix[2] = 0;
-+
-+	printf("SoC:   RK%02x%02x%s v%u\n",
-+	       cpu_code[0], cpu_code[1], suffix, cpu_version);
-+
-+	return 0;
-+}
-diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
-index ebe883ed5972..51e31dce3a96 100644
---- a/configs/generic-rk3588_defconfig
-+++ b/configs/generic-rk3588_defconfig
-@@ -18,13 +18,13 @@ CONFIG_SPL_LOAD_FIT=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-generic.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
--CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_ATF=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
-+CONFIG_CMD_MISC=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_ROCKUSB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
--- 
-2.46.2
+--QWokHM997LOXN904
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcSjzQACgkQFHw5/5Y0
+tyxDlAv8Cj0ZOqHRkpsFl8EPxm5dW450J953Qmw8ze1S6GBgYcitOPnTWpNmPNg9
+UQntjyhBmH4uiYfRLpLKNXO84R9XievscOTMyky9XX7F48ZifB+jOR5pRRByemRE
+BUXVc5Rz8A1lJLzLZ9uA932iGZ9c5FjMpMzgy8O6TyXCplCnQhUg2DHaEh2Fg55U
+Qe0HwDWdsUBUFqlhv3HdeAhlUXr/NskEf67gGxcuM0eEAfWIwR0SZZDnIBxarQvo
+exrBpL1hjlnPtwhFS/CZsvd3/Grcj2xhjOJbx5pZO+SpfsGzU5P8zJ/cZDXs2Z8/
+BAckxGXQEc5HmgDdjzzg3C+EjWpxIYmFsYzVn+BXgm1uvGyX3p0JQgAkXHS2SKS9
+MmOgVALrdE3ujVpiwERLvl+pcLfqS0jfisxXe3pfhR9tjhf1LwyBF0q5y/ALcs+s
+pPxdn0BvTRoJHG9qy00U5n7Li/fsdXL1fkhOBZI4ZMe6P8YX4DyaG3N7d5HiAw4i
+FQ7ZN0hk
+=uVMy
+-----END PGP SIGNATURE-----
+
+--QWokHM997LOXN904--
