@@ -4,82 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E674D3C538
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 00:17:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 240C0D3C53E
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 01:01:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9F8688EE5;
-	Fri, 18 Oct 2024 02:17:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 402E189119;
+	Fri, 18 Oct 2024 03:01:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rfs+9cuo";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="sV+s9ws8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CC1588F23; Fri, 18 Oct 2024 02:17:43 +0200 (CEST)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 384E889112; Fri, 18 Oct 2024 03:01:13 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA02C88E81
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 02:17:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8D77890CA
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 03:01:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-46089a6849bso9117821cf.3
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 17:17:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729210658; x=1729815458; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lovTfZU8YdBapZmEBoGlDxoke2weXZ2YXCoX8kXXrys=;
- b=rfs+9cuoeK5qkvt1ORe+e0eXCIYS8S/FwonZ3vx0GxdDkO2iX9A1EaZGsLXs8QBzbY
- RKr7m1AuLplzQr61mopNK0xv6r+CVge9RG6PvchY+lw/Rxy23wJB5NJyq8vxgLmneYiL
- AMjIn4t7eOaVql4n8YVh+mKPUQ+LH8E5a/LTM=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6A6DD3F458
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 01:01:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1729213265;
+ bh=fcyoWZDDe3HqjaZUao7cWQyBfhZhYmBihIgZ5hRT/78=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=sV+s9ws8sk57OqGtqnNtvp/H2K1QeQGs0yqdpIEDhiJipcdsEWRBYV0LbAnH5H4Pq
+ qcK8T0L/uI17g2hXMcKlhiETL0zYzVUBUS4IqJQA9gupoGiUumzaGRyvweuXEi8IQN
+ 0qaIYygLIxsDsDrDRQ9DtwPnrx6h1nxuENgNUjuffN76C5pIEpH0Q/nB89v6zTLC+Y
+ M70Xh6RCI5xqaD+J3rCjVwl9U1vpsOF0sT/nk0Zn2eCymv/kgKi+vXLmAayK40RWgT
+ qtnLsMBacSndTQOvAm2cwrDB9BE3BMxAf9zl+uMafqgIo4hUmz3g6etjjY0g6+5wc4
+ 7LTYPE3YWxvDA==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-37d458087c0so1492265f8f.1
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 18:01:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729210658; x=1729815458;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lovTfZU8YdBapZmEBoGlDxoke2weXZ2YXCoX8kXXrys=;
- b=exmoZXeniKhnjZF4UuSf065JIOoyiCOpSwGAwYjExgzoHFc9+lQbR7j8ArkdjERyPb
- NYIKRgdgrndQ2S5LbBAwmabGTEHiaPvJxENfmptDcd8RtfwfBw9YJHtzDEb4CxmwSP3n
- h9UgFnKp6rcISv/DAPBlznWNFHnUEtYqNAfQW1KoVXnE3dJqzJ3KPb/Hqel7VxjB9PCU
- iJrxVpZ9t263UibrLB8wmQcQSKUDzhDjzNyJlDLMGr3IBVWmdEmRdFXpyQlRk/AkbfQB
- dba+aDeyVkIbJn0X/GiSHB4qWhhRTUJC3PbNpKorT4zsSb3la1pGtOUvPRVcKnO/FUac
- 9hgw==
+ d=1e100.net; s=20230601; t=1729213263; x=1729818063;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fcyoWZDDe3HqjaZUao7cWQyBfhZhYmBihIgZ5hRT/78=;
+ b=OrhLX5yQK+0iJFeuhiTDppIZt8dM5nhxDBv5cDh3U6uYMdxL/hp7DsPPaTQpj2J7PW
+ 4qjkhHPdktu2YItpuYE4t14lvHkB/dCtQHEpHYsv0sTAnlQMbSV3VatjzRNVeFZNLbSE
+ yJwid5q8/vpszMUAum+6kLIwHsTLGd41euh49Z8IvNPorurLiokTQh8MkywO/W0SJtaA
+ ZHpsT28IdpetAdTNzVBqdvNjttilkBHFaDL/b94fAS+YLaFmpQ/fNnmzHBYHANA1I7zr
+ K4yUQ9CE2KsQRedulcxmCiGn3wTdWk8AfkFUt+VczXah6rYZESpYuw5rqshF7+TlalE/
+ q43g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWu9UjQ5GCSRDwRi+L7ss9Z2Y/6eNsJ36B0i0jF+X6kIrHRZ5xzl108X8yXGgeDb2MpEvy9uzQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzRVCLWctlXuvdw0fuF1iF3DQRtLX5axtvCZ4wbd8pGCWU34M9H
- Q2mLE9g/JRVvcWT9rqDNnELHiyYxZfk6biBtEPqbBarT18Wh/0KWdyqscreDdcU=
-X-Google-Smtp-Source: AGHT+IGassvhU5UG1TiQgqhgVR04Vbq8cjSZrHMwR+WSpTjSrytumseEOQpkbgLtvvuR++KX57wlLw==
-X-Received: by 2002:a05:622a:a08:b0:460:971c:7424 with SMTP id
- d75a77b69052e-460aece9f99mr7366381cf.5.1729210658446; 
- Thu, 17 Oct 2024 17:17:38 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
+ AJvYcCU7MNTfSNs9OKK19GY5s5TYOWZlPuiCHavzd5ip+Kw7RJuVi61gGixgCW9BWchsETolzvJEe/U=@lists.denx.de
+X-Gm-Message-State: AOJu0YyZzve3/Vj6+kPNb5x4vsds3+mZbkQ1p8ptrYU0ctSJn7mAYySl
+ /GGFR7VGqyQaXkb4I70jqhBUGuXj+YKDTqfq8wAL9UHP92t6iVSTc/QPAeYXlAu+t/V7K4VOMO7
+ Gjqf0GFrZC442bS/yvkVJ94uXYBJe8o3xP41fQovhvZI8DjEbya0bSohQimHdNqQSqKA=
+X-Received: by 2002:a5d:4a12:0:b0:37d:3baa:9f34 with SMTP id
+ ffacd0b85a97d-37ecef67964mr308926f8f.1.1729213262989; 
+ Thu, 17 Oct 2024 18:01:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF1IU3QhldEVin8lLQIeqWkpTlOlDPre91lcATrxnwZ7r2vVJYdAs5QC6MFY/h9Go0AY5jLXA==
+X-Received: by 2002:a5d:4a12:0:b0:37d:3baa:9f34 with SMTP id
+ ffacd0b85a97d-37ecef67964mr308915f8f.1.1729213262560; 
+ Thu, 17 Oct 2024 18:01:02 -0700 (PDT)
+Received: from [192.168.123.161]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-460aea62c3esm1778421cf.80.2024.10.17.17.17.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Oct 2024 17:17:37 -0700 (PDT)
-Date: Thu, 17 Oct 2024 18:17:34 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v6 06/12] efi: Use the same filename for all sandbox builds
-Message-ID: <20241018001734.GR4959@bill-the-cat>
-References: <20240926215950.1265143-1-sjg@chromium.org>
- <20240926215950.1265143-7-sjg@chromium.org>
- <56ceb77c-efcb-40cb-a497-0952a8457950@gmx.de>
- <CAFLszThLt96h=+28HaD3LmUk-wgj6mnQFav40ndxTxXVZDQw7g@mail.gmail.com>
+ ffacd0b85a97d-37ecf118310sm416212f8f.94.2024.10.17.18.01.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 17 Oct 2024 18:01:00 -0700 (PDT)
+Message-ID: <1774369c-9c2c-4e0f-bf01-9dc7e1fdacbc@canonical.com>
+Date: Fri, 18 Oct 2024 03:00:59 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Z0FfRePV/tcwn/sI"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThLt96h=+28HaD3LmUk-wgj6mnQFav40ndxTxXVZDQw7g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] sandbox: add bootmethod EFI boot-manager
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+References: <20241008223219.105369-1-heinrich.schuchardt@canonical.com>
+ <875xpyhfz7.fsf@baylibre.com>
+ <CAFLszThR-qMK0e9f6nsSTVh+t-rkfN1KF+OWYWixYR7ds_soHQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAFLszThR-qMK0e9f6nsSTVh+t-rkfN1KF+OWYWixYR7ds_soHQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,85 +111,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---Z0FfRePV/tcwn/sI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Oct 17, 2024 at 05:23:19PM -0600, Simon Glass wrote:
+On 10/18/24 01:23, Simon Glass wrote:
 > Hi Heinrich,
->=20
-> On Mon, 30 Sept 2024 at 17:23, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
-rote:
-> >
-> > On 26.09.24 23:59, Simon Glass wrote:
-> > > Sandbox is not a real architecture, but within U-Boot it is real enou=
-gh.
-> > > We should not need to pretend it is x86 or ARM anywhere in the code.
-> > >
-> > > Also we want to be able to locate the sandbox app using a single
-> > > filename, 'bootsbox.efi', to avoid needing tests to produce different
-> > > files on each host architecture.
-> > >
-> > > Drop the confusing use of host architecture and just let sandbox be
-> > > sandbox.
-> >
-> > As I already wrote in
-> > https://lore.kernel.org/u-boot/ae1cf1fa-766e-46a0-8ef9-2c2c7af73d9e@gmx=
-=2Ede/
-> > this patch should not be merged.
-> >
-> > bootsbx.efi does not exist in the UEFI specification.
->=20
-> If that is of concern I can get it added. Let me know.
->=20
-> >
-> > Without this patch I can test that shim work and grub are correctly
-> > loaded from a distro image. This patch makes the sandbox misbehave.
->=20
-> Why don't you do that with QEMU?
->=20
-> If we want sandbox to do this, I could add a way for sandbox to select
-> its architecture. But this patch is correct, sorry. It is basically a
-> revert of your patch:
->=20
-> 3a0654ecd0d efi_loader: correctly identify binary name
->=20
-> Let me know if you would like a selection mechanism and I'll see what I c=
-an do.
+> 
+> On Fri, 11 Oct 2024 at 08:27, Mattijs Korpershoek
+> <mkorpershoek@baylibre.com> wrote:
+>>
+>> Hi Heinrich,
+>>
+>> Thank you for the patch.
+>>
+>> On mer., oct. 09, 2024 at 00:32, Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
+>>
+>>> The EFI boot-manager is the default method to boot EFI binaries.
+>>> We should be able to use it on the Sandbox.
+>>>
+>>> * Enable EFI boot-manager bootmethod on the sandbox.
+>>> * Adjust unit tests to reflect the additional boot method.
+>>>
+>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>
+>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>>
+>>> ---
+>>>   arch/sandbox/dts/test.dts |  4 ++++
+>>>   test/boot/bootmeth.c      | 28 +++++++++++++++++-----------
+>>>   2 files changed, 21 insertions(+), 11 deletions(-)
+>>>
+> 
+> This produces the following output on sandbox, for me:
+> 
+> => bootfl scan
+> efi_set_blk_dev_to_system_partition() No EFI system partition
+> efi_set_blk_dev_to_system_partition() No EFI system partition
+>       efi_var_to_file() Failed to persist EFI variables
+> efi_set_blk_dev_to_system_partition() No EFI system partition
+>       efi_var_to_file() Failed to persist EFI variables
+> efi_set_blk_dev_to_system_partition() No EFI system partition
+>       efi_var_to_file() Failed to persist EFI variables
+> efi_set_blk_dev_to_system_partition() No EFI system partition
+>       efi_var_to_file() Failed to persist EFI variables
+> efi_set_blk_dev_to_system_partition() No EFI system partition
+>       efi_var_to_file() Failed to persist EFI variables
+> efi_set_blk_dev_to_system_partition() No EFI system partition
+>       efi_var_to_file() Failed to persist EFI variables
+> efi_set_blk_dev_to_system_partition() No EFI system partition
+>       efi_var_to_file() Failed to persist EFI variables
+> 
+> Perhaps we need to make this option, e.g. with a 'bootstd' command to enable it?
 
-I'm confused. It sounds like Heinrich is using sandbox to test on
-various hosts, how U-Boot behaves, without relying on "just test in
-QEMU". I don't see how this disconnects from your usual request on how
-to use sandbox for further testing. What is breaking for you, Simon, by
-us saying that the host instruction set determines what we load and run
-(and so, is portable whereas saying "sandbox" is not, between x86 hosts,
-arm64 hosts and riscv64 hosts).
+These messages only appear if you have no ESP on a connected block 
+device and store EFI variables on disk. For each block device a BOOT#### 
+variable is created.
 
->=20
-> Regards,
-> Simon
+Instead of changing this patch we should reduce the noisiness.
 
---=20
-Tom
+For a user it should be sufficient to read once that EFI variables 
+cannot be persisted due to a missing ESP.
 
---Z0FfRePV/tcwn/sI
-Content-Type: application/pgp-signature; name="signature.asc"
+Best regards
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcRqRoACgkQFHw5/5Y0
-tyyBfgwAk4F01wTi7vP7VfxFEv3Zj6An0Flyig33RDvabTwOU5wc1Ucws8xfZLU7
-6WW86wCJwSfdWZZSBZQphh9lmYehDsY09u3oqF4658jo65YfNYN/ckMp/Kx9P0MV
-kifv2sEPx0MCVoEPgQzYxlOtEF8E/63VGyHP5ox8jg2mBw8dH6BR/RO45oAeaVAB
-zlrakeF0zNPT7OWRENI3ZQLkFPwxsqYJTleJ+tu9DlqMHxVM24sQXOicquollrd8
-b1LQATt/4wOE/nTO/xlLoGCL9jtbeDstRQmHEgjwuMulL+XYviMhGVDaeez5GAhN
-Kx/Wwo3w0fz1SUcYz9es2kgWyICCiBUUFbv3ks7B6ZN5zgER5Xh8SV1O2aLIwlm8
-8WRL+LyFBz93nXxjwMqodPA8OBBI/feZ5pncwd6J/3CVa5h1UjxrwOKXJvihic38
-ZIkTObEHjWxk/2UTl5zfI4s0ja61kjSyG1UVN0Onq9KoFh/hTfdeLtFcldkFiBLd
-w+YkQWWr
-=8uBH
------END PGP SIGNATURE-----
-
---Z0FfRePV/tcwn/sI--
+Heinrich
