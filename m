@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 297E5D3C544
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 03:05:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65F4FD3C545
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 03:14:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6D598906D;
-	Fri, 18 Oct 2024 05:05:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C50B1891B8;
+	Fri, 18 Oct 2024 05:14:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DsCieldE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OhrhrPZr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 822F5891AA; Fri, 18 Oct 2024 05:05:23 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id E4E1A891B8; Fri, 18 Oct 2024 05:14:42 +0200 (CEST)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21A4588E81
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 05:05:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1B2C891AF
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 05:14:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6cbd092f7f0so10871576d6.0
- for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 20:05:20 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-4609c9b39d0so10036611cf.1
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 20:14:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729220720; x=1729825520; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OQJNRhoyLTdNGsJsf8Qn5/+LTZQ0UDkf/foWksiHso0=;
- b=DsCieldE2NBeSipel85lV+mz+pzp9/GLreF+wIQTge5YIOW9G/Y7odEpn8nLWC271p
- hEM5Ns5GuC7+eyq3762Xx0bY00Vpz0Q7xkv5oRywvPXKU8Hkrvyl/6tJSrinypGx2tLf
- OAZ+PUG3mzXj32IgQRwTsvHGiR6e5GQ286d04=
+ d=konsulko.com; s=google; t=1729221279; x=1729826079; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zrckl78r1TO+oDZdEBDf9XiV3/bvhcbKOPhgj6wzqq8=;
+ b=OhrhrPZryct4JddBJ2pSjdWPtluqOcmPGEgonox0IzuDQj41sS/ZTmrOmVoiFOeGlr
+ 8IbSr8GXaPPGIGcTplze1blzR0YHIAhYTajPP/J0enhznSe0UEVA2DbnWAzqYk76Gnjw
+ Rz2tvsDJLx+vEYqKidmHUhJfmbhvFS53OP1gs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729220720; x=1729825520;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OQJNRhoyLTdNGsJsf8Qn5/+LTZQ0UDkf/foWksiHso0=;
- b=CbfWZgtREl01VByilcC+uEaFAt7io8I7LM1KgfJgozrGP14R/gb+2S8wY6lvjbl2NZ
- aXCYQov2mjYlRYyHCmh8aUAU7vOwU5bWoeWfp91ehrh3aJNSSn83T0PZP5LOpQZsXsrH
- vu2tJIBj6Z8hBTnWfDlC+vpzZzI6E/3g3QpsVo9FJe3f8Lu2J2aB4lu0C+ftfTQ09Mb0
- teQOUUtszx82/eC69Vk0RI7BDvlWVLoV6SNSkYGb3Pnf4eqji28lTFbBxGwf0C/v3hTz
- p+gtJ83eZqcaY8xkN4BtHzSwnE3p64OE18G6MIiyyvYSFCC9WuLA4EXgU2Gp4xuNNAAu
- h8UQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWyyPMIIP3pTctpwlC6jTouJ3ub4JlH4vXnpXX1URiPQdGQBR2adOAFSsO70lmddJLcUAJBWhA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyOAPALumYZrCeSw7HfkY/1owBJIAVTtyH76Dl82S7BBkaySgIn
- Qz8bAwdto0b1HZc73OQIpWVu8udYQwCwDUESVWnBPVfoZySOi4735gkYtUlDtGDwnZLh+T3p88V
- oNiolALOcHw6tTxRRdfq7jOSz7hP38hoVxIhT
-X-Google-Smtp-Source: AGHT+IFNzfo+rqWdTlDhG5TT8VhUAUaJrbuDi/GySrhQvS+WtVTAwKPJbEzt65QSp8t6cqQ/5BWTQCgjXfJPWKqk5Uw=
-X-Received: by 2002:a05:6214:4597:b0:6cb:c6d2:3567 with SMTP id
- 6a1803df08f44-6cde14c2a9fmr14121126d6.3.1729220719717; Thu, 17 Oct 2024
- 20:05:19 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729221279; x=1729826079;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zrckl78r1TO+oDZdEBDf9XiV3/bvhcbKOPhgj6wzqq8=;
+ b=go6fnyrSOgT+vTOFOTXsa8oHpHxf69ai/1XbEBTyf8uqtY3IO5pQ5ojPuOKwZ6+gqc
+ 2iwbDppX/w//7OFembEDqFF5+JitKHPr6G3buDKABj2aK/T3xL/HOFa4U5sfVbAThRwB
+ JOx1nA3Pa1YKMcitmXrQeAUdb8ET1RlKm8EFQUIUY7XjMyQBl8c4rVb9s3wRrEMKdD09
+ 25WpqWxRJ1Wk5rIokhtIy6zD8zFd66YiORWpt2kW6kpGKn+X4mz11sXaQ5lpqdnrQrEC
+ NP2vCyGlPrLp6NhSphxcApJOMqEJyhSzuvwL2mKZBxL6Xxf5wLdrUD+CXfUKBkdCS1Q/
+ mFqw==
+X-Gm-Message-State: AOJu0Yy9ZlzUtIMr/GB/0UJSh1/8SFaJ6kVl8cGWahZHVN+OfORSiNqq
+ ZTBFqweMOt/HlabztuEdiCWrjv+PdrJ1uTI2eD+eR1pu1ubVT7LwOqM37yEFwWk=
+X-Google-Smtp-Source: AGHT+IFUfERQlerMGRg6S3RppkhfOZobYJdsJ7UOfKBFCXRJ9S3YxawViBAtGsWOhWqlmWzusFcR6w==
+X-Received: by 2002:a05:622a:15cf:b0:460:8dba:c60f with SMTP id
+ d75a77b69052e-460aed80708mr10975861cf.27.1729221279543; 
+ Thu, 17 Oct 2024 20:14:39 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-460aea608d3sm2919151cf.91.2024.10.17.20.14.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Oct 2024 20:14:38 -0700 (PDT)
+Date: Thu, 17 Oct 2024 21:14:35 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Shantur Rathore <i@shantur.com>
+Subject: Re: [PATCH 23/34] bootstd: Maintain a list of images
+Message-ID: <20241018031435.GS4959@bill-the-cat>
+References: <20241017232413.724808-1-sjg@chromium.org>
+ <20241017232413.724808-24-sjg@chromium.org>
 MIME-Version: 1.0
-References: <20240926215950.1265143-1-sjg@chromium.org>
- <20240926215950.1265143-7-sjg@chromium.org>
- <56ceb77c-efcb-40cb-a497-0952a8457950@gmx.de>
- <CAFLszThLt96h=+28HaD3LmUk-wgj6mnQFav40ndxTxXVZDQw7g@mail.gmail.com>
- <20241018001734.GR4959@bill-the-cat>
-In-Reply-To: <20241018001734.GR4959@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 17 Oct 2024 21:05:08 -0600
-Message-ID: <CAFLszThZY6fOOYovYV2KdQHpZ-1q9RK1HyZxrCY8AJ8MYceeXA@mail.gmail.com>
-Subject: Re: [PATCH v6 06/12] efi: Use the same filename for all sandbox builds
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="f5rgsIu8xUty5Xsj"
+Content-Disposition: inline
+In-Reply-To: <20241017232413.724808-24-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,68 +96,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Thu, 17 Oct 2024 at 18:17, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Oct 17, 2024 at 05:23:19PM -0600, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Mon, 30 Sept 2024 at 17:23, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >
-> > > On 26.09.24 23:59, Simon Glass wrote:
-> > > > Sandbox is not a real architecture, but within U-Boot it is real enough.
-> > > > We should not need to pretend it is x86 or ARM anywhere in the code.
-> > > >
-> > > > Also we want to be able to locate the sandbox app using a single
-> > > > filename, 'bootsbox.efi', to avoid needing tests to produce different
-> > > > files on each host architecture.
-> > > >
-> > > > Drop the confusing use of host architecture and just let sandbox be
-> > > > sandbox.
-> > >
-> > > As I already wrote in
-> > > https://lore.kernel.org/u-boot/ae1cf1fa-766e-46a0-8ef9-2c2c7af73d9e@gmx.de/
-> > > this patch should not be merged.
-> > >
-> > > bootsbx.efi does not exist in the UEFI specification.
-> >
-> > If that is of concern I can get it added. Let me know.
-> >
-> > >
-> > > Without this patch I can test that shim work and grub are correctly
-> > > loaded from a distro image. This patch makes the sandbox misbehave.
-> >
-> > Why don't you do that with QEMU?
-> >
-> > If we want sandbox to do this, I could add a way for sandbox to select
-> > its architecture. But this patch is correct, sorry. It is basically a
-> > revert of your patch:
-> >
-> > 3a0654ecd0d efi_loader: correctly identify binary name
-> >
-> > Let me know if you would like a selection mechanism and I'll see what I can do.
->
-> I'm confused. It sounds like Heinrich is using sandbox to test on
-> various hosts, how U-Boot behaves, without relying on "just test in
-> QEMU". I don't see how this disconnects from your usual request on how
-> to use sandbox for further testing. What is breaking for you, Simon, by
-> us saying that the host instruction set determines what we load and run
-> (and so, is portable whereas saying "sandbox" is not, between x86 hosts,
-> arm64 hosts and riscv64 hosts).
+--f5rgsIu8xUty5Xsj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This:
+On Thu, Oct 17, 2024 at 05:24:02PM -0600, Simon Glass wrote:
 
-Also we want to be able to locate the sandbox app using a single
-filename, 'bootsbox.efi', to avoid needing tests to produce different
-files on each host architecture.
+> We want to keep track of images which are loaded, or those which could
+> perhaps be loaded. This will make it easier to manage memory allocation,
+> as well as permit removal of the EFI set_efi_bootdev() hack.
 
-The idea of using sandbox to run native EFI apps is new to me, but it
-sounds great, if it will get us more tests in this area.
+Please stop calling it a "hack" in commits, that just sets things up to
+argue. Thanks.
 
-But sandbox is sandbox. It is not (x86, arm, riscv). It is a fake
-architecture that we use in U-Boot. I've offered to create a way to
-get the behaviour that Heinrich wants, so let's see what he says.
+--=20
+Tom
 
-Regards,
-Simon
+--f5rgsIu8xUty5Xsj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcR0pcACgkQFHw5/5Y0
+tywGnAv3SeZLhBy33fFWt/p2SfIcbFuuvWhJBX2aJV/49RNcxbJ/2Q0DXeZ9cjs0
+eofwy4IH72WEs3pCyvJCPAuAI6cnyJpRDuL2sbyCjoCTwQ5ejSq490jO27DzMaP+
+xynBgz/zde/pxuav39D1PcMsCcTbpCdpQ0pLHyWgtOaLDyNQmSsmTbJ9mcPoubRC
+enqcyJElzmEV+YAygZljIhviqkts0Vg+r5rWim4238vCTQpZX4XmFJJF2e+RWNux
+8dD95/ATIPgubDm/ci69XZr8EzZ+dsbARylo6jZSeGr1WqwHDzy4Ef7cmeZXhZCm
+ByqafjON/NVy8aPklyCGlGiDDFQLjFSI9Ths9G3XgSqct5fza50J3aD5SlPVusHn
+PIb8nXLmZ09NUDtPm29g28dOWk7sbVEouBlyy+EoRFI4s69UE/gLjdiDaVFjA3Zc
+lGXzPJ4GsCoD/wEnTCangKF0TMYBv+W7HORX6Bn0p6hlaH1ZPStLb+ZE1pHpBaIZ
+nEXgPhg=
+=sv9/
+-----END PGP SIGNATURE-----
+
+--f5rgsIu8xUty5Xsj--
