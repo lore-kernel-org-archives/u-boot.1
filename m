@@ -4,65 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC9DBD3C53F
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 01:30:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BB54D3C53F
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 01:57:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 709B48915A;
-	Fri, 18 Oct 2024 03:30:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 63BF389139;
+	Fri, 18 Oct 2024 03:57:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="rLE92TNG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nhAsxVCo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2245B89169; Fri, 18 Oct 2024 03:30:27 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B6C8688EE5; Fri, 18 Oct 2024 03:57:41 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0ED3289125
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 03:30:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97B8E890A9
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 03:57:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
- [5.147.80.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id BA77A408CC; 
- Fri, 18 Oct 2024 01:30:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1729215023;
- bh=J/hjgtmJnHTOL7OIYLlnrXHlx5x8NXd5SnczrWboZNE=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=rLE92TNGHw7WU7ZlsQJ6CT6inWF8hGR2RPfxcXmvfsuAyI2PNuJHPCska8aBYIW1S
- MT761TkSEPb9/klt26A4RNWVr5QNL0SjhjrSFASViSQBUkg2e6qeCv/zKIyH3+pZM+
- reFsVv2wRQLLiJDBFLndib73aecij4f1A9B7WGwqjCLrEd3NnNmjNwcMDj9Q3May3Y
- zVO1Pt/wM6nRgwdvcFwYIwI/kXqWF+5AbQSBD4Jl35Hrj91LrzyFGEYmdTI1x/U/fl
- gI/cZH5oE7nyzUH/Znnt3qy4j5aD+bQR63ks0IneIQ7PUQMDtcR86/RIoLQL5JAqDL
- tDSYWjeJSxuQw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Heiko Schocher <hs@denx.de>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Johan Jonker <jbx6244@gmail.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/3] block: make blk_create_device() static
-Date: Fri, 18 Oct 2024 03:30:15 +0200
-Message-ID: <20241018013015.127620-4-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241018013015.127620-1-heinrich.schuchardt@canonical.com>
-References: <20241018013015.127620-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6cbe90c7c95so12373616d6.1
+ for <u-boot@lists.denx.de>; Thu, 17 Oct 2024 18:57:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729216658; x=1729821458; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nb7B33k0+6SENgWE2YtRGdG9PiGHlP+WcicKEjGd3JE=;
+ b=nhAsxVCoVchzukFrwVCrnoiwqQHoR2m+Ob8CIgf3hDqOZr68070dk3veox0DrQDi/P
+ 1IYPCvinT0SVDlMS9ujOwt6hQrnZ2fRGzsRSINBeWT11d3WPJ7ctPhCNUPaGNhcMxE1o
+ eyxDKZsLFG25w73nXnrLfDtL0o4qVLAJQ0yzA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729216658; x=1729821458;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nb7B33k0+6SENgWE2YtRGdG9PiGHlP+WcicKEjGd3JE=;
+ b=pO+IV7f32jF5ZGNIPOSz9z7XoLlRiQXGPKvEp21rJLiJ055/mDzHUlTqQx65V2P/xP
+ sbbR/mi/fa0ZaJNrc/EeU3mVqCzNWuofdpW1M3bX1GIhC8/P7U/OGbKd+ZjZKQHRqZuR
+ ebHyKBaJLsPDnFXdWRNgrKRrgHiYB4De0J4AjRbhey2uex1K57QgOyvUBKvtzQunOfRp
+ PHoRcZks0m8lmRlxcgqj9YIXyay94VVOCZD/2mwHZs9MAb7+ecHseuwTU3XgZNSMf/Bg
+ TxkK/6hY8UIGd79e2EmsU53ujPMs7LHv1nChq1SgRiTUqiMQiSUze+NC/+uhB0jOm1ZU
+ ewdQ==
+X-Gm-Message-State: AOJu0Yx5vH0H1YAlAiygAlBBH6JxlNl/4CetTzOCVmUyBwONCAaje+Y4
+ G0KhUFagrgCjfwhPPi0gXLKiHROm9kCCk9uaF3kWk8ys0l1GRs6htU+GnOd/D3I=
+X-Google-Smtp-Source: AGHT+IHtWa8jO10iQfEmJbFYaqs/QQyx2TyxzkuBP2QobyVtb7DdpIUyYTjw7es4Oq6/GWUopWOD6A==
+X-Received: by 2002:a05:6214:5985:b0:6cc:561:43eb with SMTP id
+ 6a1803df08f44-6cde164b0a0mr11577586d6.52.1729216658504; 
+ Thu, 17 Oct 2024 18:57:38 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cde1366ac3sm2332156d6.113.2024.10.17.18.57.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Oct 2024 18:57:37 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Jan Kiszka <jan.kiszka@siemens.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>, Marek Vasut <marex@denx.de>, 
+ Frank Wunderlich <frank-w@public-files.de>, Jonas Karlman <jonas@kwiboo.se>, 
+ Nishanth Menon <nm@ti.com>, 
+ "Li, Hua Qian (DI FA CTR IPC CN PRC4)" <huaqian.li@siemens.com>
+In-Reply-To: <a54b501a-9a98-426c-a5ca-faf547411a30@siemens.com>
+References: <a54b501a-9a98-426c-a5ca-faf547411a30@siemens.com>
+Subject: Re: [PATCH] Extend usage for OF_OVERLAY_LIST beyond SPL
+Message-Id: <172921665626.1016776.1779599313259840996.b4-ty@konsulko.com>
+Date: Thu, 17 Oct 2024 19:57:36 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,74 +92,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are no users of the blk_create_device() function outside the uclass.
-Let's make it static. This will ensure that new block drivers will use
-blk_create_devicef().
+On Mon, 30 Sep 2024 12:20:36 +0200, Jan Kiszka wrote:
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- drivers/block/blk-uclass.c | 19 ++++++++++++++++---
- include/blk.h              | 17 -----------------
- 2 files changed, 16 insertions(+), 20 deletions(-)
+> Allow to use OF_OVERLAY_LIST also for the case that the overlays just
+> need be built, e.g. when they will be picked up by binman as artifacts
+> of the final U-Boot image. The IOT2050 boards have such a need when
+> switching to OF_UPSTREAM.
+> 
+> 
 
-diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-index 312e038445c..f3ac8db9464 100644
---- a/drivers/block/blk-uclass.c
-+++ b/drivers/block/blk-uclass.c
-@@ -695,9 +695,22 @@ static int blk_claim_devnum(enum uclass_id uclass_id, int devnum)
- 	return -ENOENT;
- }
- 
--int blk_create_device(struct udevice *parent, const char *drv_name,
--		      const char *name, int uclass_id, int devnum, int blksz,
--		      lbaint_t lba, struct udevice **devp)
-+/**
-+ * blk_create_device() - Create a new block device
-+ *
-+ * @parent:	Parent of the new device
-+ * @drv_name:	Driver name to use for the block device
-+ * @name:	Name for the device
-+ * @uclass_id:	Interface type (enum uclass_id_t)
-+ * @devnum:	Device number, specific to the interface type, or -1 to
-+ *		allocate the next available number
-+ * @blksz:	Block size of the device in bytes (typically 512)
-+ * @lba:	Total number of blocks of the device
-+ * @devp:	the new device (which has not been probed)
-+ */
-+static int blk_create_device(struct udevice *parent, const char *drv_name,
-+			     const char *name, int uclass_id, int devnum,
-+			     int blksz, lbaint_t lba, struct udevice **devp)
- {
- 	struct blk_desc *desc;
- 	struct udevice *dev;
-diff --git a/include/blk.h b/include/blk.h
-index 1fc9a5b8471..261c7dd6616 100644
---- a/include/blk.h
-+++ b/include/blk.h
-@@ -376,23 +376,6 @@ int blk_first_device(int uclass_id, struct udevice **devp);
-  */
- int blk_next_device(struct udevice **devp);
- 
--/**
-- * blk_create_device() - Create a new block device
-- *
-- * @parent:	Parent of the new device
-- * @drv_name:	Driver name to use for the block device
-- * @name:	Name for the device
-- * @uclass_id:	Interface type (enum uclass_id_t)
-- * @devnum:	Device number, specific to the interface type, or -1 to
-- *		allocate the next available number
-- * @blksz:	Block size of the device in bytes (typically 512)
-- * @lba:	Total number of blocks of the device
-- * @devp:	the new device (which has not been probed)
-- */
--int blk_create_device(struct udevice *parent, const char *drv_name,
--		      const char *name, int uclass_id, int devnum, int blksz,
--		      lbaint_t lba, struct udevice **devp);
--
- /**
-  * blk_create_devicef() - Create a new named block device
-  *
+Applied to u-boot/master, thanks!
+
 -- 
-2.45.2
+Tom
+
 
