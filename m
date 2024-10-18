@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C87BD3DEA2
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 17:21:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1090D3DEA2
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 17:21:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CF8B88D9F;
-	Fri, 18 Oct 2024 19:21:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 77FCA88DF3;
+	Fri, 18 Oct 2024 19:21:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j6Z9ln1/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K4aHdhTt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E477988DC6; Fri, 18 Oct 2024 19:20:58 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 2322588E51; Fri, 18 Oct 2024 19:21:08 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE91B88DA0
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 19:20:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F22BD88DF8
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 19:21:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6cbd57cc35bso27924006d6.1
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 10:20:56 -0700 (PDT)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7b1418058bbso164016885a.3
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 10:21:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729272055; x=1729876855; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729272063; x=1729876863; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GJmUzBBJ1LXJKS+Kyq5G8mXoq73GSlDoMEC4HoO7P6s=;
- b=j6Z9ln1/VEdY+USGF9H2mUVl/3LpWEL8h0R1qVJz8gotv5lLZkPs72n7E2lc4y0zcl
- IvR8KWwtkk5yj5uMr2PjLnPWXTJdd5Mta+l08ZOnWARJh+3j+xQ3e7MkKBrVIUe4UNHs
- WWTgtTDPzfyzTufWLgjPE08lE6GkxAWwV1AKg=
+ bh=O5ZuM3vJPDiWRzo7KCdH08YhdJyTCjCpzcxHwOmphOE=;
+ b=K4aHdhTtWHSR51LDcZMAVOvuuuHgrjhjzX2AYrjrlawUjjJOMQ1PovTysNJT6UOZBI
+ 88vTkP9ETJI4FCY5jk0tPtfXBp8KmH1kiyr/YYXwTQdikQBBiFk63mM7RP6RVjW6g/Bm
+ ygu8UCgAzFXlQCe42e9lKncHPopsOBnOUE62c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729272055; x=1729876855;
+ d=1e100.net; s=20230601; t=1729272063; x=1729876863;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=GJmUzBBJ1LXJKS+Kyq5G8mXoq73GSlDoMEC4HoO7P6s=;
- b=AAdTaQW2jPUIzrz4cOeHHqQuhXsaYwEB7cMipM9tyiRY40I42lsiAuM3OqJpJolLCv
- n+Io/WRMWoxg8ef5rLuy9+eJvzqvEG5GdqQ5E3gbqmDPDcdAFHlctaJnB145ZWzN/r6d
- a8jVeaE2bUmoZguxse/a/Io6Zon4J1jN3NaNayAIaO5YA0/P46LqvcxWsVpijEprVXt5
- nO96KjyuQD7Z8Jnr9Kv6uRp4C3uuzO0JqzKc23FcRM2PBhJvyPcOlpsZguCM93EgCO+4
- s3i9HcZ/IuCdYNtpAwB1VsGW2uMjX1pKbUcmn7vZtkYCw85hJajunOH722U5pz5PdzbJ
- zEjw==
-X-Gm-Message-State: AOJu0Yx79QqlnXOR1pJRT9HSphcGiEg68kFeeeAup8AO2pXmvA9+2WZ/
- hIX+O1DaFNQQkZWbQF4kf/PbuJqb4UDbqOUHJIYAAgAlIMmrgrf0k3ePU5BTRp2eC6/2TQ19igT
- jNVZN1EoYteWR2aCXm5TdaTXcPPj9rlQRnKKc
-X-Google-Smtp-Source: AGHT+IEOm6n9sTWLGxPZ0UhTJ+vGfLJ/HLYWmoGKthvQAr8kYGu6agg48JIJ+oe6Xs7xUnBM3Ovn+PZV5oLcrT5PVdY=
-X-Received: by 2002:a05:6214:2f84:b0:6cc:2c7b:f9f8 with SMTP id
- 6a1803df08f44-6cde18dad5amr50865886d6.12.1729272055680; Fri, 18 Oct 2024
- 10:20:55 -0700 (PDT)
+ bh=O5ZuM3vJPDiWRzo7KCdH08YhdJyTCjCpzcxHwOmphOE=;
+ b=Siew+qfRIqrYdRTqBjVFHurIg53saCpjDrpD7sWxfFMikr/8pSCn5gmtHFxlO6MdZx
+ 1/mygAQG+CdVvpi8s4Hc4nXZYj1YY0tgI91OT9LYRtBxmyu87Xi2U+p0DjU1sBa1uFYd
+ mG698EkoWu1Cnl4bmgJMb0v04rGl2z7GeCwOF3GP3xM5pOpUDaZaqqQoVsX86XrkDHJR
+ 462kAGOh7RaAKxjmzv59SKARrS3Z54XRxLB+Xi8PWT8Tm0qT+j59n9gbNEtxxyhFtLip
+ xqo38jCMjR+0bux0PHqXRR+bcIB7wo8C4gDAf8tpLhYdRGAF071bF8qCaSzM0OKOfhkP
+ EOmQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVPgcecPoMDrQu4cflIjXusEg9f6MEvcI0EyhrYCkzPdXle4XTMw+RTGD8TjC9p3YQfa6JCw5o=@lists.denx.de
+X-Gm-Message-State: AOJu0YwBKSm3GenkZfHSQDDA59xaDq7q9pfQdGlydY7jX7bzE16Zh8VX
+ SbB2wYeX5u3qVIpAs2MKI9+9J89Y4oVDtR0MCm1LZsF3yg5IULXhcVqm9sreAeitXWj4dHtOjFb
+ zspKvN3EkGJU085PEEujV1d6d5VWrdwvGC23v
+X-Google-Smtp-Source: AGHT+IHNMOydzsf06ZNsUCLz+9e/ddDduJM/6tooksXy2tLMBekA9h+aZ4mLihT5FCYUUbB2nukRYZMloH33vV1/MBc=
+X-Received: by 2002:a05:6214:4981:b0:6cc:51f:6c31 with SMTP id
+ 6a1803df08f44-6cde14c6c38mr43136086d6.5.1729272062904; Fri, 18 Oct 2024
+ 10:21:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241017232413.724808-1-sjg@chromium.org>
- <20241017232413.724808-16-sjg@chromium.org>
- <20241018031455.GU4959@bill-the-cat>
- <CAFLszTiELZL3ZAm38z9y0yLx+XEU-EUuV5GVfjU=-3WdpkTUDA@mail.gmail.com>
- <20241018151753.GY4959@bill-the-cat>
-In-Reply-To: <20241018151753.GY4959@bill-the-cat>
+ <20241017232413.724808-24-sjg@chromium.org>
+ <0B48F871-BDD8-4810-ADA3-4F6C4E403B0C@gmx.de>
+ <CAFLszTjF-kg5E+sV+CkFjStmS2YyJiPa59zOWWZxd2J5yOwftA@mail.gmail.com>
+ <20241018163303.GZ4959@bill-the-cat>
+In-Reply-To: <20241018163303.GZ4959@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 18 Oct 2024 11:20:45 -0600
-Message-ID: <CAFLszTjwNK+4fH_x2ZDkamanDjFJCtgXFD+d9gTruZs7gLvfZQ@mail.gmail.com>
-Subject: Re: [PATCH 15/34] image: Add a new type for extlinux
+Date: Fri, 18 Oct 2024 11:20:52 -0600
+Message-ID: <CAFLszTi2+2si4bq-iZK5fncnUnBHVLnpp6kqJAGFyK5Lis9OZg@mail.gmail.com>
+Subject: Re: [PATCH 23/34] bootstd: Maintain a list of images
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, 
- Raymond Mao <raymond.mao@linaro.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Julien Masson <jmasson@baylibre.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Nam Cao <namcao@linutronix.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Shantur Rathore <i@shantur.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,70 +94,41 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Fri, 18 Oct 2024 at 09:17, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 18 Oct 2024 at 10:33, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, Oct 18, 2024 at 08:57:02AM -0600, Simon Glass wrote:
-> > Hi Tom,
+> On Fri, Oct 18, 2024 at 09:01:03AM -0600, Simon Glass wrote:
+> > Hi Heinrich,
 > >
-> > On Thu, 17 Oct 2024 at 21:14, Tom Rini <trini@konsulko.com> wrote:
+> > On Thu, 17 Oct 2024 at 22:07, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 > > >
-> > > On Thu, Oct 17, 2024 at 05:23:54PM -0600, Simon Glass wrote:
 > > >
-> > > > Add an image type for the extlinux.cfg file, which U-Boot supports
-> > > > reading.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > >  boot/image.c    | 1 +
-> > > >  include/image.h | 1 +
-> > > >  2 files changed, 2 insertions(+)
-> > > >
-> > > > diff --git a/boot/image.c b/boot/image.c
-> > > > index abac254e026..cf16fb7fbf7 100644
-> > > > --- a/boot/image.c
-> > > > +++ b/boot/image.c
-> > > > @@ -183,6 +183,7 @@ static const table_entry_t uimage_type[] = {
-> > > >       {       IH_TYPE_FDT_LEGACY, "fdt_legacy", "legacy Image with Flat Device Tree ", },
-> > > >       {       IH_TYPE_RENESAS_SPKG, "spkgimage", "Renesas SPKG Image" },
-> > > >       {       IH_TYPE_STARFIVE_SPL, "sfspl", "StarFive SPL Image" },
-> > > > +     {       IH_TYPE_EXTLINUX_CFG, "extlinux_cfg", "Extlinux configuration" },
-> > > >       {       -1,                 "",           "",                   },
-> > > >  };
 > > >
-> > > This whole part of the series feels like we're abusing IH_TYPE_ far past
-> > > what it's used for. Especially the command line string one. It seems
-> > > like the main use is to be able to later on print something human
-> > > friendly. Please try and figure out some other way to do that. Thanks.
+> > > Am 18. Oktober 2024 01:24:02 MESZ schrieb Simon Glass <sjg@chromium.org>:
+> > > >We want to keep track of images which are loaded, or those which could
+> > > >perhaps be loaded. This will make it easier to manage memory allocation,
+> > > >as well as permit removal of the EFI set_efi_bootdev() hack.
 > >
-> > Yes I had the same thought, particularly with cmdline, as you say.
+> > I'll change this 'hack' to 'feature'.
 > >
-> > The obvious alternative is to just have a string which communicates
-> > the type. Then I can use IH_TYPE_INVALID, perhaps, with an extra
-> > string indicating what it really is.
+> > >
+> > > Please, keep in mind that files can be loaded manually, e.g. via the dhcp, the wget, and the loady commands. These are outside bootflows.
 > >
-> > But one advantage of the approach in this patch is that, for bootmeths
-> > which include a cmdline, it can be identified and added as a file.
-> > That includes zimage and ChromiumOS, but not EFI. It will allow me to
-> > get rid of the cmdline in struct bootflow, perhaps.
+> > Yes, this series is only going to help if bootstd is used. For ad-hoc
+> > use, EFI will need to rely on the above feature, at least until
+> > someone can think of another solution.
 >
-> Yeah, this all sounds like IH_TYPE is the wrong direction to expand.
-> Where you're grabbing these things from is where you might get a hint as
-> to what these things are and that's where to take the store the
-> knowledge for later.
+> Perhaps I need to try and be clearer here than I might have been in the
+> past. The consensus among off the shelf free software operating systems
+> is "just give me an EFI interface". This simplifies things on their end
+> if regardless of architecture it's the same interface. This means that
+> in U-Boot we need to treat EFI as one of the primary interfaces. Not a
+> novelty. Not a "some people might use". It is a frequent and commonly
+> used feature.
 
-They are grabbed from several places:
-- extlinux comes from disk, with the extlinux bootmeth, but can also
-come from 'include' files within that scripts, also pxe
-- EFI apps from from disk with the EFI bootmeth
-- kernel, ramdisk and fdt some from most bootmeths
-- cmdline comes from extlinux (with zImage only) and ChromeOS,
-probably Android but I haven't looked
-- logo comes just from script so far, but I suppose UKI and FIT will
-have it eventually
+Yes, EFI is everywhere and growing. All the more reason to tidy up
+this piece. I would like to see bootmgr use this new API, for example.
 
-Can you be more specific with your suggestion? I am not seeing an
-alternative right now.
+But how does this comment affect this patch?
 
 Regards,
 Simon
