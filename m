@@ -4,81 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C2BD3F29E
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 20:46:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66126D3F29E
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 20:49:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECCF988E2B;
-	Fri, 18 Oct 2024 22:46:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+	by phobos.denx.de (Postfix) with ESMTP id A4BA288D29;
+	Fri, 18 Oct 2024 22:49:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="axQyPOwx";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="OSYIU4dW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3889E88D72; Fri, 18 Oct 2024 22:27:27 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B691388C7B; Fri, 18 Oct 2024 22:49:26 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55F7E88B23
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 22:27:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51E1688D5B
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 22:49:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-431616c23b5so7431885e9.0
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 13:27:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1729283245; x=1729888045;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GoCJD5Zngd/58b2dw/ExiyOu/rcLIvwRGXdTekrnXME=;
- b=axQyPOwxvnn1acE3PR+qAUEV1WGbPDQJX8hjFd8/0PK/JMhU5De4AwSL2ldqAxIWiV
- G9LQTM/h+ZGjK82EjwagZAniImWT6MhD0H8jJbJRGXGNcyG97du6o7eCy8QtxHwC7N3/
- 18PfXCtlG/62yGONI3h7w2seGEEb36irxRJ0LGdXHn2vUtyXiF8wn4PwApvv3Ts81JE/
- 8SjRF70oPp/FvyGkMJ2kwPikZQ6xwtj2c5y/NJ5j1q6rTouAABwIO/YbQgi7SEOp/yQP
- O4a9kqruo/gaS2gIsVFID+Wesz/LvlpHH0lz9+mbBoX0X/jwyhFBKozmma2LbT/Nnblw
- Vcag==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A13714120A
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 20:49:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1729284560;
+ bh=airrf0wem8vS4qhNDfRPWPMgwr886Fqdm1MK224S6xY=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=OSYIU4dWCJ+tKaaBgV3cntZCS89vxzt3BgbHSbm+g3L9dOx/Gk+lpgYoTRAdjHgTV
+ oMOoFircTUhhd7UtnklRKA1RnVUzupX1ttGkPzcfquRXswUnvywfaPesn1EREAI5Oi
+ rvDd1ZSRBqon+yBhodXpNag81kUNCAklSVr65dNH6st+vVhFX0wsrd1bTBgrLltuMm
+ HjnRchcwMD8CNSVydZK9gezIFbivqYG6KuR1ebAdyYmB7z49Q5ClZPXsJptdyWVMAo
+ pZmqA8xqq189FEjccvZLiT1eqfhnCO+25XjfwmLb1NLG0kxCmj5ImFQICWgDtaI/Wx
+ Hlk0cykBAeniA==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4316138aff6so8899245e9.1
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 13:49:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729283245; x=1729888045;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GoCJD5Zngd/58b2dw/ExiyOu/rcLIvwRGXdTekrnXME=;
- b=RX5Zy95w7VMOir+GkTadUS6cVJM7Wek1b5Nxg2vyEHYLu8njX80EBNi9tGTPWLuPE3
- JbK7Eqq3+8jPFwk+6AjeSlV/h7v5Bfa6SFnDqdilSwX+zPXU5gMvsApxsOv21vYiFKMy
- Q5ty97sD/R8n535l4bBpYFIYAN0a8InSkDk/PLkHZRcEGwAzGySwAmonGJ5txJIkxov6
- ISAIiQgVPvz57Rf6XzLx0Zkkvgqg6GooLypDl9so69/uhnMe80sdz5lwsJnDxGW0CTU0
- 2si5ebCyjD87JsmMCST4yZ/KnMixyBgoPSty34t6Ituy2AtZyTQxddXOfwCCSO4WZkpi
- WnKA==
-X-Gm-Message-State: AOJu0YxdVKPu2sW3JapjiUfWZB6qU6OmWS/GlByK/nBQGj7ha2ZNK262
- JhlBUCgQX6VKRsIwC9ezcPIruQA4Zr/iD/zmnij3cz3IpPYLpFQiwqRGQ2SUUI5o/Z2AUNeeWC0
- f
-X-Google-Smtp-Source: AGHT+IFk4/Yy3K06l3JL0KglpA7Gs4L4mv+xyjVHjlf2Yayu5IbFme5mxDF/+KccCRf02FEqT4PrSw==
-X-Received: by 2002:a05:600c:3151:b0:431:4fbd:f571 with SMTP id
- 5b1f17b1804b1-43161685008mr24424795e9.13.1729283244743; 
- Fri, 18 Oct 2024 13:27:24 -0700 (PDT)
-Received: from localhost.localdomain ([78.199.60.143])
- by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4316067dc70sm35810395e9.10.2024.10.18.13.27.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Oct 2024 13:27:23 -0700 (PDT)
-From: Zixun LI <admin@hifiphile.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de,
-	Zixun LI <admin@hifiphile.com>
-Subject: [PATCH 3/3] gpio: at91: Implement ops get_flags
-Date: Fri, 18 Oct 2024 22:27:15 +0200
-Message-ID: <20241018202715.283011-3-admin@hifiphile.com>
-X-Mailer: git-send-email 2.46.2
-In-Reply-To: <20241018202715.283011-1-admin@hifiphile.com>
-References: <20241018202715.283011-1-admin@hifiphile.com>
+ d=1e100.net; s=20230601; t=1729284560; x=1729889360;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=airrf0wem8vS4qhNDfRPWPMgwr886Fqdm1MK224S6xY=;
+ b=lkM5nkCfhCaXURP5HUAaxxzQP4jbQd8OhFtgIqimdX/65mb0Iiv9c8pWzZJAuSPWBp
+ iBX9ahHeaCkGx+47jgaN3+B/4ozSWaXhPogG6K3173Lr8r3VFVBnZ7F4LgGRZytds30q
+ M2l8qarNzzfBBkQZCxFBO8l+BjUy9tXAwRQRGJeXka3P/1OpSPbhG7LWMhigkSXTFPmx
+ Ke7foyp0muart+4XGrTew2VP3WskqP6lEiM1IKhlcx42lV0C3StEtPtUm16P6IQHC2UE
+ vK58HCgKiroIPQJI4/LgcwgofJ/xQyOYwso5wL0amZpx8EsnM0dAFL5M95PPU2M1RMOL
+ t+hw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUfPqzQDGV0LX9EAzTFHjiJruBquGnGdOQ6OUX+qbyq0ilPxrV8Rdhdqc32p2AWQSgExnKGMcM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHkNSMxngqWXx1u19Rl0uBN4rn20PAF0Yc/SLmHpWsSTFNuWEc
+ jkYpckJHBFevflwGOqPBDRb9tNut3B1Tibx9nQmCV35HxOnjbTEUsFnNnWciLshoDLd08UYfuR2
+ 5D041ndav++Z+dld1vnPjFBaSbss+gigh2ngZfnCRldD89XH03/mOspNXHLP+DA/XrYk=
+X-Received: by 2002:adf:e745:0:b0:37d:511b:aecc with SMTP id
+ ffacd0b85a97d-37ebd3a76fbmr2608513f8f.54.1729284559909; 
+ Fri, 18 Oct 2024 13:49:19 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE/8alw24CgKR3WSg9FATWZ4YZWiEMM4hk+Ntcc0Q4Fr7bBO2ZMkgAsi2p97C4wTF5sHIjidw==
+X-Received: by 2002:adf:e745:0:b0:37d:511b:aecc with SMTP id
+ ffacd0b85a97d-37ebd3a76fbmr2608505f8f.54.1729284559542; 
+ Fri, 18 Oct 2024 13:49:19 -0700 (PDT)
+Received: from [192.168.123.30] (ip-005-147-080-091.um06.pools.vodafone-ip.de.
+ [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37ecf0edc71sm2781006f8f.71.2024.10.18.13.49.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 18 Oct 2024 13:49:18 -0700 (PDT)
+Message-ID: <f761d5f8-22ed-4310-8a48-e13bae888cbe@canonical.com>
+Date: Fri, 18 Oct 2024 22:49:16 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 18 Oct 2024 22:46:12 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] sandbox: add bootmethod EFI boot-manager
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Mark Kettenis
+ <kettenis@openbsd.org>, u-boot@lists.denx.de
+References: <20241018011837.126813-1-heinrich.schuchardt@canonical.com>
+ <20241018011837.126813-3-heinrich.schuchardt@canonical.com>
+ <CAFLszTjjF1r4f6NjrYSFz36DK_X6v6rYMwDCUqiSLOPysGRC7g@mail.gmail.com>
+ <ee96c1c0-c1d5-4f18-a1eb-f6460e859683@canonical.com>
+ <CAFLszThZ-s1Kwhv0DBoEG2uKE=MFdb_CmOY5hn0O5dVuFUP=Vw@mail.gmail.com>
+ <20241018203657.GJ4959@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241018203657.GJ4959@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,83 +113,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add ops get_dir_flags() to read status from GPIO registers.
+On 10/18/24 22:36, Tom Rini wrote:
+> On Fri, Oct 18, 2024 at 02:17:36PM -0600, Simon Glass wrote:
+>> Hi Heinrich,
+>>
+>> On Fri, 18 Oct 2024 at 11:26, Heinrich Schuchardt
+>> <heinrich.schuchardt@canonical.com> wrote:
+>>>
+>>> On 10/18/24 19:21, Simon Glass wrote:
+>>>> Hi Heinrich,
+>>>>
+>>>> On Thu, 17 Oct 2024 at 19:18, Heinrich Schuchardt
+>>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>>
+>>>>> The EFI boot-manager is the default method to boot EFI binaries.
+>>>>> We should be able to use it on the Sandbox.
+>>>>>
+>>>>> * Enable EFI boot-manager bootmethod on the sandbox.
+>>>>> * Adjust unit tests to reflect the additional boot method.
+>>>>>
+>>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>>>>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>>>>> ---
+>>>>> v2:
+>>>>>           no changes
+>>>>> ---
+>>>>>    arch/sandbox/dts/test.dts |  4 ++++
+>>>>>    test/boot/bootmeth.c      | 28 +++++++++++++++++-----------
+>>>>>    2 files changed, 21 insertions(+), 11 deletions(-)
+>>>>
+>>>> This is better, but I still see this.
+>>>>
+>>>> => bootflow scan
+>>>>        efi_var_to_file() Cannot persist EFI variables without system partition
+>>>>
+>>>> Please find a way to get rid of it. I can give some suggestions if you like.
+>>>>
+>>>
+>>> Would you, please, mind providing a rationale why you want this correct
+>>> message not to be written.
+>>>
+>>> I expect the sandbox to behave as any other board and provide warnings
+>>> when they are adequate.
+>>
+>> Well, what I am supposed to do to fix this warning? I just don't want
+>> unactionable messages coming up in bootstd.
 
-Signed-off-by: Zixun LI <admin@hifiphile.com>
----
- drivers/gpio/at91_gpio.c | 45 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
+The user runs a system that tries to boot via EFI. He does not have an 
+block device with an ESP. For sure that is an actionable warning:
 
-diff --git a/drivers/gpio/at91_gpio.c b/drivers/gpio/at91_gpio.c
-index 7828f9b447..c986007716 100644
---- a/drivers/gpio/at91_gpio.c
-+++ b/drivers/gpio/at91_gpio.c
-@@ -240,6 +240,24 @@ static void at91_set_port_multi_drive(struct at91_port *at91_port, int offset, i
- 	else
- 		writel(mask, &at91_port->mddr);
- }
-+
-+static bool at91_get_port_multi_drive(struct at91_port *at91_port, int offset)
-+{
-+	u32 mask, val;
-+
-+	mask = 1 << offset;
-+	val = readl(&at91_port->mdsr);
-+	return val & mask;
-+}
-+
-+static bool at91_get_port_pullup(struct at91_port *at91_port, int offset)
-+{
-+	u32 mask, val;
-+
-+	mask = 1 << offset;
-+	val = readl(&at91_port->pusr);
-+	return val & mask;
-+}
- #endif
- 
- static void at91_set_port_input(struct at91_port *at91_port, int offset,
-@@ -608,6 +626,32 @@ static int at91_gpio_set_flags(struct udevice *dev, unsigned int offset,
- 	return 0;
- }
- 
-+static int at91_gpio_get_flags(struct udevice *dev, unsigned int offset,
-+				ulong *flagsp)
-+{
-+	struct at91_port_priv *port = dev_get_priv(dev);
-+	ulong dir_flags = 0;
-+
-+	if (at91_get_port_output(port->regs, offset)) {
-+		dir_flags |= GPIOD_IS_OUT;
-+
-+		if (at91_get_port_multi_drive(port->regs, offset))
-+			dir_flags |= GPIOD_OPEN_DRAIN;
-+
-+		if (at91_get_port_value(port->regs, offset))
-+			dir_flags |= GPIOD_IS_OUT_ACTIVE;
-+	} else {
-+		dir_flags |= GPIOD_IS_IN;
-+	}
-+
-+	if (at91_get_port_pullup(port->regs, offset))
-+		dir_flags |= GPIOD_PULL_UP;
-+
-+	*flagsp = dir_flags;
-+
-+	return 0;
-+}
-+
- static const char *at91_get_bank_name(uint32_t base_addr)
- {
- 	switch (base_addr) {
-@@ -637,6 +681,7 @@ static const struct dm_gpio_ops gpio_at91_ops = {
- 	.set_value		= at91_gpio_set_value,
- 	.get_function		= at91_gpio_get_function,
- 	.set_flags		= at91_gpio_set_flags,
-+	.get_flags		= at91_gpio_get_flags,
- };
- 
- static int at91_gpio_probe(struct udevice *dev)
--- 
-2.46.2
+The user should insert properly formatted media.
 
+And your test should put an ESP on the image.
+
+>>
+>> If it happens all the time and cannot be fixed, you could add an
+>> option to the driver to ignore it, which can be controlled from the
+>> devicetree node.
+
+As said it can be easily fixed. Create an ESP on one of the block devices.
+
+Do you really expect a user to change the device-tree to suppress a warning?
+
+Wouldn't it be more plausible to remove the EFI boot method from the 
+bootflow instead if that device is never to be booted via EFI?
+
+> 
+> So, you're scanning a disk image to boot from, and it lacks a system
+> partition. Can you describe how you're creating this disk image? And are
+> you testing something EFI related, or not? And then Heinrich, can we be
+> checking for variables any later than we do today?
+> 
+
+The EFI specification requires us to create non-volatile BOOT#### 
+variables for each block device. Without an ESP we cannot persist these. 
+We are already at the latest possible moment when we reach the boot manager.
+
+Best regards
+
+Heinrich
