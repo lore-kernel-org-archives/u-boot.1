@@ -4,90 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83412D30007
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 13:33:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F55BD30007
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 13:43:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC6D288E02;
-	Fri, 18 Oct 2024 15:33:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AD64E88EA3;
+	Fri, 18 Oct 2024 15:43:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JcZACjEX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T5vqsHEO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF60B88E02; Fri, 18 Oct 2024 15:33:06 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id DB7A388E94; Fri, 18 Oct 2024 15:43:35 +0200 (CEST)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADB8488D5B
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 15:33:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8740188E7B
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 15:43:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9a19bf0a1dso33609266b.1
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 06:33:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2e2ed59a35eso1814752a91.0
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 06:43:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729258383; x=1729863183; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=4OXLwPHyyBh4SwAYgZWURmGqN1HWydUhg+xG2f1PRb8=;
- b=JcZACjEXi2cmkVbndIKyyv71QkxHFm7bwjEu6vqXCqOHSpSjWfC9mLpJORIhTnGgnY
- BXizr/5PXj2z8DGFql/3IHgLWg54czq4En8WP47c4FzzdI4pEftt9cez4+q8nlZgGD74
- Xbu1k+6FprlPt0xCw1tklwCIemkhJ1zIcjfYvPj7pBpe7eXgjfwisdayxBhDHnZKnlYu
- 1/I3UyAvSOYBm/WvWW+L4KS6ByjqF+DaJXaJPMQ2VaWmtHANy28eg4OZkTS4fYuUP0mN
- +wMoXXhsVp/cbd9e6IjK/FDiej8bsbLWsHbuKQVGAaEgHhIdd7ZDLtlQiNlG5Nb8NDg0
- gs/g==
+ d=linaro.org; s=google; t=1729259012; x=1729863812; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2udwzNgr6Xxd0+AnIEKvhYyv0AYjvcyu2OmF0YoYJJc=;
+ b=T5vqsHEOK8lb9PHG0ijxmZzh3+4fN4zF4K17w8bcn725gdg4LD78pEBX8Ppyr3dX9+
+ IAFOhiUo/BEqnkYK4wxba96jArNAsgZ5pS7jH0noD7fkUBk8b2PNg+xwn38x4EONL5ec
+ mgVY95etu6U9IosRtoRrieaUSg44+hpYyQX/H94wpg9RkoZotB5suDWlYEarRj99tieT
+ 9lfMmTgMn6LtodQ0eNt/GdTRqYX0BYfSGqbh12Z5EvAXwO1f2h56jjIMvvCqo4VONaeq
+ FPmACLZLxtzl7ItUtKPC0RworDsSGN5ZZ/tO09RfDaTE5RF5Xg/jbJ9Pg+9unrqYlRxU
+ 9opg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729258383; x=1729863183;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4OXLwPHyyBh4SwAYgZWURmGqN1HWydUhg+xG2f1PRb8=;
- b=H+uaV2rF6lUMn1pFfVCWVdIZCw582f77cCHjIby+kanCP6V13Fe7XeZvoDuOAyV8/P
- WAtO2/hXxfVhk4at5c8zIcnnqhzSdsMpk8B1YP0m0lUP6pYMtb8TmzI6hTetb0vdKC/P
- BmsVVgyyw5G8vxC7jUROSLCSCPT+5ZOsX03UxGIUHEDLlggFWPkBxUy5xILcW4zWu/Gx
- IZ30nucHntbKMJY/9QqumABnT7dwHGEaEMzkIhJCeFNZWyIqc4ENkWioBORH2MML4RjN
- IBhScHVpfp5jg79hhz5emg8HjfKQmGIJcNXs6x+DD38+r2T+1tuwb9AHKADp58+oJLmX
- M2Rg==
+ d=1e100.net; s=20230601; t=1729259012; x=1729863812;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2udwzNgr6Xxd0+AnIEKvhYyv0AYjvcyu2OmF0YoYJJc=;
+ b=wxSVc0OSdOk1XJVFab9UijXUZskWtajCko3mOY863UrorDVy0puzxXiRShLdDE7LfK
+ 8lnCcS0KqmIOsCgsbWYcBNK3csF0i+0qJzQww2RzkshQH0tZoxNXih9dnRLm3LTFZDY9
+ 8EvAzAO3Xjv96YJergl9wKzgHIU56dGMMYGhNTYjYzKROo44Rt8OARNDEGZ49GENG6Jd
+ dbwSyy5PzWC2UmLZ1gdzfqmyhnq0jgvMVtifntLULQdYX7cbkME41WQC7jDdGZMta+FF
+ u5G/aGNwcMfYM58K87lcEtowG3YOCPQ98xxHdxvTiFYLfomNRtWZ5W6tG9iqc1R83pO+
+ g3VA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUPHZpMupGUL6HZa0igyQx+TYlNiuI/5bbsiq5xZt0AQSLeCQghQzixe0ctKXshVXVo3t/cI24=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2xAAYG19Ig3CEL5JxV7uIDSJ96BczWtzy93saax/VujFyueGN
- DpAh9KnfriTvPK/HwkGvD8GS6qTEcKPj2TLKGewG909JU0Bz+qsU
-X-Google-Smtp-Source: AGHT+IGQTBUDJ6F5LC6MgiXDTMYMiXOKguukOf/TG0diIDO9momSaZVdNy4LmF1c9JviG+tAJGI6jQ==
-X-Received: by 2002:a17:907:6d0b:b0:a99:5f45:cb66 with SMTP id
- a640c23a62f3a-a9a69c92d01mr99249766b.11.1729258382904; 
- Fri, 18 Oct 2024 06:33:02 -0700 (PDT)
-Received: from ?IPV6:2a02:a449:4071:1:32d0:42ff:fe10:6983?
- ([2a02:a449:4071:1:32d0:42ff:fe10:6983])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a68c2678bsm96436266b.191.2024.10.18.06.33.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Oct 2024 06:33:02 -0700 (PDT)
-Message-ID: <4aef209c-cbed-4fac-b48a-4101e27e64f8@gmail.com>
-Date: Fri, 18 Oct 2024 15:33:01 +0200
+ AJvYcCXHJE9niCNOu3lMZGDqw6H/VgLaNDx2MsRA6OS4KODX0e/HTrj0SwaQDPg9KNUTq0bzmBAgGYY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCPVkvjdf101+OeOAVpIBpWNxDRbXlSmfSJjSlhRrEiRxV0SMp
+ j6W7rQU6GnKtN+NP9JBHZ5vUq/rP1RTwsxsG+F/GQPlSVmva8S0vosIcJbeWXVwEs1emxsAUk58
+ bLjhJ286Pr9rrD+7r+RS9oSj4GoeT24/KA53Uuw==
+X-Google-Smtp-Source: AGHT+IFZEjR9FXUdrX+yEfyPB+V3OHfiwGPZ0qFMcINrG988/ybz+XLMOTnlQVe9/4tU34KD/f2mKobat9NgA51V4Fs=
+X-Received: by 2002:a17:90a:ab0e:b0:2e2:f04d:9f0c with SMTP id
+ 98e67ed59e1d1-2e5617246edmr3003331a91.13.1729259012028; Fri, 18 Oct 2024
+ 06:43:32 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] rockchip: block: simplify rkmtd driver
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Heiko Schocher <hs@denx.de>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-References: <20241018013015.127620-1-heinrich.schuchardt@canonical.com>
- <20241018013015.127620-2-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: Johan Jonker <jbx6244@gmail.com>
-In-Reply-To: <20241018013015.127620-2-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20241018011837.126813-1-heinrich.schuchardt@canonical.com>
+ <20241018011837.126813-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241018011837.126813-2-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 18 Oct 2024 16:42:54 +0300
+Message-ID: <CAC_iWj+N7GviHP0yL2_Pz9_1Ysdx2dV4D4dMRuacs7nk6B+7hA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] efi_loader: reduce noisiness if ESP is missing
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,84 +91,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 10/18/24 03:30, Heinrich Schuchardt wrote:
-> By using blk_create_devicef() instead of blk_create_devicef() the driver
-> can be simplified and brought into line with other block device drivers.
-> 
+On Fri, 18 Oct 2024 at 04:18, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> EFI variables can be stored in a file on the EFI system partition. If that
+> partition is missing we are writing two error messages per variable. This
+> is too noisy.
+>
+> Just warn once about the missing ESP.
+>
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  drivers/block/rkmtd.c | 21 ++-------------------
->  1 file changed, 2 insertions(+), 19 deletions(-)
-> 
-> diff --git a/drivers/block/rkmtd.c b/drivers/block/rkmtd.c
-> index c55f052e51b..f84cacd7ead 100644
-> --- a/drivers/block/rkmtd.c
-> +++ b/drivers/block/rkmtd.c
-> @@ -794,36 +794,19 @@ int rkmtd_init_plat(struct udevice *dev)
->  	return 0;
+> v2:
+>         new patch
+> ---
+>  lib/efi_loader/efi_var_file.c | 22 ++++++++++++++--------
+>  1 file changed, 14 insertions(+), 8 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
+> index 413e1794e88..ba0bf33ffbd 100644
+> --- a/lib/efi_loader/efi_var_file.c
+> +++ b/lib/efi_loader/efi_var_file.c
+> @@ -37,18 +37,16 @@ static efi_status_t __maybe_unused efi_set_blk_dev_to_system_partition(void)
+>         char part_str[PART_STR_LEN];
+>         int r;
+>
+> -       if (efi_system_partition.uclass_id == UCLASS_INVALID) {
+> -               log_err("No EFI system partition\n");
+> +       if (efi_system_partition.uclass_id == UCLASS_INVALID)
+>                 return EFI_DEVICE_ERROR;
+> -       }
+> +
+>         snprintf(part_str, PART_STR_LEN, "%x:%x",
+>                  efi_system_partition.devnum, efi_system_partition.part);
+>         r = fs_set_blk_dev(blk_get_uclass_name(efi_system_partition.uclass_id),
+>                            part_str, FS_TYPE_ANY);
+> -       if (r) {
+> -               log_err("Cannot read EFI system partition\n");
+> +       if (r)
+>                 return EFI_DEVICE_ERROR;
+> -       }
+> +
+>         return EFI_SUCCESS;
 >  }
->  
-> -static void rkmtd_blk_kmalloc_release(struct udevice *dev, void *res)
-> -{
-> -	/* noop */
-> -}
-> -
->  static int rkmtd_bind(struct udevice *dev)
->  {
->  	struct rkmtd_dev *plat = dev_get_plat(dev);
-> -	char dev_name[30], *str;
->  	struct blk_desc *desc;
->  	struct udevice *bdev;
->  	int ret;
->  
-> -	snprintf(dev_name, sizeof(dev_name), "%s.%s", dev->name, "blk");
-> -
+>
+> @@ -67,14 +65,21 @@ efi_status_t efi_var_to_file(void)
+>         loff_t len;
+>         loff_t actlen;
+>         int r;
+> +       static bool once;
+>
+>         ret = efi_var_collect(&buf, &len, EFI_VARIABLE_NON_VOLATILE);
+>         if (ret != EFI_SUCCESS)
+>                 goto error;
+>
+>         ret = efi_set_blk_dev_to_system_partition();
+> -       if (ret != EFI_SUCCESS)
+> -               goto error;
+> +       if (ret != EFI_SUCCESS) {
+> +               if (!once) {
+> +                       log_warning("Cannot persist EFI variables without system partition\n");
+> +                       once = true;
+> +               }
+> +               goto out;
+> +       }
+> +       once = false;
+>
+>         r = fs_write(EFI_VAR_FILE_NAME, map_to_sysmem(buf), 0, len, &actlen);
+>         if (r || len != actlen)
+> @@ -83,6 +88,7 @@ efi_status_t efi_var_to_file(void)
+>  error:
+>         if (ret != EFI_SUCCESS)
+>                 log_err("Failed to persist EFI variables\n");
+> +out:
+>         free(buf);
+>         return ret;
+>  #else
+> --
+> 2.45.2
+>
 
-> -	str = devres_alloc(rkmtd_blk_kmalloc_release, strlen(dev_name) + 1, GFP_KERNEL);
-
-Hi Heinrich, Simon,
-
-The function strdup() is not an exact replacement for the devres_alloc() function in relation to a device.
-It is in use for memory leak detection / device resource management. 
-Not sure what the status of that devres project currently is? Also tracking in general in relation to EFI and blk-class.
-
-https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/block/blk-uclass.c?ref_type=heads#L739
-
-https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/block/rkmtd.c?ref_type=heads#L812
-
-Test for this driver are based on work done by Simon.
-https://source.denx.de/u-boot/u-boot/-/blob/master/test/dm/host.c?ref_type=heads#L71
-
-This rkmtd driver makes use of devm_kzalloc(). All the memory that rkmtd reserves is freed.
-But if I remember well somehow I was not able to free all memory on unbind and was not able to find the source, so I didn't include that last test.
-https://elixir.bootlin.com/u-boot/v2024.10/source/test/dm/rkmtd.c#L84
-
-Johan
-
-
-
-
-
-
-
-> -	if (unlikely(!str))
-> -		return -ENOMEM;
-> -
-> -	strcpy(str, dev_name);
-> -
-> -	ret = blk_create_device(dev, "rkmtd_blk", str, UCLASS_RKMTD,
-> -				-1, 512, LBA, &bdev);
-> +	ret = blk_create_devicef(dev, "rkmtd_blk", "blk", UCLASS_RKMTD,
-> +				 -1, 512, LBA, &bdev);
->  	if (ret) {
-> -		free(str);
->  		return log_msg_ret("blk", ret);
->  	}
->  
-> -	devres_add(dev, str);
-> -
->  	desc = dev_get_uclass_plat(bdev);
->  	sprintf(desc->vendor, "0x%.4x", 0x2207);
->  	memcpy(desc->product, "RKMTD", sizeof("RKMTD"));
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
