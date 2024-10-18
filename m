@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B04EAD3DEA2
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 17:21:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4062ED3DEA0
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 17:21:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8FD888E5C;
-	Fri, 18 Oct 2024 19:21:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45FC388E51;
+	Fri, 18 Oct 2024 19:21:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ReKIbFUD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fr7M+Paz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A364D88CC1; Fri, 18 Oct 2024 19:21:08 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 3BE6288EC9; Fri, 18 Oct 2024 19:21:15 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91B8188DFF
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 19:21:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2920388CC1
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 19:21:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6cb97afcec9so15077726d6.2
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 10:21:06 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6cbd005d0f9so15696556d6.3
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 10:21:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729272065; x=1729876865; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729272072; x=1729876872; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Zlk50nBs1YfX0mBDDFAM23fcT4QzcWpvMYeJGRNM3yM=;
- b=ReKIbFUDy8eEq7TH/2MIbiilpd1TeKwHSCWO7IP0wFQcHvK8HzhHY0z7hefaDPTnFu
- TnF9Wwf7mUgYTB1BxDz6ubzaCfFtTv6i1TD7I/RiIojHJdRqh7pDIJfRTku1erqVpp57
- xq9NmhGdOcZTzefW/VFSRi4J2x+2wSF4S7Wpc=
+ bh=XCDHmJIZpLs9uGsYImv3ymJTnF9fhN7CqgSs4Hqp0E4=;
+ b=fr7M+Paz6k5uQmamqybkyEoNKon5FUxIzEajqZak8IlU69cHv1rvBapnTex06oBHq2
+ e/WlFPmga9bxaJECIILG9q/2G88v++scW+/gpRVY/BXWTP6W6zFb6F0KsmJopw3fK+TI
+ xm2Ad5ZTAYVIFPKApVi2zWNFzTy9RPdjtENak=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729272065; x=1729876865;
+ d=1e100.net; s=20230601; t=1729272072; x=1729876872;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Zlk50nBs1YfX0mBDDFAM23fcT4QzcWpvMYeJGRNM3yM=;
- b=ZDIIjoHSWnTGKxxTL2j6b3w8vid5ybdsapnD8C2SX2IFWOhntW+wFJfJj6MGSHLb4w
- VF+X31baxFq3Vv8bEekakVTSoNP0RE6laZesjob5E53KanLwFeqG+d/27EFX+P9N9Gy6
- Z/0C4EWqsCWeKRMYuMKDZvN6Vod8g917raGUY1QwYGRk5oSDCTHWgpb3EP/OwJNeq2Qj
- 4MLVtylMwbjeR8sP3Sz7rff+qHThQLTC4EfqoU2v5HMO2n3eFNCH5q6YEZMAVUJeTyAf
- 1BtmN0uA8TJVbx2AC6/cOfP0liWeSuQBBb6a0JdYZj2OLh+VmJlhTfb0y2Lt94OX3Acz
- yG3A==
+ bh=XCDHmJIZpLs9uGsYImv3ymJTnF9fhN7CqgSs4Hqp0E4=;
+ b=DXkxr3EYaMaPbe7dBONWlyLxcry5PpR6YIMF0ipSltxqpqFLRPk0ral/mxmfUi/FV8
+ 96A9/V8e9vsEIQr851/C8Vlzu5kRddsn+LLSaN9jnQQUVAVy1TUqtB8IBuIUH62uhvlX
+ nLvkMq+xcBi5O1iVYyBI0oCZv9ilojtzb4APlCrUGXJrDHPwXzPkif1T39iudc/+ZGEJ
+ IV99lI+LtY8UJ12KrYhalPX/an/qDauBYoSZbjpT82PTVDu7FDWqKDqgJQuf/SM5dh+4
+ 70VqtsPxAli26s+CSHBXGcagSqLJFFetYrjusqCb/nxO8mdS2pLmOWKVoPHerY81ia1D
+ WQKA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBr2+7X9dC5uECSSBGTqID3+jrkg6El/o8xRHpRv0RxpDmUoNAQvKKKl2QUCJnodtnE1QLzhY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyPjY7v3iS8x3kQrhmEVV+HqqA2cnzscpscY0g175TdYRgglszo
- l3MduvPwITyJXjm5zLfqlCFaTBTXWrTM/lKlKQp0vYFn0EhFlhcrRccAOboOsDnMSNuXRn7hDjA
- 8t73es/prUQ8kL51A8Vuj3ie24O3tC4qguZxw
-X-Google-Smtp-Source: AGHT+IHxxZ8l8EWYeF8zNRKUi9k9zW9XajoJybZ27P+QLIYdrtszpTajOV+HNYIXZM+S3EBp9mssJxlUfrA5uH4LLk8=
-X-Received: by 2002:a05:6214:4808:b0:6cb:99db:bdbf with SMTP id
- 6a1803df08f44-6cde160f1bdmr51851756d6.43.1729272065484; Fri, 18 Oct 2024
- 10:21:05 -0700 (PDT)
+ AJvYcCUjEGfxea4kdhsbyyhKjCqjfqqMsDmjn+bdbS6JOOswiXiS3VnrGI/gIqKYrDH6YRkpAORUR/s=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy0IX1viaJKV4tq7rX9qjZt1hJ6aFoIdxaM4ynGnSpqdqJ2RZjl
+ H4ZHZzAc1KcAEHhigHU7mgdfLRadZWWA6DAdR9IhHSfWBihAUnJqKScAQYwr6se63Y3en8TEGXZ
+ JAOCbzabr1rqKtc3vjXAMbpJSa8HMxwfl7mqY
+X-Google-Smtp-Source: AGHT+IHzDAAQT8L5+o2rn7rpsjvvJwe+u4pmMv4YZC53q4URoIbBwDGxnBcjOnwG97pFXFiFWZwsUmTJ01dcYCUrT1w=
+X-Received: by 2002:a0c:f413:0:b0:6cc:51f:6c41 with SMTP id
+ 6a1803df08f44-6cde15e9d63mr42327386d6.36.1729272072077; Fri, 18 Oct 2024
+ 10:21:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241018011837.126813-1-heinrich.schuchardt@canonical.com>
- <20241018011837.126813-2-heinrich.schuchardt@canonical.com>
- <CAC_iWj+N7GviHP0yL2_Pz9_1Ysdx2dV4D4dMRuacs7nk6B+7hA@mail.gmail.com>
-In-Reply-To: <CAC_iWj+N7GviHP0yL2_Pz9_1Ysdx2dV4D4dMRuacs7nk6B+7hA@mail.gmail.com>
+ <20241018011837.126813-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241018011837.126813-3-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 18 Oct 2024 11:20:55 -0600
-Message-ID: <CAFLszTjRX=euO04XuiXS9a55wVgXU3bPF_yA-q4Qv3g0Qog_Tw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] efi_loader: reduce noisiness if ESP is missing
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>, 
+Date: Fri, 18 Oct 2024 11:21:01 -0600
+Message-ID: <CAFLszTjjF1r4f6NjrYSFz36DK_X6v6rYMwDCUqiSLOPysGRC7g@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] sandbox: add bootmethod EFI boot-manager
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, 
  Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de
@@ -89,25 +88,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 18 Oct 2024 at 07:43, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Fri, 18 Oct 2024 at 04:18, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > EFI variables can be stored in a file on the EFI system partition. If that
-> > partition is missing we are writing two error messages per variable. This
-> > is too noisy.
-> >
-> > Just warn once about the missing ESP.
-> >
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > ---
-> > v2:
-> >         new patch
-> > ---
-> >  lib/efi_loader/efi_var_file.c | 22 ++++++++++++++--------
-> >  1 file changed, 14 insertions(+), 8 deletions(-)
-> >
+Hi Heinrich,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Thu, 17 Oct 2024 at 19:18, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> The EFI boot-manager is the default method to boot EFI binaries.
+> We should be able to use it on the Sandbox.
+>
+> * Enable EFI boot-manager bootmethod on the sandbox.
+> * Adjust unit tests to reflect the additional boot method.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+> v2:
+>         no changes
+> ---
+>  arch/sandbox/dts/test.dts |  4 ++++
+>  test/boot/bootmeth.c      | 28 +++++++++++++++++-----------
+>  2 files changed, 21 insertions(+), 11 deletions(-)
+
+This is better, but I still see this.
+
+=> bootflow scan
+     efi_var_to_file() Cannot persist EFI variables without system partition
+
+Please find a way to get rid of it. I can give some suggestions if you like.
+
+Regards,
+Simon
