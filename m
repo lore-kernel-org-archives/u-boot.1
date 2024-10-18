@@ -4,99 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A48DD30007
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 13:27:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83412D30007
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 13:33:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBCCE88E33;
-	Fri, 18 Oct 2024 15:27:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CC6D288E02;
+	Fri, 18 Oct 2024 15:33:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nlXGT4Ou";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JcZACjEX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44AC988E02; Fri, 18 Oct 2024 15:27:47 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id CF60B88E02; Fri, 18 Oct 2024 15:33:06 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5C8388E33
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 15:27:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADB8488D5B
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 15:33:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4315abed18aso16493135e9.2
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 06:27:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a9a19bf0a1dso33609266b.1
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 06:33:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729258064; x=1729862864; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7tTpLHx9hkVEejtoFK+BC/tc/7dG+oiFJGd81gtkN0k=;
- b=nlXGT4OuFcDtm7/ntRHO4bV1l5xXuNwe6Iv6skVeC9OxN6ztLm6+Oon37outzI1Dw3
- LDGrNYpiGlmH7dha1sZY97uKbXmQ085DJmYanmkw3H2+8+JCJ45UVjpEtep3kOZcXYXO
- fm8p4xnmo6tCdvEcNoZjwh1Q9q1z5vAYAGOz6UXf0sdZFFnPyyzCoV0368rtbJ739KM6
- wOpCA5t1mnuz+qQZ39GQzsUqF0/0pGnDG+aG9eoDgyFuWwzmuRT4YCeMX428XIMzef/I
- Q6DkXeew157js3s7uTjzbQSHTsZ/9cYqtU4DK2hjdMG3IoeFSfst+bdEv5XqxLMByaar
- DUiA==
+ d=gmail.com; s=20230601; t=1729258383; x=1729863183; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4OXLwPHyyBh4SwAYgZWURmGqN1HWydUhg+xG2f1PRb8=;
+ b=JcZACjEXi2cmkVbndIKyyv71QkxHFm7bwjEu6vqXCqOHSpSjWfC9mLpJORIhTnGgnY
+ BXizr/5PXj2z8DGFql/3IHgLWg54czq4En8WP47c4FzzdI4pEftt9cez4+q8nlZgGD74
+ Xbu1k+6FprlPt0xCw1tklwCIemkhJ1zIcjfYvPj7pBpe7eXgjfwisdayxBhDHnZKnlYu
+ 1/I3UyAvSOYBm/WvWW+L4KS6ByjqF+DaJXaJPMQ2VaWmtHANy28eg4OZkTS4fYuUP0mN
+ +wMoXXhsVp/cbd9e6IjK/FDiej8bsbLWsHbuKQVGAaEgHhIdd7ZDLtlQiNlG5Nb8NDg0
+ gs/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729258064; x=1729862864;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7tTpLHx9hkVEejtoFK+BC/tc/7dG+oiFJGd81gtkN0k=;
- b=Zlb7qJjsvJ+OSrWoLow/Wt1RX1F3c47t2cRVjnhAVGlV2sfxIao1p3rV3p23KqK9kW
- l5xcoChfIMIx6+K91s6mnsLE5B9mOYYlqkWo6Zwp3K+xy++yTYD1qa3yJqF8SkKGy0el
- RZkBCxZA9XkVjUdNYzWG2uYIhWezPrritGJYgzI9NLpQpwap/WhEKXPPiSsIcmcP6oC3
- ZZHjUBeNDvrtuVTTiTdBYNwg5Ihna1JSWw4C45KonUUsPOFx3sMSXeNaqwjNlUoWrJMc
- pA6Mc8O9cPriIOIe/eePrvsJwcnE2RdAxg3Qy+aS8bhb2pPyQuOmpetyxBqdGetWzsiC
- i8Zg==
-X-Gm-Message-State: AOJu0Ywj1kSknJSdZiwmNEDxZ2pT5AuiwBaws20Zunt5wkjOy2cZdrHx
- vDSBNBBm0DdEPI4PaxkSOjjKGrv42OTS1ZrbWvYsM7oLnV/6+xRY8MD2gSJXiD8=
-X-Google-Smtp-Source: AGHT+IFY4ecE/+t52u7xjhs53/fX8Mrjn+VqdiYG5v+Bjjx3XlbEWf8l1pRZjxufGWjnooVeBweDuQ==
-X-Received: by 2002:a05:600c:5490:b0:431:5aea:95f with SMTP id
- 5b1f17b1804b1-4316165a78cmr20596785e9.16.1729258064299; 
- Fri, 18 Oct 2024 06:27:44 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ d=1e100.net; s=20230601; t=1729258383; x=1729863183;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4OXLwPHyyBh4SwAYgZWURmGqN1HWydUhg+xG2f1PRb8=;
+ b=H+uaV2rF6lUMn1pFfVCWVdIZCw582f77cCHjIby+kanCP6V13Fe7XeZvoDuOAyV8/P
+ WAtO2/hXxfVhk4at5c8zIcnnqhzSdsMpk8B1YP0m0lUP6pYMtb8TmzI6hTetb0vdKC/P
+ BmsVVgyyw5G8vxC7jUROSLCSCPT+5ZOsX03UxGIUHEDLlggFWPkBxUy5xILcW4zWu/Gx
+ IZ30nucHntbKMJY/9QqumABnT7dwHGEaEMzkIhJCeFNZWyIqc4ENkWioBORH2MML4RjN
+ IBhScHVpfp5jg79hhz5emg8HjfKQmGIJcNXs6x+DD38+r2T+1tuwb9AHKADp58+oJLmX
+ M2Rg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUPHZpMupGUL6HZa0igyQx+TYlNiuI/5bbsiq5xZt0AQSLeCQghQzixe0ctKXshVXVo3t/cI24=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx2xAAYG19Ig3CEL5JxV7uIDSJ96BczWtzy93saax/VujFyueGN
+ DpAh9KnfriTvPK/HwkGvD8GS6qTEcKPj2TLKGewG909JU0Bz+qsU
+X-Google-Smtp-Source: AGHT+IGQTBUDJ6F5LC6MgiXDTMYMiXOKguukOf/TG0diIDO9momSaZVdNy4LmF1c9JviG+tAJGI6jQ==
+X-Received: by 2002:a17:907:6d0b:b0:a99:5f45:cb66 with SMTP id
+ a640c23a62f3a-a9a69c92d01mr99249766b.11.1729258382904; 
+ Fri, 18 Oct 2024 06:33:02 -0700 (PDT)
+Received: from ?IPV6:2a02:a449:4071:1:32d0:42ff:fe10:6983?
+ ([2a02:a449:4071:1:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-431606d5910sm27411735e9.43.2024.10.18.06.27.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Oct 2024 06:27:43 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 18 Oct 2024 15:27:42 +0200
-Subject: [PATCH v2] usb: dwc3-generic: use DR_MODE_OTG when dr_mode isn't
- specified
+ a640c23a62f3a-a9a68c2678bsm96436266b.191.2024.10.18.06.33.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 18 Oct 2024 06:33:02 -0700 (PDT)
+Message-ID: <4aef209c-cbed-4fac-b48a-4101e27e64f8@gmail.com>
+Date: Fri, 18 Oct 2024 15:33:01 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] rockchip: block: simplify rkmtd driver
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Heiko Schocher <hs@denx.de>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Sean Anderson <seanga2@gmail.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+References: <20241018013015.127620-1-heinrich.schuchardt@canonical.com>
+ <20241018013015.127620-2-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: Johan Jonker <jbx6244@gmail.com>
+In-Reply-To: <20241018013015.127620-2-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241018-topic-usb-dwc3-dr-mode-otg-v2-1-d3e98cf6ba48@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAE1iEmcC/43NQQ6CMBCF4auQrh3TFqTIynsYFtgOMIkyZIqoI
- dzdyglcfm/xv1VFFMKo6mxVggtF4jHBHjLlh3bsESgkK6ttYbQpYeaJPDzjDcLL5xAEHhwQeO6
- hqtDn2qE+O61SYBLs6L3Hr03yQHFm+exfi/mtf2UXAwaKLrSnUjvrbH6509gKH1l61Wzb9gX92
- 0M0xQAAAA==
-X-Change-ID: 20241016-topic-usb-dwc3-dr-mode-otg-88ec307e0970
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2470;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=vhOhHO0Fpm/KRPRF2TAVLNbEwJlbCev6dctlDMxBCQw=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnEmJP6F6qTKOThQbzpzccuzc5loHkRAEf/kGf/Fmm
- oXxQTPCJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZxJiTwAKCRB33NvayMhJ0d1EEA
- CShrefe3IePyvQJjlD12oJewZP6k9u9wdE0nshQ0T0xaKAMZs3iDYAAaJj1ph/L3f5VngRMb68qbJ+
- ZISno0yM6YB9X2PbqQ3Izp2yBBlfshioJN0xCifobvplIQn9t5ZGBkoL2tpSn9BjDbCb4zvxkAo1hV
- gyrpHcVx5CRIZSjo3g40Wki/PdxYOTxTbxb/2ACmPRhnbAbfXrdTIVWWJUcEwFrcOGMw+LYU35R67r
- dU2r4Ks/vk3KVZ4uVAEGvGWRm/A/Tyjwy3+KngRWKG0qk4CYb+OcD5tJ6of1pxx3FzhdjoEIP19vL8
- nACI2YDJeK6KBqTMg1eJp7VIsDvHgZRQikF7uO/eGsenc72g4mJh/broeNRtYvZdr6srocVrRLBl6W
- kUb0fzCjUKoBqKdtIyrQDebcjIrWnJRlk/210MqrvOPO4T5RxD6EHZGyllcrRaVXXtwvV3Ec3JLLbr
- qd0DZaMwvLcubroffOKc5U9pUmIEBFHRYF8z3mC79L0AJ7LVEke+xartgXdGPnPzTAEw8Zc2lXUlZq
- yQkLSBXLUAqVljo+ghxZ/YTzQZT7fJf4oQ+FYNfL0xvamz8m3SmKAIL/mnfT5KpuwG8DGgP97VeN5L
- dZ3GykRYHTuQpkP2RX05ICrUy7IzGKnDfMuW+15jzQx6wya7y79bgRK5lAfQ==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,66 +104,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The USB DRD bindingsa at [1] are clear, if not specified the dr_mode
-property defaults to otg, and this is how Linux behaves.
 
-A cleanup is ongoing on the Linux Device Trees to remove dr_mode when
-set to "otg", so take this in account and do not fail anymore when
-dr_mode isn't specified in the glue or dwc3 node.
 
-On the software side, the Linux DWC3 driver behavior defaulting to
-DR_MODE_OTG is present since v3.12-rc1 added in commit [2].
+On 10/18/24 03:30, Heinrich Schuchardt wrote:
+> By using blk_create_devicef() instead of blk_create_devicef() the driver
+> can be simplified and brought into line with other block device drivers.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  drivers/block/rkmtd.c | 21 ++-------------------
+>  1 file changed, 2 insertions(+), 19 deletions(-)
+> 
+> diff --git a/drivers/block/rkmtd.c b/drivers/block/rkmtd.c
+> index c55f052e51b..f84cacd7ead 100644
+> --- a/drivers/block/rkmtd.c
+> +++ b/drivers/block/rkmtd.c
+> @@ -794,36 +794,19 @@ int rkmtd_init_plat(struct udevice *dev)
+>  	return 0;
+>  }
+>  
+> -static void rkmtd_blk_kmalloc_release(struct udevice *dev, void *res)
+> -{
+> -	/* noop */
+> -}
+> -
+>  static int rkmtd_bind(struct udevice *dev)
+>  {
+>  	struct rkmtd_dev *plat = dev_get_plat(dev);
+> -	char dev_name[30], *str;
+>  	struct blk_desc *desc;
+>  	struct udevice *bdev;
+>  	int ret;
+>  
+> -	snprintf(dev_name, sizeof(dev_name), "%s.%s", dev->name, "blk");
+> -
 
-[1] https://www.kernel.org/doc/Documentation/devicetree/bindings/usb/usb-drd.yaml
-[2] commit a45c82b84c844 ("usb: dwc3: adapt to use dr_mode device tree helper")
-    https://github.com/torvalds/linux/commit/a45c82b84c844cd85b2ed1aa32596f1bffa32716
+> -	str = devres_alloc(rkmtd_blk_kmalloc_release, strlen(dev_name) + 1, GFP_KERNEL);
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
-Changes in v2:
-- add ref to linux behaviour
-- Link to v1: https://lore.kernel.org/r/20241016-topic-usb-dwc3-dr-mode-otg-v1-1-4fda56072723@linaro.org
----
- drivers/usb/dwc3/dwc3-generic.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+Hi Heinrich, Simon,
 
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-index 2ab41cbae45d78ad140d54e602150b6ddd0a3b99..d62d687ece36d70ccb0f7541eb51c6b7550d932d 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -183,10 +183,10 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
- 		/* might be a leaf so check the parent for mode */
- 		node = dev_ofnode(dev->parent);
- 		plat->dr_mode = usb_get_dr_mode(node);
--		if (plat->dr_mode == USB_DR_MODE_UNKNOWN) {
--			pr_err("Invalid usb mode setup\n");
--			return -ENODEV;
--		}
-+
-+		/* If none of the nodes have dr_mode, bindings says default is OTG */
-+		if (!plat->dr_mode)
-+			plat->dr_mode = USB_DR_MODE_OTG;
- 	}
- 
- 	return 0;
-@@ -527,6 +527,10 @@ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
- 	if (!dr_mode)
- 		dr_mode = usb_get_dr_mode(node);
- 
-+	/* If none of the nodes have dr_mode, bindings says default is OTG */
-+	if (!dr_mode)
-+		dr_mode = USB_DR_MODE_OTG;
-+
- 	if (CONFIG_IS_ENABLED(DM_USB_GADGET) &&
- 	    (dr_mode == USB_DR_MODE_PERIPHERAL || dr_mode == USB_DR_MODE_OTG)) {
- 		debug("%s: dr_mode: OTG or Peripheral\n", __func__);
+The function strdup() is not an exact replacement for the devres_alloc() function in relation to a device.
+It is in use for memory leak detection / device resource management. 
+Not sure what the status of that devres project currently is? Also tracking in general in relation to EFI and blk-class.
 
----
-base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
-change-id: 20241016-topic-usb-dwc3-dr-mode-otg-88ec307e0970
+https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/block/blk-uclass.c?ref_type=heads#L739
 
-Best regards,
--- 
-Neil Armstrong <neil.armstrong@linaro.org>
+https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/block/rkmtd.c?ref_type=heads#L812
 
+Test for this driver are based on work done by Simon.
+https://source.denx.de/u-boot/u-boot/-/blob/master/test/dm/host.c?ref_type=heads#L71
+
+This rkmtd driver makes use of devm_kzalloc(). All the memory that rkmtd reserves is freed.
+But if I remember well somehow I was not able to free all memory on unbind and was not able to find the source, so I didn't include that last test.
+https://elixir.bootlin.com/u-boot/v2024.10/source/test/dm/rkmtd.c#L84
+
+Johan
+
+
+
+
+
+
+
+> -	if (unlikely(!str))
+> -		return -ENOMEM;
+> -
+> -	strcpy(str, dev_name);
+> -
+> -	ret = blk_create_device(dev, "rkmtd_blk", str, UCLASS_RKMTD,
+> -				-1, 512, LBA, &bdev);
+> +	ret = blk_create_devicef(dev, "rkmtd_blk", "blk", UCLASS_RKMTD,
+> +				 -1, 512, LBA, &bdev);
+>  	if (ret) {
+> -		free(str);
+>  		return log_msg_ret("blk", ret);
+>  	}
+>  
+> -	devres_add(dev, str);
+> -
+>  	desc = dev_get_uclass_plat(bdev);
+>  	sprintf(desc->vendor, "0x%.4x", 0x2207);
+>  	memcpy(desc->product, "RKMTD", sizeof("RKMTD"));
