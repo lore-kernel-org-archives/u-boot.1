@@ -4,92 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C0E6D3C926
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 17:51:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6A7DD3C90C
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 18:07:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8587C891A4;
-	Sat, 19 Oct 2024 19:51:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 60D72891FE;
+	Sat, 19 Oct 2024 20:07:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UriyMo/2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PKaIE52b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D76F8919D; Sat, 19 Oct 2024 19:51:30 +0200 (CEST)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 5DEA5891A4; Sat, 19 Oct 2024 20:07:19 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B19CE88EAE
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 19:51:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16BA0890CC
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 20:07:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7b150dc7bc0so226376985a.1
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 10:51:27 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6cbcc2bd7fcso17990656d6.1
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 11:07:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729360286; x=1729965086; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6D/MU8QICWS0Dxdaczin66vsC8vTjQWajItjz5hoNA0=;
- b=UriyMo/2TxzYfnShXwIVlnP2CCOalJlcTlz68DSbJNMcI0I2WUzvdlzOs3CJxx+ng5
- 2kZa5TuVsFDXeoy+03DMfMhkSfke0EuX6lLkIei7r+Wi4q20mHtCTdup3AjfI8Xj1PcR
- xmHMvdQh2lk3COvPhQtAzD9r61+3KU+1BVkF0=
+ d=chromium.org; s=google; t=1729361236; x=1729966036; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=veW57Ywk9qsnd3xNa38s/wEWWYjVNEz1jHipeiW7kzE=;
+ b=PKaIE52bZ11vrGYd5W0YGuHIECJXgWxcPqHl8F1MRwqkrA/Ar6j7CU0rcp06/LPIxB
+ WUT0wN5sDbv+8LANelPaYLw0/B6BeNCXJQovVc7eUrhhXOqFyiJJ10RumyLsv6hZ/zm3
+ dqjkhokPUXlUap6gELKCyYLRAkW6T8X/Jw/cE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729360286; x=1729965086;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6D/MU8QICWS0Dxdaczin66vsC8vTjQWajItjz5hoNA0=;
- b=GtnX4C/DRcZxPozlAkdleTRLAknpwp/HYTH/gh9L3VBz4W6jtpvUTUsafbkvtTxxuv
- BRItAM1bEKZvltxl6SkML5uf+0jXfX41p5t5rZI+cUt+KDAr2tgJQHHIGAfpKixibUc2
- QR+2vMa9sh2oXfWEjQYvo004T+/KfhwjBwItzk36pTILoCiIw6MYy5AF9RB7mswW1l9b
- PFAoKcQs8qGdhGjUC0fIHi5dXbfmBtBf6iJGCZmAOfWVQ/1c16rDPjLymBu1PQadZ9Rc
- rfFv8fdqM3eV5EB+x7NJsYHTaxx5HeK11MqOhrJ0CCuAqIM4F44edKA+ftjDR18d+Tes
- Y2ug==
-X-Gm-Message-State: AOJu0YzQcuIgsA+sWk0Ftwt1YBGJpkO0ShEuyM4C8le6CqNec/p8Ndgw
- GNW3Y1oVaNJ1dW0otF3Y1hj5rZwz79q479C7krbNCdROM/USdHe+kudvP48vteU=
-X-Google-Smtp-Source: AGHT+IF3UP6aOy+wdO8w4bx8KNp17OQIV68F2pAeQdUjrYEh9mDtjZPWffn+udX4YmapW20szDPgyA==
-X-Received: by 2002:a05:620a:24d0:b0:7a9:b268:3655 with SMTP id
- af79cd13be357-7b157bdeb54mr858489485a.43.1729360286467; 
- Sat, 19 Oct 2024 10:51:26 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b165a06daasm1808785a.70.2024.10.19.10.51.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 19 Oct 2024 10:51:25 -0700 (PDT)
-Date: Sat, 19 Oct 2024 11:51:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Eddie James <eajames@linux.ibm.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Yang Xiwen <forbidden405@outlook.com>
-Subject: Re: [PATCH v7 6/7] test: efi: boot: Set up an image suitable for EFI
- testing
-Message-ID: <20241019175121.GA4959@bill-the-cat>
-References: <20241019152434.1017394-1-sjg@chromium.org>
- <20241019152434.1017394-7-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1729361236; x=1729966036;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=veW57Ywk9qsnd3xNa38s/wEWWYjVNEz1jHipeiW7kzE=;
+ b=UBrswzsN5nNry1ZGDauwHlvx/yOBeYMszvl5VjejLlbVoLl2TpXCRUW8eags/rnBBI
+ a0ABaduL8mw4gJ9yVR6MspfTaIMsZSBL+vXQwCmp+giQqZJu13PkZ40KOslmkx8RANPM
+ VcvyEL5gwJrcSZJ2zyuf0mRzurMF/9mP89h5jPviMJ2h2/ijcZD4gv2oUCJVbx0R+jwE
+ ahIZ0EqW0ltSwx2Xt26cxrCWbr7xjuZcW60IVoVrlQlqc7zovGXsqVHkQy60XirReWHd
+ 2HZJvmD5+qIgZSsh+kJ3L7ca6bJyJGbiLOziOQhgbe2hv9NZCt4tfctgl13XarrcZFKF
+ DnYw==
+X-Gm-Message-State: AOJu0Ywmxm/Ua/rnRam/CD+egXeUnrn78eWGGyemES8YxWl1nNSc3VxA
+ xUq1XdoJ6jXnzzS8YbJ3FOWbgZj0mJQvAxFXqpKCbEB88yqEUuzgAM2VKD1kKQ7kCvXHeGvPBhJ
+ H9CpwN/ltgO5qKVAsohn0GJRblydSB9qAv0D9
+X-Google-Smtp-Source: AGHT+IEzUvz65TbGzJhmf6IN81aDS3unDCA/npjqMobL/XORW3hejPkehZdvHGKliPCo3u+FjmK1dkwX3N9NYf4BzuE=
+X-Received: by 2002:a05:6214:2dc5:b0:6cb:f077:f2f4 with SMTP id
+ 6a1803df08f44-6cde14d6feemr83672206d6.17.1729361235928; Sat, 19 Oct 2024
+ 11:07:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="WSSSUBLeR5BtVfqu"
-Content-Disposition: inline
-In-Reply-To: <20241019152434.1017394-7-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241011212126.747741-1-sjg@chromium.org>
+ <20241011212126.747741-6-sjg@chromium.org>
+ <CAC_iWj+HQg0itBTF8ZmsVr4qQkWjX+RdZ2snPKvOsVA5pMhXOQ@mail.gmail.com>
+ <CAFLszTgiebQV4VVWsMiv7Niepf2ceDxpo1yqykpJ-6X9hxchpw@mail.gmail.com>
+ <CAC_iWj+wg1p5kojdVb4YyM3h=FLi7B0n3J669m=iqdtRVpH4Qw@mail.gmail.com>
+In-Reply-To: <CAC_iWj+wg1p5kojdVb4YyM3h=FLi7B0n3J669m=iqdtRVpH4Qw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 19 Oct 2024 12:07:04 -0600
+Message-ID: <CAFLszTg82+z77ds1x5qUunvvq3gAX0y8VwNfGkjFFJ4hDeiHeQ@mail.gmail.com>
+Subject: Re: [PATCH v4 5/5] efi: Keep early allocations to the U-Boot region
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Joao Marcos Costa <jmcosta944@gmail.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,72 +92,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---WSSSUBLeR5BtVfqu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 16 Oct 2024 at 08:02, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> [...]
+>
+> > > > +
+> > > > +/**
+> > > > + * efi_memory_coop() - Allow EFI to use all available memory
+> > > > + *
+> > > > + * Up until this function is called, only a small portion of memory is available
+> > > > + * for use by the EFI memory-allocator. This function is called at the
+> > > > + * 'point of cooperation', before jumping into an EFI app, which needs to be
+> > > > + * able to make use of all the memory in the machine
+> > >
+> > > As above, this is called when the EFI subsystem comes up. Not when an
+> > > application is called. For example doing a 'printenv -e' to print EFI
+> > > variables would trigger this.
+> >
+> > Yes. At that point we know we are using an EFI feature. We can
+> > certainly extend the intent of this patch to cover that, but I am
+> > trying to take baby steps here.
+> >
+> > > The funtion call you are removing just adds all memory all memory as
+> > > EFI_CONVENTIONAL_MEMORY, which basically means free memory. I can't
+> > > understand what this patch is supposed to fix
+> >
+> > Basically it feeds a small amount of memory to EFI initially, within
+> > the U-Boot region. That is enough to deal with the few allocations
+> > that are done before efi_init_obj_list() is called.
+> >
+> > So if you don't use any EFI features, EFI's memory usage is limited to
+> > the U-Boot region.
+>
+> Yes, but what does it fix?
 
-On Sat, Oct 19, 2024 at 09:24:33AM -0600, Simon Glass wrote:
+Just that. U-Boot should not use memory below its own region, that's all.
 
-> Create a new disk for use with tests, which contains the new 'testapp'
-> EFI app specifically intended for testing the EFI loader.
->=20
-> Attach it to the USB device, since most testing is currently done with
-> mmc.
->=20
-> Initially this image will be used to test the EFI bootmeth.
->=20
-> Fix a stale comment in prep_mmc_bootdev() while we are here.
->=20
-> For now this uses sudo and a compressed fallback file, like all the
-> other bootstd tests. Once this series is in, the patch which moves
-> this to use user-space tools will be cleaned up and re-submitted.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
->=20
-> ---
-> Here is the patch to avoid sudo and CI fallback:
->=20
-> [1] https://patchwork.ozlabs.org/project/uboot/patch/
-> 20240802093322.15240-1-richard@nod.at/
->=20
-> (no changes since v1)
->=20
->  arch/sandbox/dts/test.dts           |   2 +-
->  test/boot/bootdev.c                 |  18 +++++++++-
->  test/boot/bootflow.c                |   2 +-
->  test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
+>
+>
+> >
+> > >
+> > > > + *
+> > > > + * Return: efi_status_t (EFI_SUCCESS on success)
+> > > > + */
+> > > > +int efi_memory_coop(void);
+> > > > +
+> > > >  /* Adds new or overrides configuration table entry to the system table */
+> > > >  efi_status_t efi_install_configuration_table(const efi_guid_t *guid, void *table);
+> > > >  /* Sets up a loaded image */
+> > > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > > > index 9cc33397371..2cd0b00e9eb 100644
+> > > > --- a/lib/efi_loader/efi_memory.c
+> > > > +++ b/lib/efi_loader/efi_memory.c
+> > > > @@ -30,6 +30,9 @@ DECLARE_GLOBAL_DATA_PTR;
+> > > >   */
+> > > >  #define EFI_EARLY_REGION_SIZE  SZ_256K
+> > > >
+> > > > +/* Set when all memory has been added for use by EFI */
+> > > > +static bool efi_full_memory;
+> > > > +
+> > > >  efi_uintn_t efi_memory_map_key;
+> > > >
+> > > >  struct efi_mem_list {
+> > > > @@ -932,8 +935,25 @@ static void add_u_boot_and_runtime(void)
+> > > >
+> > > >  int efi_memory_init(void)
+> > > >  {
+> > > > -       efi_add_known_memory();
+> > > > +       efi_status_t ret;
+> > > > +
+> > > > +       /* restrict EFI to its own region until efi_memory_coop() is called */
+> > > > +       ret = efi_add_memory_map_pg((ulong)map_sysmem(gd->efi_region, 0),
+> > > > +                                   EFI_EARLY_REGION_SIZE >> EFI_PAGE_SHIFT,
+> > > > +                                   EFI_CONVENTIONAL_MEMORY, false);
+> > > > +
+> > > > +       return ret;
+> > > > +}
+> > > >
+> > > > +int efi_memory_coop(void)
+> > > > +{
+> > > > +       if (efi_full_memory)
+> > > > +               return 0;
+> > > > +       log_debug("Enabling coop memory\n");
+> > > > +
+> > > > +       efi_full_memory = true;
+> > > > +
+> > > > +       efi_add_known_memory();
+> > > >         add_u_boot_and_runtime();
+> > > >
+> > > >  #ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
+> > > > @@ -943,7 +963,7 @@ int efi_memory_init(void)
+> > > >         if (efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS, EFI_BOOT_SERVICES_DATA,
+> > > >                                (64 * 1024 * 1024) >> EFI_PAGE_SHIFT,
+> > > >                                &efi_bounce_buffer_addr) != EFI_SUCCESS)
+> > > > -               return -1;
+> > > > +               return -ENOMEM;
+> > > >
+> > > >         efi_bounce_buffer = (void*)(uintptr_t)efi_bounce_buffer_addr;
+> > > >  #endif
+> > > > diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> > > > index a610e032d2f..40e23ca104c 100644
+> > > > --- a/lib/efi_loader/efi_setup.c
+> > > > +++ b/lib/efi_loader/efi_setup.c
+> > > > @@ -228,6 +228,11 @@ efi_status_t efi_init_obj_list(void)
+> > > >         if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
+> > > >                 return efi_obj_list_initialized;
+> > > >
+> > > > +       /* Allow EFI to use all memory */
+> > > > +       ret = efi_memory_coop();
+> > > > +       if (ret != EFI_SUCCESS)
+> > > > +               goto out;
+> > > > +
+>
+> I am not sure that will work. I'll have to check if not adding the
+> runtime regions from the linker scripts during bringup is safe.
+> But, instead of adding all that, including a small gd region for
+> efi_region and having to explicitly make that region bigger every time
+> something new gets added on efi allocations, why don't we simply move
+> efi_memory_init() out of init_sequence_r()?
+> We can protect the runtime services etc via LMB now and initialize the
+> memory map in efi_init_obj_list().
+>
+> I haven't gone through all the code, but it sounds doable
 
-This I think best illustrates the problem with "BOOTSBOX.EFI". This
-image will work for CI up until I can figure out how to get access to
-free arm64 servers to run some tests on and then it will fail.
+Yes that sounds like a good idea...but there is a catch. There are few
+allocations that happen when U-Boot is running - e.g. partitions. I
+think we need to work towards that bit by bit.
 
-This is also an ext4 image and while the specification only says SHOULD
-for being FAT32 there are practical problems with using ext4 and not
-FAT32 for us (some missing features in our ext4 implementation that
-prevent variables from working) and so should be done as FAT32 and not
-ext4.
+Regards,
+Simon
 
---=20
-Tom
-
---WSSSUBLeR5BtVfqu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcT8ZkACgkQFHw5/5Y0
-tyzf1Av9H+WjJLgh7JKg9ItGWW/R9GxN6cNkb5uRQ8bQI/NYgMppOJ1fa8voD9qG
-F+oxPQ9tEUNnrr8KHTHQJQ2ozJcIze5mR4kjFlHviG7P+bvLWiQN6u8YxzLPzO3V
-26UNr2D0wg17BYykGtmRxXaIdVBBNS32q/a1I7nujXFVL5JVWi/x/2CpnOaYAY0G
-Yw/jEaj7m85RuEjvmKfIpfph2daUhC5KIIIyBKcqlHNsXAAlpzMFqhyitZD/2Lwb
-KB2h6F5Q1OQUIB4hpH4WoW42Kk70b1gaT4MxGS9P3QP6WYS2byVpCH7h8iNPfTU+
-xqFWDGG73QQIG3gsAdWkhos433+nqZ596bUg9C/OS5WhPcEJ/B6ZjhaNOW9G7rA1
-pk9jGoY6c1RCPNIJ70lkyEZE+HKoQDLMLLechInIFIKFtzseXJQaTBkp6QNXPMlq
-C3GyOIFco3PZggh7ajGouOkhAROxd52m9LAx8ww9bTFK/CqDH4/xl0HT8s0F+Yqk
-7kEndA5w
-=2a1A
------END PGP SIGNATURE-----
-
---WSSSUBLeR5BtVfqu--
+>
+> Thanks
+> /Ilias
+>
+> > > >         /* Set up console modes */
+> > > >         efi_setup_console_size();
+> > > >
+> > > > --
+> > > > 2.34.1
+> > > >
+> > >
+> > > Thanks
+> > > /Ilias
+> >
+> > Regards,
+> > SImon
