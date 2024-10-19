@@ -4,91 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53DE1D3F29F
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 21:30:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E6AFD3E194
+	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 23:47:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D43388DC6;
-	Fri, 18 Oct 2024 23:30:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1AD7688E0F;
+	Sat, 19 Oct 2024 01:47:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fA1UPemI";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="HOt7fZWN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7764C88DC6; Fri, 18 Oct 2024 23:30:31 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E2CBD88DA0; Sat, 19 Oct 2024 01:47:53 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on20621.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::621])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FA9988D61
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 23:30:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39EA288E65
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 01:47:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6cbe3ea8e3fso14349136d6.0
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 14:30:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729287028; x=1729891828; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mDuGqPuk/pvIvRN15zftgMtOPPjeuMorhJJ5JNlsYsc=;
- b=fA1UPemI9hUJ8yGuTLDNXhWyPOuPUYn2wK5oGMkAoAOrnVEWU3LrF8sQtTy2Vvb2yH
- CtRDK/1sdYNsre9EOWOFuxeEhx71y9c5jJPe+aFkVXsvc45eNJNTMJ3i0EQqtVKaNqWB
- VQY/dv4kreL5fWQOSztfgS5mP50Hg4vBfs9Vs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729287028; x=1729891828;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mDuGqPuk/pvIvRN15zftgMtOPPjeuMorhJJ5JNlsYsc=;
- b=XttHpayE5ah6ONICQFINHIlX0DW87xzkH6rBmXzxLi2LOyhKlOlatvj52n85CJ8Lmq
- 6tpF4QG7etdp10DHBd/IvNdDxWYiRD31t9XPfURGyFeNlFZTJFW9jfdDh6Rwr94B7a45
- jQ2C7HNZGXNVvdRkEBduRmPji59gqrxlycPoagKaLKgUGJj5AIZSrc1sXZmKhNLE6nXZ
- 8uTpSS4Firg4t6dBQPrdZiZDmsKqxl/Wv95lCiEDbS4d4H+YKApSvUpBp7LyXB7Lc56N
- nNQojvfEiQbg11yN3vUeSWGwE0Q3n4saW83gN+Oi4iV/7PDJnAh/j/WsQfsTqvoYGneV
- Wbkg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUKbrrdq/IS2AyMX5mAbZD61dnHsmi57pGEZsIGzs/wKHq3tcGYcSQbjF1huK12VEJh0B9lSio=@lists.denx.de
-X-Gm-Message-State: AOJu0YxrumnBZ79vwSzXY0L3MdiA68WEwpWe1te0fCvwVT5zzoCfMUKU
- nP9yetAJ63nkxbSGCDCes0pD/eEkxsjl8XOpJH10HU5Aqxj2mH/0Fik04s1xqkv++zx0EVGZr3L
- 9FXU=
-X-Google-Smtp-Source: AGHT+IETz7acAvfn+BqavEOZZ5grUCsz9lxximTk+4wI7p1kItDqprghTisFZasCrMhY4FcAVGU40w==
-X-Received: by 2002:a05:6214:4a0a:b0:6cb:fa1c:87da with SMTP id
- 6a1803df08f44-6cde159f3f5mr50113786d6.38.1729287027996; 
- Fri, 18 Oct 2024 14:30:27 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cde1364e92sm10593416d6.109.2024.10.18.14.30.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Oct 2024 14:30:26 -0700 (PDT)
-Date: Fri, 18 Oct 2024 15:30:22 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Shantur Rathore <i@shantur.com>
-Subject: Re: [PATCH 23/34] bootstd: Maintain a list of images
-Message-ID: <20241018213022.GL4959@bill-the-cat>
-References: <20241017232413.724808-1-sjg@chromium.org>
- <20241017232413.724808-24-sjg@chromium.org>
- <0B48F871-BDD8-4810-ADA3-4F6C4E403B0C@gmx.de>
- <CAFLszTjF-kg5E+sV+CkFjStmS2YyJiPa59zOWWZxd2J5yOwftA@mail.gmail.com>
- <20241018163303.GZ4959@bill-the-cat>
- <CAFLszTi2+2si4bq-iZK5fncnUnBHVLnpp6kqJAGFyK5Lis9OZg@mail.gmail.com>
- <20241018180439.GD4959@bill-the-cat>
- <CAFLszTjEvoPLiq5iuCRk8q3iA50q-UHGF4GBJJeNNWwqMXD_aw@mail.gmail.com>
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=o/3AYx8q0my1s3sQPdegLYuNNVugNDzZlBjinRgLoHLFdQsl8MlNIAJGXSI/eT1/+95ZaTPo9dqMP+MeI9Lc3caaZjFYj57dv/GGFrt4RfTPa7OSsRygFqfpKMDt0nUOAOTHgX+5BuLiavylr9A+jGANJGYgtt4ut1DO1MVppIYKIrLBgBBsOiOaMqQdA9ioXi3Vp7dhNx+riTgoCsQBWUHbrRXgC8zCJ7vuACzhEV3eyLIuCsBaAVrv6E3rgfg3BiYu9TauVoe/CwCrPVUHfU9Ya7Qs4k4kBNq3n/ycsruCE2Iid7lQR8DiRpCbYCa6f7SCVQgs7J+zPPw0yCKJLQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rX7JEAx4hqUG4p2tto4zz2pYz22dF6gg8ZsBFI0kc04=;
+ b=x/NCjQRbfxMd1FnD5bH6FBqCsivQKfXhDiQ9moOBvIslMXjuLcw05CUJC8LKYBYqyvw0nfSGqW6+HgF7+Ax64KCl6XL3iCTpUlACVYTQsykMDvuSpPIJDJyQkIVDYIZS02KcVqnI+Bl2j2FJcJW4Ne59ocVWBkWLRCfuAbKY/jNvkunwTO8o91NNu/XvS0/9pxP79ev9mF2D2JJQVOjfg1u89cRdnyoXUo93lORdT/2rwAZSGnij8UYdnWnbxlLfAiapF2JA4DXL0A0p20lbdLGCKc2c0UtrWjvXisRrKsJappg7GQ4R20sWhDbY7iYkduqnbcz3SZikcogfS+NVRg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rX7JEAx4hqUG4p2tto4zz2pYz22dF6gg8ZsBFI0kc04=;
+ b=HOt7fZWN2q5iYH5uOvEiYwljUpCgeeBSxYcjZtfr7bQ6MK2LWWVmEQ3pq+r76rIGv+oEnwDm85xlbIehRqcCkuyO5C+9vnkOKiDRMXBkEDz24DFjh6C7MtsHex7pgWp72qgcrpCTSg6xdmMA3vBV4Or5QiVHEYar8Vx/h+TrRI3uHPGvhQzUrp/ncTpArh0SpJbx54arbIBHKOKkLyMjuUKdWzPTFH4dKvR6HsimWlphiPC3vpLpa/hcG7rSovYYClgsTlhh0TIrJfiJWNiX/vtCFrzBNeAX0CAwVsuCTnBFLZazmDOv990aHI1Dq57ceRGNe02k5AK37O5cSBvX9w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by VI1PR04MB10073.eurprd04.prod.outlook.com (2603:10a6:800:1dd::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.19; Fri, 18 Oct
+ 2024 23:47:46 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.8069.016; Fri, 18 Oct 2024
+ 23:47:46 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+To: festevam@gmail.com,
+	sbabic@denx.de,
+	u-boot@lists.denx.de
+Cc: uboot-imx@nxp.com,
+	Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH 1/2] arm: dts: imx8qxp-mek: fix boot
+Date: Sat, 19 Oct 2024 08:51:24 +0800
+Message-Id: <20241019005125.4165-1-peng.fan@oss.nxp.com>
+X-Mailer: git-send-email 2.35.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2P153CA0002.APCP153.PROD.OUTLOOK.COM
+ (2603:1096:4:140::16) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NxulHm9j9nQ1qjL5"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjEvoPLiq5iuCRk8q3iA50q-UHGF4GBJJeNNWwqMXD_aw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VI1PR04MB10073:EE_
+X-MS-Office365-Filtering-Correlation-Id: ac2c696e-0b9a-48ee-c220-08dcefcf4428
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|52116014|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6NvRN8w7tluAGnGWHUX6a7w6N3SFQGjqVTX5OLUv/wLPFjgRSv3LsshII12F?=
+ =?us-ascii?Q?n7NRGTxX57U9zUAoPvqCuODJx+dzhb1TelXFuNJjf2Kzpeqg//DD2146gUFK?=
+ =?us-ascii?Q?gbESUQXdxBXdx6TIAHOtT/Nkur8nZ4wOTQEDpsWY7baTvH8hhNIjldufp7A1?=
+ =?us-ascii?Q?2Vp3OwJwf25UBOYZ2A8MQT/P8ys+Zzm4/DLlCH/dqA7o652jrkDU0IZT/eKg?=
+ =?us-ascii?Q?b1fWLXzPGe8UDYj9fvv4X+znlbKvy7bx9kwvVeEUSvt2F2xZzmqAWAP6COh/?=
+ =?us-ascii?Q?pYS8zF0kX8Mv4ubU0eCoqrGcVgIT0Z1BpgrjEeUxv2P0iOieVprkvOfWFtor?=
+ =?us-ascii?Q?KLtm3DC4zKNdKQ52PFaMPPmmDuv4shFJCuU4y1cb1pIMF9Mfl0vuimIbrBxp?=
+ =?us-ascii?Q?aWm+Dwze7rWdn5eWOD/FAeLIcxU8+dUvldxoc212G+rplq3lk4D54UZjvigE?=
+ =?us-ascii?Q?G5ZVoLxkpEqDb1p8ro2fpP55YaSgoFphBpkJAf9uwVT+/yHnC0UVa+wiU9tg?=
+ =?us-ascii?Q?zQ6z9Ggc9/I5FWDzxiUzp8tHwLBlwR8tfqYhf08iny048bG7GN7OUl87w+Ds?=
+ =?us-ascii?Q?0FGCk2XtdPkrBqdVjwR2wo/Z6ApTOclhS3vs1ibYwciMoASDSvdmsFzGAvi4?=
+ =?us-ascii?Q?iT4JiBvoZXu1fPVAC15oPbDcgkGVGKgMf1o9pCyWsE72ccDtvQ5tumFxeXA0?=
+ =?us-ascii?Q?4PbmrX3rvmN3/kLfpUoBkfCewbT5VUIDFNFA0wXgjEOZ0v3+qmy2Hp+Wo0Xb?=
+ =?us-ascii?Q?BhpgDfqQz9/vSTafU1EbKQqosFg6bpHlwREWQxd3zbnYyEO2ZgT04bK7DhL6?=
+ =?us-ascii?Q?VArds1EdPVc0K5ABZNwSkxYFLtetlRHNasu6rFvDB9QufjhzI9Rl/Ti/vYDO?=
+ =?us-ascii?Q?nonp5FLWORS8mhJjvT3mUyb736m69wotP5jcDOCoOGukkjDN98s7GxdmifdA?=
+ =?us-ascii?Q?wVUv+10nIGqgE9J0X3e0Ve2AxQNT+75XNwhInijDLL4wjjBWjceH24j2x/+j?=
+ =?us-ascii?Q?uMKFJvyfZEHbjEAcCcjjzMJXzW06+dMLgWqY1Jaxtsb1SS6okIlfZlzYO6An?=
+ =?us-ascii?Q?4Fd2zTaVvbFjvlS+K4pnTgbNmbnmv7qC/cOn711rjeqZVI4R3tSR+chW4uGr?=
+ =?us-ascii?Q?6JyRA0dGZ8PvlFjlpuYzGG3m2x+yQIZhsXyDoBBkpfTPAc+uy9OVwR+XOiMp?=
+ =?us-ascii?Q?jARCq2UWPG7Mc+WLEuWs2CCfrZEaWuCc0FGMG4/xfr/uQGxOHc5wdeVH7/o7?=
+ =?us-ascii?Q?AVmXCRM5gkGb+VL5YqI43Z4wfDvvjzZLHopvpzICelwQL3gOUNI1ospu1d2V?=
+ =?us-ascii?Q?/Xmk/MCHSJzChxAVM7hJZGNlEkdGkI+wINgDQuyULyhmdQvCxNsks2k1Fc9o?=
+ =?us-ascii?Q?DTXieoA=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(52116014)(366016)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5CLuErmGign+axdn9dhh+gyhFsYBshJ1En00rxHczBu2i19q3uWy6XBoVBme?=
+ =?us-ascii?Q?1Ka7ERWoR5kr8q8Del2zHwqfrgkV52t0PH6/08EVwPyVyXf9phbB3AaPBzMS?=
+ =?us-ascii?Q?NZ5Kpvy8gUab3wH9UT59L2NFWIQtYuO0AlvNTKQWc39nSXR7QEYi06BL4aPf?=
+ =?us-ascii?Q?E9AF/H9nl18VwJcfLc0EYpRsl2pQ9qed8VlPhQdqjtvf/ErLMyvactWbXnq1?=
+ =?us-ascii?Q?PijZNvYHTSN5APEwr16LbKTqXvXfQiWADq2ut9wiHGLXaFe0/38OfOIXKcb1?=
+ =?us-ascii?Q?ySFr78abmVqAkDFOZ0LCR9Lh9+6z0ZTddFT/LG+g0gsqWnLeUYBjI6NUwFN/?=
+ =?us-ascii?Q?pZ0gsD/G53I3HyCTcbT23XJEPX98Hb2buxMVO/UI0BrCPMS8B8uGsO3p2NNw?=
+ =?us-ascii?Q?/nsl92yspQ8bais6k3EEf3pvb1smicsJcub2AcK/dBjut9wmASo8vKTlOmtz?=
+ =?us-ascii?Q?BqZXsHTZCUgxVKrku/lmFBZl+U7+nfOMcnZ/mlG9UFq3PD8IYT1F519u/yMF?=
+ =?us-ascii?Q?trCrldfTzyk8X1+OIZ/69uLKIuoagvvdijOOCfO7UchH2aejMTxO/Bsa9gFc?=
+ =?us-ascii?Q?6D1+OinJ6N2O0oZweAQS7K7Tm/vi3B9K/NLr3oiHla7Ip4WeiS+6SSSI/VxF?=
+ =?us-ascii?Q?/OJwzrbenF7XES52ToAzT/mlGCbhJsux7ZzM00hOD/lpf3JMEQGGINvBiuRo?=
+ =?us-ascii?Q?sbQ4nJT03Ty4CU/QEW+7Nm8eXEEOnCfJn5MOfgIhZo5wIT8p5/+xIL8763Pb?=
+ =?us-ascii?Q?E4NAtlkuIQdxAzlMTQb/vH42aNL7O9z//f/ULBixmUWNPpXVKQUJf4k67yFE?=
+ =?us-ascii?Q?ACHrw+dqeX0tShjkcDsVW0j6ujhNKwzfhdxDum76f7ThYq4H2g5c3AjFqMkc?=
+ =?us-ascii?Q?Jw/28anxp7eVY8Yfnlib9p/o+MnGK6ux74Rltiv28upMae7RZZ19WAeG6H70?=
+ =?us-ascii?Q?so/cKbrjxcEuvJYouraxVl477VjYOiosK+wHXg/a11dNxQCDNfkpzRIJ4CnG?=
+ =?us-ascii?Q?uQe8F7zKzNmKOZR2cVWG77ypCcOQBW9SrguMGqPsw2mcn4SBsuriT0P4lk/X?=
+ =?us-ascii?Q?xiIggc8l21gxluwfI6FpebG5mwqx30o2bI8uBDwCEFJ8t3u3I69j2eGD/sG3?=
+ =?us-ascii?Q?BA3F5y45hhlORt21vv3WUadEFodvN7wfYsjDcEMiCPJjd5w6T/s20CAWecaV?=
+ =?us-ascii?Q?U+m++fa1sXj8xB30WfZPH32lr89pCfhgz/piDGS+WEZ+HVdoPUBXHvO5BARL?=
+ =?us-ascii?Q?kb0NiNTJiAuEBtpDYpoh7v05cJm4oUGivs75gxn2KDcZly2k2ug4sdZwQIxV?=
+ =?us-ascii?Q?Dh2esI3COnTdJ7sJrJa6eheiyT01MZZqvAThWs5W61DjpExSFnXB/YBtZXDI?=
+ =?us-ascii?Q?2FBsTo3lxe3MF2iPq3l79Q2DQc1SAMS4lFuYDeQhQO8NBqOj39LnSE1oZoDp?=
+ =?us-ascii?Q?NBOQAD7CliH53EwE8saZhEu5Mv3lDrM7vr/G6PY1C62JEHF0J+mMkRqzgH5D?=
+ =?us-ascii?Q?LY/RwNrdWszbpp9yEHvdKAxx+REg+yURdLFXMpPIN5qOz4Mp1bGvnDRcNlzi?=
+ =?us-ascii?Q?UAlCI6BYNmoeENA2mHNRTx+B4Z7UQgI4b2mGWJnu?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ac2c696e-0b9a-48ee-c220-08dcefcf4428
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Oct 2024 23:47:46.3684 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Uy0lbDrAaIFvQ6ijxZQaEzPkENmDZ7ohiSA+lJZvrDHuKptTZ2AXVZo/FfR4hMizxKheRemX07/gzF+RYvsFtA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB10073
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,155 +160,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Peng Fan <peng.fan@nxp.com>
 
---NxulHm9j9nQ1qjL5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+serial_init runs into panic because no serial device found.
+Update the device tree to include bootph-some-ram for some critial
+devices needed in pre-reloc tage
 
-On Fri, Oct 18, 2024 at 12:48:31PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 18 Oct 2024 at 12:04, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Oct 18, 2024 at 11:20:52AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 18 Oct 2024 at 10:33, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, Oct 18, 2024 at 09:01:03AM -0600, Simon Glass wrote:
-> > > > > Hi Heinrich,
-> > > > >
-> > > > > On Thu, 17 Oct 2024 at 22:07, Heinrich Schuchardt <xypron.glpk@gm=
-x.de> wrote:
-> > > > > >
-> > > > > >
-> > > > > >
-> > > > > > Am 18. Oktober 2024 01:24:02 MESZ schrieb Simon Glass <sjg@chro=
-mium.org>:
-> > > > > > >We want to keep track of images which are loaded, or those whi=
-ch could
-> > > > > > >perhaps be loaded. This will make it easier to manage memory a=
-llocation,
-> > > > > > >as well as permit removal of the EFI set_efi_bootdev() hack.
-> > > > >
-> > > > > I'll change this 'hack' to 'feature'.
-> > > > >
-> > > > > >
-> > > > > > Please, keep in mind that files can be loaded manually, e.g. vi=
-a the dhcp, the wget, and the loady commands. These are outside bootflows.
-> > > > >
-> > > > > Yes, this series is only going to help if bootstd is used. For ad=
--hoc
-> > > > > use, EFI will need to rely on the above feature, at least until
-> > > > > someone can think of another solution.
-> > > >
-> > > > Perhaps I need to try and be clearer here than I might have been in=
- the
-> > > > past. The consensus among off the shelf free software operating sys=
-tems
-> > > > is "just give me an EFI interface". This simplifies things on their=
- end
-> > > > if regardless of architecture it's the same interface. This means t=
-hat
-> > > > in U-Boot we need to treat EFI as one of the primary interfaces. No=
-t a
-> > > > novelty. Not a "some people might use". It is a frequent and common=
-ly
-> > > > used feature.
-> > >
-> > > Yes, EFI is everywhere and growing. All the more reason to tidy up
-> > > this piece. I would like to see bootmgr use this new API, for example.
-> > >
-> > > But how does this comment affect this patch?
-> >
-> > Because at the very high level, I wonder if I made a mistake a few years
-> > back. As I understand it, the nominal case is "bootefi bootmgr". I was
-> > saying at the time that perhaps bootstd can just fire that off, and move
-> > on. Now it seems like we're going along the path of re-inventing that,
-> > and not integrating well with it either.
->=20
-> In what way are we re-inventing that? bootstd supports lots of
-> different ways of booting, not just EFI.
+Fixes: 8c103c33fb1 ("dm: dts: Convert driver model tags to use new schema")
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
+---
 
-At the high level, bootflow scan is re-implementing "bootefi bootmgr".
-but handling non-EFI payloads.
+CI: passed
 
-> Also I hope that one day EFI
-> will be implemented more as part of U-Boot than as a bolt-on, so will
-> make use of bootflows, etc.
+ arch/arm/dts/fsl-imx8qxp-mek-u-boot.dtsi | 18 +++++++++++++++++-
+ arch/arm/dts/fsl-imx8qxp-mek.dts         |  1 -
+ 2 files changed, 17 insertions(+), 2 deletions(-)
 
-And stuff like that is why I said what I said in here first. To me it
-sounds like you keep implying it's a hack that's not well integrated.
-When it's honestly at this point gotten more traction than FIT images
-have I think (as much as I wish FIT images had "won", it's like VHS vs
-Betamax, to bring in another technology metaphor).
+diff --git a/arch/arm/dts/fsl-imx8qxp-mek-u-boot.dtsi b/arch/arm/dts/fsl-imx8qxp-mek-u-boot.dtsi
+index 591eb66604b..e670214b5fc 100644
+--- a/arch/arm/dts/fsl-imx8qxp-mek-u-boot.dtsi
++++ b/arch/arm/dts/fsl-imx8qxp-mek-u-boot.dtsi
+@@ -6,19 +6,32 @@
+ #include "imx8qxp-u-boot.dtsi"
+ 
+ &{/imx8qx-pm} {
+-
++	bootph-some-ram;
+ 	bootph-pre-ram;
+ };
+ 
+ &mu {
++	bootph-some-ram;
+ 	bootph-pre-ram;
+ };
+ 
+ &clk {
++	bootph-some-ram;
+ 	bootph-pre-ram;
+ };
+ 
+ &iomuxc {
++	bootph-some-ram;
++	bootph-pre-ram;
++};
++
++&{/mu@5d1c0000/iomuxc/imx8qxp-mek} {
++	bootph-some-ram;
++	bootph-pre-ram;
++};
++
++&pinctrl_lpuart0 {
++	bootph-some-ram;
+ 	bootph-pre-ram;
+ };
+ 
+@@ -75,10 +88,12 @@
+ };
+ 
+ &pd_dma {
++	bootph-some-ram;
+ 	bootph-pre-ram;
+ };
+ 
+ &pd_dma_lpuart0 {
++	bootph-some-ram;
+ 	bootph-pre-ram;
+ };
+ 
+@@ -131,6 +146,7 @@
+ };
+ 
+ &lpuart0 {
++	bootph-some-ram;
+ 	bootph-pre-ram;
+ };
+ 
+diff --git a/arch/arm/dts/fsl-imx8qxp-mek.dts b/arch/arm/dts/fsl-imx8qxp-mek.dts
+index 6a987f0dbb3..983b918dc7d 100644
+--- a/arch/arm/dts/fsl-imx8qxp-mek.dts
++++ b/arch/arm/dts/fsl-imx8qxp-mek.dts
+@@ -6,7 +6,6 @@
+ /dts-v1/;
+ 
+ #include "fsl-imx8qxp.dtsi"
+-#include "fsl-imx8qxp-mek-u-boot.dtsi"
+ 
+ / {
+ 	model = "Freescale i.MX8QXP MEK";
+-- 
+2.35.3
 
-> > So, to try and bring things back together. If U-Boot decides to load
-> > $FOO from device $BAR, at that common point is where we need to:
-> > - Is there an lmb for the location this is supposed to go to (for the if
-> >   we know it, entire size)?
-> > - Note down everything else we know, now.
->=20
-> Yes.
->=20
-> >
-> > This means that we can note down enough stuff so that EFI can construct
-> > the path it needs. And if we're being told a filesystem, that filename
-> > is good enough for the IH_TYPE thing you're wanting, or at least a good
-> > chunk of it I hope.
->=20
-> You want me to ignore the type that I know (kernel, ramdisk, logo,
-> etc.) and infer the type from a filename? Why?
-
-No, I want you to save and display the filename. That's probably much
-more useful when debugging than "kernel". If you actually know some
-other type information (ie extlinux.conf says ...) then yes, it too can
-be stored as that's useful too.
-
-> For EFI there is only an EFI application. It will always just be a PE
-> file. We don't really know what it is, as someone pointed out earlier.
-> Maybe one day we will check to see if it is a UKI and pull things out
-> of it. But then, it would be component parts (kernel, ramdisk, etc.)
-> so I would want to add them as images.
-
-I don't see why yet, honestly.
-
-> > It also means that since it's at the most common point, it doesn't
-> > matter if we were in an EFI application, a boot script, a bootmeth or
-> > someone at the cmdline doing "load mmc 0:1 /boot/Image $kernel_addr_r".
->=20
-> For that case (at the cmdline), bootstd is not currently running. Are
-> you suggesting that bootstd could pick up these things and record
-> them? If so, then yes, definitely, I want to do that. This series is
-> the starting point for that. If you are suggesting something else,
-> then I think I have lost you at this point.
-
-Yes, I think I lost you somewhere, but I'm not sure how. What I am
-saying is that since everything at some point calls down to say
-fs_read() to read a file, that is the common point to note what
-we're doing. Not the load command, not the bootmeth, not the EFI_LOADER
-call.
-
---=20
-Tom
-
---NxulHm9j9nQ1qjL5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcS02oACgkQFHw5/5Y0
-tyzbngv/eD0U2VxKOyUEoEmn1YRCNepa4gZJNerfhdhZqnJhPLDJfZViIka1OcJ4
-VsgkCTBQ8up8K/iTehaqsO0ogfU4pbZOqUmSviIJSaAwd7x1bYDkvDxMDKKky0D6
-PHnmezhSmgscWeR6t/iEqT7HNzwZS6Ij9gG/I28DlS12CWcSkZ4ACGkjkDj5ecLd
-+SZhwkiGEsbn9YEB8pRMSn73YOpq8EKnKut27eYLxaXoBCj5BO4IHrFT94bI5B/o
-qIpkq+ziX0tr5qen92Fspe43bG0FvWdL8ZR4uVlDv2Gn79aSRJ10A2gbfDmrjXCf
-QfnkcDWNVyuI+DdYj3igyt0X7JXK3BCOMy3QGtQjLCHe/mNN9P3kqy4WspjCrGYo
-xBlnMtRPNZccW4OqH17cwP+zrDBzAzCWHtDx8F8n0CpnTOzEUbCruDqV7CGPTOY7
-uJ9eFl1illy+FqXTuGVN1WFrFCdI7A9WQsnnWaYeKxvzwnG557WCgVlBLuhfF51H
-rzjkGia4
-=rCo5
------END PGP SIGNATURE-----
-
---NxulHm9j9nQ1qjL5--
