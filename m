@@ -4,143 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F036D3E195
-	for <u-boot@archiver.kernel.org>; Fri, 18 Oct 2024 23:49:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9616FD3E194
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 00:14:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8D2188E88;
-	Sat, 19 Oct 2024 01:49:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id F241E889DA;
+	Sat, 19 Oct 2024 02:14:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="JmCe2DEF";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="P6YbZWLB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A63BA88E81; Sat, 19 Oct 2024 01:49:13 +0200 (CEST)
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur02on20626.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2607::626])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BFD6B88B23; Sat, 19 Oct 2024 02:14:42 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6EFD88E8C
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 01:49:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 927FA889AE
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 02:14:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uuoQBrHASaeZ0atqt0NwUfesfqT+otmwiv9dVLEfmmCcFjIcOGkReWJErDD/tSY414ammpAjOiMu4ZEFTtoLANu78WAU6I8hMufjh0yS+wKJxu+pUnKLyIC3nfvp6dheFCNWZjY3gyJ42zEcrOZKfgYAMqF5bylE0DE9QDYLbk5mccLlDK97+vgS2uOOkMuPonJAWGRBnDj7IwlGMuYu3KRdAmLpgKxrN299a0mz17htv6r9cirqFYWIfOFSFOAmZHXi23ZLoCa5Pfc7789mVRFZHZKq/rCB9Kpy2cbAbLOzW7A2Y7UAjzIN4PZ0dXF5BI/LL6+TC1obKDmfoqhEcw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yIU102ReU+VtV/8eXDYbPtSVscoYwXvU60ZWXDn5TD8=;
- b=R2FOHTPcdVWmGJmGliKPi25KaL9jvaWqJ9NH2jP717wniwCwZZVN+rs/CtZU5OrHDPjRi2k9mztYQfc9YG1P11QjvAkuWQO8IGuUyFAjGfUAhHSzzxsv1/uwv5f7wpnVI0Dkk2wZwfviIoBFdh2lmSDnnNMXSiMZT6EelL7dc00CSt64wFiHOiTixZp8DTXzWwVY4bzPlJWXcobvOpXStNs86k7MK/CMd6elyz0fx9qYrbScrCnCyhJCOAD2+tyXZXOtun2La6pM7hfvszUwMNBaHx/8l/wGcdXbeG+rSYAVbxYS59Ajo713FjeiYRsySXbPJLzEKvQRaYJrPGKlfg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yIU102ReU+VtV/8eXDYbPtSVscoYwXvU60ZWXDn5TD8=;
- b=JmCe2DEFTUFATbEXbEsec41yX0SysgOpiHlnsXnR5CWplHmUMyP3kopyC7GtdNQxxiBksA4V+517VCrGdFan4go/sKeOyHGRKT+Oh0qsbELabSZ99uz6no2izqU7iP0B/z3l9LvAGtpiLUIow6dcdFreac8OPW+Y9O0c/5gc0F40aKW9E2V9Uk2ORiH8es4CC7HJ7pGrb8Qiq0l+M1gmftcBwEe1kS4EdRS3f2EmM1M3rMd8ZCeslB5+s1+K9j/ei7N9j7RJMz87K5GBEdL/XScAYye7Mhd1ljLa4L7ACzJ50Yoy0IPmwfGcts1hULqHjVXg43paiAFtLU46BlwDFQ==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by VI1PR04MB10073.eurprd04.prod.outlook.com (2603:10a6:800:1dd::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.19; Fri, 18 Oct
- 2024 23:49:10 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.8069.016; Fri, 18 Oct 2024
- 23:49:10 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Fabio Estevam <festevam@gmail.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Fabio Estevam
- <festevam@denx.de>
-Subject: RE: [PATCH 2/2] mx6ul_14x14_evk: Convert to watchdog driver model
-Thread-Topic: [PATCH 2/2] mx6ul_14x14_evk: Convert to watchdog driver model
-Thread-Index: AQHbIYb/ocvAkphWOEiQL6/K8xyOILKNLYkg
-Date: Fri, 18 Oct 2024 23:49:10 +0000
-Message-ID: <PAXPR04MB8459A8048002D04F0C8A74AB88402@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20241018175549.361096-1-festevam@gmail.com>
- <20241018175549.361096-2-festevam@gmail.com>
-In-Reply-To: <20241018175549.361096-2-festevam@gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|VI1PR04MB10073:EE_
-x-ms-office365-filtering-correlation-id: 42334018-ba65-464e-38ab-08dcefcf7671
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?rjTpvRcgjK/bDJp5Ju28GbDuDy9FQDhOtMoWBEbAEP5hlSm83h/cUIMXDcK6?=
- =?us-ascii?Q?bZsJdisMLuRuP96oKY9j5X2b/STWaMUb+oxTiy724meku0SmUo8MO45kCfVi?=
- =?us-ascii?Q?yoIp10Ge3IaQ1WztFGWvzDu4BGMDQ7xWyaFoj6yGU0hVUNtXDUumJIYmvWL3?=
- =?us-ascii?Q?J4+tSX6V1jc9aD3L+Uu9vd54+oyeg7qZUcxIIbdiU1aS/QxFsb2sWidYPPNw?=
- =?us-ascii?Q?2UBRoYO9QaX9Cj5M3ajePs8pk2gxTzXEFhYtzWaJlljpDjujMOfe9x7Y8o9X?=
- =?us-ascii?Q?PA1O15ROy/5PTSl4i/BwMZraMEf8QILSwoSljgbUsWeBml8j0vHVueugzdVq?=
- =?us-ascii?Q?S9r9rbAnwhxoTAXhX7tAISpIrclke8pk+q/PFLdbKLdjbLerDtKcH9jsozf7?=
- =?us-ascii?Q?PhvBsyuuvlpbJZ+w9yAJSEuAEiaLQ82jlebFVoTgtdWr6r0RcI8fegjXQAKh?=
- =?us-ascii?Q?4GsdBQndGnsUApVHBWeJKiXDR0ITkPCp2jZCkrFRjid488YIIgfYRuu9CtD7?=
- =?us-ascii?Q?D5BOmR0KNW3QxetO7UGnFVqblXI32qk/AiP3VqG1Wzt5Z2zNHpKQMzYmNrcU?=
- =?us-ascii?Q?YrOZvRVg0k2HXafCsJCzghXgY4jghkPhRr2zcpaqUIx6JrA0dzcFM9+rQ/x5?=
- =?us-ascii?Q?H/ZyfP6m6JeX8nRNMEic1LkJ11DpTihDAWwtowFKsvBYTMncpKLx9dwl7d8P?=
- =?us-ascii?Q?NeyJnjFXKSCyofnd1XRBVgjiUJNQz1ym+aXCBEkdxPQDYzMv4TZG3z2c8VqV?=
- =?us-ascii?Q?Z4QqwQGfb4r8nGy0XQpwpmIj/PDTYcGwQWbbeztIph92yCwJ7jKE2RJIxTnM?=
- =?us-ascii?Q?mn1rJdVABDRVNsqNFP7hdOhJh1rbRZCZspEyOm+eZP3oFCFnYp9slCmKoPty?=
- =?us-ascii?Q?zLmEjIQw6cRwVHGbJMzVfoAb+yawJQk5XYEiNhlVnATEH2G4Rh9D23TsEZGy?=
- =?us-ascii?Q?zW4A4SgBAlPDk2GcRvl68dGk0U6qTDsfenJUoZJIHn2UWgoaEsQJBK8Nd8uB?=
- =?us-ascii?Q?kqAGzisFxbHAdNE8tDrSgX7M/Fd6HGZ5wfgeA0Fl77Ye1+aiJ/QrFqwXH2EN?=
- =?us-ascii?Q?oXTm+EUPIi05Glb8avf0Z34UR36OZDo702Xf1rYpJ65v1salRnnwCrpm41EX?=
- =?us-ascii?Q?cb1mvu9+vVXyHoe9nYWMaMC3SkB6UWRUOB1cFzRXBvqOu4+r+H4UgGQVSQlp?=
- =?us-ascii?Q?GrBUl0ITpGO0Gd9fhi/wrPlMaLXBh/+ZVeIIO2Ej32mvamhexambgnjUNpiN?=
- =?us-ascii?Q?6mkunttLQoCwDSs3RodOuYTvCuN4rpSnrhRcXVDKAEByPJpi/KBMfQJ88ZI+?=
- =?us-ascii?Q?z8tKrqTw+MW/EJnZ7C3QeVEAaRnOYtXJXKpsSfQTq2Vr6xC4/5WBVzxAgg43?=
- =?us-ascii?Q?rHpP+F0=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?ZOLjmRAjrmby+MKhGslzAFUKXc5dc09EkP/PADd4qPgFr9Cdk9Ohj1TbprUq?=
- =?us-ascii?Q?KKiUbW+j0htNIVMVMfkNP0iwL68JzD5z4L5tLWCA3fs6fXNlx4TTJQhrkzLc?=
- =?us-ascii?Q?o3VB+CtcGgMHhIcG2upLWcGRRghi3pby4ZaIBwS3HkXXFP/7I2GKXqsQlYsV?=
- =?us-ascii?Q?2sz1PEXQVPkuA8SArqEhGEaFtDs7Jymk03tK5HXQVdB6k0Z/SGOs57QweamB?=
- =?us-ascii?Q?VZ19NK7GLQHtWg9nwKXtHM9Iw95kTsXpXbFExn5DDvKK9NwR5pFzHNG5PaIH?=
- =?us-ascii?Q?30vT9jilIIIq0cMebiGH40993ljbqtDIRqR3mSqOYDCVG7kfexzJbU6OoAAo?=
- =?us-ascii?Q?YOCagolIw2Dv2zUUkdiUeP1zVAiPqKVRkSdQlFX3d2CoMMZrkmUGht9XMqyw?=
- =?us-ascii?Q?IvJ7OY/f90BhzJRLZs1TqtqgOop1N2iuVl6K/LPanjT1Hab3QZnoa68GPPVS?=
- =?us-ascii?Q?R5IZrIVG8il+D/8yR8z5QhhpB+DFURNepH1enWR0DQA8RKudNjADoUbASdgS?=
- =?us-ascii?Q?hSb+Rr1eJ/p2u/eKL6iaNG6JA+Qw7o0ln+k74rjIJG7H933JYIKl3kKqqZOq?=
- =?us-ascii?Q?/HsmJ+xbdpNh9ENHPhupdH0OMCSteBKVreCP1gK5htZdDU71/y75HLTIyiVT?=
- =?us-ascii?Q?W7hqbPyofJ4MTlG76fuEE5311jKZnfDJS4C9SFsebgdK65CsylaSoOOIfZj3?=
- =?us-ascii?Q?aOqGLjNYRvzvZsvnw0SWnozCzPOauXgG/+F6WpQdY+RS3aQXOldGKvX3qUCA?=
- =?us-ascii?Q?WJlZFYSMk/9is/qIN8Vj4eJVRTZWJqYil9XwPOK8kUX3JXSy/dvLS/m5SItI?=
- =?us-ascii?Q?M16/fFY4+Bue13fZKNjFTHx8Nnn8UeoJ0HHcX4ay/Qe3V5znjFtR4wJcygfs?=
- =?us-ascii?Q?BnqCk+QEQ1CFQBrM5AKslGmPiqdGe8fyMnIjIoTF5dX78YqieNz9JfEztns6?=
- =?us-ascii?Q?aMRCueY03op7pk8TorTB1j0K3k+AKGCJSyUa8bxDwzMp00/HsMTTxJ57HnZ9?=
- =?us-ascii?Q?2afPHVfpFD+Qfmft+JvOnqoxaJbr0w48/wrMVlFKiMwtvY/riltP/Bx48TtP?=
- =?us-ascii?Q?EIVLvBAVHgjobwEjFiWVirl57PrMhFh5f8N2Cia3AXad5IZNU3MUqCy7joPl?=
- =?us-ascii?Q?Vvimy8OGfCcAGLTbssTYk2Ig7o4x6RYf6i/39uPAZx/aWYN8dpXMXS58YtPB?=
- =?us-ascii?Q?lwHsmQ3cXvEYTnS3RD80mSwP3Ewady6F/m67cd0ar6v8UVGWY1QuwUo8nC3x?=
- =?us-ascii?Q?Z9oLF7em9A9b0HyMjlUBJTzjAy0RvObFQ21Ua3knL7vuRQJgrSw+ImHZMOsU?=
- =?us-ascii?Q?/0GuhO+9oR9drYEIY1NC3BKICOjH4sHjPOuyC0E1n1Hnje6FNy4hJ0oz+V1p?=
- =?us-ascii?Q?9+pNel1xH1efc+L0HJZgmJjy9PH9FRvZR24ZKmg+FjZEK3EiBbQXipyPG5Rc?=
- =?us-ascii?Q?8oaBJIaUzwK4Li578LaRieKbmxzzMYeQeYz7NYoGPHXlJNdOxIW6c0j1tg2b?=
- =?us-ascii?Q?75fmFbZk5jHdKo9KVNcmrM9t5T2gd2AF48lCk8FMOt9XOA+i+kzAUDCCbQ8l?=
- =?us-ascii?Q?5Z9RrF7GQtqbnQwaLa4=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 30B104120B
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 00:14:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1729296880;
+ bh=HHyjczYIaLbklKeyDEBqtOEQHKyYM4pg/RYYbbHycYw=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=P6YbZWLBeA9TwBHIsPYXwfjp3NtLY8hq/ifxl3vTLQBI7yb5DOgWD9ACsKQCza6WH
+ G5lG5W7BLmjFZQ0zN0YfLAZVibd/3MQlFtQst372ul7Aty9TBGvX2xhFrkCmkgUf97
+ un6oVWcdqjMR4Ba3ekIhu0lCyrL+7xau/ggsXsF2uUOsDhIEULfTJhedByCgwKOHmh
+ DGBD0eef0RQy8jpOPjyqmxn+lJQZrKDJB7mwoOSGHP9JHJ9T6dBV5e721RYKFDlCEB
+ vFV2MsY3NUtEHANXY0elSJ5FlLvvfto4D7FGK4xeTuYvC2aX/KhzZfIMOx1pC+5W0P
+ wD18+g/hrYUXw==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-431518e6d8fso16630465e9.0
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 17:14:40 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729296879; x=1729901679;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=HHyjczYIaLbklKeyDEBqtOEQHKyYM4pg/RYYbbHycYw=;
+ b=Qy1eUZEdN1Xyr1KMdVXQMobRWYZucKchepa9k0BOhud30chBF1jz6lCt8sqJcybpo1
+ o4RnPscTVEoQHGMFCbMA1ssvdaKPXJ8L17Zvh9y/W2/IBmqHotDLgGOBT9kUn51WxCcP
+ 40dl1bzJCjykM3JLmm5IYrCB0tzHcSlssUkwjWr589ZhgNVo+n7DXWCcpGULf9xwyz2r
+ hunbuCgAdiEKsQsH5Rr4BJ97DbyP7X0FH1DV1rRk0DcraEPPqK/tsU86z472GUUT5WS9
+ 5pl0Gs8FnzkxRZnAdma8QDqXE8Hcyvk58BuryRkpfdVyDLVhCIfH2P7vSPhwhk/TuYpZ
+ trPg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWvvwcKE5CPpheAOyIwB5KlLCC1qh9UdYZ1HVevHo9AA7jat9ZQZsfobGs5HzhS/vQ+M721qT8=@lists.denx.de
+X-Gm-Message-State: AOJu0YznyRtTpBcLKNiHvCYUlAeTOb6nihuVT6vuC7/kIHdUV2nRbey+
+ 6M7dkmCOvBHC8zyljfo7LzBvPWghbgLPJsrGWaPmqGhPqvjcgF1e8X61r4zfZCHXFYToX5RiSjB
+ AbZTNufv1uApStChEmjTNB8H5FLsHGQYpJk9lyunLG51AtGH6oRkN0Zhgkn0i5HAvtbQ=
+X-Received: by 2002:a05:600c:3b8c:b0:431:251a:9dc9 with SMTP id
+ 5b1f17b1804b1-4316169a5e7mr32688875e9.25.1729296879597; 
+ Fri, 18 Oct 2024 17:14:39 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF6URjYEdKjPbI2UQDmGdELGW2SSIL7CUqPExy/Wm5ECkGmGPhZtQj0NFITX40TiGjCMb3tWw==
+X-Received: by 2002:a05:600c:3b8c:b0:431:251a:9dc9 with SMTP id
+ 5b1f17b1804b1-4316169a5e7mr32688725e9.25.1729296879139; 
+ Fri, 18 Oct 2024 17:14:39 -0700 (PDT)
+Received: from [192.168.123.161]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43160682586sm36671585e9.1.2024.10.18.17.14.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 18 Oct 2024 17:14:38 -0700 (PDT)
+Message-ID: <215a399c-8efd-4494-ae6a-6bfe4532a16a@canonical.com>
+Date: Sat, 19 Oct 2024 02:14:37 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 42334018-ba65-464e-38ab-08dcefcf7671
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Oct 2024 23:49:10.4142 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 2q0L1GK1PKSs+KB+G/ou6/LBJ27LIrvRXwWJYZOD2yHb697vepbeGK7QP+ahVfFYZgu1VA7hg/Sr5S4jySdceQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB10073
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] sandbox: add bootmethod EFI boot-manager
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: sjg@chromium.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
+ mkorpershoek@baylibre.com, sughosh.ganu@linaro.org, kettenis@openbsd.org,
+ u-boot@lists.denx.de
+References: <20241018011837.126813-1-heinrich.schuchardt@canonical.com>
+ <20241018011837.126813-3-heinrich.schuchardt@canonical.com>
+ <CAFLszTjjF1r4f6NjrYSFz36DK_X6v6rYMwDCUqiSLOPysGRC7g@mail.gmail.com>
+ <ee96c1c0-c1d5-4f18-a1eb-f6460e859683@canonical.com>
+ <875xppggnk.fsf@bloch.sibelius.xs4all.nl>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <875xppggnk.fsf@bloch.sibelius.xs4all.nl>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,18 +112,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: [PATCH 2/2] mx6ul_14x14_evk: Convert to watchdog driver
-> model
->=20
-> From: Fabio Estevam <festevam@denx.de>
->=20
-> Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()")
-> caused the 'reset' command in U-Boot to not cause a board reset.
->=20
-> Fix it by switching to the watchdog driver model via sysreset, which is
-> the preferred method for implementing the watchdog reset.
->=20
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-> ---
+On 10/19/24 01:01, Mark Kettenis wrote:
+>> Date: Fri, 18 Oct 2024 19:26:01 +0200
+>> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> 
+> Hi Heinrich,
+> 
+>> On 10/18/24 19:21, Simon Glass wrote:
+>>> Hi Heinrich,
+>>>
+>>> On Thu, 17 Oct 2024 at 19:18, Heinrich Schuchardt
+>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>
+>>>> The EFI boot-manager is the default method to boot EFI binaries.
+>>>> We should be able to use it on the Sandbox.
+>>>>
+>>>> * Enable EFI boot-manager bootmethod on the sandbox.
+>>>> * Adjust unit tests to reflect the additional boot method.
+>>>>
+>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>>>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>>>> ---
+>>>> v2:
+>>>>           no changes
+>>>> ---
+>>>>    arch/sandbox/dts/test.dts |  4 ++++
+>>>>    test/boot/bootmeth.c      | 28 +++++++++++++++++-----------
+>>>>    2 files changed, 21 insertions(+), 11 deletions(-)
+>>>
+>>> This is better, but I still see this.
+>>>
+>>> => bootflow scan
+>>>        efi_var_to_file() Cannot persist EFI variables without system partition
+>>>
+>>> Please find a way to get rid of it. I can give some suggestions if you like.
+>>>
+>>
+>> Would you, please, mind providing a rationale why you want this correct
+>> message not to be written.
+> 
+> To me, warning about persisting EFI variables only makes sense if
+> you're actually trying to persist an EFI variable.  But all we're
+> doing here is scanning for possible bootflows.
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+The UEFI specification requires to create Boot#### variables which are 
+non-volatile.
+
+As the variables have to be non-volatile we try to persist them in a 
+file. And the message describes that this fails.
+
+> 
+>> I expect the sandbox to behave as any other board and provide warnings
+>> when they are adequate.
+> 
+> The warning doesn't make sense to me on non-sandbox boards either.
+> 
+> I suspect this is the code that autogenerates EFI Boot options, so
+> code that sets Boot#### EFI variables.  But do we really care that we
+> can't make those persistent?  The code will just regenerate them upon
+> the next boot...
+
+The same warning is written for any variable that cannot be persisted, 
+e.g. for the Boot#### variables that you create manually.
+
+Persisting auto-generated Boot#### makes sense as you may refer to these 
+in the BootOrder or BootNext variables.
+
+Best regards
+
+Heinrich
