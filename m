@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E5DD3C916
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 14:16:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A566ED3C919
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 14:17:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A117B892BF;
-	Sat, 19 Oct 2024 16:16:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1FC92892D2;
+	Sat, 19 Oct 2024 16:17:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XwUdzEsE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="arPevz0Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F465892C5; Sat, 19 Oct 2024 16:16:54 +0200 (CEST)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id D8C03892CB; Sat, 19 Oct 2024 16:17:02 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FAE8892AA
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 16:16:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 877A8892AA
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 16:17:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7b1511697a5so183207685a.2
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 07:16:51 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-4608da1bea5so21033701cf.1
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 07:17:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729347410; x=1729952210; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1729347419; x=1729952219; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6YgExZAebRZKN9ZiJlBP9Qv0ZUgwsJkGUwVem0K2juk=;
- b=XwUdzEsEU3CnOp8W6EDXUJUDDJZw36jwi6dtv4sd0qGrHFGBuPtPD60gwGQm/DlxYM
- xjxac3uaifCDkGeO0QVXeV9wpZ2KGl3smQktnI1iseGa06hUKILQScy+OSsk3B0mMY7p
- CMN2vt9pGxXx4LJxsCRcW8lHd7jcJrAlRVS98=
+ bh=VgSO6NEPG/a+yOMY5UktXc66hvGhbPTDpb6Uo81IYYQ=;
+ b=arPevz0QelEy1BlolIvXYzxL4JC6NFn3Yfvg8ygFsbg45CMQLk+4PMkBfw20o+Aq92
+ xeHotPZLEQqAYTsvMyjZ00v+uXmGHOhJqQN07sbLnNn3MU5TC0MZ0OwJJ8U5fVEDsOKy
+ tKzqW1TMcR6B62w/pHvbW9ZgAzBAlw8kcr7hc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729347410; x=1729952210;
+ d=1e100.net; s=20230601; t=1729347419; x=1729952219;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6YgExZAebRZKN9ZiJlBP9Qv0ZUgwsJkGUwVem0K2juk=;
- b=o9EAPXUtFgmYiBZsdokLFdui6Zikxaoyug1Mm6Fvo84CS4ALgtIdvJ99t36h10jqXn
- cJNM8otv1h4m9j86pHQW7Uu8ki3FOOTQT8wZmYKbiDEfwHSFjlYgP7j3CKnVq9jYybR2
- n3GQT3/anATLex3qMo0sn6rCntRtvuCMVwR7DmLQMHBbTvbMInBEIRbCSYdJ8mlyxApN
- +yw68xhVXr5cGiKzZVRKed2lOt8fywVtKUKFE9tpuWdu3Adq3Uq16T8jbjtscRsBcG36
- LL+oKpTXDzIiiclxxvuUScx334QFAODYSE+b0Lf41nVPbedfZtHETUO1d5edK0xEjwLN
- xIRg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX445yDR5Xs84P1WJ/0nhLIyK5c+/qe0RXFqMTksLKqBJGJaxQtQezOBUCiDOJXUhs882HtjgE=@lists.denx.de
-X-Gm-Message-State: AOJu0YybTaxPu996RvieVBtB6SH8eVOWl2tpM6DknXB6/1fMRbqevFt7
- g20L9trrE8Tp+DXGBWD5d9F4qJ6jJnTWdePKTOOQ0ziOtcxGbBGES+ngP8FssDU=
-X-Google-Smtp-Source: AGHT+IHOP/O8oRpXSZrGVRLOXSD8MDpo6DposYMTnDkumxsOLPm1694C8cc03WlVuN8jYe3rcokKVA==
-X-Received: by 2002:a05:620a:29d3:b0:7b1:1a1e:3013 with SMTP id
- af79cd13be357-7b157b43497mr856018485a.8.1729347410590; 
- Sat, 19 Oct 2024 07:16:50 -0700 (PDT)
+ bh=VgSO6NEPG/a+yOMY5UktXc66hvGhbPTDpb6Uo81IYYQ=;
+ b=b5EmGSUIU+rBFzY4hNqnyqSG3mbvJ7gGb/NPSl16yzu+q1Zhbn0pdKsZluykkpKx47
+ 1TLVFPTwgZ4w0ec/eGWJy6EpjBcxsuzDZaYXSbZxHSttCiRKgGei2M84S5iXkgo13wV9
+ JTsEDpDG56NGfkKW787S5Y2Yx8vpYZ9zI0hr+rvzma0aYJxGv9HgwVqQ8UAb1eOyENvg
+ AV1LzetcSJZoHAK6wdTPFag56oHfpeFCIsq0iGHS0D7hkSLatHEDb+4tDweyVFQK9CnP
+ X0nUsP7w0Lq2kG86v/adIgoTKw2JFe8OrYt6vh2eHkiLkhNw8piua20Emlryb3ty2OEn
+ EcHg==
+X-Gm-Message-State: AOJu0Yx4ou0EVJbUPVbBhdP5LszzgRYEApdyCtf9VT39S0Sady7Ke3KX
+ 3cr8mDrJ2iRSq6uDFRaoJIGbVcRYd3oJV//94p3FV4dJNfBEKKFc96nTLiEG2f8=
+X-Google-Smtp-Source: AGHT+IHxW+YlOrXEG0R00Eq7J6II/kUM8o693J1Hg8itkgFAS1EJK0t32iWGpaBWiIh9fbNDTSRY/g==
+X-Received: by 2002:ac8:788:0:b0:460:bb93:4b00 with SMTP id
+ d75a77b69052e-460bb934d0dmr35520361cf.50.1729347419275; 
+ Sat, 19 Oct 2024 07:16:59 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b156f95089sm184624385a.53.2024.10.19.07.16.48
+ 6a1803df08f44-6cde111b366sm19369206d6.5.2024.10.19.07.16.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 19 Oct 2024 07:16:49 -0700 (PDT)
-Date: Sat, 19 Oct 2024 08:16:46 -0600
+ Sat, 19 Oct 2024 07:16:58 -0700 (PDT)
+Date: Sat, 19 Oct 2024 08:16:55 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] mbedtls: fix defects in coverity scan
-Message-ID: <20241019141646.GR4959@bill-the-cat>
-References: <20241016234829.3836359-1-raymond.mao@linaro.org>
- <CALeDE9PpzBEQBYXMf9VCDWZD76LmEj0X1fq9W-=wjdwNOD1-nA@mail.gmail.com>
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>,
+ Nishanth Menon <nm@ti.com>, Baocheng Su <baocheng.su@siemens.com>,
+ Li Hua Qian <huaqian.li@siemens.com>
+Subject: Re: [PATCH 00/11] boards: siemens: iot2050: SM variant, sysinfo
+ support, fixes & cleanups
+Message-ID: <20241019141655.GS4959@bill-the-cat>
+References: <cover.1728539755.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iDr6J1px1ebE3hDz"
+ protocol="application/pgp-signature"; boundary="uL5X8p1WKDqCaRYW"
 Content-Disposition: inline
-In-Reply-To: <CALeDE9PpzBEQBYXMf9VCDWZD76LmEj0X1fq9W-=wjdwNOD1-nA@mail.gmail.com>
+In-Reply-To: <cover.1728539755.git.jan.kiszka@siemens.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,50 +93,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---iDr6J1px1ebE3hDz
+--uL5X8p1WKDqCaRYW
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Oct 19, 2024 at 10:37:38AM +0100, Peter Robinson wrote:
-> On Thu, 17 Oct 2024 at 00:49, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Fixes of unreleased buffer, deadcode and wrong variable type detected
-> > by coverity scan.
-> >
-> > Addresses-Coverity-ID: 510809:  Resource leaks  (RESOURCE_LEAK)
-> > Addresses-Coverity-ID: 510806:  Control flow issues  (DEADCODE)
-> > Addresses-Coverity-ID: 510794 Control flow issues  (NO_EFFECT)
->=20
-> I think it makes sense to reference upstream commits/PRs for these
-> sort of things moving forward, Tom maybe we need a policy around the
-> third party libraries now we have a few more.
+On Thu, Oct 10, 2024 at 07:55:44AM +0200, Jan Kiszka wrote:
 
-We should have a policy about what to do with issues found in external
-libraries (Raymond is going to work with upstream) which is likely just
-formally saying we'll report issues when found and depending on severity
-cherry-pick the fixes once resolved. But these are issues in our glue
-code, rather than upstream.
+> This series depends on:
+> https://patchwork.ozlabs.org/project/uboot/patch/a54b501a-9a98-426c-a5ca-=
+faf547411a30@siemens.com/
+>=20
+> This adds support for the new IOT2050 SM variant, introduces a sysinfo
+> driver which also permits SMBIOS support and switches the board to
+> OF_UPSTREAM. There are some further fixes for the boards included as well.
+>=20
+> Not yet included is configuration support for DMA isolation via the PVU as
+> this depends on not yet merged DT bindings and another overlay.
+>=20
+> Not a merge-dependency but still needed to restore full support for the
+> IOT2050:
+> https://patchwork.ozlabs.org/project/uboot/patch/6c201a24-422a-41f7-846c-=
+1ad5b0ebc7e2@siemens.com/
+
+This currently fails to build on iot2050 on master, can you please
+rebase and re-run CI? Thanks.
 
 --=20
 Tom
 
---iDr6J1px1ebE3hDz
+--uL5X8p1WKDqCaRYW
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcTv04ACgkQFHw5/5Y0
-tyyNDAv+K4c5yZX2nRAOhC70y1r4BgfWSyOtKcmLLnhyHxHsEijb1RFqw86gR9RZ
-fH67OrTrypqpFMhRATGHN1miaSwcGwQRGxmoRAc8oARYGJE7yx1OETfBvGdkCFcL
-k5eXfHyyBQIz3L98YCJlnck55n6x9RCtnQVlwOMziPHDEvUtAfWAxo+XPjFsRm99
-B+gVJ7qT7E1UDDOzWW+hMiyWhVc7V/MpALQayDipyHniHsKqAuEVXlYMC85f858/
-58iwtr5CgpTxJjrNdGvL73npUS8x9bVw7oPIarszozBBmFcMzgROQJlDe9qkxtXx
-Kas3ED+xezh9Fva4AzoOLKl+IaVx/D5XdstPGka+WC1TreWC8BRSCruLJ+Ra9Fxn
-rJc7gpVd+W/XzSWK6CMnVos+7IAyQuxjlQMH7ldayhaSXft0pDgadBPMhkpbABf8
-122EJPiZyFP2ur6H54c4b9TEX/GECNU/rbACbd3b7uTClae+fXFnWgbLUe+3ekI0
-+NpC4rZt
-=p10A
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcTv1cACgkQFHw5/5Y0
+tyyS+wv+OKpWa40Rt1FqPUlDCupWYbKFcFcYGxu+bmPQa94QkDb1t99ipvtcqWKu
+aoZVhpq88PQMv6ETAhWoGDyFBtIt397WyL2bkOg/puc0hSN7Le2FLhPc2dSO1hR5
+13434NmkS4YWtnzsrc9ucuk6fsNEcY5fa0eeunbqsZXEM1/JZM/lCaj+GS6nMimX
+Q5SWLrY0pz4ermyDSnTL9PjLTT0Oy0Oj5Oxa385uMBrhSyVS6nd79hAG21CptcQX
+JNGZXdz5SXu6K12uI/euApEP/crwyOS/xT25Giv/arEZD7tbHfWmKhU2p2TqL6Xo
+T0Us9tDPM1VFkuFM7LuSX8M71zoFX0KsOrGIbHp8rvFpEzyNhwMwSWkzwVwar16v
++N+ZxtwZF3QhYaQnRO1AJklzrb9+G96YLmA11OmOjp2bLyx8IFRGMQpWwFg8PJE7
+5sHrhsRtLwVOkQSrFXH+sp5p6/EiIhnYAF1Jh1eg2vL3eoOAfAnv0bUHTGhngOvX
++jiAfJMw
+=ImK1
 -----END PGP SIGNATURE-----
 
---iDr6J1px1ebE3hDz--
+--uL5X8p1WKDqCaRYW--
