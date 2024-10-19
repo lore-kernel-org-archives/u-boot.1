@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03725D3C919
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 15:27:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9960CD3C91A
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 15:27:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08B22892FA;
+	by phobos.denx.de (Postfix) with ESMTP id 72CE289334;
 	Sat, 19 Oct 2024 17:23:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Eb8mNPAI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SoaAeZLf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E58FD8932C; Sat, 19 Oct 2024 17:23:09 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id EC88C89324; Sat, 19 Oct 2024 17:23:09 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDF0A8932E
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 17:23:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F3D88933A
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 17:23:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-83ab6cbd8b1so97104739f.1
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 08:23:04 -0700 (PDT)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-83aad99d6bfso118464539f.0
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 08:23:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729351378; x=1729956178; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729351384; x=1729956184; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=v6qy0ZPJ1yxTPk4w2vvSNIi9Evzc3FPsb9bKgXonLtA=;
- b=Eb8mNPAIzCpaa8KXJzpq+G4RYhzel/RjMiPSCOn/haiS82bxTDp5L7aL3nxPjV3Eb6
- gpdGQrGTzHEEzCgzJ8zffmFm53a+sEFFru8KelBnEW14CTq0HtbuSr9YbsZ9z4XTFK0a
- gCPMp9S/iMovIjZ+rKzIq+u09OeEk666tCu3Y=
+ bh=AOQPy2aBfY49k+YQYWWb+kbIBtNIvSbbnLQfjgMDFBU=;
+ b=SoaAeZLfU+WNaXlB1WKhMYdldxXyyDddkgwXYjLzgO8uNcHDvjTBvkC4PC0K8X+JjS
+ Rlr40M6l8xBQe+97ALPT7UJyDrch3h8h7BBzOndDK8h41L+U4EyW1Sh+NBnV+wlVLJkI
+ clNXYclZMDYokEIriI2M4nFhO9qq+bGiK8oDY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729351378; x=1729956178;
+ d=1e100.net; s=20230601; t=1729351384; x=1729956184;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=v6qy0ZPJ1yxTPk4w2vvSNIi9Evzc3FPsb9bKgXonLtA=;
- b=sAPGDNrXncHdYq52aUPOvO/Wct1R3cCyyeRMssONqm+8025wCFtDWjMe+kmCmxcyuN
- SgPyF49B22rmp2cZd9G0jR8vUY20ESUiYlSXYnHo+JYytkd2BV8RSaNL/wfJLqtcucWr
- Y/KZf5w5uVrCQyKeR5OvUzcU4TK1a2JlbyVMsr8DB3VsccUdvT5kWI4/e1CDUolWq9RC
- ppkF2d/y6gMKj1v59JylQIhVJxgUuTCn4n0SGlgAOPJpEcbROIYUFeP1blElBZSiMu4g
- cKktBHE2FJDuGu6uoLFDzP3dpHUgLG1QGnsVXSbHoT3F3x73hL0+zxfOinNjzc3MeMlS
- icTw==
-X-Gm-Message-State: AOJu0YxqFUnrwEg3b8GRv/gvWehsOjwZ69/WOU2lWtp8/7VJvAA+cs+5
- PWvU0g8AUXijOQV1phrjfIKay9/hqizhVNdldjhtugm0yA8jtARoM77dec+zZjzu56Cl5/R4S+U
+ bh=AOQPy2aBfY49k+YQYWWb+kbIBtNIvSbbnLQfjgMDFBU=;
+ b=aZLY0L69dYHp1k5Q5+PRIOaglgMtXePfW7Z4JCUqE5kdhMoOB0ThKiRMoH3m9YIgNC
+ o1XHWMSjj6msZy/RqhXcAwx3+ompOTnIpsRuEoK/JUW/1zdrMb1xW3PcGssJirESewEO
+ JLi/srVByk05UBeuYguMuwxyYcC+kXNXVwEEhGcypeWzihmRYsyIOQpM6txx77SC6uzF
+ virMQfMbrkdT9Ol+2RGW1XhlclfQauOSTOThH7hH4w7DI1Y+I27LymFROxTeO0bzsejw
+ OXi7s6lrhjYPZmA4AIBVXQtaiS8TVBL/KIl6v0WtHcMJN64xLIeFcmjygP0xk+xgvr8q
+ FlFA==
+X-Gm-Message-State: AOJu0YzDsHMVn3zGQYDsA0sxL87Iqa9xWH01WR/RHjti3UTmAnU86s+O
+ 4AZZGd4wVN3POLy5fYzboYDfUVRHst6XH32q8V5SunuTwkkCioebNuOYMSx0C2IJ+ZMJ55qN1Q0
  =
-X-Google-Smtp-Source: AGHT+IF7nOJhM5biNH80Hon1hwd80AkES4TNNzE+ewWkVkhlU9prliCbujrq63nk1mchwQPww3j4ew==
-X-Received: by 2002:a92:190d:0:b0:3a0:915d:a4a7 with SMTP id
- e9e14a558f8ab-3a3f4050120mr44767985ab.2.1729351378161; 
- Sat, 19 Oct 2024 08:22:58 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEW6w3ugA1U/98MS4mL4Ff6WZBNKtOQEVQJNpgR2bOF7dVnCi90nCtWLmMQqPKg4NNeWv9UNw==
+X-Received: by 2002:a05:6e02:1a0f:b0:3a0:4d1f:519c with SMTP id
+ e9e14a558f8ab-3a3f40508c9mr62631335ab.3.1729351384083; 
+ Sat, 19 Oct 2024 08:23:04 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dc10b83faasm1006111173.52.2024.10.19.08.22.57
+ 8926c6da1cb9f-4dc10b83faasm1006111173.52.2024.10.19.08.23.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 19 Oct 2024 08:22:57 -0700 (PDT)
+ Sat, 19 Oct 2024 08:23:03 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Shantur Rathore <i@shantur.com>
-Subject: [PATCH v2 25/31] bootmeth_efi: Check the filename-allocation in the
- network path
-Date: Sat, 19 Oct 2024 09:22:05 -0600
-Message-Id: <20241019152211.1014896-26-sjg@chromium.org>
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH v2 30/31] bootstd: Update cros bootmeth to record images
+Date: Sat, 19 Oct 2024 09:22:10 -0600
+Message-Id: <20241019152211.1014896-31-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241019152211.1014896-1-sjg@chromium.org>
 References: <20241019152211.1014896-1-sjg@chromium.org>
@@ -94,31 +89,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the filename cannot be set we should give up. Add the missing error
-check.
+Record images loaded by this bootmeth.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v2:
-- Change the tag to bootmeth_efi
+- Update to use a new image-type enum in bootflow.h
 
- boot/bootmeth_efi.c | 2 ++
- 1 file changed, 2 insertions(+)
+ boot/bootmeth_cros.c | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index e8109e19bcb..1ff8788ebeb 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -269,6 +269,8 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 	if (!bootfile_name)
- 		return log_msg_ret("bootfile_name", ret);
- 	bflow->fname = strdup(bootfile_name);
-+	if (!bflow->fname)
-+		return log_msg_ret("fi0", -ENOMEM);
+diff --git a/boot/bootmeth_cros.c b/boot/bootmeth_cros.c
+index 1825293d93d..907e05b1d60 100644
+--- a/boot/bootmeth_cros.c
++++ b/boot/bootmeth_cros.c
+@@ -206,6 +206,7 @@ static int cros_read_buf(struct bootflow *bflow, void *buf, ulong size,
+ {
+ 	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+ 	ulong base, setup, cmdline, kern_base;
++	struct bootflow_img img;
+ 	ulong num_blks;
+ 	int ret;
  
- 	/* do the hideous EFI hack */
- 	efi_set_bootdev("Net", "", bflow->fname, map_sysmem(addr, 0),
+@@ -243,8 +244,27 @@ static int cros_read_buf(struct bootflow *bflow, void *buf, ulong size,
+ 	ret = copy_cmdline(map_sysmem(cmdline, 0), uuid, &bflow->cmdline);
+ 	if (ret)
+ 		return log_msg_ret("cmd", ret);
++
++	img.fname = strdup("setup");
++	if (!img.fname)
++		return log_msg_ret("cri", -ENOMEM);
++	img.type = (enum bootflow_img_t)IH_TYPE_X86_SETUP;
++	img.addr = setup;
++	img.size = 0x3000;
++	if (!alist_add(&bflow->images, img))
++		return log_msg_ret("cri", -ENOMEM);
++
+ 	bflow->x86_setup = map_sysmem(setup, 0);
+ 
++	img.fname = strdup("cmdline");
++	if (!img.fname)
++		return log_msg_ret("cri", -ENOMEM);
++	img.type = BFI_CMDLINE;
++	img.addr = cmdline;
++	img.size = 0x1000;
++	if (!alist_add(&bflow->images, img))
++		return log_msg_ret("cri", -ENOMEM);
++
+ 	return 0;
+ }
+ 
+@@ -263,6 +283,7 @@ static int cros_read_info(struct bootflow *bflow, const char *uuid,
+ 	struct udevice *blk = bflow->blk;
+ 	struct blk_desc *desc = dev_get_uclass_plat(blk);
+ 	ulong offset, size, before_base;
++	struct bootflow_img img;
+ 	void *buf;
+ 	int ret;
+ 
+@@ -306,6 +327,15 @@ static int cros_read_info(struct bootflow *bflow, const char *uuid,
+ 	}
+ 	priv->info_buf = buf;
+ 
++	img.fname = strdup("kernel");
++	if (!img.fname)
++		return log_msg_ret("cri", -ENOMEM);
++	img.type = (enum bootflow_img_t)IH_TYPE_KERNEL;
++	img.addr = 0;
++	img.size = priv->body_size;
++	if (!alist_add(&bflow->images, img))
++		return log_msg_ret("cri", -ENOMEM);
++
+ 	return 0;
+ }
+ 
 -- 
 2.34.1
 
