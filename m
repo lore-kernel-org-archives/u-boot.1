@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A737ED3C91A
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 15:28:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54581D3C919
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 15:28:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E76208924B;
-	Sat, 19 Oct 2024 17:25:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5840A892ED;
+	Sat, 19 Oct 2024 17:25:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YzGx5NRL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RHETDsjR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 316BC892B9; Sat, 19 Oct 2024 17:25:05 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 71BDE892CF; Sat, 19 Oct 2024 17:25:06 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16B3D88F8E
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 17:25:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FFC187D1A
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 17:25:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-83ac05206f6so44641139f.2
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 08:25:03 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-83aba237c03so74010639f.3
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 08:25:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729351502; x=1729956302; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729351503; x=1729956303; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9qlBj8cBvBW8HaBiWf3OnOBMsBLuXqzrYxgYFi1KlxQ=;
- b=YzGx5NRLlzaOHj+p3MRv6XlCE9SW78EPqip3EuJD+7ocZim3g598ikuXf6Vg1eiYLv
- omsZuymEOaw5UyMa2w1lYgkMWNWGnx0dig2iUjEJwLYu4a/wDCYy/SQv01AhGTLzH0C0
- ly0NxMHXOFAFwrjkND1bDT1oeZlXPt+a394GI=
+ bh=+70WcbA74VuPeyhdS56gWVzIo/18Ac3yq2SMvYP8Aho=;
+ b=RHETDsjRwC/VdjhjSDucT/enUQNz/OjSx8HwQU2Uc/f5xRBZnq/1G32Pw3v8nHYDud
+ bK6UF5B5vDiFhVL2dxQiQaVObos9J8FxfJYrBRF1wpfVdsLRrr75Dr0tf9v3hxZ+bEte
+ ZxRKvgst27Kg1yM2RZKWfcN4TMC+QST7IL9MU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729351502; x=1729956302;
+ d=1e100.net; s=20230601; t=1729351503; x=1729956303;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9qlBj8cBvBW8HaBiWf3OnOBMsBLuXqzrYxgYFi1KlxQ=;
- b=fh44LAqfTgf8SoyWtqGKW9nerfDkGDKo2LnOeTjpmgnRacePXcFhXOVBnXm/oXxaov
- qIxK6LxgAWsJ1Fl1TSWVYFqhAi8M/wBgfjJQgx/8iuL8OPVWloZruxIKl51ljQ25qEuh
- 3Z7kVUwmD3EuD/ILqOyY66lsHdgn5RdTdKztwGFCmTJtMywkCTCqfDUAAJzd+0nFtklB
- Ed9wEecTCIZe6jwvSp7b0iUhQ4T/U6KxNXH8Wo1cZX323vWtQtWXju9NMbvAU1M0lZYr
- F/XslMevbUqjsEyn9JnBSGCh7Y3Czj7WGoLC8hhOrH9cNxRgS5rIOdMTuOsJ6VYbQcYU
- xSaw==
-X-Gm-Message-State: AOJu0YzaUrjDYqrEuv5H/JH1NMIam6qGoxkkTxSYahZCMkfeSJbhiphj
- 9AY0tYalZ4eERhWhLEqYZW+m4mhCQu7u7KmsQoQEqPGd6pFWJM3jvT4sIyl7q4Z0NQBXiwNgdsI
+ bh=+70WcbA74VuPeyhdS56gWVzIo/18Ac3yq2SMvYP8Aho=;
+ b=jR9fvfwD93CsD0gns1Xic8NfUBlx0uf620OHTYxAIc5QZ1N9yc51f9WBSy67Jhec9t
+ qpZwGuzVmJ1yq7K2E9PUpqcznS7yE0uwb92h+2JnmenxVa3B42+X/gYHVO1/q5mDgpl2
+ QWt8pW0a/J6xFCN2vRzCq2Kk6qJAkjYJ8krJFyNXUNlaW+nVOkn9EBVYyimCsQlHbXrw
+ a6WUiRahTZeU9FT5xywbCdMSGwHjkyx2coT+ee4DIr7fUEs/QeAWU2USXYgX9bRfedpl
+ hlbV0E1GmLang6xYACpBjFktK/jnbMiXQI+Ef9JFnQL+hrnWHXsFJhctEIUjLYbFIgKR
+ twGQ==
+X-Gm-Message-State: AOJu0YxCdKDOId9/gPYY8gTAI9YDcKxZQVwzW8Pux1agdURCWviuoMb8
+ pvmehodp/w+GTmP7ndI0AIhBg/O/AsMlXtptEcC4HR9lG+eKQ5lxSDW1zpP1QgggACUw68jxSQ8
  =
-X-Google-Smtp-Source: AGHT+IEubYRkSHgrPQ5B4H+3hBLuSWQki42ahv1X2SWQM3gacNY/li4/vNRS4IRPK1x8PRtvqbHVIQ==
-X-Received: by 2002:a05:6602:158f:b0:83a:b71f:1b16 with SMTP id
- ca18e2360f4ac-83aba66a877mr586984039f.13.1729351501653; 
- Sat, 19 Oct 2024 08:25:01 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGd8fUuFbPREy081MFWyuXaRM3QabAaciR7NvTOGfRSBp99LfzK5gaq2wJzNWyqqAc3RzhIpg==
+X-Received: by 2002:a05:6602:6c10:b0:83a:b52b:5cb5 with SMTP id
+ ca18e2360f4ac-83aba5c8b84mr756155339f.5.1729351502891; 
+ Sat, 19 Oct 2024 08:25:02 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dc10b5ada8sm1036833173.23.2024.10.19.08.25.00
+ 8926c6da1cb9f-4dc10b5ada8sm1036833173.23.2024.10.19.08.25.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 19 Oct 2024 08:25:01 -0700 (PDT)
+ Sat, 19 Oct 2024 08:25:02 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: [PATCH v7 1/7] test: boot: Update bootflow_iter() for console checking
-Date: Sat, 19 Oct 2024 09:24:28 -0600
-Message-Id: <20241019152434.1017394-2-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v7 2/7] Revert "efi_loader: correctly identify binary name"
+Date: Sat, 19 Oct 2024 09:24:29 -0600
+Message-Id: <20241019152434.1017394-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241019152434.1017394-1-sjg@chromium.org>
 References: <20241019152434.1017394-1-sjg@chromium.org>
@@ -92,30 +90,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This test checks console output so should have the UTF_CONSOLE flag. Add
-it.
+This patch was applied without sandbox review. It has changed how
+sandbox works and the original author has not been willing to
+discuss alternatives.
+
+This reverts commit 3a0654ecd0d6a39406e6fe91f7a40ce589594ae9.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v7:
+- Add a revert of the un-reviewed patch, instead of just changing it
 
- test/boot/bootflow.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/efi_default_filename.h | 41 +++++++++++++---------------------
+ 1 file changed, 15 insertions(+), 26 deletions(-)
 
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 154dea70a59..cc894e804a4 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -370,7 +370,7 @@ static int bootflow_iter(struct unit_test_state *uts)
+diff --git a/include/efi_default_filename.h b/include/efi_default_filename.h
+index 77932984b55..13b9de8754a 100644
+--- a/include/efi_default_filename.h
++++ b/include/efi_default_filename.h
+@@ -5,7 +5,6 @@
+  * file name is defined in this include.
+  *
+  * Copyright (c) 2022, Heinrich Schuchardt <xypron.glpk@gmx.de>
+- * Copyright (c) 2022, Linaro Limited
+  */
  
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_iter, UTF_DM | UTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_iter, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ #ifndef _EFI_DEFAULT_FILENAME_H
+@@ -15,42 +14,32 @@
  
- #if defined(CONFIG_SANDBOX) && defined(CONFIG_BOOTMETH_GLOBAL)
- /* Check using the system bootdev */
+ #undef BOOTEFI_NAME
+ 
+-#ifdef CONFIG_SANDBOX
+-
+ #if HOST_ARCH == HOST_ARCH_X86_64
+ #define BOOTEFI_NAME "BOOTX64.EFI"
+-#elif HOST_ARCH == HOST_ARCH_X86
+-#define BOOTEFI_NAME "BOOTIA32.EFI"
+-#elif HOST_ARCH == HOST_ARCH_AARCH64
+-#define BOOTEFI_NAME "BOOTAA64.EFI"
+-#elif HOST_ARCH == HOST_ARCH_ARM
+-#define BOOTEFI_NAME "BOOTARM.EFI"
+-#elif HOST_ARCH == HOST_ARCH_RISCV32
+-#define BOOTEFI_NAME "BOOTRISCV32.EFI"
+-#elif HOST_ARCH == HOST_ARCH_RISCV64
+-#define BOOTEFI_NAME "BOOTRISCV64.EFI"
+-#else
+-#error Unsupported UEFI architecture
+ #endif
+ 
+-#else
++#if HOST_ARCH == HOST_ARCH_X86
++#define BOOTEFI_NAME "BOOTIA32.EFI"
++#endif
+ 
+-#if defined(CONFIG_ARM64)
++#if HOST_ARCH == HOST_ARCH_AARCH64
+ #define BOOTEFI_NAME "BOOTAA64.EFI"
+-#elif defined(CONFIG_ARM)
++#endif
++
++#if HOST_ARCH == HOST_ARCH_ARM
+ #define BOOTEFI_NAME "BOOTARM.EFI"
+-#elif defined(CONFIG_X86_64)
+-#define BOOTEFI_NAME "BOOTX64.EFI"
+-#elif defined(CONFIG_X86)
+-#define BOOTEFI_NAME "BOOTIA32.EFI"
+-#elif defined(CONFIG_ARCH_RV32I)
++#endif
++
++#if HOST_ARCH == HOST_ARCH_RISCV32
+ #define BOOTEFI_NAME "BOOTRISCV32.EFI"
+-#elif defined(CONFIG_ARCH_RV64I)
++#endif
++
++#if HOST_ARCH == HOST_ARCH_RISCV64
+ #define BOOTEFI_NAME "BOOTRISCV64.EFI"
+-#else
+-#error Unsupported UEFI architecture
+ #endif
+ 
++#ifndef BOOTEFI_NAME
++#error Unsupported UEFI architecture
+ #endif
+ 
+ #endif
 -- 
 2.34.1
 
