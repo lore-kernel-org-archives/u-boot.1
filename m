@@ -4,55 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2E11D3C902
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 09:04:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8679AD3C902
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 09:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 699A288DD0;
-	Sat, 19 Oct 2024 11:04:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C0B2088C60;
+	Sat, 19 Oct 2024 11:37:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="dRgr+yXe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VBwg3WLZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E7FE88E81; Sat, 19 Oct 2024 11:04:04 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2AF3388D13; Sat, 19 Oct 2024 11:37:53 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AB0488B23
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 11:04:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AD4E88B16
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 11:37:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-105-156.46.114.pool.telefonica.de
- [46.114.105.156])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 8FFBD3F0AB; 
- Sat, 19 Oct 2024 09:04:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1729328641;
- bh=FDd3UxAXjcJNec0PfANkS81WIn1U3Z9KnQPJ/CbWcBE=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=dRgr+yXex+FtIDRWU3ujnSToHtWPOCrR/JpOTv3dkvwLGTAMXoQ5r8rW++6iAKN2B
- YTWHqLe+OOhnxSd/nSFzIIX4vPbEuPcDeTA0HnOok2DdIgBrrG7lVyOKYD9q/ykD6X
- 76FZD65HjHQIsW9udL2ZGShyGXoN7xwwpt4NiuGwSq3ZzAMwUelIjS4H6fWzf6LVEa
- dqXEWjBhNRYpKuq/9XiSxs0HP+CN6nWcEE4FEe1B4ViFAH1sB49Jk9n0sPz62ou64T
- BJMkkDZA1B8DMqoa8GUKOwika1DYwno5EhKgc0tJjT/wkOZD+F5qCLKdOk5/+k9TJ8
- 2GUlU91mXhgrg==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_selftest: make HII test data static
-Date: Sat, 19 Oct 2024 11:03:56 +0200
-Message-ID: <20241019090356.25288-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5c948c41edeso3139800a12.1
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 02:37:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1729330670; x=1729935470; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=AxbATNa15mfHMYFqo4CYvV5nbxF1d15L/r6xe6R55ug=;
+ b=VBwg3WLZWZgY2cSkXphCOSkJj+e95g3WsFT0HNQRgI3ZuPSAWrrGPMVjcvBhmxI9Zh
+ I1WfDYjA0hvdR03YBUT9KZQEZvrZGIQSUFlmQCRtQKIUhzddUIVg+4AQx+YdYBfmLNDZ
+ bM88YnvW8o4MM3TLiuanKjhoxHKvn0BX6IRBRfGdH0+TmfWLuBPXGSTCBAQTiv1HWZvn
+ DrXGOnEsriDn6SJpY0E25hN+PpbLAmwvIX6bIMkg/GyLBzEm46WlI+vEE4EtYRZgwojF
+ lMU/y/S6Jk7YKQsPUeqtXSzn3ez95ArZkS2VMit7nVKvdXeAg8SPAZjl38JoOk3waO5R
+ DZXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729330670; x=1729935470;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AxbATNa15mfHMYFqo4CYvV5nbxF1d15L/r6xe6R55ug=;
+ b=ZxkruxiK13CWOp8pEWojTRTTbUP51xW7YtwWcYDhKcsx6MnE6ZYPgtpzXe7ZxC7ERl
+ mdc4+Fym18OMsjL6yge6qRJWcncDjIUMepV7Nf+/TG8wMEuXnXRzkNOuJJpsnZ1P9bRQ
+ ogypDIA+R7mS0s8aGZ5LP/Ycvm0LTYIFnZpSGq2nDhCUGmHy8BbkGhLS3lHony69RqCx
+ lxXIJttoyIa7c+pPiOyV7rMfIV8RSTVCDLie59knpIVvjWlAPS/PL2pIwjRwMPAvxPBy
+ OhL7d3izNkwNNqy4rrt10N+Pyn7e33dsb9KmStiG6qTDaORZuHsRbgRVHWJai1AcRjY4
+ FBKQ==
+X-Gm-Message-State: AOJu0YyGf/qrWLNXOfkcK2fX3FHzxqzSjmHf+fwYk8hr4Aur9e74g3Cv
+ DDHbnw11q4QrrJHeowKM8UUec+PxGL+tiADZlm5BPeW0Z2hgbpafkIfi0ra0WYBxtXlAx3zEICw
+ 1tRq9YvFN1H7cG6aEkzAEMKhVDOUoYQ==
+X-Google-Smtp-Source: AGHT+IE50b/CLptow+Xjy40TwpDq681+4Bld1PhBmoM/3uKe0T2wy4kH6+MydIZJVNbTIePihD8jHZj6gyp5V2cTrY8=
+X-Received: by 2002:a05:6402:1e93:b0:5ca:da2:b2ca with SMTP id
+ 4fb4d7f45d1cf-5ca0da2b46emr2812572a12.19.1729330670306; Sat, 19 Oct 2024
+ 02:37:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241016234829.3836359-1-raymond.mao@linaro.org>
+In-Reply-To: <20241016234829.3836359-1-raymond.mao@linaro.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sat, 19 Oct 2024 10:37:38 +0100
+Message-ID: <CALeDE9PpzBEQBYXMf9VCDWZD76LmEj0X1fq9W-=wjdwNOD1-nA@mail.gmail.com>
+Subject: Re: [PATCH] mbedtls: fix defects in coverity scan
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,71 +85,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Variables that are only used locally in a module should not be exported.
+On Thu, 17 Oct 2024 at 00:49, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Fixes of unreleased buffer, deadcode and wrong variable type detected
+> by coverity scan.
+>
+> Addresses-Coverity-ID: 510809:  Resource leaks  (RESOURCE_LEAK)
+> Addresses-Coverity-ID: 510806:  Control flow issues  (DEADCODE)
+> Addresses-Coverity-ID: 510794 Control flow issues  (NO_EFFECT)
 
-* Make the HII test data variables static.
-* Remove unused GUIDs.
+I think it makes sense to reference upstream commits/PRs for these
+sort of things moving forward, Tom maybe we need a policy around the
+third party libraries now we have a few more.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_selftest/efi_selftest_hii_data.c | 28 ++++--------------------
- 1 file changed, 4 insertions(+), 24 deletions(-)
+Peter
 
-diff --git a/lib/efi_selftest/efi_selftest_hii_data.c b/lib/efi_selftest/efi_selftest_hii_data.c
-index d19f0682afd..5fc890112b4 100644
---- a/lib/efi_selftest/efi_selftest_hii_data.c
-+++ b/lib/efi_selftest/efi_selftest_hii_data.c
-@@ -39,7 +39,7 @@
- /* HII keyboard layout */
- #define EFI_NULL_MODIFIER		0x0000
- 
--u8 packagelist1[] = {
-+static u8 packagelist1[] = {
- 	// EFI_HII_PACKAGE_LIST_HEADER, length = 20
- 	// SimpleFont, Font, GUID, Form, String, Image, DevicePath,
- 	// (74)        (110) 20    (8)   78      (67)   (8)
-@@ -262,7 +262,7 @@ u8 packagelist1[] = {
- 	EFI_HII_PACKAGE_END
- };
- 
--u8 packagelist2[] = {
-+static u8 packagelist2[] = {
- 	// EFI_HII_PACKAGE_LIST_HEADER, length = 20
- 	// SimpleFont, Font, GUID, KeyboardLayout, Form, End
- 	// (74)        (122) 20    192             (8)   4
-@@ -424,30 +424,10 @@ u8 packagelist2[] = {
- 	EFI_HII_PACKAGE_END			// 1
- };
- 
--efi_guid_t packagelist_guid1 =
--	EFI_GUID(0x03abcd89, 0x03f4, 0x7044,
--		 0x81, 0xde, 0x99, 0xb1, 0x81, 0x20, 0xf7, 0x68);
--
--efi_guid_t packagelist_guid2 =
--	EFI_GUID(0x8685ded3, 0x1bce, 0x43f3,
--		 0xa2, 0x0c, 0xa3, 0x06, 0xec, 0x69, 0x72, 0xdd);
--
--efi_guid_t kb_layout_guid11 =
-+static efi_guid_t kb_layout_guid11 =
- 	EFI_GUID(0x8d40e495, 0xe2aa, 0x4c6f,
- 		 0x89, 0x70, 0x68, 0x85, 0x09, 0xee, 0xc7, 0xd2);
- 
--efi_guid_t kb_layout_guid12 =
--	EFI_GUID(0x2ae60b3e, 0xb9d6, 0x49d8,
--		 0x9a, 0x16, 0xc2, 0x48, 0xf1, 0xeb, 0xa8, 0xdb);
--
--efi_guid_t kb_layout_guid21 =
--	EFI_GUID(0xe0f56a1f, 0xdf6b, 0x4a7e,
--		 0xa3, 0x9a, 0xe7, 0xa5, 0x19, 0x15, 0x45, 0xd6);
--
--efi_guid_t kb_layout_guid22 =
--	EFI_GUID(0x47be6ac9, 0x54cc, 0x46f9,
--		 0xa2, 0x62, 0xd5, 0x3b, 0x25, 0x6a, 0x0c, 0x34);
--
--efi_guid_t package_guid =
-+static efi_guid_t package_guid =
- 	EFI_GUID(0x0387c95a, 0xd703, 0x2346,
- 		 0xb2, 0xab, 0xd0, 0xc7, 0xdd, 0x90, 0x44, 0xf8);
--- 
-2.45.2
-
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+>  lib/mbedtls/pkcs7_parser.c     | 7 +++----
+>  lib/mbedtls/x509_cert_parser.c | 2 +-
+>  2 files changed, 4 insertions(+), 5 deletions(-)
+>
+> diff --git a/lib/mbedtls/pkcs7_parser.c b/lib/mbedtls/pkcs7_parser.c
+> index 69ca784858e..ecfcc46edfa 100644
+> --- a/lib/mbedtls/pkcs7_parser.c
+> +++ b/lib/mbedtls/pkcs7_parser.c
+> @@ -206,9 +206,6 @@ static int authattrs_parse(struct pkcs7_message *msg, void *aa, size_t aa_len,
+>                 p += seq_len;
+>         }
+>
+> -       if (ret && ret !=  MBEDTLS_ERR_ASN1_OUT_OF_DATA)
+> -               return ret;
+> -
+>         msg->have_authattrs = true;
+>
+>         /*
+> @@ -361,8 +358,10 @@ static int x509_populate_sinfo(struct pkcs7_message *msg,
+>         signed_info->sig = s;
+>
+>         /* Save the Authenticate Attributes data if exists */
+> -       if (!mb_sinfo->authattrs.data || !mb_sinfo->authattrs.data_len)
+> +       if (!mb_sinfo->authattrs.data || !mb_sinfo->authattrs.data_len) {
+> +               kfree(mctx);
+>                 goto no_authattrs;
+> +       }
+>
+>         mctx->authattrs_data = kmemdup(mb_sinfo->authattrs.data,
+>                                        mb_sinfo->authattrs.data_len,
+> diff --git a/lib/mbedtls/x509_cert_parser.c b/lib/mbedtls/x509_cert_parser.c
+> index cb42018695c..e163e16b9bc 100644
+> --- a/lib/mbedtls/x509_cert_parser.c
+> +++ b/lib/mbedtls/x509_cert_parser.c
+> @@ -66,7 +66,7 @@ time64_t x509_get_timestamp(const mbedtls_x509_time *x509_time)
+>  static char *x509_populate_dn_name_string(const mbedtls_x509_name *name)
+>  {
+>         size_t len = 256;
+> -       size_t wb;
+> +       int wb;
+>         char *name_str;
+>
+>         do {
+> --
+> 2.25.1
+>
