@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6415BD3C919
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 15:24:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A66AD3C919
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 15:24:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E746892F2;
-	Sat, 19 Oct 2024 17:22:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 84222892E8;
+	Sat, 19 Oct 2024 17:22:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EIaXadFh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JiolOPdp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 391C989072; Sat, 19 Oct 2024 17:22:46 +0200 (CEST)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id 55FF9892A5; Sat, 19 Oct 2024 17:22:47 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12458892D2
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 17:22:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AC6188F92
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 17:22:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-3a3b2499c65so10863545ab.0
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 08:22:44 -0700 (PDT)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-83abcfb9fd4so60331539f.3
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 08:22:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729351362; x=1729956162; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729351364; x=1729956164; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AhTQOtvm301+Eq8gC9Qaq9sNKX0ovdkGQOkVlkkPoDc=;
- b=EIaXadFh3pCZ207lSm4c+jCHO2gUCWEfIlLbDCBb+VE5rg8S1G5ED7OGqgFzlQKzag
- hIkt2bi/dSkrNAUfUjVJtnlC/7zCdwBlhxIhcYqdtNAPiJ8RedC5QaQZj27GsN8Dtve7
- /YtDgcJk9nDHD30FqQYV0jM4U8BqVZkZfnjE0=
+ bh=Wm4E9xlZw9x6n5A9J58U+VgJ1bv+Wqol7oUbwpKYvJg=;
+ b=JiolOPdphBsrX53qxCaEY/XZny6oUtyoWT1+OlUH86orTCZ6Z8wDAsx345ILENvdL2
+ wiTjw4fp2FIXc4A956zHL74DMlVbsgKHLbyT+SzQU40Iblxle638LOQTK7TWm1XeilP7
+ uXNM33MuZ8qRVa5PQqWaO0yykF+j5jnJW8I2Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729351362; x=1729956162;
+ d=1e100.net; s=20230601; t=1729351364; x=1729956164;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AhTQOtvm301+Eq8gC9Qaq9sNKX0ovdkGQOkVlkkPoDc=;
- b=i1b4mEkvjOIbbl9Fs//DopFjLw8ffdCVlugRruVnTASeeq2+KRTKCMeeZHtLcB67cq
- kcSJ+CVa1XRMjiYt4fcDfB1gYCNDK+bpBWu1JWr4qpzZjBxP0VvrmX+WY/pxG9EKhiMe
- TI+ETVx20TWv2yBbLm7VwwXSLfnQNAEHzNkZY99sKt99V5+iEJDj8yHirXYgVd5E83+S
- Vl+tMDg8VfFR934px2w7s9HGJpBrTWhCNR0HraqFYY5WPUWRDLKLseh0iRZu8UycOlWs
- fTMT4II4F90pRgizB97Nx8GbTgo2A5l7WRl9MMJSbb5ecksmGUU0ZWS+LNlQqXSZs3pN
- lqLg==
-X-Gm-Message-State: AOJu0YwUbfgn5buA54AZan1CDn3Rg+nRNdbROp3pYCGTfn5CLRdEBqs2
- RE8tn4U5Tx1jY/u48u/2POM02AS7SjTwInT5SLB0+EU1eguKcei0NN4fubgy42sE/RoKZHeidk0
+ bh=Wm4E9xlZw9x6n5A9J58U+VgJ1bv+Wqol7oUbwpKYvJg=;
+ b=RSK/BQVfWA+u2ACV2eJiBhaffwYDXGDu2yG93HTyLHGAvjNTzmZjrqubrTTpOmlDql
+ ENqRXTcTYfEcdjNMO1M5dxVE+f689ycoQ/4pU5PJV3G+uAUBRj4o7nfAAps8Sy098UDo
+ 6zwFEiAF2We6M17FBtRD7WuN7pPuPfErPuHW9grYPhFseOaFvcfuwCs8BPPCCq2Jf63u
+ JEBMA+CpbKO39DEj09Uo5Djppoz54bc2l1iGDKAyiU/osqJAvZmFLneWXHeOrwbNVvfN
+ ZyXEPKu8V4Ud0m+rUmMqtEXCiDbSHhSIMTQ8v1tOLD26k6KCeN6+nBrgcUe9bQ5MLZxz
+ 1h8A==
+X-Gm-Message-State: AOJu0Yxm/A0L0sXqjnqm13cW24KVxbKvpMy+CUXi/ciPXWEz/9zuq0w5
+ qbx4pjVvZs//dhYfwxZ21r/H1z8oowRByDXvUeSQ3ZP6fejyWxY7ehsdCQ4YQLSEv6LlPnNJ7J4
  =
-X-Google-Smtp-Source: AGHT+IEZF/Hlf/6LBniIvmT/cvOkUWxdTDav6HRom3faYz5BVwzSJDSxYCurtEFhaA+l0Q52NMS7yg==
-X-Received: by 2002:a05:6e02:1fce:b0:3a2:5b:7065 with SMTP id
- e9e14a558f8ab-3a3f40a84b5mr54628765ab.18.1729351362563; 
- Sat, 19 Oct 2024 08:22:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGSm/YYXMSsUrabauZ3h6JORoPlfMcXDsBA1qaqc9sS2bWuLgx7d1fD6nq3Rdi6dRCS8CIegw==
+X-Received: by 2002:a05:6e02:12e7:b0:3a3:67b1:3080 with SMTP id
+ e9e14a558f8ab-3a3f405b8f0mr57020785ab.7.1729351363761; 
+ Sat, 19 Oct 2024 08:22:43 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dc10b83faasm1006111173.52.2024.10.19.08.22.41
+ 8926c6da1cb9f-4dc10b83faasm1006111173.52.2024.10.19.08.22.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 19 Oct 2024 08:22:42 -0700 (PDT)
+ Sat, 19 Oct 2024 08:22:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Dragan Simic <dsimic@manjaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nam Cao <namcao@linutronix.de>, Peter Robinson <pbrobinson@gmail.com>,
- =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH v2 12/31] bootstd: Move bootflow-clearing to bootstd
-Date: Sat, 19 Oct 2024 09:21:52 -0600
-Message-Id: <20241019152211.1014896-13-sjg@chromium.org>
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: [PATCH v2 13/31] bootstd: Add a function to get bootstd only if
+ available
+Date: Sat, 19 Oct 2024 09:21:53 -0600
+Message-Id: <20241019152211.1014896-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241019152211.1014896-1-sjg@chromium.org>
 References: <20241019152211.1014896-1-sjg@chromium.org>
@@ -95,137 +91,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This relates to more than just the bootdev, since there is a global list
-of bootflows. Move the function to the bootstd file and rename it.
+Provide a function which is safe to call in the 'unbind' path, which
+returns the bootstd priv data if available.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootdev-uclass.c | 19 +++++--------------
- boot/bootstd-uclass.c | 15 +++++++++++++++
- cmd/bootflow.c        |  2 +-
- include/bootdev.h     | 10 ----------
- include/bootstd.h     | 10 ++++++++++
- 5 files changed, 31 insertions(+), 25 deletions(-)
+ boot/bootstd-uclass.c | 11 +++++++++++
+ include/bootstd.h     | 17 +++++++++++++++++
+ 2 files changed, 28 insertions(+)
 
-diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-index eddbf60600c..26b003427ec 100644
---- a/boot/bootdev-uclass.c
-+++ b/boot/bootdev-uclass.c
-@@ -557,19 +557,6 @@ int bootdev_get_bootflow(struct udevice *dev, struct bootflow_iter *iter,
- 	return ops->get_bootflow(dev, iter, bflow);
- }
- 
--void bootdev_clear_bootflows(struct udevice *dev)
--{
--	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
--
--	while (!list_empty(&ucp->bootflow_head)) {
--		struct bootflow *bflow;
--
--		bflow = list_first_entry(&ucp->bootflow_head, struct bootflow,
--					 bm_node);
--		bootflow_remove(bflow);
--	}
--}
--
- int bootdev_next_label(struct bootflow_iter *iter, struct udevice **devp,
- 		       int *method_flagsp)
- {
-@@ -935,7 +922,11 @@ static int bootdev_post_bind(struct udevice *dev)
- 
- static int bootdev_pre_unbind(struct udevice *dev)
- {
--	bootdev_clear_bootflows(dev);
-+	int ret;
-+
-+	ret = bootstd_clear_bootflows_for_bootdev(dev);
-+	if (ret)
-+		return log_msg_ret("bun", ret);
- 
- 	return 0;
- }
 diff --git a/boot/bootstd-uclass.c b/boot/bootstd-uclass.c
-index bf6e49ad97a..596d3e5e41d 100644
+index 596d3e5e41d..b2f80808c85 100644
 --- a/boot/bootstd-uclass.c
 +++ b/boot/bootstd-uclass.c
-@@ -86,6 +86,21 @@ int bootstd_add_bootflow(struct bootflow *bflow)
- 	return 0;
+@@ -140,6 +140,17 @@ const char *const *const bootstd_get_prefixes(struct udevice *dev)
+ 	return std->prefixes ? std->prefixes : default_prefixes;
  }
  
-+int bootstd_clear_bootflows_for_bootdev(struct udevice *dev)
++struct bootstd_priv *bootstd_try_priv(void)
 +{
-+	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
++	struct udevice *dev;
 +
-+	while (!list_empty(&ucp->bootflow_head)) {
-+		struct bootflow *bflow;
++	dev = uclass_try_first_device(UCLASS_BOOTSTD);
++	if (!dev || !device_active(dev))
++		return NULL;
 +
-+		bflow = list_first_entry(&ucp->bootflow_head, struct bootflow,
-+					 bm_node);
-+		bootflow_remove(bflow);
-+	}
-+
-+	return 0;
++	return dev_get_priv(dev);
 +}
 +
- static int bootstd_remove(struct udevice *dev)
+ int bootstd_get_priv(struct bootstd_priv **stdp)
  {
- 	struct bootstd_priv *priv = dev_get_priv(dev);
-diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-index ff06ac3eb9f..5f656814b29 100644
---- a/cmd/bootflow.c
-+++ b/cmd/bootflow.c
-@@ -197,7 +197,7 @@ static int do_bootflow_scan(struct cmd_tbl *cmdtp, int flag, int argc,
- 		show_header();
- 	}
- 	if (dev)
--		bootdev_clear_bootflows(dev);
-+		bootstd_clear_bootflows_for_bootdev(dev);
- 	else
- 		bootstd_clear_glob();
- 	for (i = 0,
-diff --git a/include/bootdev.h b/include/bootdev.h
-index 8db198dd56b..f9cae2fd1fd 100644
---- a/include/bootdev.h
-+++ b/include/bootdev.h
-@@ -185,16 +185,6 @@ int bootdev_find_in_blk(struct udevice *dev, struct udevice *blk,
-  */
- void bootdev_list(bool probe);
- 
--/**
-- * bootdev_clear_bootflows() - Clear bootflows from a bootdev
-- *
-- * Each bootdev maintains a list of discovered bootflows. This provides a
-- * way to clear it. These bootflows are removed from the global list too.
-- *
-- * @dev: bootdev device to update
-- */
--void bootdev_clear_bootflows(struct udevice *dev);
--
- /**
-  * bootdev_first_bootflow() - Get the first bootflow from a bootdev
-  *
+ 	struct udevice *dev;
 diff --git a/include/bootstd.h b/include/bootstd.h
-index 3fc93a4ec2e..4220ece785d 100644
+index 4220ece785d..4535d91e2ad 100644
 --- a/include/bootstd.h
 +++ b/include/bootstd.h
-@@ -122,4 +122,14 @@ int bootstd_prog_boot(void);
+@@ -89,6 +89,23 @@ const char *const *const bootstd_get_prefixes(struct udevice *dev);
   */
- int bootstd_add_bootflow(struct bootflow *bflow);
+ int bootstd_get_priv(struct bootstd_priv **stdp);
  
 +/**
-+ * bootstd_clear_bootflows_for_bootdev() - Clear bootflows from a bootdev
++ * bootstd_try_priv() - Try to get the (single) state for the bootstd system
 + *
-+ * Each bootdev maintains a list of discovered bootflows. This provides a
-+ * way to clear it. These bootflows are removed from the global list too.
++ * The state holds a global list of all bootflows that have been found. This
++ * function returns the state if available, but takes care not to create the
++ * device (or uclass) if it doesn't exist.
 + *
-+ * @dev: bootdev device to update
++ * This function is safe to use in the 'unbind' path. It will always return NULL
++ * unless the bootstd device is probed and ready, e.g. bootstd_get_priv() has
++ * previously been called.
++ *
++ * TODO(sjg@chromium.org): Consider adding a bootstd pointer to global_data
++ *
++ * Return: pointer if the device exists, else NULL
 + */
-+int bootstd_clear_bootflows_for_bootdev(struct udevice *dev);
++struct bootstd_priv *bootstd_try_priv(void);
 +
- #endif
+ /**
+  * bootstd_clear_glob() - Clear the global list of bootflows
+  *
 -- 
 2.34.1
 
