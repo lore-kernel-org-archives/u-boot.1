@@ -4,78 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32DDFD3C907
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 10:51:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0788D3C906
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 11:00:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A688C892D5;
-	Sat, 19 Oct 2024 12:51:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2D855892CD;
+	Sat, 19 Oct 2024 13:00:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dk1oddxQ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ThlrZdVh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC32A892E4; Sat, 19 Oct 2024 12:51:26 +0200 (CEST)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 14DBA892C8; Sat, 19 Oct 2024 13:00:13 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10CF8892D4
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 12:50:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9D5D892C0
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 13:00:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2f7657f9f62so29719571fa.3
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 03:50:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729335053; x=1729939853; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b62KFGuBfhOwVJtzkMjxbBqmfn2LIcspLB/oNKxGAss=;
- b=dk1oddxQylLOCGgFY5STB/xbxMlWHRvbpLmI9P8JYDRCYxoGh41lFfvr6k68NUm8Ji
- dwBj07YgpuugJIr1TILw1y9hTgLohFcOmkc54MfCVGfIkQaIanNL2EdG/dsrrR3vPNGn
- LkxoWl5NH2ym10y5PnBawCqDhMhgDrIo3EnOIyEWCvTw6naiFXjqEk9D00c6gpiBWbtR
- njoSSyq0KYV962Tp8lgsXGo8+opvMTmPtPw3miacXqQF9mkqI/+z7OsDYqU5s7qlPyil
- RIlJe0J4wpG+jlidQmzeAMBkchvxf3lVqDyp43NmGlm/b5TuxtwzmV1hdP9uu6Ehnier
- I+bw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729335053; x=1729939853;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=b62KFGuBfhOwVJtzkMjxbBqmfn2LIcspLB/oNKxGAss=;
- b=TNLdnmDMopL8/QZl68Dx7l6dlOJplww6N4AUtrkFl+mEmqRTCpk8KAfTWq7LEKUqhN
- dft8rz4vmV+hB56N4Dv9Y8RxXxlWcqa0PI2/lzzw7bpsJWPEu5+NfaBM1I/GtdNTiSAU
- RVzGmhDj/f2NWLmcXI9oNva0hgJPAoeKnnbklbO4hovXGEXAgf5exPqunFx7Hxprrm/R
- SS5U9ZKuRWS/cqu3lTT9wyfNcnELpK+lvH+ymLF4DJ0XiaBuSibAi7MMY9JkmwBNUnDv
- 187Yr/iPPf4aeUpIMrT99CeuwCGyHE+quC1O6uOIR4lV/Ng2/OVkGMRBQYnpW/+MjJ9p
- Bt7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVyrGfYsPznP/d3/GrSf5H5AX8vUiQtyFIZS7jiiwFLSm4S02Cn20BGi3GvlyBGDAboQk5okIo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyf4mJtNMXh+GZ5smZ1zzFNCrqZ/ZUn2vcPZ0R3ewXTHKGBwmlT
- e4bvd/4gAt3vjvPpFj30BhWBjPZKwAm1UOeR0vRIFUFjkXle9bOJbr5Fz5lccdH38KCHOtWo59G
- YlKsLx/lmibt+bb/Z8r6kuPEiETA=
-X-Google-Smtp-Source: AGHT+IE3zx8gt0/iHeRWepFMVTaLNjuhX962CqPMs946b3Q+zscMpf0YkGel/j+r9u2P4Ln/TPYGH7d6tYYe3EZpCsY=
-X-Received: by 2002:a05:651c:504:b0:2ef:17f7:6e1d with SMTP id
- 38308e7fff4ca-2fb82e93013mr29476721fa.4.1729335052893; Sat, 19 Oct 2024
- 03:50:52 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.. (dynamic-046-114-105-156.46.114.pool.telefonica.de
+ [46.114.105.156])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id D04803F19B; 
+ Sat, 19 Oct 2024 11:00:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1729335603;
+ bh=qCgGIOqVX2nmaNTEqh7Y1Z7fMzqnTREPNuposFLjUC4=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=ThlrZdVhf3jpa9C7/27Ur08eLUVfhXBrHuMJn+Ko/sKPW2eSztrpBuDNQu2YgJYNY
+ zHH4bvnkNV0gD+eUMbHEajGCQYQHYSL8NYKQdAQyitAMyV0IWjuTqMwgTbTVYg5G2M
+ gn+jsjO1BY53vUcydp+Lu+oNcAC8dTfkUEs1JqzK8RCrmKIMROcK7Htw4bT//R1k6H
+ QE0rhwpFE7zshWJkomqI7iMPefaIF6KhjzkTEjjz6d5mohcSYH9qSH41atl2ZWdhHi
+ k+qcfLbOK1dUb4y5mOFFTIi6UCeg4nWZjEuQcB3KRhkXOxnuy0meDnDvxVQjFC7uBv
+ vPcKyVA3Z7rRQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_loader: fix CONFIG_EFI_HTTP dependencies
+Date: Sat, 19 Oct 2024 12:59:57 +0200
+Message-ID: <20241019105957.54751-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20241019083109.12113-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241019083109.12113-1-heinrich.schuchardt@canonical.com>
-From: E Shattow <lucent@gmail.com>
-Date: Sat, 19 Oct 2024 03:50:41 -0700
-Message-ID: <CANV2PTMAwFHjLNW_JkXq6ohAZb6=XGnN8B4qrF6AV-AHBwG9wg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] configs: visionfive2: enable CONFIG_CMD_ERASEENV
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Minda Chen <minda.chen@starfivetech.com>, Rick Chen <rick@andestech.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Chanho Park <chanho61.park@samsung.com>, 
- Nam Cao <namcao@linutronix.de>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Aurelien Jarno <aurelien@aurel32.net>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,44 +69,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+CONFIG_CMD_DNS and CONFIG_CMD_WGET depend on CONFIG_CMD_NET.
+CONFIG_CMD_NET depends on CONFIG_NET or CONFIG_NET_LWIP.
 
-On Sat, Oct 19, 2024 at 1:31=E2=80=AFAM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> When moving from vendor U-Boot to the upstream U-Boot it is necessary to
-> reset the environment.
->
-> Provide the 'env erase' sub-command.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  configs/starfive_visionfive2_defconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_vi=
-sionfive2_defconfig
-> index 511645cebef..c3508926d6c 100644
-> --- a/configs/starfive_visionfive2_defconfig
-> +++ b/configs/starfive_visionfive2_defconfig
-> @@ -62,6 +62,7 @@ CONFIG_SPL_DM_RESET=3Dy
->  CONFIG_SPL_SPI_LOAD=3Dy
->  CONFIG_SPL_YMODEM_SUPPORT=3Dy
->  CONFIG_SYS_PROMPT=3D"StarFive # "
-> +CONFIG_CMD_ERASEENV=3Dy
->  CONFIG_CMD_EEPROM=3Dy
->  CONFIG_SYS_EEPROM_SIZE=3D512
->  CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3D4
-> --
-> 2.43.0
->
+We shall only enable CONFIG_EFI_HTTP if there is network support.
+We have to select CONFIG_CMD_NET.
 
-Looks good to me. I would also enable CMD_NVEDIT_LOAD in combination
-with this, for:
+Fixes: d7d07a8b508b ("efi_loader: support boot from URI device path")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/efi_loader/Kconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-env erase; env load; env save
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 69b2c9360d8..066f0ca0da7 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -545,6 +545,8 @@ config EFI_BOOTMGR
+ 
+ config EFI_HTTP_BOOT
+ 	bool "EFI HTTP Boot support"
++	depends on NET || NET_LWIP
++	select CMD_NET
+ 	select CMD_DNS
+ 	select CMD_WGET
+ 	select BLKMAP
+-- 
+2.45.2
 
-...which is easy to follow for users and works consistently to go from
-vendor U-Boot to upstream U-Boot.
-
--E
