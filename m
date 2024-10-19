@@ -4,58 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B99BD3C902
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 10:25:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB291D3C907
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 10:48:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68FB089286;
-	Sat, 19 Oct 2024 12:24:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B0D88929A;
+	Sat, 19 Oct 2024 12:48:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="g++p3t+D";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="BUGTFnhT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3287D8928D; Sat, 19 Oct 2024 12:24:58 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E7638925C
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 12:24:56 +0200 (CEST)
+ id 7E5E5892AA; Sat, 19 Oct 2024 12:48:07 +0200 (CEST)
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
+ by phobos.denx.de (Postfix) with ESMTP id 16A93891A4
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 12:48:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-105-156.46.114.pool.telefonica.de
- [46.114.105.156])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 5880D408CC; 
- Sat, 19 Oct 2024 10:24:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1729333495;
- bh=AKSIe03De5KK91UzbSV/axOlox6v8UNshYt56iSNCrQ=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=g++p3t+Dk5qBS2hA5zrdehLDYk7SLTxA0eZYduPp11uUJX2sJM2PPrhg7j9F1/niY
- rdxM9IsaYoYOxu1Ys+e3PSi4ov01Y3X4J1bPknS8uSNVUNTc5taNMOX0+NDYi1RleN
- HzxNdRpq9c79VBo2BTEBAAUXWpn4I3rD7ucv44CHXy9rJegBZJsAK40hG24Ik2oekI
- ACNgCYDuAsfSNbF/qm8kvSEOEetUKcmFC5VNlTfooBxtbiVdVpSUFwJSoMTW2yDCKY
- +yt+koX+YC8GvVQyiziSxDt7Zgj3Jysu4OPQeOCPkK8rqF19SGeAEIwJkvvSaz/zKi
- jqJ5ca3nkxE/Q==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd: simplify network definitions in Makefile
-Date: Sat, 19 Oct 2024 12:24:45 +0200
-Message-ID: <20241019102445.48624-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:Subject:Date:Message-ID:MIME-Version; bh=UV6HQ
+ vHcahpf1EhNU9beLulGI1CW7rsTRyPJKzJM3FY=; b=BUGTFnhTWfHtILyHctccs
+ T5gb2KhR8jERyN3l9dL+uoXX27bU0WXLDJkLuOqQ9D9w7G1GLExojaw/+I0xCyaP
+ VGNeB6H+Ho/7+RuXfnFerQDlaRz5vIpsYBu65aJUB5tFShy7U4ExUJLINpgjz9Zm
+ 7spQXYwDkeAif7Bh5VLFvg=
+Received: from ProDesk.. (unknown [58.22.7.114])
+ by gzsmtp4 (Coremail) with SMTP id PygvCgB3rSFYjhNnVFBeAg--.30214S2;
+ Sat, 19 Oct 2024 18:47:56 +0800 (CST)
+From: Andy Yan <andyshrk@163.com>
+To: kever.yang@rock-chips.com
+Cc: quentin.schulz@cherry.de, u-boot@lists.denx.de, dsimic@manjaro.org,
+ Andy Yan <andyshrk@163.com>
+Subject: [PATCH v2 0/2] Add support for Cool Pi GenBook
+Date: Sat, 19 Oct 2024 18:47:27 +0800
+Message-ID: <20241019104749.47301-1-andyshrk@163.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: PygvCgB3rSFYjhNnVFBeAg--.30214S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7KF1rGF43uw4DKF15GF43trb_yoW8Ar45pw
+ 4DZr95GFZ7W347trsIq3Z3urWfu3s29Fy5Cw1xXr1UtrWavr1qywsrWF1fta4agFnrtF4k
+ AFs3KF10gr4DXaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pikRhAUUUUU=
+X-Originating-IP: [58.22.7.114]
+X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/xtbB0gF9XmcTenrzUAAAsn
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,38 +64,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-/Makefile already adds lib include paths to UBOOTINCLUDE. There is no point
-in adding the same paths again.
+Support for Cool Pi GenBook is landing Linux 6.12-rc1, so also
+add the support for u-boot here.
 
-Clearly separate the lines relating to NET and to NET_LWIP.
+Changes in v2:
+- Cherry pick it from https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
+- split the dts to a separate commit
+- rename to genbook_cm5_rk3588
+- move readme to doc/board, and write as reStructuredText format
+- alphabetically reorder
+- update doc/board/rockchip
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/Makefile | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
+Andy Yan (2):
+  arm64: dts: rockchip: Add support for rk3588 based Cool Pi CM5 GenBook
+  board: rockchip: Add support for rk3588 GenBook
 
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 3c5bd56e912..61992112f5f 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -127,13 +127,10 @@ obj-y += legacy-mtd-utils.o
- endif
- obj-$(CONFIG_CMD_MUX) += mux.o
- obj-$(CONFIG_CMD_NAND) += nand.o
--ifdef CONFIG_CMD_NET
--obj-$(CONFIG_NET) += net.o
--obj-$(CONFIG_NET_LWIP) += net-lwip.o
--obj-$(filter y,$(CONFIG_CMD_NET) $(CONFIG_CMD_NET_LWIP)) += net-common.o
--lwip-includes := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
--CFLAGS_net-lwip.o := $(lwip-includes)
--CFLAGS_net-common.o := $(lwip-includes)
-+ifdef CONFIG_NET
-+obj-$(CONFIG_CMD_NET) += net.o net-common.o
-+else ifdef CONFIG_NET_LWIP
-+obj-$(CONFIG_CMD_NET) += net-lwip.o net-common.o
- endif
- obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
- obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
+ .../dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi |  70 ++++
+ arch/arm/mach-rockchip/rk3588/Kconfig         |  19 +
+ board/coolpi/genbook_cm5_rk3588/Kconfig       |  12 +
+ board/coolpi/genbook_cm5_rk3588/MAINTAINERS   |   7 +
+ configs/coolpi-genbook-cm5-rk3588_defconfig   | 104 ++++++
+ doc/board/coolpi/genbook_cm5_rk3588.rst       |  69 ++++
+ doc/board/coolpi/index.rst                    |   9 +
+ doc/board/rockchip/rockchip.rst               |   1 +
+ .../rockchip/rk3588-coolpi-cm5-genbook.dts    | 349 ++++++++++++++++++
+ include/configs/genbook-cm5-rk3588.h          |  28 ++
+ 10 files changed, 668 insertions(+)
+ create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+ create mode 100644 board/coolpi/genbook_cm5_rk3588/Kconfig
+ create mode 100644 board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+ create mode 100644 configs/coolpi-genbook-cm5-rk3588_defconfig
+ create mode 100644 doc/board/coolpi/genbook_cm5_rk3588.rst
+ create mode 100644 doc/board/coolpi/index.rst
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
+ create mode 100644 include/configs/genbook-cm5-rk3588.h
+
 -- 
-2.45.2
+2.34.1
 
