@@ -4,76 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65498D3C906
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 11:51:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80350D3C90B
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 11:51:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB63B89242;
-	Sat, 19 Oct 2024 13:51:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6B88488B23;
+	Sat, 19 Oct 2024 13:51:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GDxLMz09";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gh9jjVzs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C838C89242; Sat, 19 Oct 2024 13:51:11 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id C5451892D8; Sat, 19 Oct 2024 13:51:13 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5805D89034
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 13:51:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BE5A892B1
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 13:51:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6cbc28f8e1bso21664726d6.0
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 04:51:09 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6cbcd49b833so17949246d6.3
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 04:51:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729338668; x=1729943468; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729338670; x=1729943470; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pUjRzWMwyaGZHezQkWe3LRLlFd2fQ9zp2aDDjHl+KTg=;
- b=GDxLMz097X9VOAgg6bs71jOmvlJm98ax7MrOoiPBguqRfukod3TmhnWsuo0+vP+VyG
- N6UppxzIuCpmd03ABfkEWUm7lO+dbR9wFtKxYYE2jNxE0RumPhEvfAqGdfCkzBhqgjHG
- f1ETZv9l9kTMUjP+DclQXWhw8HwNPxk5KUTGA=
+ bh=P0Vd7JwBs73h5PgK2woaxYvdnb6CG9474ACdRhpf9ok=;
+ b=gh9jjVzsU/QkpefGcTFcir4D1sXKwCYfMlLH5R/rGlCBYRZ8ZbW4UbmVohSkVWBPV+
+ bvBdDXuF46dM/w++JbQWhhLFntCpVimuL+l/wGCzoVTYU2jX3HAT5mYmstQv/XmyPgRU
+ LJrY5PsGFRKqVV25aTuJUlSg5z/eT2FFtpszo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729338668; x=1729943468;
+ d=1e100.net; s=20230601; t=1729338670; x=1729943470;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=pUjRzWMwyaGZHezQkWe3LRLlFd2fQ9zp2aDDjHl+KTg=;
- b=HOJo2T6x6+cxvvo/7VaNNOe9KVO25jJAZHI0rQgts/WPjfwJouHovCtoODqp80Xyzq
- mxsivqe0Iw7sF1W/6X+p6i3t69ltaZGU7RK769vmQ0GNN1baMTLgezer6e8VB2guk9ue
- 4781oSGUQAFrsl4R4P7FCwQe6PKSNmdqSQJmm4/hyeApN8jvPU1z1Fq8rrtBEZPDFNPL
- 3UHdlMtn/qfAf9MJt4dw1AYmlfmFiaRYKkJwxetSLt5fF0J+JwYhU4KICVrDRJuCFBtE
- EhFGfY2cym/I2do4wbFmIHDNhI0PdGlpXNt9yFzkzCvpApeWhVMsYTQ/xNxXclMzCUcU
- 97qA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXE+Ersa/+K3aduEMhsJaCHt0gJygddZ8zFWy4hz7/cMGvROzDvZF/KVTg16LIXNjOZt7hEaqo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7UrGSEYyQCqxC0ezwVTsA5ugGczHkYZVGashIyGdOQgSN+Dib
- 2uZ9g8uS1sCrHvHRXYP3FfcMrOX9VFYDwh68/mT+dVvH9xY8+m1rUTiwR/yVnBOempmuIu76HJt
- QjnyE6ubogMoE2zuiTZZfQFcHnqJcgd+M/WPH
-X-Google-Smtp-Source: AGHT+IE9YpPOilT9QhO1jFzZkGORNo2c4HgQJ59AcAb98kEiCY+BLlY7O1T/l7ZsMg3uNOnJrMnd2kjI4jzmHU++JNk=
-X-Received: by 2002:a05:6214:4808:b0:6cb:e9da:bd6 with SMTP id
- 6a1803df08f44-6cde15d01famr77959076d6.35.1729338668259; Sat, 19 Oct 2024
- 04:51:08 -0700 (PDT)
+ bh=P0Vd7JwBs73h5PgK2woaxYvdnb6CG9474ACdRhpf9ok=;
+ b=RUiX2tJ0n8DAtfd9BTQbik0FN8JJDaGUaXlX7LwL2ijZS3wFthbPTDXvY3CaseBgOs
+ mpzF0TFf8LP3IUVIq8lE0eED8VrNoeurpEWJxEfeMG7F9aTWTnGGe+8AUVGzGrvNOPYk
+ r7aDnYcXmjzsZ8/BoJohrS68jpn16Svm6GKnPrbCELodG7Oib9lAKrpNgEB9gPlLgyTt
+ iUZdZf1fhvjFAAFjtVgfPy3ReoMyqm9mNgQ5XXzXat3sYbxu7Orh48qhjX+9P8wmGQaf
+ W1nfVCJC+H3KjPd14KEkzSnPuO1V91wJuUBF8O/CcqMFh3cOhT1A0PL7SeX7Eyi9qLvz
+ uiMA==
+X-Gm-Message-State: AOJu0Yw9x19+fB1P84Uys499BohB0aeebm6w6ZZjedNJQms4gsZzVtSM
+ 6LNlNHpwYxQrtOg//gjUmmDZEWHEwelQYBrAWrRO0GxKoXay1rvRGbxSYf2hQwwEpaBmnRJE00S
+ wj9LyUNC3XCDqohWOqVgn40LoVhpiQUAbsTPS
+X-Google-Smtp-Source: AGHT+IGkp4eUbFwBtdSypdEg26xc1KYtyCWOq+b8+a1PJKw4wuDyDvE7Dlu423e/DG9YFId5FphpH5SfiUJFXc3eYX0=
+X-Received: by 2002:a05:6214:44a1:b0:6cb:9b65:5c75 with SMTP id
+ 6a1803df08f44-6cde15d2f09mr83698376d6.32.1729338670504; Sat, 19 Oct 2024
+ 04:51:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241018013015.127620-1-heinrich.schuchardt@canonical.com>
- <20241018013015.127620-2-heinrich.schuchardt@canonical.com>
- <4aef209c-cbed-4fac-b48a-4101e27e64f8@gmail.com>
-In-Reply-To: <4aef209c-cbed-4fac-b48a-4101e27e64f8@gmail.com>
+References: <20241018155557.2184819-1-andriy.shevchenko@linux.intel.com>
+In-Reply-To: <20241018155557.2184819-1-andriy.shevchenko@linux.intel.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 19 Oct 2024 05:50:57 -0600
-Message-ID: <CAFLszTgt_5rpKg2XUW_h5_AU5zYssiO7cLtTEaz8w0_Q8zVh4A@mail.gmail.com>
-Subject: Re: [PATCH 1/3] rockchip: block: simplify rkmtd driver
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heiko Schocher <hs@denx.de>, Alexey Romanov <avromanov@salutedevices.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Date: Sat, 19 Oct 2024 05:51:00 -0600
+Message-ID: <CAFLszTgmcg+EdhDjiuSgtYR1kwgsTwEBvhC+LZNqB9ypx8ev7w@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] x86: cpu: Describe board final hooks in the header
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,75 +82,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
+On Fri, 18 Oct 2024 at 09:56, Andy Shevchenko
+<andriy.shevchenko@linux.intel.com> wrote:
+>
+> The new two declarations board_final_init() and board_final_cleanup()
+> need a description. Add it here.
+>
+> Suggested-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> ---
+>  arch/x86/include/asm/cpu.h | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>
 
-On Fri, 18 Oct 2024 at 07:33, Johan Jonker <jbx6244@gmail.com> wrote:
->
->
->
-> On 10/18/24 03:30, Heinrich Schuchardt wrote:
-> > By using blk_create_devicef() instead of blk_create_devicef() the driver
-> > can be simplified and brought into line with other block device drivers.
-> >
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > ---
-> >  drivers/block/rkmtd.c | 21 ++-------------------
-> >  1 file changed, 2 insertions(+), 19 deletions(-)
-> >
-> > diff --git a/drivers/block/rkmtd.c b/drivers/block/rkmtd.c
-> > index c55f052e51b..f84cacd7ead 100644
-> > --- a/drivers/block/rkmtd.c
-> > +++ b/drivers/block/rkmtd.c
-> > @@ -794,36 +794,19 @@ int rkmtd_init_plat(struct udevice *dev)
-> >       return 0;
-> >  }
-> >
-> > -static void rkmtd_blk_kmalloc_release(struct udevice *dev, void *res)
-> > -{
-> > -     /* noop */
-> > -}
-> > -
-> >  static int rkmtd_bind(struct udevice *dev)
-> >  {
-> >       struct rkmtd_dev *plat = dev_get_plat(dev);
-> > -     char dev_name[30], *str;
-> >       struct blk_desc *desc;
-> >       struct udevice *bdev;
-> >       int ret;
-> >
-> > -     snprintf(dev_name, sizeof(dev_name), "%s.%s", dev->name, "blk");
-> > -
->
-> > -     str = devres_alloc(rkmtd_blk_kmalloc_release, strlen(dev_name) + 1, GFP_KERNEL);
->
-> Hi Heinrich, Simon,
->
-> The function strdup() is not an exact replacement for the devres_alloc() function in relation to a device.
-> It is in use for memory leak detection / device resource management.
-> Not sure what the status of that devres project currently is? Also tracking in general in relation to EFI and blk-class.
->
-> https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/block/blk-uclass.c?ref_type=heads#L739
->
-> https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/block/rkmtd.c?ref_type=heads#L812
->
-> Test for this driver are based on work done by Simon.
-> https://source.denx.de/u-boot/u-boot/-/blob/master/test/dm/host.c?ref_type=heads#L71
->
-> This rkmtd driver makes use of devm_kzalloc(). All the memory that rkmtd reserves is freed.
-> But if I remember well somehow I was not able to free all memory on unbind and was not able to find the source, so I didn't include that last test.
-> https://elixir.bootlin.com/u-boot/v2024.10/source/test/dm/rkmtd.c#L84
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Yes, you can use that API. But I think Heinrich's patch is correct,
-and separate from your points here. Yes, blk_create_devicef()
-strdup()s the name, but it sets a flag indicating that it has done so.
-Then device_unbind() checks DM_FLAG_NAME_ALLOCED later. So the code
-should be equivalent.
 
-Re the memory leak, I don't have any ideas, but test/dm/devres.c does
-have some checks for some of that. I have often wondered about having
-a way to store the filename and line (or just the line?) with every
-allocation, so we can list out what is left at the end, since valgrind
-doesn't work on target devices.
-
-Regards,
-Simon
+> diff --git a/arch/x86/include/asm/cpu.h b/arch/x86/include/asm/cpu.h
+> index d71bc1b80c05..a5b2043f7de1 100644
+> --- a/arch/x86/include/asm/cpu.h
+> +++ b/arch/x86/include/asm/cpu.h
+> @@ -298,7 +298,20 @@ u32 cpu_get_stepping(void);
+>   */
+>  int cpu_phys_address_size(void);
+>
+> +/**
+> + * board_final_init() - Final initialization hook (optional)
+> + *
+> + * Implements a custom initialization for boards that need to do it
+> + * before the system is ready.
+> + */
+>  void board_final_init(void);
+> +
+> +/**
+> + * board_final_cleanup() - Final cleanup hook (optional)
+> + *
+> + * Implements a custom cleanup for boards that need to do it before
+> + * booting the OS.
+> + */
+>  void board_final_cleanup(void);
+>
+>  #ifndef CONFIG_EFI_STUB
+> --
+> 2.43.0.rc1.1336.g36b5255a03ac
+>
