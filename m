@@ -4,91 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C96FD3C921
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 16:30:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B612D3C920
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 16:36:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37F7988DD1;
-	Sat, 19 Oct 2024 18:30:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BA9EB88EC9;
+	Sat, 19 Oct 2024 18:36:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oiB2cfpF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qDf696az";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 811B888DF8; Sat, 19 Oct 2024 18:30:33 +0200 (CEST)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id A98B888EF5; Sat, 19 Oct 2024 18:36:56 +0200 (CEST)
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CFC188D9F
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 18:30:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7281688DD1
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 18:36:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-7b147a2ff04so256513285a.3
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 09:30:31 -0700 (PDT)
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-460c1ba306bso4959691cf.2
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 09:36:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729355430; x=1729960230; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1729355813; x=1729960613; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3vlYShuUeQ+xu85xux3qEQwGkKwQ90xX0vaClJUFE6o=;
- b=oiB2cfpFH3DuHGl4B3tKJByPHAz6LhyKRTxGiqArYZCYFi3/aNfBxgHb6/LvtDKDRc
- 8+Qz8xhFaD4V14pODmQvfdbsrdJzJ0PG5HQTLbmt52hIOyYZUBYI9BAUYzdhTHbBawxs
- +6yctecoIUb6XngVBKKLCTaGjtjtsK+URIUNA=
+ bh=H4dc1w2sNEN3Mj6RIu4xjtBQ3zbSooZVWecOenRZFBY=;
+ b=qDf696azlCKBJ52QPs58p4aceGG/2uawc+LGowy4/2H9zIKa/ZuE4ynYTEWdylo+Am
+ 02igXs1+pARY8viIUeIC35owhI8VuyR3kVIoGMSb0Q28XLngpHZlBHx28vzFvp4dJRhw
+ FXOZi0JY57q7zI3ZDQmDP4wY/HHK2EyDpCGTs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729355430; x=1729960230;
+ d=1e100.net; s=20230601; t=1729355813; x=1729960613;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3vlYShuUeQ+xu85xux3qEQwGkKwQ90xX0vaClJUFE6o=;
- b=ZSnWKZAEj8Sw22ls6TJCsmL++sMrlVubNi+TKnL4O4g2vwmaNzLnHIoVOTjPKyE9u0
- /6f4D6of3eJUSuTLefpTQtTxX+xag5HAPUP/y6UTw5n3Vs+UkU9QGuNEXd2mg37N8uDx
- 1GqV8VKxB8eEbDIQGcXBoMfPyy409utx3LQPEj/OvAqhIZhtRtTsQC/Dqa/V1ojTopak
- 2Q/7W8hiAAnzvWSRvcAIS+B4QlOUY2Z/1kuMhRXLx13G9kLMVW0h6QT0wRabWFZ3m0tn
- jsY0oh/zbnzhWozUTpsLZQgAtRdU5+Z5L0c7OsJ0Y43n8hg5u2F8bGRfZz82jgJGwDFZ
- lAag==
+ bh=H4dc1w2sNEN3Mj6RIu4xjtBQ3zbSooZVWecOenRZFBY=;
+ b=TSwPb84NW9t597Fm11d8MiaGsvvB4yBSqjQqAykLdQMsZgeVgLlBQKn0vT8yZMTroy
+ Ukw7xummBMURzR2cAX+huz+tsiEsnh2z8IH92Sp9TguYcLUsiC+EN44Ku4HIgux0R4jQ
+ raBPFP8yCSLxq1PgSdc+9qgKJrn3QUbc2gM0F+Q2glSxLA7EeI7gQTp0+cmwDkQEidSb
+ /qqiSei0k0NB7t4+DJuBMKQWTirA7HStyLQjtIZf8mjD2d/FwUcnOpRsTJsX389/Ool8
+ zhOjzwUJhzxvKqwsmRHh7cZjJXH/7e1e5hZCGSA7vGD2Zt4yBz4RZegV4hgXbrG3V7wO
+ YCpA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXRse9aBlYARScZ141QqbOWFBolbRIXFFQ8Hrnap8YpDvxkNavxeciVW0QzVz+Oeb9d8i8H/Ms=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxmw3B+xS+P+yhrm8NPW76NkFB8h2PpSj4zLpLZnn6seRmrd5Dn
- e76jb5QvFQi0ZunR6R7U4/BVQVe8mjyZcurwkNtoLGQRbuJvIz/xccpP1MGcFDg=
-X-Google-Smtp-Source: AGHT+IGjiodeBbUUjm4CGBUMYllWJheyInaQUUui/tgsXLIIor/MR7olyWA5PNILSzAquRoLx+FIyw==
-X-Received: by 2002:a05:6214:5505:b0:6cb:ce4c:1cc2 with SMTP id
- 6a1803df08f44-6cde155b9b5mr88613346d6.29.1729355429819; 
- Sat, 19 Oct 2024 09:30:29 -0700 (PDT)
+ AJvYcCU733E8SB+HY0V1/B11AAVlevyNCBMD0N4tfO26Z1T1Dz1KKNYfcAPvhCtwKQFyIyIcXishgbU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzOVIEJMhzuLHc8NuF1m//QDUj1q7GQd5U3y4ND/HYy0DxkbRwH
+ DpSiNHLa0bziprdFUJk7hx+iuocT8UkbiK7NQJhL2I7fSzmSJRp5DUMoBOzcsxI=
+X-Google-Smtp-Source: AGHT+IEb8tHX40yWLUN3DNGtoDEfDcilKuRu4vHl2s3sFaM0xrBVO1D8dHtXkpyIWUiljBnucvK1Zg==
+X-Received: by 2002:ac8:7c45:0:b0:460:ac3e:cf6 with SMTP id
+ d75a77b69052e-460aee3eba3mr95951481cf.53.1729355813236; 
+ Sat, 19 Oct 2024 09:36:53 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cde1390aadsm20070926d6.144.2024.10.19.09.30.27
+ d75a77b69052e-460aea450d4sm20123641cf.62.2024.10.19.09.36.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 19 Oct 2024 09:30:28 -0700 (PDT)
-Date: Sat, 19 Oct 2024 10:30:25 -0600
+ Sat, 19 Oct 2024 09:36:52 -0700 (PDT)
+Date: Sat, 19 Oct 2024 10:36:48 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Shantur Rathore <i@shantur.com>
-Subject: Re: [PATCH 23/34] bootstd: Maintain a list of images
-Message-ID: <20241019163025.GU4959@bill-the-cat>
-References: <20241017232413.724808-1-sjg@chromium.org>
- <20241017232413.724808-24-sjg@chromium.org>
- <0B48F871-BDD8-4810-ADA3-4F6C4E403B0C@gmx.de>
- <CAFLszTjF-kg5E+sV+CkFjStmS2YyJiPa59zOWWZxd2J5yOwftA@mail.gmail.com>
- <20241018163303.GZ4959@bill-the-cat>
- <CAFLszTi2+2si4bq-iZK5fncnUnBHVLnpp6kqJAGFyK5Lis9OZg@mail.gmail.com>
- <20241018180439.GD4959@bill-the-cat>
- <CAFLszTjEvoPLiq5iuCRk8q3iA50q-UHGF4GBJJeNNWwqMXD_aw@mail.gmail.com>
- <20241018213022.GL4959@bill-the-cat>
- <CAFLszTg0=9kvMRG_=S19W5o5Y5ugdXT-chEb=5wZ+jFK0CtQwQ@mail.gmail.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Artur Rojek <artur@conclusive.pl>, Devarsh Thakkar <devarsht@ti.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Joao Marcos Costa <jmcosta944@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
+Subject: Re: [PATCH v4 0/5] Adjust initial EFI memory-allocation to be in the
+ U-Boot region
+Message-ID: <20241019163648.GW4959@bill-the-cat>
+References: <20241011212126.747741-1-sjg@chromium.org>
+ <CAC_iWjKD=05pf=gcfCPUA0mGNbAX+jjyx5D03y0MWJRgxYDPOA@mail.gmail.com>
+ <CAFLszTgJW2KPbD1dogSVKbxgyYtvKGgSAcB_j5kXtWdkTGvtNA@mail.gmail.com>
+ <CAC_iWjJdoFLAyaa+NBoY1Hm0Q140ExU0rq-RKEqDV_yki9jojA@mail.gmail.com>
+ <CAFLszThSFuAPnsOTw_4w6raWJzOojp16ULT88s9JgwoWcpMwJQ@mail.gmail.com>
+ <20241017233458.GQ4959@bill-the-cat>
+ <CAFLszTgKLYa9RYERvAiuJ89wSKG-Ane=FxsDuvvFBpBpS0QF+w@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7J6xmmLwKSgtzHrL"
+ protocol="application/pgp-signature"; boundary="SSgtj/USuBRNteb1"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTg0=9kvMRG_=S19W5o5Y5ugdXT-chEb=5wZ+jFK0CtQwQ@mail.gmail.com>
+In-Reply-To: <CAFLszTgKLYa9RYERvAiuJ89wSKG-Ane=FxsDuvvFBpBpS0QF+w@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,223 +110,109 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7J6xmmLwKSgtzHrL
+--SSgtj/USuBRNteb1
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Oct 19, 2024 at 05:49:40AM -0600, Simon Glass wrote:
+On Sat, Oct 19, 2024 at 05:51:03AM -0600, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Fri, 18 Oct 2024 at 15:30, Tom Rini <trini@konsulko.com> wrote:
+> On Thu, 17 Oct 2024 at 17:35, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Fri, Oct 18, 2024 at 12:48:31PM -0600, Simon Glass wrote:
-> > > Hi Tom,
+> > On Thu, Oct 17, 2024 at 05:22:52PM -0600, Simon Glass wrote:
+> > > Hi Ilias,
 > > >
-> > > On Fri, 18 Oct 2024 at 12:04, Tom Rini <trini@konsulko.com> wrote:
+> > > On Tue, 15 Oct 2024 at 07:32, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
 > > > >
-> > > > On Fri, Oct 18, 2024 at 11:20:52AM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
+> > > > On Tue, 15 Oct 2024 at 16:26, Simon Glass <sjg@chromium.org> wrote:
 > > > > >
-> > > > > On Fri, 18 Oct 2024 at 10:33, Tom Rini <trini@konsulko.com> wrote:
+> > > > > Hi Ilias,
+> > > > >
+> > > > > On Mon, 14 Oct 2024 at 22:28, Ilias Apalodimas
+> > > > > <ilias.apalodimas@linaro.org> wrote:
 > > > > > >
-> > > > > > On Fri, Oct 18, 2024 at 09:01:03AM -0600, Simon Glass wrote:
-> > > > > > > Hi Heinrich,
-> > > > > > >
-> > > > > > > On Thu, 17 Oct 2024 at 22:07, Heinrich Schuchardt <xypron.glp=
-k@gmx.de> wrote:
-> > > > > > > >
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > Am 18. Oktober 2024 01:24:02 MESZ schrieb Simon Glass <sjg@=
-chromium.org>:
-> > > > > > > > >We want to keep track of images which are loaded, or those=
- which could
-> > > > > > > > >perhaps be loaded. This will make it easier to manage memo=
-ry allocation,
-> > > > > > > > >as well as permit removal of the EFI set_efi_bootdev() hac=
-k.
-> > > > > > >
-> > > > > > > I'll change this 'hack' to 'feature'.
-> > > > > > >
-> > > > > > > >
-> > > > > > > > Please, keep in mind that files can be loaded manually, e.g=
-=2E via the dhcp, the wget, and the loady commands. These are outside bootf=
-lows.
-> > > > > > >
-> > > > > > > Yes, this series is only going to help if bootstd is used. Fo=
-r ad-hoc
-> > > > > > > use, EFI will need to rely on the above feature, at least unt=
-il
-> > > > > > > someone can think of another solution.
+> > > > > > Hi Simon,
 > > > > > >
-> > > > > > Perhaps I need to try and be clearer here than I might have bee=
-n in the
-> > > > > > past. The consensus among off the shelf free software operating=
- systems
-> > > > > > is "just give me an EFI interface". This simplifies things on t=
-heir end
-> > > > > > if regardless of architecture it's the same interface. This mea=
-ns that
-> > > > > > in U-Boot we need to treat EFI as one of the primary interfaces=
-=2E Not a
-> > > > > > novelty. Not a "some people might use". It is a frequent and co=
-mmonly
-> > > > > > used feature.
+> > > > > > On Sat, 12 Oct 2024 at 00:23, Simon Glass <sjg@chromium.org> wr=
+ote:
+> > > > > > >
+> > > > > > > U-Boot relocates itself to the top of memory and is supposed =
+to avoid
+> > > > > > > using any memory below that region. This allows the maximum a=
+mount of
+> > > > > > > memory to be available for loading images.
+> > > > > > >
+> > > > > > > The lmb subsystem automatically protects U-Boot's code and da=
+ta from
+> > > > > > > being overwritten. It relies on this region being a contiguou=
+s area of
+> > > > > > > memory. This setup has worked well for at least 15 years and =
+has been
+> > > > > > > documented in the README for as long.
+> > > > > > >
+> > > > > > > The EFI_LOADER subsystem currently uses memory outside the U-=
+Boot region
+> > > > > > > when starting up.
+> > > > > > >
+> > > > > > > Some of the downstream problems this causes are:
+> > > > > > >
+> > > > > > > 1. It can overwrite images that have been loaded
+> > > > > >
+> > > > > > So can the load command
 > > > > >
-> > > > > Yes, EFI is everywhere and growing. All the more reason to tidy up
-> > > > > this piece. I would like to see bootmgr use this new API, for exa=
-mple.
+> > > > > Can you point to where? If lmb is enabled, it should be using tha=
+t, so
+> > > > > not overwrite anything.
 > > > > >
-> > > > > But how does this comment affect this patch?
 > > > >
-> > > > Because at the very high level, I wonder if I made a mistake a few =
-years
-> > > > back. As I understand it, the nominal case is "bootefi bootmgr". I =
-was
-> > > > saying at the time that perhaps bootstd can just fire that off, and=
- move
-> > > > on. Now it seems like we're going along the path of re-inventing th=
-at,
-> > > > and not integrating well with it either.
+> > > > If you load the initrd in memory X and make the kernel ovelap you w=
+ill
+> > > > overwrite parts of the initrd.
 > > >
-> > > In what way are we re-inventing that? bootstd supports lots of
-> > > different ways of booting, not just EFI.
-> >
-> > At the high level, bootflow scan is re-implementing "bootefi bootmgr".
-> > but handling non-EFI payloads.
->=20
-> bootstd is about replacing the distro scripts, not bootmgr.
-
-And the distro scripts are functionally replaced by "bootefi bootmgr",
-outside of bootstd.
-
-> > > Also I hope that one day EFI
-> > > will be implemented more as part of U-Boot than as a bolt-on, so will
-> > > make use of bootflows, etc.
-> >
-> > And stuff like that is why I said what I said in here first. To me it
-> > sounds like you keep implying it's a hack that's not well integrated.
-> > When it's honestly at this point gotten more traction than FIT images
-> > have I think (as much as I wish FIT images had "won", it's like VHS vs
-> > Betamax, to bring in another technology metaphor).
->=20
-> The 'hack' I was referring to is efi_set_bootdev(), not EFI_LOADER as a w=
-hole!
-
-I wasn't clear enough, sorry. I didn't mean just in this series where
-you referred to storing the needed property as a hack but rather
-"bolt-on" in what I quoted and "tidy up this" and "tidy up that". I'm
-just saying what impression your words leave with me, and quite possibly
-others.
-
-> > > > So, to try and bring things back together. If U-Boot decides to load
-> > > > $FOO from device $BAR, at that common point is where we need to:
-> > > > - Is there an lmb for the location this is supposed to go to (for t=
-he if
-> > > >   we know it, entire size)?
-> > > > - Note down everything else we know, now.
+> > > But lmb stops that. It is actually what it is for.
 > > >
-> > > Yes.
+> > > > Let's try once again, the ''''problem''' that was discussed in IRC,=
+ is
+> > > > that the initramfs overwrites memory that was allocated by the EFI
+> > > > subsystem *because* we haven't merged the LMB followup patches yet.
 > > >
-> > > >
-> > > > This means that we can note down enough stuff so that EFI can const=
-ruct
-> > > > the path it needs. And if we're being told a filesystem, that filen=
-ame
-> > > > is good enough for the IH_TYPE thing you're wanting, or at least a =
-good
-> > > > chunk of it I hope.
-> > >
-> > > You want me to ignore the type that I know (kernel, ramdisk, logo,
-> > > etc.) and infer the type from a filename? Why?
+> > > OK, my problem was booting Ubuntu where the bootflow was unbound by
+> > > exit-boot-services, resulting in freeing memory (and re-using it)
+> > > which was still in use. I don't actually remember what was in that
+> > > memory, though. This was over a year ago, when I sent my first version
+> > > of the test[1]
 > >
-> > No, I want you to save and display the filename. That's probably much
-> > more useful when debugging than "kernel". If you actually know some
-> > other type information (ie extlinux.conf says ...) then yes, it too can
-> > be stored as that's useful too.
+> > This was on x86 as well, yes? I believe that's what you said on the call
+> > and part of where people get confused I believe.
 >=20
-> The filename is already saved in bootflow->filename, and now it is in
-> struct bootflow_img.
+> Yes, x86
 
-OK. But that's not generic enough.
-
-> > > For EFI there is only an EFI application. It will always just be a PE
-> > > file. We don't really know what it is, as someone pointed out earlier.
-> > > Maybe one day we will check to see if it is a UKI and pull things out
-> > > of it. But then, it would be component parts (kernel, ramdisk, etc.)
-> > > so I would want to add them as images.
-> >
-> > I don't see why yet, honestly.
->=20
-> For the cmdline, 'bootflow cmdline' allows editing it, for example.
-> For a logo we can display it in the menu. The filename doesn't tell us
-> what it is.
-
-There may, or may not, be further context clues about what a blob is,
-yes, and we should make use of them. But we may not have them. Frankly
-for a logo we probably need to have dealt with that upon initializing
-the display, so earlier in the process. But this is all getting away
-=66rom the point I'm trying to make.
-
-> > > > It also means that since it's at the most common point, it doesn't
-> > > > matter if we were in an EFI application, a boot script, a bootmeth =
-or
-> > > > someone at the cmdline doing "load mmc 0:1 /boot/Image $kernel_addr=
-_r".
-> > >
-> > > For that case (at the cmdline), bootstd is not currently running. Are
-> > > you suggesting that bootstd could pick up these things and record
-> > > them? If so, then yes, definitely, I want to do that. This series is
-> > > the starting point for that. If you are suggesting something else,
-> > > then I think I have lost you at this point.
-> >
-> > Yes, I think I lost you somewhere, but I'm not sure how. What I am
-> > saying is that since everything at some point calls down to say
-> > fs_read() to read a file, that is the common point to note what
-> > we're doing. Not the load command, not the bootmeth, not the EFI_LOADER
-> > call.
->=20
-> Perhaps what you are missing is that bootstd is a proper boot
-> implementation for U-Boot, where U-Boot knows what is going on.
-> Ignoring that information and just hooking into fs_read() is like
-> throwing away the plan and trying to recreate it from photographs.
->=20
-> That said, yes I can hook into fs_read() and store that info, as it is
-> better than nothing, if bootstd is not being used, or there is a
-> script.
-
-Maybe we need to throw out the plan and start over then? Since you seem
-to not be accounting for the rest of the common paths and assuming
-that your design can just be used as-is for them despite not taking them
-in to account in the design in the first place.  Hooking in at around
-fs_read() or thereabouts is likely where we need to be at least starting
-some of this so that we do know information that we want to preserve.
-Similarly, there's the common path for "grab a file via HTTP(s)" and
-that is where we should be recording information for network loads. We
-can then augment that if it was a pxelinux.cfg file we grabbed or
-something else, but that's the common place to start gathering
-information.
+I just want to emphasize that this is a rather critical detail that was
+unintentionally omitted and lead to much of the confusion. This is a
+heavily tested path on aarch64 and I strongly suspect riscv and then I'm
+not sure who aside from you is testing this path on x86.
 
 --=20
 Tom
 
---7J6xmmLwKSgtzHrL
+--SSgtj/USuBRNteb1
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcT3poACgkQFHw5/5Y0
-tyzTlQv/aO6n2rT578Q517TRaAX1AYwNe3GwcIXrajuF2Cu7hjs1xeEWUEL7G5eA
-Umrqtr6tZsbaUewomzbR7a5rzYuddU/3xuJeiBytG4SGpCNm/3ZeMXgMPM9hMMu4
-T8S6p1KPdIVsHsEH9LQOWBN0H2k0pQTiPF30A/r3jUYZtOgpjOfn4ssVK8MDODSw
-bfOm+f9JCTDm1MUkK4Nf09AJHKHmBiFzxiKh5W17xbl8Ulm5y6pjkOrEllGNRFOY
-tL+IjNEXAlstN+wCHwS84AD5CMJzrPlneC8HwAiDsqlOzcjny4MJVXXK0ijVqtH/
-vVZSybUfiZiXAGqNt+BJzzeY0cfLia5DfhdSIc0mYq78SIOmSa+uK54TEwArG3gS
-FgxUBJXW+pMA5aBkyyIXX/fYlYNcQ/wFDVxUuxR4KcQ9Tqo4+ouvG/rQU7kvpwD/
-M5peVqxXliRgfJfbQBbPBKhqQvXDoPLGSR5zwZnIZMhBEw5xD4qzJx5eCw9hDL8L
-wmzdIP/o
-=uddu
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcT4CAACgkQFHw5/5Y0
+tyy7DwwAulCr+jEKXB2FTLQeELCTkl+XUQtmTXQVfhzpINyLgGGHNZFojodu4ouO
+RUmJ0+SUYsJasP6OP96eq1b+uIdpqgRmv9rvRSpsNviYAFveu5N20kV9Hbl0JGed
+Tg+ViyTzDy58idCcZj3ER01BPgijhl49goHKNIfYjo2ASh8p1R2vr0kKRqfSLEzp
+zGcCwiM8OPiykjj9cfS8EeehwBtwLyaTiOfTp2CaeFJznXHCQgt16H2z4Ui6BqAF
+ot1MT6zqpzKs0zw+EFwVY1ZTfd8186kIr4sAyFFpCm0TDrulDEcaif1nVRkTXb3s
+u3ATPTY1lsBlCPnUJC1dWPP0CEKoY09ESVVc3EiSGKOl8oRIDOp+aSNDKG3WM86/
+QnqFV5YbnV7dkybcnVGIzFjcJYOV0mECZIHvq+9C2JDu/zxkShaY4Pt7QXTWzMv9
+VgXfpJelAM3A4d9OfKgJGhXjQkxguzbV3V1YfmJhaIxLstctHAg2gPzBW9ipWOFG
+nSIRWSOl
+=E5x5
 -----END PGP SIGNATURE-----
 
---7J6xmmLwKSgtzHrL--
+--SSgtj/USuBRNteb1--
