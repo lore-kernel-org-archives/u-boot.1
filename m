@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2D27D3E1A8
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 02:21:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64E92D3E1A8
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 02:21:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC8B988EDA;
-	Sat, 19 Oct 2024 04:21:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47DB388E88;
+	Sat, 19 Oct 2024 04:21:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M80c+jHY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PiLlmPyK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8AE888E81; Sat, 19 Oct 2024 04:21:37 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 2785A88ECB; Sat, 19 Oct 2024 04:21:39 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D671788E81
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 04:21:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 246E188E33
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 04:21:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b1505ef7e3so142805585a.0
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 19:21:35 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6cbf0e6414aso13044476d6.1
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 19:21:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729304494; x=1729909294; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1729304496; x=1729909296; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vXQOmiL+7bywpeboPFWzJnfgkkOreRFKIHTLW+jk/Bs=;
- b=M80c+jHYfaennamaWV7FCY2Hbhc5eUK4pT0KYNMupVb6Ki6oYeU/HoaKxZa/tZ/fqn
- ohyyd8OuH4+n8PBamvU8rmGAZPplmuV+b6/s1ZodZtO/yY9zSwzZU1FHOLX3RohS46Kg
- UPwhp1g5RjEurwNRuo78TolQ+Y1K6HU1bETqg=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=m0Jrmm7GhK6bkwxd3q27T+23zWOPpwvJsFL10hK+jVY=;
+ b=PiLlmPyKygbLWXkJVZgAtx4jRaWX8ylLRou/RwsrKtNRlcjDFjFvb3lVoWPQwADhO6
+ pKk3nn1/YqYi3JJcBJ+UKMXuO6nin/xcK9BTMUwX8i2yrUwi9tbh3SUjpAVV3/sBfq73
+ SYPM+o03z/xqNe+H5VokFNl7IxJq5pU5nnyBM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729304494; x=1729909294;
+ d=1e100.net; s=20230601; t=1729304496; x=1729909296;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vXQOmiL+7bywpeboPFWzJnfgkkOreRFKIHTLW+jk/Bs=;
- b=J9htLQrne2411l+Tv0i4kCNJQt3/Lgi9lnlZczjKqiBrFc+XDNsTJd7fFiYBHATUBd
- DlTO6IJvTV0Xxyye4JlZqsudclNkh1+UWkYQ409AoONhGOWHhCMhaQLP62jpyg2WUbvU
- nQp5AN83u3PHb5QRJ9SwYlt9UyWmdU0NV8RZyAreUJyPiyNBEG9XwoPnR2vivmhyXpAJ
- 6a06b8/lmR5aTe2H3hk4OKcvBr3NaEduOispkzOUI0roWlHqkzdu1TmsAJt/XANbKBE3
- b/Xf0NjXWL7jNPYpY7qd+nTndfsgG/i4fDj84XdUM4vL+sJh8sRlAfb17G9hSbWw67OR
- Hsog==
-X-Gm-Message-State: AOJu0Yzf9JTaNP7tSYUWhU2hE7vwDmRGWDAA9/f4UTGrtbFRhWAS/GZs
- voH9Nsg+0Ovf6iu/CkwHZuTRPM3/SmSci8bkiGvJrW6XeJWHF4x4THfKJEiXviZRS4GcPIDX26/
- wtp8=
-X-Google-Smtp-Source: AGHT+IGyYmhZyVYX4Z0wFS2/sdyQvUv7nSHImGaYIfQC9LhM97DHxfOhOtIMws3OuDhEHt5ny+oXzw==
-X-Received: by 2002:a05:6214:3a08:b0:6cb:f1cb:a161 with SMTP id
- 6a1803df08f44-6cde1617b19mr51347286d6.43.1729304494546; 
- Fri, 18 Oct 2024 19:21:34 -0700 (PDT)
+ bh=m0Jrmm7GhK6bkwxd3q27T+23zWOPpwvJsFL10hK+jVY=;
+ b=Iw3PqGuWrAy/yll2FPGdv2s3OulLuN4zq6qMbEgOqzuDfhN4sCBjXDgkTLD6F0U+0o
+ QqgstbF5CrlCiqFhEQrGniVCl2ZswDWq1PVcQ/K4Vo+UaLBgqHryhaZMQ5wDTlLHIfx1
+ WQnvNYxAsGi8jqkhyhp97BTJHVBBU2QrA7Xqm49cvrz1i7jhgH8rLnmSWaVsBKZws+ao
+ zFKoV3MaSLvb5hgAIgi4Wxur9w46rquiiHUlN1A46Bc6clbi51mpPpTKiVjmh4DZB4it
+ sHf2AoSLALv0s2O0gWU5qwtrXMwU2fTiC6eyKnfbPi/URWiB/Brs2G2GCLTojXre0jmP
+ FjOA==
+X-Gm-Message-State: AOJu0Yz478HKx/eGWQ8Y4KfP+MKlZOlIHUW1kQWiZP7wCzsMMoZKnWFX
+ iMzcttAKLE7ouP2RO0CfgEzFGDH5d3B7BlSAwRoGvMPVz+0AGWmQ43cgsSTm4XoHi+QmzZeirzd
+ LLQU=
+X-Google-Smtp-Source: AGHT+IHtJyVClqmToe+tRuzzCV98V4ZtJeTzgKuXsPH0zFk+W+FAAalQidtLBFcwnuLLA2waATiH5g==
+X-Received: by 2002:a05:6214:4685:b0:6cb:ced4:eafd with SMTP id
+ 6a1803df08f44-6cde15ec4a9mr65387106d6.35.1729304495986; 
+ Fri, 18 Oct 2024 19:21:35 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cde138fde7sm12521016d6.143.2024.10.18.19.21.32
+ 6a1803df08f44-6cde138fde7sm12521016d6.143.2024.10.18.19.21.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Oct 2024 19:21:33 -0700 (PDT)
+ Fri, 18 Oct 2024 19:21:35 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20241018024657.134492-1-heinrich.schuchardt@canonical.com>
-References: <20241018024657.134492-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] cmd: upl: correct printf code
-Message-Id: <172930449283.2505436.12596718719161293392.b4-ty@konsulko.com>
-Date: Fri, 18 Oct 2024 20:21:32 -0600
+To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
+In-Reply-To: <20241016234829.3836359-1-raymond.mao@linaro.org>
+References: <20241016234829.3836359-1-raymond.mao@linaro.org>
+Subject: Re: [PATCH] mbedtls: fix defects in coverity scan
+Message-Id: <172930449470.2505436.13436740453794923291.b4-ty@konsulko.com>
+Date: Fri, 18 Oct 2024 20:21:34 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,19 +87,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 18 Oct 2024 04:46:57 +0200, Heinrich Schuchardt wrote:
+On Wed, 16 Oct 2024 16:48:26 -0700, Raymond Mao wrote:
 
-> Building on 32-bit results in a build failure:
+> Fixes of unreleased buffer, deadcode and wrong variable type detected
+> by coverity scan.
 > 
->     cmd/upl.c:75:51: warning: format ‘%lx’ expects argument of type
->     ‘long unsigned int’, but argument 3 has type ‘size_t’
->     {aka ‘unsigned int’} [-Wformat=]
->     75 | printf("UPL handoff written to %lx size %lx\n", addr, abuf_size(&buf));
->        |                                         ~~^           ~~~~~~~~~~~~~~~
->        |                                           |           |
->        |                                           |           size_t {aka unsigned int}
->        |                                           long unsigned int
->        |                                         %x
+> Addresses-Coverity-ID: 510809:  Resource leaks  (RESOURCE_LEAK)
+> Addresses-Coverity-ID: 510806:  Control flow issues  (DEADCODE)
+> Addresses-Coverity-ID: 510794 Control flow issues  (NO_EFFECT)
 > 
 > [...]
 
