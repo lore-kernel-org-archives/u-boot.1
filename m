@@ -4,98 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9616FD3E194
-	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 00:14:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3549D3E19A
+	for <u-boot@archiver.kernel.org>; Sat, 19 Oct 2024 02:00:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F241E889DA;
-	Sat, 19 Oct 2024 02:14:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id F421D88D5B;
+	Sat, 19 Oct 2024 04:00:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="P6YbZWLB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CIJlVdct";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFD6B88B23; Sat, 19 Oct 2024 02:14:42 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D071888E0F; Sat, 19 Oct 2024 04:00:51 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 927FA889AE
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 02:14:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 951E088BEF
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 04:00:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 30B104120B
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 00:14:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1729296880;
- bh=HHyjczYIaLbklKeyDEBqtOEQHKyYM4pg/RYYbbHycYw=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=P6YbZWLBeA9TwBHIsPYXwfjp3NtLY8hq/ifxl3vTLQBI7yb5DOgWD9ACsKQCza6WH
- G5lG5W7BLmjFZQ0zN0YfLAZVibd/3MQlFtQst372ul7Aty9TBGvX2xhFrkCmkgUf97
- un6oVWcdqjMR4Ba3ekIhu0lCyrL+7xau/ggsXsF2uUOsDhIEULfTJhedByCgwKOHmh
- DGBD0eef0RQy8jpOPjyqmxn+lJQZrKDJB7mwoOSGHP9JHJ9T6dBV5e721RYKFDlCEB
- vFV2MsY3NUtEHANXY0elSJ5FlLvvfto4D7FGK4xeTuYvC2aX/KhzZfIMOx1pC+5W0P
- wD18+g/hrYUXw==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-431518e6d8fso16630465e9.0
- for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 17:14:40 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-460ace055d8so9937891cf.1
+ for <u-boot@lists.denx.de>; Fri, 18 Oct 2024 19:00:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1729303248; x=1729908048; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nb8nNFVFGQrMT4ncjDR/DH0aH4IKzGDpY1UFXbSHWCo=;
+ b=CIJlVdcta1iwTpY9wr5wYNgp8XOgG4iS7CRX6c7lCoIWu4uCIvU2Uo/4ty066aX+AO
+ fnb5L0zRiEA4YZ07GshTMU3z9Bh37c/UFNOxBQbbEEgRc1VPfFbWyILs5eco1grWqMZb
+ MXFqJsp45YE6F4anhCCbHyidPyBvkz7Pu4QA4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729296879; x=1729901679;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HHyjczYIaLbklKeyDEBqtOEQHKyYM4pg/RYYbbHycYw=;
- b=Qy1eUZEdN1Xyr1KMdVXQMobRWYZucKchepa9k0BOhud30chBF1jz6lCt8sqJcybpo1
- o4RnPscTVEoQHGMFCbMA1ssvdaKPXJ8L17Zvh9y/W2/IBmqHotDLgGOBT9kUn51WxCcP
- 40dl1bzJCjykM3JLmm5IYrCB0tzHcSlssUkwjWr589ZhgNVo+n7DXWCcpGULf9xwyz2r
- hunbuCgAdiEKsQsH5Rr4BJ97DbyP7X0FH1DV1rRk0DcraEPPqK/tsU86z472GUUT5WS9
- 5pl0Gs8FnzkxRZnAdma8QDqXE8Hcyvk58BuryRkpfdVyDLVhCIfH2P7vSPhwhk/TuYpZ
- trPg==
+ d=1e100.net; s=20230601; t=1729303248; x=1729908048;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Nb8nNFVFGQrMT4ncjDR/DH0aH4IKzGDpY1UFXbSHWCo=;
+ b=a2Yx38E8NP6iowZDZ2xQQ1+88ZdWbrEe7lKW5N8uGG3son9aFoDDzrkIY8JTODDVkJ
+ mOSjwYyW1teo6RPiVuJTpVOFMrDJUT6b0iukxi7gC5deQcSHW07LpDxGNiNqAWST9NN4
+ TNdkVqIwExhvA2U0qlbF5kKhBQRP5XZUUUH7hcIq3BirRmgGyP5JLMg7DPhZxkz2+UAN
+ Na4Z0h5t8PuyCmqjPkaPiTr5+HCRifNihNJwa5zwIDYbzcSp0c+fV2UVVTi+L50I9wua
+ SCKpc47ooHgwcex2iDRY8jD8sS9PSNt8lSyHN66Km6CP8RclVYPZjd/20Nl8O1chDTXl
+ iy6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWvvwcKE5CPpheAOyIwB5KlLCC1qh9UdYZ1HVevHo9AA7jat9ZQZsfobGs5HzhS/vQ+M721qT8=@lists.denx.de
-X-Gm-Message-State: AOJu0YznyRtTpBcLKNiHvCYUlAeTOb6nihuVT6vuC7/kIHdUV2nRbey+
- 6M7dkmCOvBHC8zyljfo7LzBvPWghbgLPJsrGWaPmqGhPqvjcgF1e8X61r4zfZCHXFYToX5RiSjB
- AbZTNufv1uApStChEmjTNB8H5FLsHGQYpJk9lyunLG51AtGH6oRkN0Zhgkn0i5HAvtbQ=
-X-Received: by 2002:a05:600c:3b8c:b0:431:251a:9dc9 with SMTP id
- 5b1f17b1804b1-4316169a5e7mr32688875e9.25.1729296879597; 
- Fri, 18 Oct 2024 17:14:39 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IF6URjYEdKjPbI2UQDmGdELGW2SSIL7CUqPExy/Wm5ECkGmGPhZtQj0NFITX40TiGjCMb3tWw==
-X-Received: by 2002:a05:600c:3b8c:b0:431:251a:9dc9 with SMTP id
- 5b1f17b1804b1-4316169a5e7mr32688725e9.25.1729296879139; 
- Fri, 18 Oct 2024 17:14:39 -0700 (PDT)
-Received: from [192.168.123.161]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43160682586sm36671585e9.1.2024.10.18.17.14.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Oct 2024 17:14:38 -0700 (PDT)
-Message-ID: <215a399c-8efd-4494-ae6a-6bfe4532a16a@canonical.com>
-Date: Sat, 19 Oct 2024 02:14:37 +0200
+ AJvYcCULqDSC+oXFYei5k+2qr/MKbeRFO6Xkmq5ojjjNN1zImCrhJ/NMIsp990qAdkcJ6pG7+G5GYy4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy6kDj0SWGeXsY4pociOlr5FiV8e2i5ikkY6rqHIQZJnZNXR4tE
+ FYoFZAY2e+h/cVZ6yjef53OjOZfECvDtHxpX49pi+nJtLZX5PPf4NH69zWzJiTliWF3uomaQo7h
+ eGpbDjf/OZVeufRK2nPiP/T3W4jij8odR+hkE
+X-Google-Smtp-Source: AGHT+IGkG2HVKbxLakJ4NzPI0QrQa72Hx/GfDH5pYmC7gD4ZhF735xjeOdO1xiigWFpCK1b1Snzy+sxSJ76NL67G/ag=
+X-Received: by 2002:a05:6214:318b:b0:6cc:654:a1cc with SMTP id
+ 6a1803df08f44-6cde15fe478mr52121166d6.47.1729303247538; Fri, 18 Oct 2024
+ 19:00:47 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] sandbox: add bootmethod EFI boot-manager
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: sjg@chromium.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
- mkorpershoek@baylibre.com, sughosh.ganu@linaro.org, kettenis@openbsd.org,
- u-boot@lists.denx.de
-References: <20241018011837.126813-1-heinrich.schuchardt@canonical.com>
- <20241018011837.126813-3-heinrich.schuchardt@canonical.com>
- <CAFLszTjjF1r4f6NjrYSFz36DK_X6v6rYMwDCUqiSLOPysGRC7g@mail.gmail.com>
- <ee96c1c0-c1d5-4f18-a1eb-f6460e859683@canonical.com>
- <875xppggnk.fsf@bloch.sibelius.xs4all.nl>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <875xppggnk.fsf@bloch.sibelius.xs4all.nl>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20241018163423.1562287-1-jonas@kwiboo.se>
+ <20241018163423.1562287-2-jonas@kwiboo.se>
+In-Reply-To: <20241018163423.1562287-2-jonas@kwiboo.se>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 18 Oct 2024 20:00:36 -0600
+Message-ID: <CAFLszTig2pF8pMhUCjjcfcJ6K4KQK2oWahsO7L5Bn9cwq2LEPA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] rockchip: rk356x: Implement checkboard() to print SoC
+ variant
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Tom Rini <trini@konsulko.com>, Dragan Simic <dsimic@manjaro.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,73 +88,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/19/24 01:01, Mark Kettenis wrote:
->> Date: Fri, 18 Oct 2024 19:26:01 +0200
->> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> 
-> Hi Heinrich,
-> 
->> On 10/18/24 19:21, Simon Glass wrote:
->>> Hi Heinrich,
->>>
->>> On Thu, 17 Oct 2024 at 19:18, Heinrich Schuchardt
->>> <heinrich.schuchardt@canonical.com> wrote:
->>>>
->>>> The EFI boot-manager is the default method to boot EFI binaries.
->>>> We should be able to use it on the Sandbox.
->>>>
->>>> * Enable EFI boot-manager bootmethod on the sandbox.
->>>> * Adjust unit tests to reflect the additional boot method.
->>>>
->>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>> Reviewed-by: Simon Glass <sjg@chromium.org>
->>>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->>>> ---
->>>> v2:
->>>>           no changes
->>>> ---
->>>>    arch/sandbox/dts/test.dts |  4 ++++
->>>>    test/boot/bootmeth.c      | 28 +++++++++++++++++-----------
->>>>    2 files changed, 21 insertions(+), 11 deletions(-)
->>>
->>> This is better, but I still see this.
->>>
->>> => bootflow scan
->>>        efi_var_to_file() Cannot persist EFI variables without system partition
->>>
->>> Please find a way to get rid of it. I can give some suggestions if you like.
->>>
->>
->> Would you, please, mind providing a rationale why you want this correct
->> message not to be written.
-> 
-> To me, warning about persisting EFI variables only makes sense if
-> you're actually trying to persist an EFI variable.  But all we're
-> doing here is scanning for possible bootflows.
+Hi Jonas,
 
-The UEFI specification requires to create Boot#### variables which are 
-non-volatile.
+On Fri, 18 Oct 2024 at 10:34, Jonas Karlman <jonas@kwiboo.se> wrote:
+>
+> Implement checkboard() to print current SoC model, e.g. one of:
+>
+>   SoC:   RK3566 v1
+>   SoC:   RK3566 v2
+>   SoC:   RK3566T v2
+>   SoC:   RK3568 v2
+>   SoC:   RK3568B2 v2
+>   SoC:   RK3568J v2
+>
+> when U-Boot proper is started.
+>
+> Information about what SoC model, variant and version is read from OTP.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+>  arch/arm/dts/rk356x-u-boot.dtsi        |  4 ++
+>  arch/arm/mach-rockchip/rk3568/rk3568.c | 65 ++++++++++++++++++++++++++
+>  configs/generic-rk3568_defconfig       |  2 +-
+>  3 files changed, 70 insertions(+), 1 deletion(-)
+>
 
-As the variables have to be non-volatile we try to persist them in a 
-file. And the message describes that this fails.
+Instead of this, can you use add a CPU driver? Then it should happen
+automatically - see print_cpuinfo().
 
-> 
->> I expect the sandbox to behave as any other board and provide warnings
->> when they are adequate.
-> 
-> The warning doesn't make sense to me on non-sandbox boards either.
-> 
-> I suspect this is the code that autogenerates EFI Boot options, so
-> code that sets Boot#### EFI variables.  But do we really care that we
-> can't make those persistent?  The code will just regenerate them upon
-> the next boot...
+> diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
+> index 0a0943b462a9..24a976cf7e21 100644
+> --- a/arch/arm/dts/rk356x-u-boot.dtsi
+> +++ b/arch/arm/dts/rk356x-u-boot.dtsi
+> @@ -87,6 +87,10 @@
+>         bootph-all;
+>  };
+>
+> +&otp {
+> +       bootph-some-ram;
+> +};
+> +
+>  &pcfg_pull_none {
+>         bootph-all;
+>  };
+> diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
+> index 768a37393290..fc4c140ab970 100644
+> --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
+> +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
+> @@ -4,6 +4,7 @@
+>   */
+>
+>  #include <dm.h>
+> +#include <misc.h>
+>  #include <asm/armv8/mmu.h>
+>  #include <asm/arch-rockchip/bootrom.h>
+>  #include <asm/arch-rockchip/grf_rk3568.h>
+> @@ -133,3 +134,67 @@ int arch_cpu_init(void)
+>  #endif
+>         return 0;
+>  }
+> +
+> +#define RK3568_OTP_CPU_CODE_OFFSET             0x02
+> +#define RK3568_OTP_SPECIFICATION_OFFSET                0x07
+> +#define RK3568_OTP_CPU_VERSION_OFFSET          0x08
+> +#define RK3568_OTP_PERFORMANCE_OFFSET          0x22
+> +
+> +int checkboard(void)
+> +{
+> +       u8 cpu_code[2], specification, package, cpu_version, performance;
+> +       struct udevice *dev;
+> +       char suffix[3];
+> +       int ret;
+> +
+> +       ret = uclass_get_device_by_driver(UCLASS_MISC,
+> +                                         DM_DRIVER_GET(rockchip_otp), &dev);
+> +       if (ret) {
+> +               debug("%s: could not find otp device, ret=%d\n", __func__, ret);
+> +               return 0;
+> +       }
+> +
+> +       /* cpu-code: SoC model, 0x35 0x66 or 0x35 0x68 */
+> +       ret = misc_read(dev, RK3568_OTP_CPU_CODE_OFFSET, cpu_code, 2);
+> +       if (ret < 0) {
+> +               debug("%s: could not read cpu-code, ret=%d\n", __func__, ret);
+> +               return 0;
+> +       }
+> +
+> +       /* specification: SoC variant, 0x2 for RK3568B2 and 0xA for RK3568J */
+> +       ret = misc_read(dev, RK3568_OTP_SPECIFICATION_OFFSET, &specification, 1);
+> +       if (ret < 0) {
+> +               debug("%s: could not read specification, ret=%d\n", __func__, ret);
+> +               return 0;
+> +       }
+> +       /* package: likely SoC variant revision, 0x2 for RK3568B2 */
+> +       package = specification >> 5;
+> +       specification &= 0x1f;
+> +
+> +       /* cpu-version: chip version, e.g. second letter of lot number */
+> +       ret = misc_read(dev, RK3568_OTP_CPU_VERSION_OFFSET, &cpu_version, 1);
+> +       if (ret < 0) {
+> +               debug("%s: could not read cpu-version, ret=%d\n", __func__, ret);
+> +               return 0;
+> +       }
+> +       cpu_version >>= 3;
+> +       cpu_version &= 0x7;
+> +
+> +       /* performance: used to identify RK3566T SoC variant */
+> +       ret = misc_read(dev, RK3568_OTP_PERFORMANCE_OFFSET, &performance, 1);
+> +       if (ret < 0) {
+> +               debug("%s: could not read performance, ret=%d\n", __func__, ret);
+> +               return 0;
+> +       }
+> +       if (performance & 0x0f)
+> +               specification = 0x14; /* T-variant */
+> +
+> +       suffix[0] = specification > 1 ? '@' + specification : 0;
+> +       suffix[1] = package > 1 ? '0' + package : 0;
+> +       suffix[2] = 0;
+> +
+> +       printf("SoC:   RK%02x%02x%s v%u\n",
+> +              cpu_code[0], cpu_code[1], suffix, cpu_version);
+> +
+> +       return 0;
+> +}
+> diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
+> index 1d06f3411fe0..f79f0e84400b 100644
+> --- a/configs/generic-rk3568_defconfig
+> +++ b/configs/generic-rk3568_defconfig
+> @@ -22,7 +22,6 @@ CONFIG_SPL_LOAD_FIT=y
+>  CONFIG_LEGACY_IMAGE_FORMAT=y
+>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-generic.dtb"
+>  # CONFIG_DISPLAY_CPUINFO is not set
+> -CONFIG_DISPLAY_BOARDINFO_LATE=y
+>  CONFIG_SPL_MAX_SIZE=0x40000
+>  CONFIG_SPL_PAD_TO=0x7f8000
+>  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> @@ -31,6 +30,7 @@ CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+>  CONFIG_SPL_ATF=y
+>  CONFIG_CMD_GPIO=y
+>  CONFIG_CMD_GPT=y
+> +CONFIG_CMD_MISC=y
+>  CONFIG_CMD_MMC=y
+>  CONFIG_CMD_ROCKUSB=y
+>  CONFIG_CMD_USB_MASS_STORAGE=y
+> --
+> 2.46.2
+>
 
-The same warning is written for any variable that cannot be persisted, 
-e.g. for the Boot#### variables that you create manually.
-
-Persisting auto-generated Boot#### makes sense as you may refer to these 
-in the BootOrder or BootNext variables.
-
-Best regards
-
-Heinrich
+Regards,
+Simon
