@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2481FD3C934
-	for <u-boot@archiver.kernel.org>; Sun, 20 Oct 2024 04:32:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4977CD3C927
+	for <u-boot@archiver.kernel.org>; Sun, 20 Oct 2024 04:33:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BE4A8901A;
-	Sun, 20 Oct 2024 06:32:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BFBFE88EB7;
+	Sun, 20 Oct 2024 06:33:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IaCpZ3/W";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I0L2wB+R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6D728901A; Sun, 20 Oct 2024 06:32:06 +0200 (CEST)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id 45EFF8901A; Sun, 20 Oct 2024 06:33:16 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98CD988DD1
- for <u-boot@lists.denx.de>; Sun, 20 Oct 2024 06:32:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 075DB88DD1
+ for <u-boot@lists.denx.de>; Sun, 20 Oct 2024 06:33:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2e2ed59a35eso2858188a91.0
- for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 21:32:04 -0700 (PDT)
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-71e4e481692so2886960b3a.1
+ for <u-boot@lists.denx.de>; Sat, 19 Oct 2024 21:33:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729398718; x=1730003518; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729398792; x=1730003592; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WDzqrVbd0S4fgg+fIFUCU8gtaFaUaJIFTV755hvtKg0=;
- b=IaCpZ3/WZRzC1n948oGWIzFFaw4WMZKozaHYBt+EQjrIwGwv+6Y9eU07647AphyQHT
- zzJ86QPycOtJ5qqXBQ5SX732Ub3caZrVcgg7d0XQ3zmEWvfLifmjouYut/MlEDduZGy3
- CEuF/ZTxr9zKhOVIr68tmQC8HAIVSAPRegInsyt0DOXpUHIqrGsyaqZ43IlmVpBEE1qc
- 1Vo0roEGA49QjOd19ZG4d9s0o7ZQBgK08gwM0rR+yj2Macs053EeSoR4+85MHyYNdDsV
- t7YFct2mzRzNglPKTmixjJ4GGUZP77AHNCrFunJomrLkNkK7Gy8itnn32qSRzqNZUFrr
- 1rrQ==
+ bh=XLcC3Y3EK2wyMiF/S7+wXiLUWO1CIYkP5drVvTqFQgE=;
+ b=I0L2wB+Rxzw8Z/rQVQiEDEEXMrnK3t26OR5nsfQKVz14m2mt5yDaD8quTXx8GTTAXT
+ uNRNqopQ8EAllJNTDs9FeZ8xyqMnllpuh33KxhIh1VO9xDPc/hFhfBP2YfFWO34m/qSa
+ 76mxbBDoDd29Zgi3iot/5Rp59JS+sfKSN036HHRcKB1arEcR0IrMFEYHLxFdNd7KGmHu
+ kgntpLPk9a5XbFbR6PQFttwBID7hnPqoedkIz9v72uxU+hXyZSaR16qTQk1lhWmCtQG4
+ 5VT0z4KE9thzHhUcF3js/3liy1diaMWuFMRiFCh/ikzbRV2KC90LIY87AxQUADMObqKH
+ jtfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729398718; x=1730003518;
+ d=1e100.net; s=20230601; t=1729398792; x=1730003592;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WDzqrVbd0S4fgg+fIFUCU8gtaFaUaJIFTV755hvtKg0=;
- b=uKohk2DI2NRXkl7AgE8UR/Hfoq3DCLX6i9jKRK3sBeRZkNOGQeZRwErrXriAWAay18
- MdZbHPTdvzHCfoPdGX7ajrLKawHDaZzFhkQDk6P+UnDSwabC5AgnUX+HK75LUnRJaCwr
- 0KCQc0pr6kNgdx4+sdc1vW6klqK0FUOhQvnMFnAR8ZSUMk6uOqH2qc2wX4IWymG0HFN/
- +2RLjBcVI11sKcz1pWRUVqQmSOlEa9XJp/+tCdblt4m6FvnLfZ5LPF204wN2030KeXmz
- Uk3TNy4AA+O5T9hzC1rWMFPI0joVm9lKeBARk2hHdOb62PMZwpLOkwVZrec73RBiPCEm
- DFAQ==
-X-Gm-Message-State: AOJu0YymPgT1MOeSw55yhszDs6KRcBhq2WfedghwbNE0AVT5tP7jsOtS
- ENeW6etmaq/NNr95by02CpnwngjMrvwUURdHHuh1Mj29iDyqNUF/eCkV13yVSqur5Iir+ycKuEL
- qCXOB7xd3GtLOyW6OJfRf/COqhNZXgMS12XjxO9Whn2yHMON/tp0=
-X-Google-Smtp-Source: AGHT+IFihsCcbjjOx0NhN8JkC4avVgUZ8sKCLwtItRZL4+hs8Bw5QIM5H0t6ZFWOmj5LJObpIEknqxajNKCiWMTKfaQ=
-X-Received: by 2002:a17:90a:6305:b0:2cd:4593:2a8e with SMTP id
- 98e67ed59e1d1-2e561733904mr8054214a91.15.1729398718059; Sat, 19 Oct 2024
- 21:31:58 -0700 (PDT)
+ bh=XLcC3Y3EK2wyMiF/S7+wXiLUWO1CIYkP5drVvTqFQgE=;
+ b=wWiZI8EX/L5Y4ObKbgDBR+omYYIzFX3L53oYNaDwON7XWbaHlFMifctca3ZZ45LV4P
+ tHY+6P4L4x93B0iweNezMkf0ilqu4ratT05NM5NmYbE7P8X1+p0GpnKZ34VaIm8Ms9B9
+ PGbtZh1Ut8N6MRiEoPe79CBnw7pQDiamRKhYMMWehKvY+BqAVr0eFfanFYA8rMLAKH4t
+ qNmEXey9IkM4HtN+lCAS2waCimKdlyQAAGL6dyUdyRfOX2zU4EahpjwDG9hrs7xhFUnX
+ 5xixuFwxDrYXbFFnLI0qjcghLbrI0+C1M0VTyP2qvVskXxYzYMUsjnAQ5RBuFVkD3zsD
+ EJgg==
+X-Gm-Message-State: AOJu0YyyB7jhDcWdCGwy8hQIE8j5xCf6/UUUA1x6jnT8SxQin8hDBPos
+ 7Yj7+uU0Cy2OlIneVLd7bDCi/PZ0FT8KEh3f81CKwRMGKziiX5kG/G6LSC0wOPEH18UWa1JkHhg
+ n75rZ/JYb1KWfj3uzV/jdaJRfRpI+UAkUMN7HN8zL6Rs2XlTL/LU=
+X-Google-Smtp-Source: AGHT+IGRkehU/yfazTZIiBj3U5Sgr2ZchK/82vc1MeqAoKBmHTpVRKKSX5K3Yek4pO3PDm0sCAdcCqaZR5Ls71OR2bU=
+X-Received: by 2002:a05:6a21:70cb:b0:1d9:275b:4eed with SMTP id
+ adf61e73a8af0-1d92c5b249amr9758142637.42.1729398792522; Sat, 19 Oct 2024
+ 21:33:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241019085029.22151-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241019085029.22151-1-heinrich.schuchardt@canonical.com>
+References: <20241019090356.25288-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241019090356.25288-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 20 Oct 2024 07:31:21 +0300
-Message-ID: <CAC_iWjK1aDk86u--BcN9rZnKzjO_O0EukbO8UT088rw2Fu8wDw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_selftest: fix typo 'got languages' in HII test
+Date: Sun, 20 Oct 2024 07:32:36 +0300
+Message-ID: <CAC_iWjJo8A6J4nedS9wrm3q5CA4tUuda9RzFF7cv6b4XWyCY0A@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_selftest: make HII test data static
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -85,31 +85,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 19 Oct 2024 at 11:50, Heinrich Schuchardt
+On Sat, 19 Oct 2024 at 12:04, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> %s/got languages are/Available languages:/
+> Variables that are only used locally in a module should not be exported.
+>
+> * Make the HII test data variables static.
+> * Remove unused GUIDs.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  lib/efi_selftest/efi_selftest_hii.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  lib/efi_selftest/efi_selftest_hii_data.c | 28 ++++--------------------
+>  1 file changed, 4 insertions(+), 24 deletions(-)
 >
-> diff --git a/lib/efi_selftest/efi_selftest_hii.c b/lib/efi_selftest/efi_selftest_hii.c
-> index f219c0120a3..c363df466dc 100644
-> --- a/lib/efi_selftest/efi_selftest_hii.c
-> +++ b/lib/efi_selftest/efi_selftest_hii.c
-> @@ -913,7 +913,7 @@ static int test_hii_string_get_languages(void)
->                 goto out;
->         }
+> diff --git a/lib/efi_selftest/efi_selftest_hii_data.c b/lib/efi_selftest/efi_selftest_hii_data.c
+> index d19f0682afd..5fc890112b4 100644
+> --- a/lib/efi_selftest/efi_selftest_hii_data.c
+> +++ b/lib/efi_selftest/efi_selftest_hii_data.c
+> @@ -39,7 +39,7 @@
+>  /* HII keyboard layout */
+>  #define EFI_NULL_MODIFIER              0x0000
 >
-> -       efi_st_printf("got languages are %s\n", languages);
-> +       efi_st_printf("Available languages: %s\n", languages);
+> -u8 packagelist1[] = {
+> +static u8 packagelist1[] = {
+>         // EFI_HII_PACKAGE_LIST_HEADER, length = 20
+>         // SimpleFont, Font, GUID, Form, String, Image, DevicePath,
+>         // (74)        (110) 20    (8)   78      (67)   (8)
+> @@ -262,7 +262,7 @@ u8 packagelist1[] = {
+>         EFI_HII_PACKAGE_END
+>  };
 >
->         result = EFI_ST_SUCCESS;
+> -u8 packagelist2[] = {
+> +static u8 packagelist2[] = {
+>         // EFI_HII_PACKAGE_LIST_HEADER, length = 20
+>         // SimpleFont, Font, GUID, KeyboardLayout, Form, End
+>         // (74)        (122) 20    192             (8)   4
+> @@ -424,30 +424,10 @@ u8 packagelist2[] = {
+>         EFI_HII_PACKAGE_END                     // 1
+>  };
 >
+> -efi_guid_t packagelist_guid1 =
+> -       EFI_GUID(0x03abcd89, 0x03f4, 0x7044,
+> -                0x81, 0xde, 0x99, 0xb1, 0x81, 0x20, 0xf7, 0x68);
+> -
+> -efi_guid_t packagelist_guid2 =
+> -       EFI_GUID(0x8685ded3, 0x1bce, 0x43f3,
+> -                0xa2, 0x0c, 0xa3, 0x06, 0xec, 0x69, 0x72, 0xdd);
+> -
+> -efi_guid_t kb_layout_guid11 =
+> +static efi_guid_t kb_layout_guid11 =
+>         EFI_GUID(0x8d40e495, 0xe2aa, 0x4c6f,
+>                  0x89, 0x70, 0x68, 0x85, 0x09, 0xee, 0xc7, 0xd2);
+>
+> -efi_guid_t kb_layout_guid12 =
+> -       EFI_GUID(0x2ae60b3e, 0xb9d6, 0x49d8,
+> -                0x9a, 0x16, 0xc2, 0x48, 0xf1, 0xeb, 0xa8, 0xdb);
+> -
+> -efi_guid_t kb_layout_guid21 =
+> -       EFI_GUID(0xe0f56a1f, 0xdf6b, 0x4a7e,
+> -                0xa3, 0x9a, 0xe7, 0xa5, 0x19, 0x15, 0x45, 0xd6);
+> -
+> -efi_guid_t kb_layout_guid22 =
+> -       EFI_GUID(0x47be6ac9, 0x54cc, 0x46f9,
+> -                0xa2, 0x62, 0xd5, 0x3b, 0x25, 0x6a, 0x0c, 0x34);
+> -
+> -efi_guid_t package_guid =
+> +static efi_guid_t package_guid =
+>         EFI_GUID(0x0387c95a, 0xd703, 0x2346,
+>                  0xb2, 0xab, 0xd0, 0xc7, 0xdd, 0x90, 0x44, 0xf8);
 > --
 > 2.45.2
 >
-
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
