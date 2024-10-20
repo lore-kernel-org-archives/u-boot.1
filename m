@@ -4,89 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 326EAD3C92F
-	for <u-boot@archiver.kernel.org>; Sun, 20 Oct 2024 07:23:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 133D8D3C927
+	for <u-boot@archiver.kernel.org>; Sun, 20 Oct 2024 09:59:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 604B488FE8;
-	Sun, 20 Oct 2024 09:23:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 40A3B88E52;
+	Sun, 20 Oct 2024 11:59:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Enwmqlyn";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1729418356;
+	bh=OnKeHzJj5Xgd6tNG4MnQKKoqmXK7XsggWsFnP948aZA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=OCZCjF0QKXdOeMPfUeZjMM8gughKyzIXszFu7XPvLbpRd1KCNDQ8XTENy57vys+iv
+	 Rg36rE3CpEsykJ9AkinMwZr0+eZgOHSEnK5PvmJAgw80JCQQFPRBuZhydyVyJckhG9
+	 2Gq3ypkpCo0HHGGM6f1vPG2hRKYsvLjlsr+J1OPqQy8QiOpmJZEahlSkAs2IhU+4bq
+	 Fk2XDWcjcPCxARajlawt1HRXaOWoFUSSIF/b8dmnQPiELL+Vz+gs7YWYGzRQl2YdpM
+	 bD+8rSM1s1EQHdSSDwz898CP1QIv7Yb2yOSjyR10a4z/blR0BEUr+2fQzit+vSf6Mr
+	 Jm1MOUdia2Rvw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC5128901A; Sun, 20 Oct 2024 09:23:03 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id CEEB588F68; Sun, 20 Oct 2024 11:59:15 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73D7088FC7
- for <u-boot@lists.denx.de>; Sun, 20 Oct 2024 09:22:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6C9188E33
+ for <u-boot@lists.denx.de>; Sun, 20 Oct 2024 11:59:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C8D0C3F1C9
- for <u-boot@lists.denx.de>; Sun, 20 Oct 2024 07:22:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1729408976;
- bh=6bw8Ava74TexEfC5oUGO04G+P/AYKnhrAq2+BlLDPSA=;
- h=Message-ID:Date:MIME-Version:To:Cc:From:Subject:Content-Type;
- b=Enwmqlyn+348/P3cZ+36BRsw83cK/3Yc9hetOxhoDGYuQNy3Q2MxgYvPxS1E2wX0e
- fY+sy/B4rogJs+IWJ49ajgNI8glc3XdxTd+aFXG850Cyp2DSzyIdhGXKOBNdQ640nf
- FI3gmIJcUxzngxZuK565NrsXiS1YGOjdTP9NUcRrd7x0qQwxypd3X+7xZRGmTBDNEn
- FU+RsFdZuFI7sDRQpyVExnaKgQwxcd+YmC/LvHpFLXb9EZ+f0HY+hV6I1NoQmKUOXr
- u0GJ3zhZCqUWopcYnr8sreS1ylkosi0Us+4jK07BZrUgDQk1jVE6lxsitY1G/Hh8EC
- uHE2KV0boPvvw==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-4315544642eso26034225e9.3
- for <u-boot@lists.denx.de>; Sun, 20 Oct 2024 00:22:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729408976; x=1730013776;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=6bw8Ava74TexEfC5oUGO04G+P/AYKnhrAq2+BlLDPSA=;
- b=G1bUb77xnfJbdFfXWBAGYkGr0Ww+xxicvJYgE9uZmaZQWpnBaw51Phm3aMmTgYBLJx
- 0YV08ppWlwEsyYnJJTpzt+hzrPQnHFlBtNzI8g2LBq4khWu0W/kmrl+R1aIP9WQGfZRF
- ucnZZj7b5xmEhRGsVED7I6xkY4PMkWJyrT6SnluwDKt3qYU4ERCnp0oZAG0d8jopoG5N
- oMBGTQg3wU3sZgFAMNl+5M39jC/eERd1T1ijDHID9L8WzxS2N1m+YMTjLzf9pjUP9LWV
- xPt9C+v67C6eIaYSCiYAaeBU6EyCepnR+15wL87W6GPArdi9yaBZKRqBuvfsqhxC5n1+
- LpyQ==
-X-Gm-Message-State: AOJu0YzPmvZwX8gjd275xx77WHMndYdKnFbxcn1uOD+ZTeuNU66TVz9v
- 3H20TNYRkiQE5ri5iTeZYpmB1F6eOL9AikZHGQreuuBKsO/4PcLma0vn74bBUwhyPgx0ht8rkLd
- k35dW4eiEuNWvY/dG3dpNJMIfNtIGbeFSli2GYkof1MYnRH8RdRQskyqk/L+Mzao8/iI=
-X-Received: by 2002:a05:600c:4687:b0:431:4f5e:1f61 with SMTP id
- 5b1f17b1804b1-43161637703mr66762295e9.14.1729408976132; 
- Sun, 20 Oct 2024 00:22:56 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFkeKJlQva7QJm9sXE30gKU7swb3xzPUG8tMwYXQSflN5fCAwn6ZbwfIdlL4/5sGomykFWYLw==
-X-Received: by 2002:a05:600c:4687:b0:431:4f5e:1f61 with SMTP id
- 5b1f17b1804b1-43161637703mr66762135e9.14.1729408975736; 
- Sun, 20 Oct 2024 00:22:55 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:6e0:2078:811:73f:9fa1:af4c?
- ([2a02:3035:6e0:2078:811:73f:9fa1:af4c])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4316f50b15csm16094585e9.0.2024.10.20.00.22.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 20 Oct 2024 00:22:55 -0700 (PDT)
-Message-ID: <5b347d0c-65a2-400d-b7d9-470b1dd3fb41@canonical.com>
-Date: Sun, 20 Oct 2024 09:22:53 +0200
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4XWYnC5V1rz9tSM;
+ Sun, 20 Oct 2024 11:59:11 +0200 (CEST)
+Message-ID: <a212fde1-f284-4b69-931d-d5ddb8215ea0@denx.de>
+Date: Sun, 20 Oct 2024 11:59:10 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] watchdog: introduce separate SPL symbol for WDT_GPIO
+To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+References: <20241007174716.1068936-1-ravi@prevas.dk>
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Chintan Vankar <c-vankar@ti.com>, Ken Kurematsu <k.kurematsu@nskint.co.jp>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: Pull request efi-2025-01-rc1-2
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20241007174716.1068936-1-ravi@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4XWYnC5V1rz9tSM
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,68 +70,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+On 10/7/24 19:47, Rasmus Villemoes wrote:
+> Currently, enabling WDT_GPIO on a board which uses SPL, but does not
+> have SPL_WDT, SPL_DM_GPIO or SPL_OF_CONTROL enabled, breaks the build.
+> 
+> Make it possible to use the WDT_GPIO driver on such boards by
+> introducing a separate symbol controlling whether the driver is built
+> for SPL. Make it default to WDT_GPIO such that boards that already
+> have it enabled and all the SPL prerequisites satisfied will continue
+> to have it in SPL.
+> 
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 
-The following changes since commit f1de0b97d1cbfd982b7a507962bb21b12a024b2f:
+Reviewed-by: Stefan Roese <sr@denx.de>
 
-   Merge patch series "Cleanup dma device in spl and move dma 
-channel[0]" (2024-10-17 18:21:20 -0600)
+Thanks,
+Stefan
 
-are available in the Git repository at:
+> ---
+>   drivers/watchdog/Kconfig  | 9 +++++++++
+>   drivers/watchdog/Makefile | 2 +-
+>   2 files changed, 10 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index 0c3e9913318..18028269b9e 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -178,6 +178,15 @@ config WDT_GPIO
+>   	  doc/device-tree-bindings/watchdog/gpio-wdt.txt for
+>   	  information on how to describe the watchdog in device tree.
+>   
+> +config SPL_WDT_GPIO
+> +	bool "External gpio watchdog support in SPL"
+> +	depends on SPL_WDT
+> +	depends on SPL_DM_GPIO
+> +	depends on SPL_OF_REAL
+> +	default WDT_GPIO
+> +	help
+> +	  Support for external watchdog fed by toggling a gpio in SPL.
+> +
+>   config WDT_MAX6370
+>   	bool "MAX6370 watchdog timer support"
+>   	depends on WDT
+> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+> index 7b39adcf0ff..a450c33b3ad 100644
+> --- a/drivers/watchdog/Makefile
+> +++ b/drivers/watchdog/Makefile
+> @@ -30,7 +30,7 @@ obj-$(CONFIG_WDT_CORTINA) += cortina_wdt.o
+>   obj-$(CONFIG_WDT_ORION) += orion_wdt.o
+>   obj-$(CONFIG_WDT_CDNS) += cdns_wdt.o
+>   obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
+> -obj-$(CONFIG_WDT_GPIO) += gpio_wdt.o
+> +obj-$(CONFIG_$(SPL_TPL_)WDT_GPIO) += gpio_wdt.o
+>   obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
+>   obj-$(CONFIG_WDT_MCF) += mcf_wdt.o
+>   obj-$(CONFIG_WDT_MESON_GXBB) += meson_gxbb_wdt.o
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git 
-tags/efi-2025-01-rc1-2
+Viele Grüße,
+Stefan Roese
 
-for you to fetch changes up to 640c6c6cbaafa1b049118d431cf218d9dce3cdd8:
-
-   efi_driver: use blk_create_devicef() (2024-10-18 17:05:19 +0200)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/22810
-
-----------------------------------------------------------------
-Pull request efi-2025-01-rc1-2
-
-Documentation:
-
-* Add document describing Ethernet boot on AM62x SoC
-* Fix typo in blkmap command example
-
-UEFI:
-
-* Avoid #ifdef in efi_setup.c
-* Reduce message noisiness if ESP is missing
-* Remove ERROR:, WARNING: prefixes in messages
-* Use blk_create_devicef() in block device driver
-
-Others:
-
-* Let CONFIG_CMD_WGET depend on CONFIG_CMD_NET
-
-----------------------------------------------------------------
-Chintan Vankar (1):
-       doc: board: ti: am62x_sk: Add document for Ethernet boot on AM62x 
-SoC.
-
-Heinrich Schuchardt (6):
-       cmd: wget: CONFIG_CMD_WGET must depend on CONFIG_CMD_NET
-       efi_loader: avoid #ifdef in efi_setup.c
-       efi_loader: reduce noisiness if ESP is missing
-       efi_loader: add missing lf in error message
-       efi_loader: remove ERROR:, WARNING: prefixes in messages
-       efi_driver: use blk_create_devicef()
-
-Ken Kurematsu (1):
-       doc: blkmap: Fix typo in command example
-
-  cmd/Kconfig                       |   1 +
-  doc/board/ti/am62x_sk.rst         | 196 
-++++++++++++++++++++++++++++++++++++++
-  doc/usage/blkmap.rst              |   2 +-
-  lib/efi_driver/efi_block_device.c |   8 +-
-  lib/efi_loader/efi_helper.c       |  20 ++--
-  lib/efi_loader/efi_memory.c       |   2 +-
-  lib/efi_loader/efi_setup.c        |  25 ++---
-  lib/efi_loader/efi_var_file.c     |  22 +++--
-  8 files changed, 236 insertions(+), 40 deletions(-)
-
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
