@@ -4,73 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EB6DD15DA5
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 15:18:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 856DBD15DAE
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 15:23:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D303F88EAF;
-	Mon, 21 Oct 2024 17:18:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id F0C2188901;
+	Mon, 21 Oct 2024 17:23:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RntH1rFz";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J6rwwa2K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5EE4883D4; Mon, 21 Oct 2024 17:18:17 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 061DE885F4; Mon, 21 Oct 2024 17:23:21 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8709388DC8
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 17:18:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 221F988901
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 17:23:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49LFI26q080484;
- Mon, 21 Oct 2024 10:18:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729523882;
- bh=R4d3RcGY94A93RMbg1cJVLIJgvzLKPySUQmIhtHTKkY=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=RntH1rFzzMOpFCwaC92hYUUxPBWSagS/6e3H6mvCZsT8zeP8U++1ObTrjoEVtlSDi
- 80SIjcImZrhBR7CGh5x6lwzbZO+AXklL3V4kViKBQtxB50Eju6UFQaRzqjVB73TvZ4
- aEmtNwa5f5lr7MxiwVupTBMZeh00CfLZQtjFEV4U=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49LFI2vS117570
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 21 Oct 2024 10:18:02 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 21
- Oct 2024 10:18:01 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 21 Oct 2024 10:18:01 -0500
-Received: from [172.24.227.193] (devarsht.dhcp.ti.com [172.24.227.193] (may be
- forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49LFHtDe055340;
- Mon, 21 Oct 2024 10:17:56 -0500
-Message-ID: <66434f62-e7e6-5414-cc5e-64f516288795@ti.com>
-Date: Mon, 21 Oct 2024 20:47:55 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2e2eb9dde40so3706849a91.0
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 08:23:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729524196; x=1730128996; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=nXnjiO7mkXBFkF2SdWA/swj6oYF4snMYyChrsR8rUzQ=;
+ b=J6rwwa2KBXex0C2Mnrzb9d32/7EZiDcVtYJDpttp/Zd+qMon3HrkUitmBo8Vm2UUSq
+ +Z+usZlunYiuMR4Pbwqg/gMot1QGWtnsUoeZCVmt69cNPsdvLiwVb2owzkKo9QwWEYG5
+ wOvzbYny1GKAEIr3kt/UEJ/y16Zc89LbUPeTI7Tw6qa5LTXdsu3Qp/bxyZATzki4T/nZ
+ cfeNVR2aGPb9cjo1Q+VOIopq4VqbzrXrCsRIQQ6m4iJi+ZAwARuwczn07LGmII+bRmN0
+ 7EeGj5Mrp6QH9WlctpdsCuKaupregsxJJEiHI7YxLnbkJnz8wsLA4R2juhU03anXuogo
+ 85NA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729524196; x=1730128996;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nXnjiO7mkXBFkF2SdWA/swj6oYF4snMYyChrsR8rUzQ=;
+ b=MNw77eOJ0TDgL3zFH3gxKxqAYJ5CYMdzOnHF/dPNPk0G0jZlggVFTrGccrgZbSB0HN
+ KsHFnLtgAkFNn7ajtua/bwSxRuNaXzNxmgllToJ5XYBf8jrzkFw38nelRdShexRfWMDl
+ r3mjc3ZxCKioYF0Q7WIPDg56lHr6MdYiLkPecSK9TtA2i9+nEMGEsJ7q2N4lMs9ITwXx
+ x1A0MQwBsbxE7R8mKN4PbEVkPKmEMoGODLsErixbKDOp7xpKF+Io6LLvTkzxKGCkDNVV
+ VA0qutaI+EmoCcxVP8QoRLZM7hRvEx4+GLDQtVpgylgiGIRS+44j8kM1bgZliakuApTJ
+ spCQ==
+X-Gm-Message-State: AOJu0Yw1N/tIiXzbZq7aa+YUa4jc+TAo6HEsB/eWfWF58iZhYSZEz415
+ 5GC0T0Fa0djDpOe+lvPzDOZZzqvxilQrTnFZxgxBdaIOvilUHDtOc1gXwlWjDRDLexC39A+Ujjh
+ 8uqK52N+EfQX/z5Bg8qfG57pNbQkDAB5JO9ZxGA==
+X-Google-Smtp-Source: AGHT+IHAap0eAWxLZNMPbDVwctCXgE+pavlqAUOLtydvx7DSbbmx/mQeV83uivRR/95ZvdXda7fti18QDpkypPJ3Wt8=
+X-Received: by 2002:a17:90b:3b4f:b0:2e2:d181:6808 with SMTP id
+ 98e67ed59e1d1-2e5618f6650mr14851487a91.30.1729524196595; Mon, 21 Oct 2024
+ 08:23:16 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH 0/3] Simple-framebuffer node related updates
-Content-Language: en-US
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <bb@ti.com>
-CC: <sjg@chromium.org>, <agust@denx.de>, <praneeth@ti.com>, <nm@ti.com>,
- <vigneshr@ti.com>, <s-jain1@ti.com>, <r-donadkar@ti.com>,
- <j-humphreys@ti.com>, <ilias.apalodimas@linaro.org>,
- <xypron.glpk@gmx.de>, <akashi.tkhro@gmail.com>,
- <mkorpershoek@baylibre.com>, <eajames@linux.ibm.com>,
- <caleb.connolly@linaro.org>, <quentin.schulz@cherry.de>,
- <martinstolpe@gmail.com>, <iivanov@suse.de>, <n-jain1@ti.com>
-References: <20240925151354.480704-1-devarsht@ti.com>
-From: Devarsh Thakkar <devarsht@ti.com>
-In-Reply-To: <20240925151354.480704-1-devarsht@ti.com>
+References: <20240816154658.1866186-1-raymond.mao@linaro.org>
+ <20240816154658.1866186-11-raymond.mao@linaro.org>
+ <20240819221928.GJ1626301@bill-the-cat>
+In-Reply-To: <20240819221928.GJ1626301@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Mon, 21 Oct 2024 11:23:05 -0400
+Message-ID: <CAEfUkULLt_0=aKkjXVx6RiBkC7YuK8bsmX+dHC3vmL6UjC0PCA@mail.gmail.com>
+Subject: Re: [PATCH 10/10] tests: update smbios pytest
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Bin Meng <bmeng@tinylab.org>, Stefan Roese <sr@denx.de>,
+ Jonas Karlman <jonas@kwiboo.se>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Michal Simek <michal.simek@amd.com>,
+ Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Peter Robinson <pbrobinson@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,29 +102,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Gentle reminder.
+Hi Tom,
 
-Hi Tom, Bryan,
+On Mon, 19 Aug 2024 at 18:19, Tom Rini <trini@konsulko.com> wrote:
 
-On 25/09/24 20:43, Devarsh Thakkar wrote:
-> This series fixes some compilation issues related to FDT_SIMPLEFB
-> and VIDEO and along with that enables support for dynamic simplefb
-> node enablement for AM62x platform.
-> 
-> Devarsh Thakkar (3):
->   boot/Kconfig: Add Video Kconfig as dependency for FDT_SIMPLEFB
->   boot: fdt_simplefb: Remove conditional compilation checks for VIDEO
->     Kconfig
->   board: ti: am62x: evm: Update simple-framebuffer node in device-tree
-> 
+> On Fri, Aug 16, 2024 at 08:46:53AM -0700, Raymond Mao wrote:
+> > Update the expected test result to align with the smbios library changes.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> >  test/py/tests/test_smbios.py | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/test/py/tests/test_smbios.py b/test/py/tests/test_smbios.py
+> > index 82b0b689830..ffa4ea795ec 100644
+> > --- a/test/py/tests/test_smbios.py
+> > +++ b/test/py/tests/test_smbios.py
+> > @@ -32,7 +32,7 @@ def test_cmd_smbios_sandbox(u_boot_console):
+> >      """Run the smbios command on the sandbox"""
+> >      output = u_boot_console.run_command('smbios')
+> >      assert 'DMI type 0,' in output
+> > -    assert 'String 1: U-Boot' in output
+> > +    assert 'Vendor: U-Boot' in output
+> >      assert 'DMI type 1,' in output
+> >      assert 'Manufacturer: sandbox' in output
+> >      assert 'DMI type 2,' in output
+>
+> This needs to be done with the change, not by itself.
+>
+> Sorry but I didn't get what you mean... but shall I exclude this one from
+the series?
 
-
-Is it possible to pull in this series for -next branch ? It is already
-carrying a R-B for first two patches and last one was peer reviewed informally
-too [1].
-
-[1]:
-https://lore.kernel.org/all/CAPHZmLZopucK5uMwENuF83pRMLYR2A5sC7fes4-1JXE4jX7=rw@mail.gmail.com/
-
-Regards
-Devarsh
+Regards,
+Raymond
