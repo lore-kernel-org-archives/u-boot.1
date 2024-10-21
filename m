@@ -4,56 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C369D0E6EE
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 10:51:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B76BDD0E6F1
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 11:00:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFEF988ED7;
-	Mon, 21 Oct 2024 12:51:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id 07AC688BBE;
+	Mon, 21 Oct 2024 13:00:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="OjRM+DBk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MfNDJO82";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4843688EE4; Mon, 21 Oct 2024 12:51:40 +0200 (CEST)
-Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6548C88EA7; Mon, 21 Oct 2024 13:00:51 +0200 (CEST)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4161688E35
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 12:51:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1B837148AE42; Mon, 21 Oct 2024 12:51:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1729507897; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=aB9hw/qOx9Hk1HxRDN1BSyHYSbA3m3hnMBe2myxrDSw=;
- b=OjRM+DBkl358FuveOVkz092BJgOGgoJyKYB3O8mJCeoO6wl4QxexaXDRbPAH6ViOjRThlX
- KJr/w48cNhjn7sCQ/19fFsvqJ5au1NegYYyLnApvG2tKs43uJmhe97CBj6nQ5xuKu9pTqa
- rGFQrw1H3wcq/5gWq3hdVHO+G3zk+uHFS0h8Br0OMFwFGYzCsL3QV8w+jTKGpy2X0GEsys
- yGuke+LLidACsrzeEOhk0iZ9QbjzfjPiFelCHV4I2CxMToLvZH0Bec0UnLdnRn0uKLaFIL
- LSxs8VNNXoeQLDiqzhr1Y5H0VnSz4WUVPOwSjImsBtWB++Y2W9XEQ4PWjFwWqw==
-Date: Mon, 21 Oct 2024 12:51:35 +0200
-From: Alexander Dahl <ada@thorsis.com>
-To: Benedikt Spranger <b.spranger@linutronix.de>
-Cc: Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de,
- John Ogness <john.ogness@linutronix.de>
-Subject: Re: [PATCH 0/5] collected fallout of porting an ATSAMA5D27 based board
-Message-ID: <20241021-union-repressed-6ff41958aa98@thorsis.com>
-Mail-Followup-To: Benedikt Spranger <b.spranger@linutronix.de>,
- u-boot@lists.denx.de, John Ogness <john.ogness@linutronix.de>
-References: <20241018083006.10349-1-b.spranger@linutronix.de>
- <20241018-unsubtle-yield-8ac617356e92@thorsis.com>
- <20241018161908.3f6a13eb@mitra>
- <20241021-steadily-rephrase-ec1f100026e4@thorsis.com>
- <20241021122017.34fc9f3c@mitra>
+ by phobos.denx.de (Postfix) with ESMTPS id E50C688365
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 13:00:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-20e576dbc42so28639795ad.0
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 04:00:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729508447; x=1730113247; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=024CXQIvlMCZR/r3tdwanDNRhfSHwJAAuObNa0aEGDo=;
+ b=MfNDJO82YwR9/XzvvRBInFBONU+Bwjh6Ddq4J/fs16bmZHnY9xGDeYpvZI4fliOePD
+ vgeYngdhXNuqKsUn5AvbeotzvBJvY/lPHTOfgSE43RFMxts9SnPGWq7cM308tTZ4RusN
+ HXKRE5V5fgTdYnjIHTXQ/HmtxgN0gamxmu8Ow5FANU7ZaBZAIcOipA7qa2r0fcsJoRKC
+ iCfKcJ4w43hfAmSQn2dv4+TEnR1Xj9u6wDKYhbMULmKm14WnUrP/o53bV0LXlURE0Kjc
+ NzaXaHs+5WEU3gtsaFftEJArVdiYz1xfZ1J0OcNKOxOG7zgiH6FPoZr4jzzIsnFZNIZe
+ mmDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729508447; x=1730113247;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=024CXQIvlMCZR/r3tdwanDNRhfSHwJAAuObNa0aEGDo=;
+ b=kkEe5yz9b9J9cxYWEN6vbjjlBb7ATw55gdGKOaMojJYFLhSyinFw1DRJYFJVQxLO9C
+ J6VTPMbjY1tjbz5LfXl9XwppPtdC7yVmc7aWhyPoU8E1IPzMXSVqQe+I3ror4yS7rWFJ
+ tU7hpWIL+ZCwasiXBXYMn9AObDBXyS7x2QWYysFkCGVFepOkeZ+GkgLPj5rT01GZkhKj
+ BJJiWklxkHjCc1gXsx4tgALIpIlMvxTrD/rGY+BTauQ10EMcfAvFF+s7GbPgai3yMGiu
+ U8Cr5ozRQEbT6ztZinamzXzRORLVxILxtaQhCXGiaAIzsCGBVe/Sd0qt2Aqc3vo55ScO
+ 76cg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUOv0LccnxJi4lIepJF90RJ3p5Hdf3bo7s8gI475Ib1gzZM7R95DrmoZ0kexxVIdWc9w7ZxVWg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwBBTJ1viEdMTdkFvps1OTurng9qKp8QQrZumK4QFkz9c3AksvX
+ avaPlo3rxIDMEbPWTZBF7uLspOWOlcVPNvrSXdKGtatI3GhHO9c4ByUQW4rQTZLA2q8BHQKUcNt
+ BTcGq4QRStnl+G80uBsPyqIiFgnTgwC3h5MHxcw==
+X-Google-Smtp-Source: AGHT+IG/HmkPNkZUn16KsSX0E05JOLd8/ymtGwS6Bq1mWuZU+6Jcmg0F2pkBjRvzAAMgARWxvTnV8vd/Cb9OVxe5LWI=
+X-Received: by 2002:a17:90b:2785:b0:2e0:a77e:82ff with SMTP id
+ 98e67ed59e1d1-2e561a168d1mr13188686a91.33.1729508447407; Mon, 21 Oct 2024
+ 04:00:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241021122017.34fc9f3c@mitra>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20241018142235.715571-1-ilias.apalodimas@linaro.org>
+ <20241018142235.715571-5-ilias.apalodimas@linaro.org>
+ <CAFLszTj-f9BwFd3oO8uZGS=D_8wDtUcKQD9-9mU1rVUZin9f-Q@mail.gmail.com>
+In-Reply-To: <CAFLszTj-f9BwFd3oO8uZGS=D_8wDtUcKQD9-9mU1rVUZin9f-Q@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 21 Oct 2024 14:00:11 +0300
+Message-ID: <CAC_iWjJrUtTnymNK-GpNOp+Qjd2H2z+pPP8caK7KW4DzCVpP5Q@mail.gmail.com>
+Subject: Re: [PATCH 4/6] net: lwip: Enable https:// support for wget
+To: Simon Glass <sjg@chromium.org>
+Cc: jerome.forissier@linaro.org, raymond.mao@linaro.org, xypron.glpk@gmx.de, 
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>, 
+ Wei Ming Chen <jj251510319013@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Javier Tia <javier.tia@linaro.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,173 +98,277 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Benedikt,
+Hi Simon,
 
-Am Mon, Oct 21, 2024 at 12:20:17PM +0200 schrieb Benedikt Spranger:
-> The SPL sits in the first Page in NAND flash. It does it's magic and
-> then load the U-Boot payload from an UBI volume (Or directly load a
-> kernel). Then it "starts" the payload.
-> 
-> > Did you try reading/writing raw NAND from there?
-> I try to read from SPL. That's all what ubispl wants. No need for write
-> support here.
-> 
-> > I'm not familiar with SPL, does it consider dts?
-> It consider dts.
-> 
-> > I could share my dts parts if that helps you.
-> That would be great. I definitly give it a try.
-> So here is a quick extract (EBI is also used otherwise) of what I did.
+On Sat, 19 Oct 2024 at 14:50, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Fri, 18 Oct 2024 at 08:23, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > With the recent changes of lwip & mbedTLS we can now download from
+> > https:// urls instead of just http://.
+> > Adjust our wget lwip version parsing to support both URLs.
+> > While at it adjust the default TCP window for QEMU since https seems to
+> > requite at least 16384
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >  cmd/Kconfig      | 19 ++++++++++++
+> >  net/lwip/Kconfig |  2 +-
+> >  net/lwip/wget.c  | 78 +++++++++++++++++++++++++++++++++++++++++++-----
+> >  3 files changed, 91 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/cmd/Kconfig b/cmd/Kconfig
+> > index 8c677b1e4864..e58566a9ba34 100644
+> > --- a/cmd/Kconfig
+> > +++ b/cmd/Kconfig
+> > @@ -2118,6 +2118,25 @@ config CMD_WGET
+> >           wget is a simple command to download kernel, or other files,
+> >           from a http server over TCP.
+> >
+> > +config WGET_HTTPS
+> > +       bool "wget https"
+> > +       depends on CMD_WGET
+>
+> Is it possible to do wget programmatically, i.e. without CMDLINE?
 
-Using EBI for accessing an FPGA here on one of three boards.
-So I'll share that dts excerpt from my v2024.10 branch.
+Yes. But that would require more untangling of wget. I'll look into
+that once we are done with features.
 
-> Hopefully I did not forget anything...
-> 
-> --- a/arch/arm/dts/at91-sama5d27_ABC.dts
-> +++ b/arch/arm/dts/at91-sama5d27_ABC.dts
-> @@ -63,7 +63,62 @@
->                                         bias-disable;
->                                         bootph-all;
->                                 };
-> +
-> +                               pinctrl_nand0_default: nand0_default {
-> +                                       pinmux =
-> +                                       <PIN_PA0__D0>,
-> +                                        <PIN_PA1__D1>,
-> +                                        <PIN_PA2__D2>,
-> +                                        <PIN_PA3__D3>,
-> +                                        <PIN_PA4__D4>,
-> +                                        <PIN_PA5__D5>,
-> +                                        <PIN_PA6__D6>,
-> +                                        <PIN_PA7__D7>,
-> +                                       <PIN_PA8__NWE_NANDWE>,
-> +                                        <PIN_PA9__NCS3>,
-> +                                        <PIN_PA10__A21_NANDALE>,
-> +                                        <PIN_PA11__A22_NANDCLE>,
-> +                                        <PIN_PA12__NRD_NANDOE>,
-> +                                        <PIN_PA21__NANDRDY>;
-> +                                       bias-disable;
-> +                               };
->                         };
->                 };
->         };
->  };
-> +
-> +&ebi {
-> +       pinctrl-names = "default";
-> +       pinctrl-0 = <&pinctrl_nand0_default>;
-> +       status = "okay";
-> +
-> +       nand_controller: nand-controller {
-> +               status = "okay";
-> +
-> +               nand@3 {
-> +                       reg = <0x3 0x0 0x800000>;
-> +                       //atmel,rb = <0>;
-> +                       nand-bus-width = <8>;
-> +                       nand-ecc-mode = "hw";
-> +                       nand-ecc-strength = <4>;
-> +                       nand-ecc-step-size = <512>;
-> +                       nand-on-flash-bbt;
-> +
-> +                       partitions {
-> +                               compatible = "fixed-partitions";
-> +                               #address-cells = <1>;
-> +                               #size-cells = <1>;
-> +
-> +                               spl@0 {
-> +                                       label = "spl";
-> +                                       reg = <0x0 0x40000>;
-> +                               };
-> +
-> +                               ubi@40000 {
-> +                                       label = "UBI";
-> +                                       reg = <0x40000 0x0>;
-> +                               };
-> +                       };
-> +                };
-> +        };
-> +};
+>
+> > +       depends on PROT_TCP_LWIP
+> > +       depends on MBEDTLS_LIB
+> > +        select SHA256
+> > +        select RSA
+> > +        select ASYMMETRIC_KEY_TYPE
+> > +        select ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> > +        select X509_CERTIFICATE_PARSER
+> > +        select PKCS7_MESSAGE_PARSER
+> > +       select MBEDTLS_LIB_CRYPTO
+> > +       select MBEDTLS_LIB_TLS
+> > +       select RSA_VERIFY_WITH_PKEY
+> > +       select X509_CERTIFICATE_PARSER
+> > +       select PKCS7_MESSAGE_PARSER
+> > +       help
+> > +         Enable TLS over http for wget.
+> > +
+> >  endif  # if CMD_NET
+> >
+> >  config CMD_PXE
+> > diff --git a/net/lwip/Kconfig b/net/lwip/Kconfig
+> > index 8a67de4cf335..a9ae9bf7fa2a 100644
+> > --- a/net/lwip/Kconfig
+> > +++ b/net/lwip/Kconfig
+> > @@ -37,7 +37,7 @@ config PROT_UDP_LWIP
+> >
+> >  config LWIP_TCP_WND
+> >         int "Value of TCP_WND"
+> > -       default 8000 if ARCH_QEMU
+> > +       default 32768 if ARCH_QEMU
+> >         default 3000000
+> >         help
+> >           Default value for TCP_WND in the lwIP configuration
+> > diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> > index b495ebd1aa96..b4f039d38962 100644
+> > --- a/net/lwip/wget.c
+> > +++ b/net/lwip/wget.c
+> > @@ -7,13 +7,17 @@
+> >  #include <efi_loader.h>
+> >  #include <image.h>
+> >  #include <lwip/apps/http_client.h>
+> > +#include "lwip/altcp_tls.h"
+> >  #include <lwip/timeouts.h>
+> > +#include <rng.h>
+> >  #include <mapmem.h>
+> >  #include <net.h>
+> >  #include <time.h>
+> > +#include <dm/uclass.h>
+> >
+> >  #define SERVER_NAME_SIZE 200
+> >  #define HTTP_PORT_DEFAULT 80
+> > +#define HTTPS_PORT_DEFAULT 443
+> >  #define PROGRESS_PRINT_STEP_BYTES (100 * 1024)
+> >
+> >  enum done_state {
+> > @@ -32,18 +36,53 @@ struct wget_ctx {
+> >         enum done_state done;
+> >  };
+> >
+> > +bool wget_validate_uri(char *uri);
+> > +
+> > +int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len,
+> > +                         size_t *olen)
+> > +{
+> > +       struct udevice *dev;
+> > +       u64 rng = 0;
+> > +       int err;
+>
+> ret
+>
+> > +
+> > +       *olen = 0;
+> > +
+> > +       err = uclass_get_device(UCLASS_RNG, 0, &dev);
+>
+> Using uclass_get_device_by_seq() would allow aliases to select which
+> device is used.
 
-I have no partitions defined, but that should not hurt.  Split pinctrl
-settings here, but that's basically because I have more child nodes on
-the EBI node in Linux which I don't use in U-Boot here.  Should not
-make such a difference.
+Ok, but I don't think we need it here. We just need a random number
+from any device that can send us one no?
 
-Do you have external pull-ups for the A21_NANDALE, A22_NANDCLE,
-NANDRDY, and NCS3 lines?  Maybe cross check that with the board code
-you probably have for the old non-DM NAND driver.
+>
+> > +       if (err)
+> > +               return err;
+> > +       err = dm_rng_read(dev, &rng, sizeof(rng));
+> > +       if (err) {
+> > +               log_err("Failed to get an rng: %d\n", err);
+>
+> If you are showing an error, I think it is more likely to happen when
+> trying to find the device, so perhaps do this on the
+> uclass_get_device() call?
 
-Now my example:
+Sure
 
-  &ebi {
-          pinctrl-names = "default";
-          pinctrl-0 = <&pinctrl_ebi_default>;
-          status = "okay";
-  
-          nand_controller: nand-controller {
-                  pinctrl-names = "default";
-                  pinctrl-0 = <&pinctrl_nand_default>;
-                  status = "okay";
-  
-                  nand@3 {
-                          reg = <0x3 0x0 0x800000>;
-                          atmel,rb = <0>;
-  
-                          nand-bus-width = <8>;
-                          nand-ecc-mode = "hw";
-                          nand-on-flash-bbt;
-                          nand-ecc-strength = <8>;
-                          nand-ecc-step-size = <512>;
-                          label = "atmel_nand";
-                  };
-          };
-  };
-  
-  &pioA {
-          pinctrl_ebi_default: ebi_default {
-                  rd_we_data {
-                          pinmux = <PIN_PA22__D0>,
-                                   <PIN_PA23__D1>,
-                                   <PIN_PA24__D2>,
-                                   <PIN_PA25__D3>,
-                                   <PIN_PA26__D4>,
-                                   <PIN_PA27__D5>,
-                                   <PIN_PA28__D6>,
-                                   <PIN_PA29__D7>,
-                                   <PIN_PA30__NWE_NANDWE>,
-                                   <PIN_PB2__NRD_NANDOE>;
-                          bias-disable;
-                          atmel,drive-strength = <ATMEL_PIO_DRVSTR_ME>;
-                  };
-          };
-  
-          pinctrl_nand_default: nand_default {
-                  ale_cle_rdy_cs {
-                          pinmux = <PIN_PB0__A21_NANDALE>,
-                                   <PIN_PB1__A22_NANDCLE>,
-                                   <PIN_PC8__NANDRDY>,
-                                   <PIN_PA31__NCS3>;
-                          bias-pull-up;
-                  };
-          };
-  };
+>
+> > +               return err;
+> > +       }
+> > +
+> > +       memcpy(output, &rng, len);
+> > +       *olen = sizeof(rng);
+>
+> But then why not dm_rng_read() into output and avoid the u64?
+> Actually, dm_rng_ops-read() should return the number of bytes,
+> perhaps?
 
-Notice mine uses IO Set 1 here, but your's should work with IO Set 2 as
-well.
+The caller defines the length. Copying blindly a u64 might overflow.
+But the current code should be
+*olen = len
 
-> > (What I do here: SoC loads at91bootstrap from raw NAND at offset 0,
-> > at91bootstrap loads U-Boot from raw NAND at some offset like 0x20000,
-> > U-Boot (proper) loads everything else from UBI.)
-> From my experience that can cause significant headache starting after
-> 5-6 years in use. That's what I try to avoid :)
+>
+> > +
+> > +       return 0;
+> > +}
+> > +
+> >  static int parse_url(char *url, char *host, u16 *port, char **path)
+> >  {
+> >         char *p, *pp;
+> >         long lport;
+> > +       size_t prefix_len = 0;
+> > +
+> > +       if (!wget_validate_uri(url)) {
+> > +               log_err("Invalid URL. Use http(s)://\n");
+> > +               return -EINVAL;
+> > +       }
+> >
+> > +       *port = HTTP_PORT_DEFAULT;
+> > +       prefix_len = strlen("http://");
+> >         p = strstr(url, "http://");
+> >         if (!p) {
+> > -               log_err("only http:// is supported\n");
+> > -               return -EINVAL;
+> > +               p = strstr(url, "https://");
+> > +               prefix_len = strlen("https://");
+> > +               *port = HTTPS_PORT_DEFAULT;
+> >         }
+> >
+> > -       p += strlen("http://");
+> > +       p += prefix_len;
+> >
+> >         /* Parse hostname */
+> >         pp = strchr(p, ':');
+> > @@ -67,9 +106,8 @@ static int parse_url(char *url, char *host, u16 *port, char **path)
+> >                 if (lport > 65535)
+> >                         return -EINVAL;
+> >                 *port = (u16)lport;
+> > -       } else {
+> > -               *port = HTTP_PORT_DEFAULT;
+> >         }
+> > +
+> >         if (*pp != '/')
+> >                 return -EINVAL;
+> >         *path = pp;
+> > @@ -210,6 +248,9 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
+> >  static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+> >  {
+> >         char server_name[SERVER_NAME_SIZE];
+> > +#if defined CONFIG_WGET_HTTPS
+> > +       altcp_allocator_t tls_allocator;
+> > +#endif
+> >         httpc_connection_t conn;
+> >         httpc_state_t *state;
+> >         struct netif *netif;
+> > @@ -232,6 +273,22 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+> >                 return -1;
+> >
+> >         memset(&conn, 0, sizeof(conn));
+> > +#if defined CONFIG_WGET_HTTPS
+>
+> if (IS_ENABLED(CONFIG_WGET_HTTPS))
+>
 
-I'm aware of that.  The data retention time for the NAND flash used
-here is 10 years according to datasheet.  No big deal on Linux when
-running ubihealthd for everything stored in UBI, but everything
-outside of that is about to fail some day. :-/
+Unfortunately, I don't think we can use that here. If
+CONFIG_WGET_HTTPS is not enabled LWIP_ALTCP will not be defined, and
+the altcp_allocator_t field will be missing from the struct leading to
+a compilation error
 
-Greets
-Alex
+Thanks
+/Ilias
 
+> > +       if (port == HTTPS_PORT_DEFAULT) {
+> > +               tls_allocator.alloc = &altcp_tls_alloc;
+> > +               tls_allocator.arg =
+> > +                       altcp_tls_create_config_client(NULL, 0, server_name);
+> > +
+> > +               if (!tls_allocator.arg) {
+> > +                       log_err("error: Cannot create a TLS connection\n");
+> > +                       net_lwip_remove_netif(netif);
+> > +                       return -1;
+> > +               }
+> > +
+> > +               conn.altcp_allocator = &tls_allocator;
+> > +       }
+> > +#endif
+> > +
+> >         conn.result_fn = httpc_result_cb;
+> >         ctx.path = path;
+> >         if (httpc_get_file_dns(server_name, port, path, &conn, httpc_recv_cb,
+> > @@ -316,6 +373,7 @@ bool wget_validate_uri(char *uri)
+> >         char c;
+> >         bool ret = true;
+> >         char *str_copy, *s, *authority;
+> > +       size_t prefix_len = 0;
+> >
+> >         for (c = 0x1; c < 0x21; c++) {
+> >                 if (strchr(uri, c)) {
+> > @@ -323,15 +381,21 @@ bool wget_validate_uri(char *uri)
+> >                         return false;
+> >                 }
+> >         }
+> > +
+> >         if (strchr(uri, 0x7f)) {
+> >                 log_err("invalid character is used\n");
+> >                 return false;
+> >         }
+> >
+> > -       if (strncmp(uri, "http://", 7)) {
+> > -               log_err("only http:// is supported\n");
+> > +       if (!strncmp(uri, "http://", strlen("http://"))) {
+> > +               prefix_len = strlen("http://");
+> > +       } else if (!strncmp(uri, "https://", strlen("https://"))) {
+> > +               prefix_len = strlen("https://");
+> > +       } else {
+> > +               log_err("only http(s):// is supported\n");
+> >                 return false;
+> >         }
+> > +
+> >         str_copy = strdup(uri);
+> >         if (!str_copy)
+> >                 return false;
+> > --
+> > 2.45.2
+> >
+>
+> Regards,
+> Simon
