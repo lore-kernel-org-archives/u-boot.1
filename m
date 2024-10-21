@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19B7ED15DA5
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 15:14:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D351D15DA5
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 15:14:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAC9288F6B;
-	Mon, 21 Oct 2024 17:13:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C2DE88F82;
+	Mon, 21 Oct 2024 17:13:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="oQatQ6pF";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="NohZ+ptQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95C0B88F3D; Mon, 21 Oct 2024 17:13:44 +0200 (CEST)
+ id 8C70E88F49; Mon, 21 Oct 2024 17:13:46 +0200 (CEST)
 Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net
  [IPv6:2001:4b98:dc4:8::229])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6153488F47
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 17:13:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98FC888F4F
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 17:13:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPA id B5AE6FF806;
- Mon, 21 Oct 2024 15:13:41 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPA id D8BA3FF805;
+ Mon, 21 Oct 2024 15:13:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1729523622;
+ t=1729523623;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=+JD73HEskjgHiSD6i2xNtFANXAx6hqgdyMwpvFvgQ+Y=;
- b=oQatQ6pF2TKFbSjryUvjhe7/gsVbaxP0x6d2ZbP+hey9OzsGaWUjy0DqEdCMaH6PECNySc
- YVigfiWxhRf9d+SpNdcg5hA6Rxx9fy92/+ViEzza5pCAUdotX22sRdnBrshU51BX7jUe68
- zG8lE9leI+UflVkHzvO65aT7Ct5a/2TgDM61nJxe/G3KriorRTJk/vmzT2sw+1PIn9Lw5W
- tnH2LOP0tkDzXrYxT3BdPO4w1ipzYg4Mpm0PW+FOtsWjVUN1LqQntFhEJ/R0lLcljHBymr
- DDFyZa0BHHk5jrZx6NqLgnXxrdxh9+YjzZOJNKp0UaqFsKE6P8zvyI7Y0kjJAg==
+ bh=nCKkgScG5AthTbRCF2CjOL1QX0+r8+hWHvdO3fLjKuw=;
+ b=NohZ+ptQolZoJYxrjot84GpJTLjsVN1A+0Q05eIOKIKmQBnE3pGwymPzZgbw9hgZSje9MI
+ Q+iDkeEJ6KfAps6BlRjv9Z65oCXeZWlIn+efUEhpjuc4IWcnAv956VYGpS0p/Bc1aBW3r3
+ COj4mKksxQAfivB5kICBfpUVn7wGXYv7JpY5QXl4/5e+st6vZd02kuFfW0h0jlBEATQB/D
+ KUUn7Tj0Xgha6eq0KNWx0YPfq6mTPeKXRc/QkMPItqLaV6DEFGtHMMPcq7kqiG7sYDgkJN
+ 0vRwZNksbiN04gVb/7n0PK5RJ/eMAc8TPoEh8YKRvYoGn2psk/iv+M/LqRaazg==
 From: Bastien Curutchet <bastien.curutchet@bootlin.com>
 To: Tom Rini <trini@konsulko.com>,
 	Andrew Davis <afd@ti.com>
@@ -47,9 +47,10 @@ Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Herve Codina <herve.codina@bootlin.com>,
  Christopher Cordahi <christophercordahi@nanometrics.ca>,
  Bastien Curutchet <bastien.curutchet@bootlin.com>
-Subject: [PATCH 5/6] memory: ti-aemif: Add DM support
-Date: Mon, 21 Oct 2024 17:13:29 +0200
-Message-ID: <20241021151330.1860929-6-bastien.curutchet@bootlin.com>
+Subject: [PATCH 6/6] memory: ti-aemif-cs: Compute timing configuration from DT
+ parsing
+Date: Mon, 21 Oct 2024 17:13:30 +0200
+Message-ID: <20241021151330.1860929-7-bastien.curutchet@bootlin.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241021151330.1860929-1-bastien.curutchet@bootlin.com>
 References: <20241021151330.1860929-1-bastien.curutchet@bootlin.com>
@@ -72,190 +73,169 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The AEMIF's bindings in the Linux tree have a node for the AEMIF
-controller and then a node for each AEMIF's chip select. This CS node
-doesn't have a compatible property but describes the timing parameters
-used by a given chip select.
-The U-Boot DM framework expects every node to have a 'compatible'
-property. If no 'compatible' is present in a node, its children won't be
-parsed by u-boot.
+The Linux bindings of the AEMIF offer properties that specify the
+transaction timings for each chips select.
 
-Add DM support to the ti-aemif driver.
-Add a new ti-aemif-cs driver to comply with the Linux bindings and the
-U-Boot's DM philosophy. This driver handles the timing parameters
-of an AEMIF's chip select so move aemif_cs_configure() from ti-aemif.c
-to ti-aemif-cs.c.
+Add parsing of these properties to calculate the chip select's
+configuration from them and the rate of the AEMIF's reference clock.
 
 Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
 ---
- drivers/memory/Makefile      |  2 +-
- drivers/memory/ti-aemif-cs.c | 61 ++++++++++++++++++++++++++++++++++++
- drivers/memory/ti-aemif-cs.h |  4 +++
- drivers/memory/ti-aemif.c    | 53 ++++++++-----------------------
- 4 files changed, 79 insertions(+), 41 deletions(-)
- create mode 100644 drivers/memory/ti-aemif-cs.c
- create mode 100644 drivers/memory/ti-aemif-cs.h
+ drivers/memory/ti-aemif-cs.c | 122 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 122 insertions(+)
 
-diff --git a/drivers/memory/Makefile b/drivers/memory/Makefile
-index 1cabf8ac9c..fdc83e4e1c 100644
---- a/drivers/memory/Makefile
-+++ b/drivers/memory/Makefile
-@@ -3,5 +3,5 @@ obj-$(CONFIG_MEMORY) += memory-uclass.o
- obj-$(CONFIG_SANDBOX_MEMORY) += memory-sandbox.o
- obj-$(CONFIG_STM32_FMC2_EBI) += stm32-fmc2-ebi.o
- obj-$(CONFIG_ATMEL_EBI) += atmel_ebi.o
--obj-$(CONFIG_TI_AEMIF) += ti-aemif.o
-+obj-$(CONFIG_TI_AEMIF) += ti-aemif.o ti-aemif-cs.o
- obj-$(CONFIG_TI_GPMC) += ti-gpmc.o
 diff --git a/drivers/memory/ti-aemif-cs.c b/drivers/memory/ti-aemif-cs.c
-new file mode 100644
-index 0000000000..80166e3e6a
---- /dev/null
+index 80166e3e6a..0fcfee6f0b 100644
+--- a/drivers/memory/ti-aemif-cs.c
 +++ b/drivers/memory/ti-aemif-cs.c
-@@ -0,0 +1,61 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * DaVinci / Keystone2 : AEMIF's chip select configuration
-+ *
-+ */
-+#include <asm/io.h>
-+#include <clk.h>
-+#include <dm.h>
-+#include "ti-aemif-cs.h"
+@@ -5,6 +5,7 @@
+  */
+ #include <asm/io.h>
+ #include <clk.h>
++#include <div64.h>
+ #include <dm.h>
+ #include "ti-aemif-cs.h"
+ 
+@@ -21,6 +22,20 @@
+ #define AEMIF_CFG_TURN_AROUND(v)	(((v) & 0x03) << 2)
+ #define AEMIF_CFG_WIDTH(v)		(((v) & 0x03) << 0)
+ 
++#define SSTROBE_EN			0x1
++#define EW_EN				0x1
 +
-+#define AEMIF_CONFIG(cs)		(0x10 + ((cs) * 4))
++#define WSETUP_MAX			0xf
++#define WSTROBE_MAX			0x3f
++#define WHOLD_MAX			0x7
++#define RSETUP_MAX			0xf
++#define RSTROBE_MAX			0x3f
++#define RHOLD_MAX			0x7
++#define TA_MAX				0x3
 +
-+#define AEMIF_CFG_SELECT_STROBE(v)	((v) ? 1 << 31 : 0)
-+#define AEMIF_CFG_EXTEND_WAIT(v)	((v) ? 1 << 30 : 0)
-+#define AEMIF_CFG_WR_SETUP(v)		(((v) & 0x0f) << 26)
-+#define AEMIF_CFG_WR_STROBE(v)		(((v) & 0x3f) << 20)
-+#define AEMIF_CFG_WR_HOLD(v)		(((v) & 0x07) << 17)
-+#define AEMIF_CFG_RD_SETUP(v)		(((v) & 0x0f) << 13)
-+#define AEMIF_CFG_RD_STROBE(v)		(((v) & 0x3f) << 7)
-+#define AEMIF_CFG_RD_HOLD(v)		(((v) & 0x07) << 4)
-+#define AEMIF_CFG_TURN_AROUND(v)	(((v) & 0x03) << 2)
-+#define AEMIF_CFG_WIDTH(v)		(((v) & 0x03) << 0)
++#define WIDTH_8BITS			0x0
++#define WIDTH_16BITS			0x1
 +
-+#define set_config_field(reg, field, val)				\
-+	do {								\
-+		if ((val) != -1) {					\
-+			(reg) &= ~AEMIF_CFG_##field(0xffffffff);	\
-+			(reg) |=	AEMIF_CFG_##field((val));	\
-+		}							\
-+	} while (0)
+ #define set_config_field(reg, field, val)				\
+ 	do {								\
+ 		if ((val) != -1) {					\
+@@ -49,6 +64,111 @@ void aemif_cs_configure(int cs, struct aemif_config *cfg)
+ 	__raw_writel(tmp, cfg->base + AEMIF_CONFIG(cs));
+ }
+ 
++struct ti_aemif_cs {
++	void __iomem *base;
++	struct clk *clk;
++};
 +
-+void aemif_cs_configure(int cs, struct aemif_config *cfg)
++static unsigned int aemif_calc_cfg(ulong rate, u64 timing_ns, u32 max_cfg)
 +{
-+	unsigned long tmp;
++	u64 result;
 +
-+	tmp = __raw_readl(cfg->base + AEMIF_CONFIG(cs));
++	if (!timing_ns)
++		return 0;
 +
-+	set_config_field(tmp, SELECT_STROBE,	cfg->select_strobe);
-+	set_config_field(tmp, EXTEND_WAIT,	cfg->extend_wait);
-+	set_config_field(tmp, WR_SETUP,		cfg->wr_setup);
-+	set_config_field(tmp, WR_STROBE,	cfg->wr_strobe);
-+	set_config_field(tmp, WR_HOLD,		cfg->wr_hold);
-+	set_config_field(tmp, RD_SETUP,		cfg->rd_setup);
-+	set_config_field(tmp, RD_STROBE,	cfg->rd_strobe);
-+	set_config_field(tmp, RD_HOLD,		cfg->rd_hold);
-+	set_config_field(tmp, TURN_AROUND,	cfg->turn_around);
-+	set_config_field(tmp, WIDTH,		cfg->width);
++	result = DIV_ROUND_UP_ULL(timing_ns * rate, 1000000000ULL);
 +
-+	__raw_writel(tmp, cfg->base + AEMIF_CONFIG(cs));
++	if (result - 1 > max_cfg)
++		return max_cfg;
++
++	return result - 1;
 +}
 +
-+static const struct udevice_id aemif_cs_ids[] = {
-+	{ .compatible = "ti,da850-aemif-cs", },
-+	{},
-+};
++static int aemif_cs_set_timings(struct udevice *dev)
++{
++	struct ti_aemif_cs *priv = dev_get_priv(dev);
++	ulong rate = clk_get_rate(priv->clk);
++	struct aemif_config cfg = {};
++	u32 val;
++	u32 cs;
 +
-+U_BOOT_DRIVER(ti_aemif_cs) = {
-+	.name = "ti_aemif_cs",
-+	.id = UCLASS_MEMORY,
-+	.of_match = aemif_cs_ids,
-+};
-diff --git a/drivers/memory/ti-aemif-cs.h b/drivers/memory/ti-aemif-cs.h
-new file mode 100644
-index 0000000000..62e6c6ed1a
---- /dev/null
-+++ b/drivers/memory/ti-aemif-cs.h
-@@ -0,0 +1,4 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+#include <asm/ti-common/ti-aemif.h>
++	if (dev_read_u32(dev, "ti,cs-chipselect", &cs))
++		return -EINVAL;
 +
-+void aemif_cs_configure(int cs, struct aemif_config *cfg);
-diff --git a/drivers/memory/ti-aemif.c b/drivers/memory/ti-aemif.c
-index 5e9514713f..b26423c457 100644
---- a/drivers/memory/ti-aemif.c
-+++ b/drivers/memory/ti-aemif.c
-@@ -9,50 +9,12 @@
- #include <asm/arch/hardware.h>
- #include <asm/io.h>
- #include <asm/ti-common/ti-aemif.h>
-+#include <dm.h>
-+#include "ti-aemif-cs.h"
- 
- #define AEMIF_WAITCYCLE_CONFIG		(0x4)
- #define AEMIF_NAND_CONTROL		(0x60)
- #define AEMIF_ONENAND_CONTROL		(0x5c)
--#define AEMIF_CONFIG(cs)		(0x10 + ((cs) * 4))
--
--#define AEMIF_CFG_SELECT_STROBE(v)	((v) ? 1 << 31 : 0)
--#define AEMIF_CFG_EXTEND_WAIT(v)	((v) ? 1 << 30 : 0)
--#define AEMIF_CFG_WR_SETUP(v)		(((v) & 0x0f) << 26)
--#define AEMIF_CFG_WR_STROBE(v)		(((v) & 0x3f) << 20)
--#define AEMIF_CFG_WR_HOLD(v)		(((v) & 0x07) << 17)
--#define AEMIF_CFG_RD_SETUP(v)		(((v) & 0x0f) << 13)
--#define AEMIF_CFG_RD_STROBE(v)		(((v) & 0x3f) << 7)
--#define AEMIF_CFG_RD_HOLD(v)		(((v) & 0x07) << 4)
--#define AEMIF_CFG_TURN_AROUND(v)	(((v) & 0x03) << 2)
--#define AEMIF_CFG_WIDTH(v)		(((v) & 0x03) << 0)
--
--#define set_config_field(reg, field, val)			\
--	do {							\
--		if (val != -1) {				\
--			reg &= ~AEMIF_CFG_##field(0xffffffff);	\
--			reg |=	AEMIF_CFG_##field(val);		\
--		}						\
--	} while (0)
--
--static void aemif_cs_configure(int cs, struct aemif_config *cfg)
--{
--	unsigned long tmp;
--
--	tmp = __raw_readl(cfg->base + AEMIF_CONFIG(cs));
--
--	set_config_field(tmp, SELECT_STROBE,	cfg->select_strobe);
--	set_config_field(tmp, EXTEND_WAIT,	cfg->extend_wait);
--	set_config_field(tmp, WR_SETUP,		cfg->wr_setup);
--	set_config_field(tmp, WR_STROBE,	cfg->wr_strobe);
--	set_config_field(tmp, WR_HOLD,		cfg->wr_hold);
--	set_config_field(tmp, RD_SETUP,		cfg->rd_setup);
--	set_config_field(tmp, RD_STROBE,	cfg->rd_strobe);
--	set_config_field(tmp, RD_HOLD,		cfg->rd_hold);
--	set_config_field(tmp, TURN_AROUND,	cfg->turn_around);
--	set_config_field(tmp, WIDTH,		cfg->width);
--
--	__raw_writel(tmp, cfg->base + AEMIF_CONFIG(cs));
--}
- 
- static void aemif_configure(int cs, struct aemif_config *cfg)
- {
-@@ -84,3 +46,14 @@ void aemif_init(int num_cs, struct aemif_config *config)
- 	for (cs = 0; cs < num_cs; cs++)
- 		aemif_configure(cs, config + cs);
- }
++/*
++ * On DaVinci SoCs, chipselect is in range [2-5]
++ * On Keystone SoCs, chipselect is in range [0-3]
++ * The logic to access the configuration registers expects the CS to be in the
++ * Keystone range so a -2 offset is applied on DaVinci SoCs
++ */
++	if (IS_ENABLED(CONFIG_ARCH_DAVINCI)) {
++		if (cs < 2 || cs > 5)
++			return -EINVAL;
++		cs -= 2;
++	} else if (IS_ENABLED(CONFIG_ARCH_KEYSTONE)) {
++		if (cs > 3)
++			return -EINVAL;
++	}
 +
-+static const struct udevice_id aemif_ids[] = {
-+	{ .compatible = "ti,da850-aemif", },
-+	{},
-+};
++	if (dev_read_bool(dev, "ti,cs-select-strobe-mode"))
++		cfg.select_strobe = SSTROBE_EN;
 +
-+U_BOOT_DRIVER(ti_aemif) = {
-+	.name = "ti_aemif",
-+	.id = UCLASS_MEMORY,
-+	.of_match = aemif_ids,
-+};
++	if (dev_read_bool(dev, "ti,cs-extended-wait-mode"))
++		cfg.extend_wait = EW_EN;
++
++	val = dev_read_u32_default(dev, "ti,cs-write-setup-ns", U32_MAX);
++	cfg.wr_setup = aemif_calc_cfg(rate, val, WSETUP_MAX);
++
++	val = dev_read_u32_default(dev, "ti,cs-write-strobe-ns", U32_MAX);
++	cfg.wr_strobe = aemif_calc_cfg(rate, val, WSTROBE_MAX);
++
++	val = dev_read_u32_default(dev, "ti,cs-write-hold-ns", U32_MAX);
++	cfg.wr_hold = aemif_calc_cfg(rate, val, WHOLD_MAX);
++
++	val = dev_read_u32_default(dev, "ti,cs-read-setup-ns", U32_MAX);
++	cfg.rd_setup = aemif_calc_cfg(rate, val, RSETUP_MAX);
++
++	val = dev_read_u32_default(dev, "ti,cs-read-strobe-ns", U32_MAX);
++	cfg.rd_strobe = aemif_calc_cfg(rate, val, RSTROBE_MAX);
++
++	val = dev_read_u32_default(dev, "ti,cs-read-hold-ns", U32_MAX);
++	cfg.rd_hold = aemif_calc_cfg(rate, val, RHOLD_MAX);
++
++	val = dev_read_u32_default(dev, "ti,cs-min-turnaround-ns", U32_MAX);
++	cfg.turn_around = aemif_calc_cfg(rate, val, TA_MAX);
++
++	val = dev_read_u32_default(dev, "ti,cs-bus-width", 8);
++	if (val == 16)
++		cfg.width = WIDTH_16BITS;
++	else
++		cfg.width = WIDTH_8BITS;
++
++	cfg.base = priv->base;
++	aemif_cs_configure(cs, &cfg);
++
++	return 0;
++}
++
++static int aemif_cs_probe(struct udevice *dev)
++{
++	struct ti_aemif_cs *priv = dev_get_priv(dev);
++	struct udevice *aemif;
++
++	aemif = dev_get_parent(dev);
++	if (!aemif)
++		return -ENODEV;
++
++	priv->base = dev_read_addr_ptr(aemif);
++	if (!priv->base)
++		return -EINVAL;
++
++	priv->clk = devm_clk_get(aemif, "aemif");
++	if (IS_ERR(priv->clk))
++		return -EINVAL;
++
++	return aemif_cs_set_timings(dev);
++}
++
+ static const struct udevice_id aemif_cs_ids[] = {
+ 	{ .compatible = "ti,da850-aemif-cs", },
+ 	{},
+@@ -58,4 +178,6 @@ U_BOOT_DRIVER(ti_aemif_cs) = {
+ 	.name = "ti_aemif_cs",
+ 	.id = UCLASS_MEMORY,
+ 	.of_match = aemif_cs_ids,
++	.probe = aemif_cs_probe,
++	.priv_auto = sizeof(struct ti_aemif_cs),
+ };
 -- 
 2.47.0
 
