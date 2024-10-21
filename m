@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1ADBD15DBA
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 16:33:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4926D15DBA
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 16:33:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6988188F19;
-	Mon, 21 Oct 2024 18:32:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE4F188D54;
+	Mon, 21 Oct 2024 18:32:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QYwkef+g";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LeUYRJPA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AABA8657F; Mon, 21 Oct 2024 18:32:39 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 261E888599; Mon, 21 Oct 2024 18:32:57 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39C8288F0A
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:32:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EBDB88F2A
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:32:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a9a4031f69fso676880866b.0
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 09:32:37 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a9a0c40849cso730415766b.3
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 09:32:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729528357; x=1730133157; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729528375; x=1730133175; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lhwg6MVPbEek5sDEgt7HjsoY6wh/pa6Ai2go51kPrDw=;
- b=QYwkef+g1VbB9BJIh1MjLzY3xcXjM3C9teu9H28sMGiHA1NKRFp1kI2n9OsiTD14yG
- OQNkvEZLsKo8yfPj64EKTFXDvMmtA3IyC2v01DZP9NeiNIIT1DT+u3GBdPtp4slJa/Te
- BoVPjYvjn0sptfIt6/0Cm81nBx8z3/FlyCDP8=
+ bh=pAjQW1GjzltrPGiBPaJLUrIlzJifqVjOAtzGXCSBYRs=;
+ b=LeUYRJPARlYcaNOCmoSG57ZVA44ACHUFuTHQf7QHu32FUD9med8hlybOAG0AJenJ0P
+ /2Rn9SibBmYqZ/YYM/pGqvyy6cDiaAxOydWT1kp6GTOot+QruLyL3iL88s7UDm7kydh7
+ PUbosGck2JTMPJnr0Wn477IdBDaOzJUpV38xw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729528357; x=1730133157;
+ d=1e100.net; s=20230601; t=1729528375; x=1730133175;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=lhwg6MVPbEek5sDEgt7HjsoY6wh/pa6Ai2go51kPrDw=;
- b=MYR2lxWZxW782Q6zY6gJjYZFSDeXATZ9cLQmrBFOmi5etLN0J1d0OMqr6/hC1RCg9+
- fRje+wVfAbQ7og4cEfP7MJsiz+qfPJg40Vjb+BtnIhCw34sxcOM2zY0Mp8SrXAcvlFA8
- /3MsO/0+y25MjM1HzPK9UmeCCOLVUB54TfDsPnXVH3xIZwnux2h5alCs/KX3vYK/PdxS
- hgqweCU13BPZ1gJxMJz2oTcLFjPxScK3M4DamOQkedm+x6g/5Z0zrAXMDUmknr1ZSjPx
- yhL3xBw7y3Bywokw7lae8jKOumfrumrbVslrXPRVusgkKLJrpdUapwwIBwOFCZAa4gRc
- 6nJA==
-X-Gm-Message-State: AOJu0Ywb5PaAH8i/2/WT+XWcDevdT6DUfoDfvjIS6tCvwTQ0YhGwCdeX
- nzrIONAFc3Q0+PcW4y//wXHgG5yyD8qaRxUI6657WmxKIA7SyR4AkWfHJ/uR+yQSBb7w6IBqnER
- 4Ek90BVjtRiw1ILFt1EMhJCZzUjVg1QlEDfKkvwTfmYUvBa/YQWHM
-X-Google-Smtp-Source: AGHT+IELq4rYBK5Xyh/caaYZJZj6aVl9NOkJd3Dsq5y2RVYOpQKCp3CsW0tsZJ+TzsEzFQQWY2z/UxTjRhIcQAmJRws=
-X-Received: by 2002:a17:907:9629:b0:a99:43b2:417e with SMTP id
- a640c23a62f3a-a9a69ce1072mr1376993066b.62.1729528356668; Mon, 21 Oct 2024
- 09:32:36 -0700 (PDT)
+ bh=pAjQW1GjzltrPGiBPaJLUrIlzJifqVjOAtzGXCSBYRs=;
+ b=qdcoVkp89AeCw76mjN0MzN1JUpEncWnmVpeNz4iiMxfPUB7W11icuN1qVAX+dLnNSl
+ XJkNCUJ6BO9bHE4OhSg5GBuWJMQaplHs5ftRNYH+Mm14eTOe2kP33l3V9oMD7b75uAq3
+ mBuBw6Mw7mSNc4dhcz71e3Id85j+v0IVW6r64qHu9rhWrF1Rf7ATwMLyPJtlszkODmgo
+ 6Xg5DsFw/H2Ngs6eegz9uqAIxYdYWgR7Bnx/7/dfCOrVeH/+ral9SiYSz8XMJyezpt8I
+ sD6yN29QKMX16ccSisXc3wXY6cy5FP1asB9DCJHz/mso7lqGZMrxx0GCvCggt1VlG5AM
+ kgZA==
+X-Gm-Message-State: AOJu0YwMlgi0MfIuriA2me5XydiXe6b+hAQUZ1bk7aws+VprxA5O/ClD
+ z4Ngny/dfl2tx7DaDJhsGlV32jxRScYupSN5nty+OCXsTzbVHCYCa9iqEwhI4gqlj5EB0Nmiq4o
+ 2PH14RUFe2PW6ALoyvVL6iDnYiGaoVM57HgdwY/9k8GFpS7wM9+FA
+X-Google-Smtp-Source: AGHT+IGknAKxKCXr6T8CBNm3ch/pkP9730+pA2/SH4hHk9BL74eCVyj9gV4cDF68kVXRqn6TRz2U3F61CEWa5D9qaZc=
+X-Received: by 2002:a17:906:730e:b0:a9a:2e12:1a06 with SMTP id
+ a640c23a62f3a-a9aa8a05e8dmr48985966b.51.1729528373267; Mon, 21 Oct 2024
+ 09:32:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <ZxZk4K4ff1T3gUVm@smile.fi.intel.com>
-In-Reply-To: <ZxZk4K4ff1T3gUVm@smile.fi.intel.com>
+References: <20241021113839.318572-1-sjg@chromium.org>
+ <20241021113839.318572-19-sjg@chromium.org>
+ <87r089r50l.fsf@minerva.mail-host-address-is-not-set>
+In-Reply-To: <87r089r50l.fsf@minerva.mail-host-address-is-not-set>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Oct 2024 18:32:21 +0200
-Message-ID: <CAFLszTjuodDFZW8fJDL1Q3nByLVzcTTEAeJfws-sbtupCwNd8w@mail.gmail.com>
-Subject: Re: enabling W=1 by default
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
+Date: Mon, 21 Oct 2024 18:32:34 +0200
+Message-ID: <CAFLszThEMyk4ppCjK2XuG6vv7=HSpy+krwpVvPt92dJDxmXV1g@mail.gmail.com>
+Subject: Re: [PATCH v2 18/25] igep00x0: Drop unused status_led.h header file
+To: Javier Martinez Canillas <javierm@redhat.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Enric Balletbo i Serra <eballetbo@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,27 +84,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andy,
+Hi Javier,
 
-On Mon, 21 Oct 2024 at 16:27, Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
+On Mon, 21 Oct 2024 at 14:53, Javier Martinez Canillas
+<javierm@redhat.com> wrote:
 >
-> Hi!
+> Simon Glass <sjg@chromium.org> writes:
 >
-> looking at the redness of the output of `make W=1` here is the question:
-> isn't it a good time to enable `make W=1` by default. Yes, I understand
-> the impact, but at least we can do it mandatory for a _new_ code submitted to
-> U-Boot, right?
+> Hello Simon,
 >
-> Ideally I would have what Linux kernel has for a few releases already, i.e.
-> Werror by default and getting close to make a clean builds with that and
-> make W=1` at least against default configurations (yeah, with U-Boot there is
-> probably no default, but sandbox one).
+> > This header file is not used, so drop it.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v1)
+> >
+>
+> I've already reviewed v1 but you didn't keep the tag.
+>
+> Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
 
-Warnings should be warnings...if you would like to enable it for CI
-that is fine by me, but the U-Boot makefile shouldn't do it. It
-defeats the purpose of having a distinction between errors and
-warnings.
+Oh, sorry about that.
 
 Regards,
-Simon
+SImon
+
+
+>
+> --
+> Best regards,
+>
+> Javier Martinez Canillas
+> Core Platforms
+> Red Hat
+>
