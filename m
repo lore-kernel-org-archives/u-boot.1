@@ -4,77 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 547B3D15D82
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 12:04:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A066D15D82
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 12:19:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C335388E75;
-	Mon, 21 Oct 2024 14:04:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 45C3C88DC8;
+	Mon, 21 Oct 2024 14:19:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sZdEB4aq";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E14D388E75; Mon, 21 Oct 2024 14:04:32 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1729513184;
+	bh=TIxLwO0Kt/QjyhKnsy0FFZ7ihiDhbltI2WzmUbSSajY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=hB8ePEWyBxMlRi5OjwN9Y7NCdxNLgIRBXUIZo4boKiX2mgdzAyAkT/7IxCFP/nsAK
+	 sAYEhM2qW+NPPHH8ZHP489tQXIVzK62scJ08tT4hXdLA4RRqkqtRmoYc4jgisp4flC
+	 cyUiDwZHHQArhvgST+ZO4Gqog7rh+BxIMN88m05y96sOnTRlPKQEtogXA9Hjs5IMCP
+	 By+AgQxmMnbQTJGkPAHQRQXXLDscBwVufhLqbyv3XjYl9YC8ERpBCqN5ZfHW+dVS1r
+	 hZeNvxmL7tgLNEzZMNaLK2jVD6P973VmFv4JlT2j40jT1W/biiT0QcrqC/W2i9HjQQ
+	 eu9Nq/qq+FrWg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50F2488E35
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 14:04:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-71806621d42so2015804a34.3
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 05:04:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729512269; x=1730117069; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xrCvOewunY8pK+wEUdBGiwCES5LSDl+U/+Jss2IUHkI=;
- b=sZdEB4aqDAY5lWquFyrvN7kDfNeG05oJWYwpTiW9jl8QbaS4Ux26TIX2s/gGN7Vrzk
- zMp7fNdApiWcvfDR12+4CAAPS5Ng+UHXtQBSmVNQchg29vwqrrS0hyhvN+qVRkQJpxws
- 2X/QxRSDjMSWgNjG+m66Gxz4Hxevv/gz1tFd9i0UiQI5unP6R5xNX2grEuDlroKI13ml
- /KUBPf71xzSQte7iJ3t3wIYdboWI76E+D/tCHuFGZdAUkNfORciIwesmSra8effoUS+q
- KlDJKEQ8oM4HCjjgR9oOeeTvrP/U3ZWIgMtgMw0iPRUiGDoDSnrcsi5LrqoZ6Lp2NjUa
- qRcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729512269; x=1730117069;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xrCvOewunY8pK+wEUdBGiwCES5LSDl+U/+Jss2IUHkI=;
- b=M1hSTOLgDFyDwC03BWnLh25A4eH6WIcxeKWAR/GmgzvqeQsVzMKhBKAdz2IYdQHjOL
- l3vXymHaHUU0PBVtUJGhNDZLJkMu/e029OW9GJ4xJn+HltIQXM7yobJ0Zz75I2t1hG3Q
- LzstHyUMjIeohvRhATxgzwGBZnWKCBrU16XB+f2dL3R3NXux8OPWmkqAbkYcfu15VIQJ
- odXNn1WmGbbwwOIESxB5wye8L5d3O6d/dALnsu/2Y0Zuh84RklfyEse6F2WLJBxD1zyA
- rnFZUCZ8UdxIoInKAGUu8FSIYAlZGn7/23dL3k1E64BbO7Mqz+lSYS/W4r1znWsULSNe
- mQqA==
-X-Gm-Message-State: AOJu0YxSuBZGQ1K7Bc7Ns0/ba9VS76xqscXMxuD/ZbNrn7eJWWNH44kT
- 7F354p+M0FDr/nvweIfQ3HwF5uNBBEC2BsN3IVHw4ADB19wwAtgvxSrC2S893tlkH9aH/gLDvkC
- D3DzTigBweqgI3UlNrv/wGrv9uCpPFA7fJxBTCQ==
-X-Google-Smtp-Source: AGHT+IEPgNdHkcmmNWWVJBH0fAczy/80yzDKb8MBIkO2zBgQeEACPV4wdPHt+zbpPYhS8IozXhqGWjXPzGr1StC4CIQ=
-X-Received: by 2002:a05:6808:1801:b0:3df:1306:c74f with SMTP id
- 5614622812f47-3e602db2946mr8881774b6e.35.1729512267130; Mon, 21 Oct 2024
- 05:04:27 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9AAF1883D4;
+ Mon, 21 Oct 2024 14:19:42 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1729513182;
+ bh=TIxLwO0Kt/QjyhKnsy0FFZ7ihiDhbltI2WzmUbSSajY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=N2zMFjo0mXnvB6xbUz9D+bKVF5gKiOqvZ2pEIf0fh8SpckJFS//xBgwmCkv47NgwB
+ fzGMAD0v/UZZSRWLqT2ZTOkpSfh6pZlpTK08tToDbbRnMqddtansVicon/A/0zfOrq
+ VIRSRDr2I90mFALa6bbs7wQ8qGlggqEcInpVSdnvOM7MJ3RRDzg7FDXWqliM3ui3ea
+ 8sSZ3YsrbCuifL9H0QURDtJsQcxg+p4i0poGr43ufcxjQZJ53CQ2N4QSqvM0UiDgOv
+ BD0+KKVdA+K6zewskIF4PpyYm7UJJHxbUnsYW0nUFaqlVLjdxtuBi85U/LWxCFuV2x
+ c3cduV7Rv4SUg==
+Message-ID: <7d5feec4-cf09-4f6d-a858-0ae3e7bdff93@denx.de>
+Date: Mon, 21 Oct 2024 13:55:54 +0200
 MIME-Version: 1.0
-References: <20241018145444.1660219-1-conor@kernel.org>
- <20241018145444.1660219-4-conor@kernel.org>
-In-Reply-To: <20241018145444.1660219-4-conor@kernel.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 21 Oct 2024 17:34:16 +0530
-Message-ID: <CAFA6WYMgE-qmKwaDx=88eL-HmHCYdG-Sevp=p8tH4ZDPgR=P9A@mail.gmail.com>
-Subject: Re: [PATCH v1 3/3] riscv: dts: mpfs: migrate to OF_UPSTREAM
-To: Conor Dooley <conor@kernel.org>
-Cc: u-boot@lists.denx.de, Conor Dooley <conor.dooley@microchip.com>, 
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Tom Rini <trini@konsulko.com>, Cyril Jean <cyril.jean@microchip.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/25] mx23_olinuxino: Drop status-LED code
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+References: <20241021113839.318572-1-sjg@chromium.org>
+ <20241021113839.318572-4-sjg@chromium.org>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241021113839.318572-4-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,77 +69,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Conor,
+On 10/21/24 1:38 PM, Simon Glass wrote:
+> This is not used anymore, so drop it.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+Why not enable the new DM LED here to avoid breakage ?
 
-Thanks for working on this.
-
-On Fri, 18 Oct 2024 at 20:25, Conor Dooley <conor@kernel.org> wrote:
->
-> From: Conor Dooley <conor.dooley@microchip.com>
->
-> The U-Boot copy of the mpfs devicetree has, in general, been neglected
-> somewhat in comparison to the one in Linux. Moving to OF_UPSTREAM to
-> keep both in sync should serve to eliminate that discrepancy.
->
-> Additionally, moving to OF_UPSTREAM will let U-Boot automatically pick
-> up the devicetree rework that is in progress at [1].
->
-> Link: https://lore.kernel.org/all/20241002-private-unequal-33cfa6101338@s=
-pud/ [1]
-> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
-> ---
-> For obvious reasons, there's partial duplication here with Hal's work,
-> since we both need the new Makefile:
-> https://lore.kernel.org/all/20240930155919.111738-1-hal.feng@starfivetech=
-.com/
-> ---
->  arch/riscv/dts/Makefile                    |   1 -
->  arch/riscv/dts/mpfs-icicle-kit-fabric.dtsi |  71 ---
->  arch/riscv/dts/mpfs-icicle-kit-u-boot.dtsi |  14 -
->  arch/riscv/dts/mpfs-icicle-kit.dts         | 208 ---------
->  arch/riscv/dts/mpfs.dtsi                   | 511 ---------------------
->  configs/microchip_mpfs_icicle_defconfig    |   3 +-
->  dts/upstream/src/riscv/Makefile            |  13 +
->  7 files changed, 15 insertions(+), 806 deletions(-)
->  delete mode 100644 arch/riscv/dts/mpfs-icicle-kit-fabric.dtsi
->  delete mode 100644 arch/riscv/dts/mpfs-icicle-kit-u-boot.dtsi
->  delete mode 100644 arch/riscv/dts/mpfs-icicle-kit.dts
->  delete mode 100644 arch/riscv/dts/mpfs.dtsi
->  create mode 100644 dts/upstream/src/riscv/Makefile
->
-
-<snip>
-
-> diff --git a/dts/upstream/src/riscv/Makefile b/dts/upstream/src/riscv/Mak=
-efile
-> new file mode 100644
-> index 00000000000..dd2ed0bdfbd
-> --- /dev/null
-> +++ b/dts/upstream/src/riscv/Makefile
-> @@ -0,0 +1,13 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +include $(srctree)/scripts/Makefile.dts
-> +
-> +targets +=3D $(dtb-y)
-> +
-> +DTC_FLAGS +=3D -R 4 -p 0x1000
-> +
-> +PHONY +=3D dtbs
-> +dtbs: $(addprefix $(obj)/, $(dtb-y))
-> +       @:
-> +
-> +clean-files :=3D */*.dtb */*.dtbo
-
-Many of the common Makefile bits were moved by patch [1] to
-=E2=80=8Escripts/Makefile.dts. So you should rebase to the latest master
-branch. Apart from that, changes look good to me.
-
-[1] https://github.com/u-boot/u-boot/commit/d2061828a4c1b60b44cd2307b6a782a=
-c2efbffbe
-
--Sumit
-
-> --
-> 2.45.2
->
+DTTO for the other boards ?
