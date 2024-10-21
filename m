@@ -4,65 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA532D0E6DD
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 10:20:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A089D0E6E8
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 10:26:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0718488E91;
-	Mon, 21 Oct 2024 12:20:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id DF40388EEA;
+	Mon, 21 Oct 2024 12:26:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="dYqPJwCm";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="j0JW8r+a";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z6rujN3M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD17C88EA7; Mon, 21 Oct 2024 12:20:20 +0200 (CEST)
-Received: from galois.linutronix.de (Galois.linutronix.de
- [IPv6:2a0a:51c0:0:12e:550::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C4B8D88EEA; Mon, 21 Oct 2024 12:26:25 +0200 (CEST)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB5C088E61
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 12:20:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8361288EC6
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 12:26:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=b.spranger@linutronix.de
-Date: Mon, 21 Oct 2024 12:20:17 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1729506018;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Pv0wUqxFCypq5Vk9awYDmPWT7iEqHWhoFO2Lp1umZLE=;
- b=dYqPJwCm7KZlsKqn5yXmLwhU8QysyBk5dYF8wyjCdovkI9mPcrmG0/YeJbOOXNkS0pJulm
- tzNp4LzmJUe12WVtERiX7QZNaq6WHULEl/n0AQsgiQnfrgDt6zoh+bJx0g4NHau8oE6oqa
- LpRo75UIWx3Jo4G1n0j7fWzAcEozpk2inUtIz/dOTEnKbtU7yNDLcE8wOAvTk21FmGe98F
- jAi1iH5cn5mKHtBobjogpXirafap6BKeD3MfWxIDSwoD/sf1XcVXo5Gz+49sNZGlE66UTW
- FBsbkFfrlZoj/NR3C88So142LgK8u3+hclTP2PN4iwzNOUjENXOAGlGD2A4vRQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1729506018;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Pv0wUqxFCypq5Vk9awYDmPWT7iEqHWhoFO2Lp1umZLE=;
- b=j0JW8r+aukmO6hg+jt8xL6IR6BYLCBGvAWSMdTHJTi7ev6Kl0O8ryTbLg2xQjtr6653ThY
- 9fCCLP3dbstextDQ==
-From: Benedikt Spranger <b.spranger@linutronix.de>
-To: Alexander Dahl <ada@thorsis.com>
-Cc: u-boot@lists.denx.de, John Ogness <john.ogness@linutronix.de>
-Subject: Re: [PATCH 0/5] collected fallout of porting an ATSAMA5D27 based board
-Message-ID: <20241021122017.34fc9f3c@mitra>
-In-Reply-To: <20241021-steadily-rephrase-ec1f100026e4@thorsis.com>
-References: <20241018083006.10349-1-b.spranger@linutronix.de>
- <20241018-unsubtle-yield-8ac617356e92@thorsis.com>
- <20241018161908.3f6a13eb@mitra>
- <20241021-steadily-rephrase-ec1f100026e4@thorsis.com>
-Organization: Linutronix GmbH
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-7e9e38dd5f1so3205224a12.0
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 03:26:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729506382; x=1730111182; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=HVgh/MyT/yo4SnWRz3KqU4FieuTt8anDV0nOR8TiuuQ=;
+ b=z6rujN3MUH4TLhysr+hywAcfbNISMx330eokzOq6tVwwSJw0/IQe0bHuKwtW+0mw0P
+ uB3Eku/+HMxdb67dXl/bD7KalY5m200WBAHaaUKjWHmrhdkOvASC0cgc9usBiA4ywTvQ
+ dSHnB89QLGQ2CurcTQcZ0Mrmg6+WJW87PCL2w9/jd6JkHpcfUXgb+moctfnK0LZ5wY2f
+ IPtMTadP8aklvlPsr5sykbWfA4ZsYI76FDsxHvM3CKv8haHghBtkjZ5z8sR1l0mK+vMo
+ joBgnyUGC7sofurCv4OFJcIywdn2lJk1nBIZWRpr2a0lbzHuqXUTb+U/TtnDjHg8xprZ
+ QjQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729506382; x=1730111182;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HVgh/MyT/yo4SnWRz3KqU4FieuTt8anDV0nOR8TiuuQ=;
+ b=TpU7rtpKSV0l+sLrzMHtc1jAj1Xevu8WkakXw122MIz6Rkbw6lGi5vjbrBb0NSnjQd
+ /M4zq90fA4RadO1r25/s4qMFBCzDfHc+lNs5iLGJRjG30ppBpv62ZsYv+lurtYI0r0TZ
+ Yz2sn+czu/WQqfBXfy1qf/UU0IK2cquZWL53TpOhSwWJ1cpL7wPAiPQuuxptHWqAmMkg
+ oPd1DGinsaJQAgAy6+ChnqysIF36H9xXVtIyss52A9KQ7CgIjWLeE39TxWWm+dbznhB4
+ RKqTDorPOA5u/vBmTTT6si843X7EQjJykbmCYE4a9cKaamgIGxm9Xul8aPPpnfjIvZfq
+ nKeQ==
+X-Gm-Message-State: AOJu0YwzcTYhdS/r9EKW5zalpcSzQtBBCtmogf1JN69O1dJMb3GoAZni
+ Dquma990QW5nfHjnzdz6JmaeI+nMINsqOYLmlSGesqW8Cq+VdsJGb3NQR55l+u1S5qO/30NvqAP
+ 26W1n3W6SS6NnfmsYvgrgvdolR01+shDSsTnMnA==
+X-Google-Smtp-Source: AGHT+IHe7MPFZMd86x9Yy9hMaE+9VipZfZJpCOEA5W47Yi5XvY/76N2Uo9EMpvTkDMQZeMMTtK2NpMHdZ6IZDNdy58w=
+X-Received: by 2002:a05:6a20:d74d:b0:1d6:fb1b:d07a with SMTP id
+ adf61e73a8af0-1d92c56b8e2mr16010927637.31.1729506382049; Mon, 21 Oct 2024
+ 03:26:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+References: <20241019152211.1014896-1-sjg@chromium.org>
+ <20241019152211.1014896-24-sjg@chromium.org>
+In-Reply-To: <20241019152211.1014896-24-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 21 Oct 2024 13:25:45 +0300
+Message-ID: <CAC_iWjJ2PGNkSW8QamfRyQXD-Az7g-_SswB8Nbv14KKkGfbYOg@mail.gmail.com>
+Subject: Re: [PATCH v2 23/31] bootmeth_efi: Simplify reading files by using
+ the common function
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Shantur Rathore <i@shantur.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,137 +91,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am Mon, 21 Oct 2024 08:03:35 +0200
-schrieb Alexander Dahl <ada@thorsis.com>:
-
-> Hello Benedikt,
->=20
-> Am Fri, Oct 18, 2024 at 04:19:08PM +0200 schrieb Benedikt Spranger:
-> > On Fri, 18 Oct 2024 15:11:20 +0200
-> > Alexander Dahl <ada@thorsis.com> wrote:
-> >=20
-> > Hello Alexander,
-> >=20
-> > > Am Fri, Oct 18, 2024 at 10:30:00AM +0200 schrieb Benedikt
-> > > Spranger:
-> > > > OK, you might say the nand_atmel NAND driver is obsolete, but it
-> > > > was the only solution to get booting from NAND running. The new
-> > > > DM based NAND driver refused to do anything usefull, so I
-> > > > dropped it after spending a couple of days debugging it:
-> > >=20
-> > > Strange.  I have at least three different boards with SAMA5D27
-> > > successfully booting from NAND flash with the new DM based driver
-> > > (unfortunately none of them upstreamed, which also won't change
-> > > in the foreseeable future, sorry).
-> > OK.
-> > =20
-> > > Do you use at91bootstrap as 2nd level bootloader like me or
-> > > something else?
-> > I use the U-Boot SPL. There is no UBI support in at91boostrap. There
-> > were some attemps, but...
-> > No interest at the at91bootstrap side.
->=20
-> Yeah, been there.  Wanted at91bootstrap to boot from SPI-NOR which is
-> _not_ Quad-SPI, and the feature request was closed with "if you wanna
-> do it by yourself, ask our support for help". :-/
->=20
-> > > For me it was basically getting the dts for U-Boot correct, but
-> > > I got that running with all U-Boot releases since 2023.04 up to
-> > > 2024.10.  Could you share some more detail?
-> > I face all the trouble in SPL. And since the SPL is the essential
-> > part here (UBI support) I gave up at one point. I simply couldn't
-> > any usefull read data from the NAND flash, but all 0.
->=20
-> You can not store bootstrap or SPL in UBI, it must sit in first sector
-> of raw NAND, I suppose that's how you load SPL?
-Sorry for not beeing that clear.
-The SPL sits in the first Page in NAND flash. It does it's magic and
-then load the U-Boot payload from an UBI volume (Or directly load a
-kernel). Then it "starts" the payload.
-
-> Did you try reading/writing raw NAND from there?
-I try to read from SPL. That's all what ubispl wants. No need for write
-support here.
-
-> I'm not familiar with SPL, does it consider dts?
-It consider dts.
-
-> I could share my dts parts if that helps you.
-That would be great. I definitly give it a try.
-So here is a quick extract (EBI is also used otherwise) of what I did.
-Hopefully I did not forget anything...
-
---- a/arch/arm/dts/at91-sama5d27_ABC.dts
-+++ b/arch/arm/dts/at91-sama5d27_ABC.dts
-@@ -63,7 +63,62 @@
-                                        bias-disable;
-                                        bootph-all;
-                                };
-+
-+                               pinctrl_nand0_default: nand0_default {
-+                                       pinmux =3D
-+                                       <PIN_PA0__D0>,
-+                                        <PIN_PA1__D1>,
-+                                        <PIN_PA2__D2>,
-+                                        <PIN_PA3__D3>,
-+                                        <PIN_PA4__D4>,
-+                                        <PIN_PA5__D5>,
-+                                        <PIN_PA6__D6>,
-+                                        <PIN_PA7__D7>,
-+                                       <PIN_PA8__NWE_NANDWE>,
-+                                        <PIN_PA9__NCS3>,
-+                                        <PIN_PA10__A21_NANDALE>,
-+                                        <PIN_PA11__A22_NANDCLE>,
-+                                        <PIN_PA12__NRD_NANDOE>,
-+                                        <PIN_PA21__NANDRDY>;
-+                                       bias-disable;
-+                               };
-                        };
-                };
-        };
- };
-+
-+&ebi {
-+       pinctrl-names =3D "default";
-+       pinctrl-0 =3D <&pinctrl_nand0_default>;
-+       status =3D "okay";
-+
-+       nand_controller: nand-controller {
-+               status =3D "okay";
-+
-+               nand@3 {
-+                       reg =3D <0x3 0x0 0x800000>;
-+                       //atmel,rb =3D <0>;
-+                       nand-bus-width =3D <8>;
-+                       nand-ecc-mode =3D "hw";
-+                       nand-ecc-strength =3D <4>;
-+                       nand-ecc-step-size =3D <512>;
-+                       nand-on-flash-bbt;
-+
-+                       partitions {
-+                               compatible =3D "fixed-partitions";
-+                               #address-cells =3D <1>;
-+                               #size-cells =3D <1>;
-+
-+                               spl@0 {
-+                                       label =3D "spl";
-+                                       reg =3D <0x0 0x40000>;
-+                               };
-+
-+                               ubi@40000 {
-+                                       label =3D "UBI";
-+                                       reg =3D <0x40000 0x0>;
-+                               };
-+                       };
-+                };
-+        };
-+};
-=20
-> (What I do here: SoC loads at91bootstrap from raw NAND at offset 0,
-> at91bootstrap loads U-Boot from raw NAND at some offset like 0x20000,
-> U-Boot (proper) loads everything else from UBI.)
-=46rom my experience that can cause significant headache starting after
-5-6 years in use. That's what I try to avoid :)
-
-Regards
-    Benedikt Spranger
+On Sat, 19 Oct 2024 at 18:22, Simon Glass <sjg@chromium.org> wrote:
+>
+> The efiload_read_file() does similar things to a common function, so
+> update it to use that instead.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> Changes in v2:
+> - Change the tag to bootmeth_efi
+>
+>  boot/bootmeth_efi.c | 11 +++--------
+>  1 file changed, 3 insertions(+), 8 deletions(-)
+>
+> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+> index 2ad6d3b4ace..f3ddbe71405 100644
+> --- a/boot/bootmeth_efi.c
+> +++ b/boot/bootmeth_efi.c
+> @@ -110,19 +110,14 @@ static void set_efi_bootdev(struct blk_desc *desc, struct bootflow *bflow)
+>  static int efiload_read_file(struct bootflow *bflow, ulong addr)
+>  {
+>         struct blk_desc *desc = NULL;
+> -       loff_t bytes_read;
+> +       ulong size;
+>         int ret;
+>
+>         if (bflow->blk)
+>                  desc = dev_get_uclass_plat(bflow->blk);
+> -       ret = bootmeth_setup_fs(bflow, desc);
+> -       if (ret)
+> -               return log_msg_ret("set", ret);
+>
+> -       ret = fs_read(bflow->fname, addr, 0, bflow->size, &bytes_read);
+> -       if (ret)
+> -               return log_msg_ret("read", ret);
+> -       bflow->buf = map_sysmem(addr, bflow->size);
+> +       ret = bootmeth_common_read_file(bflow->method, bflow, bflow->fname,
+> +                                       addr, &size);
+>
+>         set_efi_bootdev(desc, bflow);
+>
+> --
+> 2.34.1
+>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
