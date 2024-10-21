@@ -4,68 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7061D15D98
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 14:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EC23D15D9E
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 14:33:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1075F88E75;
-	Mon, 21 Oct 2024 16:27:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 0DF488895E;
+	Mon, 21 Oct 2024 16:33:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="ZZg0Ma+a";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YabrJ4Vy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F214488E8A; Mon, 21 Oct 2024 16:27:52 +0200 (CEST)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8093088EAE; Mon, 21 Oct 2024 16:33:44 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9359E88B1F
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 16:27:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux.intel.com
-Authentication-Results: phobos.denx.de; spf=none
- smtp.mailfrom=andriy.shevchenko@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1729520870; x=1761056870;
- h=date:from:to:cc:subject:message-id:mime-version;
- bh=+F1dGLDid/NHYkrnWspl2EOTk6mydC9ZYnAvZZLaDBQ=;
- b=ZZg0Ma+acw36KMeCIqIWgEPa2L8Wm8J26dcle0SfF+OS1oLka2dvRSaN
- gXvzo4V8UVl5COoVi/539o0kmfrl5uaHRcV9sGmNZJRn52Zi9hOsiI22d
- VooFeK4oNOPfbyd8Iwza5Gao5zgsO31IvQ0pDHfkTOvexboyzXKQoKwHJ
- zMAyIujPzrfECID2SHUzo/Ix85r4jaokHFNy/0eIZioZL+Xhy+3O+QZCa
- qtuns275E4+L8h5LHNIiYquvxXbV0W3SjVieDgxDjpYvRdI05SDWzxPeA
- 5diu0K/4GBlD7VErOQVsAqFlSWUqlT6HmWFeL3DPsySioHpCCrppZG7Gu Q==;
-X-CSE-ConnectionGUID: GlY+/Hd7Ti2Hxyw6GhRPPQ==
-X-CSE-MsgGUID: xfTTBqtTR5W7NKkzX6MbqQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11222"; a="28781827"
-X-IronPort-AV: E=Sophos;i="6.11,199,1725346800"; d="scan'208";a="28781827"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
- by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 Oct 2024 07:27:49 -0700
-X-CSE-ConnectionGUID: jaDMF3gjRhaSzVdkEpQpAQ==
-X-CSE-MsgGUID: s9yUvY4WSS2d344Rwmb5mg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,221,1725346800"; d="scan'208";a="102858634"
-Received: from smile.fi.intel.com ([10.237.72.154])
- by fmviesa002.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 Oct 2024 07:27:47 -0700
-Received: from andy by smile.fi.intel.com with local (Exim 4.98)
- (envelope-from <andriy.shevchenko@linux.intel.com>)
- id 1t2tNo-00000005Wzp-3mxM; Mon, 21 Oct 2024 17:27:44 +0300
-Date: Mon, 21 Oct 2024 17:27:44 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ by phobos.denx.de (Postfix) with ESMTPS id 726CD87F7D
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 16:33:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6cc2ea27a50so46376596d6.0
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 07:33:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729521221; x=1730126021; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=uAbYzekLl+vNUN72RsO74YGZILo4mmJKdJ6EaBRRSj4=;
+ b=YabrJ4VymZcCA/Du1yQQPDNi8Wq3Mjv9U0a6k91R1EHaape2pO2ZHe7xbU/FQxbYMe
+ /tyzuY/Ym4AdkG2DopThePjrbdjxY9JePoYs9SodVlU11jx3UlNyRwOIrX4gMlmWMLTH
+ VDGrMxvj7bH9rivmhmOgO7ZmLdZQQJvi9p6Qo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729521221; x=1730126021;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uAbYzekLl+vNUN72RsO74YGZILo4mmJKdJ6EaBRRSj4=;
+ b=DxhuBNmwEf0mHuUhDfsGyWNfdHaKT4YO58jTZ/B9Zq1jOCOneAixfCfju+0kLVaV45
+ yw4B3DMTmTMXpqEAheU6VmxkEPTb1lUpTneWfXzLF1sm2btujNQyGeoiQQOrfagJh7JZ
+ I8rwb+nNengCWNFS3aRJKsuP1bfUwpbhwJTnSJaJpIlE3F6WuAIUuSEwKKmM3W7c53VX
+ euDR1K5rndRfmvFvwFzk2BdZAvB+VQ8W1jpJ+9G7dl+wx9XGC3tmABxi7PdQ2Uqx3hzY
+ f5c4QFPTUY5sZAVeWu+moSB7K/DNkUsvl79oxlPSrGPj77xHrAsm7gbmfa/dtzbsTuUZ
+ /iyA==
+X-Gm-Message-State: AOJu0Yxfb/UCGseV4mAI1rM2iIg8TYqrKDOBw2kSrgDIr84jUUKtoUFc
+ WZgqLJ1UeYI2wc893FqVYjq0n/MzxdFv5JV85y2a939tIBdonY4j7OsoN5yNGe4=
+X-Google-Smtp-Source: AGHT+IGkZlM6ydzIYfgBOI25aKRq8JIJyUOCmNJ2mFGlvkII9dAj57Ze7UPGCX+g7tf2dZKqtjlv8Q==
+X-Received: by 2002:ad4:5f4f:0:b0:6c3:6477:16e7 with SMTP id
+ 6a1803df08f44-6cc3785617dmr277217486d6.11.1729521219796; 
+ Mon, 21 Oct 2024 07:33:39 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6ce0091e5b3sm17480906d6.65.2024.10.21.07.33.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Oct 2024 07:33:39 -0700 (PDT)
+Date: Mon, 21 Oct 2024 08:33:36 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>
-Subject: enabling W=1 by default
-Message-ID: <ZxZk4K4ff1T3gUVm@smile.fi.intel.com>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+Subject: Re: [PATCH] CI: Add a test for building without CMDLINE
+Message-ID: <20241021143336.GG4959@bill-the-cat>
+References: <20241021134450.22985-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GnDlQ1XLSx9DKiEc"
 Content-Disposition: inline
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+In-Reply-To: <20241021134450.22985-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,20 +95,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi!
 
-looking at the redness of the output of `make W=1` here is the question:
-isn't it a good time to enable `make W=1` by default. Yes, I understand
-the impact, but at least we can do it mandatory for a _new_ code submitted to
-U-Boot, right?
+--GnDlQ1XLSx9DKiEc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ideally I would have what Linux kernel has for a few releases already, i.e.
-Werror by default and getting close to make a clean builds with that and
-make W=1` at least against default configurations (yeah, with U-Boot there is
-probably no default, but sandbox one).
+On Mon, Oct 21, 2024 at 03:44:49PM +0200, Simon Glass wrote:
 
--- 
-With Best Regards,
-Andy Shevchenko
+> Something this breaks, so add a test to keep it working. Since sandbox
+> enables a lot of options, it is a good board to use.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  .azure-pipelines.yml |  8 ++++++++
+>  .gitlab-ci.yml       | 11 +++++++++++
+>  2 files changed, 19 insertions(+)
 
+I don't like this because "sandbox" is one of the longest run-time
+build options due to all of the tests it runs. And given how we break
+down the jobs this will make a further bottleneck. Can we just disable
+CMDLINE in one of the existing sandbox defconfigs instead please?
+Perhaps sandbox_spl since that only does SPL related pytests?
 
+--=20
+Tom
+
+--GnDlQ1XLSx9DKiEc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcWZjwACgkQFHw5/5Y0
+tyytNAwAhKs53u6JJwHzPNhFrjQQNggVMJr8ySDBulIozM/gGceWFklb4d0Qr++x
+6lpjoHjKxpPVsYsXun6l+osw+NEJA7hI1elG1OA2ajEmQQr9n/XDlI+UM/4rTP4U
+s1W+kGaeW7mxahWet00HUE5v1IJqrmhOcubd8Ia23dNEB9SIv9t/Uh4veMuCFULG
+3Yib7snnMQ7+lNp6oEn954IZ9TeeNHrHhoPmFbO0mxLZJAdHj61bCuYcWzh7hMcn
+hZDlI1GOt34aObDT7RAAEwB2RgkDX/3F9aB9AGHTn50OA+HTm1GxyzFst7HrF1Rk
+JpuBw4T633S2wxXQUj3r96gyrB6P4/fYORUTrFzZB5lUc+aLRru82JJfbn8DpPVR
+A65gflTtFXeiiE/OFx8/hDqPvL/riEVIi8nnpUFs0IemxPIjuK7qUCg7tBmt3keU
+AFCTnMhLaIskpG1KOpAwHGixZr4at7Yy7+kp2G2JkeGc/QEu2B2r+3DyQeBsSaEC
+CwNZEjuf
+=oVpn
+-----END PGP SIGNATURE-----
+
+--GnDlQ1XLSx9DKiEc--
