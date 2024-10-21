@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9913D0E6D1
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 08:56:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A943D0E6D3
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 09:07:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F53188F8E;
-	Mon, 21 Oct 2024 10:56:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5E302892DA;
+	Mon, 21 Oct 2024 11:07:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ega4sBJG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BNHGieWs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F348788F8E; Mon, 21 Oct 2024 10:56:04 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id 771A6892E8; Mon, 21 Oct 2024 11:07:57 +0200 (CEST)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9717889EB
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 10:56:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DA1C892D8
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 11:07:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2e3d523a24dso3060337a91.0
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 01:56:02 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2fb501492ccso40652161fa.2
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 02:07:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729500961; x=1730105761; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+SVExKu+7sWB7Y/nwK06cY4fZOEdnkt+1Emrbyvmzxk=;
- b=Ega4sBJG1vdN3wldBvLHE6AW1JDZklC5qvA6i2F11o+aRiP/OhJL9Ek8MlDEjGJ7/7
- fPN6ryaHRrwFZ6jmy7k8FIVpeJ2NJ17PaSCmvX+yzJoa1TbY3uUWNgOqhtPN2nWTh9kU
- 92daw+hSs7pQb+RQJHpWds1ZTtvjj410OLXQKLSjhBuS8s+VA4jJHryqkPi8jOTHe2R3
- xvc08Ky1O3v4oiOZ3A3QrDg7WHZpb2pSxBGGkkL8sQzMJd+eL893icsJM9eMGLQ4sgWi
- MGGG82RNmMNKA0j2p/EHu7V9MHmBELadUoE+jFDVgnei3HpePEIJebMA39TIiLQpMN/8
- EQow==
+ d=gmail.com; s=20230601; t=1729501674; x=1730106474; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BhNl7Ul95kFNulThZu2aiumooJjViKRK5d4VZMIUj3s=;
+ b=BNHGieWsChjW1W973XGK2c5bw2WEMa24H+L8B0uyXIo429s+M0+CUZE+2G8Noueq+V
+ wGQrkOOTtNmmjjLixPN56yn4niA6Pa79RoGVJ1ipLa7yIzp+vXhS3PdXcrkwjr7lrBmV
+ 1goukJRngDHhsWnMyYdajmvNVdC6UyzI68PrU7I8DrIT/lOiJg2brLh3gB055VL0i4pZ
+ dfFE1PqdDWnYhxNDwv4puq68cUmlKVhiam4UNkCzI2wid899JWhgQZOj4mTdZUKb1w4G
+ aqVes4WrqSnBd7byDLRYEhv6iz2ypegizRxQEzt9tFimYw5hZq1vSZ4MLkAdmb3x2N7+
+ DUqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729500961; x=1730105761;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+SVExKu+7sWB7Y/nwK06cY4fZOEdnkt+1Emrbyvmzxk=;
- b=fsF2837li6gJ5JugEmxreoVaNhHayoZU81+N4DJc/sCDLfgKwgvRmGGyUOrGrAQ/Jn
- FYPRl7x7cijDlA4O5beIquchHlk5mjRO1rCF+OFP5kJITZsyHqopy6UanUh2N3NLcXxM
- DRu7N0OKrKljQLnJtI+uHDgEqKERVk//27aBS+Vfhz/wdN2c6OCeHfpHsxt3rpCndfMC
- kS8aCZXXPU3uUS6NzUfKgB2/REsT1+Mi8n9HMakOAxxrBWwgj+gMcKYI4NSC70F/YZW3
- 8iZCcuF+GA0+ay4fMG7CWAsu/fZYYr+qDqymj3vHQphXYn2mhJq/YVJwy18yvRYyOfBV
- 1kIw==
-X-Gm-Message-State: AOJu0YyXuy3OgzxmDAK7YdSY4k7vnNTjUTAROq5BYpIVP0lMDpbR47a/
- rUOLpnBaB10mKRZxaFDDPHCu2Jn3rmIpKNbabu3A1EdNzPxTNIcX5sKOJ4rbtq5HqwcuO7wXcKu
- vlRyoL3MoUZ6GKyKrRH+v4g7ZjlsaHEf3mKoLhg==
-X-Google-Smtp-Source: AGHT+IF5vtyyuOivafoy/9X6lAGmFHYnNDX0RulrjXjkCz8414c1oWK6DEFWJynjptLl5QSMLlzxBJIeWWbI+TVlmvQ=
-X-Received: by 2002:a17:90b:4a0c:b0:2e2:b3f8:b549 with SMTP id
- 98e67ed59e1d1-2e561650b59mr13040344a91.23.1729500961400; Mon, 21 Oct 2024
- 01:56:01 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729501674; x=1730106474;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BhNl7Ul95kFNulThZu2aiumooJjViKRK5d4VZMIUj3s=;
+ b=mzLTOzeGB1JvzwRwqV1OCjMKDEySA4S8Rf5/I1VqvdAvP4B5Y1cud/3LV8Ferr1Tya
+ 2lM/apiuBC19NdWBcwJ+IGeAXDTtjj00WAqsOsgqquzbOOc/SaQfYs5U4h16TWz52LwV
+ 4XGUeJFf6VXN/OyHJQCy/7QXv+HEgVR/jQOrGB2t/JSK7kPl0e/q9DVQaTibmBCllgfc
+ KYp17jrKca3UQQNSY/SsCPtzd62PlB4iOWrzPLkhVwmxkBR11Vc4uNmfdTa4hrMBxLYJ
+ O0g5SLBG7fyH+VUp6Fq3ksd/CRDhV0H+8Vy7nPz7270qC/W5l1GjmqVUP7gGgKflOljN
+ Q9yQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWgMMeEPcdLqgn32PYLzim/czoHNrwx9kTm9DcH+iwBThdgixvSNb0YBwh8kiCcB9GmVzyuHSk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJdPhrXCUmGGhi7SehptDeYUa4HvCAMj578+e5AQD7XUKNYNOa
+ 56UfBv6Z0PoV32mmRd3e3w/CNYXvIkKxgd7Xho44r3VOf/16NZP5kvfKR4oAXDjZsxAXXiZOUlP
+ G+79NsexEwJ2fKKRGoDQjf402hCM=
+X-Google-Smtp-Source: AGHT+IE0ABPSXeaaeRmQuwCTqtyxtuqhmnEc3dQ/Bz0nIyk2xCEjQdi708jyZ79zVTblH8l1ZPtmEHJUh/0a4Nr3ozc=
+X-Received: by 2002:a2e:a986:0:b0:2fb:61d9:d717 with SMTP id
+ 38308e7fff4ca-2fb82eb4d5amr47729991fa.26.1729501674140; Mon, 21 Oct 2024
+ 02:07:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241021081934.289473-1-sjg@chromium.org>
- <20241021081934.289473-8-sjg@chromium.org>
-In-Reply-To: <20241021081934.289473-8-sjg@chromium.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 21 Oct 2024 11:55:25 +0300
-Message-ID: <CAC_iWjL23bNJCOsGAu_200Dc0_FiJeLo0CBDwP87ckG7okVtyw@mail.gmail.com>
-Subject: Re: [PATCH v4 7/8] lmb: Export the lmb data structure
+References: <20241018083806.30679-1-weijie.gao@mediatek.com>
+ <CAFLszThr2dusigg9R_3ytoGXybzV6sjChDp+40L+K_Qeo=rNdw@mail.gmail.com>
+In-Reply-To: <CAFLszThr2dusigg9R_3ytoGXybzV6sjChDp+40L+K_Qeo=rNdw@mail.gmail.com>
+From: E Shattow <lucent@gmail.com>
+Date: Mon, 21 Oct 2024 02:07:43 -0700
+Message-ID: <CANV2PTM7t7SgmQaFz6KBwTpJG8_PEbXqfMu=BpTuS=2F5XqB9A@mail.gmail.com>
+Subject: Re: [PATCH] menu: fix the logic checking whether ESC key is pressed
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Weijie Gao <weijie.gao@mediatek.com>, u-boot@lists.denx.de, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, 
+ Daniel Golle <daniel@makrotopia.org>, John Crispin <john@phrozen.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,40 +92,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 21 Oct 2024 at 11:19, Simon Glass <sjg@chromium.org> wrote:
->
-> Provide a way to access this data structure so that the meminfo command
-> can use it.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v4:
-> - Add patch to export the lmb data structure
->
->  lib/lmb.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 7e90f178763..eec99c185ee 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -887,12 +887,12 @@ int lmb_init(void)
->         return 0;
->  }
->
-> -#if CONFIG_IS_ENABLED(UNIT_TEST)
->  struct lmb *lmb_get(void)
->  {
->         return &lmb;
->  }
->
-> +#if CONFIG_IS_ENABLED(UNIT_TEST)
->  int lmb_push(struct lmb *store)
->  {
->         int ret;
-> --
-> 2.43.0
->
+Hi,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Fri, Oct 18, 2024 at 8:03=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Weijie,
+>
+> On Fri, 18 Oct 2024 at 02:38, Weijie Gao <weijie.gao@mediatek.com> wrote:
+> >
+> > It's observed that the bootmenu on a serial console sometimes
+> > incorrectly quitted with superfluous characters filled to command
+> > line input:
+> >
+> > >  *** U-Boot Boot Menu ***
+> > >
+> > >      1. Startup system (Default)
+> > >      2. Upgrade firmware
+> > >      3. Upgrade ATF BL2
+> > >      4. Upgrade ATF FIP
+> > >      5. Load image
+> > >      0. U-Boot console
+> > >
+> > >
+> > >  Press UP/DOWN to move, ENTER to select, ESC to quit
+> > >MT7988> [B
+> >
+> > Analysis shows it was caused by the wrong logic of bootmenu_loop:
+> >
+> > At first the bootmenu_loop received the first ESC char correctly.
+> >
+> > However, during the second call to bootmenu_loop, there's no data
+> > in the UART Rx FIFO. Due to the low baudrate, the second char of
+> > the down array key sequence hasn't be fully received.
+> >
+> > But bootmenu_loop just did a mdelay(10), and then treated it as a
+> > single ESC key press event. It didn't even try tstc() again after
+> > the 10ms timeout.
+> >
+> > This patch fixes this issue by letting bootmenu_loop check tstc()
+> > twice.
+> >
+> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> > ---
+> >  common/menu.c | 5 +++--
+> >  1 file changed, 3 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/common/menu.c b/common/menu.c
+> > index 5fd705039fc..bd2ac3e0ed9 100644
+> > --- a/common/menu.c
+> > +++ b/common/menu.c
+> > @@ -566,7 +566,7 @@ enum bootmenu_key bootmenu_loop(struct bootmenu_dat=
+a *menu,
+> >                                 struct cli_ch_state *cch)
+> >  {
+> >         enum bootmenu_key key;
+> > -       int c;
+> > +       int c, errchar =3D 0;
+> >         int choice;
+> >
+> >         c =3D cli_ch_process(cch, 0);
+> > @@ -574,7 +574,8 @@ enum bootmenu_key bootmenu_loop(struct bootmenu_dat=
+a *menu,
+> >                 while (!c && !tstc()) {
+> >                         schedule();
+> >                         mdelay(10);
+> > -                       c =3D cli_ch_process(cch, -ETIMEDOUT);
+> > +                       c =3D cli_ch_process(cch, errchar);
+> > +                       errchar =3D -ETIMEDOUT;
+> >                 }
+> >                 if (!c) {
+> >                         c =3D getchar();
+> > --
+> > 2.34.1
+> >
+>
+> This looks reasonable from a first glance, but please can you rebase
+> on -master ?
+>
+> Regards,
+> Simon
+
+Does this affect eficonfig menu ? I was having some intermittent
+trouble about the eficonfig menu quitting suddenly before this patch.
+With this fix applied it's no worse but maybe better, I tried for some
+minutes to reproduce the previous behaviour and was not able to make
+the glitch happen.
+
+Tested-By: E Shattow <lucent@gmail.com>
