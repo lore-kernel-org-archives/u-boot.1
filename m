@@ -4,69 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C78D15DB8
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 16:10:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DB38D15DB9
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 16:14:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9340788E3A;
-	Mon, 21 Oct 2024 18:10:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id ADDF588DC8;
+	Mon, 21 Oct 2024 18:14:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="aML2WAg0";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="qDHvMWKp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FB2588DB2; Mon, 21 Oct 2024 18:10:24 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D79BC88E19; Mon, 21 Oct 2024 18:14:05 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E4BC88E19
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:10:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7E1488DB2
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:14:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=a2e0=RS=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1729527017;
- bh=B9PzkfCMatxgFrXAGynY9/9xi3rqU9th8N75auu1sQ8=;
- b=aML2WAg0PzaCsolWcwa0jkG1wqq2OtreyOxblSDbkMkzK/l2uZpKfi8WZ/GwzisONfhu+Ysg8
- uDfLB2qXvYlFIamONBenNavqbs2t7Z/L8KArXBOIRn8qd14JmZ9rLiq119g3oDx+o4ZLPSd57/o
- HKoruKmzHU+qvAwxJdz35yji71HKVz/1RZWQ8Ggtm+OoHq9tDLd+3d44EdHizH8Ac2C159w+IlP
- W0pF6ohZHLg5xa3IiQ3CtXq3THc0pFzOdynzNkzm16WhmNbGzhA/BhShB+wKfHVFdXV2Zmy4Jc2
- EAlF9BsIQ4zFcklvWX2C9mkrWGC1yL48aM2sqiim6x9w==
-Message-ID: <81b0a377-6669-46c6-9da8-c83d9758587e@kwiboo.se>
-Date: Mon, 21 Oct 2024 18:10:09 +0200
+ smtp.mailfrom=prvs=00240ef410=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49LDkdLG011056;
+ Mon, 21 Oct 2024 18:13:48 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=R7OZrIWoN7D72tfcCQm0Jf
+ Tw7YetBt02MhTY88G/bDM=; b=qDHvMWKp7G+LXXUko+K1+vo2zAkYvGGzbfV42G
+ URCfS+6QcCu881hELkQnQ/2awnNeecv1ZQaBEISGPu11efFuZjidxf6I7DcR7Q2L
+ 57OFQSLJju6v7CToahxC38ZQEo0ttBF7q49GAtlIir3NybprnhBY7jD/glF9Edv6
+ U5pctLFoXr8diN4BMJCqXNgbVauxdMPdY7sYw9qbLwA1B0POp5MdkArsB5FbIlah
+ WY152hp1y57LLHnji/O2TQ0rV5QF8iIcVqujOGTvZs1Rhu4cVd8swFnnJY06PvTr
+ yH76vo9/cKUrNNvL2d50CTeahrnx7HK3UmDvvsPdKk4VRIdw==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 42c6ujs17d-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 21 Oct 2024 18:13:48 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A805B40045;
+ Mon, 21 Oct 2024 18:12:53 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D08DA24C448;
+ Mon, 21 Oct 2024 18:12:32 +0200 (CEST)
+Received: from localhost (10.48.86.243) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Mon, 21 Oct
+ 2024 18:12:32 +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Marek Vasut
+ <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@dh-electronics.com>
+Subject: [PATCH] ARM: dts: stm32: remove unused include for dhcor
+Date: Mon, 21 Oct 2024 18:12:28 +0200
+Message-ID: <20241021181210.1.If2ca2776660cebc50014960f9a4781e8ef937d1f@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] common: Move autoprobe out to board init
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Svyatoslav <clamor95@gmail.com>, Artur Rojek <artur@conclusive.pl>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>
-References: <20241021155133.29557-1-sjg@chromium.org>
- <20241021155133.29557-4-sjg@chromium.org>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20241021155133.29557-4-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 67167ce78d3131205d38af85
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.48.86.243]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,143 +87,332 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Remove device tree include files no more used with OF_UPSTREAM migration
+stm32mp135f-dhcor-dhsbc.dts
 
-On 2024-10-21 17:51, Simon Glass wrote:
-> Rather than doing autoprobe within the driver model code, move it out to
-> the board-init code. This makes it clear that it is a separate step from
-> binding devices.
+Fixes: cccb29fc1270 ("ARM: dts: stm32: Switch to using upstream DT on DH
+STM32 DHSOM")
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
-It could probably be good to mention that after this patch the events
-EVT_DM_POST_INIT_R/F will happen before autoprobe instead of after.
+ arch/arm/dts/stm32mp13xx-dhcor-som.dtsi | 308 ------------------------
+ 1 file changed, 308 deletions(-)
+ delete mode 100644 arch/arm/dts/stm32mp13xx-dhcor-som.dtsi
 
-> 
-> For now this is always done twice, before and after relocation, but we
-> should discuss whether it might be possible to drop the post-relocation
-> probe.
-
-If you have plans to drop post-relocation probe, I suggest you first
-look into having OF_LIVE working at pre-reloaction to speed up boot, the
-use of fdtdec is super slow in getting parent node/offset.
-
-> 
-> This patch also drops autoprobe from SPL. If that is needed, we could
-> add a call in SPL.
-
-This patch will break a feature used by the Pine64 PineTab2 because of
-this change, please restore autoprobe in SPL.
-
-The PineTab2 have a feature to power itself off when power-on happen
-because of power cable was plugged in, for this to work it currently
-depends on DM probe after bind works in SPL.
-
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->  common/board_f.c    |  4 ++++
->  common/board_r.c    |  4 ++++
->  drivers/core/root.c | 17 ++++++++++++++---
->  include/dm/root.h   | 10 ++++++++++
->  4 files changed, 32 insertions(+), 3 deletions(-)
-> 
-> diff --git a/common/board_f.c b/common/board_f.c
-> index 8684ed71284..6564b2ac2f7 100644
-> --- a/common/board_f.c
-> +++ b/common/board_f.c
-> @@ -822,6 +822,10 @@ static int initf_dm(void)
->  	if (ret)
->  		return ret;
->  
-> +	ret = dm_autoprobe();
-> +	if (ret)
-> +		return ret;
-> +
->  	if (IS_ENABLED(CONFIG_TIMER_EARLY)) {
->  		ret = dm_timer_init();
->  		if (ret)
-> diff --git a/common/board_r.c b/common/board_r.c
-> index e5f33f40643..a2948b7b55c 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -243,6 +243,10 @@ static int initr_dm(void)
->  	if (ret)
->  		return ret;
->  
-> +	ret = dm_autoprobe();
-> +	if (ret)
-> +		return ret;
-> +
->  	return 0;
->  }
->  #endif
-> diff --git a/drivers/core/root.c b/drivers/core/root.c
-> index 2d4f078f97f..f6bda84b2b9 100644
-> --- a/drivers/core/root.c
-> +++ b/drivers/core/root.c
-> @@ -281,7 +281,7 @@ void *dm_priv_to_rw(void *priv)
->  }
->  #endif
->  
-> -static int dm_probe_devices(struct udevice *dev)
-> +static int dm_probe_devices_(struct udevice *dev)
-
-Why is this function renamed?
-
-Regards,
-Jonas
-
->  {
->  	struct udevice *child;
->  
-> @@ -294,7 +294,18 @@ static int dm_probe_devices(struct udevice *dev)
->  	}
->  
->  	list_for_each_entry(child, &dev->child_head, sibling_node)
-> -		dm_probe_devices(child);
-> +		dm_probe_devices_(child);
-> +
-> +	return 0;
-> +}
-> +
-> +int dm_autoprobe(void)
-> +{
-> +	int ret;
-> +
-> +	ret = dm_probe_devices_(gd->dm_root);
-> +	if (ret)
-> +		return log_msg_ret("pro", ret);
->  
->  	return 0;
->  }
-> @@ -331,7 +342,7 @@ static int dm_scan(bool pre_reloc_only)
->  	if (ret)
->  		return ret;
->  
-> -	return dm_probe_devices(gd->dm_root);
-> +	return 0;
->  }
->  
->  int dm_init_and_scan(bool pre_reloc_only)
-> diff --git a/include/dm/root.h b/include/dm/root.h
-> index b2f30a842f5..2ba5104ce1f 100644
-> --- a/include/dm/root.h
-> +++ b/include/dm/root.h
-> @@ -136,6 +136,16 @@ int dm_scan_other(bool pre_reloc_only);
->   */
->  int dm_init_and_scan(bool pre_reloc_only);
->  
-> +/**
-> + * dm_autoprobe() - Prove devices which are marked for probe-after-bind
-> + *
-> + * This probes all devices with a DM_FLAG_PROBE_AFTER_BIND flag. It checks the
-> + * entire tree, so parent nodes need not have the flag set.
-> + *
-> + * Return: 0 if OK, -ve on error
-> + */
-> +int dm_autoprobe(void);
-> +
->  /**
->   * dm_init() - Initialise Driver Model structures
->   *
+diff --git a/arch/arm/dts/stm32mp13xx-dhcor-som.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-som.dtsi
+deleted file mode 100644
+index ddad6497775b..000000000000
+--- a/arch/arm/dts/stm32mp13xx-dhcor-som.dtsi
++++ /dev/null
+@@ -1,308 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
+-/*
+- * Copyright (C) 2024 Marek Vasut <marex@denx.de>
+- */
+-
+-#include <dt-bindings/gpio/gpio.h>
+-#include <dt-bindings/input/input.h>
+-#include <dt-bindings/leds/common.h>
+-#include <dt-bindings/mfd/st,stpmic1.h>
+-#include <dt-bindings/regulator/st,stm32mp13-regulator.h>
+-#include "stm32mp13-pinctrl.dtsi"
+-
+-/ {
+-	model = "DH electronics STM32MP13xx DHCOR SoM";
+-	compatible = "dh,stm32mp131a-dhcor-som",
+-		     "st,stm32mp131";
+-
+-	aliases {
+-		mmc0 = &sdmmc2;
+-		mmc1 = &sdmmc1;
+-		serial0 = &uart4;
+-		serial1 = &uart7;
+-		rtc0 = &rv3032;
+-		spi0 = &qspi;
+-	};
+-
+-	memory@c0000000 {
+-		device_type = "memory";
+-		reg = <0xc0000000 0x20000000>;
+-	};
+-
+-	reserved-memory {
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges;
+-
+-		optee@dd000000 {
+-			reg = <0xdd000000 0x3000000>;
+-			no-map;
+-		};
+-	};
+-
+-	sdio_pwrseq: sdio-pwrseq {
+-		compatible = "mmc-pwrseq-simple";
+-		reset-gpios = <&gpiof 12 GPIO_ACTIVE_LOW>;
+-	};
+-
+-	vin: vin {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vin";
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-		regulator-always-on;
+-	};
+-};
+-
+-&i2c3 {
+-	i2c-scl-rising-time-ns = <96>;
+-	i2c-scl-falling-time-ns = <3>;
+-	clock-frequency = <400000>;
+-	status = "okay";
+-	/* spare dmas for other usage */
+-	/delete-property/dmas;
+-	/delete-property/dma-names;
+-
+-	pmic: stpmic@33 {
+-		compatible = "st,stpmic1";
+-		reg = <0x33>;
+-		interrupts-extended = <&gpioi 3 IRQ_TYPE_EDGE_FALLING>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		status = "okay";
+-
+-		regulators {
+-			compatible = "st,stpmic1-regulators";
+-
+-			ldo1-supply = <&vin>;
+-			ldo2-supply = <&vin>;
+-			ldo3-supply = <&vin>;
+-			ldo4-supply = <&vin>;
+-			ldo5-supply = <&vin>;
+-			ldo6-supply = <&vin>;
+-			pwr_sw1-supply = <&bst_out>;
+-			pwr_sw2-supply = <&bst_out>;
+-
+-			vddcpu: buck1 { /* VDD_CPU_1V2 */
+-				regulator-name = "vddcpu";
+-				regulator-min-microvolt = <1250000>;
+-				regulator-max-microvolt = <1250000>;
+-				regulator-always-on;
+-				regulator-initial-mode = <0>;
+-				regulator-over-current-protection;
+-			};
+-
+-			vdd_ddr: buck2 { /* VDD_DDR_1V35 */
+-				regulator-name = "vdd_ddr";
+-				regulator-min-microvolt = <1350000>;
+-				regulator-max-microvolt = <1350000>;
+-				regulator-always-on;
+-				regulator-initial-mode = <0>;
+-				regulator-over-current-protection;
+-			};
+-
+-			vdd: buck3 { /* VDD_3V3_1V8 */
+-				regulator-name = "vdd";
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <3300000>;
+-				regulator-always-on;
+-				regulator-initial-mode = <0>;
+-				regulator-over-current-protection;
+-			};
+-
+-			vddcore: buck4 { /* VDD_CORE_1V2 */
+-				regulator-name = "vddcore";
+-				regulator-min-microvolt = <1250000>;
+-				regulator-max-microvolt = <1250000>;
+-				regulator-always-on;
+-				regulator-initial-mode = <0>;
+-				regulator-over-current-protection;
+-			};
+-
+-			vdd_adc: ldo1 { /* VDD_ADC_1V8 */
+-				regulator-name = "vdd_adc";
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <1800000>;
+-				interrupts = <IT_CURLIM_LDO1 0>;
+-			};
+-
+-			vdd_ldo2: ldo2 { /* LDO2_OUT_1V8 */
+-				regulator-name = "vdd_ldo2";
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <1800000>;
+-				interrupts = <IT_CURLIM_LDO2 0>;
+-			};
+-
+-			vdd_ldo3: ldo3 { /* LDO3_OUT */
+-				regulator-name = "vdd_ldo3";
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <1800000>;
+-				interrupts = <IT_CURLIM_LDO3 0>;
+-			};
+-
+-			vdd_usb: ldo4 { /* VDD_USB_3V3 */
+-				regulator-name = "vdd_usb";
+-				regulator-min-microvolt = <3300000>;
+-				regulator-max-microvolt = <3300000>;
+-				interrupts = <IT_CURLIM_LDO4 0>;
+-			};
+-
+-			vdd_sd: ldo5 { /* VDD_SD_3V3_1V8 */
+-				regulator-name = "vdd_sd";
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <3300000>;
+-				interrupts = <IT_CURLIM_LDO5 0>;
+-			};
+-
+-			vdd_sd2: ldo6 { /* VDD_SD2_3V3_1V8 */
+-				regulator-name = "vdd_sd2";
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <3300000>;
+-				interrupts = <IT_CURLIM_LDO6 0>;
+-			};
+-
+-			vref_ddr: vref_ddr { /* VREF_DDR_0V675 */
+-				regulator-name = "vref_ddr";
+-				regulator-always-on;
+-			};
+-
+-			bst_out: boost { /* BST_OUT_5V2 */
+-				regulator-name = "bst_out";
+-			};
+-
+-			vbus_otg: pwr_sw1 {
+-				regulator-name = "vbus_otg";
+-				interrupts = <IT_OCP_OTG 0>;
+-			};
+-
+-			vbus_sw: pwr_sw2 {
+-				regulator-name = "vbus_sw";
+-				interrupts = <IT_OCP_SWOUT 0>;
+-				regulator-active-discharge = <1>;
+-			};
+-		};
+-
+-		onkey {
+-			compatible = "st,stpmic1-onkey";
+-			interrupts = <IT_PONKEY_F 0>, <IT_PONKEY_R 1>;
+-			interrupt-names = "onkey-falling", "onkey-rising";
+-			status = "okay";
+-		};
+-
+-		watchdog {
+-			compatible = "st,stpmic1-wdt";
+-			status = "disabled";
+-		};
+-	};
+-
+-	eeprom0: eeprom@50 {
+-		compatible = "atmel,24c256";	/* ST M24256 */
+-		reg = <0x50>;
+-		pagesize = <64>;
+-	};
+-
+-	rv3032: rtc@51 {
+-		compatible = "microcrystal,rv3032";
+-		reg = <0x51>;
+-		interrupts-extended = <&gpioi 0 IRQ_TYPE_EDGE_FALLING>;
+-	};
+-};
+-
+-&iwdg2 {
+-	timeout-sec = <32>;
+-	status = "okay";
+-};
+-
+-&qspi {
+-	pinctrl-names = "default", "sleep";
+-	pinctrl-0 = <&qspi_clk_pins_a
+-		     &qspi_bk1_pins_a
+-		     &qspi_cs1_pins_a>;
+-	pinctrl-1 = <&qspi_clk_sleep_pins_a
+-		     &qspi_bk1_sleep_pins_a
+-		     &qspi_cs1_sleep_pins_a>;
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-	status = "okay";
+-
+-	flash0: flash@0 {
+-		compatible = "jedec,spi-nor";
+-		reg = <0>;
+-		spi-rx-bus-width = <4>;
+-		spi-max-frequency = <108000000>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-	};
+-};
+-
+-/* Console UART */
+-&uart4 {
+-	pinctrl-names = "default", "sleep", "idle";
+-	pinctrl-0 = <&uart4_pins_b>;
+-	pinctrl-1 = <&uart4_sleep_pins_b>;
+-	pinctrl-2 = <&uart4_idle_pins_b>;
+-	/delete-property/dmas;
+-	/delete-property/dma-names;
+-	status = "okay";
+-};
+-
+-/* Bluetooth */
+-&uart7 {
+-	pinctrl-names = "default", "sleep", "idle";
+-	pinctrl-0 = <&uart7_pins_a>;
+-	pinctrl-1 = <&uart7_sleep_pins_a>;
+-	pinctrl-2 = <&uart7_idle_pins_a>;
+-	uart-has-rtscts;
+-	status = "okay";
+-
+-	bluetooth {
+-		compatible = "infineon,cyw43439-bt", "brcm,bcm4329-bt";
+-		max-speed = <3000000>;
+-		device-wakeup-gpios = <&gpiog 9 GPIO_ACTIVE_HIGH>;
+-		shutdown-gpios = <&gpioi 2 GPIO_ACTIVE_HIGH>;
+-	};
+-};
+-
+-/* SDIO WiFi */
+-&sdmmc1 {
+-	pinctrl-names = "default", "opendrain", "sleep";
+-	pinctrl-0 = <&sdmmc1_b4_pins_a &sdmmc1_clk_pins_a>;
+-	pinctrl-1 = <&sdmmc1_b4_od_pins_a &sdmmc1_clk_pins_a>;
+-	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a>;
+-	bus-width = <4>;
+-	cap-power-off-card;
+-	keep-power-in-suspend;
+-	non-removable;
+-	st,neg-edge;
+-	vmmc-supply = <&vdd>;
+-	mmc-pwrseq = <&sdio_pwrseq>;
+-	status = "okay";
+-
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-
+-	brcmf: bcrmf@1 {	/* muRata 1YN */
+-		reg = <1>;
+-		compatible = "infineon,cyw43439-fmac", "brcm,bcm4329-fmac";
+-		interrupt-parent = <&gpioe>;
+-		interrupts = <14 IRQ_TYPE_LEVEL_LOW>;
+-		interrupt-names = "host-wake";
+-	};
+-};
+-
+-/* eMMC */
+-&sdmmc2 {
+-	pinctrl-names = "default", "opendrain", "sleep";
+-	pinctrl-0 = <&sdmmc2_b4_pins_a &sdmmc2_d47_pins_a &sdmmc2_clk_pins_a>;
+-	pinctrl-1 = <&sdmmc2_b4_od_pins_a &sdmmc2_d47_pins_a &sdmmc2_clk_pins_a>;
+-	pinctrl-2 = <&sdmmc2_b4_sleep_pins_a &sdmmc2_d47_sleep_pins_a>;
+-	bus-width = <8>;
+-	mmc-ddr-3_3v;
+-	no-sd;
+-	no-sdio;
+-	non-removable;
+-	st,neg-edge;
+-	vmmc-supply = <&vdd>;
+-	vqmmc-supply = <&vdd>;
+-	status = "okay";
+-};
+-- 
+2.25.1
 
