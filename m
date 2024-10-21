@@ -4,96 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AED31D17123
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 18:15:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 126EBD17122
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 18:17:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C16D588EDA;
-	Mon, 21 Oct 2024 20:15:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 67E0488365;
+	Mon, 21 Oct 2024 20:17:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="kQbynRwD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ee1IsP6o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38EFD88F01; Mon, 21 Oct 2024 20:15:51 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DB6A18811C; Mon, 21 Oct 2024 20:17:25 +0200 (CEST)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25C1B88E8A
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 20:15:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E6DF88365
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 20:17:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 3B0443F2B3
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:15:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1729534548;
- bh=A65flM1CDdeTupmwfMu2DvSZGSAu6JThIPvC04QPlZQ=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=kQbynRwDNByv7KAL7Ult/AXkh1oF03AcnKTQ6+DmtZ4ApsxG6WE7NSiouArpgBcup
- Mxwc9vrxn25k4UhCwLGeOIhdviU5OQKbvPeRG6NrzNQs5Ul+Blf1XD54206Z9O1c1C
- 2icjQbS3Bd+HUs3Q6wJm3dyLWlR8APRcgFGwD01Ltz71p+HQv3hk9gy9e0BDpBvk+T
- VVACQoNZGFxI+ccz25b5NGfUUeThDnm5366n0Upwy5RVm8MVzMyik0mHK0eYYIC6Dv
- 8/OqawAQGFxpdRDcQ3ksj1vYz76rkhzhj6m4Nj+J1rZGBQgY2/2yzTi/oXrYWFrwXQ
- Jv89dtKMM4KVw==
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-a9a1be34c68so324927966b.1
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 11:15:48 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7b15d330ce1so251874085a.1
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 11:17:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729534640; x=1730139440; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dDWICrz7zdGT/d9OYkg71oIYOETk8a9J0DA+YxEvO0Y=;
+ b=Ee1IsP6oo9L7XuCk8HNoNidl8B1xxOlGm+n++sDeeGNR/cz31/Cwm1wJ363zAyEd76
+ 6d0cHsOFqx5zk9gWaD5tBG3US1qPGxQoBhCfmDB3wYOLmZ3pxap565++F/PHLtnBxniR
+ 8o7MpqQyUu3NViI5jSt1nJ7MBvjQc6X5TOrfY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729534548; x=1730139348;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=A65flM1CDdeTupmwfMu2DvSZGSAu6JThIPvC04QPlZQ=;
- b=sq7WXcAr6Cv4wzZU9OFtFY+bYRTGMLmR25AN1TzC87bksRucklC9dRu6bGkNpqUNjb
- BMcCILkuIzfjbh4JiT/JPH2NAAw05DeXecuSnK3ILR8PEp+L694+TBI7MPBJeFkug6Rt
- Ygz8mVnXThtMrpiV7ivfyqse2l9Ol2up0xb/ceyuBEkjwzlZ9QByB3Aa+ossqE9nP8CD
- oiTckUpPipoaw21Jkk2hgeziwtpFkxBstJ9zjojnmhGhaLdjzeCize2uqnlTubjmVcNT
- qxGKspgq/l1WKa2LMdhhmZnCr4EoCYxESLbOEioVtn8VcVCi2vPUSf1QGS6XDA3qWvnh
- sOTg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUs1QUBpqrkcfarjB1fn5iwdVHbxAJFiHsNM97zFlPFLC8MSrK9kh1wiZR4Q4ofRfHtv/Ebcrs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx749nBIQ4xHJjXC1vkJPfeZKMXYdsgQA5aaPkTyZLohddtY7B1
- 5+dy1Q6rrWvJbtDVR5jYO4UX8/2RdKl6hUjn0EgQkxv8KtTY6Lc/UVkWp18mcC5Ovw6y8RXkUaP
- /f3mR4AfPX2annfeajPdylehN0dFQ6vVPY4PsPSR7Yg5FGhXPbebB80PH9VoyE+78Ato=
-X-Received: by 2002:a17:906:6a04:b0:a9a:1585:dd6a with SMTP id
- a640c23a62f3a-a9aa892dc0cmr88243966b.36.1729534547765; 
- Mon, 21 Oct 2024 11:15:47 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG+elWkF9Nh+kQU8yJzDbGQ5Q5ZS4liKv/AjsidM8UO5GTGUgBRHgmkrC6pxbLhwEVmV3E95A==
-X-Received: by 2002:a17:906:6a04:b0:a9a:1585:dd6a with SMTP id
- a640c23a62f3a-a9aa892dc0cmr88241866b.36.1729534547289; 
- Mon, 21 Oct 2024 11:15:47 -0700 (PDT)
-Received: from [10.43.6.224] ([87.215.50.114])
+ d=1e100.net; s=20230601; t=1729534640; x=1730139440;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dDWICrz7zdGT/d9OYkg71oIYOETk8a9J0DA+YxEvO0Y=;
+ b=oVhRElz4XqELKl/h02fNZGn9Gz42PLua79/tzE50Q1tjSHZ/Y/6K28S8W1kInolUYB
+ +a1ZqD7rZOYytY9LOQUL0CAFf00PJ1dW8KcM88Bitxs3aWvehnzS/v9nn4MRCno89RME
+ gap7wqi3jZzik5DEDa6Iujf1LC3+1K14tr4JozZkhMI1YpCTGMI/tZf/tzDyhcbkYoYN
+ af466hkGlxqpE0h9geUAMc6UyPlUbMbChvuWrc8BmhaE4tGUctcbMrxjjJ65oBZ9eNpq
+ oHBDq2uLpZpNcpXpm8VWpRA7IASX4sLxCjv4D+pKktEebMFo98C3fciu8VgaYKBacxhH
+ zuGw==
+X-Gm-Message-State: AOJu0YxeA8zy2fMv92647A0FBIwtx4cjQ3GuxJ3FXNE5PXcHu5qD8Qyb
+ A8rpeQZzmCwCir5RkyPUBN9ApO9Wvz+M88q19GJv0th2BqXT5EDXNbltxSDohDw=
+X-Google-Smtp-Source: AGHT+IH7b44YniS2Jc2YgdhU2bL43b0WTTDLktivaln+CtIYUeyq86qPj+NKt3Kh0Tdp6ES9UrUVUA==
+X-Received: by 2002:a05:620a:2a03:b0:7a9:acd5:1b08 with SMTP id
+ af79cd13be357-7b157be3155mr1549566585a.51.1729534640533; 
+ Mon, 21 Oct 2024 11:17:20 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a912f6644sm237046566b.81.2024.10.21.11.15.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Oct 2024 11:15:46 -0700 (PDT)
-Message-ID: <1e9609f3-f237-4aa7-9f9a-4eb30243261f@canonical.com>
-Date: Mon, 21 Oct 2024 20:15:45 +0200
+ af79cd13be357-7b165a5c605sm195867685a.74.2024.10.21.11.17.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Oct 2024 11:17:19 -0700 (PDT)
+Date: Mon, 21 Oct 2024 12:17:16 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Svyatoslav <clamor95@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>,
+ Richard Weinberger <richard@nod.at>,
+ This contributor prefers not to receive mails <noreply@example.com>
+Subject: Re: [PATCH 1/3] common: Drop check for DM in initf_dm()
+Message-ID: <20241021181716.GR4959@bill-the-cat>
+References: <20241021155133.29557-1-sjg@chromium.org>
+ <20241021155133.29557-2-sjg@chromium.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] doc: do not include K3 boards twice in TOC
-To: Tom Rini <trini@konsulko.com>
-Cc: Sean Anderson <sean.anderson@seco.com>, Nishanth Menon <nm@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>, Bryan Brattlof <bb@ti.com>, Dhruva Gole
- <d-gole@ti.com>, u-boot@lists.denx.de
-References: <20241021180101.18452-1-heinrich.schuchardt@canonical.com>
- <20241021180101.18452-3-heinrich.schuchardt@canonical.com>
- <20241021181234.GQ4959@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241021181234.GQ4959@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="i20yiY22o9PnqOpj"
+Content-Disposition: inline
+In-Reply-To: <20241021155133.29557-2-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,53 +94,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/21/24 20:12, Tom Rini wrote:
-> On Mon, Oct 21, 2024 at 08:01:01PM +0200, Heinrich Schuchardt wrote:
->> Sphinx writes a warning if a page is included twice in the table of
->> contents. Use references instead.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   doc/board/ti/k3.rst | 11 +++++++----
->>   1 file changed, 7 insertions(+), 4 deletions(-)
->>
->> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
->> index c3513f0aee2..5d01f487622 100644
->> --- a/doc/board/ti/k3.rst
->> +++ b/doc/board/ti/k3.rst
->> @@ -32,19 +32,22 @@ K3 Based SoCs
->>   
->>      am62ax_sk
->>      am62x_sk
->> -   ../beagle/am62x_beagleplay
->> -   ../phytec/phycore-am62x
->> -   ../toradex/verdin-am62
->>      am62px_sk
->>      am64x_evm
->>      am65x_evm
->>      j7200_evm
->> -   ../beagle/j721e_beagleboneai64
->>      j721e_evm
->>      j721s2_evm
->>      j722s_evm
->>      j784s4_evm
->>   
->> +K3 SoC based boards in other sections
->> +
->> +* :doc:`../beagle/am62x_beagleplay`
->> +* :doc:`../beagle/j721e_beagleboneai64`
->> +* :doc:`../phytec/phycore-am62x`
->> +* :doc:`../toradex/verdin-am62`
-> 
-> Can we just make the changes to :doc: links be inline and keep the list
-> sorted/ordered as-is? Or does that not read well once rendered?
-> 
 
-This is nothing Sphinx would understand:
+--i20yiY22o9PnqOpj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-WARNING: toctree contains reference to nonexisting document 
-'board/ti/:doc:`../beagle/am62x_beagleplay`' [toc.not_readable]
+On Mon, Oct 21, 2024 at 05:51:29PM +0200, Simon Glass wrote:
 
-Best regards
+> This is enabled by all boards, so drop the condition.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Heinrich
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--i20yiY22o9PnqOpj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcWmqwACgkQFHw5/5Y0
+tyzpuQv5ARez0pnakBJXAie6ZnbNh3/kp2AWs2r/MJILgPdcUf69QXsBayqeY+hN
+N8x2/40w3pTgOvwOpQg5DnNVz4Rif/GbwKEcAwShq7HzNmfNChIhSFhHtGzqcELp
+W6yCNEPpUv+yFilukMf/s14xnpQfYi5sfg6azE4xy2KkpM/BUUqYHZ73mI9SrVCo
+mIWluBDuiJ5N26x+i8XPXtzpl6hf7jy5KJFyGiYj3YO/zw7FPX/09zO0gmo/qbXe
+hvNaUbE87KX5LauEh2mifVVRTqGr2dzBqMZpHaCdzxhS7coLQjGYjjcaEqp72h8N
+nGHUpjA5I124jsqYdpMV9DuXP0lqr8H2eAM//W3CwQwSVhbJScC63pk605kyHjnp
+WtegrVsVIQQmOv6mef/0EORocZzfRNhB/ezApKQ4tDWmM0ohR4OSIPrTyv8JSyxk
+uoPDrxnKEB7DxLuvIEVbibfoxLV1WYP3H05/cWX8MUTm/SoFUg04CxFffY2YMZBJ
+Obl5KHSV
+=4CLb
+-----END PGP SIGNATURE-----
+
+--i20yiY22o9PnqOpj--
