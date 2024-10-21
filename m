@@ -4,112 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3703DD15D89
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 13:03:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBC2DD15D89
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 13:03:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 494EA88EC6;
+	by phobos.denx.de (Postfix) with ESMTP id AB53788EE4;
 	Mon, 21 Oct 2024 15:02:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y3DAVqHN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g+UnebpV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2354D889AE; Mon, 21 Oct 2024 13:38:54 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 868BF88F01; Mon, 21 Oct 2024 13:42:59 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DE2B88EBB
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 13:38:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D01088EC6
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 13:42:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2fabb837ddbso58783771fa.1
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 04:38:50 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a99e3b3a411so870187966b.0
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 04:42:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729510729; x=1730115529; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZEN8HPOey7MW6DwzvPu4O9WUdCksTR9VMVqFVb3xNZ8=;
- b=Y3DAVqHNL8YyXW6sa4WedoNGioWe8VMyE0IlGjb8/26QFbAd49PubVrBS4Dv8ZvzZO
- 64vB4r61rCuRswCgUrnt/4+ITcZ0WSnX2EJwXAbC5q/W0EeZpgyFpfmv3ceA/NsxRd0s
- V9xqHRy3tVTcSsmKKTtgRBYl+uKiqJylElZJg=
+ d=chromium.org; s=google; t=1729510974; x=1730115774; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NjZW5ihPZTiArqY4Oqdu8eVTd0blNSde8+3M809FJxk=;
+ b=g+UnebpVx2+APZDX9cRX4zjvp9+03WiNX+4WPJwRimYKSKlWqEbBheLmXK+JHmIQc9
+ 9n7QVaCA6j+NDYEvt3xLphyGXkTkHD1PbFxgg5UGu2iqxftGzxI9FqzL/rpxdeCQTgIR
+ 8CrFLXR4TDKiWhmvP2rcDGuhzt9L5TffsjlzE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729510729; x=1730115529;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZEN8HPOey7MW6DwzvPu4O9WUdCksTR9VMVqFVb3xNZ8=;
- b=Ec8Ltm+7OhlMqsBvowLpWRdKfuPxUJ1OtrkzC7vzp1f0U6J8q/ooxYjPm2ojp8e/Q/
- Jeyl40/xUeaCOkwx7fAZ0eWOwM+RxU5UVLJ2BZsfeKkREMWsdH7BoUyM0EgBrXyzvcIr
- qEzQunLxuKbiaJMQnQmYPyEUbb+WmXCO8eFN7Z7i1eUZbIj6PphZjnzQfYlgPpxDKm+R
- vIRNqONIdlMTiZ+qXxEi1dO+HTLk5vNt2H7u//IAraPjvQGOwBprGAEfzmdCVqpJkfCM
- C6qKZXKCFVI7KBlm15O4JPtZ5n8XSBhzCUCuJZNkc1HZv8SLOTi0rZmvB8lR01QixTKK
- ik3A==
-X-Gm-Message-State: AOJu0Yxu7lG+8GUnkYJxXT6p5BlQWPIHAJAOOLPY36346emS5LC0d6rI
- Sustcutm8FBBp0SeAy9koMZpLercePS+TyWFXF0PEA7oaHf2ySR778CyL8NiiVjPUxzkb0Og0LF
- YPiva
-X-Google-Smtp-Source: AGHT+IGUg2Cqfl2MoM8QRq+TBBwJOYcXw2g+CtZmGRbNgLiH9QtkyaUD2H3KuXUVZc1es1O4srEmEA==
-X-Received: by 2002:a05:6512:15a5:b0:533:483f:9562 with SMTP id
- 2adb3069b0e04-53a154c9f5cmr8876503e87.42.1729510728838; 
- Mon, 21 Oct 2024 04:38:48 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729510974; x=1730115774;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NjZW5ihPZTiArqY4Oqdu8eVTd0blNSde8+3M809FJxk=;
+ b=q5tgj0xZN0WYe+zt5k7t2KvhjHcoLs8Dzw7lVnrWF6daJ69I6Tdeuk3Z3yFQNUY8n2
+ i0gj6EQsOSvlgU17oylVnKhmMeEtobRv2m7K5r29Z2fiph9CSsKJpCqtx81enEmpxfqV
+ S46nfckFjJS6CPUcSPKSrT1w3bQ1vtCJH0USWF5+IGjvRHO8d/6CI8L8WGx+zNY7vRt6
+ n4wyvo+W5cXRdlUG5tTkJJqv+GXPmeI4Gg8AHTyioB8nwoSGDtML/cQy983bM6WTjqry
+ Vcixxgov9pLaFFogWi/zF8AuKG3ULFvyP43o2ydIUE2lRgn7toxbpyZSUdj5v1xsGJ/n
+ 0P3g==
+X-Gm-Message-State: AOJu0YyoXCHyhFvbeU5y5mZWXKwHdojLN7QQXHgGS+oFg1q2hdcy12DA
+ fJeG7TTwj8L47sjeVR9U/Su0wBM/Pgd/yfQRVL4kr6EVt+DNpTe3xXjH/raqjMzhHHCwiMX4kwM
+ Z1M6L
+X-Google-Smtp-Source: AGHT+IH+4h1UwWa8JPvxzNQw2htIckgLKZ9ZdwQx+VBaLkoZ17vAsK8H+CnpbH67ZfRWeoAcah4h9g==
+X-Received: by 2002:a17:907:1b92:b0:a9a:8263:d2c7 with SMTP id
+ a640c23a62f3a-a9a826409bamr549598166b.7.1729510973519; 
+ Mon, 21 Oct 2024 04:42:53 -0700 (PDT)
 Received: from chromium.org (43-114-103-145.static.glaslokaal.nl.
  [145.103.114.43]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a91571ea5sm191604366b.160.2024.10.21.04.38.47
+ a640c23a62f3a-a9a912d5fcesm195080166b.26.2024.10.21.04.42.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Oct 2024 04:38:48 -0700 (PDT)
+ Mon, 21 Oct 2024 04:42:53 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Alexander Gendin <agendin@matrox.com>, Alison Wang <alison.wang@nxp.com>,
- Andre Przywara <andre.przywara@arm.com>, Andy Fleming <afleming@gmail.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Angelo Dureghello <angelo@sysam.it>, Artur Rojek <artur@conclusive.pl>,
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Aaron Williams <awilliams@marvell.com>,
+ Alexander Graf <agraf@csgraf.de>,
+ Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
+ Andre Przywara <andre.przywara@arm.com>, Anup Patel <anup@brainfault.org>,
+ Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Charles Hardin <ckhardin@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Doug Zobel <douglas.zobel@climate.com>,
- Enric Balletbo i Serra <eballetbo@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Hans de Goede <hdegoede@redhat.com>,
+ David Feng <fenghua@phytium.com.cn>, E Shattow <lucent@gmail.com>,
+ Eric Curtin <ecurtin@redhat.com>, Francois Berder <fberder@outlook.fr>,
+ Green Wan <green.wan@sifive.com>, H Bell <dmoo_dv@protonmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Jens Scharsig <esw@bus-elektronik.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Johan Jonker <jbx6244@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Mario Six <mario.six@gdsys.cc>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ "Ivan T. Ivanov" <iivanov@suse.de>,
+ James Hilliard <james.hilliard1@gmail.com>, Janne Grunau <j@jannau.net>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <kettenis@openbsd.org>, Matthias Brugger <mbrugger@suse.com>,
  Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Okhunjon Sobirjonov <okhunjon72@gmail.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Randolph <randolph@andestech.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- Sam Edwards <CFSworks@gmail.com>, Samuel Holland <samuel@sholland.org>,
- Sean Anderson <seanga2@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>,
- Wan Yee Lau <wan.yee.lau@intel.com>, Wolfgang Denk <wd@denx.de>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 00/25] led: Remove old status-LED code
-Date: Mon, 21 Oct 2024 13:38:08 +0200
-Message-ID: <20241021113839.318572-1-sjg@chromium.org>
+ Raymond Mao <raymond.mao@linaro.org>, Rick Chen <rick@andestech.com>,
+ Sam Day <me@samcday.com>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ William Zhang <william.zhang@broadcom.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>, u-boot-qcom@groups.io,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>
+Subject: [PATCH 2/2] fdt: Swap the signature for board_fdt_blob_setup()
+Date: Mon, 21 Oct 2024 13:42:38 +0200
+Message-ID: <20241021114247.349863-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241021114247.349863-1-sjg@chromium.org>
+References: <20241021114247.349863-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 21 Oct 2024 15:02:15 +0200
@@ -129,94 +133,705 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There has been an LED framework in U-Boot which uses driver model for
-about 9 years now. Recent work is underway to improve it and provide
-more features. It is probably a good time to drop the old code, which
-is only used by 5 boards:
+This returns a devicetree and updates a parameter with an error code.
+Swap it, since this fits better with the way U-Boot normally works. It
+also (more easily) allows leaving the existing pointer unchanged.
 
-   ./tools/qconfig.py -f LED_STATUS
-   5 matches
-   eb_cpu5282 eb_cpu5282_internal mx23_olinuxino pinephone
-   socfpga_vining_fpga
+No yaks were harmed in this change, but there is a very small code-size
+reduction.
 
-This series attempts that.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Changes in v2:
-- Combine code-removal and defconfig changes
-- Add a patch to enable LED and LED_BOOT for these boards
-- Add a patch to enable LED and LED_BOOT for these boards
-- Enable LED on the 5 affected platforms
-- Reorder patches for bisectability
+ arch/arm/mach-apple/board.c                   |  7 ++--
+ arch/arm/mach-snapdragon/board.c              |  7 ++--
+ arch/arm/mach-stm32mp/boot_params.c           | 19 ++++++-----
+ arch/sandbox/cpu/cpu.c                        | 34 ++++++++-----------
+ board/Marvell/octeontx/board-fdt.c            | 12 +++----
+ board/Marvell/octeontx2/board-fdt.c           | 12 +++----
+ board/Marvell/octeontx2/board.c               |  2 +-
+ board/andestech/ae350/ae350.c                 | 23 +++++++------
+ board/armltd/vexpress64/vexpress64.c          | 31 ++++++++---------
+ board/broadcom/bcmstb/bcmstb.c                |  7 ++--
+ board/emulation/qemu-arm/qemu-arm.c           |  7 ++--
+ board/emulation/qemu-ppce500/qemu-ppce500.c   | 12 +++----
+ board/emulation/qemu-riscv/qemu-riscv.c       |  7 ++--
+ board/highbank/highbank.c                     |  7 ++--
+ board/raspberrypi/rpi/rpi.c                   | 13 ++++---
+ board/sifive/unleashed/unleashed.c            |  9 ++---
+ board/sifive/unmatched/unmatched.c            |  9 ++---
+ .../visionfive2/starfive_visionfive2.c        |  9 ++---
+ board/xen/xenguest_arm64/xenguest_arm64.c     | 14 ++++----
+ board/xilinx/common/board.c                   | 26 ++++++++------
+ include/fdtdec.h                              |  8 +++--
+ lib/fdtdec.c                                  | 13 ++++---
+ 22 files changed, 146 insertions(+), 142 deletions(-)
 
-Simon Glass (25):
-  eb_cpu5282: Drop status-LED code and enable LED
-  vining_fpga: Drop status-LED code
-  mx23_olinuxino: Drop status-LED code
-  mx23_olinuxino: pinephone: Enable LED
-  socfpga_vining_fpga: Enable LED
-  led: Drop LED_STATUS_BOARD_SPECIFIC
-  arm: Drop old LED support
-  common: doc: Drop old LED support
-  st: stm32f429: Drop old LED code
-  led: Make the LED config common
-  led: Drop LED_STATUS from Kconfig
-  led: Drop the legacy LED command
-  misc: Drop gpio_led driver
-  pca9551_led: Delete driver
-  misc: status_led: Delete driver
-  m68k: Drop unused status_led.h header file
-  powerpc: Drop status-LED code
-  igep00x0: Drop unused status_led.h header file
-  sunxi: Drop status-LED code
-  common: Drop status-LED code in board_r
-  image: Drop unused status_led.h header file
-  ide: Drop unused status_led.h header file
-  mpc83xx: Drop status-LED code
-  net: Drop status-LED code
-  led: Drop status_led header file
-
- arch/arm/lib/crt0.S                          |   4 -
- arch/m68k/lib/bootm.c                        |   3 -
- arch/powerpc/lib/interrupts.c                |   6 -
- board/BuS/eb_cpu5282/eb_cpu5282.c            |  20 --
- board/isee/igep00x0/igep00x0.c               |   1 -
- board/olimex/mx23_olinuxino/mx23_olinuxino.c |   7 -
- board/softing/vining_fpga/socfpga.c          |   4 -
- board/st/stm32f429-discovery/Makefile        |   1 -
- board/st/stm32f429-discovery/led.c           |  39 ---
- board/sunxi/board.c                          |   6 -
- boot/image.c                                 |   4 -
- cmd/Makefile                                 |   1 -
- cmd/ide.c                                    |   4 -
- cmd/legacy_led.c                             | 185 ----------
- common/board_f.c                             |  22 --
- common/board_r.c                             |  27 --
- configs/eb_cpu5282_defconfig                 |   8 +-
- configs/eb_cpu5282_internal_defconfig        |   8 +-
- configs/mx23_olinuxino_defconfig             |  10 +-
- configs/pinephone_defconfig                  |   7 +-
- configs/socfpga_vining_fpga_defconfig        |  13 +-
- doc/README.LED                               |  77 -----
- drivers/led/Kconfig                          | 342 +------------------
- drivers/misc/Kconfig                         |  13 -
- drivers/misc/Makefile                        |   3 -
- drivers/misc/gpio_led.c                      | 106 ------
- drivers/misc/pca9551_led.c                   | 170 ---------
- drivers/misc/status_led.c                    | 124 -------
- drivers/timer/mpc83xx_timer.c                |   5 -
- include/configs/eb_cpu5282.h                 |   6 -
- include/status_led.h                         | 115 -------
- net/bootp.c                                  |   7 -
- net/net.c                                    |  33 --
- 33 files changed, 21 insertions(+), 1360 deletions(-)
- delete mode 100644 board/st/stm32f429-discovery/led.c
- delete mode 100644 cmd/legacy_led.c
- delete mode 100644 doc/README.LED
- delete mode 100644 drivers/misc/gpio_led.c
- delete mode 100644 drivers/misc/pca9551_led.c
- delete mode 100644 drivers/misc/status_led.c
- delete mode 100644 include/status_led.h
-
+diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+index 0b6d290b8ac..2644a04a622 100644
+--- a/arch/arm/mach-apple/board.c
++++ b/arch/arm/mach-apple/board.c
+@@ -691,11 +691,12 @@ int dram_init_banksize(void)
+ 
+ extern long fw_dtb_pointer;
+ 
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+ 	/* Return DTB pointer passed by m1n1 */
+-	*err = 0;
+-	return (void *)fw_dtb_pointer;
++	*fdtp = (void *)fw_dtb_pointer;
++
++	return 0;
+ }
+ 
+ void build_mem_map(void)
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index 2ab2ceb5138..7a7a36831c3 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -147,12 +147,11 @@ static void show_psci_version(void)
+  * or for supporting quirky devices where it's easier to leave the downstream DT in place
+  * to improve ABL compatibility. Otherwise, we use the DT provided by ABL.
+  */
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+ 	struct fdt_header *fdt;
+ 	bool internal_valid, external_valid;
+ 
+-	*err = 0;
+ 	fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
+ 	external_valid = fdt && !fdt_check_header(fdt);
+ 	internal_valid = !fdt_check_header(gd->fdt_blob);
+@@ -170,7 +169,7 @@ void *board_fdt_blob_setup(int *err)
+ 	} else {
+ 		debug("Using external FDT\n");
+ 		/* So we can use it before returning */
+-		gd->fdt_blob = fdt;
++		*fdtp = fdt;
+ 	}
+ 
+ 	/*
+@@ -179,7 +178,7 @@ void *board_fdt_blob_setup(int *err)
+ 	 */
+ 	qcom_parse_memory();
+ 
+-	return (void *)gd->fdt_blob;
++	return 0;
+ }
+ 
+ void reset_cpu(void)
+diff --git a/arch/arm/mach-stm32mp/boot_params.c b/arch/arm/mach-stm32mp/boot_params.c
+index ebddf6a7dbc..2d058edc419 100644
+--- a/arch/arm/mach-stm32mp/boot_params.c
++++ b/arch/arm/mach-stm32mp/boot_params.c
+@@ -6,6 +6,7 @@
+ #define LOG_CATEGORY LOGC_ARCH
+ 
+ #include <config.h>
++#include <errno.h>
+ #include <log.h>
+ #include <linux/libfdt.h>
+ #include <asm/arch/sys_proto.h>
+@@ -16,20 +17,22 @@
+  * Use the saved FDT address provided by TF-A at boot time (NT_FW_CONFIG =
+  * Non Trusted Firmware configuration file) when the pointer is valid
+  */
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+ 	unsigned long nt_fw_dtb = get_stm32mp_bl2_dtb();
+ 
+ 	log_debug("%s: nt_fw_dtb=%lx\n", __func__, nt_fw_dtb);
+ 
+-	*err = 0;
+ 	/* use external device tree only if address is valid */
+-	if (nt_fw_dtb >= STM32_DDR_BASE) {
+-		if (fdt_magic(nt_fw_dtb) == FDT_MAGIC)
+-			return (void *)nt_fw_dtb;
+-		log_debug("%s: DTB not found.\n", __func__);
++	if (nt_fw_dtb < STM32_DDR_BASE ||
++	    fdt_magic(nt_fw_dtb) != FDT_MAGIC) {
++		log_debug("DTB not found.\n");
++		log_debug("fall back to builtin DTB, %p\n", _end);
++
++		return -EEXIST;
+ 	}
+-	log_debug("%s: fall back to builtin DTB, %p\n", __func__, _end);
+ 
+-	return (void *)_end;
++	*fdtp = (void *)nt_fw_dtb;
++
++	return 0;
+ }
+diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
+index 06f8c13fab9..55a430e4c90 100644
+--- a/arch/sandbox/cpu/cpu.c
++++ b/arch/sandbox/cpu/cpu.c
+@@ -355,7 +355,7 @@ static int setup_auto_tree(void *blob)
+ 	return 0;
+ }
+ 
+-void *board_fdt_blob_setup(int *ret)
++int board_fdt_blob_setup(void **fdtp)
+ {
+ 	struct sandbox_state *state = state_get_current();
+ 	const char *fname = state->fdt_fname;
+@@ -364,44 +364,40 @@ void *board_fdt_blob_setup(int *ret)
+ 	int err;
+ 	int fd;
+ 
+-	if (gd->fdt_blob)
+-		return (void *)gd->fdt_blob;
+ 	blob = map_sysmem(CONFIG_SYS_FDT_LOAD_ADDR, 0);
+-	*ret = 0;
+ 	if (!state->fdt_fname) {
+ 		err = setup_auto_tree(blob);
+-		if (!err)
+-			goto done;
+-		os_printf("Unable to create empty FDT: %s\n", fdt_strerror(err));
+-		*ret = -EINVAL;
+-		goto fail;
++		if (err) {
++			os_printf("Unable to create empty FDT: %s\n",
++				  fdt_strerror(err));
++			return -EINVAL;
++		}
++		*fdtp = blob;
++
++		return 0;
+ 	}
+ 
+ 	err = os_get_filesize(fname, &size);
+ 	if (err < 0) {
+ 		os_printf("Failed to find FDT file '%s'\n", fname);
+-		*ret = err;
+-		goto fail;
++		return err;
+ 	}
+ 	fd = os_open(fname, OS_O_RDONLY);
+ 	if (fd < 0) {
+ 		os_printf("Failed to open FDT file '%s'\n", fname);
+-		*ret = -EACCES;
+-		goto fail;
++		return -EACCES;
+ 	}
+ 
+ 	if (os_read(fd, blob, size) != size) {
+ 		os_close(fd);
+ 		os_printf("Failed to read FDT file '%s'\n", fname);
+-		*ret =  -EIO;
+-		goto fail;
++		return -EIO;
+ 	}
+ 	os_close(fd);
+ 
+-done:
+-	return blob;
+-fail:
+-	return NULL;
++	*fdtp = blob;
++
++	return 0;
+ }
+ 
+ ulong timer_get_boot_us(void)
+diff --git a/board/Marvell/octeontx/board-fdt.c b/board/Marvell/octeontx/board-fdt.c
+index 6642b167e19..9d913b959e0 100644
+--- a/board/Marvell/octeontx/board-fdt.c
++++ b/board/Marvell/octeontx/board-fdt.c
+@@ -296,13 +296,9 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 	return 0;
+ }
+ 
+-/**
+- * Return the FDT base address that was passed by ATF
+- *
+- * Return:	FDT base address received from ATF in x1 register
+- */
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+-	return (void *)fdt_base_addr;
++	*fdtp = (void *)fdt_base_addr;
++
++	return 0;
+ }
+diff --git a/board/Marvell/octeontx2/board-fdt.c b/board/Marvell/octeontx2/board-fdt.c
+index 04be9fb0a9a..e5a4db00bb7 100644
+--- a/board/Marvell/octeontx2/board-fdt.c
++++ b/board/Marvell/octeontx2/board-fdt.c
+@@ -210,13 +210,9 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 	return 0;
+ }
+ 
+-/**
+- * Return the FDT base address that was passed by ATF
+- *
+- * Return:	FDT base address received from ATF in x1 register
+- */
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+-	return (void *)fdt_base_addr;
++	*fdtp = (void *)fdt_base_addr;
++
++	return 0;
+ }
+diff --git a/board/Marvell/octeontx2/board.c b/board/Marvell/octeontx2/board.c
+index 974e9eb8200..170b4a89946 100644
+--- a/board/Marvell/octeontx2/board.c
++++ b/board/Marvell/octeontx2/board.c
+@@ -234,7 +234,7 @@ static int do_go_uboot(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		return CMD_RET_USAGE;
+ 
+ 	addr = hextoul(argv[1], NULL);
+-	fdt = board_fdt_blob_setup(&err);
++	err = board_fdt_blob_setup(&fdt);
+ 	entry = (uboot_entry_t)addr;
+ 	flush_cache((ulong)addr, 1 << 20);	/* 1MiB should be enough */
+ 	dcache_disable();
+diff --git a/board/andestech/ae350/ae350.c b/board/andestech/ae350/ae350.c
+index 5ae5baed6ba..1d9d4a929c2 100644
+--- a/board/andestech/ae350/ae350.c
++++ b/board/andestech/ae350/ae350.c
+@@ -79,21 +79,24 @@ ulong board_flash_get_legacy(ulong base, int banknum, flash_info_t *info)
+ }
+ 
+ #define ANDES_HW_DTB_ADDRESS	0xF2000000
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+-
+ 	if (IS_ENABLED(CONFIG_OF_SEPARATE) || IS_ENABLED(CONFIG_OF_BOARD)) {
+-		if (fdt_magic((uintptr_t)gd->arch.firmware_fdt_addr) == FDT_MAGIC)
+-			return (void *)(ulong)gd->arch.firmware_fdt_addr;
++		if (fdt_magic((uintptr_t)gd->arch.firmware_fdt_addr) ==
++			FDT_MAGIC) {
++			*fdtp = (void *)(ulong)gd->arch.firmware_fdt_addr;
++
++			return 0;
++		}
+ 	}
+ 
+-	if (fdt_magic(CONFIG_SYS_FDT_BASE) == FDT_MAGIC)
+-		return (void *)CONFIG_SYS_FDT_BASE;
+-	return (void *)ANDES_HW_DTB_ADDRESS;
++	if (fdt_magic(CONFIG_SYS_FDT_BASE) == FDT_MAGIC) {
++		*fdtp = (void *)CONFIG_SYS_FDT_BASE;
++
++		return 0;
++	}
+ 
+-	*err = -EINVAL;
+-	return NULL;
++	return -EINVAL;
+ }
+ 
+ #ifdef CONFIG_SPL_BOARD_INIT
+diff --git a/board/armltd/vexpress64/vexpress64.c b/board/armltd/vexpress64/vexpress64.c
+index 0119f54f0df..14f9d98d879 100644
+--- a/board/armltd/vexpress64/vexpress64.c
++++ b/board/armltd/vexpress64/vexpress64.c
+@@ -168,42 +168,39 @@ static bool is_valid_dtb(uintptr_t dtb_ptr)
+ 	return fdt_subnode_offset((void *)dtb_ptr, 0, "memory") >= 0;
+ }
+ 
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+ #ifdef CONFIG_TARGET_VEXPRESS64_JUNO
+ 	phys_addr_t fdt_rom_addr = find_dtb_in_nor_flash(CONFIG_JUNO_DTB_PART);
+ 
+-	*err = 0;
+-	if (fdt_rom_addr == ~0UL) {
+-		*err = -ENXIO;
+-		return NULL;
+-	}
++	if (fdt_rom_addr == ~0UL)
++		return -ENXIO;
+ 
+-	return (void *)fdt_rom_addr;
++	*fdtp = (void *)fdt_rom_addr;
++	return 0;
+ #endif
+ 
+ #ifdef VEXPRESS_FDT_ADDR
+ 	if (fdt_magic(VEXPRESS_FDT_ADDR) == FDT_MAGIC) {
+-		*err = 0;
+-		return (void *)VEXPRESS_FDT_ADDR;
++		*fdtp = (void *)VEXPRESS_FDT_ADDR;
++		return 0;
+ 	}
+ #endif
+ 
+ 	if (is_valid_dtb(prior_stage_fdt_address[1])) {
+-		*err = 0;
+-		return (void *)prior_stage_fdt_address[1];
++		*fdtp = (void *)prior_stage_fdt_address[1];
++		return 0;
+ 	} else if (is_valid_dtb(prior_stage_fdt_address[0])) {
+-		*err = 0;
+-		return (void *)prior_stage_fdt_address[0];
++		*fdtp = (void *)prior_stage_fdt_address[0];
++		return 0;
+ 	}
+ 
+ 	if (fdt_magic(gd->fdt_blob) == FDT_MAGIC) {
+-		*err = 0;
+-		return (void *)gd->fdt_blob;
++		*fdtp = (void *)gd->fdt_blob;
++		return 0;
+ 	}
+ 
+-	*err = -ENXIO;
+-	return NULL;
++	return -ENXIO;
+ }
+ #endif
+ 
+diff --git a/board/broadcom/bcmstb/bcmstb.c b/board/broadcom/bcmstb/bcmstb.c
+index bc05aecc446..e655f610c84 100644
+--- a/board/broadcom/bcmstb/bcmstb.c
++++ b/board/broadcom/bcmstb/bcmstb.c
+@@ -130,9 +130,10 @@ int board_late_init(void)
+ 	return 0;
+ }
+ 
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+ 	/* Stored the DTB address there during our init */
+-	return (void *)prior_stage_fdt_address;
++	*fdtp = (void *)prior_stage_fdt_address;
++
++	return 0;
+ }
+diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+index 6095cb02b23..8476796f1c3 100644
+--- a/board/emulation/qemu-arm/qemu-arm.c
++++ b/board/emulation/qemu-arm/qemu-arm.c
+@@ -149,11 +149,12 @@ int dram_init_banksize(void)
+ 	return 0;
+ }
+ 
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+ 	/* QEMU loads a generated DTB for us at the start of RAM. */
+-	return (void *)CFG_SYS_SDRAM_BASE;
++	*fdtp = (void *)CFG_SYS_SDRAM_BASE;
++
++	return 0;
+ }
+ 
+ void enable_caches(void)
+diff --git a/board/emulation/qemu-ppce500/qemu-ppce500.c b/board/emulation/qemu-ppce500/qemu-ppce500.c
+index 58e5d5eb942..40d295dbf06 100644
+--- a/board/emulation/qemu-ppce500/qemu-ppce500.c
++++ b/board/emulation/qemu-ppce500/qemu-ppce500.c
+@@ -334,15 +334,11 @@ u32 cpu_mask(void)
+ 	return (1 << cpu_numcores()) - 1;
+ }
+ 
+-/**
+- * Return the virtual address of FDT that was passed by QEMU
+- *
+- * Return: virtual address of FDT received from QEMU in r3 register
+- */
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+-	return get_fdt_virt();
++	*fdtp = get_fdt_virt();
++
++	return 0;
+ }
+ 
+ /* See CFG_SYS_NS16550_CLK in arch/powerpc/include/asm/config.h */
+diff --git a/board/emulation/qemu-riscv/qemu-riscv.c b/board/emulation/qemu-riscv/qemu-riscv.c
+index e5193e31e37..a90222ea6a4 100644
+--- a/board/emulation/qemu-riscv/qemu-riscv.c
++++ b/board/emulation/qemu-riscv/qemu-riscv.c
+@@ -64,9 +64,10 @@ int board_fit_config_name_match(const char *name)
+ }
+ #endif
+ 
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+ 	/* Stored the DTB address there during our init */
+-	return (void *)(ulong)gd->arch.firmware_fdt_addr;
++	*fdtp = (void *)(ulong)gd->arch.firmware_fdt_addr;
++
++	return 0;
+ }
+diff --git a/board/highbank/highbank.c b/board/highbank/highbank.c
+index f3df83ed6c9..0ec88447384 100644
+--- a/board/highbank/highbank.c
++++ b/board/highbank/highbank.c
+@@ -97,15 +97,16 @@ int ft_board_setup(void *fdt, struct bd_info *bd)
+ }
+ #endif
+ 
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+ 	/*
+ 	 * The ECME management processor loads the DTB from NOR flash
+ 	 * into DRAM (at 4KB), where it gets patched to contain the
+ 	 * detected memory size.
+ 	 */
+-	return (void *)0x1000;
++	*fdtp = (void *)0x1000;
++
++	return 0;
+ }
+ 
+ static int is_highbank(void)
+diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+index ab5ea85cf9f..5ce6bee7316 100644
+--- a/board/raspberrypi/rpi/rpi.c
++++ b/board/raspberrypi/rpi/rpi.c
+@@ -503,15 +503,14 @@ int board_init(void)
+ /*
+  * If the firmware passed a device tree use it for U-Boot.
+  */
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+-	if (fdt_magic(fw_dtb_pointer) != FDT_MAGIC) {
+-		*err = -ENXIO;
+-		return NULL;
+-	}
++	if (fdt_magic(fw_dtb_pointer) != FDT_MAGIC)
++		return -ENXIO;
+ 
+-	return (void *)fw_dtb_pointer;
++	*fdtp = (void *)fw_dtb_pointer;
++
++	return 0;
+ }
+ 
+ int copy_property(void *dst, void *src, char *path, char *property)
+diff --git a/board/sifive/unleashed/unleashed.c b/board/sifive/unleashed/unleashed.c
+index 3c5dd50c369..5c0ac6a0ae2 100644
+--- a/board/sifive/unleashed/unleashed.c
++++ b/board/sifive/unleashed/unleashed.c
+@@ -114,15 +114,16 @@ int misc_init_r(void)
+ 
+ #endif
+ 
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+ 	if (IS_ENABLED(CONFIG_OF_SEPARATE) || IS_ENABLED(CONFIG_OF_BOARD)) {
+ 		if (gd->arch.firmware_fdt_addr)
+-			return (ulong *)(uintptr_t)gd->arch.firmware_fdt_addr;
++			*fdtp = (ulong *)(uintptr_t)gd->arch.firmware_fdt_addr;
+ 	}
+ 
+-	return (ulong *)_end;
++	*fdtp = (ulong *)_end;
++
++	return 0;
+ }
+ 
+ int board_init(void)
+diff --git a/board/sifive/unmatched/unmatched.c b/board/sifive/unmatched/unmatched.c
+index c8696270ba2..2b4a74a10a7 100644
+--- a/board/sifive/unmatched/unmatched.c
++++ b/board/sifive/unmatched/unmatched.c
+@@ -10,15 +10,16 @@
+ #include <dm.h>
+ #include <asm/sections.h>
+ 
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+ 	if (IS_ENABLED(CONFIG_OF_SEPARATE) || IS_ENABLED(CONFIG_OF_BOARD)) {
+ 		if (gd->arch.firmware_fdt_addr)
+-			return (ulong *)(uintptr_t)gd->arch.firmware_fdt_addr;
++			*fdtp = (ulong *)(uintptr_t)gd->arch.firmware_fdt_addr;
+ 	}
+ 
+-	return (ulong *)_end;
++	*fdtp = (ulong *)_end;
++
++	return 0;
+ }
+ 
+ int board_init(void)
+diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
+index f6114602f88..c88bd8192ae 100644
+--- a/board/starfive/visionfive2/starfive_visionfive2.c
++++ b/board/starfive/visionfive2/starfive_visionfive2.c
+@@ -115,15 +115,16 @@ int board_late_init(void)
+ 	return 0;
+ }
+ 
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+ 	if (IS_ENABLED(CONFIG_OF_SEPARATE) || IS_ENABLED(CONFIG_OF_BOARD)) {
+ 		if (gd->arch.firmware_fdt_addr)
+-			return (ulong *)(uintptr_t)gd->arch.firmware_fdt_addr;
++			*fdtp = (ulong *)(uintptr_t)gd->arch.firmware_fdt_addr;
+ 	}
+ 
+-	return (ulong *)_end;
++	*fdtp = (ulong *)_end;
++
++	return 0;
+ }
+ 
+ int ft_board_setup(void *blob, struct bd_info *bd)
+diff --git a/board/xen/xenguest_arm64/xenguest_arm64.c b/board/xen/xenguest_arm64/xenguest_arm64.c
+index 4c3b9c9e278..216a022aa15 100644
+--- a/board/xen/xenguest_arm64/xenguest_arm64.c
++++ b/board/xen/xenguest_arm64/xenguest_arm64.c
+@@ -44,14 +44,14 @@ int board_init(void)
+  * x0 is the physical address of the device tree blob (dtb) in system RAM.
+  * This is stored in rom_pointer during low level init.
+  */
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+-	*err = 0;
+-	if (fdt_magic(rom_pointer[0]) != FDT_MAGIC) {
+-		*err = -ENXIO;
+-		return NULL;
+-	}
+-	return (void *)rom_pointer[0];
++	if (fdt_magic(rom_pointer[0]) != FDT_MAGIC)
++		return -ENXIO;
++
++	*fdtp = (void *)rom_pointer[0];
++
++	return 0;
+ }
+ 
+ /*
+diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+index 38dd80533fa..f9421b9a988 100644
+--- a/board/xilinx/common/board.c
++++ b/board/xilinx/common/board.c
+@@ -357,17 +357,17 @@ __maybe_unused int xilinx_read_eeprom(void)
+ }
+ 
+ #if defined(CONFIG_OF_BOARD)
+-void *board_fdt_blob_setup(int *err)
++int board_fdt_blob_setup(void **fdtp)
+ {
+ 	void *fdt_blob;
+ 
+-	*err = 0;
+-
+ 	if (IS_ENABLED(CONFIG_TARGET_XILINX_MBV)) {
+ 		fdt_blob = (void *)CONFIG_XILINX_OF_BOARD_DTB_ADDR;
+ 
+-		if (fdt_magic(fdt_blob) == FDT_MAGIC)
+-			return fdt_blob;
++		if (fdt_magic(fdt_blob) == FDT_MAGIC) {
++			*fdtp = fdt_blob;
++			return 0;
++		}
+ 	}
+ 
+ 	if (!IS_ENABLED(CONFIG_XPL_BUILD) &&
+@@ -375,8 +375,10 @@ void *board_fdt_blob_setup(int *err)
+ 	    !IS_ENABLED(CONFIG_ZYNQMP_NO_DDR)) {
+ 		fdt_blob = (void *)CONFIG_XILINX_OF_BOARD_DTB_ADDR;
+ 
+-		if (fdt_magic(fdt_blob) == FDT_MAGIC)
+-			return fdt_blob;
++		if (fdt_magic(fdt_blob) == FDT_MAGIC) {
++			*fdtp = fdt_blob;
++			return 0;
++		}
+ 
+ 		debug("DTB is not passed via %p\n", fdt_blob);
+ 	}
+@@ -395,13 +397,15 @@ void *board_fdt_blob_setup(int *err)
+ 		fdt_blob = (ulong *)_end;
+ 	}
+ 
+-	if (fdt_magic(fdt_blob) == FDT_MAGIC)
+-		return fdt_blob;
++	if (fdt_magic(fdt_blob) == FDT_MAGIC) {
++		*fdtp = fdt_blob;
++
++		return 0;
++	}
+ 
+ 	debug("DTB is also not passed via %p\n", fdt_blob);
+ 
+-	*err = -EINVAL;
+-	return NULL;
++	return -EINVAL;
+ }
+ #endif
+ 
+diff --git a/include/fdtdec.h b/include/fdtdec.h
+index 555c9520379..9e36acc7e9b 100644
+--- a/include/fdtdec.h
++++ b/include/fdtdec.h
+@@ -1191,11 +1191,13 @@ int fdtdec_resetup(int *rescan);
+  *
+  * The existing devicetree is available at gd->fdt_blob
+  *
+- * @err: 0 on success, -EEXIST if the devicetree is already correct, or other
++ * @fdtp: Existing devicetree blob pointer; update this and return 0 if a
++ * different devicetree should be used
++ * Return: 0 on success, -EEXIST if the devicetree is already correct, 0 to use
++ * *@fdtp as the new devicetree, or other
+  * internal error code if we fail to setup a DTB
+- * @returns new devicetree blob pointer
+  */
+-void *board_fdt_blob_setup(int *err);
++int board_fdt_blob_setup(void **fdtp);
+ 
+ /*
+  * Decode the size of memory
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index 60e28173c03..e876b17f9ad 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1706,11 +1706,16 @@ int fdtdec_setup(void)
+ 
+ 	/* Allow the board to override the fdt address. */
+ 	if (IS_ENABLED(CONFIG_OF_BOARD)) {
+-		gd->fdt_blob = board_fdt_blob_setup(&ret);
+-		if (!ret)
++		void *blob;
++
++		ret = board_fdt_blob_setup(&blob);
++		if (ret) {
++			if (ret != -EEXIST)
++				return ret;
++		} else {
+ 			gd->fdt_src = FDTSRC_BOARD;
+-		else if (ret != -EEXIST)
+-			return ret;
++			gd->fdt_blob = blob;
++		}
+ 	}
+ 
+ 	/* Allow the early environment to override the fdt address */
 -- 
 2.43.0
 
