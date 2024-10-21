@@ -4,65 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D14EBD3C92A
-	for <u-boot@archiver.kernel.org>; Sun, 20 Oct 2024 21:01:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 222EDD3C935
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 00:57:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34C1F88EAE;
-	Sun, 20 Oct 2024 23:01:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 57BE388E02;
+	Mon, 21 Oct 2024 02:56:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729458092;
-	bh=eSzUDOAICrQPtXgR7fHD9c6AmGx+Uu+asyraLv2f/gc=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ZeVMuzps8WDPjHe1pOGUIkxlo23Nd+fXc+eyKWNztL3eeyppkIoCwb3obER1B75CP
-	 3apkUv/cKGT0fkwjN0q54n4LKyaMBUqif/U88PvG9Hz5LvumHBWsz1g/l6fN7Qq7c7
-	 kmC+5QSDWi8tIOGNU7M/0z/YrOw/Xzn5tUwyXXVtXYSQkMKSRD5H9/PIJja+u4NzZ+
-	 20Mj+8BDuxck+xH3WeOZ/ZpmU5k7W2ZIKmAw+XliwYjg62B8QAtf2S1YllqlVv2JvR
-	 NMJ50bvAlsWp2tePpxTFFKsVfqnuWAdHScSGCLWn9h/G88P5JDT4DG5SGpv+cMsnNs
-	 Nfk/87h70bQYg==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="TgLxTuuS";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7705F88EC0; Mon, 21 Oct 2024 02:56:58 +0200 (CEST)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4612E88D4F;
- Sun, 20 Oct 2024 23:01:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729458088;
- bh=eSzUDOAICrQPtXgR7fHD9c6AmGx+Uu+asyraLv2f/gc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=X8QlZieOJsiCbAKIviUSIdAJUsqDRVNK2JlwOf/L6DF3EDBVO/q8uK7zccPGROYoM
- jBoiaVsw1Q+MlsTOGE0ssIffne0VSA9N8Pg1yVs+K9X8BaxLnH047BIxtA6oBji8Cj
- Lwpsiv66rA19YLpdqgfLK7y3dhlRju+28ukRiUB+oS2auBMPWbh2SlGcZUQrdT+z6w
- BqCOumfB0/AV8CIZUN23dkyJUR2gpfNQAykfK6GwirrSB5jjWKi2cBLv0e1qQ6yvFp
- hXdHNJ1Rh8hC5vAnjgbTOHk1f/lGDiB27ESDQyQKcSEIhmG4Culbtu3tUcQD0ahQf/
- WOy6oeWPfvxzA==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Adam Ford <aford173@gmail.com>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Fabio Estevam <festevam@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@foundries.io>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com
-Subject: [PATCH v2 2/2] ARM: imx: soc: Move default TEXT_BASE for i.MX7
-Date: Sun, 20 Oct 2024 23:00:39 +0200
-Message-ID: <20241020210113.1248062-2-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241020210113.1248062-1-marex@denx.de>
-References: <20241020210113.1248062-1-marex@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id F0FDD88606
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 02:56:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 5919a6e28f4711efb88477ffae1fc7a5-20241021
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=wOIZPHFyTrnvmqsc+7FNqx4PbfdlpHkua07oQU1FAgo=; 
+ b=TgLxTuuSYfMaxPG6Toyd9d8axBdbNFnxmUp/i8vEjjidiPosIMgpONhJzAwIWCzXiV5DYYR/dZsgkKMzpYSXsGqqcf9xtyvRfvFDB8wc510PIA9dTy7S0gpWUpmzHEA7kUY5Q8KbbnWTPtePzajtAWCIKzhzRVJyKhpfmSRVPpY=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.42, REQID:b6ae751f-cf78-4248-8546-3e30afa5b0df, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:b0fcdc3, CLOUDID:c1295d25-9cd9-4037-af6e-f4241b90f84d,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|-5,EDM:-3,IP:ni
+ l,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES
+ :1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: 5919a6e28f4711efb88477ffae1fc7a5-20241021
+Received: from mtkmbs14n2.mediatek.inc [(172.21.101.76)] by
+ mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1072194399; Mon, 21 Oct 2024 08:56:47 +0800
+Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
+ mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Mon, 21 Oct 2024 08:56:45 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Mon, 21 Oct 2024 08:56:45 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, Daniel
+ Golle <daniel@makrotopia.org>, John Crispin <john@phrozen.org>, Weijie Gao
+ <weijie.gao@mediatek.com>
+Subject: [PATCH] menu: fix the logic checking whether ESC key is pressed
+Date: Mon, 21 Oct 2024 08:56:42 +0800
+Message-ID: <20241021005642.153511-1-weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,80 +85,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move i.MX7 TEXT_BASE/SPL_TEXT_BASE to Kconfig and common/spl/Kconfig
-which is the best practice.
+It's observed that the bootmenu on a serial console sometimes
+incorrectly quitted with superfluous characters filled to command
+line input:
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Adam Ford <aford173@gmail.com>
-Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-Cc: Frieder Schrempf <frieder.schrempf@kontron.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tim Harvey <tharvey@gateworks.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
----
-V2: - New patch
+>  *** U-Boot Boot Menu ***
+>
+>      1. Startup system (Default)
+>      2. Upgrade firmware
+>      3. Upgrade ATF BL2
+>      4. Upgrade ATF FIP
+>      5. Load image
+>      0. U-Boot console
+>
+>
+>  Press UP/DOWN to move, ENTER to select, ESC to quit
+>MT7988> [B
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
- Kconfig                       | 1 +
- arch/arm/mach-imx/mx7/Kconfig | 7 -------
- common/spl/Kconfig            | 1 +
- 3 files changed, 2 insertions(+), 7 deletions(-)
+Analysis shows it was caused by the wrong logic of bootmenu_loop:
 
-diff --git a/Kconfig b/Kconfig
-index b1dd4556a4e..a7b2b6db742 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -648,6 +648,7 @@ config TEXT_BASE
- 	depends on HAVE_TEXT_BASE
- 	default 0x0 if POSITION_INDEPENDENT
- 	default 0x17800000 if ARCH_MX6
-+	default 0x87800000 if ARCH_MX7
- 	default 0x80800000 if ARCH_OMAP2PLUS || ARCH_K3
- 	default 0x81700000 if MACH_SUNIV
- 	default 0x2a000000 if MACH_SUN9I
-diff --git a/arch/arm/mach-imx/mx7/Kconfig b/arch/arm/mach-imx/mx7/Kconfig
-index 2e68557d6a9..4e0e8ed0582 100644
---- a/arch/arm/mach-imx/mx7/Kconfig
-+++ b/arch/arm/mach-imx/mx7/Kconfig
-@@ -17,13 +17,6 @@ config MX7D
- 	select ROM_UNIFIED_SECTIONS
- 	imply CMD_FUSE
+At first the bootmenu_loop received the first ESC char correctly.
+
+However, during the second call to bootmenu_loop, there's no data
+in the UART Rx FIFO. Due to the low baudrate, the second char of
+the down array key sequence hasn't be fully received.
+
+But bootmenu_loop just did a mdelay(10), and then treated it as a
+single ESC key press event. It didn't even try tstc() again after
+the 10ms timeout.
+
+This patch fixes this issue by letting bootmenu_loop check tstc()
+twice.
+
+Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+---
+ common/menu.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/common/menu.c b/common/menu.c
+index 8cc9bf06d9c..48ab7f0f398 100644
+--- a/common/menu.c
++++ b/common/menu.c
+@@ -525,14 +525,15 @@ enum bootmenu_key bootmenu_loop(struct bootmenu_data *menu,
+ 				struct cli_ch_state *cch)
+ {
+ 	enum bootmenu_key key;
+-	int c;
++	int c, errchar = 0;
  
--config TEXT_BASE
--	default 0x87800000
--
--config SPL_TEXT_BASE
--	depends on SPL
--	default 0x00912000
--
- choice
- 	prompt "MX7 board select"
- 	optional
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index ed997d82cfc..045fcac10a5 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -272,6 +272,7 @@ config SPL_TEXT_BASE
- 	default 0x402F4000 if AM43XX
- 	default 0x402F0400 if AM33XX
- 	default 0x00908000 if ARCH_MX6
-+	default 0x00912000 if ARCH_MX7
- 	default 0x40301350 if OMAP54XX
- 	default 0x10060 if MACH_SUN50I || MACH_SUN50I_H5 || MACH_SUN9I
- 	default 0x20060 if SUN50I_GEN_H6 || SUNXI_GEN_NCAT2
+ 	c = cli_ch_process(cch, 0);
+ 	if (!c) {
+ 		while (!c && !tstc()) {
+ 			schedule();
+ 			mdelay(10);
+-			c = cli_ch_process(cch, -ETIMEDOUT);
++			c = cli_ch_process(cch, errchar);
++			errchar = -ETIMEDOUT;
+ 		}
+ 		if (!c) {
+ 			c = getchar();
 -- 
-2.45.2
+2.17.0
 
