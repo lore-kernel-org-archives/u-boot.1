@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC02FD0E6C8
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 08:22:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67987D0E6C9
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 08:22:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73D57892D9;
-	Mon, 21 Oct 2024 10:22:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E0557892D4;
+	Mon, 21 Oct 2024 10:22:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729498935;
-	bh=WFIOKmb5twmsecGvk2F3b/fgrb6VaaA0v/A++8zMkUs=;
+	s=phobos-20191101; t=1729498969;
+	bh=zW6L1ltp0TDM629jKJMI34m5u8DjhX6+JkuVYxwWkkg=;
 	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=xRBy3Cf2GK7gMcO9HIMWz96mZ050DxZW6iOKodX3umLbJB9ZtN31eOy+7xP2a8Nof
-	 rAzlG72xDisgjHZuEUkF9mZ/byVQEkugUViHFjAMToDNrMCWtWJ9CoYEA0g7XbiUlG
-	 gqb2sy/B1OPaWm15L7a2b/WJtAFNrpfnAzZOQNmMX2CGA1fl8suHIg/Y/3X/mTf0pW
-	 0FQrSJWnIz4rWvX8WQDhjR8njNmetLxvgZta7uJmYacLoYAIjwPVC7evM0AjdKOhhj
-	 1Qdr0r7YfBLKu6odGtKkXP94lCAGYxwfTI7ptsvJ49Xw5BrAhLlhQUgIIEeBqtg8KI
-	 1NO3f0F68nixw==
+	b=wOkmFf2zsUQ11DUsoYDaNtKYsjkMeFETt9uc230P64+unpPVoBj3WpARm8y+7ORr6
+	 +U7iotd6nq+imJjXRmSxPelhl9iRziWc3tgdM3qRunaBrPlcYy3rLUH0biSUuiqig1
+	 ZEsCsZryGUjXJiev70UU16sQ/eBnLu6IKR7kzVCgQOqvbdsIE2Mn37wXaN8G8DsqNO
+	 GsiaCBTAn3sN1DzvsimJhzsuJfBXVlg/NDZFyaqPeB2yw9/Ck/WpviGmGvacxRedTu
+	 KCdRrZGUwt5rXakUlb0Xy4l6cXzvaShsWhoGJwtU7ckZ9iy7zlNGzpxjuwcm1R+l8z
+	 D/GOL6UbDP1DQ==
 Received: from [192.168.1.107] (82-131-200-27.pool.digikabel.hu
  [82.131.200.27])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2B2CC88365;
- Mon, 21 Oct 2024 10:22:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id E5A4389313;
+ Mon, 21 Oct 2024 10:22:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729498934;
- bh=WFIOKmb5twmsecGvk2F3b/fgrb6VaaA0v/A++8zMkUs=;
+ s=phobos-20191101; t=1729498968;
+ bh=zW6L1ltp0TDM629jKJMI34m5u8DjhX6+JkuVYxwWkkg=;
  h=Date:Subject:From:To:Cc:Reply-To:References:In-Reply-To:From;
- b=sEMSLMal8/Z//NyuhAAbfUnEgki68UZikNZ3wkXt6/AhxZ0takH11fDMVBDoArMa2
- cm4iRxwc9A5dnUsFInRt2/n2CdGmOrJfAJj7J5Tw+8wwM/MLv+obKzCSSHrAbBQNIF
- QLsWh4ETe9bzuGED7pGABYw3jOpRi/oLZYZmQHb4SmI6oOSes2dv2rQKkqWP06GqnL
- CwNbCFlfjlM4/gcb7pvAFts0tnHwYD0qyMTVJBgpFvmJ9JK0i3ZxJuzxAEjcbfjTA7
- ovnhxVe1mjV9z6g14hA5m8uJKXEKQVnfJczREc11V8XqF9EZ12reO7HBvZtgXv8Aos
- HezXvuKcHunag==
-Message-ID: <31687fe9-d494-b8d3-7ccc-c06e79218e49@denx.de>
-Date: Mon, 21 Oct 2024 10:20:01 +0200
+ b=NozLP4b08DnaG8Lh5Q3gRI4EGm70Rwm8MnDXWZR3LcNc15TQ2AF//uQqeYKa6iTQ/
+ 6ACXCWz0uZPe/Hr47kgWojxFzoO9o8EbZTd1zK0OIGmO/8qj/qvyo0SI4DgmsiMg90
+ pQEtiZE0ruH9rTMAHll3fy/JrCZ5xuXHwC01z1lVoSUPLluKPWxga3N+ykp8b/mDo8
+ mbdoOVAs5nVOmbMvdseRWn6MSk9omiAfVTrVvPY6q3uv+hFqTfvUTx9ShuVz6e03So
+ nVnoRuzyPzyL2u2KW5yQEMHOuRtIpMav+c6Nk3zBxu0W5Hn7YG3NRix8CdBXm22DMq
+ K3kPT04gP39yg==
+Message-ID: <dea0b782-1268-32e3-c777-337e2826ec9c@denx.de>
+Date: Mon, 21 Oct 2024 10:20:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v1] i2c: muxes: pca954x: Add MAX735x/MAX736x support
+Subject: Re: [PATCH] i2c: i2c-gpio: add support for i2c-gpio,sda-output-only
 Content-Language: en-US
 From: Heiko Schocher <hs@denx.de>
-To: bigunclemax@gmail.com
-Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- u-boot@lists.denx.de
-References: <20240919160658.197534-1-bigunclemax@gmail.com>
- <e0dfb68b-a168-01ed-e2ae-24f1ffc98430@denx.de>
-In-Reply-To: <e0dfb68b-a168-01ed-e2ae-24f1ffc98430@denx.de>
+To: Alex Shumsky <alexthreed@gmail.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+References: <20241015202931.15270-1-alexthreed@gmail.com>
+ <476dd140-d157-5e22-3a70-d06c079e32c7@denx.de>
+In-Reply-To: <476dd140-d157-5e22-3a70-d06c079e32c7@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,45 +71,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Maksim,
+Hello Alex,
 
-On 21.10.24 06:11, Heiko Schocher wrote:
-> Hello Maksim,
+On 21.10.24 06:13, Heiko Schocher wrote:
+> Hello Alex,
 > 
-> On 19.09.24 18:06, bigunclemax@gmail.com wrote:
->> From: Maksim Kiselev <bigunclemax@gmail.com>
+> On 15.10.24 22:29, Alex Shumsky wrote:
+>> Some I2C slave devices are read-only and don't even answer with NACK.
+>> For example FD65x segment LED controllers.
+>> Make them usable with i2c-gpio,sda-output-only that are already supported
+>> by Linux 6.3+.
 >>
->> Add support for the following Maxim chips using the existing PCA954x
->> driver:
->> - MAX7356
->> - MAX7357
->> - MAX7358
->> - MAX7367
->> - MAX7368
->> - MAX7369
->>
->> All added Maxim chips behave like the PCA954x, where a single SMBUS byte
->> write selects up to 8 channels to be bridged to the primary bus.
->>
->> Tested using the MAX7358.
->>
->> Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+>> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
 >> ---
->> Hi, friends!
 >>
->> I have a custom board with MAX7358 GPIO expander.
->> This patch is the port of Linux commit:
->>   > 81694437b6eb i2c: muxes: pca954x: Add MAX735x/MAX736x support
->>
->> Best wishes, Maksim.
->>
->>   drivers/i2c/muxes/Kconfig   |  5 +++++
->>   drivers/i2c/muxes/pca954x.c | 37 +++++++++++++++++++++++++++++++++++++
->>   2 files changed, 42 insertions(+)
+>>   doc/device-tree-bindings/i2c/i2c-gpio.txt |  2 ++
+>>   drivers/i2c/i2c-gpio.c                    | 10 ++++++++--
+>>   2 files changed, 10 insertions(+), 2 deletions(-)
+> 
+> Thanks!
+> 
+> Reviewed-by: Heiko Schocher <hs@denx.de>
 
-Applied to u-boot-i2c.git
-
-Thanks
+Applied to u-boot-i2c, thanks!
 
 bye,
 Heiko
