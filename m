@@ -4,75 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD874D15D84
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 12:21:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABC9CD15D88
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 12:30:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E858D8852D;
-	Mon, 21 Oct 2024 14:21:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 155A088DC8;
+	Mon, 21 Oct 2024 14:30:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e1QcPftK";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="jXCGEdnN";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="9iM9hP9u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0B34883D4; Mon, 21 Oct 2024 14:21:43 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2D80688DE9; Mon, 21 Oct 2024 14:30:20 +0200 (CEST)
+Received: from galois.linutronix.de (Galois.linutronix.de
+ [IPv6:2a0a:51c0:0:12e:550::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61D9B88DB2
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 14:21:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4029188D70
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 14:30:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-539e59dadebso5575487e87.0
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 05:21:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729513301; x=1730118101; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JFe1jcBYsa89QIdEVr1AkTZk3nSl2CMnT9mfWRAP2tk=;
- b=e1QcPftKcgg7cMxPnSD2unIxtkiee/oWBtAm/u1h1uyfG1K8WKqi8Dx1KqJ7YMKz+m
- auB/fE8ZCz1dLHXOw0r40rfS6LF5ZDyOt8SZDQSJXgFuppYu9BpYQK6WEl3jbPfRHjTa
- YtgzKWYlMWxnRM797S+9qNTr4wnv77zZIPG7V5rmxVRlNXavlbI5P7eA3r/G+MWO1/LX
- xINn8LfCmodMSeN2SpLQHgvs2ee/uUTo3HL1exk4eEmpZbE9xngixs297HbKdZuhPqCK
- bJZi703+y78jJW7GyHne6d4jDZ6Ww3py3ecxEqwiJIiw6fE8JwZrwxpTrvgLfel5VxYV
- 37WA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729513301; x=1730118101;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JFe1jcBYsa89QIdEVr1AkTZk3nSl2CMnT9mfWRAP2tk=;
- b=ZA4UHaWjx3ZNu+ehUFqxx/IWz9kEWbCJKARHnppcr6r/+jdTlTbeqAc7SfseN51zbk
- XD8BPJkeqwQExaYXyJfFxSMP+7mU39UAk5LtbRaxwn0x2C15oyDtUlKGfW1Gu6eNYiYO
- aVv8zrWYP8EYefoVk8cHyddm2/W9GVjkW+Is3qI3PIKmYebESzAlu599/M8zqm5LbsVT
- jl+45ooFT/kZgY3ebuTOxmz22GD8wsAzmhQg3tcvkWNRQ0Z8XOhs8plOYLcZiT7ZQwpJ
- ASZ2qCzwRDHNM1Mt5UcnF3Skhxt5dWvw1Jp2aexWUjmOWCmevnhOWd5knoyJycGUrzcH
- mhew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW2OuAdKn0Osax7NoLbQzvLotDiCBOlC5VWUmKJU2OfygsMWDjTxpFVkZ4NAjC7bxmgx46vjJg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxdc0FjBhbbQZWK7gVIj6A7jaTJqGW0Be3T+MhL9OGBoHFRbav9
- MCQZ+PWCscK5vFf57HVNvhCTivVvzBECJgK42jU4cdwU/D8yyyPPipfemcR0WB5DpGXE0sE8O7X
- 3C3a7dvcngff8OJwW4OXPIwvb5Hs=
-X-Google-Smtp-Source: AGHT+IFC6VkB3LEfGQZtGSD+kqGkOsUUN5WWJEpRFbwdNBujW2xF35qL6oGVIl3jTUek5yeVP0hgAP3kI70x7b8RDHs=
-X-Received: by 2002:a05:6512:31d3:b0:533:46cc:a71e with SMTP id
- 2adb3069b0e04-53a15475391mr4666170e87.54.1729513300306; Mon, 21 Oct 2024
- 05:21:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=b.spranger@linutronix.de
+Date: Mon, 21 Oct 2024 14:30:16 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1729513817;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uqvWUCdA842P56kowiGwK41lzuCYxVMwrvIjku19lyY=;
+ b=jXCGEdnN6EfoWXaHN7OyKpH6tTJ48vFAMKcY0tE1N9fZUVGCWUqKMy0T+mjhVQEfJ++Hwt
+ IiXT+qQxJrGDaizpgECp2N0JxGAahiJAz0WM3/P4wFGQosZScuA9U9TvTJUzZm1WJ3Tm6f
+ r/wBUIkk4CFBiNX+5JOOk+5vev1qfTKA/+PBgyZi/i49F1xyM8h7V96BVzdhhmx387xslo
+ vdZVHJALljQmF+9pJPzv2f7+BybKEjeBoI/OPfK13a4GnwePGf0NpCkSwnJP/JSjMBKZAc
+ V9ypgiSlGkes4L6GylVt6bXruWhfmYCdCp5irKzG38TeQwpcEN+cJ8ox6dL/Wg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1729513817;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uqvWUCdA842P56kowiGwK41lzuCYxVMwrvIjku19lyY=;
+ b=9iM9hP9u+hok/6epss2H8BypwzaU2qHiaN8GLK/PTd0g5xWHzmyJqhgHk8Fg7F1Yo0F+9D
+ X4hm0Rk6eQUL50BQ==
+From: Benedikt Spranger <b.spranger@linutronix.de>
+To: Eugen Hristev <eugen.hristev@linaro.org>
+Cc: u-boot@lists.denx.de, John Ogness <john.ogness@linutronix.de>,
+ ada@thorsis.com
+Subject: Re: [PATCH 0/5] collected fallout of porting an ATSAMA5D27 based board
+Message-ID: <20241021143016.64dae8ca@mitra>
+In-Reply-To: <768cd930-de7f-47fd-967a-3b5849b86069@linaro.org>
+References: <20241018083006.10349-1-b.spranger@linutronix.de>
+ <20241018-unsubtle-yield-8ac617356e92@thorsis.com>
+ <20241018161908.3f6a13eb@mitra>
+ <20241021-steadily-rephrase-ec1f100026e4@thorsis.com>
+ <768cd930-de7f-47fd-967a-3b5849b86069@linaro.org>
+Organization: Linutronix GmbH
 MIME-Version: 1.0
-References: <20241020200818.278197-1-gilles.talis@gmail.com>
-In-Reply-To: <20241020200818.278197-1-gilles.talis@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 21 Oct 2024 09:21:28 -0300
-Message-ID: <CAOMZO5CZ80f+TefL_ndid_AeuEGntDwGFJj19ErR07YV-oRhVQ@mail.gmail.com>
-Subject: Re: [PATCH] board: emcraft: Add support for Emcraft Systems NavQ+
-To: Gilles Talis <gilles.talis@gmail.com>
-Cc: peng.fan@nxp.com, u-boot@lists.denx.de, uboot-imx@nxp.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,102 +81,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Gilles,
+On Mon, 21 Oct 2024 10:17:54 +0300
+Eugen Hristev <eugen.hristev@linaro.org> wrote:
 
-On Sun, Oct 20, 2024 at 5:10=E2=80=AFPM Gilles Talis <gilles.talis@gmail.co=
-m> wrote:
+Hi,
+  
+> >>> Do you use at91bootstrap as 2nd level bootloader like me or
+> >>> something else?
+> >> I use the U-Boot SPL. There is no UBI support in at91boostrap.
+> >> There were some attemps, but...
+> >> No interest at the at91bootstrap side.
+> 
+> It's not about interest. There are two main reasons:
+> First, all open source UBI stacks are GPL. At91bootstrap is not GPL
+> and it cannot take GPL restricted code (being MIT ).
+I do not recall any issue mentioned about a license issue, when I send
+out UBI patches for the AT91boostrap over a decade ago. It was a simple
+"nice, I put it in a branch, but we do not need it."
+I followed the UBI topic in AT91bootstrap loosely after that.
 
-> +/ {
-> +       wdt-reboot {
-> +               compatible =3D "wdt-reboot";
-> +               wdt =3D <&wdog1>;
-> +               bootph-pre-ram;
-> +       };
+> Second, all UBI stacks are huge in terms of code and memory. 
+OK. Maybe we have a different view on huge. The board I am supporting
+now is the successor of a AT91SAM9263 board. This (old) board use
+AT91boootstrap with UBI support. BTW: The original requirement for UBI
+support was to fit into 4k (PPC 440 bootloader).
 
-Please add a blank line here.
+> At91bootstrap is a second stage that should fit in 16k , 32k or 64k 
+> depending on the platform. So far this restriction could not be met
+> by any UBI implementation.
+OK. This need some more in depth view:
+A SPL needs UBI read support only. This support can be done in less
+then 4k, as I mentioned before. So UBI full read/write support?
+You're right. It does not fit.
 
-> +       firmware {
-> +               optee {
-> +                       compatible =3D "linaro,optee-tz";
-> +                       method =3D "smc";
-> +               };
-> +       };
-> +};
+Needed read support?
+It definitly fit (and works fine for over a decade).
 
-> +&usdhc3 {
-> +       bootph-pre-ram;
-> +       mmc-hs400-1_8v;
-> +       mmc-hs400-enhanced-strobe;
+> ... and yes, doing a custom in-house small UBI implementation would
+> be challenging, and costly.
+If you look at ubispl, you got some clue, what's needed. The UBI
+support to the AT91boostrap (for the AT91SAM9263) is about ~450 LOC.
+Managable, but why should I do it, when U-Boot SPL does the job...
 
-Why are the 2 properties above only present in the U-Boot dtsi and not
-in the kernel devicetree?
+> > (What I do here: SoC loads at91bootstrap from raw NAND at offset 0,
+> > at91bootstrap loads U-Boot from raw NAND at some offset like
+> > 0x20000, U-Boot (proper) loads everything else from UBI.)
+> 
+> Either way, it is interesting to see that the U-boot proper NAND dm 
+> driver does not work without at91bootstrap.
+To be clear: The U-Boot *SPL* does not work with the NAND dm driver.
 
-> +#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
-> +int board_phy_config(struct phy_device *phydev)
-> +{
-> +
-> +       /* enable rgmii rxc skew and phy mode select to RGMII copper */
-> +       phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x1f);
-> +       phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x8);
-> +
-> +       phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x00);
-> +       phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x82ee);
-> +       phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x05);
-> +       phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x100);
+The old NAND driver does. So from a developers view I can spend some
+spare cycles on that, from a overall project view: we use the old
+driver, since it is working.
 
-Are these board code settings needed? Can't this be derived in the
-devicetree instead?
-
-> +int board_late_init(void)
-> +{
-> +       return 0;
-> +}
-
-This can be removed, along with CONFIG_BOARD_LATE_INIT=3Dy.
-
-> diff --git a/board/emcraft/imx8mp_navqp/imximage-8mp-lpddr4.cfg b/board/e=
-mcraft/imx8mp_navqp/imximage-8mp-lpddr4.cfg
-> new file mode 100644
-> index 0000000000..999cb630fe
-> --- /dev/null
-> +++ b/board/emcraft/imx8mp_navqp/imximage-8mp-lpddr4.cfg
-> @@ -0,0 +1,9 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright 2021, 2024 NXP
-> + */
-> +
-> +
-
-Remove the double-blank line.
-
-> +Get and Build the ARM Trusted Firmware (Trusted Firmware A)
-> +-----------------------------------------------------------
-> +
-> +.. code-block:: bash
-> +
-> +    $ echo "Downloading and building TF-A..."
-> +    $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.=
-git
-> +    $ cd trusted-firmware-a
-
-Please specify a specific branch of the trusted-firmware-a repo.
-
-> +/* Initial environment variables */
-> +#define CFG_EXTRA_ENV_SETTINGS         \
-> +       BOOTENV \
-> +       "scriptaddr=3D" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
-> +       "kernel_addr_r=3D" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
-> +       "image=3DImage\0" \
-> +       "console=3Dttymxc1,115200 earlycon=3Dec_imx6q,0x30890000,115200\0=
-" \
-> +       "fdt_addr_r=3D0x43000000\0"                       \
-> +       "boot_fdt=3Dtry\0" \
-> +       "fdtfile=3D" CONFIG_DEFAULT_FDT_FILE "\0" \
-> +       "initrd_addr=3D0x43800000\0"              \
-> +       "bootm_size=3D0x10000000\0" \
-> +       "mmcpart=3D1\0" \
-> +       "mmcroot=3D/dev/mmcblk1p2 rootwait rw\0" \
-
-Please move the above variables to
-board/emcraft/imx8mp_navqp/imx8mp_navqp.env instead.
+Regards
+    Benedikt Spranger
