@@ -4,57 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24484D17148
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 23:47:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B098DD1714B
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 23:47:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19E98890CE;
-	Tue, 22 Oct 2024 01:46:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0165B89251;
+	Tue, 22 Oct 2024 01:46:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GxbNLBB7";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="moggQYEC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29DB388E41; Mon, 21 Oct 2024 15:56:08 +0200 (CEST)
+ id 064EC88EAF; Mon, 21 Oct 2024 15:56:09 +0200 (CEST)
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AB6B88F47
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 15:56:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A575E88E75
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 15:55:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+vasileios.bimpikas.analog.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 617BAA43394;
- Mon, 21 Oct 2024 13:55:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E9B1BC4CEEB;
+ by nyc.source.kernel.org (Postfix) with ESMTP id 84D45A43390;
+ Mon, 21 Oct 2024 13:55:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 51426C4CEC3;
  Mon, 21 Oct 2024 13:55:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1729518958;
- bh=DFuyJXhVSXbEI+tLlHanSs7Xi28w4/18pvfEK0X+0tw=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=GxbNLBB7DvMsOnpnonFWMggtWI0n3/3uUokTrFhhFvY7Xi5nLtuz27AESNVegj24/
- OWkSvqbJAv71axZMweyUhf82bTA+zNSGmhWHfFXfW8Xufde4mPyguUep1b8IO3VRq1
- vE2LLCF0nJ880m646Z4DPv/zeqptEpG6nLBz+9Dz92skUV9KdaNMKPJQT4AjDcHrYB
- DtpjfCcZjCLch2o/NKn8NO99JEuun1WLWfCyQsHcnD0lu8xEyYwb+/dKDe6zJt7mSo
- EMNM1w2d/5SsbTc46Z+xjeNYnQ2OHKNF0SI8jWrnegDbASDdeOSDLZIQeK6lmi4Qaa
- FAI/LjZG50/dg==
+ s=k20201202; t=1729518957;
+ bh=Cq311unnyEOsAEXQ+0MeodXiBtSZTdLSvvW0P9gzTmY=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=moggQYECAlk7EHGfycaH6elcjzQSD82KvnKK0B6CSzYAZX7vBrAtLUvgD+jHQPiiH
+ 2B1lCqL5JHC8q2iDb0SBdklAi0YM3QYRlP66KKgPlNWiDxTzwlRLIQXAyHLbPLD98H
+ tkJFnyTtbGX5zwWPUMY4dUGtFgxquvRfEFV0QnSbog4nzpAy0dcPvHPqPEsA+ViIH9
+ nL1KJ9l21BbFKZ9+vdTY5RZ9QtaI3PTdLkHTOle6Uwczkh+fOjGItimjhFdBBR1osX
+ ykmFyDK6k5cDg154akQUXoP9Z2tYIDb3TT/7JIIvAIesA6uwzXdUwUutR6bKaPCey4
+ GPxeHqc0q8dPg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id DDCCBD15D9B;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 40C47D15D9A;
  Mon, 21 Oct 2024 13:55:57 +0000 (UTC)
 From: Vasileios Bimpikas via B4 Relay
  <devnull+vasileios.bimpikas.analog.com@kernel.org>
-Date: Mon, 21 Oct 2024 14:54:40 +0100
-Subject: [PATCH v2 09/11] remoteproc: Add in SHARC loading for ADI
- SC5XX-family processors
+Subject: [PATCH v2 00/11] drivers: Driver support for ADI SC5xx SoCs
+Date: Mon, 21 Oct 2024 14:54:31 +0100
+Message-Id: <20241021-sc5xx-driver-series-v2-0-53e2472e11d0@analog.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241021-sc5xx-driver-series-v2-9-53e2472e11d0@analog.com>
-References: <20241021-sc5xx-driver-series-v2-0-53e2472e11d0@analog.com>
-In-Reply-To: <20241021-sc5xx-driver-series-v2-0-53e2472e11d0@analog.com>
+X-B4-Tracking: v=1; b=H4sIABhdFmcC/0WOQW6DMBBFr4K87iDbgICsco8qi8GMjaUYiO0go
+ ih37yS06m6+Rv/99xSJoqckTsVTRNp88svMQX8Vwkw4OwI/chZa6lr2uoJkmn2HMfqNIhxlwB7
+ t0Jqm7wYjuLlGsn7/UL8vnG1cAuQpEv6zGtVo1XRVW6pa6g4UuEiuDHh9JDxnHyg9UmmW8AuMd
+ LuzXT6ogt8JP3Ys++Z1zDjc7mvKPBX87GDFbCY23BRIqOuxx9GOttLtGWe8Lu5vYMBEwHfw+VR
+ sb2CpJERTi8vr9QPA5NlEJQEAAA==
+X-Change-ID: 20240923-sc5xx-driver-series-a9afb7c598bc
 To: Tom Rini <trini@konsulko.com>, 
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
  Greg Malysa <greg.malysa@timesys.com>, 
@@ -69,13 +72,14 @@ To: Tom Rini <trini@konsulko.com>,
  Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
  Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Angelo Dureghello <angelo.dureghello@timesys.com>, 
  Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1729518874; l=11411;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1729518874; l=5307;
  i=vasileios.bimpikas@analog.com; s=20240927; h=from:subject:message-id;
- bh=zjd2V/Sp9m0zxPInJS/5pIZqX2nzuhlbK5I7/77T/EA=;
- b=gbdbP5uazM0WSwRzIbBX+Vqy0WZ5hq4ZsxTq+ixAWDcTQJGeOZOb/GsB3CN9CRnWN/ZfK3hi1
- t6gV+BVUIVpALLGIaEw0ytStjG3ShB+hhx03K0TqwxDGBVdzmaLsdbV
+ bh=Cq311unnyEOsAEXQ+0MeodXiBtSZTdLSvvW0P9gzTmY=;
+ b=kUR/y1nq/tGM6RRoJBBPBbULmFUVQIU5B8h0bjGDK4XsW91H6DekUiPQDP8OzaklY0LhcpViM
+ YXSICK01PUKCRrhAHtGgweIuRV3d+s2i1mefdk13KfDKfENUZ7B0uPr
 X-Developer-Key: i=vasileios.bimpikas@analog.com; a=ed25519;
  pk=JkXh+NeXYCpTenwrB0gg5fMpKEnagLOXdsLFiUrqZRo=
 X-Endpoint-Received: by B4 Relay for vasileios.bimpikas@analog.com/20240927
@@ -99,370 +103,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+This series adds all of the supported peripheral drivers for the sc5xx
+series of SoCs from Analog Devices and other drivers that are used by
+the evaluation kits, such as a GPIO expander used by the EZLITE carrier
+boards.
 
-This adds the ability to load ldr-formatted files to the SHARC
-coprocessors using the rproc interface. Only a minimal subset
-of rproc functionality is supported: loading and starting
-the remote core.
+This series is based on my earlier patch series:
+  "arm: Initial support for Analog Devices SC5xx boards"
+  20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com
+since both that series and this series modify MAINTAINERS.
 
-Secure boot and signed ldr verification are not available
-at this time through the U-Boot interface.
+Note that patches 05, 07 had Reviewed-by tags, but have had minor
+changes since v1 so these weren't kept.
 
-Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
-Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
-Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
-Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
-Co-developed-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
-Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
-Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
 ---
- MAINTAINERS                          |   1 +
- drivers/remoteproc/Kconfig           |  11 ++
- drivers/remoteproc/Makefile          |   1 +
- drivers/remoteproc/adi_sc5xx_rproc.c | 276 +++++++++++++++++++++++++++++++++++
- 4 files changed, 289 insertions(+)
+Changes in v2:
+- Address comments on adi_spi3.c
+- Clean up some whitespace errors
+- Modify Kconfigs to reflect changes to mach-sc5xx/Kconfig
+- Link to v1: https://lore.kernel.org/r/20240515215837.14028-1-greg.malysa@timesys.com
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8dcb1bd5619f79bbcee47b9c8928bc13223fb268..86a7f18f530c0fdabd015d49518841b0160bfdba 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -618,6 +618,7 @@ F:	drivers/gpio/gpio-adi-adsp.c
- F:	drivers/i2c/adi_i2c.c
- F:	drivers/net/dwc_eth_qos_adi.c
- F:	drivers/pinctrl/pinctrl-adi-adsp.c
-+F:	drivers/remoteproc/adi_sc5xx_rproc.c
- F:	drivers/serial/serial_adi_uart4.c
- F:	drivers/timer/adi_sc5xx_timer.c
- F:	drivers/usb/musb-new/sc5xx.c
-diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
-index a49802c132329c6596d5fc69020f748f321a74ac..3f7cebaeb7df82bf21ddf4347a4b2ae5ba54e518 100644
---- a/drivers/remoteproc/Kconfig
-+++ b/drivers/remoteproc/Kconfig
-@@ -13,6 +13,7 @@ config REMOTEPROC
- 	depends on DM
- 
- # Please keep the configuration alphabetically sorted.
-+
- config K3_SYSTEM_CONTROLLER
- 	bool "Support for TI' K3 System Controller"
- 	select REMOTEPROC
-@@ -22,6 +23,16 @@ config K3_SYSTEM_CONTROLLER
- 	help
- 	  Say 'y' here to add support for TI' K3 System Controller.
- 
-+config REMOTEPROC_ADI_SC5XX
-+	bool "Support for ADI SC5xx SHARC cores"
-+	select REMOTEPROC
-+	depends on DM
-+	depends on ARCH_SC5XX
-+	depends on SYSCON
-+	help
-+	  Say 'y' here to add support for loading code onto SHARC cores in
-+	  an ADSP-SC5xx SoC from Analog Devices
-+
- config REMOTEPROC_SANDBOX
- 	bool "Support for Test processor for Sandbox"
- 	select REMOTEPROC
-diff --git a/drivers/remoteproc/Makefile b/drivers/remoteproc/Makefile
-index 801b0965e4f0616ca22266dfd9ff054bee797b03..93923415c00751aef16eb69ec87021513e7e391e 100644
---- a/drivers/remoteproc/Makefile
-+++ b/drivers/remoteproc/Makefile
-@@ -8,6 +8,7 @@ obj-$(CONFIG_$(XPL_)REMOTEPROC) += rproc-uclass.o rproc-elf-loader.o
- 
- # Remote proc drivers - Please keep this list alphabetically sorted.
- obj-$(CONFIG_K3_SYSTEM_CONTROLLER) += k3_system_controller.o
-+obj-$(CONFIG_REMOTEPROC_ADI_SC5XX) += adi_sc5xx_rproc.o
- obj-$(CONFIG_REMOTEPROC_SANDBOX) += sandbox_testproc.o
- obj-$(CONFIG_REMOTEPROC_STM32_COPRO) += stm32_copro.o
- obj-$(CONFIG_REMOTEPROC_TI_K3_ARM64) += ti_k3_arm64_rproc.o
-diff --git a/drivers/remoteproc/adi_sc5xx_rproc.c b/drivers/remoteproc/adi_sc5xx_rproc.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..fc9730ef32b0042da65b62be386fda348739f829
---- /dev/null
-+++ b/drivers/remoteproc/adi_sc5xx_rproc.c
-@@ -0,0 +1,276 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * (C) Copyright 2022 - Analog Devices, Inc.
-+ *
-+ * Written and/or maintained by Timesys Corporation
-+ *
-+ * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-+ * Contact: Greg Malysa <greg.malysa@timesys.com>
-+ *
-+ * Analog Devices SC5xx remoteproc driver for loading code onto SHARC cores
-+ */
-+
-+#include <dm.h>
-+#include <regmap.h>
-+#include <remoteproc.h>
-+#include <syscon.h>
-+#include <dm/device_compat.h>
-+#include <linux/delay.h>
-+
-+/* Register offsets */
-+#ifdef CONFIG_SC58X
-+#define ADI_RCU_REG_CTL		0x00
-+#define ADI_RCU_REG_STAT	0x04
-+#define ADI_RCU_REG_CRCTL	0x08
-+#define ADI_RCU_REG_CRSTAT	0x0c
-+#define ADI_RCU_REG_SIDIS	0x10
-+#define ADI_RCU_REG_SISTAT	0x14
-+#define ADI_RCU_REG_BCODE	0x1c
-+#define ADI_RCU_REG_SVECT0	0x20
-+#define ADI_RCU_REG_SVECT1	0x24
-+#define ADI_RCU_REG_SVECT2	0x28
-+#define ADI_RCU_REG_MSG		0x60
-+#define ADI_RCU_REG_MSG_SET	0x64
-+#define ADI_RCU_REG_MSG_CLR	0x68
-+#else
-+#define ADI_RCU_REG_CTL		0x00
-+#define ADI_RCU_REG_STAT	0x04
-+#define ADI_RCU_REG_CRCTL	0x08
-+#define ADI_RCU_REG_CRSTAT	0x0c
-+#define ADI_RCU_REG_SRRQSTAT	0x18
-+#define ADI_RCU_REG_SIDIS	0x1c
-+#define ADI_RCU_REG_SISTAT	0x20
-+#define ADI_RCU_REG_SVECT_LCK	0x24
-+#define ADI_RCU_REG_BCODE	0x28
-+#define ADI_RCU_REG_SVECT0	0x2c
-+#define ADI_RCU_REG_SVECT1	0x30
-+#define ADI_RCU_REG_SVECT2	0x34
-+#define ADI_RCU_REG_MSG		0x6c
-+#define ADI_RCU_REG_MSG_SET	0x70
-+#define ADI_RCU_REG_MSG_CLR	0x74
-+#endif /* CONFIG_SC58X */
-+
-+/* Register bit definitions */
-+#define ADI_RCU_CTL_SYSRST		BIT(0)
-+
-+/* Bit values for the RCU0_MSG register */
-+#define RCU0_MSG_C0IDLE			0x00000100		/* Core 0 Idle */
-+#define RCU0_MSG_C1IDLE			0x00000200		/* Core 1 Idle */
-+#define RCU0_MSG_C2IDLE			0x00000400		/* Core 2 Idle */
-+#define RCU0_MSG_CRR0			0x00001000		/* Core 0 reset request */
-+#define RCU0_MSG_CRR1			0x00002000		/* Core 1 reset request */
-+#define RCU0_MSG_CRR2			0x00004000		/* Core 2 reset request */
-+#define RCU0_MSG_C1ACTIVATE		0x00080000		/* Core 1 Activated */
-+#define RCU0_MSG_C2ACTIVATE		0x00100000		/* Core 2 Activated */
-+
-+struct sc5xx_rproc_data {
-+	/* Address to load to svect when rebooting core */
-+	u32 load_addr;
-+
-+	/* RCU parameters */
-+	struct regmap *rcu;
-+	u32 svect_offset;
-+	u32 coreid;
-+};
-+
-+struct block_code_flag {
-+	u32 bcode:4,		/* 0-3 */
-+	    bflag_save:1,	/* 4 */
-+	    bflag_aux:1,	/* 5 */
-+	    breserved:1,	/* 6 */
-+	    bflag_forward:1,	/* 7 */
-+	    bflag_fill:1,	/* 8 */
-+	    bflag_quickboot:1,	/* 9 */
-+	    bflag_callback:1,	/* 10 */
-+	    bflag_init:1,	/* 11 */
-+	    bflag_ignore:1,	/* 12 */
-+	    bflag_indirect:1,	/* 13 */
-+	    bflag_first:1,	/* 14 */
-+	    bflag_final:1,	/* 15 */
-+	    bhdrchk:8,		/* 16-23 */
-+	    bhdrsign:8;		/* 0xAD, 0xAC or 0xAB */
-+};
-+
-+struct ldr_hdr {
-+	struct block_code_flag bcode_flag;
-+	u32 target_addr;
-+	u32 byte_count;
-+	u32 argument;
-+};
-+
-+static int is_final(struct ldr_hdr *hdr)
-+{
-+	return hdr->bcode_flag.bflag_final;
-+}
-+
-+static int is_empty(struct ldr_hdr *hdr)
-+{
-+	return hdr->bcode_flag.bflag_ignore || (hdr->byte_count == 0);
-+}
-+
-+static int adi_valid_firmware(struct ldr_hdr *adi_ldr_hdr)
-+{
-+	if (!adi_ldr_hdr->byte_count &&
-+	    (adi_ldr_hdr->bcode_flag.bhdrsign == 0xAD ||
-+	     adi_ldr_hdr->bcode_flag.bhdrsign == 0xAC ||
-+	     adi_ldr_hdr->bcode_flag.bhdrsign == 0xAB))
-+		return 1;
-+
-+	return 0;
-+}
-+
-+static int sharc_load(struct udevice *dev, ulong addr, ulong size)
-+{
-+	struct sc5xx_rproc_data *priv = dev_get_priv(dev);
-+	size_t offset;
-+	u8 *buf = (u8 *)addr;
-+	struct ldr_hdr *ldr = (struct ldr_hdr *)addr;
-+	struct ldr_hdr *block_hdr;
-+	struct ldr_hdr *next_hdr;
-+
-+	if (!adi_valid_firmware(ldr)) {
-+		dev_err(dev, "Firmware at 0x%lx does not appear to be an LDR image\n", addr);
-+		dev_err(dev, "Note: Signed firmware is not currently supported\n");
-+		return -EINVAL;
-+	}
-+
-+	do {
-+		block_hdr = (struct ldr_hdr *)buf;
-+		offset = sizeof(struct ldr_hdr) + (block_hdr->bcode_flag.bflag_fill ?
-+							0 : block_hdr->byte_count);
-+		next_hdr = (struct ldr_hdr *)(buf + offset);
-+
-+		if (block_hdr->bcode_flag.bflag_first)
-+			priv->load_addr = (unsigned long)block_hdr->target_addr;
-+
-+		if (!is_empty(block_hdr)) {
-+			if (block_hdr->bcode_flag.bflag_fill) {
-+				memset((void *)(phys_addr_t)block_hdr->target_addr,
-+				       block_hdr->argument,
-+				       block_hdr->byte_count);
-+			} else {
-+				memcpy((void *)(phys_addr_t)block_hdr->target_addr,
-+				       buf + sizeof(struct ldr_hdr),
-+				       block_hdr->byte_count);
-+			}
-+		}
-+
-+		if (is_final(block_hdr))
-+			break;
-+
-+		buf += offset;
-+	} while (1);
-+
-+	return 0;
-+}
-+
-+static void sharc_reset(struct sc5xx_rproc_data *priv)
-+{
-+	u32 coreid = priv->coreid;
-+	u32 val;
-+
-+	/* First put core in reset.
-+	 * Clear CRSTAT bit for given coreid.
-+	 */
-+	regmap_write(priv->rcu, ADI_RCU_REG_CRSTAT, 1 << coreid);
-+
-+	/* Set SIDIS to disable the system interface */
-+	regmap_read(priv->rcu, ADI_RCU_REG_SIDIS, &val);
-+	regmap_write(priv->rcu, ADI_RCU_REG_SIDIS, val | (1 << (coreid - 1)));
-+
-+	/*
-+	 * Wait for access to coreX have been disabled and all the pending
-+	 * transactions have completed
-+	 */
-+	udelay(50);
-+
-+	/* Set CRCTL bit to put core in reset */
-+	regmap_read(priv->rcu, ADI_RCU_REG_CRCTL, &val);
-+	regmap_write(priv->rcu, ADI_RCU_REG_CRCTL, val | (1 << coreid));
-+
-+	/* Poll until Core is in reset */
-+	while (!(regmap_read(priv->rcu, ADI_RCU_REG_CRSTAT, &val), val & (1 << coreid)))
-+		;
-+
-+	/* Clear SIDIS to reenable the system interface */
-+	regmap_read(priv->rcu, ADI_RCU_REG_SIDIS, &val);
-+	regmap_write(priv->rcu, ADI_RCU_REG_SIDIS, val & ~(1 << (coreid - 1)));
-+
-+	udelay(50);
-+
-+	/* Take Core out of reset */
-+	regmap_read(priv->rcu, ADI_RCU_REG_CRCTL, &val);
-+	regmap_write(priv->rcu, ADI_RCU_REG_CRCTL, val & ~(1 << coreid));
-+
-+	/* Wait for done */
-+	udelay(50);
-+}
-+
-+static int sharc_start(struct udevice *dev)
-+{
-+	struct sc5xx_rproc_data *priv = dev_get_priv(dev);
-+
-+	/* Write load address to appropriate SVECT for core */
-+	regmap_write(priv->rcu, priv->svect_offset, priv->load_addr);
-+
-+	sharc_reset(priv);
-+
-+	/* Clear the IDLE bit when start the SHARC core */
-+	regmap_write(priv->rcu, ADI_RCU_REG_MSG_CLR, RCU0_MSG_C0IDLE << priv->coreid);
-+
-+	/* Notify CCES */
-+	regmap_write(priv->rcu, ADI_RCU_REG_MSG_SET, RCU0_MSG_C1ACTIVATE << (priv->coreid - 1));
-+	return 0;
-+}
-+
-+static const struct dm_rproc_ops sc5xx_ops = {
-+	.load = sharc_load,
-+	.start = sharc_start,
-+};
-+
-+static int sc5xx_probe(struct udevice *dev)
-+{
-+	struct sc5xx_rproc_data *priv = dev_get_priv(dev);
-+	u32 coreid;
-+
-+	if (dev_read_u32(dev, "coreid", &coreid)) {
-+		dev_err(dev, "Missing property coreid\n");
-+		return -ENOENT;
-+	}
-+
-+	priv->coreid = coreid;
-+	switch (coreid) {
-+	case 1:
-+		priv->svect_offset = ADI_RCU_REG_SVECT1;
-+		break;
-+	case 2:
-+		priv->svect_offset = ADI_RCU_REG_SVECT2;
-+		break;
-+	default:
-+		dev_err(dev, "Invalid value %d for coreid, must be 1 or 2\n", coreid);
-+		return -EINVAL;
-+	}
-+
-+	priv->rcu = syscon_regmap_lookup_by_phandle(dev, "adi,rcu");
-+	if (IS_ERR(priv->rcu))
-+		return PTR_ERR(priv->rcu);
-+
-+	dev_err(dev, "sc5xx remoteproc core %d available\n", priv->coreid);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id sc5xx_ids[] = {
-+	{ .compatible = "adi,sc5xx-rproc" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(adi_sc5xx_rproc) = {
-+	.name = "adi_sc5xx_rproc",
-+	.of_match = sc5xx_ids,
-+	.id = UCLASS_REMOTEPROC,
-+	.ops = &sc5xx_ops,
-+	.probe = sc5xx_probe,
-+	.priv_auto = sizeof(struct sc5xx_rproc_data),
-+	.flags = 0,
-+};
+---
+Changes in v3:
+- Rebased with current master
+- Link to v2: https://lore.kernel.org/u-boot/20240925-sc5xx-driver-series-v2-0-ad9287c25c08@analog.com/
 
+---
+Greg Malysa (2):
+      net: Add support for ADI SC5xx SoCs with DWC QoS ethernet
+      dma: Add driver for ADI SC5xx-family SoC MDMA functionality
+
+Nathan Barrett-Morrison (3):
+      gpio: Add support for ADI ADP5588 GPIO expander chips
+      usb: musb-new: Add support for Analog Devices SC5xx SoCs
+      remoteproc: Add in SHARC loading for ADI SC5XX-family processors
+
+Oliver Gaskell (6):
+      pinctrl: Add support for ADI SC5XX-family pinctrl
+      gpio: Add support for SC5XX-family processor GPIO driver
+      i2c: Add support for ADI SC5XX-family I2C peripheral
+      watchdog: Add support for ADI SC5XX-family watchdog peripheral
+      spi: Add support for ADI SC5XX-family processor SPI peripherals
+      mmc: Add support for ADI SC5XX-family processor SDHCI peripherals
+
+ MAINTAINERS                            |  11 +
+ drivers/dma/Kconfig                    |   7 +
+ drivers/dma/Makefile                   |   1 +
+ drivers/dma/adi_dma.c                  | 255 ++++++++++++
+ drivers/gpio/Kconfig                   |  17 +
+ drivers/gpio/Makefile                  |   2 +
+ drivers/gpio/adp5588_gpio.c            | 208 ++++++++++
+ drivers/gpio/gpio-adi-adsp.c           | 179 +++++++++
+ drivers/i2c/Kconfig                    |   7 +
+ drivers/i2c/Makefile                   |   3 +-
+ drivers/i2c/adi_i2c.c                  | 395 +++++++++++++++++++
+ drivers/mmc/Kconfig                    |   9 +
+ drivers/mmc/Makefile                   |   1 +
+ drivers/mmc/adi_sdhci.c                | 154 ++++++++
+ drivers/net/Kconfig                    |   7 +
+ drivers/net/Makefile                   |   1 +
+ drivers/net/dwc_eth_qos.c              |   6 +
+ drivers/net/dwc_eth_qos.h              |   2 +
+ drivers/net/dwc_eth_qos_adi.c          | 102 +++++
+ drivers/pinctrl/Kconfig                |   8 +
+ drivers/pinctrl/Makefile               |   1 +
+ drivers/pinctrl/pinctrl-adi-adsp.c     | 156 ++++++++
+ drivers/remoteproc/Kconfig             |  11 +
+ drivers/remoteproc/Makefile            |   1 +
+ drivers/remoteproc/adi_sc5xx_rproc.c   | 276 +++++++++++++
+ drivers/spi/Kconfig                    |   7 +
+ drivers/spi/Makefile                   |   1 +
+ drivers/spi/adi_spi3.c                 | 690 +++++++++++++++++++++++++++++++++
+ drivers/usb/musb-new/Kconfig           |   7 +
+ drivers/usb/musb-new/Makefile          |   1 +
+ drivers/usb/musb-new/sc5xx.c           | 202 ++++++++++
+ drivers/watchdog/Kconfig               |   9 +
+ drivers/watchdog/Makefile              |   1 +
+ drivers/watchdog/adi_wdt.c             | 145 +++++++
+ include/dt-bindings/pinctrl/adi-adsp.h |  21 +
+ 35 files changed, 2903 insertions(+), 1 deletion(-)
+---
+base-commit: 041bf69038e2957f38e2de4e5d77bdb3e2ccf8a8
+change-id: 20240923-sc5xx-driver-series-a9afb7c598bc
+prerequisite-message-id: 20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com
+prerequisite-patch-id: 184667bccb34335a943f5ba405bf2acd75b8c7f3
+prerequisite-patch-id: aad9a1786ecfe51a46034fc055c57bff62d2a653
+prerequisite-patch-id: 7640097fdc5a25ec2ffdf0eddb22f3c452510390
+prerequisite-patch-id: 909e13e6d779858f6d862b703e7cbfe510cb3a16
+prerequisite-patch-id: 0564b8079526f2fe1d9f723c8c4a2471e3ec6e1c
+prerequisite-patch-id: 469d6193e82a2f702e938004ad6ff7c22dfbab86
+prerequisite-patch-id: f6a45739e56120f54170b924a3069b98d355d1c0
+prerequisite-patch-id: 24787a90e7adadab2ae3aa2348ac9d5838c26cfe
+prerequisite-patch-id: 94e1c6fde429c63a6fa4f7b5aeab0df9a8a00d81
+prerequisite-patch-id: 32d268fd6372bda3129cddd26da45d69291efc33
+prerequisite-patch-id: f54e027ac323522349f24acbc4a946d8a3cdfaef
+prerequisite-patch-id: 0ca62b4ff0cfd3bf5a10ac84f13d0ab261e737d1
+prerequisite-patch-id: 8101423151112c3876c88223ac9ab196aebb8912
+prerequisite-patch-id: fbc3b9227e2dc550878d4e8d113b1ad81ee00028
+prerequisite-patch-id: 63cec707680793ef2feeb5b782b1db19d49766ce
+prerequisite-patch-id: 6f85ade3b9119dba85b65da8a49c4a6345c6b3ba
+prerequisite-patch-id: 988919879c6440227124dc0bb4b24d22c9041d99
+prerequisite-patch-id: 3227e7bdc2614c377b6837a47ad1cde99791d794
+prerequisite-patch-id: 10f9f40c697f22a33b83a8538e13bac642795851
+prerequisite-patch-id: e57e6a95ef319c12565a6469f230198259f0bf7d
+
+Best regards,
 -- 
-2.34.1
+Vasileios Bimpikas <vasileios.bimpikas@analog.com>
 
 
