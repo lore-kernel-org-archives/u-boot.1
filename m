@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9A18D3C927
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 01:31:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40BF7D3C927
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 01:32:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A8FF89161;
-	Mon, 21 Oct 2024 03:31:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8B1FA891E7;
+	Mon, 21 Oct 2024 03:31:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="avmI9vpI";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="iZTjrA4t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA4268925A; Mon, 21 Oct 2024 03:31:46 +0200 (CEST)
-Received: from mail-m155100.qiye.163.com (mail-m155100.qiye.163.com
- [101.71.155.100])
+ id C074F891E9; Mon, 21 Oct 2024 03:31:48 +0200 (CEST)
+Received: from mail-m127169.xmail.ntesmail.com
+ (mail-m127169.xmail.ntesmail.com [115.236.127.169])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50F1689161
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 03:31:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95228891E7
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 03:31:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=avmI9vpIOyh8emBvTE9mRt813BekIooDn1dsNsAU9MsL7w9KD/ZDOJrojoFtk1KDhzw3wejbIvNgFgqgrJBTclurNXSFryueSq5SAONs9EPfTsV2y17e0MIFdc/DguCBP3Q4zd/XxfJQZzkiNwPq4XUziVMdhjqvCgD/LB2xzzo=;
+ b=iZTjrA4t02TzOQhkNiP5rK4358EYY7bYS94iwLBU1vnHjSz60Ise7RjvF0wXOLqRuqCiXH1WVrCD5PsAfXdy2m0yFcv+easigEnf6jE/xYNUxFStEl4p4m+O0qbnb+CvVex3cwSrvA6el+h/nsHIRgjS4xnda3k7MmbScifDZZM=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=OI/9g0t88y9UnEyUniuEXCjWgod9pkmhbX1CSwbm2iY=;
+ bh=aR1l/TkiF2GmoOB7551sybgJkhbpBaLvYwF6dJOHp8o=;
  h=date:mime-version:subject:message-id:from;
 Received: from yk?rock-chips.com
  (gy-adaptive-ssl-proxy-4-entmail-virt151.gy.ntes [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with SMTP id 154CD52019D;
- Mon, 21 Oct 2024 09:31:29 +0800 (CST)
-Message-ID: <884868a9-d019-4745-a7d1-0bd44e423611@rock-chips.com>
-Date: Mon, 21 Oct 2024 09:31:29 +0800
+ by smtp.qiye.163.com (Hmail) with SMTP id 8414752020D;
+ Mon, 21 Oct 2024 09:31:33 +0800 (CST)
+Message-ID: <9b1e4935-6e30-4c42-97d6-f4356b44c2dd@rock-chips.com>
+Date: Mon, 21 Oct 2024 09:31:33 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Kever Yang <kever.yang@rock-chips.com>
-Subject: Re: [PATCH] rockchip: rk3399-pinephone-pro: Drop upstream props from
+Subject: Re: [PATCH] rockchip: rk3588-rock-5b: Drop upstream props from
  u-boot.dtsi
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+ Eugen Hristev <eugen.hristev@collabora.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-References: <20241016201523.903560-1-jonas@kwiboo.se>
+References: <20241016201413.903112-1-jonas@kwiboo.se>
 Content-Language: en-US
-In-Reply-To: <20241016201523.903560-1-jonas@kwiboo.se>
+In-Reply-To: <20241016201413.903112-1-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR0fHlZOSUIZTxhLQx8dGhhWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0hDQlYZHx4ZSU8dGE9JGB1WFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a92acb3665603afkunm154cd52019d
+X-HM-Tid: 0a92acb374e503afkunm8414752020d
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6P1E6TCo*HjIeFygROUg2TjxJ
- Tx1PCk5VSlVKTElCT0xPSUJJSk9NVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJSUpCNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PE06HAw*EjIeAyg2KU4JTjhW
+ AiwKCy1VSlVKTElCT0xPSUJOTUJKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJSElINwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,7 +77,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/10/17 04:15, Jonas Karlman wrote:
+On 2024/10/17 04:14, Jonas Karlman wrote:
 > The SPI flash node has been added in upstream DT, drop all props beside
 > bootph-* props from the SPI flash related nodes in u-boot.dtsi.
 >
@@ -87,17 +87,19 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi | 5 -----
->   1 file changed, 5 deletions(-)
+>   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi | 9 ---------
+>   1 file changed, 9 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> index 037cec10ce36..7438bec4ee63 100644
-> --- a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> @@ -15,13 +15,8 @@
+> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> index 4dd17ff408cb..3ff3bb64e4f7 100644
+> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> @@ -16,18 +16,9 @@
 >   };
 >   
->   &spi1 {
+>   &sfc {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&fspim2_pins>;
 > -	status = "okay";
 > -
 >   	flash@0 {
@@ -105,6 +107,9 @@ Thanks,
 > -		reg = <0>;
 >   		bootph-pre-ram;
 >   		bootph-some-ram;
-> -		spi-max-frequency = <10000000>;
+> -		spi-max-frequency = <24000000>;
+> -		spi-rx-bus-width = <4>;
+> -		spi-tx-bus-width = <1>;
 >   	};
 >   };
+>   
