@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6630D15DB5
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 15:51:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFD11D15DB5
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 15:52:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84E6B88F2A;
-	Mon, 21 Oct 2024 17:51:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D650B88EA7;
+	Mon, 21 Oct 2024 17:51:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fqT/sZiJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E3ZzT+AB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 685B088EDA; Mon, 21 Oct 2024 17:51:50 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 437C488EA7; Mon, 21 Oct 2024 17:51:52 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78FEE88F01
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 17:51:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6165488EBB
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 17:51:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5c9693dc739so6095782a12.3
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 08:51:48 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9552d02e6so5869903a12.2
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 08:51:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729525907; x=1730130707; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729525909; x=1730130709; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hX8Derz//Q0gRKfQ60w7kaKVtD6nG972vkiP2Gw3Hnk=;
- b=fqT/sZiJNJmGbAbB2bs09ZtAHcuV79TRwk6SB7F0j1zUEOPFEgkiXr/K3G0v6kGNgG
- /UZSGXauS7DnzbRr7EmPsLsREokNvNjC76S+fW3f3JNQuHbP78ADUcSSYXjbxI0P+qe1
- 74kqYuEbemhaJBgG3pFMe13ITUXSEOSKqOGrk=
+ bh=M7TCvE/+13I4B5F8d6QxfP5A4AxtJiZM+8RnfcyglG4=;
+ b=E3ZzT+AB4fFRvtTbpmiNdhIzFQ2qL2rPM4eb4/I9DZbWSfv/86WFDxLtrsgsEWBY2Z
+ ABU8Bs/Vje6Qh4h49321gCRBIHTgqYWe+1g7CZ1jaMEFRYC+lM0tQm+EWpx9ni2MYE/h
+ IdbF0ukEQk7CgO+RtBoefF4k7S0sBc0S1QFi0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729525907; x=1730130707;
+ d=1e100.net; s=20230601; t=1729525909; x=1730130709;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hX8Derz//Q0gRKfQ60w7kaKVtD6nG972vkiP2Gw3Hnk=;
- b=DydM8JQgvu5aCEwWhgk7JvTf7XU8sXAzsLByVfPfIzm+f5mVTQM+ptEINjSKStxRHV
- vQGo4r1OgQzZsXIr0/GyynSZXSFYV0ZIY2/W9d9PYCy9qY2WTJG71doxLUVJiDrRPAn8
- BMcuKamBNlX/okMhamkiLPLpOdFf3q3eE4EDNlqd32BZHUohGVCKq2ZFQdtNQnrUDOb2
- en7Za0mLOLEkxP4Sejnn0peRFR12berAKGuFRfRwXUWv/TckvPJNJsjQHucrCnPGmQi7
- uDQUvhVHmRojy/qDGA+eirjqJ94EW3HM8UM7DItfTTO9owU61YCUoAIt+Ih2e0fQ5KOA
- ux7g==
-X-Gm-Message-State: AOJu0YzqZB6+EWMVamEFJilO2jYEeRLkgOFQw/p2XZpX7xYQ7hvNG/1x
- LivG2+uFuGhirLrJVkgxfR9szYSfLRpkFP62Nj/N5Bbagl8dPxzZRsdZyJ7ysdkvLqOimPzeBHK
- PA0CL
-X-Google-Smtp-Source: AGHT+IHr1r8nBYrAkNDiicnbNxtm3OfvG3V+vb6nB3I7dtQE9Mp7KgqIN8wsVwCXvgL0nPJHfa3yeQ==
-X-Received: by 2002:a05:6402:d0d:b0:5bf:1bd:adb3 with SMTP id
- 4fb4d7f45d1cf-5ca0ac5111fmr11352206a12.14.1729525907393; 
- Mon, 21 Oct 2024 08:51:47 -0700 (PDT)
+ bh=M7TCvE/+13I4B5F8d6QxfP5A4AxtJiZM+8RnfcyglG4=;
+ b=k8Hbo0CQSY+pz0Q/PwoW/Bk8xWrYtoCYUEruJkzM90A76BWYne+4LIsTy7zd8bWbub
+ a6k1O+2cpoXTmbgWZ9K1pXJ3mRlizu7UQkurjiTNovYpYXR/jdd1oRx4CBZr+t9HiN6S
+ 19pvwOS/ml1ITkEsuHidJgJ7/JdpxZH9y5Xqd51OgHm81szKwmwWQ0/dnp1Un4ZRICOW
+ QTQzyIrNvRkkh/wH8rvR1P8oF/ErF/sgiHV26yscsYgA8JSXKT9OBRh/7aWMTqvnzJUx
+ 54I+RwtBnnhc5NugQazroCriJgkU01gEiFFd24HRJgsA2ZUJP/l3cpGJKiSo9YjmAN0O
+ BkBw==
+X-Gm-Message-State: AOJu0YzeoKztR1p72Fyw30BNW5lvQ0YQ1izk3KhyD+ii3wfVTjvk/mmP
+ WUP7q7ANucUvbMapLmGdfbX6pqIG4MERsfyKfZ4IUKRzAZyYDN1v/KNUVytEFjwb752KP5dyphZ
+ LpfDs
+X-Google-Smtp-Source: AGHT+IFoy1JslTNRjxIG/V6xMFvk4yc0P38FBoYKbZ7q7pY6TRzxye/9hZM5QHLNqycl2VsQqqq7GQ==
+X-Received: by 2002:a05:6402:3481:b0:5cb:728d:23ee with SMTP id
+ 4fb4d7f45d1cf-5cb728d2470mr1958236a12.33.1729525909119; 
+ Mon, 21 Oct 2024 08:51:49 -0700 (PDT)
 Received: from chromium.org ([87.215.50.114]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cb66a6d798sm2143886a12.50.2024.10.21.08.51.46
+ 4fb4d7f45d1cf-5cb66a6d798sm2143886a12.50.2024.10.21.08.51.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Oct 2024 08:51:46 -0700 (PDT)
+ Mon, 21 Oct 2024 08:51:47 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Marek Vasut <marex@denx.de>, Svyatoslav <clamor95@gmail.com>,
- Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
- Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>,
- Richard Weinberger <richard@nod.at>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/3] common: Drop check for DM in initf_dm()
-Date: Mon, 21 Oct 2024 17:51:29 +0200
-Message-ID: <20241021155133.29557-2-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 2/3] dm: core: Simplify dm_probe_devices()
+Date: Mon, 21 Oct 2024 17:51:30 +0200
+Message-ID: <20241021155133.29557-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241021155133.29557-1-sjg@chromium.org>
 References: <20241021155133.29557-1-sjg@chromium.org>
@@ -92,39 +90,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is enabled by all boards, so drop the condition.
+There is no point in checking the pre_reloc flag, since devices not
+marked as pre-reloc will not have been bound, so won't exist yet.
+
+There doesn't seem to be any point in checking if the device has a
+valid devicetree node either, so drop that too.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/board_f.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ drivers/core/root.c | 16 +++++-----------
+ 1 file changed, 5 insertions(+), 11 deletions(-)
 
-diff --git a/common/board_f.c b/common/board_f.c
-index f1bd70fdd6c..8684ed71284 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -811,9 +811,11 @@ static int initf_bootstage(void)
+diff --git a/drivers/core/root.c b/drivers/core/root.c
+index 7a714f5478a..2d4f078f97f 100644
+--- a/drivers/core/root.c
++++ b/drivers/core/root.c
+@@ -281,26 +281,20 @@ void *dm_priv_to_rw(void *priv)
+ }
+ #endif
  
- static int initf_dm(void)
+-static int dm_probe_devices(struct udevice *dev, bool pre_reloc_only)
++static int dm_probe_devices(struct udevice *dev)
  {
--#if defined(CONFIG_DM) && CONFIG_IS_ENABLED(SYS_MALLOC_F)
- 	int ret;
+-	ofnode node = dev_ofnode(dev);
+ 	struct udevice *child;
+-	int ret;
+-
+-	if (pre_reloc_only &&
+-	    (!ofnode_valid(node) || !ofnode_pre_reloc(node)) &&
+-	    !(dev->driver->flags & DM_FLAG_PRE_RELOC))
+-		goto probe_children;
  
-+	if (!CONFIG_IS_ENABLED(SYS_MALLOC_F))
-+		return 0;
+ 	if (dev_get_flags(dev) & DM_FLAG_PROBE_AFTER_BIND) {
++		int ret;
 +
- 	bootstage_start(BOOTSTAGE_ID_ACCUM_DM_F, "dm_f");
- 	ret = dm_init_and_scan(true);
- 	bootstage_accum(BOOTSTAGE_ID_ACCUM_DM_F);
-@@ -825,7 +827,6 @@ static int initf_dm(void)
+ 		ret = device_probe(dev);
  		if (ret)
  			return ret;
  	}
--#endif
+ 
+-probe_children:
+ 	list_for_each_entry(child, &dev->child_head, sibling_node)
+-		dm_probe_devices(child, pre_reloc_only);
++		dm_probe_devices(child);
  
  	return 0;
  }
+@@ -337,7 +331,7 @@ static int dm_scan(bool pre_reloc_only)
+ 	if (ret)
+ 		return ret;
+ 
+-	return dm_probe_devices(gd->dm_root, pre_reloc_only);
++	return dm_probe_devices(gd->dm_root);
+ }
+ 
+ int dm_init_and_scan(bool pre_reloc_only)
 -- 
 2.43.0
 
