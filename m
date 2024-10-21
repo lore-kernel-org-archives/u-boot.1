@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE7ADD15DB8
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 16:32:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16B04D15DB8
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 16:32:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADC4488F47;
-	Mon, 21 Oct 2024 18:32:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1503C88ED7;
+	Mon, 21 Oct 2024 18:32:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UvtwsQmU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lbv7c20Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D003588F28; Mon, 21 Oct 2024 18:32:30 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 6CBF48657F; Mon, 21 Oct 2024 18:32:34 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E909A88ED7
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:32:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCCBA88F4F
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:32:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5c9850ae22eso5912229a12.3
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 09:32:28 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a9a3dc089d8so651809766b.3
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 09:32:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729528348; x=1730133148; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HwpvIpqAp0rV3JyPztje/PLzxaWXxYn7zexG7+OM9O0=;
- b=UvtwsQmUGICr1okBvWq9Edv/QmvWxsK51XgQ5vOYqX13nFY762m7GOTS9yJ7dV1w0F
- DWZSGCC64Ebff8I3FEIThqzLdkfu8XDdYPd36sxfcjRILCcNiakH7a0PfIe7D9eomlsr
- eBJAzDan7AHnJnP7CzVhO7iXt+Ni1Wn4W7qdA=
+ d=chromium.org; s=google; t=1729528351; x=1730133151; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=68cLQNLfbCHq103cxCCpcoRZDFwiQ34jShVpaksg8xs=;
+ b=lbv7c20Qimo/9+UZPh/rtCkKDfmPNjwWSL4z22rITMis3YxbFii5doKzoYYCV92pk6
+ 20c6mvUl7gUfOtA/zPaufbQdm/4uJnVETCa4yQhig3i4677hNb5+UHsFvF3OOCzZ1hcF
+ gyVZxpWgWNATX8v6MlKMT2zHylQV+8k/Wilt4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729528348; x=1730133148;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=HwpvIpqAp0rV3JyPztje/PLzxaWXxYn7zexG7+OM9O0=;
- b=MeSE5ewRZaM3v4/JGkgG27vqurfHg1DeoWcSQWoZzuKMV9Ex2wYV/RcPOOplNMTIM9
- LeIkuDcNsOYcZbix+m2Ujw1N2Apfu6eAbRkKpccEyGUuHL9tFL3iYnq8EQO9Cy0n7QH7
- YyeIVnemzHwtMylkGuVgamlpbQogIu+A0llJOtUMIygyTsd956+w3PJTYZRj2kbgwk2c
- g/mPuHMTAMk3UD+KhVMyVX/FyNqFm9oYELgg5KTZuHVVq6xeQcixHFbYyS1zzBXjHuw4
- aLQ8l4VgGKdQIx1oQ7ubhAcQ0to4KB48kYGYpOOy16NnaLQPqrWaZX28SNNtaukHjFZS
- 2WVQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWcBf4F6TSeFPxA6fMTEUXrMNRZKGKrT5hOv3GjrsT7V9AP4fWjy8X6Ppjn/L9VrNkBA+E4Kag=@lists.denx.de
-X-Gm-Message-State: AOJu0YwMYxq0kcqBHbUKwRbArGgNYZBdFxr90Me78QkMiQgSYJY6Rgzz
- W3LQpAMDrhJ75X3fvQGNDU4jmu5yBc9dx936iLta6+oVxQ4FCpv9QA8s0ZXpQ4UkQF3j9xowzT2
- bzuc0aTcvil2XBKYOAfOhvKcWGrx78jzLb2/j0tcMP5bBQ010sW1K
-X-Google-Smtp-Source: AGHT+IEIJNIL8tXpZ11t9Df7n67bpBR5biLR2FnqjehoMVBkeUpSyPEMsWbHD3vUfFh6iokMCNhy6z668+Kc7Mm1Mac=
-X-Received: by 2002:a17:907:3fa7:b0:a9a:9b1:f972 with SMTP id
- a640c23a62f3a-a9a69c8fcaamr1236594466b.40.1729528348405; Mon, 21 Oct 2024
- 09:32:28 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729528351; x=1730133151;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=68cLQNLfbCHq103cxCCpcoRZDFwiQ34jShVpaksg8xs=;
+ b=TTxz1ol3Y10OgB75fzwQSq3Xm4X1pmicKwHLeEpJO9heWthQfsyX59n0rGAvkwOFeP
+ fslyIoqbJ5rQv9GWiCJaMbsWZyivn2fHsB8HwpD9RdC1CtD0yPlCan2bKUB4XVkV/Dkb
+ sYmLa3pHMF+EkRqysKDxaaX7Urd8xQHVNh/V/aT9u9TF9EKMJC/Q8kewHgvLsB/6UAUq
+ OuloGYaDBgKOVXzxtQUf/I2piLPHInH/T5uxGQq8v9j1NWPWw+wMT/xyqSUY6sQqTS6r
+ Zph2dqeV3+N5dDH3G3Y3LghJXP62iexvEKRPW3bMXRjWxx/EJlsOpJYt/WL7uPUPwKxQ
+ jmqg==
+X-Gm-Message-State: AOJu0YyzIAo+b3M0yyRm7Org9Fq5+iAfpkA1dJ2fN5kSBrMHKec19kTs
+ okuLxl2Bus7uTec5MFrXQU98zMbuuwpG5JXakyEYv1bCwANPl4TYBsWIzvIgK3fPr3Nsnyf08SK
+ xHiPumlFmbzNBHY195z2jDbugXPq08N7oC9bR
+X-Google-Smtp-Source: AGHT+IHU6EArF6FBL/G54suctm0OQucqgB+J9QDxBf9aGFgzlZKt27IWWKxN4VT7JFVv59ynllqsuyokyd0SNIdqesg=
+X-Received: by 2002:a17:907:7d8e:b0:a99:4f40:3e82 with SMTP id
+ a640c23a62f3a-a9a69773b68mr1351934166b.7.1729528351313; Mon, 21 Oct 2024
+ 09:32:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241021135633.2958463-1-andriy.shevchenko@linux.intel.com>
-In-Reply-To: <20241021135633.2958463-1-andriy.shevchenko@linux.intel.com>
+References: <20241021134450.22985-1-sjg@chromium.org>
+ <20241021143336.GG4959@bill-the-cat>
+In-Reply-To: <20241021143336.GG4959@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Oct 2024 18:32:13 +0200
-Message-ID: <CAFLszTitzPHYq8CzbjfA9TMkSX1V8q4TT3x=roLkTtCS4isYoQ@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] cmd: nvedit: Mark a few functions static
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Mon, 21 Oct 2024 18:32:18 +0200
+Message-ID: <CAFLszTjK=uw61U_WaqLjBX1JFCC15Ee2dRBm_qGUEsnjqiqpEw@mail.gmail.com>
+Subject: Re: [PATCH] CI: Add a test for building without CMDLINE
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,69 +88,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 21 Oct 2024 at 15:56, Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
->
-> Some functions are not used anywhere except the same file
-> where they are defined. Mark them static. This helps avoiding
-> the compiler warnings:
->
->   cmd/nvedit.c:201:5: warning: no previous prototype for =E2=80=98do_env_=
-ask=E2=80=99 [-Wmissing-prototypes]
->   cmd/nvedit.c:315:5: warning: no previous prototype for =E2=80=98do_env_=
-callback=E2=80=99 [-Wmissing-prototypes]
->   cmd/nvedit.c:384:5: warning: no previous prototype for =E2=80=98do_env_=
-flags=E2=80=99 [-Wmissing-prototype ]
->
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-> ---
->  cmd/nvedit.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->
+Hi Tom,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-
-> diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-> index 98a687bcabbd..0bd4799dc5a2 100644
-> --- a/cmd/nvedit.c
-> +++ b/cmd/nvedit.c
-> @@ -198,7 +198,7 @@ static int do_env_set(struct cmd_tbl *cmdtp, int flag=
-, int argc,
->   * Prompt for environment variable
->   */
->  #if defined(CONFIG_CMD_ASKENV)
-> -int do_env_ask(struct cmd_tbl *cmdtp, int flag, int argc, char *const ar=
-gv[])
-> +static int do_env_ask(struct cmd_tbl *cmdtp, int flag, int argc, char *c=
-onst argv[])
->  {
->         char message[CONFIG_SYS_CBSIZE];
->         int i, len, pos, size;
-> @@ -312,8 +312,8 @@ static int print_active_callback(struct env_entry *en=
-try)
->  /*
->   * Print the callbacks available and what they are bound to
->   */
-> -int do_env_callback(struct cmd_tbl *cmdtp, int flag, int argc,
-> -                   char *const argv[])
-> +static int do_env_callback(struct cmd_tbl *cmdtp, int flag, int argc,
-> +                          char *const argv[])
->  {
->         struct env_clbk_tbl *clbkp;
->         int i;
-> @@ -381,7 +381,7 @@ static int print_active_flags(struct env_entry *entry=
-)
->  /*
->   * Print the flags available and what variables have flags
->   */
-> -int do_env_flags(struct cmd_tbl *cmdtp, int flag, int argc, char *const =
-argv[])
-> +static int do_env_flags(struct cmd_tbl *cmdtp, int flag, int argc, char =
-*const argv[])
->  {
->         /* Print the available variable types */
->         printf("Available variable type flags (position %d):\n",
-> --
-> 2.43.0.rc1.1336.g36b5255a03ac
+On Mon, Oct 21, 2024, 16:33 Tom Rini <trini@konsulko.com> wrote:
 >
+> On Mon, Oct 21, 2024 at 03:44:49PM +0200, Simon Glass wrote:
+>
+> > Something this breaks, so add a test to keep it working. Since sandbox
+> > enables a lot of options, it is a good board to use.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  .azure-pipelines.yml |  8 ++++++++
+> >  .gitlab-ci.yml       | 11 +++++++++++
+> >  2 files changed, 19 insertions(+)
+>
+> I don't like this because "sandbox" is one of the longest run-time
+> build options due to all of the tests it runs. And given how we break
+> down the jobs this will make a further bottleneck. Can we just disable
+> CMDLINE in one of the existing sandbox defconfigs instead please?
+> Perhaps sandbox_spl since that only does SPL related pytests?
+
+Actually we do boot into U-Boot proper as some tests need to check
+that SPL did the right thing.
+
+Note that this patch doesn't run any tests at all. It just tries to
+build sandbox without CMDLINE
+
+Regards,
+Simon
