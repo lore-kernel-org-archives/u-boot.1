@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E15CFD0E6F4
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 11:39:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D42E4D0E6F7
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 11:39:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00B6788F20;
-	Mon, 21 Oct 2024 13:39:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF12288F4F;
+	Mon, 21 Oct 2024 13:39:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O2MbTcMT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RTy9U2qN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E38AB88F31; Mon, 21 Oct 2024 13:38:55 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id B268488CFB; Mon, 21 Oct 2024 13:38:56 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D5C688F19
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 13:38:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA7C3888D5
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 13:38:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a7aa086b077so498067766b.0
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 04:38:53 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-539f8490856so4555103e87.2
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 04:38:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729510732; x=1730115532; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729510734; x=1730115534; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lFSfBmIxA0qB/rInPVI4iqY30iI4mZqZ/CmiDf12jcU=;
- b=O2MbTcMTdzoXQ0hchPY/KhydpPUODHh6n7DlxqeDJmfAo16XiRNUeodhseEfuMfNbc
- Zdv/Vr2A18uV3Ay3rTckg5QbTN7iiq1ZS88gdtsg5lmVCX9Xdha+QXn9TfQ13HEDIIKW
- PIHnGWr2keCV6+k6+HyFzaWHwUqMtACnQcL3M=
+ bh=otqF2oEh8JLFj60TrtdrZO87CDnNFz0mj2V81/2ma7o=;
+ b=RTy9U2qN5qsyqdloJbCgvUlzW39du3djzduLDorjA0CEHYvhLJW1C/NQoVqB6qv59x
+ F0PABRBQDKuGLRHN+60FVeM5kE+RjKlf/7sCgSiqlXhYTtX8nCZXaTtSBhQLR4c06RMD
+ +qO2udw+6PnbnNjyf4QUZDzyMv5niQrlP5qkY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729510732; x=1730115532;
+ d=1e100.net; s=20230601; t=1729510734; x=1730115534;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lFSfBmIxA0qB/rInPVI4iqY30iI4mZqZ/CmiDf12jcU=;
- b=cWRZ0l8Je3hiErMlkKOJcPMn2v+zTjc7gzeKx0dwQn29rnED0GvbxxNRBf+u6VKEvs
- f0RilMbi9UxTpwTEd/1iCK014p4ByuLOr24fu6CnLXYfgBQrgMaH0357TeHayM+DDlxF
- 3B16hEN6GnPWwoKaL/YtoXCVkDWMfE/fAGxdLX1Q/87e1OeOUGFRrWUJ098l24m4PgAq
- sLrBgsbovXG5ZQ32XjCVBABdgLOyiJVTwHaK14cmGNoxOwTJLvjhct1COMS1+rfs41Oa
- cJzQOvAS5iy7wd2AL5fXr75Jdl4ZGXaBIaT8Qqp8A09OjWft8sDMtA8/ThKWkJhZzh9j
- 8/tQ==
-X-Gm-Message-State: AOJu0YzbCyW7bmIDsHtbFY8dMwt9DyNn4BSisFKf9MxwgncCxyNrFNKn
- 9IeZQE6X1DHTYYvFqdD5u6FkfcOBkQB4CFBfrOQIvcGDxsPVnIeawE8ftYOXoly25t6eeD20M/+
- GKiiw
-X-Google-Smtp-Source: AGHT+IFP+A01NnnlaPGyYg58sju4YizuZDQ/Jw7Noetg/r93krhIuNiaEgYbGi2sEkWJ3BTkZCAFsg==
-X-Received: by 2002:a17:907:86ab:b0:a9a:2afc:e4da with SMTP id
- a640c23a62f3a-a9a69cdee30mr1049830266b.63.1729510732174; 
- Mon, 21 Oct 2024 04:38:52 -0700 (PDT)
+ bh=otqF2oEh8JLFj60TrtdrZO87CDnNFz0mj2V81/2ma7o=;
+ b=wKBu8Zh6ZwMZraWbmnwgtoPt5KVaruMOYrX7qDlkH6oPRKn2YTmyqKOEx/JOyFlXG1
+ 5D2DtPRQ152lt9s/Lw++/WpFOfAwO46PSHjSATM75I8ACLmD1wI4bzow/iFy/Es6ZQMp
+ kNpY4S+2jMgvt9YBugiyagNAeA8H3jh2mDzED1MoD39kywUibp4nK43ZI4mYeh+nRQFF
+ kHfRbndlMqSqMlcGcy7X6WMJD/oi1xdjW7+rdB5DB6aOJI8T3LhatIxDu2HKATTf/JIG
+ 25Y0vMEzHPHmECNrE5AAnJCcl5D5c9h/yrGcCsfluH7HwhqqXYw9I9V/CDf4KGqcug6E
+ DsyA==
+X-Gm-Message-State: AOJu0Yy/2aU2BqGOaNWi+FNni7yzQ1zIfLQ80dJyEWBdAtUjTSXxxbEH
+ H7SaTWyUNiOC575wccRcvCFZR5rAkwm5L99gxEGm3qM39ri7SxD1smyKkwe4mggr4y/A2j6b+UB
+ hYWYf
+X-Google-Smtp-Source: AGHT+IGsVCUQBS2j1GMcoKyGGKPDQr0hwNdKcbjWgEh3AmvWKSQYJH+Xh/6RsSyWhA3tga98InRk3Q==
+X-Received: by 2002:a05:6512:1108:b0:539:964c:16b4 with SMTP id
+ 2adb3069b0e04-53a154fb01bmr5842491e87.58.1729510733438; 
+ Mon, 21 Oct 2024 04:38:53 -0700 (PDT)
 Received: from chromium.org (43-114-103-145.static.glaslokaal.nl.
  [145.103.114.43]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a91571ea5sm191604366b.160.2024.10.21.04.38.51
+ a640c23a62f3a-a9a91571ea5sm191604366b.160.2024.10.21.04.38.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Oct 2024 04:38:51 -0700 (PDT)
+ Mon, 21 Oct 2024 04:38:52 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>
-Subject: [PATCH v2 03/25] mx23_olinuxino: Drop status-LED code
-Date: Mon, 21 Oct 2024 13:38:11 +0200
-Message-ID: <20241021113839.318572-4-sjg@chromium.org>
+ Marek Vasut <marex@denx.de>, Samuel Holland <samuel@sholland.org>
+Subject: [PATCH v2 04/25] mx23_olinuxino: pinephone: Enable LED
+Date: Mon, 21 Oct 2024 13:38:12 +0200
+Message-ID: <20241021113839.318572-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241021113839.318572-1-sjg@chromium.org>
 References: <20241021113839.318572-1-sjg@chromium.org>
@@ -89,40 +89,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is not used anymore, so drop it.
+Drop the STATUS_LED options and enable LED and LED_BOOT instead, since
+this is the new way to access the LED functionality.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Add a patch to enable LED and LED_BOOT for these boards
 
- board/olimex/mx23_olinuxino/mx23_olinuxino.c | 7 -------
- 1 file changed, 7 deletions(-)
+ configs/mx23_olinuxino_defconfig | 10 ++--------
+ configs/pinephone_defconfig      |  7 ++-----
+ 2 files changed, 4 insertions(+), 13 deletions(-)
 
-diff --git a/board/olimex/mx23_olinuxino/mx23_olinuxino.c b/board/olimex/mx23_olinuxino/mx23_olinuxino.c
-index b2bb6678c23..78136c1620a 100644
---- a/board/olimex/mx23_olinuxino/mx23_olinuxino.c
-+++ b/board/olimex/mx23_olinuxino/mx23_olinuxino.c
-@@ -13,9 +13,6 @@
- #include <asm/arch/imx-regs.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/sys_proto.h>
--#ifdef CONFIG_LED_STATUS
--#include <status_led.h>
--#endif
- #include <linux/delay.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
-@@ -61,9 +58,5 @@ int board_init(void)
- 	/* Adress of boot parameters */
- 	gd->bd->bi_boot_params = PHYS_SDRAM_1 + 0x100;
- 
--#if defined(CONFIG_LED_STATUS) && defined(CONFIG_LED_STATUS_BOOT_ENABLE)
--	status_led_set(CONFIG_LED_STATUS_BOOT, CONFIG_LED_STATUS_STATE);
--#endif
--
- 	return 0;
- }
+diff --git a/configs/mx23_olinuxino_defconfig b/configs/mx23_olinuxino_defconfig
+index 3016f750e64..c1319077891 100644
+--- a/configs/mx23_olinuxino_defconfig
++++ b/configs/mx23_olinuxino_defconfig
+@@ -39,14 +39,8 @@ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="uImage"
+ CONFIG_VERSION_VARIABLE=y
+ CONFIG_MXS_GPIO=y
+-CONFIG_LED_STATUS=y
+-CONFIG_LED_STATUS_GPIO=y
+-CONFIG_LED_STATUS0=y
+-CONFIG_LED_STATUS_BIT=778
+-CONFIG_LED_STATUS_STATE=2
+-CONFIG_LED_STATUS_BOOT_ENABLE=y
+-CONFIG_LED_STATUS_BOOT=0
+-CONFIG_LED_STATUS_CMD=y
++CONFIG_LED=y
++CONFIG_LED_BOOT=y
+ CONFIG_MMC_MXS=y
+ CONFIG_CONS_INDEX=0
+ CONFIG_DM_SERIAL=y
+diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
+index 9d39204a439..272fce1c1a4 100644
+--- a/configs/pinephone_defconfig
++++ b/configs/pinephone_defconfig
+@@ -11,8 +11,5 @@ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+ CONFIG_PINEPHONE_DT_SELECTION=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
+-CONFIG_LED_STATUS=y
+-CONFIG_LED_STATUS_GPIO=y
+-CONFIG_LED_STATUS0=y
+-CONFIG_LED_STATUS_BIT=114
+-CONFIG_LED_STATUS_STATE=2
++CONFIG_LED=y
++CONFIG_LED_BOOT=y
 -- 
 2.43.0
 
