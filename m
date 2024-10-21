@@ -4,91 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5374FD17123
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 18:21:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93FD0D17123
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 18:37:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B529888E8A;
-	Mon, 21 Oct 2024 20:21:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C826388A3C;
+	Mon, 21 Oct 2024 20:37:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V74Rkv4B";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cMt96VCi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FCA888EA7; Mon, 21 Oct 2024 20:21:27 +0200 (CEST)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id AEEF588E8A; Mon, 21 Oct 2024 20:37:35 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BD6F88E8A
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 20:21:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAD6388A3C
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 20:37:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-460ad0440ddso29926081cf.3
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 11:21:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5c40aea5c40so194694a12.0
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 11:37:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729534884; x=1730139684; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ntIzIBWOqGNlE3vetd58BhSO27RpaetG+XLXAesn1AU=;
- b=V74Rkv4B59nDG6BdIeXkeLKGOrfwKKSe2baf0ZnlnKLURWA7QUd3/jV7iNgFoyhLZF
- 15+SQ8Rd4Z/yynNikxw6GNZtMFV/LsW0WfqsN7wvooUN7f50m+HHk6BZj/v85wsxwERL
- xwgsbbJj8l3tUQiHZDkiGPsT+W5kaGpof4lOM=
+ d=gmail.com; s=20230601; t=1729535851; x=1730140651; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EuzpcWRaJYRSKofzownP23Z2oCi6lTTr6q09TCaUUP0=;
+ b=cMt96VCi+8SDtcPlCxIpJrHNm61Mbkv8psdQEjdMJAOKsyQCAw2DRYs/1duEvNLeIA
+ 1CWBAx3HU/rVF9f5oqnOLR92YWpuHwY0uSj7XZUPWnUDSONpMR80BOfPZ+e0zRmMXbWl
+ 9AL+xs7nBFM9w6So3jENmou1QLIbFm6BVLuIesbiHpkcDTfkTy6Y6XS1mkF2PtI0/c3c
+ WKJgkgtlk0PHXl/tmjak+56SdtTAyV1yabJy1M5+whjrJ4avDt5K5ZHJZnS8Cge5P47G
+ z++URtttMY2xXwIGLOk18yqmNgOzbkwj7GGYEJb4Sr0/xBLcW16BbBIWaQsxsYNU83Xb
+ 47tA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729534884; x=1730139684;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ntIzIBWOqGNlE3vetd58BhSO27RpaetG+XLXAesn1AU=;
- b=M/Txt9Gyd3PxPPXsVeWt9oOOmQTe3R9BLC8jbfgx0Ry/h/vWR2gHGIzrWKrJMfaTha
- 9K1xT7xpQOUzHHJ5x/mGfz+Q//utiRmu6RzII20Vdizl+bEzLesbH/IwDhY+oLQneIBy
- pTENOeSkv0bc2oI/e5N3iwch+fBtfoJVxk1Pz9bdAU3ca5BDwNzEw58Xeuvq+l9Se/6m
- lS63eE8DGEMvtpYK4dWjRsSHjg7dG0HKbmFgHGAwc5XQtKmGLtYMvOLDsxSH1tPTynXh
- 0y4q91BuTqeeTLavCA2/sPQce7KkPGlg5VMfobgX5GEg7k5auIhLoR+Nr1u186aUcMht
- CtBg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWedKPC8YSDskacgsAs+O8+a5OQSUbP6ExosJNPBPxOCdMk7qiF3vcHJZSVUYTbs56JELED/aU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwC6Eg7m8LxeFN8Y1QnbickmUQfPRmRtV1pz9jlegn7TrI9bYbm
- NjFcctgVXykdE+R4JYLZkV2R0Mfmgbanon6gIezEpnVb4ykenyl06l8IWbsWN64=
-X-Google-Smtp-Source: AGHT+IFvY+4NqjuyyZCypDCXyERJxZnCcywHx4bD6H5HeOSHlS8gEVXYnJBGC8UFWCrUcHrXXcveLw==
-X-Received: by 2002:a05:622a:2443:b0:460:a6f8:8588 with SMTP id
- d75a77b69052e-460aedfe6b0mr212535831cf.50.1729534884049; 
- Mon, 21 Oct 2024 11:21:24 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-460d3dae6f5sm20347181cf.92.2024.10.21.11.21.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Oct 2024 11:21:23 -0700 (PDT)
-Date: Mon, 21 Oct 2024 12:21:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Jonas Karlman <jonas@kwiboo.se>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Marek Vasut <marex@denx.de>, Svyatoslav <clamor95@gmail.com>,
- Artur Rojek <artur@conclusive.pl>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 3/3] common: Move autoprobe out to board init
-Message-ID: <20241021182119.GS4959@bill-the-cat>
-References: <20241021155133.29557-1-sjg@chromium.org>
- <20241021155133.29557-4-sjg@chromium.org>
- <81b0a377-6669-46c6-9da8-c83d9758587e@kwiboo.se>
+ d=1e100.net; s=20230601; t=1729535851; x=1730140651;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EuzpcWRaJYRSKofzownP23Z2oCi6lTTr6q09TCaUUP0=;
+ b=aTxbmBHWn8nbpyNyQ37cHisNgk81fpJqx+UadNdqAYt8DpcOSZSlZ8ETnvTt2W5j7P
+ muZAMSc9ExEBrVcttNotr45ilufOK1QSIDwPxQ48mMXJP2EGDPFrj1cbYr51auXlgwyY
+ 3JBEdHkBeaNRJyS4oJg/GJsldM/RcUSQCK+waIT+h5NhY2fLgM7uaBA+Fj+K7CbzyW57
+ RLNx7k7PwF/wYiCwbFuEqMcn9hE9H8U96/RpZOimMOd7cM+SS0wIUYQ793nNvQNasVK6
+ 8DUcYP6Bq4+vgtKqPUuegMDts+Pn1rxDK2pemE5zg/SUDjNINsyNXx/01x2U9lyLsX8j
+ plGw==
+X-Gm-Message-State: AOJu0Yx5zalCmZWiLmsKjck8NErpmFkUt9BDFnIJOgZJOIyJunOhaMim
+ Q5eMGCBqgv6HSqKrrTjfig8+WMvzHH2xC6NPiU98dOZ7UBaE941Rnl0YEvtv6chg76JjCyJnoXv
+ w6Ea6Wx8eAwwgAOTYS3kln1DO614=
+X-Google-Smtp-Source: AGHT+IGQmJJuEEVV6958VxBzFoIm07vpvmO0egurE/bWDe1UDhk2Syzq44J0X35z8MUQjWb8SyPRnLfRP+lCBrGycQU=
+X-Received: by 2002:a05:6402:270c:b0:5c9:813a:b1c1 with SMTP id
+ 4fb4d7f45d1cf-5cb7944cd65mr663940a12.1.1729535850943; Mon, 21 Oct 2024
+ 11:37:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oAMWXN2eFLAFRkqU"
-Content-Disposition: inline
-In-Reply-To: <81b0a377-6669-46c6-9da8-c83d9758587e@kwiboo.se>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241021113839.318572-1-sjg@chromium.org>
+ <20241021113839.318572-5-sjg@chromium.org>
+In-Reply-To: <20241021113839.318572-5-sjg@chromium.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 21 Oct 2024 19:37:19 +0100
+Message-ID: <CALeDE9MNqjWFuw+08Wzx+KcpTDDjKQA-uJ_8LNj4KEL4UJwGfQ@mail.gmail.com>
+Subject: Re: [PATCH v2 04/25] mx23_olinuxino: pinephone: Enable LED
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Marek Vasut <marex@denx.de>, Samuel Holland <samuel@sholland.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,49 +87,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---oAMWXN2eFLAFRkqU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Drop the STATUS_LED options and enable LED and LED_BOOT instead, since
+> this is the new way to access the LED functionality.
 
-On Mon, Oct 21, 2024 at 06:10:09PM +0200, Jonas Karlman wrote:
-> Hi Simon,
->=20
-> On 2024-10-21 17:51, Simon Glass wrote:
-> > Rather than doing autoprobe within the driver model code, move it out to
-> > the board-init code. This makes it clear that it is a separate step from
-> > binding devices.
->=20
-> It could probably be good to mention that after this patch the events
-> EVT_DM_POST_INIT_R/F will happen before autoprobe instead of after.
+Should this be two commits? The subject reads as pinephone is part of
+another device.
 
-And in updating some part of doc/develop/driver-model/ and referencing
-the discussion on the list, in the commit message with some Link: lines.
-
-And I mention the last one because I fear this is related to the
-regulator changes from Marek and it would be good to hear from him that
-this series doesn't break his devices, for example.
-
---=20
-Tom
-
---oAMWXN2eFLAFRkqU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcWm58ACgkQFHw5/5Y0
-tyzI8gv+KbB/h9YmiUTk6nrtR7pzOguEN2n50Tt3VI62pLDgIANVyJdwtFz2ZgUy
-ftnCmTCg1IC5KxlU4H/c4OngRtkKeQ2tNaOlTDAKTkMUOw5tkErLCCMmCrxA9K1Z
-5RpLn6xv5FTusLG3x7Ac+NOPUYIODfxhpeTLMm9IZSrHhLo+P3EaDpPA0j6aMU9e
-QMaM6pkaRSRfWWeayXRx0S1556x593wIqyivbjHsGksmIStoqtdnthB2FQegUbB+
-B4wTmBDNm9xEwiEEo1fqZhI6v9vSBI10gINgiTXIOOg6joxqfaW1QAY/DFOHmSme
-9UsDWMVci4LDgQSa2vh1qssG1gJv+ypuacq0dCSOd0GTBZ5F69y5V/LBCD0LwyQL
-pwRQJrS+Ov6k1Dy9wYYOc17O6oXN0fOca84eG8hcwBUAc2jP983xlLEqARijCdau
-MKsAA7jrxLLowK+Npp845L2INk24N7PCez2/Yj4IuyKFFEHlOUIyTKuuYqrKKpgl
-WPpXmhmN
-=o/52
------END PGP SIGNATURE-----
-
---oAMWXN2eFLAFRkqU--
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> Changes in v2:
+> - Add a patch to enable LED and LED_BOOT for these boards
+>
+>  configs/mx23_olinuxino_defconfig | 10 ++--------
+>  configs/pinephone_defconfig      |  7 ++-----
+>  2 files changed, 4 insertions(+), 13 deletions(-)
+>
+> diff --git a/configs/mx23_olinuxino_defconfig b/configs/mx23_olinuxino_defconfig
+> index 3016f750e64..c1319077891 100644
+> --- a/configs/mx23_olinuxino_defconfig
+> +++ b/configs/mx23_olinuxino_defconfig
+> @@ -39,14 +39,8 @@ CONFIG_USE_BOOTFILE=y
+>  CONFIG_BOOTFILE="uImage"
+>  CONFIG_VERSION_VARIABLE=y
+>  CONFIG_MXS_GPIO=y
+> -CONFIG_LED_STATUS=y
+> -CONFIG_LED_STATUS_GPIO=y
+> -CONFIG_LED_STATUS0=y
+> -CONFIG_LED_STATUS_BIT=778
+> -CONFIG_LED_STATUS_STATE=2
+> -CONFIG_LED_STATUS_BOOT_ENABLE=y
+> -CONFIG_LED_STATUS_BOOT=0
+> -CONFIG_LED_STATUS_CMD=y
+> +CONFIG_LED=y
+> +CONFIG_LED_BOOT=y
+>  CONFIG_MMC_MXS=y
+>  CONFIG_CONS_INDEX=0
+>  CONFIG_DM_SERIAL=y
+> diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
+> index 9d39204a439..272fce1c1a4 100644
+> --- a/configs/pinephone_defconfig
+> +++ b/configs/pinephone_defconfig
+> @@ -11,8 +11,5 @@ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+>  CONFIG_PINEPHONE_DT_SELECTION=y
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
+> -CONFIG_LED_STATUS=y
+> -CONFIG_LED_STATUS_GPIO=y
+> -CONFIG_LED_STATUS0=y
+> -CONFIG_LED_STATUS_BIT=114
+> -CONFIG_LED_STATUS_STATE=2
+> +CONFIG_LED=y
+> +CONFIG_LED_BOOT=y
+> --
+> 2.43.0
+>
