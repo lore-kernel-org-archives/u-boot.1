@@ -4,54 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B25F9D17123
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 18:08:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0634D17122
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 18:12:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3293A88D56;
-	Mon, 21 Oct 2024 20:08:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4658F88EAF;
+	Mon, 21 Oct 2024 20:12:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="YWKWTrz1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tgHw40/j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 563A388EBB; Mon, 21 Oct 2024 20:08:38 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3416B88C60; Mon, 21 Oct 2024 20:12:41 +0200 (CEST)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7472788C60
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 20:08:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AC6688D51
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 20:12:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from localhost.localdomain (1.general.zfsdt.uk.vpn [10.172.194.136])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id F34D03F772; 
- Mon, 21 Oct 2024 18:08:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1729534116;
- bh=pX6T/gKMYKFXEq3+LYYgTpNpp0zXigVD28bnW3Mre+w=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=YWKWTrz1pFRsb7i4WNZt7aMtQ1oCJdwHStFsc1PRH60gmK8aVli45bUBxk0qtvMxK
- vcrL9lbJYM+vHkGu9jSVtXMMY7WRtKPV9ylMfE0qgt5ZVT9rr4h5RW2qlJ64FFU1cK
- TaPC0X2ueTo7uzrY7G2XX1jAGFXKEH80Iix2OX2Bbbf53+4ODzdhKxp7PLEBvIa0Jx
- 48Y9Vx8be+2baRYIgD9YPMTGl5+uHP+m3OYRlJezm8TdakgiGrgBkyMfk+85oZIgZF
- 0sNY/AMR3+GgGukSI3cLpKTPLcPEny8PhnD15pDRru+yTa3qHPsOr5OoAVrG1MSQv2
- K6qDSNZG9SMHQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] doc: update Python requirements
-Date: Mon, 21 Oct 2024 20:08:31 +0200
-Message-ID: <20241021180831.19120-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-46096aadaf0so31537291cf.2
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 11:12:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729534358; x=1730139158; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VivNwQAKIBGUyubFOOzlasfup7rr59h+gqKxJiaHULA=;
+ b=tgHw40/jS6TJm/dbwdOwQ1XmffPQB+8PnCb06tduiGtT4euRWifZ4zQDM6q1BAOa2F
+ 4D5IIRoUVS7ZhACXw9PqGavxBI/Q2dKUEOVvlsKSG7TNN4Cdt4v4qQ0pJuH/CLM0jy74
+ f3DHiJkvvEaT3oV+ubs+QrfJbwwbVi/2At1NU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729534358; x=1730139158;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VivNwQAKIBGUyubFOOzlasfup7rr59h+gqKxJiaHULA=;
+ b=Kqo7IBxiurxoRvTAd0Cl8M2BYTNOZXLTlR7z4E/5gCAqGw26IVPxrhyYik/AI74CZz
+ dj9qRCnlM67TJce5Bhl9WsmNwjyhdygAUm4LBbRFQgqI8sTBsqUTitjHWv75QyQ0FvgF
+ FWFIWrERFtGU8GPkshfD+H/JqxScLOAUyDhxSrKI5XcEEMgipmNyjTpds4SyNM5X5pfi
+ YoWH2+yRXZaDDYlufo/EjE2JLxEVHDnR5O41wVHZRGQv4K11aHEgg6GtvoSj+quN13qe
+ nAua6+tySp9LHXDYv1Tl5xBnJVocPNmfShiZ1dwe6RmxGAcH88J6mKosJHm6dJOQT9rG
+ gIsQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWpCpK8OiC27JIV7LgTkdfEdfeyn52a27kCxHZnh/Pxd2PPyri6JkcaNGTGouQchbJ9b9IXUtE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCQiQJ+Xmgf8dxeKFc26Wx5G/kjflI/vZhyOyOENj6mYsy3K3j
+ erMLR6i5XvxR+DOPTjdGat5W9UdYSO6H3ZlkEcxH/d5f2Js/ordFRCpKrUTD/tw=
+X-Google-Smtp-Source: AGHT+IHRbb+hoK2hQVLzYV8SGQS7vMfuZeECnwJdO+A6guhUWnjY3zXJG3u5jE5f6lX+M3SGugQ+lA==
+X-Received: by 2002:a05:622a:130b:b0:460:bb96:dd08 with SMTP id
+ d75a77b69052e-460fe675ef2mr9275381cf.5.1729534358009; 
+ Mon, 21 Oct 2024 11:12:38 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-460d3c40935sm20315621cf.13.2024.10.21.11.12.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Oct 2024 11:12:37 -0700 (PDT)
+Date: Mon, 21 Oct 2024 12:12:34 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Sean Anderson <sean.anderson@seco.com>, Nishanth Menon <nm@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Dhruva Gole <d-gole@ti.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] doc: do not include K3 boards twice in TOC
+Message-ID: <20241021181234.GQ4959@bill-the-cat>
+References: <20241021180101.18452-1-heinrich.schuchardt@canonical.com>
+ <20241021180101.18452-3-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="kcFgst6oY1YpVdP3"
+Content-Disposition: inline
+In-Reply-To: <20241021180101.18452-3-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,60 +95,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update Sphinx, sphinx-rtd-theme, and their dependencies.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- doc/sphinx/requirements.txt | 33 +++++++++++++++++----------------
- 1 file changed, 17 insertions(+), 16 deletions(-)
+--kcFgst6oY1YpVdP3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/sphinx/requirements.txt b/doc/sphinx/requirements.txt
-index 40dde599916..13e0327c0f6 100644
---- a/doc/sphinx/requirements.txt
-+++ b/doc/sphinx/requirements.txt
-@@ -1,25 +1,26 @@
--alabaster==0.7.16
--Babel==2.15.0
--certifi==2024.7.4
--charset-normalizer==3.3.2
--docutils==0.20.1
--idna==3.7
-+alabaster==1.0.0
-+babel==2.16.0
-+certifi==2024.8.30
-+charset-normalizer==3.4.0
-+docutils==0.21.2
-+idna==3.10
- imagesize==1.4.1
- Jinja2==3.1.4
--MarkupSafe==2.1.5
-+MarkupSafe==3.0.2
- packaging==24.1
-+pip==24.2
- Pygments==2.18.0
- requests==2.32.3
- six==1.16.0
- snowballstemmer==2.2.0
--Sphinx==7.3.7
--sphinx-prompt==1.8.0
--sphinx-rtd-theme==2.0.0
--sphinxcontrib-applehelp==1.0.8
--sphinxcontrib-devhelp==1.0.6
--sphinxcontrib-htmlhelp==2.0.5
-+Sphinx==8.1.3
-+sphinx-prompt==1.9.0
-+sphinx-rtd-theme==3.0.1
-+sphinxcontrib-applehelp==2.0.0
-+sphinxcontrib-devhelp==2.0.0
-+sphinxcontrib-htmlhelp==2.1.0
- sphinxcontrib-jquery==4.1
- sphinxcontrib-jsmath==1.0.1
--sphinxcontrib-qthelp==1.0.7
--sphinxcontrib-serializinghtml==1.1.10
--urllib3==2.2.2
-+sphinxcontrib-qthelp==2.0.0
-+sphinxcontrib-serializinghtml==2.0.0
-+urllib3==2.2.3
--- 
-2.45.2
+On Mon, Oct 21, 2024 at 08:01:01PM +0200, Heinrich Schuchardt wrote:
+> Sphinx writes a warning if a page is included twice in the table of
+> contents. Use references instead.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  doc/board/ti/k3.rst | 11 +++++++----
+>  1 file changed, 7 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+> index c3513f0aee2..5d01f487622 100644
+> --- a/doc/board/ti/k3.rst
+> +++ b/doc/board/ti/k3.rst
+> @@ -32,19 +32,22 @@ K3 Based SoCs
+> =20
+>     am62ax_sk
+>     am62x_sk
+> -   ../beagle/am62x_beagleplay
+> -   ../phytec/phycore-am62x
+> -   ../toradex/verdin-am62
+>     am62px_sk
+>     am64x_evm
+>     am65x_evm
+>     j7200_evm
+> -   ../beagle/j721e_beagleboneai64
+>     j721e_evm
+>     j721s2_evm
+>     j722s_evm
+>     j784s4_evm
+> =20
+> +K3 SoC based boards in other sections
+> +
+> +* :doc:`../beagle/am62x_beagleplay`
+> +* :doc:`../beagle/j721e_beagleboneai64`
+> +* :doc:`../phytec/phycore-am62x`
+> +* :doc:`../toradex/verdin-am62`
 
+Can we just make the changes to :doc: links be inline and keep the list
+sorted/ordered as-is? Or does that not read well once rendered?
+
+--=20
+Tom
+
+--kcFgst6oY1YpVdP3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcWmZIACgkQFHw5/5Y0
+tyykYAv/ZXTXKoc6qS3cX5+7n3dAzrK7ORTSDCgRt9lhFqZZC5dg9XAB8dP/yd4T
+MJHel1m+vQMMOQM2M1VffhbUU6rKA5whvKmfBPDYFaniRfK3lBjTdsT+ttFfWyE4
+CbqMtqNtPx4Z1mKb1Z6H3yk7sfveNMRdP03XtDS0/1f23HcdhTO1BvfrfotB3db0
+1NCno5ekDNTs3v57o3bbW/n0ORpYUp8jkr/aZldkzcRYV/SN0PgQM3DFvStXI8om
+zevGV52KV5xX27J0Y5O9dSHRdr00ajvGBx2OXo2Qz0wnPd8/YVyCAQY9PDCFg6Zs
+dhH6JfmZ4OixOrMlDIglUDqatVY5AwXnBgcIA2MeMkkPfuB+JDeHNJ1SuV96bUbm
+FVOFJGwlyN1ipwl3+pvIcXk2CHpg0/vxde5045E8e4jNZCx3NlAu1t2kQ0w4vxTv
+wkRHf4cUJeA97o3ybrM/pY6UX2xwU7W0QfX411lcY6nmqLZmILFJk7+4zCFomljL
++Sypr1NB
+=RxS5
+-----END PGP SIGNATURE-----
+
+--kcFgst6oY1YpVdP3--
