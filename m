@@ -4,62 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A827D3C934
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 01:33:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95B23D3C927
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 01:33:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB08A892B8;
-	Mon, 21 Oct 2024 03:32:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0CB87892DE;
+	Mon, 21 Oct 2024 03:32:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="EW09wCQV";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="dYWsx6Wc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AE0E892A9; Mon, 21 Oct 2024 03:32:44 +0200 (CEST)
-Received: from mail-m3275.qiye.163.com (mail-m3275.qiye.163.com
- [220.197.32.75])
+ id 6566F892A5; Mon, 21 Oct 2024 03:32:47 +0200 (CEST)
+Received: from mail-m3273.qiye.163.com (mail-m3273.qiye.163.com
+ [220.197.32.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C48AF892B8
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 03:32:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B724A891E6
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 03:32:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=EW09wCQV8Cp+7m+uOJPPgwKPW6n0yMQSU/V5AsungMz8fWf/z8wbVcyXkmhaSeCs6V9I6n320Q95b0crV1fmERd40/LOOlNOik+8Hh0sXjPLBTJ6cKY02nAtqnYK2NVDlVCryTzADE9A43R0+lf/HngTst88zoFectCU78DuAMA=;
+ b=dYWsx6Wc5bOR63T3ApM5VR7Yok1nSc23JAn2zBmDQcpAaqK8it0iOk42aBqeW0Eek2BxnKXyMXhEc2U3inG0qSinJBSvMQWJZP52XXdF6GLqCxaRKAN3g4EadHr7FlVgiGKxY5V69X+WJzMgmBdRr8wFPRqsINLmM5KoWym22zo=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=xW7oyjtW8Mq1iO3twhnWKswf/8hEWrq9VlccNbyKRqs=;
+ bh=xOEz8mHIj+1/NldW4g9dHau9Cb82h3NmhF9P8iwXa8Y=;
  h=date:mime-version:subject:message-id:from;
 Received: from yk?rock-chips.com
  (gy-adaptive-ssl-proxy-1-entmail-virt204.gy.ntes [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with SMTP id 3E83E52020F;
- Mon, 21 Oct 2024 09:32:14 +0800 (CST)
-Message-ID: <1bfc1d61-9f0c-4458-9063-fe27eb5c7808@rock-chips.com>
-Date: Mon, 21 Oct 2024 09:32:13 +0800
+ by smtp.qiye.163.com (Hmail) with SMTP id D1898520146;
+ Mon, 21 Oct 2024 09:32:10 +0800 (CST)
+Message-ID: <21a1fa55-4ce8-4822-a5e8-8bc7adf637ac@rock-chips.com>
+Date: Mon, 21 Oct 2024 09:32:10 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Kever Yang <kever.yang@rock-chips.com>
-Subject: Re: [PATCH v2 01/18] arm64: dts: rockchip: add PCIe supply regulator
- to Qnap-TS433
-To: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
- philipp.tomsich@vrull.eu, sjg@chromium.org
-Cc: ukleinek@debian.org
-References: <20241013192424.84280-1-heiko@sntech.de>
- <20241013192424.84280-2-heiko@sntech.de>
+Subject: Re: [PATCH 1/3] arm64: dts: rockchip: Correct vendor prefix for
+ Hardkernel ODROID-M1
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, Aurelien Jarno <aurelien@aurel32.net>,
+ Heiko Stuebner <heiko@sntech.de>
+References: <20241003194101.328231-1-jonas@kwiboo.se>
+ <20241003194101.328231-2-jonas@kwiboo.se>
 Content-Language: en-US
-In-Reply-To: <20241013192424.84280-2-heiko@sntech.de>
+In-Reply-To: <20241003194101.328231-2-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0hOSVYdTkseTklJSxgZQk5WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkhDHlZMH01MGEwaTkoeT0tWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a92acb4120903afkunm3e83e52020f
+X-HM-Tid: 0a92acb4094e03afkunmd1898520146
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PBw6UTo4CDIsAyhKKDgpGi4w
- MBIaFDZVSlVKTElCT0xPSEhNSE9PVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISUhPNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OjY6HBw4MTIqFygDOUlKThQx
+ DTUKFAlVSlVKTElCT0xPSEhITEpLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFIS0tMNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,63 +79,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/10/14 03:24, Heiko Stuebner wrote:
-> Add the vcc3v3-supply regulator and its link to the pcie controllers.
+On 2024/10/4 03:40, Jonas Karlman wrote:
+> The vendor prefix for Hardkernel ODROID-M1 is incorrectly listed as
+> rockchip. Use the proper hardkernel vendor prefix for this board, while
+> at it also drop the redundant soc prefix.
 >
-> Tested-by: Uwe Kleine-König <ukleinek@debian.org>
+> Fixes: fd3583267703 ("arm64: dts: rockchip: Add Hardkernel ODROID-M1 board")
+> Reviewed-by: Aurelien Jarno <aurelien@aurel32.net>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Link: https://lore.kernel.org/r/20240827211825.1419820-3-jonas@kwiboo.se
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-> Link: https://lore.kernel.org/r/20240723195538.1133436-2-heiko@sntech.de
 >
-> [ upstream commit: e0ec6d48226fb3d4df18895b56f0b7a94c0fe474 ]
+> [ upstream commit: 735065e774dcfc62e38df01a535862138b6c92ed ]
 >
-> (cherry picked from commit 59939b4343db08fa08098238160007e6ded72be9)
+> (cherry picked from commit e7259a2c4a6f2ebdfc96b8bbffc77fe67604b11f)
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   .../src/arm64/rockchip/rk3568-qnap-ts433.dts  | 21 +++++++++++++++++++
->   1 file changed, 21 insertions(+)
+>   dts/upstream/src/arm64/rockchip/rk3568-odroid-m1.dts | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-> index 6a998166003..07b4f095d76 100644
-> --- a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-> +++ b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-> @@ -12,6 +12,25 @@
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3568-odroid-m1.dts b/dts/upstream/src/arm64/rockchip/rk3568-odroid-m1.dts
+> index a337f547caf5..6a02db4f073f 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3568-odroid-m1.dts
+> +++ b/dts/upstream/src/arm64/rockchip/rk3568-odroid-m1.dts
+> @@ -13,7 +13,7 @@
+>   
 >   / {
->   	model = "Qnap TS-433-4G NAS System 4-Bay";
->   	compatible = "qnap,ts433", "rockchip,rk3568";
-> +
-> +	dc_12v: regulator-dc-12v {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "dc_12v";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <12000000>;
-> +		regulator-max-microvolt = <12000000>;
-> +	};
-> +
-> +	vcc3v3_pcie: regulator-vcc3v3-pcie {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc3v3_pcie";
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		enable-active-high;
-> +		gpios = <&gpio0 RK_PD4 GPIO_ACTIVE_HIGH>;
-> +		vin-supply = <&dc_12v>;
-> +	};
->   };
+>   	model = "Hardkernel ODROID-M1";
+> -	compatible = "rockchip,rk3568-odroid-m1", "rockchip,rk3568";
+> +	compatible = "hardkernel,odroid-m1", "rockchip,rk3568";
 >   
->   &gmac0 {
-> @@ -62,9 +81,11 @@
->   	status = "okay";
->   };
->   
-> +/* Connected to a JMicron AHCI SATA controller */
->   &pcie3x1 {
->   	/* The downstream dts has: rockchip,bifurcation, XXX: find out what this is about */
->   	reset-gpios = <&gpio0 RK_PC7 GPIO_ACTIVE_HIGH>;
-> +	vpcie3v3-supply = <&vcc3v3_pcie>;
->   	status = "okay";
->   };
->   
+>   	aliases {
+>   		ethernet0 = &gmac0;
