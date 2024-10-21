@@ -4,110 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92343D17148
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 23:47:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24484D17148
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 23:47:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8204C88FD4;
-	Tue, 22 Oct 2024 01:45:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 19E98890CE;
+	Tue, 22 Oct 2024 01:46:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ie7O1u/a";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GxbNLBB7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA0C788FB8; Mon, 21 Oct 2024 18:33:11 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 29DB388E41; Mon, 21 Oct 2024 15:56:08 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB9CB88E8A
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:33:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a99eb8b607aso490653266b.2
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 09:33:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729528387; x=1730133187; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=064QCBu1/ShiL/J+YYmRXBXRxKdwv3ZL17paOMyeo5Q=;
- b=Ie7O1u/ansd9T+Mb7/KyyQklFJwgVfV36IkITZ81rCXphiOtrPLFyUPas5wvJ+v+2H
- Eu6E8/mED/TSZRnPe4s4wAJ4uV++DqtX2q8fD83MZ9+hClV5LG68jzfL8Ge3n9P/NZ95
- VqkFvhYpUDaeQ4x8jAaScG0tEsmL8E6uI4tfM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729528387; x=1730133187;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=064QCBu1/ShiL/J+YYmRXBXRxKdwv3ZL17paOMyeo5Q=;
- b=h/VwNx31nApnGdL6YzVwFPesnItSRhuzwl+8Fs2wiqesPASznx1SWeo8w/ZyEit8js
- VYBxAAR2EcMsS7qBkHNPCklPqim2kuAnSttWspXz2H7hpMQBIudBgqkqpyOjhjlSb+2j
- p2Zg0gJShQwxd0bEmJrxXPEVPXrhDDuERtgE60GQICbWgM0iyYqA3EgAqxBC2GWE49KL
- x9Alp5tKagSiib0maX5+PdVqLc/Y98TzJd+GI7x6jG9BtrOYr8slVNfeQLe/xDkyv9sp
- w7G5TbSCCe4Ip9xZ2wEeo2BLcSn8g0jg9/CkOteAkfAtJ3TXC02ApYuzFUwBcMCKOFSw
- Y43g==
-X-Gm-Message-State: AOJu0Yx+Qd3/n6g08/vKuZO05F6xOUtNDwBJ4g9wFYELer04d1pH7en+
- wTKjPlEAeiEh/HcvwvWq9cK8mT2FYtn3HhBTnFnhTgri0E49tzJO+PGzxDS2ppQc+Z5aYVHjk/X
- uziqXjV/bF0Tgoa8tgMGRD/z3kmpy8Ng8yJ19
-X-Google-Smtp-Source: AGHT+IEQ54a+63hTpKSWV9lRii9Hw3TWdwfJ/can+lgau1uE5Ew2vI1+yNEBxq/vhqFzkp7LKzSaNeZafG38SoWGi3A=
-X-Received: by 2002:a17:907:6d0b:b0:a9a:e2b:1711 with SMTP id
- a640c23a62f3a-a9a694cbcb3mr1183189666b.0.1729528386965; Mon, 21 Oct 2024
- 09:33:06 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AB6B88F47
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 15:56:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+vasileios.bimpikas.analog.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 617BAA43394;
+ Mon, 21 Oct 2024 13:55:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E9B1BC4CEEB;
+ Mon, 21 Oct 2024 13:55:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1729518958;
+ bh=DFuyJXhVSXbEI+tLlHanSs7Xi28w4/18pvfEK0X+0tw=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=GxbNLBB7DvMsOnpnonFWMggtWI0n3/3uUokTrFhhFvY7Xi5nLtuz27AESNVegj24/
+ OWkSvqbJAv71axZMweyUhf82bTA+zNSGmhWHfFXfW8Xufde4mPyguUep1b8IO3VRq1
+ vE2LLCF0nJ880m646Z4DPv/zeqptEpG6nLBz+9Dz92skUV9KdaNMKPJQT4AjDcHrYB
+ DtpjfCcZjCLch2o/NKn8NO99JEuun1WLWfCyQsHcnD0lu8xEyYwb+/dKDe6zJt7mSo
+ EMNM1w2d/5SsbTc46Z+xjeNYnQ2OHKNF0SI8jWrnegDbASDdeOSDLZIQeK6lmi4Qaa
+ FAI/LjZG50/dg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id DDCCBD15D9B;
+ Mon, 21 Oct 2024 13:55:57 +0000 (UTC)
+From: Vasileios Bimpikas via B4 Relay
+ <devnull+vasileios.bimpikas.analog.com@kernel.org>
+Date: Mon, 21 Oct 2024 14:54:40 +0100
+Subject: [PATCH v2 09/11] remoteproc: Add in SHARC loading for ADI
+ SC5XX-family processors
 MIME-Version: 1.0
-References: <20241021114247.349863-1-sjg@chromium.org>
- <20241021114247.349863-2-sjg@chromium.org>
- <4b6297f7-4433-46c3-8661-4f68d7320c7f@linaro.org>
-In-Reply-To: <4b6297f7-4433-46c3-8661-4f68d7320c7f@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Oct 2024 18:32:55 +0200
-Message-ID: <CAFLszTg2zJ7ozumU+00824raKZZEN23cKmKbTiqu9wvprr6FoQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] fdt: Swap the signature for board_fdt_blob_setup()
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Aaron Williams <awilliams@marvell.com>, Alexander Graf <agraf@csgraf.de>, 
- Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Anup Patel <anup@brainfault.org>, Atish Patra <atishp@atishpatra.org>, 
- Bin Meng <bmeng.cn@gmail.com>, David Feng <fenghua@phytium.com.cn>, 
- E Shattow <lucent@gmail.com>, Eric Curtin <ecurtin@redhat.com>, 
- Francois Berder <fberder@outlook.fr>, Green Wan <green.wan@sifive.com>, 
- H Bell <dmoo_dv@protonmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Igor Opaniuk <igor.opaniuk@foundries.io>, "Ivan T. Ivanov" <iivanov@suse.de>, 
- James Hilliard <james.hilliard1@gmail.com>, Janne Grunau <j@jannau.net>, 
- Jerry Van Baren <vanbaren@cideas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Linus Walleij <linus.walleij@linaro.org>, 
- Liviu Dudau <liviu.dudau@foss.arm.com>, Marek Vasut <marex@denx.de>, 
- Mark Kettenis <kettenis@openbsd.org>, Matthias Brugger <mbrugger@suse.com>, 
- Michal Simek <michal.simek@amd.com>, Minda Chen <minda.chen@starfivetech.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Padmarao Begari <padmarao.begari@amd.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, 
- Peng Fan <peng.fan@nxp.com>, Peter Hoyes <Peter.Hoyes@arm.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Randolph <randolph@andestech.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Rick Chen <rick@andestech.com>, Sam Day <me@samcday.com>,
- Stefan Roese <sr@denx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, 
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, Tim Harvey <tharvey@gateworks.com>, 
- Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
- William Zhang <william.zhang@broadcom.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>, 
- u-boot-qcom@groups.io, uboot-stm32@st-md-mailman.stormreply.com, 
- =?UTF-8?Q?=C5=81ukasz_Stelmach?= <l.stelmach@samsung.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20241021-sc5xx-driver-series-v2-9-53e2472e11d0@analog.com>
+References: <20241021-sc5xx-driver-series-v2-0-53e2472e11d0@analog.com>
+In-Reply-To: <20241021-sc5xx-driver-series-v2-0-53e2472e11d0@analog.com>
+To: Tom Rini <trini@konsulko.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Greg Malysa <greg.malysa@timesys.com>, 
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Marek Vasut <marex@denx.de>, Heiko Schocher <hs@denx.de>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Stefan Roese <sr@denx.de>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1729518874; l=11411;
+ i=vasileios.bimpikas@analog.com; s=20240927; h=from:subject:message-id;
+ bh=zjd2V/Sp9m0zxPInJS/5pIZqX2nzuhlbK5I7/77T/EA=;
+ b=gbdbP5uazM0WSwRzIbBX+Vqy0WZ5hq4ZsxTq+ixAWDcTQJGeOZOb/GsB3CN9CRnWN/ZfK3hi1
+ t6gV+BVUIVpALLGIaEw0ytStjG3ShB+hhx03K0TqwxDGBVdzmaLsdbV
+X-Developer-Key: i=vasileios.bimpikas@analog.com; a=ed25519;
+ pk=JkXh+NeXYCpTenwrB0gg5fMpKEnagLOXdsLFiUrqZRo=
+X-Endpoint-Received: by B4 Relay for vasileios.bimpikas@analog.com/20240927
+ with auth_id=220
+X-Original-From: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
 X-Mailman-Approved-At: Tue, 22 Oct 2024 01:45:50 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -120,124 +93,376 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: vasileios.bimpikas@analog.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 
-On Mon, 21 Oct 2024 at 15:28, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Hi Simon,
->
-> On 21/10/2024 13:42, Simon Glass wrote:
-> > This returns a devicetree and updates a parameter with an error code.
-> > Swap it, since this fits better with the way U-Boot normally works. It
-> > also (more easily) allows leaving the existing pointer unchanged.
-> >
-> > No yaks were harmed in this change, but there is a very small code-size
-> > reduction.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
->
-> ...
->
-> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> > index 2ab2ceb5138..7a7a36831c3 100644
-> > --- a/arch/arm/mach-snapdragon/board.c
-> > +++ b/arch/arm/mach-snapdragon/board.c
-> > @@ -147,12 +147,11 @@ static void show_psci_version(void)
-> >    * or for supporting quirky devices where it's easier to leave the downstream DT in place
-> >    * to improve ABL compatibility. Otherwise, we use the DT provided by ABL.
-> >    */
-> > -void *board_fdt_blob_setup(int *err)
-> > +int board_fdt_blob_setup(void **fdtp)
-> >   {
-> >       struct fdt_header *fdt;
-> >       bool internal_valid, external_valid;
-> >
-> > -     *err = 0;
-> >       fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
-> >       external_valid = fdt && !fdt_check_header(fdt);
-> >       internal_valid = !fdt_check_header(gd->fdt_blob);
-> > @@ -170,7 +169,7 @@ void *board_fdt_blob_setup(int *err)
-> >       } else {
-> >               debug("Using external FDT\n");
-> >               /* So we can use it before returning */
-> > -             gd->fdt_blob = fdt;
-> > +             *fdtp = fdt;
->
-> I believe this is a breaking change. The qcom_parse_memory() call below
-> expects gd->fdt_blob to point to the in-use FDT. This is a bit of a
-> hack, but doing memory parsing this early simplifies things for us.
->
-> Additionally, this change doesn't make the function return -EEXIST when
-> it should.
+This adds the ability to load ldr-formatted files to the SHARC
+coprocessors using the rproc interface. Only a minimal subset
+of rproc functionality is supported: loading and starting
+the remote core.
 
-Hmm, OK, thanks. I wonder if there is another place where the memory
-can be parsed, rather than as a side-effect of this call. I will
-update this patch and try again.
+Secure boot and signed ldr verification are not available
+at this time through the U-Boot interface.
 
->
-> ...
->
-> > diff --git a/include/fdtdec.h b/include/fdtdec.h
-> > index 555c9520379..9e36acc7e9b 100644
-> > --- a/include/fdtdec.h
-> > +++ b/include/fdtdec.h
-> > @@ -1191,11 +1191,13 @@ int fdtdec_resetup(int *rescan);
-> >    *
-> >    * The existing devicetree is available at gd->fdt_blob
-> >    *
-> > - * @err: 0 on success, -EEXIST if the devicetree is already correct, or other
-> > + * @fdtp: Existing devicetree blob pointer; update this and return 0 if a
->
-> It doesn't looks like this is initialised before calling
-> board_fdt_blob_setup()?
->
-> Kind regards,
-> > + * different devicetree should be used
-> > + * Return: 0 on success, -EEXIST if the devicetree is already correct, 0 to use
-> > + * *@fdtp as the new devicetree, or other
-> >    * internal error code if we fail to setup a DTB
-> > - * @returns new devicetree blob pointer
-> >    */
-> > -void *board_fdt_blob_setup(int *err);
-> > +int board_fdt_blob_setup(void **fdtp);
-> >
-> >   /*
-> >    * Decode the size of memory
-> > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > index 60e28173c03..e876b17f9ad 100644
-> > --- a/lib/fdtdec.c
-> > +++ b/lib/fdtdec.c
-> > @@ -1706,11 +1706,16 @@ int fdtdec_setup(void)
-> >
-> >       /* Allow the board to override the fdt address. */
-> >       if (IS_ENABLED(CONFIG_OF_BOARD)) {
-> > -             gd->fdt_blob = board_fdt_blob_setup(&ret);
-> > -             if (!ret)
-> > +             void *blob;
-> > +
-> > +             ret = board_fdt_blob_setup(&blob);
-> > +             if (ret) {
-> > +                     if (ret != -EEXIST)
-> > +                             return ret;
-> > +             } else {
-> >                       gd->fdt_src = FDTSRC_BOARD;
-> > -             else if (ret != -EEXIST)
-> > -                     return ret;
-> > +                     gd->fdt_blob = blob;
-> > +             }
-> >       }
-> >
-> >       /* Allow the early environment to override the fdt address */
->
-> --
-> // Caleb (they/them)
->
+Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
+Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
+Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
+Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
+Co-developed-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
+Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
+Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
+Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+---
+ MAINTAINERS                          |   1 +
+ drivers/remoteproc/Kconfig           |  11 ++
+ drivers/remoteproc/Makefile          |   1 +
+ drivers/remoteproc/adi_sc5xx_rproc.c | 276 +++++++++++++++++++++++++++++++++++
+ 4 files changed, 289 insertions(+)
 
-Regards,
-Simon
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 8dcb1bd5619f79bbcee47b9c8928bc13223fb268..86a7f18f530c0fdabd015d49518841b0160bfdba 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -618,6 +618,7 @@ F:	drivers/gpio/gpio-adi-adsp.c
+ F:	drivers/i2c/adi_i2c.c
+ F:	drivers/net/dwc_eth_qos_adi.c
+ F:	drivers/pinctrl/pinctrl-adi-adsp.c
++F:	drivers/remoteproc/adi_sc5xx_rproc.c
+ F:	drivers/serial/serial_adi_uart4.c
+ F:	drivers/timer/adi_sc5xx_timer.c
+ F:	drivers/usb/musb-new/sc5xx.c
+diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+index a49802c132329c6596d5fc69020f748f321a74ac..3f7cebaeb7df82bf21ddf4347a4b2ae5ba54e518 100644
+--- a/drivers/remoteproc/Kconfig
++++ b/drivers/remoteproc/Kconfig
+@@ -13,6 +13,7 @@ config REMOTEPROC
+ 	depends on DM
+ 
+ # Please keep the configuration alphabetically sorted.
++
+ config K3_SYSTEM_CONTROLLER
+ 	bool "Support for TI' K3 System Controller"
+ 	select REMOTEPROC
+@@ -22,6 +23,16 @@ config K3_SYSTEM_CONTROLLER
+ 	help
+ 	  Say 'y' here to add support for TI' K3 System Controller.
+ 
++config REMOTEPROC_ADI_SC5XX
++	bool "Support for ADI SC5xx SHARC cores"
++	select REMOTEPROC
++	depends on DM
++	depends on ARCH_SC5XX
++	depends on SYSCON
++	help
++	  Say 'y' here to add support for loading code onto SHARC cores in
++	  an ADSP-SC5xx SoC from Analog Devices
++
+ config REMOTEPROC_SANDBOX
+ 	bool "Support for Test processor for Sandbox"
+ 	select REMOTEPROC
+diff --git a/drivers/remoteproc/Makefile b/drivers/remoteproc/Makefile
+index 801b0965e4f0616ca22266dfd9ff054bee797b03..93923415c00751aef16eb69ec87021513e7e391e 100644
+--- a/drivers/remoteproc/Makefile
++++ b/drivers/remoteproc/Makefile
+@@ -8,6 +8,7 @@ obj-$(CONFIG_$(XPL_)REMOTEPROC) += rproc-uclass.o rproc-elf-loader.o
+ 
+ # Remote proc drivers - Please keep this list alphabetically sorted.
+ obj-$(CONFIG_K3_SYSTEM_CONTROLLER) += k3_system_controller.o
++obj-$(CONFIG_REMOTEPROC_ADI_SC5XX) += adi_sc5xx_rproc.o
+ obj-$(CONFIG_REMOTEPROC_SANDBOX) += sandbox_testproc.o
+ obj-$(CONFIG_REMOTEPROC_STM32_COPRO) += stm32_copro.o
+ obj-$(CONFIG_REMOTEPROC_TI_K3_ARM64) += ti_k3_arm64_rproc.o
+diff --git a/drivers/remoteproc/adi_sc5xx_rproc.c b/drivers/remoteproc/adi_sc5xx_rproc.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..fc9730ef32b0042da65b62be386fda348739f829
+--- /dev/null
++++ b/drivers/remoteproc/adi_sc5xx_rproc.c
+@@ -0,0 +1,276 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2022 - Analog Devices, Inc.
++ *
++ * Written and/or maintained by Timesys Corporation
++ *
++ * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ * Contact: Greg Malysa <greg.malysa@timesys.com>
++ *
++ * Analog Devices SC5xx remoteproc driver for loading code onto SHARC cores
++ */
++
++#include <dm.h>
++#include <regmap.h>
++#include <remoteproc.h>
++#include <syscon.h>
++#include <dm/device_compat.h>
++#include <linux/delay.h>
++
++/* Register offsets */
++#ifdef CONFIG_SC58X
++#define ADI_RCU_REG_CTL		0x00
++#define ADI_RCU_REG_STAT	0x04
++#define ADI_RCU_REG_CRCTL	0x08
++#define ADI_RCU_REG_CRSTAT	0x0c
++#define ADI_RCU_REG_SIDIS	0x10
++#define ADI_RCU_REG_SISTAT	0x14
++#define ADI_RCU_REG_BCODE	0x1c
++#define ADI_RCU_REG_SVECT0	0x20
++#define ADI_RCU_REG_SVECT1	0x24
++#define ADI_RCU_REG_SVECT2	0x28
++#define ADI_RCU_REG_MSG		0x60
++#define ADI_RCU_REG_MSG_SET	0x64
++#define ADI_RCU_REG_MSG_CLR	0x68
++#else
++#define ADI_RCU_REG_CTL		0x00
++#define ADI_RCU_REG_STAT	0x04
++#define ADI_RCU_REG_CRCTL	0x08
++#define ADI_RCU_REG_CRSTAT	0x0c
++#define ADI_RCU_REG_SRRQSTAT	0x18
++#define ADI_RCU_REG_SIDIS	0x1c
++#define ADI_RCU_REG_SISTAT	0x20
++#define ADI_RCU_REG_SVECT_LCK	0x24
++#define ADI_RCU_REG_BCODE	0x28
++#define ADI_RCU_REG_SVECT0	0x2c
++#define ADI_RCU_REG_SVECT1	0x30
++#define ADI_RCU_REG_SVECT2	0x34
++#define ADI_RCU_REG_MSG		0x6c
++#define ADI_RCU_REG_MSG_SET	0x70
++#define ADI_RCU_REG_MSG_CLR	0x74
++#endif /* CONFIG_SC58X */
++
++/* Register bit definitions */
++#define ADI_RCU_CTL_SYSRST		BIT(0)
++
++/* Bit values for the RCU0_MSG register */
++#define RCU0_MSG_C0IDLE			0x00000100		/* Core 0 Idle */
++#define RCU0_MSG_C1IDLE			0x00000200		/* Core 1 Idle */
++#define RCU0_MSG_C2IDLE			0x00000400		/* Core 2 Idle */
++#define RCU0_MSG_CRR0			0x00001000		/* Core 0 reset request */
++#define RCU0_MSG_CRR1			0x00002000		/* Core 1 reset request */
++#define RCU0_MSG_CRR2			0x00004000		/* Core 2 reset request */
++#define RCU0_MSG_C1ACTIVATE		0x00080000		/* Core 1 Activated */
++#define RCU0_MSG_C2ACTIVATE		0x00100000		/* Core 2 Activated */
++
++struct sc5xx_rproc_data {
++	/* Address to load to svect when rebooting core */
++	u32 load_addr;
++
++	/* RCU parameters */
++	struct regmap *rcu;
++	u32 svect_offset;
++	u32 coreid;
++};
++
++struct block_code_flag {
++	u32 bcode:4,		/* 0-3 */
++	    bflag_save:1,	/* 4 */
++	    bflag_aux:1,	/* 5 */
++	    breserved:1,	/* 6 */
++	    bflag_forward:1,	/* 7 */
++	    bflag_fill:1,	/* 8 */
++	    bflag_quickboot:1,	/* 9 */
++	    bflag_callback:1,	/* 10 */
++	    bflag_init:1,	/* 11 */
++	    bflag_ignore:1,	/* 12 */
++	    bflag_indirect:1,	/* 13 */
++	    bflag_first:1,	/* 14 */
++	    bflag_final:1,	/* 15 */
++	    bhdrchk:8,		/* 16-23 */
++	    bhdrsign:8;		/* 0xAD, 0xAC or 0xAB */
++};
++
++struct ldr_hdr {
++	struct block_code_flag bcode_flag;
++	u32 target_addr;
++	u32 byte_count;
++	u32 argument;
++};
++
++static int is_final(struct ldr_hdr *hdr)
++{
++	return hdr->bcode_flag.bflag_final;
++}
++
++static int is_empty(struct ldr_hdr *hdr)
++{
++	return hdr->bcode_flag.bflag_ignore || (hdr->byte_count == 0);
++}
++
++static int adi_valid_firmware(struct ldr_hdr *adi_ldr_hdr)
++{
++	if (!adi_ldr_hdr->byte_count &&
++	    (adi_ldr_hdr->bcode_flag.bhdrsign == 0xAD ||
++	     adi_ldr_hdr->bcode_flag.bhdrsign == 0xAC ||
++	     adi_ldr_hdr->bcode_flag.bhdrsign == 0xAB))
++		return 1;
++
++	return 0;
++}
++
++static int sharc_load(struct udevice *dev, ulong addr, ulong size)
++{
++	struct sc5xx_rproc_data *priv = dev_get_priv(dev);
++	size_t offset;
++	u8 *buf = (u8 *)addr;
++	struct ldr_hdr *ldr = (struct ldr_hdr *)addr;
++	struct ldr_hdr *block_hdr;
++	struct ldr_hdr *next_hdr;
++
++	if (!adi_valid_firmware(ldr)) {
++		dev_err(dev, "Firmware at 0x%lx does not appear to be an LDR image\n", addr);
++		dev_err(dev, "Note: Signed firmware is not currently supported\n");
++		return -EINVAL;
++	}
++
++	do {
++		block_hdr = (struct ldr_hdr *)buf;
++		offset = sizeof(struct ldr_hdr) + (block_hdr->bcode_flag.bflag_fill ?
++							0 : block_hdr->byte_count);
++		next_hdr = (struct ldr_hdr *)(buf + offset);
++
++		if (block_hdr->bcode_flag.bflag_first)
++			priv->load_addr = (unsigned long)block_hdr->target_addr;
++
++		if (!is_empty(block_hdr)) {
++			if (block_hdr->bcode_flag.bflag_fill) {
++				memset((void *)(phys_addr_t)block_hdr->target_addr,
++				       block_hdr->argument,
++				       block_hdr->byte_count);
++			} else {
++				memcpy((void *)(phys_addr_t)block_hdr->target_addr,
++				       buf + sizeof(struct ldr_hdr),
++				       block_hdr->byte_count);
++			}
++		}
++
++		if (is_final(block_hdr))
++			break;
++
++		buf += offset;
++	} while (1);
++
++	return 0;
++}
++
++static void sharc_reset(struct sc5xx_rproc_data *priv)
++{
++	u32 coreid = priv->coreid;
++	u32 val;
++
++	/* First put core in reset.
++	 * Clear CRSTAT bit for given coreid.
++	 */
++	regmap_write(priv->rcu, ADI_RCU_REG_CRSTAT, 1 << coreid);
++
++	/* Set SIDIS to disable the system interface */
++	regmap_read(priv->rcu, ADI_RCU_REG_SIDIS, &val);
++	regmap_write(priv->rcu, ADI_RCU_REG_SIDIS, val | (1 << (coreid - 1)));
++
++	/*
++	 * Wait for access to coreX have been disabled and all the pending
++	 * transactions have completed
++	 */
++	udelay(50);
++
++	/* Set CRCTL bit to put core in reset */
++	regmap_read(priv->rcu, ADI_RCU_REG_CRCTL, &val);
++	regmap_write(priv->rcu, ADI_RCU_REG_CRCTL, val | (1 << coreid));
++
++	/* Poll until Core is in reset */
++	while (!(regmap_read(priv->rcu, ADI_RCU_REG_CRSTAT, &val), val & (1 << coreid)))
++		;
++
++	/* Clear SIDIS to reenable the system interface */
++	regmap_read(priv->rcu, ADI_RCU_REG_SIDIS, &val);
++	regmap_write(priv->rcu, ADI_RCU_REG_SIDIS, val & ~(1 << (coreid - 1)));
++
++	udelay(50);
++
++	/* Take Core out of reset */
++	regmap_read(priv->rcu, ADI_RCU_REG_CRCTL, &val);
++	regmap_write(priv->rcu, ADI_RCU_REG_CRCTL, val & ~(1 << coreid));
++
++	/* Wait for done */
++	udelay(50);
++}
++
++static int sharc_start(struct udevice *dev)
++{
++	struct sc5xx_rproc_data *priv = dev_get_priv(dev);
++
++	/* Write load address to appropriate SVECT for core */
++	regmap_write(priv->rcu, priv->svect_offset, priv->load_addr);
++
++	sharc_reset(priv);
++
++	/* Clear the IDLE bit when start the SHARC core */
++	regmap_write(priv->rcu, ADI_RCU_REG_MSG_CLR, RCU0_MSG_C0IDLE << priv->coreid);
++
++	/* Notify CCES */
++	regmap_write(priv->rcu, ADI_RCU_REG_MSG_SET, RCU0_MSG_C1ACTIVATE << (priv->coreid - 1));
++	return 0;
++}
++
++static const struct dm_rproc_ops sc5xx_ops = {
++	.load = sharc_load,
++	.start = sharc_start,
++};
++
++static int sc5xx_probe(struct udevice *dev)
++{
++	struct sc5xx_rproc_data *priv = dev_get_priv(dev);
++	u32 coreid;
++
++	if (dev_read_u32(dev, "coreid", &coreid)) {
++		dev_err(dev, "Missing property coreid\n");
++		return -ENOENT;
++	}
++
++	priv->coreid = coreid;
++	switch (coreid) {
++	case 1:
++		priv->svect_offset = ADI_RCU_REG_SVECT1;
++		break;
++	case 2:
++		priv->svect_offset = ADI_RCU_REG_SVECT2;
++		break;
++	default:
++		dev_err(dev, "Invalid value %d for coreid, must be 1 or 2\n", coreid);
++		return -EINVAL;
++	}
++
++	priv->rcu = syscon_regmap_lookup_by_phandle(dev, "adi,rcu");
++	if (IS_ERR(priv->rcu))
++		return PTR_ERR(priv->rcu);
++
++	dev_err(dev, "sc5xx remoteproc core %d available\n", priv->coreid);
++
++	return 0;
++}
++
++static const struct udevice_id sc5xx_ids[] = {
++	{ .compatible = "adi,sc5xx-rproc" },
++	{ }
++};
++
++U_BOOT_DRIVER(adi_sc5xx_rproc) = {
++	.name = "adi_sc5xx_rproc",
++	.of_match = sc5xx_ids,
++	.id = UCLASS_REMOTEPROC,
++	.ops = &sc5xx_ops,
++	.probe = sc5xx_probe,
++	.priv_auto = sizeof(struct sc5xx_rproc_data),
++	.flags = 0,
++};
+
+-- 
+2.34.1
+
+
