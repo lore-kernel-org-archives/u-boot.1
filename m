@@ -4,79 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 126EBD17122
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 18:17:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5374FD17123
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 18:21:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67E0488365;
-	Mon, 21 Oct 2024 20:17:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B529888E8A;
+	Mon, 21 Oct 2024 20:21:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ee1IsP6o";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V74Rkv4B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB6A18811C; Mon, 21 Oct 2024 20:17:25 +0200 (CEST)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id 7FCA888EA7; Mon, 21 Oct 2024 20:21:27 +0200 (CEST)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E6DF88365
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 20:17:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BD6F88E8A
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 20:21:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-7b15d330ce1so251874085a.1
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 11:17:21 -0700 (PDT)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-460ad0440ddso29926081cf.3
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 11:21:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729534640; x=1730139440; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1729534884; x=1730139684; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=dDWICrz7zdGT/d9OYkg71oIYOETk8a9J0DA+YxEvO0Y=;
- b=Ee1IsP6oo9L7XuCk8HNoNidl8B1xxOlGm+n++sDeeGNR/cz31/Cwm1wJ363zAyEd76
- 6d0cHsOFqx5zk9gWaD5tBG3US1qPGxQoBhCfmDB3wYOLmZ3pxap565++F/PHLtnBxniR
- 8o7MpqQyUu3NViI5jSt1nJ7MBvjQc6X5TOrfY=
+ bh=ntIzIBWOqGNlE3vetd58BhSO27RpaetG+XLXAesn1AU=;
+ b=V74Rkv4B59nDG6BdIeXkeLKGOrfwKKSe2baf0ZnlnKLURWA7QUd3/jV7iNgFoyhLZF
+ 15+SQ8Rd4Z/yynNikxw6GNZtMFV/LsW0WfqsN7wvooUN7f50m+HHk6BZj/v85wsxwERL
+ xwgsbbJj8l3tUQiHZDkiGPsT+W5kaGpof4lOM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729534640; x=1730139440;
+ d=1e100.net; s=20230601; t=1729534884; x=1730139684;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dDWICrz7zdGT/d9OYkg71oIYOETk8a9J0DA+YxEvO0Y=;
- b=oVhRElz4XqELKl/h02fNZGn9Gz42PLua79/tzE50Q1tjSHZ/Y/6K28S8W1kInolUYB
- +a1ZqD7rZOYytY9LOQUL0CAFf00PJ1dW8KcM88Bitxs3aWvehnzS/v9nn4MRCno89RME
- gap7wqi3jZzik5DEDa6Iujf1LC3+1K14tr4JozZkhMI1YpCTGMI/tZf/tzDyhcbkYoYN
- af466hkGlxqpE0h9geUAMc6UyPlUbMbChvuWrc8BmhaE4tGUctcbMrxjjJ65oBZ9eNpq
- oHBDq2uLpZpNcpXpm8VWpRA7IASX4sLxCjv4D+pKktEebMFo98C3fciu8VgaYKBacxhH
- zuGw==
-X-Gm-Message-State: AOJu0YxeA8zy2fMv92647A0FBIwtx4cjQ3GuxJ3FXNE5PXcHu5qD8Qyb
- A8rpeQZzmCwCir5RkyPUBN9ApO9Wvz+M88q19GJv0th2BqXT5EDXNbltxSDohDw=
-X-Google-Smtp-Source: AGHT+IH7b44YniS2Jc2YgdhU2bL43b0WTTDLktivaln+CtIYUeyq86qPj+NKt3Kh0Tdp6ES9UrUVUA==
-X-Received: by 2002:a05:620a:2a03:b0:7a9:acd5:1b08 with SMTP id
- af79cd13be357-7b157be3155mr1549566585a.51.1729534640533; 
- Mon, 21 Oct 2024 11:17:20 -0700 (PDT)
+ bh=ntIzIBWOqGNlE3vetd58BhSO27RpaetG+XLXAesn1AU=;
+ b=M/Txt9Gyd3PxPPXsVeWt9oOOmQTe3R9BLC8jbfgx0Ry/h/vWR2gHGIzrWKrJMfaTha
+ 9K1xT7xpQOUzHHJ5x/mGfz+Q//utiRmu6RzII20Vdizl+bEzLesbH/IwDhY+oLQneIBy
+ pTENOeSkv0bc2oI/e5N3iwch+fBtfoJVxk1Pz9bdAU3ca5BDwNzEw58Xeuvq+l9Se/6m
+ lS63eE8DGEMvtpYK4dWjRsSHjg7dG0HKbmFgHGAwc5XQtKmGLtYMvOLDsxSH1tPTynXh
+ 0y4q91BuTqeeTLavCA2/sPQce7KkPGlg5VMfobgX5GEg7k5auIhLoR+Nr1u186aUcMht
+ CtBg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWedKPC8YSDskacgsAs+O8+a5OQSUbP6ExosJNPBPxOCdMk7qiF3vcHJZSVUYTbs56JELED/aU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwC6Eg7m8LxeFN8Y1QnbickmUQfPRmRtV1pz9jlegn7TrI9bYbm
+ NjFcctgVXykdE+R4JYLZkV2R0Mfmgbanon6gIezEpnVb4ykenyl06l8IWbsWN64=
+X-Google-Smtp-Source: AGHT+IFvY+4NqjuyyZCypDCXyERJxZnCcywHx4bD6H5HeOSHlS8gEVXYnJBGC8UFWCrUcHrXXcveLw==
+X-Received: by 2002:a05:622a:2443:b0:460:a6f8:8588 with SMTP id
+ d75a77b69052e-460aedfe6b0mr212535831cf.50.1729534884049; 
+ Mon, 21 Oct 2024 11:21:24 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b165a5c605sm195867685a.74.2024.10.21.11.17.18
+ d75a77b69052e-460d3dae6f5sm20347181cf.92.2024.10.21.11.21.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Oct 2024 11:17:19 -0700 (PDT)
-Date: Mon, 21 Oct 2024 12:17:16 -0600
+ Mon, 21 Oct 2024 11:21:23 -0700 (PDT)
+Date: Mon, 21 Oct 2024 12:21:19 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Svyatoslav <clamor95@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
- Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>,
- Richard Weinberger <richard@nod.at>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: Re: [PATCH 1/3] common: Drop check for DM in initf_dm()
-Message-ID: <20241021181716.GR4959@bill-the-cat>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marex@denx.de>, Svyatoslav <clamor95@gmail.com>,
+ Artur Rojek <artur@conclusive.pl>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 3/3] common: Move autoprobe out to board init
+Message-ID: <20241021182119.GS4959@bill-the-cat>
 References: <20241021155133.29557-1-sjg@chromium.org>
- <20241021155133.29557-2-sjg@chromium.org>
+ <20241021155133.29557-4-sjg@chromium.org>
+ <81b0a377-6669-46c6-9da8-c83d9758587e@kwiboo.se>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="i20yiY22o9PnqOpj"
+ protocol="application/pgp-signature"; boundary="oAMWXN2eFLAFRkqU"
 Content-Disposition: inline
-In-Reply-To: <20241021155133.29557-2-sjg@chromium.org>
+In-Reply-To: <81b0a377-6669-46c6-9da8-c83d9758587e@kwiboo.se>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,38 +106,48 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---i20yiY22o9PnqOpj
+--oAMWXN2eFLAFRkqU
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 21, 2024 at 05:51:29PM +0200, Simon Glass wrote:
-
-> This is enabled by all boards, so drop the condition.
+On Mon, Oct 21, 2024 at 06:10:09PM +0200, Jonas Karlman wrote:
+> Hi Simon,
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> On 2024-10-21 17:51, Simon Glass wrote:
+> > Rather than doing autoprobe within the driver model code, move it out to
+> > the board-init code. This makes it clear that it is a separate step from
+> > binding devices.
+>=20
+> It could probably be good to mention that after this patch the events
+> EVT_DM_POST_INIT_R/F will happen before autoprobe instead of after.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+And in updating some part of doc/develop/driver-model/ and referencing
+the discussion on the list, in the commit message with some Link: lines.
+
+And I mention the last one because I fear this is related to the
+regulator changes from Marek and it would be good to hear from him that
+this series doesn't break his devices, for example.
 
 --=20
 Tom
 
---i20yiY22o9PnqOpj
+--oAMWXN2eFLAFRkqU
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcWmqwACgkQFHw5/5Y0
-tyzpuQv5ARez0pnakBJXAie6ZnbNh3/kp2AWs2r/MJILgPdcUf69QXsBayqeY+hN
-N8x2/40w3pTgOvwOpQg5DnNVz4Rif/GbwKEcAwShq7HzNmfNChIhSFhHtGzqcELp
-W6yCNEPpUv+yFilukMf/s14xnpQfYi5sfg6azE4xy2KkpM/BUUqYHZ73mI9SrVCo
-mIWluBDuiJ5N26x+i8XPXtzpl6hf7jy5KJFyGiYj3YO/zw7FPX/09zO0gmo/qbXe
-hvNaUbE87KX5LauEh2mifVVRTqGr2dzBqMZpHaCdzxhS7coLQjGYjjcaEqp72h8N
-nGHUpjA5I124jsqYdpMV9DuXP0lqr8H2eAM//W3CwQwSVhbJScC63pk605kyHjnp
-WtegrVsVIQQmOv6mef/0EORocZzfRNhB/ezApKQ4tDWmM0ohR4OSIPrTyv8JSyxk
-uoPDrxnKEB7DxLuvIEVbibfoxLV1WYP3H05/cWX8MUTm/SoFUg04CxFffY2YMZBJ
-Obl5KHSV
-=4CLb
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcWm58ACgkQFHw5/5Y0
+tyzI8gv+KbB/h9YmiUTk6nrtR7pzOguEN2n50Tt3VI62pLDgIANVyJdwtFz2ZgUy
+ftnCmTCg1IC5KxlU4H/c4OngRtkKeQ2tNaOlTDAKTkMUOw5tkErLCCMmCrxA9K1Z
+5RpLn6xv5FTusLG3x7Ac+NOPUYIODfxhpeTLMm9IZSrHhLo+P3EaDpPA0j6aMU9e
+QMaM6pkaRSRfWWeayXRx0S1556x593wIqyivbjHsGksmIStoqtdnthB2FQegUbB+
+B4wTmBDNm9xEwiEEo1fqZhI6v9vSBI10gINgiTXIOOg6joxqfaW1QAY/DFOHmSme
+9UsDWMVci4LDgQSa2vh1qssG1gJv+ypuacq0dCSOd0GTBZ5F69y5V/LBCD0LwyQL
+pwRQJrS+Ov6k1Dy9wYYOc17O6oXN0fOca84eG8hcwBUAc2jP983xlLEqARijCdau
+MKsAA7jrxLLowK+Npp845L2INk24N7PCez2/Yj4IuyKFFEHlOUIyTKuuYqrKKpgl
+WPpXmhmN
+=o/52
 -----END PGP SIGNATURE-----
 
---i20yiY22o9PnqOpj--
+--oAMWXN2eFLAFRkqU--
