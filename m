@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA99DD15DA5
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 15:14:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C830D15DA9
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 15:14:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6084688EAF;
-	Mon, 21 Oct 2024 17:13:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 214AB88EBB;
+	Mon, 21 Oct 2024 17:13:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="mR6yig1l";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="CuDosAlw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3439188F24; Mon, 21 Oct 2024 17:13:41 +0200 (CEST)
+ id 755C988F4F; Mon, 21 Oct 2024 17:13:42 +0200 (CEST)
 Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net
  [217.70.183.199])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45BCA88EAE
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 17:13:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 875C0885D1
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 17:13:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPA id 8C6F6FF803;
- Mon, 21 Oct 2024 15:13:38 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPA id D95CFFF802;
+ Mon, 21 Oct 2024 15:13:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1729523618;
+ t=1729523620;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=RZQJibq++KLTKSnOMI4p5rsjUwMYs/KpII3u62qY2wA=;
- b=mR6yig1lpkj+cXZHiJMMs0eDlLCqzCCq5PlZVu4CdT2dLs+bkR+JlGMADF6plZp49fHZc8
- T5/q1ZKozBZZI7kPFJEG4AC+eRmyCD/aC/fl22dzEG4eQLogQ2965JFOprKWAcIoe7k2sh
- Hg7NyZYoLzFbDI3SrCoovhVkJinDJhUc18d6/UKdXzgnyxHxYF70D6vaw5XyAUh9JttlC1
- QyzqCyawXFAkKZDpxTGbASmpChy0TXY7XxYmPgbNmY8A8OXfe1nygKG0SN974S3XpouvY4
- 3I4DuqxO2BaCK/d809X01XEy2HxPRFLmFfaeFnv5Z3XSFePY529ahe0y1igJIQ==
+ bh=HDu/C0gQZJYsH7nv4G6bubm3VjoZNkgSWh/EnYQwVHc=;
+ b=CuDosAlwqLV6yt3AM1GlLmQaMqDVOb4rtMmzAxJqAz3pDRjtl2d0EWuboxpwRXOzPMzckE
+ Mtgk2Co5mROCi542RvqoLhriRECXm6OoHFY9RYWJ2eTSRQKK5SNAu3Cg1ltlOznTPwZmpv
+ +lzwL/lIty63/opFvB9eHndzulI4oNq/9VO4Y7MLGVtySP6Y8FqP50jnpfpQ2SHjeppuRT
+ XMASuFI3ATDP0GTVCZytVuGe3eXe90Sjr1rJw6EDZFqEidjB1/btEE4wJ7t4M1aOeUbFoL
+ UCWLxKfHTJfUGTwuDD1cazYt6Qbj5i7n+0OKCN/YOrDJRO5yGr1gzFzkdT9vxQ==
 From: Bastien Curutchet <bastien.curutchet@bootlin.com>
 To: Tom Rini <trini@konsulko.com>,
 	Andrew Davis <afd@ti.com>
@@ -47,10 +47,10 @@ Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Herve Codina <herve.codina@bootlin.com>,
  Christopher Cordahi <christophercordahi@nanometrics.ca>,
  Bastien Curutchet <bastien.curutchet@bootlin.com>
-Subject: [PATCH 3/6] memory: ti-aemif: Add ARCH_DAVINCI to architectures that
- uses TI_AEMIF
-Date: Mon, 21 Oct 2024 17:13:27 +0200
-Message-ID: <20241021151330.1860929-4-bastien.curutchet@bootlin.com>
+Subject: [PATCH 4/6] memory: ti-aemif: Wrap the CS configuration into a
+ function
+Date: Mon, 21 Oct 2024 17:13:28 +0200
+Message-ID: <20241021151330.1860929-5-bastien.curutchet@bootlin.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241021151330.1860929-1-bastien.curutchet@bootlin.com>
 References: <20241021151330.1860929-1-bastien.curutchet@bootlin.com>
@@ -73,43 +73,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-TI_AEMIF configuration doesn't depend on ARCH_DAVINCI while the AEMIF
-controller is present in the DaVinci SoCs.
-
-Add ARCH_DAVINCI to the potential users of the TI_AEMIF driver
-Add <asm/io.h> to driver's includes to fix build issue on ARCH_DAVINCI
+Wrap the CS configuration into a aemif_configure_cs() to ease its
+migration to another driver when adding DM support.
 
 Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
 ---
- drivers/memory/Kconfig    | 2 +-
- drivers/memory/ti-aemif.c | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ drivers/memory/ti-aemif.c | 31 +++++++++++++++++++------------
+ 1 file changed, 19 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/memory/Kconfig b/drivers/memory/Kconfig
-index d10edd2774..7c40f17698 100644
---- a/drivers/memory/Kconfig
-+++ b/drivers/memory/Kconfig
-@@ -39,7 +39,7 @@ config STM32_FMC2_EBI
- 
- config TI_AEMIF
- 	tristate "Texas Instruments AEMIF driver"
--	depends on ARCH_KEYSTONE
-+	depends on ARCH_KEYSTONE || ARCH_DAVINCI
- 	help
- 	  This driver is for the AEMIF module available in Texas Instruments
- 	  SoCs. AEMIF stands for Asynchronous External Memory Interface and
 diff --git a/drivers/memory/ti-aemif.c b/drivers/memory/ti-aemif.c
-index 8e7ddde970..82a9c8cf7b 100644
+index 82a9c8cf7b..5e9514713f 100644
 --- a/drivers/memory/ti-aemif.c
 +++ b/drivers/memory/ti-aemif.c
-@@ -7,6 +7,7 @@
-  */
+@@ -34,21 +34,10 @@
+ 		}						\
+ 	} while (0)
  
- #include <asm/arch/hardware.h>
-+#include <asm/io.h>
- #include <asm/ti-common/ti-aemif.h>
+-static void aemif_configure(int cs, struct aemif_config *cfg)
++static void aemif_cs_configure(int cs, struct aemif_config *cfg)
+ {
+ 	unsigned long tmp;
  
- #define AEMIF_WAITCYCLE_CONFIG		(0x4)
+-	if (cfg->mode == AEMIF_MODE_NAND) {
+-		tmp = __raw_readl(cfg->base + AEMIF_NAND_CONTROL);
+-		tmp |= (1 << cs);
+-		__raw_writel(tmp, cfg->base + AEMIF_NAND_CONTROL);
+-
+-	} else if (cfg->mode == AEMIF_MODE_ONENAND) {
+-		tmp = __raw_readl(cfg->base + AEMIF_ONENAND_CONTROL);
+-		tmp |= (1 << cs);
+-		__raw_writel(tmp, cfg->base + AEMIF_ONENAND_CONTROL);
+-	}
+-
+ 	tmp = __raw_readl(cfg->base + AEMIF_CONFIG(cs));
+ 
+ 	set_config_field(tmp, SELECT_STROBE,	cfg->select_strobe);
+@@ -65,6 +54,24 @@ static void aemif_configure(int cs, struct aemif_config *cfg)
+ 	__raw_writel(tmp, cfg->base + AEMIF_CONFIG(cs));
+ }
+ 
++static void aemif_configure(int cs, struct aemif_config *cfg)
++{
++	unsigned long tmp;
++
++	if (cfg->mode == AEMIF_MODE_NAND) {
++		tmp = __raw_readl(cfg->base + AEMIF_NAND_CONTROL);
++		tmp |= (1 << cs);
++		__raw_writel(tmp, cfg->base + AEMIF_NAND_CONTROL);
++
++	} else if (cfg->mode == AEMIF_MODE_ONENAND) {
++		tmp = __raw_readl(cfg->base + AEMIF_ONENAND_CONTROL);
++		tmp |= (1 << cs);
++		__raw_writel(tmp, cfg->base + AEMIF_ONENAND_CONTROL);
++	}
++
++	aemif_cs_configure(cs, cfg);
++}
++
+ void aemif_init(int num_cs, struct aemif_config *config)
+ {
+ 	int cs;
 -- 
 2.47.0
 
