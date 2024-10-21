@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04CA9D0E6F9
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 11:42:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23EBCD0E6F9
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 11:42:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B861892F4;
+	by phobos.denx.de (Postfix) with ESMTP id D3EAE89335;
 	Mon, 21 Oct 2024 13:39:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eU/DbhzJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iDT64a++";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3008B88F49; Mon, 21 Oct 2024 13:39:16 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id AD68388F2A; Mon, 21 Oct 2024 13:39:16 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8753A892BA
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 13:39:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A2B788FA9
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 13:39:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5c903f5bd0eso105205a12.3
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 04:39:12 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a9a0c40849cso680623966b.3
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 04:39:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729510752; x=1730115552; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729510750; x=1730115550; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fZzOaX3V6RF9iODDAdcA59OWl/P+shVJvLGGKdn0P6k=;
- b=eU/DbhzJJjsLNFePzJzjqyPZFlShS9EjSlLBQfSYsjgoHh8t5+b9CDb9gYfkmz8iA+
- Qg1nytWJCNTCT49ubBlbkTg5ryOk7reAWkj0rqq+q9pNpm7nZmsta/M2DGkyWS6Q3irL
- /3wuxa42HMdv6K+d3fxYTLpgoMJgPeFBZz6l4=
+ bh=fG7DQm52zMxSmpbncGSfKzGCEjPWHAYUm6UlhnnTSFo=;
+ b=iDT64a++gDPPn/DxacyKqPllXSUtS1w8hmM7+BR/LYOU6qUZtegZFy6dHrykgY0Vtq
+ JgPF393h0kbHTFqNSqMIq6P4euurIfj4IcrCwbOKIsZ6QsWTLgQFNRdNhEu7lfGs/zFh
+ uopOs+pG+4tV0TWC2ksX9khVJq/V52EZRV+dU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729510752; x=1730115552;
+ d=1e100.net; s=20230601; t=1729510750; x=1730115550;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fZzOaX3V6RF9iODDAdcA59OWl/P+shVJvLGGKdn0P6k=;
- b=W5fiiZhIWqmUD2YKVvIu840MmO+q9XAiA6MUku2hBGqtKwCId3Un9FjXSIHVCBihNb
- 7ffdoyOUFVffjJwziCwq04y3SogNmj5IawTw292FBOcv2sBaAyjKryaim4FKx7OrHfs6
- pN1sGuLSWcdsXQX5Dy/fYU3K7lNGW9QatgbRIPNFOMlk4qlETguYIgyi2Xu5iqgzHVXy
- c5fzX2wq1Gb3NTeXboku4DWY3tLBOAwf8dMAYsmXODrqlkjPyAjXShnNJqYfR+Vb404C
- vXeSBAq3YJP7BNkG9hn60Pe75OliaMnSo/BghRLqFcaVU31Nur6OQYOB10n/zdWvNxZH
- vKwQ==
-X-Gm-Message-State: AOJu0YyAlA8hEPo5kvzWr5nN8+KFsvgDZWPCKLPCVC0tmNzuLprVHyxM
- 9nucQZ0vfdP79EJHckyiwpuliv729v8k8bBMuunSf5f5/uhc7KGRfTKwIjatpmMXcx74zGAJ0DW
- W9NGQ
-X-Google-Smtp-Source: AGHT+IHF+yEFWHskP1SI+MW0rBVVdp4wAH5ax0+a7ul3XCzOe6ZxW80pi2966MHmup0kBe4Gkp7+mg==
-X-Received: by 2002:a17:907:6d12:b0:a99:6036:90a with SMTP id
- a640c23a62f3a-a9a69a75131mr1177046566b.14.1729510751794; 
- Mon, 21 Oct 2024 04:39:11 -0700 (PDT)
+ bh=fG7DQm52zMxSmpbncGSfKzGCEjPWHAYUm6UlhnnTSFo=;
+ b=AvzQkld0LKO0Nz0rrtBVzXZpZnCQxWTFcH8xpJFcfC8ZD61cKlWFHQJSHe2o4az1va
+ TlQTw19p4o/r9rGmCMKvvaezkdHy0bkGgscItBUC2NOigcAegWfFNVQpWlNyvb/3hpFM
+ LO8la70zOb8geNFt1/yJBE9PkRgoR8RzyYjOGUXU/BL0+thMAX/wezg33/SNO0Q8jDcD
+ mr/UwkGjNPxERbhGrQUEW+9clXxA09gpCZvUkKkr5i+EAC37iUsQRDSFob+L6zj4z6KH
+ 7puLCOG1rUkEszZc89Hm/aSlW9A6CoeimLP0trMaTRU01E7mjwKrcsCgGo2JogL0T59S
+ Vcog==
+X-Gm-Message-State: AOJu0YzLtHQCYx16+rZgCL121X9LrYueBO7/X8akldRZawtIkGTUfHUO
+ zWTAjQYtm/tuwfrLRGQBC4j/ZRxIIs1Ht36nkiF49+xjahuN+hDJiiYvOq6gbEtObp+ZTLm/peh
+ 8FVOY
+X-Google-Smtp-Source: AGHT+IE+VVXREGJkg6h29Cj45B9bTaZNwXstBLGZbVWhulva/FCrJ8hhT4lx8X8yBzbY+CZErhA0lQ==
+X-Received: by 2002:a17:907:6ea2:b0:a9a:e2b:170a with SMTP id
+ a640c23a62f3a-a9a695d8acfmr1148927766b.0.1729510750012; 
+ Mon, 21 Oct 2024 04:39:10 -0700 (PDT)
 Received: from chromium.org (43-114-103-145.static.glaslokaal.nl.
  [145.103.114.43]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a91571ea5sm191604366b.160.2024.10.21.04.39.11
+ a640c23a62f3a-a9a91571ea5sm191604366b.160.2024.10.21.04.39.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Oct 2024 04:39:11 -0700 (PDT)
+ Mon, 21 Oct 2024 04:39:09 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mario Six <mario.six@gdsys.cc>
-Subject: [PATCH v2 23/25] mpc83xx: Drop status-LED code
-Date: Mon, 21 Oct 2024 13:38:31 +0200
-Message-ID: <20241021113839.318572-24-sjg@chromium.org>
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: [PATCH v2 21/25] image: Drop unused status_led.h header file
+Date: Mon, 21 Oct 2024 13:38:29 +0200
+Message-ID: <20241021113839.318572-22-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241021113839.318572-1-sjg@chromium.org>
 References: <20241021113839.318572-1-sjg@chromium.org>
@@ -89,39 +94,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is not used anymore, so drop it.
+This header file is not used, so drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- drivers/timer/mpc83xx_timer.c | 5 -----
- 1 file changed, 5 deletions(-)
+ boot/image.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/drivers/timer/mpc83xx_timer.c b/drivers/timer/mpc83xx_timer.c
-index 9da74479aaa..aefc18898e9 100644
---- a/drivers/timer/mpc83xx_timer.c
-+++ b/drivers/timer/mpc83xx_timer.c
-@@ -9,7 +9,6 @@
- #include <dm.h>
- #include <irq_func.h>
- #include <log.h>
--#include <status_led.h>
- #include <sysinfo.h>
- #include <time.h>
- #include <timer.h>
-@@ -178,10 +177,6 @@ void timer_interrupt(struct pt_regs *regs)
- 	if (CFG_SYS_WATCHDOG_FREQ && (priv->timestamp % (CFG_SYS_WATCHDOG_FREQ)) == 0)
- 		schedule();
- #endif    /* CONFIG_WATCHDOG || CONFIG_HW_WATCHDOG */
--
--#ifdef CONFIG_LED_STATUS
--	status_led_tick(priv->timestamp);
--#endif /* CONFIG_LED_STATUS */
- }
+diff --git a/boot/image.c b/boot/image.c
+index abac254e026..7bed8ba4b1f 100644
+--- a/boot/image.c
++++ b/boot/image.c
+@@ -15,10 +15,6 @@
+ #include <malloc.h>
+ #include <u-boot/crc.h>
  
- void wait_ticks(ulong ticks)
+-#ifdef CONFIG_SHOW_BOOT_PROGRESS
+-#include <status_led.h>
+-#endif
+-
+ #if CONFIG_IS_ENABLED(FIT) || CONFIG_IS_ENABLED(OF_LIBFDT)
+ #include <linux/libfdt.h>
+ #include <fdt_support.h>
 -- 
 2.43.0
 
