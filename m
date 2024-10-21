@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBFE3D17148
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 23:47:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F985D1714B
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 23:47:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 218DF890AE;
+	by phobos.denx.de (Postfix) with ESMTP id 8AA458929F;
 	Tue, 22 Oct 2024 01:46:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CXwp+7kK";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="t1Bys1wp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87D9388F4B; Mon, 21 Oct 2024 15:56:11 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 9C32788F3F; Mon, 21 Oct 2024 15:56:11 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FEE488F49
+ by phobos.denx.de (Postfix) with ESMTPS id ADEEE88F2A
  for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 15:56:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+vasileios.bimpikas.analog.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id B44A7A43391;
- Mon, 21 Oct 2024 13:55:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 7FA8DC4CEE4;
+ by dfw.source.kernel.org (Postfix) with ESMTP id C50075C548E;
+ Mon, 21 Oct 2024 13:55:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 9EC51C4CEE7;
  Mon, 21 Oct 2024 13:55:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1729518957;
- bh=z8ddSc4u2AJGJ1HTAr+NLcXaa0WffoUOZCn6ehQdpzY=;
+ bh=8SrwQrb7FI48/U0VGPJwsj8zrXtPF1+AHsH/cZ0I5QM=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=CXwp+7kKa/KqhvOocqyInnOSIBTo1pppRUsIW0iN7uw2I4yMOO5Fj7eZjZINxgMnE
- cso0QJT0PO6LiO7SmPGQBiFdeThhqesZebrmQdz42QpZ62dojIVwIYIWRrld33dncc
- Q5RHE0/tWqJZIzAYWjKl4lW8+Jg9da3zjnl6a75HKKbRVhoQ5Q8bsO2rRlAKWbv/YP
- n8iHedzbSafGqe7ySBXMhcMOAkn6G/W4nUqUyGzs7MWr/PNtUGfx0m1vmU/GI33NVO
- 6644p6kClZpa9195TOqt7WkllkyBHg6FuVC2qs5i+PXNmmtvncdknnr1HVvvLEIFe2
- xkvP23hMSBIBQ==
+ b=t1Bys1wp64lJ34X0xD/XcbXHIWssqxPDlmips/6s03kn6rCGE9R1oHfZGw/uxQ8wC
+ EaLnSy10EKYzUMmwe/nVeru7myFRZTwyHOvdKLcoe3B9yXQxNiWxX2XGVMAuODaVU9
+ 5z3KoHvn0tutc/swR3t6AxNeDNwLiqSgcXA7yWKDAqEsjS92yZyOuUNnYDFfbN/fRm
+ YP0zakP9m9pGJtAuUHfUWKFp1aI/f1gJkZ0qOizqQeMIYXPqJDLzSjBRHSoN/N7jYp
+ ho3dfriwTpxb9C2M1LvP0dKOkXS9RaUgxjnMchGzX0DNjML4fF0+DOTTyFKD6+zieB
+ hmCREy6FmoZfA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 6CBACD15D99;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 927CDD15D98;
  Mon, 21 Oct 2024 13:55:57 +0000 (UTC)
 From: Vasileios Bimpikas via B4 Relay
  <devnull+vasileios.bimpikas.analog.com@kernel.org>
-Date: Mon, 21 Oct 2024 14:54:33 +0100
-Subject: [PATCH v2 02/11] gpio: Add support for SC5XX-family processor GPIO
- driver
+Date: Mon, 21 Oct 2024 14:54:35 +0100
+Subject: [PATCH v2 04/11] usb: musb-new: Add support for Analog Devices
+ SC5xx SoCs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241021-sc5xx-driver-series-v2-2-53e2472e11d0@analog.com>
+Message-Id: <20241021-sc5xx-driver-series-v2-4-53e2472e11d0@analog.com>
 References: <20241021-sc5xx-driver-series-v2-0-53e2472e11d0@analog.com>
 In-Reply-To: <20241021-sc5xx-driver-series-v2-0-53e2472e11d0@analog.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -70,11 +70,11 @@ To: Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
  Oliver Gaskell <Oliver.Gaskell@analog.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1729518874; l=7781;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1729518874; l=8113;
  i=vasileios.bimpikas@analog.com; s=20240927; h=from:subject:message-id;
- bh=zDnOkVE+R6wznzVeXnMOb22YwikAbgaYqPVPmEsDVB4=;
- b=qoZ3fEpedlH9bhjJ3MrrJk9dWqaxTaQpdMIjX4OIjFDLSl00EuxNB+6eeInLAJc/0sNRUoh3k
- kpJvejlqTO7BQhYxDHZVWbhLNeSmkue/wkG3PeVGpwbz5ea3Vzpzygx
+ bh=BMXVYqBNxXzNrR41x7IaME9beHXFzNhCBEX144IeWYQ=;
+ b=+KO8Fw+r940bNENhvlapO/CmBJrRYoSlCmUl4kaApkOW6/nkPBvP8mbvF4TutRQZUcsgDXOmk
+ 5H1SrTCatAAAiF+DS6AosCOUPNGcPcUSeOivif6r6Rq4hn+Y2oM4N72
 X-Developer-Key: i=vasileios.bimpikas@analog.com; a=ed25519;
  pk=JkXh+NeXYCpTenwrB0gg5fMpKEnagLOXdsLFiUrqZRo=
 X-Endpoint-Received: by B4 Relay for vasileios.bimpikas@analog.com/20240927
@@ -98,255 +98,275 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Oliver Gaskell <Oliver.Gaskell@analog.com>
+From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 
-This adds support for using the GPIO pins on the SC5XX family of SoCs
-from Analog Devices.
+This adds support for the MUSB-based USB controller found in the
+Analog Devices SC57x and SC58x SoCs.
 
-Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
+Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
 Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
 Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
 Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
 Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
-Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
-Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 ---
- MAINTAINERS                  |   1 +
- drivers/gpio/Kconfig         |   9 +++
- drivers/gpio/Makefile        |   1 +
- drivers/gpio/gpio-adi-adsp.c | 179 +++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 190 insertions(+)
+ MAINTAINERS                   |   1 +
+ drivers/usb/musb-new/Kconfig  |   7 ++
+ drivers/usb/musb-new/Makefile |   1 +
+ drivers/usb/musb-new/sc5xx.c  | 202 ++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 211 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 47dd18c6563fd3f98643a84cfc48af79e3e39f39..c890f2570729606e947ca07d6f12ca202cf91908 100644
+index 981c41cb512684736c933b78a3547657b13e016b..8706bdc1ee5a3e0e9f626f5370c534638bf6d9d0 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -612,6 +612,7 @@ F:	doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
- F:	doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
- F:	doc/device-tree-bindings/timer/adi,sc5xx-gptimer.yaml
- F:	drivers/clk/adi/
-+F:	drivers/gpio/gpio-adi-adsp.c
+@@ -617,6 +617,7 @@ F:	drivers/gpio/gpio-adi-adsp.c
  F:	drivers/pinctrl/pinctrl-adi-adsp.c
  F:	drivers/serial/serial_adi_uart4.c
  F:	drivers/timer/adi_sc5xx_timer.c
-diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index 1e5711663eb8adc4109cb9793c49e679025e2ef6..f6f62274fb097f4eb956fa776cbfd76c468caf98 100644
---- a/drivers/gpio/Kconfig
-+++ b/drivers/gpio/Kconfig
-@@ -97,6 +97,15 @@ config SPL_DM_GPIO_LOOKUP_LABEL
- 	  different gpios on different hardware versions
- 	  for the same functionality in board code.
++F:	drivers/usb/musb-new/sc5xx.c
+ F:	include/configs/sc5*
+ F:	include/env/adi/
  
-+config ADI_GPIO
-+	bool "ADI GPIO driver"
-+	depends on DM_GPIO && ARCH_SC5XX
+diff --git a/drivers/usb/musb-new/Kconfig b/drivers/usb/musb-new/Kconfig
+index c52afd41a7532486c57bc2fa9d532757b45d8e83..ad9072a532767b94d4171d1236ffc99f48330206 100644
+--- a/drivers/usb/musb-new/Kconfig
++++ b/drivers/usb/musb-new/Kconfig
+@@ -22,6 +22,13 @@ config USB_MUSB_GADGET
+ 	  Enables the MUSB USB dual-role controller in gadget mode.
+ 
+ if USB_MUSB_HOST || USB_MUSB_GADGET
++config USB_MUSB_SC5XX
++        bool "Analog Devices MUSB support"
++        depends on (SC57X || SC58X)
 +	help
-+	  This driver supports GPIO banks on SC5xx processors. It
-+	  supports inputs and outputs but does not support pin
-+	  interrupt functionality (PINT) or other features in the
-+	  Linux version of the driver.
++	 Say y here to enable support for the USB controller on
++	 ADI SC57X/SC58X processors.
 +
- config ALTERA_PIO
- 	bool "Altera PIO driver"
- 	depends on DM_GPIO
-diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
-index fe81b6ba88b1adc815ebf04e6b65a164cda91bb8..882c3f544c7c8d9d84f6511a818ba4d2b83a9aa1 100644
---- a/drivers/gpio/Makefile
-+++ b/drivers/gpio/Makefile
-@@ -12,6 +12,7 @@ obj-$(CONFIG_$(PHASE_)DM_GPIO) += gpio-uclass.o
+ config USB_MUSB_DA8XX
+ 	bool "Enable DA8xx MUSB Controller"
+ 	depends on ARCH_DAVINCI
+diff --git a/drivers/usb/musb-new/Makefile b/drivers/usb/musb-new/Makefile
+index 396ff02654b97f318515ea36625444900b9471bf..6638772daca9ef02a0cf40e718c3df4dad02c06c 100644
+--- a/drivers/usb/musb-new/Makefile
++++ b/drivers/usb/musb-new/Makefile
+@@ -14,6 +14,7 @@ obj-$(CONFIG_USB_MUSB_PIC32) += pic32.o
+ obj-$(CONFIG_USB_MUSB_SUNXI) += sunxi.o
+ obj-$(CONFIG_USB_MUSB_TI) += ti-musb.o
+ obj-$(CONFIG_USB_MUSB_UX500) += ux500.o
++obj-$(CONFIG_USB_MUSB_SC5XX) += sc5xx.o
  
- obj-$(CONFIG_$(XPL_)DM_PCA953X)	+= pca953x_gpio.o
- 
-+obj-$(CONFIG_ADI_GPIO)		+= gpio-adi-adsp.o
- obj-$(CONFIG_ASPEED_GPIO)	+= gpio-aspeed.o
- obj-$(CONFIG_ASPEED_G7_GPIO)	+= gpio-aspeed-g7.o
- obj-$(CONFIG_AT91_GPIO)	+= at91_gpio.o
-diff --git a/drivers/gpio/gpio-adi-adsp.c b/drivers/gpio/gpio-adi-adsp.c
+ ccflags-y := $(call cc-option,-Wno-unused-variable) \
+ 		$(call cc-option,-Wno-unused-but-set-variable) \
+diff --git a/drivers/usb/musb-new/sc5xx.c b/drivers/usb/musb-new/sc5xx.c
 new file mode 100644
-index 0000000000000000000000000000000000000000..0ce00572e082003a250ba69a30bde963c654bb2c
+index 0000000000000000000000000000000000000000..16201480b43b17120109c5575993ff3176f2a70e
 --- /dev/null
-+++ b/drivers/gpio/gpio-adi-adsp.c
-@@ -0,0 +1,179 @@
++++ b/drivers/usb/musb-new/sc5xx.c
+@@ -0,0 +1,202 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
 + * (C) Copyright 2022 - Analog Devices, Inc.
 + *
++ * ADI SC5XX MUSB "glue layer"
++ *
 + * Written and/or maintained by Timesys Corporation
 + *
-+ * Author: Greg Malysa <greg.malysa@timesys.com>
-+ * Additional Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ * Loosely ported from Linux driver:
++ * Author: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ *
 + */
 +
 +#include <dm.h>
-+#include <asm-generic/gpio.h>
 +#include <dm/device_compat.h>
 +#include <linux/bitops.h>
 +#include <linux/io.h>
++#include <linux/usb/musb.h>
++#include "linux-compat.h"
++#include "musb_core.h"
++#include "musb_uboot.h"
 +
-+#define ADSP_PORT_MMIO_SIZE		0x80
-+#define ADSP_PORT_PIN_SIZE		16
++#define MUSB_SOFTRST		0x7f
++#define  MUSB_SOFTRST_NRST	BIT(0)
++#define  MUSB_SOFTRST_NRSTX	BIT(1)
 +
-+#define ADSP_PORT_REG_FER			0x00
-+#define ADSP_PORT_REG_FER_SET		0x04
-+#define ADSP_PORT_REG_FER_CLEAR		0x08
-+#define ADSP_PORT_REG_DATA			0x0c
-+#define ADSP_PORT_REG_DATA_SET		0x10
-+#define ADSP_PORT_REG_DATA_CLEAR	0x14
-+#define ADSP_PORT_REG_DIR			0x18
-+#define ADSP_PORT_REG_DIR_SET		0x1c
-+#define ADSP_PORT_REG_DIR_CLEAR		0x20
-+#define ADSP_PORT_REG_INEN			0x24
-+#define ADSP_PORT_REG_INEN_SET		0x28
-+#define ADSP_PORT_REG_INEN_CLEAR	0x2c
-+#define ADSP_PORT_REG_PORT_MUX		0x30
-+#define ADSP_PORT_REG_DATA_TGL		0x34
-+#define ADSP_PORT_REG_POLAR			0x38
-+#define ADSP_PORT_REG_POLAR_SET		0x3c
-+#define ADSP_PORT_REG_POLAR_CLEAR	0x40
-+#define ADSP_PORT_REG_LOCK			0x44
-+#define ADSP_PORT_REG_TRIG_TGL		0x48
++#define REG_USB_VBUS_CTL	0x380
++#define REG_USB_ID_CTL		0x382
++#define REG_USB_PHY_CTL		0x394
++#define REG_USB_PLL_OSC		0x398
++#define REG_USB_UTMI_CTL	0x39c
 +
-+struct adsp_gpio_priv {
-+	void __iomem *base;
-+	int ngpio;
++/* controller data */
++struct sc5xx_musb_data {
++	struct musb_host_data mdata;
++	struct device dev;
 +};
 +
-+static u32 get_port(unsigned int pin)
++#define to_sc5xx_musb_data(d)	\
++	container_of(d, struct sc5xx_musb_data, dev)
++
++static void sc5xx_musb_disable(struct musb *musb)
 +{
-+	return pin / ADSP_PORT_PIN_SIZE;
++	/* no way to shut the controller */
 +}
 +
-+static u32 get_offset(unsigned int pin)
++static int sc5xx_musb_enable(struct musb *musb)
 +{
-+	return pin % ADSP_PORT_PIN_SIZE;
++	/* soft reset by NRSTx */
++	musb_writeb(musb->mregs, MUSB_SOFTRST, MUSB_SOFTRST_NRSTX);
++	/* set mode */
++	musb_platform_set_mode(musb, musb->board_mode);
++
++	return 0;
 +}
 +
-+static int adsp_gpio_input(struct udevice *udev, unsigned int pin)
++static irqreturn_t sc5xx_interrupt(int irq, void *hci)
 +{
-+	struct adsp_gpio_priv *priv = dev_get_priv(udev);
-+	u32 port, offset;
-+	void __iomem *portbase;
++	struct musb  *musb = hci;
++	irqreturn_t ret = IRQ_NONE;
++	u8 devctl;
 +
-+	if (pin < priv->ngpio) {
-+		port = get_port(pin);
-+		offset = get_offset(pin);
-+		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
++	musb->int_usb = musb_readb(musb->mregs, MUSB_INTRUSB);
++	musb->int_tx = musb_readw(musb->mregs, MUSB_INTRTX);
++	musb->int_rx = musb_readw(musb->mregs, MUSB_INTRRX);
 +
-+		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_FER_CLEAR);
-+		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DIR_CLEAR);
-+		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_INEN_SET);
-+		return 0;
++	if (musb->int_usb & MUSB_INTR_VBUSERROR) {
++		musb->int_usb &= ~MUSB_INTR_VBUSERROR;
++		devctl = musb_readw(musb->mregs, MUSB_DEVCTL);
++		devctl |= MUSB_DEVCTL_SESSION;
++		musb_writeb(musb->mregs, MUSB_DEVCTL, devctl);
++	}
++	if (musb->int_usb || musb->int_tx || musb->int_rx) {
++		musb_writeb(musb->mregs, MUSB_INTRUSB, musb->int_usb);
++		musb_writew(musb->mregs, MUSB_INTRTX, musb->int_tx);
++		musb_writew(musb->mregs, MUSB_INTRRX, musb->int_rx);
++		ret = musb_interrupt(musb);
 +	}
 +
-+	return -EINVAL;
++	if (musb->int_usb & MUSB_INTR_DISCONNECT && is_host_active(musb))
++		musb_writeb(musb->mregs, REG_USB_VBUS_CTL, 0x0);
++
++	return ret;
 +}
 +
-+static int adsp_gpio_output(struct udevice *udev, unsigned int pin, int value)
++static int sc5xx_musb_set_mode(struct musb *musb, u8 mode)
 +{
-+	struct adsp_gpio_priv *priv = dev_get_priv(udev);
-+	u32 port, offset;
-+	void __iomem *portbase;
++	struct device *dev = musb->controller;
++	struct sc5xx_musb_data *pdata = to_sc5xx_musb_data(dev);
 +
-+	if (pin < priv->ngpio) {
-+		port = get_port(pin);
-+		offset = get_offset(pin);
-+		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
-+
-+		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_FER_CLEAR);
-+
-+		if (value)
-+			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_SET);
-+		else
-+			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_CLEAR);
-+
-+		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DIR_SET);
-+		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_INEN_CLEAR);
-+		return 0;
-+	}
-+
-+	return -EINVAL;
-+}
-+
-+static int adsp_gpio_get_value(struct udevice *udev, unsigned int pin)
-+{
-+	struct adsp_gpio_priv *priv = dev_get_priv(udev);
-+	u32 port, offset;
-+	u16 val;
-+	void __iomem *portbase;
-+
-+	if (pin < priv->ngpio) {
-+		port = get_port(pin);
-+		offset = get_offset(pin);
-+		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
-+
-+		val = ioread16(portbase + ADSP_PORT_REG_DATA);
-+		return !!(val & BIT(offset));
++	switch (mode) {
++	case MUSB_HOST:
++		musb_writeb(musb->mregs, REG_USB_ID_CTL, 0x1);
++		break;
++	case MUSB_PERIPHERAL:
++		musb_writeb(musb->mregs, REG_USB_ID_CTL, 0x3);
++		break;
++	case MUSB_OTG:
++		musb_writeb(musb->mregs, REG_USB_ID_CTL, 0x0);
++		break;
++	default:
++		dev_err(dev, "unsupported mode %d\n", mode);
++		return -EINVAL;
 +	}
 +
 +	return 0;
 +}
 +
-+static int adsp_gpio_set_value(struct udevice *udev, unsigned int pin, int value)
++static int sc5xx_musb_init(struct musb *musb)
 +{
-+	struct adsp_gpio_priv *priv = dev_get_priv(udev);
-+	u32 port, offset;
-+	void __iomem *portbase;
++	struct sc5xx_musb_data *pdata = to_sc5xx_musb_data(musb->controller);
 +
-+	if (pin < priv->ngpio) {
-+		port = get_port(pin);
-+		offset = get_offset(pin);
-+		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
++	musb->isr = sc5xx_interrupt;
 +
-+		if (value)
-+			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_SET);
-+		else
-+			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_CLEAR);
-+	}
++	musb_writel(musb->mregs, REG_USB_PLL_OSC, 20 << 1);
++	musb_writeb(musb->mregs, REG_USB_VBUS_CTL, 0x0);
++	musb_writeb(musb->mregs, REG_USB_PHY_CTL, 0x80);
++	musb_writel(musb->mregs, REG_USB_UTMI_CTL,
++		    0x40 | musb_readl(musb->mregs, REG_USB_UTMI_CTL));
 +
 +	return 0;
 +}
 +
-+static const struct dm_gpio_ops adsp_gpio_ops = {
-+	.direction_input = adsp_gpio_input,
-+	.direction_output = adsp_gpio_output,
-+	.get_value = adsp_gpio_get_value,
-+	.set_value = adsp_gpio_set_value,
++const struct musb_platform_ops sc5xx_musb_ops = {
++	.init		= sc5xx_musb_init,
++	.set_mode	= sc5xx_musb_set_mode,
++	.disable	= sc5xx_musb_disable,
++	.enable		= sc5xx_musb_enable,
 +};
 +
-+static int adsp_gpio_probe(struct udevice *udev)
++static struct musb_hdrc_config sc5xx_musb_config = {
++	.multipoint     = 1,
++	.dyn_fifo       = 1,
++	.num_eps        = 16,
++	.ram_bits       = 12,
++};
++
++/* has one MUSB controller which can be host or gadget */
++static struct musb_hdrc_platform_data sc5xx_musb_plat = {
++	.mode           = MUSB_HOST,
++	.config         = &sc5xx_musb_config,
++	.power          = 100,
++	.platform_ops	= &sc5xx_musb_ops,
++};
++
++static int musb_usb_probe(struct udevice *dev)
 +{
-+	struct adsp_gpio_priv *priv = dev_get_priv(udev);
-+	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(udev);
++	struct usb_bus_priv *priv = dev_get_uclass_priv(dev);
++	struct sc5xx_musb_data *pdata = dev_get_priv(dev);
++	struct musb_host_data *mdata = &pdata->mdata;
++	void __iomem *mregs;
++	int ret;
 +
-+	uc_priv->bank_name = "adsp gpio";
-+	uc_priv->gpio_count = dev_read_u32_default(udev, "adi,ngpios", 0);
++	priv->desc_before_addr = true;
 +
-+	if (!uc_priv->gpio_count) {
-+		dev_err(udev, "Missing adi,ngpios property!\n");
-+		return -ENOENT;
++	mregs = dev_remap_addr(dev);
++	if (!mregs)
++		return -EINVAL;
++
++	/* init controller */
++	if (IS_ENABLED(CONFIG_USB_MUSB_HOST)) {
++		mdata->host = musb_init_controller(&sc5xx_musb_plat,
++						   &pdata->dev, mregs);
++		if (!mdata->host)
++			return -EIO;
++
++		ret = musb_lowlevel_init(mdata);
++	} else {
++		sc5xx_musb_plat.mode = MUSB_PERIPHERAL;
++		mdata->host = musb_register(&sc5xx_musb_plat, &pdata->dev, mregs);
++		if (!mdata->host)
++			return -EIO;
 +	}
++	return ret;
++}
 +
-+	priv->base = dev_read_addr_ptr(udev);
-+	priv->ngpio = uc_priv->gpio_count;
++static int musb_usb_remove(struct udevice *dev)
++{
++	struct sc5xx_musb_data *pdata = dev_get_priv(dev);
++
++	musb_stop(pdata->mdata.host);
 +
 +	return 0;
 +}
 +
-+static const struct udevice_id adsp_gpio_match[] = {
-+	{ .compatible = "adi,adsp-gpio" },
-+	{ },
++static const struct udevice_id sc5xx_musb_ids[] = {
++	{ .compatible = "adi,sc5xx-musb" },
++	{ }
 +};
 +
-+U_BOOT_DRIVER(adi_adsp_gpio) = {
-+	.name	= "adi_adsp_gpio",
-+	.id	= UCLASS_GPIO,
-+	.ops	= &adsp_gpio_ops,
-+	.probe	= adsp_gpio_probe,
-+	.priv_auto = sizeof(struct adsp_gpio_priv),
-+	.of_match = adsp_gpio_match,
-+	.flags = DM_FLAG_PRE_RELOC,
++U_BOOT_DRIVER(usb_musb) = {
++	.name		= "sc5xx-musb",
++	.id		= UCLASS_USB,
++	.of_match	= sc5xx_musb_ids,
++	.probe		= musb_usb_probe,
++	.remove		= musb_usb_remove,
++#ifdef CONFIG_USB_MUSB_HOST
++	.ops		= &musb_usb_ops,
++#endif
++	.plat_auto	= sizeof(struct usb_plat),
++	.priv_auto	= sizeof(struct sc5xx_musb_data),
 +};
 
 -- 
