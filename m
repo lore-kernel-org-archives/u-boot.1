@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3149FD15DBD
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 16:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 797B9D0E6C5
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 17:07:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A38FB88EAF;
-	Mon, 21 Oct 2024 18:50:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 924118811C;
+	Mon, 21 Oct 2024 19:07:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QWtkpBOd";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ATt4uapw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84C2388CBB; Mon, 21 Oct 2024 18:50:06 +0200 (CEST)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 74EAE8806A; Mon, 21 Oct 2024 19:07:55 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43B7588E94
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:50:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5778D88E91
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 19:07:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7b14443a71eso431562385a.1
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 09:50:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729529402; x=1730134202; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MuVl+21HDY6+4RGk0zo2stJYM+Qsqn2EG0F1bSMc3I0=;
- b=QWtkpBOdVs8HW/f/2ym4UnUVUulT8A1XUaMhFsb3DxTT/5fWX0MN70URuO3SwYB9fZ
- msHR4dvCWDRRtZNKoKhBM+Mc54MSpTnVDICMz6nx7S+devyU31gmsef/Wiv+eAu0RVcW
- SGA18C3+WlpSEBzRkLySheu4nftT8qqP/MCmI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729529402; x=1730134202;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MuVl+21HDY6+4RGk0zo2stJYM+Qsqn2EG0F1bSMc3I0=;
- b=nzF1X5wfhWzBgGKF0EhV07QvgIaXJ9EQkuT8jyIWJZky2n0AcqailLgpNC74OKRgVw
- Gw9IQn0tpp4ScaVCPLO+SnCT1U9/6e3KTYMRk9UeBuITs1jZR3/BwuUEm8O5HKtfDTsE
- W61aCDseeIbU5Sn6nuOkT50TzfGvk8s989piSioJlUqfFKPFTsmkMqxaPUeG5DlV2WoF
- +sY0fqafiIOFaCeNyxnvay4LqtoKyT0DcQ53F1S7y0xScmtqpWGqcexmgoo7lj6unuEJ
- vbjf7P1SC9rVptaOa5iFs5GXspp2f7SnMiGe0jROsWWmxs2Sc1uF3GU2h+mox6OGOAgG
- z2MA==
-X-Gm-Message-State: AOJu0Yy73VU+YmVPfA88jhwqJCpCiWBZRDmA7xD5LwhCHcSRHeuC41nB
- eFY3ivy6xHkEuB3WmpkfXkswtk+VfRn3SyJJUJpJAVuo+VttpwEzqa7dVVY1il0=
-X-Google-Smtp-Source: AGHT+IE4QBxgpUyWmfZGTeS6nBlAa/tI0hIKpDRdehLiJ/bEQw7/GSmA+oFsVK2O/bGQb9yevOOiBA==
-X-Received: by 2002:a05:620a:4692:b0:7a9:afef:33e6 with SMTP id
- af79cd13be357-7b157b670e2mr1568357885a.34.1729529402140; 
- Mon, 21 Oct 2024 09:50:02 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ce008fb7c3sm19286526d6.35.2024.10.21.09.49.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Oct 2024 09:50:01 -0700 (PDT)
-Date: Mon, 21 Oct 2024 10:49:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH] CI: Add a test for building without CMDLINE
-Message-ID: <20241021164958.GK4959@bill-the-cat>
-References: <20241021134450.22985-1-sjg@chromium.org>
- <20241021143336.GG4959@bill-the-cat>
- <CAFLszTjK=uw61U_WaqLjBX1JFCC15Ee2dRBm_qGUEsnjqiqpEw@mail.gmail.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1729530468; x=1730135268; i=xypron.glpk@gmx.de;
+ bh=DVJJ8IczSpgtsh7u8bSCdJucuN87lpf6nlh2lQ/qFMc=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=ATt4uapwALCkCGwx+V1Z8tagq1tAZuMQgjW7uYgZReAnDSgEaAuuIr/BL4sggZmZ
+ Bscp5GNeXIr4wriYnq0FVMGokJLV85tTh6oYABlmsZKcCopX7sIhIyyHX4UsaklHy
+ xwGZkP9gW1aQx+uYmpO4yfN2+3HnQRkgXpFVQPTk7cBEWd4fZY/JQU9FgqlwdAWIs
+ PY2psctoA8srAfIvOKsNCwBO7Ub/gk6oZaiduhtEPnmtIAI25GuLBaj1rUv+Db308
+ Tya+UR/PRd3JLwNVLCsEzK3RxzRpl195CtM14P0hdUnfQd+7evjxyQnW86HvmDnw6
+ 9dwPU8rXvXfc5uN6tA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [10.43.6.224] ([87.215.50.114]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MrQEx-1tf4a33CEx-00oUaP; Mon, 21
+ Oct 2024 19:07:48 +0200
+Message-ID: <5cea49dd-b67e-428e-9ccd-ef16036a53e1@gmx.de>
+Date: Mon, 21 Oct 2024 19:07:43 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="te2/zbMfJPBXe1W1"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjK=uw61U_WaqLjBX1JFCC15Ee2dRBm_qGUEsnjqiqpEw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: enabling W=1 by default
+To: Simon Glass <sjg@chromium.org>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
+References: <ZxZk4K4ff1T3gUVm@smile.fi.intel.com>
+ <CAFLszTjuodDFZW8fJDL1Q3nByLVzcTTEAeJfws-sbtupCwNd8w@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAFLszTjuodDFZW8fJDL1Q3nByLVzcTTEAeJfws-sbtupCwNd8w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:wdYU7YiMJI4Uge5dXB2IaplSDFLCSgGnwsVRGRpUafhKGnR3nYP
+ bFSYbOIrX8y6coOuj3OGu5CIuFgFJymJL+XNT4SjvZPDkUwiiLI6buixQuMsfTleVf5wm5T
+ /6jbPaGeJQZ1NNfQB83Ihn1wus2q7j7Ah69QcXEQb/JoMHrx9Xasj2rSeYnT2dAGcRQuMW3
+ kOseQXFDqKcNYUxHTZ3aQ==
+UI-OutboundReport: notjunk:1;M01:P0:wMBgrhgY18c=;mnlRA/xk6LcNZYddk1ItC4bnn4x
+ 7G75J4CT2irVKr81lmMGAmVX/8xgGeIMyBWdCuJ/S6YZcXioDiULWsTeKn+JZGvTYUvhWfwKD
+ YKK5oymdwdO7riwA4GZGpHYfGvYpDdLhisjh0vxKrvnT+hxq4lm2OmP2rkZrK1a6T9o43JYOu
+ ByUvtLWG7Vy1bQLCjinop3oHb4gu3JQfx2R0U23D2W7TlCgKqOUUP02JY8uumIv4WlfyiCArI
+ gGB6T8mmuxgWIke5/yMeiWkfPUKhoTXBwdkuicOxFxaWNwHTdgppO20sv3Pv2awRnJiyVyIjV
+ 1XAcDt2oTUZRyciIjWThcqc+CTK0IRZOnXqX/bLVEdXCutauK04OElMQBaBoh0NKOOjv8dINR
+ qCUosUlOiKRWtadZvfVW882u5a8FLtu/UKL9q0mi7vvUkxnng/2YBE55p9EQGXaIDm09bh0am
+ B4FntFe0jxquYk7PNCKw4BIemuafGfNWYIwXZ3sT77KcsypXyRWVLTx7jn2GxFZWCi3BLIwm8
+ eaXonJyHIuA9OWC2VpBLbyPLWAmGO1L9CwKs1QFd2Rz2T4n3n+bM9a0Mcp9Gr9XY2GW5Wk35I
+ +Axtj/YZ20RCtBh4uxUpMvWlX+rXqDt4HhJzMzrrjEjhiGtfjR9BugB74HbIxpfu5uC314quj
+ zuHunyr/sP0MqLuvgfmghp7brv7dUkSrSQZXaeTYizQLQRcnSNReObR5egeIOeGx8eg1p7zdx
+ Ng71X1aB5qkzq6+nbZySdpjlhXbDlvn8QAK7Z8UdQ0X9r0ixBZ1cT30O/eU+8xh/tvHqHLGln
+ j84WUqTz+5NJcDj2Xpn0mhjA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,68 +92,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/21/24 18:32, Simon Glass wrote:
+> Hi Andy,
+>
+> On Mon, 21 Oct 2024 at 16:27, Andy Shevchenko
+> <andriy.shevchenko@linux.intel.com> wrote:
+>>
+>> Hi!
+>>
+>> looking at the redness of the output of `make W=3D1` here is the questi=
+on:
+>> isn't it a good time to enable `make W=3D1` by default. Yes, I understa=
+nd
+>> the impact, but at least we can do it mandatory for a _new_ code submit=
+ted to
+>> U-Boot, right?
+>>
+>> Ideally I would have what Linux kernel has for a few releases already, =
+i.e.
+>> Werror by default and getting close to make a clean builds with that an=
+d
+>> make W=3D1` at least against default configurations (yeah, with U-Boot =
+there is
+>> probably no default, but sandbox one).
+>
+> Warnings should be warnings...if you would like to enable it for CI
+> that is fine by me, but the U-Boot makefile shouldn't do it. It
+> defeats the purpose of having a distinction between errors and
+> warnings.
+>
+> Regards,
+> Simon
 
---te2/zbMfJPBXe1W1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Most contributors don't have access to our CI.
 
-On Mon, Oct 21, 2024 at 06:32:18PM +0200, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, Oct 21, 2024, 16:33 Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Oct 21, 2024 at 03:44:49PM +0200, Simon Glass wrote:
-> >
-> > > Something this breaks, so add a test to keep it working. Since sandbox
-> > > enables a lot of options, it is a good board to use.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > >  .azure-pipelines.yml |  8 ++++++++
-> > >  .gitlab-ci.yml       | 11 +++++++++++
-> > >  2 files changed, 19 insertions(+)
-> >
-> > I don't like this because "sandbox" is one of the longest run-time
-> > build options due to all of the tests it runs. And given how we break
-> > down the jobs this will make a further bottleneck. Can we just disable
-> > CMDLINE in one of the existing sandbox defconfigs instead please?
-> > Perhaps sandbox_spl since that only does SPL related pytests?
->=20
-> Actually we do boot into U-Boot proper as some tests need to check
-> that SPL did the right thing.
->=20
-> Note that this patch doesn't run any tests at all. It just tries to
-> build sandbox without CMDLINE
+doc/develop/sending_patches.rst does not indicate that patches leading
+to build warnings won't be accepted.
 
-Is there no existing thing we can put this in? And have we had another
-problem with CMDLINE=3Dn ? It's not cheap (wall clock) to add another
-stage, especially in Azure, I'd really rather figure some way to bundle
-this in with what we already do. Heck, following on with
-qemu_arm64_lwip_defconfig I'd rather just add
-sandbox_no_cmdline_defconfig and use #include so that it's just a few
-lines of defconfig anyhow, but merged in with existing builds.
+We should at least amend the documentation.
 
---=20
-Tom
+Best regards
 
---te2/zbMfJPBXe1W1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcWhjUACgkQFHw5/5Y0
-tyzi/wv/e/LIKWoG7fGLohktlA7P3DM4ayktUWEWLltrY5WcdHYEtooxA0BzDHF0
-lNrQ1jR9oLWwvW9DF4mudprIEAcakjlJDlfrsl/YChsSeEhxvekE0FFL3t3ASkEk
-9SETb7SkwkM16djTtCZ35bN2QDIuXX3215ogkvhM7Mql5Jd1g5B0AyXABb6SGWhm
-ZEGilJbHBXfWNihvvxBvkcL6As9QEj8Q6vvkP7SbeudHuoKfUozIDyqC4at09cjF
-b6GzeUO5ry+KD2ANnt6V79mVbYivOeYKkUxraK/DNvH3VtGUHGTMtc7xYYxvkxUo
-nXl5jcnvtRBaoyYtmtML4UKxypwbKB62H5s8IF0MWrcOTOig/BXumjnScUdU8Kxr
-xFtW1CrBAv1cnoiFLoIQADxbCrbm3ftIUT/kClgzPa9cmQFjFvV89c7HN7IT5quq
-VNq/UEV2CoNlBU9z/rztmjFVr+2oKBtLGhxX4TUNHXNlo9mdYg6swyQCliMb0voD
-TRoC1GA8
-=iGNo
------END PGP SIGNATURE-----
-
---te2/zbMfJPBXe1W1--
+Heinrich
