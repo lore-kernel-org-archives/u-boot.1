@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9C16D17131
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 20:21:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 501D1D17141
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 21:39:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD44788DC8;
-	Mon, 21 Oct 2024 22:21:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F7B588DE5;
+	Mon, 21 Oct 2024 23:39:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eLZAjCwX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iVIbBWoH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBD5288DC8; Mon, 21 Oct 2024 22:21:06 +0200 (CEST)
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
- [IPv6:2607:f8b0:4864:20::82a])
+ id 0B79C88DE5; Mon, 21 Oct 2024 23:39:35 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A8F588CC9
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 22:21:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29AED88E3C
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 23:39:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82a.google.com with SMTP id
- d75a77b69052e-460ace055d8so28419341cf.1
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 13:21:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9693dc739so6479797a12.3
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 14:39:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729542061; x=1730146861; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WCOuBSqaIaPhdPdWxVub/yBB6/SmbHmt9KPjrE4KBl4=;
- b=eLZAjCwX/DMv5gNNx8du+rhuunMScAmdUdL0KAr3qGraUbbeLRbkNCBtnUFLP1ulcX
- hGVGoQ90k1+KC/I7jAjafi8I9eVIMu83tzJlJ3AWpLt4tusAirIRG2wFstnsaJ5pb3Uk
- bg3jZ74ehoLACV6d82mF4X6E4as7qnYIJId6M=
+ d=gmail.com; s=20230601; t=1729546772; x=1730151572; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=SBMYw5/yfFrKgdwCRYIz+lZajlCyMKCsSHJ7pod5RWQ=;
+ b=iVIbBWoHdj29v5TUeOgtDK+xNO1Mi4r4c8l7Mw45OQF4rQsrN7vw77tRKarr4M8mr6
+ xPFtJJSSuf+SSS/K2RfEfK7ZRyp5JcDqYkUdy8fVoXSiPzfyc/Xf3ypGOvhGlMtLFkBF
+ tJEMC1N72TxBeyJkijtAwbpNl6b2T+c/gl0g7kJM8i2d/Ed7uMWZznZ7X9JgvvqzLYdX
+ TwtHiSHNKU1ycqqWG0oYTC/BFvk2cCWH46FXriQv9p8a+btd74NFXhO1YfZCtpRmq8Pf
+ YY/ulYztmIBQ0pR+OH6zi5w9KKms9d5KuklK0gCechUt7Q04Igp7PED2UrCsxpBlkPhg
+ GwJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729542061; x=1730146861;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WCOuBSqaIaPhdPdWxVub/yBB6/SmbHmt9KPjrE4KBl4=;
- b=W7tSVtOl1r5uDqqjaVZt+Gg4S3JBdBez+JicYqUCFT/P2UiJ1VF91rjlukWBDOmRKk
- EEegWE3IE4d7jvucA4wUjm/7UW3bkIVRpBYTal8dERyln5llpp8MpahArPc+v8/WsNsZ
- 5/30IL6QmnHS5/867Sx8K6K44fiOa60bvlDt+UK2EA/TR9bE00z6iwCFwUcDtl/I1C9D
- AFE4FN4Nux+iPfF6b8D2N6/CXyCoqjCsvVONqziSYKKYuPh6k9ZK80Hkw1mk3SgyzRAC
- 2PBPHjJ8/87ugHUTHDDOpX6hpOvevW0HVSUs6H+e9UfbkJCj+oZlRSST9/ilyuqewgxT
- qg0g==
-X-Gm-Message-State: AOJu0YxJtvYxyUyv/updEZkfepegWoLrRusbFTk3Z4NwFlwgf1M+NoAk
- JHoae6fxMqiV0goHMFHe4rvj0JDFqR0ryBOYoeseK6EhB8cnDXSvhg/Kl3SqY7k=
-X-Google-Smtp-Source: AGHT+IFib/7FBpTK6qYuOqWiK+T+C3HleFZQzPhZ5AD7Z4VLgBRS74AO07einPxp0R9M5XNTX1Xy4w==
-X-Received: by 2002:ac8:7c87:0:b0:461:189:5f35 with SMTP id
- d75a77b69052e-461018960femr2511541cf.25.1729542061392; 
- Mon, 21 Oct 2024 13:21:01 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-460d3c6398bsm21668751cf.30.2024.10.21.13.20.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Oct 2024 13:21:00 -0700 (PDT)
-Date: Mon, 21 Oct 2024 14:20:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Devarsh Thakkar <devarsht@ti.com>, Anatolij Gustschin <agust@denx.de>
-Cc: u-boot@lists.denx.de, bb@ti.com, sjg@chromium.org, agust@denx.de,
- praneeth@ti.com, nm@ti.com, vigneshr@ti.com, s-jain1@ti.com,
- r-donadkar@ti.com, j-humphreys@ti.com, ilias.apalodimas@linaro.org,
- xypron.glpk@gmx.de, akashi.tkhro@gmail.com,
- mkorpershoek@baylibre.com, eajames@linux.ibm.com,
- caleb.connolly@linaro.org, quentin.schulz@cherry.de,
- martinstolpe@gmail.com, iivanov@suse.de, n-jain1@ti.com
-Subject: Re: [PATCH 0/3] Simple-framebuffer node related updates
-Message-ID: <20241021202056.GU4959@bill-the-cat>
-References: <20240925151354.480704-1-devarsht@ti.com>
- <66434f62-e7e6-5414-cc5e-64f516288795@ti.com>
+ d=1e100.net; s=20230601; t=1729546772; x=1730151572;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SBMYw5/yfFrKgdwCRYIz+lZajlCyMKCsSHJ7pod5RWQ=;
+ b=l4zDFr28HXpmg2CnAv3y1TRJTboUOE3PKPOjM53zC5AL2v/Ao2fpCNh8z7h7qECjmq
+ 6KSwtH4yp51hZ4R2mJYn41uJJeGVY6AfIUXCMUb/tdxjuDRJHM5uVwT+MinkjS8UoXMr
+ vMVgKNzMGUojcu46YayRS763IPBTqh3pszJyFQBCeRrasWr1HhNFsKLaQZUcVwgRN+Lm
+ 9SkS0XnzBYR/Ug5u7nTfQK0Gpua5Tu0pQKyPRkYl7tokjFf5CxOwzR238llA3PVs8A8V
+ vjr5Dx7g/f6neGLhOYA+hHJuLF55eehWbPIYLmcSk3GvnW0rVKKY1WSCvTnFpOhWgA2T
+ XT8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX6575gQ5ikJ8RaI2XICd99K1lVkTxlctfV8GTL8TiA/7oMfg4rSPOP1sNxMxocjsLmJM6lypA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx6/DLJD9TTZJ7cccz3H1W0ERVgyTN7dhMiFI2Cfbuwx/GTDLdL
+ AL7UX3E7yYdEdudQF7bgSUM/xQdzOLFWsMkmit5wguQCXKG7PoFYL0oKGWSxaXp8UWCR+1StEFV
+ 3iSpETdGr34bj8i2+Q/HvKy6lV7I=
+X-Google-Smtp-Source: AGHT+IFI8kZbMfNHjcRy3jw8nIJRXK/y9XFXBkz7kAgfp2g6mW/Il/P/cdbkyD4OunAS5USLOpcvadBa7+jAW9qVN7M=
+X-Received: by 2002:a05:6402:358a:b0:5c9:85dc:5b9f with SMTP id
+ 4fb4d7f45d1cf-5ca0ac43593mr10467118a12.2.1729546772189; Mon, 21 Oct 2024
+ 14:39:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Mdf++2g/qwDBvMsK"
-Content-Disposition: inline
-In-Reply-To: <66434f62-e7e6-5414-cc5e-64f516288795@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241018142235.715571-1-ilias.apalodimas@linaro.org>
+ <20241018142235.715571-6-ilias.apalodimas@linaro.org>
+In-Reply-To: <20241018142235.715571-6-ilias.apalodimas@linaro.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 21 Oct 2024 22:39:20 +0100
+Message-ID: <CALeDE9MecRXSmLd+r97hm0mJu0-eqOpCaTjnNjMqf2_=q=fiXw@mail.gmail.com>
+Subject: Re: [PATCH 5/6] configs: Enable htts for wget on qemu arm64
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: jerome.forissier@linaro.org, raymond.mao@linaro.org, xypron.glpk@gmx.de, 
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Wei Ming Chen <jj251510319013@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,60 +97,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+s/htts/https for the subject.
 
---Mdf++2g/qwDBvMsK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Oct 21, 2024 at 08:47:55PM +0530, Devarsh Thakkar wrote:
-> Gentle reminder.
->=20
-> Hi Tom, Bryan,
->=20
-> On 25/09/24 20:43, Devarsh Thakkar wrote:
-> > This series fixes some compilation issues related to FDT_SIMPLEFB
-> > and VIDEO and along with that enables support for dynamic simplefb
-> > node enablement for AM62x platform.
-> >=20
-> > Devarsh Thakkar (3):
-> >   boot/Kconfig: Add Video Kconfig as dependency for FDT_SIMPLEFB
-> >   boot: fdt_simplefb: Remove conditional compilation checks for VIDEO
-> >     Kconfig
-> >   board: ti: am62x: evm: Update simple-framebuffer node in device-tree
-> >=20
->=20
->=20
-> Is it possible to pull in this series for -next branch ? It is already
-> carrying a R-B for first two patches and last one was peer reviewed infor=
-mally
-> too [1].
->=20
-> [1]:
-> https://lore.kernel.org/all/CAPHZmLZopucK5uMwENuF83pRMLYR2A5sC7fes4-1JXE4=
-jX7=3Drw@mail.gmail.com/
-
-Anatolij, do you have time to pick up some patches for v2025.01? Thanks.
-
---=20
-Tom
-
---Mdf++2g/qwDBvMsK
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcWt58ACgkQFHw5/5Y0
-tyxbogv/Vw/Yk8iqfb9n1W0Jkr8YNGiLP5DNanBGek07NiNg8hjzcqB4yVCKg928
-X31cYiLl27mz6AyWUxqc9P+U4qAONHo4idUhD8jPxD+u6xm6x6TIqVhiSFIIj7YE
-Be2gsBdlm47ydJapkDpgI3zYTAxDHE3kgZkap56CUzUdFL6I16ReZSaef1sdkYY8
-8cvjeuHurHT439Smn1F5HLUp6ZrFp0n3FwMp3wEAQKCKWXaWyVWvankd2A22200d
-6VX4nL4aCYSDKPi9oviITqzh17G6Nme2rWFdSUeVINyISljHqCaHON8bNN3h9ASu
-2NVB4MtW3U1Btep3cryQSdUqJIyacy7JqO862OO0/ywhi125yDFbZ4guaYHM0ZPg
-HJZvnoH1p1PN+6Fo16WbdqZ3EfFMX1/tLSAQxjAGkv6WpLgeRVCRKhAnMSmdWKXw
-DTF4Sg22eHYK/q8t40+a+gMPqgjcdgalzjvT/vKVUgTpFuzGE1FdpU10LhMq9K96
-I04ioSZK
-=HBJv
------END PGP SIGNATURE-----
-
---Mdf++2g/qwDBvMsK--
+> QEMU already has an lwip variant of a defconfig. That defconfig
+> is also configured with mbedTLS by default. So let's enable the
+> remaining config options to enable wget for https:// as well
+> and test that codepath in the CI
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+> ---
+>  configs/qemu_arm64_lwip_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
+> index d3d8ef16e668..754c770c33fc 100644
+> --- a/configs/qemu_arm64_lwip_defconfig
+> +++ b/configs/qemu_arm64_lwip_defconfig
+> @@ -7,3 +7,4 @@ CONFIG_NET_LWIP=y
+>  CONFIG_CMD_DNS=y
+>  CONFIG_CMD_WGET=y
+>  CONFIG_EFI_HTTP_BOOT=y
+> +CONFIG_WGET_HTTPS=y
+> --
+> 2.45.2
+>
