@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DACAAD0E6EA
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 10:32:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9FB6D0E6EE
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 10:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47F2B88D99;
-	Mon, 21 Oct 2024 12:32:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1362988E8A;
+	Mon, 21 Oct 2024 12:50:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m+dYSr2W";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XxUtZ8/1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC41E88DB2; Mon, 21 Oct 2024 12:32:27 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id C00F788EE4; Mon, 21 Oct 2024 12:50:02 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E9DC8811C
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 12:32:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63BC088E8A
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 12:50:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2e2bd347124so3115704a91.1
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 03:32:25 -0700 (PDT)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-20c6f492d2dso49564285ad.0
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 03:50:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729506744; x=1730111544; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729507799; x=1730112599; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=S8SQkC67DEMKRXHj/a3w+R6r7bEL8ibiOz8ypsrziRs=;
- b=m+dYSr2WKnRq1p1YzSZAg8IqVYMUYrnfv6LpffPsg4DbVn4zUoYwAX0CzRRMRLQShj
- UN2gYZeEGL4m4fzFUuwMsmA7o4aBeIvScamEGThm/tormLe+gr+AHyv2eFk35UHdbUSo
- OidMfUlAs/vcrwAsTPfTMsyU2NUzN1XMjKAYlq2T/xaoj6HVifQtgr/jEZiUAfwNyOmM
- REDJDdaJ558Z0DWDpvoGuOlwpgR28JpUdVfv3jNJgdTLWetkUKIw8U0eBFS0ZkViokrv
- 9wGDc5nxusn14whGHfCjG9d3LlyMXFl5KDnpwC+gXIbbfZr7qhmu+muoQBkE+P5L8ZJd
- fEyw==
+ bh=v8k5PIKBIeCo5QAeNWfkAiqSNI66xPvOn+fpTNETgUw=;
+ b=XxUtZ8/1JEdifd1L0WQwi3eulxpobysctqhfcUo2ojJqDs/bDwYuEvp6zMyVh+0cFe
+ tmzP1VAY0GLFpd50XNHI4TDNHL3oVpTUvs5jHqmUVENTC3ZMrgJrmllZMEuHQxf+jsn7
+ nsJSBjjp2tSclBPQuRTgnK9VN2sfzX5q4O5YPa1YFf/YrXLT+a8EHW08LJ+I5xz9NXBp
+ zMA/VlAhZYs6aNAdR5HNF0tNTQ0mgil3ZDa5hyjUCglN1HWN/7KSqkFDcczApdIPE9/n
+ YMDJ3bPp+uXisImZucx6gu66+QhQHkdsI4VzpwA3muXW6YSNHHI0r9jFX1s3OH5klmso
+ fqBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729506744; x=1730111544;
+ d=1e100.net; s=20230601; t=1729507799; x=1730112599;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=S8SQkC67DEMKRXHj/a3w+R6r7bEL8ibiOz8ypsrziRs=;
- b=QOsaeWUTStbusjxkC+RT2Pb6lNE/pZK0cFI7lsyFlnBuNbN1h2iRuZPzA4JTgJV0Z5
- tY0bwTPo1kussApjT5gggv1cZR9i15OLHqbMgeQChRhYFhQeer27x3syJjGFmzXXKx8Y
- a7PhJG8K0bfaKrJ6rW1fg6k+ux6OrnxO/+2+BdxW4Y3nU6335n0BXqCnfheoFTtp9cXP
- /xnKAnc3/2wW6kJOcgkgOtNPiDIuurhw50eMsHBTcduyfABP1ns5A/Vq1PxqmVuhH1Yx
- No1Xkscb0KMpRaPdcGGnfX477nwPrDeal7/7/DqA4N44Axs2RD6Ut9C+nKAJ7ydGh9W3
- 76ig==
+ bh=v8k5PIKBIeCo5QAeNWfkAiqSNI66xPvOn+fpTNETgUw=;
+ b=AhAUL/PZ91TRdj07RsVt3/uyF2NDpSQ/YBoPtoW8j7Kg2wKAMNh4f50FLkMTG4G8QX
+ PcjDXFa+uW/jZ7TRYKKhYmuEp8eRA7h2CEFvFnTHbt7d5eGxTxenTl+waCZOzWCx0yur
+ tt5kTR9fevidfBCYjujNXC0rS0xDVs3DwGuBmwOeloNsMOIlOv5gUMgfhpld3hwxx9dQ
+ XD6MxdIjhBV0IRnz8iKNkXTLKcblm+m/wdQ2WVdyVFJ2Jwg5OD4+jJhJPCmvV/k9xcIZ
+ uYt5+LTUdnb6wAzeGi3KU0GkPUNjn8fys+hbO+LKx7DiS+h9sSHRIAC/uH65I7JHq01x
+ j73A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVGLj/0K9tkth8G9rt7zQyKDeR5y1sUAB6JTq5yNWNMZskp3qTcbJL1TlEXHt8OOO6mh6sardo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzfDKwXkCgcjzO2NEQMKtwnbq9eoHQpFds2DLeD9d6J6UghVpiT
- C8lodNssIQI0U0kPNN8S2WEODZ3aig+HLSp0/ltkkQScloc5PjdgX5diBwQcnMhYD1CCOUicQGT
- 0fR/f0L+OYM5fa+N1kSa8gMOBtENs+wCfzbiVKg==
-X-Google-Smtp-Source: AGHT+IF+N/1m5O4BMKqCw4NPoaF9CtxpSFj4xmQSzJRBAhYbH/csM0Czgr7wXeala/x9fJBwf+mghWyTqzLVxe24XzQ=
-X-Received: by 2002:a17:90b:1d8f:b0:2e2:d3f6:7501 with SMTP id
- 98e67ed59e1d1-2e561722521mr11856741a91.38.1729506743938; Mon, 21 Oct 2024
- 03:32:23 -0700 (PDT)
+ AJvYcCUgwXggZtawjMkQP+rxK4oGnadMuZu3Hf7ReVNRGmuGewc7WG93q1offCdLid0DmvR2MtJndhw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwSef1GZYufG2t+jN+yjxC0/GohZZXJLZL7773J02KFaIK+8R1V
+ x3gnu3HB/4Nc1fnPeqcXSrkPhzo31773VhsKphT1S8CYrfsuw5F1fHBHul5AzD3v6gKR9dPjfMj
+ AezOG5rFtVrzIzLq65U1s4QH1QVaoDAnxvBwILA==
+X-Google-Smtp-Source: AGHT+IGECR+Pw5S12+DsfK7z5U+Oeag859dcXAzbCx1ug7w2mMouxOxLmInkljQEzquKFanTqarSh2ReI7eQwZbNmWQ=
+X-Received: by 2002:a17:90a:b701:b0:2e2:8bce:3d16 with SMTP id
+ 98e67ed59e1d1-2e56172acf8mr13499431a91.19.1729507798889; Mon, 21 Oct 2024
+ 03:49:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241018142235.715571-1-ilias.apalodimas@linaro.org>
- <20241018142235.715571-2-ilias.apalodimas@linaro.org>
- <CAEfUkUJFWHz350pY2WQmm9=hex6VXH1HGzupp1W70rMFaH2SAg@mail.gmail.com>
- <CAC_iWjLLu9GEkst9BZPSUy-nemBvZVH9OySnaLmSZ4tOdDbRhQ@mail.gmail.com>
- <CAEfUkUKCGRR5PG8d-HcuEU09s=Bb7EUKc+E3tWRCGg=7qHz13g@mail.gmail.com>
-In-Reply-To: <CAEfUkUKCGRR5PG8d-HcuEU09s=Bb7EUKc+E3tWRCGg=7qHz13g@mail.gmail.com>
+References: <20241018013015.127620-1-heinrich.schuchardt@canonical.com>
+ <20241018013015.127620-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241018013015.127620-4-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 21 Oct 2024 13:31:47 +0300
-Message-ID: <CAC_iWj+AUu7VoOsRmgdpdiRShZPiHoRXnZM_4iv8OSNWcF02Zg@mail.gmail.com>
-Subject: Re: [PATCH 1/6] mbedtls: Enable TLS 1.2 support
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: jerome.forissier@linaro.org, xypron.glpk@gmx.de, 
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Wei Ming Chen <jj251510319013@gmail.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
+Date: Mon, 21 Oct 2024 13:49:22 +0300
+Message-ID: <CAC_iWjL-tBww8AV9vjGez0YpbC9g_bRcYoS1aPbMWFJm0Ep+pA@mail.gmail.com>
+Subject: Re: [PATCH 3/3] block: make blk_create_device() static
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Simon Glass <sjg@chromium.org>, Heiko Schocher <hs@denx.de>, 
+ Alexey Romanov <avromanov@salutedevices.com>, Johan Jonker <jbx6244@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,150 +93,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+On Fri, 18 Oct 2024 at 04:30, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> There are no users of the blk_create_device() function outside the uclass.
+> Let's make it static. This will ensure that new block drivers will use
+> blk_create_devicef().
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  drivers/block/blk-uclass.c | 19 ++++++++++++++++---
+>  include/blk.h              | 17 -----------------
+>  2 files changed, 16 insertions(+), 20 deletions(-)
+>
+> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
+> index 312e038445c..f3ac8db9464 100644
+> --- a/drivers/block/blk-uclass.c
+> +++ b/drivers/block/blk-uclass.c
+> @@ -695,9 +695,22 @@ static int blk_claim_devnum(enum uclass_id uclass_id, int devnum)
+>         return -ENOENT;
+>  }
+>
+> -int blk_create_device(struct udevice *parent, const char *drv_name,
+> -                     const char *name, int uclass_id, int devnum, int blksz,
+> -                     lbaint_t lba, struct udevice **devp)
+> +/**
+> + * blk_create_device() - Create a new block device
+> + *
+> + * @parent:    Parent of the new device
+> + * @drv_name:  Driver name to use for the block device
+> + * @name:      Name for the device
+> + * @uclass_id: Interface type (enum uclass_id_t)
+> + * @devnum:    Device number, specific to the interface type, or -1 to
+> + *             allocate the next available number
+> + * @blksz:     Block size of the device in bytes (typically 512)
+> + * @lba:       Total number of blocks of the device
+> + * @devp:      the new device (which has not been probed)
+> + */
+> +static int blk_create_device(struct udevice *parent, const char *drv_name,
+> +                            const char *name, int uclass_id, int devnum,
+> +                            int blksz, lbaint_t lba, struct udevice **devp)
+>  {
+>         struct blk_desc *desc;
+>         struct udevice *dev;
+> diff --git a/include/blk.h b/include/blk.h
+> index 1fc9a5b8471..261c7dd6616 100644
+> --- a/include/blk.h
+> +++ b/include/blk.h
+> @@ -376,23 +376,6 @@ int blk_first_device(int uclass_id, struct udevice **devp);
+>   */
+>  int blk_next_device(struct udevice **devp);
+>
+> -/**
+> - * blk_create_device() - Create a new block device
+> - *
+> - * @parent:    Parent of the new device
+> - * @drv_name:  Driver name to use for the block device
+> - * @name:      Name for the device
+> - * @uclass_id: Interface type (enum uclass_id_t)
+> - * @devnum:    Device number, specific to the interface type, or -1 to
+> - *             allocate the next available number
+> - * @blksz:     Block size of the device in bytes (typically 512)
+> - * @lba:       Total number of blocks of the device
+> - * @devp:      the new device (which has not been probed)
+> - */
+> -int blk_create_device(struct udevice *parent, const char *drv_name,
+> -                     const char *name, int uclass_id, int devnum, int blksz,
+> -                     lbaint_t lba, struct udevice **devp);
+> -
+>  /**
+>   * blk_create_devicef() - Create a new named block device
+>   *
+> --
+> 2.45.2
+>
 
-On Fri, 18 Oct 2024 at 18:26, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Hi Ilias,
->
-> On Fri, 18 Oct 2024 at 10:55, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
->>
->> Hi Raymond,
->>
->> On Fri, 18 Oct 2024 at 17:39, Raymond Mao <raymond.mao@linaro.org> wrote:
->> >
->> > Hi Ilias,
->> >
->> > On Fri, 18 Oct 2024 at 10:22, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
->> >>
->> >> Since lwIP and mbedTLS have been merged we can tweak the config options
->> >> and enable TLS1.2 support. Add RSA and ECDSA by default and enable
->> >> enough block cipher modes of operation to be comatible with modern
->> >> TLS requirements and webservers
->> >>
->> >> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> >> ---
->> >>  lib/mbedtls/Kconfig              | 12 ++++++++
->> >>  lib/mbedtls/Makefile             | 33 +++++++++++++++++++-
->> >>  lib/mbedtls/mbedtls_def_config.h | 52 ++++++++++++++++++++++++++++++++
->> >>  3 files changed, 96 insertions(+), 1 deletion(-)
->> >>
->> >> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
->> >> index d71adc3648ad..f3e172633999 100644
->> >> --- a/lib/mbedtls/Kconfig
->> >> +++ b/lib/mbedtls/Kconfig
->> >> @@ -430,4 +430,16 @@ endif # SPL
->> >>
->> >>  endif # MBEDTLS_LIB_X509
->> >>
->> >> +config MBEDTLS_LIB_TLS
->> >> +       bool "MbedTLS TLS library"
->> >> +       depends on RSA_PUBLIC_KEY_PARSER_MBEDTLS
->> >> +       depends on X509_CERTIFICATE_PARSER_MBEDTLS
->> >> +       depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
->> >> +       depends on ASN1_DECODER_MBEDTLS
->> >> +       depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
->> >> +       depends on MBEDTLS_LIB_CRYPTO
->> >> +       help
->> >> +         Enable MbedTLS TLS library. If enabled HTTPs support will be enabled
->> >> +         in wget
->> >> +
->> >>  endif # MBEDTLS_LIB
->> >> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
->> >> index 83cb3c2fa705..845284799a11 100644
->> >> --- a/lib/mbedtls/Makefile
->> >> +++ b/lib/mbedtls/Makefile
->> >> @@ -25,7 +25,19 @@ obj-$(CONFIG_MBEDTLS_LIB) += mbedtls_lib_crypto.o
->> >>  mbedtls_lib_crypto-y := \
->> >>         $(MBEDTLS_LIB_DIR)/platform_util.o \
->> >>         $(MBEDTLS_LIB_DIR)/constant_time.o \
->> >> -       $(MBEDTLS_LIB_DIR)/md.o
->> >> +       $(MBEDTLS_LIB_DIR)/md.o \
->> >> +       $(MBEDTLS_LIB_DIR)/entropy.o \
->> >> +       $(MBEDTLS_LIB_DIR)/entropy_poll.o \
->> >> +       $(MBEDTLS_LIB_DIR)/aes.o \
->> >> +       $(MBEDTLS_LIB_DIR)/cipher.o \
->> >> +       $(MBEDTLS_LIB_DIR)/cipher_wrap.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ecdh.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ecdsa.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ecp.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
->> >> +       $(MBEDTLS_LIB_DIR)/gcm.o \
->> >> +
->> >
->> > I think we should move these to mbedtls_lib_tls.o and add the U-Boot Kconfig
->> > control if it exists.
->> > Take ECDSA for example:
->> > mbedtls_lib_tls-$(CONFIG_$(SPL_)ECDSA) += $(MBEDTLS_LIB_DIR)/ecdsa.o
->>
->> Fair enough, but ECDSA is the only one that exists atm. I can move
->> that there, but I don't think we should create a Kconfig option per
->> object file.
->> Those are mbedTLS internals dependencies to enable TLS1.2.  Perhaps
->> only ECDSA, AES and ECDH? OTOH the existing md5 doesn't follow that.
->>
-> I agree. We can move ECDSA and AES with Kconfig control and keep others as-is at the moment.
-
-Ok I had a closer look at this. ECDSA and AES currently have Kconfig
-options for the legacy crypto libs. As a result, we need to define
-mbedtls variants etc which is ok.
-We only have one board using AES atm and sandbox using ECDSA. Since I
-want efi https for 2025.01, we can move the new .o files under
-CONFIG_MBEDTLS_LIB_TLS and then send a patch on top cleaning up the
-Kconfigs for all crypto which is a bit messy atm.
-
-Are you ok with this?
-
->
->>
->> >
->> >>
->> >>  mbedtls_lib_crypto-$(CONFIG_$(SPL_)MD5_MBEDTLS) += $(MBEDTLS_LIB_DIR)/md5.o
->> >>  mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA1_MBEDTLS) += $(MBEDTLS_LIB_DIR)/sha1.o
->> >>  mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += \
->> >> @@ -54,3 +66,22 @@ mbedtls_lib_x509-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
->> >>         $(MBEDTLS_LIB_DIR)/x509_crt.o
->> >>  mbedtls_lib_x509-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER_MBEDTLS) += \
->> >>         $(MBEDTLS_LIB_DIR)/pkcs7.o
->> >> +
->> >> +#mbedTLS TLS support
->> >> +obj-$(CONFIG_MBEDTLS_LIB_TLS) += mbedtls_lib_tls.o
->> >> +mbedtls_lib_tls-y := \
->> >> +       $(MBEDTLS_LIB_DIR)/mps_reader.o \
->> >> +       $(MBEDTLS_LIB_DIR)/mps_trace.o \
->> >> +       $(MBEDTLS_LIB_DIR)/net_sockets.o \
->> >> +       $(MBEDTLS_LIB_DIR)/pk_ecc.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ssl_cache.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ssl_ciphersuites.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ssl_client.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ssl_cookie.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ssl_debug_helpers_generated.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ssl_msg.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ssl_ticket.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ssl_tls.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ssl_tls12_client.o \
->> >> +       $(MBEDTLS_LIB_DIR)/hmac_drbg.o \
->> >> +       $(MBEDTLS_LIB_DIR)/ctr_drbg.o \
->> >
->> > Ditto, add the U-Boot Kconfig control if it exists.
->>
->> None of these don't make sense to be a U-Boot Kconfig. They are
->> mbedTLS internal to enable TLS1.2 support.
->
->
-> I saw Jerome added CONFIG_NET and CONFIG_NET_LWIP in his LWIP series.
-> I think the net_sockets, ssl_# and ssl_tls12_# can be under this control.
-
-I would prefer having TLS as a separate Kconfig option. We might need
-to use it without wget and binding mbedTLS to lwIP doesn't make that
-much sense. It does *currently* because that's the only code that uses
-it
-
-Thanks
-/Ilias
->
-> [snip]
->
-> Regards,
-> Raymond
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
