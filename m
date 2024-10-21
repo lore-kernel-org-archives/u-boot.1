@@ -4,69 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A75D17151
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 00:56:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFE92D17159
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 02:07:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0714588606;
-	Tue, 22 Oct 2024 02:56:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 2B88C88F6B;
+	Tue, 22 Oct 2024 04:07:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="aXbNyGUx";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="QgS1khkR";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 11B368899C; Tue, 22 Oct 2024 02:56:02 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1729562849;
+	bh=AyA/gvFPJvVNaL2QTtgaVfJjzqmXa8K6GvheuVVGTN4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=kE1mnyberw1yCtL7AYGT6iqN+VV1hbY96RmK4Vf+YWio/w0vhferX39KR6RtZZuZh
+	 RHkEEjzCNlDIQ787NhsMIfEnsSaYepw6OnDVmmccoyreZNL3QuGConuvu1S+1Gjwbs
+	 x2d18nEY3B9abi8BXW3XfgKvksVruIrQLWofoU1+V1lXdjapRiscXBjaAb6W1LQrED
+	 D8fz6sAz0kGL+trqKdAucvpKQnr2DHA2uK8PumhTsGyOOhJ9Lh7GkrPqfwNYvFgHdF
+	 ai8mC7sQ/D/M6qaXxuaR8vkLSnP72nBTCizErlBgy/DdqjVjKVAlidAYPZP9SRazq0
+	 4407/kKWV/q0w==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7861688599
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 02:55:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4XXYdV1gPFz9scH;
- Tue, 22 Oct 2024 02:55:58 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729558558;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=OKW8nkuppk1KdrR+n1pVCPMGmi7Q3eCULyegOueVQh8=;
- b=aXbNyGUxBmAtgrRRWq5nIAUjwYCyNeesk8xWYr/mV5W4vXGLwLrBOrED3dhF5/8ChrL2yS
- X5XXra2SZF57yXDctP3lUl9v2FDLqQVMXIa1ypKBSEDwGK3NJ+5HIavR4lpyK5Op09zVqG
- OCZbBFxSXQRa5C6Eo1Zs60HOIDxiL0V5PzbS5iEFzGs4UcBdZWHJUkc1mlLIFamWYzuT3s
- gTR99f2C4RyZOryF59KDkjtfVQIbiP9HxzaQ5J5tE4WQR/uOdUgaTTF4/qkKh0srXCoNkv
- lrHn1yzOKuvjzQwA84GSQyVW+kYgpGIhzUHZM4qLAYzLiLcmMByZQCKJEFYr/Q==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729558556;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=OKW8nkuppk1KdrR+n1pVCPMGmi7Q3eCULyegOueVQh8=;
- b=QgS1khkRpkpq2e5GTEamGAjKIL9Tof9N5IktxFZpmxNjxPi/RAlZWhO67ZawBA29gsbneT
- mRcoB0afPGx/dSF+aS196q1/2uVj1AjqT1HrwBuhFa4Acy17mWznAWUSlCxw8cfZ3IOs/i
- e8Q5bvhcfnUHfPN8WEzr0G36S2UyjOTmcS5gDs/yk+ks/d7biEOl+JKviZrubkFisnrKKA
- q26y6ANrF3tIXjtrE/5csGAvqYPmzdAQAVv1o1VjFQF36ZS0DYUvsKOlLsLlXoiVtU44BP
- 2udKNEAo09s0kVgzoNW3vMtxVB3tu6tBanAV+mei88FUHCygmwWkGbRewugcoQ==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] ARM: renesas: Add top level boards/renesas/ MAINTAINERS file
-Date: Tue, 22 Oct 2024 02:55:32 +0200
-Message-ID: <20241022005543.239308-1-marek.vasut+renesas@mailbox.org>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id C535C88F66;
+ Tue, 22 Oct 2024 04:07:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1729562848;
+ bh=AyA/gvFPJvVNaL2QTtgaVfJjzqmXa8K6GvheuVVGTN4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=WMAkSjq6YcRdcGid/v5+aefcSLhgc1YErZl1+aUSIgkWBP3/3s2rQi5gFQGlEBJxH
+ US31YWCeJ0S+0KDZtDbIMve3070rMs8mvr14rVuqR696MdiGw4sceh4/sFr+AoKX+2
+ 3F99RqOBxlmdUUfgppgBB2s60IKUfrFgVfxpil6QpCSm0tZMra5QB0kK12n9/Ey4Fp
+ l1iLkI4jB6y7YPreu21ZY64l20TlL0+R2Rc4UVo/NJHrg1ZhcD/J12zXMiptddzJi4
+ 4p+CEYvDMzEsfwd86yZGdsJDdcJiE6kKofeeSnW9AjO8UKD4QrfHA8Z2RUP+kOCU99
+ ppstZcoASIINg==
+Message-ID: <a0f70ee2-6d71-4f66-b22e-994df2b28504@denx.de>
+Date: Tue, 22 Oct 2024 01:00:40 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: sjj7cg19m551dwfqpiwyjt9r11qjmagc
-X-MBO-RS-ID: ee39b9a067508636a72
-X-Rspamd-Queue-Id: 4XXYdV1gPFz9scH
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
+ EEPROM ID page on DH i.MX8MP DHCOM
+To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
+References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
+ <20241010132337.3259-2-cniedermaier@dh-electronics.com>
+ <934d25c2-39d8-4f51-b29e-8f20feb7431f@denx.de>
+ <a305b1455a984fca83de5a6c0d4b8dfc@dh-electronics.com>
+ <74bd0a6b-fe12-4e2c-af79-c1f8ffb7d484@denx.de>
+ <73ccb69b85094e24be2343d5cbc8879a@dh-electronics.com>
+ <17b9380b-39c0-40f2-bb28-319d26b2e13c@denx.de>
+ <7b9b543d7aad498591fa6a04a3154cf8@dh-electronics.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <7b9b543d7aad498591fa6a04a3154cf8@dh-electronics.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,40 +79,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add top level boards/renesas/ MAINTAINERS file to catch all the common
-Renesas file patterns and put people on CC via get_maintainer.pl script.
+On 10/21/24 5:38 PM, Christoph Niedermaier wrote:
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- board/renesas/MAINTAINERS | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 board/renesas/MAINTAINERS
+[...]
 
-diff --git a/board/renesas/MAINTAINERS b/board/renesas/MAINTAINERS
-new file mode 100644
-index 00000000000..d96be7d8520
---- /dev/null
-+++ b/board/renesas/MAINTAINERS
-@@ -0,0 +1,15 @@
-+RENESAS BOARDS
-+M:	Marek Vasut <marek.vasut+renesas@mailbox.org>
-+M:	Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-+S:	Maintained
-+N:	grpeach
-+N:	r2dplus
-+N:	r7s72100
-+N:	r8a66597
-+N:	r8a77
-+N:	rcar
-+N:	renesas
-+N:	rza1
-+N:	serial_sh
-+N:	sh77
-+N:	sh_eth
--- 
-2.45.2
+>> If yes, then there is no need for any static variable:
+>>
+>> board_init() {
+>>    u8 eeprom[32];
+>>    dh_read_eeprom_wlp(eeprom); // read the eeprom once
+>>    dh_setup_mac_address(eeprom); // extract MAC from EEPROM
+>>    dh_add_item_number_and_serial_to_env(eeprom); // extract SN from EEPROM
+>>    // once this function exits, the eeprom variable on stack is discarded
+>>    // which is OK, since it won't be used anymore anyway
+>> }
+> 
+> The idea is that function dh_add_item_number_and_serial_to_env() encapsulates
+> the reading.
 
+The function which interacts with the EEPROM on start up, once, can have 
+this name, sure.
+
+> I don't want to have to worry about the structure and number of
+> bytes of the EEPROM ID page and want to be independent of it. It is planned to
+> extend the structure and increase the number of bytes for the STM32MP2. The
+> changes to the size will then depend on the version of the data in the header
+> within the structure.
+
+It is OK to allocate 32 or 64 bytes on stack, since that chunk of memory 
+is free'd on return from the function. The lifespan of that allocated 
+memory is exactly as long as it should be, and it does not waste U-Boot 
+memory unnecessarily.
+
+So far, all known EEPROMs have WLP size of 32 or 64 Byes.
+
+> However, these changes should then only have to be made
+> within the function dh_add_item_number_and_serial_to_env() for reading the
+> EEPROM ID page. I accept the static variable in order to better isolate the
+> function.
+
+This can very well be:
+
+dh_add_item_number_and_serial_to_env() {
+    u8 eeprom[32];
+    dh_read_eeprom_wlp(eeprom); // read the eeprom once
+    dh_setup_mac_address(eeprom); // extract MAC from EEPROM
+    dh_add_item_number_and_serial_to_env(eeprom); // extract SN from EEPROM
+    // once this function exits, the eeprom variable on stack is discarded
+    // which is OK, since it won't be used anymore anyway
+}
+
+board_init() {
+   ..
+   dh_add_item_number_and_serial_to_env();
+   ...
+}
+
+> Since the memory is freed up again when the operating system boots,
+> this consumption of 32 bytes in U-Boot is not a problem, because it is only
+> temporary.
+This is not good, please do not waste memory in U-Boot if it can be 
+easily avoided by automatically allocating it on stack and freeing it 
+when not needed.
+
+[...]
