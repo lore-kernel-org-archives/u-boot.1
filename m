@@ -4,73 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93FD0D17123
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 18:37:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B01FAD17122
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 18:43:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C826388A3C;
-	Mon, 21 Oct 2024 20:37:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 16B1F88A3C;
+	Mon, 21 Oct 2024 20:42:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cMt96VCi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M6kkaYaC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEEF588E8A; Mon, 21 Oct 2024 20:37:35 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id ED18C88E8A; Mon, 21 Oct 2024 20:42:57 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAD6388A3C
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 20:37:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2356A88A37
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 20:42:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5c40aea5c40so194694a12.0
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 11:37:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6cbf0769512so28445646d6.3
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 11:42:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729535851; x=1730140651; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EuzpcWRaJYRSKofzownP23Z2oCi6lTTr6q09TCaUUP0=;
- b=cMt96VCi+8SDtcPlCxIpJrHNm61Mbkv8psdQEjdMJAOKsyQCAw2DRYs/1duEvNLeIA
- 1CWBAx3HU/rVF9f5oqnOLR92YWpuHwY0uSj7XZUPWnUDSONpMR80BOfPZ+e0zRmMXbWl
- 9AL+xs7nBFM9w6So3jENmou1QLIbFm6BVLuIesbiHpkcDTfkTy6Y6XS1mkF2PtI0/c3c
- WKJgkgtlk0PHXl/tmjak+56SdtTAyV1yabJy1M5+whjrJ4avDt5K5ZHJZnS8Cge5P47G
- z++URtttMY2xXwIGLOk18yqmNgOzbkwj7GGYEJb4Sr0/xBLcW16BbBIWaQsxsYNU83Xb
- 47tA==
+ d=konsulko.com; s=google; t=1729536173; x=1730140973; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qEahlITX03Z8Bv2cqWSSwrRr4JP9cWQB3ZOiulKFvWg=;
+ b=M6kkaYaCZI1hxQTcDbuBPO5idQJ3g03CFKXPa3EqWhWXTRuktBuIaO1L0bdU4DacyY
+ 9O+CVONwOXQ2yNGI/PDq+9EQ0k8C0eVM6Pl1PikxiEi3GtCO9/1sHRhI1hT5j2d10GIG
+ wfHhyYswXsa2nQ8xUP53DHR5Fp4a/MoUraUYI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729535851; x=1730140651;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EuzpcWRaJYRSKofzownP23Z2oCi6lTTr6q09TCaUUP0=;
- b=aTxbmBHWn8nbpyNyQ37cHisNgk81fpJqx+UadNdqAYt8DpcOSZSlZ8ETnvTt2W5j7P
- muZAMSc9ExEBrVcttNotr45ilufOK1QSIDwPxQ48mMXJP2EGDPFrj1cbYr51auXlgwyY
- 3JBEdHkBeaNRJyS4oJg/GJsldM/RcUSQCK+waIT+h5NhY2fLgM7uaBA+Fj+K7CbzyW57
- RLNx7k7PwF/wYiCwbFuEqMcn9hE9H8U96/RpZOimMOd7cM+SS0wIUYQ793nNvQNasVK6
- 8DUcYP6Bq4+vgtKqPUuegMDts+Pn1rxDK2pemE5zg/SUDjNINsyNXx/01x2U9lyLsX8j
- plGw==
-X-Gm-Message-State: AOJu0Yx5zalCmZWiLmsKjck8NErpmFkUt9BDFnIJOgZJOIyJunOhaMim
- Q5eMGCBqgv6HSqKrrTjfig8+WMvzHH2xC6NPiU98dOZ7UBaE941Rnl0YEvtv6chg76JjCyJnoXv
- w6Ea6Wx8eAwwgAOTYS3kln1DO614=
-X-Google-Smtp-Source: AGHT+IGQmJJuEEVV6958VxBzFoIm07vpvmO0egurE/bWDe1UDhk2Syzq44J0X35z8MUQjWb8SyPRnLfRP+lCBrGycQU=
-X-Received: by 2002:a05:6402:270c:b0:5c9:813a:b1c1 with SMTP id
- 4fb4d7f45d1cf-5cb7944cd65mr663940a12.1.1729535850943; Mon, 21 Oct 2024
- 11:37:30 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729536173; x=1730140973;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qEahlITX03Z8Bv2cqWSSwrRr4JP9cWQB3ZOiulKFvWg=;
+ b=LKT4/FTpks2impi4nFNT48WiXZ2uX9eIflc3oQNd31SbHSZzXxBFSUuVyu/Mw1Uy1A
+ dgM+gvV2qQ0xR/vyreh4um/cayfL7i+4S+4Cdp0J9iskHHM/8tBLvCQEK5qo+jgZ1bKA
+ JZQxshJHZv3dVP9f0cp0/Kth8SPgcipnzz5xMB6/1QwtYYgJl2KiKX9mKluKANGvHhY/
+ UEGwc5JumcYGol+CHSx2MkvBHBM5nQZHbJa1js5qGTwIt8KCeLGiq6UewPYJqVb85FWM
+ XcZjbJvPAjJI+OxRQZhFASfSvJuzmdUQmFWHA3OmZ3fjvy7briUKgFS7hD05kmZ2ZoLG
+ boxQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUwP8wq0q7PhKm5S41xP+5ga1DpBRSfuXd3IslBs3dL1pLYQ2BbW4UBt04dYVId1d+1PEnFkHk=@lists.denx.de
+X-Gm-Message-State: AOJu0YybmFw0aq19rxXb6yoF8+tndhFBKdeK4oBYLWq285mxlDu0P02u
+ HzCwlYlpwMjdzL0A3wqqOszeOIRFqyGfe6mYfdmXWYQ1e70rPCldzqh4vZ4UyXA=
+X-Google-Smtp-Source: AGHT+IGhEMndv3QPG5lFTE4ClZDDN+YAAP+Y6Mk1YLx5D6Q9URw28auhr/QKZZvJCyQ8qJdgOH6IaA==
+X-Received: by 2002:a05:6214:451e:b0:6cb:f7dd:b6a8 with SMTP id
+ 6a1803df08f44-6cde15379e0mr225983776d6.26.1729536172929; 
+ Mon, 21 Oct 2024 11:42:52 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6ce00902e95sm20273276d6.56.2024.10.21.11.42.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Oct 2024 11:42:52 -0700 (PDT)
+Date: Mon, 21 Oct 2024 12:42:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Sean Anderson <sean.anderson@seco.com>, Nishanth Menon <nm@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Dhruva Gole <d-gole@ti.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] doc: do not include K3 boards twice in TOC
+Message-ID: <20241021184249.GT4959@bill-the-cat>
+References: <20241021180101.18452-1-heinrich.schuchardt@canonical.com>
+ <20241021180101.18452-3-heinrich.schuchardt@canonical.com>
+ <20241021181234.GQ4959@bill-the-cat>
+ <1e9609f3-f237-4aa7-9f9a-4eb30243261f@canonical.com>
 MIME-Version: 1.0
-References: <20241021113839.318572-1-sjg@chromium.org>
- <20241021113839.318572-5-sjg@chromium.org>
-In-Reply-To: <20241021113839.318572-5-sjg@chromium.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 21 Oct 2024 19:37:19 +0100
-Message-ID: <CALeDE9MNqjWFuw+08Wzx+KcpTDDjKQA-uJ_8LNj4KEL4UJwGfQ@mail.gmail.com>
-Subject: Re: [PATCH v2 04/25] mx23_olinuxino: pinephone: Enable LED
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marex@denx.de>, Samuel Holland <samuel@sholland.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Bq3BglHUkCGl0UNP"
+Content-Disposition: inline
+In-Reply-To: <1e9609f3-f237-4aa7-9f9a-4eb30243261f@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,60 +97,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-> Drop the STATUS_LED options and enable LED and LED_BOOT instead, since
-> this is the new way to access the LED functionality.
+--Bq3BglHUkCGl0UNP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Should this be two commits? The subject reads as pinephone is part of
-another device.
+On Mon, Oct 21, 2024 at 08:15:45PM +0200, Heinrich Schuchardt wrote:
+> On 10/21/24 20:12, Tom Rini wrote:
+> > On Mon, Oct 21, 2024 at 08:01:01PM +0200, Heinrich Schuchardt wrote:
+> > > Sphinx writes a warning if a page is included twice in the table of
+> > > contents. Use references instead.
+> > >=20
+> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > ---
+> > >   doc/board/ti/k3.rst | 11 +++++++----
+> > >   1 file changed, 7 insertions(+), 4 deletions(-)
+> > >=20
+> > > diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+> > > index c3513f0aee2..5d01f487622 100644
+> > > --- a/doc/board/ti/k3.rst
+> > > +++ b/doc/board/ti/k3.rst
+> > > @@ -32,19 +32,22 @@ K3 Based SoCs
+> > >      am62ax_sk
+> > >      am62x_sk
+> > > -   ../beagle/am62x_beagleplay
+> > > -   ../phytec/phycore-am62x
+> > > -   ../toradex/verdin-am62
+> > >      am62px_sk
+> > >      am64x_evm
+> > >      am65x_evm
+> > >      j7200_evm
+> > > -   ../beagle/j721e_beagleboneai64
+> > >      j721e_evm
+> > >      j721s2_evm
+> > >      j722s_evm
+> > >      j784s4_evm
+> > > +K3 SoC based boards in other sections
+> > > +
+> > > +* :doc:`../beagle/am62x_beagleplay`
+> > > +* :doc:`../beagle/j721e_beagleboneai64`
+> > > +* :doc:`../phytec/phycore-am62x`
+> > > +* :doc:`../toradex/verdin-am62`
+> >=20
+> > Can we just make the changes to :doc: links be inline and keep the list
+> > sorted/ordered as-is? Or does that not read well once rendered?
+> >=20
+>=20
+> This is nothing Sphinx would understand:
+>=20
+> WARNING: toctree contains reference to nonexisting document
+> 'board/ti/:doc:`../beagle/am62x_beagleplay`' [toc.not_readable]
 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v2:
-> - Add a patch to enable LED and LED_BOOT for these boards
->
->  configs/mx23_olinuxino_defconfig | 10 ++--------
->  configs/pinephone_defconfig      |  7 ++-----
->  2 files changed, 4 insertions(+), 13 deletions(-)
->
-> diff --git a/configs/mx23_olinuxino_defconfig b/configs/mx23_olinuxino_defconfig
-> index 3016f750e64..c1319077891 100644
-> --- a/configs/mx23_olinuxino_defconfig
-> +++ b/configs/mx23_olinuxino_defconfig
-> @@ -39,14 +39,8 @@ CONFIG_USE_BOOTFILE=y
->  CONFIG_BOOTFILE="uImage"
->  CONFIG_VERSION_VARIABLE=y
->  CONFIG_MXS_GPIO=y
-> -CONFIG_LED_STATUS=y
-> -CONFIG_LED_STATUS_GPIO=y
-> -CONFIG_LED_STATUS0=y
-> -CONFIG_LED_STATUS_BIT=778
-> -CONFIG_LED_STATUS_STATE=2
-> -CONFIG_LED_STATUS_BOOT_ENABLE=y
-> -CONFIG_LED_STATUS_BOOT=0
-> -CONFIG_LED_STATUS_CMD=y
-> +CONFIG_LED=y
-> +CONFIG_LED_BOOT=y
->  CONFIG_MMC_MXS=y
->  CONFIG_CONS_INDEX=0
->  CONFIG_DM_SERIAL=y
-> diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
-> index 9d39204a439..272fce1c1a4 100644
-> --- a/configs/pinephone_defconfig
-> +++ b/configs/pinephone_defconfig
-> @@ -11,8 +11,5 @@ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
->  CONFIG_PINEPHONE_DT_SELECTION=y
->  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->  CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
-> -CONFIG_LED_STATUS=y
-> -CONFIG_LED_STATUS_GPIO=y
-> -CONFIG_LED_STATUS0=y
-> -CONFIG_LED_STATUS_BIT=114
-> -CONFIG_LED_STATUS_STATE=2
-> +CONFIG_LED=y
-> +CONFIG_LED_BOOT=y
-> --
-> 2.43.0
->
+Hmm, maybe toctree is the wrong keyword, given where it is in the file
+and the rest of the contents. I think the whole list is intended as
+"here are all of the K3-based platforms". This however may mean that a
+bunch of boards then need :orphan: added as they won't strictly be in
+some other ToC list?
+
+--=20
+Tom
+
+--Bq3BglHUkCGl0UNP
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcWoKUACgkQFHw5/5Y0
+tywe3QwAtqMRgdaq7Tm0Nik5rPgv0W4+n5bfnrA2vvup1HtrH/l1mVL52UcVnm4y
+R2rQK8alWZzm5IwqNH7cnxP9tMcmB6ydVGOuZhbXno4emrDOW/NtpytKl+ABGil7
+ru9cf+OMZxN3miO7zlcEpwBtQaWq5Lnp4tOM/+DkFUQuvSWGdbmRlOi+oQMQ8Q0X
+yRXKW+m1vDfPLubhkDyae3gADljQThLu84Lx1Z6fMYDMAp+vnetfxZH0CwhIzQ6g
+WqF0kDM1dE1245aHw1IStX2L9kSDqhsMSLoQnlYBCz7/b1Khk3KpXpfdKJ+BPUwT
+JAJnn40f+TaPuykfYU6voc0YumsTi2DAGptKQj/BPfjrIRT1wZce+cx8mLSV2Gla
+5aW41dNOFiOKLtXhxEfQ3xHvuxfVavUAevDIEAd04X1ax2dVbRyevAKBdgsgr1h/
+r/sx3L35mTS5j+rouipv5IHQQpNOXXZB6PSGDXAB5mH/vPStiJusZuSgkfw+5t/G
+hUE6CEhB
+=AXm4
+-----END PGP SIGNATURE-----
+
+--Bq3BglHUkCGl0UNP--
