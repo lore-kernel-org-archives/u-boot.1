@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F07AAD15D8A
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 13:02:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5DA2D15D89
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 13:02:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2D8C88CFB;
-	Mon, 21 Oct 2024 15:02:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5B5F588E42;
+	Mon, 21 Oct 2024 15:02:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="VDnG6baZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="yqJL2ZVC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3876F88A24; Mon, 21 Oct 2024 09:37:26 +0200 (CEST)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2062c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::62c])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 05540892D9; Mon, 21 Oct 2024 09:38:04 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20611.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::611])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B11AA889B3
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 09:37:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E239F892AB
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 09:38:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Brian.Ruley@gehealthcare.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZebVnv//4ufnhznAtEUm50xFxWovpBCOnj+KtALhsFEt3pN/k1e61musRFnNuE4ULHoa9Fea9GwENXkbgkwR+4edBxaBgTFEJ5Yh4hxtIXeomIzfZn3OzqCGQ/6s+sYJhyfj2P7Fp/ZZHnOql2Ew6vzsIfIw8hVm7Bg2Zf5xHsSaMpElEN8vPZI5uUe0GawQbFEZT1JDleKGgrr2xWaElZBHgoqUptbrJFzx45r2Ucep3l3BI0KNj4RhBczoDoEONVnowGtwA2cHZcDFpjVP5qq+Yj/j3M3oYv99kR+NTfyf86ZR7hFxVrk7qqp8exTKHhdLwmaCWynuYmrvF6rNgQ==
+ b=idyBwiIJ6dJ5PcznUhqf+k0nMeFOds5fVG6CeZEW5gMx43R86fhPNc0jjLL7hZWdoLgJ9YW9k6W3P2Epe83zxh8QrbaexbFucJzmnRKqQ4FACBPU1a59rxgkfFB3DrjUTswDhtVPZCIW/Rd5L2YKPcYQX12g5JtSJvddPYU//0n1tGa/6YP6PxfWwZOaiAuxk6iA+oYa6C0Y2xkzzry2Vc2ss/SAg8baRUJfEqEDiLKpyqaT3P/97E57mQWZQe3EFkXkYlDUvjzeq/4M25+Jq6Rz8AlW9U+oNYEr38qUMHNt1E4uiIYP5mhs0dVo54SwX3VnCVGJ+4f6T3j/gWOQ7w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Qsv7k/Dv7ebgCnYR2LIjnXgOdsTDcXKhJAxIj6drqKI=;
- b=iftHU3pP0xZEMrqLkza36Dx3ivAFdlmtMvlGcM/i0koMzsTqrURnF6xaZfxPn7wcL5ygeRyttSxMV3jKIhp2T0hLmcQstxUl/WOCy5gMtDbnbQ2j0NqkoA4RRM9Jz3B0nF0C1pNocVrd1Shng8bNEctr5WS+iqMWxTA68ORStOZr8Z5lvZF/BjJKzfF5OMDQByAaJxK95SeLo7W8N2wxW0g7aePf5lxr2QTRCmlRimReNriFNvQ3V8Vx24LdjYzMchPsZDQFOuWXfwjMG0ryt62lYy7xx3HaT8OoiKSagEllQbpdG71UXIw9DnOuqcFXUen+YTcykkbw9JJaJ7Ymng==
+ bh=OWAKXuDKyofXSoIDv0JxU3SlR5izpe24n49oexipdEU=;
+ b=XuoEb504KVsyVgFX0SngZ6OBfEJCHczNoezJhWCcULwUR8bVnlnJkJntX7o8yiE40E3Ct0/t/d9bguczrlTuVJ+eVwQ2DlSGlsMeYzZCyqSNCNGy5Z2UE5aawLLe8lsDh5+oDRZyNB2eHSdEAZaTGxrTT6nEvqfiRSdz7vRjfxbtV9LliSLGeZNC+uU/pO1TniVtgHREjz0qPKJ3PWh1M9XHQyNdBg8c581hu9lJpwtB14W+POzVLZUical0R2tryj/qaipiOYtKDIMRezctR/VESKQ5LFX+2Bm2F0kE/FEbPtCOQA2GSAX+hNVOvA1gyT2OSVg4DR0dWnLtTa9FVA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  165.85.157.49) smtp.rcpttodomain=lists.denx.de
  smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
@@ -42,92 +42,93 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Qsv7k/Dv7ebgCnYR2LIjnXgOdsTDcXKhJAxIj6drqKI=;
- b=VDnG6baZvV9HQ+GvUIYl61ObbUg6nHALkJk7HzN3UchTNvfMf1lvfcAPhoIjp3Pw3Gxi2+RX28nW4WUZ+hMScE/KL/NVaXjduX9aC7lzPfn0OVE2DuMofBoDd1aw3OYeTSO/Emk7IISMT9q8lfwjuf5wMeEHn/bubFjaQ7H6L8+u8tVBKM5cQClOAIXYUfRrboMIlCR86Tx+lqepwmJ6O/9IYwcawyiFP7a2KVi9i/1iR1WmJRPMyTOu3ICG/mY8fXj6DeyzYz/v4169v6GN6PH5dL5q+5MkMgs22dHR7AyhYnbZcd8yAsQ82IU+tZmg2scClpN48/Sn66D2NBjKxA==
-Received: from CH5P222CA0015.NAMP222.PROD.OUTLOOK.COM (2603:10b6:610:1ee::13)
- by SJ0PR22MB2970.namprd22.prod.outlook.com (2603:10b6:a03:424::21)
+ bh=OWAKXuDKyofXSoIDv0JxU3SlR5izpe24n49oexipdEU=;
+ b=yqJL2ZVCS2SBtrGYfP4iPuC9J6eHTtMORZHQllh9T+JTWN+T09/UyV51uttdgM3/pE4PfPCSvGeiBRK5XpYdVwr6lPQE8AjoQF7yUXslNnOglM4Xn728j+gyU1FK6ovDpswBXCNCGv3y2UMYw0x8bMqTHM//6hDSaRj05ZeArMiQxy+OCxuJRGseU43Go2mdh6RoDqtUSNZOZ7dgYVRk4PWZe+IDmiAfIKKIKZJrQMHZiUUZN/y7xiWy3WayawwJ1mmlQBd/1yF6Xs7OKitQEhiJSxpXSKJ8PmUdFKBsv49PAO2IBrBUE+/KGCL0VwNRbMGakJw0jnN5fu31heVFWw==
+Received: from CH0PR13CA0014.namprd13.prod.outlook.com (2603:10b6:610:b1::19)
+ by PH0PR22MB3982.namprd22.prod.outlook.com (2603:10b6:510:2a2::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.28; Mon, 21 Oct
- 2024 07:37:20 +0000
-Received: from CH2PEPF00000099.namprd02.prod.outlook.com
- (2603:10b6:610:1ee:cafe::1d) by CH5P222CA0015.outlook.office365.com
- (2603:10b6:610:1ee::13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.28 via Frontend
- Transport; Mon, 21 Oct 2024 07:37:20 +0000
+ 2024 07:37:58 +0000
+Received: from CH2PEPF00000141.namprd02.prod.outlook.com
+ (2603:10b6:610:b1:cafe::4b) by CH0PR13CA0014.outlook.office365.com
+ (2603:10b6:610:b1::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.14 via Frontend
+ Transport; Mon, 21 Oct 2024 07:37:57 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
  smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
 Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
  not designate 165.85.157.49 as permitted sender)
  receiver=protection.outlook.com; client-ip=165.85.157.49;
- helo=mkerelay2.compute.ge-healthcare.net;
-Received: from mkerelay2.compute.ge-healthcare.net (165.85.157.49) by
- CH2PEPF00000099.mail.protection.outlook.com (10.167.244.20) with Microsoft
+ helo=mkerelay1.compute.ge-healthcare.net;
+Received: from mkerelay1.compute.ge-healthcare.net (165.85.157.49) by
+ CH2PEPF00000141.mail.protection.outlook.com (10.167.244.74) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8093.14 via Frontend Transport; Mon, 21 Oct 2024 07:37:20 +0000
+ 15.20.8093.14 via Frontend Transport; Mon, 21 Oct 2024 07:37:57 +0000
 Received: from zoo11.em.health.ge.com (unknown [10.168.174.93])
- by builder1.em.health.ge.com (Postfix) with SMTP id 389FB613D;
- Mon, 21 Oct 2024 10:37:18 +0300 (EEST)
-Date: Mon, 21 Oct 2024 10:37:17 +0300
+ by builder1.em.health.ge.com (Postfix) with ESMTP id 8E3BB1A2DF;
+ Mon, 21 Oct 2024 10:37:55 +0300 (EEST)
 From: Brian Ruley <brian.ruley@gehealthcare.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Ian Ray <ian.ray@gehealthcare.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 2/2] binman: expand test coverage to nxp_imx8mcst
-Message-ID: <ZxYErbzoPScLkL2s@zoo11.em.health.ge.com>
+To: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: ian.ray@gehealthcare.com, Brian Ruley <brian.ruley@gehealthcare.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH v3 1/2] binman: nxp_imx8mcst: read certificates from input path
+Date: Mon, 21 Oct 2024 10:37:47 +0300
+Message-Id: <20241021073749.63-1-brian.ruley@gehealthcare.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241007130109.227305-1-brian.ruley@gehealthcare.com>
+References: <20241007130109.227305-1-brian.ruley@gehealthcare.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFLszTg3RWyx_Z6waYaBkJMRKCQnv_cQr6xaMF3v9s_R3bKmYQ@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000099:EE_|SJ0PR22MB2970:EE_
-X-MS-Office365-Filtering-Correlation-Id: a5e11acb-adf0-44d8-db04-08dcf1a33227
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000141:EE_|PH0PR22MB3982:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: 9a87d392-c422-4064-dc80-08dcf1a34863
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?kvv+JeMGcjQ4LswN9Mk5a3lp/y2+nDJZWiGtxz9uwhAg1RJZBo2vBiYs4uiP?=
- =?us-ascii?Q?Ca4u7yc007sUB5KXvL2qbOdAAkzbb8G9wGbB4DfcYdi1u6nmyh8Bme3nFad0?=
- =?us-ascii?Q?46XvnR9e4ZtsT4mTRG+w7q5gexi5VbFRmrgS1CXeYsDCh4wOiw6v2XfpkNs7?=
- =?us-ascii?Q?vPT5+G/QhZWGh3CCPxL3vhH1QDTg0+Jwnw5bSe//2m36oDkEjQ1MtfgdFqfe?=
- =?us-ascii?Q?nXycencvDjo8Ic0uDLe7QspL6sOZx7vhlv17SPgyzodz974xXF1FSefflPr5?=
- =?us-ascii?Q?56SDMDAiIf3BbAGuuMggfMMdc/YmA8eOcaCLXKADwc+q8rMNHB/UXpzSnmGL?=
- =?us-ascii?Q?aXdpMN0b3ifhUtB0UEc6zYiPtz97UdvU8/WMNTkmFCdagEaWMtR9K+LUZPlc?=
- =?us-ascii?Q?dc/+ULVpllMqW1BENgumi4mzxI2dvHS8fRLjay0EgJ9V/XuvXdp8ZKjJ12Qc?=
- =?us-ascii?Q?TBWw2UOds9fhMb7iaQtDR+yxnoS2zlp1n+SOtjQ1VFvJBUYbl+ayAuOOK3VK?=
- =?us-ascii?Q?C3aB5E8mVlxXgBr9FnbiVKXG74CGnEm72Q0bew68Tw00yhnoIuO36djahgmg?=
- =?us-ascii?Q?kQp42G2QBnRLU8jut4q82BQke6ClfjI0TQEolRpAPjPGAYXkXf+z1leqPB+d?=
- =?us-ascii?Q?EHeoayS/e25u5qlRFyS+huTF1sf/ZzRAtEEimjTBUiNcHk1MEYbqZhoJB7E+?=
- =?us-ascii?Q?F3IOrCqjZq9xzbLwY0mQ84P/JETx56RFnlTbYo9bAgrQ0f5/ycJi+9cHROwe?=
- =?us-ascii?Q?UJ+tQiAy86wXVcsa1dyTE306FlVR9cRxCqtBo21v16S/S9YyJ4qzRESRm5a1?=
- =?us-ascii?Q?apDDuvuqTwmwoEtJbF9k2eCXG10pDSbTn/P0rB47p710ACGrUUpWvppXX1Pt?=
- =?us-ascii?Q?qvPOVBldPLuhckZeM/AZTPtwKOJ6khORLnOnZeQhKs0+FpzGeHFLlZJKUFnN?=
- =?us-ascii?Q?G+d3CxofCH4rJPQJ5P4UKwg9b8+ksuFgvIZUAaDIhqgziSAt4BzNlEE6DPl3?=
- =?us-ascii?Q?+NmMcIP+A3KA21Xvb0+g7gzoz01GnTnu2LhyN+rUxANYO8jTDOaS266recte?=
- =?us-ascii?Q?U+sljK9qQ39rZImA1oTbh3fBtz2cPOCw2Tl+FmAx8mjhC3Dy1O3E6u/65Pj6?=
- =?us-ascii?Q?dfUG6YY/BT9AllKzpsSk0hu5X3R0XVMWGmzuBPnJaJvStbXTk5yfQ0xbSq/T?=
- =?us-ascii?Q?btknhW24lexXsmVg3Qwa7yX3HD361KkE23k7HYwtwVHXOTJUvaImfNVwEHfX?=
- =?us-ascii?Q?CdrqrB59wZDMqoNsOyiKedyfmtLKrQRasihliJv/uujSO+BsvKi7BIa0brWu?=
- =?us-ascii?Q?QnK9qE/fb6cpsiDdwRZczNGxA6eqU3mnx72xL7FxaNc9wF2/hYEdDFjSRk5P?=
- =?us-ascii?Q?0UdUYaVMBG5ignPAm8Xh1KDNlfGgGEVnSoNtjnJmWvE4D/IsUA=3D=3D?=
+ ARA:13230040|36860700013|376014|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?UiBlZHaEnzahHe6qQ7hNiukdUhcWjJSeaHXh/nwBX7LC5dbQrA3ZR/C4x1Kx?=
+ =?us-ascii?Q?hWFmbWFIJDf0pDPvw64caRNBL46OoV+yvD4TVp7HMOdInmCONAAevLfP8xc2?=
+ =?us-ascii?Q?QQMevhzm0qtKx1fmM9LP4xj/vYySCqTekeWrtDk1OlcTrSVq+gjd8+b7Iefs?=
+ =?us-ascii?Q?pMoa+NLUjPcCCylLL0aIdTbN7mNv0yW5oJeaYOf7Is2W5ltiapuKMVZ05Agk?=
+ =?us-ascii?Q?gMFWWQikFgZxmMxYRHbdE7E6cMVdmpy3JqljozlUeQRKcmkIxkCUQLtdAI0b?=
+ =?us-ascii?Q?W6Vpwd4gdEzV1pQwVf6FgMECAuPa9HKawpgf2Zv8Hh/16ZQ4mevOgbFqky8r?=
+ =?us-ascii?Q?e+q8ltJkJ+wuChEbCj0J5zu801rGB3s4RTXLI3hYIlQAhFOH/ZbUv0DXRZ4F?=
+ =?us-ascii?Q?VlPN6XbpZV7lkuMLwbv+0lRPQLuW2aEgN0PGfGX9l0vhVFsyCed3n0VGwoym?=
+ =?us-ascii?Q?9M6cm1Gd3iY1FdLFXZlrMAyPc4MvICrH23P4WuQpOrPgRt5fTfFEJMWuBhdb?=
+ =?us-ascii?Q?lv00hRc9nyUbhJrcOJE+fQpNRiHECs+DALuAquWTXpq1AKbNSI9wsHFgBB6X?=
+ =?us-ascii?Q?NzRa4j1eCFuK1Yr/DFFtONW/2wq3umhD1zIXluAz/oa8fKVFMwz7rYLTXO4I?=
+ =?us-ascii?Q?EvTJbkDDXnnclFtB9bfHvi4q3mOdTEauqxHdD6oCjrxg2Q6lLcCtoWsp3nOz?=
+ =?us-ascii?Q?TG8z76ZKxHQxHw2Fo0qvRhVSjMZdEIW4WFF4FLA7fWKr5/WsehTeR4tUJJvw?=
+ =?us-ascii?Q?ly5pAJa8Y2zXORHoLpmBjJ4bi8eQJqg8934jFgnAUlqLT7TPd6LwjQWuJ8x/?=
+ =?us-ascii?Q?NH54EEu4lzbpmAtRAv56C6rGE7oEE6jc4JAoyN4ilgZyI1mAcgObq3oQgNOQ?=
+ =?us-ascii?Q?uIRReJ7Qe0kZilMbOuKIBG2DFAWqg50z3yyTY17dZ+LMA+sEBtUXgDSGK2XO?=
+ =?us-ascii?Q?I4WwmOjH4CJvkuz7CxDn9WBkL49ClCr35lDhGFwoNCJlCW3HkmMBmGjUxaYM?=
+ =?us-ascii?Q?HNSpUODJuNVc7ZUDHuGllS7cv0cBJvBq/MpnjtOzXBu5C2wju0FSAdSeEvgQ?=
+ =?us-ascii?Q?mz6d9FVyJIVMYAUJ+0aaPqMxSCLMS5ZoQtYDDPVcjUEogiM3y6a50pW+LLbC?=
+ =?us-ascii?Q?0pPL+fmXlnzeN0ewpJiNVFmIRXNJF4fBpW5WasdAy2HDbAXP9hY0dPiblkK5?=
+ =?us-ascii?Q?BfqPoCfX5wyzopSoQgKvh3jRvGdEaW8Qwrh0VJ8AzL60TTj/J609iYrzAkKP?=
+ =?us-ascii?Q?iStgsmZ7Ui7bkxYIt9ywx/6+yQodz1Owp3AA2yclA1nsJfm4rGgF93xU+wzF?=
+ =?us-ascii?Q?RKiOJucPruUQauY0dFGyBlnhkDu/UMr4S/q/s06COvFlvxGSvSWb7UiqZMGO?=
+ =?us-ascii?Q?imnVmvcyI7nLB/OF7EOg7BfdXeukVfVhG9b4Wi7NZHShJJwKVg=3D=3D?=
 X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mkerelay2.compute.ge-healthcare.net;
+ IPV:NLI; SFV:NSPM; H:mkerelay1.compute.ge-healthcare.net;
  PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
+ SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026); DIR:OUT;
  SFP:1101; 
-Content-Transfer-Encoding: 7bit
 X-OriginatorOrg: gehealthcare.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2024 07:37:20.1953 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a5e11acb-adf0-44d8-db04-08dcf1a33227
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2024 07:37:57.5141 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9a87d392-c422-4064-dc80-08dcf1a34863
 X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
- Helo=[mkerelay2.compute.ge-healthcare.net]
+ Helo=[mkerelay1.compute.ge-healthcare.net]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-CH2PEPF00000099.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-CH2PEPF00000141.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR22MB2970
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR22MB3982
 X-Mailman-Approved-At: Mon, 21 Oct 2024 15:02:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -145,101 +146,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Right now, it is unclear where the certificates (and private keys) are
+read from if environment variables are unset, and providing complete
+paths in the device tree is not ideal. Naturally, it makes sense
+to be able to decide where binman should look for the files, regardless
+whether the keys are specified in the device tree or not.
 
-Sorry for the late response, we had some recent network changes, so it
-seems that my replies were not relayed correctly.
+Therefore, expand the etype to look for the necessary files from the
+input path. Introduce a new variable to provide users the ability to
+specify a custom path.
 
-On Tue, Oct 15, 2024 at 12:06:55AM -0600, Simon Glass wrote:
->
->Hi Brian,
->
-> > On Thu, 10 Oct 2024 at 05:25, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
-> >
-> > Add coverage for IMX8M code siging. Create PKI tree and other assets
-> > required by `cst' using `hab4_pki_tree.sh' script and `srktool' in
-> > `cst_3.4.1' [1].
-> >
-> > [1] https://www.nxp.com/webapp/Download?colCode=IMX_CST_TOOL_NEW
-> >
-> > Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
-> > ---
-> > Changes for v2:
-> > - Added missing *.pem files
-> > - Rebased on top of "[PATCH v4 2/2] binman: add fast authentication
-> >   method for i.MX8M signing"
-> > - Included a test for fast authentication
+As a consequence of this change, the environment variables used to
+specify the keys, e.g., `IMG_KEY', will be searched *relative* to the
+input directories.
 
-> Thanks for doing this! When I run it I get:
+Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+---
+ tools/binman/etype/nxp_imx8mcst.py | 23 +++++++++++++++--------
+ 1 file changed, 15 insertions(+), 8 deletions(-)
 
-No problem, we made an implicit deal that you get some test coverage and
-I get my feature :)
+diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
+index a7d8db4eec..ff84b751b7 100644
+--- a/tools/binman/etype/nxp_imx8mcst.py
++++ b/tools/binman/etype/nxp_imx8mcst.py
+@@ -70,23 +70,26 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+     def __init__(self, section, etype, node):
+         super().__init__(section, etype, node)
+         self.required_props = ['nxp,loader-address']
++        self._cst_key_path = os.getenv('CST_KEY_PATH', None)
++        if self._cst_key_path:
++            tools.set_input_dirs([self._cst_key_path] + tools.indir)
+ 
+     def ReadNode(self):
+         super().ReadNode()
+         self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
+-        self.srk_table = os.getenv(
++        self._srk_table = os.getenv(
+             'SRK_TABLE', fdt_util.GetString(self._node, 'nxp,srk-table',
+                                             'SRK_1_2_3_4_table.bin'))
+         self.fast_auth = fdt_util.GetBool(self._node, 'nxp,fast-auth')
+         if not self.fast_auth:
+-            self.csf_crt = os.getenv(
++            self._csf_crt = os.getenv(
+                 'CSF_KEY', fdt_util.GetString(self._node, 'nxp,csf-crt',
+                                               f'CSF1_1_{KEY_NAME}.pem'))
+-            self.img_crt = os.getenv(
++            self._img_crt = os.getenv(
+                 'IMG_KEY', fdt_util.GetString(self._node, 'nxp,img-crt',
+                                               f'IMG1_1_{KEY_NAME}.pem'))
+         else:
+-            self.srk_crt = os.getenv(
++            self._srk_crt = os.getenv(
+                 'SRK_KEY', fdt_util.GetString(self._node, 'nxp,srk-crt',
+                                               f'SRK1_{KEY_NAME}.pem'))
+ 
+@@ -142,15 +145,19 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+         config.optionxform = str
+         # Load configuration template and modify keys of interest
+         config.read_string(CSF_CONFIG_TEMPLATE)
+-        config['Install SRK']['File']  = f'"{self.srk_table}"'
++        srk_table = tools.get_input_filename(self._srk_table)
++        config['Install SRK']['File']  = f'"{srk_table}"'
+         if not self.fast_auth:
++            csf_crt = tools.get_input_filename(self._csf_crt)
++            img_crt = tools.get_input_filename(self._img_crt)
+             config.remove_section('Install NOCAK')
+-            config['Install CSFK']['File'] = f'"{self.csf_crt}"'
+-            config['Install Key']['File']  = f'"{self.img_crt}"'
++            config['Install CSFK']['File'] = f'"{csf_crt}"'
++            config['Install Key']['File']  = f'"{img_crt}"'
+         else:
++            srk_crt = tools.get_input_filename(self._srk_crt)
+             config.remove_section('Install CSFK')
+             config.remove_section('Install Key')
+-            config['Install NOCAK']['File'] = f'"{self.srk_crt}"'
++            config['Install NOCAK']['File'] = f'"{srk_crt}"'
+             config['Authenticate Data']['Verification index'] = '0'
+ 
+         config['Authenticate Data']['Blocks'] = \
+-- 
+2.39.5
 
->
-> inman test testNxpImx8mCstFastAuth
-> ======================== Running binman tests ========================
-> E
-> ======================================================================
-> ERROR: binman.ftest.TestFunctional.testNxpImx8mCstFastAuth
-> (subunit.RemotedTestCase)
-> binman.ftest.TestFunctional.testNxpImx8mCstFastAuth
-> ----------------------------------------------------------------------
-> testtools.testresult.real._StringException: Traceback (most recent call last):
-> ValueError: Error -11 running 'cst -i
-> /tmp/binman.lk6cfgwh/nxp.csf-config-txt.nxp-imx8mcst -o
-> /tmp/binman.lk6cfgwh/nxp.csf-output-blob.nxp-imx8mcst':
-> 
-> 
-> ----------------------------------------------------------------------
-> Ran 1 test in 0.198s
-> 
-> FAILED (errors=1)
->
-
-Odd, -11 means that is the resouce is temporarily unavailable, no? I
-don't see how that could be caused by my changes. I managed to trace it
-to line 367 in `tools/u_boot_pylib/tools.py`, which takes us to
-the run_pipe() function in `tools/u_boot_pylib/commands.py`, where we
-wait on a pipe:
-
-   108:    result.return_code = last_pipe.wait()
-
-For me, at least, everything works fine:
-
-    ./tools/binman/binman test testNxpImx8mCst
-    ======================== Running binman tests ========================
-    .
-    ----------------------------------------------------------------------
-    Ran 1 test in 0.318s
-    
-    OK
-    
-    ./tools/binman/binman test testNxpImx8mCstFastAuth
-    ======================== Running binman tests ========================
-    .
-    ----------------------------------------------------------------------
-    Ran 1 test in 0.333s
-    
-    OK
-
-I've compiled the NXP Code Signing tool myself from version 3.4.1
-and added that to path. The system I'm running on is:
-
-   cat /etc/fedora-release && uname -msrv
-   Fedora release 40 (Forty)
-   Linux 6.10.12-200.fc40.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Sep 30 21:38:25 UTC 2024 x86_64
-
-Also, prior to running any tests, I've built the `tools-only_defconfig`.
-I admit that I find the test suites sightly confusing, so I might have
-missed something.
-
-> Another test fails too. Do you know why I see this and you don't?
->
-No clue. All I know is that the CST might work better if re-compiled.
-Why would other tests be impacted I'm unsure -- what's the other test?
-
-Oh, and I noticed that the first dts file had some missing path prefix,
-so I'll send an updated version to fix that.
-
-Best,
-Brian
