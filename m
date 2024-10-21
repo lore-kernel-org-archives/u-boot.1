@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFAE9D17148
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 23:46:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22037D1714B
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 23:46:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 965EE88F99;
-	Tue, 22 Oct 2024 01:45:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 09B0F88FB8;
+	Tue, 22 Oct 2024 01:45:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="POSmFaGB";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Sg7fYHzb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE62988F4F; Mon, 21 Oct 2024 15:56:05 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id E568E88E41; Mon, 21 Oct 2024 15:56:07 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 141DF88F0A
+ by phobos.denx.de (Postfix) with ESMTPS id 1E3C388F19
  for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 15:56:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+vasileios.bimpikas.analog.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 4D848A4320C;
- Mon, 21 Oct 2024 13:55:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id DB252C4CEC3;
+ by dfw.source.kernel.org (Postfix) with ESMTP id B56015C53B7;
+ Mon, 21 Oct 2024 13:55:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id BD501C4CEEA;
  Mon, 21 Oct 2024 13:55:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1729518957;
- bh=RsbIeK/MhMcXZUsKkLwLLnvU8yyiT89JPUJLeUMXlKo=;
+ bh=QwuR16iK5ULb7DXuSbm2iF9uybTCs+mV4BPfkT4/+2g=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=POSmFaGBy8BXtw8it1ViwOlrfG5T5hiWVNq6B5iE3YdmPKa6AjWvvWwYBoOc8smaO
- cKQpxw2sbwAP2IXlKUkm1AUVvdwkDNw+c52ixOBls3d7flQnegpAEfZkJX1L4ZTbbc
- V+E32ad6IHUDADCmp9DtzE8kkb/3kRCiO3kj35RNBljmniEalfRNruTpmlmpnGNWT4
- hy6Yk/S0aOhByGN0BRrm7Fa6RbP3IML5MYVWtgaCF//yBZAo0XeJoht6pkrdCROeSP
- IHf55u5NVY5e8Frcc/Iqfps5gNGPptGVdmCatHQ2mMGiGUWNfM7o0QlO+YrZa9So53
- ZyY0pQl3gukng==
+ b=Sg7fYHzb6muzsRgDm0QxnipiqgppGEk4rRc1o/v7unwrdX5tnLxuTpsIHr6VqoaOR
+ E4uZHweErQgZh9exodemjGrTtD5ltONx4TJ5CnDmcpdmoz4UMQNs3hk3onHJBjZLgD
+ f8m/HV6eS5drs8wrodi0AWhYxZx/iwIngcbyVnZ8n12ZHGlstunCbdAMNxrG2ncXTl
+ b5p7jKH4KVUDoHISOHxi9Cm74ipdPje3YUNDmEdNnZptFX3IbxLeDIpLCWZNm4IgYe
+ QWXmDlqdNY5ROzCuG9NYG3LnCusHFB31OtjYL+Wrg4PbjC4FTVsx8bODboiwOgTD4p
+ ywLkN60bPLFtQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id CF4E2D15D98;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id B10B6D15D96;
  Mon, 21 Oct 2024 13:55:57 +0000 (UTC)
 From: Vasileios Bimpikas via B4 Relay
  <devnull+vasileios.bimpikas.analog.com@kernel.org>
-Date: Mon, 21 Oct 2024 14:54:39 +0100
-Subject: [PATCH v2 08/11] dma: Add driver for ADI SC5xx-family SoC MDMA
- functionality
+Date: Mon, 21 Oct 2024 14:54:37 +0100
+Subject: [PATCH v2 06/11] net: Add support for ADI SC5xx SoCs with DWC QoS
+ ethernet
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241021-sc5xx-driver-series-v2-8-53e2472e11d0@analog.com>
+Message-Id: <20241021-sc5xx-driver-series-v2-6-53e2472e11d0@analog.com>
 References: <20241021-sc5xx-driver-series-v2-0-53e2472e11d0@analog.com>
 In-Reply-To: <20241021-sc5xx-driver-series-v2-0-53e2472e11d0@analog.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -70,11 +70,11 @@ To: Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
  Oliver Gaskell <Oliver.Gaskell@analog.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1729518874; l=9823;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1729518874; l=7494;
  i=vasileios.bimpikas@analog.com; s=20240927; h=from:subject:message-id;
- bh=dW9m76x8OqcBUFPiPMIGljt1fK5pjZEhGcz8p/ey65o=;
- b=dHoVNpCY1z6ifWvrfTD00z/I8I2oRA6licxl8sgveODaUWn1HUtHwRk30LEZsANCL7ISYAR4G
- Eg8o9PZJzMsA9zSho4u3fngAvL8mdJ12mvW0sFWZLfAPct2RxifoKUp
+ bh=Qp1qK+NFQeNhvdxSNvkPPhgA7jxxwlhrb5vsawxnBog=;
+ b=4lindLCer7bXjBUZbmlR20YQtRXr6nnSAYz4QBv7v3WOzwVpLhuNynADrXb06El7iGs/aHyW9
+ C5UBB3sNSwJCr9dRjBDPjxGDlIP7GpoA+RUFMlpzTMruxfC2Boy2ATj
 X-Developer-Key: i=vasileios.bimpikas@analog.com; a=ed25519;
  pk=JkXh+NeXYCpTenwrB0gg5fMpKEnagLOXdsLFiUrqZRo=
 X-Endpoint-Received: by B4 Relay for vasileios.bimpikas@analog.com/20240927
@@ -100,9 +100,9 @@ X-Virus-Status: Clean
 
 From: Greg Malysa <greg.malysa@timesys.com>
 
-Add a rudimentary MDMA driver for the Analog Devices SC5xx SoCs,
-primarily intended for use with and tested against the QSPI/OSPI
-IP included in the SoC.
+The ADI SC598 includes a Designware QoS 5.20a IP block. This
+commit adds support for using the existing ethernet QoS driver
+with the SC598 SoC.
 
 Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
 Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
@@ -113,313 +113,197 @@ Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
 Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
 ---
- MAINTAINERS           |   1 +
- drivers/dma/Kconfig   |   7 ++
- drivers/dma/Makefile  |   1 +
- drivers/dma/adi_dma.c | 255 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 264 insertions(+)
+ MAINTAINERS                   |   1 +
+ drivers/net/Kconfig           |   7 +++
+ drivers/net/Makefile          |   1 +
+ drivers/net/dwc_eth_qos.c     |   6 +++
+ drivers/net/dwc_eth_qos.h     |   2 +
+ drivers/net/dwc_eth_qos_adi.c | 102 ++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 119 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index b87a607124f5310f1b75a17fa201d1022d036c6d..8dcb1bd5619f79bbcee47b9c8928bc13223fb268 100644
+index ee41f28914100ac86402af9a10b238edd24916e4..b853eec4d961abcd33fe722f3a7f49bf2f24ee29 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -612,6 +612,7 @@ F:	doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
- F:	doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
- F:	doc/device-tree-bindings/timer/adi,sc5xx-gptimer.yaml
- F:	drivers/clk/adi/
-+F:	drivers/dma/adi_dma.c
+@@ -615,6 +615,7 @@ F:	drivers/clk/adi/
  F:	drivers/gpio/adp5588_gpio.c
  F:	drivers/gpio/gpio-adi-adsp.c
  F:	drivers/i2c/adi_i2c.c
-diff --git a/drivers/dma/Kconfig b/drivers/dma/Kconfig
-index 3c64e8946466cab45d528720369d9467ffd36f9f..4b47be6b016b8e7223842bd07642f542a35093d6 100644
---- a/drivers/dma/Kconfig
-+++ b/drivers/dma/Kconfig
-@@ -76,6 +76,13 @@ config XILINX_DPDMA
- 	  this file is used as placeholder for driver. The main reason is
- 	  to record compatible string and calling power domain driver.
++F:	drivers/net/dwc_eth_qos_adi.c
+ F:	drivers/pinctrl/pinctrl-adi-adsp.c
+ F:	drivers/serial/serial_adi_uart4.c
+ F:	drivers/timer/adi_sc5xx_timer.c
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index 89f7411bdf336d64f8cddadc3f8c077f48481455..6d6060fe48848b6633b2e5c30e87f787559f0692 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -237,6 +237,13 @@ config DWC_ETH_QOS
+ 	  Of Service) IP block. The IP supports many options for bus type,
+ 	  clocking/reset structure, and feature list.
  
-+config ADI_DMA
-+	bool "ADI DMA driver"
-+	depends on DMA && DMA_CHANNELS
++config DWC_ETH_QOS_ADI
++	bool "Synopsys DWC Ethernet QOS device support for ADI SC59x-64 parts"
++	depends on DWC_ETH_QOS
 +	help
-+	  Enable DMA support for Analog Devices SOCs, such as the SC5xx.
-+	  Currently this is a minimalistic driver tested against OSPI use only.
++		The Synopsis Designware Ethernet QoS IP block with the specific
++		configuration used in the ADI ADSP-SC59X 64 bit SoCs
 +
- if APBH_DMA
- config APBH_DMA_BURST
- 	bool "Enable DMA BURST"
-diff --git a/drivers/dma/Makefile b/drivers/dma/Makefile
-index 48811eaaeb361612c0a8aa2af96c9a04124e3fc7..00d765864cdc04bb5c6e8842ea6865e303a91d81 100644
---- a/drivers/dma/Makefile
-+++ b/drivers/dma/Makefile
-@@ -13,5 +13,6 @@ obj-$(CONFIG_TI_KSNAV) += keystone_nav.o keystone_nav_cfg.o
- obj-$(CONFIG_TI_EDMA3) += ti-edma3.o
- obj-$(CONFIG_DMA_LPC32XX) += lpc32xx_dma.o
- obj-$(CONFIG_XILINX_DPDMA) += xilinx_dpdma.o
-+obj-$(CONFIG_ADI_DMA) += adi_dma.o
- 
- obj-y += ti/
-diff --git a/drivers/dma/adi_dma.c b/drivers/dma/adi_dma.c
+ config DWC_ETH_QOS_IMX
+ 	bool "Synopsys DWC Ethernet QOS device support for IMX"
+ 	depends on DWC_ETH_QOS
+diff --git a/drivers/net/Makefile b/drivers/net/Makefile
+index f5ab1f5dedf6b867583b841695dd43bb6fc4db6e..5d2b97db9884ee9ce356719de7ea1ffcd7b55cc7 100644
+--- a/drivers/net/Makefile
++++ b/drivers/net/Makefile
+@@ -19,6 +19,7 @@ obj-$(CONFIG_DM_ETH_PHY) += eth-phy-uclass.o
+ obj-$(CONFIG_DRIVER_DM9000) += dm9000x.o
+ obj-$(CONFIG_DSA_SANDBOX) += dsa_sandbox.o
+ obj-$(CONFIG_DWC_ETH_QOS) += dwc_eth_qos.o
++obj-$(CONFIG_DWC_ETH_QOS_ADI) += dwc_eth_qos_adi.o
+ obj-$(CONFIG_DWC_ETH_QOS_IMX) += dwc_eth_qos_imx.o
+ obj-$(CONFIG_DWC_ETH_QOS_INTEL) += dwc_eth_qos_intel.o
+ obj-$(CONFIG_DWC_ETH_QOS_ROCKCHIP) += dwc_eth_qos_rockchip.o
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index 3415c418a93576396f2090849868a66c75b5747f..d163f566255a536a7805617e8824e892335e56be 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -1632,6 +1632,12 @@ static const struct udevice_id eqos_ids[] = {
+ 		.compatible = "starfive,jh7110-dwmac",
+ 		.data = (ulong)&eqos_jh7110_config
+ 	},
++#endif
++#if IS_ENABLED(CONFIG_DWC_ETH_QOS_ADI)
++	{
++		.compatible = "adi,sc59x-dwmac-eqos",
++		.data = (ulong)&eqos_adi_config
++	},
+ #endif
+ 	{ }
+ };
+diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
+index ce57e22a81f14c46461faa1994a08ed74c940138..0eb9f2f36cacbde7f61260ebc8a421ae6239a7ce 100644
+--- a/drivers/net/dwc_eth_qos.h
++++ b/drivers/net/dwc_eth_qos.h
+@@ -87,6 +87,7 @@ struct eqos_mac_regs {
+ #define EQOS_MAC_MDIO_ADDRESS_CR_MASK			GENMASK(11, 8)
+ #define EQOS_MAC_MDIO_ADDRESS_CR_100_150		1
+ #define EQOS_MAC_MDIO_ADDRESS_CR_20_35			2
++#define EQOS_MAC_MDIO_ADDRESS_CR_150_250		4
+ #define EQOS_MAC_MDIO_ADDRESS_CR_250_300		5
+ #define EQOS_MAC_MDIO_ADDRESS_SKAP			BIT(4)
+ #define EQOS_MAC_MDIO_ADDRESS_GOC_MASK			GENMASK(3, 2)
+@@ -300,3 +301,4 @@ extern struct eqos_config eqos_qcom_config;
+ extern struct eqos_config eqos_stm32mp13_config;
+ extern struct eqos_config eqos_stm32mp15_config;
+ extern struct eqos_config eqos_jh7110_config;
++extern struct eqos_config eqos_adi_config;
+diff --git a/drivers/net/dwc_eth_qos_adi.c b/drivers/net/dwc_eth_qos_adi.c
 new file mode 100644
-index 0000000000000000000000000000000000000000..56eceff712f12b6d794dcc1b4cd52dbb821ec814
+index 0000000000000000000000000000000000000000..373e7c25051ccf4af9f5bf0566ca322b796193a7
 --- /dev/null
-+++ b/drivers/dma/adi_dma.c
-@@ -0,0 +1,255 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Analog Devices DMA controller driver
-+ *
++++ b/drivers/net/dwc_eth_qos_adi.c
+@@ -0,0 +1,102 @@
++// SPDX-License-Identifier: GPL-2.0
++/**
 + * (C) Copyright 2024 - Analog Devices, Inc.
 + *
 + * Written and/or maintained by Timesys Corporation
 + *
-+ * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-+ * Contact: Greg Malysa <greg.malysa@timesys.com>
-+ * Contact: Ian Roberts <ian.roberts@timesys.com>
-+ *
++ * Author: Greg Malysa <greg.malysa@timesys.com>
++ * Additional Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 + */
++
++#include <clk.h>
 +#include <dm.h>
-+#include <dma.h>
-+#include <dma-uclass.h>
++#include <net.h>
++#include <phy.h>
++#include <reset.h>
 +#include <asm/io.h>
-+#include <dm/device_compat.h>
-+#include <linux/errno.h>
 +
-+#define HAS_MDMA	BIT(0)
++#include <asm/arch-adi/sc5xx/sc5xx.h>
 +
-+#define REG_ADDRSTART	0x04
-+#define REG_CFG		0x08
-+#define REG_XCNT	0x0C
-+#define REG_XMOD	0x10
-+#define REG_STAT	0x30
++#include "dwc_eth_qos.h"
 +
-+#define BITP_DMA_CFG_MSIZE                        8
-+#define BITP_DMA_CFG_PSIZE                        4
-+#define BITM_DMA_CFG_WNR                 0x00000002
-+#define BITM_DMA_CFG_EN                  0x00000001
-+#define ENUM_DMA_CFG_XCNT_INT            0x00100000
-+
-+#define BITP_DMA_STAT_PBWID                      12
-+#define BITP_DMA_STAT_ERRC                        4
-+#define BITM_DMA_STAT_PBWID              0x00003000
-+#define BITM_DMA_STAT_ERRC               0x00000070
-+#define BITM_DMA_STAT_PIRQ               0x00000004
-+#define BITM_DMA_STAT_IRQERR             0x00000002
-+#define BITM_DMA_STAT_IRQDONE            0x00000001
-+
-+#define DMA_MDMA_SRC_DEFAULT_CONFIG(psize, msize) \
-+	(BITM_DMA_CFG_EN | ((psize) << BITP_DMA_CFG_PSIZE) | ((msize) << BITP_DMA_CFG_MSIZE))
-+#define DMA_MDMA_DST_DEFAULT_CONFIG(psize, msize) \
-+	(BITM_DMA_CFG_EN | BITM_DMA_CFG_WNR | ENUM_DMA_CFG_XCNT_INT | \
-+	((psize) << BITP_DMA_CFG_PSIZE) | ((msize) << BITP_DMA_CFG_MSIZE))
-+
-+struct adi_dma_channel {
-+	int id;
-+	struct adi_dma *dma;
-+	void __iomem *iosrc;
-+	void __iomem *iodest;
-+};
-+
-+struct adi_dma {
-+	struct udevice *dev;
-+	struct adi_dma_channel channels[1];
-+	void __iomem *ioaddr;
-+	unsigned long hw_cfg;
-+};
-+
-+static const struct udevice_id dma_dt_ids[] = {
-+	{ .compatible = "adi,mdma-controller", .data = HAS_MDMA },
-+	{ }
-+};
-+
-+static u8 adi_dma_get_msize(u32 n_bytecount, u32 n_address)
++static int eqos_start_resets_adi(struct udevice *dev)
 +{
-+	/* Calculate MSIZE, PSIZE, XCNT and XMOD */
-+	u8 n_msize = 0;
-+	u32 n_value = n_bytecount | n_address;
-+	u32 n_mask = 0x1;
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	u32 val;
 +
-+	for (n_msize = 0; n_msize < 5; n_msize++, n_mask <<= 1) {
-+		if ((n_value & n_mask) == n_mask)
-+			break;
-+	}
++	/*
++	 * Settings need to latch with the DMA reset below. Currently only
++	 * rgmii is supported but other phy interfaces may be supported in
++	 * the future
++	 */
++	sc5xx_enable_rgmii();
 +
-+	return n_msize;
++	val = readl(&eqos->dma_regs->mode);
++	val |= EQOS_DMA_MODE_SWR;
++	writel(val, &eqos->dma_regs->mode);
++
++	return 0;
 +}
 +
-+static int adi_dma_get_ch_error(void __iomem *ch)
++static int eqos_probe_resources_adi(struct udevice *dev)
 +{
-+	u32 cause = (readl(ch + REG_STAT) &  BITM_DMA_STAT_ERRC) >>
-+		    BITP_DMA_STAT_ERRC;
-+	switch (cause) {
-+	case 0:
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	phy_interface_t interface;
++
++	interface = eqos->config->interface(dev);
++	if (interface == PHY_INTERFACE_MODE_NA) {
++		pr_err("Invalid PHY interface\n");
 +		return -EINVAL;
-+	case 1:
-+		return -EBUSY;
-+	case 2:
-+		return -EFAULT;
-+	case 3:
-+		fallthrough;
-+	case 5:
-+		fallthrough;
-+	case 6:
-+		fallthrough;
-+	default:
-+		return -EIO;
-+	}
-+}
-+
-+static int adi_mdma_transfer(struct udevice *dev, int direction,
-+			     dma_addr_t dst, dma_addr_t src, size_t len)
-+{
-+	struct adi_dma *priv = dev_get_priv(dev);
-+	void __iomem *chsrc = priv->channels[0].iosrc;
-+	void __iomem *chdst = priv->channels[0].iodest;
-+
-+	int result = 0;
-+	u32 reg;
-+	u32 bytecount = len;
-+
-+	u8 n_srcmsize;
-+	u8 n_dstmsize;
-+	u8 n_srcpsize;
-+	u8 n_dstpsize;
-+	u8 n_psize;
-+	u32 srcconfig;
-+	u32 dstconfig;
-+	u8 srcpsizemax = (readl(chsrc + REG_STAT) & BITM_DMA_STAT_PBWID) >>
-+			 BITP_DMA_STAT_PBWID;
-+	u8 dstpsizemax = (readl(chdst + REG_STAT) & BITM_DMA_STAT_PBWID) >>
-+			 BITP_DMA_STAT_PBWID;
-+
-+	const u32 CLRSTAT = (BITM_DMA_STAT_IRQDONE | BITM_DMA_STAT_IRQERR |
-+			     BITM_DMA_STAT_PIRQ);
-+
-+	if (len == 0)
-+		return -EINVAL;
-+
-+	/* Clear DMA status */
-+	writel(CLRSTAT, chsrc + REG_STAT);
-+	writel(CLRSTAT, chdst + REG_STAT);
-+
-+	/* Calculate MSIZE, PSIZE, XCNT and XMOD */
-+	n_srcmsize = adi_dma_get_msize(bytecount, src);
-+	n_dstmsize = adi_dma_get_msize(bytecount, dst);
-+	n_srcpsize = min(n_srcmsize, srcpsizemax);
-+	n_dstpsize = min(n_dstmsize, dstpsizemax);
-+	n_psize = min(n_srcpsize, n_dstpsize);
-+
-+	srcconfig = DMA_MDMA_SRC_DEFAULT_CONFIG(n_psize, n_srcmsize);
-+	dstconfig = DMA_MDMA_DST_DEFAULT_CONFIG(n_psize, n_dstmsize);
-+
-+	/* Load the DMA descriptors */
-+	writel(src,			chsrc + REG_ADDRSTART);
-+	writel(bytecount >> n_srcmsize,	chsrc + REG_XCNT);
-+	writel(1 << n_srcmsize,		chsrc + REG_XMOD);
-+	writel(dst,			chdst + REG_ADDRSTART);
-+	writel(bytecount >> n_dstmsize,	chdst + REG_XCNT);
-+	writel(1 << n_dstmsize,		chdst + REG_XMOD);
-+
-+	writel(dstconfig, chdst + REG_CFG);
-+	writel(srcconfig, chsrc + REG_CFG);
-+
-+	/* Wait for DMA to complete while checking for a DMA error */
-+	do {
-+		reg = readl(chsrc + REG_STAT);
-+		if ((reg & BITM_DMA_STAT_IRQERR) == BITM_DMA_STAT_IRQERR) {
-+			result = adi_dma_get_ch_error(chsrc);
-+			break;
-+		}
-+		reg = readl(chdst + REG_STAT);
-+		if ((reg & BITM_DMA_STAT_IRQERR) == BITM_DMA_STAT_IRQERR) {
-+			result = adi_dma_get_ch_error(chdst);
-+			break;
-+		}
-+	} while ((reg & BITM_DMA_STAT_IRQDONE) == 0);
-+
-+	reg = readl(chsrc + REG_CFG);
-+	writel(reg & ~1, chsrc + REG_CFG);
-+	reg = readl(chdst + REG_CFG);
-+	writel(reg & ~1, chdst + REG_CFG);
-+
-+	return result;
-+}
-+
-+static int adi_dma_init_channel(struct adi_dma *dma,
-+				struct adi_dma_channel *channel, ofnode node)
-+{
-+	u32 offset;
-+
-+	if (ofnode_read_u32(node, "adi,id", &channel->id)) {
-+		dev_err(dma->dev, "Missing adi,id for channel %s\n",
-+			ofnode_get_name(node));
-+		return -ENOENT;
-+	}
-+
-+	if (ofnode_read_u32(node, "adi,src-offset", &offset)) {
-+		dev_err(dma->dev, "Missing adi,src-offset for channel %s\n",
-+			ofnode_get_name(node));
-+		return -ENOENT;
-+	}
-+
-+	channel->iosrc = dma->ioaddr + offset;
-+	channel->dma = dma;
-+
-+	if (dma->hw_cfg & HAS_MDMA) {
-+		if (ofnode_read_u32(node, "adi,dest-offset", &offset)) {
-+			dev_err(dma->dev,
-+				"Missing adi,dest-offset for channel %s\n",
-+				ofnode_get_name(node));
-+			return -ENOENT;
-+		}
-+		channel->iodest = dma->ioaddr + offset;
 +	}
 +
 +	return 0;
 +}
 +
-+static int adi_dma_probe(struct udevice *dev)
++/**
++ * rgmii tx clock rate is set to 125 MHz regardless of phy mode, and
++ * by default the internal clock is always connected to 125 MHz. According
++ * to the HRM it is invalid for this clock to have any other speed, so
++ * the hardware won't work anyway if this is wrong.
++ */
++static ulong eqos_get_tick_clk_rate_adi(struct udevice *dev)
 +{
-+	struct dma_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-+	struct adi_dma *priv = dev_get_priv(dev);
-+	ofnode node, child;
-+
-+	priv->hw_cfg = dev_get_driver_data(dev);
-+	if (priv->hw_cfg & HAS_MDMA)
-+		uc_priv->supported = DMA_SUPPORTS_MEM_TO_MEM;
-+
-+	priv->ioaddr = dev_remap_addr(dev);
-+	if (!priv->ioaddr)
-+		return -EINVAL;
-+
-+	node = dev_read_first_subnode(dev);
-+	if (!ofnode_valid(node)) {
-+		dev_err(dev,
-+			"Error: device tree DMA channel config missing!\n");
-+		return -ENODEV;
-+	}
-+
-+	node = dev_ofnode(dev);
-+	ofnode_for_each_subnode(child, node) {
-+		adi_dma_init_channel(priv, priv->channels, child);
-+		break; //Only 1 channel supported for now
-+	}
-+
-+	return 0;
++	return 125 * 1000000;
 +}
 +
-+static const struct dma_ops adi_dma_ops = {
-+	.transfer = adi_mdma_transfer,
++static int eqos_get_enetaddr_adi(struct udevice *dev)
++{
++	struct eth_pdata *pdata = dev_get_plat(dev);
++
++	return eth_env_get_enetaddr("ethaddr", pdata->enetaddr);
++}
++
++static struct eqos_ops eqos_adi_ops = {
++	.eqos_inval_desc = eqos_inval_desc_generic,
++	.eqos_flush_desc = eqos_flush_desc_generic,
++	.eqos_inval_buffer = eqos_inval_buffer_generic,
++	.eqos_flush_buffer = eqos_flush_buffer_generic,
++	.eqos_probe_resources = eqos_probe_resources_adi,
++	.eqos_remove_resources = eqos_null_ops,
++	.eqos_start_resets = eqos_start_resets_adi,
++	.eqos_stop_resets = eqos_null_ops,
++	.eqos_start_clks = eqos_null_ops,
++	.eqos_stop_clks = eqos_null_ops,
++	.eqos_calibrate_pads = eqos_null_ops,
++	.eqos_disable_calibration = eqos_null_ops,
++	.eqos_set_tx_clk_speed = eqos_null_ops,
++	.eqos_get_enetaddr = eqos_get_enetaddr_adi,
++	.eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_adi,
 +};
 +
-+U_BOOT_DRIVER(adi_dma) = {
-+	.name = "adi_dma",
-+	.id = UCLASS_DMA,
-+	.of_match = dma_dt_ids,
-+	.ops = &adi_dma_ops,
-+	.probe = adi_dma_probe,
-+	.priv_auto = sizeof(struct adi_dma),
++// @todo read mdio_wait from device tree
++// @todo read swr_wait from device tree
++struct eqos_config __maybe_unused eqos_adi_config = {
++	.reg_access_always_ok = true,
++	.mdio_wait =  20,
++	.swr_wait = 50,
++	.config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
++	.config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_150_250,
++	.axi_bus_width = EQOS_AXI_WIDTH_32,
++	.interface = dev_read_phy_mode,
++	.ops = &eqos_adi_ops,
 +};
 
 -- 
