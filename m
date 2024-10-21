@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DB38D15DB9
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 16:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C969BD15DB8
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 16:32:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADDF588DC8;
-	Mon, 21 Oct 2024 18:14:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 0904E88599;
+	Mon, 21 Oct 2024 18:32:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="qDHvMWKp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OQRDV0yn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D79BC88E19; Mon, 21 Oct 2024 18:14:05 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0644D885F4; Mon, 21 Oct 2024 18:32:22 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7E1488DB2
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:14:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 170C88657F
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:32:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=00240ef410=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49LDkdLG011056;
- Mon, 21 Oct 2024 18:13:48 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=R7OZrIWoN7D72tfcCQm0Jf
- Tw7YetBt02MhTY88G/bDM=; b=qDHvMWKp7G+LXXUko+K1+vo2zAkYvGGzbfV42G
- URCfS+6QcCu881hELkQnQ/2awnNeecv1ZQaBEISGPu11efFuZjidxf6I7DcR7Q2L
- 57OFQSLJju6v7CToahxC38ZQEo0ttBF7q49GAtlIir3NybprnhBY7jD/glF9Edv6
- U5pctLFoXr8diN4BMJCqXNgbVauxdMPdY7sYw9qbLwA1B0POp5MdkArsB5FbIlah
- WY152hp1y57LLHnji/O2TQ0rV5QF8iIcVqujOGTvZs1Rhu4cVd8swFnnJY06PvTr
- yH76vo9/cKUrNNvL2d50CTeahrnx7HK3UmDvvsPdKk4VRIdw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 42c6ujs17d-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 21 Oct 2024 18:13:48 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A805B40045;
- Mon, 21 Oct 2024 18:12:53 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D08DA24C448;
- Mon, 21 Oct 2024 18:12:32 +0200 (CEST)
-Received: from localhost (10.48.86.243) by SHFDAG1NODE3.st.com (10.75.129.71)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Mon, 21 Oct
- 2024 18:12:32 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Marek Vasut
- <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini
- <trini@konsulko.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@dh-electronics.com>
-Subject: [PATCH] ARM: dts: stm32: remove unused include for dhcor
-Date: Mon, 21 Oct 2024 18:12:28 +0200
-Message-ID: <20241021181210.1.If2ca2776660cebc50014960f9a4781e8ef937d1f@changeid>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a9a2cdc6f0cso642779166b.2
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 09:32:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1729528339; x=1730133139; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DIDJKRWb1cH4lDJYBto2MTh7jITssmP9GARA0z6Bd+U=;
+ b=OQRDV0yn8cZTCNxuGVe87aiD9Czm1iSP9je9K1YvWptIeda/WrUGrUCanxk+BN8QEp
+ ks1emydFAzBHwdK1wceIPjBdHv5MlXIQZNBNSMzxF97g+3UL3lCQO1l3Dphkwlu7PSui
+ JoryRtfD7qfv0qd3Ez7MvX3hU/v3j0CBYKnOA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729528339; x=1730133139;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DIDJKRWb1cH4lDJYBto2MTh7jITssmP9GARA0z6Bd+U=;
+ b=PJv+T2WEN+GsDOPqrcht9jfttnz9RPOr+czmD1k9kY00Y5xHfM0O8jj/BZv+ya/4VV
+ V6qS4CYc0JrxAD7DSCT8vo3sBD1hjQ+yQlAr3I5hRpgL8NyQyZVCCPD4lxV7giQRBbtu
+ q6oqwHDXFXisiX50sFvMgj3p/xk3xle+ySITCql6dz7c0EHBCAZCXbProhXaKUxSxkEm
+ SZPyPPe/8v+X6wFFP4l+4cRtYJaHyrOdfG8K7DKW8jEEU1eXkU4fUCj5iHWuAWR8fTV1
+ e3KYuReZqY4u6wzZATLZyQtTL3MxeiDA+5wt9WH7sesR9fZ+iIPENu9iNlc4I7lJZlh4
+ V0gA==
+X-Gm-Message-State: AOJu0Yyw97cG0cwW3e44vgkoQZV3Z2CX3hc1X/Vh8qIAIyK3RIPvt+Nr
+ zlggTMPUuYCUvUn/b8+gLQG7qq6pFbVGkEojVYi8GImNKt2WSAqNKWl7ZueKvXRuqidkMZjTi9g
+ FnkY9Hk5GHH1ZcMQ6fjU8eDIMjeKY/ylDxtt+
+X-Google-Smtp-Source: AGHT+IHXW5R+bsYMSSY63PBgSLcKQKDMLs1h9/ESwcRqvN18aTVxUg33p/wVSRSApUm6mg8DEyvByDu1/dtn038UcwA=
+X-Received: by 2002:a17:906:4788:b0:a9a:38e6:2fdf with SMTP id
+ a640c23a62f3a-a9a69cdf917mr1121164666b.64.1729528339551; Mon, 21 Oct 2024
+ 09:32:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.86.243]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+References: <20241016060523.888804-1-patrick.rudolph@9elements.com>
+ <20241016060523.888804-25-patrick.rudolph@9elements.com>
+ <CAFLszTh4Z8p-8d8ASrpUTnNdDhmijDm8fcct-wDWR1nRFxs5JA@mail.gmail.com>
+ <CALNFmy1=R4vp6S3H3a_3HTDjGufDxu+Heo-vk=GRjb0aj0z0Dg@mail.gmail.com>
+In-Reply-To: <CALNFmy1=R4vp6S3H3a_3HTDjGufDxu+Heo-vk=GRjb0aj0z0Dg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 21 Oct 2024 18:32:08 +0200
+Message-ID: <CAFLszTjTA98Re5rWXHpMQZADXU7uLbCayxNTtugYRxHZaFUL_w@mail.gmail.com>
+Subject: Re: [PATCH v9 24/37] common: Enable BLOBLIST_TABLES on arm
+To: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: u-boot@lists.denx.de, linux-kernel@vger.kernel.org, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,332 +87,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove device tree include files no more used with OF_UPSTREAM migration
-stm32mp135f-dhcor-dhsbc.dts
+Hi Patrick,
 
-Fixes: cccb29fc1270 ("ARM: dts: stm32: Switch to using upstream DT on DH
-STM32 DHSOM")
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
+On Mon, 21 Oct 2024 at 10:26, Patrick Rudolph
+<patrick.rudolph@9elements.com> wrote:
+>
+> Hi Simon,
+> On Fri, Oct 18, 2024 at 1:18=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi Patrick,
+> >
+> > On Wed, 16 Oct 2024 at 00:16, Patrick Rudolph
+> > <patrick.rudolph@9elements.com> wrote:
+> > >
+> > > Allow to use BLOBLIST_TABLES on arm to store ACPI or other tables.
+> > >
+> > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > > Cc: Tom Rini <trini@konsulko.com>
+> > > ---
+> > > Changelog v9:
+> > > - default to BLOBLIST_ALLOC on arm
+> > > - Move default for BLOBLIST_SIZE_RELOC up
+> > > ---
+> > >  common/Kconfig |  2 ++
+> > >  lib/Kconfig    | 15 +++++++++------
+> > >  2 files changed, 11 insertions(+), 6 deletions(-)
+> > >
+> >
+> > This is fine, but please disable it for snow since it needs the FIXED
+> > option for now.
+>
+> I cannot follow. What needs the FIXED option and what to disable?
+> I run this patch on the CI and test_py_sandbox tests are still working.
 
- arch/arm/dts/stm32mp13xx-dhcor-som.dtsi | 308 ------------------------
- 1 file changed, 308 deletions(-)
- delete mode 100644 arch/arm/dts/stm32mp13xx-dhcor-som.dtsi
+I mean that snow cannot use BLOBLIST_ALLOC and needs BLOBLIST_FIXED so
+if you make ALLOC the default you need to change the default for snow.
 
-diff --git a/arch/arm/dts/stm32mp13xx-dhcor-som.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-som.dtsi
-deleted file mode 100644
-index ddad6497775b..000000000000
---- a/arch/arm/dts/stm32mp13xx-dhcor-som.dtsi
-+++ /dev/null
-@@ -1,308 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
--/*
-- * Copyright (C) 2024 Marek Vasut <marex@denx.de>
-- */
--
--#include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/input/input.h>
--#include <dt-bindings/leds/common.h>
--#include <dt-bindings/mfd/st,stpmic1.h>
--#include <dt-bindings/regulator/st,stm32mp13-regulator.h>
--#include "stm32mp13-pinctrl.dtsi"
--
--/ {
--	model = "DH electronics STM32MP13xx DHCOR SoM";
--	compatible = "dh,stm32mp131a-dhcor-som",
--		     "st,stm32mp131";
--
--	aliases {
--		mmc0 = &sdmmc2;
--		mmc1 = &sdmmc1;
--		serial0 = &uart4;
--		serial1 = &uart7;
--		rtc0 = &rv3032;
--		spi0 = &qspi;
--	};
--
--	memory@c0000000 {
--		device_type = "memory";
--		reg = <0xc0000000 0x20000000>;
--	};
--
--	reserved-memory {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		ranges;
--
--		optee@dd000000 {
--			reg = <0xdd000000 0x3000000>;
--			no-map;
--		};
--	};
--
--	sdio_pwrseq: sdio-pwrseq {
--		compatible = "mmc-pwrseq-simple";
--		reset-gpios = <&gpiof 12 GPIO_ACTIVE_LOW>;
--	};
--
--	vin: vin {
--		compatible = "regulator-fixed";
--		regulator-name = "vin";
--		regulator-min-microvolt = <5000000>;
--		regulator-max-microvolt = <5000000>;
--		regulator-always-on;
--	};
--};
--
--&i2c3 {
--	i2c-scl-rising-time-ns = <96>;
--	i2c-scl-falling-time-ns = <3>;
--	clock-frequency = <400000>;
--	status = "okay";
--	/* spare dmas for other usage */
--	/delete-property/dmas;
--	/delete-property/dma-names;
--
--	pmic: stpmic@33 {
--		compatible = "st,stpmic1";
--		reg = <0x33>;
--		interrupts-extended = <&gpioi 3 IRQ_TYPE_EDGE_FALLING>;
--		interrupt-controller;
--		#interrupt-cells = <2>;
--		status = "okay";
--
--		regulators {
--			compatible = "st,stpmic1-regulators";
--
--			ldo1-supply = <&vin>;
--			ldo2-supply = <&vin>;
--			ldo3-supply = <&vin>;
--			ldo4-supply = <&vin>;
--			ldo5-supply = <&vin>;
--			ldo6-supply = <&vin>;
--			pwr_sw1-supply = <&bst_out>;
--			pwr_sw2-supply = <&bst_out>;
--
--			vddcpu: buck1 { /* VDD_CPU_1V2 */
--				regulator-name = "vddcpu";
--				regulator-min-microvolt = <1250000>;
--				regulator-max-microvolt = <1250000>;
--				regulator-always-on;
--				regulator-initial-mode = <0>;
--				regulator-over-current-protection;
--			};
--
--			vdd_ddr: buck2 { /* VDD_DDR_1V35 */
--				regulator-name = "vdd_ddr";
--				regulator-min-microvolt = <1350000>;
--				regulator-max-microvolt = <1350000>;
--				regulator-always-on;
--				regulator-initial-mode = <0>;
--				regulator-over-current-protection;
--			};
--
--			vdd: buck3 { /* VDD_3V3_1V8 */
--				regulator-name = "vdd";
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <3300000>;
--				regulator-always-on;
--				regulator-initial-mode = <0>;
--				regulator-over-current-protection;
--			};
--
--			vddcore: buck4 { /* VDD_CORE_1V2 */
--				regulator-name = "vddcore";
--				regulator-min-microvolt = <1250000>;
--				regulator-max-microvolt = <1250000>;
--				regulator-always-on;
--				regulator-initial-mode = <0>;
--				regulator-over-current-protection;
--			};
--
--			vdd_adc: ldo1 { /* VDD_ADC_1V8 */
--				regulator-name = "vdd_adc";
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <1800000>;
--				interrupts = <IT_CURLIM_LDO1 0>;
--			};
--
--			vdd_ldo2: ldo2 { /* LDO2_OUT_1V8 */
--				regulator-name = "vdd_ldo2";
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <1800000>;
--				interrupts = <IT_CURLIM_LDO2 0>;
--			};
--
--			vdd_ldo3: ldo3 { /* LDO3_OUT */
--				regulator-name = "vdd_ldo3";
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <1800000>;
--				interrupts = <IT_CURLIM_LDO3 0>;
--			};
--
--			vdd_usb: ldo4 { /* VDD_USB_3V3 */
--				regulator-name = "vdd_usb";
--				regulator-min-microvolt = <3300000>;
--				regulator-max-microvolt = <3300000>;
--				interrupts = <IT_CURLIM_LDO4 0>;
--			};
--
--			vdd_sd: ldo5 { /* VDD_SD_3V3_1V8 */
--				regulator-name = "vdd_sd";
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <3300000>;
--				interrupts = <IT_CURLIM_LDO5 0>;
--			};
--
--			vdd_sd2: ldo6 { /* VDD_SD2_3V3_1V8 */
--				regulator-name = "vdd_sd2";
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <3300000>;
--				interrupts = <IT_CURLIM_LDO6 0>;
--			};
--
--			vref_ddr: vref_ddr { /* VREF_DDR_0V675 */
--				regulator-name = "vref_ddr";
--				regulator-always-on;
--			};
--
--			bst_out: boost { /* BST_OUT_5V2 */
--				regulator-name = "bst_out";
--			};
--
--			vbus_otg: pwr_sw1 {
--				regulator-name = "vbus_otg";
--				interrupts = <IT_OCP_OTG 0>;
--			};
--
--			vbus_sw: pwr_sw2 {
--				regulator-name = "vbus_sw";
--				interrupts = <IT_OCP_SWOUT 0>;
--				regulator-active-discharge = <1>;
--			};
--		};
--
--		onkey {
--			compatible = "st,stpmic1-onkey";
--			interrupts = <IT_PONKEY_F 0>, <IT_PONKEY_R 1>;
--			interrupt-names = "onkey-falling", "onkey-rising";
--			status = "okay";
--		};
--
--		watchdog {
--			compatible = "st,stpmic1-wdt";
--			status = "disabled";
--		};
--	};
--
--	eeprom0: eeprom@50 {
--		compatible = "atmel,24c256";	/* ST M24256 */
--		reg = <0x50>;
--		pagesize = <64>;
--	};
--
--	rv3032: rtc@51 {
--		compatible = "microcrystal,rv3032";
--		reg = <0x51>;
--		interrupts-extended = <&gpioi 0 IRQ_TYPE_EDGE_FALLING>;
--	};
--};
--
--&iwdg2 {
--	timeout-sec = <32>;
--	status = "okay";
--};
--
--&qspi {
--	pinctrl-names = "default", "sleep";
--	pinctrl-0 = <&qspi_clk_pins_a
--		     &qspi_bk1_pins_a
--		     &qspi_cs1_pins_a>;
--	pinctrl-1 = <&qspi_clk_sleep_pins_a
--		     &qspi_bk1_sleep_pins_a
--		     &qspi_cs1_sleep_pins_a>;
--	#address-cells = <1>;
--	#size-cells = <0>;
--	status = "okay";
--
--	flash0: flash@0 {
--		compatible = "jedec,spi-nor";
--		reg = <0>;
--		spi-rx-bus-width = <4>;
--		spi-max-frequency = <108000000>;
--		#address-cells = <1>;
--		#size-cells = <1>;
--	};
--};
--
--/* Console UART */
--&uart4 {
--	pinctrl-names = "default", "sleep", "idle";
--	pinctrl-0 = <&uart4_pins_b>;
--	pinctrl-1 = <&uart4_sleep_pins_b>;
--	pinctrl-2 = <&uart4_idle_pins_b>;
--	/delete-property/dmas;
--	/delete-property/dma-names;
--	status = "okay";
--};
--
--/* Bluetooth */
--&uart7 {
--	pinctrl-names = "default", "sleep", "idle";
--	pinctrl-0 = <&uart7_pins_a>;
--	pinctrl-1 = <&uart7_sleep_pins_a>;
--	pinctrl-2 = <&uart7_idle_pins_a>;
--	uart-has-rtscts;
--	status = "okay";
--
--	bluetooth {
--		compatible = "infineon,cyw43439-bt", "brcm,bcm4329-bt";
--		max-speed = <3000000>;
--		device-wakeup-gpios = <&gpiog 9 GPIO_ACTIVE_HIGH>;
--		shutdown-gpios = <&gpioi 2 GPIO_ACTIVE_HIGH>;
--	};
--};
--
--/* SDIO WiFi */
--&sdmmc1 {
--	pinctrl-names = "default", "opendrain", "sleep";
--	pinctrl-0 = <&sdmmc1_b4_pins_a &sdmmc1_clk_pins_a>;
--	pinctrl-1 = <&sdmmc1_b4_od_pins_a &sdmmc1_clk_pins_a>;
--	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a>;
--	bus-width = <4>;
--	cap-power-off-card;
--	keep-power-in-suspend;
--	non-removable;
--	st,neg-edge;
--	vmmc-supply = <&vdd>;
--	mmc-pwrseq = <&sdio_pwrseq>;
--	status = "okay";
--
--	#address-cells = <1>;
--	#size-cells = <0>;
--
--	brcmf: bcrmf@1 {	/* muRata 1YN */
--		reg = <1>;
--		compatible = "infineon,cyw43439-fmac", "brcm,bcm4329-fmac";
--		interrupt-parent = <&gpioe>;
--		interrupts = <14 IRQ_TYPE_LEVEL_LOW>;
--		interrupt-names = "host-wake";
--	};
--};
--
--/* eMMC */
--&sdmmc2 {
--	pinctrl-names = "default", "opendrain", "sleep";
--	pinctrl-0 = <&sdmmc2_b4_pins_a &sdmmc2_d47_pins_a &sdmmc2_clk_pins_a>;
--	pinctrl-1 = <&sdmmc2_b4_od_pins_a &sdmmc2_d47_pins_a &sdmmc2_clk_pins_a>;
--	pinctrl-2 = <&sdmmc2_b4_sleep_pins_a &sdmmc2_d47_sleep_pins_a>;
--	bus-width = <8>;
--	mmc-ddr-3_3v;
--	no-sd;
--	no-sdio;
--	non-removable;
--	st,neg-edge;
--	vmmc-supply = <&vdd>;
--	vqmmc-supply = <&vdd>;
--	status = "okay";
--};
--- 
-2.25.1
+My lab is still not running, unfortunately, but I will try to get it
+sorted out soon.
 
+Regards,
+Simon
