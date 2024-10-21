@@ -4,67 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C33C8D15DBA
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 16:33:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F117D15DBB
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 16:39:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2440888F5B;
-	Mon, 21 Oct 2024 18:33:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id ECF5D88E8A;
+	Mon, 21 Oct 2024 18:39:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IT6z+i1x";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nBd8Cyhg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FD4B88F70; Mon, 21 Oct 2024 18:33:04 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id BEFDF88F01; Mon, 21 Oct 2024 18:39:35 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5510A88F91
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:33:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15CA688E8A
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 18:39:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a9a3dc089d8so651880666b.3
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 09:33:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7183a3f3beaso416996a34.1
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 09:39:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729528380; x=1730133180; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ig02ea4MBymdJfHa2Cmo69sPgYpwKCU0OXTZ59a6kd8=;
- b=IT6z+i1xqJX4v8MWcgfqqeKT7cyt5xld+o45eKgm3kVxIb2+aQX90GAcbdcs0wGCf9
- eqBt4ps2g8ZH0541ssOjLdgbzzZVPDS0T9yaEh9nTKKUhBNoiQ3Lzuz1T/KyAiGQh22u
- bCSuozWJR3PzyyZxMcZk/LcF4NMrlCRILBYj8=
+ d=konsulko.com; s=google; t=1729528772; x=1730133572; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZaRwcL3QF/n9lw62CZk7kfE+APRDYnQcnjv0bFO6Bxo=;
+ b=nBd8Cyhguchiwk5wJ34diD+g006zWqkkioo9gOWkGKrlqc2BVC6QDtYMSl0QRNPJl9
+ 2Fcz0PdBp3UrB2eFSO9sbwcRRmPPK81ommJeO4ajxgY/dWYslgsDxhpuIl/7gjNeAoYD
+ S8RfA8TbDBBBGM+Aq3Qnifl3Jb+Dl78VpikjU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729528380; x=1730133180;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ig02ea4MBymdJfHa2Cmo69sPgYpwKCU0OXTZ59a6kd8=;
- b=V8/R2JUSCo1sI1hCvuDsPbHvpDEP8so4UJ3AOjaBWfXKHqxwT5nKMFnBrV9R6BFlBE
- xZ7NEhVIHhXWhAiRmd9VJvw4XS6BJafqEsbLPViLI8dp7mWmq2bBBDtys82J88gQFROI
- TOQ2Y/FPvIj6Ay46FgX1/XRYRNdx7LzLS8/TSPwUlyGP5DNat38ufpPBWtWj7cQIH+pa
- kDhp0vmfgCWyZIiZEP8bg/Zm5f89au+nUyP0MF0/SPb2LkR/gKQhep86pFARAoZhXmNO
- XoyzFsvDxHJTwL756WtsA6Nub8rRju57lnbyCPuslQVEj32bkVg36NhjVHGwIYxPflKX
- OwtA==
-X-Gm-Message-State: AOJu0YxhjrndQSO3GrYnZGveUuGa5G3GX4xcwfdOasq0lJV+1RJRQ0GT
- T5X+5BSR9RNbJmx0W9cNMycLOLJguB4pU+2ncCJ4RM9VgUm38MNyCYaAwUSf/cDjDVoRdl4/k5h
- 4nOCrI5D2cOjiTkZ9qxn3NDHYnpmhSvwiFYuj
-X-Google-Smtp-Source: AGHT+IF9RfTB7GI6d9z8xW3IE4ybcyJjUpcBZneALuCYKmEpYe9WaiWHGv5eb7qd58UVV6dTKNvXp0DUMWP0aB/B6Ts=
-X-Received: by 2002:a17:907:7e97:b0:a77:c95e:9b1c with SMTP id
- a640c23a62f3a-a9a69a7b3bamr1269106766b.27.1729528380364; Mon, 21 Oct 2024
- 09:33:00 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729528772; x=1730133572;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZaRwcL3QF/n9lw62CZk7kfE+APRDYnQcnjv0bFO6Bxo=;
+ b=XEN8vd4fWLMLGYaOA50b6jUUFa4UryduPX406FtAgaXFNRDtbJLZkfK36etj2zAeVl
+ z1bICTcpRAXd1W5/qaLUhncs+NciEEtVq1vEHK4juLRy03oWHwVfBJu9xielUo5pT2uN
+ ahbgG8QYuUuiElCGZ9QgxqNP9ylwmPWPN2lJy6w43V2GdYnS2qFGQpQiMDUCq5E6BAEF
+ jHuC1FZdKqjmacmsiYAHQBBCh48oIWxEUtqYqqCIDFVb/7h2MZSHN57lQmTBUnErSxDj
+ iOuoCOU5BG3ESOgSNb6JZ4GQ6LDjlNg9Mg3PsswUoycKkxTQaFYCtAUtEWgp7VhOZGoT
+ xJZQ==
+X-Gm-Message-State: AOJu0YxaXb+9sLO6X7qWL5rvHFuZoaMUul2vZzHahTsuERE4PhfyBkDI
+ 02D9iTDH0gQ/oxSwTBkUdeQxcw31yIh3rfpuMfoNjXcyl3coRZVq+wHp3rkJwcQ=
+X-Google-Smtp-Source: AGHT+IFSdIpcilmYl6eOD+bYjBkegqce4j0QnfoGB+XQCvBtEwsKYLnEfFsZlO2keqTOloqp3QTBeQ==
+X-Received: by 2002:a05:6830:91c:b0:710:fd8e:1727 with SMTP id
+ 46e09a7af769-7181a89dec5mr8361386a34.18.1729528771791; 
+ Mon, 21 Oct 2024 09:39:31 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6ce008fbbd0sm19221336d6.39.2024.10.21.09.39.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Oct 2024 09:39:31 -0700 (PDT)
+Date: Mon, 21 Oct 2024 10:39:28 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heiko Schocher <hs@denx.de>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, bigunclemax@gmail.com,
+ Alex Shumsky <alexthreed@gmail.com>
+Subject: Re: Please pull u-boot-i2c
+Message-ID: <20241021163928.GH4959@bill-the-cat>
+References: <7082f093-4e4c-7329-d10a-761753c8e16e@denx.de>
 MIME-Version: 1.0
-References: <20241021142040.2981390-1-andriy.shevchenko@linux.intel.com>
-In-Reply-To: <20241021142040.2981390-1-andriy.shevchenko@linux.intel.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Oct 2024 18:32:49 +0200
-Message-ID: <CAFLszTh5qepermWtFRH3AcvPwa_YzSuPNyai_DrJLTJLY8RLSQ@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] mtd: Drop superfluous const qualifier
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="c7qsLVobyG6pCrgC"
+Content-Disposition: inline
+In-Reply-To: <7082f093-4e4c-7329-d10a-761753c8e16e@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,35 +90,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 21 Oct 2024 at 16:20, Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
->
-> The compiler will ignore it anyway:
->
->   include/linux/mtd/mtd.h:342:15: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
->
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-> ---
->  include/linux/mtd/mtd.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+--c7qsLVobyG6pCrgC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, Oct 21, 2024 at 10:27:06AM +0200, Heiko Schocher wrote:
 
-> diff --git a/include/linux/mtd/mtd.h b/include/linux/mtd/mtd.h
-> index 6751fb52c5a5..3ffcd40807d0 100644
-> --- a/include/linux/mtd/mtd.h
-> +++ b/include/linux/mtd/mtd.h
-> @@ -339,7 +339,7 @@ static inline void mtd_set_ofnode(struct mtd_info *mtd, ofnode node)
->         dev_set_ofnode(mtd->dev, node);
->  }
->
-> -static inline const ofnode mtd_get_ofnode(struct mtd_info *mtd)
-> +static inline ofnode mtd_get_ofnode(struct mtd_info *mtd)
->  {
->         return dev_ofnode(mtd->dev);
->  }
-> --
-> 2.43.0.rc1.1336.g36b5255a03ac
->
+> Hello Tom,
+>=20
+> please pull:
+>=20
+> The following changes since commit fa0ed06a749c8e3c65d8b12a7d2d33a055a08a=
+ad:
+>=20
+>   Merge tag 'efi-2025-01-rc1-2' of
+> https://source.denx.de/u-boot/custodians/u-boot-efi (2024-10-20 08:27:15
+> -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-i2c.git i2c-tag-v2025.0=
+1-rc1
+>=20
+> for you to fetch changes up to f315a4813186ca098a6c698754a06b8297d400f6:
+>=20
+>   i2c: i2c-gpio: add support for i2c-gpio,sda-output-only (2024-10-21 06:=
+32:40 +0200)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--c7qsLVobyG6pCrgC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcWg7wACgkQFHw5/5Y0
+tyyMSAwAqRc0gO/1+mgrCUDzZFI2NAQx3ul461j2xVGf+bBFNyLHa8qSARDvd6wi
+NVVWCIl4BNdJw6UphSudUcEZ0TVNNzp3zMKYwHngCFrecuP887vsjBTqsnd1E+5l
+pqhRV9JEHwVOLIIfzXvAJ3vS91Ky++WlG2rV+mg2ixI26cXF6nYs4vHQoxssTKfb
+37mpJVttsHNerfyxQVqzLmGUnBN3XyXNC87ZNIJa8HKWELdiykhqQzl6qXsvynFA
+UJZvh/lmhAC85ZCugnl8yX55M3J5A/t9/kj9qo3cKzNIZHFkB+OARIZXQumwjA9f
+1BOntmIdxQyALx68oMAKZ8ChwjVbQWzb7d9NTW0Rj2+ocP+MBXIp8+4WNyFHOu0d
+vOx4gQNQBhs4Z7KXkEI/1XEuWGDeavWiETMGx7Lh/uvvyYjbnOagkO/2VTRmurb9
+YOtAFQphWeAeXdllmOXP+KbRbC9HIY/TPhIS8r6QSKJnS6g8QMxmGrE9sDXgnZle
+IuU5zLBn
+=0Ldo
+-----END PGP SIGNATURE-----
+
+--c7qsLVobyG6pCrgC--
