@@ -4,67 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABC9CD15D88
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 12:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5ACCD15D87
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 12:34:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 155A088DC8;
-	Mon, 21 Oct 2024 14:30:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 1B76188DB5;
+	Mon, 21 Oct 2024 14:34:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="jXCGEdnN";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="9iM9hP9u";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TzUAR7nD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D80688DE9; Mon, 21 Oct 2024 14:30:20 +0200 (CEST)
-Received: from galois.linutronix.de (Galois.linutronix.de
- [IPv6:2a0a:51c0:0:12e:550::1])
+ id 59C8888E35; Mon, 21 Oct 2024 14:33:59 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4029188D70
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 14:30:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=b.spranger@linutronix.de
-Date: Mon, 21 Oct 2024 14:30:16 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1729513817;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=uqvWUCdA842P56kowiGwK41lzuCYxVMwrvIjku19lyY=;
- b=jXCGEdnN6EfoWXaHN7OyKpH6tTJ48vFAMKcY0tE1N9fZUVGCWUqKMy0T+mjhVQEfJ++Hwt
- IiXT+qQxJrGDaizpgECp2N0JxGAahiJAz0WM3/P4wFGQosZScuA9U9TvTJUzZm1WJ3Tm6f
- r/wBUIkk4CFBiNX+5JOOk+5vev1qfTKA/+PBgyZi/i49F1xyM8h7V96BVzdhhmx387xslo
- vdZVHJALljQmF+9pJPzv2f7+BybKEjeBoI/OPfK13a4GnwePGf0NpCkSwnJP/JSjMBKZAc
- V9ypgiSlGkes4L6GylVt6bXruWhfmYCdCp5irKzG38TeQwpcEN+cJ8ox6dL/Wg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1729513817;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=uqvWUCdA842P56kowiGwK41lzuCYxVMwrvIjku19lyY=;
- b=9iM9hP9u+hok/6epss2H8BypwzaU2qHiaN8GLK/PTd0g5xWHzmyJqhgHk8Fg7F1Yo0F+9D
- X4hm0Rk6eQUL50BQ==
-From: Benedikt Spranger <b.spranger@linutronix.de>
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: u-boot@lists.denx.de, John Ogness <john.ogness@linutronix.de>,
- ada@thorsis.com
-Subject: Re: [PATCH 0/5] collected fallout of porting an ATSAMA5D27 based board
-Message-ID: <20241021143016.64dae8ca@mitra>
-In-Reply-To: <768cd930-de7f-47fd-967a-3b5849b86069@linaro.org>
-References: <20241018083006.10349-1-b.spranger@linutronix.de>
- <20241018-unsubtle-yield-8ac617356e92@thorsis.com>
- <20241018161908.3f6a13eb@mitra>
- <20241021-steadily-rephrase-ec1f100026e4@thorsis.com>
- <768cd930-de7f-47fd-967a-3b5849b86069@linaro.org>
-Organization: Linutronix GmbH
+ by phobos.denx.de (Postfix) with ESMTPS id 23F6788DB5
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 14:33:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 0397DA42950;
+ Mon, 21 Oct 2024 12:33:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E6D60C4CEE5;
+ Mon, 21 Oct 2024 12:33:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1729514035;
+ bh=olM3+ZywFQWrsICsygKZtdjBqlahU1+NkCRwf2K3Hcg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=TzUAR7nDfR5HQGnfjAIp1vWejmi1jBZE3GpzdFxvAOhovN0Wudlk85tS26zzLb3U3
+ inXW5VJ6lWuRIyTJ1y2dcJiz6Pa4dg84pahnN4BN5wR+zK2Xs+pIIXl9WL3q+P7/lp
+ I/31NUrq5hKGxeOqTFI3LNeh48UCk58bsI+X0j6HInCrY4VsB1NYvzpObyjrBU9Og8
+ /WOGKAzmmjt2aj4MF1s10z9NIWtKNMTHxA6wvEEn/yiJFjI71sdkxUV0WMD6EfvvRB
+ V47UmMmblVKzZ8mIJoVm/U1QOCx2F1ZNKgxogKx2cd7Xc3+pwK8B0nIIQBELIQvvmL
+ Cx9KhUTuIpCCw==
+Date: Mon, 21 Oct 2024 13:33:51 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, Conor Dooley <conor.dooley@microchip.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Cyril Jean <cyril.jean@microchip.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH v1 3/3] riscv: dts: mpfs: migrate to OF_UPSTREAM
+Message-ID: <20241021-implant-crawfish-33a92aa8d253@spud>
+References: <20241018145444.1660219-1-conor@kernel.org>
+ <20241018145444.1660219-4-conor@kernel.org>
+ <CAFA6WYMgE-qmKwaDx=88eL-HmHCYdG-Sevp=p8tH4ZDPgR=P9A@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="ftCrmg6NSM1Xe+DT"
+Content-Disposition: inline
+In-Reply-To: <CAFA6WYMgE-qmKwaDx=88eL-HmHCYdG-Sevp=p8tH4ZDPgR=P9A@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,59 +72,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 21 Oct 2024 10:17:54 +0300
-Eugen Hristev <eugen.hristev@linaro.org> wrote:
 
-Hi,
-  
-> >>> Do you use at91bootstrap as 2nd level bootloader like me or
-> >>> something else?
-> >> I use the U-Boot SPL. There is no UBI support in at91boostrap.
-> >> There were some attemps, but...
-> >> No interest at the at91bootstrap side.
-> 
-> It's not about interest. There are two main reasons:
-> First, all open source UBI stacks are GPL. At91bootstrap is not GPL
-> and it cannot take GPL restricted code (being MIT ).
-I do not recall any issue mentioned about a license issue, when I send
-out UBI patches for the AT91boostrap over a decade ago. It was a simple
-"nice, I put it in a branch, but we do not need it."
-I followed the UBI topic in AT91bootstrap loosely after that.
+--ftCrmg6NSM1Xe+DT
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Second, all UBI stacks are huge in terms of code and memory. 
-OK. Maybe we have a different view on huge. The board I am supporting
-now is the successor of a AT91SAM9263 board. This (old) board use
-AT91boootstrap with UBI support. BTW: The original requirement for UBI
-support was to fit into 4k (PPC 440 bootloader).
+On Mon, Oct 21, 2024 at 05:34:16PM +0530, Sumit Garg wrote:
+> On Fri, 18 Oct 2024 at 20:25, Conor Dooley <conor@kernel.org> wrote:
 
-> At91bootstrap is a second stage that should fit in 16k , 32k or 64k 
-> depending on the platform. So far this restriction could not be met
-> by any UBI implementation.
-OK. This need some more in depth view:
-A SPL needs UBI read support only. This support can be done in less
-then 4k, as I mentioned before. So UBI full read/write support?
-You're right. It does not fit.
+> > diff --git a/dts/upstream/src/riscv/Makefile b/dts/upstream/src/riscv/M=
+akefile
+> > new file mode 100644
+> > index 00000000000..dd2ed0bdfbd
+> > --- /dev/null
+> > +++ b/dts/upstream/src/riscv/Makefile
+> > @@ -0,0 +1,13 @@
+> > +# SPDX-License-Identifier: GPL-2.0+
+> > +
+> > +include $(srctree)/scripts/Makefile.dts
+> > +
+> > +targets +=3D $(dtb-y)
+> > +
+> > +DTC_FLAGS +=3D -R 4 -p 0x1000
+> > +
+> > +PHONY +=3D dtbs
+> > +dtbs: $(addprefix $(obj)/, $(dtb-y))
+> > +       @:
+> > +
+> > +clean-files :=3D */*.dtb */*.dtbo
+>=20
+> Many of the common Makefile bits were moved by patch [1] to
+> =E2=80=8Escripts/Makefile.dts. So you should rebase to the latest master
+> branch. Apart from that, changes look good to me.
+>=20
+> [1] https://github.com/u-boot/u-boot/commit/d2061828a4c1b60b44cd2307b6a78=
+2ac2efbffbe
 
-Needed read support?
-It definitly fit (and works fine for over a decade).
+Heh, I had actually rebased to the latest next a few days before sending
+these, but I guess that didn't include that match. next or master make
+little difference here I think as a base, so I'll do that, thanks.
 
-> ... and yes, doing a custom in-house small UBI implementation would
-> be challenging, and costly.
-If you look at ubispl, you got some clue, what's needed. The UBI
-support to the AT91boostrap (for the AT91SAM9263) is about ~450 LOC.
-Managable, but why should I do it, when U-Boot SPL does the job...
+--ftCrmg6NSM1Xe+DT
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> > (What I do here: SoC loads at91bootstrap from raw NAND at offset 0,
-> > at91bootstrap loads U-Boot from raw NAND at some offset like
-> > 0x20000, U-Boot (proper) loads everything else from UBI.)
-> 
-> Either way, it is interesting to see that the U-boot proper NAND dm 
-> driver does not work without at91bootstrap.
-To be clear: The U-Boot *SPL* does not work with the NAND dm driver.
+-----BEGIN PGP SIGNATURE-----
 
-The old NAND driver does. So from a developers view I can spend some
-spare cycles on that, from a overall project view: we use the old
-driver, since it is working.
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZxZKLwAKCRB4tDGHoIJi
+0uzhAQDRkuZpIlalubdPnUQ0eH0Y/kLhwWjp1KAB1qXTjr340QD+PyDlPj9DSM2c
+4fgHIF+yPHoYfSRPXR0jXjR9nAXUww8=
+=uQ3l
+-----END PGP SIGNATURE-----
 
-Regards
-    Benedikt Spranger
+--ftCrmg6NSM1Xe+DT--
