@@ -4,67 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06BFFD3C93D
-	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 04:42:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F351BD3C93F
+	for <u-boot@archiver.kernel.org>; Mon, 21 Oct 2024 06:03:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B87F89202;
-	Mon, 21 Oct 2024 06:41:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C9662892A2;
+	Mon, 21 Oct 2024 08:03:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lVYJqiX/";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="AGmOIk+5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 622F18923A; Mon, 21 Oct 2024 06:41:35 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EFA17885F4; Mon, 21 Oct 2024 08:03:43 +0200 (CEST)
+Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DDC3892E5
- for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 06:41:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49L4fUH8011065;
- Sun, 20 Oct 2024 23:41:30 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729485690;
- bh=g1bijHJ1LZ4jS5KdM49rCPcqQmqeBsfAJJUyHI+qI84=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=lVYJqiX/ufqVsuGk8K58exCjbTZqzuXofEMlmny9UZMAVmPAgm43fTKchpas2cOmP
- kTVGe8/EopeP5kfPmimKTSelo3QuxGGzFmQ/xv9A4DkjyoH8gvgsiWOBKTl4+YLMXS
- g3+ZIUkekQRM24llLmyfFXFsfb7s75jXbO2uvP0Q=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49L4fUck005592
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sun, 20 Oct 2024 23:41:30 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 20
- Oct 2024 23:41:29 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 20 Oct 2024 23:41:29 -0500
-Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
- [172.24.227.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49L4f2u1059251;
- Sun, 20 Oct 2024 23:41:27 -0500
-From: Santhosh Kumar K <s-k6@ti.com>
-To: <trini@konsulko.com>, <m-chawdhry@ti.com>, <nm@ti.com>, <u-kumar1@ti.com>, 
- <vigneshr@ti.com>, <bb@ti.com>
-CC: <u-boot@lists.denx.de>, <w.egorov@phytec.de>, <n-francis@ti.com>,
- <s-k6@ti.com>
-Subject: [PATCH v4 8/8] arm: dts: k3-*-ddr: Add ss_cfg reg entry
-Date: Mon, 21 Oct 2024 10:10:24 +0530
-Message-ID: <20241021044024.835846-9-s-k6@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241021044024.835846-1-s-k6@ti.com>
-References: <20241021044024.835846-1-s-k6@ti.com>
+ by phobos.denx.de (Postfix) with ESMTPS id CDE12885F4
+ for <u-boot@lists.denx.de>; Mon, 21 Oct 2024 08:03:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 86206148AB4F; Mon, 21 Oct 2024 08:03:40 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
+ t=1729490620; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=chvajl/mO/FkfiKjAId+lu7FbgPY3/fqjISpk8XAcMs=;
+ b=AGmOIk+5RRUqH90YPh/jc4UKMCW2YMfBgseONyaY7nWSg+asDOXZtJusgqIhbPBGn+yZZN
+ ibbriHNG2v7xFOblc3Qiadar9jjSLfvzlBEWE80SUs59MXPW/ErxSuX2YILpf7Oa2WJXWJ
+ 4Ph8DzJC3xLaSrkDmWZu80+oPvdhCdmyUp19WaIe/L99dvnvTTYVhnpSrd9+R+DGJyTUc2
+ S/LFBU/yJs85Xd9hb+Qm8lqtxw5ioblhJRJlKi9b7MAZ2aEsYNa+8QAECM6EMesRo+wIhC
+ KVqJ14Z68ynPjcoXw5T3GpJcNaY5QzjkeMbm4AAlVBjWxKKUBQx8m3WNXidAyQ==
+Date: Mon, 21 Oct 2024 08:03:35 +0200
+From: Alexander Dahl <ada@thorsis.com>
+To: Benedikt Spranger <b.spranger@linutronix.de>
+Cc: Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de,
+ John Ogness <john.ogness@linutronix.de>
+Subject: Re: [PATCH 0/5] collected fallout of porting an ATSAMA5D27 based board
+Message-ID: <20241021-steadily-rephrase-ec1f100026e4@thorsis.com>
+Mail-Followup-To: Benedikt Spranger <b.spranger@linutronix.de>,
+ u-boot@lists.denx.de, John Ogness <john.ogness@linutronix.de>
+References: <20241018083006.10349-1-b.spranger@linutronix.de>
+ <20241018-unsubtle-yield-8ac617356e92@thorsis.com>
+ <20241018161908.3f6a13eb@mitra>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241018161908.3f6a13eb@mitra>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,137 +68,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add ss_cfg memory region which maps the DDRSS configuration region
-for the memory controller node.
+Hello Benedikt,
 
-Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
- arch/arm/dts/k3-am62a-ddr.dtsi  |  7 ++++---
- arch/arm/dts/k3-j721s2-ddr.dtsi | 12 ++++++++----
- arch/arm/dts/k3-j784s4-ddr.dtsi | 24 ++++++++++++++++--------
- 3 files changed, 28 insertions(+), 15 deletions(-)
+Am Fri, Oct 18, 2024 at 04:19:08PM +0200 schrieb Benedikt Spranger:
+> On Fri, 18 Oct 2024 15:11:20 +0200
+> Alexander Dahl <ada@thorsis.com> wrote:
+> 
+> Hello Alexander,
+> 
+> > Am Fri, Oct 18, 2024 at 10:30:00AM +0200 schrieb Benedikt Spranger:
+> > > OK, you might say the nand_atmel NAND driver is obsolete, but it
+> > > was the only solution to get booting from NAND running. The new DM
+> > > based NAND driver refused to do anything usefull, so I dropped it
+> > > after spending a couple of days debugging it:
+> > 
+> > Strange.  I have at least three different boards with SAMA5D27
+> > successfully booting from NAND flash with the new DM based driver
+> > (unfortunately none of them upstreamed, which also won't change in the
+> > foreseeable future, sorry).
+> OK.
+>  
+> > Do you use at91bootstrap as 2nd level bootloader like me or something
+> > else?
+> I use the U-Boot SPL. There is no UBI support in at91boostrap. There
+> were some attemps, but...
+> No interest at the at91bootstrap side.
 
-diff --git a/arch/arm/dts/k3-am62a-ddr.dtsi b/arch/arm/dts/k3-am62a-ddr.dtsi
-index 8629ea45b847..42e41f78505a 100644
---- a/arch/arm/dts/k3-am62a-ddr.dtsi
-+++ b/arch/arm/dts/k3-am62a-ddr.dtsi
-@@ -4,11 +4,12 @@
-  */
- 
- / {
--	memorycontroller: memory-controller@f308000 {
-+	memorycontroller: memory-controller@f300000 {
- 		compatible = "ti,am62a-ddrss";
- 		reg = <0x00 0x0f308000 0x00 0x4000>,
--		      <0x00 0x43014000 0x00 0x100>;
--		reg-names = "cfg", "ctrl_mmr_lp4";
-+		      <0x00 0x43014000 0x00 0x100>,
-+		      <0x00 0x0f300000 0x00 0x200>;
-+		reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 		ti,ddr-freq1 = <DDRSS_PLL_FREQUENCY_1>;
- 		ti,ddr-freq2 = <DDRSS_PLL_FREQUENCY_2>;
- 		ti,ddr-fhs-cnt = <DDRSS_PLL_FHS_CNT>;
-diff --git a/arch/arm/dts/k3-j721s2-ddr.dtsi b/arch/arm/dts/k3-j721s2-ddr.dtsi
-index 345e2b84f9e8..9764085163c4 100644
---- a/arch/arm/dts/k3-j721s2-ddr.dtsi
-+++ b/arch/arm/dts/k3-j721s2-ddr.dtsi
-@@ -5,6 +5,8 @@
- 
- &main_navss {
- 	ranges = <0x00 0x00114000 0x00 0x00114000 0x00 0x00000100>, // ctrl_mmr_lpr
-+		 <0x00 0x02980000 0x00 0x02980000 0x00 0x00000200>, // ss cfg 0
-+		 <0x00 0x029a0000 0x00 0x029a0000 0x00 0x00000200>, // ss cfg 1
- 		 <0x00 0x02990000 0x00 0x02990000 0x00 0x00004000>, // ddr0 cfg
- 		 <0x00 0x029b0000 0x00 0x029b0000 0x00 0x00004000>, // ddr1 cfg
- 		 <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
-@@ -24,8 +26,9 @@
- 		memorycontroller0: memorycontroller@2990000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x02990000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x02980000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 138 TI_SCI_PD_SHARED>,
- 				<&k3_pds 96 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 138 0>, <&k3_clks 43 2>;
-@@ -2232,8 +2235,9 @@
- 		memorycontroller1: memorycontroller@29b0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029b0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029a0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 139 TI_SCI_PD_SHARED>,
- 				<&k3_pds 97 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 139 0>, <&k3_clks 43 2>;
-diff --git a/arch/arm/dts/k3-j784s4-ddr.dtsi b/arch/arm/dts/k3-j784s4-ddr.dtsi
-index 1c3242b0870c..fc74c539331e 100644
---- a/arch/arm/dts/k3-j784s4-ddr.dtsi
-+++ b/arch/arm/dts/k3-j784s4-ddr.dtsi
-@@ -9,6 +9,10 @@
- 		 <0x00 0x029b0000 0x00 0x029b0000 0x00 0x00004000>, // ddr1 cfg
- 		 <0x00 0x029d0000 0x00 0x029d0000 0x00 0x00004000>, // ddr2 cfg
- 		 <0x00 0x029f0000 0x00 0x029f0000 0x00 0x00004000>, // ddr3 cfg
-+		 <0x00 0x02980000 0x00 0x02980000 0x00 0x00000200>, // ss cfg 0
-+		 <0x00 0x029a0000 0x00 0x029a0000 0x00 0x00000200>, // ss cfg 1
-+		 <0x00 0x029c0000 0x00 0x029c0000 0x00 0x00000200>, // ss cfg 2
-+		 <0x00 0x029e0000 0x00 0x029e0000 0x00 0x00000200>, // ss cfg 3
- 		 <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
- 
- 	msmc0: msmc {
-@@ -26,8 +30,9 @@
- 		memorycontroller0: memorycontroller@2990000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x02990000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x02980000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 191 TI_SCI_PD_SHARED>,
- 				<&k3_pds 131 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 191 1>, <&k3_clks 78 2>;
-@@ -2234,8 +2239,9 @@
- 		memorycontroller1: memorycontroller@29b0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029b0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029a0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 192 TI_SCI_PD_SHARED>,
- 				<&k3_pds 132 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 192 1>, <&k3_clks 78 2>;
-@@ -4442,8 +4448,9 @@
- 		memorycontroller2: memorycontroller@29d0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029d0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029c0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 193 TI_SCI_PD_SHARED>,
- 				<&k3_pds 133 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 193 1>, <&k3_clks 78 2>;
-@@ -6650,8 +6657,9 @@
- 		memorycontroller3: memorycontroller@29f0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029f0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x29e0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 194 TI_SCI_PD_SHARED>,
- 				<&k3_pds 139 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 194 1>, <&k3_clks 78 2>;
--- 
-2.34.1
+Yeah, been there.  Wanted at91bootstrap to boot from SPI-NOR which is
+_not_ Quad-SPI, and the feature request was closed with "if you wanna
+do it by yourself, ask our support for help". :-/
 
+> > For me it was basically getting the dts for U-Boot correct, but
+> > I got that running with all U-Boot releases since 2023.04 up to
+> > 2024.10.  Could you share some more detail?
+> I face all the trouble in SPL. And since the SPL is the essential part
+> here (UBI support) I gave up at one point. I simply couldn't any
+> usefull read data from the NAND flash, but all 0.
+
+You can not store bootstrap or SPL in UBI, it must sit in first sector
+of raw NAND, I suppose that's how you load SPL?  Did you try
+reading/writing raw NAND from there?  I'm not familiar with SPL, does
+it consider dts?  I could share my dts parts if that helps you.
+
+(What I do here: SoC loads at91bootstrap from raw NAND at offset 0,
+at91bootstrap loads U-Boot from raw NAND at some offset like 0x20000,
+U-Boot (proper) loads everything else from UBI.)
+
+Greets
+Alex
