@@ -4,170 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C70F0D1CDBD
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 08:46:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B139D1CDB8
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 09:01:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1992788F31;
-	Tue, 22 Oct 2024 10:46:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 532F088F66;
+	Tue, 22 Oct 2024 11:01:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="xuQdC/ta";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="SILz01dQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26EDD88F4B; Tue, 22 Oct 2024 10:46:50 +0200 (CEST)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2060c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::60c])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5FE5D88F6B; Tue, 22 Oct 2024 11:01:16 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6901F88EC9
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 10:46:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6D2DD88F31
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 11:01:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Manikandan.M@microchip.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=k9CV7G3WCTSg8fo/5gLb4XZgy1RNpa46Xoo0GMdyC5z7erSTNDfhJFZGYUY8yAxr5swNK6Fp0oTCdbITwayb5ULA6JdvfUqKNqUysB7czpQolw7CT3aUxsKDhlfYa09zbgaNjIMmskNm1OuGmmLfZs/BDEUN78wuE+P0q4qxKBHYrv2BFCKlM2EaTfZ1cIJjYtNZk7DUb9Mw4gF+eZK6ZRuTxL5KbmdYJk5caWftzfPADPO4rn1Q9dG4kcSXnwkLPeidKnCb+KPCZhv5aZuQuXQQG8TreITUiQSsNwu73eyZV9hp27xxUnQQ44cShfHLsavoVcaN6hiVTzVcZRJZKA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SZ5gN+Z+ZDN37XKZ7XMnp2BSQjKM9oZd/c0jIm7o4qQ=;
- b=nVH1mPffovAEIJh6aw86VY6OHIMgVzZb3HdJn4510jIc06Dr+vbyl3at/neR05nJGVIAjD94TV2Vpbil9E8ISgz61lB5eAzcdh9WMmcCXK2iQTGUpnbbIIAREApKTevwKkFsuDtn4P7pc0vhgYdPDV4VuJa6MfURU4DKsp5msMxNxLPhJZU0FlCGd+kb2MT7DvGKNGoyNvgLefyb8ZYptuM+aOnlQRFM+ZZHxH4vKsNj11rbqG6EN11EZpGpplxgClF/Ic0jLdk8OlljLK9S0bStQ1YC907kS/7jIUtYwdZd8j4yzDgaZMyVy4Y/paCdBDG+PRfIdacbR0gCygWz8w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microchip.com; dmarc=pass action=none
- header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microchip.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SZ5gN+Z+ZDN37XKZ7XMnp2BSQjKM9oZd/c0jIm7o4qQ=;
- b=xuQdC/taGTMATdPAdBil7+1XIMt3sQ8S7qRjoNXUs4JhcfyeeUVHJYY6wGTALOnZlHV0QGq3zH2XEClsCC/ikO11QHDIl2fEi3cW+QyPZMk4Qy+2n+kY+0NEzWKin+45dV7ECy88kC+BMvvl6LqLYbzlStk0F20gLJGnPlNQWmp4PTp/39ut1f3nXEb8C46zdKnyiPzci6v4CA48p3e7CNWEYjf8qA4svWB5XT+SkaRyhnkAa9RrduYtFx4pG9qIXTO0/yL/y6uAijKeveY61J20C+YHGWqNFFxBbE8yoxB0gUNMfxWwwMBM24U2D6VbscpgzVOZhb4ZnCPongnmAQ==
-Received: from PH8PR11MB6609.namprd11.prod.outlook.com (2603:10b6:510:1cc::16)
- by CO1PR11MB5138.namprd11.prod.outlook.com (2603:10b6:303:94::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.29; Tue, 22 Oct
- 2024 08:46:41 +0000
-Received: from PH8PR11MB6609.namprd11.prod.outlook.com
- ([fe80::ebc1:5d63:a07c:60d]) by PH8PR11MB6609.namprd11.prod.outlook.com
- ([fe80::ebc1:5d63:a07c:60d%5]) with mapi id 15.20.8069.027; Tue, 22 Oct 2024
- 08:46:41 +0000
-From: <Manikandan.M@microchip.com>
-To: <alexey@all4bambi.com>, <eugen.hristev@linaro.org>, <u-boot@lists.denx.de>
-CC: <Varshini.Rajendran@microchip.com>, <Hari.PrasathGE@microchip.com>
-Subject: Re: [PATCH 1/1] Fixed sama5d3 dts file so PIO sections are inside
- pinctrl as in kernel dts
-Thread-Topic: [PATCH 1/1] Fixed sama5d3 dts file so PIO sections are inside
- pinctrl as in kernel dts
-Thread-Index: AQHbIHHIjJjcFcSOAUC5zUTn8g7/iLKMGi6AgAAld4CAAt1rgIAB51qAgAFFjwCAADLzAA==
-Date: Tue, 22 Oct 2024 08:46:41 +0000
-Message-ID: <926847b7-d547-45a7-9303-cdf483035c61@microchip.com>
-References: <20241015145307.118784-1-alexey@all4bambi.com>
- <20241015145307.118784-2-alexey@all4bambi.com>
- <60f174bc-dd15-403c-9606-5e18fd183754@microchip.com>
- <c97e8bc6-f2f5-4c62-8d92-0ccbd9caf278@linaro.org>
- <97d0a144-b7b0-4c2b-a8cc-96634011114a@microchip.com>
- <f9d626b03a969fd71fdd1194293d17c7@mail.gmail.com>
- <4a178500-39c1-402b-b7af-61daaaf3f033@microchip.com>
- <972bb7e24fdc498b252cd755e7c3488f@mail.gmail.com>
-In-Reply-To: <972bb7e24fdc498b252cd755e7c3488f@mail.gmail.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-GB
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=microchip.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH8PR11MB6609:EE_|CO1PR11MB5138:EE_
-x-ms-office365-filtering-correlation-id: e0c75e16-2990-4c91-674d-08dcf2760cbb
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH8PR11MB6609.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?WXVJNVkwb3hDR3BIZWFGTXM4eU1LL2xTL3RSdHBWeGRTUkZrbXNMVkVqRVlJ?=
- =?utf-8?B?VlkvenllZnE0OVRhWDJ2MWgvQlZkaDh4cUlsWUYyMzJER2hvd2d5OWdMTDA0?=
- =?utf-8?B?ckg1ampYYzdCK2tQYUpyRHlFV3JPVm9UWjhnaHJJK1J2bWJyRWpXN2NsUlRK?=
- =?utf-8?B?cVU0MGVQS0x0T1BFY0xrVERlT0k2bzFDNHl3dURDS29Lb3k2TVZ4Sm9LN2hq?=
- =?utf-8?B?ajYxQ3lLL2JZMlBZTjhWTzE5RkhWdXNLRWpZNVFNeXZnMC9zR3FZbVlBS0dY?=
- =?utf-8?B?bWxEREdkK2lKM3c3WVBHbDVGOXdjYlRnN1l0Mk52OUlTR2lML2JkRFNjdXJn?=
- =?utf-8?B?Z1RPZlFVRWt5eEZ3VE4zODE4Q0VhRU9POUc1Q2dNVlpvelZXMEhPWUF1cHNS?=
- =?utf-8?B?Sk5lRnZQSVgwTW82RHVVbVZpRlNab3V2aHA3OW9URkhtazROSG1wVXJpVXRQ?=
- =?utf-8?B?MFlTdlZKTjgrUUhmZjhpNlhkUDFpOW9wQi85L2c4V1JWMUNBSHpUZktEeFlt?=
- =?utf-8?B?a1NDNWJXNVVaUW5ZZy9zbldyTmYyRk41R21tem1jL0p0dS9TbGlXdy8wMGhs?=
- =?utf-8?B?SDFtaHpjOFJCNkhsUUdEYUI5cTV2N0g5S21nRzh6ODMrbUErSnhaN1didTJy?=
- =?utf-8?B?Umk3OGkwbEdqdUltTFFnVDV1Q3NkQ3ZJUnhMa1gzRDBseEFxMTc5cG5wZEsx?=
- =?utf-8?B?MGlJNkM4RnN3RWhKMGlYRWZUejhNUGhMQ0hsNzA0L3NQdmN1YTMvZkFiT1R5?=
- =?utf-8?B?NGNMNDNhdUtmZFFtK0d0c3cxZ2lpalRHVkdLOTd4andHY3kyaEhRN291RFlx?=
- =?utf-8?B?aUFEQisxN0RJOHB6SnFqSG9Ma0lEM2VpMkR1aGFoa0s4Y2o5U0UyOVV0NWc2?=
- =?utf-8?B?NXQwelNHd2dwZFB1eDhIR1NSRkR2OU5KN251K25DMTBvSGhYQWRYTDlhRGN4?=
- =?utf-8?B?ZTBMSGJPYUFrSklXeDdTSG5aWXFFWTRaZDFScWRXdEx0MDdpUGlnRVQrUEZ1?=
- =?utf-8?B?cHVMc1pHMStvQmVvRjBPTXhXS0FJaWZYaHU2a29JTGFqZjRSUHpIQ3A1bFo5?=
- =?utf-8?B?UDhkTUUvejdZTERROHBRcXVaUC9nRHhhUGY2VFhVNzBWSHFIYld0RnNxWlhG?=
- =?utf-8?B?alpVdUk3bkx6LzRMdEM0M2ZwWjcxU2J1TjBNWkNFS0NOcGpacUlLeUp6c3h5?=
- =?utf-8?B?SDU0bUl6WElobjFzSWVkWG9NbkxrN0pQTzZpdVFHNVFhMnRzaWhlb0dNaWta?=
- =?utf-8?B?UEF1UXpJcytFQmhWNVdEQ3ZoVGlkOW5TR0NZQUxnQmR3N3d2MG1pRzFCQjZD?=
- =?utf-8?B?OWVkYWlYMU9KTXpka2Vvbk9TdmhkTDZyNzdXTXJpUElmYUc3NnJ6aER3bEVV?=
- =?utf-8?B?cXduOTFSdWE0N3haajJ5Q0xZYmJxb0loU00rT25yajU5bnRSc05EeTRCVFJo?=
- =?utf-8?B?Y1dZZEUzVWZTTHpFL0o4Qmc1NFVUM2haeUllSjRyN3ZtWkdoYVJsek1YODVQ?=
- =?utf-8?B?cGxhQWVwdHBpNllxbWRiS0RkR0E5QXRBYm4xeVEvR0xvZmNjeEdjb2ozaGRK?=
- =?utf-8?B?d1RzUWZGNzNyTEwzQ1Brb2Q3R2ZqMUpST3dmMVhhZ0cweWpGQ3dDcnN5a0g1?=
- =?utf-8?B?NWtYaG1pTWZVdmxOZm1MdTMrN2NjR1UxSUdGMUVyWlZzS1BQc0p5ZTMyTFo4?=
- =?utf-8?B?STRXZFhGUDJ1K1RNQ0dJRC9IVmQwUnI1aVk4TUZPN1ZFTTlGYmIrVmh3TzJW?=
- =?utf-8?B?di91d0IvTkExVUdTb0NhRVVKeWlIaVBZWElqRWQzZ0lqSkVrbTU3eUVRYXkz?=
- =?utf-8?B?cWFxMWpWcXB2d0RUSTIxVVBmNmtiWEZmYjNxMTdiUFFRK3VRRSs5RkMwV0sr?=
- =?utf-8?Q?VRffNiSgn1X2c?=
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?S1JmZVZCZ1BnT09mS2t0T0dlSEN1dThackVqTlVaNEpYcnZrSytoYlhveklq?=
- =?utf-8?B?dldXRTZ3dkdWMk00RVZnTXJqdjRaY1NiMm45bU94ZUM3OVFpbDFodXE2eEcw?=
- =?utf-8?B?WFMwOVR5T29GRlFQUjl3NXZCbnA1MkFQRU9UTWZPV3N2b0FYWFlheTY2a1pP?=
- =?utf-8?B?Mmh3WG03UWxicGIyL0gyU1l0Z2padEpWVEhnQUVkNE81K0FrUW9MdkJKS2Zh?=
- =?utf-8?B?c2hxT3NrQUVZVXVyVVFYay93NWp2NG5kbklsMDF4cXBZWFlHRjRmZXcyQTNh?=
- =?utf-8?B?M0owMC9pY3Y5MXBoOWlmc1AyY01ZUWNkNDQ3WDNLcmxFL2VqZXRkc0kwQVJa?=
- =?utf-8?B?UXduV1VFc3lBUGNtdXJRd0pmY2JrdjFNZGErVHQ3S2taYlFrRjhQTnNxU1Bl?=
- =?utf-8?B?MVhOQnYweEVNSGpxK0c1Y25RQjRyQmJzMFdjOVk0K3M0Y2FjZ1kvb3ViZ0Nn?=
- =?utf-8?B?OFBCUWhTNWYrTi81S0NCQ2E0SVVKaG1rMzExWDZWMlhuNU5YekxEVW15SXND?=
- =?utf-8?B?WHA1dERhcFNKWUFKelpsS2lFRk5EbzVKTmtEY3Y0UG1Kd2JlSTc0Y3NyRUJm?=
- =?utf-8?B?b0NXd3UzaDA2STBMN0xybEZhK05CdklQOTNYb0I5czFvSG5LazRoZ0JMVWNN?=
- =?utf-8?B?aWNFZTg2NlAveW1TalVZelJHVjdIYWV0TGtCdGVXNzI5T3dBdjd3RklnVDNB?=
- =?utf-8?B?UEVuZ29XZmtVS1l2RDZTbk9SQ1NTbDl5SXBheWw3aThVU096NVpSVjlyaGhp?=
- =?utf-8?B?dWhZWVBSaVcrVTFteUc5SE03c0xuRUQrWHR1ZSswZkNMbDBmK0FyTFJTdE5m?=
- =?utf-8?B?ZEZiZ3VPVHArSEQxUnFxVVNpUllJZjluZFdLTDJZWjhmbXBzeFZYems4SkJv?=
- =?utf-8?B?ODVnTmFYT1p0VU5odzExSnkybVUxMFpaK3U2M2FZMTdPZDlEbWQ5aFcvUWV1?=
- =?utf-8?B?ZUtBRTVHMGpQbjNObC9pQ1hzWWMxVTAvdzFPZEo3RUJ6aFdPWVllV05MNTVw?=
- =?utf-8?B?UmcyZGQ5aXZRVDZXSXVLc2VYVlZ1cXpCNGhBWGYxM05OM2hkd1hQL0lnTzJN?=
- =?utf-8?B?ZWlkQVkzSk5BNGJ4WjdQc0IyYzc3SS85SkNBQk9vZ2RLcU5aTUt3U0QzODJV?=
- =?utf-8?B?OVdRWDlsUkgrSHZ0T0djNG8ybFFzU2E1OERtN2NDbWRydHcxSnNLdEltRUIv?=
- =?utf-8?B?cUYxSlpiazhVdk1DZnpxL2xwNmRzdVRjbCtGaFFraGpWdkx5MGFVWXhJSk02?=
- =?utf-8?B?SVdMSDZpV3ZzYUdVWTc2WnNBdUU5dnNOZ0txTEVpZ1VNL09QWGF4Z1pxMlpx?=
- =?utf-8?B?ZU1wZnhoUEJoVU9JYXhKZXRld0JaK1M3V1dMcTNMWWRiRGVVRjVlZUNHUlEr?=
- =?utf-8?B?ZTQveHV1RGxWMVZJNDB4QWxKMFVibVRpaVVoTDVjcE8xT2lUNDhFR0UvYVhh?=
- =?utf-8?B?d2ZES2kzS0tHUXBla2VVUGhpaDRoUmY3amJKeU9odmFDVG5HeHNuQjBleGdV?=
- =?utf-8?B?RER6MyszbElUTVYrTkNPbWc5dEVDV1VHazZLVDNTRGVyVzNHakY1UXNoSHVU?=
- =?utf-8?B?WndJa2h6TDViY09GcDU0K3VzTGl5UjIxVEt6QVhFNEwzQkUwWTVhZzRRUWdP?=
- =?utf-8?B?SEtpMzc0NDU3Nk1JN2JPeGliU2F5T0xJcllhSkxMem5SRVl5K1VPTlQ1STRU?=
- =?utf-8?B?Wnp4Tmo3amV3bFJiZU1GdG5JbDREeUp3QkgvQ1B1STJFa1VXdmhMcTdQU2Zj?=
- =?utf-8?B?ZE5zS2VRc1cvL1AwdE1VL2trRzBHTTJlSFh1RDBjSis5NWRRbHJtUG9XbkZF?=
- =?utf-8?B?SmtUTEJyU1c1Z3NMUDBsYXFOd01FOXN5SnMrWnVHYU83N0p1OElVRU1EZFFn?=
- =?utf-8?B?dGhIYTROdUJyS0NoQTFoL2hmdGhld1QxeDBSK1htVFJGRFNocDJoZHFpMEJi?=
- =?utf-8?B?dFluT3Z6ZDZzMTZTS1lLNWFJbkRQTWU2ZG9OdDNXb3I0Y2tKZ0U1bENDYVhF?=
- =?utf-8?B?dUVJWkJCMm1oTzc5K1lqcjBWU2k2UHVDMVA1N1ppRjFLc2ZvVHAweVJKU2FD?=
- =?utf-8?B?MFQ1dDVSMzFOYUdSZGlmdDVnTXpNUGNGemJ3R2c2SUpEdG9HYVNROUdzN2tE?=
- =?utf-8?Q?FMW3J6yerplajjhoqh/F02U2f?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <5633CA33C167A448A2B390E82AC77FB0@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43162cf1eaaso53051065e9.0
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 02:01:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729587673; x=1730192473;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XWQ+l6mXV8AbAQ0VVO/v0Qpx6NmT6J96H/ksR0GkaSc=;
+ b=SILz01dQ8mUgffzUoosFTuYC4fkbMBqlDEZE6xmrX9+5597lmMlux69JuToxazFoS9
+ ztLV59bCjNwUmD2ZDklwPW1lOv5GRub4JVwQpZ4WtpAUEuifzYN0xi5dC7U3zasbfZzA
+ pyW//J+G9RcnicjYgdwrLwhh/B7fk2dQ2Qz3ArrVQYfeIdqzWj5yp2qosE8euKXmqu6/
+ adlwkkP16lRjpbADNfIHd7XZl5wTd4XPad+iHq6cwVlHcO6VpPrgIezusSvqCbFmDacW
+ sz2kp4t0blAn44CA1TRZhfnmXgvGE7ed/N8dci31uIU8QIQ0KlLYyoaYrCig5o54bF+X
+ hMhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729587673; x=1730192473;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XWQ+l6mXV8AbAQ0VVO/v0Qpx6NmT6J96H/ksR0GkaSc=;
+ b=CLwPeebLQe7JbVtn5poBkU3KoMu+vb/4N57FG8YwcYy3O5SAJ9ANmhInx8CFwAqbT2
+ 4bi9yJ8RQWkx3az4wgGy0mx9CqLwLKwy7RlJWEU2B0+6CW1CaK97s1aC4lFTMGs54OfI
+ OY3B9/6HqINB4W5TZg75tcaDZR3Zl21i8OHcbJCYjlQagYx3+jK6ywr/OLKvT5Ehoc5B
+ YOiB3DI3oqTqad+MVchsTHg3mhfXPfNPl9UpR8unqVj81Sc8FfvswHeoij+UR25F0Uni
+ p0OrzaIusD6jUoUMvZzxGOANmd6Nwg6ZBaQAmjnV50MdFyIUL+JBY3RJsPKrm633vza6
+ T19Q==
+X-Gm-Message-State: AOJu0YzOBDKxJa4ebwd1Xy0thWIx6OECo+Bp6442aEIto2o/Km/yQcJe
+ nzdj8IYLxO6TwfPh5vF/YzH+YEa+1mA+O55z40V5eVQKMjzJ60OtCoxzdeaihjE=
+X-Google-Smtp-Source: AGHT+IF/gtnjYZgmFnnts4W+4ElwQqGqtNlG6D7AqstbDsgosl5FMJY2oqBG2zKJUpItH0K75Hk3Cg==
+X-Received: by 2002:a05:600c:3b9b:b0:431:562a:54be with SMTP id
+ 5b1f17b1804b1-43161627c0dmr169498485e9.9.1729587672568; 
+ Tue, 22 Oct 2024 02:01:12 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4316f57fbb5sm80646575e9.17.2024.10.22.02.01.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Oct 2024 02:01:12 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, Tom
+ Rini <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, Mario Six
+ <mario.six@gdsys.cc>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, rockosov@gmail.com,
+ kernel@salutedevices.com, Dmitry Rokosov <ddrokosov@salutedevices.com>
+Subject: Re: [PATCH v5 3/6] treewide: bcb: move ab_select command to bcb
+ subcommands
+In-Reply-To: <20241017-android_ab_master-v5-3-43bfcc096d95@salutedevices.com>
+References: <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>
+ <20241017-android_ab_master-v5-3-43bfcc096d95@salutedevices.com>
+Date: Tue, 22 Oct 2024 11:01:08 +0200
+Message-ID: <87o73cwlyj.fsf@baylibre.com>
 MIME-Version: 1.0
-X-OriginatorOrg: microchip.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH8PR11MB6609.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e0c75e16-2990-4c91-674d-08dcf2760cbb
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Oct 2024 08:46:41.3398 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 1hJrqC98UTjyXt2xwRnrdiynGqzrwGeiJ4Ju5oZiOTx4lhqBezdvWCHTvUyysb44D0de7qn8j7lDtj2DbPc9jMcDWe71RKzDbF1aOMz8ack=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB5138
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -184,250 +95,490 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgQWxleGV5LA0KDQpUaGFuayB5b3UgZm9yIGNvbmZpcm1pbmcgdGhlIHUtYm9vdCB0cmVlIHVz
-ZWQgZm9yIHRlc3RpbmcgeW91ciBwYXRjaC4NClRoaXMgc3VnZ2VzdGVkIG1vZGlmaWNhdGlvbiBp
-cyBhIGZpeC11cCBwYXRjaCBmb3IgdGhlIHBpbmN0cmwgZHJpdmVyIA0KY2hhbmdlcyBwcmVzZW50
-IGluIHRoZSB1Ym9vdC1tY2hvIGdpdCB0cmVlLiBIb3dldmVyLCBiZWNhdXNlIHRob3NlIA0KY2hh
-bmdlcyBhcmUgbm90IHlldCBwcmVzZW50IGluIHRoZSBtYWlubGluZSBVLUJvb3QsIHRoaXMgcGF0
-Y2ggd2lsbCANCmNhdXNlIHJlZ3Jlc3Npb24gb24gYWxsIHNhbWE1ZDMgU29DIGJvYXJkcy4NCg0K
-SSBhcHByZWNpYXRlIHlvdXIgd29yayBpbiBmaW5kaW5nIGFuZCByZXNvbHZpbmcgdGhlIGlzc3Vl
-IGZvciANCnNhbWE1ZDMuUGxlYXNlIGhvbGQgb24gdG8gdGhpcyBwYXRjaDsgeW91IGNhbiBzaGFy
-ZSBhIHZlcnNpb24gMiB0aGF0IA0KcmVzb2x2ZXMgdGhlIGNvbW1lbnRzIG9uY2UgdGhlIGRyaXZl
-ciBjaGFuZ2VzIGFyZSBpbi4NCg0KQWxzbywgZnlpLCB0aGlzIGNoYW5nZSBpcyBhbHJlYWR5IHBy
-ZXNlbnQgaW4gdGhlIHUtYm9vdC1tY2hwIHRyZWUgDQpsaW51eDRtaWNyb2NoaXAtMjAyNC4xMC1y
-YzIgdmVyc2lvbiwNCmh0dHBzOi8vZ2l0aHViLmNvbS9saW51eDRtaWNyb2NoaXAvdS1ib290LW1j
-aHAvY29tbWl0L2EyNWIzMWMyNTU4ZjlmZTMwM2EzYjk3ZGQ2NjBiODc0NzY0NDYzMDENCk9uIDIy
-LzEwLzI0IDExOjE0IGFtLCBBbGV4ZXkgVHNpcmxpbiB3cm90ZToNCj4gRVhURVJOQUwgRU1BSUw6
-IERvIG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVubGVzcyB5b3Uga25vdyB0
-aGUgY29udGVudCBpcyBzYWZlDQo+IA0KPiBIaSBNYW5pa2FuZGFuLA0KPiANCj4gSSBhbSB1c2lu
-ZyBidWlsZHJvb3QgMjAyNC4wNCBzYW1hNWQzX2Vkc19oZWFkbGVzc19kZWZjb25maWcgY29uZmln
-IHNldHVwDQo+IHdoaWNoIGxlYWRzIHRvIHRoZSBmb2xsb3dpbmc6DQo+IDEuIHVib290IGZyb20g
-aHR0cHM6Ly9naXRodWIuY29tL2xpbnV4NG1pY3JvY2hpcC91LWJvb3QtbWNocC5naXQNCj4gMi4g
-dWJvb3QgdmVyc2lvbiBsaW51eDRtaWNyb2NoaXAtMjAyNC4xMC1yYzINCj4gMy4gdWJvb3QgY29u
-ZmlnIHNhbWE1ZDNfeHBsYWluZWRfbW1jDQo+IA0KPiBNeSBib2FyZCBpcyBzYW1hNWQzIEVEUyB3
-aXRoIERQODM2MzAgUEhZIGNvbm5lY3RlZCB0byBFTUFDLg0KPiANCj4gSSBjb25maXJtIHRoYXQg
-dXNpbmcgY29uZmlndXJhdGlvbiBhYm92ZSwgSSB3YXMgbm90IGFibGUgdG8gbWFrZSBFdGhlcm5l
-dA0KPiAoRU1BQykgaW4gdWJvb3Qgd29yayBiZWNhdXNlIGl0IHdhcyBmYWlsaW5nIHRvIGNvbmZp
-Z3VyZSBFTUFDIHBpbnMgdG8gdGhlDQo+IHJlcXVpcmVkIHBlcmlwaGVyYWwgbW9kZS4gVGhlIGF0
-OTFfcGluX2NoZWNrX2NvbmZpZyBmdW5jdGlvbiBpbiBwaW5jdHJsLWF0OTENCj4gcmV0dXJuZWQg
-LUVJTlZBTCBiZWNhdXNlIG9mIG5iYW5rcz0wLiBBZnRlciBhcHBseWluZyB0aGUgcGF0Y2gsIHRo
-ZSBFdGhlcm5ldA0KPiBpcyB3b3JraW5nIGZpbmUuDQo+IA0KPiBJIGFsc28gY29uZmlybSB0aGF0
-IGFmdGVyIGFwcGx5aW5nIHRoZSBwYXRjaCwgSSB3YXMgYWJsZSB0byB0b2dnbGUgSU8gcGluDQo+
-IHdpdGggZ3BpbyBjb21tYW5kICh0cmllZCBQSU9DMTggd2hpY2ggaXMgYWNjZXNzaWJsZSB0aHJv
-dWdoIElPIENvbm5lY3Rvcg0KPiAjMSksIGFsdGhvdWdoIEkgY2Fubm90IHRlbGwgeW91IGlmIHRo
-aXMgZnVuY3Rpb25hbGl0eSBhbHNvIHdvcmtlZCBiZWZvcmUNCj4gYXBwbHlpbmcgdGhlIHBhdGNo
-Lg0KPiANCj4gUmVnYXJkcywNCj4gQWxleGV5Lg0KPiANCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdl
-LS0tLS0NCj4gRnJvbTogTWFuaWthbmRhbi5NQG1pY3JvY2hpcC5jb20gPE1hbmlrYW5kYW4uTUBt
-aWNyb2NoaXAuY29tPg0KPiBTZW50OiBNb25kYXksIDIxIE9jdG9iZXIgMjAyNCAxMzoxOQ0KPiBU
-bzogYWxleGV5QGFsbDRiYW1iaS5jb207IGV1Z2VuLmhyaXN0ZXZAbGluYXJvLm9yZzsgdS1ib290
-QGxpc3RzLmRlbnguZGUNCj4gQ2M6IFZhcnNoaW5pLlJhamVuZHJhbkBtaWNyb2NoaXAuY29tOyBI
-YXJpLlByYXNhdGhHRUBtaWNyb2NoaXAuY29tDQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggMS8xXSBG
-aXhlZCBzYW1hNWQzIGR0cyBmaWxlIHNvIFBJTyBzZWN0aW9ucyBhcmUgaW5zaWRlDQo+IHBpbmN0
-cmwgYXMgaW4ga2VybmVsIGR0cw0KPiANCj4gSGkgQWxleGV5LA0KPiANCj4gQ2FuIHlvdSBjb25m
-aXJtIGlmIHlvdSBhcmUgdXNpbmcgdGhlIHUtYm9vdC1tY2hwIHJlcG8gZnJvbSBHaXRIdWIgWzFd
-IHRvDQo+IHRlc3QgdGhlIHNhbWE1ZDNfZWRzIGJvYXJkIHdoZXJlIHRoZSBkcml2ZXIgY2hhbmdl
-cyB0byBhbGlnbiBVLUJvb3QgYW5kDQo+IEtlcm5lbCBEVCBhcmUgYWxyZWFkeSBwcmVzZW50Lg0K
-PiBUaGUgcGluY3RybCBkcml2ZXIgcHJvYmUgZmFpbHMgd2l0aCB0aGUgcHJvcG9zZWQgY2hhbmdl
-IGFuZCB3aWxsIGNhdXNlDQo+IHJlZ3Jlc3Npb24gb24gb3RoZXIgYm9hcmRzIHRoYXQgdXNlcyB0
-aGUgc2FtZSBwaW5jdHJsIFBJTzMgZHJpdmVyIGluIHRoZQ0KPiBtYWlubGluZSByZXBvLg0KPiAN
-Cj4gWzFdIC0tPiBodHRwczovL2dpdGh1Yi5jb20vbGludXg0bWljcm9jaGlwL3UtYm9vdC1tY2hw
-DQo+IA0KPiBPbiAyMC8xMC8yNCAxMDo0NCBhbSwgQWxleGV5IFRzaXJsaW4gd3JvdGU6DQo+PiBF
-WFRFUk5BTCBFTUFJTDogRG8gbm90IGNsaWNrIGxpbmtzIG9yIG9wZW4gYXR0YWNobWVudHMgdW5s
-ZXNzIHlvdSBrbm93DQo+PiB0aGUgY29udGVudCBpcyBzYWZlDQo+Pg0KPj4gSGkgTWFuaWthbmRh
-biwNCj4+DQo+PiBJIGhhdmUgdGVzdGVkIGdwaW8gY21kIG9wdGlvbiBvbiBTQU1BNUQzIEVEUyBi
-b2FyZCAoQlRXIGl0IHdhc24ndA0KPj4gZW5hYmxlZCBieSBkZWZhdWx0IGluIHNhbWE1ZDNfeHBs
-YWluZWRfbW1jX2RlZmNvbmZpZyB3aGljaCBpcyB1c2VkIGJ5DQo+PiB0aGlzIGJvYXJkKSBpbiB1
-LWJvb3Qgd2l0aCB0aGUgRFQgY2hhbmdlIGFzIEkgcHJvcG9zZWQgYW5kIGl0IHNlZW1zIHRvDQo+
-PiB3b3JrIGZpbmUsIGF0IGxlYXN0IGl0IGRldGVjdHMgYWxsIHRoZSA1IEdQSU8gcG9ydHMgKEEt
-RSkuIHBpbm11eCBjbWQNCj4+IGRvZXMgbm90IHdvcmsgdG9vIG11Y2gsIGJ1dCB0aGlzIGlzIGJl
-Y2F1c2UgcGluY3RybC1hdDkxIGRvZXMgbm90DQo+PiBpbXBsZW1lbnQgZ2V0X3BpbnNfY291bnQg
-ZnVuY3Rpb24uDQo+PiBXaXRob3V0IHRoZSBwcm9wb3NlZCBjaGFuZ2UgSSB3YXMgbm90IGFibGUg
-dG8gbWFrZSB0aGUgRXRoZXJuZXQgKEVNQUMpDQo+PiBkZXRlY3QgdGhlIFBIWSBiZWNhdXNlIE1E
-SU8gaW50ZXJmYWNlIHdhcyBub3Qgd29ya2luZyAtIHRoZSBjb3JyZWN0DQo+PiBwZXJpcGhlcmFs
-IG1vZGUgZm9yIHRoZSBFTUFDIHBpbnMgd2FzIG5vdCBzZXQgYXMgZGVmaW5lZCBpbiBEVC4NCj4+
-DQo+PiBSZWdhcmRzLA0KPj4gQWxleGV5Lg0KPj4NCj4+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0t
-LS0tDQo+PiBGcm9tOiBNYW5pa2FuZGFuLk1AbWljcm9jaGlwLmNvbSA8TWFuaWthbmRhbi5NQG1p
-Y3JvY2hpcC5jb20+DQo+PiBTZW50OiBGcmlkYXksIDE4IE9jdG9iZXIgMjAyNCAxMjozMA0KPj4g
-VG86IGV1Z2VuLmhyaXN0ZXZAbGluYXJvLm9yZzsgYWxleGV5QGFsbDRiYW1iaS5jb207DQo+PiB1
-LWJvb3RAbGlzdHMuZGVueC5kZQ0KPj4gQ2M6IFZhcnNoaW5pLlJhamVuZHJhbkBtaWNyb2NoaXAu
-Y29tOyBIYXJpLlByYXNhdGhHRUBtaWNyb2NoaXAuY29tDQo+PiBTdWJqZWN0OiBSZTogW1BBVENI
-IDEvMV0gRml4ZWQgc2FtYTVkMyBkdHMgZmlsZSBzbyBQSU8gc2VjdGlvbnMgYXJlDQo+PiBpbnNp
-ZGUgcGluY3RybCBhcyBpbiBrZXJuZWwgZHRzDQo+Pg0KPj4gSGkgRXVnZW4sDQo+Pg0KPj4gT24g
-MTgvMTAvMjQgMTI6NDUgcG0sIEV1Z2VuIEhyaXN0ZXYgd3JvdGU6DQo+Pj4gW1lvdSBkb24ndCBv
-ZnRlbiBnZXQgZW1haWwgZnJvbSBldWdlbi5ocmlzdGV2QGxpbmFyby5vcmcuIExlYXJuIHdoeQ0K
-Pj4+IHRoaXMgaXMgaW1wb3J0YW50IGF0IGh0dHBzOi8vYWthLm1zL0xlYXJuQWJvdXRTZW5kZXJJ
-ZGVudGlmaWNhdGlvbiBdDQo+Pj4NCj4+PiBFWFRFUk5BTCBFTUFJTDogRG8gbm90IGNsaWNrIGxp
-bmtzIG9yIG9wZW4gYXR0YWNobWVudHMgdW5sZXNzIHlvdQ0KPj4+IGtub3cgdGhlIGNvbnRlbnQg
-aXMgc2FmZQ0KPj4+DQo+Pj4gSGVsbG8gQWxleGV5LA0KPj4+DQo+Pj4gUGxlYXNlIGZpeCB0aGUg
-c3ViamVjdCB0byBhZGhlcmUgdG8gdGhlIHJ1bGVzIEFSTTogZHRzOiAuLi4uIGV0YywgaWYNCj4+
-PiB5b3UgYXJlIHVuc3VyZSwgcGxlYXNlIGZvbGxvdyBwcmV2aW91cyBjb21taXRzIHRoYXQgdG91
-Y2hlZCB0aGlzIGZpbGUuDQo+Pj4NCj4+PiBPbiAxMC8xNy8yNCAxMTo1MSwgTWFuaWthbmRhbi5N
-QG1pY3JvY2hpcC5jb20gd3JvdGU6DQo+Pj4+IEhpIEFsZXhleSwNCj4+Pj4NCj4+Pj4gT24gMTUv
-MTAvMjQgODoyMyBwbSwgQWxleGV5IFRzaXJsaW4gd3JvdGU6DQo+Pj4+PiBUaGlzIGFsbG93cyBz
-ZXR0aW5nIHRoZSBHUElPIHBhcmFtZXRlcnMgZnJvbSBkZXZpY2UgdHJlZSwgb3RoZXJ3aXNlDQo+
-Pj4+PiB0aGUgYXQ5MV9waW5fY2hlY2tfY29uZmlnIHdpbGwgZmFpbCBiZWNhdXNlIHRoZSBwcml2
-LT5uYmFua3MgZXF1YWwNCj4+Pj4+IHRvIHplcm8NCj4+Pg0KPj4+IEkgcmVtZW1iZXIgdGhlc2Ug
-cGluIGJhbmtzIGFyZSBvdXRzaWRlIG9mIHRoZSBwaW5jdHJsIGJlY2F1c2UgdGhlDQo+Pj4gZHJp
-dmVyIGZhaWxzIHRvIHByb2JlIHRoZW0gaWYgdGhleSBhcmUgaW5zaWRlLg0KPj4+IElzIHRoaXMg
-bm8gbG9uZ2VyIHRydWUgPw0KPj4gSW5kZWVkLCB5b3UgYXJlIGNvcnJlY3QuV2l0aCB0aGUgY3Vy
-cmVudCBjb2RlIGJhc2UgdGhlIHBpbmN0cmwgZmFpbHMNCj4+IHRvIHByb2JlIGlmIHRoZXkgYXJl
-IGRlZmluZWQgaW5zaWRlLg0KPj4gSSBzdGFydGVkIHRvIHJldmlldyB0aGlzIGNvZGUgd2l0aCBh
-biBpbnRlbnRpb24gdGhhdCBteSBjaGFuZ2VzIGZvcg0KPj4gcGluY3RybCBkcml2ZXIgYW5kIERU
-IHRvIGFsaWduIFUtQm9vdCBwaW5jdHJsIERUIG5vZGUgd2l0aCB0aGUga2VybmVsDQo+PiBoYWQg
-YWxyZWFkeSBiZWVuIG1hZGUgdXBzdHJlYW0sIGhvd2V2ZXIgdGhhdCBpcyBub3QgdGhlIGNhc2Uu
-DQo+PiBUaGlzIHBhdGNoIGlzIHZhbGlkIGFuZCBuZWNlc3Nhcnkgb25seSBhZnRlciB3aGVuIG15
-IGNoYW5nZXMgYXJlDQo+PiB1cC1zdHJlYW1lZCBvdGhlcndpc2UgZHJpdmVyIHByb2JlIHdpbGwg
-ZmFpbA0KPj4NCj4+IFNpbmNlIEkgZG9uJ3Qgb3duIGEgYm9hcmQgd2l0aCB0aGlzIFNvQywgQWxl
-eGV5LCBjb3VsZCB5b3Uga2luZGx5DQo+PiBjaGVjayB0aGUgR1BJTyBmdW5jdGlvbnMgYW5kIGRl
-dGVybWluZSB3aGV0aGVyIHRoaXMgcGF0Y2ggaXMgYWN0dWFsbHkNCj4+IG5lY2Vzc2FyeSBmb3Ig
-dGhlIHByb2JsZW0geW91J3JlIGV4cGVyaWVuY2luZz9JZiBub3QsIGFmdGVyDQo+PiBpbmNvcnBv
-cmF0aW5nIHRoZSBkcml2ZXIgY2hhbmdlcywgeW91IGNhbiBzZW5kIHRoaXMgYXMgcGFydCBvZiB0
-aGUgRFQNCj4+IGFsaWdubWVudA0KPj4+DQo+Pj4gTWFuaWthbmRhbiwgaXMgaXQgcG9zc2libGUg
-dG8gdGVzdCB0aGlzIG9uIHRoZSBib2FyZD8gYW5kIHVzZSB0aGUNCj4+PiBncGlvIGNvbW1hbmQg
-aW4gVS1ib290IHRvIHRvZ2dsZSB0aGUgcGlucyAsIGxpa2UgZS5nLiBmb3IgdGhlIExFRHMNCj4+
-PiBhbmQgc2VlIGlmIHRoZXJlIGlzIG5vIHJlZ3Jlc3Npb24gPw0KPj4+DQo+Pj4gVGhhbmtzLA0K
-Pj4+IEV1Z2VuDQo+Pj4+Pg0KPj4+Pj4gU2lnbmVkLW9mZi1ieTogQWxleGV5IFRzaXJsaW4gPGFs
-ZXhleUBhbGw0YmFtYmkuY29tPg0KPj4+Pj4gLS0tDQo+Pj4+Pg0KPj4+Pj4gICAgICBhcmNoL2Fy
-bS9kdHMvc2FtYTVkMy5kdHNpIHwgMTExDQo+Pj4+PiArKysrKysrKysrKysrKysrKysrLS0tLS0t
-LS0tLS0tLS0tLS0tLQ0KPj4+Pj4gICAgICAxIGZpbGUgY2hhbmdlZCwgNTYgaW5zZXJ0aW9ucygr
-KSwgNTUgZGVsZXRpb25zKC0pDQo+Pj4+Pg0KPj4+Pj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0
-cy9zYW1hNWQzLmR0c2kgYi9hcmNoL2FybS9kdHMvc2FtYTVkMy5kdHNpDQo+Pj4+PiBpbmRleCA0
-YzAzYTMwMmVjLi5jNjcxZWE0MmYyIDEwMDY0NA0KPj4+Pj4gLS0tIGEvYXJjaC9hcm0vZHRzL3Nh
-bWE1ZDMuZHRzaQ0KPj4+Pj4gKysrIGIvYXJjaC9hcm0vZHRzL3NhbWE1ZDMuZHRzaQ0KPj4+Pj4g
-QEAgLTg3Myw2NiArODczLDY3IEBADQo+Pj4+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIEFUOTFfUElPRSAxNw0KPj4+Pj4gQVQ5MV9QRVJJ
-UEhfQiBBVDkxX1BJTkNUUkxfTk9ORT47IC8qIFBFMTcgcGVyaXBoIEIsIGNvbmZsaWN0cyB3aXRo
-DQo+Pj4+PiBBMTcgKi8NCj4+Pj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIH07DQo+Pj4+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfTsNCj4+Pj4+IC0g
-ICAgICAgICAgICAgICAgICAgIH07DQo+Pj4+Pg0KPj4+Pj4gLSAgICAgICAgICAgICAgICAgICAg
-cGlvQTogZ3Bpb0BmZmZmZjIwMCB7DQo+Pj4+PiAtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IGNvbXBhdGlibGUgPSAiYXRtZWwsYXQ5MXNhbTl4NS1ncGlvIiwNCj4+Pj4+ICJhdG1lbCxhdDkx
-cm05MjAwLWdwaW8iOw0KPj4+Pj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICByZWcgPSA8
-MHhmZmZmZjIwMCAweDEwMD47DQo+Pj4+PiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlu
-dGVycnVwdHMgPSA8NiBJUlFfVFlQRV9MRVZFTF9ISUdIIDE+Ow0KPj4+Pj4gLSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAjZ3Bpby1jZWxscyA9IDwyPjsNCj4+Pj4+IC0gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgZ3Bpby1jb250cm9sbGVyOw0KPj4+Pj4gLSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBpbnRlcnJ1cHQtY29udHJvbGxlcjtoYXINCj4+Pj4+IC0gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgI2ludGVycnVwdC1jZWxscyA9IDwyPjsNCj4+Pj4+IC0gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgY2xvY2tzID0gPCZwaW9BX2Nsaz47DQo+Pj4+PiAtICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGJvb3RwaC1hbGw7DQo+Pj4+PiAtICAgICAgICAgICAgICAgICAg
-ICB9Ow0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBwaW9BOiBncGlvQGZmZmZm
-MjAwIHsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29tcGF0aWJs
-ZSA9DQo+Pj4+PiAiYXRtZWwsYXQ5MXNhbTl4NS1ncGlvIiwgImF0bWVsLGF0OTFybTkyMDAtZ3Bp
-byI7DQo+Pj4+IFNwYWNlcyBpbnN0ZWFkIG9mIHRhYiBiZWZvcmUgJ2NvbXBhdGlibGUnLCBzaG91
-bGQgYmUgY29uc2lzdGVudCB3aXRoDQo+Pj4+IHRoZSByZW1haW5pbmcgcHJvcGVydGllcyBvZiBw
-aW9BIG5vZGUuDQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVn
-ID0gPDB4ZmZmZmYyMDAgMHgxMDA+Ow0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIGludGVycnVwdHMgPSA8Ng0KPj4+Pj4gSVJRX1RZUEVfTEVWRUxfSElHSCAxPjsN
-Cj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjZ3Bpby1jZWxscyA9
-IDwyPjsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBncGlvLWNv
-bnRyb2xsZXI7DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaW50
-ZXJydXB0LWNvbnRyb2xsZXI7DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgI2ludGVycnVwdC1jZWxscyA9IDwyPjsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBjbG9ja3MgPSA8JnBpb0FfY2xrPjsNCj4+Pj4+ICsgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBib290cGgtYWxsOw0KPj4+Pj4gKyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICB9Ow0KPj4+Pj4NCj4+Pj4+IC0gICAgICAgICAgICAgICAgICAgIHBp
-b0I6IGdwaW9AZmZmZmY0MDAgew0KPj4+Pj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICBj
-b21wYXRpYmxlID0gImF0bWVsLGF0OTFzYW05eDUtZ3BpbyIsDQo+Pj4+PiAiYXRtZWwsYXQ5MXJt
-OTIwMC1ncGlvIjsNCj4+Pj4+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVnID0gPDB4
-ZmZmZmY0MDAgMHgxMDA+Ow0KPj4+Pj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbnRl
-cnJ1cHRzID0gPDcgSVJRX1RZUEVfTEVWRUxfSElHSCAxPjsNCj4+Pj4+IC0gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgI2dwaW8tY2VsbHMgPSA8Mj47DQo+Pj4+PiAtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGdwaW8tY29udHJvbGxlcjsNCj4+Pj4+IC0gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgaW50ZXJydXB0LWNvbnRyb2xsZXI7DQo+Pj4+PiAtICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICNpbnRlcnJ1cHQtY2VsbHMgPSA8Mj47DQo+Pj4+PiAtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGNsb2NrcyA9IDwmcGlvQl9jbGs+Ow0KPj4+Pj4gLSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBib290cGgtYWxsOw0KPj4+Pj4gLSAgICAgICAgICAgICAgICAgICAgfTsN
-Cj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGlvQjogZ3Bpb0BmZmZmZjQwMCB7
-DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbXBhdGlibGUgPQ0K
-Pj4+Pj4gImF0bWVsLGF0OTFzYW05eDUtZ3BpbyIsICJhdG1lbCxhdDkxcm05MjAwLWdwaW8iOw0K
-Pj4+PiBEaXR0bw0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJl
-ZyA9IDwweGZmZmZmNDAwIDB4MTAwPjsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBpbnRlcnJ1cHRzID0gPDcNCj4+Pj4+IElSUV9UWVBFX0xFVkVMX0hJR0ggMT47
-DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI2dwaW8tY2VsbHMg
-PSA8Mj47DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZ3Bpby1j
-b250cm9sbGVyOw0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlu
-dGVycnVwdC1jb250cm9sbGVyOw0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICNpbnRlcnJ1cHQtY2VsbHMgPSA8Mj47DQo+Pj4+PiArICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgY2xvY2tzID0gPCZwaW9CX2Nsaz47DQo+Pj4+PiArICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgYm9vdHBoLWFsbDsNCj4+Pj4+ICsgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgfTsNCj4+Pj4+DQo+Pj4+PiAtICAgICAgICAgICAgICAgICAgICBw
-aW9DOiBncGlvQGZmZmZmNjAwIHsNCj4+Pj4+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAg
-Y29tcGF0aWJsZSA9ICJhdG1lbCxhdDkxc2FtOXg1LWdwaW8iLA0KPj4+Pj4gImF0bWVsLGF0OTFy
-bTkyMDAtZ3BpbyI7DQo+Pj4+PiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlZyA9IDww
-eGZmZmZmNjAwIDB4MTAwPjsNCj4+Pj4+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgaW50
-ZXJydXB0cyA9IDw4IElSUV9UWVBFX0xFVkVMX0hJR0ggMT47DQo+Pj4+PiAtICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICNncGlvLWNlbGxzID0gPDI+Ow0KPj4+Pj4gLSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBncGlvLWNvbnRyb2xsZXI7DQo+Pj4+PiAtICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIGludGVycnVwdC1jb250cm9sbGVyOw0KPj4+Pj4gLSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAjaW50ZXJydXB0LWNlbGxzID0gPDI+Ow0KPj4+Pj4gLSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBjbG9ja3MgPSA8JnBpb0NfY2xrPjsNCj4+Pj4+IC0gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgYm9vdHBoLWFsbDsNCj4+Pj4+IC0gICAgICAgICAgICAgICAgICAgIH07
-DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBpb0M6IGdwaW9AZmZmZmY2MDAg
-ew0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb21wYXRpYmxlID0N
-Cj4+Pj4+ICJhdG1lbCxhdDkxc2FtOXg1LWdwaW8iLCAiYXRtZWwsYXQ5MXJtOTIwMC1ncGlvIjsN
-Cj4+Pj4gRGl0dG8NCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBy
-ZWcgPSA8MHhmZmZmZjYwMCAweDEwMD47DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgaW50ZXJydXB0cyA9IDw4DQo+Pj4+PiBJUlFfVFlQRV9MRVZFTF9ISUdIIDE+
-Ow0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICNncGlvLWNlbGxz
-ID0gPDI+Ow0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdwaW8t
-Y29udHJvbGxlcjsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBp
-bnRlcnJ1cHQtY29udHJvbGxlcjsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAjaW50ZXJydXB0LWNlbGxzID0gPDI+Ow0KPj4+Pj4gKyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGNsb2NrcyA9IDwmcGlvQ19jbGs+Ow0KPj4+Pj4gKyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJvb3RwaC1hbGw7DQo+Pj4+PiArICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIH07DQo+Pj4+Pg0KPj4+Pj4gLSAgICAgICAgICAgICAgICAgICAg
-cGlvRDogZ3Bpb0BmZmZmZjgwMCB7DQo+Pj4+PiAtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IGNvbXBhdGlibGUgPSAiYXRtZWwsYXQ5MXNhbTl4NS1ncGlvIiwNCj4+Pj4+ICJhdG1lbCxhdDkx
-cm05MjAwLWdwaW8iOw0KPj4+Pj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICByZWcgPSA8
-MHhmZmZmZjgwMCAweDEwMD47DQo+Pj4+PiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlu
-dGVycnVwdHMgPSA8OSBJUlFfVFlQRV9MRVZFTF9ISUdIIDE+Ow0KPj4+Pj4gLSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAjZ3Bpby1jZWxscyA9IDwyPjsNCj4+Pj4+IC0gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgZ3Bpby1jb250cm9sbGVyOw0KPj4+Pj4gLSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBpbnRlcnJ1cHQtY29udHJvbGxlcjsNCj4+Pj4+IC0gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgI2ludGVycnVwdC1jZWxscyA9IDwyPjsNCj4+Pj4+IC0gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgY2xvY2tzID0gPCZwaW9EX2Nsaz47DQo+Pj4+PiAtICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGJvb3RwaC1hbGw7DQo+Pj4+PiAtICAgICAgICAgICAgICAgICAgICB9
-Ow0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBwaW9EOiBncGlvQGZmZmZmODAw
-IHsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29tcGF0aWJsZSA9
-DQo+Pj4+PiAiYXRtZWwsYXQ5MXNhbTl4NS1ncGlvIiwgImF0bWVsLGF0OTFybTkyMDAtZ3BpbyI7
-DQo+Pj4+IERpdHRvDQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cmVnID0gPDB4ZmZmZmY4MDAgMHgxMDA+Ow0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGludGVycnVwdHMgPSA8OQ0KPj4+Pj4gSVJRX1RZUEVfTEVWRUxfSElHSCAx
-PjsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjZ3Bpby1jZWxs
-cyA9IDwyPjsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBncGlv
-LWNvbnRyb2xsZXI7DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-aW50ZXJydXB0LWNvbnRyb2xsZXI7DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgI2ludGVycnVwdC1jZWxscyA9IDwyPjsNCj4+Pj4+ICsgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBjbG9ja3MgPSA8JnBpb0RfY2xrPjsNCj4+Pj4+ICsgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBib290cGgtYWxsOw0KPj4+Pj4gKyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICB9Ow0KPj4+Pj4gKw0KPj4+Pj4gKyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwaW9FOiBncGlvQGZmZmZmYTAwIHsNCj4+Pj4+ICsgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgY29tcGF0aWJsZSA9DQo+Pj4+PiAiYXRtZWwsYXQ5MXNhbTl4NS1n
-cGlvIiwgImF0bWVsLGF0OTFybTkyMDAtZ3BpbyI7DQo+Pj4+IERpdHRvDQo+Pj4+PiArICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVnID0gPDB4ZmZmZmZhMDAgMHgxMDA+Ow0K
-Pj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGludGVycnVwdHMgPSA8
-MTANCj4+Pj4+IElSUV9UWVBFX0xFVkVMX0hJR0ggMT47DQo+Pj4+PiArICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgI2dwaW8tY2VsbHMgPSA8Mj47DQo+Pj4+PiArICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgZ3Bpby1jb250cm9sbGVyOw0KPj4+Pj4gKyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGludGVycnVwdC1jb250cm9sbGVyOw0KPj4+
-Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICNpbnRlcnJ1cHQtY2VsbHMg
-PSA8Mj47DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2xvY2tz
-ID0gPCZwaW9FX2Nsaz47DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgYm9vdHBoLWFsbDsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgfTsNCj4+
-Pj4+DQo+Pj4+IEV4dHJhIGxpbmUNCj4+Pj4+IC0gICAgICAgICAgICAgICAgICAgIHBpb0U6IGdw
-aW9AZmZmZmZhMDAgew0KPj4+Pj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb21wYXRp
-YmxlID0gImF0bWVsLGF0OTFzYW05eDUtZ3BpbyIsDQo+Pj4+PiAiYXRtZWwsYXQ5MXJtOTIwMC1n
-cGlvIjsNCj4+Pj4+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVnID0gPDB4ZmZmZmZh
-MDAgMHgxMDA+Ow0KPj4+Pj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbnRlcnJ1cHRz
-ID0gPDEwIElSUV9UWVBFX0xFVkVMX0hJR0gNCj4+Pj4+IDE+Ow0KPj4+Pj4gLSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAjZ3Bpby1jZWxscyA9IDwyPjsNCj4+Pj4+IC0gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgZ3Bpby1jb250cm9sbGVyOw0KPj4+Pj4gLSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBpbnRlcnJ1cHQtY29udHJvbGxlcjsNCj4+Pj4+IC0gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgI2ludGVycnVwdC1jZWxscyA9IDwyPjsNCj4+Pj4+IC0gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgY2xvY2tzID0gPCZwaW9FX2Nsaz47DQo+Pj4+PiAtICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGJvb3RwaC1hbGw7DQo+Pj4+PiAgICAgICAgICAgICAgICAgICAgICAg
-IH07DQo+Pj4+Pg0KPj4+Pj4gICAgICAgICAgICAgICAgICAgICAgICBwbWM6IHBtY0BmZmZmZmMw
-MCB7DQo+Pj4+DQo+Pj4NCj4+DQo+PiAtLQ0KPj4gVGhhbmtzIGFuZCBSZWdhcmRzLA0KPj4gTWFu
-aWthbmRhbiBNLg0KPiANCj4gLS0NCj4gVGhhbmtzIGFuZCBSZWdhcmRzLA0KPiBNYW5pa2FuZGFu
-IE0uDQoNCi0tIA0KVGhhbmtzIGFuZCBSZWdhcmRzLA0KTWFuaWthbmRhbiBNLg0KDQo=
+Hi Dmitry,
+
+Thank you for the patch.
+
+On jeu., oct. 17, 2024 at 17:12, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+
+> To enhance code organization, it is beneficial to consolidate all A/B
+> BCB management routines into a single super-command.
+> The 'bcb' command is an excellent candidate for this purpose.
+>
+> This patch integrates the separate 'ab_select' command into the 'bcb'
+> group as the 'ab_select' subcommand, maintaining the same parameter list
+> for consistency.
+>
+> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+
+> ---
+>  MAINTAINERS                               |  1 -
+>  cmd/Kconfig                               | 14 -------
+>  cmd/Makefile                              |  1 -
+>  cmd/ab_select.c                           | 66 -------------------------------
+>  cmd/bcb.c                                 | 63 +++++++++++++++++++++++++++++
+>  configs/am57xx_evm_defconfig              |  1 -
+>  configs/am57xx_hs_evm_defconfig           |  1 -
+>  configs/am57xx_hs_evm_usb_defconfig       |  1 -
+>  configs/khadas-vim3_android_ab_defconfig  |  1 -
+>  configs/khadas-vim3l_android_ab_defconfig |  1 -
+>  configs/sandbox64_defconfig               |  2 +
+>  configs/sandbox_defconfig                 |  1 -
+>  doc/android/ab.rst                        | 12 +++---
+>  include/configs/khadas-vim3_android.h     |  2 +-
+>  include/configs/khadas-vim3l_android.h    |  2 +-
+>  include/configs/meson64_android.h         |  4 +-
+>  include/configs/ti_omap5_common.h         |  4 +-
+>  test/py/tests/test_android/test_ab.py     |  8 ++--
+>  18 files changed, 81 insertions(+), 104 deletions(-)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 7c6c368285e729dee11bb116cd7dd30d369b1a87..e0c6a6b4b43774258ce1e20100e4a2f01cbeaab0 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -65,7 +65,6 @@ R:	Sam Protsenko <semen.protsenko@linaro.org>
+>  S:	Maintained
+>  T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
+>  F:	boot/android_ab.c
+> -F:	cmd/ab_select.c
+>  F:	doc/android/ab.rst
+>  F:	include/android_ab.h
+>  F:	test/py/tests/test_android/test_ab.py
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 8c677b1e4864164d985914ea6ac4a65c6caee099..82b5852d47c1057ca9d5f13d078e428bb4a3b539 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -1775,20 +1775,6 @@ config CMD_XXD
+>  
+>  endmenu
+>  
+> -menu "Android support commands"
+> -
+> -config CMD_AB_SELECT
+> -	bool "ab_select"
+> -	depends on ANDROID_AB
+> -	help
+> -	  On Android devices with more than one boot slot (multiple copies of
+> -	  the kernel and system images) this provides a command to select which
+> -	  slot should be used to boot from and register the boot attempt. This
+> -	  is used by the new A/B update model where one slot is updated in the
+> -	  background while running from the other slot.
+> -
+> -endmenu
+> -
+>  if NET || NET_LWIP
+>  
+>  menuconfig CMD_NET
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index f30914053721d7e8ac17c828aef4d379cf3ecdb5..d1bb9d0e57d80855dd2da8af0cb510dbad65933e 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -17,7 +17,6 @@ obj-$(CONFIG_CMD_2048) += 2048.o
+>  obj-$(CONFIG_CMD_ACPI) += acpi.o
+>  obj-$(CONFIG_CMD_ADDRMAP) += addrmap.o
+>  obj-$(CONFIG_CMD_AES) += aes.o
+> -obj-$(CONFIG_CMD_AB_SELECT) += ab_select.o
+>  obj-$(CONFIG_CMD_ADC) += adc.o
+>  obj-$(CONFIG_CMD_ARMFLASH) += armflash.o
+>  obj-$(CONFIG_BLK) += blk_common.o
+> diff --git a/cmd/ab_select.c b/cmd/ab_select.c
+> deleted file mode 100644
+> index 7c178c728ca4c8b5bcba02a04eef2d6a7c86afb6..0000000000000000000000000000000000000000
+> --- a/cmd/ab_select.c
+> +++ /dev/null
+> @@ -1,66 +0,0 @@
+> -// SPDX-License-Identifier: BSD-2-Clause
+> -/*
+> - * Copyright (C) 2017 The Android Open Source Project
+> - */
+> -
+> -#include <android_ab.h>
+> -#include <command.h>
+> -#include <env.h>
+> -#include <part.h>
+> -
+> -static int do_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
+> -			char *const argv[])
+> -{
+> -	int ret;
+> -	struct blk_desc *dev_desc;
+> -	struct disk_partition part_info;
+> -	char slot[2];
+> -	bool dec_tries = true;
+> -
+> -	if (argc < 4)
+> -		return CMD_RET_USAGE;
+> -
+> -	for (int i = 4; i < argc; i++) {
+> -		if (strcmp(argv[i], "--no-dec") == 0) {
+> -			dec_tries = false;
+> -		} else {
+> -			return CMD_RET_USAGE;
+> -		}
+> -	}
+> -
+> -	/* Lookup the "misc" partition from argv[2] and argv[3] */
+> -	if (part_get_info_by_dev_and_name_or_num(argv[2], argv[3],
+> -						 &dev_desc, &part_info,
+> -						 false) < 0) {
+> -		return CMD_RET_FAILURE;
+> -	}
+> -
+> -	ret = ab_select_slot(dev_desc, &part_info, dec_tries);
+> -	if (ret < 0) {
+> -		printf("Android boot failed, error %d.\n", ret);
+> -		return CMD_RET_FAILURE;
+> -	}
+> -
+> -	/* Android standard slot names are 'a', 'b', ... */
+> -	slot[0] = BOOT_SLOT_NAME(ret);
+> -	slot[1] = '\0';
+> -	env_set(argv[1], slot);
+> -	printf("ANDROID: Booting slot: %s\n", slot);
+> -	return CMD_RET_SUCCESS;
+> -}
+> -
+> -U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
+> -	   "Select the slot used to boot from and register the boot attempt.",
+> -	   "<slot_var_name> <interface> <dev[:part|#part_name]> [--no-dec]\n"
+> -	   "    - Load the slot metadata from the partition 'part' on\n"
+> -	   "      device type 'interface' instance 'dev' and store the active\n"
+> -	   "      slot in the 'slot_var_name' variable. This also updates the\n"
+> -	   "      Android slot metadata with a boot attempt, which can cause\n"
+> -	   "      successive calls to this function to return a different result\n"
+> -	   "      if the returned slot runs out of boot attempts.\n"
+> -	   "    - If 'part_name' is passed, preceded with a # instead of :, the\n"
+> -	   "      partition name whose label is 'part_name' will be looked up in\n"
+> -	   "      the partition table. This is commonly the \"misc\" partition.\n"
+> -           "    - If '--no-dec' is set, the number of tries remaining will not\n"
+> -           "      decremented for the selected boot slot\n"
+> -);
+> diff --git a/cmd/bcb.c b/cmd/bcb.c
+> index 98b2a71087a27b1721f4bed4160095d65ec75402..2854408e5669b0d7d2a06073fa81158b21834b99 100644
+> --- a/cmd/bcb.c
+> +++ b/cmd/bcb.c
+> @@ -8,6 +8,7 @@
+>  #include <android_bootloader_message.h>
+>  #include <bcb.h>
+>  #include <command.h>
+> +#include <android_ab.h>
+>  #include <display_options.h>
+>  #include <log.h>
+>  #include <part.h>
+> @@ -376,6 +377,48 @@ void bcb_reset(void)
+>  	__bcb_reset();
+>  }
+>  
+> +__maybe_unused static int do_bcb_ab_select(struct cmd_tbl *cmdtp,
+> +					   int flag, int argc,
+> +					   char * const argv[])
+> +{
+> +	int ret;
+> +	struct blk_desc *dev_desc;
+> +	struct disk_partition part_info;
+> +	char slot[2];
+> +	bool dec_tries = true;
+> +
+> +	if (argc < 4)
+> +		return CMD_RET_USAGE;
+> +
+> +	for (int i = 4; i < argc; i++) {
+> +		if (strcmp(argv[i], "--no-dec") == 0)
+> +			dec_tries = false;
+> +		else
+> +			return CMD_RET_USAGE;
+> +	}
+> +
+> +	/* Lookup the "misc" partition from argv[2] and argv[3] */
+> +	if (part_get_info_by_dev_and_name_or_num(argv[2], argv[3],
+> +						 &dev_desc, &part_info,
+> +						 false) < 0) {
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	ret = ab_select_slot(dev_desc, &part_info, dec_tries);
+> +	if (ret < 0) {
+> +		printf("Android boot failed, error %d.\n", ret);
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	/* Android standard slot names are 'a', 'b', ... */
+> +	slot[0] = BOOT_SLOT_NAME(ret);
+> +	slot[1] = '\0';
+> +	env_set(argv[1], slot);
+> +	printf("ANDROID: Booting slot: %s\n", slot);
+> +
+> +	return CMD_RET_SUCCESS;
+> +}
+> +
+>  U_BOOT_LONGHELP(bcb,
+>  	"load <interface> <dev> <part>  - load  BCB from <interface> <dev>:<part>\n"
+>  	"load <dev> <part>              - load  BCB from mmc <dev>:<part>\n"
+> @@ -385,6 +428,23 @@ U_BOOT_LONGHELP(bcb,
+>  	"bcb dump  <field>              - dump  BCB <field>\n"
+>  	"bcb store                      - store BCB back to <interface>\n"
+>  	"\n"
+> +#if IS_ENABLED(CONFIG_ANDROID_AB)
+> +	"bcb ab_select -\n"
+> +	"    Select the slot used to boot from and register the boot attempt.\n"
+> +	"    <slot_var_name> <interface> <dev[:part|#part_name]> [--no-dec]\n"
+> +	"    - Load the slot metadata from the partition 'part' on\n"
+> +	"      device type 'interface' instance 'dev' and store the active\n"
+> +	"      slot in the 'slot_var_name' variable. This also updates the\n"
+> +	"      Android slot metadata with a boot attempt, which can cause\n"
+> +	"      successive calls to this function to return a different result\n"
+> +	"      if the returned slot runs out of boot attempts.\n"
+> +	"    - If 'part_name' is passed, preceded with a # instead of :, the\n"
+> +	"      partition name whose label is 'part_name' will be looked up in\n"
+> +	"      the partition table. This is commonly the \"misc\" partition.\n"
+> +	"    - If '--no-dec' is set, the number of tries remaining will not\n"
+> +	"      decremented for the selected boot slot\n"
+> +	"\n"
+> +#endif
+>  	"Legend:\n"
+>  	"<interface> - storage device interface (virtio, mmc, etc)\n"
+>  	"<dev>       - storage device index containing the BCB partition\n"
+> @@ -406,4 +466,7 @@ U_BOOT_CMD_WITH_SUBCMDS(bcb,
+>  	U_BOOT_SUBCMD_MKENT(test, 4, 1, do_bcb_test),
+>  	U_BOOT_SUBCMD_MKENT(dump, 2, 1, do_bcb_dump),
+>  	U_BOOT_SUBCMD_MKENT(store, 1, 1, do_bcb_store),
+> +#if IS_ENABLED(CONFIG_ANDROID_AB)
+> +	U_BOOT_SUBCMD_MKENT(ab_select, 5, 1, do_bcb_ab_select),
+> +#endif
+>  );
+> diff --git a/configs/am57xx_evm_defconfig b/configs/am57xx_evm_defconfig
+> index efc154eda043ff3ea08194288e33792ce48282f9..b793f00babe474ea3f15292fb4015a7120401238 100644
+> --- a/configs/am57xx_evm_defconfig
+> +++ b/configs/am57xx_evm_defconfig
+> @@ -48,7 +48,6 @@ CONFIG_CMD_SPL=y
+>  CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+>  CONFIG_CMD_BCB=y
+>  # CONFIG_CMD_SETEXPR is not set
+> -CONFIG_CMD_AB_SELECT=y
+>  CONFIG_BOOTP_DNS2=y
+>  # CONFIG_CMD_PMIC is not set
+>  CONFIG_CMD_AVB=y
+> diff --git a/configs/am57xx_hs_evm_defconfig b/configs/am57xx_hs_evm_defconfig
+> index 0f8533e15dbd7c0186a513b27b46a0407b6f79f1..5cacd7f9cc53d338d52120186b16684add93fd21 100644
+> --- a/configs/am57xx_hs_evm_defconfig
+> +++ b/configs/am57xx_hs_evm_defconfig
+> @@ -44,7 +44,6 @@ CONFIG_CMD_ADTIMG=y
+>  CONFIG_CMD_ABOOTIMG=y
+>  CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+>  CONFIG_CMD_BCB=y
+> -CONFIG_CMD_AB_SELECT=y
+>  CONFIG_BOOTP_DNS2=y
+>  # CONFIG_CMD_PMIC is not set
+>  CONFIG_CMD_AVB=y
+> diff --git a/configs/am57xx_hs_evm_usb_defconfig b/configs/am57xx_hs_evm_usb_defconfig
+> index 81a938339d5934605cb7defa04ea92f76468b21a..2d8068ecdc79c01c1281ab3873fc892aa4c96be7 100644
+> --- a/configs/am57xx_hs_evm_usb_defconfig
+> +++ b/configs/am57xx_hs_evm_usb_defconfig
+> @@ -46,7 +46,6 @@ CONFIG_CMD_ADTIMG=y
+>  CONFIG_CMD_ABOOTIMG=y
+>  CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+>  CONFIG_CMD_BCB=y
+> -CONFIG_CMD_AB_SELECT=y
+>  CONFIG_BOOTP_DNS2=y
+>  # CONFIG_CMD_PMIC is not set
+>  CONFIG_CMD_AVB=y
+> diff --git a/configs/khadas-vim3_android_ab_defconfig b/configs/khadas-vim3_android_ab_defconfig
+> index 510fe4f8928fe39a040a615636fa550b3e0dc5db..de5357c45cbfe4742d9491a29386850570acc235 100644
+> --- a/configs/khadas-vim3_android_ab_defconfig
+> +++ b/configs/khadas-vim3_android_ab_defconfig
+> @@ -47,7 +47,6 @@ CONFIG_CMD_SPI=y
+>  CONFIG_CMD_USB=y
+>  CONFIG_CMD_USB_MASS_STORAGE=y
+>  # CONFIG_CMD_SETEXPR is not set
+> -CONFIG_CMD_AB_SELECT=y
+>  CONFIG_CMD_REGULATOR=y
+>  CONFIG_CMD_AVB=y
+>  CONFIG_OF_CONTROL=y
+> diff --git a/configs/khadas-vim3l_android_ab_defconfig b/configs/khadas-vim3l_android_ab_defconfig
+> index d2da8ff2a69b209b8fb22a48be537bd4dd17a3bb..4d7b90f23002e464d7dc40516bcd3161b0f59439 100644
+> --- a/configs/khadas-vim3l_android_ab_defconfig
+> +++ b/configs/khadas-vim3l_android_ab_defconfig
+> @@ -47,7 +47,6 @@ CONFIG_CMD_SPI=y
+>  CONFIG_CMD_USB=y
+>  CONFIG_CMD_USB_MASS_STORAGE=y
+>  # CONFIG_CMD_SETEXPR is not set
+> -CONFIG_CMD_AB_SELECT=y
+>  CONFIG_CMD_REGULATOR=y
+>  CONFIG_CMD_AVB=y
+>  CONFIG_OF_CONTROL=y
+> diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+> index 1b3b8c6e788cd6845b61e62a06b730da28831edc..b5f80b8572ad32b2a92d4fe82c9068c453c11dfd 100644
+> --- a/configs/sandbox64_defconfig
+> +++ b/configs/sandbox64_defconfig
+> @@ -27,6 +27,7 @@ CONFIG_CONSOLE_RECORD=y
+>  CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000
+>  CONFIG_PRE_CONSOLE_BUFFER=y
+>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_ANDROID_AB=y
+>  CONFIG_CMD_CPU=y
+>  CONFIG_CMD_LICENSE=y
+>  CONFIG_CMD_BOOTZ=y
+> @@ -46,6 +47,7 @@ CONFIG_CMD_MD5SUM=y
+>  CONFIG_CMD_MEMINFO=y
+>  CONFIG_CMD_MX_CYCLIC=y
+>  CONFIG_CMD_MEMTEST=y
+> +CONFIG_CMD_BCB=y
+>  CONFIG_CMD_CLK=y
+>  CONFIG_CMD_DEMO=y
+>  CONFIG_CMD_GPIO=y
+> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+> index f596f1cc55a45ade4862122a6944d109c6c29238..d111858082d5a8ed3725c95462b2c81a406b57d2 100644
+> --- a/configs/sandbox_defconfig
+> +++ b/configs/sandbox_defconfig
+> @@ -103,7 +103,6 @@ CONFIG_CMD_AXI=y
+>  CONFIG_CMD_CAT=y
+>  CONFIG_CMD_SETEXPR_FMT=y
+>  CONFIG_CMD_XXD=y
+> -CONFIG_CMD_AB_SELECT=y
+>  CONFIG_CMD_DHCP6=y
+>  CONFIG_BOOTP_DNS2=y
+>  CONFIG_CMD_PCAP=y
+> diff --git a/doc/android/ab.rst b/doc/android/ab.rst
+> index 2adf88781d60b61d1b3c74efe976a684b590c813..7fd4aeb6a724b839de9be5e9a8843ade2ad3667e 100644
+> --- a/doc/android/ab.rst
+> +++ b/doc/android/ab.rst
+> @@ -18,7 +18,7 @@ The A/B updates support can be activated by specifying next options in
+>  your board configuration file::
+>  
+>      CONFIG_ANDROID_AB=y
+> -    CONFIG_CMD_AB_SELECT=y
+> +    CONFIG_CMD_BCB=y
+>  
+>  The disk space on target device must be partitioned in a way so that each
+>  partition which needs to be updated has two or more instances. The name of
+> @@ -26,8 +26,8 @@ each instance must be formed by adding suffixes: ``_a``, ``_b``, ``_c``, etc.
+>  For example: ``boot_a``, ``boot_b``, ``system_a``, ``system_b``, ``vendor_a``,
+>  ``vendor_b``.
+>  
+> -As a result you can use ``ab_select`` command to ensure A/B boot process in your
+> -boot script. This command analyzes and processes A/B metadata stored on a
+> +As a result you can use ``bcb ab_select`` command to ensure A/B boot process in
+> +your boot script. This command analyzes and processes A/B metadata stored on a
+>  special partition (e.g. ``misc``) and determines which slot should be used for
+>  booting up.
+>  
+> @@ -42,15 +42,15 @@ Command usage
+>  
+>  .. code-block:: none
+>  
+> -    ab_select <slot_var_name> <interface> <dev[:part_number|#part_name]>
+> +    bcb ab_select <slot_var_name> <interface> <dev[:part_number|#part_name]>
+>  
+>  for example::
+>  
+> -    => ab_select slot_name mmc 1:4
+> +    => bcb ab_select slot_name mmc 1:4
+>  
+>  or::
+>  
+> -    => ab_select slot_name mmc 1#misc
+> +    => bcb ab_select slot_name mmc 1#misc
+>  
+>  Result::
+>  
+> diff --git a/include/configs/khadas-vim3_android.h b/include/configs/khadas-vim3_android.h
+> index b76e049f09cc014837981e914a3792c829f42cdc..fc89efb4c36e5216a1344bb2d758300eec3c8f44 100644
+> --- a/include/configs/khadas-vim3_android.h
+> +++ b/include/configs/khadas-vim3_android.h
+> @@ -12,7 +12,7 @@
+>  #define LOGO_UUID "43a3305d-150f-4cc9-bd3b-38fca8693846;"
+>  #define ROOT_UUID "ddb8c3f6-d94d-4394-b633-3134139cc2e0;"
+>  
+> -#if defined(CONFIG_CMD_AB_SELECT)
+> +#if defined(CONFIG_CMD_BCB) && defined(CONFIG_ANDROID_AB)
+>  #define PARTS_DEFAULT \
+>  	"uuid_disk=${uuid_gpt_disk};" \
+>  	"name=logo,start=512K,size=2M,uuid=" LOGO_UUID \
+> diff --git a/include/configs/khadas-vim3l_android.h b/include/configs/khadas-vim3l_android.h
+> index 0ab8ffd372a4ae44804fca41c11ee930aaa72460..5b2aed1cf62af213f0ea6688fde6d07267aa4f55 100644
+> --- a/include/configs/khadas-vim3l_android.h
+> +++ b/include/configs/khadas-vim3l_android.h
+> @@ -12,7 +12,7 @@
+>  #define LOGO_UUID "43a3305d-150f-4cc9-bd3b-38fca8693846;"
+>  #define ROOT_UUID "ddb8c3f6-d94d-4394-b633-3134139cc2e0;"
+>  
+> -#if defined(CONFIG_CMD_AB_SELECT)
+> +#if defined(CONFIG_CMD_BCB) && defined(CONFIG_ANDROID_AB)
+>  #define PARTS_DEFAULT \
+>  	"uuid_disk=${uuid_gpt_disk};" \
+>  	"name=logo,start=512K,size=2M,uuid=" LOGO_UUID \
+> diff --git a/include/configs/meson64_android.h b/include/configs/meson64_android.h
+> index fa520265800ccf081862bc97643b6a8e28b13327..77364bbf9cf0d1b68d413773902ea9d18b720928 100644
+> --- a/include/configs/meson64_android.h
+> +++ b/include/configs/meson64_android.h
+> @@ -47,13 +47,13 @@
+>  #define AVB_VERIFY_CMD ""
+>  #endif
+>  
+> -#if defined(CONFIG_CMD_AB_SELECT)
+> +#if defined(CONFIG_CMD_BCB) && defined(CONFIG_ANDROID_AB)
+>  #define ANDROIDBOOT_GET_CURRENT_SLOT_CMD "get_current_slot=" \
+>  	"if part number mmc ${mmcdev} " CONTROL_PARTITION " control_part_number; " \
+>  	"then " \
+>  		"echo " CONTROL_PARTITION \
+>  			" partition number:${control_part_number};" \
+> -		"ab_select current_slot mmc ${mmcdev}:${control_part_number};" \
+> +		"bcb ab_select current_slot mmc ${mmcdev}:${control_part_number};" \
+>  	"else " \
+>  		"echo " CONTROL_PARTITION " partition not found;" \
+>  	"fi;\0"
+> diff --git a/include/configs/ti_omap5_common.h b/include/configs/ti_omap5_common.h
+> index 26494ae980108ad84eb173a0deaa7b701a5309d4..26b6c1cd188c05371c6455cd6247f07a1773d885 100644
+> --- a/include/configs/ti_omap5_common.h
+> +++ b/include/configs/ti_omap5_common.h
+> @@ -93,13 +93,13 @@
+>  
+>  #define CONTROL_PARTITION "misc"
+>  
+> -#if defined(CONFIG_CMD_AB_SELECT)
+> +#if defined(CONFIG_CMD_BCB) && defined(CONFIG_ANDROID_AB)
+>  #define AB_SELECT_SLOT \
+>  	"if part number mmc 1 " CONTROL_PARTITION " control_part_number; " \
+>  	"then " \
+>  		"echo " CONTROL_PARTITION \
+>  			" partition number:${control_part_number};" \
+> -		"ab_select slot_name mmc ${mmcdev}:${control_part_number};" \
+> +		"bcb ab_select slot_name mmc ${mmcdev}:${control_part_number};" \
+>  	"else " \
+>  		"echo " CONTROL_PARTITION " partition not found;" \
+>  		"exit;" \
+> diff --git a/test/py/tests/test_android/test_ab.py b/test/py/tests/test_android/test_ab.py
+> index c79cb07fda35dfeb608ac7345cd3f22744e2e491..0d7b7995a9fab6e3daad748721818b9e4cfac452 100644
+> --- a/test/py/tests/test_android/test_ab.py
+> +++ b/test/py/tests/test_android/test_ab.py
+> @@ -56,20 +56,20 @@ def ab_disk_image(u_boot_console):
+>  
+>  @pytest.mark.boardspec('sandbox')
+>  @pytest.mark.buildconfigspec('android_ab')
+> -@pytest.mark.buildconfigspec('cmd_ab_select')
+> +@pytest.mark.buildconfigspec('cmd_bcb')
+>  @pytest.mark.requiredtool('sgdisk')
+>  def test_ab(ab_disk_image, u_boot_console):
+> -    """Test the 'ab_select' command."""
+> +    """Test the 'bcb ab_select' command."""
+>  
+>      u_boot_console.run_command('host bind 0 ' + ab_disk_image.path)
+>  
+> -    output = u_boot_console.run_command('ab_select slot_name host 0#misc')
+> +    output = u_boot_console.run_command('bcb ab_select slot_name host 0#misc')
+>      assert 're-initializing A/B metadata' in output
+>      assert 'Attempting slot a, tries remaining 7' in output
+>      output = u_boot_console.run_command('printenv slot_name')
+>      assert 'slot_name=a' in output
+>  
+> -    output = u_boot_console.run_command('ab_select slot_name host 0:1')
+> +    output = u_boot_console.run_command('bcb ab_select slot_name host 0:1')
+>      assert 'Attempting slot b, tries remaining 7' in output
+>      output = u_boot_console.run_command('printenv slot_name')
+>      assert 'slot_name=b' in output
+>
+> -- 
+> 2.43.0
