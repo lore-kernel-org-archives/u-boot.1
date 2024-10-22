@@ -4,87 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41E25D2CE05
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 17:01:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C86CD2CE08
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 17:01:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91C9A88F62;
-	Tue, 22 Oct 2024 19:01:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ECC4E88FD9;
+	Tue, 22 Oct 2024 19:01:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i9V2sa6l";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M3ytQcXu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DA2D88FF1; Tue, 22 Oct 2024 19:00:59 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id E1B5D88FD9; Tue, 22 Oct 2024 19:01:02 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 564C187F19
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 19:00:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FB8088FF1
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 19:01:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a9a16b310f5so756911966b.0
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 10:00:57 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-37d50fad249so4551311f8f.1
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 10:01:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729616457; x=1730221257; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729616460; x=1730221260; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6rdCaYmto43azjkX8MbjV/pWo5HOo7uhWbuW5SuKFDY=;
- b=i9V2sa6lf/MjwKesRbJnuscKmEQVimxFqB1F3+KmFGgh3gpRkvGtJsHu+eiTzE5DVG
- SqWeXeW4cw/7fVv5scdE/mFI8rKRlDWwKnMS841fGNgc0+rD9U61gzXkc6sS7WIS6zHZ
- LBemNSiZya965Oc1dzAINRqYlkERYGOtRQino=
+ bh=GOsgrdlGX0zAnk4a5cHQJQ7/lz98cF4PogFIV+yrcMw=;
+ b=M3ytQcXu4LyaMe8DE2KG8NGpKzFbKP5I/A5PXwphAQNUeJL7LfNLxRfFvw4ddhbDIz
+ oizpxqoBN+EDH/zJ28DhLbrB0NmcY2HeRaZm6vDNZH+7ney5H69sp+V5lX/D6Z4IwGEG
+ SNeZMFQt8HNemIPw5KT1OYoHBLB12YNzf1sjM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729616457; x=1730221257;
+ d=1e100.net; s=20230601; t=1729616460; x=1730221260;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6rdCaYmto43azjkX8MbjV/pWo5HOo7uhWbuW5SuKFDY=;
- b=vzZDVlKGkVqrT+E5iBnUjJJedSSjH2nh4kjjJnX+4rmqvgWIKAzK1nConX/p304rMi
- Tvjv4DdOrmUHLdTMEMAWNyI/W+cwcSWZeIJ1fDH7161Q9MQ+Bn79EMWtLkagTj3KjNlX
- 60NaOPsbG4Tx1E82djXA1h+L/kdQp7oy/xzi01aZ6ZnPjHSP/PGnDEhmgQdV1PbDfIK8
- YcYbf5ylTbvvSclRsOKu80KIWm3nlHb9IK7p3kulheDhehH4M9eUUxAeNlFV69C146zM
- e/mkO22fru5c26kD2FW+QQoqJsXORVGC4Lf29OpwQdTubq+6sagzit1SgYxlJjrtGeTL
- IKog==
-X-Gm-Message-State: AOJu0Yz+2RJbg/lnk+PJ+y88sTzbUAqgXl84UW6vs8iQ4bKaYeBT2P3l
- kxUbvwRjmkV0A2AluX5HRmMcr4ECAmGJRjPyuptSyhHXw8EyusXMY51Olv4ynQ26P//QoHQ+8JW
- CeNcTJ4PQhfzEG7sM+BxWzTCpKvJDVFVN1b8D
-X-Google-Smtp-Source: AGHT+IEDwlhLTCswRvk7ncRh8IHHwjQEPXKOQeVMRZDs6arCE42rnPbK/QVkWh6u+my5k4MDUrh1hbwfkYYWdHybIUc=
-X-Received: by 2002:a17:907:1c87:b0:a99:f9e6:1d0 with SMTP id
- a640c23a62f3a-a9aace726aamr334580766b.27.1729616456612; Tue, 22 Oct 2024
- 10:00:56 -0700 (PDT)
+ bh=GOsgrdlGX0zAnk4a5cHQJQ7/lz98cF4PogFIV+yrcMw=;
+ b=QD8MQL/FwRrbQwLsgAHc5ez1aXl7zP+5b/iSp2zMgg8cP545hq0ocD8oqJ7PcmGz3n
+ aLwpmMCngVvK0QmJLwVPeffcJtq6omw9Exs3UPC98zsq6FPkz78NmP832cEzDnaoUDl5
+ rjFn8ppGDMf80RzxXTlJSM+fwp8wXNo9nA6lphJFkMYNv5vmm69h5iVqY4GRBufSdhRd
+ KsyxWPyXd9xp2kA3qkAETWHWH13IfjYb0iXrEkcrrTdFtdBGBlVaDr5AVP+4SY39BYDc
+ 2n6llzrvlkTM5LRqkJ+fp8ysfefgG7MyJ88mZahkp/ClVWplO8qSFpW8V45+GmCj4yRE
+ jdvw==
+X-Gm-Message-State: AOJu0Yz8cxbRCK21EhWUWtzlvQHuk5auGEgddZ6D8Yp0zhSxQWKRslSo
+ j1JK4jj1XlXo6hf5eqxMtG2vW3Q77lyAm1q6rlWgM4LlhHedxn0bDPNxE6gJ4qypcyVesBFqP4H
+ MmOtEX/QQji9WN7w8gPhrbx6GxDD3wOvSGJwT
+X-Google-Smtp-Source: AGHT+IHBJw8MY5ReULNOhPJXu5xHu2DDfi3TB/YYXBGuIy8KHEJnoxTLHcml1ttnlXAdY5bgcUtYjE/XFqsC87heMNw=
+X-Received: by 2002:adf:f251:0:b0:37d:542c:559 with SMTP id
+ ffacd0b85a97d-37eab4d888cmr9164742f8f.18.1729616459773; Tue, 22 Oct 2024
+ 10:00:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241019152434.1017394-1-sjg@chromium.org>
- <20241019152434.1017394-7-sjg@chromium.org>
- <20241019175121.GA4959@bill-the-cat>
- <CAFLszTgBzr_nYtFKFEuHBLBUUF8qq92y+i=bzsVaKsHyt-990Q@mail.gmail.com>
- <20241021173253.GO4959@bill-the-cat>
- <CAFLszThgsF5BL8aSGozA3nAeox=g8bVARmSaBFedM=dbLT=UWA@mail.gmail.com>
- <20241022140246.GB4959@bill-the-cat>
-In-Reply-To: <20241022140246.GB4959@bill-the-cat>
+References: <20241021134450.22985-1-sjg@chromium.org>
+ <20241021143336.GG4959@bill-the-cat>
+ <CAFLszTjK=uw61U_WaqLjBX1JFCC15Ee2dRBm_qGUEsnjqiqpEw@mail.gmail.com>
+ <20241021164958.GK4959@bill-the-cat>
+ <CAFLszThz2DGSQ+gBiJi0jaSmsghVau0UTUyuZppjSyuy9pRkuA@mail.gmail.com>
+ <20241022140223.GZ4959@bill-the-cat>
+In-Reply-To: <20241022140223.GZ4959@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 22 Oct 2024 19:00:35 +0200
-Message-ID: <CAFLszTg3pkZ3z7vH1j-Vafmw6OKhzvLQ4=X9vd+kDzmmUjOw_g@mail.gmail.com>
-Subject: Re: [PATCH v7 6/7] test: efi: boot: Set up an image suitable for EFI
- testing
+Date: Tue, 22 Oct 2024 19:00:39 +0200
+Message-ID: <CAFLszTjn5jELfjZJ0+JNQ+Op8S++_t4V-9MLVxYNnf8kzv+xSQ@mail.gmail.com>
+Subject: Re: [PATCH] CI: Add a test for building without CMDLINE
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, 
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
  Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Yang Xiwen <forbidden405@outlook.com>
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,71 +96,81 @@ Hi Tom,
 
 On Tue, 22 Oct 2024 at 16:02, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Oct 22, 2024 at 02:15:46PM +0200, Simon Glass wrote:
+> On Tue, Oct 22, 2024 at 02:16:16PM +0200, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Mon, 21 Oct 2024 at 19:32, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, 21 Oct 2024 at 18:50, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Mon, Oct 21, 2024 at 08:31:10AM +0200, Simon Glass wrote:
+> > > On Mon, Oct 21, 2024 at 06:32:18PM +0200, Simon Glass wrote:
 > > > > Hi Tom,
 > > > >
-> > > > On Sat, 19 Oct 2024 at 11:51, Tom Rini <trini@konsulko.com> wrote:
+> > > > On Mon, Oct 21, 2024, 16:33 Tom Rini <trini@konsulko.com> wrote:
 > > > > >
-> > > > > On Sat, Oct 19, 2024 at 09:24:33AM -0600, Simon Glass wrote:
+> > > > > On Mon, Oct 21, 2024 at 03:44:49PM +0200, Simon Glass wrote:
 > > > > >
-> > > > > > Create a new disk for use with tests, which contains the new 'testapp'
-> > > > > > EFI app specifically intended for testing the EFI loader.
-> > > > > >
-> > > > > > Attach it to the USB device, since most testing is currently done with
-> > > > > > mmc.
-> > > > > >
-> > > > > > Initially this image will be used to test the EFI bootmeth.
-> > > > > >
-> > > > > > Fix a stale comment in prep_mmc_bootdev() while we are here.
-> > > > > >
-> > > > > > For now this uses sudo and a compressed fallback file, like all the
-> > > > > > other bootstd tests. Once this series is in, the patch which moves
-> > > > > > this to use user-space tools will be cleaned up and re-submitted.
+> > > > > > Something this breaks, so add a test to keep it working. Since sandbox
+> > > > > > enables a lot of options, it is a good board to use.
 > > > > > >
 > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > >
 > > > > > > ---
-> > > > > > Here is the patch to avoid sudo and CI fallback:
 > > > > > >
-> > > > > > [1] https://patchwork.ozlabs.org/project/uboot/patch/
-> > > > > > 20240802093322.15240-1-richard@nod.at/
-> > > > > >
-> > > > > > (no changes since v1)
-> > > > > >
-> > > > > >  arch/sandbox/dts/test.dts           |   2 +-
-> > > > > >  test/boot/bootdev.c                 |  18 +++++++++-
-> > > > > >  test/boot/bootflow.c                |   2 +-
-> > > > > >  test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
+> > > > > >  .azure-pipelines.yml |  8 ++++++++
+> > > > > >  .gitlab-ci.yml       | 11 +++++++++++
+> > > > > >  2 files changed, 19 insertions(+)
 > > > > >
-> > > > > This I think best illustrates the problem with "BOOTSBOX.EFI". This
-> > > > > image will work for CI up until I can figure out how to get access to
-> > > > > free arm64 servers to run some tests on and then it will fail.
+> > > > > I don't like this because "sandbox" is one of the longest run-time
+> > > > > build options due to all of the tests it runs. And given how we break
+> > > > > down the jobs this will make a further bottleneck. Can we just disable
+> > > > > CMDLINE in one of the existing sandbox defconfigs instead please?
+> > > > > Perhaps sandbox_spl since that only does SPL related pytests?
 > > > >
-> > > > I don't believe so. Why do you think that?
+> > > > Actually we do boot into U-Boot proper as some tests need to check
+> > > > that SPL did the right thing.
+> > > >
+> > > > Note that this patch doesn't run any tests at all. It just tries to
+> > > > build sandbox without CMDLINE
 > > >
-> > > Because it includes the BOOTSBOX.EFI x86 binary file, and executes it?
-> > > Or did I miss where we update the contents to include that file as we
-> > > just built it (and so why have it included?) ?
+> > > Is there no existing thing we can put this in? And have we had another
+> > > problem with CMDLINE=n ? It's not cheap (wall clock) to add another
+> > > stage, especially in Azure, I'd really rather figure some way to bundle
+> > > this in with what we already do. Heck, following on with
+> > > qemu_arm64_lwip_defconfig I'd rather just add
+> > > sandbox_no_cmdline_defconfig and use #include so that it's just a few
+> > > lines of defconfig anyhow, but merged in with existing builds.
 > >
-> > It works fine on x86 and I'm sure it will work fine on ARM as well.
-> > The file is built with the host compiler, just as U-Boot itself is.
+> > No, I have not seen any problems with CMDLINE as it is, but there are
+> > some BOOTSTD cases which I would like to check, since disabling the
+> > command-line and using programmatic boot is something I'd like to
+> > eventually test. So this is just a starting point. In the end perhaps
+> > we have a new sandbox variant, or can take over the SPL one...but I'm
+> > not sure yet.
+> >
+> > If Azure is a problem, we could perhaps just do it in gitlab, where we
+> > have more runners. A build variant isn't the sort of problem that
+> > would be different between gitlab and Azure.
+> >
+> > The run is at [1] and it only took 1m19s - I suppose you saw that it
+> > is in the 'world build' section and no tests are run.
+> >
+> > Regards,
+> > Simon
+> >
+> > [1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/jobs/924269
 >
-> Erm, are you saying the BOOT/EFI/BOOTSBOX.EFI file that's in
-> test/py/tests/bootstd/flash1.img.xz doesn't need to exist and the test
-> replaces that, as it goes?
+> No, I don't want Azure and GitLab to diverge since Azure is where
+> everywhere who isn't a custodian with git access can run CI and I keep
+> encouraging more people to use it. And also note that the actual build
+> took 8 seconds which is another reason it would be good to just drop it
+> in to an existing job.
 
-No, I'm saying that sandbox uses that file, no matter the host
-architecture, and I don't need to create different versions of
-flash1.im.xz for each host architecture.
+Oh I didn't know that about Azure. Could/should we have a public
+gitlab pusher also? Or is that not possible?
 
-I discussed this with Heinrich and he seems happy enough with the -N
-flag for his use case. I know how to replicate his use case and am
-going to try it soon.
+Anyway, I cannot put it into a job which runs tests, since it doesn't
+ever produce a command prompt. So that rules out the test.py stage,
+since even if I use '-k nothing' it will still fail to see the prompt,
+so the build will fail. I don't see any option but to put the build in
+a separate piece?
 
 Regards,
 Simon
