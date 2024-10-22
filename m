@@ -4,84 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C05A6D2C54B
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 13:18:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82980D2C54B
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 13:18:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5092288DFD;
+	by phobos.denx.de (Postfix) with ESMTP id B2FA488FA7;
 	Tue, 22 Oct 2024 15:18:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=all4bambi.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=all4bambi-com.20230601.gappssmtp.com header.i=@all4bambi-com.20230601.gappssmtp.com header.b="S1NDvhIN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ee0SioUX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DC9088F82; Tue, 22 Oct 2024 10:48:50 +0200 (CEST)
-Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
- [IPv6:2a00:1450:4864:20::544])
+ id 2D83788EC9; Tue, 22 Oct 2024 10:48:52 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3A3D88D94
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 10:48:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07C9B88F66
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 10:48:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=all4bambi.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexey@all4bambi.com
-Received: by mail-ed1-x544.google.com with SMTP id
- 4fb4d7f45d1cf-5c94c4ad9d8so6926624a12.2
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 01:48:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-539f72c913aso6211646e87.1
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 01:48:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=all4bambi-com.20230601.gappssmtp.com; s=20230601; t=1729586927; x=1730191727;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
- :references:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bz+YK5S7RmWcLASNHlqOeR/qGe8kYaltQ24101RHxQQ=;
- b=S1NDvhINKglIgeRhYXpEn6Nu6B5hIHDRl55E28N26mv40n/qpdZW4cVg5n317UomN9
- baXmOiVtsf2wblh8O5TjcCtkweqF942uFF0mNAFOO7fvzyGTIGDtwj42VuxPmuWlCurJ
- 6dv86B05p62MuMPo5+2jRuHaMWTywlVphluix2o60ZChdNd6X0wjDyi8AeiMsiwcmsJ+
- gjqfidau+X7GmicQqt8rX0sojF66Ll0X7Clq+/8vHAj79t8/UadL5rnOT7u4Aeq4Wtn1
- B8yYNIPhrRb7/FrQ8zOp9XT3vkPphZn9nidFMk2q8AZ7zSmIOzudI/NcBPrwtXeaDHgr
- t3Zw==
+ d=gmail.com; s=20230601; t=1729586929; x=1730191729; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yXOG4bAnuNruA+w4vpSbSR1SmdXTLwDkoXzo1msrvxY=;
+ b=ee0SioUXlNI5N/PJ/vTN9w6k93B4jmM9JHQbxwKNG7kMYkXDZ67XJ5Nvv/gXlKk6zN
+ XHGwCXDskLQaKQ9rS+50Li5sWnmYC94Afa2kK8K7bB28pN8OZn1qk5wyul2aUD2Dt8KH
+ TeUeZCXrGBKI1Kku2PGF/CKKl+o16vLvTRHz03WeTjwVOsPqY4V3i4h1pZcXyVM/FEJj
+ eTrQn5O8aC+Fs8twpTnyS4EIgWsDlzTPsKwhZnj4HZHAzKopHrcbX8AOHk/Vei1rXBQ0
+ c/cvQB+3np+iUOUBrf1SYy+zeUY5w7QDInmBVYujU/pKr4GIAEwKgugv5bSwWiP2KDH8
+ SO/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729586927; x=1730191727;
- h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
- :references:from:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bz+YK5S7RmWcLASNHlqOeR/qGe8kYaltQ24101RHxQQ=;
- b=EeOXbL1eHKt4y3V6Cb9ULhYAl2pHIAXFB9kRvoGhV7YaTlnXzHs0ycZvqK/QKlrsXm
- qtMUwlvUNM0Oo4EVZLKzQqXyVnuYlJZ14B4aTMm8Il6K2nYkhXz1ikjRI04O2ymDDpel
- 11r+WCV9ElUSy6LQcsqEbQbarT6KMJPDETh0qQLi8+cvdxLHzeGKvSD4YtS1BHOCgXzO
- IxINiPNq896qLHrcnH8UAjX+6VMniuhgwj2h9stvxTWxqcXbZX8SYvkxlmvdZpwO3sk4
- HYl4tycUGdqUma5VnnJsbSXq4Zd3PMk56almAviKyOhGLr4SYDaisHwjKmrTpIEJfsqp
- 6w3Q==
+ d=1e100.net; s=20230601; t=1729586929; x=1730191729;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yXOG4bAnuNruA+w4vpSbSR1SmdXTLwDkoXzo1msrvxY=;
+ b=tahBx7QPPSirJqI6hdlMa6nP3tnqmwb1WGpsHlq4ZRIcO4crT9stWrmKqubcxSJuLE
+ HsY1woAU9j4oOAnfjXmSjKkWg1h7EMeFe8lyiCdqiW2tyv6rhfFN1UpHCtxYfRwGdCNI
+ XyIRQC5MtTaNwfhAAndxG4E+QIgiKeLhPhaFbptW4UTjCC0HYcKU3RTeyt8x263+VAEc
+ 6tCH3VH9pYVhs5pQvB0kP1BHom32Vx5V7XDzWz4JXZBtmFpZdzTUgPY7IumIlJYUqGoa
+ t8TPGkORy+VJ5EJhKFWX7EvQkqch0GSHa4JQ2DHhKdp2BThlIqsGlrA9b0w/eSIIdALl
+ pYGg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU3gsNMx9ynReBYRcBEnqyZhmfguyv5WLYyX9wgjULNiDdVjKj+sgYl6ltXGqEDzrDocaF+4N8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzV379i2+RMKwz6xrqxvzz75h5Td+KoAT+M3BpN04EQUFykS+61
- UcIz1Z8Wg4U7AN3vnXOTdSnOnUqP/r9IJUzshxu3W7snpeYUYHBNPICrfAiwN0227UGapnIgiwX
- w7exTr8ZQKV0tFvS0ndWflLFgDLKbCFN0a9dkjw==
-X-Google-Smtp-Source: AGHT+IGB71szuGC24pF2bNlBWxn005+H6j808FzhcTwKCn1VyABD3+wZOcmX9HqthJwRId/3m7JyEkHeEju5A5lJYE0=
-X-Received: by 2002:a05:6402:27c8:b0:5c9:463f:e6e7 with SMTP id
- 4fb4d7f45d1cf-5cb7fce1eaamr1412776a12.11.1729586926818; Tue, 22 Oct 2024
- 01:48:46 -0700 (PDT)
-From: Alexey Tsirlin <alexey@all4bambi.com>
-References: <20241015145307.118784-1-alexey@all4bambi.com>
- <20241015145307.118784-2-alexey@all4bambi.com>
- <60f174bc-dd15-403c-9606-5e18fd183754@microchip.com>
- <c97e8bc6-f2f5-4c62-8d92-0ccbd9caf278@linaro.org>
- <97d0a144-b7b0-4c2b-a8cc-96634011114a@microchip.com>
- <f9d626b03a969fd71fdd1194293d17c7@mail.gmail.com>
- <4a178500-39c1-402b-b7af-61daaaf3f033@microchip.com>
- <972bb7e24fdc498b252cd755e7c3488f@mail.gmail.com>
- <926847b7-d547-45a7-9303-cdf483035c61@microchip.com>
-In-Reply-To: <926847b7-d547-45a7-9303-cdf483035c61@microchip.com>
+ AJvYcCU7TqD6SAEto7I/F+vFXh5QaIj6sU5ZRIJKw2pTZk7M1P8mEWF/KVAVm7tgsAToJi7xjRf6ZDc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxetFcYnBJSngtljP8am0p3oCFG6j50mlCW0uzm00bEYuZM2Md2
+ JsKfUqkmLiZQS4UziwVXteuPXxU2FUK9JDIfXCPW0yBz502KLkdBsWxPaoeC6Xr5naPBNuqC8LO
+ c5kT9dwx8dpr9hR9Fg3AeKcVrBK8=
+X-Google-Smtp-Source: AGHT+IESDJ30NOXZlrNVe3MHVFVKMJkdGbCKDDCyLk3bWq90A/sQPszJvQs3aN/4SDx3h9OLgyN10NY18y3fsS59Y2U=
+X-Received: by 2002:a05:6512:acc:b0:539:e9b4:7ff6 with SMTP id
+ 2adb3069b0e04-53a15445f78mr7872135e87.45.1729586928951; Tue, 22 Oct 2024
+ 01:48:48 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQMUF1Zp/jkjjbi2ZaZRnW201dzJ+wGd3SFcAeSqxgIDKPjcigHj40K/AqXfgvEBwtfTGgGtGJEKAmFWRRyvmFph8A==
-Date: Tue, 22 Oct 2024 11:45:15 +0300
-Message-ID: <a896fa0bcede96ae3ce647714989c2a0@mail.gmail.com>
-Subject: RE: [PATCH 1/1] Fixed sama5d3 dts file so PIO sections are inside
- pinctrl as in kernel dts
-To: Manikandan.M@microchip.com, eugen.hristev@linaro.org, u-boot@lists.denx.de
-Cc: Varshini.Rajendran@microchip.com, Hari.PrasathGE@microchip.com
+References: <20241021113839.318572-1-sjg@chromium.org>
+ <20241021172613.GN4959@bill-the-cat>
+In-Reply-To: <20241021172613.GN4959@bill-the-cat>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 22 Oct 2024 09:48:37 +0100
+Message-ID: <CALeDE9OVd49GiW+M8ygEA5CCF7F8f+MD4okNtk0a8aM1oqsTDQ@mail.gmail.com>
+Subject: Re: [PATCH v2 00/25] led: Remove old status-LED code
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Alison Wang <alison.wang@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
+ Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@kernel-space.org>,
+ Angelo Dureghello <angelo@sysam.it>, Artur Rojek <artur@conclusive.pl>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Charles Hardin <ckhardin@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
+ Doug Zobel <douglas.zobel@climate.com>,
+ Enric Balletbo i Serra <eballetbo@gmail.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Hans de Goede <hdegoede@redhat.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Jens Scharsig <esw@bus-elektronik.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kamil Lulko <kamil.lulko@gmail.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Mario Six <mario.six@gdsys.cc>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, 
+ Michal Simek <michal.simek@amd.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Okhunjon Sobirjonov <okhunjon72@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
+ Sam Edwards <CFSworks@gmail.com>, Samuel Holland <samuel@sholland.org>, 
+ Sean Anderson <seanga2@gmail.com>, Sean Edmond <seanedmond@microsoft.com>, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>, 
+ Wan Yee Lau <wan.yee.lau@intel.com>, Wolfgang Denk <wd@denx.de>, 
+ uboot-stm32@st-md-mailman.stormreply.com
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Tue, 22 Oct 2024 15:18:38 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -100,328 +130,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-No problem!
+> On Mon, Oct 21, 2024 at 01:38:08PM +0200, Simon Glass wrote:
+> > There has been an LED framework in U-Boot which uses driver model for
+> > about 9 years now. Recent work is underway to improve it and provide
+> > more features. It is probably a good time to drop the old code, which
+> > is only used by 5 boards:
+> >
+> >    ./tools/qconfig.py -f LED_STATUS
+> >    5 matches
+> >    eb_cpu5282 eb_cpu5282_internal mx23_olinuxino pinephone
+> >    socfpga_vining_fpga
+> >
+> > This series attempts that.
+> >
+> > Changes in v2:
+> > - Combine code-removal and defconfig changes
+> > - Add a patch to enable LED and LED_BOOT for these boards
+> > - Add a patch to enable LED and LED_BOOT for these boards
+> > - Enable LED on the 5 affected platforms
+> > - Reorder patches for bisectability
+>
+> So I believe this means you missed the feedback of just doing the blind
+> migration rather than disabling the feature, like we used to often do
+> for cases where it's just a matter of changing CONFIG options. It
+> should:
+> - Not introduce a failure to build
+> - Just work on platforms with either OF_UPSTREAM or semi-recent device
+>   trees
+> - Just start working on those platforms when they do move to
+>   OF_UPSTREAM.
 
-Thanks!
-Alexey.
+Also when the migration was first bought up I had a quick look at how
+to do it for the pinephone and I came up empty handed. Now I've seen
+the patch for the pinephone and grep for LED_BOOT the only form of
+docs I find is in the Kconfig and include/led.h, they refer to things
+that aren't in-tree and the out of tree reference to
+dtschema/schemas/options/u-boot.yaml, the only in-tree u-boot.yaml is
+./dts/upstream/Bindings/mtd/partitions/u-boot.yaml, that I find has no
+reference to boott leds at all.
 
------Original Message-----
-From: Manikandan.M@microchip.com <Manikandan.M@microchip.com>
-Sent: Tuesday, 22 October 2024 11:47
-To: alexey@all4bambi.com; eugen.hristev@linaro.org; u-boot@lists.denx.de
-Cc: Varshini.Rajendran@microchip.com; Hari.PrasathGE@microchip.com
-Subject: Re: [PATCH 1/1] Fixed sama5d3 dts file so PIO sections are inside
-pinctrl as in kernel dts
-
-Hi Alexey,
-
-Thank you for confirming the u-boot tree used for testing your patch.
-This suggested modification is a fix-up patch for the pinctrl driver changes
-present in the uboot-mcho git tree. However, because those changes are not
-yet present in the mainline U-Boot, this patch will cause regression on all
-sama5d3 SoC boards.
-
-I appreciate your work in finding and resolving the issue for sama5d3.Please
-hold on to this patch; you can share a version 2 that resolves the comments
-once the driver changes are in.
-
-Also, fyi, this change is already present in the u-boot-mchp tree
-linux4microchip-2024.10-rc2 version,
-https://github.com/linux4microchip/u-boot-mchp/commit/a25b31c2558f9fe303a3b97dd660b87476446301
-On 22/10/24 11:14 am, Alexey Tsirlin wrote:
-> EXTERNAL EMAIL: Do not click links or open attachments unless you know
-> the content is safe
->
-> Hi Manikandan,
->
-> I am using buildroot 2024.04 sama5d3_eds_headless_defconfig config
-> setup which leads to the following:
-> 1. uboot from https://github.com/linux4microchip/u-boot-mchp.git
-> 2. uboot version linux4microchip-2024.10-rc2 3. uboot config
-> sama5d3_xplained_mmc
->
-> My board is sama5d3 EDS with DP83630 PHY connected to EMAC.
->
-> I confirm that using configuration above, I was not able to make
-> Ethernet
-> (EMAC) in uboot work because it was failing to configure EMAC pins to
-> the required peripheral mode. The at91_pin_check_config function in
-> pinctrl-at91 returned -EINVAL because of nbanks=0. After applying the
-> patch, the Ethernet is working fine.
->
-> I also confirm that after applying the patch, I was able to toggle IO
-> pin with gpio command (tried PIOC18 which is accessible through IO
-> Connector #1), although I cannot tell you if this functionality also
-> worked before applying the patch.
->
-> Regards,
-> Alexey.
->
-> -----Original Message-----
-> From: Manikandan.M@microchip.com <Manikandan.M@microchip.com>
-> Sent: Monday, 21 October 2024 13:19
-> To: alexey@all4bambi.com; eugen.hristev@linaro.org;
-> u-boot@lists.denx.de
-> Cc: Varshini.Rajendran@microchip.com; Hari.PrasathGE@microchip.com
-> Subject: Re: [PATCH 1/1] Fixed sama5d3 dts file so PIO sections are
-> inside pinctrl as in kernel dts
->
-> Hi Alexey,
->
-> Can you confirm if you are using the u-boot-mchp repo from GitHub [1]
-> to test the sama5d3_eds board where the driver changes to align U-Boot
-> and Kernel DT are already present.
-> The pinctrl driver probe fails with the proposed change and will cause
-> regression on other boards that uses the same pinctrl PIO3 driver in
-> the mainline repo.
->
-> [1] --> https://github.com/linux4microchip/u-boot-mchp
->
-> On 20/10/24 10:44 am, Alexey Tsirlin wrote:
->> EXTERNAL EMAIL: Do not click links or open attachments unless you
->> know the content is safe
->>
->> Hi Manikandan,
->>
->> I have tested gpio cmd option on SAMA5D3 EDS board (BTW it wasn't
->> enabled by default in sama5d3_xplained_mmc_defconfig which is used by
->> this board) in u-boot with the DT change as I proposed and it seems
->> to work fine, at least it detects all the 5 GPIO ports (A-E). pinmux
->> cmd does not work too much, but this is because pinctrl-at91 does not
->> implement get_pins_count function.
->> Without the proposed change I was not able to make the Ethernet
->> (EMAC) detect the PHY because MDIO interface was not working - the
->> correct peripheral mode for the EMAC pins was not set as defined in DT.
->>
->> Regards,
->> Alexey.
->>
->> -----Original Message-----
->> From: Manikandan.M@microchip.com <Manikandan.M@microchip.com>
->> Sent: Friday, 18 October 2024 12:30
->> To: eugen.hristev@linaro.org; alexey@all4bambi.com;
->> u-boot@lists.denx.de
->> Cc: Varshini.Rajendran@microchip.com; Hari.PrasathGE@microchip.com
->> Subject: Re: [PATCH 1/1] Fixed sama5d3 dts file so PIO sections are
->> inside pinctrl as in kernel dts
->>
->> Hi Eugen,
->>
->> On 18/10/24 12:45 pm, Eugen Hristev wrote:
->>> [You don't often get email from eugen.hristev@linaro.org. Learn why
->>> this is important at https://aka.ms/LearnAboutSenderIdentification ]
->>>
->>> EXTERNAL EMAIL: Do not click links or open attachments unless you
->>> know the content is safe
->>>
->>> Hello Alexey,
->>>
->>> Please fix the subject to adhere to the rules ARM: dts: .... etc, if
->>> you are unsure, please follow previous commits that touched this file.
->>>
->>> On 10/17/24 11:51, Manikandan.M@microchip.com wrote:
->>>> Hi Alexey,
->>>>
->>>> On 15/10/24 8:23 pm, Alexey Tsirlin wrote:
->>>>> This allows setting the GPIO parameters from device tree,
->>>>> otherwise the at91_pin_check_config will fail because the
->>>>> priv->nbanks equal to zero
->>>
->>> I remember these pin banks are outside of the pinctrl because the
->>> driver fails to probe them if they are inside.
->>> Is this no longer true ?
->> Indeed, you are correct.With the current code base the pinctrl fails
->> to probe if they are defined inside.
->> I started to review this code with an intention that my changes for
->> pinctrl driver and DT to align U-Boot pinctrl DT node with the kernel
->> had already been made upstream, however that is not the case.
->> This patch is valid and necessary only after when my changes are
->> up-streamed otherwise driver probe will fail
->>
->> Since I don't own a board with this SoC, Alexey, could you kindly
->> check the GPIO functions and determine whether this patch is actually
->> necessary for the problem you're experiencing?If not, after
->> incorporating the driver changes, you can send this as part of the DT
->> alignment
->>>
->>> Manikandan, is it possible to test this on the board? and use the
->>> gpio command in U-boot to toggle the pins , like e.g. for the LEDs
->>> and see if there is no regression ?
->>>
->>> Thanks,
->>> Eugen
->>>>>
->>>>> Signed-off-by: Alexey Tsirlin <alexey@all4bambi.com>
->>>>> ---
->>>>>
->>>>>      arch/arm/dts/sama5d3.dtsi | 111
->>>>> +++++++++++++++++++-------------------
->>>>>      1 file changed, 56 insertions(+), 55 deletions(-)
->>>>>
->>>>> diff --git a/arch/arm/dts/sama5d3.dtsi b/arch/arm/dts/sama5d3.dtsi
->>>>> index 4c03a302ec..c671ea42f2 100644
->>>>> --- a/arch/arm/dts/sama5d3.dtsi
->>>>> +++ b/arch/arm/dts/sama5d3.dtsi
->>>>> @@ -873,66 +873,67 @@
->>>>>                                                         AT91_PIOE
->>>>> 17 AT91_PERIPH_B AT91_PINCTRL_NONE>; /* PE17 periph B, conflicts
->>>>> with
->>>>> A17 */
->>>>>                                        };
->>>>>                                };
->>>>> -                    };
->>>>>
->>>>> -                    pioA: gpio@fffff200 {
->>>>> -                            compatible = "atmel,at91sam9x5-gpio",
->>>>> "atmel,at91rm9200-gpio";
->>>>> -                            reg = <0xfffff200 0x100>;
->>>>> -                            interrupts = <6 IRQ_TYPE_LEVEL_HIGH 1>;
->>>>> -                            #gpio-cells = <2>;
->>>>> -                            gpio-controller;
->>>>> -                            interrupt-controller;har
->>>>> -                            #interrupt-cells = <2>;
->>>>> -                            clocks = <&pioA_clk>;
->>>>> -                            bootph-all;
->>>>> -                    };
->>>>> +                            pioA: gpio@fffff200 {
->>>>> +                                  compatible =
->>>>> "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
->>>> Spaces instead of tab before 'compatible', should be consistent
->>>> with the remaining properties of pioA node.
->>>>> +                                    reg = <0xfffff200 0x100>;
->>>>> +                                    interrupts = <6
->>>>> IRQ_TYPE_LEVEL_HIGH 1>;
->>>>> +                                    #gpio-cells = <2>;
->>>>> +                                    gpio-controller;
->>>>> +                                    interrupt-controller;
->>>>> +                                    #interrupt-cells = <2>;
->>>>> +                                    clocks = <&pioA_clk>;
->>>>> +                                    bootph-all;
->>>>> +                            };
->>>>>
->>>>> -                    pioB: gpio@fffff400 {
->>>>> -                            compatible = "atmel,at91sam9x5-gpio",
->>>>> "atmel,at91rm9200-gpio";
->>>>> -                            reg = <0xfffff400 0x100>;
->>>>> -                            interrupts = <7 IRQ_TYPE_LEVEL_HIGH 1>;
->>>>> -                            #gpio-cells = <2>;
->>>>> -                            gpio-controller;
->>>>> -                            interrupt-controller;
->>>>> -                            #interrupt-cells = <2>;
->>>>> -                            clocks = <&pioB_clk>;
->>>>> -                            bootph-all;
->>>>> -                    };
->>>>> +                            pioB: gpio@fffff400 {
->>>>> +                                  compatible =
->>>>> "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
->>>> Ditto
->>>>> +                                    reg = <0xfffff400 0x100>;
->>>>> +                                    interrupts = <7
->>>>> IRQ_TYPE_LEVEL_HIGH 1>;
->>>>> +                                    #gpio-cells = <2>;
->>>>> +                                    gpio-controller;
->>>>> +                                    interrupt-controller;
->>>>> +                                    #interrupt-cells = <2>;
->>>>> +                                    clocks = <&pioB_clk>;
->>>>> +                                    bootph-all;
->>>>> +                            };
->>>>>
->>>>> -                    pioC: gpio@fffff600 {
->>>>> -                            compatible = "atmel,at91sam9x5-gpio",
->>>>> "atmel,at91rm9200-gpio";
->>>>> -                            reg = <0xfffff600 0x100>;
->>>>> -                            interrupts = <8 IRQ_TYPE_LEVEL_HIGH 1>;
->>>>> -                            #gpio-cells = <2>;
->>>>> -                            gpio-controller;
->>>>> -                            interrupt-controller;
->>>>> -                            #interrupt-cells = <2>;
->>>>> -                            clocks = <&pioC_clk>;
->>>>> -                            bootph-all;
->>>>> -                    };
->>>>> +                            pioC: gpio@fffff600 {
->>>>> +                                  compatible =
->>>>> "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
->>>> Ditto
->>>>> +                                    reg = <0xfffff600 0x100>;
->>>>> +                                    interrupts = <8
->>>>> IRQ_TYPE_LEVEL_HIGH 1>;
->>>>> +                                    #gpio-cells = <2>;
->>>>> +                                    gpio-controller;
->>>>> +                                    interrupt-controller;
->>>>> +                                    #interrupt-cells = <2>;
->>>>> +                                    clocks = <&pioC_clk>;
->>>>> +                                    bootph-all;
->>>>> +                            };
->>>>>
->>>>> -                    pioD: gpio@fffff800 {
->>>>> -                            compatible = "atmel,at91sam9x5-gpio",
->>>>> "atmel,at91rm9200-gpio";
->>>>> -                            reg = <0xfffff800 0x100>;
->>>>> -                            interrupts = <9 IRQ_TYPE_LEVEL_HIGH 1>;
->>>>> -                            #gpio-cells = <2>;
->>>>> -                            gpio-controller;
->>>>> -                            interrupt-controller;
->>>>> -                            #interrupt-cells = <2>;
->>>>> -                            clocks = <&pioD_clk>;
->>>>> -                            bootph-all;
->>>>> -                    };
->>>>> +                            pioD: gpio@fffff800 {
->>>>> +                                  compatible =
->>>>> "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
->>>> Ditto
->>>>> +                                    reg = <0xfffff800 0x100>;
->>>>> +                                    interrupts = <9
->>>>> IRQ_TYPE_LEVEL_HIGH 1>;
->>>>> +                                    #gpio-cells = <2>;
->>>>> +                                    gpio-controller;
->>>>> +                                    interrupt-controller;
->>>>> +                                    #interrupt-cells = <2>;
->>>>> +                                    clocks = <&pioD_clk>;
->>>>> +                                    bootph-all;
->>>>> +                            };
->>>>> +
->>>>> +                            pioE: gpio@fffffa00 {
->>>>> +                                  compatible =
->>>>> "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
->>>> Ditto
->>>>> +                                    reg = <0xfffffa00 0x100>;
->>>>> +                                    interrupts = <10
->>>>> IRQ_TYPE_LEVEL_HIGH 1>;
->>>>> +                                    #gpio-cells = <2>;
->>>>> +                                    gpio-controller;
->>>>> +                                    interrupt-controller;
->>>>> +                                    #interrupt-cells = <2>;
->>>>> +                                    clocks = <&pioE_clk>;
->>>>> +                                    bootph-all;
->>>>> +                            };
->>>>>
->>>> Extra line
->>>>> -                    pioE: gpio@fffffa00 {
->>>>> -                            compatible = "atmel,at91sam9x5-gpio",
->>>>> "atmel,at91rm9200-gpio";
->>>>> -                            reg = <0xfffffa00 0x100>;
->>>>> -                            interrupts = <10 IRQ_TYPE_LEVEL_HIGH
->>>>> 1>;
->>>>> -                            #gpio-cells = <2>;
->>>>> -                            gpio-controller;
->>>>> -                            interrupt-controller;
->>>>> -                            #interrupt-cells = <2>;
->>>>> -                            clocks = <&pioE_clk>;
->>>>> -                            bootph-all;
->>>>>                        };
->>>>>
->>>>>                        pmc: pmc@fffffc00 {
->>>>
->>>
->>
->> --
->> Thanks and Regards,
->> Manikandan M.
->
-> --
-> Thanks and Regards,
-> Manikandan M.
-
---
-Thanks and Regards,
-Manikandan M.
+I feel the reason there's been a recent move to add users of the
+obsolete method is because the docs for that actually existed and
+there's nothing for the new method. Maybe the first patch in the
+series should be to add some actually useful doc rahter than go from
+docs for the old method to nothing.
