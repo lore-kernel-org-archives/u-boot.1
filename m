@@ -4,65 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFE92D17159
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 02:07:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D220D1715C
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 03:16:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B88C88F6B;
-	Tue, 22 Oct 2024 04:07:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5DC0B88E39;
+	Tue, 22 Oct 2024 05:16:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729562849;
-	bh=AyA/gvFPJvVNaL2QTtgaVfJjzqmXa8K6GvheuVVGTN4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=kE1mnyberw1yCtL7AYGT6iqN+VV1hbY96RmK4Vf+YWio/w0vhferX39KR6RtZZuZh
-	 RHkEEjzCNlDIQ787NhsMIfEnsSaYepw6OnDVmmccoyreZNL3QuGConuvu1S+1Gjwbs
-	 x2d18nEY3B9abi8BXW3XfgKvksVruIrQLWofoU1+V1lXdjapRiscXBjaAb6W1LQrED
-	 D8fz6sAz0kGL+trqKdAucvpKQnr2DHA2uK8PumhTsGyOOhJ9Lh7GkrPqfwNYvFgHdF
-	 ai8mC7sQ/D/M6qaXxuaR8vkLSnP72nBTCizErlBgy/DdqjVjKVAlidAYPZP9SRazq0
-	 4407/kKWV/q0w==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="x9B1YlEX";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D4CC288EFB; Tue, 22 Oct 2024 05:16:40 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id C535C88F66;
- Tue, 22 Oct 2024 04:07:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729562848;
- bh=AyA/gvFPJvVNaL2QTtgaVfJjzqmXa8K6GvheuVVGTN4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=WMAkSjq6YcRdcGid/v5+aefcSLhgc1YErZl1+aUSIgkWBP3/3s2rQi5gFQGlEBJxH
- US31YWCeJ0S+0KDZtDbIMve3070rMs8mvr14rVuqR696MdiGw4sceh4/sFr+AoKX+2
- 3F99RqOBxlmdUUfgppgBB2s60IKUfrFgVfxpil6QpCSm0tZMra5QB0kK12n9/Ey4Fp
- l1iLkI4jB6y7YPreu21ZY64l20TlL0+R2Rc4UVo/NJHrg1ZhcD/J12zXMiptddzJi4
- 4p+CEYvDMzEsfwd86yZGdsJDdcJiE6kKofeeSnW9AjO8UKD4QrfHA8Z2RUP+kOCU99
- ppstZcoASIINg==
-Message-ID: <a0f70ee2-6d71-4f66-b22e-994df2b28504@denx.de>
-Date: Tue, 22 Oct 2024 01:00:40 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id E38D68806A
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 05:16:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49M3GWnh114345;
+ Mon, 21 Oct 2024 22:16:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1729566992;
+ bh=M6weraKKNjkOhZ/K4LHZfMvvE7gSYBfLIsv3hQ3iU5o=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=x9B1YlEX8FCxeGFMKRYj0VNctMUH1Na6k3tEIPv3vOzTh9YGKam1wM0e06HqV9boX
+ UQ8BpT7QR+2cXxpA7uYquw29gBLKvj53IK9UEItV/Cd9DRsExX/HhTaDBUL6fCJEHc
+ joplhl1RBdOh7UYHayiy1H9QbgB5gGJdiEstUbpE=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49M3GWsR109986;
+ Mon, 21 Oct 2024 22:16:32 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 21
+ Oct 2024 22:16:32 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 21 Oct 2024 22:16:32 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
+ (may be forged))
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49M3GTtH063192;
+ Mon, 21 Oct 2024 22:16:30 -0500
+Message-ID: <631b61e3-ba64-4d0c-abf4-d8a649fb2cf0@ti.com>
+Date: Tue, 22 Oct 2024 08:46:28 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
- EEPROM ID page on DH i.MX8MP DHCOM
-To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
-References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
- <20241010132337.3259-2-cniedermaier@dh-electronics.com>
- <934d25c2-39d8-4f51-b29e-8f20feb7431f@denx.de>
- <a305b1455a984fca83de5a6c0d4b8dfc@dh-electronics.com>
- <74bd0a6b-fe12-4e2c-af79-c1f8ffb7d484@denx.de>
- <73ccb69b85094e24be2343d5cbc8879a@dh-electronics.com>
- <17b9380b-39c0-40f2-bb28-319d26b2e13c@denx.de>
- <7b9b543d7aad498591fa6a04a3154cf8@dh-electronics.com>
+Subject: Re: [PATCH 2/2] doc: do not include K3 boards twice in TOC
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Tom Rini
+ <trini@konsulko.com>
+CC: Sean Anderson <sean.anderson@seco.com>, Nishanth Menon <nm@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Dhruva Gole <d-gole@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241021180101.18452-1-heinrich.schuchardt@canonical.com>
+ <20241021180101.18452-3-heinrich.schuchardt@canonical.com>
+ <20241021181234.GQ4959@bill-the-cat>
+ <1e9609f3-f237-4aa7-9f9a-4eb30243261f@canonical.com>
+ <20241021184249.GT4959@bill-the-cat>
+ <CAM=mAOkx8XyaL9TrPzExDhkjy0LUzHSu+nc07gNRpANQMRFjzw@mail.gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <7b9b543d7aad498591fa6a04a3154cf8@dh-electronics.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <CAM=mAOkx8XyaL9TrPzExDhkjy0LUzHSu+nc07gNRpANQMRFjzw@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,67 +88,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/21/24 5:38 PM, Christoph Niedermaier wrote:
+Hi Heinrich
 
-[...]
-
->> If yes, then there is no need for any static variable:
->>
->> board_init() {
->>    u8 eeprom[32];
->>    dh_read_eeprom_wlp(eeprom); // read the eeprom once
->>    dh_setup_mac_address(eeprom); // extract MAC from EEPROM
->>    dh_add_item_number_and_serial_to_env(eeprom); // extract SN from EEPROM
->>    // once this function exits, the eeprom variable on stack is discarded
->>    // which is OK, since it won't be used anymore anyway
->> }
+On 22/10/24 01:06, Heinrich Schuchardt wrote:
 > 
-> The idea is that function dh_add_item_number_and_serial_to_env() encapsulates
-> the reading.
+> 
+> Tom Rini <trini@konsulko.com <mailto:trini@konsulko.com>> schrieb am Mo., 21. 
+> Okt. 2024, 20:42:
+> 
+>     On Mon, Oct 21, 2024 at 08:15:45PM +0200, Heinrich Schuchardt wrote:
+>      > On 10/21/24 20:12, Tom Rini wrote:
+>      > > On Mon, Oct 21, 2024 at 08:01:01PM +0200, Heinrich Schuchardt wrote:
+>      > > > Sphinx writes a warning if a page is included twice in the table of
+>      > > > contents. Use references instead.
+>      > > >
+>      > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com
+>     <mailto:heinrich.schuchardt@canonical.com>>
+>      > > > ---
+>      > > >   doc/board/ti/k3.rst | 11 +++++++----
+>      > > >   1 file changed, 7 insertions(+), 4 deletions(-)
+>      > > >
+>      > > > diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+>      > > > index c3513f0aee2..5d01f487622 100644
+>      > > > --- a/doc/board/ti/k3.rst
+>      > > > +++ b/doc/board/ti/k3.rst
+>      > > > @@ -32,19 +32,22 @@ K3 Based SoCs
+>      > > >      am62ax_sk
+>      > > >      am62x_sk
+>      > > > -   ../beagle/am62x_beagleplay
+>      > > > -   ../phytec/phycore-am62x
+>      > > > -   ../toradex/verdin-am62
+>      > > >      am62px_sk
+>      > > >      am64x_evm
+>      > > >      am65x_evm
+>      > > >      j7200_evm
+>      > > > -   ../beagle/j721e_beagleboneai64
+>      > > >      j721e_evm
+>      > > >      j721s2_evm
+>      > > >      j722s_evm
+>      > > >      j784s4_evm
+>      > > > +K3 SoC based boards in other sections
+>      > > > +
+>      > > > +* :doc:`../beagle/am62x_beagleplay`
+>      > > > +* :doc:`../beagle/j721e_beagleboneai64`
+>      > > > +* :doc:`../phytec/phycore-am62x`
+>      > > > +* :doc:`../toradex/verdin-am62`
+>      > >
+>      > > Can we just make the changes to :doc: links be inline and keep the list
+>      > > sorted/ordered as-is? Or does that not read well once rendered?
+>      > >
+>      >
+>      > This is nothing Sphinx would understand:
+>      >
+>      > WARNING: toctree contains reference to nonexisting document
+>      > 'board/ti/:doc:`../beagle/am62x_beagleplay`' [toc.not_readable]
+> 
+>     Hmm, maybe toctree is the wrong keyword, given where it is in the file
+>     and the rest of the contents. I think the whole list is intended as
+>     "here are all of the K3-based platforms". This however may mean that a
+>     bunch of boards then need :orphan: added as they won't strictly be in
+>     some other ToC list?
+> 
+>     -- 
+>     Tom
+> 
+> 
+> I would prefer not to break tree navigation. It would be best if the TI 
+> contribitors stepped in.
+> 
 
-The function which interacts with the EEPROM on start up, once, can have 
-this name, sure.
+I personally feel this is good enough, the toc contains the TI K3 boards present 
+within the "K3 Generation" page while the references points to the other vendor 
+boards.
 
-> I don't want to have to worry about the structure and number of
-> bytes of the EEPROM ID page and want to be independent of it. It is planned to
-> extend the structure and increase the number of bytes for the STM32MP2. The
-> changes to the size will then depend on the version of the data in the header
-> within the structure.
+> Best regards
+> 
+> Heinrich
+> 
 
-It is OK to allocate 32 or 64 bytes on stack, since that chunk of memory 
-is free'd on return from the function. The lifespan of that allocated 
-memory is exactly as long as it should be, and it does not waste U-Boot 
-memory unnecessarily.
-
-So far, all known EEPROMs have WLP size of 32 or 64 Byes.
-
-> However, these changes should then only have to be made
-> within the function dh_add_item_number_and_serial_to_env() for reading the
-> EEPROM ID page. I accept the static variable in order to better isolate the
-> function.
-
-This can very well be:
-
-dh_add_item_number_and_serial_to_env() {
-    u8 eeprom[32];
-    dh_read_eeprom_wlp(eeprom); // read the eeprom once
-    dh_setup_mac_address(eeprom); // extract MAC from EEPROM
-    dh_add_item_number_and_serial_to_env(eeprom); // extract SN from EEPROM
-    // once this function exits, the eeprom variable on stack is discarded
-    // which is OK, since it won't be used anymore anyway
-}
-
-board_init() {
-   ..
-   dh_add_item_number_and_serial_to_env();
-   ...
-}
-
-> Since the memory is freed up again when the operating system boots,
-> this consumption of 32 bytes in U-Boot is not a problem, because it is only
-> temporary.
-This is not good, please do not waste memory in U-Boot if it can be 
-easily avoided by automatically allocating it on stack and freeing it 
-when not needed.
-
-[...]
+-- 
+Thanking You
+Neha Malcom Francis
