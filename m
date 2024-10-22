@@ -4,80 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C59D2C548
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 12:56:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8648CD2C548
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 12:57:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8356388EBA;
-	Tue, 22 Oct 2024 14:56:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id F281D881C1;
+	Tue, 22 Oct 2024 14:57:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OzoOgpXv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cxxCfYfa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0230B88F31; Tue, 22 Oct 2024 14:56:23 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E15C488EBA; Tue, 22 Oct 2024 14:57:44 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0803F80245
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 14:56:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACDCF80245
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 14:57:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-431616c23b5so28288035e9.0
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 05:56:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729601780; x=1730206580;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=QnNtK7N/98RDsZJ/GZKkZgrYYLQdsPv9TL7fYQGchrQ=;
- b=OzoOgpXv86DzX0j8hXe9s+wZoraclpv8k8qQhyWGatOkKkPHCELezDHoQkzSOk10vH
- Ko2ZWYYMdmfUkhr3iiWUckhu0Yb2LTNx1lUsahhvlISloSCd2WP+/pcJeQhxyvqs3eZB
- 4K+oF8a8elRNb8scDYyjfqOzbqp5iN//q1A2m091Gwf+OP4/oNDdRijb23f7ukADhklN
- DiA/ldNZ4F7orY29Qd5aI9Z7/T+1kz9gl5re1712gchEPcKrAuTmREnCR6SU2sqY7KUM
- LbyjNTOeS+Wn2E7HeFRXYdeoWbgwA0PaBazzkAvK/uALIae1B9tNMqGKNr2hAphiWtrQ
- N1Qg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729601780; x=1730206580;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QnNtK7N/98RDsZJ/GZKkZgrYYLQdsPv9TL7fYQGchrQ=;
- b=WZHce9uM5xdc3aWdnIh1azbiiEjAQ44maPkHQDetO7y6TLilIVZTN551kHpeuyMEF5
- FXs0VhCs7GfC4xsmRaGIYxGbE5cZAUBHqWl7fIsLOUSwgDFTXopZTK8VRk+qIfVBNZX4
- kldrpYXdFS82gJMymXSwrk2mcL6CtigeU6ooUELeeVRSw2/bEDxEFAKjIndOMidSCvJL
- lkOQVzhNjM5ptF/z63W5U7pR/acpvBrJszkLBIDqcfbaISzwSa57RnsRul9coWfGlVqc
- j+9E0HO7ZvnbDLcIznmMzAToowKhLpJ8DDw/Lx3X/7LVYJuMrqeYF5R3j6LKHs6JYymT
- qvYA==
-X-Gm-Message-State: AOJu0YwzaHLPRYXlBqUk6jixMM43k6wLJuE3Zo1Oj1aXeVB4eWDtDXp3
- hPdxJCC6vRrogryrPv1ZnDfxIikqrhrBh46v5Xngsao7R+mQxDMFJXLmvSm2oq4=
-X-Google-Smtp-Source: AGHT+IGWOe/hCdE2hhTD3wH9tbT4N8YjZeJD4b6dr7JQIwGRytnUTd3c3wh71lXdr8aQVZcCUUpMKg==
-X-Received: by 2002:a05:600c:5250:b0:431:3b80:6ca7 with SMTP id
- 5b1f17b1804b1-4317be9ced7mr19937815e9.13.1729601780344; 
- Tue, 22 Oct 2024 05:56:20 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4316f5cc596sm86731165e9.44.2024.10.22.05.56.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Oct 2024 05:56:19 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Guillaume La Roque <glaroque@baylibre.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, Guillaume La Roque
- <glaroque@baylibre.com>,
- 20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com,
- 20241017-topic-fastboot-fixes-mkbootimg-v2-0-c3927102d931@linaro.org
-Subject: Re: [PATCH 6/6] bootstd: Add test for Android boot image v2
-In-Reply-To: <20241017-adnroidv2-v1-6-781c939902c9@baylibre.com>
-References: <20241017-adnroidv2-v1-0-781c939902c9@baylibre.com>
- <20241017-adnroidv2-v1-6-781c939902c9@baylibre.com>
-Date: Tue, 22 Oct 2024 14:56:17 +0200
-Message-ID: <87v7xkuwi6.fsf@baylibre.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49MCvfYe013682;
+ Tue, 22 Oct 2024 07:57:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1729601861;
+ bh=pb+aslfJ2aWkKXgD/2byAU/+jzSJJAEMQEcR6a2GQtk=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=cxxCfYfaZrkraHawHZeqXkZJh6IV/iJuzxZFZaXTkY6ujc2Qo6+FV9zAnpndjP0UF
+ hz3FIskTvPzqfwuHFc/HZUwsrsyJZXH3eg0ToQcCAJwcT4hYjjnRhsxkkXMAI1U1wQ
+ qhdQExPa/yf3SD+hDzkIDX1VxaIRU10p+78Yb9ts=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49MCve0h071688
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 22 Oct 2024 07:57:41 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
+ Oct 2024 07:57:40 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 22 Oct 2024 07:57:40 -0500
+Received: from [10.249.132.3] ([10.249.132.3])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49MCvavR094219;
+ Tue, 22 Oct 2024 07:57:37 -0500
+Message-ID: <d2838e7a-4ace-46a9-b40e-6a90b89a5f64@ti.com>
+Date: Tue, 22 Oct 2024 18:27:36 +0530
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/6] arm: mach-k3: j721e-init.c: J7200: Add support for
+ CONFIG_K3_OPP_LOW
+To: Neha Malcom Francis <n-francis@ti.com>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>
+CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>
+References: <20241017062911.2241167-1-a-limaye@ti.com>
+ <20241017062911.2241167-5-a-limaye@ti.com>
+ <e05c19c9-47ef-4a39-896b-c8d936c6eca4@ti.com>
+Content-Language: en-US
+From: "Limaye, Aniket" <a-limaye@ti.com>
+In-Reply-To: <e05c19c9-47ef-4a39-896b-c8d936c6eca4@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,63 +83,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Guillaume,
 
-Thank you for the patch.
 
-On jeu., oct. 17, 2024 at 18:10, Guillaume La Roque <glaroque@baylibre.com> wrote:
+On 10/17/2024 4:10 PM, Neha Malcom Francis wrote:
+> Hi Aniket
+> 
+> On 17/10/24 11:59, Aniket Limaye wrote:
+>> From: Reid Tonking <reidt@ti.com>
+>>
+>> The default j7200 devicetree and k3_avs driver set 2GHz/1GHz frequency
+>> for A72/MSMC clks and the OPP_NOM voltage.
+>>
+>> J7200 SOCs may support OPP_LOW Operating Performance Point:
+>> 1GHz/500MHz clks for A72/MSMC and OPP_LOW AVS voltage read from efuse.
+>>
+>> Hence, add a config check to select OPP_LOW specs:
+>> - Check if OPP_LOW AVS voltage read from efuse is valid.
+>> - Update the clock frequencies in devicetree.
+>> - Program the OPP_LOW AVS voltage for VDD_CPU.
+>>
+>> Signed-off-by: Reid Tonking <reidt@ti.com>
+>> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+>> ---
+>>   arch/arm/mach-k3/j721e/j721e_init.c | 45 ++++++++++++++++++++++++++++-
+>>   drivers/misc/k3_avs.c               |  5 ++++
+>>   2 files changed, 49 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/ 
+>> j721e/j721e_init.c
+>> index e9ed8cb267c..0620759c36c 100644
+>> --- a/arch/arm/mach-k3/j721e/j721e_init.c
+>> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
+>> @@ -19,6 +19,7 @@
+>>   #include <fdtdec.h>
+>>   #include <mmc.h>
+>>   #include <remoteproc.h>
+>> +#include <k3-avs.h>
+>>   #include "../sysfw-loader.h"
+>>   #include "../common.h"
+>> @@ -147,6 +148,32 @@ static void setup_navss_nb(void)
+>>       writel(NB_THREADMAP_BIT1, 
+>> (uintptr_t)NAVSS0_NBSS_NB1_CFG_NB_THREADMAP);
+>>   }
+>> +int fix_freq(const void *fdt)
+>> +{
+>> +        int node, ret;
+>> +        u32 opp_low_freq[3];
+>> +
+>> +        node = fdt_node_offset_by_compatible(fdt, -1, "ti,am654-rproc");
+>> +            if (node < 0) {
+>> +                printf("%s: A72 not found\n", __func__);
+>> +                return node;
+>> +            }
+> 
+> Indentation seems to be off.
+> 
 
-> Rename actual android bootmethod test to specify it's for boot image
-> version 4.
-> Add a unit test for testing the Android bootmethod with boot image
-> version 2.
->
-> This requires another mmc image (mmc8) to contain the following
-> partitions:
-> - misc: contains the Bootloader Control Block (BCB)
-> - boot_a: contains a fake generic kernel image
->
-> we can test this with:
->
-> $ ./test/py/test.py --bd sandbox --build -k test_ut # build the mmc8.img
-> $ ./test/py/test.py --bd sandbox --build -k bootflow_android
->
-> Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
-> ---
->  arch/sandbox/dts/test.dts | 10 +++++++++-
->  test/boot/bootflow.c      | 29 +++++++++++++++++++++++++---
->  test/py/tests/test_ut.py  | 49 +++++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 84 insertions(+), 4 deletions(-)
->
-> diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-> index 9bf44ae3b0bc..108633a727f9 100644
-> --- a/arch/sandbox/dts/test.dts
-> +++ b/arch/sandbox/dts/test.dts
-> @@ -44,6 +44,7 @@
->  		mmc5 = "/mmc5";
->  		mmc6 = "/mmc6";
->  		mmc7 = "/mmc7";
-> +		mmc8 = "/mmc8";
->  		pci0 = &pci0;
->  		pci1 = &pci1;
->  		pci2 = &pci2;
-> @@ -1135,13 +1136,20 @@
->  		filename = "mmc6.img";
->  	};
->  
-> -	/* This is used for Android tests */
-> +	/* This is used for Android tests image v4 tests */
+Ahh noted... will correct in v2.
 
-Nit: we are repeating "tests" twice here.
-Maybe rephrase to "This is used for Android boot image v4 tests" ?
+>> +
+>> +        /* j7200 opp low values according to data sheet */
+>> +        opp_low_freq[0] = cpu_to_fdt32(1000000000); /* 202-2 -> 
+>> A72SS0_CORE0_0_ARM_CLK */
+>> +        opp_low_freq[1] = cpu_to_fdt32(200000000); /* 61-1 -> 
+>> GTC0_GTC_CLK */
+>> +        opp_low_freq[2] = cpu_to_fdt32(500000000); /* 4-1 -> 
+>> A72SS0_CORE0_MSMC_CLK */
+>> +
+>> +        ret = fdt_setprop((void *)fdt, node, "assigned-clock-rates",
+>> +                  opp_low_freq, sizeof(opp_low_freq));
+>> +            if (ret) {
+>> +                printf("%s: Can not set value\n", __func__);
+>> +                return ret;
+>> +            }
+>> +
+>> +        return 0;
+>> +}
+>> +
+>>   /*
+>>    * This uninitialized global variable would normal end up in 
+>> the .bss section,
+>>    * but the .bss is cleared between writing and reading this 
+>> variable, so move
+>> @@ -301,8 +328,24 @@ void board_init_f(ulong dummy)
+>>   #if defined(CONFIG_CPU_V7R) && defined(CONFIG_K3_AVS0)
+>>       ret = uclass_get_device_by_driver(UCLASS_MISC, 
+>> DM_DRIVER_GET(k3_avs),
+>>                         &dev);
+>> -    if (ret)
+>> +    if (!ret) {
+>> +        if (IS_ENABLED(CONFIG_K3_OPP_LOW)) {
+>> +            ret = k3_check_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
+>> +            if (!ret) {
+>> +                ret = fix_freq(gd->fdt_blob);
+>> +                if (ret)
+>> +                    printf("Failed to set OPP_LOW frequency\n");
+>> +
+>> +                ret = k3_avs_set_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
+>> +                if (ret)
+>> +                    printf("Failed to set OPP_LOW voltage\n");
+>> +            } else {
+>> +                printf("Failed to enable K3_OPP_LOW\n");
+>> +            }
+>> +        }
+>> +    } else {
+>>           printf("AVS init failed: %d\n", ret);
+>> +    }
+>>   #endif
+>>   #if defined(CONFIG_K3_J721E_DDRSS)
+>> diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
+>> index 90cd9dfe7f9..932b355a5c1 100644
+>> --- a/drivers/misc/k3_avs.c
+>> +++ b/drivers/misc/k3_avs.c
+>> @@ -121,6 +121,11 @@ static int k3_avs_program_voltage(struct 
+>> k3_avs_privdata *priv,
+>>       if (!vd->supply)
+>>           return -ENODEV;
+>> +    if (!volt) {
+>> +        dev_err(priv->dev, "Fuse is not set for selected opp %d\n", 
+>> opp_id);
+> 
+> s/Fuse/Efuse
 
-With the nit addressed:
+Yep, will update.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Thanks,
+Aniket
 
-[...]
 
->  	mmc7 {
->
-> -- 
-> 2.34.1
+>> +        return -EINVAL;
+>> +    }
+>> +
+>>       vd->opp = opp_id;
+>>       vd->flags |= VD_FLAG_INIT_DONE;
+> 
+
