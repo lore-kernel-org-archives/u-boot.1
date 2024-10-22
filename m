@@ -4,48 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01434D1CDA1
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 06:05:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA76D1CDA0
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 06:06:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EA398926A;
+	by phobos.denx.de (Postfix) with ESMTP id B714E88F6C;
 	Tue, 22 Oct 2024 08:04:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="GyxNxLMh";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="PaIYgXkv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 684CC88F5E; Tue, 22 Oct 2024 08:04:38 +0200 (CEST)
+ id 859ED88F5E; Tue, 22 Oct 2024 08:04:38 +0200 (CEST)
 Received: from mta-64-228.siemens.flowmailer.net
  (mta-64-228.siemens.flowmailer.net [185.136.64.228])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B66B888F75
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 08:04:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5065C88E02
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 08:04:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jan.kiszka@siemens.com
 Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
- 20241022060433653deb012efab508a4 for <u-boot@lists.denx.de>;
- Tue, 22 Oct 2024 08:04:33 +0200
+ 2024102206043466f049aff969913681 for <u-boot@lists.denx.de>;
+ Tue, 22 Oct 2024 08:04:34 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=jan.kiszka@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=2Mx1X5J1tTQQsp7b5OGUiI81YRXrfDBSX+uGme72rvc=;
- b=GyxNxLMhGZxwV20Ja+6rT/vSF+iDs3/jbp+5E6nuVJgOmQJJYcglhF6Ckz9RIj8/KmO1W7
- FCtNvC74sT3kMhgXo0ThSeXNl0vd6Ylp92YTqF3SdBL6bPcZHsQFGAzRCa085A5iFfDbZro9
- 03hGKAknqAR/VwJk0ZBTIbz2+sFwLkuZCCnpZwY8/DWDgO1pz/Sjvg05Vz+EISf7KrAAf5+Z
- fH44t0+vHy5bg4bm45DQvI+EzH91g9PkP1Aqvon5Pl0heBhs3LyX5xxZqCLjMYUB6l/R8WSI
- Xr4VLioKoWbeP4FpdhEujbAMFUxRO5MOqEc6GBnzuFSN4NEqKs+3/CDg==;
+ bh=ZPH2xGic+MRq0YewuQduIu2O2kIQKIEmrwTHSZ5OhfY=;
+ b=PaIYgXkvAkVmOf9ZykuRPEPsoJAqs3l7FB8ICY4NP2KbpcwDtNTmrPr2uyNqPkqXwGVKLv
+ 3SWPg3Dno9x/lXPBD0DcetP9917ws1WRrfL3Dg5hhFmlHotCA97d6Asl++U0mXe3HiyhILM6
+ ZwUchnIgDsT/PC9omekjKwPVIMqIcPCC2ClOeuu8kQZvBg1iX8ff/krljOLQIBNpK4avdPU6
+ 5x7HJYDnk+pBoSoe6Kohy6SOXfw0BSvpyN+SWtjDuQ57qGwD7pgXtn1Au+SgqKruecoBUslU
+ NkHm7ZRnDfp6V2UVCeXJFBjVXsPwwZFmTFMQEH+Vq+c7QV4A5mdoaM0w==;
 From: Jan Kiszka <jan.kiszka@siemens.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bryan Brattlof <bb@ti.com>,
 	Nishanth Menon <nm@ti.com>
-Subject: [PATCH v2 08/13] arm64: dts: ti: iot2050: Add overlays for M.2 used
- by firmware
-Date: Tue, 22 Oct 2024 08:04:25 +0200
-Message-ID: <247548111148ba32e8aa920df7c4fa97440feb0b.1729577070.git.jan.kiszka@siemens.com>
+Subject: [PATCH v2 10/13] board: iot2050: Support new IOT2050-SM variant
+Date: Tue, 22 Oct 2024 08:04:27 +0200
+Message-ID: <5b9f683e79aa4d169bd6da24e9293dbeb2576925.1729577070.git.jan.kiszka@siemens.com>
 In-Reply-To: <cover.1729577070.git.jan.kiszka@siemens.com>
 References: <cover.1729577070.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
@@ -68,113 +67,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jan Kiszka <jan.kiszka@siemens.com>
+From: Baocheng Su <baocheng.su@siemens.com>
 
-To allow firmware to pick up all DTs from here, move the overlays that
-are normally applied during DT fixup to the kernel source as well. Hook
-then into the build nevertheless to ensure that regular checks are
-performed.
+Main differences between the new variant and Advanced PG2:
 
+1. Arduino interface is removed. Instead, an new ASIC is added for
+   communicating with PLC 1200 signal modules.
+2. USB 3.0 type A connector is removed, only USB 2.0 type A connector is
+   avaiable.
+3. DP interface is tailored down. Instead, to communicate with the
+   PLC 1200 signal modules, a USB 3.0 type B connector is added but the
+   signal is not USB.
+4. DDR size is increased to 4 GB.
+5. Two sensors are added, one tilt sensor and one light sensor.
+
+Signed-off-by: Baocheng Su <baocheng.su@siemens.com>
+[Jan: rebased over OF_UPSTREAM]
 Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
-Link: https://lore.kernel.org/r/91f8b825467651ebd51a4051f153ab136eeb1849.1724830741.git.jan.kiszka@siemens.com
-Signed-off-by: Nishanth Menon <nm@ti.com>
-
-[ upstream commit: dba27d026fc841d28a0ed373f617cc84ec0e4504 ]
-
-(cherry picked from commit 741915246a92fc4c21537f9623a69612f7cef03a)
 ---
- ...48-iot2050-advanced-m2-bkey-ekey-pcie.dtso | 27 +++++++++++
- ...-am6548-iot2050-advanced-m2-bkey-usb3.dtso | 47 +++++++++++++++++++
- 2 files changed, 74 insertions(+)
- create mode 100644 dts/upstream/src/arm64/ti/k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie.dtso
- create mode 100644 dts/upstream/src/arm64/ti/k3-am6548-iot2050-advanced-m2-bkey-usb3.dtso
+ arch/arm/dts/k3-am65-iot2050-boot-image.dtsi      |  5 ++++-
+ .../dts/k3-am6548-iot2050-advanced-sm-u-boot.dtsi |  1 +
+ board/siemens/iot2050/board.c                     | 15 ++++++++++++++-
+ configs/iot2050_defconfig                         |  2 +-
+ doc/board/siemens/iot2050.rst                     |  4 +++-
+ 5 files changed, 23 insertions(+), 4 deletions(-)
+ create mode 120000 arch/arm/dts/k3-am6548-iot2050-advanced-sm-u-boot.dtsi
 
-diff --git a/dts/upstream/src/arm64/ti/k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie.dtso b/dts/upstream/src/arm64/ti/k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie.dtso
-new file mode 100644
-index 00000000000..666237f6d79
+diff --git a/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi b/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
+index 1b31d412b4c..f49d6f262f2 100644
+--- a/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
++++ b/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
+@@ -229,7 +229,10 @@
+ 		};
+ 
+ 		fit@380000 {
+-			fit,fdt-list-val = "ti/k3-am6528-iot2050-basic-pg2", "ti/k3-am6548-iot2050-advanced-pg2", "ti/k3-am6548-iot2050-advanced-m2";
++			fit,fdt-list-val = "ti/k3-am6528-iot2050-basic-pg2",
++					   "ti/k3-am6548-iot2050-advanced-pg2",
++					   "ti/k3-am6548-iot2050-advanced-m2",
++					   "ti/k3-am6548-iot2050-advanced-sm";
+ 
+ 			images {
+ 				bkey-usb3-overlay {
+diff --git a/arch/arm/dts/k3-am6548-iot2050-advanced-sm-u-boot.dtsi b/arch/arm/dts/k3-am6548-iot2050-advanced-sm-u-boot.dtsi
+new file mode 120000
+index 00000000000..859776d3ffe
 --- /dev/null
-+++ b/dts/upstream/src/arm64/ti/k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie.dtso
-@@ -0,0 +1,27 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * IOT2050 M.2 variant, overlay for B-key PCIE0_LANE0 + E-key PCIE1_LANE0
-+ * Copyright (c) Siemens AG, 2022-2024
-+ *
-+ * Authors:
-+ *   Chao Zeng <chao.zeng@siemens.com>
-+ *   Jan Kiszka <jan.kiszka@siemens.com>
-+ */
++++ b/arch/arm/dts/k3-am6548-iot2050-advanced-sm-u-boot.dtsi
+@@ -0,0 +1 @@
++k3-am6528-iot2050-basic-pg2-u-boot.dtsi
+\ No newline at end of file
+diff --git a/board/siemens/iot2050/board.c b/board/siemens/iot2050/board.c
+index 9d4c9cf1b31..e6bedc38917 100644
+--- a/board/siemens/iot2050/board.c
++++ b/board/siemens/iot2050/board.c
+@@ -174,6 +174,14 @@ static bool board_is_m2(void)
+ 		strcmp((char *)info->name, "IOT2050-ADVANCED-M2") == 0;
+ }
+ 
++static bool board_is_sm(void)
++{
++	struct iot2050_info *info = IOT2050_INFO_DATA;
 +
-+/dts-v1/;
-+/plugin/;
++	return info->magic == IOT2050_INFO_MAGIC &&
++		strcmp((char *)info->name, "IOT2050-ADVANCED-SM") == 0;
++}
 +
-+#include <dt-bindings/phy/phy.h>
-+#include <dt-bindings/gpio/gpio.h>
-+
-+&pcie0_rc {
-+	num-lanes = <1>;
-+	phys = <&serdes0 PHY_TYPE_PCIE 1>;
-+	phy-names = "pcie-phy0";
-+	reset-gpios = <&main_gpio1 15 GPIO_ACTIVE_HIGH>;
-+	status = "okay";
-+};
-+
-+&pcie1_rc {
-+	status = "okay";
-+};
-diff --git a/dts/upstream/src/arm64/ti/k3-am6548-iot2050-advanced-m2-bkey-usb3.dtso b/dts/upstream/src/arm64/ti/k3-am6548-iot2050-advanced-m2-bkey-usb3.dtso
-new file mode 100644
-index 00000000000..0f86235c977
---- /dev/null
-+++ b/dts/upstream/src/arm64/ti/k3-am6548-iot2050-advanced-m2-bkey-usb3.dtso
-@@ -0,0 +1,47 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * IOT2050 M.2 variant, overlay for B-key USB3.0 + E-key PCIE1_LANE0
-+ * Copyright (c) Siemens AG, 2022-2024
-+ *
-+ * Authors:
-+ *   Chao Zeng <chao.zeng@siemens.com>
-+ *   Jan Kiszka <jan.kiszka@siemens.com>
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+#include <dt-bindings/phy/phy.h>
-+#include <dt-bindings/gpio/gpio.h>
-+
-+&serdes0 {
-+	assigned-clock-parents = <&k3_clks 153 7>, <&k3_clks 153 4>;
-+};
-+
-+&pcie0_rc {
-+	status = "disabled";
-+};
-+
-+&pcie1_rc {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&minipcie_pins_default>;
-+
-+	num-lanes = <1>;
-+	phys = <&serdes1 PHY_TYPE_PCIE 0>;
-+	phy-names = "pcie-phy0";
-+	reset-gpios = <&wkup_gpio0 27 GPIO_ACTIVE_HIGH>;
-+	status = "okay";
-+};
-+
-+&dwc3_0 {
-+	assigned-clock-parents = <&k3_clks 151 4>,  /* set REF_CLK to 20MHz i.e. PER0_PLL/48 */
-+				 <&k3_clks 151 8>;  /* set PIPE3_TXB_CLK to WIZ8B2M4VSB */
-+	phys = <&serdes0 PHY_TYPE_USB3 0>;
-+	phy-names = "usb3-phy";
-+};
-+
-+&usb0 {
-+	maximum-speed = "super-speed";
-+	snps,dis-u1-entry-quirk;
-+	snps,dis-u2-entry-quirk;
-+};
+ static void remove_mmc1_target(void)
+ {
+ 	char *boot_targets = strdup(env_get("boot_targets"));
+@@ -189,7 +197,10 @@ static void remove_mmc1_target(void)
+ 
+ static void enable_pcie_connector_power(void)
+ {
+-	set_pinvalue("gpio@601000_17", "P3V3_PCIE_CON_EN", 1);
++	if (board_is_sm())
++		set_pinvalue("gpio@601000_22", "P3V3_PCIE_CON_EN", 1);
++	else
++		set_pinvalue("gpio@601000_17", "P3V3_PCIE_CON_EN", 1);
+ 	udelay(4 * 100);
+ }
+ 
+@@ -230,6 +241,8 @@ void set_board_info_env(void)
+ 			fdtfile = "ti/k3-am6548-iot2050-advanced.dtb";
+ 		else if (board_is_m2())
+ 			fdtfile = "ti/k3-am6548-iot2050-advanced-m2.dtb";
++		else if (board_is_sm())
++			fdtfile = "ti/k3-am6548-iot2050-advanced-sm.dtb";
+ 		else
+ 			fdtfile = "ti/k3-am6548-iot2050-advanced-pg2.dtb";
+ 	} else {
+diff --git a/configs/iot2050_defconfig b/configs/iot2050_defconfig
+index 78db6d21099..2624f0cb573 100644
+--- a/configs/iot2050_defconfig
++++ b/configs/iot2050_defconfig
+@@ -80,7 +80,7 @@ CONFIG_CMD_TIME=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_UPSTREAM=y
+-CONFIG_OF_LIST="ti/k3-am6528-iot2050-basic ti/k3-am6528-iot2050-basic-pg2 ti/k3-am6548-iot2050-advanced ti/k3-am6548-iot2050-advanced-pg2 ti/k3-am6548-iot2050-advanced-m2"
++CONFIG_OF_LIST="ti/k3-am6528-iot2050-basic ti/k3-am6528-iot2050-basic-pg2 ti/k3-am6548-iot2050-advanced ti/k3-am6548-iot2050-advanced-pg2 ti/k3-am6548-iot2050-advanced-m2 ti/k3-am6548-iot2050-advanced-sm"
+ CONFIG_OF_OVERLAY_LIST="ti/k3-am6548-iot2050-advanced-m2-bkey-usb3 ti/k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie"
+ CONFIG_SPL_MULTI_DTB_FIT=y
+ CONFIG_SPL_OF_LIST="ti/k3-am6528-iot2050-basic"
+diff --git a/doc/board/siemens/iot2050.rst b/doc/board/siemens/iot2050.rst
+index d0c0a412097..37b23f6146b 100644
+--- a/doc/board/siemens/iot2050.rst
++++ b/doc/board/siemens/iot2050.rst
+@@ -8,7 +8,9 @@ The SIMATIC IOT2050 is an open industrial IoT gateway that is using the TI
+ AM6528 GP (Basic variant) or the AM6548 HS (Advanced variant). The Advanced
+ variant is prepared for secure boot. M.2 Variant also uses the AM6548 HS.
+ Instead of a MiniPCI connector, it comes with two M.2 connectors and can
+-support 5G/WIFI/BT applications or connect an SSD.
++support 5G/WIFI/BT applications or connect an SSD. Compared with the AM6548
++Advanced variant, SM variant removes the Arduino interface, and adds a new
++ASIC for communicating with the PLC 1200 signal modules.
+ 
+ The IOT2050 starts only from OSPI. It loads a Siemens-provided bootloader
+ called SE-Boot for the MCU domain (R5F cores), then hands over to ATF and
 -- 
 2.43.0
 
