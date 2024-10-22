@@ -4,69 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CDBFD1CDC7
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 09:33:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F76BD1CDD1
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 10:04:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7910488F4B;
-	Tue, 22 Oct 2024 11:33:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id EBBEA88F50;
+	Tue, 22 Oct 2024 12:04:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="VFppT++P";
+	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="ngmBLn62";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C75DC88F4B; Tue, 22 Oct 2024 11:33:27 +0200 (CEST)
-Received: from mx2.securetransport.de (mx2.securetransport.de
- [IPv6:2a03:4000:13:6c7::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B83DC88F4B; Tue, 22 Oct 2024 12:04:41 +0200 (CEST)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on2070a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::70a])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA2FF88D9C
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 11:33:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ by phobos.denx.de (Postfix) with ESMTPS id 80FE288D9E
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 12:04:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1729589469;
- bh=z2UHSG6hzXAEg76IuAdRnquICa4aisbQIqfsEcE79s4=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=VFppT++PTAWchVzAan39A3fpY79BzHVR32zAdkSnBA43vetpKTCSIIhch8mMOxAPE
- tBMLXX7jEh8kyudbiyrveBSAwSc5Wtb9hgrRO9hJiZDretxQSDPOrm9Qk6/wMhJ9xa
- rdbdKptuxhGtXzGnZi7kM1C1a1ucTro59pC7Jhx6DfbhGRz+7F9TjSrjHKea6Gbv+9
- ArorJF7R1OzZd8FJl6iJb2tB+VJVdOO5YAlomUMhjL5lMqieLsk3DfR4mGDhbN9HCm
- L7iF29e4J4ka0r7MPGxrKBI90ApkMZRs+w7ESCdo/wRvi/riekUL50M0g2bVDf/XsZ
- WunJmWF1tmULQ==
-X-secureTransport-forwarded: yes
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Fabio Estevam
- <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
- <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
-Subject: RE: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
- EEPROM ID page on DH i.MX8MP DHCOM
-Thread-Topic: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
- EEPROM ID page on DH i.MX8MP DHCOM
-Thread-Index: AQHbGxfHmD5+3BWcGkWm07IML/aPr7KDeoyAgAXUiUCAAK5vAIAA1rQQgABasgCABjFZgIAAYh8AgADI4vA=
-Date: Tue, 22 Oct 2024 09:31:08 +0000
-Message-ID: <d06620ee891f4e419bfeb8fe657ba729@dh-electronics.com>
-References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
- <20241010132337.3259-2-cniedermaier@dh-electronics.com>
- <934d25c2-39d8-4f51-b29e-8f20feb7431f@denx.de>
- <a305b1455a984fca83de5a6c0d4b8dfc@dh-electronics.com>
- <74bd0a6b-fe12-4e2c-af79-c1f8ffb7d484@denx.de>
- <73ccb69b85094e24be2343d5cbc8879a@dh-electronics.com>
- <17b9380b-39c0-40f2-bb28-319d26b2e13c@denx.de>
- <7b9b543d7aad498591fa6a04a3154cf8@dh-electronics.com>
- <a0f70ee2-6d71-4f66-b22e-994df2b28504@denx.de>
-In-Reply-To: <a0f70ee2-6d71-4f66-b22e-994df2b28504@denx.de>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NyS4of+kq1QTmaePWZ+E2uj/OoxJlpB0t2YHdCiy4p61gy/wPWc8K/SGK4yQxgZuF2i50MFwk/ZMe6ljt1KYxWhpvn3ObOXJKpmiCPXxfVx8C3uk73rv0jKL4tIEfD5hbpUEa/3jLtdqyZGXGezqXVvXOYvThIbvYSZBpRb0OUY+YPn3XBLUaDRSiQwS2ki5BY9C3eRPdbdAyWBcOXWLlBoujLiEbUGvlXLyUWPEWGxvBl10RVzp1h1Z6j20850IRjKFobGgHoJSv4zh7/UKoDkTcjjhpsmePiLj5pCRULhT3/31eJJecmtMZiE6Yymur9JR8FwODuVwG4e426gL0w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xzMUKLRkggeXwZYE+MsLnPfWwoLmVASVIRLoYsOCsRI=;
+ b=tSHmBXw4ckAttm4pdviE4y1hU5Qlw6A5krgFi6dmnkgJEWIZXXKkhd9RWo1NEEyJt/HB5i3wLdQdkkvMl8Jk/ElHv15oUklXtw1RwKDVe1WRYUBS9290VqS22kXpe0/gj4zVeQq0uzA/S4iTvq7PuQMYXwnWyS+AkghPJhIwgWB49sC+UC2O5e2AS0oXjql19FDQgK/kqdf9YXH1hbqUY7mbzHWJX9oUz2abVVVG3uizgk1vFAFabA7SfnO12WIa53YPi0wMFFbrW54nQwQ+U5pdyiZOT6mC5+9v7PZ+60dTffrnvryIhirm92zbRRhmp5WGtz/Dm9Huq+TNqdvCwQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=ti.com smtp.mailfrom=phytec.de; dmarc=none
+ action=none header.from=phytec.de; dkim=none (message not signed); arc=none
+ (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=phytecmesstechnikgmbh.onmicrosoft.com;
+ s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xzMUKLRkggeXwZYE+MsLnPfWwoLmVASVIRLoYsOCsRI=;
+ b=ngmBLn627RZom4iuMrBzILdZvgUAUYDrTe3mHSIS1tE+Y/ikPRn/ZJWAxmUZI9PVRSyX5s6t6p58IWQLX6/ShzYibwZyIuOp6MCYUE4RpK0QkwOB6H2EiiNuqkxuhK+0SYGvnjS7OqsNqKufmF8i81ysjSf0wImT9Jbi+trWCtw=
+Received: from DB6PR0301CA0102.eurprd03.prod.outlook.com (2603:10a6:6:30::49)
+ by DB8P195MB0536.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:15f::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.16; Tue, 22 Oct
+ 2024 10:04:36 +0000
+Received: from DB1PEPF0003922E.eurprd03.prod.outlook.com
+ (2603:10a6:6:30:cafe::42) by DB6PR0301CA0102.outlook.office365.com
+ (2603:10a6:6:30::49) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.29 via Frontend
+ Transport; Tue, 22 Oct 2024 10:04:35 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ DB1PEPF0003922E.mail.protection.outlook.com (10.167.8.101) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8093.14 via Frontend Transport; Tue, 22 Oct 2024 10:04:35 +0000
+Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 22 Oct
+ 2024 12:04:34 +0200
+Received: from [192.168.0.212] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 22 Oct
+ 2024 12:04:34 +0200
+Message-ID: <94cc6dcf-fe92-414f-b5f6-5797c8fa64ff@phytec.de>
+Date: Tue, 22 Oct 2024 12:04:33 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 7/8] board: ti: Pull redundant DDR functions to a
+ common location and Fixup DDR size when ECC is enabled
+To: Santhosh Kumar K <s-k6@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>, 
+ <nm@ti.com>, <u-kumar1@ti.com>, <vigneshr@ti.com>, <bb@ti.com>
+CC: <u-boot@lists.denx.de>, <n-francis@ti.com>
+References: <20241021044024.835846-1-s-k6@ti.com>
+ <20241021044024.835846-8-s-k6@ti.com>
+Content-Language: en-US
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20241021044024.835846-8-s-k6@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB1PEPF0003922E:EE_|DB8P195MB0536:EE_
+X-MS-Office365-Filtering-Correlation-Id: da424d5c-8e76-45c2-5dfa-08dcf280ee90
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VGU5RmNJbWQ4c2tNOFJ2aEpBcGtMbzRsbmNxcHAxU1JmMy9Fc25yS0ZGZVhl?=
+ =?utf-8?B?ZGVmcnhkd3gxS2JJaFZ3bHF0aXoyVi8wcGlWREJJRXArZUVaRGM1Ui9lZ0FF?=
+ =?utf-8?B?RnNpNURIbnJ0VGtPaXgwRnlEdkszcVZlMWlFUVFvdkJHdUNudTkxYlFhZDJ3?=
+ =?utf-8?B?aTdKTVhYZmZMdjRXaE9taGhCOXdaRTYrbWYwL0RMbXh2N0R5OThlY25ocVBl?=
+ =?utf-8?B?dlArRGF5VUZPZGdaekdLVEZBQnhXcUFwMTYxS0tna2dvQkc0V2lJZnZEQW9Q?=
+ =?utf-8?B?cjgyUjFsOHczMk1XSjRETXYxRS8xZzFZYi9rWUU4cXNBc0Q2Ukk5QlpvaWQr?=
+ =?utf-8?B?aDlSQmU0QklMREJQUzVtWGEvL1VLNm0yMWtsZVJXNkYvTHZGeHlaTUx6aUc4?=
+ =?utf-8?B?d2RTcDJHSDAyYjYrNDVOUU5xaDVsZzdobkdKbE1OSTY1ckl1czdac0xtZTN6?=
+ =?utf-8?B?dnpGelJ3dTVBT1lZdWl6QW1yZ0I0bjdWb3Z5UnlJUW1jakNxK2dlYmZXL3B0?=
+ =?utf-8?B?aERxQ2s3ODFiN2tPbUdpcy81MjRUUTdmVlVsU20zTDF6dmM0anlHMkx5b1Z1?=
+ =?utf-8?B?TnlCN1Y1bktXZXZkWkREWDlOMmpXNXlCK25KeEE5VU1jamZuUS9VelF5cE8v?=
+ =?utf-8?B?OFh4NFZxWmtGclJGS2lMVVA0U2pBczNmMlpjTFd4blkzZkhIeE0rYVpTNGt6?=
+ =?utf-8?B?cVFKTDdhclFnalVDYnlkSHJYd05iY1hpUmVkSkxhUyttYXZuK2xCdmlHSlo5?=
+ =?utf-8?B?Vi9YOEVzMk0zb2lWcU51cEZ0VDFwRmQ3TWtCZ3pGS2xGMDczQWZQSXlFRTBG?=
+ =?utf-8?B?K0RZWkRPQjlvcGNFNW1SUzBuRk1ZZ2NmeExXNDBvV1hlRWVHeDBFYlhlbXQ5?=
+ =?utf-8?B?Misrc0JNdTlJN1hqbDEyWVNnWDAvQmJRZERZODhkQlpzdmNyRzVMMExrUlpX?=
+ =?utf-8?B?NVN2V3FPSEYzd0ZyWDd4WmQ1RG5BVk5IZFFOdldBVGNoby9YWlJOUkkrLzVZ?=
+ =?utf-8?B?NnJlQytUWm4zK3kxZk9yOEZCbnFsU2UwKzN6THFYeXUxZktkRTZPMmZtcW1E?=
+ =?utf-8?B?empqNGlSM1ZLL1lBUC9qZlVvNllFbS92MytpTnExN0xSZ3NXVVBRdVlMdisr?=
+ =?utf-8?B?eHNTbU93TzFTbmVBYnBGUnVuaU1ML3hLRzhYZ2U5cE1RMHhGNlpFVFJBWVR5?=
+ =?utf-8?B?OTlwbHBYckpDbDVSSzJHa1hrbHBwZG1RY3UrQytRZW5CNnZmaDBjTXc3RW5Z?=
+ =?utf-8?B?c1AwTzQ5WVJ3bE5vZjhOYzlvV0R0c3Q5Q013NFdkZVZqVHFkTk5ibDhCWlBQ?=
+ =?utf-8?B?Smk4YlpFZ2FYUURvNldXZERjZkZvWE03RWVnT3lYdEVLcUo3NzR1RUJaL2tZ?=
+ =?utf-8?B?L3l3dUd5Zkp2QWJXWWNkR2dtTnlKMjRJRWZaSFVQSWkveExTR1ZCbkp1T3dt?=
+ =?utf-8?B?V243STBMc0t3YSswQitHd1grNCtlQzF6L0lPZHE3dWZ4eXZmb3pwcDhIK3hQ?=
+ =?utf-8?B?NmhxTnhhSFgxbmc2eFMrVUE3ZzJCazN6aE1vSXlha29ROWZBdnhqU1NPSC9B?=
+ =?utf-8?B?UU93dnJuTFI1RHZIaWV3eld2QXJ2QkN3TXJOYXJyejVFK25zMkgrdXhoaldR?=
+ =?utf-8?B?K1Z0QWFhYmpQbHh5eEpxYnM3ZlpXRVhQcVpVeEVMZUViNGxXS21zUGN4c3c5?=
+ =?utf-8?B?UVFHdW02UzIrbDNOTURmZG1pUy9JYyt0SWsvNDBrRTdidHk4VXNjQUJBNlBG?=
+ =?utf-8?B?bTd4bUlpdmt5N1BlTE5RakFBUllzRXhMdG4zd082aWtIRkg5VzFtbi9nSzAx?=
+ =?utf-8?B?Y2k3bmtld0NQVmRWbkNBZisxeC9MWjFBT0hHc1RaN3lJT1BmT0lkcnN2RjEr?=
+ =?utf-8?B?cHN6eW5aYWxyUTBkV1NSWUFpZGxMbEpkemlnbFdGbWJrN0E9PQ==?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2024 10:04:35.1317 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: da424d5c-8e76-45c2-5dfa-08dcf280ee90
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF0003922E.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8P195MB0536
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,60 +161,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQpTZW50OiBUdWVzZGF5LCBPY3RvYmVy
-IDIyLCAyMDI0IDE6MDEgQU0NCj4gT24gMTAvMjEvMjQgNTozOCBQTSwgQ2hyaXN0b3BoIE5pZWRl
-cm1haWVyIHdyb3RlOg0KPiANCj4gWy4uLl0NCj4gDQo+Pj4gSWYgeWVzLCB0aGVuIHRoZXJlIGlz
-IG5vIG5lZWQgZm9yIGFueSBzdGF0aWMgdmFyaWFibGU6DQo+Pj4NCj4+PiBib2FyZF9pbml0KCkg
-ew0KPj4+ICAgIHU4IGVlcHJvbVszMl07DQo+Pj4gICAgZGhfcmVhZF9lZXByb21fd2xwKGVlcHJv
-bSk7IC8vIHJlYWQgdGhlIGVlcHJvbSBvbmNlDQo+Pj4gICAgZGhfc2V0dXBfbWFjX2FkZHJlc3Mo
-ZWVwcm9tKTsgLy8gZXh0cmFjdCBNQUMgZnJvbSBFRVBST00NCj4+PiAgICBkaF9hZGRfaXRlbV9u
-dW1iZXJfYW5kX3NlcmlhbF90b19lbnYoZWVwcm9tKTsgLy8gZXh0cmFjdCBTTiBmcm9tIEVFUFJP
-TQ0KPj4+ICAgIC8vIG9uY2UgdGhpcyBmdW5jdGlvbiBleGl0cywgdGhlIGVlcHJvbSB2YXJpYWJs
-ZSBvbiBzdGFjayBpcyBkaXNjYXJkZWQNCj4+PiAgICAvLyB3aGljaCBpcyBPSywgc2luY2UgaXQg
-d29uJ3QgYmUgdXNlZCBhbnltb3JlIGFueXdheQ0KPj4+IH0NCj4+DQo+PiBUaGUgaWRlYSBpcyB0
-aGF0IGZ1bmN0aW9uIGRoX2FkZF9pdGVtX251bWJlcl9hbmRfc2VyaWFsX3RvX2VudigpIGVuY2Fw
-c3VsYXRlcw0KPj4gdGhlIHJlYWRpbmcuDQo+IA0KPiBUaGUgZnVuY3Rpb24gd2hpY2ggaW50ZXJh
-Y3RzIHdpdGggdGhlIEVFUFJPTSBvbiBzdGFydCB1cCwgb25jZSwgY2FuIGhhdmUNCj4gdGhpcyBu
-YW1lLCBzdXJlLg0KDQpTb3JyeSwgSSBtZWFuIHRoZSBmdW5jdGlvbiBkaF9nZXRfdmFsdWVfZnJv
-bV9lZXByb21faWRfcGFnZSgpIGhlcmUuDQoNCj4+IEkgZG9uJ3Qgd2FudCB0byBoYXZlIHRvIHdv
-cnJ5IGFib3V0IHRoZSBzdHJ1Y3R1cmUgYW5kIG51bWJlciBvZg0KPj4gYnl0ZXMgb2YgdGhlIEVF
-UFJPTSBJRCBwYWdlIGFuZCB3YW50IHRvIGJlIGluZGVwZW5kZW50IG9mIGl0LiBJdCBpcyBwbGFu
-bmVkIHRvDQo+PiBleHRlbmQgdGhlIHN0cnVjdHVyZSBhbmQgaW5jcmVhc2UgdGhlIG51bWJlciBv
-ZiBieXRlcyBmb3IgdGhlIFNUTTMyTVAyLiBUaGUNCj4+IGNoYW5nZXMgdG8gdGhlIHNpemUgd2ls
-bCB0aGVuIGRlcGVuZCBvbiB0aGUgdmVyc2lvbiBvZiB0aGUgZGF0YSBpbiB0aGUgaGVhZGVyDQo+
-PiB3aXRoaW4gdGhlIHN0cnVjdHVyZS4NCj4gDQo+IEl0IGlzIE9LIHRvIGFsbG9jYXRlIDMyIG9y
-IDY0IGJ5dGVzIG9uIHN0YWNrLCBzaW5jZSB0aGF0IGNodW5rIG9mIG1lbW9yeQ0KPiBpcyBmcmVl
-J2Qgb24gcmV0dXJuIGZyb20gdGhlIGZ1bmN0aW9uLiBUaGUgbGlmZXNwYW4gb2YgdGhhdCBhbGxv
-Y2F0ZWQNCj4gbWVtb3J5IGlzIGV4YWN0bHkgYXMgbG9uZyBhcyBpdCBzaG91bGQgYmUsIGFuZCBp
-dCBkb2VzIG5vdCB3YXN0ZSBVLUJvb3QNCj4gbWVtb3J5IHVubmVjZXNzYXJpbHkuDQo+IA0KPiBT
-byBmYXIsIGFsbCBrbm93biBFRVBST01zIGhhdmUgV0xQIHNpemUgb2YgMzIgb3IgNjQgQnllcy4N
-Cj4gDQo+PiBIb3dldmVyLCB0aGVzZSBjaGFuZ2VzIHNob3VsZCB0aGVuIG9ubHkgaGF2ZSB0byBi
-ZSBtYWRlDQo+PiB3aXRoaW4gdGhlIGZ1bmN0aW9uIGRoX2FkZF9pdGVtX251bWJlcl9hbmRfc2Vy
-aWFsX3RvX2VudigpIGZvciByZWFkaW5nIHRoZQ0KPj4gRUVQUk9NIElEIHBhZ2UuIEkgYWNjZXB0
-IHRoZSBzdGF0aWMgdmFyaWFibGUgaW4gb3JkZXIgdG8gYmV0dGVyIGlzb2xhdGUgdGhlDQo+PiBm
-dW5jdGlvbi4NCg0KU29ycnksIGhlcmUgSSBtZWFuIGFsc28gdGhlIGZ1bmN0aW9uIGRoX2dldF92
-YWx1ZV9mcm9tX2VlcHJvbV9pZF9wYWdlKCkuDQoNCj4gVGhpcyBjYW4gdmVyeSB3ZWxsIGJlOg0K
-PiANCj4gZGhfYWRkX2l0ZW1fbnVtYmVyX2FuZF9zZXJpYWxfdG9fZW52KCkgew0KPiAgICAgdTgg
-ZWVwcm9tWzMyXTsNCj4gICAgIGRoX3JlYWRfZWVwcm9tX3dscChlZXByb20pOyAvLyByZWFkIHRo
-ZSBlZXByb20gb25jZQ0KPiAgICAgZGhfc2V0dXBfbWFjX2FkZHJlc3MoZWVwcm9tKTsgLy8gZXh0
-cmFjdCBNQUMgZnJvbSBFRVBST00NCj4gICAgIGRoX2FkZF9pdGVtX251bWJlcl9hbmRfc2VyaWFs
-X3RvX2VudihlZXByb20pOyAvLyBleHRyYWN0IFNOIGZyb20gRUVQUk9NDQo+ICAgICAvLyBvbmNl
-IHRoaXMgZnVuY3Rpb24gZXhpdHMsIHRoZSBlZXByb20gdmFyaWFibGUgb24gc3RhY2sgaXMgZGlz
-Y2FyZGVkDQo+ICAgICAvLyB3aGljaCBpcyBPSywgc2luY2UgaXQgd29uJ3QgYmUgdXNlZCBhbnlt
-b3JlIGFueXdheQ0KPiB9DQo+IA0KPiBib2FyZF9pbml0KCkgew0KPiAgICAuLg0KPiAgICBkaF9h
-ZGRfaXRlbV9udW1iZXJfYW5kX3NlcmlhbF90b19lbnYoKTsNCj4gICAgLi4uDQo+IH0NCj4gDQo+
-PiBTaW5jZSB0aGUgbWVtb3J5IGlzIGZyZWVkIHVwIGFnYWluIHdoZW4gdGhlIG9wZXJhdGluZyBz
-eXN0ZW0gYm9vdHMsDQo+PiB0aGlzIGNvbnN1bXB0aW9uIG9mIDMyIGJ5dGVzIGluIFUtQm9vdCBp
-cyBub3QgYSBwcm9ibGVtLCBiZWNhdXNlIGl0IGlzIG9ubHkNCj4+IHRlbXBvcmFyeS4NCj4gVGhp
-cyBpcyBub3QgZ29vZCwgcGxlYXNlIGRvIG5vdCB3YXN0ZSBtZW1vcnkgaW4gVS1Cb290IGlmIGl0
-IGNhbiBiZQ0KPiBlYXNpbHkgYXZvaWRlZCBieSBhdXRvbWF0aWNhbGx5IGFsbG9jYXRpbmcgaXQg
-b24gc3RhY2sgYW5kIGZyZWVpbmcgaXQNCj4gd2hlbiBub3QgbmVlZGVkLg0KPiANCj4gWy4uLl0N
-Cg0KSSBkb24ndCB3YW50IHRvIGFsbG9jYXRlIHRoZSBtZW1vcnkgaW4gdGhlIGZ1bmN0aW9uIGJv
-YXJkX2luaXQoKS4gSSB3YW50IHRvIGhhbmRsZQ0Kc2l6ZSBhbmQgY2FjaGluZyBpbiB0aGUgZnVu
-Y3Rpb24gZGhfZ2V0X3ZhbHVlX2Zyb21fZWVwcm9tX2lkX3BhZ2UoKS4gU28gSSBkb24ndA0Kd2Fu
-dCB0byBkZWFsIHdpdGggc2l6ZSBhbmQgc3RydWN0dXJlIGluIHRoZSBmdW5jdGlvbiBib2FyZF9p
-bml0KCkuIEZvciBtZSwgdGhlIHVzZQ0Kb2YgYSBzdGF0aWMgdmFyaWFibGUgaXMgT0ssIGJ1dCB5
-b3UgZG9uJ3QgbGlrZSBpdC4gRG8geW91IGtub3cgaG93IEkgY2FuIGRvIHRoaXMNCndpdGhvdXQg
-YXNzaWduaW5nIGEgc3RhdGljIHZhcmlhYmxlLCBidXQgbm90IGFsbG9jYXRlIHRoZSBtZW1vcnkg
-c29tZXdoZXJlIGluIGENCmNhbGxlciBmdW5jdGlvbj8NCg0KDQpSZWdhcmRzDQpDaHJpc3RvcGgN
-Cg==
+Hi Santhosh,
+
+Am 21.10.24 um 06:40 schrieb Santhosh Kumar K:
+> As there are few redundant functions in board/ti/*/evm.c files, pull
+> them to a common location of access to reuse and include the common file
+> to access the functions.
+> 
+> Call k3-ddrss driver through fixup_ddr_driver_for_ecc() to fixup the
+> device tree and resize the available amount of DDR, if ECC is enabled.
+> Otherwise, fixup the device tree using the regular
+> fdt_fixup_memory_banks().
+> 
+> Also call dram_init_banksize() after every call to
+> fixup_ddr_driver_for_ecc() is made so that gd->bd is populated
+> correctly.
+> 
+> Ensure that fixup_ddr_driver_for_ecc() is agnostic to the number of DDR
+> controllers present.
+> 
+> Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+<snip>
+
+> +obj-y += common.o security.o k3-ddr.o
+>   obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
+>   obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
+>   obj-$(CONFIG_SOC_K3_AM625) += am62x/
+> diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
+> new file mode 100644
+> index 000000000000..754e9ba29dac
+> --- /dev/null
+<snip>
+
+> +#include <fdt_support.h>
+> +#include <dm/uclass.h>
+> +#include <k3-ddrss.h>
+> +#include <spl.h>
+> +
+> +#include <asm/arch/k3-ddr.h>
+> +
+> +int dram_init(void)
+> +{
+> +        s32 ret;
+> +
+> +        ret = fdtdec_setup_mem_size_base_lowest();
+> +        if (ret)
+> +                printf("Error setting up mem size and base. %d\n", ret);
+> +
+> +        return ret;
+> +}
+> +
+> +int dram_init_banksize(void)
+> +{
+> +        s32 ret;
+> +
+> +        ret = fdtdec_setup_memory_banksize();
+> +        if (ret)
+> +                printf("Error setting up memory banksize. %d\n", ret);
+> +
+> +        return ret;
+> +}
+> +Moving dram_init() and dram_init_banksize() into a generic part forces 
+every K3 based board to use your implementation.
+
+This also breaks the builds for phycore_am62x, phycore_am64x and also 
+the verdin-am62,
+
+   phycore-am62x.c:49: multiple definition of `dram_init'
+   phycore-am62x.c:97: multiple definition of `dram_init_banksize
+
+Regards,
+Wadim
