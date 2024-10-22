@@ -4,79 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B65FD1CDC7
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 09:20:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB79D1CDC8
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 09:22:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90D9888F50;
-	Tue, 22 Oct 2024 11:20:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 19A3988D9C;
+	Tue, 22 Oct 2024 11:22:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ZEI074Ml";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g8zO09It";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A10588FA5; Tue, 22 Oct 2024 11:20:43 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1663088F50; Tue, 22 Oct 2024 11:22:16 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7195588F4B
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 11:20:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 223AC88969
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 11:22:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4316e9f4a40so27767925e9.2
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 02:20:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729588841; x=1730193641;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=J0O1mhMetq5CnE7K4iiqKSrt+s0FH2MrOyrlLmCCNeo=;
- b=ZEI074Mlpt/QckDx4v8er73NrQOrTvILJWWvPIvrAZx3wujNJHhTfJzpJnWSpTwByS
- BZ4yDDfDdbiANnoQiOHp3wM/hvInOpP/H9Nw7q2nBHT/iLU2NibB+kau6BkylXQU9EuO
- rjMPgYYddvc9mzOs7h09Ka5KJFELSTtzmCbedRDqMcse9kkPJADMNw+Ce1pLVs3lkeVf
- +uokJhUE0l2aqnUR1W/Gr2bOBj+Veur0XOvbxoar1rktsa1lyy4FFvYv9gD3WiuuKvwr
- MduqauVZuDOkLTeXwBGrktbS1S95RRU1VHOsPpsCnj/yYpXq2SLOFjRWLuf/Brh/l8CD
- Aa6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729588841; x=1730193641;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=J0O1mhMetq5CnE7K4iiqKSrt+s0FH2MrOyrlLmCCNeo=;
- b=iCnKVWWRK6YytAlZwVPhKjklp0EDL2+n4fnDyTtPmm7VLczDuGYZf6GdiJ3AgABLfT
- VccJFfp9nEpgtvLVOKDSiKaXEheIJTzB2R8+xbkuxAMczTNiXW/fLaeVnxY8e9i3o7WZ
- za0nDd8ByPpU7pzDeXSYfcK1Lnxq6WEY/vKjBh95hN2/mjMUx2oq2qVEhZw+BAHhxvBR
- ro2pvO9cyJsp6bzH4r98tAZyjpVNfrLyKO4kIYvaFn9VcTVfOkKYBtcxVf6RG5zSvScn
- L7BvJT2hAYS6bdP8FKFURwfCFBkEAfjMCy/l/49x0EH3FEGO0Fdk9nLJoOvz3Ozn90UR
- UNMg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUIq3nlX2/DFCsWddycJC/75KsExdU0SjwGePwba9B3Zn/dUG+D5ohdvH/wEYJ3vP+luuU2/8s=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYqlkb+C4LZLNwqZw2h+3GNDUyiJPn3k21fkWB2fvK1s/kSdD9
- bhu31T0E5s7Omdb8GdVWmroUDVfVmhMK5/ZncxkJM4p6MfGNCo9pgo/GpIrTsF4=
-X-Google-Smtp-Source: AGHT+IGH6GO4DdfW82elU34QMHf7q+ObQBXhFEfV7NaNreBrGxNrivLUfgS7G1W3QjQDnl0OoMS17w==
-X-Received: by 2002:a05:600c:474e:b0:431:47d4:19bd with SMTP id
- 5b1f17b1804b1-431616287aamr128223225e9.9.1729588840895; 
- Tue, 22 Oct 2024 02:20:40 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4316f5c2fa7sm83843545e9.34.2024.10.22.02.20.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Oct 2024 02:20:40 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: Guillaume La Roque <glaroque@baylibre.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 3/3] image: android: handle ramdisk default address
-In-Reply-To: <20241017-topic-fastboot-fixes-mkbootimg-v2-3-c3927102d931@linaro.org>
-References: <20241017-topic-fastboot-fixes-mkbootimg-v2-0-c3927102d931@linaro.org>
- <20241017-topic-fastboot-fixes-mkbootimg-v2-3-c3927102d931@linaro.org>
-Date: Tue, 22 Oct 2024 11:20:37 +0200
-Message-ID: <878qugwl22.fsf@baylibre.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49M9MBxe119204;
+ Tue, 22 Oct 2024 04:22:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1729588931;
+ bh=nykxh34mesOL0hf6R9WeTdM0zEFqPWfSMXnoTDksZFM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=g8zO09ItlQ+fqnATKRafaQwWyHKL62YbgF/sp9lB5uXrXToBYiSNKGX96cgSZUen4
+ LiEsPQCCxz/VVkTelZ4/wdnxHVTZ5Po6WRwNHT3D/JM131VFgNo6GkRuwm+nphlGJU
+ JFTba86GREudbEBhn9w49YE2ze4+SEc4UAc4NDSo=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49M9MB5a083362
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 22 Oct 2024 04:22:11 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
+ Oct 2024 04:22:10 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 22 Oct 2024 04:22:10 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
+ (may be forged))
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49M9M7m4114434;
+ Tue, 22 Oct 2024 04:22:08 -0500
+Message-ID: <9353d62b-128b-4814-a113-52959ba3c2ca@ti.com>
+Date: Tue, 22 Oct 2024 14:52:07 +0530
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 8/8] arm: dts: k3-*-ddr: Add ss_cfg reg entry
+To: Santhosh Kumar K <s-k6@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>, 
+ <nm@ti.com>, <u-kumar1@ti.com>, <vigneshr@ti.com>, <bb@ti.com>
+CC: <u-boot@lists.denx.de>, <w.egorov@phytec.de>
+References: <20241021044024.835846-1-s-k6@ti.com>
+ <20241021044024.835846-9-s-k6@ti.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20241021044024.835846-9-s-k6@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,100 +83,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
+Hi Santhosh
 
-Thank you for the patch.
-
-On jeu., oct. 17, 2024 at 16:44, Neil Armstrong <neil.armstrong@linaro.org> wrote:
-
-> The two tools that create android boot images, mkbootimg and the fastboot
-> client, set the kernel address by default to 0x11008000.
->
-> U-boot always honors this field, and will try to copy the ramdisk to
-> whatever value is set in the header, which won't be mapped to the actual
-> RAM on most platforms, resulting in the kernel obviously not booting.
->
-> All the targets in U-Boot right now will download the android boot image
-> to CONFIG_SYS_LOAD_ADDR, which means that it will already have been
-> downloaded to some location that is suitable to use the ramdisk in-place
-> for header version 0 to 2. For header version 3 and later, the ramdisk
-> can't be used in-place to use ramdisk_addr_r in this case.
->
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
+On 21/10/24 10:10, Santhosh Kumar K wrote:
+> Add ss_cfg memory region which maps the DDRSS configuration region
+> for the memory controller node.
+> 
+> Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 > ---
->  boot/image-android.c | 38 ++++++++++++++++++++++++++++++--------
->  1 file changed, 30 insertions(+), 8 deletions(-)
->
-> diff --git a/boot/image-android.c b/boot/image-android.c
-> index 3adcc69a392f74ae64f3fbcf1b85204f60ac9aff..cd01278f211d63262f2bdad7aa1176e2c1bbfedd 100644
-> --- a/boot/image-android.c
-> +++ b/boot/image-android.c
-> @@ -14,6 +14,7 @@
->  #include <linux/libfdt.h>
->  
->  #define ANDROID_IMAGE_DEFAULT_KERNEL_ADDR	0x10008000
-> +#define ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR	0x11000000
->  
->  static char andr_tmp_str[ANDR_BOOT_ARGS_SIZE + 1];
->  
-> @@ -405,9 +406,25 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
->  
->  	if (!img_data.ramdisk_size)
->  		return -ENOENT;
-> -
-> +	/*
-> +	 * Android tools can generate a boot.img with default load address
-> +	 * or 0, even though it doesn't really make a lot of sense, and it
-> +	 * might be valid on some platforms, we treat that address as
-> +	 * the default value for this field, and try to pass ramdisk
-> +	 * in place if possible.
-> +	 */
->  	if (img_data.header_version > 2) {
-> -		ramdisk_ptr = img_data.ramdisk_addr;
-> +		/* Ramdisk can't be used in-place, copy it to ramdisk_addr_r */
-> +		if (img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
-> +			ramdisk_ptr = env_get_ulong("ramdisk_addr_r", 16, 0);
-> +			if (!ramdisk_ptr) {
-> +				printf("Invalid ramdisk_addr_r to copy ramdisk into\n");
-> +				return -EINVAL;
-> +			}
-> +		} else {
-> +			ramdisk_ptr = img_data.ramdisk_addr;
-> +		}
-> +		*rd_data = ramdisk_ptr;
->  		memcpy((void *)(ramdisk_ptr), (void *)img_data.vendor_ramdisk_ptr,
->  		       img_data.vendor_ramdisk_size);
->  		ramdisk_ptr += img_data.vendor_ramdisk_size;
-> @@ -420,15 +437,20 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
->  			       img_data.bootconfig_size);
->  		}
->  	} else {
-> -		ramdisk_ptr = img_data.ramdisk_addr;
-> -		memcpy((void *)(ramdisk_ptr), (void *)img_data.ramdisk_ptr,
-> -		       img_data.ramdisk_size);
-> +		/* Ramdisk can be used in-place, use current ptr */
-> +		if (img_data.ramdisk_addr == 0 ||
-> +		    img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
-> +			*rd_data = img_data.ramdisk_ptr;
-> +		} else {
-> +			ramdisk_ptr = img_data.ramdisk_addr;
-> +			*rd_data = ramdisk_ptr;
-> +			memcpy((void *)(ramdisk_ptr), (void *)img_data.ramdisk_ptr,
-> +			       img_data.ramdisk_size);
-> +		}
->  	}
->  
->  	printf("RAM disk load addr 0x%08lx size %u KiB\n",
-> -	       img_data.ramdisk_addr, DIV_ROUND_UP(img_data.ramdisk_size, 1024));
-> -
-> -	*rd_data = img_data.ramdisk_addr;
-> +	       *rd_data, DIV_ROUND_UP(img_data.ramdisk_size, 1024));
->  
->  	*rd_len = img_data.ramdisk_size;
->  	return 0;
->
-> -- 
-> 2.34.1
+>   arch/arm/dts/k3-am62a-ddr.dtsi  |  7 ++++---
+>   arch/arm/dts/k3-j721s2-ddr.dtsi | 12 ++++++++----
+>   arch/arm/dts/k3-j784s4-ddr.dtsi | 24 ++++++++++++++++--------
+>   3 files changed, 28 insertions(+), 15 deletions(-)
+> 
+
+Thank you for this series. Maybe I missed something, but why is this DT patch at 
+the very end of the series? Doesn't it make sense to include it before the 
+patches triggering inline ECC i.e. patch 7/8?
+
+Sanity tested inline ECC on j784s4 and j721s2 and all looks good [1].
+
+Tested-by: Neha Malcom Francis <n-francis@ti.com>
+
+[1] https://gist.github.com/nehamalcom/66f1a2ef5288a94eebabe97708b5a277
+
+-- 
+Thanking You
+Neha Malcom Francis
