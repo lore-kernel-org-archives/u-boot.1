@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BB3DCDD0E1
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 20:07:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5874CDD0E1
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 20:07:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8460489286;
-	Tue, 22 Oct 2024 22:07:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 31C3388FD6;
+	Tue, 22 Oct 2024 22:07:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nrcOczLA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IQN0/5Kz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EB1B88FA5; Tue, 22 Oct 2024 22:07:00 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id B004288FD6; Tue, 22 Oct 2024 22:07:13 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F34F8908D
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 22:06:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE71A892CB
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 22:07:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-46098928354so42805811cf.1
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 13:06:57 -0700 (PDT)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6cbe8119e21so43504486d6.1
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 13:07:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729627615; x=1730232415; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729627628; x=1730232428; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VkJNtusQwE9iknc4JN0uCGVcaeEGktT/EIetnn7e6S8=;
- b=nrcOczLA1EDwsGdGXcTQFAR8StE0+z7e9i8lHi6a0Z6DSbGfpu92JCnbPmEko+7+dQ
- kt3X7MLhCTuH1olaULJ5DmaD20je/6LLqLNpNi8rkDJNZ97rZr79aWUcIntEfpcNTVnM
- QFU6S7DK5M6Jn3HX0ZGqujvBQnlCKT1kEPc6VJTBpmsX+yhYPIMEslUqT9szBEJroYIY
- N2gebaLeOpHvz8Zep5o96Bf/P+87+zpc5MznanNZ8KBGy4tCFh3iZhnamaK6I3cS6Iye
- tHlKyUP1tybIkZYvCQBnLMPc54ArtQrskclHpzCFJs1erW49HAMccWx2bT3iZ7kf1t+O
- 6r6g==
+ bh=qmvLYoekOF9Ag+DYm+N/C5gip1rDM57XGxQQpA3NIJg=;
+ b=IQN0/5KzDvr4mI49jLFIaXNkf9fOp3iwKurwC7uvruzUwwk2itbvkM7d+DKm5+ibLD
+ MYWS9gVgoPbCf37MswjpTiAUxQuArJtpE63ulSJWS4kGBhRj44u+uftyxdlb0c3NOVIm
+ VqGas0CltF5CHf2VJxMz+O31vSa97tDM03ZRtBfvjbx2oahfDmWA4FlybYUR92W8dDPd
+ K1B0LQ+xksZg1UiuR0InJsaqRJ6bTt9uxCVXcY+Cu4EEJF68v+WKv7H4g533NgJUj4ap
+ nSDifqt1HjFcuCy0DstWcbAq/CZk6OL+3qKtzwWvkb1mtEoZTxGTWA3oooFIOyfAW5pJ
+ +imA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729627615; x=1730232415;
+ d=1e100.net; s=20230601; t=1729627628; x=1730232428;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VkJNtusQwE9iknc4JN0uCGVcaeEGktT/EIetnn7e6S8=;
- b=a/p84pAIWPomTCFeXjb+uO0Eg/LAfvvKWmJuKBc6sCMt8cNfd8vpoKHkNCWqTnUMBR
- 9aICjlIyxO0x+u8290SWNbCzHA6iR7W9Sy/GvYiCnjSIzFqFNnig73LAORvvg8ztFE6W
- x4I6FMfE2Re4g+S1+hHxMpf0AFgmuDOO5oSHQTPctrp/L73HHTw+mkmi/9kGlmE44W66
- q8upPPo6JbvXwPSgTXe3PJ2IHmwlfO0B/zsWQ+I0vakUTmdH2674RSHAt6HlikVA5oUh
- U1D4Dp/ePOvEIytawFE+/QIPHviDkclmyGgRzuSC7k/yaHu8pws6qD6pLcsXBXyj39yI
- KnKw==
-X-Gm-Message-State: AOJu0YzVr3sjP9Nn7Gdd3Ws0kJ+OcPaQfB/E+Xjvu6jDYVzrtUwJlZb0
- qpjnYC63Xb7CA81FQ5Ng9kIod7Ti93jLkMl9dungSwC5IY+hDLC52Qfgart+lPrc14HPL9beQ7H
- Wwjo=
-X-Google-Smtp-Source: AGHT+IEFmn5Nl6RV3n8gI5CFzAdCcBW0sOejKG5lM4EvlQRX6BfoeBJWhzT2MSaIwNqzrGgLCpubXA==
-X-Received: by 2002:a05:6214:5c45:b0:6c5:313d:7cca with SMTP id
- 6a1803df08f44-6ce341cbe71mr4986276d6.11.1729627615393; 
- Tue, 22 Oct 2024 13:06:55 -0700 (PDT)
+ bh=qmvLYoekOF9Ag+DYm+N/C5gip1rDM57XGxQQpA3NIJg=;
+ b=Dfdqy9qaKMynmoumKQZDvkCSwgZxLYYsGhlk5J5XJzxZCWgN1TajDCAPoQnD2wJHAU
+ AfiekNNf5xbPPO0BS51HOyqbItUVS/d3L9wiq4JL3Vq4dMn7i5KPJQWxvlzDoq4SfNeO
+ jaH6oxDeIfnM0bA0AoJ6okTlWQCV32tmZQFa5/ivHLmmmEUreMEnkDixviXufruKL5Fw
+ EJeuO1/J7nNhqsZ0ecZY5kL3T25BjkvNm/hGXiHK+GjVhdnC2TmUR3/soNDzqzA0fNbX
+ PqDvOwYuAffBo/t0PepJ0DHnYPEKa6SpK0o3USj9+d8LGecwuAFurjmblRzE06l1TYbo
+ mUKg==
+X-Gm-Message-State: AOJu0YyFYl2w++tmPoyox4rhBfTVFWb0ZqoxW5nTLWDPSJeGhhsEuWqy
+ pMxERJOQIuTewcUWYD5d6Oc8R5raTDoialAJomMyCCB959ATCtnxZDzFR4GEGvpr5lCMB9fCCKV
+ J4wo=
+X-Google-Smtp-Source: AGHT+IHXJRnhGEdLpIHeGl3QqinItGDywdpPIEYBRs7ENGjQ0nTxdt3E/1EQM5WDHjm6FEBCd7z8dw==
+X-Received: by 2002:a05:6214:5890:b0:6cb:e944:c1a9 with SMTP id
+ 6a1803df08f44-6ce342b481bmr3472066d6.31.1729627628436; 
+ Tue, 22 Oct 2024 13:07:08 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ce0091a255sm32519956d6.59.2024.10.22.13.06.53
+ 6a1803df08f44-6ce0091a255sm32519956d6.59.2024.10.22.13.07.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Oct 2024 13:06:54 -0700 (PDT)
+ Tue, 22 Oct 2024 13:07:07 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: iwamatsu@nigauri.org, marek.vasut+renesas@mailbox.org,
@@ -73,20 +73,19 @@ Cc: iwamatsu@nigauri.org, marek.vasut+renesas@mailbox.org,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Simon Glass <sjg@chromium.org>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Stefan Roese <sr@denx.de>, Angelo Dureghello <angelo@kernel-space.org>,
+ Alexander Gendin <agendin@matrox.com>, Wan Yee Lau <wan.yee.lau@intel.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Wan Yee Lau <wan.yee.lau@intel.com>,
- Alexander Gendin <agendin@matrox.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Michal Simek <michal.simek@amd.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Max Krummenacher <max.krummenacher@toradex.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH v2 3/8] sysinfo: Add sysinfo driver and data structure for
- smbios
-Date: Tue, 22 Oct 2024 13:05:24 -0700
-Message-Id: <20241022200543.116343-4-raymond.mao@linaro.org>
+Subject: [PATCH v2 4/8] smbios: Refactor smbios library
+Date: Tue, 22 Oct 2024 13:05:25 -0700
+Message-Id: <20241022200543.116343-5-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241022200543.116343-1-raymond.mao@linaro.org>
 References: <20241022200543.116343-1-raymond.mao@linaro.org>
@@ -108,558 +107,634 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add sysinfo driver to retrieve smbios information (Type 4 and 7).
-So that the smbios library can use it for getting values from the
-hardware platform instead of device tree.
+Current smbios library does not fully match to the specification.
+It hardcodes values instead of exposing values from the device.
+It does not support dynamic length for contained object handles
+or elements and misses the handling of a few of fields.
+
+The refactoring of this patch includes:
+1. Expose values from device via sysinfo interface.
+2. Replace smbios_add_prop with smbios_add_prop_si to allow getting
+   string values from sysinfo.
+3. Add smbios_get_val_si to get int values from sysinfo.
+4. Use sysinfo_get_data to get data area.
+5. Miscellaneous fixes in smbios.
+
+Moreover, this patch adds SMBIOS type 7 (cache information) write
+functions.
+Link cache handles from type 7 to type 4.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2
-- Move the changes to smbios.c instead of creating new file.
-- Move the headfile to include dir.
-- Combine with #6(v1) patch.
-- Clean-up the private data structures.
-- Clean-up the operations of the strings and common values.
+- Combine with #7(v1) patch.
+- Move the changes of cmd/smbios.c to a separated patch.
+- Refactor smbios_get_val_si to get values from dt when values are
+   not available from sysinfo driver.
+- Miscellaneous refactoring.
 
- drivers/sysinfo/smbios.c | 228 +++++++++++++++++++++++++++++++++++++++
- include/smbios.h         |  60 +++++++++++
- include/smbios_plat.h    |  79 ++++++++++++++
- include/sysinfo.h        |  95 +++++++++++++++-
- 4 files changed, 461 insertions(+), 1 deletion(-)
- create mode 100644 include/smbios_plat.h
+ include/smbios.h |  14 +-
+ lib/smbios.c     | 420 +++++++++++++++++++++++++++++++++++++++++------
+ 2 files changed, 383 insertions(+), 51 deletions(-)
 
-diff --git a/drivers/sysinfo/smbios.c b/drivers/sysinfo/smbios.c
-index a7ac8e3f072..3980845b3ba 100644
---- a/drivers/sysinfo/smbios.c
-+++ b/drivers/sysinfo/smbios.c
-@@ -5,14 +5,240 @@
-  */
- 
- #include <dm.h>
-+#include <smbios_plat.h>
- #include <sysinfo.h>
- 
-+/* platform information storage */
-+struct processor_info processor_info;
-+struct cache_info cache_info[SYSINFO_CACHE_LVL_MAX];
-+struct sysinfo_plat sysinfo_smbios_p = {
-+	/* Processor Information */
-+	.processor = &processor_info,
-+	/* Cache Information */
-+	.cache = &cache_info[0],
-+};
-+
-+/* structure for smbios private data storage */
-+struct sysinfo_plat_priv {
-+	struct processor_info *t4;
-+	struct smbios_type7 t7[SYSINFO_CACHE_LVL_MAX];
-+	u16 cache_handles[SYSINFO_CACHE_LVL_MAX];
-+	u8 cache_level;
-+};
-+
-+static void smbios_cache_info_dump(struct smbios_type7 *cache_info)
-+{
-+	log_debug("SMBIOS Type 7 (Cache Information):\n");
-+	log_debug("Cache Configuration: 0x%04x\n", cache_info->config.data);
-+	log_debug("Maximum Cache Size: %u KB\n", cache_info->max_size.data);
-+	log_debug("Installed Size: %u KB\n", cache_info->inst_size.data);
-+	log_debug("Supported SRAM Type: 0x%04x\n",
-+		  cache_info->supp_sram_type.data);
-+	log_debug("Current SRAM Type: 0x%04x\n",
-+		  cache_info->curr_sram_type.data);
-+	log_debug("Cache Speed: %u\n", cache_info->speed);
-+	log_debug("Error Correction Type: %u\n", cache_info->err_corr_type);
-+	log_debug("System Cache Type: %u\n", cache_info->sys_cache_type);
-+	log_debug("Associativity: %u\n", cache_info->associativity);
-+	log_debug("Maximum Cache Size 2: %u KB\n", cache_info->max_size2.data);
-+	log_debug("Installed Cache Size 2: %u KB\n",
-+		  cache_info->inst_size2.data);
-+}
-+
-+/* weak function for the platforms not yet supported */
-+__weak int sysinfo_get_cache_info(u8 level, struct cache_info *cache_info)
-+{
-+	return -ENOSYS;
-+}
-+
-+__weak int sysinfo_get_processor_info(struct processor_info *pinfo)
-+{
-+	return -ENOSYS;
-+}
-+
-+void sysinfo_cache_info_default(struct cache_info *ci)
-+{
-+	memset(ci, 0, sizeof(*ci));
-+	ci->config.data = SMBIOS_CACHE_LOCATE_UNKNOWN | SMBIOS_CACHE_OP_UND;
-+	ci->supp_sram_type.fields.unknown = 1;
-+	ci->curr_sram_type.fields.unknown = 1;
-+	ci->speed = SMBIOS_CACHE_SPEED_UNKNOWN;
-+	ci->err_corr_type = SMBIOS_CACHE_ERRCORR_UNKNOWN;
-+	ci->cache_type = SMBIOS_CACHE_SYSCACHE_TYPE_UNKNOWN;
-+}
-+
-+static int sysinfo_plat_detect(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+static int sysinfo_plat_get_str(struct udevice *dev, int id,
-+				size_t size, char *val)
-+{
-+	struct sysinfo_plat_priv *priv = dev_get_priv(dev);
-+	const char *str = NULL;
-+
-+	switch (id) {
-+	case SYSINFO_ID_SMBIOS_PROCESSOR_MANUFACT:
-+		str = priv->t4->manufacturer;
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	if (!str)
-+		return -ENOSYS;
-+
-+	strlcpy(val, str, size);
-+
-+	return 0;
-+}
-+
-+static int sysinfo_plat_get_int(struct udevice *dev, int id, int *val)
-+{
-+	struct sysinfo_plat_priv *priv = dev_get_priv(dev);
-+	u8 i;
-+
-+	if (id >= SYSINFO_ID_SMBIOS_CACHE_INFO_START &&
-+	    id <= SYSINFO_ID_SMBIOS_CACHE_INFO_END) {
-+		/* For smbios type 7 */
-+		for (i = 0; i < priv->cache_level; i++) {
-+			switch (id - i) {
-+			case SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE:
-+				*val = priv->t7[i].max_size.data;
-+				return 0;
-+			case SYSINFO_ID_SMBIOS_CACHE_INST_SIZE:
-+				*val = priv->t7[i].inst_size.data;
-+				return 0;
-+			case SYSINFO_ID_SMBIOS_CACHE_SCACHE_TYPE:
-+				*val = priv->t7[i].sys_cache_type;
-+				return 0;
-+			case SYSINFO_ID_SMBIOS_CACHE_ASSOC:
-+				*val = priv->t7[i].associativity;
-+				return 0;
-+			case SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE2:
-+				*val = priv->t7[i].max_size2.data;
-+				return 0;
-+			case SYSINFO_ID_SMBIOS_CACHE_INST_SIZE2:
-+				*val = priv->t7[i].inst_size2.data;
-+				return 0;
-+			default:
-+				break;
-+			}
-+		}
-+		return -ENOSYS;
-+	}
-+
-+	switch (id) {
-+	case SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT:
-+		*val = priv->t4->core_count;
-+		break;
-+	case SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN:
-+		*val = priv->t4->core_enabled;
-+		break;
-+	case SYSINFO_ID_SMBIOS_PROCESSOR_CHARA:
-+		*val = priv->t4->characteristics;
-+		break;
-+	case SYSINFO_ID_SMBIOS_CACHE_LEVEL:
-+		if (!priv->cache_level)	/* No cache detected */
-+			return -ENOSYS;
-+		*val = priv->cache_level - 1;
-+		break;
-+	default:
-+		return -ENOSYS;
-+	}
-+
-+	return 0;
-+}
-+
-+static int sysinfo_plat_get_data(struct udevice *dev, int id, uchar **buf,
-+				 size_t *size)
-+{
-+	struct sysinfo_plat_priv *priv = dev_get_priv(dev);
-+
-+	switch (id) {
-+	case SYSINFO_ID_SMBIOS_PROCESSOR_ID:
-+		*buf = (uchar *)priv->t4->id;
-+		*size = sizeof(priv->t4->id);
-+		break;
-+	case SYSINFO_ID_SMBIOS_CACHE_HANDLE:
-+		*buf = (uchar *)(&priv->cache_handles[0]);
-+		*size = sizeof(priv->cache_handles);
-+		break;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+	return 0;
-+}
-+
-+static int sysinfo_plat_probe(struct udevice *dev)
-+{
-+	struct sysinfo_plat_priv *priv = dev_get_priv(dev);
-+	struct sysinfo_plat *plat = &sysinfo_smbios_p;
-+	u8 level;
-+
-+	if (!sysinfo_get_processor_info(plat->processor))
-+		priv->t4 = plat->processor;
-+
-+	for (level = 0; level < SYSINFO_CACHE_LVL_MAX; level++) {
-+		struct cache_info *pcache = plat->cache + level;
-+
-+		if (sysinfo_get_cache_info(level, pcache))
-+			break; /* no more levels */
-+
-+		/*
-+		 * Fill in the SMBIOS type 7 structure,
-+		 * skip the header members (type, length, handle),
-+		 * and the ones in DT smbios node.
-+		 */
-+		priv->t7[level].sys_cache_type = pcache->cache_type;
-+		priv->t7[level].associativity = pcache->associativity;
-+
-+		if (pcache->max_size > SMBIOS_CACHE_SIZE_EXT_KB) {
-+			priv->t7[level].max_size.data = 0xFFFF;
-+			priv->t7[level].max_size2.fields.size =
-+				pcache->max_size / 64;
-+			priv->t7[level].max_size2.fields.granu =
-+				SMBIOS_CACHE_GRANU_64K;
-+		} else {
-+			priv->t7[level].max_size.fields.size = pcache->max_size;
-+			priv->t7[level].max_size.fields.granu =
-+				SMBIOS_CACHE_GRANU_1K;
-+			priv->t7[level].max_size2.data = 0;
-+		}
-+		if (pcache->inst_size > SMBIOS_CACHE_SIZE_EXT_KB) {
-+			priv->t7[level].inst_size.data = 0xFFFF;
-+			priv->t7[level].inst_size2.fields.size =
-+				pcache->inst_size / 64;
-+			priv->t7[level].inst_size2.fields.granu =
-+				SMBIOS_CACHE_GRANU_64K;
-+		} else {
-+			priv->t7[level].inst_size.fields.size =
-+				pcache->inst_size;
-+			priv->t7[level].inst_size.fields.granu =
-+				SMBIOS_CACHE_GRANU_1K;
-+			priv->t7[level].inst_size2.data = 0;
-+		}
-+		smbios_cache_info_dump(&priv->t7[level]);
-+	}
-+	if (!level) /* no cache detected */
-+		return -ENOSYS;
-+
-+	priv->cache_level = level;
-+
-+	return 0;
-+}
-+
- static const struct udevice_id sysinfo_smbios_ids[] = {
- 	{ .compatible = "u-boot,sysinfo-smbios" },
- 	{ /* sentinel */ }
- };
- 
- static const struct sysinfo_ops sysinfo_smbios_ops = {
-+	.detect = sysinfo_plat_detect,
-+	.get_str = sysinfo_plat_get_str,
-+	.get_int = sysinfo_plat_get_int,
-+	.get_data = sysinfo_plat_get_data,
- };
- 
- U_BOOT_DRIVER(sysinfo_smbios) = {
-@@ -20,4 +246,6 @@ U_BOOT_DRIVER(sysinfo_smbios) = {
- 	.id             = UCLASS_SYSINFO,
- 	.of_match       = sysinfo_smbios_ids,
- 	.ops		= &sysinfo_smbios_ops,
-+	.priv_auto	= sizeof(struct sysinfo_plat_priv),
-+	.probe		= sysinfo_plat_probe,
- };
 diff --git a/include/smbios.h b/include/smbios.h
-index 78fd14d881b..cb4b3e08b3a 100644
+index cb4b3e08b3a..18f568f9b0d 100644
 --- a/include/smbios.h
 +++ b/include/smbios.h
-@@ -187,6 +187,66 @@ struct __packed smbios_type4 {
+@@ -122,6 +122,8 @@ struct __packed smbios_type1 {
  	char eos[SMBIOS_STRUCT_EOS_BYTES];
  };
  
-+union cache_config {
-+	struct {
-+		u16 level:3;
-+		u16 bsocketed:1;
-+		u16 rsvd0:1;
-+		u16 locate:2;
-+		u16 benabled:1;
-+		u16 opmode:2;
-+		u16 rsvd1:6;
-+	} fields;
-+	u16 data;
-+};
++#define SMBIOS_TYPE2_CON_OBJ_HANDLE_SIZE sizeof(u16)
 +
-+union cache_size_word {
-+	struct {
-+		u16 size:15;
-+		u16 granu:1;
-+	} fields;
-+	u16 data;
-+};
-+
-+union cache_size_dword {
-+	struct {
-+		u32 size:31;
-+		u32 granu:1;
-+	} fields;
-+	u32 data;
-+};
-+
-+union cache_sram_type {
-+	struct {
-+		u16 other:1;
-+		u16 unknown:1;
-+		u16 nonburst:1;
-+		u16 burst:1;
-+		u16 plburst:1;
-+		u16 sync:1;
-+		u16 async:1;
-+		u16 rsvd:9;
-+	} fields;
-+	u16 data;
-+};
-+
-+struct __packed smbios_type7 {
-+	struct smbios_header hdr;
+ struct __packed smbios_type2 {
+ 	struct smbios_header hdr;
+ 	u8 manufacturer;
+@@ -134,6 +136,10 @@ struct __packed smbios_type2 {
+ 	u16 chassis_handle;
+ 	u8 board_type;
+ 	u8 number_contained_objects;
++	/*
++	 * Dynamic bytes will be inserted here to store the objects.
++	 * length is equal to 'number_contained_objects'.
++	 */
+ 	char eos[SMBIOS_STRUCT_EOS_BYTES];
+ };
+ 
+@@ -153,12 +159,17 @@ struct __packed smbios_type3 {
+ 	u8 number_of_power_cords;
+ 	u8 element_count;
+ 	u8 element_record_length;
++	/*
++	 * Dynamic bytes will be inserted here to store the elements.
++	 * length is equal to 'element_record_length' * 'element_record_length'
++	 */
++	u8 sku_number;
+ 	char eos[SMBIOS_STRUCT_EOS_BYTES];
+ };
+ 
+ struct __packed smbios_type4 {
+ 	struct smbios_header hdr;
+-	u8 socket_designation;
 +	u8 socket_design;
-+	union cache_config config;
-+	union cache_size_word max_size;
-+	union cache_size_word inst_size;
-+	union cache_sram_type supp_sram_type;
-+	union cache_sram_type curr_sram_type;
-+	u8 speed;
-+	u8 err_corr_type;
-+	u8 sys_cache_type;
-+	u8 associativity;
-+	union cache_size_dword max_size2;
-+	union cache_size_dword inst_size2;
-+	char eos[SMBIOS_STRUCT_EOS_BYTES];
-+};
-+
- struct __packed smbios_type32 {
- 	u8 type;
- 	u8 length;
-diff --git a/include/smbios_plat.h b/include/smbios_plat.h
-new file mode 100644
-index 00000000000..70089d5a2ba
---- /dev/null
-+++ b/include/smbios_plat.h
-@@ -0,0 +1,79 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2024 Linaro Limited
-+ * Author: Raymond Mao <raymond.mao@linaro.org>
-+ */
-+#ifndef __SMBIOS_PLAT_H
-+#define __SMBIOS_PLAT_H
-+
-+#include <smbios.h>
-+
-+struct cache_info {
-+	union cache_config config;
-+	union cache_sram_type supp_sram_type;
-+	union cache_sram_type curr_sram_type;
-+	u32 line_size;
-+	u32 associativity;
-+	u32 max_size;
-+	u32 inst_size;
-+	u8 cache_type;
-+	u8 speed;
-+	u8 err_corr_type;
-+	char *socket_design;
-+};
-+
-+struct processor_info {
-+	u32 id[2];
-+	u16 ext_clock;
-+	u16 max_speed;
-+	u16 curr_speed;
-+	u16 characteristics;
-+	u16 family2;
-+	u16 core_count2;
-+	u16 core_enabled2;
-+	u16 thread_count2;
+ 	u8 processor_type;
+ 	u8 processor_family;
+ 	u8 processor_manufacturer;
+@@ -184,6 +195,7 @@ struct __packed smbios_type4 {
+ 	u16 core_count2;
+ 	u16 core_enabled2;
+ 	u16 thread_count2;
 +	u16 thread_enabled;
-+	u8 type;
-+	u8 family;
-+	u8 voltage;
-+	u8 status;
-+	u8 upgrade;
-+	u8 core_count;
-+	u8 core_enabled;
-+	u8 thread_count;
-+	char *socket_design;
-+	char *manufacturer;
-+	char *version;
-+	char *sn;
-+	char *asset_tag;
-+	char *pn;
-+};
-+
-+struct sysinfo_plat {
-+	struct processor_info *processor;
-+	struct cache_info *cache;
-+	/* add other sysinfo structure here */
-+};
-+
-+#if defined CONFIG_SYSINFO_SMBIOS
-+int sysinfo_get_cache_info(u8 level, struct cache_info *cache_info);
-+void sysinfo_cache_info_default(struct cache_info *ci);
-+int sysinfo_get_processor_info(struct processor_info *pinfo);
-+#else
-+static inline int sysinfo_get_cache_info(u8 level,
-+					 struct cache_info *cache_info)
+ 	char eos[SMBIOS_STRUCT_EOS_BYTES];
+ };
+ 
+diff --git a/lib/smbios.c b/lib/smbios.c
+index 886c40e7594..c2763d036a7 100644
+--- a/lib/smbios.c
++++ b/lib/smbios.c
+@@ -206,6 +206,34 @@ void get_str_from_dt(const struct map_sysinfo *nprop, char *str, size_t size)
+ 	}
+ }
+ 
++/**
++ * smbios_get_val_si() - Get value from the devicetree or sysinfo
++ *
++ * @ctx:	context of SMBIOS
++ * @prop:	property to read
++ * @sysinfo_id: unique identifier for the value to be read
++ * Return:	0 if not found, else value from the devicetree or sysinfo
++ */
++static int smbios_get_val_si(struct smbios_ctx *ctx, const char *prop,
++			     int sysinfo_id)
 +{
-+	return -ENOSYS;
++	int val;
++
++	if (!sysinfo_id || !ctx->dev)
++		return 0;
++
++	if (!sysinfo_get_int(ctx->dev, sysinfo_id, &val))
++		return val;
++
++	if (!IS_ENABLED(CONFIG_OF_CONTROL) || !prop || !ofnode_valid(ctx->node))
++		return 0;
++
++	if (!ofnode_read_u32(ctx->node, prop, &val))
++		return val;
++
++	return 0;
 +}
 +
-+static inline void sysinfo_cache_info_default(struct cache_info *ci)
-+{
-+}
-+
-+static inline int sysinfo_get_processor_info(struct processor_info *pinfo)
-+{
-+	return -ENOSYS;
-+}
-+#endif
-+
-+#endif	/* __SMBIOS_PLAT_H */
-diff --git a/include/sysinfo.h b/include/sysinfo.h
-index 17b2b9c7111..cb08a691270 100644
---- a/include/sysinfo.h
-+++ b/include/sysinfo.h
-@@ -11,6 +11,8 @@
+ /**
+  * smbios_add_prop_si() - Add a property from the devicetree or sysinfo
+  *
+@@ -225,9 +253,6 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
+ 	if (!dval || !*dval)
+ 		dval = NULL;
  
- struct udevice;
+-	if (!prop)
+-		return smbios_add_string(ctx, dval);
+-
+ 	if (sysinfo_id && ctx->dev) {
+ 		char val[SMBIOS_STR_MAX];
  
-+#define SYSINFO_CACHE_LVL_MAX 3
+@@ -235,6 +260,9 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
+ 		if (!ret)
+ 			return smbios_add_string(ctx, val);
+ 	}
++	if (!prop)
++		return smbios_add_string(ctx, dval);
 +
- /*
-  * This uclass encapsulates hardware methods to gather information about a
-  * sysinfo or a specific device such as hard-wired GPIOs on GPIO expanders,
-@@ -42,18 +44,109 @@ struct udevice;
- enum sysinfo_id {
- 	SYSINFO_ID_NONE,
+ 	if (IS_ENABLED(CONFIG_OF_CONTROL)) {
+ 		const char *str = NULL;
+ 		char str_dt[128] = { 0 };
+@@ -336,9 +364,12 @@ static int smbios_write_type0(ulong *current, int handle,
+ 	memset(t, 0, len);
+ 	fill_smbios_header(t, SMBIOS_BIOS_INFORMATION, len, handle);
+ 	smbios_set_eos(ctx, t->eos);
+-	t->vendor = smbios_add_prop(ctx, NULL, "U-Boot");
++	t->vendor = smbios_add_prop_si(ctx, NULL, SYSINFO_ID_SMBIOS_BIOS_VENDOR,
++				       "U-Boot");
  
--	/* For SMBIOS tables */
-+	/* BIOS Information (Type 0) */
-+	SYSINFO_ID_SMBIOS_BIOS_VENDOR,
-+	SYSINFO_ID_SMBIOS_BIOS_VER,
-+	SYSINFO_ID_SMBIOS_BIOS_REL_DATE,
+-	t->bios_ver = smbios_add_prop(ctx, "version", PLAIN_VERSION);
++	t->bios_ver = smbios_add_prop_si(ctx, "version",
++					 SYSINFO_ID_SMBIOS_BIOS_VER,
++					 PLAIN_VERSION);
+ 	if (t->bios_ver)
+ 		gd->smbios_version = ctx->last_str;
+ 	log_debug("smbios_version = %p: '%s'\n", gd->smbios_version,
+@@ -347,7 +378,9 @@ static int smbios_write_type0(ulong *current, int handle,
+ 	print_buffer((ulong)gd->smbios_version, gd->smbios_version,
+ 		     1, strlen(gd->smbios_version) + 1, 0);
+ #endif
+-	t->bios_release_date = smbios_add_prop(ctx, NULL, U_BOOT_DMI_DATE);
++	t->bios_release_date =
++		smbios_add_prop_si(ctx, NULL, SYSINFO_ID_SMBIOS_BIOS_REL_DATE,
++				   U_BOOT_DMI_DATE);
+ #ifdef CONFIG_ROM_SIZE
+ 	if (CONFIG_ROM_SIZE < SZ_16M) {
+ 		t->bios_rom_size = (CONFIG_ROM_SIZE / 65536) - 1;
+@@ -392,9 +425,11 @@ static int smbios_write_type1(ulong *current, int handle,
+ 	memset(t, 0, len);
+ 	fill_smbios_header(t, SMBIOS_SYSTEM_INFORMATION, len, handle);
+ 	smbios_set_eos(ctx, t->eos);
+-	t->manufacturer = smbios_add_prop_si(ctx, "manufacturer",
+-					     SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
+-					     NULL);
 +
-+	/* System Information (Type 1) */
- 	SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
- 	SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
- 	SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
- 	SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
-+	SYSINFO_ID_SMBIOS_SYSTEM_WAKEUP,
- 	SYSINFO_ID_SMBIOS_SYSTEM_SKU,
- 	SYSINFO_ID_SMBIOS_SYSTEM_FAMILY,
++	t->manufacturer =
++		smbios_add_prop_si(ctx, "manufacturer",
++				   SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
++				   NULL);
+ 	t->product_name = smbios_add_prop_si(ctx, "product",
+ 					     SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
+ 					     NULL);
+@@ -405,11 +440,14 @@ static int smbios_write_type1(ulong *current, int handle,
+ 		t->serial_number = smbios_add_prop(ctx, NULL, serial_str);
+ 		strlcpy((char *)t->uuid, serial_str, sizeof(t->uuid));
+ 	} else {
+-		t->serial_number = smbios_add_prop_si(ctx, "serial",
+-						      SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
+-						      NULL);
++		t->serial_number =
++			smbios_add_prop_si(ctx, "serial",
++					   SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
++					   NULL);
+ 	}
+-	t->wakeup_type = SMBIOS_WAKEUP_TYPE_UNKNOWN;
++	t->wakeup_type =
++		smbios_get_val_si(ctx, "wakeup-type",
++				  SYSINFO_ID_SMBIOS_SYSTEM_WAKEUP);
+ 	t->sku_number = smbios_add_prop_si(ctx, "sku",
+ 					   SYSINFO_ID_SMBIOS_SYSTEM_SKU, NULL);
+ 	t->family = smbios_add_prop_si(ctx, "family",
+@@ -427,29 +465,59 @@ static int smbios_write_type2(ulong *current, int handle,
+ {
+ 	struct smbios_type2 *t;
+ 	int len = sizeof(*t);
++	u8 *eos_addr;
+ 
++	/*
++	 * reserve the space for the dynamic bytes of contained object handles.
++	 * TODO: len += <obj_handle_num> * SMBIOS_TYPE2_CON_OBJ_HANDLE_SIZE
++	 * obj_handle_num can be from DT node "baseboard" or sysinfo driver.
++	 */
+ 	t = map_sysmem(*current, len);
+ 	memset(t, 0, len);
+ 	fill_smbios_header(t, SMBIOS_BOARD_INFORMATION, len, handle);
+-	smbios_set_eos(ctx, t->eos);
+-	t->manufacturer = smbios_add_prop_si(ctx, "manufacturer",
+-					     SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
+-					     NULL);
+-	t->product_name = smbios_add_prop_si(ctx, "product",
+-					     SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
+-					     NULL);
+-	t->version = smbios_add_prop_si(ctx, "version",
+-					SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
+-					NULL);
+ 
+-	t->serial_number = smbios_add_prop_si(ctx, "serial",
+-					      SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
+-					      NULL);
+-	t->asset_tag_number = smbios_add_prop_si(ctx, "asset-tag",
+-						 SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
+-						 NULL);
+-	t->feature_flags = SMBIOS_BOARD_FEAT_HOST_BOARD;
+-	t->board_type = SMBIOS_BOARD_TYPE_MOTHERBOARD;
++	/* eos is at the end of the structure */
++	eos_addr = (u8 *)t + len - sizeof(t->eos);
++	smbios_set_eos(ctx, eos_addr);
 +
-+	/* Baseboard (or Module) Information (Type 2) */
- 	SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
- 	SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
- 	SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
- 	SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
- 	SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
-+	SYSINFO_ID_SMBIOS_BASEBOARD_FEATURE,
-+	SYSINFO_ID_SMBIOS_BASEBOARD_CHASSIS_LOCAT,
-+	SYSINFO_ID_SMBIOS_BASEBOARD_TYPE,
-+	SYSINFO_ID_SMBIOS_BASEBOARD_OBJS_NUM,
-+	SYSINFO_ID_SMBIOS_BASEBOARD_OBJS_HANDLE,
++	t->manufacturer =
++		smbios_add_prop_si(ctx, "manufacturer",
++				   SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
++				   NULL);
++	t->product_name =
++		smbios_add_prop_si(ctx, "product",
++				   SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
++				   NULL);
++	t->version =
++		smbios_add_prop_si(ctx, "version",
++				   SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
++				   NULL);
++	t->serial_number =
++		smbios_add_prop_si(ctx, "serial",
++				   SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
++				   NULL);
++	t->asset_tag_number =
++		smbios_add_prop_si(ctx, "asset-tag",
++				   SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
++				   NULL);
++	t->feature_flags =
++		smbios_get_val_si(ctx, "feature-flags",
++				  SYSINFO_ID_SMBIOS_BASEBOARD_FEATURE);
 +
-+	/* System Enclosure or Chassis (Type 3) */
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_MANUFACTURER,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_VERSION,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_SERIAL,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_ASSET_TAG,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_TYPE,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_BOOTUP,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_POW,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_THERMAL,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_SECURITY,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_OEM,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_HEIGHT,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_POWCORE_NUM,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENT_CNT,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENT_LEN,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENTS,
-+	SYSINFO_ID_SMBIOS_ENCLOSURE_SKU,
-+
-+	/* Processor Information (Type 4) */
-+	SYSINFO_ID_SMBIOS_PROCESSOR_SOCKET,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_TYPE,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_MANUFACT,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_ID,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_VERSION,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_VOLTAGE,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_EXT_CLOCK,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_MAX_SPEED,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_CUR_SPEED,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_STATUS,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_UPGRADE,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_SN,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_ASSET_TAG,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_PN,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_CHARA,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_FAMILY,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_FAMILY2,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT2,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN2,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT2,
-+	SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_EN,
++	t->chassis_location =
++		smbios_add_prop_si(ctx, "chassis-location",
++				   SYSINFO_ID_SMBIOS_BASEBOARD_CHASSIS_LOCAT,
++				   NULL);
++	t->board_type =
++		smbios_get_val_si(ctx, "board-type",
++				  SYSINFO_ID_SMBIOS_BASEBOARD_TYPE);
 +
 +	/*
-+	 * Cache Information (Type 7)
-+	 * Each of the id should reserve space for up to
-+	 * SYSINFO_CACHE_LVL_MAX levels of cache
++	 * TODO:
++	 * Populate the Contained Object Handles if they exist
++	 * t->number_contained_objects = <obj_handle_num>;
 +	 */
-+	SYSINFO_ID_SMBIOS_CACHE_LEVEL,
-+	SYSINFO_ID_SMBIOS_CACHE_HANDLE,
-+	SYSINFO_ID_SMBIOS_CACHE_INFO_START,
-+	SYSINFO_ID_SMBIOS_CACHE_SOCKET = SYSINFO_ID_SMBIOS_CACHE_INFO_START,
-+	SYSINFO_ID_SMBIOS_CACHE_CONFIG =
-+		SYSINFO_ID_SMBIOS_CACHE_SOCKET + SYSINFO_CACHE_LVL_MAX,
-+	SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE =
-+		SYSINFO_ID_SMBIOS_CACHE_CONFIG + SYSINFO_CACHE_LVL_MAX,
-+	SYSINFO_ID_SMBIOS_CACHE_INST_SIZE =
-+		SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE + SYSINFO_CACHE_LVL_MAX,
-+	SYSINFO_ID_SMBIOS_CACHE_SUPSRAM_TYPE =
-+		SYSINFO_ID_SMBIOS_CACHE_INST_SIZE + SYSINFO_CACHE_LVL_MAX,
-+	SYSINFO_ID_SMBIOS_CACHE_CURSRAM_TYPE =
-+		SYSINFO_ID_SMBIOS_CACHE_SUPSRAM_TYPE + SYSINFO_CACHE_LVL_MAX,
-+	SYSINFO_ID_SMBIOS_CACHE_SPEED =
-+		SYSINFO_ID_SMBIOS_CACHE_CURSRAM_TYPE + SYSINFO_CACHE_LVL_MAX,
-+	SYSINFO_ID_SMBIOS_CACHE_ERRCOR_TYPE =
-+		SYSINFO_ID_SMBIOS_CACHE_SPEED + SYSINFO_CACHE_LVL_MAX,
-+	SYSINFO_ID_SMBIOS_CACHE_SCACHE_TYPE =
-+		SYSINFO_ID_SMBIOS_CACHE_ERRCOR_TYPE + SYSINFO_CACHE_LVL_MAX,
-+	SYSINFO_ID_SMBIOS_CACHE_ASSOC =
-+		SYSINFO_ID_SMBIOS_CACHE_SCACHE_TYPE + SYSINFO_CACHE_LVL_MAX,
-+	SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE2 =
-+		SYSINFO_ID_SMBIOS_CACHE_ASSOC + SYSINFO_CACHE_LVL_MAX,
-+	SYSINFO_ID_SMBIOS_CACHE_INST_SIZE2 =
-+		SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE2 + SYSINFO_CACHE_LVL_MAX,
-+	SYSINFO_ID_SMBIOS_CACHE_INFO_END =
-+		SYSINFO_ID_SMBIOS_CACHE_INST_SIZE2 + SYSINFO_CACHE_LVL_MAX - 1,
++
+ 	t->chassis_handle = handle + 1;
  
- 	/* For show_board_info() */
- 	SYSINFO_ID_BOARD_MODEL,
+ 	len = t->hdr.length + smbios_string_table_len(ctx);
+@@ -464,17 +532,73 @@ static int smbios_write_type3(ulong *current, int handle,
+ {
+ 	struct smbios_type3 *t;
+ 	int len = sizeof(*t);
++	u8 *elem_addr, *eos_addr, *sku_num_addr;
++	size_t elem_size = 0;
++
++	/*
++	 * reserve the space for the dynamic bytes of contained elements.
++	 * TODO: elem_size = <element_count> * <element_record_length>
++	 * element_count and element_record_length can be from DT node
++	 * "chassis" or sysinfo driver.
++	 */
++	len += elem_size;
+ 
+ 	t = map_sysmem(*current, len);
+ 	memset(t, 0, len);
+ 	fill_smbios_header(t, SMBIOS_SYSTEM_ENCLOSURE, len, handle);
+-	smbios_set_eos(ctx, t->eos);
+-	t->manufacturer = smbios_add_prop(ctx, "manufacturer", NULL);
+-	t->chassis_type = SMBIOS_ENCLOSURE_DESKTOP;
+-	t->bootup_state = SMBIOS_STATE_SAFE;
+-	t->power_supply_state = SMBIOS_STATE_SAFE;
+-	t->thermal_state = SMBIOS_STATE_SAFE;
+-	t->security_status = SMBIOS_SECURITY_NONE;
++	elem_addr = (u8 *)t + offsetof(struct smbios_type3, sku_number);
++	sku_num_addr = elem_addr + elem_size;
++
++	/* eos is at the end of the structure */
++	eos_addr = (u8 *)t + len - sizeof(t->eos);
++	smbios_set_eos(ctx, eos_addr);
++
++	t->manufacturer =
++		smbios_add_prop_si(ctx, "manufacturer",
++				   SYSINFO_ID_SMBIOS_ENCLOSURE_MANUFACTURER,
++				   NULL);
++
++	t->chassis_type = smbios_get_val_si(ctx, "chassis-type",
++					    SYSINFO_ID_SMBIOS_ENCLOSURE_TYPE);
++	t->version = smbios_add_prop_si(ctx, "version",
++					SYSINFO_ID_SMBIOS_ENCLOSURE_VERSION,
++					NULL);
++	t->serial_number =
++		smbios_add_prop_si(ctx, "serial",
++				   SYSINFO_ID_SMBIOS_ENCLOSURE_SERIAL,
++				   NULL);
++	t->asset_tag_number =
++		smbios_add_prop_si(ctx, "asset-tag",
++				   SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
++				   NULL);
++	t->bootup_state = smbios_get_val_si(ctx, "bootup-state",
++					    SYSINFO_ID_SMBIOS_ENCLOSURE_BOOTUP);
++	t->power_supply_state =
++		smbios_get_val_si(ctx, "power-supply-state",
++				  SYSINFO_ID_SMBIOS_ENCLOSURE_POW);
++	t->thermal_state =
++		smbios_get_val_si(ctx, "thermal-state",
++				  SYSINFO_ID_SMBIOS_ENCLOSURE_THERMAL);
++	t->security_status =
++		smbios_get_val_si(ctx, "security-status",
++				  SYSINFO_ID_SMBIOS_ENCLOSURE_SECURITY);
++	t->oem_defined = smbios_get_val_si(ctx, "oem-defined",
++					   SYSINFO_ID_SMBIOS_ENCLOSURE_OEM);
++	t->height = smbios_get_val_si(ctx, "height",
++				      SYSINFO_ID_SMBIOS_ENCLOSURE_HEIGHT);
++	t->number_of_power_cords =
++		smbios_get_val_si(ctx, "number-of-power-cords",
++				  SYSINFO_ID_SMBIOS_ENCLOSURE_POWCORE_NUM);
++
++	/*
++	 * TODO: Populate the Contained Element Record if they exist
++	 * t->element_count = <element_num>;
++	 * t->element_record_length = <element_len>;
++	 */
++
++	*sku_num_addr =
++		smbios_add_prop_si(ctx, "sku", SYSINFO_ID_SMBIOS_ENCLOSURE_SKU,
++				   NULL);
+ 
+ 	len = t->hdr.length + smbios_string_table_len(ctx);
+ 	*current += len;
+@@ -489,6 +613,8 @@ static void smbios_write_type4_dm(struct smbios_type4 *t,
+ 	u16 processor_family = SMBIOS_PROCESSOR_FAMILY_UNKNOWN;
+ 	const char *vendor = NULL;
+ 	const char *name = NULL;
++	u8 *id_data = NULL;
++	size_t id_size = 0;
+ 
+ #ifdef CONFIG_CPU
+ 	char processor_name[49];
+@@ -510,11 +636,33 @@ static void smbios_write_type4_dm(struct smbios_type4 *t,
+ 			name = processor_name;
+ 	}
+ #endif
++	if (processor_family == SMBIOS_PROCESSOR_FAMILY_UNKNOWN)
++		processor_family =
++			smbios_get_val_si(ctx, "family",
++					  SYSINFO_ID_SMBIOS_PROCESSOR_FAMILY);
++
++	if (processor_family == SMBIOS_PROCESSOR_FAMILY_EXT)
++		t->processor_family2 =
++			smbios_get_val_si(ctx, "family2",
++					  SYSINFO_ID_SMBIOS_PROCESSOR_FAMILY2);
++
++	t->processor_family = processor_family;
++	t->processor_manufacturer =
++		smbios_add_prop_si(ctx, "manufacturer",
++				   SYSINFO_ID_SMBIOS_PROCESSOR_MANUFACT,
++				   vendor);
++	t->processor_version =
++		smbios_add_prop_si(ctx, "version",
++				   SYSINFO_ID_SMBIOS_PROCESSOR_VERSION,
++				   name);
++
++	if (t->processor_id[0] || t->processor_id[1] ||
++	    sysinfo_get_data(ctx->dev, SYSINFO_ID_SMBIOS_PROCESSOR_ID,
++			     &id_data, &id_size))
++		return;
+ 
+-	t->processor_family = 0xfe;
+-	t->processor_family2 = processor_family;
+-	t->processor_manufacturer = smbios_add_prop(ctx, NULL, vendor);
+-	t->processor_version = smbios_add_prop(ctx, NULL, name);
++	if (id_data && id_size == sizeof(t->processor_id))
++		memcpy((u8 *)t->processor_id, id_data, id_size);
+ }
+ 
+ static int smbios_write_type4(ulong *current, int handle,
+@@ -522,18 +670,96 @@ static int smbios_write_type4(ulong *current, int handle,
+ {
+ 	struct smbios_type4 *t;
+ 	int len = sizeof(*t);
++	u8 *hdl;
++	size_t hdl_size;
+ 
+ 	t = map_sysmem(*current, len);
+ 	memset(t, 0, len);
+ 	fill_smbios_header(t, SMBIOS_PROCESSOR_INFORMATION, len, handle);
+ 	smbios_set_eos(ctx, t->eos);
+-	t->processor_type = SMBIOS_PROCESSOR_TYPE_CENTRAL;
++	t->socket_design =
++		smbios_add_prop_si(ctx, "socket-design",
++				   SYSINFO_ID_SMBIOS_PROCESSOR_SOCKET,
++				   NULL);
++	t->processor_type =
++		smbios_get_val_si(ctx, "processor-type",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_TYPE);
+ 	smbios_write_type4_dm(t, ctx);
+-	t->status = SMBIOS_PROCESSOR_STATUS_ENABLED;
+-	t->processor_upgrade = SMBIOS_PROCESSOR_UPGRADE_NONE;
+-	t->l1_cache_handle = 0xffff;
+-	t->l2_cache_handle = 0xffff;
+-	t->l3_cache_handle = 0xffff;
++
++	t->voltage =
++		smbios_get_val_si(ctx, "voltage",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_VOLTAGE);
++	t->external_clock =
++		smbios_get_val_si(ctx, "external-clock",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_EXT_CLOCK);
++	t->max_speed =
++		smbios_get_val_si(ctx, "max-speed",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_MAX_SPEED);
++	t->current_speed =
++		smbios_get_val_si(ctx, "current-speed",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_CUR_SPEED);
++	t->status =
++		smbios_get_val_si(ctx, "processor-status",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_STATUS);
++	t->processor_upgrade =
++		smbios_get_val_si(ctx, "upgrade",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_UPGRADE);
++
++	t->l1_cache_handle = SMBIOS_CACHE_HANDLE_NONE;
++	t->l2_cache_handle = SMBIOS_CACHE_HANDLE_NONE;
++	t->l3_cache_handle = SMBIOS_CACHE_HANDLE_NONE;
++
++	/* Read the cache handles */
++	if (!sysinfo_get_data(ctx->dev, SYSINFO_ID_SMBIOS_CACHE_HANDLE,
++			      &hdl, &hdl_size) &&
++	    (hdl_size == SYSINFO_CACHE_LVL_MAX * sizeof(u16))) {
++		u16 *handle = (u16 *)hdl;
++
++		if (*handle)
++			t->l1_cache_handle = *handle;
++
++		handle++;
++		if (*handle)
++			t->l2_cache_handle = *handle;
++
++		handle++;
++		if (*handle)
++			t->l3_cache_handle = *handle;
++	}
++
++	t->serial_number = smbios_add_prop_si(ctx, "serial",
++					      SYSINFO_ID_SMBIOS_PROCESSOR_SN,
++					      NULL);
++	t->asset_tag = smbios_add_prop_si(ctx, "asset-tag",
++					  SYSINFO_ID_SMBIOS_PROCESSOR_ASSET_TAG,
++					  NULL);
++	t->part_number = smbios_add_prop_si(ctx, "part-number",
++					    SYSINFO_ID_SMBIOS_PROCESSOR_PN,
++					    NULL);
++	t->core_count =
++		smbios_get_val_si(ctx, "core-count",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT);
++	t->core_enabled =
++		smbios_get_val_si(ctx, "core-enabled",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN);
++	t->thread_count =
++		smbios_get_val_si(ctx, "thread-count",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT);
++	t->processor_characteristics =
++		smbios_get_val_si(ctx, "characteristics",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_CHARA);
++	t->core_count2 =
++		smbios_get_val_si(ctx, "core-count2",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT2);
++	t->core_enabled2 =
++		smbios_get_val_si(ctx, "core-enabled2",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN2);
++	t->thread_count2 =
++		smbios_get_val_si(ctx, "thread-count2",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT2);
++	t->thread_enabled =
++		smbios_get_val_si(ctx, "thread-enabled",
++				  SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_EN);
+ 
+ 	len = t->hdr.length + smbios_string_table_len(ctx);
+ 	*current += len;
+@@ -542,6 +768,98 @@ static int smbios_write_type4(ulong *current, int handle,
+ 	return len;
+ }
+ 
++static int smbios_write_type7_1level(ulong *current, int handle,
++				     struct smbios_ctx *ctx, int level)
++{
++	struct smbios_type7 *t;
++	int len = sizeof(*t);
++	u8 *hdl;
++	size_t hdl_size;
++
++	t = map_sysmem(*current, len);
++	memset(t, 0, len);
++	fill_smbios_header(t, SMBIOS_CACHE_INFORMATION, len, handle);
++	smbios_set_eos(ctx, t->eos);
++
++	t->socket_design =
++		smbios_add_prop_si(ctx, "socket-design",
++				   SYSINFO_ID_SMBIOS_CACHE_SOCKET + level,
++				   NULL);
++	t->config.data =
++		smbios_get_val_si(ctx, "config",
++				  SYSINFO_ID_SMBIOS_CACHE_CONFIG + level);
++	t->max_size.data =
++		smbios_get_val_si(ctx, "max-size",
++				  SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE + level);
++	t->inst_size.data =
++		smbios_get_val_si(ctx, "installed-size",
++				  SYSINFO_ID_SMBIOS_CACHE_INST_SIZE + level);
++	t->supp_sram_type.data =
++		smbios_get_val_si(ctx, "supported-sram-type",
++				  SYSINFO_ID_SMBIOS_CACHE_SUPSRAM_TYPE + level);
++	t->curr_sram_type.data =
++		smbios_get_val_si(ctx, "current-sram-type",
++				  SYSINFO_ID_SMBIOS_CACHE_CURSRAM_TYPE + level);
++	t->speed = smbios_get_val_si(ctx, "speed",
++				     SYSINFO_ID_SMBIOS_CACHE_SPEED + level);
++	t->err_corr_type =
++		smbios_get_val_si(ctx, "error-correction-type",
++				  SYSINFO_ID_SMBIOS_CACHE_ERRCOR_TYPE + level);
++	t->sys_cache_type =
++		smbios_get_val_si(ctx, "system-cache-type",
++				  SYSINFO_ID_SMBIOS_CACHE_SCACHE_TYPE + level);
++	t->associativity =
++		smbios_get_val_si(ctx, "associativity",
++				  SYSINFO_ID_SMBIOS_CACHE_ASSOC + level);
++	t->max_size2.data =
++		smbios_get_val_si(ctx, "max-size2",
++				  SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE2 + level);
++	t->inst_size2.data =
++		smbios_get_val_si(ctx, "installed-size2",
++				  SYSINFO_ID_SMBIOS_CACHE_INST_SIZE2 + level);
++
++	/* Save the cache handles */
++	if (!sysinfo_get_data(ctx->dev, SYSINFO_ID_SMBIOS_CACHE_HANDLE,
++			      &hdl, &hdl_size)) {
++		if (hdl_size == SYSINFO_CACHE_LVL_MAX * sizeof(u16))
++			*((u16 *)hdl + level) = handle;
++	}
++
++	len = t->hdr.length + smbios_string_table_len(ctx);
++	*current += len;
++	unmap_sysmem(t);
++
++	return len;
++}
++
++static int smbios_write_type7(ulong *current, int handle,
++			      struct smbios_ctx *ctx)
++{
++	int len = 0;
++	int i, level;
++	ofnode parent = ctx->node;
++	struct smbios_ctx ctx_bak;
++
++	memcpy(&ctx_bak, ctx, sizeof(ctx_bak));
++
++	/* Get the number of level */
++	level =	smbios_get_val_si(ctx, NULL, SYSINFO_ID_SMBIOS_CACHE_LEVEL);
++	if (level >= SYSINFO_CACHE_LVL_MAX) /* Error, return 0-length */
++		return 0;
++
++	for (i = 0; i <= level; i++) {
++		char buf[9] = "";
++
++		if (!snprintf(buf, sizeof(buf), "l%d-cache", i + 1))
++			return 0;
++		ctx->subnode_name = buf;
++		ctx->node = ofnode_find_subnode(parent, ctx->subnode_name);
++		len += smbios_write_type7_1level(current, handle++, ctx, i);
++		memcpy(ctx, &ctx_bak, sizeof(*ctx));
++	}
++	return len;
++}
++
+ static int smbios_write_type32(ulong *current, int handle,
+ 			       struct smbios_ctx *ctx)
+ {
+@@ -581,7 +899,9 @@ static struct smbios_write_method smbios_write_funcs[] = {
+ 	{ smbios_write_type2, "baseboard", },
+ 	/* Type 3 must immediately follow type 2 due to chassis handle. */
+ 	{ smbios_write_type3, "chassis", },
+-	{ smbios_write_type4, },
++	/* Type 7 must ahead of type 4 to get cache handles. */
++	{ smbios_write_type7, "cache", },
++	{ smbios_write_type4, "processor"},
+ 	{ smbios_write_type32, },
+ 	{ smbios_write_type127 },
+ };
+@@ -598,7 +918,7 @@ ulong write_smbios_table(ulong addr)
+ 	int i;
+ 
+ 	ctx.node = ofnode_null();
+-	if (IS_ENABLED(CONFIG_OF_CONTROL) && CONFIG_IS_ENABLED(SYSINFO)) {
++	if (CONFIG_IS_ENABLED(SYSINFO)) {
+ 		uclass_first_device(UCLASS_SYSINFO, &ctx.dev);
+ 		if (ctx.dev) {
+ 			int ret;
 -- 
 2.25.1
 
