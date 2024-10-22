@@ -4,56 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC64DCDD0E6
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 20:19:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E7C1CDD0E6
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 20:21:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02CA888FD6;
-	Tue, 22 Oct 2024 22:19:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E098188FF1;
+	Tue, 22 Oct 2024 22:21:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729628369;
-	bh=e9PfrbG3Eh7W3pHj97e2lT0rd8xw7XUlGEff1tJjWf4=;
+	s=phobos-20191101; t=1729628512;
+	bh=Rn3weA+VxjMIYdPDgkdOPntzb8miN/Mw6jg19Lf8xKU=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Vp/WurDPONw8C6IrnhkD2VpYoGQdiDVtkyVdQ4GjkhiI6h+E99DQErbZAu4eV6HwB
-	 AHZS3pjAmT9DepOGw0IHDu0QX6MA0XTw1zVuDM2YxgZk5GDtSyrmoNPYgNR7Y3/aoS
-	 /lrb1i7+L1tnU9sI0s8DE4Au7uWyg7/H9kEaqd0oy9e+dv8U6DFGzCNvgRUF+YhhrX
-	 tnS4MBFL1Da7My3g1bk8eGjG8SlDX5Z4KYOQewYTgSIkFDYyvjveldN/c3D7QJN73X
-	 cITZquAi4GUIrkvR4g/gx9predqbcqc933lFx0lFYh4yaX3PrAMPbtx1JKUd6GNxRw
-	 2ZB/UhEXbXCyQ==
+	b=M2NvFex7/z8LmifndeWabnxG+BGAtM7qcZYXmyTf/BZouMHD4OrqNGl9Lfvzg7uvd
+	 Y7MUdAhwN2AzclS1TN9eqftSz/QBveDgPcpkauugYQ7I8SSkzxua/4IEkSDTTilG6C
+	 0SLOusH/SPgLivVXGErDvBnLwF+01ATzUzBgIG8DoWrLiwCWfo3jVmJUpVdTQ4y9jv
+	 kKiU6pQnkLSiS3Kq7c9iIoBpPT/3kjEe8SGgDSr0t4ss0S4GkLbFZkRrhcrZrvu5rl
+	 nPTK8NUFuXMjhU0qyEOWbJlKRkZIfHkv/7K6EmA/OwhSy1HpWqhubkmzBq8jE7CBIr
+	 69xK3UhzgfI7A==
 Received: from crub (p5483347b.dip0.t-ipconnect.de [84.131.52.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3F77388FCC;
- Tue, 22 Oct 2024 22:19:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id A785188FCC;
+ Tue, 22 Oct 2024 22:21:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729628366;
- bh=e9PfrbG3Eh7W3pHj97e2lT0rd8xw7XUlGEff1tJjWf4=;
+ s=phobos-20191101; t=1729628510;
+ bh=Rn3weA+VxjMIYdPDgkdOPntzb8miN/Mw6jg19Lf8xKU=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=llNIZcMtjYy/B1lf2Ny2RmHIseURrvUGs2AWEsXpyJvhHgsRNCZZALXSxFJv2HjIq
- T00XRXbMJ7OJQ0wNJRHl3DPD+AXfkXMF4IK8ipfQihOyw28r+czXyvRRwfvE6GRlbH
- mSH5jGNJyre/zEactPc52exgkXBNYb6/tWZuJCp9X7G/7gEcZjpgo+myOPzQ0QCyLx
- HIcPkQFbqS0vBajj7gCzvXW/6Sx6+epad2WCWtQwPc2R2TZPxO0mqZILPs34Bulbs3
- ZF8eJtNbXGwGiuTEjNIxFRp3DqtZnTMv6tiIgHTx3XWuRP2adBaegOPogH6eu41Dk0
- 1VVZ+ARIFhQ3Q==
-Date: Tue, 22 Oct 2024 22:19:25 +0200
+ b=z5la8EQ808zXpfpdvyRJbjT6GicAOyD3tKCVmZizXA8EpiEQDuGmbNOTutC8HyiQc
+ DZrIIfW4qkYWTLBF5Aa4ZI5DqeKIHz6iXySmx927GCmd7/PouImvG63nHRtm8xh8UW
+ 4FUDwwrAWW6OcdMKrDw2nayGTQYW5e+8VVtYwnSPYY/kIuIEIYpRrYUCdM/dpLdOqs
+ ryP2BhWPrbch6mhiRa2t/UUc/k/Y8HllzeEXlGdK84UEajL7GIDhVRPXoBaAR/daoJ
+ F2e6aoqOxUCu+Rx/n0Pq00OEfBZmCj7PVPhDnY8V575rTpAzLcru05pXuH9+hV0SQF
+ QcUWWOX+Y3nJQ==
+Date: Tue, 22 Oct 2024 22:21:49 +0200
 From: Anatolij Gustschin <agust@denx.de>
-To: Tom Rini <trini@konsulko.com>, Devarsh Thakkar <devarsht@ti.com>, nm@ti.com
-Cc: u-boot@lists.denx.de, bb@ti.com, sjg@chromium.org, praneeth@ti.com,
- vigneshr@ti.com, s-jain1@ti.com, r-donadkar@ti.com, j-humphreys@ti.com,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, akashi.tkhro@gmail.com,
- mkorpershoek@baylibre.com, eajames@linux.ibm.com,
- caleb.connolly@linaro.org, quentin.schulz@cherry.de,
- martinstolpe@gmail.com, iivanov@suse.de, n-jain1@ti.com
-Subject: Re: [PATCH 0/3] Simple-framebuffer node related updates
-Message-ID: <20241022221925.61550574@crub>
-In-Reply-To: <20241021202056.GU4959@bill-the-cat>
-References: <20240925151354.480704-1-devarsht@ti.com>
- <66434f62-e7e6-5414-cc5e-64f516288795@ti.com>
- <20241021202056.GU4959@bill-the-cat>
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ <u-boot@lists.denx.de>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Ian Ray <ian.ray@gehealthcare.com>
+Subject: Re: [PATCH] video: Fix VNBYTES() macro comment
+Message-ID: <20241022222149.07f849f7@crub>
+In-Reply-To: <20240910091200.101886-1-miquel.raynal@bootlin.com>
+References: <20240910091200.101886-1-miquel.raynal@bootlin.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
@@ -73,37 +68,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 21 Oct 2024 14:20:56 -0600
-Tom Rini trini@konsulko.com wrote:
+On Tue, 10 Sep 2024 11:11:59 +0200
+Miquel Raynal miquel.raynal@bootlin.com wrote:
 
-> On Mon, Oct 21, 2024 at 08:47:55PM +0530, Devarsh Thakkar wrote:
-> > Gentle reminder.
-> > 
-> > Hi Tom, Bryan,
-> > 
-> > On 25/09/24 20:43, Devarsh Thakkar wrote:  
-> > > This series fixes some compilation issues related to FDT_SIMPLEFB
-> > > and VIDEO and along with that enables support for dynamic simplefb
-> > > node enablement for AM62x platform.
-> > > 
-> > > Devarsh Thakkar (3):
-> > >   boot/Kconfig: Add Video Kconfig as dependency for FDT_SIMPLEFB
-> > >   boot: fdt_simplefb: Remove conditional compilation checks for VIDEO
-> > >     Kconfig
-> > >   board: ti: am62x: evm: Update simple-framebuffer node in device-tree
-> > >   
-> > 
-> > 
-> > Is it possible to pull in this series for -next branch ? It is already
-> > carrying a R-B for first two patches and last one was peer reviewed informally
-> > too [1].
-> > 
-> > [1]:
-> > https://lore.kernel.org/all/CAPHZmLZopucK5uMwENuF83pRMLYR2A5sC7fes4-1JXE4jX7=rw@mail.gmail.com/  
+> The VNBYTES() macro has been updated to silence possible warnings
+> regarding authorized (but unusual) uses of this macro, but the comment
+> was kept unchanged. A year has passed so let's fix the comment now to
+> avoid confusions.
 > 
-> Anatolij, do you have time to pick up some patches for v2025.01? Thanks.
+> Fixes: cc05d352fbc ("video: Add parentheses around VNBYTES() macro")
+> Suggested-by: Tom Rini <trini@konsulko.com>
+> Link: https://lore.kernel.org/u-boot/20240906183432.GG3879073@bill-the-cat/
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> ---
+>  include/video.h | 6 +-----
+>  1 file changed, 1 insertion(+), 5 deletions(-)
 
-series applied to u-boot-video/master, thanks!
+applied to u-boot-video/master, thanks!
 
 --
 Anatolij
