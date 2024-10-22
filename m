@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92452D0E6FC
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 11:14:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08348D15DBB
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 11:14:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D50788D8D;
-	Tue, 22 Oct 2024 13:14:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9551588F8E;
+	Tue, 22 Oct 2024 13:14:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729595645;
-	bh=wdxDy5I9euMQrVv0vP6udNMAkzZD8byzn2cu/G9eksA=;
+	s=phobos-20191101; t=1729595658;
+	bh=3Dq7y7+UlxbOvwbsNJ2hByn/8k32Z37zfb9DmmKohqQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=L5xpojfVZfGCo3xNiWzGYFo4AsstCFILc+TM1FoQe6ftbIrJf0wN8elgj8OQ0AxZl
-	 lBj3gZ8+AZoNNLK4SZEWQm9Bmyw/75MnoQka47ZKn6RJZmUQ9xM9PbXmzjM4U22jbz
-	 wddhvoY06ZO0LRzFtOLa3+kXmO/1WR1JbB1d4CSMqrbOixbPSCP7PvnOTPw8N692q7
-	 m9P13YXOkjRMqbrukpME8ZJ0L2fN0qY+FvoUXGiOfDb6gSrd5OJ3RH90plmzhk3uKs
-	 pCA2PPJRWBQuUpq+pv/FTjjJLyx9vx4OuAIxY+ujMZe+PTgTwq1yU7c9OPQ9N/Lpyk
-	 UjsXsJUdpyYgA==
+	b=fg0DBz2Te5Q4N+YZGlBbN9Dmn1ci7SIk0ZylonYuqauJUECiJE8AA1mviv0Ju2OGy
+	 3nTielTwwzdmmm+3Imdts3GWB3CLmZtY+9e/kZCP/VqGFISVLMR3nWtjf6bqA+5TBk
+	 Gs4agGtT/3Jy1flvxV6RIP6DFlQhX+0Uv0I2iUudTys4sLq0grbvXukUb3cRoah56b
+	 LA45ZR4adyWSvK5nW5jRvf4YZdgattjT1faP2daEOF3upgaOg9FkHrfapFob66q0Y3
+	 myn2lbJc1zcEnhB6ctBbxINKBWTC5D0xSkJXBL4dyDy9tPs8J7wR+ctdhLnQceRhei
+	 di6xxSRaosUmw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76BB189056; Tue, 22 Oct 2024 13:14:03 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
+ id 0E52888FD6; Tue, 22 Oct 2024 13:14:18 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2298188D91
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 13:14:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3919C88D5C
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 13:14:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XXqLb0s3rz9sS5;
- Tue, 22 Oct 2024 13:13:59 +0200 (CEST)
-Message-ID: <5f03433a-0e24-49be-bec6-0ff900e386ad@denx.de>
-Date: Tue, 22 Oct 2024 13:13:58 +0200
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4XXqLt1NQsz9tPw;
+ Tue, 22 Oct 2024 13:14:14 +0200 (CEST)
+Message-ID: <61c763e3-ffa7-458e-a19b-e79617e4cc80@denx.de>
+Date: Tue, 22 Oct 2024 13:14:13 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 12/13] boot: cedit: include u-boot/schedule.h
+Subject: Re: [PATCH 13/13] global_data.h: remove unnecesary include of cyclic.h
 To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>
 References: <20241003212802.3810-1-ravi@prevas.dk>
- <20241003212802.3810-13-ravi@prevas.dk>
+ <20241003212802.3810-14-ravi@prevas.dk>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241003212802.3810-13-ravi@prevas.dk>
+In-Reply-To: <20241003212802.3810-14-ravi@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4XXqLb0s3rz9sS5
+X-Rspamd-Queue-Id: 4XXqLt1NQsz9tPw
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,8 +71,11 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/3/24 23:28, Rasmus Villemoes wrote:
-> This TU currently relies on getting a declaration of schedule()
-> through some nested include. Include the proper header directly.
+> Nothing in cyclic.h is needed to define struct global_data, so do not
+> include that header.
+> 
+> If any .c file relies on getting cyclic.h through asm/global_data.h,
+> it needs to include it itself.
 > 
 > Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 
@@ -83,21 +85,21 @@ Thanks,
 Stefan
 
 > ---
->   boot/cedit.c | 1 +
->   1 file changed, 1 insertion(+)
+>   include/asm-generic/global_data.h | 1 -
+>   1 file changed, 1 deletion(-)
 > 
-> diff --git a/boot/cedit.c b/boot/cedit.c
-> index c29a2be14ce..ff0efda3a7b 100644
-> --- a/boot/cedit.c
-> +++ b/boot/cedit.c
-> @@ -20,6 +20,7 @@
->   #include <video.h>
->   #include <linux/delay.h>
->   #include "scene_internal.h"
-> +#include <u-boot/schedule.h>
+> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+> index 27aa75e7036..1570ad8f0c0 100644
+> --- a/include/asm-generic/global_data.h
+> +++ b/include/asm-generic/global_data.h
+> @@ -20,7 +20,6 @@
+>    */
 >   
->   enum {
->   	CMOS_MAX_BITS	= 2048,
+>   #ifndef __ASSEMBLY__
+> -#include <cyclic.h>
+>   #include <event_internal.h>
+>   #include <fdtdec.h>
+>   #include <membuff.h>
 
 Viele Grüße,
 Stefan Roese
