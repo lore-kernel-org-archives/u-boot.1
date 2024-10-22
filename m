@@ -4,45 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 338EDD1CDB2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 08:23:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00385D1CDB4
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 08:32:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E64E88F31;
-	Tue, 22 Oct 2024 10:23:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B90188D91;
+	Tue, 22 Oct 2024 10:32:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C85A388599; Tue, 22 Oct 2024 10:23:51 +0200 (CEST)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 60F3188549
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 10:23:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.11,222,1725289200"; 
- d="asc'?scan'208";a="226623544"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 22 Oct 2024 17:23:45 +0900
-Received: from [10.226.93.125] (unknown [10.226.93.125])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 0627640065BF;
- Tue, 22 Oct 2024 17:23:34 +0900 (JST)
-Message-ID: <da2fc67d-fa30-4da1-806a-581c3b887877@bp.renesas.com>
-Date: Tue, 22 Oct 2024 09:23:33 +0100
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="q9sieWHZ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 938BA88D91; Tue, 22 Oct 2024 10:32:40 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 41C81882BE
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 10:32:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43163667f0eso37971335e9.0
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 01:32:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729585958; x=1730190758;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ewlRDRy9rSStzBpNiy2SmbDXWnIcvHgbQLDAoT1XjrU=;
+ b=q9sieWHZpyjFCbf6YsR/ux0sddM+pY9M9EAk7wIomo6kwJafuFvtBKIiZNicHZuBWT
+ pGFkTx60M0+e8iQpLu/a6sxHfr71sScOK0+tAReMSSBLacFosVPvjOjTKxYq6IOj3K1B
+ bn54co276Owb3kVv1gMv2PZk2ZXodP6yHPCL7Yg46LYWyyC4s7XrizW7zwChvXho3BmU
+ cOiIL0C114T0xdaXu9bGKlNLN95nJCrDigGPEFUsk0MSPWQqPJ9E+rPbjO7AG5SJ7RXP
+ ynCRU9P068XwNaoEob5TTql/rFLwO6kP6avPRTfwLVLhav/nnvkbvCw74iCEFWgIQJl9
+ F+Aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729585958; x=1730190758;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ewlRDRy9rSStzBpNiy2SmbDXWnIcvHgbQLDAoT1XjrU=;
+ b=pS6SMy4E77WSj+y5IdyVR1jACL4tFG+YJFLNULpFhiT77ZV3AXfpwhYhtDv1D/vQBW
+ O3TuCjqa3omj7fVnN7BdsaPdFgRieqoT6TfG5rS4c2IfBBmt6UJf+Oxzvq6Bik0V7Esq
+ gPNw7mSmcx2mYkr/5TuCOPKOGJ2f9GAV+t63pOhpYb3+iS2LvCotvlgENwu2kzoynP0k
+ hrO6h90qo627Wii0Ty4qgFVpoa38A6IowL2WVHq+e/uXl0yCoO9FkF3CDxsgTzBLyXqD
+ QtjmUa87HFbyJeC6jm03pz3whGCqYkLCjaB4LyKUA4olZgY/W2htjm6m5ycVr4JffSUv
+ ACAQ==
+X-Gm-Message-State: AOJu0YxADtZ3DGrq0wq6obdp5vssxaXlK4uQlDNuvt1SUyFbcxMrukto
+ Dv4Jze39Kbfx7QDX4zZ2ghzXXwxHaTDY9sZKSaBMG5ztsxuE61UJoVCiB07rYIo=
+X-Google-Smtp-Source: AGHT+IH620t5DBpF6+J/rjWeUv1k560iRER3FSXu7Gw6Viveebz0L8IwbUS7xPbIcS5tN0IZLx/eZw==
+X-Received: by 2002:a05:600c:1d27:b0:431:5847:f63f with SMTP id
+ 5b1f17b1804b1-4316164ac7amr113798365e9.13.1729585957599; 
+ Tue, 22 Oct 2024 01:32:37 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4316f5709efsm82701435e9.10.2024.10.22.01.32.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Oct 2024 01:32:36 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, Tom
+ Rini <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, Mario Six
+ <mario.six@gdsys.cc>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, rockosov@gmail.com,
+ kernel@salutedevices.com, Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Guillaume La Roque <glaroque@baylibre.com>
+Subject: Re: [PATCH v5 0/6] android_ab: introduce bcb ab_dump command and
+ provide several bcb fixes
+In-Reply-To: <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>
+References: <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>
+Date: Tue, 22 Oct 2024 10:32:34 +0200
+Message-ID: <87ttd4wna5.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: renesas: Add top level boards/renesas/ MAINTAINERS
- file
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-References: <20241022005543.239308-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-GB
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20241022005543.239308-1-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------Klnexjiqo9XEGcsJyyESYKsp"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,152 +95,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------Klnexjiqo9XEGcsJyyESYKsp
-Content-Type: multipart/mixed; boundary="------------6tHC7KT8Y4BuYgcB9Czftjms";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <da2fc67d-fa30-4da1-806a-581c3b887877@bp.renesas.com>
-Subject: Re: [PATCH] ARM: renesas: Add top level boards/renesas/ MAINTAINERS
- file
-References: <20241022005543.239308-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241022005543.239308-1-marek.vasut+renesas@mailbox.org>
+Hi Dmitry,
 
---------------6tHC7KT8Y4BuYgcB9Czftjms
-Content-Type: multipart/mixed; boundary="------------d3GJgt0N9G9SFm0O23o9TLgJ"
+Thank you for this series.
 
---------------d3GJgt0N9G9SFm0O23o9TLgJ
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On jeu., oct. 17, 2024 at 17:12, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
 
-On 22/10/2024 01:55, Marek Vasut wrote:
-> Add top level boards/renesas/ MAINTAINERS file to catch all the common
-> Renesas file patterns and put people on CC via get_maintainer.pl script=
-=2E
+> The patch series include changes:
+>     - move ab_select_slot() documentation to @ notation
+>     - redesign 'bcb' command to U_BOOT_LONGHELP approach
+>     - move ab_select command to bcb subcommands
+>     - introduce the ab_dump command to print the content of the BCB
+>       block; it's useful for debugging A/B logic on supported boards
+>     - fix the slot suffix format in the ABC block to align with official
+>       Android BCB specifications
+>     - add a test for the ab_dump command to verify the accuracy of each
+>       field within the ABC data displayed, it's also useful for testing
+>       slot_suffix problem code paths
+>
+> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
 
-s/boards/board/, here and in the commit title.
+Boot tested AOSP using on Khadas VIM3 using khadas_vim3_android_defconfig
 
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # vim3_android
+
+Boot tested Android 14 on Beagle Play using:
+am62x_beagleplay_a53_defconfig and am62x_a53_android.config
+
+Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # beagleplay
+
 > ---
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
+> Changes in v5:
+> - rework direct #ifdefs to IS_ENABLED() macro
+> - redesign 'bcb' command to U_BOOT_LONGHELP approach
+> - check argc directly in the ab_select and ab_dump subcommands handlers
+> - Link to v4: https://lore.kernel.org/r/20241015-android_ab_master-v4-0-a91cca9513c4@salutedevices.com
+>
+> Changes in v4:
+> - add #ifdefs for CONFIG_ANDROID_AB in cmd/bcb.c to allow the usage of
+>   the bcb command without A/B enabled
+> - run the savedefconfig command for all defconfigs that include the
+>   CMD_BCB configuration
+> - resolve merge conflicts with latest master
+> - provide additional trailers from the previous version (excluding
+>   changed patches)
+> - Link to v3: https://lore.kernel.org/r/20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com
+>
+> Changes in v3:
+> - return "Legend" block for bcb command
+> - additionally, verify the CONFIG_ANDROID_AB configuration alongside
+>   CONFIG_CMD_BCB to ensure that the A/B scheme is used for the
+>   designated board.
+> - Link to v2: https://lore.kernel.org/all/20240911214945.15873-1-ddrokosov@salutedevices.com/
+>
+> Changes in v2:
+> - move ab_select_slot() documentation to @ notation
+> - move ab_select command to bcb subcommands per Simon and Mattijs
+>   suggestions
+> - redesign ab_dump as bcb subcommand
+> - use spaces instead of tabs in the ab_dump command output
+> - print hex values in the lowercase
+> - add RvB tags
+> - Link to v1: https://lore.kernel.org/all/20240725194716.32232-1-ddrokosov@salutedevices.com/
+>
 > ---
->  board/renesas/MAINTAINERS | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
->  create mode 100644 board/renesas/MAINTAINERS
->=20
-> diff --git a/board/renesas/MAINTAINERS b/board/renesas/MAINTAINERS
-> new file mode 100644
-> index 00000000000..d96be7d8520
-> --- /dev/null
-> +++ b/board/renesas/MAINTAINERS
-> @@ -0,0 +1,15 @@
-> +RENESAS BOARDS
-> +M:	Marek Vasut <marek.vasut+renesas@mailbox.org>
-> +M:	Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> +S:	Maintained
-> +N:	grpeach
-> +N:	r2dplus
-> +N:	r7s72100
-> +N:	r8a66597
-> +N:	r8a77
-> +N:	rcar
-> +N:	renesas
-> +N:	rza1
-> +N:	serial_sh
-> +N:	sh77
-> +N:	sh_eth
-
-Should we also add 'rzg2l' and 'r9a07g' to this list?
-
-Thanks,
-
---=20
-Paul Barker
-
---------------d3GJgt0N9G9SFm0O23o9TLgJ
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------d3GJgt0N9G9SFm0O23o9TLgJ--
-
---------------6tHC7KT8Y4BuYgcB9Czftjms--
-
---------------Klnexjiqo9XEGcsJyyESYKsp
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZxdhBQUDAAAAAAAKCRDbaV4Vf/JGvb5K
-AP44MvzuMiX8hhHBu59L/cIMsv9YdOSyXkKc6i2c7+R+tgEAtj4oIcrSm0aXvIPFtx7l1SkXD+LX
-23X+EWOtU/06Gw0=
-=cBnJ
------END PGP SIGNATURE-----
-
---------------Klnexjiqo9XEGcsJyyESYKsp--
+> Dmitry Rokosov (6):
+>       include/android_ab: move ab_select_slot() documentation to @ notation
+>       cmd: bcb: rework the command to U_BOOT_LONGHELP approach
+>       treewide: bcb: move ab_select command to bcb subcommands
+>       cmd: bcb: change strcmp() usage style in the do_bcb_ab_select()
+>       cmd: bcb: introduce 'ab_dump' command to print BCB block content
+>       common: android_ab: fix slot suffix for abc block
+>
+>  MAINTAINERS                               |   1 -
+>  boot/android_ab.c                         | 116 +++++++++++++---
+>  cmd/Kconfig                               |  14 --
+>  cmd/Makefile                              |   1 -
+>  cmd/ab_select.c                           |  66 ---------
+>  cmd/bcb.c                                 | 221 +++++++++++++++++-------------
+>  configs/am57xx_evm_defconfig              |   1 -
+>  configs/am57xx_hs_evm_defconfig           |   1 -
+>  configs/am57xx_hs_evm_usb_defconfig       |   1 -
+>  configs/khadas-vim3_android_ab_defconfig  |   1 -
+>  configs/khadas-vim3l_android_ab_defconfig |   1 -
+>  configs/sandbox64_defconfig               |   2 +
+>  configs/sandbox_defconfig                 |   1 -
+>  doc/android/ab.rst                        |  12 +-
+>  include/android_ab.h                      |  17 ++-
+>  include/configs/khadas-vim3_android.h     |   2 +-
+>  include/configs/khadas-vim3l_android.h    |   2 +-
+>  include/configs/meson64_android.h         |   4 +-
+>  include/configs/ti_omap5_common.h         |   4 +-
+>  test/py/tests/test_android/test_ab.py     |  31 ++++-
+>  20 files changed, 275 insertions(+), 224 deletions(-)
+> ---
+> base-commit: 98a36deb9ab7aaea70b0b0db47718100e08cf3e8
+> change-id: 20241008-android_ab_master-d86d71c839ae
+>
+> Best regards,
+> -- 
+> Dmitry Rokosov <ddrokosov@salutedevices.com>
