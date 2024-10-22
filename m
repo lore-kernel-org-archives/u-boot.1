@@ -4,93 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82980D2C54B
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 13:18:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB9BD2C54E
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 13:19:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2FA488FA7;
-	Tue, 22 Oct 2024 15:18:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 252C288FD6;
+	Tue, 22 Oct 2024 15:18:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ee0SioUX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZjqBjeUG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D83788EC9; Tue, 22 Oct 2024 10:48:52 +0200 (CEST)
+ id 3B2AC88D97; Tue, 22 Oct 2024 14:15:50 +0200 (CEST)
 Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
  [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07C9B88F66
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 10:48:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3ACC188ECB
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 14:15:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-539f72c913aso6211646e87.1
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 01:48:50 -0700 (PDT)
+ 2adb3069b0e04-539ee1acb86so3643824e87.0
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 05:15:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729586929; x=1730191729; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729599345; x=1730204145; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yXOG4bAnuNruA+w4vpSbSR1SmdXTLwDkoXzo1msrvxY=;
- b=ee0SioUXlNI5N/PJ/vTN9w6k93B4jmM9JHQbxwKNG7kMYkXDZ67XJ5Nvv/gXlKk6zN
- XHGwCXDskLQaKQ9rS+50Li5sWnmYC94Afa2kK8K7bB28pN8OZn1qk5wyul2aUD2Dt8KH
- TeUeZCXrGBKI1Kku2PGF/CKKl+o16vLvTRHz03WeTjwVOsPqY4V3i4h1pZcXyVM/FEJj
- eTrQn5O8aC+Fs8twpTnyS4EIgWsDlzTPsKwhZnj4HZHAzKopHrcbX8AOHk/Vei1rXBQ0
- c/cvQB+3np+iUOUBrf1SYy+zeUY5w7QDInmBVYujU/pKr4GIAEwKgugv5bSwWiP2KDH8
- SO/w==
+ bh=pNTFFiDhvjS02pYi2E36x2cwn0ld7G4zNAPfrwiz67k=;
+ b=ZjqBjeUGCkQCCeBur727rK3chxx9W2sh9XO6RD7v/Ui8PAXB7v+gcJHWORnecMIiIR
+ PBSvyn9Z+t2UNNbM9MLEOUGzqDFc2OIEtC2SmNq2k4u06u72LPJ/wsf65Nxu/O4UDLrR
+ 02355orMt7R7O9XQzCVV0X9uSFV5xVEKrtOHU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729586929; x=1730191729;
+ d=1e100.net; s=20230601; t=1729599345; x=1730204145;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=yXOG4bAnuNruA+w4vpSbSR1SmdXTLwDkoXzo1msrvxY=;
- b=tahBx7QPPSirJqI6hdlMa6nP3tnqmwb1WGpsHlq4ZRIcO4crT9stWrmKqubcxSJuLE
- HsY1woAU9j4oOAnfjXmSjKkWg1h7EMeFe8lyiCdqiW2tyv6rhfFN1UpHCtxYfRwGdCNI
- XyIRQC5MtTaNwfhAAndxG4E+QIgiKeLhPhaFbptW4UTjCC0HYcKU3RTeyt8x263+VAEc
- 6tCH3VH9pYVhs5pQvB0kP1BHom32Vx5V7XDzWz4JXZBtmFpZdzTUgPY7IumIlJYUqGoa
- t8TPGkORy+VJ5EJhKFWX7EvQkqch0GSHa4JQ2DHhKdp2BThlIqsGlrA9b0w/eSIIdALl
- pYGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU7TqD6SAEto7I/F+vFXh5QaIj6sU5ZRIJKw2pTZk7M1P8mEWF/KVAVm7tgsAToJi7xjRf6ZDc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxetFcYnBJSngtljP8am0p3oCFG6j50mlCW0uzm00bEYuZM2Md2
- JsKfUqkmLiZQS4UziwVXteuPXxU2FUK9JDIfXCPW0yBz502KLkdBsWxPaoeC6Xr5naPBNuqC8LO
- c5kT9dwx8dpr9hR9Fg3AeKcVrBK8=
-X-Google-Smtp-Source: AGHT+IESDJ30NOXZlrNVe3MHVFVKMJkdGbCKDDCyLk3bWq90A/sQPszJvQs3aN/4SDx3h9OLgyN10NY18y3fsS59Y2U=
-X-Received: by 2002:a05:6512:acc:b0:539:e9b4:7ff6 with SMTP id
- 2adb3069b0e04-53a15445f78mr7872135e87.45.1729586928951; Tue, 22 Oct 2024
- 01:48:48 -0700 (PDT)
+ bh=pNTFFiDhvjS02pYi2E36x2cwn0ld7G4zNAPfrwiz67k=;
+ b=XqhvUc6bDACdahicf28r6tGPtwIh+3dhfj7aWhiT6dASa2s4wvhLytCyORWQvNgfvV
+ jRW5YiyGUhhfvn+1lhKjmg/G6nNyRrCn1JWYo+Xr1gHGCmpQOz9Xj2xfE/i2w3rRq/dU
+ GgaaJtqZoYQKV6KEatmWvWOSvLUKUsaQlAS9kJ9Csp+p9J6lKSyGVJ62ES2R1HsKulf0
+ fG3n4ITV0yp9zkBtxEsWRWqQtuy4jl12FAzf9C9tiSDsxtfQgBWNNfVA7YUBhrK/LuOf
+ zlS4ye2CinVy2pVqiSXtBmJGrxW1f2mBrZxie4AtgeBnlqSw8DXrY0uNXjhMvePyeafQ
+ VEAg==
+X-Gm-Message-State: AOJu0Yx8jvkkTLL5ZtW8rMDInccauG3WOyIjYqp1sDzhSmi5ybxkTthL
+ 4rpBC3h6Z9/HLJRpN2yzOVfKElNvsTvTZtctRJNHvnBh4eQ1O6MAUwVmoYcgEffOBs8tWSsvSZP
+ 5sRMBKCnCoz3D5/4yC6wFhpPLA9dn0PJ0+KuyrLfDI8gvGk8vnJ9M
+X-Google-Smtp-Source: AGHT+IEQOf5Uth+EbYU6C8n0FmGmq35lcVLjqELZ6jNADa/5wekxFkyQcP1MpfN9icNtCardmm2IB4CXjRqc0Cai5c0=
+X-Received: by 2002:a05:6512:39cc:b0:539:e436:f1cc with SMTP id
+ 2adb3069b0e04-53a1546cc59mr8133444e87.52.1729599345254; Tue, 22 Oct 2024
+ 05:15:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241021113839.318572-1-sjg@chromium.org>
  <20241021172613.GN4959@bill-the-cat>
 In-Reply-To: <20241021172613.GN4959@bill-the-cat>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 22 Oct 2024 09:48:37 +0100
-Message-ID: <CALeDE9OVd49GiW+M8ygEA5CCF7F8f+MD4okNtk0a8aM1oqsTDQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 22 Oct 2024 14:15:34 +0200
+Message-ID: <CAFLszTguu7hRpsSLxADsBkMgTzA_-fAR0t8Axv+8=OvxJvSRCw@mail.gmail.com>
 Subject: Re: [PATCH v2 00/25] led: Remove old status-LED code
 To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Alexander Gendin <agendin@matrox.com>, 
- Alison Wang <alison.wang@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
- Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@kernel-space.org>,
- Angelo Dureghello <angelo@sysam.it>, Artur Rojek <artur@conclusive.pl>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Charles Hardin <ckhardin@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
- Doug Zobel <douglas.zobel@climate.com>,
- Enric Balletbo i Serra <eballetbo@gmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Hans de Goede <hdegoede@redhat.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Javier Martinez Canillas <javierm@redhat.com>,
- Jens Scharsig <esw@bus-elektronik.de>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Johan Jonker <jbx6244@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kamil Lulko <kamil.lulko@gmail.com>, 
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Albert Aribaud <albert.u.boot@aribaud.net>, 
+ Alexander Gendin <agendin@matrox.com>, Alison Wang <alison.wang@nxp.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Andy Fleming <afleming@gmail.com>, 
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Angelo Dureghello <angelo@sysam.it>, 
+ Artur Rojek <artur@conclusive.pl>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Charles Hardin <ckhardin@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>, 
+ Devarsh Thakkar <devarsht@ti.com>, Doug Zobel <douglas.zobel@climate.com>, 
+ Enric Balletbo i Serra <eballetbo@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Hans de Goede <hdegoede@redhat.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Javier Martinez Canillas <javierm@redhat.com>, 
+ Jens Scharsig <esw@bus-elektronik.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>, 
  =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
  Mario Six <mario.six@gdsys.cc>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -130,6 +123,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
+
+On Mon, 21 Oct 2024 at 19:26, Tom Rini <trini@konsulko.com> wrote:
+>
 > On Mon, Oct 21, 2024 at 01:38:08PM +0200, Simon Glass wrote:
 > > There has been an LED framework in U-Boot which uses driver model for
 > > about 9 years now. Recent work is underway to improve it and provide
@@ -160,17 +157,8 @@ X-Virus-Status: Clean
 > - Just start working on those platforms when they do move to
 >   OF_UPSTREAM.
 
-Also when the migration was first bought up I had a quick look at how
-to do it for the pinephone and I came up empty handed. Now I've seen
-the patch for the pinephone and grep for LED_BOOT the only form of
-docs I find is in the Kconfig and include/led.h, they refer to things
-that aren't in-tree and the out of tree reference to
-dtschema/schemas/options/u-boot.yaml, the only in-tree u-boot.yaml is
-./dts/upstream/Bindings/mtd/partitions/u-boot.yaml, that I find has no
-reference to boott leds at all.
+Perhaps I didn't understand what you were saying. I thought you meant
+to enable LED and LED_BOOT on these 5 boards?
 
-I feel the reason there's been a recent move to add users of the
-obsolete method is because the docs for that actually existed and
-there's nothing for the new method. Maybe the first patch in the
-series should be to add some actually useful doc rahter than go from
-docs for the old method to nothing.
+Regards,
+Simon
