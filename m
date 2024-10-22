@@ -4,84 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74268D2C543
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 12:17:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 170DED2C544
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 12:23:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04EED88F4B;
-	Tue, 22 Oct 2024 14:17:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7FAF788E78;
+	Tue, 22 Oct 2024 14:23:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nb4QVCEG";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="CYoRPSdT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8793488F82; Tue, 22 Oct 2024 14:17:08 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2294A88E78; Tue, 22 Oct 2024 14:23:26 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2062f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::62f])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DF5B88969
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 14:17:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE57D88D97
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 14:23:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2fb388e64b0so54738981fa.0
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 05:17:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729599425; x=1730204225; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uxgCAiBhLRO6Ja2QpPMM5eGSQp+LD8NfDErGNXdgv5E=;
- b=nb4QVCEGtmYIYmIKmQkP5OkvPm3kX5QbT2OPhQI8BiotkHHu2EbylwiT7NvtwAlX+j
- lmDDNuq3Xmr6SC5hPFvKgUSeMkd3bkM16Du8GQLRAgQxsfJqUp3KX23i7vlA7L8iAdKF
- 9rxafIIsYJiNaZY5CCH/V3yVIQgHDYMf4iajo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729599425; x=1730204225;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uxgCAiBhLRO6Ja2QpPMM5eGSQp+LD8NfDErGNXdgv5E=;
- b=s5xFdRsKes6aDB8S38FZnEx7ipAurWYWE2ez1bKdAndUtbTq1URs8YoCflbmGQjIS5
- hOLfEpXnWxNTjQ1SoQ7d2mhugGl1gf//4p5CIgP39u7SY9DVRnmt31tf6j+oQSIl32CN
- sC3eG4xgg0i8J3+AsBBlvBJrGb6Hu8hHTKHscoi/EPukwJo+FNHnYWiflLVJe0CpdwdE
- 3p9ibns7wMznQON4dUPJMFyTFtXzWIhK3npl0NNii+z2D00oIOrnYSuQ0mRStbL+7hXK
- Bus25ZkLj0++jCSu27Zqp2vewVx6sXLox/m6WwOImKupM7eE8u/HaPaovdMlkVaSsuOd
- N8+g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVRbEh1k/b6q8a1P8dVI580yhnXKSHtPwq0ajCnQggQVoyMSqkN4QZe85peuv71//VnGaerNto=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz3OEgKFXICTiHtXTmhn6GB3iA2LrBiF2PYy4F8iwkqTeWkTpBR
- CDghPBJ3MXu0+hrBQMQ6yx7vEl1/DcW9BY/fNY3sOebjho8m5s+P8iGW0M1yJ3l3jrO3Q7bR0lC
- tDpkenkwohAoGlzeGavWGzOL+ewggpIM4li98ZAWYVgVXNx/oyT81
-X-Google-Smtp-Source: AGHT+IGZiyofrVjdfWHaYjhrj9RLf0pvDJgYnlItCrvii8ZHWLJYAvkweKRs/CjxHTBx/NZUOltslc8Ao71NHP0h3CI=
-X-Received: by 2002:a05:6512:2815:b0:539:e232:e436 with SMTP id
- 2adb3069b0e04-53b12c03956mr1981355e87.24.1729599424561; Tue, 22 Oct 2024
- 05:17:04 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hlMOsmJ8xxgttM4eIocLOGTon4Iq6iL2urUI7F1fzdzI5f3Oc5kdb9JaST+JcT2XU5y+P7pdFMIWwTht8h40rWH9mvn7nrG/se0RZQxBL5no405krI9V+njYdHr/eK+feKZiH98hU9Qu6CXWAKbfp8V2DC7l6t0pU9m1xoPL0s3PXEulzKDNcWOIbXdyyLP520CSYJDyn2AWCkxdAM7A9UJVMdolY1Z8iJEF0R5Es4+XC3i8weAc+rtNrCKeJXefK8ByoPPU48HHauCAecOu3+mUEMoESGWngZV1FsT5SiJtbVlyAIUkouL6Dm02WFFhhxbJT6uezf9bVZhmA6boFA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JyM899+STZCQcQJeTJq9q+sEWEb/LvzFyczZZtNNFVc=;
+ b=cIIKuSQdZGpv6dpK5ZdGPQGcfZbjIYlaRligtLWbx2XqJ7dX1yQAwrozaQSZk9bCnqgHp2MO13OL1oDOEb4yr4b0wA9fZDjfjT5MY24fiqrrC5TlcDXNxVxAqm5Vj+jJR/ID6iD2tiJ9IWdgcYsDkXFeR6ZNVrfnne1px+Dsf+HXr8KqUAkvmGWQZvONX7LGTnUHBBgfyIp1ovgSAFBxyJztc+gQXgycXC9WV3V5I0+eWB5uQXiTO52qAI+62xZ40qYg+BrEMH6j2NQxF4q+QQvoDAMTRI0QUndznQNfBMu+bk0GilnMKQA4R8S68AwmQa59Fxq6p1g1GVGqm1UmKA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JyM899+STZCQcQJeTJq9q+sEWEb/LvzFyczZZtNNFVc=;
+ b=CYoRPSdTq8sVADBXypkGSTR+BrVPBm+/UzxUG3MRopHaSzQ6SBqm71JpXZMMCXC9Q0vsUltnnERBJC6az+5Emyal7PdLXo5GaldwQyaX7xUoYqP8acIt/edNe0+cdcmDKUCKT6zOiWpdL+6HxFb/zMKkybQpPOIK65CL/cFefrbou9K3k7n93tIDmGBaM6Hx1O8XRdxtkgoK4obnPP+3mCszMKTat/P0BvNJjfEkmRxn3RSYqMeUYXP83uagSEq8MOp22AjCRBtzGSMXxP3h538Naw231bGbUAWgWAQD6pufTIrUY5M/N2Hjkj4xzTbUF73R8xiTl0Wy09mOSv5Yxg==
+Received: from DB9PR04MB8461.eurprd04.prod.outlook.com (2603:10a6:10:2cf::20)
+ by PA4PR04MB9367.eurprd04.prod.outlook.com (2603:10a6:102:2aa::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.28; Tue, 22 Oct
+ 2024 12:23:21 +0000
+Received: from DB9PR04MB8461.eurprd04.prod.outlook.com
+ ([fe80::b1b9:faa9:901b:c197]) by DB9PR04MB8461.eurprd04.prod.outlook.com
+ ([fe80::b1b9:faa9:901b:c197%5]) with mapi id 15.20.8069.016; Tue, 22 Oct 2024
+ 12:23:21 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Fabio Estevam <festevam@gmail.com>, =?utf-8?B?U3rFkWtlIEJlbmphbWlu?=
+ <egyszeregy@freemail.hu>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "sbabic@denx.de"
+ <sbabic@denx.de>
+Subject: RE: [PATCH] imx9: Improve boot device auto-selection
+Thread-Topic: [PATCH] imx9: Improve boot device auto-selection
+Thread-Index: AQHbHZdg9PRX9ypEMkGYCrSJBu+Zw7KFYtiggARUeICAABQ9gIAI4jmAgAAQ8sA=
+Date: Tue, 22 Oct 2024 12:23:21 +0000
+Message-ID: <DB9PR04MB8461C9D5EB7ADA89A2D335CE884C2@DB9PR04MB8461.eurprd04.prod.outlook.com>
+References: <20241013174120.1872-1-egyszeregy@freemail.hu>
+ <PAXPR04MB845929FE951FCEC327F9F54788442@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <CAOMZO5DBDDYr+9K8rq56L-=5EGWDNXY514rz5zoqPdXOQ2x=jw@mail.gmail.com>
+ <93d2989d-7d55-40a3-a44b-ef64e1feb511@freemail.hu>
+ <CAOMZO5Bvkqj6uYpSU=JsWd_t7yfvHAqhs9J08fGiEa1nfCX3Hw@mail.gmail.com>
+In-Reply-To: <CAOMZO5Bvkqj6uYpSU=JsWd_t7yfvHAqhs9J08fGiEa1nfCX3Hw@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9PR04MB8461:EE_|PA4PR04MB9367:EE_
+x-ms-office365-filtering-correlation-id: 6deb1f0c-80e6-4e75-c516-08dcf2945165
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?bUlGeUY4ZWxOUXdCOTJCWlQ4WjY4ZjI3VXc4QTF2TlNaemY5MU84dmh0NW81?=
+ =?utf-8?B?dk5sVWpUNHI3c2gwQWsxRTVhVTVQWGd3UWpCVjFuUkQ4QkJxaWxtcCs0OE8r?=
+ =?utf-8?B?OGpDV2pmZ1lxck85Ry92R1hOZkpsVTczY2xyN2NyMk9JemFENHFmNk44WGF6?=
+ =?utf-8?B?anBsREs0WlRJbmNFaExGcjdFMytUb0kzMVEwL0JzLy9BWThLOVd3aUJ6bXU2?=
+ =?utf-8?B?SlozcDlUSjc2WXlrWTBGdG5WVThBeGZ4aHdvOW5XeUlxVkx0K2hJVXloUi9s?=
+ =?utf-8?B?cHJ0RmliNEdybWhLbDBLUjUvcUsxbmVEOEhpOWh3blJRQThoNUxQN2NWOU1h?=
+ =?utf-8?B?Y0hhaVltWkpZUFBGcTdCRjNBVlYwNDBsTDhpNnVmUEptTXQwRnZGSDVRVUFI?=
+ =?utf-8?B?UzhzMkNYRk81eFI5eHh4T3FHdkppQTFEckJDei9HTHpaVldRcHpqTHlnd3NC?=
+ =?utf-8?B?MmVsM0hEb2ZRZVBZRDVoakZPL253c2dseWxvbTRLcTNsbDk0V1l0RnllTzhr?=
+ =?utf-8?B?c1hTL0FEbXJiVHpQVkc1OTM5NXVEUGRFYVh4L1RYeVZ0b2xjbHd6SEF4d1Zy?=
+ =?utf-8?B?d1VENzZIQXBoU3d6UXlpZVhveTNFVnV4SUtDTExRNCswNG9EUnVhdlZkVHAv?=
+ =?utf-8?B?ckJaalJUYWtoWWlRMzVaQmVHUnBGTER4VzgwUFRzRS9hNG11UVlHR0hlTG4x?=
+ =?utf-8?B?NW54aGlFY09OVmhFT3BIVkdtV0JmdEtNSFM0S0htM1ZZU2dmSFNERU5KMXd5?=
+ =?utf-8?B?Szh0TzlEdmI0b2x0NWFad1RRbjA2aCtHQTUwQjVXM2ZBUkJzYk9oYmNGWVpo?=
+ =?utf-8?B?aEJ5ZFZ1VzBaMHlNb3dSblFWYi9URHRSQUVsdjIrUGk3aGNGekxYNnNDQzNV?=
+ =?utf-8?B?YmN5b0tkSi9lSEtpQXl2M29xMGhCTSt3bEZIWVFGMCtiM3pRblFWazhYdERW?=
+ =?utf-8?B?dGtnT1FoRU0xWmRNbkV0blZEcnpCS0lQYkxiQ3V2YW1kdTlESDR2VVUvWEdM?=
+ =?utf-8?B?eUlCR0xDbE90U0lRM2NWUjNWQXhCWGIzUnkvSXZSTkh4MWZUd0NHZzFOVjJi?=
+ =?utf-8?B?Tjd4TVlBMFdtU0tkMXlaT01KaytONnQ5Tnhhc1VFVEd3UG1MZGQ5TzVRVXFZ?=
+ =?utf-8?B?QythbCtzcU9vWGl1Z2g0YVMrN2svUnhLc2xMZUhTaVJqNXdaSXg1ZTJFK2hv?=
+ =?utf-8?B?Yy9QazY4dEcvNEFVcWhlM3hHYlE4K1NLWEpIVGxGWFpadTBPREhxMzcvOHM3?=
+ =?utf-8?B?d1lrQWx5ZUZZMS80OW9yRHVCZ0lxbmY0ZTFkaW5ER0pTNUtMUUNWWU9rNzRQ?=
+ =?utf-8?B?Y0FmT0lSR2h5M3NVcFFFaHF5QmZYVHgrTzlWTlRrb0k2enlrZTQ3emZTRWt3?=
+ =?utf-8?B?L1R6SXhqbTJsVmtDTTd5bFc5TVJVSTVPU1NHLzNKZ2pUZEdVTmdaa3p1VGQw?=
+ =?utf-8?B?dmY2TURKVzh6cmo3MEhDTW5BL1BVU01oVjRxMDEraU8xQWgxVU1kYk1qQ3Rn?=
+ =?utf-8?B?MFRDS2xKTVFNYkI0R3RnZTJRMm9oMTg4WEtMZndveTdRYnNGeEh3R3BlL2FO?=
+ =?utf-8?B?Ni9oT1d6VWM4RFpna3dOSWQzSnk3Qkg0cVc0dG8wV2hBcW0vb2xUM1ltUGp5?=
+ =?utf-8?B?cUgrYkdCNVdXZVRGUWYwU2VwSmhTTTJtaEVuMTgrb0pVTERLNTlNcE80V3J0?=
+ =?utf-8?B?Sm03QWhYUGIvemtaejNjMkFBVVN6SjY5eHNjTnRWRnNmNkdoTkptVzliMjJu?=
+ =?utf-8?B?cVI0YW1zVGlCZHJKYjByRXVOOEFPcW1kTEZrRHFlUVczTTFBV0U5VVlhb1Yx?=
+ =?utf-8?Q?fvPsrCH5w9fKZbkDBSmd7yXea0ANnLKYhVzWY=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR04MB8461.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?eTNIRjg4VU12cVhiWTc2Z3UvQzNXbG9IYWlTRnlIYnljRWoxbjJYMFhST0tC?=
+ =?utf-8?B?VXNUTXp6Wm9pSnJMcEM1Mk16K2loM2JZV253ZnBqUGVReUN6dDFPNjR2T2Fo?=
+ =?utf-8?B?bFdFUmRCdk9abi8vN1JMSVN0akU2OGU5THFWTzY5QzZhTDVBWjFFOVRRMk9B?=
+ =?utf-8?B?cExPRVZBODdpR1FQZXdZbTh5c05iNVRReUF2NnBUNDFLYU9ocG1TaTlYUzJC?=
+ =?utf-8?B?VHJNUnJQNXZnM3pHaEdqaWZQVzREeFk2cGdVS0EyUllRZGxLcTlTSTRIYkxY?=
+ =?utf-8?B?Qnp1WFF2Y0t6L3VLTlQ0TTFmdkw3d1pBZ0hGTE93ZS9mR0lDb2tMMXY3NVlT?=
+ =?utf-8?B?TjdJNDNpOUJTamE1dGxCRFI3OUxBWjhKd1lKNGtyRHJiRVNVTzAwQ1VERU9z?=
+ =?utf-8?B?aDJ3YnlYeXN3Q1RpaHVDQlZOSmo5cHRTNThLNFgram45NEp6MzdoMndoVXBs?=
+ =?utf-8?B?aXNSeHliWHFrOUFRbWJQTDM5TEg5OFlJMENsOGtiaFNUTGZpekxvZWRGQ0Fo?=
+ =?utf-8?B?eFhrR3pCU0dWQ0ZoWjJGb2Y0Q0IraXRZdE42MExQQ3RkditMRDF3cHg0RExv?=
+ =?utf-8?B?cm9JOFBGSUUvN1VjeDVvV0Q3Zys3elVoMmlvNVdEUTdHMEdZaXhFNFF4L1cv?=
+ =?utf-8?B?OWFYVGhpVlJ0QU9pMmhxMEpmbVplak54elNQRW9JSUJTdk9mM29UT1o4OUxR?=
+ =?utf-8?B?ZnkvcUtoMC9VSGZZSjFzS003NklPdXFGQjIwbit5OU5zaDA1aGJDY1o0b3I0?=
+ =?utf-8?B?YmV3TkphSG90U0JYcUFrdGZsNURNSDBmZnVhZXZIb3g1Tlh2WTl4VzgvL1Nz?=
+ =?utf-8?B?L2FValBWczMyNm5ER3hQR2xxSkZEK01QZEhKWTFmb0ZQc0xMV3JKd09ET2VB?=
+ =?utf-8?B?RGd2bzk4L3NKK2w2Qm95dzhRWDNlaDNwcndNWTJjaEh2dGR0SXM1a3FlWkdO?=
+ =?utf-8?B?d0ZaRlE3WDBzR1QwZDlPMlNxdDlma2t1WG5LTUJVMHpmNm5zLzBhQ3JIRkFk?=
+ =?utf-8?B?TCs2a1ZiNzZJcWwyOSs1V2pDSmh5UGd5ZWw2QngvN2tUOTN5OUJmb2lsZ1pq?=
+ =?utf-8?B?Rzg5MzU5Ymo1MWsrWjFOMHJXVDJxOHFScVF0NlJzbHVnRHEranZyRHp5VDVo?=
+ =?utf-8?B?djVBZVBrTHIvV1NsMVQ5cWhTM2ZvWmRlVkJtWG0wajZGTTl2WnZMd0dOeCtx?=
+ =?utf-8?B?MXlIQW1Ra3dUdFJlM3orSzdJMFNWSHlPL1U3dFBNY3dITVZ1OVhkRDdZKzBO?=
+ =?utf-8?B?YzdkK0o0NWx4ckFPc2VZWlM3dml6SCt5QzN6MEVQQmcyZVBrUU9McTErMVRD?=
+ =?utf-8?B?cGVEU05WNWZudkNEbk9GZmdjamFoVzBpRFZmTDdrRHFhaXB0RGEvR1lxVmJS?=
+ =?utf-8?B?RlhoM2QyVi9YNkVWczZIZFB3dWJQcWlyZmhUT1FieldpdmRIWWpHcm1kWVNQ?=
+ =?utf-8?B?UGhWVmtTMDZHdzR2elpKd0E2MEd4K0FwQVlkajZjMjVONXYzUzJVTlIvOSt4?=
+ =?utf-8?B?VVRCNXJuWFpoQk9SRnlnUTAwdElDdU9rTGZNTHJJNnBpK001ZExjZm8yYzdS?=
+ =?utf-8?B?Y2lEV3ZGZHFZZ3FHS1I0Q3JhUEJkQWd2c3dXTW9Xa2l0TUIyV3hnSGI4MUtj?=
+ =?utf-8?B?Q1RxTXNiN2RQWGpJVDFjUjVncFRSZmFxWThaaFV0Ryt3UjV0V3VqS0U4dkgw?=
+ =?utf-8?B?KzR0a28veE9saFp3ODk0T1FIcnlIR21JdGlUcDRuenprR09leWljYzVXemFv?=
+ =?utf-8?B?U1dLTjMxT0U2N0dPQTNQRXVjRno3S2tEbHVmaGZYdENsaDF1SklyUC9lQUw4?=
+ =?utf-8?B?NlZwR1B5cmJnSFI3V2FqVXJqNENBaWxvUXhrSmIvUFJyT3QzeittVkszUjkr?=
+ =?utf-8?B?V1FzdGlXSWhlUURBK2x5eCtyZTV1NW0zM3Rrd3oyVTUvcnA5TnFERWRvY0ls?=
+ =?utf-8?B?YTRYTVZIclJQUlRTNER4OW9OdkxzTmJ0Y3J1WVliaytaN1I1SktPL090ZDNy?=
+ =?utf-8?B?MWNVWlkyTGZIZElwRU5mT1c2U0ErZnVtZlFJWUJxQ1NxYm1Fb01JRG1sK1pn?=
+ =?utf-8?B?UnpKQ2dNY1ZYMEZFQVFXdm8vMm82S3cvL0tyMCtRZFdObytUZStlNWVpNHhq?=
+ =?utf-8?Q?QYxI=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20241017232413.724808-1-sjg@chromium.org>
- <20241017232413.724808-24-sjg@chromium.org>
- <0B48F871-BDD8-4810-ADA3-4F6C4E403B0C@gmx.de>
- <CAFLszTjF-kg5E+sV+CkFjStmS2YyJiPa59zOWWZxd2J5yOwftA@mail.gmail.com>
- <20241018163303.GZ4959@bill-the-cat>
- <CAFLszTi2+2si4bq-iZK5fncnUnBHVLnpp6kqJAGFyK5Lis9OZg@mail.gmail.com>
- <20241018180439.GD4959@bill-the-cat>
- <CAFLszTjEvoPLiq5iuCRk8q3iA50q-UHGF4GBJJeNNWwqMXD_aw@mail.gmail.com>
- <20241018213022.GL4959@bill-the-cat>
- <CAFLszTg0=9kvMRG_=S19W5o5Y5ugdXT-chEb=5wZ+jFK0CtQwQ@mail.gmail.com>
- <20241019163025.GU4959@bill-the-cat>
-In-Reply-To: <20241019163025.GU4959@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 22 Oct 2024 14:16:52 +0200
-Message-ID: <CAFLszTjAYhGGF+dm+egcw_yixo-akmKZUNb5EWnegD0dgETeWg@mail.gmail.com>
-Subject: Re: [PATCH 23/34] bootstd: Maintain a list of images
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Julien Masson <jmasson@baylibre.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Nam Cao <namcao@linutronix.de>,
- Quentin Schulz <quentin.schulz@cherry.de>, Shantur Rathore <i@shantur.com>
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR04MB8461.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6deb1f0c-80e6-4e75-c516-08dcf2945165
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Oct 2024 12:23:21.4428 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: /ytt30PQ4oRX+EJpXwClFPYj6Oymh7h+xxW+53p6Aau1NEQNUP7sL8Qe1315YlgxLpmq+eNGZo+eo+spy8kJvw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9367
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,200 +177,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Sat, 19 Oct 2024 at 18:30, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Oct 19, 2024 at 05:49:40AM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Fri, 18 Oct 2024 at 15:30, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Oct 18, 2024 at 12:48:31PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Fri, 18 Oct 2024 at 12:04, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Fri, Oct 18, 2024 at 11:20:52AM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Fri, 18 Oct 2024 at 10:33, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Fri, Oct 18, 2024 at 09:01:03AM -0600, Simon Glass wrote:
-> > > > > > > > Hi Heinrich,
-> > > > > > > >
-> > > > > > > > On Thu, 17 Oct 2024 at 22:07, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > > > > > > > >
-> > > > > > > > >
-> > > > > > > > >
-> > > > > > > > > Am 18. Oktober 2024 01:24:02 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> > > > > > > > > >We want to keep track of images which are loaded, or those which could
-> > > > > > > > > >perhaps be loaded. This will make it easier to manage memory allocation,
-> > > > > > > > > >as well as permit removal of the EFI set_efi_bootdev() hack.
-> > > > > > > >
-> > > > > > > > I'll change this 'hack' to 'feature'.
-> > > > > > > >
-> > > > > > > > >
-> > > > > > > > > Please, keep in mind that files can be loaded manually, e.g. via the dhcp, the wget, and the loady commands. These are outside bootflows.
-> > > > > > > >
-> > > > > > > > Yes, this series is only going to help if bootstd is used. For ad-hoc
-> > > > > > > > use, EFI will need to rely on the above feature, at least until
-> > > > > > > > someone can think of another solution.
-> > > > > > >
-> > > > > > > Perhaps I need to try and be clearer here than I might have been in the
-> > > > > > > past. The consensus among off the shelf free software operating systems
-> > > > > > > is "just give me an EFI interface". This simplifies things on their end
-> > > > > > > if regardless of architecture it's the same interface. This means that
-> > > > > > > in U-Boot we need to treat EFI as one of the primary interfaces. Not a
-> > > > > > > novelty. Not a "some people might use". It is a frequent and commonly
-> > > > > > > used feature.
-> > > > > >
-> > > > > > Yes, EFI is everywhere and growing. All the more reason to tidy up
-> > > > > > this piece. I would like to see bootmgr use this new API, for example.
-> > > > > >
-> > > > > > But how does this comment affect this patch?
-> > > > >
-> > > > > Because at the very high level, I wonder if I made a mistake a few years
-> > > > > back. As I understand it, the nominal case is "bootefi bootmgr". I was
-> > > > > saying at the time that perhaps bootstd can just fire that off, and move
-> > > > > on. Now it seems like we're going along the path of re-inventing that,
-> > > > > and not integrating well with it either.
-> > > >
-> > > > In what way are we re-inventing that? bootstd supports lots of
-> > > > different ways of booting, not just EFI.
-> > >
-> > > At the high level, bootflow scan is re-implementing "bootefi bootmgr".
-> > > but handling non-EFI payloads.
-> >
-> > bootstd is about replacing the distro scripts, not bootmgr.
->
-> And the distro scripts are functionally replaced by "bootefi bootmgr",
-> outside of bootstd.
-
-But that doesn't support anything other than EFI apps, so isn't useful
-for when EFI is not wanted.
-
->
-> > > > Also I hope that one day EFI
-> > > > will be implemented more as part of U-Boot than as a bolt-on, so will
-> > > > make use of bootflows, etc.
-> > >
-> > > And stuff like that is why I said what I said in here first. To me it
-> > > sounds like you keep implying it's a hack that's not well integrated.
-> > > When it's honestly at this point gotten more traction than FIT images
-> > > have I think (as much as I wish FIT images had "won", it's like VHS vs
-> > > Betamax, to bring in another technology metaphor).
-> >
-> > The 'hack' I was referring to is efi_set_bootdev(), not EFI_LOADER as a whole!
->
-> I wasn't clear enough, sorry. I didn't mean just in this series where
-> you referred to storing the needed property as a hack but rather
-> "bolt-on" in what I quoted and "tidy up this" and "tidy up that". I'm
-> just saying what impression your words leave with me, and quite possibly
-> others.
-
-OK I will try to be more gentle with my language.
-
->
-> > > > > So, to try and bring things back together. If U-Boot decides to load
-> > > > > $FOO from device $BAR, at that common point is where we need to:
-> > > > > - Is there an lmb for the location this is supposed to go to (for the if
-> > > > >   we know it, entire size)?
-> > > > > - Note down everything else we know, now.
-> > > >
-> > > > Yes.
-> > > >
-> > > > >
-> > > > > This means that we can note down enough stuff so that EFI can construct
-> > > > > the path it needs. And if we're being told a filesystem, that filename
-> > > > > is good enough for the IH_TYPE thing you're wanting, or at least a good
-> > > > > chunk of it I hope.
-> > > >
-> > > > You want me to ignore the type that I know (kernel, ramdisk, logo,
-> > > > etc.) and infer the type from a filename? Why?
-> > >
-> > > No, I want you to save and display the filename. That's probably much
-> > > more useful when debugging than "kernel". If you actually know some
-> > > other type information (ie extlinux.conf says ...) then yes, it too can
-> > > be stored as that's useful too.
-> >
-> > The filename is already saved in bootflow->filename, and now it is in
-> > struct bootflow_img.
->
-> OK. But that's not generic enough.
-
-How about we see how things work out here rather than giving up at the
-start? It is pretty clear in my head, so far.
-
->
-> > > > For EFI there is only an EFI application. It will always just be a PE
-> > > > file. We don't really know what it is, as someone pointed out earlier.
-> > > > Maybe one day we will check to see if it is a UKI and pull things out
-> > > > of it. But then, it would be component parts (kernel, ramdisk, etc.)
-> > > > so I would want to add them as images.
-> > >
-> > > I don't see why yet, honestly.
-> >
-> > For the cmdline, 'bootflow cmdline' allows editing it, for example.
-> > For a logo we can display it in the menu. The filename doesn't tell us
-> > what it is.
->
-> There may, or may not, be further context clues about what a blob is,
-> yes, and we should make use of them. But we may not have them. Frankly
-> for a logo we probably need to have dealt with that upon initializing
-> the display, so earlier in the process. But this is all getting away
-> from the point I'm trying to make.
->
-> > > > > It also means that since it's at the most common point, it doesn't
-> > > > > matter if we were in an EFI application, a boot script, a bootmeth or
-> > > > > someone at the cmdline doing "load mmc 0:1 /boot/Image $kernel_addr_r".
-> > > >
-> > > > For that case (at the cmdline), bootstd is not currently running. Are
-> > > > you suggesting that bootstd could pick up these things and record
-> > > > them? If so, then yes, definitely, I want to do that. This series is
-> > > > the starting point for that. If you are suggesting something else,
-> > > > then I think I have lost you at this point.
-> > >
-> > > Yes, I think I lost you somewhere, but I'm not sure how. What I am
-> > > saying is that since everything at some point calls down to say
-> > > fs_read() to read a file, that is the common point to note what
-> > > we're doing. Not the load command, not the bootmeth, not the EFI_LOADER
-> > > call.
-> >
-> > Perhaps what you are missing is that bootstd is a proper boot
-> > implementation for U-Boot, where U-Boot knows what is going on.
-> > Ignoring that information and just hooking into fs_read() is like
-> > throwing away the plan and trying to recreate it from photographs.
-> >
-> > That said, yes I can hook into fs_read() and store that info, as it is
-> > better than nothing, if bootstd is not being used, or there is a
-> > script.
->
-> Maybe we need to throw out the plan and start over then? Since you seem
-> to not be accounting for the rest of the common paths and assuming
-> that your design can just be used as-is for them despite not taking them
-> in to account in the design in the first place.  Hooking in at around
-> fs_read() or thereabouts is likely where we need to be at least starting
-> some of this so that we do know information that we want to preserve.
-> Similarly, there's the common path for "grab a file via HTTP(s)" and
-> that is where we should be recording information for network loads. We
-> can then augment that if it was a pxelinux.cfg file we grabbed or
-> something else, but that's the common place to start gathering
-> information.
-
-Here's what I see as the key point: bootstd knows what is being
-booted. It knows that the kernel is a kernel and where it came from.
-If there is a logo or cmdline, it knows about that too. It is sort-of
-the point of bootstd to make booting more automatic and deterministic.
-Where people are using scripts and ad-hoc ways of booting, they just
-aren't going to get the same level of control and visibility as
-bootstd can provide.
-
-I think I recall having exactly this discussion before?
-
-I will see if I can construct a small series to show what an ad-hoc
-bootflow might look like. It will at least collect loaded files into
-one place so they can be examined, etc.
-
-Regards,
-Simon
+PiBTdWJqZWN0OiBSZTogW1BBVENIXSBpbXg5OiBJbXByb3ZlIGJvb3QgZGV2aWNlIGF1dG8tc2Vs
+ZWN0aW9uDQo+IA0KPiBPbiBXZWQsIE9jdCAxNiwgMjAyNCBhdCA0OjQy4oCvUE0gU3rFkWtlIEJl
+bmphbWluDQo+IDxlZ3lzemVyZWd5QGZyZWVtYWlsLmh1PiB3cm90ZToNCj4gDQo+ID4gWW91IGNh
+biB1c2Ugb25seSBvbmUgb2YgY29uZmlnIGZyb20gQ09ORklHX0VOVl9JU19JTl9NTUM9eSBhbmQN
+Cj4gPiBDT05GSUdfRU5WX0lTX05PV0hFUkU9eSBpbiBVLWJvb3QgY29uZmlnIGluIHNhbWUgdGlt
+ZS4NCj4gDQo+IGlteDkzXzExeDExX2V2a19kZWZjb25maWcgc2VsZWN0cyBib3RoIENPTkZJR19F
+TlZfSVNfSU5fTU1DPXkNCj4gYW5kIENPTkZJR19FTlZfSVNfTk9XSEVSRT15Lg0KPiANCj4gPiBJ
+ZiB5b3UgbGlrZSB0byB1c2UgQ09ORklHX0VOVl9JU19OT1dIRVJFPXksIHRoZXNlIGNvZGVzIGlu
+IHRoZQ0KPiBwYXRjaGVkDQo+ID4gc291cmNlIGZpbGVzIHdpbGwgYmUgbm90IHBhcnQgb2YgdGhl
+IGJ1aWxkLCBhbmQgdGhlIGF1dG9kZXRlY3Rpb24gb2YNCj4gPiB0aGUgYm9vdCBtb2RlIHdpbGwg
+bmV2ZXIgd29yay4gQXQgdGhlIG1vbWVudCBpdCB3b3JrcyBvbmx5IGlmIHlvdQ0KPiB1c2UNCj4g
+PiBDT05GSUdfRU5WX0lTX0lOX01NQz15IGluIFUtYm9vdCBjb25maWcgYnV0IGl0IHNob3VsZCB3
+b3JrIGFsc28NCj4gaW4NCj4gPiBjYXNlIG9mIHVzZSBDT05GSUdfRU5WX0lTX05PV0hFUkU9eSBv
+cHRpb24gYWxzby4NCj4gDQo+IEJ1dCBsaWtlIEkgc2FpZCBpbXg5M18xMXgxMV9ldmtfZGVmY29u
+ZmlnIHNlbGVjdHMgYm90aA0KPiBDT05GSUdfRU5WX0lTX0lOX01NQz15IGFuZCBDT05GSUdfRU5W
+X0lTX05PV0hFUkU9eS4NCj4gDQo+IEkgYW0gc3RpbGwgY29uZnVzZWQgYnkgeW91ciBwYXRjaC4N
+Cj4gDQo+IEkgd291bGQgbGlrZSB0byBnZXQgYSBmZWVkYmFjayBmcm9tIFBlbmcgRmFuLg0KDQpJ
+biBVVVUgYm9vdCBtb2RlLCB3ZSB1c2UgdGhlIGVudiBpbnNpZGUgVS1Cb290IHByb3Blciwgc28N
+Cml0IGlzIE5PV0hFUkUuDQoNCkluIHRoaXMgcGF0Y2gsIEkgdGhpbmsgdXNlIGNoYW5naW5nIHRv
+IG1tYyBmb3IgTk9XSEVSRQ0KbWF5IGJyZWFrIHRoZSBydWxlLg0KDQpUaGFua3MsDQpQZW5nLg0K
