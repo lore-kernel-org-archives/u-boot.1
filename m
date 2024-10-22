@@ -4,147 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F76BD1CDD1
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 10:04:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D3E5D1CDD9
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 10:46:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBBEA88F50;
-	Tue, 22 Oct 2024 12:04:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id B368888F50;
+	Tue, 22 Oct 2024 12:46:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="ngmBLn62";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1729593973;
+	bh=rc6i4wCqQ3UpSL5O82X3IzQj1LHV9XL5VDb+RD2NYa8=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=VpWhBj0C39HzlUp9X5PF9kK9fN9PZKebOcCWEB6GjQfwwemwoEJid46YWw8QjdUKq
+	 8IF/sk6jyQNyUB8M1mTDSik6e1UvARf/Nr4DWNm0kiDVlqq10KYBSj19u1962Bx0RW
+	 Eprrbiqz7NpdxHcpfDtcRy2lvnTddTaX+U22HkXUcLuaouIRn3HoSNxHDz8XokD4qB
+	 ocdarmMM0tuE4ENHXRo1uS9s37G27tO5RhYnh/4FoAW7Z585Dpdl59TDWAZiRyKOPd
+	 RED797KPgDHu3WT7i2UeFdV0flwjB5gUsh36TrtQbGbNW9gdOb1Cy/hG3JeaaWuS+q
+	 xy7uEQ0Fma/qg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B83DC88F4B; Tue, 22 Oct 2024 12:04:41 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on2070a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::70a])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B511088F99; Tue, 22 Oct 2024 12:46:12 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80FE288D9E
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 12:04:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9605288C4D
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 12:46:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NyS4of+kq1QTmaePWZ+E2uj/OoxJlpB0t2YHdCiy4p61gy/wPWc8K/SGK4yQxgZuF2i50MFwk/ZMe6ljt1KYxWhpvn3ObOXJKpmiCPXxfVx8C3uk73rv0jKL4tIEfD5hbpUEa/3jLtdqyZGXGezqXVvXOYvThIbvYSZBpRb0OUY+YPn3XBLUaDRSiQwS2ki5BY9C3eRPdbdAyWBcOXWLlBoujLiEbUGvlXLyUWPEWGxvBl10RVzp1h1Z6j20850IRjKFobGgHoJSv4zh7/UKoDkTcjjhpsmePiLj5pCRULhT3/31eJJecmtMZiE6Yymur9JR8FwODuVwG4e426gL0w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xzMUKLRkggeXwZYE+MsLnPfWwoLmVASVIRLoYsOCsRI=;
- b=tSHmBXw4ckAttm4pdviE4y1hU5Qlw6A5krgFi6dmnkgJEWIZXXKkhd9RWo1NEEyJt/HB5i3wLdQdkkvMl8Jk/ElHv15oUklXtw1RwKDVe1WRYUBS9290VqS22kXpe0/gj4zVeQq0uzA/S4iTvq7PuQMYXwnWyS+AkghPJhIwgWB49sC+UC2O5e2AS0oXjql19FDQgK/kqdf9YXH1hbqUY7mbzHWJX9oUz2abVVVG3uizgk1vFAFabA7SfnO12WIa53YPi0wMFFbrW54nQwQ+U5pdyiZOT6mC5+9v7PZ+60dTffrnvryIhirm92zbRRhmp5WGtz/Dm9Huq+TNqdvCwQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=ti.com smtp.mailfrom=phytec.de; dmarc=none
- action=none header.from=phytec.de; dkim=none (message not signed); arc=none
- (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=phytecmesstechnikgmbh.onmicrosoft.com;
- s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xzMUKLRkggeXwZYE+MsLnPfWwoLmVASVIRLoYsOCsRI=;
- b=ngmBLn627RZom4iuMrBzILdZvgUAUYDrTe3mHSIS1tE+Y/ikPRn/ZJWAxmUZI9PVRSyX5s6t6p58IWQLX6/ShzYibwZyIuOp6MCYUE4RpK0QkwOB6H2EiiNuqkxuhK+0SYGvnjS7OqsNqKufmF8i81ysjSf0wImT9Jbi+trWCtw=
-Received: from DB6PR0301CA0102.eurprd03.prod.outlook.com (2603:10a6:6:30::49)
- by DB8P195MB0536.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:15f::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.16; Tue, 22 Oct
- 2024 10:04:36 +0000
-Received: from DB1PEPF0003922E.eurprd03.prod.outlook.com
- (2603:10a6:6:30:cafe::42) by DB6PR0301CA0102.outlook.office365.com
- (2603:10a6:6:30::49) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.29 via Frontend
- Transport; Tue, 22 Oct 2024 10:04:35 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- DB1PEPF0003922E.mail.protection.outlook.com (10.167.8.101) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8093.14 via Frontend Transport; Tue, 22 Oct 2024 10:04:35 +0000
-Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 22 Oct
- 2024 12:04:34 +0200
-Received: from [192.168.0.212] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 22 Oct
- 2024 12:04:34 +0200
-Message-ID: <94cc6dcf-fe92-414f-b5f6-5797c8fa64ff@phytec.de>
-Date: Tue, 22 Oct 2024 12:04:33 +0200
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XXpkS2TlMz9smy;
+ Tue, 22 Oct 2024 12:46:08 +0200 (CEST)
+Message-ID: <a1229732-a42d-471d-9914-07e459d51d25@denx.de>
+Date: Tue, 22 Oct 2024 12:46:07 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 7/8] board: ti: Pull redundant DDR functions to a
- common location and Fixup DDR size when ECC is enabled
-To: Santhosh Kumar K <s-k6@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>, 
- <nm@ti.com>, <u-kumar1@ti.com>, <vigneshr@ti.com>, <bb@ti.com>
-CC: <u-boot@lists.denx.de>, <n-francis@ti.com>
-References: <20241021044024.835846-1-s-k6@ti.com>
- <20241021044024.835846-8-s-k6@ti.com>
+Subject: Re: [PATCH 1/2] watchdog: Add a driver for the photonicat watchdog
+To: Coia Prant <coiaprant@gmail.com>, u-boot@lists.denx.de
+References: <20240829083035.227423-1-coiaprant@gmail.com>
+ <20240829083035.227423-2-coiaprant@gmail.com>
 Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20241021044024.835846-8-s-k6@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF0003922E:EE_|DB8P195MB0536:EE_
-X-MS-Office365-Filtering-Correlation-Id: da424d5c-8e76-45c2-5dfa-08dcf280ee90
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VGU5RmNJbWQ4c2tNOFJ2aEpBcGtMbzRsbmNxcHAxU1JmMy9Fc25yS0ZGZVhl?=
- =?utf-8?B?ZGVmcnhkd3gxS2JJaFZ3bHF0aXoyVi8wcGlWREJJRXArZUVaRGM1Ui9lZ0FF?=
- =?utf-8?B?RnNpNURIbnJ0VGtPaXgwRnlEdkszcVZlMWlFUVFvdkJHdUNudTkxYlFhZDJ3?=
- =?utf-8?B?aTdKTVhYZmZMdjRXaE9taGhCOXdaRTYrbWYwL0RMbXh2N0R5OThlY25ocVBl?=
- =?utf-8?B?dlArRGF5VUZPZGdaekdLVEZBQnhXcUFwMTYxS0tna2dvQkc0V2lJZnZEQW9Q?=
- =?utf-8?B?cjgyUjFsOHczMk1XSjRETXYxRS8xZzFZYi9rWUU4cXNBc0Q2Ukk5QlpvaWQr?=
- =?utf-8?B?aDlSQmU0QklMREJQUzVtWGEvL1VLNm0yMWtsZVJXNkYvTHZGeHlaTUx6aUc4?=
- =?utf-8?B?d2RTcDJHSDAyYjYrNDVOUU5xaDVsZzdobkdKbE1OSTY1ckl1czdac0xtZTN6?=
- =?utf-8?B?dnpGelJ3dTVBT1lZdWl6QW1yZ0I0bjdWb3Z5UnlJUW1jakNxK2dlYmZXL3B0?=
- =?utf-8?B?aERxQ2s3ODFiN2tPbUdpcy81MjRUUTdmVlVsU20zTDF6dmM0anlHMkx5b1Z1?=
- =?utf-8?B?TnlCN1Y1bktXZXZkWkREWDlOMmpXNXlCK25KeEE5VU1jamZuUS9VelF5cE8v?=
- =?utf-8?B?OFh4NFZxWmtGclJGS2lMVVA0U2pBczNmMlpjTFd4blkzZkhIeE0rYVpTNGt6?=
- =?utf-8?B?cVFKTDdhclFnalVDYnlkSHJYd05iY1hpUmVkSkxhUyttYXZuK2xCdmlHSlo5?=
- =?utf-8?B?Vi9YOEVzMk0zb2lWcU51cEZ0VDFwRmQ3TWtCZ3pGS2xGMDczQWZQSXlFRTBG?=
- =?utf-8?B?K0RZWkRPQjlvcGNFNW1SUzBuRk1ZZ2NmeExXNDBvV1hlRWVHeDBFYlhlbXQ5?=
- =?utf-8?B?Misrc0JNdTlJN1hqbDEyWVNnWDAvQmJRZERZODhkQlpzdmNyRzVMMExrUlpX?=
- =?utf-8?B?NVN2V3FPSEYzd0ZyWDd4WmQ1RG5BVk5IZFFOdldBVGNoby9YWlJOUkkrLzVZ?=
- =?utf-8?B?NnJlQytUWm4zK3kxZk9yOEZCbnFsU2UwKzN6THFYeXUxZktkRTZPMmZtcW1E?=
- =?utf-8?B?empqNGlSM1ZLL1lBUC9qZlVvNllFbS92MytpTnExN0xSZ3NXVVBRdVlMdisr?=
- =?utf-8?B?eHNTbU93TzFTbmVBYnBGUnVuaU1ML3hLRzhYZ2U5cE1RMHhGNlpFVFJBWVR5?=
- =?utf-8?B?OTlwbHBYckpDbDVSSzJHa1hrbHBwZG1RY3UrQytRZW5CNnZmaDBjTXc3RW5Z?=
- =?utf-8?B?c1AwTzQ5WVJ3bE5vZjhOYzlvV0R0c3Q5Q013NFdkZVZqVHFkTk5ibDhCWlBQ?=
- =?utf-8?B?Smk4YlpFZ2FYUURvNldXZERjZkZvWE03RWVnT3lYdEVLcUo3NzR1RUJaL2tZ?=
- =?utf-8?B?L3l3dUd5Zkp2QWJXWWNkR2dtTnlKMjRJRWZaSFVQSWkveExTR1ZCbkp1T3dt?=
- =?utf-8?B?V243STBMc0t3YSswQitHd1grNCtlQzF6L0lPZHE3dWZ4eXZmb3pwcDhIK3hQ?=
- =?utf-8?B?NmhxTnhhSFgxbmc2eFMrVUE3ZzJCazN6aE1vSXlha29ROWZBdnhqU1NPSC9B?=
- =?utf-8?B?UU93dnJuTFI1RHZIaWV3eld2QXJ2QkN3TXJOYXJyejVFK25zMkgrdXhoaldR?=
- =?utf-8?B?K1Z0QWFhYmpQbHh5eEpxYnM3ZlpXRVhQcVpVeEVMZUViNGxXS21zUGN4c3c5?=
- =?utf-8?B?UVFHdW02UzIrbDNOTURmZG1pUy9JYyt0SWsvNDBrRTdidHk4VXNjQUJBNlBG?=
- =?utf-8?B?bTd4bUlpdmt5N1BlTE5RakFBUllzRXhMdG4zd082aWtIRkg5VzFtbi9nSzAx?=
- =?utf-8?B?Y2k3bmtld0NQVmRWbkNBZisxeC9MWjFBT0hHc1RaN3lJT1BmT0lkcnN2RjEr?=
- =?utf-8?B?cHN6eW5aYWxyUTBkV1NSWUFpZGxMbEpkemlnbFdGbWJrN0E9PQ==?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2024 10:04:35.1317 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: da424d5c-8e76-45c2-5dfa-08dcf280ee90
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF0003922E.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8P195MB0536
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20240829083035.227423-2-coiaprant@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,76 +68,299 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Santhosh,
+On 8/29/24 10:30, Coia Prant wrote:
+> This driver supports the photonicat watchdog timers.
+> 
+> Signed-off-by: Coia Prant <coiaprant@gmail.com>
 
-Am 21.10.24 um 06:40 schrieb Santhosh Kumar K:
-> As there are few redundant functions in board/ti/*/evm.c files, pull
-> them to a common location of access to reuse and include the common file
-> to access the functions.
-> 
-> Call k3-ddrss driver through fixup_ddr_driver_for_ecc() to fixup the
-> device tree and resize the available amount of DDR, if ECC is enabled.
-> Otherwise, fixup the device tree using the regular
-> fdt_fixup_memory_banks().
-> 
-> Also call dram_init_banksize() after every call to
-> fixup_ddr_driver_for_ecc() is made so that gd->bd is populated
-> correctly.
-> 
-> Ensure that fixup_ddr_driver_for_ecc() is agnostic to the number of DDR
-> controllers present.
-> 
-> Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+Why did you send this driver twice? Please send only 1/1 patch next
+time.
+
 > ---
-<snip>
+>   drivers/watchdog/Kconfig    |   6 +
+>   drivers/watchdog/Makefile   |   1 +
+>   drivers/watchdog/pcat_wdt.c | 218 ++++++++++++++++++++++++++++++++++++
+>   3 files changed, 225 insertions(+)
+>   create mode 100644 drivers/watchdog/pcat_wdt.c
+> 
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index 0c3e9913..f0a52ecf 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -421,4 +421,10 @@ config WDT_FTWDT010
+>   	help
+>   	  Faraday Technology ftwdt010 watchdog is an architecture independent
+>   	  watchdog. It is usually used in SoC chip design.
+> +
+> +config WDT_PCAT
+> +	bool "photonicat board watchdog support"
+> +	depends on WDT && SERIAL && DM
+> +	help
+> +	  Select this to enable watchdog timer on photonicat board.
 
-> +obj-y += common.o security.o k3-ddr.o
->   obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
->   obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
->   obj-$(CONFIG_SOC_K3_AM625) += am62x/
-> diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
+What is a "photonicat board"? Which SoC is used? Manufacturer?
+
+And empty line missing here?
+
+>   endmenu
+> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+> index 7b39adcf..829b5ed1 100644
+> --- a/drivers/watchdog/Makefile
+> +++ b/drivers/watchdog/Makefile
+> @@ -50,3 +50,4 @@ obj-$(CONFIG_WDT_STM32MP) += stm32mp_wdt.o
+>   obj-$(CONFIG_WDT_SUNXI) += sunxi_wdt.o
+>   obj-$(CONFIG_WDT_TANGIER) += tangier_wdt.o
+>   obj-$(CONFIG_WDT_XILINX) += xilinx_wwdt.o
+> +obj-$(CONFIG_WDT_PCAT) += pcat_wdt.o
+
+Please sort alphabetically.
+
+> \ No newline at end of file
+> diff --git a/drivers/watchdog/pcat_wdt.c b/drivers/watchdog/pcat_wdt.c
 > new file mode 100644
-> index 000000000000..754e9ba29dac
+> index 00000000..cac07fb6
 > --- /dev/null
-<snip>
+> +++ b/drivers/watchdog/pcat_wdt.c
+> @@ -0,0 +1,218 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +#include <dm.h>
+> +#include <dm/device_compat.h>
+> +#include <wdt.h>
+> +#include <asm/gpio.h>
+> +#include <linux/delay.h>
+> +#include <serial.h>
+> +#include <dm/device-internal.h>
 
-> +#include <fdt_support.h>
-> +#include <dm/uclass.h>
-> +#include <k3-ddrss.h>
-> +#include <spl.h>
+Sorting of header includes looks not correct.
+
 > +
-> +#include <asm/arch/k3-ddr.h>
-> +
-> +int dram_init(void)
+> +struct pcat_wdt_priv
 > +{
-> +        s32 ret;
+> +	struct udevice *serial_dev;
+> +	struct dm_serial_ops *serial_ops;
+> +	uint16_t packet_count;
+> +};
 > +
-> +        ret = fdtdec_setup_mem_size_base_lowest();
-> +        if (ret)
-> +                printf("Error setting up mem size and base. %d\n", ret);
+> +static uint16_t pcat_pmu_serial_compute_crc16(const uint8_t *data,
+> +											  size_t len)
+
+alignment?
+
+> +{
+> +	uint16_t crc = 0xFFFF;
+> +	size_t i;
+> +	unsigned int j;
 > +
-> +        return ret;
+> +	for (i = 0; i < len; i++)
+> +	{
+
+Coding style is wrong. Please use Linux coding style with U-Boot code as
+well. scripts/checkpatch.pl will help you finding issues.
+
+I'll stop the review here and will continue, once you've sent v2.
+
+Thanks,
+Stefan
+
+> +		crc ^= data[i];
+> +		for (j = 0; j < 8; j++)
+> +		{
+> +			if (crc & 1)
+> +			{
+> +				crc = (crc >> 1) ^ 0xA001;
+> +			}
+> +			else
+> +			{
+> +				crc >>= 1;
+> +			}
+> +		}
+> +	}
+> +
+> +	return crc;
 > +}
 > +
-> +int dram_init_banksize(void)
+> +static int pcat_wdt_reset(struct udevice *dev)
 > +{
-> +        s32 ret;
+> +	struct pcat_wdt_priv *priv = dev_get_priv(dev);
+> +	uint8_t packet[13] = "\xA5\x01\x81\x00\x00\x03\x00\x01\x00"
+> +						 "\x00\x00\x00\x5A";
+> +	uint16_t crc;
+> +	int err = 0;
+> +	unsigned int i;
 > +
-> +        ret = fdtdec_setup_memory_banksize();
-> +        if (ret)
-> +                printf("Error setting up memory banksize. %d\n", ret);
+> +	packet[3] = priv->packet_count & 0xFF;
+> +	packet[4] = (priv->packet_count >> 8) & 0xFF;
+> +	priv->packet_count++;
 > +
-> +        return ret;
+> +	crc = pcat_pmu_serial_compute_crc16(packet + 1, 9);
+> +	packet[10] = crc & 0xFF;
+> +	packet[11] = (crc >> 8) & 0xFF;
+> +
+> +	i = 0;
+> +	while (i < 13)
+> +	{
+> +		err = priv->serial_ops->putc(
+> +			priv->serial_dev, ((const char *)packet)[i]);
+> +		if (!err)
+> +		{
+> +			i++;
+> +		}
+> +		else if (err == -EAGAIN)
+> +		{
+> +			;
+> +		}
+> +		else
+> +		{
+> +			pr_err("%s: unable to send watchdog setup "
+> +				   "request: %d\n",
+> +				   __func__, err);
+> +			break;
+> +		}
+> +	}
+> +	return err;
 > +}
-> +Moving dram_init() and dram_init_banksize() into a generic part forces 
-every K3 based board to use your implementation.
+> +
+> +static int pcat_wdt_setup(struct pcat_wdt_priv *priv, u64 timeout)
+> +{
+> +	uint8_t packet[16] = "\xA5\x01\x81\x00\x00\x06\x00\x13\x00"
+> +						 "\x3C\x3C\x00\x00\x00\x00\x5A";
+> +	uint16_t crc;
+> +	int err = 0;
+> +	unsigned int i;
+> +
+> +	if (timeout > 255)
+> +	{
+> +		pr_warn("%s: timeout cannot be more than 255s\n",
+> +				__func__);
+> +		timeout = 255;
+> +	}
+> +
+> +	packet[3] = priv->packet_count & 0xFF;
+> +	packet[4] = (priv->packet_count >> 8) & 0xFF;
+> +	priv->packet_count++;
+> +	packet[11] = timeout & 0xFF;
+> +
+> +	crc = pcat_pmu_serial_compute_crc16(packet + 1, 12);
+> +	packet[13] = crc & 0xFF;
+> +	packet[14] = (crc >> 8) & 0xFF;
+> +
+> +	i = 0;
+> +	while (i < 16)
+> +	{
+> +		err = priv->serial_ops->putc(
+> +			priv->serial_dev, ((const char *)packet)[i]);
+> +		if (!err)
+> +		{
+> +			i++;
+> +		}
+> +		else if (err == -EAGAIN)
+> +		{
+> +			;
+> +		}
+> +		else
+> +		{
+> +			pr_err("%s: unable to send watchdog setup "
+> +				   "request: %d\n",
+> +				   __func__, err);
+> +			break;
+> +		}
+> +	}
+> +
+> +	return err;
+> +}
+> +
+> +static int pcat_wdt_start(struct udevice *dev, u64 timeout, ulong flags)
+> +{
+> +	struct pcat_wdt_priv *priv = dev_get_priv(dev);
+> +
+> +	pcat_wdt_setup(priv, timeout);
+> +
+> +	return 0;
+> +}
+> +
+> +static int pcat_wdt_stop(struct udevice *dev)
+> +{
+> +	struct pcat_wdt_priv *priv = dev_get_priv(dev);
+> +
+> +	pcat_wdt_setup(priv, 0);
+> +
+> +	return 0;
+> +}
+> +
+> +static int dm_probe(struct udevice *dev)
+> +{
+> +	struct pcat_wdt_priv *priv = dev_get_priv(dev);
+> +	struct udevice *serial_dev = NULL;
+> +	struct dm_serial_ops *ops;
+> +	int ret;
+> +
+> +	ret = uclass_get_device_by_phandle(UCLASS_SERIAL, dev, "port",
+> +									   &serial_dev);
+> +	if (ret)
+> +	{
+> +		pr_err("%s: unable to find serial port device: %d\n",
+> +			   __func__, ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = device_probe(serial_dev);
+> +	if (ret)
+> +	{
+> +		pr_err("%s: unable to probe serial port device: %d\n",
+> +			   __func__, ret);
+> +		return ret;
+> +	}
+> +
+> +	ops = serial_get_ops(serial_dev);
+> +	if (!ops)
+> +	{
+> +		printf("Cannot get ops for PMU serial port!\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	if (ops->setconfig)
+> +	{
+> +		ops->setconfig(serial_dev, SERIAL_DEFAULT_CONFIG);
+> +	}
+> +	if (ops->setbrg)
+> +	{
+> +		ops->setbrg(serial_dev, 115200);
+> +	}
+> +
+> +	priv->serial_dev = serial_dev;
+> +	priv->serial_ops = ops;
+> +	priv->packet_count = 0;
+> +
+> +	pcat_wdt_stop(dev);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct wdt_ops pcat_wdt_ops = {
+> +	.start = pcat_wdt_start,
+> +	.reset = pcat_wdt_reset,
+> +	.stop = pcat_wdt_stop,
+> +};
+> +
+> +static const struct udevice_id pcat_wdt_ids[] = {
+> +	{.compatible = "linux,wdt-pcat"},
+> +	{}};
+> +
+> +U_BOOT_DRIVER(wdt_pcat) = {
+> +	.name = "wdt_pcat",
+> +	.id = UCLASS_WDT,
+> +	.of_match = pcat_wdt_ids,
+> +	.ops = &pcat_wdt_ops,
+> +	.probe = dm_probe,
+> +	.priv_auto = sizeof(struct pcat_wdt_priv),
+> +};
+> \ No newline at end of file
 
-This also breaks the builds for phycore_am62x, phycore_am64x and also 
-the verdin-am62,
+Viele Grüße,
+Stefan Roese
 
-   phycore-am62x.c:49: multiple definition of `dram_init'
-   phycore-am62x.c:97: multiple definition of `dram_init_banksize
-
-Regards,
-Wadim
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
