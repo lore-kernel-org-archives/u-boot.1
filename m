@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 369E2D2CDFD
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 16:27:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E741CD2CDFA
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 16:27:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 124A288D97;
+	by phobos.denx.de (Postfix) with ESMTP id 6D07C88FD6;
 	Tue, 22 Oct 2024 18:27:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n0CZk/b3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CCGUafyN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FE1D88FA7; Tue, 22 Oct 2024 18:27:13 +0200 (CEST)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id 01E6C88FCE; Tue, 22 Oct 2024 18:27:14 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF5D188216
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 18:27:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F25F688D91
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 18:27:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7b14df8f821so495340085a.2
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 09:27:10 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6cbe3ea8e3fso35763826d6.0
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 09:27:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729614429; x=1730219229; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1729614431; x=1730219231; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=brAIHzJPrUOcr+tOVqG3CU7OQkmj+O6vqlLrW2jpOS8=;
- b=n0CZk/b3hwCykz0tuGHy36kcro+pA/PUToiD+tWAsRDzjaF2jocKrThDo5hqlw6urY
- 68y+8/+aQy6/E+Twl0oWz5UxfmityuDq/U8939gKF6O6htoEpGhXbhkT4uFTvvZBT+dQ
- HWZDN1AE+oWQ9LmK+SI6v07pfTVp3+xZFg5M8=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=feqMErR//ASxMgw1kPlY3T6P2tuGb0rL7+a7Ia1OoiY=;
+ b=CCGUafyNt1aB+EBvMYHXllHoEGZWlyaUzQU7dvokw07uBHCmj5I6lrSQFNOlRUerxl
+ XGv9nAqhdU60q7bqsSvCgtpJiT3/iu13yPYDpD2vxMKWRQBHh2oZsxsUhDi+fx4A5FeC
+ JWvE1I6xbgBN5hOsTcgYsLGF+MCZ40bGkkk5Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729614429; x=1730219229;
+ d=1e100.net; s=20230601; t=1729614431; x=1730219231;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=brAIHzJPrUOcr+tOVqG3CU7OQkmj+O6vqlLrW2jpOS8=;
- b=UFldGLMPMUHAxq2cALMZcIPCyd9cYk1r42ig2I4VsCME7zVBV9jTGesvG/JGqA51eS
- pKqpssOzqQsJYO9uEk4j6UD9oEPUau+agqfx+FuAnrTucxOV2YdI2LCvGRwTxMYTbKry
- 38V+cUqWIrPPkjU13LKlYu6b8IslX0Z1bh9a23zwhiXak2HzmEJcBRASQ153rzKJgtcS
- vNxOJOflUeR2w+/5KF9u33KcUsc+X1jkYQKWVHkln1gAios+s4iCqXpU5Ogr6UG38eG7
- 7cmff00EeDkLZkkUmOg8NsHFkbn7/Y/sh0q2uTj4JmYqxA261s6UZSWmmefb280NIn+T
- yimw==
-X-Gm-Message-State: AOJu0YzxddiujFdQbuZxdOIguPlbrvtDi6HPKIP39F5mq/aPNtDkuWXO
- K+MHafHd0jWUXkA7Ed69XqMNZFsBHCki+g8VplKdmqX9dM/xY+w/3OI/WAcjKho=
-X-Google-Smtp-Source: AGHT+IGlOmdECqxDgfGE5nunsj9llFd7yfLVyuIZlJ8KxdsaKBD/nf4MC072WjqArhT2yrnZC8YoEQ==
-X-Received: by 2002:a05:6214:2f85:b0:6cc:37cf:5dc8 with SMTP id
- 6a1803df08f44-6cde1528766mr237645766d6.21.1729614429735; 
- Tue, 22 Oct 2024 09:27:09 -0700 (PDT)
+ bh=feqMErR//ASxMgw1kPlY3T6P2tuGb0rL7+a7Ia1OoiY=;
+ b=d+XMnomPnfK219fT8AyxMMpB5vFD1PkmYSwzDXyqppbcYleYNIlFTRoB8i0yBUoOIv
+ BOUbyhKiCGhJOCs1Ck1sYcE2GLkbbp1aYflcImzi06nq0FFblddH7AcDKgZuddnW8rFd
+ Y6u6eo6OhpLwkYoGSiZ4NoI4dCW2SsEaJGr+6YeKQIqOk0yi7qgM0Zj3oBbi9X+T0If7
+ EOw7PTwviU/LvsRYX5WcIjLnkTZm4Ab/x0/C9G0HXLT5zdHAd3BbAa53Vtk9DDVV5iSL
+ 0PukGTDl6zVH+yZp2m/WJ6yI00GUuXECSJtfbfa6E+ZAvuh7vs/U1MQw1B397o6Qot6X
+ VKLA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXI5zSHKCJ+23mwhj3N14coZdDRu7Wu3fFul8mKdT+HZCgVyo8XV53Sdt1m7LXGAj79lzdVNIw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyGkDbUpM25mew0VQgfZSgNKvuG9py7fvpDOrPcyJ6C+Tu9jbOp
+ 36l6exK+6b8Mjw85tARFrHmkj1kXjJwbO6cspCjPkZ/Kb8N9cVjQVdDwKEdgC0VlMVVm3hCEkcj
+ 17IFJBQ==
+X-Google-Smtp-Source: AGHT+IEuT0e3ysxLyE2HLpTBrUEJ9CUCF+XwpQdt/egXOOZRYmsoyTcbWgs9tgFoEU5ucRedyD9pCA==
+X-Received: by 2002:a05:6214:310e:b0:6cc:b5:bd4d with SMTP id
+ 6a1803df08f44-6ce23f36663mr30681736d6.34.1729614430866; 
+ Tue, 22 Oct 2024 09:27:10 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ce008b2be4sm30344046d6.2.2024.10.22.09.27.08
+ 6a1803df08f44-6ce008b2be4sm30344046d6.2.2024.10.22.09.27.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Oct 2024 09:27:09 -0700 (PDT)
+ Tue, 22 Oct 2024 09:27:10 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: u-boot@lists.denx.de, Neha Malcom Francis <n-francis@ti.com>, 
- Keerthy J <j-keerthy@ti.com>, Udit Kumar <u-kumar1@ti.com>, 
- Aniket Limaye <a-limaye@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
- Andrew Davis <afd@ti.com>, Nishanth Menon <nm@ti.com>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241015-b4-upstream-j721s2-avs-v5-0-5c8087387dc5@ti.com>
-References: <20241015-b4-upstream-j721s2-avs-v5-0-5c8087387dc5@ti.com>
-Subject: Re: [PATCH v5 0/7] Add AVS support for J721S2
-Message-Id: <172961442811.3127138.639160786960070139.b4-ty@konsulko.com>
-Date: Tue, 22 Oct 2024 10:27:08 -0600
+To: sjg@chromium.org, u-boot@lists.denx.de, 
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>
+In-Reply-To: <20241014095620.216936-1-chiawei_wang@aspeedtech.com>
+References: <20241014095620.216936-1-chiawei_wang@aspeedtech.com>
+Subject: Re: [PATCH v3 0/3] aspeed: ast2700: Add Caliptra ECDSA driver
+Message-Id: <172961442984.3127138.14971443761867455881.b4-ty@konsulko.com>
+Date: Tue, 22 Oct 2024 10:27:09 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,14 +90,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Oct 2024 16:22:16 +0530, Manorit Chawdhry wrote:
+On Mon, 14 Oct 2024 17:56:17 +0800, Chia-Wei Wang wrote:
 
-> This series adds support for Adaptive voltage scaling on J721S2 device [0].
+> Aspeed AST2700 SoCs integrates the Caliptra secure IP, where an ECDSA384
+> signature verification HW interface is exported for SoC crypto needs.
 > 
-> [0]: https://www.ti.com/lit/pdf/spruj28 (Section 5.2.4.1 AVS Support)
-> 
-> AVS Test for J721S2: https://gist.github.com/manorit2001/b2fd9f6764a863294d4aa0755c83c84f
-> Boot Test results: https://gist.github.com/manorit2001/d44e035552cb19aadeb0d928d5cb5f26
+> This patch series firstly extends the FIT image signing/verify common
+> code to support the ECDSA384 algorithm. For better convenience, the
+> device tree for ECDSA public key storage is also revised by referring
+> to RSA implementations.
 > 
 > [...]
 
