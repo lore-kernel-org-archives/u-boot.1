@@ -4,78 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6CE4D1CDA0
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 06:03:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 167CCD1CDA1
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 06:04:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 378B088D9C;
-	Tue, 22 Oct 2024 08:03:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 62F4E88F91;
+	Tue, 22 Oct 2024 08:04:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gjnVUYzA";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="fIWpbP9L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A070F88E02; Tue, 22 Oct 2024 08:02:59 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7A44088F82; Tue, 22 Oct 2024 08:04:34 +0200 (CEST)
+Received: from mta-64-226.siemens.flowmailer.net
+ (mta-64-226.siemens.flowmailer.net [185.136.64.226])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADEAD883D4
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 08:02:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 376D088E31
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 08:04:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1729576972; x=1730181772; i=xypron.glpk@gmx.de;
- bh=QH1gHUDgWsw2CrKS6ACWAcdvmSLl9trbcWklnIX9a5c=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=gjnVUYzANNlfqAF+u15jr63JWbc3dj7eITik/qGXGBtQPxPP5NSNpVJ+D574sr0B
- R3+D9EelC0Cmm/TP8y1lpmbKFEOSZ8X286DIgyMnCx5vbW4oiX6k8vMmGerYmNPVv
- IGoEj+LUR1suaqwiTYB+behMyHzgYHc656TUkNUnpN27lEirC9o5arFd7vloJy3oY
- /0kqbZPwAAV2hFPqKXpA8tZsdMMCAhkCVEW7fOul1s2EBqBXV2JjkqjnHPj3tNS6L
- tcDg6ywHs/NhHxTaEJctt0ojI+wH93dean7XIknW8yUR+qq7Oimvruco+dtMNr2BE
- xESVtQHWmskUEo52fg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [10.150.8.169] ([145.103.114.43]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N3se8-1u2pNz48K8-00zoCg; Tue, 22
- Oct 2024 08:02:52 +0200
-Message-ID: <5fc1929f-c931-4c14-847b-6ea9333037d5@gmx.de>
-Date: Tue, 22 Oct 2024 08:02:46 +0200
+ spf=pass smtp.mailfrom=jan.kiszka@siemens.com
+Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id
+ 202410220604314c47aefd9c98991523 for <u-boot@lists.denx.de>;
+ Tue, 22 Oct 2024 08:04:31 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=jan.kiszka@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=NOUMkE4gUv1EAIU9AqUrsju6bX6Zic7CsRE/jSjxxvM=;
+ b=fIWpbP9LQVFer7RO2UELEB3wxQVDvHE9gwE7Z1cAgzb8ncK0mXxym2jCf5gqR/rn1+HJpp
+ BYnMgO9um4wi3MC7p+0Rcg2TrGBtd2ndK8qsFxeiB7lTHCjYxDBVbnl2Q81Tq1XaY2UA5OVU
+ nP4+F8zBEyW4jx/2tUNTSiYjSajeT8COLHBsT4PlcaU/rGiBpvQJ54qJqrffHwEdGhE54k8e
+ PKMxtdCVFzR04kk/dljmevhi6nGV0+5WBiq8RvAA5T3TGEpMYG6iiXxWL+dWII8NJCJUqvra
+ D7oQSyT5wrbBTVnlUd9pCUfuI2xpI1Xe0vtP9cMrEGs+bOkjfq52lhjw==;
+From: Jan Kiszka <jan.kiszka@siemens.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Bryan Brattlof <bb@ti.com>, Nishanth Menon <nm@ti.com>,
+ Baocheng Su <baocheng.su@siemens.com>, Li Hua Qian <huaqian.li@siemens.com>
+Subject: [PATCH v2 00/13] boards: siemens: iot2050: SM variant, sysinfo support,
+ fixes & cleanups
+Date: Tue, 22 Oct 2024 08:04:17 +0200
+Message-ID: <cover.1729577070.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/1] efi_loader: Mark a function static
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-References: <20241021140546.2969356-1-andriy.shevchenko@linux.intel.com>
- <CAC_iWjL1nUaKGb2kDK=7BKn1xgS3CitQ3FHP94VcwObjcMuuAQ@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAC_iWjL1nUaKGb2kDK=7BKn1xgS3CitQ3FHP94VcwObjcMuuAQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:xba/9qWxfQJDnnrC39jfx1NyZHAm8WQm/uOUKAzvdC/a3Fsy4VG
- D9Wg20+DlhxIxqX6q2dW5MymXQ0VCRTj24eAB2p85Yk3H39lOZH2N6O9zPivojLPE1VUbY/
- g5HInWtPNyqAH+wgrtjjpENBA+hiw+ZLOhlYmyoLZNgXsGLJM76+rg4vC1OhjkKxfbIMaf+
- 7ybcUxokAtmfj5vK7ONYw==
-UI-OutboundReport: notjunk:1;M01:P0:C5aIZvECuHE=;g/l6IjhZlCVEZ197OD4SY+H73eB
- ikFbSyEp5QpDA7JoNN2DIyTBZTA0Ee2zRr36GQO0ajGW+s+8KFr/+OvqesGNw4v3vCMDBF8Fn
- 8vLbK8OGWhSm6/+sx/Sp7irNVEPxsM9v1Bd9Z1D0WlJy/pyvI4SrWoJG//07yPFHvNL98Z3ll
- ZAjIxHlNfYVhYdhHkNKSfffUVQSQWC1Du751nEJ8llx+dYb7spcUo2gKuXae7od//YhB4DXCk
- vtiPIb+0AuKF8dG+Hezw5FNXdhBMLiZS9fOs1ukoctnqwNmRrti75NM6ZbiXaApkjLX+Fc1RT
- 2tgJY0yWF/pWxK4YB6EguyDRAzrj/KZ7BZ669ztKsyelX/9QsA3p43yAc6OYlfXWeOgcS/pf6
- AsF8sYGRc1532uvuo2Da5YR7b0m+G8596PaoXyu35ovj82ViJWtWTMSDbY8sFQ7cyRnI33yZd
- soRIsvm+X3IHSJG7UYkCUhnG9nqy8C2cYSDkV64brP2oAi4E9zk20dczP54kWJzYvpsFZZb5h
- eSVDUDCI5FrCW7LKDJKQHOPOhLvIFBpF9VV9f53wsLehmdhemK/3EV0jkdo8vyDdvrADLT8wf
- dHt31Mk28P8mtNbWok94fZl+D+qt55IgD2qnO9fSeAB+qqhKmkgC2J+WgvrKvxYimVlb2cYU3
- DI8Ye4fE8n0AujaF4kIA3fUasb8/mg1C+UiMvB/sak54m+IWu9qczxuWN59KYt7UeTfZl8Gq8
- UPMRTMunFzw19GDdv2LOw3EsCpv1V2Ql+k0iUcClwC9KqYMVEXhrfsj3TGAA1kKHhnkCQQIpL
- L25ovYAh317TEkbC2ZRNEUZA==
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-294854:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,53 +66,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/21/24 16:40, Ilias Apalodimas wrote:
-> Thanks Andy
->
-> On Mon, 21 Oct 2024 at 17:06, Andy Shevchenko
-> <andriy.shevchenko@linux.intel.com> wrote:
->>
->> efi_bootmgr_release_uridp_resource() is not used anywhere except
->> the same file where it is defined. Mark it static.
->> This helps avoiding the compiler warning:
->>
->>    lib/efi_loader/efi_bootmgr.c:388:14: warning: no previous prototype =
-for =E2=80=98efi_bootmgr_release_uridp_resource=E2=80=99 [-Wmissing-protot=
-ypes]
->>
->> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
->> ---
->>   lib/efi_loader/efi_bootmgr.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.=
-c
->> index 589d3996b680..79144962cd73 100644
->> --- a/lib/efi_loader/efi_bootmgr.c
->> +++ b/lib/efi_loader/efi_bootmgr.c
->> @@ -385,7 +385,7 @@ err:
->>    * @ctx:       event context
->>    * Return:     status code
->>    */
->> -efi_status_t efi_bootmgr_release_uridp_resource(struct uridp_context *=
-ctx)
->> +static efi_status_t efi_bootmgr_release_uridp_resource(struct uridp_co=
-ntext *ctx)
->>   {
->>          efi_status_t ret =3D EFI_SUCCESS;
->>
->> --
->> 2.43.0.rc1.1336.g36b5255a03ac
->>
->
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Changes in v2:
+ - rebased over master, adding the missing 6.12 cherry-picks from
+   devicetree-rebasing
 
-Hello Andy,
+This adds support for the new IOT2050 SM variant, introduces a sysinfo
+driver which also permits SMBIOS support and switches the board to
+OF_UPSTREAM. There are some further fixes for the boards included as well.
 
-The function is called efi_bootmgr_release_uridp() since 292a4a4c7b77
-("efi_loader: shorten efi_bootmgr_release_uridp_resource()").
+Not yet included is configuration support for DMA isolation via the PVU as
+this depends on not yet merged DT bindings and another overlay.
 
-Best regards
+Jan
 
-Heinrich
+
+CC: Baocheng Su <baocheng.su@siemens.com>
+CC: Li Hua Qian <huaqian.li@siemens.com>
+
+Baocheng Su (5):
+  board: siemens: iot2050: Fix coding style
+  board: siemens: iot2050: Control pcie power for all variants
+  board: siemens: iot2050: Pass DDR size from FSBL
+  board: siemens: iot2050: Generalize the fdt fixup
+  board: iot2050: Support new IOT2050-SM variant
+
+Jan Kiszka (5):
+  board: siemens: iot2050: Fix mistake in list of writable env vars
+  board: siemens: iot2050: Stop using special spl DT sources
+  arm64: dts: ti: iot2050: Add overlays for M.2 used by firmware
+  board: siemens: iot2050: Migrate to OF_UPSTREAM
+  smbios: Fill UUID from sysinfo when available
+
+Li Hua Qian (3):
+  arm64: dts: ti: iot2050: Disable lock-step for all iot2050 boards
+  sysinfo: Add driver for IOT2050 boards
+  board: siemens: iot2050: Use sysinfo for board initialization
+
+ arch/arm/dts/Makefile                         |   8 -
+ arch/arm/dts/k3-am65-iot2050-boot-image.dtsi  |  19 +-
+ arch/arm/dts/k3-am65-iot2050-common-pg1.dtsi  |  46 --
+ arch/arm/dts/k3-am65-iot2050-common-pg2.dtsi  |  51 --
+ .../dts/k3-am65-iot2050-common-u-boot.dtsi    |  18 +
+ arch/arm/dts/k3-am65-iot2050-common.dtsi      | 738 ------------------
+ arch/arm/dts/k3-am65-iot2050-spl.dts          |  17 -
+ .../dts/k3-am6528-iot2050-basic-common.dtsi   |  61 --
+ arch/arm/dts/k3-am6528-iot2050-basic-pg2.dts  |  24 -
+ arch/arm/dts/k3-am6528-iot2050-basic.dts      |  24 -
+ .../k3-am6548-iot2050-advanced-common.dtsi    |  52 --
+ .../arm/dts/k3-am6548-iot2050-advanced-m2.dts | 119 ---
+ .../dts/k3-am6548-iot2050-advanced-pg2.dts    |  29 -
+ .../k3-am6548-iot2050-advanced-sm-u-boot.dtsi |   1 +
+ arch/arm/dts/k3-am6548-iot2050-advanced.dts   |  24 -
+ arch/arm/mach-k3/am65x/Kconfig                |   2 +
+ board/siemens/iot2050/board.c                 | 226 ++++--
+ configs/iot2050_defconfig                     |   7 +-
+ doc/board/siemens/iot2050.rst                 |   7 +-
+ drivers/sysinfo/Kconfig                       |   7 +
+ drivers/sysinfo/Makefile                      |   1 +
+ drivers/sysinfo/iot2050.c                     | 143 ++++
+ drivers/sysinfo/iot2050.h                     |  26 +
+ .../arm64/ti/k3-am65-iot2050-common-pg2.dtsi  |   5 -
+ .../src/arm64/ti/k3-am65-iot2050-common.dtsi  |   5 +
+ .../src/arm64/ti/k3-am6528-iot2050-basic.dts  |   5 -
+ ...48-iot2050-advanced-m2-bkey-ekey-pcie.dtso |   2 +-
+ ...-am6548-iot2050-advanced-m2-bkey-usb3.dtso |   2 +-
+ include/configs/iot2050.h                     |   5 +-
+ include/sysinfo.h                             |   1 +
+ lib/smbios.c                                  |   4 +
+ 31 files changed, 379 insertions(+), 1300 deletions(-)
+ delete mode 100644 arch/arm/dts/k3-am65-iot2050-common-pg1.dtsi
+ delete mode 100644 arch/arm/dts/k3-am65-iot2050-common-pg2.dtsi
+ delete mode 100644 arch/arm/dts/k3-am65-iot2050-common.dtsi
+ delete mode 100644 arch/arm/dts/k3-am65-iot2050-spl.dts
+ delete mode 100644 arch/arm/dts/k3-am6528-iot2050-basic-common.dtsi
+ delete mode 100644 arch/arm/dts/k3-am6528-iot2050-basic-pg2.dts
+ delete mode 100644 arch/arm/dts/k3-am6528-iot2050-basic.dts
+ delete mode 100644 arch/arm/dts/k3-am6548-iot2050-advanced-common.dtsi
+ delete mode 100644 arch/arm/dts/k3-am6548-iot2050-advanced-m2.dts
+ delete mode 100644 arch/arm/dts/k3-am6548-iot2050-advanced-pg2.dts
+ create mode 120000 arch/arm/dts/k3-am6548-iot2050-advanced-sm-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/k3-am6548-iot2050-advanced.dts
+ create mode 100644 drivers/sysinfo/iot2050.c
+ create mode 100644 drivers/sysinfo/iot2050.h
+ rename arch/arm/dts/k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie-overlay.dtso => dts/upstream/src/arm64/ti/k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie.dtso (92%)
+ rename arch/arm/dts/k3-am6548-iot2050-advanced-m2-bkey-usb3-overlay.dtso => dts/upstream/src/arm64/ti/k3-am6548-iot2050-advanced-m2-bkey-usb3.dtso (96%)
+
+-- 
+2.43.0
 
