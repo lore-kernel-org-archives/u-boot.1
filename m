@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D3E5D1CDD9
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 10:46:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 089DDD1CDD5
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 10:48:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B368888F50;
-	Tue, 22 Oct 2024 12:46:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3DE6788D3A;
+	Tue, 22 Oct 2024 12:48:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729593973;
-	bh=rc6i4wCqQ3UpSL5O82X3IzQj1LHV9XL5VDb+RD2NYa8=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1729594119;
+	bh=vGzz08jdOmhFbJV4el0D346SCVhcL7FXxfb58RNa1aM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VpWhBj0C39HzlUp9X5PF9kK9fN9PZKebOcCWEB6GjQfwwemwoEJid46YWw8QjdUKq
-	 8IF/sk6jyQNyUB8M1mTDSik6e1UvARf/Nr4DWNm0kiDVlqq10KYBSj19u1962Bx0RW
-	 Eprrbiqz7NpdxHcpfDtcRy2lvnTddTaX+U22HkXUcLuaouIRn3HoSNxHDz8XokD4qB
-	 ocdarmMM0tuE4ENHXRo1uS9s37G27tO5RhYnh/4FoAW7Z585Dpdl59TDWAZiRyKOPd
-	 RED797KPgDHu3WT7i2UeFdV0flwjB5gUsh36TrtQbGbNW9gdOb1Cy/hG3JeaaWuS+q
-	 xy7uEQ0Fma/qg==
+	b=tTfMQgyoEAFA9+2sDK0mF7Z62TL9XYkAGqMAciNGiaD7l+a505e7lmguGWU2ryw2z
+	 OLd+rx8svN+c5L7PJxHeU3rogP3jnJUTZgpC9QH6KwDadVSBQVMhuCHTpg/olcROX/
+	 g39UmOa9D/gVkOlS+nbPFJ3g8KU/mXGdXePHpQt0Elh7iCwAv5G8r5mb2xJSYTh+Bz
+	 ViGrwhrKqOej+C1thZAZ7tsigSNt05NQy55TDn7WnSh0qAeja/DrdKjy4PPk1DHrGA
+	 44TJY2QdeRTVXiFcUCUGqdOA088Ww6KIDW/noDswZVGj0bmLAqNXSdPrB/YAngBdt6
+	 jKpx3tFGZr+Cw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B511088F99; Tue, 22 Oct 2024 12:46:12 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
+ id 759CA88CFB; Tue, 22 Oct 2024 12:48:38 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9605288C4D
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 12:46:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A42F88F8E
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 12:48:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -38,18 +38,18 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XXpkS2TlMz9smy;
- Tue, 22 Oct 2024 12:46:08 +0200 (CEST)
-Message-ID: <a1229732-a42d-471d-9914-07e459d51d25@denx.de>
-Date: Tue, 22 Oct 2024 12:46:07 +0200
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4XXpnG3177z9smb;
+ Tue, 22 Oct 2024 12:48:34 +0200 (CEST)
+Message-ID: <dfa75c24-50d8-47b2-b4e3-2b9b2580d223@denx.de>
+Date: Tue, 22 Oct 2024 12:48:33 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/2] watchdog: Add a driver for the photonicat watchdog
-To: Coia Prant <coiaprant@gmail.com>, u-boot@lists.denx.de
-References: <20240829083035.227423-1-coiaprant@gmail.com>
- <20240829083035.227423-2-coiaprant@gmail.com>
+Subject: Re: [PATCH] watchdog: gpio_wdt: add support for stoppable devices
+To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
+Cc: Paul Doelle <paaull.git@gmail.com>, Felix Blix <felbe@prevas.dk>
+References: <20241002192323.632822-1-ravi@prevas.dk>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240829083035.227423-2-coiaprant@gmail.com>
+In-Reply-To: <20241002192323.632822-1-ravi@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,294 +68,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/29/24 10:30, Coia Prant wrote:
-> This driver supports the photonicat watchdog timers.
+On 10/2/24 21:23, Rasmus Villemoes wrote:
+> Back when I added this driver in commit 2ac8490412c9, I wrote
 > 
-> Signed-off-by: Coia Prant <coiaprant@gmail.com>
-
-Why did you send this driver twice? Please send only 1/1 patch next
-time.
-
-> ---
->   drivers/watchdog/Kconfig    |   6 +
->   drivers/watchdog/Makefile   |   1 +
->   drivers/watchdog/pcat_wdt.c | 218 ++++++++++++++++++++++++++++++++++++
->   3 files changed, 225 insertions(+)
->   create mode 100644 drivers/watchdog/pcat_wdt.c
+>      The corresponding linux driver apparently has support for some
+>      watchdog circuits which can be disabled by tri-stating the gpio, but I
+>      have never actually encountered such a chip in the wild;
 > 
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index 0c3e9913..f0a52ecf 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -421,4 +421,10 @@ config WDT_FTWDT010
->   	help
->   	  Faraday Technology ftwdt010 watchdog is an architecture independent
->   	  watchdog. It is usually used in SoC chip design.
-> +
-> +config WDT_PCAT
-> +	bool "photonicat board watchdog support"
-> +	depends on WDT && SERIAL && DM
-> +	help
-> +	  Select this to enable watchdog timer on photonicat board.
+> That has changed now; I have a board with just such a watchdog on my
+> desk currently. Add support for that.
+> 
+> - For a hw_algo="toggle" device, the gpio is requested as output if the
+>    always-running flag is set, otherwise as input.
+> 
+> - The ->start() method is updated to change the direction to output when
+>    required (i.e. it is not always-running).
+> 
+> - The ->stop() method is implemented, but of course reports failure if
+>    always-running.
+> 
+> As I still haven't met any hw_algo="level" devices, I'm not entirely
+> sure how they fit in, but I'm borrowing logic from the corresponding
+> linux driver:
+> 
+> - In ->probe(), such devices always request the gpio as GPIOD_IS_OUT.
+> 
+> - In ->stop(), the linux driver has an "eternal ping" comment and sets
+>    the gpio to (logic) high.
+> 
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 
-What is a "photonicat board"? Which SoC is used? Manufacturer?
-
-And empty line missing here?
-
->   endmenu
-> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-> index 7b39adcf..829b5ed1 100644
-> --- a/drivers/watchdog/Makefile
-> +++ b/drivers/watchdog/Makefile
-> @@ -50,3 +50,4 @@ obj-$(CONFIG_WDT_STM32MP) += stm32mp_wdt.o
->   obj-$(CONFIG_WDT_SUNXI) += sunxi_wdt.o
->   obj-$(CONFIG_WDT_TANGIER) += tangier_wdt.o
->   obj-$(CONFIG_WDT_XILINX) += xilinx_wwdt.o
-> +obj-$(CONFIG_WDT_PCAT) += pcat_wdt.o
-
-Please sort alphabetically.
-
-> \ No newline at end of file
-> diff --git a/drivers/watchdog/pcat_wdt.c b/drivers/watchdog/pcat_wdt.c
-> new file mode 100644
-> index 00000000..cac07fb6
-> --- /dev/null
-> +++ b/drivers/watchdog/pcat_wdt.c
-> @@ -0,0 +1,218 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <wdt.h>
-> +#include <asm/gpio.h>
-> +#include <linux/delay.h>
-> +#include <serial.h>
-> +#include <dm/device-internal.h>
-
-Sorting of header includes looks not correct.
-
-> +
-> +struct pcat_wdt_priv
-> +{
-> +	struct udevice *serial_dev;
-> +	struct dm_serial_ops *serial_ops;
-> +	uint16_t packet_count;
-> +};
-> +
-> +static uint16_t pcat_pmu_serial_compute_crc16(const uint8_t *data,
-> +											  size_t len)
-
-alignment?
-
-> +{
-> +	uint16_t crc = 0xFFFF;
-> +	size_t i;
-> +	unsigned int j;
-> +
-> +	for (i = 0; i < len; i++)
-> +	{
-
-Coding style is wrong. Please use Linux coding style with U-Boot code as
-well. scripts/checkpatch.pl will help you finding issues.
-
-I'll stop the review here and will continue, once you've sent v2.
+Reviewed-by: Stefan Roese <sr@denx.de>
 
 Thanks,
 Stefan
 
-> +		crc ^= data[i];
-> +		for (j = 0; j < 8; j++)
-> +		{
-> +			if (crc & 1)
-> +			{
-> +				crc = (crc >> 1) ^ 0xA001;
-> +			}
-> +			else
-> +			{
-> +				crc >>= 1;
-> +			}
-> +		}
-> +	}
-> +
-> +	return crc;
-> +}
-> +
-> +static int pcat_wdt_reset(struct udevice *dev)
-> +{
-> +	struct pcat_wdt_priv *priv = dev_get_priv(dev);
-> +	uint8_t packet[13] = "\xA5\x01\x81\x00\x00\x03\x00\x01\x00"
-> +						 "\x00\x00\x00\x5A";
-> +	uint16_t crc;
-> +	int err = 0;
-> +	unsigned int i;
-> +
-> +	packet[3] = priv->packet_count & 0xFF;
-> +	packet[4] = (priv->packet_count >> 8) & 0xFF;
-> +	priv->packet_count++;
-> +
-> +	crc = pcat_pmu_serial_compute_crc16(packet + 1, 9);
-> +	packet[10] = crc & 0xFF;
-> +	packet[11] = (crc >> 8) & 0xFF;
-> +
-> +	i = 0;
-> +	while (i < 13)
-> +	{
-> +		err = priv->serial_ops->putc(
-> +			priv->serial_dev, ((const char *)packet)[i]);
-> +		if (!err)
-> +		{
-> +			i++;
-> +		}
-> +		else if (err == -EAGAIN)
-> +		{
-> +			;
-> +		}
-> +		else
-> +		{
-> +			pr_err("%s: unable to send watchdog setup "
-> +				   "request: %d\n",
-> +				   __func__, err);
-> +			break;
-> +		}
-> +	}
-> +	return err;
-> +}
-> +
-> +static int pcat_wdt_setup(struct pcat_wdt_priv *priv, u64 timeout)
-> +{
-> +	uint8_t packet[16] = "\xA5\x01\x81\x00\x00\x06\x00\x13\x00"
-> +						 "\x3C\x3C\x00\x00\x00\x00\x5A";
-> +	uint16_t crc;
-> +	int err = 0;
-> +	unsigned int i;
-> +
-> +	if (timeout > 255)
-> +	{
-> +		pr_warn("%s: timeout cannot be more than 255s\n",
-> +				__func__);
-> +		timeout = 255;
-> +	}
-> +
-> +	packet[3] = priv->packet_count & 0xFF;
-> +	packet[4] = (priv->packet_count >> 8) & 0xFF;
-> +	priv->packet_count++;
-> +	packet[11] = timeout & 0xFF;
-> +
-> +	crc = pcat_pmu_serial_compute_crc16(packet + 1, 12);
-> +	packet[13] = crc & 0xFF;
-> +	packet[14] = (crc >> 8) & 0xFF;
-> +
-> +	i = 0;
-> +	while (i < 16)
-> +	{
-> +		err = priv->serial_ops->putc(
-> +			priv->serial_dev, ((const char *)packet)[i]);
-> +		if (!err)
-> +		{
-> +			i++;
-> +		}
-> +		else if (err == -EAGAIN)
-> +		{
-> +			;
-> +		}
-> +		else
-> +		{
-> +			pr_err("%s: unable to send watchdog setup "
-> +				   "request: %d\n",
-> +				   __func__, err);
-> +			break;
-> +		}
-> +	}
-> +
-> +	return err;
-> +}
-> +
-> +static int pcat_wdt_start(struct udevice *dev, u64 timeout, ulong flags)
-> +{
-> +	struct pcat_wdt_priv *priv = dev_get_priv(dev);
-> +
-> +	pcat_wdt_setup(priv, timeout);
+> ---
+>   drivers/watchdog/gpio_wdt.c | 27 ++++++++++++++++++++++++---
+>   1 file changed, 24 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/watchdog/gpio_wdt.c b/drivers/watchdog/gpio_wdt.c
+> index 2920c2c751f..e889861e917 100644
+> --- a/drivers/watchdog/gpio_wdt.c
+> +++ b/drivers/watchdog/gpio_wdt.c
+> @@ -45,14 +45,32 @@ static int gpio_wdt_start(struct udevice *dev, u64 timeout, ulong flags)
+>   	if (priv->always_running)
+>   		return 0;
+>   
+> -	return -ENOSYS;
+> +	dm_gpio_set_dir_flags(&priv->gpio, GPIOD_IS_OUT);
+> +	gpio_wdt_reset(dev);
 > +
 > +	return 0;
 > +}
 > +
-> +static int pcat_wdt_stop(struct udevice *dev)
+> +static int gpio_wdt_stop(struct udevice *dev)
 > +{
-> +	struct pcat_wdt_priv *priv = dev_get_priv(dev);
+> +	struct gpio_wdt_priv *priv = dev_get_priv(dev);
 > +
-> +	pcat_wdt_setup(priv, 0);
+> +	if (priv->always_running)
+> +		return -EOPNOTSUPP;
+> +
+> +	if (priv->hw_algo == HW_ALGO_TOGGLE)
+> +		dm_gpio_set_dir_flags(&priv->gpio, GPIOD_IS_IN);
+> +	else
+> +		dm_gpio_set_value(&priv->gpio, 1);
 > +
 > +	return 0;
-> +}
-> +
-> +static int dm_probe(struct udevice *dev)
-> +{
-> +	struct pcat_wdt_priv *priv = dev_get_priv(dev);
-> +	struct udevice *serial_dev = NULL;
-> +	struct dm_serial_ops *ops;
-> +	int ret;
-> +
-> +	ret = uclass_get_device_by_phandle(UCLASS_SERIAL, dev, "port",
-> +									   &serial_dev);
-> +	if (ret)
-> +	{
-> +		pr_err("%s: unable to find serial port device: %d\n",
-> +			   __func__, ret);
-> +		return ret;
-> +	}
-> +
-> +	ret = device_probe(serial_dev);
-> +	if (ret)
-> +	{
-> +		pr_err("%s: unable to probe serial port device: %d\n",
-> +			   __func__, ret);
-> +		return ret;
-> +	}
-> +
-> +	ops = serial_get_ops(serial_dev);
-> +	if (!ops)
-> +	{
-> +		printf("Cannot get ops for PMU serial port!\n");
-> +		return -EINVAL;
-> +	}
-> +
-> +	if (ops->setconfig)
-> +	{
-> +		ops->setconfig(serial_dev, SERIAL_DEFAULT_CONFIG);
-> +	}
-> +	if (ops->setbrg)
-> +	{
-> +		ops->setbrg(serial_dev, 115200);
-> +	}
-> +
-> +	priv->serial_dev = serial_dev;
-> +	priv->serial_ops = ops;
-> +	priv->packet_count = 0;
-> +
-> +	pcat_wdt_stop(dev);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct wdt_ops pcat_wdt_ops = {
-> +	.start = pcat_wdt_start,
-> +	.reset = pcat_wdt_reset,
-> +	.stop = pcat_wdt_stop,
-> +};
-> +
-> +static const struct udevice_id pcat_wdt_ids[] = {
-> +	{.compatible = "linux,wdt-pcat"},
-> +	{}};
-> +
-> +U_BOOT_DRIVER(wdt_pcat) = {
-> +	.name = "wdt_pcat",
-> +	.id = UCLASS_WDT,
-> +	.of_match = pcat_wdt_ids,
-> +	.ops = &pcat_wdt_ops,
-> +	.probe = dm_probe,
-> +	.priv_auto = sizeof(struct pcat_wdt_priv),
-> +};
-> \ No newline at end of file
+>   }
+>   
+>   static int dm_probe(struct udevice *dev)
+>   {
+>   	struct gpio_wdt_priv *priv = dev_get_priv(dev);
+> -	int ret;
+>   	const char *algo = dev_read_string(dev, "hw_algo");
+> +	int ret, flags;
+>   
+>   	if (!algo)
+>   		return -EINVAL;
+> @@ -64,7 +82,9 @@ static int dm_probe(struct udevice *dev)
+>   		return -EINVAL;
+>   
+>   	priv->always_running = dev_read_bool(dev, "always-running");
+> -	ret = gpio_request_by_name(dev, "gpios", 0, &priv->gpio, GPIOD_IS_OUT);
+> +	flags = priv->always_running || priv->hw_algo == HW_ALGO_LEVEL ?
+> +		GPIOD_IS_OUT : GPIOD_IS_IN;
+> +	ret = gpio_request_by_name(dev, "gpios", 0, &priv->gpio, flags);
+>   	if (ret < 0) {
+>   		dev_err(dev, "Request for wdt gpio failed: %d\n", ret);
+>   		return ret;
+> @@ -78,6 +98,7 @@ static int dm_probe(struct udevice *dev)
+>   
+>   static const struct wdt_ops gpio_wdt_ops = {
+>   	.start = gpio_wdt_start,
+> +	.stop  = gpio_wdt_stop,
+>   	.reset = gpio_wdt_reset,
+>   };
+>   
 
 Viele Grüße,
 Stefan Roese
