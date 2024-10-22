@@ -4,95 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97505D2C559
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 14:02:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3058BD2C55E
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 14:20:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3261088F31;
-	Tue, 22 Oct 2024 16:02:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F95788599;
+	Tue, 22 Oct 2024 16:20:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Zoacugsn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iof5jPE6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D5DC88F31; Tue, 22 Oct 2024 16:02:56 +0200 (CEST)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id 4A77088F8E; Tue, 22 Oct 2024 16:20:01 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDCA988F8E
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 16:02:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB5CA88599
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 16:19:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7b1467af9dbso414417485a.0
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 07:02:53 -0700 (PDT)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7b15eadee87so262042585a.2
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 07:19:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729605773; x=1730210573; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1729606798; x=1730211598; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VnCD3MM0uvDA4v0r9yn03byqJ5DwLiS5isMUrNyBJZU=;
- b=Zoacugsnbt8PS+qMym+nFBZV/1UgkzniCGbsblaBbr21mSSYvqLDmeJf30bcZ5jsZe
- xY6ATL8rVAE5JOocK3JlTBf1JwRcDC/XQ7RHsuYcSl4ZjsFfFwXh1oEjBGaZLF2bMno1
- jcqsaj2m05omxGoPNcZzBs0K4QG7fYx1nLjBg=
+ bh=QrGnuDqbCTsJJZhykIiWGxxLWS9cjlQMSEuCUdKzw0s=;
+ b=iof5jPE6Kv1or9YfyBDo03AcnDcyNzH8sjcHuvw04wCQZRbW9EMSzLiv0jLN/iltRy
+ Dnd6RjyBreRHfHkovavoy2d4a0nn1yHdSKAq/8tGNn258Hu1OBk2JBHAGNdUslFZjE80
+ ZtoQzOKy2XzuH3UmhckMmcBUM1PItJgbNgG/E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729605773; x=1730210573;
+ d=1e100.net; s=20230601; t=1729606798; x=1730211598;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VnCD3MM0uvDA4v0r9yn03byqJ5DwLiS5isMUrNyBJZU=;
- b=aTQYb/b468T1Wq3Jep6Tn2RSHM2ZUubva0V1t8VRZXsTlSxzYxTHcmnabdZ1V6fsh8
- gwq+OHc7vZSY/Vfn+od9P62/Z8P0ADyuiZcApea4/fvQy5bz4E8zTswLt6ZR8vnbqZTt
- lltcHpbmTiizY/PpUT+YRGfDMT2AGXbx6oK+i0avXvuAznD4OyIlEhv5gXZEfkDCdYzG
- 6xwLldeKCXSR0tC0VbOurbl0Jqcg1KHlCJD4PjpKuiPB7JmAw9HRbMWrA3/GkGnzgfD4
- H3Q1B+8YnCBnA+f0FV6SDfBD/S+zNnzJV/9OHm3JkPpstqPJN8Occ4GHfK+Q6+1ZSm9w
- G+lQ==
-X-Gm-Message-State: AOJu0Yyd+9tZr5WdJsftRB7Nx4Yz3mau/NcoYBa2fSMDxswp/BcuzdOI
- H/CZSHnXfxbfFuJ76GCevJgeTINNgdAqKHTqlwbxPg98GvnegeEnmfNt8aeX7JQ=
-X-Google-Smtp-Source: AGHT+IELviy9XsBYHWup/I8Nr4n/1F3zhDX6tEyTDeag6e/FwlwT+ZOhVnJiOa6YcW9ZRubPKTD5gQ==
-X-Received: by 2002:a05:620a:4543:b0:7b1:45be:2e80 with SMTP id
- af79cd13be357-7b175146c26mr506148085a.0.1729605772539; 
- Tue, 22 Oct 2024 07:02:52 -0700 (PDT)
+ bh=QrGnuDqbCTsJJZhykIiWGxxLWS9cjlQMSEuCUdKzw0s=;
+ b=ke+t7yrsTdngj7XhiijIIUUbiC2KDcrK2NI//+y5YCMoCjNyS3S1Td9p420NNMMkPb
+ N/LSgYS4U5UB3dtm0xgAqphrBL8Io66fuY9NA8BkBR15R9OXwKpAJF3E3+oUcpyrV10C
+ QP74TSl+nEGoeDW2aOpMQJN79ifRT5aZxVkgofk5Xe/AfCeBLS5jWLASi2y3lhK+ls8o
+ p7Yzb1dDwb3ksZGKnErrJ8OnNXIkBLTWbMrZN/8Vx66Tbqkqez2z1qKISij6Ytt31Osc
+ Dz/eAPXZW80WGglHZB4n/TUbRJGTfq7E2ez3EI/EHwDfdG60VURPpJAj2IHl/bLaNTij
+ LK9w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU9GUUOwossCDd0ZHVdw1F7dbbmzeiCV0AG2iBflPrtY5G4jKUDtrSaC5ot9XVGbfshNa4FHVs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxKzjWL2iEnAcZ3t5AXm/APuBdEJLpL+k4/zRFPupL34TkfNWLp
+ nRbq3Ba+sfbUB2Wa+tWqrgSG/FDaR8ZtcT6PqiyThnhTLEvK7Uh7Ht/bxU6JjcU=
+X-Google-Smtp-Source: AGHT+IEtiKWde2XLWmHy1Y/6OdUPx6sgw/BU6fCv1BcQ5KREKw8yKHjAuLUTJKPxjjDao725uo2e3w==
+X-Received: by 2002:a05:6214:16f:b0:6ce:23fb:ee5b with SMTP id
+ 6a1803df08f44-6ce23fbef31mr32265896d6.30.1729606797741; 
+ Tue, 22 Oct 2024 07:19:57 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b1659e5c62sm282014385a.40.2024.10.22.07.02.50
+ 6a1803df08f44-6ce009dd217sm29284626d6.110.2024.10.22.07.19.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Oct 2024 07:02:51 -0700 (PDT)
-Date: Tue, 22 Oct 2024 08:02:46 -0600
+ Tue, 22 Oct 2024 07:19:56 -0700 (PDT)
+Date: Tue, 22 Oct 2024 08:19:53 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Eddie James <eajames@linux.ibm.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Yang Xiwen <forbidden405@outlook.com>
-Subject: Re: [PATCH v7 6/7] test: efi: boot: Set up an image suitable for EFI
- testing
-Message-ID: <20241022140246.GB4959@bill-the-cat>
-References: <20241019152434.1017394-1-sjg@chromium.org>
- <20241019152434.1017394-7-sjg@chromium.org>
- <20241019175121.GA4959@bill-the-cat>
- <CAFLszTgBzr_nYtFKFEuHBLBUUF8qq92y+i=bzsVaKsHyt-990Q@mail.gmail.com>
- <20241021173253.GO4959@bill-the-cat>
- <CAFLszThgsF5BL8aSGozA3nAeox=g8bVARmSaBFedM=dbLT=UWA@mail.gmail.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v4 0/3] dwc3: gadget: properly fix cache operations
+Message-ID: <20241022141953.GC4959@bill-the-cat>
+References: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-0-5f3498d8035b@linaro.org>
+ <172955350574.3031532.4179642258271087474.b4-ty@konsulko.com>
+ <87h694wlj0.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="693nWLq2DjbHJB7t"
+ protocol="application/pgp-signature"; boundary="6znTGy0RpZsVyGzd"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThgsF5BL8aSGozA3nAeox=g8bVARmSaBFedM=dbLT=UWA@mail.gmail.com>
+In-Reply-To: <87h694wlj0.fsf@baylibre.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,92 +97,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---693nWLq2DjbHJB7t
+--6znTGy0RpZsVyGzd
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 22, 2024 at 02:15:46PM +0200, Simon Glass wrote:
+On Tue, Oct 22, 2024 at 11:10:27AM +0200, Mattijs Korpershoek wrote:
 > Hi Tom,
 >=20
-> On Mon, 21 Oct 2024 at 19:32, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Oct 21, 2024 at 08:31:10AM +0200, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Sat, 19 Oct 2024 at 11:51, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sat, Oct 19, 2024 at 09:24:33AM -0600, Simon Glass wrote:
-> > > >
-> > > > > Create a new disk for use with tests, which contains the new 'tes=
-tapp'
-> > > > > EFI app specifically intended for testing the EFI loader.
-> > > > >
-> > > > > Attach it to the USB device, since most testing is currently done=
- with
-> > > > > mmc.
-> > > > >
-> > > > > Initially this image will be used to test the EFI bootmeth.
-> > > > >
-> > > > > Fix a stale comment in prep_mmc_bootdev() while we are here.
-> > > > >
-> > > > > For now this uses sudo and a compressed fallback file, like all t=
-he
-> > > > > other bootstd tests. Once this series is in, the patch which moves
-> > > > > this to use user-space tools will be cleaned up and re-submitted.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > >
-> > > > > ---
-> > > > > Here is the patch to avoid sudo and CI fallback:
-> > > > >
-> > > > > [1] https://patchwork.ozlabs.org/project/uboot/patch/
-> > > > > 20240802093322.15240-1-richard@nod.at/
-> > > > >
-> > > > > (no changes since v1)
-> > > > >
-> > > > >  arch/sandbox/dts/test.dts           |   2 +-
-> > > > >  test/boot/bootdev.c                 |  18 +++++++++-
-> > > > >  test/boot/bootflow.c                |   2 +-
-> > > > >  test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
-> > > >
-> > > > This I think best illustrates the problem with "BOOTSBOX.EFI". This
-> > > > image will work for CI up until I can figure out how to get access =
-to
-> > > > free arm64 servers to run some tests on and then it will fail.
-> > >
-> > > I don't believe so. Why do you think that?
-> >
-> > Because it includes the BOOTSBOX.EFI x86 binary file, and executes it?
-> > Or did I miss where we update the contents to include that file as we
-> > just built it (and so why have it included?) ?
+> On lun., oct. 21, 2024 at 17:31, Tom Rini <trini@konsulko.com> wrote:
 >=20
-> It works fine on x86 and I'm sure it will work fine on ARM as well.
-> The file is built with the host compiler, just as U-Boot itself is.
+> > On Fri, 11 Oct 2024 16:38:23 +0200, Neil Armstrong wrote:
+> >
+> >> We experience huge problems with cache handling on Qualcomm
+> >> systems, and it appears the dcache handling in the DWC3 gadget
+> >> code is quite wrong and causes operational issues.
+> >>=20
+> >> This serie fixes the dcache operations on unaligned data,
+> >> and properly invalidate buffers when reading back data from
+> >> hardware.
+> >>=20
+> >> [...]
+> >
+> > Applied to u-boot/master, thanks!
+>=20
+> I think you already pulled this via:
+>=20
+> https://patchwork.ozlabs.org/project/uboot/patch/87iktr2l9t.fsf@baylibre.=
+com/
 
-Erm, are you saying the BOOT/EFI/BOOTSBOX.EFI file that's in
-test/py/tests/bootstd/flash1.img.xz doesn't need to exist and the test
-replaces that, as it goes?
+Ah, hunh. OK. So, I should try and run the script to update patchwork
+status based on patch hashes more often. And I think b4 applied it to
+the original merge base, then merged to master as a no-op.
 
 --=20
 Tom
 
---693nWLq2DjbHJB7t
+--6znTGy0RpZsVyGzd
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcXsIYACgkQFHw5/5Y0
-tyzAnAwAq2pmDox4aqoVNsr6HvSCBVBjtXuiboMwyRvHrnsMtI8+2Mi32ZRoS+cK
-TZBECnfyuhOb4vJAHvzVbfa5Yecf6HEEuXmk8M9r6lKAgg4/EeJjVau8O9JZOxyg
-dn1EkiDpm6qK+78BWFXo06a8iuF3AXuVNcoAB9a0pcsNPjtiBBdFmVykSaB+CyBk
-Lal3sU7OEKBX/GV7/5uLpxizjIw8VuBbq7bBllll7p+kUsre/dZ174AYvNIhwdHa
-RjBCDWS5qSNFX/A/8otyMhpjLLZA/i/8/AMijJkM/fwNGL6P5LXGcfOoKn60D1Xd
-40l15NDu1m70U3LjFg0OsYSyGxmdBNIRAqI1bekDLE3ltMSOaFDoxzynTQxPxlzl
-dlDRYRE1LHpvEct+e0gjpszmYLgRxiO7AE04BPEaYEHCw0xJoDvHg3zJjHBhQAwh
-zKbD6UoEg+7lTDLb2fwb5rsGLZIbnKdMG1xxqEsluQbUdV04pzicsDi9ecEEFD7J
-LrDJKjge
-=ZyhF
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcXtIIACgkQFHw5/5Y0
+tyywjgv+MJd5S0EB+HB9+QcZMvkTXyuUsxTNJvqf9Q0YTY5PXZmBXrcGBFN6tXuV
+3W7pDTNKqdlO24O+5+l+mQMFzSbXk79h3OQERtB4FVPwhbqGnviKNUOfC0DqMlQY
+nCwfJ8lCUZXWc+/nlkyR1YB2OjF0/tW/iw/BHeKlWviO9JvTPZW0CKEAMa0lN5IJ
+9f64YZw4a+mjpvP7gQHEygpgLTUvWUmqjWVjypDuJdKLeDTYRBZ4aIiNV4WoJEi8
+piTh5+phiyn/bIRwb2sHFPrpsg7JN0S2kjGBc5ifQeaOyvO+xBe8jbVjhsoLb0vw
+EBBguRELgd+uTdRYKnugK0lXPmZUxe6CXF6B4UrdFvPCbN7peQTSna3qcHSUc/mb
+xeHLlfyemmYpim14ZU1dnyGTjXSg0x6kiRXAJBItGg53r87QAyGsas8Q6imdnAuZ
+ILmXm/H1hijj7/nxBf6J/cw4CCeGYTczUq7y+VJuZC/FaY/zgsfgV7wUiM02/bfB
+AoacYNJJ
+=TwRF
 -----END PGP SIGNATURE-----
 
---693nWLq2DjbHJB7t--
+--6znTGy0RpZsVyGzd--
