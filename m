@@ -4,56 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08348D15DBB
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 11:14:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC458D0E6FC
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 11:18:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9551588F8E;
-	Tue, 22 Oct 2024 13:14:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5B20188DFD;
+	Tue, 22 Oct 2024 13:18:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729595658;
-	bh=3Dq7y7+UlxbOvwbsNJ2hByn/8k32Z37zfb9DmmKohqQ=;
+	s=phobos-20191101; t=1729595911;
+	bh=QYw6GsC3CUO5DBgBMaA3sZMTNesnqJyAtMkwbl4ah2U=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fg0DBz2Te5Q4N+YZGlBbN9Dmn1ci7SIk0ZylonYuqauJUECiJE8AA1mviv0Ju2OGy
-	 3nTielTwwzdmmm+3Imdts3GWB3CLmZtY+9e/kZCP/VqGFISVLMR3nWtjf6bqA+5TBk
-	 Gs4agGtT/3Jy1flvxV6RIP6DFlQhX+0Uv0I2iUudTys4sLq0grbvXukUb3cRoah56b
-	 LA45ZR4adyWSvK5nW5jRvf4YZdgattjT1faP2daEOF3upgaOg9FkHrfapFob66q0Y3
-	 myn2lbJc1zcEnhB6ctBbxINKBWTC5D0xSkJXBL4dyDy9tPs8J7wR+ctdhLnQceRhei
-	 di6xxSRaosUmw==
+	b=AFfdz15p12fPhricXjbdobvlv8Cve6mj1z7hBhfA36+bhZEoR0lupnLH7Aa8OHBSc
+	 BmjtIiraLt6xbXMbVdvPClMUqYqS5wns5koQv/kKeMEy3J1jR/KUh+01qklNkhL+uH
+	 9CCDYaFoLxrvbG/IX/DmdqRKLBWwceMAOdaZ4CdyRD2VGgKHX8BmNZAowAhKovlGzo
+	 a77aGjCKEzDf5H7YT+vlbMzKnOXJ0DqK6MxDj0ZrczT5vopCkvZhhkn8BEO4tyOOpR
+	 wpS00WLGXCAziX1WvrdJ3QQalT4Wpj3fhsdiiLToN4cGLjkcyAc8kEfsrya5eYcpUw
+	 DTXXz81JxX8pg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E52888FD6; Tue, 22 Oct 2024 13:14:18 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ id D11BE88E89; Tue, 22 Oct 2024 13:18:29 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3919C88D5C
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 13:14:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAD308826E
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 13:18:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4XXqLt1NQsz9tPw;
- Tue, 22 Oct 2024 13:14:14 +0200 (CEST)
-Message-ID: <61c763e3-ffa7-458e-a19b-e79617e4cc80@denx.de>
-Date: Tue, 22 Oct 2024 13:14:13 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XXqRj28Zjz9sQc;
+ Tue, 22 Oct 2024 13:18:25 +0200 (CEST)
+Message-ID: <a95685d3-50fe-4b4d-a6bc-23adac2a33c5@denx.de>
+Date: Tue, 22 Oct 2024 13:18:24 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 13/13] global_data.h: remove unnecesary include of cyclic.h
+Subject: Re: [PATCH] watchdog: gpio_wdt: add support for stoppable devices
 To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20241003212802.3810-1-ravi@prevas.dk>
- <20241003212802.3810-14-ravi@prevas.dk>
+Cc: Paul Doelle <paaull.git@gmail.com>, Felix Blix <felbe@prevas.dk>
+References: <20241002192323.632822-1-ravi@prevas.dk>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241003212802.3810-14-ravi@prevas.dk>
+In-Reply-To: <20241002192323.632822-1-ravi@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4XXqLt1NQsz9tPw
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,36 +68,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/3/24 23:28, Rasmus Villemoes wrote:
-> Nothing in cyclic.h is needed to define struct global_data, so do not
-> include that header.
+Hi Rasmus,
+
+On 10/2/24 21:23, Rasmus Villemoes wrote:
+> Back when I added this driver in commit 2ac8490412c9, I wrote
 > 
-> If any .c file relies on getting cyclic.h through asm/global_data.h,
-> it needs to include it itself.
+>      The corresponding linux driver apparently has support for some
+>      watchdog circuits which can be disabled by tri-stating the gpio, but I
+>      have never actually encountered such a chip in the wild;
+> 
+> That has changed now; I have a board with just such a watchdog on my
+> desk currently. Add support for that.
+> 
+> - For a hw_algo="toggle" device, the gpio is requested as output if the
+>    always-running flag is set, otherwise as input.
+> 
+> - The ->start() method is updated to change the direction to output when
+>    required (i.e. it is not always-running).
+> 
+> - The ->stop() method is implemented, but of course reports failure if
+>    always-running.
+> 
+> As I still haven't met any hw_algo="level" devices, I'm not entirely
+> sure how they fit in, but I'm borrowing logic from the corresponding
+> linux driver:
+> 
+> - In ->probe(), such devices always request the gpio as GPIOD_IS_OUT.
+> 
+> - In ->stop(), the linux driver has an "eternal ping" comment and sets
+>    the gpio to (logic) high.
 > 
 > Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+While running a CI build, I'm seeing some sandbox failures, most likely
+related to this change here:
+
+https://dev.azure.com/sr0718/u-boot/_build/results?buildId=375&view=logs&j=db15d90c-51e5-5ca3-902e-4c5d558bba82&t=64917d2e-7acb-5ec4-6136-40fc146da71a
+
+Could you please take a look at this?
 
 Thanks,
 Stefan
 
 > ---
->   include/asm-generic/global_data.h | 1 -
->   1 file changed, 1 deletion(-)
+>   drivers/watchdog/gpio_wdt.c | 27 ++++++++++++++++++++++++---
+>   1 file changed, 24 insertions(+), 3 deletions(-)
 > 
-> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-> index 27aa75e7036..1570ad8f0c0 100644
-> --- a/include/asm-generic/global_data.h
-> +++ b/include/asm-generic/global_data.h
-> @@ -20,7 +20,6 @@
->    */
+> diff --git a/drivers/watchdog/gpio_wdt.c b/drivers/watchdog/gpio_wdt.c
+> index 2920c2c751f..e889861e917 100644
+> --- a/drivers/watchdog/gpio_wdt.c
+> +++ b/drivers/watchdog/gpio_wdt.c
+> @@ -45,14 +45,32 @@ static int gpio_wdt_start(struct udevice *dev, u64 timeout, ulong flags)
+>   	if (priv->always_running)
+>   		return 0;
 >   
->   #ifndef __ASSEMBLY__
-> -#include <cyclic.h>
->   #include <event_internal.h>
->   #include <fdtdec.h>
->   #include <membuff.h>
+> -	return -ENOSYS;
+> +	dm_gpio_set_dir_flags(&priv->gpio, GPIOD_IS_OUT);
+> +	gpio_wdt_reset(dev);
+> +
+> +	return 0;
+> +}
+> +
+> +static int gpio_wdt_stop(struct udevice *dev)
+> +{
+> +	struct gpio_wdt_priv *priv = dev_get_priv(dev);
+> +
+> +	if (priv->always_running)
+> +		return -EOPNOTSUPP;
+> +
+> +	if (priv->hw_algo == HW_ALGO_TOGGLE)
+> +		dm_gpio_set_dir_flags(&priv->gpio, GPIOD_IS_IN);
+> +	else
+> +		dm_gpio_set_value(&priv->gpio, 1);
+> +
+> +	return 0;
+>   }
+>   
+>   static int dm_probe(struct udevice *dev)
+>   {
+>   	struct gpio_wdt_priv *priv = dev_get_priv(dev);
+> -	int ret;
+>   	const char *algo = dev_read_string(dev, "hw_algo");
+> +	int ret, flags;
+>   
+>   	if (!algo)
+>   		return -EINVAL;
+> @@ -64,7 +82,9 @@ static int dm_probe(struct udevice *dev)
+>   		return -EINVAL;
+>   
+>   	priv->always_running = dev_read_bool(dev, "always-running");
+> -	ret = gpio_request_by_name(dev, "gpios", 0, &priv->gpio, GPIOD_IS_OUT);
+> +	flags = priv->always_running || priv->hw_algo == HW_ALGO_LEVEL ?
+> +		GPIOD_IS_OUT : GPIOD_IS_IN;
+> +	ret = gpio_request_by_name(dev, "gpios", 0, &priv->gpio, flags);
+>   	if (ret < 0) {
+>   		dev_err(dev, "Request for wdt gpio failed: %d\n", ret);
+>   		return ret;
+> @@ -78,6 +98,7 @@ static int dm_probe(struct udevice *dev)
+>   
+>   static const struct wdt_ops gpio_wdt_ops = {
+>   	.start = gpio_wdt_start,
+> +	.stop  = gpio_wdt_stop,
+>   	.reset = gpio_wdt_reset,
+>   };
+>   
 
 Viele Grüße,
 Stefan Roese
