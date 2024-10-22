@@ -4,54 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 089DDD1CDD5
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 10:48:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E7AD1CDD9
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 10:50:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DE6788D3A;
-	Tue, 22 Oct 2024 12:48:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 06C3D88CFB;
+	Tue, 22 Oct 2024 12:50:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729594119;
-	bh=vGzz08jdOmhFbJV4el0D346SCVhcL7FXxfb58RNa1aM=;
+	s=phobos-20191101; t=1729594226;
+	bh=EShEmkGp4Qkpwv8Tcqhj6ao9ZXiXVrwAQo/MRLF2DUo=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=tTfMQgyoEAFA9+2sDK0mF7Z62TL9XYkAGqMAciNGiaD7l+a505e7lmguGWU2ryw2z
-	 OLd+rx8svN+c5L7PJxHeU3rogP3jnJUTZgpC9QH6KwDadVSBQVMhuCHTpg/olcROX/
-	 g39UmOa9D/gVkOlS+nbPFJ3g8KU/mXGdXePHpQt0Elh7iCwAv5G8r5mb2xJSYTh+Bz
-	 ViGrwhrKqOej+C1thZAZ7tsigSNt05NQy55TDn7WnSh0qAeja/DrdKjy4PPk1DHrGA
-	 44TJY2QdeRTVXiFcUCUGqdOA088Ww6KIDW/noDswZVGj0bmLAqNXSdPrB/YAngBdt6
-	 jKpx3tFGZr+Cw==
+	b=BvYvdk4NF8mfC0jSMPz7qXpX1/n3VvwdD5WLRzXsV6klc4NvV60dBq0Bcu/GePDHj
+	 aQwo18DFgGYnQZFzY4a2o3wSIp5AuDsTghnqamraR2kmLODJwzG0TJCLyOkwZADFlo
+	 Uyp9+T3P1cjXX/s4DNVLSYzmnFCHRHI51PhNQ9L8aew+t0mdCUiKw/0/aEKYURQDOQ
+	 OtcEf6SNO3jQvZOBWNaDmhmY2NBDLqaEWZuBiAOWjW7K06nI236NytBAohXyVxv9GW
+	 tjbv6tXUBg9LeML00HF67Qn4FYJ7gDHh5NBPXGxse3kd3gbvUXLvTkznh0UfLPot3y
+	 +elctG/h88qUw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 759CA88CFB; Tue, 22 Oct 2024 12:48:38 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id 48D8888F91; Tue, 22 Oct 2024 12:50:24 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A42F88F8E
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 12:48:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C0928899C
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 12:50:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4XXpnG3177z9smb;
- Tue, 22 Oct 2024 12:48:34 +0200 (CEST)
-Message-ID: <dfa75c24-50d8-47b2-b4e3-2b9b2580d223@denx.de>
-Date: Tue, 22 Oct 2024 12:48:33 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XXpqJ2B0Qz9slZ;
+ Tue, 22 Oct 2024 12:50:20 +0200 (CEST)
+Message-ID: <ea7f0186-648d-4aac-b582-ea211acb9a3b@denx.de>
+Date: Tue, 22 Oct 2024 12:50:19 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] watchdog: gpio_wdt: add support for stoppable devices
-To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
-Cc: Paul Doelle <paaull.git@gmail.com>, Felix Blix <felbe@prevas.dk>
-References: <20241002192323.632822-1-ravi@prevas.dk>
+Subject: Re: [PATCH] drivers: watchdog: Add DaVinci's watchdog support
+To: Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Herve Codina <herve.codina@bootlin.com>,
+ Christopher Cordahi <christophercordahi@nanometrics.ca>
+References: <20241003084255.33478-1-bastien.curutchet@bootlin.com>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241002192323.632822-1-ravi@prevas.dk>
+In-Reply-To: <20241003084255.33478-1-bastien.curutchet@bootlin.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4XXpqJ2B0Qz9slZ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,35 +73,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/2/24 21:23, Rasmus Villemoes wrote:
-> Back when I added this driver in commit 2ac8490412c9, I wrote
+On 10/3/24 10:42, Bastien Curutchet wrote:
+> Add support for the DaVinci's watchdog timer
 > 
->      The corresponding linux driver apparently has support for some
->      watchdog circuits which can be disabled by tri-stating the gpio, but I
->      have never actually encountered such a chip in the wild;
-> 
-> That has changed now; I have a board with just such a watchdog on my
-> desk currently. Add support for that.
-> 
-> - For a hw_algo="toggle" device, the gpio is requested as output if the
->    always-running flag is set, otherwise as input.
-> 
-> - The ->start() method is updated to change the direction to output when
->    required (i.e. it is not always-running).
-> 
-> - The ->stop() method is implemented, but of course reports failure if
->    always-running.
-> 
-> As I still haven't met any hw_algo="level" devices, I'm not entirely
-> sure how they fit in, but I'm borrowing logic from the corresponding
-> linux driver:
-> 
-> - In ->probe(), such devices always request the gpio as GPIOD_IS_OUT.
-> 
-> - In ->stop(), the linux driver has an "eternal ping" comment and sets
->    the gpio to (logic) high.
-> 
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
 
 Reviewed-by: Stefan Roese <sr@denx.de>
 
@@ -104,67 +84,179 @@ Thanks,
 Stefan
 
 > ---
->   drivers/watchdog/gpio_wdt.c | 27 ++++++++++++++++++++++++---
->   1 file changed, 24 insertions(+), 3 deletions(-)
+>   drivers/watchdog/Kconfig       |   7 ++
+>   drivers/watchdog/Makefile      |   1 +
+>   drivers/watchdog/davinci_wdt.c | 131 +++++++++++++++++++++++++++++++++
+>   3 files changed, 139 insertions(+)
+>   create mode 100644 drivers/watchdog/davinci_wdt.c
 > 
-> diff --git a/drivers/watchdog/gpio_wdt.c b/drivers/watchdog/gpio_wdt.c
-> index 2920c2c751f..e889861e917 100644
-> --- a/drivers/watchdog/gpio_wdt.c
-> +++ b/drivers/watchdog/gpio_wdt.c
-> @@ -45,14 +45,32 @@ static int gpio_wdt_start(struct udevice *dev, u64 timeout, ulong flags)
->   	if (priv->always_running)
->   		return 0;
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index 0c3e991331..a1c50b3f1f 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -169,6 +169,13 @@ config WDT_CORTINA
+>   	  This driver support all CPU ISAs supported by Cortina
+>   	  Access CAxxxx SoCs.
 >   
-> -	return -ENOSYS;
-> +	dm_gpio_set_dir_flags(&priv->gpio, GPIOD_IS_OUT);
-> +	gpio_wdt_reset(dev);
+> +config WDT_DAVINCI
+> +	bool "DaVinci watchdog timer support"
+> +	depends on WDT
+> +	help
+> +	  Select this to enable the watchdog timer for DaVinci SoCs such as the
+> +	  OMAP-L138.
+> +
+>   config WDT_GPIO
+>   	bool "External gpio watchdog support"
+>   	depends on WDT
+> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+> index 7b39adcf0f..ad3053998a 100644
+> --- a/drivers/watchdog/Makefile
+> +++ b/drivers/watchdog/Makefile
+> @@ -29,6 +29,7 @@ obj-$(CONFIG_WDT_BOOKE) += booke_wdt.o
+>   obj-$(CONFIG_WDT_CORTINA) += cortina_wdt.o
+>   obj-$(CONFIG_WDT_ORION) += orion_wdt.o
+>   obj-$(CONFIG_WDT_CDNS) += cdns_wdt.o
+> +obj-$(CONFIG_WDT_DAVINCI) += davinci_wdt.o
+>   obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
+>   obj-$(CONFIG_WDT_GPIO) += gpio_wdt.o
+>   obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
+> diff --git a/drivers/watchdog/davinci_wdt.c b/drivers/watchdog/davinci_wdt.c
+> new file mode 100644
+> index 0000000000..fa8d7842e9
+> --- /dev/null
+> +++ b/drivers/watchdog/davinci_wdt.c
+> @@ -0,0 +1,131 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * DaVinci Watchdog driver
+> + *
+> + */
+> +
+> +#include <asm/io.h>
+> +#include <clk.h>
+> +#include <dm.h>
+> +#include <wdt.h>
+> +
+> +/* Control Register */
+> +#define DAVINCI_WDT_ID			0x00
+> +#define DAVINCI_WDT_TIM12		0x10
+> +#define DAVINCI_WDT_TIM34		0x14
+> +#define DAVINCI_WDT_PRD12		0x18
+> +#define DAVINCI_WDT_PRD34		0x1C
+> +#define DAVINCI_WDT_TCR			0x20
+> +#define DAVINCI_WDT_TGCR		0x24
+> +#define DAVINCI_WDT_WDTCR		0x28
+> +
+> +#define DAVINCI_TCR_CONT_EN		BIT(7)
+> +
+> +#define DAVINCI_TGCR_PLUSEN		BIT(4)
+> +#define DAVINCI_TGCR_WDT_MODE		BIT(3)
+> +#define DAVINCI_TGCR_TIM34RS		BIT(1)
+> +#define DAVINCI_TGCR_TIM12RS		BIT(0)
+> +
+> +#define DAVINCI_WDTCR_INVALID_KEY	(0x5555 << 16)
+> +#define DAVINCI_WDTCR_WDKEY0		(0xA5C6 << 16)
+> +#define DAVINCI_WDTCR_WDKEY1		(0xDA7E << 16)
+> +#define DAVINCI_WDTCR_WDFLAG		BIT(15)
+> +#define DAVINCI_WDTCR_WDEN		BIT(14)
+> +
+> +#define DEFAULT_THRESHOLD		0xA03200000
+> +
+> +struct davinci_wdt_priv {
+> +	void __iomem *base;
+> +	struct clk *ref_clk;
+> +};
+> +
+> +static int davinci_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+> +{
+> +	struct davinci_wdt_priv *priv = dev_get_priv(dev);
+> +	ulong rate = clk_get_rate(priv->ref_clk);
+> +	u64 threshold;
+> +
+> +	if (!rate)
+> +		threshold = DEFAULT_THRESHOLD;
+> +	else
+> +		threshold = rate * timeout_ms / 1000;
+> +
+> +	/* Reset control registers */
+> +	writel(0, priv->base + DAVINCI_WDT_TCR);
+> +	writel(0, priv->base + DAVINCI_WDT_TGCR);
+> +
+> +	/* Enable watchdog mode and timers */
+> +	writel(DAVINCI_TGCR_WDT_MODE | DAVINCI_TGCR_TIM12RS | DAVINCI_TGCR_TIM34RS,
+> +	       priv->base + DAVINCI_WDT_TGCR);
+> +
+> +	/* Reset counters */
+> +	writel(0, priv->base + DAVINCI_WDT_TIM12);
+> +	writel(0, priv->base + DAVINCI_WDT_TIM34);
+> +
+> +	/* Set timeout threshold */
+> +	writel(threshold & 0xFFFFFFFF, priv->base + DAVINCI_WDT_PRD12);
+> +	writel(threshold >> 32, priv->base + DAVINCI_WDT_PRD34);
+> +
+> +	/* Enable counter */
+> +	writel(DAVINCI_TCR_CONT_EN, priv->base + DAVINCI_WDT_TCR);
+> +
+> +	/* Go to watchdog's active state */
+> +	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY0, priv->base + DAVINCI_WDT_WDTCR);
+> +	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY1, priv->base + DAVINCI_WDT_WDTCR);
 > +
 > +	return 0;
 > +}
 > +
-> +static int gpio_wdt_stop(struct udevice *dev)
+> +static int davinci_wdt_expire_now(struct udevice *dev, ulong flags)
 > +{
-> +	struct gpio_wdt_priv *priv = dev_get_priv(dev);
+> +	struct davinci_wdt_priv *priv = dev_get_priv(dev);
 > +
-> +	if (priv->always_running)
-> +		return -EOPNOTSUPP;
-> +
-> +	if (priv->hw_algo == HW_ALGO_TOGGLE)
-> +		dm_gpio_set_dir_flags(&priv->gpio, GPIOD_IS_IN);
-> +	else
-> +		dm_gpio_set_value(&priv->gpio, 1);
+> +	writel(DAVINCI_WDTCR_INVALID_KEY, priv->base + DAVINCI_WDT_WDTCR);
 > +
 > +	return 0;
->   }
->   
->   static int dm_probe(struct udevice *dev)
->   {
->   	struct gpio_wdt_priv *priv = dev_get_priv(dev);
-> -	int ret;
->   	const char *algo = dev_read_string(dev, "hw_algo");
-> +	int ret, flags;
->   
->   	if (!algo)
->   		return -EINVAL;
-> @@ -64,7 +82,9 @@ static int dm_probe(struct udevice *dev)
->   		return -EINVAL;
->   
->   	priv->always_running = dev_read_bool(dev, "always-running");
-> -	ret = gpio_request_by_name(dev, "gpios", 0, &priv->gpio, GPIOD_IS_OUT);
-> +	flags = priv->always_running || priv->hw_algo == HW_ALGO_LEVEL ?
-> +		GPIOD_IS_OUT : GPIOD_IS_IN;
-> +	ret = gpio_request_by_name(dev, "gpios", 0, &priv->gpio, flags);
->   	if (ret < 0) {
->   		dev_err(dev, "Request for wdt gpio failed: %d\n", ret);
->   		return ret;
-> @@ -78,6 +98,7 @@ static int dm_probe(struct udevice *dev)
->   
->   static const struct wdt_ops gpio_wdt_ops = {
->   	.start = gpio_wdt_start,
-> +	.stop  = gpio_wdt_stop,
->   	.reset = gpio_wdt_reset,
->   };
->   
+> +}
+> +
+> +static int davinci_wdt_restart(struct udevice *dev)
+> +{
+> +	struct davinci_wdt_priv *priv = dev_get_priv(dev);
+> +
+> +	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY0, priv->base + DAVINCI_WDT_WDTCR);
+> +	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY1, priv->base + DAVINCI_WDT_WDTCR);
+> +
+> +	return 0;
+> +}
+> +
+> +static int davinci_wdt_probe(struct udevice *dev)
+> +{
+> +	struct davinci_wdt_priv *priv = dev_get_priv(dev);
+> +
+> +	priv->base = dev_remap_addr_index(dev, 0);
+> +	if (!priv->base)
+> +		return -EFAULT;
+> +
+> +	priv->ref_clk = devm_clk_get(dev, "ref");
+> +	if (IS_ERR(priv->ref_clk))
+> +		return PTR_ERR(priv->ref_clk);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct wdt_ops davinci_wdt_ops = {
+> +	.start = davinci_wdt_start,
+> +	.reset = davinci_wdt_restart,
+> +	.expire_now = davinci_wdt_expire_now,
+> +};
+> +
+> +static const struct udevice_id davinci_wdt_ids[] = {
+> +	{.compatible = "ti,davinci-wdt"},
+> +	{}
+> +};
+> +
+> +U_BOOT_DRIVER(davinci_wdt) = {
+> +	.name = "davinci_wdt",
+> +	.id = UCLASS_WDT,
+> +	.probe = davinci_wdt_probe,
+> +	.of_match = davinci_wdt_ids,
+> +	.ops = &davinci_wdt_ops,
+> +	.priv_auto = sizeof(struct davinci_wdt_priv),
+> +};
 
 Viele Grüße,
 Stefan Roese
