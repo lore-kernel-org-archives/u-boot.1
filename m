@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B649D2C54B
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 12:52:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C967D2C54A
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 12:55:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3248488F5B;
-	Tue, 22 Oct 2024 14:52:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C3D9F88F4D;
+	Tue, 22 Oct 2024 14:55:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729601542;
-	bh=BBxmV8I+VpH4FEU2fvsNegWji0IrDl9Xbb+NvstxAn0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=D7OHexaAdO/oBbDJ1t/6YFioFZzZW/l7gobJzKaTuPu65HxK3r3id4atQ8JV2L50k
-	 +CBcY2ftSzu3FQxco01DMCFzhglN2RYh88zRbsIV+X0/wPqhU9NXom62Ng6kl+4dZp
-	 4GPildVr8pdM91epEO33HY3lEp15oVil1eeLOaruxc7EoAwrSsh3MVxcMTrsrYDTt3
-	 vBd8fpl6qTRw5PLj64hIjrTE9rn+n/QBnN1l03j8D2dF5AuUmZR3bSHm242mCYA3cm
-	 WOFPiLMHb9jIW+NWmzcDb5VHJpD6QIhDq4sGk3I8cj2zeGpiTT/QgZ78aM4SsWMVgK
-	 8a9VGQUnPB2oQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wjvrZVTZ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4EEC988EBA; Tue, 22 Oct 2024 14:55:28 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id ACFEC88DFD;
- Tue, 22 Oct 2024 14:52:20 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729601541;
- bh=BBxmV8I+VpH4FEU2fvsNegWji0IrDl9Xbb+NvstxAn0=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=C62xfNU2wbStxSmsYu4N7wF1bonsGg4lXaytdp2kLMG7FQtpt0R882dvZFkT2POrB
- He5AuY6JGTfaiNcPbKV/sfiF4L+uKelr2E3oSz8eivziDxEZt/GNZFoZCM4rXei2fa
- Rfog69lUHX0DYClCaASs4+CTTR7pLctFC8sCsMA+Oae/P79Xx89wnOFn9dxLC/zc7+
- mr+lSatugdYUxpmuTTOZIdvV2sfQc2pznS/n+xwsFwEwTO9PSn0YwJDqXL+as4MEvI
- EWr6l11Vct/oRDI3rmw6T5EIry/FdfrMJ5S2kF5iske+otT/fHzbRRXMVtE257A1NQ
- 9o4rDKLgyoHvw==
-Message-ID: <009179c8-5512-4ba6-beeb-2d508dd5abd8@denx.de>
-Date: Tue, 22 Oct 2024 13:57:24 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 92DDD80245
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 14:55:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49MCtNRG008226;
+ Tue, 22 Oct 2024 07:55:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1729601723;
+ bh=XnJ7Gwlr/ALS6jz94H5GyOtOEfamTF/1AvipQ50l7C0=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=wjvrZVTZy/w6A6NXS5a93nIV7Nb3lknU19j2mbUIzOHqT4PYvnjqi1UDqgom5t00C
+ tEFE0bhz1sQSEPTIrIQbM3unypF2+rw9iY7J9LYKlgrQX2IYq8i/NsoapQzI0ns1yd
+ kE2k0xp1YaKELJU0zy2d0n0ss2Ya6T8gv7VRiTs0=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49MCtNEQ055968;
+ Tue, 22 Oct 2024 07:55:23 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
+ Oct 2024 07:55:23 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 22 Oct 2024 07:55:22 -0500
+Received: from [10.249.132.3] ([10.249.132.3])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49MCtJox084123;
+ Tue, 22 Oct 2024 07:55:20 -0500
+Message-ID: <8ef0f46b-1d3f-4c33-9348-82a626e8de42@ti.com>
+Date: Tue, 22 Oct 2024 18:25:18 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
- EEPROM ID page on DH i.MX8MP DHCOM
-To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
-References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
- <20241010132337.3259-2-cniedermaier@dh-electronics.com>
- <934d25c2-39d8-4f51-b29e-8f20feb7431f@denx.de>
- <a305b1455a984fca83de5a6c0d4b8dfc@dh-electronics.com>
- <74bd0a6b-fe12-4e2c-af79-c1f8ffb7d484@denx.de>
- <73ccb69b85094e24be2343d5cbc8879a@dh-electronics.com>
- <17b9380b-39c0-40f2-bb28-319d26b2e13c@denx.de>
- <7b9b543d7aad498591fa6a04a3154cf8@dh-electronics.com>
- <a0f70ee2-6d71-4f66-b22e-994df2b28504@denx.de>
- <d06620ee891f4e419bfeb8fe657ba729@dh-electronics.com>
+Subject: Re: [PATCH 3/6] misc: k3_avs: Add k3_check_opp function
+To: Neha Malcom Francis <n-francis@ti.com>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>
+CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>
+References: <20241017062911.2241167-1-a-limaye@ti.com>
+ <20241017062911.2241167-4-a-limaye@ti.com>
+ <cdcc56d6-6ad6-43f9-b2a7-0abd350e319c@ti.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <d06620ee891f4e419bfeb8fe657ba729@dh-electronics.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: "Limaye, Aniket" <a-limaye@ti.com>
+In-Reply-To: <cdcc56d6-6ad6-43f9-b2a7-0abd350e319c@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,121 +81,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/22/24 11:31 AM, Christoph Niedermaier wrote:
-> From: Marek Vasut <marex@denx.de>
-> Sent: Tuesday, October 22, 2024 1:01 AM
->> On 10/21/24 5:38 PM, Christoph Niedermaier wrote:
->>
->> [...]
->>
->>>> If yes, then there is no need for any static variable:
->>>>
->>>> board_init() {
->>>>     u8 eeprom[32];
->>>>     dh_read_eeprom_wlp(eeprom); // read the eeprom once
->>>>     dh_setup_mac_address(eeprom); // extract MAC from EEPROM
->>>>     dh_add_item_number_and_serial_to_env(eeprom); // extract SN from EEPROM
->>>>     // once this function exits, the eeprom variable on stack is discarded
->>>>     // which is OK, since it won't be used anymore anyway
->>>> }
->>>
->>> The idea is that function dh_add_item_number_and_serial_to_env() encapsulates
->>> the reading.
->>
->> The function which interacts with the EEPROM on start up, once, can have
->> this name, sure.
+
+
+On 10/17/2024 4:06 PM, Neha Malcom Francis wrote:
+> Hi Aniket
 > 
-> Sorry, I mean the function dh_get_value_from_eeprom_id_page() here.
-
-The function name doesn't really matter, please pick a fitting one.
-
->>> I don't want to have to worry about the structure and number of
->>> bytes of the EEPROM ID page and want to be independent of it. It is planned to
->>> extend the structure and increase the number of bytes for the STM32MP2. The
->>> changes to the size will then depend on the version of the data in the header
->>> within the structure.
+> On 17/10/24 11:59, Aniket Limaye wrote:
+>> From: Reid Tonking <reidt@ti.com>
 >>
->> It is OK to allocate 32 or 64 bytes on stack, since that chunk of memory
->> is free'd on return from the function. The lifespan of that allocated
->> memory is exactly as long as it should be, and it does not waste U-Boot
->> memory unnecessarily.
+>> Useful when trying to check if an opp efuse is burned in or not.
 >>
->> So far, all known EEPROMs have WLP size of 32 or 64 Byes.
+>> k3_avs driver checks opp_ids when probing and overwrites the voltage
+>> values in vd_data for the respective board. This can be called to check
+>> that data and returns 0 if valid.
 >>
->>> However, these changes should then only have to be made
->>> within the function dh_add_item_number_and_serial_to_env() for reading the
->>> EEPROM ID page. I accept the static variable in order to better isolate the
->>> function.
+>> Signed-off-by: Reid Tonking <reidt@ti.com>
+>> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+>> ---
+>>   drivers/misc/k3_avs.c | 25 +++++++++++++++++++++++++
+>>   include/k3-avs.h      |  1 +
+>>   2 files changed, 26 insertions(+)
+>>
+>> diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
+>> index 9d950d034a5..90cd9dfe7f9 100644
+>> --- a/drivers/misc/k3_avs.c
+>> +++ b/drivers/misc/k3_avs.c
+>> @@ -192,6 +192,31 @@ static int match_opp(struct vd_data *vd, u32 freq)
+>>       return -EINVAL;
+>>   }
+>> +/**
+>> + * k3_check_opp: Check for presence of opp efuse
+>> + * @opp_id: opp id to check if voltage is present
+>> + *
+>> + * Checks to see if an opp has voltage. k3_avs probe will populate
+>> + * votlage data if efuse is present. Returns 0 if data is valid.
+>> + */
+>> +int k3_check_opp(struct udevice *dev, int vdd_id, int opp_id)
 > 
-> Sorry, here I mean also the function dh_get_value_from_eeprom_id_page().
+> Can this be a static function?
+
+It is being used in the board file (j721e-init.c) in the following 
+commit... to check if efuse was read correctly, before attempting to set 
+an OPP.
+
 > 
->> This can very well be:
->>
->> dh_add_item_number_and_serial_to_env() {
->>      u8 eeprom[32];
->>      dh_read_eeprom_wlp(eeprom); // read the eeprom once
->>      dh_setup_mac_address(eeprom); // extract MAC from EEPROM
->>      dh_add_item_number_and_serial_to_env(eeprom); // extract SN from EEPROM
->>      // once this function exits, the eeprom variable on stack is discarded
->>      // which is OK, since it won't be used anymore anyway
->> }
->>
->> board_init() {
->>     ..
->>     dh_add_item_number_and_serial_to_env();
->>     ...
->> }
->>
->>> Since the memory is freed up again when the operating system boots,
->>> this consumption of 32 bytes in U-Boot is not a problem, because it is only
->>> temporary.
->> This is not good, please do not waste memory in U-Boot if it can be
->> easily avoided by automatically allocating it on stack and freeing it
->> when not needed.
->>
->> [...]
+>> +{
+>> +    struct k3_avs_privdata *priv = dev_get_priv(dev);
+>> +    struct vd_data *vd;
+>> +    int volt;
+>> +
+>> +    vd = get_vd(priv, vdd_id);
+>> +    if (!vd)
+>> +        return -EINVAL;
+>> +
+>> +    volt = vd->opps[opp_id].volt;
+>> +    if (volt)
+>> +        return 0;
+>> +
+>> +    printf("No efuse found for opp_%d\n", opp_id);
+>> +    return -EINVAL;
+>> +}
+>> +
+>>   /**
+>>    * k3_avs_notify_freq: Notify clock rate change towards AVS subsystem
+>>    * @dev_id: Device ID for the clock to be changed
+>> diff --git a/include/k3-avs.h b/include/k3-avs.h
+>> index f6f1031c9cc..41a1da36356 100644
+>> --- a/include/k3-avs.h
+>> +++ b/include/k3-avs.h
+>> @@ -27,5 +27,6 @@
+>>   int k3_avs_set_opp(struct udevice *dev, int vdd_id, int opp_id);
+>>   int k3_avs_notify_freq(int dev_id, int clk_id, u32 freq);
+>> +int k3_check_opp(struct udevice *dev, int vdd_id, int opp_id);
+>>   #endif
 > 
-> I don't want to allocate the memory in the function board_init().
 
-You do not, the following automatically reserves space on stack when 
-called and frees it up upon function return:
-
-function foo() {
-   u8 array[12];
-   ...
-   stuff(array);
-   ...
-}
-
-> I want to handle
-> size and caching in the function dh_get_value_from_eeprom_id_page(). So I don't
-> want to deal with size and structure in the function board_init(). For me, the use
-> of a static variable is OK, but you don't like it. Do you know how I can do this
-> without assigning a static variable, but not allocate the memory somewhere in a
-> caller function?
-Even the static variable space is allocated somewhere, either in .bss or 
-.data section, except with static variable(s) the memory persists 
-throughout the lifetime of U-Boot because their content has to be 
-retained even when the function using their content returns.
-
-With variable(s) allocated on stack (which is majority of variable), the 
-memory allocation happens on entry to the function and the memory is 
-automatically freed on exit from the function.
-
-It is perfectly fine to call some wrapper superfunction from 
-board_init() which holds the array on stack and calls all the EEPROM 
-parser/handler functions:
-
-eeprom_superwrapper() {
-   u8 eeprom[64];
-   ...
-   eeprom_do_stuff1(eeprom);
-   eeprom_do_stuff2(eeprom);
-   ...
-}
-
-board_init() {
-   ...
-   eeprom_superwrapper();
-   ...
-}
