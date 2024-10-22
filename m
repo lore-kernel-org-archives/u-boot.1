@@ -4,56 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5D8AD1715A
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 11:46:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8659D3C932
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 12:00:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A7FC88E2D;
-	Tue, 22 Oct 2024 13:46:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id D8ED188C4D;
+	Tue, 22 Oct 2024 14:00:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729597583;
-	bh=jC2afX6CE+P8zFdypqQF/Mz5S97y6RjciZFCQEPqigY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=vjl9yvy5lzdCAMgO2Gbb9VvojiZCjGMuGRjPdOHGP1JNZlka9PoHDODI07f1DyLqg
-	 afVrrBC82IXjA0TkvHQ9m1o0ngfaQM8xOX/ZwPgKFzbpvJebq/nD8Aps5mRr3nrVKl
-	 RAUv0e/ji14MMvVXn3l4TV3NhJM3iW8PyVEwmmz3FyHvRP8DHjdoiyR8Oo23AVGMgV
-	 jugWo1XsAiqB4QCzq7RsX8jJ4pOn0JnPomWReNxSNzBRSOQyXvhLwcgWGjtpfBu1H4
-	 VDRDAloQsTu4TwzyqBbOGqExMjp8XVZ1FoXtRJkZ86xxor8e/JY8HbkaLiShiuEVTP
-	 +QjmWSiIbNBFQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CF58088ECB; Tue, 22 Oct 2024 13:46:21 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F5B288D9C
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 13:46:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xb7V/Oyj";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1123988C66; Tue, 22 Oct 2024 14:00:38 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XXr3s2Fm7z9skF;
- Tue, 22 Oct 2024 13:46:17 +0200 (CEST)
-Message-ID: <5c707249-9857-44c0-9ea6-d2d104000ed0@denx.de>
-Date: Tue, 22 Oct 2024 13:46:16 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 067EA88969
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 14:00:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a99ea294480so363055866b.2
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 05:00:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1729598435; x=1730203235; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=v+iPQm3rpnB+hEo8HwCPkhrMQeplMSF13kQ2Lr+pAPE=;
+ b=Xb7V/OyjvVQUiNI7qF4qWDndeK8XiHrcryq35Nz7+FUSrotpr1YIlxa4OS+HKmHuNB
+ EQe+LG3VoUbdsmGzpYCvueIzKD3btmJIYQAFlR1hEn8aBrmHbJMesqGjPRTy5XK5JvQE
+ 9tgtI4l8Bt6mKldmEg1NPsLlHkANtnjhdjdoM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729598435; x=1730203235;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=v+iPQm3rpnB+hEo8HwCPkhrMQeplMSF13kQ2Lr+pAPE=;
+ b=WsJHKiLU9R56q43MzdoEGz+8JrWfkqo1IHZd+Qknsn7GIVxiYwzqw8DXlw4c8YkkSl
+ KN9YyNsnNL3V0y8c3eOyak91XJHAxolce/3Qio/mMwaqnkxlMU3XeAel+gszXwIOExle
+ Pjy81xKElywBQLFr9V1zpqzS0Dh5vmw8NkMw/HKA5YWxpMCQ7fVs/AHjg8GlZQVfasND
+ qKJFp5mcCLAigs3w2GSV47IsLTvtuOPd/Vtr/nEh/wxo9LHIL2wMsvbND7m3RnFToj8m
+ X8nykbaCvtsuxjiv3X084Lf5JeIVUthdoUASKpMS9qS119Q/I0kPqPIoVC3AYW8oEbUT
+ ZSvQ==
+X-Gm-Message-State: AOJu0YwoKit0wsUvS+JQ91Ck7ir0FaIkUJxFC54AyEvn0x+1mb5riYGc
+ spOLGk+iL46BH35svi2WP4N4+FHvet7/Xg3k+pWKP6h2NFkaEIPn0gY7IR+pxCXFghuXBAuZEYK
+ UJZI7
+X-Google-Smtp-Source: AGHT+IEqZajHx2+q3ulNb1C9VEcK1pixIHj2goJWa99VqEqh1mWsNdgdlKkyEH6q6+iGU1bG1Kj2WQ==
+X-Received: by 2002:a05:6402:51c8:b0:5c9:a5a9:1167 with SMTP id
+ 4fb4d7f45d1cf-5ca0ac50e14mr18946123a12.10.1729598433878; 
+ Tue, 22 Oct 2024 05:00:33 -0700 (PDT)
+Received: from chromium.org (43-114-103-145.static.glaslokaal.nl.
+ [145.103.114.43]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5cb66a6d0besm3083100a12.57.2024.10.22.05.00.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Oct 2024 05:00:32 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Alexander Gendin <agendin@matrox.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Eddie James <eajames@linux.ibm.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>, Sean Anderson <seanga2@gmail.com>,
+ Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Yang Xiwen <forbidden405@outlook.com>
+Subject: [PATCH v8 0/8] efi: Add a test for EFI bootmeth
+Date: Tue, 22 Oct 2024 14:00:21 +0200
+Message-ID: <20241022120032.196311-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Subject: Re: [PATCH] watchdog: gpio_wdt: add support for stoppable devices
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Paul Doelle <paaull.git@gmail.com>,
- Felix Blix <felbe@prevas.dk>
-References: <20241002192323.632822-1-ravi@prevas.dk>
- <a95685d3-50fe-4b4d-a6bc-23adac2a33c5@denx.de> <877ca0qs6d.fsf@prevas.dk>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <877ca0qs6d.fsf@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,26 +105,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/22/24 13:43, Rasmus Villemoes wrote:
-> On Tue, Oct 22 2024, Stefan Roese <sr@denx.de> wrote:
-> 
->> Hi Rasmus,
->>
->> On 10/2/24 21:23, Rasmus Villemoes wrote:
->>
->> While running a CI build, I'm seeing some sandbox failures, most likely
->> related to this change here:
->>
->> https://dev.azure.com/sr0718/u-boot/_build/results?buildId=375&view=logs&j=db15d90c-51e5-5ca3-902e-4c5d558bba82&t=64917d2e-7acb-5ec4-6136-40fc146da71a
->>
->> Could you please take a look at this?
->>
-> 
-> Ah yes, sorry about that. The two -ENOSYS in test/dm/wdt.c should
-> probably become -EOPNOTSUPP. Can you test with that change folded in, or
-> do you want me to resend?
+The test coverage for the EFI bootmeth is incomplete since it does not
+actually boot the application.
 
-Let me give it a try...
+This series creates a simple test for this purpose. It includes a few
+patches to make this work:
 
-Thanks,
-Stefan
+- Revert of an unreviewed patch to change the sandbox efi filename
+- Hang in sandbox virtio due to EFI probing all block devices
+
+Other necessary fixes have already been applied.
+
+Changes in v8:
+- Add new patch to move default filename to a function
+- Add new patch to control on-host behaviour
+- Add new patch to report host default-filename in native mode
+
+Changes in v7:
+- Update commit message
+- Drop patches already applied
+- Drop patch 'Disable ANSI output for tests'
+- Rebase on -master
+
+Changes in v6:
+- Drop the patch to disable sandbox virtio blk with EFI
+- Add new patch to disable the sandbox virtio blk device
+- Deal with sandbox CONFIG_LOGF_FUNC
+- Rebase on -next
+- Drop patches previously applied
+- Drop mention of helloworld since it is no-longer used by this test
+
+Changes in v4:
+- Add efi_loader tag to some patches
+- Split out non-EFI patches into a different series
+
+Changes in v2:
+- Add many new patches to resolve all the outstanding test issues
+
+Simon Glass (8):
+  test: boot: Update bootflow_iter() for console checking
+  efi_loader: Add a test app
+  efi: Move default filename to a function
+  sandbox: Add a -N flag to control on-host behaviour
+  sandbox: Report host default-filename in native mode
+  sandbox: virtio: Disable the sandbox virtio blk device
+  test: efi: boot: Set up an image suitable for EFI testing
+  test: efi: boot: Add a test for the efi bootmeth
+
+ arch/Kconfig                        |   3 +-
+ arch/sandbox/cpu/start.c            |  10 ++++
+ arch/sandbox/dts/test.dts           |   2 +-
+ arch/sandbox/include/asm/state.h    |   1 +
+ boot/Makefile                       |   4 +-
+ boot/bootmeth_efi.c                 |  29 ++--------
+ boot/efi_fname.c                    |  82 ++++++++++++++++++++++++++++
+ cmd/efidebug.c                      |  25 +++++++++
+ include/efi.h                       |  34 ++++++++++++
+ include/efi_default_filename.h      |  56 -------------------
+ lib/efi_loader/Kconfig              |  10 ++++
+ lib/efi_loader/Makefile             |   1 +
+ lib/efi_loader/efi_bootmgr.c        |  10 +++-
+ lib/efi_loader/testapp.c            |  68 +++++++++++++++++++++++
+ test/boot/bootdev.c                 |  18 +++++-
+ test/boot/bootflow.c                |  71 ++++++++++++++++++++++--
+ test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
+ test/py/tests/test_ut.py            |  52 ++++++++++++++++--
+ 18 files changed, 377 insertions(+), 99 deletions(-)
+ create mode 100644 boot/efi_fname.c
+ delete mode 100644 include/efi_default_filename.h
+ create mode 100644 lib/efi_loader/testapp.c
+ create mode 100644 test/py/tests/bootstd/flash1.img.xz
+
+-- 
+2.43.0
+
