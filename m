@@ -4,56 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70A41D0E6FC
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 11:12:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE865D0E6FC
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 11:12:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0AFC88D5C;
-	Tue, 22 Oct 2024 13:12:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D58C88EEB;
+	Tue, 22 Oct 2024 13:12:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729595538;
-	bh=isho2ILFY4PguhNGtG/Y7/m0du5wnynEan+P2GEIxyk=;
+	s=phobos-20191101; t=1729595561;
+	bh=HGSKBAx2f+GISHwW1mZUdCJea0sBQLBG2oSsiUdvPI4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=W0NGM5y2dKDnS1lYA/gNnYdakOteDMKGCeDylXLC/y2FpBZ5f7wo5sb20/qPXoqTx
-	 lx0k0uWPyxwd46oTaUCnPhSB45e0hJzLLi7uyxibWGDRqNWcU+5L+thkIWDaewput/
-	 I8qwO0VqxJ9IIW/RIClb1BvjrJWsVthSZqufy0ZjZiquRhKhp9fEh1BcvWUwf3ut7W
-	 +axMs1YIggN9BwlLePbAmKh+Y9HP2u9HHk8O6pr+bmz7dSdFP7MGejuNZrAXU2DHWf
-	 HRfiMXn8TJOJ01pIRmQCFJF10ilrb0YDuxwvOKE7JObyckTlgFTee9tX5lBijiztxz
-	 OxDnS3Q9CxcdQ==
+	b=TrWq/kMPB759Lxh0F8mkNu+ZA0ErkPFy2Zb39PzzAjuYDMt9Xy3vhLSdJapPxMExu
+	 O2BU78W7GxXmTHZL/fCAduCmyV6aNefmqb1RjoK1hl3WQubYnYLUyewooJ5/0oGxZQ
+	 Rv1bNFM8W0ykT8QP+f1PSWJrpI45v/9khDNtDLOKPKw1J//BYfLilg9S0nQsv8g2Nc
+	 /emcbU9RmlesxyT20BFte9IoQ7qv3dyHq+ZMAT+dI3+waZ0D5Z5OaqlUk/1v0slNau
+	 U/j3RdkAdksPW9McGB+aDEdJzhaA17Q6sUcqymD11HkGCVDXU8N4DcgLgoCgfVKei2
+	 xSNK4sUw3Oy8w==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F8C488D8D; Tue, 22 Oct 2024 13:12:18 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ id 7A19C88FBB; Tue, 22 Oct 2024 13:12:40 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 774CC8641A
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 13:12:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F50B8641A
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 13:12:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XXqJZ2xn3z9sRJ;
- Tue, 22 Oct 2024 13:12:14 +0200 (CEST)
-Message-ID: <55ae2931-b5e8-43dc-90a0-3108755505bf@denx.de>
-Date: Tue, 22 Oct 2024 13:12:13 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XXqK03R17z9sRJ;
+ Tue, 22 Oct 2024 13:12:36 +0200 (CEST)
+Message-ID: <e241dec3-de47-4b4a-b8bb-f0e4c2cd7f40@denx.de>
+Date: Tue, 22 Oct 2024 13:12:35 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 06/13] test: dm: wdt: replace cyclic_run() by schedule()
+Subject: Re: [PATCH 07/13] cyclic: make cyclic_run static
 To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>
 References: <20241003212802.3810-1-ravi@prevas.dk>
- <20241003212802.3810-7-ravi@prevas.dk>
+ <20241003212802.3810-8-ravi@prevas.dk>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241003212802.3810-7-ravi@prevas.dk>
+In-Reply-To: <20241003212802.3810-8-ravi@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4XXqJZ2xn3z9sRJ
+X-Rspamd-Queue-Id: 4XXqK03R17z9sRJ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,11 +72,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/3/24 23:27, Rasmus Villemoes wrote:
-> This is the last place outside of cyclic.c that references
-> cyclic_run() directly. Replace by schedule(), so that cyclic_run() can
-> be made private. This also better matches what I believe commit
-> 29caf9305b6f ("cyclic: Use schedule() instead of WATCHDOG_RESET()")
-> intended to do.
+> The only caller left is schedule(); everybody outside cyclic.c now
+> calls or references schedule().
 > 
 > Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 
@@ -85,61 +83,53 @@ Thanks,
 Stefan
 
 > ---
->   test/dm/wdt.c | 10 +++++-----
->   1 file changed, 5 insertions(+), 5 deletions(-)
+>   common/cyclic.c  |  2 +-
+>   include/cyclic.h | 12 ------------
+>   2 files changed, 1 insertion(+), 13 deletions(-)
 > 
-> diff --git a/test/dm/wdt.c b/test/dm/wdt.c
-> index 1df2da23c6c..4d751b7e8cf 100644
-> --- a/test/dm/wdt.c
-> +++ b/test/dm/wdt.c
-> @@ -3,7 +3,6 @@
->    * Copyright 2017 Google, Inc
+> diff --git a/common/cyclic.c b/common/cyclic.c
+> index 38d815bec35..196797fd61e 100644
+> --- a/common/cyclic.c
+> +++ b/common/cyclic.c
+> @@ -45,7 +45,7 @@ void cyclic_unregister(struct cyclic_info *cyclic)
+>   	hlist_del(&cyclic->list);
+>   }
+>   
+> -void cyclic_run(void)
+> +static void cyclic_run(void)
+>   {
+>   	struct cyclic_info *cyclic;
+>   	struct hlist_node *tmp;
+> diff --git a/include/cyclic.h b/include/cyclic.h
+> index e8de616dcd5..c6c463d68e9 100644
+> --- a/include/cyclic.h
+> +++ b/include/cyclic.h
+> @@ -87,14 +87,6 @@ int cyclic_unregister_all(void);
 >    */
+>   struct hlist_head *cyclic_get_list(void);
 >   
-> -#include <cyclic.h>
->   #include <dm.h>
->   #include <time.h>
->   #include <wdt.h>
-> @@ -14,6 +13,7 @@
->   #include <test/test.h>
->   #include <test/ut.h>
->   #include <linux/delay.h>
-> +#include <u-boot/schedule.h>
->   #include <watchdog.h>
+> -/**
+> - * cyclic_run() - Interate over all registered cyclic functions
+> - *
+> - * Interate over all registered cyclic functions and if the it's function
+> - * needs to be executed, then call into these registered functions.
+> - */
+> -void cyclic_run(void);
+> -
+>   #else
 >   
->   /* Test that watchdog driver functions are called */
-> @@ -131,7 +131,7 @@ static int dm_test_wdt_watchdog_reset(struct unit_test_state *uts)
->   	/* Neither device should be "started", so watchdog_reset() should be a no-op. */
->   	reset_count = state->wdt.reset_count;
->   	val = sandbox_gpio_get_value(gpio, offset);
-> -	cyclic_run();
-> +	schedule();
->   	ut_asserteq(reset_count, state->wdt.reset_count);
->   	ut_asserteq(val, sandbox_gpio_get_value(gpio, offset));
+>   static inline void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
+> @@ -106,10 +98,6 @@ static inline void cyclic_unregister(struct cyclic_info *cyclic)
+>   {
+>   }
 >   
-> @@ -141,19 +141,19 @@ static int dm_test_wdt_watchdog_reset(struct unit_test_state *uts)
->   
->   	/* Make sure both devices have just been pinged. */
->   	timer_test_add_offset(100);
-> -	cyclic_run();
-> +	schedule();
->   	reset_count = state->wdt.reset_count;
->   	val = sandbox_gpio_get_value(gpio, offset);
->   
->   	/* The gpio watchdog should be pinged, the sandbox one not. */
->   	timer_test_add_offset(30);
-> -	cyclic_run();
-> +	schedule();
->   	ut_asserteq(reset_count, state->wdt.reset_count);
->   	ut_asserteq(!val, sandbox_gpio_get_value(gpio, offset));
->   
->   	/* After another ~30ms, both devices should get pinged. */
->   	timer_test_add_offset(30);
-> -	cyclic_run();
-> +	schedule();
->   	ut_asserteq(reset_count + 1, state->wdt.reset_count);
->   	ut_asserteq(val, sandbox_gpio_get_value(gpio, offset));
->   
+> -static inline void cyclic_run(void)
+> -{
+> -}
+> -
+>   static inline int cyclic_unregister_all(void)
+>   {
+>   	return 0;
 
 Viele Grüße,
 Stefan Roese
