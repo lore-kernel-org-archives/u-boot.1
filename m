@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E7C1CDD0E6
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 20:21:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 874EECDD0E1
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 20:23:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E098188FF1;
-	Tue, 22 Oct 2024 22:21:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 16FED8904B;
+	Tue, 22 Oct 2024 22:23:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729628512;
-	bh=Rn3weA+VxjMIYdPDgkdOPntzb8miN/Mw6jg19Lf8xKU=;
+	s=phobos-20191101; t=1729628613;
+	bh=Dz76ZoWBUSMgS5qBaWW+o9iHhkMNVeeWIAr1YNVpjc4=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=M2NvFex7/z8LmifndeWabnxG+BGAtM7qcZYXmyTf/BZouMHD4OrqNGl9Lfvzg7uvd
-	 Y7MUdAhwN2AzclS1TN9eqftSz/QBveDgPcpkauugYQ7I8SSkzxua/4IEkSDTTilG6C
-	 0SLOusH/SPgLivVXGErDvBnLwF+01ATzUzBgIG8DoWrLiwCWfo3jVmJUpVdTQ4y9jv
-	 kKiU6pQnkLSiS3Kq7c9iIoBpPT/3kjEe8SGgDSr0t4ss0S4GkLbFZkRrhcrZrvu5rl
-	 nPTK8NUFuXMjhU0qyEOWbJlKRkZIfHkv/7K6EmA/OwhSy1HpWqhubkmzBq8jE7CBIr
-	 69xK3UhzgfI7A==
+	b=ylW7ybTgcNGAi2jK30nNzXn/dMlmRsr/WOVeCRbXYbqE4EApPv3v5sMzCCqwylImk
+	 q5esJPOq0+wqKRQUCedW6FQfwtKrGWT3gwIG2mvG1yhb9Jic7iYno5hjPFTkNDW+Up
+	 4sSukbAD3mb2QlHpSPyBdBxCyAAucxgtd8mmHyJhG84XdQbcaBlv8DlTv94Gup6xKo
+	 +yJXu816cvRMu7EUBZxygoZ4M1C11gqbsD+PKL0E9K6B1POpGgoA5vUtrPefA3GkFu
+	 SYhcfvW1h3MUhZNepzLL58h1f+pC5iwzX8xXSSsu9wJDa2RuGSf6OhZCwsHrfuvGrK
+	 dy44kbG90P2oQ==
 Received: from crub (p5483347b.dip0.t-ipconnect.de [84.131.52.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A785188FCC;
- Tue, 22 Oct 2024 22:21:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id EC6AC88FD9;
+ Tue, 22 Oct 2024 22:23:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729628510;
- bh=Rn3weA+VxjMIYdPDgkdOPntzb8miN/Mw6jg19Lf8xKU=;
+ s=phobos-20191101; t=1729628612;
+ bh=Dz76ZoWBUSMgS5qBaWW+o9iHhkMNVeeWIAr1YNVpjc4=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=z5la8EQ808zXpfpdvyRJbjT6GicAOyD3tKCVmZizXA8EpiEQDuGmbNOTutC8HyiQc
- DZrIIfW4qkYWTLBF5Aa4ZI5DqeKIHz6iXySmx927GCmd7/PouImvG63nHRtm8xh8UW
- 4FUDwwrAWW6OcdMKrDw2nayGTQYW5e+8VVtYwnSPYY/kIuIEIYpRrYUCdM/dpLdOqs
- ryP2BhWPrbch6mhiRa2t/UUc/k/Y8HllzeEXlGdK84UEajL7GIDhVRPXoBaAR/daoJ
- F2e6aoqOxUCu+Rx/n0Pq00OEfBZmCj7PVPhDnY8V575rTpAzLcru05pXuH9+hV0SQF
- QcUWWOX+Y3nJQ==
-Date: Tue, 22 Oct 2024 22:21:49 +0200
+ b=yGd2dyG1lADdPznx7EbwT9Ao2jtT44d99vej3rsTnnBFw8Cou+I1szg5YeaE085VB
+ 9FBEVdw8WIfpXZ205F2tKA+6rv81R2Ry7fWt8QilrqY9l8rWyRzWsMgP5NYeRtv6hm
+ /qDhZ74LgRlRuF5wNiBLZKVCBBfYpVmCIlhm03HPyZXXAijUbAXLPCkngfXM1EP8BC
+ Lkd+9snvTxtN8fwTLGpb3Ug28VK+7OJvd6cqoPFvExX4NoetXr+MLcB9x/fEzFztGi
+ v23XoG0ClQJ39/UwcP2sXsyFJDDPMgcJTF8se7nkXs8OvrdTyK1GXizhaLeAuigDUx
+ ifKD3+sizpC4g==
+Date: Tue, 22 Oct 2024 22:23:31 +0200
 From: Anatolij Gustschin <agust@denx.de>
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Dan Carpenter <dan.carpenter@linaro.org>,
- <u-boot@lists.denx.de>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Ian Ray <ian.ray@gehealthcare.com>
-Subject: Re: [PATCH] video: Fix VNBYTES() macro comment
-Message-ID: <20241022222149.07f849f7@crub>
-In-Reply-To: <20240910091200.101886-1-miquel.raynal@bootlin.com>
-References: <20240910091200.101886-1-miquel.raynal@bootlin.com>
+To: Leo Yu-Chi Liang <ycliang@andestech.com>
+Cc: <u-boot@lists.denx.de>, <trini@konsulko.com>, <lekkit@at.encryp.ch>,
+ <pbrobinson@gmail.com>, <caleb.connolly@linaro.org>
+Subject: Re: [PATCH v2 1/1] video: simplefb: Fix build warn with
+ CONFIG_FDT_64BIT=n
+Message-ID: <20241022222331.609a7539@crub>
+In-Reply-To: <20241009084828.864091-1-ycliang@andestech.com>
+References: <20241009084828.864091-1-ycliang@andestech.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
@@ -68,21 +68,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 10 Sep 2024 11:11:59 +0200
-Miquel Raynal miquel.raynal@bootlin.com wrote:
+On Wed, 9 Oct 2024 16:48:28 +0800
+Leo Yu-Chi Liang ycliang@andestech.com wrote:
 
-> The VNBYTES() macro has been updated to silence possible warnings
-> regarding authorized (but unusual) uses of this macro, but the comment
-> was kept unchanged. A year has passed so let's fix the comment now to
-> avoid confusions.
+> From: LekKit <50500857+LekKit@users.noreply.github.com>
 > 
-> Fixes: cc05d352fbc ("video: Add parentheses around VNBYTES() macro")
-> Suggested-by: Tom Rini <trini@konsulko.com>
-> Link: https://lore.kernel.org/u-boot/20240906183432.GG3879073@bill-the-cat/
-> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> Fix compile warning with !CONFIG_FDT_64BIT by
+> casting the variable in the debug print.
+> 
+> Signed-off-by: Eva Kurchatova <lekkit@at.encryp.ch>
+> Reported-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 > ---
->  include/video.h | 6 +-----
->  1 file changed, 1 insertion(+), 5 deletions(-)
+>  drivers/video/simplefb.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 applied to u-boot-video/master, thanks!
 
