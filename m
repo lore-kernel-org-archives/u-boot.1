@@ -4,92 +4,206 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B2AFCDD0DD
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 19:58:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8BC2CDD0E1
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 19:59:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AF3688FA7;
-	Tue, 22 Oct 2024 21:58:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0320588FA7;
+	Tue, 22 Oct 2024 21:59:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XXa/xKpY";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="gJsBMC7C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E963E88F4B; Tue, 22 Oct 2024 21:58:18 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DFC7C88FA7; Tue, 22 Oct 2024 21:59:53 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20622.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::622])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C192788FA7
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 21:58:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A211888F4B
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 21:59:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4315855ec58so9761115e9.2
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 12:58:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729627095; x=1730231895; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dTyVuN+YOaLpv6/9rMX2eBRc0dnw178zzFQHnZiZbcE=;
- b=XXa/xKpYQ4/YqBmzEynmTY72GhNS5z+oKlq5aBQyLgHXQ7h9gSeK7RvPR4sP6dqqb2
- WKzvMjUSSMiA5kb7k6J9sdK7dnHMaP6Ho2IE1JeEvtQXBjaaRT/9vJa3QIKikljezZLL
- UhMdt2Biu/5LFomVAIlriGOyzCueQzU8gggp+pd5zTTrvq45gT/xpqomITMFKgcoT7io
- 44r4xSAvq+bttgTBaGv80/q2CIaQPb6hncRcbb/xr209fxqQh7eLyb2FHfMop+MpAFTk
- qyr30BsWigqZ/MbuCbBsBp5RK3zCQzpZJCK7Jrlae7x0ZP0yPiD5YdRA2NmHsybfHMEL
- O0+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729627095; x=1730231895;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dTyVuN+YOaLpv6/9rMX2eBRc0dnw178zzFQHnZiZbcE=;
- b=r9xZL8UyGtVEbmqLo+THtaiV/AhBElz4IU7uu47I7WgH9CfbZ0S6e22KDdeuhrug5J
- hj8DxLVU050Jyune+PhJAguyxqM9r+FVTVJQIfVbsbeFJx7qb7kpk/CfbRM27QOy2NjU
- F8RLBAyTFJWnEGe6h2XexN7vJVMgWFIoENK9Kxn2zVMfEH/jtaxnSdh86Z1N77o4Rcvf
- XZiTGX1dCIjxUJKyZW6ht2rXcAom85UTkaSGGwqMvpnmAeJdid7FqZYGBCHVjo6cAPZH
- sSLl0xi8FjiJ4kQlaBhqRZxuefPababKIo/NYv9q6q5mMxN+84HO+kIzErIGLlj2M9S/
- G7zQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW0aP64Am5IFrp253vDIv0zgncMNH4IwI7EfhrOm4Xgy7mfkjypRokhc3IhKxfhwvGlim5X32w=@lists.denx.de
-X-Gm-Message-State: AOJu0YyO6FjC5MCLt+XsOCa6rv+QBtK8QExNF3UNgJB9VyCVM1KFtJMv
- o5nxOYQ2EPJRr602qGZaHy/kj2xS0TNLulD1icD95O7SFYs6d094
-X-Google-Smtp-Source: AGHT+IEMocnRzPYFLx99sJle91ybPMt5eMU5myqOnVl9mUYhXQELaG5pOP+nDcUFdUrZr2aysMbgaw==
-X-Received: by 2002:a5d:59a2:0:b0:37d:487e:4d9d with SMTP id
- ffacd0b85a97d-37efcf1c1cbmr26620f8f.8.1729627094905; 
- Tue, 22 Oct 2024 12:58:14 -0700 (PDT)
-Received: from ?IPV6:2a02:a449:4071:1:32d0:42ff:fe10:6983?
- ([2a02:a449:4071:1:32d0:42ff:fe10:6983])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cb66c725d1sm3594104a12.84.2024.10.22.12.58.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Oct 2024 12:58:13 -0700 (PDT)
-Message-ID: <1b23c91e-df7e-42ad-bf3b-b62138c07c98@gmail.com>
-Date: Tue, 22 Oct 2024 21:58:13 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=jan.kiszka@siemens.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vmOSC2ZqAi0bSZoLeq8U/B4paLEKL1YTb4tbpOWeUxFC7MAVo1pmDMc8xI8JXE7bV1haUkPcZ9GbajYfqi0O6CrNWKawRexL31/yq5LjS/tXYvmtGgXDwsgk75vt2LjBGIB2n+Qek6f5G3/R/WuaXeyxjbp8E0p0SP2c7ew7bwM3NaWfYN72qYi3LtwhL3ipbLrrvMJMcTUt/DEf9pzHlXVuZaKAMImu4eXSlYBckhFgIZQ7zqsAeC3QDfa66uKKS1SHwS9ddxYoycOX9wcqGUQqs0p6/JfuSAwlrKa1/Us8Z2GIvV74GDxZUMpxKltAPw4as5tXlrZS6jefcUcRaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tbUqcJo/dVXtC6Ca9hwffeXMxvJUg4fKSDOVjFfAmn0=;
+ b=uOnl2Yfn+8IcC4vVpEVyntuit8mER2pHZl0iSPzD9fPUJn9OYyBz9ZwOuefwCdajLmwhEhLRQC4iiQ8QBfmBWOTpAEkrurHjGsOKDePyvz1u0IrokjmIqKXF0vPbyCbSm4QXfPl4cDVtodIE9CmlhJmFbMC1lcGruY86qp/X4AkCktP4pyYutxhIHROlnBJothv1BZcw0gfoe29KN4tBfTsow3lJYN+fS0HKnLxyyAPvQeeOsvQaJuEKW87GgO1a3CEMT6oqUXqr1ugGT5kklmi5o8cw42On+Gaak8NQrb40yj5NLE86vw6ojzEgc/56rB4ZjmAEChZ6jSrIcp9zsg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tbUqcJo/dVXtC6Ca9hwffeXMxvJUg4fKSDOVjFfAmn0=;
+ b=gJsBMC7ClXaMnCaKzpaI3DEa7J5kl4VwblB233LVT2XKychcRR/SJcJs7rlgCD9ed38Cu7G2fwMckwTXm/C3eKqIxak2DZnzftKBn0CskBGPz3U2aU0r8HxFB3k9HFRBctki4HL/D0kqZf2FhUcO4YJsj5goqaqLjeD5PGAlqx2p4GpNc/DNBpKw1sOIjahw3X8vuXCXMUCcJz2meuP9fV04Ic7TYEQzrsGLrn4VemN1ea00WdXHqkP/F9n/uhbYmPWTQxVag3VdJZKQp2zYkSUA8w6Jr7hl9iCGu+1eXirR0cfyAmhRmisfI8RzzungtlnwmCLv8lObsXG/PGuHNA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
+ by GV1PR10MB6242.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:92::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.15; Tue, 22 Oct
+ 2024 19:59:49 +0000
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::8fe1:7e71:cf4a:7408%3]) with mapi id 15.20.8093.014; Tue, 22 Oct 2024
+ 19:59:49 +0000
+Message-ID: <f1ef1ad7-f4ce-4b96-931b-d51c77a86e8d@siemens.com>
+Date: Tue, 22 Oct 2024 21:59:48 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] rockchip: block: simplify rkmtd driver
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Heiko Schocher <hs@denx.de>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>
-References: <20241018013015.127620-1-heinrich.schuchardt@canonical.com>
- <20241018013015.127620-2-heinrich.schuchardt@canonical.com>
- <4aef209c-cbed-4fac-b48a-4101e27e64f8@gmail.com>
- <CAFLszTgt_5rpKg2XUW_h5_AU5zYssiO7cLtTEaz8w0_Q8zVh4A@mail.gmail.com>
- <8bc4173f-ceb1-491f-bbdb-507a9ca96642@canonical.com>
+Subject: Re: [PATCH v2 12/13] sysinfo: Add driver for IOT2050 boards
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>,
+ Nishanth Menon <nm@ti.com>,
+ "Li, Hua Qian (DI FA CTR IPC CN PRC4)" <huaqian.li@siemens.com>
+References: <cover.1729577070.git.jan.kiszka@siemens.com>
+ <64b2dae0ae60feded514b774f0e91c303c81a52d.1729577070.git.jan.kiszka@siemens.com>
+ <CAFLszTgYaBh8ccEVoRAhGDAysY=XY=5es1k6TmF=mWBEHyYUAA@mail.gmail.com>
+From: Jan Kiszka <jan.kiszka@siemens.com>
 Content-Language: en-US
-From: Johan Jonker <jbx6244@gmail.com>
-In-Reply-To: <8bc4173f-ceb1-491f-bbdb-507a9ca96642@canonical.com>
+Autocrypt: addr=jan.kiszka@siemens.com; keydata=
+ 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
+In-Reply-To: <CAFLszTgYaBh8ccEVoRAhGDAysY=XY=5es1k6TmF=mWBEHyYUAA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0108.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a3::11) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:588::19)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|GV1PR10MB6242:EE_
+X-MS-Office365-Filtering-Correlation-Id: e76bb423-a053-4708-42d9-08dcf2d415e0
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VFhLWkxyVXVncW43RWpoeno2V2xIaFpUbWcyUU5MSUd3aU1XTDdwNTBENDhx?=
+ =?utf-8?B?QkRkaElMRW1CeWRyWGloMnljZnJLdmVjYmRLeFNqTklXTW00SHl2ZkxUT0dD?=
+ =?utf-8?B?TERwL0YyQ29mUjZ0R1c4WDI2cWsrK2dKUXowbkY3NXpwQUVtb0tMbTJjR1FC?=
+ =?utf-8?B?QjNHaTM0WnhPMXpZVkt4MTYrNElXK3Z3SFc2Tno2T29vYWw1VFdqeFVCSzR4?=
+ =?utf-8?B?NkZ3ZmhyVUF6YW52Z0Y4c0FmUzVCL21Db1FDSGZ6WHQyTFJxZ2kycWVvQ1RM?=
+ =?utf-8?B?YThEMkh2ZThXZ3ZnYi9McFFBSFdlRDR3ZE9RZDkrSEI2ZWdYM3l4RUJVZXor?=
+ =?utf-8?B?d211d1VSTlpPYWhEV094algrMGF0cFhmdUdERG9sN0NvRmRIR3liZ2cxcERy?=
+ =?utf-8?B?UEhZczUreHhPQ3ArNXVnMFF4TWdibXV2RHoyMDk2NnE0V2d1L2hmOTQrVEpC?=
+ =?utf-8?B?WmE3SndhZ291YVA3MldodXpuTzZ4RzkzUVhYajZVOWNqRkJ4Rm5xRS9rcjlV?=
+ =?utf-8?B?SlJvUEZxbm1aN1ozLzNoSDkwK0JGamsvdnJYOUpGVi9POWJhQzJ2Z3E5c2RS?=
+ =?utf-8?B?amNpN1hzaUFNT1Z4cytOVVZJNDJjMjRyU01PL0Zsd1c4U2U2Y0NrSXRwSlBJ?=
+ =?utf-8?B?ZFZRMUs3cllVcEcyYnNlMlM5WkIrQ21TSytTRW1QazRBcU8zOEJBTk0vckx1?=
+ =?utf-8?B?eDM4UGZZeUd2WHFGSEF2emxhRit0M1lWUjVNY1NPRWRuSlJId2I0MkIySGJU?=
+ =?utf-8?B?aTFsQ3p4UXhxN2JQb3I1MWVBN1BEY2VmMThIQ3AxYng1QjhvQ0lNVXIyQjJU?=
+ =?utf-8?B?WGV6bzVCNzZ3SCtBVU1rS0xUOVE1WUpPNXc4K1krVUdVRWdzVlc0RGpDaDFh?=
+ =?utf-8?B?QUFPVkFSSFBEOXRHV0ErWllCajk2RERGVjU0QnVyRm5aWFhFVnBGVS9rOHJX?=
+ =?utf-8?B?Vy8wdzliY0tUR1NzWDZDNGc1Z2NLY2U1eUJhV1cyTk9OQ2JtVTJ6dVpWZmNB?=
+ =?utf-8?B?RnMvTm56Z29PZkJHQkVFYnhNVzFRMUY4TFY3cThSWTBkNmtoSWhhSUdwTjVN?=
+ =?utf-8?B?eGhOZDg5SWo1anFwWk5reWo3OWQxZTNlbkhrcVJic0N0U2c0VjU0b2s2YmhY?=
+ =?utf-8?B?NkYzQ2VSOXBrRjdLR2hTSDJaSERRZC9idFVGNGNxeU84c1o1MldYRU5KaEhD?=
+ =?utf-8?B?a1Zaam1TWld1ajBBdXBEbEt3M3FJZlIwb01TWDB1OEJpbnRBUGdLZFExaVJ1?=
+ =?utf-8?B?MWJ4SGxYS1JoZ2xsTGdRRU43eVg4Z1dlODBBL1U2T2lGSEdLbmVFSkxWemlC?=
+ =?utf-8?B?QUxHWFY1MXY2RHd3d0FVYkk1c1lQd1p3bXpwWWFKU3EwYVBCbUkwWUtXT21K?=
+ =?utf-8?B?WllnS1laVVlvTHQ0elNySmFXbVR2bTQ1RFJkNzRwKzFMdExTSVJXVVhBZ3Nv?=
+ =?utf-8?B?Uy95ckNRTTU3M3BWY2ZJcXE0aFVuSUhlaFBMUmxSRjRzWXNhUlluaGg0UW90?=
+ =?utf-8?B?bVZHQW1PWXBZZy9rbGVEUHREaDZvdmJ0QmdRQXFUblNtWEoyN296QWV6aVNs?=
+ =?utf-8?B?YnJyZkdZejlHV0o5TjBiT1E4VmlOZEJZOTJCTlhSMThFUnphbW9pT3pCRmF3?=
+ =?utf-8?B?U3RBYkh5aWdOTWdpQUJndnBQVWF4bnpGQ3VpN0RIYUlvZnFwT2lzcThFcTR6?=
+ =?utf-8?B?M29LL0lDSDBZbWF6ckdPczJ4bjJpK2V5ZEdOMlluR0NlUmsydjZ6K1JEbHUv?=
+ =?utf-8?Q?B8oOr4r3hBREBPXXK+/nDyyds325LRvj3apYPEF?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M09JQk5QcU5HRTd5bFpzUld5aVN1OW8xeGtqY1Q5cnlvWE1mai9VRHZLdjlW?=
+ =?utf-8?B?MVZhZXN2OGZ2QjBKeDlpYkJ0RkpRQVpkaW0yRE9XcTNzM0lMNFUrT2Zvazgx?=
+ =?utf-8?B?b2lWYUI4b3ptWUM4cUYyOWx5T2Z6cmt0Und4OFFSdkttTW9uRGZ5Z3dYSmV1?=
+ =?utf-8?B?Z1MrejNmZ2txN29CdFR0TmZuajZoSk9zandxblBtbzc4cmhla0pvTFBTTFNG?=
+ =?utf-8?B?djNzK1VjTHhOQmx1YTZZazJ6dGtza3NrMjl4LzF5QllSVk82MHM2eG1NbU4z?=
+ =?utf-8?B?QVNROHNWYUR3dy81RUhqeGltdHF1Z3VnckQwTU44SklET0o3ZnRVbG1KcnM3?=
+ =?utf-8?B?bzZXaHRsSWFNTnMraStnT2ZWOVY4bkx4YVZQTXhoOHA4WklnR3lzMkdXdzND?=
+ =?utf-8?B?RnIrTVQxYXowTDltWXFPMlNtekYxMmRHc3FGem4zV1hTa0Y1cCtPdTd6aXhM?=
+ =?utf-8?B?UndDQWk5SVZmOCtrcGNrYmJTZE1QU042SnZPNWY1UzJXSHFuYzNxelBQbGZj?=
+ =?utf-8?B?V3Y2MlVpTTNzSVRHMmswVVJkbmc0Yms3MHZYNCtVTktWUGJUa2FNdDVoMUlZ?=
+ =?utf-8?B?a0pnZmZJNDBkY1hYOWxWaFBPUHdLaDlBSmRpM0VUV2h2c1RxTDNXeUlWMmpQ?=
+ =?utf-8?B?UU5TTWN2dkdWVXdpRlJoTnB1enhjaGhVWE0yZVpvaTB1cmRJQ1poVHFHYlAy?=
+ =?utf-8?B?VkNFTC93cENsUy8vSVhuRTl1SzFyM3VwK3Z6YlMyWHp4R3lOMlR5M3k1WjNk?=
+ =?utf-8?B?Q3FDRjB5a3diNjJrSTFKYmFYdDdUelFzTU5HYmRMRHFRT20wY0cvVXZoMlJp?=
+ =?utf-8?B?U1VwWCt0dzRFR0pFd0FIdjVHWHBENkNVMFkrYXhqd25xNmtZVlExZGJjdk1K?=
+ =?utf-8?B?RlplTDlDeUo4czJxSndMZnB5UEEwT1ZtWkdmK3ZIaW11clRrZENVb2hHZDVM?=
+ =?utf-8?B?NG1zWjB2MnFMNHdUT0kwb09raGM1TnBiYklBR0l6ZUVkTWt4d0RBMzBmSVRW?=
+ =?utf-8?B?ZS9tTHZSTW5FR1U4Q2QrQVZmUWJlTmlMaWZMSHRibFZxbzBoVjdGd0ZsK1hK?=
+ =?utf-8?B?R2dQaGY0SEpUTGp0TlpqbGtVL1RtTkpIUTNTcnA2elBFK29XNlFjSXJ4RXAx?=
+ =?utf-8?B?SFNNak44NExjbjl1WEJENndIT3JyNVk0bTV1TXhqaVE5RW1yeXZBdnBUK0d2?=
+ =?utf-8?B?THBQYlMrZ1BRUnhNNTRFNzFMRnVtUjNhT2JKQWN3UHpvd2YremdxaFg1cEkr?=
+ =?utf-8?B?bUVicXJ1WVZsV2ZMQm5NK3laODlvMU1yRW12eEVhdDYrTjdHK3J3QTJqUlJG?=
+ =?utf-8?B?blo0ZTBFM01SaFM3NmhTUEJDMjg5eU8xRU1Cc0RMdG1SL2NubW1NUTd4bWNm?=
+ =?utf-8?B?SzRmZk8va3NSTU1ta0hicUVlS21NS2gwb3pHV2RVVUpsV1Z6UVAvQWpmZUZo?=
+ =?utf-8?B?K1ZHYU9kNlQxTjVEa2RQQ2tlRGhsTElUblBaYSs5YTllbUVwQ1Nzdkt4bzRj?=
+ =?utf-8?B?NVFiK2hnRjIxVTBjdVBuT2c5M2JYOGo4dGdBWXpmN0F2WDc3Z3dyN1BpYktN?=
+ =?utf-8?B?WHV3TmtVZ2Z6bGdwcU43V0l6SHdDMTVjQlhIam1NVVRaZDFwcGlvVjVaY0lF?=
+ =?utf-8?B?V2MzT0F5VU9MTnlIL1FnMGZsNUQ2MGtaRVhmUEszMWdpSHdxTm5VbGdGSmJm?=
+ =?utf-8?B?TjZkUi9hUkpYOFVPamhXUXFKT0d6cEY0TWlaTkVGNzRGOC9PdEV6bzZ4UWNW?=
+ =?utf-8?B?dTB4SlZZTEJIZ1F1dEsxRklMTndPMFZaVlJEaDFzZStkYjVWRVF3cDQ3SSto?=
+ =?utf-8?B?T0pzTXc2UXB4U0NVMTArZWVlQXhjRzlLZEg3SW5EWGFLdlErSDVBT1BYUjl1?=
+ =?utf-8?B?M2ZlTzNRY0FkL25qQ01JVTZEVlBBbiswbUhwUEdma1ZZTS9tQlZCNVNidEVB?=
+ =?utf-8?B?T3FRNUZCRnRKTjdadzVYWHBiQlo2dFN6RzFPcWNoMXdxT3pLLzNBVjlUR2JM?=
+ =?utf-8?B?TkJLUTJ4UFhJcG9hK1MzMFlVUWpxQmhJelM5VEg3U0NGM1RUN2tKMHBqcHJm?=
+ =?utf-8?B?MWZxN1czZGFEREQzM0NGWUVuTjFuTjJRSXBlMnNYd2o1cDBmTCtWbVpXak9m?=
+ =?utf-8?B?VW1TNlhLejFibnlWL0tjV1BBYXdEZ2lZQm9QZ0Q2REpYZytuaUVUOVlpK3h5?=
+ =?utf-8?B?aXc9PQ==?=
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e76bb423-a053-4708-42d9-08dcf2d415e0
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2024 19:59:49.4571 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: A9yRHa/N/v74gfWDf0/bb8nzXVwsbeVpe6DMNz6Re272Sa4BGz5fuMg184LvR3ieYrWiRZM+sFlV5ihphrWfvg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB6242
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,180 +220,329 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 10/21/24 15:35, Heinrich Schuchardt wrote:
-> On 10/19/24 13:50, Simon Glass wrote:
->> Hi Johan,
+On 22.10.24 19:00, Simon Glass wrote:
+> On Tue, 22 Oct 2024 at 08:06, Jan Kiszka <jan.kiszka@siemens.com> wrote:
 >>
->> On Fri, 18 Oct 2024 at 07:33, Johan Jonker <jbx6244@gmail.com> wrote:
->>>
->>>
->>>
->>> On 10/18/24 03:30, Heinrich Schuchardt wrote:
->>>> By using blk_create_devicef() instead of blk_create_devicef() the driver
->>>> can be simplified and brought into line with other block device drivers.
->>>>
->>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>> ---
-
-Tested-by: Johan Jonker <jbx6244@gmail.com>
-
->>>>   drivers/block/rkmtd.c | 21 ++-------------------
->>>>   1 file changed, 2 insertions(+), 19 deletions(-)
->>>>
->>>> diff --git a/drivers/block/rkmtd.c b/drivers/block/rkmtd.c
->>>> index c55f052e51b..f84cacd7ead 100644
->>>> --- a/drivers/block/rkmtd.c
->>>> +++ b/drivers/block/rkmtd.c
->>>> @@ -794,36 +794,19 @@ int rkmtd_init_plat(struct udevice *dev)
->>>>        return 0;
->>>>   }
->>>>
->>>> -static void rkmtd_blk_kmalloc_release(struct udevice *dev, void *res)
->>>> -{
->>>> -     /* noop */
->>>> -}
->>>> -
->>>>   static int rkmtd_bind(struct udevice *dev)
->>>>   {
->>>>        struct rkmtd_dev *plat = dev_get_plat(dev);
->>>> -     char dev_name[30], *str;
->>>>        struct blk_desc *desc;
->>>>        struct udevice *bdev;
->>>>        int ret;
->>>>
->>>> -     snprintf(dev_name, sizeof(dev_name), "%s.%s", dev->name, "blk");
->>>> -
->>>
->>>> -     str = devres_alloc(rkmtd_blk_kmalloc_release, strlen(dev_name) + 1, GFP_KERNEL);
->>>
->>> Hi Heinrich, Simon,
->>>
->>> The function strdup() is not an exact replacement for the devres_alloc() function in relation to a device.
->>> It is in use for memory leak detection / device resource management.
->>> Not sure what the status of that devres project currently is? Also tracking in general in relation to EFI and blk-class.
->>>
->>> https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/block/blk-uclass.c?ref_type=heads#L739
->>>
->>> https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/block/rkmtd.c?ref_type=heads#L812
->>>
->>> Test for this driver are based on work done by Simon.
->>> https://source.denx.de/u-boot/u-boot/-/blob/master/test/dm/host.c?ref_type=heads#L71
->>>
->>> This rkmtd driver makes use of devm_kzalloc(). All the memory that rkmtd reserves is freed.
->>> But if I remember well somehow I was not able to free all memory on unbind and was not able to find the source, so I didn't include that last test.
->>> https://elixir.bootlin.com/u-boot/v2024.10/source/test/dm/rkmtd.c#L84
+>> From: Li Hua Qian <huaqian.li@siemens.com>
 >>
->> Yes, you can use that API. But I think Heinrich's patch is correct,
->> and separate from your points here. Yes, blk_create_devicef()
->> strdup()s the name, but it sets a flag indicating that it has done so.
->> Then device_unbind() checks DM_FLAG_NAME_ALLOCED later. So the code
->> should be equivalent.
+>> This brings a sysinfo driver and DT entry for the IOT2050 board series.
+>> It translates the board information passed from SE-Boot to SPL into
+>> values that can be retrieved via the sysinfo API. Will is already used
+>> to fill the SMBIOS table when booting via EFI.
 >>
+>> Signed-off-by: Li Hua Qian <huaqian.li@siemens.com>
+>> [Jan: split-off as separate patch, cleanup]
+>> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+>> ---
+>>  .../dts/k3-am65-iot2050-common-u-boot.dtsi    |  18 +++
+>>  configs/iot2050_defconfig                     |   1 +
+>>  drivers/sysinfo/Kconfig                       |   7 +
+>>  drivers/sysinfo/Makefile                      |   1 +
+>>  drivers/sysinfo/iot2050.c                     | 143 ++++++++++++++++++
+>>  drivers/sysinfo/iot2050.h                     |  26 ++++
+>>  6 files changed, 196 insertions(+)
+>>  create mode 100644 drivers/sysinfo/iot2050.c
+>>  create mode 100644 drivers/sysinfo/iot2050.h
+> 
+> I think strlcpy() might be better than strncpy() for this case
+> 
 
->> Re the memory leak, I don't have any ideas, but test/dm/devres.c does
->> have some checks for some of that. I have often wondered about having
->> a way to store the filename and line (or just the line?) with every
->> allocation, so we can list out what is left at the end, since valgrind
->> doesn't work on target devices.
+Ack.
 
-Please have a look at a little test patch below.
-I'm out of ideas. All I reserve for RKMTD as memory is freed I think.
-Also replaced a second devres_alloc() function with strdup() with the some result.
-The difference with the host device is that it adds an GPT/EFI partition.
-Maybe it add a few bytes while parsing the partitions?
-Anyone able verify a partition on other block devices then RKMTD in a test?
+> The idea with sysinfo is that we use the same enum for all boards, so
+> please add your new things to sysinfo.h
+> 
 
-Johan
+See below.
 
+> Do you actually want all the sysinfo info in capitals? If so, that's
+> fine, just checking...
+> 
+
+This is how it is being shipped already, yes.
 
 >>
->> Regards,
->> Simon
+>> diff --git a/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi b/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
+>> index b6d2c816acc..55337179f9f 100644
+>> --- a/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
+>> +++ b/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
+>> @@ -14,6 +14,24 @@
+>>                 spi0 = &ospi0;
+>>         };
+>>
+>> +       sysinfo {
+>> +               compatible = "siemens,sysinfo-iot2050";
+>> +               /* TI_SRAM_SCRATCH_BOARD_EEPROM_START */
+>> +               offset = <0x40280000>;
+>> +               bootph-all;
+>> +
+>> +               smbios {
+>> +                       system {
+>> +                               manufacturer = "SIEMENS AG";
+>> +                               product = "SIMATIC IOT2050";
+>> +                       };
+>> +
+>> +                       baseboard {
+>> +                               manufacturer = "SIEMENS AG";
+>> +                       };
+>> +               };
+>> +       };
+>> +
+>>         leds {
+>>                 bootph-all;
+>>                 status-led-red {
+>> diff --git a/configs/iot2050_defconfig b/configs/iot2050_defconfig
+>> index 2624f0cb573..574e232d119 100644
+>> --- a/configs/iot2050_defconfig
+>> +++ b/configs/iot2050_defconfig
+>> @@ -141,6 +141,7 @@ CONFIG_SOC_TI=y
+>>  CONFIG_SPI=y
+>>  CONFIG_DM_SPI=y
+>>  CONFIG_CADENCE_QSPI=y
+>> +CONFIG_SYSINFO=y
+>>  CONFIG_SYSRESET=y
+>>  CONFIG_SPL_SYSRESET=y
+>>  CONFIG_SYSRESET_TI_SCI=y
+>> diff --git a/drivers/sysinfo/Kconfig b/drivers/sysinfo/Kconfig
+>> index 2030e4babc9..df83df69ffb 100644
+>> --- a/drivers/sysinfo/Kconfig
+>> +++ b/drivers/sysinfo/Kconfig
+>> @@ -31,6 +31,13 @@ config SYSINFO_RCAR3
+>>         help
+>>           Support querying SoC version information for Renesas R-Car Gen3.
+>>
+>> +config SYSINFO_IOT2050
+>> +       bool "Enable sysinfo driver for the Siemens IOT2050"
+>> +       depends on TARGET_IOT2050_A53
+>> +       default y if TARGET_IOT2050_A53
+>> +       help
+>> +         Support querying device information for Siemens IOT2050.
+>> +
+>>  config SYSINFO_SANDBOX
+>>         bool "Enable sysinfo driver for the Sandbox board"
+>>         help
+>> diff --git a/drivers/sysinfo/Makefile b/drivers/sysinfo/Makefile
+>> index 680dde77fe8..26ca3150999 100644
+>> --- a/drivers/sysinfo/Makefile
+>> +++ b/drivers/sysinfo/Makefile
+>> @@ -5,6 +5,7 @@
+>>  obj-y += sysinfo-uclass.o
+>>  obj-$(CONFIG_SYSINFO_GAZERBEAM) += gazerbeam.o
+>>  obj-$(CONFIG_SYSINFO_GPIO) += gpio.o
+>> +obj-$(CONFIG_SYSINFO_IOT2050) += iot2050.o
+>>  obj-$(CONFIG_SYSINFO_RCAR3) += rcar3.o
+>>  obj-$(CONFIG_SYSINFO_SANDBOX) += sandbox.o
+>>  obj-$(CONFIG_SYSINFO_SMBIOS) += smbios.o
+>> diff --git a/drivers/sysinfo/iot2050.c b/drivers/sysinfo/iot2050.c
+>> new file mode 100644
+>> index 00000000000..5359d6b8d62
+>> --- /dev/null
+>> +++ b/drivers/sysinfo/iot2050.c
+>> @@ -0,0 +1,143 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +/*
+>> + * Copyright (c) Siemens AG, 2024
+>> + */
+>> +
+>> +#include <dm.h>
+>> +#include <sysinfo.h>
+>> +#include <net.h>
+>> +#include <asm/arch/hardware.h>
+>> +
+>> +#include "iot2050.h"
+>> +
+>> +#define IOT2050_INFO_MAGIC             0x20502050
+>> +
+>> +struct iot2050_info {
+>> +       u32 magic;
+>> +       u16 size;
+>> +       char name[20 + 1];
+>> +       char serial[16 + 1];
+>> +       char mlfb[18 + 1];
+>> +       char uuid[32 + 1];
+>> +       char a5e[18 + 1];
+>> +       u8 mac_addr_cnt;
+>> +       u8 mac_addr[8][ARP_HLEN];
+>> +       char seboot_version[40 + 1];
+>> +       u8 padding[3];
+>> +       u32 ddr_size_mb;
+>> +} __packed;
+>> +
+>> +/**
+>> + * struct sysinfo_iot2050_priv - sysinfo private data
+>> + * @info: iot2050 board info
+>> + */
+>> +struct sysinfo_iot2050_priv {
+>> +       struct iot2050_info *info;
+>> +};
+>> +
+>> +static int sysinfo_iot2050_detect(struct udevice *dev)
+>> +{
+>> +       struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
+>> +
+>> +       if (priv->info == NULL || priv->info->magic != IOT2050_INFO_MAGIC)
+>> +               return -EFAULT;
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +static int sysinfo_iot2050_get_str(struct udevice *dev, int id, size_t size,
+>> +                                  char *val)
+>> +{
+>> +       struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
+>> +       char byte_str[3] = {0};
+>> +       unsigned int n;
+>> +
+>> +       switch (id) {
+>> +       case BOARD_NAME:
+>> +               strncpy(val, priv->info->name, size);
+>> +               break;
+>> +       case BOARD_SERIAL:
+>> +               strncpy(val, priv->info->serial, size);
+>> +               break;
+>> +       case BOARD_MLFB:
+>> +               strncpy(val, priv->info->mlfb, size);
+>> +               break;
+>> +       case BOARD_UUID:
+>> +               for (n = 0; n < min(size, (size_t)16); n++) {
+>> +                       memcpy(byte_str, priv->info->uuid + n * 2, 2);
+>> +                       val[n] = (char)hextoul(byte_str, NULL);
+>> +               }
+>> +               break;
+>> +       case BOARD_A5E:
+>> +               strncpy(val, priv->info->a5e, size);
+>> +               break;
+>> +       case BOARD_SEBOOT_VER:
+>> +               strncpy(val, priv->info->seboot_version, size);
+>> +               break;
+>> +       case BOARD_MAC_ADDR_1:
+>> +       case BOARD_MAC_ADDR_2:
+>> +       case BOARD_MAC_ADDR_3:
+>> +       case BOARD_MAC_ADDR_4:
+>> +       case BOARD_MAC_ADDR_5:
+>> +       case BOARD_MAC_ADDR_6:
+>> +       case BOARD_MAC_ADDR_7:
+>> +       case BOARD_MAC_ADDR_8:
+>> +               memcpy(val, priv->info->mac_addr[id - BOARD_MAC_ADDR_START],
+>> +                      ARP_HLEN);
 > 
-> Hello Johan,
+> For this, we really need another parameter to get_str(), i.e. the
+> index, since we don't know how many MACs there will be. So how about
+> adding a few new operations?
 > 
-> I hope that Simon's comment clarifies how freeing the string resource works.
+> int (*get_item_count)(struct udevice *dev, int id);
+> int (*get_str_item)(struct udevice *dev, int id, int index, size_t
+> size, char *val);
+
+Ok, makes sense.
+
 > 
-> Do you have a device to test this patch?
+>> +               return 0;
+>> +       case BOARD_DDR_SIZE:
+>> +               memcpy(val, &priv->info->ddr_size_mb,
+>> +                      sizeof(priv->info->ddr_size_mb));
+>> +               return 0;
+>> +       default:
+>> +               return -EINVAL;
+>> +       };
+>> +
+>> +       val[size - 1] = '\0';
+>> +       return 0;
+>> +}
+>> +
+>> +static int sysinfo_iot2050_get_int(struct udevice *dev, int id, int *val)
+>> +{
+>> +       struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
+>> +
+>> +       switch (id) {
+>> +       case BOARD_MAC_ADDR_CNT:
+>> +               *val = priv->info->mac_addr_cnt;
+>> +               return 0;
+>> +       default:
+>> +               return -EINVAL;
+>> +       };
+>> +}
+>> +
+>> +static const struct sysinfo_ops sysinfo_iot2050_ops = {
+>> +       .detect = sysinfo_iot2050_detect,
+>> +       .get_str = sysinfo_iot2050_get_str,
+>> +       .get_int = sysinfo_iot2050_get_int,
+>> +};
+>> +
+>> +static int sysinfo_iot2050_probe(struct udevice *dev)
+>> +{
+>> +       struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
+>> +       unsigned long offset;
+>> +
+>> +       offset = dev_read_u32_default(dev, "offset",
+>> +                                     TI_SRAM_SCRATCH_BOARD_EEPROM_START);
+>> +       priv->info = (struct iot2050_info *)offset;
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +static const struct udevice_id sysinfo_iot2050_ids[] = {
+>> +       { .compatible = "siemens,sysinfo-iot2050" },
+>> +       { /* sentinel */ }
+>> +};
+>> +
+>> +U_BOOT_DRIVER(sysinfo_iot2050) = {
+>> +       .name           = "sysinfo_iot2050",
+>> +       .id             = UCLASS_SYSINFO,
+>> +       .of_match       = sysinfo_iot2050_ids,
+>> +       .ops            = &sysinfo_iot2050_ops,
+>> +       .priv_auto      = sizeof(struct sysinfo_iot2050_priv),
+>> +       .probe          = sysinfo_iot2050_probe,
+>> +};
+>> diff --git a/drivers/sysinfo/iot2050.h b/drivers/sysinfo/iot2050.h
+>> new file mode 100644
+>> index 00000000000..f659a8282b5
+>> --- /dev/null
+>> +++ b/drivers/sysinfo/iot2050.h
+>> @@ -0,0 +1,26 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +/*
+>> + * Copyright (c) Siemens AG, 2024
+>> + */
+>> +
+>> +#include <sysinfo.h>
+>> +
+>> +enum sysinfo_id_iot2050 {
+>> +       BOARD_MLFB              = SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
+>> +       BOARD_SERIAL            = SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
+>> +       BOARD_UUID              = SYSINFO_ID_SMBIOS_SYSTEM_UUID,
+>> +       BOARD_A5E               = SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
+>> +       BOARD_NAME              = SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
 > 
-> Best regards
+> Do you need to rename these? It seems better to use the standard
+> names, although I do think they are quite long.
+
+We don't rename, we map pre-existing field names in EEPROM and
+pre-existing board-specific U-Boot env vars to sysinfo fields here.
+
 > 
-> Heinrich
+>> +       BOARD_SEBOOT_VER        = SYSINFO_ID_USER + 0,
+>> +       BOARD_MAC_ADDR_CNT      = SYSINFO_ID_USER + 1,
+>> +       BOARD_MAC_ADDR_1        = SYSINFO_ID_USER + 2,
+>> +       BOARD_MAC_ADDR_START    = BOARD_MAC_ADDR_1,
+>> +       BOARD_MAC_ADDR_2        = SYSINFO_ID_USER + 3,
+>> +       BOARD_MAC_ADDR_3        = SYSINFO_ID_USER + 4,
+>> +       BOARD_MAC_ADDR_4        = SYSINFO_ID_USER + 5,
+>> +       BOARD_MAC_ADDR_5        = SYSINFO_ID_USER + 6,
+>> +       BOARD_MAC_ADDR_6        = SYSINFO_ID_USER + 7,
+>> +       BOARD_MAC_ADDR_7        = SYSINFO_ID_USER + 8,
+>> +       BOARD_MAC_ADDR_8        = SYSINFO_ID_USER + 9,
+>> +       BOARD_DDR_SIZE          = SYSINFO_ID_USER + 10,
+> 
+> These are the ones which should be added as standard. Be sure to
+> comment them as necessary.
 
-From b767850c66e51b4b4d2b8f9f9d314dd430b9a8d0 Mon Sep 17 00:00:00 2001
-From: Johan Jonker <jbx6244@gmail.com>
-Date: Tue, 22 Oct 2024 20:12:37 +0200
-Subject: [PATCH v1] RKMTD memory leak test
+You mean that BOARD_MAC_ADDR and BOARD_DDR_SIZE should become
+SYSINFO_ID_BOARD_MAC_ADDR and SYSINFO_ID_BOARD_DDR_SIZE? But
+BOARD_SEBOOT_VER is nothing that has any meaning beyond our board.
 
-To reproduce:
-git clone --depth 1 https://source.denx.de/u-boot/u-boot.git
-make sandbox_defconfig
-make
+Jan
 
-./u-boot -T -c "ut dm dm_test_rkmtd"
-
-Test: dm_test_rkmtd: rkmtd.c (flat tree)
-test/dm/rkmtd.c:95, dm_test_rkmtd(): report:
-mem_start: 2844096
-mem_test1: 3374736
-mem_exit: 2844128
-diff: 32
-
-Or inside U-boot:
-./u-boot
-
-ut dm dm_test_rkmtd
-
-Test: dm_test_rkmtd: rkmtd.c (flat tree)
-test/dm/rkmtd.c:95, dm_test_rkmtd(): report:
-mem_start: 113040
-mem_test1: 643824
-mem_exit: 113216
-diff: 176
----
- test/dm/rkmtd.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
-
-diff --git a/test/dm/rkmtd.c b/test/dm/rkmtd.c
-index d1ca5d1acacb..ba8e211f60a2 100644
---- a/test/dm/rkmtd.c
-+++ b/test/dm/rkmtd.c
-@@ -29,11 +29,14 @@ static int dm_test_rkmtd(struct unit_test_state *uts)
- 	struct rkmtd_dev *plat;
- 	struct blk_desc *desc;
- 	struct sector0 *sec0;
-+	ulong mem_start, mem_exit, mem_test1;
- 	int i;
- 
- 	ut_asserteq(-ENODEV, uclass_first_device_err(UCLASS_RKMTD, &dev));
- 	ut_asserteq(-ENODEV, uclass_first_device_err(UCLASS_PARTITION, &part));
- 
-+	mem_start = ut_check_delta(0);
-+
- 	ut_assertok(rkmtd_create_device(label, &dev));
- 
- 	/* Check that the plat data has been allocated */
-@@ -78,11 +81,19 @@ static int dm_test_rkmtd(struct unit_test_state *uts)
- 	ut_asserteq(12, blk_dread(desc, 64, 12, read));
- 	ut_asserteq_mem(write, read, RW_BUF_SIZE);
- 
-+	mem_test1 = ut_check_delta(0);
-+
- 	ut_assertok(rkmtd_detach(dev));
- 
- 	ut_asserteq(-ENODEV, blk_get_from_parent(dev, &blk));
- 	ut_assertok(device_unbind(dev));
- 
-+	/* check there were no memory leaks */
-+	//ut_asserteq(0, ut_check_delta(mem_start));
-+
-+	mem_exit = ut_check_delta(0);
-+	ut_reportf("\nmem_start: %lu\nmem_test1: %lu\nmem_exit: %lu\ndiff: %lu\n", mem_start, mem_test1, mem_exit, mem_exit - mem_start);
-+
- 	return 0;
- }
- DM_TEST(dm_test_rkmtd, UTF_SCAN_FDT);
 -- 
-2.39.2
+Siemens AG, Technology
+Linux Expert Center
