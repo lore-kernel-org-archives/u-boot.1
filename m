@@ -4,61 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADB56D1CDD5
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 10:54:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C2ED0E6FC
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 11:10:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EE1D88FA7;
-	Tue, 22 Oct 2024 12:54:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
+	by phobos.denx.de (Postfix) with ESMTP id 6F4DF88D8D;
+	Tue, 22 Oct 2024 13:10:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="pzN87KSU";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1729595445;
+	bh=GiRavWVn3RqxzKZxcfV1GuNz/41wNSFXTumkKyiI8mU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Dh5XI6hlZKK+em2VzM00ryFirR7HqdnyJyAhy2cydIb2Z3ErF4CFIgKtCvlE+sXnF
+	 WrNzCnioqobQhquy0OkxlcY2O+fLkG8nKp+SJvt9oRsx2dJz7oKSa5HCWcF8uW2BLl
+	 WNJSc5kXElR7m66RGrAbRn/MZNhN6Ybm4oeuxYSmOlsrDN0CMbQzb/AjTLzUM/67p/
+	 dggp33nsqcFNYZtO/7AZBf0UJbeWPiYPH+Yi3BOd7ARptoAFsQYCWyNCjWwYUZ78Bh
+	 jH7YHbIbJ6yWrrTDtz96XcUpMss+hWNuw4aMEmolB19+9CBZjTxPLhiPDjpLPuQ77y
+	 iA595arXozXLg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E07BC88D8D; Tue, 22 Oct 2024 12:54:27 +0200 (CEST)
-Received: from smtp-out.freemail.hu (fmfe30.freemail.hu [46.107.16.235])
+ id 2785488D91; Tue, 22 Oct 2024 13:10:44 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D15588D5A
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 12:54:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2BBD88D5A
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 13:10:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=freemail.hu
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=egyszeregy@freemail.hu
-Received: from [192.168.0.16] (catv-178-48-208-49.catv.fixed.vodafone.hu
- [178.48.208.49])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp.freemail.hu (Postfix) with ESMTPSA id 4XXpw03kzpzGpM;
- Tue, 22 Oct 2024 12:54:24 +0200 (CEST)
-Message-ID: <ab46ecca-15df-4a01-bbc2-41b50ac668fe@freemail.hu>
-Date: Tue, 22 Oct 2024 12:52:46 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XXqGl4fQFz9sRJ;
+ Tue, 22 Oct 2024 13:10:39 +0200 (CEST)
+Message-ID: <e22fc564-f968-471e-959a-f115ca8babb9@denx.de>
+Date: Tue, 22 Oct 2024 13:10:38 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] imx9: Improve boot device auto-selection
-From: =?UTF-8?Q?Sz=C5=91ke_Benjamin?= <egyszeregy@freemail.hu>
-To: Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "sbabic@denx.de" <sbabic@denx.de>
-References: <20241013174120.1872-1-egyszeregy@freemail.hu>
- <PAXPR04MB845929FE951FCEC327F9F54788442@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <CAOMZO5DBDDYr+9K8rq56L-=5EGWDNXY514rz5zoqPdXOQ2x=jw@mail.gmail.com>
- <93d2989d-7d55-40a3-a44b-ef64e1feb511@freemail.hu>
-Content-Language: hu
-In-Reply-To: <93d2989d-7d55-40a3-a44b-ef64e1feb511@freemail.hu>
+Subject: Re: [PATCH 01/13] doc: cyclic: remove reference to WATCHDOG_RESET
+To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+References: <20241003212802.3810-1-ravi@prevas.dk>
+ <20241003212802.3810-2-ravi@prevas.dk>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20241003212802.3810-2-ravi@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1729594465; 
- s=20181004; d=freemail.hu;
- h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding;
- l=1795; bh=geiPv7otegyla2px5LTd7qjvTboXCLJwzhvZWyvLqTc=;
- b=pzN87KSUTeMDpcRHGevpOCYJ1Oc2XXWAo/RxIsV7znHTHHyJ3a7/exRUXSbfyBuC
- f8nk9S/Py7w33+CmKCXlb0HKgFvYRfz2GG7ERodjr4uTopuJ9rttx5hMnV3A3cKz5SF
- pO+rJjcYXzYquEYALrwChSIj6zSgdp534bzSErcKU3d1rRHMh1Ic50jf+m5FA/gROWt
- TN4Y4sLmSINCQCF+PXIARQV9kyLgywNwS7O20mGLLkhTQd/dfI6hLz/GEyMV/R3O7wR
- sr1x3EipoVcatGauKaxhyKfnFqa3TNtKk09oMx0mslAhO0Axywq+w3UnhUgjMJRK8/0
- RSSXVcKadA==
+X-Rspamd-Queue-Id: 4XXqGl4fQFz9sRJ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,48 +70,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-2024. 10. 16. 21:41 keltezéssel, Szőke Benjamin írta:
-> 2024. 10. 16. 20:28 keltezéssel, Fabio Estevam írta:
->> Benjamin,
->>
->> On Sun, Oct 13, 2024 at 9:39 PM Peng Fan <peng.fan@nxp.com> wrote:
->>
->>> Would you please give more background on this, I not got
->>> the point on why doing this?
->>
->> I also do not understand the reason for this change. It is not clear
->> by reading the commit log.
->>
->> Please describe what exactly fails to work before the patch and what
->> works after your change.
->>
->>>> +#ifndef CONFIG_SYS_MMC_ENV_DEV
->>>> +#define CONFIG_SYS_MMC_ENV_DEV 0
->>>> +#endif
->>
->> I don't understand the need for this.
->>
->> env/Kconfig has a default 0 for SYS_MMC_ENV_DEV.
+On 10/3/24 23:27, Rasmus Villemoes wrote:
+> WATCHDOG_RESET is no more. Replace the reference by schedule().
 > 
+> While here, rearrange the sentence a bit so that "cyclic_run()"
+> becomes the object and "the main function responsible for calling all
+> registered cyclic functions" a parenthetical rather than the other way
+> around, which at least to me makes it more readable.
 > 
-> You can use only one of config from CONFIG_ENV_IS_IN_MMC=y and 
-> CONFIG_ENV_IS_NOWHERE=y in U-boot config in same time.
-> 
-> If you like to use CONFIG_ENV_IS_NOWHERE=y, these codes in the patched source 
-> files will be not part of the build, and the autodetection of the boot mode will 
-> never work. At the moment it works only if you use CONFIG_ENV_IS_IN_MMC=y in U- 
-> boot config but it should work also in case of use CONFIG_ENV_IS_NOWHERE=y 
-> option also.
-> 
-> Other poblem is that CONFIG_SYS_MMC_ENV_DEV can be defined only if 
-> CONFIG_ENV_IS_IN_MMC=y is active in config of U-boot. It means, it needs to be 
-> manually defined in case when CONFIG_ENV_IS_NOWHERE=y is used, because the codes 
-> in the patched sources like to use it as a return value in some error/default 
-> cases.
-> 
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 
-Did you get what is the problem?
+Reviewed-by: Stefan Roese <sr@denx.de>
 
-https://github.com/u-boot/u-boot/commit/636c95f82b9a184a9b45a8965488cea2dedcd78e
-The implementation of mmc_get_env_dev() in arch/arm/mach-imx/imx9/soc.c is not 
-able to support CONFIG_ENV_IS_NOWHERE=y using. It was fixed in my patch.
+Thanks,
+Stefan
+
+> ---
+>   doc/develop/cyclic.rst | 10 +++++-----
+>   1 file changed, 5 insertions(+), 5 deletions(-)
+> 
+> diff --git a/doc/develop/cyclic.rst b/doc/develop/cyclic.rst
+> index 893c269099a..6f1da6f0d9b 100644
+> --- a/doc/develop/cyclic.rst
+> +++ b/doc/develop/cyclic.rst
+> @@ -49,8 +49,8 @@ executed all 10ms.
+>   How is this cyclic functionality integrated /  executed?
+>   --------------------------------------------------------
+>   
+> -The cyclic infrastructure integrates the main function responsible for
+> -calling all registered cyclic functions cyclic_run() into the common
+> -WATCHDOG_RESET macro. This guarantees that cyclic_run() is executed
+> -very often, which is necessary for the cyclic functions to get scheduled
+> -and executed at their configured periods.
+> +The cyclic infrastructure integrates cyclic_run(), the main function
+> +responsible for calling all registered cyclic functions, into the
+> +common schedule() function. This guarantees that cyclic_run() is
+> +executed very often, which is necessary for the cyclic functions to
+> +get scheduled and executed at their configured periods.
+
+Viele Grüße,
+Stefan Roese
+
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
