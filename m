@@ -4,69 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8648CD2C548
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 12:57:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA36D2C54B
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 13:06:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F281D881C1;
-	Tue, 22 Oct 2024 14:57:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D217C88EFB;
+	Tue, 22 Oct 2024 15:06:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cxxCfYfa";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y+Rashyp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E15C488EBA; Tue, 22 Oct 2024 14:57:44 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E048888F31; Tue, 22 Oct 2024 15:06:35 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACDCF80245
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 14:57:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F412F881C1
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 15:06:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49MCvfYe013682;
- Tue, 22 Oct 2024 07:57:41 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729601861;
- bh=pb+aslfJ2aWkKXgD/2byAU/+jzSJJAEMQEcR6a2GQtk=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=cxxCfYfaZrkraHawHZeqXkZJh6IV/iJuzxZFZaXTkY6ujc2Qo6+FV9zAnpndjP0UF
- hz3FIskTvPzqfwuHFc/HZUwsrsyJZXH3eg0ToQcCAJwcT4hYjjnRhsxkkXMAI1U1wQ
- qhdQExPa/yf3SD+hDzkIDX1VxaIRU10p+78Yb9ts=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49MCve0h071688
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 22 Oct 2024 07:57:41 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
- Oct 2024 07:57:40 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 22 Oct 2024 07:57:40 -0500
-Received: from [10.249.132.3] ([10.249.132.3])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49MCvavR094219;
- Tue, 22 Oct 2024 07:57:37 -0500
-Message-ID: <d2838e7a-4ace-46a9-b40e-6a90b89a5f64@ti.com>
-Date: Tue, 22 Oct 2024 18:27:36 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-539fb49c64aso7894726e87.0
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 06:06:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729602392; x=1730207192; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uP9XucXOx5JqZOSjrhnWMEaqJvgx5qKja//0fhhqprw=;
+ b=y+Rashyprnp0OmTQ0LgRldKD62/evr5oWxP/NmZx6F7RxvBUafhSVkfatMoESkmzr2
+ nPVvNaaUarMuj+Kq9tu9db5VWyH0JqIyGEauEfpEiMkB81eb/AKL/34NLJZcMjLLZ5h/
+ YSq24fWtnCnKEhGdSYqw/tg8rMdDgAEMBHiaHcuAMpmCTFLahklufqO5jjCb402+KjOk
+ 0kQEaWFXCSBnpZvM25JmhUSg+wTAoZEkPBiktlrCCW6z6nDVNbtQ1MgN3iduJniEErwT
+ m9v5ZmLbDUNJchUyttb0HSxYba+ZwojCRfMrxs/aObEtnJ2QsffabdQ1ZxRMUy5PR/cm
+ QO8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729602392; x=1730207192;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uP9XucXOx5JqZOSjrhnWMEaqJvgx5qKja//0fhhqprw=;
+ b=ET586sLILAOLQwA6GZ3sZBBpKq1m2F0SSF8ZtBEh7ti9zwTphPccUQEZyI1LjnHCYh
+ foLr+gDYOMnliYKzfJ+TGXZRALW5ihN6zi/kKWf0VOcoJWemXTRmHbOi4vrdblRzEQ4w
+ CmfT9sQym6LfaiO2ngeFmLp7oTZp1iMahcTcE5gQO3UNtMVVDU7h75XHXEmfQbpWf5rR
+ InqI2qL1xlGOB7ATFbfGg9wOaceVOph5D9gGQUmmkGqCbtRK2XLWZgHUVIboV9Nbaf0q
+ CdHsyTlnGfua8OSi8qNdIeb+O5XhpRDzHQT6oKBmF1dYSFDrRJdC5MYMHApUZLWyVU9n
+ QCCg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUySqDgLxglBq0VHxYozHn2Ntnwvp+QaPTmVg10yqb+PLb1BWiK/Rrwuucu/Gm+6ZyOWK3pvG0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyDuM+asmk/aaLfNKPgKs0G6874+gF0vuOs8BsW1Z26IY4pwKbE
+ 16PJM7lq9cAEsdrkZtfe0u2/y6N/CeSwFgrtGQxpQjir/L7XaNpxmxcHgPah74jRP4HIVPlgnMy
+ lHqwv1NDTFHR39360j7UCNBx4EnmMYSvMNwaz+g==
+X-Google-Smtp-Source: AGHT+IFx3QLZBor8cjLoEWRtRMYie+2fD9FZTqkyZn++NANg/VRA3ppHjJSg/nTJO1m80KaDClo8OtR40YBXINy7EeI=
+X-Received: by 2002:a05:6512:1294:b0:536:53e3:feae with SMTP id
+ 2adb3069b0e04-53a15340876mr13309542e87.11.1729602391898; Tue, 22 Oct 2024
+ 06:06:31 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] arm: mach-k3: j721e-init.c: J7200: Add support for
- CONFIG_K3_OPP_LOW
-To: Neha Malcom Francis <n-francis@ti.com>, <u-boot@lists.denx.de>,
- <trini@konsulko.com>
-CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>
-References: <20241017062911.2241167-1-a-limaye@ti.com>
- <20241017062911.2241167-5-a-limaye@ti.com>
- <e05c19c9-47ef-4a39-896b-c8d936c6eca4@ti.com>
-Content-Language: en-US
-From: "Limaye, Aniket" <a-limaye@ti.com>
-In-Reply-To: <e05c19c9-47ef-4a39-896b-c8d936c6eca4@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241018142235.715571-1-ilias.apalodimas@linaro.org>
+ <20241018142235.715571-6-ilias.apalodimas@linaro.org>
+In-Reply-To: <20241018142235.715571-6-ilias.apalodimas@linaro.org>
+From: =?UTF-8?B?SsOpcsO0bWUgRm9yaXNzaWVy?= <jerome.forissier@linaro.org>
+Date: Tue, 22 Oct 2024 13:53:16 +0200
+Message-ID: <CA+NB=mZLDY0yRsOBfYAucDhZ-02hx=w6iNJbRLJcUy1ZJZOirQ@mail.gmail.com>
+Subject: Re: [PATCH 5/6] configs: Enable htts for wget on qemu arm64
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Wei Ming Chen <jj251510319013@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,138 +100,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Le ven. 18 oct. 2024, 16:23, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+a =C3=A9crit :
 
+> QEMU already has an lwip variant of a defconfig. That defconfig
+> is also configured with mbedTLS by default. So let's enable the
+> remaining config options to enable wget for https:// as well
+> and test that codepath in the CI
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  configs/qemu_arm64_lwip_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/configs/qemu_arm64_lwip_defconfig
+> b/configs/qemu_arm64_lwip_defconfig
+> index d3d8ef16e668..754c770c33fc 100644
+> --- a/configs/qemu_arm64_lwip_defconfig
+> +++ b/configs/qemu_arm64_lwip_defconfig
+> @@ -7,3 +7,4 @@ CONFIG_NET_LWIP=3Dy
+>  CONFIG_CMD_DNS=3Dy
+>  CONFIG_CMD_WGET=3Dy
+>  CONFIG_EFI_HTTP_BOOT=3Dy
+> +CONFIG_WGET_HTTPS=3Dy
+> --
+> 2.45.2
+>
 
-On 10/17/2024 4:10 PM, Neha Malcom Francis wrote:
-> Hi Aniket
-> 
-> On 17/10/24 11:59, Aniket Limaye wrote:
->> From: Reid Tonking <reidt@ti.com>
->>
->> The default j7200 devicetree and k3_avs driver set 2GHz/1GHz frequency
->> for A72/MSMC clks and the OPP_NOM voltage.
->>
->> J7200 SOCs may support OPP_LOW Operating Performance Point:
->> 1GHz/500MHz clks for A72/MSMC and OPP_LOW AVS voltage read from efuse.
->>
->> Hence, add a config check to select OPP_LOW specs:
->> - Check if OPP_LOW AVS voltage read from efuse is valid.
->> - Update the clock frequencies in devicetree.
->> - Program the OPP_LOW AVS voltage for VDD_CPU.
->>
->> Signed-off-by: Reid Tonking <reidt@ti.com>
->> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
->> ---
->>   arch/arm/mach-k3/j721e/j721e_init.c | 45 ++++++++++++++++++++++++++++-
->>   drivers/misc/k3_avs.c               |  5 ++++
->>   2 files changed, 49 insertions(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/ 
->> j721e/j721e_init.c
->> index e9ed8cb267c..0620759c36c 100644
->> --- a/arch/arm/mach-k3/j721e/j721e_init.c
->> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
->> @@ -19,6 +19,7 @@
->>   #include <fdtdec.h>
->>   #include <mmc.h>
->>   #include <remoteproc.h>
->> +#include <k3-avs.h>
->>   #include "../sysfw-loader.h"
->>   #include "../common.h"
->> @@ -147,6 +148,32 @@ static void setup_navss_nb(void)
->>       writel(NB_THREADMAP_BIT1, 
->> (uintptr_t)NAVSS0_NBSS_NB1_CFG_NB_THREADMAP);
->>   }
->> +int fix_freq(const void *fdt)
->> +{
->> +        int node, ret;
->> +        u32 opp_low_freq[3];
->> +
->> +        node = fdt_node_offset_by_compatible(fdt, -1, "ti,am654-rproc");
->> +            if (node < 0) {
->> +                printf("%s: A72 not found\n", __func__);
->> +                return node;
->> +            }
-> 
-> Indentation seems to be off.
-> 
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
-Ahh noted... will correct in v2.
-
->> +
->> +        /* j7200 opp low values according to data sheet */
->> +        opp_low_freq[0] = cpu_to_fdt32(1000000000); /* 202-2 -> 
->> A72SS0_CORE0_0_ARM_CLK */
->> +        opp_low_freq[1] = cpu_to_fdt32(200000000); /* 61-1 -> 
->> GTC0_GTC_CLK */
->> +        opp_low_freq[2] = cpu_to_fdt32(500000000); /* 4-1 -> 
->> A72SS0_CORE0_MSMC_CLK */
->> +
->> +        ret = fdt_setprop((void *)fdt, node, "assigned-clock-rates",
->> +                  opp_low_freq, sizeof(opp_low_freq));
->> +            if (ret) {
->> +                printf("%s: Can not set value\n", __func__);
->> +                return ret;
->> +            }
->> +
->> +        return 0;
->> +}
->> +
->>   /*
->>    * This uninitialized global variable would normal end up in 
->> the .bss section,
->>    * but the .bss is cleared between writing and reading this 
->> variable, so move
->> @@ -301,8 +328,24 @@ void board_init_f(ulong dummy)
->>   #if defined(CONFIG_CPU_V7R) && defined(CONFIG_K3_AVS0)
->>       ret = uclass_get_device_by_driver(UCLASS_MISC, 
->> DM_DRIVER_GET(k3_avs),
->>                         &dev);
->> -    if (ret)
->> +    if (!ret) {
->> +        if (IS_ENABLED(CONFIG_K3_OPP_LOW)) {
->> +            ret = k3_check_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
->> +            if (!ret) {
->> +                ret = fix_freq(gd->fdt_blob);
->> +                if (ret)
->> +                    printf("Failed to set OPP_LOW frequency\n");
->> +
->> +                ret = k3_avs_set_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
->> +                if (ret)
->> +                    printf("Failed to set OPP_LOW voltage\n");
->> +            } else {
->> +                printf("Failed to enable K3_OPP_LOW\n");
->> +            }
->> +        }
->> +    } else {
->>           printf("AVS init failed: %d\n", ret);
->> +    }
->>   #endif
->>   #if defined(CONFIG_K3_J721E_DDRSS)
->> diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
->> index 90cd9dfe7f9..932b355a5c1 100644
->> --- a/drivers/misc/k3_avs.c
->> +++ b/drivers/misc/k3_avs.c
->> @@ -121,6 +121,11 @@ static int k3_avs_program_voltage(struct 
->> k3_avs_privdata *priv,
->>       if (!vd->supply)
->>           return -ENODEV;
->> +    if (!volt) {
->> +        dev_err(priv->dev, "Fuse is not set for selected opp %d\n", 
->> opp_id);
-> 
-> s/Fuse/Efuse
-
-Yep, will update.
-
-Thanks,
-Aniket
-
-
->> +        return -EINVAL;
->> +    }
->> +
->>       vd->opp = opp_id;
->>       vd->flags |= VD_FLAG_INIT_DONE;
-> 
-
+>
