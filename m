@@ -4,80 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABFFDD1CDC7
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 09:19:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 603FCD1CDC7
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 09:19:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 302C988F50;
-	Tue, 22 Oct 2024 11:19:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id E9A8788F50;
+	Tue, 22 Oct 2024 11:19:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=devpi.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="2fLBzyZ9";
+	dkim=pass (2048-bit key; unprotected) header.d=devpi.de header.i=@devpi.de header.b="TSHBW9I9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F182A88F6B; Tue, 22 Oct 2024 11:19:03 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1449088F8E; Tue, 22 Oct 2024 11:19:47 +0200 (CEST)
+Received: from smtp052.goneo.de (smtp5.goneo.de [IPv6:2001:1640:5::8:30])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF3E188F4B
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 11:19:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A961388F4B
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 11:19:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=none (p=none dis=none) header.from=devpi.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-431688d5127so30528665e9.0
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 02:19:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729588741; x=1730193541;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=1FO/ZjVbOHcv5nPN1JpPwS4t8Ca0vxFn5UIhvi4WibA=;
- b=2fLBzyZ98ABwzGW+HcPCm4o/gAynSBHTG9WiYgGglDd8+7VprReu+1Z7nJWvIPT1Aj
- /v/Twp1yr/Fhj3PYKPiz/12a5nRauoIFMDp+1Pn7rbRWTRr9nimxIJ6sN0Ak41Q/hOk3
- MG876UEY70d8dCT48TyeTXppeYww+yd1j62LKVw/cZGmYy1rarWH2AdA/IxZLvdeLke2
- DaG/dlAqWeu8YdL0ed0xrS1MCuPWI9a9gSdAGGEuIdYnSnVurD6O1USeDM6ewiZfPAuF
- 2pZQOFVz3dPObDrl9SqeAWCx0iDrRczH28Qj5NOdOeRu0PDdProO347YAYEgjwuyixf+
- 9IdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729588741; x=1730193541;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1FO/ZjVbOHcv5nPN1JpPwS4t8Ca0vxFn5UIhvi4WibA=;
- b=eu5IQKpbDxtEBp1bRZKWN0WPTuw82kGyBZ99qiNeUhak/s9wqm6fiEsLYheQRIIJ4f
- TOm97ctNhCEvEANkDZZQ0F5REMrFAMqZVAYohl6o6FKm+Mdi8uey0RKip3nOhSUc/Eok
- LYZy0kWAOtXVgEaXnxXHf4UYNzDDXNLWf2UibIctDadpfRwWdTBYvBJF6nqc6rCyYiw3
- 3kLQnTKw+0bB3YMv2Ex7KsUmaRJbymqSCZHcXjTbO5S4XDj/Bw6LB6/TpnLQoJ9DgSa0
- FFXNfDYAaU3wzwtk9A5x/BjuzMfxwYCA2Z3MRXC8dCrfsvI8NTgqrEqnjjqqbT2BzN+b
- grKA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU5PQ7ailFURtOuugS4jS95/2tB0uxCl3jy6jPr7CE8ELnVV0QJG4NDHIGia33fidyJc5/FxYk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yylh0BiUiH6FhMZqND+IFifDQ3XMlNZfwibxU24x9HenBZs9K0I
- deqW+YzSWp5y6Gxlwmna8voegNr8VjCEbig8TvTfirDGWAMY71AcpjCwkmUvsiA=
-X-Google-Smtp-Source: AGHT+IEEylCyV/xDAcHHos9GvulqZ0X5UnHUkxXTGLnrD799WBbavsQywPQ56tKbrFbACT7jAZOqQw==
-X-Received: by 2002:a05:600c:4f0c:b0:431:5522:e009 with SMTP id
- 5b1f17b1804b1-43161631ee9mr105491895e9.12.1729588741340; 
- Tue, 22 Oct 2024 02:19:01 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4316f57fc17sm81078105e9.15.2024.10.22.02.19.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Oct 2024 02:19:00 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: Guillaume La Roque <glaroque@baylibre.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 2/3] image: android: do not boot XIP when kernel is
- compressed
-In-Reply-To: <20241017-topic-fastboot-fixes-mkbootimg-v2-2-c3927102d931@linaro.org>
-References: <20241017-topic-fastboot-fixes-mkbootimg-v2-0-c3927102d931@linaro.org>
- <20241017-topic-fastboot-fixes-mkbootimg-v2-2-c3927102d931@linaro.org>
-Date: Tue, 22 Oct 2024 11:18:58 +0200
-Message-ID: <87bjzcwl4t.fsf@baylibre.com>
-MIME-Version: 1.0
-Content-Type: text/plain
+ spf=pass smtp.mailfrom=lehmanju@devpi.de
+Received: from hub1.goneo.de (hub1.goneo.de [IPv6:2001:1640:5::8:52])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by smtp5.goneo.de (Postfix) with ESMTPS id 67A0E240E52;
+ Tue, 22 Oct 2024 11:19:44 +0200 (CEST)
+Received: from hub1.goneo.de (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPS id 7FA73240560;
+ Tue, 22 Oct 2024 11:19:42 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=devpi.de; s=DKIM001;
+ t=1729588782;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=BI/vxBlDasbAsTcXgd96XqxigBK32oUODsynFAKSSBE=;
+ b=TSHBW9I9NNcFQZKmfHmQ2raI6D1plwDjQlWemaf446zcDDSt4p87g2ahkR5M0CLP0UOoe5
+ DnnWoUEGesiI4l+f0aeEW6EqEyHKUzhN9Gs40qbbUDpFjWBYtUl1q0ZZm/JyLqnuw4hq4K
+ 7xu+/C7mEpMnhBpYxmHbwFqffVTtv1zfKEJkH7xgBB1ToHwHiLiHzTkDCKNr6UR/P863VN
+ Xu+Jz5KjesE0VHELNePxYvSQAHNCJGmmcrXd9iYdmcYllsbFcvPRJdq/yhj+mp9xW0bFBA
+ vzcocnyNizYkRin/4vlonQ8pevKzLcxhKlx2Ipc6+b2xTk3PwUmvDIx8c4u4TQ==
+Received: from smtpclient.apple (uhh-wlan-fo-134-100-17-56.rrz.uni-hamburg.de
+ [134.100.17.56])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPSA id 432822402D7;
+ Tue, 22 Oct 2024 11:19:42 +0200 (CEST)
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+From: Julius Lehmann <lehmanju@devpi.de>
+Mime-Version: 1.0 (1.0)
+Subject: Re: [PATCH] scsi: fix disk capacity too small by one sector
+Date: Tue, 22 Oct 2024 11:19:31 +0200
+Message-Id: <2AAED6E9-717D-42DB-A375-AC0793742E71@devpi.de>
+References: <20241022033515.GA3053232@bill-the-cat>
+Cc: Simon Glass <sjg@chromium.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
+In-Reply-To: <20241022033515.GA3053232@bill-the-cat>
+To: Tom Rini <trini@konsulko.com>
+X-Mailer: iPad Mail (22A3370)
+X-Rspamd-UID: 188e8e
+X-Rspamd-UID: 545208
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,88 +87,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
 
-Thank you for the patch.
 
-On jeu., oct. 17, 2024 at 16:44, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+> Am 22.10.2024 um 05:35 schrieb Tom Rini <trini@konsulko.com>:
+>=20
+> =EF=BB=BFOn Mon, Oct 14, 2024 at 06:06:35PM +0200, Julius Lehmann wrote:
+>=20
+>> SCSI READ CAPACITY reports the address of the last
+>> block and the block size. The total number of blocks
+>> is thus last block address plus one.
+>>=20
+>> ---
+>> This patch fixes the disk size reported by scsi. Up until now, the report=
+ed disk size is too small by one sector. Read/Write operations on other sect=
+ors have not been affected. Trying to partition scsi backed storage via ums h=
+as resulted in "storage too small" errors.
+>>=20
+>> doc: https://linux.die.net/man/8/sg_readcap
+>>=20
+>> Signed-off-by: Julius Lehmann <lehmanju@devpi.de>
+>> ---
+>> drivers/scsi/scsi.c | 2 ++
+>> 1 file changed, 2 insertions(+)
+>>=20
+>> diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
+>> index 51cacf3479236be6c6ea3e7d15b87e03f10e7f3a..bcdeda95ed1514119057cc679=
+74fec465cf5672c 100644
+>> --- a/drivers/scsi/scsi.c
+>> +++ b/drivers/scsi/scsi.c
+>> @@ -309,6 +309,7 @@ static int scsi_read_capacity(struct udevice *dev, st=
+ruct scsi_cmd *pccb,
+>>             ((unsigned long)pccb->pdata[5] << 16) |
+>>             ((unsigned long)pccb->pdata[6] << 8)  |
+>>             ((unsigned long)pccb->pdata[7]);
+>> +        *capacity +=3D 1;
+>>        return 0;
+>>    }
+>>=20
+>> @@ -332,6 +333,7 @@ static int scsi_read_capacity(struct udevice *dev, st=
+ruct scsi_cmd *pccb,
+>>            ((uint64_t)pccb->pdata[5] << 16) |
+>>            ((uint64_t)pccb->pdata[6] << 8)  |
+>>            ((uint64_t)pccb->pdata[7]);
+>> +    *capacity +=3D 1;
+>>=20
+>>    *blksz =3D ((uint64_t)pccb->pdata[8]  << 56) |
+>>         ((uint64_t)pccb->pdata[9]  << 48) |
+>>=20
+>=20
+> This leads to this failure in CI:
+> https://source.denx.de/u-boot/u-boot/-/jobs/926468#L288
+>=20
 
-> When trying to boot an android boot image with a compressed
-> kernel, if the kernel is used in-place because it was created
-> with mkbootimg, the space will be too small to properly
-> uncompress.
->
-> Take in account the compressed state, and if compressed
-> use the kernel_addr_r which should be big enough.
->
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+thx for the hint. looks like the test might need some updating, since the ex=
+pected output has changed. will fix it with the next iteration =E2=80=A6 onc=
+e i fixed all the necessary python dependencies to run the test locally
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> --
+> Tom
+> <signature.asc>
 
-> ---
->  boot/image-android.c | 20 +++++++++++++++-----
->  1 file changed, 15 insertions(+), 5 deletions(-)
->
-> diff --git a/boot/image-android.c b/boot/image-android.c
-> index bb5f4f84487d40e0cf24dc3b57042993967e66d5..3adcc69a392f74ae64f3fbcf1b85204f60ac9aff 100644
-> --- a/boot/image-android.c
-> +++ b/boot/image-android.c
-> @@ -208,7 +208,8 @@ bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
->  	return true;
->  }
->  
-> -static ulong android_image_get_kernel_addr(struct andr_image_data *img_data)
-> +static ulong android_image_get_kernel_addr(struct andr_image_data *img_data,
-> +					   ulong comp)
->  {
->  	/*
->  	 * All the Android tools that generate a boot.img use this
-> @@ -221,8 +222,11 @@ static ulong android_image_get_kernel_addr(struct andr_image_data *img_data)
->  	 *
->  	 * Otherwise, we will return the actual value set by the user.
->  	 */
-> -	if (img_data->kernel_addr  == ANDROID_IMAGE_DEFAULT_KERNEL_ADDR)
-> -		return img_data->kernel_ptr;
-> +	if (img_data->kernel_addr  == ANDROID_IMAGE_DEFAULT_KERNEL_ADDR) {
-> +		if (comp == IH_COMP_NONE)
-> +			return img_data->kernel_ptr;
-> +		return env_get_ulong("kernel_addr_r", 16, 0);
-> +	}
->  
->  	/*
->  	 * abootimg creates images where all load addresses are 0
-> @@ -258,11 +262,14 @@ int android_image_get_kernel(const void *hdr,
->  	struct andr_image_data img_data = {0};
->  	ulong kernel_addr;
->  	const struct legacy_img_hdr *ihdr;
-> +	ulong comp;
->  
->  	if (!android_image_get_data(hdr, vendor_boot_img, &img_data))
->  		return -EINVAL;
->  
-> -	kernel_addr = android_image_get_kernel_addr(&img_data);
-> +	comp = android_image_get_kcomp(hdr, vendor_boot_img);
-> +
-> +	kernel_addr = android_image_get_kernel_addr(&img_data, comp);
->  	ihdr = (const struct legacy_img_hdr *)img_data.kernel_ptr;
->  
->  	/*
-> @@ -359,11 +366,14 @@ ulong android_image_get_kload(const void *hdr,
->  			      const void *vendor_boot_img)
->  {
->  	struct andr_image_data img_data;
-> +	ulong comp;
->  
->  	if (!android_image_get_data(hdr, vendor_boot_img, &img_data))
->  		return -EINVAL;
->  
-> -	return android_image_get_kernel_addr(&img_data);
-> +	comp = android_image_get_kcomp(hdr, vendor_boot_img);
-> +
-> +	return android_image_get_kernel_addr(&img_data, comp);
->  }
->  
->  ulong android_image_get_kcomp(const void *hdr,
->
-> -- 
-> 2.34.1
+Regards
+Julius=
+
