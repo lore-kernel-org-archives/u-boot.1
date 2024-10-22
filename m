@@ -4,85 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38AABD2C541
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 12:16:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73CCCD2C543
+	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 12:16:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4CBF88F4B;
-	Tue, 22 Oct 2024 14:16:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B348488F99;
+	Tue, 22 Oct 2024 14:16:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fMkBD8Ya";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KY9ybxAR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B91C88E89; Tue, 22 Oct 2024 14:16:01 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id E973A88969; Tue, 22 Oct 2024 14:16:05 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF35F88969
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 14:15:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0199E88969
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 14:16:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a99f629a7aaso1004695466b.1
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 05:15:58 -0700 (PDT)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-539f2b95775so6568458e87.1
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 05:16:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729599358; x=1730204158; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729599361; x=1730204161; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=c2XAtq9AzT/LCywNY5QGTkudOjXzpm7bWK5woKhYzMo=;
- b=fMkBD8Yap476VU8/2DkPxeMnF9KBqDhUENakvXrB934QtwzyG4i/epZ5TnOOv5z0zb
- EKdUJtHdVnCmFhfCIo9flnFp/g26VQyDddaTeJXjsq1DG2KILkMCPZpH0CXuWR01/kMn
- 916rcYr4R2Xcfdw5crOAeEBRJlbi62sxPJzUY=
+ bh=yNCDYsBPe0Jkk0AlmG4RiF9c3o5m1g4nrO6GN7rOBxQ=;
+ b=KY9ybxARbjAFcAngKc2TxKX6QbF4VzotyyDJdMlosglhdJlHsc5kuRBgQnziYsDA+e
+ CI23VAqJQCdo2oj8ARjyqBfgjkgcJ3EgRBcWpV5+HvAZmWicueDA8HhNj7X/Q5ZuDnDc
+ ONADR5d4Hxw96yBFIuR4ZEBGnRYsEO5Zr023E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729599358; x=1730204158;
+ d=1e100.net; s=20230601; t=1729599361; x=1730204161;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=c2XAtq9AzT/LCywNY5QGTkudOjXzpm7bWK5woKhYzMo=;
- b=Sztqunqk2l/JByt3cHqSJaQFQfIO4iPN8Z0lU5Luji02FrKUwrcOSxPjRQnbtPVZ0d
- OicBTZE0QYhDB9vWGlt1KX7oreeIgD/gJcciCcprEExQhnGB+4QxKcQw0l5Iym29TsbC
- URQHo6j2GDRbR6Fd1JtWshDJkCsa8zFvqoZSI41TlbSpXP0sZhRS3MXl9cTctIRZvVKW
- RjeXn4gqKrJJYL2MoM0Djd0RuJZEHAb2f7jdFbI5AsQ6bhEMs+qhzEyfGjoNeSItcMQc
- GD8s7kQWLqOXT7mY9n+7swS7enehNwHXCn5fs7YODRTCmPThxyVcL6tjRgnOLJuCXuYj
- tn+w==
-X-Gm-Message-State: AOJu0Yx3Zmw3DOtYdJ5TM3BtF6njTN0mL6Yhxts/FlYmEwUtLOAt0e7T
- IHVBigL4+pTcCyh2L8MD36tN2yQJlyZQa27UiHbPpadi3JHGNHaftbPDj/xXKvoxgcuTpEiK0C5
- L5LplpFOdX6CtoizIjztJoY5V+nQgrNiBD4Ds
-X-Google-Smtp-Source: AGHT+IHzoILtJgkf41qeGswbh2q+YCFbfIY1ZIqAeGdNstWSqQeIdP3HAN+pEeFIdacoyEzPMJvEQ5CAhe2nl0BAzSA=
-X-Received: by 2002:a17:907:86a1:b0:a99:57c3:1fbb with SMTP id
- a640c23a62f3a-a9aaa5190b8mr318688766b.9.1729599357674; Tue, 22 Oct 2024
- 05:15:57 -0700 (PDT)
+ bh=yNCDYsBPe0Jkk0AlmG4RiF9c3o5m1g4nrO6GN7rOBxQ=;
+ b=qSZtWLE7bCZU6FS6Ghffok5V6t3mHUMP2uFA6TbOdFcgSpl2yBcYELSNDufc0abjrY
+ +dFPiw3+m3UNhC2lqNunt6p2+YgvijpjfE1he2GWex5rhqw3iSoLUPKpfBHQev++8Y3g
+ m6gi9bal1Gs+hVsrzXXAUrYC7Zq//Fb1rwd84ZTteIbfwtMDv3dnRZmM3RuZdXa6vIpM
+ XolFU0z8oSM34tbVNsawdRKtB8pRrZxCOTnol6RlJZs9VZRFt4e6ovFsT4IVRc46hc7J
+ d+E5kY17dqlWRja4IbOE3tfmY5qYPFpElKWNRuc7hxM1I0AJJFR7SNrU7X/V3xvN8b3n
+ XoKQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX24g3AZWS6L8jyBNVaJPv3SOtgyhvQyShOY3GK9dWh8sihsKxnZE+pU7Izpiula9uxx+14cj8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx2Qpz7S1iZ6GznhAbaQuw/vqTcU+KEVGR47ecY+e7rfftpd9Cg
+ RpSlsLq5Fd24gMTVEwvOBTxQnoZ5Y9pja4nYOdQkAXxyCgqLb6QlZi7Z4ffEOBF5eR97Vf4RCKF
+ 5/GluesCAGFDEPeHbW27Po6FiO1r2XfkYP8UT
+X-Google-Smtp-Source: AGHT+IElDEvTr104OzYQiSWYjXzFLqVLeDdR/85V9cjjpueIQo9urCLWHbsWR/6vbSQyYVLl0hGDT7qcmtUr6f+7NeM=
+X-Received: by 2002:a05:6512:1091:b0:539:94f5:bf with SMTP id
+ 2adb3069b0e04-53a154eb367mr12340140e87.59.1729599361264; Tue, 22 Oct 2024
+ 05:16:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241019152434.1017394-1-sjg@chromium.org>
- <20241019152434.1017394-7-sjg@chromium.org>
- <20241019175121.GA4959@bill-the-cat>
- <CAFLszTgBzr_nYtFKFEuHBLBUUF8qq92y+i=bzsVaKsHyt-990Q@mail.gmail.com>
- <20241021173253.GO4959@bill-the-cat>
-In-Reply-To: <20241021173253.GO4959@bill-the-cat>
+References: <20241016060523.888804-1-patrick.rudolph@9elements.com>
+ <20241016060523.888804-25-patrick.rudolph@9elements.com>
+ <CAFLszTh4Z8p-8d8ASrpUTnNdDhmijDm8fcct-wDWR1nRFxs5JA@mail.gmail.com>
+ <CALNFmy1=R4vp6S3H3a_3HTDjGufDxu+Heo-vk=GRjb0aj0z0Dg@mail.gmail.com>
+ <CAFLszTjTA98Re5rWXHpMQZADXU7uLbCayxNTtugYRxHZaFUL_w@mail.gmail.com>
+ <CALeDE9P04s7uX0Egq+seDbHyn_QXgz+NWPHtJ2W1CGKtATPLsw@mail.gmail.com>
+In-Reply-To: <CALeDE9P04s7uX0Egq+seDbHyn_QXgz+NWPHtJ2W1CGKtATPLsw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 22 Oct 2024 14:15:46 +0200
-Message-ID: <CAFLszThgsF5BL8aSGozA3nAeox=g8bVARmSaBFedM=dbLT=UWA@mail.gmail.com>
-Subject: Re: [PATCH v7 6/7] test: efi: boot: Set up an image suitable for EFI
- testing
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, 
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Yang Xiwen <forbidden405@outlook.com>
+Date: Tue, 22 Oct 2024 14:15:50 +0200
+Message-ID: <CAFLszTgE+fjXGXFvJ0KWdw=q8CP_53kfWq0nrGZzJzyHJhdHFA@mail.gmail.com>
+Subject: Re: [PATCH v9 24/37] common: Enable BLOBLIST_TABLES on arm
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de, 
+ linux-kernel@vger.kernel.org, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,71 +89,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Peter,
 
-On Mon, 21 Oct 2024 at 19:32, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 21 Oct 2024 at 19:57, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
-> On Mon, Oct 21, 2024 at 08:31:10AM +0200, Simon Glass wrote:
-> > Hi Tom,
+> > > > > Allow to use BLOBLIST_TABLES on arm to store ACPI or other tables.
+> > > > >
+> > > > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > > > > Cc: Tom Rini <trini@konsulko.com>
+> > > > > ---
+> > > > > Changelog v9:
+> > > > > - default to BLOBLIST_ALLOC on arm
+> > > > > - Move default for BLOBLIST_SIZE_RELOC up
+> > > > > ---
+> > > > >  common/Kconfig |  2 ++
+> > > > >  lib/Kconfig    | 15 +++++++++------
+> > > > >  2 files changed, 11 insertions(+), 6 deletions(-)
+> > > > >
+> > > >
+> > > > This is fine, but please disable it for snow since it needs the FIXED
+> > > > option for now.
+> > >
+> > > I cannot follow. What needs the FIXED option and what to disable?
+> > > I run this patch on the CI and test_py_sandbox tests are still working.
 > >
-> > On Sat, 19 Oct 2024 at 11:51, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Oct 19, 2024 at 09:24:33AM -0600, Simon Glass wrote:
-> > >
-> > > > Create a new disk for use with tests, which contains the new 'testapp'
-> > > > EFI app specifically intended for testing the EFI loader.
-> > > >
-> > > > Attach it to the USB device, since most testing is currently done with
-> > > > mmc.
-> > > >
-> > > > Initially this image will be used to test the EFI bootmeth.
-> > > >
-> > > > Fix a stale comment in prep_mmc_bootdev() while we are here.
-> > > >
-> > > > For now this uses sudo and a compressed fallback file, like all the
-> > > > other bootstd tests. Once this series is in, the patch which moves
-> > > > this to use user-space tools will be cleaned up and re-submitted.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > ---
-> > > > Here is the patch to avoid sudo and CI fallback:
-> > > >
-> > > > [1] https://patchwork.ozlabs.org/project/uboot/patch/
-> > > > 20240802093322.15240-1-richard@nod.at/
-> > > >
-> > > > (no changes since v1)
-> > > >
-> > > >  arch/sandbox/dts/test.dts           |   2 +-
-> > > >  test/boot/bootdev.c                 |  18 +++++++++-
-> > > >  test/boot/bootflow.c                |   2 +-
-> > > >  test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
-> > >
-> > > This I think best illustrates the problem with "BOOTSBOX.EFI". This
-> > > image will work for CI up until I can figure out how to get access to
-> > > free arm64 servers to run some tests on and then it will fail.
-> >
-> > I don't believe so. Why do you think that?
+> > I mean that snow cannot use BLOBLIST_ALLOC and needs BLOBLIST_FIXED so
+> > if you make ALLOC the default you need to change the default for snow.
 >
-> Because it includes the BOOTSBOX.EFI x86 binary file, and executes it?
-> Or did I miss where we update the contents to include that file as we
-> just built it (and so why have it included?) ?
+> Simon by snow do you mean the device (configs/snow_defconfig) snow, I
+> think Patrick doesn't know you're referring to what I believe to be a
+> device config.
 
-It works fine on x86 and I'm sure it will work fine on ARM as well.
-The file is built with the host compiler, just as U-Boot itself is.
-
->
-> > BTW it would be good to get CI running on arm. I believe Linaro might
-> > have some servers. I keep thinking of getting an Ampere device but so
-> > far have resisted as it is UEFI with closed firmware...
->
-> The problem is more, for GitLab, getting anyone to maintain and provide
-> a runner and then for Azure, waiting for Microsoft to include some in
-> the free tier. I think for the former, at one point I was thinking about
-> using one of Oracle's always-free tier ones and for a small enough
-> subset of things (like a host tools and a sandbox run) it might be fine.
-
-OK. I suspect Ilias might be able to help.
+Oh OK, yes that is what I mean. If it is too confusing I can send a
+fix-up patch after this series is applied.
 
 Regards,
-Simon
+SImon
