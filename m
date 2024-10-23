@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B78FCF5386
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:33:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 881CFCF5386
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:33:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F48F89346;
-	Wed, 23 Oct 2024 15:29:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7582F8935D;
+	Wed, 23 Oct 2024 15:29:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="X3IY9IwX";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="LgFQRFOH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC8A7892CF; Wed, 23 Oct 2024 15:29:16 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 2DF4D89350; Wed, 23 Oct 2024 15:29:18 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DB378933B
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:29:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE17589355
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:29:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43162cf1eaaso72183025e9.0
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:29:03 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4314b316495so66212525e9.2
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:29:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729690143; x=1730294943; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729690150; x=1730294950; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eNakn2lh4coir6wXgnAEYR67LhROU5Z5DBHvfE4imvQ=;
- b=X3IY9IwXkhROLRORYloDrk+JSJTbUAInUvPANGuT82AY7vYQP34pORC96Ku9DjFQ+r
- Q0uLFtNln/ieab1+ffHpajO5WClyfgrxOmNUCOE2AZRXWaKFKOE1/BFaYfJZiveNIn30
- 5PleVoqk0PywblyBniCIOd9kaaobmNLjKgODaKnWD7AgG8HUVk5bsrHvmKA/SZgGazkq
- vpqPq+olriauMM8bp+GdNFuKtb/lQ7l+pDEaAMqzVo+NAfxUgqqngE3ibAYwhli4hSji
- Ggxv35uOKdENJx7FOjADsCRrV13nWd0kb2QQmbDi1hdrM9rGB8te4vezasNocSDTnVCb
- zRbg==
+ bh=/xmQLXC0uaRjKkSflpCjZv+x+pRgOIXGpr7RR9pIpyM=;
+ b=LgFQRFOHdxTgVLpzn8tZvb3iLEMHVaSvBwu6F7HnKaO9xMp460E/WZNu3smFJeVhkY
+ shbCA2KN2SbUBhSD0QC4t1LAWIvKJiNNKS+MyctgBelxE6OKbCQX4N2e0QjsWmuMlVPJ
+ zcsZxP5qbKZNX/cqwPk3396wvNB2KEuI3UESuZ0fc6cubhQ6rD+9RXthCan7Gua5RA1D
+ y07qiXmAa1nSQiqx9J6AUogDfTu7V5HB13C9FPgOY+AV5Z8UENBXlYAj0bZ1zmUZ6MUP
+ g+ei3msLDjOIAQwB7eoufpzQ1ANEemus4VGsv3jOuPMZEeWvRUk2ggi9cjnuWawTSH0H
+ thwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729690143; x=1730294943;
+ d=1e100.net; s=20230601; t=1729690150; x=1730294950;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eNakn2lh4coir6wXgnAEYR67LhROU5Z5DBHvfE4imvQ=;
- b=BHJ4nZbAyaEjsn8Kax7fg0UFW9gnAu3y7KnxcM2DoG8+R1NjRI08O1oiq9AOVWuUpq
- Zfu5cpWqOqRx3yijmUe1ak8shlULLBxi9FXB5dvZ3xBQZCKRnhrY1N+RAi6fPLi98tc/
- Z1YfNAzEq5xRq5+eQ24prZfKDA0kfgb24UGBM7M2HT/wAjcvHSt2dReP3Ub8snt9VBLJ
- 4xa6dD44yGGiXUSjzruSKQrIdYiVKfL7BonKxVSSZli99NB4LpgTCRI7V6W0Do19RAeM
- gcLbpGyTa7/kWvPB3cFVlRyO6YuUF+nThOPoIOl1OXlmK4U+AwUtkmgIMvbznpMrwfbg
- JThA==
-X-Gm-Message-State: AOJu0YzhmhpPp/3eIYFJdozGy4rxIK8hPhDtkIn5cPaxkdYLrQdKm4Aw
- cCGIk6irZaTsd7bxhYidwNJNO8d4mG6NuDTPFafJM2JkEadylvQZ9s26+oUEeghnja76r3ULIyc
- t
-X-Google-Smtp-Source: AGHT+IEvhQ0zVv23lnTYt3sy0ltCI+BAigOEf3vT4eJzqlr8nxz8TQfTfEuRH8n1EqosBgE/MAolwQ==
-X-Received: by 2002:adf:fe45:0:b0:37d:2de3:bf8a with SMTP id
- ffacd0b85a97d-37efcf15f43mr2133792f8f.26.1729690143064; 
- Wed, 23 Oct 2024 06:29:03 -0700 (PDT)
+ bh=/xmQLXC0uaRjKkSflpCjZv+x+pRgOIXGpr7RR9pIpyM=;
+ b=cnJJBsnqxqxD6yRQZZujnqsdg5M5DRr9ddyynqrLYt/CdHM+qEOeB698OpqIL2TkEJ
+ iSL2L8NeuzppZ0jmVNnGk37JroxcMd52TUspcwUtn9UPPYi/nbRKjgDDyTHZadcHYvk2
+ VgFmKM5804BdChFS+5iTEk4P20BrckegTtF+NGoMtzBK+/jAfhjXugbtUbVY096crYPd
+ PbHdUoH/cQt0vhm/V+KJ2AYL0433jzq34WBhxV02NYqp3YGiTngjn+1Trcrd6ybvr4JK
+ k42Oyz6U0wfhUrl5JEN/PncvdX33rRbMFEeA1w1YQwPCH7+Mj0cPoZz1PqkUL7Lp9tUy
+ d/RA==
+X-Gm-Message-State: AOJu0YxSvNDYtTrMGea3vBKkj1d7xxRgdPdwMHsPbJW8yf6Zc9/py6Cn
+ qeavSVoGsgHwVJX1puw2jSucxqrZVJzi3LHlWjW5A4nHr3BNolfQhk2+WiNGH7t624fPF99RA0x
+ 0
+X-Google-Smtp-Source: AGHT+IH7emQV9/Zk0Ls1nUtVbYeUjNokMBoEZImr3L0u93OiSGptUtlVVW9/++7s8TAqPlvWzqkorA==
+X-Received: by 2002:a05:6000:1b0e:b0:37d:3541:5643 with SMTP id
+ ffacd0b85a97d-37efcf851f3mr1947101f8f.51.1729690150225; 
+ Wed, 23 Oct 2024 06:29:10 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.29.02
+ ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.29.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Oct 2024 06:29:02 -0700 (PDT)
+ Wed, 23 Oct 2024 06:29:09 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
-	linux-kernel@vger.kernel.org
+	Simon Glass <sjg@chromium.org>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v10 18/37] drivers/cpu: Add generic armv8 cpu driver
-Date: Wed, 23 Oct 2024 15:20:01 +0200
-Message-ID: <20241023132116.970117-19-patrick.rudolph@9elements.com>
+ Moritz Fischer <moritzf@google.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v10 22/37] drivers: misc: irq-uclass: Update irq_get_by_index
+Date: Wed, 23 Oct 2024 15:20:05 +0200
+Message-ID: <20241023132116.970117-23-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241023132116.970117-1-patrick.rudolph@9elements.com>
 References: <20241023132116.970117-1-patrick.rudolph@9elements.com>
@@ -95,176 +95,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a generic driver that binds to armv8 CPU nodes. The generic driver allows
-- to enumerate CPUs present in a system, even when no other driver binds it
-- generates ACPI SSDT code for each CPU
-- Fill the ACPI MADT table (implemented in a follow up patch)
+Support reading the "interrupts" property from the devicetree in case
+the "interrupts-extended" property isn't found. As the "interrupts"
+property is commonly used, this allows to parse all existing FDT and
+makes irq_get_by_index() more useful.
 
-The newly introduced code could also be reused on other CPU drivers that are
-compatible with armv8.
+The "interrupts" property doesn't contain a phandle as "interrupts-extended"
+does, so implement a new method to locate the interrupt-parent called
+irq_get_interrupt_parent().
 
-TEST: Booted on QEMU sbsa and verify the driver binds to CPU nodes.
-      Confirmed with FWTS that all ACPI processor devices are present.
+TEST: Read the interrupts from the GIC node for ACPI MADT generation.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
+Reviewed-by: Moritz Fischer <moritzf@google.com>
 ---
-Changelog v4:
-- Export armv8_cpu_fill_ssdt to use it in other CPU drivers
-Changelog v6:
-- Update header order
+Changelog v9:
+- Read interrupt-cells from interrupt parent
 ---
- drivers/cpu/Kconfig     |  6 ++++
- drivers/cpu/Makefile    |  2 ++
- drivers/cpu/armv8_cpu.c | 73 +++++++++++++++++++++++++++++++++++++++++
- drivers/cpu/armv8_cpu.h | 21 ++++++++++++
- 4 files changed, 102 insertions(+)
- create mode 100644 drivers/cpu/armv8_cpu.c
- create mode 100644 drivers/cpu/armv8_cpu.h
+ arch/sandbox/dts/test.dts |  3 ++
+ drivers/misc/irq-uclass.c | 66 ++++++++++++++++++++++++++++++++++++++-
+ include/irq.h             | 14 +++++++++
+ test/dm/irq.c             | 15 +++++++++
+ 4 files changed, 97 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/cpu/Kconfig b/drivers/cpu/Kconfig
-index 5c06cd9f60..9c0df331d7 100644
---- a/drivers/cpu/Kconfig
-+++ b/drivers/cpu/Kconfig
-@@ -26,6 +26,12 @@ config CPU_RISCV
- 	help
- 	  Support CPU cores for RISC-V architecture.
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index 8412506c17..9599a8db9c 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -522,6 +522,9 @@
+ 	};
  
-+config CPU_ARMV8
-+	bool "Enable generic ARMv8 CPU driver"
-+	depends on CPU && ARM64
-+	help
-+	  Support CPU cores for armv8 architecture.
-+
- config CPU_MICROBLAZE
- 	bool "Enable Microblaze CPU driver"
- 	depends on CPU && MICROBLAZE
-diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
-index bc75d9b974..773395693a 100644
---- a/drivers/cpu/Makefile
-+++ b/drivers/cpu/Makefile
-@@ -6,10 +6,12 @@
+ 	f-test {
++		#interrupt-cells = <2>;
++		interrupt-parent = <&irq>;
++		interrupts = <4 0>;
+ 		compatible = "denx,u-boot-fdt-test";
+ 	};
  
- obj-$(CONFIG_CPU) += cpu-uclass.o
+diff --git a/drivers/misc/irq-uclass.c b/drivers/misc/irq-uclass.c
+index 79eb7c200d..ac778593c9 100644
+--- a/drivers/misc/irq-uclass.c
++++ b/drivers/misc/irq-uclass.c
+@@ -62,6 +62,40 @@ int irq_read_and_clear(struct irq *irq)
+ 	return ops->read_and_clear(irq);
+ }
  
-+
- obj-$(CONFIG_ARCH_BMIPS) += bmips_cpu.o
- obj-$(CONFIG_ARCH_IMX8) += imx8_cpu.o
- obj-$(CONFIG_ARCH_AT91) += at91_cpu.o
- obj-$(CONFIG_ARCH_MEDIATEK) += mtk_cpu.o
-+obj-$(CONFIG_CPU_ARMV8) += armv8_cpu.o
- obj-$(CONFIG_CPU_IMX) += imx8_cpu.o
- obj-$(CONFIG_CPU_MPC83XX) += mpc83xx_cpu.o
- obj-$(CONFIG_CPU_RISCV) += riscv_cpu.o
-diff --git a/drivers/cpu/armv8_cpu.c b/drivers/cpu/armv8_cpu.c
-new file mode 100644
-index 0000000000..19f072be43
---- /dev/null
-+++ b/drivers/cpu/armv8_cpu.c
-@@ -0,0 +1,73 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2024 9elements GmbH
-+ */
-+#include <cpu.h>
-+#include <dm.h>
-+#include <acpi/acpigen.h>
-+#include <asm/armv8/cpu.h>
-+#include <dm/acpi.h>
-+#include <asm/io.h>
-+#include <linux/bitops.h>
-+#include <linux/printk.h>
-+#include <linux/sizes.h>
-+
-+static int armv8_cpu_get_desc(const struct udevice *dev, char *buf, int size)
++int irq_get_interrupt_parent(const struct udevice *dev,
++			     struct udevice **interrupt_parent)
 +{
-+	int cpuid;
++	struct ofnode_phandle_args phandle_args;
++	struct udevice *irq = NULL;
++	ofnode node;
++	int ret;
 +
-+	cpuid = (read_midr() & MIDR_PARTNUM_MASK) >> MIDR_PARTNUM_SHIFT;
++	if (!dev || !interrupt_parent)
++		return -EINVAL;
 +
-+	snprintf(buf, size, "CPU MIDR %04x", cpuid);
++	*interrupt_parent = NULL;
++
++	node = dev_ofnode(dev);
++	if (!ofnode_valid(node))
++		return -EINVAL;
++
++	while (ofnode_valid(node)) {
++		ret = ofnode_parse_phandle_with_args(node, "interrupt-parent",
++						     NULL, 0, 0, &phandle_args);
++		if (!ret && !device_get_global_by_ofnode(phandle_args.node, &irq))
++			break;
++		node = ofnode_get_parent(node);
++	}
++
++	if (!irq) {
++		log_err("Cannot find an interrupt parent for device %s\n", dev->name);
++		return -ENODEV;
++	}
++	*interrupt_parent = irq;
 +
 +	return 0;
 +}
 +
-+static int armv8_cpu_get_info(const struct udevice *dev,
-+			      struct cpu_info *info)
-+{
-+	info->cpu_freq = 0;
-+	info->features = BIT(CPU_FEAT_L1_CACHE) | BIT(CPU_FEAT_MMU);
+ #if CONFIG_IS_ENABLED(OF_PLATDATA)
+ int irq_get_by_phandle(struct udevice *dev, const struct phandle_2_arg *cells,
+ 		       struct irq *irq)
+@@ -142,10 +176,40 @@ err:
+ int irq_get_by_index(struct udevice *dev, int index, struct irq *irq)
+ {
+ 	struct ofnode_phandle_args args;
+-	int ret;
++	struct udevice *interrupt_parent;
++	int ret, size, i;
++	const __be32 *list;
++	u32 count;
+ 
+ 	ret = dev_read_phandle_with_args(dev, "interrupts-extended",
+ 					 "#interrupt-cells", 0, index, &args);
++	if (ret) {
++		list = dev_read_prop(dev, "interrupts", &size);
++		if (!list)
++			return -ENOENT;
 +
-+	return 0;
-+}
++		ret = irq_get_interrupt_parent(dev, &interrupt_parent);
++		if (ret)
++			return -ENODEV;
++		args.node = dev_ofnode(interrupt_parent);
 +
-+static int armv8_cpu_get_count(const struct udevice *dev)
-+{
-+	return uclass_id_count(UCLASS_CPU);
-+}
++		if (dev_read_u32(interrupt_parent, "#interrupt-cells", &count)) {
++			log_err("%s: could not get #interrupt-cells for %s\n",
++				__func__, dev->name);
++			return -ENOENT;
++		}
 +
-+#ifdef CONFIG_ACPIGEN
-+int armv8_cpu_fill_ssdt(const struct udevice *dev, struct acpi_ctx *ctx)
-+{
-+	uint core_id = dev_seq(dev);
++		if (index * count >= size / sizeof(*list))
++			return -ENOENT;
++		if (count > OF_MAX_PHANDLE_ARGS)
++			count = OF_MAX_PHANDLE_ARGS;
++		args.args_count = count;
++		for (i = 0; i < count; i++)
++			args.args[i] = be32_to_cpup(&list[index * count + i]);
 +
-+	acpigen_write_processor_device(ctx, core_id);
-+
-+	return 0;
-+}
-+
-+struct acpi_ops armv8_cpu_acpi_ops = {
-+	.fill_ssdt	= armv8_cpu_fill_ssdt,
-+};
-+#endif
-+
-+static const struct cpu_ops cpu_ops = {
-+	.get_count = armv8_cpu_get_count,
-+	.get_desc  = armv8_cpu_get_desc,
-+	.get_info  = armv8_cpu_get_info,
-+};
-+
-+static const struct udevice_id cpu_ids[] = {
-+	{ .compatible = "arm,armv8" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(arm_cpu) = {
-+	.name		= "arm-cpu",
-+	.id		= UCLASS_CPU,
-+	.of_match	= cpu_ids,
-+	.ops		= &cpu_ops,
-+	.flags		= DM_FLAG_PRE_RELOC,
-+	ACPI_OPS_PTR(&armv8_cpu_acpi_ops)
-+};
-diff --git a/drivers/cpu/armv8_cpu.h b/drivers/cpu/armv8_cpu.h
-new file mode 100644
-index 0000000000..2c4b0252cf
---- /dev/null
-+++ b/drivers/cpu/armv8_cpu.h
-@@ -0,0 +1,21 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2024 9elements GmbH
-+ */
-+#include <dm/acpi.h>
-+#include <dm/device.h>
-+
-+#ifndef _ARMV8_CPU_H_
-+#define _ARMV8_CPU_H_
-+
++		return irq_get_by_index_tail(ret, dev_ofnode(dev), &args,
++					     "interrupts", index, irq);
++	}
+ 
+ 	return irq_get_by_index_tail(ret, dev_ofnode(dev), &args,
+ 				     "interrupts-extended", index > 0, irq);
+diff --git a/include/irq.h b/include/irq.h
+index 5638c10128..0fbc1a5f48 100644
+--- a/include/irq.h
++++ b/include/irq.h
+@@ -200,6 +200,20 @@ int irq_restore_polarities(struct udevice *dev);
+  */
+ int irq_read_and_clear(struct irq *irq);
+ 
 +/**
-+ * armv8_cpu_fill_ssdt() - Fill the SSDT
-+ * Parses the FDT and writes the SSDT nodes.
++ * irq_get_interrupt_parent() - returns the interrupt parent
 + *
-+ * @dev: cpu device to generate ACPI tables for
-+ * @ctx: ACPI context pointer
-+ * @return:	0 if OK, or a negative error code.
++ * Walks the devicetree and returns the interrupt parent's ofnode
++ * for the specified device.
++ *
++ * @dev: device
++ * @interrupt_parent: The interrupt parent's ofnode'
++ * Return: 0 success, or error value
++ *
 + */
-+int armv8_cpu_fill_ssdt(const struct udevice *dev, struct acpi_ctx *ctx);
++int irq_get_interrupt_parent(const struct udevice *dev,
++			     struct udevice **interrupt_parent);
 +
-+#endif
-\ No newline at end of file
+ struct phandle_2_arg;
+ /**
+  * irq_get_by_phandle() - Get an irq by its phandle information (of-platadata)
+diff --git a/test/dm/irq.c b/test/dm/irq.c
+index 836f2d82e7..ca3e188065 100644
+--- a/test/dm/irq.c
++++ b/test/dm/irq.c
+@@ -76,6 +76,21 @@ static int dm_test_request(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_request, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+ 
++/* Test of irq_get_by_index() */
++static int dm_test_irq_get_by_index(struct unit_test_state *uts)
++{
++	struct udevice *dev;
++	struct irq irq;
++
++	ut_assertok(uclass_get_device_by_name(UCLASS_TEST_FDT, "f-test",
++					      &dev));
++	ut_assertok(irq_get_by_index(dev, 0, &irq));
++	ut_asserteq(4, irq.id);
++
++	return 0;
++}
++DM_TEST(dm_test_irq_get_by_index, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++
+ /* Test of irq_get_acpi() */
+ static int dm_test_irq_get_acpi(struct unit_test_state *uts)
+ {
 -- 
 2.46.2
 
