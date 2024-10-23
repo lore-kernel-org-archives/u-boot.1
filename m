@@ -4,72 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCD28CF5399
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 14:52:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22610CDDE7B
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 15:11:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5516289092;
-	Wed, 23 Oct 2024 16:52:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 51F4E8919C;
+	Wed, 23 Oct 2024 17:11:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="GH7kP8Ei";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="VuNlVcq3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DFE98912A; Wed, 23 Oct 2024 16:52:21 +0200 (CEST)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4B03A891A3; Wed, 23 Oct 2024 17:11:00 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D65089024
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 16:52:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux.intel.com
-Authentication-Results: phobos.denx.de; spf=none
- smtp.mailfrom=andriy.shevchenko@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1729695139; x=1761231139;
- h=date:from:to:subject:message-id:references:mime-version:
- in-reply-to; bh=747De215ydzfZq7orasBKM2POiX8hIzCAbJaqL2Bfp8=;
- b=GH7kP8EiL4wcDUwNM59cZpJ14+U4AIARy/mdPU8u3gFpa7nQj0mup0Z1
- NM1F1XxpdOZGSzrh9NRaStBGRFCADDNTM81vmrdX2bN4cio3TKcF3AuOH
- DZ4uOKEaMjKFmQNFhSaE/eNksus2dsJX/Ua5lrhHxDQmQSgRrpE4cw2IH
- pZByTdlODGTnaCA9fy+IVIg6bhLn19dXD0BHsGkPbOaQg0PgvJWX/7mDO
- 33Ykf0XOHrF/QFMJHsOO0YGOCmF2EPjXZGXl1wVWTsGQs/XwJ3++wsoGw
- QROsM1nhTqwMihGcg8I/hzF1vXBKscnUyR6cnqLiely+GjcaLeVzSsuiK A==;
-X-CSE-ConnectionGUID: 7dBdlFs7SA+Fvuplx8UW0g==
-X-CSE-MsgGUID: 5/RVvSsvTqKzHJ4/InBoZw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11234"; a="29391033"
-X-IronPort-AV: E=Sophos;i="6.11,226,1725346800"; d="scan'208";a="29391033"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
- by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Oct 2024 07:52:17 -0700
-X-CSE-ConnectionGUID: vXcVeeKISH+mIb7RtlkLvw==
-X-CSE-MsgGUID: wc0uc2WvSTakKQOobSOStw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,226,1725346800"; d="scan'208";a="79902011"
-Received: from smile.fi.intel.com ([10.237.72.154])
- by fmviesa007.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Oct 2024 07:52:15 -0700
-Received: from andy by smile.fi.intel.com with local (Exim 4.98)
- (envelope-from <andriy.shevchenko@linux.intel.com>)
- id 1t3cia-00000006F9z-2bum; Wed, 23 Oct 2024 17:52:12 +0300
-Date: Wed, 23 Oct 2024 17:52:12 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: enabling W=1 by default
-Message-ID: <ZxkNnJxVHSlxNjSV@smile.fi.intel.com>
-References: <ZxZk4K4ff1T3gUVm@smile.fi.intel.com>
- <CAFLszTjuodDFZW8fJDL1Q3nByLVzcTTEAeJfws-sbtupCwNd8w@mail.gmail.com>
- <ZxenO05qCbt5IIZS@smile.fi.intel.com>
- <20241023-gizzard-untracked-4a1c6d2f6be6@thorsis.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 7790189184
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 17:10:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4XYXYV1zzKz9spX;
+ Wed, 23 Oct 2024 17:10:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1729696254;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=j0ecRAJOc0nTRn3Qu+ryMPavGa0pqr9Rf7OIj6n4eOg=;
+ b=VuNlVcq3H4reTUU/H4TpjFQjIL1XhiOgOt4exvl1jOALl8PGcXmwmLRldCuWLqCZ7aaNQU
+ lwpAVZWp5iEzq8133fZyHof5lGdLhB+Nd7q3WICDWb9NNMKTqfx/KMMYm8WnxWzXvfbupT
+ OwNQI5U3Ucw66TrUSTxi7M8sy04+Fx0I8POPoDi/Dc71166OLXmZpGnxDxwrI8ZCHP7vOY
+ c0ybrDcQgYM6k9pRBdWAHvhXyRVfmL1enjGbzEudpAcRJDcgdJQiC0q8n7g8Q/7hP4aeLr
+ dSOqhR34DyKNdo0DUcn3o5cLI66qOBBWXhGpIdBxnz8auOxOiMCwJjTrvmQCvA==
+Message-ID: <c3c81551-ebc6-4d7a-8770-802b6435ca77@mailbox.org>
+Date: Wed, 23 Oct 2024 17:10:50 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241023-gizzard-untracked-4a1c6d2f6be6@thorsis.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories support
+ in QSPI driver"
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Michael Walle <mwalle@kernel.org>,
+ "Simek, Michal" <michal.simek@amd.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, Tom Rini
+ <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
+ "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
+ <SA1PR12MB8697AF99B0A56734FF65AD47984D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <699f9d96-a109-40ab-9cd8-ed0c5b4b589f@mailbox.org>
+ <SA1PR12MB869767A8D003AB114830D46A984D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <03389ee7-3da9-4160-a193-00fd517ad56e@mailbox.org>
+ <SA1PR12MB869722D8E2019193343572AF984D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <SA1PR12MB869722D8E2019193343572AF984D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 9c1pbr83yopsre9zq6egecs5513memr6
+X-MBO-RS-ID: 30904d7e4ccd7576eb8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,60 +92,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 23, 2024 at 09:52:09AM +0200, Alexander Dahl wrote:
-> Am Tue, Oct 22, 2024 at 04:23:07PM +0300 schrieb Andy Shevchenko:
-> > On Mon, Oct 21, 2024 at 06:32:21PM +0200, Simon Glass wrote:
-> > > On Mon, 21 Oct 2024 at 16:27, Andy Shevchenko
-> > > <andriy.shevchenko@linux.intel.com> wrote:
-> > > >
-> > > > looking at the redness of the output of `make W=1` here is the question:
-> > > > isn't it a good time to enable `make W=1` by default. Yes, I understand
-> > > > the impact, but at least we can do it mandatory for a _new_ code submitted to
-> > > > U-Boot, right?
-> > > >
-> > > > Ideally I would have what Linux kernel has for a few releases already, i.e.
-> > > > Werror by default and getting close to make a clean builds with that and
-> > > > make W=1` at least against default configurations (yeah, with U-Boot there is
-> > > > probably no default, but sandbox one).
-> > > 
-> > > Warnings should be warnings...
-> > 
-> > Yes, and ideally the code should not have warnings, right?
+On 10/23/24 4:14 PM, Abbarapu, Venkatesh wrote:
+> Hi,
 > 
-> +1
+>> -----Original Message-----
+>> From: Marek Vasut <marek.vasut@mailbox.org>
+>> Sent: Wednesday, October 23, 2024 6:15 PM
+>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; u-boot@lists.denx.de
+>> Cc: Andre Przywara <andre.przywara@arm.com>; Ashok Reddy Soma
+>> <ashok.reddy.soma@amd.com>; Jagan Teki <jagan@amarulasolutions.com>;
+>> Michael Walle <mwalle@kernel.org>; Simek, Michal <michal.simek@amd.com>;
+>> Patrice Chotard <patrice.chotard@foss.st.com>; Patrick Delaunay
+>> <patrick.delaunay@foss.st.com>; Pratyush Yadav <p.yadav@ti.com>; Quentin
+>> Schulz <quentin.schulz@cherry.de>; Sean Anderson <seanga2@gmail.com>;
+>> Simon Glass <sjg@chromium.org>; Takahiro Kuwano
+>> <Takahiro.Kuwano@infineon.com>; Tom Rini <trini@konsulko.com>; Tudor
+>> Ambarus <tudor.ambarus@linaro.org>; uboot-stm32@st-md-
+>> mailman.stormreply.com
+>> Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories support in
+>> QSPI driver"
+>>
+>> On 10/23/24 11:07 AM, Abbarapu, Venkatesh wrote:
+>>> Hi,
+>>> Tested with the non-stacked default single configuration on ZynqMP zcu102 board
+>> and didn’t see any issue.
+>>>
+>>> ZynqMP> sf probe 0 0 0
+>>> SF: Detected mt25qu512a with page size 256 Bytes, erase size 64 KiB,
+>>> total 64 MiB
+>>> ZynqMP> sf erase 0x0 0x4000000;mw.b 0x8000 aabbccdd 0x4000000;sf write
+>>> ZynqMP> 0x8000 0x0 0x4000000;mw.b 0x8008000 0x0 0x4000000;sf read
+>>> ZynqMP> 0x8008000 0x0 0x4000000;cmp.b 0x8000 0x8008000 0x4000000
+>>> SF: 67108864 bytes @ 0x0 Erased: OK
+>>> device 0 whole chip
+>>> SF: 67108864 bytes @ 0x0 Written: OK
+>>> device 0 whole chip
+>>> SF: 67108864 bytes @ 0x0 Read: OK
+>>> Total of 67108864 byte(s) were the same
+>>>
+>>> Thanks
+>>> Venkatesh
+>>>
+>>>> -----Original Message-----
+>>>> From: Marek Vasut <marek.vasut@mailbox.org>
+>>>> Sent: Wednesday, October 23, 2024 2:12 PM
+>>>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; Marek Vasut
+>>>> <marek.vasut+renesas@mailbox.org>; u-boot@lists.denx.de
+>>>> Cc: Andre Przywara <andre.przywara@arm.com>; Ashok Reddy Soma
+>>>> <ashok.reddy.soma@amd.com>; Jagan Teki <jagan@amarulasolutions.com>;
+>>>> Michael Walle <mwalle@kernel.org>; Simek, Michal
+>>>> <michal.simek@amd.com>; Patrice Chotard
+>>>> <patrice.chotard@foss.st.com>; Patrick Delaunay
+>>>> <patrick.delaunay@foss.st.com>; Pratyush Yadav <p.yadav@ti.com>;
+>>>> Quentin Schulz <quentin.schulz@cherry.de>; Sean Anderson
+>>>> <seanga2@gmail.com>; Simon Glass <sjg@chromium.org>; Takahiro Kuwano
+>>>> <Takahiro.Kuwano@infineon.com>; Tom Rini <trini@konsulko.com>; Tudor
+>>>> Ambarus <tudor.ambarus@linaro.org>; uboot-stm32@st-md-
+>>>> mailman.stormreply.com
+>>>> Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel
+>>>> memories support in QSPI driver"
+>>>>
+>>>> On 10/23/24 5:18 AM, Abbarapu, Venkatesh wrote:
+>>>>> Hi Marek,
+>>>>> There was some issue and fix is sent
+>>>>> https://lore.kernel.org/u-boot/20241018082644.22495-1-venkatesh.abba
+>>>>> ra
+>>>>> pu@amd.com/T/#u
+>>>>
+>>>> Is this one fix or three fixes for three different issues ?
+>>>>
+>>>> This seems to fix READ errors, which is apparently another error
+>>>> introduced by this stuff. In my case, plain and simply 'sf probe ; sf
+>>>> update' combination with single non- stacked SPI NOR does not work. Was such
+>> a simple configuration ever tested ?
+>>>>
+>>>>> Not sure we need to revert whole parallel/stacked support?
+>>>> Please stop top-posting.
+>>
+>> You ran completely different test on completely different chip.
+>>
+>> Stop top posting.
 > 
-> > Otherwise how can we do better? It's quite similar to what you wrote WRT
-> > documenting the function prototypes, the same applies to the new contribution
-> > WRT `make W=1`.
-> > 
-> > > if you would like to enable it for CI that is fine by me,
-> > 
-> > Yes, that's the idea, but I'm not the owner of any U-Boot CIs,
-> > hence it's a proposal.
-> > 
-> > > but the U-Boot makefile shouldn't do it. It defeats the purpose of
-> > > having a distinction between errors and warnings.
-> > 
-> > While it's not what I wanted, I disagree on your comment. The idea is to make
-> > rules stricter (for new code) to make it better and that's why Linus enabled
-> > Werror by default in the Linux kernel. And personally I consider that as a good
-> > thing to follow.
+> Sorry for top posting
 > 
-> Long term experience: each time you upgrade your toolchain you get new
-> warnings.  Each package (u-boot, kernel, userland, does not matter
-> which) enabling -Werror breaks the BSP build.  What should a developer
-> do then?  Fix each warning in each foreign project and bring it
-> upstream?  Or disable -Werror?  Last thing is what is usually done.
-> You can see several patches in buildroot or ptxdist disabling -Werror
-> for this reason.
-
-That's why the set of enabled/disabled warnings are spread over W=<n> and hence
-hidden when known to be PITA. W=1 is kinda special in a sense that we put the
-warnings that might affect code generation, size of the binary, etc. In some cases
-it even might prevent security bugs.
-
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+> Will try to get the spansion flash part and try the below tests.
+> At this point tried testing on different board with different flash part.
+> 
+> Zynq> sf probe 0 0 0
+> SF: Detected mx66l1g45g with page size 256 Bytes, erase size 64 KiB, total 128 MiB
+> Zynq> sf update 0x4000000 0 0x160000
+> device 0 offset 0x0, size 0x160000
+> 1441792 bytes written, 0 bytes skipped in 5.735s, speed 257435 B/s
+I'm sorry, I missed this ^ part.
