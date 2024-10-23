@@ -4,75 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D78CF5385
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 12:45:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CA5CCF5388
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:02:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE06389278;
-	Wed, 23 Oct 2024 14:45:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 866E489222;
+	Wed, 23 Oct 2024 15:02:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="X3yPWnKi";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KKgwyRSj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F9AC89278; Wed, 23 Oct 2024 14:45:16 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CE5DA89268; Wed, 23 Oct 2024 15:02:23 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87D708925A
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 14:45:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A447488DEF
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:02:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4XYTKH0y9Gz9tSh;
- Wed, 23 Oct 2024 14:45:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729687507;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=jR6hH7qQagObgfMRWn+Z30a2P5s5WAjKp9PuinFV2b8=;
- b=X3yPWnKibj+EKNgKF2+Iisy8q6T1hu3aTiGpLbcOLlk410G9XkNQxa/8SLaG6ZLqq0Xtzh
- l+CX2kH1ETJbBANzLE0WlpdcypA/HBK+wR9Y6OP7gPlCV7njd9TVLRF4PgA2YuY7/nZtnW
- 0x97QTLsFTJwetmzNurYRPsq/VDGSdcBb/u5VtZk5OHlvJexb3UTG7OJYdAU/3gXWbey+m
- OVD6I8971xY4p7PnjVEukPuGTBlggqfACvGl/gyhwuUeFGjwAYXXOBx2wlxsJBhy0cKGKu
- X22nPT0ETaI1vg6ErBjqPnx39NiacggkDXGJsgi2L7Y/HHIEH3y9zVszCLWx9A==
-Message-ID: <03389ee7-3da9-4160-a193-00fd517ad56e@mailbox.org>
-Date: Wed, 23 Oct 2024 14:45:02 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=a-limaye@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49ND2Gh0030257;
+ Wed, 23 Oct 2024 08:02:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1729688536;
+ bh=+is1OuRpUc4AVRjhNo12hzNhwnTMiTSRz90RBTrfkk8=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=KKgwyRSjF/S4V8Nzqq2xVUA+2wevYqCIeI40B019PYZw6s3qxGkoIHr/iiwFASHU9
+ jScgMxpKhHEWiPZCU63C3Oe1+ONB5aRK/F+i6saU9bA2r6K56KI77Jw6qYXp1nsppi
+ i8+/KkA+7x9iyMawUm3teOo4KXh6Kmoy5zjb/z4I=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49ND2Gni017183
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 23 Oct 2024 08:02:16 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
+ Oct 2024 08:02:16 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 23 Oct 2024 08:02:16 -0500
+Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
+ [172.24.227.91])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49ND2BQ0037622;
+ Wed, 23 Oct 2024 08:02:14 -0500
+From: Aniket Limaye <a-limaye@ti.com>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>
+CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>,
+ Aniket Limaye <a-limaye@ti.com>
+Subject: [PATCH v2 1/5] arm: dts: k3-j7200-r5-common: Add msmc clk to a72 node
+Date: Wed, 23 Oct 2024 18:27:09 +0530
+Message-ID: <20241023130033.1826413-2-a-limaye@ti.com>
+X-Mailer: git-send-email 2.47.0
+In-Reply-To: <20241023130033.1826413-1-a-limaye@ti.com>
+References: <20241023130033.1826413-1-a-limaye@ti.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories support
- in QSPI driver"
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Andre Przywara <andre.przywara@arm.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Michael Walle <mwalle@kernel.org>,
- "Simek, Michal" <michal.simek@amd.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, Tom Rini
- <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
- <SA1PR12MB8697AF99B0A56734FF65AD47984D2@SA1PR12MB8697.namprd12.prod.outlook.com>
- <699f9d96-a109-40ab-9cd8-ed0c5b4b589f@mailbox.org>
- <SA1PR12MB869767A8D003AB114830D46A984D2@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <SA1PR12MB869767A8D003AB114830D46A984D2@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: xajrgtgggyad68mcu13i416xeo4xuswr
-X-MBO-RS-ID: 62ef564259d206bf4ea
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,56 +80,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/23/24 11:07 AM, Abbarapu, Venkatesh wrote:
-> Hi,
-> Tested with the non-stacked default single configuration on ZynqMP zcu102 board and didn’t see any issue.
-> 
-> ZynqMP> sf probe 0 0 0
-> SF: Detected mt25qu512a with page size 256 Bytes, erase size 64 KiB, total 64 MiB
-> ZynqMP> sf erase 0x0 0x4000000;mw.b 0x8000 aabbccdd 0x4000000;sf write 0x8000 0x0 0x4000000;mw.b 0x8008000 0x0 0x4000000;sf read 0x8008000 0x0 0x4000000;cmp.b 0x8000 0x8008000 0x4000000
-> SF: 67108864 bytes @ 0x0 Erased: OK
-> device 0 whole chip
-> SF: 67108864 bytes @ 0x0 Written: OK
-> device 0 whole chip
-> SF: 67108864 bytes @ 0x0 Read: OK
-> Total of 67108864 byte(s) were the same
-> 
-> Thanks
-> Venkatesh
-> 
->> -----Original Message-----
->> From: Marek Vasut <marek.vasut@mailbox.org>
->> Sent: Wednesday, October 23, 2024 2:12 PM
->> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; Marek Vasut
->> <marek.vasut+renesas@mailbox.org>; u-boot@lists.denx.de
->> Cc: Andre Przywara <andre.przywara@arm.com>; Ashok Reddy Soma
->> <ashok.reddy.soma@amd.com>; Jagan Teki <jagan@amarulasolutions.com>;
->> Michael Walle <mwalle@kernel.org>; Simek, Michal <michal.simek@amd.com>;
->> Patrice Chotard <patrice.chotard@foss.st.com>; Patrick Delaunay
->> <patrick.delaunay@foss.st.com>; Pratyush Yadav <p.yadav@ti.com>; Quentin
->> Schulz <quentin.schulz@cherry.de>; Sean Anderson <seanga2@gmail.com>;
->> Simon Glass <sjg@chromium.org>; Takahiro Kuwano
->> <Takahiro.Kuwano@infineon.com>; Tom Rini <trini@konsulko.com>; Tudor
->> Ambarus <tudor.ambarus@linaro.org>; uboot-stm32@st-md-
->> mailman.stormreply.com
->> Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories support in
->> QSPI driver"
->>
->> On 10/23/24 5:18 AM, Abbarapu, Venkatesh wrote:
->>> Hi Marek,
->>> There was some issue and fix is sent
->>> https://lore.kernel.org/u-boot/20241018082644.22495-1-venkatesh.abbara
->>> pu@amd.com/T/#u
->>
->> Is this one fix or three fixes for three different issues ?
->>
->> This seems to fix READ errors, which is apparently another error introduced by this
->> stuff. In my case, plain and simply 'sf probe ; sf update' combination with single non-
->> stacked SPI NOR does not work. Was such a simple configuration ever tested ?
->>
->>> Not sure we need to revert whole parallel/stacked support?
->> Please stop top-posting.
+From: Reid Tonking <reidt@ti.com>
 
-You ran completely different test on completely different chip.
+The j7200 SOC has a single DDR controller and hence no need for
+configuring the MSMC interleaver. Hence we do not have an explicit node
+for MSMC in j7200 DT, unlike j721s2/j784s4.
 
-Stop top posting.
+Also, MSMC clk id is described under A72SS0_CORE0 Device in TISCI
+documentation [0].
+
+Considering the above, define the MSMC clk in the a72 node.
+
+[0]: https://software-dl.ti.com/tisci/esd/latest/5_soc_doc/j7200/clocks.html#clocks-for-a72ss0-core0-device
+
+Signed-off-by: Reid Tonking <reidt@ti.com>
+Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+
+---
+v2:
+- Update commit msg to justify location of msmc clk in DT
+- Link to v1: https://lore.kernel.org/u-boot/20241017062911.2241167-2-a-limaye@ti.com/
+---
+ arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+index f096b102793..759a1e83456 100644
+--- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
++++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+@@ -23,11 +23,11 @@
+ 				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
+ 				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+ 		resets = <&k3_reset 202 0>;
+-		clocks = <&k3_clks 61 1>, <&k3_clks 202 2>;
+-		clock-names = "gtc", "core";
+-		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 323 0>;
+-		assigned-clock-parents= <0>, <0>, <&k3_clks 323 2>;
+-		assigned-clock-rates = <2000000000>, <200000000>;
++		clocks = <&k3_clks 61 1>, <&k3_clks 4 1>, <&k3_clks 202 2> ;
++		clock-names = "gtc", "msmc", "core";
++		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 4 1>, <&k3_clks 323 0>;
++		assigned-clock-parents= <0>, <0>, <0>, <&k3_clks 323 2>;
++		assigned-clock-rates = <2000000000>, <200000000>, <1000000000>;
+ 		ti,sci = <&dmsc>;
+ 		ti,sci-proc-id = <32>;
+ 		ti,sci-host-id = <10>;
+-- 
+2.34.1
+
