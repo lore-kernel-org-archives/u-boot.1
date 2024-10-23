@@ -4,73 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 524FED2E022
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 08:39:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83FE3D2E022
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 08:41:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98174890AE;
-	Wed, 23 Oct 2024 10:38:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0305F89092;
+	Wed, 23 Oct 2024 10:41:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UScHalKP";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="w7XAKufP";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Hx1vzQh3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD1C2891A3; Wed, 23 Oct 2024 10:38:58 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 7657E890AE; Wed, 23 Oct 2024 10:41:49 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3A478908D
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 10:38:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D17058908D
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 10:41:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4XYMs84czwz9t2X;
- Wed, 23 Oct 2024 10:38:52 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4XYMwK3WHlz9t3D;
+ Wed, 23 Oct 2024 10:41:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729672732;
+ s=mail20150812; t=1729672897;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6gASXJgUiznHR0p1X+JRPSm7AikBPSLcmc487qiFnAc=;
- b=UScHalKPOPVodHXvYzHKrpFemEijnMMxhSqf4oUYWM9lzqwtH80Xztml0YO01RGJqu5nNR
- RSRhzIH1OaNvOWpZkSYU93fQ6GIs5WRkcva1kJxUNK1Lu2c1UkEanCqH605rZRDuf2cv7I
- /COb+E39EpnTAs/X62xiulEbiZ01RltkBmfm8px0Uby+HErcza8pgVBlXUHOAlZdgSrTes
- 5zXgHElW8fA15VFCA/m0Xy0dYv6RiNE5hEdk77Qus1tr479y3ZuyUU+rmzTLXgBWSSDmKK
- UbbpmivGuOJJ42hpexn5t05/qBiYhlP1wo7XkyOwqRqkoMLrDMKoIU0rwXNB8g==
-Message-ID: <e9929e0c-aa43-428f-8bf7-7b4cdef0e9c3@mailbox.org>
-Date: Wed, 23 Oct 2024 10:38:48 +0200
+ bh=nETczxx9naPwETSneqAB2+nSLhBVJJhureDjd5PqEQo=;
+ b=w7XAKufPhnC+eXiJQOx5TlnZWA3AHsDLqflKHffmEjRVabOqur2Jqw0NtlUrKpqNhXg1/5
+ Odau4nMOD13TXd4qHkCZOWbL8c5zt0HVzXHJinLwpKPspfm+Y7P32NYFUqyd99stg3vH7+
+ 7y7YJHK1RnpL+Q/3sGzkfq288sS7r1NEbIR1RcA009czjZYs51ggY4X+MCdWiDEMhHuPGP
+ IRjJar3EfwW7NwZJxZRjsrg3BM61//fHsZChiDO2XXpiqEKzk20GKeOotbnxFoaPAQ8ruz
+ xV9jTRv1EMr8nq8H+48tmJFYyF+FQ02QKUY0mVNyJuABVVb/G/sIOMxemiUSBQ==
+Message-ID: <699f9d96-a109-40ab-9cd8-ed0c5b4b589f@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1729672895;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nETczxx9naPwETSneqAB2+nSLhBVJJhureDjd5PqEQo=;
+ b=Hx1vzQh3o0flhckvYFKT0d79+LlJUs+HlQa58hG16JnWxen/UuxBkK4qQd/DUKfEjO7sqL
+ oO3gYpjczvXC1X6DqHRkdFSAFf+0R0YMMECvqibdcfCfAPKT4P2/lGh/LkrCr7ABkj7jeg
+ 1xMnBGeRNcfU5ZNTWKnLMljhy3YWqAPVjiRoRASmzj6AWe+RyaSt8grgLeag15N0LsHnGg
+ 3gRoL3eKC3FFGTsdY6dwSz8zno+zrSgsvk3QYleo4JCg3gRRvZXx1oa3ZvTZ2rNO5QaxE2
+ WntskBPSXvMlKdxCOVdWa2nBQLc/l2t6X62uE/XwgVSJxwYpK2HU2I7ngfFOFA==
+Date: Wed, 23 Oct 2024 10:41:31 +0200
 MIME-Version: 1.0
 Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories support
  in QSPI driver"
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Cc: Andre Przywara <andre.przywara@arm.com>,
  Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
  Jagan Teki <jagan@amarulasolutions.com>, Michael Walle <mwalle@kernel.org>,
+ "Simek, Michal" <michal.simek@amd.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, Tom Rini
  <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- uboot-stm32@st-md-mailman.stormreply.com
+ "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
- <b9cb3ec8-b6f2-4f38-8cda-d3d10278f503@amd.com>
+ <SA1PR12MB8697AF99B0A56734FF65AD47984D2@SA1PR12MB8697.namprd12.prod.outlook.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <b9cb3ec8-b6f2-4f38-8cda-d3d10278f503@amd.com>
+In-Reply-To: <SA1PR12MB8697AF99B0A56734FF65AD47984D2@SA1PR12MB8697.namprd12.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 8ex3fc6de9nmyx7ddq4keeexdc6o6w4r
-X-MBO-RS-ID: f99f85ef8fd36321583
+X-MBO-RS-META: rakpnfp38gg36n7nwu7atxb64q4bk6c3
+X-MBO-RS-ID: 1870e1da7dd7069787f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,46 +102,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/23/24 10:17 AM, Michal Simek wrote:
-> 
-> 
-> On 10/22/24 23:06, Marek Vasut wrote:
->> This reverts commit 1e36d34b52e7a1ebe5a2a5339d6905540f4253aa.
->>
->> This parallel/stacked support breaks basic SPI NOR support,
->> e.g. this no longer works:
->>
->> => sf probe && sf update 0x50000000 0 0x160000
->> SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB, 
->> total 64 MiB
->> device 0 offset 0x0, size 0x160000
->> SPI flash failed in read step
-> 
-> Reverting everything seems to me too much. Tom has tested it on his HW 
-> and didn't see any issue. That's why better to look at code which is 
-> causing this.
-> You are reverting everything but likely there is specific patch which is 
-> causing this. Which one is it?
-> Which board was used for your testing? Likely we don't have access to it.
-> Is there any QEMU available which can be used for debugging?
+On 10/23/24 5:18 AM, Abbarapu, Venkatesh wrote:
+> Hi Marek,
+> There was some issue and fix is sent
+> https://lore.kernel.org/u-boot/20241018082644.22495-1-venkatesh.abbarapu@amd.com/T/#u
 
-The testcase including the exact SPI NOR model is above.
+Is this one fix or three fixes for three different issues ?
 
-iMX6 with w25q16dw seems to be broken too.
+This seems to fix READ errors, which is apparently another error 
+introduced by this stuff. In my case, plain and simply 'sf probe ; sf 
+update' combination with single non-stacked SPI NOR does not work. Was 
+such a simple configuration ever tested ?
 
-Basically every board I have access no longer has a working "sf probe ; 
-sf update" combination ... so yeah, this means this patchset is 
-fundamentally broken.
-
->> Since none of this seems to be in Linux either, revert it all.
-> 
-> This has been discussed with Tom before.
-
-Tom is not the U-Boot MTD maintainer ?
-
-> It wasn't in sync even before 
-> and we can't really stop development on subsystems.
-These patches have been rejected from mainline Linux for many years, why 
-are they added to U-Boot which includes an import of MTD subsystem from 
-Linux ? Such diverging code base with random patches will only make it 
-much harder to synchronize Linux MTD subsystem back to U-Boot.
+> Not sure we need to revert whole parallel/stacked support?
+Please stop top-posting.
