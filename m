@@ -4,53 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FB23CDDE66
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 10:54:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 664C1CDDE67
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 10:55:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FA9D892F5;
-	Wed, 23 Oct 2024 12:53:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E5DBA8926F;
+	Wed, 23 Oct 2024 12:55:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729680838;
-	bh=4GOzjQ2uQkWSUi5ty6WKF+ZiQY196AEt+hID5SEkPuc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=rmnbHGqjavvkzjhTWv6yPJqXZhiMG6pLD3/wF8DARfNNuVN7EoLmLm1DNMAEb+yR2
-	 7pXmy8CRYS+ZDN1e9nkX88B1sn7WgTPJL5OFxOKdPX0H8CDkkwWzygTiFJDkS+zuSM
-	 8QQsiMufGr8t8NRy21AlqD/hK9viQZ6S0eU1EtZoHbjwuq4x5uWECKl9rSJkSXTMJJ
-	 8LMsHFo8LWycGItMYAAtSaTVthQoQEJ7qZ/esL3W7bJv6dZOA4EDN1jIqRsVDb4DoY
-	 AZVC/gFYozrqy1XCse5xSA0IdzwGIlh1he0pv6hPyBOL4R8tLqIUE4Oi91LZ9grG22
-	 6DkVhEq4Sl29w==
+	s=phobos-20191101; t=1729680920;
+	bh=rv7qeP+IKCEujHhdwA6yWMuiydsx61D/vb0WVCTkO9M=;
+	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=b6EgZ1Xl4C/ZjJiZtapuc/VbbEPRKqoZtwVJyJiPe4EGMCT8GHbwTiwkOD/iJQZBY
+	 ERnantCvK3chUVkQ2lB4V1tL3IYj9URV4/60KW7BRFidn4wXphymV1SF1zRtguh64W
+	 Crbkm+zosuY2faX55O+8n/3bUtMQUndROeh0ZFZHRCk/3WM/eU0xXbdjwC/O5hOF83
+	 QIWA/rEte+YW/4YJAzcE3WTuIGPeQhFfft8M6XkyxkSalov9OScjXavlRWjqNTOXZd
+	 rJONCCrsMNODdTdui5hqyFbQWBjnnngkE7J0SS1xYZhOZPhJGr6qgUHOFkTsZ7X1RF
+	 8KViN2GkRNZrw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C0D8892F4; Wed, 23 Oct 2024 12:53:57 +0200 (CEST)
+ id 7788A8926F; Wed, 23 Oct 2024 12:55:19 +0200 (CEST)
 Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61AE8892DC
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 12:53:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8D2B892D8
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 12:55:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XYQrn27Vgz9sT8;
- Wed, 23 Oct 2024 12:53:45 +0200 (CEST)
-Message-ID: <b1a951a0-df3f-456e-9d1e-102c7eb83bc1@denx.de>
-Date: Wed, 23 Oct 2024 12:53:44 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XYQtH464kz9snB;
+ Wed, 23 Oct 2024 12:55:03 +0200 (CEST)
+Message-ID: <87707c04-dc76-41f0-8fca-5782ca37091a@denx.de>
+Date: Wed, 23 Oct 2024 12:55:02 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] watchdog: introduce separate SPL symbol for WDT_GPIO
-To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20241007174716.1068936-1-ravi@prevas.dk>
 Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241007174716.1068936-1-ravi@prevas.dk>
+Subject: Please pull u-boot-watchdog/master
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,66 +63,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/7/24 19:47, Rasmus Villemoes wrote:
-> Currently, enabling WDT_GPIO on a board which uses SPL, but does not
-> have SPL_WDT, SPL_DM_GPIO or SPL_OF_CONTROL enabled, breaks the build.
-> 
-> Make it possible to use the WDT_GPIO driver on such boards by
-> introducing a separate symbol controlling whether the driver is built
-> for SPL. Make it default to WDT_GPIO such that boards that already
-> have it enabled and all the SPL prerequisites satisfied will continue
-> to have it in SPL.
-> 
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+Hi Tom,
 
-Applied to u-boot-watchdog/master
+please pull the following watchdog related patches:
+
+----------------------------------------------------------------
+- watchdog: gpio_wdt: add support for stoppable devices (Rasmus)
+- watchdog: Add DaVinci's watchdog support (Bastien)
+- cyclic: disentangling cyclic API from schedule() (Rasmus)
+- watchdog: introduce separate SPL symbol for WDT_GPIO (Rasmus)
+----------------------------------------------------------------
+
+Here the Azure build, without any issues:
+
+https://dev.azure.com/sr0718/u-boot/_build/results?buildId=378&view=results
 
 Thanks,
 Stefan
 
-> ---
->   drivers/watchdog/Kconfig  | 9 +++++++++
->   drivers/watchdog/Makefile | 2 +-
->   2 files changed, 10 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index 0c3e9913318..18028269b9e 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -178,6 +178,15 @@ config WDT_GPIO
->   	  doc/device-tree-bindings/watchdog/gpio-wdt.txt for
->   	  information on how to describe the watchdog in device tree.
->   
-> +config SPL_WDT_GPIO
-> +	bool "External gpio watchdog support in SPL"
-> +	depends on SPL_WDT
-> +	depends on SPL_DM_GPIO
-> +	depends on SPL_OF_REAL
-> +	default WDT_GPIO
-> +	help
-> +	  Support for external watchdog fed by toggling a gpio in SPL.
-> +
->   config WDT_MAX6370
->   	bool "MAX6370 watchdog timer support"
->   	depends on WDT
-> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-> index 7b39adcf0ff..a450c33b3ad 100644
-> --- a/drivers/watchdog/Makefile
-> +++ b/drivers/watchdog/Makefile
-> @@ -30,7 +30,7 @@ obj-$(CONFIG_WDT_CORTINA) += cortina_wdt.o
->   obj-$(CONFIG_WDT_ORION) += orion_wdt.o
->   obj-$(CONFIG_WDT_CDNS) += cdns_wdt.o
->   obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
-> -obj-$(CONFIG_WDT_GPIO) += gpio_wdt.o
-> +obj-$(CONFIG_$(SPL_TPL_)WDT_GPIO) += gpio_wdt.o
->   obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
->   obj-$(CONFIG_WDT_MCF) += mcf_wdt.o
->   obj-$(CONFIG_WDT_MESON_GXBB) += meson_gxbb_wdt.o
+The following changes since commit 392ff1449f7d30cc48fd4d17320d05882cd68f2e:
 
-Viele Grüße,
-Stefan Roese
+   Merge tag 'video-20241022' of 
+https://source.denx.de/u-boot/custodians/u-boot-video (2024-10-22 
+14:11:20 -0600)
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+are available in the Git repository at:
+
+   git@source.denx.de:u-boot/custodians/u-boot-watchdog.git
+
+for you to fetch changes up to ed3410ee6049a7683718e8255575ad55ee1bdefd:
+
+   watchdog: introduce separate SPL symbol for WDT_GPIO (2024-10-23 
+07:02:25 +0200)
+
+----------------------------------------------------------------
+Bastien Curutchet (1):
+       drivers: watchdog: Add DaVinci's watchdog support
+
+Rasmus Villemoes (15):
+       watchdog: gpio_wdt: add support for stoppable devices
+       doc: cyclic: remove reference to WATCHDOG_RESET
+       cyclic: introduce u-boot/schedule.h
+       led: include cyclic.h in led_sw_blink.c
+       m68k: asm/ptrace.h: include linux/types.h
+       fs/cramfs: use schedule instead of cyclic_run as callback
+       test: dm: wdt: replace cyclic_run() by schedule()
+       cyclic: make cyclic_run static
+       watchdog.h: change include of cyclic.h to u-boot/schedule.h
+       lib/sha*: include u-boot/schedule.h instead of cyclic.h
+       i2c: rzg2l: include u-boot/schedule.h
+       ddr: altera: include u-boot/schedule.h
+       boot: cedit: include u-boot/schedule.h
+       global_data.h: remove unnecesary include of cyclic.h
+       watchdog: introduce separate SPL symbol for WDT_GPIO
+
+  arch/m68k/include/asm/ptrace.h    |   2 +
+  boot/cedit.c                      |   1 +
+  common/cyclic.c                   |   3 +-
+  doc/develop/cyclic.rst            |  10 +--
+  drivers/ddr/altera/sdram_n5x.c    |   1 +
+  drivers/ddr/altera/sdram_soc64.c  |   1 +
+  drivers/i2c/rz_riic.c             |   1 +
+  drivers/led/led_sw_blink.c        |   1 +
+  drivers/watchdog/Kconfig          |  16 +++++
+  drivers/watchdog/Makefile         |   3 +-
+  drivers/watchdog/davinci_wdt.c    | 131 
+++++++++++++++++++++++++++++++++++++++
+  drivers/watchdog/gpio_wdt.c       |  27 +++++++-
+  fs/cramfs/uncompress.c            |   4 +-
+  include/asm-generic/global_data.h |   1 -
+  include/cyclic.h                  |  24 +------
+  include/u-boot/schedule.h         |  24 +++++++
+  include/watchdog.h                |   2 +-
+  lib/sha1.c                        |   2 +-
+  lib/sha256.c                      |   2 +-
+  lib/sha512.c                      |   2 +-
+  test/dm/wdt.c                     |  14 ++--
+  21 files changed, 225 insertions(+), 47 deletions(-)
+  create mode 100644 drivers/watchdog/davinci_wdt.c
+  create mode 100644 include/u-boot/schedule.h
