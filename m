@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F079CFA466
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 20:29:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F6CCFA466
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 20:29:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B45398919C;
-	Wed, 23 Oct 2024 22:29:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1FDD1892F5;
+	Wed, 23 Oct 2024 22:29:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36A538919D; Wed, 23 Oct 2024 22:29:19 +0200 (CEST)
+ id 49DD5892F0; Wed, 23 Oct 2024 22:29:19 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1CFD891A5
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 22:29:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1251888B4B
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 22:29:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
@@ -25,7 +25,7 @@ Authentication-Results: phobos.denx.de;
 Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1t3hya-001CNZ-09;
+ (envelope-from <tharvey@gateworks.com>) id 1t3hya-001CNZ-Jh;
  Wed, 23 Oct 2024 20:29:04 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>,
@@ -33,10 +33,9 @@ To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de
 Cc: linux-kernel@vger.kernel.org,
 	Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 2/4] imx: power-domain: Convert to use livetree API for fdt
- access
-Date: Wed, 23 Oct 2024 13:28:53 -0700
-Message-Id: <20241023202855.1571188-2-tharvey@gateworks.com>
+Subject: [PATCH 3/4] i2c: mxc_i2c: Convert to use livetree API for fdt access
+Date: Wed, 23 Oct 2024 13:28:54 -0700
+Message-Id: <20241023202855.1571188-3-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241023202855.1571188-1-tharvey@gateworks.com>
 References: <20241023202855.1571188-1-tharvey@gateworks.com>
@@ -60,61 +59,60 @@ X-Virus-Status: Clean
 
 Convert to using livetree API functions.
 
-Without this if livetree is enabled (OF_LIVE) the imx8m-power-domain
-driver will (silently) fail to probe its children leaving you with
-no power domain support causing issues with certain devices.
+Without this if livetree is enabled (OF_LIVE) the mxc-i2c
+driver will fail to support scl-gpios and sda-gpios for
+i2c bus recovery.
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
- drivers/power/domain/imx8m-power-domain.c | 18 +++++++-----------
- 1 file changed, 7 insertions(+), 11 deletions(-)
+ drivers/i2c/mxc_i2c.c | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/power/domain/imx8m-power-domain.c b/drivers/power/domain/imx8m-power-domain.c
-index 8b6870c86463..c22fbe60675e 100644
---- a/drivers/power/domain/imx8m-power-domain.c
-+++ b/drivers/power/domain/imx8m-power-domain.c
-@@ -456,25 +456,22 @@ static int imx8m_power_domain_of_xlate(struct power_domain *power_domain,
+diff --git a/drivers/i2c/mxc_i2c.c b/drivers/i2c/mxc_i2c.c
+index 2f3cb5908c91..2dfc1c4eab5d 100644
+--- a/drivers/i2c/mxc_i2c.c
++++ b/drivers/i2c/mxc_i2c.c
+@@ -29,7 +29,6 @@
+ #include <watchdog.h>
+ #include <dm.h>
+ #include <dm/pinctrl.h>
+-#include <fdtdec.h>
  
- static int imx8m_power_domain_bind(struct udevice *dev)
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -867,8 +866,7 @@ static int mxc_i2c_set_bus_speed(struct udevice *bus, unsigned int speed)
+ static int mxc_i2c_probe(struct udevice *bus)
  {
--	int offset;
-+	ofnode subnode;
- 	const char *name;
- 	int ret = 0;
+ 	struct mxc_i2c_bus *i2c_bus = dev_get_priv(bus);
+-	const void *fdt = gd->fdt_blob;
+-	int node = dev_of_offset(bus);
++	ofnode node = dev_ofnode(bus);
+ 	fdt_addr_t addr;
+ 	int ret, ret2;
  
--	offset = dev_of_offset(dev);
--	for (offset = fdt_first_subnode(gd->fdt_blob, offset); offset > 0;
--	     offset = fdt_next_subnode(gd->fdt_blob, offset)) {
-+	ofnode_for_each_subnode(subnode, dev_ofnode(dev)) {
- 		/* Bind the subnode to this driver */
--		name = fdt_get_name(gd->fdt_blob, offset, NULL);
-+		name = ofnode_get_name(subnode);
- 
- 		/* Descend into 'pgc' subnode */
- 		if (!strstr(name, "power-domain")) {
--			offset = fdt_first_subnode(gd->fdt_blob, offset);
--			name = fdt_get_name(gd->fdt_blob, offset, NULL);
-+			subnode = ofnode_first_subnode(subnode);
-+			name = ofnode_get_name(subnode);
- 		}
--
- 		ret = device_bind_with_driver_data(dev, dev->driver, name,
- 						   dev->driver_data,
--						   offset_to_ofnode(offset),
-+						   subnode,
- 						   NULL);
- 
- 		if (ret == -ENODEV)
-@@ -514,8 +511,7 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
- 	struct imx_pgc_domain_data *domain_data =
- 		(struct imx_pgc_domain_data *)dev_get_driver_data(dev);
- 
--	pdata->resource_id = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
--					    "reg", -1);
-+	pdata->resource_id = ofnode_read_u32_default(dev_ofnode(dev), "reg", -1);
- 	pdata->domain = &domain_data->domains[pdata->resource_id];
- 	pdata->regs = domain_data->pgc_regs;
- 	pdata->base = dev_read_addr_ptr(dev->parent);
+@@ -912,17 +910,15 @@ static int mxc_i2c_probe(struct udevice *bus)
+ 	 * See Documentation/devicetree/bindings/i2c/i2c-imx.txt
+ 	 * Use gpio to force bus idle when necessary.
+ 	 */
+-	ret = fdt_stringlist_search(fdt, node, "pinctrl-names", "gpio");
++	ret = ofnode_stringlist_search(node, "pinctrl-names", "gpio");
+ 	if (ret < 0) {
+ 		debug("i2c bus %d at 0x%2lx, no gpio pinctrl state.\n",
+ 		      dev_seq(bus), i2c_bus->base);
+ 	} else {
+-		ret = gpio_request_by_name_nodev(offset_to_ofnode(node),
+-				"scl-gpios", 0, &i2c_bus->scl_gpio,
+-				GPIOD_IS_OUT);
+-		ret2 = gpio_request_by_name_nodev(offset_to_ofnode(node),
+-				"sda-gpios", 0, &i2c_bus->sda_gpio,
+-				GPIOD_IS_OUT);
++		ret = gpio_request_by_name(bus, "scl-gpios", 0, &i2c_bus->scl_gpio,
++					   GPIOD_IS_OUT);
++		ret2 = gpio_request_by_name(bus, "sda-gpios", 0, &i2c_bus->sda_gpio,
++					    GPIOD_IS_OUT);
+ 		if (!dm_gpio_is_valid(&i2c_bus->sda_gpio) ||
+ 		    !dm_gpio_is_valid(&i2c_bus->scl_gpio) ||
+ 		    ret || ret2) {
 -- 
 2.25.1
 
