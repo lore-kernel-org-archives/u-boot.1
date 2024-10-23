@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55527CDDE79
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 12:13:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83E31CF5366
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 12:18:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4F058908D;
-	Wed, 23 Oct 2024 14:13:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0371989266;
+	Wed, 23 Oct 2024 14:18:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EpPpcF32";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="rR3Z9hga";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6686388FF6; Wed, 23 Oct 2024 14:13:21 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 608A489268; Wed, 23 Oct 2024 14:18:52 +0200 (CEST)
+Received: from mx2.securetransport.de (mx2.securetransport.de
+ [IPv6:2a03:4000:13:6c7::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 519CC8908D
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 14:13:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F6858925A
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 14:18:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3e5ffbc6acbso3234829b6e.3
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 05:13:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729685595; x=1730290395; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pqnYq6W+ihjzZy/yj9yWbgs7hBkvk9rbBtTNpx66Mlc=;
- b=EpPpcF32j/xCl8lpXcJvcZRR1xUR3JnPfBYqY5XxyP4KujgkeUqtBQ6mb8hdedEr9e
- 5U/lqTkSsGTUCuDpMZJjN5j+W+14BxxlvQwYDVEgJ5O++DmiqsZM6CmB9YCTt3jFI+Qa
- GMBQsmXZ8M0g5ZYBuAV6h4F9rPJrzcVk3spS+VFRrrZiJ7ZdSfp4WhyeOw54jpXUIogW
- qTG/xp3X8wWizPJWrkusjKkEEFgnoyqn8+cRZaT1c7ikb2g5W2qiDS0g+qhZK+dGNCwB
- nQ2UTniWnFIJmp06Y9aAe5qzS3ULHjOVqkj5gLPY3MtbQMimlwNvX2h7rBWkmmGESm7d
- p9Tg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729685595; x=1730290395;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pqnYq6W+ihjzZy/yj9yWbgs7hBkvk9rbBtTNpx66Mlc=;
- b=s1Cj/pqrjifhXNoEhlA3r/4WyAB8lumVZ6MS232bj7+nRZlTqR2cZ3f2316EXFK2kR
- fpl0cg4Lz/Xil47lezOJaQjUfBkhjScRGsXTGBr9Ya0a1F2pDJt8YbjrupkEhwPFpDe8
- Tfn8tmVjurmYIQVEKCSVPj3/3KXAsxtOx6CiaBtO7uqeURExhzs+6HfQJUPTmhuRsW2i
- LHFW4IYtmNE5nJm0lne9BRkYwb9bMeWCMYErgzpuDXpxjnrZ76+XULJ+5Y1cj0wmbJwL
- fVXtEIs7lpMF1vtPnWqjg/Txtfbu0jMhlvbTdw1RArORJ+EKF8Lm8yNu+anrCAyLJl/K
- WavQ==
-X-Gm-Message-State: AOJu0Yzt0b8e9lZbDEmzMHJNhk+SVQchbCsZ/IOw7nQNHtrrXl8Tf++E
- ku6ej+wnuCk6xGDnSomPU8jBQ26OljkrmhTqQVGsuMnOIcEHy/+n1cmNMydit59vAsKAryLcmea
- auFBvBduWXmZa1n5+x1bX7o4Ysjk8yMwtv0SfFw==
-X-Google-Smtp-Source: AGHT+IEAC3wEUKSF/lSaaDsXITzB5/1+HE3pkmnB3MASzrUKIldgVFu1OmDKJhX4RgyrxnG4emoZFEfaObmFu2NKAsU=
-X-Received: by 2002:a05:6808:178f:b0:3e5:dae2:c1f5 with SMTP id
- 5614622812f47-3e6245006bbmr2390746b6e.7.1729685594830; Wed, 23 Oct 2024
- 05:13:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1729685920;
+ bh=U2qmkjipLPClSzXLWtuLWeK4MtXuouaGV9Wp/aNAefc=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=rR3Z9hgaGdWTEeHI89CiS/xIP1xUW7UJ+G6gF2UaLiSzx/mnDFBGyQ2Jeiz/w5V7d
+ tBhYjH9i9bWB95r0OIdEmkoEWif31lS7DdtwH0S3meOqAcNjr1xDuaxvOXvAZKNg3t
+ Tf5qzPzJGDsMaxWO14kSqvzCuc/D58/7xLzEDXBgJBVXAadQAl3q4XVH7yYgp8BwSs
+ OFo16bmTSC77gcptC4oBbqRVyjeLZWTn9gHats3x+8nRh76I94vN24S5AcfE5brPSM
+ P0lHJdAA62dFEENe+RkluNvYjOd/l3FbHaTyet779doz3cViOzNJKOCU/8up2TPDi6
+ I3zbNc0OdtJ5Q==
+X-secureTransport-forwarded: yes
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Fabio Estevam
+ <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
+ <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
+Subject: RE: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
+ EEPROM ID page on DH i.MX8MP DHCOM
+Thread-Topic: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
+ EEPROM ID page on DH i.MX8MP DHCOM
+Thread-Index: AQHbGxfHmD5+3BWcGkWm07IML/aPr7KDeoyAgAXUiUCAAK5vAIAA1rQQgABasgCABjFZgIAAYh8AgADI4vCAABAiAIABs80Q
+Date: Wed, 23 Oct 2024 12:18:14 +0000
+Message-ID: <bef41c1fefeb422e9e1b8f8f0d241a13@dh-electronics.com>
+References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
+ <20241010132337.3259-2-cniedermaier@dh-electronics.com>
+ <934d25c2-39d8-4f51-b29e-8f20feb7431f@denx.de>
+ <a305b1455a984fca83de5a6c0d4b8dfc@dh-electronics.com>
+ <74bd0a6b-fe12-4e2c-af79-c1f8ffb7d484@denx.de>
+ <73ccb69b85094e24be2343d5cbc8879a@dh-electronics.com>
+ <17b9380b-39c0-40f2-bb28-319d26b2e13c@denx.de>
+ <7b9b543d7aad498591fa6a04a3154cf8@dh-electronics.com>
+ <a0f70ee2-6d71-4f66-b22e-994df2b28504@denx.de>
+ <d06620ee891f4e419bfeb8fe657ba729@dh-electronics.com>
+ <009179c8-5512-4ba6-beeb-2d508dd5abd8@denx.de>
+In-Reply-To: <009179c8-5512-4ba6-beeb-2d508dd5abd8@denx.de>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20241023101754.4021948-1-conor@kernel.org>
- <20241023101754.4021948-4-conor@kernel.org>
-In-Reply-To: <20241023101754.4021948-4-conor@kernel.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 23 Oct 2024 17:43:03 +0530
-Message-ID: <CAFA6WYOopnPPom+bO5FwP6GZ02mS9eLG1np5fx5tBR-rUW+BWw@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] riscv: dts: mpfs: migrate to OF_UPSTREAM
-To: Conor Dooley <conor@kernel.org>
-Cc: u-boot@lists.denx.de, Conor Dooley <conor.dooley@microchip.com>, 
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Tom Rini <trini@konsulko.com>, Cyril Jean <cyril.jean@microchip.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,909 +85,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 23 Oct 2024 at 15:48, Conor Dooley <conor@kernel.org> wrote:
->
-> From: Conor Dooley <conor.dooley@microchip.com>
->
-> The U-Boot copy of the mpfs devicetree has, in general, been neglected
-> somewhat in comparison to the one in Linux. Moving to OF_UPSTREAM to
-> keep both in sync should serve to eliminate that discrepancy.
->
-> Additionally, moving to OF_UPSTREAM will let U-Boot automatically pick
-> up the devicetree rework that is in progress at [1].
->
-> Link: https://lore.kernel.org/all/20241002-private-unequal-33cfa6101338@spud/ [1]
-> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
-> ---
-> v2:
-> - rebase on master, drop !DTC_FLAGS from Makefile
-> ---
->  arch/riscv/dts/Makefile                    |   1 -
->  arch/riscv/dts/mpfs-icicle-kit-fabric.dtsi |  71 ---
->  arch/riscv/dts/mpfs-icicle-kit-u-boot.dtsi |  14 -
->  arch/riscv/dts/mpfs-icicle-kit.dts         | 208 ---------
->  arch/riscv/dts/mpfs.dtsi                   | 511 ---------------------
->  configs/microchip_mpfs_icicle_defconfig    |   4 +-
->  dts/upstream/src/riscv/Makefile            |   6 +
->  7 files changed, 8 insertions(+), 807 deletions(-)
->  delete mode 100644 arch/riscv/dts/mpfs-icicle-kit-fabric.dtsi
->  delete mode 100644 arch/riscv/dts/mpfs-icicle-kit-u-boot.dtsi
->  delete mode 100644 arch/riscv/dts/mpfs-icicle-kit.dts
->  delete mode 100644 arch/riscv/dts/mpfs.dtsi
->  create mode 100644 dts/upstream/src/riscv/Makefile
->
-
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
-
--Sumit
-
-> diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
-> index f3dfd751cb4..bf32ead01b0 100644
-> --- a/arch/riscv/dts/Makefile
-> +++ b/arch/riscv/dts/Makefile
-> @@ -1,7 +1,6 @@
->  # SPDX-License-Identifier: GPL-2.0+
->
->  dtb-$(CONFIG_TARGET_ANDES_AE350) += ae350_32.dtb ae350_64.dtb
-> -dtb-$(CONFIG_TARGET_MICROCHIP_ICICLE) += mpfs-icicle-kit.dtb
->  dtb-$(CONFIG_TARGET_MILKV_DUO) += cv1800b-milkv-duo.dtb
->  dtb-$(CONFIG_TARGET_QEMU_VIRT) += qemu-virt32.dtb qemu-virt64.dtb
->  dtb-$(CONFIG_TARGET_OPENPITON_RISCV64) += openpiton-riscv64.dtb
-> diff --git a/arch/riscv/dts/mpfs-icicle-kit-fabric.dtsi b/arch/riscv/dts/mpfs-icicle-kit-fabric.dtsi
-> deleted file mode 100644
-> index 1069134f2e1..00000000000
-> --- a/arch/riscv/dts/mpfs-icicle-kit-fabric.dtsi
-> +++ /dev/null
-> @@ -1,71 +0,0 @@
-> -// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-> -/* Copyright (c) 2020-2021 Microchip Technology Inc */
-> -
-> -/ {
-> -       compatible = "microchip,mpfs-icicle-reference-rtlv2210", "microchip,mpfs-icicle-kit",
-> -                    "microchip,mpfs";
-> -
-> -       core_pwm0: pwm@40000000 {
-> -               compatible = "microchip,corepwm-rtl-v4";
-> -               reg = <0x0 0x40000000 0x0 0xF0>;
-> -               microchip,sync-update-mask = /bits/ 32 <0>;
-> -               #pwm-cells = <3>;
-> -               clocks = <&ccc_nw CLK_CCC_PLL0_OUT3>;
-> -               status = "disabled";
-> -       };
-> -
-> -       i2c2: i2c@40000200 {
-> -               compatible = "microchip,corei2c-rtl-v7";
-> -               reg = <0x0 0x40000200 0x0 0x100>;
-> -               #address-cells = <1>;
-> -               #size-cells = <0>;
-> -               clocks = <&ccc_nw CLK_CCC_PLL0_OUT3>;
-> -               interrupt-parent = <&plic>;
-> -               interrupts = <122>;
-> -               clock-frequency = <100000>;
-> -               status = "disabled";
-> -       };
-> -
-> -       pcie: pcie@3000000000 {
-> -               compatible = "microchip,pcie-host-1.0";
-> -               #address-cells = <0x3>;
-> -               #interrupt-cells = <0x1>;
-> -               #size-cells = <0x2>;
-> -               device_type = "pci";
-> -               reg = <0x30 0x0 0x0 0x8000000>, <0x0 0x43000000 0x0 0x10000>;
-> -               reg-names = "cfg", "apb";
-> -               bus-range = <0x0 0x7f>;
-> -               interrupt-parent = <&plic>;
-> -               interrupts = <119>;
-> -               interrupt-map = <0 0 0 1 &pcie_intc 0>,
-> -                               <0 0 0 2 &pcie_intc 1>,
-> -                               <0 0 0 3 &pcie_intc 2>,
-> -                               <0 0 0 4 &pcie_intc 3>;
-> -               interrupt-map-mask = <0 0 0 7>;
-> -               clocks = <&ccc_nw CLK_CCC_PLL0_OUT1>, <&ccc_nw CLK_CCC_PLL0_OUT3>;
-> -               clock-names = "fic1", "fic3";
-> -               ranges = <0x3000000 0x0 0x8000000 0x30 0x8000000 0x0 0x80000000>;
-> -               dma-ranges = <0x02000000 0x0 0x00000000 0x0 0x00000000 0x1 0x00000000>;
-> -               msi-parent = <&pcie>;
-> -               msi-controller;
-> -               status = "disabled";
-> -               pcie_intc: interrupt-controller {
-> -                       #address-cells = <0>;
-> -                       #interrupt-cells = <1>;
-> -                       interrupt-controller;
-> -               };
-> -       };
-> -
-> -       refclk_ccc: cccrefclk {
-> -               compatible = "fixed-clock";
-> -               #clock-cells = <0>;
-> -       };
-> -};
-> -
-> -&ccc_nw {
-> -       clocks = <&refclk_ccc>, <&refclk_ccc>, <&refclk_ccc>, <&refclk_ccc>,
-> -                <&refclk_ccc>, <&refclk_ccc>;
-> -       clock-names = "pll0_ref0", "pll0_ref1", "pll1_ref0", "pll1_ref1",
-> -                     "dll0_ref", "dll1_ref";
-> -       status = "okay";
-> -};
-> diff --git a/arch/riscv/dts/mpfs-icicle-kit-u-boot.dtsi b/arch/riscv/dts/mpfs-icicle-kit-u-boot.dtsi
-> deleted file mode 100644
-> index f60283fb6b3..00000000000
-> --- a/arch/riscv/dts/mpfs-icicle-kit-u-boot.dtsi
-> +++ /dev/null
-> @@ -1,14 +0,0 @@
-> -// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-> -/*
-> - * Copyright (C) 2020 Microchip Technology Inc.
-> - * Padmarao Begari <padmarao.begari@microchip.com>
-> - */
-> -
-> -/ {
-> -       aliases {
-> -               cpu1 = &cpu1;
-> -               cpu2 = &cpu2;
-> -               cpu3 = &cpu3;
-> -               cpu4 = &cpu4;
-> -       };
-> -};
-> diff --git a/arch/riscv/dts/mpfs-icicle-kit.dts b/arch/riscv/dts/mpfs-icicle-kit.dts
-> deleted file mode 100644
-> index 8aa5fb17d64..00000000000
-> --- a/arch/riscv/dts/mpfs-icicle-kit.dts
-> +++ /dev/null
-> @@ -1,208 +0,0 @@
-> -// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> -/*
-> - * Copyright (C) 2021-2022 Microchip Technology Inc.
-> - * Padmarao Begari <padmarao.begari@microchip.com>
-> - */
-> -
-> -/dts-v1/;
-> -
-> -#include "mpfs.dtsi"
-> -#include "mpfs-icicle-kit-fabric.dtsi"
-> -#include <dt-bindings/gpio/gpio.h>
-> -#include <dt-bindings/leds/common.h>
-> -
-> -/* Clock frequency (in Hz) of the rtcclk */
-> -#define RTCCLK_FREQ            1000000
-> -
-> -/ {
-> -       model = "Microchip PolarFire-SoC Icicle Kit";
-> -       compatible = "microchip,mpfs-icicle-reference-rtlv2210", "microchip,mpfs-icicle-kit",
-> -                    "microchip,mpfs";
-> -
-> -       aliases {
-> -               ethernet0 = &mac1;
-> -               serial0 = &mmuart0;
-> -               serial1 = &mmuart1;
-> -               serial2 = &mmuart2;
-> -               serial3 = &mmuart3;
-> -               serial4 = &mmuart4;
-> -       };
-> -
-> -       chosen {
-> -               stdout-path = "serial1:115200n8";
-> -       };
-> -
-> -       cpus {
-> -               timebase-frequency = <RTCCLK_FREQ>;
-> -       };
-> -
-> -       leds {
-> -               compatible = "gpio-leds";
-> -
-> -               led-1 {
-> -                       gpios = <&gpio2 16 GPIO_ACTIVE_HIGH>;
-> -                       color = <LED_COLOR_ID_RED>;
-> -                       label = "led1";
-> -               };
-> -
-> -               led-2 {
-> -                       gpios = <&gpio2 17 GPIO_ACTIVE_HIGH>;
-> -                       color = <LED_COLOR_ID_RED>;
-> -                       label = "led2";
-> -               };
-> -
-> -               led-3 {
-> -                       gpios = <&gpio2 18 GPIO_ACTIVE_HIGH>;
-> -                       color = <LED_COLOR_ID_AMBER>;
-> -                       label = "led3";
-> -               };
-> -
-> -               led-4 {
-> -                       gpios = <&gpio2 19 GPIO_ACTIVE_HIGH>;
-> -                       color = <LED_COLOR_ID_AMBER>;
-> -                       label = "led4";
-> -               };
-> -       };
-> -
-> -       ddrc_cache_lo: memory@80000000 {
-> -               device_type = "memory";
-> -               reg = <0x0 0x80000000 0x0 0x40000000>;
-> -               status = "okay";
-> -       };
-> -
-> -       ddrc_cache_hi: memory@1040000000 {
-> -               device_type = "memory";
-> -               reg = <0x10 0x40000000 0x0 0x40000000>;
-> -               status = "okay";
-> -       };
-> -
-> -       reserved-memory {
-> -               #address-cells = <2>;
-> -               #size-cells = <2>;
-> -               ranges;
-> -
-> -               hss_payload: region@BFC00000 {
-> -                       reg = <0x0 0xBFC00000 0x0 0x400000>;
-> -                       no-map;
-> -               };
-> -       };
-> -};
-> -
-> -&core_pwm0 {
-> -       status = "okay";
-> -};
-> -
-> -&gpio2 {
-> -       interrupts = <53>, <53>, <53>, <53>,
-> -                    <53>, <53>, <53>, <53>,
-> -                    <53>, <53>, <53>, <53>,
-> -                    <53>, <53>, <53>, <53>,
-> -                    <53>, <53>, <53>, <53>,
-> -                    <53>, <53>, <53>, <53>,
-> -                    <53>, <53>, <53>, <53>,
-> -                    <53>, <53>, <53>, <53>;
-> -       status = "okay";
-> -};
-> -
-> -&i2c0 {
-> -       status = "okay";
-> -};
-> -
-> -&i2c1 {
-> -       status = "okay";
-> -};
-> -
-> -&i2c2 {
-> -       status = "okay";
-> -};
-> -
-> -&mac0 {
-> -       phy-mode = "sgmii";
-> -       phy-handle = <&phy0>;
-> -       status = "enabled";
-> -};
-> -
-> -&mac1 {
-> -       phy-mode = "sgmii";
-> -       phy-handle = <&phy1>;
-> -       status = "okay";
-> -
-> -       phy1: ethernet-phy@9 {
-> -               reg = <9>;
-> -       };
-> -
-> -       phy0: ethernet-phy@8 {
-> -               reg = <8>;
-> -       };
-> -};
-> -
-> -&mbox {
-> -       status = "okay";
-> -};
-> -
-> -&mmc {
-> -       bus-width = <4>;
-> -       disable-wp;
-> -       cap-sd-highspeed;
-> -       cap-mmc-highspeed;
-> -       mmc-ddr-1_8v;
-> -       mmc-hs200-1_8v;
-> -       sd-uhs-sdr12;
-> -       sd-uhs-sdr25;
-> -       sd-uhs-sdr50;
-> -       sd-uhs-sdr104;
-> -       status = "okay";
-> -};
-> -
-> -&mmuart1 {
-> -       status = "okay";
-> -};
-> -
-> -&mmuart2 {
-> -       status = "okay";
-> -};
-> -
-> -&mmuart3 {
-> -       status = "okay";
-> -};
-> -
-> -&mmuart4 {
-> -       status = "okay";
-> -};
-> -
-> -&pcie {
-> -       status = "okay";
-> -};
-> -
-> -&qspi {
-> -       status = "okay";
-> -};
-> -
-> -&refclk {
-> -       clock-frequency = <125000000>;
-> -};
-> -
-> -&refclk_ccc {
-> -       clock-frequency = <50000000>;
-> -};
-> -
-> -&rtc {
-> -       status = "okay";
-> -};
-> -
-> -&spi0 {
-> -       status = "okay";
-> -};
-> -
-> -&spi1 {
-> -       status = "okay";
-> -};
-> -
-> -&syscontroller {
-> -       status = "okay";
-> -};
-> -
-> -&usb {
-> -       status = "okay";
-> -       dr_mode = "host";
-> -};
-> diff --git a/arch/riscv/dts/mpfs.dtsi b/arch/riscv/dts/mpfs.dtsi
-> deleted file mode 100644
-> index 6012a285070..00000000000
-> --- a/arch/riscv/dts/mpfs.dtsi
-> +++ /dev/null
-> @@ -1,511 +0,0 @@
-> -// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> -/* Copyright (c) 2020-2021 Microchip Technology Inc */
-> -
-> -#include "dt-bindings/clock/microchip-mpfs-clock.h"
-> -
-> -/ {
-> -       #address-cells = <2>;
-> -       #size-cells = <2>;
-> -       model = "Microchip PolarFire SoC";
-> -       compatible = "microchip,mpfs";
-> -
-> -       cpus {
-> -               #address-cells = <1>;
-> -               #size-cells = <0>;
-> -
-> -               cpu0: cpu@0 {
-> -                       compatible = "sifive,e51", "sifive,rocket0", "riscv";
-> -                       device_type = "cpu";
-> -                       i-cache-block-size = <64>;
-> -                       i-cache-sets = <128>;
-> -                       i-cache-size = <16384>;
-> -                       reg = <0>;
-> -                       riscv,isa = "rv64imac";
-> -                       clocks = <&clkcfg CLK_CPU>;
-> -                       status = "disabled";
-> -
-> -                       cpu0_intc: interrupt-controller {
-> -                               #interrupt-cells = <1>;
-> -                               compatible = "riscv,cpu-intc";
-> -                               interrupt-controller;
-> -                       };
-> -               };
-> -
-> -               cpu1: cpu@1 {
-> -                       compatible = "sifive,u54-mc", "sifive,rocket0", "riscv";
-> -                       d-cache-block-size = <64>;
-> -                       d-cache-sets = <64>;
-> -                       d-cache-size = <32768>;
-> -                       d-tlb-sets = <1>;
-> -                       d-tlb-size = <32>;
-> -                       device_type = "cpu";
-> -                       i-cache-block-size = <64>;
-> -                       i-cache-sets = <64>;
-> -                       i-cache-size = <32768>;
-> -                       i-tlb-sets = <1>;
-> -                       i-tlb-size = <32>;
-> -                       mmu-type = "riscv,sv39";
-> -                       reg = <1>;
-> -                       riscv,isa = "rv64imafdc";
-> -                       clocks = <&clkcfg CLK_CPU>;
-> -                       tlb-split;
-> -                       next-level-cache = <&cctrllr>;
-> -                       status = "okay";
-> -
-> -                       cpu1_intc: interrupt-controller {
-> -                               #interrupt-cells = <1>;
-> -                               compatible = "riscv,cpu-intc";
-> -                               interrupt-controller;
-> -                       };
-> -               };
-> -
-> -               cpu2: cpu@2 {
-> -                       compatible = "sifive,u54-mc", "sifive,rocket0", "riscv";
-> -                       d-cache-block-size = <64>;
-> -                       d-cache-sets = <64>;
-> -                       d-cache-size = <32768>;
-> -                       d-tlb-sets = <1>;
-> -                       d-tlb-size = <32>;
-> -                       device_type = "cpu";
-> -                       i-cache-block-size = <64>;
-> -                       i-cache-sets = <64>;
-> -                       i-cache-size = <32768>;
-> -                       i-tlb-sets = <1>;
-> -                       i-tlb-size = <32>;
-> -                       mmu-type = "riscv,sv39";
-> -                       reg = <2>;
-> -                       riscv,isa = "rv64imafdc";
-> -                       clocks = <&clkcfg CLK_CPU>;
-> -                       tlb-split;
-> -                       next-level-cache = <&cctrllr>;
-> -                       status = "okay";
-> -
-> -                       cpu2_intc: interrupt-controller {
-> -                               #interrupt-cells = <1>;
-> -                               compatible = "riscv,cpu-intc";
-> -                               interrupt-controller;
-> -                       };
-> -               };
-> -
-> -               cpu3: cpu@3 {
-> -                       compatible = "sifive,u54-mc", "sifive,rocket0", "riscv";
-> -                       d-cache-block-size = <64>;
-> -                       d-cache-sets = <64>;
-> -                       d-cache-size = <32768>;
-> -                       d-tlb-sets = <1>;
-> -                       d-tlb-size = <32>;
-> -                       device_type = "cpu";
-> -                       i-cache-block-size = <64>;
-> -                       i-cache-sets = <64>;
-> -                       i-cache-size = <32768>;
-> -                       i-tlb-sets = <1>;
-> -                       i-tlb-size = <32>;
-> -                       mmu-type = "riscv,sv39";
-> -                       reg = <3>;
-> -                       riscv,isa = "rv64imafdc";
-> -                       clocks = <&clkcfg CLK_CPU>;
-> -                       tlb-split;
-> -                       next-level-cache = <&cctrllr>;
-> -                       status = "okay";
-> -
-> -                       cpu3_intc: interrupt-controller {
-> -                               #interrupt-cells = <1>;
-> -                               compatible = "riscv,cpu-intc";
-> -                               interrupt-controller;
-> -                       };
-> -               };
-> -
-> -               cpu4: cpu@4 {
-> -                       compatible = "sifive,u54-mc", "sifive,rocket0", "riscv";
-> -                       d-cache-block-size = <64>;
-> -                       d-cache-sets = <64>;
-> -                       d-cache-size = <32768>;
-> -                       d-tlb-sets = <1>;
-> -                       d-tlb-size = <32>;
-> -                       device_type = "cpu";
-> -                       i-cache-block-size = <64>;
-> -                       i-cache-sets = <64>;
-> -                       i-cache-size = <32768>;
-> -                       i-tlb-sets = <1>;
-> -                       i-tlb-size = <32>;
-> -                       mmu-type = "riscv,sv39";
-> -                       reg = <4>;
-> -                       riscv,isa = "rv64imafdc";
-> -                       clocks = <&clkcfg CLK_CPU>;
-> -                       tlb-split;
-> -                       next-level-cache = <&cctrllr>;
-> -                       status = "okay";
-> -                       cpu4_intc: interrupt-controller {
-> -                               #interrupt-cells = <1>;
-> -                               compatible = "riscv,cpu-intc";
-> -                               interrupt-controller;
-> -                       };
-> -               };
-> -
-> -               cpu-map {
-> -                       cluster0 {
-> -                               core0 {
-> -                                       cpu = <&cpu0>;
-> -                               };
-> -
-> -                               core1 {
-> -                                       cpu = <&cpu1>;
-> -                               };
-> -
-> -                               core2 {
-> -                                       cpu = <&cpu2>;
-> -                               };
-> -
-> -                               core3 {
-> -                                       cpu = <&cpu3>;
-> -                               };
-> -
-> -                               core4 {
-> -                                       cpu = <&cpu4>;
-> -                               };
-> -                       };
-> -               };
-> -       };
-> -
-> -       refclk: mssrefclk {
-> -               compatible = "fixed-clock";
-> -               #clock-cells = <0>;
-> -       };
-> -
-> -       syscontroller: syscontroller {
-> -               compatible = "microchip,mpfs-sys-controller";
-> -               mboxes = <&mbox 0>;
-> -       };
-> -
-> -       soc {
-> -               #address-cells = <2>;
-> -               #size-cells = <2>;
-> -               compatible = "simple-bus";
-> -               ranges;
-> -
-> -               cctrllr: cache-controller@2010000 {
-> -                       compatible = "microchip,mpfs-ccache", "sifive,fu540-c000-ccache", "cache";
-> -                       reg = <0x0 0x2010000 0x0 0x1000>;
-> -                       cache-block-size = <64>;
-> -                       cache-level = <2>;
-> -                       cache-sets = <1024>;
-> -                       cache-size = <2097152>;
-> -                       cache-unified;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <1>, <3>, <4>, <2>;
-> -               };
-> -
-> -               clint: clint@2000000 {
-> -                       compatible = "sifive,fu540-c000-clint", "sifive,clint0";
-> -                       reg = <0x0 0x2000000 0x0 0xC000>;
-> -                       interrupts-extended = <&cpu0_intc 3>, <&cpu0_intc 7>,
-> -                                             <&cpu1_intc 3>, <&cpu1_intc 7>,
-> -                                             <&cpu2_intc 3>, <&cpu2_intc 7>,
-> -                                             <&cpu3_intc 3>, <&cpu3_intc 7>,
-> -                                             <&cpu4_intc 3>, <&cpu4_intc 7>;
-> -               };
-> -
-> -               plic: interrupt-controller@c000000 {
-> -                       compatible = "sifive,fu540-c000-plic", "sifive,plic-1.0.0";
-> -                       reg = <0x0 0xc000000 0x0 0x4000000>;
-> -                       #address-cells = <0>;
-> -                       #interrupt-cells = <1>;
-> -                       interrupt-controller;
-> -                       interrupts-extended = <&cpu0_intc 11>,
-> -                                             <&cpu1_intc 11>, <&cpu1_intc 9>,
-> -                                             <&cpu2_intc 11>, <&cpu2_intc 9>,
-> -                                             <&cpu3_intc 11>, <&cpu3_intc 9>,
-> -                                             <&cpu4_intc 11>, <&cpu4_intc 9>;
-> -                       riscv,ndev = <186>;
-> -               };
-> -
-> -               pdma: dma-controller@3000000 {
-> -                       compatible = "sifive,fu540-c000-pdma", "sifive,pdma0";
-> -                       reg = <0x0 0x3000000 0x0 0x8000>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <5 6>, <7 8>, <9 10>, <11 12>;
-> -                       dma-channels = <4>;
-> -                       #dma-cells = <1>;
-> -               };
-> -
-> -               clkcfg: clkcfg@20002000 {
-> -                       compatible = "microchip,mpfs-clkcfg";
-> -                       reg = <0x0 0x20002000 0x0 0x1000>, <0x0 0x3E001000 0x0 0x1000>;
-> -                       clocks = <&refclk>;
-> -                       #clock-cells = <1>;
-> -                       #reset-cells = <1>;
-> -               };
-> -
-> -               ccc_se: clock-controller@38010000 {
-> -                       compatible = "microchip,mpfs-ccc";
-> -                       reg = <0x0 0x38010000 0x0 0x1000>, <0x0 0x38020000 0x0 0x1000>,
-> -                             <0x0 0x39010000 0x0 0x1000>, <0x0 0x39020000 0x0 0x1000>;
-> -                       #clock-cells = <1>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               ccc_ne: clock-controller@38040000 {
-> -                       compatible = "microchip,mpfs-ccc";
-> -                       reg = <0x0 0x38040000 0x0 0x1000>, <0x0 0x38080000 0x0 0x1000>,
-> -                             <0x0 0x39040000 0x0 0x1000>, <0x0 0x39080000 0x0 0x1000>;
-> -                       #clock-cells = <1>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               ccc_nw: clock-controller@38100000 {
-> -                       compatible = "microchip,mpfs-ccc";
-> -                       reg = <0x0 0x38100000 0x0 0x1000>, <0x0 0x38200000 0x0 0x1000>,
-> -                             <0x0 0x39100000 0x0 0x1000>, <0x0 0x39200000 0x0 0x1000>;
-> -                       #clock-cells = <1>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               ccc_sw: clock-controller@38400000 {
-> -                       compatible = "microchip,mpfs-ccc";
-> -                       reg = <0x0 0x38400000 0x0 0x1000>, <0x0 0x38800000 0x0 0x1000>,
-> -                             <0x0 0x39400000 0x0 0x1000>, <0x0 0x39800000 0x0 0x1000>;
-> -                       #clock-cells = <1>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               mmuart0: serial@20000000 {
-> -                       compatible = "ns16550a";
-> -                       reg = <0x0 0x20000000 0x0 0x400>;
-> -                       reg-io-width = <4>;
-> -                       reg-shift = <2>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <90>;
-> -                       current-speed = <115200>;
-> -                       clocks = <&clkcfg CLK_MMUART0>;
-> -                       status = "disabled"; /* Reserved for the HSS */
-> -               };
-> -
-> -               mmuart1: serial@20100000 {
-> -                       compatible = "ns16550a";
-> -                       reg = <0x0 0x20100000 0x0 0x400>;
-> -                       reg-io-width = <4>;
-> -                       reg-shift = <2>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <91>;
-> -                       current-speed = <115200>;
-> -                       clocks = <&clkcfg CLK_MMUART1>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               mmuart2: serial@20102000 {
-> -                       compatible = "ns16550a";
-> -                       reg = <0x0 0x20102000 0x0 0x400>;
-> -                       reg-io-width = <4>;
-> -                       reg-shift = <2>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <92>;
-> -                       current-speed = <115200>;
-> -                       clocks = <&clkcfg CLK_MMUART2>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               mmuart3: serial@20104000 {
-> -                       compatible = "ns16550a";
-> -                       reg = <0x0 0x20104000 0x0 0x400>;
-> -                       reg-io-width = <4>;
-> -                       reg-shift = <2>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <93>;
-> -                       current-speed = <115200>;
-> -                       clocks = <&clkcfg CLK_MMUART3>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               mmuart4: serial@20106000 {
-> -                       compatible = "ns16550a";
-> -                       reg = <0x0 0x20106000 0x0 0x400>;
-> -                       reg-io-width = <4>;
-> -                       reg-shift = <2>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <94>;
-> -                       clocks = <&clkcfg CLK_MMUART4>;
-> -                       current-speed = <115200>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               /* Common node entry for emmc/sd */
-> -               mmc: mmc@20008000 {
-> -                       compatible = "microchip,mpfs-sd4hc", "cdns,sd4hc";
-> -                       reg = <0x0 0x20008000 0x0 0x1000>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <88>;
-> -                       clocks = <&clkcfg CLK_MMC>;
-> -                       max-frequency = <200000000>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               spi0: spi@20108000 {
-> -                       compatible = "microchip,mpfs-spi";
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -                       reg = <0x0 0x20108000 0x0 0x1000>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <54>;
-> -                       clocks = <&clkcfg CLK_SPI0>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               spi1: spi@20109000 {
-> -                       compatible = "microchip,mpfs-spi";
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -                       reg = <0x0 0x20109000 0x0 0x1000>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <55>;
-> -                       clocks = <&clkcfg CLK_SPI1>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               qspi: spi@21000000 {
-> -                       compatible = "microchip,mpfs-qspi", "microchip,coreqspi-rtl-v2";
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -                       reg = <0x0 0x21000000 0x0 0x1000>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <85>;
-> -                       clocks = <&clkcfg CLK_QSPI>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               i2c0: i2c@2010a000 {
-> -                       compatible = "microchip,mpfs-i2c", "microchip,corei2c-rtl-v7";
-> -                       reg = <0x0 0x2010a000 0x0 0x1000>;
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <58>;
-> -                       clocks = <&clkcfg CLK_I2C0>;
-> -                       clock-frequency = <100000>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               i2c1: i2c@2010b000 {
-> -                       compatible = "microchip,mpfs-i2c", "microchip,corei2c-rtl-v7";
-> -                       reg = <0x0 0x2010b000 0x0 0x1000>;
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <61>;
-> -                       clocks = <&clkcfg CLK_I2C1>;
-> -                       clock-frequency = <100000>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               can0: can@2010c000 {
-> -                       compatible = "microchip,mpfs-can";
-> -                       reg = <0x0 0x2010c000 0x0 0x1000>;
-> -                       clocks = <&clkcfg CLK_CAN0>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <56>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               can1: can@2010d000 {
-> -                       compatible = "microchip,mpfs-can";
-> -                       reg = <0x0 0x2010d000 0x0 0x1000>;
-> -                       clocks = <&clkcfg CLK_CAN1>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <57>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               mac0: ethernet@20110000 {
-> -                       compatible = "microchip,mpfs-macb", "cdns,macb";
-> -                       reg = <0x0 0x20110000 0x0 0x2000>;
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <64>, <65>, <66>, <67>, <68>, <69>;
-> -                       local-mac-address = [00 00 00 00 00 00];
-> -                       clocks = <&clkcfg CLK_MAC0>, <&clkcfg CLK_AHB>;
-> -                       clock-names = "pclk", "hclk";
-> -                       resets = <&clkcfg CLK_MAC0>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               mac1: ethernet@20112000 {
-> -                       compatible = "microchip,mpfs-macb", "cdns,macb";
-> -                       reg = <0x0 0x20112000 0x0 0x2000>;
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <70>, <71>, <72>, <73>, <74>, <75>;
-> -                       local-mac-address = [00 00 00 00 00 00];
-> -                       clocks = <&clkcfg CLK_MAC1>, <&clkcfg CLK_AHB>;
-> -                       clock-names = "pclk", "hclk";
-> -                       resets = <&clkcfg CLK_MAC1>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               gpio0: gpio@20120000 {
-> -                       compatible = "microchip,mpfs-gpio";
-> -                       reg = <0x0 0x20120000 0x0 0x1000>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupt-controller;
-> -                       #interrupt-cells = <1>;
-> -                       clocks = <&clkcfg CLK_GPIO0>;
-> -                       gpio-controller;
-> -                       #gpio-cells = <2>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               gpio1: gpio@20121000 {
-> -                       compatible = "microchip,mpfs-gpio";
-> -                       reg = <0x0 0x20121000 0x0 0x1000>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupt-controller;
-> -                       #interrupt-cells = <1>;
-> -                       clocks = <&clkcfg CLK_GPIO1>;
-> -                       gpio-controller;
-> -                       #gpio-cells = <2>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               gpio2: gpio@20122000 {
-> -                       compatible = "microchip,mpfs-gpio";
-> -                       reg = <0x0 0x20122000 0x0 0x1000>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupt-controller;
-> -                       #interrupt-cells = <1>;
-> -                       clocks = <&clkcfg CLK_GPIO2>;
-> -                       gpio-controller;
-> -                       #gpio-cells = <2>;
-> -                       status = "disabled";
-> -               };
-> -
-> -               rtc: rtc@20124000 {
-> -                       compatible = "microchip,mpfs-rtc";
-> -                       reg = <0x0 0x20124000 0x0 0x1000>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <80>, <81>;
-> -                       clocks = <&clkcfg CLK_RTC>, <&clkcfg CLK_RTCREF>;
-> -                       clock-names = "rtc", "rtcref";
-> -                       status = "disabled";
-> -               };
-> -
-> -               usb: usb@20201000 {
-> -                       compatible = "microchip,mpfs-musb";
-> -                       reg = <0x0 0x20201000 0x0 0x1000>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <86>, <87>;
-> -                       clocks = <&clkcfg CLK_USB>;
-> -                       interrupt-names = "dma","mc";
-> -                       status = "disabled";
-> -               };
-> -
-> -               mbox: mailbox@37020000 {
-> -                       compatible = "microchip,mpfs-mailbox";
-> -                       reg = <0x0 0x37020000 0x0 0x58>, <0x0 0x2000318C 0x0 0x40>,
-> -                             <0x0 0x37020800 0x0 0x100>;
-> -                       interrupt-parent = <&plic>;
-> -                       interrupts = <96>;
-> -                       #mbox-cells = <1>;
-> -                       status = "disabled";
-> -               };
-> -       };
-> -};
-> diff --git a/configs/microchip_mpfs_icicle_defconfig b/configs/microchip_mpfs_icicle_defconfig
-> index 94952a96762..a35721a8a89 100644
-> --- a/configs/microchip_mpfs_icicle_defconfig
-> +++ b/configs/microchip_mpfs_icicle_defconfig
-> @@ -4,8 +4,8 @@ CONFIG_SYS_MALLOC_F_LEN=0x2000
->  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
->  CONFIG_ENV_SIZE=0x2000
-> -CONFIG_DEFAULT_DEVICE_TREE="mpfs-icicle-kit"
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
-> +CONFIG_DEFAULT_DEVICE_TREE="microchip/mpfs-icicle-kit"
-> +CONFIG_OF_UPSTREAM=y
->  CONFIG_SYS_LOAD_ADDR=0x80200000
->  CONFIG_SYS_MEM_TOP_HIDE=0x400000
->  CONFIG_TARGET_MICROCHIP_ICICLE=y
-> diff --git a/dts/upstream/src/riscv/Makefile b/dts/upstream/src/riscv/Makefile
-> new file mode 100644
-> index 00000000000..980617e6de3
-> --- /dev/null
-> +++ b/dts/upstream/src/riscv/Makefile
-> @@ -0,0 +1,6 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +include $(srctree)/scripts/Makefile.dts
-> +
-> +DTC_FLAGS += -R 4 -p 0x1000
-> +
-> --
-> 2.45.2
->
+RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQpTZW50OiBUdWVzZGF5LCBPY3RvYmVy
+IDIyLCAyMDI0IDE6NTcgUE0NCj4gT24gMTAvMjIvMjQgMTE6MzEgQU0sIENocmlzdG9waCBOaWVk
+ZXJtYWllciB3cm90ZToNCj4+IEZyb206IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRlPg0KPj4g
+U2VudDogVHVlc2RheSwgT2N0b2JlciAyMiwgMjAyNCAxOjAxIEFNDQo+Pj4gT24gMTAvMjEvMjQg
+NTozOCBQTSwgQ2hyaXN0b3BoIE5pZWRlcm1haWVyIHdyb3RlOg0KPj4+DQo+Pj4gWy4uLl0NCj4+
+Pg0KPj4+Pj4gSWYgeWVzLCB0aGVuIHRoZXJlIGlzIG5vIG5lZWQgZm9yIGFueSBzdGF0aWMgdmFy
+aWFibGU6DQo+Pj4+Pg0KPj4+Pj4gYm9hcmRfaW5pdCgpIHsNCj4+Pj4+ICAgICB1OCBlZXByb21b
+MzJdOw0KPj4+Pj4gICAgIGRoX3JlYWRfZWVwcm9tX3dscChlZXByb20pOyAvLyByZWFkIHRoZSBl
+ZXByb20gb25jZQ0KPj4+Pj4gICAgIGRoX3NldHVwX21hY19hZGRyZXNzKGVlcHJvbSk7IC8vIGV4
+dHJhY3QgTUFDIGZyb20gRUVQUk9NDQo+Pj4+PiAgICAgZGhfYWRkX2l0ZW1fbnVtYmVyX2FuZF9z
+ZXJpYWxfdG9fZW52KGVlcHJvbSk7IC8vIGV4dHJhY3QgU04gZnJvbSBFRVBST00NCj4+Pj4+ICAg
+ICAvLyBvbmNlIHRoaXMgZnVuY3Rpb24gZXhpdHMsIHRoZSBlZXByb20gdmFyaWFibGUgb24gc3Rh
+Y2sgaXMgZGlzY2FyZGVkDQo+Pj4+PiAgICAgLy8gd2hpY2ggaXMgT0ssIHNpbmNlIGl0IHdvbid0
+IGJlIHVzZWQgYW55bW9yZSBhbnl3YXkNCj4+Pj4+IH0NCj4+Pj4NCj4+Pj4gVGhlIGlkZWEgaXMg
+dGhhdCBmdW5jdGlvbiBkaF9hZGRfaXRlbV9udW1iZXJfYW5kX3NlcmlhbF90b19lbnYoKSBlbmNh
+cHN1bGF0ZXMNCj4+Pj4gdGhlIHJlYWRpbmcuDQo+Pj4NCj4+PiBUaGUgZnVuY3Rpb24gd2hpY2gg
+aW50ZXJhY3RzIHdpdGggdGhlIEVFUFJPTSBvbiBzdGFydCB1cCwgb25jZSwgY2FuIGhhdmUNCj4+
+PiB0aGlzIG5hbWUsIHN1cmUuDQo+Pg0KPj4gU29ycnksIEkgbWVhbiB0aGUgZnVuY3Rpb24gZGhf
+Z2V0X3ZhbHVlX2Zyb21fZWVwcm9tX2lkX3BhZ2UoKSBoZXJlLg0KPiANCj4gVGhlIGZ1bmN0aW9u
+IG5hbWUgZG9lc24ndCByZWFsbHkgbWF0dGVyLCBwbGVhc2UgcGljayBhIGZpdHRpbmcgb25lLg0K
+DQpJdCdzIG5vdCBhYm91dCB0aGUgZnVuY3Rpb24gbmFtZS4gSSBoYXZlIHJlZmVyZW5jZWQgdGhl
+IHdyb25nIGZ1bmN0aW9uLg0KDQo+Pj4+IEkgZG9uJ3Qgd2FudCB0byBoYXZlIHRvIHdvcnJ5IGFi
+b3V0IHRoZSBzdHJ1Y3R1cmUgYW5kIG51bWJlciBvZg0KPj4+PiBieXRlcyBvZiB0aGUgRUVQUk9N
+IElEIHBhZ2UgYW5kIHdhbnQgdG8gYmUgaW5kZXBlbmRlbnQgb2YgaXQuIEl0IGlzIHBsYW5uZWQg
+dG8NCj4+Pj4gZXh0ZW5kIHRoZSBzdHJ1Y3R1cmUgYW5kIGluY3JlYXNlIHRoZSBudW1iZXIgb2Yg
+Ynl0ZXMgZm9yIHRoZSBTVE0zMk1QMi4gVGhlDQo+Pj4+IGNoYW5nZXMgdG8gdGhlIHNpemUgd2ls
+bCB0aGVuIGRlcGVuZCBvbiB0aGUgdmVyc2lvbiBvZiB0aGUgZGF0YSBpbiB0aGUgaGVhZGVyDQo+
+Pj4+IHdpdGhpbiB0aGUgc3RydWN0dXJlLg0KPj4+DQo+Pj4gSXQgaXMgT0sgdG8gYWxsb2NhdGUg
+MzIgb3IgNjQgYnl0ZXMgb24gc3RhY2ssIHNpbmNlIHRoYXQgY2h1bmsgb2YgbWVtb3J5DQo+Pj4g
+aXMgZnJlZSdkIG9uIHJldHVybiBmcm9tIHRoZSBmdW5jdGlvbi4gVGhlIGxpZmVzcGFuIG9mIHRo
+YXQgYWxsb2NhdGVkDQo+Pj4gbWVtb3J5IGlzIGV4YWN0bHkgYXMgbG9uZyBhcyBpdCBzaG91bGQg
+YmUsIGFuZCBpdCBkb2VzIG5vdCB3YXN0ZSBVLUJvb3QNCj4+PiBtZW1vcnkgdW5uZWNlc3Nhcmls
+eS4NCj4+Pg0KPj4+IFNvIGZhciwgYWxsIGtub3duIEVFUFJPTXMgaGF2ZSBXTFAgc2l6ZSBvZiAz
+MiBvciA2NCBCeWVzLg0KPj4+DQo+Pj4+IEhvd2V2ZXIsIHRoZXNlIGNoYW5nZXMgc2hvdWxkIHRo
+ZW4gb25seSBoYXZlIHRvIGJlIG1hZGUNCj4+Pj4gd2l0aGluIHRoZSBmdW5jdGlvbiBkaF9hZGRf
+aXRlbV9udW1iZXJfYW5kX3NlcmlhbF90b19lbnYoKSBmb3IgcmVhZGluZyB0aGUNCj4+Pj4gRUVQ
+Uk9NIElEIHBhZ2UuIEkgYWNjZXB0IHRoZSBzdGF0aWMgdmFyaWFibGUgaW4gb3JkZXIgdG8gYmV0
+dGVyIGlzb2xhdGUgdGhlDQo+Pj4+IGZ1bmN0aW9uLg0KPj4NCj4+IFNvcnJ5LCBoZXJlIEkgbWVh
+biBhbHNvIHRoZSBmdW5jdGlvbiBkaF9nZXRfdmFsdWVfZnJvbV9lZXByb21faWRfcGFnZSgpLg0K
+Pj4NCj4+PiBUaGlzIGNhbiB2ZXJ5IHdlbGwgYmU6DQo+Pj4NCj4+PiBkaF9hZGRfaXRlbV9udW1i
+ZXJfYW5kX3NlcmlhbF90b19lbnYoKSB7DQo+Pj4gICAgICB1OCBlZXByb21bMzJdOw0KPj4+ICAg
+ICAgZGhfcmVhZF9lZXByb21fd2xwKGVlcHJvbSk7IC8vIHJlYWQgdGhlIGVlcHJvbSBvbmNlDQo+
+Pj4gICAgICBkaF9zZXR1cF9tYWNfYWRkcmVzcyhlZXByb20pOyAvLyBleHRyYWN0IE1BQyBmcm9t
+IEVFUFJPTQ0KPj4+ICAgICAgZGhfYWRkX2l0ZW1fbnVtYmVyX2FuZF9zZXJpYWxfdG9fZW52KGVl
+cHJvbSk7IC8vIGV4dHJhY3QgU04gZnJvbSBFRVBST00NCj4+PiAgICAgIC8vIG9uY2UgdGhpcyBm
+dW5jdGlvbiBleGl0cywgdGhlIGVlcHJvbSB2YXJpYWJsZSBvbiBzdGFjayBpcyBkaXNjYXJkZWQN
+Cj4+PiAgICAgIC8vIHdoaWNoIGlzIE9LLCBzaW5jZSBpdCB3b24ndCBiZSB1c2VkIGFueW1vcmUg
+YW55d2F5DQo+Pj4gfQ0KPj4+DQo+Pj4gYm9hcmRfaW5pdCgpIHsNCj4+PiAgICAgLi4NCj4+PiAg
+ICAgZGhfYWRkX2l0ZW1fbnVtYmVyX2FuZF9zZXJpYWxfdG9fZW52KCk7DQo+Pj4gICAgIC4uLg0K
+Pj4+IH0NCj4+Pg0KPj4+PiBTaW5jZSB0aGUgbWVtb3J5IGlzIGZyZWVkIHVwIGFnYWluIHdoZW4g
+dGhlIG9wZXJhdGluZyBzeXN0ZW0gYm9vdHMsDQo+Pj4+IHRoaXMgY29uc3VtcHRpb24gb2YgMzIg
+Ynl0ZXMgaW4gVS1Cb290IGlzIG5vdCBhIHByb2JsZW0sIGJlY2F1c2UgaXQgaXMgb25seQ0KPj4+
+PiB0ZW1wb3JhcnkuDQo+Pj4gVGhpcyBpcyBub3QgZ29vZCwgcGxlYXNlIGRvIG5vdCB3YXN0ZSBt
+ZW1vcnkgaW4gVS1Cb290IGlmIGl0IGNhbiBiZQ0KPj4+IGVhc2lseSBhdm9pZGVkIGJ5IGF1dG9t
+YXRpY2FsbHkgYWxsb2NhdGluZyBpdCBvbiBzdGFjayBhbmQgZnJlZWluZyBpdA0KPj4+IHdoZW4g
+bm90IG5lZWRlZC4NCj4+Pg0KPj4+IFsuLi5dDQo+Pg0KPj4gSSBkb24ndCB3YW50IHRvIGFsbG9j
+YXRlIHRoZSBtZW1vcnkgaW4gdGhlIGZ1bmN0aW9uIGJvYXJkX2luaXQoKS4NCj4gDQo+IFlvdSBk
+byBub3QsIHRoZSBmb2xsb3dpbmcgYXV0b21hdGljYWxseSByZXNlcnZlcyBzcGFjZSBvbiBzdGFj
+ayB3aGVuDQo+IGNhbGxlZCBhbmQgZnJlZXMgaXQgdXAgdXBvbiBmdW5jdGlvbiByZXR1cm46DQo+
+IA0KPiBmdW5jdGlvbiBmb28oKSB7DQo+ICAgIHU4IGFycmF5WzEyXTsNCj4gICAgLi4uDQo+ICAg
+IHN0dWZmKGFycmF5KTsNCj4gICAgLi4uDQo+IH0NCg0KU29ycnksIEkgZXhwcmVzc2VkIG15c2Vs
+ZiBpbmNvcnJlY3RseSBoZXJlLiBPZiBjb3Vyc2UgSSBtZWFudCB0aGF0DQpJIGRvbid0IHdhbnQg
+dG8gcmVzZXJ2ZSBtZW1vcnkgb24gdGhlIHN0YWNrIGZvciB0aGUgRUVQUk9NIElEIHBhZ2UNCmlu
+IHRoZSBib2FyZF9pbml0KCkgZnVuY3Rpb24uDQoNCj4+IEkgd2FudCB0byBoYW5kbGUNCj4+IHNp
+emUgYW5kIGNhY2hpbmcgaW4gdGhlIGZ1bmN0aW9uIGRoX2dldF92YWx1ZV9mcm9tX2VlcHJvbV9p
+ZF9wYWdlKCkuIFNvIEkgZG9uJ3QNCj4+IHdhbnQgdG8gZGVhbCB3aXRoIHNpemUgYW5kIHN0cnVj
+dHVyZSBpbiB0aGUgZnVuY3Rpb24gYm9hcmRfaW5pdCgpLiBGb3IgbWUsIHRoZSB1c2UNCj4+IG9m
+IGEgc3RhdGljIHZhcmlhYmxlIGlzIE9LLCBidXQgeW91IGRvbid0IGxpa2UgaXQuIERvIHlvdSBr
+bm93IGhvdyBJIGNhbiBkbyB0aGlzDQo+PiB3aXRob3V0IGFzc2lnbmluZyBhIHN0YXRpYyB2YXJp
+YWJsZSwgYnV0IG5vdCBhbGxvY2F0ZSB0aGUgbWVtb3J5IHNvbWV3aGVyZSBpbiBhDQo+PiBjYWxs
+ZXIgZnVuY3Rpb24/DQo+IEV2ZW4gdGhlIHN0YXRpYyB2YXJpYWJsZSBzcGFjZSBpcyBhbGxvY2F0
+ZWQgc29tZXdoZXJlLCBlaXRoZXIgaW4gLmJzcyBvcg0KPiAuZGF0YSBzZWN0aW9uLCBleGNlcHQg
+d2l0aCBzdGF0aWMgdmFyaWFibGUocykgdGhlIG1lbW9yeSBwZXJzaXN0cw0KPiB0aHJvdWdob3V0
+IHRoZSBsaWZldGltZSBvZiBVLUJvb3QgYmVjYXVzZSB0aGVpciBjb250ZW50IGhhcyB0byBiZQ0K
+PiByZXRhaW5lZCBldmVuIHdoZW4gdGhlIGZ1bmN0aW9uIHVzaW5nIHRoZWlyIGNvbnRlbnQgcmV0
+dXJucy4NCj4gDQo+IFdpdGggdmFyaWFibGUocykgYWxsb2NhdGVkIG9uIHN0YWNrICh3aGljaCBp
+cyBtYWpvcml0eSBvZiB2YXJpYWJsZSksIHRoZQ0KPiBtZW1vcnkgYWxsb2NhdGlvbiBoYXBwZW5z
+IG9uIGVudHJ5IHRvIHRoZSBmdW5jdGlvbiBhbmQgdGhlIG1lbW9yeSBpcw0KPiBhdXRvbWF0aWNh
+bGx5IGZyZWVkIG9uIGV4aXQgZnJvbSB0aGUgZnVuY3Rpb24uDQo+IA0KPiBJdCBpcyBwZXJmZWN0
+bHkgZmluZSB0byBjYWxsIHNvbWUgd3JhcHBlciBzdXBlcmZ1bmN0aW9uIGZyb20NCj4gYm9hcmRf
+aW5pdCgpIHdoaWNoIGhvbGRzIHRoZSBhcnJheSBvbiBzdGFjayBhbmQgY2FsbHMgYWxsIHRoZSBF
+RVBST00NCj4gcGFyc2VyL2hhbmRsZXIgZnVuY3Rpb25zOg0KPiANCj4gZWVwcm9tX3N1cGVyd3Jh
+cHBlcigpIHsNCj4gICAgdTggZWVwcm9tWzY0XTsNCj4gICAgLi4uDQo+ICAgIGVlcHJvbV9kb19z
+dHVmZjEoZWVwcm9tKTsNCj4gICAgZWVwcm9tX2RvX3N0dWZmMihlZXByb20pOw0KPiAgICAuLi4N
+Cj4gfQ0KPiANCj4gYm9hcmRfaW5pdCgpIHsNCj4gICAgLi4uDQo+ICAgIGVlcHJvbV9zdXBlcndy
+YXBwZXIoKTsNCj4gICAgLi4uDQo+IH0NCg0KVGhhdCdzIG5vdCB3aGF0IEknbSBsb29raW5nIGZv
+ci4gRG8geW91IGhhdmUgYW5vdGhlciBzb2x1dGlvbj8NCg0KUmVnYXJkcw0KQ2hyaXN0b3BoDQo=
