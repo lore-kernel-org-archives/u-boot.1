@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBEABCF5389
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1BF0CF5386
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:36:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E9068933E;
+	by phobos.denx.de (Postfix) with ESMTP id C6E7D89396;
 	Wed, 23 Oct 2024 15:29:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="RM9U+G7x";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="PpZC7mh9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3908D89396; Wed, 23 Oct 2024 15:29:39 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 5D5E98933E; Wed, 23 Oct 2024 15:29:40 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2688789378
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:29:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 497D789325
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:29:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-37d70df0b1aso5411815f8f.3
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:29:33 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-431548bd1b4so67311795e9.3
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:29:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729690172; x=1730294972; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729690163; x=1730294963; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s1PGPiBrrEy/i6m/9uYgnU5vvxUw2TYy10sba5q7ln0=;
- b=RM9U+G7xV8WUbssjSvEy64VJ2QaCFn2JJsKm3i8j/rTT+h7xQYt0mxS/qL1CZPIBTo
- e4M/vFJSmJfjSZ82FI8grs/3P/RKBD9U3CvViyZ3ET4zKFWMUQiimBrHpp3dgH4WKinL
- eW5fRjvtefS4L43nr1EltbJSNChOKNUNg4QYfDTMUURvWqPdS+Vi5ispcLy9y9XHz6db
- UXqbKdTBctAl+E11vgs69WUdjKpOipdNbCu8fCE8raJqc5BcqDCllq6T8eMsAbrUPuhJ
- Umv7Ilg7j4OpjJFmDVsony0f3K2TadQ3TZUh76G3SVFzZXWkg7tlqeD+uextXJJuRcU6
- BAAQ==
+ bh=GPno4ADtXhZUllZMcZrfRejL4Hx0JRA70lXU/jFDHMI=;
+ b=PpZC7mh9foLKVo75S6MsoDgciM3vY1p8Bo+dBtdwYqTwgnp2P5oigHWyc4hEALmFEz
+ 5WMbZJVuWqW1oAHSU4smW8iEtCz5XN5rJKM4XdS2Aq/MP9g93MMAPX37pRLt9ieJkasE
+ yl0Hj8yNJGBThjc5212xBjLgvmkWxU6yGIBEE/AvXeIY/6KMuoUNcrE3RnwYuB9gBCmU
+ 0gWcZcUY943f2K2TZoOFm14xcEwKixM34QR7szY3MJa3fogxX9H7/5QD9H0EEyUmHnhJ
+ 1qN299Z5U1SbRNBI2vHadpfao7PEDBomIHVQGrks7zH0CcCLlcDeeIgj223AGONEqSdD
+ +N7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729690172; x=1730294972;
+ d=1e100.net; s=20230601; t=1729690163; x=1730294963;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=s1PGPiBrrEy/i6m/9uYgnU5vvxUw2TYy10sba5q7ln0=;
- b=OV4kpsho4aGvlv2uHIESLk/rafMQfm/EZCKLDJEB9SllUqaDze5FDuqRU8chx0V+jO
- 3rKuUUSCeWDNQoR4FqOnU/dnMlXmZZYNYamO2+rbxKyRCD9AkTIGlgSbao5krTg2skdi
- aGrTLWgGCbtNKkIPDZkPIqVjk+IRL/MhWmWtMP0dnUKNuOaTWdN+H23HvO+diWoSkIqA
- 8YonUjwsfH0tpMZibVfq8a5ScvcRm3kQB+tZxMcvHsRK8BXVgryQceCwuWnvVnyUcPfV
- SW8lHAAxkLLydNNFHi0wwh2/Je6myKLTL/U3FAbLNlTH8DghAQ70RMk5CwIlR+NPad5I
- WCEw==
-X-Gm-Message-State: AOJu0Yz6uBO4EUTzFMNBqiABtPyuBOuDLNJdjtOFWnPohf7J+gtZpGHy
- MaBIwW3Ao1Y2NJuBWVvyH/dUYxDP0/nNKcaG+7AzFO6bYfjmBUGaWiaZzvPGYxp0yEDuUDi9IZT
- E
-X-Google-Smtp-Source: AGHT+IFPVLYAdhM61lsapQ8u/x1Edt2hiMq9q6wmP913hSlazaCNyivroZ722xH3/UZTa91hSD+r1Q==
-X-Received: by 2002:a05:6000:10c9:b0:37d:47ee:10d9 with SMTP id
- ffacd0b85a97d-37efcf5bca6mr1795741f8f.34.1729690172570; 
- Wed, 23 Oct 2024 06:29:32 -0700 (PDT)
+ bh=GPno4ADtXhZUllZMcZrfRejL4Hx0JRA70lXU/jFDHMI=;
+ b=RdoNN9I5TEoGT4eeJlzBIvNBCAVrkpuGPJJ0nAjrrSbYIot3XQeZRfD4vg9Hr58Fje
+ wf7OIaKJPDmKCtmtZz4mfwjewoHjrKv6F+K7cJdiwkjvs7wnKrbHU8a9EJVi9TFXnSR+
+ vrFIXivxSW2EbkdWN0ga13GLcQW11u/DT9Yf6B/xPrapNvvG43tQ10rbGk0PNkmr9beB
+ sqhrvuh3dOBx3yAubiYk38soJua222CPOMq4FXrZP8CLaddKw/3vvaxlqznKL4IPaWiM
+ pmdinjGIEGXdrQqqdOBoQCeA3n242Fj1NKbImFJjggManhGv0lEFvxG//H5E4/dnj5PG
+ TYPg==
+X-Gm-Message-State: AOJu0YxoX7z0qM7F8ZqH+Rb+A8k6QmbhQ91cOg17RDLFsNC0/1Nb/o04
+ UcDmsRMjFuYtQjvC8V3rz8yKKghxNXYNp1wYgeWNBUCiinJr5XIasRPnqFDGOfRoqHw9y2qJAtU
+ v
+X-Google-Smtp-Source: AGHT+IE+w4VyfAJBi/w9pfRGv7IBnUjzmt6lGPS24earg0gK0+g044zZ2kABYR3lreXj3LdG0MxyQQ==
+X-Received: by 2002:a05:600c:1d99:b0:431:52cc:877e with SMTP id
+ 5b1f17b1804b1-43184209af9mr18523965e9.20.1729690162657; 
+ Wed, 23 Oct 2024 06:29:22 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.29.31
+ ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.29.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Oct 2024 06:29:32 -0700 (PDT)
+ Wed, 23 Oct 2024 06:29:22 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
-To: u-boot@lists.denx.de,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Matthias Brugger <mbrugger@suse.com>,
+To: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
  Peter Robinson <pbrobinson@gmail.com>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v10 33/37] arm: mach-bcm283x: Add ARMV8_MULTIENTRY support
-Date: Wed, 23 Oct 2024 15:20:16 +0200
-Message-ID: <20241023132116.970117-34-patrick.rudolph@9elements.com>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v10 28/37] arm: bcm283x: Generate ACPI tables
+Date: Wed, 23 Oct 2024 15:20:11 +0200
+Message-ID: <20241023132116.970117-29-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241023132116.970117-1-patrick.rudolph@9elements.com>
 References: <20241023132116.970117-1-patrick.rudolph@9elements.com>
@@ -97,322 +95,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When ACPI is enabled over FDT the APs cannot be brought out of reset
-by the OS using the "FDT spin-table" mechanism, as no FDT is provided
-to the OS. The APs must be released out of reset in u-boot and then
-brought up in an ACPI compliant fashion.
+Generate SoC specific ACPI tables for BCM2711:
+- FADT
+- PPTT
+- GTDT
 
-When ARMV8_MULTIENTRY is specified, the APs are released from reset
-and will enter U-Boot after it has been relocated as well.
+Board specific tables like DSDT and SSDT are added in a separate patch.
 
-By default ARMV8_MULTIENTRY is not selected, keeping existing behaviour.
+MADT is already properly generated from the FDT.
 
-TEST: All APs enter U-Boot when run on qemu-system-aarch64 and on
-      real hardware.
+When ACPI is enabled for a different SoC compliation will fail by
+design, indicating the required functions that needs to be implemented.
+When ACPI is not enabled the added code does nothing, keeping existing
+behaviour.
+
+TEST: Booted on RPi4 with only ACPI enabled, providing no FDT to the OS.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>
 Cc: Matthias Brugger <mbrugger@suse.com>
 Cc: Peter Robinson <pbrobinson@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
 ---
 Changelog v2:
-- Drop CPU code from board
-- Add CPU driver to release APs from reset
+- Drop duplicated code to generate ACPI tables. Is now part of efi loader.
 Changelog v4:
-- Use the generic armv8 CPU driver
-- Probe all CPUs
-- Release secondary CPUs in the probe function
-- Use of_to_plat() to parse DT
-- Drop udelay()
-- Select the GICv2 driver
-Changelog v5:
-- Cosmetic fixes
-- Drop arch_early_init_r()
+- Drop acpi_fill_madt() as it's now generated by drivers
 Changelog v6:
 - Update header order
-- Drop ifdef
 ---
- arch/arm/Kconfig              |   1 +
- arch/arm/mach-bcm283x/Kconfig |   5 +-
- drivers/cpu/Makefile          |   2 +-
- drivers/cpu/bcm283x_cpu.c     | 214 ++++++++++++++++++++++++++++++++++
- 4 files changed, 220 insertions(+), 2 deletions(-)
- create mode 100644 drivers/cpu/bcm283x_cpu.c
+ arch/arm/mach-bcm283x/Makefile       |   4 +
+ arch/arm/mach-bcm283x/bcm2711_acpi.c | 128 +++++++++++++++++++++++++++
+ 2 files changed, 132 insertions(+)
+ create mode 100644 arch/arm/mach-bcm283x/bcm2711_acpi.c
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 0d0c731dd0..787f983ffd 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -651,6 +651,7 @@ config ARCH_ORION5X
+diff --git a/arch/arm/mach-bcm283x/Makefile b/arch/arm/mach-bcm283x/Makefile
+index 7cd068832f..38e320307d 100644
+--- a/arch/arm/mach-bcm283x/Makefile
++++ b/arch/arm/mach-bcm283x/Makefile
+@@ -4,3 +4,7 @@
  
- config ARCH_BCM283X
- 	bool "Broadcom BCM283X family"
-+	select CPU
- 	select DM
- 	select DM_GPIO
- 	select DM_SERIAL
-diff --git a/arch/arm/mach-bcm283x/Kconfig b/arch/arm/mach-bcm283x/Kconfig
-index b3287ce8bc..0ef8156c64 100644
---- a/arch/arm/mach-bcm283x/Kconfig
-+++ b/arch/arm/mach-bcm283x/Kconfig
-@@ -24,7 +24,9 @@ config BCM2837_64B
- 	bool "Broadcom BCM2837 SoC 64-bit support"
- 	depends on ARCH_BCM283X
- 	select BCM2837
-+	select DRIVER_GICV2
- 	select ARM64
-+	select CPU_ARMV8
- 
- config BCM2711
- 	bool "Broadcom BCM2711 SoC support"
-@@ -42,11 +44,12 @@ config BCM2711_64B
- 	bool "Broadcom BCM2711 SoC 64-bit support"
- 	depends on ARCH_BCM283X
- 	select BCM2711
-+	select DRIVER_GICV2
- 	select ARM64
-+	select CPU_ARMV8
- 
- menu "Broadcom BCM283X family"
- 	depends on ARCH_BCM283X
--
- choice
- 	prompt "Broadcom BCM283X board select"
- 	optional
-diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
-index 773395693a..eaf494706e 100644
---- a/drivers/cpu/Makefile
-+++ b/drivers/cpu/Makefile
-@@ -6,7 +6,7 @@
- 
- obj-$(CONFIG_CPU) += cpu-uclass.o
- 
--
-+obj-$(CONFIG_ARCH_BCM283X) += bcm283x_cpu.o
- obj-$(CONFIG_ARCH_BMIPS) += bmips_cpu.o
- obj-$(CONFIG_ARCH_IMX8) += imx8_cpu.o
- obj-$(CONFIG_ARCH_AT91) += at91_cpu.o
-diff --git a/drivers/cpu/bcm283x_cpu.c b/drivers/cpu/bcm283x_cpu.c
+ obj-$(CONFIG_BCM2835) += lowlevel_init.o
+ obj-y	+= init.o reset.o mbox.o msg.o phys2bus.o
++
++ifeq ($(CONFIG_GENERATE_ACPI_TABLE),y)
++obj-$(CONFIG_BCM2711) += bcm2711_acpi.o
++endif
+\ No newline at end of file
+diff --git a/arch/arm/mach-bcm283x/bcm2711_acpi.c b/arch/arm/mach-bcm283x/bcm2711_acpi.c
 new file mode 100644
-index 0000000000..59a7b142c9
+index 0000000000..79b283353c
 --- /dev/null
-+++ b/drivers/cpu/bcm283x_cpu.c
-@@ -0,0 +1,214 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/arm/mach-bcm283x/bcm2711_acpi.c
+@@ -0,0 +1,128 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Copyright 2024 9elements GmbH
++ * (C) Copyright 2024 9elements GmbH
++ *
++ * See file CREDITS for list of people who contributed to this
++ * project.
 + */
 +
-+#include <cpu.h>
-+#include <cpu_func.h>
-+#include <dm.h>
-+#include <fdt_support.h>
-+#include <acpi/acpigen.h>
-+#include <asm/armv8/cpu.h>
-+#include <asm/cache.h>
-+#include <asm/io.h>
-+#include <asm/global_data.h>
-+#include <asm/system.h>
-+#include <asm-generic/sections.h>
-+#include <linux/bitops.h>
-+#include <linux/clk-provider.h>
-+#include <linux/delay.h>
-+#include "armv8_cpu.h"
++#include <string.h>
++#include <tables_csum.h>
++#include <acpi/acpi_table.h>
++#include <asm/acpi_table.h>
++#include <asm/armv8/sec_firmware.h>
++#include <asm/arch/acpi/bcm2711.h>
++#include <dm/uclass.h>
 +
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+struct bcm_plat {
-+	u64 release_addr;
-+};
-+
-+static int cpu_bcm_get_desc(const struct udevice *dev, char *buf, int size)
++void acpi_fill_fadt(struct acpi_fadt *fadt)
 +{
-+	struct cpu_plat *plat = dev_get_parent_plat(dev);
-+	const char *name;
++	fadt->flags = ACPI_FADT_HW_REDUCED_ACPI | ACPI_FADT_LOW_PWR_IDLE_S0;
 +
-+	if (size < 32)
-+		return -ENOSPC;
-+
-+	if (device_is_compatible(dev, "arm,cortex-a53"))
-+		name = "A53";
-+	else if (device_is_compatible(dev, "arm,cortex-a72"))
-+		name = "A72";
-+	else
-+		name = "?";
-+
-+	snprintf(buf, size, "Broadcom Cortex-%s at %u MHz\n",
-+		 name, plat->timebase_freq);
-+
-+	return 0;
++	if (CONFIG_IS_ENABLED(SEC_FIRMWARE_ARMV8_PSCI) &&
++	    sec_firmware_support_psci_version() != PSCI_INVALID_VER)
++		fadt->arm_boot_arch = ACPI_ARM_PSCI_COMPLIANT;
 +}
 +
-+static int cpu_bcm_get_info(const struct udevice *dev, struct cpu_info *info)
++#define L3_ATTRIBUTES (ACPI_PPTT_READ_ALLOC | ACPI_PPTT_WRITE_ALLOC | \
++			(ACPI_PPTT_CACHE_TYPE_UNIFIED << \
++			 ACPI_PPTT_CACHE_TYPE_SHIFT))
++#define L3_SIZE 0x100000
++#define L3_SETS 0x400
++#define L3_WAYS 0x10
++
++#define L1D_ATTRIBUTES (ACPI_PPTT_READ_ALLOC | ACPI_PPTT_WRITE_ALLOC | \
++			(ACPI_PPTT_CACHE_TYPE_DATA << \
++			 ACPI_PPTT_CACHE_TYPE_SHIFT))
++#define L1D_SIZE 0x8000
++#define L1D_SETS 0x100
++#define L1D_WAYS 2
++
++#define L1I_ATTRIBUTES (ACPI_PPTT_READ_ALLOC | \
++			(ACPI_PPTT_CACHE_TYPE_INSTR << \
++			 ACPI_PPTT_CACHE_TYPE_SHIFT))
++#define L1I_SIZE 0xc000
++#define L1I_SETS 0x100
++#define L1I_WAYS 3
++
++static int acpi_write_pptt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
 +{
-+	struct cpu_plat *plat = dev_get_parent_plat(dev);
++	struct acpi_table_header *header;
++	int cluster_offset, l3_offset;
++	u32 offsets[2];
 +
-+	info->cpu_freq = plat->timebase_freq * 1000;
-+	info->features = BIT(CPU_FEAT_L1_CACHE) | BIT(CPU_FEAT_MMU);
++	header = ctx->current;
++	ctx->tab_start = ctx->current;
 +
-+	return 0;
-+}
++	memset(header, '\0', sizeof(struct acpi_table_header));
 +
-+static int cpu_bcm_get_count(const struct udevice *dev)
-+{
-+	return uclass_id_count(UCLASS_CPU);
-+}
++	acpi_fill_header(header, "PPTT");
++	header->revision = acpi_get_table_revision(ACPITAB_PPTT);
++	acpi_inc(ctx, sizeof(*header));
 +
-+static int cpu_bcm_get_vendor(const struct udevice *dev,  char *buf, int size)
-+{
-+	snprintf(buf, size, "Broadcom");
++	l3_offset = acpi_pptt_add_cache(ctx, ACPI_PPTT_ALL_VALID, 0, L3_SIZE,
++					L3_SETS, L3_WAYS, L3_ATTRIBUTES, 64);
 +
-+	return 0;
-+}
++	cluster_offset = acpi_pptt_add_proc(ctx, ACPI_PPTT_PHYSICAL_PACKAGE |
++					    ACPI_PPTT_CHILDREN_IDENTICAL,
++					    0, 0, 1, &l3_offset);
 +
-+static int cpu_bcm_is_current(struct udevice *dev)
-+{
-+	struct cpu_plat *plat = dev_get_parent_plat(dev);
++	offsets[0] = acpi_pptt_add_cache(ctx, ACPI_PPTT_ALL_VALID, 0, L1D_SIZE,
++					 L1D_SETS, L1D_WAYS, L1D_ATTRIBUTES, 64);
 +
-+	if (plat->cpu_id == (read_mpidr() & 0xffff))
-+		return 1;
++	offsets[1] = acpi_pptt_add_cache(ctx, ACPI_PPTT_ALL_BUT_WRITE_POL, 0,
++					 L1I_SIZE, L1I_SETS, L1I_WAYS,
++					 L1I_ATTRIBUTES, 64);
 +
-+	return 0;
-+}
-+
-+/**
-+ * bcm_cpu_on - Releases the secondary CPU from it's spintable
-+ *
-+ * Write the CPU's spintable mailbox and let the CPU enter U-Boot.
-+ *
-+ * @dev: Device to start
-+ * @return: zero on success or error code on failure.
-+ */
-+static int bcm_cpu_on(struct udevice *dev)
-+{
-+	struct bcm_plat *plat = dev_get_plat(dev);
-+	ulong *start_address;
-+
-+	if (plat->release_addr == ~0ULL)
-+		return -ENODATA;
-+
-+	start_address = map_physmem(plat->release_addr, sizeof(uintptr_t), MAP_NOCACHE);
-+
-+	/* Point secondary CPU to U-Boot entry */
-+	*start_address = (uintptr_t)_start;
-+
-+	/* Make sure the other CPUs see the written start address */
-+	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+		flush_dcache_all();
-+
-+	/* Send an event to wake up the secondary CPU. */
-+	asm("dsb	ishst\n"
-+	    "sev");
-+
-+	unmap_physmem(start_address, MAP_NOCACHE);
-+
-+	return 0;
-+}
-+
-+static const struct cpu_ops cpu_bcm_ops = {
-+	.get_desc	= cpu_bcm_get_desc,
-+	.get_info	= cpu_bcm_get_info,
-+	.get_count	= cpu_bcm_get_count,
-+	.get_vendor	= cpu_bcm_get_vendor,
-+	.is_current	= cpu_bcm_is_current,
-+};
-+
-+static const struct udevice_id cpu_bcm_ids[] = {
-+	{ .compatible = "arm,cortex-a53" },	/* RPi 3 */
-+	{ .compatible = "arm,cortex-a72" },	/* RPi 4 */
-+	{ }
-+};
-+
-+static int bcm_cpu_bind(struct udevice *dev)
-+{
-+	struct cpu_plat *plat = dev_get_parent_plat(dev);
-+
-+	plat->cpu_id = dev_read_addr(dev);
-+
-+	return 0;
-+}
-+
-+/**
-+ * bcm_cpu_of_to_plat - Gather spin-table release address
-+ *
-+ * Read the spin-table release address to allow all seconary CPUs to enter
-+ * U-Boot when necessary.
-+ *
-+ * @dev: Device to start
-+ */
-+static int bcm_cpu_of_to_plat(struct udevice *dev)
-+{
-+	struct bcm_plat *plat = dev_get_plat(dev);
-+	const char *prop;
-+
-+	if (CONFIG_IS_ENABLED(ARMV8_MULTIENTRY)) {
-+		plat->release_addr = ~0ULL;
-+
-+		prop = dev_read_string(dev, "enable-method");
-+		if (!prop || strcmp(prop, "spin-table"))
-+			return -ENODEV;
-+
-+		plat->release_addr = dev_read_u64_default(dev, "cpu-release-addr", ~0ULL);
-+
-+		if (plat->release_addr == ~0ULL)
-+			return -ENODEV;
++	for (int i = 0; i < uclass_id_count(UCLASS_CPU); i++) {
++		acpi_pptt_add_proc(ctx, ACPI_PPTT_CHILDREN_IDENTICAL |
++				   ACPI_PPTT_NODE_IS_LEAF |
++				   ACPI_PPTT_PROC_ID_VALID,
++				   cluster_offset, i, 2, offsets);
 +	}
 +
++	header->length = ctx->current - ctx->tab_start;
++	header->checksum = table_compute_checksum(header, header->length);
++
++	acpi_inc(ctx, header->length);
++	acpi_add_table(ctx, header);
++
 +	return 0;
-+}
++};
 +
-+static int bcm_cpu_probe(struct udevice *dev)
++ACPI_WRITER(5pptt, "PPTT", acpi_write_pptt, 0);
++
++static int rpi_write_gtdt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
 +{
-+	struct cpu_plat *plat = dev_get_parent_plat(dev);
-+	struct clk clk;
-+	int ret;
++	struct acpi_table_header *header;
++	struct acpi_gtdt *gtdt;
 +
-+	/* Get a clock if it exists */
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (!ret) {
-+		ret = clk_enable(&clk);
-+		if (ret && (ret != -ENOSYS || ret != -EOPNOTSUPP))
-+			return ret;
-+		ret = clk_get_rate(&clk);
-+		if (IS_ERR_VALUE(ret))
-+			return ret;
-+		plat->timebase_freq = ret;
-+	}
++	gtdt = ctx->current;
++	header = &gtdt->header;
 +
-+	/*
-+	 * The armstub holds the secondary CPUs in a spinloop. When
-+	 * ARMV8_MULTIENTRY is enabled release the secondary CPUs and
-+	 * let them enter U-Boot as well.
-+	 */
-+	if (CONFIG_IS_ENABLED(ARMV8_MULTIENTRY)) {
-+		ret = bcm_cpu_on(dev);
-+		if (ret)
-+			return ret;
-+	}
++	memset(gtdt, '\0', sizeof(struct acpi_gtdt));
 +
-+	return ret;
-+}
++	acpi_fill_header(header, "GTDT");
++	header->length = sizeof(struct acpi_gtdt);
++	header->revision = acpi_get_table_revision(ACPITAB_GTDT);
 +
-+struct acpi_ops bcm283x_cpu_acpi_ops = {
-+	.fill_ssdt	= armv8_cpu_fill_ssdt,
-+	.fill_madt	= armv8_cpu_fill_madt,
++	gtdt->cnt_ctrl_base = BCM2711_ARM_LOCAL_BASE_ADDRESS + 0x1c;
++	gtdt->sec_el1_gsiv = 29;
++	gtdt->sec_el1_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->el1_gsiv = 30;
++	gtdt->el1_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->virt_el1_gsiv = 27;
++	gtdt->virt_el1_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->el2_gsiv = 26;
++	gtdt->el2_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->cnt_read_base = 0xffffffffffffffff;
++
++	header->checksum = table_compute_checksum(header, header->length);
++
++	acpi_add_table(ctx, gtdt);
++
++	acpi_inc(ctx, sizeof(struct acpi_gtdt));
++
++	return 0;
 +};
 +
-+U_BOOT_DRIVER(cpu_bcm_drv) = {
-+	.name		= "bcm283x_cpu",
-+	.id		= UCLASS_CPU,
-+	.of_match	= cpu_bcm_ids,
-+	.ops		= &cpu_bcm_ops,
-+	.probe		= bcm_cpu_probe,
-+	.bind		= bcm_cpu_bind,
-+	.of_to_plat	= bcm_cpu_of_to_plat,
-+	.plat_auto	= sizeof(struct bcm_plat),
-+	ACPI_OPS_PTR(&bcm283x_cpu_acpi_ops)
-+};
++ACPI_WRITER(5gtdt, "GTDT", rpi_write_gtdt, 0);
 -- 
 2.46.2
 
