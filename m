@@ -4,146 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB70DCFA474
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 20:55:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6BB4CFA472
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 20:55:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5271F89397;
+	by phobos.denx.de (Postfix) with ESMTP id C07C68939B;
 	Wed, 23 Oct 2024 22:55:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=al-enterprise.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=al-enterprise.com header.i=@al-enterprise.com header.b="Q2u3KoVa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SxZIpCci";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA9F68919C; Wed, 23 Oct 2024 18:35:11 +0200 (CEST)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on20614.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2606::614])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E737A88B11; Wed, 23 Oct 2024 22:11:20 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EFEE892B8
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 18:35:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=al-enterprise.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5722087F7D
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 22:11:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=girish.kumar@al-enterprise.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZZ9dJWDsty/ng6zrD7u+9Q1VqDvtKXGc3Sd4LLb4AIh03SVoNsnnMOuy8MVQm1nDCQFeO+YZ7KbLeRt4k1Nj7lcfnL0HDjakQHwzI17IFsEjRQS8q/l0+TSQ/AY9k3aez/EVbkMCKZH+9g1T9CFaNdeadvoFXnZK8hLktalXCFt1LW+zadnMMrNX5S0788g3f3siHCBr7RnYV8n1q4ihnhsmPk2fIdbIoaR6Ep8jofct4ZLf5ac60GJ5XAYQblu7Og41EJcf0Fb+RRG0yEIKPCsRi0bW4Ogjpc02PjRhOjeyoVU7MCMeky9S5Yu+u17nVWW/jeLwVHEx4Dp6UHkxYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/NI82VU6miOHySO+Jx7ayag66ZY+RAIIrdjwBsg+v7g=;
- b=OUWAk6zVVSWrcuTfSCWysnkqbshPijyg6JJEjCJwmVv85Dem3fjC6JMap3gbVqlxpihSpRFkZ9FBgJ6VxQq1/Pqz8OcDEo3BlRKUP7VloGEqTdV8V+t77Koi73JDmVdUqTOx7beS0CoXf/qTVR9HhgDwPJI6lxxva7if99Hk/OBtUQkN3d7jmqVjZ0VCusbAW7gKL2vAbRJRnYd1VDTFBFkj2zMA5VTf0PPGgdwchpZjA2wgRbD3Uhy6wwKO4T2zHqGvd6av8CV1dfz5ylmGtBX+OiQBwvCi7iduLThrdPThBgxhGSFZbUFMG0GdJ/B9MRFt8AUJhZFkzo0E92Hv9Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=al-enterprise.com; dmarc=pass action=none
- header.from=al-enterprise.com; dkim=pass header.d=al-enterprise.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=al-enterprise.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/NI82VU6miOHySO+Jx7ayag66ZY+RAIIrdjwBsg+v7g=;
- b=Q2u3KoVaHiaRD/Hrg688HQ16UkBKdbCSW7leXMP6Ym232/H3hM9zCk5sD4WRqTLoUCVLiVVv1hYOC1K8G79dO+9wNIkkC+pBEGshi3RAO4lsoruvBY7fjGmm3ex7duSOSI3hg1etYgbK8Yr/3ZmBrcs9mydcX4vPB1OZPa7ailg=
-Received: from AS4PR08MB8167.eurprd08.prod.outlook.com (2603:10a6:20b:58e::16)
- by VI0PR08MB11169.eurprd08.prod.outlook.com (2603:10a6:800:252::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.16; Wed, 23 Oct
- 2024 16:35:04 +0000
-Received: from AS4PR08MB8167.eurprd08.prod.outlook.com
- ([fe80::2da2:6fd5:19ae:5f73]) by AS4PR08MB8167.eurprd08.prod.outlook.com
- ([fe80::2da2:6fd5:19ae:5f73%6]) with mapi id 15.20.8093.018; Wed, 23 Oct 2024
- 16:35:04 +0000
-From: Kumar Girish <girish.kumar@al-enterprise.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Patch for 2018 u-boot : Fix "EHCI timed out on TD - token=XXXX" error
- on ehci-hcd
-Thread-Topic: Patch for 2018 u-boot : Fix "EHCI timed out on TD - token=XXXX"
- error on ehci-hcd
-Thread-Index: AdslZ7yOimV/I94/T7SDOm7sLs0d0A==
-Date: Wed, 23 Oct 2024 16:35:04 +0000
-Message-ID: <AS4PR08MB8167C4DB165AF2FB28C0751DC04D2@AS4PR08MB8167.eurprd08.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=al-enterprise.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS4PR08MB8167:EE_|VI0PR08MB11169:EE_
-x-ms-office365-filtering-correlation-id: 0cffc352-259e-4552-ea89-08dcf380a5ec
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|8096899003|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?7zXPEOXxL0nYk5ceUttdW5x3refgXHGs1dFpzjj86JqOyTiPAOfyJDikqgwJ?=
- =?us-ascii?Q?RbVj/5FcFfuElcTWSg15mejWKi6cCIz3Jxqhm8T7zN4zQjinlcssmBJfUcCz?=
- =?us-ascii?Q?/6jOKBTB7x14UjNMlKnRN5n9fbcgAcZFmVpdNPU59khibp4MYVrb/DiMUH3j?=
- =?us-ascii?Q?lyC2X2MH4sL5oRQZhm0CCjuKVO35PulQnJ2z8uAOwML+l+im1eBszMYTGVr2?=
- =?us-ascii?Q?O98PAxe0u83lxQN3SOGQZWaIAyiImilAKEXQmpWAfFiLKsMk/ieiZPpg/9LQ?=
- =?us-ascii?Q?pWoExUkCP+sacWOjXAEbsktSE8ED3PmMPwmBwjZUC5eDIo7zLZP6Z5ir8NuB?=
- =?us-ascii?Q?jYrG0EoBCmf84ud3nQephwRe7V4iQ28JWHI/p58Sd20fAjAV/Q8g29WMv9Tv?=
- =?us-ascii?Q?fLmYF+CakwaTGBt18u8Uouaw4qkM8OwqHki3HAsUD4v2KoFsLWoJE5jC5q41?=
- =?us-ascii?Q?zMRPxDqfsSGORqaDBG1pEzM0WvBCV2d9/xff2BBaQONr10k3SS6rqanRc8jg?=
- =?us-ascii?Q?/Dj0ufGM9OeIdZVej+bsyo3MquWQG6UY+m42uaHINcbJoAAkXxT2/0OkdbW+?=
- =?us-ascii?Q?o4Skq+neg6qdlzzPV6xItLFPzWWvD0Kiss/LOvXpfZDnBqlF6DeanFv2jinH?=
- =?us-ascii?Q?VoWLOXJd/fHf9bnpA/Ku1ZPzTI1Lt+fSS7mUB7I/umeuDkPww/3D9KDitbZ2?=
- =?us-ascii?Q?xjpQ1u46fm8nFRX+ejp6t5pVQcq8a1YXYCpoevwyb5fh4+4J+DK1g6zsn/cF?=
- =?us-ascii?Q?da7C1f+YaUKFDVlxwRsN5o8gp3lyBlYsDjqhP2FZ3pwM0Jyy/dyTdWNYaH3D?=
- =?us-ascii?Q?u+Py3b6cyQne7lxnJHNA15yl7AK26968B2hDG6/pnneIWtlNDoxF2HMipd4v?=
- =?us-ascii?Q?h8un021/8Z2dFjXpFYsDaojEwRZCarJPz4m7Hb6ghbjN1wWb//pf+Cl82dqo?=
- =?us-ascii?Q?RnBB57adGCUViy2RSBsHM44LDsBMQaO4JOEUN3CXdnTPUb1D2Lrc34Wtzads?=
- =?us-ascii?Q?eretP4urXPehu0CqKRO+F126c0YalJXhqioVHnFZLfaLCMtsBrE8E1hiPT+X?=
- =?us-ascii?Q?Evu81ujPcQxVDkGWQpjguQzGYb0ExjQ3Hf2xYtASqE+zURXXNXcw+atz9c5H?=
- =?us-ascii?Q?vlvtYkSRhSOPxKRYPp9uK1IMMwkNDKX5M4FmWm90CTq5ak3HwxtXnR162Ebb?=
- =?us-ascii?Q?HxwZpf3Gayq/M4NtNfQjhqlImlhq9AgA/mG8stb7AwUxc9Uho2Pg63LywyFd?=
- =?us-ascii?Q?MnYcHj5AhPOGKMM9N5vFNGRvIypBrM7Nvedqkc6CZR59adBh8a5ucMywMj1C?=
- =?us-ascii?Q?dsC55avojGGQB2+t4pnL1Zzt?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR08MB8167.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(8096899003)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?h/8IidS3Xlrxhl27aWZNbKJxnTQD4iUPSJMK+GKjdYDngullQkm3de669eiq?=
- =?us-ascii?Q?hhxIDVvUuOL2oGWcaxeCF+ksfVajmw1+MVoeiVB9eb9yBc+QUXbLajPgWoMx?=
- =?us-ascii?Q?xewU218mlu8KRXdw+mH2d8U4r6tdY+ZkQIgOyOFcyN6o1BMAZUD3TBuQFInX?=
- =?us-ascii?Q?sJp4KVz5bbtmIr60TtliZsaY2Md9Yx/lenRjB6CCpoxFbZHznvo/sqNwDEd0?=
- =?us-ascii?Q?+BddBO886+sGGIplldDjxBzNoSdh/Z/hBKzYmKCAWcBTw+q4hPc6+E/lYEH2?=
- =?us-ascii?Q?vudckzXmjwBOEVFh9HWz+iF8rHVUJHWZFz8bdUavjdY2xbvIOphl0HYVk/5q?=
- =?us-ascii?Q?JlPlDPD9HH9/yAzMR0vrcZGwd7oA8om+SB+DhcUtI73SJXGSAbneOG8yO1g+?=
- =?us-ascii?Q?6RVT29EmU2uL3g4897JWHhVjrYmBGL2xm7Mm1r+Ytq+b66oF050gRl4LMJZN?=
- =?us-ascii?Q?1f/Myuk8+1FGXvDQEWt9HJaJ63E/Rphkypg+6guDs3U1Cqk/d3BLrTZlRBKn?=
- =?us-ascii?Q?b8NofGfi6v19EPmac5rebfOUol+LEiTyHKf4s9ohn5Wt6Xr8CwOrjCVhiE7l?=
- =?us-ascii?Q?AJyIuCuDb/QVa/o9/+WXsTlxKn6U77taI2dJ3keUpZM57dwfi5ZFcdYr12sy?=
- =?us-ascii?Q?MOFGWv0PKmYiUPStU3uByQ515VtbIrYYtue63SsoZSq0inzwEshbY6kHFqiY?=
- =?us-ascii?Q?UbHFNkrxIL1esySexX1g4iyXGa9LQLL05f768Pfd5WX+gBgtyv/jenVUkO8Q?=
- =?us-ascii?Q?+4xZy9Y4S/dAGq01tCb32kPxCWTRzl+tb9OdJwSTq2sZkVCFwRov0l+qO4/Y?=
- =?us-ascii?Q?m6balf34DJ8FJIhXVKiXFaIJl6T+rQub9ZkjUhMF8IpQ22GFUHSYSlHO8PTv?=
- =?us-ascii?Q?ic/iRAj8IZ9gin3LtWCgt/daNcyKndp7g0MNCZYkeonneOgib0v7dmGV7mnh?=
- =?us-ascii?Q?k5qdPCSDSqg7s+rsASo3HByJBemgDleY0+ono9uJnjpHoSzcHDgt1kFP7FXP?=
- =?us-ascii?Q?kk3hlNNFDGJm7ZiLOUHAyr4AinUTIFBli76GhkK8Da0Z4X+8QVnLL2ePMORV?=
- =?us-ascii?Q?SJ1fFDl0DSy2JM6SrrbbMH8APfavz84Quq/jOJRCp+tFkCzphCAr867S7F59?=
- =?us-ascii?Q?m/vDEJSrPSWG7uaBq8xKezlaJbT96Dqdl/FM8nnfNtnVyXfnSLbEjKTthFjJ?=
- =?us-ascii?Q?KWt4eC1I4Nw0glQtDmdQEZXNPze6O+wDdf5x8IolvSaH5Zd+SGp8UWZDb4RD?=
- =?us-ascii?Q?/0lVaRPbgArnMPTXN1d7BEX4O1GUr08FLKKooKEX+hp8R9XH7mXSU9Ju9zN0?=
- =?us-ascii?Q?5y9B5gZKv8SrBP8RprW3rbkTDPrtCKQT8WBn1FUA/T4DSXF4JvNTivN91OZ+?=
- =?us-ascii?Q?EpklXNVvfOX0sj2OGSmjaon71bsXmvCeHwgCrU0Dg/E471Dlvf2FNCCMmJ1s?=
- =?us-ascii?Q?1rmJJitmP+8dQojBnRZahUemHG/ScFfUA3lSWSqO5uIGZO2mC92nfAwfPz5M?=
- =?us-ascii?Q?SN8ybGR0VK73AXnXx3x0zToc6MYl4sysU0Vj9h1BbEYJUEzhJLd7wFt6JAa8?=
- =?us-ascii?Q?vK7viiu31FsPtkCiJk3UWr2vPN0mY0roEX5xAL2W3e4YSqPAinDChFRm2Ebn?=
- =?us-ascii?Q?Dg=3D=3D?=
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=l.rubusch@gmail.com
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e2b9a22f60cso27606276.2
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 13:11:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1729714270; x=1730319070; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ALHfwdDoDWdYEJAhWktodFsUcTIz3WmSt3lHBLI74bg=;
+ b=SxZIpCciXjmBVKIIee/V08cxlsP1kiw9o8fkaaOz2fB9ZBpKAuihZTcsIFytuRgBr+
+ bBcoYlOpC3EzOthg2+tCR3CTyGTddd/+WfVDCSVxXLHoj+EeKv+6F4G4wHGFbiGAIrk7
+ OTkQghiW+fag044/q1rCw75rI+bpQnAOQQojczv8KmBHrE0T7D+9/sjOk+pKMBN215/N
+ OK8q9f6h34cvM14fu2iXy5gIf2B9HS7oIfsUa11LnIZ84ynY8cR1WUPNkBZsD7byF4Au
+ 6CwzxlG5DmN+0bqk/Af4XeRri3N6opVgQ8hPzB1XABjru9M+mC3ZsgwC8YzUcAxwaqbc
+ JRjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729714270; x=1730319070;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ALHfwdDoDWdYEJAhWktodFsUcTIz3WmSt3lHBLI74bg=;
+ b=jQp0625xXFJWQaC4HWh1cZuwfODnAFqnrIIjrZj2w3+FLpvZyJcUIJL3u1EOLVrhuP
+ NQyycchsDRPu3D0oxU8+LPgCUIFgPNg0prUEK6QjN5vgU3UBUvYAr0GUl0BWMR2NgKzH
+ 2UxHae2SItQQPf+J/Az6Y6iJEO0SFVNFH6QmmN9HQsuY5VoPC0ZrvwT/byWHSqZ4GSiV
+ b17aVpA5YSO6jTBcSRWs8585yJLqv5NtjNpTvmBbrtoZH2goVVzRQoPyyPUthplHAvbG
+ b2yx0SgkWgZ767NKfl7s5/yThuDbiBhtHoSJulr2X+7XuifltMkbJ9ldJuHeNzt0R6KC
+ InJQ==
+X-Gm-Message-State: AOJu0YzrDZV5OvLuhr2bFAsut6ASUtlPjJL1MmYngyabHeXzSL8TyNZX
+ fu9VLLKhECbvlVaw+VZX5EvgV4Hm6jIKjqStUStFhfT2mjNjs8CFGolID4VQmfrOqUTML/9UjLj
+ ++L9y0g3w7Pytmw44PGU6Xt2Bzlo=
+X-Google-Smtp-Source: AGHT+IF1yb5stqC9/+mA1JPWYIt0RhQJ8ODdK2Dunh1oRIFh9FyVb4xT4jxRrb3hNVergwwqNvTZ+lKOc9V6cvK8Ku0=
+X-Received: by 2002:a05:690c:4a0d:b0:6e3:2066:2693 with SMTP id
+ 00721157ae682-6e7f0fd8255mr16170097b3.10.1729714270120; Wed, 23 Oct 2024
+ 13:11:10 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: al-enterprise.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR08MB8167.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0cffc352-259e-4552-ea89-08dcf380a5ec
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Oct 2024 16:35:04.4326 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 1e410eb7-628b-4a1c-ab28-642f4be058a7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: owSTTJGU4noq9i+YfYYdfHItadbyNDzDd0LbNX2qaXkh0xevtj/58+Wocc5mvmgdPZjQC5JbWauqE/fpgZqKHaUaXd1HqhJMW75WfOg+XZA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR08MB11169
-X-Mailman-Approved-At: Wed, 23 Oct 2024 22:55:07 +0200
-Content-Type: text/plain; charset="us-ascii"
+References: <20241013143232.2090645-1-l.rubusch@gmail.com>
+ <20241013143232.2090645-3-l.rubusch@gmail.com>
+ <ce29c957-4198-4947-b7de-7e10ed385eab@denx.de>
+ <CAFXKEHZLwbU=w4LH4iiZeo4ycwOKjgi5YZesHHgxzy6Ac+TOUA@mail.gmail.com>
+ <5ba375a1-cf1d-463c-8590-3ddf46c47f3e@denx.de>
+In-Reply-To: <5ba375a1-cf1d-463c-8590-3ddf46c47f3e@denx.de>
+From: Lothar Rubusch <l.rubusch@gmail.com>
+Date: Wed, 23 Oct 2024 22:10:34 +0200
+Message-ID: <CAFXKEHZ4+zPw7LuNYK2QZYOQj4v=1UMuf29CSGAEibSOWU48SQ@mail.gmail.com>
+Subject: Re: [PATCH 02/10] ARM: socfpga: add Mercury+ AA1 SoM support
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, simon.k.r.goldschmidt@gmail.com, 
+ tien.fong.chee@intel.com, sumit.garg@linaro.org, sjg@chromium.org, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, jit.loon.lim@intel.com, 
+ barnas@google.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Mailman-Approved-At: Wed, 23 Oct 2024 22:55:07 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,16 +95,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi All,
-I see the error ""scanning bus 1 for devices... EHCI timed out on TD - toke=
-n=3D0x80008d80"
+Hi
 
-From the denx site, I found the below patch. But it is for 2016 and 2017 u-=
-boot version
-https://lists.denx.de/pipermail/u-boot/2020-March/401784.html
+On Sun, Oct 20, 2024 at 7:02=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+>
+> On 10/18/24 11:47 PM, Lothar Rubusch wrote:
+> > On Mon, Oct 14, 2024 at 8:42=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
+te:
+> >
+> > [...]
+> >
+> >>> diff --git a/board/enclustra/mercury_aa1/fpga.its b/board/enclustra/m=
+ercury_aa1/fpga.its
+> >>> new file mode 100644
+> >>> index 0000000000..cb42d61fbd
+> >>> --- /dev/null
+> >>> +++ b/board/enclustra/mercury_aa1/fpga.its
+> >>> @@ -0,0 +1,32 @@
+> >>> +/dts-v1/;
+> >>> +
+> >>> +/ {
+> >>> +     description =3D "FIT image with FPGA bistream";
+> >>> +     #address-cells =3D <1>;
+> >>> +
+> >>> +     images {
+> >>> +             fpga-periph-1 {
+> >>> +                     description =3D "FPGA peripheral bitstream";
+> >>> +                     data =3D /incbin/("../../../bitstream.periph.rb=
+f");
+> >>> +                     type =3D "fpga";
+> >>> +                     arch =3D "arm";
+> >>> +                     compression =3D "none";
+> >>> +             };
+> >>> +
+> >>> +             fpga-core-1 {
+> >>> +                     description =3D "FPGA core bitstream";
+> >>> +                     data =3D /incbin/("../../../bitstream.core.rbf"=
+);
+> >>> +                     type =3D "fpga";
+> >>> +                     arch =3D "arm";
+> >>> +                     compression =3D "none";
+> >>> +             };
+> >>> +     };
+> >>> +
+> >>> +     configurations {
+> >>> +             default =3D "config-1";
+> >>> +             config-1 {
+> >>> +                     description =3D "Boot with FPGA early IO releas=
+e config";
+> >>> +                     fpga =3D "fpga-periph-1", "fpga-core-1";
+> >>> +             };
+> >>> +     };
+> >>> +};
+> >>
+> >> Can this be generated using binman instead ?
+> >
+> > This would a oportunity for me to learn the binman tool. Great idea! I
+> > need to read a bit more on binman to get a better understanding. I'll
+> > give it a try and let you know. Thank you.
+>
+> This commit might help:
+>
+> 5fccc2891e28 ("ARM: dts: stm32: Generate u-boot.itb using binman on DH
+> STM32 DHSOM")
+>
 
-Could you please provide me the patch which can be applied on 2018 u-boot
-Thank you for your support.
+I face a problem here. First, to apply binman stances in the .dtsi and
+integrating it as -u-boot.dtsi is very interesting and I actually like
+the solution to bind everything togerther in this way.
 
-Regards,
-Girish
+But, I face the situation where the very design specific bitstream(s)
+for the FPGA are actually not supposed to be upstreamed. Having u-boot
+binaries and bitstream as .itb separate, allows to build the u-boot
+part even w/o the bitstream, i.e. the u-boot setup can be quite
+generic, can be tested and verified building. Is this still possible
+if binman requires it as binary blob? On the otherhand it allows to
+wrap the FPGA logic and exchange the .itb separately when developing a
+design w/o the need to modify the bootloader.
+
+So, I'd like to hear your opinion on that. Would the .itb appraoch be
+acceptable in this case? Is there still a better way? Does it make
+sense to make a separate binman setup instead?
