@@ -4,65 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA82BCF5386
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:03:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3793CF5386
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:15:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 814D2892F9;
-	Wed, 23 Oct 2024 15:02:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 161D888DEF;
+	Wed, 23 Oct 2024 15:15:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="x+IZaWtt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YHtdqd+w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12A5B892CB; Wed, 23 Oct 2024 15:02:35 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 39B6C88F82; Wed, 23 Oct 2024 10:52:43 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64EBF88DEF
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:02:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A7CA885B3
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 10:52:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=a-limaye@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49ND2PAo029434;
- Wed, 23 Oct 2024 08:02:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729688545;
- bh=NIgjTpppFHZL5f++aYBFf2X9Cop6kStzDDACscThPPg=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=x+IZaWttfOhxLkbMebGdXPadRVlmgFZJbO0ZXrR6oTrICbWumA/0t77KOtV8Pb9cm
- SQueh3Il9mKmqVzkWH80nX0ULeDo9aq/CV0rKF1xEyner7x8xptvnZdVQfHQmTy4KS
- 11XmMekBREAj4kX/uIHyJ31+AufIEA4yjojF2zys=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49ND2Pq7111439;
- Wed, 23 Oct 2024 08:02:25 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
- Oct 2024 08:02:25 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 23 Oct 2024 08:02:25 -0500
-Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
- [172.24.227.91])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49ND2BQ4037622;
- Wed, 23 Oct 2024 08:02:23 -0500
-From: Aniket Limaye <a-limaye@ti.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>
-CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>,
- Aniket Limaye <a-limaye@ti.com>
-Subject: [PATCH v2 5/5] configs: j7200_evm_r5_defconfig: Define K3_OPP_LOW
-Date: Wed, 23 Oct 2024 18:27:13 +0530
-Message-ID: <20241023130033.1826413-6-a-limaye@ti.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241023130033.1826413-1-a-limaye@ti.com>
-References: <20241023130033.1826413-1-a-limaye@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=liujianfeng1994@gmail.com
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-7c3d415f85eso769439a12.0
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 01:52:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1729673554; x=1730278354; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jBIJBNOZz+PQ9LIsmX4bUTQQgawChPUtaLPN0gzNMT8=;
+ b=YHtdqd+wPNWaE1iuhcZQGP2clslrUhJbKpYZtGoSi4h3wNwcNHPmw1XLUyq5xR7UxW
+ fUHOELf8PniV0OuSgWitbnb0QSIjn+YJRlsbo2EQufnfiNlDQ7/e05nKw22H7Y4yjReA
+ VTB/rzW3QKGmMyQRlP31MIKTBJd4etS4D9gRpm2+YS5PPjKlQIvpW0wyNwSfNS3M858E
+ Qw+dpFtvsnLHApxBrjJSlGCxnRxHJc6MQtJuD23xJhwLbF48Ac66+WWwvZ1ELKmOpWVh
+ ZIdw5Q48GHURjBmWWNh9J2QFysv+226YzIQuh7VF61rFdkeiDW2h3q+0oogfOAjHvUUn
+ eb8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729673554; x=1730278354;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jBIJBNOZz+PQ9LIsmX4bUTQQgawChPUtaLPN0gzNMT8=;
+ b=qZCFBl7Hhmaba8ki0WO9iwtI7f3JWCQXH/Px/DLYbx9tTajx+ZHlotpWNTufyjhxXy
+ NUt9bJCNDo2rhSFP783TCOZtwRenuSY/u8ZK4LXIu1opb50vJkuPNHWXwjIAcf2t48eY
+ N373049DXkeV6s47iZV/zR/sRsUxGdm4q7f2GznF6Hf3OYkUt0r2TcyZ6hioK8b1VNFB
+ lQTuG+1uFo/jFUt/AJIOZ1sBuiOYRhmW2AtPqkWDAijQHlLGcomFGg7RvpCvtveNnCIe
+ 4tiiDb1NF9PN/ERYbmW7Ro+BvNeqR6MKaBic4H6C3lb3pUx1Qd/sFblUWwVS8pHl3Dde
+ 8nQw==
+X-Gm-Message-State: AOJu0YwfLIFCs8CYX1ImkbonFSx0Jou4U+vXUSMeKHS7/oHXBJlTqOrR
+ d+kCAzkPqUBP1BdhfaSilH+ba8TSbRtH9820tSwnycx4f+G5RYET5iCHSw9m
+X-Google-Smtp-Source: AGHT+IEkGL+swSfr+Aal20lxvPxK9V+jqmbZJ8Z0juJWmEk8nZhanNf03qjFLFA8n9uVUW0KI1oCjQ==
+X-Received: by 2002:a05:6a00:3e0b:b0:71e:7bcc:a0de with SMTP id
+ d2e1a72fcca58-72030b1f0ddmr1275131b3a.3.1729673554275; 
+ Wed, 23 Oct 2024 01:52:34 -0700 (PDT)
+Received: from rock-5b.. ([221.220.134.146]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-71ec13d7595sm5892689b3a.110.2024.10.23.01.52.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Oct 2024 01:52:33 -0700 (PDT)
+From: Jianfeng Liu <liujianfeng1994@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Jianfeng Liu <liujianfeng1994@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Ricardo Pardini <ricardo@pardini.net>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] configs: orangepi-3b-rk3566_defconfig: Enable
+ CONFIG_MULTI_DTB_FIT
+Date: Wed, 23 Oct 2024 16:52:20 +0800
+Message-ID: <20241023085225.403545-1-liujianfeng1994@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Wed, 23 Oct 2024 15:15:20 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,46 +92,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Reid Tonking <reidt@ti.com>
+Orange Pi 3B uses board_fit_config_name_match in rk_board_late_init to
+decide which kernel dtb to load. To make it work with system using grub,
+we have to enable CONFIG_MULTI_DTB_FIT.
 
-Adds the default config for K3_OPP_LOW in J7200
+Tested with opensuse using grub2, without CONFIG_MULTI_DTB_FIT grub will
+load rk3566-orangepi-3b.dtb in u-boot, which has no gmac ethernet
+enabled.
 
-Signed-off-by: Reid Tonking <reidt@ti.com>
-Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
 ---
- arch/arm/mach-k3/Kconfig       | 6 ++++++
- configs/j7200_evm_r5_defconfig | 1 +
- 2 files changed, 7 insertions(+)
 
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index f3f42b39213..a095d8a29ae 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -103,6 +103,12 @@ config SYS_K3_BOOT_CORE_ID
- 	int
- 	default 16
- 
-+config K3_OPP_LOW
-+	bool "Enable OPP_LOW on supported TI K3 SoCs"
-+	help
-+	  Enabling this will allow Socs with the proper efuse to run at a lower
-+	  MPU core voltage and adjust frequency according to SoC trm
-+
- config K3_EARLY_CONS
- 	bool "Activate to allow for an early console during SPL"
- 	depends on SPL
-diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
-index 1db92512dc2..bf6f3c6136d 100644
---- a/configs/j7200_evm_r5_defconfig
-+++ b/configs/j7200_evm_r5_defconfig
-@@ -102,6 +102,7 @@ CONFIG_K3_SEC_PROXY=y
- CONFIG_FS_LOADER=y
- CONFIG_SPL_FS_LOADER=y
- CONFIG_K3_AVS0=y
-+# CONFIG_K3_OPP_LOW is not set
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_SPL_MMC_HS400_SUPPORT=y
- CONFIG_MMC_SDHCI=y
+ configs/orangepi-3b-rk3566_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/orangepi-3b-rk3566_defconfig b/configs/orangepi-3b-rk3566_defconfig
+index 2181c9caf58..e87849a9946 100644
+--- a/configs/orangepi-3b-rk3566_defconfig
++++ b/configs/orangepi-3b-rk3566_defconfig
+@@ -48,6 +48,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
+ # CONFIG_OF_UPSTREAM is not set
+ CONFIG_OF_LIST="rk3566-orangepi-3b rk3566-orangepi-3b-v1.1 rk3566-orangepi-3b-v2.1"
++CONFIG_MULTI_DTB_FIT=y
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
 -- 
-2.34.1
+2.43.0
 
