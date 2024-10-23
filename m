@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C7CECF538A
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:30:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65AECCF538B
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:30:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDAE089319;
-	Wed, 23 Oct 2024 15:28:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B0888931E;
+	Wed, 23 Oct 2024 15:28:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="GYnfvRBY";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="UB3gFE/g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53BD189305; Wed, 23 Oct 2024 15:28:49 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 8475288E0A; Wed, 23 Oct 2024 15:28:51 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 375B4892CF
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:28:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05F02892AA
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:28:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-37d473c4bb6so6128902f8f.3
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:28:39 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-42f6bec84b5so75127375e9.1
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:28:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729690114; x=1730294914; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729690122; x=1730294922; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XRQl7wQGVXZD2IoSeE5jPvYL4o9lDN2ybm88LpSQPQA=;
- b=GYnfvRBYm09XrmxmibVBkur+wx99aiwvGINtCnM641rWMdRX8TjfphxOQAS31VU1f4
- 3BGJT2rHOrYmYWkbqhX+2UEa69whEtE80c5xfpIBZBEN2KiJZE0hYJxNBBqb50wVVMTO
- cOd0DrY9WR7Jfdb+JJQuGIVfcQozeI0lwMSS5Z8Q3M4gvUmv+dWSCGjeRm+V1D31fq3F
- g24uTn2frosKWMbtKwUSEpOix9gMG7G685Q/X+a/bdAEdeP5fyMnYq22JaMdDVH78lyY
- hoqNUrIosKK2iUTuNC0C155n6WIxWpJnlMf/dJbLDdXSZqurFIf5K3v0z+FmEVrfD6lf
- maUg==
+ bh=ITSLGK4bQBMqrxY17we8WGYbi7+b5QmS4fbUtrbPTKA=;
+ b=UB3gFE/gzmIQKKnTfooCRB51av4aOjX127gL+bX3IonE/rBYvf7GBJOjgTOqNLOySI
+ ju+9tY6f4fQJwuZIGus0CP1rvtTQ96H+Dty5qvTxMi4/Cw02clWF11OVKtZFMy1i0HBK
+ e8iD/TYejB12afFNMFuD6jC0YaJsiTc+99j7mkKLfETeJShluGJNlz2ICjpjY+gUMQKi
+ rufORr/7XoIucgc+M/rxLOfIN2jFF1quGZM9meDEseBYqkrvf1VXoSIEN1Y3fv4gcTY4
+ vZ19XPmW1bP03wTuWGfFTvaETSIGkjo7tIbIwUYgkvyaSfJF6OBpgCff+xw+dmyhQ4sc
+ UKsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729690114; x=1730294914;
+ d=1e100.net; s=20230601; t=1729690122; x=1730294922;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XRQl7wQGVXZD2IoSeE5jPvYL4o9lDN2ybm88LpSQPQA=;
- b=E/SDkIVMUNwLPIDuHTla0LlZF/4ihOBh8Cw4fDj0GMmN+leSTgvT5wc/4DdAiNNY+5
- OAAOldG41yMA+BuVayowda5NsjgI4NZpQPGlFXHpEqVOdIVtWhMTVXwRSn1GebclHepI
- fo7IY3OTT2HySOvXZYA7PoxWmAxxeZ56wcv8LwGYMv3ED5t3NBNQZRveKX+dM1vTbYM2
- ZkH47vl3tSzobepT50dQcpgXvwjmfggLkNknw669jZAcDU24mZwlEGppGkslJWYqBwGZ
- 78E4I7IRgMV3nwPeE7s3nas9Y2qAYQpWmTmBMvJBDSLOihs1pb2ZITsbMdqPfFGHke1d
- qPIA==
-X-Gm-Message-State: AOJu0YxKTtcIg3vSUbxL4HZ5cdqYZrY4XsAKyVQR1d2Bwd4jhDADdu6W
- LCyYitUnXb8YF6Irs9XSk4ajtBluMlqplWSLSrhefZnpIQHcO1AZ4OkQh+TsNcBimLJT0/A03xU
- K
-X-Google-Smtp-Source: AGHT+IHq8pyprbeBSrxtX+xRNNa2OpsBMukB3lDCaqSD3I4iYf/QL6Noh+yydT9Fc9HlTPbHCTNlPg==
-X-Received: by 2002:a5d:4e01:0:b0:37c:d1fb:82f4 with SMTP id
- ffacd0b85a97d-37efcf7c31dmr2109955f8f.36.1729690113419; 
- Wed, 23 Oct 2024 06:28:33 -0700 (PDT)
+ bh=ITSLGK4bQBMqrxY17we8WGYbi7+b5QmS4fbUtrbPTKA=;
+ b=OnFAph5d1LQ58FuRcQ1yN84U4FY4TazHVSdxQm1r4PpvfQiQZ7tplSb8dqr8e25Npu
+ rwZJQ9t+sEUa3b/G6tC0NPiBuOqhrcADH1GuKROpLOKN995eYtK7613JaP28mvXN6QFR
+ 9V6LqQcB2dufAOzmKHPuVfqGyZFEPvEUY324SzJkxXHFkqvpq4i3Rgf9QaqhynnqCX5i
+ 17+b8wOMfiaXIhOX9Fxtdl6icRlBiX/S1OG8i90mOppABh1KuDfyCcQll/COMsogby+1
+ rtMIwgt30nB65aPATrJ7LfSygTXgijA8l5z0Civ7dN97+DgQdbCDDms11qJTQgc6U0XA
+ UQKg==
+X-Gm-Message-State: AOJu0Yyh8HmjTahxws9iEHfYgu8sFarFAJYXCe+C6R9BqLKG8wyW62MP
+ sUWdKchiAuJ8f1/hh0jlJOgxLg9wVCYB0dpUhwoBhOiHA2yZM0EG3oGxABKR1KEffQSrika3j3Q
+ L
+X-Google-Smtp-Source: AGHT+IHz9wW3yJ0xgGMFczK4ax2SMelsbvRFMXkmXP6/T/v+xAaNmR0kHd+bijq4X+OhmTx/WZ22Tg==
+X-Received: by 2002:adf:b312:0:b0:37d:3def:2a82 with SMTP id
+ ffacd0b85a97d-37efcf7f2efmr1584839f8f.36.1729690122318; 
+ Wed, 23 Oct 2024 06:28:42 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.28.32
+ ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.28.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Oct 2024 06:28:32 -0700 (PDT)
+ Wed, 23 Oct 2024 06:28:42 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
-Cc: Maximilian Brune <maximilian.brune@9elements.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v10 02/37] acpi: x86: Write FADT in common code
-Date: Wed, 23 Oct 2024 15:19:45 +0200
-Message-ID: <20241023132116.970117-3-patrick.rudolph@9elements.com>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v10 07/37] arm: acpi: Add generic ACPI methods
+Date: Wed, 23 Oct 2024 15:19:50 +0200
+Message-ID: <20241023132116.970117-8-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241023132116.970117-1-patrick.rudolph@9elements.com>
 References: <20241023132116.970117-1-patrick.rudolph@9elements.com>
@@ -96,360 +95,337 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Maximilian Brune <maximilian.brune@9elements.com>
+Add generic ACPI code to generate
+- MADT GICC
+- MADT GICD
+- MADT GICR
+- MADT GIC ITS
+- PPTT processor
+- PPTT cache
 
-Write the FADT in common code since it's used on all architectures.
-Since the FADT is mandatory all SoCs or mainboards must implement the
-introduced function acpi_fill_fadt() and properly update the FADT.
+as commonly used on arm platforms.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-
 ---
-Changelog v4:
-- Drop __weak attribute
+Changelog v2:
+- Add full comments to exported functions
+Changelog v6:
+- Update header order
 ---
- arch/sandbox/lib/acpi_table.c     |  6 +++++
- arch/x86/cpu/apollolake/acpi.c    | 20 ++++------------
- arch/x86/cpu/baytrail/acpi.c      | 17 +-------------
- arch/x86/cpu/quark/acpi.c         | 19 +---------------
- arch/x86/cpu/tangier/acpi.c       | 25 ++------------------
- arch/x86/include/asm/acpi_table.h | 12 ----------
- arch/x86/lib/acpi_table.c         | 23 -------------------
- include/acpi/acpi_table.h         |  9 ++++++++
- lib/acpi/acpi_table.c             | 38 +++++++++++++++++++++++++++++++
- 9 files changed, 61 insertions(+), 108 deletions(-)
- create mode 100644 arch/sandbox/lib/acpi_table.c
+ arch/arm/include/asm/acpi_table.h | 115 ++++++++++++++++++++++++++++++
+ arch/arm/lib/Makefile             |   1 +
+ arch/arm/lib/acpi_table.c         | 114 +++++++++++++++++++++++++++++
+ include/acpi/acpi_table.h         |  34 ++++++++-
+ 4 files changed, 263 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/lib/acpi_table.c
 
-diff --git a/arch/sandbox/lib/acpi_table.c b/arch/sandbox/lib/acpi_table.c
-new file mode 100644
-index 0000000000..10b7ce441a
---- /dev/null
-+++ b/arch/sandbox/lib/acpi_table.c
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: GPL-2.0+
+diff --git a/arch/arm/include/asm/acpi_table.h b/arch/arm/include/asm/acpi_table.h
+index e69de29bb2..c65eabe837 100644
+--- a/arch/arm/include/asm/acpi_table.h
++++ b/arch/arm/include/asm/acpi_table.h
+@@ -0,0 +1,115 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++#ifndef __ASM_ACPI_TABLE_H__
++#define __ASM_ACPI_TABLE_H__
++
++#ifndef __ACPI__
++
 +#include <acpi/acpi_table.h>
 +
-+void acpi_fill_fadt(struct acpi_fadt *fadt)
-+{
-+}
-\ No newline at end of file
-diff --git a/arch/x86/cpu/apollolake/acpi.c b/arch/x86/cpu/apollolake/acpi.c
-index 76230aea83..93040e7bb3 100644
---- a/arch/x86/cpu/apollolake/acpi.c
-+++ b/arch/x86/cpu/apollolake/acpi.c
-@@ -128,8 +128,10 @@ int arch_madt_sci_irq_polarity(int sci)
- 	return MP_IRQ_POLARITY_LOW;
- }
- 
--void fill_fadt(struct acpi_fadt *fadt)
-+void acpi_fill_fadt(struct acpi_fadt *fadt)
- {
-+	intel_acpi_fill_fadt(fadt);
++/**
++ * acpi_write_madt_gicc() - Write out a MADT GICC sub-table
++ *
++ * Write out the GIC CPU Interface sub-table.
++ *
++ * @gicc:             Pointer to place to put the sub-table
++ * @cpu_num:          GIC's CPU Interface Number
++ * @perf_gsiv:        The GSIV used for Performance Monitoring Interrupts
++ * @phys_base:        Address at which the processor can access this
++ *                    GIC CPU Interface
++ * @gicv:             Address of the GIC virtual CPU interface registers
++ * @gich:             Address of the GIC virtual interface control block
++ *                    registers
++ * @vgic_maint_irq:   GSIV for Virtual GIC maintenance interrupt
++ * @gicr_base:        Physical address of the associated Redistributor
++ * @mpidr:            MPIDR as defined by ARM architecture
++ * @efficiency:       Describes the relative power efficiency
++ */
++void acpi_write_madt_gicc(struct acpi_madt_gicc *gicc, uint cpu_num,
++			  uint perf_gsiv, ulong phys_base, ulong gicv,
++			  ulong gich, uint vgic_maint_irq, u64 gicr_base,
++			  ulong mpidr, uint efficiency);
 +
- 	fadt->pm_tmr_blk = IOMAP_ACPI_BASE + PM1_TMR;
++/**
++ * acpi_write_madt_gicd() - Write out a MADT GICD sub-table
++ *
++ * Write out the GIC Distributor sub-table.
++ *
++ * @gicd:            Pointer to place to put the sub-table
++ * @gic_id:          This GIC Distributor's hardware ID
++ * @phys_base:       The 64-bit physical address for this Distributor
++ * @gic_version:     GIC version
++ */
++void acpi_write_madt_gicd(struct acpi_madt_gicd *gicd, uint gic_id,
++			  ulong phys_base, uint gic_version);
++
++/**
++ * acpi_write_madt_gicr() - Write out a MADT GICR sub-table
++ *
++ * Write out the GIC Redistributor sub-table.
++ *
++ * @gicr:                            Pointer to place to put the sub-table
++ * @discovery_range_base_address:    Physical address of a page range
++ *                                   containing all GIC Redistributors
++ * @discovery_range_length:          Length of the GIC Redistributor
++ *                                   Discovery page range
++ */
++void acpi_write_madt_gicr(struct acpi_madt_gicr *gicr,
++			  u64 discovery_range_base_address,
++			  u32 discovery_range_length);
++
++/**
++ * acpi_write_madt_its() - Write out a MADT ITS sub-table
++ *
++ * Write out the GIC Interrupt Translation Service sub-table.
++ *
++ * @its:                    Pointer to place to put the sub-table
++ * @its_id:                 Uniqueue GIC ITS ID
++ * @physical_base_address:  Physical address for the Interrupt
++ *                          Translation Service
++ */
++void acpi_write_madt_its(struct acpi_madt_its *its,
++			 u32 its_id,
++			 u64 physical_base_address);
++
++/**
++ * acpi_pptt_add_proc() - Write out a PPTT processor sub-table
++ *
++ * Write out the Processor Properties Topology Table processor sub-table.
++ *
++ * @ctx:                   ACPI context pointer
++ * @flags:                 Processor Structure Flags
++ * @parent:                Reference to parent processor
++ * @proc_id:               ACPI processor ID as defined in MADT
++ * @num_resources:         Number of resource structure references
++ * @resource_list:         References to other PPTT structures
++ * Return: offset from start of PPTT in bytes
++ */
++int acpi_pptt_add_proc(struct acpi_ctx *ctx, const u32 flags, const u32 parent,
++		       const u32 proc_id, const u32 num_resources,
++		       const u32 *resource_list);
++
++/**
++ * acpi_pptt_add_cache() - Write out a PPTT cache sub-table
++ *
++ * Write out the Processor Properties Topology Table cache sub-table.
++ *
++ * @ctx: ACPI context pointer
++ * @flags:                Cache Structure Flags
++ * @next_cache_level:     Reference to next level of cache
++ * @size:                 Size of the cache in bytes
++ * @sets:                 Number of sets in the cache
++ * @assoc:                Integer number of ways
++ * @attributes:           Allocation type, Cache type, policy
++ * @line_size:            Line size in bytes
++ * Return: offset from start of PPTT in bytes
++ */
++int acpi_pptt_add_cache(struct acpi_ctx *ctx, const u32 flags,
++			const u32 next_cache_level, const u32 size,
++			const u32 sets, const u8 assoc, const u8 attributes,
++			const u16 line_size);
++
++#endif /* !__ASSEMBLY__ */
++#endif /* !__ACPI__ */
++
++#endif /* __ASM_ACPI_TABLE_H__ */
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index 67275fba61..a7efed6771 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -86,6 +86,7 @@ obj-y	+= psci-dt.o
+ obj-$(CONFIG_DEBUG_LL)	+= debug.o
  
- 	fadt->p_lvl2_lat = ACPI_FADT_C2_NOT_SUPPORTED;
-@@ -143,23 +145,9 @@ void fill_fadt(struct acpi_fadt *fadt)
- 	fadt->x_pm_tmr_blk.space_id = 1;
- 	fadt->x_pm_tmr_blk.bit_width = fadt->pm_tmr_len * 8;
- 	fadt->x_pm_tmr_blk.addrl = IOMAP_ACPI_BASE + PM1_TMR;
--}
--
--static int apl_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
--{
--	struct acpi_table_header *header;
--	struct acpi_fadt *fadt;
--
--	fadt = ctx->current;
--	acpi_fadt_common(fadt, ctx->facs, ctx->dsdt);
--	intel_acpi_fill_fadt(fadt);
--	fill_fadt(fadt);
--	header = &fadt->header;
--	header->checksum = table_compute_checksum(fadt, header->length);
+ obj-$(CONFIG_BLOBLIST)  += xferlist.o
++obj-$(CONFIG_GENERATE_ACPI_TABLE) += acpi_table.o
  
--	return acpi_add_fadt(ctx, fadt);
-+	fadt->preferred_pm_profile = ACPI_PM_MOBILE;
- }
--ACPI_WRITER(5fadt, "FADT", apl_write_fadt, 0);
- 
- int apl_acpi_fill_dmar(struct acpi_ctx *ctx)
- {
-diff --git a/arch/x86/cpu/baytrail/acpi.c b/arch/x86/cpu/baytrail/acpi.c
-index 7821964f1f..7e1c2de3d3 100644
---- a/arch/x86/cpu/baytrail/acpi.c
-+++ b/arch/x86/cpu/baytrail/acpi.c
-@@ -15,20 +15,13 @@
- #include <asm/arch/iomap.h>
- #include <dm/uclass-internal.h>
- 
--static int baytrail_write_fadt(struct acpi_ctx *ctx,
--			       const struct acpi_writer *entry)
-+void acpi_fill_fadt(struct acpi_fadt *fadt)
- {
- 	struct acpi_table_header *header;
--	struct acpi_fadt *fadt;
- 
--	fadt = ctx->current;
- 	header = &fadt->header;
- 	u16 pmbase = ACPI_BASE_ADDRESS;
- 
--	memset(fadt, '\0', sizeof(struct acpi_fadt));
--
--	acpi_fill_header(header, "FACP");
--	header->length = sizeof(struct acpi_fadt);
- 	header->revision = 4;
- 
- 	fadt->preferred_pm_profile = ACPI_PM_MOBILE;
-@@ -77,9 +70,6 @@ static int baytrail_write_fadt(struct acpi_ctx *ctx,
- 	fadt->reset_reg.addrh = 0;
- 	fadt->reset_value = SYS_RST | RST_CPU | FULL_RST;
- 
--	fadt->x_firmware_ctrl = map_to_sysmem(ctx->facs);
--	fadt->x_dsdt = map_to_sysmem(ctx->dsdt);
--
- 	fadt->x_pm1a_evt_blk.space_id = ACPI_ADDRESS_SPACE_IO;
- 	fadt->x_pm1a_evt_blk.bit_width = fadt->pm1_evt_len * 8;
- 	fadt->x_pm1a_evt_blk.bit_offset = 0;
-@@ -135,12 +125,7 @@ static int baytrail_write_fadt(struct acpi_ctx *ctx,
- 	fadt->x_gpe1_blk.access_size = 0;
- 	fadt->x_gpe1_blk.addrl = 0x0;
- 	fadt->x_gpe1_blk.addrh = 0x0;
--
--	header->checksum = table_compute_checksum(fadt, header->length);
--
--	return acpi_add_fadt(ctx, fadt);
- }
--ACPI_WRITER(5fadt, "FADT", baytrail_write_fadt, 0);
- 
- int acpi_create_gnvs(struct acpi_global_nvs *gnvs)
- {
-diff --git a/arch/x86/cpu/quark/acpi.c b/arch/x86/cpu/quark/acpi.c
-index 80e94600fc..0fe5f2bafb 100644
---- a/arch/x86/cpu/quark/acpi.c
-+++ b/arch/x86/cpu/quark/acpi.c
-@@ -11,23 +11,14 @@
- #include <asm/arch/iomap.h>
- #include <linux/string.h>
- 
--static int quark_write_fadt(struct acpi_ctx *ctx,
--			    const struct acpi_writer *entry)
-+void acpi_fill_fadt(struct acpi_fadt *fadt)
- {
- 	u16 pmbase = ACPI_PM1_BASE_ADDRESS;
- 	struct acpi_table_header *header;
--	struct acpi_fadt *fadt;
- 
--	fadt = ctx->current;
- 	header = &fadt->header;
--
--	memset(fadt, '\0', sizeof(struct acpi_fadt));
--
--	acpi_fill_header(header, "FACP");
--	header->length = sizeof(struct acpi_fadt);
- 	header->revision = 4;
- 
--	fadt->preferred_pm_profile = ACPI_PM_UNSPECIFIED;
- 	fadt->sci_int = 9;
- 	fadt->smi_cmd = 0;
- 	fadt->acpi_enable = 0;
-@@ -73,9 +64,6 @@ static int quark_write_fadt(struct acpi_ctx *ctx,
- 	fadt->reset_reg.addrh = 0;
- 	fadt->reset_value = SYS_RST | RST_CPU | FULL_RST;
- 
--	fadt->x_firmware_ctrl = map_to_sysmem(ctx->facs);
--	fadt->x_dsdt = map_to_sysmem(ctx->dsdt);
--
- 	fadt->x_pm1a_evt_blk.space_id = ACPI_ADDRESS_SPACE_IO;
- 	fadt->x_pm1a_evt_blk.bit_width = fadt->pm1_evt_len * 8;
- 	fadt->x_pm1a_evt_blk.bit_offset = 0;
-@@ -131,12 +119,7 @@ static int quark_write_fadt(struct acpi_ctx *ctx,
- 	fadt->x_gpe1_blk.access_size = 0;
- 	fadt->x_gpe1_blk.addrl = 0x0;
- 	fadt->x_gpe1_blk.addrh = 0x0;
--
--	header->checksum = table_compute_checksum(fadt, header->length);
--
--	return acpi_add_fadt(ctx, fadt);
- }
--ACPI_WRITER(5fadt, "FADT", quark_write_fadt, 0);
- 
- int acpi_create_gnvs(struct acpi_global_nvs *gnvs)
- {
-diff --git a/arch/x86/cpu/tangier/acpi.c b/arch/x86/cpu/tangier/acpi.c
-index d4d0ef6f85..1c73a9dbfe 100644
---- a/arch/x86/cpu/tangier/acpi.c
-+++ b/arch/x86/cpu/tangier/acpi.c
-@@ -16,21 +16,8 @@
- #include <asm/arch/iomap.h>
- #include <dm/uclass-internal.h>
- 
--static int tangier_write_fadt(struct acpi_ctx *ctx,
--			      const struct acpi_writer *entry)
-+void acpi_fill_fadt(struct acpi_fadt *fadt)
- {
--	struct acpi_table_header *header;
--	struct acpi_fadt *fadt;
--
--	fadt = ctx->current;
--	header = &fadt->header;
--
--	memset(fadt, '\0', sizeof(struct acpi_fadt));
--
--	acpi_fill_header(header, "FACP");
--	header->length = sizeof(struct acpi_fadt);
--	header->revision = 6;
--
- 	fadt->preferred_pm_profile = ACPI_PM_UNSPECIFIED;
- 
- 	fadt->iapc_boot_arch = ACPI_FADT_VGA_NOT_PRESENT |
-@@ -40,17 +27,9 @@ static int tangier_write_fadt(struct acpi_ctx *ctx,
- 		ACPI_FADT_POWER_BUTTON | ACPI_FADT_SLEEP_BUTTON |
- 		ACPI_FADT_SEALED_CASE | ACPI_FADT_HEADLESS |
- 		ACPI_FADT_HW_REDUCED_ACPI;
--
-+	fadt->header.revision = 6;
- 	fadt->minor_revision = 2;
--
--	fadt->x_firmware_ctrl = map_to_sysmem(ctx->facs);
--	fadt->x_dsdt = map_to_sysmem(ctx->dsdt);
--
--	header->checksum = table_compute_checksum(fadt, header->length);
--
--	return acpi_add_fadt(ctx, fadt);
- }
--ACPI_WRITER(5fadt, "FADT", tangier_write_fadt, 0);
- 
- u32 acpi_fill_madt(u32 current)
- {
-diff --git a/arch/x86/include/asm/acpi_table.h b/arch/x86/include/asm/acpi_table.h
-index e617524617..3988898f66 100644
---- a/arch/x86/include/asm/acpi_table.h
-+++ b/arch/x86/include/asm/acpi_table.h
-@@ -168,18 +168,6 @@ int acpi_create_dmar_ds_ioapic(struct acpi_ctx *ctx, uint enumeration_id,
- int acpi_create_dmar_ds_msi_hpet(struct acpi_ctx *ctx, uint enumeration_id,
- 				 pci_dev_t bdf);
- 
--/**
-- * acpi_fadt_common() - Handle common parts of filling out an FADT
-- *
-- * This sets up the Fixed ACPI Description Table
-- *
-- * @fadt: Pointer to place to put FADT
-- * @facs: Pointer to the FACS
-- * @dsdt: Pointer to the DSDT
-- */
--void acpi_fadt_common(struct acpi_fadt *fadt, struct acpi_facs *facs,
--		      void *dsdt);
--
- /**
-  * intel_acpi_fill_fadt() - Set up the contents of the FADT
-  *
-diff --git a/arch/x86/lib/acpi_table.c b/arch/x86/lib/acpi_table.c
-index 08fd1e54ce..ff02ce80d1 100644
---- a/arch/x86/lib/acpi_table.c
-+++ b/arch/x86/lib/acpi_table.c
-@@ -381,29 +381,6 @@ int acpi_write_hpet(struct acpi_ctx *ctx)
- 	return 0;
- }
- 
--void acpi_fadt_common(struct acpi_fadt *fadt, struct acpi_facs *facs,
--		      void *dsdt)
--{
--	struct acpi_table_header *header = &fadt->header;
--
--	memset((void *)fadt, '\0', sizeof(struct acpi_fadt));
--
--	acpi_fill_header(header, "FACP");
--	header->length = sizeof(struct acpi_fadt);
--	header->revision = 4;
--	memcpy(header->oem_id, OEM_ID, 6);
--	memcpy(header->oem_table_id, OEM_TABLE_ID, 8);
--	memcpy(header->creator_id, ASLC_ID, 4);
--
--	fadt->x_firmware_ctrl = map_to_sysmem(facs);
--	fadt->x_dsdt = map_to_sysmem(dsdt);
--
--	fadt->preferred_pm_profile = ACPI_PM_MOBILE;
--
--	/* Use ACPI 3.0 revision */
--	fadt->header.revision = 4;
--}
--
- void acpi_create_dmar_drhd(struct acpi_ctx *ctx, uint flags, uint segment,
- 			   u64 bar)
- {
+ # For EABI conformant tool chains, provide eabi_compat()
+ ifneq (,$(findstring -mabi=aapcs-linux,$(PLATFORM_CPPFLAGS)))
+diff --git a/arch/arm/lib/acpi_table.c b/arch/arm/lib/acpi_table.c
+new file mode 100644
+index 0000000000..286ed7ceca
+--- /dev/null
++++ b/arch/arm/lib/acpi_table.c
+@@ -0,0 +1,114 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Based on acpi.c from coreboot
++ *
++ * Copyright (C) 2024 9elements GmbH
++ */
++
++#define LOG_CATEGORY LOGC_ACPI
++
++#include <string.h>
++#include <acpi/acpigen.h>
++#include <acpi/acpi_device.h>
++#include <acpi/acpi_table.h>
++
++void acpi_write_madt_gicc(struct acpi_madt_gicc *gicc, uint cpu_num,
++			  uint perf_gsiv, ulong phys_base, ulong gicv,
++			  ulong gich, uint vgic_maint_irq, u64 gicr_base,
++			  ulong mpidr, uint efficiency)
++{
++	memset(gicc, '\0', sizeof(struct acpi_madt_gicc));
++	gicc->type = ACPI_APIC_GICC;
++	gicc->length = sizeof(struct acpi_madt_gicc);
++	gicc->cpu_if_num = cpu_num;
++	gicc->processor_id = cpu_num;
++	gicc->flags = ACPI_MADTF_ENABLED;
++	gicc->perf_gsiv = perf_gsiv;
++	gicc->phys_base = phys_base;
++	gicc->gicv = gicv;
++	gicc->gich = gich;
++	gicc->vgic_maint_irq = vgic_maint_irq;
++	gicc->gicr_base = gicr_base;
++	gicc->mpidr = mpidr;
++	gicc->efficiency = efficiency;
++}
++
++void acpi_write_madt_gicd(struct acpi_madt_gicd *gicd, uint gic_id,
++			  ulong phys_base, uint gic_version)
++{
++	memset(gicd, '\0', sizeof(struct acpi_madt_gicd));
++	gicd->type = ACPI_APIC_GICD;
++	gicd->length = sizeof(struct acpi_madt_gicd);
++	gicd->gic_id = gic_id;
++	gicd->phys_base = phys_base;
++	gicd->gic_version = gic_version;
++}
++
++void acpi_write_madt_gicr(struct acpi_madt_gicr *gicr,
++			  u64 discovery_range_base_address,
++			  u32 discovery_range_length)
++{
++	memset(gicr, '\0', sizeof(struct acpi_madt_gicr));
++	gicr->type = ACPI_APIC_GICR;
++	gicr->length = sizeof(struct acpi_madt_gicr);
++	gicr->discovery_range_base_address = discovery_range_base_address;
++	gicr->discovery_range_length = discovery_range_length;
++}
++
++void acpi_write_madt_its(struct acpi_madt_its *its,
++			 u32 its_id,
++			 u64 physical_base_address)
++{
++	memset(its, '\0', sizeof(struct acpi_madt_its));
++	its->type = ACPI_APIC_ITS;
++	its->length = sizeof(struct acpi_madt_its);
++	its->gic_its_id = its_id;
++	its->physical_base_address = physical_base_address;
++}
++
++int acpi_pptt_add_proc(struct acpi_ctx *ctx, const u32 flags, const u32 parent,
++		       const u32 proc_id, const u32 num_resources,
++		       const u32 *resource_list)
++{
++	struct acpi_pptt_proc *proc = ctx->current;
++	int offset;
++
++	offset = ctx->current - ctx->tab_start;
++	proc->hdr.type = ACPI_PPTT_TYPE_PROC;
++	proc->flags = flags;
++	proc->parent = parent;
++	proc->proc_id = proc_id;
++	proc->num_resources = num_resources;
++	proc->hdr.length = sizeof(struct acpi_pptt_proc) +
++		sizeof(u32) * num_resources;
++
++	if (resource_list)
++		memcpy(proc + 1, resource_list, sizeof(u32) * num_resources);
++
++	acpi_inc(ctx, proc->hdr.length);
++
++	return offset;
++}
++
++int acpi_pptt_add_cache(struct acpi_ctx *ctx, const u32 flags,
++			const u32 next_cache_level, const u32 size,
++			const u32 sets, const u8 assoc, const u8 attributes,
++			const u16 line_size)
++{
++	struct acpi_pptt_cache *cache = ctx->current;
++	int offset;
++
++	offset = ctx->current - ctx->tab_start;
++	cache->hdr.type = ACPI_PPTT_TYPE_CACHE;
++	cache->hdr.length = sizeof(struct acpi_pptt_cache);
++	cache->flags = flags;
++	cache->next_cache_level = next_cache_level;
++	cache->size = size;
++	cache->sets = sets;
++	cache->assoc = assoc;
++	cache->attributes = attributes;
++	cache->line_size = line_size;
++	acpi_inc(ctx, cache->hdr.length);
++
++	return offset;
++}
 diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index a372435492..19cf0fb43c 100644
+index c6a3e44a95..7d994a985f 100644
 --- a/include/acpi/acpi_table.h
 +++ b/include/acpi/acpi_table.h
-@@ -954,6 +954,15 @@ void acpi_fill_header(struct acpi_table_header *header, char *signature);
-  */
- int acpi_fill_csrt(struct acpi_ctx *ctx);
+@@ -342,7 +342,10 @@ enum acpi_apic_types {
+ 	ACPI_APIC_LX2APIC,		/* Processor local x2APIC */
+ 	ACPI_APIC_LX2APIC_NMI,		/* Local x2APIC NMI */
+ 	ACPI_APIC_GICC,			/* Generic Interrupt Ctlr CPU i/f */
+-	ACPI_APIC_GICD			/* Generic Interrupt Ctlr Distributor */
++	ACPI_APIC_GICD,			/* Generic Interrupt Ctlr Distributor */
++	ACPI_APIC_MSI_FRAME,		/* Generic Interrupt MSI Frame */
++	ACPI_APIC_GICR,			/* Generic Interrupt Ctlr Redistributor */
++	ACPI_APIC_ITS,			/* Interrupt Translation Service */
+ };
+ 
+ /* MADT: Processor Local APIC Structure */
+@@ -437,6 +440,35 @@ struct acpi_madt_gicd {
+ 	u8 reserved3[3];
+ } __packed;
  
 +/**
-+ * acpi_fill_fadt() - Fill out the body of the FADT
++ * struct __packed acpi_madt_gicr - GIC Redistributor (type 0xe)
 + *
-+ * Must be implemented in SoC specific code or in mainboard code.
-+ *
-+ * @fadt: Pointer to FADT to update
++ * This holds information about the Generic Interrupt Controller (GIC)
++ * Redistributor interface. See ACPI Spec v6.3 section 5.2.12.17
 + */
-+void acpi_fill_fadt(struct acpi_fadt *fadt);
++struct acpi_madt_gicr {
++	u8 type;
++	u8 length;
++	u16 reserved;
++	u64 discovery_range_base_address;
++	u32 discovery_range_length;
++} __packed;
 +
- /**
-  * acpi_get_rsdp_addr() - get ACPI RSDP table address
-  *
-diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index c9ddcca8cb..9eb0b507a0 100644
---- a/lib/acpi/acpi_table.c
-+++ b/lib/acpi/acpi_table.c
-@@ -202,6 +202,44 @@ int acpi_add_table(struct acpi_ctx *ctx, void *table)
- 	return 0;
- }
- 
-+int acpi_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
-+{
-+	struct acpi_table_header *header;
-+	struct acpi_fadt *fadt;
++/**
++ * struct __packed acpi_madt_its - GIC Interrupt Translation Service (type 0xf)
++ *
++ * This holds information about the Interrupt Translation Service (ITS)
++ * Structure. See ACPI Spec v6.3 section 5.2.12.18
++ */
++struct acpi_madt_its {
++	u8 type;
++	u8 length;
++	u16 reserved;
++	u32 gic_its_id;
++	u64 physical_base_address;
++	u32 reserved2;
++} __packed;
 +
-+	fadt = ctx->current;
-+	header = &fadt->header;
-+
-+	memset((void *)fadt, '\0', sizeof(struct acpi_fadt));
-+
-+	acpi_fill_header(header, "FACP");
-+	header->length = sizeof(struct acpi_fadt);
-+	header->revision = acpi_get_table_revision(ACPITAB_FADT);
-+	memcpy(header->oem_id, OEM_ID, 6);
-+	memcpy(header->oem_table_id, OEM_TABLE_ID, 8);
-+	memcpy(header->creator_id, ASLC_ID, 4);
-+	header->creator_revision = 1;
-+
-+	fadt->x_firmware_ctrl = map_to_sysmem(ctx->facs);
-+	fadt->x_dsdt = map_to_sysmem(ctx->dsdt);
-+
-+	if (fadt->x_firmware_ctrl < 0x100000000ULL)
-+		fadt->firmware_ctrl = fadt->x_firmware_ctrl;
-+
-+	if (fadt->x_dsdt < 0x100000000ULL)
-+		fadt->dsdt = fadt->x_dsdt;
-+
-+	fadt->preferred_pm_profile = ACPI_PM_UNSPECIFIED;
-+
-+	acpi_fill_fadt(fadt);
-+
-+	header->checksum = table_compute_checksum(fadt, header->length);
-+
-+	return acpi_add_fadt(ctx, fadt);
-+}
-+
-+ACPI_WRITER(5fadt, "FADT", acpi_write_fadt, 0);
-+
- void acpi_create_dbg2(struct acpi_dbg2_header *dbg2,
- 		      int port_type, int port_subtype,
- 		      struct acpi_gen_regaddr *address, u32 address_size,
+ /* MCFG (PCI Express MMIO config space BAR description table) */
+ struct acpi_mcfg {
+ 	struct acpi_table_header header;
 -- 
 2.46.2
 
