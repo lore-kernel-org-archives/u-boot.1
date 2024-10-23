@@ -4,85 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CAD4CF5386
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:16:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BB95CF5386
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:20:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA1E4892F0;
-	Wed, 23 Oct 2024 15:15:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C9E0B89266;
+	Wed, 23 Oct 2024 15:20:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cLGLCKOz";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="jrwdN/dS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F4D588DEF; Wed, 23 Oct 2024 15:10:39 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4EC6E88FA5; Wed, 23 Oct 2024 15:20:38 +0200 (CEST)
+Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89708891E9
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:10:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3D9788F4B
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:20:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=martinstolpe@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-431548bd1b4so67089225e9.3
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:10:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729689023; x=1730293823; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VYZSl3q+MXzKcQUjOgIryvlFhPuPXXvb4CLqPwRmKBk=;
- b=cLGLCKOzNq8q+I6Dk2dDqqCSHd+rR0QXfPYR2h8ozCWeeSRGt8QbzrlrizYqGGtC0v
- pMmoqesKtsp3bkD5X3GEqn/ui1ceXuMX5b7p3/DP1C0t0AI5gOjYZegnD6X8V8CJD0gW
- tL50EK2Z23gnfNN94a9qg04tHWIeFNkzibO4n0AW1ofuBw0x/TMMou4ntAlhtzFJlHxi
- mIlkirYZMMrFf7Uq0Nkkrq/urTkug3xWGohQGzxJO+M1piRtMo61cL4TV1g9HUJJ961t
- fXQEHkuNjrWgB2DcENpNPSLg0cgIDrmB7Fx3ayroq6hkD0rVOGSum86wCYplpATkhRYn
- MbKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729689023; x=1730293823;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VYZSl3q+MXzKcQUjOgIryvlFhPuPXXvb4CLqPwRmKBk=;
- b=gyv4YLEXE+IZTlkr2Z5TEGesjeTwlWyXEfqnA5Lpig4rrMKaHvXrVYGfavds8FizXy
- 4Ch8mdw3Slj4IQqPL6mqh6LQItuxE8aHj1xN72St0WpXZ4DV3Wzz1/Qdc6+xVMp90cFa
- UiMLrUQPPTGh561JfKPUx2P5yjui2ZQ8RYzCXyGwQ9ScoscmDrSTxfi4IThaayIEpMyl
- DFVJdvsvy2mvpmA/uHkUsHoozW0y0LH1XA5qyOjA2aTax9R65O+q+U+2NN0l5DB2+dYL
- c0nAnoYubd3nVM1osmTSdsAycDumnkBiqYd+t7bIlR9wvxCvldfQIF8hxS5XAX/k5oMd
- A4uw==
-X-Gm-Message-State: AOJu0YySsewAYCbVkFMWACVTVZ06JGthckvVp7MeM5cIp99JopzIhnDD
- jo2x1ETwf83FA2SSv09uHpZpOOkdlPeuWVSlJVV/WRWsbt+3id3rJ6h1dtny
-X-Google-Smtp-Source: AGHT+IEenMqvdfuLTB5HPSJO4EuAEA6+3/reLe9otly6OdXSiOqoJL5004XuzutKCqFhAQEtKdkUUA==
-X-Received: by 2002:a05:600c:1c0f:b0:431:3b53:105e with SMTP id
- 5b1f17b1804b1-431841fda82mr21676035e9.9.1729689022572; 
- Wed, 23 Oct 2024 06:10:22 -0700 (PDT)
-Received: from NLOOP11.neuroloop.local ([213.164.76.146])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37ee0a47b74sm8842742f8f.27.2024.10.23.06.10.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Oct 2024 06:10:22 -0700 (PDT)
-From: Martin Stolpe <martinstolpe@gmail.com>
-X-Google-Original-From: Martin Stolpe <martin.stolpe@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Martin Stolpe <martin.stolpe@gmail.com>,
- Francois Berder <fberder@outlook.fr>, "Ivan T. Ivanov" <iivanov@suse.de>,
- Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 1/1] rpi: Only add frame buffer node if CONFIG_FDT_SIMPLEFB
- is set
-Date: Wed, 23 Oct 2024 15:09:20 +0200
-Message-ID: <20241023131012.2445564-2-martin.stolpe@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241023131012.2445564-1-martin.stolpe@gmail.com>
-References: <20241023131012.2445564-1-martin.stolpe@gmail.com>
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1729689623;
+ bh=mFKsUzBkIdsQhNVxeWWUOIc5yjxmj0fXUKVNMBCYAjM=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=jrwdN/dSQqS1Eeklbt9Ttm7I4FJJUNDQzH/OejjB58TwwcDFSIljKPalsWTQ67ZgF
+ bIVgNrIEIpaW24mXMdQQnd0MpotbcU4RJ+NYN0Ek3yc6CSqXSUISBazqwR/Rjo5k5a
+ a+01zf8B7KmFX535UTwUPsqq99Cb/29ZKqPA+VUCAgWn3+b7tQObmUq9txwhP7obaN
+ zvVdLUg7z8/Gu7wRzu+zJRxsvcVsiHMXA4iYq+YkO0VoIGYF/mKKkteA9F/5du7wj+
+ 2GqivVqDoDkxUaF4wNZxCNQ0YkYlPQw9l+W3GfKI8gqF1fXB2wolH2dC3rZA692gcu
+ lZejjQDGPgsVA==
+X-secureTransport-forwarded: yes
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Fabio Estevam
+ <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
+ <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
+Subject: RE: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
+ EEPROM ID page on DH i.MX8MP DHCOM
+Thread-Topic: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
+ EEPROM ID page on DH i.MX8MP DHCOM
+Thread-Index: AQHbGxfHmD5+3BWcGkWm07IML/aPr7KDeoyAgAXUiUCAAK5vAIAA1rQQgABasgCABjFZgIAAYh8AgADI4vCAABAiAIABs80Q///qwYCAACbfkA==
+Date: Wed, 23 Oct 2024 13:20:21 +0000
+Message-ID: <95c20aac320049eda6a324d360743691@dh-electronics.com>
+References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
+ <20241010132337.3259-2-cniedermaier@dh-electronics.com>
+ <934d25c2-39d8-4f51-b29e-8f20feb7431f@denx.de>
+ <a305b1455a984fca83de5a6c0d4b8dfc@dh-electronics.com>
+ <74bd0a6b-fe12-4e2c-af79-c1f8ffb7d484@denx.de>
+ <73ccb69b85094e24be2343d5cbc8879a@dh-electronics.com>
+ <17b9380b-39c0-40f2-bb28-319d26b2e13c@denx.de>
+ <7b9b543d7aad498591fa6a04a3154cf8@dh-electronics.com>
+ <a0f70ee2-6d71-4f66-b22e-994df2b28504@denx.de>
+ <d06620ee891f4e419bfeb8fe657ba729@dh-electronics.com>
+ <009179c8-5512-4ba6-beeb-2d508dd5abd8@denx.de>
+ <bef41c1fefeb422e9e1b8f8f0d241a13@dh-electronics.com>
+ <1fd571bc-d133-4e91-8ab6-45e6e7429027@denx.de>
+In-Reply-To: <1fd571bc-d133-4e91-8ab6-45e6e7429027@denx.de>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 23 Oct 2024 15:15:20 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,38 +86,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The functions fdt_simplefb_add_node and fdt_simplefb_enable_and_mem_rsv
-are only available if CONFIG_FDT_SIMPLEFB is enabled.
-
-Signed-off-by: Martin Stolpe <martin.stolpe@gmail.com>
----
-
- board/raspberrypi/rpi/rpi.c | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
-
-diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-index ab5ea85cf9..47db441696 100644
---- a/board/raspberrypi/rpi/rpi.c
-+++ b/board/raspberrypi/rpi/rpi.c
-@@ -569,11 +569,13 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 
- 	update_fdt_from_fw(blob, (void *)fw_dtb_pointer);
- 
--	node = fdt_node_offset_by_compatible(blob, -1, "simple-framebuffer");
--	if (node < 0)
--		fdt_simplefb_add_node(blob);
--	else
--		fdt_simplefb_enable_and_mem_rsv(blob);
-+	if (CONFIG_IS_ENABLED(FDT_SIMPLEFB)) {
-+		node = fdt_node_offset_by_compatible(blob, -1, "simple-framebuffer");
-+		if (node < 0)
-+			fdt_simplefb_add_node(blob);
-+		else
-+			fdt_simplefb_enable_and_mem_rsv(blob);
-+	}
- 
- #ifdef CONFIG_EFI_LOADER
- 	/* Reserve the spin table */
--- 
-2.43.0
-
+RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQpTZW50OiBXZWRuZXNkYXksIE9jdG9i
+ZXIgMjMsIDIwMjQgMjo0MSBQTQ0KPiBPbiAxMC8yMy8yNCAyOjE4IFBNLCBDaHJpc3RvcGggTmll
+ZGVybWFpZXIgd3JvdGU6DQo+IA0KPiBbLi4uXQ0KPiANCj4+PiBZb3UgZG8gbm90LCB0aGUgZm9s
+bG93aW5nIGF1dG9tYXRpY2FsbHkgcmVzZXJ2ZXMgc3BhY2Ugb24gc3RhY2sgd2hlbg0KPj4+IGNh
+bGxlZCBhbmQgZnJlZXMgaXQgdXAgdXBvbiBmdW5jdGlvbiByZXR1cm46DQo+Pj4NCj4+PiBmdW5j
+dGlvbiBmb28oKSB7DQo+Pj4gICAgIHU4IGFycmF5WzEyXTsNCj4+PiAgICAgLi4uDQo+Pj4gICAg
+IHN0dWZmKGFycmF5KTsNCj4+PiAgICAgLi4uDQo+Pj4gfQ0KPj4NCj4+IFNvcnJ5LCBJIGV4cHJl
+c3NlZCBteXNlbGYgaW5jb3JyZWN0bHkgaGVyZS4gT2YgY291cnNlIEkgbWVhbnQgdGhhdA0KPj4g
+SSBkb24ndCB3YW50IHRvIHJlc2VydmUgbWVtb3J5IG9uIHRoZSBzdGFjayBmb3IgdGhlIEVFUFJP
+TSBJRCBwYWdlDQo+PiBpbiB0aGUgYm9hcmRfaW5pdCgpIGZ1bmN0aW9uLg0KPiANCj4gV2h5ID8N
+Cg0KSXQncyBhYm91dCBzdHJ1Y3R1cmluZyB0aGUgc29mdHdhcmUuIEkgd2FudCB0byBpc29sYXRl
+IHRoZSBmdW5jdGlvbiB3aGljaA0KaXMgcmVzcG9uc2libGUgZm9yIGV2YWx1YXRlIHRoZSBFRVBS
+T00gZnJvbSB0aGUgY2FsbGVyIGZ1bmN0aW9uLiBJIHdhbnRlZA0KdG8gYXZvaWQgZW50YW5nbGlu
+ZyB0aGUgdHdvLiBUaGlzIG1lYW5zIHRoYXQgSSwgYXMgdGhlIGNhbGxlciBvZiB0aGUgZnVuY3Rp
+b24sDQpkbyBub3QgaGF2ZSB0byB3b3JyeSBhYm91dCB0aGUgaW50ZXJuYWwgc3RydWN0dXJlIG9m
+IHRoZSBFRVBST00gSUQgcGFnZS4NCg0KPj4+PiBJIHdhbnQgdG8gaGFuZGxlDQo+Pj4+IHNpemUg
+YW5kIGNhY2hpbmcgaW4gdGhlIGZ1bmN0aW9uIGRoX2dldF92YWx1ZV9mcm9tX2VlcHJvbV9pZF9w
+YWdlKCkuIFNvIEkgZG9uJ3QNCj4+Pj4gd2FudCB0byBkZWFsIHdpdGggc2l6ZSBhbmQgc3RydWN0
+dXJlIGluIHRoZSBmdW5jdGlvbiBib2FyZF9pbml0KCkuIEZvciBtZSwgdGhlIHVzZQ0KPj4+PiBv
+ZiBhIHN0YXRpYyB2YXJpYWJsZSBpcyBPSywgYnV0IHlvdSBkb24ndCBsaWtlIGl0LiBEbyB5b3Ug
+a25vdyBob3cgSSBjYW4gZG8gdGhpcw0KPj4+PiB3aXRob3V0IGFzc2lnbmluZyBhIHN0YXRpYyB2
+YXJpYWJsZSwgYnV0IG5vdCBhbGxvY2F0ZSB0aGUgbWVtb3J5IHNvbWV3aGVyZSBpbiBhDQo+Pj4+
+IGNhbGxlciBmdW5jdGlvbj8NCj4+PiBFdmVuIHRoZSBzdGF0aWMgdmFyaWFibGUgc3BhY2UgaXMg
+YWxsb2NhdGVkIHNvbWV3aGVyZSwgZWl0aGVyIGluIC5ic3Mgb3INCj4+PiAuZGF0YSBzZWN0aW9u
+LCBleGNlcHQgd2l0aCBzdGF0aWMgdmFyaWFibGUocykgdGhlIG1lbW9yeSBwZXJzaXN0cw0KPj4+
+IHRocm91Z2hvdXQgdGhlIGxpZmV0aW1lIG9mIFUtQm9vdCBiZWNhdXNlIHRoZWlyIGNvbnRlbnQg
+aGFzIHRvIGJlDQo+Pj4gcmV0YWluZWQgZXZlbiB3aGVuIHRoZSBmdW5jdGlvbiB1c2luZyB0aGVp
+ciBjb250ZW50IHJldHVybnMuDQo+Pj4NCj4+PiBXaXRoIHZhcmlhYmxlKHMpIGFsbG9jYXRlZCBv
+biBzdGFjayAod2hpY2ggaXMgbWFqb3JpdHkgb2YgdmFyaWFibGUpLCB0aGUNCj4+PiBtZW1vcnkg
+YWxsb2NhdGlvbiBoYXBwZW5zIG9uIGVudHJ5IHRvIHRoZSBmdW5jdGlvbiBhbmQgdGhlIG1lbW9y
+eSBpcw0KPj4+IGF1dG9tYXRpY2FsbHkgZnJlZWQgb24gZXhpdCBmcm9tIHRoZSBmdW5jdGlvbi4N
+Cj4+Pg0KPj4+IEl0IGlzIHBlcmZlY3RseSBmaW5lIHRvIGNhbGwgc29tZSB3cmFwcGVyIHN1cGVy
+ZnVuY3Rpb24gZnJvbQ0KPj4+IGJvYXJkX2luaXQoKSB3aGljaCBob2xkcyB0aGUgYXJyYXkgb24g
+c3RhY2sgYW5kIGNhbGxzIGFsbCB0aGUgRUVQUk9NDQo+Pj4gcGFyc2VyL2hhbmRsZXIgZnVuY3Rp
+b25zOg0KPj4+DQo+Pj4gZWVwcm9tX3N1cGVyd3JhcHBlcigpIHsNCj4+PiAgICAgdTggZWVwcm9t
+WzY0XTsNCj4+PiAgICAgLi4uDQo+Pj4gICAgIGVlcHJvbV9kb19zdHVmZjEoZWVwcm9tKTsNCj4+
+PiAgICAgZWVwcm9tX2RvX3N0dWZmMihlZXByb20pOw0KPj4+ICAgICAuLi4NCj4+PiB9DQo+Pj4N
+Cj4+PiBib2FyZF9pbml0KCkgew0KPj4+ICAgICAuLi4NCj4+PiAgICAgZWVwcm9tX3N1cGVyd3Jh
+cHBlcigpOw0KPj4+ICAgICAuLi4NCj4+PiB9DQo+Pg0KPj4gVGhhdCdzIG5vdCB3aGF0IEknbSBs
+b29raW5nIGZvci4gRG8geW91IGhhdmUgYW5vdGhlciBzb2x1dGlvbj8NCj4gTm8uIEkgZG8gbm90
+IHVuZGVyc3RhbmQgd2hhdCBpcyB0aGUgcHJvYmxlbSB3aXRoIGFsbG9jYXRpbmcgNjQgQnl0ZXMg
+b24NCj4gc3RhY2sgPw0KDQpUaGVyZSBpcyBubyBwcm9ibGVtIHdpdGggdGhlIHJlc2VydmF0aW9u
+IG9mIHRoZSBFRVBST00gYnVmZmVyIG9uIHRoZQ0Kc3RhY2suIEkgd2FudGVkIHRvIGlzb2xhdGUg
+dGhlIGV2YWx1YXRpb24gZnVuY3Rpb24gZnJvbSB0aGUgY2FsbGVyDQpmdW5jdGlvbiwgc28gdGhh
+dCBJIGhhdmUgbm8gZGVwZW5kZW5jaWVzIG9uIHRoZSBjYWxsZXIuIFNpbmNlIHRoZXJlDQpzZWVt
+cyB0byBiZSBubyBiZXR0ZXIgc29sdXRpb24sIEkgd2lsbCBhZGQgdGhlIHZhcmlhYmxlIHRvIHRo
+ZQ0KYm9hcmRfaW5pdCgpIGZ1bmN0aW9uIGluIFYyLg0KDQoNClJlZ2FyZHMNCkNocmlzdG9waA0K
