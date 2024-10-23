@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93B79CF5386
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:34:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEAD1CF5386
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:34:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A57978934B;
-	Wed, 23 Oct 2024 15:29:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F35189308;
+	Wed, 23 Oct 2024 15:29:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="BdbdOoYX";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="NWeUJeW1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00B888930D; Wed, 23 Oct 2024 15:29:21 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 6B19389357; Wed, 23 Oct 2024 15:29:24 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B92B38933A
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:29:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D453B89367
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:29:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-37d3ecad390so639628f8f.1
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:29:12 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-37d3ecad390so639685f8f.1
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:29:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729690152; x=1730294952; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729690155; x=1730294955; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tubikTbz3aK504vdDHlUvSlhgJacrpoiHsGwKa1FeHU=;
- b=BdbdOoYXooebkC3KR8yfHqiEX3VTBbi+tK4+8onyCYV1Qmu7uuZ2rMF7eZg6PqUQk5
- iZBUcKxeb3V9mfkN5MwJh1zqCNqIKE9vTTQUJqHkDmjLd40mlWggu/RNKjVk2hsl83OJ
- 4B3i9la86Coc0hpPd8R7uv/8adZCkKLNvfy0hHoEBbSJlthw+/haEbnhz4gdFh7BSvxF
- qNJeQphB3sA9wpHIz72cELaiach0l6AvLdtc4JNUwfpJrZWyqGpPt3hfiBB7Ojt1v4wV
- lETSFtIofyu7ErYFRXxsVXSUk+KAjsUeRxKINQwMVBKuAxDbX03tUaP0WKFP+aZ5V30x
- 1waA==
+ bh=WwKTa2EBAz4I04/nwNCkYGEwdnLhNaFfCA7k8RayRf0=;
+ b=NWeUJeW1iuGFkL6jUdckmN/1udx0jq06jmLVzpdiGPSlzUAM/Ak8PIaNyfIxn+HOyL
+ KaG1nJXtcB+9b4k3rwS+h0G+n3gKXapm/LFtb08EmG32g0Wb2ZuSPcqZLEUx4Dh7yULU
+ Y9xFE9dkjCx4SGOTZ1jYQkrgro8V18jlJthWJyoqLLGtCfljU13F5B0gk5i6sTaFSR8d
+ pXb6NER1C2kxAD2oXY82nsPtZIsrxdPN/srsBLh/kVlnII9khYN26AP0ggqosP6/r7Ru
+ y6F14x9yYInKJhPKmSdUWCA1ygdXiHJizqsXth/QKOmTOrrM4j/aodgzwy2XhTZAzUXt
+ eGMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729690152; x=1730294952;
+ d=1e100.net; s=20230601; t=1729690155; x=1730294955;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tubikTbz3aK504vdDHlUvSlhgJacrpoiHsGwKa1FeHU=;
- b=gzzCcsacQJjmVKjDxhiSfNQ8zQZWNUUIj3ObI/b5YFpCOmp+jZAVQ5ojqazNvFwhfn
- lU17JkoIxk9Q5uQl5rMNod65Xoz6ZCxtUy9T1JQWpECWLegGjVcZ5aiFVq5iGi8wICEg
- Jra/2449sXMuzJe5Pjm1ZPutUT4ur2ubvGpdz4hIENH/Dj3nmx6WaaQ/RULNLCMF3cK9
- XLjFD9du8xKT9f89RE0Uih82VPug0wZa3b1CkwDakaxmwDZ09b7eEuV2joA3yAng1o1Q
- qG2c0eV3IKGN9bWqO7zxeM3F6l4a4At8281Hf5/wSQ2worR2ImQdaSqZ1v+oCRcG8vw0
- /CIQ==
-X-Gm-Message-State: AOJu0YzXHBzb/I1OPexujrJYYTELj9NtGf5pZqocomOefaxh8odjdHKp
- oHNhwaY2POOVEpwMy4wkl83ThZtUKFZGV2U1AXN2tVk419mzojGXnJ0KKccgiQoX1KpFhiWUzvR
- s
-X-Google-Smtp-Source: AGHT+IEu7Hjg+2L7HeTIic/97IuIyBzovWEvuHBA6wOpqLqayz62dwI5J2INr3xy3nyq86m0dw8aGA==
-X-Received: by 2002:a5d:694f:0:b0:37e:f451:a05a with SMTP id
- ffacd0b85a97d-37efc653acdmr1902863f8f.27.1729690152117; 
- Wed, 23 Oct 2024 06:29:12 -0700 (PDT)
+ bh=WwKTa2EBAz4I04/nwNCkYGEwdnLhNaFfCA7k8RayRf0=;
+ b=Z1WElmZUGCYrt+JPhbX6P+QUpXzZhd9TOWCSMtgnd2VSPDQgNy7yr9QbPJW0/gVTXi
+ FPogPGxxrOel+2jf62ynjMN+y8aHYhkvDNM/BmRr6kqxBT4hMs+gqSOSS4eIOSFESpql
+ pPgGPcGFhtAKsv2Ul0gG7Z+7LN018XumMUvrK20sgqDEr1MZHl7Jg7hmfpfDZ3ixcjTu
+ ffmJzuPmG2GgxT5nEsekICXvYfvq/2CXqL6sFvaBnpBxD++m2kIaMW61Sid1Pr3ayEtU
+ 7BF83D7Zj/iCuhB6oqSES92o0QJdF+gIYqOpR+lwlAbEb3eDk08giwnkwivy0j+l6Eqq
+ MeXA==
+X-Gm-Message-State: AOJu0YyBk9og7iSDPEthOdFu5zXtnz4aLL8Kt6tuJUSOWPYOunxwSjt9
+ f0ySjzqSBO9D3riGh99RKL86t+YZ5uMdO09HY83MyGgZqOKOq3S9KCIV5+HHSFXsB+fKHpxZGkb
+ N
+X-Google-Smtp-Source: AGHT+IFeBXTIINucHYCMJsW2SG5ZTFaZ8ZRlD5SIIa0gW1Uc7vsZmPgLhyH/1hWliCZd9umIKYkMOA==
+X-Received: by 2002:adf:e88d:0:b0:37d:47eb:b586 with SMTP id
+ ffacd0b85a97d-37ef12592e5mr4733714f8f.4.1729690154047; 
+ Wed, 23 Oct 2024 06:29:14 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.29.11
+ ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.29.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Oct 2024 06:29:11 -0700 (PDT)
+ Wed, 23 Oct 2024 06:29:13 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	linux-kernel@vger.kernel.org
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v10 23/37] drivers/arm: Implement acpi_fill_madt
-Date: Wed, 23 Oct 2024 15:20:06 +0200
-Message-ID: <20241023132116.970117-24-patrick.rudolph@9elements.com>
+Subject: [PATCH v10 24/37] common: Enable BLOBLIST_TABLES on arm
+Date: Wed, 23 Oct 2024 15:20:07 +0200
+Message-ID: <20241023132116.970117-25-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241023132116.970117-1-patrick.rudolph@9elements.com>
 References: <20241023132116.970117-1-patrick.rudolph@9elements.com>
@@ -95,309 +95,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fill the MADT table in the GIC driver and armv8 CPU driver to
-drop SoC specific code. While the GIC only needs devicetree
-data, the CPU driver needs additional information stored in
-the cpu_plat struct.
-
-While on it update the only board making use of the existing
-drivers and writing ACPI MADT in mainboard code.
-
-TEST: Booted on QEMU sbsa-ref using GICV3 driver model generated MADT.
-      Booted on QEMU raspb4 using GICV2 driver model generated MADT.
+Allow to use BLOBLIST_TABLES on arm to store ACPI or other tables.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
 ---
-Changelog v4:
-- Read everything from the DT
-- Export armv8_cpu_fill_madt() to use it in other CPU drivers
-- Depend on IRQ
-Changelog v6:
-- Update header order
+Changelog v9:
+- default to BLOBLIST_ALLOC on arm
+- Move default for BLOBLIST_SIZE_RELOC up
+Changelog v10:
+- Revert changes done in v9 and use revision v8
 ---
- arch/arm/lib/gic-v3-its.c | 89 ++++++++++++++++++++++++++++++++++++++-
- drivers/cpu/Kconfig       |  1 +
- drivers/cpu/armv8_cpu.c   | 80 ++++++++++++++++++++++++++++++++++-
- drivers/cpu/armv8_cpu.h   | 10 +++++
- 4 files changed, 178 insertions(+), 2 deletions(-)
+ common/Kconfig |  1 +
+ lib/Kconfig    | 15 +++++++++------
+ 2 files changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm/lib/gic-v3-its.c b/arch/arm/lib/gic-v3-its.c
-index 58f8bf864f..51cc239776 100644
---- a/arch/arm/lib/gic-v3-its.c
-+++ b/arch/arm/lib/gic-v3-its.c
-@@ -5,9 +5,11 @@
- #include <cpu_func.h>
- #include <dm.h>
- #include <irq.h>
-+#include <asm/acpi_table.h>
- #include <asm/gic.h>
- #include <asm/gic-v3.h>
- #include <asm/io.h>
-+#include <dm/acpi.h>
- #include <dt-bindings/interrupt-controller/arm-gic.h>
- #include <linux/bitops.h>
- #include <linux/printk.h>
-@@ -28,12 +30,14 @@ static u32 lpi_id_bits;
- struct gic_v3_its_priv {
- 	ulong gicd_base;
- 	ulong gicr_base;
-+	ulong gicr_length;
- };
- 
- static int gic_v3_its_get_gic_addr(struct gic_v3_its_priv *priv)
- {
- 	struct udevice *dev;
- 	fdt_addr_t addr;
-+	fdt_size_t size;
- 	int ret;
- 
- 	ret = uclass_get_device_by_driver(UCLASS_IRQ,
-@@ -51,12 +55,13 @@ static int gic_v3_its_get_gic_addr(struct gic_v3_its_priv *priv)
- 	}
- 	priv->gicd_base = addr;
- 
--	addr = dev_read_addr_index(dev, 1);
-+	addr = dev_read_addr_size_index(dev, 1, &size);
- 	if (addr == FDT_ADDR_T_NONE) {
- 		pr_err("%s: failed to get GICR address\n", __func__);
- 		return -EINVAL;
- 	}
- 	priv->gicr_base = addr;
-+	priv->gicr_length = size;
- 
- 	return 0;
- }
-@@ -160,6 +165,42 @@ int gic_lpi_tables_init(u64 base, u32 num_redist)
- 	return 0;
- }
- 
-+#ifdef CONFIG_ACPIGEN
-+/**
-+ * acpi_gicv3_fill_madt() - Fill out the body of the MADT
-+ *
-+ * Write GICD and GICR tables based on collected devicetree data.
-+ *
-+ * @dev: Device to write ACPI tables for
-+ * @ctx: ACPI context to write MADT sub-tables to
-+ * Return: 0 if OK
-+ */
-+static int acpi_gicv3_fill_madt(const struct udevice *dev, struct acpi_ctx *ctx)
-+{
-+	struct acpi_madt_gicd *gicd;
-+	struct acpi_madt_gicr *gicr;
-+
-+	struct gic_v3_its_priv priv;
-+
-+	if (gic_v3_its_get_gic_addr(&priv))
-+		return -EINVAL;
-+
-+	gicd = ctx->current;
-+	acpi_write_madt_gicd(gicd, dev_seq(dev), priv.gicd_base, 3);
-+	acpi_inc(ctx, gicd->length);
-+
-+	gicr = ctx->current;
-+	acpi_write_madt_gicr(gicr, priv.gicr_base, priv.gicr_length);
-+	acpi_inc(ctx, gicr->length);
-+
-+	return 0;
-+}
-+
-+struct acpi_ops gic_v3_acpi_ops = {
-+	.fill_madt	= acpi_gicv3_fill_madt,
-+};
-+#endif
-+
- static const struct udevice_id gic_v3_ids[] = {
- 	{ .compatible = "arm,gic-v3" },
- 	{}
-@@ -191,4 +232,50 @@ U_BOOT_DRIVER(arm_gic_v3) = {
- 	.id		= UCLASS_IRQ,
- 	.of_match	= gic_v3_ids,
- 	.ops		= &arm_gic_v3_ops,
-+	ACPI_OPS_PTR(&gic_v3_acpi_ops)
-+};
-+
-+#ifdef CONFIG_ACPIGEN
-+/**
-+ * acpi_gic_its_fill_madt() - Fill out the body of the MADT
-+ *
-+ * Write ITS tables based on collected devicetree data.
-+ *
-+ * @dev: Device to write ACPI tables for
-+ * @ctx: ACPI context to write MADT sub-tables to
-+ * Return: 0 if OK
-+ */
-+static int acpi_gic_its_fill_madt(const struct udevice *dev, struct acpi_ctx *ctx)
-+{
-+	struct acpi_madt_its *its;
-+	fdt_addr_t addr;
-+
-+	addr = dev_read_addr_index(dev, 0);
-+	if (addr == FDT_ADDR_T_NONE) {
-+		pr_err("%s: failed to get GIC ITS address\n", __func__);
-+		return -EINVAL;
-+	}
-+
-+	its = ctx->current;
-+	acpi_write_madt_its(its, dev_seq(dev), addr);
-+	acpi_inc(ctx, its->length);
-+
-+	return 0;
-+}
-+
-+struct acpi_ops gic_v3_its_acpi_ops = {
-+	.fill_madt	= acpi_gic_its_fill_madt,
-+};
-+#endif
-+
-+static const struct udevice_id gic_v3_its_ids[] = {
-+	{ .compatible = "arm,gic-v3-its" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(arm_gic_v3_its) = {
-+	.name		= "gic-v3-its",
-+	.id		= UCLASS_IRQ,
-+	.of_match	= gic_v3_its_ids,
-+	ACPI_OPS_PTR(&gic_v3_its_acpi_ops)
- };
-diff --git a/drivers/cpu/Kconfig b/drivers/cpu/Kconfig
-index 9c0df331d7..4cc3679c00 100644
---- a/drivers/cpu/Kconfig
-+++ b/drivers/cpu/Kconfig
-@@ -29,6 +29,7 @@ config CPU_RISCV
- config CPU_ARMV8
- 	bool "Enable generic ARMv8 CPU driver"
- 	depends on CPU && ARM64
-+	select IRQ
+diff --git a/common/Kconfig b/common/Kconfig
+index 957de0c5c0..c3a68e33de 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1077,6 +1077,7 @@ config BLOBLIST_SIZE_RELOC
+ 	hex "Size of bloblist after relocation"
+ 	default BLOBLIST_SIZE if BLOBLIST_FIXED || BLOBLIST_ALLOC
+ 	default 0x0 if BLOBLIST_PASSAGE
++	default 0x20000 if (ARM && EFI_LOADER && GENERATE_ACPI_TABLE)
  	help
- 	  Support CPU cores for armv8 architecture.
+ 	  Sets the size of the bloblist in bytes after relocation. Since U-Boot
+ 	  has a lot more memory available then, it is possible to use a larger
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 1dd4f27159..2e0fc1bc8f 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -984,12 +984,15 @@ menu "System tables"
  
-diff --git a/drivers/cpu/armv8_cpu.c b/drivers/cpu/armv8_cpu.c
-index 19f072be43..4eedfe5e2c 100644
---- a/drivers/cpu/armv8_cpu.c
-+++ b/drivers/cpu/armv8_cpu.c
-@@ -4,10 +4,11 @@
-  */
- #include <cpu.h>
- #include <dm.h>
-+#include <irq.h>
- #include <acpi/acpigen.h>
- #include <asm/armv8/cpu.h>
--#include <dm/acpi.h>
- #include <asm/io.h>
-+#include <dm/acpi.h>
- #include <linux/bitops.h>
- #include <linux/printk.h>
- #include <linux/sizes.h>
-@@ -47,8 +48,85 @@ int armv8_cpu_fill_ssdt(const struct udevice *dev, struct acpi_ctx *ctx)
- 	return 0;
- }
+ config BLOBLIST_TABLES
+ 	bool "Put tables in a bloblist"
+-	depends on X86 && BLOBLIST
+-	help
+-	  Normally tables are placed at address 0xf0000 and can be up to 64KB
+-	  long. With this option, tables are instead placed in the bloblist
+-	  with a pointer from 0xf0000. The size can then be larger and the
+-	  tables can be placed high in memory.
++	depends on BLOBLIST
++	default y if (ARM && EFI_LOADER && GENERATE_ACPI_TABLE)
++	default n
++	help
++	  On x86 normally tables are placed at address 0xf0000 and can be up
++	  to 64KB long. With this option, tables are instead placed in the
++	  bloblist with a pointer from 0xf0000. The size can then be larger
++	  and the tables can be placed high in memory.
++	  On other architectures the tables are always placed in high memory.
  
-+int armv8_cpu_fill_madt(const struct udevice *dev, struct acpi_ctx *ctx)
-+{
-+	struct acpi_madt_gicc *gicc;
-+	struct cpu_plat *cpu_plat;
-+	struct udevice *gic;
-+	u64 gicc_gicv = 0;
-+	u64 gicc_gich = 0;
-+	u64 gicc_gicr_base = 0;
-+	u64 gicc_phys_base = 0;
-+	u32 gicc_perf_gsiv = 0;
-+	u64 gicc_mpidr;
-+	u32 gicc_vgic_maint_irq = 0;
-+	int addr_index;
-+	fdt_addr_t addr;
-+	int ret;
-+	struct irq req_irq;
-+
-+	cpu_plat = dev_get_parent_plat(dev);
-+	if (!cpu_plat)
-+		return 0;
-+
-+	ret = irq_get_interrupt_parent(dev, &gic);
-+	if (ret) {
-+		log_err("%s: Failed to find interrupt parent for %s\n",
-+			__func__, dev->name);
-+		return -ENODEV;
-+	}
-+
-+	addr_index = 1;
-+
-+	if (device_is_compatible(gic, "arm,gic-v3")) {
-+		addr = dev_read_addr_index(gic, addr_index++);
-+		if (addr != FDT_ADDR_T_NONE)
-+			gicc_gicr_base = addr;
-+	}
-+
-+	addr = dev_read_addr_index(gic, addr_index++);
-+	if (addr != FDT_ADDR_T_NONE)
-+		gicc_phys_base = addr;
-+
-+	addr = dev_read_addr_index(gic, addr_index++);
-+	if (addr != FDT_ADDR_T_NONE)
-+		gicc_gich = addr;
-+
-+	addr = dev_read_addr_index(gic, addr_index++);
-+	if (addr != FDT_ADDR_T_NONE)
-+		gicc_gicv = addr;
-+
-+	ret = irq_get_by_index(gic, 0, &req_irq);
-+	if (!ret)
-+		gicc_vgic_maint_irq = req_irq.id;
-+
-+	gicc_mpidr = dev_read_u64_default(dev, "reg", 0);
-+	if (!gicc_mpidr)
-+		gicc_mpidr = dev_read_u32_default(dev, "reg", 0);
-+
-+	/*
-+	 * gicc_vgic_maint_irq and gicc_gicv are the same for every CPU
-+	 */
-+	gicc = ctx->current;
-+	acpi_write_madt_gicc(gicc,
-+			     dev_seq(dev),
-+			     gicc_perf_gsiv, /* FIXME: needs a PMU driver */
-+			     gicc_phys_base,
-+			     gicc_gicv,
-+			     gicc_gich,
-+			     gicc_vgic_maint_irq,
-+			     gicc_gicr_base,
-+			     gicc_mpidr,
-+			     0); /* FIXME: Not defined in DT */
-+
-+	acpi_inc(ctx, gicc->length);
-+
-+	return 0;
-+}
-+
- struct acpi_ops armv8_cpu_acpi_ops = {
- 	.fill_ssdt	= armv8_cpu_fill_ssdt,
-+	.fill_madt	= armv8_cpu_fill_madt,
- };
- #endif
- 
-diff --git a/drivers/cpu/armv8_cpu.h b/drivers/cpu/armv8_cpu.h
-index 2c4b0252cf..48c705e98d 100644
---- a/drivers/cpu/armv8_cpu.h
-+++ b/drivers/cpu/armv8_cpu.h
-@@ -18,4 +18,14 @@
-  */
- int armv8_cpu_fill_ssdt(const struct udevice *dev, struct acpi_ctx *ctx);
- 
-+/**
-+ * armv8_cpu_fill_madt() - Fill the MADT
-+ * Parses the FDT and writes the MADT subtables.
-+ *
-+ * @dev: cpu device to generate ACPI tables for
-+ * @ctx: ACPI context pointer
-+ * @return:	0 if OK, or a negative error code.
-+ */
-+int armv8_cpu_fill_madt(const struct udevice *dev, struct acpi_ctx *ctx);
-+
- #endif
-\ No newline at end of file
+ config GENERATE_SMBIOS_TABLE
+ 	bool "Generate an SMBIOS (System Management BIOS) table"
 -- 
 2.46.2
 
