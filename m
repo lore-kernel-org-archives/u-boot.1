@@ -4,122 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40434D2C57C
-	for <u-boot@archiver.kernel.org>; Tue, 22 Oct 2024 23:20:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F61D2CDF6
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 00:01:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C315A88FF6;
-	Wed, 23 Oct 2024 01:20:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 874A089024;
+	Wed, 23 Oct 2024 02:01:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="qJ5P5mRW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DAnwyh78";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AF1489049; Wed, 23 Oct 2024 01:20:24 +0200 (CEST)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8B6688905F; Wed, 23 Oct 2024 02:01:07 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A42488FD6
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 01:20:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11C4988D97
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 02:01:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20241022232016epoutp03c6ad03e5f910ea0d2abc7f93d5662ad7~A6bQoOfKK1479314793epoutp03t
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 23:20:16 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20241022232016epoutp03c6ad03e5f910ea0d2abc7f93d5662ad7~A6bQoOfKK1479314793epoutp03t
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1729639216;
- bh=8FCxiIhfmiPS2SghX/JUdjTfRIGkjmIUgpcAj9wTiRw=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=qJ5P5mRWdlqxA9r9nW5gXqKI+KLoK5ess9QnMc+eis9/DRDzz20vIBEr8O3C43loc
- aLY27W6Ex8+fUXA75xwJrLyaVSMw3xr2WS8SVM5dzK4n3wmDM7AXgBcmO5/LqiiyIg
- MHv11t4T9vyHhnrawTFp/6OBNuNtBWJ0F3z2C4hc=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20241022232016epcas1p2919fa7e44296156577954c11d0d7ada0~A6bQUHiIn2538425384epcas1p2X;
- Tue, 22 Oct 2024 23:20:16 +0000 (GMT)
-Received: from epsmgec1p1.samsung.com (unknown [182.195.36.134]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4XY7Sb2476z4x9Pt; Tue, 22 Oct
- 2024 23:20:15 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 7E.FE.08588.F2338176; Wed, 23 Oct 2024 08:20:15 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20241022232015epcas1p220bd969ddf1a2bd604df1ff7b29a6629~A6bO35Yh32538425384epcas1p2O;
- Tue, 22 Oct 2024 23:20:15 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241022232014epsmtrp276e65dc3907d9d0a2acef9a2771832da~A6bO290Jq2889228892epsmtrp2O;
- Tue, 22 Oct 2024 23:20:14 +0000 (GMT)
-X-AuditID: b6c32a33-a57ff7000000218c-aa-6718332f4e05
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- BF.A2.08229.E2338176; Wed, 23 Oct 2024 08:20:14 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20241022232014epsmtip22002fa573d944f185671bf5dd6175b10~A6bOj57-Q0396003960epsmtip2o;
- Tue, 22 Oct 2024 23:20:14 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Manorit Chawdhry'" <m-chawdhry@ti.com>
-Cc: <u-boot@lists.denx.de>, "'Neha Malcom Francis'" <n-francis@ti.com>,
- "'Keerthy	J'" <j-keerthy@ti.com>, "'Udit Kumar'" <u-kumar1@ti.com>, "'Aniket
- Limaye'" <a-limaye@ti.com>, "'Tom Rini'" <trini@konsulko.com>, "'Vignesh
- Raghavendra'" <vigneshr@ti.com>, "'Andrew Davis'" <afd@ti.com>, "'Nishanth
- Menon'" <nm@ti.com>, "'Simon Glass'" <sjg@chromium.org>
-In-Reply-To: <20241015-b4-upstream-j721s2-avs-v5-1-5c8087387dc5@ti.com>
-Subject: RE: [PATCH v5 1/7] power: pmic: tps65941: Add DM_PMIC dependency
-Date: Wed, 23 Oct 2024 08:20:14 +0900
-Message-ID: <0a5e01db24d8$f30ccd80$d9266880$@samsung.com>
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: ko
-Thread-Index: AQFZ+uHwsA/FFz51NiRmymUl/hNhTgHw2MbOARHAdLizfadOwA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmphk+LIzCtJLcpLzFFi42LZdlhTX1ffWCLdoO8Pt8WtlXYW709NZLc4
- tb2JyeLSg1SLkzda2S3e/DjLZPFtyzZGi6mTNrNbvN3byW4xbe8MZov/Zz+wO3B7zG64yOLx
- 6sAqdo+zd3Ywehy/sZ0pgCUq2yYjNTEltUghNS85PyUzL91WyTs43jne1MzAUNfQ0sJcSSEv
- MTfVVsnFJ0DXLTMH6CglhbLEnFKgUEBicbGSvp1NUX5pSapCRn5xia1SakFKToFpgV5xYm5x
- aV66Xl5qiZWhgYGRKVBhQnbGkf33WAse8lS077vJ2sB4lquLkZNDQsBEomPjJZYuRi4OIYEd
- jBJ7N65khXA+MUo8PPqNEcL5xijRvfEkUBkHWMvZR44Q8b2MEge/PGSGcF4ySvyc2sMGMpdN
- QE/i/6KFzCC2iICOxJ9DrWA7mAVeMElc7d8HVsQp4C7xa/I1MFtYwFPi34QXbCAbWARUJV5t
- 9QYJ8wpYSkz8eY4R4lYFiZ9Pl7GC2MwCIhKzO9ug5jtJzNx7Amy+hMBXdoklH1tYIRpcJBb+
- nsMMYQtLvDq+hR3ClpL4/G4vG0RDM6PE0iUHWSGcHkaJfw3X2SCqjCX2L53MBHIRs4CmxPpd
- +hCb+STefe1hhQQFr0RHmxBEtYrEpdcvmWDm333yH+oGD4nlO3vZISF0nVFixvuFTBMY5Wch
- eWIWwoYFjEyrGMVSC4pz01OTDQsM4XGZnJ+7iRGcHLWMdzBenv9P7xAjEwfjIUYJDmYlEV6l
- EtF0Id6UxMqq1KL8+KLSnNTiQ4ymwJCcyCwlmpwPTM95JfGGJpYGJmZGxiYWhmaGSuK8Z66U
- pQoJpCeWpGanphakFsH0MXFwSjUwlW6++KdC/Pg869SCd017U1e69B/8+a+3zyLduLb7esrN
- fK2cpS8WmNa8s5zF8pLl5lTd0OMZX/hOxaxN9Xuz5GAZ15Zp18OseFpvdq5d8Eg5fiaDw83A
- I96HzWfWFuV9vJEVttDjv2XOiiDniaGNVzvnKL749sO8aH9rNaO+Vxvrzg2ifnf+zMli2c95
- +8M5pnLedlcHBpYXNWv+1+8K4LTqv/9mF9Oj4pgUmacF87IyF6k/nm7hbe69TC35Hsv84/G2
- /8+tkjkRVq157co15Ynh7VLPTOTNn8TN3cLypZk777eD6LaUMxFuzuI3A+t/mteIsvd88jXo
- ZVp9cM+dVsamDQvuxyWU6+gE1V5XYinOSDTUYi4qTgQANdxOkRcEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOLMWRmVeSWpSXmKPExsWy7bCSvK6esUS6wbLnRha3VtpZvD81kd3i
- 1PYmJotLD1ItTt5oZbd48+Msk8W3LdsYLaZO2sxu8XZvJ7vFtL0zmC3+n/3A7sDtMbvhIovH
- qwOr2D3O3tnB6HH8xnamAJYoLpuU1JzMstQifbsErowj+++xFjzkqWjfd5O1gfEsVxcjB4eE
- gInE2UeOXYxcHEICuxkl2g6uY+5i5ASKS0l8fjqVDaJGWOLw4WKImueMEqe/PWMDqWET0JP4
- v2ghWL2IgI7En0OtLCA2s8AnJom5v4IhGi4zSixdvxWsiFPAXeLX5GtgzcICnhL/JrwAW8Ai
- oCrxaqs3SJhXwFJi4s9zjBA3KEj8fLqMFWKmiMTszjaoXU4SM/eeYJnAKDALSWoBI+MqRsnU
- guLc9NxiwwLDvNRyveLE3OLSvHS95PzcTYzgsNbS3MG4fdUHvUOMTByMhxglOJiVRHiVSkTT
- hXhTEiurUovy44tKc1KLDzFKc7AoifOKv+hNERJITyxJzU5NLUgtgskycXBKNTAJefgIHS59
- faL7y6vszOS0F9pmTy5eYKxv+vLjzmnRr2osLS3OMu2fp20ybw16Gz7V5fDvxJa9XbMMeQ/W
- 3vx0dTWj8FFTe2t1rVDlk9bHur0vOXC1Gd65s4Dl1xPdOS3B1s7ckze+VEub0HmjTPmGtfmy
- TrUFUeqrIzo9WxZ+t110p/bnTCGlm8Z3T5U2l+Q51Oz+L/lgsvfXWTzpOd0tlrnKIUft7i1w
- vpPszVIzh/uG4ZMjV//2T8wU85lYdq/sQeHxaCUl2clHXlo3xnXsMNybVpi0dFd/5CTnTyX+
- 3iwfY224rvocedl8S7KKQZ2TZeW2QLe5mzq1THXunbTjWiZmH/re2en/7y8Oy5RYijMSDbWY
- i4oTAUYovwzaAgAA
-X-CMS-MailID: 20241022232015epcas1p220bd969ddf1a2bd604df1ff7b29a6629
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241015105233epcas1p1bf750c216a3cbe2190cd3f6af8254784
-References: <20241015-b4-upstream-j721s2-avs-v5-0-5c8087387dc5@ti.com>
- <CGME20241015105233epcas1p1bf750c216a3cbe2190cd3f6af8254784@epcas1p1.samsung.com>
- <20241015-b4-upstream-j721s2-avs-v5-1-5c8087387dc5@ti.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6cbe9e8bbb1so41001196d6.1
+ for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 17:01:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729641660; x=1730246460; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=s4w2B/yfF8nFP0tpQFi2BEnKjPzo+KxVWCntsu03r4M=;
+ b=DAnwyh78U+95yEkVkSlxMMGkYNFYhD3VUlE99lqSIa6zAOVGeEB9+UKh7VfB0ptwQd
+ 3cwCIq4WnGSGy3amc9z0c3a3oI9hXV6lSdXNAB6Wi68U/1/n80e3F54RyIeRIvT067cL
+ Mqse0s0D2E816DeCFUVnnHPyZSP29riIFRHwA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729641660; x=1730246460;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=s4w2B/yfF8nFP0tpQFi2BEnKjPzo+KxVWCntsu03r4M=;
+ b=cDYl7SKVBQ6HEg7r6VQWjXLN6GrszKgfiTi2+SZ39gR0PDzA/3fsLCwclJvBS9YFqy
+ HrdPkc9cCfya2zWPuhzl7e2qFT0f6tKE/SW9M0A9OKrcCACB0KR/yfZVuYy5Hg06St3m
+ DD3CDMDdXVCvXM5YiymTw7//G6SibKGGdwpxM+ERtIQUZOrtVQnMpFmZPpQbTpruHOlj
+ CPOBduhDnWVLQptgEgRmqVecs8GF+GL28KETvc4fBwV0pQr73hM3rrxzl3vGwvyCmtkr
+ +wZHd6gdULE0qB4LynzlBtiR2xlj6ry7VSoXQCWXjX4sOiTkBIZ9kn0x7rqBuf6e6Ngy
+ X0eA==
+X-Gm-Message-State: AOJu0YwoKNsbixs/bKt1s3R/1TjC9XP4llRaOpgyEolXgHejRUR+O7VK
+ fn+9qp4WOvSrw1pLigqqER4hoBY9Rl2SuDT3Kwphxz7e7WG8hJWhOr22CxWM0BZo1KtQhT47Z+z
+ brzI=
+X-Google-Smtp-Source: AGHT+IHtT/CTegmojp+PV7nvFgv9KFENh9vPg5X5sOeyKiSJLxIsqto7zdKZXpCT8E7QQYVrssNV3w==
+X-Received: by 2002:a05:6214:3218:b0:6cb:f99d:5d71 with SMTP id
+ 6a1803df08f44-6ce342d261bmr11840896d6.33.1729641659915; 
+ Tue, 22 Oct 2024 17:00:59 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6ce0091a2f3sm33981386d6.61.2024.10.22.17.00.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Oct 2024 17:00:57 -0700 (PDT)
+Date: Tue, 22 Oct 2024 18:00:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anatolij Gustschin <agust@denx.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: [GIT PULL] u-boot-video/video-20241022
+Message-ID: <20241023000054.GJ4959@bill-the-cat>
+References: <20241022220944.45a4eb2b@crub>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ipAuROP+yxdmdQC3"
+Content-Disposition: inline
+In-Reply-To: <20241022220944.45a4eb2b@crub>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,51 +90,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--ipAuROP+yxdmdQC3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> -----Original Message-----
-> From: Manorit Chawdhry <m-chawdhry@ti.com>
-> Sent: Tuesday, October 15, 2024 7:52 PM
-> To: Jaehoon Chung <jh80.chung@samsung.com>
-> Cc: u-boot@lists.denx.de; Neha Malcom Francis <n-francis@ti.com>; Keerthy J <j-keerthy@ti.com>; Udit
-> Kumar <u-kumar1@ti.com>; Aniket Limaye <a-limaye@ti.com>; Tom Rini <trini@konsulko.com>; Vignesh
-> Raghavendra <vigneshr@ti.com>; Andrew Davis <afd@ti.com>; Nishanth Menon <nm@ti.com>; Simon Glass
-> <sjg@chromium.org>; Manorit Chawdhry <m-chawdhry@ti.com>
-> Subject: [PATCH v5 1/7] power: pmic: tps65941: Add DM_PMIC dependency
->
-> This Kconfig depends on DM_PMIC but hadn't be explicitly stated which
-> could cause config related issues.
->
-> Adds the dependency in Kconfig for tps65941.
->
-> Fixes: 6b86dd0c1ead ("power: pmic: tps65941: Add support for tps65941 family of PMICs")
-> Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+On Tue, Oct 22, 2024 at 10:09:44PM +0200, Anatolij Gustschin wrote:
 
+> Hi Tom,
+>=20
+> please pull video driver updates.
+>=20
+> CI: https://source.denx.de/u-boot/custodians/u-boot-video/-/pipelines/229=
+07
+>=20
+> Thanks,
+> Anatolij
+>=20
+> The following changes since commit 6606a6adfaf8517cff7e5fe0fb206beed80087=
+d5:
+>=20
+>   envtools: make them build again (2024-10-21 20:51:23 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-video.git tags/video-20=
+241022
+>=20
+> for you to fetch changes up to 722073a0653dd18d0148dd435f067be4e82f9129:
+>=20
+>   video: simplefb: Fix build warn with CONFIG_FDT_64BIT=3Dn (2024-10-22 2=
+0:56:28 +0200)
+>=20
 
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+Applied to u-boot/master, thanks!
 
-Best Regards,
-Jaehoon Chung
+--=20
+Tom
 
-> ---
->  drivers/power/pmic/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-> index 562c1a3b122a..bbcbcee4c355 100644
-> --- a/drivers/power/pmic/Kconfig
-> +++ b/drivers/power/pmic/Kconfig
-> @@ -394,6 +394,7 @@ config SPL_PMIC_LP87565
->
->  config PMIC_TPS65941
->  	bool "Enable driver for Texas Instruments TPS65941 PMIC"
-> +	depends on DM_PMIC
->  	help
->  	The TPS65941 is a PMIC containing a bunch of SMPS & LDOs.
->  	This driver binds the pmic children.
->
-> --
-> 2.46.0
+--ipAuROP+yxdmdQC3
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcYPK8ACgkQFHw5/5Y0
+tywRcwv8D1+VN/y6erxnoTifa9rY2nzLXUcxbMOM06YneiMbvi3gCSy9RmrryzNR
+P0AYVuZ0JetZlK4CjYRS7AAMSwaqY3tc9fTMjL2uTK/uQLHxLf0KbM5zBpadyQkR
+UtkP9YwrrBb3SnDCuwXmNLMmC01PmhoLtIhGddMarQjHiWsimycXqxsT1KjHZ3kq
+TKFZVJhH2BNI1Xy01gHN1cf8Penkk4fW1nV9jqWQlS196wB/8UH/vVEpRh0poBLI
+HYkTWvZAyXaz8izdqJEU6o2QVqWVxkBoTwy0HwoDkIXSFkR6BP665C4Wbo+KblhI
+NakLkYitf74YZ11+a256OfhnTzv/fs9QiuCMzGi7FM2AR2s24Gv6sKmSvIKI0C49
+2cmvSnYeC9ciFBcIWGoymOjs+/PvLcp7OTP9EuK18ubGnBFVDj1oL2TTXiS6yMCu
+ENiMlDYWqeunsJcnh6Yz1SKrGkM5scvc0+/4sJzHg7cv6sRvqwn7q3SFR/y13GIK
+01krUfxv
+=o8fi
+-----END PGP SIGNATURE-----
 
+--ipAuROP+yxdmdQC3--
