@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 667C6D2E016
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 06:07:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39049D2E016
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 06:09:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3B9F890AE;
-	Wed, 23 Oct 2024 08:07:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E484892E1;
+	Wed, 23 Oct 2024 08:09:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Tz1lgz76";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Li8PXE3o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DD2589092; Wed, 23 Oct 2024 08:07:03 +0200 (CEST)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2060d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::60d])
+ id 5B52F890AE; Wed, 23 Oct 2024 08:09:46 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2062d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::62d])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9E7F890AE
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 08:06:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85AF8890AE
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 08:09:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u2TCPAvi+Al8Pa/J9IGKcR6/3EeC/yprANiXlNcAgYae3YCN/OokshK2581jTNcd1i5Hj82fk8/TLfs2XF+4kymGMqYU1BjOPmOTJow/w5atnJZGNkTjmczBylx3YiVQ2fzaWL/38R/ylOPXWG+TclH+b31FiY743QjJfX6euuvc1APaE2D5gI2oGY3caQwKv0Knlu660zSljLUvw3sEqnl2ncxFYRWP/+w5pZbZhBj9Ra0Yq3Ily+bdTQM/GlzL0wMRUMsDYXf5csxbUGcaYr+l5BIXCk3UX2okup1NMLKeHpiBRiap/JSdue2C3jFnpmmYNZ89n43MwyF4b8UuwA==
+ b=eo9KbXRZr25FJLbdxEE7tLx34rXjy0ZFu9N5rYRXJXBeLUpzKVqt8249HVkiCtXH2W4f+c9Nr0TiRFJCTXQYsYwXU1SH05k2DDKG0jc2Ccgr9EeOT064NAQg8pSiBXp56CBCYYhxuxLlYmzXCHfP56sKfM+pgngx8u4s5VeRlva+hzqGO8SjA2IqM/TDsqSH11b6CvXv8bGJ3kYVSl54efAv53q3PVnkW6LiApCf4DVVjtGJ98F2FU15rbCASYwdxunqL6A3ZiKbOHCQnNQGOm414Dn1kmM56moDqe36OqV/RkK1cfM3krfZ6Y53DYhRsmBGFLfx0HmdXJsrkqC0eQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KQbQGcVHCl099X98OS62/GTUa9327cRBk8TLxzUAzk4=;
- b=lDpuVPjHyp36lHMeRtxdrQsg2qiWjc87qzOdKNonCfoDtB5kYUhIM/fwg97IG1i8y9J2ix81O8f3+vOppXtN/FaFnpbVP30/1AuOb6y4B+34rn2jm668jD8r7snLgpOXKx94BBQAxf+cjDXRqGfnRiwpkp1/18Qx3tFZdschEguFdpVZ8qI4rFbD5MuUnSPs1JQO4HunjFVAeEoJ/CNHlMq3nPcTWn8ithxJTFgQ4p+lfCBkbPhJlqKoUviMwJfNKCYJbuE7eXUljBSV21aYAvjXcPI9rZL9UmGKhlUcTbrEL1+LHEgOX89znyQF1Vek98cK370O8tn/JZONcPpDGw==
+ bh=9Z8FLYaz7ZiGhvJY5ASVYy17fT5UZrUW9ghdT7Tfyzk=;
+ b=qoSiBod6Ml+qOwJu4fbRH2i7mXm9OsevkJiR2r1Qpg3ukCmxEHefC8N2Xwim4I+JoGF9P/vnEzqENEZ3/qZVdeqbVuJFSGYKY9FdRHxoHC7pIugiwi8hQrrLiRwlWioCO/gt+nxp1Yuq2Nqa1FfhIUfuZ2omUsS54AZ2RD/X63vVPcXL139gVkCiKSCkqmI7ldPdZghIQowJDAA9cTGCK0CdbOrn4D3XUupzwVWz3TlKlT9mb3kzAHKx5Yy20i/nCY/G5J+HCHm9J8NmTSEmSeCIQRAAHWMn5RqjDfjbDC8GcNewWplEogC3zlct+egDG32lxzBWYj1Fm08qrTmTQg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KQbQGcVHCl099X98OS62/GTUa9327cRBk8TLxzUAzk4=;
- b=Tz1lgz76W6/wpzHXt9UDM8bgkcMXlDdhnZmaEm1LB3FjtNKubQ+cSbUHY5DuYVbp2RFOAP5FFGnH12JjaooqldawP4yPdxQ6UX5R1JemsE7gN62gC1ad+OJY6NIOvvwgWbLjVWfFFY/PqHzhp60Lw80Dv4QqW5MufGaP+Sw7g0s=
-Received: from BYAPR01CA0026.prod.exchangelabs.com (2603:10b6:a02:80::39) by
- DM4PR12MB6328.namprd12.prod.outlook.com (2603:10b6:8:a0::16) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8069.29; Wed, 23 Oct 2024 06:06:51 +0000
-Received: from SJ1PEPF0000231D.namprd03.prod.outlook.com
- (2603:10b6:a02:80:cafe::d6) by BYAPR01CA0026.outlook.office365.com
- (2603:10b6:a02:80::39) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.16 via Frontend
- Transport; Wed, 23 Oct 2024 06:06:51 +0000
+ bh=9Z8FLYaz7ZiGhvJY5ASVYy17fT5UZrUW9ghdT7Tfyzk=;
+ b=Li8PXE3o0l2MePGdAAGBuE/1augLT7ZVy5HJ85NVGrfezkkAMuvH8z6gIvFiIzTyRnJKRodWcBoDIIQTCp/1jURLnfLuocHL74y6NrqC3jBKcVysFla8FXQhSvHN/syglCi4n8n3BM9ALLAlELaWZPovb4kH2i+4fztU3O4K0i4=
+Received: from CH2PR05CA0041.namprd05.prod.outlook.com (2603:10b6:610:38::18)
+ by MN0PR12MB5835.namprd12.prod.outlook.com (2603:10b6:208:37a::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.17; Wed, 23 Oct
+ 2024 06:09:35 +0000
+Received: from CH3PEPF00000014.namprd21.prod.outlook.com
+ (2603:10b6:610:38:cafe::b6) by CH2PR05CA0041.outlook.office365.com
+ (2603:10b6:610:38::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.17 via Frontend
+ Transport; Wed, 23 Oct 2024 06:09:34 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -58,28 +59,31 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF0000231D.mail.protection.outlook.com (10.167.242.234) with Microsoft
+ CH3PEPF00000014.mail.protection.outlook.com (10.167.244.119) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8093.14 via Frontend Transport; Wed, 23 Oct 2024 06:06:51 +0000
+ 15.20.8114.2 via Frontend Transport; Wed, 23 Oct 2024 06:09:34 +0000
 Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 23 Oct
- 2024 01:06:47 -0500
+ 2024 01:09:29 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Leo <ycliang@andestech.com>, Padmarao Begari
- <padmarao.begari@microchip.com>, Rick Chen <rick@andestech.com>, Tom Rini
- <trini@konsulko.com>
-Subject: [PATCH] riscv: mbv: Align DT with QEMU
-Date: Wed, 23 Oct 2024 08:06:40 +0200
-Message-ID: <077311f948de84c055ce2529370734b8ce310ad6.1729663597.git.michal.simek@amd.com>
+CC: Srinivas Goud <srinivas.goud@amd.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Paul Alvin <alvin.paulp@amd.com>, "Prasad
+ Kummari" <prasad.kummari@amd.com>, Tejas Bhumkar
+ <tejas.arvind.bhumkar@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh
+ Yadav Abbarapu" <venkatesh.abbarapu@amd.com>, Vishal Patel
+ <vishal.patel@amd.com>
+Subject: [PATCH] arm64: zynqmp: Configure SoC RTC on SOM
+Date: Wed, 23 Oct 2024 08:09:23 +0200
+Message-ID: <9b684faeec85381b9b8fe796aaebc2ee79f17b8e.1729663761.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4379; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=PNFHWj4WnTwSs0s9hJdu6ZGPi3TDXsl8elfUWN8hnWc=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhnSJSYWud3XLZHSMryddtQnQzp2/s/aJ0xXBl+6bfPXfH
- P/2WoelI5aFQZCJQVZMkUXa5sqZvZUzpghfPCwHM4eVCWQIAxenAFxEjGHBBOnQrAkCjm/Nb4go
- sXsmXFnxY68mw3ynhffCjr+eYXVUMkbhDNPEk9r/T94CAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1541; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=LD8Lbia2FUBlQLYnXNzRt53LCYQSt2tpP1jx3atkghg=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhnSJyWIOql9lmhgrDrfusr+/L1/k5nEr0V2rRP5kz+Xom
+ 7flXZ9mRywLgyATg6yYIou0zZUzeytnTBG+eFgOZg4rE8gQBi5OAZiIrCbD/MDVO3bZBIUdiZmz
+ 7u4hiYQTh/gslzDMD5miUGv29F2edijTTt0gv5TEXc3RAA==
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
@@ -89,50 +93,50 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF0000231D:EE_|DM4PR12MB6328:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2678cbdd-b3f1-402a-28ea-08dcf328e2ff
+X-MS-TrafficTypeDiagnostic: CH3PEPF00000014:EE_|MN0PR12MB5835:EE_
+X-MS-Office365-Filtering-Correlation-Id: ac75623c-fbe2-45be-cac1-08dcf3294455
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6sQGnKKqQpoR3B2LOl1uil91FwWybZ7YOxewNUFL5RsXd0oa5ePVgo5sHwcH?=
- =?us-ascii?Q?FbdRr5gt/wwFwzEHPVcOLU2rOJuDt9kLNLgWDc1JFXmIrE8rQqUO5lNBvRFt?=
- =?us-ascii?Q?Bn1HAAO90TI4uUk5gywWjyXo2H8lkFlGkWMQd831/xTgTwlKu3Otk2exos1O?=
- =?us-ascii?Q?uEZWu5ZzHy4cSytf5XDGa1fBIYLA3Y/LIIb+ZuqbbMcSVF5G3WBROpr7lD4f?=
- =?us-ascii?Q?p+aTT3Sq0/RbZkiI12Zb/zo5YQ6g2etDs+7qNLdK9I3ZASwxHfO+BmXWPuyX?=
- =?us-ascii?Q?6jNe+t9SnubzVsg/uE+XMlmPdDh3ngzrwfQu/yzZhCMciHLhD/v5MPfQeNJ1?=
- =?us-ascii?Q?YKPD/i8wad24U94fbYbSUhEeI/KdEfmIXcCqCJMpRXpdRoB8sLtrrbDjEfvp?=
- =?us-ascii?Q?pEAoq0oZhsfzx1JrI7e8720BHvyvv1ouVVXJgJKsD3eLe6p8Feylv30DP9S+?=
- =?us-ascii?Q?r9IVdSop+3gqqgS8Wx1AkbRexKj3mR50tUsuSzYRuxA0ButfRiAEqrsTJM8x?=
- =?us-ascii?Q?oV13sPn6vROsLWmalqdT/dFGSWQV8mOMNKYerAYUQ9TRc9qdKiA6zAs92AfS?=
- =?us-ascii?Q?eU4NxRas+khXHKNZyx/hiCoSybVUcqUGM6uAIEBXaLIPN50qalr2E1cWjJui?=
- =?us-ascii?Q?92RvO4ayA4NjK+rtCEZnepKsfc45ua+YjMbw71k0TvRG9mmyEHhlx34rSwf+?=
- =?us-ascii?Q?fspC0xWZEAa9LoiWQXakT/C+i6wnJg1JS/XJAUVbmxKeyS/wV/YydJHdOpyA?=
- =?us-ascii?Q?obIpvjSSCbYrMRaRQqrZXTjC5xJ4KeG3l6BxcFhKdtvTwHoUjqoHxrT81fhX?=
- =?us-ascii?Q?ubnIt8IL1kPQeN4VIGNAT8EQ2iAw32sJTjXMWLyl1ELB1LiE5Y3xmfLCR6hN?=
- =?us-ascii?Q?wrGoipH244WG5YA+4zNAfAlUoq8iIwKTI3I3YHuHwVZrUtZ+z4GYCE0fOo++?=
- =?us-ascii?Q?qIeM+79Su+4UxS0szQ3xCPBbbWHkSckuSn6HX2m68YhIilzdTLzM+hP6a7ZB?=
- =?us-ascii?Q?ABIMKKQHta25sfkT1cXfQqKSSanswzlnZDKKdBl+Fv6oFcl9bRNi7fUs0LOC?=
- =?us-ascii?Q?Yeps/AO6Ya6IKCFPu4/HVDaLnH3JfvwGiMH50NemH85fv7sgfmOnVLJtXlQ5?=
- =?us-ascii?Q?BMPETdZJAmdaV1wOtpoOtirf3TktY7vvY6wXCI3LWiVLyOhrYg5qzepmyO0r?=
- =?us-ascii?Q?cuKvdpG6a5Hq5CAiuXQe8SCzvZWqJQNStkENCIbRifC3GRyo5jleo4W/TPaJ?=
- =?us-ascii?Q?M/amlh1kW0I1QH0IqH+IUXBFD+iuzv8CROg+RelrT7DeUQELg513Sih6ZjNu?=
- =?us-ascii?Q?xV7rNeozZY5MvwPpucoZNqjvv5/xA5F6PJX2PFqdf310twxxKJrX4/EuWOzH?=
- =?us-ascii?Q?mxz/a62EBa3alRvvlmHgx/06SpIPNAqhMGvU98D/GRhRgH+cMg=3D=3D?=
+ ARA:13230040|376014|36860700013|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?WuKJgFymeoGAgajZr0TiSfrhu5kr6/BsUhAs8GwbOB0skax7IvdRqGD1plcB?=
+ =?us-ascii?Q?QI4Wjgf0iRvEiGhWyuOrT1ZSj4HEX3xJtVZOA2c52hz0pAkCYq/ac9uZ5dO/?=
+ =?us-ascii?Q?Pyn2buv6T/GHOKi+GVGkrGIoCD7uAuFNG5k35xMGrseqSAs1FGn4pkqCzgg1?=
+ =?us-ascii?Q?LW3lRDIl1CtU9+niDpcs9S1WFHaOlBFLSyJa1vnU4YPAcc4pzaffEOS8Yhmt?=
+ =?us-ascii?Q?KZSJY9kMSqDNdhhoIuZ5V8LRoD7wvWesSCmYgV8dceaAmsTIauCtSQOFEMbg?=
+ =?us-ascii?Q?bP3/VVJ5f2077yM9xiA/KjwwUCxM+T+z8+WEcbG8J/sIZscgY1zde9beIVb+?=
+ =?us-ascii?Q?3DHJXnFVqVG1Wjku6aa7OarQRLXFi3Y3oTxn/y1W4ckEMJR1plpb7cEge2x0?=
+ =?us-ascii?Q?AbKnGH5colghrkIHehiE5GlnaB106Fio/Co3X50grxkXPcxAo1mn7MjJZa/m?=
+ =?us-ascii?Q?ig5SuQMtr0nQqRG6HsTtNmZ4ZCrfTuDGqAFFXlrGyVZU2tvzxS46QNOeN9uW?=
+ =?us-ascii?Q?qfuc6IfOwzEO4Me+6kN9MHiTv3oUMW41WSsTjsbOscfOkcgAsgbBZl69u/L1?=
+ =?us-ascii?Q?yCw9/QCvjdzjIEAt8XDL9QsmWvHBVSjxfNJrBuvioUEoOtwDLDBhP0Rmpy4/?=
+ =?us-ascii?Q?fRVs+jcFlx+gLmxa5mRvRWZJNzEWxxEWsacEVbNFjcMlWAbkNU7D69qVo9xP?=
+ =?us-ascii?Q?vN3+GeRunWaeMVEy1jb5ozzkcbRAwcdiZ2a3Ous0LId5UiNSwKLI+i+ME9/v?=
+ =?us-ascii?Q?P7eqQM73nRuEyHbKIbvHltcQmnEmm6bQaOUO161JvwgGDKRNzyWfK/y35MUG?=
+ =?us-ascii?Q?x8KeKY60T5JzYh8vCjXV92SAdgwOShZXEXBS2VYMBJQxR9MkejVGWURPnG/w?=
+ =?us-ascii?Q?jEm6gMkf+X7ioxOFsVTDRerbHI2nr0j+fuLfXtqDDWenrAUTn6dp7HhZi+Nq?=
+ =?us-ascii?Q?Q6wm2wR+jucsPChQss5Lmnn1seVE5b0zz90nFqOFKy4McgS1zwDziohAaYyv?=
+ =?us-ascii?Q?3J+KDhqWALwSRmoGv9L3oCWP/DWAl9vNNA1LaxxZgqkvO3LIMrj0U21CpMxj?=
+ =?us-ascii?Q?mRNcHJKVokYVlKR+wUElhA3sOYM+F1VSRi0KiMLFaw6Nc9uQWNpL9YiX5+5F?=
+ =?us-ascii?Q?yEew7s4tB8OEH+k7k7MmnxVwwjP4a7ZtI8qGnMcEobeojoG+yKOglSwBd45p?=
+ =?us-ascii?Q?+8GPT8UDVZEg0GXOhXFiV+wg9gycseGtHy7ER1ZrZM0y1oXsosOX2D9D1mIG?=
+ =?us-ascii?Q?n6gnLbCiZdyEndEQQqarpYvfi7XxbXvU1ELD7OtM9AQF/gJhz7oTJ2/cCtfo?=
+ =?us-ascii?Q?XQmMkYX6e0teu09J9ngWEvYroo4g8LxAiSBtTcl3FTjt8FI09aFvjpFRqa77?=
+ =?us-ascii?Q?rdUrSFjMrpxV2OmcgtzkbgBTCOASzL2NPdXSvVdzIXJ+u+vB5A=3D=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
+ SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2024 06:06:51.0975 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2678cbdd-b3f1-402a-28ea-08dcf328e2ff
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2024 06:09:34.4668 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ac75623c-fbe2-45be-cac1-08dcf3294455
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF0000231D.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF00000014.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6328
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB5835
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,156 +153,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Align U-Boot with QEMU amd-microblaze-v-virt platform to be able to wire
-it with CI.
+Use RTC available in HW on Kria SOM without using emulation that's why
+configure it properly and disable emulated one.
+Power on reset value of RTC Calibration register without battery backup is
+not matching with crystal frequency which leads to RTC time drift. That's
+why write CALIB_WRITE register with crystal frequency (0x7FFF). There is
+also an option to write zero so that Linux will set default value (0x7FFF)
+in driver probe but calibration 0 is not permited by DT schema.
 
+Co-developed-by: Srinivas Goud <srinivas.goud@amd.com>
+Signed-off-by: Srinivas Goud <srinivas.goud@amd.com>
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
-I am sending it to be in queue. Qemu patch hasn't been merged to qemu yet
-but here is the latest version.
-https://lore.kernel.org/r/20241017072507.4033413-1-sai.pavan.boddu@amd.com
----
- arch/riscv/dts/xilinx-mbv32.dts | 30 ++++++++++--------------------
- board/xilinx/mbv/Kconfig        |  6 +++---
- configs/xilinx_mbv32_defconfig  | 12 ++++++------
- 3 files changed, 19 insertions(+), 29 deletions(-)
+ arch/arm/dts/zynqmp-sm-k26-revA.dts  | 1 +
+ configs/xilinx_zynqmp_kria_defconfig | 1 -
+ 2 files changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/riscv/dts/xilinx-mbv32.dts b/arch/riscv/dts/xilinx-mbv32.dts
-index 48ee11549566..4050ce2f051d 100644
---- a/arch/riscv/dts/xilinx-mbv32.dts
-+++ b/arch/riscv/dts/xilinx-mbv32.dts
-@@ -20,7 +20,7 @@
- 	cpus: cpus {
- 		#address-cells = <1>;
- 		#size-cells = <0>;
--		timebase-frequency = <102000000>;
-+		timebase-frequency = <100000000>;
- 		cpu_0: cpu@0 {
- 			compatible = "amd,mbv32", "riscv";
- 			device_type = "cpu";
-@@ -28,7 +28,7 @@
- 			riscv,isa = "rv32imafdc";
- 			i-cache-size = <32768>;
- 			d-cache-size = <32768>;
--			clock-frequency = <102000000>;
-+			clock-frequency = <100000000>;
- 			cpu0_intc: interrupt-controller {
- 				compatible = "riscv,cpu-intc";
- 				interrupt-controller;
-@@ -46,15 +46,15 @@
- 		stdout-path = "serial0:115200n8";
- 	};
+diff --git a/arch/arm/dts/zynqmp-sm-k26-revA.dts b/arch/arm/dts/zynqmp-sm-k26-revA.dts
+index 8056f6b176ed..8c43ade94053 100644
+--- a/arch/arm/dts/zynqmp-sm-k26-revA.dts
++++ b/arch/arm/dts/zynqmp-sm-k26-revA.dts
+@@ -387,6 +387,7 @@
  
--	memory@20000000 {
-+	memory@80000000 {
- 		device_type = "memory";
--		reg = <0x20000000 0x20000000>;
-+		reg = <0x80000000 0x40000000>;
- 	};
+ &rtc {
+ 	status = "okay";
++	calibration = <0x7fff>;
+ };
  
--	clk102: clock {
-+	clk100: clock {
- 		compatible = "fixed-clock";
- 		#clock-cells = <0>;
--		clock-frequency = <102000000>;
-+		clock-frequency = <100000000>;
- 	};
- 
- 	axi: axi {
-@@ -77,30 +77,20 @@
- 			compatible = "xlnx,xps-timer-1.00.a";
- 			reg = <0x41c00000 0x1000>;
- 			interrupt-parent = <&axi_intc>;
--			interrupts = <1 2>;
--			bootph-all;
--			xlnx,one-timer-only = <0>;
--			clock-names = "s_axi_aclk";
--			clocks = <&clk102>;
--		};
--
--		xlnx_timer1: timer@41c20000 {
--			compatible = "xlnx,xps-timer-1.00.a";
--			reg = <0x41c20000 0x1000>;
--			interrupt-parent = <&axi_intc>;
- 			interrupts = <0 2>;
-+			bootph-all;
- 			xlnx,one-timer-only = <0>;
- 			clock-names = "s_axi_aclk";
--			clocks = <&clk102>;
-+			clocks = <&clk100>;
- 		};
- 
- 		uart0: serial@40600000 {
- 			compatible = "xlnx,xps-uartlite-1.00.a";
- 			reg = <0x40600000 0x1000>;
- 			interrupt-parent = <&axi_intc>;
--			interrupts = <2 2>;
-+			interrupts = <1 2>;
- 			bootph-all;
--			clocks = <&clk102>;
-+			clocks = <&clk100>;
- 			current-speed = <115200>;
- 			xlnx,data-bits = <8>;
- 			xlnx,use-parity = <0>;
-diff --git a/board/xilinx/mbv/Kconfig b/board/xilinx/mbv/Kconfig
-index a3a6f2125770..c52ba1870b0b 100644
---- a/board/xilinx/mbv/Kconfig
-+++ b/board/xilinx/mbv/Kconfig
-@@ -10,14 +10,14 @@ config SYS_CPU
- 	default "generic"
- 
- config TEXT_BASE
--	default 0x21200000
-+	default 0x81200000
- 
- config SPL_TEXT_BASE
--	default 0x20000000
-+	default 0x80000000
- 
- config SPL_OPENSBI_LOAD_ADDR
- 	hex
--	default 0x20200000
-+	default 0x80200000
- 
- config BOARD_SPECIFIC_OPTIONS
- 	def_bool y
-diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
-index 3983b20c2d80..7333413267ec 100644
---- a/configs/xilinx_mbv32_defconfig
-+++ b/configs/xilinx_mbv32_defconfig
-@@ -2,17 +2,17 @@ CONFIG_RISCV=y
- CONFIG_SYS_MALLOC_LEN=0xe00000
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x21200000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x81200000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
--CONFIG_SPL_STACK=0x20200000
--CONFIG_SPL_BSS_START_ADDR=0x24000000
-+CONFIG_SPL_STACK=0x80200000
-+CONFIG_SPL_BSS_START_ADDR=0x84000000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
--CONFIG_SYS_LOAD_ADDR=0x20200000
-+CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_SPL_SIZE_LIMIT=0x40000
- CONFIG_SPL=y
- CONFIG_DEBUG_UART_BASE=0x40600000
--CONFIG_DEBUG_UART_CLOCK=1000000
-+CONFIG_DEBUG_UART_CLOCK=100000000
- CONFIG_SYS_CLK_FREQ=100000000
- CONFIG_BOOT_SCRIPT_OFFSET=0x0
- CONFIG_DEBUG_UART=y
-@@ -20,7 +20,7 @@ CONFIG_TARGET_XILINX_MBV=y
- # CONFIG_SPL_SMP is not set
- CONFIG_REMAKE_ELF=y
- CONFIG_FIT=y
--CONFIG_SPL_LOAD_FIT_ADDRESS=0x20200000
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x80200000
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_DISPLAY_CPUINFO=y
- CONFIG_DISPLAY_BOARDINFO=y
+ &lpd_dma_chan1 {
+diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
+index dd4df0b2da17..0dddf69c5d05 100644
+--- a/configs/xilinx_zynqmp_kria_defconfig
++++ b/configs/xilinx_zynqmp_kria_defconfig
+@@ -187,7 +187,6 @@ CONFIG_DM_PWM=y
+ CONFIG_PWM_CADENCE_TTC=y
+ CONFIG_RESET_ZYNQMP=y
+ CONFIG_DM_RTC=y
+-CONFIG_RTC_EMULATION=y
+ CONFIG_RTC_ZYNQMP=y
+ CONFIG_SCSI=y
+ CONFIG_ARM_DCC=y
 -- 
 2.43.0
 
