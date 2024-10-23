@@ -4,88 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83FE3D2E022
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 08:41:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A25BD2E025
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 08:51:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0305F89092;
-	Wed, 23 Oct 2024 10:41:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id F241C88F82;
+	Wed, 23 Oct 2024 10:51:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="w7XAKufP";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Hx1vzQh3";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HBhxciK6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7657E890AE; Wed, 23 Oct 2024 10:41:49 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 32AA4891A3; Wed, 23 Oct 2024 10:51:12 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D17058908D
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 10:41:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ADB188B0B
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 10:51:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4XYMwK3WHlz9t3D;
- Wed, 23 Oct 2024 10:41:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729672897;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nETczxx9naPwETSneqAB2+nSLhBVJJhureDjd5PqEQo=;
- b=w7XAKufPhnC+eXiJQOx5TlnZWA3AHsDLqflKHffmEjRVabOqur2Jqw0NtlUrKpqNhXg1/5
- Odau4nMOD13TXd4qHkCZOWbL8c5zt0HVzXHJinLwpKPspfm+Y7P32NYFUqyd99stg3vH7+
- 7y7YJHK1RnpL+Q/3sGzkfq288sS7r1NEbIR1RcA009czjZYs51ggY4X+MCdWiDEMhHuPGP
- IRjJar3EfwW7NwZJxZRjsrg3BM61//fHsZChiDO2XXpiqEKzk20GKeOotbnxFoaPAQ8ruz
- xV9jTRv1EMr8nq8H+48tmJFYyF+FQ02QKUY0mVNyJuABVVb/G/sIOMxemiUSBQ==
-Message-ID: <699f9d96-a109-40ab-9cd8-ed0c5b4b589f@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729672895;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nETczxx9naPwETSneqAB2+nSLhBVJJhureDjd5PqEQo=;
- b=Hx1vzQh3o0flhckvYFKT0d79+LlJUs+HlQa58hG16JnWxen/UuxBkK4qQd/DUKfEjO7sqL
- oO3gYpjczvXC1X6DqHRkdFSAFf+0R0YMMECvqibdcfCfAPKT4P2/lGh/LkrCr7ABkj7jeg
- 1xMnBGeRNcfU5ZNTWKnLMljhy3YWqAPVjiRoRASmzj6AWe+RyaSt8grgLeag15N0LsHnGg
- 3gRoL3eKC3FFGTsdY6dwSz8zno+zrSgsvk3QYleo4JCg3gRRvZXx1oa3ZvTZ2rNO5QaxE2
- WntskBPSXvMlKdxCOVdWa2nBQLc/l2t6X62uE/XwgVSJxwYpK2HU2I7ngfFOFA==
-Date: Wed, 23 Oct 2024 10:41:31 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49N8p6wE066318;
+ Wed, 23 Oct 2024 03:51:06 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1729673466;
+ bh=Z12vtKf6IHG+bK5KBC7XQkym/rA/N51DjheWwnBO97I=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=HBhxciK6yhlkSBqmZ5FfnZkoQy2H+WjJqN5530SuYOtCaSr9++uAEq/uGxmA1Ujip
+ vCG8xqXr9ReNx1rV1ejqe2AwGu3jTxdYF0Qu/qKx5UjjJX2T7HKtGvKhYZIk9saJmT
+ GHOzQibrAHXEs/rBW0Ux4GozsvYMekVGEqol+ON0=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49N8p6jl130456
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 23 Oct 2024 03:51:06 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
+ Oct 2024 03:51:05 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 23 Oct 2024 03:51:05 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
+ (may be forged))
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49N8p28s020547;
+ Wed, 23 Oct 2024 03:51:03 -0500
+Message-ID: <05478448-3f3f-4b5d-8b74-7fff39415708@ti.com>
+Date: Wed, 23 Oct 2024 14:21:02 +0530
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories support
- in QSPI driver"
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Andre Przywara <andre.przywara@arm.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Michael Walle <mwalle@kernel.org>,
- "Simek, Michal" <michal.simek@amd.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, Tom Rini
- <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
- <SA1PR12MB8697AF99B0A56734FF65AD47984D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] arm: dts: k3-j7200-r5-common: Add msmc clk to a72 node
+To: Aniket Limaye <a-limaye@ti.com>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>
+CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>
+References: <20241017062911.2241167-1-a-limaye@ti.com>
+ <20241017062911.2241167-2-a-limaye@ti.com>
+ <9a5dc591-a5ca-4d53-9465-242986f4a62e@ti.com>
+ <41bee479-47cf-4ea4-b628-05d265bc2bbc@ti.com>
+ <c4d1c81f-aa87-40c1-b388-7df2b6332f2a@ti.com>
+ <141ad03d-ecd7-4d54-b936-61b98a605639@ti.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <SA1PR12MB8697AF99B0A56734FF65AD47984D2@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: rakpnfp38gg36n7nwu7atxb64q4bk6c3
-X-MBO-RS-ID: 1870e1da7dd7069787f
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <141ad03d-ecd7-4d54-b936-61b98a605639@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,17 +87,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/23/24 5:18 AM, Abbarapu, Venkatesh wrote:
-> Hi Marek,
-> There was some issue and fix is sent
-> https://lore.kernel.org/u-boot/20241018082644.22495-1-venkatesh.abbarapu@amd.com/T/#u
+Hi Aniket
 
-Is this one fix or three fixes for three different issues ?
+On 23/10/24 13:28, Aniket Limaye wrote:
+> 
+> 
+> On 23/10/24 12:17, Neha Malcom Francis wrote:
+>> Hi Aniket
+>>
+>> On 23/10/24 11:42, Aniket Limaye wrote:
+>>>
+>>> On 17/10/24 16:00, Neha Malcom Francis wrote:
+>>>> Hi Aniket
+>>>>
+>>>> On 17/10/24 11:59, Aniket Limaye wrote:
+>>>>> From: Reid Tonking <reidt@ti.com>
+>>>>>
+>>>>> Define the MSMC clk in the a72 node
+>>>>
+>>>> The usage of MSMC and A72SS interchangeably in this series is confusing. 
+>>>> Could you expand on it in the cover letter why in J7200 this clock is 
+>>>> defined as part of the A72 node as opposed to devices that have MSMC as a 
+>>>> separate module altogether with its own clock (like J721S2 and J784S4)?
+>>>
+>>> Yeah sure. will elaborate in v2:
+>>>
+>>> The msmc clock frequency needs to be updated as per selected OPP (in PATCH 
+>>> 4). But we don't have a msmc node for j721e/j7200, unlike those in 
+>>> j721s2/j784s4. So we are defining the msmc clock in the a72_0 node, such that 
+>>> it's frequency can be updated along with core clock frequency when OPP_LOW 
+>>> config is selected.
+>>>
+>>> I am open to suggestions if this is not the right place for it.
+>>> Thanks for the reviews!
+>>
+>> Configuring the MSMC interleaver is only required in devices that have more 
+>> than one DDR controller i.e. J721S2 and J784S4. This is what is being done by 
+>> the MSMC driver present in U-Boot (see drivers/ram/k3-ddrss/k3-ddrss.c). This 
+>> configuration is not needed in this device and is probably why we don't have 
+>> an explicit MSMC node.
+>>
+>> I was thinking the patch is okay initially considering this, but now am 
+>> wondering whether this is a hacky way to set a clock and should we introduce 
+>> the MSMC as a node cleanly, after all it is hardware that needs to be 
+>> described. What do you think?
+>>
+> 
+> Yeah I am also not quite sure where the MSMC clk description should go: in a new 
+> separate node, or in a72_0.
+> 
+> However, MSMC clk id is described under A72SS0_CORE0 Device in TISCI 
+> documentation [0]. Which makes a case for putting this under a72_0 node itself 
+> (along with the fact that there isn't a separate msmc node for j721e/j7200 which 
+> have a single DDR controller). So I guess I vote for keeping it as is, under 
+> a72_0 node.
 
-This seems to fix READ errors, which is apparently another error 
-introduced by this stuff. In my case, plain and simply 'sf probe ; sf 
-update' combination with single non-stacked SPI NOR does not work. Was 
-such a simple configuration ever tested ?
 
-> Not sure we need to revert whole parallel/stacked support?
-Please stop top-posting.
+I am content with this argument, especially since the intention of the MSMC 
+driver in U-Boot is exclusively for setting up the interleaver. (I should 
+probably target cleaning that up and making it a generic driver as a future action!)
+
+> 
+> [0]: 
+> https://software-dl.ti.com/tisci/esd/latest/5_soc_doc/j7200/clocks.html#clocks-for-a72ss0-core0-device
+> 
+> Thanks,
+> Aniket
+> 
+>>>
+>>> Regards,
+>>> Aniket
+>>>
+>>>>>
+>>>>> Signed-off-by: Reid Tonking <reidt@ti.com>
+>>>>> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+>>>>> ---
+>>>>>   arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 10 +++++-----
+>>>>>   1 file changed, 5 insertions(+), 5 deletions(-)
+>>>>>
+>>>>> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts 
+>>>>> b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>>>>> index f096b102793..759a1e83456 100644
+>>>>> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>>>>> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>>>>> @@ -23,11 +23,11 @@
+>>>>>                   <&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
+>>>>>                   <&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+>>>>>           resets = <&k3_reset 202 0>;
+>>>>> -        clocks = <&k3_clks 61 1>, <&k3_clks 202 2>;
+>>>>> -        clock-names = "gtc", "core";
+>>>>> -        assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 323 
+>>>>> 0>;
+>>>>> -        assigned-clock-parents= <0>, <0>, <&k3_clks 323 2>;
+>>>>> -        assigned-clock-rates = <2000000000>, <200000000>;
+>>>>> +        clocks = <&k3_clks 61 1>, <&k3_clks 4 1>, <&k3_clks 202 2> ;
+>>>>> +        clock-names = "gtc", "msmc", "core";
+>>>>> +        assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 4 
+>>>>> 1>, <&k3_clks 323 0>;
+>>>>> +        assigned-clock-parents= <0>, <0>, <0>, <&k3_clks 323 2>;
+>>>>> +        assigned-clock-rates = <2000000000>, <200000000>, <1000000000>;
+>>>>>           ti,sci = <&dmsc>;
+>>>>>           ti,sci-proc-id = <32>;
+>>>>>           ti,sci-host-id = <10>;
+>>>>
+>>
+
+-- 
+Thanking You
+Neha Malcom Francis
