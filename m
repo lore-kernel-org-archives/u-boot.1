@@ -4,56 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F3D0CF538B
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:48:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7967CCF538D
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 14:04:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1B188908D;
-	Wed, 23 Oct 2024 15:48:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B6956891E9;
+	Wed, 23 Oct 2024 16:04:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729691300;
-	bh=zxH3pe3XdhoMQFjwy6P4IFwoAP8GnrQ6kGkW4VGy5W4=;
+	s=phobos-20191101; t=1729692291;
+	bh=sXvWU+8z7Q5X6V3cWFeNvID219qrfx7L7eJ68mVPAmw=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=RQ0uAGSyj63eDMs96cpznAJBMWF8KGbaOdAZyJREPZrwQH+psOedXbhj/Q35OVtAR
-	 xoxDYtgDtmKLyrLugpGpMXfWM8YyqG7V6OYJ9x1wb41nTPUqhrHLVIkZXEA6jpxoln
-	 JuMaS5fBVkY8Z/DLsQoclC+V5EJo8coXzf4kiPjB6cqX6i2Sob99dTnZS03WNnT7jE
-	 Y5zOa0B9yzwjlprwqhwoBwGIeROuFeE4vgdTRgEWaaLHizujPfA0FSNx9kLuA1bpph
-	 ovZgdKZ3/EL7j8aSt53EDyTRp/3lnUOPzfc0q4/NYmtSQOpqioBEtPHcQKukklEFKV
-	 uPcEG/VixNCSQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D9CA8908F; Wed, 23 Oct 2024 15:48:19 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	b=jW4j01cmjUJGZZVCJiNYon9uAJo6sLMAX0qrRRi/gJS8v+Beem29o5KHyIY96gVjf
+	 5Ny10OBVX0X34yky9GV+/XJI/Adn3AkdDTz2kZRma19ngm2Iafp/C5+hNY3OcCvVP4
+	 vmbBuP+cOAIgQ9k40AeSVIUYFp7/fkekIzJdwbhrke2SZg0CRkZl5JtLaYUpQBL6QW
+	 n6soduETh7+U9e21sqaYMgdSqicRVayeqYj4dgR7v8MBDcaw6jFRUtHNpGN/2Pcsa9
+	 aVLS0qQYTYeuKWvVa5pGQLZc5ledBfhI+ZpqQ05/+50heQhKMK+LEZozh7sfPhCIyi
+	 Tok/QdwJ5jsew==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 648E588E0A
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:48:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XYVk51Mtjz9t1K;
- Wed, 23 Oct 2024 15:48:13 +0200 (CEST)
-Message-ID: <758e4071-2e87-4051-905c-f4654ef29b5a@denx.de>
-Date: Wed, 23 Oct 2024 15:48:11 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E5CAB892E0;
+ Wed, 23 Oct 2024 16:04:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1729692291;
+ bh=sXvWU+8z7Q5X6V3cWFeNvID219qrfx7L7eJ68mVPAmw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=gS1qos/xk7JhJivWeV6xOoQbCj9+KBVMFvx1xJAfIUnhsNm3VdS2PvujDToQsn0+h
+ iTVqJ7t2dA4vYXmK5dBFoSMUbrfVFyb5JyqSmufmX+aSc7niLLMKhsSBO2clu954mO
+ f2KHYCco8uSwkHiUzuZm8ANVLoN5JQ+O4k64tlt7kouAl3n7HVi5GCQQgxCTd/Cs9a
+ tsb41VnheHhHFGCbZICZKrmVaOwX64TT9atw9Hm271qJ+xGC8j7FEgkXsPsXzoWKIO
+ gwwlZ8p4x13PacG8xx9WTKDrYDmmUt6l7R2tsL3aXlWhXaK7eSa54e7pHvXrfRb+uC
+ yD+ukZ6udLd4w==
+Message-ID: <c9d142f6-05ca-4fab-8016-3f545e6538d0@denx.de>
+Date: Wed, 23 Oct 2024 16:04:45 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] mips: mt7688: gardena-smart-gateway: Increase
- CONFIG_SYS_BOOTM_LEN
-To: Ezra Buehler <ezra@easyb.ch>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Ezra Buehler <ezra.buehler@husqvarnagroup.com>
-References: <20241023132731.420801-1-ezra@easyb.ch>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
+ EEPROM ID page on DH i.MX8MP DHCOM
+To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
+References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
+ <20241010132337.3259-2-cniedermaier@dh-electronics.com>
+ <934d25c2-39d8-4f51-b29e-8f20feb7431f@denx.de>
+ <a305b1455a984fca83de5a6c0d4b8dfc@dh-electronics.com>
+ <74bd0a6b-fe12-4e2c-af79-c1f8ffb7d484@denx.de>
+ <73ccb69b85094e24be2343d5cbc8879a@dh-electronics.com>
+ <17b9380b-39c0-40f2-bb28-319d26b2e13c@denx.de>
+ <7b9b543d7aad498591fa6a04a3154cf8@dh-electronics.com>
+ <a0f70ee2-6d71-4f66-b22e-994df2b28504@denx.de>
+ <d06620ee891f4e419bfeb8fe657ba729@dh-electronics.com>
+ <009179c8-5512-4ba6-beeb-2d508dd5abd8@denx.de>
+ <bef41c1fefeb422e9e1b8f8f0d241a13@dh-electronics.com>
+ <1fd571bc-d133-4e91-8ab6-45e6e7429027@denx.de>
+ <95c20aac320049eda6a324d360743691@dh-electronics.com>
 Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241023132731.420801-1-ezra@easyb.ch>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <95c20aac320049eda6a324d360743691@dh-electronics.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,50 +85,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/23/24 15:27, Ezra Buehler wrote:
-> From: Ezra Buehler <ezra.buehler@husqvarnagroup.com>
+On 10/23/24 3:20 PM, Christoph Niedermaier wrote:
+> From: Marek Vasut <marex@denx.de>
+> Sent: Wednesday, October 23, 2024 2:41 PM
+>> On 10/23/24 2:18 PM, Christoph Niedermaier wrote:
+>>
+>> [...]
+>>
+>>>> You do not, the following automatically reserves space on stack when
+>>>> called and frees it up upon function return:
+>>>>
+>>>> function foo() {
+>>>>      u8 array[12];
+>>>>      ...
+>>>>      stuff(array);
+>>>>      ...
+>>>> }
+>>>
+>>> Sorry, I expressed myself incorrectly here. Of course I meant that
+>>> I don't want to reserve memory on the stack for the EEPROM ID page
+>>> in the board_init() function.
+>>
+>> Why ?
 > 
-> The default value of 0x800000 (8 MB) is somewhat limiting for us, as our
-> compressed kernel may grow up to around 4 MB. By choosing the commonly
-> used value of 0x2000000 (32 MB), we are definitely on the safe side.
-> This rather large amount should be fine, as we have 128 MB of RAM.
+> It's about structuring the software. I want to isolate the function which
+> is responsible for evaluate the EEPROM from the caller function. I wanted
+> to avoid entangling the two. This means that I, as the caller of the function,
+> do not have to worry about the internal structure of the EEPROM ID page.
+
+You are only passing in a block of unstructured memory allocated on 
+stack, u8 block[64].
+
+>>>>> I want to handle
+>>>>> size and caching in the function dh_get_value_from_eeprom_id_page(). So I don't
+>>>>> want to deal with size and structure in the function board_init(). For me, the use
+>>>>> of a static variable is OK, but you don't like it. Do you know how I can do this
+>>>>> without assigning a static variable, but not allocate the memory somewhere in a
+>>>>> caller function?
+>>>> Even the static variable space is allocated somewhere, either in .bss or
+>>>> .data section, except with static variable(s) the memory persists
+>>>> throughout the lifetime of U-Boot because their content has to be
+>>>> retained even when the function using their content returns.
+>>>>
+>>>> With variable(s) allocated on stack (which is majority of variable), the
+>>>> memory allocation happens on entry to the function and the memory is
+>>>> automatically freed on exit from the function.
+>>>>
+>>>> It is perfectly fine to call some wrapper superfunction from
+>>>> board_init() which holds the array on stack and calls all the EEPROM
+>>>> parser/handler functions:
+>>>>
+>>>> eeprom_superwrapper() {
+>>>>      u8 eeprom[64];
+>>>>      ...
+>>>>      eeprom_do_stuff1(eeprom);
+>>>>      eeprom_do_stuff2(eeprom);
+>>>>      ...
+>>>> }
+>>>>
+>>>> board_init() {
+>>>>      ...
+>>>>      eeprom_superwrapper();
+>>>>      ...
+>>>> }
+>>>
+>>> That's not what I'm looking for. Do you have another solution?
+>> No. I do not understand what is the problem with allocating 64 Bytes on
+>> stack ?
 > 
-> Signed-off-by: Ezra Buehler <ezra.buehler@husqvarnagroup.com>
-> ---
-> 
-> Are there drawbacks of choosing a hight value for CONFIG_SYS_BOOTM_LEN
-> that I am missing here? If so, 0x1000000 is most likely enough too.
-
-I don't see problems with using 32MB, so:
-
-Reviewed-by: Stefan Roese <sr@denx.de>
-
-Thanks,
-Stefan
-
-> Cheers,
-> Ezra.
-> 
->   configs/gardena-smart-gateway-mt7688_defconfig | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/configs/gardena-smart-gateway-mt7688_defconfig b/configs/gardena-smart-gateway-mt7688_defconfig
-> index b7f4a76ce6..2c69e91339 100644
-> --- a/configs/gardena-smart-gateway-mt7688_defconfig
-> +++ b/configs/gardena-smart-gateway-mt7688_defconfig
-> @@ -47,6 +47,7 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
->   CONFIG_SPL_NOR_SUPPORT=y
->   CONFIG_HUSH_PARSER=y
->   CONFIG_CMD_LICENSE=y
-> +CONFIG_SYS_BOOTM_LEN=0x2000000
->   # CONFIG_CMD_ELF is not set
->   # CONFIG_CMD_XIMG is not set
->   CONFIG_CMD_MEMINFO=y
-
-Viele Grüße,
-Stefan Roese
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+> There is no problem with the reservation of the EEPROM buffer on the
+> stack. I wanted to isolate the evaluation function from the caller
+> function, so that I have no dependencies on the caller. Since there
+> seems to be no better solution, I will add the variable to the
+> board_init() function in V2.
+There seem to be multiple functions using the same data, so you have to 
+pass pointer to those data around.
