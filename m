@@ -4,73 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A25BD2E025
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 08:51:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BCE3D2E025
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 08:51:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F241C88F82;
-	Wed, 23 Oct 2024 10:51:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5CB748929F;
+	Wed, 23 Oct 2024 10:51:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HBhxciK6";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="teiA/VIa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32AA4891A3; Wed, 23 Oct 2024 10:51:12 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 55851892AA; Wed, 23 Oct 2024 10:51:44 +0200 (CEST)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on20613.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:240a::613])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1ADB188B0B
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 10:51:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B1A688B0B
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 10:51:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49N8p6wE066318;
- Wed, 23 Oct 2024 03:51:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729673466;
- bh=Z12vtKf6IHG+bK5KBC7XQkym/rA/N51DjheWwnBO97I=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=HBhxciK6yhlkSBqmZ5FfnZkoQy2H+WjJqN5530SuYOtCaSr9++uAEq/uGxmA1Ujip
- vCG8xqXr9ReNx1rV1ejqe2AwGu3jTxdYF0Qu/qKx5UjjJX2T7HKtGvKhYZIk9saJmT
- GHOzQibrAHXEs/rBW0Ux4GozsvYMekVGEqol+ON0=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49N8p6jl130456
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 23 Oct 2024 03:51:06 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
- Oct 2024 03:51:05 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 23 Oct 2024 03:51:05 -0500
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
- (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49N8p28s020547;
- Wed, 23 Oct 2024 03:51:03 -0500
-Message-ID: <05478448-3f3f-4b5d-8b74-7fff39415708@ti.com>
-Date: Wed, 23 Oct 2024 14:21:02 +0530
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UPIChNTab208pzrAKxI3xXIcNQ/XM8VjrHZw1QWe+UJ+4nFU5xRIFzLpcBnl0f28WTsCyv6mGAZm2tMbm/Brwg+31ApffgX/uE7A7xLe9aTWbX9Ruy4hO78TEzscgwbFYRDcOArZypiyMhavDNEbZuYD6aQrEjQdwsPKEBh/jlnxz5fxq7QeDBMK7jPBBHuVtZgl2LF6J1ycXSZMhwMjyS6OSe77q/oboA0Nan/blNZZ0BGRrp0tf4ZrTd7bOdWXq52hGz0JMu7R3or5fLfVF9jeBCIT9DOkXhBLEgOgEazXWZ8WsCyeo5os1kWARC9LO8gAM9qocBMsT6w98jx7Qg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4xCBlXqXJ2hwtOrv0nABizTdKNA4W/OObrs3rargdGk=;
+ b=V5pXBjzz4zpb29ELYz1oafBqo9xBZHOeDoLAfkAsiJU3t54h8KzCywPVegRStMeNfoIAtBFbkHGh6xsck4fixsOsCXs7vDrM9bVDbfzE+dsMFcNdCOgmOqiYFJBJKog1Y0Kxo4HH5BxCHL5iFvxOYADyP+IdJFFrqAsrdLVBQ8bcONYUSavUTxSmp3lKw4fIK9yCyS0AWZKLMkgI18lV10pMF07ir/8jOy1qxk7Vp8sKmubFsisVVySzqGrcnIR8px0tdtRsvTeZ7q7etlMscAkUBkSZNGGV4sTKHSPjydOX8uSXstDm0zlMVzDYJCfuhLOYHzM5kZjDWRK2mNV6ww==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4xCBlXqXJ2hwtOrv0nABizTdKNA4W/OObrs3rargdGk=;
+ b=teiA/VIaYLw3Q39wc9gfc8WcVQgeG9DE5Jxao/e2C4hGAQhOdv7d2dnEfcAXDAXVLctA3QNxgQ+A3fZYSRZt5jtNK8qAPZ2jDpr/mcqEWWemQcBDqQgeC/oEWmlytMX9IWWOBtyxyanaN+olyWOBqa0MOrHNnpsnNYqdWsNOi7A=
+Received: from CH2PR05CA0011.namprd05.prod.outlook.com (2603:10b6:610::24) by
+ PH0PR12MB7079.namprd12.prod.outlook.com (2603:10b6:510:21d::8) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8093.17; Wed, 23 Oct 2024 08:51:36 +0000
+Received: from CH3PEPF0000000B.namprd04.prod.outlook.com
+ (2603:10b6:610:0:cafe::9) by CH2PR05CA0011.outlook.office365.com
+ (2603:10b6:610::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.17 via Frontend
+ Transport; Wed, 23 Oct 2024 08:51:35 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CH3PEPF0000000B.mail.protection.outlook.com (10.167.244.38) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8093.14 via Frontend Transport; Wed, 23 Oct 2024 08:51:35 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 23 Oct
+ 2024 03:51:34 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 23 Oct
+ 2024 03:51:34 -0500
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Wed, 23 Oct 2024 03:51:33 -0500
+From: Padmarao Begari <padmarao.begari@amd.com>
+To: <u-boot@lists.denx.de>
+Subject: [PATCH] .mailmap: update e-mail address for Padmarao Begari
+Date: Wed, 23 Oct 2024 14:21:27 +0530
+Message-ID: <20241023085127.3450680-1-padmarao.begari@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] arm: dts: k3-j7200-r5-common: Add msmc clk to a72 node
-To: Aniket Limaye <a-limaye@ti.com>, <u-boot@lists.denx.de>,
- <trini@konsulko.com>
-CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>
-References: <20241017062911.2241167-1-a-limaye@ti.com>
- <20241017062911.2241167-2-a-limaye@ti.com>
- <9a5dc591-a5ca-4d53-9465-242986f4a62e@ti.com>
- <41bee479-47cf-4ea4-b628-05d265bc2bbc@ti.com>
- <c4d1c81f-aa87-40c1-b388-7df2b6332f2a@ti.com>
- <141ad03d-ecd7-4d54-b936-61b98a605639@ti.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <141ad03d-ecd7-4d54-b936-61b98a605639@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PEPF0000000B:EE_|PH0PR12MB7079:EE_
+X-MS-Office365-Filtering-Correlation-Id: e0b1f863-1e33-47a9-cb02-08dcf33fe6a7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?5eKLahCRDPuCeXbcyNLPpSGRIqQ800l5Rpelh5F9mnOM1PpMxWTr8U7foMCk?=
+ =?us-ascii?Q?0/EdhxEbPzXGyiEHPJpY83y97Nz3GAbCAiascZZgMEpAGBL8kRPT16mvbHyl?=
+ =?us-ascii?Q?xOr2zy4RnDOtcSf3wLNI6HCpwGXhudbcoVM7rj3PH0GKptyzPd5ZemE1DhfH?=
+ =?us-ascii?Q?+hIKBFd4gobFUj/rUPEC77CP/4RowQWSPPlvwFeDKZv/JeLEFhDnZ732hyCw?=
+ =?us-ascii?Q?H+gjW+AMpSo7JfZDn4kGwBQtW7uH9JnTjCGjv+GuHtODriUlwOHGpCeVkQVE?=
+ =?us-ascii?Q?RAViV3wj1ARe7o6fwUlfZ+aFiGJch2xLTji/fFagR/fYUT7WErT1Dd6nCNd4?=
+ =?us-ascii?Q?KgkdCH4t0YqfFfHy5rInTrVUTTjAq04pG1I3eddjoUw9W+HAmDG1GknFGQAJ?=
+ =?us-ascii?Q?1RwIz1FdfPuQ+gNHJoEYO5ido+fIn8WM9vj2SBeKE9EI3gnq3ogkf+uc2xSM?=
+ =?us-ascii?Q?dyMSzOaqZBagp+2mimgnaAVHtx6WQlVxmTnSQ3QlutFZgGSiObEXkSb4PB0t?=
+ =?us-ascii?Q?ZeMa2Dt0VBCJrQ1G1urg+kFV/9fpaCKD1JfBHhFs2MDs54gvbvCl4n4XfoGM?=
+ =?us-ascii?Q?Lr666QcPJLM7YbkrT7B6hD+kbkLeuEXoyH6vGMTFslp707+ajnqOuxnxjfcz?=
+ =?us-ascii?Q?+M7o0b8Nu4+owy0PNOX9LGvpF7jt9yBgTLEY5djdfrFZh7/lM2238GMRf6s9?=
+ =?us-ascii?Q?BU/6ecxEZxJWh2UwtTRCeeMu/flvZ/g9QBhs5ZZGfYyZSZ02kfdGWIDkwtg8?=
+ =?us-ascii?Q?4dnldtYXQ2vNH0TAftjFSUdbjX38Xy3p4pjJNymuGDeAxvSMbds49Cd1shl0?=
+ =?us-ascii?Q?kVNf8SqI5nuDFhmQuhthNrGKq3fXhXDGOpYthXs1U+hXiC8yEyGXdPksNrsl?=
+ =?us-ascii?Q?x8daRNP477ZO5ktnBV51xzS3RjZ3KUX8v6aoScgRpk7SK0p9Akjs0rIFrp9W?=
+ =?us-ascii?Q?P05o8j2aXgEB07T7PE8dyhd72SkMieLE4AJWVWZ/e+Mxg6XV6nz/Wn4aMcsd?=
+ =?us-ascii?Q?Y00tTyvrQkJxKDniIqZMMI0Bl+iFw13YmRXsCfIXqSWli8svDS4zOrpv0pEE?=
+ =?us-ascii?Q?1oWBGJ2ZRf6phtV6I4rkymcw5VNZ+bKesQdGewHtc8shTh8lr9su+WagdxIn?=
+ =?us-ascii?Q?TaZq46lepr4mRzT4KbRnxxhHAPy3mxFRyH+LOjg/rjfsfVr6UxrW9a0iX0/L?=
+ =?us-ascii?Q?623ClZroAXxGIzbxdYrqB97mr4xU/PJCK4PI6NweLRAb0i6NIhzGTMH9bYaM?=
+ =?us-ascii?Q?OEuTMCfDRxZ6D4IzTiY1HRL1XlkwUeAxf1YNG/KgzfUqTJULt4nsw0IbhteU?=
+ =?us-ascii?Q?Pzkwgzz2Vl08vijZPHZ6FqaFvxY6i+wZvfW5mgqBBHCc0A4ukD4ZUsDfw/G/?=
+ =?us-ascii?Q?QGSBFJFhHaBhvRs0XiJPmxOBQizVEg3akK2JcDuFRPnp/QyZTw=3D=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2024 08:51:35.7231 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e0b1f863-1e33-47a9-cb02-08dcf33fe6a7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF0000000B.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7079
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,111 +145,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aniket
+Update e-mail address.
 
-On 23/10/24 13:28, Aniket Limaye wrote:
-> 
-> 
-> On 23/10/24 12:17, Neha Malcom Francis wrote:
->> Hi Aniket
->>
->> On 23/10/24 11:42, Aniket Limaye wrote:
->>>
->>> On 17/10/24 16:00, Neha Malcom Francis wrote:
->>>> Hi Aniket
->>>>
->>>> On 17/10/24 11:59, Aniket Limaye wrote:
->>>>> From: Reid Tonking <reidt@ti.com>
->>>>>
->>>>> Define the MSMC clk in the a72 node
->>>>
->>>> The usage of MSMC and A72SS interchangeably in this series is confusing. 
->>>> Could you expand on it in the cover letter why in J7200 this clock is 
->>>> defined as part of the A72 node as opposed to devices that have MSMC as a 
->>>> separate module altogether with its own clock (like J721S2 and J784S4)?
->>>
->>> Yeah sure. will elaborate in v2:
->>>
->>> The msmc clock frequency needs to be updated as per selected OPP (in PATCH 
->>> 4). But we don't have a msmc node for j721e/j7200, unlike those in 
->>> j721s2/j784s4. So we are defining the msmc clock in the a72_0 node, such that 
->>> it's frequency can be updated along with core clock frequency when OPP_LOW 
->>> config is selected.
->>>
->>> I am open to suggestions if this is not the right place for it.
->>> Thanks for the reviews!
->>
->> Configuring the MSMC interleaver is only required in devices that have more 
->> than one DDR controller i.e. J721S2 and J784S4. This is what is being done by 
->> the MSMC driver present in U-Boot (see drivers/ram/k3-ddrss/k3-ddrss.c). This 
->> configuration is not needed in this device and is probably why we don't have 
->> an explicit MSMC node.
->>
->> I was thinking the patch is okay initially considering this, but now am 
->> wondering whether this is a hacky way to set a clock and should we introduce 
->> the MSMC as a node cleanly, after all it is hardware that needs to be 
->> described. What do you think?
->>
-> 
-> Yeah I am also not quite sure where the MSMC clk description should go: in a new 
-> separate node, or in a72_0.
-> 
-> However, MSMC clk id is described under A72SS0_CORE0 Device in TISCI 
-> documentation [0]. Which makes a case for putting this under a72_0 node itself 
-> (along with the fact that there isn't a separate msmc node for j721e/j7200 which 
-> have a single DDR controller). So I guess I vote for keeping it as is, under 
-> a72_0 node.
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+---
+ .mailmap | 1 +
+ 1 file changed, 1 insertion(+)
 
-
-I am content with this argument, especially since the intention of the MSMC 
-driver in U-Boot is exclusively for setting up the interleaver. (I should 
-probably target cleaning that up and making it a generic driver as a future action!)
-
-> 
-> [0]: 
-> https://software-dl.ti.com/tisci/esd/latest/5_soc_doc/j7200/clocks.html#clocks-for-a72ss0-core0-device
-> 
-> Thanks,
-> Aniket
-> 
->>>
->>> Regards,
->>> Aniket
->>>
->>>>>
->>>>> Signed-off-by: Reid Tonking <reidt@ti.com>
->>>>> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
->>>>> ---
->>>>>   arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 10 +++++-----
->>>>>   1 file changed, 5 insertions(+), 5 deletions(-)
->>>>>
->>>>> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts 
->>>>> b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
->>>>> index f096b102793..759a1e83456 100644
->>>>> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
->>>>> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
->>>>> @@ -23,11 +23,11 @@
->>>>>                   <&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
->>>>>                   <&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
->>>>>           resets = <&k3_reset 202 0>;
->>>>> -        clocks = <&k3_clks 61 1>, <&k3_clks 202 2>;
->>>>> -        clock-names = "gtc", "core";
->>>>> -        assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 323 
->>>>> 0>;
->>>>> -        assigned-clock-parents= <0>, <0>, <&k3_clks 323 2>;
->>>>> -        assigned-clock-rates = <2000000000>, <200000000>;
->>>>> +        clocks = <&k3_clks 61 1>, <&k3_clks 4 1>, <&k3_clks 202 2> ;
->>>>> +        clock-names = "gtc", "msmc", "core";
->>>>> +        assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 4 
->>>>> 1>, <&k3_clks 323 0>;
->>>>> +        assigned-clock-parents= <0>, <0>, <0>, <&k3_clks 323 2>;
->>>>> +        assigned-clock-rates = <2000000000>, <200000000>, <1000000000>;
->>>>>           ti,sci = <&dmsc>;
->>>>>           ti,sci-proc-id = <32>;
->>>>>           ti,sci-host-id = <10>;
->>>>
->>
-
+diff --git a/.mailmap b/.mailmap
+index 4d48349f0e..005e965b84 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -89,6 +89,7 @@ Neil Armstrong <neil.armstrong@linaro.org> <narmstrong@baylibre.com>
+ Nicolas Saenz Julienne <nsaenz@kernel.org> <nsaenzjulienne@suse.de>
+ This contributor prefers not to receive mails <noreply@example.com> <pali@kernel.org>
+ This contributor prefers not to receive mails <noreply@example.com> <pali.rohar@gmail.com>
++Padmarao Begari <padmarao.begari@amd.com> <padmarao.begari@microchip.com>
+ Patrice Chotard <patrice.chotard@foss.st.com> <patrice.chotard@st.com>
+ Patrick Delaunay <patrick.delaunay@foss.st.com> <patrick.delaunay@st.com>
+ Paul Burton <paul.burton@mips.com> <paul.burton@imgtec.com>
 -- 
-Thanking You
-Neha Malcom Francis
+2.25.1
+
