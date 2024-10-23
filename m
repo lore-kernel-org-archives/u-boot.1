@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07384CF5389
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:32:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBB41CF5389
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:32:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3920E89335;
+	by phobos.denx.de (Postfix) with ESMTP id 9EC6E8933D;
 	Wed, 23 Oct 2024 15:29:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="euzyGMCh";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Hxan6UWc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEE5A89268; Wed, 23 Oct 2024 15:29:00 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 212CA89308; Wed, 23 Oct 2024 15:29:02 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67AEC8930E
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:28:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D15EC892F4
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:28:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-37d4821e6b4so4661591f8f.3
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:28:53 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4314b316495so66210505e9.2
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:28:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729690133; x=1730294933; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729690136; x=1730294936; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LgUH/j7Y4ssXH4OFnj8ziNsgQJMqug2+57e7KEKxB7E=;
- b=euzyGMChgGduOHEhZgLFh8B03IFIUJzvYWEvaAUoknHjhVrCMmGRss6zrSAYy/K3JY
- 1xUCdaNfKhJ+HciEh6It8nmT0maaKrwU6+a+OUU9CZTHMbDevKwmgDBsRKoHo9DlSI+w
- QKAhDyuevLOwqdLqoV3L13ysq5gHfiHMaSIQ/NOqtXZimiI3Q7fwtKYW+MG81TKa/aN6
- 8SQRidPpu843B80WSKG+C1cE908O99RSf4TShRPwNjniT7AVrc6FsrfOUnfY7l1S4bOT
- NhPP97zs1iHFmYJDIAsauC5FpNjxbIM725bluI+0uidYUDU6eY+hy9WZlKCKWimitK4a
- vhXg==
+ bh=uUSwEThMcuBbj+N1L6I/K35sdbHKZ32fPMo+DGkXuf8=;
+ b=Hxan6UWcf23Q9kuwJyEX1808osVn/778m4XM2nwgyFQieiI6Oxj8khaZ/X4CKn9Lxg
+ VQN0or6PS6oXIl4PN9q4QLAsSYadZp5t8RaM4Tid/79QSHCYdDrsUbN21dQOrJo60etq
+ UkwWHGPE7YiITZzzL8vf2uZhfRAQnT5Jyh3iXOtXOmX5xGPd/In1SgEwYP/QGDFNFm1/
+ 5tREnZCw14lI2lhsQsr5cedyrsN55MtXleJHuLcl+GcBw32WSDYFoT3nsGwcq0CoS1DK
+ AqdHNxj+5eL7G32D3pIq9x2WTpjhuWzZuAO9Sd7SjCgqzPnzvMCpswUPISl6xkLU311k
+ YPhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729690133; x=1730294933;
+ d=1e100.net; s=20230601; t=1729690136; x=1730294936;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LgUH/j7Y4ssXH4OFnj8ziNsgQJMqug2+57e7KEKxB7E=;
- b=BxctbVOCIcZ8p6bKSyHi0Xwurs4UDBNf0seKmXr0Anojsf8ahTqkmLp+3DpO/T1rly
- FEa5troruW+0NrC4Gpg9w86GlOXA7yit3iGlbOEeY2HYr5M7/qa7ppt70OdbC4pQwGDJ
- 2egBhgg66mvb4Onk9JM2TBYRWdv5aGhkmNDWhzhAXZcBY3XWM+1KSlidhvNBcp5ZtEr1
- zMPwZnEsl+Lydqdl0BaBkxsHZZ0ojR07AIE52SXfasAo8MbyhkSvihZ7vPBjpM0UIBPS
- Vprb+YtBZl6QPpxo2byAqCioeelg7Nb34hK/lKX3GuyKjD04ospU/3SfoyxiqfGVZGp/
- z9HQ==
-X-Gm-Message-State: AOJu0YxQL+ppuiEX56c8yL6wFi6afnsYXOtl+7FD91HbtsAZTE832xBt
- dZvMkXiV/6uU7mO9g41+IzKgv/EQ7KiKhWU9IjaRckzzrLB7j0ZvfJnlZwF+CX4o/4OlRXLqiHr
- L
-X-Google-Smtp-Source: AGHT+IFP5ZOnL/8THnjm2tayu8t9n5mYdJIPUI4JMFj1xhN+3FZk7+FTEZnJ10InNBDU49lcZlRIYA==
-X-Received: by 2002:adf:f645:0:b0:37d:4fab:c198 with SMTP id
- ffacd0b85a97d-37efcf1b13bmr1670960f8f.26.1729690132836; 
- Wed, 23 Oct 2024 06:28:52 -0700 (PDT)
+ bh=uUSwEThMcuBbj+N1L6I/K35sdbHKZ32fPMo+DGkXuf8=;
+ b=YHbPAAlDzzmOeFYwfwmx3OTRPwxnbUxWrqml0EycnzKNlqiB9Gp/cnin+NbgKyktxW
+ VbIB1D6zrpvGGthNqgQ5uWzFY8amcoZvfV6VZ9WItdJ1Sk1/7iy+sVViq2V74QCjLnbD
+ DY+KWxYMc9fLZUaGecOyae6WdGdT6nV8ukVZcjMjU1A/DvA2qGTrbunznKEymOAlliVv
+ yt614/Stynn7pZP3O12El/Ly/OvFm5jhH5uf6NS0HWxB2Zuqoz7cJXWDwT+lvdstafrw
+ HsO8z4wqxounM7fqtONGEaqIhZbcyOK5DdYboSuoV3juVLmuU4c5AdRr/ryFhdFgTf8R
+ Ebuw==
+X-Gm-Message-State: AOJu0YwL645oR07Ps2eGMEDahcBG2AbMgkgk/N/vJZ3GIAA7JK2GgDgG
+ JRVVIdwIab3kDD/X6n3etvLD/NwEME/09PocxL9hv/K3iqfZ5iBfkmi2bGndnDB5L9nO9zaNEvg
+ M
+X-Google-Smtp-Source: AGHT+IGE4hEHHqiaBs6KN0pJ5PmsUIFEwIJnvrdxcwBhNnGyifLR+uAUyHB7y0lQ7XmNnkYvfz2B0Q==
+X-Received: by 2002:a05:600c:1908:b0:431:1d0a:38e2 with SMTP id
+ 5b1f17b1804b1-4318415eb6fmr22252275e9.21.1729690136199; 
+ Wed, 23 Oct 2024 06:28:56 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.28.52
+ ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.28.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Oct 2024 06:28:52 -0700 (PDT)
+ Wed, 23 Oct 2024 06:28:55 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v10 13/37] acpi_table: Support platforms with unusable RSDT
-Date: Wed, 23 Oct 2024 15:19:56 +0200
-Message-ID: <20241023132116.970117-14-patrick.rudolph@9elements.com>
+Subject: [PATCH v10 15/37] acpi: Add processor device
+Date: Wed, 23 Oct 2024 15:19:58 +0200
+Message-ID: <20241023132116.970117-16-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241023132116.970117-1-patrick.rudolph@9elements.com>
 References: <20241023132116.970117-1-patrick.rudolph@9elements.com>
@@ -95,141 +95,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since ACPI 2.0 the RSDT is deprecated and the XSDT should be preferred.
-Until now the RSDT and XSDT entries were keept in sync as all platforms
-that installed ACPI tables placed them below 4GiB and thus the address
-would fit into the 32bit RSDT.
+Add a new method to write the processor device identified by _HID
+ACPI0007, that is preferred over the Processor OpCode since ACPI 6.0.
 
-On platforms that do not have usable DRAM below 4GiB, like QEMU sbsa,
-the RSDT cannot be used. Allow both RSDT and XSDT to be null and only
-fill those tables that are present in acpi_add_table().
-
-TEST: Fixes a crash on QEMU sbsa and allows to boot on QEMU sbsa.
+Fixes booting arm using ACPI only since the Processor OpCode isn't
+found valid by the Linux kernel.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
 ---
-Changelog v4:
-- Updated commit message and better explain why this change is needed
----
- lib/acpi/acpi_table.c | 95 ++++++++++++++++++++++++++-----------------
- 1 file changed, 57 insertions(+), 38 deletions(-)
+ include/acpi/acpigen.h | 12 ++++++++++++
+ lib/acpi/acpigen.c     | 11 +++++++++++
+ 2 files changed, 23 insertions(+)
 
-diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index 9d9c8befe8..d6357bdc4d 100644
---- a/lib/acpi/acpi_table.c
-+++ b/lib/acpi/acpi_table.c
-@@ -157,51 +157,70 @@ int acpi_add_table(struct acpi_ctx *ctx, void *table)
- 	struct acpi_rsdt *rsdt;
- 	struct acpi_xsdt *xsdt;
+diff --git a/include/acpi/acpigen.h b/include/acpi/acpigen.h
+index 3aa94d70b9..16df85b9c1 100644
+--- a/include/acpi/acpigen.h
++++ b/include/acpi/acpigen.h
+@@ -833,6 +833,7 @@ void acpigen_write_dsm_end(struct acpi_ctx *ctx);
+  *
+  * This emits a Processor package header with the required information. The
+  * caller must complete the information and call acpigen_pop_len() at the end
++ * Deprecated since ACPI 6.0.
+  *
+  * @ctx: ACPI context pointer
+  * @cpuindex: CPU number
+@@ -842,6 +843,17 @@ void acpigen_write_dsm_end(struct acpi_ctx *ctx);
+ void acpigen_write_processor(struct acpi_ctx *ctx, uint cpuindex,
+ 			     u32 pblock_addr, uint pblock_len);
  
--	/* The RSDT is mandatory while the XSDT is not */
--	rsdt = ctx->rsdt;
--
--	/* This should always be MAX_ACPI_TABLES */
--	entries_num = ARRAY_SIZE(rsdt->entry);
--
--	for (i = 0; i < entries_num; i++) {
--		if (rsdt->entry[i] == 0)
--			break;
--	}
--
--	if (i >= entries_num) {
--		log_err("ACPI: Error: too many tables\n");
--		return -E2BIG;
--	}
-+	/* On legacy x86 platforms the RSDT is mandatory while the XSDT is not.
-+	 * On other platforms there might be no memory below 4GiB, thus RSDT is NULL.
-+	 */
-+	if (ctx->rsdt) {
-+		rsdt = ctx->rsdt;
- 
--	/* Add table to the RSDT */
--	rsdt->entry[i] = nomap_to_sysmem(table);
-+		/* This should always be MAX_ACPI_TABLES */
-+		entries_num = ARRAY_SIZE(rsdt->entry);
- 
--	/* Fix RSDT length or the kernel will assume invalid entries */
--	rsdt->header.length = sizeof(struct acpi_table_header) +
--				(sizeof(u32) * (i + 1));
-+		for (i = 0; i < entries_num; i++) {
-+			if (rsdt->entry[i] == 0)
-+				break;
-+		}
- 
--	/* Re-calculate checksum */
--	rsdt->header.checksum = 0;
--	rsdt->header.checksum = table_compute_checksum((u8 *)rsdt,
--						       rsdt->header.length);
-+		if (i >= entries_num) {
-+			log_err("ACPI: Error: too many tables\n");
-+			return -E2BIG;
-+		}
- 
--	/*
--	 * And now the same thing for the XSDT. We use the same index as for
--	 * now we want the XSDT and RSDT to always be in sync in U-Boot
--	 */
--	xsdt = ctx->xsdt;
-+		/* Add table to the RSDT */
-+		rsdt->entry[i] = nomap_to_sysmem(table);
- 
--	/* Add table to the XSDT */
--	xsdt->entry[i] = nomap_to_sysmem(table);
-+		/* Fix RSDT length or the kernel will assume invalid entries */
-+		rsdt->header.length = sizeof(struct acpi_table_header) +
-+					(sizeof(u32) * (i + 1));
- 
--	/* Fix XSDT length */
--	xsdt->header.length = sizeof(struct acpi_table_header) +
--				(sizeof(u64) * (i + 1));
-+		/* Re-calculate checksum */
-+		rsdt->header.checksum = 0;
-+		rsdt->header.checksum = table_compute_checksum((u8 *)rsdt,
-+							       rsdt->header.length);
-+	}
- 
--	/* Re-calculate checksum */
--	xsdt->header.checksum = 0;
--	xsdt->header.checksum = table_compute_checksum((u8 *)xsdt,
--						       xsdt->header.length);
-+	if (ctx->xsdt) {
-+		/*
-+		 * And now the same thing for the XSDT. We use the same index as for
-+		 * now we want the XSDT and RSDT to always be in sync in U-Boot
-+		 */
-+		xsdt = ctx->xsdt;
++/**
++ * acpigen_write_processor_device() - Write a Processor device
++ *
++ * Write a device with _HID ACPI0007 identifying a processor.
++ * Replacement for the Processor OpCode.
++ *
++ * @ctx: ACPI context pointer
++ * @cpuindex: CPU number
++ */
++void acpigen_write_processor_device(struct acpi_ctx *ctx, uint cpuindex);
 +
-+		/* This should always be MAX_ACPI_TABLES */
-+		entries_num = ARRAY_SIZE(xsdt->entry);
-+
-+		for (i = 0; i < entries_num; i++) {
-+			if (xsdt->entry[i] == 0)
-+				break;
-+		}
-+
-+		if (i >= entries_num) {
-+			log_err("ACPI: Error: too many tables\n");
-+			return -E2BIG;
-+		}
-+
-+		/* Add table to the XSDT */
-+		xsdt->entry[i] = nomap_to_sysmem(table);
-+
-+		/* Fix XSDT length */
-+		xsdt->header.length = sizeof(struct acpi_table_header) +
-+					(sizeof(u64) * (i + 1));
-+
-+		/* Re-calculate checksum */
-+		xsdt->header.checksum = 0;
-+		xsdt->header.checksum = table_compute_checksum((u8 *)xsdt,
-+							       xsdt->header.length);
-+	}
- 
- 	return 0;
+ /**
+  * acpigen_write_processor_package() - Write a package containing the processors
+  *
+diff --git a/lib/acpi/acpigen.c b/lib/acpi/acpigen.c
+index ecff5a50d5..fa9dad32a3 100644
+--- a/lib/acpi/acpigen.c
++++ b/lib/acpi/acpigen.c
+@@ -361,6 +361,17 @@ void acpigen_write_processor(struct acpi_ctx *ctx, uint cpuindex,
+ 	acpigen_emit_byte(ctx, pblock_len);
  }
+ 
++void acpigen_write_processor_device(struct acpi_ctx *ctx, uint cpuindex)
++{
++	char pscope[16];
++
++	snprintf(pscope, sizeof(pscope), ACPI_CPU_STRING, cpuindex);
++	acpigen_write_device(ctx, pscope);
++	acpigen_write_name_string(ctx, "_HID", "ACPI0007");
++	acpigen_write_name_integer(ctx, "_UID", cpuindex);
++	acpigen_pop_len(ctx); /* Device */
++}
++
+ void acpigen_write_processor_package(struct acpi_ctx *ctx,
+ 				     const char *const name,
+ 				     const uint first_core,
 -- 
 2.46.2
 
