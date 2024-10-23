@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F61D2CDF6
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 00:01:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B81FD2E001
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 00:58:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 874A089024;
-	Wed, 23 Oct 2024 02:01:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8905489074;
+	Wed, 23 Oct 2024 02:58:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DAnwyh78";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QVPx78/H";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="aaWetYdJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B6688905F; Wed, 23 Oct 2024 02:01:07 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8BBE789085; Wed, 23 Oct 2024 02:58:51 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11C4988D97
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 02:01:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB3E488FF6
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 02:58:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6cbe9e8bbb1so41001196d6.1
- for <u-boot@lists.denx.de>; Tue, 22 Oct 2024 17:01:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729641660; x=1730246460; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=s4w2B/yfF8nFP0tpQFi2BEnKjPzo+KxVWCntsu03r4M=;
- b=DAnwyh78U+95yEkVkSlxMMGkYNFYhD3VUlE99lqSIa6zAOVGeEB9+UKh7VfB0ptwQd
- 3cwCIq4WnGSGy3amc9z0c3a3oI9hXV6lSdXNAB6Wi68U/1/n80e3F54RyIeRIvT067cL
- Mqse0s0D2E816DeCFUVnnHPyZSP29riIFRHwA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729641660; x=1730246460;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=s4w2B/yfF8nFP0tpQFi2BEnKjPzo+KxVWCntsu03r4M=;
- b=cDYl7SKVBQ6HEg7r6VQWjXLN6GrszKgfiTi2+SZ39gR0PDzA/3fsLCwclJvBS9YFqy
- HrdPkc9cCfya2zWPuhzl7e2qFT0f6tKE/SW9M0A9OKrcCACB0KR/yfZVuYy5Hg06St3m
- DD3CDMDdXVCvXM5YiymTw7//G6SibKGGdwpxM+ERtIQUZOrtVQnMpFmZPpQbTpruHOlj
- CPOBduhDnWVLQptgEgRmqVecs8GF+GL28KETvc4fBwV0pQr73hM3rrxzl3vGwvyCmtkr
- +wZHd6gdULE0qB4LynzlBtiR2xlj6ry7VSoXQCWXjX4sOiTkBIZ9kn0x7rqBuf6e6Ngy
- X0eA==
-X-Gm-Message-State: AOJu0YwoKNsbixs/bKt1s3R/1TjC9XP4llRaOpgyEolXgHejRUR+O7VK
- fn+9qp4WOvSrw1pLigqqER4hoBY9Rl2SuDT3Kwphxz7e7WG8hJWhOr22CxWM0BZo1KtQhT47Z+z
- brzI=
-X-Google-Smtp-Source: AGHT+IHtT/CTegmojp+PV7nvFgv9KFENh9vPg5X5sOeyKiSJLxIsqto7zdKZXpCT8E7QQYVrssNV3w==
-X-Received: by 2002:a05:6214:3218:b0:6cb:f99d:5d71 with SMTP id
- 6a1803df08f44-6ce342d261bmr11840896d6.33.1729641659915; 
- Tue, 22 Oct 2024 17:00:59 -0700 (PDT)
-Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ce0091a2f3sm33981386d6.61.2024.10.22.17.00.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Oct 2024 17:00:57 -0700 (PDT)
-Date: Tue, 22 Oct 2024 18:00:54 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anatolij Gustschin <agust@denx.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [GIT PULL] u-boot-video/video-20241022
-Message-ID: <20241023000054.GJ4959@bill-the-cat>
-References: <20241022220944.45a4eb2b@crub>
+ spf=fail smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4XY9fG4M8tz9svs;
+ Wed, 23 Oct 2024 02:58:46 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1729645126;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=I9d0bE0620anuwQdUS97w6uy6aKtJCAwls404clyfV0=;
+ b=QVPx78/Hm6ynfniPJRgEz9rXHCt1OwPgssePH5wEHgoz8RKl10r14xrgDWPf7Hez6wbwm6
+ upEBL9d7kLuUBdsMJg3Sf6xiF1eNqrBtVJg9vOzpruppuTnhbuxHN0Up7Zu9MHhlvCdeBr
+ pjI4oIaIIFcJeLhJ1FAbEJjH5lnxz/OR0IOkMeV4pBIY/NdtQiTo1oxq8ND7geGpGVt39B
+ +4cRy7Rp6mtVaFh6TpkdNnLp8R1Bz4mX0iX4twM/Uz6fEYXeNTmeQgx7qObiGlmWSIRH/l
+ OMsjJfcoqumd1gB6ZIL0chuITFhj8YpZSHV8xvCTR4r9YMRDssnri6VyOZwE/A==
+Message-ID: <a0a7bc7a-2ea5-49a9-aa44-fe78f830661c@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1729645124;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=I9d0bE0620anuwQdUS97w6uy6aKtJCAwls404clyfV0=;
+ b=aaWetYdJhuLRI6CBQBmNErZbLqhVBFEf9+PUO7qWqI6CTNLRISFLk9s+Ad/sqMpJhoxs8r
+ VCNgCJpSn5wpbmTOnr/yG2wmd96A6T781MSTRVfUDpoz/cNI4+53MKIPbif20smCU0Ft2U
+ InDjgECXqK/FFCV+RPjWprgNCV1+EVKV3ZvDyU+Hjp19tcuE5M1yrHGvOzys4CJUNO5s9/
+ xS2g0cuvRi4XAN0ADB3lonnrybeC7RtdyRItdZTLm8DJxPdF1b5R7qvuKxnJQBF5FykuQd
+ FpAeZup3NqM9Dxm1OtupgGVOv0nnmGJ1e3zpfI/BRh6qbczeYQi8vfxWFGc4kQ==
+Date: Wed, 23 Oct 2024 02:58:42 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ipAuROP+yxdmdQC3"
-Content-Disposition: inline
-In-Reply-To: <20241022220944.45a4eb2b@crub>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH] mmc: renesas-sdhi: Add compatible string for rzg2l-sdhi
+To: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de
+References: <20241018075148.2783-1-paul.barker.ct@bp.renesas.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20241018075148.2783-1-paul.barker.ct@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: r711gn61qe66cjm89q9a8qh9b66qww5b
+X-MBO-RS-ID: 6497ac90218b2a6719a
+X-Rspamd-Queue-Id: 4XY9fG4M8tz9svs
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,61 +91,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/18/24 9:51 AM, Paul Barker wrote:
+> After the recent dts/upstream subtree merge, the sdhi compatible string
+> used in the device tree for RZ/G2L family SoCs is "renesas,rzg2l-sdhi"
+> not "renesas,rcar-gen3-sdhi". This broke the ability to access the eMMC
+> and SD card devices on RZ/G2L boards.
+> 
+> Fix this by adding the new compatible string to the sdhi driver.
+> 
+> Fixes: 136b7b6d2e98 ("Subtree merge tag 'v6.11-dts' of dts repo [1] into dts/upstream")
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> ---
+>   drivers/mmc/renesas-sdhi.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
+> index 23db2a75c444..916182cdadea 100644
+> --- a/drivers/mmc/renesas-sdhi.c
+> +++ b/drivers/mmc/renesas-sdhi.c
+> @@ -863,6 +863,7 @@ static const struct udevice_id renesas_sdhi_match[] = {
+>   	{ .compatible = "renesas,sdhi-r8a77970", .data = RENESAS_GEN3_QUIRKS },
+>   	{ .compatible = "renesas,sdhi-r8a77990", .data = RENESAS_GEN3_QUIRKS },
+>   	{ .compatible = "renesas,sdhi-r8a77995", .data = RENESAS_GEN3_QUIRKS },
+> +	{ .compatible = "renesas,rzg2l-sdhi", .data = RENESAS_GEN3_QUIRKS },
+>   	{ .compatible = "renesas,rcar-gen4-sdhi", .data = RENESAS_GEN3_QUIRKS },
 
---ipAuROP+yxdmdQC3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+That should be placed here _after_ rcar-gen4 if we want to pretend the 
+list is at least somewhat sorted.
 
-On Tue, Oct 22, 2024 at 10:09:44PM +0200, Anatolij Gustschin wrote:
+With that fixed:
 
-> Hi Tom,
->=20
-> please pull video driver updates.
->=20
-> CI: https://source.denx.de/u-boot/custodians/u-boot-video/-/pipelines/229=
-07
->=20
-> Thanks,
-> Anatolij
->=20
-> The following changes since commit 6606a6adfaf8517cff7e5fe0fb206beed80087=
-d5:
->=20
->   envtools: make them build again (2024-10-21 20:51:23 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-video.git tags/video-20=
-241022
->=20
-> for you to fetch changes up to 722073a0653dd18d0148dd435f067be4e82f9129:
->=20
->   video: simplefb: Fix build warn with CONFIG_FDT_64BIT=3Dn (2024-10-22 2=
-0:56:28 +0200)
->=20
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---ipAuROP+yxdmdQC3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcYPK8ACgkQFHw5/5Y0
-tywRcwv8D1+VN/y6erxnoTifa9rY2nzLXUcxbMOM06YneiMbvi3gCSy9RmrryzNR
-P0AYVuZ0JetZlK4CjYRS7AAMSwaqY3tc9fTMjL2uTK/uQLHxLf0KbM5zBpadyQkR
-UtkP9YwrrBb3SnDCuwXmNLMmC01PmhoLtIhGddMarQjHiWsimycXqxsT1KjHZ3kq
-TKFZVJhH2BNI1Xy01gHN1cf8Penkk4fW1nV9jqWQlS196wB/8UH/vVEpRh0poBLI
-HYkTWvZAyXaz8izdqJEU6o2QVqWVxkBoTwy0HwoDkIXSFkR6BP665C4Wbo+KblhI
-NakLkYitf74YZ11+a256OfhnTzv/fs9QiuCMzGi7FM2AR2s24Gv6sKmSvIKI0C49
-2cmvSnYeC9ciFBcIWGoymOjs+/PvLcp7OTP9EuK18ubGnBFVDj1oL2TTXiS6yMCu
-ENiMlDYWqeunsJcnh6Yz1SKrGkM5scvc0+/4sJzHg7cv6sRvqwn7q3SFR/y13GIK
-01krUfxv
-=o8fi
------END PGP SIGNATURE-----
-
---ipAuROP+yxdmdQC3--
+Thanks !
