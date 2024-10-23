@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76108CF5386
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:02:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFEECCF5388
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:03:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F60789266;
-	Wed, 23 Oct 2024 15:02:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B7A7B892E8;
+	Wed, 23 Oct 2024 15:02:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="N/be557Q";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sn/UDsRB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE4FE892E1; Wed, 23 Oct 2024 15:02:30 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 65C4A8925A; Wed, 23 Oct 2024 15:02:31 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C8F1892AA
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:02:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C65089266
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:02:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=a-limaye@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49ND2NJh004501;
- Wed, 23 Oct 2024 08:02:23 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49ND2JoL121356;
+ Wed, 23 Oct 2024 08:02:19 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729688543;
- bh=l4Wh6b8jWTiqYF/log10+bESDWn5mgH0hRUdRcd8x54=;
+ s=ti-com-17Q1; t=1729688539;
+ bh=7RGCZYvxiVGVbgQnyTymS44wLrD0JhEF5H7KqX8GS8E=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=N/be557QgsqzFqlL2VDWZJBBmEwxAfdo9XUWOQxbR43+RjrC0SBBx2v/4sYNCieU4
- zLp+7YVnR6eRifrYwCc8FAAyBJLmD8sltEIqy///QsdGNszV4DmAvaK3gBx8id4Vrz
- ofdvBMTImvax6BbBwWpoZNzT3mquyDBLO+SDdpHI=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49ND2NTs017206
+ b=sn/UDsRB/tmpfPQG89k5PFpUnNFD4aX5V8bSkbaasVIivxFYFS950P22FF0ic7/di
+ bNPxkFLeJTvsS4ntd0uVDp0XuEtQ01mZP7QuOlo5NXGmxDggbcpC+WUevaBMNoeYnd
+ FqpIo05PGYsJ54G1OqjfJMUfqGceWYDEgib0ISDU=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49ND2IcR027970
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 23 Oct 2024 08:02:23 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 23 Oct 2024 08:02:18 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
- Oct 2024 08:02:23 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2024 08:02:18 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 23 Oct 2024 08:02:23 -0500
+ Frontend Transport; Wed, 23 Oct 2024 08:02:18 -0500
 Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
  [172.24.227.91])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49ND2BQ3037622;
- Wed, 23 Oct 2024 08:02:21 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49ND2BQ1037622;
+ Wed, 23 Oct 2024 08:02:16 -0500
 From: Aniket Limaye <a-limaye@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>
 CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>,
  Aniket Limaye <a-limaye@ti.com>
-Subject: [PATCH v2 4/5] arm: mach-k3: j721e-init.c: J7200: Add support for
- CONFIG_K3_OPP_LOW
-Date: Wed, 23 Oct 2024 18:27:12 +0530
-Message-ID: <20241023130033.1826413-5-a-limaye@ti.com>
+Subject: [PATCH v2 2/5] misc: k3_avs: Add OPP_LOW voltage and frequency to
+ vd_data
+Date: Wed, 23 Oct 2024 18:27:10 +0530
+Message-ID: <20241023130033.1826413-3-a-limaye@ti.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241023130033.1826413-1-a-limaye@ti.com>
 References: <20241023130033.1826413-1-a-limaye@ti.com>
@@ -83,102 +83,60 @@ X-Virus-Status: Clean
 
 From: Reid Tonking <reidt@ti.com>
 
-The default j7200 devicetree and k3_avs driver set 2GHz/1GHz frequency
-for A72/MSMC clks and the OPP_NOM voltage.
+J7200 SOC supports OPP_LOW and OPP_NOM as two Operating Performance
+Points as per (7.5 Operating Performance Points) section in the
+Datasheet [0].
+- A72SS/MSMC at 2 GHz/1GHz operation must use OPP_NOM.
+- A72SS/MSMC at 1 GHz/500 MHz operation can use OPP_NOM or OPP_LOW
+  voltage (though OPP_LOW voltage is recommended to reduce power
+  consumption).
 
-J7200 SOCs may support OPP_LOW Operating Performance Point:
-1GHz/500MHz clks for A72/MSMC and OPP_LOW AVS voltage read from efuse.
+Add OPP_LOW frequency->voltage entry to vd_data.
 
-Hence, add a config check to select OPP_LOW specs:
-- Check if OPP_LOW AVS voltage read from efuse is valid.
-- Update the clock frequencies in devicetree.
-- Program the OPP_LOW AVS voltage for VDD_CPU.
+The actual OPP voltage for the device is read from the efuse and
+updated in k3_avs_probe().
+OPP_NOM corresponds to OPP_1 and OPP_LOW to OPP_0 efuse register
+fields, as described in the Datasheet [0]
+The register offsets and fields are described in the TRM (5.2.6.1.5
+WKUP_VTM_VD_OPPVID_j Register) [1].
+
+[0]: https://www.ti.com/lit/gpn/dra821u (J7200 Datasheet)
+[1]: https://www.ti.com/lit/pdf/spruiu1 (J7200 TRM)
 
 Signed-off-by: Reid Tonking <reidt@ti.com>
 Signed-off-by: Aniket Limaye <a-limaye@ti.com>
-
 ---
-v2:
-- Fix indentation in fix_freq()
-- Remove the efuse data check addition from this commit, as it's not
-  related to adding support for CONFIG_K3_OPP_LOW. The same addition
-  was moved to the previous patch in this series.
-- Link to v1: https://lore.kernel.org/u-boot/20241017062911.2241167-5-a-limaye@ti.com/
----
- arch/arm/mach-k3/j721e/j721e_init.c | 45 ++++++++++++++++++++++++++++-
- 1 file changed, 44 insertions(+), 1 deletion(-)
+ drivers/misc/k3_avs.c | 4 ++++
+ include/k3-avs.h      | 1 +
+ 2 files changed, 5 insertions(+)
 
-diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
-index e9ed8cb267c..de10517bb27 100644
---- a/arch/arm/mach-k3/j721e/j721e_init.c
-+++ b/arch/arm/mach-k3/j721e/j721e_init.c
-@@ -19,6 +19,7 @@
- #include <fdtdec.h>
- #include <mmc.h>
- #include <remoteproc.h>
-+#include <k3-avs.h>
+diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
+index 99a18a109b7..9d950d034a5 100644
+--- a/drivers/misc/k3_avs.c
++++ b/drivers/misc/k3_avs.c
+@@ -501,6 +501,10 @@ static struct vd_data j721e_vd_data[] = {
+ 		.dev_id = 202, /* J721E_DEV_A72SS0_CORE0 */
+ 		.clk_id = 2, /* ARM clock */
+ 		.opps = {
++			[AM6_OPP_LOW] = {
++				.volt = 0, /* voltage TBD after OPP fuse reading */
++				.freq = 1000000000,
++			},
+ 			[AM6_OPP_NOM] = {
+ 				.volt = 880000, /* TBD in DM */
+ 				.freq = 2000000000,
+diff --git a/include/k3-avs.h b/include/k3-avs.h
+index 1014d5d114d..f6f1031c9cc 100644
+--- a/include/k3-avs.h
++++ b/include/k3-avs.h
+@@ -20,6 +20,7 @@
  
- #include "../sysfw-loader.h"
- #include "../common.h"
-@@ -147,6 +148,32 @@ static void setup_navss_nb(void)
- 	writel(NB_THREADMAP_BIT1, (uintptr_t)NAVSS0_NBSS_NB1_CFG_NB_THREADMAP);
- }
+ #define NUM_OPPS		4
  
-+int fix_freq(const void *fdt)
-+{
-+	int node, ret;
-+	u32 opp_low_freq[3];
-+
-+	node = fdt_node_offset_by_compatible(fdt, -1, "ti,am654-rproc");
-+	if (node < 0) {
-+		printf("%s: A72 not found\n", __func__);
-+		return node;
-+	}
-+
-+	/* j7200 opp low values according to data sheet */
-+	opp_low_freq[0] = cpu_to_fdt32(1000000000); /* 202-2 -> A72SS0_CORE0_0_ARM_CLK */
-+	opp_low_freq[1] = cpu_to_fdt32(200000000); /* 61-1 -> GTC0_GTC_CLK */
-+	opp_low_freq[2] = cpu_to_fdt32(500000000); /* 4-1 -> A72SS0_CORE0_MSMC_CLK */
-+
-+	ret = fdt_setprop((void *)fdt, node, "assigned-clock-rates",
-+			  opp_low_freq, sizeof(opp_low_freq));
-+	if (ret) {
-+		printf("%s: Can not set value\n", __func__);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
- /*
-  * This uninitialized global variable would normal end up in the .bss section,
-  * but the .bss is cleared between writing and reading this variable, so move
-@@ -301,8 +328,24 @@ void board_init_f(ulong dummy)
- #if defined(CONFIG_CPU_V7R) && defined(CONFIG_K3_AVS0)
- 	ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
- 					  &dev);
--	if (ret)
-+	if (!ret) {
-+		if (IS_ENABLED(CONFIG_K3_OPP_LOW)) {
-+			ret = k3_check_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
-+			if (!ret) {
-+				ret = fix_freq(gd->fdt_blob);
-+				if (ret)
-+					printf("Failed to set OPP_LOW frequency\n");
-+
-+				ret = k3_avs_set_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
-+				if (ret)
-+					printf("Failed to set OPP_LOW voltage\n");
-+			} else {
-+				printf("Failed to enable K3_OPP_LOW\n");
-+			}
-+		}
-+	} else {
- 		printf("AVS init failed: %d\n", ret);
-+	}
- #endif
- 
- #if defined(CONFIG_K3_J721E_DDRSS)
++#define AM6_OPP_LOW		0
+ #define AM6_OPP_NOM		1
+ #define AM6_OPP_OD		2
+ #define AM6_OPP_TURBO		3
 -- 
 2.34.1
 
