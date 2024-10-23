@@ -4,60 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E58AD2E021
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 07:52:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F50CD2E021
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 07:58:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ABA988A43;
-	Wed, 23 Oct 2024 09:52:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id E53B088A4C;
+	Wed, 23 Oct 2024 09:58:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="DUVaujlD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DrhVuDPd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4E8188A4C; Wed, 23 Oct 2024 09:52:25 +0200 (CEST)
-Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2F09888FA5; Wed, 23 Oct 2024 09:58:30 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1B8E889E9
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 09:52:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id DFF9B148B1E8; Wed, 23 Oct 2024 09:52:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1729669942; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=FHZgnu86H2wBqH4o/4Q7W07dDd3jJHg8HPMmEgfsQNc=;
- b=DUVaujlDe5k3efxSIJjDBfIp1as9lTOhfE8Ah+cwdOnRObK4k6HEDyJdVDyT7xcQ57jPNp
- akGIZgX3uSma+ME44+NkQ7zlsyOKylufJGSWXsIphkJnLuyJXzZmUpXgUUDPiNY5kilcbm
- f9pF9FpCLn4FlKu8x1fI1lGOwsRpbMZkfhaoBfDnDd3qv+nUAIch3lzNzhqvb3Cwmzevac
- 3zas7POlC1LfK8RDm2qIT/T6TYGtuc6GXtQK4mdyFGb4RNeJJRzHXV6GSgkErjDMaps3cM
- i4lVFA6rLYAVhM8PeFpmnJVZWpQcYmlpSFrUt0TQQwzIa3oPWzlNU28DMG6Y5A==
-Date: Wed, 23 Oct 2024 09:52:09 +0200
-From: Alexander Dahl <ada@thorsis.com>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: enabling W=1 by default
-Message-ID: <20241023-gizzard-untracked-4a1c6d2f6be6@thorsis.com>
-Mail-Followup-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>
-References: <ZxZk4K4ff1T3gUVm@smile.fi.intel.com>
- <CAFLszTjuodDFZW8fJDL1Q3nByLVzcTTEAeJfws-sbtupCwNd8w@mail.gmail.com>
- <ZxenO05qCbt5IIZS@smile.fi.intel.com>
+ by phobos.denx.de (Postfix) with ESMTPS id EEDC988A43
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 09:58:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=a-limaye@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49N7wPBZ081491;
+ Wed, 23 Oct 2024 02:58:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1729670305;
+ bh=BrpU6eqIwR7NOhpP8/dpEjNf9UOtSbARltPXO+aRb5I=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=DrhVuDPdoPWlWw/4DbG6qA7kWDvhmblfIJfcwEtJNXvOVcXLYI7alLL+0ui1cFmfX
+ RMd5AFYrpNGynhVTU4ve39jlsGfD9XHSOR6bubSENbmWWiRlGLPnRjKWmPnfFeTEpZ
+ 2m/sLM4Fv2pzYElqVgDNxAGVD5ftXQmEP9FO+dXY=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49N7wP3Y103176
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 23 Oct 2024 02:58:25 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
+ Oct 2024 02:58:25 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 23 Oct 2024 02:58:25 -0500
+Received: from [172.24.227.91] (psdkl-workstation0.dhcp.ti.com [172.24.227.91])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49N7wM02069163;
+ Wed, 23 Oct 2024 02:58:23 -0500
+Message-ID: <141ad03d-ecd7-4d54-b936-61b98a605639@ti.com>
+Date: Wed, 23 Oct 2024 13:28:21 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ZxenO05qCbt5IIZS@smile.fi.intel.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] arm: dts: k3-j7200-r5-common: Add msmc clk to a72 node
+To: Neha Malcom Francis <n-francis@ti.com>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>
+CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>
+References: <20241017062911.2241167-1-a-limaye@ti.com>
+ <20241017062911.2241167-2-a-limaye@ti.com>
+ <9a5dc591-a5ca-4d53-9465-242986f4a62e@ti.com>
+ <41bee479-47cf-4ea4-b628-05d265bc2bbc@ti.com>
+ <c4d1c81f-aa87-40c1-b388-7df2b6332f2a@ti.com>
+Content-Language: en-US
+From: Aniket Limaye <a-limaye@ti.com>
+In-Reply-To: <c4d1c81f-aa87-40c1-b388-7df2b6332f2a@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,56 +84,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
 
-Am Tue, Oct 22, 2024 at 04:23:07PM +0300 schrieb Andy Shevchenko:
-> On Mon, Oct 21, 2024 at 06:32:21PM +0200, Simon Glass wrote:
-> > On Mon, 21 Oct 2024 at 16:27, Andy Shevchenko
-> > <andriy.shevchenko@linux.intel.com> wrote:
-> > >
-> > > looking at the redness of the output of `make W=1` here is the question:
-> > > isn't it a good time to enable `make W=1` by default. Yes, I understand
-> > > the impact, but at least we can do it mandatory for a _new_ code submitted to
-> > > U-Boot, right?
-> > >
-> > > Ideally I would have what Linux kernel has for a few releases already, i.e.
-> > > Werror by default and getting close to make a clean builds with that and
-> > > make W=1` at least against default configurations (yeah, with U-Boot there is
-> > > probably no default, but sandbox one).
-> > 
-> > Warnings should be warnings...
+
+On 23/10/24 12:17, Neha Malcom Francis wrote:
+> Hi Aniket
 > 
-> Yes, and ideally the code should not have warnings, right?
-
-+1
-
-> Otherwise how can we do better? It's quite similar to what you wrote WRT
-> documenting the function prototypes, the same applies to the new contribution
-> WRT `make W=1`.
+> On 23/10/24 11:42, Aniket Limaye wrote:
+>>
+>> On 17/10/24 16:00, Neha Malcom Francis wrote:
+>>> Hi Aniket
+>>>
+>>> On 17/10/24 11:59, Aniket Limaye wrote:
+>>>> From: Reid Tonking <reidt@ti.com>
+>>>>
+>>>> Define the MSMC clk in the a72 node
+>>>
+>>> The usage of MSMC and A72SS interchangeably in this series is 
+>>> confusing. Could you expand on it in the cover letter why in J7200 
+>>> this clock is defined as part of the A72 node as opposed to devices 
+>>> that have MSMC as a separate module altogether with its own clock 
+>>> (like J721S2 and J784S4)?
+>>
+>> Yeah sure. will elaborate in v2:
+>>
+>> The msmc clock frequency needs to be updated as per selected OPP (in 
+>> PATCH 4). But we don't have a msmc node for j721e/j7200, unlike those 
+>> in j721s2/j784s4. So we are defining the msmc clock in the a72_0 node, 
+>> such that it's frequency can be updated along with core clock 
+>> frequency when OPP_LOW config is selected.
+>>
+>> I am open to suggestions if this is not the right place for it.
+>> Thanks for the reviews!
 > 
-> > if you would like to enable it for CI that is fine by me,
+> Configuring the MSMC interleaver is only required in devices that have 
+> more than one DDR controller i.e. J721S2 and J784S4. This is what is 
+> being done by the MSMC driver present in U-Boot (see 
+> drivers/ram/k3-ddrss/k3-ddrss.c). This configuration is not needed in 
+> this device and is probably why we don't have an explicit MSMC node.
 > 
-> Yes, that's the idea, but I'm not the owner of any U-Boot CIs,
-> hence it's a proposal.
+> I was thinking the patch is okay initially considering this, but now am 
+> wondering whether this is a hacky way to set a clock and should we 
+> introduce the MSMC as a node cleanly, after all it is hardware that 
+> needs to be described. What do you think?
 > 
-> > but the U-Boot makefile shouldn't do it. It defeats the purpose of
-> > having a distinction between errors and warnings.
+
+Yeah I am also not quite sure where the MSMC clk description should go: 
+in a new separate node, or in a72_0.
+
+However, MSMC clk id is described under A72SS0_CORE0 Device in TISCI 
+documentation [0]. Which makes a case for putting this under a72_0 node 
+itself (along with the fact that there isn't a separate msmc node for 
+j721e/j7200 which have a single DDR controller). So I guess I vote for 
+keeping it as is, under a72_0 node.
+
+[0]: 
+https://software-dl.ti.com/tisci/esd/latest/5_soc_doc/j7200/clocks.html#clocks-for-a72ss0-core0-device
+
+Thanks,
+Aniket
+
+>>
+>> Regards,
+>> Aniket
+>>
+>>>>
+>>>> Signed-off-by: Reid Tonking <reidt@ti.com>
+>>>> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+>>>> ---
+>>>>   arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 10 +++++-----
+>>>>   1 file changed, 5 insertions(+), 5 deletions(-)
+>>>>
+>>>> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts 
+>>>> b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>>>> index f096b102793..759a1e83456 100644
+>>>> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>>>> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>>>> @@ -23,11 +23,11 @@
+>>>>                   <&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
+>>>>                   <&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+>>>>           resets = <&k3_reset 202 0>;
+>>>> -        clocks = <&k3_clks 61 1>, <&k3_clks 202 2>;
+>>>> -        clock-names = "gtc", "core";
+>>>> -        assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, 
+>>>> <&k3_clks 323 0>;
+>>>> -        assigned-clock-parents= <0>, <0>, <&k3_clks 323 2>;
+>>>> -        assigned-clock-rates = <2000000000>, <200000000>;
+>>>> +        clocks = <&k3_clks 61 1>, <&k3_clks 4 1>, <&k3_clks 202 2> ;
+>>>> +        clock-names = "gtc", "msmc", "core";
+>>>> +        assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, 
+>>>> <&k3_clks 4 1>, <&k3_clks 323 0>;
+>>>> +        assigned-clock-parents= <0>, <0>, <0>, <&k3_clks 323 2>;
+>>>> +        assigned-clock-rates = <2000000000>, <200000000>, 
+>>>> <1000000000>;
+>>>>           ti,sci = <&dmsc>;
+>>>>           ti,sci-proc-id = <32>;
+>>>>           ti,sci-host-id = <10>;
+>>>
 > 
-> While it's not what I wanted, I disagree on your comment. The idea is to make
-> rules stricter (for new code) to make it better and that's why Linus enabled
-> Werror by default in the Linux kernel. And personally I consider that as a good
-> thing to follow.
-
-Long term experience: each time you upgrade your toolchain you get new
-warnings.  Each package (u-boot, kernel, userland, does not matter
-which) enabling -Werror breaks the BSP build.  What should a developer
-do then?  Fix each warning in each foreign project and bring it
-upstream?  Or disable -Werror?  Last thing is what is usually done.
-You can see several patches in buildroot or ptxdist disabling -Werror
-for this reason.
-
-Just my 2 cents.
-
-Greets
-Alex
-
