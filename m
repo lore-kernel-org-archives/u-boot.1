@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8FBECF5389
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:33:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B78FCF5386
+	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 13:33:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2A4789364;
-	Wed, 23 Oct 2024 15:29:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1F48F89346;
+	Wed, 23 Oct 2024 15:29:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="DppwmZIk";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="X3IY9IwX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 855D38933A; Wed, 23 Oct 2024 15:29:12 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id DC8A7892CF; Wed, 23 Oct 2024 15:29:16 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE5928933E
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:29:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DB378933B
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 15:29:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-37d4821e6b4so4661760f8f.3
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:29:07 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43162cf1eaaso72183025e9.0
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 06:29:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1729690146; x=1730294946; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1729690143; x=1730294943; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MKu1shEspiBGFDbULaeGm5YbhuAQEJF6cvlpQuXsf3E=;
- b=DppwmZIkAyUeDEh3985LIsFUQzDUZYmjzh1WREmfO4ca8zwrrxZrfN9UrzH+4dcYT/
- kAfP2TmeeBer2ybZ6d8WloE7CUIZIcEv7MLqqru34F4KiCICFy2oP4ol95ed/fRD+eG3
- c7WH3BFr1Kx+P1Pi3mDKeWDSUIiAF2t5becwj3MOKBawE5GDv5uwRFTgqIrU82g1ywev
- GvBqhUqW1NbhBQ/bai4abgu+3xoe92UsInp2kTOlA4/x2F3ldHL1s5LaFrCRdOPZoTSO
- JJgn6lrAxB4dgAeAdSNY9YvddXjNAqbzvkTsqgMXxzuN/YPY9QnTalVS9q14FxfT/GWe
- IQeA==
+ bh=eNakn2lh4coir6wXgnAEYR67LhROU5Z5DBHvfE4imvQ=;
+ b=X3IY9IwXkhROLRORYloDrk+JSJTbUAInUvPANGuT82AY7vYQP34pORC96Ku9DjFQ+r
+ Q0uLFtNln/ieab1+ffHpajO5WClyfgrxOmNUCOE2AZRXWaKFKOE1/BFaYfJZiveNIn30
+ 5PleVoqk0PywblyBniCIOd9kaaobmNLjKgODaKnWD7AgG8HUVk5bsrHvmKA/SZgGazkq
+ vpqPq+olriauMM8bp+GdNFuKtb/lQ7l+pDEaAMqzVo+NAfxUgqqngE3ibAYwhli4hSji
+ Ggxv35uOKdENJx7FOjADsCRrV13nWd0kb2QQmbDi1hdrM9rGB8te4vezasNocSDTnVCb
+ zRbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729690146; x=1730294946;
+ d=1e100.net; s=20230601; t=1729690143; x=1730294943;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MKu1shEspiBGFDbULaeGm5YbhuAQEJF6cvlpQuXsf3E=;
- b=IiWFxrOhvH3kSEr7Anrkm4pei03xvcImE2fofGEFwAXCZjFlXq7Zzt3OZT6kIQB+O0
- f6D8uMpTHvvzeT8ZWJJlHcDJczPiidFtSPUwYqt7R1irb0wZA+ExjkbAhpmjF23WI9Tq
- aYjSByJuBbrOLUWL+coF3LIpzWHXSZf15ZKUqzMITDgo1hfpJPXRY/oIRIKcMWm4XuZ6
- +10SQ2abSybYC9PKs3kHbU6wcMwo/z/Vfvl0Hsqw2UxvhIcY8tp0CKVgf96zASjj353Y
- 6CZs288LOjG9QmrzkhXi1ypq4bGjgqUGxsRqJFMbt8GaX9Fegi9mBSQRL0u/BMD0AKmv
- CecA==
-X-Gm-Message-State: AOJu0YzlnzE4LJo1OGdE8D1i5hJUogDrwzc0cq82VvBMMVhaLhul2BA0
- fopyUJxW15ZBVy55OVK8uPdFz6xgV75Le548MtherLM/zTtmZgwHpP9cUpyyuw5+6CUHFMxTBmO
- h
-X-Google-Smtp-Source: AGHT+IFBvuEGZKWznn7uULpnrgTFSCE8ALsMzElLxazkNqNtoXZysGaQH5SryzLOD4u7WQGCJOUP3w==
-X-Received: by 2002:a5d:5644:0:b0:37d:3f5c:5a83 with SMTP id
- ffacd0b85a97d-37efcf08153mr1901423f8f.19.1729690146498; 
- Wed, 23 Oct 2024 06:29:06 -0700 (PDT)
+ bh=eNakn2lh4coir6wXgnAEYR67LhROU5Z5DBHvfE4imvQ=;
+ b=BHJ4nZbAyaEjsn8Kax7fg0UFW9gnAu3y7KnxcM2DoG8+R1NjRI08O1oiq9AOVWuUpq
+ Zfu5cpWqOqRx3yijmUe1ak8shlULLBxi9FXB5dvZ3xBQZCKRnhrY1N+RAi6fPLi98tc/
+ Z1YfNAzEq5xRq5+eQ24prZfKDA0kfgb24UGBM7M2HT/wAjcvHSt2dReP3Ub8snt9VBLJ
+ 4xa6dD44yGGiXUSjzruSKQrIdYiVKfL7BonKxVSSZli99NB4LpgTCRI7V6W0Do19RAeM
+ gcLbpGyTa7/kWvPB3cFVlRyO6YuUF+nThOPoIOl1OXlmK4U+AwUtkmgIMvbznpMrwfbg
+ JThA==
+X-Gm-Message-State: AOJu0YzhmhpPp/3eIYFJdozGy4rxIK8hPhDtkIn5cPaxkdYLrQdKm4Aw
+ cCGIk6irZaTsd7bxhYidwNJNO8d4mG6NuDTPFafJM2JkEadylvQZ9s26+oUEeghnja76r3ULIyc
+ t
+X-Google-Smtp-Source: AGHT+IEvhQ0zVv23lnTYt3sy0ltCI+BAigOEf3vT4eJzqlr8nxz8TQfTfEuRH8n1EqosBgE/MAolwQ==
+X-Received: by 2002:adf:fe45:0:b0:37d:2de3:bf8a with SMTP id
+ ffacd0b85a97d-37efcf15f43mr2133792f8f.26.1729690143064; 
+ Wed, 23 Oct 2024 06:29:03 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.29.05
+ ffacd0b85a97d-37ee0b9b186sm8907478f8f.91.2024.10.23.06.29.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Oct 2024 06:29:06 -0700 (PDT)
+ Wed, 23 Oct 2024 06:29:02 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	linux-kernel@vger.kernel.org
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Moritz Fischer <moritzf@google.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v10 20/37] arm: gic-v3-its: Implement of_xlate
-Date: Wed, 23 Oct 2024 15:20:03 +0200
-Message-ID: <20241023132116.970117-21-patrick.rudolph@9elements.com>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v10 18/37] drivers/cpu: Add generic armv8 cpu driver
+Date: Wed, 23 Oct 2024 15:20:01 +0200
+Message-ID: <20241023132116.970117-19-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241023132116.970117-1-patrick.rudolph@9elements.com>
 References: <20241023132116.970117-1-patrick.rudolph@9elements.com>
@@ -95,75 +95,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Translate IRQs by implementing of_xlate() as required by
-irq_get_by_index() to parse interrupt properties.
+Add a generic driver that binds to armv8 CPU nodes. The generic driver allows
+- to enumerate CPUs present in a system, even when no other driver binds it
+- generates ACPI SSDT code for each CPU
+- Fill the ACPI MADT table (implemented in a follow up patch)
 
-Map DT interrupts to ARM GIC interrupts as follows:
+The newly introduced code could also be reused on other CPU drivers that are
+compatible with armv8.
 
-- Interrupt numbers ID32-ID1019 are used for SPIs
-- ID0-ID15 are used for SGIs
-- ID16-ID31 are used for PPIs
-
-TEST: Booted on qemu sbsa-ref that has a GICV3.
+TEST: Booted on QEMU sbsa and verify the driver binds to CPU nodes.
+      Confirmed with FWTS that all ACPI processor devices are present.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-Reviewed-by: Moritz Fischer <moritzf@google.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
 ---
-Changelog v9:
-- Require at least 3 interrupt-cells
-- Map SPI interrupts to ID32+
-- Map PPI interrupts to ID16+
+Changelog v4:
+- Export armv8_cpu_fill_ssdt to use it in other CPU drivers
+Changelog v6:
+- Update header order
 ---
- arch/arm/lib/gic-v3-its.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ drivers/cpu/Kconfig     |  6 ++++
+ drivers/cpu/Makefile    |  2 ++
+ drivers/cpu/armv8_cpu.c | 73 +++++++++++++++++++++++++++++++++++++++++
+ drivers/cpu/armv8_cpu.h | 21 ++++++++++++
+ 4 files changed, 102 insertions(+)
+ create mode 100644 drivers/cpu/armv8_cpu.c
+ create mode 100644 drivers/cpu/armv8_cpu.h
 
-diff --git a/arch/arm/lib/gic-v3-its.c b/arch/arm/lib/gic-v3-its.c
-index 22fa46a341..58f8bf864f 100644
---- a/arch/arm/lib/gic-v3-its.c
-+++ b/arch/arm/lib/gic-v3-its.c
-@@ -4,9 +4,11 @@
-  */
- #include <cpu_func.h>
- #include <dm.h>
-+#include <irq.h>
- #include <asm/gic.h>
- #include <asm/gic-v3.h>
- #include <asm/io.h>
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
- #include <linux/bitops.h>
- #include <linux/printk.h>
- #include <linux/sizes.h>
-@@ -163,8 +165,30 @@ static const struct udevice_id gic_v3_ids[] = {
- 	{}
- };
+diff --git a/drivers/cpu/Kconfig b/drivers/cpu/Kconfig
+index 5c06cd9f60..9c0df331d7 100644
+--- a/drivers/cpu/Kconfig
++++ b/drivers/cpu/Kconfig
+@@ -26,6 +26,12 @@ config CPU_RISCV
+ 	help
+ 	  Support CPU cores for RISC-V architecture.
  
-+static int arm_gic_v3_of_xlate(struct irq *irq, struct ofnode_phandle_args *args)
++config CPU_ARMV8
++	bool "Enable generic ARMv8 CPU driver"
++	depends on CPU && ARM64
++	help
++	  Support CPU cores for armv8 architecture.
++
+ config CPU_MICROBLAZE
+ 	bool "Enable Microblaze CPU driver"
+ 	depends on CPU && MICROBLAZE
+diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
+index bc75d9b974..773395693a 100644
+--- a/drivers/cpu/Makefile
++++ b/drivers/cpu/Makefile
+@@ -6,10 +6,12 @@
+ 
+ obj-$(CONFIG_CPU) += cpu-uclass.o
+ 
++
+ obj-$(CONFIG_ARCH_BMIPS) += bmips_cpu.o
+ obj-$(CONFIG_ARCH_IMX8) += imx8_cpu.o
+ obj-$(CONFIG_ARCH_AT91) += at91_cpu.o
+ obj-$(CONFIG_ARCH_MEDIATEK) += mtk_cpu.o
++obj-$(CONFIG_CPU_ARMV8) += armv8_cpu.o
+ obj-$(CONFIG_CPU_IMX) += imx8_cpu.o
+ obj-$(CONFIG_CPU_MPC83XX) += mpc83xx_cpu.o
+ obj-$(CONFIG_CPU_RISCV) += riscv_cpu.o
+diff --git a/drivers/cpu/armv8_cpu.c b/drivers/cpu/armv8_cpu.c
+new file mode 100644
+index 0000000000..19f072be43
+--- /dev/null
++++ b/drivers/cpu/armv8_cpu.c
+@@ -0,0 +1,73 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2024 9elements GmbH
++ */
++#include <cpu.h>
++#include <dm.h>
++#include <acpi/acpigen.h>
++#include <asm/armv8/cpu.h>
++#include <dm/acpi.h>
++#include <asm/io.h>
++#include <linux/bitops.h>
++#include <linux/printk.h>
++#include <linux/sizes.h>
++
++static int armv8_cpu_get_desc(const struct udevice *dev, char *buf, int size)
 +{
-+	if (args->args_count < 3) {
-+		log_debug("Invalid args_count: %d\n", args->args_count);
-+		return -EINVAL;
-+	}
++	int cpuid;
 +
-+	if (args->args[0] == GIC_SPI)
-+		irq->id = args->args[1] + 32;
-+	else
-+		irq->id = args->args[1] + 16;
++	cpuid = (read_midr() & MIDR_PARTNUM_MASK) >> MIDR_PARTNUM_SHIFT;
 +
-+	irq->flags = args->args[2];
++	snprintf(buf, size, "CPU MIDR %04x", cpuid);
 +
 +	return 0;
 +}
 +
-+static const struct irq_ops arm_gic_v3_ops = {
-+	.of_xlate		=  arm_gic_v3_of_xlate,
++static int armv8_cpu_get_info(const struct udevice *dev,
++			      struct cpu_info *info)
++{
++	info->cpu_freq = 0;
++	info->features = BIT(CPU_FEAT_L1_CACHE) | BIT(CPU_FEAT_MMU);
++
++	return 0;
++}
++
++static int armv8_cpu_get_count(const struct udevice *dev)
++{
++	return uclass_id_count(UCLASS_CPU);
++}
++
++#ifdef CONFIG_ACPIGEN
++int armv8_cpu_fill_ssdt(const struct udevice *dev, struct acpi_ctx *ctx)
++{
++	uint core_id = dev_seq(dev);
++
++	acpigen_write_processor_device(ctx, core_id);
++
++	return 0;
++}
++
++struct acpi_ops armv8_cpu_acpi_ops = {
++	.fill_ssdt	= armv8_cpu_fill_ssdt,
++};
++#endif
++
++static const struct cpu_ops cpu_ops = {
++	.get_count = armv8_cpu_get_count,
++	.get_desc  = armv8_cpu_get_desc,
++	.get_info  = armv8_cpu_get_info,
 +};
 +
- U_BOOT_DRIVER(arm_gic_v3) = {
- 	.name		= "gic-v3",
- 	.id		= UCLASS_IRQ,
- 	.of_match	= gic_v3_ids,
-+	.ops		= &arm_gic_v3_ops,
- };
++static const struct udevice_id cpu_ids[] = {
++	{ .compatible = "arm,armv8" },
++	{}
++};
++
++U_BOOT_DRIVER(arm_cpu) = {
++	.name		= "arm-cpu",
++	.id		= UCLASS_CPU,
++	.of_match	= cpu_ids,
++	.ops		= &cpu_ops,
++	.flags		= DM_FLAG_PRE_RELOC,
++	ACPI_OPS_PTR(&armv8_cpu_acpi_ops)
++};
+diff --git a/drivers/cpu/armv8_cpu.h b/drivers/cpu/armv8_cpu.h
+new file mode 100644
+index 0000000000..2c4b0252cf
+--- /dev/null
++++ b/drivers/cpu/armv8_cpu.h
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2024 9elements GmbH
++ */
++#include <dm/acpi.h>
++#include <dm/device.h>
++
++#ifndef _ARMV8_CPU_H_
++#define _ARMV8_CPU_H_
++
++/**
++ * armv8_cpu_fill_ssdt() - Fill the SSDT
++ * Parses the FDT and writes the SSDT nodes.
++ *
++ * @dev: cpu device to generate ACPI tables for
++ * @ctx: ACPI context pointer
++ * @return:	0 if OK, or a negative error code.
++ */
++int armv8_cpu_fill_ssdt(const struct udevice *dev, struct acpi_ctx *ctx);
++
++#endif
+\ No newline at end of file
 -- 
 2.46.2
 
