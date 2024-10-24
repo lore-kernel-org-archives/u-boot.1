@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 424F8CE8E8A
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 15:26:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E75BCCE8E8A
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 15:27:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E13188FA7;
-	Thu, 24 Oct 2024 17:25:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F208589051;
+	Thu, 24 Oct 2024 17:25:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0DA489024; Thu, 24 Oct 2024 17:25:42 +0200 (CEST)
+ id 3B0BD88FB9; Thu, 24 Oct 2024 17:25:47 +0200 (CEST)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 8E9D989003
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 17:25:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id D50D088FB9
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 17:25:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.11,229,1725289200"; d="scan'208";a="226888007"
+X-IronPort-AV: E=Sophos;i="6.11,229,1725289200"; d="scan'208";a="226888011"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 25 Oct 2024 00:25:36 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 25 Oct 2024 00:25:38 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.183])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id DD32040065A3;
- Fri, 25 Oct 2024 00:25:27 +0900 (JST)
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 54F1D4008C7C;
+ Fri, 25 Oct 2024 00:25:35 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -35,9 +35,9 @@ To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Ramon Fried <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH 07/14] net: phy: ksz90x1: Load skew values from device tree
-Date: Thu, 24 Oct 2024 16:24:41 +0100
-Message-Id: <20241024152448.102-8-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH 09/14] net: ravb: Support up to two instances
+Date: Thu, 24 Oct 2024 16:24:43 +0100
+Message-Id: <20241024152448.102-10-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
@@ -59,150 +59,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Various signal skew values may be set in the device tree for the ksz9131
-Ethernet PHY. For example, the RZ/G2L board requires non-default values
-for rxc-skew-psec & txc-skew-psec.
+Several Renesas SoCs in the RZ/G2L family have two Ethernet interfaces.
+To support this second interface, we extend the bb_miiphy_buses[] array
+and keep track of the current bus index in ravb_of_to_plat().
 
-This is based on the ksz9131 phy driver in Linux v6.11.
+Support for an arbitrary number of instances is not implemented - it is
+expected that bb_miiphy_buses will be replaced with a proper device
+model/uclass implementation before that is needed.
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 ---
- drivers/net/phy/micrel_ksz90x1.c | 115 +++++++++++++++++++++++++++++++
- 1 file changed, 115 insertions(+)
+ drivers/net/ravb.c | 28 ++++++++++++++++++++++++----
+ 1 file changed, 24 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/net/phy/micrel_ksz90x1.c b/drivers/net/phy/micrel_ksz90x1.c
-index 4f99b115a3c7..b64046e0bc72 100644
---- a/drivers/net/phy/micrel_ksz90x1.c
-+++ b/drivers/net/phy/micrel_ksz90x1.c
-@@ -389,6 +389,117 @@ U_BOOT_PHY_DRIVER(ksz9031) = {
- #define KSZ9131RN_DLL_ENABLE_DELAY	0
- #define KSZ9131RN_DLL_DISABLE_DELAY	BIT(12)
- 
-+#define KSZ9131RN_CONTROL_PAD_SKEW	4
-+#define KSZ9131RN_RX_DATA_PAD_SKEW	5
-+#define KSZ9131RN_TX_DATA_PAD_SKEW	6
-+#define KSZ9131RN_CLK_PAD_SKEW		8
-+
-+#define KSZ9131RN_SKEW_5BIT_MAX		2400
-+#define KSZ9131RN_SKEW_4BIT_MAX		800
-+#define KSZ9131RN_OFFSET		700
-+#define KSZ9131RN_STEP			100
-+
-+static int ksz9131_of_load_skew_values(struct phy_device *phydev,
-+				       ofnode of_node,
-+				       u16 reg, size_t field_sz,
-+				       const char *field[], u8 numfields)
-+{
-+	int val[4] = {-(1 + KSZ9131RN_OFFSET), -(2 + KSZ9131RN_OFFSET),
-+		      -(3 + KSZ9131RN_OFFSET), -(4 + KSZ9131RN_OFFSET)};
-+	int skewval, skewmax = 0;
-+	int matches = 0;
-+	u16 maxval;
-+	u16 newval;
-+	u16 mask;
-+	int i;
-+
-+	/* psec properties in dts should mean x pico seconds */
-+	if (field_sz == 5)
-+		skewmax = KSZ9131RN_SKEW_5BIT_MAX;
-+	else
-+		skewmax = KSZ9131RN_SKEW_4BIT_MAX;
-+
-+	for (i = 0; i < numfields; i++)
-+		if (!ofnode_read_s32(of_node, field[i], &skewval)) {
-+			if (skewval < -KSZ9131RN_OFFSET)
-+				skewval = -KSZ9131RN_OFFSET;
-+			else if (skewval > skewmax)
-+				skewval = skewmax;
-+
-+			val[i] = skewval + KSZ9131RN_OFFSET;
-+			matches++;
-+		}
-+
-+	if (!matches)
-+		return 0;
-+
-+	if (matches < numfields)
-+		newval = phy_read_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG, reg);
-+	else
-+		newval = 0;
-+
-+	maxval = (field_sz == 4) ? 0xf : 0x1f;
-+	for (i = 0; i < numfields; i++)
-+		if (val[i] != -(i + 1 + KSZ9131RN_OFFSET)) {
-+			mask = 0xffff;
-+			mask ^= maxval << (field_sz * i);
-+			newval = (newval & mask) |
-+				(((val[i] / KSZ9131RN_STEP) & maxval)
-+					<< (field_sz * i));
-+		}
-+
-+	return phy_write_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG, reg, newval);
-+}
-+
-+static int ksz9131_of_load_all_skew_values(struct phy_device *phydev)
-+{
-+	const char *control_skews[2] = { "txen-skew-psec", "rxdv-skew-psec" };
-+	const char *clk_skews[2] = { "rxc-skew-psec", "txc-skew-psec" };
-+	const char *rx_data_skews[4] = {
-+		"rxd0-skew-psec", "rxd1-skew-psec",
-+		"rxd2-skew-psec", "rxd3-skew-psec"
-+	};
-+	const char *tx_data_skews[4] = {
-+		"txd0-skew-psec", "txd1-skew-psec",
-+		"txd2-skew-psec", "txd3-skew-psec"
-+	};
-+	struct ofnode_phandle_args phandle_args;
-+	int ret;
-+
-+	/*
-+	 * Silently ignore failure here as the device tree is not required to
-+	 * contain a phy node.
-+	 */
-+	if (dev_read_phandle_with_args(phydev->dev, "phy-handle", NULL, 0, 0,
-+				       &phandle_args))
-+		return 0;
-+
-+	if (!ofnode_valid(phandle_args.node))
-+		return 0;
-+
-+	ret = ksz9131_of_load_skew_values(phydev, phandle_args.node,
-+					  KSZ9131RN_CLK_PAD_SKEW, 5,
-+					  clk_skews, 2);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = ksz9131_of_load_skew_values(phydev, phandle_args.node,
-+					  KSZ9131RN_CONTROL_PAD_SKEW, 4,
-+					  control_skews, 2);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = ksz9131_of_load_skew_values(phydev, phandle_args.node,
-+					  KSZ9131RN_RX_DATA_PAD_SKEW, 4,
-+					  rx_data_skews, 4);
-+	if (ret < 0)
-+		return ret;
-+
-+	return ksz9131_of_load_skew_values(phydev, phandle_args.node,
-+					   KSZ9131RN_TX_DATA_PAD_SKEW, 4,
-+					   tx_data_skews, 4);
-+}
-+
- static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
+diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+index f1401d2f6ed2..9b33ce929618 100644
+--- a/drivers/net/ravb.c
++++ b/drivers/net/ravb.c
+@@ -11,6 +11,7 @@
+ #include <clk.h>
+ #include <cpu_func.h>
+ #include <dm.h>
++#include <dm/device_compat.h>
+ #include <errno.h>
+ #include <log.h>
+ #include <miiphy.h>
+@@ -494,6 +495,7 @@ static int ravb_probe(struct udevice *dev)
  {
- 	struct phy_driver *drv = phydev->drv;
-@@ -466,6 +577,10 @@ static int ksz9131_config(struct phy_device *phydev)
- 			return ret;
- 	}
+ 	struct eth_pdata *pdata = dev_get_plat(dev);
+ 	struct ravb_priv *eth = dev_get_priv(dev);
++	struct bb_miiphy_bus *phybus;
+ 	struct mii_dev *mdiodev;
+ 	void __iomem *iobase;
+ 	int ret;
+@@ -513,7 +515,8 @@ static int ravb_probe(struct udevice *dev)
  
-+	ret = ksz9131_of_load_all_skew_values(phydev);
-+	if (ret < 0)
-+		return ret;
+ 	mdiodev->read = bb_miiphy_read;
+ 	mdiodev->write = bb_miiphy_write;
+-	bb_miiphy_buses[0].priv = eth;
++	phybus = (struct bb_miiphy_bus *)pdata->priv_pdata;
++	phybus->priv = eth;
+ 	snprintf(mdiodev->name, sizeof(mdiodev->name), dev->name);
+ 
+ 	ret = mdio_register(mdiodev);
+@@ -625,7 +628,17 @@ int ravb_bb_delay(struct bb_miiphy_bus *bus)
+ 
+ struct bb_miiphy_bus bb_miiphy_buses[] = {
+ 	{
+-		.name		= "ravb",
++		.name		= "ravb0",
++		.init		= ravb_bb_init,
++		.mdio_active	= ravb_bb_mdio_active,
++		.mdio_tristate	= ravb_bb_mdio_tristate,
++		.set_mdio	= ravb_bb_set_mdio,
++		.get_mdio	= ravb_bb_get_mdio,
++		.set_mdc	= ravb_bb_set_mdc,
++		.delay		= ravb_bb_delay,
++	},
++	{
++		.name		= "ravb1",
+ 		.init		= ravb_bb_init,
+ 		.mdio_active	= ravb_bb_mdio_active,
+ 		.mdio_tristate	= ravb_bb_mdio_tristate,
+@@ -646,10 +659,16 @@ static const struct eth_ops ravb_ops = {
+ 	.write_hwaddr		= ravb_write_hwaddr,
+ };
+ 
++static int bb_miiphy_index;
 +
- 	ret = ksz9131_led_errata(phydev);
- 	if (ret < 0)
- 		return ret;
+ int ravb_of_to_plat(struct udevice *dev)
+ {
+ 	struct eth_pdata *pdata = dev_get_plat(dev);
+-	const fdt32_t *cell;
++
++	if (bb_miiphy_index >= bb_miiphy_buses_num) {
++		dev_err(dev, "ravb driver supports only 1 or 2 devices!\n");
++		return -EOVERFLOW;
++	}
+ 
+ 	pdata->iobase = dev_read_addr(dev);
+ 
+@@ -662,7 +681,8 @@ int ravb_of_to_plat(struct udevice *dev)
+ 	if (cell)
+ 		pdata->max_speed = fdt32_to_cpu(*cell);
+ 
+-	sprintf(bb_miiphy_buses[0].name, dev->name);
++	pdata->priv_pdata = &bb_miiphy_buses[bb_miiphy_index];
++	sprintf(bb_miiphy_buses[bb_miiphy_index++].name, dev->name);
+ 
+ 	return 0;
+ }
 -- 
 2.43.0
 
