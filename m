@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 863DBCE8E78
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 14:05:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B5A0CE8E7A
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 14:10:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3F6A88E63;
-	Thu, 24 Oct 2024 16:05:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CF95C88F33;
+	Thu, 24 Oct 2024 16:10:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cgfX3nWO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LsVAcOcG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A76388E63; Thu, 24 Oct 2024 16:05:04 +0200 (CEST)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 01ABC88DFE; Thu, 24 Oct 2024 16:10:21 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CCB588F69
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 16:04:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3C9C88E77
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 16:10:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2e30116efc9so773621a91.2
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 07:04:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b158542592so61374885a.2
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 07:10:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729778696; x=1730383496; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+8VWmrcWy7eJR8258Gnwp3mqaFMCWiGUyxEnjX+jUh0=;
- b=cgfX3nWOnfdmPW6G2Gos+aQbDiPC6iYVKwLvoxaNk+Fxw5lt+qrwzWk62SIyN/BFk8
- bJ3EAaAt+tCK6szCWf2XzNf04aQHp6XUyLQAXJML9/rNbwb9/AlkP9BHzjXW1qji1Qps
- 2pdHQwJsdNifnlNcQBS0Xoh2EVIj9RQgC5zI31fSnLOQb10x/fog9GU6eL0Zypa4wuh2
- KgVKVb/IRe3WkIMWPw/Quh7JSnQnvv97vkk5FsM0JogWvdZ4Y9+lVwRP6wIlckh6sTIZ
- Go9vCr7k/08shSeiPF5dg2WaGw8ntD5Rj+P7Lx10XIDW+YYsypFmXsKg1glF8e64C4Ww
- YPMA==
+ d=konsulko.com; s=google; t=1729779016; x=1730383816; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=z+RHkPMjIWL9G+cO+eshkGNbTX4jSgtjVe3Sm+MtUF0=;
+ b=LsVAcOcGWmFvyaICIx8of/9kU38zvIXDhIs4xkUuxvJYbFpz/qCeXT6nkKlT+azem9
+ kWXjvNL2dL+9UFQMyJqLOU6bdaZpvEUq8K10aoQ3/KEIny09G/L7dD2/AWMH816K8anH
+ cmCIDpHt2pVge5St/Pauun/K8Az+tqR5LZwEU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729778696; x=1730383496;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+8VWmrcWy7eJR8258Gnwp3mqaFMCWiGUyxEnjX+jUh0=;
- b=Gr9HpxQIIVWvCxf2oa0l3H4VZ8fbbmZdKqHfyjh72EkhxUDXpqJpfiKQxbwcWuNDLv
- FmxtUohl/LTDG+lXrPwLS28x6CLiVGsqj6WJ6mYjPgmF5R/xsMvDBidc+Q1q78ColdYb
- NHpv0zTDbLNUSQQ2NJpaThkgGeKaawqL/dB3WpGtNosbOTVSj3LRYTg+P5ebj6pzgOhe
- y6k3b85q2vU0+DuXT95Bxgw5m+JwMUt578bgTk1Ij/FyauBtbAIDfXakxE5IejYGqDx2
- uD0xmQ4QNnJs+el5sSK4G5ksb69Um4RnVBLXf27JxIV7DsDdq59GWxJnM7IDrQTCz/PO
- 3xQw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXVbPEyX7+yiT7Exsuxi2xWGbh+QHIY+fEjtta//Ntv9P6MiwGeuOi6DepTUV8BEfeCj/IHkgY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxhd8nr1hinA4n5NobWQ1ckMQv0jQlfwRLvp+QoAC0kvJIGHX0S
- S+qjnvBiynEsyysLngIWb+MVMWSLqmS/ER9+RN2S6BNxin5jTDQuMyG+sCp+iak070CPwQ5j/W3
- C+zIZNnEIK/7C+TcDfMyCIoJIRVgzbquf3mwzgQ==
-X-Google-Smtp-Source: AGHT+IEws+o2izwiTsIxTMasxKuDWnN/jaOjdYAMVyIZMZe8vG7VKdiqL4hJO8yhN73FIgu96WJpTuF+V01J2wurBvc=
-X-Received: by 2002:a17:90b:4c48:b0:2e2:cef9:4d98 with SMTP id
- 98e67ed59e1d1-2e77f6d8cd6mr2255083a91.25.1729778694745; Thu, 24 Oct 2024
- 07:04:54 -0700 (PDT)
-MIME-Version: 1.0
-References: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
- <20241024112449.1362319-5-ilias.apalodimas@linaro.org>
-In-Reply-To: <20241024112449.1362319-5-ilias.apalodimas@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 24 Oct 2024 17:04:17 +0300
-Message-ID: <CAC_iWjLuqUTKW-okV85RULz-P61kDbniEVERHDeBWpKu5gXcUw@mail.gmail.com>
-Subject: Re: [PATCH v2 4/6] net: lwip: Enable https:// support for wget
-To: jerome.forissier@linaro.org, raymond.mao@linaro.org
-Cc: xypron.glpk@gmx.de, Tom Rini <trini@konsulko.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
- Wei Ming Chen <jj251510319013@gmail.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, 
+ d=1e100.net; s=20230601; t=1729779016; x=1730383816;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=z+RHkPMjIWL9G+cO+eshkGNbTX4jSgtjVe3Sm+MtUF0=;
+ b=XQwgP+U6ZMdXgVt1/ZfmRpi480rr96dNetlFQODsw555WJepRt0YrjVLmyi+frYOmS
+ z6wQCbt1ZpUStz9R9YHSvcdh5s1ohpFxv7Z8+KexBa4kN6Yf3ruyv8sI0JmeDb4I1X+U
+ 1dCbf2htuEw90TMRc/kRm2j8iqYmaMN2GT5z5BTsmLhbPEllTFtGRU51PW5BmP5OVdJk
+ mHwr8UAt2oAi3I4XzajAuenLjCLcoG0edqpnVGYtXUDc74USsu9oT28oJaXyYT0EZp3Y
+ ycMW7ArKBxLn0/Ffd7/8gDFqg+HWOCZjFnudiiwDtB3Axdx5IqWYP4C4RQQa+oxLnmMK
+ nZVw==
+X-Gm-Message-State: AOJu0YyF4LASkewZeJfFXI+PFQUTfq5IwFvDYdJ5efhraZREzCGuMSgK
+ T5keQ5VfeD3TuvdP+9XmOLWnFuJSTdmq1SDqNhqvzQB79FMhjUjzixS5uPGSmow=
+X-Google-Smtp-Source: AGHT+IGLxjfszDeFDrFZkqwrCkNxW9DRvd+lBRVXcFT7dHp1j+K4HGSmeJHt6H35H5tZ9wwXV7anww==
+X-Received: by 2002:a05:620a:1996:b0:7a9:c129:5da7 with SMTP id
+ af79cd13be357-7b17e57a26amr754520685a.29.1729779015510; 
+ Thu, 24 Oct 2024 07:10:15 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b165903a99sm492181685a.0.2024.10.24.07.10.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Oct 2024 07:10:14 -0700 (PDT)
+Date: Thu, 24 Oct 2024 08:10:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, iwamatsu@nigauri.org,
+ marek.vasut+renesas@mailbox.org,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, Wan Yee Lau <wan.yee.lau@intel.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Alexander Gendin <agendin@matrox.com>, Jonas Karlman <jonas@kwiboo.se>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: Re: [PATCH v2 0/8] SMBIOS improvements
+Message-ID: <20241024141010.GQ4959@bill-the-cat>
+References: <20241022200543.116343-1-raymond.mao@linaro.org>
+ <20241024002255.GP4959@bill-the-cat>
+ <CAEfUkUJYcBSET22QJAKzCd+q4GYXe6H9Xshpm_RiET57uzsE3Q@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JpuhjuCHwNaGUhfb"
+Content-Disposition: inline
+In-Reply-To: <CAEfUkUJYcBSET22QJAKzCd+q4GYXe6H9Xshpm_RiET57uzsE3Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,228 +103,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replying to myself here but
 
-On Thu, 24 Oct 2024 at 14:25, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> With the recent changes of lwip & mbedTLS we can now download from
-> https:// urls instead of just http://.
-> Adjust our wget lwip version parsing to support both URLs.
-> While at it adjust the default TCP window for QEMU since https seems to
-> require at least 16384
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->  cmd/Kconfig      | 19 ++++++++++++
->  net/lwip/Kconfig |  2 +-
->  net/lwip/wget.c  | 78 +++++++++++++++++++++++++++++++++++++++++++-----
->  3 files changed, 91 insertions(+), 8 deletions(-)
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 3ee70f31b142..1d90a884e2c1 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -2126,6 +2126,25 @@ config CMD_WGET
->           wget is a simple command to download kernel, or other files,
->           from a http server over TCP.
->
-> +config WGET_HTTPS
-> +       bool "wget https"
-> +       depends on CMD_WGET
-> +       depends on PROT_TCP_LWIP
-> +       depends on MBEDTLS_LIB
-> +        select SHA256
-> +        select RSA
-> +        select ASYMMETRIC_KEY_TYPE
-> +        select ASYMMETRIC_PUBLIC_KEY_SUBTYPE
-> +        select X509_CERTIFICATE_PARSER
-> +        select PKCS7_MESSAGE_PARSER
-> +       select MBEDTLS_LIB_CRYPTO
-> +       select MBEDTLS_LIB_TLS
-> +       select RSA_VERIFY_WITH_PKEY
-> +       select X509_CERTIFICATE_PARSER
-> +       select PKCS7_MESSAGE_PARSER
-> +       help
-> +         Enable TLS over http for wget.
-> +
->  endif  # if CMD_NET
->
->  config CMD_PXE
-> diff --git a/net/lwip/Kconfig b/net/lwip/Kconfig
-> index 8a67de4cf335..a9ae9bf7fa2a 100644
-> --- a/net/lwip/Kconfig
-> +++ b/net/lwip/Kconfig
-> @@ -37,7 +37,7 @@ config PROT_UDP_LWIP
->
->  config LWIP_TCP_WND
->         int "Value of TCP_WND"
-> -       default 8000 if ARCH_QEMU
-> +       default 32768 if ARCH_QEMU
->         default 3000000
->         help
->           Default value for TCP_WND in the lwIP configuration
-> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-> index b495ebd1aa96..1a2ecdcddf34 100644
-> --- a/net/lwip/wget.c
-> +++ b/net/lwip/wget.c
-> @@ -7,13 +7,17 @@
->  #include <efi_loader.h>
->  #include <image.h>
->  #include <lwip/apps/http_client.h>
-> +#include "lwip/altcp_tls.h"
->  #include <lwip/timeouts.h>
-> +#include <rng.h>
->  #include <mapmem.h>
->  #include <net.h>
->  #include <time.h>
-> +#include <dm/uclass.h>
->
->  #define SERVER_NAME_SIZE 200
->  #define HTTP_PORT_DEFAULT 80
-> +#define HTTPS_PORT_DEFAULT 443
->  #define PROGRESS_PRINT_STEP_BYTES (100 * 1024)
->
->  enum done_state {
-> @@ -32,18 +36,53 @@ struct wget_ctx {
->         enum done_state done;
->  };
->
-> +bool wget_validate_uri(char *uri);
-> +
-> +int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len,
-> +                         size_t *olen)
-> +{
-> +       struct udevice *dev;
-> +       u64 rng = 0;
-> +       int ret;
-> +
-> +       *olen = 0;
-> +
-> +       ret = uclass_get_device(UCLASS_RNG, 0, &dev);
-> +       if (ret) {
-> +               log_err("Failed to get an rng: %d\n", ret);
-> +               return ret;
-> +       }
-> +       ret = dm_rng_read(dev, &rng, sizeof(rng));
-> +       if (ret)
-> +               return ret;
-> +
-> +       memcpy(output, &rng, len);
-> +       *olen = sizeof(rng);
+--JpuhjuCHwNaGUhfb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I just realized I forgot to address this. I'll fix it on v3, but the
-rest of the code is ok to review
+On Thu, Oct 24, 2024 at 09:35:36AM -0400, Raymond Mao wrote:
+> Hi Tom,
+>=20
+> On Wed, 23 Oct 2024 at 20:23, Tom Rini <trini@konsulko.com> wrote:
+>=20
+> > On Tue, Oct 22, 2024 at 01:05:21PM -0700, Raymond Mao wrote:
+> >
+> > > Motivations for changes:
+> > > Current SMBIOS library and command-line tool is not fully matching wi=
+th
+> > > the requirements:
+> > > 1. Missing support for other mandatory types (#7, #9, #16, #17, #19).
+> > > 2. Only a few platforms support SMBIOS node from the device tree.
+> > > 3. Values of some fields are hardcoded in the library other than fetc=
+hing
+> > >    from the device hardware.
+> > > 4. Embedded data with dynamic length is not supported (E.g. Contained
+> > >    Object Handles in Type #2 and Contained Elements in Type #3)
+> > >
+> > > Changes:
+> > > 1. Refactor the SMBIOS library and command-line tool to better align =
+with
+> > >    the SMBIOS spec.
+> > > 2. Create an arch-specific driver for all aarch64-based platforms to
+> > fetch
+> > >    SMBIOS private data from the device hardware (processor and cache).
+> > > 3. Create a sysinfo driver to poppulate platform SMBIOS private data.
+> > > 4. Add generic SMBIOS DTS file for arm64 platforms for those common
+> > strings
+> > >    and values which cannot be retrieved from the system registers.
+> > >    Vendors can create their own SMBIOS node using this as an example.
+> > >    For those boards without SMBIOS nodes, this DTS file can be includ=
+ed
+> > to
+> > >    have a generic SMBIOS information of the system.
+> > > 5. Add support for Type #7 (Cache Information) and link its handles to
+> > >    Type #4.
+> > >
+> > > Once this patch is acceptted, subsequent patch sets will add other
+> > missing
+> > > types (#9, #16, #17, #19).
+> > >
+> > > Tests:
+> > > To test this with QEMU arm64, please follow the guide on dt_qemu.rst =
+to
+> > > get a merged DT to run with.
+> > > ```
+> > > qemu-system-arm -machine virt -machine dumpdtb=3Dqemu.dtb
+> > > cat  <(dtc -I dtb qemu.dtb) <(dtc -I dtb ./dts/dt.dtb | grep -v
+> > /dts-v1/) \
+> > >   | dtc - -o merged.dtb
+> > > qemu-system-arm -machine virt -nographic -bios u-boot.bin -dtb merged=
+=2Edtb
+> > > ```
+> > >
+> > > Known issues:
+> > > It hits the image size limitation on R-CAR board(rcar3_salvator-x).
+> > > ```
+> > > u-boot.img exceeds file size limit:
+> > >   limit:  0x100000 bytes
+> > >   actual: 0x10049d bytes
+> > >   excess: 0x49d bytes
+> > > ```
+> > > This board needs a clean-up to reserve spaces for the changes as SMBI=
+OS
+> > > is a fundamental feature.
+> > >
+> > > Below is the breakdown of the size-growth of the related functions:
+> > >   function                                   old     new   delta
+> > >     static.smbios_write_type4                  252    1052    +800
+> > >     static.smbios_write_type7                    -     764    +764
+> > >     static.smbios_write_type3                  188     488    +300
+> > >     smbios_get_val_si                            -     128    +128
+> > >     static.smbios_write_type2                  316     376     +60
+> > >     sysinfo_get_data                             -      56     +56
+> > >     static.smbios_write_type1                  380     396     +16
+> > >     smbios_write_funcs                         112     128     +16
+> > >     ofnode_read_u32                              -      12     +12
+> > >     sysinfo_rcar_ops                            40      48      +8
+> > >     install_smbios_table                       468     472      +4
+> >
+> > Right, so here's the problem I see right now. About 70% of all U-Boot
+> > platforms enable GENERATE_SMBIOS_TABLE and so "smbios: Refactor smbios
+> > library" causes a growth of around 1.5 kilobytes. That's a problem.
+> > There is a place where we're going to generate as full and complete a
+> > table as we can, and a place where we just want maybe the basics. We
+> > need to re-factor things first so that the platforms which aren't doing
+> > detailed tables do not grow and perhaps even shrink because we can pull
+> > existing code out.
+> >
+> Do you have a list of those platforms which don't need detailed tables?
+> I can add a new kconfig for this in the next version.
 
-Thanks
-/Ilias
-> +
-> +       return 0;
-> +}
-> +
->  static int parse_url(char *url, char *host, u16 *port, char **path)
->  {
->         char *p, *pp;
->         long lport;
-> +       size_t prefix_len = 0;
-> +
-> +       if (!wget_validate_uri(url)) {
-> +               log_err("Invalid URL. Use http(s)://\n");
-> +               return -EINVAL;
-> +       }
->
-> +       *port = HTTP_PORT_DEFAULT;
-> +       prefix_len = strlen("http://");
->         p = strstr(url, "http://");
->         if (!p) {
-> -               log_err("only http:// is supported\n");
-> -               return -EINVAL;
-> +               p = strstr(url, "https://");
-> +               prefix_len = strlen("https://");
-> +               *port = HTTPS_PORT_DEFAULT;
->         }
->
-> -       p += strlen("http://");
-> +       p += prefix_len;
->
->         /* Parse hostname */
->         pp = strchr(p, ':');
-> @@ -67,9 +106,8 @@ static int parse_url(char *url, char *host, u16 *port, char **path)
->                 if (lport > 65535)
->                         return -EINVAL;
->                 *port = (u16)lport;
-> -       } else {
-> -               *port = HTTP_PORT_DEFAULT;
->         }
-> +
->         if (*pp != '/')
->                 return -EINVAL;
->         *path = pp;
-> @@ -210,6 +248,9 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
->  static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
->  {
->         char server_name[SERVER_NAME_SIZE];
-> +#if defined CONFIG_WGET_HTTPS
-> +       altcp_allocator_t tls_allocator;
-> +#endif
->         httpc_connection_t conn;
->         httpc_state_t *state;
->         struct netif *netif;
-> @@ -232,6 +273,22 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
->                 return -1;
->
->         memset(&conn, 0, sizeof(conn));
-> +#if defined CONFIG_WGET_HTTPS
-> +       if (port == HTTPS_PORT_DEFAULT) {
-> +               tls_allocator.alloc = &altcp_tls_alloc;
-> +               tls_allocator.arg =
-> +                       altcp_tls_create_config_client(NULL, 0, server_name);
-> +
-> +               if (!tls_allocator.arg) {
-> +                       log_err("error: Cannot create a TLS connection\n");
-> +                       net_lwip_remove_netif(netif);
-> +                       return -1;
-> +               }
-> +
-> +               conn.altcp_allocator = &tls_allocator;
-> +       }
-> +#endif
-> +
->         conn.result_fn = httpc_result_cb;
->         ctx.path = path;
->         if (httpc_get_file_dns(server_name, port, path, &conn, httpc_recv_cb,
-> @@ -316,6 +373,7 @@ bool wget_validate_uri(char *uri)
->         char c;
->         bool ret = true;
->         char *str_copy, *s, *authority;
-> +       size_t prefix_len = 0;
->
->         for (c = 0x1; c < 0x21; c++) {
->                 if (strchr(uri, c)) {
-> @@ -323,15 +381,21 @@ bool wget_validate_uri(char *uri)
->                         return false;
->                 }
->         }
-> +
->         if (strchr(uri, 0x7f)) {
->                 log_err("invalid character is used\n");
->                 return false;
->         }
->
-> -       if (strncmp(uri, "http://", 7)) {
-> -               log_err("only http:// is supported\n");
-> +       if (!strncmp(uri, "http://", strlen("http://"))) {
-> +               prefix_len = strlen("http://");
-> +       } else if (!strncmp(uri, "https://", strlen("https://"))) {
-> +               prefix_len = strlen("https://");
-> +       } else {
-> +               log_err("only http(s):// is supported\n");
->                 return false;
->         }
-> +
->         str_copy = strdup(uri);
->         if (!str_copy)
->                 return false;
-> --
-> 2.45.2
->
+No, you need to determine this, but it should be something that can be
+determined by existing data. The platforms which grow by only 1.5KiB
+don't. The ones that grow by ~4KiB, maybe? You need to see what they're
+actually doing today to determine that. Growing by ~8KiB? Yes.
+
+You can see my log at:
+https://gist.github.com/trini/8d3d4ab5b53402059a9d178786033c18
+
+And all of that is aside from my original worry about including a large
+number of static strings. I did not look in to if v2 deals with that.
+
+--=20
+Tom
+
+--JpuhjuCHwNaGUhfb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcaVT4ACgkQFHw5/5Y0
+tyxKswv9HV5Qkm3NNJ3oasEKeeQ142zRiivSvL80Wps3lfRJcvN2dCzhnfPfRf2X
+MeybjuJkQ5Devd6pogAhyqNF0TCrDbaRMT/akVpJ/VoYrzC/uI4k4IDYdFVinX0w
+lj3xCShlIudiX42vr7TaiWBYaox2JjuX2DXpL836YNd3y8k1IszJ3D2wtDhz/lTd
+khA1IKHHwMOlfmwOrN//jrzhznAfl/oclY5ccGhRKLJshYsMwFMQTHqGWjKoMdIr
+MMXd5uwhVjiW9jW40Idytph8g5+BWcVLJ7uPMkl3ZL/Gkj59oyXeL8Dgex2Z6RNK
+Q/tBhxuolTql3NAjoESyRpJfflKC1uVTSdI98kR+6vb0183DU7emcU99zpGhRg8X
+X8gMtzVrQUZo24uw9z0t49XcOr0Q0OTiNcC/jzQv+Pm07vEUF3XQwoR48Fa6XVTz
+8WAr3Of+Sfky8NeYTDg1OutNzyXq7PXmSFcc1icylMgC/uZpJDQNDmmyDyICkHis
+K7TFvPAn
+=Pf0d
+-----END PGP SIGNATURE-----
+
+--JpuhjuCHwNaGUhfb--
