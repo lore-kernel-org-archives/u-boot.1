@@ -4,135 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA6CDCFA47F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 10:42:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A9FCD2C542
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 10:46:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCE3D88C7B;
-	Thu, 24 Oct 2024 12:42:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id AD1B288C7B;
+	Thu, 24 Oct 2024 12:46:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wwpIJRYA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kAaT15/D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74C9788D29; Thu, 24 Oct 2024 12:42:49 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2061e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::61e])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4EB5A88DB7; Thu, 24 Oct 2024 12:46:20 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB16D88BB7
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 12:42:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F0F988BB7
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 12:46:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=f3NYvRu1c3UYLLWZNQp4J7IMrh0ewo6sGnefVgTSepBgTI7an2mokseNks9zP7CraWjdOsyKPEOvdim15v/6aBTGIofUhJAZFPV8fb7t3UKFuaYghUSMYpqST+C7w3DoSa/IILKJ8+pSyE7u3uacdFvSRCcft+LdU9mow/iFnAmsrp195/umPDiazJRAjKJlCR7qQK4S/12sP0fmvd9GVoT4t96ObHDLLdF1qvZ5AruqTgdhGGkzc1sFBawE1vhBBbs270EUAe3b2NaBonP9I5zjzj/9+uol5X1vyotV81xTJ0A6MSYffRAFC1wd+yadekQtQYjL7hfi7xGfmxzWgw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=L+UkSMCAQVtHzTq+QKQoACj6B6HH/5iWCBn4xVOqdV0=;
- b=ZVJAzEgozDKoilpzMFZgnGOHCjQ6NPHZ5NfQ8lkfIV6ARQH35mSPBrH13cvX2R33yOwKfDhKUMdV6UppIEESrGqlBFjjhCJ3ZpdUsp4Rpl8FGjsNOhksafG+DXCDJ/LKyFWiPYEt5t/Bct5PltuwGecwgl7jVWQg7CbTrw7RJxX/Ti/LUCPyR4deBysbx7WB8P+S0V0vYxGSbi668t9UHRx9DxiAX3haYrvZEeuoONIzE9NHBxGjOBiMoW3ASZZfRMgspg5e1+ZGNaT+DKaS10WzufJGvy1FxVMHs1iWWVLXXOwzMR8d2QUvAIT/jwsLZ/hMMxb0p1xhg/LUveOuIQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=L+UkSMCAQVtHzTq+QKQoACj6B6HH/5iWCBn4xVOqdV0=;
- b=wwpIJRYA1KgxRg0h0E7O3RaXyq/Gt5dslZ4pZTlj5aOIIq6hoAyZ/TdCAtGMwjDxV67G+lQqbLT3ovKsEGWBeMHC2yaW0DV7LmTvCmdO/RX+yuMJRhQmQhJeMHv474TvVNVuamrtSo8qC98fGTh0AJNPssUsmGLS7x1ExBTxZ7k=
-Received: from MW4PR03CA0349.namprd03.prod.outlook.com (2603:10b6:303:dc::24)
- by PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.17; Thu, 24 Oct
- 2024 10:42:40 +0000
-Received: from SJ5PEPF00000206.namprd05.prod.outlook.com
- (2603:10b6:303:dc:cafe::e3) by MW4PR03CA0349.outlook.office365.com
- (2603:10b6:303:dc::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.17 via Frontend
- Transport; Thu, 24 Oct 2024 10:42:40 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF00000206.mail.protection.outlook.com (10.167.244.39) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8093.14 via Frontend Transport; Thu, 24 Oct 2024 10:42:40 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 24 Oct
- 2024 05:42:36 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Saeed Nowshadi <saeed.nowshadi@amd.com>, Paul Alvin <alvin.paulp@amd.com>, 
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: zynqmp: Fix pwm-fan polarity
-Date: Thu, 24 Oct 2024 12:42:33 +0200
-Message-ID: <3e8e38b77101335f86bca0f05b3988877bb12993.1729766551.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a9a850270e2so118722066b.0
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 03:46:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729766768; x=1730371568; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=llggovwtdPHjq8gq0kgQDelnBh9ebffUtwHswj1YMDY=;
+ b=kAaT15/DejqPTEkU3Yk9bnLlLcXyRxb174qQDleK2ewspaoyFrKVIFssY9FfYh0oRk
+ 99xyDfDab9GTR618SzOmQENv3jZds0sn6zlsWpbF5L5eDM+PT33Ae2hJYmaxX3jBtuHK
+ 2ZesgWBvQqOGaNIEDHF3ImgN5How/ryDkSWwo5Wou07rMYRFcsFyzazR9u/TXlLgJ0WG
+ 3QV3DBA2xKYWEwEye5MaTL7rtUYHSiaYXbzQo6NL83F6+BeB8aylDqHvxYaPi+iXjDYt
+ 8K0m5cUr9z7EXv6UjDSynvGQG/N71bq/R+rWxg0jrH8g3y5RrM37uAY2ph58pT7Lr5OT
+ 116A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729766768; x=1730371568;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=llggovwtdPHjq8gq0kgQDelnBh9ebffUtwHswj1YMDY=;
+ b=vEoyNWBa4EHJv7jlX7f7AEEzMYQngzo1nL4R6rEcUXD42CFyxMdwXuEded9Ykwv6tK
+ wvLe3mW8SoueqpJwV2xtpY0BkINULTXA3/vaIgPeEYS/s2A1cu0CFsBb5foHvHH8bzcA
+ SYZps5iRAtReVj6cUh2hxk7q9mLtf6886raspu3l4IqFaybVWQ3SHnfxERih1pvxrM9X
+ 7tjCemdKBtR+kKQHP6LesxtFuZWARexyzHOLKy2tMETVHtrmhKr8KV5GPtl+n8XvPsdi
+ w3s7YE3CkiEIr6HWkuNJnnuWXwQyx/PKn3oY6y7WUAUjjOJnLvccwCW3dRZejMjFTdsP
+ Qabg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWXlGzcgWFrZrPxP0hly2Yd1rc0VDt6XeEN0AwKMIxZ7E7Adxz5Stx31s5kPJ+UbM6zHhfKs6w=@lists.denx.de
+X-Gm-Message-State: AOJu0YwpIcZ60D/2PzGW0DJvTU4ULw3NG6mG3J2wvEXNO3YczircuYVG
+ kAveTHXhZhsQJEONdkUjTI0iKuGy+OfdUX1TUfpCIrj4Zr+L6Z89pBV0cvSeySU=
+X-Google-Smtp-Source: AGHT+IH+8XN8uecImBsc2j8YZNkZy7CtA0NJ58m76FpQF+vOPIXcEslwdGbWmX3wCkq/hZQX/1DigA==
+X-Received: by 2002:a17:907:1c8b:b0:a9a:522a:ba70 with SMTP id
+ a640c23a62f3a-a9abf8aefb2mr532319366b.32.1729766767608; 
+ Thu, 24 Oct 2024 03:46:07 -0700 (PDT)
+Received: from localhost.localdomain (ppp176092143132.access.hol.gr.
+ [176.92.143.132]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9a9159a1a6sm597792766b.204.2024.10.24.03.46.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Oct 2024 03:46:06 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: [PATCH] lmb: Correctly unmap and free memory on errors
+Date: Thu, 24 Oct 2024 13:46:02 +0300
+Message-ID: <20241024104603.1340301-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1078; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=xOgGjohLNrNyx0KuuzAaBewXSh0F1M4B+rFRzW0p19U=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhnQplVlMVYtFG76VqzROaYl1X2347mlo4t1ndzz5XUVCd
- p/7KW7bEcvCIMjEICumyCJtc+XM3soZU4QvHpaDmcPKBDKEgYtTACbyaQnDPNXLj4Ufqv7fapT+
- 4nHSXAFb2z+znjDMFRDmypzqMXF1kJm/7Qw3zsisojIjAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF00000206:EE_|PH7PR12MB5685:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8a0530a1-444f-4154-dca1-08dcf418956c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?NIfm3s0hDICD2LCub9iH9qtRX7qn802sPAI1JbCDjG9Ipv1T8nAJtSq15f4W?=
- =?us-ascii?Q?7Xbbh7vVn0s9tHBEYksT+FY1fzVpna2z5z9zeNtocFMFiNUsjaTMIHlYZz31?=
- =?us-ascii?Q?VwOXCmKk5yAagqLhHcmH+LVU0MzmRPBFrBgTlTWDR4k5mXR2cg5l6NKHimvC?=
- =?us-ascii?Q?5odgHkwlYM+Hl+ckpgRVeeiz3aN8nh6SI/fmzX9UEGM2BnOxv3pLiVPdmVmd?=
- =?us-ascii?Q?m+Q4qLjcVqe5J32YWlrJ3VBAOK42wtTrNGgDwPHWUUyki4FpyuN9zGdQ4TM0?=
- =?us-ascii?Q?UdquR0OpQMQZKxngS3bkpwD1YknSWxooA0Snl40ji0vUuzZiwuPfdCpR4KL2?=
- =?us-ascii?Q?3TqIQrYrULRza6gPMgLDqlvkD5P7ZlKdPRG8tSJi/4Pkctdi6MO7DWl6Na5d?=
- =?us-ascii?Q?n+dGWVhl+eaoXZWM1c2HFyvUlOW8lLGBS7m+TzCuBZY9fVpCQ+qZC2rB/ALm?=
- =?us-ascii?Q?C4xK7paX8QibN8MdtFFS1zw3Ba+xpoaZQAht/0EaEoGCS3s3S5nFcxE8HXRP?=
- =?us-ascii?Q?N6cvsRgYFigwJvzdMl3PZLEunxkX7tGitotVCds2hM9sTZZJM09ye0QADfse?=
- =?us-ascii?Q?1kODHq7PMjx26Xk16Fa8Cyp8AqSoRxm3Qu2IDX2vqoUkt4CbH4zB5DtDusmP?=
- =?us-ascii?Q?JJDrhp5QZfmw++NVKPZwhm6wFa8bcAu8xSEZcaV3upX5qAdePJa//ygjCfOQ?=
- =?us-ascii?Q?6rzr/GK3PYbBpqH1ePmlPa2kQ826t/gLXPpjy521I9UagpBbcYp5amjG1BoL?=
- =?us-ascii?Q?yK2pGf2lPs7wAE7+KbyNcJaUDbsuk2mIeIwxFQrRTOrg1nWSWYtwrpqsJrfi?=
- =?us-ascii?Q?4m6UfnO2Hi8bLXSQjh7h18kgC2zec0je6EsunYYZIbi0b0AYTg0HoLNmWzVP?=
- =?us-ascii?Q?494YmlpGTSmljRUel6F5D/dE3YGQ8dC+cG8DBHpi/3T9b7HgRzrq5fAxuyBL?=
- =?us-ascii?Q?UBka1YptbAx70NXdORV2TCx5iE2h0U2NzabCxtuNLGgZ+CUHFnaosnmOdYfD?=
- =?us-ascii?Q?4DPRHkPF3BgoS6wgGxEQwQ4D3Ra/fG89kbw0XEB6NEFbGFwjbJGgZLDgzjZ+?=
- =?us-ascii?Q?OIXCA+Fpetll/DlprjaH3MdeVH5iNIaQbtJ6YFwQbobBpV3qlbcMiJ/pWfLA?=
- =?us-ascii?Q?zdI4caixSi7bYSeMSUX3mPXi5VWbMdCDGaXJ1sYYDlsD+16YoX1l2djMtiXM?=
- =?us-ascii?Q?ZajjNAO5/hZOQubv2n+SONFHwZdFYiazTZy1yP+6qKW3e/SfNP/qSO1vt9LL?=
- =?us-ascii?Q?JyIRPhm467cxgTTXAbcGWukve1gj5VdxoEOFAi1mOUsDRPo+vQ9ttNsO84ne?=
- =?us-ascii?Q?7hp6wKNRFkWl/XWavfnk+RlG350/1mRdzveGTi/6x6Gz4JMs8nSO8ZJXN6+a?=
- =?us-ascii?Q?wb2sz96vLPwT26tLm7siAV6YbcaGTNZ29YkioxCpIGEzOL7RnQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2024 10:42:40.1693 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8a0530a1-444f-4154-dca1-08dcf418956c
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF00000206.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5685
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,41 +92,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Saeed Nowshadi <saeed.nowshadi@amd.com>
+We never free and unmap the memory on errors and we never unmap it when
+freeing it. This won't cause any problems on actual hardware but it will
+on sandbox
 
-In previous version of pwm driver, the polarity of pwm were implemented
-in reverse.  In recent release, that issue in the driver is fixed,
-therefore, correctly set the polarity in the device tree.
-
-Signed-off-by: Saeed Nowshadi <saeed.nowshadi@amd.com>
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+Fixes: commit 22f2c9ed9f53 ("efi: memory: use the lmb API's for allocating and freeing memory")
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
+ lib/efi_loader/efi_memory.c | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
 
- arch/arm/dts/zynqmp-sc-revB.dts | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index 9f3f08769977..84be5532a655 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -451,7 +451,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+ 				enum efi_memory_type memory_type,
+ 				efi_uintn_t pages, uint64_t *memory)
+ {
+-	u64 len;
++	u64 efi_addr, len;
+ 	uint flags;
+ 	efi_status_t ret;
+ 	phys_addr_t addr;
+@@ -499,14 +499,17 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+ 		return EFI_INVALID_PARAMETER;
+ 	}
 
-diff --git a/arch/arm/dts/zynqmp-sc-revB.dts b/arch/arm/dts/zynqmp-sc-revB.dts
-index 1af3f643567e..c4f70581695d 100644
---- a/arch/arm/dts/zynqmp-sc-revB.dts
-+++ b/arch/arm/dts/zynqmp-sc-revB.dts
-@@ -3,7 +3,7 @@
-  * dts file for Xilinx ZynqMP Generic System Controller
-  *
-  * (C) Copyright 2021 - 2022, Xilinx, Inc.
-- * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
-+ * (C) Copyright 2022 - 2024, Advanced Micro Devices, Inc.
-  *
-  * Michal Simek <michal.simek@amd.com>
-  */
-@@ -80,7 +80,7 @@
- 	pwm-fan {
- 		compatible = "pwm-fan";
- 		status = "okay";
--		pwms = <&ttc0 2 40000 1>;
-+		pwms = <&ttc0 2 40000 0>;
- 	};
- };
- 
--- 
-2.43.0
+-	addr = (u64)(uintptr_t)map_sysmem(addr, 0);
++	efi_addr = (u64)(uintptr_t)map_sysmem(addr, 0);
+ 	/* Reserve that map in our memory maps */
+-	ret = efi_add_memory_map_pg(addr, pages, memory_type, true);
+-	if (ret != EFI_SUCCESS)
++	ret = efi_add_memory_map_pg(efi_addr, pages, memory_type, true);
++	if (ret != EFI_SUCCESS) {
+ 		/* Map would overlap, bail out */
++		lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
++		unmap_sysmem((void *)(uintptr_t)efi_addr);
+ 		return  EFI_OUT_OF_RESOURCES;
++	}
+
+-	*memory = addr;
++	*memory = efi_addr;
+
+ 	return EFI_SUCCESS;
+ }
+@@ -548,6 +551,8 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages)
+ 	if (ret != EFI_SUCCESS)
+ 		return EFI_NOT_FOUND;
+
++	unmap_sysmem((void *)(uintptr_t)memory);
++
+ 	return ret;
+ }
+
+--
+2.45.2
 
