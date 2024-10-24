@@ -4,81 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11A9BCE8E8B
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 15:37:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 797CECE8E8A
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 15:52:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CD6488E77;
-	Thu, 24 Oct 2024 17:37:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id C033888DFE;
+	Thu, 24 Oct 2024 17:52:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="N9Abxrrv";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F66688E17; Thu, 24 Oct 2024 17:37:50 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6587188E88
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 17:37:46 +0200 (CEST)
+ id 122D188D61; Thu, 24 Oct 2024 17:52:26 +0200 (CEST)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id E093588DFE
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 17:52:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e290200a560so1190673276.1
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 08:37:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1729784265; x=1730389065; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FXjAdAl+3TkcjhpeJvQQNtOiM979rMtIsz1Imc20Bww=;
- b=N9AbxrrvaZ5IvsMIO/gCkIbAqiG3LhOYsh6OcpoZ+YBGkK51gTHkxtnNuUysQQk1V7
- R44RhaU1VqEnrltKEKuhGyrJ/btugpFkBNLsA9ca6APIKNLbLRkVhBloZEP2ny3kVpHh
- PeoFafhtH5vugvtRevmCbNfbPUhoQSzzox8YCC+MPhjQScdUz9SKfA2dQYw2OOgpuWjq
- DAMbropBLT/4Rd8Es7cZLu+94d9nogGg6ndtFH2p60yl3yrL+8XcPjTmotdNrD6oGmhD
- 4v819YTHv7ghcIRWqYgjhloVUan5dNphD4J1Z2/LjQeF690p7ez0tAxv75VpzKbhiKl9
- M0TQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729784265; x=1730389065;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FXjAdAl+3TkcjhpeJvQQNtOiM979rMtIsz1Imc20Bww=;
- b=SpMILZM1mMoqUgCVe6r2WIkOYQowS+mgaWKJz6aGhIUziTpJS3d1rNf0x6VAUYid8B
- 6XwsTIv/rBcKwREiaXc4BoKqNu1ueseNAE3Q5q4YjtGW58Oyb15l6qamZ5Uw2sWqF8fk
- 4CtXKbmw2qmlykVpZoqYF7ZA3/q/68R/SwjOcgTvxzEfEayfcIP/qU0u4N5Uenle+y5K
- wX9QjzFZGyig36+qxxj58m3ASe45t37OJaUPhY7g4W+Odn44x0WaCBFwR7M3z2Lk87Bk
- NB20s5ZZTgZQaoypPcHHonod4d35ecUaq4y4i1bH5KciMqUl9Da6xfLgAdjjzS3ux5qG
- KHRg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVa575h58OFaPzhS1Tk1kx0m7vPlnyt8+LtoJx2KVM/Q7BEeQModEfoPWpDn3w8Psx5hY74ASY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx8BqlNjin5ZIHPTNakvwniJGUYvYKatJfYbq9NcVeadnbzfy5W
- cXF9CF5brhYIWIwMJt547TPr5SDlFBHbkkQ53yKl7u3CliTwNG3nvlKmKx110GaURG/E4UTU8RW
- e2x+JsgT4t+zyzKgq1UMqDRSplool7KXr8fipnA==
-X-Google-Smtp-Source: AGHT+IHCGW5Hq4avfvCOudJbYFx+h3N4yf3wipiM8//wXAwVIY/VsxM84fX85t7lmSyQbx8a6cYd25pXx03llnY9/lA=
-X-Received: by 2002:a05:6902:102b:b0:e28:f0e5:380b with SMTP id
- 3f1490d57ef6-e2e3a607229mr6697474276.4.1729784264455; Thu, 24 Oct 2024
- 08:37:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.11,229,1725289200"; 
+ d="asc'?scan'208";a="222905298"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie5.idc.renesas.com with ESMTP; 25 Oct 2024 00:52:18 +0900
+Received: from [10.226.93.183] (unknown [10.226.93.183])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 28C51400BC04;
+ Fri, 25 Oct 2024 00:52:09 +0900 (JST)
+Message-ID: <ec430629-eb17-4675-8f84-1d747ef2c0fc@bp.renesas.com>
+Date: Thu, 24 Oct 2024 16:52:08 +0100
 MIME-Version: 1.0
-References: <20241024-phytec_imx8m_optee-v1-0-fc6b78bf9a9b@phytec.de>
-In-Reply-To: <20241024-phytec_imx8m_optee-v1-0-fc6b78bf9a9b@phytec.de>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Thu, 24 Oct 2024 08:37:33 -0700
-Message-ID: <CAJ+vNU2vZM5B=BhNtsOHU-jGpSsAvR7Sfi91QCFRrOCMYX_Q5g@mail.gmail.com>
-Subject: Re: [PATCH RFC 0/6] imx8(m): add optee node to binman FIT image
-To: Yannic Moog <y.moog@phytec.de>
-Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, 
- Manuel Traut <manut@mecka.net>, Benjamin Hahn <b.hahn@phytec.de>,
- Teresa Remmet <t.remmet@phytec.de>, 
- Yashwanth Varakala <y.varakala@phytec.de>, u-boot@lists.denx.de,
- upstream@lists.phytec.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 13/14] arm64: dts: renesas: rzg2l: Enable Ethernet TXC
+ output
+To: Geert Uytterhoeven <geert+renesas@glider.be>,
+ Linus Walleij <linus.walleij@linaro.org>
+Cc: u-boot@lists.denx.de
+References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
+ <20241024152448.102-14-paul.barker.ct@bp.renesas.com>
+Content-Language: en-GB
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20241024152448.102-14-paul.barker.ct@bp.renesas.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------Ko0kRzq6cU6ZRA0jTwlcbpwu"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,110 +61,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 24, 2024 at 12:04=E2=80=AFAM Yannic Moog <y.moog@phytec.de> wro=
-te:
->
-> There have been attempts to get op-tee node integrated upstream in the
-> past [1][2]. The challenge is on how to handle the load and entry
-> addresses where the op-tee image should be loaded to.
-> Different SoC families and architectures have different RAM base
-> addresses. Further the final addresses can vary from board to board
-> (e.g. depending on populated RAM size).
-> As a result, I propose to solve the issue via device tree where the
-> optee node itself is defined the same as in previous solutions.
-> The difference in this approach is to omit the 'load' and 'entry'
-> properties from the node definition in the <soc>-u-boot.dtsi.
-> These must be defined in the <board>-u-boot.dtsi.
->
-> This solution avoids the route via kconfig while still allowing each
-> board to individually define the op-tee load address.
-> This is possible as tee-os node has the 'optional' property.
-> There is no need to keep parts in #ifdefs when no optee integration is
-> desired or possible
->
-> I included usage for PHYTEC boards for examples (with documentation).
->
-> There is one caveat however:
-> The series in its current form would break all other imx8m{m,n,p}
-> boards. This is due to the fact that they do not define entry and load
-> addr for the tee entry.
-> During runtime, spl_load_simple_fit fails for the OP-TEE node (no load
-> addr).
->
-> [...]
-> Can't load tee: No load address and no buffer
-> spl_load_simple_fit: can't load image loadables index 1 (ret =3D -105)
-> mmc_load_image_raw_sector: mmc block read error
-> SPL: failed to boot from all boot devices
->
-> [3] suggests (Any absent entries are dropped immediately) that
-> using this proposed solution should work and is allowed. However [4] on
-> the other hand clearly states that the entry does not get removed (which
-> is the case), rather its data set to 0.
->
-> To me the question now is on how to move forward.
-> - Is my proposed solution undesired in the sense that I try to use a
->   mechanism that current U-Boot/binman is not designed for?
-> - Should load_simple_fit check and discard optional entries right away
->   before doing any other processing?
-> - Should binman be changed so that optional entries do in fact get
->   removed instead of being zeroed?
->
-> I am asking for help regarding the questions above since that is not my
-> area of expertise.
->
-> [1] https://patchwork.ozlabs.org/project/uboot/patch/20230622173006.39218=
-91-1-tharvey@gateworks.com/
-> [2] https://patchwork.ozlabs.org/project/uboot/patch/ZeHDVr-Bzm935-5N@mec=
-ka.net/
-> [3] https://docs.u-boot.org/en/latest/develop/package/binman.html#optiona=
-l-entries
-> [4] https://docs.u-boot.org/en/latest/develop/package/binman.html#image-d=
-escription-format
-> see optional: description in [4]
->
-> ---
-> Yannic Moog (6):
->       arm: dts: imx8m: add fit optee node
->       arm: dts: imx8mp-phyboard-pollux: add optee load address
->       arm: dts: imx8mm-phygate-tauri-l: add optee load address
->       arm: dts: imx8mm-phyboard-polis: add optee load address
->       doc: phytec: imx8mp: add OP-TEE documentation
->       doc: phytec: imx8mm: add OP-TEE integration instructions
->
->  arch/arm/dts/imx8mm-phyboard-polis-rdk-u-boot.dtsi |  5 +++++
->  arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi    |  5 +++++
->  arch/arm/dts/imx8mm-u-boot.dtsi                    | 15 ++++++++++++-
->  arch/arm/dts/imx8mn-u-boot.dtsi                    | 15 ++++++++++++-
->  .../arm/dts/imx8mp-phyboard-pollux-rdk-u-boot.dtsi |  5 +++++
->  arch/arm/dts/imx8mp-u-boot.dtsi                    | 15 ++++++++++++-
->  doc/board/phytec/imx8mm-phygate-tauri-l.rst        | 26 ++++++++++++++++=
-+++++-
->  doc/board/phytec/phycore-imx8mm.rst                | 25 ++++++++++++++++=
-++++-
->  doc/board/phytec/phycore-imx8mp.rst                | 26 ++++++++++++++++=
-+++++-
->  9 files changed, 131 insertions(+), 6 deletions(-)
-> ---
-> base-commit: fd3f2e3f0edc1f87be4c5a39a0c81037d551c069
-> change-id: 20240903-phytec_imx8m_optee-8674ef012a36
->
-> Best regards,
-> --
-> Yannic Moog <y.moog@phytec.de>
->
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------Ko0kRzq6cU6ZRA0jTwlcbpwu
+Content-Type: multipart/mixed; boundary="------------yN1mLzRG6LdOIgYZ8UQlbGl3";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Geert Uytterhoeven <geert+renesas@glider.be>,
+ Linus Walleij <linus.walleij@linaro.org>
+Cc: u-boot@lists.denx.de
+Message-ID: <ec430629-eb17-4675-8f84-1d747ef2c0fc@bp.renesas.com>
+Subject: Re: [PATCH 13/14] arm64: dts: renesas: rzg2l: Enable Ethernet TXC
+ output
+References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
+ <20241024152448.102-14-paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20241024152448.102-14-paul.barker.ct@bp.renesas.com>
 
-Hi Yannic,
+--------------yN1mLzRG6LdOIgYZ8UQlbGl3
+Content-Type: multipart/mixed; boundary="------------IAERIS9Kac1j50E26unYT06Z"
 
-Thanks for looking at this - there is a need for a solution for easier
-integration of a TEE.
+--------------IAERIS9Kac1j50E26unYT06Z
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-What is wrong with adding the address via Kconfig? My attempt [1]
-failed due to something in CI that I just didn't know how to fix or
-have the time to look into.
+On 24/10/2024 16:24, Paul Barker wrote:
+> Configure ET0_TXC and ET1_TXC as outputs on the Renesas RZ/[GV]2L SMARC=
 
-Best Regards,
+> SoMs, as per RGMII specification.
+>=20
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+> Acked-by: Linus Walleij <linus.walleij@linaro.org>
+> Link: https://lore.kernel.org/20240625200316.4282-5-paul.barker.ct@bp.r=
+enesas.com
+> Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+>=20
+> [ upstream commit: 41c934da488d3a5a79148ead3b5c5eecac1b1d5d ]
+>=20
+> (cherry picked from commit 11cbf7bc3124f3d5267ea6aef8e4ba6d6b4f589e)
 
-Tim
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20230622173006.3921891=
--1-tharvey@gateworks.com/
+Apologies Geert and Linus W, this and the following patch are for
+U-Boot. `git send-email` Cc'd you based on the Reviewed-by & Acked-by
+tags. You can safely ignore these :)
+
+I'll see if I can add some notes to the relevant U-Boot docs [1] [2] to
+use the `--no-signed-off-cc` argument to `git send-email` for such
+patches, so that myself and others hopefully don't make the same mistake
+in the future.
+
+[1]: https://docs.u-boot.org/en/latest/develop/process.html#resyncing-of-=
+the-device-tree-subtree
+[2]: https://docs.u-boot.org/en/latest/develop/devicetree/control.html#re=
+syncing-with-devicetree-rebasing
+
+Thanks,
+
+--=20
+Paul Barker
+--------------IAERIS9Kac1j50E26unYT06Z
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------IAERIS9Kac1j50E26unYT06Z--
+
+--------------yN1mLzRG6LdOIgYZ8UQlbGl3--
+
+--------------Ko0kRzq6cU6ZRA0jTwlcbpwu
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZxptKAUDAAAAAAAKCRDbaV4Vf/JGvU7H
+AQCNTxA1nZx3ZVTwH3fRLRZm4UqXfrokaJTjmj8+WFaH6AD/RBrRhcP50zkXUBEZvPTX6gE9GONF
+i4w+hGwrsjSCiwo=
+=nRwe
+-----END PGP SIGNATURE-----
+
+--------------Ko0kRzq6cU6ZRA0jTwlcbpwu--
