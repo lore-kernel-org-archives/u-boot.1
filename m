@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41EAFCE8E94
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 16:20:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E823CE8E93
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 16:37:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B763388D61;
-	Thu, 24 Oct 2024 18:20:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8ADC388E63;
+	Thu, 24 Oct 2024 18:37:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cAEIrRg0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MzvdcneC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6807C88A4C; Thu, 24 Oct 2024 18:20:05 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4D13C88DA0; Thu, 24 Oct 2024 18:37:04 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E092A88EE0
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 18:20:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EAC388F47
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 18:36:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49OGJwGh013784;
- Thu, 24 Oct 2024 11:19:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729786798;
- bh=HgFLd3KprFBTYmxSp1X1gsHNoLzdzUsG6gTmY9J/YsE=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=cAEIrRg0kmmDju0jp3kQx9wK1Fo+aJ7Lk6ZZ7vwm7CDI0LYDO1Hi8L8lMXpsLAuKH
- wZdD8Sn8R/1AR1zExrjvwSbotQoV0QgKZz5seJY640+FIVOGylzwSiayedI74feZL5
- UgRUhf7AgpIJxorMedFIOSWJwzksTdmS9KFQXuBE=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49OGJwMg013879;
- Thu, 24 Oct 2024 11:19:58 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 24
- Oct 2024 11:19:58 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 24 Oct 2024 11:19:58 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49OGJw1X130545;
- Thu, 24 Oct 2024 11:19:58 -0500
-Date: Thu, 24 Oct 2024 11:19:58 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: Santhosh Kumar K <s-k6@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>, 
- <nm@ti.com>, <u-kumar1@ti.com>, <vigneshr@ti.com>,
- <u-boot@lists.denx.de>, <w.egorov@phytec.de>
-Subject: Re: [PATCH v4 2/8] ram: k3-ddrss: Add
- k3_ddrss_ddr_bank_base_size_calc() to solve 'calculations restricted to 32
- bits' issue
-Message-ID: <20241024161958.hxbtvbeaf52zsblc@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20241021044024.835846-1-s-k6@ti.com>
- <20241021044024.835846-3-s-k6@ti.com>
- <20241023143905.xbrqu6eabaer6wui@bryanbrattlof.com>
- <92a86113-f2b3-4b1a-942d-792aaf63a34d@ti.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a9a0ec0a94fso147412866b.1
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 09:36:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1729787814; x=1730392614; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=t6TIUzInM+WGxzp0qhyA/nltgSSe/VJh/dF6cDFNjvo=;
+ b=MzvdcneCZGp8OIAPzQIsiDIZw0bohRvz4wCGLIvWLd1EBPCNMetuaUGXrVye9mBCgb
+ PPbhS3frfaScO5e6s3TxnxQRWvVQAxwD0e/Wvph2ZWxkJV8CZz6LXn4aYlEvrfFC3ybB
+ p8wRFdemV7mZXjERp40ZYQrDPcsqrP7RUpLj0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729787814; x=1730392614;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t6TIUzInM+WGxzp0qhyA/nltgSSe/VJh/dF6cDFNjvo=;
+ b=rOVoksEh8FXeLnS4pQKVR8ooW+l947A0HRJd1ebiDcNxnI2YQ6Qj1Q9klnsFvYAT38
+ /lutAjx4xpyylOLuWgPX7GCgRMaD6wHkyIqfNrtiX6Cz+lpS1CyvF9ABG0MY8TYPFGMm
+ zsosfwOk9pcSkEguzDD9oHtEQVha/tcMxMHjX2+8RIbzwxWN9b2yNVfGO+EOXzKkzwYR
+ BENshYVDNlivyDKdaV/ot/XWNEBQeXmOb1bUBnLHWT3IIIZ8s0dQ6nh8+Hy79R8ScocN
+ qygnSTORe/XtDS8LfvavZq/yMzn0lkUddFrszMymw8mfqDCICU7WA7tL2T+Xs7/ZqNtE
+ y/hA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVDJXIUHlPTSbMKCU1GbA0AJYZPmKCK2yg8sCzW7etmjOSC/gvAF+4O+iYODoeAwLVftqUfe28=@lists.denx.de
+X-Gm-Message-State: AOJu0YwYu5KEel1Tpv0uBCzfPHtdWdZQxDulmqwhiFW792eWwt5Fo+Ch
+ U/7NiZDC40C9/LSVonJyc+u+J4AU/AjJ3HKofGynO9n1kPwSlC7cIPgCdqmWTjyF8tsH1+3wnss
+ 3ZBZIa4pW5dPQ6xrOocrkJueZgpjH+mGsvrJkk4oXg1ON7NJagl5J
+X-Google-Smtp-Source: AGHT+IEHMNz6x8TPB4UVka+8oBcoF+g4fUrKAEbIwDIEmtfnQLZJEQd1NLgHMahRUHvEwnvyABvcBwQubIr+sHXK8Bo=
+X-Received: by 2002:a17:907:2da1:b0:a9a:1796:30d0 with SMTP id
+ a640c23a62f3a-a9ad285fc4emr241277366b.62.1729787814386; Thu, 24 Oct 2024
+ 09:36:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <92a86113-f2b3-4b1a-942d-792aaf63a34d@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241024131627.77018-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241024131627.77018-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 24 Oct 2024 18:36:42 +0200
+Message-ID: <CAFLszTh7CCvLQbePJFB7u_QHnKrsCk5A8Mx05vXEUJwdmyJU-A@mail.gmail.com>
+Subject: Re: [PATCH 1/1] fs: ext4: document struct ext2_inode
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Michael Walle <michael@walle.cc>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,159 +84,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On October 24, 2024 thus sayeth Neha Malcom Francis:
-> Hi Bryan
-> 
-> On 23/10/24 20:09, Bryan Brattlof wrote:
-> > On October 21, 2024 thus sayeth Santhosh Kumar K:
-> > > As R5 is a 32 bit processor, the RAM banks' base and size calculation
-> > > is restricted to 32 bits, which results in wrong values if bank's base
-> > > is greater than 32 bits or bank's size is greater than or equal to 4GB.
-> > > 
-> > > So, add k3_ddrss_ddr_bank_base_size_calc() to get the base address and
-> > > size of RAM's banks from the device tree memory node, and store in a
-> > > 64 bit device private data which can be used for ECC reserved memory
-> > > calculation, Setting ECC range and Fixing up bank size in device tree
-> > > when ECC is enabled.
-> > > 
-> > > Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-> > > ---
-> > >   drivers/ram/k3-ddrss/k3-ddrss.c | 72 ++++++++++++++++++++++++++-------
-> > >   1 file changed, 57 insertions(+), 15 deletions(-)
-> > > 
-> > > diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-> > > index f2ab8cf2b49b..bd6783ebc2cd 100644
-> > > --- a/drivers/ram/k3-ddrss/k3-ddrss.c
-> > > +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-> > > @@ -147,6 +147,9 @@ struct k3_ddrss_desc {
-> > >   	struct k3_ddrss_ecc_region ecc_regions[K3_DDRSS_MAX_ECC_REGIONS];
-> > >   	u64 ecc_reserved_space;
-> > >   	bool ti_ecc_enabled;
-> > > +	unsigned long long ddr_bank_base[CONFIG_NR_DRAM_BANKS];
-> > > +	unsigned long long ddr_bank_size[CONFIG_NR_DRAM_BANKS];
-> > > +	unsigned long long ddr_ram_size;
-> > 
-> > Should we use the u64 typedef here?
-> > 
-> > >   };
-> > >   struct reginitdata {
-> > > @@ -668,11 +671,54 @@ static void k3_ddrss_lpddr4_preload_full_mem(struct k3_ddrss_desc *ddrss,
-> > >   	printf("ECC: priming DDR completed in %lu msec\n", get_timer(done));
-> > >   }
-> > > +static void k3_ddrss_ddr_bank_base_size_calc(struct k3_ddrss_desc *ddrss)
-> > > +{
-> > > +	int bank, na, ns, len, parent;
-> > > +	const fdt32_t *ptr, *end;
-> > > +
-> > > +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> > > +		ddrss->ddr_bank_base[bank] = 0;
-> > > +		ddrss->ddr_bank_size[bank] = 0;
-> > > +	}
-> > > +
-> > > +	ofnode mem = ofnode_null();
-> > > +
-> > > +	do {
-> > > +		mem = ofnode_by_prop_value(mem, "device_type", "memory", 7);
-> > > +	} while (!ofnode_is_enabled(mem));
-> > > +
-> > > +	const void *fdt = ofnode_to_fdt(mem);
-> > > +	int node = ofnode_to_offset(mem);
-> > > +	const char *property = "reg";
-> > > +
-> > > +	parent = fdt_parent_offset(fdt, node);
-> > > +	na = fdt_address_cells(fdt, parent);
-> > > +	ns = fdt_size_cells(fdt, parent);
-> > > +	ptr = fdt_getprop(fdt, node, property, &len);
-> > > +	end = ptr + len / sizeof(*ptr);
-> > > +
-> > > +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> > > +		if (ptr + na + ns <= end) {
-> > > +			if (CONFIG_IS_ENABLED(OF_TRANSLATE))
-> > > +				ddrss->ddr_bank_base[bank] = fdt_translate_address(fdt, node, ptr);
-> > > +			else
-> > > +				ddrss->ddr_bank_base[bank] = fdtdec_get_number(ptr, na);
-> > > +
-> > > +			ddrss->ddr_bank_size[bank] = fdtdec_get_number(&ptr[na], ns);
-> > > +		}
-> > > +
-> > > +		ptr += na + ns;
-> > > +	}
-> > > +
-> > > +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++)
-> > > +		ddrss->ddr_ram_size += ddrss->ddr_bank_size[bank];
-> > > +}
-> > > +
-> > >   static void k3_ddrss_lpddr4_ecc_calc_reserved_mem(struct k3_ddrss_desc *ddrss)
-> > >   {
-> > >   	fdtdec_setup_mem_size_base_lowest();
-> > > -	ddrss->ecc_reserved_space = gd->ram_size;
-> > > +	ddrss->ecc_reserved_space = ddrss->ddr_ram_size;
-> > >   	do_div(ddrss->ecc_reserved_space, 9);
-> > >   	/* Round to clean number */
-> > > @@ -696,7 +742,7 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
-> > >   	/* Preload the full memory with 0's using the BIST engine of
-> > >   	 * the LPDDR4 controller.
-> > >   	 */
-> > > -	k3_ddrss_lpddr4_preload_full_mem(ddrss, gd->ram_size, 0);
-> > > +	k3_ddrss_lpddr4_preload_full_mem(ddrss, ddrss->ddr_ram_size, 0);
-> > >   	/* Clear Error Count Register */
-> > >   	writel(0x1, base + DDRSS_ECC_1B_ERR_CNT_REG);
-> > > @@ -741,6 +787,8 @@ static int k3_ddrss_probe(struct udevice *dev)
-> > >   	k3_lpddr4_start(ddrss);
-> > > +	k3_ddrss_ddr_bank_base_size_calc(ddrss);
-> > > +
-> > >   	if (ddrss->ti_ecc_enabled) {
-> > >   		if (!ddrss->ddrss_ss_cfg) {
-> > >   			printf("%s: ss_cfg is required if ecc is enabled but not provided.",
-> > > @@ -761,30 +809,24 @@ static int k3_ddrss_probe(struct udevice *dev)
-> > >   int k3_ddrss_ddr_fdt_fixup(struct udevice *dev, void *blob, struct bd_info *bd)
-> > >   {
-> > > -	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
-> > > -	u64 start[CONFIG_NR_DRAM_BANKS];
-> > > -	u64 size[CONFIG_NR_DRAM_BANKS];
-> > >   	int bank;
-> > > +	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
-> > >   	if (ddrss->ecc_reserved_space == 0)
-> > >   		return 0;
-> > >   	for (bank = CONFIG_NR_DRAM_BANKS - 1; bank >= 0; bank--) {
-> > > -		if (ddrss->ecc_reserved_space > bd->bi_dram[bank].size) {
-> > > -			ddrss->ecc_reserved_space -= bd->bi_dram[bank].size;
-> > > -			bd->bi_dram[bank].size = 0;
-> > > +		if (ddrss->ecc_reserved_space > ddrss->ddr_bank_size[bank]) {
-> > > +			ddrss->ecc_reserved_space -= ddrss->ddr_bank_size[bank];
-> > > +			ddrss->ddr_bank_size[bank] = 0;
-> > >   		} else {
-> > > -			bd->bi_dram[bank].size -= ddrss->ecc_reserved_space;
-> > > +			ddrss->ddr_bank_size[bank] -= ddrss->ecc_reserved_space;
-> > >   			break;
-> > >   		}
-> > >   	}
-> > > -	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> > > -		start[bank] =  bd->bi_dram[bank].start;
-> > > -		size[bank] = bd->bi_dram[bank].size;
-> > > -	}
-> > > -
-> > > -	return fdt_fixup_memory_banks(blob, start, size, CONFIG_NR_DRAM_BANKS);
-> > > +	return fdt_fixup_memory_banks(blob, ddrss->ddr_bank_base,
-> > > +				      ddrss->ddr_bank_size, CONFIG_NR_DRAM_BANKS);
-> > >   }
-> > 
-> > Have we looked into passing this information via the global data pointer
-> > rather than fixing up the device tree on each boot phase?
-> > 
-> >      https://patchwork.ozlabs.org/project/uboot/patch/20180926215520.87168-23-sjg@chromium.org/
-> > 
-> > I don't see a clear path to pass GD from SPL to SPL but there is a TPL
-> > to SPL which I think we should be able to copy.
-> 
-> But we also make use of this to fix up the device tree that passes onto
-> kernel as well, I need to look into this patch though. But from a first
-> glance looks like we will be able to pass on the information from SPL->SPL
-> (with modification as you said) and SPL->U-Boot but U-Boot->Kernel would
-> still require this function to be present.
-> 
+On Thu, 24 Oct 2024 at 15:16, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Provide Sphinx style documentation for struct ext2_inode.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  include/ext_common.h | 30 +++++++++++++++++++++++++++---
+>  1 file changed, 27 insertions(+), 3 deletions(-)
+>
 
-I agree. If this scheme works out we can place this kernel fixup 
-function with the other OPN fixups we do though later on in the boot.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-  https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/mach-k3/common_fdt.c
+> diff --git a/include/ext_common.h b/include/ext_common.h
+> index b09bbde116a..a85ac04f79a 100644
+> --- a/include/ext_common.h
+> +++ b/include/ext_common.h
+> @@ -173,20 +173,35 @@ struct ext2_block_group {
+>         __le32 bg_reserved;
+>  };
+>
+> -/* The ext2 inode. */
+> +/**
+> + * struct ext2_inode - ext2 inode
+> + */
+>  struct ext2_inode {
+> +       /** @mode: file mode */
+>         __le16 mode;
+> +       /** @uid: lower 16 bits of owner UID */
+>         __le16 uid;
+> +       /** @size: lower 32 bits of file size */
+>         __le32 size;
+> +       /** @atime: last access time */
+
+Is this seconds since 1970?
+
+>         __le32 atime;
+> +       /** @ctime: last change time */
+>         __le32 ctime;
+> +       /** @mtime: last modification time */
+>         __le32 mtime;
+> +       /** @dtime: deletion time */
+>         __le32 dtime;
+> +       /** @gid: lower 16 bits of group ID */
+>         __le16 gid;
+> +       /** @nlinks: number of hard links */
+>         __le16 nlinks;
+> -       __le32 blockcnt;        /* Blocks of either 512 or block_size bytes */
+> +       /** @blockcnt: lower 32 bit of block count */
+> +       __le32 blockcnt;
+> +       /** @flags: inode flags */
+>         __le32 flags;
+
+Where are the values for these flags?
+
+> +       /** @osd1: operating system specific data */
+
+hyphen before specific
+
+>         __le32 osd1;
+> +       /** @b: block map or extent tree */
+>         union {
+>                 struct datablocks {
+>                         __le32 dir_blocks[INDIRECT_BLOCKS];
+> @@ -197,10 +212,19 @@ struct ext2_inode {
+>                 char symlink[60];
+>                 char inline_data[60];
+>         } b;
+> +       /** @version: file version (for NFS) */
+>         __le32 version;
+> +       /** @acl: lower 32 bit of extended attribute block */
+>         __le32 acl;
+
+Can you link to where the attributes are defined, or add the enum name?
+
+> -       __le32 size_high;       /* previously dir_acl, but never used */
+> +       /** @size_high - dir_acl on ext2/3, upper 32 size bits on ext4
+> +        *
+> +        * In ext2/3 this field was named i_dir_acl, though it was usually set
+> +        * to zero and never used.
+> +        */
+> +       __le32 size_high;
+> +       /** @fragment_addr - (obsolete) fragment address */
+>         __le32 fragment_addr;
+> +       /** @osd2: operating system specific data */
+>         __le32 osd2[3];
+>  };
+>
+> --
+> 2.45.2
+>
+
+Regards,
+Simon
