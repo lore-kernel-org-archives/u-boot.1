@@ -4,41 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B13CACE8E8B
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 15:27:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 334A2CE8E8A
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 15:28:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6B3989070;
-	Thu, 24 Oct 2024 17:26:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2DA1F8907D;
+	Thu, 24 Oct 2024 17:26:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B8B188FE4; Thu, 24 Oct 2024 17:26:02 +0200 (CEST)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id D8C3388F48
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 17:25:54 +0200 (CEST)
+ id 71FC689070; Thu, 24 Oct 2024 17:26:06 +0200 (CEST)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id F31A389023
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 17:25:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.11,229,1725289200"; d="scan'208";a="222903837"
+X-IronPort-AV: E=Sophos;i="6.11,229,1725289200"; d="scan'208";a="226888020"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 25 Oct 2024 00:25:53 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 25 Oct 2024 00:25:54 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.183])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 02C37400388C;
- Fri, 25 Oct 2024 00:25:49 +0900 (JST)
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id AF3454008C65;
+ Fri, 25 Oct 2024 00:25:42 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- Linus Walleij <linus.walleij@linaro.org>
-Subject: [PATCH 13/14] arm64: dts: renesas: rzg2l: Enable Ethernet TXC output
-Date: Thu, 24 Oct 2024 16:24:47 +0100
-Message-Id: <20241024152448.102-14-paul.barker.ct@bp.renesas.com>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH 11/14] net: ravb: Add RZ/G2L Support
+Date: Thu, 24 Oct 2024 16:24:45 +0100
+Message-Id: <20241024152448.102-12-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
@@ -60,112 +59,372 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Configure ET0_TXC and ET1_TXC as outputs on the Renesas RZ/[GV]2L SMARC
-SoMs, as per RGMII specification.
+The Renesas R9A07G044L (RZ/G2L) SoC includes two Gigabit Ethernet
+interfaces which can be supported using the ravb driver. Some RZ/G2L
+specific steps need to be taken during initialization due to differences
+between this SoC and previously supported SoCs. We also need to ensure
+that the module reset is de-asserted after the module clock is enabled
+but before any Ethernet register reads/writes take place.
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
-Acked-by: Linus Walleij <linus.walleij@linaro.org>
-Link: https://lore.kernel.org/20240625200316.4282-5-paul.barker.ct@bp.renesas.com
-Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
-
-[ upstream commit: 41c934da488d3a5a79148ead3b5c5eecac1b1d5d ]
-
-(cherry picked from commit 11cbf7bc3124f3d5267ea6aef8e4ba6d6b4f589e)
 ---
- .../src/arm64/renesas/rzg2l-smarc-som.dtsi    | 76 +++++++++++--------
- 1 file changed, 44 insertions(+), 32 deletions(-)
+ arch/arm/mach-renesas/Kconfig |   1 +
+ drivers/net/Kconfig           |   2 +
+ drivers/net/ravb.c            | 183 ++++++++++++++++++++++++++++++++--
+ 3 files changed, 176 insertions(+), 10 deletions(-)
 
-diff --git a/dts/upstream/src/arm64/renesas/rzg2l-smarc-som.dtsi b/dts/upstream/src/arm64/renesas/rzg2l-smarc-som.dtsi
-index 4409c47239b9..2b5e037ea9fa 100644
---- a/dts/upstream/src/arm64/renesas/rzg2l-smarc-som.dtsi
-+++ b/dts/upstream/src/arm64/renesas/rzg2l-smarc-som.dtsi
-@@ -180,41 +180,53 @@
- 	};
+diff --git a/arch/arm/mach-renesas/Kconfig b/arch/arm/mach-renesas/Kconfig
+index aeb55da609bd..d373ab56ce91 100644
+--- a/arch/arm/mach-renesas/Kconfig
++++ b/arch/arm/mach-renesas/Kconfig
+@@ -76,6 +76,7 @@ config RZG2L
+ 	imply MULTI_DTB_FIT
+ 	imply MULTI_DTB_FIT_USER_DEFINED_AREA
+ 	imply PINCTRL_RZG2L
++	imply RENESAS_RAVB
+ 	imply RENESAS_SDHI
+ 	imply RZG2L_GPIO
+ 	imply SCIF_CONSOLE
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index 89f7411bdf33..d009acdcd94f 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -822,6 +822,8 @@ config RENESAS_RAVB
+ 	depends on RCAR_64
+ 	select PHYLIB
+ 	select PHY_ETHERNET_ID
++	select BITBANGMII
++	select BITBANGMII_MULTI
+ 	help
+ 	  This driver implements support for the Ethernet AVB block in
+ 	  Renesas M3 and H3 SoCs.
+diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+index fb869cd0872e..e2ab929858c8 100644
+--- a/drivers/net/ravb.c
++++ b/drivers/net/ravb.c
+@@ -24,6 +24,7 @@
+ #include <asm/io.h>
+ #include <asm/global_data.h>
+ #include <asm/gpio.h>
++#include <reset.h>
  
- 	eth0_pins: eth0 {
--		pinmux = <RZG2L_PORT_PINMUX(28, 1, 1)>, /* ET0_LINKSTA */
--			 <RZG2L_PORT_PINMUX(27, 1, 1)>, /* ET0_MDC */
--			 <RZG2L_PORT_PINMUX(28, 0, 1)>, /* ET0_MDIO */
--			 <RZG2L_PORT_PINMUX(20, 0, 1)>, /* ET0_TXC */
--			 <RZG2L_PORT_PINMUX(20, 1, 1)>, /* ET0_TX_CTL */
--			 <RZG2L_PORT_PINMUX(20, 2, 1)>, /* ET0_TXD0 */
--			 <RZG2L_PORT_PINMUX(21, 0, 1)>, /* ET0_TXD1 */
--			 <RZG2L_PORT_PINMUX(21, 1, 1)>, /* ET0_TXD2 */
--			 <RZG2L_PORT_PINMUX(22, 0, 1)>, /* ET0_TXD3 */
--			 <RZG2L_PORT_PINMUX(24, 0, 1)>, /* ET0_RXC */
--			 <RZG2L_PORT_PINMUX(24, 1, 1)>, /* ET0_RX_CTL */
--			 <RZG2L_PORT_PINMUX(25, 0, 1)>, /* ET0_RXD0 */
--			 <RZG2L_PORT_PINMUX(25, 1, 1)>, /* ET0_RXD1 */
--			 <RZG2L_PORT_PINMUX(26, 0, 1)>, /* ET0_RXD2 */
--			 <RZG2L_PORT_PINMUX(26, 1, 1)>, /* ET0_RXD3 */
--			 <RZG2L_PORT_PINMUX(1, 0, 1)>;  /* IRQ2 */
-+		txc {
-+			pinmux = <RZG2L_PORT_PINMUX(20, 0, 1)>; /* ET0_TXC */
-+			output-enable;
-+		};
+ /* Registers */
+ #define RAVB_REG_CCC		0x000
+@@ -31,12 +32,14 @@
+ #define RAVB_REG_CSR		0x00C
+ #define RAVB_REG_APSR		0x08C
+ #define RAVB_REG_RCR		0x090
++#define RAVB_REG_RTC		0x0B4
+ #define RAVB_REG_TGC		0x300
+ #define RAVB_REG_TCCR		0x304
+ #define RAVB_REG_RIC0		0x360
+ #define RAVB_REG_RIC1		0x368
+ #define RAVB_REG_RIC2		0x370
+ #define RAVB_REG_TIC		0x378
++#define RAVB_REG_RIC3		0x388
+ #define RAVB_REG_ECMR		0x500
+ #define RAVB_REG_RFLR		0x508
+ #define RAVB_REG_ECSIPR		0x518
+@@ -44,6 +47,7 @@
+ #define RAVB_REG_GECMR		0x5b0
+ #define RAVB_REG_MAHR		0x5c0
+ #define RAVB_REG_MALR		0x5c8
++#define RAVB_REG_CSR0		0x800
+ 
+ #define CCC_OPC_CONFIG		BIT(0)
+ #define CCC_OPC_OPERATION	BIT(1)
+@@ -65,14 +69,24 @@
+ #define PIR_MDC			BIT(0)
+ 
+ #define ECMR_TRCCM		BIT(26)
++#define ECMR_RCPT		BIT(25)
+ #define ECMR_RZPF		BIT(20)
+ #define ECMR_PFR		BIT(18)
+ #define ECMR_RXF		BIT(17)
++#define ECMR_TXF		BIT(16)
+ #define ECMR_RE			BIT(6)
+ #define ECMR_TE			BIT(5)
+ #define ECMR_DM			BIT(1)
++#define ECMR_PRM		BIT(0)
+ #define ECMR_CHG_DM		(ECMR_TRCCM | ECMR_RZPF | ECMR_PFR | ECMR_RXF)
+ 
++#define CSR0_RPE		BIT(5)
++#define CSR0_TPE		BIT(4)
 +
-+		mux {
-+			pinmux = <RZG2L_PORT_PINMUX(28, 1, 1)>, /* ET0_LINKSTA */
-+				 <RZG2L_PORT_PINMUX(27, 1, 1)>, /* ET0_MDC */
-+				 <RZG2L_PORT_PINMUX(28, 0, 1)>, /* ET0_MDIO */
-+				 <RZG2L_PORT_PINMUX(20, 1, 1)>, /* ET0_TX_CTL */
-+				 <RZG2L_PORT_PINMUX(20, 2, 1)>, /* ET0_TXD0 */
-+				 <RZG2L_PORT_PINMUX(21, 0, 1)>, /* ET0_TXD1 */
-+				 <RZG2L_PORT_PINMUX(21, 1, 1)>, /* ET0_TXD2 */
-+				 <RZG2L_PORT_PINMUX(22, 0, 1)>, /* ET0_TXD3 */
-+				 <RZG2L_PORT_PINMUX(24, 0, 1)>, /* ET0_RXC */
-+				 <RZG2L_PORT_PINMUX(24, 1, 1)>, /* ET0_RX_CTL */
-+				 <RZG2L_PORT_PINMUX(25, 0, 1)>, /* ET0_RXD0 */
-+				 <RZG2L_PORT_PINMUX(25, 1, 1)>, /* ET0_RXD1 */
-+				 <RZG2L_PORT_PINMUX(26, 0, 1)>, /* ET0_RXD2 */
-+				 <RZG2L_PORT_PINMUX(26, 1, 1)>, /* ET0_RXD3 */
-+				 <RZG2L_PORT_PINMUX(1, 0, 1)>;  /* IRQ2 */
-+		};
- 	};
- 
- 	eth1_pins: eth1 {
--		pinmux = <RZG2L_PORT_PINMUX(37, 2, 1)>, /* ET1_LINKSTA */
--			 <RZG2L_PORT_PINMUX(37, 0, 1)>, /* ET1_MDC */
--			 <RZG2L_PORT_PINMUX(37, 1, 1)>, /* ET1_MDIO */
--			 <RZG2L_PORT_PINMUX(29, 0, 1)>, /* ET1_TXC */
--			 <RZG2L_PORT_PINMUX(29, 1, 1)>, /* ET1_TX_CTL */
--			 <RZG2L_PORT_PINMUX(30, 0, 1)>, /* ET1_TXD0 */
--			 <RZG2L_PORT_PINMUX(30, 1, 1)>, /* ET1_TXD1 */
--			 <RZG2L_PORT_PINMUX(31, 0, 1)>, /* ET1_TXD2 */
--			 <RZG2L_PORT_PINMUX(31, 1, 1)>, /* ET1_TXD3 */
--			 <RZG2L_PORT_PINMUX(33, 1, 1)>, /* ET1_RXC */
--			 <RZG2L_PORT_PINMUX(34, 0, 1)>, /* ET1_RX_CTL */
--			 <RZG2L_PORT_PINMUX(34, 1, 1)>, /* ET1_RXD0 */
--			 <RZG2L_PORT_PINMUX(35, 0, 1)>, /* ET1_RXD1 */
--			 <RZG2L_PORT_PINMUX(35, 1, 1)>, /* ET1_RXD2 */
--			 <RZG2L_PORT_PINMUX(36, 0, 1)>, /* ET1_RXD3 */
--			 <RZG2L_PORT_PINMUX(1, 1, 1)>;  /* IRQ3 */
-+		txc {
-+			pinmux = <RZG2L_PORT_PINMUX(29, 0, 1)>; /* ET1_TXC */
-+			output-enable;
-+		};
++#define GECMR_SPEED_10M		(0 << 4)
++#define GECMR_SPEED_100M	(1 << 4)
++#define GECMR_SPEED_1G		(2 << 4)
 +
-+		mux {
-+			pinmux = <RZG2L_PORT_PINMUX(37, 2, 1)>, /* ET1_LINKSTA */
-+				 <RZG2L_PORT_PINMUX(37, 0, 1)>, /* ET1_MDC */
-+				 <RZG2L_PORT_PINMUX(37, 1, 1)>, /* ET1_MDIO */
-+				 <RZG2L_PORT_PINMUX(29, 1, 1)>, /* ET1_TX_CTL */
-+				 <RZG2L_PORT_PINMUX(30, 0, 1)>, /* ET1_TXD0 */
-+				 <RZG2L_PORT_PINMUX(30, 1, 1)>, /* ET1_TXD1 */
-+				 <RZG2L_PORT_PINMUX(31, 0, 1)>, /* ET1_TXD2 */
-+				 <RZG2L_PORT_PINMUX(31, 1, 1)>, /* ET1_TXD3 */
-+				 <RZG2L_PORT_PINMUX(33, 1, 1)>, /* ET1_RXC */
-+				 <RZG2L_PORT_PINMUX(34, 0, 1)>, /* ET1_RX_CTL */
-+				 <RZG2L_PORT_PINMUX(34, 1, 1)>, /* ET1_RXD0 */
-+				 <RZG2L_PORT_PINMUX(35, 0, 1)>, /* ET1_RXD1 */
-+				 <RZG2L_PORT_PINMUX(35, 1, 1)>, /* ET1_RXD2 */
-+				 <RZG2L_PORT_PINMUX(36, 0, 1)>, /* ET1_RXD3 */
-+				 <RZG2L_PORT_PINMUX(1, 1, 1)>;  /* IRQ3 */
-+		};
- 	};
+ /* DMA Descriptors */
+ #define RAVB_NUM_BASE_DESC		16
+ #define RAVB_NUM_TX_DESC		8
+@@ -108,6 +122,16 @@
  
- 	gpio-sd0-pwr-en-hog {
+ #define RAVB_TX_TIMEOUT_MS		1000
+ 
++#define RAVB_RCV_BUFF_MAX		8192
++
++struct ravb_device_ops {
++	int (*mac_init)(struct udevice *dev);
++	int (*dmac_init)(struct udevice *dev);
++	int (*config)(struct udevice *dev);
++	int (*reset_deassert)(struct udevice *dev);
++	void (*reset_assert)(struct udevice *dev);
++};
++
+ struct ravb_desc {
+ 	u32	ctrl;
+ 	u32	dptr;
+@@ -131,6 +155,7 @@ struct ravb_priv {
+ 	struct mii_dev		*bus;
+ 	void __iomem		*iobase;
+ 	struct clk_bulk		clks;
++	struct reset_ctl	rst;
+ };
+ 
+ static inline void ravb_flush_dcache(u32 addr, u32 len)
+@@ -350,8 +375,25 @@ static int ravb_write_hwaddr(struct udevice *dev)
+ }
+ 
+ /* E-MAC init function */
+-static int ravb_mac_init(struct ravb_priv *eth)
++static int ravb_mac_init_rzg2l(struct udevice *dev)
+ {
++	struct ravb_priv *eth = dev_get_priv(dev);
++
++	setbits_32(eth->iobase + RAVB_REG_ECMR,
++		   ECMR_PRM | ECMR_RXF | ECMR_TXF | ECMR_RCPT |
++		   ECMR_TE | ECMR_RE | ECMR_RZPF |
++		   (eth->phydev->duplex ? ECMR_DM : 0));
++
++	/* Recv frame limit set register */
++	writel(RAVB_RCV_BUFF_MAX + ETH_FCS_LEN, eth->iobase + RAVB_REG_RFLR);
++
++	return 0;
++}
++
++static int ravb_mac_init_rcar(struct udevice *dev)
++{
++	struct ravb_priv *eth = dev_get_priv(dev);
++
+ 	/* Disable MAC Interrupt */
+ 	writel(0, eth->iobase + RAVB_REG_ECSIPR);
+ 
+@@ -364,12 +406,10 @@ static int ravb_mac_init(struct ravb_priv *eth)
+ /* AVB-DMAC init function */
+ static int ravb_dmac_init(struct udevice *dev)
+ {
++	struct ravb_device_ops *device_ops =
++		(struct ravb_device_ops *)dev_get_driver_data(dev);
+ 	struct ravb_priv *eth = dev_get_priv(dev);
+-	struct eth_pdata *pdata = dev_get_plat(dev);
+-	int ret = 0;
+-	int mode = 0;
+-	unsigned int delay;
+-	bool explicit_delay = false;
++	int ret;
+ 
+ 	/* Set CONFIG mode */
+ 	ret = ravb_reset(dev);
+@@ -385,6 +425,27 @@ static int ravb_dmac_init(struct udevice *dev)
+ 	/* Set little endian */
+ 	clrbits_le32(eth->iobase + RAVB_REG_CCC, CCC_BOC);
+ 
++	return device_ops->dmac_init(dev);
++}
++
++static int ravb_dmac_init_rzg2l(struct udevice *dev)
++{
++	struct ravb_priv *eth = dev_get_priv(dev);
++
++	/* Set Max Frame Length (RTC) */
++	writel(RAVB_RCV_BUFF_MAX, eth->iobase + RAVB_REG_RTC);
++
++	return 0;
++}
++
++static int ravb_dmac_init_rcar(struct udevice *dev)
++{
++	struct ravb_priv *eth = dev_get_priv(dev);
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	int mode = 0;
++	unsigned int delay;
++	bool explicit_delay = false;
++
+ 	/* AVB rx set */
+ 	writel(0x18000001, eth->iobase + RAVB_REG_RCR);
+ 
+@@ -429,22 +490,50 @@ static int ravb_dmac_init(struct udevice *dev)
+ 
+ static int ravb_config(struct udevice *dev)
+ {
++	struct ravb_device_ops *device_ops =
++		(struct ravb_device_ops *)dev_get_driver_data(dev);
+ 	struct ravb_priv *eth = dev_get_priv(dev);
+ 	struct phy_device *phy = eth->phydev;
+-	u32 mask = ECMR_CHG_DM | ECMR_RE | ECMR_TE;
+ 	int ret;
+ 
+ 	/* Configure AVB-DMAC register */
+ 	ravb_dmac_init(dev);
+ 
+ 	/* Configure E-MAC registers */
+-	ravb_mac_init(eth);
++	device_ops->mac_init(dev);
+ 	ravb_write_hwaddr(dev);
+ 
+ 	ret = phy_startup(phy);
+ 	if (ret)
+ 		return ret;
+ 
++	return device_ops->config(dev);
++}
++
++static int ravb_config_rzg2l(struct udevice *dev)
++{
++	struct ravb_priv *eth = dev_get_priv(dev);
++	struct phy_device *phy = eth->phydev;
++
++	writel(CSR0_TPE | CSR0_RPE, eth->iobase + RAVB_REG_CSR0);
++
++	/* Set the transfer speed */
++	if (phy->speed == 10)
++		writel(GECMR_SPEED_10M, eth->iobase + RAVB_REG_GECMR);
++	else if (phy->speed == 100)
++		writel(GECMR_SPEED_100M, eth->iobase + RAVB_REG_GECMR);
++	else if (phy->speed == 1000)
++		writel(GECMR_SPEED_1G, eth->iobase + RAVB_REG_GECMR);
++
++	return 0;
++}
++
++static int ravb_config_rcar(struct udevice *dev)
++{
++	struct ravb_priv *eth = dev_get_priv(dev);
++	struct phy_device *phy = eth->phydev;
++	u32 mask = ECMR_CHG_DM | ECMR_RE | ECMR_TE;
++
+ 	/* Set the transfer speed */
+ 	if (phy->speed == 100)
+ 		writel(0, eth->iobase + RAVB_REG_GECMR);
+@@ -491,8 +580,47 @@ static void ravb_stop(struct udevice *dev)
+ 	ravb_reset(dev);
+ }
+ 
++static int ravb_reset_deassert_rzg2l(struct udevice *dev)
++{
++	struct ravb_priv *eth = dev_get_priv(dev);
++	int ret;
++
++	ret = reset_get_by_index(dev, 0, &eth->rst);
++	if (ret < 0) {
++		dev_err(dev, "failed to get reset line\n");
++		return ret;
++	}
++
++	ret = reset_deassert(&eth->rst);
++	if (ret < 0) {
++		dev_err(dev, "failed to de-assert reset line\n");
++		reset_free(&eth->rst);
++	}
++
++	return ret;
++}
++
++static int ravb_reset_deassert_rcar(struct udevice *dev)
++{
++	return 0;
++}
++
++static void ravb_reset_assert_rzg2l(struct udevice *dev)
++{
++	struct ravb_priv *eth = dev_get_priv(dev);
++
++	reset_assert(&eth->rst);
++	reset_free(&eth->rst);
++}
++
++static void ravb_reset_assert_rcar(struct udevice *dev)
++{
++}
++
+ static int ravb_probe(struct udevice *dev)
+ {
++	struct ravb_device_ops *device_ops =
++		(struct ravb_device_ops *)dev_get_driver_data(dev);
+ 	struct eth_pdata *pdata = dev_get_plat(dev);
+ 	struct ravb_priv *eth = dev_get_priv(dev);
+ 	struct bb_miiphy_bus *phybus;
+@@ -530,6 +658,10 @@ static int ravb_probe(struct udevice *dev)
+ 	if (ret)
+ 		goto err_mdio_register;
+ 
++	ret = device_ops->reset_deassert(dev);
++	if (ret)
++		goto err_reset_deassert;
++
+ 	ret = ravb_reset(dev);
+ 	if (ret)
+ 		goto err_mdio_reset;
+@@ -541,6 +673,8 @@ static int ravb_probe(struct udevice *dev)
+ 	return 0;
+ 
+ err_mdio_reset:
++	device_ops->reset_assert(dev);
++err_reset_deassert:
+ 	clk_release_bulk(&eth->clks);
+ err_mdio_register:
+ 	mdio_free(mdiodev);
+@@ -551,8 +685,11 @@ err_mdio_alloc:
+ 
+ static int ravb_remove(struct udevice *dev)
+ {
++	struct ravb_device_ops *device_ops =
++		(struct ravb_device_ops *)dev_get_driver_data(dev);
+ 	struct ravb_priv *eth = dev_get_priv(dev);
+ 
++	device_ops->reset_assert(dev);
+ 	clk_release_bulk(&eth->clks);
+ 
+ 	free(eth->phydev);
+@@ -684,9 +821,35 @@ int ravb_of_to_plat(struct udevice *dev)
+ 	return 0;
+ }
+ 
++static const struct ravb_device_ops ravb_device_ops_rzg2l = {
++	.mac_init = ravb_mac_init_rzg2l,
++	.dmac_init = ravb_dmac_init_rzg2l,
++	.config = ravb_config_rzg2l,
++	.reset_deassert = ravb_reset_deassert_rzg2l,
++	.reset_assert = ravb_reset_assert_rzg2l,
++};
++
++static const struct ravb_device_ops ravb_device_ops_rcar = {
++	.mac_init = ravb_mac_init_rcar,
++	.dmac_init = ravb_dmac_init_rcar,
++	.config = ravb_config_rcar,
++	.reset_deassert = ravb_reset_deassert_rcar,
++	.reset_assert = ravb_reset_assert_rcar,
++};
++
+ static const struct udevice_id ravb_ids[] = {
+-	{ .compatible = "renesas,etheravb-rcar-gen3" },
+-	{ .compatible = "renesas,etheravb-rcar-gen4" },
++	{
++		.compatible = "renesas,etheravb-rcar-gen3",
++		.data = (ulong)&ravb_device_ops_rcar,
++	},
++	{
++		.compatible = "renesas,etheravb-rcar-gen4",
++		.data = (ulong)&ravb_device_ops_rcar,
++	},
++	{
++		.compatible = "renesas,rzg2l-gbeth",
++		.data = (ulong)&ravb_device_ops_rzg2l,
++	},
+ 	{ }
+ };
+ 
 -- 
 2.43.0
 
