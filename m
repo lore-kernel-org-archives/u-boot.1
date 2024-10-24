@@ -4,92 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1EF9CE8E91
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 16:39:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B448CE8E96
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 16:54:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29C7688DA0;
-	Thu, 24 Oct 2024 18:39:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9F4B188E63;
+	Thu, 24 Oct 2024 18:54:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P2dlSVJ+";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Zdmv4HHS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE8EB88E63; Thu, 24 Oct 2024 18:39:17 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 088E188F45; Thu, 24 Oct 2024 18:54:50 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D496788C66
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 18:39:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3ABD388D47
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 18:54:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9a1b71d7ffso164423866b.1
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 09:39:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-20c6f492d2dso11714275ad.0
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 09:54:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729787953; x=1730392753; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729788878; x=1730393678; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aM+uz/8XGrdDTiEwY+p7V0T4rS45nVzkRbXcbDG3G04=;
- b=P2dlSVJ+Ep5OTUNG1qXvgFvjx7tH7Hsg1EzlSUF8r/9VUzDn5jerjK30cjt+gR7Bau
- shcIYNBYzR3wqkoor3sdrI0rUWIvaXycSkg0v1ggnwjWyVFqVfiPi5cDmx66sUa9Cv61
- ZDr/jPa8l2aopqKC28pKvh98ZjEy2BO99bxTM=
+ bh=03g8IvNAY9k1SyLl4vqWo/5ueUKxgryxZv4X9lfwpiQ=;
+ b=Zdmv4HHSQEurAlfJYbqjnQnsMofFGvmjluAo0EKrMjOS92FEovfmGvhejUAu26d3iu
+ C+IInEiaY7mT/PlmA/DCjJtPWtxsWxcuxhePYPfeIZGyt23b65vcSBMNd0MRNcv1yI55
+ X2UGGJiM/+Pfvn1G9//RRdQBI7Rln1wxhULL6e1rb0H2J8vGrg9TL8dtA8NO2HI8Da4B
+ YcK0USYVocl2X9tM9Dd5Y1FSchYmY9vQ1FVnRTGVg0P21aeU5XEef5IH+76hLHSnerNe
+ 6NYD2GcxMN3Doyq+BvuOwpsiDaM6nxWFoG/uXxHgeGrf3NUkFrccOKZ7Cdc73/pe0Jly
+ G9qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729787953; x=1730392753;
+ d=1e100.net; s=20230601; t=1729788878; x=1730393678;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aM+uz/8XGrdDTiEwY+p7V0T4rS45nVzkRbXcbDG3G04=;
- b=S/PDAMYDzyzwJyTPFtzMWQPBxX2B+yKB5YM6yYU3598z0Qkte91PgFlzhOpKFfN5gm
- FBQSb0rFvs3LYuwgW0mTR2BSUjWEMNstig5HIdsOSSexzt/uoO2NnyiJItXbdDUsqslF
- QuzMZ93jmpexwh2EIINSSPDJp0+4hQs/eLMaZB6/l1c64lXCRrEJQ8zMhrrrOOGXCj5B
- mBz65sa3+GvwcOhiNNah4GVnzJQTFkPb3UVVPMSuLALdpNYyym8ICrZGiw89v0q0Auif
- 3CoDOcbNi26s4gWeeSKrGasdArB1AXLIdyj1ZEVTSUpJnKUWOhT/ZBDwiOMnRyzhDP8A
- gekQ==
-X-Gm-Message-State: AOJu0YwNB3/27RUwVUf1XhsROdnjZWXhNCFGEu2eSCQNXijfkWpZez37
- 4S2PhZ5CVPloXae51CVKL+cHEATzIqRNxCu5+HWKbURoig3Y0L5NNJjA95JdWRX+dcxHPz6lDU0
- fYFlTRDZL9OFFJuO/2Vd0JT83GBQyVgiVbPks
-X-Google-Smtp-Source: AGHT+IFZ1AqhcixIWt8NGItRo3ZInM2eMf4x/N6pRf1SRfAcE/9OzerY5j2pWxlmpPDcLTPxdF+mvH21vzJPhgwCcjs=
-X-Received: by 2002:a17:907:7d8e:b0:a8a:6c5d:63b2 with SMTP id
- a640c23a62f3a-a9abf8759a8mr696774666b.18.1729787953202; Thu, 24 Oct 2024
- 09:39:13 -0700 (PDT)
+ bh=03g8IvNAY9k1SyLl4vqWo/5ueUKxgryxZv4X9lfwpiQ=;
+ b=gvkkTXSe/yMFVaQsHDf9SYnVFza7kF6rss8D0TRlkFMVipdKXEpCxsiXenbNBecKLW
+ 1V9ResTw2K573ruW/Vw/L2kClhaR/lg9Gfdh/VrkOwhThpGm83JEj75lUvt6Q06KLwLt
+ wHmFSxfFPhW+hQE9aONzJ1OrrrPko4RpDdwqc8EgRSKfg+EIs5JPdIqheK4ImiePtnAD
+ XiGYJktYlnE/eCps7tv/AS7izbP0UbxqdK8xFP8UwnrpvaswIGFn8HSPfqUFkqLR9Cdh
+ tXlUuTORkl/RHk72Dtk0TKQEU1ML9QJSL15xfpctbOw+uLoABhciLs7GRVhIM/jBDSkS
+ kTqQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVmr54bpoeVP3BHFfsOyXl0qekthITglWrjRdffV4vCICVpnsUbOlCaXdDFwZoj9uptDQa3Xno=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzjit9kP2rZx7jeEy/58I2ZrZXoshZg9qD5t85v/H2xf22iOuF2
+ 7ieAneYEO5K7XxWyhEcq2H2rx8BxyLZyFRcAC2ZKiGX5OOkGlVK1oHUpvaPElbHooAiJYHgdK5q
+ CNFNnVLlzMuiS5b2HakC+LGqcAwEbvdbn9ZbYBw==
+X-Google-Smtp-Source: AGHT+IGTEEpiGQVMQpYk4gH8fcz/GAikzzQfQebWeVxz1UMMUDGvLmnUd1H0hx18PlaUr5nAwgcFIrMG/7aRnT8sUlI=
+X-Received: by 2002:a17:90a:ad91:b0:2e2:a2f0:e199 with SMTP id
+ 98e67ed59e1d1-2e76b5b6820mr7133906a91.8.1729788878255; Thu, 24 Oct 2024
+ 09:54:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241019152434.1017394-1-sjg@chromium.org>
- <20241019152434.1017394-7-sjg@chromium.org>
- <20241019175121.GA4959@bill-the-cat>
- <CAFLszTgBzr_nYtFKFEuHBLBUUF8qq92y+i=bzsVaKsHyt-990Q@mail.gmail.com>
- <20241021173253.GO4959@bill-the-cat>
- <CAFLszThgsF5BL8aSGozA3nAeox=g8bVARmSaBFedM=dbLT=UWA@mail.gmail.com>
- <20241022140246.GB4959@bill-the-cat>
- <CAFLszTg3pkZ3z7vH1j-Vafmw6OKhzvLQ4=X9vd+kDzmmUjOw_g@mail.gmail.com>
- <20241022175427.GH4959@bill-the-cat>
- <CAFLszTg=DJWnMf7Lun7ga0+_J4Vw6rpf32LMkdRLSy-WY+2U7g@mail.gmail.com>
- <20241023184121.GL4959@bill-the-cat>
-In-Reply-To: <20241023184121.GL4959@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 24 Oct 2024 18:39:00 +0200
-Message-ID: <CAFLszTgQB3Axj_FQwUURG0+u+z3SM5ypo88CfBntq+xUrzfOGw@mail.gmail.com>
-Subject: Re: [PATCH v7 6/7] test: efi: boot: Set up an image suitable for EFI
- testing
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, 
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+References: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
+ <20241024112449.1362319-2-ilias.apalodimas@linaro.org>
+ <CAEfUkUKxUC5gmqBaTDFyG=1p=7Eah=5HkysJP-zpXsHoLHwUYw@mail.gmail.com>
+ <CAC_iWjJnoRU7h+182EU9hXZnwfOVf0G5wPALtg4PRvM_MgDFgw@mail.gmail.com>
+In-Reply-To: <CAC_iWjJnoRU7h+182EU9hXZnwfOVf0G5wPALtg4PRvM_MgDFgw@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 24 Oct 2024 12:54:25 -0400
+Message-ID: <CAEfUkU+r9Nu6ZOjdDbuvUSSZXAzjc_WELDNNffwCYbQ4Yk7wmg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/6] mbedtls: Enable TLS 1.2 support
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: jerome.forissier@linaro.org, xypron.glpk@gmx.de, 
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Yang Xiwen <forbidden405@outlook.com>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Wei Ming Chen <jj251510319013@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,106 +100,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ilias,
 
-On Wed, Oct 23, 2024, 20:41 Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Oct 23, 2024 at 05:39:07AM +0200, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 22 Oct 2024 at 19:54, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Oct 22, 2024 at 07:00:35PM +0200, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Tue, 22 Oct 2024 at 16:02, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Tue, Oct 22, 2024 at 02:15:46PM +0200, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Mon, 21 Oct 2024 at 19:32, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Mon, Oct 21, 2024 at 08:31:10AM +0200, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Sat, 19 Oct 2024 at 11:51, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Sat, Oct 19, 2024 at 09:24:33AM -0600, Simon Glass wrote:
-> > > > > > > > >
-> > > > > > > > > > Create a new disk for use with tests, which contains the new 'testapp'
-> > > > > > > > > > EFI app specifically intended for testing the EFI loader.
-> > > > > > > > > >
-> > > > > > > > > > Attach it to the USB device, since most testing is currently done with
-> > > > > > > > > > mmc.
-> > > > > > > > > >
-> > > > > > > > > > Initially this image will be used to test the EFI bootmeth.
-> > > > > > > > > >
-> > > > > > > > > > Fix a stale comment in prep_mmc_bootdev() while we are here.
-> > > > > > > > > >
-> > > > > > > > > > For now this uses sudo and a compressed fallback file, like all the
-> > > > > > > > > > other bootstd tests. Once this series is in, the patch which moves
-> > > > > > > > > > this to use user-space tools will be cleaned up and re-submitted.
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > >
-> > > > > > > > > > ---
-> > > > > > > > > > Here is the patch to avoid sudo and CI fallback:
-> > > > > > > > > >
-> > > > > > > > > > [1] https://patchwork.ozlabs.org/project/uboot/patch/
-> > > > > > > > > > 20240802093322.15240-1-richard@nod.at/
-> > > > > > > > > >
-> > > > > > > > > > (no changes since v1)
-> > > > > > > > > >
-> > > > > > > > > >  arch/sandbox/dts/test.dts           |   2 +-
-> > > > > > > > > >  test/boot/bootdev.c                 |  18 +++++++++-
-> > > > > > > > > >  test/boot/bootflow.c                |   2 +-
-> > > > > > > > > >  test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
-> > > > > > > > >
-> > > > > > > > > This I think best illustrates the problem with "BOOTSBOX.EFI". This
-> > > > > > > > > image will work for CI up until I can figure out how to get access to
-> > > > > > > > > free arm64 servers to run some tests on and then it will fail.
-> > > > > > > >
-> > > > > > > > I don't believe so. Why do you think that?
-> > > > > > >
-> > > > > > > Because it includes the BOOTSBOX.EFI x86 binary file, and executes it?
-> > > > > > > Or did I miss where we update the contents to include that file as we
-> > > > > > > just built it (and so why have it included?) ?
-> > > > > >
-> > > > > > It works fine on x86 and I'm sure it will work fine on ARM as well.
-> > > > > > The file is built with the host compiler, just as U-Boot itself is.
-> > > > >
-> > > > > Erm, are you saying the BOOT/EFI/BOOTSBOX.EFI file that's in
-> > > > > test/py/tests/bootstd/flash1.img.xz doesn't need to exist and the test
-> > > > > replaces that, as it goes?
-> > > >
-> > > > No, I'm saying that sandbox uses that file, no matter the host
-> > > > architecture, and I don't need to create different versions of
-> > > > flash1.im.xz for each host architecture.
-> > > >
-> > > > I discussed this with Heinrich and he seems happy enough with the -N
-> > > > flag for his use case. I know how to replicate his use case and am
-> > > > going to try it soon.
-> > >
-> > > Yes, I'm just confused as to how the same BOOTSBOX.EFI binary file can
-> > > be executed as both x86-64 and aarch64. Because:
-> > > $ xz -k -d test/py/tests/bootstd/flash1.img.xz
-> > > $ sudo losetup -fP  test/py/tests/bootstd/flash1.img
-> > > $ sudo mount -o ro /dev/loop18p1 /mnt
-> > > $ file /mnt/EFI/BOOT/BOOTSBOX.EFI
-> > > /mnt/EFI/BOOT/BOOTSBOX.EFI: PE32+ executable (EFI application) x86-64 (stripped to external PDB), for MS Windows, 5 sections
-> > >
-> > > Seems unlikely to work on an aarch64 host. Which is why I asked if the
-> > > test actually replaced the contents of the file.
-> >
-> > Well, yes, for now the .xz is an x86_64 image, but I expect to be able
-> > to get rid of that fallback once my EFI test lands, so it should work
-> > fine on ARM.
->
-> So lets just re-work things to get this right from the start then
-> please.
+On Thu, 24 Oct 2024 at 10:44, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
-My understanding was that I offered to tidy up and send [1] after this
-series lands?
+> Hi Raymond
+>
+> On Thu, 24 Oct 2024 at 17:13, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Hi Ilias,
+> >
+> > On Thu, 24 Oct 2024 at 07:25, Ilias Apalodimas <
+> ilias.apalodimas@linaro.org> wrote:
+> >>
+> >> Since lwIP and mbedTLS have been merged we can tweak the config options
+> >> and enable TLS1.2 support. Add RSA and ECDSA by default and enable
+> >> enough block cipher modes of operation to be comatible with modern
+> >> TLS requirements and webservers
+> >>
+> >> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> >> ---
+> >>  lib/mbedtls/Kconfig              | 12 ++++++++
+> >>  lib/mbedtls/Makefile             | 31 +++++++++++++++++++
+> >>  lib/mbedtls/mbedtls_def_config.h | 52 ++++++++++++++++++++++++++++++++
+> >>  3 files changed, 95 insertions(+)
+> >>
+> >> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> >> index d71adc3648ad..f3e172633999 100644
+> >> --- a/lib/mbedtls/Kconfig
+> >> +++ b/lib/mbedtls/Kconfig
+> >> @@ -430,4 +430,16 @@ endif # SPL
+> >>
+> >>  endif # MBEDTLS_LIB_X509
+> >>
+> >> +config MBEDTLS_LIB_TLS
+> >> +       bool "MbedTLS TLS library"
+> >> +       depends on RSA_PUBLIC_KEY_PARSER_MBEDTLS
+> >> +       depends on X509_CERTIFICATE_PARSER_MBEDTLS
+> >> +       depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+> >> +       depends on ASN1_DECODER_MBEDTLS
+> >> +       depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+> >> +       depends on MBEDTLS_LIB_CRYPTO
+> >> +       help
+> >> +         Enable MbedTLS TLS library. If enabled HTTPs support will be
+> enabled
+> >> +         in wget
+> >> +
+> >>  endif # MBEDTLS_LIB
+> >> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+> >> index 83cb3c2fa705..ce0a61e40541 100644
+> >> --- a/lib/mbedtls/Makefile
+> >> +++ b/lib/mbedtls/Makefile
+> >> @@ -26,6 +26,7 @@ mbedtls_lib_crypto-y := \
+> >>         $(MBEDTLS_LIB_DIR)/platform_util.o \
+> >>         $(MBEDTLS_LIB_DIR)/constant_time.o \
+> >>         $(MBEDTLS_LIB_DIR)/md.o
+> >> +
+> >>  mbedtls_lib_crypto-$(CONFIG_$(SPL_)MD5_MBEDTLS) +=
+> $(MBEDTLS_LIB_DIR)/md5.o
+> >>  mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA1_MBEDTLS) +=
+> $(MBEDTLS_LIB_DIR)/sha1.o
+> >>  mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += \
+> >> @@ -54,3 +55,33 @@
+> mbedtls_lib_x509-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
+> >>         $(MBEDTLS_LIB_DIR)/x509_crt.o
+> >>  mbedtls_lib_x509-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER_MBEDTLS) += \
+> >>         $(MBEDTLS_LIB_DIR)/pkcs7.o
+> >> +
+> >> +#mbedTLS TLS support
+> >> +obj-$(CONFIG_MBEDTLS_LIB_TLS) += mbedtls_lib_tls.o
+> >> +mbedtls_lib_tls-y := \
+> >> +       $(MBEDTLS_LIB_DIR)/mps_reader.o \
+> >> +       $(MBEDTLS_LIB_DIR)/mps_trace.o \
+> >> +       $(MBEDTLS_LIB_DIR)/net_sockets.o \
+> >> +       $(MBEDTLS_LIB_DIR)/pk_ecc.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ssl_cache.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ssl_ciphersuites.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ssl_client.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ssl_cookie.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ssl_debug_helpers_generated.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ssl_msg.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ssl_ticket.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ssl_tls.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ssl_tls12_client.o \
+> >> +       $(MBEDTLS_LIB_DIR)/hmac_drbg.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ctr_drbg.o \
+> >> +       $(MBEDTLS_LIB_DIR)/entropy.o \
+> >> +       $(MBEDTLS_LIB_DIR)/entropy_poll.o \
+> >> +       $(MBEDTLS_LIB_DIR)/aes.o \
+> >> +       $(MBEDTLS_LIB_DIR)/cipher.o \
+> >> +       $(MBEDTLS_LIB_DIR)/cipher_wrap.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ecdh.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ecdsa.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ecp.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
+> >> +       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
+> >> +       $(MBEDTLS_LIB_DIR)/gcm.o \
+> >> diff --git a/lib/mbedtls/mbedtls_def_config.h
+> b/lib/mbedtls/mbedtls_def_config.h
+> >> index 1af911c2003f..ac8f0bbf2c0e 100644
+> >> --- a/lib/mbedtls/mbedtls_def_config.h
+> >> +++ b/lib/mbedtls/mbedtls_def_config.h
+> >> @@ -87,4 +87,56 @@
+> >>
+> >>  #endif /* #if defined CONFIG_MBEDTLS_LIB_X509 */
+> >>
+> >> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS)
+> >
+> >
+> > It would be better to use "#if defined CONFIG_MBEDTLS_LIB_TLS" here,
+> > as in SPL build it implicitly expects a "CONFIG_SPL_MBEDTLS_LIB_TLS"
+> > which we don't have.
+> >
+>
+> We usually prefer CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS) regardless of an
+> SPL flag or not.
+>
+> If the flag is never expected to be enabled in SPL build, that is OK.
+Because in SPL, CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS) will be always false
+without a CONFIG_SPL_MBEDTLS_LIB_TLS.
 
 Regards,
-Simon
+Raymond
