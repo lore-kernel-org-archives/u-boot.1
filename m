@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EE77D0BB5B
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 04:04:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 484C7D0BB5E
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 04:58:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BFFB892FD;
-	Thu, 24 Oct 2024 06:04:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 716AF892DE;
+	Thu, 24 Oct 2024 06:58:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fhehrqDt";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OuE0TnAI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F5B0892FD; Thu, 24 Oct 2024 06:04:14 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5DFC489323; Thu, 24 Oct 2024 05:57:58 +0200 (CEST)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A964892F5
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 06:04:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C30688B8F
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 05:57:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=n-francis@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49O442RT013667;
- Wed, 23 Oct 2024 23:04:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729742642;
- bh=f0y0412ProvZdS6/NzBoMwy1F5/1oNgwfg10MDRlQ6o=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=fhehrqDtFYzkC/WAp2UpQnw0v7nQugbmpgATbGNptBiw01ZL5RjMJuB/RAfMq2h50
- DyLTsKmGprzVbQRSLbpvkalqY0UXTvH0I//y5OOXEyi8f7RuLdrwh9nVPeqALKrZZ/
- vjwUKSC+eNUC/dc/sKLe+mLU5YYw3nsAJOE0xgJI=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49O4428h038803
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 23 Oct 2024 23:04:02 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
- Oct 2024 23:04:01 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 23 Oct 2024 23:04:01 -0500
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
- (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49O43wiK001332;
- Wed, 23 Oct 2024 23:03:59 -0500
-Message-ID: <689bda91-9d6a-4ae4-9ccf-b2e5af6c53cd@ti.com>
-Date: Thu, 24 Oct 2024 09:33:58 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jayaramudu.d@gmail.com
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e28fe3b02ffso506422276.3
+ for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 20:57:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1729742272; x=1730347072; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=jZHQ84DRIH27G5vgM8WbJNrz1h7tWpUMi0UuoM9LBI8=;
+ b=OuE0TnAIZjGwpjjLvXta+Mz5KGTSfaNfX7mu63Thjbmp08f/pXVONRJ+HmlPvctXo3
+ 55HgHkURhGmRv8cl4T3a0OgWVHMaPL1myUJLc0c9dHo6Z2GQTWHPW2pmkhIEHlWPR4pC
+ kVNklxaWvqQTVTu4HYN5MmD8k7WkT2/f3ft/SODs998Son4PnJni7wYF303dI3nYaun1
+ qROh5iiC6UwRdN7HXzjJcHHOCmU8TGT72cU3543MIrWNVnOAk5wG9WDQX2iUXLTf/F/2
+ YVhgkr1rdHYDE4IscFROH/zJawgpkqep/onwwcJ0HrntATHMpGChVSv1aaevkt4wgjGv
+ /mew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729742272; x=1730347072;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=jZHQ84DRIH27G5vgM8WbJNrz1h7tWpUMi0UuoM9LBI8=;
+ b=RixxN7G36IJX3TlV/aFGpM/oCJRXe/gtsvu9ePMVXEvnitr5gWDa5uot+ueV5n4hSw
+ pUHerDwovxWsN9Sra24nXhRjKWskL/tZIXTrrpZzuLRNhRK0D8mQlUfDr7SzuZI1egm/
+ DhNc/hMEEfeNFHFSNf5iqdt9+KqyyXUY3ZEdoaLdtb3Ub9TKJvDtG0VaPj6TaEHNvAWM
+ qxnp+zYQi8ksQStLWpt7qfVTCnc4kpJkX6W0hijzNrCYRXZQapfFMYIv05OsHHQhqGZX
+ A3GUqil2TgpvNuH0rglLVyCxXUeB4lOJah9lr9Zh4cTOKVXVCJ3ElcJBZSViXAUEXLDK
+ 3Luw==
+X-Gm-Message-State: AOJu0YyQSOpLsqUuJbo6h8XNSSmTPIZ1e/P0QSf4BmhmlrplmT2PZng1
+ 3yhQnNK7FNtZ8AKWImn/9WarwTyvsD7Qqf7npu2Xn59EDlOfEWrDykZx1LIrZSmmrdDPbvm5TpY
+ j9yaMx3VrpaZoxnKqvBxWm4Sz4aP0lorC
+X-Google-Smtp-Source: AGHT+IEawo/Adah6tms0wPf4uomr2zBsgV6MK4iwhfbQMTpTa0iRAP5jzbWyAh30yDwCtYcHhPw9Qat8kkauctKe4HU=
+X-Received: by 2002:a05:6902:178d:b0:e20:291e:7fe1 with SMTP id
+ 3f1490d57ef6-e2e3a65b32bmr5072334276.25.1729742271817; Wed, 23 Oct 2024
+ 20:57:51 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 5/8] drivers: ram: Kconfig: Add CONFIG_K3_INLINE_ECC
-To: Bryan Brattlof <bb@ti.com>, Santhosh Kumar K <s-k6@ti.com>
-CC: <trini@konsulko.com>, <m-chawdhry@ti.com>, <nm@ti.com>, <u-kumar1@ti.com>, 
- <vigneshr@ti.com>, <u-boot@lists.denx.de>, <w.egorov@phytec.de>
-References: <20241021044024.835846-1-s-k6@ti.com>
- <20241021044024.835846-6-s-k6@ti.com>
- <20241023144559.dtwggwlxwljpky6p@bryanbrattlof.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20241023144559.dtwggwlxwljpky6p@bryanbrattlof.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: "Jayaramudu .D" <jayaramudu.d@gmail.com>
+Date: Thu, 24 Oct 2024 09:27:40 +0530
+Message-ID: <CAB2y086kRpFK98gWm-8FVfC5me0UePwDMZdouvm+PkstaZkiEw@mail.gmail.com>
+Subject: Pincontrol driver
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Thu, 24 Oct 2024 06:58:33 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,51 +83,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Bryan
+Hi,
 
-On 23/10/24 20:15, Bryan Brattlof wrote:
-> On October 21, 2024 thus sayeth Santhosh Kumar K:
->> From: Neha Malcom Francis <n-francis@ti.com>
->>
->> Add CONFIG_K3_INLINE_ECC so that ECC functions can be compiled into R5 SPL
->> only when the config has been enabled.
->>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->>   drivers/ram/Kconfig | 10 ++++++++++
->>   1 file changed, 10 insertions(+)
->>
->> diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
->> index f7e357f24da7..533d0c629a64 100644
->> --- a/drivers/ram/Kconfig
->> +++ b/drivers/ram/Kconfig
->> @@ -116,6 +116,16 @@ config IMXRT_SDRAM
->>   	  to support external memories like sdram, psram & nand.
->>   	  This driver is for the sdram memory interface with the SEMC.
->>   
->> +config K3_INLINE_ECC
->> +	bool "Enable TI Inline ECC support"
->> +	depends on K3_DDRSS
->> +	help
->> +	  Enable Inline ECC support on K3 platforms. 1/9th of the SDRAM space
->> +	  is used for ECC storage and the rest 8/9th is available for system
->> +	  use. Enabling ECC increases boot time as the ECC protected regions
->> +	  need to be primed with a predefined value prior to enabling ECC
->> +	  check.
->> +
-> 
-> I agree size will always be a complaint at such an early stage of boot
-> but we're already adding the ECC configuration in the memory{} node.
-> 
-> We should do one or the other but not both. It would be hard to debug
-> problems if someone added the protected{} node but not enable this
-> config
+I am working on a board which AMD soc, trying to enable gpio at uboot, but
+I did not see AMD pincontrol driver in U-boot 2024. Could you please
+suggest any info.
 
-Actually I do agree with this, maybe we can get rid of the flag ti,ecc-enable 
-which is redundant. In multi-DDR systems, it was still a possibility that we 
-could use it to select the DDR we want ECC enabled on, but that hasn't been 
-tested nor does it make any sense since they'll be interleaved anyways.
-
--- 
-Thanking You
-Neha Malcom Francis
+Thanks
+Jayaram
