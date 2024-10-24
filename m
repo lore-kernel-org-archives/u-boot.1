@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E75BCCE8E8A
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 15:27:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D275CE8E8A
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 15:27:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F208589051;
-	Thu, 24 Oct 2024 17:25:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 711EF8902E;
+	Thu, 24 Oct 2024 17:25:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B0BD88FB9; Thu, 24 Oct 2024 17:25:47 +0200 (CEST)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id D50D088FB9
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 17:25:38 +0200 (CEST)
+ id 685C389024; Thu, 24 Oct 2024 17:25:56 +0200 (CEST)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id E19798902E
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 17:25:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.11,229,1725289200"; d="scan'208";a="226888011"
+X-IronPort-AV: E=Sophos;i="6.11,229,1725289200"; d="scan'208";a="222903828"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 25 Oct 2024 00:25:38 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 25 Oct 2024 00:25:46 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.183])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 54F1D4008C7C;
- Fri, 25 Oct 2024 00:25:35 +0900 (JST)
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 90033400388C;
+ Fri, 25 Oct 2024 00:25:31 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -35,9 +35,9 @@ To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Ramon Fried <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH 09/14] net: ravb: Support up to two instances
-Date: Thu, 24 Oct 2024 16:24:43 +0100
-Message-Id: <20241024152448.102-10-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH 08/14] net: phy: ksz90x1: Simplify ksz9131_config_rgmii_delay
+Date: Thu, 24 Oct 2024 16:24:42 +0100
+Message-Id: <20241024152448.102-9-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
@@ -59,96 +59,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Several Renesas SoCs in the RZ/G2L family have two Ethernet interfaces.
-To support this second interface, we extend the bb_miiphy_buses[] array
-and keep track of the current bus index in ravb_of_to_plat().
-
-Support for an arbitrary number of instances is not implemented - it is
-expected that bb_miiphy_buses will be replaced with a proper device
-model/uclass implementation before that is needed.
+We can call phy_modify_mmd() instead of manually calling drv->readext()
+and drv->writeext().
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 ---
- drivers/net/ravb.c | 28 ++++++++++++++++++++++++----
- 1 file changed, 24 insertions(+), 4 deletions(-)
+ drivers/net/phy/micrel_ksz90x1.c | 26 ++++++++------------------
+ 1 file changed, 8 insertions(+), 18 deletions(-)
 
-diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
-index f1401d2f6ed2..9b33ce929618 100644
---- a/drivers/net/ravb.c
-+++ b/drivers/net/ravb.c
-@@ -11,6 +11,7 @@
- #include <clk.h>
- #include <cpu_func.h>
- #include <dm.h>
-+#include <dm/device_compat.h>
- #include <errno.h>
- #include <log.h>
- #include <miiphy.h>
-@@ -494,6 +495,7 @@ static int ravb_probe(struct udevice *dev)
+diff --git a/drivers/net/phy/micrel_ksz90x1.c b/drivers/net/phy/micrel_ksz90x1.c
+index b64046e0bc72..6515d8feb9be 100644
+--- a/drivers/net/phy/micrel_ksz90x1.c
++++ b/drivers/net/phy/micrel_ksz90x1.c
+@@ -502,8 +502,7 @@ static int ksz9131_of_load_all_skew_values(struct phy_device *phydev)
+ 
+ static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
  {
- 	struct eth_pdata *pdata = dev_get_plat(dev);
- 	struct ravb_priv *eth = dev_get_priv(dev);
-+	struct bb_miiphy_bus *phybus;
- 	struct mii_dev *mdiodev;
- 	void __iomem *iobase;
+-	struct phy_driver *drv = phydev->drv;
+-	u16 rxcdll_val, txcdll_val, val;
++	u16 rxcdll_val, txcdll_val;
  	int ret;
-@@ -513,7 +515,8 @@ static int ravb_probe(struct udevice *dev)
  
- 	mdiodev->read = bb_miiphy_read;
- 	mdiodev->write = bb_miiphy_write;
--	bb_miiphy_buses[0].priv = eth;
-+	phybus = (struct bb_miiphy_bus *)pdata->priv_pdata;
-+	phybus->priv = eth;
- 	snprintf(mdiodev->name, sizeof(mdiodev->name), dev->name);
+ 	switch (phydev->interface) {
+@@ -527,24 +526,15 @@ static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
+ 		return 0;
+ 	}
  
- 	ret = mdio_register(mdiodev);
-@@ -625,7 +628,17 @@ int ravb_bb_delay(struct bb_miiphy_bus *bus)
+-	val = drv->readext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+-			   KSZ9131RN_RXC_DLL_CTRL);
+-	val &= ~KSZ9131RN_DLL_CTRL_BYPASS;
+-	val |= rxcdll_val;
+-	ret = drv->writeext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+-			    KSZ9131RN_RXC_DLL_CTRL, val);
+-	if (ret)
++	ret = phy_modify_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
++			     KSZ9131RN_RXC_DLL_CTRL, KSZ9131RN_DLL_CTRL_BYPASS,
++			     rxcdll_val);
++	if (ret < 0)
+ 		return ret;
  
- struct bb_miiphy_bus bb_miiphy_buses[] = {
- 	{
--		.name		= "ravb",
-+		.name		= "ravb0",
-+		.init		= ravb_bb_init,
-+		.mdio_active	= ravb_bb_mdio_active,
-+		.mdio_tristate	= ravb_bb_mdio_tristate,
-+		.set_mdio	= ravb_bb_set_mdio,
-+		.get_mdio	= ravb_bb_get_mdio,
-+		.set_mdc	= ravb_bb_set_mdc,
-+		.delay		= ravb_bb_delay,
-+	},
-+	{
-+		.name		= "ravb1",
- 		.init		= ravb_bb_init,
- 		.mdio_active	= ravb_bb_mdio_active,
- 		.mdio_tristate	= ravb_bb_mdio_tristate,
-@@ -646,10 +659,16 @@ static const struct eth_ops ravb_ops = {
- 	.write_hwaddr		= ravb_write_hwaddr,
- };
- 
-+static int bb_miiphy_index;
-+
- int ravb_of_to_plat(struct udevice *dev)
- {
- 	struct eth_pdata *pdata = dev_get_plat(dev);
--	const fdt32_t *cell;
-+
-+	if (bb_miiphy_index >= bb_miiphy_buses_num) {
-+		dev_err(dev, "ravb driver supports only 1 or 2 devices!\n");
-+		return -EOVERFLOW;
-+	}
- 
- 	pdata->iobase = dev_read_addr(dev);
- 
-@@ -662,7 +681,8 @@ int ravb_of_to_plat(struct udevice *dev)
- 	if (cell)
- 		pdata->max_speed = fdt32_to_cpu(*cell);
- 
--	sprintf(bb_miiphy_buses[0].name, dev->name);
-+	pdata->priv_pdata = &bb_miiphy_buses[bb_miiphy_index];
-+	sprintf(bb_miiphy_buses[bb_miiphy_index++].name, dev->name);
- 
- 	return 0;
+-	val = drv->readext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+-			   KSZ9131RN_TXC_DLL_CTRL);
+-
+-	val &= ~KSZ9131RN_DLL_CTRL_BYPASS;
+-	val |= txcdll_val;
+-	ret = drv->writeext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+-			    KSZ9131RN_TXC_DLL_CTRL, val);
+-
+-	return ret;
++	return phy_modify_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
++			      KSZ9131RN_TXC_DLL_CTRL, KSZ9131RN_DLL_CTRL_BYPASS,
++			      txcdll_val);
  }
+ 
+ /* Silicon Errata DS80000693B
 -- 
 2.43.0
 
