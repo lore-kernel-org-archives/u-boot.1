@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9246CE8E62
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 11:25:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E749BCE8E63
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 11:25:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2CC588EE1;
-	Thu, 24 Oct 2024 13:25:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 52AB188EAE;
+	Thu, 24 Oct 2024 13:25:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XSHyKMKv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m9r0clgB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0F9B88EF7; Thu, 24 Oct 2024 13:25:14 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 201FD88F2C; Thu, 24 Oct 2024 13:25:17 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9AE088EE0
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 13:25:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C171288C7B
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 13:25:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a9a3dc089d8so99619866b.3
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 04:25:12 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-539f58c68c5so1369191e87.3
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 04:25:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729769112; x=1730373912; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Zs+NGUFYtW9cLpOstJpdzvzW6CNb2t22qVaYqByjTRU=;
- b=XSHyKMKvAyi+v3lZHS7Pg7j81gjNQ1lA3dLOlCBOJZaNsoHzlsmXvNG7z6YjwWVABR
- /NSFYKMD6NhMSp0Q/S6vuL5bghXGTnMaSCn0bq/RXLmCmVvpTDVzLS10STEfwPj06BL1
- 2lQgFBRMfS+SmeWfYNPY9HX2QzLEh1nS/R62D/hHE34jGCs9+b2CzYzURy1PsCFcK+wJ
- VrCTNKtoIbMZRpzXX1S6lDR8yqOd+NDhCPG34eV7gk1gW7JNb+V562IX99faEie4+/py
- EPOW2/Mwzf45iGuJ/bLO8QCo+uOxVvFKb5BlVYSE+QLJHxDfDiAPUyr6mm+84DdKiWum
- F6Kg==
+ d=linaro.org; s=google; t=1729769101; x=1730373901; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Kh2XcqplF8dOanxBgkX+l66sGLE22K0OCMnxo4JF+Dg=;
+ b=m9r0clgBKU/Sx3/BzXXE7CVRSltcSFyK2Sa/X2jJHce42s9KtA8gq4isaFBm7jhOC6
+ Owk8d18jq6UzVsQd75lJ9hcey59d81T0loFDxdae6E6nFosItEYsPubyQwYgisqL3pDI
+ wwvITpuajpDFPcJSeL2nj1YK7NOi5O5hjl2FnHHfwRv4EXOUDXrVfLDl9C2IyKq4GtLu
+ PlEq2kTmwZj7Sp+2CnNUS7VdKLjJtfX8UDOxpC5YeGTCTbY8Z55mefGUQuQgcv9kY65E
+ 9XD77O31CholuPBG17yRd87Djysj2Ao0uX++IUw4ObktSphvlGfwkuWfgsaIViLG8Klq
+ p90A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729769112; x=1730373912;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Zs+NGUFYtW9cLpOstJpdzvzW6CNb2t22qVaYqByjTRU=;
- b=eYzPsUWxgn6EOlp6Khq+AzjAt9nk7ZuxnYv01xz6ZCgSKO/xaWHWY44ZSOFIe5/y1A
- SBNrAoyXT7rfmXJxAhe1fQKQhCqLjTMScW8hhp7RHIpu53VtTC7vCecPWSM0UhaTbZYj
- /yJqqqQuJlsC61I9c8JycPpvQVy+cWypqZHogXHyMZtfB+wSR9oNjaGvIGdbllWV90h5
- tV0LXhK42JHDmp/y4ftThy//hHwcO3AEEChcja59oxlHKgQyWO8mS7WVltsrSigQKCQp
- yk/SxuYbaNfMUO2Ec1Yp2jyjagrlWQo8+3NfF4Hf7U/+noQCWe4lhBBETvXEg2+0Xzfy
- uq6Q==
+ d=1e100.net; s=20230601; t=1729769101; x=1730373901;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Kh2XcqplF8dOanxBgkX+l66sGLE22K0OCMnxo4JF+Dg=;
+ b=J33RSaVYioMqEji0tewFNkPiovGKNdgw2ONGJLDXuNGnH42h/NGsMdWdeQQz0O6MFQ
+ srh/w3Pz89bPo+7/3Q9F270yXfLZlb1NcZBXgqE2Gg5s6sRxSYhya/d6OY6GDSgq4eYi
+ rtNU3O+04e5oZlyEzOUgJSWKYZl8y5yu400aCSbHhZVuWAflo7w1LBBDxAOltI32Xy2m
+ Ub1q2vAx1C+PcZPiQXylnlWS8B3Si4xcOTQfUcFQvxOXJI3CxTCnBxj5CFi20BDFxKdo
+ FC2wbqEXcQ4jFVOQndRv65uFbHK+vSpHBmxJg64sX3XPA5p3SjIabcoktRPfKMzH7z8s
+ 3vvQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX5BFtT7e78JcPimOUTDBo05BfjDRwiW/QgKmWJ++X5xId5xkEPMuASwkKtp2yK2mN1d1H+Wls=@lists.denx.de
-X-Gm-Message-State: AOJu0YyOzEjjQDxjCQsRwACrHS4jOiRCEtGw3qF/gTdr6ZQ1jjnzZCtE
- d98fNJp0EcyZAY5G52pK26eF+Ntq6cZ+rrqqLDzB7kSPHSrO6grSQD9ROmT2TZ0=
-X-Google-Smtp-Source: AGHT+IEGtSMTnL+mrcKO5up5w1N6m11mGYTRqsoDVcG5/F0SRkbQ1KjjyS2K+5Ny+XmBfLoUmxxzrQ==
-X-Received: by 2002:a17:907:9496:b0:a99:46dd:f397 with SMTP id
- a640c23a62f3a-a9abf96f1f5mr510022966b.64.1729769112305; 
- Thu, 24 Oct 2024 04:25:12 -0700 (PDT)
+ AJvYcCWCFmrXWmu3yLcu3nyFBIjNh9zAJMJPi1IsDyA/TpWieJ1sRuAhiGP/1vAVvESqqjaodseP4do=@lists.denx.de
+X-Gm-Message-State: AOJu0YxsueYaD8CnTnC1FNTSoIATxG8jA8aDu+4QiGesd1qRFJVskgF3
+ kWUHX/8TVHSE0Yc56G1rOMMr/o6Xd7AS1yv85ZZGMCFA0geR3P1lP+Ryx+WIDb4=
+X-Google-Smtp-Source: AGHT+IH6/ytfVIZqzqCJHOdXyxi/um83Xy1NPmJXPtVV+NpdW2myMu5beC24hZQH4aRWZI362tgL4w==
+X-Received: by 2002:a05:6512:3ca7:b0:538:9e36:7b6a with SMTP id
+ 2adb3069b0e04-53b1a34d04emr5551563e87.32.1729769100976; 
+ Thu, 24 Oct 2024 04:25:00 -0700 (PDT)
 Received: from localhost.localdomain (ppp176092143132.access.hol.gr.
  [176.92.143.132]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a91572c0dsm611534466b.177.2024.10.24.04.25.05
+ a640c23a62f3a-a9a91572c0dsm611534466b.177.2024.10.24.04.24.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 04:25:10 -0700 (PDT)
+ Thu, 24 Oct 2024 04:24:59 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: jerome.forissier@linaro.org,
 	raymond.mao@linaro.org
@@ -75,17 +74,15 @@ Cc: xypron.glpk@gmx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Peter Robinson <pbrobinson@gmail.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
  Wei Ming Chen <jj251510319013@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH v2 1/6] mbedtls: Enable TLS 1.2 support
-Date: Thu, 24 Oct 2024 14:24:08 +0300
-Message-ID: <20241024112449.1362319-2-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 0/6] Enable https for wget
+Date: Thu, 24 Oct 2024 14:24:07 +0300
+Message-ID: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
-References: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,146 +101,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since lwIP and mbedTLS have been merged we can tweak the config options
-and enable TLS1.2 support. Add RSA and ECDSA by default and enable
-enough block cipher modes of operation to be comatible with modern
-TLS requirements and webservers
+Hi all,
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- lib/mbedtls/Kconfig              | 12 ++++++++
- lib/mbedtls/Makefile             | 31 +++++++++++++++++++
- lib/mbedtls/mbedtls_def_config.h | 52 ++++++++++++++++++++++++++++++++
- 3 files changed, 95 insertions(+)
+This is a respin of [0] adding https support to wget. In short
 
-diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-index d71adc3648ad..f3e172633999 100644
---- a/lib/mbedtls/Kconfig
-+++ b/lib/mbedtls/Kconfig
-@@ -430,4 +430,16 @@ endif # SPL
- 
- endif # MBEDTLS_LIB_X509
- 
-+config MBEDTLS_LIB_TLS
-+	bool "MbedTLS TLS library"
-+	depends on RSA_PUBLIC_KEY_PARSER_MBEDTLS
-+	depends on X509_CERTIFICATE_PARSER_MBEDTLS
-+	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
-+	depends on ASN1_DECODER_MBEDTLS
-+	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
-+	depends on MBEDTLS_LIB_CRYPTO
-+	help
-+	  Enable MbedTLS TLS library. If enabled HTTPs support will be enabled
-+	  in wget
-+
- endif # MBEDTLS_LIB
-diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
-index 83cb3c2fa705..ce0a61e40541 100644
---- a/lib/mbedtls/Makefile
-+++ b/lib/mbedtls/Makefile
-@@ -26,6 +26,7 @@ mbedtls_lib_crypto-y := \
- 	$(MBEDTLS_LIB_DIR)/platform_util.o \
- 	$(MBEDTLS_LIB_DIR)/constant_time.o \
- 	$(MBEDTLS_LIB_DIR)/md.o
-+
- mbedtls_lib_crypto-$(CONFIG_$(SPL_)MD5_MBEDTLS) += $(MBEDTLS_LIB_DIR)/md5.o
- mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA1_MBEDTLS) += $(MBEDTLS_LIB_DIR)/sha1.o
- mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += \
-@@ -54,3 +55,33 @@ mbedtls_lib_x509-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
- 	$(MBEDTLS_LIB_DIR)/x509_crt.o
- mbedtls_lib_x509-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER_MBEDTLS) += \
- 	$(MBEDTLS_LIB_DIR)/pkcs7.o
-+
-+#mbedTLS TLS support
-+obj-$(CONFIG_MBEDTLS_LIB_TLS) += mbedtls_lib_tls.o
-+mbedtls_lib_tls-y := \
-+	$(MBEDTLS_LIB_DIR)/mps_reader.o \
-+	$(MBEDTLS_LIB_DIR)/mps_trace.o \
-+	$(MBEDTLS_LIB_DIR)/net_sockets.o \
-+	$(MBEDTLS_LIB_DIR)/pk_ecc.o \
-+	$(MBEDTLS_LIB_DIR)/ssl_cache.o \
-+	$(MBEDTLS_LIB_DIR)/ssl_ciphersuites.o \
-+	$(MBEDTLS_LIB_DIR)/ssl_client.o \
-+	$(MBEDTLS_LIB_DIR)/ssl_cookie.o \
-+	$(MBEDTLS_LIB_DIR)/ssl_debug_helpers_generated.o \
-+	$(MBEDTLS_LIB_DIR)/ssl_msg.o \
-+	$(MBEDTLS_LIB_DIR)/ssl_ticket.o \
-+	$(MBEDTLS_LIB_DIR)/ssl_tls.o \
-+	$(MBEDTLS_LIB_DIR)/ssl_tls12_client.o \
-+	$(MBEDTLS_LIB_DIR)/hmac_drbg.o \
-+	$(MBEDTLS_LIB_DIR)/ctr_drbg.o \
-+	$(MBEDTLS_LIB_DIR)/entropy.o \
-+	$(MBEDTLS_LIB_DIR)/entropy_poll.o \
-+	$(MBEDTLS_LIB_DIR)/aes.o \
-+	$(MBEDTLS_LIB_DIR)/cipher.o \
-+	$(MBEDTLS_LIB_DIR)/cipher_wrap.o \
-+	$(MBEDTLS_LIB_DIR)/ecdh.o \
-+	$(MBEDTLS_LIB_DIR)/ecdsa.o \
-+	$(MBEDTLS_LIB_DIR)/ecp.o \
-+	$(MBEDTLS_LIB_DIR)/ecp_curves.o \
-+	$(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
-+	$(MBEDTLS_LIB_DIR)/gcm.o \
-diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
-index 1af911c2003f..ac8f0bbf2c0e 100644
---- a/lib/mbedtls/mbedtls_def_config.h
-+++ b/lib/mbedtls/mbedtls_def_config.h
-@@ -87,4 +87,56 @@
- 
- #endif /* #if defined CONFIG_MBEDTLS_LIB_X509 */
- 
-+#if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS)
-+#include "rtc.h"
-+
-+/* Generic options */
-+#define MBEDTLS_ENTROPY_HARDWARE_ALT
-+#define MBEDTLS_HAVE_TIME
-+#define MBEDTLS_PLATFORM_MS_TIME_ALT
-+#define MBEDTLS_PLATFORM_TIME_MACRO rtc_mktime
-+#define MBEDTLS_PLATFORM_C
-+#define MBEDTLS_SSL_CLI_C
-+#define MBEDTLS_SSL_TLS_C
-+#define MBEDTLS_CIPHER_C
-+#define MBEDTLS_MD_C
-+#define MBEDTLS_CTR_DRBG_C
-+#define MBEDTLS_AES_C
-+#define MBEDTLS_ENTROPY_C
-+#define MBEDTLS_NO_PLATFORM_ENTROPY
-+#define MBEDTLS_SSL_PROTO_TLS1_2
-+#define MBEDTLS_SSL_SERVER_NAME_INDICATION
-+#define MBEDTLS_KEY_EXCHANGE_PSK_ENABLED
-+
-+/* RSA */
-+#define MBEDTLS_KEY_EXCHANGE_RSA_ENABLED
-+#define MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED
-+#define MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED
-+#define MBEDTLS_GCM_C
-+
-+/* ECDSA */
-+#define MBEDTLS_ECDSA_C
-+#define MBEDTLS_ECDH_C
-+#define MBEDTLS_ECDSA_DETERMINISTIC
-+#define MBEDTLS_HMAC_DRBG_C
-+#define MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
-+#define MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
-+#define MBEDTLS_CAN_ECDH
-+#define MBEDTLS_PK_CAN_ECDSA_SIGN
-+#define MBEDTLS_ECP_C
-+#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
-+#define MBEDTLS_ECP_DP_BP256R1_ENABLED
-+#define MBEDTLS_ECP_DP_BP384R1_ENABLED
-+#define MBEDTLS_ECP_DP_BP512R1_ENABLED
-+
-+#endif /* #if defined CONFIG_MBEDTLS_LIB_TLS */
-+
- #endif /* #if defined CONFIG_MBEDTLS_LIB */
--- 
+patch#1 enables the crypto algorithms we need in mbedTLS
+patches#2, #3 enable anf fix the lwIP part we need
+patch#4 is adding https:// parsing support in our wget
+patch#5 is making https:// the default for QEMU lwip defconfig so
+people can easily test
+and finaly patch#6 updates our documentation
+
+[0] https://lore.kernel.org/u-boot/20241018142235.715571-1-ilias.apalodimas@linaro.org/
+
+Changes since v1:
+- re-arranged the Makefile objects so they only get compiled when TLS ie enabled
+- Fix all the applicable remarks Simon had on the wget patches
+- Fixed the title of a patch pointer out by Peter
+- Rebased on -master
+- Collected r-b tags
+
+Ilias Apalodimas (4):
+  mbedtls: Enable TLS 1.2 support
+  net: lwip: Enable https:// support for wget
+  configs: Enable https for wget on qemu arm64
+  doc: uefi: Describe UEFI HTTPs boot
+
+Javier Tia (2):
+  net: lwip: Update lwIP for mbedTLS > 3.0 support and enable https
+  net: lwip: Add Support Server Name Indication support
+
+ cmd/Kconfig                                   | 19 +++++
+ configs/qemu_arm64_lwip_defconfig             |  1 +
+ doc/develop/uefi/uefi.rst                     | 45 ++++++++++-
+ lib/lwip/Makefile                             |  3 +
+ .../src/apps/altcp_tls/altcp_tls_mbedtls.c    | 50 +++++++-----
+ lib/lwip/lwip/src/core/tcp_out.c              | 10 +--
+ lib/lwip/lwip/src/include/lwip/altcp_tls.h    |  2 +-
+ lib/lwip/u-boot/lwipopts.h                    |  6 ++
+ lib/mbedtls/Kconfig                           | 12 +++
+ lib/mbedtls/Makefile                          | 31 ++++++++
+ lib/mbedtls/mbedtls_def_config.h              | 52 +++++++++++++
+ net/lwip/Kconfig                              |  2 +-
+ net/lwip/wget.c                               | 78 +++++++++++++++++--
+ 13 files changed, 272 insertions(+), 39 deletions(-)
+
+--
 2.45.2
 
