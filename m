@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30867D0BB66
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 07:04:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 289A1D0BB69
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 07:04:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD2EA88E63;
-	Thu, 24 Oct 2024 09:04:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CA9008932D;
+	Thu, 24 Oct 2024 09:04:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="AVIPONLz";
+	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="u8kCDFrZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4B4788D97; Thu, 24 Oct 2024 09:04:23 +0200 (CEST)
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur03on20710.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260c::710])
+ id 8FBA788D97; Thu, 24 Oct 2024 09:04:24 +0200 (CEST)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on20726.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::726])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7873188E63
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 09:04:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C55CC89330
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 09:04:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XrAV6J6EHB+2SSQcXBhx5+eWZdjljo41g1IkIxL+7efU/OgKEoKavv1NdhFEqzq4xsEj57qs2B1NSjr6aeVrfQL3047NzchepOt+gdvnc0fjUNW8LpUxm7YkLpEfGLV9h9jqQRNy5+KzTuIXLu6ynaZa4ajN2/+YLliLDRQiWKhVdUfbXQFEWQYT0rJ7lb9aU0hSnzuGvFIFNbkMWis6yzzdrzHlEWsAFb4Y2Nfa9hhH/nViEAOkGf/MzWHebLmlPDj0dzMQRMS0SnzSlvwXHHodNS5ntfPzK76iPs7zDRiOIaGj4oLkjs0RawW025pxtFcJT5OgTP/hkz+WUJ8pMQ==
+ b=Z9foY4ewiDOo9edwLBFP0cPbmyVp44ekpKLDYEf37zANs8a5gReShJ8qSz+1ltz63Y1yMQdONAxYH8qnZy5KZ/a/Fk/cZTQQQQQFMLzJjXIOLjCoZz2Qux6jXOknH7e+jPm7dre5DoPKKAnTfVP+ULXcQ2byfAFrFjNASvKyTeiRiM2Tiey+5j3JExTykAbJqH25MilIEJgjZQXbQs6UZhMzKb0O+w4BIoTcUqO7iY3OG4tolAAJ+5U0dRy+PN4ck5dUnPqfE5smDS1ZNB5UASmL8R694/Vyfk/LepTEiJi2woDeCVFYy9ma5+ZTk0ludtmtcJ2UFzwQRC2DqjG6yQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4Hp4nqlNqRLVMY+oCcOSD7Bgxu/kb6L9HkY7dr45pfE=;
- b=eKNYVJoOGz8r+42DpNNdtkMQdHaqxJSZ6gM+UGA5BSWhHIB7mhxXqndcLsMaJZu1Wl5G1M8r+KS3Q1e/tfnEWfhJkXuuOoUu3JW9urGfHMcyB0sP13MYqDhcx5qC/Fx6yzpHZZkfBs5513XUvT5XD2hV7cPq0shQDYe18Cq24f1rdf4HzhurmYj6cJ2jGAT0ouT7LzNrZMUs///JZuVWrG6omJXruFF9e7ogLJjyHxuihXHRGCOWVxt/2gsjf8i7YnbTf2hZ3i8OVHmhzmH6Ay65DCMi7usFiQROb/H06lXUY9zwXoRSWxriN/MRDRcsumMP4Pp6KOPeVm9ZowDkSw==
+ bh=BEHVMyV6CDIG73Btqb/UD3yIIYCB3CrqkMonuXMt3ns=;
+ b=AaUyp6ipcdXSwAr9nG2Z7It0b47w/b0xSNflrNgPZByTAAR0sJwK3O+4ZueWwwL6KIJFFtscfs9+RvVMlm+szvHZa97qf0a4EmVqFFdGkfUXhEAtp+K56Q2Bvmsv4QPg13i2ouoZ+M2hMjErNztGdxPClIz9L2VNsKSb+MqBvfdkkLJ7ja79Gbd3+11Tar+d4lC2rCcKdp9B8xWMW8Vq4WINnXxKBgbkIQQpFQCC7BRVOGpcfmFXMxww8ha6rANmb7TtGJzIhTHYcIhbzO4hYOGRq2lbQD2A3cHYRu2yV+mU5SAd5vigo4oMLyUnHZk1M9DGLPoqxuHssqteUfQanQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
  dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
@@ -41,18 +41,18 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=phytecmesstechnikgmbh.onmicrosoft.com;
  s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4Hp4nqlNqRLVMY+oCcOSD7Bgxu/kb6L9HkY7dr45pfE=;
- b=AVIPONLzsavxPzdofhAYCslyxsr8RCQ0jyAxNMQN31mRw+EMgyCMexHl51e7QQRbxvuR42ONpUfis60/rch8JSvSsc7YrQg7ejsm8FDbb2yM5WGOqS5t0WjW4gLkmfCFQhMdWE3C5aSU69PBeTrjuFPYJB4/kVSg73QdomQ/Dbo=
-Received: from AS9PR05CA0336.eurprd05.prod.outlook.com (2603:10a6:20b:490::28)
- by GV1P195MB2657.EURP195.PROD.OUTLOOK.COM (2603:10a6:150:1f4::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.16; Thu, 24 Oct
- 2024 07:04:14 +0000
+ bh=BEHVMyV6CDIG73Btqb/UD3yIIYCB3CrqkMonuXMt3ns=;
+ b=u8kCDFrZvkK7s78aNYZSSveUXO1pVRhHieyCgd9WBXlDL0GeFd/i/ek6GrzpDrOtCrh2Sb+Cy+gdRcxWiT1WQXwrXGQnn7yjJ/dBJcMIMwLbp1TPIg2pBADmohvGVnbdv4GAwEi/eleiNwhZ+3fXHxYcObGvK0AUImlxqZ4JCSU=
+Received: from AS9PR05CA0337.eurprd05.prod.outlook.com (2603:10a6:20b:490::9)
+ by PR3P195MB0959.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:a3::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.17; Thu, 24 Oct
+ 2024 07:04:17 +0000
 Received: from AMS0EPF000001B6.eurprd05.prod.outlook.com
- (2603:10a6:20b:490:cafe::be) by AS9PR05CA0336.outlook.office365.com
- (2603:10a6:20b:490::28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.17 via Frontend
- Transport; Thu, 24 Oct 2024 07:04:14 +0000
+ (2603:10a6:20b:490:cafe::25) by AS9PR05CA0337.outlook.office365.com
+ (2603:10a6:20b:490::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.18 via Frontend
+ Transport; Thu, 24 Oct 2024 07:04:17 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -62,23 +62,23 @@ Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
 Received: from Diagnostix.phytec.de (91.26.50.189) by
  AMS0EPF000001B6.mail.protection.outlook.com (10.167.16.170) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8093.14 via Frontend Transport; Thu, 24 Oct 2024 07:04:14 +0000
+ 15.20.8093.14 via Frontend Transport; Thu, 24 Oct 2024 07:04:17 +0000
 Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 24 Oct
- 2024 09:04:10 +0200
+ 2024 09:04:12 +0200
 Received: from lws-moog.phytec.de (172.25.32.62) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 24 Oct
- 2024 09:04:10 +0200
+ 2024 09:04:11 +0200
 From: Yannic Moog <y.moog@phytec.de>
-Date: Thu, 24 Oct 2024 09:03:37 +0200
-Subject: [PATCH RFC 3/6] arm: dts: imx8mm-phygate-tauri-l: add optee load
- address
+Date: Thu, 24 Oct 2024 09:03:40 +0200
+Subject: [PATCH RFC 6/6] doc: phytec: imx8mm: add OP-TEE integration
+ instructions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20241024-phytec_imx8m_optee-v1-3-fc6b78bf9a9b@phytec.de>
+Message-ID: <20241024-phytec_imx8m_optee-v1-6-fc6b78bf9a9b@phytec.de>
 References: <20241024-phytec_imx8m_optee-v1-0-fc6b78bf9a9b@phytec.de>
 In-Reply-To: <20241024-phytec_imx8m_optee-v1-0-fc6b78bf9a9b@phytec.de>
 To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, "NXP
@@ -94,59 +94,58 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Berlix.phytec.de
  (172.25.0.12)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001B6:EE_|GV1P195MB2657:EE_
-X-MS-Office365-Filtering-Correlation-Id: d8b84f85-c810-48e3-b473-08dcf3fa1188
+X-MS-TrafficTypeDiagnostic: AMS0EPF000001B6:EE_|PR3P195MB0959:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9b2b3145-1cc4-4d0e-8d33-08dcf3fa1346
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?aENjd0FLVnMvWEd0NHhQRitTRHY4VTdSM3lTcXM4QnQxc2RJZGVraUM2bjll?=
- =?utf-8?B?TnhkTzNDMFUwb3ozZnp6ZTE4Z2ZWeE5FTG5mWWFVNnFLL0I0QVRCMHlWSUJI?=
- =?utf-8?B?M1J6djNuNFU4Rit0SUg4SUlLMi8vazNSdVB5STdRa0JxN2Y2T1VhYzAvSVQx?=
- =?utf-8?B?K1ZFc3hDaFozSTNDZ3R4WkxUTTRpWDZpNDlqNk5TYUU4Vm1CREpDcE1KNlpy?=
- =?utf-8?B?VHRvNlRhTWtqbmtweEkxMWU3V0VKOEVVeDFRdzRVdUt4U3MyUStGK1hYS2tW?=
- =?utf-8?B?SjRaQ2JLeGJVYXd1cnZCdHNuUGpOZ2U5dXJCUWlSRzAvbkl5SmZVaHpoV2Zn?=
- =?utf-8?B?ZEhNQ1orUXk4bUQxWi9TMVE3YXJGRGt0S1QvUmFsZUcwVUhtbWplYXJ4cUEw?=
- =?utf-8?B?MDQvVWJSWDZpNTVaNVUxYnBvVVo5Q3pjbS9xTnpJSWdJblNEVXdia1BLWllw?=
- =?utf-8?B?bFQrU0t3RUUya1RpejAyQURGSXFjQWpqVmhiYzJRb3Vjem1QbnRXZCtkNzkv?=
- =?utf-8?B?QWd2OHNKdndYK3VSZ1IwQ004dzJUVnBDK2Irblg3cVFhSmdYQlJOT21PMm1y?=
- =?utf-8?B?VkJJWUxzcm5kempXSGtGL1lqb05oUDE2emdPczZLdVgyOGtYNW9HQUp3YmF2?=
- =?utf-8?B?ZXBNWEZMRk1PckRTSXJYb1JEc1hUcTh2SVpQbXpSK3IyMEEyMWNOZXgwZ1Vm?=
- =?utf-8?B?cndOY1BpNmszSGgxL1VRclVZY3dCMFR4UzI4NDY4MU4zbVpBV2R3a3BsbE1q?=
- =?utf-8?B?RE1uVzRjWDdwWUN2UnZsbDgxUFExYmNQdmpRZnBNKzBhN09nYkkwRnZiOE5G?=
- =?utf-8?B?ZnB6MlZWZlhEeVd4WFRzWURMeHBQRnhkSWwrdDZHNUpnMStmdlJoQ1NoUytO?=
- =?utf-8?B?RVJHYXRkZjJBd3BiS2g2SmR6V29XQ3dIQnpSOTVuamFIVTBRWlVDMHhDYXlz?=
- =?utf-8?B?dUJ6b2xpVVV6Z0hBL2tuSjNmM0xHN3hkZmlqK2tEZ2dhQ2hZVzFtcHlhMUt1?=
- =?utf-8?B?T2lUa1lnTTVzOWxrUExrcldMZmtBYUh2eE9mU3FuMmVVZGY4NFdzTGxENE55?=
- =?utf-8?B?eGVPRitYTWt0WXhIek53L1pUWmUwNVZzcGdISytld1I0Y0tPZk9qM09VdzZ6?=
- =?utf-8?B?UUFvWE1WZWdYZjQveEY5V3g5dEUvNzJXbnp0WXlVdU9ZQ2xyRGRpMW40ekcx?=
- =?utf-8?B?K3lFa2ZBcTNCVlZOSFBXUlVLNktJcmp3UjB1eUVGRnZrM2w3UmQ4OG1aUUo3?=
- =?utf-8?B?MGtXcE4zVGhXU3BYeC9pN3dDYzNMRTZMMUgwWitpZlFrZUhSaitodnpVNUU5?=
- =?utf-8?B?QTYyaklNa2xlNXpFWEZiUDhSVWgyWjA0WG5MNzJTR1JGeFdkQkY2RVI0QjE0?=
- =?utf-8?B?NnFLUkVNQi9HejNQQVh4M0NIWHhzUWI1YzJDK2J4QnhLeUJqV0RNRW9wQjhP?=
- =?utf-8?B?UWJ4ZWQ1UmlveGJLdFl2YUN5T3Ztc1dub09EbTc2cGZGNVU4Z3FoeVUvR0ZK?=
- =?utf-8?B?V2ZNRWVxb3MxUGdOR3owWmdjZTZUREt3anBOL2xGTFhXc1BkVUxhMjFuNW8r?=
- =?utf-8?B?WThEb1dEb1FldysvUDZONUxkK21QTHZEMjUxRDVwTXdzazlSR21SRjg4Ykdx?=
- =?utf-8?B?YW9PcjU3eEhPclZ0SlIvSGFTNWdScnNlaDM1Y25rM24yTi9xU2wvRUdIWGFV?=
- =?utf-8?B?QzdjWTVDTncxdm00cnI2c2NOb2pQREtMRGx6bHJvZ1B6NHNHSDNrakl2Ny9t?=
- =?utf-8?B?c2RwOFVZRDI3UzBLZkw1TzlaS2tFZ3FrdVNKaDZ2VXlvazRRSXUwNWtNM0xZ?=
- =?utf-8?B?UDkrdTVLKytQbmZFd1JaZGhhQnRkcW9kUVRKaUpjcWtNWjZrRmwyVitFSDVs?=
- =?utf-8?B?ZURrUDNrWkJlUTI2QTdZZHEzdGlLdHFYK0RQUDlPSXhZUmc9PQ==?=
+ ARA:13230040|376014|36860700013|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QWVnaXZuUFgyRmZLUC9KTTl1Mlo0NUJTZkdiRGZrU0VNUURBcFNydVZOUWRj?=
+ =?utf-8?B?SFdYdkU4bGNzNnYyb0hZQkpwUFR3RUFFNEtISjZxczJJNDdWTmNYdVQwMTRv?=
+ =?utf-8?B?MUZBRUZ6WFZFNjgxMEpmOGJoTWtieHBZNWNJR2h4Y2VYdWNBTTNoNEJnZFdK?=
+ =?utf-8?B?eThYdEo0dWcxbS9HcmRhZUVabExIcytYekFFWjRJMTN1Vm1aRkRINWQyVm1z?=
+ =?utf-8?B?VTU1Y1ZLb0NOZEVQaFFZV0YwZ1FTQkRxdzJpMTZhNVZSTWlEc2NiYlplSXBp?=
+ =?utf-8?B?WFVqbjdROExMS3lZQk1oMzNCOUJrVXUwSGRXN3haZXFuTERFMzFRZWhRd3k2?=
+ =?utf-8?B?Sm9TdUk0bU9vNTRldGZTV21XWGZHU2MzbkdOd3kxYUlSTlVlODd6all3ZFZL?=
+ =?utf-8?B?OUxWMHNwcU5pTWFoTFJnbTZCTElWckRlRWRmaURLb1JyZW1JZkY2WDR0bTZT?=
+ =?utf-8?B?Y3orUk10R0RTRHVZS3dqT1ZyRVZtYkt2MjZEZU1aVVRhY0pQQy9LQW0yTHRS?=
+ =?utf-8?B?RVhEeHJFQ2NGZENoRmxlNnBMYTM3bmZYRGpNOTBEaE5Mam8xSE1rQmdyMGkz?=
+ =?utf-8?B?ek9vcmZlRXZ0MVFRd28vaDY2NFlsQ2pWSW5pcWtwQm13TEEwOUQ5dUFTbnk5?=
+ =?utf-8?B?MTVqaGljenRtQ0UrbmtueDBtZFA0QnE2VlZpcjNUdnVTTDNrZzVKbm1rSzFO?=
+ =?utf-8?B?K2NFQlpFQlNwVUtaUS96YjlBWmdEa1hlQjZrNk0xcG83dHZNclBhY0J6ZFRq?=
+ =?utf-8?B?RHpCV1BieXgrdGNiMGVXa3FtRUhYdktWVmE2eEpZWVMyeXNNRFJWVG14TUtL?=
+ =?utf-8?B?Q1p6UHVkUGVGdnZtcVV5cGRiYWxmbnhIRUJGa2FCM2I3WTFDVVdMVXIxRnpu?=
+ =?utf-8?B?UUhuZCtPWEYxaGluYmNsUXhlNVphV3BQRCtDeU9Oa3k2TkFMQzJYd1E4dnVI?=
+ =?utf-8?B?QTNwZVRjbmk0TE1rN0E0emhyU2lYWUUrRVh1cVBQQUdGL1RtUUdFSkdodkZ0?=
+ =?utf-8?B?UWdsQkdNTjAydkVxamFYaXZmRTJyNmh5NVc2aFp0cXlPMDBMbk5TWmxpaUdq?=
+ =?utf-8?B?cHVrSUtDb050dWdLczExZXBoTUlEQzB3VE5YMFFUcVJiZGZDNDhjOFhYakZ6?=
+ =?utf-8?B?T1NwdkV0ODRXS2NrMjRpVG1XYWN6U0s5UmRPVFJnbURDeGhvby9JcFlvSHp3?=
+ =?utf-8?B?bk9CQjBnQkxnZ3FhOFNlYU15YlpVV0VrUnAyczk3V1o1TnJ3b01vTjVtN2lx?=
+ =?utf-8?B?NWJ3aXgzNFR0cElpMFhMMW1xSkFmQ0JFaTJmRmlsUm5RUXhxR1F2V2psUlJY?=
+ =?utf-8?B?dkV1MnJUV1p1aWl2akhld0ZFUTZ4STZuVnlVTG9LcTExQTVWREJ1Vm9RbXJZ?=
+ =?utf-8?B?ekZGSlllbDZWM2V0ckttaVIreW5PWG9VNXhidU5JMlErOHFSaVU5U1RFRFlk?=
+ =?utf-8?B?UUE5NnZhMHY4RkdiL2VmaFZnU01MY2hsTE9VQ25ZZG43dDBkZjRZUjJYTTMw?=
+ =?utf-8?B?NWIzL1FOVy9sL2dIbTJDWmd0K21VMEROWjExYkgzNElUcTJQRVQxbGIxRzBL?=
+ =?utf-8?B?ZHlRbnJWRWI1VjZtazIwakQxSWJZYlVCMXpmc1dPYTFKWm5ITE94V2ZNOTBB?=
+ =?utf-8?B?VzVaUFE0NlhRdDRPRjNQRnU1d3FxUkc0bWJrNXNta1Bub3pqZUtyTGhTd2pl?=
+ =?utf-8?B?a3l0amw2TGNYZTYzOC81RVM1ZjRnN1Rad2paUjNtdmxVR3hmaE9rbk5SSDY0?=
+ =?utf-8?B?Y21ZaGl6blBFRGRCSUFWMHFqUkl0dkZOUFBuZjZuZHVoeVBFSG0zY05qMkUy?=
+ =?utf-8?Q?YbmGqzQNlguzW8ScpfkirP9y8DI6Z02xRYEo4=3D?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
+ SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2024 07:04:14.1000 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d8b84f85-c810-48e3-b473-08dcf3fa1188
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2024 07:04:17.0219 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b2b3145-1cc4-4d0e-8d33-08dcf3fa1346
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001B6.eurprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1P195MB2657
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P195MB0959
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,29 +162,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The phyGATE-Tauri-L expects 0x56000000 address to load optee.
+Add instructions on how to build and package OP-TEE for the
+phycore-imx8mm based boards. The build instructions are identical for
+phyGATE-Tauri-L and phyBOARD-Polis.
+Also fix missig '-' for TF-A build instructions.
 
 Signed-off-by: Yannic Moog <y.moog@phytec.de>
 ---
- arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi | 5 +++++
- 1 file changed, 5 insertions(+)
+ doc/board/phytec/imx8mm-phygate-tauri-l.rst | 26 +++++++++++++++++++++++++-
+ doc/board/phytec/phycore-imx8mm.rst         | 25 ++++++++++++++++++++++++-
+ 2 files changed, 49 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi b/arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi
-index f59f119374f..a25bec7f498 100644
---- a/arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi
-@@ -13,6 +13,11 @@
- 	};
- };
+diff --git a/doc/board/phytec/imx8mm-phygate-tauri-l.rst b/doc/board/phytec/imx8mm-phygate-tauri-l.rst
+index 28b614fd144..d9b5124365e 100644
+--- a/doc/board/phytec/imx8mm-phygate-tauri-l.rst
++++ b/doc/board/phytec/imx8mm-phygate-tauri-l.rst
+@@ -9,6 +9,7 @@ Quick Start
+ -----------
  
-+&tee {
-+	entry = <0x56000000>;
-+	load = <0x56000000>;
-+};
+ - Build the ARM Trusted firmware binary
++- Build the OP-TEE binary (optional)
+ - Get ddr firmware
+ - Build U-Boot
+ - Boot
+@@ -20,10 +21,32 @@ Build the ARM Trusted firmware binary
+ 
+    $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
+    $ cd trusted-firmware-a
+-   $ export CROSS_COMPILE=aarch64-linux-gnu
++   $ export CROSS_COMPILE=aarch64-linux-gnu-
+    $ export IMX_BOOT_UART_BASE=0x30880000
++   $ # with optee
++   $ make PLAT=imx8mm BL32_BASE=0x56000000 SPD=opteed bl31
++   $ # without optee
+    $ make PLAT=imx8mm bl31
+ 
++Build the OP-TEE binary (optional)
++----------------------------------
 +
- &pinctrl_uart3 {
- 	bootph-pre-ram;
- };
++.. code-block:: bash
++
++   $ git clone https://github.com/OP-TEE/optee_os.git
++   $ cd optee_os
++   $ make CFG_ARM64_core=y \
++     CFG_TEE_BENCHMARK=n \
++     CROSS_COMPILE=aarch64-linux-gnu- \
++     CROSS_COMPILE_core=aarch64-linux-gnu- \
++     CROSS_COMPILE_ta_arm32=arm-linux-gnueabihf- \
++     CROSS_COMPILE_ta_arm64=aarch64-linux-gnu- \
++     O=out/arm \
++     PLATFORM=imx-mx8mmevk \
++     CFG_TZDRAM_START=0x56000000 \
++     CFG_DDR_SIZE=0x80000000 \
++     CFG_UART_BASE=UART3_BASE
++
+ Get the ddr firmware
+ --------------------
+ 
+@@ -42,6 +65,7 @@ Copy binaries
+ .. code-block:: bash
+ 
+    $ cp <TF-A dir>/build/imx8mm/release/bl31.bin .
++   $ cp <OP-TEE dir>/out/arm/core/tee-raw.bin tee.bin
+    $ cp firmware-imx-8.23/firmware/ddr/synopsys/lpddr4*.bin .
+ 
+ Build U-Boot
+diff --git a/doc/board/phytec/phycore-imx8mm.rst b/doc/board/phytec/phycore-imx8mm.rst
+index e9dc2259907..5a4e8a669c6 100644
+--- a/doc/board/phytec/phycore-imx8mm.rst
++++ b/doc/board/phytec/phycore-imx8mm.rst
+@@ -9,6 +9,7 @@ Quick Start
+ -----------
+ 
+ - Build the ARM Trusted firmware binary
++- Build the OP-TEE binary (optional)
+ - Get ddr firmware
+ - Build U-Boot
+ - Boot
+@@ -20,10 +21,32 @@ Build the ARM Trusted firmware binary
+ 
+    $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
+    $ cd trusted-firmware-a
+-   $ export CROSS_COMPILE=aarch64-linux-gnu
++   $ export CROSS_COMPILE=aarch64-linux-gnu-
+    $ export IMX_BOOT_UART_BASE=0x30880000
++   $ # with optee
++   $ make PLAT=imx8mm BL32_BASE=0x56000000 SPD=opteed bl31
++   $ # without optee
+    $ make PLAT=imx8mm bl31
+ 
++Build the OP-TEE binary (optional)
++----------------------------------
++
++.. code-block:: bash
++
++   $ git clone https://github.com/OP-TEE/optee_os.git
++   $ cd optee_os
++   $ make CFG_ARM64_core=y \
++     CFG_TEE_BENCHMARK=n \
++     CROSS_COMPILE=aarch64-linux-gnu- \
++     CROSS_COMPILE_core=aarch64-linux-gnu- \
++     CROSS_COMPILE_ta_arm32=arm-linux-gnueabihf- \
++     CROSS_COMPILE_ta_arm64=aarch64-linux-gnu- \
++     O=out/arm \
++     PLATFORM=imx-mx8mmevk \
++     CFG_TZDRAM_START=0x56000000 \
++     CFG_DDR_SIZE=0x80000000 \
++     CFG_UART_BASE=UART3_BASE
++
+ Get the ddr firmware
+ --------------------
+ 
 
 -- 
 2.43.0
