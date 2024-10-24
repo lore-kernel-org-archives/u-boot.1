@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D275CE8E8A
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 15:27:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B13CACE8E8B
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 15:27:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 711EF8902E;
-	Thu, 24 Oct 2024 17:25:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C6B3989070;
+	Thu, 24 Oct 2024 17:26:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 685C389024; Thu, 24 Oct 2024 17:25:56 +0200 (CEST)
+ id 5B8B188FE4; Thu, 24 Oct 2024 17:26:02 +0200 (CEST)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id E19798902E
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 17:25:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id D8C3388F48
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 17:25:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.11,229,1725289200"; d="scan'208";a="222903828"
+X-IronPort-AV: E=Sophos;i="6.11,229,1725289200"; d="scan'208";a="222903837"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 25 Oct 2024 00:25:46 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 25 Oct 2024 00:25:53 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.183])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 90033400388C;
- Fri, 25 Oct 2024 00:25:31 +0900 (JST)
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 02C37400388C;
+ Fri, 25 Oct 2024 00:25:49 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH 08/14] net: phy: ksz90x1: Simplify ksz9131_config_rgmii_delay
-Date: Thu, 24 Oct 2024 16:24:42 +0100
-Message-Id: <20241024152448.102-9-paul.barker.ct@bp.renesas.com>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ Linus Walleij <linus.walleij@linaro.org>
+Subject: [PATCH 13/14] arm64: dts: renesas: rzg2l: Enable Ethernet TXC output
+Date: Thu, 24 Oct 2024 16:24:47 +0100
+Message-Id: <20241024152448.102-14-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
@@ -59,60 +60,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We can call phy_modify_mmd() instead of manually calling drv->readext()
-and drv->writeext().
+Configure ET0_TXC and ET1_TXC as outputs on the Renesas RZ/[GV]2L SMARC
+SoMs, as per RGMII specification.
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
----
- drivers/net/phy/micrel_ksz90x1.c | 26 ++++++++------------------
- 1 file changed, 8 insertions(+), 18 deletions(-)
+Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Acked-by: Linus Walleij <linus.walleij@linaro.org>
+Link: https://lore.kernel.org/20240625200316.4282-5-paul.barker.ct@bp.renesas.com
+Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
 
-diff --git a/drivers/net/phy/micrel_ksz90x1.c b/drivers/net/phy/micrel_ksz90x1.c
-index b64046e0bc72..6515d8feb9be 100644
---- a/drivers/net/phy/micrel_ksz90x1.c
-+++ b/drivers/net/phy/micrel_ksz90x1.c
-@@ -502,8 +502,7 @@ static int ksz9131_of_load_all_skew_values(struct phy_device *phydev)
+[ upstream commit: 41c934da488d3a5a79148ead3b5c5eecac1b1d5d ]
+
+(cherry picked from commit 11cbf7bc3124f3d5267ea6aef8e4ba6d6b4f589e)
+---
+ .../src/arm64/renesas/rzg2l-smarc-som.dtsi    | 76 +++++++++++--------
+ 1 file changed, 44 insertions(+), 32 deletions(-)
+
+diff --git a/dts/upstream/src/arm64/renesas/rzg2l-smarc-som.dtsi b/dts/upstream/src/arm64/renesas/rzg2l-smarc-som.dtsi
+index 4409c47239b9..2b5e037ea9fa 100644
+--- a/dts/upstream/src/arm64/renesas/rzg2l-smarc-som.dtsi
++++ b/dts/upstream/src/arm64/renesas/rzg2l-smarc-som.dtsi
+@@ -180,41 +180,53 @@
+ 	};
  
- static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
- {
--	struct phy_driver *drv = phydev->drv;
--	u16 rxcdll_val, txcdll_val, val;
-+	u16 rxcdll_val, txcdll_val;
- 	int ret;
+ 	eth0_pins: eth0 {
+-		pinmux = <RZG2L_PORT_PINMUX(28, 1, 1)>, /* ET0_LINKSTA */
+-			 <RZG2L_PORT_PINMUX(27, 1, 1)>, /* ET0_MDC */
+-			 <RZG2L_PORT_PINMUX(28, 0, 1)>, /* ET0_MDIO */
+-			 <RZG2L_PORT_PINMUX(20, 0, 1)>, /* ET0_TXC */
+-			 <RZG2L_PORT_PINMUX(20, 1, 1)>, /* ET0_TX_CTL */
+-			 <RZG2L_PORT_PINMUX(20, 2, 1)>, /* ET0_TXD0 */
+-			 <RZG2L_PORT_PINMUX(21, 0, 1)>, /* ET0_TXD1 */
+-			 <RZG2L_PORT_PINMUX(21, 1, 1)>, /* ET0_TXD2 */
+-			 <RZG2L_PORT_PINMUX(22, 0, 1)>, /* ET0_TXD3 */
+-			 <RZG2L_PORT_PINMUX(24, 0, 1)>, /* ET0_RXC */
+-			 <RZG2L_PORT_PINMUX(24, 1, 1)>, /* ET0_RX_CTL */
+-			 <RZG2L_PORT_PINMUX(25, 0, 1)>, /* ET0_RXD0 */
+-			 <RZG2L_PORT_PINMUX(25, 1, 1)>, /* ET0_RXD1 */
+-			 <RZG2L_PORT_PINMUX(26, 0, 1)>, /* ET0_RXD2 */
+-			 <RZG2L_PORT_PINMUX(26, 1, 1)>, /* ET0_RXD3 */
+-			 <RZG2L_PORT_PINMUX(1, 0, 1)>;  /* IRQ2 */
++		txc {
++			pinmux = <RZG2L_PORT_PINMUX(20, 0, 1)>; /* ET0_TXC */
++			output-enable;
++		};
++
++		mux {
++			pinmux = <RZG2L_PORT_PINMUX(28, 1, 1)>, /* ET0_LINKSTA */
++				 <RZG2L_PORT_PINMUX(27, 1, 1)>, /* ET0_MDC */
++				 <RZG2L_PORT_PINMUX(28, 0, 1)>, /* ET0_MDIO */
++				 <RZG2L_PORT_PINMUX(20, 1, 1)>, /* ET0_TX_CTL */
++				 <RZG2L_PORT_PINMUX(20, 2, 1)>, /* ET0_TXD0 */
++				 <RZG2L_PORT_PINMUX(21, 0, 1)>, /* ET0_TXD1 */
++				 <RZG2L_PORT_PINMUX(21, 1, 1)>, /* ET0_TXD2 */
++				 <RZG2L_PORT_PINMUX(22, 0, 1)>, /* ET0_TXD3 */
++				 <RZG2L_PORT_PINMUX(24, 0, 1)>, /* ET0_RXC */
++				 <RZG2L_PORT_PINMUX(24, 1, 1)>, /* ET0_RX_CTL */
++				 <RZG2L_PORT_PINMUX(25, 0, 1)>, /* ET0_RXD0 */
++				 <RZG2L_PORT_PINMUX(25, 1, 1)>, /* ET0_RXD1 */
++				 <RZG2L_PORT_PINMUX(26, 0, 1)>, /* ET0_RXD2 */
++				 <RZG2L_PORT_PINMUX(26, 1, 1)>, /* ET0_RXD3 */
++				 <RZG2L_PORT_PINMUX(1, 0, 1)>;  /* IRQ2 */
++		};
+ 	};
  
- 	switch (phydev->interface) {
-@@ -527,24 +526,15 @@ static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
- 		return 0;
- 	}
+ 	eth1_pins: eth1 {
+-		pinmux = <RZG2L_PORT_PINMUX(37, 2, 1)>, /* ET1_LINKSTA */
+-			 <RZG2L_PORT_PINMUX(37, 0, 1)>, /* ET1_MDC */
+-			 <RZG2L_PORT_PINMUX(37, 1, 1)>, /* ET1_MDIO */
+-			 <RZG2L_PORT_PINMUX(29, 0, 1)>, /* ET1_TXC */
+-			 <RZG2L_PORT_PINMUX(29, 1, 1)>, /* ET1_TX_CTL */
+-			 <RZG2L_PORT_PINMUX(30, 0, 1)>, /* ET1_TXD0 */
+-			 <RZG2L_PORT_PINMUX(30, 1, 1)>, /* ET1_TXD1 */
+-			 <RZG2L_PORT_PINMUX(31, 0, 1)>, /* ET1_TXD2 */
+-			 <RZG2L_PORT_PINMUX(31, 1, 1)>, /* ET1_TXD3 */
+-			 <RZG2L_PORT_PINMUX(33, 1, 1)>, /* ET1_RXC */
+-			 <RZG2L_PORT_PINMUX(34, 0, 1)>, /* ET1_RX_CTL */
+-			 <RZG2L_PORT_PINMUX(34, 1, 1)>, /* ET1_RXD0 */
+-			 <RZG2L_PORT_PINMUX(35, 0, 1)>, /* ET1_RXD1 */
+-			 <RZG2L_PORT_PINMUX(35, 1, 1)>, /* ET1_RXD2 */
+-			 <RZG2L_PORT_PINMUX(36, 0, 1)>, /* ET1_RXD3 */
+-			 <RZG2L_PORT_PINMUX(1, 1, 1)>;  /* IRQ3 */
++		txc {
++			pinmux = <RZG2L_PORT_PINMUX(29, 0, 1)>; /* ET1_TXC */
++			output-enable;
++		};
++
++		mux {
++			pinmux = <RZG2L_PORT_PINMUX(37, 2, 1)>, /* ET1_LINKSTA */
++				 <RZG2L_PORT_PINMUX(37, 0, 1)>, /* ET1_MDC */
++				 <RZG2L_PORT_PINMUX(37, 1, 1)>, /* ET1_MDIO */
++				 <RZG2L_PORT_PINMUX(29, 1, 1)>, /* ET1_TX_CTL */
++				 <RZG2L_PORT_PINMUX(30, 0, 1)>, /* ET1_TXD0 */
++				 <RZG2L_PORT_PINMUX(30, 1, 1)>, /* ET1_TXD1 */
++				 <RZG2L_PORT_PINMUX(31, 0, 1)>, /* ET1_TXD2 */
++				 <RZG2L_PORT_PINMUX(31, 1, 1)>, /* ET1_TXD3 */
++				 <RZG2L_PORT_PINMUX(33, 1, 1)>, /* ET1_RXC */
++				 <RZG2L_PORT_PINMUX(34, 0, 1)>, /* ET1_RX_CTL */
++				 <RZG2L_PORT_PINMUX(34, 1, 1)>, /* ET1_RXD0 */
++				 <RZG2L_PORT_PINMUX(35, 0, 1)>, /* ET1_RXD1 */
++				 <RZG2L_PORT_PINMUX(35, 1, 1)>, /* ET1_RXD2 */
++				 <RZG2L_PORT_PINMUX(36, 0, 1)>, /* ET1_RXD3 */
++				 <RZG2L_PORT_PINMUX(1, 1, 1)>;  /* IRQ3 */
++		};
+ 	};
  
--	val = drv->readext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
--			   KSZ9131RN_RXC_DLL_CTRL);
--	val &= ~KSZ9131RN_DLL_CTRL_BYPASS;
--	val |= rxcdll_val;
--	ret = drv->writeext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
--			    KSZ9131RN_RXC_DLL_CTRL, val);
--	if (ret)
-+	ret = phy_modify_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
-+			     KSZ9131RN_RXC_DLL_CTRL, KSZ9131RN_DLL_CTRL_BYPASS,
-+			     rxcdll_val);
-+	if (ret < 0)
- 		return ret;
- 
--	val = drv->readext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
--			   KSZ9131RN_TXC_DLL_CTRL);
--
--	val &= ~KSZ9131RN_DLL_CTRL_BYPASS;
--	val |= txcdll_val;
--	ret = drv->writeext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
--			    KSZ9131RN_TXC_DLL_CTRL, val);
--
--	return ret;
-+	return phy_modify_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
-+			      KSZ9131RN_TXC_DLL_CTRL, KSZ9131RN_DLL_CTRL_BYPASS,
-+			      txcdll_val);
- }
- 
- /* Silicon Errata DS80000693B
+ 	gpio-sd0-pwr-en-hog {
 -- 
 2.43.0
 
