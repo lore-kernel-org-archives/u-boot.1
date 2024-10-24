@@ -4,69 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E823CE8E93
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 16:37:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1EF9CE8E91
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 16:39:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ADC388E63;
-	Thu, 24 Oct 2024 18:37:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 29C7688DA0;
+	Thu, 24 Oct 2024 18:39:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MzvdcneC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P2dlSVJ+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D13C88DA0; Thu, 24 Oct 2024 18:37:04 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id AE8EB88E63; Thu, 24 Oct 2024 18:39:17 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EAC388F47
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 18:36:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D496788C66
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 18:39:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a9a0ec0a94fso147412866b.1
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 09:36:55 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a9a1b71d7ffso164423866b.1
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 09:39:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1729787814; x=1730392614; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1729787953; x=1730392753; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t6TIUzInM+WGxzp0qhyA/nltgSSe/VJh/dF6cDFNjvo=;
- b=MzvdcneCZGp8OIAPzQIsiDIZw0bohRvz4wCGLIvWLd1EBPCNMetuaUGXrVye9mBCgb
- PPbhS3frfaScO5e6s3TxnxQRWvVQAxwD0e/Wvph2ZWxkJV8CZz6LXn4aYlEvrfFC3ybB
- p8wRFdemV7mZXjERp40ZYQrDPcsqrP7RUpLj0=
+ bh=aM+uz/8XGrdDTiEwY+p7V0T4rS45nVzkRbXcbDG3G04=;
+ b=P2dlSVJ+Ep5OTUNG1qXvgFvjx7tH7Hsg1EzlSUF8r/9VUzDn5jerjK30cjt+gR7Bau
+ shcIYNBYzR3wqkoor3sdrI0rUWIvaXycSkg0v1ggnwjWyVFqVfiPi5cDmx66sUa9Cv61
+ ZDr/jPa8l2aopqKC28pKvh98ZjEy2BO99bxTM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729787814; x=1730392614;
+ d=1e100.net; s=20230601; t=1729787953; x=1730392753;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=t6TIUzInM+WGxzp0qhyA/nltgSSe/VJh/dF6cDFNjvo=;
- b=rOVoksEh8FXeLnS4pQKVR8ooW+l947A0HRJd1ebiDcNxnI2YQ6Qj1Q9klnsFvYAT38
- /lutAjx4xpyylOLuWgPX7GCgRMaD6wHkyIqfNrtiX6Cz+lpS1CyvF9ABG0MY8TYPFGMm
- zsosfwOk9pcSkEguzDD9oHtEQVha/tcMxMHjX2+8RIbzwxWN9b2yNVfGO+EOXzKkzwYR
- BENshYVDNlivyDKdaV/ot/XWNEBQeXmOb1bUBnLHWT3IIIZ8s0dQ6nh8+Hy79R8ScocN
- qygnSTORe/XtDS8LfvavZq/yMzn0lkUddFrszMymw8mfqDCICU7WA7tL2T+Xs7/ZqNtE
- y/hA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVDJXIUHlPTSbMKCU1GbA0AJYZPmKCK2yg8sCzW7etmjOSC/gvAF+4O+iYODoeAwLVftqUfe28=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYu5KEel1Tpv0uBCzfPHtdWdZQxDulmqwhiFW792eWwt5Fo+Ch
- U/7NiZDC40C9/LSVonJyc+u+J4AU/AjJ3HKofGynO9n1kPwSlC7cIPgCdqmWTjyF8tsH1+3wnss
- 3ZBZIa4pW5dPQ6xrOocrkJueZgpjH+mGsvrJkk4oXg1ON7NJagl5J
-X-Google-Smtp-Source: AGHT+IEHMNz6x8TPB4UVka+8oBcoF+g4fUrKAEbIwDIEmtfnQLZJEQd1NLgHMahRUHvEwnvyABvcBwQubIr+sHXK8Bo=
-X-Received: by 2002:a17:907:2da1:b0:a9a:1796:30d0 with SMTP id
- a640c23a62f3a-a9ad285fc4emr241277366b.62.1729787814386; Thu, 24 Oct 2024
- 09:36:54 -0700 (PDT)
+ bh=aM+uz/8XGrdDTiEwY+p7V0T4rS45nVzkRbXcbDG3G04=;
+ b=S/PDAMYDzyzwJyTPFtzMWQPBxX2B+yKB5YM6yYU3598z0Qkte91PgFlzhOpKFfN5gm
+ FBQSb0rFvs3LYuwgW0mTR2BSUjWEMNstig5HIdsOSSexzt/uoO2NnyiJItXbdDUsqslF
+ QuzMZ93jmpexwh2EIINSSPDJp0+4hQs/eLMaZB6/l1c64lXCRrEJQ8zMhrrrOOGXCj5B
+ mBz65sa3+GvwcOhiNNah4GVnzJQTFkPb3UVVPMSuLALdpNYyym8ICrZGiw89v0q0Auif
+ 3CoDOcbNi26s4gWeeSKrGasdArB1AXLIdyj1ZEVTSUpJnKUWOhT/ZBDwiOMnRyzhDP8A
+ gekQ==
+X-Gm-Message-State: AOJu0YwNB3/27RUwVUf1XhsROdnjZWXhNCFGEu2eSCQNXijfkWpZez37
+ 4S2PhZ5CVPloXae51CVKL+cHEATzIqRNxCu5+HWKbURoig3Y0L5NNJjA95JdWRX+dcxHPz6lDU0
+ fYFlTRDZL9OFFJuO/2Vd0JT83GBQyVgiVbPks
+X-Google-Smtp-Source: AGHT+IFZ1AqhcixIWt8NGItRo3ZInM2eMf4x/N6pRf1SRfAcE/9OzerY5j2pWxlmpPDcLTPxdF+mvH21vzJPhgwCcjs=
+X-Received: by 2002:a17:907:7d8e:b0:a8a:6c5d:63b2 with SMTP id
+ a640c23a62f3a-a9abf8759a8mr696774666b.18.1729787953202; Thu, 24 Oct 2024
+ 09:39:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241024131627.77018-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241024131627.77018-1-heinrich.schuchardt@canonical.com>
+References: <20241019152434.1017394-1-sjg@chromium.org>
+ <20241019152434.1017394-7-sjg@chromium.org>
+ <20241019175121.GA4959@bill-the-cat>
+ <CAFLszTgBzr_nYtFKFEuHBLBUUF8qq92y+i=bzsVaKsHyt-990Q@mail.gmail.com>
+ <20241021173253.GO4959@bill-the-cat>
+ <CAFLszThgsF5BL8aSGozA3nAeox=g8bVARmSaBFedM=dbLT=UWA@mail.gmail.com>
+ <20241022140246.GB4959@bill-the-cat>
+ <CAFLszTg3pkZ3z7vH1j-Vafmw6OKhzvLQ4=X9vd+kDzmmUjOw_g@mail.gmail.com>
+ <20241022175427.GH4959@bill-the-cat>
+ <CAFLszTg=DJWnMf7Lun7ga0+_J4Vw6rpf32LMkdRLSy-WY+2U7g@mail.gmail.com>
+ <20241023184121.GL4959@bill-the-cat>
+In-Reply-To: <20241023184121.GL4959@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 24 Oct 2024 18:36:42 +0200
-Message-ID: <CAFLszTh7CCvLQbePJFB7u_QHnKrsCk5A8Mx05vXEUJwdmyJU-A@mail.gmail.com>
-Subject: Re: [PATCH 1/1] fs: ext4: document struct ext2_inode
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Michael Walle <michael@walle.cc>,
- u-boot@lists.denx.de
+Date: Thu, 24 Oct 2024 18:39:00 +0200
+Message-ID: <CAFLszTgQB3Axj_FQwUURG0+u+z3SM5ypo88CfBntq+xUrzfOGw@mail.gmail.com>
+Subject: Re: [PATCH v7 6/7] test: efi: boot: Set up an image suitable for EFI
+ testing
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>, 
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Yang Xiwen <forbidden405@outlook.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,97 +106,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 24 Oct 2024 at 15:16, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+Hi Tom,
+
+On Wed, Oct 23, 2024, 20:41 Tom Rini <trini@konsulko.com> wrote:
 >
-> Provide Sphinx style documentation for struct ext2_inode.
+> On Wed, Oct 23, 2024 at 05:39:07AM +0200, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Tue, 22 Oct 2024 at 19:54, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Oct 22, 2024 at 07:00:35PM +0200, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 22 Oct 2024 at 16:02, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Oct 22, 2024 at 02:15:46PM +0200, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Mon, 21 Oct 2024 at 19:32, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Mon, Oct 21, 2024 at 08:31:10AM +0200, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Sat, 19 Oct 2024 at 11:51, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Sat, Oct 19, 2024 at 09:24:33AM -0600, Simon Glass wrote:
+> > > > > > > > >
+> > > > > > > > > > Create a new disk for use with tests, which contains the new 'testapp'
+> > > > > > > > > > EFI app specifically intended for testing the EFI loader.
+> > > > > > > > > >
+> > > > > > > > > > Attach it to the USB device, since most testing is currently done with
+> > > > > > > > > > mmc.
+> > > > > > > > > >
+> > > > > > > > > > Initially this image will be used to test the EFI bootmeth.
+> > > > > > > > > >
+> > > > > > > > > > Fix a stale comment in prep_mmc_bootdev() while we are here.
+> > > > > > > > > >
+> > > > > > > > > > For now this uses sudo and a compressed fallback file, like all the
+> > > > > > > > > > other bootstd tests. Once this series is in, the patch which moves
+> > > > > > > > > > this to use user-space tools will be cleaned up and re-submitted.
+> > > > > > > > > >
+> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > >
+> > > > > > > > > > ---
+> > > > > > > > > > Here is the patch to avoid sudo and CI fallback:
+> > > > > > > > > >
+> > > > > > > > > > [1] https://patchwork.ozlabs.org/project/uboot/patch/
+> > > > > > > > > > 20240802093322.15240-1-richard@nod.at/
+> > > > > > > > > >
+> > > > > > > > > > (no changes since v1)
+> > > > > > > > > >
+> > > > > > > > > >  arch/sandbox/dts/test.dts           |   2 +-
+> > > > > > > > > >  test/boot/bootdev.c                 |  18 +++++++++-
+> > > > > > > > > >  test/boot/bootflow.c                |   2 +-
+> > > > > > > > > >  test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
+> > > > > > > > >
+> > > > > > > > > This I think best illustrates the problem with "BOOTSBOX.EFI". This
+> > > > > > > > > image will work for CI up until I can figure out how to get access to
+> > > > > > > > > free arm64 servers to run some tests on and then it will fail.
+> > > > > > > >
+> > > > > > > > I don't believe so. Why do you think that?
+> > > > > > >
+> > > > > > > Because it includes the BOOTSBOX.EFI x86 binary file, and executes it?
+> > > > > > > Or did I miss where we update the contents to include that file as we
+> > > > > > > just built it (and so why have it included?) ?
+> > > > > >
+> > > > > > It works fine on x86 and I'm sure it will work fine on ARM as well.
+> > > > > > The file is built with the host compiler, just as U-Boot itself is.
+> > > > >
+> > > > > Erm, are you saying the BOOT/EFI/BOOTSBOX.EFI file that's in
+> > > > > test/py/tests/bootstd/flash1.img.xz doesn't need to exist and the test
+> > > > > replaces that, as it goes?
+> > > >
+> > > > No, I'm saying that sandbox uses that file, no matter the host
+> > > > architecture, and I don't need to create different versions of
+> > > > flash1.im.xz for each host architecture.
+> > > >
+> > > > I discussed this with Heinrich and he seems happy enough with the -N
+> > > > flag for his use case. I know how to replicate his use case and am
+> > > > going to try it soon.
+> > >
+> > > Yes, I'm just confused as to how the same BOOTSBOX.EFI binary file can
+> > > be executed as both x86-64 and aarch64. Because:
+> > > $ xz -k -d test/py/tests/bootstd/flash1.img.xz
+> > > $ sudo losetup -fP  test/py/tests/bootstd/flash1.img
+> > > $ sudo mount -o ro /dev/loop18p1 /mnt
+> > > $ file /mnt/EFI/BOOT/BOOTSBOX.EFI
+> > > /mnt/EFI/BOOT/BOOTSBOX.EFI: PE32+ executable (EFI application) x86-64 (stripped to external PDB), for MS Windows, 5 sections
+> > >
+> > > Seems unlikely to work on an aarch64 host. Which is why I asked if the
+> > > test actually replaced the contents of the file.
+> >
+> > Well, yes, for now the .xz is an x86_64 image, but I expect to be able
+> > to get rid of that fallback once my EFI test lands, so it should work
+> > fine on ARM.
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  include/ext_common.h | 30 +++++++++++++++++++++++++++---
->  1 file changed, 27 insertions(+), 3 deletions(-)
->
+> So lets just re-work things to get this right from the start then
+> please.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-> diff --git a/include/ext_common.h b/include/ext_common.h
-> index b09bbde116a..a85ac04f79a 100644
-> --- a/include/ext_common.h
-> +++ b/include/ext_common.h
-> @@ -173,20 +173,35 @@ struct ext2_block_group {
->         __le32 bg_reserved;
->  };
->
-> -/* The ext2 inode. */
-> +/**
-> + * struct ext2_inode - ext2 inode
-> + */
->  struct ext2_inode {
-> +       /** @mode: file mode */
->         __le16 mode;
-> +       /** @uid: lower 16 bits of owner UID */
->         __le16 uid;
-> +       /** @size: lower 32 bits of file size */
->         __le32 size;
-> +       /** @atime: last access time */
-
-Is this seconds since 1970?
-
->         __le32 atime;
-> +       /** @ctime: last change time */
->         __le32 ctime;
-> +       /** @mtime: last modification time */
->         __le32 mtime;
-> +       /** @dtime: deletion time */
->         __le32 dtime;
-> +       /** @gid: lower 16 bits of group ID */
->         __le16 gid;
-> +       /** @nlinks: number of hard links */
->         __le16 nlinks;
-> -       __le32 blockcnt;        /* Blocks of either 512 or block_size bytes */
-> +       /** @blockcnt: lower 32 bit of block count */
-> +       __le32 blockcnt;
-> +       /** @flags: inode flags */
->         __le32 flags;
-
-Where are the values for these flags?
-
-> +       /** @osd1: operating system specific data */
-
-hyphen before specific
-
->         __le32 osd1;
-> +       /** @b: block map or extent tree */
->         union {
->                 struct datablocks {
->                         __le32 dir_blocks[INDIRECT_BLOCKS];
-> @@ -197,10 +212,19 @@ struct ext2_inode {
->                 char symlink[60];
->                 char inline_data[60];
->         } b;
-> +       /** @version: file version (for NFS) */
->         __le32 version;
-> +       /** @acl: lower 32 bit of extended attribute block */
->         __le32 acl;
-
-Can you link to where the attributes are defined, or add the enum name?
-
-> -       __le32 size_high;       /* previously dir_acl, but never used */
-> +       /** @size_high - dir_acl on ext2/3, upper 32 size bits on ext4
-> +        *
-> +        * In ext2/3 this field was named i_dir_acl, though it was usually set
-> +        * to zero and never used.
-> +        */
-> +       __le32 size_high;
-> +       /** @fragment_addr - (obsolete) fragment address */
->         __le32 fragment_addr;
-> +       /** @osd2: operating system specific data */
->         __le32 osd2[3];
->  };
->
-> --
-> 2.45.2
->
+My understanding was that I offered to tidy up and send [1] after this
+series lands?
 
 Regards,
 Simon
