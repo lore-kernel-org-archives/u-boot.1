@@ -4,72 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71EC8D0BB6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 08:37:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CA8FD0BB7B
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 09:15:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A443F892FD;
-	Thu, 24 Oct 2024 10:37:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7631089313;
+	Thu, 24 Oct 2024 11:15:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cMnWG9rd";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Qffj0B4J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3DEE89333; Thu, 24 Oct 2024 10:37:43 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 772E189328; Thu, 24 Oct 2024 11:15:37 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE9E9890AE
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 10:37:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98AB78806A
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 11:15:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2f75c56f16aso5718841fa.0
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 01:37:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729759056; x=1730363856; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=q+ItNUxx6qdEeKden71T/y85dKdE5OPU8s47oCuT5Ig=;
- b=cMnWG9rdp6B+Nj262h9dJPzWCQY4wLNMyUuM/lZ0UmClhbcnqzDvZNIMGNkQvMqJUj
- jW+V5hahOHHXR8G7KqD+pDwx4quPzShRLFhWYB9taJRhrGw6TCUDQafkcPNPcVOLKf6b
- QXz3mU0ydQwIT7u8s741dhVwErZwYJ9h86fdmr46tO53cHG5fkck+BUzbSosL6/GYbWi
- 7snmtzez0FDYM2wwLSdStooKakhwXuGowKRWTu7bXLJGdTMq1y4iypHRq8v8UrasSUDz
- F+mjHsdnQkOhSmIq+KuPvMGTPQaCt5z5qgSBvj6mVlWXj/2ZzBLwhc/LkZTWqN+Yvfk9
- ZAew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729759056; x=1730363856;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=q+ItNUxx6qdEeKden71T/y85dKdE5OPU8s47oCuT5Ig=;
- b=Tmc2XxjXCt6Sya9EgoynYrXXO6eNq/tZ14C9r9ptaxzGwo3PiijFxey/EHXkQKzzMR
- FlhKqP5IfpNtSn5Z392vBC+E2n/R2A6NoBlZX9CPQdX8zs69pQt88gAJopwysfjetYvH
- QcQY/Trra2qDjX6/Zi16qPxpfYR9+uGG+dHkK8MLQNhkps/nqfl1wBhDWuo/Fg+b/wxF
- x8vrd+J9gZo0AO6dwTO7Tck1Cyv2q4iRCCO3jpEsKSh3egnb9zLceIS9XLlv2Z4Fo0uk
- FYXs/N3J+tnjuIQTkYcA90Q+oW1ivoNIJ2ikeahwXPgWaG2bvfEtJFsAv1HxqECwuM7x
- k4Tw==
-X-Gm-Message-State: AOJu0YzvbCSaQ7va7SWfpt27TK/K7nGC8NqiOu9aL/kIoNfYNLgMqB9d
- 0Q6cGclVpwuqvkSxELecj1s7QsMec19T814E9lRsgjo1xO03UZ53kRfz4xRf7P/AafYj4JIH6PN
- yqlrAYhS+70p3i6+xCHCGlhKnk1A=
-X-Google-Smtp-Source: AGHT+IEtOZLh3ObpL4apeHSRbZBxcUpqls9FoSI+T1PEEwcm1Dto0qnbdBKMQCSI91TP7Hk7eZXORIlVuLYdrcup+cY=
-X-Received: by 2002:a05:651c:545:b0:2fb:8c9a:fe37 with SMTP id
- 38308e7fff4ca-2fc9d30b200mr30179211fa.16.1729759055884; Thu, 24 Oct 2024
- 01:37:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.CtrlMice (43-114-103-145.static.glaslokaal.nl
+ [145.103.114.43])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id B2BB83F385; 
+ Thu, 24 Oct 2024 09:15:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1729761331;
+ bh=Jh851w643v1CJrEXcquBJ2n5d4pSGi5UAWJxECJ17E8=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Qffj0B4JsJouIDOVGgugFZ4mtB5zCVTHKGtATRk8nR8S2SQz94+FWBYCRqgMuYrIl
+ 0hp3QNJh0dPiw0g9prrdHPMYeSPU0QunpjF8xhKUZhjJjdeO4uhnUsQs9jCq+C7AQ7
+ eYcxP9zbXkeEQOL9B7YT7aJfpb4PlRb8+HuPRN3eeFgYW/d3EAQwYqQbGeLvHXvKKi
+ iTonos1T6UItyrOdFjVLK3Q2VXihPsVmC6hyFIBIDumdtMPAuR+LxuPEOtDnMyQwMy
+ NiGGGIPwcyFaWreLb69ITjbfdHvzCo1kh4o0qk3DzRak6JMQbZSZIDX8jbFlyCL296
+ CiUiorf5yoMMg==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Rob Clark <robdclark@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/2] doc: include file-system API into HTML docs
+Date: Thu, 24 Oct 2024 11:15:27 +0200
+Message-ID: <20241024091529.31136-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <AS4PR08MB8167C4DB165AF2FB28C0751DC04D2@AS4PR08MB8167.eurprd08.prod.outlook.com>
-In-Reply-To: <AS4PR08MB8167C4DB165AF2FB28C0751DC04D2@AS4PR08MB8167.eurprd08.prod.outlook.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 24 Oct 2024 09:37:23 +0100
-Message-ID: <CALeDE9OCPGb9PK9evm=8bQyV9fWHrHd0TuOA6BSufT5mZLiX9g@mail.gmail.com>
-Subject: Re: Patch for 2018 u-boot : Fix "EHCI timed out on TD - token=XXXX"
- error on ehci-hcd
-To: Kumar Girish <girish.kumar@al-enterprise.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,32 +69,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kumar,
+* Describe the fields of struct fs_dir_stream.
+* Update fs_readdir() and fs_opendir() description.
+* Fix Sphinx errors.
+* Add include/fs.h to the API documentation.
 
-> I see the error ""scanning bus 1 for devices... EHCI timed out on TD - token=0x80008d80"
+Heinrich Schuchardt (2):
+  fs: improve API documentation
+  doc: include file-system API into HTML docs
 
-You don't mention any details of the device.
+ doc/api/fs.rst    |  7 +++++
+ doc/api/index.rst |  1 +
+ include/fs.h      | 66 +++++++++++++++++++++++++++++------------------
+ 3 files changed, 49 insertions(+), 25 deletions(-)
+ create mode 100644 doc/api/fs.rst
 
-> From the denx site, I found the below patch. But it is for 2016 and 2017 u-boot version
-> https://lists.denx.de/pipermail/u-boot/2020-March/401784.html
+-- 
+2.45.2
 
-So the patch looks to be sent in 2020 so I'm not sure that's correct,
-and looking at the thread the problem the patch is trying to address
-were fixed another way and the referenced fixes landed in late 2019.
-
-> Could you please provide me the patch which can be applied on 2018 u-boot
-> Thank you for your support.
-
-Is there a reason you can't use a newer U-Boot? The latest is 2024.10.
-Have you tried that? Looking at the thread I suspect the problem is
-fixed in a version later than late 2019.
-
-Generally the U-Boot community is happy to help with problems but it's
-not a free patch consulting house. Generally you're expected to try
-the latest release and see if the problem still exists there, if for
-some reason you can't move to the latest version, because it's a
-vendor tree for example, you're likely better to go to the vendor that
-owns the SDK for assistance, else there's a number of great companies
-that offer paid consulting for U-Boot.
-
-Peter
