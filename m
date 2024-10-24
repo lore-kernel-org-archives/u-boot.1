@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BCDACE8E63
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 11:25:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE2CFCE8E62
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 11:26:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F62888FA7;
-	Thu, 24 Oct 2024 13:25:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8CFFE88F55;
+	Thu, 24 Oct 2024 13:25:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZV9dcrDo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TGqh+dfz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86DE188F48; Thu, 24 Oct 2024 13:25:34 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id AF1C688F47; Thu, 24 Oct 2024 13:25:43 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A2A188F47
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 13:25:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CADB688F7B
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 13:25:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a9a4031f69fso106242966b.0
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 04:25:32 -0700 (PDT)
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2fabb837ddbso11927611fa.1
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 04:25:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729769132; x=1730373932; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729769139; x=1730373939; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kcu8YE5sVDxrapWp+sBeZLFxERfJYVHXUsD7NwBjx6k=;
- b=ZV9dcrDo3MJnHmYL8/h3lDE6zREfESglz8AjUvwROJY6PCu/QbpaddkCJ3F7MHPuKo
- E2LEgyZM9edATgJloJ9g2XhaEX57cMhxnHhh/KhSs2DykWa6gAdHgR5Js0v4FTkJUwjO
- XkGxvQPj55f+PpD9goZ/Qcf80wiAYxNhxUYsoexEOBCpu4Udepnq5JauR3hiNoOB4bit
- zlUJRzG+nr1crStKo7UOdTVlyWYhuIjqY/WlsFT/ts87navoawkZOXesaEMwC6kctmJr
- FJ2uFQNx7shGGIc+hkC+GXe3dhcCkvqO8v9rj/uXdjwX4qSN5GZjwgi2y5pgoPDA1K3v
- F6ag==
+ bh=MtlHHgZ03dQdRkQG9XQdATB0IN61C4W/Z9C+ygjSaG0=;
+ b=TGqh+dfzErm1L2kDRaNVNyLBq5qajnW+dmJ071WcZbrU5X8zcCcwIXL0xfSCz3nbyA
+ eiGUsNKXUjl90dUuuiKcjm4r6LigpboDGWGDA399sqe3cl1QtV9fByIqZcBlXClBNwZH
+ p2Zln2lyfaAQwZqFx4iKhvrBO7/4zCwVClX3eDKVLU2uHgybdRr4Z0gsurQCdSeYgeBS
+ 96qLZFTNVTLRouTHHFYdOSAkDAzXGD9YF0MopoTv5WOlp7SMuxsC9WDbcC8q51B1+iwP
+ Qu4a3OCmazXtcDtsUkF3s5d8f5d4mOuBjXXsCaq0YTTI4UAFJlTkar6nfyto+ki1emfc
+ wIxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729769132; x=1730373932;
+ d=1e100.net; s=20230601; t=1729769139; x=1730373939;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kcu8YE5sVDxrapWp+sBeZLFxERfJYVHXUsD7NwBjx6k=;
- b=RXnn3TKK32f4igMIFLm541r0M1sOxUfe2b1Y4UT0HHUsfXq8fSsCdXS6TgVta/IlY1
- o9xfJrmNJBbOscwQklXVuMbjF9S8FYx2DMHYxyPm4QoFVSeSQ2pcx3+Iv33RE+gDh/TO
- nI/SsB5Nr+GQ5HPvqqa8J9duqsrI2xJ0WJSvn8YsiieYmqCWWNcue4vwzgeUbt1dPGvR
- Tu5lNRxnO+5Ef4xxd7e3FqMBaAId+M3deJI6dgrO0XC8RNILpDrQBbk91iwPyfBi5qDC
- R2eXd2tB+kCKSx0IVA74z2w4fBmcyfYWpzI77Wql8eb+0GDbvGZItT0QdfS3STR0k/hf
- 9drw==
+ bh=MtlHHgZ03dQdRkQG9XQdATB0IN61C4W/Z9C+ygjSaG0=;
+ b=FBaKWnVf1QxHboasBYfhwbjduJKXPVTsYe+hTdNLKB0Qn53UdRHUh3nmsm4Xz34Hri
+ 6hKPs1K/wELqPwmPrKDyFud0jxJfZGnlxfrd8qoq3387YpvKpF14PaVPm2hqM/2cirF5
+ YsnnNi0RGAHmOHhjcO6krsc2x9ooSsUL8m9sVYibb0bYN8Np486VM/F4r+4fpPxEG3Ao
+ R4mKCxnHx3qTz+HhXefe9hwpPiUVP7PVeyVnxoeuz9YSt17vLiWhXZhprGmT1Gi3KgAz
+ /lLATPdh945PqeH8+HM0HUgGO46o0gsS7SQdTflZEQ4T+qM2v+R68MJlPey9FMXGRS0j
+ Hl3g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWIaTYYj8Vb2qNngCBXLYxSyNAWDkcjsClT7+mC3uLhOLCj8tnMOHmcGASblj/K0U5LP7U3yVA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJCMOWk6D41ZsTgB3a4wQBw56fZwnz5oFpUv0Jf9hOnm7+uHjH
- 6IekMLQAAJykqLM9Uum6NQfbeiTfhOx29xuteFKDMww7K61StaWGjlbsMcVsW2E=
-X-Google-Smtp-Source: AGHT+IFOgOXT5GlRPFAqL24Nvm5agBBY3/HBuM7cY5uyXTrZOP4IWoipX4aEhG1e0ub21fkoIMlF4Q==
-X-Received: by 2002:a17:907:1c22:b0:a99:f29a:bc9a with SMTP id
- a640c23a62f3a-a9ad2710be1mr170993966b.7.1729769131738; 
- Thu, 24 Oct 2024 04:25:31 -0700 (PDT)
+ AJvYcCUv0LcxXH7v/ImJpZL18GAum5BEjomDsGFMp5gS2b+m2P+ejY6F25RU3xK3pBEy4rORywFOhH8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw4RiTsi6CODcM93PKuPzaletmhuCn++U7eYvz8KCuDTO9YEQva
+ BVJ4/Hl19WYxp8n0GizurpEeXXrjkSgek0YKNYv57zMCquar391xJMPMLK4o2IA=
+X-Google-Smtp-Source: AGHT+IEAoi3m0oQ7kczoO601fTlkiDjrtnEjOX7xJuO8TPo9OTP1LCg4oTvG6Dtc9vfs+PwfH+MHWg==
+X-Received: by 2002:a05:651c:1508:b0:2f0:27da:6864 with SMTP id
+ 38308e7fff4ca-2fc9d3252a9mr45495181fa.17.1729769139015; 
+ Thu, 24 Oct 2024 04:25:39 -0700 (PDT)
 Received: from localhost.localdomain (ppp176092143132.access.hol.gr.
  [176.92.143.132]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a91572c0dsm611534466b.177.2024.10.24.04.25.27
+ a640c23a62f3a-a9a91572c0dsm611534466b.177.2024.10.24.04.25.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 04:25:29 -0700 (PDT)
+ Thu, 24 Oct 2024 04:25:37 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: jerome.forissier@linaro.org,
 	raymond.mao@linaro.org
-Cc: xypron.glpk@gmx.de, Javier Tia <javier.tia@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+Cc: xypron.glpk@gmx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Peter Robinson <pbrobinson@gmail.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
  Wei Ming Chen <jj251510319013@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 3/6] net: lwip: Add Support Server Name Indication support
-Date: Thu, 24 Oct 2024 14:24:10 +0300
-Message-ID: <20241024112449.1362319-4-ilias.apalodimas@linaro.org>
+ Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH v2 4/6] net: lwip: Enable https:// support for wget
+Date: Thu, 24 Oct 2024 14:24:11 +0300
+Message-ID: <20241024112449.1362319-5-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
 References: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
@@ -104,94 +104,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Javier Tia <javier.tia@linaro.org>
+With the recent changes of lwip & mbedTLS we can now download from
+https:// urls instead of just http://.
+Adjust our wget lwip version parsing to support both URLs.
+While at it adjust the default TCP window for QEMU since https seems to
+require at least 16384
 
-SNI, or Server Name Indication, is an addition to the TLS encryption
-protocol that enables a client device to specify the domain name it is
-trying to reach in the first step of the TLS handshake, preventing
-common name mismatch errors and not reaching to HTTPS server that
-enforce this condition. Since most of the websites require it nowadays
-add support for it.
-
-It's worth noting that this is already sent to lwIP [0]
-
-[0] https://github.com/lwip-tcpip/lwip/pull/47
-
-Signed-off-by: Javier Tia <javier.tia@linaro.org>
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c | 11 +++++++----
- lib/lwip/lwip/src/include/lwip/altcp_tls.h           |  2 +-
- 2 files changed, 8 insertions(+), 5 deletions(-)
+ cmd/Kconfig      | 19 ++++++++++++
+ net/lwip/Kconfig |  2 +-
+ net/lwip/wget.c  | 78 +++++++++++++++++++++++++++++++++++++++++++-----
+ 3 files changed, 91 insertions(+), 8 deletions(-)
 
-diff --git a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
-index ef19821b89e0..24b432966312 100644
---- a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
-+++ b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
-@@ -106,6 +106,7 @@ struct altcp_tls_config {
-   u8_t pkey_count;
-   u8_t pkey_max;
-   mbedtls_x509_crt *ca;
-+  char host[256];
- #if defined(MBEDTLS_SSL_CACHE_C) && ALTCP_MBEDTLS_USE_SESSION_CACHE
-   /** Inter-connection cache for fast connection startup */
-   struct mbedtls_ssl_cache_context cache;
-@@ -642,6 +643,7 @@ altcp_mbedtls_setup(void *conf, struct altcp_pcb *conn, struct altcp_pcb *inner_
-   /* tell mbedtls about our I/O functions */
-   mbedtls_ssl_set_bio(&state->ssl_context, conn, altcp_mbedtls_bio_send, altcp_mbedtls_bio_recv, NULL);
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 3ee70f31b142..1d90a884e2c1 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2126,6 +2126,25 @@ config CMD_WGET
+ 	  wget is a simple command to download kernel, or other files,
+ 	  from a http server over TCP.
  
-+  mbedtls_ssl_set_hostname(&state->ssl_context, config->host);
-   altcp_mbedtls_setup_callbacks(conn, inner_conn);
-   conn->inner_conn = inner_conn;
-   conn->fns = &altcp_mbedtls_functions;
-@@ -951,7 +953,7 @@ altcp_tls_create_config_server_privkey_cert(const u8_t *privkey, size_t privkey_
- }
++config WGET_HTTPS
++	bool "wget https"
++	depends on CMD_WGET
++	depends on PROT_TCP_LWIP
++	depends on MBEDTLS_LIB
++        select SHA256
++        select RSA
++        select ASYMMETRIC_KEY_TYPE
++        select ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++        select X509_CERTIFICATE_PARSER
++        select PKCS7_MESSAGE_PARSER
++	select MBEDTLS_LIB_CRYPTO
++	select MBEDTLS_LIB_TLS
++	select RSA_VERIFY_WITH_PKEY
++	select X509_CERTIFICATE_PARSER
++	select PKCS7_MESSAGE_PARSER
++	help
++	  Enable TLS over http for wget.
++
+ endif  # if CMD_NET
  
- static struct altcp_tls_config *
--altcp_tls_create_config_client_common(const u8_t *ca, size_t ca_len, int is_2wayauth)
-+altcp_tls_create_config_client_common(const u8_t *ca, size_t ca_len, int is_2wayauth, char *host)
+ config CMD_PXE
+diff --git a/net/lwip/Kconfig b/net/lwip/Kconfig
+index 8a67de4cf335..a9ae9bf7fa2a 100644
+--- a/net/lwip/Kconfig
++++ b/net/lwip/Kconfig
+@@ -37,7 +37,7 @@ config PROT_UDP_LWIP
+ 
+ config LWIP_TCP_WND
+ 	int "Value of TCP_WND"
+-	default 8000 if ARCH_QEMU
++	default 32768 if ARCH_QEMU
+ 	default 3000000
+ 	help
+ 	  Default value for TCP_WND in the lwIP configuration
+diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+index b495ebd1aa96..1a2ecdcddf34 100644
+--- a/net/lwip/wget.c
++++ b/net/lwip/wget.c
+@@ -7,13 +7,17 @@
+ #include <efi_loader.h>
+ #include <image.h>
+ #include <lwip/apps/http_client.h>
++#include "lwip/altcp_tls.h"
+ #include <lwip/timeouts.h>
++#include <rng.h>
+ #include <mapmem.h>
+ #include <net.h>
+ #include <time.h>
++#include <dm/uclass.h>
+ 
+ #define SERVER_NAME_SIZE 200
+ #define HTTP_PORT_DEFAULT 80
++#define HTTPS_PORT_DEFAULT 443
+ #define PROGRESS_PRINT_STEP_BYTES (100 * 1024)
+ 
+ enum done_state {
+@@ -32,18 +36,53 @@ struct wget_ctx {
+ 	enum done_state done;
+ };
+ 
++bool wget_validate_uri(char *uri);
++
++int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len,
++			  size_t *olen)
++{
++	struct udevice *dev;
++	u64 rng = 0;
++	int ret;
++
++	*olen = 0;
++
++	ret = uclass_get_device(UCLASS_RNG, 0, &dev);
++	if (ret) {
++		log_err("Failed to get an rng: %d\n", ret);
++		return ret;
++	}
++	ret = dm_rng_read(dev, &rng, sizeof(rng));
++	if (ret)
++		return ret;
++
++	memcpy(output, &rng, len);
++	*olen = sizeof(rng);
++
++	return 0;
++}
++
+ static int parse_url(char *url, char *host, u16 *port, char **path)
  {
-   int ret;
-   struct altcp_tls_config *conf = altcp_tls_create_config(0, (is_2wayauth) ? 1 : 0, (is_2wayauth) ? 1 : 0, ca != NULL);
-@@ -973,13 +975,14 @@ altcp_tls_create_config_client_common(const u8_t *ca, size_t ca_len, int is_2way
+ 	char *p, *pp;
+ 	long lport;
++	size_t prefix_len = 0;
++
++	if (!wget_validate_uri(url)) {
++		log_err("Invalid URL. Use http(s)://\n");
++		return -EINVAL;
++	}
  
-     mbedtls_ssl_conf_ca_chain(&conf->conf, conf->ca, NULL);
-   }
-+  memcpy(conf->host, host, sizeof(conf->host));
-   return conf;
- }
++	*port = HTTP_PORT_DEFAULT;
++	prefix_len = strlen("http://");
+ 	p = strstr(url, "http://");
+ 	if (!p) {
+-		log_err("only http:// is supported\n");
+-		return -EINVAL;
++		p = strstr(url, "https://");
++		prefix_len = strlen("https://");
++		*port = HTTPS_PORT_DEFAULT;
+ 	}
  
- struct altcp_tls_config *
--altcp_tls_create_config_client(const u8_t *ca, size_t ca_len)
-+altcp_tls_create_config_client(const u8_t *ca, size_t ca_len, char *host)
+-	p += strlen("http://");
++	p += prefix_len;
+ 
+ 	/* Parse hostname */
+ 	pp = strchr(p, ':');
+@@ -67,9 +106,8 @@ static int parse_url(char *url, char *host, u16 *port, char **path)
+ 		if (lport > 65535)
+ 			return -EINVAL;
+ 		*port = (u16)lport;
+-	} else {
+-		*port = HTTP_PORT_DEFAULT;
+ 	}
++
+ 	if (*pp != '/')
+ 		return -EINVAL;
+ 	*path = pp;
+@@ -210,6 +248,9 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
+ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
  {
--  return altcp_tls_create_config_client_common(ca, ca_len, 0);
-+  return altcp_tls_create_config_client_common(ca, ca_len, 0, host);
- }
+ 	char server_name[SERVER_NAME_SIZE];
++#if defined CONFIG_WGET_HTTPS
++	altcp_allocator_t tls_allocator;
++#endif
+ 	httpc_connection_t conn;
+ 	httpc_state_t *state;
+ 	struct netif *netif;
+@@ -232,6 +273,22 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+ 		return -1;
  
- struct altcp_tls_config *
-@@ -995,7 +998,7 @@ altcp_tls_create_config_client_2wayauth(const u8_t *ca, size_t ca_len, const u8_
-     return NULL;
-   }
+ 	memset(&conn, 0, sizeof(conn));
++#if defined CONFIG_WGET_HTTPS
++	if (port == HTTPS_PORT_DEFAULT) {
++		tls_allocator.alloc = &altcp_tls_alloc;
++		tls_allocator.arg =
++			altcp_tls_create_config_client(NULL, 0, server_name);
++
++		if (!tls_allocator.arg) {
++			log_err("error: Cannot create a TLS connection\n");
++			net_lwip_remove_netif(netif);
++			return -1;
++		}
++
++		conn.altcp_allocator = &tls_allocator;
++	}
++#endif
++
+ 	conn.result_fn = httpc_result_cb;
+ 	ctx.path = path;
+ 	if (httpc_get_file_dns(server_name, port, path, &conn, httpc_recv_cb,
+@@ -316,6 +373,7 @@ bool wget_validate_uri(char *uri)
+ 	char c;
+ 	bool ret = true;
+ 	char *str_copy, *s, *authority;
++	size_t prefix_len = 0;
  
--  conf = altcp_tls_create_config_client_common(ca, ca_len, 1);
-+  conf = altcp_tls_create_config_client_common(ca, ca_len, 1, NULL);
-   if (conf == NULL) {
-     return NULL;
-   }
-diff --git a/lib/lwip/lwip/src/include/lwip/altcp_tls.h b/lib/lwip/lwip/src/include/lwip/altcp_tls.h
-index fcb784d89d70..fb0618234481 100644
---- a/lib/lwip/lwip/src/include/lwip/altcp_tls.h
-+++ b/lib/lwip/lwip/src/include/lwip/altcp_tls.h
-@@ -92,7 +92,7 @@ struct altcp_tls_config *altcp_tls_create_config_server_privkey_cert(const u8_t
- /** @ingroup altcp_tls
-  * Create an ALTCP_TLS client configuration handle
-  */
--struct altcp_tls_config *altcp_tls_create_config_client(const u8_t *cert, size_t cert_len);
-+struct altcp_tls_config *altcp_tls_create_config_client(const u8_t *cert, size_t cert_len, char *host);
+ 	for (c = 0x1; c < 0x21; c++) {
+ 		if (strchr(uri, c)) {
+@@ -323,15 +381,21 @@ bool wget_validate_uri(char *uri)
+ 			return false;
+ 		}
+ 	}
++
+ 	if (strchr(uri, 0x7f)) {
+ 		log_err("invalid character is used\n");
+ 		return false;
+ 	}
  
- /** @ingroup altcp_tls
-  * Create an ALTCP_TLS client configuration handle with two-way server/client authentication
+-	if (strncmp(uri, "http://", 7)) {
+-		log_err("only http:// is supported\n");
++	if (!strncmp(uri, "http://", strlen("http://"))) {
++		prefix_len = strlen("http://");
++	} else if (!strncmp(uri, "https://", strlen("https://"))) {
++		prefix_len = strlen("https://");
++	} else {
++		log_err("only http(s):// is supported\n");
+ 		return false;
+ 	}
++
+ 	str_copy = strdup(uri);
+ 	if (!str_copy)
+ 		return false;
 -- 
 2.45.2
 
