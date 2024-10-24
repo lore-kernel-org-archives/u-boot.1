@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F21CE8E63
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 11:26:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D000CE8E62
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 11:26:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF2C488FC0;
-	Thu, 24 Oct 2024 13:25:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5DC4588EE0;
+	Thu, 24 Oct 2024 13:26:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wT7Ianl+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AJLA79RU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03B1088F2C; Thu, 24 Oct 2024 13:25:54 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 2DAC688EE0; Thu, 24 Oct 2024 13:26:01 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BCC988C7B
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 13:25:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B34388FB9
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 13:25:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-539f76a6f0dso751341e87.1
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 04:25:49 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a9a0cee600aso91466566b.1
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 04:25:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729769148; x=1730373948; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729769154; x=1730373954; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y988mXFVlw/ZvqvO8EpMiKq+MdDOfWgrkrGomVG+qSc=;
- b=wT7Ianl+GjTdhyG2sGIrpS9KK9lD+yizwysdY2lWVEcBpQLkzrSjWy53dDNZ5qBW9q
- 7hsIqry7V9kmpSgc/t2yk5uQeUAELRTihy1ENRU4T6RSLwlom4NjBhWn+4wWAMLebUev
- 9xxF99DGK705+athSgjBoP2+SGOVhxau+n7XsUiezgmQ39dktXSJDtJVDwtm22NeePcu
- 40wjNRCofIR6sKU5iK+G8CAFKcMAFhU6tnxxI3ccwwyvRRnhtChqkm+spivL7tuwSzmy
- pDUt5OWZvItYNCiBIK8hT4zcnRmeyjknzPDo+grxJSlI4rcECPsIx60MwoM3xvirGbMf
- qR+g==
+ bh=z0uM6ntOYMs0q92YYMNWqhN3ZZP/ZZqsv1+VRN9gK0Y=;
+ b=AJLA79RUxSJfXEqVGSniAN20yj7n+H7NSMi+NbayUuMTEhD8aNaiw1kK1FbAicKdr2
+ 8fDvL0FESFLfd4BBWT0vAvToXXevNhu7MHGyfu2DnUb3OkEhN+1GtYLvT5KVtad8WpO0
+ pMZlLpYZD/2Aqx6uo337/LGLdWFTOyiD13gh/fYGhgXTwq1sHY65hsFth4yrR0liJ/EJ
+ CU0NPqHYazlwWgcijf1CkmG9zHiT2pAvar+/74vFy3ymMTHQr+V1AlUy2IyxoPsuQ+am
+ iru0+I98LOOTc/3IQ09GxZa5Go5u1yX2cJeMrnSINgkAbYh2seYGMg40qJde2YaS0xPL
+ 23yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729769148; x=1730373948;
+ d=1e100.net; s=20230601; t=1729769154; x=1730373954;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y988mXFVlw/ZvqvO8EpMiKq+MdDOfWgrkrGomVG+qSc=;
- b=CjjmK2RW1UcykwpqSIWJgJBsRT4w8WQM/SQEXd4vtN0jqoBsRTYrMz6QFPz1Tg2Ygl
- nxZvXttGFb4kDZk0IUr31hiY85bDQO6hjcOq2hOE53aiZudbePEVN7W1Fs4oyrwKQB9v
- fOXuZXGrJWBkqaq8QjrseNNLcZhQPa+dX0nGa2GCV/H3mJFADz/fOh+aGCQ562yjZxmC
- 4P4JRIvsb/8yQwYk8WxKhQx9MV9GXaKFa241toKO6w+CF5gwGp08WnebqqsjRAnAC1+e
- aYR8MUDhyjcEzL4fWjz0DRxMEgsXjqr6/EZkjo4ZxQu+Jv55yN1Jt4sgZNj3ckXbwC4k
- 19xQ==
+ bh=z0uM6ntOYMs0q92YYMNWqhN3ZZP/ZZqsv1+VRN9gK0Y=;
+ b=bRl1Alyv+YGcyrNWUU9jt67Qbij7ACycpHIRTtg1RqSFm2eD7wCkxkJ4YNEMsDRS1k
+ 8X9L0Kv+ZWglnQuDiupEEzycHX8MLyMicoamaRPqYuhL6u+iSdt3v24WJ0OaB6GAPKk6
+ hQ4c1IspMDPTuZipKNnTi7TlJRWY0OLIvpgHQ4FaK8gZ76v+Rz5n2df45M7HP4eOsu9r
+ 08AuYI8l76kJqgm4S+XRJNy5e7eTys6UB4d2mAe5KxnebQZ4+PzmzTpiEfrxekiTJ1qU
+ QckuykSIwdyZV44YDYaf4BOdPIpDeSqrL6yMewenM7KRrDSl8WwvgbBx4vUaehO1hw8T
+ MJiA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVvmNREcLzEOa5vZ3zYaAT9pF/hHrqcpMMEzeMPvlc7fmIaJMhCIEc4y8Ity2tWR6wcN9jdbyc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyjY42zpeTTR6b7iuqBful2N3p3Cycbwy+cFG9jwdIzOqG3b6oA
- KhQyDNSbM+my1Q/Y0HSYZMErrfGs5ciKLemx0kM3M9bGs0BTQk9+cK9k1wki5NM=
-X-Google-Smtp-Source: AGHT+IFu/rotmUevBL1l4HyfEIksQrZxAlB+BjWk/TQJkFMKTIZLAxwgZMY6atM0cZQaUTMx1vNVGw==
-X-Received: by 2002:a05:6512:31c3:b0:539:9f52:9e4 with SMTP id
- 2adb3069b0e04-53b1a375da2mr3506942e87.48.1729769146791; 
- Thu, 24 Oct 2024 04:25:46 -0700 (PDT)
+ AJvYcCXs/YbeGCXJFeXxULsGDbl4rU7SV8fPDYiC9KAR8altVLpR2JJ/eih175FntHlbLAmrWnix+Ws=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZ6H9MBzg/YAxyMqDpGDkTFyVMQVGqqtzEJIqFkgDqngll7Kqn
+ Hzt26eVixvkCH4NEbDy1tsyJmgh5Hzo6MWctMqQp6zuNEHye6xTfT2fTTMbmPn0=
+X-Google-Smtp-Source: AGHT+IESChttTdrziVMFUJD5VRlCyoIZgp0FkIOXHB2f1IQaapzs/ZJks4TpPaiEqr5PVuF3Pg3S3w==
+X-Received: by 2002:a17:907:98d:b0:a9a:e91:68c5 with SMTP id
+ a640c23a62f3a-a9abf8ba5c5mr472918066b.33.1729769154523; 
+ Thu, 24 Oct 2024 04:25:54 -0700 (PDT)
 Received: from localhost.localdomain (ppp176092143132.access.hol.gr.
  [176.92.143.132]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a91572c0dsm611534466b.177.2024.10.24.04.25.43
+ a640c23a62f3a-a9a91572c0dsm611534466b.177.2024.10.24.04.25.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 04:25:45 -0700 (PDT)
+ Thu, 24 Oct 2024 04:25:52 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: jerome.forissier@linaro.org,
 	raymond.mao@linaro.org
 Cc: xypron.glpk@gmx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Jonathan Humphreys <j-humphreys@ti.com>,
  Wei Ming Chen <jj251510319013@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
  Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH v2 5/6] configs: Enable https for wget on qemu arm64
-Date: Thu, 24 Oct 2024 14:24:12 +0300
-Message-ID: <20241024112449.1362319-6-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 6/6] doc: uefi: Describe UEFI HTTPs boot
+Date: Thu, 24 Oct 2024 14:24:13 +0300
+Message-ID: <20241024112449.1362319-7-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
 References: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
@@ -104,28 +105,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-QEMU already has an lwip variant of a defconfig. That defconfig
-is also configured with mbedTLS by default. So let's enable the
-remaining config options to enable wget for https:// as well
-and test that codepath in the CI
+We now can use a combination og lwIP & mbedTLS and download from
+https://. Describe the config options needed to enable it as well
+as some limitations
 
-Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- configs/qemu_arm64_lwip_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ doc/develop/uefi/uefi.rst | 45 +++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 43 insertions(+), 2 deletions(-)
 
-diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
-index d3d8ef16e668..754c770c33fc 100644
---- a/configs/qemu_arm64_lwip_defconfig
-+++ b/configs/qemu_arm64_lwip_defconfig
-@@ -7,3 +7,4 @@ CONFIG_NET_LWIP=y
- CONFIG_CMD_DNS=y
- CONFIG_CMD_WGET=y
- CONFIG_EFI_HTTP_BOOT=y
-+CONFIG_WGET_HTTPS=y
+diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+index 0760ca91d4fc..e19dcaac8056 100644
+--- a/doc/develop/uefi/uefi.rst
++++ b/doc/develop/uefi/uefi.rst
+@@ -681,8 +681,8 @@ UEFI variables. Booting according to these variables is possible via::
+ As of U-Boot v2020.10 UEFI variables cannot be set at runtime. The U-Boot
+ command 'efidebug' can be used to set the variables.
+ 
+-UEFI HTTP Boot
+-~~~~~~~~~~~~~~
++UEFI HTTP Boot using the legacy TCP stack
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ HTTP Boot provides the capability for system deployment and configuration
+ over the network. HTTP Boot can be activated by specifying::
+@@ -715,6 +715,47 @@ We need to preset the "httpserverip" environment variable to proceed the wget::
+ 
+     setenv httpserverip 192.168.1.1
+ 
++UEFI HTTP(s) Boot using lwIP
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++Similar to the above U-Boot can do EFI HTTP boot using lwIP. If we combine this
++with mbedTLS we can also download from https://
++
++HTTP(s) Boot can be activated by specifying::
++
++    CONFIG_EFI_HTTP_BOOT
++    CONFIG_NET_LWIP
++    CONFIG_WGET_HTTPS
++
++For QEMU targets there's a Kconfig that supports this by default::
++
++    make qemu_arm64_lwip_defconfig
++
++The commands and functionality are similar to the legacy stack, with the notable
++exception of not having to define an "httpserverip" if you are trying to resolve
++an IP. However, lwIP code doesn't yet support redirects::
++
++    => efidebug boot add -u 1 netinst https://cdimage.debian.org/cdimage/weekly-builds/arm64/iso-cd/debian-testing-arm64-netinst.iso
++    => dhcp
++    DHCP client bound to address 10.0.2.15 (3 ms)
++    => efidebug boot order 1
++    => bootefi bootmgr
++
++    HTTP server error 302
++    Loading Boot0001 'netinst' failed
++    EFI boot manager: Cannot load any image
++
++If the url you specified isn't a redirect::
++
++    => efidebug boot add -u 1 netinst https://download.rockylinux.org/pub/rocky/9/isos/aarch64/Rocky-9.4-aarch64-minimal.iso
++    => dhcp
++    => bootefi bootmgr
++    #######################################
++
++If the downloaded file extension is .iso or .img file, efibootmgr tries to
++mount the image and boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
++If the downloaded file is PE-COFF image, load the downloaded file and
++start it.
++
+ Executing the built in hello world application
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
 -- 
 2.45.2
 
