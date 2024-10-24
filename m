@@ -4,82 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03F4BD0BB46
-	for <u-boot@archiver.kernel.org>; Wed, 23 Oct 2024 23:00:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A41DD0BB4A
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 00:07:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B283892E1;
-	Thu, 24 Oct 2024 01:00:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D4319892FD;
+	Thu, 24 Oct 2024 02:07:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P1SxCHH/";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="IBrwHY7M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F8D08930D; Thu, 24 Oct 2024 01:00:42 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1CA2989309; Thu, 24 Oct 2024 02:07:02 +0200 (CEST)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79747892DB
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 01:00:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 719A6892FD
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 02:06:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6cbcc2bd7fcso2268446d6.1
- for <u-boot@lists.denx.de>; Wed, 23 Oct 2024 16:00:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729724437; x=1730329237; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=19crp+nnH/LyOJAlm9kqn8vA5MLISK1h83Y2XL1m/34=;
- b=P1SxCHH/B6mBnYSjR441vuZz18xL+GZAN8vNkfXNoHU4wVumit+if+eferOOc3uhsb
- 59j8o9ply0tSBR/uL0AB7bIzezzcnHhORmN0+xnt/ASm7Bp9/Xgj5BrRtmjo5NbEOhdS
- RzP6+pUOkKH6y4lEq5MT5WDWywAX9Yy0V9tYQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729724437; x=1730329237;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=19crp+nnH/LyOJAlm9kqn8vA5MLISK1h83Y2XL1m/34=;
- b=LFWCn5fsHErI2+qsEu5+2xFhVaJFIvCSf9ldvr5NkNzgxEYgUtC2HOvS27O0ya2ATh
- uNGPttQi8g2moVjgLa4KSJSKh2kctUyOxSrDFVuByf0d6ILcnEoWo08yrtVIO7NWPiSI
- UpU8K5uUVOgBH1f6e1poSbASjXiFlC4ZvICVywDC2go87GaCkSjE/rvLDieH+9WnmD5c
- aF5eJIGLEOdSRt7mXzcnlfZ9KsZdTwNoSHxCyIp0UI7dGs1BFIdJFrhPsPfNCA06Ynt4
- l1sgd7Qr37GjC9BhC7hm//HlutP4tb4JPE1rOJLhSgaMbA8YTDTvyOvu8euJzZfGhlnh
- YMlg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVkhrIH7A62qDpYpfuEaer1gtkrQCV5+DBAWMGfiPnhGk/yIkCK6X4nkJApFR1JdZYGgssIVuc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzH1ll32q1TDjs3GIcAjrV+NwqXdp16dWroJSUUYjttnLudnNhN
- HKEf3p9/6LaGhiwyZFXHIYsREIgBvMmU/tFsRUVN0lIbk0LEbUV1892Nmdi+T5Q=
-X-Google-Smtp-Source: AGHT+IGbX0oPGCRAQmGLVSABX1uvqrSPQ5PSuDjRtjXMB0DAL1+hwANCkeva+SUrOXAeYEa8YXARdg==
-X-Received: by 2002:a05:6214:3d9f:b0:6ce:2f4e:40f1 with SMTP id
- 6a1803df08f44-6ce34256662mr64127036d6.26.1729724437218; 
- Wed, 23 Oct 2024 16:00:37 -0700 (PDT)
-Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ce0090c360sm43823456d6.57.2024.10.23.16.00.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Oct 2024 16:00:35 -0700 (PDT)
-Date: Wed, 23 Oct 2024 17:00:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: enabling W=1 by default
-Message-ID: <20241023230032.GO4959@bill-the-cat>
-References: <ZxZk4K4ff1T3gUVm@smile.fi.intel.com>
- <CAFLszTjuodDFZW8fJDL1Q3nByLVzcTTEAeJfws-sbtupCwNd8w@mail.gmail.com>
- <ZxenO05qCbt5IIZS@smile.fi.intel.com>
- <CAFLszTj4pot8tCjesT9-cHewTUMogKMdGj+pSQDHXsnFV3rwUQ@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SwGSwPfnewALSRc0"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTj4pot8tCjesT9-cHewTUMogKMdGj+pSQDHXsnFV3rwUQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20241024000652epoutp014a91956620f342abeb8bd7475d930c8f~BOtOvTYu70130401304epoutp01b
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 00:06:52 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20241024000652epoutp014a91956620f342abeb8bd7475d930c8f~BOtOvTYu70130401304epoutp01b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1729728412;
+ bh=MOYloseJjEeLgcgK/SNvProDLrJQDHs0EI10EqayTe8=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=IBrwHY7MT9bgek9m4COOI0ZnUjNCaa7/YpFpDRHCBf2vQlXHVDDFr6nvwXHMlI1ik
+ H3HXJUcX8Yy9vgEgkPNtSROOfBHgO/YtafWNvHG0QhwM65Bt0y34eKsxp0juHgmIUO
+ lEFFoHgRkP8sFHXoPq+Mwet0u/cv8RBdom2n0Dik=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTP id
+ 20241024000652epcas1p3b2a6053aa692d46f341557b3e98cdbdd~BOtOh-jzn2798227982epcas1p3n;
+ Thu, 24 Oct 2024 00:06:52 +0000 (GMT)
+Received: from epsmges1p5.samsung.com (unknown [182.195.38.237]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4XYmRv0qhgz4x9Q2; Thu, 24 Oct
+ 2024 00:06:51 +0000 (GMT)
+Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
+ epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
+ AC.EB.09398.B9F89176; Thu, 24 Oct 2024 09:06:51 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20241024000650epcas1p186b53e05118fa7cdc277c1b6e8689b37~BOtM40TpV0945009450epcas1p10;
+ Thu, 24 Oct 2024 00:06:50 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20241024000650epsmtrp199aafa8018f30e5cb1372653ddbe5d4d~BOtM4J55o1453814538epsmtrp1-;
+ Thu, 24 Oct 2024 00:06:50 +0000 (GMT)
+X-AuditID: b6c32a39-5f9f8700000024b6-a0-67198f9bc09c
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 64.02.18937.A9F89176; Thu, 24 Oct 2024 09:06:50 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20241024000650epsmtip231fb4749050e995d05130639dfa6c6f1~BOtMkvnDJ2947029470epsmtip2f;
+ Thu, 24 Oct 2024 00:06:50 +0000 (GMT)
+From: "Jaehoon Chung" <jh80.chung@samsung.com>
+To: "'Tim Harvey'" <tharvey@gateworks.com>, "'Heiko Schocher'" <hs@denx.de>,
+ "'Tom Rini'" <trini@konsulko.com>, "'Peng Fan'" <peng.fan@nxp.com>,
+ <u-boot@lists.denx.de>
+Cc: <linux-kernel@vger.kernel.org>
+In-Reply-To: <20241023202855.1571188-4-tharvey@gateworks.com>
+Subject: RE: [PATCH 4/4] mmc: fsl_esdhc: Convert to use livetree API for fdt
+ access
+Date: Thu, 24 Oct 2024 09:06:49 +0900
+Message-ID: <0bf101db25a8$9fe17d10$dfa47730$@samsung.com>
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: ko
+Thread-Index: AQI9tlBLkulT+iAYa8f+rqP6Oy1iRAKkIeFFAvkOAWGxovrhcA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrEKsWRmVeSWpSXmKPExsWy7bCmru7sfsl0g/9vmC123LnPbHF51xw2
+ ix+rvrBaXDzxidli6qTN7BZv93ayO7B5zJt1gsXjXM9dNo9XB1axe5y9s4PRY+O7HUwenzfJ
+ BbBFZdtkpCampBYppOYl56dk5qXbKnkHxzvHm5oZGOoaWlqYKynkJeam2iq5+AToumXmAJ2h
+ pFCWmFMKFApILC5W0rezKcovLUlVyMgvLrFVSi1IySkwLdArTswtLs1L18tLLbEyNDAwMgUq
+ TMjOuNKYVrBDuOLO8/+MDYyzBboYOTgkBEwknl+N7mLk4hAS2MEoMWfnbSYI5xOjxJaF51m6
+ GDkhnO6ZOiA2SMOXrs2MEPGdjBI3Z5pANLxklLhw9A4zSIJNQE/i/6KFzCAJEYHVjBIrH09i
+ BVnHLKAkcfWUHEgNp4CtxOUZ88HqhQVCJebPugC2jEVAVeLG8klMIDavgKXEvDl9TBCLFSR+
+ Pl3GCmIzC4hIzO5sA+sVEXCS6Jzwkg2i5iW7xPRvkRC2i8TVf9cZIWxhiVfHt7BD2FISL/vb
+ 2EFukxBoZpRYuuQgK4TTwyjxr+E61CRjif1LJzNBHK0psX6XPsRiPol3X3tYIUHHK9HRJgRR
+ rSJx6fVLJpj5d5/8Z4WwPSRau6+zQwLoMDBEP21lncAoPwvJD7MQNixgZFrFKJZaUJybnlps
+ WGAKj8fk/NxNjODEp2W5g3H62w96hxiZOBgPMUpwMCuJ8F7MkEwX4k1JrKxKLcqPLyrNSS0+
+ xGgKDMmJzFKiyfnA1JtXEm9oYmlgYmZkbGJhaGaoJM575kpZqpBAemJJanZqakFqEUwfEwen
+ VAPTvD3SDGveLPwYoHF9b9my9J8GFpxz4nuMZeuem30QP31kipH2A9uGXSr1bQ+dPnW+Ytq9
+ k2v/pau/PxYZVX6Qy0+q6d4n/3+xp8v8qBXzhCdM09ke9yTTqIJ/67GQss+MU2MjmCeWs5/e
+ fUPuSf4iXzvfW3d6F/ifDYj6I1+8ooE/dWV16AIen5+Obn91Oh6KvHleONG4sqDn7N+SDiHb
+ lIZJHZPfXLfpWceTZ+HE4TDlxemwh9sZTrJ+brCtrPSL53ZYYeUYf0p3K6NGiEXJ0kmT/r7V
+ WthUL6JZ1nV8PlO33yXLf4KnDE7EfFwre7Y7hrVAS8/05NOACM/6Red2tCgK70xvUGlSmTRN
+ gE2JpTgj0VCLuag4EQDRxpRVBQQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrCLMWRmVeSWpSXmKPExsWy7bCSvO6sfsl0gxtr1Sx23LnPbHF51xw2
+ ix+rvrBaXDzxidli6qTN7BZv93ayO7B5zJt1gsXjXM9dNo9XB1axe5y9s4PRY+O7HUwenzfJ
+ BbBFcdmkpOZklqUW6dslcGVcaUwr2CFccef5f8YGxtkCXYycHBICJhJfujYzdjFycQgJbGeU
+ mDl3KitEQkri89OpbF2MHEC2sMThw8UQNc8ZJU4/2MYEUsMmoCfxf9FCZpCEiMB6RonpHZsY
+ QRqYBZQkrp6SA6kREtjPKNG12xnE5hSwlbg8Yz4zSImwQLDExnnJIGEWAVWJG8sngY3kFbCU
+ mDenjwniBAWJn0+XgZ3DLCAiMbuzjRnEFhFwkuic8JJtAqPALCSpBYyMqxhFUwuKc9NzkwsM
+ 9YoTc4tL89L1kvNzNzGCA1YraAfjsvV/9Q4xMnEwHmKU4GBWEuG9mCGZLsSbklhZlVqUH19U
+ mpNafIhRmoNFSZxXOaczRUggPbEkNTs1tSC1CCbLxMEp1cBkxfZzx+1Q8QLXhAnKz1Tr9u15
+ uqlSImKewePfL/ZaT5p3dOtz6UfvPfyXhDacv7rjyyeHyomWfFbx0zPinhlb25m/KAh8ubW0
+ OO3WnE9PMwO+lujcj1N7on+Y4a3P12s3AvffNtZI2eWdmXk5LaKXZ6WvsKbAc8NZa/Lb2F8K
+ /rK0K3iRePPVxEc/d2nnF6wIT3XkE29ccU/Gd23pnNmHtQzTD+vIbVkpL59UMUVmp++Snxek
+ 7q7ZsGLDfNsHk3fNXyur92uilW/bdb2L73ebuCwvFpQ44760evu3kMUyL0R4pnBw/c56OGPJ
+ sg9yT7yecmyfZaGQq3TYd7dH1ZpIm95HXr8r56w/5j194bZXMkosxRmJhlrMRcWJABnvLiXH
+ AgAA
+X-CMS-MailID: 20241024000650epcas1p186b53e05118fa7cdc277c1b6e8689b37
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20241023202929epcas1p153367751258e5df3feab5c189458e841
+References: <20241023202855.1571188-1-tharvey@gateworks.com>
+ <CGME20241023202929epcas1p153367751258e5df3feab5c189458e841@epcas1p1.samsung.com>
+ <20241023202855.1571188-4-tharvey@gateworks.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,108 +136,70 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---SwGSwPfnewALSRc0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 22, 2024 at 08:13:40PM +0200, Simon Glass wrote:
-> Hi Andy,
->=20
-> On Tue, 22 Oct 2024 at 15:23, Andy Shevchenko
-> <andriy.shevchenko@linux.intel.com> wrote:
-> >
-> > On Mon, Oct 21, 2024 at 06:32:21PM +0200, Simon Glass wrote:
-> > > On Mon, 21 Oct 2024 at 16:27, Andy Shevchenko
-> > > <andriy.shevchenko@linux.intel.com> wrote:
-> > > >
-> > > > looking at the redness of the output of `make W=3D1` here is the qu=
-estion:
-> > > > isn't it a good time to enable `make W=3D1` by default. Yes, I unde=
-rstand
-> > > > the impact, but at least we can do it mandatory for a _new_ code su=
-bmitted to
-> > > > U-Boot, right?
-> > > >
-> > > > Ideally I would have what Linux kernel has for a few releases alrea=
-dy, i.e.
-> > > > Werror by default and getting close to make a clean builds with tha=
-t and
-> > > > make W=3D1` at least against default configurations (yeah, with U-B=
-oot there is
-> > > > probably no default, but sandbox one).
-> > >
-> > > Warnings should be warnings...
-> >
-> > Yes, and ideally the code should not have warnings, right?
-> >
-> > Otherwise how can we do better? It's quite similar to what you wrote WRT
-> > documenting the function prototypes, the same applies to the new contri=
-bution
-> > WRT `make W=3D1`.
-> >
-> > > if you would like to enable it for CI that is fine by me,
-> >
-> > Yes, that's the idea, but I'm not the owner of any U-Boot CIs,
-> > hence it's a proposal.
->=20
-> You can still do a patch...but I see we already use 'buildman -E' in
-> CI, so perhaps it is already working?
+> -----Original Message-----
+> From: Tim Harvey <tharvey@gateworks.com>
+> Sent: Thursday, October 24, 2024 5:29 AM
+> To: Heiko Schocher <hs@denx.de>; Tom Rini <trini@konsulko.com>; Peng Fan <peng.fan@nxp.com>; Jaehoon
+> Chung <jh80.chung@samsung.com>; u-boot@lists.denx.de
+> Cc: linux-kernel@vger.kernel.org; Tim Harvey <tharvey@gateworks.com>
+> Subject: [PATCH 4/4] mmc: fsl_esdhc: Convert to use livetree API for fdt access
+>
+> Convert to using livetree API functions.
+>
+> Without this if livetree is enabled (OF_LIVE) the fsl_esdhc_imx
+> driver will fail to read vendor-specific properties from the dt.
+>
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 
-In general, yes, it is.
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
-> > > but the U-Boot makefile shouldn't do it. It defeats the purpose of
-> > > having a distinction between errors and warnings.
-> >
-> > While it's not what I wanted, I disagree on your comment. The idea is t=
-o make
-> > rules stricter (for new code) to make it better and that's why Linus en=
-abled
-> > Werror by default in the Linux kernel. And personally I consider that a=
-s a good
-> > thing to follow.
->=20
-> I'll note that coreboot enabled this and it is a right pain. Since
-> coreboot always produces copious amounts of pointless output, there is
-> then a warning hidden somewhere in the middle and the build then fails
-> inexplicably. At least with U-Boot we can use -s and only get messages
-> which require user action.
+Best Regards,
+Jaehoon Chung
 
-Personally, I find -Werror very helpful when developing code because it
-means I either (a) made a mistake or (b) forgot to if-out some code I
-didn't intend. This is also personal preference. But I think "make
-KCFLAGS=3D-Werror -sj" is great, personally. And I'll re-run without the
--j if I can't see what failed right there.
+> ---
+>  drivers/mmc/fsl_esdhc_imx.c | 15 +++++++--------
+>  1 file changed, 7 insertions(+), 8 deletions(-)
+>
+> diff --git a/drivers/mmc/fsl_esdhc_imx.c b/drivers/mmc/fsl_esdhc_imx.c
+> index fb410104c1fc..d7a45ef0ad0d 100644
+> --- a/drivers/mmc/fsl_esdhc_imx.c
+> +++ b/drivers/mmc/fsl_esdhc_imx.c
+> @@ -1398,8 +1398,7 @@ static int fsl_esdhc_of_to_plat(struct udevice *dev)
+>  	struct udevice *vqmmc_dev;
+>  	int ret;
+>
+> -	const void *fdt = gd->fdt_blob;
+> -	int node = dev_of_offset(dev);
+> +	ofnode node = dev_ofnode(dev);
+>  	fdt_addr_t addr;
+>  	unsigned int val;
+>
+> @@ -1413,15 +1412,15 @@ static int fsl_esdhc_of_to_plat(struct udevice *dev)
+>  	priv->dev = dev;
+>  	priv->mode = -1;
+>
+> -	val = fdtdec_get_int(fdt, node, "fsl,tuning-step", 1);
+> +	val = ofnode_read_u32_default(node, "fsl,tuning-step", 1);
+>  	priv->tuning_step = val;
+> -	val = fdtdec_get_int(fdt, node, "fsl,tuning-start-tap",
+> -			     ESDHC_TUNING_START_TAP_DEFAULT);
+> +	val = ofnode_read_u32_default(node, "fsl,tuning-start-tap",
+> +				      ESDHC_TUNING_START_TAP_DEFAULT);
+>  	priv->tuning_start_tap = val;
+> -	val = fdtdec_get_int(fdt, node, "fsl,strobe-dll-delay-target",
+> -			     ESDHC_STROBE_DLL_CTRL_SLV_DLY_TARGET_DEFAULT);
+> +	val = ofnode_read_u32_default(node, "fsl,strobe-dll-delay-target",
+> +				      ESDHC_STROBE_DLL_CTRL_SLV_DLY_TARGET_DEFAULT);
+>  	priv->strobe_dll_delay_target = val;
+> -	val = fdtdec_get_int(fdt, node, "fsl,signal-voltage-switch-extra-delay-ms", 0);
+> +	val = ofnode_read_u32_default(node, "fsl,signal-voltage-switch-extra-delay-ms", 0);
+>  	priv->signal_voltage_switch_extra_delay_ms = val;
+>
+>  	if (dev_read_bool(dev, "broken-cd"))
+> --
+> 2.25.1
+>
 
-> But anyway, so long as we have this enabled in CI, we are not
-> introducing new warnings. But another point is that we tend to get
-> more warnings when moving to a newer toolchain...and devicetree has
-> tons of warnings now.
 
-It doesn't matter at this point, but perhaps if device tree warnings
-were errors there'd have been motivation these past many years to (a)
-resync and (b) fix any number of them. Unfortunately it's like migration
-notices and just noise to ignore.
 
---=20
-Tom
-
---SwGSwPfnewALSRc0
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcZgBAACgkQFHw5/5Y0
-tyy8cwv+IWfYtahvCKlSLHcNm3AoJwnEZJt6Sc9U4GmMKjTG0/shA1Cep4gDuMGy
-qV36vib/VAJRSWQyTu2PUc7bwSwZSn7EdzMEzSszmnEg9qRkADu9mTc3+4yS5w7L
-fA8Yns4xfJA3kGaP1+ArQxCJS/JqNAE8UGMdlfrfwngyQILGBufIN20PvY5pbcfh
-AAmaNTtu2kz4MT9UQ8cX0GrxxFSw4FsqBP3ALNqIGzwiHgjZlogldJsvho6eaI5J
-AWt4sng1r7e85JNToQZELM/ypqPE6QwPJBmzIaBNv68goGGgTLM4fLGKV5erkb8B
-h2tXj8ME93uzfrBVoX/1w6JUnEcqJx4VQJSdqYz/POEHlIySPo4zcRDasP6/7AiA
-HrRTNMRfckhgltEsQ/xacoavNg6jfxZ45Wnwa7TTN8nyxynHMXFOV4l9em6Eqb5K
-SynjaFdis/1s17+07aC1eFPlnU/0KzHQGTpIhOX3Kyl1KkQLbjqX8DQeggopeC/S
-rjeTkE7r
-=FQFT
------END PGP SIGNATURE-----
-
---SwGSwPfnewALSRc0--
