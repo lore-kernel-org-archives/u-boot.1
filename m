@@ -4,91 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D000CE8E62
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 11:26:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CDEACE8E65
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 11:30:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DC4588EE0;
-	Thu, 24 Oct 2024 13:26:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9354A88EE0;
+	Thu, 24 Oct 2024 13:30:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AJLA79RU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E2buklIq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DAC688EE0; Thu, 24 Oct 2024 13:26:01 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 8A8A988EE0; Thu, 24 Oct 2024 13:30:16 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B34388FB9
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 13:25:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D534788C7B
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 13:30:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9a0cee600aso91466566b.1
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 04:25:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2fb6110c8faso7276401fa.1
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 04:30:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729769154; x=1730373954; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=z0uM6ntOYMs0q92YYMNWqhN3ZZP/ZZqsv1+VRN9gK0Y=;
- b=AJLA79RUxSJfXEqVGSniAN20yj7n+H7NSMi+NbayUuMTEhD8aNaiw1kK1FbAicKdr2
- 8fDvL0FESFLfd4BBWT0vAvToXXevNhu7MHGyfu2DnUb3OkEhN+1GtYLvT5KVtad8WpO0
- pMZlLpYZD/2Aqx6uo337/LGLdWFTOyiD13gh/fYGhgXTwq1sHY65hsFth4yrR0liJ/EJ
- CU0NPqHYazlwWgcijf1CkmG9zHiT2pAvar+/74vFy3ymMTHQr+V1AlUy2IyxoPsuQ+am
- iru0+I98LOOTc/3IQ09GxZa5Go5u1yX2cJeMrnSINgkAbYh2seYGMg40qJde2YaS0xPL
- 23yQ==
+ d=gmail.com; s=20230601; t=1729769406; x=1730374206; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QyFFxTYwv1jJXGXk9sHZfM8RGUMlCig7USSVDvqZ0z8=;
+ b=E2buklIqGY0Gxrxeuvn2TItAkdUpmx5WkMFXg4U0zoC2YnkUTTpH5NnIqKkzOkAchb
+ 75SaMOMqPfxQ+gPssvDBhZGa8GXpUbNtvH5DJu/p5cHPA3D9x9OR9gEsKUE2rTEZL6HE
+ SRa9RlRIDp/5Im4K4hQUGXbsRuJH/vdpAeQDIX5nHE+qJ3gVBEeVZclTQ8SpjHLGa73m
+ rg2S9vmh/s2QifbJtpx+lFLRQnri6fejB4qvWT+BMXX91nebsIYbybFoVy5K7eZnGeqU
+ 7AcIoijFQ+r6nyUxlUF7MvYZ/TS/JvNxK0hwKfPGQzXeKBLjljbgoZC8yW9WOHWdnSQn
+ fCnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729769154; x=1730373954;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=z0uM6ntOYMs0q92YYMNWqhN3ZZP/ZZqsv1+VRN9gK0Y=;
- b=bRl1Alyv+YGcyrNWUU9jt67Qbij7ACycpHIRTtg1RqSFm2eD7wCkxkJ4YNEMsDRS1k
- 8X9L0Kv+ZWglnQuDiupEEzycHX8MLyMicoamaRPqYuhL6u+iSdt3v24WJ0OaB6GAPKk6
- hQ4c1IspMDPTuZipKNnTi7TlJRWY0OLIvpgHQ4FaK8gZ76v+Rz5n2df45M7HP4eOsu9r
- 08AuYI8l76kJqgm4S+XRJNy5e7eTys6UB4d2mAe5KxnebQZ4+PzmzTpiEfrxekiTJ1qU
- QckuykSIwdyZV44YDYaf4BOdPIpDeSqrL6yMewenM7KRrDSl8WwvgbBx4vUaehO1hw8T
- MJiA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXs/YbeGCXJFeXxULsGDbl4rU7SV8fPDYiC9KAR8altVLpR2JJ/eih175FntHlbLAmrWnix+Ws=@lists.denx.de
-X-Gm-Message-State: AOJu0YxZ6H9MBzg/YAxyMqDpGDkTFyVMQVGqqtzEJIqFkgDqngll7Kqn
- Hzt26eVixvkCH4NEbDy1tsyJmgh5Hzo6MWctMqQp6zuNEHye6xTfT2fTTMbmPn0=
-X-Google-Smtp-Source: AGHT+IESChttTdrziVMFUJD5VRlCyoIZgp0FkIOXHB2f1IQaapzs/ZJks4TpPaiEqr5PVuF3Pg3S3w==
-X-Received: by 2002:a17:907:98d:b0:a9a:e91:68c5 with SMTP id
- a640c23a62f3a-a9abf8ba5c5mr472918066b.33.1729769154523; 
- Thu, 24 Oct 2024 04:25:54 -0700 (PDT)
-Received: from localhost.localdomain (ppp176092143132.access.hol.gr.
- [176.92.143.132]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a91572c0dsm611534466b.177.2024.10.24.04.25.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 04:25:52 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: jerome.forissier@linaro.org,
-	raymond.mao@linaro.org
-Cc: xypron.glpk@gmx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
- Wei Ming Chen <jj251510319013@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH v2 6/6] doc: uefi: Describe UEFI HTTPs boot
-Date: Thu, 24 Oct 2024 14:24:13 +0300
-Message-ID: <20241024112449.1362319-7-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
-References: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
+ d=1e100.net; s=20230601; t=1729769406; x=1730374206;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QyFFxTYwv1jJXGXk9sHZfM8RGUMlCig7USSVDvqZ0z8=;
+ b=ni0dczbKlHQ/VkocJoX4jLWfQeaFvfoEowbP6ZhaxUFOZHwORUs+I0RH6Hgkh9J+hI
+ gZJXM6deEvLGG+RpVqSeybtxMGZ6l7BLPDdmOQBvb9p4IgzXLYEwbzSh3YBVpGdtbsRh
+ cHV+kYzYRcY1sFZJePIf9yUNT6d42LwZvLRFB4nkmrGBQZPdCfLWZZ+dZQnSHr6gMhxs
+ CfzKSnSLpB3GrlR1wsVMseNdwHlqPm/zkVvAoCto7vr9HMNlXP6dTs490Vm1+QErYdfe
+ Gpe+3T0WmE//5SC6mggVbqUfrxntkHHp7uyafcnpC2vREzEOZHqRAdWNsyhkBzhHeTwn
+ jY2g==
+X-Gm-Message-State: AOJu0Yw/8cthei0/qVoyqKIGNUxwFTlR2ogH5frDN+Ceykug3sC6ZVzb
+ GIVCfnvVc9BVnc+M2cchYI3kt/xREsHjc6i3UvGlojalGLYp2rIe/VKanOUHrSPFZSF6F8KljMO
+ QywegQhtxkjD/qF7LZK835LBUuVk=
+X-Google-Smtp-Source: AGHT+IGRojJN57X2WsQHr0WPupYPun/8BXsPPJIiyH3nKNzBIt+/jd+A4SFBQFiwQEP5kE3NQR7J1kANq4qne8Ofzls=
+X-Received: by 2002:a2e:701:0:b0:2fb:607b:4cde with SMTP id
+ 38308e7fff4ca-2fca8277985mr7971911fa.39.1729769405757; Thu, 24 Oct 2024
+ 04:30:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241023131012.2445564-1-martin.stolpe@gmail.com>
+ <20241023131012.2445564-2-martin.stolpe@gmail.com>
+In-Reply-To: <20241023131012.2445564-2-martin.stolpe@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 24 Oct 2024 12:29:53 +0100
+Message-ID: <CALeDE9N0_ntH1cU5SKQmN9SQEW6uPRQnKHRd90tp7N+H0HO9Ww@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] rpi: Only add frame buffer node if
+ CONFIG_FDT_SIMPLEFB is set
+To: Martin Stolpe <martinstolpe@gmail.com>
+Cc: u-boot@lists.denx.de, Martin Stolpe <martin.stolpe@gmail.com>, 
+ Francois Berder <fberder@outlook.fr>, "Ivan T. Ivanov" <iivanov@suse.de>, 
+ Matthias Brugger <mbrugger@suse.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,79 +91,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We now can use a combination og lwIP & mbedTLS and download from
-https://. Describe the config options needed to enable it as well
-as some limitations
+Hi Martin,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- doc/develop/uefi/uefi.rst | 45 +++++++++++++++++++++++++++++++++++++--
- 1 file changed, 43 insertions(+), 2 deletions(-)
+> The functions fdt_simplefb_add_node and fdt_simplefb_enable_and_mem_rsv
+> are only available if CONFIG_FDT_SIMPLEFB is enabled.
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index 0760ca91d4fc..e19dcaac8056 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -681,8 +681,8 @@ UEFI variables. Booting according to these variables is possible via::
- As of U-Boot v2020.10 UEFI variables cannot be set at runtime. The U-Boot
- command 'efidebug' can be used to set the variables.
- 
--UEFI HTTP Boot
--~~~~~~~~~~~~~~
-+UEFI HTTP Boot using the legacy TCP stack
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
- HTTP Boot provides the capability for system deployment and configuration
- over the network. HTTP Boot can be activated by specifying::
-@@ -715,6 +715,47 @@ We need to preset the "httpserverip" environment variable to proceed the wget::
- 
-     setenv httpserverip 192.168.1.1
- 
-+UEFI HTTP(s) Boot using lwIP
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+Similar to the above U-Boot can do EFI HTTP boot using lwIP. If we combine this
-+with mbedTLS we can also download from https://
-+
-+HTTP(s) Boot can be activated by specifying::
-+
-+    CONFIG_EFI_HTTP_BOOT
-+    CONFIG_NET_LWIP
-+    CONFIG_WGET_HTTPS
-+
-+For QEMU targets there's a Kconfig that supports this by default::
-+
-+    make qemu_arm64_lwip_defconfig
-+
-+The commands and functionality are similar to the legacy stack, with the notable
-+exception of not having to define an "httpserverip" if you are trying to resolve
-+an IP. However, lwIP code doesn't yet support redirects::
-+
-+    => efidebug boot add -u 1 netinst https://cdimage.debian.org/cdimage/weekly-builds/arm64/iso-cd/debian-testing-arm64-netinst.iso
-+    => dhcp
-+    DHCP client bound to address 10.0.2.15 (3 ms)
-+    => efidebug boot order 1
-+    => bootefi bootmgr
-+
-+    HTTP server error 302
-+    Loading Boot0001 'netinst' failed
-+    EFI boot manager: Cannot load any image
-+
-+If the url you specified isn't a redirect::
-+
-+    => efidebug boot add -u 1 netinst https://download.rockylinux.org/pub/rocky/9/isos/aarch64/Rocky-9.4-aarch64-minimal.iso
-+    => dhcp
-+    => bootefi bootmgr
-+    #######################################
-+
-+If the downloaded file extension is .iso or .img file, efibootmgr tries to
-+mount the image and boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-+If the downloaded file is PE-COFF image, load the downloaded file and
-+start it.
-+
- Executing the built in hello world application
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
--- 
-2.45.2
+Is this a follow up on the patch [1] you sent a month ago? If so it's
+not really a v1, and you should add a chnagelog as to what's changed
+as well as cc: the people that provided feedback.
 
+[1] https://lists.denx.de/pipermail/u-boot/2024-September/565514.html
+
+> Signed-off-by: Martin Stolpe <martin.stolpe@gmail.com>
+> ---
+>
+>  board/raspberrypi/rpi/rpi.c | 12 +++++++-----
+>  1 file changed, 7 insertions(+), 5 deletions(-)
+>
+> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> index ab5ea85cf9..47db441696 100644
+> --- a/board/raspberrypi/rpi/rpi.c
+> +++ b/board/raspberrypi/rpi/rpi.c
+> @@ -569,11 +569,13 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+>
+>         update_fdt_from_fw(blob, (void *)fw_dtb_pointer);
+>
+> -       node = fdt_node_offset_by_compatible(blob, -1, "simple-framebuffer");
+> -       if (node < 0)
+> -               fdt_simplefb_add_node(blob);
+> -       else
+> -               fdt_simplefb_enable_and_mem_rsv(blob);
+> +       if (CONFIG_IS_ENABLED(FDT_SIMPLEFB)) {
+> +               node = fdt_node_offset_by_compatible(blob, -1, "simple-framebuffer");
+> +               if (node < 0)
+> +                       fdt_simplefb_add_node(blob);
+> +               else
+> +                       fdt_simplefb_enable_and_mem_rsv(blob);
+> +       }
+>
+>  #ifdef CONFIG_EFI_LOADER
+>         /* Reserve the spin table */
+> --
+> 2.43.0
+>
