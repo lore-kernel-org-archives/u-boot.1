@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F08BCCE8E83
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 14:44:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F110CE8E8A
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 15:20:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7136C88E81;
-	Thu, 24 Oct 2024 16:44:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6738F88CD9;
+	Thu, 24 Oct 2024 17:20:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SCmOmj0Z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GcTUkEYf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 353A788ED2; Thu, 24 Oct 2024 16:44:35 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id 3E1F388DFE; Thu, 24 Oct 2024 17:20:35 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FC2388DDC
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 16:44:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA39A88C3E
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 17:20:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-7d916b6a73aso528340a12.1
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 07:44:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6cbf347dc66so6036256d6.3
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 08:20:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729781067; x=1730385867; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gjcnzxqccE7b78dI5jrjZQxrTtm9MKTZAYXdAIKpN7g=;
- b=SCmOmj0Z7sT81BAOl+L86l+kxhdNIOuqek2GGER1j5ez/nUQOigOCNxFKqwOIaS+Kj
- lq4jeWWY1Du1ug5X6pw+B+04XO2hdu9SYDMmuZssAIJa4EF0rbo4rPNcxH6ReR1FhqbR
- FAr+tIfeUQ+RfN5VGVaxsrQ45YsIt7rvIpSs+KcxCpyyRxoh1BVFXl/Rb2CKxn79kREv
- zoyu/HmEYIjvEIROWArtWtrmsV9bQ79feh9xeqkoGawcM/PhXUOSAK5A5XfdEsOruAmq
- 1WvqTJ6bHh0beJqZOtXfLfgpPeuuy/zpsnTyij2EHKaJ59fZ9v6a2vH0TQRP0hT3SBfB
- MPZQ==
+ d=konsulko.com; s=google; t=1729783223; x=1730388023; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=tundspbPVx0+A+uJNA6rNW6cDbv0pZMZI8KwgU+a5jE=;
+ b=GcTUkEYfwxJ5bZTJxIFaNZhij8rKfvrMa93NiVwv3o67zYV4brcVbhgB3MrIFLVXAK
+ NyIDyC3jDy+DEAJkL8b+wUctNLLH2TOATQsQX/6qUjxz36xvXSV5BQWOIS84RRyxHLU0
+ 2ibAWr4tYu1Qh9QGgr2DGy5DaFwHCjDU1MEWY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729781067; x=1730385867;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gjcnzxqccE7b78dI5jrjZQxrTtm9MKTZAYXdAIKpN7g=;
- b=S9yjt/wWkh9c/YM+tVfT+bHNJmfUJwSNoMyoT9fbywLH4AMP0atGviIqNmgwvYTudt
- COfHwmL4A+M4tBWS97Dy08QO/ZzOapEqitLxYlKPhepN2ymZlSUeCEPSmXY5cBBuIV/A
- 9Ju7iXkIcbg82RK3DZvq/8cMuARH0m9s6RV2PU3nBhiK80Vig7D1IyfereA72zlu8Pnp
- SEEfMQ+a8POmJ4jblpAuZC5RLPi0ds54eivNVE5rO2E5GZcebLeakTIq9aqx0pED9zVk
- 2LHdv846fNH20rXPTFLlmVE0XnTtm5IqY4J2TUc1n+eNdxbSRJoX1Js/7gYDWWSMzQc1
- obcQ==
+ d=1e100.net; s=20230601; t=1729783223; x=1730388023;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tundspbPVx0+A+uJNA6rNW6cDbv0pZMZI8KwgU+a5jE=;
+ b=P3tq3iet7QEQcxbIu+iivc5GG5a27eKQFeGNAq3SlDKInOqEbLfRtRwte6RyB2qUqC
+ I2RTl2+dp6UNpnARmnDCc6npHPL/rTjG7y5qFWjEhIVG/CRgs6FWIRk2fcZ0GnA3QbPQ
+ +yYy3tm3lH6RsQNfgP6mQ6KpSc/rDjiOE8AbMSwrdpjABAkPGYDWDFlhir9/QJzBZxwj
+ 3FO63+ooblwbPWdaIZSFZMVqsRyPtU3Qpmd8pDSYqozQX8USWD47MAPJg2ik+Gspqei3
+ DmID9jyeZujbj+BQ1UPCuPp4SRVrh9Ou/dzIa8xzJzCRXsYeKaW5UwEelmJCiXm18m3D
+ kmtQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUSS2FmqZPbbW0XwnBJpNGbtEIK+7d7L+VUEuIqmUxpcNThbBDJYL8tfz8yIwrGAR3jYWKOepU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxyFepYAGGRH9Gz/izs/HhUx67Vk4qypZ63T3SgLdCw5BroYJS3
- MAt1nWZ7SJBNgPR4Lcw9Emrw/NWPCGhOTUUzjMhiXmkcxFrv04sYRT8aMh5OVtyfeWXa4tCml8n
- 3xiJA73ZAhpHE9CYjpUxnHKqVjYrEaam+FcCn7wco2KJylcc3la0=
-X-Google-Smtp-Source: AGHT+IGZoaGlfiIHXEbDzWInOwSOqJ5SS1IMiCo6PWjtgHtf60Q36SE36SiqLYLexSGoVOmVVyyLI074C9v+Ebs9OE8=
-X-Received: by 2002:a05:6a21:a24c:b0:1d9:af2:6143 with SMTP id
- adf61e73a8af0-1d989a4e3cfmr2477039637.16.1729781066857; Thu, 24 Oct 2024
- 07:44:26 -0700 (PDT)
+ AJvYcCVGA/kZ/g9X93wXkp3RiH0rwRRpyBqVLAQwLa2//QWzouhN2L+sGDcXlzppwZm7OAoEFrtFFAA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTp5c/Q8DBSUmKaiHo/uGusNfcTgwvEhDuqj1bviF24JkcRu7S
+ JRBAt8xDFPTC6HmKga+ociDxr5v9CYs7EEaFc7hWnQWKTK/I+0bcsJckrHZHbXU=
+X-Google-Smtp-Source: AGHT+IHqkMnnlEy2G8z0HVejCne5FIX/ych4CE1NSzrB44j9gwWYI2O1xvAbzZ5gQ2A/v8OON72wlw==
+X-Received: by 2002:a05:6214:3c85:b0:6cb:e6fa:4960 with SMTP id
+ 6a1803df08f44-6ce33f33bc5mr83727786d6.0.1729783223550; 
+ Thu, 24 Oct 2024 08:20:23 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6ce008b2a48sm50918636d6.25.2024.10.24.08.20.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Oct 2024 08:20:22 -0700 (PDT)
+Date: Thu, 24 Oct 2024 09:20:19 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marex@denx.de>
+Cc: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de,
+ Tim Harvey <tharvey@gateworks.com>, Heiko Schocher <hs@denx.de>
+Subject: Re: [PATCH] imx8m: set sane default value for SPL_LOAD_FIT_ADDRESS
+Message-ID: <20241024152019.GS4959@bill-the-cat>
+References: <20241024100145.841964-1-ravi@prevas.dk>
+ <58754a24-eb1a-4306-a5de-e990539b1717@denx.de>
+ <87seslprkk.fsf@prevas.dk>
+ <5b9d07eb-14f1-4ac8-bc3f-69cdd8b87a73@denx.de>
 MIME-Version: 1.0
-References: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
- <20241024112449.1362319-2-ilias.apalodimas@linaro.org>
- <CAEfUkUKxUC5gmqBaTDFyG=1p=7Eah=5HkysJP-zpXsHoLHwUYw@mail.gmail.com>
-In-Reply-To: <CAEfUkUKxUC5gmqBaTDFyG=1p=7Eah=5HkysJP-zpXsHoLHwUYw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 24 Oct 2024 17:43:50 +0300
-Message-ID: <CAC_iWjJnoRU7h+182EU9hXZnwfOVf0G5wPALtg4PRvM_MgDFgw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/6] mbedtls: Enable TLS 1.2 support
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: jerome.forissier@linaro.org, xypron.glpk@gmx.de, 
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Wei Ming Chen <jj251510319013@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="f2qSurzryZV97g7U"
+Content-Disposition: inline
+In-Reply-To: <5b9d07eb-14f1-4ac8-bc3f-69cdd8b87a73@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,118 +94,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond
 
-On Thu, 24 Oct 2024 at 17:13, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Hi Ilias,
->
-> On Thu, 24 Oct 2024 at 07:25, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
->>
->> Since lwIP and mbedTLS have been merged we can tweak the config options
->> and enable TLS1.2 support. Add RSA and ECDSA by default and enable
->> enough block cipher modes of operation to be comatible with modern
->> TLS requirements and webservers
->>
->> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> ---
->>  lib/mbedtls/Kconfig              | 12 ++++++++
->>  lib/mbedtls/Makefile             | 31 +++++++++++++++++++
->>  lib/mbedtls/mbedtls_def_config.h | 52 ++++++++++++++++++++++++++++++++
->>  3 files changed, 95 insertions(+)
->>
->> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
->> index d71adc3648ad..f3e172633999 100644
->> --- a/lib/mbedtls/Kconfig
->> +++ b/lib/mbedtls/Kconfig
->> @@ -430,4 +430,16 @@ endif # SPL
->>
->>  endif # MBEDTLS_LIB_X509
->>
->> +config MBEDTLS_LIB_TLS
->> +       bool "MbedTLS TLS library"
->> +       depends on RSA_PUBLIC_KEY_PARSER_MBEDTLS
->> +       depends on X509_CERTIFICATE_PARSER_MBEDTLS
->> +       depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
->> +       depends on ASN1_DECODER_MBEDTLS
->> +       depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
->> +       depends on MBEDTLS_LIB_CRYPTO
->> +       help
->> +         Enable MbedTLS TLS library. If enabled HTTPs support will be enabled
->> +         in wget
->> +
->>  endif # MBEDTLS_LIB
->> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
->> index 83cb3c2fa705..ce0a61e40541 100644
->> --- a/lib/mbedtls/Makefile
->> +++ b/lib/mbedtls/Makefile
->> @@ -26,6 +26,7 @@ mbedtls_lib_crypto-y := \
->>         $(MBEDTLS_LIB_DIR)/platform_util.o \
->>         $(MBEDTLS_LIB_DIR)/constant_time.o \
->>         $(MBEDTLS_LIB_DIR)/md.o
->> +
->>  mbedtls_lib_crypto-$(CONFIG_$(SPL_)MD5_MBEDTLS) += $(MBEDTLS_LIB_DIR)/md5.o
->>  mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA1_MBEDTLS) += $(MBEDTLS_LIB_DIR)/sha1.o
->>  mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += \
->> @@ -54,3 +55,33 @@ mbedtls_lib_x509-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
->>         $(MBEDTLS_LIB_DIR)/x509_crt.o
->>  mbedtls_lib_x509-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER_MBEDTLS) += \
->>         $(MBEDTLS_LIB_DIR)/pkcs7.o
->> +
->> +#mbedTLS TLS support
->> +obj-$(CONFIG_MBEDTLS_LIB_TLS) += mbedtls_lib_tls.o
->> +mbedtls_lib_tls-y := \
->> +       $(MBEDTLS_LIB_DIR)/mps_reader.o \
->> +       $(MBEDTLS_LIB_DIR)/mps_trace.o \
->> +       $(MBEDTLS_LIB_DIR)/net_sockets.o \
->> +       $(MBEDTLS_LIB_DIR)/pk_ecc.o \
->> +       $(MBEDTLS_LIB_DIR)/ssl_cache.o \
->> +       $(MBEDTLS_LIB_DIR)/ssl_ciphersuites.o \
->> +       $(MBEDTLS_LIB_DIR)/ssl_client.o \
->> +       $(MBEDTLS_LIB_DIR)/ssl_cookie.o \
->> +       $(MBEDTLS_LIB_DIR)/ssl_debug_helpers_generated.o \
->> +       $(MBEDTLS_LIB_DIR)/ssl_msg.o \
->> +       $(MBEDTLS_LIB_DIR)/ssl_ticket.o \
->> +       $(MBEDTLS_LIB_DIR)/ssl_tls.o \
->> +       $(MBEDTLS_LIB_DIR)/ssl_tls12_client.o \
->> +       $(MBEDTLS_LIB_DIR)/hmac_drbg.o \
->> +       $(MBEDTLS_LIB_DIR)/ctr_drbg.o \
->> +       $(MBEDTLS_LIB_DIR)/entropy.o \
->> +       $(MBEDTLS_LIB_DIR)/entropy_poll.o \
->> +       $(MBEDTLS_LIB_DIR)/aes.o \
->> +       $(MBEDTLS_LIB_DIR)/cipher.o \
->> +       $(MBEDTLS_LIB_DIR)/cipher_wrap.o \
->> +       $(MBEDTLS_LIB_DIR)/ecdh.o \
->> +       $(MBEDTLS_LIB_DIR)/ecdsa.o \
->> +       $(MBEDTLS_LIB_DIR)/ecp.o \
->> +       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
->> +       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
->> +       $(MBEDTLS_LIB_DIR)/gcm.o \
->> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
->> index 1af911c2003f..ac8f0bbf2c0e 100644
->> --- a/lib/mbedtls/mbedtls_def_config.h
->> +++ b/lib/mbedtls/mbedtls_def_config.h
->> @@ -87,4 +87,56 @@
->>
->>  #endif /* #if defined CONFIG_MBEDTLS_LIB_X509 */
->>
->> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS)
->
->
-> It would be better to use "#if defined CONFIG_MBEDTLS_LIB_TLS" here,
-> as in SPL build it implicitly expects a "CONFIG_SPL_MBEDTLS_LIB_TLS"
-> which we don't have.
->
+--f2qSurzryZV97g7U
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-We usually prefer CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS) regardless of an
-SPL flag or not.
+On Thu, Oct 24, 2024 at 04:06:03PM +0200, Marek Vasut wrote:
+> On 10/24/24 3:18 PM, Rasmus Villemoes wrote:
+> > On Thu, Oct 24 2024, Marek Vasut <marex@denx.de> wrote:
+> >=20
+> > > On 10/24/24 12:01 PM, Rasmus Villemoes wrote:
+> > > > I enabled IMX_HAB on an imx8mp board, but even though I knew about =
+the
+> > > > implementation, I forgot that I had to provide a sane value for
+> > > > SPL_LOAD_FIT_ADDRESS. The help text for IMX_HAB doesn't mention this
+> > > > implicit requirement, and there's no build-time warning; the default
+> > > > 0x0 value just ends up being returned from
+> > > > board_spl_fit_buffer_addr(), obviously resulting in a non-booting
+> > > > board.
+> > > > The existing imx8m* board configs that set a non-zero value
+> > > > currently
+> > > > all use 0x44000000. The actual value doesn't matter too much, but 0=
+ is
+> > > > always wrong for imx8m platforms. So just use 0x44000000 as default
+> > > > for those platforms.
+> > > > Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> > > > ---
+> > > >    boot/Kconfig | 1 +
+> > > >    1 file changed, 1 insertion(+)
+> > > > diff --git a/boot/Kconfig b/boot/Kconfig
+> > > > index 940389d4882..72d1f69afcd 100644
+> > > > --- a/boot/Kconfig
+> > > > +++ b/boot/Kconfig
+> > > > @@ -231,6 +231,7 @@ config SPL_LOAD_FIT
+> > > >    config SPL_LOAD_FIT_ADDRESS
+> > > >    	hex "load address of fit image"
+> > > >    	depends on SPL_LOAD_FIT
+> > > > +	default 0x44000000 if ARCH_IMX8M
+> > > This only applies to HAB , for non-HAB the fitImage can be loaded at
+> > > arbitrary location, do you need:
+> > >=20
+> > > default 0x44000000 if ARCH_IMX8M && IMX_HAB
+> > >=20
+> > > right ?
+> >=20
+> > On IMX8 without HAB, the value is not used at all AFAICT (otherwise the
+> > value of 0x0 would have caused trouble already). I don't see the harm of
+> > setting some sane value that's actually within DRAM space independent of
+> > HAB.
+> >=20
+> > Making the default depend on IMX_HAB has the UX problem that if I do
+> > "make imx8mp_evk_defconfig", then go about tweaking stuff, then do "make
+> > menuconfig" and enable IMX_HAB, SPL_LOAD_FIT_ADDRESS already has the
+> > bogus 0x0 value and nothing forces or asks that to be changed. Making t=
+he
+> > default depend only on SOC (or SOC family or whatever IMX8M is in this
+> > context) makes that problem go away.
+> Looking at this closely, common/spl/spl_ram.c does make use of
+> CONFIG_SPL_LOAD_FIT_ADDRESS too, so I think yes, we should have a default
+> for this.
+>=20
+> iMX6 should have 0x14000000
+> iMX7 should have 0x84000000
+> iMX8M should have 0x44000000
 
-Thanks
-/Ilias
-> [snip]
->
-> With above change,
-> Reviewed-by: Raymond Mao <raymond.mao@linaro.org>
->
-> Regards,
-> Raymond
+These differ, slightly, from the value used in CONFIG_SYS_LOAD_ADDR.
+Could that not be used (and the overall option changed to default
+SYS_LOAD_ADDR ?
+
+--=20
+Tom
+
+--f2qSurzryZV97g7U
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcaZa8ACgkQFHw5/5Y0
+tyxymQwAoIhlYNASultQ1f+U0I4b6kNokFg5kPnfeD/H+F5s+FiEAHkZeMVlnBPg
+ryiduLRxVy3DLr2TP2X43iHQdQGxHtH0vrLWtapm6t0SM23RRU6Za5SpUQkbs8Hl
+8xY9OTCFGcImSYYJ7mAETZxZ3jNRUim6EX/QKAQ+FPUtQX5MQLuMf1w7BrQB/+el
+QE7yaThZ+IJG3XU5y6Z1wSo/0ZvmMhT/n7rcW+4aEo9fZg9au9tT94ttZkLHU7YQ
+PT4pYJk1tVIqKKjrIT8q6Zy6g+5/JJf+IvhuqY2bAocBdm8NAmdWpwq88wUV8VNM
+r4PH3+KTh13rXit+UUszHchp9UVTMdV2zlbPZfc+rQ6mPYLZdOt0d82LW7NE79AH
+nVQ/+MnMkYjehwBzQ7j3LAVNPBtiBSmMQ6M3tU3OXay0X86zoxX7tzSjTmPGEveI
+l90nNo1dDHqzK+yzr1yr6jXdPhi+cNwzz3S+DNFv+lC/W+Nl2Vzb9FMkVnGfz8kw
+7U9uqpqN
+=eSUl
+-----END PGP SIGNATURE-----
+
+--f2qSurzryZV97g7U--
