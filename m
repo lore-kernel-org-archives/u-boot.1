@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA5ED0BB59
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 04:01:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EE77D0BB5B
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 04:04:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CABD8932A;
-	Thu, 24 Oct 2024 06:01:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1BFFB892FD;
+	Thu, 24 Oct 2024 06:04:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZVCUOJNO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fhehrqDt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E190389328; Thu, 24 Oct 2024 06:01:25 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 4F5B0892FD; Thu, 24 Oct 2024 06:04:14 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0CA588B8F
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 06:01:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A964892F5
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 06:04:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49O41H1S095309;
- Wed, 23 Oct 2024 23:01:17 -0500
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49O442RT013667;
+ Wed, 23 Oct 2024 23:04:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729742477;
- bh=gMkbZSkQWd4irgps6kiDb68Ge2uW2JUz2PNzebOcoz4=;
+ s=ti-com-17Q1; t=1729742642;
+ bh=f0y0412ProvZdS6/NzBoMwy1F5/1oNgwfg10MDRlQ6o=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=ZVCUOJNOGkDQgQOnE+VSNK3B03nV2nbvPErPTPpWIBqcw++Ok2yXCGvBGYJHeLINB
- RXzNR8cCA6S8Qq1vtE+SuSOWCVRL0SBy8GPPYCdlLVoi5iHonBuXmaUubDN/ydABxQ
- oJXBqxm+tjF67rwW9vFlTlcq8PnmnbDsmQYbVJgo=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49O41HAB024623
+ b=fhehrqDtFYzkC/WAp2UpQnw0v7nQugbmpgATbGNptBiw01ZL5RjMJuB/RAfMq2h50
+ DyLTsKmGprzVbQRSLbpvkalqY0UXTvH0I//y5OOXEyi8f7RuLdrwh9nVPeqALKrZZ/
+ vjwUKSC+eNUC/dc/sKLe+mLU5YYw3nsAJOE0xgJI=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49O4428h038803
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 23 Oct 2024 23:01:17 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 23 Oct 2024 23:04:02 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
- Oct 2024 23:01:16 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2024 23:04:01 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 23 Oct 2024 23:01:17 -0500
+ Frontend Transport; Wed, 23 Oct 2024 23:04:01 -0500
 Received: from [172.24.227.36]
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
  (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49O41DuR128482;
- Wed, 23 Oct 2024 23:01:14 -0500
-Message-ID: <92a86113-f2b3-4b1a-942d-792aaf63a34d@ti.com>
-Date: Thu, 24 Oct 2024 09:31:13 +0530
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49O43wiK001332;
+ Wed, 23 Oct 2024 23:03:59 -0500
+Message-ID: <689bda91-9d6a-4ae4-9ccf-b2e5af6c53cd@ti.com>
+Date: Thu, 24 Oct 2024 09:33:58 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/8] ram: k3-ddrss: Add
- k3_ddrss_ddr_bank_base_size_calc() to solve 'calculations restricted to 32
- bits' issue
+Subject: Re: [PATCH v4 5/8] drivers: ram: Kconfig: Add CONFIG_K3_INLINE_ECC
 To: Bryan Brattlof <bb@ti.com>, Santhosh Kumar K <s-k6@ti.com>
 CC: <trini@konsulko.com>, <m-chawdhry@ti.com>, <nm@ti.com>, <u-kumar1@ti.com>, 
  <vigneshr@ti.com>, <u-boot@lists.denx.de>, <w.egorov@phytec.de>
 References: <20241021044024.835846-1-s-k6@ti.com>
- <20241021044024.835846-3-s-k6@ti.com>
- <20241023143905.xbrqu6eabaer6wui@bryanbrattlof.com>
+ <20241021044024.835846-6-s-k6@ti.com>
+ <20241023144559.dtwggwlxwljpky6p@bryanbrattlof.com>
 Content-Language: en-US
 From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20241023143905.xbrqu6eabaer6wui@bryanbrattlof.com>
+In-Reply-To: <20241023144559.dtwggwlxwljpky6p@bryanbrattlof.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -88,167 +86,48 @@ X-Virus-Status: Clean
 
 Hi Bryan
 
-On 23/10/24 20:09, Bryan Brattlof wrote:
+On 23/10/24 20:15, Bryan Brattlof wrote:
 > On October 21, 2024 thus sayeth Santhosh Kumar K:
->> As R5 is a 32 bit processor, the RAM banks' base and size calculation
->> is restricted to 32 bits, which results in wrong values if bank's base
->> is greater than 32 bits or bank's size is greater than or equal to 4GB.
+>> From: Neha Malcom Francis <n-francis@ti.com>
 >>
->> So, add k3_ddrss_ddr_bank_base_size_calc() to get the base address and
->> size of RAM's banks from the device tree memory node, and store in a
->> 64 bit device private data which can be used for ECC reserved memory
->> calculation, Setting ECC range and Fixing up bank size in device tree
->> when ECC is enabled.
+>> Add CONFIG_K3_INLINE_ECC so that ECC functions can be compiled into R5 SPL
+>> only when the config has been enabled.
 >>
->> Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 >> ---
->>   drivers/ram/k3-ddrss/k3-ddrss.c | 72 ++++++++++++++++++++++++++-------
->>   1 file changed, 57 insertions(+), 15 deletions(-)
+>>   drivers/ram/Kconfig | 10 ++++++++++
+>>   1 file changed, 10 insertions(+)
 >>
->> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
->> index f2ab8cf2b49b..bd6783ebc2cd 100644
->> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
->> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
->> @@ -147,6 +147,9 @@ struct k3_ddrss_desc {
->>   	struct k3_ddrss_ecc_region ecc_regions[K3_DDRSS_MAX_ECC_REGIONS];
->>   	u64 ecc_reserved_space;
->>   	bool ti_ecc_enabled;
->> +	unsigned long long ddr_bank_base[CONFIG_NR_DRAM_BANKS];
->> +	unsigned long long ddr_bank_size[CONFIG_NR_DRAM_BANKS];
->> +	unsigned long long ddr_ram_size;
+>> diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
+>> index f7e357f24da7..533d0c629a64 100644
+>> --- a/drivers/ram/Kconfig
+>> +++ b/drivers/ram/Kconfig
+>> @@ -116,6 +116,16 @@ config IMXRT_SDRAM
+>>   	  to support external memories like sdram, psram & nand.
+>>   	  This driver is for the sdram memory interface with the SEMC.
+>>   
+>> +config K3_INLINE_ECC
+>> +	bool "Enable TI Inline ECC support"
+>> +	depends on K3_DDRSS
+>> +	help
+>> +	  Enable Inline ECC support on K3 platforms. 1/9th of the SDRAM space
+>> +	  is used for ECC storage and the rest 8/9th is available for system
+>> +	  use. Enabling ECC increases boot time as the ECC protected regions
+>> +	  need to be primed with a predefined value prior to enabling ECC
+>> +	  check.
+>> +
 > 
-> Should we use the u64 typedef here?
+> I agree size will always be a complaint at such an early stage of boot
+> but we're already adding the ECC configuration in the memory{} node.
 > 
->>   };
->>   
->>   struct reginitdata {
->> @@ -668,11 +671,54 @@ static void k3_ddrss_lpddr4_preload_full_mem(struct k3_ddrss_desc *ddrss,
->>   	printf("ECC: priming DDR completed in %lu msec\n", get_timer(done));
->>   }
->>   
->> +static void k3_ddrss_ddr_bank_base_size_calc(struct k3_ddrss_desc *ddrss)
->> +{
->> +	int bank, na, ns, len, parent;
->> +	const fdt32_t *ptr, *end;
->> +
->> +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
->> +		ddrss->ddr_bank_base[bank] = 0;
->> +		ddrss->ddr_bank_size[bank] = 0;
->> +	}
->> +
->> +	ofnode mem = ofnode_null();
->> +
->> +	do {
->> +		mem = ofnode_by_prop_value(mem, "device_type", "memory", 7);
->> +	} while (!ofnode_is_enabled(mem));
->> +
->> +	const void *fdt = ofnode_to_fdt(mem);
->> +	int node = ofnode_to_offset(mem);
->> +	const char *property = "reg";
->> +
->> +	parent = fdt_parent_offset(fdt, node);
->> +	na = fdt_address_cells(fdt, parent);
->> +	ns = fdt_size_cells(fdt, parent);
->> +	ptr = fdt_getprop(fdt, node, property, &len);
->> +	end = ptr + len / sizeof(*ptr);
->> +
->> +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
->> +		if (ptr + na + ns <= end) {
->> +			if (CONFIG_IS_ENABLED(OF_TRANSLATE))
->> +				ddrss->ddr_bank_base[bank] = fdt_translate_address(fdt, node, ptr);
->> +			else
->> +				ddrss->ddr_bank_base[bank] = fdtdec_get_number(ptr, na);
->> +
->> +			ddrss->ddr_bank_size[bank] = fdtdec_get_number(&ptr[na], ns);
->> +		}
->> +
->> +		ptr += na + ns;
->> +	}
->> +
->> +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++)
->> +		ddrss->ddr_ram_size += ddrss->ddr_bank_size[bank];
->> +}
->> +
->>   static void k3_ddrss_lpddr4_ecc_calc_reserved_mem(struct k3_ddrss_desc *ddrss)
->>   {
->>   	fdtdec_setup_mem_size_base_lowest();
->>   
->> -	ddrss->ecc_reserved_space = gd->ram_size;
->> +	ddrss->ecc_reserved_space = ddrss->ddr_ram_size;
->>   	do_div(ddrss->ecc_reserved_space, 9);
->>   
->>   	/* Round to clean number */
->> @@ -696,7 +742,7 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
->>   	/* Preload the full memory with 0's using the BIST engine of
->>   	 * the LPDDR4 controller.
->>   	 */
->> -	k3_ddrss_lpddr4_preload_full_mem(ddrss, gd->ram_size, 0);
->> +	k3_ddrss_lpddr4_preload_full_mem(ddrss, ddrss->ddr_ram_size, 0);
->>   
->>   	/* Clear Error Count Register */
->>   	writel(0x1, base + DDRSS_ECC_1B_ERR_CNT_REG);
->> @@ -741,6 +787,8 @@ static int k3_ddrss_probe(struct udevice *dev)
->>   
->>   	k3_lpddr4_start(ddrss);
->>   
->> +	k3_ddrss_ddr_bank_base_size_calc(ddrss);
->> +
->>   	if (ddrss->ti_ecc_enabled) {
->>   		if (!ddrss->ddrss_ss_cfg) {
->>   			printf("%s: ss_cfg is required if ecc is enabled but not provided.",
->> @@ -761,30 +809,24 @@ static int k3_ddrss_probe(struct udevice *dev)
->>   
->>   int k3_ddrss_ddr_fdt_fixup(struct udevice *dev, void *blob, struct bd_info *bd)
->>   {
->> -	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
->> -	u64 start[CONFIG_NR_DRAM_BANKS];
->> -	u64 size[CONFIG_NR_DRAM_BANKS];
->>   	int bank;
->> +	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
->>   
->>   	if (ddrss->ecc_reserved_space == 0)
->>   		return 0;
->>   
->>   	for (bank = CONFIG_NR_DRAM_BANKS - 1; bank >= 0; bank--) {
->> -		if (ddrss->ecc_reserved_space > bd->bi_dram[bank].size) {
->> -			ddrss->ecc_reserved_space -= bd->bi_dram[bank].size;
->> -			bd->bi_dram[bank].size = 0;
->> +		if (ddrss->ecc_reserved_space > ddrss->ddr_bank_size[bank]) {
->> +			ddrss->ecc_reserved_space -= ddrss->ddr_bank_size[bank];
->> +			ddrss->ddr_bank_size[bank] = 0;
->>   		} else {
->> -			bd->bi_dram[bank].size -= ddrss->ecc_reserved_space;
->> +			ddrss->ddr_bank_size[bank] -= ddrss->ecc_reserved_space;
->>   			break;
->>   		}
->>   	}
->>   
->> -	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
->> -		start[bank] =  bd->bi_dram[bank].start;
->> -		size[bank] = bd->bi_dram[bank].size;
->> -	}
->> -
->> -	return fdt_fixup_memory_banks(blob, start, size, CONFIG_NR_DRAM_BANKS);
->> +	return fdt_fixup_memory_banks(blob, ddrss->ddr_bank_base,
->> +				      ddrss->ddr_bank_size, CONFIG_NR_DRAM_BANKS);
->>   }
-> 
-> Have we looked into passing this information via the global data pointer
-> rather than fixing up the device tree on each boot phase?
-> 
->      https://patchwork.ozlabs.org/project/uboot/patch/20180926215520.87168-23-sjg@chromium.org/
-> 
-> I don't see a clear path to pass GD from SPL to SPL but there is a TPL
-> to SPL which I think we should be able to copy.
+> We should do one or the other but not both. It would be hard to debug
+> problems if someone added the protected{} node but not enable this
+> config
 
-But we also make use of this to fix up the device tree that passes onto kernel 
-as well, I need to look into this patch though. But from a first glance looks 
-like we will be able to pass on the information from SPL->SPL (with modification 
-as you said) and SPL->U-Boot but U-Boot->Kernel would still require this 
-function to be present.
-
-> 
-> ~Bryan
+Actually I do agree with this, maybe we can get rid of the flag ti,ecc-enable 
+which is redundant. In multi-DDR systems, it was still a possibility that we 
+could use it to select the DDR we want ECC enabled on, but that hasn't been 
+tested nor does it make any sense since they'll be interleaved anyways.
 
 -- 
 Thanking You
