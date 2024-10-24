@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E749BCE8E63
-	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 11:25:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E826BCE8E62
+	for <u-boot@archiver.kernel.org>; Thu, 24 Oct 2024 11:25:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52AB188EAE;
-	Thu, 24 Oct 2024 13:25:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF12B88FA0;
+	Thu, 24 Oct 2024 13:25:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m9r0clgB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lsacNo7L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 201FD88F2C; Thu, 24 Oct 2024 13:25:17 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 3BE7388F83; Thu, 24 Oct 2024 13:25:26 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C171288C7B
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 13:25:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC46688EE0
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 13:25:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-539f58c68c5so1369191e87.3
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 04:25:11 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a9a6b4ca29bso83441366b.3
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 04:25:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729769101; x=1730373901; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Kh2XcqplF8dOanxBgkX+l66sGLE22K0OCMnxo4JF+Dg=;
- b=m9r0clgBKU/Sx3/BzXXE7CVRSltcSFyK2Sa/X2jJHce42s9KtA8gq4isaFBm7jhOC6
- Owk8d18jq6UzVsQd75lJ9hcey59d81T0loFDxdae6E6nFosItEYsPubyQwYgisqL3pDI
- wwvITpuajpDFPcJSeL2nj1YK7NOi5O5hjl2FnHHfwRv4EXOUDXrVfLDl9C2IyKq4GtLu
- PlEq2kTmwZj7Sp+2CnNUS7VdKLjJtfX8UDOxpC5YeGTCTbY8Z55mefGUQuQgcv9kY65E
- 9XD77O31CholuPBG17yRd87Djysj2Ao0uX++IUw4ObktSphvlGfwkuWfgsaIViLG8Klq
- p90A==
+ d=linaro.org; s=google; t=1729769123; x=1730373923; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dcQxmocUYN9YZanZXFkaHkeGtaePH92QkvXfFuthaH4=;
+ b=lsacNo7LPaGP0rTsBCEYd4AlmWF3jup4lrOsfd0T3uJcwhbWnkIzGsRAvbgcToDeO4
+ Q8Pxsw/uTh5HlJbEVLbcou88wEht++s8jw766eVa6JmYHI8TeEt9uuoRa6O42CYsSZW9
+ gnlHvFZ6FMxebbwEXJ+afkp4qRijOh6y7xpoyCryz+bcDOSyN+vUT7Kx4sNzKHzrpyol
+ 2/xByLijqwgZh0YowWti7Z41l6u/XjNR3Jwpt3P8OSTHgi2flpPm6Kr2q+YVLSMvnepB
+ +rUaaJ+uf04ApGQN9aZrz7D0KHYMC3S3rp42TPQqmN4/UTzysnk1tZH5comVED2uIGFH
+ q/kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729769101; x=1730373901;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Kh2XcqplF8dOanxBgkX+l66sGLE22K0OCMnxo4JF+Dg=;
- b=J33RSaVYioMqEji0tewFNkPiovGKNdgw2ONGJLDXuNGnH42h/NGsMdWdeQQz0O6MFQ
- srh/w3Pz89bPo+7/3Q9F270yXfLZlb1NcZBXgqE2Gg5s6sRxSYhya/d6OY6GDSgq4eYi
- rtNU3O+04e5oZlyEzOUgJSWKYZl8y5yu400aCSbHhZVuWAflo7w1LBBDxAOltI32Xy2m
- Ub1q2vAx1C+PcZPiQXylnlWS8B3Si4xcOTQfUcFQvxOXJI3CxTCnBxj5CFi20BDFxKdo
- FC2wbqEXcQ4jFVOQndRv65uFbHK+vSpHBmxJg64sX3XPA5p3SjIabcoktRPfKMzH7z8s
- 3vvQ==
+ d=1e100.net; s=20230601; t=1729769123; x=1730373923;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dcQxmocUYN9YZanZXFkaHkeGtaePH92QkvXfFuthaH4=;
+ b=eAVV/0frj19uAfiA8wSq8qKL6xCJnMExCNLo9Z7Ck+wVzHX/Qj8a4yO3l9goB923OF
+ BclV/uHgSOj2KYCI3s74TVPLstuYgGYB1X6mTw26v8D3F28ZwbAFWNEmFCUQerBwu+yI
+ N1I43PcMAZCFDqpqlJlBcTbe77/A5IiY1HBpjdqjVgRDFFl9CmcXW9p52UAARfQ32Ild
+ rCOV9yejcBNCD4e8GPDgO+yxKRH3Kb14xMHfxBhhIMAveoIXHwTTxgEKHA+RmKgrVcq9
+ b6nS1wTGa4O5e4VJ59sIcOhBMDuq+xPOarbPEy6M8WZm98wjEZe7a3JriaBcz/GunGzx
+ 1UzQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWCFmrXWmu3yLcu3nyFBIjNh9zAJMJPi1IsDyA/TpWieJ1sRuAhiGP/1vAVvESqqjaodseP4do=@lists.denx.de
-X-Gm-Message-State: AOJu0YxsueYaD8CnTnC1FNTSoIATxG8jA8aDu+4QiGesd1qRFJVskgF3
- kWUHX/8TVHSE0Yc56G1rOMMr/o6Xd7AS1yv85ZZGMCFA0geR3P1lP+Ryx+WIDb4=
-X-Google-Smtp-Source: AGHT+IH6/ytfVIZqzqCJHOdXyxi/um83Xy1NPmJXPtVV+NpdW2myMu5beC24hZQH4aRWZI362tgL4w==
-X-Received: by 2002:a05:6512:3ca7:b0:538:9e36:7b6a with SMTP id
- 2adb3069b0e04-53b1a34d04emr5551563e87.32.1729769100976; 
- Thu, 24 Oct 2024 04:25:00 -0700 (PDT)
+ AJvYcCVlATX1c3zSUxtmmG135W5MdmuC1Dv5LyECcL64UswUJj/yZeLCDKmUGKC47DEBeaXWThMCens=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw71XY94GGR4iknuL86VW5kM6zTtnL7R5/rIgWDfVv022FAZcMT
+ +qZpR+O7EKtoeVGhR324gSMYydeFmxvck7+qHan8AZd7cJatTTzA7gwThnpWo7g=
+X-Google-Smtp-Source: AGHT+IGoy6tV5uxAXDzNwJ+Hll8cZNIJwmzA2DozLNDvFBXjxsZD4mvjVzD3BNeIa24+5s+kRQvRXg==
+X-Received: by 2002:a17:907:3dac:b0:a99:ce2f:b0ff with SMTP id
+ a640c23a62f3a-a9abf8a4f1dmr580357266b.33.1729769123216; 
+ Thu, 24 Oct 2024 04:25:23 -0700 (PDT)
 Received: from localhost.localdomain (ppp176092143132.access.hol.gr.
  [176.92.143.132]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a91572c0dsm611534466b.177.2024.10.24.04.24.57
+ a640c23a62f3a-a9a91572c0dsm611534466b.177.2024.10.24.04.25.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 04:24:59 -0700 (PDT)
+ Thu, 24 Oct 2024 04:25:18 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: jerome.forissier@linaro.org,
 	raymond.mao@linaro.org
-Cc: xypron.glpk@gmx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+Cc: xypron.glpk@gmx.de, Javier Tia <javier.tia@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -77,12 +79,14 @@ Cc: xypron.glpk@gmx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Wei Ming Chen <jj251510319013@gmail.com>,
  Jonathan Humphreys <j-humphreys@ti.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH v2 0/6] Enable https for wget
-Date: Thu, 24 Oct 2024 14:24:07 +0300
-Message-ID: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
+ Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 2/6] net: lwip: Update lwIP for mbedTLS > 3.0 support and
+ enable https
+Date: Thu, 24 Oct 2024 14:24:09 +0300
+Message-ID: <20241024112449.1362319-3-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
+References: <20241024112449.1362319-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -101,51 +105,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+From: Javier Tia <javier.tia@linaro.org>
 
-This is a respin of [0] adding https support to wget. In short
+The current code support mbedTLS 2.28. Since we are using a newer
+version in U-Boot, update the necessary accessors and the lwIP codebase
+to work with mbedTLS 3.6.0. It's worth noting that the patches are
+already sent to lwIP [0]
 
-patch#1 enables the crypto algorithms we need in mbedTLS
-patches#2, #3 enable anf fix the lwIP part we need
-patch#4 is adding https:// parsing support in our wget
-patch#5 is making https:// the default for QEMU lwip defconfig so
-people can easily test
-and finaly patch#6 updates our documentation
+While at it enable LWIP_ALTCP_TLS and enable TLS support in lwIP
 
-[0] https://lore.kernel.org/u-boot/20241018142235.715571-1-ilias.apalodimas@linaro.org/
+[0] https://github.com/lwip-tcpip/lwip/pull/47
 
-Changes since v1:
-- re-arranged the Makefile objects so they only get compiled when TLS ie enabled
-- Fix all the applicable remarks Simon had on the wget patches
-- Fixed the title of a patch pointer out by Peter
-- Rebased on -master
-- Collected r-b tags
+Signed-off-by: Javier Tia <javier.tia@linaro.org>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/lwip/Makefile                             |  3 ++
+ .../src/apps/altcp_tls/altcp_tls_mbedtls.c    | 39 ++++++++++++-------
+ lib/lwip/lwip/src/core/tcp_out.c              | 10 +----
+ lib/lwip/u-boot/lwipopts.h                    |  6 +++
+ 4 files changed, 34 insertions(+), 24 deletions(-)
 
-Ilias Apalodimas (4):
-  mbedtls: Enable TLS 1.2 support
-  net: lwip: Enable https:// support for wget
-  configs: Enable https for wget on qemu arm64
-  doc: uefi: Describe UEFI HTTPs boot
-
-Javier Tia (2):
-  net: lwip: Update lwIP for mbedTLS > 3.0 support and enable https
-  net: lwip: Add Support Server Name Indication support
-
- cmd/Kconfig                                   | 19 +++++
- configs/qemu_arm64_lwip_defconfig             |  1 +
- doc/develop/uefi/uefi.rst                     | 45 ++++++++++-
- lib/lwip/Makefile                             |  3 +
- .../src/apps/altcp_tls/altcp_tls_mbedtls.c    | 50 +++++++-----
- lib/lwip/lwip/src/core/tcp_out.c              | 10 +--
- lib/lwip/lwip/src/include/lwip/altcp_tls.h    |  2 +-
- lib/lwip/u-boot/lwipopts.h                    |  6 ++
- lib/mbedtls/Kconfig                           | 12 +++
- lib/mbedtls/Makefile                          | 31 ++++++++
- lib/mbedtls/mbedtls_def_config.h              | 52 +++++++++++++
- net/lwip/Kconfig                              |  2 +-
- net/lwip/wget.c                               | 78 +++++++++++++++++--
- 13 files changed, 272 insertions(+), 39 deletions(-)
-
---
+diff --git a/lib/lwip/Makefile b/lib/lwip/Makefile
+index dfcd700ca474..19e5c6897f5a 100644
+--- a/lib/lwip/Makefile
++++ b/lib/lwip/Makefile
+@@ -53,3 +53,6 @@ obj-y += \
+ 	lwip/src/core/timeouts.o \
+ 	lwip/src/core/udp.o \
+ 	lwip/src/netif/ethernet.o
++
++obj-$(CONFIG_MBEDTLS_LIB_TLS) += lwip/src/apps/altcp_tls/altcp_tls_mbedtls.o \
++	lwip/src/apps/altcp_tls/altcp_tls_mbedtls_mem.o
+diff --git a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
+index a8c2fc2ee2cd..ef19821b89e0 100644
+--- a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
++++ b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
+@@ -3,7 +3,7 @@
+  * Application layered TCP/TLS connection API (to be used from TCPIP thread)
+  *
+  * This file provides a TLS layer using mbedTLS
+- * 
++ *
+  * This version is currently compatible with the 2.x.x branch (current LTS).
+  */
+ 
+@@ -70,7 +70,6 @@
+ /* @todo: which includes are really needed? */
+ #include "mbedtls/entropy.h"
+ #include "mbedtls/ctr_drbg.h"
+-#include "mbedtls/certs.h"
+ #include "mbedtls/x509.h"
+ #include "mbedtls/ssl.h"
+ #include "mbedtls/net_sockets.h"
+@@ -81,8 +80,6 @@
+ #include "mbedtls/ssl_cache.h"
+ #include "mbedtls/ssl_ticket.h"
+ 
+-#include "mbedtls/ssl_internal.h" /* to call mbedtls_flush_output after ERR_MEM */
+-
+ #include <string.h>
+ 
+ #ifndef ALTCP_MBEDTLS_ENTROPY_PTR
+@@ -132,6 +129,16 @@ static err_t altcp_mbedtls_lower_recv_process(struct altcp_pcb *conn, altcp_mbed
+ static err_t altcp_mbedtls_handle_rx_appldata(struct altcp_pcb *conn, altcp_mbedtls_state_t *state);
+ static int altcp_mbedtls_bio_send(void *ctx, const unsigned char *dataptr, size_t size);
+ 
++static void
++altcp_mbedtls_flush_output(altcp_mbedtls_state_t *state)
++{
++  if (state->ssl_context.MBEDTLS_PRIVATE(out_left) != 0) {
++    int flushed = mbedtls_ssl_send_alert_message(&state->ssl_context, 0, 0);
++    if (flushed) {
++      LWIP_DEBUGF(ALTCP_MBEDTLS_DEBUG, ("mbedtls_ssl_send_alert_message failed: %d\n", flushed));
++    }
++  }
++}
+ 
+ /* callback functions from inner/lower connection: */
+ 
+@@ -524,14 +531,14 @@ altcp_mbedtls_lower_sent(void *arg, struct altcp_pcb *inner_conn, u16_t len)
+     LWIP_ASSERT("state", state != NULL);
+     LWIP_ASSERT("pcb mismatch", conn->inner_conn == inner_conn);
+     /* calculate TLS overhead part to not send it to application */
+-    overhead = state->overhead_bytes_adjust + state->ssl_context.out_left;
++    overhead = state->overhead_bytes_adjust + state->ssl_context.MBEDTLS_PRIVATE(out_left);
+     if ((unsigned)overhead > len) {
+       overhead = len;
+     }
+     /* remove ACKed bytes from overhead adjust counter */
+     state->overhead_bytes_adjust -= len;
+     /* try to send more if we failed before (may increase overhead adjust counter) */
+-    mbedtls_ssl_flush_output(&state->ssl_context);
++    altcp_mbedtls_flush_output(state);
+     /* remove calculated overhead from ACKed bytes len */
+     app_len = len - (u16_t)overhead;
+     /* update application write counter and inform application */
+@@ -559,7 +566,7 @@ altcp_mbedtls_lower_poll(void *arg, struct altcp_pcb *inner_conn)
+     if (conn->state) {
+       altcp_mbedtls_state_t *state = (altcp_mbedtls_state_t *)conn->state;
+       /* try to send more if we failed before */
+-      mbedtls_ssl_flush_output(&state->ssl_context);
++      altcp_mbedtls_flush_output(state);
+       if (altcp_mbedtls_handle_rx_appldata(conn, state) == ERR_ABRT) {
+         return ERR_ABRT;
+       }
+@@ -683,7 +690,7 @@ altcp_tls_set_session(struct altcp_pcb *conn, struct altcp_tls_session *session)
+   if (session && conn && conn->state) {
+     altcp_mbedtls_state_t *state = (altcp_mbedtls_state_t *)conn->state;
+     int ret = -1;
+-    if (session->data.start)
++    if (session->data.MBEDTLS_PRIVATE(start))
+       ret = mbedtls_ssl_set_session(&state->ssl_context, &session->data);
+     return ret < 0 ? ERR_VAL : ERR_OK;
+   }
+@@ -776,7 +783,7 @@ altcp_tls_create_config(int is_server, u8_t cert_count, u8_t pkey_count, int hav
+   struct altcp_tls_config *conf;
+   mbedtls_x509_crt *mem;
+ 
+-  if (TCP_WND < MBEDTLS_SSL_MAX_CONTENT_LEN) {
++  if (TCP_WND < MBEDTLS_SSL_IN_CONTENT_LEN || TCP_WND < MBEDTLS_SSL_OUT_CONTENT_LEN) {
+     LWIP_DEBUGF(ALTCP_MBEDTLS_DEBUG|LWIP_DBG_LEVEL_SERIOUS,
+       ("altcp_tls: TCP_WND is smaller than the RX decrypion buffer, connection RX might stall!\n"));
+   }
+@@ -900,7 +907,7 @@ err_t altcp_tls_config_server_add_privkey_cert(struct altcp_tls_config *config,
+     return ERR_VAL;
+   }
+ 
+-  ret = mbedtls_pk_parse_key(pkey, (const unsigned char *) privkey, privkey_len, privkey_pass, privkey_pass_len);
++  ret = mbedtls_pk_parse_key(pkey, (const unsigned char *) privkey, privkey_len, privkey_pass, privkey_pass_len, mbedtls_ctr_drbg_random, &altcp_tls_entropy_rng->ctr_drbg);
+   if (ret != 0) {
+     LWIP_DEBUGF(ALTCP_MBEDTLS_DEBUG, ("mbedtls_pk_parse_public_key failed: %d\n", ret));
+     mbedtls_x509_crt_free(srvcert);
+@@ -1003,7 +1010,7 @@ altcp_tls_create_config_client_2wayauth(const u8_t *ca, size_t ca_len, const u8_
+   }
+ 
+   mbedtls_pk_init(conf->pkey);
+-  ret = mbedtls_pk_parse_key(conf->pkey, privkey, privkey_len, privkey_pass, privkey_pass_len);
++  ret = mbedtls_pk_parse_key(conf->pkey, privkey, privkey_len, privkey_pass, privkey_pass_len, mbedtls_ctr_drbg_random, &altcp_tls_entropy_rng->ctr_drbg);
+   if (ret != 0) {
+     LWIP_DEBUGF(ALTCP_MBEDTLS_DEBUG, ("mbedtls_pk_parse_key failed: %d 0x%x\n", ret, -1*ret));
+     altcp_tls_free_config(conf);
+@@ -1189,7 +1196,7 @@ altcp_mbedtls_sndbuf(struct altcp_pcb *conn)
+           size_t ret;
+ #if defined(MBEDTLS_SSL_MAX_FRAGMENT_LENGTH)
+           /* @todo: adjust ssl_added to real value related to negotiated cipher */
+-          size_t max_frag_len = mbedtls_ssl_get_max_frag_len(&state->ssl_context);
++          size_t max_frag_len = mbedtls_ssl_get_max_in_record_payload(&state->ssl_context);
+           max_len = LWIP_MIN(max_frag_len, max_len);
+ #endif
+           /* Adjust sndbuf of inner_conn with what added by SSL */
+@@ -1232,9 +1239,9 @@ altcp_mbedtls_write(struct altcp_pcb *conn, const void *dataptr, u16_t len, u8_t
+   /* HACK: if there is something left to send, try to flush it and only
+      allow sending more if this succeeded (this is a hack because neither
+      returning 0 nor MBEDTLS_ERR_SSL_WANT_WRITE worked for me) */
+-  if (state->ssl_context.out_left) {
+-    mbedtls_ssl_flush_output(&state->ssl_context);
+-    if (state->ssl_context.out_left) {
++  if (state->ssl_context.MBEDTLS_PRIVATE(out_left)) {
++    altcp_mbedtls_flush_output(state);
++    if (state->ssl_context.MBEDTLS_PRIVATE(out_left)) {
+       return ERR_MEM;
+     }
+   }
+@@ -1284,6 +1291,8 @@ altcp_mbedtls_bio_send(void *ctx, const unsigned char *dataptr, size_t size)
+   while (size_left) {
+     u16_t write_len = (u16_t)LWIP_MIN(size_left, 0xFFFF);
+     err_t err = altcp_write(conn->inner_conn, (const void *)dataptr, write_len, apiflags);
++    /* try to send data... */
++    altcp_output(conn->inner_conn);
+     if (err == ERR_OK) {
+       written += write_len;
+       size_left -= write_len;
+diff --git a/lib/lwip/lwip/src/core/tcp_out.c b/lib/lwip/lwip/src/core/tcp_out.c
+index 64579ee5cbd8..b5d312137368 100644
+--- a/lib/lwip/lwip/src/core/tcp_out.c
++++ b/lib/lwip/lwip/src/core/tcp_out.c
+@@ -1255,14 +1255,6 @@ tcp_output(struct tcp_pcb *pcb)
+   LWIP_ASSERT("don't call tcp_output for listen-pcbs",
+               pcb->state != LISTEN);
+ 
+-  /* First, check if we are invoked by the TCP input processing
+-     code. If so, we do not output anything. Instead, we rely on the
+-     input processing code to call us when input processing is done
+-     with. */
+-  if (tcp_input_pcb == pcb) {
+-    return ERR_OK;
+-  }
+-
+   wnd = LWIP_MIN(pcb->snd_wnd, pcb->cwnd);
+ 
+   seg = pcb->unsent;
+@@ -2036,7 +2028,7 @@ tcp_rst(const struct tcp_pcb *pcb, u32_t seqno, u32_t ackno,
+         u16_t local_port, u16_t remote_port)
+ {
+   struct pbuf *p;
+-  
++
+   p = tcp_rst_common(pcb, seqno, ackno, local_ip, remote_ip, local_port, remote_port);
+   if (p != NULL) {
+     tcp_output_control_segment(pcb, p, local_ip, remote_ip);
+diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
+index 9d618625facb..88d6faf327ae 100644
+--- a/lib/lwip/u-boot/lwipopts.h
++++ b/lib/lwip/u-boot/lwipopts.h
+@@ -154,4 +154,10 @@
+ #define MEMP_MEM_INIT			1
+ #define MEM_LIBC_MALLOC			1
+ 
++#if defined(CONFIG_MBEDTLS_LIB_TLS)
++#define LWIP_ALTCP                      1
++#define LWIP_ALTCP_TLS                  1
++#define LWIP_ALTCP_TLS_MBEDTLS          1
++#endif
++
+ #endif /* LWIP_UBOOT_LWIPOPTS_H */
+-- 
 2.45.2
 
