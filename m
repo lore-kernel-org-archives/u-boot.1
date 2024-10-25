@@ -4,27 +4,27 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC9F6D149EB
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 20:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CE8AD149EB
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 20:15:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D49589020;
+	by phobos.denx.de (Postfix) with ESMTP id 659F689030;
 	Fri, 25 Oct 2024 22:14:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 101DD89024; Fri, 25 Oct 2024 19:18:45 +0200 (CEST)
+ id 760928902A; Fri, 25 Oct 2024 19:18:46 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 17AF387F7D
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 19:18:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 4C83288F68
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 19:18:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=leo.yan@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E55C9339;
- Fri, 25 Oct 2024 10:19:08 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7BF1D339;
+ Fri, 25 Oct 2024 10:19:11 -0700 (PDT)
 Received: from e132581.cambridge.arm.com (e132581.arm.com [10.2.76.71])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 268973F71E;
- Fri, 25 Oct 2024 10:18:38 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id B448A3F71E;
+ Fri, 25 Oct 2024 10:18:40 -0700 (PDT)
 From: Leo Yan <leo.yan@arm.com>
 To: Tom Rini <trini@konsulko.com>, Usama Arif <usama.arif@arm.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
@@ -32,10 +32,12 @@ To: Tom Rini <trini@konsulko.com>, Usama Arif <usama.arif@arm.com>,
  Boyan Karatotev <boyan.karatotev@arm.com>,
  Jackson Cooper-Driver <jackson.cooper-driver@arm.com>, u-boot@lists.denx.de
 Cc: Leo Yan <leo.yan@arm.com>
-Subject: [PATCH v1 0/8] U-boot: arm: Refine the booting on Total Compute
-Date: Fri, 25 Oct 2024 18:18:13 +0100
-Message-Id: <20241025171821.624702-1-leo.yan@arm.com>
+Subject: [PATCH v1 2/8] arm: total_compute: Initialize environment variables
+Date: Fri, 25 Oct 2024 18:18:15 +0100
+Message-Id: <20241025171821.624702-3-leo.yan@arm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241025171821.624702-1-leo.yan@arm.com>
+References: <20241025171821.624702-1-leo.yan@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 25 Oct 2024 22:14:52 +0200
@@ -55,43 +57,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series is to refine the booting on Arm Total Compuate
-platform.
+From: Boyan Karatotev <boyan.karatotev@arm.com>
 
-It changes to use the info passed in DTB for initialization DRAM info,
-and dynamically initializes the booting envoironment variables.
+Initialize the environment variables 'fdt_addr_r' and 'kernel_addr_r'
+during the misc init phase. The static configurations are not needed,
+remove them.
 
-Another big change is to use an envoironment file for boot commands,
-based on it, the series extends to support multiple block devices
-(MMC and virtio). And the env file is extended for booting Debian.
+Signed-off-by: Boyan Karatotev <boyan.karatotev@arm.com>
+Signed-off-by: Leo Yan <leo.yan@arm.com>
+---
+ arch/arm/Kconfig                           |  1 +
+ board/armltd/total_compute/total_compute.c | 23 ++++++++++++++++++++++
+ include/configs/total_compute.h            |  4 +---
+ 3 files changed, 25 insertions(+), 3 deletions(-)
 
-The last commit is to update memory mapping info based on the DRAM info
-passed via DT binding.
-
-
-Boyan Karatotev (5):
-  arm: total_compute: depend on TF-A for hardware description
-  arm: total_compute: Initialize environment variables
-  arm: total_compute: Remove unused bootm_size
-  arm: total_compute: move the boot command to an env file
-  arm: total_compute: Minor improvement for boot arguments
-
-Leo Yan (3):
-  arm: total_compute: Dynamically detect block device
-  arm: total_compute: Support Debian boot
-  arm: total_compute: Update memory mapping info
-
- arch/arm/Kconfig                             |   2 +
- board/armltd/total_compute/Makefile          |   1 +
- board/armltd/total_compute/lowlevel_init.S   |  12 +++
- board/armltd/total_compute/total_compute.c   | 102 ++++++++++++++-----
- board/armltd/total_compute/total_compute.env |  39 +++++++
- configs/total_compute_defconfig              |   2 +-
- include/configs/total_compute.h              |  31 ------
- 7 files changed, 130 insertions(+), 59 deletions(-)
- create mode 100644 board/armltd/total_compute/lowlevel_init.S
- create mode 100644 board/armltd/total_compute/total_compute.env
-
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index d0127418ee..f4ce884e37 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1391,6 +1391,7 @@ config TARGET_TOTAL_COMPUTE
+ 	select DM_MMC
+ 	select DM_GPIO
+ 	imply OF_HAS_PRIOR_STAGE
++	imply MISC_INIT_R
+ 
+ config TARGET_LS2080A_EMU
+ 	bool "Support ls2080a_emu"
+diff --git a/board/armltd/total_compute/total_compute.c b/board/armltd/total_compute/total_compute.c
+index 571a075145..02bb648ce7 100644
+--- a/board/armltd/total_compute/total_compute.c
++++ b/board/armltd/total_compute/total_compute.c
+@@ -8,6 +8,8 @@
+ #include <dm.h>
+ #include <dm/platform_data/serial_pl01x.h>
+ #include <env.h>
++#include <linux/sizes.h>
++
+ #include <asm/armv8/mmu.h>
+ #include <asm/global_data.h>
+ #include <asm/system.h>
+@@ -51,6 +53,27 @@ void *board_fdt_blob_setup(int *err)
+ 	return (void *)fw_dtb_pointer;
+ }
+ 
++int misc_init_r(void)
++{
++	size_t base;
++
++	if (!env_get("fdt_addr_r"))
++		env_set_hex("fdt_addr_r", fw_dtb_pointer);
++
++	if (!env_get("kernel_addr_r")) {
++		/*
++		 * The kernel has to be 2M aligned and the first 64K at the
++		 * start of SDRAM is reserved for DTB.
++		 */
++		base = gd->ram_base + SZ_2M;
++		assert(IS_ALIGNED(base, SZ_2M));
++
++		env_set_hex("kernel_addr_r", base);
++	}
++
++	return 0;
++}
++
+ int board_init(void)
+ {
+ 	return 0;
+diff --git a/include/configs/total_compute.h b/include/configs/total_compute.h
+index 205e6a6278..8053dca315 100644
+--- a/include/configs/total_compute.h
++++ b/include/configs/total_compute.h
+@@ -14,9 +14,7 @@
+ #define CFG_EXTRA_ENV_SETTINGS	\
+ 				"bootm_size=0x20000000\0"	\
+ 				"load_addr=0xa0000000\0"	\
+-				"kernel_addr_r=0x80080000\0"	\
+-				"initrd_addr_r=0x88000000\0"	\
+-				"fdt_addr_r=0x83000000\0"
++				"initrd_addr_r=0x88000000\0"
+ /*
+  * If vbmeta partition is present, boot Android with verification using AVB.
+  * Else if system partition is present (no vbmeta partition), boot Android
 -- 
 2.34.1
 
