@@ -4,59 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BF79D0C606
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:37:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF213D0C606
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:40:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0278D88F64;
-	Fri, 25 Oct 2024 14:37:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 60A1D89021;
+	Fri, 25 Oct 2024 14:40:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="iWGHun5L";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="DrQnpkro";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE8BB8905C; Fri, 25 Oct 2024 14:37:40 +0200 (CEST)
-Received: from mail-m121146.qiye.163.com (mail-m121146.qiye.163.com
- [115.236.121.146])
- by phobos.denx.de (Postfix) with ESMTP id 4135A88DB7
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:37:22 +0200 (CEST)
+ id 4BDC889058; Fri, 25 Oct 2024 14:40:27 +0200 (CEST)
+Received: from mail-m1973188.qiye.163.com (mail-m1973188.qiye.163.com
+ [220.197.31.88])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E4C8A88F64
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:40:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id ec4739a;
- Fri, 25 Oct 2024 20:36:30 +0800 (GMT+08:00)
-Message-ID: <fd998b85-1425-4880-8469-e9c07019d0db@rock-chips.com>
-Date: Fri, 25 Oct 2024 20:36:30 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id ec47490;
+ Fri, 25 Oct 2024 20:40:16 +0800 (GMT+08:00)
+Message-ID: <d966f05d-0eea-4c6c-a4e4-037f3911872e@rock-chips.com>
+Date: Fri, 25 Oct 2024 20:40:16 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/8] adc: rockchip-saradc: Use vdd-microvolts prop as
- fallback
+Subject: Re: [PATCH 4/8] arm64: dts: rockchip: add SPI flash on NanoPC-T6
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, u-boot@lists.denx.de
+ Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
+Cc: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, u-boot@lists.denx.de, 
+ Heiko Stuebner <heiko@sntech.de>
 References: <20241017200039.1235524-1-jonas@kwiboo.se>
- <20241017200039.1235524-8-jonas@kwiboo.se>
+ <20241017200039.1235524-5-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241017200039.1235524-8-jonas@kwiboo.se>
+In-Reply-To: <20241017200039.1235524-5-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR9JGlZOHktLS01DTh8eSk9WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh1CT1YeHUJCQk9KQhlOS0tWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a92c3ada69a09d6kunmec4739a
+X-HM-Tid: 0a92c3b119be09d6kunmec47490
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PEk6Thw4FDIjKRc8KFZNAjgX
- DRQKCQhVSlVKTElCQ05CTEJKT09OVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTUxONwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NRg6Kww5VjIfKRc0ATgdLzMq
+ SzQwCQ9VSlVKTElCQ01LS0pMTkpMVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTU1KNwY+
 DKIM-Signature: a=rsa-sha256;
- b=iWGHun5LpZvebuB1qyYeG5oh9MM1QNI+Rdv8Ly1b2hZ1z88ppnuJVSoGm8P+rDud/FC37M4vNkOt5dYB40TZ7JK0uxYRn7QQUda2XSDEKtg9JnTvlD94Gn3MLffwnNCMxlD+A6oFxIi4mU+p5R4kSBomD0+kOsHi3q0k5YvRBXA=;
+ b=DrQnpkrosq7GQfBbBsnHkyYx/P1LTv9rb6sbCYVqMTA9uZFLkJUMrs9vFBUSfDQewW2XtxDyVenKjjXOd2QvWjxjjg2xIzeEWcoLjtUsLQWQL6RmnO0mvdIbiR8M6Ds2P/qGibHOKf6eZhqYNp0hvC9gl4wM1biHZ8HfBPODYvI=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=gMr5QdgmDSz+13d94sX0GOvsXdUhoZGI86XLIoRW2cs=;
+ bh=w8+c0wUpr3VOfnH5BPcGEUIwOJtb3N4Hq5SrcUT5DLM=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,49 +78,51 @@ X-Virus-Status: Clean
 
 
 On 2024/10/18 04:00, Jonas Karlman wrote:
-> Change to use vdd-microvolts prop value as voltage reference when the
-> supply regulator is missing or when DM_REGULATOR=n is used.
+> From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 >
+> FriendlyELEC NanoPC-T6 has optional SPI flash chip on-board.
+> It is populated with 32MB one on LTS version.
+>
+> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+> Link: https://lore.kernel.org/r/20240829-friendlyelec-nanopc-t6-lts-v6-5-edff247e8c02@linaro.org
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>
+> [ upstream commit: a22a629c63b1addcf2d81eaf30383c1deca5b7a9 ]
+>
+> (cherry picked from commit 7588da65fdf09c7de9f903780c212a8ae96f2866)
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   drivers/adc/rockchip-saradc.c | 9 ++++++---
->   1 file changed, 6 insertions(+), 3 deletions(-)
+>   .../src/arm64/rockchip/rk3588-nanopc-t6.dtsi      | 15 +++++++++++++++
+>   1 file changed, 15 insertions(+)
 >
-> diff --git a/drivers/adc/rockchip-saradc.c b/drivers/adc/rockchip-saradc.c
-> index f6832ab30731..7cf9735f60d0 100644
-> --- a/drivers/adc/rockchip-saradc.c
-> +++ b/drivers/adc/rockchip-saradc.c
-> @@ -241,7 +241,7 @@ int rockchip_saradc_probe(struct udevice *dev)
->   {
->   	struct adc_uclass_plat *uc_pdata = dev_get_uclass_plat(dev);
->   	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
-> -	struct udevice *vref;
-> +	struct udevice *vref = NULL;
->   	struct clk clk;
->   	int vref_uv;
->   	int ret;
-> @@ -259,7 +259,7 @@ int rockchip_saradc_probe(struct udevice *dev)
->   	priv->active_channel = -1;
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi
+> index d199f51a220c..77580c671b36 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi
+> @@ -560,6 +560,21 @@
+>   	status = "okay";
+>   };
 >   
->   	ret = device_get_supply_regulator(dev, "vref-supply", &vref);
-> -	if (ret) {
-> +	if (ret && uc_pdata->vdd_microvolts <= 0) {
->   		printf("can't get vref-supply: %d\n", ret);
->   		return ret;
->   	}
-> @@ -267,7 +267,10 @@ int rockchip_saradc_probe(struct udevice *dev)
->   	if (priv->reset)
->   		rockchip_saradc_reset_controller(priv->reset);
->   
-> -	vref_uv = regulator_get_value(vref);
-> +	if (vref)
-> +		vref_uv = regulator_get_value(vref);
-> +	else
-> +		vref_uv = uc_pdata->vdd_microvolts;
->   	if (vref_uv < 0) {
->   		printf("can't get vref-supply value: %d\n", vref_uv);
->   		return vref_uv;
+> +/* optional on non-LTS, populated on LTS version */
+> +&sfc {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&fspim1_pins>;
+> +	status = "okay";
+> +
+> +	flash@0 {
+> +		compatible = "jedec,spi-nor";
+> +		reg = <0>;
+> +		spi-max-frequency = <104000000>;
+> +		spi-rx-bus-width = <4>;
+> +		spi-tx-bus-width = <1>;
+> +	};
+> +};
+> +
+>   &spi2 {
+>   	status = "okay";
+>   	assigned-clocks = <&cru CLK_SPI2>;
