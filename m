@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1766FD0C600
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 11:20:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0843BD0C600
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 11:27:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C6A488ED2;
-	Fri, 25 Oct 2024 13:20:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8EE4B88ED2;
+	Fri, 25 Oct 2024 13:27:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Sh0Kk6nw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UvE65Qum";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6CCD88FE4; Fri, 25 Oct 2024 13:20:32 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id 71F2E88B8F; Fri, 25 Oct 2024 13:27:29 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EB4E88DFE
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 13:20:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7317088ED2
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 13:27:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2fb51e00c05so29970101fa.0
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 04:20:28 -0700 (PDT)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2fb559b0b00so16982391fa.0
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 04:27:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729855222; x=1730460022; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1729855631; x=1730460431; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vyyma5Jk6JThDCMq3d9E6wHSy+krktLU1KLenlI1TFE=;
- b=Sh0Kk6nwXxAGQtajCK5wwOmVCvbt8rTBipnCo0t1pItvvtlNKuesAF/74zJhr1dlN5
- piMIiRY14hzm78y+EME4NXRQ4PMbtfEuGnVkx7e9jiv5AHbaC3B2Zcr10i0YkAZzvgZG
- LYNpHUodtcJ1LJjlnccHmCBe3499yXbfSSu8oejX54Ew4VP5oReCD1CkiwMENtzjzdSy
- usO7irnxFQy3+KpVGAEiEQXFh2MnhAUBsyyDHWiGraV1pawOlwd0O2LWZFn/YP4NSceN
- nhp4s/X+LsGqCDZFFbBttE/YpecEYxoYwgKVlEtRBKcWgSvnJv1AODJ2DmyQpaAIpfg8
- DefA==
+ bh=biOZ7XqlH/JyPHerVXE/GRedrOle//tQnswYQNNK7hI=;
+ b=UvE65QumSFHTScebUIToba5HsqIHjGkCZ/+42b/6MVbvgpbJRB6KtSs/j7dmIl8e1w
+ 90TCmDb3gkB8F1NTtLpfP+BbOVxlqxP8xlfs7Yat09xlANJas4HErTjGdsnWn4OJm5Zs
+ n0z4tMVYdVI86VflGfjnbd/3Jxl/UY6MfT+a2oyuxcvNY3CMuuDYU92AxQxmt6NqQOdJ
+ tcrXOQGb3k1i2KEvQJFWdLS49jhcKF6e2zS4J1SKT1l7gVYvAaOa/GS0PbXX8wht1sCI
+ B0SGkQ9wWKuaetwrOZr+oQHckGuGSfrM5MLGa/JcJdLqbqlyOiiKt8BJYoog3N958SE+
+ cBcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729855222; x=1730460022;
+ d=1e100.net; s=20230601; t=1729855631; x=1730460431;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Vyyma5Jk6JThDCMq3d9E6wHSy+krktLU1KLenlI1TFE=;
- b=jeIslqOlz1yb/0zo8jzhcKlOZVGShB4bEW+8Fql+pUDAErsMWaARqb3IzLHVd4GRWe
- YGsyfB68dUHsXC0lDte5OBZ3YniP9QrUokKz4Tbbc3vIL/born3jfL/njlpdKLtV/IZe
- KqBrerqWYQkVei47XRdVP4Dk498zsLt6YxJBbbOu0cpqBq1osAT3J99ATieZlEt0R+5B
- zAfEcwidppPyEwxSSaNDMhgni4PDkV//FzRE97Uh2ohBPlM5k0wHy4nc5W3Du6/Z9FCO
- LTePZJFsmsYbmQDUjjDmbse47yr36kJeYAGlrO62C61hKVwLhR3fbvndqakwx6Ik2KcM
- B+1w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV4js3tmvcVj32hXAW2iVMIlm8jo8uyQrtlIi5+/YZB96GviTAwhRgTB7VRr/ZldCaK7G5rdH0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRI7MpemwVb5QdSx4xBo+qVyz2kTgrf++xMOcIa+HWa3tkKBID
- XJN36KBt8uP+SveI7jmkTPu9aIXOdmo3fYa/e3P1hTpcjWjNokV1PRHNjDzaJX8lwSdiTwvDuUF
- lhNgdbJJdmqMycTRvTF7cxyqt4dcRK2gp
-X-Google-Smtp-Source: AGHT+IFqHUjG64q0tD2/oUfzcfHJD8xClHI9DdGpjuHCoao42ypI+TjI2SvSa8JaWo0z0V3GFunroq71L2W+G6AAFAg=
-X-Received: by 2002:a2e:71a:0:b0:2fb:510c:7237 with SMTP id
- 38308e7fff4ca-2fc9d580d75mr62920121fa.41.1729855221989; Fri, 25 Oct 2024
- 04:20:21 -0700 (PDT)
+ bh=biOZ7XqlH/JyPHerVXE/GRedrOle//tQnswYQNNK7hI=;
+ b=O0WABUcrKq819J34hd46nacepML1VG0c+9tCHLcn20DjJXrSFmL62yzRa6ZCwchjQ7
+ ZA/Vz8d5FNUMckA9oeXadArcPEvsFIWgQdvM9BKb2n0twfnAAxDjdy3uAPx6/E3gopRT
+ URbID4Mb+IsxVl6wjN7cPBCmjXqViOA/7nmDxD954MGpfYJW59H0cleWuIFNBC1l0CbK
+ ZqTvIVXTfSA0B2XYYV9A5twlgqCmp9/6A0Wsv+aId3SAZe2PRF7YsMmKeaJaxCJVVlX/
+ kwSFE6Y2L3/T+1sTez+b2uxNbit16nzDXDgigLcz9Lce2F5/khjYJ7VJhMfjK+QFU4mg
+ KKiA==
+X-Gm-Message-State: AOJu0YwdZN/pFPehmdBbr3Qu4qENx1K3CCUBrD94GR7Hq/zlCRjoG2Gk
+ 0jbapCaZofAnU8ugSfc1xI0ez4twiDDVe4RPAU8W5QI2nqC7zBSo3j5fmq/j+hr1h28zNgqNTmO
+ /GGvgjpm99KuXdE/oXemKnxCDE9Q=
+X-Google-Smtp-Source: AGHT+IE0t0ELW0oIqPhFzi5KPJRTxIAikhGTanCVINnxHce5lSMOXnGoqtObebLaLv0QtW+gy2H49aPTjaHUUEm5sGQ=
+X-Received: by 2002:a2e:4a12:0:b0:2fb:7f9f:7f50 with SMTP id
+ 38308e7fff4ca-2fc9d330671mr39777931fa.13.1729855630330; Fri, 25 Oct 2024
+ 04:27:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241025004411.585310-1-gilles.talis@gmail.com>
-In-Reply-To: <20241025004411.585310-1-gilles.talis@gmail.com>
+References: <20241019220322.341324-1-marex@denx.de>
+ <20241019220322.341324-4-marex@denx.de>
+In-Reply-To: <20241019220322.341324-4-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 25 Oct 2024 08:20:09 -0300
-Message-ID: <CAOMZO5BQoZ=MvRqmcZW8GsAGjfJsnev8dUwgLE1EOnO43c5ybQ@mail.gmail.com>
-Subject: Re: [PATCH v2] board: emcraft: Add support for Emcraft Systems NavQ+
-To: Gilles Talis <gilles.talis@gmail.com>
-Cc: peng.fan@nxp.com, u-boot@lists.denx.de, uboot-imx@nxp.com
+Date: Fri, 25 Oct 2024 08:26:58 -0300
+Message-ID: <CAOMZO5A9AGG_X=ztxMZWJvVH4yV63RvCm0KdugpUCpqoXcxXfw@mail.gmail.com>
+Subject: Re: [PATCH 4/5] arm64: imx: Deduplicate DH i.MX8MP DHSOM defconfigs
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Andreas Geisreiter <ageisreiter@dh-electronics.de>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,78 +93,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Gilles,
+Hi Marek,
 
-On Thu, Oct 24, 2024 at 9:44=E2=80=AFPM Gilles Talis <gilles.talis@gmail.co=
-m> wrote:
+On Sat, Oct 19, 2024 at 7:03=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> The Emcraft Systems NavQ+ kit is a mobile robotics platform
-> based on NXP i.MX8 MPlus SoC.
->
-> The following interfaces and devices are enabled:
-> - eMMC
-> - Gigabit Ethernet (through eQOS interface)
-> - SD-Card
-> - UART console
->
-> The device tree file is taken from upstream Linux Kernel
-> through OF_UPSTREAM
->
-> Signed-off-by: Gilles Talis <gilles.talis@gmail.com>
-> ---
-> Changes v1 --> v2:
-> - Removed unused usdhc properties from dtsi
-> - Moved to correct ethernet PHY driver (REALTEK -> ATHEROS)
-> - Removed empty board_late_init() function
-> - Moved env variables to an env file
+> Deduplicate defconfigs for all DH i.MX8MP DHSOM by factoring out the
+> common parts into generic _dhsom_defconfig and including those using
+> the #include <configs/...> preprocessor macro, which is applicable to
+> defconfigs as well. This enables CMD_EXPORTENV on all iMX8MP DHSOM
+> systems to be consistent with other DHSOM systems.
+....
 
-This version looks better, thanks.
+>  create mode 100644 configs/dhsom_defconfig
+>  create mode 100644 configs/imx8mp_dhsom_defconfig
+>  create mode 100644 configs/imx_dhsom_defconfig
 
-CI reports an error.
+CI complains about this:
 
-Warning, treated as error:
-142/builds/u-boot/custodians/u-boot-imx/doc/board/emcraft/index.rst:6:toctr=
-ee
-contains reference to nonexisting document
-'board/emcraft/imx8mp-navqp'
-143make[1]: *** [doc/Makefile:70: htmldocs] Error 2
-144make: *** [Makefile:2445: htmldocs] Error 2
+$ ./tools/buildman/buildman --maintainer-check
+fatal: detected dubious ownership in repository at
+'/builds/u-boot/custodians/u-boot-imx'
+To add an exception for this directory, call:
+git config --global --add safe.directory /builds/u-boot/custodians/u-boot-i=
+mx
+WARNING: no maintainers for 'dhsom'
+WARNING: no maintainers for 'imx_dhsom'
 
 Please fix and resend.
-
-> +#include <miiphy.h>
-> +
-> +#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
-> +int board_phy_config(struct phy_device *phydev)
-> +{
-> +       if (phydev->drv->config)
-> +               phydev->drv->config(phydev);
-> +
-> +       return 0;
-
-Can't board_phy_config() be removed now?
-
-> diff --git a/board/emcraft/imx8mp_navqp/imx8mp_navqp.env b/board/emcraft/=
-imx8mp_navqp/imx8mp_navqp.env
-> new file mode 100644
-> index 0000000000..a8b76574b4
-> --- /dev/null
-> +++ b/board/emcraft/imx8mp_navqp/imx8mp_navqp.env
-> @@ -0,0 +1,13 @@
-
-SPDX header is missing for this file.
-
-> +int board_fit_config_name_match(const char *name)
-> +{
-> +       if (is_imx8mp() &&
-> +           !strcmp(name, "imx8mp-navqp"))
-> +               return 0;
-> +
-> +       return -1;
-
-return -EINVAL;
-
-> +#if defined(CONFIG_CMD_NET)
-> +#define CFG_FEC_MXC_PHYADDR          1
-
-With DM, this is no longer used, right?
