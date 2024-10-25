@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B1BBD0C61B
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 14:48:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B031ED0C61D
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 14:49:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFB088902F;
-	Fri, 25 Oct 2024 16:48:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 323A388A4C;
+	Fri, 25 Oct 2024 16:49:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nB+euswN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="emY0UZj3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6C6E8902F; Fri, 25 Oct 2024 16:48:54 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 537868902A; Fri, 25 Oct 2024 16:49:28 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEAA488C66
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 16:48:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 719988870D
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 16:49:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2fb498a92f6so22068211fa.1
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 07:48:52 -0700 (PDT)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2fb3da341c9so22837161fa.2
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 07:49:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729867732; x=1730472532; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1729867761; x=1730472561; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2o66jcYTQufeuQxLXLIB0JRg3VL/FfKI0vEXDd/J9IY=;
- b=nB+euswNL200kcXLM3ki0+hLZB/cgDqwO5i0ROIFinBWVzdnxBcp/xI5IENg6W6Uy1
- cMozV5cWW1EJSnM82rM+bVtAbnrkdKsslwhxgw5eqAF69Az+toHULY1wnWqK9RypR56T
- XaV9Nt36/X/mKQnxXbjeBrgbkmxy7Jn1zCrwSk3OxYn7/xj6MbCb8EB0dCzWJl3SpNp5
- Ef5Vd96XUiwsLyc+Zo7jjk6wMhhdIZBMslXVFdqSri+oIvU2bl2z3fJoPLkqmzHohEYq
- WKFErcXoth2YsuMCPC7gsrmAXt/x06OIzNM5y9ok6VKfFsXhQYjeoh7oGHO4hp3dRqB3
- J7Kw==
+ bh=HYnajsWZNNg6BW3th3lt33F7HnBt2xEmxq9LSUBNNBs=;
+ b=emY0UZj34/WRI/WU3PUXjJo6oloUuAb64XbF1TTDv5bvc98HaggaPTeGsNUM/hHxtz
+ uR99KKwUGi6SWPUIOad2EMZJLlTEiivg9ZzwemfR03t6m2dfHsy4AMf83fRdUa1+/Swl
+ SiK0CxogI06Sww3oVdaQXbxMm3RKNuNhYG1uDVQUbZuEZ5SZNDEB+QS4Env8H9xJboMC
+ 71fWkuIX/6IY/r6MrG2R/ZZm+M8SjhlCT/dJmJpw//sv/Szjshz3A+i9vnJ8A9TiB8xV
+ F6G64OvSCAaH9/DYPeM/HLgyLa/JTNLRJGkl58AtbwimA7pH3sRXIKY0hwvvII//zWmS
+ 1cfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729867732; x=1730472532;
+ d=1e100.net; s=20230601; t=1729867761; x=1730472561;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2o66jcYTQufeuQxLXLIB0JRg3VL/FfKI0vEXDd/J9IY=;
- b=gPe3YHobiJueJ/HzxacVZVAdisvKwnxGdETxAQQsnwEPVp/0H12CUBUFc/7zwuKNs0
- wW3LYuiR19VQf2/X3esuCCeuKpC7ZLPoQiGewX+Lxm2w7e6XgK+pHUI5xsGfpzJGsGJX
- PahDQfNAl2iPD8FZ8txiofDoOk5lv4ASmAFW6eycda8/KBlw77EwkhVuoAUoWeXeKCEz
- ni3euPvACjBaIA3e2aFDTQ4Dy0T10eEsVj6AE4oBEP181J14rOTjomp59o7kLE9Q8rE8
- sHHcFXxVHvPHdWf9imeyCTxBOVrGKZWLpTepfG58nw47eikNHVgmTVEDQyz61edNJuJc
- LVlw==
+ bh=HYnajsWZNNg6BW3th3lt33F7HnBt2xEmxq9LSUBNNBs=;
+ b=PHgSA3TVfU8xTQDEXomZUHDVlG+mAZq6qvniOBRBl5AWFTO81Zl3O/pIaU1jqBf55g
+ 2hD0cNV+tDmTsPyWt67DaF3tMr4mnZJdfaZKxTH8yWxGlKbwv0JS6d//9f4f/hHTFajM
+ zbJGB/LXVVSko0ca5LomDUxUdKeqImHZ2MXkGIVPJpYotGiXLw93GF4ue1KTrC/Xbwec
+ VlcNeg1cpIXyZkkrVs4VhqgS2B2DPGXktJ3RoFcUgqHxEqL+vnx8bcrCOoJLpo6FavhO
+ VlHdb4Ofdr+/p4iG46nSACsCuuObCpc35iovksRoshvRdXCwimclzVKuzU6yplN5S8W9
+ wA9Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWicBK1BmUToNC9BOGEuqy5y7L0YcgI40cjiZoaVnuWSB+gECjjhX62ZDbst40wIHXTlKfr7Vw=@lists.denx.de
-X-Gm-Message-State: AOJu0YywcT6EtvEvGRaOFzdTvAYleHHg+0lauNxeXLLZymx8K9OVmY1b
- +4jsyOEY4VWPrpTd77y3sp8QP/L0Ilp11ls122uUcXpTJx5XpqcM9z5g1fRI9vuvJpRu+2FltPn
- NveQzrXl8K+mkUjCywghdsPSQUwE=
-X-Google-Smtp-Source: AGHT+IHQYRIJXso4ga1ZjFjdoRjS2CjulJxtgOr8FD4TILZNho4ONY4RCcn1w0U56KnkFpt+VcljgTHAXfx9Qh1+o3k=
-X-Received: by 2002:a2e:be24:0:b0:2ef:17f7:6e1d with SMTP id
- 38308e7fff4ca-2fca81c2448mr41528441fa.4.1729867731949; Fri, 25 Oct 2024
- 07:48:51 -0700 (PDT)
+ AJvYcCVsVrBKFl4LIPsjvZG068p9sgKyirHNDiKuA5oBCodHul6qbKeaTfzlus0G03ffWjY8JEj50q4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzySGy0MS60Kei0rmsw9X1T7dkD/7tNjWeYZpBC76Qd0QCWRVG2
+ aT8tIbK3BkpURPBIEQxVYrUq3LnZJo+gXFMpAaA45WwvaqofWsyp5OjyE4M1V/jRGJjCmd7dYgq
+ yn4s7GL3j2TYNcjk9/kFjpBT8re1R5w==
+X-Google-Smtp-Source: AGHT+IEnPJ1SRbIbgRzoYMuVn6HkRU6pRIzFBaACJHrKJZ+77O8O9hOkoipkgIq2wTvt45P4iPLjGSldvKCCeh0AzUs=
+X-Received: by 2002:a2e:b8cb:0:b0:2fb:3445:a4af with SMTP id
+ 38308e7fff4ca-2fc9d31133cmr58008781fa.21.1729867760400; Fri, 25 Oct 2024
+ 07:49:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241023-imx93qsb-v2-0-1843ab1a4d5a@nxp.com>
- <20241023-imx93qsb-v2-1-1843ab1a4d5a@nxp.com>
-In-Reply-To: <20241023-imx93qsb-v2-1-1843ab1a4d5a@nxp.com>
+References: <20241023115350.8413-1-hiagofranco@gmail.com>
+In-Reply-To: <20241023115350.8413-1-hiagofranco@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 25 Oct 2024 11:48:40 -0300
-Message-ID: <CAOMZO5D+xin38JOPyhAshdAFpDFXeNTiYVm5NaiQ4byxVST0KQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] imx9: clock: Add 800MHz fracpll entry
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
+Date: Fri, 25 Oct 2024 11:49:09 -0300
+Message-ID: <CAOMZO5A17cnb+sSh687xHJw2kFkWz2Sn_LUN8Zt=mfKhho8_Ag@mail.gmail.com>
+Subject: Re: [PATCH] verdin-imx8m{m|p}: defconfig: update fastboot buffer
+ size/address
+To: Hiago De Franco <hiagofranco@gmail.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>, 
+ u-boot@lists.denx.de, Hiago De Franco <hiago.franco@toradex.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -91,13 +92,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Oct 22, 2024 at 11:59=E2=80=AFPM Peng Fan (OSS) <peng.fan@oss.nxp.c=
-om> wrote:
+On Wed, Oct 23, 2024 at 8:54=E2=80=AFAM Hiago De Franco <hiagofranco@gmail.=
+com> wrote:
 >
-> From: Peng Fan <peng.fan@nxp.com>
+> From: Hiago De Franco <hiago.franco@toradex.com>
 >
-> Add 800MHz fracpll entry to support DDR 3200MTS.
+> Remove FASTBOOT_BUF_SIZE from verdin-imx8mm_defconfig and
+> verdin-imx8mp_defconfig to use the default value of 0x7000000, aligning
+> with other Toradex boards.
 >
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> Update FASTBOOT_BUF_ADDR to 0x44200000, consistent with the value in
+> previous downstream NXP U-Boot releases. This will make fastboot
+> applications continue working with upstream U-Boot by using the same
+> address.
+>
+> Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
 
-Applied all, thanks.
+Applied, thanks.
