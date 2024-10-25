@@ -4,76 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44F43D149D9
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 17:54:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 920B7D149E7
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 19:06:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 654F588F71;
-	Fri, 25 Oct 2024 19:54:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D487D88FE4;
+	Fri, 25 Oct 2024 21:06:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WPUYJXhQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k1AQgtzp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7F5B88D13; Fri, 25 Oct 2024 19:54:24 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id B0A1289017; Fri, 25 Oct 2024 21:06:10 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3108088F71
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 19:54:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91B5988FBF
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 21:06:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6cbce9e4598so13847316d6.2
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 10:54:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a99e3b3a411so574881466b.0
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 12:06:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729878853; x=1730483653; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Tq/250fmYDP9FB3T9AX0PVQ4LoePqPQXoZgYjWEEZAE=;
- b=WPUYJXhQ4/5eH0rgxdQ9mOyKe5B3DRlmAsKuYDT4z+WUMRrmrcOUU4GkxcfaExuZCK
- 9y3Vql3UeBaar7wEkrhRs7/igbehPs4N6ArWjvVtKqmurbCrzvFOK9rBGVQhnbQiHh1X
- 5p0fWELenRzVLkUmL0fqGhCQTwNZyu4Yb0/QI=
+ d=linaro.org; s=google; t=1729883165; x=1730487965; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=otIfmtqkp+MOynee4XCgz0LEwoxkdqL3cDLHLkEDQXY=;
+ b=k1AQgtzpciQWzjZcBF0y6J+bKovENmy80koSECVAvnpSHMlRkQ25lKQRhBkRYx/HUf
+ 0trXkApalF9uLDgxfKC0x0EI/1QMb7XBXxFVNsBTnOpmolHfh49sO/oGPtbr8L3Z+NVw
+ U7nKZARu6j+gUCHgMtBg8/ebr+P6w6SS/wYpZdmw1E60cFgjHh24EdfiIEh1HO1Xj3hp
+ nn5RfiHgpaibOYImNksoSlKKxBy2cwVu7Tv5GAL2COef4CiOqnr4YLcU0+yqwK0xTFxH
+ rlN62WkkSnii/xJI6+QeYxlA7TKK3rnNa4mnR+dtiQccMsJG1b9fyMqhGVDM1mMAyZ7d
+ yKTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729878853; x=1730483653;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Tq/250fmYDP9FB3T9AX0PVQ4LoePqPQXoZgYjWEEZAE=;
- b=k36/Km4PDXp4f6LmN98mP1E7zEWV5tmgf72zTIcmoDPSykCx/YtqQbe5YZCIjyglsv
- Ttir17ggSHgzh5qX9gFSRhsOqrBpbfjYVUOpcxiIq9oO0l07x+/Wl4ksc1xQ2SI3YNY7
- yOAHwXnuZHRtUeMNEp/Aa8SuMbqoJ6H6Yti/yq8X4U8h2WO6khX/le5FfhNb3DgS7ebm
- uJ37VphXtdpiZmkETwm9FiAqHf+F2+bDlJskW8YbWCshbnh141xAlRvykTKS7KIWrokN
- mRQLDdlzaE9/uBN8lZzFFyup78u2vWyDXJ/XPdlkttWd1WR0bzBQWEZ+qNjTeRSlw+Ef
- 7Bow==
-X-Gm-Message-State: AOJu0YzHFyRbjgK0thwCnz2Ntem3qmR/Qs46ZONRnJQuJidhNk9KXOtg
- exTFFrnhaNZjLesnNwy6yYreOmm0nenbZnzE6IH40faGXtiPruTR+JpCmr7bx54=
-X-Google-Smtp-Source: AGHT+IFs9ub8hmHtbeKjmda9xo2SDhhZEUoUf30UuF3maNOT01Bm5WKJPDHTJvVPCEVkbyA7o31zOg==
-X-Received: by 2002:a05:6214:468d:b0:6cb:e3ea:f07e with SMTP id
- 6a1803df08f44-6d1856fb7dbmr4080796d6.26.1729878853028; 
- Fri, 25 Oct 2024 10:54:13 -0700 (PDT)
-Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d179a5bc20sm7730706d6.143.2024.10.25.10.54.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Oct 2024 10:54:12 -0700 (PDT)
-Date: Fri, 25 Oct 2024 11:54:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>
-Subject: Re: [GIT PULL] Please pull u-boot-dfu-20241025
-Message-ID: <20241025175409.GB4959@bill-the-cat>
-References: <87frokva81.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1729883165; x=1730487965;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=otIfmtqkp+MOynee4XCgz0LEwoxkdqL3cDLHLkEDQXY=;
+ b=LWWRdJq1mEggTSb1c6Xmg6ptoVa4ib51W51mlnCrWTwM1qc8zLHIG1itimy6naSb7s
+ 7MVvYNDG+0K67zMOBn7wcdCLOpe38a9MzVH8QxPEGBXD0Smlrv2VyyXl66BXX4gdQeez
+ r347OhkpL1koeT3r+qb320+Qfgu/3+6EnvXdlvaUBjJlIWtXM/2ZbKvUfTT9MJK2Cwly
+ GuBzCUHoNnPbl8qPxBpcizv3199XlWqE159riQiePjo68R2ZZpv4eN66dwiApR7SUn0c
+ Sib52bTmS9hg4rXPyCHsZXobW6eD6qWdDiesK8iiK0DolR3bxSgnEdm5VuqUrXKSZ9g8
+ mbaw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVaoYMeDMxu2gJKvBCHZRavyjdhFoO7k2X/xaUNb98lvqVuxtaKQgeqWTAHC4e58n+7o1f3wL8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJNR8Daybh+kRDGDN6JHzbECBXt01KqY+9KaozJtvlMYMq6igk
+ 1YLotkPf8x3Xahkdpg5ihfNwQdG6WDzqe7ciE+NLUboKwrjKmCg9JEbuq6ksHXQ=
+X-Google-Smtp-Source: AGHT+IFoGqdLZUsX/2vcFJeelxikUL+nVhdPp96+FgSxbx2CwA1liTFsKxI6hDjwdFcRhngbWQ8pBw==
+X-Received: by 2002:a17:907:9281:b0:a9a:6c41:50c0 with SMTP id
+ a640c23a62f3a-a9de38e4057mr43668666b.26.1729883164684; 
+ Fri, 25 Oct 2024 12:06:04 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:888d:ff00::4? ([2a02:8109:888d:ff00::4])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9b30f5932fsm98283266b.168.2024.10.25.12.06.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 25 Oct 2024 12:06:04 -0700 (PDT)
+Message-ID: <1023cc96-fd6d-4001-931c-682805346684@linaro.org>
+Date: Fri, 25 Oct 2024 21:06:02 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="PWOt4cMUXjeF7RPa"
-Content-Disposition: inline
-In-Reply-To: <87frokva81.fsf@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] lmb: Fix lmb_add_region_flags() return codes and
+ testing
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, sughosh.ganu@linaro.org
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+References: <20241023152203.1218242-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20241023152203.1218242-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,76 +101,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---PWOt4cMUXjeF7RPa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 23/10/2024 17:22, Ilias Apalodimas wrote:
+> The function description says this should return 0 or -1 on failures.
+> When regions coalesce though this returns the number of coalescedregions
 
-On Fri, Oct 25, 2024 at 10:49:02AM +0200, Mattijs Korpershoek wrote:
+* coalesced regions
+> which is confusing and requires special handling of the return code.
+> On top of that no one is using the number of coalesced regions.
+> 
+> So let's just return 0 on success and adjust our selftests accordingly
+> 
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-> Hi Tom,
->=20
-> Please find some new developments and fixes for master:
->=20
-> Dfu:
-> - Rely on device tree for spi speed/mode on spi flash
->=20
-> Android image:
-> - Fix booting on platforms having > 4GiB of memory
-> - Decompress boot image to kernel_addr_r when compression is enabled
-> - Honor CONFIG_SYS_LOAD_ADDR when mkbootimg uses default address
->=20
-> Bcb:
-> - Rework bcb command to use U_BOOT_LONGHELP
-> - Move ab_select cmd to bcb cmd
-> - Implement ab_dump command in bcb
-> - bcb: Write '_<slot>' instead of '<slot>' to misc partition
->=20
-> CI job:
-> - https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/22962
->=20
-> Thanks,
-> Mattijs
->=20
-> The following changes since commit 7af813341d5df064aeee764c31ffb50ffcdf4e=
-b6:
->=20
->   Merge https://source.denx.de/u-boot/custodians/u-boot-watchdog (2024-10=
--23 08:33:56 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu=
--20241025
->=20
-> for you to fetch changes up to 21e7fa0e3ac599737cd235bb5233765e8a1b8b0f:
->=20
->   image: android: handle ramdisk default address (2024-10-24 09:48:14 +02=
-00)
->=20
+Thanks for following up on this!
 
-Applied to u-boot/master, thanks!
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   boot/image-fdt.c |  2 +-
+>   lib/lmb.c        | 10 +++++-----
+>   test/lib/lmb.c   | 10 +++++-----
+>   3 files changed, 11 insertions(+), 11 deletions(-)
+> 
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> index 8eda521693dc..eac09059d955 100644
+> --- a/boot/image-fdt.c
+> +++ b/boot/image-fdt.c
+> @@ -73,7 +73,7 @@ static void boot_fdt_reserve_region(u64 addr, u64 size, enum lmb_flags flags)
+>   	long ret;
+>   
+>   	ret = lmb_reserve_flags(addr, size, flags);
+> -	if (ret >= 0) {
+> +	if (!ret) {
+>   		debug("   reserving fdt memory region: addr=%llx size=%llx flags=%x\n",
+>   		      (unsigned long long)addr,
+>   		      (unsigned long long)size, flags);
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 7e90f178763b..8ce58fcb9224 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -450,7 +450,7 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+>   	}
+>   
+>   	if (coalesced)
+> -		return coalesced;
+> +		return 0;
+>   
+>   	if (alist_full(lmb_rgn_lst) &&
+>   	    !alist_expand_by(lmb_rgn_lst, lmb_rgn_lst->alloc))
+> @@ -487,7 +487,7 @@ long lmb_add(phys_addr_t base, phys_size_t size)
+>   	struct alist *lmb_rgn_lst = &lmb.free_mem;
+>   
+>   	ret = lmb_add_region(lmb_rgn_lst, base, size);
+> -	if (ret < 0)
+> +	if (ret)
+>   		return ret;
+>   
+>   	if (lmb_should_notify(LMB_NONE))
+> @@ -583,8 +583,8 @@ long lmb_reserve_flags(phys_addr_t base, phys_size_t size, enum lmb_flags flags)
+>   	struct alist *lmb_rgn_lst = &lmb.used_mem;
+>   
+>   	ret = lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
+> -	if (ret < 0)
+> -		return -1;
+> +	if (ret)
+> +		return ret;
+>   
+>   	if (lmb_should_notify(flags))
+>   		return lmb_map_update_notify(base, size, MAP_OP_RESERVE);
+> @@ -651,7 +651,7 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
+>   			if (rgn < 0) {
+>   				/* This area isn't reserved, take it */
+>   				if (lmb_add_region_flags(&lmb.used_mem, base,
+> -							 size, flags) < 0)
+> +							 size, flags))
+>   					return 0;
+>   
+>   				if (lmb_should_notify(flags)) {
+> diff --git a/test/lib/lmb.c b/test/lib/lmb.c
+> index b2c54fb4bcb8..c917115b7b66 100644
+> --- a/test/lib/lmb.c
+> +++ b/test/lib/lmb.c
+> @@ -473,7 +473,7 @@ static int lib_test_lmb_overlapping_reserve(struct unit_test_state *uts)
+>   
+>   	/* allocate overlapping region should return the coalesced count */
+>   	ret = lmb_reserve(0x40011000, 0x10000);
+> -	ut_asserteq(ret, 1);
+> +	ut_asserteq(ret, 0);
+>   	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x11000,
+>   		   0, 0, 0, 0);
+>   	/* allocate 3nd region */
+> @@ -748,13 +748,13 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
+>   
+>   	/* merge after */
+>   	ret = lmb_reserve_flags(0x40020000, 0x10000, LMB_NOMAP);
+> -	ut_asserteq(ret, 1);
+> +	ut_asserteq(ret, 0);
+>   	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x20000,
+>   		   0, 0, 0, 0);
+>   
+>   	/* merge before */
+>   	ret = lmb_reserve_flags(0x40000000, 0x10000, LMB_NOMAP);
+> -	ut_asserteq(ret, 1);
+> +	ut_asserteq(ret, 0);
+>   	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40000000, 0x30000,
+>   		   0, 0, 0, 0);
+>   
+> @@ -770,7 +770,7 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
+>   
+>   	/* test that old API use LMB_NONE */
+>   	ret = lmb_reserve(0x40040000, 0x10000);
+> -	ut_asserteq(ret, 1);
+> +	ut_asserteq(ret, 0);
+>   	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, 0x40000000, 0x30000,
+>   		   0x40030000, 0x20000, 0, 0);
+>   
+> @@ -789,7 +789,7 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
+>   
+>   	/* merge with 2 adjacent regions */
+>   	ret = lmb_reserve_flags(0x40060000, 0x10000, LMB_NOMAP);
+> -	ut_asserteq(ret, 2);
+> +	ut_asserteq(ret, 0);
+>   	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 3, 0x40000000, 0x30000,
+>   		   0x40030000, 0x20000, 0x40050000, 0x30000);
+>   
 
---=20
-Tom
+-- 
+// Caleb (they/them)
 
---PWOt4cMUXjeF7RPa
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcb2zUACgkQFHw5/5Y0
-tyzQgQwAuVV6XndONrs/dxOTxAU1Rujcdf3WY2F7BX9iS/QrKpgg4IZVq1HWp9lh
-MUZzJzqt/miys2jQuqYtUlEk38ySyFTT9wiPOhZ0Tvawuqs1hlgK6QDJGGM/M0TF
-V/LNP43e9ScP3AZDLIE8yXZWeXqxvbErnydleZetEHPiY1tKI+vn69NEuqFvqHuJ
-0/m/EkkTXh6zsJI4e+eQrhNQpf1irg2ZbrMilb6nFh6XYHVaawpHXA/zrk2hTn6S
-r5T05LTVKWMDXHxB4fsOGdASvW1lxyiMMtFuMqahGvTUhNc+r5x4K9IWowh3vb+7
-dP3OdVfnXrASfz5Ioc7CzzDzZ25LkjMv190yXc85sxR81pzypZK+br+uzINL1wyw
-kSd+WUelBEFfO78Urugq1cYJTQUJAaxOip+6zzKhJWTMlOkE5S3nlYfNQQCSIqIL
-uuzEPHKBm1xEyqCSptGDw0e59ehdu/nieamJysUcxSXTr5YTXmTfCezSrEQiNIwX
-6o1K7nUD
-=hUdU
------END PGP SIGNATURE-----
-
---PWOt4cMUXjeF7RPa--
