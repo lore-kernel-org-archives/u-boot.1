@@ -4,43 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97CF9D149EE
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 20:16:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9594D149F0
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 20:22:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7F91890A8;
-	Fri, 25 Oct 2024 22:14:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 4346188A1C;
+	Fri, 25 Oct 2024 22:22:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D28D89024; Fri, 25 Oct 2024 19:19:04 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3D9DA89017
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 19:18:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=leo.yan@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5773B1424;
- Fri, 25 Oct 2024 10:19:19 -0700 (PDT)
-Received: from e132581.cambridge.arm.com (e132581.arm.com [10.2.76.71])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 900723F71E;
- Fri, 25 Oct 2024 10:18:48 -0700 (PDT)
-From: Leo Yan <leo.yan@arm.com>
-To: Tom Rini <trini@konsulko.com>, Usama Arif <usama.arif@arm.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Boyan Karatotev <boyan.karatotev@arm.com>,
- Jackson Cooper-Driver <jackson.cooper-driver@arm.com>, u-boot@lists.denx.de
-Cc: Leo Yan <leo.yan@arm.com>
-Subject: [PATCH v1 8/8] arm: total_compute: Update memory mapping info
-Date: Fri, 25 Oct 2024 18:18:21 +0100
-Message-Id: <20241025171821.624702-9-leo.yan@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241025171821.624702-1-leo.yan@arm.com>
-References: <20241025171821.624702-1-leo.yan@arm.com>
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oWpjURwJ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9859788BEF; Fri, 25 Oct 2024 22:22:23 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2089D8857C
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 22:22:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e290d5f83bcso2589071276.0
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 13:22:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729887737; x=1730492537; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=v/zdlAHQIX7u0FPyvGy7OnfeB5IFMoEuVm4rSGqXQXk=;
+ b=oWpjURwJ9GjbrmeSUVV7NzFnBVzMOoDrwWSplu1HRTfuxOwXVlIjXXB3mZzzZ5U9JN
+ RpMYxetzA0lRp1dYB3czty0JVbChieZ0zfVBNJzAK8RuCH/llpL31juYhWwaBigfVGNo
+ wOqqIOyPHr1KCCjBSLmnqZ9JSQovbRRNEWiAI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729887737; x=1730492537;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=v/zdlAHQIX7u0FPyvGy7OnfeB5IFMoEuVm4rSGqXQXk=;
+ b=lZzqMCqO6CxIbv3bZNpN48CTroU8ab1/SD2VmFcV6pRy2Dh51oxS/cxqx7CnEKTz1X
+ rLASQMU9fJgyiL7RUAghI8HWOcqhnJWNhqlX0lncAHIx1aHnqDzpk2iiVaXu+Do5JBv9
+ jQsqyXGvnTuQTp1ImR4LBa82be4ARgBb8myMVsS/UfBgu7P+SYKtaNVUuZD1OV7lGD+Q
+ ppbCyvrYHRT5Zdvnn4FMxefhxOWX6cvxqkUe+k7zpUesOIDO0vSyphrlu64PY2OEClTj
+ uWi+zbdWhGFqQE5BCeSxVAAXAJ56JGGhRsEqo4XwlUwoI/PbuqCrTDJY67A3M1Z44+Ft
+ 521Q==
+X-Gm-Message-State: AOJu0YxaCx9T7OCy+CkNp1o1Ayua2bblR2L/YdTJowAiaEdyv48KHOZo
+ PfCwzALSXqjD/H3kB0ZrrikQNsUKMBvdGVXsxKA8zFYmp378567Fd+HomSU6cwI=
+X-Google-Smtp-Source: AGHT+IHjVYiC4iQ9c0Hkn/DkkPEPxCyDzgYqctGW13CHNYKcn1VR7uAfBGe3SwY3V88Lv7ILQcaSFA==
+X-Received: by 2002:a05:6902:1885:b0:e30:6e8d:b523 with SMTP id
+ 3f1490d57ef6-e3087bfd43bmr889965276.40.1729887736929; 
+ Fri, 25 Oct 2024 13:22:16 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46132297c39sm9299661cf.50.2024.10.25.13.22.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Oct 2024 13:22:16 -0700 (PDT)
+Date: Fri, 25 Oct 2024 14:22:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [GIT PULL] xilinx patches for v2025.01-rc1 cont
+Message-ID: <20241025202213.GC4959@bill-the-cat>
+References: <70e3a9b6-229f-4db0-9034-19b04dde9f80@amd.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 25 Oct 2024 22:14:52 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vclXNvSeojNEqa1S"
+Content-Disposition: inline
+In-Reply-To: <70e3a9b6-229f-4db0-9034-19b04dde9f80@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,87 +88,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit introduces build_mem_map() function for updating the mem_map
-structure with copying info from gd->bd->bi_dram, so that it can keep
-the consistence for DRAM info passed via DT.
 
-The page table size is calculated prior to mem_map is ready, introduce
-the get_page_table_size() function for a predefined table size.
+--vclXNvSeojNEqa1S
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Leo Yan <leo.yan@arm.com>
----
- board/armltd/total_compute/total_compute.c | 44 +++++++++++++++++-----
- 1 file changed, 34 insertions(+), 10 deletions(-)
+On Fri, Oct 25, 2024 at 05:50:26PM +0200, Michal Simek wrote:
 
-diff --git a/board/armltd/total_compute/total_compute.c b/board/armltd/total_compute/total_compute.c
-index 02bb648ce7..4101816317 100644
---- a/board/armltd/total_compute/total_compute.c
-+++ b/board/armltd/total_compute/total_compute.c
-@@ -14,7 +14,10 @@
- #include <asm/global_data.h>
- #include <asm/system.h>
- 
--static struct mm_region total_compute_mem_map[] = {
-+/* +1 is end of list which needs to be empty */
-+#define TC_MEM_MAP_MAX		(1 + CONFIG_NR_DRAM_BANKS + 1)
-+
-+static struct mm_region total_compute_mem_map[TC_MEM_MAP_MAX] = {
- 	{
- 		.virt = 0x0UL,
- 		.phys = 0x0UL,
-@@ -22,15 +25,6 @@ static struct mm_region total_compute_mem_map[] = {
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		.virt = 0x80000000UL,
--		.phys = 0x80000000UL,
--		.size = 0xff80000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
--			 PTE_BLOCK_INNER_SHARE
--	}, {
--		/* List terminator */
--		0,
- 	}
- };
- 
-@@ -89,6 +83,36 @@ int dram_init_banksize(void)
- 	return fdtdec_setup_memory_banksize();
- }
- 
-+void build_mem_map(void)
-+{
-+	int i;
-+
-+	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		/*
-+		 * The first node is for I/O device, start from node 1 for
-+		 * updating DRAM info.
-+		 */
-+		mem_map[i + 1].virt = gd->bd->bi_dram[i].start;
-+		mem_map[i + 1].phys = gd->bd->bi_dram[i].start;
-+		mem_map[i + 1].size = gd->bd->bi_dram[i].size;
-+		mem_map[i + 1].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+				       PTE_BLOCK_INNER_SHARE;
-+	}
-+}
-+
-+void enable_caches(void)
-+{
-+	build_mem_map();
-+
-+	icache_enable();
-+	dcache_enable();
-+}
-+
-+u64 get_page_table_size(void)
-+{
-+	return SZ_256K;
-+}
-+
- /* Nothing to be done here as handled by PSCI interface */
- void reset_cpu(void)
- {
--- 
-2.34.1
+> Hi,
+>=20
+> I have collected couple of more patches and would be good for me to clean=
+ my
+> queue. There are some other patches which have been sent recently which w=
+ill
+> come later after review.
+>=20
+> I am especially waiting for memtop series (sent today) from Sughosh becau=
+se
+> it is fixing issue on Kria platform which is regression because of LMB
+> series.
+>=20
+> Also would like to get rid of SPL_FIT_GENERATOR in this version but I thi=
+nk
+> we are almost there.
+>=20
+> We also started to upstream qemu model for MBV to be able to wire this
+> platform in our CI.
+> http://lore.kernel.org/r/20241017072507.4033413-1-sai.pavan.boddu@amd.com
+>=20
+> Thanks,
+> Michal
+>=20
+> The following changes since commit 08ae12be8509daf3d1c5a148b8a50c0ffb6457=
+c2:
+>=20
+>   Mark a few functions static inline (2024-10-24 11:21:48 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
+> tags/xilinx-for-v2025.01-rc1-v2
+>=20
+> for you to fetch changes up to b3d9c6c71412fe63320e879d89873da672e69100:
+>=20
+>   .mailmap: update e-mail address for Padmarao Begari (2024-10-25 16:21:0=
+0 +0200)
+>=20
 
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--vclXNvSeojNEqa1S
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcb/fEACgkQFHw5/5Y0
+tywxBwwAo+woIF/xgBvQbTf4CKe3ISvYx01UuTQfbbynwBlezsna3dfEBTGnYlGF
+sDtJR95cHlBKfhMWgtYIa3yXdD5z05VxkropUeQhOIGcA/Lx+uAXKT2hsaqOmZ1V
+70ziXnqOb+ac8yg+Koipb5i0a3DnKHc8dDMkl5TqdnLSj00fBefAIps1MQP+GuVY
+/gymYgJPM1Ugw7+WBw6qF/3X7Kv+Akwf7qh0042bwi0+gzlqASmqlaSzgvBWz3hR
+pZMZDWZRx8axl45kK0CYnAQalq3SvV6RcxMh3XwoFn7L6PwdLOqE/SkDhVM7031P
+nL1ipjp3XJoR5/PaTG6X3oEdwHb9nnLLEpKlheubyufpuCLBk06/jx0bq0Ty4t5J
+MzvcIWfAYGLREP/Eaxhn4sOYS+JWDncigQ+zQt+sAX0U9Y8S1CNTCZ/O03d9FqYV
+hH6FgzKQ4OYAAVOk3q1XMMSNaVYGf5veCY88G/gtomnn/Q1NrUURwEGLfZYa5tMR
+84T546JN
+=hXD1
+-----END PGP SIGNATURE-----
+
+--vclXNvSeojNEqa1S--
