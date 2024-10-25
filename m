@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 879C0D0C603
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:01:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4246D0C603
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:01:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FC3189048;
-	Fri, 25 Oct 2024 14:00:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 07B3989023;
+	Fri, 25 Oct 2024 14:00:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="XC9LLHFM";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Rzv/Blwr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB87B8901C; Fri, 25 Oct 2024 14:00:11 +0200 (CEST)
-Received: from mail-m127164.xmail.ntesmail.com
- (mail-m127164.xmail.ntesmail.com [115.236.127.164])
+ id 8115889024; Fri, 25 Oct 2024 14:00:12 +0200 (CEST)
+Received: from mail-m12798.qiye.163.com (mail-m12798.qiye.163.com
+ [115.236.127.98])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88D8989028
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 13:59:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73B2088BB2
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:00:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id ebe5859;
- Fri, 25 Oct 2024 19:59:36 +0800 (GMT+08:00)
-Message-ID: <263cdd89-4019-43f8-899f-251d2e678b27@rock-chips.com>
-Date: Fri, 25 Oct 2024 19:59:36 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id ebe5871;
+ Fri, 25 Oct 2024 20:00:04 +0800 (GMT+08:00)
+Message-ID: <46da5b3f-39c2-4c78-af82-d087608533f0@rock-chips.com>
+Date: Fri, 25 Oct 2024 20:00:04 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 11/18] arm64: dts: rockchip: define cpu-supply on the
- Qnap-TS433
+Subject: Re: [PATCH v2 14/18] arm64: dts: rockchip: add 2 pmu_io_domain
+ supplies for Qnap-TS433
 To: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
  philipp.tomsich@vrull.eu, sjg@chromium.org
 Cc: ukleinek@debian.org
 References: <20241013192424.84280-1-heiko@sntech.de>
- <20241013192424.84280-12-heiko@sntech.de>
+ <20241013192424.84280-15-heiko@sntech.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241013192424.84280-12-heiko@sntech.de>
+In-Reply-To: <20241013192424.84280-15-heiko@sntech.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRlKQlZISElPGh9JGBhMTE1WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0NDH1ZLHUMdHh0YHUpJQhhWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a92c38bdd5e09d6kunmebe5859
+X-HM-Tid: 0a92c38c4d7809d6kunmebe5871
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MDo6CAw4KDIZCxczKUs4NixP
- CzkwFD9VSlVKTElCQ05MTkxMSk5IVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTEhONwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Kz46Ijo*OjIeAxc8E0pWNhFN
+ NxdPCQpVSlVKTElCQ05MTUtOTE5NVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSk5ONwY+
 DKIM-Signature: a=rsa-sha256;
- b=XC9LLHFMkO3XaGPZtmXhMDxc3mU0N5ByXTuvXfCkjx+l5zW/qEV6TOxlo0wGrbOMDAPI6cZ+trUniAZXksetmSJzJTfp4I8vgekLZWSWlAc8J5+NRI90mdGsvgg6AJ+Q46VjjELRgYzjALKXIC9s8q/+OTPFfiqOL333yzmWtXY=;
+ b=Rzv/BlwrPEgda1xBorE4HIFEIFfN6Cl4aMnPwUzS6lQ428dIKVnn4Xs2+MtYtt5yeJtlLTqyxUgfQ15fCSbSnGLcbP+s2u+HohRA6rApuhjYP2fEc5xjd5ap0wISyjVj0MXubx8XrpivLLafVqTnU8s3LCE3LuzjnIQDKkzc6kU=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=1VDnibGwA3UgaVtNYl4DCn+LCly1OoaF3TUKsONwzMY=;
+ bh=/Ft2UBLyRv8ykaMbq5DlRiPfc1dI37wqlDH2IcLErOw=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,97 +77,37 @@ X-Virus-Status: Clean
 
 
 On 2024/10/14 03:24, Heiko Stuebner wrote:
-> The TS433 seems to use a silergy,syr827 regulator for the cpu supply.
-> At least that is the compatible used in the vendor devicetree, though
-> it could very well also be another fan53555 clone.
->
-> Define the needed regulator node and hook up the cpu-supply to the
-> cpu cores.
+> Add the two supplies for the pmu-io-domains that are defined in the
+> vendor devicetree for the TS433.
 >
 > Tested-by: Uwe Kleine-König <ukleinek@debian.org>
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-> Link: https://lore.kernel.org/r/20240723195538.1133436-12-heiko@sntech.de
+> Link: https://lore.kernel.org/r/20240723195538.1133436-15-heiko@sntech.de
 >
-> [ upstream commit: 99b36ba910d896bddbb9a190ca686c6d9cd0325f ]
+> [ upstream commit: 64b7f16fb3947e5d08d9e9b860ce966250e45d52 ]
 >
-> (cherry picked from commit 2f0afd1a3cbf6f3192dc7a5c496affab718671b3)
+> (cherry picked from commit 9b4d4c02b5762196063ab03c5439f96cbbaf2485)
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   .../src/arm64/rockchip/rk3568-qnap-ts433.dts  | 41 +++++++++++++++++++
->   1 file changed, 41 insertions(+)
+>   dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts | 5 +++++
+>   1 file changed, 5 insertions(+)
 >
 > diff --git a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-> index 9f964b6f411..4bccefc0537 100644
+> index 9a0cb69c3cf..6c4269b3d95 100644
 > --- a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
 > +++ b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-> @@ -130,6 +130,16 @@
->   		vin-supply = <&vcc5v0_usb>;
+> @@ -531,6 +531,11 @@
 >   	};
+>   };
 >   
-> +	vcc5v0_sys: regulator-vcc5v0-sys {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc5v0_sys";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +		vin-supply = <&dc_12v>;
-> +	};
+> +&pmu_io_domains {
+> +	vccio4-supply = <&vcc_1v8>;
+> +	vccio6-supply = <&vcc_1v8>;
+> +};
 > +
->   	vcc5v0_usb: regulator-vcc5v0-usb {
->   		compatible = "regulator-fixed";
->   		regulator-name = "vcc5v0_usb";
-> @@ -156,6 +166,22 @@
+>   &sata1 {
 >   	status = "okay";
 >   };
->   
-> +&cpu0 {
-> +	cpu-supply = <&vdd_cpu>;
-> +};
-> +
-> +&cpu1 {
-> +	cpu-supply = <&vdd_cpu>;
-> +};
-> +
-> +&cpu2 {
-> +	cpu-supply = <&vdd_cpu>;
-> +};
-> +
-> +&cpu3 {
-> +	cpu-supply = <&vdd_cpu>;
-> +};
-> +
->   &gmac0 {
->   	assigned-clocks = <&cru SCLK_GMAC0_RX_TX>, <&cru SCLK_GMAC0>;
->   	assigned-clock-parents = <&cru SCLK_GMAC0_RGMII_SPEED>, <&cru CLK_MAC0_2TOP>;
-> @@ -175,12 +201,27 @@
->   };
->   
->   &i2c0 {
-> +	status = "okay";
-> +
->   	pmic@20 {
->   		compatible = "rockchip,rk809";
->   		reg = <0x20>;
->   		interrupt-parent = <&gpio0>;
->   		interrupts = <3 IRQ_TYPE_LEVEL_LOW>;
->   	};
-> +
-> +	vdd_cpu: regulator@40 {
-> +		compatible = "silergy,syr827";
-> +		reg = <0x40>;
-> +		fcs,suspend-voltage-selector = <1>;
-> +		regulator-name = "vdd_cpu";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <712500>;
-> +		regulator-max-microvolt = <1390000>;
-> +		regulator-ramp-delay = <2300>;
-> +		vin-supply = <&vcc5v0_sys>;
-> +	};
->   };
->   
->   &i2c1 {
