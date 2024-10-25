@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4246D0C603
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:01:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08E20D0C603
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:01:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07B3989023;
-	Fri, 25 Oct 2024 14:00:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 74F5289083;
+	Fri, 25 Oct 2024 14:00:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Rzv/Blwr";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="MSsBDNmt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8115889024; Fri, 25 Oct 2024 14:00:12 +0200 (CEST)
-Received: from mail-m12798.qiye.163.com (mail-m12798.qiye.163.com
- [115.236.127.98])
+ id 4F0E889072; Fri, 25 Oct 2024 14:00:36 +0200 (CEST)
+Received: from mail-m11886.qiye.163.com (mail-m11886.qiye.163.com
+ [115.236.118.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73B2088BB2
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:00:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BBEE8901C
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:00:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id ebe5871;
- Fri, 25 Oct 2024 20:00:04 +0800 (GMT+08:00)
-Message-ID: <46da5b3f-39c2-4c78-af82-d087608533f0@rock-chips.com>
-Date: Fri, 25 Oct 2024 20:00:04 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id ebe589d;
+ Fri, 25 Oct 2024 20:00:18 +0800 (GMT+08:00)
+Message-ID: <06fdb8af-de56-44b9-96d2-fbf7af599cce@rock-chips.com>
+Date: Fri, 25 Oct 2024 20:00:18 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 14/18] arm64: dts: rockchip: add 2 pmu_io_domain
- supplies for Qnap-TS433
+Subject: Re: [PATCH v2 15/18] arm64: dts: rockchip: Simplify network PHY
+ connection on qnap-ts433
 To: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
  philipp.tomsich@vrull.eu, sjg@chromium.org
-Cc: ukleinek@debian.org
+Cc: ukleinek@debian.org, Andrew Lunn <andrew@lunn.ch>
 References: <20241013192424.84280-1-heiko@sntech.de>
- <20241013192424.84280-15-heiko@sntech.de>
+ <20241013192424.84280-16-heiko@sntech.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241013192424.84280-15-heiko@sntech.de>
+In-Reply-To: <20241013192424.84280-16-heiko@sntech.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0NDH1ZLHUMdHh0YHUpJQhhWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGU9LSlZMT0sZSEwdHRpJGRhWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a92c38c4d7809d6kunmebe5871
+X-HM-Tid: 0a92c38c840409d6kunmebe589d
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Kz46Ijo*OjIeAxc8E0pWNhFN
- NxdPCQpVSlVKTElCQ05MTUtOTE5NVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSk5ONwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pkk6Aww5FjIoCxchA1Y1Ngkz
+ CkhPCUxVSlVKTElCQ05MTUpCQkpJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTUlPNwY+
 DKIM-Signature: a=rsa-sha256;
- b=Rzv/BlwrPEgda1xBorE4HIFEIFfN6Cl4aMnPwUzS6lQ428dIKVnn4Xs2+MtYtt5yeJtlLTqyxUgfQ15fCSbSnGLcbP+s2u+HohRA6rApuhjYP2fEc5xjd5ap0wISyjVj0MXubx8XrpivLLafVqTnU8s3LCE3LuzjnIQDKkzc6kU=;
+ b=MSsBDNmtupFc92XHlpPvMx3oUybMOuECihyU4O1DmeMSGDRuAn9/eTzQQBpxm7pZ5HXINejGrvbLiGLjOxpR+WCKMkivC4bEhFz8LF5AEPB7jUbPQ6QkVTx0K7ye9LreZNbuOYYAGP5Uk+wf7CLPwHnYXHx4CFHaf9hCu2YXGTQ=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=/Ft2UBLyRv8ykaMbq5DlRiPfc1dI37wqlDH2IcLErOw=;
+ bh=Sp4FFkGjbF5BQVNcmP+brgInMJqhFTTRzxNKatbH4Zo=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,37 +77,46 @@ X-Virus-Status: Clean
 
 
 On 2024/10/14 03:24, Heiko Stuebner wrote:
-> Add the two supplies for the pmu-io-domains that are defined in the
-> vendor devicetree for the TS433.
+> From: Uwe Kleine-König <ukleinek@debian.org>
 >
-> Tested-by: Uwe Kleine-König <ukleinek@debian.org>
+> While it requires to have the right phy driver loaded (i.e. motorcomm)
+> to make the phy asserting the right delays, this is generally the
+> preferred way to define the MAC <-> PHY connection.
+>
+> Signed-off-by: Uwe Kleine-König <ukleinek@debian.org>
+> Reviewed-by: Andrew Lunn <andrew@lunn.ch>
+> Link: https://lore.kernel.org/r/20240304084612.711678-2-ukleinek@debian.org
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-> Link: https://lore.kernel.org/r/20240723195538.1133436-15-heiko@sntech.de
 >
-> [ upstream commit: 64b7f16fb3947e5d08d9e9b860ce966250e45d52 ]
+> [ upstream commit: e8d45544f806f3b55c30345de84262cbb9504902 ]
 >
-> (cherry picked from commit 9b4d4c02b5762196063ab03c5439f96cbbaf2485)
+> (cherry picked from commit e0bbe061fd537bd7b113c53eb046bbcbf0e6597d)
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts | 5 +++++
->   1 file changed, 5 insertions(+)
+>   dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts | 4 +---
+>   1 file changed, 1 insertion(+), 3 deletions(-)
 >
 > diff --git a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-> index 9a0cb69c3cf..6c4269b3d95 100644
+> index 6c4269b3d95..20e4fa6c185 100644
 > --- a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
 > +++ b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-> @@ -531,6 +531,11 @@
->   	};
->   };
->   
-> +&pmu_io_domains {
-> +	vccio4-supply = <&vcc_1v8>;
-> +	vccio6-supply = <&vcc_1v8>;
-> +};
-> +
->   &sata1 {
+> @@ -198,15 +198,13 @@
+>   	assigned-clock-rates = <0>, <125000000>;
+>   	clock_in_out = "output";
+>   	phy-handle = <&rgmii_phy0>;
+> -	phy-mode = "rgmii";
+> +	phy-mode = "rgmii-id";
+>   	pinctrl-names = "default";
+>   	pinctrl-0 = <&gmac0_miim
+>   		     &gmac0_tx_bus2
+>   		     &gmac0_rx_bus2
+>   		     &gmac0_rgmii_clk
+>   		     &gmac0_rgmii_bus>;
+> -	rx_delay = <0x2f>;
+> -	tx_delay = <0x3c>;
 >   	status = "okay";
 >   };
+>   
