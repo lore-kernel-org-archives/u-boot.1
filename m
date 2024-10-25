@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99BC7D1039C
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 02:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B99D1039C
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 02:02:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04E6088F83;
+	by phobos.denx.de (Postfix) with ESMTP id 675EB88FCB;
 	Fri, 25 Oct 2024 04:02:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bqUnGvko";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D0kULvAM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8A1A88B0C; Fri, 25 Oct 2024 04:02:39 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 5DC6188B0C; Fri, 25 Oct 2024 04:02:40 +0200 (CEST)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA8A588FBF
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 04:02:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EE4E88F83
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 04:02:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mr.bossman075@gmail.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7b13fe8f4d0so106090285a.0
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 19:02:31 -0700 (PDT)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7b158542592so102867685a.2
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 19:02:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729821750; x=1730426550; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Qf2km1sVoj38LAoHSbncMebl/iwPREBdiLFqLWYuvbE=;
- b=bqUnGvkoMFoidPMAH9nh1vWnjj2KYzZxWq0QwIr0pRXIB5MT5b71pMAoXDNMn+1WBp
- hP/vcJCbBwXVt2u+vSHXBABIOcOs0nviHXOFV5J6s4JrKlY88K7PT2qS0kOjizUd+U39
- CGv68etoK3c1U+VJUd8Wd3MQ+HCko5ihu0KkU9azTzgbB8fKkP3QiYHGXcJbYYx2dXKm
- 4WLs7fHV8bmrdkiiKHwFtQITaNE2Vh8tA3HHFgk/kMFV6g6RP7AHfgx8lvx2BJ0fAC6g
- 90FW9szQ6kDfYUZIwan5WE6ZuJJ0F94hHknHbQcc0wZ4ONp4CMxVwoKCZZ4wrfjYBhOF
- YexA==
+ d=gmail.com; s=20230601; t=1729821753; x=1730426553; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TmGiU8hTdE/i3CkC3m5nW2x+X5WDaGWRQQKox4eVncI=;
+ b=D0kULvAMK67156hvPg0wR+oQjLx0pb4nQGu3X7AMXcCmKGpCuEohy5IyjnJuCCLsux
+ Duu9LljZbLsSbMUearq8ZXXRiC6mRXIUeffsCNs3GRWAIMxp4FnzZcyx1wnsfRusxHQx
+ GKJf4P0eALnjWVRz2LMOwpcxtLSjcRiuHkQ87Typl4mRUArJv5Ggs+KsJmVjauVi7D4e
+ iPOQDWkjH5oPk3eM/XpOuco7giOZRGozo2fSSOBol7MUKT5O4Oc8PIkFvH1YMR99nz60
+ vuKnDM76Y011EmoYXd7LIv/dCajpyR+Pm0Kb/iS6djQ5AXu0j2C4V5KK/2i2Bjuky0iY
+ GISQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729821750; x=1730426550;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Qf2km1sVoj38LAoHSbncMebl/iwPREBdiLFqLWYuvbE=;
- b=PfKIi0iTmYAVPyyC+nB6b7nviqVz7/xHhGR0H4Xb69+osNAUvpImsnm6xF30jRfup6
- 8jHolQ5tGKwAzg8jUkIGQ4QlgPs5tT7v+UShifZTssOKQdh4OEZYsdRSAQ0BGFfibX+h
- 8mikKCzbDcaUofIKgm8OTLzqvgCG/X3n8Wxak4NUBI2TKiMX9b8A8h2fVM4hVBDSvG3k
- HVpHWNWMVvUDBPEJztM0hXJWGwvJ/+meI6zr/MQJsUXqkgMLCezGX5YXgtQsASPxCI+w
- w96MYHJZC2vd1Yt26zm2smlsrgsYWwAieGjy2x7ek7E3a5Bf7HzFvblQuULHX7KoyQ9a
- fEHA==
-X-Gm-Message-State: AOJu0Yx162lwM88ttcOsI05wEDkkOCEeW1nMquVlnSHlSfXY75HuqoWT
- OtCTgTiKbJQtLRf6XbfZlJiLpE6HlanX1CsFv54QRP2WtbcwjVdLpXP0hn95
-X-Google-Smtp-Source: AGHT+IF9reYre7qMYzTPcPAHBWRQg5LyTo6c49zSPu02y+3oTPrgy5sOQxR8FJLHTJRY+VGMqBwuyg==
-X-Received: by 2002:a05:620a:240a:b0:7a7:fdef:27a with SMTP id
- af79cd13be357-7b17e5bc63emr1107339085a.58.1729821750278; 
- Thu, 24 Oct 2024 19:02:30 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729821753; x=1730426553;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TmGiU8hTdE/i3CkC3m5nW2x+X5WDaGWRQQKox4eVncI=;
+ b=ZUXlGWU27GEel2h9lvNvSSak3w87ECxiS53aZ8Gbisu9bxgDKXXwbr50OsrW1K7Cch
+ /VjkKUOR7TlMQVjNs9BD63cQz/+xeWrF0S9TyWiL6FuHjCiHlcJkUhRYwwcldygerBKz
+ J7Wvs5/5zKWhUKKTVzhGWb99BqZgsSiSESNn+f2OsCi3XRtTK8+g0rs8lya01o1jQjS6
+ l1Zug5ntYgGJQwcrcm7vxyUt2CQNZOzZvjtu2ait/WUeKKxo9tSzf7Xcw5FkbkrGnScM
+ RzAUjUhLJqmXqPhhDnrK3DdnstHdAWTMLs3wLki5CDIAeKDzlye618TQ922POu/1lflW
+ RMtA==
+X-Gm-Message-State: AOJu0YyagzT8LP2NKUmMWZQSn4FzYtxCHBsT4l7mQu64NumQfPfOXBOt
+ YVQUDtEolfyesrFiQMq7YUgXvsQapGFyjT2z1FGHz5Rp4/4QVsMrY8z+X23H
+X-Google-Smtp-Source: AGHT+IH8YpG1/lqm2ZiFlovjUaoGfk2yDH49GVS1hdETbvuy0yiiPKLQzINp7nh674ldj4v/nIGISQ==
+X-Received: by 2002:a05:620a:1a8f:b0:7b1:56f0:e06f with SMTP id
+ af79cd13be357-7b17e568066mr928667685a.15.1729821752879; 
+ Thu, 24 Oct 2024 19:02:32 -0700 (PDT)
 Received: from jesse-desktop.. (pool-108-26-179-17.bstnma.fios.verizon.net.
  [108.26.179.17]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b18d294b3fsm11607585a.33.2024.10.24.19.02.28
+ af79cd13be357-7b18d294b3fsm11607585a.33.2024.10.24.19.02.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 19:02:29 -0700 (PDT)
+ Thu, 24 Oct 2024 19:02:32 -0700 (PDT)
 From: Jesse Taube <mr.bossman075@gmail.com>
 X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
 To: u-boot@lists.denx.de
@@ -72,10 +73,12 @@ Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  Jesse Taube <Mr.Bossman075@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH 1/4] imx: imxrt*: Fix binman breaking boot
-Date: Thu, 24 Oct 2024 22:02:25 -0400
-Message-ID: <20241025020228.1686306-1-Mr.Bossman075@gmail.com>
+Subject: [PATCH 3/4] configs: imxrt1050-evk: Enable standard boot
+Date: Thu, 24 Oct 2024 22:02:27 -0400
+Message-ID: <20241025020228.1686306-3-Mr.Bossman075@gmail.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241025020228.1686306-1-Mr.Bossman075@gmail.com>
+References: <20241025020228.1686306-1-Mr.Bossman075@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,63 +97,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The init_r parsing of U-Boot device tree to search the binman
-information errors. set CONFIG_BINMAN_FDT to no to fix this.
+Enable standard boot support and add default environments for the
+imxrt1050-evk board.
 
-Fixes: 7079eeb72fc ("imx: imxrt1050-evk: Add support for SPI flash booting
-s")
 Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
 ---
- configs/imxrt1020-evk_defconfig      | 1 +
- configs/imxrt1050-evk_defconfig      | 1 +
- configs/imxrt1050-evk_fspi_defconfig | 1 +
- configs/imxrt1170-evk_defconfig      | 1 +
- 4 files changed, 4 insertions(+)
+ board/freescale/imxrt1050-evk/imxrt1050-evk-nor.env | 13 +++++++++++++
+ board/freescale/imxrt1050-evk/imxrt1050-evk.env     | 13 +++++++++++++
+ configs/imxrt1050-evk_defconfig                     |  4 ++--
+ configs/imxrt1050-evk_fspi_defconfig                |  5 +++--
+ include/configs/imxrt1050-evk.h                     |  7 -------
+ 5 files changed, 31 insertions(+), 11 deletions(-)
+ create mode 100644 board/freescale/imxrt1050-evk/imxrt1050-evk-nor.env
+ create mode 100644 board/freescale/imxrt1050-evk/imxrt1050-evk.env
 
-diff --git a/configs/imxrt1020-evk_defconfig b/configs/imxrt1020-evk_defconfig
-index 5865d41a741..58a3e92ce08 100644
---- a/configs/imxrt1020-evk_defconfig
-+++ b/configs/imxrt1020-evk_defconfig
-@@ -67,6 +67,7 @@ CONFIG_FSL_LPUART=y
- CONFIG_TIMER=y
- CONFIG_SPL_TIMER=y
- CONFIG_IMX_GPT_TIMER=y
-+# CONFIG_BINMAN_FDT is not set
- CONFIG_SHA1=y
- CONFIG_SHA256=y
- CONFIG_HEXDUMP=y
+diff --git a/board/freescale/imxrt1050-evk/imxrt1050-evk-nor.env b/board/freescale/imxrt1050-evk/imxrt1050-evk-nor.env
+new file mode 100644
+index 00000000000..c61e9e3c00a
+--- /dev/null
++++ b/board/freescale/imxrt1050-evk/imxrt1050-evk-nor.env
+@@ -0,0 +1,13 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++/* environment for imxrt1050-evk */
++
++#ifdef CONFIG_VIDEO
++stdin=serial
++stdout=serial,vidconsole
++stderr=serial,vidconsole
++#endif
++
++fdt_addr_r=0x80800000
++kernel_addr_r=0x80000000
++boot_targets=nor
+diff --git a/board/freescale/imxrt1050-evk/imxrt1050-evk.env b/board/freescale/imxrt1050-evk/imxrt1050-evk.env
+new file mode 100644
+index 00000000000..1c5cbc29d53
+--- /dev/null
++++ b/board/freescale/imxrt1050-evk/imxrt1050-evk.env
+@@ -0,0 +1,13 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++/* environment for imxrt1050-evk */
++
++#ifdef CONFIG_VIDEO
++stdin=serial
++stdout=serial,vidconsole
++stderr=serial,vidconsole
++#endif
++
++fdt_addr_r=0x80800000
++kernel_addr_r=0x80000000
++boot_targets=mmc
 diff --git a/configs/imxrt1050-evk_defconfig b/configs/imxrt1050-evk_defconfig
-index f8b85398b79..2653efac148 100644
+index 2653efac148..141303c5a29 100644
 --- a/configs/imxrt1050-evk_defconfig
 +++ b/configs/imxrt1050-evk_defconfig
-@@ -84,5 +84,6 @@ CONFIG_VIDEO_MXS=y
- CONFIG_SPLASH_SCREEN=y
- CONFIG_SPLASH_SCREEN_ALIGN=y
- CONFIG_BMP_16BPP=y
-+# CONFIG_BINMAN_FDT is not set
- CONFIG_SHA256=y
- CONFIG_HEXDUMP=y
+@@ -23,10 +23,10 @@ CONFIG_SPL_SIZE_LIMIT=0x20000
+ CONFIG_SPL=y
+ CONFIG_HAVE_SYS_UBOOT_START=y
+ CONFIG_SYS_UBOOT_START=0x800023FD
+-CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTSTD_FULL=y
++CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_SD_BOOT=y
+ CONFIG_SPI_BOOT=y
+-# CONFIG_USE_BOOTCOMMAND is not set
+ CONFIG_SYS_CBSIZE=256
+ CONFIG_SYS_PBSIZE=276
+ CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
 diff --git a/configs/imxrt1050-evk_fspi_defconfig b/configs/imxrt1050-evk_fspi_defconfig
-index 73001ffe161..95b5b56ece7 100644
+index 95b5b56ece7..b77dbab7077 100644
 --- a/configs/imxrt1050-evk_fspi_defconfig
 +++ b/configs/imxrt1050-evk_fspi_defconfig
-@@ -85,6 +85,7 @@ CONFIG_VIDEO_MXS=y
- CONFIG_SPLASH_SCREEN=y
- CONFIG_SPLASH_SCREEN_ALIGN=y
- CONFIG_BMP_16BPP=y
-+# CONFIG_BINMAN_FDT is not set
- CONFIG_SHA256=y
- CONFIG_HEXDUMP=y
- CONFIG_FSPI_CONF_HEADER=y
-diff --git a/configs/imxrt1170-evk_defconfig b/configs/imxrt1170-evk_defconfig
-index 5f28c22e66c..487da275c62 100644
---- a/configs/imxrt1170-evk_defconfig
-+++ b/configs/imxrt1170-evk_defconfig
-@@ -68,3 +68,4 @@ CONFIG_FSL_LPUART=y
- CONFIG_TIMER=y
- CONFIG_SPL_TIMER=y
- CONFIG_IMX_GPT_TIMER=y
-+# CONFIG_BINMAN_FDT is not set
+@@ -9,6 +9,7 @@ CONFIG_SPL_GPIO=y
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
+ CONFIG_NR_DRAM_BANKS=1
++CONFIG_ENV_SOURCE_FILE="imxrt1050-evk-nor"
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20020000
+ CONFIG_ENV_OFFSET=0x80000
+@@ -24,10 +25,10 @@ CONFIG_SPL_SIZE_LIMIT=0x20000
+ CONFIG_SPL=y
+ CONFIG_HAVE_SYS_UBOOT_START=y
+ CONFIG_SYS_UBOOT_START=0x800023FD
+-CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTSTD_FULL=y
++CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_SD_BOOT=y
+ CONFIG_SPI_BOOT=y
+-# CONFIG_USE_BOOTCOMMAND is not set
+ CONFIG_SYS_CBSIZE=256
+ CONFIG_SYS_PBSIZE=276
+ CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
+diff --git a/include/configs/imxrt1050-evk.h b/include/configs/imxrt1050-evk.h
+index b370e25105a..c520c2fc203 100644
+--- a/include/configs/imxrt1050-evk.h
++++ b/include/configs/imxrt1050-evk.h
+@@ -18,13 +18,6 @@
+ #define DMAMEM_BASE			(PHYS_SDRAM + PHYS_SDRAM_SIZE - \
+ 					 DMAMEM_SZ_ALL)
+ 
+-#ifdef CONFIG_VIDEO
+-#define CFG_EXTRA_ENV_SETTINGS \
+-		"stdin=serial\0" \
+-		"stdout=serial,vidconsole\0" \
+-		"stderr=serial,vidconsole\0"
+-#endif
+-
+ /*
+  * Address of U-Boot for SPI NOR boot
+  */
 -- 
 2.45.2
 
