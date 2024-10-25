@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A738D10399
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 01:09:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99BC7D1039C
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 02:02:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDAD088FAF;
-	Fri, 25 Oct 2024 03:09:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 04E6088F83;
+	Fri, 25 Oct 2024 04:02:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cgs0VcMB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bqUnGvko";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17C7F88FBA; Fri, 25 Oct 2024 03:09:04 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id D8A1A88B0C; Fri, 25 Oct 2024 04:02:39 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66D5388FB7
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 03:08:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA8A588FBF
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 04:02:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7b18da94ba9so2685985a.0
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 18:08:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=mr.bossman075@gmail.com
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7b13fe8f4d0so106090285a.0
+ for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 19:02:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729818538; x=1730423338; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FMlKIuTRxGKl9aZm58SvckeeJ5+QNcx1dn+lE/FbevQ=;
- b=cgs0VcMBKAjI9YJUDmbJdNoa6hAuzE0AIdTPSat/C7y6YSsWLSqQcOnNTwLfSYN0dT
- ay8oaRzwzaksTpAZYdOc0TVm7q98LNlSn7GHh8zO1cpRCX2ZSWMDZ/3J7KO/VISlEln5
- jhV2EDvCIA46P+ncS7wR3tkKPix+J3RqX9D44=
+ d=gmail.com; s=20230601; t=1729821750; x=1730426550; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Qf2km1sVoj38LAoHSbncMebl/iwPREBdiLFqLWYuvbE=;
+ b=bqUnGvkoMFoidPMAH9nh1vWnjj2KYzZxWq0QwIr0pRXIB5MT5b71pMAoXDNMn+1WBp
+ hP/vcJCbBwXVt2u+vSHXBABIOcOs0nviHXOFV5J6s4JrKlY88K7PT2qS0kOjizUd+U39
+ CGv68etoK3c1U+VJUd8Wd3MQ+HCko5ihu0KkU9azTzgbB8fKkP3QiYHGXcJbYYx2dXKm
+ 4WLs7fHV8bmrdkiiKHwFtQITaNE2Vh8tA3HHFgk/kMFV6g6RP7AHfgx8lvx2BJ0fAC6g
+ 90FW9szQ6kDfYUZIwan5WE6ZuJJ0F94hHknHbQcc0wZ4ONp4CMxVwoKCZZ4wrfjYBhOF
+ YexA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729818538; x=1730423338;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FMlKIuTRxGKl9aZm58SvckeeJ5+QNcx1dn+lE/FbevQ=;
- b=aoxBFBnOZyhMZoNuXz8tYXqbaausmhb4FRfBdTVh5MTckaOHsobVzCZRPFqAU5WgXq
- wmUTh0bsZvpUcaE68dEEAPhjfwI9lnrmhUasavlIG75UBqctHsiFCrnUKmL+t7U1MJJ+
- c+C642WJKOdkMuEGsnmFt6DR+YkGXyAxwbhG8+azHPCiI8EDIr0zhveH+UPbyNng0rix
- fF6D+NbUi3DvXZfjgbWOQ0BKI0Mozf3p8oA4llhBFzGqIUIMHmCw0oWvq5s1oDC78Doq
- OvozutiWkPPf+d+GF682kkYLLi7xLtIfooE5iziMYU8wc9Osb+bjf5gxwoHfMju/IL/n
- SQdQ==
-X-Gm-Message-State: AOJu0YyPUGlKZ5odjWnkz6o0IciXUnH2FONbC970UzhrX+QpI9z5iEJi
- nYRoG4sfuq+QpwUQdGJyX85OvLXXzUaixQzH3iwUnpIf24tncnVSwCWf+INQQ0Y=
-X-Google-Smtp-Source: AGHT+IFeMCFnQCmc0h3oT+1Kq3TeofxN5kZXNfSnGOYLHZfl5y6D0jZ2QlyxVYwgledaehGAipX5sA==
-X-Received: by 2002:a05:620a:198a:b0:7b1:4783:aa2 with SMTP id
- af79cd13be357-7b1865c79bemr577156585a.7.1729818538256; 
- Thu, 24 Oct 2024 18:08:58 -0700 (PDT)
-Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b18d359743sm7433285a.135.2024.10.24.18.08.56
+ d=1e100.net; s=20230601; t=1729821750; x=1730426550;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Qf2km1sVoj38LAoHSbncMebl/iwPREBdiLFqLWYuvbE=;
+ b=PfKIi0iTmYAVPyyC+nB6b7nviqVz7/xHhGR0H4Xb69+osNAUvpImsnm6xF30jRfup6
+ 8jHolQ5tGKwAzg8jUkIGQ4QlgPs5tT7v+UShifZTssOKQdh4OEZYsdRSAQ0BGFfibX+h
+ 8mikKCzbDcaUofIKgm8OTLzqvgCG/X3n8Wxak4NUBI2TKiMX9b8A8h2fVM4hVBDSvG3k
+ HVpHWNWMVvUDBPEJztM0hXJWGwvJ/+meI6zr/MQJsUXqkgMLCezGX5YXgtQsASPxCI+w
+ w96MYHJZC2vd1Yt26zm2smlsrgsYWwAieGjy2x7ek7E3a5Bf7HzFvblQuULHX7KoyQ9a
+ fEHA==
+X-Gm-Message-State: AOJu0Yx162lwM88ttcOsI05wEDkkOCEeW1nMquVlnSHlSfXY75HuqoWT
+ OtCTgTiKbJQtLRf6XbfZlJiLpE6HlanX1CsFv54QRP2WtbcwjVdLpXP0hn95
+X-Google-Smtp-Source: AGHT+IF9reYre7qMYzTPcPAHBWRQg5LyTo6c49zSPu02y+3oTPrgy5sOQxR8FJLHTJRY+VGMqBwuyg==
+X-Received: by 2002:a05:620a:240a:b0:7a7:fdef:27a with SMTP id
+ af79cd13be357-7b17e5bc63emr1107339085a.58.1729821750278; 
+ Thu, 24 Oct 2024 19:02:30 -0700 (PDT)
+Received: from jesse-desktop.. (pool-108-26-179-17.bstnma.fios.verizon.net.
+ [108.26.179.17]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b18d294b3fsm11607585a.33.2024.10.24.19.02.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 18:08:57 -0700 (PDT)
-Date: Thu, 24 Oct 2024 19:08:54 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jan Kiszka <jan.kiszka@siemens.com>, Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>,
- Nishanth Menon <nm@ti.com>
-Subject: Re: [PATCH v2 11/13] smbios: Fill UUID from sysinfo when available
-Message-ID: <20241025010854.GX4959@bill-the-cat>
-References: <cover.1729577070.git.jan.kiszka@siemens.com>
- <9e440edc2a6bdcb7d768d277dd6afb02ab941ecd.1729577070.git.jan.kiszka@siemens.com>
+ Thu, 24 Oct 2024 19:02:29 -0700 (PDT)
+From: Jesse Taube <mr.bossman075@gmail.com>
+X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Jesse Taube <Mr.Bossman075@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH 1/4] imx: imxrt*: Fix binman breaking boot
+Date: Thu, 24 Oct 2024 22:02:25 -0400
+Message-ID: <20241025020228.1686306-1-Mr.Bossman075@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9MW74U9pkx4j9HNO"
-Content-Disposition: inline
-In-Reply-To: <9e440edc2a6bdcb7d768d277dd6afb02ab941ecd.1729577070.git.jan.kiszka@siemens.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,90 +94,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The init_r parsing of U-Boot device tree to search the binman
+information errors. set CONFIG_BINMAN_FDT to no to fix this.
 
---9MW74U9pkx4j9HNO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 7079eeb72fc ("imx: imxrt1050-evk: Add support for SPI flash booting
+s")
+Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+---
+ configs/imxrt1020-evk_defconfig      | 1 +
+ configs/imxrt1050-evk_defconfig      | 1 +
+ configs/imxrt1050-evk_fspi_defconfig | 1 +
+ configs/imxrt1170-evk_defconfig      | 1 +
+ 4 files changed, 4 insertions(+)
 
-On Tue, Oct 22, 2024 at 08:04:28AM +0200, Jan Kiszka wrote:
+diff --git a/configs/imxrt1020-evk_defconfig b/configs/imxrt1020-evk_defconfig
+index 5865d41a741..58a3e92ce08 100644
+--- a/configs/imxrt1020-evk_defconfig
++++ b/configs/imxrt1020-evk_defconfig
+@@ -67,6 +67,7 @@ CONFIG_FSL_LPUART=y
+ CONFIG_TIMER=y
+ CONFIG_SPL_TIMER=y
+ CONFIG_IMX_GPT_TIMER=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_SHA1=y
+ CONFIG_SHA256=y
+ CONFIG_HEXDUMP=y
+diff --git a/configs/imxrt1050-evk_defconfig b/configs/imxrt1050-evk_defconfig
+index f8b85398b79..2653efac148 100644
+--- a/configs/imxrt1050-evk_defconfig
++++ b/configs/imxrt1050-evk_defconfig
+@@ -84,5 +84,6 @@ CONFIG_VIDEO_MXS=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_SHA256=y
+ CONFIG_HEXDUMP=y
+diff --git a/configs/imxrt1050-evk_fspi_defconfig b/configs/imxrt1050-evk_fspi_defconfig
+index 73001ffe161..95b5b56ece7 100644
+--- a/configs/imxrt1050-evk_fspi_defconfig
++++ b/configs/imxrt1050-evk_fspi_defconfig
+@@ -85,6 +85,7 @@ CONFIG_VIDEO_MXS=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_SHA256=y
+ CONFIG_HEXDUMP=y
+ CONFIG_FSPI_CONF_HEADER=y
+diff --git a/configs/imxrt1170-evk_defconfig b/configs/imxrt1170-evk_defconfig
+index 5f28c22e66c..487da275c62 100644
+--- a/configs/imxrt1170-evk_defconfig
++++ b/configs/imxrt1170-evk_defconfig
+@@ -68,3 +68,4 @@ CONFIG_FSL_LPUART=y
+ CONFIG_TIMER=y
+ CONFIG_SPL_TIMER=y
+ CONFIG_IMX_GPT_TIMER=y
++# CONFIG_BINMAN_FDT is not set
+-- 
+2.45.2
 
-> From: Jan Kiszka <jan.kiszka@siemens.com>
->=20
-> Allow for the sysinfo drivers to provide a system UUID to SMBIOS. Will
-> be first used by the IOT2050 boards.
->=20
-> Based on original patch by Li Hua Qian.
->=20
-> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->  include/sysinfo.h | 1 +
->  lib/smbios.c      | 4 ++++
->  2 files changed, 5 insertions(+)
->=20
-> diff --git a/include/sysinfo.h b/include/sysinfo.h
-> index 8a77ef44856..1c5008b5f23 100644
-> --- a/include/sysinfo.h
-> +++ b/include/sysinfo.h
-> @@ -49,6 +49,7 @@ enum sysinfo_id {
->  	SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
->  	SYSINFO_ID_SMBIOS_SYSTEM_SKU,
->  	SYSINFO_ID_SMBIOS_SYSTEM_FAMILY,
-> +	SYSINFO_ID_SMBIOS_SYSTEM_UUID,
->  	SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
->  	SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
->  	SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
-> diff --git a/lib/smbios.c b/lib/smbios.c
-> index 7c24ea129eb..1441fa4cde6 100644
-> --- a/lib/smbios.c
-> +++ b/lib/smbios.c
-> @@ -387,6 +387,7 @@ static int smbios_write_type1(ulong *current, int han=
-dle,
->  	struct smbios_type1 *t;
->  	int len =3D sizeof(struct smbios_type1);
->  	char *serial_str =3D env_get("serial#");
-> +	char uuid[sizeof(t->uuid)];
-> =20
->  	t =3D map_sysmem(*current, len);
->  	memset(t, 0, sizeof(struct smbios_type1));
-> @@ -409,6 +410,9 @@ static int smbios_write_type1(ulong *current, int han=
-dle,
->  						      SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
->  						      NULL);
->  	}
-> +	if (!sysinfo_get_str(ctx->dev, SYSINFO_ID_SMBIOS_SYSTEM_UUID,
-> +			     sizeof(uuid), uuid))
-> +		strncpy((char *)t->uuid, uuid, sizeof(t->uuid));
->  	t->wakeup_type =3D SMBIOS_WAKEUP_TYPE_UNKNOWN;
->  	t->sku_number =3D smbios_add_prop_si(ctx, "sku",
->  					   SYSINFO_ID_SMBIOS_SYSTEM_SKU, NULL);
-
-This commit leads to sandbox (and sandbox with clang) failing a ton of
-tests:
-https://source.denx.de/u-boot/u-boot/-/jobs/929474
-
-Without this commit in the series, iot2050 fails to build.
-
---=20
-Tom
-
---9MW74U9pkx4j9HNO
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmca76YACgkQFHw5/5Y0
-tyy54gwApBp9+JpYkR2C4tnE1gPTeGL/l9BVSGoe4cP8DOEkyk3kprQCb1ftb50g
-/1Hjr6SHsQNTjFh35fIwSi70PhPf9xwoi1/ixdWETT0VAmXYoKto2ozx1kHkG5wX
-HKs51vATrRsQhdOgbxotoHDKBLBtej49FuoCi4Ezr+Z07RV8kYaAwxoEp2uArHSM
-1dEHUmB3GEBGYjBqXuEo+TU59Ymf+YBTXVTYStW81rRvvHchXLCdAOGqgQqZ7rUR
-uSzhd3vIMPc4KDTH4I//aw5s5YxQltiWNcBRuauYvtkSH3aQgD1dNS/jnDkOfZAQ
-ZSYP9xLeafbcClOYycoYre2Yd7U0fypvN+n6dYG4xyXfTHbQCbwpivwZHdUrMeVq
-kSFTpmwj6HNghEYxJON/3H10rn9KUXp6LaTQieAH4KavjHAMNxYxf+HXRL9FcnEj
-I/fUkvOWRPaNcuWzfzx8RNdqL/UaMnHbvvBT66DJHxjOLIkdQs5HoPlvfwToXw2u
-VMA8WDmk
-=gFoG
------END PGP SIGNATURE-----
-
---9MW74U9pkx4j9HNO--
