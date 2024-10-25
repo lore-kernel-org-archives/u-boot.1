@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84C08D0C5FB
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 11:19:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1766FD0C600
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 11:20:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C41E88F94;
-	Fri, 25 Oct 2024 13:19:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8C6A488ED2;
+	Fri, 25 Oct 2024 13:20:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H+DWBiBw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Sh0Kk6nw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E90888DFE; Fri, 25 Oct 2024 13:19:40 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id C6CCD88FE4; Fri, 25 Oct 2024 13:20:32 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27A3688ED2
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 13:19:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EB4E88DFE
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 13:20:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-71ec12160f6so1339242b3a.3
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 04:19:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2fb51e00c05so29970101fa.0
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 04:20:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729855163; x=1730459963; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GpPOp7UslCyv38dK/QwFCNlQhTiyBiudV5Cjfj0cGAs=;
- b=H+DWBiBwQvacT+f8Gla97d/wqTY/25y7RWorWHG2/A4QzrkKvJv9lZ/wXI0O10VDGJ
- vej/+9rVllUlr1j6imEl+1nInx5BXKkD8WLR3mJRGLl7ErZdXv+urJB5rhY45MI5dPyc
- gq8u1Ypz3PcprTSFo5dg9wO92fsy1A5enY2qdSsJ3iRWPDlK3FmK7p5VRPzCdHGF1+tB
- 4HVftqMbmACXrnyE4+bzxknhQFSC2wqjOYP8o6azcopz4OjSHoQD7Ftht0igfu4gzSJc
- 4ftOwhOazStJQ2iVehU127AC+VuOXDnJVP3EqR034npR3RAUBa7NlolIG9ZsFkeXr+67
- 2B/A==
+ d=gmail.com; s=20230601; t=1729855222; x=1730460022; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Vyyma5Jk6JThDCMq3d9E6wHSy+krktLU1KLenlI1TFE=;
+ b=Sh0Kk6nwXxAGQtajCK5wwOmVCvbt8rTBipnCo0t1pItvvtlNKuesAF/74zJhr1dlN5
+ piMIiRY14hzm78y+EME4NXRQ4PMbtfEuGnVkx7e9jiv5AHbaC3B2Zcr10i0YkAZzvgZG
+ LYNpHUodtcJ1LJjlnccHmCBe3499yXbfSSu8oejX54Ew4VP5oReCD1CkiwMENtzjzdSy
+ usO7irnxFQy3+KpVGAEiEQXFh2MnhAUBsyyDHWiGraV1pawOlwd0O2LWZFn/YP4NSceN
+ nhp4s/X+LsGqCDZFFbBttE/YpecEYxoYwgKVlEtRBKcWgSvnJv1AODJ2DmyQpaAIpfg8
+ DefA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729855163; x=1730459963;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GpPOp7UslCyv38dK/QwFCNlQhTiyBiudV5Cjfj0cGAs=;
- b=V3quuDgG052N0ML/0WvfXzYHWczmEJHZ7e2CoBglMGbebUIA1FuaC5jLz7mBgOR2Mb
- hxk88na2MDmLUULvZbJs68Q+1AhijK0YUQInjVAFxJYpCBaMnb1sZPlwwGULPhUGpOtk
- ghAvHyw7g0bzjnn8ugJIWZZ4X+J0kcLZ5lfDUqtGMKbb4gHDFxqjEtAKP7nlNgADS1ON
- Z0t1kHXon5QhH1WeVVo8EEkq2HwzJhuxWHce+qEpBPYjUqrXB2wkL1eSDMOMlgDZLkpO
- kR+OuQ+f8Irye/TpYIXo8UBuHLAkPdr7zMC6yu9EwMBwbElzvXqqGpv8pjF46WDBj/jT
- LNjQ==
-X-Gm-Message-State: AOJu0YxuJNTSyDYnP0ylzLg+AoXsSc5DfJiGGwYm4oqNut8suzfpGFgx
- 94fxbk/9s3xDlGv+CiiUQGFtuAAOBVsqsnNYIDCN61n6IRt4SmV86ydhPURRAZOHrrOROmzebGB
- aib3aePqDK4ngcYkfBvNriuOlnS122Sgz4tdYgg==
-X-Google-Smtp-Source: AGHT+IEpUhs002EhtWWpFJMmmnb1peBXy9FICwfVXZmiv54Ar2tyx+2zIT3Pw3VCU1bq72bE96fZtJodcVlHbRwuO9Y=
-X-Received: by 2002:a05:6a00:39a8:b0:71e:cc7:c511 with SMTP id
- d2e1a72fcca58-72045fa4418mr7190942b3a.23.1729855163555; Fri, 25 Oct 2024
- 04:19:23 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729855222; x=1730460022;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Vyyma5Jk6JThDCMq3d9E6wHSy+krktLU1KLenlI1TFE=;
+ b=jeIslqOlz1yb/0zo8jzhcKlOZVGShB4bEW+8Fql+pUDAErsMWaARqb3IzLHVd4GRWe
+ YGsyfB68dUHsXC0lDte5OBZ3YniP9QrUokKz4Tbbc3vIL/born3jfL/njlpdKLtV/IZe
+ KqBrerqWYQkVei47XRdVP4Dk498zsLt6YxJBbbOu0cpqBq1osAT3J99ATieZlEt0R+5B
+ zAfEcwidppPyEwxSSaNDMhgni4PDkV//FzRE97Uh2ohBPlM5k0wHy4nc5W3Du6/Z9FCO
+ LTePZJFsmsYbmQDUjjDmbse47yr36kJeYAGlrO62C61hKVwLhR3fbvndqakwx6Ik2KcM
+ B+1w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV4js3tmvcVj32hXAW2iVMIlm8jo8uyQrtlIi5+/YZB96GviTAwhRgTB7VRr/ZldCaK7G5rdH0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwRI7MpemwVb5QdSx4xBo+qVyz2kTgrf++xMOcIa+HWa3tkKBID
+ XJN36KBt8uP+SveI7jmkTPu9aIXOdmo3fYa/e3P1hTpcjWjNokV1PRHNjDzaJX8lwSdiTwvDuUF
+ lhNgdbJJdmqMycTRvTF7cxyqt4dcRK2gp
+X-Google-Smtp-Source: AGHT+IFqHUjG64q0tD2/oUfzcfHJD8xClHI9DdGpjuHCoao42ypI+TjI2SvSa8JaWo0z0V3GFunroq71L2W+G6AAFAg=
+X-Received: by 2002:a2e:71a:0:b0:2fb:510c:7237 with SMTP id
+ 38308e7fff4ca-2fc9d580d75mr62920121fa.41.1729855221989; Fri, 25 Oct 2024
+ 04:20:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241025111411.165904-1-sughosh.ganu@linaro.org>
-In-Reply-To: <20241025111411.165904-1-sughosh.ganu@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 25 Oct 2024 14:18:47 +0300
-Message-ID: <CAC_iWjL1R2D=vcOzTn=snNf8GfWT80JCET8vB-+nAvS8J=PPvA@mail.gmail.com>
-Subject: Re: [PATCH 0/4] Add pmem node for preserving distro ISO's
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>, Anton Antonov <Anton.Antonov@arm.com>
+References: <20241025004411.585310-1-gilles.talis@gmail.com>
+In-Reply-To: <20241025004411.585310-1-gilles.talis@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 25 Oct 2024 08:20:09 -0300
+Message-ID: <CAOMZO5BQoZ=MvRqmcZW8GsAGjfJsnev8dUwgLE1EOnO43c5ybQ@mail.gmail.com>
+Subject: Re: [PATCH v2] board: emcraft: Add support for Emcraft Systems NavQ+
+To: Gilles Talis <gilles.talis@gmail.com>
+Cc: peng.fan@nxp.com, u-boot@lists.denx.de, uboot-imx@nxp.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,53 +89,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+CC Anton
+Hi Gilles,
 
-On Fri, 25 Oct 2024 at 14:14, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Thu, Oct 24, 2024 at 9:44=E2=80=AFPM Gilles Talis <gilles.talis@gmail.co=
+m> wrote:
 >
-> When installing a distro via EFI HTTP boot some OS installers expect
-> the .iso image to be preserved and treat it as a "CDROM" to install
-> packages.
+> The Emcraft Systems NavQ+ kit is a mobile robotics platform
+> based on NXP i.MX8 MPlus SoC.
 >
-> This is problematic in EFI, since U-Boot mounts the image, starts the
-> installer, and eventually calls ExitBootServices. At that point the
-> image U-Boot mounted disappears. Some distros don't care and download
-> the missing packages from a web archive, while others halt the
-> installation complaining they can't find certain packages.
+> The following interfaces and devices are enabled:
+> - eMMC
+> - Gigabit Ethernet (through eQOS interface)
+> - SD-Card
+> - UART console
 >
-> If the firmware uses ACPI, this is supported by using NFIT which
-> provides NVDIMM ramdisks to the OS and preserves the image.
-> We don't have anything in place for Device Trees though. Since DT
-> supports persistent memory nodes (pmem) use those and preserve the
-> .iso for installers.
+> The device tree file is taken from upstream Linux Kernel
+> through OF_UPSTREAM
 >
-> The issue can be reproduced by attempting an EFI HTTP boot with Ubuntu
-> live server ISO, or a Rocky Linux ISO. The installation would fail
-> with the failure to locate certain packages.
->
->
->
-> Ilias Apalodimas (2):
->   efi_loader: add a function to remove memory from the EFI map
->   efi_loader: preserve installer images in pmem
->
-> Masahisa Kojima (1):
->   fdt: add support for adding pmem nodes
->
-> Sughosh Ganu (1):
->   efi: add helper functions to insert pmem node for DT fixup
->
->  boot/fdt_support.c           | 41 +++++++++++++++++++++++++++--
->  boot/image-fdt.c             |  9 +++++++
->  include/efi_loader.h         | 28 +++++++++++++++++---
->  include/fdt_support.h        | 13 +++++++++
->  lib/efi_loader/efi_bootmgr.c | 43 ++++++++++++++++++++++++++----
->  lib/efi_loader/efi_helper.c  | 12 +++++++++
->  lib/efi_loader/efi_memory.c  | 51 +++++++++++++++++++++++++++---------
->  lib/lmb.c                    |  4 +--
->  8 files changed, 175 insertions(+), 26 deletions(-)
->
-> --
-> 2.34.1
->
->
+> Signed-off-by: Gilles Talis <gilles.talis@gmail.com>
+> ---
+> Changes v1 --> v2:
+> - Removed unused usdhc properties from dtsi
+> - Moved to correct ethernet PHY driver (REALTEK -> ATHEROS)
+> - Removed empty board_late_init() function
+> - Moved env variables to an env file
+
+This version looks better, thanks.
+
+CI reports an error.
+
+Warning, treated as error:
+142/builds/u-boot/custodians/u-boot-imx/doc/board/emcraft/index.rst:6:toctr=
+ee
+contains reference to nonexisting document
+'board/emcraft/imx8mp-navqp'
+143make[1]: *** [doc/Makefile:70: htmldocs] Error 2
+144make: *** [Makefile:2445: htmldocs] Error 2
+
+Please fix and resend.
+
+> +#include <miiphy.h>
+> +
+> +#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
+> +int board_phy_config(struct phy_device *phydev)
+> +{
+> +       if (phydev->drv->config)
+> +               phydev->drv->config(phydev);
+> +
+> +       return 0;
+
+Can't board_phy_config() be removed now?
+
+> diff --git a/board/emcraft/imx8mp_navqp/imx8mp_navqp.env b/board/emcraft/=
+imx8mp_navqp/imx8mp_navqp.env
+> new file mode 100644
+> index 0000000000..a8b76574b4
+> --- /dev/null
+> +++ b/board/emcraft/imx8mp_navqp/imx8mp_navqp.env
+> @@ -0,0 +1,13 @@
+
+SPDX header is missing for this file.
+
+> +int board_fit_config_name_match(const char *name)
+> +{
+> +       if (is_imx8mp() &&
+> +           !strcmp(name, "imx8mp-navqp"))
+> +               return 0;
+> +
+> +       return -1;
+
+return -EINVAL;
+
+> +#if defined(CONFIG_CMD_NET)
+> +#define CFG_FEC_MXC_PHYADDR          1
+
+With DM, this is no longer used, right?
