@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B031ED0C61D
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 14:49:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C818FD0C61D
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 14:52:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 323A388A4C;
-	Fri, 25 Oct 2024 16:49:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2109C88F92;
+	Fri, 25 Oct 2024 16:52:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="emY0UZj3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LdvqTWNG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 537868902A; Fri, 25 Oct 2024 16:49:28 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 0602287F7D; Fri, 25 Oct 2024 16:52:17 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 719988870D
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 16:49:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51B3C8903B
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 16:52:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2fb3da341c9so22837161fa.2
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 07:49:21 -0700 (PDT)
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2fb470a8b27so29482711fa.1
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 07:52:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729867761; x=1730472561; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1729867927; x=1730472727; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HYnajsWZNNg6BW3th3lt33F7HnBt2xEmxq9LSUBNNBs=;
- b=emY0UZj34/WRI/WU3PUXjJo6oloUuAb64XbF1TTDv5bvc98HaggaPTeGsNUM/hHxtz
- uR99KKwUGi6SWPUIOad2EMZJLlTEiivg9ZzwemfR03t6m2dfHsy4AMf83fRdUa1+/Swl
- SiK0CxogI06Sww3oVdaQXbxMm3RKNuNhYG1uDVQUbZuEZ5SZNDEB+QS4Env8H9xJboMC
- 71fWkuIX/6IY/r6MrG2R/ZZm+M8SjhlCT/dJmJpw//sv/Szjshz3A+i9vnJ8A9TiB8xV
- F6G64OvSCAaH9/DYPeM/HLgyLa/JTNLRJGkl58AtbwimA7pH3sRXIKY0hwvvII//zWmS
- 1cfw==
+ bh=v9l2fRNzuY0O3RnYfcLWVLPAha2NHmqL79LfNgA/xts=;
+ b=LdvqTWNGh4SAtgaowH9DUOOmsc575fd+FbBGIpa+x4OLI6/6uHqfoPRvML3KXdtUEd
+ HwmRML09N+ggTpoi9pYvz8M644e7NZ2KjrowNvBlNpmAo6QGPAThEj3BKRVGQShJaumw
+ qiI2Evx34SQrZHf1kr7dv7HzxVH+freHyt3Jb+W2m9HIJteDm6kGt7RoED0magSBvYJB
+ 2XyK3XIE42Qqw770i6WsHEMNrsNPtrUClmdvZHFFtVdFOlekr/0sFru6VpYjWPZr8wc9
+ 3QEfEsb4dYk+KYx/ePkhooQlm85eSkr5Xn6Gak8o0tocjvx4SV1Qf/xRk8JsRjaWTADj
+ lKQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729867761; x=1730472561;
+ d=1e100.net; s=20230601; t=1729867927; x=1730472727;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HYnajsWZNNg6BW3th3lt33F7HnBt2xEmxq9LSUBNNBs=;
- b=PHgSA3TVfU8xTQDEXomZUHDVlG+mAZq6qvniOBRBl5AWFTO81Zl3O/pIaU1jqBf55g
- 2hD0cNV+tDmTsPyWt67DaF3tMr4mnZJdfaZKxTH8yWxGlKbwv0JS6d//9f4f/hHTFajM
- zbJGB/LXVVSko0ca5LomDUxUdKeqImHZ2MXkGIVPJpYotGiXLw93GF4ue1KTrC/Xbwec
- VlcNeg1cpIXyZkkrVs4VhqgS2B2DPGXktJ3RoFcUgqHxEqL+vnx8bcrCOoJLpo6FavhO
- VlHdb4Ofdr+/p4iG46nSACsCuuObCpc35iovksRoshvRdXCwimclzVKuzU6yplN5S8W9
- wA9Q==
+ bh=v9l2fRNzuY0O3RnYfcLWVLPAha2NHmqL79LfNgA/xts=;
+ b=HxLolRe4qiwPSCL6xL2un3AUMz2vD65+HqyTfwyzaZesnAeuUY6Y24qa7lGKSD2DNd
+ 57XBGBgHNGxd/lskvxgbyYEvGWVW5IYCxC8ZrjnKg9ve1R3VjXMegvhiFZ1LyQJeZZYI
+ I+mKGa9MDKJJspbHRPls2sNjqV99F/eFD7G/8tEaKNX5etcil31V85W3LRYD6vlKwxrg
+ xvbPrNR10DKmdEyREWVIn0mwwmW9Gwm3ezho//7Qq4xBXY/A1Oc0SZFVwQIK5DEcNRDE
+ RAlHAKHxXiCeRwNqinS16tLdymhIrDM3qd+OaiwhIsujj30GwMrS9ooU3OBCKn2zxnd/
+ /VBg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVsVrBKFl4LIPsjvZG068p9sgKyirHNDiKuA5oBCodHul6qbKeaTfzlus0G03ffWjY8JEj50q4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzySGy0MS60Kei0rmsw9X1T7dkD/7tNjWeYZpBC76Qd0QCWRVG2
- aT8tIbK3BkpURPBIEQxVYrUq3LnZJo+gXFMpAaA45WwvaqofWsyp5OjyE4M1V/jRGJjCmd7dYgq
- yn4s7GL3j2TYNcjk9/kFjpBT8re1R5w==
-X-Google-Smtp-Source: AGHT+IEnPJ1SRbIbgRzoYMuVn6HkRU6pRIzFBaACJHrKJZ+77O8O9hOkoipkgIq2wTvt45P4iPLjGSldvKCCeh0AzUs=
-X-Received: by 2002:a2e:b8cb:0:b0:2fb:3445:a4af with SMTP id
- 38308e7fff4ca-2fc9d31133cmr58008781fa.21.1729867760400; Fri, 25 Oct 2024
- 07:49:20 -0700 (PDT)
+ AJvYcCUzzCEDl5xwS5hYBs+7K5MIIdWuK15lPq4H4bcnN7ihJQbYRftMlIpAVukVqe/YCD/efH+9MTs=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywqs1qTcKYlnBngt2vWDnD/7UUnA7mV7Fxdf/qUStOi2eHRpdqF
+ gI4c8OvSoqIPy/ZquKvEtYnQLSlFCmsW98woXlaBn3Mmnxy4ZSuhZ4uSQDcDy0RddNGbujDu2Bp
+ FsvhwK0BuyNptrotEABTzB3YylOk=
+X-Google-Smtp-Source: AGHT+IFt+KAc+nuChB/jEwzCLcRBbkc9NG+OyXXQ+JLkCgxJ/TvkFsTkCHoDdr2U/UAhBgLpMwtUiApVk+7DnTUzgrU=
+X-Received: by 2002:a05:651c:2226:b0:2f3:f287:17df with SMTP id
+ 38308e7fff4ca-2fca836154fmr23503561fa.20.1729867926463; Fri, 25 Oct 2024
+ 07:52:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241023115350.8413-1-hiagofranco@gmail.com>
-In-Reply-To: <20241023115350.8413-1-hiagofranco@gmail.com>
+References: <20241024122735.893319-1-ravi@prevas.dk>
+ <3606fb53-c36e-93c7-6ff9-9947ae43c408@denx.de>
+In-Reply-To: <3606fb53-c36e-93c7-6ff9-9947ae43c408@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 25 Oct 2024 11:49:09 -0300
-Message-ID: <CAOMZO5A17cnb+sSh687xHJw2kFkWz2Sn_LUN8Zt=mfKhho8_Ag@mail.gmail.com>
-Subject: Re: [PATCH] verdin-imx8m{m|p}: defconfig: update fastboot buffer
- size/address
-To: Hiago De Franco <hiagofranco@gmail.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de, Hiago De Franco <hiago.franco@toradex.com>
+Date: Fri, 25 Oct 2024 11:51:53 -0300
+Message-ID: <CAOMZO5Aae_0cDXX-E9syhVPwMF7_NVu2__40m6Tmi7daePyVbg@mail.gmail.com>
+Subject: Re: [PATCH] imx: hab: fix size of IVT+CSF blob tacked on to u-boot.itb
+To: hs@denx.de
+Cc: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@denx.de>,
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,20 +93,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 23, 2024 at 8:54=E2=80=AFAM Hiago De Franco <hiagofranco@gmail.=
-com> wrote:
+On Fri, Oct 25, 2024 at 1:36=E2=80=AFAM Heiko Schocher <hs@denx.de> wrote:
 >
-> From: Hiago De Franco <hiago.franco@toradex.com>
+> Hello Rasmus,
 >
-> Remove FASTBOOT_BUF_SIZE from verdin-imx8mm_defconfig and
-> verdin-imx8mp_defconfig to use the default value of 0x7000000, aligning
-> with other Toradex boards.
+> On 24.10.24 14:27, Rasmus Villemoes wrote:
+> > Loading flash.bin using uuu fails when flash.bin does not have the
+> > right size.
+> >
+> > When flash.bin is loaded from some storage medium (sd card/emmc), SPL
+> > just loads some random garbage bytes from beyond what has been
+> > populated when flash.bin was written, but when loaded via uuu, SPL
+> > hangs waiting for the host to send the expected number of bytes. Which
+> > is (size of FIT image aligned to 0x1000)+CONFIG_CSF_SIZE. The
+> > alignment to 0x1000 is already done and is necessary in all cases
+> > because that's the exact expected location of the 32 byte IVT
+> > header. But the IVT+CSF blob tacked onto the end must be a total of
+> > CONFIG_CSF_SIZE.
+> >
+> > This is exactly the same fix as 89f19f45d650, except that this time
+> > around I don't know how to cleanly get CONFIG_CSF_SIZE.
+> >
+> > Fixes: bc6beae7c55f (binman: Add nxp_imx8mcst etype for i.MX8M flash.bi=
+n signing)
+> > Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> > ---
+> > Heiko, can you check if this works for you?
 >
-> Update FASTBOOT_BUF_ADDR to 0x44200000, consistent with the value in
-> previous downstream NXP U-Boot releases. This will make fastboot
-> applications continue working with upstream U-Boot by using the same
-> address.
->
-> Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
+> Works fine for me, thanks!
 
 Applied, thanks.
