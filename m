@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F32AFD0C601
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 11:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53CE5D0C5FB
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 11:15:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2986288FFC;
-	Fri, 25 Oct 2024 13:14:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C439189016;
+	Fri, 25 Oct 2024 13:15:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0195288FE2; Fri, 25 Oct 2024 13:14:58 +0200 (CEST)
+ id 350B889001; Fri, 25 Oct 2024 13:14:59 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 38C0C88ED2
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 13:14:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 0FFF888F47
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 13:14:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5539F339;
- Fri, 25 Oct 2024 04:15:19 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 349D5497;
+ Fri, 25 Oct 2024 04:15:24 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7915D3F73B;
- Fri, 25 Oct 2024 04:14:47 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9A4BD3F73B;
+ Fri, 25 Oct 2024 04:14:52 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 1/4] fdt: add support for adding pmem nodes
-Date: Fri, 25 Oct 2024 16:44:08 +0530
-Message-Id: <20241025111411.165904-2-sughosh.ganu@linaro.org>
+Subject: [PATCH 3/4] efi_loader: preserve installer images in pmem
+Date: Fri, 25 Oct 2024 16:44:10 +0530
+Message-Id: <20241025111411.165904-4-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241025111411.165904-1-sughosh.ganu@linaro.org>
 References: <20241025111411.165904-1-sughosh.ganu@linaro.org>
@@ -56,7 +55,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Masahisa Kojima <kojima.masahisa@socionext.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 One of the problems OS installers face, when running in EFI, is that
 the mounted ISO after calling ExitBootServices goes away. For some
@@ -67,111 +66,79 @@ inst.stage2 [0].
 
 ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
 don't have anything in place for DTs. Linux and device trees have support
-for persistent memory devices. So add a function that can inject a pmem
-node in a DT, so we can use it when launhing OS installers with EFI.
+for persistent memory devices.
 
-[0]
-https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/installation_guide/chap-anaconda-boot-options#sect-boot-options-installer
+It's worth noting that for linux to instantiate the /dev/pmemX device,
+the memory described in the pmem node has to be omitted from the EFI
+memory map we hand over to the OS if ZONE_DEVICES and SPARSEMEM is
+enabled. With those enabled the pmem driver ends up calling
+devm_memremap_pages() instead of devm_memremap(). The latter works
+whether the memory is omitted or marked as reserved, but mapping pages
+only works if the memory is omitted.
 
-Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+On top of that, depending on how the kernel is configured, that memory
+area must be page aligned or 2MB aligned. PowerPC is an exception here
+and requires 16MB alignment, but since we don't have EFI support for
+it, limit the alignment to 2MB.
+
+Ensure that the ISO image is 2MB aligned and remove the region
+occupied by the image from the EFI memory map.
+
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- boot/fdt_support.c    | 41 +++++++++++++++++++++++++++++++++++++++--
- include/fdt_support.h | 13 +++++++++++++
- 2 files changed, 52 insertions(+), 2 deletions(-)
+ lib/efi_loader/efi_bootmgr.c | 22 +++++++++++++++++-----
+ 1 file changed, 17 insertions(+), 5 deletions(-)
 
-diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-index 2392027d40..61f725389b 100644
---- a/boot/fdt_support.c
-+++ b/boot/fdt_support.c
-@@ -18,6 +18,7 @@
- #include <dm/ofnode.h>
- #include <linux/ctype.h>
- #include <linux/types.h>
-+#include <linux/sizes.h>
- #include <asm/global_data.h>
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index a3aa2b8d1b..16f75555f6 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -18,6 +18,8 @@
+ #include <efi_loader.h>
+ #include <efi_variable.h>
  #include <asm/unaligned.h>
- #include <linux/libfdt.h>
-@@ -463,7 +464,6 @@ void do_fixup_by_compat_u32(void *fdt, const char *compat,
- 	do_fixup_by_compat(fdt, compat, prop, &tmp, 4, create);
- }
++#include <linux/kernel.h>
++#include <linux/sizes.h>
  
--#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
- /*
-  * fdt_pack_reg - pack address and size array into the "reg"-suitable stream
-  */
-@@ -491,7 +491,7 @@ static int fdt_pack_reg(const void *fdt, void *buf, u64 *address, u64 *size,
- 
- 	return p - (char *)buf;
- }
--
-+#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
- #if CONFIG_NR_DRAM_BANKS > 4
- #define MEMORY_BANKS_MAX CONFIG_NR_DRAM_BANKS
- #else
-@@ -2221,3 +2221,40 @@ int fdt_valid(struct fdt_header **blobp)
+ static const struct efi_boot_services *bs;
+ static const struct efi_runtime_services *rs;
+@@ -358,13 +360,16 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
  	}
- 	return 1;
- }
-+
-+int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size)
-+{
-+	u64 pmem_start[2] = { 0 };
-+	u64 pmem_size[2] = { 0 };
-+	char pmem_node[32] = {0};
-+	int nodeoffset, len;
-+	int err;
-+	u8 tmp[4 * 16]; /* Up to 64-bit address + 64-bit size */
-+
-+	if (!IS_ALIGNED(addr, SZ_2M) || !IS_ALIGNED(addr + size, SZ_2M)) {
-+		printf("Start and end address needs at 2MB alignment\n");
-+		return -1;
-+	}
-+	snprintf(pmem_node, sizeof(pmem_node), "pmem@%lx", addr);
-+	nodeoffset = fdt_find_or_add_subnode(blob, 0, pmem_node);
-+	if (nodeoffset < 0)
-+		return nodeoffset;
-+
-+	err = fdt_setprop_string(blob, nodeoffset, "compatible", "pmem-region");
-+	if (err)
-+		return err;
-+	err = fdt_setprop_empty(blob, nodeoffset, "volatile");
-+	if (err)
-+		return err;
-+	pmem_start[0] = addr;
-+	pmem_size[0] = size;
-+	len = fdt_pack_reg(blob, tmp, pmem_start, pmem_size, 1);
-+	err = fdt_setprop(blob, nodeoffset, "reg", tmp, len);
-+	if (err < 0) {
-+		printf("WARNING: could not set pmem %s %s.\n", "reg",
-+		       fdt_strerror(err));
-+		return err;
-+	}
-+
-+	return 0;
-+}
-diff --git a/include/fdt_support.h b/include/fdt_support.h
-index 741e2360c2..63ece0de32 100644
---- a/include/fdt_support.h
-+++ b/include/fdt_support.h
-@@ -473,4 +473,17 @@ void fdt_fixup_pstore(void *blob);
-  */
- int fdt_kaslrseed(void *blob, bool overwrite);
  
-+/**
-+ * fdt_fixup_pmem_region() - add a pmem node on the device tree
-+ *
-+ * This functions injects a pmem node to the device tree. Usually
-+ * used with EFI installers to preserve installer images
-+ *
-+ * @blob:	device tree provided by caller
-+ * @addr:	start address of the pmem node
-+ * @size:	size of the memory of the pmem node
-+ * Return:	0 on success or < 0 on failure
-+ */
-+int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size);
-+
- #endif /* ifndef __FDT_SUPPORT_H */
+ 	/*
+-	 * TODO: expose the ramdisk to OS.
+-	 * Need to pass the ramdisk information by the architecture-specific
+-	 * methods such as 'pmem' device-tree node.
++	 * Linux supports 'pmem' which allows OS installers to find, reclaim
++	 * the mounted images and continue the installation since the contents
++	 * of the pmem region are treated as local media.
++	 *
++	 * The memory regions used for it needs to be carved out of the EFI
++	 * memory map.
+ 	 */
+-	ret = efi_add_memory_map(addr, size, EFI_RESERVED_MEMORY_TYPE);
++	ret = efi_remove_memory_map(addr, size, EFI_CONVENTIONAL_MEMORY);
+ 	if (ret != EFI_SUCCESS) {
+-		log_err("Memory reservation failed\n");
++		log_err("Failed to reserve memory\n");
+ 		goto err;
+ 	}
+ 
+@@ -486,6 +491,13 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ 		ret = EFI_INVALID_PARAMETER;
+ 		goto err;
+ 	}
++	/*
++	 * Depending on the kernel configuration, pmem memory area must be page
++	 * aligned or 2MB aligned. PowerPC is an exception here and requires
++	 * 16MB alignment, but since we don't have EFI support for it, limit
++	 * the alignment to 2MB.
++	 */
++	image_size = ALIGN(image_size, SZ_2M);
+ 
+ 	/*
+ 	 * If the file extension is ".iso" or ".img", mount it and try to load
 -- 
 2.34.1
 
