@@ -4,83 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CDFDD1039C
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 02:03:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23D2ED116EC
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 04:36:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A6CD88FC8;
-	Fri, 25 Oct 2024 04:02:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 43B5E88F47;
+	Fri, 25 Oct 2024 06:36:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WvugLQ7A";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E5D5E88DDC; Fri, 25 Oct 2024 04:02:42 +0200 (CEST)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1729830982;
+	bh=ySkmF9IxoKKuAN4s+1hYUyDoo9qJRqEv3vUzcQcHjNA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=bVQCE1U/PJFfiG0DY5zf8cbJQ0G3lIPQJe4gBRw0i/EgbQoC2xLa7MUTEtCdWfVa8
+	 1aHp8HkOwWsQ5tZPNk8UdCCseoygSqxvrXEycpxNK1A7OMS+gAcpy6mn9vx0urTkyh
+	 s7uuc9Co7G2mfx/iHs8VRUOGFJSQo/Hhycmbm+hzUGa56A2iZKlSkZn6uZZYY2edPd
+	 NkCsaKRi6fuhVw+7IoGBk8Ud2G0ouXF+LnX4hz+vbcFhBZpz5iVdlEMYp/W3jEmn/b
+	 PgWKzRKPS13s4U1PK0UbN00YUIDNwGjYDxYfZBecQVDtlDVcSTX2V2G2WA1rqnFola
+	 v40MHI2dWq0Zg==
+Received: from [192.168.1.107] (82-131-200-27.pool.digikabel.hu
+ [82.131.200.27])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EAD588FB7
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 04:02:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mr.bossman075@gmail.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7b14554468fso98328785a.1
- for <u-boot@lists.denx.de>; Thu, 24 Oct 2024 19:02:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729821754; x=1730426554; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=s5Nb1izu2Wd1J8OL0vWu/TL9qDa8++DVpnU3OSHdAL4=;
- b=WvugLQ7Az5qZoAbStXBDMBaSUIk/OTfDArBTYw+A9OqbL1LSgBW423AMlnJQj2ObsD
- JWZDpMnjE50QRZsYkm3zkQtV39YcM7hbW/rV78p/9Uz/KqiFXEetzr9f9cupEgejGK6W
- jO+RyjhaNe+l40V7rcH9dVaXtxlQ+68mOqXGkhkxZeLTCEQFLKwLN/TXghIhNMLs6Shb
- 2BgNUBJnFLruEov+FS00AFEWhtpx/JoxuV4Wm+Srxyguvbe2gNAzJ+Br+OwEprczql1s
- ffQDtVNhm53W+GfdYEslk7debB8FP2hQb/2QKC0OSCswhW1Yx1YKM0KkOeEeQdv1Clr5
- 0ZDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729821754; x=1730426554;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=s5Nb1izu2Wd1J8OL0vWu/TL9qDa8++DVpnU3OSHdAL4=;
- b=e7tAnvlirXKiX2jdIL/Bem4sulhf1jBZpqH9M9pSSxZj8atR5cHIKk4JZ+xj3QTVFR
- BNGkMpTOceuJ+lK/ARRddTBuluk0STW5TNyAIFB6t/fgALoYF25iiOkEZFypLxAR+akm
- /gW+OlwXNIohtSLSLsYlKb/rvp4RXtnGS7I7JDNrpcH/mK4CNnc8Hy9f6VdYGUQhhKoL
- fnqeIE6lyemBjqrwr2eVd0WTAodCR907lz+wujFAzbAza/Tf//XKOMyCNz+Im13p1d9G
- IKyno6Ya7K5VaRp8TwxgDGu9ZdrMLun6S8qLvjf4/1Bs7Q6cuaP9glGwfDnhNt+1kJcf
- 02gA==
-X-Gm-Message-State: AOJu0YzXN5UIO+hDC7adE22onX150GdUccA4tg7zgc/vJZaavZydAzT3
- QwWs2RPrG+AKheTdmf4BDPlVaGyKdgZi9tX0q4Na9TzuhtkKs92UoYNOGbpJ
-X-Google-Smtp-Source: AGHT+IHc3qVAqigy4OKgOADMPuXjmzA2N8vZM/fauuGNmSGtylfC+zyc84nuXJdltLglVKQ1MYFGQA==
-X-Received: by 2002:a05:620a:4249:b0:7b1:184e:a665 with SMTP id
- af79cd13be357-7b186d0f689mr510560685a.59.1729821754158; 
- Thu, 24 Oct 2024 19:02:34 -0700 (PDT)
-Received: from jesse-desktop.. (pool-108-26-179-17.bstnma.fios.verizon.net.
- [108.26.179.17]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b18d294b3fsm11607585a.33.2024.10.24.19.02.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 19:02:33 -0700 (PDT)
-From: Jesse Taube <mr.bossman075@gmail.com>
-X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Giulio Benetti <giulio.benetti@benettiengineering.com>,
- Jesse Taube <Mr.Bossman075@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH 4/4] ARM: dts: imxrt1170: Fix default cells value warnings
-Date: Thu, 24 Oct 2024 22:02:28 -0400
-Message-ID: <20241025020228.1686306-4-Mr.Bossman075@gmail.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241025020228.1686306-1-Mr.Bossman075@gmail.com>
-References: <20241025020228.1686306-1-Mr.Bossman075@gmail.com>
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id B14B388FC0;
+ Fri, 25 Oct 2024 06:36:20 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1729830981;
+ bh=ySkmF9IxoKKuAN4s+1hYUyDoo9qJRqEv3vUzcQcHjNA=;
+ h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
+ b=r6/Awq5By29y363YwS3iyIL25D1cMzhz0RarjFU9dVqRIRmtDIIUlBvZwhD4B5z45
+ igpgeq9P2ZwXYiHvp997FKEWluezsGCKWF1QNH6pjqLpdPQzb5+8WmCJWgZZnM74kE
+ 6b6mda8EtQLMbxnLXqix98SjH1+xWJqW+PXJfWn/2WTraUqXTljXWywUh4dJiqUSo9
+ JUPRHAgOoinuzVtnvSDkEDRG/Knfc4wus5xicus8/wGsEPksn9uTmUsOSAEOE5Qvrz
+ cftiL2RzR9ykd8b9K6Z83jmjrkanyvFfCa7MD+o1DtCjy4s4dnMAzB4NBi9l6QFAVI
+ SUDN73YrgnsXA==
+Message-ID: <3606fb53-c36e-93c7-6ff9-9947ae43c408@denx.de>
+Date: Fri, 25 Oct 2024 06:34:04 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH] imx: hab: fix size of IVT+CSF blob tacked on to u-boot.itb
+Content-Language: en-US
+To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@denx.de>,
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>
+References: <20241024122735.893319-1-ravi@prevas.dk>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20241024122735.893319-1-ravi@prevas.dk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,31 +66,71 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add #address-cells and #size-cells to the memory node to fix warnings
+Hello Rasmus,
 
-Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
----
- arch/arm/dts/imxrt1170-evk.dts | 2 ++
- 1 file changed, 2 insertions(+)
+On 24.10.24 14:27, Rasmus Villemoes wrote:
+> Loading flash.bin using uuu fails when flash.bin does not have the
+> right size.
+> 
+> When flash.bin is loaded from some storage medium (sd card/emmc), SPL
+> just loads some random garbage bytes from beyond what has been
+> populated when flash.bin was written, but when loaded via uuu, SPL
+> hangs waiting for the host to send the expected number of bytes. Which
+> is (size of FIT image aligned to 0x1000)+CONFIG_CSF_SIZE. The
+> alignment to 0x1000 is already done and is necessary in all cases
+> because that's the exact expected location of the 32 byte IVT
+> header. But the IVT+CSF blob tacked onto the end must be a total of
+> CONFIG_CSF_SIZE.
+> 
+> This is exactly the same fix as 89f19f45d650, except that this time
+> around I don't know how to cleanly get CONFIG_CSF_SIZE.
+> 
+> Fixes: bc6beae7c55f (binman: Add nxp_imx8mcst etype for i.MX8M flash.bin signing)
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> ---
+> Heiko, can you check if this works for you?
 
-diff --git a/arch/arm/dts/imxrt1170-evk.dts b/arch/arm/dts/imxrt1170-evk.dts
-index c2fd0c0392c..0d8e7016860 100644
---- a/arch/arm/dts/imxrt1170-evk.dts
-+++ b/arch/arm/dts/imxrt1170-evk.dts
-@@ -20,6 +20,8 @@
- 	};
- 
- 	memory {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
- 		device_type = "memory";
- 		reg = <0x20240000 0xf0000 0x80000000 0x4000000>;
- 
+Works fine for me, thanks!
+
+> And if somebody wants to pick this up and knows how to get at CONFIG_
+> values, feel free to fix up and take authorship. But perhaps it's not
+> really configurable at all; imx8mimage.c has the value 0x2000
+> hard-coded, so I don't think anything good could ever come from
+> modifying CONFIG_CSF_SIZE. If so, the right fix is probably just to
+> make that knob non-settable.
+
+Hmm... I don not know if it is a fix value... added Simon,
+may he knows how to use a CONFIG_ option in buildman. If I
+find time, I will take a look...
+
+bye,
+Heiko
+> 
+>   tools/binman/etype/nxp_imx8mcst.py | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
+> index 8221517b0c4..9a1974cc522 100644
+> --- a/tools/binman/etype/nxp_imx8mcst.py
+> +++ b/tools/binman/etype/nxp_imx8mcst.py
+> @@ -137,6 +137,8 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+>           args = ['-i', cfg_fname, '-o', output_fname]
+>           if self.cst.run_cmd(*args) is not None:
+>               outdata = tools.read_file(output_fname)
+> +            # fixme: 0x2000 should be CONFIG_CSF_SIZE
+> +            outdata += tools.get_bytes(0, 0x2000 - 0x20 - len(outdata))
+>               return data + outdata
+>           else:
+>               # Bintool is missing; just use the input data as the output
+> 
+
 -- 
-2.45.2
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
