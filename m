@@ -4,61 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D060ED0C601
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:05:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F299D0C601
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:16:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 259A089093;
-	Fri, 25 Oct 2024 14:04:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id C0C2A88CD9;
+	Fri, 25 Oct 2024 14:16:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="HL58ZRaa";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F38089067; Fri, 25 Oct 2024 14:04:53 +0200 (CEST)
-Received: from mail-m19731102.qiye.163.com (mail-m19731102.qiye.163.com
- [220.197.31.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 970A788C10
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:04:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ id 4EC4F88DEA; Fri, 25 Oct 2024 14:16:07 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 54BD488C10
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:16:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id ebe59d7;
- Fri, 25 Oct 2024 20:04:42 +0800 (GMT+08:00)
-Message-ID: <fbe42c00-e23d-4149-bf25-24a0c92cbd81@rock-chips.com>
-Date: Fri, 25 Oct 2024 20:04:42 +0800
+ dmarc=fail (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 40D8F339;
+ Fri, 25 Oct 2024 05:16:34 -0700 (PDT)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E67E43F71E;
+ Fri, 25 Oct 2024 05:16:02 -0700 (PDT)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Michal Simek <michal.simek@amd.com>, love.kumar@amd.com,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/2] Add generic function for computing ram_top
+Date: Fri, 25 Oct 2024 17:45:45 +0530
+Message-Id: <20241025121547.181633-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V2 4/4] board: rockchip: Enable PD_VO before driver access
-To: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de
-Cc: jonas@kwiboo.se, trini@konsulko.com, philipp.tomsich@vrull.eu,
- sjg@chromium.org, dsimic@manjaro.org, quentin.schulz@cherry.de,
- Chris Morgan <macromorgan@hotmail.com>
-References: <20240919140022.511067-1-macroalpha82@gmail.com>
- <20240919140022.511067-5-macroalpha82@gmail.com>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240919140022.511067-5-macroalpha82@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQk1PQlYZGUMZSENMTU1IHU5WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a92c39089b709d6kunmebe59d7
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OVE6LBw5SzIpFxc*A0kpSiIJ
- KC0KFBZVSlVKTElCQ05MQ0NIQ0tLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSENNNwY+
-DKIM-Signature: a=rsa-sha256;
- b=HL58ZRaaRbXcmU5RAo800HmP4TBGS6GYJf9Ymp+fVMHcZiTOuJ2jBhjurqb3uSmXJr9LiLZgfGvzuLlOtztq9RHQpZdLdL1ArorHWpAGBqn/GaAk1DCPKu3BZpc9CVJmlq8AV5RBAsb+xHgiVz/LQpQl9LZbjjmjHxQrsOQGK3g=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=jKCCE40DZbFZETUQbWRrVVOS47tTXCVzFheMClQQEL4=;
- h=date:mime-version:subject:message-id:from;
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,42 +52,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The board_get_usable_ram_top() function is used by boards to compute
+uppermost address of RAM(ram_top) that is to be used by U-Boot -- this
+need not be the highest RAM address of the platform. This computation
+happens before U-Boot relocates to its final destination address in
+RAM. Certain platforms, like the Xilinx boards were computing the
+ram_top value in an indirect manner, through some LMB API's. Thus it
+is no longer possible to use these LMB API's to compute the ram_top,
+as the LMB module gets initialised only after relocation, and the heap
+memory has been set up. Add generic functionality to compute the value
+of ram_top which can be used by platforms.
 
-On 2024/9/19 22:00, Chris Morgan wrote:
-> From: Chris Morgan <macromorgan@hotmail.com>
->
-> Enable the PD_VO power domain before driver access on the rk3568 SoC.
->
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Thanks,
-- Kever
-> ---
->   arch/arm/mach-rockchip/rk3568/rk3568.c | 6 ++++++
->   1 file changed, 6 insertions(+)
->
-> diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> index 1b3e40074e3..d5742b68d68 100644
-> --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
-> +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> @@ -26,6 +26,8 @@
->   #define PMU_BASE_ADDR		0xfdd90000
->   #define PMU_NOC_AUTO_CON0	(0x70)
->   #define PMU_NOC_AUTO_CON1	(0x74)
-> +#define PMU_PWR_GATE_SFTCON	(0xa0)
-> +#define PMU_PD_VO_DWN_ENA	BIT(7)
->   #define EDP_PHY_GRF_BASE	0xfdcb0000
->   #define EDP_PHY_GRF_CON0	(EDP_PHY_GRF_BASE + 0x00)
->   #define EDP_PHY_GRF_CON10	(EDP_PHY_GRF_BASE + 0x28)
-> @@ -130,6 +132,10 @@ int arch_cpu_init(void)
->   	writel(0x3f3f0707, GRF_BASE + GRF_GPIO1C_DS_1);
->   	writel(0x3f3f0707, GRF_BASE + GRF_GPIO1C_DS_2);
->   	writel(0x3f3f0707, GRF_BASE + GRF_GPIO1C_DS_3);
-> +
-> +	/* Enable VO power domain for display */
-> +	writel((PMU_PD_VO_DWN_ENA << 16),
-> +	       PMU_BASE_ADDR + PMU_PWR_GATE_SFTCON);
->   #endif
->   	return 0;
->   }
+Sughosh Ganu (2):
+  common: memtop: add logic to detect ram_top
+  xilinx: use get_mem_top() to compute ram_top
+
+ board/xilinx/common/board.c |  25 +++++
+ common/Makefile             |   1 +
+ common/memtop.c             | 186 ++++++++++++++++++++++++++++++++++++
+ include/memtop.h            |  22 +++++
+ 4 files changed, 234 insertions(+)
+ create mode 100644 common/memtop.c
+ create mode 100644 include/memtop.h
+
+-- 
+2.34.1
+
+
