@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 769A8D149F7
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 22:56:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B461D149F6
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 22:56:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 756158901D;
-	Sat, 26 Oct 2024 00:56:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D678E89065;
+	Sat, 26 Oct 2024 00:56:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1729896983;
-	bh=/SpKiwa/39Rk9vz2LwhI3nZ1L5N6uYGafrFpl/rbJh8=;
+	s=phobos-20191101; t=1729896989;
+	bh=c9AWJR3oeD24FSco8wazdgoj2UCNynMr+ILi7wk99Rw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=I3b2pofHoyaVsrqTOwBJQTd/m8821NVptEd14NB4rj0RmU5C96YDNpR3wRSZ4Uoce
-	 Z5FFyLjiuDLhGMat5NjqFRKqHeecg5CY3MVKiBy1rmons0RxMxG4PENtpoi9QuSFGc
-	 DSt1m3ehFyDuGb5AMNlFymYS9PVhLhjhtevfqEI00ysaced/oeaJiw0cIhChaaQfFC
-	 YVxDSIXIqBa5EypXAy23OlEfFakKH34geyJoyL47teg3HQ9bZqVII303pA7KO+bahJ
-	 YsR7VeNwXZvlFWEaeQWYTrxuulQcknMmLzwS9paGC77nir1s/rhSmFE49uOJiDbL+X
-	 K0cehewVQHgIw==
+	b=0XF0ZB1FhuA9FTloKG5tIrp0XEC8MgpL/hMLC6PrHdP3uKSOZ7ZODqffre9bEjrFl
+	 uoS8dOURrpW1n4ttkkKijQf48y2+MJQ3AooJvE5FK8mUXpNurF4W0Nt2E8tUHPhT4k
+	 xBosX+FI+2anPHSluHs2qrMb75IGP5FEnpv5qDU8s6CdKVXVgsxSpTJXEMKHpyMkpB
+	 0reb6N57BmhA+Iw+T7/qUsVqExRMWgYHLbSdwazmKhU49Sn/X8iojEyAjtV03+0LHi
+	 YAfTKszbB7I2FBt51bF/NAq5TF5CTXx8KB+22a3QlOCMQySmNziqkCgK9HXIV0QDRs
+	 2KqhPK4QX0VXQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id F008288DF8;
- Sat, 26 Oct 2024 00:56:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 94AF988E67;
+ Sat, 26 Oct 2024 00:56:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729896982;
- bh=/SpKiwa/39Rk9vz2LwhI3nZ1L5N6uYGafrFpl/rbJh8=;
+ s=phobos-20191101; t=1729896988;
+ bh=c9AWJR3oeD24FSco8wazdgoj2UCNynMr+ILi7wk99Rw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Ip+huQ1+HIwz5IREB5pO/YNtvBC8B/pSlzMZEKse+gJGrt8Divsn8lvXVzGQfUKLc
- e89vuFp45TKZKsnz95lEvFJrqAGS+jPfZM2untNtmrXZQPhzpZhmG9Tv3jNqmYYtKK
- jUWfJyv0IWOE9xNBQHjVOqNakoAhuBhuojtV9/ovKtXTOVn0tqCMhSknIpqOC1e/S9
- GIIjBOJmR2YMj/mYx2LcHBWv/eXD4CDc694oYd0bIiifjXJq3GAXs8ssaOkVNnqqAw
- bsXOcvkty/puflx0RL2WE8cbGyRp7WsdXofLXAQvmkthKFiIFIW8yoSykR2SwlfPUG
- S9hgbleBX7smA==
+ b=PCxRIH1KA6VgbJWwmDq9G0C4fRgVxbQdkNG+A2gAgqbt17n6S/vKQBFgFfW79S/KZ
+ 8KoZuKlaqRUlC5XVc0HZmO/zfEaHdS8noqNYeFEQVNkd45RIky26O3BrV+KyKYILby
+ eid+86pcbhTJ5HpddclZ5+eoTtRGI1bRLZljoZqmm6i+Nilq/LM5NlF3EFp3kWnRy4
+ VhKUpE+sjn7hFxGfjaQifghtfYfuYN290t5gsofh2cLvVg88S0cyt8d0aDFskHchcJ
+ nqEGf4Z9g8HIf2qsch+O8A630BQWy7aJGfJ7g9ggdGG9zzjjO6Ll6WP4kwjgJPn6gj
+ WsiO5TqIcTytw==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
@@ -49,10 +49,10 @@ Cc: Marek Vasut <marex@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
  u-boot@dh-electronics.com
-Subject: [PATCH v2 2/5] arm64: imx: imx8mp: Disable PCI support on DH i.MX8MP
- DHCOM SoM on DRC02 board
-Date: Sat, 26 Oct 2024 00:55:03 +0200
-Message-ID: <20241025225602.114784-2-marex@denx.de>
+Subject: [PATCH v2 3/5] arm64: imx: imx8mp: Disable PCA954x I2C mux on DH
+ i.MX8MP DRC02 and PicoITX
+Date: Sat, 26 Oct 2024 00:55:04 +0200
+Message-ID: <20241025225602.114784-3-marex@denx.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241025225602.114784-1-marex@denx.de>
 References: <20241025225602.114784-1-marex@denx.de>
@@ -74,7 +74,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The DRC02 carrier board does not expose PCIe in any way, disable PCIe support.
+Neither the DRC02 nor PicoITX carrier board contains the PCA954x I2C mux
+chip, the chip is only present on PDK3 carrier board. Disable support for
+the PCA954x mux chip and I2C mux altogether on both i.MX8MP DHCOM DRC02 and
+PicoITX.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -91,40 +94,36 @@ Cc: u-boot@lists.denx.de
 ---
 V2: No change
 ---
- configs/imx8mp_dhcom_drc02_defconfig | 5 -----
- 1 file changed, 5 deletions(-)
+ configs/imx8mp_dhcom_drc02_defconfig   | 2 --
+ configs/imx8mp_dhcom_picoitx_defconfig | 2 --
+ 2 files changed, 4 deletions(-)
 
 diff --git a/configs/imx8mp_dhcom_drc02_defconfig b/configs/imx8mp_dhcom_drc02_defconfig
-index ffc9bf0e1c2..366e5bbbb74 100644
+index 366e5bbbb74..c6e3c1b9a8a 100644
 --- a/configs/imx8mp_dhcom_drc02_defconfig
 +++ b/configs/imx8mp_dhcom_drc02_defconfig
-@@ -35,7 +35,6 @@ CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_ENV_OFFSET_REDUND=0xFF0000
- CONFIG_IMX_BOOTAUX=y
- CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x48000000
--CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
- CONFIG_ENV_VARS_UBOOT_CONFIG=y
- CONFIG_FIT=y
-@@ -105,7 +104,6 @@ CONFIG_CMD_BKOPS_ENABLE=y
- CONFIG_MMC_SPEED_MODE_SET=y
- CONFIG_CMD_MTD=y
- CONFIG_CMD_PART=y
--CONFIG_CMD_PCI=y
- CONFIG_CMD_READ=y
- CONFIG_CMD_SPI=y
- CONFIG_CMD_USB=y
-@@ -220,10 +218,7 @@ CONFIG_DWC_ETH_QOS_IMX=y
- CONFIG_FEC_MXC=y
- CONFIG_RGMII=y
- CONFIG_MII=y
--CONFIG_NVME_PCI=y
--CONFIG_PCIE_DW_IMX=y
- CONFIG_PHY_IMX8MQ_USB=y
--CONFIG_PHY_IMX8M_PCIE=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_IMX8M=y
+@@ -184,8 +184,6 @@ CONFIG_SPL_GPIO_HOG=y
+ CONFIG_MXC_GPIO=y
+ CONFIG_DM_PCA953X=y
+ CONFIG_DM_I2C=y
+-CONFIG_I2C_MUX=y
+-CONFIG_I2C_MUX_PCA954x=y
+ # CONFIG_INPUT is not set
+ CONFIG_LED=y
+ CONFIG_LED_BLINK=y
+diff --git a/configs/imx8mp_dhcom_picoitx_defconfig b/configs/imx8mp_dhcom_picoitx_defconfig
+index 7cefe9ae821..f4e9ba91bcf 100644
+--- a/configs/imx8mp_dhcom_picoitx_defconfig
++++ b/configs/imx8mp_dhcom_picoitx_defconfig
+@@ -184,8 +184,6 @@ CONFIG_SPL_GPIO_HOG=y
+ CONFIG_MXC_GPIO=y
+ CONFIG_DM_PCA953X=y
+ CONFIG_DM_I2C=y
+-CONFIG_I2C_MUX=y
+-CONFIG_I2C_MUX_PCA954x=y
+ # CONFIG_INPUT is not set
+ CONFIG_LED=y
+ CONFIG_LED_BLINK=y
 -- 
 2.45.2
 
