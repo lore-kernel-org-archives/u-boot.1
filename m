@@ -4,157 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D420CD0C601
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:26:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA77D0C601
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:31:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0891788FD5;
-	Fri, 25 Oct 2024 14:26:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 34E5A88B0C;
+	Fri, 25 Oct 2024 14:31:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="CGtkOye1";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="JEll1HXh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D74688FEE; Fri, 25 Oct 2024 14:26:53 +0200 (CEST)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on2072e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260e::72e])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 793938857C; Fri, 25 Oct 2024 14:31:16 +0200 (CEST)
+Received: from mail-m12765.qiye.163.com (mail-m12765.qiye.163.com
+ [115.236.127.65])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1440B88F68
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:26:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 69EF388F64
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:31:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lH6YlF0MAoFrZEv+H02vZpBszuLVY/JsKZpnrxtmYSvXrrT5kAnES4JrgCnHVBT/VgFoJT+PnPjiOiqncZDELwgMDj0nLtR8T9rHzQ1v2+vqCADP6KXpca/ppK1EUlHDSRTUFR+V8Vczsf/8A8fQI8C9NCijhgG2aNQEfe7J30JFs2EtQPqT0Ij9diKKIz6i0kkogZt5f7z9albY9kkab/46F/oDEPp5Q0HNUEGIWG3i+2mJKb71AzLy86Autuvp9OC/r92y41GORntHF582vU7xcIwRA/wPErtxvsNRZVS2wzjF6uAvfcrwIKxA+QuKH1rTQido/rd6XgofeJZGKQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oIo3XQUI8PwXakRi8Zl1AGEEio9VKknVvsXxwN3s+iI=;
- b=QYzSKI2lnCKzHysjwfNfdMGIz/qc/0fp8GRRDRaxlY8Sd4ykb39iXWFfnTX664RPERh8qdO1cU69I6YcskhaMNHen5ihKCKKLeEAvlrW4Q4TItLGUwNaT6MhTLl5/y3s0vFV/LB7qBWYE3ZNcRrXOVmx0t1kvj+B6mQUjNS+5jQhbT/M1+hZQotbbZgRgNqEuL/HsVqA12M1I/Gs4I7L63wqGz3YsbLEn9FK9diR60XY9anzNGEeL+D12MgFn7XvsCyZHKsB9gPGOr8jvFOnirj0FGfEfMpVXpDjs3x6wjF3afQejZh62a60eFQiu3InA59FYpfLt0IMuaaxUiDlpg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=gateworks.com smtp.mailfrom=phytec.de;
- dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
- arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=phytecmesstechnikgmbh.onmicrosoft.com;
- s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oIo3XQUI8PwXakRi8Zl1AGEEio9VKknVvsXxwN3s+iI=;
- b=CGtkOye1YmR+iNQtkCqsfGmih7AylELVZhL3yI5aAD2q0eP+s7sRZ266IoD6TKB8Tf5riNzq3lsd1Pzurc3G3mUvxnzXxNhJIuskGs8vaHQgF15Db1ZkjomPeJE8qW0fNl0iwyqABuIuPEMRJ/3x8uAd3eIbov51CV+GHEVu6BQ=
-Received: from AM6P195CA0094.EURP195.PROD.OUTLOOK.COM (2603:10a6:209:86::35)
- by AM0P195MB0690.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:14b::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.20; Fri, 25 Oct
- 2024 12:26:42 +0000
-Received: from AMS0EPF000001AD.eurprd05.prod.outlook.com
- (2603:10a6:209:86:cafe::41) by AM6P195CA0094.outlook.office365.com
- (2603:10a6:209:86::35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.21 via Frontend
- Transport; Fri, 25 Oct 2024 12:26:42 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- AMS0EPF000001AD.mail.protection.outlook.com (10.167.16.153) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8093.14 via Frontend Transport; Fri, 25 Oct 2024 12:26:41 +0000
-Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 25 Oct
- 2024 14:26:41 +0200
-Received: from Berlix.phytec.de (172.25.0.12) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 25 Oct
- 2024 14:26:41 +0200
-Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
- Fri, 25 Oct 2024 14:26:41 +0200
-From: Yannic Moog <Y.Moog@phytec.de>
-To: "tharvey@gateworks.com" <tharvey@gateworks.com>
-CC: "manut@mecka.net" <manut@mecka.net>, "uboot-imx@nxp.com"
- <uboot-imx@nxp.com>, "trini@konsulko.com" <trini@konsulko.com>,
- "festevam@gmail.com" <festevam@gmail.com>, Yashwanth Varakala
- <Y.Varakala@phytec.de>, "sbabic@denx.de" <sbabic@denx.de>, Benjamin Hahn
- <B.Hahn@phytec.de>, PHYTEC Upstream <upstream@lists.phytec.de>,
- "sjg@chromium.org" <sjg@chromium.org>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Teresa Remmet <T.Remmet@phytec.de>
-Subject: Re: [PATCH RFC 1/6] arm: dts: imx8m: add fit optee node
-Thread-Topic: [PATCH RFC 1/6] arm: dts: imx8m: add fit optee node
-Thread-Index: AQHbJeLsD17LfBDuX02Lmol+rCHaIrKV5q6AgAFeTgA=
-Date: Fri, 25 Oct 2024 12:26:41 +0000
-Message-ID: <383445df396a7a9a444c6cf6f69d831abc232a47.camel@phytec.de>
-References: <20241024-phytec_imx8m_optee-v1-0-fc6b78bf9a9b@phytec.de>
- <20241024-phytec_imx8m_optee-v1-1-fc6b78bf9a9b@phytec.de>
- <CAJ+vNU2ZrBEoeTrXZspYEUx5_N5sQQabSHCTVUVwP2bhoYWy+Q@mail.gmail.com>
-In-Reply-To: <CAJ+vNU2ZrBEoeTrXZspYEUx5_N5sQQabSHCTVUVwP2bhoYWy+Q@mail.gmail.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <C9EFF28B4AB97D478E57D925F7AE3E5F@phytec.de>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [172.16.12.67] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTP id ec47252;
+ Fri, 25 Oct 2024 20:30:44 +0800 (GMT+08:00)
+Message-ID: <076ad029-7788-4f2f-b3fe-58e61fa8cf51@rock-chips.com>
+Date: Fri, 25 Oct 2024 20:30:44 +0800
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001AD:EE_|AM0P195MB0690:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4e030e20-f0b5-4ffc-dede-08dcf4f04826
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TGhBeUVyKzNoL2xNL2hwQWJQckJyMGxzaGlIQTkrYkgyUHdlSERsdnZoVDYr?=
- =?utf-8?B?OEw2SUpxeEUzSEthU0MrVmZ0M2dROUxDVUpZRUdROE0vb2pac3FJVHVGNi8w?=
- =?utf-8?B?dFNKOEI0a3B5UXBlTDBoTzF5bU9pUVlnRmYyaDB1b0ptV2t4QWVnUVp0Q1No?=
- =?utf-8?B?NGhvamJpQWsyYitMSEJ0NTNNNDFNdkdEeWpZUnNQRnN6L2VsR1hrYk03bkEx?=
- =?utf-8?B?WGQ0SHVKWWQ2Q1NiQmhsNmlMa1JMQ1FEd1FMMmJOcGZiYUNsNXptbWxtU3Zo?=
- =?utf-8?B?a3VZcCtibFl4U2I4b2oyNVBGc29uMWJaVDBqRlI1REVLcUxkaHBuekd2RzBB?=
- =?utf-8?B?Z0ZlR3RTaFBHaTBRT1pPcCt4NzgvcElSaXBackE5Y3dIQzBNLzF0dEUvTkIz?=
- =?utf-8?B?N2FabVlubTJkMCt6K3JtdDRVWnVYUU0rRUNkVGhDZWV2Z1B5emRRZWJVbXBZ?=
- =?utf-8?B?ZHZNM1pzeTNZdElCSU9uZ2ZMcmNVYUxESDZ3ZzVTaXMxaUdYNFp3NWZZSGpr?=
- =?utf-8?B?dHZJY3pyTVZSTDNORi8wdFZTNFM4L0NRbS9zOHEyYUxqakVTQk9Za3FNU3dI?=
- =?utf-8?B?WHlCdTFXQ01yakczY0Z4TXE1MUo3TURHMEE5bnZiSEtSMmljQk9ZT3p1UE5Y?=
- =?utf-8?B?TjBXYVZ0dHRGU1JxSWlJUzBNbjlEZXkyaHY4Qy9la2NoK3hDd2dXdHZZOFlR?=
- =?utf-8?B?bDltRXQ4MHR4RDQ3Z0doZEljcW1UQUoyNVZCWjQwTm55bHFHZXM3RUFaeThF?=
- =?utf-8?B?WGZaUmptZDQxSEtKekM1c1gyYk4weDdvWUFqaExKZjI2SkxYaWpUb1lPZTF6?=
- =?utf-8?B?N0pHcWRJUlpPTHJ0aTA0bUlBUE80cDhSd0dXMWhGOW1PTGkwSmd0cERNd0gw?=
- =?utf-8?B?NG9UbmJ4NkRlSTk0L3Z3T04yMkpKak1ZL1oyVG9tK2twQUl3UkVxcExtZnBE?=
- =?utf-8?B?QnJPQ3Q0eDlRYnhUK3VqRHRXZllVODY0Sk9xekFQQ1A2bzVaZ3piVlN2dkM0?=
- =?utf-8?B?NUZmeEIxYmxoOGtVbG1OYS9TbVdpSFd6amNJMk9PdnFIdkZ6NWFkd1lVRWhs?=
- =?utf-8?B?VGs3QXlOMmlPOHlYTWJxSEoyZFRUTmJrcGFJU2JLMzI0K21JNVVtK3Y4c0kr?=
- =?utf-8?B?YjhFWGJKbHVCYzNWNHdZNHNmY09xVi96Q3hnZ3Y3Qk1RUmpHcWZBRis4RkVl?=
- =?utf-8?B?bCtBZ0w1aVBaeks5bnlmMkJEUEtxNXpuMWJMbkppV1hkS2ppcEY2bVlEZ0xT?=
- =?utf-8?B?eG9sZWQ5WlBLVzR6SXR2TWFuTUpnVXZ0K3UwNml2WG1NZVpuOTM3YkJqRFdJ?=
- =?utf-8?B?TUlNNVNNSVpEQnNsMlc4UnZ5TWtCdm1BTG9Oc2ZOL0RiRm1TV201WlhUNGM4?=
- =?utf-8?B?N1JpTFpUa1JSNlp3OVRsVG1OcHl0UlViSm03MVZSaWhZU2ZuZzVLMGVuQWY2?=
- =?utf-8?B?MGF4Q2I0NXIxN2kxWGdVZkZ0TUNGM2lkSVN6cmJjOENPMndEOVVmZnoyY0NB?=
- =?utf-8?B?WWt6M0ZCQ1U5RGpvajdORzJXNitxWXlYTFFwSUUxczNVcUkzS01IV2RsR3Rr?=
- =?utf-8?B?WDVKb0lsbDNnNjBqa0c3K2paZ1VtVGI1Z1RLQ2E2Q3FqMGtBNDF5OUYrRUpF?=
- =?utf-8?B?Rmx5M2FhdjY4aWhTVGUvMHI1a1VIblViVTU5NWhZWVF3cDI0WGtsTFJ5cVFo?=
- =?utf-8?B?TDlhTkFzU1ZzemhlbEQwYmxweWE1SzZjc0ZmenR0cTEyQlZRL25rRzNSN1dS?=
- =?utf-8?B?L1VmVzNXcEc2WGtGMk1zRXhLNGUvM3paQ0lkS3VJWk1Ta0J4NzZzT2ZXMXpQ?=
- =?utf-8?B?QlgxZ0tleFpiTWw5ajdvTFRlc0JPSXZxcSsyVjZqbFhXcmZLQVRkV2lxdy9k?=
- =?utf-8?B?Z0NieEh4MW01NVZ1MmJvMEJFU21VM1oxOWJXQS8zYUZiVlE9PQ==?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2024 12:26:41.9290 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4e030e20-f0b5-4ffc-dede-08dcf4f04826
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001AD.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0P195MB0690
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/4] debug_uart: Replace debug functions with dummies
+ if CONFIG_DEBUG_UART is not set
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu
+References: <20240918130155.299353-1-lukasz.czechowski@thaumatec.com>
+ <20240918130155.299353-2-lukasz.czechowski@thaumatec.com>
+ <22ae3879-e266-440c-8f25-2d46a5676261@rock-chips.com>
+ <c72f7799-5748-4602-bfb2-c99ba767a614@cherry.de>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <c72f7799-5748-4602-bfb2-c99ba767a614@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQxkZTVYdTBpKQx4dH04fGU5WFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a92c3a85e8c09d6kunmec47252
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MxA6PSo*GTIpExcXOAoqEB1R
+ IRcaFBlVSlVKTElCQ05CT09OSk5OVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTkhINwY+
+DKIM-Signature: a=rsa-sha256;
+ b=JEll1HXhrXICsLxuoiFWspPw++vDDeftNpBbXTutwQx5P66s8SGVY47zQ9Qab3QCV9FTX3EihjwrreBzr+zLbDS9yv/nhz+2azN6mIBzZ+cPNY3lFTzhFqpCxSuRepsNandCn2HcVtJwdCseW9uYY8UxGVVkgxOa0cBrMLme79E=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=X7q7Y3QgRfO/zEqqunmbi7lW8xULAZoAZGx7T7KvbYk=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,166 +77,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gVGh1LCAyMDI0LTEwLTI0IGF0IDA4OjMyIC0wNzAwLCBUaW0gSGFydmV5IHdyb3RlOgo+IE9u
-IFRodSwgT2N0IDI0LCAyMDI0IGF0IDEyOjA04oCvQU0gWWFubmljIE1vb2cgPHkubW9vZ0BwaHl0
-ZWMuZGU+Cj4gd3JvdGU6Cj4gPiAKPiA+IEFkZCB0ZWUgbm9kZSBpbiBTb0MgdS1ib290IGRldmlj
-ZSB0cmVlcy4gRWFjaCBib2FyZCBhZGRzIHRoZWlyCj4gPiBzcGVjaWZpYwo+ID4gbG9hZCBhbmQg
-ZW50cnkgYWRkcmVzc2VzIGZvciB0aGUgb3AtdGVlIGltYWdlIGluIHRoZSByZXNwZWN0aXZlCj4g
-PiBib2FyZC11LWJvb3QuZHRzaSBmaWxlLgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBZYW5uaWMg
-TW9vZyA8eS5tb29nQHBoeXRlYy5kZT4KPiA+IC0tLQo+ID4gwqBhcmNoL2FybS9kdHMvaW14OG1t
-LXUtYm9vdC5kdHNpIHwgMTUgKysrKysrKysrKysrKystCj4gPiDCoGFyY2gvYXJtL2R0cy9pbXg4
-bW4tdS1ib290LmR0c2kgfCAxNSArKysrKysrKysrKysrKy0KPiA+IMKgYXJjaC9hcm0vZHRzL2lt
-eDhtcC11LWJvb3QuZHRzaSB8IDE1ICsrKysrKysrKysrKysrLQo+ID4gwqAzIGZpbGVzIGNoYW5n
-ZWQsIDQyIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCj4gPiAKPiA+IGRpZmYgLS1naXQg
-YS9hcmNoL2FybS9kdHMvaW14OG1tLXUtYm9vdC5kdHNpIGIvYXJjaC9hcm0vZHRzL2lteDhtbS0K
-PiA+IHUtYm9vdC5kdHNpCj4gPiBpbmRleCBkMzFiYzgyMjUzMi4uZTdhNjgwMGI3NzEgMTAwNjQ0
-Cj4gPiAtLS0gYS9hcmNoL2FybS9kdHMvaW14OG1tLXUtYm9vdC5kdHNpCj4gPiArKysgYi9hcmNo
-L2FybS9kdHMvaW14OG1tLXUtYm9vdC5kdHNpCj4gPiBAQCAtMTY0LDYgKzE2NCwxOSBAQAo+ID4g
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIH07Cj4gPiDCoCNlbmRpZgo+ID4gCj4gPiArwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCB0ZWU6IHRlZSB7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgZGVzY3JpcHRpb24gPSAiT1AtCj4gPiBURUUiOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIHR5cGUgPSAidGVlIjsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCBhcmNoID0gImFybTY0IjsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCBjb21wcmVzc2lvbiA9Cj4gPiAibm9uZSI7Cj4gPiArwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgb3MgPSAidGVlIjsKPiA+ICsKPiA+ICvCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB0ZWUtb3Mgewo+ID4gK8KgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmaWxlbmFtZSA9Cj4gPiAidGVl
-LmJpbiI7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIG9wdGlvbmFsOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IH07Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Owo+ID4gKwo+ID4gwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIGJpbm1hbl9maXA6IGZpcCB7Cj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIGFyY2ggPSAiYXJtNjQiOwo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCBjb21wcmVzc2lvbiA9Cj4gPiAibm9uZSI7Cj4gPiBAQCAtMTkyLDcgKzIwNSw3
-IEBACj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGZkdCA9ICJmZHQt
-U0VRIjsKPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmlybXdhcmUg
-PSAidWJvb3QiOwo+ID4gwqAjaWZuZGVmIENPTkZJR19BUk1WOF9QU0NJCj4gPiAtwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbG9hZGFibGVzID0gImF0ZiI7Cj4gPiArwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbG9hZGFibGVzID0gImF0ZiIsCj4gPiAidGVl
-IjsKPiA+IMKgI2VuZGlmCj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfTsKPiA+IMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH07
-Cj4gPiBkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vZHRzL2lteDhtbi11LWJvb3QuZHRzaSBiL2FyY2gv
-YXJtL2R0cy9pbXg4bW4tCj4gPiB1LWJvb3QuZHRzaQo+ID4gaW5kZXggNjg3NWM2ZDQ0ZmYuLmJj
-Yjg4ZjBhNTA3IDEwMDY0NAo+ID4gLS0tIGEvYXJjaC9hcm0vZHRzL2lteDhtbi11LWJvb3QuZHRz
-aQo+ID4gKysrIGIvYXJjaC9hcm0vZHRzL2lteDhtbi11LWJvb3QuZHRzaQo+ID4gQEAgLTIzNSw2
-ICsyMzUsMTkgQEAKPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Owo+ID4gwqAjZW5kaWYKPiA+
-IAo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdGVlOiB0ZWUgewo+ID4gK8KgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGRlc2NyaXB0aW9uID0gIk9QLQo+ID4gVEVFIjsKPiA+ICvC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB0eXBlID0gInRlZSI7Cj4gPiArwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXJjaCA9ICJhcm02NCI7Cj4gPiArwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgY29tcHJlc3Npb24gPQo+ID4gIm5vbmUi
-Owo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG9zID0gInRlZSI7Cj4g
-PiArCj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdGVlLW9zIHsKPiA+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmls
-ZW5hbWUgPQo+ID4gInRlZS5iaW4iOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBvcHRpb25hbDsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCB9Owo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfTsKPiA+ICsKPiA+
-IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBiaW5tYW5fZmlwOiBmaXAgewo+ID4gwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBhcmNoID0gImFybTY0IjsKPiA+IMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgY29tcHJlc3Npb24gPQo+ID4gIm5vbmUiOwo+ID4g
-QEAgLTI2Myw3ICsyNzYsNyBAQAo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCBmZHQgPSAiZmR0LVNFUSI7Cj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIGZpcm13YXJlID0gInVib290IjsKPiA+IMKgI2lmbmRlZiBDT05GSUdfQVJNVjhfUFND
-SQo+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGxvYWRhYmxlcyA9ICJh
-dGYiOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGxvYWRhYmxlcyA9
-ICJhdGYiLAo+ID4gInRlZSI7Cj4gPiDCoCNlbmRpZgo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IH07Cj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCB9Owo+ID4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9pbXg4bXAtdS1i
-b290LmR0c2kgYi9hcmNoL2FybS9kdHMvaW14OG1wLQo+ID4gdS1ib290LmR0c2kKPiA+IGluZGV4
-IDU2NzQ5Y2NhY2QyLi43YTljNjE2ZmIxYSAxMDA2NDQKPiA+IC0tLSBhL2FyY2gvYXJtL2R0cy9p
-bXg4bXAtdS1ib290LmR0c2kKPiA+ICsrKyBiL2FyY2gvYXJtL2R0cy9pbXg4bXAtdS1ib290LmR0
-c2kKPiA+IEBAIC0xODUsNiArMTg1LDE5IEBACj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfTsK
-PiA+IMKgI2VuZGlmCj4gPiAKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHRlZTogdGVlIHsKPiA+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBkZXNjcmlwdGlvbiA9ICJPUC0K
-PiA+IFRFRSI7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdHlwZSA9
-ICJ0ZWUiOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGFyY2ggPSAi
-YXJtNjQiOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbXByZXNz
-aW9uID0KPiA+ICJub25lIjsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCBvcyA9ICJ0ZWUiOwo+ID4gKwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIHRlZS1vcyB7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIGZpbGVuYW1lID0KPiA+ICJ0ZWUuYmluIjsKPiA+ICvCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgb3B0aW9uYWw7Cj4gPiArwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfTsKPiA+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIH07Cj4gPiArCj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgQGZkdC1TRVEgewo+ID4gwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBkZXNjcmlwdGlvbiA9Cj4gPiAiTkFN
-RSI7Cj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHR5cGUgPSAiZmxh
-dF9kdCI7Cj4gPiBAQCAtMjA0LDcgKzIxNyw3IEBACj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgIGZkdCA9ICJmZHQtU0VRIjsKPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgZmlybXdhcmUgPSAidWJvb3QiOwo+ID4gwqAjaWZuZGVmIENPTkZJ
-R19BUk1WOF9QU0NJCj4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbG9h
-ZGFibGVzID0gImF0ZiI7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-bG9hZGFibGVzID0gImF0ZiIsCj4gPiAidGVlIjsKPiA+IMKgI2VuZGlmCj4gPiDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAgfTsKPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH07Cj4gPiAKPiA+IC0tCj4gPiAyLjQzLjAKPiA+IAoK
-SGkgVGltLAoKPiAKPiBIaSBZYW5uaWMsCj4gCj4gSSd2ZSBhdHRlbXB0ZWQgc29tZXRoaW5nIGxp
-a2UgdGhpcyBpbiB0aGUgcGFzdCBbMV0gYnV0IEkgYWRkZWQgdGhlCj4gbG9hZCBhZGRyZXNzIGFu
-ZCBtYWRlIGl0IGEgS2NvbmZpZy4gSXQgbmV2ZXIgbWFkZSBpdCBpbiBkdWUgdG8KPiBzb21ldGhp
-bmcgaGFwcGVuaW5nIGluIENJIHRoYXQgSSBuZXZlciBoYWQgYSBjaGFuY2UgdG8gZ2V0IGJhY2sg
-dG8uCj4gCj4gV2hhdCBoYXBwZW5zIHdpdGggdGhlIGJpbm1hbiBzdGVwIGlmIHlvdSBkb24ndCBo
-YXZlIGFuIG92ZXJsYXkgdGhhdAo+IHNwZWNpZmllcyBsb2FkL2VudHJ5PwoKYWZhaWsgYmlubWFu
-IGRvZXMgbm90IGhhbmRsZSBzdWNoIGEgY2FzZSwgaS5lLiB0aGVyZSB3aWxsIGJlIG5vCmVudHJ5
-L2xvYWQgcHJvcCBpbiB0aGUgcmVzdWx0aW5nIGJpbmFyeS4gVGhlIHRlZSBub2RlIGl0c2VsZiwg
-aG93ZXZlciwKaXMgcHJlc2VudC4gVGhhdCBpcyB3aHkgc3BsIGNyYXNoZXMgYXQgcnVudGltZTsg
-YmVjYXVzZSBpdCBjYW5ub3QgZmluZAp0aGUgJ2xvYWQnIHN5bWJvbCBmb3IgdGhlIHRlZSBub2Rl
-L2Jsb2IuCgpZYW5uaWMKCj4gCj4gQmVzdCBSZWdhcmRzLAo+IAo+IFRpbQo+IFsxXQo+IGh0dHBz
-Oi8vcGF0Y2h3b3JrLm96bGFicy5vcmcvcHJvamVjdC91Ym9vdC9wYXRjaC8yMDIzMDYyMjE3MzAw
-Ni4zOTIxODkxLTEtdGhhcnZleUBnYXRld29ya3MuY29tLwoK
+Hi Tom,
+
+     This is regression of "#ifdef CONFIG", is it possible for us to go 
+back to use "#ifdef CONFIG" in this case?
+
+Or do you have any other suggestion for this issue?
+
+On 2024/9/30 16:55, Quentin Schulz wrote:
+> Hi Kever,
+>
+> On 9/29/24 3:53 AM, Kever Yang wrote:
+>> Hi Lukasz,
+>>
+>>      I think this will make the error happen like this:
+>>
+>> +common/console.c: In function 'puts':
+>> +common/console.c:746:29: error: unused variable 'ch' 
+>> [-Werror=unused- variable]
+>> +  746 |                         int ch = *s++;
+>> +      |                             ^~
+>> +cc1: all warnings being treated as errors
+>> +make[2]: *** [scripts/Makefile.build:257: common/console.o] Error 1
+>>
+>>
+>> The main reason is that below patch removes "#ifdef":
+>>
+>> c04f856822a console: remove #ifdef CONFIG when it is possible
+>>
+>
+> Can you please always share the link to the pipelines that fail so 
+> people have an idea on how to reproduce it locally?
+>
+> Here I assume it is: 
+> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/22455
+>
+> A simple way is to apply the patches, build the pine64-lts for example 
+> and then you'll see warnings (which aren't failing builds locally I 
+> believe but in CI, yes).
+>
+> I think we can fool the compiler with the following:
+>
+> diff --git a/include/debug_uart.h b/include/debug_uart.h
+> index dc0f1aa4c98..b19e44d6d0f 100644
+> --- a/include/debug_uart.h
+> +++ b/include/debug_uart.h
+> @@ -204,12 +204,12 @@ void printdec(unsigned int value);
+>  #define DEBUG_UART_FUNCS \
+>      #warning "DEBUG_UART not defined!"
+>
+> -#define printch(ch) do{}while(0);
+> -#define printascii(str) do{}while(0);
+> -#define printhex2(value) do{}while(0);
+> -#define printhex4(value) do{}while(0);
+> -#define printhex8(value) do{}while(0);
+> -#define printdec(value) do{}while(0);
+> +#define printch(ch) do{ (void)(ch); }while(0);
+> +#define printascii(str) do{ (void)(str); }while(0);
+> +#define printhex2(value) do{ (void)(value); }while(0);
+> +#define printhex4(value) do{ (void)(value); }while(0);
+> +#define printhex8(value) do{ (void)(value); }while(0);
+> +#define printdec(value) do{ (void)(value); }while(0);
+>
+>  #endif
+>
+> Does this make sense?
+
+Hi Quentin,
+
+     Thanks for your information about pipeline and suggestion for code 
+change, but this workaround does not looks good :(
+
+
+Thanks,
+
+- Kever
+
+>
+> Cheers,
+> Quentin
