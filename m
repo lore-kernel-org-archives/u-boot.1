@@ -4,27 +4,27 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27A30D149EB
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 20:15:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B6F8D149EE
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 20:15:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 367E289060;
+	by phobos.denx.de (Postfix) with ESMTP id 971BC8906D;
 	Fri, 25 Oct 2024 22:14:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E72488F68; Fri, 25 Oct 2024 19:18:49 +0200 (CEST)
+ id 46D4F89030; Fri, 25 Oct 2024 19:18:56 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 8ED3E88FBA
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 19:18:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 48C6588FBA
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 19:18:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=leo.yan@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B5804497;
- Fri, 25 Oct 2024 10:19:16 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6FA8B143D;
+ Fri, 25 Oct 2024 10:19:15 -0700 (PDT)
 Received: from e132581.cambridge.arm.com (e132581.arm.com [10.2.76.71])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id EDFD33F71E;
- Fri, 25 Oct 2024 10:18:45 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 9D75B3F71E;
+ Fri, 25 Oct 2024 10:18:44 -0700 (PDT)
 From: Leo Yan <leo.yan@arm.com>
 To: Tom Rini <trini@konsulko.com>, Usama Arif <usama.arif@arm.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
@@ -32,9 +32,10 @@ To: Tom Rini <trini@konsulko.com>, Usama Arif <usama.arif@arm.com>,
  Boyan Karatotev <boyan.karatotev@arm.com>,
  Jackson Cooper-Driver <jackson.cooper-driver@arm.com>, u-boot@lists.denx.de
 Cc: Leo Yan <leo.yan@arm.com>
-Subject: [PATCH v1 6/8] arm: total_compute: Dynamically detect block device
-Date: Fri, 25 Oct 2024 18:18:19 +0100
-Message-Id: <20241025171821.624702-7-leo.yan@arm.com>
+Subject: [PATCH v1 5/8] arm: total_compute: Minor improvement for boot
+ arguments
+Date: Fri, 25 Oct 2024 18:18:18 +0100
+Message-Id: <20241025171821.624702-6-leo.yan@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241025171821.624702-1-leo.yan@arm.com>
 References: <20241025171821.624702-1-leo.yan@arm.com>
@@ -57,54 +58,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dynamically detect block device in the boot command, this allows to
-support both MMC and virtio block devices.
+From: Boyan Karatotev <boyan.karatotev@arm.com>
 
+Tell the AVB command that is loading from MMC.
+
+Signed-off-by: Boyan Karatotev <boyan.karatotev@arm.com>
 Signed-off-by: Leo Yan <leo.yan@arm.com>
 ---
- board/armltd/total_compute/total_compute.env | 21 +++++++++++++-------
- 1 file changed, 14 insertions(+), 7 deletions(-)
+ board/armltd/total_compute/total_compute.env | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/board/armltd/total_compute/total_compute.env b/board/armltd/total_compute/total_compute.env
-index 9dd50819ea..93460aa5dc 100644
+index 8975a86fd2..9dd50819ea 100644
 --- a/board/armltd/total_compute/total_compute.env
 +++ b/board/armltd/total_compute/total_compute.env
-@@ -4,21 +4,28 @@ load_addr=0xa0000000
- initrd_addr_r=0x88000000
- 
- bootcmd=
--    if part number mmc 0 vbmeta is_avb; then
--        echo 'MMC with vbmeta partition detected.';
-+    virtio scan;
-+    if virtio info; then
-+        blk_dev=virtio;
-+    else;
-+        blk_dev=mmc;
-+    fi;
-+    echo block device is ${blk_dev};
-+    if part number ${blk_dev} 0 vbmeta is_avb; then
-+        echo '${blk_dev} with vbmeta partition detected.';
+@@ -7,7 +7,7 @@ bootcmd=
+     if part number mmc 0 vbmeta is_avb; then
+         echo 'MMC with vbmeta partition detected.';
          echo 'Starting Android Verified boot...';
--        avb init mmc 0;
-+        avb init ${blk_dev} 0;
+-        avb init 0;
++        avb init mmc 0;
          if avb verify; then
              set bootargs $bootargs $avb_bootargs;
--            part start mmc 0 boot boot_start;
--            part size mmc 0 boot boot_size;
--            mmc read ${load_addr} ${boot_start} ${boot_size};
-+            part start ${blk_dev} 0 boot boot_start;
-+            part size ${blk_dev} 0 boot boot_size;
-+            ${blk_dev} read ${load_addr} ${boot_start} ${boot_size};
-             bootm ${load_addr} ${load_addr} ${fdt_addr_r};
-         else;
-             echo 'AVB verification failed.';
-             exit;
-         fi;
--    elif part number mmc 0 system is_non_avb_android; then
-+    elif part number ${blk_dev} 0 system is_non_avb_android; then
-         echo 'Booting Android non-AVB...';
-         booti ${kernel_addr_r} ${initrd_addr_r} ${fdt_addr_r};
-     elif iminfo ${load_addr}; then
+             part start mmc 0 boot boot_start;
 -- 
 2.34.1
 
