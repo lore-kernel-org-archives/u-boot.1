@@ -4,80 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5982DD0C61F
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 15:10:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BE85D0BB56
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 15:10:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF81588FE4;
-	Fri, 25 Oct 2024 17:09:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2FEE589030;
+	Fri, 25 Oct 2024 17:10:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bnT04aIK";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5895088FBF; Fri, 25 Oct 2024 17:09:58 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1729869026;
+	bh=ndzeqRyiX7Rslx1SxtxTCmbFPOqL3fa7upeL+zW3BLI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=OWxeVEeDO/dzzUVxQRbtgLxe5P0RDPsBt1OoJduHgwe53nfBfTNlkkJO2rnfouxfW
+	 tiFZtMw+kfe8wn4ohMcnj8FlP0XH87ooyIRxAjvpTd9hCJkEktncrkPoM+nv+ZftLi
+	 iuyFtJ7Cp59qFeqUSvvqleta+HnEn5qVxEYgqEr0AG3EH+uKBZkmUAAr7RL4tixVDL
+	 4TT+bQCy8+thvaediaQU7gtG6gs0sDPRWy4D0EbgZIaE3OKIVJtit3krLwfS1zPmb+
+	 /PCVCORbqrs598+Q3wUsMn1iL/3Rfu3evimcId775ByI80hG0QCte3fIxIjSM3A427
+	 ochCxe3tehnEA==
+Received: from [127.0.0.1] (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 712BB88B23
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 17:09:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2fb5740a03bso23073581fa.1
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 08:09:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729868996; x=1730473796; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hUjqwRTRTw/U+nfHBcDkiMZ08jdJ1F5hEYX5ew9jRi8=;
- b=bnT04aIKe/cQS1bUkCjWGZUbJ1tFFZ6tVky7YbPNNxGbNI+qZ9iYfkx/ee+Ujm/Bl+
- jPeMSaG+96cr4LtxMstzHq5SmqJmeOGg817brOjnhXlfz5rD63dRVd7evtQieq5ZQ8BZ
- QhGQUVwUAEr4gkhhZOt5xuUrzy57bxyDEQ7OhsBdn98V9deprUYThBKf4Xm3MgxW10Rd
- ApEmMBjlUjhkI1ZlNvHbKD0Q5IojGNQNU4h1IRyWOPhVeRQYDcM2j8qTK4H58gqei1D6
- b3/IcCi4bozb3BFY++/gLMWDpzSaEJW85DBortxLqVcj7R6jeGm8REKH5kf0WieN/w5f
- sm+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729868996; x=1730473796;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hUjqwRTRTw/U+nfHBcDkiMZ08jdJ1F5hEYX5ew9jRi8=;
- b=HIpZcNwjX8lBXOqr+7NGmuFP1pL8xfRiiDNXWSXX3auI+xd3Yv5Bryoc9xFdOSK2nd
- oPlLEY3n5U9PWQV4DLgX0MXJqcGPb/uaPYq0yS8m+manAixpSP2gona6H5NsfdRU+Wg9
- jTDHKhhvGJ8AV5Sz4MOiiaLXpTiktI2cKMaCOP307Kq/Vzl9AbTiYf432Iqhl9gzclam
- QMRulP5ZddHOEOFT2kBI8FT7+lZK2cy/Ghk8KPmMmPKGjBEouR0k2xWfSZfjWpr9xaAj
- Zw/3MGDp/y23Z05Jpnop1hm73atJzOa/gX5Q6itkTSmILkojWXbmBIjwv97Juxf+z0k+
- qg1g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVN8xcFvNueCUxDOxBRK0eHSNI9rVrR994s3Vt0Yd1iKFdBac4X7IwJ+jOwxb8zeIc7458Rskg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyu9+lrXnKUgce66sw0ZSPCW+XkCuI0lw6of0+H+hRH6GqrDam7
- U+Fv4JM4089C1UK0+H2YSIy7dAla1Ig3LlAs5IGJMvMFANeaulF4TmneMRFi+pRKb17t/3Cz7Z2
- 8mebP1nSN5heCuEJLCIZFtKVcrYMgWg==
-X-Google-Smtp-Source: AGHT+IF9DuOITTW7z+xtxQsCAAzzywDF94KOeJvKNw3eP/NDc2qomQ3/tfxNaBM4AB+bWBmtWOpsUKjPky4pshwRlx4=
-X-Received: by 2002:a05:651c:1546:b0:2fa:c0fc:e3d8 with SMTP id
- 38308e7fff4ca-2fc9d60a0f9mr56167481fa.38.1729868995423; Fri, 25 Oct 2024
- 08:09:55 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id D2DAE8902D;
+ Fri, 25 Oct 2024 17:10:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1729869025;
+ bh=ndzeqRyiX7Rslx1SxtxTCmbFPOqL3fa7upeL+zW3BLI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=RxJ2+g1RwjkTY4LLcJPQyCSwJgwi26ARnMOTPQ6t2jp4GMM5xsiH1hcC6p9b0fvVc
+ 8evF5QQgZotpJSE8dLyz/KfSkw6lYReSFebN9Tir5OjCrpuIOnFj4Yk0b2rOnHTPTA
+ iSa1D58LpaLRG6Sfwdo4FNCTEN2yXocLihb5cqubFVNEgYIyK5GOaYgMcMUjikWTfK
+ paIeazwv/Z7aDuhpyp2rCfO8DAIN5qLeVLgWUWywoKK536zOfAKOQdRG5YjDtXzSgF
+ FUSni12wGHKZ72HpK+XXX/bnXlpRf1zbmkCGPhjok0pDBbvycjuuiMkwlxZ//VkvAU
+ OMbpQncgyxhWw==
+Message-ID: <e2d45889-33b1-438e-8872-f03a4c050c18@denx.de>
+Date: Fri, 25 Oct 2024 17:09:15 +0200
 MIME-Version: 1.0
-References: <20241024122735.893319-1-ravi@prevas.dk>
- <3606fb53-c36e-93c7-6ff9-9947ae43c408@denx.de>
- <CAOMZO5Aae_0cDXX-E9syhVPwMF7_NVu2__40m6Tmi7daePyVbg@mail.gmail.com>
-In-Reply-To: <CAOMZO5Aae_0cDXX-E9syhVPwMF7_NVu2__40m6Tmi7daePyVbg@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 25 Oct 2024 12:09:44 -0300
-Message-ID: <CAOMZO5DNQ6cKyNqsQaU8CE-FwoOQdgaf99S8dQ4_FE9XZDvmCw@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] imx: hab: fix size of IVT+CSF blob tacked on to u-boot.itb
-To: hs@denx.de
-Cc: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@denx.de>,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.denx.de, Heiko Schocher <hs@denx.de>,
+ Fabio Estevam <festevam@denx.de>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>
+References: <20241024122735.893319-1-ravi@prevas.dk>
+ <3fa7049d-4657-4cae-9ccf-fac1c62ce529@denx.de> <87o738psig.fsf@prevas.dk>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <87o738psig.fsf@prevas.dk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,15 +71,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Oct 25, 2024 at 11:51=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
- wrote:
+On 10/25/24 9:10 AM, Rasmus Villemoes wrote:
+> On Thu, Oct 24 2024, Marek Vasut <marex@denx.de> wrote:
+> 
+>> On 10/24/24 2:27 PM, Rasmus Villemoes wrote:
+>>> Loading flash.bin using uuu fails when flash.bin does not have the
+>>> right size.
+>>> When flash.bin is loaded from some storage medium (sd card/emmc),
+>>> SPL
+>>> just loads some random garbage bytes from beyond what has been
+>>> populated when flash.bin was written, but when loaded via uuu, SPL
+>>> hangs waiting for the host to send the expected number of bytes. Which
+>>> is (size of FIT image aligned to 0x1000)+CONFIG_CSF_SIZE. The
+>>> alignment to 0x1000 is already done and is necessary in all cases
+>>> because that's the exact expected location of the 32 byte IVT
+>>> header. But the IVT+CSF blob tacked onto the end must be a total of
+>>> CONFIG_CSF_SIZE.
+>>> This is exactly the same fix as 89f19f45d650, except that this time
+>>> around I don't know how to cleanly get CONFIG_CSF_SIZE.
+>>> Fixes: bc6beae7c55f (binman: Add nxp_imx8mcst etype for i.MX8M
+>>> flash.bin signing)
+>>> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+>>> ---
+>>> Heiko, can you check if this works for you?
+>>> And if somebody wants to pick this up and knows how to get at
+>>> CONFIG_
+>>> values, feel free to fix up and take authorship. But perhaps it's not
+>>> really configurable at all; imx8mimage.c has the value 0x2000
+>>> hard-coded, so I don't think anything good could ever come from
+>>> modifying CONFIG_CSF_SIZE. If so, the right fix is probably just to
+>>> make that knob non-settable.
+>>>    tools/binman/etype/nxp_imx8mcst.py | 2 ++
+>>>    1 file changed, 2 insertions(+)
+>>> diff --git a/tools/binman/etype/nxp_imx8mcst.py
+>>> b/tools/binman/etype/nxp_imx8mcst.py
+>>> index 8221517b0c4..9a1974cc522 100644
+>>> --- a/tools/binman/etype/nxp_imx8mcst.py
+>>> +++ b/tools/binman/etype/nxp_imx8mcst.py
+>>> @@ -137,6 +137,8 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+>>>            args = ['-i', cfg_fname, '-o', output_fname]
+>>>            if self.cst.run_cmd(*args) is not None:
+>>>                outdata = tools.read_file(output_fname)
+>>> +            # fixme: 0x2000 should be CONFIG_CSF_SIZE
+>>> +            outdata += tools.get_bytes(0, 0x2000 - 0x20 - len(outdata))
+>>>                return data + outdata
+>>>            else:
+>>>                # Bintool is missing; just use the input data as the output
+>>
+>> I have to admit, I never really figured out this binman stuff, but
+>> shouldn't the fix be also in tools/binman/etype/nxp_imx8mimage.py ?
+> 
+> No, why? That logic is all about generating the imx-specific header in
+> front of SPL.bin, there's no CSF being generated.
 
-> > > Heiko, can you check if this works for you?
-> >
-> > Works fine for me, thanks!
->
-> Applied, thanks.
+This patch is modifying tools/binman/etype/nxp_imx8mcst.py which is the 
+Code-Signing-Tool binman etype, the thing used for generating SIGNED 
+images during HAB use.
 
-Sorry, applied it too soon. I see there is an ongoing discussion.
+Shouldn't this patch modify tools/binman/etype/nxp_imx8mimage.py which 
+is the etype used when generating flash.bin itself ?
 
-I will wait for more time.
+My understanding was that the problem Heiko reported was alignment of 
+flash.bin , independently of it being signed or not ?
+
+> Or maybe mkimage tacks
+> on some dummy bytes, but then that's explicitly ignored by the signing
+> step, I think that's what the
+> 
+>              signbase -= 0x40
+>              signsize = struct.unpack('<I', data[24:28])[0] - signbase
+>              # Remove mkimage generated padding from the end of data
+>              data = data[:signsize]
+> 
+> is about, so the signing step generates a new IVT and a new (real) CSF
+> for the SPL. And none of that matters for the size of the final
+> flash.bin, because the FIT image is located far ahead at a fixed 0x58000
+> position.
+> 
+>> And ... shouldn't it somehow use SetImagePos() ?
+> 
+> Again, why? I'm padding a blob (in this case the CSF data) to a required
+> size before tacking it on. Exactly as the existing code does
+> 
+>              # Align fitImage to 4k
+>              signsize = tools.align(len(data), 0x1000)
+>              data += tools.get_bytes(0, signsize - len(data))
+> 
+> before writing out the (padded FIT image + 32 byte IVT) for cst to chew
+> on and generate the CSF data.
+> 
+> This is all about ensuring that the FIT+IVT+CSF blob has (exactly) the size
+> computed by board_spl_fit_size_align, which is
+> 
+>          size = ALIGN(size, 0x1000);
+>          size += CONFIG_CSF_SIZE;
+> 
+> The 0x1000 part is done in the existing code, I'm just making sure that
+> the data we append after that is exactly CONFIG_CSF_SIZE. The CSF blob
+> itself is what is originally in outdata, and because the IVT must be
+> included in the data which is signed, the IVT has already been appended
+> after the 0x1000 padded FIT image; that's why the computation of the
+> extra bytes ends up being a little complicated. [If we just appended a
+> full CONFIG_CSF_SIZE bytes, the board would boot, but then uuu would be
+> hanging while waiting to deliver the remaining part of the file, so the
+> size should match exactly.]
+> 
+> I also don't grok the binman stuff, but there's really no separate image
+> to set a "position" for, the csf blob (or ivt+csf blob) is not
+> represented as its own image in the binman description.
+It is probably best to let Simon comment on this.
