@@ -4,62 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C66FD0C606
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:40:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66B1FD0C614
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 14:13:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA12E8906D;
-	Fri, 25 Oct 2024 14:40:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 8517D88FC5;
+	Fri, 25 Oct 2024 16:13:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="XepechRd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P131+jqU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36D7B89082; Fri, 25 Oct 2024 14:40:43 +0200 (CEST)
-Received: from mail-m3295.qiye.163.com (mail-m3295.qiye.163.com
- [220.197.32.95])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4344D88FC8; Fri, 25 Oct 2024 16:13:33 +0200 (CEST)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61DDD89068
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:40:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 301F188C3D
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 16:13:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id ec474b2;
- Fri, 25 Oct 2024 20:40:32 +0800 (GMT+08:00)
-Message-ID: <b1ceeadf-7f35-4128-88a1-ffdcef2b031b@rock-chips.com>
-Date: Fri, 25 Oct 2024 20:40:32 +0800
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-460c2418e37so13635021cf.0
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 07:13:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729865603; x=1730470403; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NNcMYVGbsYSPVU7t+saj9LkNYEzvrutiarLDprjvUYQ=;
+ b=P131+jqUxlDWJ7d7yojPmsXjWbTlvNxWU36ue0DVXbdglOwy4n/hvs7EPBGFniDEsp
+ SSTCj9EOTULFe5l7p17ebc32tFNVRyb0Nh0NzX73H6i2thNmwaUi+RJcCODH/Rqp7rj3
+ bbKUdbP3EWgIbRuhkbyNER7SP+IexF8uaH70I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729865603; x=1730470403;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NNcMYVGbsYSPVU7t+saj9LkNYEzvrutiarLDprjvUYQ=;
+ b=r5ZHC7EwQc4W7lu4K/+7mklORGZQIKROyUgbLtgZOJ6aEFnQC7js5r0OYgRpz/blID
+ KJr5M40yM1vn3+QmJH1FU6pfLTfOjXdiZKXB2iflM3kGkWw4tcRvzfEwc81+qWIu/0mk
+ s5vURQNa5HXXlaj5T5Q+vJwtKaILfa/0bBLjNZdgvMMFGx/csHbiaXiCDU5ZKe6pR86X
+ ydiJmMwaKnsc4CYis/amX1SIR7wBuZepy4J/lb5GooxIRn0m/yIZtN1/y2HTjGh7ggyo
+ oBvhK0Gc7y0Z9afERjdICo9rDQhCAWUYWTZry/Rfqew7WGD1GEjxgGM7gSppOIt7YoSX
+ 8Stg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVhB9BpxlzFPFvtFvMExAnycErE4Md5/3Kz6NguCkN6ITeKBA5BnHHDyGwILPWjDQxujYDf/FM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzmlNXU5OgALb0OagsiErmt0JteC5F+DsBWAEScn721h6tXDe89
+ 5dIkFqam9FFB0RkRNx4Az674to2kSpTZ9YWaH2W8GuEAT3wbNeyMWWyCfEghL/4=
+X-Google-Smtp-Source: AGHT+IEKQaKcej7P+ZZAHyBpLNNrQmn7yzK8gmHUwV4kzJY2cNM/LhbqZmHhpUVEpZfKV5GE2tiMEg==
+X-Received: by 2002:ac8:5789:0:b0:461:1c54:5bcd with SMTP id
+ d75a77b69052e-4611c546a48mr103153171cf.13.1729865601507; 
+ Fri, 25 Oct 2024 07:13:21 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46132142c4asm6351851cf.32.2024.10.25.07.13.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Oct 2024 07:13:20 -0700 (PDT)
+Date: Fri, 25 Oct 2024 08:13:17 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
+ u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu
+Subject: Re: [PATCH v3 1/4] debug_uart: Replace debug functions with dummies
+ if CONFIG_DEBUG_UART is not set
+Message-ID: <20241025141317.GY4959@bill-the-cat>
+References: <20240918130155.299353-1-lukasz.czechowski@thaumatec.com>
+ <20240918130155.299353-2-lukasz.czechowski@thaumatec.com>
+ <22ae3879-e266-440c-8f25-2d46a5676261@rock-chips.com>
+ <c72f7799-5748-4602-bfb2-c99ba767a614@cherry.de>
+ <076ad029-7788-4f2f-b3fe-58e61fa8cf51@rock-chips.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/8] arm64: dts: rockchip: add NanoPC-T6 LTS
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>,
- Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, u-boot@lists.denx.de, 
- Heiko Stuebner <heiko@sntech.de>
-References: <20241017200039.1235524-1-jonas@kwiboo.se>
- <20241017200039.1235524-4-jonas@kwiboo.se>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241017200039.1235524-4-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkgaGVYZGEoeHR9PGB5OSB1WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a92c3b1598409d6kunmec474b2
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NC46Pgw5NDIsCxcrATo8LzEx
- DUMKCzxVSlVKTElCQ01LS0hPS0tOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJQ0xPNwY+
-DKIM-Signature: a=rsa-sha256;
- b=XepechRdqerzVpXJpdVm7e1VSAIhUWQ0VID9fEhEbaRdcPQhMSHo6JL0IHZAOeUHlC1EmZDwgs9MZWhTiuXH/imCVHuylMuW6LYme06SrjXzaKXhX6Ii9wtHhSwxuxzC62bUqFMQaPgM7vH0CYweRFcSvznSjR0oduD6zBLDEIc=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=DXfQ1itzV1V1erCo308UvowGg7qDcG4Ptcjst8l70ho=;
- h=date:mime-version:subject:message-id:from;
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="MODP8duxw+AzTBDl"
+Content-Disposition: inline
+In-Reply-To: <076ad029-7788-4f2f-b3fe-58e61fa8cf51@rock-chips.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,100 +98,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/10/18 04:00, Jonas Karlman wrote:
-> From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
->
-> In the LTS (2310) version the miniPCIe slot got removed and USB 2.0
-> setup has changed. There are two external accessible ports and two ports
-> on the internal header.
->
-> There is an on-board USB hub which provides:
-> - one external connector (bottom one)
-> - two internal ports on pin header
-> - one port for m.2 E connector
->
-> The top USB 2.0 connector comes directly from the SoC.
->
-> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-> Link: https://lore.kernel.org/r/20240829-friendlyelec-nanopc-t6-lts-v6-4-edff247e8c02@linaro.org
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
->
-> [ upstream commit: db1dcbe5f752d423421f77d54d246398b196f670 ]
->
-> (cherry picked from commit f4a834fbc8cdb40fddd63d083e8d1c6189ba62dc)
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+--MODP8duxw+AzTBDl
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks,
-- Kever
-> ---
->   .../arm64/rockchip/rk3588-nanopc-t6-lts.dts   | 60 +++++++++++++++++++
->   1 file changed, 60 insertions(+)
->   create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6-lts.dts
->
-> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6-lts.dts b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6-lts.dts
-> new file mode 100644
-> index 000000000000..2d92bbb4027d
-> --- /dev/null
-> +++ b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6-lts.dts
-> @@ -0,0 +1,60 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Copyright (c) 2021 Rockchip Electronics Co., Ltd.
-> + * Copyright (c) 2023 Thomas McKahan
-> + * Copyright (c) 2024 Linaro Ltd.
-> + *
-> + */
-> +
-> +/dts-v1/;
-> +
-> +#include "rk3588-nanopc-t6.dtsi"
-> +
-> +/ {
-> +	model = "FriendlyElec NanoPC-T6 LTS";
-> +	compatible = "friendlyarm,nanopc-t6-lts", "rockchip,rk3588";
-> +
-> +	/* provide power for on-board USB 2.0 hub */
-> +	vcc5v0_usb20_host: vcc5v0-usb20-host-regulator {
-> +		compatible = "regulator-fixed";
-> +		enable-active-high;
-> +		gpio = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-0 = <&usb20_host_pwren>;
-> +		pinctrl-names = "default";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-max-microvolt = <5000000>;
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-name = "vcc5v0_usb20_host";
-> +		vin-supply = <&vcc5v0_sys>;
-> +	};
-> +};
-> +
-> +&pinctrl {
-> +	usb {
-> +		usb20_host_pwren: usb20-host-pwren {
-> +			rockchip,pins = <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +};
-> +
-> +&u2phy1 {
-> +	status = "okay";
-> +};
-> +
-> +&u2phy1_otg {
-> +	status = "okay";
-> +};
-> +
-> +&u2phy2_host {
-> +	phy-supply = <&vcc5v0_usb20_host>;
-> +};
-> +
-> +&usbdp_phy1 {
-> +	status = "okay";
-> +};
-> +
-> +&usb_host1_xhci {
-> +	dr_mode = "host";
-> +	status = "okay";
-> +};
+On Fri, Oct 25, 2024 at 08:30:44PM +0800, Kever Yang wrote:
+
+> Hi Tom,
+>=20
+> =A0=A0=A0 This is regression of "#ifdef CONFIG", is it possible for us to=
+ go back
+> to use "#ifdef CONFIG" in this case?
+
+Yes, that's fine, thanks.
+
+--=20
+Tom
+
+--MODP8duxw+AzTBDl
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcbp3kACgkQFHw5/5Y0
+tyzcgQv9FFCwK2GvpMMSFspzuoyCpQVKQPGUdtQYHcyIHi2U6LYf3Ox4oWLXwBaC
+99Ba4NZGwulHENmNkFMkL/h8DZShhBRrLoSViaPmM833lKIkX2C830R7fltxyHLi
+N+RU0HdjIqrmxldANkWcpFOAcBjlbC9EDDnc6vAdnVDXsXa8Ek1lk623odCi4lmc
+8ho8gBs1Y2SG19K3sRfYNyIGbIJi0osC5NEPWHKlyc5O/KCUxxkpFwHevCRjQfQR
+5IZrOP0xBVR0dw/Iw5dsios1fGcUtjecPtQRKczn6a+aM5Az/iDPP3VHEbW7l22N
+Z+HbEQRadNOBj9utNymMSMG3b8fmLedEjtMEkag+FGdgHJzX1MTKwJTocsqFOfpO
+ris6IjPbckoLvSmOwbs8KiaaWJBWXWrC5m0XqsOE6CSuo2uO9TZwFnW4ludxxCoh
+UVhz/XzZ+CH/pFoTDjbG+B/XoF1aN9+Ab2xYbwiqEg7cZMqhBUZsjecGJPFCBJry
+uhFo5oXG
+=o1ZD
+-----END PGP SIGNATURE-----
+
+--MODP8duxw+AzTBDl--
