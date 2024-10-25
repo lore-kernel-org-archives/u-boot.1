@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71E1ED0C5EB
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 08:49:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D421DD0C5F8
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 09:49:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A631D88E88;
-	Fri, 25 Oct 2024 10:49:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id BE7BD88F47;
+	Fri, 25 Oct 2024 11:49:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="N0jUrME+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CanrcNFR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3557688E88; Fri, 25 Oct 2024 10:49:16 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id C7FB788F47; Fri, 25 Oct 2024 11:49:46 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5375288B8F
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 10:49:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 638B188DB7
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 11:49:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4315c1c7392so18413565e9.1
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 01:49:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-7ea8de14848so1020619a12.2
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 02:49:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729846146; x=1730450946;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to;
- bh=l8KMpy6Y5zY5O0CCXsdW7JoP6onGwsJs2ORSQGLos8M=;
- b=N0jUrME+rxBf2896Urc9UBjEAABgqL4vTbznycndeAog39Q6ZbBUeV2HefKqypQKSC
- V4vdNXhkQS1zcmtc2Z+9v606kR1lQUP8/5ZmtHe/JCQ/rDcXShNg/IBr7Dgg6/xRXRN4
- opLHKgIxVqg9/IZrUE8dqAYnvQogz5rMs5iNLA7jElP/ApaW3YJOVPiufU+0F1MvSygo
- E1Rkexbk4O74onb/1qIaqPyK/oRC8QLDt0vidPoXow7//Ihqv+oP1/6T+26cLHQhC0Rt
- vtWQaL7oIpSdtNPLMreIujlZVi1JkWXEn7F27WMs9fvpOfrXZQNO82aOAD5PBN9N6Ty7
- rWyg==
+ d=linaro.org; s=google; t=1729849775; x=1730454575; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VMnM2uHbdRzRZdjjqvzWkEdn+H13APIMWwFwuY+coPM=;
+ b=CanrcNFRDC1WThMMCXY7+e4aB+wHc4aeRxFAuXTjgYspWwJhLBUPyixeNBeX/3aYw4
+ wdzJyhWgfV1E14a8v/NJag8uwPpIloRJGKDKqE4pRq1k4m+aRcgbokAyHJX8vXHoFy+7
+ ZdNvEEdNd8OxzxDlWsxQJdRp4zzNZ1T+vzAb9EHLz0v33n0xlDfExqxYalexBFREnZnP
+ KKGk1nPCRaKIGgraLHygCLtJuUbdzxHbxu50cBqFiVJmdjWCzRAiWyTjLdm94AjwSG+O
+ tj1mtuAvCtLxKrDYyHWnRLT3kqbBIG2YicEF3r1FAhK5brnKkZEVOAPS7wrFtvDs3fd1
+ 6iUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729846146; x=1730450946;
- h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=l8KMpy6Y5zY5O0CCXsdW7JoP6onGwsJs2ORSQGLos8M=;
- b=VJOWd07Tsm+6ZxCMMdCFXAoNKaDzyJzsZV+SjizgoL0t/MzjoFx4wIAefG3ccK/9m0
- RFQNMhlpbUxvP32+dHwpV8KoJ9eymHaKzc5SFepBDiKBkUjnRvrEg2jhR3P+gU2Ve/US
- e6Na2Zjn8oh/pv7DGwHfxeNAlhw9s8JmSt/xHkBiYUdd1ZoLRNe1MNgyWgcIEIuP3My/
- 57Q7xdhVoiYaGuUTLRXEe58zJD1quhKK9Li6oy4wqReah14HkwZ1bcsHkrbqGx45MxZ6
- hECb2MwnEPC/b3OscL0gvPrwdcjG2ahRVw9RAepkFtI/vD/WWAhCO0K/IeNiu/qkZBC+
- 9/1w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV1z/kYi7Q08hXYc7erWYriS8WahS1/VF6/TyRvS2yKnTEsW275V7GrMopUI/19GqqbT9lmsbk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwmtyqBMUDfURmiuthVw4lC0VlLVAR/CiWmJi1OMgtpyUNFBpJ0
- xTALAWVypnjQCxp6/bnhYil2QbVMsRo9ZpuB2VD9ccv0FgViQr2hbSSxB5CcgxRqBdBFz1Qn2Dj
- D
-X-Google-Smtp-Source: AGHT+IF0FdTEIOeNBxgy6R44f1tj//juTm//XAqx66rFP4WJ3qq3ZSAFvBuGRJWNxx1RmveE15Up2A==
-X-Received: by 2002:a05:600c:3496:b0:431:4b88:d408 with SMTP id
- 5b1f17b1804b1-431841ee388mr77214465e9.5.1729846145798; 
- Fri, 25 Oct 2024 01:49:05 -0700 (PDT)
-Received: from localhost (lfbn-tou-1-402-59.w86-206.abo.wanadoo.fr.
- [86.206.229.59]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43193595470sm11453465e9.15.2024.10.25.01.49.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Oct 2024 01:49:05 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Neil Armstrong
- <neil.armstrong@linaro.org>, Dmitry Rokosov <ddrokosov@salutedevices.com>
-Subject: [GIT PULL] Please pull u-boot-dfu-20241025
-Date: Fri, 25 Oct 2024 10:49:02 +0200
-Message-ID: <87frokva81.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1729849775; x=1730454575;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VMnM2uHbdRzRZdjjqvzWkEdn+H13APIMWwFwuY+coPM=;
+ b=JVuAk7tiViAqU3dCpZ0KWtR0UU+aypLJfpj4DvayK14n4kYIVpq/2+gJ1MfUxod1d6
+ OZdvefbPPJepQhYCGw1KbkPgjwgOVnap3D1s9kpsUcO7p43DIP26QU+pU/ze0SG0Vy0N
+ 4EwHMd9LedEj7iwWhE6LJyxt4Pk2zZddh4KeTre9OxC0OZRb+bBXOnF6E/rMFhtwuvVu
+ VP0Qq5wEw6G7lIPL4XSSBv/xrfA5yV+n73/7DT2XEi+EhV4MwCDORu91UecgZmToNSGt
+ P5RMIlxHBc3QPxUPltwtHUm9qJBFGhT6PFGlq2HEGKwz4Zm1lr0lVRclvWDqeAAIW2zv
+ QV9g==
+X-Gm-Message-State: AOJu0YysU7W9hhk5KlTdlibTRthOXWYwNJLxp3+9VMiPAWIBdTKNt9de
+ 6K1DAnIBIJhRdA/7mspMMbRPHaaUaNwEf1xIrpm93D4bBA+FJ6czwdyjt4p2SGW40RfimWvv9Sv
+ /UvNhi6ozkptMF2aElF23EyANaIpEI2caizCgjQ==
+X-Google-Smtp-Source: AGHT+IHZMgK9VXgv/sPP1uAfaPMEMpJPtdazaNZMBJXSwnIb69X9onf9wQW7i9MN78yNktPOjXk0lk6GyeSP5Zmqdjo=
+X-Received: by 2002:a05:6a20:9f43:b0:1d9:275b:4ee1 with SMTP id
+ adf61e73a8af0-1d978b3db08mr11344252637.24.1729849774744; Fri, 25 Oct 2024
+ 02:49:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20241022120032.196311-1-sjg@chromium.org>
+ <20241022120032.196311-3-sjg@chromium.org>
+In-Reply-To: <20241022120032.196311-3-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 25 Oct 2024 12:48:58 +0300
+Message-ID: <CAC_iWjJYqrh6MS50d6MxdStJFGg2pWnf1PHwQ9muYDPmOBP7Lg@mail.gmail.com>
+Subject: Re: [PATCH v8 2/8] efi_loader: Add a test app
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,98 +89,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Simon,
 
-Please find some new developments and fixes for master:
+On Tue, 22 Oct 2024 at 15:00, Simon Glass <sjg@chromium.org> wrote:
+>
+> Add a simple app to use for testing. This is intended to do whatever it
+> needs to for testing purposes. For now it just prints a message and
+> exits boot services.
+>
+> There was a considerable amount of discussion about whether it is OK to
+> call exit-boot-services and then return to U-Boot. This is not normally
+> done in a real application, since exit-boot-services is used to
+> completely disconnect from U-Boot. However, since this is a test, we
+> need to check the results of running the app, so returning is necessary.
+> It works correctly and it provides a nice model of how to test the EFI
+> code in a simple way.
 
-Dfu:
-- Rely on device tree for spi speed/mode on spi flash
+Yes, I haven't had time to look at that whole discussion, but since
+this is a test app I don't care too much if it violates the EFI spec
+or not.
 
-Android image:
-- Fix booting on platforms having > 4GiB of memory
-- Decompress boot image to kernel_addr_r when compression is enabled
-- Honor CONFIG_SYS_LOAD_ADDR when mkbootimg uses default address
+OTOH we have lib/efi_selftest/efi_selftest_exitbootservices.c to test
+EBS. So why can't you just remove that call, exit normally and check
+the results you want?
 
-Bcb:
-- Rework bcb command to use U_BOOT_LONGHELP
-- Move ab_select cmd to bcb cmd
-- Implement ab_dump command in bcb
-- bcb: Write '_<slot>' instead of '<slot>' to misc partition
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> (no changes since v7)
+>
+> Changes in v7:
+> - Update commit message
+>
+>  lib/efi_loader/Kconfig   | 10 ++++++
+>  lib/efi_loader/Makefile  |  1 +
+>  lib/efi_loader/testapp.c | 68 ++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 79 insertions(+)
+>  create mode 100644 lib/efi_loader/testapp.c
+>
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index 69b2c9360d8..6ced29da719 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -565,6 +565,16 @@ config BOOTEFI_HELLO_COMPILE
+>           No additional space will be required in the resulting U-Boot binary
+>           when this option is enabled.
+>
+> +config BOOTEFI_TESTAPP_COMPILE
+> +       bool "Compile an EFI test app for testing"
+> +       default y
+> +       help
+> +         This compiles an app designed for testing. It is packed into an image
+> +         by the test.py testing frame in the setup_efi_image() function.
+> +
+> +         No additional space will be required in the resulting U-Boot binary
+> +         when this option is enabled.
+> +
+>  endif
+>
+>  source "lib/efi/Kconfig"
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index 00d18966f9e..87131ab911d 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
+>  ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+>  apps-y += dtbdump
+>  endif
+> +apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
+>
+>  obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+>  obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
+> diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
+> new file mode 100644
+> index 00000000000..feb444c92e9
+> --- /dev/null
+> +++ b/lib/efi_loader/testapp.c
+> @@ -0,0 +1,68 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Hello world EFI application
+> + *
+> + * Copyright 2024 Google LLC
+> + * Written by Simon Glass <sjg@chromium.org>
+> + *
+> + * This test program is used to test the invocation of an EFI application.
+> + * It writes a few messages to the console and then exits boot services
+> + */
+> +
+> +#include <efi_api.h>
+> +
+> +static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
+> +
+> +static struct efi_system_table *systable;
+> +static struct efi_boot_services *boottime;
+> +static struct efi_simple_text_output_protocol *con_out;
+> +
+> +/**
+> + * efi_main() - entry point of the EFI application.
+> + *
+> + * @handle:    handle of the loaded image
+> + * @systab:    system table
+> + * Return:     status code
+> + */
+> +efi_status_t EFIAPI efi_main(efi_handle_t handle,
+> +                            struct efi_system_table *systab)
+> +{
+> +       struct efi_loaded_image *loaded_image;
+> +       efi_status_t ret;
+> +       efi_uintn_t map_size;
+> +       efi_uintn_t map_key;
+> +       efi_uintn_t desc_size;
+> +       u32 desc_version;
+> +
+> +       systable = systab;
+> +       boottime = systable->boottime;
+> +       con_out = systable->con_out;
+> +
+> +       /* Get the loaded image protocol */
+> +       ret = boottime->open_protocol(handle, &loaded_image_guid,
+> +                                     (void **)&loaded_image, NULL, NULL,
+> +                                     EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> +       if (ret != EFI_SUCCESS) {
+> +               con_out->output_string
+> +                       (con_out, u"Cannot open loaded image protocol\r\n");
+> +               goto out;
+> +       }
+> +
+> +       /* UEFI requires CR LF */
+> +       con_out->output_string(con_out, u"U-Boot test app for EFI_LOADER\r\n");
+> +
+> +out:
+> +       map_size = 0;
+> +       ret = boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size,
+> +                                      &desc_version);
+> +       con_out->output_string(con_out, u"Exiting boot sevices\n");
+> +
+> +       /* exit boot services so that this part of U-Boot can be tested */
 
-CI job:
-- https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/22962
+Please add a comment and a print that U-Boot needs to reboot from that
+point onwards to continue testing
 
-Thanks,
-Mattijs
-
-The following changes since commit 7af813341d5df064aeee764c31ffb50ffcdf4eb6:
-
-  Merge https://source.denx.de/u-boot/custodians/u-boot-watchdog (2024-10-23 08:33:56 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20241025
-
-for you to fetch changes up to 21e7fa0e3ac599737cd235bb5233765e8a1b8b0f:
-
-  image: android: handle ramdisk default address (2024-10-24 09:48:14 +0200)
-
-----------------------------------------------------------------
-u-boot-dfu-20241025
-
-Dfu:
-- Rely on device tree for spi speed/mode on spi flash
-
-Android Image:
-- Fix booting on platforms having > 4GiB of memory
-- Decompress boot image to kernel_addr_r when compression is enabled
-- Honor CONFIG_SYS_LOAD_ADDR when mkbootimg uses default address
-
-Bcb:
-- Rework bcb command to use U_BOOT_LONGHELP
-- Move ab_select cmd to bcb cmd
-- Implement ab_dump command in bcb
-- bcb: Write '_<slot>' instead of '<slot>' to misc partition
-
-----------------------------------------------------------------
-Dmitry Rokosov (6):
-      include/android_ab: move ab_select_slot() documentation to @ notation
-      cmd: bcb: rework the command to U_BOOT_LONGHELP approach
-      treewide: bcb: move ab_select command to bcb subcommands
-      cmd: bcb: change strcmp() usage style in the do_bcb_ab_select()
-      cmd: bcb: introduce 'ab_dump' command to print BCB block content
-      common: android_ab: fix slot suffix for abc block
-
-Neil Armstrong (5):
-      spi: add DM_SPI_FLASH compatibility inline functions
-      dfu: sf: rely on DT for spi speed and mode
-      image: android: use ulong for kernel address
-      image: android: do not boot XIP when kernel is compressed
-      image: android: handle ramdisk default address
-
- MAINTAINERS                               |   1 -
- boot/android_ab.c                         | 116 +++++++++++++---
- boot/image-android.c                      |  62 +++++++--
- cmd/Kconfig                               |  14 --
- cmd/Makefile                              |   1 -
- cmd/ab_select.c                           |  66 ---------
- cmd/bcb.c                                 | 221 +++++++++++++++++-------------
- configs/am57xx_evm_defconfig              |   1 -
- configs/am57xx_hs_evm_defconfig           |   1 -
- configs/am57xx_hs_evm_usb_defconfig       |   1 -
- configs/khadas-vim3_android_ab_defconfig  |   1 -
- configs/khadas-vim3l_android_ab_defconfig |   1 -
- configs/sandbox64_defconfig               |   2 +
- configs/sandbox_defconfig                 |   1 -
- doc/android/ab.rst                        |  12 +-
- drivers/dfu/dfu_sf.c                      |  16 ++-
- include/android_ab.h                      |  17 ++-
- include/android_image.h                   |   2 +-
- include/configs/khadas-vim3_android.h     |   2 +-
- include/configs/khadas-vim3l_android.h    |   2 +-
- include/configs/meson64_android.h         |   4 +-
- include/configs/ti_omap5_common.h         |   4 +-
- include/spi_flash.h                       |  34 +++++
- test/py/tests/test_android/test_ab.py     |  31 ++++-
- 24 files changed, 372 insertions(+), 241 deletions(-)
- delete mode 100644 cmd/ab_select.c
+Thanks
+/Ilias
+> +       boottime->exit_boot_services(handle, map_key);
+> +
+> +       /* now exit for real */
+> +       ret = boottime->exit(handle, ret, 0, NULL);
+> +
+> +       /* We should never arrive here */
+> +       return ret;
+> +}
+> --
+> 2.43.0
+>
