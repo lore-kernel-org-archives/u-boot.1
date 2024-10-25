@@ -4,201 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78BD2D0C603
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:33:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB5F7D0C603
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:35:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EA898902E;
-	Fri, 25 Oct 2024 14:33:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 078A389016;
+	Fri, 25 Oct 2024 14:35:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="sE+RllZv";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BX3Pn/RQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CF748901A; Fri, 25 Oct 2024 14:33:32 +0200 (CEST)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on20611.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2406::611])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 84B3089017; Fri, 25 Oct 2024 14:35:14 +0200 (CEST)
+Received: from mail-m32111.qiye.163.com (mail-m32111.qiye.163.com
+ [220.197.32.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3251989060
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:33:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DB8388DB7
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:35:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ovfx/ToxSUJqprsHFKNLa2prP4EiOv8Wcj4lu+CUNTQaphfvq8AstAnxO5zSnUM1e2KMp3zrnOo8FdNw4A7Gm+FQXtumDwrla140NeoeqLEinW29xRqF1rbf57ISZv2WW2quaQ+4YwNwhC7OI/lGW6sopiyHQYXZqSOF+60lM17bFRb5bev1vp1YfXGkFGxDpL5WIdULTJOAoH0LKUS+WgQJhl+BqQgxb4B9TkAUpTptMUO/auv4qwHyKqZxhkUuXgy4CZqvmI8BW0p+c4VjfsoXHQHVgGAMR8oUn2wRsgqBFakSVcFWAQU++BAUKQEpuHk79Gr6UdZSwCM3YdCeWQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JwYFfUfWQtmSBNyZiELg4GMhzAOcSostyf1qG4Z0K80=;
- b=yHofDq24CWT08wN92UbEs3F++Y0aFG8SESVsejpZekGzxKK+Whfuq2452upXWwQOVgJjXMqxRhE8BK0NIygDrQnju8IG9L31SgmHPcOs97M2K+fqh8iZyKCJp8ney/TM6V5dZqs3aVsSC/ptAJp0UQPX+AB/TaRVLcha9Pso2cHqAptGvMTUHI1aNOxhL4tz/uu3Kl6/rEfMqNSkK4+H3bhwwRw5croVEbZXNLhaXvX1Hd5G0aM3KHJe93jRtOAFrv3OB4uDTlP4joHo+URrqa9hL/LkupB+VFID8iJSqN4ueg43gsKK/eqGV7PF878npOkL6hs+oB37vRZrhx7RIQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JwYFfUfWQtmSBNyZiELg4GMhzAOcSostyf1qG4Z0K80=;
- b=sE+RllZv9FyIbEJWKZM7E7ccr/8P8XkWC21GvClCSCr65GwyYonJn/A9JU91+kD2CZ2VCdlDvkHqU0tjiV02QELXO5G/OF+CnfDm4v7ZMl7X4gxNXXL4pE5qvECHUxvL4+TIsL+Cjwq7EoFJxw0vN37kZjrKSvlcgt4QYkPaUBU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by IA0PR12MB7507.namprd12.prod.outlook.com (2603:10b6:208:441::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.23; Fri, 25 Oct
- 2024 12:33:12 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%6]) with mapi id 15.20.8093.018; Fri, 25 Oct 2024
- 12:33:12 +0000
-Message-ID: <c17206d0-857a-44f6-8830-b12bb25ba60e@amd.com>
-Date: Fri, 25 Oct 2024 14:33:00 +0200
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [172.16.12.67] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTP id ec4733d;
+ Fri, 25 Oct 2024 20:35:00 +0800 (GMT+08:00)
+Message-ID: <6101e5ed-2e89-426f-9a4d-ca50040a7012@rock-chips.com>
+Date: Fri, 25 Oct 2024 20:35:00 +0800
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] common: memtop: add logic to detect ram_top
-To: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
-Cc: love.kumar@amd.com, Tom Rini <trini@konsulko.com>
-References: <20241025121547.181633-1-sughosh.ganu@linaro.org>
- <20241025121547.181633-2-sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 1/8] arm64: dts: rockchip: prepare NanoPC-T6 for LTS board
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
+Cc: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, u-boot@lists.denx.de, 
+ Heiko Stuebner <heiko@sntech.de>
+References: <20241017200039.1235524-1-jonas@kwiboo.se>
+ <20241017200039.1235524-2-jonas@kwiboo.se>
 Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20241025121547.181633-2-sughosh.ganu@linaro.org>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20241017200039.1235524-2-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VE1PR03CA0058.eurprd03.prod.outlook.com
- (2603:10a6:803:118::47) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|IA0PR12MB7507:EE_
-X-MS-Office365-Filtering-Correlation-Id: f7c44670-faa1-4d6c-adf1-08dcf4f13073
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?alZncG9vQTFMZWh5bVQvQTJMZlZSSXRhdnFaM1YrOUpnVHU0VWhibmJSV2pD?=
- =?utf-8?B?K08relhIVWE3SktWaDk1aGNqMVJIbVhkaWY5TzAwNlVvT0pGK0NOaTZXSmd4?=
- =?utf-8?B?Y2hURFFweGpObzZubW1ZWk9zWmhWaFYxWm5DZTJzWlFCYWxFWTEveHFKRGpI?=
- =?utf-8?B?blR2RU5nb0xQMFJNOGlKSlJpOTdnRExUMWE2ZDBmTU4rdlZtY1habHpBeG9j?=
- =?utf-8?B?TU95UHhIQUgxWS9yaXFtUndkOWJ0R0IvMldwdk5QVEt1TzZpTWpieEhFQnJX?=
- =?utf-8?B?SDd5Z2kxUkQwV1E1YmRTQVRhekVBbWtKbHZOTDR1MzRpNTB1NUZXVncvc1Jq?=
- =?utf-8?B?ZjlqdEZsVWJVbWhPK0xqdENYM3ZNNVVqK0RtU1RhZnpUSXkzK3R3azBCQ1hW?=
- =?utf-8?B?SndSbGYrbnJqN2FDaWV4NE5veU9kOThOWGxWTjEwU0V5WjlVYU1JVEtGTStX?=
- =?utf-8?B?YjdGVmhuTWl5WldlN0xlbkVYMmFvK0graE5RN004TnNmQlNYSnVyUTRYUEhT?=
- =?utf-8?B?RU5KZXVxL0xsdFFLc3FWNXJLSXR6ckZjSFNIQUMzWXV6aU0yM1NqOFJRbUpl?=
- =?utf-8?B?UVlZMXJWK0YyMmVWaDZBa21IcnBOY053c043cmZua3g5MWZaNSsvYk5zKzZt?=
- =?utf-8?B?S0FUNUZNZCtacHVxUmdDRk5BUktOTGc3OXBKNkNhbnlMRy9mSktEUUlwakZZ?=
- =?utf-8?B?Ums2R0Zzb3dWN1o2SkY2cDdpa2Y1WU9hT3EyS3VBWWF6TjVnenpsUU0rZXZH?=
- =?utf-8?B?MnY4amt4dmk5SFd3aDhQZmxDM0t0a2RnY1ZLSXZic3Erc3dPN0ZzcngvanFO?=
- =?utf-8?B?NU1vQklFdVA5T1p5U3dIUHRQTHJ5WmNocDRiaER6Wno0UkhkRHkzMGJMN1pS?=
- =?utf-8?B?NDlZa3lwcVRSR21sSXVyVzc0dmdKcjVnRHEyYXhwaDlJa0dxcFRORjRQaThN?=
- =?utf-8?B?NS9lYjllazZ3eGVacy9qTlYwZlBaVXp5RllNeE92VkxVNEwvY0hMd041eFRo?=
- =?utf-8?B?YmdTWjE3RFdmK2hDZXUzcVJQdDFQVWFTaENyK3hLdUZjMTMzRFhxL21IVHU2?=
- =?utf-8?B?anFBN2w5TklTRVZiM3dDS09Fa1grMkgwSlZTb2Rld2w4ZWdoUlpOWDJ2S09w?=
- =?utf-8?B?MFRONStjakxJRktDL1ZDZTlqdHdqSVZheVhGTUxDbzVuSHh1QVdscFBSSmtC?=
- =?utf-8?B?bWdnUnVEM0NNd2lQYW51TGNnTitBa3V1L2dGZEplS2JmYUx5TjB3bHhXTjN0?=
- =?utf-8?B?b2VUaWlnaXF3MVZFU1RhVkN3UWtOY2ZmMVJSNXFGekRuK2ZvemFWdUNzdEo3?=
- =?utf-8?B?VEVSam9zL0RmTGFQZmZrcUpETTkybnZ4OTg0TkpHZHBTZ3JkQkNvTXRTYkxl?=
- =?utf-8?B?TWFUVXc2bHRTWGRaazE4dm1kTk03WGNnQ1lHZ3N5WExMY29hejNaWUd4UlZn?=
- =?utf-8?B?QnRkUUsxdnlOd2hWK2puZ3UrV1kzSzUyNDd0WTI1U3JuUFFjbDlkNGNlL2pE?=
- =?utf-8?B?Z2hGYS9JT3JZVVhOeFY5UWNZSjlSTkc1UUp3MkEzbEdnL1BIeVN2cjdFTUMv?=
- =?utf-8?B?NW9OdG11b2haM0N0a2NvbStMODNsVk16RlBQSnFXaWtqcmprak9DdG9wMlRt?=
- =?utf-8?B?MHg0VDNWQ0NHTCtvZGJnUkNmcGtsbU8wdXlWZ3NnNmdYMk1UL0F5WEJDb3Rp?=
- =?utf-8?B?MTVLZHkrZElTNXc3QVJyOWQ2bTNIbWxzbHN0RXlxTEU3b1dsOUl6cjFMbXA2?=
- =?utf-8?Q?C4CTasB2xMYe/bnncLflAFIlaakKsehxR/+IS96?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OFFZOERRUkVmeUFncGRJbi9CWmJzOHBkaDhONTZMN2V6cEt0SVNjUC9vSkxl?=
- =?utf-8?B?UExaNXVYVHlRb3dXYUJ6TXJVK2t1RWllZGYraTlxV0NxT0ljVG1GK3ZIc2tC?=
- =?utf-8?B?aXFIUG5YWFFGWVZVajJOSlhrUHQrRFdWWWZJSHpIdmxaOVJRaW16SnhzYTdu?=
- =?utf-8?B?bmJ4SGhYaDVER0pnT3JzalBOTE04eDd5dGszQktHbFZ2d21vSXdaMHpvUFc0?=
- =?utf-8?B?REVzWWpvYXBnLzRyUzJ2RXkvVHFPdzVsbU91Rm40Z2FPcWErWUl3cFFGdjdE?=
- =?utf-8?B?MjlXSlo1NnNSMDFLdEc1a0cyS1JyUjRFWTlmVWJzSUNHV3BTb3BSc1piWU4v?=
- =?utf-8?B?ZnVjT3FOb0ZKZ1FCOEdVR1hWMXJLUko1M1ZCcXVEMno1SllYUXZGbktXVWV4?=
- =?utf-8?B?d1k2bDZBZDV0czI4NHR3b3o0djlGSE8rdm5SbzV6dWVOdHZOZ0tzQUFvalUr?=
- =?utf-8?B?MUd0RTNabVQwSkZOdFJJZXNkRVN5cEVrbm0zSjdWTm1Ua3Mvb2xWMytXU3Nl?=
- =?utf-8?B?M0RTYStnbFRRaXhUZ1FDZE8zNEZMajVhMXRSS2IwSEdkR0RvQnZRNnNMYUU0?=
- =?utf-8?B?Ryt4cnJmZzBXMVp0aEM1MkdEVWQ2NHZNYk8ycTk2MmVRNGloekliVkluaUxw?=
- =?utf-8?B?aks4Y1AwMGxmZUo2OGU5N2tXcDJrcnAxVUozV29YM1h2eDJnS0hyeWFoc2pD?=
- =?utf-8?B?YWRleCtyWkhERk9hYW9xcWMxR21yNzlYeWIxcUkyOHlGNEFnNmlqTE9pckIr?=
- =?utf-8?B?ZTFqM01qRERYc2Vha1h4Z0VjY3JsTUNiRVRQdWVPODN0Zlp3TFRJbU1wSnJ5?=
- =?utf-8?B?N296Z2VHWG5GMkU2bUU5UU1aSStOQ2F2NSt5c0dRNk5PNkp1aldLak9MYnIz?=
- =?utf-8?B?TW5NMFkraHh6Smh6Y0o2SzNFdldOaXNZK3RNZlNKZnQzQURKOWVlT0ZJb3hs?=
- =?utf-8?B?NGZ0Um10SkJuQWpBMGFBYzkxU1U2YXRvMjczWkxJNXgyeDZHbitjTEJvNEJv?=
- =?utf-8?B?Z1ZKVTZGbnBNV2hzZ0YwU1lEUXpCVHpBK3IzS3VEczNTRzRoMU5iR0NrRUt4?=
- =?utf-8?B?cnhhaGJFUEpCVXEra0cyU1pCeUw5Mk56aDVzVzlnekx2cW1ERGc1alBIZ1dF?=
- =?utf-8?B?ODdnSDRveVYrOCs2ZVVJYkFTQ2ZNNzdsS1A1VnVWUE1ZR0dLak1BM0N1L0Nq?=
- =?utf-8?B?d1V6aHpwRWtWZWI1bzVPVy9sbzRrc2lQZ3pDZWRBckhQTHM4aVVpY3FXQ3BO?=
- =?utf-8?B?Mmk4eXJxcU4zaHhyeW5Wb1ZrTkN5WjRaeWdiaUg3YzdiRVN3MjU5STFsZHpF?=
- =?utf-8?B?MHFVVGJKWmE4Nk1UODRMZExqaVhpTE9xcnkvWG1na2pNbzJNeUpNendxczlK?=
- =?utf-8?B?aEttM0wxanZXMGdmTm1oQ1F6TCtWUlFLQzVxZ3hYSFZKK3p4QUwwNmpRZjRv?=
- =?utf-8?B?M0JEY2p6bUJzbUdGTkFBeGhkOGtmcjZQaW9ubXFtU005aEM0YWpJS2VkeU8v?=
- =?utf-8?B?L25ubDRMM1BpWVlDa1VxYzBuazdSNmYyUUxrZ1NGUXYwUE51dXZmeHJ5endC?=
- =?utf-8?B?MGhLY1RJUWU0OHc1N1paSUNkYUozRmViMW5JcGxNd1B3OXhiemNEU1dWSUha?=
- =?utf-8?B?SGQ0VmVRSWpnRVQyTk5hOVMrU3hvQnBVT2xLNURqNjgzSFI2cWVrMm9qdHRT?=
- =?utf-8?B?MGdUVnNKbWhaNEtDVWU0LzlPSEJEWHFzSmtEVTYzL1kxU0JtbEo0eVVRUTAy?=
- =?utf-8?B?S0J1TEtEaFczT0JIMUh6TS9HcXN2ZU80b3lWTHZoeGUydHY3NXI2dWRXUm5I?=
- =?utf-8?B?U1RCU3VIaWxWcG0ySFBSWmVnVk9FWk5oc1gxbExyY01aVGFLeDFaVERjRG45?=
- =?utf-8?B?bjMwZ1pTeDkyZUcreWp2R0dJSjJyc25YTWhoWUJ2T1dIdy9tUXNNOUcvOEt6?=
- =?utf-8?B?S3FKbUNYSERBdEtVQ3o1VVRTQ3RNQnYyQktIVVJ6ZTZHNTZBTmVJQWVEemQz?=
- =?utf-8?B?M2tTTFk4YUVOaXI2RXlzc1kxRzhXeW1kZ2x3eDgyUElmSTUvN3Q1Zi9uMGI5?=
- =?utf-8?B?UDhSaEdVaWd3enRyQVpCc091K0VCNWxueWdCSGYrdW1PdEoxSjhaUnV0b1pq?=
- =?utf-8?Q?zuYFknOHrvdgA+ooY4Da46XQi?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f7c44670-faa1-4d6c-adf1-08dcf4f13073
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2024 12:33:11.9382 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: y9xvmFOdVnadZzIoTUQLXN6AvOjnCPOor5/QDPIRi2ig5veHNKpnli0blsXH59KT
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7507
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhhMGVYdSkwfH0wYSx1KShlWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a92c3ac490e09d6kunmec4733d
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MjY6SCo5NDIqMRcOKFZLAww1
+ GQ0KC05VSlVKTElCQ05CTEtJT09DVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOS0tLTTcG
+DKIM-Signature: a=rsa-sha256;
+ b=BX3Pn/RQ86P95vkF9guHxknxqJfLwnh0TZZoAFeN0tq3fmcLsS9lHpXh8BZqdNgWuAO27x7cF4IhgYOpFTMMRejF8t0pGE9D+M0jxvzxHTub89pfK0S/sJBHsVFve26/xtdlE6PNWZJnG5ELjAb8+JNqzXSrMmyCz87RevO0EIQ=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=s5/QiLblNlgRtpOLW98n+dL/L9KiBr9E3+HTHXud6xM=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -216,215 +77,1931 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-
-On 10/25/24 14:15, Sughosh Ganu wrote:
-> Add generic logic to determine the ram_top value for boards. Earlier,
-> this was achieved in an indirect manner through a set of LMB API's.
-> That has since changed so that the LMB code is available only after
-> relocation. Replace those LMB calls with a single call to
-> get_mem_top() to determine the value of ram_top.
-> 
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
->   common/Makefile  |   1 +
->   common/memtop.c  | 186 +++++++++++++++++++++++++++++++++++++++++++++++
->   include/memtop.h |  22 ++++++
->   3 files changed, 209 insertions(+)
->   create mode 100644 common/memtop.c
->   create mode 100644 include/memtop.h
-> 
-> diff --git a/common/Makefile b/common/Makefile
-> index 2ee5ef9cc6e..35991562a12 100644
-> --- a/common/Makefile
-> +++ b/common/Makefile
-> @@ -7,6 +7,7 @@
->   ifndef CONFIG_XPL_BUILD
->   obj-y += init/
->   obj-y += main.o
-> +obj-y += memtop.o
->   obj-y += exports.o
->   obj-y += cli_getch.o cli_simple.o cli_readline.o
->   obj-$(CONFIG_HUSH_OLD_PARSER) += cli_hush.o
-> diff --git a/common/memtop.c b/common/memtop.c
-> new file mode 100644
-> index 00000000000..579daa89136
-> --- /dev/null
-> +++ b/common/memtop.c
-> @@ -0,0 +1,186 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2024, Linaro Limited
-> + */
-> +
-> +#include <fdt_support.h>
-> +#include <fdtdec.h>
-> +#include <memtop.h>
-> +
-> +#include <asm/types.h>
-> +
-> +#define MEM_RGN_COUNT	16
-> +
-> +struct region {
-> +	phys_addr_t base;
-> +	phys_size_t size;
-> +};
-> +
-> +struct mem_region {
-> +	struct region rgn[MEM_RGN_COUNT];
-> +	uint count;
-> +};
-> +
-> +static void add_mem_region(struct mem_region *mem_rgn, phys_addr_t base,
-> +			   phys_size_t size)
-> +{
-> +	long i;
-> +
-> +	for (i = mem_rgn->count; i >= 0; i--) {
-> +		if (i && base < mem_rgn->rgn[i - 1].base) {
-> +			mem_rgn->rgn[i] = mem_rgn->rgn[i - 1];
-> +		} else {
-> +			mem_rgn->rgn[i].base = base;
-> +			mem_rgn->rgn[i].size = size;
-> +			break;
-> +		}
-> +	}
-> +
-> +	mem_rgn->count++;
-> +}
-> +
-> +static void mem_regions_init(struct mem_region *mem)
-> +{
-> +	uint i;
-> +
-> +	mem->count = 0;
-> +	for (i = 0; i < MEM_RGN_COUNT; i++) {
-> +		mem->rgn[i].base = 0;
-> +		mem->rgn[i].size = 0;
-> +	}
-> +}
-> +
-> +static int fdt_add_reserved_regions(struct mem_region *free_mem,
-> +				    struct mem_region *reserved_mem,
-> +				    void *fdt_blob)
-> +{
-> +	u64 addr, size;
-> +	int i, total, ret;
-> +	int nodeoffset, subnode;
-> +	struct fdt_resource res;
-> +
-> +	if (fdt_check_header(fdt_blob) != 0)
-> +		return -1;
-> +
-> +	/* process memreserve sections */
-> +	total = fdt_num_mem_rsv(fdt_blob);
-> +	assert_noisy(total < MEM_RGN_COUNT);
-> +	for (i = 0; i < total; i++) {
-> +		if (fdt_get_mem_rsv(fdt_blob, i, &addr, &size) != 0)
-> +			continue;
-> +		add_mem_region(reserved_mem, addr, size);
-> +	}
-> +
-> +	i = 0;
-> +	/* process reserved-memory */
-> +	nodeoffset = fdt_subnode_offset(fdt_blob, 0, "reserved-memory");
-> +	if (nodeoffset >= 0) {
-> +		subnode = fdt_first_subnode(fdt_blob, nodeoffset);
-> +		while (subnode >= 0) {
-> +			/* check if this subnode has a reg property */
-> +			ret = fdt_get_resource(fdt_blob, subnode, "reg", 0,
-> +					       &res);
-> +			if (!ret && fdtdec_get_is_enabled(fdt_blob, subnode)) {
-> +				addr = res.start;
-> +				size = res.end - res.start + 1;
-> +				assert_noisy(i < MEM_RGN_COUNT);
-> +				add_mem_region(reserved_mem, addr, size);
-> +			}
-> +
-> +			subnode = fdt_next_subnode(fdt_blob, subnode);
-> +			++i;
-> +		}
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static long addrs_overlap(phys_addr_t base1, phys_size_t size1,
-> +			  phys_addr_t base2, phys_size_t size2)
-> +{
-> +	const phys_addr_t base1_end = base1 + size1 - 1;
-> +	const phys_addr_t base2_end = base2 + size2 - 1;
-> +
-> +	return ((base1 <= base2_end) && (base2 <= base1_end));
-> +}
-> +
-> +static long region_overlap_check(struct mem_region *mem_rgn, phys_addr_t base,
-> +				 phys_size_t size)
-> +{
-> +	unsigned long i;
-> +	struct region *rgn = mem_rgn->rgn;
-> +
-> +	for (i = 0; i < mem_rgn->count; i++) {
-> +		phys_addr_t rgnbase = rgn[i].base;
-> +		phys_size_t rgnsize = rgn[i].size;
-> +
-> +		if (addrs_overlap(base, size, rgnbase, rgnsize))
-> +			break;
-> +	}
-> +
-> +	return (i < mem_rgn->count) ? i : -1;
-> +}
-> +
-> +static int find_ram_top(struct mem_region *free_mem,
-> +			struct mem_region *reserved_mem, phys_size_t size)
-> +{
-> +	long i, rgn;
-> +	phys_addr_t base = 0;
-> +	phys_addr_t res_base;
-> +
-> +	for (i = free_mem->count - 1; i >= 0; i--) {
-> +		phys_addr_t rgnbase = free_mem->rgn[i].base;
-> +		phys_size_t rgnsize = free_mem->rgn[i].size;
-> +
-> +		if (rgnsize < size)
-> +			continue;
-> +
-> +		base = rgnbase + rgnsize - size;
-> +		while (base && rgnbase <= base) {
-> +			rgn = region_overlap_check(reserved_mem, base, size);
-> +			if (rgn < 0)
-> +				return base;
-> +
-> +			res_base = reserved_mem->rgn[rgn].base;
-> +			if (res_base < size)
-> +				break;
-> +			base = res_base - size;
-> +		}
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +/**
-> + * get_mem_top() - Compute the value of ram_top
-> + * @ram_start:	Start of RAM
-> + * @ram_size:	RAM size
-> + * @size:	Minimum RAM size requested
-> + * @fdt:	FDT blob
-> + *
-> + * The function computes the top address of RAM memory that can be
-> + * used by U-Boot. This is being done by going through the list of
-> + * reserved memory regions specified in the devicetree blob passed
-> + * to the function. The logic used here is derived from the lmb
-> + * allocation function.
-> + *
-> + * Return: address of ram top on success, 0 on failure
-> + */
-
-There is likely no reason to have documentation written twice.
-Using in just header should be fine.
-When this is fixed feel free to add
-
-Reviewed-by: Michal Simek <michal.simek@amd.com>
+On 2024/10/18 04:00, Jonas Karlman wrote:
+> From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+>
+> FriendlyELEC introduced a second version of NanoPC-T6 SBC.
+>
+> Create common include file and make NanoPC-T6 use it. Following
+> patches will add LTS version.
+>
+> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+> Link: https://lore.kernel.org/r/20240829-friendlyelec-nanopc-t6-lts-v6-2-edff247e8c02@linaro.org
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>
+> [ upstream commit: d14f3a4f1feabb6bb5935bf3b275a1e6bf2208eb ]
+>
+> (cherry picked from commit e8b52bdfe5a1444edd1b9bb7cc10b9781d72cc84)
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
-Michal
+- Kever
+> ---
+>   .../src/arm64/rockchip/rk3588-nanopc-t6.dts   | 932 +----------------
+>   .../src/arm64/rockchip/rk3588-nanopc-t6.dtsi  | 945 ++++++++++++++++++
+>   2 files changed, 947 insertions(+), 930 deletions(-)
+>   create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi
+>
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dts b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dts
+> index ad8e36a339dc..3f8fbec65098 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dts
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dts
+> @@ -2,944 +2,16 @@
+>   /*
+>    * Copyright (c) 2021 Rockchip Electronics Co., Ltd.
+>    * Copyright (c) 2023 Thomas McKahan
+> + * Copyright (c) 2024 Linaro Ltd.
+>    *
+>    */
+>   
+>   /dts-v1/;
+>   
+> -#include <dt-bindings/gpio/gpio.h>
+> -#include <dt-bindings/pinctrl/rockchip.h>
+> -#include <dt-bindings/usb/pd.h>
+> -#include "rk3588.dtsi"
+> +#include "rk3588-nanopc-t6.dtsi"
+>   
+>   / {
+>   	model = "FriendlyElec NanoPC-T6";
+>   	compatible = "friendlyarm,nanopc-t6", "rockchip,rk3588";
+>   
+> -	aliases {
+> -		mmc0 = &sdhci;
+> -		mmc1 = &sdmmc;
+> -	};
+> -
+> -	chosen {
+> -		stdout-path = "serial2:1500000n8";
+> -	};
+> -
+> -	leds {
+> -		compatible = "gpio-leds";
+> -
+> -		sys_led: led-0 {
+> -			gpios = <&gpio2 RK_PB7 GPIO_ACTIVE_HIGH>;
+> -			label = "system-led";
+> -			linux,default-trigger = "heartbeat";
+> -			pinctrl-names = "default";
+> -			pinctrl-0 = <&sys_led_pin>;
+> -		};
+> -
+> -		usr_led: led-1 {
+> -			gpios = <&gpio2 RK_PC0 GPIO_ACTIVE_HIGH>;
+> -			label = "user-led";
+> -			pinctrl-names = "default";
+> -			pinctrl-0 = <&usr_led_pin>;
+> -		};
+> -	};
+> -
+> -	sound {
+> -		compatible = "simple-audio-card";
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&hp_det>;
+> -
+> -		simple-audio-card,name = "realtek,rt5616-codec";
+> -		simple-audio-card,format = "i2s";
+> -		simple-audio-card,mclk-fs = <256>;
+> -
+> -		simple-audio-card,hp-det-gpio = <&gpio1 RK_PC4 GPIO_ACTIVE_LOW>;
+> -		simple-audio-card,hp-pin-name = "Headphones";
+> -
+> -		simple-audio-card,widgets =
+> -			"Headphone", "Headphones",
+> -			"Microphone", "Microphone Jack";
+> -		simple-audio-card,routing =
+> -			"Headphones", "HPOL",
+> -			"Headphones", "HPOR",
+> -			"MIC1", "Microphone Jack",
+> -			"Microphone Jack", "micbias1";
+> -
+> -		simple-audio-card,cpu {
+> -			sound-dai = <&i2s0_8ch>;
+> -		};
+> -		simple-audio-card,codec {
+> -			sound-dai = <&rt5616>;
+> -		};
+> -	};
+> -
+> -	vcc12v_dcin: vcc12v-dcin-regulator {
+> -		compatible = "regulator-fixed";
+> -		regulator-name = "vcc12v_dcin";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		regulator-min-microvolt = <12000000>;
+> -		regulator-max-microvolt = <12000000>;
+> -	};
+> -
+> -	/* vcc5v0_sys powers peripherals */
+> -	vcc5v0_sys: vcc5v0-sys-regulator {
+> -		compatible = "regulator-fixed";
+> -		regulator-name = "vcc5v0_sys";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		regulator-min-microvolt = <5000000>;
+> -		regulator-max-microvolt = <5000000>;
+> -		vin-supply = <&vcc12v_dcin>;
+> -	};
+> -
+> -	/* vcc4v0_sys powers the RK806, RK860's */
+> -	vcc4v0_sys: vcc4v0-sys-regulator {
+> -		compatible = "regulator-fixed";
+> -		regulator-name = "vcc4v0_sys";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		regulator-min-microvolt = <4000000>;
+> -		regulator-max-microvolt = <4000000>;
+> -		vin-supply = <&vcc12v_dcin>;
+> -	};
+> -
+> -	vcc_1v1_nldo_s3: vcc-1v1-nldo-s3-regulator {
+> -		compatible = "regulator-fixed";
+> -		regulator-name = "vcc-1v1-nldo-s3";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		regulator-min-microvolt = <1100000>;
+> -		regulator-max-microvolt = <1100000>;
+> -		vin-supply = <&vcc4v0_sys>;
+> -	};
+> -
+> -	vcc_3v3_pcie20: vcc3v3-pcie20-regulator {
+> -		compatible = "regulator-fixed";
+> -		regulator-name = "vcc_3v3_pcie20";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		regulator-min-microvolt = <3300000>;
+> -		regulator-max-microvolt = <3300000>;
+> -		vin-supply = <&vcc_3v3_s3>;
+> -	};
+> -
+> -	vbus5v0_typec: vbus5v0-typec-regulator {
+> -		compatible = "regulator-fixed";
+> -		enable-active-high;
+> -		gpio = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&typec5v_pwren>;
+> -		regulator-name = "vbus5v0_typec";
+> -		regulator-min-microvolt = <5000000>;
+> -		regulator-max-microvolt = <5000000>;
+> -		vin-supply = <&vcc5v0_sys>;
+> -	};
+> -
+> -	vcc3v3_pcie2x1l0: vcc3v3-pcie2x1l0-regulator {
+> -		compatible = "regulator-fixed";
+> -		enable-active-high;
+> -		gpio = <&gpio4 RK_PC2 GPIO_ACTIVE_HIGH>;
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&pcie_m2_1_pwren>;
+> -		regulator-name = "vcc3v3_pcie2x1l0";
+> -		regulator-min-microvolt = <3300000>;
+> -		regulator-max-microvolt = <3300000>;
+> -		vin-supply = <&vcc5v0_sys>;
+> -	};
+> -
+> -	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
+> -		compatible = "regulator-fixed";
+> -		enable-active-high;
+> -		gpios = <&gpio2 RK_PC5 GPIO_ACTIVE_HIGH>;
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&pcie_m2_0_pwren>;
+> -		regulator-name = "vcc3v3_pcie30";
+> -		regulator-min-microvolt = <3300000>;
+> -		regulator-max-microvolt = <3300000>;
+> -		vin-supply = <&vcc5v0_sys>;
+> -	};
+> -
+> -	vcc3v3_sd_s0: vcc3v3-sd-s0-regulator {
+> -		compatible = "regulator-fixed";
+> -		enable-active-low;
+> -		gpio = <&gpio4 RK_PA5 GPIO_ACTIVE_LOW>;
+> -		regulator-boot-on;
+> -		regulator-max-microvolt = <3300000>;
+> -		regulator-min-microvolt = <3300000>;
+> -		regulator-name = "vcc3v3_sd_s0";
+> -		vin-supply = <&vcc_3v3_s3>;
+> -	};
+> -
+> -	vdd_4g_3v3: vdd-4g-3v3-regulator {
+> -		compatible = "regulator-fixed";
+> -		enable-active-high;
+> -		gpio = <&gpio4 RK_PC6 GPIO_ACTIVE_HIGH>;
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&pin_4g_lte_pwren>;
+> -		regulator-name = "vdd_4g_3v3";
+> -		regulator-min-microvolt = <3300000>;
+> -		regulator-max-microvolt = <3300000>;
+> -		vin-supply = <&vcc5v0_sys>;
+> -	};
+> -};
+> -
+> -&combphy0_ps {
+> -	status = "okay";
+> -};
+> -
+> -&combphy1_ps {
+> -	status = "okay";
+> -};
+> -
+> -&combphy2_psu {
+> -	status = "okay";
+> -};
+> -
+> -&cpu_l0 {
+> -	cpu-supply = <&vdd_cpu_lit_s0>;
+> -};
+> -
+> -&cpu_l1 {
+> -	cpu-supply = <&vdd_cpu_lit_s0>;
+> -};
+> -
+> -&cpu_l2 {
+> -	cpu-supply = <&vdd_cpu_lit_s0>;
+> -};
+> -
+> -&cpu_l3 {
+> -	cpu-supply = <&vdd_cpu_lit_s0>;
+> -};
+> -
+> -&cpu_b0 {
+> -	cpu-supply = <&vdd_cpu_big0_s0>;
+> -};
+> -
+> -&cpu_b1 {
+> -	cpu-supply = <&vdd_cpu_big0_s0>;
+> -};
+> -
+> -&cpu_b2 {
+> -	cpu-supply = <&vdd_cpu_big1_s0>;
+> -};
+> -
+> -&cpu_b3 {
+> -	cpu-supply = <&vdd_cpu_big1_s0>;
+> -};
+> -
+> -&gpio0 {
+> -	gpio-line-names = /* GPIO0 A0-A7 */
+> -			  "", "", "", "",
+> -			  "", "", "", "",
+> -			  /* GPIO0 B0-B7 */
+> -			  "", "", "", "",
+> -			  "", "", "", "",
+> -			  /* GPIO0 C0-C7 */
+> -			  "", "", "", "",
+> -			  "HEADER_10", "HEADER_08", "HEADER_32", "",
+> -			  /* GPIO0 D0-D7 */
+> -			  "", "", "", "",
+> -			  "", "", "", "";
+> -};
+> -
+> -&gpio1 {
+> -	gpio-line-names = /* GPIO1 A0-A7 */
+> -			  "HEADER_27", "HEADER_28", "", "",
+> -			  "", "", "", "HEADER_15",
+> -			  /* GPIO1 B0-B7 */
+> -			  "HEADER_26", "HEADER_21", "HEADER_19", "HEADER_23",
+> -			  "HEADER_24", "HEADER_22", "", "",
+> -			  /* GPIO1 C0-C7 */
+> -			  "", "", "", "",
+> -			  "", "", "", "",
+> -			  /* GPIO1 D0-D7 */
+> -			  "", "", "", "",
+> -			  "", "", "HEADER_05", "HEADER_03";
+> -};
+> -
+> -&gpio2 {
+> -	gpio-line-names = /* GPIO2 A0-A7 */
+> -			  "", "", "", "",
+> -			  "", "", "", "",
+> -			  /* GPIO2 B0-B7 */
+> -			  "", "", "", "",
+> -			  "", "", "", "",
+> -			  /* GPIO2 C0-C7 */
+> -			  "", "CSI1_11", "CSI1_12", "",
+> -			  "", "", "", "",
+> -			  /* GPIO2 D0-D7 */
+> -			  "", "", "", "",
+> -			  "", "", "", "";
+> -};
+> -
+> -&gpio3 {
+> -	gpio-line-names = /* GPIO3 A0-A7 */
+> -			  "HEADER_35", "HEADER_38", "HEADER_40", "HEADER_36",
+> -			  "HEADER_37", "", "DSI0_12", "",
+> -			  /* GPIO3 B0-B7 */
+> -			  "HEADER_33", "DSI0_10", "HEADER_07", "HEADER_16",
+> -			  "HEADER_18", "HEADER_29", "HEADER_31", "HEADER_12",
+> -			  /* GPIO3 C0-C7 */
+> -			  "DSI0_08", "DSI0_14", "HEADER_11", "HEADER_13",
+> -			  "", "", "", "",
+> -			  /* GPIO3 D0-D7 */
+> -			  "", "", "", "",
+> -			  "", "DSI1_10", "", "";
+> -};
+> -
+> -&gpio4 {
+> -	gpio-line-names = /* GPIO4 A0-A7 */
+> -			  "DSI1_08", "DSI1_14", "", "DSI1_12",
+> -			  "", "", "", "",
+> -			  /* GPIO4 B0-B7 */
+> -			  "", "", "", "",
+> -			  "", "", "", "",
+> -			  /* GPIO4 C0-C7 */
+> -			  "", "", "", "",
+> -			  "CSI0_11", "CSI0_12", "", "",
+> -			  /* GPIO4 D0-D7 */
+> -			  "", "", "", "",
+> -			  "", "", "", "";
+> -};
+> -
+> -&i2c0 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&i2c0m2_xfer>;
+> -	status = "okay";
+> -
+> -	vdd_cpu_big0_s0: regulator@42 {
+> -		compatible = "rockchip,rk8602";
+> -		reg = <0x42>;
+> -		fcs,suspend-voltage-selector = <1>;
+> -		regulator-name = "vdd_cpu_big0_s0";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		regulator-min-microvolt = <550000>;
+> -		regulator-max-microvolt = <1050000>;
+> -		regulator-ramp-delay = <2300>;
+> -		vin-supply = <&vcc4v0_sys>;
+> -
+> -		regulator-state-mem {
+> -			regulator-off-in-suspend;
+> -		};
+> -	};
+> -
+> -	vdd_cpu_big1_s0: regulator@43 {
+> -		compatible = "rockchip,rk8603", "rockchip,rk8602";
+> -		reg = <0x43>;
+> -		fcs,suspend-voltage-selector = <1>;
+> -		regulator-name = "vdd_cpu_big1_s0";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		regulator-min-microvolt = <550000>;
+> -		regulator-max-microvolt = <1050000>;
+> -		regulator-ramp-delay = <2300>;
+> -		vin-supply = <&vcc4v0_sys>;
+> -
+> -		regulator-state-mem {
+> -			regulator-off-in-suspend;
+> -		};
+> -	};
+> -};
+> -
+> -&i2c2 {
+> -	status = "okay";
+> -
+> -	vdd_npu_s0: regulator@42 {
+> -		compatible = "rockchip,rk8602";
+> -		reg = <0x42>;
+> -		rockchip,suspend-voltage-selector = <1>;
+> -		regulator-name = "vdd_npu_s0";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		regulator-min-microvolt = <550000>;
+> -		regulator-max-microvolt = <950000>;
+> -		regulator-ramp-delay = <2300>;
+> -		vin-supply = <&vcc4v0_sys>;
+> -
+> -		regulator-state-mem {
+> -			regulator-off-in-suspend;
+> -		};
+> -	};
+> -};
+> -
+> -&i2c6 {
+> -	clock-frequency = <200000>;
+> -	status = "okay";
+> -
+> -	fusb302: typec-portc@22 {
+> -		compatible = "fcs,fusb302";
+> -		reg = <0x22>;
+> -		interrupt-parent = <&gpio0>;
+> -		interrupts = <RK_PD3 IRQ_TYPE_LEVEL_LOW>;
+> -		pinctrl-0 = <&usbc0_int>;
+> -		pinctrl-names = "default";
+> -		vbus-supply = <&vbus5v0_typec>;
+> -
+> -		connector {
+> -			compatible = "usb-c-connector";
+> -			data-role = "dual";
+> -			label = "USB-C";
+> -			power-role = "dual";
+> -			try-power-role = "sink";
+> -			source-pdos = <PDO_FIXED(5000, 2000, PDO_FIXED_USB_COMM)>;
+> -			sink-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>;
+> -			op-sink-microwatt = <1000000>;
+> -		};
+> -	};
+> -
+> -	hym8563: rtc@51 {
+> -		compatible = "haoyu,hym8563";
+> -		reg = <0x51>;
+> -		#clock-cells = <0>;
+> -		clock-output-names = "hym8563";
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&hym8563_int>;
+> -		interrupt-parent = <&gpio0>;
+> -		interrupts = <RK_PB0 IRQ_TYPE_LEVEL_LOW>;
+> -		wakeup-source;
+> -	};
+> -};
+> -
+> -&i2c7 {
+> -	clock-frequency = <200000>;
+> -	status = "okay";
+> -
+> -	rt5616: codec@1b {
+> -		compatible = "realtek,rt5616";
+> -		reg = <0x1b>;
+> -		clocks = <&cru I2S0_8CH_MCLKOUT>;
+> -		clock-names = "mclk";
+> -		#sound-dai-cells = <0>;
+> -		assigned-clocks = <&cru I2S0_8CH_MCLKOUT>;
+> -		assigned-clock-rates = <12288000>;
+> -
+> -		port {
+> -			rt5616_p0_0: endpoint {
+> -				remote-endpoint = <&i2s0_8ch_p0_0>;
+> -			};
+> -		};
+> -	};
+> -
+> -	/* connected with MIPI-CSI1 */
+> -};
+> -
+> -&i2c8 {
+> -	pinctrl-0 = <&i2c8m2_xfer>;
+> -};
+> -
+> -&i2s0_8ch {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&i2s0_lrck
+> -		     &i2s0_mclk
+> -		     &i2s0_sclk
+> -		     &i2s0_sdi0
+> -		     &i2s0_sdo0>;
+> -	status = "okay";
+> -
+> -	i2s0_8ch_p0: port {
+> -		i2s0_8ch_p0_0: endpoint {
+> -			dai-format = "i2s";
+> -			mclk-fs = <256>;
+> -			remote-endpoint = <&rt5616_p0_0>;
+> -		};
+> -	};
+> -};
+> -
+> -&pcie2x1l0 {
+> -	reset-gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_HIGH>;
+> -	vpcie3v3-supply = <&vcc_3v3_pcie20>;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&pcie2_0_rst>;
+> -	status = "okay";
+> -};
+> -
+> -&pcie2x1l1 {
+> -	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
+> -	vpcie3v3-supply = <&vcc3v3_pcie2x1l0>;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&pcie2_1_rst>;
+> -	status = "okay";
+> -};
+> -
+> -&pcie2x1l2 {
+> -	reset-gpios = <&gpio4 RK_PA4 GPIO_ACTIVE_HIGH>;
+> -	vpcie3v3-supply = <&vcc_3v3_pcie20>;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&pcie2_2_rst>;
+> -	status = "okay";
+> -};
+> -
+> -&pcie30phy {
+> -	status = "okay";
+> -};
+> -
+> -&pcie3x4 {
+> -	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+> -	vpcie3v3-supply = <&vcc3v3_pcie30>;
+> -	status = "okay";
+> -};
+> -
+> -&pinctrl {
+> -	gpio-leds {
+> -		sys_led_pin: sys-led-pin {
+> -			rockchip,pins = <2 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -
+> -		usr_led_pin: usr-led-pin {
+> -			rockchip,pins = <2 RK_PC0 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -	};
+> -
+> -	headphone {
+> -		hp_det: hp-det {
+> -			rockchip,pins = <1 RK_PC4 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -	};
+> -
+> -	hym8563 {
+> -		hym8563_int: hym8563-int {
+> -			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
+> -		};
+> -	};
+> -
+> -	pcie {
+> -		pcie2_0_rst: pcie2-0-rst {
+> -			rockchip,pins = <4 RK_PB3 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -
+> -		pcie2_1_rst: pcie2-1-rst {
+> -			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -
+> -		pcie2_2_rst: pcie2-2-rst {
+> -			rockchip,pins = <4 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -
+> -		pcie_m2_0_pwren: pcie-m20-pwren {
+> -			rockchip,pins = <2 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -
+> -		pcie_m2_1_pwren: pcie-m21-pwren {
+> -			rockchip,pins = <4 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -	};
+> -
+> -	usb {
+> -		pin_4g_lte_pwren: 4g-lte-pwren {
+> -			rockchip,pins = <4 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -
+> -		typec5v_pwren: typec5v-pwren {
+> -			rockchip,pins = <1 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -
+> -		usbc0_int: usbc0-int {
+> -			rockchip,pins = <0 RK_PD3 RK_FUNC_GPIO &pcfg_pull_up>;
+> -		};
+> -	};
+> -};
+> -
+> -&pwm1 {
+> -	pinctrl-0 = <&pwm1m1_pins>;
+> -	status = "okay";
+> -};
+> -
+> -&saradc {
+> -	vref-supply = <&avcc_1v8_s0>;
+> -	status = "okay";
+> -};
+> -
+> -&sdhci {
+> -	bus-width = <8>;
+> -	no-sdio;
+> -	no-sd;
+> -	non-removable;
+> -	max-frequency = <200000000>;
+> -	mmc-hs400-1_8v;
+> -	mmc-hs400-enhanced-strobe;
+> -	status = "okay";
+> -};
+> -
+> -&sdmmc {
+> -	bus-width = <4>;
+> -	cap-mmc-highspeed;
+> -	cap-sd-highspeed;
+> -	cd-gpios = <&gpio0 RK_PA4 GPIO_ACTIVE_LOW>;
+> -	disable-wp;
+> -	no-mmc;
+> -	no-sdio;
+> -	sd-uhs-sdr104;
+> -	vmmc-supply = <&vcc3v3_sd_s0>;
+> -	vqmmc-supply = <&vccio_sd_s0>;
+> -	status = "okay";
+> -};
+> -
+> -&spi2 {
+> -	status = "okay";
+> -	assigned-clocks = <&cru CLK_SPI2>;
+> -	assigned-clock-rates = <200000000>;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&spi2m2_cs0 &spi2m2_pins>;
+> -	num-cs = <1>;
+> -
+> -	pmic@0 {
+> -		compatible = "rockchip,rk806";
+> -		spi-max-frequency = <1000000>;
+> -		reg = <0x0>;
+> -
+> -		interrupt-parent = <&gpio0>;
+> -		interrupts = <7 IRQ_TYPE_LEVEL_LOW>;
+> -
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&pmic_pins>, <&rk806_dvs1_null>,
+> -			    <&rk806_dvs2_null>, <&rk806_dvs3_null>;
+> -
+> -		system-power-controller;
+> -
+> -		vcc1-supply = <&vcc4v0_sys>;
+> -		vcc2-supply = <&vcc4v0_sys>;
+> -		vcc3-supply = <&vcc4v0_sys>;
+> -		vcc4-supply = <&vcc4v0_sys>;
+> -		vcc5-supply = <&vcc4v0_sys>;
+> -		vcc6-supply = <&vcc4v0_sys>;
+> -		vcc7-supply = <&vcc4v0_sys>;
+> -		vcc8-supply = <&vcc4v0_sys>;
+> -		vcc9-supply = <&vcc4v0_sys>;
+> -		vcc10-supply = <&vcc4v0_sys>;
+> -		vcc11-supply = <&vcc_2v0_pldo_s3>;
+> -		vcc12-supply = <&vcc4v0_sys>;
+> -		vcc13-supply = <&vcc_1v1_nldo_s3>;
+> -		vcc14-supply = <&vcc_1v1_nldo_s3>;
+> -		vcca-supply = <&vcc4v0_sys>;
+> -
+> -		gpio-controller;
+> -		#gpio-cells = <2>;
+> -
+> -		rk806_dvs1_null: dvs1-null-pins {
+> -			pins = "gpio_pwrctrl1";
+> -			function = "pin_fun0";
+> -		};
+> -
+> -		rk806_dvs2_null: dvs2-null-pins {
+> -			pins = "gpio_pwrctrl2";
+> -			function = "pin_fun0";
+> -		};
+> -
+> -		rk806_dvs3_null: dvs3-null-pins {
+> -			pins = "gpio_pwrctrl3";
+> -			function = "pin_fun0";
+> -		};
+> -
+> -		regulators {
+> -			vdd_gpu_s0: vdd_gpu_mem_s0: dcdc-reg1 {
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <550000>;
+> -				regulator-max-microvolt = <950000>;
+> -				regulator-ramp-delay = <12500>;
+> -				regulator-name = "vdd_gpu_s0";
+> -				regulator-enable-ramp-delay = <400>;
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -				};
+> -			};
+> -
+> -			vdd_cpu_lit_s0: vdd_cpu_lit_mem_s0: dcdc-reg2 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <550000>;
+> -				regulator-max-microvolt = <950000>;
+> -				regulator-ramp-delay = <12500>;
+> -				regulator-name = "vdd_cpu_lit_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -				};
+> -			};
+> -
+> -			vdd_log_s0: dcdc-reg3 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <675000>;
+> -				regulator-max-microvolt = <750000>;
+> -				regulator-ramp-delay = <12500>;
+> -				regulator-name = "vdd_log_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -					regulator-suspend-microvolt = <750000>;
+> -				};
+> -			};
+> -
+> -			vdd_vdenc_s0: vdd_vdenc_mem_s0: dcdc-reg4 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <550000>;
+> -				regulator-max-microvolt = <950000>;
+> -				regulator-init-microvolt = <750000>;
+> -				regulator-ramp-delay = <12500>;
+> -				regulator-name = "vdd_vdenc_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -				};
+> -			};
+> -
+> -			vdd_ddr_s0: dcdc-reg5 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <675000>;
+> -				regulator-max-microvolt = <900000>;
+> -				regulator-ramp-delay = <12500>;
+> -				regulator-name = "vdd_ddr_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -					regulator-suspend-microvolt = <850000>;
+> -				};
+> -			};
+> -
+> -			vdd2_ddr_s3: dcdc-reg6 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-name = "vdd2_ddr_s3";
+> -
+> -				regulator-state-mem {
+> -					regulator-on-in-suspend;
+> -				};
+> -			};
+> -
+> -			vcc_2v0_pldo_s3: dcdc-reg7 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <2000000>;
+> -				regulator-max-microvolt = <2000000>;
+> -				regulator-ramp-delay = <12500>;
+> -				regulator-name = "vdd_2v0_pldo_s3";
+> -
+> -				regulator-state-mem {
+> -					regulator-on-in-suspend;
+> -					regulator-suspend-microvolt = <2000000>;
+> -				};
+> -			};
+> -
+> -			vcc_3v3_s3: dcdc-reg8 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <3300000>;
+> -				regulator-max-microvolt = <3300000>;
+> -				regulator-name = "vcc_3v3_s3";
+> -
+> -				regulator-state-mem {
+> -					regulator-on-in-suspend;
+> -					regulator-suspend-microvolt = <3300000>;
+> -				};
+> -			};
+> -
+> -			vddq_ddr_s0: dcdc-reg9 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-name = "vddq_ddr_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -				};
+> -			};
+> -
+> -			vcc_1v8_s3: dcdc-reg10 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <1800000>;
+> -				regulator-max-microvolt = <1800000>;
+> -				regulator-name = "vcc_1v8_s3";
+> -
+> -				regulator-state-mem {
+> -					regulator-on-in-suspend;
+> -					regulator-suspend-microvolt = <1800000>;
+> -				};
+> -			};
+> -
+> -			avcc_1v8_s0: pldo-reg1 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <1800000>;
+> -				regulator-max-microvolt = <1800000>;
+> -				regulator-name = "avcc_1v8_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -				};
+> -			};
+> -
+> -			vcc_1v8_s0: pldo-reg2 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <1800000>;
+> -				regulator-max-microvolt = <1800000>;
+> -				regulator-name = "vcc_1v8_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -					regulator-suspend-microvolt = <1800000>;
+> -				};
+> -			};
+> -
+> -			avdd_1v2_s0: pldo-reg3 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <1200000>;
+> -				regulator-max-microvolt = <1200000>;
+> -				regulator-name = "avdd_1v2_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -				};
+> -			};
+> -
+> -			vcc_3v3_s0: pldo-reg4 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <3300000>;
+> -				regulator-max-microvolt = <3300000>;
+> -				regulator-ramp-delay = <12500>;
+> -				regulator-name = "vcc_3v3_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -				};
+> -			};
+> -
+> -			vccio_sd_s0: pldo-reg5 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <1800000>;
+> -				regulator-max-microvolt = <3300000>;
+> -				regulator-ramp-delay = <12500>;
+> -				regulator-name = "vccio_sd_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -				};
+> -			};
+> -
+> -			pldo6_s3: pldo-reg6 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <1800000>;
+> -				regulator-max-microvolt = <1800000>;
+> -				regulator-name = "pldo6_s3";
+> -
+> -				regulator-state-mem {
+> -					regulator-on-in-suspend;
+> -					regulator-suspend-microvolt = <1800000>;
+> -				};
+> -			};
+> -
+> -			vdd_0v75_s3: nldo-reg1 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <750000>;
+> -				regulator-max-microvolt = <750000>;
+> -				regulator-name = "vdd_0v75_s3";
+> -
+> -				regulator-state-mem {
+> -					regulator-on-in-suspend;
+> -					regulator-suspend-microvolt = <750000>;
+> -				};
+> -			};
+> -
+> -			vdd_ddr_pll_s0: nldo-reg2 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <850000>;
+> -				regulator-max-microvolt = <850000>;
+> -				regulator-name = "vdd_ddr_pll_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -					regulator-suspend-microvolt = <850000>;
+> -				};
+> -			};
+> -
+> -			avdd_0v75_s0: nldo-reg3 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <750000>;
+> -				regulator-max-microvolt = <750000>;
+> -				regulator-name = "avdd_0v75_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -				};
+> -			};
+> -
+> -			vdd_0v85_s0: nldo-reg4 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <850000>;
+> -				regulator-max-microvolt = <850000>;
+> -				regulator-name = "vdd_0v85_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -				};
+> -			};
+> -
+> -			vdd_0v75_s0: nldo-reg5 {
+> -				regulator-always-on;
+> -				regulator-boot-on;
+> -				regulator-min-microvolt = <750000>;
+> -				regulator-max-microvolt = <750000>;
+> -				regulator-name = "vdd_0v75_s0";
+> -
+> -				regulator-state-mem {
+> -					regulator-off-in-suspend;
+> -				};
+> -			};
+> -		};
+> -	};
+> -};
+> -
+> -&tsadc {
+> -	status = "okay";
+> -};
+> -
+> -&uart2 {
+> -	pinctrl-0 = <&uart2m0_xfer>;
+> -	status = "okay";
+> -};
+> -
+> -&u2phy2_host {
+> -	phy-supply = <&vdd_4g_3v3>;
+> -	status = "okay";
+> -};
+> -
+> -&u2phy3_host {
+> -	status = "okay";
+> -};
+> -
+> -&u2phy2 {
+> -	status = "okay";
+> -};
+> -
+> -&u2phy3 {
+> -	status = "okay";
+> -};
+> -
+> -&usb_host0_ehci {
+> -	status = "okay";
+> -};
+> -
+> -&usb_host0_ohci {
+> -	status = "okay";
+> -};
+> -
+> -&usb_host1_ehci {
+> -	status = "okay";
+> -};
+> -
+> -&usb_host1_ohci {
+> -	status = "okay";
+>   };
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi
+> new file mode 100644
+> index 000000000000..ad8e36a339dc
+> --- /dev/null
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-nanopc-t6.dtsi
+> @@ -0,0 +1,945 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (c) 2021 Rockchip Electronics Co., Ltd.
+> + * Copyright (c) 2023 Thomas McKahan
+> + *
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/pinctrl/rockchip.h>
+> +#include <dt-bindings/usb/pd.h>
+> +#include "rk3588.dtsi"
+> +
+> +/ {
+> +	model = "FriendlyElec NanoPC-T6";
+> +	compatible = "friendlyarm,nanopc-t6", "rockchip,rk3588";
+> +
+> +	aliases {
+> +		mmc0 = &sdhci;
+> +		mmc1 = &sdmmc;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial2:1500000n8";
+> +	};
+> +
+> +	leds {
+> +		compatible = "gpio-leds";
+> +
+> +		sys_led: led-0 {
+> +			gpios = <&gpio2 RK_PB7 GPIO_ACTIVE_HIGH>;
+> +			label = "system-led";
+> +			linux,default-trigger = "heartbeat";
+> +			pinctrl-names = "default";
+> +			pinctrl-0 = <&sys_led_pin>;
+> +		};
+> +
+> +		usr_led: led-1 {
+> +			gpios = <&gpio2 RK_PC0 GPIO_ACTIVE_HIGH>;
+> +			label = "user-led";
+> +			pinctrl-names = "default";
+> +			pinctrl-0 = <&usr_led_pin>;
+> +		};
+> +	};
+> +
+> +	sound {
+> +		compatible = "simple-audio-card";
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&hp_det>;
+> +
+> +		simple-audio-card,name = "realtek,rt5616-codec";
+> +		simple-audio-card,format = "i2s";
+> +		simple-audio-card,mclk-fs = <256>;
+> +
+> +		simple-audio-card,hp-det-gpio = <&gpio1 RK_PC4 GPIO_ACTIVE_LOW>;
+> +		simple-audio-card,hp-pin-name = "Headphones";
+> +
+> +		simple-audio-card,widgets =
+> +			"Headphone", "Headphones",
+> +			"Microphone", "Microphone Jack";
+> +		simple-audio-card,routing =
+> +			"Headphones", "HPOL",
+> +			"Headphones", "HPOR",
+> +			"MIC1", "Microphone Jack",
+> +			"Microphone Jack", "micbias1";
+> +
+> +		simple-audio-card,cpu {
+> +			sound-dai = <&i2s0_8ch>;
+> +		};
+> +		simple-audio-card,codec {
+> +			sound-dai = <&rt5616>;
+> +		};
+> +	};
+> +
+> +	vcc12v_dcin: vcc12v-dcin-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc12v_dcin";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <12000000>;
+> +		regulator-max-microvolt = <12000000>;
+> +	};
+> +
+> +	/* vcc5v0_sys powers peripherals */
+> +	vcc5v0_sys: vcc5v0-sys-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		vin-supply = <&vcc12v_dcin>;
+> +	};
+> +
+> +	/* vcc4v0_sys powers the RK806, RK860's */
+> +	vcc4v0_sys: vcc4v0-sys-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc4v0_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <4000000>;
+> +		regulator-max-microvolt = <4000000>;
+> +		vin-supply = <&vcc12v_dcin>;
+> +	};
+> +
+> +	vcc_1v1_nldo_s3: vcc-1v1-nldo-s3-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc-1v1-nldo-s3";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <1100000>;
+> +		regulator-max-microvolt = <1100000>;
+> +		vin-supply = <&vcc4v0_sys>;
+> +	};
+> +
+> +	vcc_3v3_pcie20: vcc3v3-pcie20-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc_3v3_pcie20";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vcc_3v3_s3>;
+> +	};
+> +
+> +	vbus5v0_typec: vbus5v0-typec-regulator {
+> +		compatible = "regulator-fixed";
+> +		enable-active-high;
+> +		gpio = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&typec5v_pwren>;
+> +		regulator-name = "vbus5v0_typec";
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vcc3v3_pcie2x1l0: vcc3v3-pcie2x1l0-regulator {
+> +		compatible = "regulator-fixed";
+> +		enable-active-high;
+> +		gpio = <&gpio4 RK_PC2 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&pcie_m2_1_pwren>;
+> +		regulator-name = "vcc3v3_pcie2x1l0";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
+> +		compatible = "regulator-fixed";
+> +		enable-active-high;
+> +		gpios = <&gpio2 RK_PC5 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&pcie_m2_0_pwren>;
+> +		regulator-name = "vcc3v3_pcie30";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vcc3v3_sd_s0: vcc3v3-sd-s0-regulator {
+> +		compatible = "regulator-fixed";
+> +		enable-active-low;
+> +		gpio = <&gpio4 RK_PA5 GPIO_ACTIVE_LOW>;
+> +		regulator-boot-on;
+> +		regulator-max-microvolt = <3300000>;
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-name = "vcc3v3_sd_s0";
+> +		vin-supply = <&vcc_3v3_s3>;
+> +	};
+> +
+> +	vdd_4g_3v3: vdd-4g-3v3-regulator {
+> +		compatible = "regulator-fixed";
+> +		enable-active-high;
+> +		gpio = <&gpio4 RK_PC6 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&pin_4g_lte_pwren>;
+> +		regulator-name = "vdd_4g_3v3";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +};
+> +
+> +&combphy0_ps {
+> +	status = "okay";
+> +};
+> +
+> +&combphy1_ps {
+> +	status = "okay";
+> +};
+> +
+> +&combphy2_psu {
+> +	status = "okay";
+> +};
+> +
+> +&cpu_l0 {
+> +	cpu-supply = <&vdd_cpu_lit_s0>;
+> +};
+> +
+> +&cpu_l1 {
+> +	cpu-supply = <&vdd_cpu_lit_s0>;
+> +};
+> +
+> +&cpu_l2 {
+> +	cpu-supply = <&vdd_cpu_lit_s0>;
+> +};
+> +
+> +&cpu_l3 {
+> +	cpu-supply = <&vdd_cpu_lit_s0>;
+> +};
+> +
+> +&cpu_b0 {
+> +	cpu-supply = <&vdd_cpu_big0_s0>;
+> +};
+> +
+> +&cpu_b1 {
+> +	cpu-supply = <&vdd_cpu_big0_s0>;
+> +};
+> +
+> +&cpu_b2 {
+> +	cpu-supply = <&vdd_cpu_big1_s0>;
+> +};
+> +
+> +&cpu_b3 {
+> +	cpu-supply = <&vdd_cpu_big1_s0>;
+> +};
+> +
+> +&gpio0 {
+> +	gpio-line-names = /* GPIO0 A0-A7 */
+> +			  "", "", "", "",
+> +			  "", "", "", "",
+> +			  /* GPIO0 B0-B7 */
+> +			  "", "", "", "",
+> +			  "", "", "", "",
+> +			  /* GPIO0 C0-C7 */
+> +			  "", "", "", "",
+> +			  "HEADER_10", "HEADER_08", "HEADER_32", "",
+> +			  /* GPIO0 D0-D7 */
+> +			  "", "", "", "",
+> +			  "", "", "", "";
+> +};
+> +
+> +&gpio1 {
+> +	gpio-line-names = /* GPIO1 A0-A7 */
+> +			  "HEADER_27", "HEADER_28", "", "",
+> +			  "", "", "", "HEADER_15",
+> +			  /* GPIO1 B0-B7 */
+> +			  "HEADER_26", "HEADER_21", "HEADER_19", "HEADER_23",
+> +			  "HEADER_24", "HEADER_22", "", "",
+> +			  /* GPIO1 C0-C7 */
+> +			  "", "", "", "",
+> +			  "", "", "", "",
+> +			  /* GPIO1 D0-D7 */
+> +			  "", "", "", "",
+> +			  "", "", "HEADER_05", "HEADER_03";
+> +};
+> +
+> +&gpio2 {
+> +	gpio-line-names = /* GPIO2 A0-A7 */
+> +			  "", "", "", "",
+> +			  "", "", "", "",
+> +			  /* GPIO2 B0-B7 */
+> +			  "", "", "", "",
+> +			  "", "", "", "",
+> +			  /* GPIO2 C0-C7 */
+> +			  "", "CSI1_11", "CSI1_12", "",
+> +			  "", "", "", "",
+> +			  /* GPIO2 D0-D7 */
+> +			  "", "", "", "",
+> +			  "", "", "", "";
+> +};
+> +
+> +&gpio3 {
+> +	gpio-line-names = /* GPIO3 A0-A7 */
+> +			  "HEADER_35", "HEADER_38", "HEADER_40", "HEADER_36",
+> +			  "HEADER_37", "", "DSI0_12", "",
+> +			  /* GPIO3 B0-B7 */
+> +			  "HEADER_33", "DSI0_10", "HEADER_07", "HEADER_16",
+> +			  "HEADER_18", "HEADER_29", "HEADER_31", "HEADER_12",
+> +			  /* GPIO3 C0-C7 */
+> +			  "DSI0_08", "DSI0_14", "HEADER_11", "HEADER_13",
+> +			  "", "", "", "",
+> +			  /* GPIO3 D0-D7 */
+> +			  "", "", "", "",
+> +			  "", "DSI1_10", "", "";
+> +};
+> +
+> +&gpio4 {
+> +	gpio-line-names = /* GPIO4 A0-A7 */
+> +			  "DSI1_08", "DSI1_14", "", "DSI1_12",
+> +			  "", "", "", "",
+> +			  /* GPIO4 B0-B7 */
+> +			  "", "", "", "",
+> +			  "", "", "", "",
+> +			  /* GPIO4 C0-C7 */
+> +			  "", "", "", "",
+> +			  "CSI0_11", "CSI0_12", "", "",
+> +			  /* GPIO4 D0-D7 */
+> +			  "", "", "", "",
+> +			  "", "", "", "";
+> +};
+> +
+> +&i2c0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&i2c0m2_xfer>;
+> +	status = "okay";
+> +
+> +	vdd_cpu_big0_s0: regulator@42 {
+> +		compatible = "rockchip,rk8602";
+> +		reg = <0x42>;
+> +		fcs,suspend-voltage-selector = <1>;
+> +		regulator-name = "vdd_cpu_big0_s0";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <550000>;
+> +		regulator-max-microvolt = <1050000>;
+> +		regulator-ramp-delay = <2300>;
+> +		vin-supply = <&vcc4v0_sys>;
+> +
+> +		regulator-state-mem {
+> +			regulator-off-in-suspend;
+> +		};
+> +	};
+> +
+> +	vdd_cpu_big1_s0: regulator@43 {
+> +		compatible = "rockchip,rk8603", "rockchip,rk8602";
+> +		reg = <0x43>;
+> +		fcs,suspend-voltage-selector = <1>;
+> +		regulator-name = "vdd_cpu_big1_s0";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <550000>;
+> +		regulator-max-microvolt = <1050000>;
+> +		regulator-ramp-delay = <2300>;
+> +		vin-supply = <&vcc4v0_sys>;
+> +
+> +		regulator-state-mem {
+> +			regulator-off-in-suspend;
+> +		};
+> +	};
+> +};
+> +
+> +&i2c2 {
+> +	status = "okay";
+> +
+> +	vdd_npu_s0: regulator@42 {
+> +		compatible = "rockchip,rk8602";
+> +		reg = <0x42>;
+> +		rockchip,suspend-voltage-selector = <1>;
+> +		regulator-name = "vdd_npu_s0";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <550000>;
+> +		regulator-max-microvolt = <950000>;
+> +		regulator-ramp-delay = <2300>;
+> +		vin-supply = <&vcc4v0_sys>;
+> +
+> +		regulator-state-mem {
+> +			regulator-off-in-suspend;
+> +		};
+> +	};
+> +};
+> +
+> +&i2c6 {
+> +	clock-frequency = <200000>;
+> +	status = "okay";
+> +
+> +	fusb302: typec-portc@22 {
+> +		compatible = "fcs,fusb302";
+> +		reg = <0x22>;
+> +		interrupt-parent = <&gpio0>;
+> +		interrupts = <RK_PD3 IRQ_TYPE_LEVEL_LOW>;
+> +		pinctrl-0 = <&usbc0_int>;
+> +		pinctrl-names = "default";
+> +		vbus-supply = <&vbus5v0_typec>;
+> +
+> +		connector {
+> +			compatible = "usb-c-connector";
+> +			data-role = "dual";
+> +			label = "USB-C";
+> +			power-role = "dual";
+> +			try-power-role = "sink";
+> +			source-pdos = <PDO_FIXED(5000, 2000, PDO_FIXED_USB_COMM)>;
+> +			sink-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>;
+> +			op-sink-microwatt = <1000000>;
+> +		};
+> +	};
+> +
+> +	hym8563: rtc@51 {
+> +		compatible = "haoyu,hym8563";
+> +		reg = <0x51>;
+> +		#clock-cells = <0>;
+> +		clock-output-names = "hym8563";
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&hym8563_int>;
+> +		interrupt-parent = <&gpio0>;
+> +		interrupts = <RK_PB0 IRQ_TYPE_LEVEL_LOW>;
+> +		wakeup-source;
+> +	};
+> +};
+> +
+> +&i2c7 {
+> +	clock-frequency = <200000>;
+> +	status = "okay";
+> +
+> +	rt5616: codec@1b {
+> +		compatible = "realtek,rt5616";
+> +		reg = <0x1b>;
+> +		clocks = <&cru I2S0_8CH_MCLKOUT>;
+> +		clock-names = "mclk";
+> +		#sound-dai-cells = <0>;
+> +		assigned-clocks = <&cru I2S0_8CH_MCLKOUT>;
+> +		assigned-clock-rates = <12288000>;
+> +
+> +		port {
+> +			rt5616_p0_0: endpoint {
+> +				remote-endpoint = <&i2s0_8ch_p0_0>;
+> +			};
+> +		};
+> +	};
+> +
+> +	/* connected with MIPI-CSI1 */
+> +};
+> +
+> +&i2c8 {
+> +	pinctrl-0 = <&i2c8m2_xfer>;
+> +};
+> +
+> +&i2s0_8ch {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&i2s0_lrck
+> +		     &i2s0_mclk
+> +		     &i2s0_sclk
+> +		     &i2s0_sdi0
+> +		     &i2s0_sdo0>;
+> +	status = "okay";
+> +
+> +	i2s0_8ch_p0: port {
+> +		i2s0_8ch_p0_0: endpoint {
+> +			dai-format = "i2s";
+> +			mclk-fs = <256>;
+> +			remote-endpoint = <&rt5616_p0_0>;
+> +		};
+> +	};
+> +};
+> +
+> +&pcie2x1l0 {
+> +	reset-gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc_3v3_pcie20>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie2_0_rst>;
+> +	status = "okay";
+> +};
+> +
+> +&pcie2x1l1 {
+> +	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_pcie2x1l0>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie2_1_rst>;
+> +	status = "okay";
+> +};
+> +
+> +&pcie2x1l2 {
+> +	reset-gpios = <&gpio4 RK_PA4 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc_3v3_pcie20>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie2_2_rst>;
+> +	status = "okay";
+> +};
+> +
+> +&pcie30phy {
+> +	status = "okay";
+> +};
+> +
+> +&pcie3x4 {
+> +	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_pcie30>;
+> +	status = "okay";
+> +};
+> +
+> +&pinctrl {
+> +	gpio-leds {
+> +		sys_led_pin: sys-led-pin {
+> +			rockchip,pins = <2 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		usr_led_pin: usr-led-pin {
+> +			rockchip,pins = <2 RK_PC0 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	headphone {
+> +		hp_det: hp-det {
+> +			rockchip,pins = <1 RK_PC4 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	hym8563 {
+> +		hym8563_int: hym8563-int {
+> +			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +
+> +	pcie {
+> +		pcie2_0_rst: pcie2-0-rst {
+> +			rockchip,pins = <4 RK_PB3 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		pcie2_1_rst: pcie2-1-rst {
+> +			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		pcie2_2_rst: pcie2-2-rst {
+> +			rockchip,pins = <4 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		pcie_m2_0_pwren: pcie-m20-pwren {
+> +			rockchip,pins = <2 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		pcie_m2_1_pwren: pcie-m21-pwren {
+> +			rockchip,pins = <4 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	usb {
+> +		pin_4g_lte_pwren: 4g-lte-pwren {
+> +			rockchip,pins = <4 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		typec5v_pwren: typec5v-pwren {
+> +			rockchip,pins = <1 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		usbc0_int: usbc0-int {
+> +			rockchip,pins = <0 RK_PD3 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +};
+> +
+> +&pwm1 {
+> +	pinctrl-0 = <&pwm1m1_pins>;
+> +	status = "okay";
+> +};
+> +
+> +&saradc {
+> +	vref-supply = <&avcc_1v8_s0>;
+> +	status = "okay";
+> +};
+> +
+> +&sdhci {
+> +	bus-width = <8>;
+> +	no-sdio;
+> +	no-sd;
+> +	non-removable;
+> +	max-frequency = <200000000>;
+> +	mmc-hs400-1_8v;
+> +	mmc-hs400-enhanced-strobe;
+> +	status = "okay";
+> +};
+> +
+> +&sdmmc {
+> +	bus-width = <4>;
+> +	cap-mmc-highspeed;
+> +	cap-sd-highspeed;
+> +	cd-gpios = <&gpio0 RK_PA4 GPIO_ACTIVE_LOW>;
+> +	disable-wp;
+> +	no-mmc;
+> +	no-sdio;
+> +	sd-uhs-sdr104;
+> +	vmmc-supply = <&vcc3v3_sd_s0>;
+> +	vqmmc-supply = <&vccio_sd_s0>;
+> +	status = "okay";
+> +};
+> +
+> +&spi2 {
+> +	status = "okay";
+> +	assigned-clocks = <&cru CLK_SPI2>;
+> +	assigned-clock-rates = <200000000>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&spi2m2_cs0 &spi2m2_pins>;
+> +	num-cs = <1>;
+> +
+> +	pmic@0 {
+> +		compatible = "rockchip,rk806";
+> +		spi-max-frequency = <1000000>;
+> +		reg = <0x0>;
+> +
+> +		interrupt-parent = <&gpio0>;
+> +		interrupts = <7 IRQ_TYPE_LEVEL_LOW>;
+> +
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&pmic_pins>, <&rk806_dvs1_null>,
+> +			    <&rk806_dvs2_null>, <&rk806_dvs3_null>;
+> +
+> +		system-power-controller;
+> +
+> +		vcc1-supply = <&vcc4v0_sys>;
+> +		vcc2-supply = <&vcc4v0_sys>;
+> +		vcc3-supply = <&vcc4v0_sys>;
+> +		vcc4-supply = <&vcc4v0_sys>;
+> +		vcc5-supply = <&vcc4v0_sys>;
+> +		vcc6-supply = <&vcc4v0_sys>;
+> +		vcc7-supply = <&vcc4v0_sys>;
+> +		vcc8-supply = <&vcc4v0_sys>;
+> +		vcc9-supply = <&vcc4v0_sys>;
+> +		vcc10-supply = <&vcc4v0_sys>;
+> +		vcc11-supply = <&vcc_2v0_pldo_s3>;
+> +		vcc12-supply = <&vcc4v0_sys>;
+> +		vcc13-supply = <&vcc_1v1_nldo_s3>;
+> +		vcc14-supply = <&vcc_1v1_nldo_s3>;
+> +		vcca-supply = <&vcc4v0_sys>;
+> +
+> +		gpio-controller;
+> +		#gpio-cells = <2>;
+> +
+> +		rk806_dvs1_null: dvs1-null-pins {
+> +			pins = "gpio_pwrctrl1";
+> +			function = "pin_fun0";
+> +		};
+> +
+> +		rk806_dvs2_null: dvs2-null-pins {
+> +			pins = "gpio_pwrctrl2";
+> +			function = "pin_fun0";
+> +		};
+> +
+> +		rk806_dvs3_null: dvs3-null-pins {
+> +			pins = "gpio_pwrctrl3";
+> +			function = "pin_fun0";
+> +		};
+> +
+> +		regulators {
+> +			vdd_gpu_s0: vdd_gpu_mem_s0: dcdc-reg1 {
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <550000>;
+> +				regulator-max-microvolt = <950000>;
+> +				regulator-ramp-delay = <12500>;
+> +				regulator-name = "vdd_gpu_s0";
+> +				regulator-enable-ramp-delay = <400>;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vdd_cpu_lit_s0: vdd_cpu_lit_mem_s0: dcdc-reg2 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <550000>;
+> +				regulator-max-microvolt = <950000>;
+> +				regulator-ramp-delay = <12500>;
+> +				regulator-name = "vdd_cpu_lit_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vdd_log_s0: dcdc-reg3 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <675000>;
+> +				regulator-max-microvolt = <750000>;
+> +				regulator-ramp-delay = <12500>;
+> +				regulator-name = "vdd_log_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +					regulator-suspend-microvolt = <750000>;
+> +				};
+> +			};
+> +
+> +			vdd_vdenc_s0: vdd_vdenc_mem_s0: dcdc-reg4 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <550000>;
+> +				regulator-max-microvolt = <950000>;
+> +				regulator-init-microvolt = <750000>;
+> +				regulator-ramp-delay = <12500>;
+> +				regulator-name = "vdd_vdenc_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vdd_ddr_s0: dcdc-reg5 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <675000>;
+> +				regulator-max-microvolt = <900000>;
+> +				regulator-ramp-delay = <12500>;
+> +				regulator-name = "vdd_ddr_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +					regulator-suspend-microvolt = <850000>;
+> +				};
+> +			};
+> +
+> +			vdd2_ddr_s3: dcdc-reg6 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-name = "vdd2_ddr_s3";
+> +
+> +				regulator-state-mem {
+> +					regulator-on-in-suspend;
+> +				};
+> +			};
+> +
+> +			vcc_2v0_pldo_s3: dcdc-reg7 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <2000000>;
+> +				regulator-max-microvolt = <2000000>;
+> +				regulator-ramp-delay = <12500>;
+> +				regulator-name = "vdd_2v0_pldo_s3";
+> +
+> +				regulator-state-mem {
+> +					regulator-on-in-suspend;
+> +					regulator-suspend-microvolt = <2000000>;
+> +				};
+> +			};
+> +
+> +			vcc_3v3_s3: dcdc-reg8 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <3300000>;
+> +				regulator-max-microvolt = <3300000>;
+> +				regulator-name = "vcc_3v3_s3";
+> +
+> +				regulator-state-mem {
+> +					regulator-on-in-suspend;
+> +					regulator-suspend-microvolt = <3300000>;
+> +				};
+> +			};
+> +
+> +			vddq_ddr_s0: dcdc-reg9 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-name = "vddq_ddr_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vcc_1v8_s3: dcdc-reg10 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +				regulator-name = "vcc_1v8_s3";
+> +
+> +				regulator-state-mem {
+> +					regulator-on-in-suspend;
+> +					regulator-suspend-microvolt = <1800000>;
+> +				};
+> +			};
+> +
+> +			avcc_1v8_s0: pldo-reg1 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +				regulator-name = "avcc_1v8_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vcc_1v8_s0: pldo-reg2 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +				regulator-name = "vcc_1v8_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +					regulator-suspend-microvolt = <1800000>;
+> +				};
+> +			};
+> +
+> +			avdd_1v2_s0: pldo-reg3 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <1200000>;
+> +				regulator-max-microvolt = <1200000>;
+> +				regulator-name = "avdd_1v2_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vcc_3v3_s0: pldo-reg4 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <3300000>;
+> +				regulator-max-microvolt = <3300000>;
+> +				regulator-ramp-delay = <12500>;
+> +				regulator-name = "vcc_3v3_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vccio_sd_s0: pldo-reg5 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <3300000>;
+> +				regulator-ramp-delay = <12500>;
+> +				regulator-name = "vccio_sd_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			pldo6_s3: pldo-reg6 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +				regulator-name = "pldo6_s3";
+> +
+> +				regulator-state-mem {
+> +					regulator-on-in-suspend;
+> +					regulator-suspend-microvolt = <1800000>;
+> +				};
+> +			};
+> +
+> +			vdd_0v75_s3: nldo-reg1 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <750000>;
+> +				regulator-max-microvolt = <750000>;
+> +				regulator-name = "vdd_0v75_s3";
+> +
+> +				regulator-state-mem {
+> +					regulator-on-in-suspend;
+> +					regulator-suspend-microvolt = <750000>;
+> +				};
+> +			};
+> +
+> +			vdd_ddr_pll_s0: nldo-reg2 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <850000>;
+> +				regulator-max-microvolt = <850000>;
+> +				regulator-name = "vdd_ddr_pll_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +					regulator-suspend-microvolt = <850000>;
+> +				};
+> +			};
+> +
+> +			avdd_0v75_s0: nldo-reg3 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <750000>;
+> +				regulator-max-microvolt = <750000>;
+> +				regulator-name = "avdd_0v75_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vdd_0v85_s0: nldo-reg4 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <850000>;
+> +				regulator-max-microvolt = <850000>;
+> +				regulator-name = "vdd_0v85_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vdd_0v75_s0: nldo-reg5 {
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <750000>;
+> +				regulator-max-microvolt = <750000>;
+> +				regulator-name = "vdd_0v75_s0";
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&tsadc {
+> +	status = "okay";
+> +};
+> +
+> +&uart2 {
+> +	pinctrl-0 = <&uart2m0_xfer>;
+> +	status = "okay";
+> +};
+> +
+> +&u2phy2_host {
+> +	phy-supply = <&vdd_4g_3v3>;
+> +	status = "okay";
+> +};
+> +
+> +&u2phy3_host {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy2 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy3 {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host0_ehci {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host0_ohci {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host1_ehci {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host1_ohci {
+> +	status = "okay";
+> +};
