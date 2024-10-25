@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4CE0D0C603
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45378D0C601
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:04:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED9C389028;
-	Fri, 25 Oct 2024 14:01:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C6BF788F94;
+	Fri, 25 Oct 2024 14:04:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="IyN8W9ql";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="fKE3ajvn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4546E89028; Fri, 25 Oct 2024 14:01:52 +0200 (CEST)
-Received: from mail-m127208.xmail.ntesmail.com
- (mail-m127208.xmail.ntesmail.com [115.236.127.208])
+ id E0EA788C10; Fri, 25 Oct 2024 14:04:31 +0200 (CEST)
+Received: from mail-m1973182.qiye.163.com (mail-m1973182.qiye.163.com
+ [220.197.31.82])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D18DA89070
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:01:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A6DCF88F94
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:04:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id ebe5901;
- Fri, 25 Oct 2024 20:01:39 +0800 (GMT+08:00)
-Message-ID: <b742de90-4378-41bf-86d7-1c2bcc816ed1@rock-chips.com>
-Date: Fri, 25 Oct 2024 20:01:38 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id ebe59b0;
+ Fri, 25 Oct 2024 20:04:17 +0800 (GMT+08:00)
+Message-ID: <b39bba53-5379-4c5e-9d77-ee6a27a6e94c@rock-chips.com>
+Date: Fri, 25 Oct 2024 20:04:17 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 18/18] board: rockchip: add support for Qnap TS433
- devices
-To: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
- philipp.tomsich@vrull.eu, sjg@chromium.org
-Cc: ukleinek@debian.org
-References: <20241013192424.84280-1-heiko@sntech.de>
- <20241013192424.84280-19-heiko@sntech.de>
+Subject: Re: [PATCH V2 1/4] board: rockchip: Convert Anbernic RGxx3 to
+ OF_UPSTREAM
+To: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de
+Cc: jonas@kwiboo.se, trini@konsulko.com, philipp.tomsich@vrull.eu,
+ sjg@chromium.org, dsimic@manjaro.org, quentin.schulz@cherry.de,
+ Chris Morgan <macromorgan@hotmail.com>
+References: <20240919140022.511067-1-macroalpha82@gmail.com>
+ <20240919140022.511067-2-macroalpha82@gmail.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241013192424.84280-19-heiko@sntech.de>
+In-Reply-To: <20240919140022.511067-2-macroalpha82@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh0ZT1ZOSEJCGkwfT0hNTEtWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0wYTlYfTB4eGEpJSh9IHU1WFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a92c38dbdaa09d6kunmebe5901
+X-HM-Tid: 0a92c390287809d6kunmebe59b0
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MTo6Qjo6PTIfIRcXKUgMSw08
- DkMaCxpVSlVKTElCQ05MTEtLSkhPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSkhISTcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PTo6GRw4LjIsHxc0A0gtSi0T
+ N1YwFCNVSlVKTElCQ05MQ05DTExIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJS01DSjcG
 DKIM-Signature: a=rsa-sha256;
- b=IyN8W9qlpuqcobHCONbwBESajTv6RXXF1DjCgnEXq7R523KfluU1w5tl+UQ/DsNMxoZJxLwWjhUCPl7UeUDVWOw5Y0Xv598DCtu3irZKHP62EqZe++wlJty3G8i+rALCoOcml7X7p33GbmDLpGdVBjf2KiwmBxtqc1BZitP03eE=;
+ b=fKE3ajvndttmd/rEBYieBtpIBNVfgDEoQr3tkpov4C1T2KQFiLp5PmGOvCe0Q0CcXyC3iXhywZoRdXjHKmCzxPvHOWuFkmUxT+mdxDm1XXb+YX2lwAhd/WC4R5wBaqLHfCvHjuCBo3MF7KymDroic0RIOLP+NNGEzZ6nqSj6rXA=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=+srmHPxY6LpfH9vwXXcofIl+UeGmq9QnCLSdMHzOa4U=;
+ bh=vCm45E01cN9lomH4w37TU+PHD60XjwG+niKddEZtUYs=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,344 +77,633 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/10/14 03:24, Heiko Stuebner wrote:
-> The Qnap TS433 is a 4-bay NAS based around the RK3568.
+On 2024/9/19 22:00, Chris Morgan wrote:
+> From: Chris Morgan <macromorgan@hotmail.com>
 >
-> Two SATA bays are connected to the RK3568's own SATA controllers while
-> the other two are connected to a JMicron SATA controller living on the
-> PCIe bus.
+> Refactor the board detection logic (again) to make it compatible with
+> the upstream device-trees, and switch to OF_UPSTREAM.
 >
-> It provides one 2.5Gb and one 1Gb ethernet port as well as 3 usb ports.
+> Now the device boots with the device-tree for the 353P, and then
+> loads the correct device tree (of 10) in the later stages of SPL.
 >
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi |  6 ++
->   arch/arm/mach-rockchip/rk3568/Kconfig      | 14 ++++
->   board/qnap/ts433/Kconfig                   | 12 +++
->   board/qnap/ts433/MAINTAINERS               |  8 ++
->   configs/qnap-ts433-rk3568_defconfig        | 86 ++++++++++++++++++++
->   doc/board/qnap/index.rst                   |  9 +++
->   doc/board/qnap/ts433.rst                   | 91 ++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst            |  1 +
->   include/configs/qnap_ts433.h               | 10 +++
->   9 files changed, 237 insertions(+)
->   create mode 100644 arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
->   create mode 100644 board/qnap/ts433/Kconfig
->   create mode 100644 board/qnap/ts433/MAINTAINERS
->   create mode 100644 configs/qnap-ts433-rk3568_defconfig
->   create mode 100644 doc/board/qnap/index.rst
->   create mode 100644 doc/board/qnap/ts433.rst
->   create mode 100644 include/configs/qnap_ts433.h
+>   .../dts/rk3566-anbernic-rg353p-u-boot.dtsi    |  34 +++
+>   .../arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi |  52 -----
+>   arch/arm/dts/rk3566-anbernic-rgxx3.dts        |  28 ---
+>   board/anbernic/rgxx3_rk3566/MAINTAINERS       |   4 +-
+>   board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c    | 214 +++++++++++++-----
+>   configs/anbernic-rgxx3-rk3566_defconfig       |  10 +-
+>   6 files changed, 195 insertions(+), 147 deletions(-)
+>   create mode 100644 arch/arm/dts/rk3566-anbernic-rg353p-u-boot.dtsi
+>   delete mode 100644 arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
+>   delete mode 100644 arch/arm/dts/rk3566-anbernic-rgxx3.dts
 >
-> diff --git a/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi b/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+> diff --git a/arch/arm/dts/rk3566-anbernic-rg353p-u-boot.dtsi b/arch/arm/dts/rk3566-anbernic-rg353p-u-boot.dtsi
 > new file mode 100644
-> index 00000000000..19acbceb468
+> index 00000000000..fa3fbe6c810
 > --- /dev/null
-> +++ b/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
-> @@ -0,0 +1,6 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * (C) Copyright 2024 Heiko Stuebner <heiko@sntech.de>
-> + */
+> +++ b/arch/arm/dts/rk3566-anbernic-rg353p-u-boot.dtsi
+> @@ -0,0 +1,34 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 > +
 > +#include "rk356x-u-boot.dtsi"
-> diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-> index 899cf909fbb..2a0fd40874e 100644
-> --- a/arch/arm/mach-rockchip/rk3568/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-> @@ -27,6 +27,19 @@ config TARGET_POWKIDDY_X55_RK3566
->   	help
->   	  Powkiddy X55 handheld gaming console with an RK3566 SoC.
+> +
+> +/ {
+> +	chosen {
+> +		u-boot,spl-boot-order = &sdmmc0, &sdhci;
+> +	};
+> +
+> +	/*
+> +	 * Adding fixed regulator to work around driver regulator
+> +	 * requirements. Note that the correct regulator is on by
+> +	 * default at boot and that saradc regulator gets corrected
+> +	 * when proper device-tree is loaded.
+> +	 */
+> +	vcc_1v8_dummy: vcc-1v8-dummy {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +		compatible = "regulator-fixed";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <1800000>;
+> +		regulator-max-microvolt = <1800000>;
+> +		regulator-name = "vcc_1v8_dummy";
+> +		status = "okay";
+> +	};
+> +};
+> +
+> +&saradc {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +	vref-supply = <&vcc_1v8_dummy>;
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi b/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
+> deleted file mode 100644
+> index c7e849816a6..00000000000
+> --- a/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
+> +++ /dev/null
+> @@ -1,52 +0,0 @@
+> -// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> -
+> -#include "rk356x-u-boot.dtsi"
+> -
+> -/ {
+> -	chosen {
+> -		u-boot,spl-boot-order = &sdmmc0, &sdhci;
+> -	};
+> -};
+> -
+> -&dsi_dphy0 {
+> -	status = "okay";
+> -};
+> -
+> -&dsi0 {
+> -	status = "okay";
+> -};
+> -
+> -&i2c2 {
+> -	pinctrl-0 = <&i2c2m1_xfer>;
+> -	pinctrl-names = "default";
+> -	status = "okay";
+> -};
+> -
+> -&pmucru {
+> -	assigned-clocks = <&pmucru SCLK_32K_IOE>;
+> -	assigned-clock-parents = <&pmucru CLK_RTC_32K>;
+> -};
+> -
+> -/*
+> - * We don't need the clocks, but if they are present they may cause
+> - * probing to fail so we remove them for U-Boot.
+> - */
+> -&rk817 {
+> -	/delete-property/ assigned-clocks;
+> -	/delete-property/ assigned-clock-parents;
+> -	/delete-property/ clocks;
+> -	/delete-property/ clock-names;
+> -};
+> -
+> -&sdhci {
+> -	pinctrl-0 = <&emmc_bus8>, <&emmc_clk>, <&emmc_cmd>,
+> -		    <&emmc_datastrobe>, <&emmc_rstnout>;
+> -	pinctrl-names = "default";
+> -	bus-width = <8>;
+> -	max-frequency = <200000000>;
+> -	mmc-hs200-1_8v;
+> -	non-removable;
+> -	vmmc-supply = <&vcc_3v3>;
+> -	vqmmc-supply = <&vcc_1v8>;
+> -	status = "okay";
+> -};
+> diff --git a/arch/arm/dts/rk3566-anbernic-rgxx3.dts b/arch/arm/dts/rk3566-anbernic-rgxx3.dts
+> deleted file mode 100644
+> index c393c8d07af..00000000000
+> --- a/arch/arm/dts/rk3566-anbernic-rgxx3.dts
+> +++ /dev/null
+> @@ -1,28 +0,0 @@
+> -// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> -
+> -/dts-v1/;
+> -
+> -#include "rk3566-anbernic-rgxx3.dtsi"
+> -
+> -/ {
+> -
+> -/*
+> - * Note this is a pseudo-model that doesn't exist in mainline Linux.
+> - * This model is used for all RGXX3 devices and the board.c file will
+> - * set the correct dtb name for loading mainline Linux automatically.
+> - */
+> -	model = "RGXX3";
+> -	compatible = "anbernic,rg-arc-d", "anbernic,rg-arc-s",
+> -		     "anbernic,rg353m", "anbernic,rg353p",
+> -		     "anbernic,rg353ps", "anbernic,rg353v",
+> -		     "anbernic,rg353vs", "anbernic,rg503",
+> -		     "powkiddy,rgb10max3", "powkiddy,rgb30",
+> -		     "powkiddy,rk2023", "rockchip,rk3566";
+> -};
+> -
+> -&cru {
+> -	assigned-clocks = <&pmucru CLK_RTC_32K>, <&cru PLL_GPLL>,
+> -			  <&pmucru PLL_PPLL>, <&cru PLL_VPLL>;
+> -	assigned-clock-rates = <32768>, <1200000000>,
+> -			       <200000000>, <241500000>;
+> -};
+> diff --git a/board/anbernic/rgxx3_rk3566/MAINTAINERS b/board/anbernic/rgxx3_rk3566/MAINTAINERS
+> index 7970e5a4aad..75a1e8076ca 100644
+> --- a/board/anbernic/rgxx3_rk3566/MAINTAINERS
+> +++ b/board/anbernic/rgxx3_rk3566/MAINTAINERS
+> @@ -4,6 +4,4 @@ S:	Maintained
+>   F:	board/anbernic/rgxx3_rk3566
+>   F:	include/configs/anbernic-rgxx3-rk3566.h
+>   F:	configs/anbernic-rgxx3-rk3566_defconfig
+> -F:	arch/arm/dts/rk3566-anbernic-rgxx3.dts
+> -F:	arch/arm/dts/rk3566-anbernic-rgxx3.dtsi
+> -F:	arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
+> +F:	arch/arm/dts/rk3566-anbernic-rg353p-u-boot.dtsi
+> diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> index 5c57b902d14..224019f9ba3 100644
+> --- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> +++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> @@ -11,6 +11,7 @@
+>   #include <dm/lists.h>
+>   #include <env.h>
+>   #include <fdt_support.h>
+> +#include <i2c.h>
+>   #include <linux/delay.h>
+>   #include <mipi_dsi.h>
+>   #include <mmc.h>
+> @@ -19,6 +20,8 @@
+>   #include <stdlib.h>
+>   #include <video_bridge.h>
 >   
-> +config TARGET_QNAP_TS433_RK3568
-> +	bool "QNAP-TS433"
-> +	help
-> +	  Qnap TS433 4-bay NAS with a RK3568 SoC.
+> +DECLARE_GLOBAL_DATA_PTR;
 > +
-> +	  It provides the following featureset:
-> +	   * 4GB LPDDR4
-> +	   * 4GB eMMC
-> +	   * 2 SATA ports connected to two RK3568's SATA controllers
-> +	   * 2 SATA ports connected to a JMicron JMB58x AHCI SATA controller
-> +	   * 1 1G network controller
-> +	   * 1 2.5G Realtek RTL8125 network controller
-> +
->   config TARGET_QUARTZ64_RK3566
->   	bool "Pine64 Quartz64"
->   	help
-> @@ -64,6 +77,7 @@ source "board/anbernic/rgxx3_rk3566/Kconfig"
->   source "board/hardkernel/odroid_m1/Kconfig"
->   source "board/pine64/quartz64_rk3566/Kconfig"
->   source "board/powkiddy/x55/Kconfig"
-> +source "board/qnap/ts433/Kconfig"
->   source "board/radxa/zero3-rk3566/Kconfig"
->   source "board/xunlong/orangepi-3b-rk3566/Kconfig"
+>   #define GPIO0_BASE		0xfdd60000
+>   #define GPIO4_BASE		0xfe770000
+>   #define GPIO_SWPORT_DR_L	0x0000
+> @@ -40,10 +43,11 @@ struct rg3xx_model {
+>   	const char *board_name;
+>   	const char *fdtfile;
+>   	const bool detect_panel;
+> +	const bool uart_con;
+>   };
 >   
-> diff --git a/board/qnap/ts433/Kconfig b/board/qnap/ts433/Kconfig
-> new file mode 100644
-> index 00000000000..b00e1f9f2ef
-> --- /dev/null
-> +++ b/board/qnap/ts433/Kconfig
-> @@ -0,0 +1,12 @@
-> +if TARGET_QNAP_TS433_RK3568
+>   enum rgxx3_device_id {
+> -	RG353M,
+> +	RG353M = 1,
+>   	RG353P,
+>   	RG353V,
+>   	RG503,
+> @@ -61,45 +65,51 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>   	[RG353M] = {
+>   		.adc_value = 517, /* Observed average from device */
+>   		.board = "rk3566-anbernic-rg353m",
+> -		.board_name = "RG353M",
+> +		.board_name = "Anbernic RG353M",
+>   		/* Device is identical to RG353P. */
+>   		.fdtfile = DTB_DIR "rk3566-anbernic-rg353p.dtb",
+>   		.detect_panel = 1,
+> +		.uart_con = 1,
+>   	},
+>   	[RG353P] = {
+>   		.adc_value = 860, /* Documented value of 860 */
+>   		.board = "rk3566-anbernic-rg353p",
+> -		.board_name = "RG353P",
+> +		.board_name = "Anbernic RG353P",
+>   		.fdtfile = DTB_DIR "rk3566-anbernic-rg353p.dtb",
+>   		.detect_panel = 1,
+> +		.uart_con = 1,
+>   	},
+>   	[RG353V] = {
+>   		.adc_value = 695, /* Observed average from device */
+>   		.board = "rk3566-anbernic-rg353v",
+> -		.board_name = "RG353V",
+> +		.board_name = "Anbernic RG353V",
+>   		.fdtfile = DTB_DIR "rk3566-anbernic-rg353v.dtb",
+>   		.detect_panel = 1,
+> +		.uart_con = 1,
+>   	},
+>   	[RG503] = {
+>   		.adc_value = 1023, /* Observed average from device */
+>   		.board = "rk3566-anbernic-rg503",
+> -		.board_name = "RG503",
+> +		.board_name = "Anbernic RG503",
+>   		.fdtfile = DTB_DIR "rk3566-anbernic-rg503.dtb",
+>   		.detect_panel = 0,
+> +		.uart_con = 1,
+>   	},
+>   	[RGB30] = {
+>   		.adc_value = 383, /* Gathered from second hand information */
+>   		.board = "rk3566-powkiddy-rgb30",
+> -		.board_name = "RGB30",
+> +		.board_name = "Powkiddy RGB30",
+>   		.fdtfile = DTB_DIR "rk3566-powkiddy-rgb30.dtb",
+>   		.detect_panel = 0,
+> +		.uart_con = 0,
+>   	},
+>   	[RK2023] = {
+>   		.adc_value = 635, /* Observed average from device */
+>   		.board = "rk3566-powkiddy-rk2023",
+> -		.board_name = "RK2023",
+> +		.board_name = "Powkiddy RK2023",
+>   		.fdtfile = DTB_DIR "rk3566-powkiddy-rk2023.dtb",
+>   		.detect_panel = 0,
+> +		.uart_con = 0,
+>   	},
+>   	[RGARCD] = {
+>   		.adc_value = 183, /* Observed average from device */
+> @@ -107,6 +117,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>   		.board_name = "Anbernic RG ARC-D",
+>   		.fdtfile = DTB_DIR "rk3566-anbernic-rg-arc-d.dtb",
+>   		.detect_panel = 0,
+> +		.uart_con = 1,
+>   	},
+>   	[RGB10MAX3] = {
+>   		.adc_value = 765, /* Observed average from device */
+> @@ -114,21 +125,24 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>   		.board_name = "Powkiddy RGB10MAX3",
+>   		.fdtfile = DTB_DIR "rk3566-powkiddy-rgb10max3.dtb",
+>   		.detect_panel = 0,
+> +		.uart_con = 0,
+>   	},
+>   	/* Devices with duplicate ADC value */
+>   	[RG353PS] = {
+>   		.adc_value = 860, /* Observed average from device */
+>   		.board = "rk3566-anbernic-rg353ps",
+> -		.board_name = "RG353PS",
+> +		.board_name = "Anbernic RG353PS",
+>   		.fdtfile = DTB_DIR "rk3566-anbernic-rg353ps.dtb",
+>   		.detect_panel = 1,
+> +		.uart_con = 1,
+>   	},
+>   	[RG353VS] = {
+>   		.adc_value = 695, /* Gathered from second hand information */
+>   		.board = "rk3566-anbernic-rg353vs",
+> -		.board_name = "RG353VS",
+> +		.board_name = "Anbernic RG353VS",
+>   		.fdtfile = DTB_DIR "rk3566-anbernic-rg353vs.dtb",
+>   		.detect_panel = 1,
+> +		.uart_con = 1,
+>   	},
+>   	[RGARCS] = {
+>   		.adc_value = 183, /* Observed average from device */
+> @@ -136,6 +150,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>   		.board_name = "Anbernic RG ARC-S",
+>   		.fdtfile = DTB_DIR "rk3566-anbernic-rg-arc-s.dtb",
+>   		.detect_panel = 0,
+> +		.uart_con = 1,
+>   	},
+>   };
+>   
+> @@ -164,7 +179,7 @@ static const struct rg353_panel rg353_panel_details[] = {
+>   void spl_board_init(void)
+>   {
+>   	/* Set GPIO0_C5, GPIO0_C6, and GPIO0_C7 to output. */
+> -	writel(GPIO_WRITEMASK(GPIO_C7 | GPIO_C6 | GPIO_C5) | \
+> +	writel(GPIO_WRITEMASK(GPIO_C7 | GPIO_C6 | GPIO_C5) |
+>   	       (GPIO_C7 | GPIO_C6 | GPIO_C5),
+>   	       (GPIO0_BASE + GPIO_SWPORT_DDR_H));
+>   	/* Set GPIO0_C5 and GPIO_C6 to 0 and GPIO0_C7 to 1. */
+> @@ -174,16 +189,22 @@ void spl_board_init(void)
+>   
+>   /*
+>    * Buzz the buzzer so the user knows something is going on. Make it
+> - * optional in case PWM is disabled.
+> + * optional in case PWM is disabled or if CONFIG_DM_PWM is not
+> + * enabled.
+>    */
+>   void __maybe_unused startup_buzz(void)
+>   {
+>   	struct udevice *dev;
+>   	int err;
+>   
+> -	err = uclass_get_device(UCLASS_PWM, 0, &dev);
+> +	if (!IS_ENABLED(CONFIG_DM_PWM))
+> +		return;
 > +
-> +config SYS_BOARD
-> +	default "qnap_ts433"
+> +	/* Probe the PWM controller. */
+> +	err = uclass_get_device_by_name(UCLASS_PWM,
+> +					"pwm@fe6e0010", &dev);
+>   	if (err)
+> -		printf("pwm not found\n");
+> +		return;
+>   
+>   	pwm_set_enable(dev, 0, 1);
+>   	mdelay(200);
+> @@ -245,6 +266,13 @@ U_BOOT_DRIVER(anbernic_rg353_panel) = {
+>   	.plat_auto	= sizeof(struct mipi_dsi_panel_plat),
+>   };
+>   
+> +/*
+> + * The Anbernic 353 series shipped with 2 distinct displays requiring
+> + * 2 distinct drivers, with no way for a user to know which panel is
+> + * which. This function queries the DSI panel for the panel ID to
+> + * determine which panel is present so the device-tree can be corrected
+> + * automatically.
+> + */
+>   int rgxx3_detect_display(void)
+>   {
+>   	struct udevice *dev;
+> @@ -333,17 +361,10 @@ int rgxx3_detect_display(void)
+>   	return 0;
+>   }
+>   
+> -/* Detect which Anbernic RGXX3 device we are using so as to load the
+> - * correct devicetree for Linux. Set an environment variable once
+> - * found. The detection depends on the value of ADC channel 1, the
+> - * presence of an eMMC on mmc0, and querying the DSI panel.
+> - */
+> -int rgxx3_detect_device(void)
+> +int rgxx3_read_board_id(void)
+>   {
+>   	u32 adc_info;
+> -	int ret, i;
+> -	int board_id = -ENXIO;
+> -	struct mmc *mmc;
+> +	int ret;
+>   
+>   	ret = adc_channel_single_shot("saradc@fe720000", 1, &adc_info);
+>   	if (ret) {
+> @@ -357,16 +378,32 @@ int rgxx3_detect_device(void)
+>   	 * design calls for no more than a 1% variance on the
+>   	 * resistor, so assume a +- value of 15 should be enough.
+>   	 */
+> -	for (i = 0; i < ARRAY_SIZE(rg3xx_model_details); i++) {
+> +	for (int i = 0; i < ARRAY_SIZE(rg3xx_model_details); i++) {
+>   		u32 adc_min = rg3xx_model_details[i].adc_value - 15;
+>   		u32 adc_max = rg3xx_model_details[i].adc_value + 15;
+>   
+> -		if (adc_min < adc_info && adc_max > adc_info) {
+> -			board_id = i;
+> -			break;
+> -		}
+> +		if (adc_min < adc_info && adc_max > adc_info)
+> +			return i;
+>   	}
+>   
+> +	return -ENODEV;
+> +}
 > +
-> +config SYS_VENDOR
-> +	default "qnap"
+> +/* Detect which Anbernic RGXX3 device we are using so as to load the
+> + * correct devicetree for Linux. Set an environment variable once
+> + * found. The detection depends on the value of ADC channel 1 and the
+> + * presence of an eMMC on mmc0.
+> + */
+> +int rgxx3_detect_device(void)
+> +{
+> +	int ret;
+> +	int board_id;
+> +	struct mmc *mmc;
 > +
-> +config SYS_CONFIG_NAME
-> +	default "qnap_ts433"
+> +	board_id = rgxx3_read_board_id();
+> +	if (board_id < 0)
+> +		return board_id;
 > +
-> +endif
-> diff --git a/board/qnap/ts433/MAINTAINERS b/board/qnap/ts433/MAINTAINERS
-> new file mode 100644
-> index 00000000000..c2b31ad9794
-> --- /dev/null
-> +++ b/board/qnap/ts433/MAINTAINERS
-> @@ -0,0 +1,8 @@
-> +QNAP-TS433
-> +M:	Heiko Stuebner <heiko@sntech.de>
-> +S:	Maintained
-> +F:	board/qnap/ts433/
-> +F:	doc/board/qnap/
-> +F:	include/configs/qnap_ts433.h
-> +F:	configs/qnap-ts433-rk3568_defconfig
-> +F:	arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
-> diff --git a/configs/qnap-ts433-rk3568_defconfig b/configs/qnap-ts433-rk3568_defconfig
-> new file mode 100644
-> index 00000000000..cbe4622e468
-> --- /dev/null
-> +++ b/configs/qnap-ts433-rk3568_defconfig
-> @@ -0,0 +1,86 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-qnap-ts433"
-> +CONFIG_ROCKCHIP_RK3568=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_QNAP_TS433_RK3568=y
-> +CONFIG_DEBUG_UART_BASE=0xFE660000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-qnap-ts433.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_SATA=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_DWC_AHCI=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_RTL8169=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_DM_PMIC_FAN53555=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/qnap/index.rst b/doc/board/qnap/index.rst
-> new file mode 100644
-> index 00000000000..652ea11a056
-> --- /dev/null
-> +++ b/doc/board/qnap/index.rst
-> @@ -0,0 +1,9 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
+>   	/*
+>   	 * Try to access the eMMC on an RG353V, RG353P, or RG Arc D.
+>   	 * If it's missing, it's an RG353VS, RG353PS, or RG Arc S.
+> @@ -387,67 +424,87 @@ int rgxx3_detect_device(void)
+>   		}
+>   	}
+>   
+> -	if (board_id < 0)
+> -		return board_id;
+> +	return board_id;
+> +}
+>   
+> -	env_set("board", rg3xx_model_details[board_id].board);
+> -	env_set("board_name",
+> -		rg3xx_model_details[board_id].board_name);
+> -	env_set("fdtfile", rg3xx_model_details[board_id].fdtfile);
+> +/*
+> + * Check the loaded device tree to set the correct gd->board_type.
+> + * Disable the console if the board doesn't support a console.
+> + */
+> +int set_gd_value(void)
+> +{
+> +	const char *model;
+>   
+> -	/* Skip panel detection for when it is not needed. */
+> -	if (!rg3xx_model_details[board_id].detect_panel)
+> -		return 0;
+> +	model = fdt_getprop(gd->fdt_blob, 0, "model", NULL);
+>   
+> -	/* Warn but don't fail for errors in auto-detection of the panel. */
+> -	ret = rgxx3_detect_display();
+> -	if (ret)
+> -		printf("Failed to detect panel type\n");
+> +	for (int i = 0; i < ARRAY_SIZE(rg3xx_model_details); i++) {
+> +		if (strcmp(rg3xx_model_details[i].board_name, model) == 0) {
+> +			gd->board_type = i;
+> +			if (!rg3xx_model_details[i].uart_con)
+> +				gd->flags |= GD_FLG_SILENT |
+> +					     GD_FLG_DISABLE_CONSOLE;
+> +			return 0;
+> +		}
+> +	}
+>   
+> -	return 0;
+> +	return -ENODEV;
+>   }
+>   
+>   int rk_board_late_init(void)
+>   {
+>   	int ret;
+>   
+> -	ret = rgxx3_detect_device();
+> +	ret = set_gd_value();
+>   	if (ret) {
+> -		printf("Unable to detect device type: %d\n", ret);
+> -		return ret;
+> +		printf("Unable to auto-detect device\n");
+> +		goto end;
+>   	}
+>   
+> +	/*
+> +	 * Change the model number on the RG353M since it uses the same
+> +	 * tree as the RG353P.
+> +	 */
+> +	if (gd->board_type == RG353P) {
+> +		ret = rgxx3_read_board_id();
+> +		if (ret > 0)
+> +			gd->board_type = ret;
+> +	}
 > +
-> +Qnap
-> +====
+> +	env_set("board", rg3xx_model_details[gd->board_type].board);
+> +	env_set("board_name",
+> +		rg3xx_model_details[gd->board_type].board_name);
+> +	env_set("fdtfile", rg3xx_model_details[gd->board_type].fdtfile);
 > +
-> +.. toctree::
-> +   :maxdepth: 2
+> +	/*
+> +	 * Skip panel detection if not needed. Warn but don't fail for
+> +	 * errors in auto-detection of the panel.
+> +	 */
+> +	if (rg3xx_model_details[gd->board_type].detect_panel) {
+> +		ret = rgxx3_detect_display();
+> +		if (ret)
+> +			printf("Failed to detect panel type\n");
+> +	}
 > +
-> +   ts433.rst
-> diff --git a/doc/board/qnap/ts433.rst b/doc/board/qnap/ts433.rst
-> new file mode 100644
-> index 00000000000..5c7fd314b7a
-> --- /dev/null
-> +++ b/doc/board/qnap/ts433.rst
-> @@ -0,0 +1,91 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
+> +end:
+>   	/* Turn off red LED and turn on orange LED. */
+>   	writel(GPIO_WRITEMASK(GPIO_C7 | GPIO_C6 | GPIO_C5) | GPIO_C6,
+>   	       (GPIO0_BASE + GPIO_SWPORT_DR_H));
+>   
+> -	if (IS_ENABLED(CONFIG_DM_PWM))
+> -		startup_buzz();
+> +	startup_buzz();
+>   
+>   	return 0;
+>   }
+>   
+> -int ft_board_setup(void *blob, struct bd_info *bd)
+> +int rgxx3_panel_fixup(void *blob)
+>   {
+>   	const struct rg353_panel *panel = NULL;
+> -	int node, ret, i;
+> +	int node, ret;
+>   	char *env;
+>   
+> -	/* No fixups necessary for the RG503 */
+> -	env = env_get("board_name");
+> -	if (env && (!strcmp(env, rg3xx_model_details[RG503].board_name)))
+> -		return 0;
+> -
+> -	/* Change the model name of the RG353M */
+> -	if (env && (!strcmp(env, rg3xx_model_details[RG353M].board_name)))
+> -		fdt_setprop(blob, 0, "model",
+> -			    rg3xx_model_details[RG353M].board_name,
+> -			    sizeof(rg3xx_model_details[RG353M].board_name));
+> -
+>   	env = env_get("panel");
+>   	if (!env) {
+>   		printf("Can't get panel env\n");
+> -		return 0;
+> +		return -EINVAL;
+>   	}
+>   
+>   	/*
+> @@ -469,7 +526,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+>   		return 0;
+>   
+>   	/* Panels don't match, search by first compatible value. */
+> -	for (i = 0; i < ARRAY_SIZE(rg353_panel_details); i++) {
+> +	for (int i = 0; i < ARRAY_SIZE(rg353_panel_details); i++) {
+>   		if (!strcmp(env, rg353_panel_details[i].panel_compat[0])) {
+>   			panel = &rg353_panel_details[i];
+>   			break;
+> @@ -489,3 +546,38 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+>   
+>   	return 0;
+>   }
 > +
-> +U-Boot for Qnap TS433 Devices
-> +=================================
+> +int ft_board_setup(void *blob, struct bd_info *bd)
+> +{
+> +	int ret;
 > +
-> +This allows U-Boot to boot the Qnap TS433 NAS
+> +	if (gd->board_type == RG353M)
+> +		fdt_setprop(blob, 0, "model",
+> +			    rg3xx_model_details[RG353M].board_name,
+> +			    sizeof(rg3xx_model_details[RG353M].board_name));
 > +
-> +Preparing the serial
-> +--------------------
+> +	if (rg3xx_model_details[gd->board_type].detect_panel) {
+> +		ret = rgxx3_panel_fixup(blob);
+> +		if (ret)
+> +			printf("Unable to update panel compat\n");
+> +	}
 > +
-> +Qnap devices run their serial console with a 115200 baudrate. As the
-> +binary DDR-init and maskrom-downloader expect a 1500000 rate, it is
-> +necessary to adapt the binaries if their output is needed.
+> +	return 0;
+> +}
 > +
-> +This can be done with a binary provided in the rkbin repository.
-> +First the ddrbin_param.txt in the rkbin repo needs to be modified:
+> +int board_fit_config_name_match(const char *name)
+> +{
+> +	int ret;
 > +
-> +.. code-block:: bash
+> +	if (gd->board_type == 0) {
+> +		ret = rgxx3_detect_device();
+> +		if (ret < 0)
+> +			return ret;
+> +		gd->board_type = ret;
+> +	}
 > +
-> +    diff --git a/tools/ddrbin_param.txt b/tools/ddrbin_param.txt
-> +    index 0dfdd318..82ade7e7 100644
-> +    --- a/tools/ddrbin_param.txt
-> +    +++ b/tools/ddrbin_param.txt
-> +    @@ -11,7 +11,7 @@ lp5_freq=
+> +	if (strcmp(name, rg3xx_model_details[gd->board_type].fdtfile) == 0)
+> +		return 0;
 > +
-> +     uart id=
-> +     uart iomux=
-> +    -uart baudrate=
-> +    +uart baudrate=115200
-> +
-> +     sr_idle=
-> +     pd_idle=
-> +
-> +And after that the ddrbin_tool binary can be used to modify apply this
-> +modification and also a new maskrom downloader can be build:
-> +
-> +.. code-block:: bash
-> +
-> +    $ tools/ddrbin_tool rk3568 tools/ddrbin_param.txt bin/rk35/rk3568_ddr_1560MHz_v1.21.bin
-> +    $ tools/boot_merger RKBOOT/RK3568MINIALL.ini
-> +
-> +Building U-Boot
-> +---------------
-> +
-> +.. code-block:: bash
-> +
-> +    $ export CROSS_COMPILE=aarch64-linux-gnu-
-> +    $ export BL31=../rkbin/bin/rk35/rk3568_bl31_v1.34.elf
-> +    $ export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3568_ddr_1056MHz_v1.13.bin
-> +    $ make qnap-ts433-rk3568_defconfig
-> +    $ make
-> +
-> +This will build ``u-boot-rockchip.bin`` which can be written to the
-> +on-board eMMC.
-> +
-> +Image installation
-> +------------------
-> +
-> +The Qnap thankfully provides an easily accessible serial header as well as
-> +a very user-friendly jumper-header to bring the device into maskrom mode.
-> +
-> +To access both, the drive trays need to be removed. Looking at the board,
-> +through the upper cutout of the metal frame the white 4-port serial-header
-> +can be seen next to a barcode sticker. It's pinout is as follows:
-> +
-> +.. code-block:: bash
-> +
-> +   ,_  _.
-> +   |1234|  1=TX 2=VCC
-> +   `----'  3=RX 4=GND
-> +
-> +
-> +Directly below it, the mentioned 2-pin jumper header can be seen.
-> +
-> +To write your u-boot to the device, it needs to be powered off first. Then
-> +a jumper or suitable cable needs to be used to connect the two pins of the
-> +maskrom header. Turning on the device now will start it in maskrom mode.
-> +
-> +It is important that the jumper gets removed after that stop and before
-> +actually trying to write to the emmc.
-> +
-> +The front usb-port needs to be connected to the host with an USB-A-to-A
-> +cable to allow flashing.
-> +
-> +The flashing itself is done via rkdeveloptool, which can be found for
-> +example as package of that name in Debian-based distributions:
-> +
-> +.. code-block:: bash
-> +
-> +    $ rkdeveloptool db rk356x_spl_loader_v1.21.113.bin
-> +    $ rkdeveloptool wl 64 u-boot-rockchip.bin
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 86d83befb5b..a0349d3ad56 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -118,6 +118,7 @@ List of mainline supported Rockchip boards:
->        - FriendlyElec NanoPi R5S (nanopi-r5s-rk3568)
->        - Generic RK3566/RK3568 (generic-rk3568)
->        - Hardkernel ODROID-M1 (odroid-m1-rk3568)
-> +     - QNAP TS-433 (qnap-ts433-rk3568)
->        - Radxa E25 Carrier Board (radxa-e25-rk3568)
->        - Radxa ROCK 3A (rock-3a-rk3568)
->        - Radxa ROCK 3B (rock-3b-rk3568)
-> diff --git a/include/configs/qnap_ts433.h b/include/configs/qnap_ts433.h
-> new file mode 100644
-> index 00000000000..aee4546bf07
-> --- /dev/null
-> +++ b/include/configs/qnap_ts433.h
-> @@ -0,0 +1,10 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +
-> +#ifndef __QNAP_TS433_H
-> +#define __QNAP_TS433_H
-> +
-> +#define ROCKCHIP_DEVICE_SETTINGS
-> +
-> +#include <configs/rk3568_common.h>
-> +
-> +#endif
+> +	return -ENXIO;
+> +}
+> diff --git a/configs/anbernic-rgxx3-rk3566_defconfig b/configs/anbernic-rgxx3-rk3566_defconfig
+> index a03509bf467..f5e5470df8c 100644
+> --- a/configs/anbernic-rgxx3-rk3566_defconfig
+> +++ b/configs/anbernic-rgxx3-rk3566_defconfig
+> @@ -3,7 +3,7 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+>   CONFIG_SPL_GPIO=y
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3566-anbernic-rgxx3"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-anbernic-rg353p"
+>   CONFIG_ROCKCHIP_RK3568=y
+>   CONFIG_ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON=y
+>   CONFIG_SPL_SERIAL=y
+> @@ -19,8 +19,10 @@ CONFIG_SPL_LOAD_FIT=y
+>   CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_OF_BOARD_SETUP=y
+>   CONFIG_OF_STDOUT_VIA_ALIAS=y
+> -CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-anbernic-rgxx3.dtb"
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-anbernic-rg353p.dtb"
+> +CONFIG_DISABLE_CONSOLE=y
+>   # CONFIG_CONSOLE_MUX is not set
+> +CONFIG_BOARD_TYPES=y
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>   CONFIG_BOARD_RNG_SEED=y
+> @@ -38,13 +40,14 @@ CONFIG_CMD_MMC=y
+>   # CONFIG_SPL_DOS_PARTITION is not set
+>   CONFIG_SPL_OF_CONTROL=y
+>   CONFIG_OF_LIVE=y
+> -# CONFIG_OF_UPSTREAM is not set
+> +CONFIG_OF_LIST="rockchip/rk3566-anbernic-rg353p rockchip/rk3566-anbernic-rg353v rockchip/rk3566-anbernic-rg503 rockchip/rk3566-anbernic-rg-arc-d rockchip/rk3566-anbernic-rg353ps rockchip/rk3566-anbernic-rg353vs rockchip/rk3566-anbernic-rg-arc-s rockchip/rk3566-powkiddy-rgb30 rockchip/rk3566-powkiddy-rk2023 rockchip/rk3566-powkiddy-rgb10max3"
+>   CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>   CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+>   # CONFIG_NET is not set
+>   CONFIG_SPL_DM_SEQ_ALIAS=y
+>   CONFIG_SPL_REGMAP=y
+>   CONFIG_SPL_SYSCON=y
+> +CONFIG_SPL_ADC=y
+>   CONFIG_SPL_CLK=y
+>   CONFIG_ARM_SMCCC_FEATURES=y
+>   CONFIG_SCMI_FIRMWARE=y
+> @@ -70,6 +73,7 @@ CONFIG_SPL_RAM=y
+>   # CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>   # CONFIG_RNG_SMCCC_TRNG is not set
+>   CONFIG_BAUDRATE=1500000
+> +# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
+>   CONFIG_DEBUG_UART_SHIFT=2
+>   CONFIG_SYS_NS16550_MEM32=y
+>   CONFIG_SYSRESET=y
