@@ -4,58 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92200D0C601
-	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:02:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 509FBD0C603
+	for <u-boot@archiver.kernel.org>; Fri, 25 Oct 2024 12:02:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA61489072;
-	Fri, 25 Oct 2024 14:00:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4064389096;
+	Fri, 25 Oct 2024 14:00:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="cAV0P6t1";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="bhbfLxL3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E6D38907B; Fri, 25 Oct 2024 14:00:47 +0200 (CEST)
-Received: from mail-m11885.qiye.163.com (mail-m11885.qiye.163.com
- [115.236.118.85])
- by phobos.denx.de (Postfix) with ESMTP id 2E63089079
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:00:42 +0200 (CEST)
+ id F0E6489079; Fri, 25 Oct 2024 14:00:50 +0200 (CEST)
+Received: from mail-m12772.qiye.163.com (mail-m12772.qiye.163.com
+ [115.236.127.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D314688FE2
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 14:00:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id ebe58ac;
- Fri, 25 Oct 2024 20:00:27 +0800 (GMT+08:00)
-Message-ID: <3f08565f-b97b-443d-8396-cb20289476a4@rock-chips.com>
-Date: Fri, 25 Oct 2024 20:00:26 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id ebe58b8;
+ Fri, 25 Oct 2024 20:00:34 +0800 (GMT+08:00)
+Message-ID: <59666ee5-2730-4447-9a61-43964f8323d0@rock-chips.com>
+Date: Fri, 25 Oct 2024 20:00:33 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 16/18] arm64: dts: rockchip: actually enable
- pmu-io-domains on qnap-ts433
+Subject: Re: [PATCH v2 17/18] arm64: dts: rockchip: add product-data eeproms
+ to QNAP TS433
 To: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
  philipp.tomsich@vrull.eu, sjg@chromium.org
 Cc: ukleinek@debian.org
 References: <20241013192424.84280-1-heiko@sntech.de>
- <20241013192424.84280-17-heiko@sntech.de>
+ <20241013192424.84280-18-heiko@sntech.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241013192424.84280-17-heiko@sntech.de>
+In-Reply-To: <20241013192424.84280-18-heiko@sntech.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhpNHVZKSk5CTk0YSEkeH05WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkofGFYaQxlNGk1PTx9MTktWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a92c38ca48709d6kunmebe58ac
+X-HM-Tid: 0a92c38cbf5109d6kunmebe58b8
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NxA6EQw*PDIjVhcxOVY*NgxR
- DSMwCy1VSlVKTElCQ05MTUlDS01KVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSEtKNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NxQ6LSo4DDIfKRchKVExNgML
+ AwNPCglVSlVKTElCQ05MTUhOS0pJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTE9JNwY+
 DKIM-Signature: a=rsa-sha256;
- b=cAV0P6t11NnEISEnmXKRmJWHjiRUcDa0l//qDf8yNO3d2m5c91J0L99vKowKwgS9VywgKU784bQTvJAUzMc30rMFbY42ydS/ody2FLZPTsGngn/CAQiwlrLWbcfFAz6HrXhXvp2d6YYQ6l2NC66pwS+ics1vBoGeLQEtmedJ97o=;
+ b=bhbfLxL3pR1n3dfMMnojNm++8BSvgYRKlvj+UApznqXI4IPNSL8LCqrJ133bR+W5IYw0HmdlBirkJLBQLblodx75NEePuAzwddfxxmrtcsQoKfJx8p3s/XjT2tO2ZFeyBcwQeRQ0f+ospcjNZM6tyVuK243m2P8/6MYWORNfaKs=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=WinMUdggn2uVZzrDMSKqxvi935FUIvA9Ca9BeOPISWE=;
+ bh=ho0EzuBRYwgrTC4XrkOZo6m+Vq7UQwjS2Z/TNrYZKWs=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,35 +77,55 @@ X-Virus-Status: Clean
 
 
 On 2024/10/14 03:24, Heiko Stuebner wrote:
-> Contrary to the vendor-kernel the pmu-io-domains are not enabled by
-> default. This resulted in the value not being set according to the
-> regulator, which in turn made the gmac0 interface that is connected
-> to the vccio4 supply inoperable.
+> The device contains two i2c-connected eeproms holding some product-
+> specific values. One sitting on the mainboard and one on the statically
+> connected backplane.
 >
-> Fixes: 64b7f16fb394 ("arm64: dts: rockchip: add 2 pmu_io_domain supplies for Qnap-TS433")
+> While the eeprom chips themself have a size of 512 byte, the eeprom data
+> only uses 256 byte each, probably to stay compatible with other models.
+>
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-> Link: https://lore.kernel.org/r/20240805162052.3345768-1-heiko@sntech.de
+> Link: https://lore.kernel.org/r/20240810211438.286441-3-heiko@sntech.de
 >
-> [ upstream commit: 40cc4257169712f0ae3835820a4c5afbdd1a16ff ]
+> [ upstream commit: da6f4130234448122fe3e66c8116f7d9eea8a5c7 ]
 >
-> (cherry picked from commit f509fcb1fb82117e551b489592ac5714a6c5cd8d)
+> (cherry picked from commit 0b3109708caf5002ba188ae28eae9ce46b2c39b4)
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts | 1 +
->   1 file changed, 1 insertion(+)
+>   .../src/arm64/rockchip/rk3568-qnap-ts433.dts  | 20 +++++++++++++++++++
+>   1 file changed, 20 insertions(+)
 >
 > diff --git a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-> index 20e4fa6c185..90d8d526629 100644
+> index 90d8d526629..e601d9271ba 100644
 > --- a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
 > +++ b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-> @@ -532,6 +532,7 @@
->   &pmu_io_domains {
->   	vccio4-supply = <&vcc_1v8>;
->   	vccio6-supply = <&vcc_1v8>;
-> +	status = "okay";
+> @@ -454,6 +454,26 @@
+>   		reg = <0x51>;
+>   		wakeup-source;
+>   	};
+> +
+> +	/* eeprom for vital-product-data on the mainboard */
+> +	eeprom@54 {
+> +		compatible = "giantec,gt24c04a", "atmel,24c04";
+> +		reg = <0x54>;
+> +		label = "VPD_MB";
+> +		num-addresses = <2>;
+> +		pagesize = <16>;
+> +		read-only;
+> +	};
+> +
+> +	/* eeprom for vital-product-data on the backplane */
+> +	eeprom@56 {
+> +		compatible = "giantec,gt24c04a", "atmel,24c04";
+> +		reg = <0x56>;
+> +		label = "VPD_BP";
+> +		num-addresses = <2>;
+> +		pagesize = <16>;
+> +		read-only;
+> +	};
 >   };
 >   
->   &sata1 {
+>   &mdio0 {
