@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A9CD10BE5
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 06:41:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D36ED10BE5
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 06:41:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAC6588E8C;
-	Sat, 26 Oct 2024 08:41:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3AFE289031;
+	Sat, 26 Oct 2024 08:41:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RYqHAvCq";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="g+ORpOHc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 224FD8902A; Sat, 26 Oct 2024 08:41:05 +0200 (CEST)
+ id 66AC988FC7; Sat, 26 Oct 2024 08:41:05 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D1B388FC7
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 08:41:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BF3C88E74
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 08:41:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,19 +30,19 @@ Received: from LT2ubnt.c.hoisthospitality.com (unknown [87.215.50.114])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id DFE2B42700; 
- Sat, 26 Oct 2024 06:41:01 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 3CC3842649; 
+ Sat, 26 Oct 2024 06:41:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1729924862;
- bh=2m6uBTzW/pwdbGU7YEFj/y2aXPHreUE0xwQksO0lGQk=;
+ s=20210705; t=1729924860;
+ bh=+oGeDVjKO1oFlGIabhV9RJBQAiOGLxH6pOniOjmDHM4=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=RYqHAvCq40YZzX4aoc7nFY9VJCUjm2SdIUv4ERiWiBkH6vFwbk84apdv1Mte1DOc0
- /wagzw2rDwBy3reKbs/dUCJ45Py/YyqFZK82O8S4zVOGmzkKTjlpC4HFVrsF0SkGTz
- QOCaxsSdmDleNJvxTcUNTWMSnKgrS3CFxXhVLPVdor7J0NOpeYIrVa27n4T/0zn/ae
- 2jtj9K7TLEr/RJNhmovpR1kDNgcMg8omFoWgEydZC+3U7cHFVe1oStgT4brmcfXO8t
- dGUoM2GTMEMqFDdqu6Y/QuAysvh5Pa0Z25ZUqvmWPkGekkJS7k0dps8IKjjkXqVkUV
- mYGMqAG4xXMDw==
+ b=g+ORpOHcuQt4AQQS9YlOIPVkdR4sqWN3NH31vrGRsL5EJ1iTNR4nSsATLwxmtNi6A
+ /6GNgTBypNNbT3Ysz/RvxishneSOvsHAQy0yVBIK0MqcAIp2YuHBtF3ojw1xDWSwVX
+ KgZE0HNfW4bxnX+k6/kpkzXJwpZ0oghuO1EzjU/g9QBIYa5hmrjRFq7hUGInAOEKza
+ ZV+a1jhw41yObjG7EgwSHDtwFj1VKuOcgLSu7CqS4jzMCJVdyQbEzreqf8v+6Q1B/x
+ 7JhvIjeQip1romWmRWvW+kNp4lIzAChTQzSgPjZIXcDk/wjKHLZJfvZ1DtyJ2Fnmp0
+ ABD+ZoZ1NYPsg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -53,9 +53,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 4/5] efi_loader: fix GetInfo and SetInfo
-Date: Sat, 26 Oct 2024 08:40:47 +0200
-Message-ID: <20241026064048.370062-5-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/5] fs: ext4: simplify ext4fs_iterate_dir()
+Date: Sat, 26 Oct 2024 08:40:44 +0200
+Message-ID: <20241026064048.370062-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241026064048.370062-1-heinrich.schuchardt@canonical.com>
 References: <20241026064048.370062-1-heinrich.schuchardt@canonical.com>
@@ -77,63 +77,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-* Some of our file system drivers cannot report a file size for
-  directories. Use a dummy value in this case.
-* For SetInfo the UEFI spec requires to ignore the file size field.
+Remove copying a pointer with a cast to the very same type.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- lib/efi_loader/efi_file.c | 30 ++++++++++++++++++++----------
- 1 file changed, 20 insertions(+), 10 deletions(-)
+ fs/ext4/ext4_common.c | 27 +++++++++++++--------------
+ 1 file changed, 13 insertions(+), 14 deletions(-)
 
-diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
-index c92d8ccf004..95b3c890ee9 100644
---- a/lib/efi_loader/efi_file.c
-+++ b/lib/efi_loader/efi_file.c
-@@ -864,8 +864,16 @@ static efi_status_t EFIAPI efi_file_getinfo(struct efi_file_handle *file,
- 		}
+diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
+index 76f7102456e..c1e38978bb9 100644
+--- a/fs/ext4/ext4_common.c
++++ b/fs/ext4/ext4_common.c
+@@ -2046,24 +2046,23 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
+ 	unsigned int fpos = 0;
+ 	int status;
+ 	loff_t actread;
+-	struct ext2fs_node *diro = (struct ext2fs_node *) dir;
  
- 		ret = efi_get_file_size(fh, &file_size);
--		if (ret != EFI_SUCCESS)
--			goto error;
-+		if (ret != EFI_SUCCESS) {
-+			if (!fh->isdir)
-+				goto error;
-+			/*
-+			 * Some file drivers don't implement fs_size() for
-+			 * directories. Use a dummy non-zero value.
-+			 */
-+			file_size = 4096;
-+			ret = EFI_SUCCESS;
-+		}
+ #ifdef DEBUG
+ 	if (name != NULL)
+ 		printf("Iterate dir %s\n", name);
+ #endif /* of DEBUG */
+-	if (!diro->inode_read) {
+-		status = ext4fs_read_inode(diro->data, diro->ino, &diro->inode);
++	if (!dir->inode_read) {
++		status = ext4fs_read_inode(dir->data, dir->ino, &dir->inode);
+ 		if (status == 0)
+ 			return 0;
+ 	}
+ 	/* Search the file.  */
+-	while (fpos < le32_to_cpu(diro->inode.size)) {
++	while (fpos < le32_to_cpu(dir->inode.size)) {
+ 		struct ext2_dirent dirent;
  
- 		memset(info, 0, required_size);
+-		status = ext4fs_read_file(diro, fpos,
+-					   sizeof(struct ext2_dirent),
+-					   (char *)&dirent, &actread);
++		status = ext4fs_read_file(dir, fpos,
++					  sizeof(struct ext2_dirent),
++					  (char *)&dirent, &actread);
+ 		if (status < 0)
+ 			return 0;
  
-@@ -976,14 +984,16 @@ static efi_status_t EFIAPI efi_file_setinfo(struct efi_file_handle *file,
- 		}
- 		free(new_file_name);
- 		/* Check for truncation */
--		ret = efi_get_file_size(fh, &file_size);
--		if (ret != EFI_SUCCESS)
--			goto out;
--		if (file_size != info->file_size) {
--			/* TODO: we do not support truncation */
--			EFI_PRINT("Truncation not supported\n");
--			ret = EFI_ACCESS_DENIED;
--			goto out;
-+		if (!fh->isdir) {
-+			ret = efi_get_file_size(fh, &file_size);
-+			if (ret != EFI_SUCCESS)
-+				goto out;
-+			if (file_size != info->file_size) {
-+				/* TODO: we do not support truncation */
-+				EFI_PRINT("Truncation not supported\n");
-+				ret = EFI_ACCESS_DENIED;
-+				goto out;
-+			}
- 		}
- 		/*
- 		 * We do not care for the other attributes
+@@ -2077,7 +2076,7 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
+ 			struct ext2fs_node *fdiro;
+ 			int type = FILETYPE_UNKNOWN;
+ 
+-			status = ext4fs_read_file(diro,
++			status = ext4fs_read_file(dir,
+ 						  fpos +
+ 						  sizeof(struct ext2_dirent),
+ 						  dirent.namelen, filename,
+@@ -2089,7 +2088,7 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
+ 			if (!fdiro)
+ 				return 0;
+ 
+-			fdiro->data = diro->data;
++			fdiro->data = dir->data;
+ 			fdiro->ino = le32_to_cpu(dirent.inode);
+ 
+ 			filename[dirent.namelen] = '\0';
+@@ -2104,7 +2103,7 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
+ 				else if (dirent.filetype == FILETYPE_REG)
+ 					type = FILETYPE_REG;
+ 			} else {
+-				status = ext4fs_read_inode(diro->data,
++				status = ext4fs_read_inode(dir->data,
+ 							   le32_to_cpu
+ 							   (dirent.inode),
+ 							   &fdiro->inode);
+@@ -2140,10 +2139,10 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
+ 				}
+ 			} else {
+ 				if (fdiro->inode_read == 0) {
+-					status = ext4fs_read_inode(diro->data,
+-								 le32_to_cpu(
+-								 dirent.inode),
+-								 &fdiro->inode);
++					status = ext4fs_read_inode(dir->data,
++								   le32_to_cpu(
++								   dirent.inode),
++								   &fdiro->inode);
+ 					if (status == 0) {
+ 						free(fdiro);
+ 						return 0;
 -- 
 2.45.2
 
