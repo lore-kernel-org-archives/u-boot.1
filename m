@@ -4,40 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 488A4D149FE
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 02:39:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96950D149FE
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 02:45:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3257488F57;
-	Sat, 26 Oct 2024 04:39:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F0C2888F68;
+	Sat, 26 Oct 2024 04:45:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="QCLWzJq7";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BL0VETxa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B951888F68; Sat, 26 Oct 2024 04:39:56 +0200 (CEST)
-Received: from ec2-44-216-146-144.compute-1.amazonaws.com
- (ec2-44-216-146-144.compute-1.amazonaws.com [44.216.146.144])
+ id 6297688F92; Sat, 26 Oct 2024 04:45:07 +0200 (CEST)
+Received: from mail-m6095.netease.com (mail-m6095.netease.com [210.79.60.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3273A88DEE
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 04:39:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DAA188DEE
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 04:45:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.54] (unknown [59.56.82.81])
- by smtp.qiye.163.com (Hmail) with ESMTP id f32ad86;
- Sat, 26 Oct 2024 10:39:42 +0800 (GMT+08:00)
-Message-ID: <0673c284-fc0c-4495-b44a-4c9e5e162b39@rock-chips.com>
-Date: Sat, 26 Oct 2024 10:39:37 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id f33cdb0;
+ Sat, 26 Oct 2024 10:44:59 +0800 (GMT+08:00)
+Message-ID: <630cc98f-c6df-4773-a9b0-efe7b4d3b9e4@rock-chips.com>
+Date: Sat, 26 Oct 2024 10:44:59 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 18/18] board: rockchip: add support for Qnap TS433
  devices
 To: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
  philipp.tomsich@vrull.eu, sjg@chromium.org
-Cc: ukleinek@debian.org
+Cc: ukleinek@debian.org, Tom Rini <trini@konsulko.com>
 References: <20241013192424.84280-1-heiko@sntech.de>
  <20241013192424.84280-19-heiko@sntech.de>
 Content-Language: en-US
@@ -46,18 +45,18 @@ In-Reply-To: <20241013192424.84280-19-heiko@sntech.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDT0pJVh8dTUlLThlNTUNDTFYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaHkoeVk9DTxoaH0oYGUtLQ1YVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQlVOTVVDSVVDSllXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
  JLS1kG
-X-HM-Tid: 0a92c6b19f0703a4kunmf32ad86
+X-HM-Tid: 0a92c6b6778203a4kunmf33cdb0
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NCI6SDo4DjIvNRYxEygrGA4Z
- ChJPCilVSlVKTElCQkpLSENIS01IVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQlVOTVVDSVVDSllXWQgBWUFKSUpISjcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MBA6Nww6GTIYKRZIKR03MUhC
+ TykaCwtVSlVKTElCQkpLTEtLTUNCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQlVOTVVDSVVDSllXWQgBWUFKSkxOTjcG
 DKIM-Signature: a=rsa-sha256;
- b=QCLWzJq74xA3Yf1RmAaJqAvrVifKpj1IE8/M7dIULqXD1IjZvRIf/cBdCXPp7FBsg1e7upEZbJ8J5ChU3j5kWJX1F4JbN39Vau4yPNDEHE3CwuQIYDuMkqFave6FRaJlENFSzSW3RPrK3eYmJK4TryeLjcRs1B6h8BfDs3SCkO8=;
+ b=BL0VETxaM6d3uIo91588Yqtae7ueNeBhMttHRF4hEyHtEWBdSj/DJ5qE5pr5SohOYEMz37HbRuoMDhpfqOPz0xdVA+GwJql+Y7IffPO3LF8GhuwWmSfTkW0kebKuOJPPV6pWgjKWEMKxPTVkMxvJ6gEHPrfH5e9qIxzu8eZHngM=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=wYRDp3/lj1WjQBLIjI8ou2z6due7vtjEPWa2mCyXylE=;
+ bh=+lRg3MoldWOgU0HZxTcFk7PmFrnBinGZbKorqdn1b9s=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,30 +76,6 @@ X-Virus-Status: Clean
 
 Hi Heiko,
 
-     I got a ci error for this patch:
-
-https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/jobs/929839
-
-+Image 'simple-bin-spi' is missing external blobs and is non-functional: 
-rockchip-tpl
-+/binman/simple-bin-spi/mkimage/rockchip-tpl (rockchip-tpl):
-+drivers/net/rtl8169.c:320:2: error: #warning cache-line size is larger 
-than descriptor size [-Werror=cpp]
-+  320 | #warning cache-line size is larger than descriptor size
-+      |  ^~~~~~~
-+cc1: all warnings being treated as errors
-+make[3]: *** [scripts/Makefile.build:257: drivers/net/rtl8169.o] Error 1
-+make[2]: *** [scripts/Makefile.build:398: drivers/net] Error 2
-+make[1]: *** [Makefile:1914: drivers] Error 2
-+make: *** [Makefile:177: sub-make] Error 2
-
-
-Seems for some reason the CI is building the TPL and rtl8169.c is build 
-inside TPL?
-
-
-Thanks,
-- Kever
 On 2024/10/14 03:24, Heiko Stuebner wrote:
 > The Qnap TS433 is a 4-bay NAS based around the RK3568.
 >
@@ -119,6 +94,28 @@ On 2024/10/14 03:24, Heiko Stuebner wrote:
 >   configs/qnap-ts433-rk3568_defconfig        | 86 ++++++++++++++++++++
 >   doc/board/qnap/index.rst                   |  9 +++
 >   doc/board/qnap/ts433.rst                   | 91 ++++++++++++++++++++++
+
+I got a CI build fail for the doc check:
+
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/jobs/929791
+
+checking consistency... failed
+Warning, treated as error:
+/builds/u-boot/custodians/u-boot-rockchip/doc/board/qnap/index.rst:document 
+isn't included in any toctree
+make[1]: *** [doc/Makefile:70: htmldocs] Error 2
+make: *** [Makefile:2445: htmldocs] Error 2
+
+
+Hi Tom,
+
+     Do you have any suggestion for this kind of error?
+
+
+Thanks,
+
+- Kever
+
 >   doc/board/rockchip/rockchip.rst            |  1 +
 >   include/configs/qnap_ts433.h               | 10 +++
 >   9 files changed, 237 insertions(+)
