@@ -4,96 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 357A1D149F9
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 00:32:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 488A4D149FE
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 02:39:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 583DA88F92;
-	Sat, 26 Oct 2024 02:32:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3257488F57;
+	Sat, 26 Oct 2024 04:39:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UTKnQkh9";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="QCLWzJq7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E155C89020; Sat, 26 Oct 2024 02:32:22 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B951888F68; Sat, 26 Oct 2024 04:39:56 +0200 (CEST)
+Received: from ec2-44-216-146-144.compute-1.amazonaws.com
+ (ec2-44-216-146-144.compute-1.amazonaws.com [44.216.146.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC67A88F57
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 02:32:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3273A88DEE
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 04:39:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7b152a923a3so178934385a.3
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 17:32:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729902738; x=1730507538; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jSeyJnNqOwQ6heh07mtnkuW/z/Hg7Muv2dL4oUfcFs8=;
- b=UTKnQkh9BFmFW0qC52xsWMFy9gtfcubCE55OUbj6//yaArgvKur5emwhZq+f0GoOlu
- ufXM1y0FB9ba2ISilDcOj3co7I9nSDziu0eVnuvoW4AxxY1R5WXKzuy3HyaC3qjDU/e5
- Lg8jbahCLVMR5jO9NjrmKW7sPqTBdRAoJPTUE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729902738; x=1730507538;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jSeyJnNqOwQ6heh07mtnkuW/z/Hg7Muv2dL4oUfcFs8=;
- b=YoTkU4tZXXrwefBhFvmVNvaEbo/3r2kpfI60OHSH4EXRM5LpFhd4e2W//9cSLyxk/m
- qmw7PfDpbUtX1rol5onITxDLcvVzmegC1otiWqya9gAZNMfY5N57tOxWfic1jQlqt6Ct
- 2d/VV9uM0XwTCkHZvSzRoMpM9CuAsdw5NsvFaty4EaSj4BflEjpZrzp9vTGo9oCylOFt
- xVHL6UOCrdQT1caz3OBzuciMOLf6f7uesI+lhShSx/S0/cDZYqxO7tKCUJUd9r7iDW/C
- PJruT5BcXcJ/mH37SonuRRTclY54qhhvBMiBn6OrnvDVpCBq7+CSUgIL2rS+zf7D9Y9u
- hi9g==
-X-Gm-Message-State: AOJu0YyR/GoA6QoTfY3zSPtgW2GIw8kus3Lg3BPmlDB2ujGY3VJVbhDO
- kMcJS5NR5cbPTofpp/5KXhVV9cyD9/d3Q8wQq8DrzhK/ezuF1Y4IpP6CZFzoQ/I=
-X-Google-Smtp-Source: AGHT+IHxptHQpkZh6+6eMDOw4wKCcB4jz8FhCEZ9gsJDM3jb/ZeLA4rDWi3iX8eQ3VTf0Xq5AiUkOg==
-X-Received: by 2002:a05:620a:d86:b0:7b1:4fa8:af90 with SMTP id
- af79cd13be357-7b193efd710mr167872485a.30.1729902737828; 
- Fri, 25 Oct 2024 17:32:17 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b18d278244sm104125985a.4.2024.10.25.17.32.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Oct 2024 17:32:17 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, Artur Rojek <artur@conclusive.pl>, 
- Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
- Etienne Carriere <etienne.carriere@foss.st.com>, 
- Eugene Uriev <eugeneuriev@gmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Jonas Karlman <jonas@kwiboo.se>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Maxim Moskalets <maximmosk4@gmail.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
- Sean Anderson <seanga2@gmail.com>, 
- Sebastian Reichel <sebastian.reichel@collabora.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- This contributor prefers not to receive mails <noreply@example.com>, 
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-In-Reply-To: <20241021081934.289473-1-sjg@chromium.org>
-References: <20241021081934.289473-1-sjg@chromium.org>
-Subject: Re: [PATCH v4 0/8] Allow showing the memory map
-Message-Id: <172990273419.502739.7844795066224107789.b4-ty@konsulko.com>
-Date: Fri, 25 Oct 2024 18:32:14 -0600
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [192.168.1.54] (unknown [59.56.82.81])
+ by smtp.qiye.163.com (Hmail) with ESMTP id f32ad86;
+ Sat, 26 Oct 2024 10:39:42 +0800 (GMT+08:00)
+Message-ID: <0673c284-fc0c-4495-b44a-4c9e5e162b39@rock-chips.com>
+Date: Sat, 26 Oct 2024 10:39:37 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 18/18] board: rockchip: add support for Qnap TS433
+ devices
+To: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
+ philipp.tomsich@vrull.eu, sjg@chromium.org
+Cc: ukleinek@debian.org
+References: <20241013192424.84280-1-heiko@sntech.de>
+ <20241013192424.84280-19-heiko@sntech.de>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20241013192424.84280-19-heiko@sntech.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDT0pJVh8dTUlLThlNTUNDTFYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQlVOTVVDSVVDSllXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
+ JLS1kG
+X-HM-Tid: 0a92c6b19f0703a4kunmf32ad86
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NCI6SDo4DjIvNRYxEygrGA4Z
+ ChJPCilVSlVKTElCQkpLSENIS01IVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQlVOTVVDSVVDSllXWQgBWUFKSUpISjcG
+DKIM-Signature: a=rsa-sha256;
+ b=QCLWzJq74xA3Yf1RmAaJqAvrVifKpj1IE8/M7dIULqXD1IjZvRIf/cBdCXPp7FBsg1e7upEZbJ8J5ChU3j5kWJX1F4JbN39Vau4yPNDEHE3CwuQIYDuMkqFave6FRaJlENFSzSW3RPrK3eYmJK4TryeLjcRs1B6h8BfDs3SCkO8=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=wYRDp3/lj1WjQBLIjI8ou2z6due7vtjEPWa2mCyXylE=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,22 +75,366 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 21 Oct 2024 10:19:24 +0200, Simon Glass wrote:
+Hi Heiko,
 
-> This little series adds a new 'memmap' command, intended to show the
-> layout of memory within U-Boot and how much memory is available for
-> loading images.
-> 
-> Changes in v4:
-> - Drop am65x patch as it is not needed
-> - Add patch to export the lmb data structure
-> - Add new patch to show the lmb records
-> 
-> [...]
+     I got a ci error for this patch:
 
-Applied to u-boot/master, thanks!
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/jobs/929839
 
--- 
-Tom
++Image 'simple-bin-spi' is missing external blobs and is non-functional: 
+rockchip-tpl
++/binman/simple-bin-spi/mkimage/rockchip-tpl (rockchip-tpl):
++drivers/net/rtl8169.c:320:2: error: #warning cache-line size is larger 
+than descriptor size [-Werror=cpp]
++  320 | #warning cache-line size is larger than descriptor size
++      |  ^~~~~~~
++cc1: all warnings being treated as errors
++make[3]: *** [scripts/Makefile.build:257: drivers/net/rtl8169.o] Error 1
++make[2]: *** [scripts/Makefile.build:398: drivers/net] Error 2
++make[1]: *** [Makefile:1914: drivers] Error 2
++make: *** [Makefile:177: sub-make] Error 2
 
 
+Seems for some reason the CI is building the TPL and rtl8169.c is build 
+inside TPL?
+
+
+Thanks,
+- Kever
+On 2024/10/14 03:24, Heiko Stuebner wrote:
+> The Qnap TS433 is a 4-bay NAS based around the RK3568.
+>
+> Two SATA bays are connected to the RK3568's own SATA controllers while
+> the other two are connected to a JMicron SATA controller living on the
+> PCIe bus.
+>
+> It provides one 2.5Gb and one 1Gb ethernet port as well as 3 usb ports.
+>
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+> ---
+>   arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi |  6 ++
+>   arch/arm/mach-rockchip/rk3568/Kconfig      | 14 ++++
+>   board/qnap/ts433/Kconfig                   | 12 +++
+>   board/qnap/ts433/MAINTAINERS               |  8 ++
+>   configs/qnap-ts433-rk3568_defconfig        | 86 ++++++++++++++++++++
+>   doc/board/qnap/index.rst                   |  9 +++
+>   doc/board/qnap/ts433.rst                   | 91 ++++++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst            |  1 +
+>   include/configs/qnap_ts433.h               | 10 +++
+>   9 files changed, 237 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+>   create mode 100644 board/qnap/ts433/Kconfig
+>   create mode 100644 board/qnap/ts433/MAINTAINERS
+>   create mode 100644 configs/qnap-ts433-rk3568_defconfig
+>   create mode 100644 doc/board/qnap/index.rst
+>   create mode 100644 doc/board/qnap/ts433.rst
+>   create mode 100644 include/configs/qnap_ts433.h
+>
+> diff --git a/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi b/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..19acbceb468
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+> @@ -0,0 +1,6 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * (C) Copyright 2024 Heiko Stuebner <heiko@sntech.de>
+> + */
+> +
+> +#include "rk356x-u-boot.dtsi"
+> diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+> index 899cf909fbb..2a0fd40874e 100644
+> --- a/arch/arm/mach-rockchip/rk3568/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+> @@ -27,6 +27,19 @@ config TARGET_POWKIDDY_X55_RK3566
+>   	help
+>   	  Powkiddy X55 handheld gaming console with an RK3566 SoC.
+>   
+> +config TARGET_QNAP_TS433_RK3568
+> +	bool "QNAP-TS433"
+> +	help
+> +	  Qnap TS433 4-bay NAS with a RK3568 SoC.
+> +
+> +	  It provides the following featureset:
+> +	   * 4GB LPDDR4
+> +	   * 4GB eMMC
+> +	   * 2 SATA ports connected to two RK3568's SATA controllers
+> +	   * 2 SATA ports connected to a JMicron JMB58x AHCI SATA controller
+> +	   * 1 1G network controller
+> +	   * 1 2.5G Realtek RTL8125 network controller
+> +
+>   config TARGET_QUARTZ64_RK3566
+>   	bool "Pine64 Quartz64"
+>   	help
+> @@ -64,6 +77,7 @@ source "board/anbernic/rgxx3_rk3566/Kconfig"
+>   source "board/hardkernel/odroid_m1/Kconfig"
+>   source "board/pine64/quartz64_rk3566/Kconfig"
+>   source "board/powkiddy/x55/Kconfig"
+> +source "board/qnap/ts433/Kconfig"
+>   source "board/radxa/zero3-rk3566/Kconfig"
+>   source "board/xunlong/orangepi-3b-rk3566/Kconfig"
+>   
+> diff --git a/board/qnap/ts433/Kconfig b/board/qnap/ts433/Kconfig
+> new file mode 100644
+> index 00000000000..b00e1f9f2ef
+> --- /dev/null
+> +++ b/board/qnap/ts433/Kconfig
+> @@ -0,0 +1,12 @@
+> +if TARGET_QNAP_TS433_RK3568
+> +
+> +config SYS_BOARD
+> +	default "qnap_ts433"
+> +
+> +config SYS_VENDOR
+> +	default "qnap"
+> +
+> +config SYS_CONFIG_NAME
+> +	default "qnap_ts433"
+> +
+> +endif
+> diff --git a/board/qnap/ts433/MAINTAINERS b/board/qnap/ts433/MAINTAINERS
+> new file mode 100644
+> index 00000000000..c2b31ad9794
+> --- /dev/null
+> +++ b/board/qnap/ts433/MAINTAINERS
+> @@ -0,0 +1,8 @@
+> +QNAP-TS433
+> +M:	Heiko Stuebner <heiko@sntech.de>
+> +S:	Maintained
+> +F:	board/qnap/ts433/
+> +F:	doc/board/qnap/
+> +F:	include/configs/qnap_ts433.h
+> +F:	configs/qnap-ts433-rk3568_defconfig
+> +F:	arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+> diff --git a/configs/qnap-ts433-rk3568_defconfig b/configs/qnap-ts433-rk3568_defconfig
+> new file mode 100644
+> index 00000000000..cbe4622e468
+> --- /dev/null
+> +++ b/configs/qnap-ts433-rk3568_defconfig
+> @@ -0,0 +1,86 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-qnap-ts433"
+> +CONFIG_ROCKCHIP_RK3568=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_TARGET_QNAP_TS433_RK3568=y
+> +CONFIG_DEBUG_UART_BASE=0xFE660000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-qnap-ts433.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_SATA=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_ROCKUSB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_PMIC=y
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_AHCI_PCI=y
+> +CONFIG_DWC_AHCI=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+> +CONFIG_RTL8169=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_DM_PMIC_FAN53555=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_PWM_ROCKCHIP=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_SCSI=y
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_ERRNO_STR=y
+> diff --git a/doc/board/qnap/index.rst b/doc/board/qnap/index.rst
+> new file mode 100644
+> index 00000000000..652ea11a056
+> --- /dev/null
+> +++ b/doc/board/qnap/index.rst
+> @@ -0,0 +1,9 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +Qnap
+> +====
+> +
+> +.. toctree::
+> +   :maxdepth: 2
+> +
+> +   ts433.rst
+> diff --git a/doc/board/qnap/ts433.rst b/doc/board/qnap/ts433.rst
+> new file mode 100644
+> index 00000000000..5c7fd314b7a
+> --- /dev/null
+> +++ b/doc/board/qnap/ts433.rst
+> @@ -0,0 +1,91 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +U-Boot for Qnap TS433 Devices
+> +=================================
+> +
+> +This allows U-Boot to boot the Qnap TS433 NAS
+> +
+> +Preparing the serial
+> +--------------------
+> +
+> +Qnap devices run their serial console with a 115200 baudrate. As the
+> +binary DDR-init and maskrom-downloader expect a 1500000 rate, it is
+> +necessary to adapt the binaries if their output is needed.
+> +
+> +This can be done with a binary provided in the rkbin repository.
+> +First the ddrbin_param.txt in the rkbin repo needs to be modified:
+> +
+> +.. code-block:: bash
+> +
+> +    diff --git a/tools/ddrbin_param.txt b/tools/ddrbin_param.txt
+> +    index 0dfdd318..82ade7e7 100644
+> +    --- a/tools/ddrbin_param.txt
+> +    +++ b/tools/ddrbin_param.txt
+> +    @@ -11,7 +11,7 @@ lp5_freq=
+> +
+> +     uart id=
+> +     uart iomux=
+> +    -uart baudrate=
+> +    +uart baudrate=115200
+> +
+> +     sr_idle=
+> +     pd_idle=
+> +
+> +And after that the ddrbin_tool binary can be used to modify apply this
+> +modification and also a new maskrom downloader can be build:
+> +
+> +.. code-block:: bash
+> +
+> +    $ tools/ddrbin_tool rk3568 tools/ddrbin_param.txt bin/rk35/rk3568_ddr_1560MHz_v1.21.bin
+> +    $ tools/boot_merger RKBOOT/RK3568MINIALL.ini
+> +
+> +Building U-Boot
+> +---------------
+> +
+> +.. code-block:: bash
+> +
+> +    $ export CROSS_COMPILE=aarch64-linux-gnu-
+> +    $ export BL31=../rkbin/bin/rk35/rk3568_bl31_v1.34.elf
+> +    $ export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3568_ddr_1056MHz_v1.13.bin
+> +    $ make qnap-ts433-rk3568_defconfig
+> +    $ make
+> +
+> +This will build ``u-boot-rockchip.bin`` which can be written to the
+> +on-board eMMC.
+> +
+> +Image installation
+> +------------------
+> +
+> +The Qnap thankfully provides an easily accessible serial header as well as
+> +a very user-friendly jumper-header to bring the device into maskrom mode.
+> +
+> +To access both, the drive trays need to be removed. Looking at the board,
+> +through the upper cutout of the metal frame the white 4-port serial-header
+> +can be seen next to a barcode sticker. It's pinout is as follows:
+> +
+> +.. code-block:: bash
+> +
+> +   ,_  _.
+> +   |1234|  1=TX 2=VCC
+> +   `----'  3=RX 4=GND
+> +
+> +
+> +Directly below it, the mentioned 2-pin jumper header can be seen.
+> +
+> +To write your u-boot to the device, it needs to be powered off first. Then
+> +a jumper or suitable cable needs to be used to connect the two pins of the
+> +maskrom header. Turning on the device now will start it in maskrom mode.
+> +
+> +It is important that the jumper gets removed after that stop and before
+> +actually trying to write to the emmc.
+> +
+> +The front usb-port needs to be connected to the host with an USB-A-to-A
+> +cable to allow flashing.
+> +
+> +The flashing itself is done via rkdeveloptool, which can be found for
+> +example as package of that name in Debian-based distributions:
+> +
+> +.. code-block:: bash
+> +
+> +    $ rkdeveloptool db rk356x_spl_loader_v1.21.113.bin
+> +    $ rkdeveloptool wl 64 u-boot-rockchip.bin
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index 86d83befb5b..a0349d3ad56 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -118,6 +118,7 @@ List of mainline supported Rockchip boards:
+>        - FriendlyElec NanoPi R5S (nanopi-r5s-rk3568)
+>        - Generic RK3566/RK3568 (generic-rk3568)
+>        - Hardkernel ODROID-M1 (odroid-m1-rk3568)
+> +     - QNAP TS-433 (qnap-ts433-rk3568)
+>        - Radxa E25 Carrier Board (radxa-e25-rk3568)
+>        - Radxa ROCK 3A (rock-3a-rk3568)
+>        - Radxa ROCK 3B (rock-3b-rk3568)
+> diff --git a/include/configs/qnap_ts433.h b/include/configs/qnap_ts433.h
+> new file mode 100644
+> index 00000000000..aee4546bf07
+> --- /dev/null
+> +++ b/include/configs/qnap_ts433.h
+> @@ -0,0 +1,10 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +
+> +#ifndef __QNAP_TS433_H
+> +#define __QNAP_TS433_H
+> +
+> +#define ROCKCHIP_DEVICE_SETTINGS
+> +
+> +#include <configs/rk3568_common.h>
+> +
+> +#endif
