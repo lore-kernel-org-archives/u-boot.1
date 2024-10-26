@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AAD8D10BE5
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 08:11:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 994EAD10BEC
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 08:52:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5D3588DF1;
-	Sat, 26 Oct 2024 10:11:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A411888DF1;
+	Sat, 26 Oct 2024 10:52:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VKxpRd8e";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="YQ+ZJEKp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F056D88B4B; Sat, 26 Oct 2024 10:11:22 +0200 (CEST)
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
+ id 8E9D388DF8; Sat, 26 Oct 2024 10:52:26 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7738588B4B
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 10:11:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D35588CD9
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 10:52:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-71e49ad46b1so1838654b3a.1
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 01:11:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2e2e050b1c3so2687212a91.0
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 01:52:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729930277; x=1730535077; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=u93NYpenY6edniktxX5Gs+TTsmwn02LA1+Gd82ynyCo=;
- b=VKxpRd8eXyEW7kri9J3sVC3Pv8MjFcMi5UpQyH5y8ZYlXjXAVNxkaFDlElHwYzlD8b
- eXdV+FE60yxzsezI2YWK0PVrotsysCOtBCgWfwnUuV/vu49BZU6fZTbfeynTSQIeACQG
- 97/FAou7dKovBx5Yf0CQhMSPfG8U5Dkp4pP1jf1afcbPKqaIhH72VOmV3VkqOcT084gi
- mHD1wBVkZdpFSELzX8miAKA1V6SZot4WVIK0UEWIu7zSU9SFaUf9NJGBcC52CtS81trH
- gkDZSHTSmAGNTQlTtaAEYpWSPTgJjs6OLQtpFjnxvVeJLQ8or+sYPej83wCHwIGJ9w8L
- o63Q==
+ d=amarulasolutions.com; s=google; t=1729932740; x=1730537540;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ayQFIAjr1qY4DgTSg4SEf4vYsnK6IwNCAIF22KeML0g=;
+ b=YQ+ZJEKpb9RWZ7SsiG0H6RCNFqhGMyHBV4ezqw9FdUZgMD0o0GRBlTqK5PUOf9Ocdr
+ rn4FXCJavDaspBmBt4aLAGjx90qqZnHp7JTEUjJEcR4ZyjugtdNCUJ3ACi31Y81gKjB/
+ UXwnpc88tZ2837HJQkbEAW01Fmqx7WcBfBiSc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729930277; x=1730535077;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=u93NYpenY6edniktxX5Gs+TTsmwn02LA1+Gd82ynyCo=;
- b=NDKXK3+S/WZFmNLKFtP67rUVUKQEOCC7K1GQ2fsTzI8royfesaVNsPLGWAE8x+SMKq
- ysDOs4xiR87hJaJNGXs3NcnvBYniErjoDs3Vfq/2kiNnxjqtDg0Hv6RwmqVSC0QoBLGr
- dKz3WKlzP/0X6EEXIjGhB8YLB4C6gLxZMMkh8UCt6b18ua2MqlCB5YhDfbUT2pNtI1l1
- PqdD3XAkDkWsHeraT02JL837pyCjW+rCTNCyFp5DYrovYQNRcrLbPOli43tJuzkfpkYG
- dujVqdSAmuVzj31Sp0/3q7OhiIOHhXtp2QNYRfcy9BhhQLuDKZnDX2HLnGBirFAkpvtg
- hQCQ==
+ d=1e100.net; s=20230601; t=1729932740; x=1730537540;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ayQFIAjr1qY4DgTSg4SEf4vYsnK6IwNCAIF22KeML0g=;
+ b=DZrgZHSwWpxSByOUjNI96R0mnu9K0FZXDexF4qH+JxhkJZoTTl0aB41VJ28Ru4hs5m
+ SixQjkIVnqeOd+GTZ3MMvEuLrQblvqZBSfK8GCVITvrLzHUO+rLl5N/x1I9JVSTEg0cd
+ wXA15v31oRfJNOgYMrPtJv6b3aiNIZxSIaHxfwUZKqiawxNUAGcYQPYg6K240fUiZT0e
+ He75I9JbIkvFVK5vEniv1ruBBkLk2qJOJiXbSzM1ouh5YtbsFReKUks3hVROQc2XKdoN
+ K1zawwGvAuTWJW4rYtKyHCbbAcjo5utLi+Kq7amWN8Kt1d8q35XIZVG+qK/DR3musZzS
+ kuIg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUbAF+WfTJaYH9RefG3ojaQsuhxc3mZk6IxoM4O1f0UgFY4pfLO4d+Wcjv4irLLL9X84oDuLmI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyxJkVht7gDzjpf9++qsvnib7/1UWahIAK7Ss1CD5Ob/gcki0gm
- eBMWVqBwLaPBxeNM3/H/TMHGIgzXHAR3IjoX/rc2C2h8xKuJoj37q+MkyraLRLJOmeyzPFf7Aoj
- 3RZCjhs8W5no91PKsEW5CW4aqgGy1oC09ep0g0HbQkQYk+mFt
-X-Google-Smtp-Source: AGHT+IFmktCGFKvedsKLG0Fe7PCUdgfPZt+7c3SU8TqJLwkZYjWTBJAr/FXL3gzd2Jj3XVuMAK/PpQ4A4gY4+zy0J1o=
-X-Received: by 2002:a05:6a00:ccf:b0:71e:7745:85b8 with SMTP id
- d2e1a72fcca58-72062f4e66cmr3117841b3a.1.1729930276923; Sat, 26 Oct 2024
- 01:11:16 -0700 (PDT)
+ AJvYcCVulstnVETUgxauNdl+oDv2+tQUTPB98PW27HUK0ZO6x2MjXRrfTyjWqhhBMJ7g7hiaktPMGy0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx/ScugzIyVUaUikVuFhWS50dtzIwGDQ3WL2fi/Vf6vCAx7R6Wf
+ uJh4CLKxlLLKhQl4ZNOGsXq3Bv9+xW+jDwyrRc2YdlTLlj6UWJJB0XbZ0zq0grAA6uDsjlZJ2bJ
+ GXFFNTn/dMrTsJrITigosCwi2V0JTvLZzk9yfSQ==
+X-Google-Smtp-Source: AGHT+IHrxAOk51z4bU2UGpoCX6TMV8jEa3+GDpk2Vn09G4Rkzt0qVhTrA/XDLNXy55t9WynMY1oCljrreIleSHbTPRc=
+X-Received: by 2002:a17:90a:70c2:b0:2e2:c1d0:68dc with SMTP id
+ 98e67ed59e1d1-2e77e5e48a7mr12856829a91.9.1729932740407; Sat, 26 Oct 2024
+ 01:52:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <ZxZk4K4ff1T3gUVm@smile.fi.intel.com>
- <CAFLszTjuodDFZW8fJDL1Q3nByLVzcTTEAeJfws-sbtupCwNd8w@mail.gmail.com>
- <ZxenO05qCbt5IIZS@smile.fi.intel.com>
- <20241023-gizzard-untracked-4a1c6d2f6be6@thorsis.com>
- <ZxkNnJxVHSlxNjSV@smile.fi.intel.com>
-In-Reply-To: <ZxkNnJxVHSlxNjSV@smile.fi.intel.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 26 Oct 2024 11:10:40 +0300
-Message-ID: <CAC_iWj+adgo3Kyd_j77P3_OWzpad8xOB2Cc8NxsxQNrQrDRi2g@mail.gmail.com>
-Subject: Re: enabling W=1 by default
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
+References: <20241026064048.370062-1-heinrich.schuchardt@canonical.com>
+ <20241026064048.370062-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241026064048.370062-2-heinrich.schuchardt@canonical.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Sat, 26 Oct 2024 10:52:08 +0200
+Message-ID: <CAOf5uwnC7G9DjKT86KwQMbb+rkb5YcL8c6cV_jziHoGoDSPn3w@mail.gmail.com>
+Subject: Re: [PATCH 1/5] fs: ext4: simplify ext4fs_iterate_dir()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Richard Weinberger <richard@nod.at>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sean Anderson <seanga2@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,74 +94,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andy
+Hi
 
-On Wed, 23 Oct 2024 at 17:52, Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
+On Sat, Oct 26, 2024 at 8:41=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On Wed, Oct 23, 2024 at 09:52:09AM +0200, Alexander Dahl wrote:
-> > Am Tue, Oct 22, 2024 at 04:23:07PM +0300 schrieb Andy Shevchenko:
-> > > On Mon, Oct 21, 2024 at 06:32:21PM +0200, Simon Glass wrote:
-> > > > On Mon, 21 Oct 2024 at 16:27, Andy Shevchenko
-> > > > <andriy.shevchenko@linux.intel.com> wrote:
-> > > > >
-> > > > > looking at the redness of the output of `make W=1` here is the question:
-> > > > > isn't it a good time to enable `make W=1` by default. Yes, I understand
-> > > > > the impact, but at least we can do it mandatory for a _new_ code submitted to
-> > > > > U-Boot, right?
-
-I think this is a good idea and perhaps we can do it per subsystem. I
-cleaned up EFI a few years ago, but some new have crept in.
-I've sent a bunch of no brainer patches, once I clean all of it (and
-assuming it's doable), I 'll try enabling W=1 as the default for
-efi_loader
-
-thanks
-/Ilias
-> > > > >
-> > > > > Ideally I would have what Linux kernel has for a few releases already, i.e.
-> > > > > Werror by default and getting close to make a clean builds with that and
-> > > > > make W=1` at least against default configurations (yeah, with U-Boot there is
-> > > > > probably no default, but sandbox one).
-> > > >
-> > > > Warnings should be warnings...
-> > >
-> > > Yes, and ideally the code should not have warnings, right?
-> >
-> > +1
-> >
-> > > Otherwise how can we do better? It's quite similar to what you wrote WRT
-> > > documenting the function prototypes, the same applies to the new contribution
-> > > WRT `make W=1`.
-> > >
-> > > > if you would like to enable it for CI that is fine by me,
-> > >
-> > > Yes, that's the idea, but I'm not the owner of any U-Boot CIs,
-> > > hence it's a proposal.
-> > >
-> > > > but the U-Boot makefile shouldn't do it. It defeats the purpose of
-> > > > having a distinction between errors and warnings.
-> > >
-> > > While it's not what I wanted, I disagree on your comment. The idea is to make
-> > > rules stricter (for new code) to make it better and that's why Linus enabled
-> > > Werror by default in the Linux kernel. And personally I consider that as a good
-> > > thing to follow.
-> >
-> > Long term experience: each time you upgrade your toolchain you get new
-> > warnings.  Each package (u-boot, kernel, userland, does not matter
-> > which) enabling -Werror breaks the BSP build.  What should a developer
-> > do then?  Fix each warning in each foreign project and bring it
-> > upstream?  Or disable -Werror?  Last thing is what is usually done.
-> > You can see several patches in buildroot or ptxdist disabling -Werror
-> > for this reason.
+> Remove copying a pointer with a cast to the very same type.
 >
-> That's why the set of enabled/disabled warnings are spread over W=<n> and hence
-> hidden when known to be PITA. W=1 is kinda special in a sense that we put the
-> warnings that might affect code generation, size of the binary, etc. In some cases
-> it even might prevent security bugs.
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  fs/ext4/ext4_common.c | 27 +++++++++++++--------------
+>  1 file changed, 13 insertions(+), 14 deletions(-)
 >
+> diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
+> index 76f7102456e..c1e38978bb9 100644
+> --- a/fs/ext4/ext4_common.c
+> +++ b/fs/ext4/ext4_common.c
+> @@ -2046,24 +2046,23 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, c=
+har *name,
+>         unsigned int fpos =3D 0;
+>         int status;
+>         loff_t actread;
+> -       struct ext2fs_node *diro =3D (struct ext2fs_node *) dir;
+>
+>  #ifdef DEBUG
+>         if (name !=3D NULL)
+>                 printf("Iterate dir %s\n", name);
+>  #endif /* of DEBUG */
+> -       if (!diro->inode_read) {
+> -               status =3D ext4fs_read_inode(diro->data, diro->ino, &diro=
+->inode);
+> +       if (!dir->inode_read) {
+> +               status =3D ext4fs_read_inode(dir->data, dir->ino, &dir->i=
+node);
+>                 if (status =3D=3D 0)
+>                         return 0;
+>         }
+>         /* Search the file.  */
+> -       while (fpos < le32_to_cpu(diro->inode.size)) {
+> +       while (fpos < le32_to_cpu(dir->inode.size)) {
+>                 struct ext2_dirent dirent;
+>
+> -               status =3D ext4fs_read_file(diro, fpos,
+> -                                          sizeof(struct ext2_dirent),
+> -                                          (char *)&dirent, &actread);
+> +               status =3D ext4fs_read_file(dir, fpos,
+> +                                         sizeof(struct ext2_dirent),
+> +                                         (char *)&dirent, &actread);
+>                 if (status < 0)
+>                         return 0;
+>
+> @@ -2077,7 +2076,7 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, cha=
+r *name,
+>                         struct ext2fs_node *fdiro;
+>                         int type =3D FILETYPE_UNKNOWN;
+>
+> -                       status =3D ext4fs_read_file(diro,
+> +                       status =3D ext4fs_read_file(dir,
+>                                                   fpos +
+>                                                   sizeof(struct ext2_dire=
+nt),
+>                                                   dirent.namelen, filenam=
+e,
+> @@ -2089,7 +2088,7 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, cha=
+r *name,
+>                         if (!fdiro)
+>                                 return 0;
+>
+> -                       fdiro->data =3D diro->data;
+> +                       fdiro->data =3D dir->data;
+>                         fdiro->ino =3D le32_to_cpu(dirent.inode);
+>
+>                         filename[dirent.namelen] =3D '\0';
+> @@ -2104,7 +2103,7 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, cha=
+r *name,
+>                                 else if (dirent.filetype =3D=3D FILETYPE_=
+REG)
+>                                         type =3D FILETYPE_REG;
+>                         } else {
+> -                               status =3D ext4fs_read_inode(diro->data,
+> +                               status =3D ext4fs_read_inode(dir->data,
+>                                                            le32_to_cpu
+>                                                            (dirent.inode)=
+,
+>                                                            &fdiro->inode)=
+;
+> @@ -2140,10 +2139,10 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, c=
+har *name,
+>                                 }
+>                         } else {
+>                                 if (fdiro->inode_read =3D=3D 0) {
+> -                                       status =3D ext4fs_read_inode(diro=
+->data,
+> -                                                                le32_to_=
+cpu(
+> -                                                                dirent.i=
+node),
+> -                                                                &fdiro->=
+inode);
+> +                                       status =3D ext4fs_read_inode(dir-=
+>data,
+> +                                                                  le32_t=
+o_cpu(
+> +                                                                  dirent=
+.inode),
+> +                                                                  &fdiro=
+->inode);
+>                                         if (status =3D=3D 0) {
+>                                                 free(fdiro);
+>                                                 return 0;
 > --
-> With Best Regards,
-> Andy Shevchenko
+> 2.45.2
 >
->
+Nit I don't know if this can a const pointer from the function call prospec=
+tive
+
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
