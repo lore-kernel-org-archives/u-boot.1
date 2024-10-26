@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CDF6D0C604
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 16:17:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BA29D0C604
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 16:18:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45D5F89058;
+	by phobos.denx.de (Postfix) with ESMTP id A316D89067;
 	Sat, 26 Oct 2024 18:16:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QPmbaIVq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RaLTktKc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8834A89021; Sat, 26 Oct 2024 17:52:43 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id EDEEE88F70; Sat, 26 Oct 2024 17:52:45 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A6FA88EA8
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 17:52:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AEAD688F68
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 17:52:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c94c0bf354so428497a12.1
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 08:52:33 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9589ba577so500429a12.1
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 08:52:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729957953; x=1730562753; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1729957958; x=1730562758; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g24PlX+f7Q9JrGsECLdRHFJ1jIEI63ltoZxyzNejD1M=;
- b=QPmbaIVqTffecsoeM80nLA9uQDFklwqVQ24ZeAdvO2DK+WKly/b6KWjT8+2T3msgSU
- 8nAfH1OJ8IwafcYflSUjGiRbGpkoxBAAhhIZhm4qEhS3pzcJifPVR28YYtmAuJqf5fYt
- uzr0oC0+658A28S0D9MmD97Wwk6ljvWFoiQ/MYBL7+ScTvrjcky5bp9pmlw5bxjcnxvh
- DJA3UOmm+bgI4OgaME6ZwXfXf0H/rMcu+XKKDU9fSHWhj02m3hIBorS+AevoXNjgfZPY
- KflHzjpEbwZUSezV6mTcCdIq9o/xA6DTZaLxrqWtnspbrmwQ/YH3uOZYWfT4I9OY4wpQ
- 3DVA==
+ bh=IURYN84oDNLi1NHR9dnkdXmYzlhlM+LR1UTAGXoKB6U=;
+ b=RaLTktKcd695kWbpk/eb6oPy+JMSH8XrE8a+b53gRWaaNhmB+5MQPFdTxL034FNmBl
+ RYCL7t3Y2gQGgbT4AphGV7JBSLeBlumz2qal/ruoJ+thJZD1xK0TsUseVwy35ucpfdcK
+ 4wHDqK56dZg7GMSOf7Tr8QI/+uoc4CQC+b6STGZ6mlGxeU8qXit4My8rKh/g9a4Z8ih8
+ uqw1aioqWiPEM47ZiibVceqeNxPelFVr7BkIBmX/jkDiXwBwfssqHgwJXtkxTL+5smgy
+ mbbmcG9mYNRScWpwZxUth/ir7cgNwMQOROqsTFHd5EqAko+Qj/0cu38SYCsVEwYoQf19
+ 8iMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729957953; x=1730562753;
+ d=1e100.net; s=20230601; t=1729957958; x=1730562758;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g24PlX+f7Q9JrGsECLdRHFJ1jIEI63ltoZxyzNejD1M=;
- b=cb+0Fr8MpI3e0ZI1rZIGTIwPeXf9xBDLAjZSFJLPO25PK3EFByF7RtXi3VbLBJldQQ
- 0tZ9kOhDEC1TdEq+Qu0z61Hmfxh+zgGffGcsWoFDuS8iE3V9tA1or6lRbYnNb/VHdxDa
- JHZbA3EfuRHhoCsH3kqWqwUJ3xUgBLVLnawiLIUTM26NpuG2gZ0vBS5l45J9BGTbyLjI
- OBIbE/LQTmJc9imZrYV6gjf8acY6FJWZEe9NpV64TWaNSN5dHvf9fSTO9zhFhb+ZZ4+I
- 0EZMzXbL/3h5aXYKioQectzyO5B7C+7nkvP+lAT/LPs09441oTrtyz0+PzSMjo9has9z
- Huzw==
-X-Gm-Message-State: AOJu0YzQASxVEOHYr4rlPfjUelLdoeP+KQkXnd6QLTkBgJDinbkQfvkV
- KhFrCaT80RFBugMEJqYdVZc6sQNhWmUZTdeSlbm1kGprA19RxGAqsK4a2A==
-X-Google-Smtp-Source: AGHT+IEknvHwCWr7dE//MXqPD3mjBni9Z0+5uXilNoHISYB8B7egRL51Uy911SG2ac9zsFoXUljE3A==
-X-Received: by 2002:a05:6402:51cb:b0:5c3:eb29:83ce with SMTP id
- 4fb4d7f45d1cf-5cbbfacb548mr930128a12.9.1729957952785; 
- Sat, 26 Oct 2024 08:52:32 -0700 (PDT)
+ bh=IURYN84oDNLi1NHR9dnkdXmYzlhlM+LR1UTAGXoKB6U=;
+ b=pBMDJ+OTHRRWQup5MC01+EwhkHQpb7dCL2MjiXXBi90ZJZyi2w0lFpm5GOXoTPdKP/
+ CXCNz6oUMg4Ne4lhNtUMUJGP7Tr+xs3EY3Kf4zalsxOWDEIcrcMxrmTrEKSQ/FJxwJcf
+ 0CNPJpPKgref5hRzzQSW5aJXVSYSL+DbVKjo/9eKQZIf0BodgA7bCk0j/PHiAb93iZG2
+ KkK9jjhKiakkmFq87r06J9asIBKNsIle1nU1AUv+/x6nOzgLJ4kW6buGEztvz+8KdIDR
+ lZ+WjDtHmrVVcZuGJcQ6tJRI0kR/AZjDfDQreukxWfARgo25myqiIdmI3x9wHl7YN1vT
+ R/PA==
+X-Gm-Message-State: AOJu0Yz6SFBh90YxIACq05ewQNHoak4ahYuNSRKKMZMQRwCi+GUgpuiv
+ y/KXx3pQid5ofbdxTi50Vj57zVCkHQRE+k6ZuJ6E4Eio2Uer7LUhcD+m9w==
+X-Google-Smtp-Source: AGHT+IF+J0uq19Rf29i7CdL/HxfHL6cmYtc9ezwgxmfT35fvwlwVV4AirI/xscN17t5RDI4QkM65JA==
+X-Received: by 2002:a05:6402:3546:b0:5cb:7291:29c7 with SMTP id
+ 4fb4d7f45d1cf-5cbbfad4d88mr942749a12.8.1729957957907; 
+ Sat, 26 Oct 2024 08:52:37 -0700 (PDT)
 Received: from 6c1d2e1f4cf4.v.cablecom.net (84-72-156-211.dclient.hispeed.ch.
  [84.72.156.211]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cbb63197casm1620179a12.63.2024.10.26.08.52.30
+ 4fb4d7f45d1cf-5cbb63197casm1620179a12.63.2024.10.26.08.52.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 26 Oct 2024 08:52:31 -0700 (PDT)
+ Sat, 26 Oct 2024 08:52:36 -0700 (PDT)
 From: Lothar Rubusch <l.rubusch@gmail.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, marex@denx.de,
  simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  sumit.garg@linaro.org
 Cc: sjg@chromium.org, xypron.glpk@gmx.de, michal.simek@amd.com,
  jit.loon.lim@intel.com, barnas@google.com, l.rubusch@gmail.com
-Subject: [PATCH v4 04/11] ARM: socfpga: add Enclustra storage switch
-Date: Sat, 26 Oct 2024 15:52:13 +0000
-Message-Id: <20241026155220.26300-5-l.rubusch@gmail.com>
+Subject: [PATCH v4 06/11] ARM: socfpga: AA1: support MAC from secure eeprom
+Date: Sat, 26 Oct 2024 15:52:15 +0000
+Message-Id: <20241026155220.26300-7-l.rubusch@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241026155220.26300-1-l.rubusch@gmail.com>
 References: <20241026155220.26300-1-l.rubusch@gmail.com>
@@ -95,311 +95,449 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some of Enclustra's Intel SoMs need gpio muxing for setting up
-the boot media. This can be done by switching dip switches and also in
-software. The image in this case can be loaded from SD card, and flashed
-to the eMMC or QSPI. After, the dip switches can set the boot select
-accordingly. With altera_set_storage MMC|EMMC|QSPI from off the u-boot
-shell, the media is usually switched.
+Several Enclustra devices store MAC address in a secure eeprom device. In
+most cases this is the atsha204a (alternatively DS28). The atsha204a device
+is preconfigured accordingly. Reading then is based on u-boot's atsha204a
+driver. Add such support for Enclustra's AA1 SoMs.
 
 Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
 ---
- .../socfpga_arria10_enclustra_mercury_aa1.dts |  17 ++
- board/enclustra/mercury_aa1/Makefile          |   8 +
- .../mercury_aa1/aa1_set_storage_cmd.c         | 190 ++++++++++++++++++
- doc/board/enclustra/mercury-aa1.rst           |  25 +++
- 4 files changed, 240 insertions(+)
- create mode 100644 board/enclustra/mercury_aa1/Makefile
- create mode 100644 board/enclustra/mercury_aa1/aa1_set_storage_cmd.c
+ arch/arm/mach-socfpga/Kconfig                 |   2 +-
+ board/enclustra/common/Kconfig                |  25 +++++
+ board/enclustra/common/Makefile               |   3 +
+ board/enclustra/common/enclustra_mac.h        |  48 +++++++++
+ board/enclustra/common/mac_atsha204.c         | 102 ++++++++++++++++++
+ board/enclustra/common/mac_common.c           |  52 +++++++++
+ board/enclustra/common/mac_ds28.c             |  93 ++++++++++++++++
+ board/enclustra/mercury_aa1/Makefile          |   2 +
+ .../mercury_aa1/aa1_board_late_init.c         |  17 +++
+ .../socfpga_enclustra_mercury_aa1_defconfig   |   1 +
+ 10 files changed, 344 insertions(+), 1 deletion(-)
+ create mode 100644 board/enclustra/common/Kconfig
+ create mode 100644 board/enclustra/common/enclustra_mac.h
+ create mode 100644 board/enclustra/common/mac_atsha204.c
+ create mode 100644 board/enclustra/common/mac_common.c
+ create mode 100644 board/enclustra/common/mac_ds28.c
+ create mode 100644 board/enclustra/mercury_aa1/aa1_board_late_init.c
 
-diff --git a/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts b/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
-index e8cc51a7b8..c038b2352e 100644
---- a/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
-+++ b/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
-@@ -5,6 +5,8 @@
+diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
+index b7de86e934..60d8c889dc 100644
+--- a/arch/arm/mach-socfpga/Kconfig
++++ b/arch/arm/mach-socfpga/Kconfig
+@@ -297,6 +297,6 @@ config SYS_CONFIG_NAME
+ 	default "socfpga_stratix10_socdk" if TARGET_SOCFPGA_STRATIX10_SOCDK
+ 	default "socfpga_vining_fpga" if TARGET_SOCFPGA_SOFTING_VINING_FPGA
  
- /dts-v1/;
+-source "board/enclustra/mercury_aa1/Kconfig"
++source "board/enclustra/common/Kconfig"
  
-+#include <dt-bindings/gpio/gpio.h>
+ endif
+diff --git a/board/enclustra/common/Kconfig b/board/enclustra/common/Kconfig
+new file mode 100644
+index 0000000000..4ba082e5e7
+--- /dev/null
++++ b/board/enclustra/common/Kconfig
+@@ -0,0 +1,25 @@
++config ENCLUSTRA_EEPROM_MAC
++	bool "Enclustra MAC address"
++	select ATSHA204A
++	depends on TARGET_SOCFPGA_ENCLUSTRA_MERCURY_AA1
++	default y
++	help
++	  Reads the MAC address out of the EEPROM and configures the MAC
++	  addresses in the environment.
 +
- /* The arria10 family */
- #include "socfpga/socfpga_arria10_mercury_aa1.dtsi"
- 
-@@ -17,6 +19,13 @@
- 		i2c1 = &i2c0;
- 		spi0 = &qspi;
- 	};
++choice
++	prompt "Enclustra EEPROM device"
++	depends on ENCLUSTRA_EEPROM_MAC
++	default ENCLUSTRA_EEPROM_MAC_ATSHA204 if TARGET_SOCFPGA_ENCLUSTRA_MERCURY_AA1
++	help
++	  Specify the device where the MAC is stored.
 +
-+	altera_set_storage {
-+		compatible = "enclustra,altera_set_storage";
-+		status = "okay";
-+		oe-gpios = <&portb 5 GPIO_ACTIVE_HIGH>;
-+		sel-gpios = <&portc 6 GPIO_ACTIVE_HIGH>;
-+	};
- };
- 
- &qspi {
-@@ -35,6 +44,14 @@
- 	};
- };
- 
-+&gpio1 {
-+	status = "okay";
-+};
++config ENCLUSTRA_EEPROM_MAC_ATSHA204
++	bool "MAC stored in 'ATSHA204'"
 +
-+&gpio2 {
-+	status = "okay";
-+};
++config ENCLUSTRA_EEPROM_MAC_DS28
++	bool "MAC stored in 'DS28'"
 +
- /* Carrier board support */
- #if IS_ENABLED(CONFIG_ENCLUSTRA_PE1)
- # include "socfpga/socfpga_enclustra_mercury_pe1.dtsi"
++endchoice
++
++source "board/enclustra/mercury_aa1/Kconfig"
+diff --git a/board/enclustra/common/Makefile b/board/enclustra/common/Makefile
+index 16c8531d74..c83743abe7 100644
+--- a/board/enclustra/common/Makefile
++++ b/board/enclustra/common/Makefile
+@@ -2,3 +2,6 @@
+ # Copyright (c) 2024 Enclustra GmbH
+ 
+ # Common for several Enclustra modules
++obj-$(CONFIG_ENCLUSTRA_EEPROM_MAC) += mac_common.o
++obj-$(CONFIG_ENCLUSTRA_EEPROM_MAC_ATSHA204) += mac_atsha204.o
++obj-$(CONFIG_ENCLUSTRA_EEPROM_MAC_DS28) += mac_ds28.o
+diff --git a/board/enclustra/common/enclustra_mac.h b/board/enclustra/common/enclustra_mac.h
+new file mode 100644
+index 0000000000..9631e9d458
+--- /dev/null
++++ b/board/enclustra/common/enclustra_mac.h
+@@ -0,0 +1,48 @@
++/* SPDX-License-Identifier: GPL-2.0+
++ *
++ * Copyright 2024 Enclustra GmbH, <info@enclustra.com>
++ */
++
++#ifndef ENCLUSTRA_MAC
++# define ENCLUSTRA_MAC               0xF7B020
++#endif
++
++/*
++ * enclustra_mac_is_in_env - Check if MAC address is already set
++ *
++ * @env: name of the environment variable
++ * Return: true if MAC is set, false otherwise
++ */
++bool enclustra_mac_is_in_env(const char *env);
++
++/*
++ * enclustra_get_mac_is_enabled - Test if ethernet MAC is enabled in DT
++ *
++ * @alias: alias for ethernet MAC device tree node
++ * Return: 0 if OK, other value on error
++ */
++int enclustra_get_mac_is_enabled(const char *alias);
++
++/*
++ * enclustra_get_mac_from_eeprom - Get MAC address from eeprom and write it to enetaddr
++ *
++ * @enetaddr: buffer where address is to be stored
++ * @alias: alias for EEPROM device tree node
++ * Return: 0 if OK, other value on error
++ */
++int enclustra_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias);
++
++/*
++ * enclustra_get_mac1_from_mac - Get MAC1 address from MAC and write it to enetaddr
++ *
++ * @enetaddr: buffer where MAC is passed, MAC will be modified to MAC1
++ * Return: 0 if OK, else error value
++ */
++int enclustra_get_mac1_from_mac(unsigned char *enetaddr);
++
++/*
++ * enclustra_setup_mac_address - Try to get MAC address from various locations and write it to env
++ *
++ * Return: 0 if OK, other value on error
++ */
++int enclustra_setup_mac_address(void);
+diff --git a/board/enclustra/common/mac_atsha204.c b/board/enclustra/common/mac_atsha204.c
+new file mode 100644
+index 0000000000..d582bfde0a
+--- /dev/null
++++ b/board/enclustra/common/mac_atsha204.c
+@@ -0,0 +1,102 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024 Enclustra GmbH
++ */
++
++#include <dm.h>
++#include <atsha204a-i2c.h>
++#include <net.h>
++
++#include "enclustra_mac.h"
++
++int enclustra_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
++{
++	struct udevice *dev;
++	u32 hwaddr_h;
++	u8 data[4];
++	int i, j, eeprom_addr, mac_len, ret;
++
++	ret = uclass_get_device_by_name(UCLASS_MISC, alias, &dev);
++	if (ret) {
++		printf("%s: Failed, cannot find EEPROM! ret = %d\n", __func__, ret);
++		return ret;
++	}
++
++	/* Make sure atsha204a is in a defined state (part of protocol) */
++	ret = atsha204a_sleep(dev);
++	if (ret) {
++		printf("%s(): Failed to bring EEPROM in defined state\n", __func__);
++		return ret;
++	}
++
++	ret = atsha204a_wakeup(dev);
++	if (ret) {
++		printf("%s(): Failed to wakeup EEPROM\n", __func__);
++		return ret;
++	}
++
++	/*
++	 * Read twice portions of 4 bytes (atsha204 protocol). One from address
++	 * 4 the other from address 5 of the OTP zone. Then convert the data to
++	 * the 6 elements of the MAC address.
++	 */
++	eeprom_addr = 4;
++	mac_len = 6;
++	for (i = 0; i < 2; i++) {
++		eeprom_addr += i;
++		if (atsha204a_read(dev, ATSHA204A_ZONE_OTP, false, eeprom_addr, data)) {
++			printf("%s(): Failed to parse ATSHA204A_ZONE_OTP of EEPROM\n",
++			       __func__);
++			return -EFAULT;
++		}
++
++		for (j = 0; j < 4 && j + i * 4 < mac_len; j++)
++			enetaddr[j + i * 4] = data[j];
++	}
++
++	/*
++	 * Check if the value is a valid mac registered for
++	 * Enclustra GmbH
++	 */
++	hwaddr_h = enetaddr[0] | (enetaddr[1] << 8) | (enetaddr[2] << 16);
++	if ((hwaddr_h & 0xFFFFFF) != ENCLUSTRA_MAC) {
++		printf("%s(): Failed, parsed MAC is no Enclustra MAC\n", __func__);
++		return -ENOENT;
++	}
++
++	if (!is_valid_ethaddr(enetaddr)) {
++		printf("%s(): Failed, address read from EEPROM is invalid!\n",
++		       __func__);
++		return -EINVAL;
++	}
++
++	printf("ethaddr set to %pM\n", enetaddr);
++
++	return 0;
++}
++
++int enclustra_setup_mac_address(void)
++{
++	unsigned char enetaddr[6];
++	int ret;
++
++	if (enclustra_mac_is_in_env("ethaddr"))
++		return 0;
++
++	if (enclustra_get_mac_is_enabled("ethernet0"))
++		return 0;
++
++	ret = enclustra_get_mac_from_eeprom(enetaddr, "atsha204a@64");
++	if (ret)
++		return ret;
++
++	ret = eth_env_set_enetaddr("ethaddr", enetaddr);
++	if (ret)
++		return ret;
++
++	if (!enclustra_get_mac1_from_mac(enetaddr))
++		return eth_env_set_enetaddr("eth1addr", enetaddr);
++
++	printf("%s(): Failed, unable to set MAC address!\n", __func__);
++	return -ENXIO;
++}
+diff --git a/board/enclustra/common/mac_common.c b/board/enclustra/common/mac_common.c
+new file mode 100644
+index 0000000000..3304a8987c
+--- /dev/null
++++ b/board/enclustra/common/mac_common.c
+@@ -0,0 +1,52 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024 Enclustra GmbH
++ */
++
++#include <dm.h>
++#include <atsha204a-i2c.h>
++#include <net.h>
++
++#include "enclustra_mac.h"
++
++bool enclustra_mac_is_in_env(const char *env)
++{
++	unsigned char enetaddr[6];
++
++	return eth_env_get_enetaddr(env, enetaddr);
++}
++
++int enclustra_get_mac_is_enabled(const char *alias)
++{
++	ofnode node =   ofnode_path(alias);
++
++	if (!ofnode_valid(node))
++		return -EINVAL;
++
++	if (!ofnode_is_enabled(node))
++		return -EINVAL;
++
++	return 0;
++}
++
++int enclustra_get_mac1_from_mac(unsigned char *enetaddr)
++{
++	u32 hwaddr_h;
++
++	/* Increment MAC addr */
++	hwaddr_h = (enetaddr[3] << 16) | (enetaddr[4] << 8) | enetaddr[5];
++	hwaddr_h = (hwaddr_h + 1) & 0xFFFFFF;
++	enetaddr[3] = (hwaddr_h >> 16) & 0xFF;
++	enetaddr[4] = (hwaddr_h >> 8) & 0xFF;
++	enetaddr[5] = hwaddr_h & 0xFF;
++
++	if (!is_valid_ethaddr(enetaddr)) {
++		printf("%s(): Failed, address computed from enetaddr is invalid!\n",
++		       __func__);
++		return -EINVAL;
++	}
++
++	printf("eth1addr set to %pM\n", enetaddr);
++
++	return 0;
++}
+diff --git a/board/enclustra/common/mac_ds28.c b/board/enclustra/common/mac_ds28.c
+new file mode 100644
+index 0000000000..49c3a05317
+--- /dev/null
++++ b/board/enclustra/common/mac_ds28.c
+@@ -0,0 +1,93 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024 Enclustra GmbH
++ */
++
++#include <linux/compat.h>
++#include <dm.h>
++#include <i2c.h>
++#include <net.h>
++
++#include "enclustra_mac.h"
++
++#define DS28_I2C_ADDR 0x5C
++#define DS28_SYS_I2C_EEPROM_BUS 0
++
++int enclustra_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
++{
++	struct udevice *dev;
++	u32 hwaddr_h;
++	struct dm_i2c_chip *chip;
++	uint chip_addr = DS28_I2C_ADDR;
++	int alen = 1;
++	int ret;
++
++	ret = i2c_get_chip_for_busnum(DS28_SYS_I2C_EEPROM_BUS, chip_addr,
++				      alen, &dev);
++	if (ret)
++		return ret;
++
++	chip = dev_get_parent_plat(dev);
++	if (chip->offset_len != alen) {
++		debug("I2C chip %x: alen %d does not match offset_len %d\n",
++		      chip_addr, alen, chip->offset_len);
++		return -EADDRNOTAVAIL;
++	}
++
++	ret = dm_i2c_read(dev, 0x10, enetaddr, 6);
++	if (ret) {
++		printf("%s(): Failed reading EEPROM! ret = %d\n", __func__, ret);
++		return ret;
++	}
++
++	/*
++	 * Check if the value is a valid mac registered for
++	 * Enclustra  GmbH
++	 */
++	hwaddr_h = enetaddr[0] | (enetaddr[1] << 8) | (enetaddr[2] << 16);
++	if ((hwaddr_h & 0xFFFFFF) != ENCLUSTRA_MAC) {
++		printf("%s(): Failed, parsed MAC is no Enclustra MAC\n", __func__);
++		return -ENOENT;
++	}
++
++	if (!is_valid_ethaddr(enetaddr)) {
++		printf("%s(): Failed, address read from EEPROM is invalid!\n",
++		       __func__);
++		return -EINVAL;
++	}
++
++	printf("ethaddr set to %pM\n", enetaddr);
++
++	return 0;
++}
++
++int enclustra_setup_mac_address(void)
++{
++	unsigned char enetaddr[6];
++	int ret;
++
++	if (enclustra_mac_is_in_env("ethaddr"))
++		return 0;
++
++	if (enclustra_get_mac_is_enabled("ethernet0"))
++		return 0;
++
++	/*
++	 * Note: DS28 is still not available in official DT, so referencing
++	 * here by i2c busnumber and address directly
++	 * preparation for DT access here, though
++	 */
++	ret = enclustra_get_mac_from_eeprom(enetaddr, "");
++	if (ret)
++		return ret;
++
++	ret = eth_env_set_enetaddr("ethaddr", enetaddr);
++	if (ret)
++		return ret;
++
++	if (!enclustra_get_mac1_from_mac(enetaddr))
++		return eth_env_set_enetaddr("eth1addr", enetaddr);
++
++	printf("%s(): Failed, unable to set MAC address!\n", __func__);
++	return -ENXIO;
++}
 diff --git a/board/enclustra/mercury_aa1/Makefile b/board/enclustra/mercury_aa1/Makefile
-new file mode 100644
-index 0000000000..53c84d8156
---- /dev/null
+index 53c84d8156..b145254466 100644
+--- a/board/enclustra/mercury_aa1/Makefile
 +++ b/board/enclustra/mercury_aa1/Makefile
-@@ -0,0 +1,8 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (c) 2024 Enclustra GmbH
+@@ -6,3 +6,5 @@ ifeq ($(CONFIG_SPL_BUILD),)
+ obj-y += aa1_set_storage_cmd.o
+ 
+ endif
 +
-+ifeq ($(CONFIG_SPL_BUILD),)
-+
-+obj-y += aa1_set_storage_cmd.o
-+
-+endif
-diff --git a/board/enclustra/mercury_aa1/aa1_set_storage_cmd.c b/board/enclustra/mercury_aa1/aa1_set_storage_cmd.c
++obj-y += aa1_board_late_init.o
+diff --git a/board/enclustra/mercury_aa1/aa1_board_late_init.c b/board/enclustra/mercury_aa1/aa1_board_late_init.c
 new file mode 100644
-index 0000000000..31c5ddb23b
+index 0000000000..2e8f8459e3
 --- /dev/null
-+++ b/board/enclustra/mercury_aa1/aa1_set_storage_cmd.c
-@@ -0,0 +1,190 @@
++++ b/board/enclustra/mercury_aa1/aa1_board_late_init.c
+@@ -0,0 +1,17 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2024 Enclustra GmbH
 + * <info@enclustra.com>
 + */
 +
-+#include <command.h>
 +#include <env.h>
 +#include <init.h>
-+#include <dm.h>
 +#include <dm/uclass.h>
-+#include <asm-generic/gpio.h>
-+#include <asm/io.h>
++#include <dm.h>
 +
-+/* Pin muxing */
-+#define ALTERA_NONE 0
-+#define ALTERA_MMC 1
-+#define ALTERA_QSPI 2
-+#define ALTERA_EMMC 3
-+#define MMC_CLK_DIV 0x9
-+#define QSPI_CLK_DIV 0x384
-+#define ALTERA_PINMUX_OFFS 0xffd07200
-+#define ALTERA_CLKMGR_MAINPLL_CNTR6CLK_BASE 0xFFD04078
++#include "../common/enclustra_mac.h"
 +
-+static int altera_current_storage = ALTERA_NONE;
-+
-+static const struct udevice_id altera_set_storage_match[] = {
-+	{ .compatible = "enclustra,altera_set_storage" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(altera_set_storage) = {
-+	.name		= "altera_set_storage",
-+	.id			= UCLASS_MISC,
-+	.of_match	= altera_set_storage_match,
-+};
-+
-+static void enclustra_mercury_aa1_write(const u32 *pinmux_arr, int len)
++int board_late_init(void)
 +{
-+	u32 i, offset, value;
-+
-+	for (i = 0; i < len; i += 2) {
-+		offset = pinmux_arr[i];
-+		value = pinmux_arr[i + 1];
-+		writel(value, ALTERA_PINMUX_OFFS + offset);
-+	}
++	return enclustra_setup_mac_address();
 +}
-+
-+static void enclustra_mercury_aa1_set_mux_mmc(void)
-+{
-+	static const u32 pinmux_arr[] = {0x0c, 0x8,	// IO4 connected to SDMMC
-+					 0x10, 0x8,	// IO5
-+					 0x14, 0x8,	// IO6
-+					 0x18, 0x8,	// IO7
-+					 0x1c, 0x8,	// IO8
-+					 0x20, 0x8,	// IO9
-+					 0x24, 0xf,	// IO10 connected to GPIO
-+					 0x28, 0xf,	// IO11
-+					 0x2c, 0xf,	// IO12
-+					 0x30, 0xf,	// IO13
-+					 0x34, 0xf,	// IO14
-+					 0x38, 0xf};	// IO15
-+	enclustra_mercury_aa1_write(pinmux_arr, ARRAY_SIZE(pinmux_arr));
-+}
-+
-+static void enclustra_mercury_aa1_set_mux_emmc(void)
-+{
-+	static const u32 pinmux_arr[] = {0x0c, 0x8,	// IO4
-+					 0x10, 0x8,	// IO5
-+					 0x14, 0x8,	// IO6
-+					 0x18, 0x8,	// IO7
-+					 0x1c, 0x8,	// IO8
-+					 0x20, 0x8,	// IO9
-+					 0x24, 0xf,	// IO10
-+					 0x28, 0xf,	// IO11
-+					 0x2c, 0x8,	// IO12
-+					 0x30, 0x8,	// IO13
-+					 0x34, 0x8,	// IO14
-+					 0x38, 0x8};	// IO15
-+	enclustra_mercury_aa1_write(pinmux_arr, ARRAY_SIZE(pinmux_arr));
-+}
-+
-+static void enclustra_mercury_aa1_set_mux_qspi(void)
-+{
-+	static const u32 pinmux_arr[] = {0x0c, 0x4,	// IO4 connected to QSPI
-+					 0x10, 0x4,	// IO5
-+					 0x14, 0x4,	// IO6
-+					 0x18, 0x4,	// IO7
-+					 0x1c, 0x4,	// IO8
-+					 0x20, 0x4,	// IO9
-+					 0x24, 0xf,	// IO10
-+					 0x28, 0xf,	// IO11
-+					 0x2c, 0xf,	// IO12
-+					 0x30, 0xf,	// IO13
-+					 0x34, 0xf,	// IO14
-+					 0x38, 0xf};	// IO15
-+	enclustra_mercury_aa1_write(pinmux_arr, ARRAY_SIZE(pinmux_arr));
-+}
-+
-+static int altera_set_storage(struct udevice *dev, int store)
-+{
-+	struct gpio_desc gpio_flash_sel;
-+	struct gpio_desc gpio_flash_oe;
-+	int ret;
-+
-+	if (store == altera_current_storage)
-+		return CMD_RET_FAILURE;
-+
-+	/* oe: portb 5 */
-+	ret = gpio_request_by_name(dev, "oe-gpios", 0,
-+				   &gpio_flash_oe, GPIOD_IS_OUT);
-+
-+	if (ret) {
-+		printf("ERROR: GPIO oe not found\n");
-+		return log_msg_ret("gpio", ret);
-+	}
-+
-+	/* sel: portc 6 */
-+	ret = gpio_request_by_name(dev, "sel-gpios", 0,
-+				   &gpio_flash_sel, GPIOD_IS_OUT);
-+	if (ret) {
-+		printf("ERROR: GPIO sel not found\n");
-+		ret = CMD_RET_FAILURE;
-+		goto err;
-+	}
-+
-+	switch (store) {
-+	case ALTERA_MMC:
-+		enclustra_mercury_aa1_set_mux_mmc();
-+		dm_gpio_set_value(&gpio_flash_sel, 0);
-+		dm_gpio_set_value(&gpio_flash_oe, 0);
-+		altera_current_storage = ALTERA_MMC;
-+		writel(MMC_CLK_DIV, ALTERA_CLKMGR_MAINPLL_CNTR6CLK_BASE);
-+		break;
-+	case ALTERA_EMMC:
-+		enclustra_mercury_aa1_set_mux_emmc();
-+		dm_gpio_set_value(&gpio_flash_sel, 1);
-+		dm_gpio_set_value(&gpio_flash_oe, 1);
-+		altera_current_storage = ALTERA_EMMC;
-+		writel(MMC_CLK_DIV, ALTERA_CLKMGR_MAINPLL_CNTR6CLK_BASE);
-+		break;
-+	case ALTERA_QSPI:
-+		enclustra_mercury_aa1_set_mux_qspi();
-+		dm_gpio_set_value(&gpio_flash_sel, 1);
-+		dm_gpio_set_value(&gpio_flash_oe, 0);
-+		altera_current_storage = ALTERA_QSPI;
-+		writel(QSPI_CLK_DIV, ALTERA_CLKMGR_MAINPLL_CNTR6CLK_BASE);
-+		break;
-+	default:
-+		altera_current_storage = ALTERA_NONE;
-+		break;
-+	}
-+
-+	ret = CMD_RET_SUCCESS;
-+	dm_gpio_free(dev, &gpio_flash_sel);
-+err:
-+	dm_gpio_free(dev, &gpio_flash_oe);
-+
-+	return ret;
-+}
-+
-+static int altera_set_storage_cmd(struct cmd_tbl *cmdtp, int flag,
-+				  int argc, char * const argv[])
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_DRIVER_GET(altera_set_storage), &dev);
-+	if (ret)
-+		return ret;
-+
-+	if (argc != 2)
-+		return CMD_RET_USAGE;
-+
-+	if (!strcasecmp(argv[1], "mmc"))
-+		return altera_set_storage(dev, ALTERA_MMC);
-+	else if (!strcasecmp(argv[1], "qspi"))
-+		return altera_set_storage(dev, ALTERA_QSPI);
-+	else if (!strcasecmp(argv[1], "emmc"))
-+		return altera_set_storage(dev, ALTERA_EMMC);
-+	else
-+		return CMD_RET_USAGE;
-+
-+	return CMD_RET_FAILURE;
-+}
-+
-+U_BOOT_CMD(altera_set_storage, 2, 0, altera_set_storage_cmd,
-+	   "Set non volatile memory access",
-+	   "<MMC|QSPI|EMMC> - Set access for the selected memory device");
-diff --git a/doc/board/enclustra/mercury-aa1.rst b/doc/board/enclustra/mercury-aa1.rst
-index dec7cc3bdd..cba36aae2e 100644
---- a/doc/board/enclustra/mercury-aa1.rst
-+++ b/doc/board/enclustra/mercury-aa1.rst
-@@ -151,6 +151,31 @@ Alternative boot media are possible as officially documented by Enclustra.
- Note: eMMC and QSPI can be flashed from off the u-boot shell. Usually after
- flashing, the correct boot mode needs to be set by a BSEL switch.
- 
-+In the u-boot shell use the following command to switch between the boot media.
-+This can be used to flash e.g. eMMC or QSPI with an image file stored on the SD
-+card. Approaches are described in detail in the official Enclustra
-+documentation according to their releases mentioned as links.
-+
-+ .. code-block:: bash
-+
-+    Hit any key to stop autoboot:  0
-+    => altera_set_storage
-+    altera_set_storage - Set non volatile memory access
-+    Usage:
-+    altera_set_storage <MMC|QSPI|EMMC> - Set access for the selected memory device
-+    => altera_set_storage QSPI
-+    => sf probe
-+    SF: Detected s25fl512s with page size 256 Bytes, erase size 256 KiB, total 64 MiB
-+    => altera_set_storage MMC
-+    => mmc rescan
-+    => mmc list
-+    mmc@ff808000: 0 (SD)
-+    => altera_set_storage EMMC
-+    => mmc rescan
-+    => mmc list
-+    mmc@ff808000: 0 (eMMC)
-+    =>
-+
- Before turning on the setup, make sure to have the correct voltage configured
- at the carrier board, using the jumpers on the voltage pin header. Also make
- sure to have switched to the correct boot media using typically some dip
+diff --git a/configs/socfpga_enclustra_mercury_aa1_defconfig b/configs/socfpga_enclustra_mercury_aa1_defconfig
+index 6a2434fe5a..5f52a30e9d 100644
+--- a/configs/socfpga_enclustra_mercury_aa1_defconfig
++++ b/configs/socfpga_enclustra_mercury_aa1_defconfig
+@@ -28,6 +28,7 @@ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+ CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
+ CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_BOARD_LATE_INIT=y
+ CONFIG_CLOCKS=y
+ CONFIG_SPL_PAD_TO=0x40000
+ CONFIG_SPL_NO_BSS_LIMIT=y
 -- 
 2.25.1
 
