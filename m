@@ -4,63 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD81D10BE3
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 06:42:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E0D2D10BE5
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 07:24:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 379FC88EC0;
-	Sat, 26 Oct 2024 08:41:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id CAEEA88D13;
+	Sat, 26 Oct 2024 09:24:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="DsIkVtiD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pZAxJvg0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7506C88EC0; Sat, 26 Oct 2024 08:41:20 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 04DA188D13; Sat, 26 Oct 2024 09:24:28 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB77788D94
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 08:41:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43D5A87F19
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 09:24:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.c.hoisthospitality.com (unknown [87.215.50.114])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 586854271F; 
- Sat, 26 Oct 2024 06:41:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1729924862;
- bh=5QbLloR5Gn24dWyT0xnMX3+icKmrCiWrw0izNpIa+LI=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=DsIkVtiDxG3zxGsO6LgFlxq9IYPfz3S0vfVAV3aLzBTSzpbd5QqxwODA33YCm7zlb
- fJi6m6MxPhV+rZjnifxQgNMEDLXJgqLfBWwNmcUFoEtxeD5hzDtZrRq1geK/A6Od0w
- 4toAWWjyBr89IzcAlfcjlJ2CphIEk+wjSyI7HV3KYz7p3FBQBrUqDQWNELboS6eug7
- UOn4IlezKFrRDgSvgGLb90R8slwl2eaVvfiXfz/80N614RUdlIIi9cijFmt2GDzrxo
- KNvD588Nheuj2qGWpBg++nB5xP3/tgf5bJEQG8dyyq1lMX7WcQIVA5TeBIwmZ6d/vn
- Gs8lkmrzMwnOw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Richard Weinberger <richard@nod.at>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 5/5] fs: ext4: use fs_ls_generic
-Date: Sat, 26 Oct 2024 08:40:48 +0200
-Message-ID: <20241026064048.370062-6-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241026064048.370062-1-heinrich.schuchardt@canonical.com>
-References: <20241026064048.370062-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9709c9b0cso3730579a12.1
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 00:24:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729927461; x=1730532261; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ahqipkSAMdcHfbqMR2LdHIFHYwsu7zoCYtTZMogQ8C4=;
+ b=pZAxJvg0zCvXb3f5q+2te8drlz0QCKflNjUCJYpybQRFznmC5UnbbJJUBWcF0/k3nm
+ aNSNjEMV/jtLjAzafWwNje/x4hSWHSW0SlDOxngmmocGBFiLe79Onz17CvimiIWJy3wN
+ 2GBUBec2PhJjjBNtSb4MVRp28bZhXRXxPWWl+thqqOAV1pXt2oqgzJQCb8MJYqcakuvo
+ ajjOvP9qZajEclu6CBRr1smpGwodxr3LX8QpAmA7eF8abJjEmcjJu3NiwHEZxvrwFN23
+ viO982eoOhiTLAcjbphmNbUQJ02xU5qRbfF5QQdk3bu82eShKozfsDPZxC/TuIZz/Cw+
+ ygwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729927461; x=1730532261;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ahqipkSAMdcHfbqMR2LdHIFHYwsu7zoCYtTZMogQ8C4=;
+ b=wa/4YalyIUOlGi64DkV3MNLUZayUIb0qBoFm+cfp6Fugew0GbJjVbdIxVemI56Rjd9
+ tm81XEBeb/+CscLT3HP/YIL0WA2cAWa/0Jiwc2Gk4nwiml3d93Dxae2/wetVTwiJMEyd
+ WyvDKKYOoMwYfuF3de7wqbOpqXTbNmXOxVfslq51E/VWfAY6FWP4KzqJnBYJuo9lx/nn
+ S2Tz2+uJBRJ1sRKLa0gSnqzcmckiux0rE+aD9ofZatsAcTkfc7qKTftj3bV4E1l2fIZZ
+ 4MsgongbQ4AY0EqYP9qGUIbvyLg5xh+McKKNFSMiWZbpiYkKaaehtVVTNR//f2D0xutM
+ g0mQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU56KyhHmqzeCghJg0auS+Zp2C+3aMtl1JziUuKm44lzhIqs58/ew09jcwTx/rbpKlVooJk9pY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6dpxYAMXlhZVHj50ed9leFxAd1i9o6RVnbITsJZVLgsgswxaN
+ r/cX/nmWhO5GUSSH+WWdP1WrfV9wsJ1i/isKvK1/jiW8zlqZ1P26YQmPkG0JTHA=
+X-Google-Smtp-Source: AGHT+IFBdBAlxS6tuAYgFLnqrapTGJKh4rmGFzbUiPSWL9d2CdyQBZStKv2GceSEe17QkdaEqFVcRw==
+X-Received: by 2002:a05:6402:40c7:b0:5ca:e4e:59d6 with SMTP id
+ 4fb4d7f45d1cf-5cbbfa5483bmr1290010a12.26.1729927460665; 
+ Sat, 26 Oct 2024 00:24:20 -0700 (PDT)
+Received: from hades (ppp176092143132.access.hol.gr. [176.92.143.132])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5cbb63197bdsm1304292a12.70.2024.10.26.00.24.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 26 Oct 2024 00:24:18 -0700 (PDT)
+Date: Sat, 26 Oct 2024 10:24:15 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] cmd: simplify network definitions in Makefile
+Message-ID: <ZxyZH0a+827NlMcr@hades>
+References: <20241019102445.48624-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241019102445.48624-1-heinrich.schuchardt@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,140 +95,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that opendir, readir, closedir are implemented for ext4 we can use
-fs_ls_generic() for implementing the ls command.
+Thanks Heinrich
 
-Adjust the unit tests:
-
-* fs_ls_generic() produces more spaces between file size and name.
-* The ext4 specific message "** Can not find directory. **\n" is not
-  written anymore.
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- fs/ext4/ext4_common.c               | 29 -----------------------------
- fs/ext4/ext4fs.c                    | 23 -----------------------
- fs/fs.c                             |  2 +-
- test/py/tests/test_env.py           |  2 +-
- test/py/tests/test_fs/test_basic.py |  5 +----
- 5 files changed, 3 insertions(+), 58 deletions(-)
-
-diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
-index c1e38978bb9..cc150cf824f 100644
---- a/fs/ext4/ext4_common.c
-+++ b/fs/ext4/ext4_common.c
-@@ -2137,35 +2137,6 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
- 					*fnode = fdiro;
- 					return 1;
- 				}
--			} else {
--				if (fdiro->inode_read == 0) {
--					status = ext4fs_read_inode(dir->data,
--								   le32_to_cpu(
--								   dirent.inode),
--								   &fdiro->inode);
--					if (status == 0) {
--						free(fdiro);
--						return 0;
--					}
--					fdiro->inode_read = 1;
--				}
--				switch (type) {
--				case FILETYPE_DIRECTORY:
--					printf("<DIR> ");
--					break;
--				case FILETYPE_SYMLINK:
--					printf("<SYM> ");
--					break;
--				case FILETYPE_REG:
--					printf("      ");
--					break;
--				default:
--					printf("< ? > ");
--					break;
--				}
--				printf("%10u %s\n",
--				       le32_to_cpu(fdiro->inode.size),
--					filename);
- 			}
- 			free(fdiro);
- 		}
-diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
-index 32693198aeb..dfecfa0b4e8 100644
---- a/fs/ext4/ext4fs.c
-+++ b/fs/ext4/ext4fs.c
-@@ -201,29 +201,6 @@ int ext4fs_read_file(struct ext2fs_node *node, loff_t pos,
- 	return 0;
- }
- 
--int ext4fs_ls(const char *dirname)
--{
--	struct ext2fs_node *dirnode = NULL;
--	int status;
--
--	if (dirname == NULL)
--		return 0;
--
--	status = ext4fs_find_file(dirname, &ext4fs_root->diropen, &dirnode,
--				  FILETYPE_DIRECTORY);
--	if (status != 1) {
--		printf("** Can not find directory. **\n");
--		if (dirnode)
--			ext4fs_free_node(dirnode, &ext4fs_root->diropen);
--		return 1;
--	}
--
--	ext4fs_iterate_dir(dirnode, NULL, NULL, NULL);
--	ext4fs_free_node(dirnode, &ext4fs_root->diropen);
--
--	return 0;
--}
--
- int ext4fs_opendir(const char *dirname, struct fs_dir_stream **dirsp)
- {
- 	struct ext4_dir_stream *dirs;
-diff --git a/fs/fs.c b/fs/fs.c
-index a515905c4c9..1afa0fbeaed 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -220,7 +220,7 @@ static struct fstype_info fstypes[] = {
- 		.null_dev_desc_ok = false,
- 		.probe = ext4fs_probe,
- 		.close = ext4fs_close,
--		.ls = ext4fs_ls,
-+		.ls = fs_ls_generic,
- 		.exists = ext4fs_exists,
- 		.size = ext4fs_size,
- 		.read = ext4_read_file,
-diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
-index 00bcccd65ff..4471db7d9cb 100644
---- a/test/py/tests/test_env.py
-+++ b/test/py/tests/test_env.py
-@@ -488,7 +488,7 @@ def test_env_ext4(state_test_env):
-         assert 'Loading Environment from EXT4... OK' in response
- 
-         response = c.run_command('ext4ls host 0:0')
--        assert '8192 uboot.env' in response
-+        assert '8192   uboot.env' in response
- 
-         response = c.run_command('env info')
-         assert 'env_valid = valid' in response
-diff --git a/test/py/tests/test_fs/test_basic.py b/test/py/tests/test_fs/test_basic.py
-index 71f3e86fb18..b5f4704172a 100644
---- a/test/py/tests/test_fs/test_basic.py
-+++ b/test/py/tests/test_fs/test_basic.py
-@@ -33,10 +33,7 @@ class TestFsBasic(object):
-             # In addition, test with a nonexistent directory to see if we crash.
-             output = u_boot_console.run_command(
-                 '%sls host 0:0 invalid_d' % fs_type)
--            if fs_type == 'ext4':
--                assert('Can not find directory' in output)
--            else:
--                assert('' == output)
-+            assert('' == output)
- 
-     def test_fs2(self, u_boot_console, fs_obj_basic):
-         """
--- 
-2.45.2
+On Sat, Oct 19, 2024 at 12:24:45PM +0200, Heinrich Schuchardt wrote:
+> /Makefile already adds lib include paths to UBOOTINCLUDE. There is no point
+> in adding the same paths again.
+> 
+> Clearly separate the lines relating to NET and to NET_LWIP.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  cmd/Makefile | 11 ++++-------
+>  1 file changed, 4 insertions(+), 7 deletions(-)
+> 
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index 3c5bd56e912..61992112f5f 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -127,13 +127,10 @@ obj-y += legacy-mtd-utils.o
+>  endif
+>  obj-$(CONFIG_CMD_MUX) += mux.o
+>  obj-$(CONFIG_CMD_NAND) += nand.o
+> -ifdef CONFIG_CMD_NET
+> -obj-$(CONFIG_NET) += net.o
+> -obj-$(CONFIG_NET_LWIP) += net-lwip.o
+> -obj-$(filter y,$(CONFIG_CMD_NET) $(CONFIG_CMD_NET_LWIP)) += net-common.o
+> -lwip-includes := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
+> -CFLAGS_net-lwip.o := $(lwip-includes)
+> -CFLAGS_net-common.o := $(lwip-includes)
+> +ifdef CONFIG_NET
+> +obj-$(CONFIG_CMD_NET) += net.o net-common.o
+> +else ifdef CONFIG_NET_LWIP
+> +obj-$(CONFIG_CMD_NET) += net-lwip.o net-common.o
+>  endif
+>  obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
+>  obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
+> -- 
+> 2.45.2
+> 
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
