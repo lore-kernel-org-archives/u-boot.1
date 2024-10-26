@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22BE1D10BE5
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 07:58:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF29ED10BE8
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 08:01:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68B2488DF1;
-	Sat, 26 Oct 2024 09:58:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 07CC388DF1;
+	Sat, 26 Oct 2024 10:01:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UiXbF0Ds";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RH8kqfgw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 991B988DF1; Sat, 26 Oct 2024 09:57:59 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 197C888DF8; Sat, 26 Oct 2024 10:01:11 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1EFC88D13
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 09:57:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85A8288936
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 10:01:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5c957d8bce2so1391798a12.2
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 00:57:50 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a7aa086b077so352137366b.0
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 01:01:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729929470; x=1730534270; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1729929656; x=1730534456; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=+XARH5HSpG7w/stzXhdcMBKtYiFLu0MlOS9eE4iLoro=;
- b=UiXbF0Ds4yWFO2gbGtLS4LgiKZIS9X4W52tXTciqlgCIkX1sJafK60fDvDWrMEYGI8
- G6Wk3m3eGjK6ccVBkOncc31T9WUaup86HcmfOaD0789rJKn8OueqBwBm2u7RIxrXKVx7
- CV4Xnjc4eO/9qJq6IodiDN5ePSfNLkFsKPqU38zG8hMB/dele36yNwhJiEPAcB1Ejb7e
- cvLZs646Q3rB4aD/Gq4v5hlnl5jTMERj/W9bcyvn1Y6j1Mnvw0uX3QEINp6ex5hJTnuJ
- 3ccZjMwmhlRMPKeF1YH2Cfs0ze4HGkfrh4MwSa8Yb/+bCpNE/3E1TctsRmPcHO6y2maB
- FRyg==
+ bh=+af8JleH+HioQNHuV1xAco6oQtIB9NxtywL9TG2Js+Q=;
+ b=RH8kqfgwUTOIFaPFgyy+0vvkwvbOKX9zYFj1yTMDq78f8xR2xpKnYCEGrZMN/VZ8ga
+ VUESgAsj1FrX/tNOmlpmdskBI7zPTLkIkGowD/WTY3vdvBZlf8E3G0CWdhSLgouPNgR3
+ B2vipn6aRbvNpSfQoKuaBDNUbaDDNXq4x/Dv+KhwhUoYh/PgoFcFz+5XcEK27g2hZH/j
+ OQVcSvJxEf0kUSUJm+Qy+zq1Bs7OCYBUGK8jb3OYK8I3tGOrNhYauPVIGwil9cVPyjPk
+ ubZ1EcIpHOGK5vgxRUYfMWS0JXF0miWL2wL8YqbGFQGlMpWBN7h+9D9mRdza69weyA65
+ EGHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729929470; x=1730534270;
+ d=1e100.net; s=20230601; t=1729929656; x=1730534456;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+XARH5HSpG7w/stzXhdcMBKtYiFLu0MlOS9eE4iLoro=;
- b=GEkA7sGpWj8F5c8k/zEZKNE1cfDPxsYGEhIesGWRHHt4SyDLzqnQTMWInMcMsAY3hF
- VCPAFFcCXpe6jEfbt43s1z40ioYD4O0VqdVp7bFkWvCBo7UTnY3eJOJO+iZ49bShDNkl
- DpLtyadtzEHDQn3HnVF3yU49aR5Mn0y5JjExS7aRK8ff5hkjE5bjtVwfwg5WWAIiNy2u
- kjt1GaDvFmEjmvGXbb8LbpJlN6yNnyN2puq9D7FQPOczcFIGr4l1mgotVk4yZjqz7o0T
- Ek61wOSS130VBAg1iMYT1wfE+O/cSNoR9gZnOuxh1XdZeLJiKafYGLzDThHB20oIEShI
- ZYkA==
+ bh=+af8JleH+HioQNHuV1xAco6oQtIB9NxtywL9TG2Js+Q=;
+ b=Rv91T+Dq2pVuRfABHSnBNH/trXuHxoKIpPCxwbLGZu5Z5B7sMvMXL0Oa5g4FQUfD22
+ ZyTes6rod5ObQ8iC1ZuwMulypEYYM33dMygz6Dhcb2JhgQ6Kk56HZ8vd9dH1cvQzkCQO
+ TaSBRXHnvcwwRXWRwmdhEOsthP7o/s1rMFXL41o5EuNnd/PRJ6ScROvbYr5M8fgHLFir
+ Z/Uhvcq+zLxkGMIjHYFChy+TUCqe1UpKxuUisUAgikzDdXdnPhiS4x0xLLL27xsHbEXG
+ VrMg4R5N2JejcmVWpzq4sOWpp2W9duMtTa+MwMkzCJEYTZpzZCTqOCfDtDtSStMI2E+D
+ e/TA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWRSvAgL2GK0WDtmSXr19ZU0hU6ypaRroU837ju+ej2MofV/7unJfS+Krmh8Pb9oftYAaU1+Yw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwVUnIVUHr4TJQ6QRbH+pgQmugapT/CvdPNkwkZeHnDbJ0Tn8qY
- ibOAWzYD6m6IN4tg2o/G7lRgzl2k7UbQQz34GQYwD2CrgfqZ3ZUSNeREHeOBW5c=
-X-Google-Smtp-Source: AGHT+IGDcbkvBNlCwq6+hsgzk7SgmpvAVur5W5fJ6mMQMKTcUcVEtDzOOFgprNDcUuOUX+lGcmxAQQ==
-X-Received: by 2002:a05:6402:1e93:b0:5c9:40f5:1518 with SMTP id
- 4fb4d7f45d1cf-5cbbfafd4d9mr1718682a12.35.1729929470032; 
- Sat, 26 Oct 2024 00:57:50 -0700 (PDT)
+ AJvYcCUBPUrBPEPmkKiRhxl5puIhdaxmu2Ix+r3wKDJyZFVdCgCIlj1FdfKXHOp7DpXMG+bcHdt6xlo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwrJSX1qufsOtdMYBAVcI7y89hQzsTx/XZ5SqiX1nSD8Jb+CGDv
+ sUINbodxhz/4iL9A+x3cgn4GsIULJqDAN1y3wEoZP6sW5uHQ0ciu0UsL+7iGTTg=
+X-Google-Smtp-Source: AGHT+IEjX/29Q6n7kbOV2mrLpmUwNRpddsYVCotiWuaUIJkGtVtHDTkQfD1XAbqGgCD8cbCoN5NcAw==
+X-Received: by 2002:a17:907:7e91:b0:a99:403e:2578 with SMTP id
+ a640c23a62f3a-a9de5c91d04mr175125966b.5.1729929655936; 
+ Sat, 26 Oct 2024 01:00:55 -0700 (PDT)
 Received: from hades.. (ppp176092143132.access.hol.gr. [176.92.143.132])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b31bc028asm151475066b.177.2024.10.26.00.57.46
+ a640c23a62f3a-a9b1f297204sm148280266b.116.2024.10.26.01.00.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 26 Oct 2024 00:57:48 -0700 (PDT)
+ Sat, 26 Oct 2024 01:00:54 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: Mark static functions in smbiosdump
-Date: Sat, 26 Oct 2024 10:57:41 +0300
-Message-ID: <20241026075745.117832-1-ilias.apalodimas@linaro.org>
+ Tom Rini <trini@konsulko.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Joao Marcos Costa <jmcosta944@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: Remove unused diskid
+Date: Sat, 26 Oct 2024 11:00:49 +0300
+Message-ID: <20241026080050.125214-1-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,45 +94,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Mark functions that are only used locally as static and
-quiesce W=1 warnings
+That variable is defined and assigned a value in two functions
+but it's never used.
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- lib/efi_loader/smbiosdump.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ lib/efi_loader/efi_disk.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
-index 2f0b91a353d1..d7f2ba30a954 100644
---- a/lib/efi_loader/smbiosdump.c
-+++ b/lib/efi_loader/smbiosdump.c
-@@ -289,7 +289,7 @@ static void *get_config_table(const efi_guid_t *guid)
-  * @len:	length of buffer
-  * Return:	checksum
-  */
--u8 checksum(void *buf, int len)
-+static u8 checksum(void *buf, int len)
+diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+index 93a9a5ac0250..1f3de0a23399 100644
+--- a/lib/efi_loader/efi_disk.c
++++ b/lib/efi_loader/efi_disk.c
+@@ -561,11 +561,9 @@ static int efi_disk_create_raw(struct udevice *dev, efi_handle_t agent_handle)
  {
- 	u8 ret = 0;
+ 	struct efi_disk_obj *disk;
+ 	struct blk_desc *desc;
+-	int diskid;
+ 	efi_status_t ret;
  
-@@ -304,7 +304,7 @@ u8 checksum(void *buf, int len)
-  *
-  * Return:	status code
-  */
--efi_status_t do_check(void)
-+static efi_status_t do_check(void)
- {
- 	struct smbios3_entry *smbios3_anchor;
- 	void *table, *table_end;
-@@ -401,7 +401,7 @@ efi_status_t do_check(void)
-  * @buf:	buffer to write
-  * @size:	size of the buffer
-  */
--efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
-+static efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
- {
- 	efi_uintn_t ret;
- 	struct efi_simple_file_system_protocol *file_system;
+ 	desc = dev_get_uclass_plat(dev);
+-	diskid = desc->devnum;
+ 
+ 	ret = efi_disk_add_dev(NULL, NULL, desc,
+ 			       NULL, 0, &disk, agent_handle);
+@@ -608,7 +606,6 @@ static int efi_disk_create_part(struct udevice *dev, efi_handle_t agent_handle)
+ 	struct disk_part *part_data;
+ 	struct disk_partition *info;
+ 	unsigned int part;
+-	int diskid;
+ 	struct efi_handler *handler;
+ 	struct efi_device_path *dp_parent;
+ 	struct efi_disk_obj *disk;
+@@ -618,7 +615,6 @@ static int efi_disk_create_part(struct udevice *dev, efi_handle_t agent_handle)
+ 		return -1;
+ 
+ 	desc = dev_get_uclass_plat(dev_get_parent(dev));
+-	diskid = desc->devnum;
+ 
+ 	part_data = dev_get_uclass_plat(dev);
+ 	part = part_data->partnum;
 -- 
 2.43.0
 
