@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 994EAD10BEC
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 08:52:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C9FD10BEC
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 08:53:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A411888DF1;
-	Sat, 26 Oct 2024 10:52:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5516888DF1;
+	Sat, 26 Oct 2024 10:53:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="YQ+ZJEKp";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="aUCSZqRv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E9D388DF8; Sat, 26 Oct 2024 10:52:26 +0200 (CEST)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id 3CAE888DF8; Sat, 26 Oct 2024 10:53:21 +0200 (CEST)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D35588CD9
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 10:52:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DF0988CD9
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 10:53:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2e2e050b1c3so2687212a91.0
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 01:52:21 -0700 (PDT)
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-2e2cc469c62so2019675a91.2
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 01:53:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1729932740; x=1730537540;
+ d=amarulasolutions.com; s=google; t=1729932797; x=1730537597;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ayQFIAjr1qY4DgTSg4SEf4vYsnK6IwNCAIF22KeML0g=;
- b=YQ+ZJEKpb9RWZ7SsiG0H6RCNFqhGMyHBV4ezqw9FdUZgMD0o0GRBlTqK5PUOf9Ocdr
- rn4FXCJavDaspBmBt4aLAGjx90qqZnHp7JTEUjJEcR4ZyjugtdNCUJ3ACi31Y81gKjB/
- UXwnpc88tZ2837HJQkbEAW01Fmqx7WcBfBiSc=
+ bh=zQP6ZISNGtCxHCMKtWFGXP45Ar7kRjUEThhVEVu4pGQ=;
+ b=aUCSZqRvmdh/EuXMsvc7XDB3HNr9GITw+fpLzcYr0/lqL1uJ9XpKKUO3WVxTE/5Dod
+ 2brE39V6DyI8uAzpBu3Pv7h9/AKll0IoWW7dnCsNf5NAv57WEdjsgBV/9p7HcuekoWih
+ DnQVIbMGnDd/sMBqMnYYdeuIRgLWtJYYfqDwQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729932740; x=1730537540;
+ d=1e100.net; s=20230601; t=1729932797; x=1730537597;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ayQFIAjr1qY4DgTSg4SEf4vYsnK6IwNCAIF22KeML0g=;
- b=DZrgZHSwWpxSByOUjNI96R0mnu9K0FZXDexF4qH+JxhkJZoTTl0aB41VJ28Ru4hs5m
- SixQjkIVnqeOd+GTZ3MMvEuLrQblvqZBSfK8GCVITvrLzHUO+rLl5N/x1I9JVSTEg0cd
- wXA15v31oRfJNOgYMrPtJv6b3aiNIZxSIaHxfwUZKqiawxNUAGcYQPYg6K240fUiZT0e
- He75I9JbIkvFVK5vEniv1ruBBkLk2qJOJiXbSzM1ouh5YtbsFReKUks3hVROQc2XKdoN
- K1zawwGvAuTWJW4rYtKyHCbbAcjo5utLi+Kq7amWN8Kt1d8q35XIZVG+qK/DR3musZzS
- kuIg==
+ bh=zQP6ZISNGtCxHCMKtWFGXP45Ar7kRjUEThhVEVu4pGQ=;
+ b=uUAlo5Z3CqdKcy3AjDgwVFSG/6KOjbDX07+TOo7uZN6fJnFvfpKlQEPTg6kVPrmHps
+ /a/JOmIWdElXNhQSuZ4ecfBjGWorFZBbh1+SfHcvBfhAalhgUJPWSXaM4koLxWpHH2AN
+ Cj0ZZ6/2jaonrQIWhJC2MPyIg5zZ5/Y9397ebpNR7wScUo8UHyMuHM8OpwP7JAbDNgR/
+ 1EzL4nRy9Xb8O11C8zAOxquK5ru/RWOWc01qI46jfT1jJP4eewQzfiV0uebFFKCrRM9D
+ YvH0TG+ns4ZsDpZtAtOxtDkpY8DBgzICz5M3havNrj1a59ecHTOMaJ/vGfXwQ0Oqw0GP
+ KzfQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVulstnVETUgxauNdl+oDv2+tQUTPB98PW27HUK0ZO6x2MjXRrfTyjWqhhBMJ7g7hiaktPMGy0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx/ScugzIyVUaUikVuFhWS50dtzIwGDQ3WL2fi/Vf6vCAx7R6Wf
- uJh4CLKxlLLKhQl4ZNOGsXq3Bv9+xW+jDwyrRc2YdlTLlj6UWJJB0XbZ0zq0grAA6uDsjlZJ2bJ
- GXFFNTn/dMrTsJrITigosCwi2V0JTvLZzk9yfSQ==
-X-Google-Smtp-Source: AGHT+IHrxAOk51z4bU2UGpoCX6TMV8jEa3+GDpk2Vn09G4Rkzt0qVhTrA/XDLNXy55t9WynMY1oCljrreIleSHbTPRc=
-X-Received: by 2002:a17:90a:70c2:b0:2e2:c1d0:68dc with SMTP id
- 98e67ed59e1d1-2e77e5e48a7mr12856829a91.9.1729932740407; Sat, 26 Oct 2024
- 01:52:20 -0700 (PDT)
+ AJvYcCUMEH4Z2uJZ/eCDl41i7uNRbt4detGz3s4SuhJ9ubWFUmLxr9hVrZJzxfmDw9dudqm+hhr8Rvo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxQIt52ZjUpMXbkIJnRfyfA+0A25hQ3tZQXXfA+xxike5taZaUt
+ foEMihcGu44O50rns8uaOD8vIrTrKTvdUvHWSW4Mzg7klsKZ93AuOxDYTIF57FKRO4WDzzss2Xy
+ 5HvWDjL4cjphkWeRsNvBoJr7Snn9IrbxmSU5ChA==
+X-Google-Smtp-Source: AGHT+IEtdUnDR6AY4bTDQCI5AcI7WCWNfIGkTxF1fFP/9n5o1g5hpDQ0eMG4dzaspvuotZSvSwpueG5+n9WXwV0PhK0=
+X-Received: by 2002:a17:90a:68ce:b0:2e2:a8dd:9bb5 with SMTP id
+ 98e67ed59e1d1-2e8f105e834mr2381830a91.12.1729932796999; Sat, 26 Oct 2024
+ 01:53:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241026064048.370062-1-heinrich.schuchardt@canonical.com>
- <20241026064048.370062-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241026064048.370062-2-heinrich.schuchardt@canonical.com>
+ <20241026064048.370062-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241026064048.370062-3-heinrich.schuchardt@canonical.com>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sat, 26 Oct 2024 10:52:08 +0200
-Message-ID: <CAOf5uwnC7G9DjKT86KwQMbb+rkb5YcL8c6cV_jziHoGoDSPn3w@mail.gmail.com>
-Subject: Re: [PATCH 1/5] fs: ext4: simplify ext4fs_iterate_dir()
+Date: Sat, 26 Oct 2024 10:53:06 +0200
+Message-ID: <CAOf5uw=kzzTmPHCOLnzQ4Atx7WkAjt9NE8McnWxvPnZFMFHcjw@mail.gmail.com>
+Subject: Re: [PATCH 2/5] fs: ext4: free directory node in ext4fs_exists()
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
@@ -96,120 +96,49 @@ X-Virus-Status: Clean
 
 Hi
 
-On Sat, Oct 26, 2024 at 8:41=E2=80=AFAM Heinrich Schuchardt
+On Sat, Oct 26, 2024 at 8:42=E2=80=AFAM Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> Remove copying a pointer with a cast to the very same type.
+> The directory retrieved in ext4fs_exists() should be freed to avoid a
+> memory leak.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  fs/ext4/ext4_common.c | 27 +++++++++++++--------------
->  1 file changed, 13 insertions(+), 14 deletions(-)
+>  fs/ext4/ext4fs.c | 9 +++++++--
+>  1 file changed, 7 insertions(+), 2 deletions(-)
 >
-> diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
-> index 76f7102456e..c1e38978bb9 100644
-> --- a/fs/ext4/ext4_common.c
-> +++ b/fs/ext4/ext4_common.c
-> @@ -2046,24 +2046,23 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, c=
-har *name,
->         unsigned int fpos =3D 0;
->         int status;
->         loff_t actread;
-> -       struct ext2fs_node *diro =3D (struct ext2fs_node *) dir;
+> diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
+> index 15587e92e3e..21714149ef5 100644
+> --- a/fs/ext4/ext4fs.c
+> +++ b/fs/ext4/ext4fs.c
+> @@ -209,12 +209,17 @@ int ext4fs_exists(const char *filename)
+>  {
+>         struct ext2fs_node *dirnode =3D NULL;
+>         int filetype;
+> +       int ret;
 >
->  #ifdef DEBUG
->         if (name !=3D NULL)
->                 printf("Iterate dir %s\n", name);
->  #endif /* of DEBUG */
-> -       if (!diro->inode_read) {
-> -               status =3D ext4fs_read_inode(diro->data, diro->ino, &diro=
-->inode);
-> +       if (!dir->inode_read) {
-> +               status =3D ext4fs_read_inode(dir->data, dir->ino, &dir->i=
-node);
->                 if (status =3D=3D 0)
->                         return 0;
->         }
->         /* Search the file.  */
-> -       while (fpos < le32_to_cpu(diro->inode.size)) {
-> +       while (fpos < le32_to_cpu(dir->inode.size)) {
->                 struct ext2_dirent dirent;
+>         if (!filename)
+>                 return 0;
 >
-> -               status =3D ext4fs_read_file(diro, fpos,
-> -                                          sizeof(struct ext2_dirent),
-> -                                          (char *)&dirent, &actread);
-> +               status =3D ext4fs_read_file(dir, fpos,
-> +                                         sizeof(struct ext2_dirent),
-> +                                         (char *)&dirent, &actread);
->                 if (status < 0)
->                         return 0;
->
-> @@ -2077,7 +2076,7 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, cha=
-r *name,
->                         struct ext2fs_node *fdiro;
->                         int type =3D FILETYPE_UNKNOWN;
->
-> -                       status =3D ext4fs_read_file(diro,
-> +                       status =3D ext4fs_read_file(dir,
->                                                   fpos +
->                                                   sizeof(struct ext2_dire=
-nt),
->                                                   dirent.namelen, filenam=
+> -       return ext4fs_find_file1(filename, &ext4fs_root->diropen, &dirnod=
 e,
-> @@ -2089,7 +2088,7 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, cha=
-r *name,
->                         if (!fdiro)
->                                 return 0;
+> -                                &filetype);
+> +       ret =3D ext4fs_find_file1(filename, &ext4fs_root->diropen, &dirno=
+de,
+> +                               &filetype);
+> +       if (dirnode)
+> +               ext4fs_free_node(dirnode, &ext4fs_root->diropen);
+> +
+> +       return ret;
+>  }
 >
-> -                       fdiro->data =3D diro->data;
-> +                       fdiro->data =3D dir->data;
->                         fdiro->ino =3D le32_to_cpu(dirent.inode);
->
->                         filename[dirent.namelen] =3D '\0';
-> @@ -2104,7 +2103,7 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, cha=
-r *name,
->                                 else if (dirent.filetype =3D=3D FILETYPE_=
-REG)
->                                         type =3D FILETYPE_REG;
->                         } else {
-> -                               status =3D ext4fs_read_inode(diro->data,
-> +                               status =3D ext4fs_read_inode(dir->data,
->                                                            le32_to_cpu
->                                                            (dirent.inode)=
-,
->                                                            &fdiro->inode)=
-;
-> @@ -2140,10 +2139,10 @@ int ext4fs_iterate_dir(struct ext2fs_node *dir, c=
-har *name,
->                                 }
->                         } else {
->                                 if (fdiro->inode_read =3D=3D 0) {
-> -                                       status =3D ext4fs_read_inode(diro=
-->data,
-> -                                                                le32_to_=
-cpu(
-> -                                                                dirent.i=
-node),
-> -                                                                &fdiro->=
-inode);
-> +                                       status =3D ext4fs_read_inode(dir-=
->data,
-> +                                                                  le32_t=
-o_cpu(
-> +                                                                  dirent=
-.inode),
-> +                                                                  &fdiro=
-->inode);
->                                         if (status =3D=3D 0) {
->                                                 free(fdiro);
->                                                 return 0;
+
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+
+>  int ext4fs_size(const char *filename, loff_t *size)
 > --
 > 2.45.2
 >
-Nit I don't know if this can a const pointer from the function call prospec=
-tive
-
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 
 
 --=20
