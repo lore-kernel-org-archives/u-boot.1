@@ -4,84 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C73ADD10BFF
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 16:24:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE21D10C01
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 18:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48FCE88B4B;
-	Sat, 26 Oct 2024 18:24:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EA7C588D94;
+	Sat, 26 Oct 2024 20:07:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=devpi.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PtSxUwTG";
+	dkim=pass (2048-bit key; unprotected) header.d=devpi.de header.i=@devpi.de header.b="YS29LpBo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A85F788F71; Sat, 26 Oct 2024 18:24:05 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4503188D94; Sat, 26 Oct 2024 20:07:01 +0200 (CEST)
+Received: from smtp6.goneo.de (smtp6.goneo.de [IPv6:2001:1640:5::8:31])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 040F6888EB
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 18:23:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19D5688D70
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 20:06:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-539e59dadebso3662559e87.0
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 09:23:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729959838; x=1730564638; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hDM//PltKAQvcURxdqh8jvWwaJHScejb5CWSURy65n4=;
- b=PtSxUwTGu+DqbOHAq7OcYRXxRtVLz1fCdkfkMNNQR2ci8HE7gHFtRo1VmLoYagwE5S
- ELgeAcA08O3ZstvWEG7Q3bLBFdlBz8rAmX7HBYZIPctxPulE2pbGSlRhReIxWK3NmOa/
- 1c0JsmiuEl42l5Prwp17bT/RfhlFtPGe3vYzVZHxouhnGATicjeX+m09h2dIvGsBuJMC
- kWisnW7Bf5ZiyQaVwn0BBAxwh/MNBXJu6a6pOJWDWG87oCBy/UPePssj3y9Wdc48U+jG
- A8Zc5rplurxkGC5CQHXb6RLNSAw96xnyWCWxVtto5nrUMsf1Ph8zncltuOdrxSOunH7d
- kbIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729959838; x=1730564638;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hDM//PltKAQvcURxdqh8jvWwaJHScejb5CWSURy65n4=;
- b=dZMIuwLU+DCRz8t+L+czPmfwf2WnN9BKOzau9hb7GE/bXMmYrX76UdbX9VigFu08Hp
- BppoqzmruUlvVlYnSwyiV/doQsnbjgha/bGZadpA8WrTm59Hyrqv42cNMZVoaMngKWtF
- 0iaGmAbGX47uS9HBoh8jE0k0QdMFRT6BX/FuEyqncvdWvGWzRGofZDG/j0GJIZq6OAAF
- 8r07nW+8Yb28w+D1CJs/oXbrLPByjkvtBrBYXu9RbJs4Wno2ZXey3EOcHGiT4QNQnaA5
- GQ8MyWYWT8MnVADWrcGZDVaqPEBtR4SHh/ufJt8BDUiAZnG/VsAB0NRt62UUARClF1eF
- CE0A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWVtoz0uTe8nU3bL3hUdKFAp+F8nsNoEpGW4r8TRSP7LBof1HF6erAoI7sNmCASDQdGA0GwwjM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzDzQ/xhvHdtV31KG0QPWzE+WvkAr0tLMJMLDRg0CcFWnd3Akk/
- LdyfVnXK4xZ88poSAJebSPtoX9slSvWmOpSNr5L6pyeUd0JNVy1r6hyrgA5gcCyG8rtDhcFEkRQ
- U/O/vnbiuqf6CpoLC8ZRavSqDvmk=
-X-Google-Smtp-Source: AGHT+IHareK+mgDzimgYgZUhgu6F1SdhrUSOj+8+itHHmW7sGCOGm3vEHJBb9wv73T/ysQya1ubPK6mWTZ4Vk4zc0b8=
-X-Received: by 2002:ac2:4e08:0:b0:539:e94d:b490 with SMTP id
- 2adb3069b0e04-53b34c5f8e4mr1154548e87.43.1729959837833; Sat, 26 Oct 2024
- 09:23:57 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=devpi.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lehmanju@devpi.de
+Received: from hub1.goneo.de (hub1.goneo.de [85.220.129.52])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by smtp6.goneo.de (Postfix) with ESMTPS id B602024089F;
+ Sat, 26 Oct 2024 20:06:54 +0200 (CEST)
+Received: from hub1.goneo.de (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPS id 9DFC0240569;
+ Sat, 26 Oct 2024 20:06:52 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=devpi.de; s=DKIM001;
+ t=1729966012;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=YpINJllwe7J+fVByCyQiOJlCt9RGalj2HqQTIjM2+xU=;
+ b=YS29LpBoWoVD2DI8KkbqnldvmiSf+tqIyavLbSQ4XXHurqsbsSgQdU2WkuK0XOvabI3Ska
+ 5TLyCOz0j4cN+Q/YKsQ5MYi9SviEYWdwK8CH3gCTbu8C8VDk66CG1exZEcEcz7Qgv0zg6L
+ Un6oZAHFUU6rkHGA1IfOtxDUFKGBLA5O31x9/GfCaWw06vec+sT772D+4A+W+xl4esnWnT
+ 6tqRKuiMPBmjvUQVaLFnpjNpL4tMvQGWdmSLIkVY8M38OCpXNGHm0GJsQZhqDLVPUgfXXq
+ 8z+KZVQi/ade3SwVS0yB12LqNAxB+vBpLWtVR2odB0j/tUrL5I9pgXAEtV6Zfg==
+Received: from p200300cbef0f7d100000000000000193.dip0.t-ipconnect.de
+ (p200300cbef0f7d100000000000000193.dip0.t-ipconnect.de
+ [IPv6:2003:cb:ef0f:7d10::193])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPSA id 5090C240560;
+ Sat, 26 Oct 2024 20:06:52 +0200 (CEST)
+From: Julius Lehmann <lehmanju@devpi.de>
+Date: Sat, 26 Oct 2024 20:06:44 +0200
+Subject: [PATCH v2] scsi: fix disk capacity too small by one sector
 MIME-Version: 1.0
-References: <20240829013058.6178-1-minda.chen@starfivetech.com>
- <20240829013058.6178-6-minda.chen@starfivetech.com>
-In-Reply-To: <20240829013058.6178-6-minda.chen@starfivetech.com>
-From: E Shattow <lucent@gmail.com>
-Date: Sat, 26 Oct 2024 09:23:46 -0700
-Message-ID: <CANV2PTMW3a0BS8cXrU_N5nJPrRv0jknfZUh7_CSsZ5LRG277eg@mail.gmail.com>
-Subject: Re: [PATCH v4 5/9] spl: starfive: visionfive2: Disable USB
- overcurrent pin by default.
-To: Minda Chen <minda.chen@starfivetech.com>
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Roger Quadros <rogerq@kernel.org>, 
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Romanov <avromanov@salutedevices.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Nishanth Menon <nm@ti.com>, 
- u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20241026-fix-scsi-disksize-v2-1-bc6be9a6043d@devpi.de>
+X-B4-Tracking: v=1; b=H4sIALMvHWcC/32NQQ6CMBBFr0Jm7ZgWS7CuvIdhUTqDTEyAdEyjE
+ u5u5QAu38//76+gnIQVLtUKibOozFOB+lBBHMN0ZxQqDLWpnTXW4SAv1KiCJPpQ+TBSewrGtjH
+ Q4KDslsSltDtvXeFR9Dmn936R7S/9Z8sWLRqm3vvG983ZXInzIkdi6LZt+wLrF7ppsQAAAA==
+X-Change-ID: 20241014-fix-scsi-disksize-d73a017cadf4
+To: Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Julius Lehmann <lehmanju@devpi.de>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2465; i=lehmanju@devpi.de;
+ h=from:subject:message-id; bh=bhxjrggtUu74DDAeRUtT13/xsH4epq3rS/NzuN5sn8A=;
+ b=owEBbQKS/ZANAwAKARK2S7xC0EEDAcsmYgBnHS+8cv5AiTKfJvDiODYBJY6QfyWEOwXYnc/qy
+ aK+vfLIA/OJAjMEAAEKAB0WIQTCqoxFzEvlxm0XalUStku8QtBBAwUCZx0vvAAKCRAStku8QtBB
+ A7kvD/9qZTNp5KDdutYkYOTV70a41xcDosjkBK+siauMZu/sd/zIgorE1JOElv12faLJfnlDPFx
+ SQTnUne3qtvu2AmHt3F4CsjgnZNhzbV4ugTsOczo6Emgz6iifwt868eiRI+VWSzQgMB1wQ7vrvv
+ x8N9w5E7lFiqfQW7SfdhciQWj397Ufo5TAIFpQrKtnDsug4niCxzULBmHxuciBOrkjdSbzSxyp6
+ pwJAkIfrDZukCYlrjxG/DcKylaPVmsxfkpO2hOGKB+MbQhRKF4DaN4w+EU8G0s5zIzjE/NIhxWk
+ a006xxhKJySoj73DpVtS03/xkrG8I+h4fkRviHpPEFwlziFwbrlkilICcMwxZc4ZEeU5prch03W
+ +nwVOZFcUPYThYrtNpN3CZZbKrOmLekdv3z433wgbd96qhoxpNcansUuvGkZSWwRnRSFioDyvcH
+ 0MQYIZ5LxLcqv0z+RoOb805/PNpzPvivyLs4rtjgIjbs1GMWXvmwwShP96YcAbIIgvOhFJI/FzU
+ OAfRgADEw5+MQnB9l8ifNp3Dq8UUHCmH3oATTQGMD6FCKPTyPpfBJCh/MOMxUORKuhH/K9wBcmb
+ Z5VXCgmpfbn7R6XQSlfAh4jqCFE9FLWGGTEN/dgRZLHH+wn3nvShLqN0DoKI3wEqJKeVC5XVDAV
+ i8Q8eR/v8Jaegkw==
+X-Developer-Key: i=lehmanju@devpi.de; a=openpgp;
+ fpr=C2AA8C45CC4BE5C66D176A5512B64BBC42D04103
+X-Rspamd-UID: fbe3fd
+X-Rspamd-UID: 039e83
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,59 +105,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 28, 2024 at 6:31=E2=80=AFPM Minda Chen <minda.chen@starfivetech=
-.com> wrote:
->
-> For some JH7110 boards, USB host overcurent pin is not reserved,
-> To make USB host work, overcurrent pin must be disabled. So set the
-> pin default disabled in spl stage.
->
-> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
-> ---
->  arch/riscv/include/asm/arch-jh7110/gpio.h | 5 +++++
->  board/starfive/visionfive2/spl.c          | 3 +++
->  2 files changed, 8 insertions(+)
->
-> diff --git a/arch/riscv/include/asm/arch-jh7110/gpio.h b/arch/riscv/inclu=
-de/asm/arch-jh7110/gpio.h
-> index 90aa2f8a9e..be2a1e0d1c 100644
-> --- a/arch/riscv/include/asm/arch-jh7110/gpio.h
-> +++ b/arch/riscv/include/asm/arch-jh7110/gpio.h
-> @@ -63,6 +63,11 @@ enum gpio_state {
->                         GPIO_DIN_MASK << GPIO_SHIFT(gpi), \
->                         ((gpio + 2) & GPIO_DIN_MASK) << GPIO_SHIFT(gpi))
->
-> +#define SYS_IOMUX_DIN_DISABLED(gpi)\
-> +       clrsetbits_le32(JH7110_SYS_IOMUX + GPIO_DIN + GPIO_OFFSET(gpi), \
-> +                       GPIO_DIN_MASK << GPIO_SHIFT(gpi), \
-> +                       ((0x1) & GPIO_DIN_MASK) << GPIO_SHIFT(gpi))
-> +
->  #define SYS_IOMUX_SET_DS(gpio, ds) \
->         clrsetbits_le32(JH7110_SYS_IOMUX + GPIO_CONFIG + gpio * 4, \
->                         GPIO_DS_MASK, (ds) << GPIO_DS_SHIFT)
-> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive=
-2/spl.c
-> index b794b73b6b..388a06e4d9 100644
-> --- a/board/starfive/visionfive2/spl.c
-> +++ b/board/starfive/visionfive2/spl.c
-> @@ -452,6 +452,9 @@ void board_init_f(ulong dummy)
->                         JH7110_CLK_CPU_ROOT_MASK,
->                         BIT(JH7110_CLK_CPU_ROOT_SHIFT));
->
-> +       /* Set USB overcurrent overflow pin disable */
-> +       SYS_IOMUX_DIN_DISABLED(2);
-> +
->         ret =3D spl_board_init_f();
->         if (ret) {
->                 debug("spl_board_init_f init failed: %d\n", ret);
-> --
-> 2.17.1
->
+SCSI READ CAPACITY reports the address of the last block and the block
+size. The total number of blocks is thus last block address plus one.
 
-As tested, this patch is required for the operating system after
-U-Boot to enable USB on at least Pine64 Star64 and Milk-V Mars CM Lite
-even if U-Boot does not adopt the other patches in this series.
+This also fixes the corresponding test case.
 
-Can this be cherry-picked separate from the series?
+---
+This patch fixes the disk size reported by scsi. Up until now, the reported disk size is too small by one sector. Read/Write operations on other sectors have not been affected. Trying to partition scsi backed storage via ums has resulted in "storage too small" errors.
 
-Tested-by: E Shattow <lucent@gmail.com>
+doc: https://linux.die.net/man/8/sg_readcap
+
+Signed-off-by: Julius Lehmann <lehmanju@devpi.de>
+---
+Changes in v2:
+- fixed corresponding test case
+- Link to v1: https://lore.kernel.org/r/20241014-fix-scsi-disksize-v1-1-0edb9959b580@devpi.de
+---
+ drivers/scsi/scsi.c | 2 ++
+ test/boot/bootdev.c | 2 +-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
+index 51cacf3479236be6c6ea3e7d15b87e03f10e7f3a..bcdeda95ed1514119057cc67974fec465cf5672c 100644
+--- a/drivers/scsi/scsi.c
++++ b/drivers/scsi/scsi.c
+@@ -309,6 +309,7 @@ static int scsi_read_capacity(struct udevice *dev, struct scsi_cmd *pccb,
+ 			 ((unsigned long)pccb->pdata[5] << 16) |
+ 			 ((unsigned long)pccb->pdata[6] << 8)  |
+ 			 ((unsigned long)pccb->pdata[7]);
++		*capacity += 1;
+ 		return 0;
+ 	}
+ 
+@@ -332,6 +333,7 @@ static int scsi_read_capacity(struct udevice *dev, struct scsi_cmd *pccb,
+ 		    ((uint64_t)pccb->pdata[5] << 16) |
+ 		    ((uint64_t)pccb->pdata[6] << 8)  |
+ 		    ((uint64_t)pccb->pdata[7]);
++	*capacity += 1;
+ 
+ 	*blksz = ((uint64_t)pccb->pdata[8]  << 56) |
+ 		 ((uint64_t)pccb->pdata[9]  << 48) |
+diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
+index c635d06ec25d4bf274099f153648d34f5a845436..bc632a3d14124f5f821c4625e5b29b7d352f7161 100644
+--- a/test/boot/bootdev.c
++++ b/test/boot/bootdev.c
+@@ -621,7 +621,7 @@ static int bootdev_test_next_label(struct unit_test_state *uts)
+ 	ut_assertok(bootdev_next_label(&iter, &dev, &mflags));
+ 	ut_assert_nextline("scanning bus for devices...");
+ 	ut_assert_skip_to_line(
+-		"            Capacity: 1.9 MB = 0.0 GB (4095 x 512)");
++		"            Capacity: 2.0 MB = 0.0 GB (4096 x 512)");
+ 	ut_assert_console_end();
+ 	ut_assertnonnull(dev);
+ 	ut_asserteq_str("scsi.id0lun0.bootdev", dev->name);
+
+---
+base-commit: 29e5dbc55c64c6450f066c55a5bc48bd1717aa1b
+change-id: 20241014-fix-scsi-disksize-d73a017cadf4
+
+Best regards,
+-- 
+Julius Lehmann <lehmanju@devpi.de>
+
