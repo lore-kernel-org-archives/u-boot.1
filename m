@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87ADFD10BFF
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 16:19:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C73ADD10BFF
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 16:24:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E02C890B9;
-	Sat, 26 Oct 2024 18:16:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 48FCE88B4B;
+	Sat, 26 Oct 2024 18:24:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZcoQ7H07";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PtSxUwTG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55F6088F92; Sat, 26 Oct 2024 17:53:02 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id A85F788F71; Sat, 26 Oct 2024 18:24:05 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8E6688EA8
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 17:52:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 040F6888EB
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 18:23:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5c933d5bdf1so517967a12.0
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 08:52:57 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-539e59dadebso3662559e87.0
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 09:23:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729957971; x=1730562771; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1729959838; x=1730564638; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tUMdBtrRJJfkkMZKXd3+L8/bZhUlb5XaVO/1jN6I/o4=;
- b=ZcoQ7H07f/P9XRdCeNgrSJWjtSggKpRQsoxln3plHQT/4Y5qfhyFYXxUT1LfpTLs4q
- yRO/tKLkzIxtpWfUcEmyU29yO8RLCRGLxYgcURZIQaCu+znGKwoyAyLTmYCD4CT0wB4k
- pbuzSujOXG6PTU3+ZHYjg4HI1H+0SfJL/XlrQWXejZe+bFAhtYSRfwX/Sf73YBgTWp0L
- R0NJRiCwvWaryg509+YpwaP/WfLZX92fy1ISvopUvQdHNbekTOLlUx+WVjgZ2tp0cOSC
- VMECqw82kyqXldcz00pETzJkDT0Ha3mv8ZZUvD5rOX5MfcBtH9uQCr6jXOUguEOnX1hX
- PapA==
+ bh=hDM//PltKAQvcURxdqh8jvWwaJHScejb5CWSURy65n4=;
+ b=PtSxUwTGu+DqbOHAq7OcYRXxRtVLz1fCdkfkMNNQR2ci8HE7gHFtRo1VmLoYagwE5S
+ ELgeAcA08O3ZstvWEG7Q3bLBFdlBz8rAmX7HBYZIPctxPulE2pbGSlRhReIxWK3NmOa/
+ 1c0JsmiuEl42l5Prwp17bT/RfhlFtPGe3vYzVZHxouhnGATicjeX+m09h2dIvGsBuJMC
+ kWisnW7Bf5ZiyQaVwn0BBAxwh/MNBXJu6a6pOJWDWG87oCBy/UPePssj3y9Wdc48U+jG
+ A8Zc5rplurxkGC5CQHXb6RLNSAw96xnyWCWxVtto5nrUMsf1Ph8zncltuOdrxSOunH7d
+ kbIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729957971; x=1730562771;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1729959838; x=1730564638;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tUMdBtrRJJfkkMZKXd3+L8/bZhUlb5XaVO/1jN6I/o4=;
- b=ipIu/tVRdmQAcJ5WQiSXhozMhy/J6GXOy+87FOh9ap8xDfzOLiv8cXZnU4e0l18NEz
- 81bJ/i9fcpR4a/s/lCrGcFaiGNTY8k+clzxyZColU5CCJGpqTjPa0ndMvH4j/1XdIPPx
- KyIPVSzycdMJQCc+HsFzwS2XOasDy0KqfJRQA7Hte2piBiFE74kTx59QqFtf/8ptvpaq
- 1bE49qTan5SHwByBtalRRWhuc0SwsHPr1sInaCwnZV0ZWGdvWP3Rftq+M0/wnsVaVQ+G
- IzaY7cS1IOEfmRuPNxW4cvKlk1cEQuCuxIexwp65PoI6D/fEy1nLu9GeaiGo35ZfWAgX
- qp7w==
-X-Gm-Message-State: AOJu0Ywthx2l4Axq2rAvIYOqGWduJ0Ip/KoBr/s3JDbJvNemInJjkqRW
- uiSGHQjNyJPm28No3ckTTdmmEz+1a93s/+IkqXz2mx0FoFFljl+6I9n6/g==
-X-Google-Smtp-Source: AGHT+IHDS25alN3kNm8TpcQungSVanNqAOXGRMdL8crRi5d3OnRYjfNdYn0ZwxfLPeUJ6u+leTNh9A==
-X-Received: by 2002:a05:6402:210b:b0:5c2:6850:7b2 with SMTP id
- 4fb4d7f45d1cf-5cbbf94932cmr956703a12.6.1729957970373; 
- Sat, 26 Oct 2024 08:52:50 -0700 (PDT)
-Received: from 6c1d2e1f4cf4.v.cablecom.net (84-72-156-211.dclient.hispeed.ch.
- [84.72.156.211]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cbb63197casm1620179a12.63.2024.10.26.08.52.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 26 Oct 2024 08:52:49 -0700 (PDT)
-From: Lothar Rubusch <l.rubusch@gmail.com>
-To: u-boot@lists.denx.de, trini@konsulko.com, marex@denx.de,
- simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
- sumit.garg@linaro.org
-Cc: sjg@chromium.org, xypron.glpk@gmx.de, michal.simek@amd.com,
- jit.loon.lim@intel.com, barnas@google.com, l.rubusch@gmail.com
-Subject: [PATCH v4 11/11] doc: develop: orthographic delights
-Date: Sat, 26 Oct 2024 15:52:20 +0000
-Message-Id: <20241026155220.26300-12-l.rubusch@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241026155220.26300-1-l.rubusch@gmail.com>
-References: <20241026155220.26300-1-l.rubusch@gmail.com>
+ bh=hDM//PltKAQvcURxdqh8jvWwaJHScejb5CWSURy65n4=;
+ b=dZMIuwLU+DCRz8t+L+czPmfwf2WnN9BKOzau9hb7GE/bXMmYrX76UdbX9VigFu08Hp
+ BppoqzmruUlvVlYnSwyiV/doQsnbjgha/bGZadpA8WrTm59Hyrqv42cNMZVoaMngKWtF
+ 0iaGmAbGX47uS9HBoh8jE0k0QdMFRT6BX/FuEyqncvdWvGWzRGofZDG/j0GJIZq6OAAF
+ 8r07nW+8Yb28w+D1CJs/oXbrLPByjkvtBrBYXu9RbJs4Wno2ZXey3EOcHGiT4QNQnaA5
+ GQ8MyWYWT8MnVADWrcGZDVaqPEBtR4SHh/ufJt8BDUiAZnG/VsAB0NRt62UUARClF1eF
+ CE0A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWVtoz0uTe8nU3bL3hUdKFAp+F8nsNoEpGW4r8TRSP7LBof1HF6erAoI7sNmCASDQdGA0GwwjM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzDzQ/xhvHdtV31KG0QPWzE+WvkAr0tLMJMLDRg0CcFWnd3Akk/
+ LdyfVnXK4xZ88poSAJebSPtoX9slSvWmOpSNr5L6pyeUd0JNVy1r6hyrgA5gcCyG8rtDhcFEkRQ
+ U/O/vnbiuqf6CpoLC8ZRavSqDvmk=
+X-Google-Smtp-Source: AGHT+IHareK+mgDzimgYgZUhgu6F1SdhrUSOj+8+itHHmW7sGCOGm3vEHJBb9wv73T/ysQya1ubPK6mWTZ4Vk4zc0b8=
+X-Received: by 2002:ac2:4e08:0:b0:539:e94d:b490 with SMTP id
+ 2adb3069b0e04-53b34c5f8e4mr1154548e87.43.1729959837833; Sat, 26 Oct 2024
+ 09:23:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 26 Oct 2024 18:16:43 +0200
+References: <20240829013058.6178-1-minda.chen@starfivetech.com>
+ <20240829013058.6178-6-minda.chen@starfivetech.com>
+In-Reply-To: <20240829013058.6178-6-minda.chen@starfivetech.com>
+From: E Shattow <lucent@gmail.com>
+Date: Sat, 26 Oct 2024 09:23:46 -0700
+Message-ID: <CANV2PTMW3a0BS8cXrU_N5nJPrRv0jknfZUh7_CSsZ5LRG277eg@mail.gmail.com>
+Subject: Re: [PATCH v4 5/9] spl: starfive: visionfive2: Disable USB
+ overcurrent pin by default.
+To: Minda Chen <minda.chen@starfivetech.com>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Roger Quadros <rogerq@kernel.org>, 
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Romanov <avromanov@salutedevices.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Nishanth Menon <nm@ti.com>, 
+ u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,125 +98,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix some typos and duplicate words in documentation files.
+On Wed, Aug 28, 2024 at 6:31=E2=80=AFPM Minda Chen <minda.chen@starfivetech=
+.com> wrote:
+>
+> For some JH7110 boards, USB host overcurent pin is not reserved,
+> To make USB host work, overcurrent pin must be disabled. So set the
+> pin default disabled in spl stage.
+>
+> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
+> ---
+>  arch/riscv/include/asm/arch-jh7110/gpio.h | 5 +++++
+>  board/starfive/visionfive2/spl.c          | 3 +++
+>  2 files changed, 8 insertions(+)
+>
+> diff --git a/arch/riscv/include/asm/arch-jh7110/gpio.h b/arch/riscv/inclu=
+de/asm/arch-jh7110/gpio.h
+> index 90aa2f8a9e..be2a1e0d1c 100644
+> --- a/arch/riscv/include/asm/arch-jh7110/gpio.h
+> +++ b/arch/riscv/include/asm/arch-jh7110/gpio.h
+> @@ -63,6 +63,11 @@ enum gpio_state {
+>                         GPIO_DIN_MASK << GPIO_SHIFT(gpi), \
+>                         ((gpio + 2) & GPIO_DIN_MASK) << GPIO_SHIFT(gpi))
+>
+> +#define SYS_IOMUX_DIN_DISABLED(gpi)\
+> +       clrsetbits_le32(JH7110_SYS_IOMUX + GPIO_DIN + GPIO_OFFSET(gpi), \
+> +                       GPIO_DIN_MASK << GPIO_SHIFT(gpi), \
+> +                       ((0x1) & GPIO_DIN_MASK) << GPIO_SHIFT(gpi))
+> +
+>  #define SYS_IOMUX_SET_DS(gpio, ds) \
+>         clrsetbits_le32(JH7110_SYS_IOMUX + GPIO_CONFIG + gpio * 4, \
+>                         GPIO_DS_MASK, (ds) << GPIO_DS_SHIFT)
+> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive=
+2/spl.c
+> index b794b73b6b..388a06e4d9 100644
+> --- a/board/starfive/visionfive2/spl.c
+> +++ b/board/starfive/visionfive2/spl.c
+> @@ -452,6 +452,9 @@ void board_init_f(ulong dummy)
+>                         JH7110_CLK_CPU_ROOT_MASK,
+>                         BIT(JH7110_CLK_CPU_ROOT_SHIFT));
+>
+> +       /* Set USB overcurrent overflow pin disable */
+> +       SYS_IOMUX_DIN_DISABLED(2);
+> +
+>         ret =3D spl_board_init_f();
+>         if (ret) {
+>                 debug("spl_board_init_f init failed: %d\n", ret);
+> --
+> 2.17.1
+>
 
-Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
----
- doc/develop/gdb.rst      |  2 +-
- tools/binman/binman.rst  |  4 ++--
- tools/binman/entries.rst | 22 +++++++++++-----------
- 3 files changed, 14 insertions(+), 14 deletions(-)
+As tested, this patch is required for the operating system after
+U-Boot to enable USB on at least Pine64 Star64 and Milk-V Mars CM Lite
+even if U-Boot does not adopt the other patches in this series.
 
-diff --git a/doc/develop/gdb.rst b/doc/develop/gdb.rst
-index 4e359c7f22..ebe65492ef 100644
---- a/doc/develop/gdb.rst
-+++ b/doc/develop/gdb.rst
-@@ -13,7 +13,7 @@ Similarly QEMU can provide a GDB server.
- Preparing build
- ---------------
- 
--Building U-Boot with with reduced optimization (-Og) and without link time
-+Building U-Boot with reduced optimization (-Og) and without link time
- optimization is recommended for easier debugging::
- 
-     CONFIG_CC_OPTIMIZE_FOR_DEBUG=y
-diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
-index 381e55686f..df682ba86d 100644
---- a/tools/binman/binman.rst
-+++ b/tools/binman/binman.rst
-@@ -1047,8 +1047,8 @@ Here, a new 'value' property will be written to the 'hash' node containing
- the hash of the 'u-boot' entry. Only SHA256 is supported at present. Whole
- sections can be hased if desired, by adding the 'hash' node to the section.
- 
--The has value can be chcked at runtime by hashing the data actually read and
--comparing this has to the value in the device tree.
-+The hash value can be checked at runtime by hashing the data actually read and
-+comparing this hash to the value in the device tree.
- 
- 
- Expanded entries
-diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-index e918162fb4..79d93eb22d 100644
---- a/tools/binman/entries.rst
-+++ b/tools/binman/entries.rst
-@@ -240,7 +240,7 @@ Properties / Entry arguments:
-         lz4: Use lz4 compression (via 'lz4' command-line utility)
- 
- This entry reads data from a file and places it in the entry. The
--default filename is often specified specified by the subclass. See for
-+default filename is often specified by the subclass. See for
- example the 'u-boot' entry which provides the filename 'u-boot.bin'.
- 
- If compression is enabled, an extra 'uncomp-size' property is written to
-@@ -286,7 +286,7 @@ Entry: blob-ext-list: List of externally built binary blobs
- This is like blob-ext except that a number of blobs can be provided,
- typically with some sort of relationship, e.g. all are DDC parameters.
- 
--If any of the external files needed by this llist is missing, binman can
-+If any of the external files needed by this list is missing, binman can
- optionally ignore it and produce a broken image with a warning.
- 
- Args:
-@@ -1164,7 +1164,7 @@ Properties / Entry arguments:
- 
- FMAP is a simple format used by flashrom, an open-source utility for
- reading and writing the SPI flash, typically on x86 CPUs. The format
--provides flashrom with a list of areas, so it knows what it in the flash.
-+provides flashrom with a list of areas, that it knows what is in the flash.
- It can then read or write just a single area, instead of the whole flash.
- 
- The format is defined by the flashrom project, in the file lib/fmap.h -
-@@ -1338,7 +1338,7 @@ Properties / Entry arguments:
- This file contains a binary blob which is used on some devices to set up
- the silicon. U-Boot executes this code in U-Boot proper after SDRAM is
- running, so that it can make full use of memory. Documentation is typically
--not available in sufficient detail to allow U-Boot do this this itself.
-+not available in sufficient detail to allow U-Boot do this itself.
- 
- An example filename is 'fsp_s.bin'
- 
-@@ -1411,7 +1411,7 @@ Properties / Entry arguments:
- This file contains code used by the SoC that is required to make it work.
- The Management Engine is like a background task that runs things that are
- not clearly documented, but may include keyboard, display and network
--access. For platform that use ME it is not possible to disable it. U-Boot
-+access. For platforms using ME, it is not possible to disable it. U-Boot
- does not directly execute code in the ME binary.
- 
- A typical filename is 'me.bin'.
-@@ -2303,8 +2303,8 @@ to avoid the data overlapping with U-Boot variables. This entry is useful in
- that case. It automatically pads out the entry size to cover both the code,
- data and BSS.
- 
--The contents of this entry will a certain number of zero bytes, determined
--by __bss_size
-+The contents of this entry will be filled up with a number of zero bytes,
-+determined by __bss_size
- 
- The ELF file 'spl/u-boot-spl' must also be available for this to work, since
- binman uses that to look up the BSS address.
-@@ -2479,8 +2479,8 @@ to avoid the data overlapping with U-Boot variables. This entry is useful in
- that case. It automatically pads out the entry size to cover both the code,
- data and BSS.
- 
--The contents of this entry will a certain number of zero bytes, determined
--by __bss_size
-+The contents of this entry will be filled up with a number of zero bytes,
-+determined by __bss_size
- 
- The ELF file 'tpl/u-boot-tpl' must also be available for this to work, since
- binman uses that to look up the BSS address.
-@@ -2678,8 +2678,8 @@ to avoid the data overlapping with U-Boot variables. This entry is useful in
- that case. It automatically pads out the entry size to cover both the code,
- data and BSS.
- 
--The contents of this entry will a certain number of zero bytes, determined
--by __bss_size
-+The contents of this entry will be filled up with a number of zero bytes,
-+determined by __bss_size
- 
- The ELF file 'vpl/u-boot-vpl' must also be available for this to work, since
- binman uses that to look up the BSS address.
--- 
-2.25.1
+Can this be cherry-picked separate from the series?
 
+Tested-by: E Shattow <lucent@gmail.com>
