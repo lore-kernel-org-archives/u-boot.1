@@ -4,80 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE89D149F9
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 00:32:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 357A1D149F9
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 00:32:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E21918841E;
-	Sat, 26 Oct 2024 02:32:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 583DA88F92;
+	Sat, 26 Oct 2024 02:32:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jAbTfLSW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UTKnQkh9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 925AD88730; Sat, 26 Oct 2024 02:32:19 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id E155C89020; Sat, 26 Oct 2024 02:32:22 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AF3488360
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 02:32:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC67A88F57
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 02:32:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6cbcd49b833so14228546d6.3
- for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 17:32:10 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7b152a923a3so178934385a.3
+ for <u-boot@lists.denx.de>; Fri, 25 Oct 2024 17:32:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729902729; x=1730507529; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=frGxxQ6opcDmpUpbgGc3L0Q0Ybig9sYn4kLlMVab7pg=;
- b=jAbTfLSWqBDNyw1sY+Kji+Bc8aZdsXKojM39gUZnK1KmoswCdAd+H2pEBzm51iHQz5
- jB+UMUI5sGTxxuttSuaKpUv9NSG/YL1Ua7yKLH23WAqHGB8QggOg5v3flS+pCKpFIHAI
- kUEDsMmxvXcF45GSun0BdJRsLlqbEQhkSGtSs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729902729; x=1730507529;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1729902738; x=1730507538; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=frGxxQ6opcDmpUpbgGc3L0Q0Ybig9sYn4kLlMVab7pg=;
- b=XMC2fEzqjHuCCNL3p1JbEMUJeIV9Mf5s9TO6dt68gL26X0PBG2CCvq4dhd48qR6r6U
- trlMaX/QqkqEoirH76nWixD3/vZoi60HvphGIBP+KzV/lMhqnezki2OnvQsQsuY230qc
- j5zg9pYlKI1v97M2rJNzoOt9Ti05zpp6JfUWmU2dv1vOqdYYLnDaL6OnEJACi/4j5dUg
- k3SIRCrt4ll/zolvMyEb75YcjCg+wo86USWpxp6+NR0igjJrxwzlyhd/obNKsCs9yApT
- Nt8QqmqVlYZmp6JV1/wCorMZ3Yu5rVxuQed3VtDnlL5wVrLQ9G9a6x8rrjl+Abcq0/fY
- mfMw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU1iFJkEEFCrFv/pS7hRTOqcebMSLB7NZm3/hyHfQ6kof48xu0bLKAH7sXOQC8iIdAnXdRpFF4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwV9fVcWsMjZ5lzNbPiNXv1f5WAyqJpMqiq79Xt90+t7AM059mM
- 2Bnls7yr36KAqaKSbVKMaqWaIaZKGIvz1Y3ll8cFCuSKlroZepSyYJjIHxNTDX4=
-X-Google-Smtp-Source: AGHT+IHtkbFXrf8FLVLO3ZRAV1fkfjaiXCbk03U2BSyoWZaIyey7acn7PWQ+ND032Ge9oxq96i55bg==
-X-Received: by 2002:a05:6214:390a:b0:6cb:fa38:47bf with SMTP id
- 6a1803df08f44-6d1856f6273mr16646076d6.22.1729902729420; 
- Fri, 25 Oct 2024 17:32:09 -0700 (PDT)
-Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d17991b4d9sm10554196d6.60.2024.10.25.17.32.07
+ bh=jSeyJnNqOwQ6heh07mtnkuW/z/Hg7Muv2dL4oUfcFs8=;
+ b=UTKnQkh9BFmFW0qC52xsWMFy9gtfcubCE55OUbj6//yaArgvKur5emwhZq+f0GoOlu
+ ufXM1y0FB9ba2ISilDcOj3co7I9nSDziu0eVnuvoW4AxxY1R5WXKzuy3HyaC3qjDU/e5
+ Lg8jbahCLVMR5jO9NjrmKW7sPqTBdRAoJPTUE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729902738; x=1730507538;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jSeyJnNqOwQ6heh07mtnkuW/z/Hg7Muv2dL4oUfcFs8=;
+ b=YoTkU4tZXXrwefBhFvmVNvaEbo/3r2kpfI60OHSH4EXRM5LpFhd4e2W//9cSLyxk/m
+ qmw7PfDpbUtX1rol5onITxDLcvVzmegC1otiWqya9gAZNMfY5N57tOxWfic1jQlqt6Ct
+ 2d/VV9uM0XwTCkHZvSzRoMpM9CuAsdw5NsvFaty4EaSj4BflEjpZrzp9vTGo9oCylOFt
+ xVHL6UOCrdQT1caz3OBzuciMOLf6f7uesI+lhShSx/S0/cDZYqxO7tKCUJUd9r7iDW/C
+ PJruT5BcXcJ/mH37SonuRRTclY54qhhvBMiBn6OrnvDVpCBq7+CSUgIL2rS+zf7D9Y9u
+ hi9g==
+X-Gm-Message-State: AOJu0YyR/GoA6QoTfY3zSPtgW2GIw8kus3Lg3BPmlDB2ujGY3VJVbhDO
+ kMcJS5NR5cbPTofpp/5KXhVV9cyD9/d3Q8wQq8DrzhK/ezuF1Y4IpP6CZFzoQ/I=
+X-Google-Smtp-Source: AGHT+IHxptHQpkZh6+6eMDOw4wKCcB4jz8FhCEZ9gsJDM3jb/ZeLA4rDWi3iX8eQ3VTf0Xq5AiUkOg==
+X-Received: by 2002:a05:620a:d86:b0:7b1:4fa8:af90 with SMTP id
+ af79cd13be357-7b193efd710mr167872485a.30.1729902737828; 
+ Fri, 25 Oct 2024 17:32:17 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b18d278244sm104125985a.4.2024.10.25.17.32.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Oct 2024 17:32:08 -0700 (PDT)
-Date: Fri, 25 Oct 2024 18:32:04 -0600
+ Fri, 25 Oct 2024 17:32:17 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Marek Vasut <marex@denx.de>, Rasmus Villemoes <ravi@prevas.dk>,
- u-boot@lists.denx.de, Tim Harvey <tharvey@gateworks.com>,
- Heiko Schocher <hs@denx.de>
-Subject: Re: [PATCH] imx8m: set sane default value for SPL_LOAD_FIT_ADDRESS
-Message-ID: <20241026003204.GD4959@bill-the-cat>
-References: <20241024100145.841964-1-ravi@prevas.dk>
- <58754a24-eb1a-4306-a5de-e990539b1717@denx.de>
- <CAOMZO5DtDDOqmWuQbbDWqAaDzszyFsYud-JRGiwr5zeHiXveqQ@mail.gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>, Artur Rojek <artur@conclusive.pl>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
+ Etienne Carriere <etienne.carriere@foss.st.com>, 
+ Eugene Uriev <eugeneuriev@gmail.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
+ Sean Anderson <seanga2@gmail.com>, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>, 
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
+In-Reply-To: <20241021081934.289473-1-sjg@chromium.org>
+References: <20241021081934.289473-1-sjg@chromium.org>
+Subject: Re: [PATCH v4 0/8] Allow showing the memory map
+Message-Id: <172990273419.502739.7844795066224107789.b4-ty@konsulko.com>
+Date: Fri, 25 Oct 2024 18:32:14 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FSyOYqDjPLUdMP66"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5DtDDOqmWuQbbDWqAaDzszyFsYud-JRGiwr5zeHiXveqQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,55 +110,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 21 Oct 2024 10:19:24 +0200, Simon Glass wrote:
 
---FSyOYqDjPLUdMP66
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> This little series adds a new 'memmap' command, intended to show the
+> layout of memory within U-Boot and how much memory is available for
+> loading images.
+> 
+> Changes in v4:
+> - Drop am65x patch as it is not needed
+> - Add patch to export the lmb data structure
+> - Add new patch to show the lmb records
+> 
+> [...]
 
-On Fri, Oct 25, 2024 at 09:24:10PM -0300, Fabio Estevam wrote:
-> On Thu, Oct 24, 2024 at 8:51=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
-> >
-> > On 10/24/24 12:01 PM, Rasmus Villemoes wrote:
-> > > I enabled IMX_HAB on an imx8mp board, but even though I knew about the
-> > > implementation, I forgot that I had to provide a sane value for
-> > > SPL_LOAD_FIT_ADDRESS. The help text for IMX_HAB doesn't mention this
-> > > implicit requirement, and there's no build-time warning; the default
-> > > 0x0 value just ends up being returned from
-> > > board_spl_fit_buffer_addr(), obviously resulting in a non-booting
-> > > board.
-> > >
-> > > The existing imx8m* board configs that set a non-zero value currently
-> > > all use 0x44000000. The actual value doesn't matter too much, but 0 is
-> > > always wrong for imx8m platforms. So just use 0x44000000 as default
-> > > for those platforms.
-> > >
-> > > Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
->=20
-> Applied, thanks.
+Applied to u-boot/master, thanks!
 
-In that moving to a different default is a tangential cleanup, I'm fine
-with this.
-
---=20
+-- 
 Tom
 
---FSyOYqDjPLUdMP66
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmccOHkACgkQFHw5/5Y0
-tyyKDQv/ZrINtzwS87+/e4w91PsDVgVK+PiQ220mkEZHZKJDFRcnpqlxfC+KNTqZ
-auP04yT8zW+FT69pt8BpVtIntsGHNsRAY3Sp0jNcBBVFYjGlxk3ZadLwqBhK+B3q
-NZPKu9IWVQUWbnU/fMkx/vnFatU0Ai2DDmyQOGhcj9pP4FQUQvVS90ZFzQqntJSi
-qb/o+ydDlsZoejMIdcuUU9tnYM5NS4hP5BfB4dub87StufHJIhPU0DHq1yhSDW26
-PinHOnSu4LuSbHcII5oXJexVdsLR3wm8/6J6RehDlDteDOilA2H9TnL1vRRAaKrd
-/j9ND4kdtaG7ca8KJzs36AUaOF1IFtyvCg4u1oNZhbeyndoKBFOkyOO4j3xBbUtg
-nPk5roTjyffGEbRswlIXQ2QW/Hz3xjoiGiTcFC2vrnkoe9gN+z9oNHsIiTfembxm
-tqUgue0hA1v1kZMPP7rdPS5qzEJ2mVFIU+td7j34WYCq64iytUWUyG5OZvc30mLZ
-vgPbwtmc
-=fGHw
------END PGP SIGNATURE-----
-
---FSyOYqDjPLUdMP66--
