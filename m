@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11793D10BFF
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 16:17:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A651AD10BFF
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 16:17:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76F2489031;
+	by phobos.denx.de (Postfix) with ESMTP id DD2F689046;
 	Sat, 26 Oct 2024 18:16:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZHHDJDuQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ezLSwLOO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17B8F88F70; Sat, 26 Oct 2024 17:52:38 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 9954B88D94; Sat, 26 Oct 2024 17:52:41 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2923B88EFD
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 17:52:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31D2188FC7
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 17:52:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9a017a382bso52341066b.3
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 08:52:36 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5c935ca63ceso424852a12.0
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 08:52:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729957955; x=1730562755; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1729957950; x=1730562750; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+Q7JtJi6Wqz4MrkVheVk4/io0wAVG04EhwWPdjQa8n0=;
- b=ZHHDJDuQJEuhjGch/wSX/zN5572OlJfk3Gel+MDYZs1XeXyzitqa4r/62oS5nhYIgl
- kc3Hx40mHBzKBpOAtVfKLALAh2zqT38DK0Z/+7elk0SEk0ySz6JbNhVMlHUSAmDfeLuz
- fz2Vd/ItpjNqerP1/TftrRPQ0zyiNHMEXWWQrM47ozDfNuW8waDjwoDcy0pUA2s9NCR6
- 9SdzyX48cvnu/XScMKHornj2tnJaUhE04olf9zL1abHvEwUFQ0PuCfhLsGAiHVIZY/0F
- i4UokTn6YJkpPcSq7HzI2jG7ULSCBBCxGBYjbu8iVyhv03t7s29L4XnzXh5O9dSad11A
- xggg==
+ bh=6RAMOhj/idd80sqhfHlcb3SXLEJcDSjxjxF/uiyEviM=;
+ b=ezLSwLOO8iqMLIccqbQBb5lAErI+WU8Yz0ZxEFMbkCD6hjm8igW3GNSditp05fXKNf
+ EwmFG2YoeRzWAEoty+Y4DiU+M2Isfn+AURW8hK6ddlcxeAa0WcnNyl4Jyz/+wa0SNdnm
+ pAgA99EZdtBSYq/sM5gjOclrUs9s/+r0LSAUwo4n0Mm/0t0DAV7HB78oHsXpzFZZXAwZ
+ wPt8llPaWNuPNiBdc7RUPH3DzmVNy7TQ70BiwRlJQ8BRD4e2j8IPE/FrmFL3/AM/mHUU
+ E49KAjAb6d+D8alzxNQs+p56RwU2Re9NhS6tPMHv8LHR8OaYK1xFJ57EoczSEdRbzJaW
+ z5pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729957955; x=1730562755;
+ d=1e100.net; s=20230601; t=1729957950; x=1730562750;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+Q7JtJi6Wqz4MrkVheVk4/io0wAVG04EhwWPdjQa8n0=;
- b=stk37Ppn/qVCX96jw5hFH7IHASMs2OS/HQK/88Jt/3XtqFXOgA9wgnAKMgTiU/lyxQ
- N92IjfhysJwzIS1bCVSDIqz1tFGXmdtsN6oHf03BVZ0ubAJ5KirHD5/QF8KZpv31VUYG
- uBHBDQgPo30qvVbCDwrrc9fMxfS9uftvxFci9xudkS0OLVYunO8QFBFtvUR78ZsfqL2Y
- XAOC1W9G8UwBfUWXs7i3G6Dayw7xpC9PZn9AemofMKA5kQyZsu2P3S3xUfFM1o8F0Ffg
- f9WWjEjOaZ6dcLkZs9OjySfRh53Q0C8a9sj9souwXztefDxNrfk8wnzCySPRfp/mDBA3
- fHMg==
-X-Gm-Message-State: AOJu0Yzykzce/9PAfzwshZYw4m3OGHB05yyivn7w7QHP8EmilxiO2WKb
- h/Rh3ZJGDicS6qs10fOhXVvy0bLAmMYmU+QzQ5WQUD5qdldw9i8YV6Jw2Q==
-X-Google-Smtp-Source: AGHT+IF7DcYDsbyv1SG1EV6cC50vq2MATZ1nJNBK4WVAY2YX7qR//knlRYgAQ0dArbi4UTkyIa7n0g==
-X-Received: by 2002:a05:6402:13cb:b0:5cb:b261:c35a with SMTP id
- 4fb4d7f45d1cf-5cbbfa71aa0mr931448a12.5.1729957955356; 
- Sat, 26 Oct 2024 08:52:35 -0700 (PDT)
+ bh=6RAMOhj/idd80sqhfHlcb3SXLEJcDSjxjxF/uiyEviM=;
+ b=BtOsIazUDUHSkC1qCveMqtSdknIRgSUSpwRHIBDiVBVtm/gjp2T4g/H6eApNyTpn2G
+ PmUNcAew8Q6Vf9htF2lLyN4MfP7efF5Y0i0MERbqfJKWCGroIZMdXTxEZhXumC0mffRM
+ HZreZX3bKSm6xjW1q02SBGIjoNho69gnZGFvVz/tIwSCG5outan8iaGTspxZrNq3qYPn
+ HVIejRNTumw9Z0dSClZiZNr219BqGjseqOpyZFvyI4jCp3yLGLMCxvIdBqhr03axMWVY
+ iKFf5D27IcY4p4/L/D9mJUs0foMZKNAwyo6SqdqTH6NfaHRxRXx75bCP/tOG9/GzeD0C
+ +E3g==
+X-Gm-Message-State: AOJu0YxYg/fSSinYdDxT7BWISTlURNuJZTcUyWBLqMpnzE/RIiVhBOko
+ j/BmwUGSwhQGTWaBIVJAP/Tj/thlePeJcyEDuqg3FMgizT603+dsZzq8lA==
+X-Google-Smtp-Source: AGHT+IHmC4oUonlgnyxXAm0oa6JrbAtySChbL4MgELaRGimJbbO/KKnOhPgCQFPMcExWfsFwFO3VFQ==
+X-Received: by 2002:a05:6402:51cb:b0:5c3:eb29:83ce with SMTP id
+ 4fb4d7f45d1cf-5cbbfacb548mr930117a12.9.1729957950237; 
+ Sat, 26 Oct 2024 08:52:30 -0700 (PDT)
 Received: from 6c1d2e1f4cf4.v.cablecom.net (84-72-156-211.dclient.hispeed.ch.
  [84.72.156.211]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cbb63197casm1620179a12.63.2024.10.26.08.52.32
+ 4fb4d7f45d1cf-5cbb63197casm1620179a12.63.2024.10.26.08.52.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 26 Oct 2024 08:52:34 -0700 (PDT)
+ Sat, 26 Oct 2024 08:52:29 -0700 (PDT)
 From: Lothar Rubusch <l.rubusch@gmail.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, marex@denx.de,
  simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  sumit.garg@linaro.org
 Cc: sjg@chromium.org, xypron.glpk@gmx.de, michal.simek@amd.com,
  jit.loon.lim@intel.com, barnas@google.com, l.rubusch@gmail.com
-Subject: [PATCH v4 05/11] ARM: socfpga: add Mercury+ AA1 boot scripts
-Date: Sat, 26 Oct 2024 15:52:14 +0000
-Message-Id: <20241026155220.26300-6-l.rubusch@gmail.com>
+Subject: [PATCH v4 03/11] ARM: dts: socfpga: add Mercury+ AA1 for u-boot dts
+Date: Sat, 26 Oct 2024 15:52:12 +0000
+Message-Id: <20241026155220.26300-4-l.rubusch@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241026155220.26300-1-l.rubusch@gmail.com>
 References: <20241026155220.26300-1-l.rubusch@gmail.com>
@@ -95,51 +95,537 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add bootscripts to boot Enclustra SoMs from MicroSD card or QSPI flash.
-MicroSD card as bood device here covers the cases of sdmmc or emmc as
-such boot media.
+Introduce u-boot specific device-tree files for Enclustra Mercury+ AA1
+SoMs (Intel/arria10).
 
+Generic device-tree fragments for linux and U-boot shall be provided in
+dts/upstream. The selection of the generic device-tree fragments depends
+on a selected boot-mode and a selected carrier board.
+
+On Intel/Arria10 a handoff setup is needed for initialization of
+various clock / pinmux / DRAM settings only used by U-Boot provided by
+the current patch.
+
+Signed-off-by: Andreas Buerkler <andreas.buerkler@enclustra.com>
 Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
 ---
- board/enclustra/bootscripts/qspi-aa1.cmd | 12 ++++++++++++
- board/enclustra/bootscripts/sd-aa1.cmd   |  9 +++++++++
- 2 files changed, 21 insertions(+)
- create mode 100644 board/enclustra/bootscripts/qspi-aa1.cmd
- create mode 100644 board/enclustra/bootscripts/sd-aa1.cmd
+ ..._arria10_enclustra_mercury_aa1-u-boot.dtsi |  45 +++
+ .../socfpga_arria10_enclustra_mercury_aa1.dts |  45 +++
+ .../socfpga_arria10_mercury_aa1-u-boot.dtsi   |  19 ++
+ .../dts/socfpga_arria10_mercury_aa1_handoff.h | 305 ++++++++++++++++++
+ board/enclustra/mercury_aa1/Kconfig           |  37 +++
+ board/enclustra/mercury_aa1/MAINTAINERS       |   2 +
+ 6 files changed, 453 insertions(+)
+ create mode 100644 arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1-u-boot.dtsi
+ create mode 100644 arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
+ create mode 100644 arch/arm/dts/socfpga_arria10_mercury_aa1_handoff.h
 
-diff --git a/board/enclustra/bootscripts/qspi-aa1.cmd b/board/enclustra/bootscripts/qspi-aa1.cmd
+diff --git a/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1-u-boot.dtsi b/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1-u-boot.dtsi
 new file mode 100644
-index 0000000000..9633754491
+index 0000000000..6e38286572
 --- /dev/null
-+++ b/board/enclustra/bootscripts/qspi-aa1.cmd
-@@ -0,0 +1,12 @@
-+# This is an example input file for boot.scr generation.
-+# Generate boot.scr
-+# ./tools/mkimage -A arm -O linux -T script -C none -a 0 -e 0 -d board/enclustra/bootscripts/qspi-aa1.cmd boot.scr
-+#
-+# Note: The needed variables need to be set in the environment.
-+bridge enable
-+sf probe
-+sf read $kernel_addr_r $qspi_offset_addr_kernel $kernel_size
-+sf read $fdt_addr_r $qspi_offset_addr_devicetree $fdt_size
-+sf read $rootfs_addr_r $qspi_offset_addr_rootfs $rootfs_size
-+run fdtload_qspi
-+bootm $kernel_addr_r $rootfs_addr_r $fdt_addr_r
-diff --git a/board/enclustra/bootscripts/sd-aa1.cmd b/board/enclustra/bootscripts/sd-aa1.cmd
++++ b/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1-u-boot.dtsi
+@@ -0,0 +1,45 @@
++// SPDX-License-Identifier: GPL-2.0+ OR MIT
++/*
++ * Copyright (C) 2024 Lothar Rubusch <l.rubusch@gmail.com>
++ */
++
++/* Arria10 handoff (u-boot) */
++#include "socfpga_arria10_mercury_aa1_handoff.h"
++#include "socfpga_arria10-handoff.dtsi"
++#include "socfpga_arria10_handoff_u-boot.dtsi"
++#include "socfpga_arria10_mercury_aa1-u-boot.dtsi"
++
++/* Specific boot-mode (u-boot) */
++#if IS_ENABLED(CONFIG_ENCLUSTRA_SDMMC) || IS_ENABLED(CONFIG_ENCLUSTRA_EMMC)
++
++/ {
++	fs_loader0: fs-loader {
++		bootph-all;
++		compatible = "u-boot,fs-loader";
++		phandlepart = <&mmc 1>;
++	};
++};
++
++&fpga_mgr {
++	bootph-all;
++	firmware-loader = <&fs_loader0>;
++	altr,bitstream = "fpga.itb";
++};
++
++#elif IS_ENABLED(CONFIG_ENCLUSTRA_QSPI)
++
++/ {
++	fs_loader0: fs-loader {
++		bootph-all;
++		compatible = "u-boot,fs-loader";
++		sfconfig = <0 0 50000000 3>;
++	};
++};
++
++&fpga_mgr {
++	bootph-all;
++	firmware-loader = <&fs_loader0>;
++	altr,bitstream = "300000";
++};
++
++#endif
+diff --git a/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts b/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
 new file mode 100644
-index 0000000000..604ae0760a
+index 0000000000..e8cc51a7b8
 --- /dev/null
-+++ b/board/enclustra/bootscripts/sd-aa1.cmd
-@@ -0,0 +1,9 @@
-+# This is an example input file for boot.scr generation.
-+# Generate boot.scr
-+# ./tools/mkimage -A arm -O linux -T script -C none -a 0 -e 0 -n "U-boot mmc start script" -d board/enclustra/bootscripts/sd-aa1.cmd boot.scr
-+#
-+# Note: The needed variables need to be set in the environment.
-+bridge enable
-+load mmc $devnum:$distro_bootpart $kernel_addr_r Image
-+load mmc $devnum:$distro_bootpart $fdt_addr_r $fdtfile
-+booti $kernel_addr_r - $fdt_addr_r
++++ b/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
+@@ -0,0 +1,45 @@
++// SPDX-License-Identifier: GPL-2.0+ OR MIT
++/*
++ * Copyright (C) 2024 Lothar Rubusch <l.rubusch@gmail.com>
++ */
++
++/dts-v1/;
++
++/* The arria10 family */
++#include "socfpga/socfpga_arria10_mercury_aa1.dtsi"
++
++/ {
++	aliases {
++		ethernet0 = &gmac0;
++		serial0 = &uart0;
++		serial1 = &uart1;
++		i2c0 = &i2c1;
++		i2c1 = &i2c0;
++		spi0 = &qspi;
++	};
++};
++
++&qspi {
++	bootph-all;
++	status = "okay";
++	flash0: s25fl512s@0 {
++		bootph-all;
++
++		cdns,page-size = <256>;
++		cdns,block-size = <16>;
++
++		cdns,tshsl-ns = <200>;
++		cdns,tsd2d-ns = <255>;
++		cdns,tchsh-ns = <20>;
++		cdns,tslch-ns = <20>;
++	};
++};
++
++/* Carrier board support */
++#if IS_ENABLED(CONFIG_ENCLUSTRA_PE1)
++# include "socfpga/socfpga_enclustra_mercury_pe1.dtsi"
++#elif IS_ENABLED(CONFIG_ENCLUSTRA_PE3)
++# include "socfpga/socfpga_enclustra_mercury_pe3.dtsi"
++#elif IS_ENABLED(CONFIG_ENCLUSTRA_ST1)
++# include "socfpga/socfpga_enclustra_mercury_st1.dtsi"
++#endif
+diff --git a/arch/arm/dts/socfpga_arria10_mercury_aa1-u-boot.dtsi b/arch/arm/dts/socfpga_arria10_mercury_aa1-u-boot.dtsi
+index 8866df3ddd..ad5b5a87e0 100644
+--- a/arch/arm/dts/socfpga_arria10_mercury_aa1-u-boot.dtsi
++++ b/arch/arm/dts/socfpga_arria10_mercury_aa1-u-boot.dtsi
+@@ -33,6 +33,21 @@
+ 	bootph-all;
+ };
+ 
++&l4_main_clk {
++	bootph-all;
++};
++
++&qspi_clk {
++	bootph-all;
++};
++
++&qspi {
++	bootph-all;
++	flash0: s25fl512s@0 {
++		bootph-all;
++	};
++};
++
+ &mmc {
+ 	bootph-all;
+ };
+@@ -52,3 +67,7 @@
+ &uart1 {
+ 	bootph-all;
+ };
++
++&watchdog1 {
++	bootph-all;
++};
+diff --git a/arch/arm/dts/socfpga_arria10_mercury_aa1_handoff.h b/arch/arm/dts/socfpga_arria10_mercury_aa1_handoff.h
+new file mode 100644
+index 0000000000..b7cdb74792
+--- /dev/null
++++ b/arch/arm/dts/socfpga_arria10_mercury_aa1_handoff.h
+@@ -0,0 +1,305 @@
++/* SPDX-License-Identifier: BSD-3-Clause */
++/*
++ * Intel Arria 10 SoCFPGA configuration
++ */
++
++#ifndef __SOCFPGA_ARRIA10_CONFIG_H__
++#define __SOCFPGA_ARRIA10_CONFIG_H__
++
++/* Clocks */
++#define CB_INTOSC_LS_CLK_HZ 60000000
++#define EMAC0_CLK_HZ 250000000
++#define EMAC1_CLK_HZ 250000000
++#define EMAC2_CLK_HZ 250000000
++#define EOSC1_CLK_HZ 33333000
++#define F2H_FREE_CLK_HZ 200000000
++#define H2F_USER0_CLK_HZ 100000000
++#define H2F_USER1_CLK_HZ 50000000
++#define L3_MAIN_FREE_CLK_HZ 400000000
++#define SDMMC_CLK_HZ 200000000
++#define TPIU_CLK_HZ 100000000
++#define MAINPLLGRP_CNTR15CLK_CNT 900
++#define MAINPLLGRP_CNTR2CLK_CNT 900
++#define MAINPLLGRP_CNTR3CLK_CNT 900
++#define MAINPLLGRP_CNTR4CLK_CNT 900
++#define MAINPLLGRP_CNTR5CLK_CNT 900
++#define MAINPLLGRP_CNTR6CLK_CNT 9
++#define MAINPLLGRP_CNTR7CLK_CNT 19
++#define MAINPLLGRP_CNTR7CLK_SRC 0
++#define MAINPLLGRP_CNTR8CLK_CNT 39
++#define MAINPLLGRP_CNTR9CLK_CNT 900
++#define MAINPLLGRP_CNTR9CLK_SRC 0
++#define MAINPLLGRP_MPUCLK_CNT 0
++#define MAINPLLGRP_MPUCLK_SRC 0
++#define MAINPLLGRP_NOCCLK_CNT 0
++#define MAINPLLGRP_NOCCLK_SRC 0
++#define MAINPLLGRP_NOCDIV_CSATCLK 0
++#define MAINPLLGRP_NOCDIV_CSPDBGCLK 1
++#define MAINPLLGRP_NOCDIV_CSTRACECLK 0
++#define MAINPLLGRP_NOCDIV_L4MAINCLK 0
++#define MAINPLLGRP_NOCDIV_L4MPCLK 1
++#define MAINPLLGRP_NOCDIV_L4SPCLK 2
++#define MAINPLLGRP_VCO0_PSRC 0
++#define MAINPLLGRP_VCO1_DENOM 32
++#define MAINPLLGRP_VCO1_NUMER 1980
++#define PERPLLGRP_CNTR2CLK_CNT 7
++#define PERPLLGRP_CNTR2CLK_SRC 1
++#define PERPLLGRP_CNTR3CLK_CNT 900
++#define PERPLLGRP_CNTR3CLK_SRC 1
++#define PERPLLGRP_CNTR4CLK_CNT 19
++#define PERPLLGRP_CNTR4CLK_SRC 1
++#define PERPLLGRP_CNTR5CLK_CNT 499
++#define PERPLLGRP_CNTR5CLK_SRC 1
++#define PERPLLGRP_CNTR6CLK_CNT 900
++#define PERPLLGRP_CNTR6CLK_SRC 0
++#define PERPLLGRP_CNTR7CLK_CNT 900
++#define PERPLLGRP_CNTR8CLK_CNT 900
++#define PERPLLGRP_CNTR8CLK_SRC 0
++#define PERPLLGRP_CNTR9CLK_CNT 900
++#define PERPLLGRP_EMACCTL_EMAC0SEL 0
++#define PERPLLGRP_EMACCTL_EMAC1SEL 0
++#define PERPLLGRP_EMACCTL_EMAC2SEL 0
++#define PERPLLGRP_GPIODIV_GPIODBCLK 32000
++#define PERPLLGRP_VCO0_PSRC 0
++#define PERPLLGRP_VCO1_DENOM 32
++#define PERPLLGRP_VCO1_NUMER 1980
++#define CLKMGR_TESTIOCTRL_DEBUGCLKSEL 16
++#define CLKMGR_TESTIOCTRL_MAINCLKSEL 8
++#define CLKMGR_TESTIOCTRL_PERICLKSEL 8
++#define ALTERAGRP_MPUCLK_MAINCNT 1
++#define ALTERAGRP_MPUCLK_PERICNT 900
++#define ALTERAGRP_NOCCLK_MAINCNT 4
++#define ALTERAGRP_NOCCLK_PERICNT 900
++#define ALTERAGRP_MPUCLK ((ALTERAGRP_MPUCLK_PERICNT << 16) | \
++	(ALTERAGRP_MPUCLK_MAINCNT))
++#define ALTERAGRP_NOCCLK ((ALTERAGRP_NOCCLK_PERICNT << 16) | \
++	(ALTERAGRP_NOCCLK_MAINCNT))
++
++/* Pin Mux Configuration */
++#define CONFIG_IO_10_INPUT_BUF_EN 1
++#define CONFIG_IO_10_PD_DRV_STRG 10
++#define CONFIG_IO_10_PD_SLW_RT 1
++#define CONFIG_IO_10_PU_DRV_STRG 8
++#define CONFIG_IO_10_PU_SLW_RT 1
++#define CONFIG_IO_10_RTRIM 1
++#define CONFIG_IO_10_WK_PU_EN 0
++#define CONFIG_IO_11_INPUT_BUF_EN 1
++#define CONFIG_IO_11_PD_DRV_STRG 10
++#define CONFIG_IO_11_PD_SLW_RT 1
++#define CONFIG_IO_11_PU_DRV_STRG 8
++#define CONFIG_IO_11_PU_SLW_RT 1
++#define CONFIG_IO_11_RTRIM 1
++#define CONFIG_IO_11_WK_PU_EN 0
++#define CONFIG_IO_12_INPUT_BUF_EN 1
++#define CONFIG_IO_12_PD_DRV_STRG 10
++#define CONFIG_IO_12_PD_SLW_RT 1
++#define CONFIG_IO_12_PU_DRV_STRG 8
++#define CONFIG_IO_12_PU_SLW_RT 1
++#define CONFIG_IO_12_RTRIM 1
++#define CONFIG_IO_12_WK_PU_EN 0
++#define CONFIG_IO_13_INPUT_BUF_EN 1
++#define CONFIG_IO_13_PD_DRV_STRG 10
++#define CONFIG_IO_13_PD_SLW_RT 1
++#define CONFIG_IO_13_PU_DRV_STRG 8
++#define CONFIG_IO_13_PU_SLW_RT 1
++#define CONFIG_IO_13_RTRIM 1
++#define CONFIG_IO_13_WK_PU_EN 0
++#define CONFIG_IO_14_INPUT_BUF_EN 1
++#define CONFIG_IO_14_PD_DRV_STRG 10
++#define CONFIG_IO_14_PD_SLW_RT 1
++#define CONFIG_IO_14_PU_DRV_STRG 8
++#define CONFIG_IO_14_PU_SLW_RT 1
++#define CONFIG_IO_14_RTRIM 1
++#define CONFIG_IO_14_WK_PU_EN 0
++#define CONFIG_IO_15_INPUT_BUF_EN 1
++#define CONFIG_IO_15_PD_DRV_STRG 10
++#define CONFIG_IO_15_PD_SLW_RT 1
++#define CONFIG_IO_15_PU_DRV_STRG 8
++#define CONFIG_IO_15_PU_SLW_RT 1
++#define CONFIG_IO_15_RTRIM 1
++#define CONFIG_IO_15_WK_PU_EN 0
++#define CONFIG_IO_16_INPUT_BUF_EN 0
++#define CONFIG_IO_16_PD_DRV_STRG 10
++#define CONFIG_IO_16_PD_SLW_RT 1
++#define CONFIG_IO_16_PU_DRV_STRG 8
++#define CONFIG_IO_16_PU_SLW_RT 1
++#define CONFIG_IO_16_RTRIM 1
++#define CONFIG_IO_16_WK_PU_EN 0
++#define CONFIG_IO_17_INPUT_BUF_EN 1
++#define CONFIG_IO_17_PD_DRV_STRG 10
++#define CONFIG_IO_17_PD_SLW_RT 1
++#define CONFIG_IO_17_PU_DRV_STRG 8
++#define CONFIG_IO_17_PU_SLW_RT 1
++#define CONFIG_IO_17_RTRIM 1
++#define CONFIG_IO_17_WK_PU_EN 0
++#define CONFIG_IO_1_INPUT_BUF_EN 1
++#define CONFIG_IO_1_PD_DRV_STRG 10
++#define CONFIG_IO_1_PD_SLW_RT 0
++#define CONFIG_IO_1_PU_DRV_STRG 8
++#define CONFIG_IO_1_PU_SLW_RT 0
++#define CONFIG_IO_1_RTRIM 1
++#define CONFIG_IO_1_WK_PU_EN 1
++#define CONFIG_IO_2_INPUT_BUF_EN 1
++#define CONFIG_IO_2_PD_DRV_STRG 10
++#define CONFIG_IO_2_PD_SLW_RT 0
++#define CONFIG_IO_2_PU_DRV_STRG 8
++#define CONFIG_IO_2_PU_SLW_RT 0
++#define CONFIG_IO_2_RTRIM 1
++#define CONFIG_IO_2_WK_PU_EN 1
++#define CONFIG_IO_3_INPUT_BUF_EN 1
++#define CONFIG_IO_3_PD_DRV_STRG 10
++#define CONFIG_IO_3_PD_SLW_RT 0
++#define CONFIG_IO_3_PU_DRV_STRG 8
++#define CONFIG_IO_3_PU_SLW_RT 0
++#define CONFIG_IO_3_RTRIM 1
++#define CONFIG_IO_3_WK_PU_EN 1
++#define CONFIG_IO_4_INPUT_BUF_EN 1
++#define CONFIG_IO_4_PD_DRV_STRG 10
++#define CONFIG_IO_4_PD_SLW_RT 1
++#define CONFIG_IO_4_PU_DRV_STRG 8
++#define CONFIG_IO_4_PU_SLW_RT 1
++#define CONFIG_IO_4_RTRIM 1
++#define CONFIG_IO_4_WK_PU_EN 0
++#define CONFIG_IO_5_INPUT_BUF_EN 1
++#define CONFIG_IO_5_PD_DRV_STRG 10
++#define CONFIG_IO_5_PD_SLW_RT 1
++#define CONFIG_IO_5_PU_DRV_STRG 8
++#define CONFIG_IO_5_PU_SLW_RT 1
++#define CONFIG_IO_5_RTRIM 1
++#define CONFIG_IO_5_WK_PU_EN 0
++#define CONFIG_IO_6_INPUT_BUF_EN 0
++#define CONFIG_IO_6_PD_DRV_STRG 10
++#define CONFIG_IO_6_PD_SLW_RT 1
++#define CONFIG_IO_6_PU_DRV_STRG 8
++#define CONFIG_IO_6_PU_SLW_RT 1
++#define CONFIG_IO_6_RTRIM 1
++#define CONFIG_IO_6_WK_PU_EN 0
++#define CONFIG_IO_7_INPUT_BUF_EN 1
++#define CONFIG_IO_7_PD_DRV_STRG 10
++#define CONFIG_IO_7_PD_SLW_RT 1
++#define CONFIG_IO_7_PU_DRV_STRG 8
++#define CONFIG_IO_7_PU_SLW_RT 1
++#define CONFIG_IO_7_RTRIM 1
++#define CONFIG_IO_7_WK_PU_EN 0
++#define CONFIG_IO_8_INPUT_BUF_EN 1
++#define CONFIG_IO_8_PD_DRV_STRG 10
++#define CONFIG_IO_8_PD_SLW_RT 1
++#define CONFIG_IO_8_PU_DRV_STRG 8
++#define CONFIG_IO_8_PU_SLW_RT 1
++#define CONFIG_IO_8_RTRIM 1
++#define CONFIG_IO_8_WK_PU_EN 0
++#define CONFIG_IO_9_INPUT_BUF_EN 1
++#define CONFIG_IO_9_PD_DRV_STRG 10
++#define CONFIG_IO_9_PD_SLW_RT 1
++#define CONFIG_IO_9_PU_DRV_STRG 8
++#define CONFIG_IO_9_PU_SLW_RT 1
++#define CONFIG_IO_9_RTRIM 1
++#define CONFIG_IO_9_WK_PU_EN 0
++#define CONFIG_IO_BANK_VOLTAGE_SEL_CLKRST_IO 1
++#define CONFIG_IO_BANK_VOLTAGE_SEL_PERI_IO 1
++#define PINMUX_DEDICATED_IO_10_SEL 15
++#define PINMUX_DEDICATED_IO_11_SEL 15
++#define PINMUX_DEDICATED_IO_12_SEL 15
++#define PINMUX_DEDICATED_IO_13_SEL 15
++#define PINMUX_DEDICATED_IO_14_SEL 15
++#define PINMUX_DEDICATED_IO_15_SEL 15
++#define PINMUX_DEDICATED_IO_16_SEL 13
++#define PINMUX_DEDICATED_IO_17_SEL 13
++#define PINMUX_DEDICATED_IO_4_SEL 8
++#define PINMUX_DEDICATED_IO_5_SEL 8
++#define PINMUX_DEDICATED_IO_6_SEL 8
++#define PINMUX_DEDICATED_IO_7_SEL 8
++#define PINMUX_DEDICATED_IO_8_SEL 8
++#define PINMUX_DEDICATED_IO_9_SEL 8
++#define PINMUX_I2C0_USEFPGA_SEL 0
++#define PINMUX_I2C1_USEFPGA_SEL 0
++#define PINMUX_I2CEMAC0_USEFPGA_SEL 0
++#define PINMUX_I2CEMAC1_USEFPGA_SEL 0
++#define PINMUX_I2CEMAC2_USEFPGA_SEL 0
++#define PINMUX_NAND_USEFPGA_SEL 0
++#define PINMUX_PLL_CLOCK_OUT_USEFPGA_SEL 0
++#define PINMUX_QSPI_USEFPGA_SEL 0
++#define PINMUX_RGMII0_USEFPGA_SEL 0
++#define PINMUX_RGMII1_USEFPGA_SEL 0
++#define PINMUX_RGMII2_USEFPGA_SEL 0
++#define PINMUX_SDMMC_USEFPGA_SEL 0
++#define PINMUX_SHARED_IO_Q1_10_SEL 8
++#define PINMUX_SHARED_IO_Q1_11_SEL 8
++#define PINMUX_SHARED_IO_Q1_12_SEL 8
++#define PINMUX_SHARED_IO_Q1_1_SEL 8
++#define PINMUX_SHARED_IO_Q1_2_SEL 8
++#define PINMUX_SHARED_IO_Q1_3_SEL 8
++#define PINMUX_SHARED_IO_Q1_4_SEL 8
++#define PINMUX_SHARED_IO_Q1_5_SEL 8
++#define PINMUX_SHARED_IO_Q1_6_SEL 8
++#define PINMUX_SHARED_IO_Q1_7_SEL 8
++#define PINMUX_SHARED_IO_Q1_8_SEL 8
++#define PINMUX_SHARED_IO_Q1_9_SEL 8
++#define PINMUX_SHARED_IO_Q2_10_SEL 4
++#define PINMUX_SHARED_IO_Q2_11_SEL 4
++#define PINMUX_SHARED_IO_Q2_12_SEL 4
++#define PINMUX_SHARED_IO_Q2_1_SEL 4
++#define PINMUX_SHARED_IO_Q2_2_SEL 4
++#define PINMUX_SHARED_IO_Q2_3_SEL 4
++#define PINMUX_SHARED_IO_Q2_4_SEL 4
++#define PINMUX_SHARED_IO_Q2_5_SEL 4
++#define PINMUX_SHARED_IO_Q2_6_SEL 4
++#define PINMUX_SHARED_IO_Q2_7_SEL 4
++#define PINMUX_SHARED_IO_Q2_8_SEL 4
++#define PINMUX_SHARED_IO_Q2_9_SEL 4
++#define PINMUX_SHARED_IO_Q3_10_SEL 15
++#define PINMUX_SHARED_IO_Q3_11_SEL 1
++#define PINMUX_SHARED_IO_Q3_12_SEL 1
++#define PINMUX_SHARED_IO_Q3_1_SEL 15
++#define PINMUX_SHARED_IO_Q3_2_SEL 15
++#define PINMUX_SHARED_IO_Q3_3_SEL 15
++#define PINMUX_SHARED_IO_Q3_4_SEL 15
++#define PINMUX_SHARED_IO_Q3_5_SEL 15
++#define PINMUX_SHARED_IO_Q3_6_SEL 15
++#define PINMUX_SHARED_IO_Q3_7_SEL 0
++#define PINMUX_SHARED_IO_Q3_8_SEL 0
++#define PINMUX_SHARED_IO_Q3_9_SEL 15
++#define PINMUX_SHARED_IO_Q4_10_SEL 15
++#define PINMUX_SHARED_IO_Q4_11_SEL 15
++#define PINMUX_SHARED_IO_Q4_12_SEL 15
++#define PINMUX_SHARED_IO_Q4_1_SEL 10
++#define PINMUX_SHARED_IO_Q4_2_SEL 10
++#define PINMUX_SHARED_IO_Q4_3_SEL 10
++#define PINMUX_SHARED_IO_Q4_4_SEL 10
++#define PINMUX_SHARED_IO_Q4_5_SEL 10
++#define PINMUX_SHARED_IO_Q4_6_SEL 10
++#define PINMUX_SHARED_IO_Q4_7_SEL 15
++#define PINMUX_SHARED_IO_Q4_8_SEL 15
++#define PINMUX_SHARED_IO_Q4_9_SEL 15
++#define PINMUX_SPIM0_USEFPGA_SEL 0
++#define PINMUX_SPIM1_USEFPGA_SEL 0
++#define PINMUX_SPIS0_USEFPGA_SEL 0
++#define PINMUX_SPIS1_USEFPGA_SEL 0
++#define PINMUX_UART0_USEFPGA_SEL 0
++#define PINMUX_UART1_USEFPGA_SEL 0
++#define PINMUX_USB0_USEFPGA_SEL 0
++#define PINMUX_USB1_USEFPGA_SEL 0
++
++/* Bridge Configuration */
++#define F2H_AXI_SLAVE 0
++#define F2SDRAM0_AXI_SLAVE 0
++#define F2SDRAM1_AXI_SLAVE 0
++#define F2SDRAM2_AXI_SLAVE 0
++#define H2F_AXI_MASTER 1
++#define LWH2F_AXI_MASTER 1
++
++/* Voltage Select for Config IO */
++#define CONFIG_IO_BANK_VSEL \
++	(((CONFIG_IO_BANK_VOLTAGE_SEL_CLKRST_IO & 0x3) << 8) | \
++	(CONFIG_IO_BANK_VOLTAGE_SEL_PERI_IO & 0x3))
++
++/* Macro for Config IO bit mapping */
++#define CONFIG_IO_MACRO(NAME) (((NAME ## _RTRIM & 0x7) << 19) | \
++	((NAME ## _INPUT_BUF_EN & 0x3) << 17) | \
++	((NAME ## _WK_PU_EN & 0x1) << 16) | \
++	((NAME ## _PU_SLW_RT & 0x1) << 13) | \
++	((NAME ## _PU_DRV_STRG & 0x1f) << 8) | \
++	((NAME ## _PD_SLW_RT & 0x1) << 5) | \
++	(NAME ## _PD_DRV_STRG & 0x1f))
++
++#endif /* __SOCFPGA_ARRIA10_CONFIG_H__ */
+diff --git a/board/enclustra/mercury_aa1/Kconfig b/board/enclustra/mercury_aa1/Kconfig
+index 40c7cb2687..a5f3c2a051 100644
+--- a/board/enclustra/mercury_aa1/Kconfig
++++ b/board/enclustra/mercury_aa1/Kconfig
+@@ -12,4 +12,41 @@ config SYS_VENDOR
+ config SYS_CONFIG_NAME
+ 	default "socfpga_mercury_aa1"
+ 
++choice
++	prompt "Mercury+ AA1 base-board"
++	default ENCLUSTRA_PE1
++	help
++	  Select the base-board for Mercury+ AA1.
++
++config ENCLUSTRA_PE1
++	bool "Mercury+ PE1"
++
++config ENCLUSTRA_PE3
++	bool "Mercury+ PE3"
++
++config ENCLUSTRA_ST1
++	bool "Mercury+ ST1"
++
++config ENCLUSTRA_CUSTOM_BASE
++	bool "Customized base-board"
++
++endchoice
++
++choice
++	prompt "Mercury+ AA1 boot-mode"
++	default ENCLUSTRA_SDMMC
++	help
++	  Select the boot-mode for the Mercury+ AA1 setup.
++
++config ENCLUSTRA_SDMMC
++	bool "SD card"
++
++config ENCLUSTRA_EMMC
++	bool "eMMC"
++
++config ENCLUSTRA_QSPI
++	bool "QSPI flash"
++
++endchoice
++
+ endif
+diff --git a/board/enclustra/mercury_aa1/MAINTAINERS b/board/enclustra/mercury_aa1/MAINTAINERS
+index 13baf949ab..f765530770 100644
+--- a/board/enclustra/mercury_aa1/MAINTAINERS
++++ b/board/enclustra/mercury_aa1/MAINTAINERS
+@@ -1,6 +1,8 @@
+ Enclustra Mercury+ AA1
+ M:	Lothar Rubusch <l.rubusch@gmail.com>
+ S:	Maintained
++N:	arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
++N:	arch/arm/dts/socfpga_arria10_mercury_aa1_handoff.h
+ N:	board/enclustra/mercury_aa1/
+ N:	board/enclustra/common/
+ N:	configs/socfpga_enclustra_mercury_aa1_defconfig
 -- 
 2.25.1
 
