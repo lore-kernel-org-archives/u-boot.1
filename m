@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBB09D0C604
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 16:17:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CED2CD0C604
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 16:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A975288FC7;
-	Sat, 26 Oct 2024 18:16:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 12D9B89020;
+	Sat, 26 Oct 2024 18:16:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ghOAkJp0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B++Oc5nP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE5508901D; Sat, 26 Oct 2024 17:52:32 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 42AED88F68; Sat, 26 Oct 2024 17:52:34 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4459788F68
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 17:52:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7CB188EFD
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 17:52:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5c93346dfc8so404478a12.3
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 08:52:29 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a9a68480e3eso46651566b.1
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 08:52:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729957949; x=1730562749; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1729957946; x=1730562746; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q7TQEhl6j4yO+NSRkD7vSErHmqTvRuRWrYF3WrexbDw=;
- b=ghOAkJp0ybd25Qgwd+x8PJDZjVQpz2Yx37gIPfhzgziaxmTAVcJ4SR5Tlp48uNJil3
- jCAN5VePPSsLyNvnZ6amKn1kHhWJiXB8gZzsl8VNHSUAf5mwBxzsMuZNav7XAtPMQjjz
- oCJLMzyXqCSULfVOwobzHiICPijeyXKB+S+rwU+Ff/lc4d6T/C8e1+z8QydpuDqKXWwx
- p7MFhtBcDPOhcsSdPLLADh+wMvpKqBeWak+WapTQyHDaq68wRDvI0n5xdw0Kg3AY+ftJ
- chWjEdVQnaSRSC5HMoFX+/H5/dNzHqXdqZvI9QoJoQH9CowzZDVPK80MgcDffCUM5i4b
- iBiw==
+ bh=ZkMysxXhZ7nQfQZsF6uyPc1oUm1jYCy0w+YQmvL61+M=;
+ b=B++Oc5nPwEBPKGAunqoaDqPT/RvShXEytytDaTzOjrbyXfFbxadhEZtWMjS4nC9wls
+ VKXnktl56E4UjaF7CZ4MeymtvZ/C8eRwtz3McMTQwgWXAyUSi1VPKgyjtWaJ91YIt8Pr
+ tpBAz8OvCUydqszYv7BfWfdO98AcDLEkDJJDSFyUF8Qpxg8eGv96C5lrjJohTJbdDupE
+ MDyugJo2lFxeNaF5hVdGtXXIX3QLepcQLp8LlAAEp0a9rdK99+MShQN7sLrLK2ajIJam
+ M9m+Fp+sYDarH0MWoce4Yb7/klzLHQPtQ/AV01Ra98ZwMMFx0FhD8BTlQkuEkxcTstjd
+ UpjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729957949; x=1730562749;
+ d=1e100.net; s=20230601; t=1729957946; x=1730562746;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q7TQEhl6j4yO+NSRkD7vSErHmqTvRuRWrYF3WrexbDw=;
- b=trE34lLiTWP/p3KeqSFW51H+2qQisqrKnTFWBPGDVPutV/+TIV69rjmMrKGbPP1c4R
- Ul7At8KHbxa/rnX2dnPu85K4wip/hK81CcnEjfPi2T86auebgJLMa+O02XkHY7D1aU0n
- namP5RH9J0UZUEZuntJJIdTSUbHj6s9USaLS6F+3KomWlwm8+WzNAuh5svUpdioj1hQz
- tL587pBZ60ZwlDLmcsP/MFC41qIVpWIJYw36Vyoq5IupFuhviRHhOyk5jvD3FewGcUf8
- lsnyzDjdWKOJhnrh18EVkBvzy4k1JZ35Sz1dCR35LNDq7yu2Sj2p/ADdPH63s9A+LkJD
- MNNQ==
-X-Gm-Message-State: AOJu0Ywh6o29PtJMU1Sos0YTCRJTeC89xAMKGrxY30wMSrQ01D2RNxZ1
- dN13HOfh88J9c0WujfEekGEgKGOK7FN/sCELV1jEC3vFDb9VIEda8A1cPg==
-X-Google-Smtp-Source: AGHT+IGi/Ha8DxKItOrJ4FFuxBdv+9ob60gZjwvHqmtfbv8k1oiqps9MMDAP3rTsTVj8iZ2xMp0ngw==
-X-Received: by 2002:a05:6402:26d4:b0:5ca:d530:9663 with SMTP id
- 4fb4d7f45d1cf-5cbbf91924fmr710868a12.4.1729957948355; 
- Sat, 26 Oct 2024 08:52:28 -0700 (PDT)
+ bh=ZkMysxXhZ7nQfQZsF6uyPc1oUm1jYCy0w+YQmvL61+M=;
+ b=lOkXecJoVhr9gt31VcdhRkWKJjfCgYxq/hiqrYfcDip7IniAqyIndN7nlwRhOKlcVf
+ 2PxuQQikMWay/uer/JlHVSjDvOjaXFayvY4etV3Cb0DyKVMlCKlQXKlvKAObnioGZkMe
+ cMyqZZjPbMw38sALTX8c8RasdoetiGrsux230B6ZhDCZCVBgz+q4HiCcEoSlmZrkLlQZ
+ 8sH+9pzyRr2AFsCcDr+4ei2wxLsTjzesNRthvfjfSqojwgRPv6u8uLByW2hAb+rJ3lRo
+ bwaNSki48s0zkQXXg6Y07eo/aN5qAe+KpT3sYVkwe/piIx5XEbq2o+9ytsGmW2vBsIpr
+ 4IAA==
+X-Gm-Message-State: AOJu0Yx/a7IzY3idZSJVlp1nCqKDtDfeeUzU1L4xeM0vilAqkgxhHNvX
+ YMaYvPBwOoptglaE0fVZIXAe1GzV15NC0VcTzZLUw1YXtOUKa7855kxidg==
+X-Google-Smtp-Source: AGHT+IG5tVh/WPzWajrsG5mlN6j29kgcl5Uaq97C3+mMoizUsAZgc0F2rhItILdyeuQW0WhyxVWowA==
+X-Received: by 2002:a05:6402:2085:b0:5cb:c085:a55a with SMTP id
+ 4fb4d7f45d1cf-5cbc085a84emr983138a12.9.1729957945826; 
+ Sat, 26 Oct 2024 08:52:25 -0700 (PDT)
 Received: from 6c1d2e1f4cf4.v.cablecom.net (84-72-156-211.dclient.hispeed.ch.
  [84.72.156.211]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cbb63197casm1620179a12.63.2024.10.26.08.52.25
+ 4fb4d7f45d1cf-5cbb63197casm1620179a12.63.2024.10.26.08.52.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 26 Oct 2024 08:52:27 -0700 (PDT)
+ Sat, 26 Oct 2024 08:52:24 -0700 (PDT)
 From: Lothar Rubusch <l.rubusch@gmail.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, marex@denx.de,
  simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  sumit.garg@linaro.org
 Cc: sjg@chromium.org, xypron.glpk@gmx.de, michal.simek@amd.com,
  jit.loon.lim@intel.com, barnas@google.com, l.rubusch@gmail.com
-Subject: [PATCH v4 02/11] ARM: socfpga: add Mercury+ AA1 SoM support
-Date: Sat, 26 Oct 2024 15:52:11 +0000
-Message-Id: <20241026155220.26300-3-l.rubusch@gmail.com>
+Subject: [PATCH v4 01/11] doc: board: enclustra: add Enclustra Mercury+ AA1
+Date: Sat, 26 Oct 2024 15:52:10 +0000
+Message-Id: <20241026155220.26300-2-l.rubusch@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241026155220.26300-1-l.rubusch@gmail.com>
 References: <20241026155220.26300-1-l.rubusch@gmail.com>
@@ -95,285 +95,254 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce support for the Enclustra SoMs: Mercury+ AA1 (Intel/Arria10)
+Start documentation section for Enclustra. Cover Enclustra Intel SoMs and
+related carrier board setups. The section covers the Mercury+ AA1 SoM
+(Intel/arria10).
 
-Cover general board files for SD/MMC and QSPI boot modes. Integrate the
-boards to kconfig. All build variants will depend on Quartus handoff
-files, thus they depend on the particular Quartus design. The approach is
-covered in the according documentation part.
-
-Additionally add configuration for SD/MMC boot and QSPI bootmodes. Register
-additional targets in kconfig.
-
-Signed-off-by: Andreas Buerkler <andreas.buerkler@enclustra.com>
 Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
 ---
- arch/arm/mach-socfpga/Kconfig                 |  9 ++
- board/enclustra/common/Makefile               |  4 +
- board/enclustra/mercury_aa1/Kconfig           | 15 ++++
- board/enclustra/mercury_aa1/MAINTAINERS       | 10 +++
- board/enclustra/mercury_aa1/fpga.its          | 32 +++++++
- .../socfpga_enclustra_mercury_aa1_defconfig   | 85 +++++++++++++++++++
- include/configs/socfpga_mercury_aa1.h         | 23 +++++
- 7 files changed, 178 insertions(+)
- create mode 100644 board/enclustra/common/Makefile
- create mode 100644 board/enclustra/mercury_aa1/Kconfig
- create mode 100644 board/enclustra/mercury_aa1/MAINTAINERS
- create mode 100644 board/enclustra/mercury_aa1/fpga.its
- create mode 100644 configs/socfpga_enclustra_mercury_aa1_defconfig
- create mode 100644 include/configs/socfpga_mercury_aa1.h
+ doc/board/enclustra/index.rst       |   9 ++
+ doc/board/enclustra/mercury-aa1.rst | 202 ++++++++++++++++++++++++++++
+ doc/board/index.rst                 |   1 +
+ 3 files changed, 212 insertions(+)
+ create mode 100644 doc/board/enclustra/index.rst
+ create mode 100644 doc/board/enclustra/mercury-aa1.rst
 
-diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
-index 6b6a162f56..b7de86e934 100644
---- a/arch/arm/mach-socfpga/Kconfig
-+++ b/arch/arm/mach-socfpga/Kconfig
-@@ -184,6 +184,10 @@ config TARGET_SOCFPGA_EBV_SOCRATES
- 	bool "EBV SoCrates (Cyclone V)"
- 	select TARGET_SOCFPGA_CYCLONE5
- 
-+config TARGET_SOCFPGA_ENCLUSTRA_MERCURY_AA1
-+	bool "Enclustra Mercury+ AA1"
-+	select TARGET_SOCFPGA_ARRIA10
-+
- config TARGET_SOCFPGA_IS1
- 	bool "IS1 (Cyclone V)"
- 	select TARGET_SOCFPGA_CYCLONE5
-@@ -237,6 +241,7 @@ config SYS_BOARD
- 	default "de10-standard" if TARGET_SOCFPGA_TERASIC_DE10_STANDARD
- 	default "is1" if TARGET_SOCFPGA_IS1
- 	default "mcvevk" if TARGET_SOCFPGA_ARIES_MCVEVK
-+	default "mercury_aa1" if TARGET_SOCFPGA_ENCLUSTRA_MERCURY_AA1
- 	default "n5x-socdk" if TARGET_SOCFPGA_N5X_SOCDK
- 	default "secu1" if TARGET_SOCFPGA_ARRIA5_SECU1
- 	default "sockit" if TARGET_SOCFPGA_TERASIC_SOCKIT
-@@ -256,6 +261,7 @@ config SYS_VENDOR
- 	default "aries" if TARGET_SOCFPGA_ARIES_MCVEVK
- 	default "devboards" if TARGET_SOCFPGA_DEVBOARDS_DBM_SOC1
- 	default "ebv" if TARGET_SOCFPGA_EBV_SOCRATES
-+	default "enclustra" if TARGET_SOCFPGA_ENCLUSTRA_MERCURY_AA1
- 	default "google" if TARGET_SOCFPGA_CHAMELEONV3
- 	default "keymile" if TARGET_SOCFPGA_ARRIA5_SECU1
- 	default "softing" if TARGET_SOCFPGA_SOFTING_VINING_FPGA
-@@ -283,6 +289,7 @@ config SYS_CONFIG_NAME
- 	default "socfpga_de10_standard" if TARGET_SOCFPGA_TERASIC_DE10_STANDARD
- 	default "socfpga_is1" if TARGET_SOCFPGA_IS1
- 	default "socfpga_mcvevk" if TARGET_SOCFPGA_ARIES_MCVEVK
-+	default "socfpga_mercury_aa1" if TARGET_SOCFPGA_ENCLUSTRA_MERCURY_AA1
- 	default "socfpga_n5x_socdk" if TARGET_SOCFPGA_N5X_SOCDK
- 	default "socfpga_sockit" if TARGET_SOCFPGA_TERASIC_SOCKIT
- 	default "socfpga_socrates" if TARGET_SOCFPGA_EBV_SOCRATES
-@@ -290,4 +297,6 @@ config SYS_CONFIG_NAME
- 	default "socfpga_stratix10_socdk" if TARGET_SOCFPGA_STRATIX10_SOCDK
- 	default "socfpga_vining_fpga" if TARGET_SOCFPGA_SOFTING_VINING_FPGA
- 
-+source "board/enclustra/mercury_aa1/Kconfig"
-+
- endif
-diff --git a/board/enclustra/common/Makefile b/board/enclustra/common/Makefile
+diff --git a/doc/board/enclustra/index.rst b/doc/board/enclustra/index.rst
 new file mode 100644
-index 0000000000..16c8531d74
+index 0000000000..00727d0861
 --- /dev/null
-+++ b/board/enclustra/common/Makefile
-@@ -0,0 +1,4 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (c) 2024 Enclustra GmbH
++++ b/doc/board/enclustra/index.rst
+@@ -0,0 +1,9 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
-+# Common for several Enclustra modules
-diff --git a/board/enclustra/mercury_aa1/Kconfig b/board/enclustra/mercury_aa1/Kconfig
++Enclustra
++=========
++
++.. toctree::
++   :maxdepth: 2
++
++   mercury-aa1
+diff --git a/doc/board/enclustra/mercury-aa1.rst b/doc/board/enclustra/mercury-aa1.rst
 new file mode 100644
-index 0000000000..40c7cb2687
+index 0000000000..dec7cc3bdd
 --- /dev/null
-+++ b/board/enclustra/mercury_aa1/Kconfig
-@@ -0,0 +1,15 @@
-+if TARGET_SOCFPGA_ENCLUSTRA_MERCURY_AA1
++++ b/doc/board/enclustra/mercury-aa1.rst
+@@ -0,0 +1,202 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
++.. sectionauthor:: Lothar Rubusch <l.rubusch@gmail.com>
 +
-+config SYS_CPU
-+	default "armv7"
++Mercury AA1 Module (Arria1 10)
++==============================
 +
-+config SYS_BOARD
-+	default "mercury_aa1"
++- SoM: https://www.enclustra.com/en/products/system-on-chip-modules/mercury-aa1/
++- Carrier board Mercury+ ST1: https://www.enclustra.com/en/products/base-boards/mercury-st1/
++- Carrier board Mercury+ PE1: https://www.enclustra.com/en/products/base-boards/mercury-pe1-200-300-400/
++- Carrier board Mercury+ PE3: https://www.enclustra.com/en/products/base-boards/mercury-pe3/
 +
-+config SYS_VENDOR
-+	default "enclustra"
++There are slightly different variants of the AA1 SoM, going by the identifier.
 +
-+config SYS_CONFIG_NAME
-+	default "socfpga_mercury_aa1"
++- Me-aa1-270-2i2-d11e-nfx3
++- Me-aa1-270-3e4-d11e-nfx3
++- Me-aa1-480-2i3-d12e-nfx3
 +
-+endif
-diff --git a/board/enclustra/mercury_aa1/MAINTAINERS b/board/enclustra/mercury_aa1/MAINTAINERS
-new file mode 100644
-index 0000000000..13baf949ab
---- /dev/null
-+++ b/board/enclustra/mercury_aa1/MAINTAINERS
-@@ -0,0 +1,10 @@
-+Enclustra Mercury+ AA1
-+M:	Lothar Rubusch <l.rubusch@gmail.com>
-+S:	Maintained
-+N:	board/enclustra/mercury_aa1/
-+N:	board/enclustra/common/
-+N:	configs/socfpga_enclustra_mercury_aa1_defconfig
-+N:	doc/board/enclustra/mercury-aa1.rst
-+N:	include/configs/socfpga_mercury_aa1.h
-+N:	enclustra
-+N:	mercury_aa1
-diff --git a/board/enclustra/mercury_aa1/fpga.its b/board/enclustra/mercury_aa1/fpga.its
-new file mode 100644
-index 0000000000..cb42d61fbd
---- /dev/null
-+++ b/board/enclustra/mercury_aa1/fpga.its
-@@ -0,0 +1,32 @@
-+/dts-v1/;
++The u-boot setup is specific to a quartus design. Generate handoff files from
++the design. Pass them to a python script to produce a handoff.h file. This is
++needed as input for building the device-tree for u-boot. Eventually, building
++the final u-boot depends on the particular Quartus design, the particular
++carrier board, the selected boot media and boot mode.
 +
-+/ {
-+	description = "FIT image with FPGA bistream";
-+	#address-cells = <1>;
++Enclustra provides reference design examples which can be built with
++OpenEmbedded using their meta-layer.
 +
-+	images {
-+		fpga-periph-1 {
-+			description = "FPGA peripheral bitstream";
-+			data = /incbin/("../../../bitstream.periph.rbf");
-+			type = "fpga";
-+			arch = "arm";
-+			compression = "none";
-+		};
++- Reference Design AA1 on ST1: https://github.com/enclustra/Mercury_AA1_ST1_Reference_Design
++- Reference Design AA1 on PE1: https://github.com/enclustra/Mercury_AA1_PE1_Reference_Design
++- Reference Design AA1 on PE3: https://github.com/enclustra/Mercury_AA1_PE3_Reference_Design
++- OpenEmbedded meta-layer: https://github.com/enclustra/meta-enclustra-socfpga
 +
-+		fpga-core-1 {
-+			description = "FPGA core bitstream";
-+			data = /incbin/("../../../bitstream.core.rbf");
-+			type = "fpga";
-+			arch = "arm";
-+			compression = "none";
-+		};
-+	};
++Quick Start
++-----------
 +
-+	configurations {
-+		default = "config-1";
-+		config-1 {
-+			description = "Boot with FPGA early IO release config";
-+			fpga = "fpga-periph-1", "fpga-core-1";
-+		};
-+	};
-+};
-diff --git a/configs/socfpga_enclustra_mercury_aa1_defconfig b/configs/socfpga_enclustra_mercury_aa1_defconfig
-new file mode 100644
-index 0000000000..6a2434fe5a
---- /dev/null
-+++ b/configs/socfpga_enclustra_mercury_aa1_defconfig
-@@ -0,0 +1,85 @@
-+CONFIG_ARM=y
-+CONFIG_SYS_L2_PL310=y
-+CONFIG_ARCH_SOCFPGA=y
-+CONFIG_SYS_MALLOC_LEN=0x4000000
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xffe2b000
-+CONFIG_SF_DEFAULT_SPEED=10000000
-+CONFIG_SF_DEFAULT_MODE=0x2003
-+CONFIG_ENV_SIZE=0x80000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="socfpga_arria10_enclustra_mercury_aa1"
-+CONFIG_SPL_TEXT_BASE=0xFFE00000
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_STACK=0xffe2b000
-+CONFIG_TARGET_SOCFPGA_ENCLUSTRA_MERCURY_AA1=y
-+CONFIG_IDENT_STRING="socfpga_arria10"
-+CONFIG_SPL_FS_FAT=y
-+CONFIG_FIT=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_BOOTARGS="console=ttyS0,115200 rw rootwait root=/dev/mmcblk0p3"
-+CONFIG_BOOTCOMMAND="run distro_bootcmd"
-+CONFIG_DEFAULT_FDT_FILE="system.dtb"
-+CONFIG_SYS_CONSOLE_IS_IN_ENV=y
-+CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
-+CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_CLOCKS=y
-+CONFIG_SPL_PAD_TO=0x40000
-+CONFIG_SPL_NO_BSS_LIMIT=y
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xffe2b000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x15000
-+CONFIG_SPL_ENV_SUPPORT=y
-+CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
-+CONFIG_SPL_FPGA=y
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
-+# CONFIG_CMD_BOOTDEV is not set
-+# CONFIG_CMD_BOOTMETH is not set
-+# CONFIG_CMD_VBE is not set
-+CONFIG_CMD_ASKENV=y
-+CONFIG_CMD_GREPENV=y
-+CONFIG_CMD_FPGA_LOADMK=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_SYSBOOT=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-parent dmas dma-names"
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_USE_BOOTFILE=y
-+CONFIG_BOOTFILE="boot.scr"
-+CONFIG_VERSION_VARIABLE=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_DWAPB_GPIO=y
-+CONFIG_SYS_I2C_DW=y
-+CONFIG_MISC=y
-+CONFIG_FS_LOADER=y
-+CONFIG_SPL_FS_LOADER=y
-+CONFIG_MMC_DW=y
-+CONFIG_BOOTDEV_SPI_FLASH=y
-+# CONFIG_SPI_FLASH_LOCK is not set
-+# CONFIG_SPI_FLASH_UNLOCK_ALL is not set
-+CONFIG_SPI_FLASH_SPANSION=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_PHY_MICREL=y
-+CONFIG_PHY_MICREL_KSZ90X1=y
-+CONFIG_ETH_DESIGNWARE=y
-+CONFIG_MII=y
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SPI=y
-+CONFIG_CADENCE_QSPI=y
-+CONFIG_TIMER=y
-+CONFIG_SPL_TIMER=y
-+CONFIG_DESIGNWARE_APB_TIMER=y
-+CONFIG_USB=y
-diff --git a/include/configs/socfpga_mercury_aa1.h b/include/configs/socfpga_mercury_aa1.h
-new file mode 100644
-index 0000000000..d9d169f6dd
---- /dev/null
-+++ b/include/configs/socfpga_mercury_aa1.h
-@@ -0,0 +1,23 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2024 Enclustra GmbH
-+ * <info@enclustra.com>
-+ */
++- Setup and build a Quartus design project
++- Obtain the hps.xml file from the Quartus design project
++- Generate the handoff.h file for u-boot
++- Adjust the device-tree file according to your setup
++- Build u-boot
++- Flash u-boot
 +
-+#ifndef __CONFIG_SOCFGPA_MERCURY_AA1_H__
-+#define __CONFIG_SOCFGPA_MERCURY_AA1_H__
++Build U-Boot
++------------
 +
-+#include <asm/arch/base_addr_a10.h>
++The Quartus design produces a design specific ``hps.xml``, an ``emif.xml`` and
++a corresponding ``id`` file contained in a directory ``handoff``.
 +
-+/*
-+ * U-Boot general configurations
-+ */
++Generate the handoff.h file for u-boot, from a provided ``hps.xml`` using the
++script provided in u-boot.
 +
-+/* Memory configurations  */
-+#define PHYS_SDRAM_1_SIZE		0x80000000
++.. code-block:: bash
 +
-+/* The rest of the configuration is shared */
-+#include <configs/socfpga_common.h>
-+#include <config_distro_bootcmd.h>
++    $ arch/arm/mach-socfpga/qts-filter-a10.sh <where you saved it>/hps.xml arch/arm/dts/socfpga_arria10_mercury_aa1_handoff.h
 +
-+#endif	/* __CONFIG_SOCFGPA_MERCURY_AA1_H__ */
++Adjust the device-tree file according to your setup. Follow the comments in the
++file.
++
++.. code-block:: bash
++
++    $ vi ./arch/arm/dts/enclustra-aa1.dts
++
++Build u-boot. Source your favorite toolchain for ARM first.
++
++.. code-block:: bash
++
++    $ make socfpga_enclustra_mercury_aa1_defconfig
++    $ make -j8
++
++Setup and compile a boot script as needed. Depending on the boot-mode select
++``sd-aa1.cmd`` for SD/eMMC, or ``qspi-aa1.cmd`` for QSPI flash.
++
++.. code-block:: bash
++
++    $ ./tools/mkimage -A arm -O linux -T script -C none -a 0 -e 0 -n "U-boot mmc startscript" -d board/enclustra/bootscripts/sd-aa1.cmd boot.scr
++
++Device-Tree setup
++-----------------
++
++The basic u-boot device-tree fragments are provided here. The handoff tools
++will generate further u-boot device-tree fragments. The various .dtsi files
++then need to be included in a top-level .dts file.
++
++Flash the U-Boot Binary to a Micro SD Card
++------------------------------------------
++
++The following example describes the full approach. Prepare a micro SD card with
++three partitions as follows e.g. on /dev/sda (check before):
++
++* ``type=c, start=2048, size=409600``
++* ``type=a2, start=411648, size=14336``
++* ``type=83, start=425984, size=1619968``
++
++.. code-block:: bash
++
++    $ cat ./partitionmap.txt
++    start=        2048, size=      102400, type=b, bootable
++    start=      104448, size=        4096, type=a2
++    start=      108544, size=      819200, type=83
++
++    $ sudo sfdisk /dev/sde < ./partitionmap.txt
++
++Note: The ``fpga.itb`` is needed to start the bootloader. A kernel
++``system.dtb`` is needed to boot into the system. Both are not part of
++u-boot, but are be provided through OpenEmbedded using Enclustra's meta-layer.
++
++Generally the bitstream files depend on the logic design, but the meta-layer
++provides a demo design. Copy the ``bitstream.periph.rbf`` and
++``bitstream.core.rbf`` from your design or OpenEmbedded's deploy directory. The
++``fpga.its`` in board/enclustra then is used to bundle them.
++
++ .. code-block:: bash
++
++    $ cp <from quartus design>/bitstream.periph.rbf ./
++    $ cp <from quartus design>/bitstream.core.rbf ./
++    $ ./tools/mkimage -E -f ./board/enclustra/mercury_aa1/fpga.its fpga.itb
++
++Format the SD card, and copy the following artifacts to the mounted boot
++partition, e.g. on /dev/sda.
++
++ .. code-block:: bash
++
++    $ mkfs.vfat -n boot /dev/sda1
++    $ mount /dev/sda1 /media/boot
++    $ cp ./{boot.scr,u-boot.img,fpga.itb,Image,system.dtb} /media/boot/
++    $ umount /dev/sda1
++
++Flash the SPL directly.
++
++ .. code-block:: bash
++
++    $ sudo dd if=./spl/u-boot-splx4.sfp of=/dev/sda2 conv=fdatasync bs=4k status=progress
++
++Format and flash a rootfs from image or files to the third partition.
++
++ .. code-block:: bash
++
++    $ mkfs.ext4 -L rootfs /dev/sda3
++    $ mount /dev/sda3 /media/rootfs
++    $ tar xf ./rootfs.tar -C /media/rootfs
++    $ umount /dev/sda3
++
++Boot Media
++----------
++
++Alternative boot media are possible as officially documented by Enclustra.
++
++* Micro-SD card
++* eMMC
++* QSPI
++
++Note: eMMC and QSPI can be flashed from off the u-boot shell. Usually after
++flashing, the correct boot mode needs to be set by a BSEL switch.
++
++Before turning on the setup, make sure to have the correct voltage configured
++at the carrier board, using the jumpers on the voltage pin header. Also make
++sure to have switched to the correct boot media using typically some dip
++switches to be found on the carrier board.
++
++Boot Log
++--------
++
++The demo shows booting a AA1 + ST1 setup and stopping at the u-boot shell.
++
++Here is the console output::
++
++  U-Boot SPL 2024.10
++  FPGA: Checking FPGA configuration setting ...
++  FPGA: Start to program peripheral/full bitstream ...
++  FPGA: Early Release Succeeded.
++  FPGA: Checking FPGA configuration setting ...
++  FPGA: Start to program peripheral/full bitstream ...
++  FPGA: Early Release Succeeded.
++
++  U-Boot SPL 2024.10
++  DDRCAL: Success
++  DDRCAL: Scrubbing ECC RAM (2048 MiB).
++  DDRCAL: Scrubbing ECC RAM done.
++  FPGA: Checking FPGA configuration setting ...
++  FPGA: Start to program core bitstream ...
++  Full Configuration Succeeded.
++  FPGA: Enter user mode.
++  Trying to boot from MMC1
++
++
++  U-Boot 2024.10
++
++  CPU:   Altera SoCFPGA Arria 10
++  BOOT:  SD/MMC External Transceiver (1.8V)
++  Model: Enclustra Mercury+ AA1
++  DRAM:  2 GiB
++  Core:  80 devices, 20 uclasses, devicetree: separate
++  MMC:   dwmmc0@ff808000: 0
++  Loading Environment from FAT... OK
++  In:    serial
++  Out:   serial
++  Err:   serial
++  Model: Enclustra Mercury+ AA1
++  ethaddr set to 20:B0:F7:06:0D:BE
++  eth1addr set to 20:B0:F7:06:0D:BF
++  Net:   eth0: ethernet@ff800000
++  =>
++
+diff --git a/doc/board/index.rst b/doc/board/index.rst
+index 3fb7c84f10..26feff48cd 100644
+--- a/doc/board/index.rst
++++ b/doc/board/index.rst
+@@ -25,6 +25,7 @@ Board-specific doc
+    congatec/index
+    coreboot/index
+    emulation/index
++   enclustra/index
+    gateworks/index
+    google/index
+    highbank/index
 -- 
 2.25.1
 
