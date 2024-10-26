@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5476D10BE8
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 07:43:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 419A5D10BE8
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 07:44:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B3B888DEE;
-	Sat, 26 Oct 2024 09:43:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AF2EC88D13;
+	Sat, 26 Oct 2024 09:44:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Mrzc2pFG";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="lkHABJVp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AE9688DF1; Sat, 26 Oct 2024 09:43:32 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B1FD3889ED; Sat, 26 Oct 2024 09:44:40 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42F62889ED
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 09:43:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FCD388D13
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 09:44:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5c97c7852e8so3833269a12.1
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 00:43:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729928605; x=1730533405; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=M2mX5yHrySGNk/MyJQVqe6B8uryeYJ5+i6kQkedDtNg=;
- b=Mrzc2pFGTC0FpjwOtJyp2e2lVHwyoipMUlXALOkhbP5L69qjJhgQWzC+PqOtuNaNuc
- 0xz9uMZxY/gx+yGxG3pH4YyYEyyYw+KVpmLT59nrdSNenYQdDwI/6BtNdKqi5jFtY22l
- dyNxL3DflKJpWv6THxvcr6fCI9PFWabS15RlwgkHMWNRPAeE0h7Dd1YPPC6VROXdLjwb
- ol7unouKxrHBQiuZgD0mRt5P1r0x4NQlyI6vf3FSXjiLS/ZQxc+JFVp/jTgdREdDCumd
- HP8s6kLaWhY8M9oD8buXzZeErZiCaZzE4Bhg0Oidsw8ISG5FCiWlY+EtANDO4dXmw/Y0
- iCxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729928605; x=1730533405;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=M2mX5yHrySGNk/MyJQVqe6B8uryeYJ5+i6kQkedDtNg=;
- b=rPR98LlYnVgaMlN2MRwLem6cOqpimHzac/aPo8Wb0DNHyVBJMVMI4AZMeHY1rEBCLU
- 4ojkoP5ieD5gthDQm23+voZu1MTGC18kj3FSoRgQFj2ht8n9eeTk22KWhbx7HoA4TzU0
- RSWmFTiQi405wQNZQO+JPU7ogh0GhpC6Jy4qlfrQ/CYOciS7r1dryeGHWPLxU9/uYmpj
- HhLBwrDZ+tzmp33SCgXlwxitK0F8NRGDmcvPKosIR8FWEfMkT/l6/AKYsROXwj+Z2Z3Z
- DTx67+ZsEPA+goDfMR5LBiz3h2jwqw0p4DJy/zntqclhmULojGzXSMK1z2wRrJsR9hWN
- EdsA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUPtAXT7ymRpQ5cVVwCSr24JnD78vLSBnDX6qlLe2zKsTs/x10KIYmIKCQM073FXipSajjmTD8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9LKerWE5gaMZu2w8UrNNadlVPIYEfr5qvwPO9UJWDyRS/0v7Y
- SKcVoNVCOXEI1zvel0ZfGKZJh/9KrXNMMjl7T5dP3MeEb7UajpX4nDqplNz/zKg=
-X-Google-Smtp-Source: AGHT+IEKTaklyrN8LiMd9H2AFVbbVEjfKClFGIasKqt9AKoPQIFhTJ4EpKcdNIhoyFL3CpvjXb4qNg==
-X-Received: by 2002:a17:907:9726:b0:a9a:4a1f:c97d with SMTP id
- a640c23a62f3a-a9de5c9db6cmr145697966b.7.1729928604542; 
- Sat, 26 Oct 2024 00:43:24 -0700 (PDT)
-Received: from hades.. (ppp176092143132.access.hol.gr. [176.92.143.132])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cbb631a258sm1328128a12.78.2024.10.26.00.43.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 26 Oct 2024 00:43:22 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: Mark static function in dumpdtb
-Date: Sat, 26 Oct 2024 10:43:17 +0300
-Message-ID: <20241026074319.110292-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1729928663; x=1730533463; i=xypron.glpk@gmx.de;
+ bh=Rgyk32792afllHJsl8Gs+E9Iroro0n4VDOuAc1x1c88=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=lkHABJVpDNnuOpJ+np+YNfgQkWzYYYTWdgRXE5I5zQnMH/A8dXzTuihTZolcVDhM
+ xNIjbWTfOuqNnrTrXtsNhI/t1FtYBcs+ggN0BsvlvVKF7f0N0kNZQvddVSVsj6dKl
+ cTCNaRwoQ+rcz2rNCBYecG7OzukW4Wxvb2QVk+2UOyaJKElAKkf5xkZb79bINlMG9
+ YHnk+M6ts/LQebuJipkALXkXFnP0SxQc/y7J2mUw+MMfMw0SJmA10K8IydR0J6IZ8
+ e13O9EENM/3SkYRjbseGysKfnWOfmpat2FBVZSYm9SrCValqoQ48oAzREywaUHUga
+ W63XryHQ2epWYT3gag==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [10.43.6.224] ([87.215.50.114]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MQeA2-1tHIlF0nlm-00SK5q; Sat, 26
+ Oct 2024 09:44:23 +0200
+Message-ID: <4f6fa7d8-b2cb-451f-add0-ac38c9b984e5@gmx.de>
+Date: Sat, 26 Oct 2024 09:44:15 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: Mark efi_bootmgr_release_uridp as static
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Tom Rini <trini@konsulko.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ u-boot@lists.denx.de
+References: <20241026073734.102723-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241026073734.102723-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:kPYCTClgi+eO/sUaLERA+OjHyZ7T9AkoT8osDxvV96xFRZTminp
+ FTzodofRuXZ/A2v80o+vcN7mwI04/8u0u+n8fpguZVgUReT0YluhuTcPtessaJjAuLWUQBo
+ KGomoPa60eX7xaQfaEDYu33ZeDWhFQYVskKLbqRh7+wOKv0FdJm6n6kdywBkurfCgIOnbnw
+ pJaqauKcqz4h/WkYISQRQ==
+UI-OutboundReport: notjunk:1;M01:P0:pV3vkJ61MKI=;RyJ2dszfRKUCIVaXX2lRvgKpjWg
+ YWz8RXcMUxv+OCgy7hznEIRBXVHWHLqz4q8ppu5qkxkhN6jhQla7VUGTfX2E4kGk2wPDFVFwd
+ dVgxbMn96fbMqzqPnUObkzuAoWRYYJ+Ik5zC0ORmUJNnzJQf7V2SK9x4RPMArA5+ix4Ft/rpu
+ 8F57NClocaPNSjiAR8jw2KRQNpN06WIXCfmdAcqBec6R/FDzrDwCdGX0VtymwmN2MebJID94+
+ druF6SVBT/KtgBoimTUGplE6CkKfcWQxoQg0c5yOLmkRW0X0OWtns47gSMN/Y6MIm9rniQujf
+ RqLlKYlNqp8UqgcS3gvzNgHLb9B9rRUttcCoibF1xKNtWN9OAb/wQ/WeAYZ0+oO6U6TlTrRZk
+ OkR6ACPMuVvsENRQ1FM1Q0TcxfQM4fbnB3QPVxKzxN6XZBwzI+QJ24rzFMKslYZ0kp/qLFoR6
+ Q+tzFad/xNL6JHCbRFzTK0g14Ma4yzVCYw/TGyIZ389RhxsFeRnjGuRlOXnJAdJmmOzI6j+1D
+ kBStCzZudheaSx47ZTxHNcVG9fL3TGLd+Hn5q+1PVUc4dkdttHfGSzzP8c33v4rUlzAy1quLo
+ KvoF71k8pDW8iNnXZCgta1db8CpDIgVvD4VYva2m7JjCOHj+WbQO2s7zPCn9NrneO+83djeL8
+ 1iljPcZ3hxS+1S6eDaeNgdZYUuqvd4cn84d5qWI1mIXjpl9nT5ucRWmL38j+kwIhyBToMVv8w
+ S2g4krY3PKLAkce+KTFWH1SPgmTlXrxE6RLxrdY4HjMR4bCfzejOVqSEHmzLQ3dKLIy57xI4m
+ tY5lpGPhJsmfeuuGfrzQ3JFA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,72 +93,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A few functions are only used locally but miss the 'static' keyword.
-Add it and quiesce W=1 build wanrings
+On 10/26/24 09:37, Ilias Apalodimas wrote:
+> This is only used locally so make it static
+>
+> Suggested-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   lib/efi_loader/efi_bootmgr.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index a3aa2b8d1b92..f9b5988a06ea 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -385,7 +385,7 @@ err:
+>    * @ctx:	event context
+>    * Return:	status code
+>    */
+> -efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
+> +static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx=
+)
+>   {
+>   	efi_status_t ret =3D EFI_SUCCESS;
+>   	efi_status_t ret2 =3D EFI_SUCCESS;
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- lib/efi_loader/dtbdump.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/lib/efi_loader/dtbdump.c b/lib/efi_loader/dtbdump.c
-index 9f1d8fb82cb0..a3d59a2fd3be 100644
---- a/lib/efi_loader/dtbdump.c
-+++ b/lib/efi_loader/dtbdump.c
-@@ -225,7 +225,7 @@ static u32 f2h(fdt32_t val)
-  * @systable:	system table
-  * Return:	device tree or NULL
-  */
--void *get_dtb(struct efi_system_table *systable)
-+static void *get_dtb(struct efi_system_table *systable)
- {
- 	void *dtb = NULL;
- 	efi_uintn_t i;
-@@ -246,7 +246,7 @@ void *get_dtb(struct efi_system_table *systable)
-  * @pos:	UTF-16 string
-  * Return:	pointer to first non-whitespace
-  */
--u16 *skip_whitespace(u16 *pos)
-+static u16 *skip_whitespace(u16 *pos)
- {
- 	for (; *pos && *pos <= 0x20; ++pos)
- 		;
-@@ -260,7 +260,7 @@ u16 *skip_whitespace(u16 *pos)
-  * @keyword:	keyword to be searched
-  * Return:	true fi @string starts with the keyword
-  */
--bool starts_with(u16 *string, u16 *keyword)
-+static bool starts_with(u16 *string, u16 *keyword)
- {
- 	for (; *keyword; ++string, ++keyword) {
- 		if (*string != *keyword)
-@@ -272,7 +272,7 @@ bool starts_with(u16 *string, u16 *keyword)
- /**
-  * do_help() - print help
-  */
--void do_help(void)
-+static void do_help(void)
- {
- 	error(u"dump       - print device-tree\r\n");
- 	error(u"load <dtb> - load device-tree from file\r\n");
-@@ -332,7 +332,7 @@ open_file_system(struct efi_simple_file_system_protocol **file_system)
-  * @filename:	file name
-  * Return:	status code
-  */
--efi_status_t do_load(u16 *filename)
-+static efi_status_t do_load(u16 *filename)
- {
- 	struct efi_dt_fixup_protocol *dt_fixup_prot;
- 	struct efi_simple_file_system_protocol *file_system;
-@@ -469,7 +469,7 @@ out:
-  * @filename:	file name
-  * Return:	status code
-  */
--efi_status_t do_save(u16 *filename)
-+static efi_status_t do_save(u16 *filename)
- {
- 	struct efi_simple_file_system_protocol *file_system;
- 	efi_uintn_t dtb_size;
--- 
-2.43.0
-
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
