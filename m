@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC6E7D0C604
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 20:18:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6189D10C03
+	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 20:19:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E42CD89040;
-	Sat, 26 Oct 2024 22:18:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5DB7289093;
+	Sat, 26 Oct 2024 22:18:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ttn45R7m";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="lATOZDiP";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="sDQ7dEJx";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ZevWuu7I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58F2189030; Sat, 26 Oct 2024 22:18:35 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 9479F8908A; Sat, 26 Oct 2024 22:18:38 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 412A089034
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 22:18:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 62D0789079
+ for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 22:18:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4XbWDy6Wlfz9smc;
- Sat, 26 Oct 2024 22:18:26 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4XbWF10mQRz9skw;
+ Sat, 26 Oct 2024 22:18:29 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1729973909;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=FUpraYsXhTq6Qs3z36kw6sbrKuOgRBC4vu4ya1bHr9U=;
+ b=sDQ7dEJxJmBqUzfSTkfO7D26qoAZJn4m9keCZj+zAGn+Q8UW52FVdl6Vp94yItwbTpkFbM
+ XGpKmlrtPo8r2CAnCr1EuzYD9//KbfumeMCIjwld0N1fgxh12NkX8tLd556iTx87qkSVQY
+ AfVwGuJFxxVFwNBXG6/b8Fn4HhFl5/9Obl4jICzf0Tl/0fASQinvXVIxrLeYEZdaAWARjn
+ j1qBnvRKRh8X5O98ZQmNLP3uNijAV2FRgeYaWe0/U/REdidjQQgmxMub+WWF5iTPX5zqOC
+ Sh9lJf1+H3H9BYLpI9z9nxFWcKq3KOt8jVsDIRv3fKX0WdPzfr36N8bg92Kdug==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1729973907;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=cZ2QLTpDAAkvelHCJeAOFOiAGhcbV1bLoGPfq9CYwdg=;
- b=ttn45R7mCTS3koQZi5kEeKXyHW66raosMaNZUsK7C4HPZzOMebdhzUV6Ovt/TEr0yVuX0U
- fmSc9vGfCNAmYp4fJXqjVYrwHeNE5nY2ktSAj+foAnV+jfbVQlQAvEqC1HQ7We+8RQ0l1N
- QJsPlSDz8pepHdP6MjRIEItlxNo4Ey2Wl9V3h0NtitLjAZ78h1p1zbR+9aq6BnY4VYc8lB
- FI/CWtOa50J0pFd+Tk9GTFZxdtjywW61AqAldva5jE4YgxFszFbQSW3DoAeeGnmOTJfA2d
- IPxknAC6B1YaK4qgcznjNTrSV/hLix3aPLCO8E9zzUSmpd3EuJIgHFoFRyImaw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729973905;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=cZ2QLTpDAAkvelHCJeAOFOiAGhcbV1bLoGPfq9CYwdg=;
- b=lATOZDiP5cZZ6epz9+OdYpZ5SqSh0uQOKe/KBRtEblSWI6NFBUPzmlsasfYne3L099P7Ex
- 11q485YPvqhvaVpgy+NbvmIdroMHsB9N3S2w/zhWIzx9AIzhpu8Umd4qf8ZktIom+XjF3y
- fD+0kUJQG2jY4gkAHshPURgwVhu+3WHd8DhgW+RwLwenQ5kvIkkZ/tl4g0HSFDeE89XCfZ
- 6nzQ6SHsOn/2lV2jfHqIkWW/F7Yh0cjKySm89qnVuW4V+8wjdgbY9IupPuO+dS7FlqNWCF
- foh1wb35JUKEulZ1EpD6q2KzfzC9K17cqtj5HMcpnZikCuN360coeG/RsF0uMQ==
+ bh=FUpraYsXhTq6Qs3z36kw6sbrKuOgRBC4vu4ya1bHr9U=;
+ b=ZevWuu7In84FjGe9d755lvoObpuShOqwwTKV+cpwSxnbmZ6u4g4zvvXMcYcLVgK0ohDYFU
+ GJQrqgunIdGdKQYHSkjZlxjrqu7VT9fumYLu685FV6yfD8Mc06iQoiH6WyoI06RKsmcWLZ
+ Re7/r8QShOtKv/n/OCAJNppbFboGzTFQHkW937LfE//DXEKZdGc+5z34wxaLcY9icFMqV+
+ smhE9rqTvSGhTr3l/I3zcnjfH4pE/6Fauz0Gmsf2DsxWVeoOoV6n3l5rJdL5/lEFTmJ126
+ p0mhA2jVaHxbWEh0mC0+/M3WLo/xQooD+vcoJcwL0Ld/6eXJQn/Vf8WglMbp0A==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Andre Przywara <andre.przywara@arm.com>,
@@ -72,16 +72,15 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Tom Rini <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 3/9] mtd: spi-nor: Remove recently added set_4byte() call
-Date: Sat, 26 Oct 2024 22:16:20 +0200
-Message-ID: <20241026201741.171073-3-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 4/9] mtd: spi-nor: Remove recently added write_disable() call
+Date: Sat, 26 Oct 2024 22:16:21 +0200
+Message-ID: <20241026201741.171073-4-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20241026201741.171073-1-marek.vasut+renesas@mailbox.org>
 References: <20241026201741.171073-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 6u7bn78ujebip6f1fkrnkzrai3q99kdk
-X-MBO-RS-ID: 6f0ae3836092742770c
-X-Rspamd-Queue-Id: 4XbWDy6Wlfz9smc
+X-MBO-RS-META: rpm6rayed1xnhyah7chyzbqef1cmk6ta
+X-MBO-RS-ID: c5a2266fe1fa926723a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,7 +97,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove undocumented set_4byte() call. This was added in commit
+Remove undocumented write_disable() call. This was added in commit
 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
 without any explanation in the commit message. Remove it.
 
@@ -123,21 +122,44 @@ Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- drivers/mtd/spi/spi-nor-core.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/mtd/spi/spi-nor-core.c | 10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
 
 diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 0b131ad9aba..3114281832b 100644
+index 3114281832b..d22363e8267 100644
 --- a/drivers/mtd/spi/spi-nor-core.c
 +++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -4593,7 +4593,6 @@ int spi_nor_scan(struct spi_nor *nor)
- #else
- 	/* Configure the BAR - discover bank cmds and read current bank */
- 	nor->addr_width = 3;
--	set_4byte(nor, info, 0);
- 	ret = read_bar(nor, info);
- 	if (ret < 0)
+@@ -2073,10 +2073,6 @@ static int spi_nor_write(struct mtd_info *mtd, loff_t to, size_t len,
+ 		if (ret)
+ 			goto write_err;
+ 
+-		ret = write_disable(nor);
+-		if (ret)
+-			goto write_err;
+-
+ 		*retlen += written;
+ 		i += written;
+ 	}
+@@ -2117,10 +2113,6 @@ static int macronix_quad_enable(struct spi_nor *nor)
+ 	if (ret)
  		return ret;
+ 
+-	ret = write_disable(nor);
+-	if (ret)
+-		return ret;
+-
+ 	ret = read_sr(nor);
+ 	if (!(ret > 0 && (ret & SR_QUAD_EN_MX))) {
+ 		dev_err(nor->dev, "Macronix Quad bit not set\n");
+@@ -2182,7 +2174,7 @@ static int spansion_quad_enable_volatile(struct spi_nor *nor, u32 addr_base,
+ 		return -EINVAL;
+ 	}
+ 
+-	return write_disable(nor);
++	return 0;
+ }
+ #endif
+ 
 -- 
 2.45.2
 
