@@ -4,80 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B03B7D10C07
-	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 02:22:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20842D10C16
+	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 10:11:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EBBD89079;
-	Sun, 27 Oct 2024 03:21:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0F0EB88DCC;
+	Sun, 27 Oct 2024 11:11:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="d1fyjfkp";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="x+13AtEB";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A81D588C10; Sun, 27 Oct 2024 03:21:37 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16A838903B
- for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 03:21:34 +0100 (CET)
+ id AB71F88DF5; Sun, 27 Oct 2024 11:11:48 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 632F9889ED
+ for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 11:11:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4XbgHx5Lzbz9sy4;
- Sun, 27 Oct 2024 03:21:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729995693;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Samb3tP23R8JoKjvQ7uzcWjdUK0QWebjArABM/T4l2k=;
- b=d1fyjfkpsArdaj8yLPdeuEYqYjl2roLsvycmd83VtyKnXInYrDBZoBI2+1Vdi2I00XDiEy
- Cv4p7+HxXqY+OfjXRVcty6p++QwixOvFtue1LkjUDrzxLVsYB1l4D+S8Z55IUt/NTA9X4u
- Uk1dmnkV6IF+FmkwukJyIb/TvJjvt1iZ3jyhtBXUQ9lncAvEAV5pR6IsVLpFZek7HQKUTC
- q+tKFZ0FzJUrNGiR8Yt+zwCMQ766K6x6P5fZ/vUAizv+WyGjHqCW1gQgTCeEunMBKt7MLD
- nfzefuBWieoFLR0orXss03LxrsuhaWWgZEdYhemZ4QT3uBz5Pifwl1PI9kxJ5g==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729995691;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Samb3tP23R8JoKjvQ7uzcWjdUK0QWebjArABM/T4l2k=;
- b=x+13AtEBHwm2yoXgWobg4khvf0v5UUWB33IekXdgFkaUY7Z2LJCroRoXu1udSdBWhOrTG3
- EKECmF013AnWQD7aV3PRwdwXvrnnpEEPaV2UfA+QDidnaz2KlQhlTNMaEAYEkawMFh+ARA
- 9uyStvf/8iAiXgSEl/Rst2oSOZWiqFFelXPDNmM1+zPIPEIvfFqPPjUfMuRfHzMKNc8mNx
- oG9rffuNNrJo/Jzc13SwrNtSDibQBKIvVa/i7E89ZJzJ8a3p55nFk8f4hL5jUWpQnq8cKv
- 8APy7D4gevtPipy6mJlAx8TgB7hExBip2glDtqMBpXSDax3k2+i+HcmWOYLQ7Q==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "Cogent Embedded, Inc." <source@cogentembedded.com>,
- Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Hai Pham <hai.pham.ud@renesas.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 5/5] ARM: renesas: Deduplicate common Renesas defconfig
-Date: Sun, 27 Oct 2024 03:20:07 +0100
-Message-ID: <20241027022040.356716-5-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241027022040.356716-1-marek.vasut+renesas@mailbox.org>
-References: <20241027022040.356716-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.11,236,1725289200"; 
+ d="asc'?scan'208";a="223109176"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie5.idc.renesas.com with ESMTP; 27 Oct 2024 19:11:34 +0900
+Received: from [10.226.92.22] (unknown [10.226.92.22])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 020C041AA3F5;
+ Sun, 27 Oct 2024 19:11:20 +0900 (JST)
+Message-ID: <806590e4-2aa1-4ec7-80bc-9ef8ed2a7e30@bp.renesas.com>
+Date: Sun, 27 Oct 2024 10:11:18 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: f33f0769e5e599b7e26
-X-MBO-RS-META: wkdrymzs1smfkj7bggwzmmspit7e5psk
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] ARM: renesas: Add top level board/renesas/ MAINTAINERS
+ file
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+References: <20241027021045.355625-1-marek.vasut+renesas@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20241027021045.355625-1-marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------fn0lY35HzA5G5aJJFZtXKDIP"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,187 +59,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Deduplicate common Renesas defconfig by factoring out the common
-parts into generic renesas_rcar_defconfig and including those using
-the #include <configs/...> preprocessor macro in the current set of
-board specific defconfigs. The preprocessor macro is applicable
-to defconfigs as well.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------fn0lY35HzA5G5aJJFZtXKDIP
+Content-Type: multipart/mixed; boundary="------------7Q0Im2Bv30Qbr0rBGWw3mXTU";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Message-ID: <806590e4-2aa1-4ec7-80bc-9ef8ed2a7e30@bp.renesas.com>
+Subject: Re: [PATCH v2] ARM: renesas: Add top level board/renesas/ MAINTAINERS
+ file
+References: <20241027021045.355625-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241027021045.355625-1-marek.vasut+renesas@mailbox.org>
 
-This introduces no functional change, the resulting .config are
-identical for all Renesas systems.
+--------------7Q0Im2Bv30Qbr0rBGWw3mXTU
+Content-Type: multipart/mixed; boundary="------------M95yIQxWQkQKkV6iQ0Nrex8s"
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: "Cogent Embedded, Inc." <source@cogentembedded.com>
-Cc: Adam Ford <aford173@gmail.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Cc: Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
-V2: Rename common _defconfig to .config
----
- configs/renesas_rcar.config   | 27 +++++++++++++++++++++++++++
- configs/renesas_rcar2.config  | 29 ++---------------------------
- configs/renesas_rcar64.config | 31 ++-----------------------------
- 3 files changed, 31 insertions(+), 56 deletions(-)
- create mode 100644 configs/renesas_rcar.config
+--------------M95yIQxWQkQKkV6iQ0Nrex8s
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/configs/renesas_rcar.config b/configs/renesas_rcar.config
-new file mode 100644
-index 00000000000..351803b743a
---- /dev/null
-+++ b/configs/renesas_rcar.config
-@@ -0,0 +1,27 @@
-+CONFIG_CLK=y
-+CONFIG_CLK_RENESAS=y
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_EXT2=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MII=y
-+CONFIG_CMD_PING=y
-+CONFIG_DM_GPIO=y
-+CONFIG_DM_I2C=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_DM_SPI=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_FIT=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_MTD=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_RCAR_GPIO=y
-+CONFIG_SCIF_CONSOLE=y
-+CONFIG_SPI=y
-+CONFIG_VERSION_VARIABLE=y
-diff --git a/configs/renesas_rcar2.config b/configs/renesas_rcar2.config
-index 77606a47082..74dfd41f1a3 100644
---- a/configs/renesas_rcar2.config
-+++ b/configs/renesas_rcar2.config
-@@ -1,56 +1,32 @@
-+#include <configs/renesas_rcar.config>
-+
- # CONFIG_CMD_IMI is not set
- # CONFIG_CMD_XIMG is not set
- # CONFIG_EFI_LOADER is not set
- CONFIG_ARCH_CPU_INIT=y
- CONFIG_BOOTDELAY=3
--CONFIG_CLK=y
--CONFIG_CLK_RENESAS=y
--CONFIG_CMD_BOOTZ=y
- CONFIG_CMD_CACHE=y
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_EXT4=y
--CONFIG_CMD_EXT4_WRITE=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MII=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PCI=y
--CONFIG_CMD_PING=y
- CONFIG_CMD_SDRAM=y
- CONFIG_CMD_TIME=y
- CONFIG_CMD_USB=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4f000000
--CONFIG_DM_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_DM_REGULATOR_GPIO=y
--CONFIG_DM_SPI=y
--CONFIG_DM_SPI_FLASH=y
- CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_ENV_SIZE=0x40000
--CONFIG_FIT=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_HUSH_PARSER=y
--CONFIG_MTD=y
- CONFIG_NR_DRAM_BANKS=1
--CONFIG_OF_CONTROL=y
- CONFIG_PARTITION_UUIDS=y
- CONFIG_PCI=y
- CONFIG_PCI_RCAR_GEN2=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL=y
- CONFIG_PINCTRL_PFC=y
--CONFIG_RCAR_GPIO=y
- CONFIG_RENESAS_SDHI=y
--CONFIG_SCIF_CONSOLE=y
- CONFIG_SH_QSPI=y
--CONFIG_SPI=y
- CONFIG_SPI_FLASH_SPANSION=y
- CONFIG_SYS_CBSIZE=256
- CONFIG_SYS_I2C_RCAR_IIC=y
-@@ -64,4 +40,3 @@ CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_PCI=y
- CONFIG_USB_STORAGE=y
--CONFIG_VERSION_VARIABLE=y
-diff --git a/configs/renesas_rcar64.config b/configs/renesas_rcar64.config
-index 3e2cc50b02c..12211ae2810 100644
---- a/configs/renesas_rcar64.config
-+++ b/configs/renesas_rcar64.config
-@@ -1,41 +1,14 @@
--CONFIG_ARCH_RENESAS=y
--CONFIG_ARM=y
--CONFIG_CLK=y
--CONFIG_CLK_RENESAS=y
--CONFIG_CMD_BOOTZ=y
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_EXT4=y
--CONFIG_CMD_EXT4_WRITE=y
--CONFIG_CMD_FAT=y
-+#include <configs/renesas_rcar.config>
-+
- CONFIG_CMD_FS_GENERIC=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
- CONFIG_CMD_SPI=y
--CONFIG_DM_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_DM_REGULATOR_GPIO=y
--CONFIG_DM_SPI=y
--CONFIG_DM_SPI_FLASH=y
--CONFIG_FIT=y
--CONFIG_HUSH_PARSER=y
--CONFIG_MTD=y
--CONFIG_OF_CONTROL=y
- CONFIG_PHY_ANEG_TIMEOUT=20000
--CONFIG_RCAR_GPIO=y
- CONFIG_REGMAP=y
- CONFIG_REMAKE_ELF=y
- CONFIG_RENESAS_RPC_SPI=y
--CONFIG_SCIF_CONSOLE=y
--CONFIG_SPI=y
- CONFIG_SUPPORT_RAW_INITRD=y
- CONFIG_SYSCON=y
- CONFIG_SYS_LOAD_ADDR=0x58000000
- CONFIG_SYS_MALLOC_BOOTPARAMS=y
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MONITOR_LEN=1048576
--CONFIG_VERSION_VARIABLE=y
--- 
-2.45.2
+On 27/10/2024 02:10, Marek Vasut wrote:
+> Add top level board/renesas/ MAINTAINERS file to catch all the common
+> Renesas file patterns and put people on CC via get_maintainer.pl script=
+=2E
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+> V2: - Replace boards with board in commit message
+>     - Add rzg2l and r9a0
 
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+
+Thanks!
+
+--=20
+Paul Barker
+--------------M95yIQxWQkQKkV6iQ0Nrex8s
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------M95yIQxWQkQKkV6iQ0Nrex8s--
+
+--------------7Q0Im2Bv30Qbr0rBGWw3mXTU--
+
+--------------fn0lY35HzA5G5aJJFZtXKDIP
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx4RxgUDAAAAAAAKCRDbaV4Vf/JGvYOV
+AP9isvegHiEHJzWS93AuYFGkwX+QhqRHKEHUG0LRgxLKxAEAzFQuPm7D7nR36nq2Pvr50J3mnc6s
+QHOAHdmKoQgtnQ0=
+=uQkP
+-----END PGP SIGNATURE-----
+
+--------------fn0lY35HzA5G5aJJFZtXKDIP--
