@@ -4,45 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20842D10C16
-	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 10:11:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE11D10C1E
+	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 10:55:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F0EB88DCC;
-	Sun, 27 Oct 2024 11:11:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 45A4C889ED;
+	Sun, 27 Oct 2024 11:55:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB71F88DF5; Sun, 27 Oct 2024 11:11:48 +0100 (CET)
+ id 0F22388C53; Sun, 27 Oct 2024 11:55:55 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 632F9889ED
- for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 11:11:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 48D5B8897F
+ for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 11:55:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.11,236,1725289200"; 
- d="asc'?scan'208";a="223109176"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 27 Oct 2024 19:11:34 +0900
+ d="asc'?scan'208";a="223110302"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 27 Oct 2024 19:55:48 +0900
 Received: from [10.226.92.22] (unknown [10.226.92.22])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 020C041AA3F5;
- Sun, 27 Oct 2024 19:11:20 +0900 (JST)
-Message-ID: <806590e4-2aa1-4ec7-80bc-9ef8ed2a7e30@bp.renesas.com>
-Date: Sun, 27 Oct 2024 10:11:18 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id BE78A40065AF;
+ Sun, 27 Oct 2024 19:55:42 +0900 (JST)
+Message-ID: <faedbde1-5fdd-4300-9edc-cd4e50b480ee@bp.renesas.com>
+Date: Sun, 27 Oct 2024 10:55:39 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] ARM: renesas: Add top level board/renesas/ MAINTAINERS
- file
+Subject: Re: [PATCH 1/2] ARM: renesas: Drop old unused clock DT headers
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-References: <20241027021045.355625-1-marek.vasut+renesas@mailbox.org>
+Cc: "Cogent Embedded, Inc." <source@cogentembedded.com>,
+ Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Hai Pham <hai.pham.ud@renesas.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Lad Prabhakar
+ <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Sumit Garg
+ <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20241027020504.354623-1-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20241027021045.355625-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241027020504.354623-1-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------fn0lY35HzA5G5aJJFZtXKDIP"
+ boundary="------------NXYdS9jldxaDkDmHUTEzQ0IX"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,38 +66,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------fn0lY35HzA5G5aJJFZtXKDIP
-Content-Type: multipart/mixed; boundary="------------7Q0Im2Bv30Qbr0rBGWw3mXTU";
+--------------NXYdS9jldxaDkDmHUTEzQ0IX
+Content-Type: multipart/mixed; boundary="------------tbrnaeFDjn1e0ednZWEtmule";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <806590e4-2aa1-4ec7-80bc-9ef8ed2a7e30@bp.renesas.com>
-Subject: Re: [PATCH v2] ARM: renesas: Add top level board/renesas/ MAINTAINERS
- file
-References: <20241027021045.355625-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241027021045.355625-1-marek.vasut+renesas@mailbox.org>
+Cc: "Cogent Embedded, Inc." <source@cogentembedded.com>,
+ Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Hai Pham <hai.pham.ud@renesas.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Lad Prabhakar
+ <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Sumit Garg
+ <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Message-ID: <faedbde1-5fdd-4300-9edc-cd4e50b480ee@bp.renesas.com>
+Subject: Re: [PATCH 1/2] ARM: renesas: Drop old unused clock DT headers
+References: <20241027020504.354623-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241027020504.354623-1-marek.vasut+renesas@mailbox.org>
 
---------------7Q0Im2Bv30Qbr0rBGWw3mXTU
-Content-Type: multipart/mixed; boundary="------------M95yIQxWQkQKkV6iQ0Nrex8s"
+--------------tbrnaeFDjn1e0ednZWEtmule
+Content-Type: multipart/mixed; boundary="------------Fb0gqV7yFXF0V5b85Ri8rClu"
 
---------------M95yIQxWQkQKkV6iQ0Nrex8s
+--------------Fb0gqV7yFXF0V5b85Ri8rClu
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 27/10/2024 02:10, Marek Vasut wrote:
-> Add top level board/renesas/ MAINTAINERS file to catch all the common
-> Renesas file patterns and put people on CC via get_maintainer.pl script=
-=2E
+On 27/10/2024 02:04, Marek Vasut wrote:
+> Renesas R-Car systems use mainline Linux DTs for U-Boot via OF_UPSTREAM=
+,
+> which also includes headers from dts/upstream/include/dt-bindings/clock=
+ .
+> Remove unused legacy DT header files from include/dt-bindings/clock .
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
+> Cc: "Cogent Embedded, Inc." <source@cogentembedded.com>
+> Cc: Adam Ford <aford173@gmail.com>
+> Cc: Biju Das <biju.das.jz@bp.renesas.com>
+> Cc: Hai Pham <hai.pham.ud@renesas.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+> Cc: Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>
 > Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Sumit Garg <sumit.garg@linaro.org>
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
-> ---
-> V2: - Replace boards with board in commit message
->     - Add rzg2l and r9a0
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
@@ -99,7 +119,7 @@ Thanks!
 
 --=20
 Paul Barker
---------------M95yIQxWQkQKkV6iQ0Nrex8s
+--------------Fb0gqV7yFXF0V5b85Ri8rClu
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -163,21 +183,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------M95yIQxWQkQKkV6iQ0Nrex8s--
+--------------Fb0gqV7yFXF0V5b85Ri8rClu--
 
---------------7Q0Im2Bv30Qbr0rBGWw3mXTU--
+--------------tbrnaeFDjn1e0ednZWEtmule--
 
---------------fn0lY35HzA5G5aJJFZtXKDIP
+--------------NXYdS9jldxaDkDmHUTEzQ0IX
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx4RxgUDAAAAAAAKCRDbaV4Vf/JGvYOV
-AP9isvegHiEHJzWS93AuYFGkwX+QhqRHKEHUG0LRgxLKxAEAzFQuPm7D7nR36nq2Pvr50J3mnc6s
-QHOAHdmKoQgtnQ0=
-=uQkP
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx4cLAUDAAAAAAAKCRDbaV4Vf/JGvRAk
+AP45mE60ojsDMoWbU6ev5XjMVdyr8asV36uag9kPcfLG8gEAuQxB41HZUPRbBAfTy6Vf2gJhoOkv
+k9L1ewZJq/NscQk=
+=tIrh
 -----END PGP SIGNATURE-----
 
---------------fn0lY35HzA5G5aJJFZtXKDIP--
+--------------NXYdS9jldxaDkDmHUTEzQ0IX--
