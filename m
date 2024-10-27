@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CAD8D1356F
-	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 16:32:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D92BD1356D
+	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 16:32:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B944C89057;
-	Sun, 27 Oct 2024 17:32:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1760089079;
+	Sun, 27 Oct 2024 17:32:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="VVpzOuD7";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="KXqNv5aR";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="BNbx8xiL";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="qWj97fCx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B30389057; Sun, 27 Oct 2024 17:32:06 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 4562989057; Sun, 27 Oct 2024 17:32:07 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C49188C10
- for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 17:32:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 12A6888E78
+ for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 17:32:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Xc29C6GVFz9sby;
- Sun, 27 Oct 2024 17:31:59 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Xc29F5YvFz9sjc;
+ Sun, 27 Oct 2024 17:32:01 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1730046721;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vgglfI6WqvK8x6gxGZC02YXlDuP50Q/241fkn4+wMtk=;
+ b=BNbx8xiLuxe3ou1nwI/Ga1wbDjtpEDFhH9/yktx48QAX+5Nmat+kkTJu7KlXtbcixvTBoa
+ Mx74I2s1dcSh8D8LxfrGn+GZ6YQKI/f7A6Snv+B+WKiLpCKmuHzfQ1ca3HdMA20Wz/73mg
+ nr+czIHOduoODTdYx+RZVsvHARIZxyOCTlYPq6AyJ1gMLurzZFQjZjxuFZXU+8KQPnbQBm
+ apXpu0p9HqgEmTQ1OyO6WP5Hm5e6FNdDP5SooqNQcRS2Uw/aIVkg7clOil4GzjZZx1QgXz
+ XaYWjQjNMNx54PQFPs6TTNcTmKATFEnrV/uQtFVio4zGAoilIS/cqR7w5BTMyA==
+Message-ID: <d88f090e-90cf-4b3d-9aa5-f9b211e74bfe@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1730046719;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=tDW6+UewxL7gdKrRFiwM+CIwRwtCuR4W3vr4rbNk5Ac=;
- b=VVpzOuD7MUwwVDPUZScNQzukSkmzXGhjZYHuqYHwl4zz/8YzLbwz8UVPI6gLiCX/gwRJ07
- dfw92HSyNaTHPzzqvuzDfQ9N1k8fbMe8nWTV0zhm4UP+UbFeJwUCGrOp1x2jsq0/XBfdIp
- hnlG7zg5wg3KNCzZDzhouOdrdtRSGmq9mExocup9d1tK9bgj1nVmJjzQzvVXRh2fNCvNon
- /xF8R19uuEcETF3Pi3t+Dmk8bBa5I7ltaMZzic+a0BGR110kT1d9rfPbBuLqveG0Z67gw6
- AZzAaLghOe439dSD94Didsk7Cn//IHJxVRpNUQbOxq2/xKsaKfAHaKO8iVnfkQ==
-Message-ID: <bd2ec192-cbc7-4410-a3c5-e3ac0aaa7b88@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730046718;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=tDW6+UewxL7gdKrRFiwM+CIwRwtCuR4W3vr4rbNk5Ac=;
- b=KXqNv5aRN18LJARt71lu7gi+pMrFb18dgw2+2TPRX2YEgQtCrATCWx5ZQgSjky2FxwMrfI
- qRSxNvSKx5hlmy/IrHhPvuiWaCE8hF4caqmqg6CnBCCwXmuE/51i7IRkwJgJdVSRE7+XIc
- IgEwUnGIhnjcxYdgCnYQXiwiYHgCzV1sHNkbYaCWtIbpIKAr5KbIPJFqsBw0MPQJegQv+v
- ekc75qovUA5LnLciwmfAmjsCga6tfmylTHhX827/gDtvTzMRdAkWCr7qS2MyYVYxnavm5e
- 4zzNXQw1n2BuX7zfjgnz9vCl5vEeqCDmRTsmqBmlPk3o0QpebYMLIJXxCiV4Lg==
-Date: Sun, 27 Oct 2024 17:15:37 +0100
+ bh=vgglfI6WqvK8x6gxGZC02YXlDuP50Q/241fkn4+wMtk=;
+ b=qWj97fCxWav7KHgfYzxBq4F0D9KeEqwdv7FfkLhLfjSGDZvxq9oq+hDqVXYyId6BCU5NSQ
+ j2vfVoDSB5eGrzZZ0aoP4G3iU+vQxeRIFNORMNEt5s+2gjgJljqZBNQRXWt0IW6qSoQX53
+ AiQggj9QcyC+auk4Br6tOSbL8IzDeLawKxrosFYhCIHae/7YSCOHITgK5y79YAYZLYYYPy
+ DrMGpuCotQm+IoT4jzKD5S0HY397prCSQI0sQKibT3dC+auOcvlNHPHkkuCXK/d6sDwBwd
+ o+E7D+RMN7Kt5d1ZL4q+ZNCXaT4uE38z8PY90vIjtwCyndsIouswC13KP1FjxQ==
+Date: Sun, 27 Oct 2024 17:16:39 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 03/14] pinctrl: rzg2l: Support Ethernet TXC output enable
+Subject: Re: [PATCH 04/14] pinctrl: rzg2l: Drop unnecessary scope
 To: Paul Barker <paul.barker.ct@bp.renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -69,14 +70,15 @@ To: Paul Barker <paul.barker.ct@bp.renesas.com>,
  <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
- <20241024152448.102-4-paul.barker.ct@bp.renesas.com>
+ <20241024152448.102-5-paul.barker.ct@bp.renesas.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20241024152448.102-4-paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20241024152448.102-5-paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ztn4apiu6ak5x8xkni7p9k6aexs1mpn7
-X-MBO-RS-ID: 3bf54aaf52561c36d31
+X-MBO-RS-META: eg7sbipkd1sbd9bmpe96uqgp557z35me
+X-MBO-RS-ID: 02991a856ade00e0ac1
+X-Rspamd-Queue-Id: 4Xc29F5YvFz9sjc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,17 +96,11 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/24/24 5:24 PM, Paul Barker wrote:
-> On the RZ/G2L SoC family, the direction of the Ethernet TXC/TX_CLK
-> signal is selectable to support an Ethernet PHY operating in either MII
-> or RGMII mode. By default, the signal is configured as an input and MII
-> mode is supported. The ETH_MODE register can be modified to configure
-> this signal as an output to support RGMII mode.
-> 
-> As this signal is be default an input, and can optionally be switched to
-> an output, it maps neatly onto an `output-enable` property in the device
-> tree.
+> In rzg2l_pinconf_set(), there are no new variables defined in the case
+> statement for PIN_CONFIG_INPUT_ENABLE so no additional scope is needed.
 > 
 > Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-Same comment as on 2/14 regarding kernel commits.
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Is this something which should be configured in DT instead ?
+btw. it might make sense to split the series per subsystem so it can go 
+in piece by piece.
