@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DBF1D1356D
-	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 16:34:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A396D1356D
+	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 16:34:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 267C8890BB;
-	Sun, 27 Oct 2024 17:32:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7974D88FFB;
+	Sun, 27 Oct 2024 17:32:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="koZ4Xs/P";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="yN9Sgn5c";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ww1Mpvjg";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="KNxrjFuj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D59A890B4; Sun, 27 Oct 2024 17:32:22 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 399728906D; Sun, 27 Oct 2024 17:32:24 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8B0788FFB
- for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 17:32:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C501888EBA
+ for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 17:32:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,36 +31,36 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Xc29S2cFXz9sby;
- Sun, 27 Oct 2024 17:32:12 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Xc29P4Bxqz9sn8;
+ Sun, 27 Oct 2024 17:32:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730046732;
+ s=mail20150812; t=1730046729;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=73/I8eR6ZLKmw5vqDfzCns9lIezGAkinS1RH7y7iv68=;
- b=koZ4Xs/PUXOkeH60y6oT9TDSQMxeO53NmMWNo2d3Z79JTFFN1sM4+OfIdP8RfRKm+3+0jP
- zM1IEal9yBYEpSOo8UxsxrcxNJ4dnHfclNCaL/FMOR/7mghQHCbAG9AdXat8K+DtRmPCSW
- UVijq97GsxTaA2ZjkWZ/fWAKnOyTRc4rM84H/An/9qCSX/bhJHWtnYaVqBB7hKRRUcwfaU
- 00jSGTNrm16r1JuI6snTZa53QBjNhmeolKV4OnS02cUPQJ9UoVZqz583wjpDmmitPxJous
- NgqbjGOM5isni/x8iHJmZ/ObxYRhLU4nq2ZxhFeIz8yJ2XvO50Z2JN2L2ckZWA==
-Message-ID: <5bd5fe3c-1077-4dc9-8305-b435c426d712@mailbox.org>
+ bh=9qkhxHG6/FTb9SSSoXrH4fOAOWYHPO8QwNscJp3vzXY=;
+ b=ww1MpvjgCK+U+jdhfE+0aTZ9kEYGqqP9KvYkNRnYvgGVfSYGzUTMLHWrs9ntL8KtCkv6mf
+ PMyqcjJovYRb0M+rv9J/YajnqX98j64NCmVHa6/DloqCPXgNYbEeHyXU0rGskV+bFRz2gO
+ mbwlZtKHS/3KGxU6OFIoKrd1qS8yPt1dlJbPgTaq36H95QJu1Yhdg/uqy68mTlKHccXeSl
+ on0EcT55AXq7RlvBujs2d3mNgNf6Uf98zeGNBWi+tdSI1QX/8Xx4TR3KTWCyzzQnlvirz9
+ 53e5MyzLJFy4snd0PX2K4jZc9rkhhvCqP4oyqK75mXcUnYMR6qkWc8+YFyqT3A==
+Message-ID: <9bd496f2-7765-4067-bbc6-36b355107af3@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730046730;
+ s=mail20150812; t=1730046727;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=73/I8eR6ZLKmw5vqDfzCns9lIezGAkinS1RH7y7iv68=;
- b=yN9Sgn5co3ZXGhB/kQglEIBWw45reKOOjdiB3MufOJphUMgiYL8pwDp1h7M2Ezb0/HhNV5
- D+WE5TN+PyskjAUn+32mntF7VN3fKWBJmp4wJDaWADrgvfKB6g63uZxWJDwx2/Ja4sTGLT
- EfU+weO2wMCj7DIzltcXFEnq30KRmrz3SSm0jFVgiAyXlkYNu3rZ8cgeFPIzRfg6pjKxuw
- aEl5Qe5YzjAd4By/IIBR+WO7fBXdJDOyLthsE7pTWAbYw+5yfaVogizJCgcJBR9oX62rrO
- Ek1Uvj0SNxh9JPP6wEveiRc4+ywOP+3DEZHQWIsLRdFbhmFEL2GFIJFJ95tbmg==
-Date: Sun, 27 Oct 2024 17:29:43 +0100
+ bh=9qkhxHG6/FTb9SSSoXrH4fOAOWYHPO8QwNscJp3vzXY=;
+ b=KNxrjFuj3CzE67d/zhyBdZHIqjevnnHmwjBA72J5tU9MhAOr9iYt/wB8bFS+BJM6OobK1y
+ /4ZFXOJq6utgRF0sLBBWizX8Zsd1WMAAaYHPq8bu87zUS9480Z7uTOLk6tzP3hE9b/nh4W
+ Kpvl/00CQbgaoVsmrpAytEtwYbEyR/yMcj1jWOgY/iqm8oGByZ+yg+ubT2aGG5P0pJr57c
+ vMevob6eTvjwcXgP8aWRtKLcEOyyRfV334H6uOuAD4ShikmdGaS+vTSmA2Wrn+mn2A5poH
+ +bpixj7N+Z3+IbepVZUHVTzQIkVkYQKh9dk0iHQ2f0sypAfe/YtvhuTlaFiH9w==
+Date: Sun, 27 Oct 2024 17:25:26 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 11/14] net: ravb: Add RZ/G2L Support
+Subject: Re: [PATCH 09/14] net: ravb: Support up to two instances
 To: Paul Barker <paul.barker.ct@bp.renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -68,14 +69,14 @@ To: Paul Barker <paul.barker.ct@bp.renesas.com>,
  <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
- <20241024152448.102-12-paul.barker.ct@bp.renesas.com>
+ <20241024152448.102-10-paul.barker.ct@bp.renesas.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20241024152448.102-12-paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20241024152448.102-10-paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 9iueawtxpg1bk6djtfsp1rqujm6fygkc
-X-MBO-RS-ID: 8208c043ac1e31f7ab0
+X-MBO-RS-META: qej1kxb4meqd99jj43j4ygucyd3a4ade
+X-MBO-RS-ID: 65520cad5455587f506
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,118 +94,81 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/24/24 5:24 PM, Paul Barker wrote:
-> The Renesas R9A07G044L (RZ/G2L) SoC includes two Gigabit Ethernet
-> interfaces which can be supported using the ravb driver. Some RZ/G2L
-> specific steps need to be taken during initialization due to differences
-> between this SoC and previously supported SoCs. We also need to ensure
-> that the module reset is de-asserted after the module clock is enabled
-> but before any Ethernet register reads/writes take place.
+> Several Renesas SoCs in the RZ/G2L family have two Ethernet interfaces.
+> To support this second interface, we extend the bb_miiphy_buses[] array
+> and keep track of the current bus index in ravb_of_to_plat().
+> 
+> Support for an arbitrary number of instances is not implemented - it is
+> expected that bb_miiphy_buses will be replaced with a proper device
+> model/uclass implementation before that is needed.
 > 
 > Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 > ---
->   arch/arm/mach-renesas/Kconfig |   1 +
->   drivers/net/Kconfig           |   2 +
->   drivers/net/ravb.c            | 183 ++++++++++++++++++++++++++++++++--
->   3 files changed, 176 insertions(+), 10 deletions(-)
+>   drivers/net/ravb.c | 28 ++++++++++++++++++++++++----
+>   1 file changed, 24 insertions(+), 4 deletions(-)
 > 
-> diff --git a/arch/arm/mach-renesas/Kconfig b/arch/arm/mach-renesas/Kconfig
-> index aeb55da609bd..d373ab56ce91 100644
-> --- a/arch/arm/mach-renesas/Kconfig
-> +++ b/arch/arm/mach-renesas/Kconfig
-> @@ -76,6 +76,7 @@ config RZG2L
->   	imply MULTI_DTB_FIT
->   	imply MULTI_DTB_FIT_USER_DEFINED_AREA
->   	imply PINCTRL_RZG2L
-> +	imply RENESAS_RAVB
->   	imply RENESAS_SDHI
->   	imply RZG2L_GPIO
->   	imply SCIF_CONSOLE
-> diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-> index 89f7411bdf33..d009acdcd94f 100644
-> --- a/drivers/net/Kconfig
-> +++ b/drivers/net/Kconfig
-> @@ -822,6 +822,8 @@ config RENESAS_RAVB
->   	depends on RCAR_64
->   	select PHYLIB
->   	select PHY_ETHERNET_ID
-> +	select BITBANGMII
-> +	select BITBANGMII_MULTI
-
-Keep the list sorted.
-
->   	help
->   	  This driver implements support for the Ethernet AVB block in
->   	  Renesas M3 and H3 SoCs.
 > diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
-> index fb869cd0872e..e2ab929858c8 100644
+> index f1401d2f6ed2..9b33ce929618 100644
 > --- a/drivers/net/ravb.c
 > +++ b/drivers/net/ravb.c
-
-[...]
-
-> @@ -108,6 +122,16 @@
+> @@ -11,6 +11,7 @@
+>   #include <clk.h>
+>   #include <cpu_func.h>
+>   #include <dm.h>
+> +#include <dm/device_compat.h>
+>   #include <errno.h>
+>   #include <log.h>
+>   #include <miiphy.h>
+> @@ -494,6 +495,7 @@ static int ravb_probe(struct udevice *dev)
+>   {
+>   	struct eth_pdata *pdata = dev_get_plat(dev);
+>   	struct ravb_priv *eth = dev_get_priv(dev);
+> +	struct bb_miiphy_bus *phybus;
+>   	struct mii_dev *mdiodev;
+>   	void __iomem *iobase;
+>   	int ret;
+> @@ -513,7 +515,8 @@ static int ravb_probe(struct udevice *dev)
 >   
->   #define RAVB_TX_TIMEOUT_MS		1000
+>   	mdiodev->read = bb_miiphy_read;
+>   	mdiodev->write = bb_miiphy_write;
+> -	bb_miiphy_buses[0].priv = eth;
+> +	phybus = (struct bb_miiphy_bus *)pdata->priv_pdata;
+> +	phybus->priv = eth;
+>   	snprintf(mdiodev->name, sizeof(mdiodev->name), dev->name);
 >   
-> +#define RAVB_RCV_BUFF_MAX		8192
-> +
-> +struct ravb_device_ops {
-> +	int (*mac_init)(struct udevice *dev);
-> +	int (*dmac_init)(struct udevice *dev);
-> +	int (*config)(struct udevice *dev);
-> +	int (*reset_deassert)(struct udevice *dev);
-> +	void (*reset_assert)(struct udevice *dev);
-> +};
-
-[...]
-
-> +static int ravb_reset_deassert_rcar(struct udevice *dev)
-> +{
-
-The callsites should check if a callback is assigned or NULL and only 
-call the callback if it is assigned. Then you won't need empty callbacks 
-like this.
-
-Basically add if (ops->reset_deassert) ops->reset_deassert() and remove 
-this empty function.
-
-> +	return 0;
-> +}
-> +
-> +static void ravb_reset_assert_rzg2l(struct udevice *dev)
-> +{
-> +	struct ravb_priv *eth = dev_get_priv(dev);
-> +
-> +	reset_assert(&eth->rst);
-> +	reset_free(&eth->rst);
-> +}
-
-A bit of a design question -- would it make sense to have ravb-rcar.c 
-and ravb-rzg2l.c to contain the differences between the ravb variants, 
-and keep common code only in ravb.c ?
-
-[...]
-
-> @@ -684,9 +821,35 @@ int ravb_of_to_plat(struct udevice *dev)
->   	return 0;
->   }
+>   	ret = mdio_register(mdiodev);
+> @@ -625,7 +628,17 @@ int ravb_bb_delay(struct bb_miiphy_bus *bus)
 >   
-> +static const struct ravb_device_ops ravb_device_ops_rzg2l = {
-
-Keep the list sorted, rzg is below rcar (Z is after C) .
-
-> +	.mac_init = ravb_mac_init_rzg2l,
-> +	.dmac_init = ravb_dmac_init_rzg2l,
-> +	.config = ravb_config_rzg2l,
-> +	.reset_deassert = ravb_reset_deassert_rzg2l,
-> +	.reset_assert = ravb_reset_assert_rzg2l,
-> +};
+>   struct bb_miiphy_bus bb_miiphy_buses[] = {
+>   	{
+> -		.name		= "ravb",
+> +		.name		= "ravb0",
+> +		.init		= ravb_bb_init,
+> +		.mdio_active	= ravb_bb_mdio_active,
+> +		.mdio_tristate	= ravb_bb_mdio_tristate,
+> +		.set_mdio	= ravb_bb_set_mdio,
+> +		.get_mdio	= ravb_bb_get_mdio,
+> +		.set_mdc	= ravb_bb_set_mdc,
+> +		.delay		= ravb_bb_delay,
+> +	},
+> +	{
+> +		.name		= "ravb1",
+>   		.init		= ravb_bb_init,
+>   		.mdio_active	= ravb_bb_mdio_active,
+>   		.mdio_tristate	= ravb_bb_mdio_tristate,
+> @@ -646,10 +659,16 @@ static const struct eth_ops ravb_ops = {
+>   	.write_hwaddr		= ravb_write_hwaddr,
+>   };
+>   
+> +static int bb_miiphy_index;
 > +
-> +static const struct ravb_device_ops ravb_device_ops_rcar = {
-> +	.mac_init = ravb_mac_init_rcar,
-> +	.dmac_init = ravb_dmac_init_rcar,
-> +	.config = ravb_config_rcar,
-> +	.reset_deassert = ravb_reset_deassert_rcar,
-> +	.reset_assert = ravb_reset_assert_rcar,
-> +};
-[...]
+>   int ravb_of_to_plat(struct udevice *dev)
+>   {
+>   	struct eth_pdata *pdata = dev_get_plat(dev);
+> -	const fdt32_t *cell;
+> +
+> +	if (bb_miiphy_index >= bb_miiphy_buses_num) {
+> +		dev_err(dev, "ravb driver supports only 1 or 2 devices!\n");
+Hmmmm, I really do not like this, can we make this dynamic ?
+
+Unless you want to take a look at this yourself, I can add it into my todo ?
