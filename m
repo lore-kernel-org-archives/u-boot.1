@@ -4,85 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECA37D10BED
-	for <u-boot@archiver.kernel.org>; Sat, 26 Oct 2024 22:48:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28278D0C604
+	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 01:05:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 700B588DE5;
-	Sun, 27 Oct 2024 00:48:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4758B8903B;
+	Sun, 27 Oct 2024 02:05:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nNAaXevt";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6154E88E3C; Sun, 27 Oct 2024 00:48:57 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1729991107;
+	bh=B9B2kmzn/PbZXgA/GEsdzRi6AdG0P3f2vujUtNVDaR4=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=E4etquf8FBermu5qnydaKpgqtj/pumNgpuYMU7hNSypSR1GTSjm4BKdT79DC5hAjm
+	 fT4tARt/gtxuvXz66hFLWY1zm3rjWbIqdosQqzSgEz5HAktJ7kV3oZp7Bnyg1L/DzY
+	 xlG4uTbyyy912DA0wRPzvS/BCr5aKkV+LuLdZO/W1SKXI1wJmVYupPvbjK8FqMpT0s
+	 EDR7r4JK0qsn6su19Q9NoZJSg4U9qXxsYGduZ3XQEqGuNzpy5Oj9WTVgWrCGRUyzhq
+	 43dVb2DvNgsh96grDpTlSAurf+xj+PvSBzyWS0irP5H/nVCObmR3cRlQNqn1/YGQ+E
+	 mHYjkQhjegGUA==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58F73889DA
- for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 00:48:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5c96b2a10e1so4822106a12.2
- for <u-boot@lists.denx.de>; Sat, 26 Oct 2024 15:48:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729982925; x=1730587725; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=pveZg8hRGqZ4F4zVl9AuQKplER23meMz/jSzJBp7XvQ=;
- b=nNAaXevtQoeZpS6UQ+DZdRubB93G+IaRveMUvwQssKRWlE6Y1bISzNhRj1gUZgoaK9
- Bg6nJYNvuHpyLpj4BAaNlK5dlDUk1eDk09obons0BEi1+HGEJZz1hTW1LvcTMeHXHuwJ
- yWapwee2rKxA0gNKYqThGwbQhmHJJjyFVjUBt0dgz9bp7C1HaudvL9g1HPIC4UUnq7Tc
- 8lfUpXqMK6uRQa6WM/E5gNQK3lv1mofnfkA2U6hhTGDCNdc1zGiB+QNfItzCkEK3nUrq
- I6VuoD7vgep64aKM52JJetEMt1Z7wKZTH4NRpVM/nTisedV0dHUy6oyvQ2gkVPslYypJ
- RV7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729982925; x=1730587725;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pveZg8hRGqZ4F4zVl9AuQKplER23meMz/jSzJBp7XvQ=;
- b=wixsCXMqXfAGPq1/rXJfQ0aVURuplE1KRW/vzGI30OlamW/YuSBgS+8xpVMM86tDfy
- n5fm/Yv6Sul5NGNGj6Y78s/n3aMwMjaq+HSTRs2e/ZztBEqlI5HjFeOwkZfh0ZzVFZjp
- iz1XT97cAxWdVrIEb245knRahqKUdDWfdGrOZKuS4ascD+lDIdq14gk0P9d+No3y1LCu
- 3lmMmtT3fIhNbX+Ufdbzr4PjS5gf+rsnbhJtLuG5IVy/kfR9AvdulYejoHDqrT5bR6l3
- 2VawmT7jlghdIqlPpZs+OP/MOPDW/6MwxkfQVw2uWTf6Tk3LfiOm9rs2lMxEM2P/RdfN
- n09w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUGZIH7czngYw2JOaNK7wwznDaOlMhdZYQxEf54fpiAjYqQ9LBLNhyfjHLZtZVtUnOVeeL6O9M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3SOBiQypcnM9pJPZc2xxT6nRPMF26uNHIbU1fUcrpBR9lG3zt
- BJDZjjMTBuLFByqNm7SE1ysIj5s3RmKhhMi37YzRLh+e3qAEccscIZbzp5kMHfo=
-X-Google-Smtp-Source: AGHT+IHs5Lat8bFWM3Cq/eBRVv/dL3V1qkIkwKT4L5CX7aVHQknaQNYsnm4fq0eyRcd7ScXqTk2gJg==
-X-Received: by 2002:a17:906:6a1d:b0:a9a:18ee:5106 with SMTP id
- a640c23a62f3a-a9de61e95a5mr295681966b.65.1729982924649; 
- Sat, 26 Oct 2024 15:48:44 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b1f29737fsm216509266b.113.2024.10.26.15.48.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 26 Oct 2024 15:48:43 -0700 (PDT)
-Message-ID: <ad794a0a-ef85-4d9b-9923-791a8f9958e7@linaro.org>
-Date: Sun, 27 Oct 2024 00:48:42 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 19422885F4;
+ Sun, 27 Oct 2024 02:05:04 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1729991105;
+ bh=B9B2kmzn/PbZXgA/GEsdzRi6AdG0P3f2vujUtNVDaR4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=qqOq+bJlSznwSO95mkjuFW+rGzyg0LiHfutvGntzI8gP/aOc5giHAXCdBE32mR2d1
+ ODoPtZcSM6cZ0J0BJu7mNBpWCR6kxzdkTZ6zRopepuAPOkBX4Cy2Y20vk+BKX0rNxO
+ BKMXGY6iKmp1ZIU2Lmur4/JLNElDa4N9e5SEIqsf81Dtxj1FZiSQEWACdt5tldoxKc
+ pck/A22SjYRmlXjJC99CwAq/zQA54IyduVE+2wIsxpQ6NXSW+VX1QRQbqAgWBCeySy
+ 3v+IPnEWRXVjk6gmo3BITJF1nN68wVeIGUgZEFR2onOnAGN8qhHVWei2SAaPclmLTb
+ p1clsaCdzzRdA==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH 1/2] ARM: stm32: Deduplicate DH STM32MP15xx DHSOM defconfigs
+Date: Sun, 27 Oct 2024 02:03:46 +0100
+Message-ID: <20241027010437.350243-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Betterbird (Linux)
-Subject: Re: [PATCH] mmc: msm_sdhci: enable vqmmc at probe if available
-Content-Language: en-US
-To: neil.armstrong@linaro.org, Sumit Garg <sumit.garg@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20241016-topic-sm8x50-mmc-vqmmc-v1-1-767af5351d37@linaro.org>
- <cd028a77-c645-403b-9f2e-9ad2943ea146@linaro.org>
- <52e77e08-f122-4f7b-ba0f-b82e1a5911fb@linaro.org>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <52e77e08-f122-4f7b-ba0f-b82e1a5911fb@linaro.org>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,91 +67,586 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Deduplicate defconfigs for all DH STM32MP15xx DHSOM systems by factoring
+out the common parts into generic stm32mp15_dhsom.config and including
+those using the #include <configs/...> preprocessor macro in the current
+set of board specific defconfigs. The preprocessor macro is applicable
+to defconfigs as well.
 
+This introduces no functional change, the resulting .config is identical
+for all DH STM32MP15xx DHSOM systems.
 
-On 24/10/2024 16:16, Neil Armstrong wrote:
-> On 24/10/2024 15:11, Caleb Connolly wrote:
->> Hi Neil,
->>
->> On 16/10/2024 11:17, Neil Armstrong wrote:
->>> On earlier platforms, the vqmmc regulator was enabled by the
->>> previous bootloader, but on the newest (SM8650) it's not
->>> and we need vqmmc to be enabled in order to have the card
->>> to respond.
->>
->> Isn't/shouldn't this be handled in mmc_power_init() ?
-> 
-> So, yes and no, the device_get_supply_regulator(vqmmc-supply) in
-> mmc_power_init is
-> done to be used by sdhci_set_voltage() but .... but ... Qualcomm doesn't
-> use
-> MMC_SIGNAL_VOLTAGE_330 but MMC_SIGNAL_VOLTAGE_300 which is implemented
-> in Linux
-> but not in Uboot, so it would require a significant mmc/sdhci driver update
-> but since we 're not even far from supporting any card state requiring
-> MMC_SIGNAL_VOLTAGE_180 we don't even declare the sdhci_ops and neither
-> any of the config_dll/set_enhanced_strobe/execute_tuning so in our current
-> case we just need to enable vqmmc.
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ configs/stm32mp15_dhcom_basic_defconfig | 174 +-----------------------
+ configs/stm32mp15_dhcor_basic_defconfig | 174 +-----------------------
+ configs/stm32mp15_dhsom.config          | 172 +++++++++++++++++++++++
+ 3 files changed, 176 insertions(+), 344 deletions(-)
+ create mode 100644 configs/stm32mp15_dhsom.config
 
-Ahhh, welp this presumably explains a bunch of my sdcard woes ;( I
-thought the generic code was handling this (and clearly did a bad job at
-checking the regulators themselves)
-
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-
-Kind regards,
-> 
-> Neil
->>
->> Kind regards,
->>>
->>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->>> ---
->>>   drivers/mmc/msm_sdhci.c | 12 ++++++++++++
->>>   1 file changed, 12 insertions(+)
->>>
->>> diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
->>> index 4e5c932c071..27bb7052fca 100644
->>> --- a/drivers/mmc/msm_sdhci.c
->>> +++ b/drivers/mmc/msm_sdhci.c
->>> @@ -15,6 +15,7 @@
->>>   #include <asm/global_data.h>
->>>   #include <asm/io.h>
->>>   #include <linux/bitops.h>
->>> +#include <power/regulator.h>
->>>   /* Non-standard registers needed for SDHCI startup */
->>>   #define SDCC_MCI_POWER   0x0
->>> @@ -43,6 +44,7 @@ struct msm_sdhc {
->>>       struct sdhci_host host;
->>>       void *base;
->>>       struct clk_bulk clks;
->>> +    struct udevice *vqmmc;
->>>   };
->>>   struct msm_sdhc_variant_info {
->>> @@ -163,6 +165,16 @@ static int msm_sdc_probe(struct udevice *dev)
->>>       if (ret)
->>>           return ret;
->>> +    /* Get the vqmmc regulator and enable it if available */
->>> +    device_get_supply_regulator(dev, "vqmmc-supply", &prv->vqmmc);
->>> +    if (prv->vqmmc) {
->>> +        ret = regulator_set_enable_if_allowed(prv->vqmmc, true);
->>> +        if (ret) {
->>> +            printf("Failed to enable the VQMMC regulator\n");
->>> +            return ret;
->>> +        }
->>> +    }
->>> +
->>>       var_info = (void *)dev_get_driver_data(dev);
->>>       if (!var_info->mci_removed) {
->>>           ret = msm_sdc_mci_init(prv);
->>>
->>> ---
->>> base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
->>> change-id: 20241016-topic-sm8x50-mmc-vqmmc-b7cf8176ec51
->>>
->>> Best regards,
->>
-> 
-
+diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
+index a92c615d250..b730bf76dca 100644
+--- a/configs/stm32mp15_dhcom_basic_defconfig
++++ b/configs/stm32mp15_dhcom_basic_defconfig
+@@ -1,181 +1,11 @@
++#include <configs/stm32mp15_dhsom.config>
++
+ CONFIG_ARM=y
+ CONFIG_ARCH_STM32MP=y
+-CONFIG_SYS_MALLOC_F_LEN=0x3000
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
+-CONFIG_SF_DEFAULT_SPEED=50000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_SECT_SIZE=0x1000
+-CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157c-dhcom-pdk2"
+-CONFIG_SPL_TEXT_BASE=0x2FFC2500
+-CONFIG_SPL_MMC=y
+-CONFIG_BOOTCOUNT_BOOTLIMIT=3
+-CONFIG_SYS_BOOTCOUNT_ADDR=0x5C00A14C
+-CONFIG_SPL_STACK=0x30000000
+-CONFIG_SYS_BOOTM_LEN=0x2000000
+-CONFIG_SYS_LOAD_ADDR=0xc2000000
+-CONFIG_SPL=y
+-CONFIG_CMD_STM32KEY=y
+-CONFIG_CMD_STBOARD=y
+-CONFIG_TARGET_DH_STM32MP1_PDK2=y
+-CONFIG_CMD_STM32PROG=y
+-CONFIG_CMD_STM32PROG_OTP=y
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
+-# CONFIG_ARMV7_VIRT is not set
+ CONFIG_SYS_MEMTEST_START=0xc0000000
+ CONFIG_SYS_MEMTEST_END=0xc4000000
+-CONFIG_HAS_BOARD_SIZE_LIMIT=y
+-CONFIG_BOARD_SIZE_LIMIT=1441792
+-# CONFIG_EFI_LOADER is not set
+-CONFIG_FIT=y
+-CONFIG_SPL_LOAD_FIT=y
+-CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_BOOTDELAY=1
+-CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+-CONFIG_SYS_PBSIZE=1050
+-CONFIG_CONSOLE_MUX=y
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_SPL_FOOTPRINT_LIMIT=y
+-CONFIG_SPL_MAX_FOOTPRINT=0x3db00
+-CONFIG_SPL_BOOTCOUNT_LIMIT=y
+-CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MTD=y
+-CONFIG_SPL_DM_SPI_FLASH=y
+-CONFIG_SPL_POWER=y
+-CONFIG_SPL_RAM_DEVICE=y
+-CONFIG_SPL_SPI_FLASH_MTD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
+-CONFIG_SYS_PROMPT="STM32MP> "
+-# CONFIG_CMD_ELF is not set
+-# CONFIG_CMD_EXPORTENV is not set
+-CONFIG_CMD_EEPROM=y
+ CONFIG_SYS_I2C_EEPROM_BUS=3
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_UNZIP=y
+-CONFIG_CMD_ADC=y
+-CONFIG_CMD_CLK=y
+-CONFIG_CMD_DFU=y
+-CONFIG_CMD_FUSE=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_REMOTEPROC=y
+-CONFIG_CMD_SPI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_USB_MASS_STORAGE=y
+-CONFIG_CMD_DHCP6=y
+-CONFIG_CMD_TFTPPUT=y
+-CONFIG_SYS_DISABLE_AUTOLOAD=y
+-CONFIG_CMD_WGET=y
+-CONFIG_CMD_BOOTCOUNT=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_TIME=y
+-CONFIG_CMD_TIMER=y
+-CONFIG_CMD_PMIC=y
+-CONFIG_CMD_REGULATOR=y
+-CONFIG_CMD_BTRFS=y
+-CONFIG_CMD_EXT4_WRITE=y
+-# CONFIG_SPL_DOS_PARTITION is not set
+-# CONFIG_ISO_PARTITION is not set
+-# CONFIG_SPL_PARTITION_UUIDS is not set
+-CONFIG_OF_LIVE=y
+-CONFIG_OF_UPSTREAM=y
+ CONFIG_OF_LIST="st/stm32mp157c-dhcom-pdk2 st/stm32mp153c-dhcom-drc02 st/stm32mp157c-dhcom-picoitx"
+ CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_SPL_ENV_IS_NOWHERE=y
+-CONFIG_VERSION_VARIABLE=y
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_IP_DEFRAG=y
+-CONFIG_TFTP_TSIZE=y
+-CONFIG_USE_SERVERIP=y
+-CONFIG_SERVERIP="192.168.1.1"
+-CONFIG_PROT_TCP_SACK=y
+-CONFIG_IPV6=y
+-CONFIG_STM32_ADC=y
+-CONFIG_SPL_BLOCK_CACHE=y
+-CONFIG_BOOTCOUNT_LIMIT=y
+-CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
+-CONFIG_GPIO_HOG=y
+-CONFIG_DM_HWSPINLOCK=y
+-CONFIG_HWSPINLOCK_STM32=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_STM32F7=y
+-CONFIG_LED=y
+-CONFIG_LED_GPIO=y
+-CONFIG_STM32_FMC2_EBI=y
+-CONFIG_I2C_EEPROM=y
+ CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+-CONFIG_SUPPORT_EMMC_BOOT=y
+-CONFIG_STM32_SDMMC2=y
+-CONFIG_MTD=y
+-CONFIG_DM_MTD=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+-CONFIG_SPI_FLASH_MACRONIX=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_WINBOND=y
+-CONFIG_SPI_FLASH_MTD=y
+-CONFIG_PHY_ANEG_TIMEOUT=20000
+-CONFIG_DWC_ETH_QOS=y
+-CONFIG_KS8851_MLL=y
+-CONFIG_PHY=y
+-CONFIG_SPL_PHY=y
+-CONFIG_PHY_STM32_USBPHYC=y
+-CONFIG_PINCONF=y
+-# CONFIG_SPL_PINCTRL_FULL is not set
+-CONFIG_PINCTRL_STMFX=y
+-CONFIG_DM_PMIC=y
+-CONFIG_PMIC_STPMIC1=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_SPL_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+-CONFIG_DM_REGULATOR_STM32_VREFBUF=y
+-CONFIG_DM_REGULATOR_STPMIC1=y
+-CONFIG_SPL_DM_REGULATOR_STPMIC1=y
+-CONFIG_REMOTEPROC_STM32_COPRO=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_STM32=y
+-CONFIG_SERIAL_RX_BUFFER=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_STM32_QSPI=y
+-CONFIG_STM32_SPI=y
+-CONFIG_SYSRESET_SYSCON=y
+-CONFIG_USB=y
+-CONFIG_DM_USB_GADGET=y
+-CONFIG_SPL_DM_USB_GADGET=y
+-CONFIG_USB_EHCI_HCD=y
+-CONFIG_USB_EHCI_GENERIC=y
+-CONFIG_USB_OHCI_HCD=y
+-CONFIG_USB_OHCI_GENERIC=y
+-CONFIG_USB_DWC2=y
+-CONFIG_USB_HOST_ETHER=y
+-CONFIG_USB_ETHER_ASIX=y
+-CONFIG_USB_GADGET=y
+-CONFIG_SPL_USB_GADGET=y
+-CONFIG_USB_GADGET_MANUFACTURER="dh"
+-CONFIG_USB_GADGET_VENDOR_NUM=0x0483
+-CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
+-CONFIG_USB_GADGET_DWC2_OTG=y
+-CONFIG_USB_GADGET_DOWNLOAD=y
+-CONFIG_SPL_DFU=y
+-CONFIG_WDT=y
+-CONFIG_WDT_STM32MP=y
+-CONFIG_FAT_WRITE=y
+-# CONFIG_BINMAN_FDT is not set
+diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
+index 4162eda67a0..42a596505ca 100644
+--- a/configs/stm32mp15_dhcor_basic_defconfig
++++ b/configs/stm32mp15_dhcor_basic_defconfig
+@@ -1,181 +1,11 @@
++#include <configs/stm32mp15_dhsom.config>
++
+ CONFIG_ARM=y
+ CONFIG_ARCH_STM32MP=y
+-CONFIG_SYS_MALLOC_F_LEN=0x3000
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
+-CONFIG_SF_DEFAULT_SPEED=50000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_SECT_SIZE=0x1000
+-CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157a-dhcor-avenger96"
+-CONFIG_SPL_TEXT_BASE=0x2FFC2500
+-CONFIG_SPL_MMC=y
+-CONFIG_BOOTCOUNT_BOOTLIMIT=3
+-CONFIG_SYS_BOOTCOUNT_ADDR=0x5C00A14C
+-CONFIG_SPL_STACK=0x30000000
+-CONFIG_SYS_BOOTM_LEN=0x2000000
+-CONFIG_SYS_LOAD_ADDR=0xc2000000
+-CONFIG_SPL=y
+-CONFIG_CMD_STM32KEY=y
+-CONFIG_CMD_STBOARD=y
+-CONFIG_TARGET_DH_STM32MP1_PDK2=y
+-CONFIG_CMD_STM32PROG=y
+-CONFIG_CMD_STM32PROG_OTP=y
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
+-# CONFIG_ARMV7_VIRT is not set
+-CONFIG_HAS_BOARD_SIZE_LIMIT=y
+-CONFIG_BOARD_SIZE_LIMIT=1441792
+-# CONFIG_EFI_LOADER is not set
+-CONFIG_FIT=y
+-CONFIG_SPL_LOAD_FIT=y
+-CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_BOOTDELAY=1
+-CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+-CONFIG_SYS_PBSIZE=1050
+-CONFIG_CONSOLE_MUX=y
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_SPL_FOOTPRINT_LIMIT=y
+-CONFIG_SPL_MAX_FOOTPRINT=0x3db00
+-CONFIG_SPL_BOOTCOUNT_LIMIT=y
+-CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MTD=y
+-CONFIG_SPL_DM_SPI_FLASH=y
+-CONFIG_SPL_POWER=y
+-CONFIG_SPL_RAM_DEVICE=y
+-CONFIG_SPL_SPI_FLASH_MTD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
+-CONFIG_SYS_PROMPT="STM32MP> "
+-# CONFIG_CMD_ELF is not set
+-# CONFIG_CMD_EXPORTENV is not set
+-CONFIG_CMD_EEPROM=y
+ CONFIG_SYS_I2C_EEPROM_BUS=2
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_UNZIP=y
+-CONFIG_CMD_ADC=y
+-CONFIG_CMD_CLK=y
+-CONFIG_CMD_DFU=y
+-CONFIG_CMD_FUSE=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_REMOTEPROC=y
+-CONFIG_CMD_SPI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_USB_MASS_STORAGE=y
+-CONFIG_CMD_DHCP6=y
+-CONFIG_CMD_TFTPPUT=y
+-CONFIG_SYS_DISABLE_AUTOLOAD=y
+-CONFIG_CMD_WGET=y
+-CONFIG_CMD_BOOTCOUNT=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_TIME=y
+-CONFIG_CMD_TIMER=y
+-CONFIG_CMD_PMIC=y
+-CONFIG_CMD_REGULATOR=y
+-CONFIG_CMD_BTRFS=y
+-CONFIG_CMD_EXT4_WRITE=y
+-# CONFIG_SPL_DOS_PARTITION is not set
+-# CONFIG_ISO_PARTITION is not set
+-# CONFIG_SPL_PARTITION_UUIDS is not set
+-CONFIG_OF_LIVE=y
+-CONFIG_OF_UPSTREAM=y
+ CONFIG_OF_LIST="st/stm32mp157a-dhcor-avenger96 st/stm32mp151a-dhcor-testbench st/stm32mp153c-dhcor-drc-compact"
+ CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_SPL_ENV_IS_NOWHERE=y
+-CONFIG_VERSION_VARIABLE=y
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_IP_DEFRAG=y
+-CONFIG_TFTP_TSIZE=y
+-CONFIG_USE_SERVERIP=y
+-CONFIG_SERVERIP="192.168.1.1"
+-CONFIG_PROT_TCP_SACK=y
+-CONFIG_IPV6=y
+-CONFIG_STM32_ADC=y
+-CONFIG_SPL_BLOCK_CACHE=y
+-CONFIG_BOOTCOUNT_LIMIT=y
+-CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
+-CONFIG_GPIO_HOG=y
+-CONFIG_DM_HWSPINLOCK=y
+-CONFIG_HWSPINLOCK_STM32=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_STM32F7=y
+-CONFIG_LED=y
+-CONFIG_LED_GPIO=y
+-CONFIG_STM32_FMC2_EBI=y
+-CONFIG_I2C_EEPROM=y
+ CONFIG_SYS_I2C_EEPROM_ADDR=0x53
+-CONFIG_SUPPORT_EMMC_BOOT=y
+-CONFIG_STM32_SDMMC2=y
+-CONFIG_MTD=y
+-CONFIG_DM_MTD=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+-CONFIG_SPI_FLASH_MACRONIX=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_WINBOND=y
+-CONFIG_SPI_FLASH_MTD=y
+-CONFIG_PHY_ANEG_TIMEOUT=20000
+ CONFIG_PHY_MICREL=y
+ CONFIG_PHY_MICREL_KSZ90X1=y
+-CONFIG_DWC_ETH_QOS=y
+-CONFIG_KS8851_MLL=y
+-CONFIG_PHY=y
+-CONFIG_SPL_PHY=y
+-CONFIG_PHY_STM32_USBPHYC=y
+-CONFIG_PINCONF=y
+-# CONFIG_SPL_PINCTRL_FULL is not set
+-CONFIG_PINCTRL_STMFX=y
+-CONFIG_DM_PMIC=y
+-CONFIG_PMIC_STPMIC1=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_SPL_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+-CONFIG_DM_REGULATOR_STM32_VREFBUF=y
+-CONFIG_DM_REGULATOR_STPMIC1=y
+-CONFIG_SPL_DM_REGULATOR_STPMIC1=y
+-CONFIG_REMOTEPROC_STM32_COPRO=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_STM32=y
+-CONFIG_SERIAL_RX_BUFFER=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_STM32_QSPI=y
+-CONFIG_STM32_SPI=y
+-CONFIG_SYSRESET_SYSCON=y
+-CONFIG_USB=y
+-CONFIG_DM_USB_GADGET=y
+-CONFIG_SPL_DM_USB_GADGET=y
+-CONFIG_USB_EHCI_HCD=y
+-CONFIG_USB_EHCI_GENERIC=y
+-CONFIG_USB_OHCI_HCD=y
+-CONFIG_USB_OHCI_GENERIC=y
+-CONFIG_USB_DWC2=y
+-CONFIG_USB_HOST_ETHER=y
+-CONFIG_USB_ETHER_ASIX=y
+-CONFIG_USB_GADGET=y
+-CONFIG_SPL_USB_GADGET=y
+-CONFIG_USB_GADGET_MANUFACTURER="dh"
+-CONFIG_USB_GADGET_VENDOR_NUM=0x0483
+-CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
+-CONFIG_USB_GADGET_DWC2_OTG=y
+-CONFIG_USB_GADGET_DOWNLOAD=y
+-CONFIG_SPL_DFU=y
+-CONFIG_WDT=y
+-CONFIG_WDT_STM32MP=y
+-CONFIG_FAT_WRITE=y
+-# CONFIG_BINMAN_FDT is not set
+diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
+new file mode 100644
+index 00000000000..9ea80c1b127
+--- /dev/null
++++ b/configs/stm32mp15_dhsom.config
+@@ -0,0 +1,172 @@
++# CONFIG_ARMV7_VIRT is not set
++# CONFIG_BINMAN_FDT is not set
++# CONFIG_CMD_ELF is not set
++# CONFIG_CMD_EXPORTENV is not set
++# CONFIG_EFI_LOADER is not set
++# CONFIG_ISO_PARTITION is not set
++# CONFIG_SPL_DOS_PARTITION is not set
++# CONFIG_SPL_PARTITION_UUIDS is not set
++# CONFIG_SPL_PINCTRL_FULL is not set
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_BOARD_SIZE_LIMIT=1441792
++CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
++CONFIG_BOOTCOUNT_BOOTLIMIT=3
++CONFIG_BOOTCOUNT_LIMIT=y
++CONFIG_BOOTDELAY=1
++CONFIG_CMD_ADC=y
++CONFIG_CMD_BOOTCOUNT=y
++CONFIG_CMD_BTRFS=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_DHCP6=y
++CONFIG_CMD_EEPROM=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_FUSE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_REMOTEPROC=y
++CONFIG_CMD_SPI=y
++CONFIG_CMD_STBOARD=y
++CONFIG_CMD_STM32KEY=y
++CONFIG_CMD_STM32PROG=y
++CONFIG_CMD_STM32PROG_OTP=y
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_TIMER=y
++CONFIG_CMD_UNZIP=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_WGET=y
++CONFIG_CONSOLE_MUX=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_DM_HWSPINLOCK=y
++CONFIG_DM_I2C=y
++CONFIG_DM_MTD=y
++CONFIG_DM_PMIC=y
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_REGULATOR_STM32_VREFBUF=y
++CONFIG_DM_REGULATOR_STPMIC1=y
++CONFIG_DM_RTC=y
++CONFIG_DM_SPI=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_ENV_SIZE=0x4000
++CONFIG_FAT_WRITE=y
++CONFIG_FIT=y
++CONFIG_GPIO_HOG=y
++CONFIG_HAS_BOARD_SIZE_LIMIT=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_HWSPINLOCK_STM32=y
++CONFIG_I2C_EEPROM=y
++CONFIG_IPV6=y
++CONFIG_IP_DEFRAG=y
++CONFIG_KS8851_MLL=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MTD=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_UPSTREAM=y
++CONFIG_PHY=y
++CONFIG_PHY_ANEG_TIMEOUT=20000
++CONFIG_PHY_STM32_USBPHYC=y
++CONFIG_PINCONF=y
++CONFIG_PINCTRL_STMFX=y
++CONFIG_PMIC_STPMIC1=y
++CONFIG_PROT_TCP_SACK=y
++CONFIG_REMOTEPROC_STM32_COPRO=y
++CONFIG_RTC_STM32=y
++CONFIG_SERIAL_RX_BUFFER=y
++CONFIG_SERVERIP="192.168.1.1"
++CONFIG_SF_DEFAULT_SPEED=50000000
++CONFIG_SPI=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPL=y
++CONFIG_SPL_BLOCK_CACHE=y
++CONFIG_SPL_BOOTCOUNT_LIMIT=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
++CONFIG_SPL_DFU=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR_STPMIC1=y
++CONFIG_SPL_DM_SPI=y
++CONFIG_SPL_DM_SPI_FLASH=y
++CONFIG_SPL_DM_USB_GADGET=y
++CONFIG_SPL_ENV_IS_NOWHERE=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_FOOTPRINT_LIMIT=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_I2C=y
++CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
++CONFIG_SPL_MAX_FOOTPRINT=0x3db00
++CONFIG_SPL_MMC=y
++CONFIG_SPL_MTD=y
++CONFIG_SPL_PHY=y
++CONFIG_SPL_POWER=y
++CONFIG_SPL_RAM_DEVICE=y
++CONFIG_SPL_SPI=y
++CONFIG_SPL_SPI_FLASH_MTD=y
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_STACK=0x30000000
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
++CONFIG_SPL_TEXT_BASE=0x2FFC2500
++CONFIG_SPL_USB_GADGET=y
++CONFIG_STM32_ADC=y
++CONFIG_STM32_FMC2_EBI=y
++CONFIG_STM32_QSPI=y
++CONFIG_STM32_SDMMC2=y
++CONFIG_STM32_SPI=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_SYSRESET_SYSCON=y
++CONFIG_SYS_BOOTCOUNT_ADDR=0x5C00A14C
++CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
++CONFIG_SYS_BOOTM_LEN=0x2000000
++CONFIG_SYS_DISABLE_AUTOLOAD=y
++CONFIG_SYS_I2C_STM32F7=y
++CONFIG_SYS_LOAD_ADDR=0xc2000000
++CONFIG_SYS_MALLOC_F_LEN=0x3000
++CONFIG_SYS_PBSIZE=1050
++CONFIG_SYS_PROMPT="STM32MP> "
++CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
++CONFIG_TARGET_DH_STM32MP1_PDK2=y
++CONFIG_TFTP_TSIZE=y
++CONFIG_USB=y
++CONFIG_USB_DWC2=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_ETHER_ASIX=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_GADGET_DWC2_OTG=y
++CONFIG_USB_GADGET_MANUFACTURER="dh"
++CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
++CONFIG_USB_GADGET_VENDOR_NUM=0x0483
++CONFIG_USB_HOST_ETHER=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USE_SERVERIP=y
++CONFIG_VERSION_VARIABLE=y
++CONFIG_WDT=y
++CONFIG_WDT_STM32MP=y
 -- 
-// Caleb (they/them)
+2.45.2
+
