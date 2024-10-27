@@ -4,72 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 292D3D1358A
-	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 23:11:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FE17D1358B
+	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 23:11:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2CBE88EE3;
-	Mon, 28 Oct 2024 00:11:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6DBD388EFB;
+	Mon, 28 Oct 2024 00:11:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DoIPl9ET";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nRMCDyjj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B3F88862E; Mon, 28 Oct 2024 00:11:26 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 0D94988F0A; Mon, 28 Oct 2024 00:11:30 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EECA88F4F
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 00:11:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 36C5C88EFB
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 00:11:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6ce3fc4e58bso22779216d6.0
- for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 16:11:15 -0700 (PDT)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6cbf347dc66so24826106d6.3
+ for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 16:11:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730070674; x=1730675474; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730070672; x=1730675472; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xll5TON1WDPbAvprPaTw+VjTnceF9rVHrImr3SnYjxI=;
- b=DoIPl9ETJgDB7Q4zFMtXFjiNIpyo/80wRk1B6OGfKSNqjKlIUMnp6tLDrhWOLYwVqW
- JWoA2040xBI4/eYUI3KII21nRKV6QSgxqITdHQy+WYNF2CUQeaJADLm2icqOB8LoCKm4
- fa1uKGoYiqCwkcDmSGap1Np7LO8M+SBkNKYds=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=mXFvEVszwDosLsslW3pH0fEnaHHiqT7eAuGu5cTK46E=;
+ b=nRMCDyjjMQOdekhikX2I05gYiqRfwAsQMiFZgF8PkR+aR9muyhNOVzVVEJFE1SfTCb
+ ci7sUGeNza9gq5heHpFwQUH/oGJKLxYXZrMCgLN9+Msq1NN8smHH+ITj101A16AKwL+W
+ seYJFRXULvNX3D9xJfA7DvVmGVaz/3hAJBkQI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730070674; x=1730675474;
+ d=1e100.net; s=20230601; t=1730070672; x=1730675472;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xll5TON1WDPbAvprPaTw+VjTnceF9rVHrImr3SnYjxI=;
- b=WdK31MWq4kMk7916fw6ZE10rMvzQZ+P6jF65wg5muASBLgUrnBet5QPZYWQ7KP7fb7
- WC42hLm/siQ3ty50D2uljP8ym0uup0ssBqfHPTM3FiJMgOOCqJNTDF1zVSMn2F5t++mv
- UvRyyZuHxI4av4MtpdWeUhRsGM41UJSch7L0nzJXRt9Br4GisdMxXg7u8RJ/8l+XHvSc
- 11GiwuiQJeePC6cmXO7ydCRt8OUNZv7Bvlz5/6YbQ2yqzA0+ytM6dFYCTOi/Xh/60Gv8
- dgJAuEr/fqr0OvnJAeMMaOou7DdqwWQn4id2KWhb6lyD8ibphmpT1YmmDZWyhuq73swk
- uP2Q==
-X-Gm-Message-State: AOJu0YwLu4AFxyN5J0cUMebIVTwaD422pZLGXkfiMlJMqCy0ButtjLyh
- eiyRrOW7ta8PHWLGOyboxDuA9Y4xRgCEB3MEE2Nd7uRcKlw7BK3BiiNStyHmt5w=
-X-Google-Smtp-Source: AGHT+IE7whgwWzRIhKK/zWfEDNQpyOocprh28gUPzW/s8Tw7xQsMHI5STkDOKkyk3LJgh/8H4tP0aw==
-X-Received: by 2002:a05:6214:4588:b0:6d1:8261:174f with SMTP id
- 6a1803df08f44-6d185816d6fmr107501936d6.36.1730070674220; 
- Sun, 27 Oct 2024 16:11:14 -0700 (PDT)
+ bh=mXFvEVszwDosLsslW3pH0fEnaHHiqT7eAuGu5cTK46E=;
+ b=IBL+86ouCtUhpW/hgWCMkMRhS9VnVda3GECGjaT8eLkfkZMX/OOEWsBRIXFD6iHSx4
+ WKIExVJO5keEXtyl7K33u1SCGqgwkV8LtQPHiMWA9qmXJImKwrLtQyx2EjhbBMVkpdgq
+ 3RnMqjprkHRcx+2IuJepOwm4x+OEEMtpYa5jXRjxNO346Lhj4M3Ao2+BGS2/7fwcNmih
+ ezySKcMgZLuflKdNXZd0fvNLGCkOkeYnVJmjKzizJArQR4poNPE/CCst0POBMoayjXzd
+ 37UHANgCMmhr7dFy0gq4xqHMmTCJktdKzNDGyM7tZMIpKFgXXn+HBporJZDrkdZJgPbe
+ QNOg==
+X-Gm-Message-State: AOJu0YxwX4bID3CIJ4VgZJTWNc2ne0mKcr6tRmUSOvdgy737A8TsMo7Y
+ dbniHc4ZpFoBHYkPbLQfJXbyGWxlf2EnmkF/qpr5ya20NQHgmPnyhos3wh7bkew=
+X-Google-Smtp-Source: AGHT+IFT7iKyJWxon/gM+QF4kAHZ2VhF6kktHGmw5aOcB8VOMHXWPxYTT/55QjkoE/TOwoaM4W3H0Q==
+X-Received: by 2002:a05:6214:398e:b0:6cb:faee:76bd with SMTP id
+ 6a1803df08f44-6d18583c4cfmr105167536d6.37.1730070672140; 
+ Sun, 27 Oct 2024 16:11:12 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d17972f622sm27464976d6.9.2024.10.27.16.11.12
+ 6a1803df08f44-6d17972f622sm27464976d6.9.2024.10.27.16.11.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Oct 2024 16:11:13 -0700 (PDT)
+ Sun, 27 Oct 2024 16:11:11 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Maxim Uvarov <maxim.uvarov@linaro.org>
-In-Reply-To: <20241009094208.1212555-1-jerome.forissier@linaro.org>
-References: <20241009094208.1212555-1-jerome.forissier@linaro.org>
-Subject: Re: [PATCH v2] net: recv(): return -EAGAIN instead of 0 when no
- cleanup is expected
-Message-Id: <173007067229.2057421.17116036505712665875.b4-ty@konsulko.com>
-Date: Sun, 27 Oct 2024 17:11:12 -0600
+To: u-boot@lists.denx.de, Romain Naour <romain.naour@smile.fr>
+In-Reply-To: <20241008075435.1572727-1-romain.naour@smile.fr>
+References: <20241008075435.1572727-1-romain.naour@smile.fr>
+Subject: Re: [PATCH 0/9] net: ksz9477: add support for KSZ GbE switches
+ using SPI bus
+Message-Id: <173007067048.2057421.2528163658496496788.b4-ty@konsulko.com>
+Date: Sun, 27 Oct 2024 17:11:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -90,14 +87,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 09 Oct 2024 11:42:08 +0200, Jerome Forissier wrote:
+On Tue, 08 Oct 2024 09:54:23 +0200, Romain Naour wrote:
 
-> Some drivers do not behave properly when free_pkt() is called with a
-> length of zero. It is an issue I observed when developing the lwIP
-> series [1] (see "QEMU CI tests for r2dplus_i82557c, r2dplus_rtl8139"
-> in the change log) and which I fixed incorrectly by not calling
-> free_pkt() when recv() returns 0. That turned out to be wrong for two
-> reasons:
+> We are using a custom board where an ethernet switch device KSZ9896 is
+> available. This family of devices can use several types of serial bus
+> as management interface: mdio, i2c or SPI. Due to board design
+> constraints and because we initially planned to use this device only
+> from Linux, the SPI bus was used.
+> 
+> Luckily we are using a recent enough u-boot release where KSZ9477
+> driver is available... but only for the i2c interface. Indeed, unlike
+> the kernel driver, the KSZ9477 driver doesn't use the regmap API to
+> access the underlying bus since the regmap API is limited to direct
+> memory access [1].
 > 
 > [...]
 
