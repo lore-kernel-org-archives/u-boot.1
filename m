@@ -4,60 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B52D1356F
-	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 16:09:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1989DD1356D
+	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 16:09:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 062D789058;
-	Sun, 27 Oct 2024 17:09:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 740BF89080;
+	Sun, 27 Oct 2024 17:09:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1730045373;
-	bh=M4AXlrkuHEfQGn04cfPPFmX5QxXztKAIsGzIHCdDwDk=;
+	s=phobos-20191101; t=1730045375;
+	bh=JtTtbvoPmYDXTcPSATscWdVYGyf+fchIPYvxmoh5RzU=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=UrgcmCLPHZQXmiP1MsojF4Asf0cSpTy6ORQDjrhyR9wuBrBXP7FC52bKZ4qskx6Y4
-	 GVP77gqlyEdTydWlJB7fEyKkEhIkwZKtjZXPdLslV2WSrPx2CyPvYxq9xpL6TeIvOF
-	 qWBWHCYg5rneJqDs/qH7HmvIusXDC0zauHWBrHx+YMDLqf4O9QrWUCJgQc7wcTfEkG
-	 6PK9rD1GHVJQfV2ejPexpM+kQ0uz8ZHg6eXMifMR2nn+MmFwkGLeUazVKQbDDRlW1W
-	 YOblv4FKKyyvHslaoNYAOR4FsP9xfr3TSzpYi1JRUB+uQjhgLJfjV8Pg8SOu3SXzg7
-	 1s9XQRE9mFCmQ==
+	b=t4jiY3Mtder/Vmdv/Ct9ZnqWiL3896/7F4qZOoFsTuyy9PqtFbBXUsIpyShKXuDz+
+	 RXhDJsfTPE9KO07R6OTXQV2+9jwfZ7Y1VXHiHQlFhM9umuMfB5LgKn80e8Uy3DfrKi
+	 TfNpRL5yR38MfeVxTfkmCzikuaLDYHtm4JbtdUUa3Ce4FIvcfwp689O0etwtwNHo3m
+	 iODHwWU6fHxYT7vE97CYouEGKYWOgz37Plb98EWrFCGStuBVYXgooOh+asX5d2F1hx
+	 WU44E4muQhphkdxYYcw3DZ7WdftmLRlc60TsJVNfcP0dfl1+BX62mrqW1oYcNWbKkQ
+	 mN3W3KOUgWAtw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id BB46E881A5;
- Sun, 27 Oct 2024 17:09:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 0C7F589031;
+ Sun, 27 Oct 2024 17:09:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1730045371;
- bh=M4AXlrkuHEfQGn04cfPPFmX5QxXztKAIsGzIHCdDwDk=;
+ s=phobos-20191101; t=1730045372;
+ bh=JtTtbvoPmYDXTcPSATscWdVYGyf+fchIPYvxmoh5RzU=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Ig7JLMuzUolg2L8LpuXje0OUJOkvkUG+lyCHHiW2G2m03Gn9N9UhxJLkh2G5I8n94
- V46yDiib/O9NvoAgwAmReujxb0fjWk1JmWU283Egl+29jHMZp8hZPyzxwjwoul9zvK
- u7RSa3cP8EoUMwg/JTa6/fceqBbtBbeAN09bDYI5rqSQNe9diyhR/hKnDigFiQt26T
- ztVBm4u0YkFRnZdy1v8ThCRC0/zafcv8C7b+mn6cA9jbHIEH6wxTmOE5deSgDO72is
- fgDBYNfroVW6Ok2qU9uXSqfi80lg2MtmOduU6OQFtFZ44TKg/7LDgEx9a54+hgQ35M
- kZ+TidDWNtc0w==
-Message-ID: <8404049c-85df-4c72-bf3c-bf83d143b8b9@denx.de>
-Date: Sun, 27 Oct 2024 16:25:50 +0100
+ b=pCqVCatwYE9GHynWPoS4+LVtUg0RpjLH9I3MFPdNleJxvmyFh7hXL6hju+LbHGjvA
+ YOD89YhsRDZrrJ6lCaz+GKhxIR2YL3s2ANUnCB89X2tOMfgPU+PmP5lr0oBsLMGupR
+ FNBbrypPOl9BofIEd08l4ntISxZk35yL1zg+PMBdqJFwqnLdWwY82Ii1LrfJ9bh8MT
+ ZtLyJHiMou2sI5K+Y/7C9UFiLH3dqsgdz68aK6cTri7qFSXd7++oJJt34JzFDuqC6f
+ zod9znVrUv1I/nLfbvEZjHfnXkzfbBstWJEKLwqpM1K+QvGJUQw0rBAfnj+DDs+YID
+ 5rLue6UzlADfA==
+Message-ID: <6f3ce823-93e8-46b5-86f3-52038efc5271@denx.de>
+Date: Sun, 27 Oct 2024 17:08:05 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/10] ARM: socfpga: add Mercury+ AA1 SoM support
-To: Lothar Rubusch <l.rubusch@gmail.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com,
- simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
- sumit.garg@linaro.org, sjg@chromium.org, xypron.glpk@gmx.de,
- michal.simek@amd.com, jit.loon.lim@intel.com, barnas@google.com
-References: <20241013143232.2090645-1-l.rubusch@gmail.com>
- <20241013143232.2090645-3-l.rubusch@gmail.com>
- <ce29c957-4198-4947-b7de-7e10ed385eab@denx.de>
- <CAFXKEHZLwbU=w4LH4iiZeo4ycwOKjgi5YZesHHgxzy6Ac+TOUA@mail.gmail.com>
- <5ba375a1-cf1d-463c-8590-3ddf46c47f3e@denx.de>
- <CAFXKEHZ4+zPw7LuNYK2QZYOQj4v=1UMuf29CSGAEibSOWU48SQ@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] usb: ci_udc: don't use "advance" feature when
+ setting address
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>, Simon Holesch <simon@holesch.de>,
+ Ion Agorria <ion@agorria.com>
+Cc: u-boot@lists.denx.de
+References: <20241013145820.85426-1-clamor95@gmail.com>
+ <20241013145820.85426-2-clamor95@gmail.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFXKEHZ4+zPw7LuNYK2QZYOQj4v=1UMuf29CSGAEibSOWU48SQ@mail.gmail.com>
+In-Reply-To: <20241013145820.85426-2-clamor95@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,52 +73,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/23/24 10:10 PM, Lothar Rubusch wrote:
+On 10/13/24 4:58 PM, Svyatoslav Ryhel wrote:
 
-Hi,
+Sorry for the late reply.
 
-sorry for the late reply.
+> +++ b/drivers/usb/gadget/ci_udc.c
+> @@ -649,12 +649,30 @@ static void flip_ep0_direction(void)
+>   	}
+>   }
+>   
+> +/*
+> + * This function explicitly sets the address, without the "USBADRA" (advance)
+> + * feature, which is not supported by older versions of the controller.
+> + */
+> +static void ci_set_address(struct ci_udc *udc, u8 address)
+> +{
+> +	DBG("%s %x\n", __func__, address);
 
->>>> Can this be generated using binman instead ?
->>>
->>> This would a oportunity for me to learn the binman tool. Great idea! I
->>> need to read a bit more on binman to get a better understanding. I'll
->>> give it a try and let you know. Thank you.
->>
->> This commit might help:
->>
->> 5fccc2891e28 ("ARM: dts: stm32: Generate u-boot.itb using binman on DH
->> STM32 DHSOM")
->>
-> 
-> I face a problem here. First, to apply binman stances in the .dtsi and
-> integrating it as -u-boot.dtsi is very interesting and I actually like
-> the solution to bind everything togerther in this way.
-> 
-> But, I face the situation where the very design specific bitstream(s)
-> for the FPGA are actually not supposed to be upstreamed. Having u-boot
-> binaries and bitstream as .itb separate, allows to build the u-boot
-> part even w/o the bitstream, i.e. the u-boot setup can be quite
-> generic, can be tested and verified building. Is this still possible
-> if binman requires it as binary blob?
+log_debug() or dev_dbg() please.
 
-I believe so, U-Boot CI does use binman to build e.g. imx8m targets 
-which do require extra firmware, but during the CI build that extra 
-firmware is replaced by blank empty files by binman. It does print some 
-sort of warning that the files are missing ... try e.g. 'make 
-imx8mp_dhcom_pdk3_defconfig ; make' and you should see the behavior 
-locally too.
+> +	writel(address << 25, &udc->devaddr);
+> +}
+> +
+>   static void handle_ep_complete(struct ci_ep *ci_ep)
+>   {
+>   	struct ept_queue_item *item, *next_td;
+>   	int num, in, len, j;
+>   	struct ci_req *ci_req;
+>   
+> +	/* Set the device address that was previously sent by SET_ADDRESS */
+> +	if (controller.next_device_address != 0) {
+> +		struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
+> +
+> +		ci_set_address(udc, controller.next_device_address);
+> +		controller.next_device_address = 0;
+> +	}
+> +
+>   	num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+>   	in = (ci_ep->desc->bEndpointAddress & USB_DIR_IN) != 0;
+>   	item = ci_get_qtd(num, in);
+> @@ -783,7 +801,7 @@ static void handle_setup(void)
+>   		 * write address delayed (will take effect
+>   		 * after the next IN txn)
+>   		 */
+> -		writel((r.wValue << 25) | (1 << 24), &udc->devaddr);
+> +		controller.next_device_address = r.wValue;
 
-> On the otherhand it allows to
-> wrap the FPGA logic and exchange the .itb separately when developing a
-> design w/o the need to modify the bootloader.
-> 
-> So, I'd like to hear your opinion on that. Would the .itb appraoch be
-> acceptable in this case? Is there still a better way? Does it make
-> sense to make a separate binman setup instead?
+wValue is word , u16 , but next_device_address is u8 below , why ?
 
-The SPL .its handling was dropped now that the last user was switched to 
-the binman method, but I hope the above will let you switch to the 
-binman method too ?
+>   		req->length = 0;
+>   		usb_ep_queue(controller.gadget.ep0, req, 0);
+>   		return;
+> @@ -814,6 +832,9 @@ static void stop_activity(void)
+>   	int i, num, in;
+>   	struct ept_queue_head *head;
+>   	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
+> +
+> +	ci_set_address(udc, 0);
+> +
+>   	writel(readl(&udc->epcomp), &udc->epcomp);
+>   #ifdef CONFIG_CI_UDC_HAS_HOSTPC
+>   	writel(readl(&udc->epsetupstat), &udc->epsetupstat);
+> @@ -934,6 +955,7 @@ static int ci_pullup(struct usb_gadget *gadget, int is_on)
+>   	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
+>   	if (is_on) {
+>   		/* RESET */
+> +		controller.next_device_address = 0;
+>   		writel(USBCMD_ITC(MICRO_8FRAME) | USBCMD_RST, &udc->usbcmd);
+>   		udelay(200);
+>   
+> diff --git a/drivers/usb/gadget/ci_udc.h b/drivers/usb/gadget/ci_udc.h
+> index bea2f9f3fe3..807f2084c1e 100644
+> --- a/drivers/usb/gadget/ci_udc.h
+> +++ b/drivers/usb/gadget/ci_udc.h
+> @@ -105,6 +105,7 @@ struct ci_drv {
+>   	struct ept_queue_head		*epts;
+>   	uint8_t				*items_mem;
+>   	struct ci_ep			ep[NUM_ENDPOINTS];
+> +	u8				next_device_address;
 
-8efc954fc77e ("Makefile: Drop SPL_FIT_SOURCE support")
+Should this be u16 ?
