@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE11D10C1E
-	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 10:55:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67515D10C1B
+	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 10:58:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45A4C889ED;
-	Sun, 27 Oct 2024 11:55:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E1166889ED;
+	Sun, 27 Oct 2024 11:58:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F22388C53; Sun, 27 Oct 2024 11:55:55 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 48D5B8897F
- for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 11:55:49 +0100 (CET)
+ id CDE9188C53; Sun, 27 Oct 2024 11:58:26 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id C67848897F
+ for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 11:58:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.11,236,1725289200"; 
- d="asc'?scan'208";a="223110302"
+ d="asc'?scan'208";a="227096061"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 27 Oct 2024 19:55:48 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 27 Oct 2024 19:58:21 +0900
 Received: from [10.226.92.22] (unknown [10.226.92.22])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id BE78A40065AF;
- Sun, 27 Oct 2024 19:55:42 +0900 (JST)
-Message-ID: <faedbde1-5fdd-4300-9edc-cd4e50b480ee@bp.renesas.com>
-Date: Sun, 27 Oct 2024 10:55:39 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 8DB36400721E;
+ Sun, 27 Oct 2024 19:58:09 +0900 (JST)
+Message-ID: <b64ae1f7-c5fc-4751-b8d4-06737308debd@bp.renesas.com>
+Date: Sun, 27 Oct 2024 10:58:07 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] ARM: renesas: Drop old unused clock DT headers
+Subject: Re: [PATCH 2/2] ARM: renesas: Drop old unused power DT headers
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: "Cogent Embedded, Inc." <source@cogentembedded.com>,
@@ -44,11 +44,12 @@ Cc: "Cogent Embedded, Inc." <source@cogentembedded.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Sumit Garg
  <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20241027020504.354623-1-marek.vasut+renesas@mailbox.org>
+ <20241027020504.354623-2-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20241027020504.354623-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241027020504.354623-2-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------NXYdS9jldxaDkDmHUTEzQ0IX"
+ boundary="------------0p1uJhxD01VtAbDEUhVj6VBx"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,8 +67,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------NXYdS9jldxaDkDmHUTEzQ0IX
-Content-Type: multipart/mixed; boundary="------------tbrnaeFDjn1e0ednZWEtmule";
+--------------0p1uJhxD01VtAbDEUhVj6VBx
+Content-Type: multipart/mixed; boundary="------------0NF7Gt4MibuA9eDNSNVAuYS0";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -79,24 +80,25 @@ Cc: "Cogent Embedded, Inc." <source@cogentembedded.com>,
  Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Sumit Garg
  <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <faedbde1-5fdd-4300-9edc-cd4e50b480ee@bp.renesas.com>
-Subject: Re: [PATCH 1/2] ARM: renesas: Drop old unused clock DT headers
+Message-ID: <b64ae1f7-c5fc-4751-b8d4-06737308debd@bp.renesas.com>
+Subject: Re: [PATCH 2/2] ARM: renesas: Drop old unused power DT headers
 References: <20241027020504.354623-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241027020504.354623-1-marek.vasut+renesas@mailbox.org>
+ <20241027020504.354623-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241027020504.354623-2-marek.vasut+renesas@mailbox.org>
 
---------------tbrnaeFDjn1e0ednZWEtmule
-Content-Type: multipart/mixed; boundary="------------Fb0gqV7yFXF0V5b85Ri8rClu"
+--------------0NF7Gt4MibuA9eDNSNVAuYS0
+Content-Type: multipart/mixed; boundary="------------SMn3zXVHwFN4QQABLMY9SvC7"
 
---------------Fb0gqV7yFXF0V5b85Ri8rClu
+--------------SMn3zXVHwFN4QQABLMY9SvC7
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 27/10/2024 02:04, Marek Vasut wrote:
 > Renesas R-Car systems use mainline Linux DTs for U-Boot via OF_UPSTREAM=
 ,
-> which also includes headers from dts/upstream/include/dt-bindings/clock=
+> which also includes headers from dts/upstream/include/dt-bindings/power=
  .
-> Remove unused legacy DT header files from include/dt-bindings/clock .
+> Remove unused legacy DT header files from include/dt-bindings/power .
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -119,7 +121,8 @@ Thanks!
 
 --=20
 Paul Barker
---------------Fb0gqV7yFXF0V5b85Ri8rClu
+
+--------------SMn3zXVHwFN4QQABLMY9SvC7
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -183,21 +186,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------Fb0gqV7yFXF0V5b85Ri8rClu--
+--------------SMn3zXVHwFN4QQABLMY9SvC7--
 
---------------tbrnaeFDjn1e0ednZWEtmule--
+--------------0NF7Gt4MibuA9eDNSNVAuYS0--
 
---------------NXYdS9jldxaDkDmHUTEzQ0IX
+--------------0p1uJhxD01VtAbDEUhVj6VBx
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx4cLAUDAAAAAAAKCRDbaV4Vf/JGvRAk
-AP45mE60ojsDMoWbU6ev5XjMVdyr8asV36uag9kPcfLG8gEAuQxB41HZUPRbBAfTy6Vf2gJhoOkv
-k9L1ewZJq/NscQk=
-=tIrh
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx4cvwUDAAAAAAAKCRDbaV4Vf/JGvd7B
+AQDKikSlgQ4OMcvOpVEULY9tSEmv8Ds/Jp7pomQ1oNtL3gD/XIshwtNaYXfoSSPEkYHrbVDVqnFN
+TkVKz5rh1Vq7qQo=
+=La4g
 -----END PGP SIGNATURE-----
 
---------------NXYdS9jldxaDkDmHUTEzQ0IX--
+--------------0p1uJhxD01VtAbDEUhVj6VBx--
