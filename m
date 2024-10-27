@@ -4,52 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67515D10C1B
-	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 10:58:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A7B9D13569
+	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 14:40:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1166889ED;
-	Sun, 27 Oct 2024 11:58:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id E629388EE3;
+	Sun, 27 Oct 2024 15:40:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CDE9188C53; Sun, 27 Oct 2024 11:58:26 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id C67848897F
- for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 11:58:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.11,236,1725289200"; 
- d="asc'?scan'208";a="227096061"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 27 Oct 2024 19:58:21 +0900
-Received: from [10.226.92.22] (unknown [10.226.92.22])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 8DB36400721E;
- Sun, 27 Oct 2024 19:58:09 +0900 (JST)
-Message-ID: <b64ae1f7-c5fc-4751-b8d4-06737308debd@bp.renesas.com>
-Date: Sun, 27 Oct 2024 10:58:07 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EvRsA/31";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0E0EF88E78; Sun, 27 Oct 2024 15:40:25 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F02588EE4
+ for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 15:40:20 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=gilles.talis@gmail.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5c94c4ad9d8so4350878a12.2
+ for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 07:40:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1730040020; x=1730644820; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8llIp0Xuu8sk3H2YZ2/56yNl3JGuRKLymBRZrJq9ujA=;
+ b=EvRsA/31EtG4mZZd9/zrFKkRvw/1aRSFUEyORXwspPOrsI9g1If4ECIRDA3XaUwSeA
+ W4XoMKgsCO7ktFat1PiqnGJ+pii3oDtbSopxz5F5viP4oIr/oypuTNkGQc4b0CFD92T8
+ i4fmn4b9BpWfvUJzK+41Fx7OHBmEEPnEMe3aQA3VbGEMYcLBdtrgal0AUBUSWTh3eLAZ
+ 8+pr4eOHxlQKb9Edl/boVTusbVtBtmP5Q8eig8Q9tLVBzf8jI6h1qpQh4MbysjlaxL5J
+ bDl6uIHAtcsh7u2Q7a2YydUZBunRYwmknEx4waaHm513nMuo7eLfmoVAq8xYOjqXb8/K
+ FkZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730040020; x=1730644820;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8llIp0Xuu8sk3H2YZ2/56yNl3JGuRKLymBRZrJq9ujA=;
+ b=b+AyQ3/pECGP9QZIHaGvwSDkLIDW/PNMu0zq6hnbU0KiN/lX8Tl71+3dtRXkOla+jC
+ aVbtn+wBmiiehfuRETNGeP31/RNtwyw+4PouNbkBa1BpJqLHskEYXgaMLjZ4NLvEfQU9
+ M++CVeBqK7jKKB5ExnHaHByyAqNv0iTZE564WOAmjDPO/h84QwmljY+N7BqaMiUbfIiX
+ 2LN5bEnVZj2GZz2Nqb9q98LS+FLfk0OL+CfCieTVilw5NOMyRXsLUGIGEcXJyHXlnhQE
+ KNsYxVkTNnJdksHujnPi+xl7JqW35Jc9ZS0iia5a9piCEmLrj9NeRcijqyCpNfEUwfJd
+ 0jDg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUj0bA9+Qyo1eTl74UycYdOWKKOA4qPtug9E5bSUNic12z1Cy4ELTXrGVdbfHEuNH7ylePsbIU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZJtgyQPfgJazz51/13Tas+gqTZ9PYA3vK9xFP0j/GGUjtCEol
+ kXYKm6DH6pTyUxJk37Eu6ENA0uQJVMMViJW3h9ZtVc5DnHxr6cCU6/c4XrW3kHK0sD+iCg3QJZM
+ 6wNRA6xDsaaP8khlXGqENi1TxKmBtJ7Pv
+X-Google-Smtp-Source: AGHT+IEMDeyNvuIPx3xqMO71tNC/OBhd8WMcZDGApihE73xLe9zodDcq6rd4qwjRFzs5sZ6WjIZH5RdTWxxzUNpX3CQ=
+X-Received: by 2002:a17:907:6d0e:b0:a99:f0d0:4ce3 with SMTP id
+ a640c23a62f3a-a9de5d97f44mr463765566b.17.1730040019390; Sun, 27 Oct 2024
+ 07:40:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] ARM: renesas: Drop old unused power DT headers
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: "Cogent Embedded, Inc." <source@cogentembedded.com>,
- Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Hai Pham <hai.pham.ud@renesas.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Lad Prabhakar
- <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Sumit Garg
- <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20241027020504.354623-1-marek.vasut+renesas@mailbox.org>
- <20241027020504.354623-2-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20241027020504.354623-2-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------0p1uJhxD01VtAbDEUhVj6VBx"
+References: <20241025004411.585310-1-gilles.talis@gmail.com>
+ <CAOMZO5BQoZ=MvRqmcZW8GsAGjfJsnev8dUwgLE1EOnO43c5ybQ@mail.gmail.com>
+In-Reply-To: <CAOMZO5BQoZ=MvRqmcZW8GsAGjfJsnev8dUwgLE1EOnO43c5ybQ@mail.gmail.com>
+From: Gilles Talis <gilles.talis@gmail.com>
+Date: Sun, 27 Oct 2024 10:40:07 -0400
+Message-ID: <CAKcgs2y881Q1_Z7yC6vxqPm_i9050ajDDK-0vEDSHp_Wxar6Jw@mail.gmail.com>
+Subject: Re: [PATCH v2] board: emcraft: Add support for Emcraft Systems NavQ+
+To: Fabio Estevam <festevam@gmail.com>
+Cc: peng.fan@nxp.com, u-boot@lists.denx.de, uboot-imx@nxp.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,141 +90,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------0p1uJhxD01VtAbDEUhVj6VBx
-Content-Type: multipart/mixed; boundary="------------0NF7Gt4MibuA9eDNSNVAuYS0";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: "Cogent Embedded, Inc." <source@cogentembedded.com>,
- Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Hai Pham <hai.pham.ud@renesas.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Lad Prabhakar
- <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Sumit Garg
- <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <b64ae1f7-c5fc-4751-b8d4-06737308debd@bp.renesas.com>
-Subject: Re: [PATCH 2/2] ARM: renesas: Drop old unused power DT headers
-References: <20241027020504.354623-1-marek.vasut+renesas@mailbox.org>
- <20241027020504.354623-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241027020504.354623-2-marek.vasut+renesas@mailbox.org>
+Hi Fabio,
+thank you for the second review!
 
---------------0NF7Gt4MibuA9eDNSNVAuYS0
-Content-Type: multipart/mixed; boundary="------------SMn3zXVHwFN4QQABLMY9SvC7"
+Le ven. 25 oct. 2024 =C3=A0 07:20, Fabio Estevam <festevam@gmail.com> a =C3=
+=A9crit :
+>
+> Hi Gilles,
+>
+> On Thu, Oct 24, 2024 at 9:44=E2=80=AFPM Gilles Talis <gilles.talis@gmail.=
+com> wrote:
+> >
+> > The Emcraft Systems NavQ+ kit is a mobile robotics platform
+> > based on NXP i.MX8 MPlus SoC.
+> >
+> > The following interfaces and devices are enabled:
+> > - eMMC
+> > - Gigabit Ethernet (through eQOS interface)
+> > - SD-Card
+> > - UART console
+> >
+> > The device tree file is taken from upstream Linux Kernel
+> > through OF_UPSTREAM
+> >
+> > Signed-off-by: Gilles Talis <gilles.talis@gmail.com>
+> > ---
+> > Changes v1 --> v2:
+> > - Removed unused usdhc properties from dtsi
+> > - Moved to correct ethernet PHY driver (REALTEK -> ATHEROS)
+> > - Removed empty board_late_init() function
+> > - Moved env variables to an env file
+>
+> This version looks better, thanks.
+>
+> CI reports an error.
+>
+> Warning, treated as error:
+> 142/builds/u-boot/custodians/u-boot-imx/doc/board/emcraft/index.rst:6:toc=
+tree
+> contains reference to nonexisting document
+> 'board/emcraft/imx8mp-navqp'
+> 143make[1]: *** [doc/Makefile:70: htmldocs] Error 2
+> 144make: *** [Makefile:2445: htmldocs] Error 2
+>
+> Please fix and resend.
+Good catch! I will fix this.
 
---------------SMn3zXVHwFN4QQABLMY9SvC7
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+>
+> > +#include <miiphy.h>
+> > +
+> > +#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
+> > +int board_phy_config(struct phy_device *phydev)
+> > +{
+> > +       if (phydev->drv->config)
+> > +               phydev->drv->config(phydev);
+> > +
+> > +       return 0;
+>
+> Can't board_phy_config() be removed now?
+Indeed. Will do.
 
-On 27/10/2024 02:04, Marek Vasut wrote:
-> Renesas R-Car systems use mainline Linux DTs for U-Boot via OF_UPSTREAM=
-,
-> which also includes headers from dts/upstream/include/dt-bindings/power=
- .
-> Remove unused legacy DT header files from include/dt-bindings/power .
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: "Cogent Embedded, Inc." <source@cogentembedded.com>
-> Cc: Adam Ford <aford173@gmail.com>
-> Cc: Biju Das <biju.das.jz@bp.renesas.com>
-> Cc: Hai Pham <hai.pham.ud@renesas.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-> Cc: Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Sumit Garg <sumit.garg@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
+>
+> > diff --git a/board/emcraft/imx8mp_navqp/imx8mp_navqp.env b/board/emcraf=
+t/imx8mp_navqp/imx8mp_navqp.env
+> > new file mode 100644
+> > index 0000000000..a8b76574b4
+> > --- /dev/null
+> > +++ b/board/emcraft/imx8mp_navqp/imx8mp_navqp.env
+> > @@ -0,0 +1,13 @@
+>
+> SPDX header is missing for this file.
+OK. Will do.
 
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>
+> > +int board_fit_config_name_match(const char *name)
+> > +{
+> > +       if (is_imx8mp() &&
+> > +           !strcmp(name, "imx8mp-navqp"))
+> > +               return 0;
+> > +
+> > +       return -1;
+>
+> return -EINVAL;
+OK.
 
-Thanks!
-
---=20
-Paul Barker
-
---------------SMn3zXVHwFN4QQABLMY9SvC7
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------SMn3zXVHwFN4QQABLMY9SvC7--
-
---------------0NF7Gt4MibuA9eDNSNVAuYS0--
-
---------------0p1uJhxD01VtAbDEUhVj6VBx
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx4cvwUDAAAAAAAKCRDbaV4Vf/JGvd7B
-AQDKikSlgQ4OMcvOpVEULY9tSEmv8Ds/Jp7pomQ1oNtL3gD/XIshwtNaYXfoSSPEkYHrbVDVqnFN
-TkVKz5rh1Vq7qQo=
-=La4g
------END PGP SIGNATURE-----
-
---------------0p1uJhxD01VtAbDEUhVj6VBx--
+>
+> > +#if defined(CONFIG_CMD_NET)
+> > +#define CFG_FEC_MXC_PHYADDR          1
+>
+> With DM, this is no longer used, right?
+Indeed. Will remove.
