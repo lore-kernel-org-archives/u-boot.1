@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D089D13585
-	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 21:02:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F106DD1356A
+	for <u-boot@archiver.kernel.org>; Sun, 27 Oct 2024 21:03:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 521BA8880B;
+	by phobos.denx.de (Postfix) with ESMTP id AEC1F88F0A;
 	Sun, 27 Oct 2024 22:02:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1730062978;
-	bh=ZwQH3uJeJLEhVO7oxIHMBLYZQU/oBVZ+PqtEqAvNvvs=;
+	bh=lEqUjs7undS7UftpUtPSdU3z228rDJDSWpSxruU8BzY=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=T9nFdfcpveCCk9FdJShVq6qndGD0J6q+ojCxPuHsL99dq1rUZAo20U/tAfO25RjBI
-	 TygIAIQQ7Eo3AnS6CgSBHGqfBqj1qrGHuB4EZfdkTAv3SeooHJxWdjbNZW3uNd3EIQ
-	 lxKJI6logLmG7Fdmj6SuTdkhIGULxr3ToDJXa8pn9W6bpbgouhmY2nqRdJdM2+2C1b
-	 ZKjd9RDPLcxhugUHTLXiGc0qeFumpwoU/lO12Iewi8TBHfmfE+XhC+pCj7mMkZoEVM
-	 NdeCRh6+11FItGTlrumer5EZ2+NKTDU7k+1GSvCdaVbkEhpIRFtVukhitQmTwA59RC
-	 e0jFRHbmOkJLQ==
+	b=qAz4kSdEsEB+R2CdKvDsOKnS0MTKINRv2FMywT1yctIVv/zrgM1LFc1sUpAmTZBMg
+	 NzgkCtA1Tf/5rQj7po5zcSaBTL3uMgONEKqkAunig9Fe/hNokvbbbv/p7h4+wv1Haf
+	 p045/kngJV1z4m+LBGu2Cm+RlFEuC/6sb6u4g1+WKaHF8R/DSI06WMfU6ORB5dl1kQ
+	 kDabsEb6xh2hFY/OkVWXjcnU0GDzR3iU+A4ovkxvZu69J/D4f4Pd3rmwiu6wOptlx5
+	 q2U4mj9HUWPFVvZvKbBrvmy6WhLvfdV0IjkZpLKBvNvuugzO16rwqAtY0Ae6rsrlpo
+	 XXIqnF63d+cbg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 116948811C;
+ by phobos.denx.de (Postfix) with ESMTPSA id D3E5F881A5;
  Sun, 27 Oct 2024 22:02:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1730062976;
- bh=ZwQH3uJeJLEhVO7oxIHMBLYZQU/oBVZ+PqtEqAvNvvs=;
+ s=phobos-20191101; t=1730062977;
+ bh=lEqUjs7undS7UftpUtPSdU3z228rDJDSWpSxruU8BzY=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=QT+TXs6L9YGkvo7N6dJBWWxrUHwh1zvflgs+G/4g+1tagJ6UrfKAWpb3fHK6dNtoG
- ojW+1Q23ztA2S06hTA+MqYBanElT/HXe0TvybzMSBCTJsKerV9C3iQ0FrIxsomGK4h
- JTQr/PTqBaU2yqYYZSzrGIeUTSZShIZxFbeFPsEWdg9Hw6FHn439w+F6D51eMkDfRT
- f37y0PLYVVKLuPW6BR/w+i0hKNFM5W9RqmWrURuafJlDc+zW8bmSMsJzcerO9yc5pr
- AH5hYbjw6Vnzl3Bkf4ZPON2gLKajpnKYRWxRg5uuFvHeEaqEZqiInCvbEiK8RQUIj0
- ye2zdCJNcTmkA==
-Message-ID: <16b090de-2fbb-4905-909d-0da92cb1946c@denx.de>
-Date: Sun, 27 Oct 2024 22:01:58 +0100
+ b=fotZY7mVFS4t0hIKSc4fUmDbTnaHDl5wn9f7+KhfPMT+DjC1wVUonny8+00ZNNHdJ
+ WnVpnkXe4RbC6tCaF/RRp0xm2CEIAiF4Vk6J8vxqPNqm+X6mKfyL59krOPvY5aHGcX
+ /MhRxS1QCT2/uAA3woB/dqdM9kgLZ6ZZ2ZhLKAiZGoM5JkWQFOsdwsONSyM/5pmnfr
+ fN1Jk/M+H6EWAgScxCjdgkKC0qOcUz2xl92yMRVGUMU7K7r8xUC+0H04BWX3ceZvzk
+ qWwCKmHVM+sIDsLYpONjfNknDFd7o55ZX6uDtVa4S2JEPzo3HjmvyUkQFo5ePI7g3E
+ wKcl/d3fAeaCQ==
+Message-ID: <f5ff176d-14f3-4ace-85db-33419512d42b@denx.de>
+Date: Sun, 27 Oct 2024 22:02:20 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] imx: hab: fix size of IVT+CSF blob tacked on to u-boot.itb
-To: Fabio Estevam <festevam@gmail.com>, hs@denx.de
-Cc: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@denx.de>,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.denx.de, Heiko Schocher <hs@denx.de>,
+ Fabio Estevam <festevam@denx.de>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>
 References: <20241024122735.893319-1-ravi@prevas.dk>
- <3606fb53-c36e-93c7-6ff9-9947ae43c408@denx.de>
- <CAOMZO5Aae_0cDXX-E9syhVPwMF7_NVu2__40m6Tmi7daePyVbg@mail.gmail.com>
- <CAOMZO5DNQ6cKyNqsQaU8CE-FwoOQdgaf99S8dQ4_FE9XZDvmCw@mail.gmail.com>
+ <3fa7049d-4657-4cae-9ccf-fac1c62ce529@denx.de> <87o738psig.fsf@prevas.dk>
+ <e2d45889-33b1-438e-8872-f03a4c050c18@denx.de> <874j4xl7cj.fsf@prevas.dk>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAOMZO5DNQ6cKyNqsQaU8CE-FwoOQdgaf99S8dQ4_FE9XZDvmCw@mail.gmail.com>
+In-Reply-To: <874j4xl7cj.fsf@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,18 +72,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/25/24 5:09 PM, Fabio Estevam wrote:
-> On Fri, Oct 25, 2024 at 11:51 AM Fabio Estevam <festevam@gmail.com> wrote:
+On 10/27/24 7:38 PM, Rasmus Villemoes wrote:
+> On Fri, Oct 25 2024, Marek Vasut <marex@denx.de> wrote:
 > 
->>>> Heiko, can you check if this works for you?
+>> On 10/25/24 9:10 AM, Rasmus Villemoes wrote:
+>>> On Thu, Oct 24 2024, Marek Vasut <marex@denx.de> wrote:
 >>>
->>> Works fine for me, thanks!
+>>>> On 10/24/24 2:27 PM, Rasmus Villemoes wrote:
+>>>>> Loading flash.bin using uuu fails when flash.bin does not have the
+>>>>> right size.
+>>>>> When flash.bin is loaded from some storage medium (sd card/emmc),
+>>>>> SPL
+>>>>> just loads some random garbage bytes from beyond what has been
+>>>>> populated when flash.bin was written, but when loaded via uuu, SPL
+>>>>> hangs waiting for the host to send the expected number of bytes. Which
+>>>>> is (size of FIT image aligned to 0x1000)+CONFIG_CSF_SIZE. The
+>>>>> alignment to 0x1000 is already done and is necessary in all cases
+>>>>> because that's the exact expected location of the 32 byte IVT
+>>>>> header. But the IVT+CSF blob tacked onto the end must be a total of
+>>>>> CONFIG_CSF_SIZE.
+>>>>> This is exactly the same fix as 89f19f45d650, except that this time
+>>>>> around I don't know how to cleanly get CONFIG_CSF_SIZE.
+>>>>> Fixes: bc6beae7c55f (binman: Add nxp_imx8mcst etype for i.MX8M
+>>>>> flash.bin signing)
+>>>>> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+>>>>> ---
+>>>>> Heiko, can you check if this works for you?
+>>>>> And if somebody wants to pick this up and knows how to get at
+>>>>> CONFIG_
+>>>>> values, feel free to fix up and take authorship. But perhaps it's not
+>>>>> really configurable at all; imx8mimage.c has the value 0x2000
+>>>>> hard-coded, so I don't think anything good could ever come from
+>>>>> modifying CONFIG_CSF_SIZE. If so, the right fix is probably just to
+>>>>> make that knob non-settable.
+>>>>>     tools/binman/etype/nxp_imx8mcst.py | 2 ++
+>>>>>     1 file changed, 2 insertions(+)
+>>>>> diff --git a/tools/binman/etype/nxp_imx8mcst.py
+>>>>> b/tools/binman/etype/nxp_imx8mcst.py
+>>>>> index 8221517b0c4..9a1974cc522 100644
+>>>>> --- a/tools/binman/etype/nxp_imx8mcst.py
+>>>>> +++ b/tools/binman/etype/nxp_imx8mcst.py
+>>>>> @@ -137,6 +137,8 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+>>>>>             args = ['-i', cfg_fname, '-o', output_fname]
+>>>>>             if self.cst.run_cmd(*args) is not None:
+>>>>>                 outdata = tools.read_file(output_fname)
+>>>>> +            # fixme: 0x2000 should be CONFIG_CSF_SIZE
+>>>>> +            outdata += tools.get_bytes(0, 0x2000 - 0x20 - len(outdata))
+>>>>>                 return data + outdata
+>>>>>             else:
+>>>>>                 # Bintool is missing; just use the input data as the output
+>>>>
+>>>> I have to admit, I never really figured out this binman stuff, but
+>>>> shouldn't the fix be also in tools/binman/etype/nxp_imx8mimage.py ?
+>>> No, why? That logic is all about generating the imx-specific header
+>>> in
+>>> front of SPL.bin, there's no CSF being generated.
 >>
->> Applied, thanks.
+>> This patch is modifying tools/binman/etype/nxp_imx8mcst.py which is
+>> the Code-Signing-Tool binman etype, the thing used for generating
+>> SIGNED images during HAB use.
+>>
+>> Shouldn't this patch modify tools/binman/etype/nxp_imx8mimage.py which
+>> is the etype used when generating flash.bin itself ?
 > 
-> Sorry, applied it too soon. I see there is an ongoing discussion.
+> No, because this is not about flash.bin per se, but about the (u-boot
+> FIT+IVT+CSF) blob that forms part of flash.bin, in the IMX_HAB case.
 > 
-> I will wait for more time.
-
-Go ahead, nothing to add from my side, but it would be good to get a TB 
-from Heiko maybe ?
+>> My understanding was that the problem Heiko reported was alignment of
+>> flash.bin , independently of it being signed or not ?
+> 
+> Read the thread again. Heiko's problem was very much related to IMX_HAB
+> being enabled. I've already explained what the problem actually is
+> and why this fixes it. Not only once, but as I said, this is equivalent
+> to a fix I sent for the shell script implementation, so to answer a
+> question you asked elsewhere: Yes, this is missing in the binman
+> implementation.
+> 
+> Extending the size of flash.bin in the !IMX_HAB case will have the
+> opposite problem (as will adding the wrong amount of padding bytes in
+> the IMX_HAB case), namely that the board will boot, but uuu on the host
+> will "hang" waiting for the target to consume the remaining bytes.
+Oh, I see, all right then. Thanks for clarifying.
