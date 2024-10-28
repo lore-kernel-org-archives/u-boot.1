@@ -4,100 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65877D10C11
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 13:32:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E571D33989
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 14:16:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA550890C4;
-	Mon, 28 Oct 2024 14:32:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5E58E89085;
+	Mon, 28 Oct 2024 15:16:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gfU7AO2V";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="2cnNz2VQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1BDF88C53; Mon, 28 Oct 2024 13:48:25 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7CCC28908F; Mon, 28 Oct 2024 15:16:40 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2906890BB
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 13:48:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A23089080
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 15:16:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5cb72918bddso5621110a12.3
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 05:48:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730119703; x=1730724503; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=fl7+XBQRNRJIciJ/KRFAUFpzGuyefvzn0ILJo3jTU/0=;
- b=gfU7AO2VO2y9rDtHtxoWjQ8etolzzJDByRSuz0UEZYJZy4X3iNhwub3ezpwd3cYuEe
- HmjQk3hjHCzqDog2BV3QGwQ6rciuB1mCqG4Q1anFrs4hhBNmE2U8HgxVCFAn1TuUFbv+
- CneeJ9FpcMd+di3nO2N61tUi7rlBJL+svIHJQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730119703; x=1730724503;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fl7+XBQRNRJIciJ/KRFAUFpzGuyefvzn0ILJo3jTU/0=;
- b=drsu2mg4aXp6NSHNl2Kv0+l3SryA2Os8JYRs4Vccgy+FNxapOQUdiAe8W6Zv4SdXwT
- dgpBTLE283oB5FxO4G7288pV+w0+2zuVQlbY0tIfmSjJ6fe7yuHYItNKJGX8RSe3/Xs9
- WWUW6AbTqc8ZkDjDhQtXteiDYVHzdTJVw3UJ0bSERYKlNTs8fpJY87AQDAhvdQG+56n0
- w7fO2JgT4ePd7fiYEMzVV9y1x+81M4RPt8N3klzLj/gNR/hOSov09WoA8XrgOwPoRX5G
- qe7aUPnILEMkns8S7fxNCJjm6OeSfT0j62z/DHKeHLfItBx5KYG2odtrIrUVC8yScE1i
- Ykdw==
-X-Gm-Message-State: AOJu0YxV4E5X+j1mLxiaZrbrQbnL1OQAcDlNds/GlCM91tGhzavHnm/4
- 9/AXn99FJuJYQvqXUzeE3uzCLe3iiDdBgnhT9jqXebX4XT5C0Y1gCzMJ5mtEIt8V/60TsjFLIIu
- row==
-X-Google-Smtp-Source: AGHT+IEJCS3eix+KoJC39iEUyXCOZOrfc9K0O2ILWHRlCo8oyK1TEPLhpI13jOPJ8dn6Aahg9oAn6Q==
-X-Received: by 2002:a17:907:98b:b0:a9a:c57f:9666 with SMTP id
- a640c23a62f3a-a9de5cfd7ccmr655584766b.2.1730119702695; 
- Mon, 28 Oct 2024 05:48:22 -0700 (PDT)
-Received: from chromium.org (43-114-103-145.static.glaslokaal.nl.
- [145.103.114.43]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b30d6fdc5sm375593366b.163.2024.10.28.05.48.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 05:48:22 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Emil Kronborg <emil.kronborg@protonmail.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, Levi Yun <yeoreum.yun@arm.com>,
- Marek Vasut <marex@denx.de>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sean Anderson <seanga2@gmail.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Wei Ming Chen <jj251510319013@gmail.com>
-Subject: [PATCH 00/15] efi_loader: Add support for logging to a buffer
-Date: Mon, 28 Oct 2024 13:47:51 +0100
-Message-ID: <20241028124815.47262-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=10316c0424=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49SDXdIN003954;
+ Mon, 28 Oct 2024 15:16:29 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ OfbIoBQwrVfZmbBVomt42SVXk+4LhNH2JrKvm15eJYY=; b=2cnNz2VQ9AM8WX1O
+ 59jedRc7fem/1ZHmTfKOq3rlZ5YscMaLjhxzA1DbgFhFvIlPKvtg9jsRZ69iu/Dt
+ L1OiUgSHrjsBv+Yhg9l630pSlrC3woWf3i6zTrFkRdGJ5ea9SnkJ+1HhifFPFeDD
+ FBuTVw69qKRyoaf4/ZYzM3osXgM+lEyrxFfN/1ku5cYiWob7fYYKmISXbTpFOE6A
+ PcPd/ZqSHs1fZJL4ETLO+q+KDeuo6pts8z28/veuHMTLHdGPUYbMYjeTHAb4L6Wd
+ 8Fxk9I0W/LzFwd3KNuqvpbgFE9qz3xX35zj5v21lVEF1Yg97ZfA/aiL4kZT/BonX
+ DYtfvw==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 42gqachg5s-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 28 Oct 2024 15:16:28 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 0F59740050;
+ Mon, 28 Oct 2024 15:14:53 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E939D273658;
+ Mon, 28 Oct 2024 15:14:13 +0100 (CET)
+Received: from [10.48.86.243] (10.48.86.243) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Mon, 28 Oct
+ 2024 15:14:13 +0100
+Message-ID: <4b60130d-030f-405c-a753-eeb52a5e7b1d@foss.st.com>
+Date: Mon, 28 Oct 2024 15:14:11 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 28 Oct 2024 14:32:38 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 06/11] lib: uuid: supporting building as part of host
+ tools
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>, Mario Six
+ <mario.six@gdsys.cc>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+CC: Richard Hughes <hughsient@gmail.com>, <u-boot@lists.denx.de>
+References: <20240830-b4-dynamic-uuid-v8-0-79b31b199bee@linaro.org>
+ <20240830-b4-dynamic-uuid-v8-6-79b31b199bee@linaro.org>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20240830-b4-dynamic-uuid-v8-6-79b31b199bee@linaro.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.86.243]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,75 +94,245 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is a bit of a pain to log EFI boot-services calls at present. The
-output goes to the console so cannot easily be inspected later. Also it
-would be useful to be able to store the log and review it later, perhaps
-after something has gone wrong.
-
-This series makes a start on implementing a log-to-buffer feature. It
-provides a simple 'efidebug log' command to inspect the buffer. For now,
-only memory allocations are logged.
-
-This feature makes it possible to add tests to check which EFI calls are
-made by U-Boot itself. It may also make it easier to figure out what is
-needed for booting Windows.
-
-Some patches to help with debugging sandbox memory-mapping are included,
-but for now EFI's use of mapping is not adjusted.
+Hi,
 
 
-Simon Glass (15):
-  log: Add a new category for tests
-  test: Allow saving and restoring the bloblist
-  bloblist: test: Mark tests with UTF_BLOBLIST
-  sandbox: Convert sb command to use new macro
-  doc: sandbox: Add docs for the sb command
-  sandbox: Add a way to show the sandbox memory-mapping
-  sandbox: Fix comment for nomap_sysmem() function
-  lmb: Drop extra 16KB of stack space
-  efi_loader: Fix free in ..._media_device_boot_option()
-  efi_loader: Add support for logging EFI calls
-  efi_loader: Create the log on startup
-  efi_loader: Add a command to show the EFI log
-  test: efi_loader: Add a simple test for the EFI log
-  efi_loader: Use the log with memory-related functions
-  efi_loader: Add documentation for the EFI log
+This patch seens cause problemes for STM32MP1 platforms, AARCH32
 
- MAINTAINERS                    |   7 +
- arch/sandbox/cpu/cpu.c         |  13 +
- arch/sandbox/include/asm/cpu.h |   3 +
- arch/sandbox/include/asm/io.h  |   2 +-
- cmd/efidebug.c                 |  53 +++-
- cmd/sb.c                       |  42 ++--
- common/log.c                   |   1 +
- configs/sandbox_defconfig      |   3 +
- doc/develop/uefi/uefi.rst      |  22 ++
- doc/usage/cmd/efidebug.rst     | 109 ++++++++
- doc/usage/cmd/sb.rst           |  79 ++++++
- doc/usage/index.rst            |   2 +
- include/bloblist.h             |   1 +
- include/efi.h                  |   1 +
- include/efi_log.h              | 316 +++++++++++++++++++++++
- include/log.h                  |   2 +
- include/test/test.h            |   3 +
- lib/efi_loader/Kconfig         |  19 ++
- lib/efi_loader/Makefile        |   1 +
- lib/efi_loader/efi_bootmgr.c   |   3 +-
- lib/efi_loader/efi_log.c       | 444 +++++++++++++++++++++++++++++++++
- lib/efi_loader/efi_memory.c    | 119 ++++++---
- lib/efi_loader/efi_setup.c     |   7 +
- lib/lmb.c                      |   2 -
- test/common/bloblist.c         |  28 +--
- test/lib/Makefile              |   1 +
- test/lib/efi_log.c             |  93 +++++++
- test/test-main.c               |  13 +
- 28 files changed, 1305 insertions(+), 84 deletions(-)
- create mode 100644 doc/usage/cmd/efidebug.rst
- create mode 100644 doc/usage/cmd/sb.rst
- create mode 100644 include/efi_log.h
- create mode 100644 lib/efi_loader/efi_log.c
- create mode 100644 test/lib/efi_log.c
+For FIP UUID configuration.
 
--- 
-2.43.0
 
+On 8/30/24 14:34, Caleb Connolly wrote:
+> Adjust the UUID library code so that it can be compiled as part of a
+> host tool.
+>
+> This removes the one redundant log_debug() call, as well as the
+> incorrectly defined LOG_CATEGORY.
+>
+> In general this is a fairly trivial change, just adjusting includes and
+> disabling list_guid.
+>
+> This will be used by a new genguid tool to generate v5 GUIDs that match
+> those generated by U-Boot at runtime.
+>
+> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   include/uuid.h |  4 ++--
+>   lib/uuid.c     | 44 ++++++++++++++++++++++++++++++--------------
+>   2 files changed, 32 insertions(+), 16 deletions(-)
+>
+> diff --git a/include/uuid.h b/include/uuid.h
+> index 1f4fa103b5e9..7f8414dc906c 100644
+> --- a/include/uuid.h
+> +++ b/include/uuid.h
+> @@ -69,10 +69,10 @@ struct uuid {
+>   } __packed;
+>   
+>   /* Bits of a bitmask specifying the output format for GUIDs */
+>   #define UUID_STR_FORMAT_STD	0
+> -#define UUID_STR_FORMAT_GUID	BIT(0)
+> -#define UUID_STR_UPPER_CASE	BIT(1)
+> +#define UUID_STR_FORMAT_GUID	0x1
+> +#define UUID_STR_UPPER_CASE	0x2
+>   
+>   /* Use UUID_STR_LEN + 1 for string space */
+>   #define UUID_STR_LEN		36
+>   #define UUID_BIN_LEN		sizeof(struct uuid)
+> diff --git a/lib/uuid.c b/lib/uuid.c
+> index c9dfdf007a18..6fdae7997702 100644
+> --- a/lib/uuid.c
+> +++ b/lib/uuid.c
+> @@ -6,25 +6,38 @@
+>    * Authors:
+>    *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+>    */
+>   
+> -#define LOG_CATEGOT LOGC_CORE
+> -
+> +#ifndef USE_HOSTCC
+>   #include <command.h>
+>   #include <efi_api.h>
+>   #include <env.h>
+>   #include <rand.h>
+>   #include <time.h>
+> -#include <uuid.h>
+> -#include <linux/ctype.h>
+> -#include <errno.h>
+>   #include <asm/io.h>
+>   #include <part_efi.h>
+>   #include <malloc.h>
+>   #include <dm/uclass.h>
+>   #include <rng.h>
+> +#include <linux/ctype.h>
+> +#include <hexdump.h>
+> +#else
+> +#include <stdarg.h>
+> +#include <stdint.h>
+> +#include <eficapsule.h>
+> +#include <ctype.h>
+> +#endif
+> +#include <linux/types.h>
+> +#include <errno.h>
+> +#include <linux/kconfig.h>
+> +#include <uuid.h>
+>   #include <u-boot/sha1.h>
+>   
+> +#ifdef USE_HOSTCC
+> +/* polyfill hextoul to avoid pulling in strto.c */
+> +#define hextoul(cp, endp) strtoul(cp, endp, 16)
+> +#endif
+> +
+>   int uuid_str_valid(const char *uuid)
+>   {
+>   	int i, valid;
+>   
+> @@ -51,8 +64,9 @@ int uuid_str_valid(const char *uuid)
+>   static const struct {
+>   	const char *string;
+>   	efi_guid_t guid;
+>   } list_guid[] = {
+> +#ifndef USE_HOSTCC
+>   #ifdef CONFIG_PARTITION_TYPE_GUID
+>   	{"system",	PARTITION_SYSTEM_GUID},
+>   	{"mbr",		LEGACY_MBR_PARTITION_GUID},
+>   	{"msft",	PARTITION_MSFT_RESERVED_GUID},
+> @@ -231,8 +245,9 @@ static const struct {
+>   	{ "EFI_MEMORY_TYPE", EFI_MEMORY_TYPE },
+>   	{ "EFI_MEM_STATUS_CODE_REC", EFI_MEM_STATUS_CODE_REC },
+>   	{ "EFI_GUID_EFI_ACPI1", EFI_GUID_EFI_ACPI1 },
+>   #endif
+> +#endif /* !USE_HOSTCC */
+>   };
+>   
+>   int uuid_guid_get_bin(const char *guid_str, unsigned char *guid_bin)
+>   {
+> @@ -266,9 +281,8 @@ int uuid_str_to_bin(const char *uuid_str, unsigned char *uuid_bin,
+>   	uint32_t tmp32;
+>   	uint64_t tmp64;
+>   
+>   	if (!uuid_str_valid(uuid_str)) {
+> -		log_debug("not valid\n");
+>   #ifdef CONFIG_PARTITION_TYPE_GUID
+>   		if (!uuid_guid_get_bin(uuid_str, uuid_bin))
+>   			return 0;
+>   #endif
+> @@ -297,19 +311,19 @@ int uuid_str_to_bin(const char *uuid_str, unsigned char *uuid_bin,
+>   
+>   	tmp16 = cpu_to_be16(hextoul(uuid_str + 19, NULL));
+>   	memcpy(uuid_bin + 8, &tmp16, 2);
+>   
+> -	tmp64 = cpu_to_be64(simple_strtoull(uuid_str + 24, NULL, 16));
+> +	tmp64 = cpu_to_be64(hextoul(uuid_str + 24, NULL));
+>   	memcpy(uuid_bin + 10, (char *)&tmp64 + 2, 6);
+>   
+>   	return 0;
+>   }
+>   
+>   int uuid_str_to_le_bin(const char *uuid_str, unsigned char *uuid_bin)
+>   {
+> -	u16 tmp16;
+> -	u32 tmp32;
+> -	u64 tmp64;
+> +	uint16_t tmp16;
+> +	uint32_t tmp32;
+> +	uint64_t tmp64;
+>   
+>   	if (!uuid_str_valid(uuid_str) || !uuid_bin)
+>   		return -EINVAL;
+>   
+> @@ -324,22 +338,22 @@ int uuid_str_to_le_bin(const char *uuid_str, unsigned char *uuid_bin)
+>   
+>   	tmp16 = cpu_to_le16(hextoul(uuid_str + 19, NULL));
+>   	memcpy(uuid_bin + 8, &tmp16, 2);
+>   
+> -	tmp64 = cpu_to_le64(simple_strtoull(uuid_str + 24, NULL, 16));
+> +	tmp64 = cpu_to_le64(hextoul(uuid_str + 24, NULL));
+
+Here you change
+
+simple_strtoull  => return unsigned long long
+
+to
+
+hextoul => return unsigned long
+
+for 32bits system that can the cause of issue I think
+
+with UUID defined in stm32prog command, with use a gpt
+create command with UUID define in
+
+./arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+
+/* FIP type partition UUID used by TF-A*/
+#define FIP_TYPE_UUID "19D5DF83-11B0-457B-BE2C-7559C13142A5"
+
+/* unique partition guid (uuid) for FIP partitions A/B */
+#define FIP_A_UUID \
+	EFI_GUID(0x4FD84C93, 0x54EF, 0x463F, \
+		 0xA7, 0xEF, 0xAE, 0x25, 0xFF, 0x88, 0x70, 0x87)
+
+
+with the patch the GPT partition is create with incorrect UUID (type and partion)
+with "0000" in last field.
+
+
+$> BAD
+Partition GUID code: 19D5DF83-11B0-457B-BE2C-0000C13142A5
+Partition unique GUID: 4FD84C93-54EF-463F-A7EF-0000FF887087
+
+before the patch
+
+$> OK
+Partition GUID code: 19D5DF83-11B0-457B-BE2C-7559C13142A5
+Partition unique GUID: 4FD84C93-54EF-463F-A7EF-AE25FF887087
+
+for 32bits platform, we must use simple_strtoull and not
+
+ulong hextoul(const char *cp, char **endp)
+{
+	return simple_strtoul(cp, endp, 16);
+}
+
+for define hextoull()
+
+
+what do you thin, of this issue ?
+
+>   	memcpy(uuid_bin + 10, &tmp64, 6);
+>   
+>   	return 0;
+>   }
+>   
+>   void uuid_bin_to_str(const unsigned char *uuid_bin, char *uuid_str,
+>   		     int str_format)
+>   {
+> -	const u8 uuid_char_order[UUID_BIN_LEN] = {0, 1, 2, 3, 4, 5, 6, 7, 8,
+> +	const uint8_t uuid_char_order[UUID_BIN_LEN] = {0, 1, 2, 3, 4, 5, 6, 7, 8,
+>   						  9, 10, 11, 12, 13, 14, 15};
+> -	const u8 guid_char_order[UUID_BIN_LEN] = {3, 2, 1, 0, 5, 4, 7, 6, 8,
+> +	const uint8_t guid_char_order[UUID_BIN_LEN] = {3, 2, 1, 0, 5, 4, 7, 6, 8,
+>   						  9, 10, 11, 12, 13, 14, 15};
+> -	const u8 *char_order;
+> +	const uint8_t *char_order;
+>   	const char *format;
+>   	int i;
+>   
+>   	/*
+> @@ -419,8 +433,9 @@ void gen_v5_guid(const struct uuid *namespace, struct efi_guid *guid, ...)
+>   	tmp16 = (uint16_t *)&guid->b[6];
+>   	*tmp16 = cpu_to_le16(be16_to_cpu(*tmp16));
+>   }
+>   
+> +#ifndef USE_HOSTCC
+>   #if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
+>   void gen_rand_uuid(unsigned char *uuid_bin)
+>   {
+>   	u32 ptr[4];
+> @@ -502,4 +517,5 @@ U_BOOT_CMD(guid, CONFIG_SYS_MAXARGS, 1, do_uuid,
+>   	   "e.g. guid guid_env"
+>   );
+>   #endif /* CONFIG_CMD_UUID */
+>   #endif /* CONFIG_RANDOM_UUID || CONFIG_CMD_UUID */
+> +#endif /* !USE_HOSTCC */
+>
