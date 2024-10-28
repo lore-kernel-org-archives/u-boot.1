@@ -4,90 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA6E2D5B14E
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 21:08:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B710CD5B156
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 21:25:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7263F89124;
-	Mon, 28 Oct 2024 22:08:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D780890A9;
+	Mon, 28 Oct 2024 22:25:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Rj+Nthi6";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="kPUZ4nqd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0167389121; Mon, 28 Oct 2024 22:08:30 +0100 (CET)
+ id CF6EE890E7; Mon, 28 Oct 2024 22:25:05 +0100 (CET)
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED83689099
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 22:08:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1FD78909F
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 22:25:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
- [209.85.208.69])
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 7828E3F2B7
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 21:08:27 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 27F3E3F2AB
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 21:25:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1730149707;
- bh=IWFP8Sb1N3Xu62gCtgFSktIrexcn1h4yuPAqgkLgZXs=;
+ s=20210705; t=1730150703;
+ bh=G8P8v94lzJBZ5DsPdqHDISbod4v+z/ZSdqEMbyAIIxs=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=Rj+Nthi6NGpZvPnSPORPBxOTqshtJ27WP4Rcue3kGUyeK2892WdYXb97ikD1srbze
- lM02mKGc8X6SMywCSBA00VEY4C+nWo0ixQL/L4LyUFWAvFAvLfYl1wTO6chdii1uLE
- bDILyNxw2eovbzDbxLQU1MZtqAXmwTgO24NqMhp0Dt/VlKOAZEB1bNlXUUd8l4qVGb
- x029YCpKbsFq6zPIxiIrVrqE8ZSD5CQCfUgQTPBaamCJ0Iei/QdUi1BRr0c/69CwtN
- M7BjToom/6LFCzZlRaT0/ye7oqIOfZP/I88KJk+BYEQv9q8uYzUF25qa9YPPZXqieZ
- MoxloZqZCqIPQ==
-Received: by mail-ed1-f69.google.com with SMTP id
- 4fb4d7f45d1cf-5c934295846so2931291a12.1
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 14:08:27 -0700 (PDT)
+ b=kPUZ4nqdcbVzZPH3EHxOtQppWupu+CBcVtEtm/n5eWBqxSxhre+tvO08zhIWcl6/+
+ iTDsFCBiHUjvQN5MO6cSpaPsRT4CianIOoxWGzcGqjpRDIrgFUVfBlIr43dzsfSlSR
+ pCbnD+YrHoic6ki4ChTrJZvrwAXR/D/KVsXf2KdLFfkPha1SHR7wKWVqsvwGiku7Gz
+ sclDe/YQD8jare+3pZV6w/BuiRao5rzf31w4NGsl+4z0p0xiuex0qvptyA99j+VZr6
+ VQ+fS0F+IZ8uPtS3zzVKCHN1gpZB0rDTSQP0LNGsxOK6TOFvpXKpHoGnTKVxE8BafM
+ Go/MeHGyRlkNw==
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-a9a1828916fso575385866b.1
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 14:25:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730149707; x=1730754507;
+ d=1e100.net; s=20230601; t=1730150703; x=1730755503;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IWFP8Sb1N3Xu62gCtgFSktIrexcn1h4yuPAqgkLgZXs=;
- b=uejI06cK5mmVrBwgNdmV7Y8SfcGl6rBi+9K8w4q4cjsbgLE63QXVxxNBTHssTyMX7U
- rDSGxSme5x6zASFTehIVfXOB6r6GgYfN+gUqiqLei6Z4Td+2gOT9c8NECkEM24eOwt8J
- 5aBShdTZTF16DW9mcwO9R6C1YrtY8hkxzND0U63Nn1PLSeJIocZ5pAp8ggyuEeWluLAq
- 3YKagNoO+SutPOAtAdIUmxizbL0pjxw9rb2Ol0VRUy0tZ4qAS46NjSVbBPxBcx5SVs+M
- ZxH+h7h4OZKiUE0DlYxzjmuGAvoECUzqtF5T/XicV5wEizz+Vj6NDwKwAyw7nIJ0EOzc
- sjzw==
+ bh=G8P8v94lzJBZ5DsPdqHDISbod4v+z/ZSdqEMbyAIIxs=;
+ b=oK9vOdAdYUxg7BbF7CE/Hq/YUEQ+XBjGRRaunMoIGxRZNgbRrWL9OuCwLdzyEYuf16
+ Y3LnFWxDEqT1ri70Gce/36dGLpVQa5x8ZqOYmOtcIox91cj9t7oDqyMZ2reEfP70sA9n
+ AisJxZ4s/Vg5bJVp7QJYCWDsUaa5e6UXHkOFcLUqtCA+N5waPCtrbH3HEXm6p4BrN9Mk
+ 2+rEYQTOYY4mo+9oW0NNDLi/MDgXkdrEgXqg5CbkqIK8WXpOoL0rOUTdO8f0zK+1nAC7
+ 2HUnDyPN96UThgdu+8uboZHUVKlBiScoGUC1oFnDly5GgUK0rKBvglncmXGDwsXGLadC
+ fzaw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUPT53qAZnxj6EGSnoIm59LjZP1g8U7VdrEMfJqixl3O8g1eYKUZWcU5ydYGyJi1QVloJE8lww=@lists.denx.de
-X-Gm-Message-State: AOJu0YwiboxxD7ZCDFFQsg9+uFkZu6Qxgo1EDzQB8HgQhLe8P7zRHp8I
- aohDD0LzfQxC5yYdRpzNOcOKxRVsPUIGtrz+er+C9rRg1kpozfzZCH8Ut7/7r9orP9rlzE2pWtm
- 9TC0LfaY+SYso//Rrhyk46bjgd/BjxjvdS2+78ZEybwUYZMQurUMvzJAbu4JFyx6SphI=
-X-Received: by 2002:a50:8dca:0:b0:5c5:c060:420d with SMTP id
- 4fb4d7f45d1cf-5cbbf9402e8mr6598329a12.25.1730149706995; 
- Mon, 28 Oct 2024 14:08:26 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEivKV+87tpb1THDQxQluKmGieMVI3yN4dWvvJhMS0E1XPGQnYuUXd07TKD4L5PGaWQm8erpw==
-X-Received: by 2002:a50:8dca:0:b0:5c5:c060:420d with SMTP id
- 4fb4d7f45d1cf-5cbbf9402e8mr6598319a12.25.1730149706495; 
- Mon, 28 Oct 2024 14:08:26 -0700 (PDT)
+ AJvYcCXqd27N8V7lgRPcDb/uCYOqZNFyl3Sj2iVEMFCBPQFBe3/MT72p3/vcB4XUdqPza2Po44LOM3I=@lists.denx.de
+X-Gm-Message-State: AOJu0YxEXcPLAR4R4gtFNgzSylt3jVqXAn2z+eXF6LNj1cr+yCNMhIHZ
+ 8T0esWW9LtUl8kW3YGIcCgJAry6wl/m1mzTeWphhdYQ9t8IHLIuCoX1HCyrs0ljuwjKteq9pUQs
+ rrTUgPPnkEZkCYqzyUDl3bR+2j0LnAzewOdK8ox3+MEN5w2ePGedQxZ9Q7eMkXnbglIk=
+X-Received: by 2002:a17:907:3e84:b0:a9a:a890:9fa8 with SMTP id
+ a640c23a62f3a-a9e2274c1ffmr99708966b.11.1730150702698; 
+ Mon, 28 Oct 2024 14:25:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFRtomWpDBfP7jmwd5IgboImlT8FZcpqW2PvNXuQv9CF3wKgcft0pmNEDaoON4zJlUxlFiqCA==
+X-Received: by 2002:a17:907:3e84:b0:a9a:a890:9fa8 with SMTP id
+ a640c23a62f3a-a9e2274c1ffmr99706666b.11.1730150702315; 
+ Mon, 28 Oct 2024 14:25:02 -0700 (PDT)
 Received: from [10.43.6.224] ([87.215.50.114])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cbb63197edsm3499395a12.75.2024.10.28.14.08.23
+ a640c23a62f3a-a9b1f29737fsm409350866b.113.2024.10.28.14.24.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Oct 2024 14:08:24 -0700 (PDT)
-Message-ID: <774c1efe-f5b7-4581-abd6-714a9b24bc7d@canonical.com>
-Date: Mon, 28 Oct 2024 22:08:22 +0100
+ Mon, 28 Oct 2024 14:25:01 -0700 (PDT)
+Message-ID: <7eb00a6a-bba3-4aa5-ba63-1da2c63b3e5f@canonical.com>
+Date: Mon, 28 Oct 2024 22:24:58 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] test/hush: Add CONFIG_CONSOLE_RECORD where required
+Subject: Re: [PATCH 3/3] test/lib/uuid: Make lib_test_dynamic_uuid depend on
+ SANDBOX
 To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 References: <20241028164844.2308549-1-trini@konsulko.com>
- <20241028164844.2308549-2-trini@konsulko.com>
+ <20241028164844.2308549-3-trini@konsulko.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241028164844.2308549-2-trini@konsulko.com>
+In-Reply-To: <20241028164844.2308549-3-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -107,32 +110,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/28/24 17:48, Tom Rini wrote:
-> The "dollar" tests require CONFIG_CONSOLE_RECORD to be enabled so guard
-> with that.
+> The dynamic UUID test checks for the sandbox specific capsule UUID to be
+> used, so we can only perform this test on sandbox currently.
+
+The tested function is gen_v5_guid(). This function is used to generated 
+capsule UUIDs. It receives the test data provided in 
+dynamic_uuid_test_data test_data[]:
+
+* compatible string
+* image name
+
+The generated UUID is compared to a UUID provided in the test data.
+
+By chance the chosen test data contains the string 'sandbox'.
+
+It is not obvious why this test should depend on running on the sandbox.
+
+Where did it fail for you?
+
+Best regards
+
+Heinrich
+
 > 
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
->   test/hush/Makefile | 2 ++
+>   test/lib/uuid.c | 2 ++
 >   1 file changed, 2 insertions(+)
 > 
-> diff --git a/test/hush/Makefile b/test/hush/Makefile
-> index a2d98815e501..4c3a0be857ae 100644
-> --- a/test/hush/Makefile
-> +++ b/test/hush/Makefile
-> @@ -5,6 +5,8 @@
+> diff --git a/test/lib/uuid.c b/test/lib/uuid.c
+> index d00e9563a472..55ef9e7454d7 100644
+> --- a/test/lib/uuid.c
+> +++ b/test/lib/uuid.c
+> @@ -84,6 +84,7 @@ static int lib_test_uuid_bits(struct unit_test_state *uts)
+>   LIB_TEST(lib_test_uuid_bits, 0);
+>   #endif
 >   
->   obj-y += cmd_ut_hush.o
->   obj-y += if.o
-> +ifdef CONFIG_CONSOLE_RECORD
->   obj-y += dollar.o
-
-Or to keep it simpler:
-
-obj-$(CONFIG_CONSOLE_RECORD) += dollar.o
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
-> +endif
->   obj-y += list.o
->   obj-y += loop.o
+> +#ifdef CONFIG_SANDBOX
+>   struct dynamic_uuid_test_data {
+>   	const char *compatible;
+>   	const u16 *images[4];
+> @@ -159,3 +160,4 @@ static int lib_test_dynamic_uuid(struct unit_test_state *uts)
+>   }
+>   
+>   LIB_TEST(lib_test_dynamic_uuid, 0);
+> +#endif
 
