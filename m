@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9054D13570
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 09:51:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20BC0D13588
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 09:53:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE1368905F;
-	Mon, 28 Oct 2024 10:51:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 954C38907E;
+	Mon, 28 Oct 2024 10:53:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9E388901F; Mon, 28 Oct 2024 10:51:15 +0100 (CET)
+ id D46F089085; Mon, 28 Oct 2024 10:53:08 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 874B88905F
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 10:51:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 05C028905F
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 10:53:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.11,238,1725289200"; 
- d="asc'?scan'208";a="223204684"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 28 Oct 2024 18:51:08 +0900
+ d="asc'?scan'208";a="223204875"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie5.idc.renesas.com with ESMTP; 28 Oct 2024 18:53:02 +0900
 Received: from [10.226.93.33] (unknown [10.226.93.33])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 7195B40062BD;
- Mon, 28 Oct 2024 18:50:53 +0900 (JST)
-Message-ID: <a7d6a116-704c-4d48-a018-ce1da4fedee5@bp.renesas.com>
-Date: Mon, 28 Oct 2024 09:50:51 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 1172C41C42ED;
+ Mon, 28 Oct 2024 18:52:59 +0900 (JST)
+Message-ID: <5dfc0e83-857d-4cfb-ade2-63f3d62d60bc@bp.renesas.com>
+Date: Mon, 28 Oct 2024 09:52:58 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/14] net: ravb: Support up to two instances
+Subject: Re: [PATCH 11/14] net: ravb: Add RZ/G2L Support
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
@@ -42,13 +42,13 @@ To: Marek Vasut <marek.vasut@mailbox.org>,
  <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
- <20241024152448.102-10-paul.barker.ct@bp.renesas.com>
- <9bd496f2-7765-4067-bbc6-36b355107af3@mailbox.org>
+ <20241024152448.102-12-paul.barker.ct@bp.renesas.com>
+ <5bd5fe3c-1077-4dc9-8305-b435c426d712@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <9bd496f2-7765-4067-bbc6-36b355107af3@mailbox.org>
+In-Reply-To: <5bd5fe3c-1077-4dc9-8305-b435c426d712@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------0Q7KoqZM4dl7Q0ufsUYGp40p"
+ boundary="------------tbISfXlCya7khQ2MmZLGMTmB"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,8 +66,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------0Q7KoqZM4dl7Q0ufsUYGp40p
-Content-Type: multipart/mixed; boundary="------------tWp6SlJ6EI4OQMziiPOUUX5v";
+--------------tbISfXlCya7khQ2MmZLGMTmB
+Content-Type: multipart/mixed; boundary="------------Dju6aJ2lReiRgtXdVdcbloAX";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut@mailbox.org>,
@@ -77,151 +77,134 @@ To: Marek Vasut <marek.vasut@mailbox.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
  <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
-Message-ID: <a7d6a116-704c-4d48-a018-ce1da4fedee5@bp.renesas.com>
-Subject: Re: [PATCH 09/14] net: ravb: Support up to two instances
+Message-ID: <5dfc0e83-857d-4cfb-ade2-63f3d62d60bc@bp.renesas.com>
+Subject: Re: [PATCH 11/14] net: ravb: Add RZ/G2L Support
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
- <20241024152448.102-10-paul.barker.ct@bp.renesas.com>
- <9bd496f2-7765-4067-bbc6-36b355107af3@mailbox.org>
-In-Reply-To: <9bd496f2-7765-4067-bbc6-36b355107af3@mailbox.org>
+ <20241024152448.102-12-paul.barker.ct@bp.renesas.com>
+ <5bd5fe3c-1077-4dc9-8305-b435c426d712@mailbox.org>
+In-Reply-To: <5bd5fe3c-1077-4dc9-8305-b435c426d712@mailbox.org>
 
---------------tWp6SlJ6EI4OQMziiPOUUX5v
-Content-Type: multipart/mixed; boundary="------------hiAN5Gm0A58OaUdRzXOr0oPw"
+--------------Dju6aJ2lReiRgtXdVdcbloAX
+Content-Type: multipart/mixed; boundary="------------5fNRHabnaa8Im6KW06siuOpn"
 
---------------hiAN5Gm0A58OaUdRzXOr0oPw
+--------------5fNRHabnaa8Im6KW06siuOpn
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 27/10/2024 16:25, Marek Vasut wrote:
+On 27/10/2024 16:29, Marek Vasut wrote:
 > On 10/24/24 5:24 PM, Paul Barker wrote:
->> Several Renesas SoCs in the RZ/G2L family have two Ethernet interfaces=
-=2E
->> To support this second interface, we extend the bb_miiphy_buses[] arra=
-y
->> and keep track of the current bus index in ravb_of_to_plat().
->>
->> Support for an arbitrary number of instances is not implemented - it i=
-s
->> expected that bb_miiphy_buses will be replaced with a proper device
->> model/uclass implementation before that is needed.
+>> The Renesas R9A07G044L (RZ/G2L) SoC includes two Gigabit Ethernet
+>> interfaces which can be supported using the ravb driver. Some RZ/G2L
+>> specific steps need to be taken during initialization due to differenc=
+es
+>> between this SoC and previously supported SoCs. We also need to ensure=
+
+>> that the module reset is de-asserted after the module clock is enabled=
+
+>> but before any Ethernet register reads/writes take place.
 >>
 >> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 >> ---
->>   drivers/net/ravb.c | 28 ++++++++++++++++++++++++----
->>   1 file changed, 24 insertions(+), 4 deletions(-)
+>>   arch/arm/mach-renesas/Kconfig |   1 +
+>>   drivers/net/Kconfig           |   2 +
+>>   drivers/net/ravb.c            | 183 ++++++++++++++++++++++++++++++++=
+--
+>>   3 files changed, 176 insertions(+), 10 deletions(-)
 >>
+>> diff --git a/arch/arm/mach-renesas/Kconfig b/arch/arm/mach-renesas/Kco=
+nfig
+>> index aeb55da609bd..d373ab56ce91 100644
+>> --- a/arch/arm/mach-renesas/Kconfig
+>> +++ b/arch/arm/mach-renesas/Kconfig
+>> @@ -76,6 +76,7 @@ config RZG2L
+>>   	imply MULTI_DTB_FIT
+>>   	imply MULTI_DTB_FIT_USER_DEFINED_AREA
+>>   	imply PINCTRL_RZG2L
+>> +	imply RENESAS_RAVB
+>>   	imply RENESAS_SDHI
+>>   	imply RZG2L_GPIO
+>>   	imply SCIF_CONSOLE
+>> diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+>> index 89f7411bdf33..d009acdcd94f 100644
+>> --- a/drivers/net/Kconfig
+>> +++ b/drivers/net/Kconfig
+>> @@ -822,6 +822,8 @@ config RENESAS_RAVB
+>>   	depends on RCAR_64
+>>   	select PHYLIB
+>>   	select PHY_ETHERNET_ID
+>> +	select BITBANGMII
+>> +	select BITBANGMII_MULTI
+>=20
+> Keep the list sorted.
+
+Will fix in v2.
+
+>=20
+>>   	help
+>>   	  This driver implements support for the Ethernet AVB block in
+>>   	  Renesas M3 and H3 SoCs.
 >> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
->> index f1401d2f6ed2..9b33ce929618 100644
+>> index fb869cd0872e..e2ab929858c8 100644
 >> --- a/drivers/net/ravb.c
 >> +++ b/drivers/net/ravb.c
->> @@ -11,6 +11,7 @@
->>   #include <clk.h>
->>   #include <cpu_func.h>
->>   #include <dm.h>
->> +#include <dm/device_compat.h>
->>   #include <errno.h>
->>   #include <log.h>
->>   #include <miiphy.h>
->> @@ -494,6 +495,7 @@ static int ravb_probe(struct udevice *dev)
->>   {
->>   	struct eth_pdata *pdata =3D dev_get_plat(dev);
->>   	struct ravb_priv *eth =3D dev_get_priv(dev);
->> +	struct bb_miiphy_bus *phybus;
->>   	struct mii_dev *mdiodev;
->>   	void __iomem *iobase;
->>   	int ret;
->> @@ -513,7 +515,8 @@ static int ravb_probe(struct udevice *dev)
->>  =20
->>   	mdiodev->read =3D bb_miiphy_read;
->>   	mdiodev->write =3D bb_miiphy_write;
->> -	bb_miiphy_buses[0].priv =3D eth;
->> +	phybus =3D (struct bb_miiphy_bus *)pdata->priv_pdata;
->> +	phybus->priv =3D eth;
->>   	snprintf(mdiodev->name, sizeof(mdiodev->name), dev->name);
->>  =20
->>   	ret =3D mdio_register(mdiodev);
->> @@ -625,7 +628,17 @@ int ravb_bb_delay(struct bb_miiphy_bus *bus)
->>  =20
->>   struct bb_miiphy_bus bb_miiphy_buses[] =3D {
->>   	{
->> -		.name		=3D "ravb",
->> +		.name		=3D "ravb0",
->> +		.init		=3D ravb_bb_init,
->> +		.mdio_active	=3D ravb_bb_mdio_active,
->> +		.mdio_tristate	=3D ravb_bb_mdio_tristate,
->> +		.set_mdio	=3D ravb_bb_set_mdio,
->> +		.get_mdio	=3D ravb_bb_get_mdio,
->> +		.set_mdc	=3D ravb_bb_set_mdc,
->> +		.delay		=3D ravb_bb_delay,
->> +	},
->> +	{
->> +		.name		=3D "ravb1",
->>   		.init		=3D ravb_bb_init,
->>   		.mdio_active	=3D ravb_bb_mdio_active,
->>   		.mdio_tristate	=3D ravb_bb_mdio_tristate,
->> @@ -646,10 +659,16 @@ static const struct eth_ops ravb_ops =3D {
->>   	.write_hwaddr		=3D ravb_write_hwaddr,
->>   };
->>  =20
->> +static int bb_miiphy_index;
->> +
->>   int ravb_of_to_plat(struct udevice *dev)
->>   {
->>   	struct eth_pdata *pdata =3D dev_get_plat(dev);
->> -	const fdt32_t *cell;
->> +
->> +	if (bb_miiphy_index >=3D bb_miiphy_buses_num) {
->> +		dev_err(dev, "ravb driver supports only 1 or 2 devices!\n");
-> Hmmmm, I really do not like this, can we make this dynamic ?
 >=20
-> Unless you want to take a look at this yourself, I can add it into my t=
-odo ?
+> [...]
+>=20
+>> @@ -108,6 +122,16 @@
+>>  =20
+>>   #define RAVB_TX_TIMEOUT_MS		1000
+>>  =20
+>> +#define RAVB_RCV_BUFF_MAX		8192
+>> +
+>> +struct ravb_device_ops {
+>> +	int (*mac_init)(struct udevice *dev);
+>> +	int (*dmac_init)(struct udevice *dev);
+>> +	int (*config)(struct udevice *dev);
+>> +	int (*reset_deassert)(struct udevice *dev);
+>> +	void (*reset_assert)(struct udevice *dev);
+>> +};
+>=20
+> [...]
+>=20
+>> +static int ravb_reset_deassert_rcar(struct udevice *dev)
+>> +{
+>=20
+> The callsites should check if a callback is assigned or NULL and only=20
+> call the callback if it is assigned. Then you won't need empty callback=
+s=20
+> like this.
+>=20
+> Basically add if (ops->reset_deassert) ops->reset_deassert() and remove=
+=20
+> this empty function.
 
-I think the real solution here would be to separate the bb_miiphy
-operations from the bus instance, so we would have something like:
+Will fix in v2.
 
-    struct bb_miiphy_bus {
-        struct bb_miiphy_ops *ops;
-        void *priv;
-    };
+>=20
+>> +	return 0;
+>> +}
+>> +
+>> +static void ravb_reset_assert_rzg2l(struct udevice *dev)
+>> +{
+>> +	struct ravb_priv *eth =3D dev_get_priv(dev);
+>> +
+>> +	reset_assert(&eth->rst);
+>> +	reset_free(&eth->rst);
+>> +}
+>=20
+> A bit of a design question -- would it make sense to have ravb-rcar.c=20
+> and ravb-rzg2l.c to contain the differences between the ravb variants, =
 
-    struct bb_miiphy_ops {
-        int (*init)(struct bb_miiphy_bus *bus);
-        int (*mdio_active)(struct bb_miiphy_bus *bus);
-        int (*mdio_tristate)(struct bb_miiphy_bus *bus);
-        int (*set_mdio)(struct bb_miiphy_bus *bus, int v);
-        int (*get_mdio)(struct bb_miiphy_bus *bus, int *v);
-        int (*set_mdc)(struct bb_miiphy_bus *bus, int v);
-        int (*delay)(struct bb_miiphy_bus *bus);
-    };
+> and keep common code only in ravb.c ?
 
-    int bb_miiphy_bus_register(const char *name,
-                               struct bb_miiphy_ops *ops,
-			       void *priv);
-
-Where drivers will call `bb_miiphy_bus_register()` from the probe
-function, it will create a `struct bb_miiphy_bus` instance and a
-`struct mii_dev` instance then call `mdio_register()`. The driver can
-then support an arbitrary number of MDIO busses from a single constant
-`struct bb_miiphy_ops` instance.
-
-The bb_miiphy_getbus() function should be dropped from miiphy.c.
-Instead, the priv pointer in the `struct mii_dev` instance can point to
-the appropriate `struct bb_miiphy_bus` instance.
-
-It looks like all users of CONFIG_BITBANGMII also set
-CONFIG_BITBANGMII_MULTI, and there don't seem to be any targets that
-define the macros documented in README.bitbangMII (lines 15-22). So, we
-can drop the non-BITBANGMII_MULTI code from miiphybb.c and simplify
-things a lot.
-
-That's non-trivial but it's not a huge set of changes, maybe something
-we could target for v2024.04?
+That would probably be an improvement. I'll do that for v2.
 
 Thanks,
 
 --=20
 Paul Barker
---------------hiAN5Gm0A58OaUdRzXOr0oPw
+
+--------------5fNRHabnaa8Im6KW06siuOpn
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -285,21 +268,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------hiAN5Gm0A58OaUdRzXOr0oPw--
+--------------5fNRHabnaa8Im6KW06siuOpn--
 
---------------tWp6SlJ6EI4OQMziiPOUUX5v--
+--------------Dju6aJ2lReiRgtXdVdcbloAX--
 
---------------0Q7KoqZM4dl7Q0ufsUYGp40p
+--------------tbISfXlCya7khQ2MmZLGMTmB
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx9eewUDAAAAAAAKCRDbaV4Vf/JGvVgK
-AP9woHu8pEv9Q1BYOYi2dbgMzjPhL5pDVxnI1aXr7s94YwD/XvCnuhZyYOLS22rm5MiCaypxKgAU
-6WvhLOJrujtzQwk=
-=Gdoc
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx9e+gUDAAAAAAAKCRDbaV4Vf/JGvdch
+AP4343Ki/H9PWkEUGgldMzPGOiClpp+j+BQoYnEH+pdEtgEA8DM5WOMzbP14dsJLa5yFFTVXNX3H
+M5Ntm1lSNWQGLAw=
+=Mija
 -----END PGP SIGNATURE-----
 
---------------0Q7KoqZM4dl7Q0ufsUYGp40p--
+--------------tbISfXlCya7khQ2MmZLGMTmB--
