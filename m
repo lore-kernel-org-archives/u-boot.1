@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13CCBD13588
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 02:58:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3CF3D1356B
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 03:12:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6575A8895E;
-	Mon, 28 Oct 2024 03:58:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 3EF138895E;
+	Mon, 28 Oct 2024 04:12:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="hjS9ScuS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JSIRgHmz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42A9C87BF4; Mon, 28 Oct 2024 03:58:21 +0100 (CET)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8727587BF4; Mon, 28 Oct 2024 04:12:04 +0100 (CET)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9DBD88C53
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 03:58:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 00A1688F2A
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 04:12:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 74efb4c494d811efbd192953cf12861f-20241028
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
- bh=EwYNu9mVZfGRtY+H37VECl/E2HmLc0HVinGoir3iaL0=; 
- b=hjS9ScuSiIlvsnfHVIXW/5EMZnmdMD1W4+8itShZH+zaWLSzn6UmRPlYkBs8x988Dlm4JKfqdvAMyoQ6qkYWoLWbe4TL3rrRxTG1QBvuSGJvNYvpSH9SgAhVVI4GOACpIzWyzitj1MBacONT+LSbD86Mc4H9oKUcBkKejkaggDc=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.42, REQID:d58514ca-fe34-407d-9062-108b410dffe6, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:b0fcdc3, CLOUDID:8d5d322e-a7a0-4b06-8464-80be82133975,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|-5,EDM:-3,IP:ni
- l,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES
- :1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 74efb4c494d811efbd192953cf12861f-20241028
-Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1857443754; Mon, 28 Oct 2024 10:58:06 +0800
-Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
- mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Mon, 28 Oct 2024 10:58:05 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Mon, 28 Oct 2024 10:58:04 +0800
-Message-ID: <6db33dd28da63dabc198788f28bfa00425d7f62e.camel@mediatek.com>
-Subject: Re: [PATCH] menu: fix the logic checking whether ESC key is pressed
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, Daniel Golle <daniel@makrotopia.org>
-CC: <u-boot@lists.denx.de>, GSS_MTK_Uboot_upstream
- <GSS_MTK_Uboot_upstream@mediatek.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, "John
- Crispin" <john@phrozen.org>
-Date: Mon, 28 Oct 2024 10:58:04 +0800
-In-Reply-To: <d00691ed-815e-4db9-b5d7-b09c32ead593@mailbox.org>
-References: <20241021005642.153511-1-weijie.gao@mediatek.com>
- <Zx1Bpb7_9TEqBeyB@pidgin.makrotopia.org>
- <37e445c29de0c1ef020d56a7d4da2916d692545b.camel@mediatek.com>
- <d00691ed-815e-4db9-b5d7-b09c32ead593@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-7b154f71885so379160185a.0
+ for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 20:12:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1730085121; x=1730689921; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7a/UCi5AtxrfFEEg5N0WEaiiv4+4816U99hIMf8wB6g=;
+ b=JSIRgHmzNmvQCMOWz+BHVEa2rglhse75GkJrMAcXWel3Nu1TfUcmwuazDKx836ATpW
+ sex9R7bwh0LNLEZjtYxLkhJKcrfKzaTRLmVCgY+rH1l9Yvnb8vfjakamCS5H5IIlWams
+ FhXlxHP85boibT49hgyGuvDsDG7AhtPdebf3k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730085121; x=1730689921;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7a/UCi5AtxrfFEEg5N0WEaiiv4+4816U99hIMf8wB6g=;
+ b=VlEnRUd6hqEac1aZQ9L2bwlij9g/h6Dx506ztxiIxmlf8UwZd++FKzaUi5lclUC562
+ Gs4bqZw8qxsCOXN0Sd7KLdXV5M5KkCxJOZuRCEe5Fj7TC2rWL84PLg96b3HqreFGf2Mi
+ JQkTztXQ+H9H0/tgTHg0VQMSmHFeierTgwT4nWVNPmi0bHYsRGQ7FVv5CN6vrR3Wg32/
+ ayZ252rYr61a/dk22Jvj/8tyMCKk07xbFX+tloltl+HX/QY4zY3XS8myQsXgu26MnyQM
+ U84BdZFCoOyGJG1C2Qw7hhPEg1nFPwD5W7F561GLNhCn02pCUqcCWPd1/sulkr2bgyaI
+ yegg==
+X-Gm-Message-State: AOJu0YymVcK0LPvUr36BZEqs5T51ZPKaOADEnH7Y5b0dCY+s8WHvalzl
+ zTFxopngHyx173K2vDYQNA9Nn1bdAIL+pl8qAsWeQMz2HzsggT3WGSnmy6AWO5tjj14demzdcJr
+ iCUY=
+X-Google-Smtp-Source: AGHT+IE+g0D+8oDqWWN2RzynD/hywZN1pMj81fI4FaO3OkNc7zgoDbrgsKz6apXwKKss5m8VWbpd8A==
+X-Received: by 2002:a05:620a:4007:b0:7ac:b04e:34c6 with SMTP id
+ af79cd13be357-7b193f3e313mr1248965085a.50.1730085120880; 
+ Sun, 27 Oct 2024 20:12:00 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b18d2aac53sm280242185a.59.2024.10.27.20.11.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 27 Oct 2024 20:11:59 -0700 (PDT)
+Date: Sun, 27 Oct 2024 21:11:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Patrick Rudolph <patrick.rudolph@9elements.com>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20241028031156.GN4959@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-MTK: N
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+ffc/KOSQtB2P50z"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,84 +85,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2024-10-28 at 03:33 +0100, Marek Vasut wrote:
-> External email : Please do not click links or open attachments until
-> you have verified the sender or the content.
-> 
-> 
-> On 10/28/24 1:25 AM, Weijie Gao wrote:
-> > Hi Daniel,
-> > 
-> > On Sat, 2024-10-26 at 20:23 +0100, Daniel Golle wrote:
-> > > External email : Please do not click links or open attachments
-> > > until
-> > > you have verified the sender or the content.
-> > > 
-> > > 
-> > > Hi!
-> > > 
-> > > On Mon, Oct 21, 2024 at 08:56:42AM +0800, Weijie Gao wrote:
-> > > > It's observed that the bootmenu on a serial console sometimes
-> > > > incorrectly quitted with superfluous characters filled to
-> > > > command
-> > > > line input:
-> > > > 
-> > > > >   *** U-Boot Boot Menu ***
-> > > > > 
-> > > > >       1. Startup system (Default)
-> > > > >       2. Upgrade firmware
-> > > > >       3. Upgrade ATF BL2
-> > > > >       4. Upgrade ATF FIP
-> > > > >       5. Load image
-> > > > >       0. U-Boot console
-> > > > > 
-> > > > > 
-> > > > >   Press UP/DOWN to move, ENTER to select, ESC to quit
-> > > > > MT7988> [B
-> > > > 
-> > > > Analysis shows it was caused by the wrong logic of
-> > > > bootmenu_loop:
-> > > > 
-> > > > At first the bootmenu_loop received the first ESC char
-> > > > correctly.
-> > > > 
-> > > > However, during the second call to bootmenu_loop, there's no
-> > > > data
-> > > > in the UART Rx FIFO. Due to the low baudrate, the second char
-> > > > of
-> > > > the down array key sequence hasn't be fully received.
-> > > > 
-> > > > But bootmenu_loop just did a mdelay(10), and then treated it as
-> > > > a
-> > > > single ESC key press event. It didn't even try tstc() again
-> > > > after
-> > > > the 10ms timeout.
-> > > > 
-> > > > This patch fixes this issue by letting bootmenu_loop check
-> > > > tstc()
-> > > > twice.
-> > > 
-> > > The patch helps to fix the problem when dealing with single key
-> > > presses. However, apparently this is not enough to fix the issue
-> > > in
-> > > all situations. I still manage to drop into U-Boot console with
-> > > an
-> > > extra '[A' when simply holding down the arrow-up key for a while.
-> > > 
-> > 
-> > Holding down the arrow-up key for a while can cause the PC to send
-> > large amounts of data to the UART Rx FIFO. Since filogic UARTs
-> > usually
-> > have only 32 bytes FIFO, it's very easy to cause Rx FIFO overflow,
-> > and then you'll still be dropped into U-Boot console due to data
-> > loss.
-> > I've already confirmed this during solving this issue and this can
-> > only
-> > be solved by increasing the baudrate.
-> 
-> Does CONFIG_SERIAL_RX_BUFFER help with those overflows ?
 
-CONFIG_SERIAL_RX_BUFFER can't fully elimate the overflow. I can still
-reproduce this issue by holding down the arrow-up key for more than
-15 seconds.
+--+ffc/KOSQtB2P50z
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+Here's the latest report.
+
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Sun, Oct 27, 2024 at 9:05=E2=80=AFPM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
+
+
+Hi,
+
+Please find the latest report on new defect(s) introduced to Das
+U-Boot found with Coverity Scan.
+
+1 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+
+
+New defect(s) Reported-by: Coverity Scan
+Showing 1 of 1 defect(s)
+
+
+** CID 511435:  Integer handling issues  (SIGN_EXTENSION)
+/lib/acpi/acpi_table.c: 476 in acpi_write_spcr()
+
+
+___________________________________________________________________________=
+_____________________________
+*** CID 511435:  Integer handling issues  (SIGN_EXTENSION)
+/lib/acpi/acpi_table.c: 476 in acpi_write_spcr()
+470             default:
+471                     space_id =3D ACPI_ADDRESS_SPACE_IO;
+472                     break;
+473             }
+474
+475             serial_width =3D serial_info.reg_width * 8;
+>>>     CID 511435:  Integer handling issues  (SIGN_EXTENSION)
+>>>     Suspicious implicit sign extension: "serial_info.reg_offset" with t=
+ype "u8" (8 bits, unsigned) is promoted in "serial_info.reg_offset << seria=
+l_info.reg_shift" to type "int" (32 bits, signed), then sign-extended to ty=
+pe "unsigned long" (64 bits, unsigned).  If "serial_info.reg_offset << seri=
+al_info.reg_shift" is greater than 0x7FFFFFFF, the upper bits of the result=
+ will all be 1.
+476             serial_offset =3D serial_info.reg_offset << serial_info.reg=
+_shift;
+477             serial_address =3D serial_info.addr + serial_offset;
+478
+479             /* Encode register access size */
+480             switch (serial_info.reg_shift) {
+481             case 0:
+
+----- End forwarded message -----
+
+--=20
+Tom
+
+--+ffc/KOSQtB2P50z
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcfAPkACgkQFHw5/5Y0
+tyzjkgv/dF5L44JxHrcbCftcQ+QF9fcVO7lNa06XmZGXX4gpNEjoiZ1Jkn8AMQfq
+jUYUMieU8nSuf5qqJFSESlkuLwtzxLixzRkn+Dz0vVd08isFPwDR74UFffYtGZWC
+HEuLo0lfPw1M78aYkHGAYn7sycK2VlfLOqeqL45ivEQmB4j2yqp28tY0aOoxprrV
+YcTLSH9F6OhtjXi3CaQPW7CY6uvcC4makEBgBLYEgz7QNCJJ9sMzv1sigIbSwd0K
+bzosOyLAGpwf+uOnxjPzc0OVSHojGYSPFSAbsOgU699hgDeAk7Co80zIn84kddgT
+vIbr1uNV2wV3FRRNQMxbA8gwrlxAEfz+ItUVfy4UYnVVosKn1edVnAK0Z6/sCcsI
+Q8LLLiLIEPWG3zJJwfbS9oQm5kOuRfZaO6gZJ/R89g5aiMfrhbJDzt07P9QTWuyA
+/qgHoYyxtGFxk+4FBWYJk9fhVbKpR9evuS2oWUYZz4ZAYRY3Gy8sPBfoB44lUQFl
+dj06MoNQ
+=B96B
+-----END PGP SIGNATURE-----
+
+--+ffc/KOSQtB2P50z--
