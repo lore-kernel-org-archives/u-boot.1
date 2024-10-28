@@ -4,59 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D12AAD3E2A2
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 18:49:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63428D3E2A3
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 19:00:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40606890A9;
-	Mon, 28 Oct 2024 19:49:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B4E848913A;
+	Mon, 28 Oct 2024 20:00:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="Qk8jGUQP";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="uckh8JAX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE2D5890DF; Mon, 28 Oct 2024 19:49:17 +0100 (CET)
+ id E91C4890D0; Mon, 28 Oct 2024 20:00:44 +0100 (CET)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 501798909F
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 19:49:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 097E88911A
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 20:00:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
  s=gloria202408;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+ Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=p7+sjT0NdoOeLPH0DkWf6Rrf1Ei1tmRk/2LpyUMNvOw=; b=Qk8jGUQP0VVdUjuX+EcrCBH/oc
- s1I+9VPZYjOdRByqsNAiO3G3x1l/JFmBDNn9wV0FQTjPwEPxxMt3FpnV5pHocfG3r8BHpNzqdG2lT
- VSHvIAvVlGJblNL6znXi6NKuTTWS7il3f/IK9O1gpBTFt2sR+QB+4MeVrVPZ1oqrrcS+x4Pmdl+tN
- F10EIyYfXfru8ZU9DiXCDlmDZh70+g6M5GDadwVTfBOErVbJOb8urRhjsGxeQ7a3IqLRB7vd9hS5x
- yXfCu9KmLDj+N+NBJ/K0zoSoLp52rfO3gX37pBqS4ackQ8qak4TX9L/cVyOzORCRdS8kNqEhkVT+o
- ZLnHGUsA==;
-Received: from [185.156.123.69] (helo=phil.localnet)
+ bh=PYD0HU4sKBzgAUSXf5UCqTsKGCY6WBzYqrzaTFUfaZQ=; b=uckh8JAXH/R3Rdb3ICWh9/YPg3
+ N2qguwyWk5zYvkIBXSsDi4kUT16zWbIQ8T39VeZ4giLVt9bjzuvUcoyL7NHkSvXTELp/TXCq5nipw
+ j7Zkyxg8LsDuzG5hR0v71+2R7nPS1+q/wSETZQ/bIvbZMq+w/+48UfYbAG8xIvWpzX5iFuCqciDQJ
+ FJ87bfoYon15b/X8Cd9qURR1zVIbhzf+pmrHrCZLGGwM/Fdx7QJWqzcFJqTj2wQoNS0MX0f2Yf30v
+ K7Ww80Yhxccl43ZmtMqTL8AOWp4xr7s2O5DJ4ATwFrwvya+XgtattwTTGeel4qCg7g3rg0z2LAnNC
+ hEu6hNDA==;
+Received: from [185.156.123.69] (helo=phil.sntech)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1t5Unh-00082D-Ro; Mon, 28 Oct 2024 19:49:13 +0100
+ id 1t5Uyn-0000Gm-Ix; Mon, 28 Oct 2024 20:00:41 +0100
 From: Heiko Stuebner <heiko@sntech.de>
-To: u-boot@lists.denx.de, philipp.tomsich@vrull.eu, sjg@chromium.org,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: ukleinek@debian.org
-Subject: Re: [PATCH v2 18/18] board: rockchip: add support for Qnap TS433
- devices
-Date: Mon, 28 Oct 2024 19:49:12 +0100
-Message-ID: <2882551.mvXUDI8C0e@phil>
-In-Reply-To: <17d20d41-5546-4b11-92b2-b51bfa076bc5@rock-chips.com>
-References: <20241013192424.84280-1-heiko@sntech.de>
- <0673c284-fc0c-4495-b44a-4c9e5e162b39@rock-chips.com>
- <17d20d41-5546-4b11-92b2-b51bfa076bc5@rock-chips.com>
+To: u-boot@lists.denx.de, kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
+ sjg@chromium.org
+Cc: heiko@sntech.de,
+	ukleinek@debian.org
+Subject: [PATCH v3 00/18] Support for rk3568 based QNAP TS433 NAS
+Date: Mon, 28 Oct 2024 20:00:16 +0100
+Message-ID: <20241028190034.143122-1-heiko@sntech.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,49 +70,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
+Currently QNAP builds a series of RK3568- (and RK3588-) based NAS systems.
+This series provides support for the 4-bay variant called TS433.
 
-Am Montag, 28. Oktober 2024, 09:39:27 CET schrieb Kever Yang:
-> On 2024/10/26 10:39, Kever Yang wrote:
-> > Hi Heiko,
-> >
-> >     I got a ci error for this patch:
-> >
-> > https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/jobs/929839
-> >
-> > +Image 'simple-bin-spi' is missing external blobs and is 
-> > non-functional: rockchip-tpl
-> > +/binman/simple-bin-spi/mkimage/rockchip-tpl (rockchip-tpl):
-> > +drivers/net/rtl8169.c:320:2: error: #warning cache-line size is 
-> > larger than descriptor size [-Werror=cpp]
-> > +  320 | #warning cache-line size is larger than descriptor size
-> > +      |  ^~~~~~~
-> > +cc1: all warnings being treated as errors
-> 
-> The other boards are using below Kconfig to fix this warning, which is 
-> suggest by the driver:
-> 
-> CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-> 
->   307  * Warn if the cache-line size is larger than the descriptor size. 
-> In such
->   308  * cases the driver will likely fail because the CPU needs to 
-> flush the cache
->   309  * when requeuing RX buffers, therefore descriptors written by the 
-> hardware
->   310  * may be discarded.
->   311 *
->   312  * This can be fixed by defining CONFIG_SYS_NONCACHED_MEMORY which 
-> will cause
->   313  * the driver to allocate descriptors from a pool of non-cached 
-> memory.
->   314 *
->   315  * Hardware maintain D-cache coherency in RISC-V architecture.
+The whole series of devices is pretty similar so adding support for the
+other variants will be pretty easy, once device-specific devicetrees land.
 
-thanks so much for this pointer, I started looking into the issue
-today, but your pointer made everything so much easier.
+The cherry-picked dts patches landed in the 6.12-rc1 merge window in
+the Linux kernel.
 
-Thanks a lot
-Heiko
+This currently goes on top of today's u-boot master.
 
+changes in v3:
+- list qnap/index in doc/boards/index
+- add CONFIG_SYS_HAS_NONCACHED_MEMORY to defconfig to fix cache error
+changes in v2:
+- use actual cherry-picked upstream dts commits, now that they are
+  merged
+
+Heiko Stuebner (17):
+  arm64: dts: rockchip: add PCIe supply regulator to Qnap-TS433
+  arm64: dts: rockchip: enable second PCIe controller on the Qnap-TS433
+  arm64: dts: rockchip: enable uart0 on Qnap-TS433
+  arm64: dts: rockchip: enable usb ports on Qnap-TS433
+  arm64: dts: rockchip: add stdout path on Qnap-TS433
+  arm64: dts: rockchip: enable sata1+2 on Qnap-TS433
+  arm64: dts: rockchip: add board-aliases for Qnap-TS433
+  arm64: dts: rockchip: add hdd leds to Qnap-TS433
+  arm64: dts: rockchip: enable the tsadc on the Qnap-TS433
+  arm64: dts: rockchip: add gpio-keys to Qnap-TS433
+  arm64: dts: rockchip: define cpu-supply on the Qnap-TS433
+  arm64: dts: rockchip: add missing pmic information on Qnap-TS433
+  arm64: dts: rockchip: enable gpu on Qnap-TS433
+  arm64: dts: rockchip: add 2 pmu_io_domain supplies for Qnap-TS433
+  arm64: dts: rockchip: actually enable pmu-io-domains on qnap-ts433
+  arm64: dts: rockchip: add product-data eeproms to QNAP TS433
+  board: rockchip: add support for Qnap TS433 devices
+
+Uwe Kleine-König (1):
+  arm64: dts: rockchip: Simplify network PHY connection on qnap-ts433
+
+ arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi    |   6 +
+ arch/arm/mach-rockchip/rk3568/Kconfig         |  14 +
+ board/qnap/ts433/Kconfig                      |  12 +
+ board/qnap/ts433/MAINTAINERS                  |   8 +
+ configs/qnap-ts433-rk3568_defconfig           |  87 +++
+ doc/board/index.rst                           |   1 +
+ doc/board/qnap/index.rst                      |   9 +
+ doc/board/qnap/ts433.rst                      |  91 +++
+ doc/board/rockchip/rockchip.rst               |   1 +
+ .../src/arm64/rockchip/rk3568-qnap-ts433.dts  | 571 +++++++++++++++++-
+ include/configs/qnap_ts433.h                  |  10 +
+ 11 files changed, 804 insertions(+), 6 deletions(-)
+ create mode 100644 arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+ create mode 100644 board/qnap/ts433/Kconfig
+ create mode 100644 board/qnap/ts433/MAINTAINERS
+ create mode 100644 configs/qnap-ts433-rk3568_defconfig
+ create mode 100644 doc/board/qnap/index.rst
+ create mode 100644 doc/board/qnap/ts433.rst
+ create mode 100644 include/configs/qnap_ts433.h
+
+-- 
+2.45.2
 
