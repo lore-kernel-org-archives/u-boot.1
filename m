@@ -4,139 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CB64D13588
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 08:28:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F199D13570
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 08:39:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBEFC89040;
-	Mon, 28 Oct 2024 09:28:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id DE6C889072;
+	Mon, 28 Oct 2024 09:39:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="WtNIWi9x";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="TP7LfJaD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61C7989089; Mon, 28 Oct 2024 09:28:52 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2060b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::60b])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 72AA989089; Mon, 28 Oct 2024 09:39:39 +0100 (CET)
+Received: from mail-m121156.qiye.163.com (mail-m121156.qiye.163.com
+ [115.236.121.156])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75FA68909E
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 09:28:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C95A388C66
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 09:39:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Prasad.Kummari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bGEULAQNfRsQCJiaUiNbcGBmRHyLyA1dZ1eUjVV+pkvsZ54lSQIWmyM1yNTU3sqKoM0GdrovLqhMZWc5wRFMdQn9JQuTiDkmRWaAeEqvtYn1ppz1yuRkDs4tqQ4RTISyCXMI+n836448S8DABeHmJf4w/2w6vOdUt1H4jQO2KJuNRSYjiFmJZyS3i6YO0g0EADvlbO8bl8/rhnHisAOdqMFHykoga9SWSCgsi3IAsLMh7v6UnCOjqgFNdHI78Pv2RrIJhtO4Uoo96YlIoXy0eUeFvY7h6fxvuq+JPJKYnLmbZabfBMKpA9U7EbewZG2VXoKc7HjFNNtRrB7lYyTvHQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8dYE3Xtq9ED8BXEo6sYSGHWy8ysGd11MhNeG7EN9FTA=;
- b=VaSMiHXqtLcfx7Y+UovXjLHD6tnV1asaxEhfyP60jwqPWsZZ4aWjqBeZPuRY2LfLQZU3PMAZPxtdGe9mneVwwWMX4MfWWvuDJumUIyff0krk5FbTUhNJnq+AQONImuFnShUFRz1EttzexdoqeL0F641LmQMjQ69BKlUF3CKhDvTeJKLZ7OiLScN89/mRelBXxxrT6G+MkvQn9ikDMA7Q61DwJidtAIuwpIG6Gme8CmnMR+K5eoBhaVMdgtLRHCnveoLeyKxZB9iEpR9L1kob3w/2vcGgMiRDoyulc1DUU6ld+tFP2W1uaziRmrQaDt53b5lGVpiktbhoO1fzSqsHIA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8dYE3Xtq9ED8BXEo6sYSGHWy8ysGd11MhNeG7EN9FTA=;
- b=WtNIWi9xdqxh5/n5lP+wYoIthd6IkgQpbLZKkL6wmR6S8BE/7ufMqKmMja3lOX7FrJMaukdUhFtRjS81099X3H9vcRNvENz1LuPyAV3G7nLCD3OJRVNPFuqRY6SJTZ0noijCMN6O4Av3ZKDGfsQ7JRi1ZLVy1wrluD/VrgNi1Po=
-Received: from MW2PR16CA0058.namprd16.prod.outlook.com (2603:10b6:907:1::35)
- by PH8PR12MB6699.namprd12.prod.outlook.com (2603:10b6:510:1ce::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.25; Mon, 28 Oct
- 2024 08:28:39 +0000
-Received: from DS2PEPF00003445.namprd04.prod.outlook.com
- (2603:10b6:907:1:cafe::ce) by MW2PR16CA0058.outlook.office365.com
- (2603:10b6:907:1::35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.23 via Frontend
- Transport; Mon, 28 Oct 2024 08:28:39 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS2PEPF00003445.mail.protection.outlook.com (10.167.17.72) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8114.16 via Frontend Transport; Mon, 28 Oct 2024 08:28:38 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Oct
- 2024 03:28:38 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Oct
- 2024 03:28:36 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 28 Oct 2024 03:28:32 -0500
-From: Prasad Kummari <prasad.kummari@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
- <padmarao.begari@amd.com>, <git@xilinx.com>, <jagan@amarulasolutions.com>,
- <n-francis@ti.com>, <d-gole@ti.com>, <mwalle@kernel.org>,
- <patrice.chotard@foss.st.com>, <patrick.delaunay@foss.st.com>,
- <p.yadav@ti.com>, <quentin.sulz@cherry.de>, <seanga2@gmail.com>,
- <sjg@chromium.org>, <Takahiro.Kuwano@infineon.com>, <trini@konsulko.com>,
- <tudor.ambarus@linaro.org>, Prasad Kummari <prasad.kummari@amd.com>
-Subject: [PATCH] mtd: spi-nor: Store stacked memories sizes in parameter array
-Date: Mon, 28 Oct 2024 13:57:25 +0530
-Message-ID: <20241028082723.3842308-1-prasad.kummari@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [172.16.12.67] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 112ad42c;
+ Mon, 28 Oct 2024 16:39:28 +0800 (GMT+08:00)
+Message-ID: <17d20d41-5546-4b11-92b2-b51bfa076bc5@rock-chips.com>
+Date: Mon, 28 Oct 2024 16:39:27 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 18/18] board: rockchip: add support for Qnap TS433
+ devices
+From: Kever Yang <kever.yang@rock-chips.com>
+To: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
+ philipp.tomsich@vrull.eu, sjg@chromium.org
+Cc: ukleinek@debian.org
+References: <20241013192424.84280-1-heiko@sntech.de>
+ <20241013192424.84280-19-heiko@sntech.de>
+ <0673c284-fc0c-4495-b44a-4c9e5e162b39@rock-chips.com>
+Content-Language: en-US
+In-Reply-To: <0673c284-fc0c-4495-b44a-4c9e5e162b39@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003445:EE_|PH8PR12MB6699:EE_
-X-MS-Office365-Filtering-Correlation-Id: d2ab7854-7855-495b-60a4-08dcf72a85fe
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|1800799024|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?L2EOTMaEXpNXI6iyT+qmXIliWaeTVlqydOrgkh2EUqiJ7IHqz19+L1JUzXj9?=
- =?us-ascii?Q?C/0aH9tnnNWZl9ymb3uxeCaIXtIx8qMDMETvbGSiEYCxd35JI+Z/Bx6TI0mP?=
- =?us-ascii?Q?AByl5swdaYtAW0JwHO/QgNEiRxyVQjGIU7UIGB1ElhchtFNGQ+df21FaijoG?=
- =?us-ascii?Q?jfK66GIOo7DguEy+ROTqDzVrUa0Ot3IADJbamu3C2NJIZTi50XlNR7I7quQG?=
- =?us-ascii?Q?0xlgMIvUh6fF6W2/+VLRGR9sDkpP+KlO0+LgAhQsq3C8Sbnx0dxouZadgCz/?=
- =?us-ascii?Q?JI8hJZADQtHOkJ6tqP84IL+t3i6kJ11MM+w1bFy4s5v+Qrh1VbkUp768V91C?=
- =?us-ascii?Q?UGtNg171Esi34JUMeavWjGy50+0dp4mf4/IdRUVAcygZgULAQj0eHcZ3bqYd?=
- =?us-ascii?Q?ArQF0FdU3jEtFBWNXrJ2MHN3efVGC0rn1hFqxJe0Z0vs5IQGy4f+WKmIbiWI?=
- =?us-ascii?Q?CX2V9VlgXyuIv7CtSliLPyiQdRiS6PYV4Few5jnW6b/OHVhpnhbZgbiIvQwF?=
- =?us-ascii?Q?XpfEquxwCRn55AJ4vY0jhLUHGrZ9f+tyHVos6iBhFTMdS899UFH1znrnZ0XC?=
- =?us-ascii?Q?bsySHiJ8Ms8r9pXpzD55YbWLoBESzcGFFqgngcVxqxfi0j53EbtfTdaXNxNf?=
- =?us-ascii?Q?IQXNiKdkvN8c4fvPMapy8ZOtkdiW/MH5B18nWgFuVS9ji++jCuCpz02sC3EJ?=
- =?us-ascii?Q?boIO4J0oa0iJAt43iglmbQaq8AROY7IRu0vYdcH3oPm+AokAuV1A1nwZgV8l?=
- =?us-ascii?Q?j0AGJH/4n2Rrhq+JODUTmrr7VUc/xL5R1o4ACieurosIN+gLYFJsrNwpLaCt?=
- =?us-ascii?Q?Kd1EXzdn8zIK1WHOlJv5mU+Xq37dxPopn//TQYVdKV1YuMqQNQOtz5704Rd2?=
- =?us-ascii?Q?HITrTBLvJ8D588gZuRDhMUS2BcyPK7+vkdxHcPyeoo3wMLrAq8jqmrC23jaB?=
- =?us-ascii?Q?H8QHkSPPtErmNqKhetPsL3ycoh+apk3OmGSKUFLIaeOj69K3Qzzsz5QXFoXM?=
- =?us-ascii?Q?RJTf8I1CJRT005mSgkSBGR8kB+GnsVcOB73KvRss9NjIdZ9xTNyC+ljtwRza?=
- =?us-ascii?Q?qQSy+X+jN6ODMt/D3QufoflXCdRFLkRh49AZyBv+BtfLiZRBXw+D0Tx9khI5?=
- =?us-ascii?Q?HFtp541RHNdYZeKpG3J+hHA0kx85zQWxnVpHWeWA+roWV+XFiAo+maBJARPT?=
- =?us-ascii?Q?wEMuZYHar8zqTNGuA3BxfcRNX5cDeuXBOuCDyckTlN+RQMvA6qkuJB7oeBS2?=
- =?us-ascii?Q?oDUDqxI34u0RBPnwjQ5zQRRVzQKrEQjVlWnnyHcd50/oIKjwWwxWIEhK67XT?=
- =?us-ascii?Q?m2k4Za17MJ5p5lSHh6c+Wpv3VuiUYe5Le7ULW8fbMKBjPauS1UXyjyWO3z3N?=
- =?us-ascii?Q?TV0eALN2AQJ61iZQkF2RNjDmegDsU+tSddtKDOE1MBq2mg0ptxVukeBBZ0QD?=
- =?us-ascii?Q?39gg1FbYGhI=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2024 08:28:38.7245 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d2ab7854-7855-495b-60a4-08dcf72a85fe
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003445.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6699
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0keGFZLT00dSktNTx5JTxhWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
+ JVSktLVUpCS0tZBg++
+X-HM-Tid: 0a92d247b68203a7kunm112ad42c
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NTY6Fxw5ETIdKQpINgM5Axw9
+ HhkaCzFVSlVKTEhLSktPTE1CSkpOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSExDSDcG
+DKIM-Signature: a=rsa-sha256;
+ b=TP7LfJaD0jXoRb9c2KOhS5ImPyDI16rDtoVkQwxw242RQ4I2QzX8U+xI8oR0oj6kbyqOaNRr2hWesv6cPmtKr4yQ3lxjocUIPVjNI0BFllpp/8mTKVKQtOfueBzQE6M5p1nDVtEgEmC0PlqR9fQqf8wDKnPlStRgrfsv0sNFjx8=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=64myB3ODdOb70F6A6iPxaxUE/MLonylP9G32Y/+t6z8=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,162 +76,410 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Each flash connected in stacked mode should have a array of integers
-to the nor structure to store each flash size. This array stores the
-sizes parameters of each flash connected in a stacked or parallel mode.
+Hi Heiko,
 
-The current stacked implementation assumes a maximum of two flashes
-connected in stacked mode, with both flashes being of the same make
-but potentially differing in size. Thus, except for the sizes, all
-other flash parameters of both flashes are identical.
 
-In the current implementation of stacked mode operation, the full
-chip erase in stack mode does not work correctly for the upper flash.
-This problem occurs because spi-nor cannot set the SPI_XFER_U_PAGE
-flag. It only sets this flag for the lower flash and
-calls spi_nor_erase_chip(), which erases only the lower flash.
-Also, spi-nor does not know which chip select values to use.
-It will select the upper flash if SPI_XFER_U_PAGE is set, otherwise,
-it will select the lower flash.
+On 2024/10/26 10:39, Kever Yang wrote:
+> Hi Heiko,
+>
+>     I got a ci error for this patch:
+>
+> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/jobs/929839
+>
+> +Image 'simple-bin-spi' is missing external blobs and is 
+> non-functional: rockchip-tpl
+> +/binman/simple-bin-spi/mkimage/rockchip-tpl (rockchip-tpl):
+> +drivers/net/rtl8169.c:320:2: error: #warning cache-line size is 
+> larger than descriptor size [-Werror=cpp]
+> +  320 | #warning cache-line size is larger than descriptor size
+> +      |  ^~~~~~~
+> +cc1: all warnings being treated as errors
 
-To fix this issue, spi-nor needs to send the full chip erase command
-to both the upper and lower flash. Since spi-nor does not know the
-chip select values, it will determine which flash to erase based on
-the individual flash sizes stored in array of params. The code changes
-will loop through the number of flashes and set the SPI_XFER_U_PAGE
-flag to indicate the upper flash. Using the individual index,
-spi-nor will call spi_nor_erase_chip() for each flash and wait until
-the chip is ready.
+The other boards are using below Kconfig to fix this warning, which is 
+suggest by the driver:
 
-Need to rebase top of this commit:
-https://lore.kernel.org/u-boot/20241018082644.22495-1-venkatesh.abbarapu@amd.com/T/#u
+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
 
-Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
----
- drivers/mtd/spi/spi-nor-core.c | 47 ++++++++++++++++++++++++++++++----
- include/linux/mtd/spi-nor.h    |  3 +++
- 2 files changed, 45 insertions(+), 5 deletions(-)
+  307  * Warn if the cache-line size is larger than the descriptor size. 
+In such
+  308  * cases the driver will likely fail because the CPU needs to 
+flush the cache
+  309  * when requeuing RX buffers, therefore descriptors written by the 
+hardware
+  310  * may be discarded.
+  311 *
+  312  * This can be fixed by defining CONFIG_SYS_NONCACHED_MEMORY which 
+will cause
+  313  * the driver to allocate descriptors from a pool of non-cached 
+memory.
+  314 *
+  315  * Hardware maintain D-cache coherency in RISC-V architecture.
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 2034d84251..0d96373a1e 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -1063,7 +1063,7 @@ static int spi_nor_erase_chip(struct spi_nor *nor)
- 	if (ret)
- 		return ret;
- 
--	return nor->mtd.size;
-+	return ret;
- }
- 
- /*
-@@ -1104,7 +1104,7 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
- 	struct spi_nor *nor = mtd_to_spi_nor(mtd);
- 	u32 addr, len, rem, offset, max_size;
- 	bool addr_known = false;
--	int ret, err;
-+	int ret, err, idx = 0, rc = 0;
- 
- 	dev_dbg(nor->dev, "at 0x%llx, len %lld\n", (long long)instr->addr,
- 		(long long)instr->len);
-@@ -1155,7 +1155,35 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
- 
- 		if (len == mtd->size &&
- 		    !(nor->flags & SNOR_F_NO_OP_CHIP_ERASE)) {
--			ret = spi_nor_erase_chip(nor);
-+			if (nor->flags & SNOR_F_HAS_STACKED) {
-+
-+				ret = 0; idx = 0;
-+				while (idx < nor->num_flash) {
-+					if (idx == 1) {
-+						nor->spi->flags |= SPI_XFER_U_PAGE;
-+						rc = write_enable(nor);
-+						if (rc < 0)
-+							goto erase_err;
-+					}
-+					rc = spi_nor_erase_chip(nor);
-+					if (rc < 0)
-+						goto erase_err;
-+
-+					rc = spi_nor_erase_chip_wait_till_ready(nor,
-+										nor->cs_params[idx]);
-+					if (rc)
-+						goto erase_err;
-+
-+					ret += nor->cs_params[idx];
-+					idx++;
-+				}
-+
-+			} else {
-+				ret = spi_nor_erase_chip(nor);
-+				if (ret < 0)
-+					goto erase_err;
-+				ret = nor->mtd.size;
-+			}
- 		} else {
- 			ret = spi_nor_erase_sector(nor, offset);
- 		}
-@@ -1166,7 +1194,7 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
- 		len -= ret;
- 
- 		if (max_size == mtd->size &&
--		    !(nor->flags & SNOR_F_NO_OP_CHIP_ERASE)) {
-+		    !(nor->flags & SNOR_F_NO_OP_CHIP_ERASE) && !idx) {
- 			ret = spi_nor_erase_chip_wait_till_ready(nor, mtd->size);
- 		} else {
- 			ret = spi_nor_wait_till_ready(nor);
-@@ -3204,6 +3232,9 @@ static int spi_nor_init_params(struct spi_nor *nor,
- 		spi_nor_post_sfdp_fixups(nor, params);
- 	}
- #if CONFIG_IS_ENABLED(DM_SPI) && CONFIG_IS_ENABLED(SPI_ADVANCE)
-+
-+	nor->num_flash = 0;
-+
- 	/*
- 	 * The flashes that are connected in stacked mode should be of same make.
- 	 * Except the flash size all other properties are identical for all the
-@@ -3225,6 +3256,7 @@ static int spi_nor_init_params(struct spi_nor *nor,
- 			if (!(nor->spi->flags & SPI_XFER_STACKED))
- 				nor->spi->flags |= SPI_XFER_STACKED;
- 		}
-+		nor->num_flash++;
- 	}
- 
- 	i = 0;
-@@ -3242,13 +3274,18 @@ static int spi_nor_init_params(struct spi_nor *nor,
- 			if (!(nor->flags & SNOR_F_HAS_PARALLEL))
- 				nor->flags |= SNOR_F_HAS_PARALLEL;
- 		}
-+		nor->num_flash++;
- 	}
- 
- 	if (nor->flags & (SNOR_F_HAS_STACKED | SNOR_F_HAS_PARALLEL)) {
- 		params->size = 0;
--		for (idx = 0; idx < SNOR_FLASH_CNT_MAX; idx++)
-+
-+		for (idx = 0; idx < nor->num_flash; idx++) {
-+			nor->cs_params[idx] = flash_size[idx];
- 			params->size += flash_size[idx];
-+		}
- 	}
-+
- 	/*
- 	 * In parallel-memories the erase operation is
- 	 * performed on both the flashes simultaneously
-diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
-index 1ae586b2e5..f0719206c5 100644
---- a/include/linux/mtd/spi-nor.h
-+++ b/include/linux/mtd/spi-nor.h
-@@ -616,6 +616,9 @@ struct spi_nor {
- 	u32 size;
- 	u32 sector_size;
- 	u32 erase_size;
-+/* Number of flashes connected in parallel or stacked mode parameters */
-+	u32 num_flash;
-+	u64 cs_params[SNOR_FLASH_CNT_MAX];
- };
- 
- #ifndef __UBOOT__
--- 
-2.25.1
 
+Thanks,
+
+- Kever
+
+> +make[3]: *** [scripts/Makefile.build:257: drivers/net/rtl8169.o] Error 1
+> +make[2]: *** [scripts/Makefile.build:398: drivers/net] Error 2
+> +make[1]: *** [Makefile:1914: drivers] Error 2
+> +make: *** [Makefile:177: sub-make] Error 2
+>
+>
+> Seems for some reason the CI is building the TPL and rtl8169.c is 
+> build inside TPL?
+>
+>
+> Thanks,
+> - Kever
+> On 2024/10/14 03:24, Heiko Stuebner wrote:
+>> The Qnap TS433 is a 4-bay NAS based around the RK3568.
+>>
+>> Two SATA bays are connected to the RK3568's own SATA controllers while
+>> the other two are connected to a JMicron SATA controller living on the
+>> PCIe bus.
+>>
+>> It provides one 2.5Gb and one 1Gb ethernet port as well as 3 usb ports.
+>>
+>> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>> ---
+>>   arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi |  6 ++
+>>   arch/arm/mach-rockchip/rk3568/Kconfig      | 14 ++++
+>>   board/qnap/ts433/Kconfig                   | 12 +++
+>>   board/qnap/ts433/MAINTAINERS               |  8 ++
+>>   configs/qnap-ts433-rk3568_defconfig        | 86 ++++++++++++++++++++
+>>   doc/board/qnap/index.rst                   |  9 +++
+>>   doc/board/qnap/ts433.rst                   | 91 ++++++++++++++++++++++
+>>   doc/board/rockchip/rockchip.rst            |  1 +
+>>   include/configs/qnap_ts433.h               | 10 +++
+>>   9 files changed, 237 insertions(+)
+>>   create mode 100644 arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+>>   create mode 100644 board/qnap/ts433/Kconfig
+>>   create mode 100644 board/qnap/ts433/MAINTAINERS
+>>   create mode 100644 configs/qnap-ts433-rk3568_defconfig
+>>   create mode 100644 doc/board/qnap/index.rst
+>>   create mode 100644 doc/board/qnap/ts433.rst
+>>   create mode 100644 include/configs/qnap_ts433.h
+>>
+>> diff --git a/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi 
+>> b/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+>> new file mode 100644
+>> index 00000000000..19acbceb468
+>> --- /dev/null
+>> +++ b/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+>> @@ -0,0 +1,6 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * (C) Copyright 2024 Heiko Stuebner <heiko@sntech.de>
+>> + */
+>> +
+>> +#include "rk356x-u-boot.dtsi"
+>> diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig 
+>> b/arch/arm/mach-rockchip/rk3568/Kconfig
+>> index 899cf909fbb..2a0fd40874e 100644
+>> --- a/arch/arm/mach-rockchip/rk3568/Kconfig
+>> +++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+>> @@ -27,6 +27,19 @@ config TARGET_POWKIDDY_X55_RK3566
+>>       help
+>>         Powkiddy X55 handheld gaming console with an RK3566 SoC.
+>>   +config TARGET_QNAP_TS433_RK3568
+>> +    bool "QNAP-TS433"
+>> +    help
+>> +      Qnap TS433 4-bay NAS with a RK3568 SoC.
+>> +
+>> +      It provides the following featureset:
+>> +       * 4GB LPDDR4
+>> +       * 4GB eMMC
+>> +       * 2 SATA ports connected to two RK3568's SATA controllers
+>> +       * 2 SATA ports connected to a JMicron JMB58x AHCI SATA 
+>> controller
+>> +       * 1 1G network controller
+>> +       * 1 2.5G Realtek RTL8125 network controller
+>> +
+>>   config TARGET_QUARTZ64_RK3566
+>>       bool "Pine64 Quartz64"
+>>       help
+>> @@ -64,6 +77,7 @@ source "board/anbernic/rgxx3_rk3566/Kconfig"
+>>   source "board/hardkernel/odroid_m1/Kconfig"
+>>   source "board/pine64/quartz64_rk3566/Kconfig"
+>>   source "board/powkiddy/x55/Kconfig"
+>> +source "board/qnap/ts433/Kconfig"
+>>   source "board/radxa/zero3-rk3566/Kconfig"
+>>   source "board/xunlong/orangepi-3b-rk3566/Kconfig"
+>>   diff --git a/board/qnap/ts433/Kconfig b/board/qnap/ts433/Kconfig
+>> new file mode 100644
+>> index 00000000000..b00e1f9f2ef
+>> --- /dev/null
+>> +++ b/board/qnap/ts433/Kconfig
+>> @@ -0,0 +1,12 @@
+>> +if TARGET_QNAP_TS433_RK3568
+>> +
+>> +config SYS_BOARD
+>> +    default "qnap_ts433"
+>> +
+>> +config SYS_VENDOR
+>> +    default "qnap"
+>> +
+>> +config SYS_CONFIG_NAME
+>> +    default "qnap_ts433"
+>> +
+>> +endif
+>> diff --git a/board/qnap/ts433/MAINTAINERS b/board/qnap/ts433/MAINTAINERS
+>> new file mode 100644
+>> index 00000000000..c2b31ad9794
+>> --- /dev/null
+>> +++ b/board/qnap/ts433/MAINTAINERS
+>> @@ -0,0 +1,8 @@
+>> +QNAP-TS433
+>> +M:    Heiko Stuebner <heiko@sntech.de>
+>> +S:    Maintained
+>> +F:    board/qnap/ts433/
+>> +F:    doc/board/qnap/
+>> +F:    include/configs/qnap_ts433.h
+>> +F:    configs/qnap-ts433-rk3568_defconfig
+>> +F:    arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+>> diff --git a/configs/qnap-ts433-rk3568_defconfig 
+>> b/configs/qnap-ts433-rk3568_defconfig
+>> new file mode 100644
+>> index 00000000000..cbe4622e468
+>> --- /dev/null
+>> +++ b/configs/qnap-ts433-rk3568_defconfig
+>> @@ -0,0 +1,86 @@
+>> +CONFIG_ARM=y
+>> +CONFIG_SKIP_LOWLEVEL_INIT=y
+>> +CONFIG_COUNTER_FREQUENCY=24000000
+>> +CONFIG_ARCH_ROCKCHIP=y
+>> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-qnap-ts433"
+>> +CONFIG_ROCKCHIP_RK3568=y
+>> +CONFIG_SPL_SERIAL=y
+>> +CONFIG_TARGET_QNAP_TS433_RK3568=y
+>> +CONFIG_DEBUG_UART_BASE=0xFE660000
+>> +CONFIG_DEBUG_UART_CLOCK=24000000
+>> +CONFIG_SYS_LOAD_ADDR=0xc00800
+>> +CONFIG_PCI=y
+>> +CONFIG_DEBUG_UART=y
+>> +CONFIG_AHCI=y
+>> +CONFIG_FIT=y
+>> +CONFIG_FIT_VERBOSE=y
+>> +CONFIG_SPL_FIT_SIGNATURE=y
+>> +CONFIG_SPL_LOAD_FIT=y
+>> +CONFIG_LEGACY_IMAGE_FORMAT=y
+>> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-qnap-ts433.dtb"
+>> +# CONFIG_DISPLAY_CPUINFO is not set
+>> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+>> +CONFIG_SPL_MAX_SIZE=0x40000
+>> +CONFIG_SPL_PAD_TO=0x7f8000
+>> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>> +CONFIG_SPL_ATF=y
+>> +CONFIG_CMD_GPIO=y
+>> +CONFIG_CMD_GPT=y
+>> +CONFIG_CMD_I2C=y
+>> +CONFIG_CMD_MMC=y
+>> +CONFIG_CMD_PCI=y
+>> +CONFIG_CMD_SATA=y
+>> +CONFIG_CMD_USB=y
+>> +CONFIG_CMD_ROCKUSB=y
+>> +CONFIG_CMD_USB_MASS_STORAGE=y
+>> +# CONFIG_CMD_SETEXPR is not set
+>> +CONFIG_CMD_PMIC=y
+>> +CONFIG_CMD_REGULATOR=y
+>> +# CONFIG_SPL_DOS_PARTITION is not set
+>> +CONFIG_SPL_OF_CONTROL=y
+>> +CONFIG_OF_LIVE=y
+>> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent 
+>> assigned-clocks assigned-clock-rates assigned-clock-parents"
+>> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>> +CONFIG_SPL_DM_SEQ_ALIAS=y
+>> +CONFIG_SPL_REGMAP=y
+>> +CONFIG_SPL_SYSCON=y
+>> +CONFIG_AHCI_PCI=y
+>> +CONFIG_DWC_AHCI=y
+>> +CONFIG_SPL_CLK=y
+>> +CONFIG_ROCKCHIP_GPIO=y
+>> +CONFIG_SYS_I2C_ROCKCHIP=y
+>> +CONFIG_LED=y
+>> +CONFIG_LED_GPIO=y
+>> +CONFIG_MISC=y
+>> +CONFIG_SUPPORT_EMMC_RPMB=y
+>> +CONFIG_MMC_DW=y
+>> +CONFIG_MMC_DW_ROCKCHIP=y
+>> +CONFIG_MMC_SDHCI=y
+>> +CONFIG_MMC_SDHCI_SDMA=y
+>> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+>> +CONFIG_DWC_ETH_QOS=y
+>> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+>> +CONFIG_RTL8169=y
+>> +CONFIG_PCIE_DW_ROCKCHIP=y
+>> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+>> +CONFIG_SPL_PINCTRL=y
+>> +CONFIG_DM_PMIC=y
+>> +CONFIG_DM_PMIC_FAN53555=y
+>> +CONFIG_PMIC_RK8XX=y
+>> +CONFIG_REGULATOR_RK8XX=y
+>> +CONFIG_PWM_ROCKCHIP=y
+>> +CONFIG_SPL_RAM=y
+>> +CONFIG_SCSI=y
+>> +CONFIG_DEBUG_UART_SHIFT=2
+>> +CONFIG_SYS_NS16550_MEM32=y
+>> +CONFIG_SYSRESET=y
+>> +CONFIG_USB=y
+>> +CONFIG_USB_XHCI_HCD=y
+>> +CONFIG_USB_EHCI_HCD=y
+>> +CONFIG_USB_EHCI_GENERIC=y
+>> +CONFIG_USB_OHCI_HCD=y
+>> +CONFIG_USB_OHCI_GENERIC=y
+>> +CONFIG_USB_DWC3=y
+>> +CONFIG_USB_DWC3_GENERIC=y
+>> +CONFIG_ERRNO_STR=y
+>> diff --git a/doc/board/qnap/index.rst b/doc/board/qnap/index.rst
+>> new file mode 100644
+>> index 00000000000..652ea11a056
+>> --- /dev/null
+>> +++ b/doc/board/qnap/index.rst
+>> @@ -0,0 +1,9 @@
+>> +.. SPDX-License-Identifier: GPL-2.0+
+>> +
+>> +Qnap
+>> +====
+>> +
+>> +.. toctree::
+>> +   :maxdepth: 2
+>> +
+>> +   ts433.rst
+>> diff --git a/doc/board/qnap/ts433.rst b/doc/board/qnap/ts433.rst
+>> new file mode 100644
+>> index 00000000000..5c7fd314b7a
+>> --- /dev/null
+>> +++ b/doc/board/qnap/ts433.rst
+>> @@ -0,0 +1,91 @@
+>> +.. SPDX-License-Identifier: GPL-2.0+
+>> +
+>> +U-Boot for Qnap TS433 Devices
+>> +=================================
+>> +
+>> +This allows U-Boot to boot the Qnap TS433 NAS
+>> +
+>> +Preparing the serial
+>> +--------------------
+>> +
+>> +Qnap devices run their serial console with a 115200 baudrate. As the
+>> +binary DDR-init and maskrom-downloader expect a 1500000 rate, it is
+>> +necessary to adapt the binaries if their output is needed.
+>> +
+>> +This can be done with a binary provided in the rkbin repository.
+>> +First the ddrbin_param.txt in the rkbin repo needs to be modified:
+>> +
+>> +.. code-block:: bash
+>> +
+>> +    diff --git a/tools/ddrbin_param.txt b/tools/ddrbin_param.txt
+>> +    index 0dfdd318..82ade7e7 100644
+>> +    --- a/tools/ddrbin_param.txt
+>> +    +++ b/tools/ddrbin_param.txt
+>> +    @@ -11,7 +11,7 @@ lp5_freq=
+>> +
+>> +     uart id=
+>> +     uart iomux=
+>> +    -uart baudrate=
+>> +    +uart baudrate=115200
+>> +
+>> +     sr_idle=
+>> +     pd_idle=
+>> +
+>> +And after that the ddrbin_tool binary can be used to modify apply this
+>> +modification and also a new maskrom downloader can be build:
+>> +
+>> +.. code-block:: bash
+>> +
+>> +    $ tools/ddrbin_tool rk3568 tools/ddrbin_param.txt 
+>> bin/rk35/rk3568_ddr_1560MHz_v1.21.bin
+>> +    $ tools/boot_merger RKBOOT/RK3568MINIALL.ini
+>> +
+>> +Building U-Boot
+>> +---------------
+>> +
+>> +.. code-block:: bash
+>> +
+>> +    $ export CROSS_COMPILE=aarch64-linux-gnu-
+>> +    $ export BL31=../rkbin/bin/rk35/rk3568_bl31_v1.34.elf
+>> +    $ export 
+>> ROCKCHIP_TPL=../rkbin/bin/rk35/rk3568_ddr_1056MHz_v1.13.bin
+>> +    $ make qnap-ts433-rk3568_defconfig
+>> +    $ make
+>> +
+>> +This will build ``u-boot-rockchip.bin`` which can be written to the
+>> +on-board eMMC.
+>> +
+>> +Image installation
+>> +------------------
+>> +
+>> +The Qnap thankfully provides an easily accessible serial header as 
+>> well as
+>> +a very user-friendly jumper-header to bring the device into maskrom 
+>> mode.
+>> +
+>> +To access both, the drive trays need to be removed. Looking at the 
+>> board,
+>> +through the upper cutout of the metal frame the white 4-port 
+>> serial-header
+>> +can be seen next to a barcode sticker. It's pinout is as follows:
+>> +
+>> +.. code-block:: bash
+>> +
+>> +   ,_  _.
+>> +   |1234|  1=TX 2=VCC
+>> +   `----'  3=RX 4=GND
+>> +
+>> +
+>> +Directly below it, the mentioned 2-pin jumper header can be seen.
+>> +
+>> +To write your u-boot to the device, it needs to be powered off 
+>> first. Then
+>> +a jumper or suitable cable needs to be used to connect the two pins 
+>> of the
+>> +maskrom header. Turning on the device now will start it in maskrom 
+>> mode.
+>> +
+>> +It is important that the jumper gets removed after that stop and before
+>> +actually trying to write to the emmc.
+>> +
+>> +The front usb-port needs to be connected to the host with an USB-A-to-A
+>> +cable to allow flashing.
+>> +
+>> +The flashing itself is done via rkdeveloptool, which can be found for
+>> +example as package of that name in Debian-based distributions:
+>> +
+>> +.. code-block:: bash
+>> +
+>> +    $ rkdeveloptool db rk356x_spl_loader_v1.21.113.bin
+>> +    $ rkdeveloptool wl 64 u-boot-rockchip.bin
+>> diff --git a/doc/board/rockchip/rockchip.rst 
+>> b/doc/board/rockchip/rockchip.rst
+>> index 86d83befb5b..a0349d3ad56 100644
+>> --- a/doc/board/rockchip/rockchip.rst
+>> +++ b/doc/board/rockchip/rockchip.rst
+>> @@ -118,6 +118,7 @@ List of mainline supported Rockchip boards:
+>>        - FriendlyElec NanoPi R5S (nanopi-r5s-rk3568)
+>>        - Generic RK3566/RK3568 (generic-rk3568)
+>>        - Hardkernel ODROID-M1 (odroid-m1-rk3568)
+>> +     - QNAP TS-433 (qnap-ts433-rk3568)
+>>        - Radxa E25 Carrier Board (radxa-e25-rk3568)
+>>        - Radxa ROCK 3A (rock-3a-rk3568)
+>>        - Radxa ROCK 3B (rock-3b-rk3568)
+>> diff --git a/include/configs/qnap_ts433.h b/include/configs/qnap_ts433.h
+>> new file mode 100644
+>> index 00000000000..aee4546bf07
+>> --- /dev/null
+>> +++ b/include/configs/qnap_ts433.h
+>> @@ -0,0 +1,10 @@
+>> +/* SPDX-License-Identifier: GPL-2.0+ */
+>> +
+>> +#ifndef __QNAP_TS433_H
+>> +#define __QNAP_TS433_H
+>> +
+>> +#define ROCKCHIP_DEVICE_SETTINGS
+>> +
+>> +#include <configs/rk3568_common.h>
+>> +
+>> +#endif
+>
