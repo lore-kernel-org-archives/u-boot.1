@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69607D5B845
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 23:12:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A317D5B847
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 23:22:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBFDC89058;
-	Tue, 29 Oct 2024 00:12:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8995B89159;
+	Tue, 29 Oct 2024 00:22:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t2RADrXX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NWO24jhL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 230D4890E7; Tue, 29 Oct 2024 00:12:03 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 9304E89152; Tue, 29 Oct 2024 00:22:55 +0100 (CET)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96C2489043
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 00:11:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 306728907E
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 00:22:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7b14554468fso369646485a.1
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 16:11:58 -0700 (PDT)
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-460ad98b043so41428171cf.1
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 16:22:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730157117; x=1730761917; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730157772; x=1730762572; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=l+N0/H/jKGrnQrN1CroK6oF5hj6UmvW0HIEBi0mEv5U=;
- b=t2RADrXXAUUWLantxqezVrqic74C6ENbiKzw7V+SYu1bh+a1X+JiWHZs6l6UbfamzA
- yfGIy189rCm4G+de4ANK98qqa8W3LHGQ+uUFzF2TqksYYohVS6DkCrQKKQgwKWhnDU71
- 514SSSWlc5dbkrWtjKA4iVO1IKwbMJNS/L6Sg=
+ bh=tIJiF7QzDqqITMWwuBXIt2qoi8EsGdFeFS6nLtHXgeE=;
+ b=NWO24jhLqwNfxOTAgFSJ5QsJd3FPdiz8XOIh3ZS33LV+VJLcNpRXPap/1PR1PpLotc
+ M9ccmWeo6d6ugvzg3hZrPpkwFtOorynLLZq4HtMi+tmw+vJP85vbe3bC9Sm7DLwjp4U8
+ j28wO6pj6Wy+5aKcKrO2KjSNM28XSjzyFSXPc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730157117; x=1730761917;
+ d=1e100.net; s=20230601; t=1730157772; x=1730762572;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=l+N0/H/jKGrnQrN1CroK6oF5hj6UmvW0HIEBi0mEv5U=;
- b=YJ3pviaAPCr10pbHBo+A9MW5tuqBPPiakaQdgPIj2f6E9dM27U+ODkdYv1KIwyl7l4
- 3DZsMzzB0ftPJjUngi7cdIG+GFGwJQ0+OzTpYATeXTxl7x7sqVrxcqhCzh2YWSCzpDOF
- PE9CCNpD5aMrs0V0n7AvCUVqR7FxmdEo+JsLjyTv9wzmIm1fP4h3msMtbEhLxuE5wqpG
- 1LytfOxAyi9jQZ5d2oYHT20jy/3Rdy3p/smvHocFk4CAt8g+GNhXw1xSRAALxrdQCRt5
- EcSVNegrnKThAeMy2zTnAo/Td01HBCN/HS0DdleMbVhU4tNY40VvPT+q4g713zKd3crw
- qXsw==
+ bh=tIJiF7QzDqqITMWwuBXIt2qoi8EsGdFeFS6nLtHXgeE=;
+ b=H1i7CVACnRDrkJcaofPmWeuq8EDQr+FJd5bHRmf3So8CmgYoAaL5kifdKNT91ZqZWg
+ SGfGmTXVguhxYXPlyBwVKxDjdKVVTzMmjmlwPAcSByR3e5aNn9oKXh1Ww9BOyyXK2yGX
+ VPYGAZ5Z3M8KMxIhNxk6QGsifSDMvLPgiLVHixhAg9xXLNDz3HtwF4ub7L1MlqVTcbvR
+ Sgn5g0jfTWrVAW+wAAOfgcmEGSPik8h8EXDyT7pOlbEo/eRCA0ES9TBh9O8l2xaqOP/Z
+ 6HBcgH2jzX5GSahBsq159FgJ2EKlkJHD8y+Fc8I9BNCyxbfpR3RkOhn9t8iQE0lgLmAX
+ fzlg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXq3AVQD9OS4SY8pGJXddkMz6G1onmaxWKjX4o/zg8vmnV9RKhbVO8AdoDMrYyar3PmZ7BExH4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyGHwdHVJVVwjcmEnud//iPwvPgnYkEAoyHZg7i/AiIHWKAM5iq
- Da8SZPmZxb5mkoUG6dhfarjD5G9WQj+cnlvgaJzrt7skdJWpucF9b1HK1DTVkhc=
-X-Google-Smtp-Source: AGHT+IGzXN+tp+hLq6tlHe+9ZQNrcZnU1jfnLsDXp+ejUq5epoZU7u3Hzqdk8LngyytECV6+iCBjbQ==
-X-Received: by 2002:a05:620a:178d:b0:7ae:64a2:be61 with SMTP id
- af79cd13be357-7b193eff6a3mr1609027085a.36.1730157116942; 
- Mon, 28 Oct 2024 16:11:56 -0700 (PDT)
+ AJvYcCXdwDHivljIr/EdEecydt5tcaWK9KcGu4bRdj2/Ib+tREaQM6UVljJqGR1+TSFYOlUxt75A/lA=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywztm9yvIypvE6oP87UQHY8C72nNoatKSRVPeJb15Es1zxQzb7e
+ Rh2eIv59+Oqfh3YiCH3Qtvn+P/g4IyvE9xKnplq/XpXnsqRNNdK0JTElvtGpPOs=
+X-Google-Smtp-Source: AGHT+IFG3Wi2785FOAHpDDbDx2jQ/LKEC88x8XoRa2gVBvCau4ZCk/IN7/c1G0H9xFAetyLoU70WgA==
+X-Received: by 2002:a05:622a:549:b0:461:43d4:fcb3 with SMTP id
+ d75a77b69052e-4616842ff9emr2977261cf.13.1730157771972; 
+ Mon, 28 Oct 2024 16:22:51 -0700 (PDT)
 Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b18d344bedsm362194185a.115.2024.10.28.16.11.53
+ d75a77b69052e-4613211c703sm39039211cf.11.2024.10.28.16.22.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 16:11:55 -0700 (PDT)
-Date: Mon, 28 Oct 2024 17:11:51 -0600
+ Mon, 28 Oct 2024 16:22:50 -0700 (PDT)
+Date: Mon, 28 Oct 2024 17:22:47 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Janne Grunau <janne@jannau.net>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>,
- Michal Simek <michal.simek@amd.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>, asahi@lists.linux.dev
-Subject: Re: [PATCH v4 05/27] lmb: make LMB memory map persistent and global
-Message-ID: <20241028231151.GV4959@bill-the-cat>
-References: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
- <20240826115940.3233167-6-sughosh.ganu@linaro.org>
- <ZyAAJsnV4uz2Btwy@robin>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 3/3] test/lib/uuid: Make lib_test_dynamic_uuid depend on
+ SANDBOX
+Message-ID: <20241028232247.GW4959@bill-the-cat>
+References: <20241028164844.2308549-1-trini@konsulko.com>
+ <20241028164844.2308549-3-trini@konsulko.com>
+ <7eb00a6a-bba3-4aa5-ba63-1da2c63b3e5f@canonical.com>
+ <20241028213441.GU4959@bill-the-cat>
+ <e229e1d4-c2c9-4697-aa39-925a9ae5c75a@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xrpsQgvBZ8fO+3q/"
+ protocol="application/pgp-signature"; boundary="xfbp+ZLNKWneNi2j"
 Content-Disposition: inline
-In-Reply-To: <ZyAAJsnV4uz2Btwy@robin>
+In-Reply-To: <e229e1d4-c2c9-4697-aa39-925a9ae5c75a@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,120 +98,75 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---xrpsQgvBZ8fO+3q/
+--xfbp+ZLNKWneNi2j
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 28, 2024 at 10:20:38PM +0100, Janne Grunau wrote:
-> On Mon, Aug 26, 2024 at 05:29:18PM +0530, Sughosh Ganu wrote:
-> > The current LMB API's for allocating and reserving memory use a
-> > per-caller based memory view. Memory allocated by a caller can then be
-> > overwritten by another caller. Make these allocations and reservations
-> > persistent using the alloced list data structure.
+On Mon, Oct 28, 2024 at 11:01:05PM +0100, Heinrich Schuchardt wrote:
+> On 10/28/24 22:34, Tom Rini wrote:
+> > On Mon, Oct 28, 2024 at 10:24:58PM +0100, Heinrich Schuchardt wrote:
+> > > On 10/28/24 17:48, Tom Rini wrote:
+> > > > The dynamic UUID test checks for the sandbox specific capsule UUID =
+to be
+> > > > used, so we can only perform this test on sandbox currently.
+> > >=20
+> > > The tested function is gen_v5_guid(). This function is used to genera=
+ted
+> > > capsule UUIDs. It receives the test data provided in dynamic_uuid_tes=
+t_data
+> > > test_data[]:
+> > >=20
+> > > * compatible string
+> > > * image name
+> > >=20
+> > > The generated UUID is compared to a UUID provided in the test data.
+> > >=20
+> > > By chance the chosen test data contains the string 'sandbox'.
+> > >=20
+> > > It is not obvious why this test should depend on running on the sandb=
+ox.
+> > >=20
+> > > Where did it fail for you?
 > >=20
-> > Two alloced lists are declared -- one for the available(free) memory,
-> > and one for the used memory. Once full, the list can then be extended
-> > at runtime.
+> > On Pi 3, I forget if it was rpi_3 or rpi_arm64_defconfig (with tweaks
+> > like enabling CONFIG_UNIT_TEST).
 > >=20
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > [sjg: Optimise the logic to add a region in lmb_add_region_flags()]
-> > [sjg: Use a stack to store pointer of lmb struct when running lmb tests]
-> > ---
-> > Changes since V3:
-> > * Fix checkpatch warnings of spaces between function name and
-> >   open parantheses.
-> > * s/uint64_t/u64 as suggested by checkpatch.
-> > * Remove unneccessary parantheses in lmb.c as suggested by checkpatch.
-> > * Fix alignment in test/cmd/bdinfo.c as suggested by checkpatch.
 >=20
-> [...]
-> =20
-> >  drivers/iommu/apple_dart.c           |   8 +-
+> On qemu_arm64_defconfig the tests runs fine:
 >=20
-> [...]
+> =3D> ut lib lib_test_dynamic_uuid
+> Test: lib_test_dynamic_uuid: uuid.c
+> Failures: 0
 >=20
-> > diff --git a/drivers/iommu/apple_dart.c b/drivers/iommu/apple_dart.c
-> > index 9327dea1e3..611ac7cd6d 100644
-> > --- a/drivers/iommu/apple_dart.c
-> > +++ b/drivers/iommu/apple_dart.c
-> > @@ -70,7 +70,6 @@
-> > =20
-> >  struct apple_dart_priv {
-> >  	void *base;
-> > -	struct lmb lmb;
-> >  	u64 *l1, *l2;
-> >  	int bypass, shift;
-> > =20
-> > @@ -124,7 +123,7 @@ static dma_addr_t apple_dart_map(struct udevice *de=
-v, void *addr, size_t size)
-> >  	off =3D (phys_addr_t)addr - paddr;
-> >  	psize =3D ALIGN(size + off, DART_PAGE_SIZE);
-> > =20
-> > -	dva =3D lmb_alloc(&priv->lmb, psize, DART_PAGE_SIZE);
-> > +	dva =3D lmb_alloc(psize, DART_PAGE_SIZE);
-> > =20
-> >  	idx =3D dva / DART_PAGE_SIZE;
-> >  	for (i =3D 0; i < psize / DART_PAGE_SIZE; i++) {
-> > @@ -160,7 +159,7 @@ static void apple_dart_unmap(struct udevice *dev, d=
-ma_addr_t addr, size_t size)
-> >  			   (unsigned long)&priv->l2[idx + i]);
-> >  	priv->flush_tlb(priv);
-> > =20
-> > -	lmb_free(&priv->lmb, dva, psize);
-> > +	lmb_free(dva, psize);
-> >  }
-> > =20
-> >  static struct iommu_ops apple_dart_ops =3D {
-> > @@ -213,8 +212,7 @@ static int apple_dart_probe(struct udevice *dev)
-> >  	priv->dvabase =3D DART_PAGE_SIZE;
-> >  	priv->dvaend =3D SZ_4G - DART_PAGE_SIZE;
-> > =20
-> > -	lmb_init(&priv->lmb);
-> > -	lmb_add(&priv->lmb, priv->dvabase, priv->dvaend - priv->dvabase);
-> > +	lmb_add(priv->dvabase, priv->dvaend - priv->dvabase);
->=20
-> no. This breaks everything. apple_dart is an iommu and used struct lmb
-> to manage the IO virtual address space. This has nothing to do
-> with system memory.
-> Depending on the allocation strategy this will cause all sorts of
-> problems since the IO and the physical memory address space does not
-> overlap on apple silicon devices. IOVA is for many devices only 32-bit
-> but physical memory starts at 0x10_0000_0000 or 0x100_0000_0000.
-> Every device has its own iommu / IOVA space so sharing the space between
-> all of them is another problem. I'd assume only theoretical due to the
-> limited driver support and memory use in u-boot.
->=20
-> My current plan to fix this is to resurrect the old lmb code under a
-> different name.
->=20
-> Not sure about the same change in sandbox_iommu but I guess it could be
-> ok as there is no sandbox.
+> Missing CONFIG_SANDBOX cannot be the cause of the issue that you observed.
 
-Oh damn, sorry. Perhaps it can be brought back in the iommu framework
-more directly? I asked Caleb and they said snapdragon doesn't need
-something like this.
+Hunh, OK. Lets for now go with it being related to the 32bit UUID
+problem:
+https://lore.kernel.org/u-boot/4b60130d-030f-405c-a753-eeb52a5e7b1d@foss.st=
+=2Ecom
+and that it was on 32bit Pi only where I saw that failure, as indeed I
+don't on 64bit Pi now. Thanks!
 
 --=20
 Tom
 
---xrpsQgvBZ8fO+3q/
+--xfbp+ZLNKWneNi2j
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcgGjMACgkQFHw5/5Y0
-tywfjwv+J2FIGg7fOM2FX1HkVAYTAk6DuqX+s0/GjIE/Xiq7AbRy+qFKHZLS8xTK
-13cQDgx65ad98dXwbb0J84OPkSAP0BHQYSCXwWGkbK8vG+NhL8vuz5Vpdd1AA2HG
-+1OTixg9YnXLQOfrKpxOEbkfc/CZoX9I2wNTEQHg3yA/J/t4lhxMva3zCBdMPMy7
-SHwuWO7Yl0Dgl5qT2HqHJx9OcUxa5rhDYWKhH6kAKNqkUv6UAKDOuEpwLygIodk0
-mnIXti8o+sVJs0PeUrVap+QSeD+Oo+kjIxN7WYsd11qNdy316YtosaZObl42xUAZ
-Hz4vN0mEG/du+niCcOqhYtXuJuZS3hjcoRe5xS926+MvMBNNqOyiDdZdQeOzOxk5
-VWHjVGN2LDsXRYgzsqodVBMdo7Rt6U9/STN8lvZewqROaHkxzVUeYJe8VzBtp4VP
-Qi/rw/CTSWm+kSw7cZKHDCkaSUyWbnfbVNlj+8AemUpfCWZ29SZnJCbwUcTqIVBm
-OqpBWCuW
-=w1BV
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcgHMQACgkQFHw5/5Y0
+tywFEQv+JexYbia4zVhloFqK204sl8d0pOSQzZBf08WuBTL21THY3ZIBjj5h+2dC
+A1vnR23eqT+AP59wSpcyUwKmnay9LKCbNm6KS1JatSF66G33lZS1/fuf3lL1II1V
+tCcAh7U2BGpkVO8YbpjGjLVlPoPuMv7xYEQksz2y/gypQ+9JG7s9B1NVB+SONEZt
+Fq3WoB5TdMSYEYSLZRtSMVx1tsWjFj5DvVZnIIgcoyPoObEwpbTURGmKuG/l4lyp
+Fy3KXq10Uk9ZkwewivMFkgnSNLcZJTQ/2X3k4dlFA//NpBoaP2aP5ogVe4GspM0t
+frwJGJu8wzF4GmgMxJSDvOtwDKekosS9STnNz80afMf9VjoOEJcCSrHn/ZKp5ktn
+/bDchzKiyL/Co11QZukUOXNzpmCXRiS5X7uMzqkgQR10VhsytMIcPjgSWumZ3TIb
+C0XjJG+WmUPcyLMPNnrYv7Go6N4uu+ZW4FaA9nkALpYtkun77M/8TshsiYnP262F
+pR43/RPq
+=PhcZ
 -----END PGP SIGNATURE-----
 
---xrpsQgvBZ8fO+3q/--
+--xfbp+ZLNKWneNi2j--
