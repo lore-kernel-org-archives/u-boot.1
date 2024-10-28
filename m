@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F58D3399B
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 17:04:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB1ED339A1
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 17:05:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D996589117;
-	Mon, 28 Oct 2024 18:04:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 516DF89100;
+	Mon, 28 Oct 2024 18:04:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gEkRxY2q";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fsyGGSGq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECE6C890B3; Mon, 28 Oct 2024 18:04:51 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id C70EE89100; Mon, 28 Oct 2024 18:04:53 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 046FB89119
+ by phobos.denx.de (Postfix) with ESMTPS id C552389100
  for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 18:04:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9a850270e2so749946766b.0
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 10:04:49 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a99f629a7aaso724573166b.1
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 10:04:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730135089; x=1730739889; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730135090; x=1730739890; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VbcwYq0+Cu8848NmeF80UEJs+lz+xPlX9ORO2cXgbJQ=;
- b=gEkRxY2qIpGQoWMeZ+cMXIHA3T/eMUZyLso2Its7kjnBcwNmB9t/lqELKUQO7av8ko
- /K/uDJzeoRIYrNw2O6SwPUO06/7XLVtAy0pK5RcD+XegoJxO/vSg9VeYvIcT/E41GSCd
- 6XwpqDpFDlmdSgF1ljSX2TB8rrAp71o3wTJeY=
+ bh=kfI43omiJ8cA4sJOpq1TgON7314CQ1hlm/xF0K2m4ow=;
+ b=fsyGGSGq7rhb9ZDLcEqPQ7BlUkLjVcGGpqaJ6Usaa0EUl1zdPlWj035iRJymb6KJT1
+ cq9VG09hWbpyKlZoBlw4E3onmp13nU61INBVNgScwUplA46N4oGHBq+uDAmEbxMTBMZT
+ beb6mbuD6mR5QqV4ZinzQaDklaqx2GWDW1600=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730135089; x=1730739889;
+ d=1e100.net; s=20230601; t=1730135090; x=1730739890;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VbcwYq0+Cu8848NmeF80UEJs+lz+xPlX9ORO2cXgbJQ=;
- b=cSpqI51tNdNDUTBobULnUMhzty1YYGPnl4Ywzly0q/tRpFygbXWlHpdF6LBeyEUPbJ
- V+vnxHZIvdnRmxWz02SUYiVM4KWX5Xopue2V/Tq970+Sts+9jKXp5klsaLfrBYfxPfkH
- +fCy57xVZmHD4WXGcqdztldV2tyRrLDf7VIM5RU2hxw46UId6jreO8qlCA19KDByfl1g
- Hf/O8NavZCw3+/mXBUcMLtNH5bZE/trtMjJmv1NygGtudaAVXb94IEPq4RtsWZxFo+aO
- 4JF0YDhp0t33nH9ItQEoh5DPzc7YlrKOv/ihciB0NHfWjsb/s6bfSUhMymPXU1LEUeCs
- HXKQ==
-X-Gm-Message-State: AOJu0YxR5t/v3GZPVf8H+MbRcXBAeM/UDt9hyD5DSLYSXSVfo3E9cf+3
- XLFkP1yWeE6CPbubORYRS1CU/upMLTeZqloTbyZP8UV6bS8VhkHs97NTCwwpQ03LR9ydVYf7s9J
- rAQfPEziD6x7fS1E6M2dbJDbPpefFPv+tNp5K
-X-Google-Smtp-Source: AGHT+IHruuG/bzQIbtvTPwGPKasSV8ah34q03XTALuiO7B3VsRzG/FcFjBVGSPLD82Tlr65txp54+O4oqfS8UZRrcyk=
-X-Received: by 2002:a17:907:9712:b0:a9a:55de:11f4 with SMTP id
- a640c23a62f3a-a9de6191f51mr883016766b.54.1730135089447; Mon, 28 Oct 2024
- 10:04:49 -0700 (PDT)
+ bh=kfI43omiJ8cA4sJOpq1TgON7314CQ1hlm/xF0K2m4ow=;
+ b=Yq2aG++HSaHj9UUL2zdQ7DgLaflDmLdGPYSOsZW90IKVAeuLxH0XQxf+qmzSf7/1h/
+ ubDhakrnoqObvcmnsTBqUlYxhdGYnztRbSRSa8zt8QzsWcWIvcNO94p8yAJ1eZWlGjIa
+ fq81W50QCQk0CIR9iwQdORfpFNfESv0QgjgUaLzTei2eRM5q6Cv3mknYIIyigp3zv55R
+ J2k+Qeqz3h8YrJozkxxI0Ezr8WYxjlswpfcIl7Z3agYzbi6oY9zAhCwertCcJMPanD1P
+ MUNn9SgOOHZrhzwFMb6DgZ0RpjtrfBLCIqWRu02CgweyeiSsSdh7GSfa6w5E+7XQ01Po
+ fI6g==
+X-Gm-Message-State: AOJu0Yz6J53jlZzDbbqzAjaDqUCljNq4YVsto7k86Xoc8vndopoRur2l
+ 2VNMKlRr7C/+xpy97VUtccxmL8qthmWo24qCHxS4PNqK2zaM3Fi0fZX3dOiwZ4rcTk3y+Nz3ero
+ JU8pejzLNFuFP5i/Tp8ZREYzwpAHWlYqB2zD3
+X-Google-Smtp-Source: AGHT+IE6agZLlrXlE5cUtchN6nB9O3HaWfUoPxuo2dlS+z8UqnNW6i4XB3IO57D0JF4Rj6Ocm+eu42pmWmwK+ap9pgo=
+X-Received: by 2002:a17:907:ea3:b0:a99:f9fa:5c01 with SMTP id
+ a640c23a62f3a-a9e22b3b53amr26640166b.32.1730135090307; Mon, 28 Oct 2024
+ 10:04:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241022200543.116343-1-raymond.mao@linaro.org>
- <20241022200543.116343-5-raymond.mao@linaro.org>
-In-Reply-To: <20241022200543.116343-5-raymond.mao@linaro.org>
+ <20241022200543.116343-6-raymond.mao@linaro.org>
+In-Reply-To: <20241022200543.116343-6-raymond.mao@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 28 Oct 2024 18:04:26 +0100
-Message-ID: <CAFLszTi6hMrArrJFJpc+jfh_aCBsSCUsYpkDhYF6255y8Bpd0w@mail.gmail.com>
-Subject: Re: [PATCH v2 4/8] smbios: Refactor smbios library
+Date: Mon, 28 Oct 2024 18:04:34 +0100
+Message-ID: <CAFLszTjPh34RrHQjnD5mFk-fG4GGHAZjsTmskrTqPHdaQrvfZQ@mail.gmail.com>
+Subject: Re: [PATCH v2 5/8] armv8: Add arch-specific sysinfo platform driver
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
@@ -71,10 +71,10 @@ Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Stefan Roese <sr@denx.de>, Angelo Dureghello <angelo@kernel-space.org>, 
- Alexander Gendin <agendin@matrox.com>, Wan Yee Lau <wan.yee.lau@intel.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
- Michal Simek <michal.simek@amd.com>,
+ Stefan Roese <sr@denx.de>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Wan Yee Lau <wan.yee.lau@intel.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Alexander Gendin <agendin@matrox.com>, 
  Masahisa Kojima <kojima.masahisa@socionext.com>, 
  Max Krummenacher <max.krummenacher@toradex.com>, 
  Francesco Dolcini <francesco.dolcini@toradex.com>,
@@ -101,40 +101,24 @@ Hi Raymond,
 
 On Tue, 22 Oct 2024 at 22:07, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> Current smbios library does not fully match to the specification.
-> It hardcodes values instead of exposing values from the device.
-> It does not support dynamic length for contained object handles
-> or elements and misses the handling of a few of fields.
->
-> The refactoring of this patch includes:
-> 1. Expose values from device via sysinfo interface.
-> 2. Replace smbios_add_prop with smbios_add_prop_si to allow getting
->    string values from sysinfo.
-> 3. Add smbios_get_val_si to get int values from sysinfo.
-> 4. Use sysinfo_get_data to get data area.
-> 5. Miscellaneous fixes in smbios.
->
-> Moreover, this patch adds SMBIOS type 7 (cache information) write
-> functions.
-> Link cache handles from type 7 to type 4.
+> Add sysinfo platform driver for all armv8 platforms to retrieve
+> hardware information on processor and cache.
 >
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
 > Changes in v2
-> - Combine with #7(v1) patch.
-> - Move the changes of cmd/smbios.c to a separated patch.
-> - Refactor smbios_get_val_si to get values from dt when values are
->    not available from sysinfo driver.
-> - Miscellaneous refactoring.
+> - Combine with #8(v1) patch.
+> - Remove the handling of the common strings and values.
 >
->  include/smbios.h |  14 +-
->  lib/smbios.c     | 420 +++++++++++++++++++++++++++++++++++++++++------
->  2 files changed, 383 insertions(+), 51 deletions(-)
->
+>  arch/arm/cpu/armv8/Makefile  |   2 +
+>  arch/arm/cpu/armv8/sysinfo.c | 292 +++++++++++++++++++++++++++++++++++
+>  2 files changed, 294 insertions(+)
+>  create mode 100644 arch/arm/cpu/armv8/sysinfo.c
 
-There's an awful lot in this patch.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Can it be split up?
+I have to wonder who wants this information. Doesn't Linux know it already,
+based on the compatible string?
 
 Regards,
 Simon
