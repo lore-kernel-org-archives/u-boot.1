@@ -4,74 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06488D3399D
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 15:54:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E944D3399B
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 16:45:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45F2689080;
-	Mon, 28 Oct 2024 16:54:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B3F689099;
+	Mon, 28 Oct 2024 17:45:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=tkos.co.il
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="uEfSGdQR";
+	dkim=pass (2048-bit key; secure) header.d=tkos.co.il header.i=@tkos.co.il header.b="jfVr8JOp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 205CF8907E; Mon, 28 Oct 2024 16:54:18 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 497B2890A9; Mon, 28 Oct 2024 17:45:00 +0100 (CET)
+Received: from mail.tkos.co.il (mail.tkos.co.il [84.110.109.230])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8F6289080
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 16:54:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5A7188D3A
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 17:44:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=tkos.co.il
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=moritzf@google.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-20ca03687fdso170535ad.0
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 08:54:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1730130854; x=1730735654; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GDhT8aK1NxM2n49a3EhfZ/HnoLhyPW/pgSImtwZtZEk=;
- b=uEfSGdQRYW9G7ETyvhuwgFnjbiRFyYhb8xw37o4S87KFGpiqyl/MExOdkz5Z+8vxKc
- JAM5UZF/KhxJGRzhfVubfe+9dRMs1FH3tctsoyBEYodtogNzUdIsnYEZ9/HbI3UFNVEY
- XBoUNA6JmB7W7WI9dDtvAJt+8GvfYJqFw2O8TJSG8pRZ2tZtfYbRHkZhdlCkIjsqOp75
- yW4iZlvk4sUnqtAlRa+g3SJNx6aTe7QDc3Er4ITa8MIff+hoYF+5kBWbCV/fQYQD5eWC
- lB6LPBOI6tqV0N93vd6+XbrfqZe2rtoJIk/8wXCDncZkP19kX4IOKHBxRYNOwxBG54fM
- yr7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730130854; x=1730735654;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GDhT8aK1NxM2n49a3EhfZ/HnoLhyPW/pgSImtwZtZEk=;
- b=ErGjTO5LjREjtab28m70TX/B5lADrzTYgDbYt2FmzXIutLO+WmOs+TsADf0oKXUxvw
- U1d2Q7KMYWvtwQvI9jb6o5tufqtDmuJHYsu8keJPvOhqIvnePg6UBJOhOxpVwPtLaWyv
- 7rUb+RzUixNinQ55nPV3e+GLSt7H7qREnCjR63Pk62AMKsMQSn+uvgJM5bK6tU7iWyl5
- WVwlodi12mFeHboRjzgGj8B1B+p4+Q++gk3i+u2MYVDd9ihstOZ41FWEplq2xsqhw3tN
- xHZzCxcrMnsyoybXURMJi7CwRLBknhSRwz+b4LyZR9RnHEwe1gafFcCsCAvpXNwnL4Nn
- 42Rw==
-X-Gm-Message-State: AOJu0YxKNZAGEnRcMzxhs8MF1xuebugCK2sYECvpKqXF+6jwjYUsCg6x
- Jjgye7ZDFyxL8mR2loNNh3G7dZPDrBSKkv05rIAYAFHuOeGlTINZutTHyMdUFZ4fvetPznGIdsZ
- I1JfQJdSwJoxgmg3HGYjEc6kAlAK0dHpSAwjj0iRiyppAMf6JHQ==
-X-Google-Smtp-Source: AGHT+IGez7T5ARakki+1Y/1DfE288fOs/Pw6X2bqbz8j9N0D8qqFJaJM5r5a7ZdMlRODvwVBD5VfBIj4KDpY43KQSuY=
-X-Received: by 2002:a17:902:e804:b0:205:8ceb:79a7 with SMTP id
- d9443c01a7336-210c7bb6d73mr2386795ad.23.1730130854041; Mon, 28 Oct 2024
- 08:54:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=baruch@tkos.co.il
+Received: from tarshish.tkos.co.il (unknown [10.0.8.2])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.tkos.co.il (Postfix) with ESMTPS id 0FB724402B5;
+ Mon, 28 Oct 2024 18:41:46 +0200 (IST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tkos.co.il;
+ s=default; t=1730133706;
+ bh=L05jzYGE48SEKd/vK4Yn9JUsxfYB21d9484R+deDVEY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=jfVr8JOpv2CmOr4noywZY7b0Biu9SEi0wz7cBWiG+i9N1wp61f0/sHMG5tNHskKpV
+ 33TRIHufQZiLUC7RAw1lw23bPGgKor4Sz8VUXziNO/sEWTHcqL61dX0cMsiGwX4Kfo
+ Peu5J3f7d83QWv+S4T8OhY6gBBM5qcpGmWrpEdxAe11VFPxCp7FYfsBqUCSdCbibhv
+ KrsTrMW+xgHCfv3wGxj9nFmbLcdbov9bw+6v8J9RiNfwMHsv/cwJh/2zyrqDBSS7f2
+ t0UDyuq2WUQobgODrUpiGQ4n1+3yfBbHCT2oiL8WxTs7hhcLVYScd+2PY806yR3rRv
+ /onf5WKC/bqbA==
+From: Baruch Siach <baruch@tkos.co.il>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Baruch Siach <baruch@tkos.co.il>
+Subject: [PATCH] boot/Kconfig: correct fdt_fixup_memory_banks name typo
+Date: Mon, 28 Oct 2024 18:44:35 +0200
+Message-ID: <a65bc69d909e18b9cf138f8f97f4b16b4a4d4de7.1730133875.git.baruch@tkos.co.il>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20241028080837.1590247-1-patrick.rudolph@9elements.com>
-In-Reply-To: <20241028080837.1590247-1-patrick.rudolph@9elements.com>
-From: Moritz Fischer <moritzf@google.com>
-Date: Mon, 28 Oct 2024 08:54:00 -0700
-Message-ID: <CAFyOScr335rvA0mnNkBOTLfTv-wFebTAwK5MT1ZxXFT+BQXqQQ@mail.gmail.com>
-Subject: Re: [PATCH v1] acpi_table: Fix coverity defect in acpi_write_spcr
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,47 +66,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 28, 2024 at 1:09=E2=80=AFAM Patrick Rudolph
-<patrick.rudolph@9elements.com> wrote:
->
-> Fix "Integer handling issues  (SIGN_EXTENSION)" in newly added code:
-> Cast serial_info.reg_offset to u64 to prevent an integer overflow when
-> shifted too many bits to the left. Currently this never happens as the
-> shift is supposed to be less than 4.
->
-Reviewed-by: Moritz Fischer <moritzf@google.com>
-> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> ---
->  lib/acpi/acpi_table.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-> index 6473d95c10..b9e12228fd 100644
-> --- a/lib/acpi/acpi_table.c
-> +++ b/lib/acpi/acpi_table.c
-> @@ -420,7 +420,7 @@ int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, st=
-ruct udevice *dev,
->  static int acpi_write_spcr(struct acpi_ctx *ctx, const struct acpi_write=
-r *entry)
->  {
->         struct serial_device_info serial_info =3D {0};
-> -       ulong serial_address, serial_offset;
-> +       u64 serial_address, serial_offset;
->         struct acpi_table_header *header;
->         struct acpi_spcr *spcr;
->         struct udevice *dev;
-> @@ -473,7 +473,7 @@ static int acpi_write_spcr(struct acpi_ctx *ctx, cons=
-t struct acpi_writer *entry
->         }
->
->         serial_width =3D serial_info.reg_width * 8;
-> -       serial_offset =3D serial_info.reg_offset << serial_info.reg_shift=
-;
-> +       serial_offset =3D ((u64)serial_info.reg_offset) << serial_info.re=
-g_shift;
->         serial_address =3D serial_info.addr + serial_offset;
->
->         /* Encode register access size */
-> --
-> 2.46.2
->
+Signed-off-by: Baruch Siach <baruch@tkos.co.il>
+---
+ boot/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/boot/Kconfig b/boot/Kconfig
+index b9287c606856..7dd30a030e39 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -1699,7 +1699,7 @@ config FDT_SIMPLEFB
+ 	  memory
+ 
+ config ARCH_FIXUP_FDT_MEMORY
+-	bool "Enable arch_fixup_memory_banks() call"
++	bool "Enable fdt_fixup_memory_banks() call"
+ 	default y
+ 	help
+ 	  Enable FDT memory map syncup before OS boot. This feature can be
+-- 
+2.45.2
+
