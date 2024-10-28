@@ -4,81 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E64D13588
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 03:35:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF720D13570
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 05:16:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 720CF8895E;
-	Mon, 28 Oct 2024 04:35:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 52F908901F;
+	Mon, 28 Oct 2024 06:16:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Rn3p+WQU";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E1BE988AB2; Mon, 28 Oct 2024 04:35:06 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1730092560;
+	bh=6xAeu5ROFjpgifnBEkuQlJQqDHkAJ2QKrpTuVdhbyoI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=m0pNZB7wLpKGLx3xspQDBNBtEtZ86JjL6tBX8GuC5zE4RMsKwElIcSJWhO6Mui55U
+	 5OPAvOHOfiEaSUP6HHaJa4D2N0WlOmjxMmmcBbBPiiBvoHC2zNPLJIdkCFM0ogKgOi
+	 MMlwF5JT18SMo/+/FLy7G3jSqp+igxEkKrUyxAoto7QCQWdHbOlZxsPNhpkW6Xr32/
+	 8End6EhpGcvJ9KDQfv/j3bnmnlueDF4NyLNnA8LT6Ud/EiOzcfdiZ2qS59it1LdoHb
+	 5IMuVF0mz6pnMfmVI7m0ztOM+mwsdTFGQq44NDjAZ4GteSz9KpN5artkWwaIE7vTaS
+	 R89M1DFaOmboA==
+Received: from [192.168.1.107] (89-186-114-4.pool.digikabel.hu [89.186.114.4])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E881F885F4
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 04:35:01 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-53a0c160b94so4179805e87.2
- for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 20:35:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730086501; x=1730691301; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L9uQ/XDPVIvWq0DldVRRpWZCS8PVdgZM+UyAcuMbk/c=;
- b=Rn3p+WQUaYHxTDsSv2KgAt6F5sPLuWxrFIjW40kv4Sw6aR5sglS02BDmOuR9PACQlP
- gY5PXA4QGXTtv1A9P1EE1L8qEmrDUPvintUlVBRZtUBeTpEPu5xQDd6hraECH8yKaCz+
- o3sb5OqR3XSn5kMxF0rjkSdq2OeCPj0BorCwB3r9JqKLJObCcK/DGub3PGqkW/YiSfYj
- 4KlPaedS5h7FrAl/aWfpu83w9E2EQGypZ7ftxmF4V2Ntj7P7Ki3TMlIlowuuveiJkvN9
- ED0GsBsMHLbTniMvub98NKXnXP55qRfDaJs+/X5K1tQxHhaRYDcQ9ZMbEgih1VQL9r2q
- nbEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730086501; x=1730691301;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=L9uQ/XDPVIvWq0DldVRRpWZCS8PVdgZM+UyAcuMbk/c=;
- b=BNyYgPhRnRq0Ozl501Ez3EdgUdssVrXdlz6n/5y3oWre/dgDtwtsKVGgZq15DP+G1y
- RJeLvSHCb/89kFkupZTPAWucBusgVYLCxHWVrEoSeMeDLw4X08CF5iJ/etutSGc8ubEB
- KdLB2VcbfHu+IhsSGajQVr0rBCJo3Vkn5IR8FRzWS4LXqdKh3pBkqWf56lwG4oWZWaKC
- yYBSJLEOY7jP6Y7slf8tJwHMvo71oDkXFfYI37n0S13uqph91XkryNBtBrkty5XZ/A+s
- 45TGfRD4KAgjmJsb6wbzt9ZtkH/+bMD2+/FEBnyzoSx5tziPBmOjus1Vqh39xFzJJgwC
- Uj3A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVh01cEhQnSxMBa+4bAbqE+n5hZp1SBPqp1ZwEHhVTLH3jkmIEBuXdOf2IW58Q3r2GXHMf5Ths=@lists.denx.de
-X-Gm-Message-State: AOJu0YzaKxxkQW29chLAB28VrVXfOdlOWj5EMEile09wZHA/aYvtian4
- 7C1kAorPNYq72dwb7Yco8aid+m0/vUyqEU0kppOjS6Q5HpugI1N6NBDaC+2bIhghmJ/3/F7oHmP
- +nE6ZoY1mpgGZXgJBeQfImAxYm2k=
-X-Google-Smtp-Source: AGHT+IHOjzJe2RyMJUb1lp//LmfFLoZ/0WQizdLmJbjksFKEl7kbj4sHq9hMcXio/1GMhqXQh+E7DR6ovSFtyCXXnCo=
-X-Received: by 2002:a05:6512:b90:b0:539:de03:d7a7 with SMTP id
- 2adb3069b0e04-53b348cee56mr2623676e87.22.1730086500573; Sun, 27 Oct 2024
- 20:35:00 -0700 (PDT)
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id D8DB688FA8;
+ Mon, 28 Oct 2024 06:15:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1730092558;
+ bh=6xAeu5ROFjpgifnBEkuQlJQqDHkAJ2QKrpTuVdhbyoI=;
+ h=Date:Subject:To:Cc:References:From:Reply-To:In-Reply-To:From;
+ b=feub4Qk30JDKZc+OJwCuqA1EtfVEbbnpdJLK51lRkr8tClF1imhebJacJlB+Jo4Fs
+ L3NJVFFDyly39xvVdf5X+Sc+e2ZBHAypcuHIlUVwFX1Z1/9g9+ANvAMwk9cL1/aEPX
+ dMWp9Bv6S6+gOd+inoTmhr9zWlS6o7cyIj8EFuzDSzIN9c4qpz+jUVkMc7Jd0c6alX
+ Pw60rHGBer5PGCAsRyvlK3MSg+90Mxb6nPTCuYSa+8RigeLHPuOrH7ATH5laogIwVt
+ h2XZjUs+tNAPPrZbmAEHQQACo9n8bzekJd88UOQE96R/qUQLu346R5EfD7KlOUQFsK
+ gRqs9QuI5C52g==
+Message-ID: <c4a248da-6e16-708f-abf4-b89422076466@denx.de>
+Date: Mon, 28 Oct 2024 06:13:41 +0100
 MIME-Version: 1.0
-References: <20241028015847.42344-1-hal.feng@starfivetech.com>
- <20241028015847.42344-10-hal.feng@starfivetech.com>
-In-Reply-To: <20241028015847.42344-10-hal.feng@starfivetech.com>
-From: E Shattow <lucent@gmail.com>
-Date: Sun, 27 Oct 2024 20:34:48 -0700
-Message-ID: <CANV2PTPvoLJS_zUNoFYbt+PndZEHccbJG0YBK9+0fMS__G4otw@mail.gmail.com>
-Subject: Re: [PATCH v2 09/14] riscv: dts: jh7110: Add u-boot device tree for
- JH7110 based boards
-To: Hal Feng <hal.feng@starfivetech.com>
-Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>, 
- Nam Cao <namcao@linutronix.de>, Bo Gan <ganboing@gmail.com>, 
- Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
- Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH] imx: hab: fix size of IVT+CSF blob tacked on to u-boot.itb
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@gmail.com>
+Cc: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@denx.de>,
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>
+References: <20241024122735.893319-1-ravi@prevas.dk>
+ <3606fb53-c36e-93c7-6ff9-9947ae43c408@denx.de>
+ <CAOMZO5Aae_0cDXX-E9syhVPwMF7_NVu2__40m6Tmi7daePyVbg@mail.gmail.com>
+ <CAOMZO5DNQ6cKyNqsQaU8CE-FwoOQdgaf99S8dQ4_FE9XZDvmCw@mail.gmail.com>
+ <16b090de-2fbb-4905-909d-0da92cb1946c@denx.de>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <16b090de-2fbb-4905-909d-0da92cb1946c@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,112 +69,39 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Oct 27, 2024 at 6:59=E2=80=AFPM Hal Feng <hal.feng@starfivetech.com=
-> wrote:
->
-> To support the other JH7110 based boards, add u-boot
-> device tree for them.
->
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: H Bell <dmoo_dv@protonmail.com>
-> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
-> ---
->  arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi          | 11 +++++++++++
->  arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi       |  6 ++++++
->  .../jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi    |  6 ++++++
->  3 files changed, 23 insertions(+)
->  create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->  create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-b=
-oot.dtsi
->
-> diff --git a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi b/arch/riscv/dt=
-s/jh7110-milkv-mars-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..2ad4068549
-> --- /dev/null
-> +++ b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
-> @@ -0,0 +1,11 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +/*
-> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
-> + */
-> +
-> +#include "jh7110-common-u-boot.dtsi"
-> +
-> +&phy0 {
-> +       /delete-property/ motorcomm,tx-clk-10-inverted;
-> +       rx-internal-delay-ps =3D <1900>;
-> +};
+Hello Marek,
 
-For Heinrich, what is the origin of rx-internal-delay-ps 1900 value? Refer =
-to:
+On 27.10.24 22:01, Marek Vasut wrote:
+> On 10/25/24 5:09 PM, Fabio Estevam wrote:
+>> On Fri, Oct 25, 2024 at 11:51 AM Fabio Estevam <festevam@gmail.com> wrote:
+>>
+>>>>> Heiko, can you check if this works for you?
+>>>>
+>>>> Works fine for me, thanks!
+>>>
+>>> Applied, thanks.
+>>
+>> Sorry, applied it too soon. I see there is an ongoing discussion.
+>>
+>> I will wait for more time.
+> 
+> Go ahead, nothing to add from my side, but it would be good to get a TB from Heiko maybe ?
 
-https://patchwork.ozlabs.org/project/uboot/list/?series=3D429908 "
-riscv64: dts: starfive: Mars ethernet0 phy delay values sync with
-upstream Linux "
+I tested it already, ah, and forgot the TB, so
 
-For Hal, I think we should not replace the rx-internal-delay-ps
-property here and then the phy delay patch for Mars (as mentioned) is
-not needed. Carrying this value from before OF_UPSTREAM creates work
-for future, unless you prefer to avoid change in functionality
-compared to before OF_UPSTREAM.
+Tested-by: Heiko Schocher <hs@denx.de>
 
-> diff --git a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi b/arch/riscv=
-/dts/jh7110-pine64-star64-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..9df1e5db55
-> --- /dev/null
-> +++ b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
-> @@ -0,0 +1,6 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +/*
-> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
-> + */
-> +
-> +#include "jh7110-common-u-boot.dtsi"
+Thanks!
 
-There is a same story here for Pine64 Star64 about delay values. Refer to:
-
-https://patchwork.ozlabs.org/project/uboot/list/?series=3D429906
-"riscv64: dts: starfive: Star64 ethernet0 phy delay values sync with
-upstream Linux"
-https://lore.kernel.org/lkml/20241023-guts-versus-1a2bcfdfbec2@spud/
-"[PATCH] riscv: dts: starfive: Update ethernet phy0 delay parameter
-values for Star64"
-
-It is your choice if you want to duplicate the upstream patch here to
-change the property nodes (or not) until the next dts sync from
-upstream, or cherry-pick a dts sync (when that becomes possible after
-upstream makes this available). The problem affects only ethernet0
-which is well-known as "does not work, try a different network port"
-and so it is not any trouble to just ignore the problem here, making
-this fix now creates more work for us in the future. Star64 has a
-working secondary network port ethernet1 and so no change is requested
-from me.
-
-The phy delay value patch for U-Boot and Star64 can be dropped in
-favor of the OF_UPSTREAM series and any action or non-action you
-decide for this.
-
-> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dts=
-i b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..9df1e5db55
-> --- /dev/null
-> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
-> @@ -0,0 +1,6 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +/*
-> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
-> + */
-> +
-> +#include "jh7110-common-u-boot.dtsi"
-> --
-> 2.43.2
->
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
