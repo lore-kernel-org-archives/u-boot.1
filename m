@@ -4,51 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98507D13588
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 07:28:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28F1FD13595
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 07:34:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFEDA89058;
-	Mon, 28 Oct 2024 08:28:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 961F489072;
+	Mon, 28 Oct 2024 08:34:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07DA889058; Mon, 28 Oct 2024 08:28:26 +0100 (CET)
+ id EDDAD89079; Mon, 28 Oct 2024 08:34:00 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84E0F88C66
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 08:28:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E15F58906D
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 08:33:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 49S7S2kQ089799
+ by Atcsqr.andestech.com with ESMTPS id 49S7XnJb092717
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Mon, 28 Oct 2024 15:28:02 +0800 (+08)
+ Mon, 28 Oct 2024 15:33:49 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Oct
- 2024 15:28:03 +0800
-Date: Mon, 28 Oct 2024 15:27:59 +0800
+ 2024 15:33:50 +0800
+Date: Mon, 28 Oct 2024 15:33:47 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-CC: Rick Chen <rick@andestech.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/1] riscv: add missing linefeed in error message
-Message-ID: <Zx887ecblSuJ6qUY@swlinux02>
-References: <20241017181649.6822-1-heinrich.schuchardt@canonical.com>
+CC: Minda Chen <minda.chen@starfivetech.com>, Rick Chen <rick@andestech.com>, 
+ Chanho Park <chanho61.park@samsung.com>,
+ Nam Cao <namcao@linutronix.de>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/1] configs: visionfive2: enable CONFIG_CMD_ERASEENV
+Message-ID: <Zx8-W36d9Ku_0hNe@swlinux02>
+References: <20241019083109.12113-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20241017181649.6822-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241019083109.12113-1-heinrich.schuchardt@canonical.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 49S7S2kQ089799
+X-MAIL: Atcsqr.andestech.com 49S7XnJb092717
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,13 +68,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 17, 2024 at 08:16:49PM +0200, Heinrich Schuchardt wrote:
-> * Messages written with log_err() should be terminated with linefeed.
-> * Spell device-tree with hyphen as elsewhere in U-Boot.
+On Sat, Oct 19, 2024 at 10:31:09AM +0200, Heinrich Schuchardt wrote:
+> When moving from vendor U-Boot to the upstream U-Boot it is necessary to
+> reset the environment.
+> 
+> Provide the 'env erase' sub-command.
 > 
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  arch/riscv/lib/fdt_fixup.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  configs/starfive_visionfive2_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
