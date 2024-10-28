@@ -4,57 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8E0D1356B
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 03:19:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E64D13588
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 03:35:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A922788FD9;
-	Mon, 28 Oct 2024 04:19:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 720CF8895E;
+	Mon, 28 Oct 2024 04:35:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1730085574;
-	bh=ogmY0un4dXMJFcgoH1UObYsgltkXZ1nWusvjdqr0jNE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=FyNh+GbsUAG1a3+UFgiWdaSSNwJmdUHxSUiHQixYw528Xio7U/CuNN+KvfB+Gu9qi
-	 ZV7QYdqQUXzGCAGXVleB+WPEbguTQaQpl0PK6qNHKeKNvjiGtlpqB7tzKGzOCVZ39A
-	 WBJBwKqrxuHYj+zFj5KNHbQ7r+HD8dzgnNzx+bV4CvFUfHdb3Gx/xKv7lmsSZAZp5i
-	 UognKdq6rc1/6t0+Gau/MA+INB/iqfIBbwr0ReOcCRaXCuFYghvQ8Zwa06xVwYRfha
-	 0Yg8aXN8N0YQojmE5jJ3fjn75JFToNVtpdUCLsWmODL8ShZL13pZN0bjMvDvs5021+
-	 jja7uDmGC5KoQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Rn3p+WQU";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E1BE988AB2; Mon, 28 Oct 2024 04:35:06 +0100 (CET)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 941BD88FD9;
- Mon, 28 Oct 2024 04:19:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1730085568;
- bh=ogmY0un4dXMJFcgoH1UObYsgltkXZ1nWusvjdqr0jNE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=RQa2PU/K+EMBw0CA7durJyYg/5msOLWkcgEvks/NZPiz018+MrRKecOoEZeGwYdng
- NpDPsciHx+IJNRw6dA5KnO7Q/NNW2Yg/zU5+IedKDxsbfWPNbfPqEWH0bZYPGOFXGb
- 6WcmHsXxVZvmOk4dagF3u1Pi0T+eYGbjlyyYs2YBc0wd9j4rTn+l86DjaCBUFw5OC/
- VSnXDZTwcNSw4hYibqZjduZmqwCQWO6tGmS6QG/E0lRRQ4Xuwk22blTaExj6KM7p1u
- I4yPpUrgqer/mbLFe0EnOk1VGPk9MZA/thNEPtws5syxISU1RW69m0wfSScSFGWW0k
- /ykQ2VCo6bNNA==
-Message-ID: <71653cb9-dfd8-48c8-a972-fb75e454cbcf@denx.de>
-Date: Mon, 28 Oct 2024 03:31:49 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id E881F885F4
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 04:35:01 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-53a0c160b94so4179805e87.2
+ for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 20:35:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1730086501; x=1730691301; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L9uQ/XDPVIvWq0DldVRRpWZCS8PVdgZM+UyAcuMbk/c=;
+ b=Rn3p+WQUaYHxTDsSv2KgAt6F5sPLuWxrFIjW40kv4Sw6aR5sglS02BDmOuR9PACQlP
+ gY5PXA4QGXTtv1A9P1EE1L8qEmrDUPvintUlVBRZtUBeTpEPu5xQDd6hraECH8yKaCz+
+ o3sb5OqR3XSn5kMxF0rjkSdq2OeCPj0BorCwB3r9JqKLJObCcK/DGub3PGqkW/YiSfYj
+ 4KlPaedS5h7FrAl/aWfpu83w9E2EQGypZ7ftxmF4V2Ntj7P7Ki3TMlIlowuuveiJkvN9
+ ED0GsBsMHLbTniMvub98NKXnXP55qRfDaJs+/X5K1tQxHhaRYDcQ9ZMbEgih1VQL9r2q
+ nbEQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730086501; x=1730691301;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=L9uQ/XDPVIvWq0DldVRRpWZCS8PVdgZM+UyAcuMbk/c=;
+ b=BNyYgPhRnRq0Ozl501Ez3EdgUdssVrXdlz6n/5y3oWre/dgDtwtsKVGgZq15DP+G1y
+ RJeLvSHCb/89kFkupZTPAWucBusgVYLCxHWVrEoSeMeDLw4X08CF5iJ/etutSGc8ubEB
+ KdLB2VcbfHu+IhsSGajQVr0rBCJo3Vkn5IR8FRzWS4LXqdKh3pBkqWf56lwG4oWZWaKC
+ yYBSJLEOY7jP6Y7slf8tJwHMvo71oDkXFfYI37n0S13uqph91XkryNBtBrkty5XZ/A+s
+ 45TGfRD4KAgjmJsb6wbzt9ZtkH/+bMD2+/FEBnyzoSx5tziPBmOjus1Vqh39xFzJJgwC
+ Uj3A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVh01cEhQnSxMBa+4bAbqE+n5hZp1SBPqp1ZwEHhVTLH3jkmIEBuXdOf2IW58Q3r2GXHMf5Ths=@lists.denx.de
+X-Gm-Message-State: AOJu0YzaKxxkQW29chLAB28VrVXfOdlOWj5EMEile09wZHA/aYvtian4
+ 7C1kAorPNYq72dwb7Yco8aid+m0/vUyqEU0kppOjS6Q5HpugI1N6NBDaC+2bIhghmJ/3/F7oHmP
+ +nE6ZoY1mpgGZXgJBeQfImAxYm2k=
+X-Google-Smtp-Source: AGHT+IHOjzJe2RyMJUb1lp//LmfFLoZ/0WQizdLmJbjksFKEl7kbj4sHq9hMcXio/1GMhqXQh+E7DR6ovSFtyCXXnCo=
+X-Received: by 2002:a05:6512:b90:b0:539:de03:d7a7 with SMTP id
+ 2adb3069b0e04-53b348cee56mr2623676e87.22.1730086500573; Sun, 27 Oct 2024
+ 20:35:00 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] eth: asix88179: Fix ASIX AX88179A PHY hang
-To: Khoa Hoang <admin@khoahoang.com>
-Cc: u-boot <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-References: <20241027051250.35627-1-admin@khoahoang.com>
- <20241027051250.35627-2-admin@khoahoang.com>
- <16f8f409-4329-47e3-98dc-f18dc64e15e2@denx.de>
- <192d05af314.106edbab3154233.8510680526990626189@khoahoang.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <192d05af314.106edbab3154233.8510680526990626189@khoahoang.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20241028015847.42344-1-hal.feng@starfivetech.com>
+ <20241028015847.42344-10-hal.feng@starfivetech.com>
+In-Reply-To: <20241028015847.42344-10-hal.feng@starfivetech.com>
+From: E Shattow <lucent@gmail.com>
+Date: Sun, 27 Oct 2024 20:34:48 -0700
+Message-ID: <CANV2PTPvoLJS_zUNoFYbt+PndZEHccbJG0YBK9+0fMS__G4otw@mail.gmail.com>
+Subject: Re: [PATCH v2 09/14] riscv: dts: jh7110: Add u-boot device tree for
+ JH7110 based boards
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>, 
+ Nam Cao <namcao@linutronix.de>, Bo Gan <ganboing@gmail.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,64 +95,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/28/24 12:41 AM, Khoa Hoang wrote:
-> ---- On Sun, 27 Oct 2024 07:44:59 -0700 Marek Vasut  wrote ---
-> 
->   > On 10/27/24 6:12 AM, Khoa Hoang wrote:
->   > > In the original code, the MII_ADVERTISE register is modified while
->   > > auto-negotiation is still in progress, which causes the PHY to lock up
->   > > with the ASIX AX88179A.
->   > >
->   > > This patch disables auto-negotiation and resets the PHY before
->   > > modifying the MII_ADVERTISE register, then restarts auto-negotiation
->   > > afterward. This prevents the PHY from locking up.
->   > >
->   > > Additionally, both AX88179 and AX88179A variants do not appear to
->   > > support the ADVERTISE_LPACK (BIT(14)) in the MII_ADVERTISE register,
->   > > as setting this bit does not seem to have any effect. While I do not
->   > > have access to the AX88179{,A} datasheet, in most Ethernet PHYs, this
->   > > bit is reserved as 0, so we should avoid setting it.
->   > >
->   > > Signed-off-by: Khoa Hoang admin@khoahoang.com>
->   > > ---
->   > >   drivers/usb/eth/asix88179.c | 10 +++++++++-
->   > >   1 file changed, 9 insertions(+), 1 deletion(-)
->   > >
->   > > diff --git a/drivers/usb/eth/asix88179.c b/drivers/usb/eth/asix88179.c
->   > > index 4bd3b9d1..a856aa2d 100644
->   > > --- a/drivers/usb/eth/asix88179.c
->   > > +++ b/drivers/usb/eth/asix88179.c
->   > > @@ -344,14 +344,22 @@ static int asix_basic_reset(struct ueth_data *dev,
->   > >            AX_MEDIUM_GIGAMODE | AX_MEDIUM_JUMBO_EN;
->   > >       asix_write_cmd(dev, AX_ACCESS_MAC, AX_MEDIUM_STATUS_MODE, 2, 2, tmp16);
->   > >
->   > > +    /* Disable auto-negotiation and reset the PHY */
->   > > +    *tmp16 = BMCR_RESET;
->   >
->   > Why not use the same trick as u16 adv below here ?
->   >
->   > u16 reset = BMCR_RESET;
->   > asix_write_cmd(dev, AX_ACCESS_PHY, 0x03, MII_BMCR, 2, &reset);
->   >
->   > > +    asix_write_cmd(dev, AX_ACCESS_PHY, 0x03, MII_BMCR, 2, tmp16);
->   > > +
->   > >       u16 adv = 0;
->   >
-> Sure, I can apply this change. I don’t have a strong preference for one approach over the other.
-> 
-> I noticed a mistake in these lines:
-> 
-> +	/* Restart auto-negotiation */
-> +	*tmp16 = BMCR_ANENABLE | BMCR_ANRESTART | BMCR_RESET;
-> +	asix_write_cmd(dev, AX_ACCESS_PHY, 0x03, MII_BMCR, 2, tmp16);
-> 
-> The issue is that I set BMCR_RESET, which would reset the PHY’s settings. This should be changed to:
-> 
-> u16 bmcr = 0;
-> asix_read_cmd(dev, AX_ACCESS_PHY, 0x03, MII_BMCR, 2, &bmcr);
-> bmcr |= BMCR_ANENABLE | BMCR_ANRESTART;
-> asix_write_cmd(dev, AX_ACCESS_PHY, 0x03, MII_BMCR, 2, tmp16);
-> 
-> This avoids resetting the PHY settings while enabling and restarting auto-negotiation correctly.
-> Will test this change and update in next version.
-Nice !
+On Sun, Oct 27, 2024 at 6:59=E2=80=AFPM Hal Feng <hal.feng@starfivetech.com=
+> wrote:
+>
+> To support the other JH7110 based boards, add u-boot
+> device tree for them.
+>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: H Bell <dmoo_dv@protonmail.com>
+> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+> ---
+>  arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi          | 11 +++++++++++
+>  arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi       |  6 ++++++
+>  .../jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi    |  6 ++++++
+>  3 files changed, 23 insertions(+)
+>  create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-b=
+oot.dtsi
+>
+> diff --git a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi b/arch/riscv/dt=
+s/jh7110-milkv-mars-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..2ad4068549
+> --- /dev/null
+> +++ b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+> @@ -0,0 +1,11 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +/*
+> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
+> + */
+> +
+> +#include "jh7110-common-u-boot.dtsi"
+> +
+> +&phy0 {
+> +       /delete-property/ motorcomm,tx-clk-10-inverted;
+> +       rx-internal-delay-ps =3D <1900>;
+> +};
+
+For Heinrich, what is the origin of rx-internal-delay-ps 1900 value? Refer =
+to:
+
+https://patchwork.ozlabs.org/project/uboot/list/?series=3D429908 "
+riscv64: dts: starfive: Mars ethernet0 phy delay values sync with
+upstream Linux "
+
+For Hal, I think we should not replace the rx-internal-delay-ps
+property here and then the phy delay patch for Mars (as mentioned) is
+not needed. Carrying this value from before OF_UPSTREAM creates work
+for future, unless you prefer to avoid change in functionality
+compared to before OF_UPSTREAM.
+
+> diff --git a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi b/arch/riscv=
+/dts/jh7110-pine64-star64-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..9df1e5db55
+> --- /dev/null
+> +++ b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+> @@ -0,0 +1,6 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +/*
+> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
+> + */
+> +
+> +#include "jh7110-common-u-boot.dtsi"
+
+There is a same story here for Pine64 Star64 about delay values. Refer to:
+
+https://patchwork.ozlabs.org/project/uboot/list/?series=3D429906
+"riscv64: dts: starfive: Star64 ethernet0 phy delay values sync with
+upstream Linux"
+https://lore.kernel.org/lkml/20241023-guts-versus-1a2bcfdfbec2@spud/
+"[PATCH] riscv: dts: starfive: Update ethernet phy0 delay parameter
+values for Star64"
+
+It is your choice if you want to duplicate the upstream patch here to
+change the property nodes (or not) until the next dts sync from
+upstream, or cherry-pick a dts sync (when that becomes possible after
+upstream makes this available). The problem affects only ethernet0
+which is well-known as "does not work, try a different network port"
+and so it is not any trouble to just ignore the problem here, making
+this fix now creates more work for us in the future. Star64 has a
+working secondary network port ethernet1 and so no change is requested
+from me.
+
+The phy delay value patch for U-Boot and Star64 can be dropped in
+favor of the OF_UPSTREAM series and any action or non-action you
+decide for this.
+
+> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dts=
+i b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..9df1e5db55
+> --- /dev/null
+> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+> @@ -0,0 +1,6 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +/*
+> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
+> + */
+> +
+> +#include "jh7110-common-u-boot.dtsi"
+> --
+> 2.43.2
+>
