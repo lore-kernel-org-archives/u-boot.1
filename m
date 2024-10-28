@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE167D10C0B
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 12:44:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D600D1039A
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 12:48:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FFAC8915F;
-	Mon, 28 Oct 2024 13:42:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9CBD8890C1;
+	Mon, 28 Oct 2024 13:48:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EHQQ0pGl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eqdHYpUd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC10589164; Mon, 28 Oct 2024 13:42:12 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 9DD6A890CE; Mon, 28 Oct 2024 13:48:27 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1D7089099
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 13:42:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3384890A8
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 13:48:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5c99be0a4bbso5851650a12.2
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 05:42:10 -0700 (PDT)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a9a850270e2so708257066b.0
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 05:48:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730119330; x=1730724130; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730119705; x=1730724505; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hEHyhziWd7Z4hka3w30/BDpLeYFhvgEs4/NDvbyM5r0=;
- b=EHQQ0pGlceb4I6UPNzlWVEAibBFamCpskXM6S6ShnwLgie/t1ttpyYxoORdCNnP0Hj
- qzefrR9+/dtQ+8PjRudkYyYH/lpOK6+xrG0g0V8MssEYw7VVZGcXd+B3MDgUi9cBWZw3
- Jk+HJMky18XZ1bCMv2dkfhIu9FO4mdXMPok2g=
+ bh=sqa3sdySiIXEV4hvREQrv+d+PKy6T2Qi/UBNyJREjGQ=;
+ b=eqdHYpUdwUMxoCmLIoNKYOsri1wunytpV7TL4OfAnjKyR9lfz8aVjd2v/5KzzSsoGA
+ 8xCULnrj5bwG8DizkkaVXSJOrJxY5Lh7dmbbvkKZVgLuJuQq1uXZfm+IZyvPw5Y/bZlG
+ 4iENx6z2Y7x2WHKrQ80OyY+1p9SmIx9JNUTJ4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730119330; x=1730724130;
+ d=1e100.net; s=20230601; t=1730119705; x=1730724505;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hEHyhziWd7Z4hka3w30/BDpLeYFhvgEs4/NDvbyM5r0=;
- b=EZSY5SdzCBbYejouZwBnN4wEnNc/sSd2YssZSkTed6TBorDAttLJWXVFdxIgHt1wAK
- K6yvNjP2+nfu0qS4Qjyd2z00jzuC4tvkHyl0PHGJboY1bSp8R19jhBUygnoFi5h/u/3P
- o7yZlO79zzFLLtMwBIEmr6J1ARiYzsGQhnhIWqlytRC0gx6Nj5s0PYggrViz6308jaDz
- IqqHjALM/K9aB/9smTa1MUmaJdTHmzMwl9bSI59oJ5LBXJusc+xmnpStNeLVYDszMpi7
- UbN9c1M460ULn4DdwJ1/6XcjDHkWqQhGbVTMB4vDPyuR6jzhhjYT0ZrROFoXwhNmYowR
- +wGA==
-X-Gm-Message-State: AOJu0YzYKtyqjVUqsnkAX+YXcBUhQS6WTrEJT/9zYVObbYoa9CcD2zAz
- lRyF264PNveV1j5aELSY75DnjEWXYpF8DlAo+iAn+2HWDYgPZQr2eJAgsITgim/7w1g8O2co59h
- /EA==
-X-Google-Smtp-Source: AGHT+IEtUTWYgidzhSLJ7jxd2sIExWzF1got7meF8J1kx0F1r6pzxzsBmYttwR0OO7GKa4aAuFsEgw==
-X-Received: by 2002:a17:906:f590:b0:a9d:e1d1:bf95 with SMTP id
- a640c23a62f3a-a9de5cea078mr728064166b.25.1730119329884; 
- Mon, 28 Oct 2024 05:42:09 -0700 (PDT)
+ bh=sqa3sdySiIXEV4hvREQrv+d+PKy6T2Qi/UBNyJREjGQ=;
+ b=a4KDVSDremOEPdRghhMwn8QbeqjiJv+A6sqvaP+JeJNcgH+qgFpow5WsjtNtmWIAk1
+ dXvcHSBltc4Z98Zw67wKRo8Y3QLKjSVdWZPhhmof7HfTk/+DIvjlR6O0EGbSkOqiXHKP
+ VTgAiBObVFpucmQsHvX50q1lI1TkdJVXDsjGPelcTe7eUebzq3E3GVPSaRyDAU0xJqYE
+ D1Yyaknbw+W89ciYO2bVgwsesPlsMgfo9WadI/Mq/gfGCRKag12wsyA0LFxw9XqhVE9x
+ bX9jvvVnmyBy3RdXj22qTw3adZAJUJw+yb9jJjN2m/fiWrqFQiVFEgqyZ6RHoyzWmL8B
+ GcMw==
+X-Gm-Message-State: AOJu0YwaEekI/JlAEqzrsRh79wvK7LwUpJSLVx2kw8HZtNVgfOJgL4DP
+ RAM6fTNe3k10090yULeElCF2fq+Q/BzTC7kkCFJ+NmLqPcn6Prm81DR7WWjtSmHgIXT04+Ys7Z9
+ JTg==
+X-Google-Smtp-Source: AGHT+IEMEkjlsOChGIpxO2uTcJw+dZtNeC3Uy4Azw9lnKAvBp7NBuTfljUK98wvZ0rC8My88wJfNkQ==
+X-Received: by 2002:a17:907:9803:b0:a99:44d1:5bba with SMTP id
+ a640c23a62f3a-a9de615aec6mr718078366b.45.1730119704762; 
+ Mon, 28 Oct 2024 05:48:24 -0700 (PDT)
 Received: from chromium.org (43-114-103-145.static.glaslokaal.nl.
  [145.103.114.43]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b30c7ae0bsm375313766b.156.2024.10.28.05.42.08
+ a640c23a62f3a-a9b30d6fdc5sm375593366b.163.2024.10.28.05.48.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 05:42:08 -0700 (PDT)
+ Mon, 28 Oct 2024 05:48:24 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 21/21] test: Quote test names
-Date: Mon, 28 Oct 2024 13:41:26 +0100
-Message-ID: <20241028124130.32072-22-sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>
+Subject: [PATCH 01/15] log: Add a new category for tests
+Date: Mon, 28 Oct 2024 13:47:52 +0100
+Message-ID: <20241028124815.47262-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241028124130.32072-1-sjg@chromium.org>
-References: <20241028124130.32072-1-sjg@chromium.org>
+In-Reply-To: <20241028124815.47262-1-sjg@chromium.org>
+References: <20241028124815.47262-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,53 +91,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When mentioning a test name, add single quotes to make it easier to see.
+In some core test code, no existing categories make sense. Add a new one
+for testing.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/test-main.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ common/log.c  | 1 +
+ include/log.h | 2 ++
+ 2 files changed, 3 insertions(+)
 
-diff --git a/test/test-main.c b/test/test-main.c
-index e4f42689da4..c825f9c7797 100644
---- a/test/test-main.c
-+++ b/test/test-main.c
-@@ -594,14 +594,14 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
- 			 */
- 			len = strlen(test_name);
- 			if (len < 6 || strcmp(test_name + len - 6, "_norun")) {
--				printf("Test %s is manual so must have a name ending in _norun\n",
-+				printf("Test '%s' is manual so must have a name ending in _norun\n",
- 				       test_name);
- 				uts->fail_count++;
- 				return -EBADF;
- 			}
- 			if (!uts->force_run) {
- 				if (select_name) {
--					printf("Test %s skipped as it is manual (use -f to run it)\n",
-+					printf("Test '%s' skipped as it is manual (use -f to run it)\n",
- 					       test_name);
- 				}
- 				continue;
-@@ -612,7 +612,7 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
- 		if (one && upto == pos) {
- 			ret = ut_run_test_live_flat(uts, one);
- 			if (uts->fail_count != old_fail_count) {
--				printf("Test %s failed %d times (position %d)\n",
-+				printf("Test '%s' failed %d times (position %d)\n",
- 				       one->name,
- 				       uts->fail_count - old_fail_count, pos);
- 			}
-@@ -622,7 +622,7 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
- 		for (i = 0; i < uts->runs_per_test; i++)
- 			ret = ut_run_test_live_flat(uts, test);
- 		if (uts->fail_count != old_fail_count) {
--			printf("Test %s failed %d times\n", test_name,
-+			printf("Test '%s' failed %d times\n", test_name,
- 			       uts->fail_count - old_fail_count);
- 		}
- 		found++;
+diff --git a/common/log.c b/common/log.c
+index b83a6618900..c9fe35230d6 100644
+--- a/common/log.c
++++ b/common/log.c
+@@ -32,6 +32,7 @@ static const char *const log_cat_name[] = {
+ 	"fs",
+ 	"expo",
+ 	"console",
++	"test",
+ };
+ 
+ _Static_assert(ARRAY_SIZE(log_cat_name) == LOGC_COUNT - LOGC_NONE,
+diff --git a/include/log.h b/include/log.h
+index bf81a27011f..4f6d6a2c2cf 100644
+--- a/include/log.h
++++ b/include/log.h
+@@ -106,6 +106,8 @@ enum log_category_t {
+ 	LOGC_EXPO,
+ 	/** @LOGC_CONSOLE: Related to the console and stdio */
+ 	LOGC_CONSOLE,
++	/** @LOGC_TEST: Related to testing */
++	LOGC_TEST,
+ 	/** @LOGC_COUNT: Number of log categories */
+ 	LOGC_COUNT,
+ 	/** @LOGC_END: Sentinel value for lists of log categories */
 -- 
 2.43.0
 
