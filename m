@@ -4,70 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35A36D10C0B
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 12:42:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6194FD10C0B
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 12:42:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46AE7890D0;
+	by phobos.denx.de (Postfix) with ESMTP id A93AE890F8;
 	Mon, 28 Oct 2024 13:41:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jvMsaI8j";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hzqirQD+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 226DA890A7; Mon, 28 Oct 2024 13:41:45 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id F1C15890E7; Mon, 28 Oct 2024 13:41:46 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1736A890BB
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 13:41:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 192CC89099
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 13:41:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-539fb49c64aso6985368e87.0
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 05:41:43 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a9aa8895facso690022566b.2
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 05:41:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730119302; x=1730724102; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730119303; x=1730724103; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0deI9Q+O/aTaU0UL5XrpvvCu2Kr0SPLOggXowSkeLSE=;
- b=jvMsaI8jJ1tzClvD4Pz1ZxbAuxsHI2DtYpfUhN3arPTAeSN//Fq6aRCCniDG4Son0w
- KLa/LhatObwS2bkd5hBxwjdqSf6+ZYvMJMwYJ4QyOEbBpA7CQlU+oqUy3if32CbDJkcg
- no43UoorCzYUUedHx6EUGfMw4JymKiRHMJjQI=
+ bh=/J0HVMaWx0G/dXH/zzshguECbDtEAfphEPAV17Xbqnk=;
+ b=hzqirQD+X7Ms3P2BM9EDf4m0Ciu8y337B0LIesaHC4jnxAHdvTOwXyTktjcGoqtjuD
+ 9pUnYRZDXcqFDt44wlDAyJzpyUaBaD8zFotOfl1409ySVyYuMy8QdcIG17TaHSIMe6oQ
+ 33QczAElDINISIHPe906k+dWxRyolQ0ZbyNkI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730119302; x=1730724102;
+ d=1e100.net; s=20230601; t=1730119303; x=1730724103;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0deI9Q+O/aTaU0UL5XrpvvCu2Kr0SPLOggXowSkeLSE=;
- b=DEkq32uiTr7oZlSbX3h/JEtz7W23or2gBaAvRqcdEyymkKWbhBUagDlDLmwAIvlcbv
- +q4IDAz1RgDztAA8ckxcIdku+43TRPfjYa+0fcpDKu7IKj4mxXMJ0TmZX5a7h3CFhzPe
- lqJYUAL5pmX1lEfT8Vle4ABNWTw3vivnQyDEskbEtMxC1LY8toFz3LtkGhBRBMlZLJxZ
- kn5KaIxxd1XZiMkMJwFMGbGYBxALaTj2NJxsVseLzC4apRXneBDW/QT2kys8IIdRn3u7
- ph/UWoD/j4PI6zhsNFtonLswchsYYKdVTrBNKviLgoM61zJI8hTexGAiat6QzYqTC/NH
- /LDQ==
-X-Gm-Message-State: AOJu0YymZn4zabYgbWqqhczY1RdpUZVNgDinOKg1B2TW+g6Asn8fWf7M
- zHfKoP19+1XqFNmPWHW2OjzC9fd8+Q4Y81ev0x/xDGKGOHMoKu7SqwgoRlVM2Qczs/tNcsxIINx
- jGQ==
-X-Google-Smtp-Source: AGHT+IH+t0iW8cpxyjPsWMjoYfPYihk0yfa5Ij3c5H6PeTYabnUERcGS98IEzdLgfCsnsOFfZR1AXQ==
-X-Received: by 2002:a05:6512:b82:b0:53b:154c:f75d with SMTP id
- 2adb3069b0e04-53b348dc826mr6124733e87.31.1730119301829; 
- Mon, 28 Oct 2024 05:41:41 -0700 (PDT)
+ bh=/J0HVMaWx0G/dXH/zzshguECbDtEAfphEPAV17Xbqnk=;
+ b=uIUS+rJaa/PmPBKmtG1KzuzKv/n174VqirGlQ6XeHWYTtwYxfGhJEx3qIGhVHWNMXn
+ kmAgw/St9f6Ho+cXVUfXKVKa12Ltp2mANghdkhtcy6Jx0UH0OplghbHBznOBJ0ZxrOnb
+ nqiQV4QTbaPu2aVmGrFDHIjl1x1NnlwDINj8jiqEumjTtA/ykapFBn5/m/Z0CRaFKXhH
+ V+ug99+oZlzI8uIxNyeniwElSOPArtbreoXDyIqWNXXrc16CoufUXJzCePQ7+bbAOh5I
+ P1SnoUMpA2q5q1EmS/QHOAHzMYuOIuicLyPB+HLgsKL9s+u8CTG/RRCK6kieYufuv7iL
+ vL3A==
+X-Gm-Message-State: AOJu0YwQ47xBXlJdSiqKcjdmspbhDOlouzHCuZ8bXmMr+F9OkSm56yx7
+ cVrmGeFytl1O9aJlw08PFIJ7I0abrwKEmvwPBLLtiEk3qq8tIOjZSLkP7fOKgck0YzoQs57ZR1z
+ gQw==
+X-Google-Smtp-Source: AGHT+IEC6JgQRH9ZNER6COB8/eLGIvmJkwBt6inW9nVKQTxkqo7mCP+tV+TS4kT9pTnFNxkOTBi9pA==
+X-Received: by 2002:a17:907:9446:b0:a99:f619:d365 with SMTP id
+ a640c23a62f3a-a9de5f6e257mr666512266b.30.1730119303555; 
+ Mon, 28 Oct 2024 05:41:43 -0700 (PDT)
 Received: from chromium.org (43-114-103-145.static.glaslokaal.nl.
  [145.103.114.43]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b30c7ae0bsm375313766b.156.2024.10.28.05.41.40
+ a640c23a62f3a-a9b30c7ae0bsm375313766b.156.2024.10.28.05.41.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 05:41:40 -0700 (PDT)
+ Mon, 28 Oct 2024 05:41:42 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 04/21] test: Drop test-trace.sh and common.sh
-Date: Mon, 28 Oct 2024 13:41:09 +0100
-Message-ID: <20241028124130.32072-5-sjg@chromium.org>
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 05/21] compression: test: Move test into lib
+Date: Mon, 28 Oct 2024 13:41:10 +0100
+Message-ID: <20241028124130.32072-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241028124130.32072-1-sjg@chromium.org>
 References: <20241028124130.32072-1-sjg@chromium.org>
@@ -89,114 +93,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The trace feature is now tested in CI so there is no need for these old
-script. Also they don't work. Drop them.
+This test doesn't belong at the top level. Move it into the lib/
+directory, since that is where compression is implemented.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/common.sh           | 20 -------------
- test/trace/test-trace.sh | 64 ----------------------------------------
- 2 files changed, 84 deletions(-)
- delete mode 100644 test/common.sh
- delete mode 100755 test/trace/test-trace.sh
+ test/Makefile                | 1 -
+ test/lib/Makefile            | 3 +++
+ test/{ => lib}/compression.c | 0
+ 3 files changed, 3 insertions(+), 1 deletion(-)
+ rename test/{ => lib}/compression.c (100%)
 
-diff --git a/test/common.sh b/test/common.sh
-deleted file mode 100644
-index 904d579b7bf..00000000000
---- a/test/common.sh
-+++ /dev/null
-@@ -1,20 +0,0 @@
--#!/bin/sh
--
--OUTPUT_DIR=sandbox
--
--fail() {
--	echo "Test failed: $1"
--	if [ -n ${tmp} ]; then
--		rm ${tmp}
--	fi
--	exit 1
--}
--
--build_uboot() {
--	echo "Build sandbox"
--	OPTS="O=${OUTPUT_DIR} $1"
--	NUM_CPUS=$(nproc)
--	echo ${OPTS}
--	make ${OPTS} sandbox_config
--	make ${OPTS} -s -j${NUM_CPUS}
--}
-diff --git a/test/trace/test-trace.sh b/test/trace/test-trace.sh
-deleted file mode 100755
-index 5130b2bf017..00000000000
---- a/test/trace/test-trace.sh
-+++ /dev/null
-@@ -1,64 +0,0 @@
--#!/bin/bash
--# SPDX-License-Identifier: GPL-2.0+
--# Copyright (c) 2013 The Chromium OS Authors.
--#
--
--# Simple test script for tracing with sandbox
--
--TRACE_OPT="FTRACE=1"
--
--BASE="$(dirname $0)/.."
--. $BASE/common.sh
--
--run_trace() {
--	echo "Run trace"
--	./${OUTPUT_DIR}/u-boot <<END
--trace stats
--hash sha256 0 10000
--trace pause
--trace stats
--hash sha256 0 10000
--trace stats
--trace resume
--hash sha256 0 10000
--trace pause
--trace stats
--reset
--END
--}
--
--check_results() {
--	echo "Check results"
--
--	# Expect sha256 to run 3 times, so we see the string 6 times
--	if [ $(grep -c sha256 ${tmp}) -ne 6 ]; then
--		fail "sha256 error"
--	fi
--
--	# 4 sets of results (output of 'trace stats')
--	if [ $(grep -c "traced function calls" ${tmp}) -ne 4 ]; then
--		fail "trace output error"
--	fi
--
--	# Check trace counts. We expect to see an increase in the number of
--	# traced function calls between each 'trace stats' command, except
--	# between calls 2 and 3, where tracing is paused.
--	# This code gets the sign of the difference between each number and
--	# its predecessor.
--	counts="$(tr -d ',\r' <${tmp} | awk \
--		'/traced function calls/ { diff = $1 - upto; upto = $1; \
--		printf "%d ", diff < 0 ? -1 : (diff > 0 ? 1 : 0)}')"
--
--	if [ "${counts}" != "1 1 0 1 " ]; then
--		fail "trace collection error: ${counts}"
--	fi
--}
--
--echo "Simple trace test / sanity check using sandbox"
--echo
--tmp="$(tempfile)"
--build_uboot "${TRACE_OPT}"
--run_trace >${tmp}
--check_results ${tmp}
--rm ${tmp}
--echo "Test passed"
+diff --git a/test/Makefile b/test/Makefile
+index 2beff431899..fcd73f0b472 100644
+--- a/test/Makefile
++++ b/test/Makefile
+@@ -8,7 +8,6 @@ obj-$(CONFIG_$(XPL_)CMDLINE) += bootm.o
+ obj-$(CONFIG_$(XPL_)CMDLINE) += cmd/
+ obj-$(CONFIG_$(XPL_)CMDLINE) += cmd_ut.o
+ obj-$(CONFIG_$(XPL_)CMDLINE) += command_ut.o
+-obj-$(CONFIG_$(XPL_)UT_COMPRESSION) += compression.o
+ obj-y += dm/
+ obj-$(CONFIG_FUZZ) += fuzz/
+ ifndef CONFIG_SANDBOX_VPL
+diff --git a/test/lib/Makefile b/test/lib/Makefile
+index a54387a058e..ce22780eed8 100644
+--- a/test/lib/Makefile
++++ b/test/lib/Makefile
+@@ -2,6 +2,9 @@
+ #
+ # (C) Copyright 2018
+ # Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
++
++obj-$(CONFIG_$(XPL_)UT_COMPRESSION) += compression.o
++
+ ifeq ($(CONFIG_XPL_BUILD),)
+ obj-y += cmd_ut_lib.o
+ obj-y += abuf.o
+diff --git a/test/compression.c b/test/lib/compression.c
+similarity index 100%
+rename from test/compression.c
+rename to test/lib/compression.c
 -- 
 2.43.0
 
