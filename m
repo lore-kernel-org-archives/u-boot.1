@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58761D10C0B
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 12:43:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE35ED1039A
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 12:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CFA789103;
+	by phobos.denx.de (Postfix) with ESMTP id D57DA8910A;
 	Mon, 28 Oct 2024 13:41:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CkIUk6xC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FbdC0raQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55C538910C; Mon, 28 Oct 2024 13:41:54 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id AA32089117; Mon, 28 Oct 2024 13:41:54 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40C12890D5
+ by phobos.denx.de (Postfix) with ESMTPS id C882289099
  for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 13:41:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a9a0ec0a94fso598621966b.1
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a9a26a5d6bfso653463866b.1
  for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 05:41:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1730119311; x=1730724111; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wpJwt9ww3Y1ABI7p95Xfoo0ZPNxw+dxkXXb9NnCw/7s=;
- b=CkIUk6xCHNN6u5hs9MyFyWxiKX1Lgds69Jb3URK0SoxjJnhh8clrFRMJ4wB6H+qcyU
- za4/59sQKhDtkf/Yunvc8mb49nMyM6d2GX7BlrmosDd4BTt9WqVT9LMYjW6Nx6tMLBmh
- GLbdZYTOgbPGacDL1Z6Sb+gZH0yAq28NT7VmQ=
+ bh=SiB74drxioaOZsywEIGdcAOpMQ3ZcTGnFS/HQvM8m9M=;
+ b=FbdC0raQ8ZET3g7GDf50CdG9TuRP6l77dN6Cc+F3saS7p2xXT7esWhid7AuNtdgz4M
+ Cc4+pmcIs0QhtFTNuQRb2EQ9qyg/adyRL6zG2FlI73LNBaTVXKVxKT2GyrKgwZ5ZRcaw
+ XzrGOPwtnpD64le7EUuwPaLMI2vfabyvNjDuw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1730119311; x=1730724111;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wpJwt9ww3Y1ABI7p95Xfoo0ZPNxw+dxkXXb9NnCw/7s=;
- b=qgfaZj97zykLfvIEfO9pdi94q5qnrDhPytViQAPCf7B2LYzRqH6G4mMtXjaCXlCaok
- v9jmDkOhvt2T4WXhX/ysNod7HlpGYXeQao3SGt5o0PPAsEvXXwIepSgcgXHcjGMYmS2L
- xCZvkomWs0V1l7fL1VOfQQ2aYJh5zcp4Bbb6V+VdMNxT8DUUl2k8QGo9oxBE2FO4/A8B
- vbbFifoNbZa2h+tJfzTfxKJHdiJaI4Sl0mn8TtQ+UizogwrfOunjP/Jyz/twiAQ6yc+z
- dsD5mzBThlvji4ji0GEYaMjj8mgcCiOnwEZ4EV3ctUwH6le0ZsVLicCZd/tmUugA4NaL
- C7jg==
-X-Gm-Message-State: AOJu0YyNoQgTFoTApANOKf6o/uvC5NlDQuo+B5/EREQUZmTEIUO0kI0w
- Uyu88RL7QzUbS/Mn/DF1K6M91qSCX4yquuuHl08hUQhg0NkIaOr5tHQ/Jf/oPpy+fh3Qqs2YMVL
- Uvg==
-X-Google-Smtp-Source: AGHT+IFt5+rODpP8E5NSye6VMRJVElnwcTgOjO5ektiuk5xg0+ICdvQpfJowbKWZTk+b+UI/cUq76A==
-X-Received: by 2002:a17:907:8694:b0:a99:43e5:ac37 with SMTP id
- a640c23a62f3a-a9de5ecc0c8mr683083466b.15.1730119310631; 
- Mon, 28 Oct 2024 05:41:50 -0700 (PDT)
+ bh=SiB74drxioaOZsywEIGdcAOpMQ3ZcTGnFS/HQvM8m9M=;
+ b=Ar7xauAs2RFXHPmEyeSKnBB6F/pT8WYDIIIA8Sc1L/RMIg9A/z+fHGblsveu8hs99z
+ 8LEfMK3qjuww66vGZqJdB+embutkGD5v9NXPgTL8Il3hvkvp/TQOSKLrYuWq0EHuVinN
+ 6PY7bQDcrKgHU4Y7sOI1WLfbnuaZu1QDMHJiHdOnaba9MIpGHjddI/54HG9/EVKbcw4n
+ +9CtUBNCxO8vEGK7nTVCU1FqRVQVTLxzxQX21SjhCFepvkoEzWruKft+dsbMF3mwiDwn
+ JiyIUDU23n6ljnxsIK73OMJJiLetJc4exz8XhbklW9IjfeGBhemJdWPlfFzXN9wF+iKK
+ vcyA==
+X-Gm-Message-State: AOJu0Yzt9Q0MQdeqoPlA+sJ97Yt3R3ClG+cWSjs7hXq8mZWNeZUr0xfM
+ pCjNZjGQUpCqQOcWgDL3OgEJWOYCK0t9DCNhP7j8Ne4tgc2CTiNOrfbr+vWkd4HFqY1s5DwHDb1
+ nYw==
+X-Google-Smtp-Source: AGHT+IGyCHf0fCse24maGWME+YV1zJQK8rHTtOITpNxQlpnLVoGBcdvH9ttJTCy54VRFYRVsDQrzcw==
+X-Received: by 2002:a17:907:7e82:b0:a89:f5f6:395 with SMTP id
+ a640c23a62f3a-a9de5ca0153mr742267866b.1.1730119311464; 
+ Mon, 28 Oct 2024 05:41:51 -0700 (PDT)
 Received: from chromium.org (43-114-103-145.static.glaslokaal.nl.
  [145.103.114.43]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b30c7ae0bsm375313766b.156.2024.10.28.05.41.49
+ a640c23a62f3a-a9b30c7ae0bsm375313766b.156.2024.10.28.05.41.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 05:41:49 -0700 (PDT)
+ Mon, 28 Oct 2024 05:41:51 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 09/21] test: Update command test to use unit-test functions
-Date: Mon, 28 Oct 2024 13:41:14 +0100
-Message-ID: <20241028124130.32072-10-sjg@chromium.org>
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 10/21] bootm: test: Move test into boot
+Date: Mon, 28 Oct 2024 13:41:15 +0100
+Message-ID: <20241028124130.32072-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241028124130.32072-1-sjg@chromium.org>
 References: <20241028124130.32072-1-sjg@chromium.org>
@@ -89,131 +92,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than enabled DEBUG and using assert(), use the unit-test
-functions now provided.
-
-Drop a check that causes pytest to fail.
+This test doesn't belong at the top level. Move it into the boot/
+directory, to match its implementation.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/cmd/command.c | 63 +++++++++++++++++++++++-----------------------
- 1 file changed, 32 insertions(+), 31 deletions(-)
+ test/Makefile           | 1 -
+ test/boot/Makefile      | 1 +
+ test/{ => boot}/bootm.c | 0
+ 3 files changed, 1 insertion(+), 1 deletion(-)
+ rename test/{ => boot}/bootm.c (100%)
 
-diff --git a/test/cmd/command.c b/test/cmd/command.c
-index 77800687ec3..5ec93d490ba 100644
---- a/test/cmd/command.c
-+++ b/test/cmd/command.c
-@@ -26,16 +26,16 @@ static int command_test(struct unit_test_state *uts)
+diff --git a/test/Makefile b/test/Makefile
+index 283d97012cf..4366e495a15 100644
+--- a/test/Makefile
++++ b/test/Makefile
+@@ -4,7 +4,6 @@
  
- 	/* commands separated by \n */
- 	run_command_list("setenv list 1\n setenv list ${list}1", -1, 0);
--	assert(!strcmp("11", env_get("list")));
-+	ut_assert(!strcmp("11", env_get("list")));
+ obj-y += test-main.o
  
- 	/* command followed by \n and nothing else */
- 	run_command_list("setenv list 1${list}\n", -1, 0);
--	assert(!strcmp("111", env_get("list")));
-+	ut_assert(!strcmp("111", env_get("list")));
+-obj-$(CONFIG_$(XPL_)CMDLINE) += bootm.o
+ obj-$(CONFIG_$(XPL_)CMDLINE) += cmd/
+ obj-$(CONFIG_$(XPL_)CMDLINE) += cmd_ut.o
+ obj-y += dm/
+diff --git a/test/boot/Makefile b/test/boot/Makefile
+index d8eded20d4f..4b5e8a692c9 100644
+--- a/test/boot/Makefile
++++ b/test/boot/Makefile
+@@ -10,6 +10,7 @@ obj-$(CONFIG_EXPO) += expo.o
+ obj-$(CONFIG_CEDIT) += cedit.o
+ endif
  
- 	/* a command string with \0 in it. Stuff after \0 should be ignored */
- 	run_command("setenv list", 0);
- 	run_command_list(test_cmd, sizeof(test_cmd), 0);
--	assert(!strcmp("123", env_get("list")));
-+	ut_assert(!strcmp("123", env_get("list")));
++obj-$(CONFIG_$(XPL_)CMDLINE) += bootm.o
+ obj-$(CONFIG_MEASURED_BOOT) += measurement.o
  
- 	/*
- 	 * a command list where we limit execution to only the first command
-@@ -43,60 +43,61 @@ static int command_test(struct unit_test_state *uts)
- 	 */
- 	run_command_list("setenv list 1\n setenv list ${list}2; "
- 		"setenv list ${list}3", strlen("setenv list 1"), 0);
--	assert(!strcmp("1", env_get("list")));
-+	ut_assert(!strcmp("1", env_get("list")));
- 
--	assert(run_command("false", 0) == 1);
--	assert(run_command("echo", 0) == 0);
--	assert(run_command_list("false", -1, 0) == 1);
--	assert(run_command_list("echo", -1, 0) == 0);
-+	ut_asserteq(1, run_command("false", 0));
-+	ut_assertok(run_command("echo", 0));
-+	ut_asserteq(1, run_command_list("false", -1, 0));
-+	ut_assertok(run_command_list("echo", -1, 0));
- 
- #ifdef CONFIG_HUSH_PARSER
- 	run_command("setenv foo 'setenv black 1\nsetenv adder 2'", 0);
- 	run_command("run foo", 0);
--	assert(env_get("black") != NULL);
--	assert(!strcmp("1", env_get("black")));
--	assert(env_get("adder") != NULL);
--	assert(!strcmp("2", env_get("adder")));
-+	ut_assertnonnull(env_get("black"));
-+	ut_asserteq(0, strcmp("1", env_get("black")));
-+	ut_assertnonnull(env_get("adder"));
-+	ut_asserteq(0, strcmp("2", env_get("adder")));
- #endif
- 
--	assert(run_command("", 0) == 0);
--	assert(run_command(" ", 0) == 0);
-+	ut_assertok(run_command("", 0));
-+	ut_assertok(run_command(" ", 0));
- 
--	assert(run_command("'", 0) == 1);
-+	ut_asserteq(1, run_command("'", 0));
- 
- 	/* Variadic function test-cases */
- #pragma GCC diagnostic push
- #pragma GCC diagnostic ignored "-Wformat-zero-length"
--	assert(run_commandf("") == 0);
-+	ut_assertok(run_commandf(""));
- #pragma GCC diagnostic pop
--	assert(run_commandf(" ") == 0);
--	assert(run_commandf("'") == 1);
-+	ut_assertok(run_commandf(" "));
-+	ut_asserteq(1, run_commandf("'"));
- 
--	assert(run_commandf("env %s %s", "delete -f", "list") == 0);
-+	ut_assertok(run_commandf("env %s %s", "delete -f", "list"));
- 	/*
- 	 * Expected: "## Error: "list" not defined"
- 	 * (disabled to avoid pytest bailing out)
- 	 *
--	 * assert(run_commandf("printenv list") == 1);
-+	 * ut_asserteq(1, run_commandf("printenv list"));
- 	 */
- 
- 	memset(long_str, 'x', sizeof(long_str));
--	assert(run_commandf("Truncation case: %s", long_str) == -ENOSPC);
-+	ut_asserteq(-ENOSPC, run_commandf("Truncation case: %s", long_str));
- 
- 	if (IS_ENABLED(CONFIG_HUSH_PARSER)) {
--		assert(run_commandf("env %s %s %s %s", "delete -f", "adder",
--				    "black", "foo") == 0);
--		assert(run_commandf("setenv foo 'setenv %s 1\nsetenv %s 2'",
--				    "black", "adder") == 0);
--		run_command("run foo", 0);
--		assert(env_get("black"));
--		assert(!strcmp("1", env_get("black")));
--		assert(env_get("adder"));
--		assert(!strcmp("2", env_get("adder")));
-+		ut_assertok(run_commandf("env %s %s %s %s", "delete -f",
-+					 "adder", "black", "foo"));
-+		ut_assertok(run_commandf(
-+			"setenv foo 'setenv %s 1\nsetenv %s 2'",
-+			"black", "adder"));
-+		ut_assertok(run_command("run foo", 0));
-+		ut_assertnonnull(env_get("black"));
-+		ut_asserteq(0, strcmp("1", env_get("black")));
-+		ut_assertnonnull(env_get("adder"));
-+		ut_asserteq(0, strcmp("2", env_get("adder")));
- 	}
- 
- 	/* Clean up before exit */
--	run_command("env default -f -a", 0);
-+	ut_assertok(run_command("env default -f -a", 0));
- 
- 	/* put back the FDT environment */
- 	ut_assertok(env_set("from_fdt", "yes"));
+ ifdef CONFIG_OF_LIVE
+diff --git a/test/bootm.c b/test/boot/bootm.c
+similarity index 100%
+rename from test/bootm.c
+rename to test/boot/bootm.c
 -- 
 2.43.0
 
