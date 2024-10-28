@@ -4,118 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 622B3D1358F
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 00:31:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05029D13590
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 02:00:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB9A988744;
-	Mon, 28 Oct 2024 01:31:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 249A588ECB;
+	Mon, 28 Oct 2024 03:00:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="t/gozOPD";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40A2688ECB; Mon, 28 Oct 2024 01:30:59 +0100 (CET)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
+ id 1E3E3885F4; Mon, 28 Oct 2024 02:59:13 +0100 (CET)
+Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
+ (mail-bjschn02on2072f.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4440:2::72f])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B683E88730
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 01:30:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90D7A88F71
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 02:59:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20241028003044epoutp0468cb01acc2fbd0c2f2774bc81019aa66~CdnNPhAWz1725117251epoutp049
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 00:30:44 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20241028003044epoutp0468cb01acc2fbd0c2f2774bc81019aa66~CdnNPhAWz1725117251epoutp049
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1730075444;
- bh=D5XP+P4OKmP3dvG63jy/mJqmn9NyUaL1no8+dOceqn0=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=t/gozOPD12olywJMq//A11k3x/9QAr6tkbX/tUnDx4TtKykh9bqwQQnNjlqoyV/Uu
- elmsLIJQfXpgeiYeaMI+FfQdmhO2T5aR00raatrLjMcgcJcfY5yTwVA4GA90zCFG0O
- jglBAavjG9qD0znRcIOSGk/x+NgXOTe3AhVW2GQA=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20241028003044epcas1p356cfcb2d1e3dd4def9f7915b24e695df~CdnM-d41f0619206192epcas1p3J;
- Mon, 28 Oct 2024 00:30:44 +0000 (GMT)
-Received: from epsmgec1p1-new.samsung.com (unknown [182.195.36.136]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4XcDnb28Kvz4x9Pq; Mon, 28 Oct
- 2024 00:30:43 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 25.AE.19363.33BDE176; Mon, 28 Oct 2024 09:30:43 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20241028003043epcas1p1a412d029d329dac92060d51bf19a4a8c~CdnL3jzgR2959129591epcas1p1M;
- Mon, 28 Oct 2024 00:30:43 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241028003043epsmtrp2726f98f11981984fd804e25816389317~CdnL21p2m2861328613epsmtrp2a;
- Mon, 28 Oct 2024 00:30:43 +0000 (GMT)
-X-AuditID: b6c32a4c-02dff70000004ba3-72-671edb334c00
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- E1.24.18937.23BDE176; Mon, 28 Oct 2024 09:30:42 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20241028003042epsmtip18cc04b8d7f53dbee818fecc1b02a222a~CdnLrOsWN1786817868epsmtip1-;
- Mon, 28 Oct 2024 00:30:42 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: <wens@csie.org>, "'Andre Przywara'" <andre.przywara@arm.com>
-Cc: "'Jagan Teki'" <jagan@amarulasolutions.com>, "'Tom Rini'"
- <trini@konsulko.com>, <u-boot@lists.denx.de>, <linux-sunxi@lists.linux.dev>
-In-Reply-To: <CAGb2v671y0EkMKmYJKqPp0ek3_-kv26adUjG=g5-tdPe+5f3Hw@mail.gmail.com>
-Subject: RE: [PATCH] sunxi: power: axp809: Fix DCDC4 programming
-Date: Mon, 28 Oct 2024 09:30:42 +0900
-Message-ID: <104601db28d0$9f4290d0$ddc7b270$@samsung.com>
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: ko
-Thread-Index: AQGqQcI8CYpISmIDDBim4CD6STd+mgIv+UgYAnP1doWy1/4noA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrFKsWRmVeSWpSXmKPExsWy7bCmga7xbbl0g29r+C1WzPvJaPFl0wQ2
- iyn7drFZTJ20md3i7d5Odoufh84zObB5rP14n9Vjzbw1jB4bHq1m9Xh1YBW7x9k7Oxg9Xmye
- yRjAFpVtk5GamJJapJCal5yfkpmXbqvkHRzvHG9qZmCoa2hpYa6kkJeYm2qr5OIToOuWmQN0
- h5JCWWJOKVAoILG4WEnfzqYov7QkVSEjv7jEVim1ICWnwLRArzgxt7g0L10vL7XEytDAwMgU
- qDAhO2PJn07mgj7+iq3HPzE1MD7h7mLk4JAQMJG48ZC1i5GLQ0hgD6PEmod/2CCcT4wSU6/e
- RXC+7H4F5HCCdRz/+YoJIrGTUeJR+xOwhJDAS0aJU7fsQWw2AT2J/4sWMoPYIgIOEp2TprGD
- NDALdDNKtE9eANbAKRAosXbvTLAiYaCirl9TGEFsFgFViQPPellBbF4BS4mZh34xQ2xWkPj5
- dBlYnFlARGJ2ZxszyA8iAk4Sh2/VgsyXEHjELtF38y4LRL2LxNer56BsYYlXx7ewQ9hSEp/f
- 7WWDaGhmlFi65CArhNPDKPGv4TrUn8YS+5dOZgLZwCygKbF+lz7EYj6Jd197WCGBxyvR0SYE
- Ua0icen1SyaY+Xef/GeFsD0kfi47zQgJrWuMEgve32WdwCg/C8kPsxA2LGBkWsUolVpQnJue
- mmxYYKibl1oOj87k/NxNjOBEqOWzg/H7+r96hxiZOBgPMUpwMCuJ8K6OlU0X4k1JrKxKLcqP
- LyrNSS0+xGgKDM2JzFKiyfnAVJxXEm9oYmlgYmZkbGJhaGaoJM575kpZqpBAemJJanZqakFq
- EUwfEwenVANT/ZMz15kXuxjzvvh8rip+p7mU3UkWz8MWDXzGqS//K7P9/BLz2cgqK12xekXh
- cvMe6S0511Pm7XnSYbxhEdvJfpOgX2mC0rIhNet/rYh+vmvCu6CZjFMVZEUzE6fuOB8oVX6p
- +n/h+dClezU/PLpc/IfR87KA8k9W0ffamsf2Rld05u29IL5Wz136e9GsZQtVVZasfHlZf1+S
- VfkGhs5DOyz23XKRPO3VFJNw9Nfl176Zfm3b78z8uGPHWRa7QBmmHXsfzj2s7WMbM6P4/pNV
- Vv/e3vuWvDqoU/mhSkZC0EuNGVz7v3T8+BYW7tor8XbD1liFTrOlp01sk4N/b7jyJUV296wp
- AjM1ay2n3i62V2Ipzkg01GIuKk4EADsOcAoNBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrOLMWRmVeSWpSXmKPExsWy7bCSnK7Rbbl0g5d9VhYr5v1ktPiyaQKb
- xZR9u9gspk7azG7xdm8nu8XPQ+eZHNg81n68z+qxZt4aRo8Nj1azerw6sIrd4+ydHYweLzbP
- ZAxgi+KySUnNySxLLdK3S+DKWPKnk7mgj79i6/FPTA2MT7i7GDk5JARMJI7/fMXUxcjFISSw
- nVHi5sqXzBAJKYnPT6eydTFyANnCEocPF0PUPGeU2LP7GhtIDZuAnsT/RQvB6kUEnCSWnbzN
- AmIzC/QzSnzaIQjRcIlRYvr2FUwgCU6BQIm1e2eCNQgLOEh0/ZrCCGKzCKhKHHjWywpi8wpY
- Ssw89AvqCAWJn0+XsUIMFZGY3dnGDHIQyLLDt2onMArMQpJZwMi4ilE0taA4Nz03ucBQrzgx
- t7g0L10vOT93EyM4bLWCdjAuW/9X7xAjEwfjIUYJDmYlEd7VsbLpQrwpiZVVqUX58UWlOanF
- hxilOViUxHmVczpThATSE0tSs1NTC1KLYLJMHJxSDUxbz268cZHvbMKlt7r5D6w1WYXkTByK
- Bd/vFu9zKdM33PxV5WX7boHiVyKpCzUNytzzcnTWKTB/cq64pczqICV90LJAMpZjqrlt/v+5
- HBq7il8nrGm7VX9uwY34vLXOYf+2yL/UqXO81POwbH9GdsG6/eesotQSF21+2PrputQ9v/71
- keeY5NeVqu1IYmHM3iobtOHt310Fr3wmiG+9uzpqn5DImXkbdCVkNtfPj57adsThxepF3c92
- SeWL1quLvr6UHvPQrU6ltqDvodyH2Utqql5Ln1p14VOzvmna24KPmxNX/pmx+e6CwmXfdQ91
- Se0VNL6k5u2zzeqrAGv57AN+hzJk6ovSwi9OnbJsFacSS3FGoqEWc1FxIgBKznU2ygIAAA==
-X-CMS-MailID: 20241028003043epcas1p1a412d029d329dac92060d51bf19a4a8c
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241025144320epcas1p3f4f3ad62a7b7aacb4cebc7f1ce9fc14c
-References: <20241007222625.18883-1-andre.przywara@arm.com>
- <CGME20241025144320epcas1p3f4f3ad62a7b7aacb4cebc7f1ce9fc14c@epcas1p3.samsung.com>
- <CAGb2v671y0EkMKmYJKqPp0ek3_-kv26adUjG=g5-tdPe+5f3Hw@mail.gmail.com>
+ spf=pass smtp.mailfrom=hal.feng@starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IWEteokbIDiktEvSxJrtJJ9Fj47cHhXMxPXGkdwDmBS2mmrGwCBOFBTS2/0lm+Q3tJM1wR7BZ+5iu+TVHkJHfD774Q+BrntluhZAMTavfhssj2zv3FI+d//0uflvbPCM1aqxkCuyoMcYYBpA0eKOUs4ZbDONyaovrgpboCKErMmK1KIk55fRVKmOfHAaM/VaVNytKFZ6iTInpyLGGGgpci2LeZSjagnS7kwO8CJKC11/K2QQV2nf7YjsrbdW30dNeLu1IPGwKod4+5LY81XXo1/alGhyrMAZNuCdWY5sjrZacnEj+K7c1njVOxQa7MKp6HO8s9kgvDT3ivUsBAsfdA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PyvJEJA6CFBRjv6UmKptULhET5MCfikhi5Rn8MSl7W4=;
+ b=E7+JimvLoN0RonNuB/ZnYySYPVXpMSup6+zmiW0WfwtpwcZtBXQi2Z8S4cL7tDRTjiYZEQZr6A/HHdPOq49nMAu9phoJuaBpK9HOucA6oBx/VmXZSDNEuJdlb+gLVlM+wGNEmeQzhpoiB92ak3xTNPMplCjT0dNWgAKwQnJhqBNLKd1iJg7FvhuNc9uEhifkL4TcsX9vsb5fcRbbPg43uuGsLVK3eZlsQDcyBowXOsKdEFw7m9EPOC5nRnGWd1eKZLjrMmXyfpOUjLc+uYp5FUxH4akiBfKAIkDWCt+AH46omiNKW1lzxgMJoFXnhFdb5jtQ/hiXfFRDC0UOzvmoOQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:7::14) by ZQ2PR01MB1164.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:12::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.34; Mon, 28 Oct
+ 2024 01:59:06 +0000
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7%4]) with mapi id 15.20.8069.031; Mon, 28 Oct 2024
+ 01:59:06 +0000
+From: Hal Feng <hal.feng@starfivetech.com>
+To: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>,
+ E Shattow <lucent@gmail.com>, Nam Cao <namcao@linutronix.de>,
+ Bo Gan <ganboing@gmail.com>
+Cc: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 01/14] Makefile: Add OF_UPSTREAM Makefile for RISC-V
+Date: Mon, 28 Oct 2024 09:58:34 +0800
+Message-ID: <20241028015847.42344-2-hal.feng@starfivetech.com>
+X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20241028015847.42344-1-hal.feng@starfivetech.com>
+References: <20241028015847.42344-1-hal.feng@starfivetech.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: BJXPR01CA0069.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c211:12::36) To ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:7::14)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1164:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0f01b648-06e4-489b-1e4a-08dcf6f41b00
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|52116014|366016|41320700013|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: /CJt6J89MY3KIFkabI73fp1tChjgXZ2UBFTnhp+ci0y1T7IfV/FKR33zeWBLNsMku46A5nKruUuqc8t9g2jV+rDUlrofafLV7/dYfFIjY+FOQvohFvRI5IY7+BLemzEBOx/WBhPfIliqqO5DeCKykHQqSd/Ks9sDaZK/uUW0KNqHzf+1J3mb64izrIN65oe2hlBrcfpl0YodmTgsQWEbscHgdTZ8sXgr5HKVdDp+Pljnl/tEPIG+NWz8ecL1vgkcCz/Bmwyklf6mMhRuKMD8rnIaqCSEALMktQTy6fQGgjobM8YiESN4tb+rTSHO7jhzKXaZtryR4PHOFiC/zCnf6NTJ4+FG8ijdVF3Z3icnWowJu54ifsxPn/Ud8g2Zwwk5WRaqakXCwi9vg10xwMk5HAmZ3Nwdy2B+2Vfw3dwzslDH5k+Zl+QQEqp8U8bT87T+QXb6MpLGwpClihvuvfpRzYI7IFXkGDkVJJinQ0WTWvgeuCwobkfU6pqR6AKKqPvHiPVV1hZVaAnETvpFfwGbzqC5VtcMLkk1VrZIu6omlycv8M0fv/onl3Ml4oHZ2dE+WrjBljXAY0H54issiIJHXCpSo2hSM9u+iBVmi2+9D8/4CkmGVq8STHHcX6jR3w6x
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE;
+ SFS:(13230040)(7416014)(52116014)(366016)(41320700013)(1800799024)(38350700014);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ZwjIXJ6FDMwDM5CbbynEDAoQzHy50QRusEgQZ+g65p/z0iGwaFH5dl17w9Ed?=
+ =?us-ascii?Q?j1J1D50186VbTsDZHJ2CrU6mvL7KVHCEl/d2005FSopU8EGsrolBFHcowjxJ?=
+ =?us-ascii?Q?vnf3MkBX5hebLGxy2BWNsay8wkBIXEDeUyoPBAlyEftNIKdyVhnMgUCX4AcI?=
+ =?us-ascii?Q?z1brD9gerh7jx8rQo3GJCaHRcgYb1sJ1GgGzNFGknH4KqQPcjbxytcF/2Mre?=
+ =?us-ascii?Q?XYU2llnYDuXXD55exnh/I/Di/5XuCJdvfi2UBGOyfI0aXipiuUvk6GQ4T7o9?=
+ =?us-ascii?Q?l+1ibW6sB8vPc2kYqbYu9SIq6V8//jucvZeZ2co5Rzq6pZ9QObOvr5V+FzWk?=
+ =?us-ascii?Q?aRZx7r6SrsoOX9U4squCPh8oiYDsN1WqFk8rIdjtDh1uds4ycFd9wMyA0qID?=
+ =?us-ascii?Q?agzCMrQL/hCFgTvSFjn0OzndaUtTnQ2aViePFwPbPn5vrNAS49v4is5Q59Hn?=
+ =?us-ascii?Q?fDRh0rU5UMI0b9nNYukdh6H3Cjqte/wudQ2qv5f3JD6vIcR/T+mt/zScUD0b?=
+ =?us-ascii?Q?wBNn90UTY5lIq7xe4Yg2XuWNfZy/7FbB2tb/N7cQkEr0Q6+V252N3DRVCnVj?=
+ =?us-ascii?Q?dFxvg8Lv+NUfdttkWJZS0YDhSsaYvvIDOXvS/NE1kbedy/8dzW87/GsuqHAf?=
+ =?us-ascii?Q?BMGnn0Al8z9ZqDIfmQzrw6096cr2ox5raML0J76BKXYciGhtQUMzVAGCq8P9?=
+ =?us-ascii?Q?pDVQ5/D62YSGUlMV9fY7ehbJDjwHfQYOgdv9A+o+Z1wahEmKbsu2hMb0Mwo2?=
+ =?us-ascii?Q?pYo7FhtL38jgeYNZcRKYeFUNo+V1HXYghk+6XHZM1DRFintMBhNJLlJh24Sj?=
+ =?us-ascii?Q?7RVW+AI+cVMKbLkqviPpVB+GEUOVdC32Q1xDpaMSRzzws058/eKY3pHx1sgv?=
+ =?us-ascii?Q?oqDr7xPYC4bDVwnq1bwirnhcIJXcEmTlX//KF8iKHqtWGKiWOvcqZhAOc9Dp?=
+ =?us-ascii?Q?HVSN2u9NsOPxrQoavx1GIDEdNzL9Ad1iCPIOF9M4kzZG1ktLmF4XWC0lP0Lm?=
+ =?us-ascii?Q?VbJOUD4MZOJnUEnz27kqK4ZSmtXHNbdb25SIqh8Cd1w3svZfgbV1mROaZZOQ?=
+ =?us-ascii?Q?OPROGA2gXbapJwpL3TzDVAzw+ncO0H+/3gdKiOk+U8ev290w/7K7QmsW/Gbg?=
+ =?us-ascii?Q?zpwFSi1nXs8Ibk47xnhFT4MOWhyg/7tRwVwfoMt3YLjM8ArxSkSbCOBPHSU+?=
+ =?us-ascii?Q?IreNSQXIOhd2fX60DFC27TZJO5KOkNppTm5l4HQ3qdsyutHF6tWffeal1we6?=
+ =?us-ascii?Q?FEe46IkqrGcyIabLogwz1fy96r2Op93H5NrJF4APAyA3u5ObgF1WGiNP9FRR?=
+ =?us-ascii?Q?qewX84DAEUhY3wRD3h7e/b5k6hHzcpLevDsQmKT2eBHZZ12g8nTC+pK+rlQe?=
+ =?us-ascii?Q?AOmlj8ZlCrWgaHe7cQvXEneepDx1SUAErBkdpHQXPEiYxsam9bxGhJKqmbTc?=
+ =?us-ascii?Q?afkH+qgtAzzvHK3PTH4BIxmZLZNWmk2r/Y/zxpWLLFHFBAqlcl/4bf+wT3qH?=
+ =?us-ascii?Q?3s8I58XGgeHrY+24tBGxokJgPh7uZBytiwIv6P5YYRuh7rGNpiZCiobVOVII?=
+ =?us-ascii?Q?qRoiyWGetVkdKb/tBN6CupwzAhLpkSsSmTNS9thMOwxXaXO9uY/CGMRMesNm?=
+ =?us-ascii?Q?dw=3D=3D?=
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0f01b648-06e4-489b-1e4a-08dcf6f41b00
+X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2024 01:59:06.6248 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: XWW60OSzFcJJWiUP/hno7iE6dg0zGRuAoIly8z0rvY5JWtkx33DSb7RA4kKY3H29+TCKb434LhU9Dyf4zURlQQDERfl8L6Ov9obJuVLEJIo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1164
+X-Mailman-Approved-At: Mon, 28 Oct 2024 03:00:01 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,54 +134,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This makes RISC-V DT buildable with OF_UPSTREAM.
 
+Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+---
+ dts/upstream/src/riscv/Makefile | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 dts/upstream/src/riscv/Makefile
 
-> -----Original Message-----
-> From: Chen-Yu Tsai <wens@csie.org>
-> Sent: Friday, October 25, 2024 11:43 PM
-> To: Andre Przywara <andre.przywara@arm.com>
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>; Jagan Teki <jagan@amarulasolutions.com>; Tom Rini
-> <trini@konsulko.com>; u-boot@lists.denx.de; linux-sunxi@lists.linux.dev
-> Subject: Re: [PATCH] sunxi: power: axp809: Fix DCDC4 programming
->
-> On Tue, Oct 8, 2024 at 6:27?AM Andre Przywara <andre.przywara@arm.com> wrote:
-> >
-> > When trying to set the DCDC4 regulator, the code was accidentally
-> > setting the voltage register for DCDC5 (VCC-DRAM). The higher voltage
-> > doesn't harm the DRAM chips, but upsets the Linux regulator driver: when
-> > it tried to correct that, it tripped over a separate DT bug.
-> > The DCDC5 DT limits are 1.425 and 1.575V, which cannot bet set with the
-> > rail's resolution of 50mV. The kernel driver gave up, and made in turn
-> > the system hang, as the PMIC powers essential devices.
-> >
-> > Fix the copy&paste bug by using the correct PMIC voltage register.
-> >
-> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
->
-> Reviewed-by: Chen-Yu Tsai <wens@csie.org>
-
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-
->
-> > ---
-> >  drivers/power/axp809.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/power/axp809.c b/drivers/power/axp809.c
-> > index 9e38e1a7450..ec3eca1ac4b 100644
-> > --- a/drivers/power/axp809.c
-> > +++ b/drivers/power/axp809.c
-> > @@ -93,7 +93,7 @@ int axp_set_dcdc4(unsigned int mvolt)
-> >                 return pmic_bus_clrbits(AXP809_OUTPUT_CTRL1,
-> >                                         AXP809_OUTPUT_CTRL1_DCDC4_EN);
-> >
-> > -       ret = pmic_bus_write(AXP809_DCDC5_CTRL, cfg);
-> > +       ret = pmic_bus_write(AXP809_DCDC4_CTRL, cfg);
-> >         if (ret)
-> >                 return ret;
-> >
-> > --
-> > 2.46.2
-> >
-
+diff --git a/dts/upstream/src/riscv/Makefile b/dts/upstream/src/riscv/Makefile
+new file mode 100644
+index 0000000000..e00b3190da
+--- /dev/null
++++ b/dts/upstream/src/riscv/Makefile
+@@ -0,0 +1,14 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++include $(srctree)/scripts/Makefile.dts
++
++targets += $(dtb-y)
++
++# Add any required device tree compiler flags here
++DTC_FLAGS += -R 4 -p 0x1000
++
++PHONY += dtbs
++dtbs: $(addprefix $(obj)/, $(dtb-y))
++	@:
++
++clean-files := */*.dtb */*.dtbo
+-- 
+2.43.2
 
