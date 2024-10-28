@@ -4,121 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73881D13590
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 02:03:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8499D13592
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 02:34:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D523890BC;
-	Mon, 28 Oct 2024 03:00:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 08A908862E;
+	Mon, 28 Oct 2024 03:34:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DD2688969; Mon, 28 Oct 2024 02:59:24 +0100 (CET)
-Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
- (mail-bjschn02on20719.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4440:2::719])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AF2E88C66
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 02:59:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hal.feng@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BZyIlvBrHnqq5XtA//i1Rr4/fx81wz8pMWgYwKTXUsUAL+m42kLKU26Mi+k2KW5Jwv4ymaXlZabRVvenhZfKW3THWpGN+3M80nP/deYLn9bbwUeWaQZ7jNdhAy/+ot0ZbQJFSdiqzM6Mlkvu2N6VIKZw4441Ef7XpyAqXGk4m2lTj2UdNH9G4H2Y9bvrxOjMutOKCjnXQ0K3Qz422NBaEV4PwvW4lXc1RzSCHUT5WaSxX07gjjl5Xr2RUQ87R/p7qlKuWcGjTPaeC7iS4RWTMq+vSm6En9GbXowrP6pDzhrmxk7YBgeATTyzvmc0WFA1DmAu72SAjx8Fhhis4zZ9wQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HEv+I/u1Ck+YkVUBIoPxOyh5Ymhu1rgbS06Kh2F2pns=;
- b=iGl1/HkKfCGfb/fnQDF5GQ3mroc432+SDtE+yq2MronW6qwFNLe0CfMNwZbDAwIA5SuyfvGfHKVg5rG23SnpAndyDKvAzE8cRLpFAKE5J4PUSGVrUs43JspVLkWQ4Cc7yrJcGuRMdIKW0VKFzSay7fx9ZOuLYyZpEEuSVh8mv4WA1cfdj5maDxT4JptBL3PAnE4NJSBp9EqprujbchOVX8EQU+xkTweHPIf/52m/9k1dtm1DXhjbH91kpTZ0RaerpfHOYTuHr+LvQ7VDYUJBt5Cnukx1QHAGk2VhXG5hY5RnJATVTcL+IU2mPhfzJs4Xs9t9EGDWdvHKssv04oHzxA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14) by ZQ2PR01MB1211.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.34; Mon, 28 Oct
- 2024 01:59:16 +0000
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7%4]) with mapi id 15.20.8069.031; Mon, 28 Oct 2024
- 01:59:16 +0000
-From: Hal Feng <hal.feng@starfivetech.com>
-To: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>,
- E Shattow <lucent@gmail.com>, Nam Cao <namcao@linutronix.de>,
- Bo Gan <ganboing@gmail.com>
-Cc: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 11/14] configs: visionfive2: Enable MULTI_DTB_FIT for
- JH7110 based board DT
-Date: Mon, 28 Oct 2024 09:58:44 +0800
-Message-ID: <20241028015847.42344-12-hal.feng@starfivetech.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20241028015847.42344-1-hal.feng@starfivetech.com>
-References: <20241028015847.42344-1-hal.feng@starfivetech.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BJXPR01CA0069.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c211:12::36) To ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14)
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="CtUH/dOs";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Uoxpms6n";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id ECD9E88EAE; Mon, 28 Oct 2024 03:34:05 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 14B3E8841E
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 03:34:01 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4XcHWl5Sqcz9shl;
+ Mon, 28 Oct 2024 03:33:55 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1730082835;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1g8vqySVWR71CzraRnNELBChL3r+TFDjkVBxy1qX5T4=;
+ b=CtUH/dOsbGZjFB0WRxn8oQcdT/KEBeOtX7JDbTHNqSPebFpE+GF8j6H9K7cHu9JdbC2nnh
+ 4KBIo5wBvWcgZM0U65dKl18Axgzg/hJTcn3UW6FYg0VnGFnZNei4U3zrr9xInbGKoEhRuN
+ MgJ/MPtVr1Rw+F82l9bIs5iWNyBtaDzfn1BP5wpcfPjA5zp2ID6VDvIim2VejoKz48J9PI
+ sAjoSzokhUhHTR7ZYUwd3vjiwSXaNoRiTQo0KlkqXSFFKmsHeLObbaPyz5Hc4BaoZzaFmu
+ Y4pPZYl/62ruvFGr60Q+CKnFtuagxAXfn5rd9/8XjMFvgeHyDcJB8RDoEMz8NQ==
+Message-ID: <d00691ed-815e-4db9-b5d7-b09c32ead593@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1730082833;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1g8vqySVWR71CzraRnNELBChL3r+TFDjkVBxy1qX5T4=;
+ b=Uoxpms6noXNiRBMfaQ2irWzY5s438FxBnD9p/5v7Y74npOrX2qV9gUF97K0uN8jt8d690Q
+ Fra2iuyCsZSfMEcZyr7+hbgchTSTj7Xxu3nnwPr4eg1FeA2qqQ+2VjFOaiXLqdsIZgaQLV
+ 5MZh6u9zdxtw3o1V+x59xz+bIJkmFOz69axK3XtnOPHuDg2B9GM5IfgB+tuw0XnvCEbTap
+ ongN9hPJlO2iM/DZ+zalM3/dCJ75CYDxSjQrSUOcB1ck4QNNrBm60sF1xCx1v7DN+uoAnT
+ CJ7Xt1RRmq1APw0rEwYewkT6koAfJdg+qBC9AoaXVtqLxef9NKb8PW6kqXrUlw==
+Date: Mon, 28 Oct 2024 03:33:49 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1211:EE_
-X-MS-Office365-Filtering-Correlation-Id: 856ea33f-38a2-4529-c719-08dcf6f420ea
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|7416014|52116014|366016|41320700013|38350700014; 
-X-Microsoft-Antispam-Message-Info: fPJulF3dsgJ2qGEU9WS/8p0KxwsauFJtYK4e7SF6sR/jDkeYGp/m5rC93cxMcbf1tNJTFSY0yQJ2suveZVpHx5+nFqIPMKxJZ70IUVeffrXege1EPl5THCSZZMOI9SF0UQf3M4xe7vN5efzuKUla+qOO/3ha7lb4mbVovatIaFdV+8DYS2L5OpKoWZdBLxdyJkkhWcfgMsDRhkSLumRQbf+4gwOcJSCHfSC8ximxy2b59yzgtzoNmdp+igFGiR+1iUdM1ZHfxUfUGMVOYruKvHsyUECcp1zyrzRp6qVFbe9Il63YFRl0iIdT5+5jLFkNKM/Facomd8DAzllSLAo+sZJHwRU6sQuWKwh7XnLKHtJDkC1/QBgFRlRxh/telsKxz24x77H54N2QhydscZhTlB3sOi8/xwMhFysoIwrcsjOzvyirmBj6qNWKR0TLcA3jw8/uTD02G7FNfQ82xuWkubb8po1zSdVBS0IgsbQT03DAgYVovV8+NlOvoDlNSYePpR7zN5Pd1wm7RPWba4Cl0PrzUkKbsWI2uQGhphJsxLuwMeQvBu6OBAq046wDRLVH3qPtaHXa3lGCfcfoOs+DAf7J+t9Lw3CpOxASgG5Q+izRdrfeKAjSIaDU0Pok+3jE
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(52116014)(366016)(41320700013)(38350700014);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?jhhDg0gqWiOdM1caxRTfzoTZVNycTKDTGDjlVsS7KbDpZtXANuY3TMhlJ/0H?=
- =?us-ascii?Q?Xh9it1HDIQap1FKrOx3PDkIbDh+1e8f64/Rrh0R7VCeiw89BdbeiVr2wDQ0B?=
- =?us-ascii?Q?UhWFzCKd5J9KoDA8Bbdqs8qqpRgfR9Eo1JPlFnqymYByABn6hrBA/SXYsVbr?=
- =?us-ascii?Q?uCGPUSvFB0Y6pGkbUe2JvLsPPeRvoCJIOAVOW1mzE0GPgO9GTdRKZOMZOeZf?=
- =?us-ascii?Q?yX2T4shmjDkazB877QQjNxN8vCt/ke5DQhmIuXll145qDnBYPblbBDAofN35?=
- =?us-ascii?Q?KQLxaJe7YpNweJn6DxJLhTopif4XLEqZNF9CDhWUiPtPcC+B7MG5m4pk69L4?=
- =?us-ascii?Q?jMslvo/MuVvGmJCvg8yiPW1lNM6EPrU/yMDHdG2tVdhyCEKGh645qW82PYgd?=
- =?us-ascii?Q?1M+iC/T3l4l3aYdhISwvQmt9EpR26tNFr4sNt32nkmKHu9Qd6qvaJnTYjgVC?=
- =?us-ascii?Q?qmiTovUniSaK1FLQncNS9ZshHHpZoU1nQZMoK7Arqh3Gu4o5dKJK94rfJ5JX?=
- =?us-ascii?Q?Y/WFK/bD8hAxGqWaOUvvz7sMuooBAuKaCQPK3+JwmOtiF3RMBEO7O9fUNBVZ?=
- =?us-ascii?Q?L60d7xyBsh+/GI227RxHh8/MIP8sPbd64wouoFvre7PHz/2LeKuBv9L8ZZMt?=
- =?us-ascii?Q?1pJnFwf2Z1+hgtYXnl4gpoEOn8piZVy/0VOxiTfuQ97zatmZhKDcQ/TJakLJ?=
- =?us-ascii?Q?Jg3mKcEE5QNW3yf0Vk+ymv0e1RHVzErP4jBOLTwHFnsJtonobG0vZTyothAg?=
- =?us-ascii?Q?uHQZtVpePbQ+ghPjzIdFD7qsDrWkp+dk+H3u7+yg1lwGcbkaEwbUsV+yt0Br?=
- =?us-ascii?Q?aR3lFiGRjfELdiuGzCGeFk6CfeV33wDLlUFDjfAEtqfaDMkUMBrFMuu7rqn1?=
- =?us-ascii?Q?uAIYQVvoo7OBgkQWhVreUuU7oVe9ZSLWC3bJ+/YpAZl41BuyWVVhIRfdWHaq?=
- =?us-ascii?Q?lEQzUoqvuSEIuH4lzFH0WsiCjH+r2WfcsSTqDiUTSxR0rKgwNsTpbdJolNFr?=
- =?us-ascii?Q?F0K7eHx6Fz/pnXpPHhrJ84oRXPcQvFHW1qd4UZv/Tzqmy94S6a5cqlStnN+m?=
- =?us-ascii?Q?ltjcPhdesli9407KSO1gsE9WmUGsqMdhZaqYHvNgib7KhlaeYjunq3bIBGCy?=
- =?us-ascii?Q?mGF0u0uPZz5hi70N3ndW9Rtuhs8iXWelwiyLcsrLTnnKvETthyO3uVA6rTc9?=
- =?us-ascii?Q?qdByziiXaYCBYdLszABD/9rB+rW6Qk1Hd7CpIMy3QsNJPg4YLQbqtO1lJYg6?=
- =?us-ascii?Q?6bvNO+f2flL7OqWYP8YyYd3zmKr1Gw6A3vclsUHY/IAuRBL9iRsJ3Oi7nKi7?=
- =?us-ascii?Q?No+p6stMnOBdXe+ApcMkOLCzDfrSj2/gKC4/0QozReBAjDP8Hl6obULrcA0x?=
- =?us-ascii?Q?d5oTM9s5LlV/3rsvM65odK3cV9+FmgbSyMhB+G6RPGF8gRRqDsrjUvntlbZI?=
- =?us-ascii?Q?ZsIzqK8bG3syMyWWVhbE80xvy06ZDf0AnyaL+qBTviry5onW4ZPOX0J9WnRY?=
- =?us-ascii?Q?OwTJR6nPaMxQnIbkF8TZVEzNM7MSX0DM4x8kGgEuz5gd6C2vBIRVi2LH2dtx?=
- =?us-ascii?Q?DgimMbT+9SDVXVWGgyKramT+8Lqha7u4R/3nnKXRQkvzpO1ghhI6Jh/HRqty?=
- =?us-ascii?Q?wQ=3D=3D?=
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 856ea33f-38a2-4529-c719-08dcf6f420ea
-X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2024 01:59:16.6093 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ber3NviHJxmDLLHYjdEhvUUMinlmWVEmon9+7dK1CE3xrmaft81a1XOuerXwFHbU4EMbGvJkzX41bGLywZp8p6IPByU5sgau8cAWUG/tY3s=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1211
-X-Mailman-Approved-At: Mon, 28 Oct 2024 03:00:01 +0100
+Subject: Re: [PATCH] menu: fix the logic checking whether ESC key is pressed
+To: Weijie Gao <weijie.gao@mediatek.com>, Daniel Golle <daniel@makrotopia.org>
+Cc: u-boot@lists.denx.de,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
+ <trini@konsulko.com>, John Crispin <john@phrozen.org>
+References: <20241021005642.153511-1-weijie.gao@mediatek.com>
+ <Zx1Bpb7_9TEqBeyB@pidgin.makrotopia.org>
+ <37e445c29de0c1ef020d56a7d4da2916d692545b.camel@mediatek.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <37e445c29de0c1ef020d56a7d4da2916d692545b.camel@mediatek.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: k46s33ep9usk5qojc6t6jjzmys4yr94g
+X-MBO-RS-ID: a3b8fc51d9c26bf7390
+X-Rspamd-Queue-Id: 4XcHWl5Sqcz9shl
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,26 +93,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So JH7110 based boards can select their own DT at runtime.
-
-Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
----
- configs/starfive_visionfive2_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index e4ecf205e7..be9605d053 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -74,6 +74,8 @@ CONFIG_CMD_WDT=y
- CONFIG_CMD_TFTPPUT=y
- CONFIG_CMD_BOOTSTAGE=y
- CONFIG_OF_BOARD=y
-+CONFIG_OF_LIST="starfive/jh7110-starfive-visionfive-2-v1.3b starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-milkv-mars starfive/jh7110-pine64-star64"
-+CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_SECT_SIZE_AUTO=y
--- 
-2.43.2
-
+On 10/28/24 1:25 AM, Weijie Gao wrote:
+> Hi Daniel,
+> 
+> On Sat, 2024-10-26 at 20:23 +0100, Daniel Golle wrote:
+>> External email : Please do not click links or open attachments until
+>> you have verified the sender or the content.
+>>
+>>
+>> Hi!
+>>
+>> On Mon, Oct 21, 2024 at 08:56:42AM +0800, Weijie Gao wrote:
+>>> It's observed that the bootmenu on a serial console sometimes
+>>> incorrectly quitted with superfluous characters filled to command
+>>> line input:
+>>>
+>>>>   *** U-Boot Boot Menu ***
+>>>>
+>>>>       1. Startup system (Default)
+>>>>       2. Upgrade firmware
+>>>>       3. Upgrade ATF BL2
+>>>>       4. Upgrade ATF FIP
+>>>>       5. Load image
+>>>>       0. U-Boot console
+>>>>
+>>>>
+>>>>   Press UP/DOWN to move, ENTER to select, ESC to quit
+>>>> MT7988> [B
+>>>
+>>> Analysis shows it was caused by the wrong logic of bootmenu_loop:
+>>>
+>>> At first the bootmenu_loop received the first ESC char correctly.
+>>>
+>>> However, during the second call to bootmenu_loop, there's no data
+>>> in the UART Rx FIFO. Due to the low baudrate, the second char of
+>>> the down array key sequence hasn't be fully received.
+>>>
+>>> But bootmenu_loop just did a mdelay(10), and then treated it as a
+>>> single ESC key press event. It didn't even try tstc() again after
+>>> the 10ms timeout.
+>>>
+>>> This patch fixes this issue by letting bootmenu_loop check tstc()
+>>> twice.
+>>
+>> The patch helps to fix the problem when dealing with single key
+>> presses. However, apparently this is not enough to fix the issue in
+>> all situations. I still manage to drop into U-Boot console with an
+>> extra '[A' when simply holding down the arrow-up key for a while.
+>>
+> 
+> Holding down the arrow-up key for a while can cause the PC to send
+> large amounts of data to the UART Rx FIFO. Since filogic UARTs usually
+> have only 32 bytes FIFO, it's very easy to cause Rx FIFO overflow,
+> and then you'll still be dropped into U-Boot console due to data loss.
+> I've already confirmed this during solving this issue and this can only
+> be solved by increasing the baudrate.
+Does CONFIG_SERIAL_RX_BUFFER help with those overflows ?
