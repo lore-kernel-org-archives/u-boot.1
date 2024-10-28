@@ -4,157 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EFE2D33990
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 14:34:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBBF2D33990
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 15:17:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE70689164;
-	Mon, 28 Oct 2024 15:32:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id 4846089099;
+	Mon, 28 Oct 2024 16:17:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="Jn0tLvp4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bpv9jFnt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A251A8914F; Mon, 28 Oct 2024 15:32:23 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2071c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::71c])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 733F3890BF; Mon, 28 Oct 2024 16:17:45 +0100 (CET)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E8A789119
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 15:32:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31B8B8908F
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 16:17:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=A2Vw0sqJopRnkGqUL3jIFeopEcE7+YJkm4l0mZD6386ywvCLGOZC7gJ46Mifja53lHXzpXAvAT+fKT8ssFuvfk3Eyif05kx3JFP1AQDQwteaq/LVKgcCmB1l7LV5E0p+xLxcRykJuIGePWy6p90oI09rMQMIZXX5Rt+VHJZ8U/KUE358AFKe/1Wr47/oDpwnpLV6KA0yJtzWgzO7O2b8lPAdkClmAcNtm48OorY+yIgjL2ORqG4GSazvUrJiz+oUoXSHXB4BY2Vo3ZlP+5oKY9OmueSJuhp17cd1YW2VJKVWMp8ZHjjP4F1FB4XPkUVCIoyyi9NwulZAl8B9WPA6/Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6sFQt6zaAgVS93SAJlpQIvP1VFROgVlnzIEJ15h9BlA=;
- b=FwDnV6ktuN0DsaPM7LhK7/THQe9LTssCwnGYMBt8HHAoC3dsb/WscUH4w9Rh148NylLFm72eLI0VmNUjNJl01eKJ+pCQ9YK+HdowBBFKzMzrMmhhl9PQBZCxaaFjOZ1h+oqbXGpYTPRZ15U/b96rs4YYl8U4rZjMjjDbGpjBh4XLrO0SQ4vDMiNLo/YvVJtTV/HtZ1jA7AbvTBBwV21gigYhrBa5oCA6H/24jiQRpAuzV21oTm2kxM7wGdYVvCpmXHhKhZ6pXMU1cn0y2uyVA638iFoY4dxKWwM/ZTV22x4rxUcexE6XY7dxF7R6cZRyt+tk6TXAvuPyfRTrb+RxMA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6sFQt6zaAgVS93SAJlpQIvP1VFROgVlnzIEJ15h9BlA=;
- b=Jn0tLvp4Cs1J5TEWpD7+nFQbbWjRUF549erQGDbM+x24Cdv47UgLLST4p2s++WYuyRsimNUgzyWJBej9PXgnk6GbQFiSrn7tUUYTi+Lfj/95SuTpn4VXLbhuH+rRv/0rb8e43YUwofDHXtFI6xBhEDGtKRbg4qUUsMuUZ8lozeb9DcTsnklW0fgnVru1P4vUT9ZpDD5fMUbO99DmsU+rnLIEZ7MNYa9sCBrNYf4QpRWKEGFDCfHJLY+39ofSigQRXN2Luo6yCAnWqtBmwb0x1fvC/1ux/X5T7B5ANp/ARTNWCw5vhm6fFyJn7FPdhJ8lG6bRblz63lI0lAniInFFwA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by GV1PR08MB8059.eurprd08.prod.outlook.com (2603:10a6:150:95::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.25; Mon, 28 Oct
- 2024 14:32:16 +0000
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.8093.024; Mon, 28 Oct 2024
- 14:32:16 +0000
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-7b150dc7bc0so344773385a.1
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 08:17:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1730128662; x=1730733462; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZrG9gi0mR/UsZp2TctTK5wRRqz/jvvjyAh90v8t3H/s=;
+ b=bpv9jFnts3ytBNFQkan74SlD8Oge6rzKzp1V81TdDKy3In5DpVtx1EQqSMNSqEFMSk
+ +d39vPvtKp1QQPWyMX62oeJVYKGP1Irk43FATcNzsN8ueJPplvWLMA3BzzCanPERtJXu
+ 7nkC51xZMdvv4Py6bR6ZZ8etUbMAccBkfDki0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730128662; x=1730733462;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZrG9gi0mR/UsZp2TctTK5wRRqz/jvvjyAh90v8t3H/s=;
+ b=GO1YB+6aNwVOaucc1ez07YXlsrblxKwR7vzaGfWpjSkSUjq+mzabPAGuxgJSSRg3Ll
+ MhaigXpSurg8thSRsmV5pMZDnlD7fA4BGybIB3yWudeeB6ALxfk7mtn8zfA1PeYDCDg+
+ 1aLMvVvwQOoYKZ9UnWdgaGKta/R2Utt5GD/0YSYgwK1gM3kUqxWt+qJu+6kU0HvyIbV6
+ MjuDawTp4PoOTERzqJFC+sjea8B+nH2vFL/nyLp0cZUxJPX8Nz9dBLLWiE/qh7gI/Gal
+ r1CfCAewuox3Vygo2Ya+Txm5kgTvj6A/5x9g4h3D1s5s0XFS9L5uycGitsiLv1BWgaUs
+ eXuA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVWYFqwKw5w4vNEL2cyQuNOyyvgoZae7Pqn3erG4L4+9wQL2nddZ7JDylAuwNO1a0G0RJiNBP0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxddeJFgp5fef9lz2R5psPrI6QSVVdyeggUOjAHwCElea21WmIa
+ aKQZvdRkn7amDwXg/BQrAKmXYynSZQ9LtTsaO5+5DjX+jmWlYWDNKgjJiVPfraI=
+X-Google-Smtp-Source: AGHT+IFIAEqRAA0H15GY+JoadesBSQPRoFSDlTg95YfAh3IkF2d0mzKhKnxlt6WcdaOFd80fLmhoIg==
+X-Received: by 2002:a05:620a:4714:b0:7b1:8cda:6f4e with SMTP id
+ af79cd13be357-7b193ed840bmr1292291385a.5.1730128661926; 
+ Mon, 28 Oct 2024 08:17:41 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b18d3480d7sm326858285a.123.2024.10.28.08.17.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Oct 2024 08:17:41 -0700 (PDT)
+Date: Mon, 28 Oct 2024 09:17:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sean Anderson <seanga2@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
- Baruch Siach <baruch@tkos.co.il>, Christian Marangi <ansuelsmth@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v12 12/13] net/httpd: add httpd common code
-Date: Mon, 28 Oct 2024 17:31:42 +0300
-Message-ID: <20241028143143.1807305-13-mikhail.kshevetskiy@iopsys.eu>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241028143143.1807305-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20241028143143.1807305-1-mikhail.kshevetskiy@iopsys.eu>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0101.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:9::27) To GV2PR08MB8121.eurprd08.prod.outlook.com
- (2603:10a6:150:7d::22)
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v8 2/8] efi_loader: Add a test app
+Message-ID: <20241028151738.GO4959@bill-the-cat>
+References: <20241022120032.196311-1-sjg@chromium.org>
+ <20241022120032.196311-3-sjg@chromium.org>
+ <9f322139-ad6d-494d-879b-eab3211b874b@gmx.de>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|GV1PR08MB8059:EE_
-X-MS-Office365-Filtering-Correlation-Id: c0f1240f-be96-405c-1436-08dcf75d520e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|52116014|376014|366016|1800799024|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?0zEoYKZss3T2dDFE/tq3orn0rhpcsO7O2UXRoV7+nAdYqguBg8ZjX+s44/mc?=
- =?us-ascii?Q?Z+QRNrAwsV+hwFNgIyNBlsVAiSE62rJU10l53PeVPXL150O5wNsiw0xXBXCJ?=
- =?us-ascii?Q?2CL0AgbbQfAwgiUtq9eFYddWk01PGOtijeiYYNxLWKkBYz5VOPVhqrA3xKL0?=
- =?us-ascii?Q?vYv5w9/zF2RtKX3KZDJdKHIRB0sTUsyramO4i+5SLDcm11Rs4GV7bPo1ubNq?=
- =?us-ascii?Q?0zZzBZtuR1pUQbkrBRlgYMKulkMU79hh0Z1Uek0P8W+nh8eRdHkiY7YdcEzx?=
- =?us-ascii?Q?yul43I0Oe1mt8HvVhMyWswMy8wAOiwMKOTbt7KPxcmDLRCb0MPIksL3QGeHa?=
- =?us-ascii?Q?hKQjCLMvzrqYvWAxSBqYPEf9/jmvQhpjl7dxle33zZf/sqvJ8o74U4PWXAOd?=
- =?us-ascii?Q?4Wq+/eGkt7+RbUk0kE9Th8vak6hqbkNFk0vzeARadd1UBmwNfljlrszDdvlS?=
- =?us-ascii?Q?xQ/fxY9++CYvMdp/d46Nk6fKX9pxNTeXMVHsveiQHXAKCU4z6A7NfvIwMYVh?=
- =?us-ascii?Q?LX7EXJHAMwcVQ54llrGx/ii7S3CFFAAmrzm5wJP2sPgE65tZ3DB503YEAcle?=
- =?us-ascii?Q?ZARzo3yI+iu3d8UOei8CAkDGgfGP8jzdyw8OOBd7Dm8fNrwoCgWSJH2Ai40t?=
- =?us-ascii?Q?NLzvS0/zG3AZ1IWxa/AZ+Ne42oT6xJGL5eBX10ix0F1VfEfheLTvQ3jeAtqg?=
- =?us-ascii?Q?Q1XwC2xNfrjCwI0VYhsaTLBqfjDl4GrUy7WaCszzQLOQ12v6fLv3m/eGSLP0?=
- =?us-ascii?Q?a1EDvNk4hDTHhEEWUPLFdNA5HvPvAZn59JdPz+50rSgYxbGg8RrVt/iodUCX?=
- =?us-ascii?Q?4Gm1Hwe5HnOriCmMg0STnxLgx7+RokfNjVO7haRnHcvIAoxJ07G5/AnzymH/?=
- =?us-ascii?Q?53NgiIbV/OXFEw0svxPJlDK4ISBnHDcIvoxiSAr0fF5Feb9qdEo8Jba7tVw1?=
- =?us-ascii?Q?53SRb9S6EvUmvKaPHOjLSD514fP3cFDgmz9h3NGKdT0Z7ANwp3/xkA87esFo?=
- =?us-ascii?Q?MzVGG87b+zNGMQCZcO1AYi00JxW7AIcnVOFMtLPsd9KPoZQ3kfDPIXAdSLE9?=
- =?us-ascii?Q?qICdGAfPHu3u1KSq4T/XtnrT3D85C1V0Gz0NZEHOeLoeO8IQ9SdlpSw96yUW?=
- =?us-ascii?Q?KWZtnl7qPDY9VP4wjJX5oqGoWGEaOR+ODzupBnFAgNyFcVL0rmfWV89HqCec?=
- =?us-ascii?Q?W/Vyof5Z9bWDsocZ7s/EL+STd6AKdw0NCkyPg0W4vh28BcgWLMDxwYa/intu?=
- =?us-ascii?Q?agNdSREL7Gfb4ayXbzDS+lBhwwsIwwZegClmr3AI+t6doO0nosygBce8fvPb?=
- =?us-ascii?Q?8eXqHKUEQ7zuYg5uS5dG2cZLBt1HHZsP/qDCVhnKzp+T6VNAPrS/lH9SJ9Ts?=
- =?us-ascii?Q?tUvjFFLGj7Kt+RBexzIHxKwNMYwN?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(52116014)(376014)(366016)(1800799024)(921020)(38350700014);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gcSei4qkOTYqAeUMnJ+vVqbr03JQSiv+xvLbg2g1Qqh5UzD5kpziOEaa2RQ6?=
- =?us-ascii?Q?zrofp+NUiZRu+zqLViPcIU3E6YZwN11XyWAAx79PF4txCfJX7TyY1GQ1+159?=
- =?us-ascii?Q?e6U9f0PpaGbc7zSuxKWbRFzAQaq8VIOiErI2tF+RApjGQnYAWcDf6x0YdpmB?=
- =?us-ascii?Q?36oGP6AygCvhtS0rZJYfAQegudLD+0Lb7y+2WXm0zX1MjQg2JsUaZ7CKqPt+?=
- =?us-ascii?Q?X56C6Oi4hD1XvjVng5CMBeI2k6dvtA4lDLkIzUWvtzz3XmtJ+mdKYQjseH/+?=
- =?us-ascii?Q?dux7CyrWTnJN1T54lLwU6UxiGDplLSWeX7g2pl3pi4NoLBEzNzcTFwSCjNhv?=
- =?us-ascii?Q?Yc3khA6fwjPEB7UqwXfxEvdMVU98D1VQ8ACEWSoz4RH1uN3n6SVkAJaheuAU?=
- =?us-ascii?Q?/XddhClquFAfe7VX7tuzkpuOwAnVgsqJQNxGtyebk2QhMIRNsdv1uzevSVfs?=
- =?us-ascii?Q?SIp3XJQJBtumnKH/o+lEpY9Dfv3qoovE5T4ZuaK5EEJiUcuX9v/JJV72K7xO?=
- =?us-ascii?Q?zBf40g5rgSLDUGxfO6Jd2ySOQ5iLR/t9Ogk8QzKIpyE2OJDxLUi3ZDYupIpU?=
- =?us-ascii?Q?Cl1BHJMWjq/SXa3/zAr4U9tgJOL8k6mWIBS4tCdNRvjdyeFd94an1PH1BIkQ?=
- =?us-ascii?Q?Amu+jv9BR2AVT9C0IB2Z4S1wDrY+l6B+zbVEmWsL7art8TuWlz6WTRVbO4X2?=
- =?us-ascii?Q?u8xfUqA3VPKeobf2eYnfrK/NpQ9YobRMnmMwZT2xzqsFnr6SE+o8yxY7sChM?=
- =?us-ascii?Q?cB1mgSbrBfZ9owTBCiK6MAbEEaDcD2ItHn+3ueLPkwrmbyDjQlhU+yZf/cUP?=
- =?us-ascii?Q?sl2l7ooFipmR68wXSLTWk0sxOBW+wxbTF3Lna2/GV8np/Femjv9F9vk7hlqh?=
- =?us-ascii?Q?zK2unIdkrA821p3c6i3Jac03mScgGRqCyWk4xCVVJjzMfZZt8TuLxDrM2QrR?=
- =?us-ascii?Q?gWFNaeoI2BwYQEkdg/9hIwSR7rubbL5PJpBX5YPuufCmSyDZjqe8YJb5qr8q?=
- =?us-ascii?Q?cNO0KjoryK2pgeqKdSqSFp2cJ26t2FKbFzoPoVJAWKzWUWWR4IRX6tr5aXy4?=
- =?us-ascii?Q?jhXJewKO8B5xivVoWYX+CcDi/G2ZigBE/r23YrvgTzsqadELNWwXmINFRTnV?=
- =?us-ascii?Q?OYFLKNeqo8jIBoCP0iHt5/iRU9JN7oYnxB42yHVq05dGiwzhQNSgVN7yKDwB?=
- =?us-ascii?Q?9HyZKKAjIZ7pbswc9/er4FhZFz4QqXGPh7+vE1sRv197mq6KLE4K8OR3semu?=
- =?us-ascii?Q?omaVfusI9VCBx7msQiqH0OIQVG2lalm4ZCWcAcCPwk7gpDnzjTXWf6T+X4MD?=
- =?us-ascii?Q?6YWLzTGtId7/0gyW9Ozhq5vjMTzwDf0u1TQbcWLxqAu0ek7yW5ZYil1BAoxp?=
- =?us-ascii?Q?LdGVky/ni4kKJtnBw/fOrthngyDWhswEVcQ80qeuEintuD2PMi5t0JwM8fz0?=
- =?us-ascii?Q?8QqzV27eVGaKlfiuoxQrHLK8A6zLHfqQVLRdeLMrFkkNEy6QQ1a9QfPBz6X3?=
- =?us-ascii?Q?FG4wcKUUKJ+eUGQZBjAzihBXYJuP66iZRJf+jFhb7aFb7lwdZ39vjBbuXMkF?=
- =?us-ascii?Q?bnppa90yLr39a4K4TgrYgjv8qPOBU0I8p68tuTyw+RZe/82xAh2s5YMhA9b3?=
- =?us-ascii?Q?/d1c3QYNYBSJfTHO9ea5e2o=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: c0f1240f-be96-405c-1436-08dcf75d520e
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2024 14:32:16.2478 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FbDMz1yR+ijxCwQWHjK2txo5pPdjfPjgt5KTVoe4Q6c9USUNUkANKePY5jVkdj+K2hwam12iOtbwTCzX0mDuyW/CNsqUmQuK32j0SI49fko=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB8059
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6q65uNTnqvpddeNd"
+Content-Disposition: inline
+In-Reply-To: <9f322139-ad6d-494d-879b-eab3211b874b@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,922 +97,185 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds HTTP/1.1 compatible web-server that can be used
-by other. Server supports GET, POST, and HEAD requests. On client
-request it will call user specified GET/POST callback. Then results
-will be transmitted to client.
 
-The following restrictions exist on the POST request
-at the moment:
-  * only multipart/form-data with a single file object
-  * object will be stored to a memory area specified in
-    image_load_addr variable
+--6q65uNTnqvpddeNd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- include/net-legacy.h |   2 +-
- include/net/httpd.h  |  71 +++++
- net/Kconfig          |  14 +
- net/Makefile         |   1 +
- net/httpd.c          | 735 +++++++++++++++++++++++++++++++++++++++++++
- net/net.c            |   6 +
- 6 files changed, 828 insertions(+), 1 deletion(-)
- create mode 100644 include/net/httpd.h
- create mode 100644 net/httpd.c
+On Mon, Oct 28, 2024 at 06:59:10AM +0100, Heinrich Schuchardt wrote:
+> On 10/22/24 14:00, Simon Glass wrote:
+> > Add a simple app to use for testing. This is intended to do whatever it
+> > needs to for testing purposes. For now it just prints a message and
+> > exits boot services.
+> >=20
+> > There was a considerable amount of discussion about whether it is OK to
+> > call exit-boot-services and then return to U-Boot. This is not normally
+> > done in a real application, since exit-boot-services is used to
+> > completely disconnect from U-Boot. However, since this is a test, we
+> > need to check the results of running the app, so returning is necessary.
+> > It works correctly and it provides a nice model of how to test the EFI
+> > code in a simple way.
+> >=20
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >=20
+> > (no changes since v7)
+> >=20
+> > Changes in v7:
+> > - Update commit message
+> >=20
+> >   lib/efi_loader/Kconfig   | 10 ++++++
+> >   lib/efi_loader/Makefile  |  1 +
+> >   lib/efi_loader/testapp.c | 68 ++++++++++++++++++++++++++++++++++++++++
+> >   3 files changed, 79 insertions(+)
+> >   create mode 100644 lib/efi_loader/testapp.c
+> >=20
+> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > index 69b2c9360d8..6ced29da719 100644
+> > --- a/lib/efi_loader/Kconfig
+> > +++ b/lib/efi_loader/Kconfig
+> > @@ -565,6 +565,16 @@ config BOOTEFI_HELLO_COMPILE
+> >   	  No additional space will be required in the resulting U-Boot binary
+> >   	  when this option is enabled.
+> >=20
+> > +config BOOTEFI_TESTAPP_COMPILE
+> > +	bool "Compile an EFI test app for testing"
+> > +	default y
+> > +	help
+> > +	  This compiles an app designed for testing. It is packed into an ima=
+ge
+> > +	  by the test.py testing frame in the setup_efi_image() function.
+> > +
+> > +	  No additional space will be required in the resulting U-Boot binary
+> > +	  when this option is enabled.
+> > +
+> >   endif
+> >=20
+> >   source "lib/efi/Kconfig"
+> > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> > index 00d18966f9e..87131ab911d 100644
+> > --- a/lib/efi_loader/Makefile
+> > +++ b/lib/efi_loader/Makefile
+> > @@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) +=3D initrddump
+> >   ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+> >   apps-y +=3D dtbdump
+> >   endif
+> > +apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) +=3D testapp
+> >=20
+> >   obj-$(CONFIG_CMD_BOOTEFI_HELLO) +=3D helloworld_efi.o
+> >   obj-$(CONFIG_EFI_BOOTMGR) +=3D efi_bootmgr.o
+> > diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
+> > new file mode 100644
+> > index 00000000000..feb444c92e9
+> > --- /dev/null
+> > +++ b/lib/efi_loader/testapp.c
+> > @@ -0,0 +1,68 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+>=20
+> This is not a valid SPDX identifier. Please, use GPL-2.0-or-later.
 
-diff --git a/include/net-legacy.h b/include/net-legacy.h
-index fdb6d2abb85..26f3cf468a8 100644
---- a/include/net-legacy.h
-+++ b/include/net-legacy.h
-@@ -305,7 +305,7 @@ extern int		net_restart_wrap;	/* Tried all network devices */
- enum proto_t {
- 	BOOTP, RARP, ARP, TFTPGET, DHCP, DHCP6, PING, PING6, DNS, NFS, CDP,
- 	NETCONS, SNTP, TFTPSRV, TFTPPUT, LINKLOCAL, FASTBOOT_UDP, FASTBOOT_TCP,
--	WOL, UDP, NCSI, WGET, NETCAT_LOAD, NETCAT_SAVE, RS
-+	WOL, UDP, NCSI, WGET, NETCAT_LOAD, NETCAT_SAVE, HTTPD, RS
- };
- /* Indicates whether the file name was specified on the command line */
- extern bool	net_boot_file_name_explicit;
-diff --git a/include/net/httpd.h b/include/net/httpd.h
-new file mode 100644
-index 00000000000..ef6c37ece7c
---- /dev/null
-+++ b/include/net/httpd.h
-@@ -0,0 +1,71 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * httpd support header file
-+ * Copyright (C) 2024 IOPSYS Software Solutions AB
-+ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-+ *
-+ */
-+#ifndef __NET_HTTPD_COMMON_H__
-+#define __NET_HTTPD_COMMON_H__
-+
-+struct tcp_stream;
-+
-+struct http_reply {
-+	int		code;
-+	const char	*code_msg;
-+	const char	*data_type;
-+	void		*data;
-+	u32		len;
-+};
-+
-+struct httpd_post_data {
-+	const char	*name;
-+	const char	*filename;
-+	void		*addr;
-+	u32		size;
-+};
-+
-+enum httpd_req_check {
-+	HTTPD_REQ_OK,
-+	HTTPD_BAD_URL,
-+	HTTPD_BAD_REQ,
-+	HTTPD_CLNT_RST
-+};
-+
-+struct httpd_config {
-+	enum net_loop_state	(*on_stop)(void);
-+	void			(*on_req_end)(void *req_id);
-+
-+	enum httpd_req_check	(*pre_get)(void *req_id, const char *url);
-+	enum httpd_req_check	(*pre_post)(void *req_id, const char *url,
-+					    struct httpd_post_data *post);
-+
-+	struct http_reply *	(*get)(void *req_id, const char *url);
-+	struct http_reply *	(*post)(void *req_id, const char *url,
-+					struct httpd_post_data *post);
-+
-+	struct http_reply	*error_400;
-+	struct http_reply	*error_404;
-+};
-+
-+/**
-+ * httpd_setup() - configure the webserver
-+ */
-+void httpd_setup(struct httpd_config *config);
-+
-+/**
-+ * httpd_stop() - start stopping of the webserver
-+ */
-+void httpd_stop(void);
-+
-+/**
-+ * httpd_start() - start the webserver
-+ */
-+void httpd_start(void);
-+
-+/**
-+ * httpd_get_tcp_stream() - get underlying tcp stream
-+ */
-+struct tcp_stream *httpd_get_tcp_stream(void *req_id);
-+
-+#endif /* __NET_HTTPD_COMMON_H__ */
-diff --git a/net/Kconfig b/net/Kconfig
-index 76ab7d91eeb..a7d794f259d 100644
---- a/net/Kconfig
-+++ b/net/Kconfig
-@@ -210,6 +210,20 @@ config PROT_TCP_SACK
- 	  This option should be turn on if you want to achieve the fastest
- 	  file transfer possible.
- 
-+config HTTPD_COMMON
-+	bool "HTTP server common code"
-+	depends on PROT_TCP
-+	help
-+	  HTTP/1.1 compatible web-server common code. It supports standard
-+	  GET/POST requests. User MUST provide a configuration to the
-+	  web-server. On client request web-server will call user specified
-+	  GET/POST callback. Then results will be transmitted to the client.
-+	  The following restricions on the POST request are present at the
-+	  moment:
-+	    * only mulipart/form-data with a single binary object
-+	    * object will be stored to a memory area specified in
-+	      image_load_addr variable
-+
- config IPV6
- 	bool "IPv6 support"
- 	help
-diff --git a/net/Makefile b/net/Makefile
-index 4cf13efe17c..e9e91dc8cce 100644
---- a/net/Makefile
-+++ b/net/Makefile
-@@ -31,6 +31,7 @@ obj-$(CONFIG_PROT_UDP) += udp.o
- obj-$(CONFIG_PROT_TCP) += tcp.o
- obj-$(CONFIG_CMD_WGET) += wget.o
- obj-$(CONFIG_CMD_NETCAT) += netcat.o
-+obj-$(CONFIG_HTTPD_COMMON) += httpd.o
- 
- # Disable this warning as it is triggered by:
- # sprintf(buf, index ? "foo%d" : "foo", index)
-diff --git a/net/httpd.c b/net/httpd.c
-new file mode 100644
-index 00000000000..6fe1b828492
---- /dev/null
-+++ b/net/httpd.c
-@@ -0,0 +1,735 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * httpd support driver
-+ * Copyright (C) 2024 IOPSYS Software Solutions AB
-+ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-+ */
-+
-+#include <command.h>
-+#include <display_options.h>
-+#include <env.h>
-+#include <image.h>
-+#include <malloc.h>
-+#include <mapmem.h>
-+#include <net.h>
-+#include <version.h>
-+#include <net/httpd.h>
-+#include <net/tcp.h>
-+
-+#define HTTP_PORT		80
-+
-+#define MAX_URL_LEN		128
-+#define MAX_BOUNDARY_LEN	80
-+#define MAX_MPART_NAME_LEN	80
-+#define MAX_FILENAME_LEN	256
-+#define BUFFER_LEN		2048
-+
-+enum http_req_state {
-+	ST_REQ_LINE = 0,
-+	ST_REQ_HDR,
-+	ST_REQ_MPBOUNDARY,
-+	ST_REQ_MPART,
-+	ST_REQ_MPFILE,
-+	ST_REQ_MPEND,
-+	ST_REQ_DONE,
-+};
-+
-+enum http_method {
-+	HTTP_UNKNOWN = -1,
-+	HTTP_GET,
-+	HTTP_POST,
-+	HTTP_HEAD,
-+	HTTP_OPTIONS,
-+};
-+
-+/**
-+ * struct httpd_priv - private data of HTTP request processing
-+ * @req_state:		state of the HTTP request processing
-+ * @tcp:		TCP connection of this HTTP request
-+ *
-+ * Data collected from the HTTP request and request header
-+ * ---------------------------------------------------------------------------
-+ * @method:		HTTP request method
-+ * @url:		HTTP request URL
-+ * @version_major:	Major version number of HTTP protocol
-+ * @version_minor:	Minor version number of HTTP protocol
-+ * @hdr_len:		Length of the HTTP request header
-+ *
-+ * Data for the multipart/form-data POST requests
-+ * ---------------------------------------------------------------------------
-+ * @post_fstart:	File data beginning offset (from start of tcp rx stream)
-+ * @post_flen:		Length of the passed file
-+ * @post_fname:		Name of the passed file (see 'filename' tag of the
-+ *			  'Content-Disposition:' line of multipart/form-data
-+ *			  body)
-+ * @post_name:		(see 'name' tag of the 'Content-Disposition:' line
-+ *			  of multipart/form-data body)
-+ * @post_boundary:	The boundary of multipart/form-data body
-+ *
-+ * Data returned by the HTTP get/post callbacks or error handler
-+ * ---------------------------------------------------------------------------
-+ * @reply_code:		HTTP reply code
-+ * @reply_fstart:	End of the HTTP reply header and start of the reply
-+ *			  file data (offset from start of tcp tx stream).
-+ * @reply_flen:		Length of reply file. Zero if no file needs to be sent
-+ *			  in reply.
-+ * @reply_fdata:	Pointer to reply file data. NULL if no file needs to
-+ *			  sent in reply.
-+ *
-+ * @rx_processed:	Currect reading position in TCP stream
-+ * @buf:		Buffer for HTTP request/reply headers. Incoming file
-+ *			  data will be stored in the memory starting from
-+ *			  ${loadaddr} address.
-+ */
-+struct httpd_priv {
-+	enum http_req_state	req_state;
-+	struct tcp_stream	*tcp;
-+
-+	enum http_method	method;
-+	char			url[MAX_URL_LEN];
-+	u32			version_major;
-+	u32			version_minor;
-+	u32			hdr_len;
-+
-+	u32			post_fstart;
-+	u32			post_flen;
-+	char			post_fname[MAX_FILENAME_LEN];
-+	char			post_name[MAX_MPART_NAME_LEN];
-+	char			post_boundary[MAX_BOUNDARY_LEN];
-+
-+	int			reply_code;
-+	u32			reply_fstart;
-+	u32			reply_flen;
-+	void			*reply_fdata;
-+
-+	u32			rx_processed;
-+	char			buf[BUFFER_LEN];
-+};
-+
-+static struct http_reply options_reply = {
-+	.code      = 200,
-+	.code_msg  = "OK",
-+	.data_type = "text/plain",
-+	.data      = NULL,
-+	.len       = 0
-+};
-+
-+static int stop_server;
-+static int tsize_num_hash;
-+
-+static struct httpd_config *cfg;
-+
-+static void show_block_marker(u32 offs, u32 size)
-+{
-+	int cnt;
-+
-+	if (offs > size)
-+		offs = size;
-+
-+	cnt = offs * 50 / size;
-+	while (tsize_num_hash < cnt) {
-+		putc('#');
-+		tsize_num_hash++;
-+	}
-+
-+	if (cnt == 50)
-+		putc('\n');
-+}
-+
-+struct tcp_stream *httpd_get_tcp_stream(void *req_id)
-+{
-+	return ((struct httpd_priv *)req_id)->tcp;
-+}
-+
-+static void tcp_stream_on_closed(struct tcp_stream *tcp)
-+{
-+	struct httpd_priv *priv = tcp->priv;
-+
-+	if (priv->req_state != ST_REQ_DONE &&
-+	    priv->req_state >= ST_REQ_MPFILE) {
-+		printf("\nHTTPD: transfer was terminated\n");
-+	}
-+
-+	if (cfg->on_req_end)
-+		cfg->on_req_end(tcp->priv);
-+
-+	free(tcp->priv);
-+
-+	if (stop_server)
-+		net_set_state(cfg->on_stop ? cfg->on_stop() : NETLOOP_SUCCESS);
-+}
-+
-+static void http_make_reply(struct httpd_priv *priv, struct http_reply *reply,
-+			    int head_only)
-+{
-+	int offs = 0;
-+
-+	if (priv->version_major >= 1) {
-+		offs = snprintf(priv->buf, sizeof(priv->buf),
-+				"HTTP/%d.%d %d %s\r\n"
-+				"Server: %s\r\n"
-+				"Connection: close\r\n"
-+				"Cache-Control: no-store\r\n"
-+				"Content-Type: %s\r\n"
-+				"Content-Length: %d\r\n",
-+				priv->version_major, priv->version_minor,
-+				reply->code, reply->code_msg, U_BOOT_VERSION,
-+				reply->data_type,
-+				head_only ? 0 : reply->len);
-+		if (priv->method == HTTP_OPTIONS)
-+			offs += snprintf(priv->buf + offs, sizeof(priv->buf) - offs,
-+					"Access-Control-Allow-Methods: GET, HEAD, OPTIONS, POST\r\n");
-+		offs += snprintf(priv->buf + offs, sizeof(priv->buf) - offs,
-+				"\r\n");
-+	}
-+
-+	priv->reply_code = reply->code;
-+	priv->reply_fstart = offs;
-+	if (!head_only) {
-+		priv->reply_flen = reply->len;
-+		priv->reply_fdata = reply->data;
-+	}
-+}
-+
-+static enum httpd_req_check http_parse_line(struct httpd_priv *priv, char *line)
-+{
-+	char			*url, *version, *data, *end;
-+	u32			len, tmp;
-+	enum httpd_req_check	ret;
-+	struct httpd_post_data	post;
-+
-+	switch (priv->req_state) {
-+	case ST_REQ_LINE:
-+		if (!strncasecmp(line, "GET ", 4)) {
-+			priv->method = HTTP_GET;
-+			url = line + 4;
-+		} else if (!strncasecmp(line, "POST ", 5)) {
-+			priv->method = HTTP_POST;
-+			url = line + 5;
-+		} else if (!strncasecmp(line, "HEAD ", 5)) {
-+			priv->method = HTTP_HEAD;
-+			url = line + 5;
-+		} else if (!strncasecmp(line, "OPTIONS ", 8)) {
-+			priv->method = HTTP_OPTIONS;
-+			url = line + 8;
-+		} else {
-+			/* unknown request */
-+			return HTTPD_CLNT_RST;
-+		}
-+
-+		version = strstr(url, " ");
-+		if (!version) {
-+			/* check for HTTP 0.9 */
-+			if (*url != '/' || priv->method != HTTP_GET)
-+				return HTTPD_CLNT_RST;
-+
-+			if (strlen(url) >= MAX_URL_LEN)
-+				return HTTPD_CLNT_RST;
-+
-+			if (cfg->pre_get) {
-+				ret = cfg->pre_get(priv, url);
-+				if (ret != HTTPD_REQ_OK)
-+					return ret;
-+			}
-+
-+			priv->req_state = ST_REQ_DONE;
-+			priv->hdr_len = strlen(line) + 2;
-+			priv->version_major = 0;
-+			priv->version_minor = 9;
-+			strcpy(priv->url, url);
-+			return HTTPD_REQ_OK;
-+		}
-+
-+		if (strncasecmp(version + 1, "HTTP/", 5)) {
-+			/* version is required for HTTP >= 1.0 */
-+			return HTTPD_CLNT_RST;
-+		}
-+
-+		*version++ = '\0';
-+		version += strlen("HTTP/");
-+
-+		priv->version_major = dectoul(version, &end);
-+		switch (*end) {
-+		case '\0':
-+			priv->version_minor = 0;
-+			break;
-+		case '.':
-+			priv->version_minor = dectoul(end + 1, &end);
-+			if (*end == '\0')
-+				break;
-+			fallthrough;
-+		default:
-+			/* bad version format */
-+			return HTTPD_CLNT_RST;
-+		}
-+
-+		if (priv->version_major < 1) {
-+			/* bad version */
-+			return HTTPD_CLNT_RST;
-+		}
-+
-+		if (priv->version_major > 1 || priv->version_minor > 1) {
-+			/* We support HTTP/1.1 or early standards only */
-+			priv->version_major = 1;
-+			priv->version_minor = 1;
-+		}
-+
-+		if (*url != '/')
-+			return HTTPD_CLNT_RST;
-+
-+		if (strlen(url) >= MAX_URL_LEN)
-+			return HTTPD_CLNT_RST;
-+
-+		priv->req_state = ST_REQ_HDR;
-+		strcpy(priv->url, url);
-+		return HTTPD_REQ_OK;
-+
-+	case ST_REQ_HDR:
-+		if (*line == '\0') {
-+			priv->hdr_len = priv->rx_processed + 2;
-+			switch (priv->method) {
-+			case HTTP_GET:
-+			case HTTP_HEAD:
-+				if (cfg->pre_get) {
-+					ret = cfg->pre_get(priv, priv->url);
-+					if (ret != HTTPD_REQ_OK)
-+						return ret;
-+				}
-+				fallthrough;
-+
-+			case HTTP_OPTIONS:
-+				priv->req_state = ST_REQ_DONE;
-+				return HTTPD_REQ_OK;
-+
-+			default:
-+				break;
-+			}
-+
-+			if (*priv->post_boundary != '\0') {
-+				priv->req_state = ST_REQ_MPBOUNDARY;
-+				return HTTPD_REQ_OK;
-+			}
-+			/* NOT multipart/form-data POST request */
-+			return HTTPD_BAD_REQ;
-+		}
-+
-+		if (priv->method != HTTP_POST)
-+			return HTTPD_REQ_OK;
-+
-+		len = strlen("Content-Length: ");
-+		if (!strncasecmp(line, "Content-Length: ", len)) {
-+			data = line + len;
-+			priv->post_flen = simple_strtol(data, &end, 10);
-+			if (*end != '\0') {
-+				/* bad Content-Length string */
-+				return HTTPD_BAD_REQ;
-+			}
-+			return HTTPD_REQ_OK;
-+		}
-+
-+		len = strlen("Content-Type: ");
-+		if (!strncasecmp(line, "Content-Type: ", len)) {
-+			data = strstr(line + len, " boundary=");
-+			if (!data) {
-+				/* expect multipart/form-data format */
-+				return HTTPD_BAD_REQ;
-+			}
-+
-+			data += strlen(" boundary=");
-+			if (strlen(data) >= sizeof(priv->post_boundary)) {
-+				/* no space to keep boundary */
-+				return HTTPD_BAD_REQ;
-+			}
-+
-+			strcpy(priv->post_boundary, data);
-+			return HTTPD_REQ_OK;
-+		}
-+
-+		return HTTPD_REQ_OK;
-+
-+	case ST_REQ_MPBOUNDARY:
-+		if (*line == '\0')
-+			return HTTPD_REQ_OK;
-+		if (line[0] != '-' || line[1] != '-' ||
-+		    strcmp(line + 2, priv->post_boundary)) {
-+			/* expect boundary line */
-+			return HTTPD_BAD_REQ;
-+		}
-+		priv->req_state = ST_REQ_MPART;
-+		return HTTPD_REQ_OK;
-+
-+	case ST_REQ_MPART:
-+		if (*line == '\0') {
-+			if (*priv->post_name == '\0')
-+				return HTTPD_BAD_REQ;
-+
-+			priv->post_fstart = priv->rx_processed + 2;
-+			priv->post_flen -= priv->post_fstart - priv->hdr_len;
-+			/* expect: "\r\n--${boundary}--\r\n", so strlen() + 8 */
-+			priv->post_flen -= strlen(priv->post_boundary) + 8;
-+
-+			if (!priv->post_flen) {
-+				/* do not allow zero sized uploads */
-+				return HTTPD_BAD_REQ;
-+			}
-+
-+			if (cfg->pre_post) {
-+				post.addr     = NULL;
-+				post.name     = priv->post_name;
-+				post.filename = priv->post_fname;
-+				post.size     = priv->post_flen;
-+
-+				ret = cfg->pre_post(priv, priv->url, &post);
-+				if (ret != HTTPD_REQ_OK)
-+					return ret;
-+			}
-+
-+			tsize_num_hash = 0;
-+			printf("File: %s, %u bytes\n", priv->post_fname, priv->post_flen);
-+			printf("Loading: ");
-+
-+			priv->req_state = ST_REQ_MPFILE;
-+			return HTTPD_REQ_OK;
-+		}
-+
-+		len = strlen("Content-Disposition: ");
-+		if (!strncasecmp(line, "Content-Disposition: ", len)) {
-+			data = strstr(line + len, " name=\"");
-+			if (!data) {
-+				/* name attribute not found */
-+				return HTTPD_BAD_REQ;
-+			}
-+
-+			data += strlen(" name=\"");
-+			end = strstr(data, "\"");
-+			if (!end) {
-+				/* bad name attribute format */
-+				return HTTPD_BAD_REQ;
-+			}
-+
-+			tmp = end - data;
-+			if (tmp >= sizeof(priv->post_name)) {
-+				/* multipart name is too long */
-+				return HTTPD_BAD_REQ;
-+			}
-+			strncpy(priv->post_name, data, tmp);
-+			priv->post_name[tmp] = '\0';
-+
-+			data = strstr(line + len, " filename=\"");
-+			if (!data) {
-+				/* filename attribute not found */
-+				return HTTPD_BAD_REQ;
-+			}
-+
-+			data += strlen(" filename=\"");
-+			end = strstr(data, "\"");
-+			if (!end) {
-+				/* bad filename attribute format */
-+				return HTTPD_BAD_REQ;
-+			}
-+
-+			tmp = end - data;
-+			if (tmp >= sizeof(priv->post_fname))
-+				tmp = sizeof(priv->post_fname) - 1;
-+			strncpy(priv->post_fname, data, tmp);
-+			priv->post_fname[tmp] = '\0';
-+			return HTTPD_REQ_OK;
-+		}
-+
-+		return HTTPD_REQ_OK;
-+
-+	case ST_REQ_MPEND:
-+		if (*line == '\0')
-+			return HTTPD_REQ_OK;
-+
-+		len = strlen(priv->post_boundary);
-+		if (line[0] != '-' || line[1] != '-' ||
-+		    strncmp(line + 2, priv->post_boundary, len) ||
-+		    line[len + 2] != '-' || line[len + 3] != '-' ||
-+		    line[len + 4] != '\0') {
-+			/* expect final boundary line */
-+			return HTTPD_BAD_REQ;
-+		}
-+		priv->req_state = ST_REQ_DONE;
-+		return HTTPD_REQ_OK;
-+
-+	default:
-+		return HTTPD_BAD_REQ;
-+	}
-+}
-+
-+static enum httpd_req_check http_parse_buf(struct httpd_priv *priv,
-+					   char *buf, u32 size)
-+{
-+	char			*eol_pos;
-+	u32			len;
-+	enum httpd_req_check	ret;
-+
-+	buf[size] = '\0';
-+	while (size > 0) {
-+		eol_pos = strstr(buf, "\r\n");
-+		if (!eol_pos)
-+			break;
-+
-+		*eol_pos = '\0';
-+		len = eol_pos + 2 - buf;
-+
-+		ret = http_parse_line(priv, buf);
-+		if (ret != HTTPD_REQ_OK) {
-+			/* request processing error */
-+			return ret;
-+		}
-+
-+		priv->rx_processed += len;
-+		buf += len;
-+		size -= len;
-+
-+		if (priv->req_state == ST_REQ_MPFILE ||
-+		    priv->req_state == ST_REQ_DONE)
-+			return HTTPD_REQ_OK;
-+	}
-+
-+	/* continue when more data becomes available */
-+	return HTTPD_REQ_OK;
-+}
-+
-+static void tcp_stream_on_rcv_nxt_update(struct tcp_stream *tcp, u32 rx_bytes)
-+{
-+	struct httpd_priv	*priv;
-+	void			*ptr;
-+	u32			shift, size;
-+	enum httpd_req_check	ret;
-+	struct http_reply	*reply;
-+	struct httpd_post_data	post;
-+
-+	priv = tcp->priv;
-+
-+	switch (priv->req_state) {
-+	case ST_REQ_DONE:
-+		return;
-+
-+	case ST_REQ_MPFILE:
-+		show_block_marker(rx_bytes - priv->post_fstart,
-+				  priv->post_flen);
-+		if (rx_bytes < priv->post_fstart + priv->post_flen) {
-+			priv->rx_processed = rx_bytes;
-+			return;
-+		}
-+		priv->req_state = ST_REQ_MPEND;
-+		priv->rx_processed = priv->post_fstart + priv->post_flen;
-+		fallthrough;
-+
-+	case ST_REQ_MPEND:
-+		shift = priv->rx_processed - priv->post_fstart;
-+		ptr = map_sysmem(image_load_addr + shift,
-+				 rx_bytes - priv->rx_processed);
-+		ret = http_parse_buf(priv, ptr,
-+				     rx_bytes - priv->rx_processed);
-+		unmap_sysmem(ptr);
-+
-+		if (ret != HTTPD_REQ_OK)
-+			goto error;
-+		if (priv->req_state != ST_REQ_DONE)
-+			return;
-+		break;
-+
-+	default:
-+		ret = http_parse_buf(priv, priv->buf + priv->rx_processed,
-+				     rx_bytes - priv->rx_processed);
-+		if (ret != HTTPD_REQ_OK)
-+			goto error;
-+
-+		if (priv->req_state == ST_REQ_MPFILE) {
-+			/*
-+			 * We just switched from parsing of HTTP request
-+			 * headers to binary data reading. Our tcp->rx
-+			 * handler may put some binary data to priv->buf.
-+			 * It's time to copy these data to a proper place.
-+			 * It's required to copy whole buffer data starting
-+			 * from priv->rx_processed position. Otherwise we
-+			 * may miss data placed after the first hole.
-+			 */
-+			size = sizeof(priv->buf) - priv->rx_processed;
-+			if (size > 0) {
-+				ptr = map_sysmem(image_load_addr, size);
-+				memcpy(ptr, priv->buf + priv->rx_processed, size);
-+				unmap_sysmem(ptr);
-+			}
-+
-+			show_block_marker(rx_bytes - priv->post_fstart,
-+					  priv->post_flen);
-+		}
-+
-+		if (priv->req_state != ST_REQ_DONE)
-+			return;
-+		break;
-+	}
-+
-+	switch (priv->method) {
-+	case HTTP_OPTIONS:
-+		reply = &options_reply;
-+		break;
-+
-+	case HTTP_GET:
-+	case HTTP_HEAD:
-+		if (!cfg->get) {
-+			ret = HTTPD_BAD_REQ;
-+			goto error;
-+		}
-+		reply = cfg->get(priv, priv->url);
-+		break;
-+
-+	case HTTP_POST:
-+		if (!cfg->post) {
-+			ret = HTTPD_BAD_REQ;
-+			goto error;
-+		}
-+		post.name     = priv->post_name;
-+		post.filename = priv->post_fname;
-+		post.size     = priv->post_flen;
-+		post.addr     = map_sysmem(image_load_addr, post.size);
-+		reply = cfg->post(priv, priv->url, &post);
-+		unmap_sysmem(post.addr);
-+		break;
-+
-+	default:
-+		ret = HTTPD_BAD_REQ;
-+		goto error;
-+	}
-+
-+	http_make_reply(priv, reply, priv->method == HTTP_HEAD);
-+	return;
-+
-+error:
-+	priv->req_state = ST_REQ_DONE;
-+	switch (ret) {
-+	case HTTPD_BAD_URL:
-+		http_make_reply(priv, cfg->error_404, 0);
-+		break;
-+	case HTTPD_BAD_REQ:
-+		http_make_reply(priv, cfg->error_400, 0);
-+		break;
-+	default:
-+		tcp_stream_reset(tcp);
-+		break;
-+	}
-+}
-+
-+static int tcp_stream_rx(struct tcp_stream *tcp, u32 rx_offs, void *buf, int len)
-+{
-+	void			*ptr;
-+	struct httpd_priv	*priv;
-+	u32			shift;
-+
-+	priv = tcp->priv;
-+	switch (priv->req_state) {
-+	case ST_REQ_DONE:
-+		return len;
-+	case ST_REQ_MPFILE:
-+	case ST_REQ_MPEND:
-+		shift = rx_offs - priv->post_fstart;
-+		ptr = map_sysmem(image_load_addr + shift, len);
-+		memcpy(ptr, buf, len);
-+		unmap_sysmem(ptr);
-+		return len;
-+	default:
-+		/*
-+		 * accept data that fits to buffer,
-+		 * reserve space for end of line symbol
-+		 */
-+		if (rx_offs + len > sizeof(priv->buf) - 1)
-+			len = sizeof(priv->buf) - rx_offs - 1;
-+		memcpy(priv->buf + rx_offs, buf, len);
-+		return len;
-+	}
-+}
-+
-+static void tcp_stream_on_snd_una_update(struct tcp_stream *tcp, u32 tx_bytes)
-+{
-+	struct httpd_priv *priv;
-+
-+	priv = tcp->priv;
-+	if ((priv->req_state == ST_REQ_DONE) &&
-+	    (tx_bytes == priv->reply_fstart + priv->reply_flen))
-+		tcp_stream_close(tcp);
-+}
-+
-+static int tcp_stream_tx(struct tcp_stream *tcp, u32 tx_offs, void *buf, int maxlen)
-+{
-+	struct httpd_priv	*priv;
-+	u32			len, bytes = 0;
-+	char			*ptr;
-+
-+	priv = tcp->priv;
-+	if (priv->req_state != ST_REQ_DONE)
-+		return 0;
-+
-+	if (tx_offs < priv->reply_fstart) {
-+		len = maxlen;
-+		if (len > priv->reply_fstart - tx_offs)
-+			len = priv->reply_fstart - tx_offs;
-+		memcpy(buf, priv->buf + tx_offs, len);
-+		buf += len;
-+		tx_offs += len;
-+		bytes += len;
-+		maxlen -= len;
-+	}
-+
-+	if (tx_offs >= priv->reply_fstart) {
-+		if (tx_offs + maxlen > priv->reply_fstart + priv->reply_flen)
-+			maxlen = priv->reply_fstart + priv->reply_flen - tx_offs;
-+		if (maxlen > 0) {
-+			ptr = priv->reply_fdata + tx_offs - priv->reply_fstart;
-+			memcpy(buf, ptr, maxlen);
-+			bytes += maxlen;
-+		}
-+	}
-+
-+	return bytes;
-+}
-+
-+static int tcp_stream_on_create(struct tcp_stream *tcp)
-+{
-+	struct httpd_priv	*priv;
-+
-+	if (!cfg || stop_server || tcp->lport != HTTP_PORT)
-+		return 0;
-+
-+	priv = malloc(sizeof(struct httpd_priv));
-+	if (!priv)
-+		return 0;
-+
-+	memset(priv, 0, sizeof(struct httpd_priv));
-+	priv->tcp = tcp;
-+
-+	tcp->priv = priv;
-+	tcp->on_closed = tcp_stream_on_closed;
-+	tcp->on_rcv_nxt_update = tcp_stream_on_rcv_nxt_update;
-+	tcp->rx = tcp_stream_rx;
-+	tcp->on_snd_una_update = tcp_stream_on_snd_una_update;
-+	tcp->tx = tcp_stream_tx;
-+
-+	return 1;
-+}
-+
-+void httpd_setup(struct httpd_config *config)
-+{
-+	cfg = config;
-+}
-+
-+void httpd_stop(void)
-+{
-+	stop_server = 1;
-+}
-+
-+void httpd_start(void)
-+{
-+	if (!cfg) {
-+		net_set_state(NETLOOP_FAIL);
-+		return;
-+	}
-+	stop_server = 0;
-+	memset(net_server_ethaddr, 0, 6);
-+	tcp_stream_set_on_create_handler(tcp_stream_on_create);
-+	printf("HTTPD listening on port %d...\n", HTTP_PORT);
-+}
-diff --git a/net/net.c b/net/net.c
-index 50e8cfa9ff2..a1bed804803 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -102,6 +102,7 @@
- #include <linux/compiler.h>
- #include <net/fastboot_udp.h>
- #include <net/fastboot_tcp.h>
-+#include <net/httpd.h>
- #include <net/ncsi.h>
- #include <net/netcat.h>
- #if defined(CONFIG_CMD_PCAP)
-@@ -581,6 +582,11 @@ restart:
- 			netcat_save_start();
- 			break;
- #endif
-+#if defined(CONFIG_HTTPD_COMMON)
-+		case HTTPD:
-+			httpd_start();
-+			break;
-+#endif
- #if defined(CONFIG_CMD_CDP)
- 		case CDP:
- 			cdp_start();
--- 
-2.45.2
+We should switch to the proper one here, but there are numerous examples
+of this today.
 
+> > +/*
+> > + * Hello world EFI application
+> > + *
+> > + * Copyright 2024 Google LLC
+> > + * Written by Simon Glass <sjg@chromium.org>
+> > + *
+> > + * This test program is used to test the invocation of an EFI applicat=
+ion.
+> > + * It writes a few messages to the console and then exits boot services
+> > + */
+> > +
+> > +#include <efi_api.h>
+> > +
+> > +static const efi_guid_t loaded_image_guid =3D EFI_LOADED_IMAGE_PROTOCO=
+L_GUID;
+> > +
+> > +static struct efi_system_table *systable;
+> > +static struct efi_boot_services *boottime;
+> > +static struct efi_simple_text_output_protocol *con_out;
+> > +
+> > +/**
+> > + * efi_main() - entry point of the EFI application.
+> > + *
+> > + * @handle:	handle of the loaded image
+> > + * @systab:	system table
+> > + * Return:	status code
+> > + */
+> > +efi_status_t EFIAPI efi_main(efi_handle_t handle,
+> > +			     struct efi_system_table *systab)
+> > +{
+> > +	struct efi_loaded_image *loaded_image;
+> > +	efi_status_t ret;
+> > +	efi_uintn_t map_size;
+> > +	efi_uintn_t map_key;
+> > +	efi_uintn_t desc_size;
+> > +	u32 desc_version;
+> > +
+> > +	systable =3D systab;
+> > +	boottime =3D systable->boottime;
+> > +	con_out =3D systable->con_out;
+> > +
+> > +	/* Get the loaded image protocol */
+> > +	ret =3D boottime->open_protocol(handle, &loaded_image_guid,
+> > +				      (void **)&loaded_image, NULL, NULL,
+> > +				      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> > +	if (ret !=3D EFI_SUCCESS) {
+> > +		con_out->output_string
+> > +			(con_out, u"Cannot open loaded image protocol\r\n");
+> > +		goto out;
+> > +	}
+> > +
+> > +	/* UEFI requires CR LF */
+> > +	con_out->output_string(con_out, u"U-Boot test app for EFI_LOADER\r\n"=
+);
+> > +
+> > +out:
+> > +	map_size =3D 0;
+> > +	ret =3D boottime->get_memory_map(&map_size, NULL, &map_key, &desc_siz=
+e,
+> > +				       &desc_version);
+> > +	con_out->output_string(con_out, u"Exiting boot sevices\n");
+>=20
+> %s/sevices/services/g
+>=20
+> > +
+> > +	/* exit boot services so that this part of U-Boot can be tested */
+> > +	boottime->exit_boot_services(handle, map_key);
+> > +
+> > +	/* now exit for real */
+> > +	ret =3D boottime->exit(handle, ret, 0, NULL);
+>=20
+> As written before boot services are not available after
+> ExitBootServices(). Please, call the ResetSystem() service.
+
+Right, but the point is to not do that and instead test what happens. I
+think Ilias had said we need to make some big loud print on console that
+you must reset the system for it to be usable afterwards, would that
+be enough?
+
+--=20
+Tom
+
+--6q65uNTnqvpddeNd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcfqw4ACgkQFHw5/5Y0
+tyygywv+MTYCWp9R/olID2EBIym5ZZYyosB+uckotlkjRFjuw4fjnchPLeDsSHdL
+f+ryc608RAo7lY9rQ8bmzBJ5QY0fEZVbnRLqJlr1fAVm9hjbpzHOBc5sK7xUUuyN
+f6PlP29DQpG12JDjlDJ1NvV/taFuE9wPQYq4IMFfOA9s3xPrTt88x5H+tYwiqHwm
+5EKe7S2p03XFsrSRgmZuWI7VStMJ8oGJRhSF+qMQWXqGBSW+dIyVrTdafcM/GliN
+XNLPEUPDHkfYTT1ny+UREs2yx6klrmnNyuCVg+lDtz4n5OQidq1X2iQph3d4nXNf
+d1iBj9KVB5YsHp5esn2Na+g6g7ZVy27+K4cTXGywx9lUSAMDnqup5rbDjuKM1BUg
+S0x6shA9wqWr7po5Dhy8zsvcWLnnQdNYzoDwukwgmb/g0ufsjTpAH/6gjrHTSLS6
+3AzR5bIss+TAbFzjE44+MUf7AvMZqyHqx41Q/9GT7ZVEtxXEDoUJcOAym9CJPYwp
+dwA0eexl
+=wQdp
+-----END PGP SIGNATURE-----
+
+--6q65uNTnqvpddeNd--
