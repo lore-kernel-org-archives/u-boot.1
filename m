@@ -4,84 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD208D3E2A3
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 19:04:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F19A6D3E2BA
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 19:29:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07B598911E;
-	Mon, 28 Oct 2024 20:04:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1F42889043;
+	Mon, 28 Oct 2024 20:29:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Vm8J0IqF";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="ygSSn5IJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2F358911B; Mon, 28 Oct 2024 20:04:19 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 7BDD189049; Mon, 28 Oct 2024 20:29:35 +0100 (CET)
+Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F5E18908F
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 20:04:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AD5288FE8
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 20:29:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730142251; x=1730747051; i=xypron.glpk@gmx.de;
- bh=74VBAQLg+iKMmbIRRfh0x9d7PKwICqbhj7CgJmmAQjY=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=Vm8J0IqF970p7iM2GFiIMzUui43Bgezwr4jfG1JWpPBYTL63Un5lM02vPWjwGg/+
- rZbjsTJx81exZy0FRfmZmXAvI5FefH/Nn0PcGqpRAr72q0Zvv2e8WCvgs2UKvZaDN
- ZGXXRxb9tmF1RBUVXProWZ3XW4YFIqHxzaq0whVsUBl5cKJoePFAhjMaxrBHfclWa
- Rp6r96mi3xReVwIyy46lw9qihJmN3kAvxrkg8LDRGASp3Sx+LRayRPWt6WxTRRoNe
- lDaIBqrijr+zuYNgOUaNnWgWjM0aQAMbJXUGw1k1pN0Bu3qr8GLcwP67+UR9hdWc5
- 1NLtemQVrvjjFs5rpg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [10.43.6.224] ([87.215.50.114]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MWASe-1tOfo03iSQ-00SCyy; Mon, 28
- Oct 2024 20:04:11 +0100
-Message-ID: <ea85b8fc-fe7b-4a76-a3e1-bb92b45b027a@gmx.de>
-Date: Mon, 28 Oct 2024 20:04:07 +0100
+ dmarc=pass (p=none dis=none) header.from=sntech.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
+ s=gloria202408;
+ h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=LkP1zYx5VAaSOyTi1FVHPo2OZK91Jme7Pnd7BiloJjw=; b=ygSSn5IJaL+FCE5eJ5pIT3eu+M
+ 5N+Ja1uhq51EanrnPing/7hyIEIk3g+d2iYpUR1fJ5XkM/MI7xBHnB2G41G2TsAIgmhghnwTdgPaK
+ ylju6om/DuPvgkoVa+Zr8cv6cBPLFocXjcFKmCD1geHd7asEH2GBTBWZjhAmByPymMeI/BWIFDXU7
+ F4ENgEUjm0F3/WUeJVQewINoxDpnP2Gcf887zrKfo9iVS+I0uAZZUjClTY1m1cjdtPmelEL4OBiqA
+ +MF5rq+0fiqzzaiH3YpZayXaGUUnxwnA97qztuWAaj13ZlXYriuAc7I53sGCMPqCQI/QvRzLenT5H
+ g/5ey7kg==;
+Received: from [185.156.123.69] (helo=phil.sntech)
+ by gloria.sntech.de with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <heiko@sntech.de>)
+ id 1t5Uyr-0000Gm-OL; Mon, 28 Oct 2024 20:00:45 +0100
+From: Heiko Stuebner <heiko@sntech.de>
+To: u-boot@lists.denx.de, kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
+ sjg@chromium.org
+Cc: heiko@sntech.de,
+	ukleinek@debian.org
+Subject: [PATCH v3 18/18] board: rockchip: add support for Qnap TS433 devices
+Date: Mon, 28 Oct 2024 20:00:34 +0100
+Message-ID: <20241028190034.143122-19-heiko@sntech.de>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241028190034.143122-1-heiko@sntech.de>
+References: <20241028190034.143122-1-heiko@sntech.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 5/8] sandbox: Report host default-filename in native
- mode
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Shantur Rathore <i@shantur.com>, =?UTF-8?Q?Vincent_Stehl=C3=A9?=
- <vincent.stehle@arm.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20241022120032.196311-1-sjg@chromium.org>
- <20241022120032.196311-6-sjg@chromium.org>
- <CAC_iWjKUjsMdqXa2YZGiu1FSsjx_aH6cDQsi+2Ng5i-+9obQhQ@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAC_iWjKUjsMdqXa2YZGiu1FSsjx_aH6cDQsi+2Ng5i-+9obQhQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:1hXttaol3uyIcJ/9ox1oBR/Dol12ahLYJa2uADfrp+RKEV6z1oq
- OydUigCNKN3ZDrmkQkrGc4pAq4F+Q6Jg7O8AG/FGd32YFX5OCWP8WBCK6hFL3FiiWi+9VN8
- E14coz2apJbwGAu7y09GJ/x3qd04gPU3gGQsT1Je5vQUXYpPS7nH0ByWnhLajW+Q46svgWe
- PTSqHfGsoPjYyLdvPQX3A==
-UI-OutboundReport: notjunk:1;M01:P0:Iet+EBiDkKE=;Ys09jwgPJV7fqZ0U6Mwt6bm4+Hw
- qkkJ3MBZbfRwpmOgcAx4aGHkL4Gfo/EOchON1dtzHhkvy+kgxb9mfINC3Jo4VAmZWtGzu0u9E
- W7t3U+MC3gVK5b1LKFdS/9Cxi1u9nE6TbvDyDDZUabtRVy2JtRT4sewiTgW/Vvj4dJwCZpCHw
- PFIRp2WxhQZrgRJez/vEzpxbxrp+ZRZ062AEqOsAJez7bg5Sde17P4ifCi+EZGPlzZMtNn/z9
- sDzVSxAi4RPycVEDBkWORR1tRbHZdoj/vptsL6//czxyDl52s4LJUorEovRXD4wK7j29FC8JL
- Ci1Nfc9ddb5fFk3S6IlyPCZObJmg2IPWsJWo5/hhVjuYYZOVXnoV0ykOjyBAEVyAzPn9bnxq8
- x/MsUKrhbbPMDjiZrUb8bD7UaftBkPkXgbBSXdmRkUZrz0VaAxpv2UQtDczjLZ0ZBwrag7dlS
- RkihqUAZToXZUXeHdEONfY8iVrB5SRWiN7fS2wRtNpkwOCls8gkeSvbCnpTLMc2IvgtyaDWrU
- svn635cJuenQpH03xVm56lwqG/lIN0Hw6ZupIiPbBH5F0c6xvMuyzpTbb6Au1cqDK8lRNMSCT
- vduuF6NYTTbci90G0XToa7BRuTaB621zAIzNx+OqtD6AUPp73c0gjPfuoVKgNFwXhRpa9w0VK
- uUoxgm0XHwzSizq+XcyHxqkpAfKMiFfA61TZgdOaJnLc1Y5bpQIFr9HtZZGzSZ19qbh4R23b4
- FQ1GnmCRChL9v+65KIy8QcIt95enVFUdqeeFKCgmBvqU0LtVHLUrn/J7lzslFj9yHWk3IuKnN
- fs9ESJBq/snzEB+mA5zwLmug==
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,290 +71,356 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/25/24 11:56, Ilias Apalodimas wrote:
-> Hi Simon,
->
->
-> On Tue, 22 Oct 2024 at 15:00, Simon Glass <sjg@chromium.org> wrote:
->>
->> When the --native flag is given, pretend to be running the host
->> architecture rather than sandbox.
->>
->> Add an 'efidebug filename' command to report it.
->
-> Heinrich does this allow you to continue your testing in native archs?
->
->>
->> Signed-off-by: Simon Glass <sjg@chromium.org>
->> ---
->>
->> Changes in v8:
->> - Add new patch to report host default-filename in native mode
->>
->>   boot/bootmeth_efi.c | 25 ++------------------
->>   boot/efi_fname.c    | 57 +++++++++++++++++++++++++++++++++-----------=
--
->>   cmd/efidebug.c      | 25 ++++++++++++++++++++
->>   include/efi.h       | 25 ++++++++++++++++++++
->>   4 files changed, 94 insertions(+), 38 deletions(-)
->>
->> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
->> index 371b36d550b..f836aa655f5 100644
->> --- a/boot/bootmeth_efi.c
->> +++ b/boot/bootmeth_efi.c
->> @@ -25,32 +25,11 @@
->>
->>   #define EFI_DIRNAME    "/EFI/BOOT/"
->>
->> -static int get_efi_pxe_arch(void)
->> -{
->> -       /* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-par=
-ameters.xml */
->> -       if (IS_ENABLED(CONFIG_ARM64))
->> -               return 0xb;
->> -       else if (IS_ENABLED(CONFIG_ARM))
->> -               return 0xa;
->> -       else if (IS_ENABLED(CONFIG_X86_64))
->> -               return 0x6;
->> -       else if (IS_ENABLED(CONFIG_X86))
->> -               return 0x7;
->> -       else if (IS_ENABLED(CONFIG_ARCH_RV32I))
->> -               return 0x19;
->> -       else if (IS_ENABLED(CONFIG_ARCH_RV64I))
->> -               return 0x1b;
->> -       else if (IS_ENABLED(CONFIG_SANDBOX))
->> -               return 0;       /* not used */
->> -
->> -       return -EINVAL;
->> -}
->> -
->>   static int get_efi_pxe_vci(char *str, int max_len)
->>   {
->>          int ret;
->>
->> -       ret =3D get_efi_pxe_arch();
->> +       ret =3D efi_get_pxe_arch();
->>          if (ret < 0)
->>                  return ret;
->>
->> @@ -239,7 +218,7 @@ static int distro_efi_read_bootflow_net(struct boot=
-flow *bflow)
->>          ret =3D get_efi_pxe_vci(str, sizeof(str));
->>          if (ret)
->>                  return log_msg_ret("vci", ret);
->> -       ret =3D get_efi_pxe_arch();
->> +       ret =3D efi_get_pxe_arch();
->>          if (ret < 0)
->>                  return log_msg_ret("arc", ret);
->>          arch =3D ret;
->> diff --git a/boot/efi_fname.c b/boot/efi_fname.c
->> index a6b11383bba..790f9e2fa36 100644
->> --- a/boot/efi_fname.c
->> +++ b/boot/efi_fname.c
->> @@ -9,29 +9,34 @@
->>    */
->>
->>   #include <efi.h>
->> +#include <errno.h>
->>   #include <host_arch.h>
->>
->> -#ifdef CONFIG_SANDBOX
->> -
->>   #if HOST_ARCH =3D=3D HOST_ARCH_X86_64
->> -#define BOOTEFI_NAME "BOOTX64.EFI"
->> +#define HOST_BOOTEFI_NAME "BOOTX64.EFI"
->> +#define HOST_PXE_ARCH 0x6
->>   #elif HOST_ARCH =3D=3D HOST_ARCH_X86
->> -#define BOOTEFI_NAME "BOOTIA32.EFI"
->> +#define HOST_BOOTEFI_NAME "BOOTIA32.EFI"
->> +#define HOST_PXE_ARCH 0x7
->>   #elif HOST_ARCH =3D=3D HOST_ARCH_AARCH64
->> -#define BOOTEFI_NAME "BOOTAA64.EFI"
->> +#define HOST_BOOTEFI_NAME "BOOTAA64.EFI"
->> +#define HOST_PXE_ARCH 0xb
->>   #elif HOST_ARCH =3D=3D HOST_ARCH_ARM
->> -#define BOOTEFI_NAME "BOOTARM.EFI"
->> +#define HOST_BOOTEFI_NAME "BOOTARM.EFI"
->> +#define HOST_PXE_ARCH 0xa
->>   #elif HOST_ARCH =3D=3D HOST_ARCH_RISCV32
->> -#define BOOTEFI_NAME "BOOTRISCV32.EFI"
->> +#define HOST_BOOTEFI_NAME "BOOTRISCV32.EFI"
->> +#define HOST_PXE_ARCH 0x19
->>   #elif HOST_ARCH =3D=3D HOST_ARCH_RISCV64
->> -#define BOOTEFI_NAME "BOOTRISCV64.EFI"
->> +#define HOST_BOOTEFI_NAME "BOOTRISCV64.EFI"
->> +#define HOST_PXE_ARCH 0x1b
->>   #else
->> -#error Unsupported UEFI architecture
->> +#error Unsupported Host architecture
->>   #endif
->>
->> -#else
->> -
->> -#if defined(CONFIG_ARM64)
->> +#if defined(CONFIG_SANDBOX)
->> +#define BOOTEFI_NAME "BOOTSBOX.EFI"
->> +#elif defined(CONFIG_ARM64)
->>   #define BOOTEFI_NAME "BOOTAA64.EFI"
->>   #elif defined(CONFIG_ARM)
->>   #define BOOTEFI_NAME "BOOTARM.EFI"
->> @@ -47,9 +52,31 @@
->>   #error Unsupported UEFI architecture
- >>   #endif>>
->> -#endif
->> -
->>   const char *efi_get_basename(void)
->>   {
->> -       return BOOTEFI_NAME;
->> +       return efi_use_host_arch() ? HOST_BOOTEFI_NAME : BOOTEFI_NAME;
->> +}
->> +
->> +int efi_get_pxe_arch(void)
->> +{
->> +       if (efi_use_host_arch())
->> +               return HOST_PXE_ARCH;
->> +
->> +       /* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-par=
-ameters.xml */
->> +       if (IS_ENABLED(CONFIG_ARM64))
->> +               return 0xb;
->> +       else if (IS_ENABLED(CONFIG_ARM))
->> +               return 0xa;
->> +       else if (IS_ENABLED(CONFIG_X86_64))
->> +               return 0x6;
->> +       else if (IS_ENABLED(CONFIG_X86))
->> +               return 0x7;
->> +       else if (IS_ENABLED(CONFIG_ARCH_RV32I))
->> +               return 0x19;
->> +       else if (IS_ENABLED(CONFIG_ARCH_RV64I))
->> +               return 0x1b;
->> +       else if (IS_ENABLED(CONFIG_SANDBOX))
+The Qnap TS433 is a 4-bay NAS based around the RK3568.
 
-Please, add a warning here:
+Two SATA bays are connected to the RK3568's own SATA controllers while
+the other two are connected to a JMicron SATA controller living on the
+PCIe bus.
 
-      log_warn("You are using the sandbox in non-compliant mode\n");
+It provides one 2.5Gb and one 1Gb ethernet port as well as 3 usb ports.
 
-The riscv64 sandbox can only run riscv64 binaries
-The arm64 sandbox can only run arm64 binary.
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+---
+ arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi |  6 ++
+ arch/arm/mach-rockchip/rk3568/Kconfig      | 14 ++++
+ board/qnap/ts433/Kconfig                   | 12 +++
+ board/qnap/ts433/MAINTAINERS               |  8 ++
+ configs/qnap-ts433-rk3568_defconfig        | 87 +++++++++++++++++++++
+ doc/board/index.rst                        |  1 +
+ doc/board/qnap/index.rst                   |  9 +++
+ doc/board/qnap/ts433.rst                   | 91 ++++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst            |  1 +
+ include/configs/qnap_ts433.h               | 10 +++
+ 10 files changed, 239 insertions(+)
+ create mode 100644 arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+ create mode 100644 board/qnap/ts433/Kconfig
+ create mode 100644 board/qnap/ts433/MAINTAINERS
+ create mode 100644 configs/qnap-ts433-rk3568_defconfig
+ create mode 100644 doc/board/qnap/index.rst
+ create mode 100644 doc/board/qnap/ts433.rst
+ create mode 100644 include/configs/qnap_ts433.h
 
-We cannot expect a DHCP server to do the expected with the value 0.
-
-So why should we introduce this?
-
->> +               return 0;       /* not used */
-
-The following comment would fit better:
-
-     /* This breaks PXE booting on the sandbox.*/
-
-Best regards
-
-Heinrich
-
->> +
->> +       return -EINVAL;
->>   }
->> diff --git a/cmd/efidebug.c b/cmd/efidebug.c
->> index e040fe75fa1..02f1e080e88 100644
->> --- a/cmd/efidebug.c
->> +++ b/cmd/efidebug.c
->> @@ -511,6 +511,27 @@ static int do_efi_show_images(struct cmd_tbl *cmdt=
-p, int flag,
->>          return CMD_RET_SUCCESS;
->>   }
->>
->> +/**
->> + * do_efi_show_defaults() - show UEFI default filename and PXE archite=
-cture
->> + *
->> + * @cmdtp:     Command table
->> + * @flag:      Command flag
->> + * @argc:      Number of arguments
->> + * @argv:      Argument array
->> + * Return:     CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on fail=
-ure
->> + *
->> + * Implement efidebug "defaults" sub-command.
->> + * Shows the default EFI filename and PXE architecture
->> + */
->> +static int do_efi_show_defaults(struct cmd_tbl *cmdtp, int flag,
->> +                               int argc, char *const argv[])
->> +{
->> +       printf("Default boot path: EFI\\BOOT\\%s\n", efi_get_basename()=
-);
->> +       printf("PXE arch: 0x%02x\n", efi_get_pxe_arch());
->> +
->> +       return CMD_RET_SUCCESS;
->> +}
->> +
->>   static const char * const efi_mem_type_string[] =3D {
->>          [EFI_RESERVED_MEMORY_TYPE] =3D "RESERVED",
->>          [EFI_LOADER_CODE] =3D "LOADER CODE",
->> @@ -1561,6 +1582,8 @@ static struct cmd_tbl cmd_efidebug_sub[] =3D {
->>                           "", ""),
->>          U_BOOT_CMD_MKENT(dh, CONFIG_SYS_MAXARGS, 1, do_efi_show_handle=
-s,
->>                           "", ""),
->> +       U_BOOT_CMD_MKENT(defaults, CONFIG_SYS_MAXARGS, 1, do_efi_show_d=
-efaults,
->> +                        "", ""),
->>          U_BOOT_CMD_MKENT(images, CONFIG_SYS_MAXARGS, 1, do_efi_show_im=
-ages,
->>                           "", ""),
->>          U_BOOT_CMD_MKENT(memmap, CONFIG_SYS_MAXARGS, 1, do_efi_show_me=
-mmap,
->> @@ -1653,6 +1676,8 @@ U_BOOT_LONGHELP(efidebug,
->>          "  - show UEFI drivers\n"
->>          "efidebug dh\n"
->>          "  - show UEFI handles\n"
->> +       "efidebug defaults\n"
->> +       "  - show default EFI filename and PXE architecture\n"
->>          "efidebug images\n"
->>          "  - show loaded images\n"
->>          "efidebug memmap\n"
->> diff --git a/include/efi.h b/include/efi.h
->> index 1b8093bd4d3..70bb47e742f 100644
->> --- a/include/efi.h
->> +++ b/include/efi.h
->> @@ -678,4 +678,29 @@ void efi_show_tables(struct efi_system_table *syst=
-ab);
->>    */
->>   const char *efi_get_basename(void);
->>
->> +#ifdef CONFIG_SANDBOX
->> +#include <asm/state.h>
->> +#endif
->> +
->> +static inline bool efi_use_host_arch(void)
->> +{
->> +#ifdef CONFIG_SANDBOX
->
-> #if IS_ENABLED(CONFIG_SANDBOX) is preferred no ?
->
->> +       struct sandbox_state *state =3D state_get_current();
->> +
->> +       return state->native;
->> +#else
->> +       return false;
->> +#endif
->> +}
->> +
->> +/**
->> + * efi_get_pxe_arch() - Get the architecture value for PXE
->> + *
->> + * See:
->> + * http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters=
-.xml
->> + *
->> + * Return: Architecture value
->> + */
->> +int efi_get_pxe_arch(void);
->> +
->>   #endif /* _LINUX_EFI_H */
->> --
->> 2.43.0
->>
->
-> Thanks
-> /Ilias
+diff --git a/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi b/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+new file mode 100644
+index 00000000000..19acbceb468
+--- /dev/null
++++ b/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2024 Heiko Stuebner <heiko@sntech.de>
++ */
++
++#include "rk356x-u-boot.dtsi"
+diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+index e646f714c92..ce327ed6f9e 100644
+--- a/arch/arm/mach-rockchip/rk3568/Kconfig
++++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+@@ -32,6 +32,19 @@ config TARGET_POWKIDDY_X55_RK3566
+ 	help
+ 	  Powkiddy X55 handheld gaming console with an RK3566 SoC.
+ 
++config TARGET_QNAP_TS433_RK3568
++	bool "QNAP-TS433"
++	help
++	  Qnap TS433 4-bay NAS with a RK3568 SoC.
++
++	  It provides the following featureset:
++	   * 4GB LPDDR4
++	   * 4GB eMMC
++	   * 2 SATA ports connected to two RK3568's SATA controllers
++	   * 2 SATA ports connected to a JMicron JMB58x AHCI SATA controller
++	   * 1 1G network controller
++	   * 1 2.5G Realtek RTL8125 network controller
++
+ config TARGET_QUARTZ64_RK3566
+ 	bool "Pine64 Quartz64"
+ 	help
+@@ -70,6 +83,7 @@ source "board/hardkernel/odroid_m1/Kconfig"
+ source "board/hardkernel/odroid_m1s/Kconfig"
+ source "board/pine64/quartz64_rk3566/Kconfig"
+ source "board/powkiddy/x55/Kconfig"
++source "board/qnap/ts433/Kconfig"
+ source "board/radxa/zero3-rk3566/Kconfig"
+ source "board/xunlong/orangepi-3b-rk3566/Kconfig"
+ 
+diff --git a/board/qnap/ts433/Kconfig b/board/qnap/ts433/Kconfig
+new file mode 100644
+index 00000000000..b00e1f9f2ef
+--- /dev/null
++++ b/board/qnap/ts433/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_QNAP_TS433_RK3568
++
++config SYS_BOARD
++	default "qnap_ts433"
++
++config SYS_VENDOR
++	default "qnap"
++
++config SYS_CONFIG_NAME
++	default "qnap_ts433"
++
++endif
+diff --git a/board/qnap/ts433/MAINTAINERS b/board/qnap/ts433/MAINTAINERS
+new file mode 100644
+index 00000000000..c2b31ad9794
+--- /dev/null
++++ b/board/qnap/ts433/MAINTAINERS
+@@ -0,0 +1,8 @@
++QNAP-TS433
++M:	Heiko Stuebner <heiko@sntech.de>
++S:	Maintained
++F:	board/qnap/ts433/
++F:	doc/board/qnap/
++F:	include/configs/qnap_ts433.h
++F:	configs/qnap-ts433-rk3568_defconfig
++F:	arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+diff --git a/configs/qnap-ts433-rk3568_defconfig b/configs/qnap-ts433-rk3568_defconfig
+new file mode 100644
+index 00000000000..840da7f3759
+--- /dev/null
++++ b/configs/qnap-ts433-rk3568_defconfig
+@@ -0,0 +1,87 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_SYS_HAS_NONCACHED_MEMORY=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-qnap-ts433"
++CONFIG_ROCKCHIP_RK3568=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_QNAP_TS433_RK3568=y
++CONFIG_DEBUG_UART_BASE=0xFE660000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-qnap-ts433.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_SATA=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_ROCKUSB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_RTL8169=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_DM_PMIC_FAN53555=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/index.rst b/doc/board/index.rst
+index 3fb7c84f10c..fe775b1b05d 100644
+--- a/doc/board/index.rst
++++ b/doc/board/index.rst
+@@ -42,6 +42,7 @@ Board-specific doc
+    phytec/index
+    purism/index
+    qualcomm/index
++   qnap/index
+    renesas/index
+    rockchip/index
+    samsung/index
+diff --git a/doc/board/qnap/index.rst b/doc/board/qnap/index.rst
+new file mode 100644
+index 00000000000..652ea11a056
+--- /dev/null
++++ b/doc/board/qnap/index.rst
+@@ -0,0 +1,9 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Qnap
++====
++
++.. toctree::
++   :maxdepth: 2
++
++   ts433.rst
+diff --git a/doc/board/qnap/ts433.rst b/doc/board/qnap/ts433.rst
+new file mode 100644
+index 00000000000..5c7fd314b7a
+--- /dev/null
++++ b/doc/board/qnap/ts433.rst
+@@ -0,0 +1,91 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++U-Boot for Qnap TS433 Devices
++=================================
++
++This allows U-Boot to boot the Qnap TS433 NAS
++
++Preparing the serial
++--------------------
++
++Qnap devices run their serial console with a 115200 baudrate. As the
++binary DDR-init and maskrom-downloader expect a 1500000 rate, it is
++necessary to adapt the binaries if their output is needed.
++
++This can be done with a binary provided in the rkbin repository.
++First the ddrbin_param.txt in the rkbin repo needs to be modified:
++
++.. code-block:: bash
++
++    diff --git a/tools/ddrbin_param.txt b/tools/ddrbin_param.txt
++    index 0dfdd318..82ade7e7 100644
++    --- a/tools/ddrbin_param.txt
++    +++ b/tools/ddrbin_param.txt
++    @@ -11,7 +11,7 @@ lp5_freq=
++
++     uart id=
++     uart iomux=
++    -uart baudrate=
++    +uart baudrate=115200
++
++     sr_idle=
++     pd_idle=
++
++And after that the ddrbin_tool binary can be used to modify apply this
++modification and also a new maskrom downloader can be build:
++
++.. code-block:: bash
++
++    $ tools/ddrbin_tool rk3568 tools/ddrbin_param.txt bin/rk35/rk3568_ddr_1560MHz_v1.21.bin
++    $ tools/boot_merger RKBOOT/RK3568MINIALL.ini
++
++Building U-Boot
++---------------
++
++.. code-block:: bash
++
++    $ export CROSS_COMPILE=aarch64-linux-gnu-
++    $ export BL31=../rkbin/bin/rk35/rk3568_bl31_v1.34.elf
++    $ export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3568_ddr_1056MHz_v1.13.bin
++    $ make qnap-ts433-rk3568_defconfig
++    $ make
++
++This will build ``u-boot-rockchip.bin`` which can be written to the
++on-board eMMC.
++
++Image installation
++------------------
++
++The Qnap thankfully provides an easily accessible serial header as well as
++a very user-friendly jumper-header to bring the device into maskrom mode.
++
++To access both, the drive trays need to be removed. Looking at the board,
++through the upper cutout of the metal frame the white 4-port serial-header
++can be seen next to a barcode sticker. It's pinout is as follows:
++
++.. code-block:: bash
++
++   ,_  _.
++   |1234|  1=TX 2=VCC
++   `----'  3=RX 4=GND
++
++
++Directly below it, the mentioned 2-pin jumper header can be seen.
++
++To write your u-boot to the device, it needs to be powered off first. Then
++a jumper or suitable cable needs to be used to connect the two pins of the
++maskrom header. Turning on the device now will start it in maskrom mode.
++
++It is important that the jumper gets removed after that stop and before
++actually trying to write to the emmc.
++
++The front usb-port needs to be connected to the host with an USB-A-to-A
++cable to allow flashing.
++
++The flashing itself is done via rkdeveloptool, which can be found for
++example as package of that name in Debian-based distributions:
++
++.. code-block:: bash
++
++    $ rkdeveloptool db rk356x_spl_loader_v1.21.113.bin
++    $ rkdeveloptool wl 64 u-boot-rockchip.bin
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 7b11a2e0a35..0783603ec50 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -119,6 +119,7 @@ List of mainline supported Rockchip boards:
+      - FriendlyElec NanoPi R5S (nanopi-r5s-rk3568)
+      - Generic RK3566/RK3568 (generic-rk3568)
+      - Hardkernel ODROID-M1 (odroid-m1-rk3568)
++     - QNAP TS-433 (qnap-ts433-rk3568)
+      - Radxa E25 Carrier Board (radxa-e25-rk3568)
+      - Radxa ROCK 3A (rock-3a-rk3568)
+      - Radxa ROCK 3B (rock-3b-rk3568)
+diff --git a/include/configs/qnap_ts433.h b/include/configs/qnap_ts433.h
+new file mode 100644
+index 00000000000..aee4546bf07
+--- /dev/null
++++ b/include/configs/qnap_ts433.h
+@@ -0,0 +1,10 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#ifndef __QNAP_TS433_H
++#define __QNAP_TS433_H
++
++#define ROCKCHIP_DEVICE_SETTINGS
++
++#include <configs/rk3568_common.h>
++
++#endif
+-- 
+2.45.2
 
