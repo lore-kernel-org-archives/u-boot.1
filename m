@@ -4,75 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65321D13570
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 11:29:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04E7ED1039A
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 12:24:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2FBB8907D;
-	Mon, 28 Oct 2024 12:29:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 218DD88360;
+	Mon, 28 Oct 2024 13:24:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tbDjUX1v";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E38F48907D; Mon, 28 Oct 2024 12:29:45 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 679CF8907E; Mon, 28 Oct 2024 13:24:31 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19BBE8907B
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 12:29:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 07AB987CF8
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 13:24:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a9a5f555cfbso273549666b.1
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 04:29:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730114975; x=1730719775; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rFjCfYVgzDjGL0W48u/jshX0QFKr2Gt7/EP3PX4nyIY=;
- b=tbDjUX1vV0aPGOhHCzQCY/JoTjj9x9T4vq9f9LHoi9mCGvQl6l015u7dMRlJ2Kn6z6
- whIIs5P990Tvdz0gcT8znIg3T29Oj9rcaU5KgPqGv1/MJuwc5R5NaxczuCKmTfpD7+xX
- SyAhdGJLcXvLGloVRSC0S8w1g6w/l+NS/6c8YYAAi+1VpVMmNaFS/N29UNB2jyJi/R+J
- WoqJqmYN/I5Ve4PXxacqscNWjNMOo4EzZWGV4pYInCUh4GdKzV7WR1Ki/GBPe7p6DFOi
- gi2pJknkalldYwPtobZiOhBVwzLZ1FgFPY3MZPeTXgLiZyP8ak5RuaZB6l2kZMNixO0b
- RUuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730114975; x=1730719775;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rFjCfYVgzDjGL0W48u/jshX0QFKr2Gt7/EP3PX4nyIY=;
- b=s1Z2oPD+lTEr9CITMBYN5J6HFGveWkQ2TaJ8LXS1kymi9xSKEwQd67WjMInLtVlpjS
- ZJ57Mi0Xffb+2bPf2+Y5fjeXuWl2UtRuUf1TnUVuPkgsZpbfliTxo6Z+QBljtO/5fecj
- Ilp88EmcOzxN/YNePsZKK2Gjt+9YI4VHKYvFLtNJQykvnbx3onDgr4ijF6pUmbdchI5b
- eMVJf4QQLo85pCB6NsMY1G559zBjpSPhMWozp4XXumnQLY2UnfkC6BfXHyiLOsn+vXSX
- E7O0ApNv/dFN/LdHr2nQdqXn19t7btjgWN9Nt+lbeedqf36W3IsyxsTS/9c65szCxwON
- zfew==
-X-Gm-Message-State: AOJu0YzIfl9wUW2dyKNwVh+0nXoCqYoDZ6TyeBBEtfq8X8x4A/lXruGF
- 8n5PzIPVe7m2+vIYb7hyXhft9H1dZzkL/eE2x+UlF9AlcyqQfy6vyzydwwpXx0tFg64ft5z+Vx1
- yhp/5fsV02JgwCW0Qmzeiu/zwcTxEpRlc7y9GtQ==
-X-Google-Smtp-Source: AGHT+IETT+pd0NNqWfZAA4FiSzngYOWTcbaYEWH8St5zA4xq2sB6NIWEtn0JDqyHg0n32dYV0wMuosPJeVOLo0bsY8E=
-X-Received: by 2002:a05:6402:28c5:b0:5cb:bebb:38d8 with SMTP id
- 4fb4d7f45d1cf-5cbbf8c2365mr7760405a12.14.1730114975351; Mon, 28 Oct 2024
- 04:29:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 49SCOBYc028629
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Mon, 28 Oct 2024 20:24:11 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Oct
+ 2024 20:24:12 +0800
+Date: Mon, 28 Oct 2024 20:24:07 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <ycliang@andestech.com>, <rick@andestech.com>
+Subject: [GIT PULL] u-boot-riscv/master
+Message-ID: <Zx-CZxLR6dNGASwK@swlinux02>
 MIME-Version: 1.0
-References: <20241025111411.165904-1-sughosh.ganu@linaro.org>
- <20241025111411.165904-2-sughosh.ganu@linaro.org>
- <CAFLszTgpUOpjMogv5q0EhLHe-i=VBYHtdaGyBp6as99BkbE0pg@mail.gmail.com>
-In-Reply-To: <CAFLszTgpUOpjMogv5q0EhLHe-i=VBYHtdaGyBp6as99BkbE0pg@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 28 Oct 2024 16:59:24 +0530
-Message-ID: <CADg8p95SAYvhTaAYWOSHmZXNbyuNdB2=_2Mhwdn8eU+aBtNioQ@mail.gmail.com>
-Subject: Re: [PATCH 1/4] fdt: add support for adding pmem nodes
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 49SCOBYc028629
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,58 +63,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 27 Oct 2024 at 20:30, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sughosh,
->
-> On Fri, 25 Oct 2024 at 13:15, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > From: Masahisa Kojima <kojima.masahisa@socionext.com>
-> >
-> > One of the problems OS installers face, when running in EFI, is that
-> > the mounted ISO after calling ExitBootServices goes away. For some
-> > distros this is a problem since they rely on finding some core packages
-> > before continuing the installation. Distros have works around this --
-> > e.g Fedora has a special kernel command line parameter called
-> > inst.stage2 [0].
-> >
-> > ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
-> > don't have anything in place for DTs. Linux and device trees have support
-> > for persistent memory devices. So add a function that can inject a pmem
-> > node in a DT, so we can use it when launhing OS installers with EFI.
-> >
-> > [0]
-> > https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/installation_guide/chap-anaconda-boot-options#sect-boot-options-installer
-> >
-> > Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> >  boot/fdt_support.c    | 41 +++++++++++++++++++++++++++++++++++++++--
-> >  include/fdt_support.h | 13 +++++++++++++
-> >  2 files changed, 52 insertions(+), 2 deletions(-)
->
-> Can you please use the ofnode interface for this? We are trying not to
-> add more of this kind of fixup, as it means someone will have to port
-> it over later.
->
-> See EVT_FT_FIXUP
+Hi Tom,
 
-Are you suggesting using the EVT_FT_FIXUP interface for adding the
-pmem node? If so, how does this work on platforms which enable
-livetree? Looking at the code, I see that the EVT_FT_FIXUP gets called
-only when the livetree is not active. However, I am not able to find
-any place where the livetree is getting disabled. We do have a
-function, oftree_to_fdt() which flattens a livetree, but I don't see
-it getting called from anywhere except from a 'upl' command. The
-of_root pointer does get set in initr_of_live(), but apart from
-dm_test_pre_run(), I do not see where we disable the livetree and set
-of_root to NULL.
+The following changes since commit 3df6145db0ed3430a2af089db5a82372bea3f4d5:
 
-So on platforms which do enable livetree, how does this fixup work?
-What am I missing?
+  x86: Missed removal of CMD_BOOTEFI_HELLO_COMPILE (2024-10-27 20:11:36 -0600)
 
--sughosh
+are available in the Git repository at:
 
->
-> Regards,
-> Simon
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
+
+for you to fetch changes up to 9e859849e2caa17d730bc4507fd6ef3c7959d3b4:
+
+  riscv: cache: Add CBO instructions (2024-10-28 18:56:54 +0800)
+
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/23051
+----------------------------------------------------------------
+- risc-v: Add Zicbom support
+- board: Support RVVM board
+- DTS: device tree fixes
+- configs: Enable some configs
+----------------------------------------------------------------
+E Shattow (2):
+      riscv64: dts: starfive: Star64 ethernet0 phy delay values sync with upstream Linux
+      riscv64: dts: starfive: Mars ethernet0 phy delay values sync with upstream Linux
+
+Heinrich Schuchardt (3):
+      cmd: sbi: Add FWFT, MPXY extensions
+      riscv: add missing linefeed in error message
+      configs: visionfive2: enable CONFIG_CMD_ERASEENV
+
+LekKit (3):
+      riscv: qemu: Enable booting from NVMe
+      riscv: qemu: Enable EFI framebuffer
+      riscv: qemu: Explicitly advertise RVVM support
+
+Maksim Kiselev (2):
+      gpio: dw: Add ngpios DT-property support
+      configs: th1520_lpi4a: Enable CMD_GPIO, DM_GPIO and DWAPB_GPIO driver
+
+Mayuresh Chitale (2):
+      riscv: Add support for defining instructions
+      riscv: cache: Add CBO instructions
+
+ arch/riscv/Kconfig                     |  6 ++-
+ arch/riscv/include/asm/insn-def.h      | 39 ++++++++++++++
+ arch/riscv/include/asm/sbi.h           |  4 +-
+ arch/riscv/lib/cache.c                 | 96 ++++++++++++++++++++++++++++++++++
+ arch/riscv/lib/fdt_fixup.c             |  2 +-
+ board/emulation/qemu-riscv/Kconfig     |  2 +
+ board/starfive/visionfive2/spl.c       |  6 +--
+ cmd/riscv/sbi.c                        |  4 +-
+ configs/starfive_visionfive2_defconfig |  1 +
+ configs/th1520_lpi4a_defconfig         |  4 +-
+ drivers/gpio/dwapb_gpio.c              |  4 +-
+ include/configs/qemu-riscv.h           |  1 +
+ 12 files changed, 159 insertions(+), 10 deletions(-)
+ create mode 100644 arch/riscv/include/asm/insn-def.h
+
+Best regards,
+Leo
