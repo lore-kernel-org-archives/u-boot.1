@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01299D1039A
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 12:49:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD500D10C11
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 12:49:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58BE38917A;
-	Mon, 28 Oct 2024 13:48:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C7ED0890F8;
+	Mon, 28 Oct 2024 13:48:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eGtWLxwD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L8p7efVN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A89889156; Mon, 28 Oct 2024 13:48:40 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 5CE5F8916B; Mon, 28 Oct 2024 13:48:44 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22BA788C53
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 13:48:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67A7E890BB
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 13:48:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9a0c40849cso701980366b.3
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 05:48:38 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9454f3bfaso5019137a12.2
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 05:48:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730119716; x=1730724516; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730119719; x=1730724519; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b7uVRf7QRD51QIyxuqZsEDRqnk4PsytbESlbXh1RbDU=;
- b=eGtWLxwDAsQiDhf0/w7bNH033lLdVY+wBMVhiWsIGWGeW1TMb23YMDAC0FAvBXB5Cj
- 9yShu+e37XCi73iAGEPv1Wt3cd0L0Y17A2PcAw2YthbK2atlQMoeP4X1YS7HhB/hf4eJ
- AYaZmoKeO4lBy+JUjv3q9oFl7eFhdk1FY/Ivg=
+ bh=eUiTJtjqMXIq9jpetlZI/rgVPq4fWekFjsdgZ1J+nDI=;
+ b=L8p7efVN9MqxUdBPNfGMd0XVmkosMRN0qL6VhXWAIwthA2RAScDGDHMJeWykbYWSVE
+ 0k5kJSKyHBPtP4yz0sBqqeRfGMBwhPIxJeHgHyFMGtwtldBjCcVRpAkXZWqo9XehKx68
+ WLiXS7V9vMAJBapORXKrlg11deYUhaE2tDFac=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730119716; x=1730724516;
+ d=1e100.net; s=20230601; t=1730119719; x=1730724519;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=b7uVRf7QRD51QIyxuqZsEDRqnk4PsytbESlbXh1RbDU=;
- b=KYWgnLAnz5R5qVS/yei9OtiyC0GbFdAEUHJx5aDJjHPQSEsdI+ByyTQEvoUENSjUmj
- KDVR2VSZz/+kkcwYZCl+clKtEEZ6TPQk55Hbj9NT/VrI0cM9XZONiOGIFZUfPpAiDuGi
- gLCoCk5aqVJLSvSTSGlXAEKkhyBDbn2EjeCBMSgCxVVU3chP93PYSlczJm/YMs8lOcp/
- Gx4U9l00hMdhBIG5U2H0A1iSBdFE86wE942aJRDg6MI8vit32LuBIQwsCbenRwb1v8wX
- Pu6JWetHEXb3JWDVYa0+auYc9+cIz+2Lq+GqAMtDf973+bpZ/k550X3NE6Rc/JgrHd6X
- mXDg==
-X-Gm-Message-State: AOJu0YxLr6a9/0TnAEm31wHGS+njT6RXwNEVVlVJDwj17VRUsOUpHWMK
- dC13+siI7AeIx6Eciy9pIb6jZukNsHKELEXOhU53gJnZ7MKDSoqy+ZFg2/0mAJ7tOTpIHjtaKWE
- 4xw==
-X-Google-Smtp-Source: AGHT+IFJ5TsI9i7cSI5R4WmMps0vu7YxXXqi64bLCGbzl6j+3C5AbTKFa0PL6CKl8dSypJEqH+LJTg==
-X-Received: by 2002:a17:907:97d1:b0:a9a:6b4c:9d2c with SMTP id
- a640c23a62f3a-a9de618d417mr719956166b.59.1730119716517; 
- Mon, 28 Oct 2024 05:48:36 -0700 (PDT)
+ bh=eUiTJtjqMXIq9jpetlZI/rgVPq4fWekFjsdgZ1J+nDI=;
+ b=bb+Nd45us4moqPnwT6lzY/3GQGdXb4fZiy5TmqKBHBJBUdNvmLuUohExOKKruA1AKE
+ 2wtnBU8zIH/p3bizaCW0JLV1CV85tDOlvSxF5JZ8NmqxWD8RxoAuYmkXwTsTyfr/7+eo
+ +tCWI529NDdDhneZ2HFMoZ2IbjGFLoNRRF3WBVZpGk74aMo6sWt/dL33B4jHk/hi66F6
+ uTe3Qy9tx07mx9U/L56XQujc9SJtnbke4KknTFvtY1fBEjLusSkTsmrE20QMRhfzooHA
+ oBa/ubpDNWJch9gA4SZrpXoWc20UYPAyTAcoQG7d12wxBbQaGtxLgcaFDiyUMBPFAAJV
+ iNyQ==
+X-Gm-Message-State: AOJu0YxKbgAerLCBM15+h7eFvvlBv05R22pborK5B7T1oHSy/y+BiHBq
+ Bo1S5RuiT77HOWsc4gaSR5GJQfvcqF1MUWTFKyOa62x5sB5og3qnh1C+AfCww1T98/89IU+ysDl
+ PBg==
+X-Google-Smtp-Source: AGHT+IFKX3X8EIEXsRqfGWZUGMabcW1Vt3gQ36+e/XOKKrp6FPPAiNoRwsay96MB1cDyfk1jWFVdBQ==
+X-Received: by 2002:a17:907:94cb:b0:a9a:33c:f6e1 with SMTP id
+ a640c23a62f3a-a9de5c9f681mr768289866b.5.1730119718801; 
+ Mon, 28 Oct 2024 05:48:38 -0700 (PDT)
 Received: from chromium.org (43-114-103-145.static.glaslokaal.nl.
  [145.103.114.43]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b30d6fdc5sm375593366b.163.2024.10.28.05.48.34
+ a640c23a62f3a-a9b30d6fdc5sm375593366b.163.2024.10.28.05.48.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 05:48:35 -0700 (PDT)
+ Mon, 28 Oct 2024 05:48:37 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 08/15] lmb: Drop extra 16KB of stack space
-Date: Mon, 28 Oct 2024 13:47:59 +0100
-Message-ID: <20241028124815.47262-9-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Subject: [PATCH 09/15] efi_loader: Fix free in ..._media_device_boot_option()
+Date: Mon, 28 Oct 2024 13:48:00 +0100
+Message-ID: <20241028124815.47262-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241028124815.47262-1-sjg@chromium.org>
 References: <20241028124815.47262-1-sjg@chromium.org>
@@ -90,31 +91,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is already a defined stack-size which is used to reserve space for
-the stack. It is confusing to add more in the lmb module, since then the
-memory map (with meminfo command) seems to have a hole in it.
-
-Drop this unnecessary feature.
+Freeing a NULL pointer is an error in EFI, so check the pointer first,
+before freeing it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- lib/lmb.c | 2 --
- 1 file changed, 2 deletions(-)
+ lib/efi_loader/efi_bootmgr.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/lib/lmb.c b/lib/lmb.c
-index eec99c185ee..9d60865122f 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -219,8 +219,6 @@ static void lmb_reserve_uboot_region(void)
- 	 */
- 	debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index a3aa2b8d1b9..431a38704e9 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -1180,7 +1180,8 @@ out:
+ 			free(opt[i].lo);
+ 	}
+ 	free(opt);
+-	efi_free_pool(handles);
++	if (handles)
++		efi_free_pool(handles);
  
--	/* adjust sp by 16K to be safe */
--	rsv_start -= SZ_16K;
- 	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
- 		if (!gd->bd->bi_dram[bank].size ||
- 		    rsv_start < gd->bd->bi_dram[bank].start)
+ 	if (ret == EFI_NOT_FOUND)
+ 		return EFI_SUCCESS;
 -- 
 2.43.0
 
