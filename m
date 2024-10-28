@@ -4,88 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A966D3E2C2
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 20:02:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F4C4D5B156
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 21:02:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61C5D89080;
-	Mon, 28 Oct 2024 21:02:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2BB8A8908F;
+	Mon, 28 Oct 2024 22:02:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Vxb6EVym";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="DBcYpyms";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C80A3890CE; Mon, 28 Oct 2024 21:02:34 +0100 (CET)
-Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
- [IPv6:2607:f8b0:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9EDDD890E7; Mon, 28 Oct 2024 22:02:19 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8501889080
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 21:02:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A9CBC8907E
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 22:02:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-7c1324be8easo3985996a12.1
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 13:02:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730145751; x=1730750551; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H0Yrfhf8aWx4KxVZW2XStx6VujwtRe0IhgBI9hg/9i0=;
- b=Vxb6EVym8ucvMwKPgdkzV15U/jpnyUGlYQiG24hNhHOYRfr2xlD6GbokS4nrjeNLrH
- 6fqgJWG/BXuu96hS+ai2O2tX+tAGLZz1FNEioSyayfyWEfnU3PXto+oNFfBjgZqnMp6J
- ANTSStFalF3CXJCOg9JdOEF08gdzmVD3y6cxhai69up44ptFYqoY/lai3KE4GsvQosCY
- i6NkD6qQxka+ehWvPxLUEHMX7Mu3u7jRb10+U5cp58qjEM03o5qnjUwEcjxPo55Ufh+y
- 0rWY+gtXUIr6jmSteqqEHZYnYBlUhTeoDYt/TV4l45Tps/Fyz505wLzSnTpqFsmdnYuN
- a8SQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730145751; x=1730750551;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=H0Yrfhf8aWx4KxVZW2XStx6VujwtRe0IhgBI9hg/9i0=;
- b=w+6d6gzNiUCyP0rkhIwNrhQaIMd6oEj7B3t8jbqZjTvc8rP0SEK97LBul7JJK7ZPMa
- AXE96gHcbSIkn3+x5Ev2O/MSLl0A9XJGBtsrB+vKSZh+Il4GVJkyxdMhG4WOZpQc3SBC
- AVxt/ViFLqUukgYuj5C7SmgvF5KJBpU4Wcj+5zyzwRY7cqudnS036R0VuHIC9iAfjIAk
- CZMjqTSSel9PHb2wRisPmoG89OX3P+DgkbgocGqkQFLrpqgB0iUBbMeyiwTLcF1uBcqK
- ZsGs3VYrVf//df8hZr/Yyvtam0/jEJaT0mro87u1CjwafmdLyJX6uri/4JGOQ7KwhDjI
- 6dNw==
-X-Gm-Message-State: AOJu0Yy2yxYiZHJFYb91ZisRXDwKbN52j4nVuV8/gyFzGuwM1XXVmHy3
- BLIFPqH++zmz3TH73fTvnB77+krAOdfvAk60h/jCmOpu9lTCl/UwiHh+La+zJ9qj/ulHZxAnXwS
- u+lm8f6d8FM+r97s411t89h3ps5240wKKpAjQOA==
-X-Google-Smtp-Source: AGHT+IGrbFIfOfN01l6hTUiooIg90WBakJ4tFEU7HaIhxs8OHPFT/W57hmMSrppoyNOPjZSha6uZrl24viWCr9AfZmQ=
-X-Received: by 2002:a17:90a:9a8:b0:2c9:90fa:b9f8 with SMTP id
- 98e67ed59e1d1-2e91e84d2aemr1157234a91.10.1730145750940; Mon, 28 Oct 2024
- 13:02:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1730149336; x=1730754136; i=xypron.glpk@gmx.de;
+ bh=sQIV9N0akjdnPNcC5+lLnpTtbjJGzVOQsUlYDO2f8Ts=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=DBcYpymsoCo3KfiQ1yQG0LVFGNkIOpNSuigLPaWaivxxyCEiFFrj1Sp4p629zQjk
+ 0y3di0prVv98hG5XhqYAkoGOp4RinULaL9nnHIvDJMEMSpPMNiOr5zSP5cJycM73b
+ pZdTXE0Hgmh220lr5WjMB9kPpzbvCRkkyHJAM6ewJHKXU8yiZHEz2TyggfBf1AgvB
+ DNAuUi+bwcCkJGuA9n3t9lXVaizItI2XVn2W2K02K3Bl+/U3VlYO+rf8Wr51XEHH2
+ VhlvkPpEXuKVSt8hrfzXts9ap4WbYx/UTmyTSkPTwMnlUhBcZu1JHK5JYSWupJBj4
+ 3jbQl5XP6RpngBg1Og==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [10.43.6.224] ([87.215.50.114]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MrQIv-1th0tb0WTn-00ioB1; Mon, 28
+ Oct 2024 22:02:16 +0100
+Message-ID: <e29cdac5-8c91-4e6b-a7a6-e94917c12fa6@gmx.de>
+Date: Mon, 28 Oct 2024 22:02:15 +0100
 MIME-Version: 1.0
-References: <20241022200543.116343-1-raymond.mao@linaro.org>
- <20241022200543.116343-8-raymond.mao@linaro.org>
- <CAFLszTgRxuiQOZOr_fvAZjmZewKHPi3k5Hdd+CgeExpVDycnVA@mail.gmail.com>
-In-Reply-To: <CAFLszTgRxuiQOZOr_fvAZjmZewKHPi3k5Hdd+CgeExpVDycnVA@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 28 Oct 2024 16:02:20 -0400
-Message-ID: <CAEfUkUKJSVcuMGVVkiOYrGgknDrmzFvBa7LUSDgWU2T5GBuqVQ@mail.gmail.com>
-Subject: Re: [PATCH v2 7/8] cmd: update smbios cmd
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Stefan Roese <sr@denx.de>, Wan Yee Lau <wan.yee.lau@intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Alexander Gendin <agendin@matrox.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Max Krummenacher <max.krummenacher@toradex.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] test/cmd: Make some "ut dm" tests only available on
+ sandbox
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20241028164844.2308549-1-trini@konsulko.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241028164844.2308549-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:RozK2z4OFuFXMOFo9DeTdant2gavviosrsnroCOwRvncB1VJzYK
+ zaAV5Zmk/Fl7fs0SomTgReJNj3vDP4fgAdMit83/twLFnBnGv2sdtfwoFlDsbQVCVLQfEhB
+ +5/nXruyXJALZodt8RUDtl5j0kPvzZXH5oG7UAafLzC7g3aAxEguAYhLV+Bx3dLc5Btn2nU
+ u/p1Wi2teEQKpdbme+Rtg==
+UI-OutboundReport: notjunk:1;M01:P0:/K8ltJC0nYw=;S91RzKi6rwhIJwVpRd6HoG+UTuK
+ IWYpZsK3jHoT09VQYrnQ/08JnGXsqfAysTaTuGcRt0z2VNnHtM9JtfISUQbRhiHUfl9GgCMZD
+ DNha+iGFB4MRnXFysNLOQj7Skrr+K/5/ngS/Q5TuoRjDJRzoQ6FufB1p4GuVD0RW+rucDP+Rt
+ hxUbzaKzuCoElV9KI18SDmr8Xm2RUznBsd+p4fTmQ9qPjsN6Su+j0IJVT80YCWq4rzVe8kcyP
+ 2DTIKwnnz48AXoeI+qfDYoeRvV8QeMkUcOoCyQ4c98584OFoYvChwS5ZzTWz8tc/ur3UFcXhx
+ WTZMtfR47ZOoP74LVBG3nz5zAAPO4WBiXFD26VX6O6wxoxxzDCFccETLjtQs2NeHkUlokaIKz
+ VtorPgKehIVgjIVwTYWutSNgtMTafE/K9AY9DTxHTLsRuXO9Uk0UvULqSGdlXV9R+oqblUkjv
+ A1YTcfo3ST/o18kMQK2waXekeohOqGpklqlu68HyVBPcm3bYQ1Hy4Aqn7En2unNKVawUtNRmo
+ 8mRd10Rlt84ExDjnDX2GEl4MCT4AQ25lK75as2iZVZ6OC5TcnP5T0xLJHSlRBomE5RSDH2Mgr
+ 6KOUiirO622WsEcO96DK42fcDCCEMsUKpFSYSEtCIEg4OrOqp8aJkNpRLsh5tTs1xrMRoZ6Ed
+ tDhft4HFYHDdAZfRQ36m+u0+lNQMDvWq1oChv/mSFcQtVua/5G8yKM1JtljLj4+ccSojP89Et
+ 5kixzh7joI9g/PyRn+MNPmrmSS3CyNKTwuCRuPsPtRQit/42wGVFAvxVENM/jdXpb93nCc9sC
+ 57rl5xOsTkGR8Il7PGrzy5Vw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,38 +90,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On Mon, 28 Oct 2024 at 13:05, Simon Glass <sjg@chromium.org> wrote:
-
-> On Tue, 22 Oct 2024 at 22:07, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Update the cmd according to the changes of the smbios library:
-> > 1. Refactor smbios cmd print functions to match the content defined
-> >    by the specification.
-> > 2. Add new print functions for Type 0, 3, 4 and 7.
-> > 3. Update the expected pytest result to align with the smbios
-> >    library changes.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> > Changes in v2
-> > - Initial patch. Move all changes related to cmd/smbios into this patch.
-> > - Combine with #9(v1) patch.
-> >
-> >  cmd/smbios.c                 | 342 ++++++++++++++++++++++++++++++++---
-> >  include/smbios.h             |   5 +
-> >  test/py/tests/test_smbios.py |   2 +-
-> >  3 files changed, 319 insertions(+), 30 deletions(-)
-> >
+On 10/28/24 17:48, Tom Rini wrote:
+> Currently, the "dm" suite in unit tests (ut) is only available on
+> sandbox. Make sure that all cmd tests that are part of this suite are
+> only available on sandbox and not attempted to be run on hardware (where
+> it will fail to be able to be started).
 >
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> OK, so it should be possible to expand the test for sandbox to check each
-> field? Something like test/dm/acpi.c ?
->
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
-Yes, I can add some more field checkers in the next version.
 
-Regards,
-Raymond
+Adding a comment to the sources describing that the tests require
+sandbox drivers would be helpful.
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+
+> ---
+>   test/cmd/Makefile | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+> index 4b487c1d2cb4..fe7a2165af22 100644
+> --- a/test/cmd/Makefile
+> +++ b/test/cmd/Makefile
+> @@ -25,16 +25,16 @@ obj-$(CONFIG_CMD_MEM_SEARCH) +=3D mem_search.o
+>   ifdef CONFIG_CMD_PCI
+>   obj-$(CONFIG_CMD_PCI_MPS) +=3D pci_mps.o
+>   endif
+> -obj-$(CONFIG_CMD_PINMUX) +=3D pinmux.o
+> -obj-$(CONFIG_CMD_PWM) +=3D pwm.o
+>   obj-$(CONFIG_CMD_SEAMA) +=3D seama.o
+>   ifdef CONFIG_SANDBOX
+>   obj-$(CONFIG_CMD_MBR) +=3D mbr.o
+> +obj-$(CONFIG_CMD_PINMUX) +=3D pinmux.o
+> +obj-$(CONFIG_CMD_PWM) +=3D pwm.o
+>   obj-$(CONFIG_CMD_READ) +=3D rw.o
+>   obj-$(CONFIG_CMD_SETEXPR) +=3D setexpr.o
+> +obj-$(CONFIG_CMD_TEMPERATURE) +=3D temperature.o
+>   ifdef CONFIG_NET
+>   obj-$(CONFIG_CMD_WGET) +=3D wget.o
+>   endif
+>   obj-$(CONFIG_ARM_FFA_TRANSPORT) +=3D armffa.o
+>   endif
+> -obj-$(CONFIG_CMD_TEMPERATURE) +=3D temperature.o
+
