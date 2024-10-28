@@ -4,94 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 432A3D3E2BA
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 19:33:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D809FD3E2BC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 19:44:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3EFB890D1;
-	Mon, 28 Oct 2024 20:33:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5BB108908F;
+	Mon, 28 Oct 2024 20:44:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="knHxhQTm";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SHEnYTs+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A18D0890D1; Mon, 28 Oct 2024 20:33:19 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B07FF8908F; Mon, 28 Oct 2024 20:44:07 +0100 (CET)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C69868913A
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 20:33:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 23E4D8907E
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 20:44:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730143985; x=1730748785; i=xypron.glpk@gmx.de;
- bh=1vPb1bBanrjB4gwtNauXrejOIyGHh0nWhmXMVi3PLuc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=knHxhQTmn/ouJ93AMKCiu36JBLfG6M5UNxbfRYhdqmgpLuLAjYg1M9GRJtVTbJAY
- tyc6gnE2E7Jw+kcXOWhb6c+2St3LL0JZEubD2fDv7lVVIx7uP0oQS8b0oNacR7pIt
- lrSxWDCOqIVgkdtdvxP+YH+JZ7CsBFMQPABTB8zXj6IHm63yabnTauuRUU/1UVqt3
- ji5el3u8wVtu9KA+ihjqXCBbj9lHGusnXshVkMVR7T6ztjF+Y/i8FAcYYYnphH61V
- Uxo1nVhyuIgQvaC/ui9gfFDVMtovQ5Lb97Hpar8nmq0yqpDkD4r/3NsFcl2CTzJ7l
- 0Uubmn2Zl9CvXS0T9Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [10.43.6.224] ([87.215.50.114]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MYvcA-1tRQ2b1zQu-00TroK; Mon, 28
- Oct 2024 20:33:05 +0100
-Message-ID: <195d624a-507a-4008-b576-4fb017ad1e64@gmx.de>
-Date: Mon, 28 Oct 2024 20:33:04 +0100
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-71f5208217dso3072976b3a.2
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 12:44:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730144642; x=1730749442; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NuD1rKE+71bIwCDVopyOLwtX5i4RBL798MBU4b0Xn3o=;
+ b=SHEnYTs+2W/vmYJjeCNre2rF0igdiGpUheriQyDcF7hQqkE1q0O0KASO77vlmsilV3
+ mj73Sa3Tz4KCbN1BwkcCo1oszQ++panrap6Nn1KzMV81KRZPK6/de7h16C4DrJWiaZOt
+ Bn67v2Ly19BL1Rlp/BVnSoDXIV/zE5Z0/9H9sLQZCp2oeCkAPM2AWpHL83PR2JnpOSx5
+ jwo0rIVBXjX4bu2S4Sis8K2Bzckcls+IPJxKvNC6PGiycfgGL2qxR5OFWAtpmEd9IV72
+ FIdAkx2RbwFEjoBzuSywF3u78ATegw18z9fuZ1eU1jZM/lAN7N0kZgReelx/deT6BsDt
+ hNPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730144642; x=1730749442;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NuD1rKE+71bIwCDVopyOLwtX5i4RBL798MBU4b0Xn3o=;
+ b=hVTRZ/Z/wCW1LizkP+uimMkGvrgAAyy8hEjYNjH3dzbfpmTHpygJNN+6qEaD+cAw/J
+ hhMVg+R6fkVr2BTBqSui/TCz6DcaOIlAgL5ia/8HEBojfNXDMrcW/DVtEF6Tjz8iRINu
+ c3OofZmUC7P5rFRAYeuWcrqkmAzM31Cxz2GXKEV2NbRj65hvUL6W1TVQVzUEv9x+tdw6
+ fh2ccx+xwgG8eRFFRb2XKmEanEJIa+YJ89OwmPvlD3DMD0aXKqy61U1/mG+i+xn1tIf1
+ nNBHkcb3XMjLZWFJADsV7wpB8nwyNSKiEfVSpsq82Uc71mDKPoWFkZN7W0413Gky/XXf
+ PpNQ==
+X-Gm-Message-State: AOJu0YwMnebDZ80Dyf1xJ2YfKAwW0glWY1mnWDVP2gwNYI4cbbQyyNib
+ TnJLaMNxhE1Fxch5vw5lVUtx640YTILYMGLWGEMof5M5iAckRjlhMf1dq3zYvADeE3yToOlCDTD
+ rGXeQgZQD9/Xp4U/FdrFMXdsmML5jJmF5azDMfg==
+X-Google-Smtp-Source: AGHT+IGYdNZzefm52mSMwtFwj46ENUz+5GaaOtqJz83eAqHgum+igP70qV4Z0SBWX8d6SOvoWQQg9STmp5+5H9UvV/A=
+X-Received: by 2002:a05:6a20:c6c1:b0:1cf:9a86:6cb7 with SMTP id
+ adf61e73a8af0-1d9a83d5671mr12338877637.20.1730144642481; Mon, 28 Oct 2024
+ 12:44:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 7/8] test: efi: boot: Set up an image suitable for EFI
- testing
+References: <20241022200543.116343-1-raymond.mao@linaro.org>
+ <20241022200543.116343-4-raymond.mao@linaro.org>
+ <CAFLszTjNB+JZZdKShy6JkR69E2WJE-g=OapC3oThPeT1jLS-zA@mail.gmail.com>
+In-Reply-To: <CAFLszTjNB+JZZdKShy6JkR69E2WJE-g=OapC3oThPeT1jLS-zA@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Mon, 28 Oct 2024 15:43:50 -0400
+Message-ID: <CAEfUkUK2a_EixD6zGJfNbhpu1nd9LVxmtjh=ojf0Za9OBbLpGg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/8] sysinfo: Add sysinfo driver and data structure for
+ smbios
 To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, Eddie James
- <eajames@linux.ibm.com>, Francis Laniel
- <francis.laniel@amarulasolutions.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Yang Xiwen <forbidden405@outlook.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20241022120032.196311-1-sjg@chromium.org>
- <20241022120032.196311-8-sjg@chromium.org>
- <e29d4360-87c0-478c-be50-f9af99e6c2b9@gmx.de>
- <67974fc5-0aee-4160-a29e-61a29e383f2c@gmx.de>
- <CAFLszTh+z6y8xcYFS_UOyn1aqipBCujs0WaivQAtoo7+BkrxKA@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAFLszTh+z6y8xcYFS_UOyn1aqipBCujs0WaivQAtoo7+BkrxKA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:+8UtgvNl/U0tgZ/cCj47II7M7V3Eqr68EcUIGRgqMCxgmxclNBO
- gwx8FirdbBedPv0+vTmfkdIHzlvCMmhfFpxrRd+uLDbR0DsAA2Br0mUiro/b5XdYuEZXO09
- xphTr+/qko5k3i4PXHZRqEgtnqfrnvtg5frnje5sDr+iVwhz9GxBcKsroRi5l4gTVD15x/h
- c+cVAdICW1n8I6F1PJGSg==
-UI-OutboundReport: notjunk:1;M01:P0:0U460pPscE4=;1ScDMdDoQ4bolp31AvxQNCPAqnB
- vXQ7Nkl/smnFLHw08W/VmduNv7HksNDB3F3+Wn7+2bvy88bgfIHGMzh5BOCNJWAN7XuPUfKKE
- lIeCrhLi2eK2EnkVTW5N5tQwWosvOdNlUMKacU5lwchfNAWlPVOOULPhIdOO1cbe/aQ6RSX5A
- EM8rLVz4jawrAbxwO7eFhhWJhmUukI+A4mjmOBqvzYeUajAxS7NjLjBeOdVrVru7/RrWj3BNN
- fe0Tr67IY4ZEpt7H6g9EHuu1C/TYmecCcaSmvgVi/+sbBARA+7SNiwQ+u01+mPBow/bBAj58s
- 59Cnhr3IeDlAZ+UaxFrEoCll/W5Y6Rxpf5Ni1gERsBCLnK8arElaetS0JIfIvlP6e86nlMGl5
- s4VVRgppE0g0x64JApED7zZd0X8aFbO1TxwJ2nkQtLCqJWa6hPH67ExVb9XiwpXCQuOBk3tvV
- g8If13Pl2F/f31NvQrVRNH57NkTVo9CDdCBrJApkXzkOX4MzKiQYiGISq5sTWrSDaOzZzKluv
- CksL3FAkBllRNmpasP/Y3K6PoI4GItOkIgZsEVuaj1ImJkM557QUHorzvtJ9yNgsZxuV57V6n
- 6mOp1DuTYZ5SxqDeDpew1PMwCKW+Z+vXfDMsb77j+vtlpRUHWgYd+q6vtKNIsa1a1WATFchjP
- Pc639DHTJ+0637hQyNpkzAuE9oTKSvjs/DqBX13XojSAaqs9yhbwUmm5of1GNaFWQC1F+aUqV
- pfooD8JAavRPJ/7kjZA+7we+6BXYEpo1tMupm9TYo8QMRwiNRC84JHWPO3yofyX+ENdQrqAPM
- 6k1UGHov68pG8DXF+CWWK8lj9SJcPhYJqws9vzLQyNRN0=
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Stefan Roese <sr@denx.de>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
+ Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,255 +102,615 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/28/24 18:02, Simon Glass wrote:
-> Hi Heinrich,
+Hi Simon,
+
+On Mon, 28 Oct 2024 at 13:04, Simon Glass <sjg@chromium.org> wrote:
+
+> Hi Raymond,
 >
-> On Mon, 28 Oct 2024 at 11:25, Heinrich Schuchardt <xypron.glpk@gmx.de
-> <mailto:xypron.glpk@gmx.de>> wrote:
->  >
->  > On 10/28/24 07:08, Heinrich Schuchardt wrote:
->  > > On 10/22/24 14:00, Simon Glass wrote:
->  > >> Create a new disk for use with tests, which contains the new 'test=
-app'
->  > >> EFI app specifically intended for testing the EFI loader.
->  > >>
->  > >> Attach it to the USB device, since most testing is currently done =
-with
->  > >> mmc.
->  > >>
->  > >> Initially this image will be used to test the EFI bootmeth.
->  > >>
->  > >> Fix a stale comment in prep_mmc_bootdev() while we are here.
->  > >>
->  > >> For now this uses sudo and a compressed fallback file, like all th=
-e
->  > >> other bootstd tests. Once this series is in, the patch which moves
->  > >> this to use user-space tools will be cleaned up and re-submitted.
->  > >>
->  > >> Signed-off-by: Simon Glass <sjg@chromium.org
-> <mailto:sjg@chromium.org>>
->  > >>
->  > >> ---
->  > >> Here is the patch to avoid sudo and CI fallback:
->  > >>
->  > >> [1] https://patchwork.ozlabs.org/project/uboot/patch/ <https://
-> patchwork.ozlabs.org/project/uboot/patch/>
->  > >> 20240802093322.15240-1-richard@nod.at/
-> <http://20240802093322.15240-1-richard@nod.at/>
->  > >>
->  > >> (no changes since v1)
->  > >>
->  > >>=C2=A0 =C2=A0arch/sandbox/dts/test.dts=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0|=C2=A0 =C2=A02 +-
->  > >>=C2=A0 =C2=A0test/boot/bootdev.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 18 +++++++++-
->  > >>=C2=A0 =C2=A0test/boot/bootflow.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +-
->  > >>=C2=A0 =C2=A0test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 by=
-tes
->  > >>=C2=A0 =C2=A0test/py/tests/test_ut.py=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 |=C2=A0 52 ++++++++++++++++++++++
-> ++----
->  > >>=C2=A0 =C2=A05 files changed, 65 insertions(+), 9 deletions(-)
->  > >>=C2=A0 =C2=A0create mode 100644 test/py/tests/bootstd/flash1.img.xz
->  > >>
->  > >> diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
->  > >> index 9bf44ae3b0b..f40fd5a2b16 100644
->  > >> --- a/arch/sandbox/dts/test.dts
->  > >> +++ b/arch/sandbox/dts/test.dts
->  > >> @@ -1512,7 +1512,7 @@
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0flash-stick@1 {
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0reg =3D <1>;
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0compatible =3D "sandbox,usb-flash";
->  > >> -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 sandbox,filepath =3D "testflash1.bin";
->  > >> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 sandbox,filepath =3D "flash1.img";
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0};
->  > >>
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0flash-stick@2 {
->  > >> diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
->  > >> index 369105ca4cf..c892854b227 100644
->  > >> --- a/test/boot/bootdev.c
->  > >> +++ b/test/boot/bootdev.c
->  > >> @@ -221,6 +221,10 @@ static int bootdev_test_order(struct
->  > >> unit_test_state *uts)
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0/* Use the environment variable to overr=
-ide it */
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_assertok(env_set("boot_targets", "mmc=
-1 mmc2 usb"));
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_assertok(bootflow_scan_first(NULL, NU=
-LL, &iter, 0, &bflow));
->  > >> +
->  > >> +=C2=A0 =C2=A0 /* get the usb device which has a backing file (fla=
-sh1.img) */
->  > >> +=C2=A0 =C2=A0 ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
->  > >> +
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq(-ENODEV, bootflow_scan_next(=
-&iter, &bflow));
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq(5, iter.num_devs);
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq_str("mmc1.bootdev", iter.dev=
-_used[0]->name);
->  > >> @@ -260,7 +264,11 @@ static int bootdev_test_order(struct
->  > >> unit_test_state *uts)
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_assertok(bootflow_scan_first(NULL, NU=
-LL, &iter, 0, &bflow));
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq(2, iter.num_devs);
->  > >>
->  > >> -=C2=A0 =C2=A0 /* Now scan past mmc1 and make sure that the 3 USB =
-devices show
->  > >> up */
->  > >> +=C2=A0 =C2=A0 /*
->  > >> +=C2=A0 =C2=A0 =C2=A0* Now scan past mmc1 and make sure that the 3=
- USB devices show
->  > >> up. The
->  > >> +=C2=A0 =C2=A0 =C2=A0* first one has a backing file so returns suc=
-cess
->  > >> +=C2=A0 =C2=A0 =C2=A0*/
->  > >> +=C2=A0 =C2=A0 ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq(-ENODEV, bootflow_scan_next(=
-&iter, &bflow));
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq(6, iter.num_devs);
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq_str("mmc2.bootdev", iter.dev=
-_used[0]->name);
->  > >> @@ -322,6 +330,10 @@ static int bootdev_test_prio(struct
->  > >> unit_test_state *uts)
->  > >>
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0/* 3 MMC and 3 USB bootdevs: MMC should =
-come before USB */
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_assertok(bootflow_scan_first(NULL, NU=
-LL, &iter, 0, &bflow));
->  > >> +
->  > >> +=C2=A0 =C2=A0 /* get the usb device which has a backing file (fla=
-sh1.img) */
->  > >> +=C2=A0 =C2=A0 ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
->  > >> +
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq(-ENODEV, bootflow_scan_next(=
-&iter, &bflow));
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq(6, iter.num_devs);
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq_str("mmc2.bootdev", iter.dev=
-_used[0]->name);
->  > >> @@ -339,6 +351,10 @@ static int bootdev_test_prio(struct
->  > >> unit_test_state *uts)
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0bootflow_iter_uninit(&iter);
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_assertok(bootflow_scan_first(NULL, NU=
-LL, &iter,
-> BOOTFLOWIF_HUNT,
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0&bflow));
->  > >> +
->  > >> +=C2=A0 =C2=A0 /* get the usb device which has a backing file (fla=
-sh1.img) */
->  > >> +=C2=A0 =C2=A0 ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
->  > >> +
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq(-ENODEV, bootflow_scan_next(=
-&iter, &bflow));
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq(7, iter.num_devs);
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_asserteq_str("usb_mass_storage.lun0.b=
-ootdev",
->  > >> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
->  > >> index 539abe63ebe..d94c07963d5 100644
->  > >> --- a/test/boot/bootflow.c
->  > >> +++ b/test/boot/bootflow.c
->  > >> @@ -533,7 +533,7 @@ static int prep_mmc_bootdev(struct unit_test_s=
-tate
->  > >> *uts, const char *mmc_dev,
->  > >>
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0order[2] =3D mmc_dev;
->  > >>
->  > >> -=C2=A0 =C2=A0 /* Enable the mmc4 node since we need a second boot=
-flow */
->  > >> +=C2=A0 =C2=A0 /* Enable the requested mmc node since we need a se=
-cond
-> bootflow */
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0root =3D oftree_root(oftree_default());
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0node =3D ofnode_find_subnode(root, mmc_d=
-ev);
->  > >>=C2=A0 =C2=A0 =C2=A0 =C2=A0ut_assert(ofnode_valid(node));
->  > >> diff --git a/test/py/tests/bootstd/flash1.img.xz b/test/py/tests/
->  > >> bootstd/flash1.img.xz
->  > >> new file mode 100644
->  > >> index
->  > >>
-> 0000000000000000000000000000000000000000..9148b91a20c1f0acb54449b124d140=
-8961e92507
->  > >
->  > > We should not accept such binaries. This was just how xz was hacked
->  > > (https://en.wikipedia.org/wiki/XZ_Utils_backdoor <https://
-> en.wikipedia.org/wiki/XZ_Utils_backdoor>).
->  > >
->  > > This binary wouldn't conform to the GPL 2.0 license either.
+> On Tue, 22 Oct 2024 at 22:06, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Add sysinfo driver to retrieve smbios information (Type 4 and 7).
+> > So that the smbios library can use it for getting values from the
+> > hardware platform instead of device tree.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Move the changes to smbios.c instead of creating new file.
+> > - Move the headfile to include dir.
+> > - Combine with #6(v1) patch.
+> > - Clean-up the private data structures.
+> > - Clean-up the operations of the strings and common values.
+> >
+> >  drivers/sysinfo/smbios.c | 228 +++++++++++++++++++++++++++++++++++++++
+> >  include/smbios.h         |  60 +++++++++++
+> >  include/smbios_plat.h    |  79 ++++++++++++++
+> >  include/sysinfo.h        |  95 +++++++++++++++-
+> >  4 files changed, 461 insertions(+), 1 deletion(-)
+> >  create mode 100644 include/smbios_plat.h
+> >
+> > diff --git a/drivers/sysinfo/smbios.c b/drivers/sysinfo/smbios.c
+> > index a7ac8e3f072..3980845b3ba 100644
+> > --- a/drivers/sysinfo/smbios.c
+> > +++ b/drivers/sysinfo/smbios.c
+> > @@ -5,14 +5,240 @@
+> >   */
+> >
+> >  #include <dm.h>
+> > +#include <smbios_plat.h>
+> >  #include <sysinfo.h>
+> >
+> > +/* platform information storage */
+> > +struct processor_info processor_info;
+> > +struct cache_info cache_info[SYSINFO_CACHE_LVL_MAX];
+> > +struct sysinfo_plat sysinfo_smbios_p = {
+> > +       /* Processor Information */
+> > +       .processor = &processor_info,
+> > +       /* Cache Information */
+> > +       .cache = &cache_info[0],
+> > +};
+> > +
+> > +/* structure for smbios private data storage */
+> > +struct sysinfo_plat_priv {
+> > +       struct processor_info *t4;
+> > +       struct smbios_type7 t7[SYSINFO_CACHE_LVL_MAX];
+> > +       u16 cache_handles[SYSINFO_CACHE_LVL_MAX];
+> > +       u8 cache_level;
+> > +};
+> > +
+> > +static void smbios_cache_info_dump(struct smbios_type7 *cache_info)
+> > +{
+> > +       log_debug("SMBIOS Type 7 (Cache Information):\n");
+> > +       log_debug("Cache Configuration: 0x%04x\n",
+> cache_info->config.data);
+> > +       log_debug("Maximum Cache Size: %u KB\n",
+> cache_info->max_size.data);
+> > +       log_debug("Installed Size: %u KB\n", cache_info->inst_size.data);
+> > +       log_debug("Supported SRAM Type: 0x%04x\n",
 >
-> Yes, I've offered to tidy up the patch and drop this binary (and the
-> others) once this test lands.
+> %#04x
 >
-> [..]
+> > +                 cache_info->supp_sram_type.data);
+> > +       log_debug("Current SRAM Type: 0x%04x\n",
+> > +                 cache_info->curr_sram_type.data);
+> > +       log_debug("Cache Speed: %u\n", cache_info->speed);
+> > +       log_debug("Error Correction Type: %u\n",
+> cache_info->err_corr_type);
+> > +       log_debug("System Cache Type: %u\n", cache_info->sys_cache_type);
+> > +       log_debug("Associativity: %u\n", cache_info->associativity);
+> > +       log_debug("Maximum Cache Size 2: %u KB\n",
+> cache_info->max_size2.data);
+> > +       log_debug("Installed Cache Size 2: %u KB\n",
+> > +                 cache_info->inst_size2.data);
+> > +}
+> > +
+> > +/* weak function for the platforms not yet supported */
+> > +__weak int sysinfo_get_cache_info(u8 level, struct cache_info
+> *cache_info)
+> > +{
+> > +       return -ENOSYS;
+> > +}
+> > +
+> > +__weak int sysinfo_get_processor_info(struct processor_info *pinfo)
+> > +{
+> > +       return -ENOSYS;
+> > +}
+> > +
+> > +void sysinfo_cache_info_default(struct cache_info *ci)
+> > +{
+> > +       memset(ci, 0, sizeof(*ci));
+> > +       ci->config.data = SMBIOS_CACHE_LOCATE_UNKNOWN |
+> SMBIOS_CACHE_OP_UND;
+> > +       ci->supp_sram_type.fields.unknown = 1;
+> > +       ci->curr_sram_type.fields.unknown = 1;
+> > +       ci->speed = SMBIOS_CACHE_SPEED_UNKNOWN;
+> > +       ci->err_corr_type = SMBIOS_CACHE_ERRCORR_UNKNOWN;
+> > +       ci->cache_type = SMBIOS_CACHE_SYSCACHE_TYPE_UNKNOWN;
+> > +}
+> > +
+> > +static int sysinfo_plat_detect(struct udevice *dev)
+> > +{
+> > +       return 0;
+> > +}
+> > +
+> > +static int sysinfo_plat_get_str(struct udevice *dev, int id,
+> > +                               size_t size, char *val)
+> > +{
+> > +       struct sysinfo_plat_priv *priv = dev_get_priv(dev);
+> > +       const char *str = NULL;
+> > +
+> > +       switch (id) {
+> > +       case SYSINFO_ID_SMBIOS_PROCESSOR_MANUFACT:
 >
->  > >> +def setup_efi_image(cons):
->  > >> +=C2=A0 =C2=A0 """Create a 20MB disk image with an EFI app on it""=
-"
->  > >> +=C2=A0 =C2=A0 devnum =3D 1
->  > >> +=C2=A0 =C2=A0 basename =3D 'flash'
->  > >> +=C2=A0 =C2=A0 fname, mnt =3D setup_image(cons, devnum, 0xc, secon=
-d_part=3DTrue,
->  > >> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0basename=3Dbasename)
->  > >> +
->  > >> +=C2=A0 =C2=A0 loop =3D None
->  > >> +=C2=A0 =C2=A0 mounted =3D False
->  > >> +=C2=A0 =C2=A0 complete =3D False
->  > >> +=C2=A0 =C2=A0 try:
->  > >> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 loop =3D mount_image(cons, fname, mnt=
-, 'ext4')
->  > >> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 mounted =3D True
->  > >> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 efi_dir =3D os.path.join(mnt, 'EFI')
->  > >> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 mkdir_cond(efi_dir)
->  > >> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 bootdir =3D os.path.join(efi_dir, 'BO=
-OT')
->  > >> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 mkdir_cond(bootdir)
->  > >> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 efi_src =3D os.path.join(cons.config.=
-build_dir,
->  > >> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0f'lib/efi_loader/testapp.e=
-fi')
->  > >> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 efi_dst =3D os.path.join(bootdir, 'BO=
-OTSBOX.EFI')
->  >
->  > As said I can live with the -n switch though that standards defying
->  > bootsbox.efi name provides no benefit whatsoever. But, please, do not
->  > ignore the switch.
+> These are getting too long.
 >
-> The -N flag is provided for allowing sandbox to use the correct, default
-> name for the underlying host. It is not intended for use in CI, where
-> 'sandbox is sandbox'. So far, CI calls sandbox without that flag, so the
-> code above is actually correct.
+> How about SYSINFOSM_PROC_MANUF ?
+>
+> We can use SYSINFOSM as short for SYSINFO_ID_SMBIOS
+>
+> Other existing macros are starting from SYSINFO_ID_, so I guess something
+reasonable can be SYSINFO_ID_SMB_PROC_MANU.
+
+
+> > +               str = priv->t4->manufacturer;
+> > +               break;
+> > +       default:
+> > +               break;
+> > +       }
+> > +
+> > +       if (!str)
+> > +               return -ENOSYS;
+> > +
+> > +       strlcpy(val, str, size);
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +static int sysinfo_plat_get_int(struct udevice *dev, int id, int *val)
+> > +{
+> > +       struct sysinfo_plat_priv *priv = dev_get_priv(dev);
+> > +       u8 i;
+> > +
+> > +       if (id >= SYSINFO_ID_SMBIOS_CACHE_INFO_START &&
+> > +           id <= SYSINFO_ID_SMBIOS_CACHE_INFO_END) {
+> > +               /* For smbios type 7 */
+> > +               for (i = 0; i < priv->cache_level; i++) {
+> > +                       switch (id - i) {
+> > +                       case SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE:
+> > +                               *val = priv->t7[i].max_size.data;
+> > +                               return 0;
+> > +                       case SYSINFO_ID_SMBIOS_CACHE_INST_SIZE:
+> > +                               *val = priv->t7[i].inst_size.data;
+> > +                               return 0;
+> > +                       case SYSINFO_ID_SMBIOS_CACHE_SCACHE_TYPE:
+> > +                               *val = priv->t7[i].sys_cache_type;
+> > +                               return 0;
+> > +                       case SYSINFO_ID_SMBIOS_CACHE_ASSOC:
+> > +                               *val = priv->t7[i].associativity;
+> > +                               return 0;
+> > +                       case SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE2:
+> > +                               *val = priv->t7[i].max_size2.data;
+> > +                               return 0;
+> > +                       case SYSINFO_ID_SMBIOS_CACHE_INST_SIZE2:
+> > +                               *val = priv->t7[i].inst_size2.data;
+> > +                               return 0;
+> > +                       default:
+> > +                               break;
+> > +                       }
+> > +               }
+> > +               return -ENOSYS;
+> > +       }
+> > +
+> > +       switch (id) {
+> > +       case SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT:
+> > +               *val = priv->t4->core_count;
+> > +               break;
+> > +       case SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN:
+> > +               *val = priv->t4->core_enabled;
+> > +               break;
+> > +       case SYSINFO_ID_SMBIOS_PROCESSOR_CHARA:
+> > +               *val = priv->t4->characteristics;
+> > +               break;
+> > +       case SYSINFO_ID_SMBIOS_CACHE_LEVEL:
+> > +               if (!priv->cache_level) /* No cache detected */
+> > +                       return -ENOSYS;
+> > +               *val = priv->cache_level - 1;
+> > +               break;
+> > +       default:
+> > +               return -ENOSYS;
+> > +       }
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +static int sysinfo_plat_get_data(struct udevice *dev, int id, uchar
+> **buf,
+>
+> How about void **, so we don't need to cast below?
+>
+> > +                                size_t *size)
+> > +{
+> > +       struct sysinfo_plat_priv *priv = dev_get_priv(dev);
+> > +
+> > +       switch (id) {
+> > +       case SYSINFO_ID_SMBIOS_PROCESSOR_ID:
+> > +               *buf = (uchar *)priv->t4->id;
+> > +               *size = sizeof(priv->t4->id);
+> > +               break;
+> > +       case SYSINFO_ID_SMBIOS_CACHE_HANDLE:
+> > +               *buf = (uchar *)(&priv->cache_handles[0]);
+>
+> Isn't that the same as:
+>
+>     *buf = (uchar *)&priv->cache_handles;
+>
+> > +               *size = sizeof(priv->cache_handles);
+> > +               break;
+> > +       default:
+> > +               return -EOPNOTSUPP;
+> > +       }
+> > +       return 0;
+> > +}
+> > +
+> > +static int sysinfo_plat_probe(struct udevice *dev)
+> > +{
+> > +       struct sysinfo_plat_priv *priv = dev_get_priv(dev);
+> > +       struct sysinfo_plat *plat = &sysinfo_smbios_p;
+> > +       u8 level;
+> > +
+> > +       if (!sysinfo_get_processor_info(plat->processor))
+> > +               priv->t4 = plat->processor;
+> > +
+> > +       for (level = 0; level < SYSINFO_CACHE_LVL_MAX; level++) {
+> > +               struct cache_info *pcache = plat->cache + level;
+> > +
+> > +               if (sysinfo_get_cache_info(level, pcache))
+> > +                       break; /* no more levels */
+> > +
+> > +               /*
+> > +                * Fill in the SMBIOS type 7 structure,
+> > +                * skip the header members (type, length, handle),
+> > +                * and the ones in DT smbios node.
+> > +                */
+> > +               priv->t7[level].sys_cache_type = pcache->cache_type;
+> > +               priv->t7[level].associativity = pcache->associativity;
+> > +
+> > +               if (pcache->max_size > SMBIOS_CACHE_SIZE_EXT_KB) {
+> > +                       priv->t7[level].max_size.data = 0xFFFF;
+> > +                       priv->t7[level].max_size2.fields.size =
+> > +                               pcache->max_size / 64;
+> > +                       priv->t7[level].max_size2.fields.granu =
+> > +                               SMBIOS_CACHE_GRANU_64K;
+> > +               } else {
+> > +                       priv->t7[level].max_size.fields.size =
+> pcache->max_size;
+> > +                       priv->t7[level].max_size.fields.granu =
+> > +                               SMBIOS_CACHE_GRANU_1K;
+> > +                       priv->t7[level].max_size2.data = 0;
+> > +               }
+> > +               if (pcache->inst_size > SMBIOS_CACHE_SIZE_EXT_KB) {
+> > +                       priv->t7[level].inst_size.data = 0xFFFF;
+> > +                       priv->t7[level].inst_size2.fields.size =
+> > +                               pcache->inst_size / 64;
+> > +                       priv->t7[level].inst_size2.fields.granu =
+> > +                               SMBIOS_CACHE_GRANU_64K;
+> > +               } else {
+> > +                       priv->t7[level].inst_size.fields.size =
+> > +                               pcache->inst_size;
+> > +                       priv->t7[level].inst_size.fields.granu =
+> > +                               SMBIOS_CACHE_GRANU_1K;
+> > +                       priv->t7[level].inst_size2.data = 0;
+> > +               }
+> > +               smbios_cache_info_dump(&priv->t7[level]);
+> > +       }
+> > +       if (!level) /* no cache detected */
+> > +               return -ENOSYS;
+> > +
+> > +       priv->cache_level = level;
+> > +
+> > +       return 0;
+> > +}
+> > +
+> >  static const struct udevice_id sysinfo_smbios_ids[] = {
+> >         { .compatible = "u-boot,sysinfo-smbios" },
+> >         { /* sentinel */ }
+> >  };
+> >
+> >  static const struct sysinfo_ops sysinfo_smbios_ops = {
+> > +       .detect = sysinfo_plat_detect,
+> > +       .get_str = sysinfo_plat_get_str,
+> > +       .get_int = sysinfo_plat_get_int,
+> > +       .get_data = sysinfo_plat_get_data,
+> >  };
+> >
+> >  U_BOOT_DRIVER(sysinfo_smbios) = {
+> > @@ -20,4 +246,6 @@ U_BOOT_DRIVER(sysinfo_smbios) = {
+> >         .id             = UCLASS_SYSINFO,
+> >         .of_match       = sysinfo_smbios_ids,
+> >         .ops            = &sysinfo_smbios_ops,
+> > +       .priv_auto      = sizeof(struct sysinfo_plat_priv),
+> > +       .probe          = sysinfo_plat_probe,
+> >  };
+> > diff --git a/include/smbios.h b/include/smbios.h
+> > index 78fd14d881b..cb4b3e08b3a 100644
+> > --- a/include/smbios.h
+> > +++ b/include/smbios.h
+> > @@ -187,6 +187,66 @@ struct __packed smbios_type4 {
+> >         char eos[SMBIOS_STRUCT_EOS_BYTES];
+> >  };
+> >
+> > +union cache_config {
+> > +       struct {
+> > +               u16 level:3;
+> > +               u16 bsocketed:1;
+> > +               u16 rsvd0:1;
+> > +               u16 locate:2;
+> > +               u16 benabled:1;
+> > +               u16 opmode:2;
+> > +               u16 rsvd1:6;
+> > +       } fields;
+> > +       u16 data;
+> > +};
+> > +
+> > +union cache_size_word {
+> > +       struct {
+> > +               u16 size:15;
+> > +               u16 granu:1;
+> > +       } fields;
+> > +       u16 data;
+> > +};
+> > +
+> > +union cache_size_dword {
+> > +       struct {
+> > +               u32 size:31;
+> > +               u32 granu:1;
+> > +       } fields;
+> > +       u32 data;
+> > +};
+> > +
+> > +union cache_sram_type {
+> > +       struct {
+> > +               u16 other:1;
+> > +               u16 unknown:1;
+> > +               u16 nonburst:1;
+> > +               u16 burst:1;
+> > +               u16 plburst:1;
+> > +               u16 sync:1;
+> > +               u16 async:1;
+> > +               u16 rsvd:9;
+> > +       } fields;
+> > +       u16 data;
+> > +};
+> > +
+> > +struct __packed smbios_type7 {
+> > +       struct smbios_header hdr;
+> > +       u8 socket_design;
+> > +       union cache_config config;
+> > +       union cache_size_word max_size;
+> > +       union cache_size_word inst_size;
+> > +       union cache_sram_type supp_sram_type;
+> > +       union cache_sram_type curr_sram_type;
+> > +       u8 speed;
+> > +       u8 err_corr_type;
+> > +       u8 sys_cache_type;
+> > +       u8 associativity;
+> > +       union cache_size_dword max_size2;
+> > +       union cache_size_dword inst_size2;
+> > +       char eos[SMBIOS_STRUCT_EOS_BYTES];
+> > +};
+> > +
+> >  struct __packed smbios_type32 {
+> >         u8 type;
+> >         u8 length;
+> > diff --git a/include/smbios_plat.h b/include/smbios_plat.h
+> > new file mode 100644
+> > index 00000000000..70089d5a2ba
+> > --- /dev/null
+> > +++ b/include/smbios_plat.h
+> > @@ -0,0 +1,79 @@
+> > +/* SPDX-License-Identifier: GPL-2.0+ */
+> > +/*
+> > + * Copyright (c) 2024 Linaro Limited
+> > + * Author: Raymond Mao <raymond.mao@linaro.org>
+> > + */
+> > +#ifndef __SMBIOS_PLAT_H
+> > +#define __SMBIOS_PLAT_H
+> > +
+> > +#include <smbios.h>
+> > +
+> > +struct cache_info {
+> > +       union cache_config config;
+> > +       union cache_sram_type supp_sram_type;
+> > +       union cache_sram_type curr_sram_type;
+> > +       u32 line_size;
+> > +       u32 associativity;
+> > +       u32 max_size;
+> > +       u32 inst_size;
+> > +       u8 cache_type;
+> > +       u8 speed;
+> > +       u8 err_corr_type;
+> > +       char *socket_design;
+> > +};
+> > +
+> > +struct processor_info {
+> > +       u32 id[2];
+> > +       u16 ext_clock;
+> > +       u16 max_speed;
+> > +       u16 curr_speed;
+> > +       u16 characteristics;
+> > +       u16 family2;
+> > +       u16 core_count2;
+> > +       u16 core_enabled2;
+> > +       u16 thread_count2;
+> > +       u16 thread_enabled;
+> > +       u8 type;
+> > +       u8 family;
+> > +       u8 voltage;
+> > +       u8 status;
+> > +       u8 upgrade;
+> > +       u8 core_count;
+> > +       u8 core_enabled;
+> > +       u8 thread_count;
+> > +       char *socket_design;
+> > +       char *manufacturer;
+> > +       char *version;
+> > +       char *sn;
+> > +       char *asset_tag;
+> > +       char *pn;
+> > +};
+> > +
+> > +struct sysinfo_plat {
+> > +       struct processor_info *processor;
+> > +       struct cache_info *cache;
+> > +       /* add other sysinfo structure here */
+> > +};
+> > +
+> > +#if defined CONFIG_SYSINFO_SMBIOS
+> > +int sysinfo_get_cache_info(u8 level, struct cache_info *cache_info);
+> > +void sysinfo_cache_info_default(struct cache_info *ci);
+> > +int sysinfo_get_processor_info(struct processor_info *pinfo);
+> > +#else
+> > +static inline int sysinfo_get_cache_info(u8 level,
+> > +                                        struct cache_info *cache_info)
+> > +{
+> > +       return -ENOSYS;
+> > +}
+> > +
+> > +static inline void sysinfo_cache_info_default(struct cache_info *ci)
+> > +{
+> > +}
+> > +
+> > +static inline int sysinfo_get_processor_info(struct processor_info
+> *pinfo)
+> > +{
+> > +       return -ENOSYS;
+> > +}
+> > +#endif
+> > +
+> > +#endif /* __SMBIOS_PLAT_H */
+> > diff --git a/include/sysinfo.h b/include/sysinfo.h
+> > index 17b2b9c7111..cb08a691270 100644
+> > --- a/include/sysinfo.h
+> > +++ b/include/sysinfo.h
+> > @@ -11,6 +11,8 @@
+> >
+> >  struct udevice;
+> >
+> > +#define SYSINFO_CACHE_LVL_MAX 3
+> > +
+> >  /*
+> >   * This uclass encapsulates hardware methods to gather information
+> about a
+> >   * sysinfo or a specific device such as hard-wired GPIOs on GPIO
+> expanders,
+> > @@ -42,18 +44,109 @@ struct udevice;
+> >  enum sysinfo_id {
+> >         SYSINFO_ID_NONE,
+> >
+> > -       /* For SMBIOS tables */
+> > +       /* BIOS Information (Type 0) */
+> > +       SYSINFO_ID_SMBIOS_BIOS_VENDOR,
+> > +       SYSINFO_ID_SMBIOS_BIOS_VER,
+> > +       SYSINFO_ID_SMBIOS_BIOS_REL_DATE,
+> > +
+> > +       /* System Information (Type 1) */
+> >         SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
+> >         SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
+> >         SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
+> >         SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
+> > +       SYSINFO_ID_SMBIOS_SYSTEM_WAKEUP,
+> >         SYSINFO_ID_SMBIOS_SYSTEM_SKU,
+> >         SYSINFO_ID_SMBIOS_SYSTEM_FAMILY,
+> > +
+> > +       /* Baseboard (or Module) Information (Type 2) */
+> >         SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
+> >         SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
+> >         SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
+> >         SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
+> >         SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
+> > +       SYSINFO_ID_SMBIOS_BASEBOARD_FEATURE,
+> > +       SYSINFO_ID_SMBIOS_BASEBOARD_CHASSIS_LOCAT,
+> > +       SYSINFO_ID_SMBIOS_BASEBOARD_TYPE,
+> > +       SYSINFO_ID_SMBIOS_BASEBOARD_OBJS_NUM,
+> > +       SYSINFO_ID_SMBIOS_BASEBOARD_OBJS_HANDLE,
+> > +
+> > +       /* System Enclosure or Chassis (Type 3) */
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_MANUFACTURER,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_VERSION,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_SERIAL,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_ASSET_TAG,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_TYPE,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_BOOTUP,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_POW,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_THERMAL,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_SECURITY,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_OEM,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_HEIGHT,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_POWCORE_NUM,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENT_CNT,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENT_LEN,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENTS,
+> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_SKU,
+> > +
+> > +       /* Processor Information (Type 4) */
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_SOCKET,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_TYPE,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_MANUFACT,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_ID,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_VERSION,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_VOLTAGE,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_EXT_CLOCK,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_MAX_SPEED,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CUR_SPEED,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_STATUS,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_UPGRADE,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_SN,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_ASSET_TAG,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_PN,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CHARA,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_FAMILY,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_FAMILY2,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT2,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN2,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT2,
+> > +       SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_EN,
+> > +
+> > +       /*
+> > +        * Cache Information (Type 7)
+> > +        * Each of the id should reserve space for up to
+> > +        * SYSINFO_CACHE_LVL_MAX levels of cache
+> > +        */
+> > +       SYSINFO_ID_SMBIOS_CACHE_LEVEL,
+> > +       SYSINFO_ID_SMBIOS_CACHE_HANDLE,
+> > +       SYSINFO_ID_SMBIOS_CACHE_INFO_START,
+> > +       SYSINFO_ID_SMBIOS_CACHE_SOCKET =
+> SYSINFO_ID_SMBIOS_CACHE_INFO_START,
+> > +       SYSINFO_ID_SMBIOS_CACHE_CONFIG =
+> > +               SYSINFO_ID_SMBIOS_CACHE_SOCKET + SYSINFO_CACHE_LVL_MAX,
+> > +       SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE =
+> > +               SYSINFO_ID_SMBIOS_CACHE_CONFIG + SYSINFO_CACHE_LVL_MAX,
+> > +       SYSINFO_ID_SMBIOS_CACHE_INST_SIZE =
+> > +               SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE + SYSINFO_CACHE_LVL_MAX,
+> > +       SYSINFO_ID_SMBIOS_CACHE_SUPSRAM_TYPE =
+> > +               SYSINFO_ID_SMBIOS_CACHE_INST_SIZE +
+> SYSINFO_CACHE_LVL_MAX,
+> > +       SYSINFO_ID_SMBIOS_CACHE_CURSRAM_TYPE =
+> > +               SYSINFO_ID_SMBIOS_CACHE_SUPSRAM_TYPE +
+> SYSINFO_CACHE_LVL_MAX,
+> > +       SYSINFO_ID_SMBIOS_CACHE_SPEED =
+> > +               SYSINFO_ID_SMBIOS_CACHE_CURSRAM_TYPE +
+> SYSINFO_CACHE_LVL_MAX,
+> > +       SYSINFO_ID_SMBIOS_CACHE_ERRCOR_TYPE =
+> > +               SYSINFO_ID_SMBIOS_CACHE_SPEED + SYSINFO_CACHE_LVL_MAX,
+> > +       SYSINFO_ID_SMBIOS_CACHE_SCACHE_TYPE =
+> > +               SYSINFO_ID_SMBIOS_CACHE_ERRCOR_TYPE +
+> SYSINFO_CACHE_LVL_MAX,
+> > +       SYSINFO_ID_SMBIOS_CACHE_ASSOC =
+> > +               SYSINFO_ID_SMBIOS_CACHE_SCACHE_TYPE +
+> SYSINFO_CACHE_LVL_MAX,
+> > +       SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE2 =
+> > +               SYSINFO_ID_SMBIOS_CACHE_ASSOC + SYSINFO_CACHE_LVL_MAX,
+> > +       SYSINFO_ID_SMBIOS_CACHE_INST_SIZE2 =
+> > +               SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE2 +
+> SYSINFO_CACHE_LVL_MAX,
+> > +       SYSINFO_ID_SMBIOS_CACHE_INFO_END =
+> > +               SYSINFO_ID_SMBIOS_CACHE_INST_SIZE2 +
+> SYSINFO_CACHE_LVL_MAX - 1,
+> >
+>
+> This seems to be allocating sequential values for each cache? Instead, we
+> should add a 'seq' parameter to get_data()
+>
+> >         /* For show_board_info() */
+> >         SYSINFO_ID_BOARD_MODEL,
+> > --
+> > 2.25.1
+> >
 >
 > Regards,
 > Simon
-
-Hello Simon,
-
-We are in round 8 of this patch series and it is still broken:
-
-You supply an xz image which we should never accept for security reasons.
-
-That xz image contains an EFI/BOOT/BOOTSBOX.EFI blob. This does not
-comply to the GPLv2 license.
-
-That blob is an amd64 binary. So nobody will be able it to run it in the
-sandbox built on the riscv64 or arm64 machines.
-
-* Please, remove the blob.
-* Do the same for all blobs in test/py/tests/bootstd/.
-* Provide a test test runs on all EFI architectures.
-* Make sure that we can run the test both on QEMU and on real hardware.
-* Please, comply in your test to the UEFI specification.
-
-Best regards
-
-Heinrich
+>
