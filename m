@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71B18D13592
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 02:53:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13CCBD13588
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 02:58:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5940888FEA;
-	Mon, 28 Oct 2024 03:53:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6575A8895E;
+	Mon, 28 Oct 2024 03:58:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bCQfGxYe";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="hjS9ScuS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 215958901D; Mon, 28 Oct 2024 03:53:27 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 42A9C87BF4; Mon, 28 Oct 2024 03:58:21 +0100 (CET)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BFAF88F2A
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 03:53:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9DBD88C53
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 03:58:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6cc250bbc9eso29544556d6.2
- for <u-boot@lists.denx.de>; Sun, 27 Oct 2024 19:53:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730083990; x=1730688790; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QYUIuVrYyPI0TAOgNjXrWcsSCp1hzojpWkeVxsye10Y=;
- b=bCQfGxYeoPeBwxcfmPWGH3Eu5ymjnLXofO+XhxCYeek0EPuRCt43bJcboChZGw29Ze
- qTWnMBVjOR7loff2WTnSGgo3aGITAmP1lXb0BpoXR+C/5J1kg49vPrji6C/vcV7p6hyr
- /4jdSz4Y+OLYbwU6bRT1wji1BWtWpmKDzUOoo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730083990; x=1730688790;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QYUIuVrYyPI0TAOgNjXrWcsSCp1hzojpWkeVxsye10Y=;
- b=pI5dYNEdYh7qbsTsedJz+YndvWI+wW3y59lYVlxzq5jSxii3glY92RTVtnGDPZFAHJ
- FEVcQPVhPVkCY64l+FxVKi0pFnzcvKQqfNQ8xlWQnZ7LDR6GYLVSBYuoVzffPZbAu00E
- 4IVuB1KmoQDHJMekG305+LD5RM0cbNy80a+ZSTQ2oY7O60jdo1jahDMQZWRzi9dojLQl
- 9t3zEb/aEdd6ggq6WIMbP3hSHMTqaoCOHf+31aLADGFPnpP3WyEMtjkdAvQ+FLZVX+YG
- wzFG9i3ypSiBNZE6PKAFBAe7zlVWVpEiIygZXttlHm0wW0W3eYqv73A4DlQtY+60QKIm
- OomQ==
-X-Gm-Message-State: AOJu0YzZv7FICYhZcxe09MMJ8tHrn+ol3lYIZlG9ao8KbCNTdJydeAY1
- UBQvw+zAevJQTOUwtVr+knFXlHBQOajVY+ASLBEwlJG+6iQSNsB99Y7kwTP3O40=
-X-Google-Smtp-Source: AGHT+IF2N7yHRZNaioQTeIWF96NX4vCoF4ydOJJk+anrn45si9sXTXJKgKC9Rn+w+DiMhiBXHQk7Pg==
-X-Received: by 2002:a05:6214:419e:b0:6cb:c0cb:c07d with SMTP id
- 6a1803df08f44-6d18569478dmr97052706d6.12.1730083990478; 
- Sun, 27 Oct 2024 19:53:10 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d1799fd4fcsm28497146d6.92.2024.10.27.19.53.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Oct 2024 19:53:09 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Angelo Dureghello <angelo@kernel-space.org>, 
- Bin Meng <bmeng.cn@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241025170700.74440-1-andrew.goodbody@linaro.org>
-References: <20241025170700.74440-1-andrew.goodbody@linaro.org>
-Subject: Re: [PATCH] x86: Missed removal of CMD_BOOTEFI_HELLO_COMPILE
-Message-Id: <173008398854.2202883.451613261072776585.b4-ty@konsulko.com>
-Date: Sun, 27 Oct 2024 20:53:08 -0600
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 74efb4c494d811efbd192953cf12861f-20241028
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
+ bh=EwYNu9mVZfGRtY+H37VECl/E2HmLc0HVinGoir3iaL0=; 
+ b=hjS9ScuSiIlvsnfHVIXW/5EMZnmdMD1W4+8itShZH+zaWLSzn6UmRPlYkBs8x988Dlm4JKfqdvAMyoQ6qkYWoLWbe4TL3rrRxTG1QBvuSGJvNYvpSH9SgAhVVI4GOACpIzWyzitj1MBacONT+LSbD86Mc4H9oKUcBkKejkaggDc=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.42, REQID:d58514ca-fe34-407d-9062-108b410dffe6, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:b0fcdc3, CLOUDID:8d5d322e-a7a0-4b06-8464-80be82133975,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|-5,EDM:-3,IP:ni
+ l,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES
+ :1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: 74efb4c494d811efbd192953cf12861f-20241028
+Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1857443754; Mon, 28 Oct 2024 10:58:06 +0800
+Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
+ mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Mon, 28 Oct 2024 10:58:05 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Mon, 28 Oct 2024 10:58:04 +0800
+Message-ID: <6db33dd28da63dabc198788f28bfa00425d7f62e.camel@mediatek.com>
+Subject: Re: [PATCH] menu: fix the logic checking whether ESC key is pressed
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: Marek Vasut <marek.vasut@mailbox.org>, Daniel Golle <daniel@makrotopia.org>
+CC: <u-boot@lists.denx.de>, GSS_MTK_Uboot_upstream
+ <GSS_MTK_Uboot_upstream@mediatek.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, "John
+ Crispin" <john@phrozen.org>
+Date: Mon, 28 Oct 2024 10:58:04 +0800
+In-Reply-To: <d00691ed-815e-4db9-b5d7-b09c32ead593@mailbox.org>
+References: <20241021005642.153511-1-weijie.gao@mediatek.com>
+ <Zx1Bpb7_9TEqBeyB@pidgin.makrotopia.org>
+ <37e445c29de0c1ef020d56a7d4da2916d692545b.camel@mediatek.com>
+ <d00691ed-815e-4db9-b5d7-b09c32ead593@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,17 +91,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 25 Oct 2024 18:07:00 +0100, Andrew Goodbody wrote:
-
-> The config setting CMD_BOOTEFI_HELLO_COMPILE was removed in favour
-> of BOOTEFI_HELLO_COMPILE but the usage in this Makefile was not
-> updated. Fix it.
+On Mon, 2024-10-28 at 03:33 +0100, Marek Vasut wrote:
+> External email : Please do not click links or open attachments until
+> you have verified the sender or the content.
 > 
 > 
+> On 10/28/24 1:25 AM, Weijie Gao wrote:
+> > Hi Daniel,
+> > 
+> > On Sat, 2024-10-26 at 20:23 +0100, Daniel Golle wrote:
+> > > External email : Please do not click links or open attachments
+> > > until
+> > > you have verified the sender or the content.
+> > > 
+> > > 
+> > > Hi!
+> > > 
+> > > On Mon, Oct 21, 2024 at 08:56:42AM +0800, Weijie Gao wrote:
+> > > > It's observed that the bootmenu on a serial console sometimes
+> > > > incorrectly quitted with superfluous characters filled to
+> > > > command
+> > > > line input:
+> > > > 
+> > > > >   *** U-Boot Boot Menu ***
+> > > > > 
+> > > > >       1. Startup system (Default)
+> > > > >       2. Upgrade firmware
+> > > > >       3. Upgrade ATF BL2
+> > > > >       4. Upgrade ATF FIP
+> > > > >       5. Load image
+> > > > >       0. U-Boot console
+> > > > > 
+> > > > > 
+> > > > >   Press UP/DOWN to move, ENTER to select, ESC to quit
+> > > > > MT7988> [B
+> > > > 
+> > > > Analysis shows it was caused by the wrong logic of
+> > > > bootmenu_loop:
+> > > > 
+> > > > At first the bootmenu_loop received the first ESC char
+> > > > correctly.
+> > > > 
+> > > > However, during the second call to bootmenu_loop, there's no
+> > > > data
+> > > > in the UART Rx FIFO. Due to the low baudrate, the second char
+> > > > of
+> > > > the down array key sequence hasn't be fully received.
+> > > > 
+> > > > But bootmenu_loop just did a mdelay(10), and then treated it as
+> > > > a
+> > > > single ESC key press event. It didn't even try tstc() again
+> > > > after
+> > > > the 10ms timeout.
+> > > > 
+> > > > This patch fixes this issue by letting bootmenu_loop check
+> > > > tstc()
+> > > > twice.
+> > > 
+> > > The patch helps to fix the problem when dealing with single key
+> > > presses. However, apparently this is not enough to fix the issue
+> > > in
+> > > all situations. I still manage to drop into U-Boot console with
+> > > an
+> > > extra '[A' when simply holding down the arrow-up key for a while.
+> > > 
+> > 
+> > Holding down the arrow-up key for a while can cause the PC to send
+> > large amounts of data to the UART Rx FIFO. Since filogic UARTs
+> > usually
+> > have only 32 bytes FIFO, it's very easy to cause Rx FIFO overflow,
+> > and then you'll still be dropped into U-Boot console due to data
+> > loss.
+> > I've already confirmed this during solving this issue and this can
+> > only
+> > be solved by increasing the baudrate.
+> 
+> Does CONFIG_SERIAL_RX_BUFFER help with those overflows ?
 
-Applied to u-boot/master, thanks!
-
--- 
-Tom
-
+CONFIG_SERIAL_RX_BUFFER can't fully elimate the overflow. I can still
+reproduce this issue by holding down the arrow-up key for more than
+15 seconds.
 
