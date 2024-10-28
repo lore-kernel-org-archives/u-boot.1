@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F296D13588
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 08:47:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32467D13588
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 08:50:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E58BE89079;
-	Mon, 28 Oct 2024 09:47:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 92D5F890A9;
+	Mon, 28 Oct 2024 09:50:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4DC587CF8; Mon, 28 Oct 2024 09:47:40 +0100 (CET)
+ id E7F5D8895E; Mon, 28 Oct 2024 09:50:47 +0100 (CET)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 6C5DF89083
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 09:47:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 16415890A9
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 09:50:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.11,238,1725289200"; 
- d="asc'?scan'208";a="227183390"
+ d="asc'?scan'208";a="227183698"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 28 Oct 2024 17:47:28 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 28 Oct 2024 17:50:40 +0900
 Received: from [10.226.93.33] (unknown [10.226.93.33])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 375CE41AA103;
- Mon, 28 Oct 2024 17:47:25 +0900 (JST)
-Message-ID: <9357db88-c9f3-4864-a8e1-61a83954f09b@bp.renesas.com>
-Date: Mon, 28 Oct 2024 08:47:24 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id C0ACF41ABBF9;
+ Mon, 28 Oct 2024 17:50:37 +0900 (JST)
+Message-ID: <1dac61de-f6fd-40ee-bfca-64464249623f@bp.renesas.com>
+Date: Mon, 28 Oct 2024 08:50:36 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/14] net: phy: ksz90x1: Handle ksz9131 LED errata
+Subject: Re: [PATCH 08/14] net: phy: ksz90x1: Simplify
+ ksz9131_config_rgmii_delay
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
@@ -42,13 +43,13 @@ To: Marek Vasut <marek.vasut@mailbox.org>,
  <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
- <20241024152448.102-7-paul.barker.ct@bp.renesas.com>
- <ff3ff3f4-c7b1-4a8b-9a0a-0153404bc56b@mailbox.org>
+ <20241024152448.102-9-paul.barker.ct@bp.renesas.com>
+ <73609bce-143a-4da2-9e8c-87ac7646a72d@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <ff3ff3f4-c7b1-4a8b-9a0a-0153404bc56b@mailbox.org>
+In-Reply-To: <73609bce-143a-4da2-9e8c-87ac7646a72d@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------yQK0M0fpQXs1Pkockljra9Z6"
+ boundary="------------irahBg6iE97DM0wNjhZKNg7Z"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,8 +67,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------yQK0M0fpQXs1Pkockljra9Z6
-Content-Type: multipart/mixed; boundary="------------gRQi6Jm7z9NQngECnbHyI81N";
+--------------irahBg6iE97DM0wNjhZKNg7Z
+Content-Type: multipart/mixed; boundary="------------c0t4lS89riInOgnfQFhyk0ZV";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut@mailbox.org>,
@@ -77,87 +78,92 @@ To: Marek Vasut <marek.vasut@mailbox.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
  <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
-Message-ID: <9357db88-c9f3-4864-a8e1-61a83954f09b@bp.renesas.com>
-Subject: Re: [PATCH 06/14] net: phy: ksz90x1: Handle ksz9131 LED errata
+Message-ID: <1dac61de-f6fd-40ee-bfca-64464249623f@bp.renesas.com>
+Subject: Re: [PATCH 08/14] net: phy: ksz90x1: Simplify
+ ksz9131_config_rgmii_delay
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
- <20241024152448.102-7-paul.barker.ct@bp.renesas.com>
- <ff3ff3f4-c7b1-4a8b-9a0a-0153404bc56b@mailbox.org>
-In-Reply-To: <ff3ff3f4-c7b1-4a8b-9a0a-0153404bc56b@mailbox.org>
+ <20241024152448.102-9-paul.barker.ct@bp.renesas.com>
+ <73609bce-143a-4da2-9e8c-87ac7646a72d@mailbox.org>
+In-Reply-To: <73609bce-143a-4da2-9e8c-87ac7646a72d@mailbox.org>
 
---------------gRQi6Jm7z9NQngECnbHyI81N
-Content-Type: multipart/mixed; boundary="------------vGVNYo73iXNTRT8oAOGSazya"
+--------------c0t4lS89riInOgnfQFhyk0ZV
+Content-Type: multipart/mixed; boundary="------------dr8bXqU71IdHoBr0aYZYxRyD"
 
---------------vGVNYo73iXNTRT8oAOGSazya
+--------------dr8bXqU71IdHoBr0aYZYxRyD
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 27/10/2024 16:18, Marek Vasut wrote:
+On 27/10/2024 16:20, Marek Vasut wrote:
 > On 10/24/24 5:24 PM, Paul Barker wrote:
->> Micrel KSZ9131 PHY LED behavior is not correct when configured in
->> Individual Mode, LED1 (Activity LED) is in the ON state when there is
->> no-link.
->>
->> Workaround this by setting bit 9 of register 0x1e after verifying that=
-
->> the LED configuration is Individual Mode.
->>
->> This issue is described in KSZ9131RNX Silicon Errata DS80000693B [*]
->> and according to that it will not be corrected in a future silicon
->> revision.
->>
->> [*] https://ww1.microchip.com/downloads/en/DeviceDoc/KSZ9131RNX-Silico=
-n-Errata-and-Data-Sheet-Clarification-80000863B.pdf
->>
->> Based on commit 0316c7e66bbd in the Linux kernel.
+>> We can call phy_modify_mmd() instead of manually calling drv->readext(=
+)
+>> and drv->writeext().
 >>
 >> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 >> ---
->>   drivers/net/phy/micrel_ksz90x1.c | 24 ++++++++++++++++++++++++
->>   1 file changed, 24 insertions(+)
+>>   drivers/net/phy/micrel_ksz90x1.c | 26 ++++++++------------------
+>>   1 file changed, 8 insertions(+), 18 deletions(-)
 >>
 >> diff --git a/drivers/net/phy/micrel_ksz90x1.c b/drivers/net/phy/micrel=
 _ksz90x1.c
->> index c48ae6e88f30..4f99b115a3c7 100644
+>> index b64046e0bc72..6515d8feb9be 100644
 >> --- a/drivers/net/phy/micrel_ksz90x1.c
 >> +++ b/drivers/net/phy/micrel_ksz90x1.c
->> @@ -436,6 +436,26 @@ static int ksz9131_config_rgmii_delay(struct phy_=
-device *phydev)
->>   	return ret;
->>   }
+>> @@ -502,8 +502,7 @@ static int ksz9131_of_load_all_skew_values(struct =
+phy_device *phydev)
 >>  =20
->> +/* Silicon Errata DS80000693B
->> + *
->> + * When LEDs are configured in Individual Mode, LED1 is ON in a no-li=
-nk
->> + * condition. Workaround is to set register 0x1e, bit 9, this way LED=
-1 behaves
->> + * according to the datasheet (off if there is no link).
->> + */
->> +static int ksz9131_led_errata(struct phy_device *phydev)
->> +{
->> +	int reg;
->> +
->> +	reg =3D phy_read_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG, 0);
->> +	if (reg < 0)
->> +		return reg;
->> +
->> +	if (!(reg & BIT(4)))
-> It would be good to have symbolic names for these BIT()s , please add=20
-> some #define ... macros .
+>>   static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
+>>   {
+>> -	struct phy_driver *drv =3D phydev->drv;
+>> -	u16 rxcdll_val, txcdll_val, val;
+>> +	u16 rxcdll_val, txcdll_val;
+>>   	int ret;
+>>  =20
+>>   	switch (phydev->interface) {
+>> @@ -527,24 +526,15 @@ static int ksz9131_config_rgmii_delay(struct phy=
+_device *phydev)
+>>   		return 0;
+>>   	}
+>>  =20
+>> -	val =3D drv->readext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+>> -			   KSZ9131RN_RXC_DLL_CTRL);
+>> -	val &=3D ~KSZ9131RN_DLL_CTRL_BYPASS;
+>> -	val |=3D rxcdll_val;
+>> -	ret =3D drv->writeext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+>> -			    KSZ9131RN_RXC_DLL_CTRL, val);
+>> -	if (ret)
+>> +	ret =3D phy_modify_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
+>> +			     KSZ9131RN_RXC_DLL_CTRL, KSZ9131RN_DLL_CTRL_BYPASS,
+>> +			     rxcdll_val);
+>> +	if (ret < 0)
+>>   		return ret;
+>>  =20
+>> -	val =3D drv->readext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+>> -			   KSZ9131RN_TXC_DLL_CTRL);
+>> -
+>> -	val &=3D ~KSZ9131RN_DLL_CTRL_BYPASS;
+>> -	val |=3D txcdll_val;
+>> -	ret =3D drv->writeext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+>> -			    KSZ9131RN_TXC_DLL_CTRL, val);
+>> -
+>> -	return ret;
+>> +	return phy_modify_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
+>> +			      KSZ9131RN_TXC_DLL_CTRL, KSZ9131RN_DLL_CTRL_BYPASS,
+>> +			      txcdll_val);
+>>   }
+> Can't you set both bitfields at the same time ? They seem to be in the =
 
-I can add symbolic names for the values used above
-(KSZ9131RN_COMMON_CTRL=3D0 and KSZ9131RN_COMMON_CTRL_LED_MODE=3DBIT(4)).
+> same register.
 
-The arguments used in the following phy_set_bits() call are a bit
-trickier - all the errata document says is "Register 0x1E (30d), bit 9
-must be set to 1". The Linux kernel commit adding this workaround
-doesn't have any symbolic names either.
+These writes are to two different registers (KSZ9131RN_RXC_DLL_CTRL and
+KSZ9131RN_TXC_DLL_CTRL), using the same bitmask in both cases
+(KSZ9131RN_DLL_CTRL_BYPASS).
 
 Thanks,
 
 --=20
 Paul Barker
---------------vGVNYo73iXNTRT8oAOGSazya
+--------------dr8bXqU71IdHoBr0aYZYxRyD
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -221,21 +227,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------vGVNYo73iXNTRT8oAOGSazya--
+--------------dr8bXqU71IdHoBr0aYZYxRyD--
 
---------------gRQi6Jm7z9NQngECnbHyI81N--
+--------------c0t4lS89riInOgnfQFhyk0ZV--
 
---------------yQK0M0fpQXs1Pkockljra9Z6
+--------------irahBg6iE97DM0wNjhZKNg7Z
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx9PnAUDAAAAAAAKCRDbaV4Vf/JGvaPd
-AP9ZwOn6U5TGq/bnOWZ0eO/n1VJAFCuka7Gzs7i2kHjCqAD+K7MEe9VRnrHylt+XwS77O481sar+
-kywfz2UI6ymB5QA=
-=bBDM
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx9QXAUDAAAAAAAKCRDbaV4Vf/JGvf9e
+AP4ofmR7raJ5mn/BFq/vnBQgLUawzcXdHL6oJCnKRHNMmAEAntI+sUZvMwvwiNpGp075xRLaI9xL
+IZpR4FBToB3xywE=
+=m/5X
 -----END PGP SIGNATURE-----
 
---------------yQK0M0fpQXs1Pkockljra9Z6--
+--------------irahBg6iE97DM0wNjhZKNg7Z--
