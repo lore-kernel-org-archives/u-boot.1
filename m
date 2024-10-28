@@ -4,78 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1243D13588
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 08:09:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 172ABD13588
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 08:09:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 247CF89082;
-	Mon, 28 Oct 2024 09:09:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
+	by phobos.denx.de (Postfix) with ESMTP id 9615289095;
+	Mon, 28 Oct 2024 09:09:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="A7l6u/Sr";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B7978907B; Mon, 28 Oct 2024 09:09:17 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DC3988F6B
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 09:09:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=9elements.com
+ id E3B418908A; Mon, 28 Oct 2024 09:09:43 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 4358D89066
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 09:09:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a7aa086b077so494879466b.0
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 01:09:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1730102941; x=1730707741; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NgXV1XiIotzzZ/tGBFT4iczfJGVItBK3vxD8bbHZRkI=;
- b=A7l6u/SrSQXD4I4R7S5/jDplnHge3elxX/Xy1tWMCYz1c9mX+tI/iG59TL/kjLrgzf
- zFtvT3/FJMY0mWT5Xb0+AdROYCb6t2/qyyt84zLMLRwiwsO6I8Ny1lujd72moIDLQUgj
- HZmitmM+Z03yQG6UGsCh9gYwkM6B567k9C3Jfuypo1WbnKoxDhHvFvDCI3dpoFueBqO1
- /UEsBKKzlJbeBkWAJe92LwUu7TCpeorAwhCbxbu0eQZam+su9ZHYNxzHSkZIYRP+zeWu
- XRhZuFV6ohEf5Xf+6GdrSr8FFKj6KwnTYYNYr13HyRa/tOEQwxL37h7ReJZuNXCNNEya
- tqww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730102941; x=1730707741;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NgXV1XiIotzzZ/tGBFT4iczfJGVItBK3vxD8bbHZRkI=;
- b=OMoWI2m6IsKtevAK44P3yQb6t0uypq4h9IpIcRWE1O8PtvFlR8EpE4tUA5IZcOSXd4
- OBHn0PnopD7JiGSP/5HSoSs3U9f2GRh1pqeWDjgx5hOx2UZrnpkgDM141YZPFGX0sRoI
- D51FSN639ZyrcDOX0dV/X6pWDYUrtLyB7BWZ36wO7O/WRDflmyg50MMbUPYCIZCREnRc
- ky46ur7iIhQ5JsSaUV60/QVJEmAzyA34lZJk8GLd0zRCZaHGMHW+qmROIkH4tWvT7Eq2
- jT1WIp7X+9oDIT/Zn2T574Orr01pQG/L82JX498yUGDW0Cm4xtmjQkWYJrLJxp+07zS9
- G7Jw==
-X-Gm-Message-State: AOJu0Yyt3+L+upD8ah1ZmRj4uOmJItMXdnlCOXt5j0bKjQHmCah0NnVb
- LDfvqNUlrxJ92IUqWA0FJU1xCBL6OO0vsS82otbusCYIfpXNNQhXqH2yWOZ/CtPXM23yl9Sycj7
- y
-X-Google-Smtp-Source: AGHT+IFdjCGm/SWrIapr50iZ7qiW7YZUqY6vouYbfE8Yokha4KzKaTNyCo1UMA7pX3KluoFo8fsm0Q==
-X-Received: by 2002:a17:906:7949:b0:a9a:80cc:d7b0 with SMTP id
- a640c23a62f3a-a9de6157a62mr552581766b.44.1730102940491; 
- Mon, 28 Oct 2024 01:09:00 -0700 (PDT)
-Received: from fedora.sec.9e.network
- (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9b30c7ae0bsm351725266b.156.2024.10.28.01.08.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2024 01:09:00 -0700 (PDT)
-From: Patrick Rudolph <patrick.rudolph@9elements.com>
-To: u-boot@lists.denx.de,
-	Simon Glass <sjg@chromium.org>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1] acpi_table: Fix coverity defect in acpi_write_spcr
-Date: Mon, 28 Oct 2024 09:08:35 +0100
-Message-ID: <20241028080837.1590247-1-patrick.rudolph@9elements.com>
-X-Mailer: git-send-email 2.46.2
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.11,238,1725289200"; 
+ d="asc'?scan'208";a="227179311"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie6.idc.renesas.com with ESMTP; 28 Oct 2024 17:09:29 +0900
+Received: from [10.226.93.33] (unknown [10.226.93.33])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 12BEC419DA17;
+ Mon, 28 Oct 2024 17:09:25 +0900 (JST)
+Message-ID: <135f57dd-d8f9-421d-a346-84245c4794f0@bp.renesas.com>
+Date: Mon, 28 Oct 2024 08:09:24 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/14] pinctrl: rzg2l: Support 2.5V PVDD for Ethernet
+ interfaces
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de
+References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
+ <20241024152448.102-3-paul.barker.ct@bp.renesas.com>
+ <30ec85e5-6de8-4305-971d-893ea8e1151b@mailbox.org>
+Content-Language: en-GB
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <30ec85e5-6de8-4305-971d-893ea8e1151b@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------CQSUGC6YxeFTp3m3zW8ixIuW"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,38 +66,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix "Integer handling issues  (SIGN_EXTENSION)" in newly added code:
-Cast serial_info.reg_offset to u64 to prevent an integer overflow when
-shifted too many bits to the left. Currently this never happens as the
-shift is supposed to be less than 4.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------CQSUGC6YxeFTp3m3zW8ixIuW
+Content-Type: multipart/mixed; boundary="------------fXVjzaoPiWsTkgphxH3LBzU3";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de
+Message-ID: <135f57dd-d8f9-421d-a346-84245c4794f0@bp.renesas.com>
+Subject: Re: [PATCH 02/14] pinctrl: rzg2l: Support 2.5V PVDD for Ethernet
+ interfaces
+References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
+ <20241024152448.102-3-paul.barker.ct@bp.renesas.com>
+ <30ec85e5-6de8-4305-971d-893ea8e1151b@mailbox.org>
+In-Reply-To: <30ec85e5-6de8-4305-971d-893ea8e1151b@mailbox.org>
 
-Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
----
- lib/acpi/acpi_table.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+--------------fXVjzaoPiWsTkgphxH3LBzU3
+Content-Type: multipart/mixed; boundary="------------4W2YVIW9WDzb2FpJhn5frY00"
 
-diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index 6473d95c10..b9e12228fd 100644
---- a/lib/acpi/acpi_table.c
-+++ b/lib/acpi/acpi_table.c
-@@ -420,7 +420,7 @@ int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, struct udevice *dev,
- static int acpi_write_spcr(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- {
- 	struct serial_device_info serial_info = {0};
--	ulong serial_address, serial_offset;
-+	u64 serial_address, serial_offset;
- 	struct acpi_table_header *header;
- 	struct acpi_spcr *spcr;
- 	struct udevice *dev;
-@@ -473,7 +473,7 @@ static int acpi_write_spcr(struct acpi_ctx *ctx, const struct acpi_writer *entry
- 	}
- 
- 	serial_width = serial_info.reg_width * 8;
--	serial_offset = serial_info.reg_offset << serial_info.reg_shift;
-+	serial_offset = ((u64)serial_info.reg_offset) << serial_info.reg_shift;
- 	serial_address = serial_info.addr + serial_offset;
- 
- 	/* Encode register access size */
--- 
-2.46.2
+--------------4W2YVIW9WDzb2FpJhn5frY00
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+On 27/10/2024 16:14, Marek Vasut wrote:
+> On 10/24/24 5:24 PM, Paul Barker wrote:
+>> The Ethenet interfaces on the Renesas RZ/G2L SoC family can operate at=
+
+>> multiple power supply voltages: 3.3V (default value), 2.5V and 1.8V.
+>>
+>> rzg2l_pinconf_set() is extended to support the 2.5V setting, with a
+>> check to ensure this is only used on Ethernet interfaces as it is not
+>> supported on the SD & QSPI interfaces.
+>>
+>> While we're modifying rzg2l_pinconf_set(), drop the unnecessary defaul=
+t
+>> value for pwr_reg as it is set in every branch of the following if
+>> condition.
+>>
+>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Is this ported from Linux ? If so, please include the Linux kernel=20
+> commit in the commit message, else ignore this comment.
+
+This was re-implemented in U-Boot instead of porting Linux commits
+(51996952b8b50 and cd27553b0dee6) due to differences between the
+existing RZ/G2L pinctrl code in Linux and U-Boot.
+
+Thanks,
+
+--=20
+Paul Barker
+--------------4W2YVIW9WDzb2FpJhn5frY00
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------4W2YVIW9WDzb2FpJhn5frY00--
+
+--------------fXVjzaoPiWsTkgphxH3LBzU3--
+
+--------------CQSUGC6YxeFTp3m3zW8ixIuW
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx9GtAUDAAAAAAAKCRDbaV4Vf/JGvbEj
+AQDm3HWgsvb3OznykTuQzXoDYfCDM5wGNYLM5vW6gJvMVgD+OXNxOd0Go4Q6Z/tH4b7yFH2WbhfZ
+DP2re05jM4a47g8=
+=G6sH
+-----END PGP SIGNATURE-----
+
+--------------CQSUGC6YxeFTp3m3zW8ixIuW--
