@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2054D339A1
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 17:02:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14A80D3399B
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 17:03:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3413B89100;
-	Mon, 28 Oct 2024 18:02:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9F3358910B;
+	Mon, 28 Oct 2024 18:03:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n/lFcAzy";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UoxMrLp2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3DB189100; Mon, 28 Oct 2024 18:02:55 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id B89F98910C; Mon, 28 Oct 2024 18:03:10 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D88089098
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 18:02:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1F6B890D1
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 18:03:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5c9362c26d8so9893514a12.1
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 10:02:53 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a9a2cdc6f0cso614163366b.2
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 10:03:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730134973; x=1730739773; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730134988; x=1730739788; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oLbVqB0BM0SGVnwcUqDXlQagWGOvjoywz1gUvWxTuLo=;
- b=n/lFcAzyxds+AsPL6Sp8ML0qrbOAGH4ogk6S3PjBzt85Ciycm1AXE98sa4YZVkx3nJ
- jZq42UkLRLJClmrGKBN3aUJ2nwKD982Qgd9mi4NINXX9n+MpvwZhfqA+CK6Raw6mytM/
- /VohEj+jDDU6MCfiQ3hhqJAOlkfTA0RpBiGRQ=
+ bh=VmyjHBytuQZhsQeGt6Svls7T2gR7a8m0Fn2a8VAsImc=;
+ b=UoxMrLp2y9lqZ2yuU2g+faTo7MwIEYvvECYP0vPgAS+PmvTrIrsv2Q7BlfJozGqjwv
+ /6sW0emyjxwy7EvvUG4JKoTixbHtWCSZ3pHHpib6qSypphkZPj18askJ+wQ//rb7xDio
+ 4z0XEPSGoBqIphP+LZbd0rMBTwkGLKkNX9z+8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730134973; x=1730739773;
+ d=1e100.net; s=20230601; t=1730134988; x=1730739788;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oLbVqB0BM0SGVnwcUqDXlQagWGOvjoywz1gUvWxTuLo=;
- b=YTy5OX/rqTxesWjNcJZ4gxmfWrCGLPedvaUO5I4YRKgtBNYbfFaVXIp/vSruCdVWBI
- SpP6DeWnhx+kMmExYGHhthJGc1SURN7jQFWIPyZOq+xHQ5oReErJNWHbZitG21PhYN5N
- xlbSG3TfU0foDaUFA2/0zIern64Y6tXV4WZJlCHeY3OdKsUv4y0+6RA5EFXn0f7xbuK1
- fDyukBjznmWEIbUGE+mAXzgB7mmU2w3b3NmhWBkDfr3xMvb0nXRGa7AcBobhNPuFJ5f8
- ZhIMm8dcUiUlzSsrZcbBwtalEFH5mi0BSwkJqwo87t5QNniIE04P/LMoTqq9vDRKIqpK
- NCyQ==
+ bh=VmyjHBytuQZhsQeGt6Svls7T2gR7a8m0Fn2a8VAsImc=;
+ b=pwOZloHYdyFisDYyAiZOEoRC0ZJ2KDOASqlvZPftr+b4or2GhFAJt/WaiFsyx4+TFP
+ RtuZJF4q0cSQbc5STmEDIiqsmAS+TYwIwu1u6oh/hLj34uC81L48C6cTCcKrw24Il1Nq
+ QKHJSD5ViWXxFIrYMp3vOrUP5EulkK7lWCSEZrj7zWJo7rrW1zo+Trmg2XRSNY0TZqaP
+ NeWFvZTt9LVPrELl7DX06TIYna/Knjilx3Y7iJHE6+b2oGw5AEz+gWF/OuIhZ/p/AwEb
+ pF3pwbSdaPOyJ34ppCa+gUDWxQKH4odix0UJoo5JHRtH4PeEwxO6gqlqSTo5NJ6gts7u
+ OwNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVENc3FXqCZbbp8H24FPD5lqWXoMlNvhtS7PbqHrBrLwAnGwDOZjOLJqCpujJ3kKThNr6O6uwQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2CnYa5IAeAMrUN1KOhfqzs/ljT9p1lX2VrCf/P9cwOrddtaUB
- 0qk1DXawpHv+Gvuj9v2D2fx+nqSuvlKtSkgJojiG800wNLrmvBF2iaIbiQPkJ0AGTkKB132oh3c
- +OGFGKty1CILzWRyDkDlPlbtopApQbGzKMMO8
-X-Google-Smtp-Source: AGHT+IFSmjiUiLzXNZn2flJxLd7BfRzPPubWI6LxWw7ZtcPi59vSC/658u1kBO7TPWfA1s/LHMvjc+6/gZfmJL/pHaM=
-X-Received: by 2002:a17:907:9808:b0:a99:f777:c6ef with SMTP id
- a640c23a62f3a-a9e2273e2f5mr26767366b.3.1730134972731; Mon, 28 Oct 2024
- 10:02:52 -0700 (PDT)
+ AJvYcCW43aicDXkTAg/2pLBkuMU+Q/nDCrcyhGr/q4YmVJuHZX+mJEShcKtvprEaEy+qnnnOhz/0k+M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0ahF7uKWf4UEpNwG1WdTXRfP6AG+dSh/s6f57zC/VVONzk14+
+ mHIm6YciuK7C1nGlYR66zEWogooNrUGzyNcs9eumspcgVwGsOwfDU+3ffOhfTsdo52PsIawhflt
+ zaZm1AjHX67zI+S2ti2zKgVhsVkyszCZCxpc9
+X-Google-Smtp-Source: AGHT+IGb11Czae/fC1T+n1P27eP6YfsTcgN72cjFgyNUguqgEbKMdnj2nnewTgymHMFTTyMi9HBUa4GG8Iqqj4XKp4A=
+X-Received: by 2002:a17:907:3f20:b0:a9a:375e:c167 with SMTP id
+ a640c23a62f3a-a9de5c91a19mr853140666b.1.1730134988270; Mon, 28 Oct 2024
+ 10:03:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1729577070.git.jan.kiszka@siemens.com>
- <9e440edc2a6bdcb7d768d277dd6afb02ab941ecd.1729577070.git.jan.kiszka@siemens.com>
- <20241025010854.GX4959@bill-the-cat>
- <ff2c2611-e650-40cb-86aa-275a930fcf87@siemens.com>
-In-Reply-To: <ff2c2611-e650-40cb-86aa-275a930fcf87@siemens.com>
+References: <20241022120032.196311-1-sjg@chromium.org>
+ <20241022120032.196311-2-sjg@chromium.org>
+ <f5d2100a-bd30-40b1-a305-44475070c5ce@gmx.de>
+In-Reply-To: <f5d2100a-bd30-40b1-a305-44475070c5ce@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 28 Oct 2024 18:02:41 +0100
-Message-ID: <CAFLszTg==a87SJaMiceGv4c8eHW0-oY8unmwatBNyJnBH6=3BA@mail.gmail.com>
-Subject: Re: [PATCH v2 11/13] smbios: Fill UUID from sysinfo when available
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Bryan Brattlof <bb@ti.com>, Nishanth Menon <nm@ti.com>
+Date: Mon, 28 Oct 2024 18:02:55 +0100
+Message-ID: <CAFLszThm6d7WDksCBAzWT=FGq6LZLXDuAnYK166SRGAJPCGU5A@mail.gmail.com>
+Subject: Re: [PATCH v8 1/8] test: boot: Update bootflow_iter() for console
+ checking
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -88,79 +90,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jan,
+Hi Heinrich,
 
-On Mon, 28 Oct 2024 at 07:12, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+On Mon, 28 Oct 2024 at 07:07, Heinrich Schuchardt <xypron.glpk@gmx.de>
+wrote:
 >
-> On 25.10.24 03:08, Tom Rini wrote:
-> > On Tue, Oct 22, 2024 at 08:04:28AM +0200, Jan Kiszka wrote:
+> On 10/22/24 14:00, Simon Glass wrote:
+> > This test checks console output so should have the UTF_CONSOLE flag. Add
+> > it.
 > >
-> >> From: Jan Kiszka <jan.kiszka@siemens.com>
-> >>
-> >> Allow for the sysinfo drivers to provide a system UUID to SMBIOS. Will
-> >> be first used by the IOT2050 boards.
-> >>
-> >> Based on original patch by Li Hua Qian.
-> >>
-> >> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
-> >> Reviewed-by: Simon Glass <sjg@chromium.org>
-> >> ---
-> >>  include/sysinfo.h | 1 +
-> >>  lib/smbios.c      | 4 ++++
-> >>  2 files changed, 5 insertions(+)
-> >>
-> >> diff --git a/include/sysinfo.h b/include/sysinfo.h
-> >> index 8a77ef44856..1c5008b5f23 100644
-> >> --- a/include/sysinfo.h
-> >> +++ b/include/sysinfo.h
-> >> @@ -49,6 +49,7 @@ enum sysinfo_id {
-> >>      SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
-> >>      SYSINFO_ID_SMBIOS_SYSTEM_SKU,
-> >>      SYSINFO_ID_SMBIOS_SYSTEM_FAMILY,
-> >> +    SYSINFO_ID_SMBIOS_SYSTEM_UUID,
-> >>      SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
-> >>      SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
-> >>      SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
-> >> diff --git a/lib/smbios.c b/lib/smbios.c
-> >> index 7c24ea129eb..1441fa4cde6 100644
-> >> --- a/lib/smbios.c
-> >> +++ b/lib/smbios.c
-> >> @@ -387,6 +387,7 @@ static int smbios_write_type1(ulong *current, int
-handle,
-> >>      struct smbios_type1 *t;
-> >>      int len = sizeof(struct smbios_type1);
-> >>      char *serial_str = env_get("serial#");
-> >> +    char uuid[sizeof(t->uuid)];
-> >>
-> >>      t = map_sysmem(*current, len);
-> >>      memset(t, 0, sizeof(struct smbios_type1));
-> >> @@ -409,6 +410,9 @@ static int smbios_write_type1(ulong *current, int
-handle,
-> >>
-SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
-> >>                                                    NULL);
-> >>      }
-> >> +    if (!sysinfo_get_str(ctx->dev, SYSINFO_ID_SMBIOS_SYSTEM_UUID,
-> >> +                         sizeof(uuid), uuid))
-> >> +            strncpy((char *)t->uuid, uuid, sizeof(t->uuid));
-> >>      t->wakeup_type = SMBIOS_WAKEUP_TYPE_UNKNOWN;
-> >>      t->sku_number = smbios_add_prop_si(ctx, "sku",
-> >>                                         SYSINFO_ID_SMBIOS_SYSTEM_SKU,
-NULL);
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >
-> > This commit leads to sandbox (and sandbox with clang) failing a ton of
-> > tests:
-> > https://source.denx.de/u-boot/u-boot/-/jobs/929474
+> > (no changes since v1)
 > >
-> > Without this commit in the series, iot2050 fails to build.
+> >   test/boot/bootflow.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
 > >
+> > diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> > index 154dea70a59..cc894e804a4 100644
+> > --- a/test/boot/bootflow.c
+> > +++ b/test/boot/bootflow.c
+> > @@ -370,7 +370,7 @@ static int bootflow_iter(struct unit_test_state
+*uts)
+> >
+> >       return 0;
+> >   }
+> > -BOOTSTD_TEST(bootflow_iter, UTF_DM | UTF_SCAN_FDT);
+> > +BOOTSTD_TEST(bootflow_iter, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
 >
-> Strange on first sight - we will look into this. As this patch and the
-> following 2 are only adding a feature, maybe you could already merge the
-> first 10 patches? Would make v3 shorter for us.
+> The test invokes ut_assert_console_end(). But where does it check
+> console output?
 
-I marked the first 10 patches as 'under review'. I'm not sure who is
-picking them up, probably Tom.
+That is it. It is making sure that there is no console output. But the flag
+is needed in order to do any console checking.
 
 Regards,
 Simon
