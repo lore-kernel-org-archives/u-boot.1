@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F190CD3E2BA
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 19:30:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D16AD3E2BA
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 19:30:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 610B28911E;
-	Mon, 28 Oct 2024 20:29:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C05FB89126;
+	Mon, 28 Oct 2024 20:29:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="ytIzKUqA";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="Kd6e+BVH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF01E890CE; Mon, 28 Oct 2024 20:29:47 +0100 (CET)
+ id 1D3F58911D; Mon, 28 Oct 2024 20:29:52 +0100 (CET)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D9538911D
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 20:29:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F3A0A89126
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 20:29:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
@@ -31,26 +31,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JrIS2lL6O8HEry7Ylb0/CeD0pF5LcAoPa3eBooleG1E=; b=ytIzKUqAnb+rZwnWQT7x3usRql
- TcNa5GJjkarRHq4NPluAsb9Hhq9VQvbWWYNyjadx9BkZxVG2vyuCFSgRjnT2TVdRnS8nw6tN0eQYV
- xKBE1BaR9wn8KcI/aXTwxWj8QdoHVam6bc/MAYF7u4+M1Pq3i3offXPT5v/LdlDJI0F0EkuieT7hW
- 8TJo1NpLR7pCSxEH7V7E7Z8bNGW3Z2TEqQevAsULHv0O8wqpnS4jixqHlNteyc1PDX4m+LGKjCjF9
- j/qzY6yitm5ff2o++BfGvI1jVzeh0hEI9tn6Td26zAPbQyRGKN4Zfrblgr+HPxGFbpczkop6aHxa0
- 37rc5paQ==;
+ bh=PlOcdzoblVmFL45uLgELN0cgoaypzPk1i059oatbTO8=; b=Kd6e+BVH2hEZzlkOMYe4HrLNkY
+ zCF9wxrytjArcOru3m22Qv2wVfwSkkj0wR0hY1g775kVS8SlTyb+lk5l4jo/Oi677n4/QyNhKQOnE
+ Us7mvxUvAThsmYTzaxfA2UHFevWIPv5sZYtNBNPaIElqYHG4s6/XF500KwAERGjv+zCG8qwKXB7T4
+ j2XsHYbCOwLey2G72Ph5v1wM6I2VDsV5Sws6G14kCdw8zikRhhyXfg/JkVclkR0FrGAUNOLcU1MiP
+ AB9zH5FXOxfPlVZ5MYN07cNNtaKvdMsxb3MMGlxIgOF73PUZFF/yBgfIZILDAPc12h7Ar7bvnDIyZ
+ U5TSNouQ==;
 Received: from [185.156.123.69] (helo=phil.sntech)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1t5Uyq-0000Gm-QV; Mon, 28 Oct 2024 20:00:44 +0100
+ id 1t5Uyp-0000Gm-SR; Mon, 28 Oct 2024 20:00:43 +0100
 From: Heiko Stuebner <heiko@sntech.de>
 To: u-boot@lists.denx.de, kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
  sjg@chromium.org
 Cc: heiko@sntech.de,
 	ukleinek@debian.org
-Subject: [PATCH v3 14/18] arm64: dts: rockchip: add 2 pmu_io_domain supplies
- for Qnap-TS433
-Date: Mon, 28 Oct 2024 20:00:30 +0100
-Message-ID: <20241028190034.143122-15-heiko@sntech.de>
+Subject: [PATCH v3 10/18] arm64: dts: rockchip: add gpio-keys to Qnap-TS433
+Date: Mon, 28 Oct 2024 20:00:26 +0100
+Message-ID: <20241028190034.143122-11-heiko@sntech.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241028190034.143122-1-heiko@sntech.de>
 References: <20241028190034.143122-1-heiko@sntech.de>
@@ -73,37 +72,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the two supplies for the pmu-io-domains that are defined in the
-vendor devicetree for the TS433.
+The TS433 has 3 buttons, power and copy in the front as well as a reset
+pinhole button on the back. The power-button is connected to the embedded
+controller while the other two buttons are just gpio connected.
+
+Add the gpio-keys definition for the two buttons we can handle right now.
 
 Tested-by: Uwe Kleine-König <ukleinek@debian.org>
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-Link: https://lore.kernel.org/r/20240723195538.1133436-15-heiko@sntech.de
+Link: https://lore.kernel.org/r/20240723195538.1133436-11-heiko@sntech.de
 
-[ upstream commit: 64b7f16fb3947e5d08d9e9b860ce966250e45d52 ]
+[ upstream commit: 9b682d31b24f1f70b5b4d0618095d46e0722b9d8 ]
 
-(cherry picked from commit 9b4d4c02b5762196063ab03c5439f96cbbaf2485)
+(cherry picked from commit f0b858c751382ee9faf18f9b19b0817c6b50ac1c)
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
- dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../src/arm64/rockchip/rk3568-qnap-ts433.dts  | 29 +++++++++++++++++++
+ 1 file changed, 29 insertions(+)
 
 diff --git a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-index 9a0cb69c3cf..6c4269b3d95 100644
+index 34fc31ea9a3..9f964b6f411 100644
 --- a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
 +++ b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-@@ -531,6 +531,11 @@
+@@ -6,6 +6,7 @@
+ 
+ /dts-v1/;
+ 
++#include <dt-bindings/input/input.h>
+ #include <dt-bindings/leds/common.h>
+ #include <dt-bindings/gpio/gpio.h>
+ #include "rk3568.dtsi"
+@@ -24,6 +25,24 @@
+ 		stdout-path = "serial2:115200n8";
  	};
+ 
++	keys {
++		compatible = "gpio-keys";
++		pinctrl-0 = <&copy_button_pin>, <&reset_button_pin>;
++		pinctrl-names = "default";
++
++		key-copy {
++			label = "copy";
++			gpios = <&gpio0 RK_PB6 GPIO_ACTIVE_LOW>;
++			linux,code = <KEY_COPY>;
++		};
++
++		key-reset {
++			label = "reset";
++			gpios = <&gpio0 RK_PB5 GPIO_ACTIVE_LOW>;
++			linux,code = <KEY_RESTART>;
++		};
++	};
++
+ 	leds {
+ 		compatible = "gpio-leds";
+ 
+@@ -202,6 +221,16 @@
  };
  
-+&pmu_io_domains {
-+	vccio4-supply = <&vcc_1v8>;
-+	vccio6-supply = <&vcc_1v8>;
-+};
+ &pinctrl {
++	keys {
++		copy_button_pin: copy-button-pin {
++			rockchip,pins = <0 RK_PB6 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
 +
- &sata1 {
- 	status = "okay";
- };
++		reset_button_pin: reset-button-pin {
++			rockchip,pins = <0 RK_PB5 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++
+ 	leds {
+ 		hdd1_led_pin: hdd1-led-pin {
+ 			rockchip,pins = <1 RK_PD5 RK_FUNC_GPIO &pcfg_pull_up>;
 -- 
 2.45.2
 
