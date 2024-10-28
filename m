@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 172ABD13588
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 08:09:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88E29D13570
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 08:16:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9615289095;
-	Mon, 28 Oct 2024 09:09:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D5D688901F;
+	Mon, 28 Oct 2024 09:16:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3B418908A; Mon, 28 Oct 2024 09:09:43 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 4358D89066
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 09:09:36 +0100 (CET)
+ id 0341E88EAE; Mon, 28 Oct 2024 09:16:35 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 7B8A78901F
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 09:16:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.11,238,1725289200"; 
- d="asc'?scan'208";a="227179311"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 28 Oct 2024 17:09:29 +0900
+ d="asc'?scan'208";a="223194479"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 28 Oct 2024 17:16:26 +0900
 Received: from [10.226.93.33] (unknown [10.226.93.33])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 12BEC419DA17;
- Mon, 28 Oct 2024 17:09:25 +0900 (JST)
-Message-ID: <135f57dd-d8f9-421d-a346-84245c4794f0@bp.renesas.com>
-Date: Mon, 28 Oct 2024 08:09:24 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 7898C40078AC;
+ Mon, 28 Oct 2024 17:16:23 +0900 (JST)
+Message-ID: <37f789ee-0232-4836-a0eb-7f4f14197ab9@bp.renesas.com>
+Date: Mon, 28 Oct 2024 08:16:21 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/14] pinctrl: rzg2l: Support 2.5V PVDD for Ethernet
- interfaces
+Subject: Re: [PATCH 03/14] pinctrl: rzg2l: Support Ethernet TXC output enable
+Content-Language: en-GB
 To: Marek Vasut <marek.vasut@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -42,14 +42,13 @@ To: Marek Vasut <marek.vasut@mailbox.org>,
  <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
- <20241024152448.102-3-paul.barker.ct@bp.renesas.com>
- <30ec85e5-6de8-4305-971d-893ea8e1151b@mailbox.org>
-Content-Language: en-GB
+ <20241024152448.102-4-paul.barker.ct@bp.renesas.com>
+ <bd2ec192-cbc7-4410-a3c5-e3ac0aaa7b88@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <30ec85e5-6de8-4305-971d-893ea8e1151b@mailbox.org>
+In-Reply-To: <bd2ec192-cbc7-4410-a3c5-e3ac0aaa7b88@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------CQSUGC6YxeFTp3m3zW8ixIuW"
+ boundary="------------PYbS754Lavb1lGlchFBAUjno"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,8 +66,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------CQSUGC6YxeFTp3m3zW8ixIuW
-Content-Type: multipart/mixed; boundary="------------fXVjzaoPiWsTkgphxH3LBzU3";
+--------------PYbS754Lavb1lGlchFBAUjno
+Content-Type: multipart/mixed; boundary="------------gxhdKPrWgvJTwy0Bc5CZihqM";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut@mailbox.org>,
@@ -78,49 +77,57 @@ To: Marek Vasut <marek.vasut@mailbox.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
  <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
-Message-ID: <135f57dd-d8f9-421d-a346-84245c4794f0@bp.renesas.com>
-Subject: Re: [PATCH 02/14] pinctrl: rzg2l: Support 2.5V PVDD for Ethernet
- interfaces
+Message-ID: <37f789ee-0232-4836-a0eb-7f4f14197ab9@bp.renesas.com>
+Subject: Re: [PATCH 03/14] pinctrl: rzg2l: Support Ethernet TXC output enable
 References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
- <20241024152448.102-3-paul.barker.ct@bp.renesas.com>
- <30ec85e5-6de8-4305-971d-893ea8e1151b@mailbox.org>
-In-Reply-To: <30ec85e5-6de8-4305-971d-893ea8e1151b@mailbox.org>
+ <20241024152448.102-4-paul.barker.ct@bp.renesas.com>
+ <bd2ec192-cbc7-4410-a3c5-e3ac0aaa7b88@mailbox.org>
+In-Reply-To: <bd2ec192-cbc7-4410-a3c5-e3ac0aaa7b88@mailbox.org>
 
---------------fXVjzaoPiWsTkgphxH3LBzU3
-Content-Type: multipart/mixed; boundary="------------4W2YVIW9WDzb2FpJhn5frY00"
+--------------gxhdKPrWgvJTwy0Bc5CZihqM
+Content-Type: multipart/mixed; boundary="------------cafEnPTsctgvwE0zAgfhq23I"
 
---------------4W2YVIW9WDzb2FpJhn5frY00
+--------------cafEnPTsctgvwE0zAgfhq23I
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 27/10/2024 16:14, Marek Vasut wrote:
+On 27/10/2024 16:15, Marek Vasut wrote:
 > On 10/24/24 5:24 PM, Paul Barker wrote:
->> The Ethenet interfaces on the Renesas RZ/G2L SoC family can operate at=
-
->> multiple power supply voltages: 3.3V (default value), 2.5V and 1.8V.
+>> On the RZ/G2L SoC family, the direction of the Ethernet TXC/TX_CLK
+>> signal is selectable to support an Ethernet PHY operating in either MI=
+I
+>> or RGMII mode. By default, the signal is configured as an input and MI=
+I
+>> mode is supported. The ETH_MODE register can be modified to configure
+>> this signal as an output to support RGMII mode.
 >>
->> rzg2l_pinconf_set() is extended to support the 2.5V setting, with a
->> check to ensure this is only used on Ethernet interfaces as it is not
->> supported on the SD & QSPI interfaces.
->>
->> While we're modifying rzg2l_pinconf_set(), drop the unnecessary defaul=
-t
->> value for pwr_reg as it is set in every branch of the following if
->> condition.
+>> As this signal is be default an input, and can optionally be switched =
+to
+>> an output, it maps neatly onto an `output-enable` property in the devi=
+ce
+>> tree.
 >>
 >> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Is this ported from Linux ? If so, please include the Linux kernel=20
-> commit in the commit message, else ignore this comment.
+> Same comment as on 2/14 regarding kernel commits.
 
-This was re-implemented in U-Boot instead of porting Linux commits
-(51996952b8b50 and cd27553b0dee6) due to differences between the
+This was re-implemented in U-Boot due to differences between the
 existing RZ/G2L pinctrl code in Linux and U-Boot.
+
+>=20
+> Is this something which should be configured in DT instead ?
+
+This patch adds support for configuring it in the DT, using the
+'output-enable' property. You can see this used later in this series in
+the device tree patch to enable Ethernet TXC output [1].
+
+[1]: https://msgid.link/20241024152448.102-14-paul.barker.ct@bp.renesas.c=
+om
 
 Thanks,
 
 --=20
 Paul Barker
---------------4W2YVIW9WDzb2FpJhn5frY00
+--------------cafEnPTsctgvwE0zAgfhq23I
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -184,21 +191,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------4W2YVIW9WDzb2FpJhn5frY00--
+--------------cafEnPTsctgvwE0zAgfhq23I--
 
---------------fXVjzaoPiWsTkgphxH3LBzU3--
+--------------gxhdKPrWgvJTwy0Bc5CZihqM--
 
---------------CQSUGC6YxeFTp3m3zW8ixIuW
+--------------PYbS754Lavb1lGlchFBAUjno
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx9GtAUDAAAAAAAKCRDbaV4Vf/JGvbEj
-AQDm3HWgsvb3OznykTuQzXoDYfCDM5wGNYLM5vW6gJvMVgD+OXNxOd0Go4Q6Z/tH4b7yFH2WbhfZ
-DP2re05jM4a47g8=
-=G6sH
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx9IVgUDAAAAAAAKCRDbaV4Vf/JGvURV
+AP9MTrSTwwhllVzu94LVlSMVyUMwrNUO+lIDgmL5belVhAEA//wC51bq3at0IQyBhpEtvXotG9FY
+JuAiYpK74NoJaAI=
+=SNN5
 -----END PGP SIGNATURE-----
 
---------------CQSUGC6YxeFTp3m3zW8ixIuW--
+--------------PYbS754Lavb1lGlchFBAUjno--
