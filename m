@@ -4,51 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20BC0D13588
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 09:53:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB73BD13588
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 10:04:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 954C38907E;
-	Mon, 28 Oct 2024 10:53:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 430EB89079;
+	Mon, 28 Oct 2024 11:04:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D46F089085; Mon, 28 Oct 2024 10:53:08 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 05C028905F
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 10:53:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.11,238,1725289200"; 
- d="asc'?scan'208";a="223204875"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 28 Oct 2024 18:53:02 +0900
-Received: from [10.226.93.33] (unknown [10.226.93.33])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 1172C41C42ED;
- Mon, 28 Oct 2024 18:52:59 +0900 (JST)
-Message-ID: <5dfc0e83-857d-4cfb-ade2-63f3d62d60bc@bp.renesas.com>
-Date: Mon, 28 Oct 2024 09:52:58 +0000
-MIME-Version: 1.0
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="WOj/PMjR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B461189072; Mon, 28 Oct 2024 11:04:44 +0100 (CET)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on20610.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2607::610])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9351F89083
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 11:04:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Ek6oTC+aMTPa57458oepQpIjiLq8eD54jrm78wfvxaeYa7uBMWu0q2/Ddji7s3IwFObu6DqAkCAS8qHP8dO4eFFw0O2GcxDM7EiaSSbRZr5PDLpAduxWnVCFaDwGj2TV3RzpgPji52S8ne3C/4BL4fLIh0y7QIY05som1uiG6AjZS6XUs+EnV/ov4lVvwGWom2a8YClpiZehx2ieaXqKRyAoNAPWBVx3A6JY56rbzv32RrMy/3k9EBpemzyH+0BQWfCs6pc0ZjPhLYyqU/W/cQM4oZh915mSxmlAm1ewmEDsJ318zGof13f3/fAXDfl/CC0aecd7dH14va5pbPWg2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PpgCl92SXJzHn3SzKzscNCf1R1ROzmEEnLVowHLv8VU=;
+ b=iEPaz+dfReysXyovaYBAgde4dRiVlesbXOhhlk4eW4KpDlJJLq+LWe8AkCTsMLeMRbE6mxuSxn+NztL+m1ECwOqTkZJHmKBzHXbhVg+hjkeOsO64wLYwBN3PWmwKKbJpbLy3I+mCNBH9ViyZcClt9/hgDPke0+SHgHY9qScgaa/d1SHB47hRo70i+DUVFUITqSiFnq6KiF+JptosoApTS67WBQA/WLQ+GCSyQnHT73EIrezVFtgKjehgGsfrqv3m5dUZxz+/JjUvISV41vxawV6ldQubcOUtKyvBW1GcxoRModrTURqEIfkaOudJfRji1HPTvJis5G8vEQlwLWO8wA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PpgCl92SXJzHn3SzKzscNCf1R1ROzmEEnLVowHLv8VU=;
+ b=WOj/PMjRj68lTDgcq3mhxdoWBeMSq4CdMDBzDyH4n/FS0T2bLN4kRLimo0IGHSOBtRejgnOWzMt8fgqBpKedU86TiQYNdekcoZYWIHmDivoHnjJhrCDTdsZs2/sHQQEjtAsIV/942B11Ex8BbF0ndwWQZ/RrV8DbDTHcLyFttT0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PAXPR04MB9076.eurprd04.prod.outlook.com (2603:10a6:102:22a::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.23; Mon, 28 Oct
+ 2024 10:04:33 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8093.025; Mon, 28 Oct 2024
+ 10:04:33 +0000
+Message-ID: <cf0dfa6c-4bdc-47db-8847-2575b44f1384@cherry.de>
+Date: Mon, 28 Oct 2024 11:04:31 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/14] net: ravb: Add RZ/G2L Support
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
- <20241024152448.102-12-paul.barker.ct@bp.renesas.com>
- <5bd5fe3c-1077-4dc9-8305-b435c426d712@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <5bd5fe3c-1077-4dc9-8305-b435c426d712@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------tbISfXlCya7khQ2MmZLGMTmB"
+Subject: Re: [PATCH] dm: core: downgrade some dm_warn messages to log_debug()
+To: Simon Glass <sjg@chromium.org>, Quentin Schulz <foss+uboot@0leil.net>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Alexander Dahl <ada@thorsis.com>
+References: <20241015-dm-debug-less-verbose-v1-1-366e8f00b556@cherry.de>
+ <CAFLszTgg23HAJ5duUZDnhoX+xvbPCpdtrx0CUVQytxm8sZRsHA@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CAFLszTgg23HAJ5duUZDnhoX+xvbPCpdtrx0CUVQytxm8sZRsHA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0022.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1c::10) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB9076:EE_
+X-MS-Office365-Filtering-Correlation-Id: 30bb0d95-aba0-4caa-6725-08dcf737eb91
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Q0NsZVFHREtjc0pqZnRPNGZYVDJmamhwUHYrZ2daZGhwVzQ4V3dRSlE2QWtr?=
+ =?utf-8?B?Z3U1SGd2Q2hEeXhBbEJYdG14ajAzL0xJTmdhU0NSczFVUDIzS2dKU0g4S1hF?=
+ =?utf-8?B?REI3MmdXT1ZPZG9qUEh5eUNtQVVPTSt2VkxSbHJOZ3kyWVFQdDdrSytSNEtZ?=
+ =?utf-8?B?UUR3YU9GVG9vaU9wamU5cXc3TDFUS3U1clUyZUtUSkMvcGVmRjBTRXltY3E3?=
+ =?utf-8?B?Ym1kTGcvVndLNkJrVVVkK3R0YlhMb3J4YUN1UjNRQ3hxUGVKZUZ4SklNN3Bi?=
+ =?utf-8?B?OXBvWG4ycjBsQmZ0NEJOeXhRTlNScUhaL2Z0RzBwRWZhREt4TDJZbEc0UDEx?=
+ =?utf-8?B?N0tPSW83Zys3WHhZbDZLOU5BeFh2QkVOakc5ei9RWk02dHRSMkpvUUg3WUdS?=
+ =?utf-8?B?T0g2NE1MdjV5cUUzTXRZdldId0RTd3FPR0tMNWdqNVNlakE0ajBISEhLeDBQ?=
+ =?utf-8?B?Z0pGQU94cXYwNDN5RU9xL1IxVGtKNENuVkhEcTBvQkJLR0FDU2tKclNFTk1r?=
+ =?utf-8?B?NHBJYXRHT1dmUXJxYVZSOVFjN3JmdUVZbnQ0R2JZb1I1VXgwcG1iWGR1Kzdx?=
+ =?utf-8?B?UHNBbm9md0U4SGM1VDkrVEVZRWpjYUYwckw1TTRvVzVLSVAxTkh4WHJMdGdN?=
+ =?utf-8?B?cXR3MFVTYlZMd3JmcVBnc0pxRzk2dXR5U1plV0YwRlVxRElDRmtKTDlWZTBY?=
+ =?utf-8?B?aDQxNExUVUZOVWFwT3JWMnlFL0x3dlFrRzFVaW1JVGNSdWpyVU8zL0QxV0NZ?=
+ =?utf-8?B?alZ6U3BqVUlULzlkVVQ0b1RGNk1nSlFudy9PaWdmNmNLSXdMOXkzdlVYTzlk?=
+ =?utf-8?B?QjhGQzlKTmV6VnZGWE4rR1BRc1JPQllrcVdkVVdFd08rLy9MMEFXbHdEUEE2?=
+ =?utf-8?B?Nis4c1dpSFkweFYvcjZwL3phTk1kODlFUFhnOXFOWmZrNXlpcmloMjRGeVc1?=
+ =?utf-8?B?WVUxSVpvclhwYkJIbDVJcDZDNTdCeUxpVWFLTWlqb2h4bFNFaFZvVGlvRUpF?=
+ =?utf-8?B?eGpuZlVOcHJSYmI3ZkxvanF2WU5vWWE3a01lWXdVZ0xwaWliVTdZa3JobHdQ?=
+ =?utf-8?B?eXNNTm5vY01xK09pMUNmd2hPMkNhOG9pbUVmQ1JqbkFKQ3VENXBqUzdEY3pt?=
+ =?utf-8?B?S1c0UExZV2hpYzBGNDZ0UENsZTlqUlQxOG1yNzVBQy9TSUs1eTQ1RW9EMlRq?=
+ =?utf-8?B?UmhEVHVkMy9TZlg3T3BFbXVwK2FUdzV4UmhEUXlsUDkwMkVHL0U3UmxUbmJW?=
+ =?utf-8?B?Y1RSMmVRT01TL3V2OGgwaDJXdE5xMTVrd3ZMRWJKbjNMZ1RmVmNDbk91bFMy?=
+ =?utf-8?B?MWpNdjFtdXlUSGFadExhUXpoQlQ3cHhxNnZLRy9peEJTczFjaGJlNkpFNWdL?=
+ =?utf-8?B?SjlhbTBxU0ZRemR0STF4UFRkVzNCM29XK0Y0a0x1emMrOVBMWUhwNmpCSVNu?=
+ =?utf-8?B?bTlKeTQ2TWVRY2txaGFCV25kK0lieVV2Wmc2Ujg0MXRySld1WHRmdHhiQnIr?=
+ =?utf-8?B?S1NtWWQzV05OYnhCSnE5RmxVdDdlMHNvcCtLVmp3SG1WcThsUEdCakxPUE9F?=
+ =?utf-8?B?dkRLWHJ3RlJEdlZUL0hsQ21HMGQyUkI2RmVIcWhBRFNLUjk4SUsxTzc3QkxC?=
+ =?utf-8?B?UGNGanlZc3F3cFRzYXlLUHJSNlV3YjFGOUNsN29JM0hRaDRlYUJ3enlHSWkx?=
+ =?utf-8?B?S1JkenA0N0JGTHpzRmhGQzM5UWo3NDVwd1V4aGRtZzA0Y1V1d2o1Zjl2c2pL?=
+ =?utf-8?Q?gONA5NWqHTQJeJ4/8m2eAVuTy2UJyV4CjjXsre1?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bnZWd0RuM2w3c0FtUVJRMGR4azFZV2YrMmpscVp0SWpkTExGRnBxd0xWbm5q?=
+ =?utf-8?B?NVJacHE2MjdtVDJKMHJ2cEMxWDA5ZXlZQyt2TWg3THZKQmRQcHBGdXZSbUE4?=
+ =?utf-8?B?T2xNZVFwbTVLNk1iaGNPNmMzK3lBN0NpSStzZWpsb1FUZitueWtyUWlIQjdy?=
+ =?utf-8?B?SkJGQkNoc1RuMDVrMy9rMFlOOEoxTmNuU1Z3V2lDQncwYjhxVVZnQXh6VGo1?=
+ =?utf-8?B?WWJiTVpzeCsvWG9TVFMrNkhnS0ZOdUFLVExYRDRidC94Q0dic3hIU0JpNmh2?=
+ =?utf-8?B?VUZNa3VzNUhvU3pPUjhvbFFhZ21rOXVCK3R0aExzQ2ZPRzQrMGZCb0FaV1FN?=
+ =?utf-8?B?SUp5cVJnb1hKdmorMjFoZHc1Ulc1YUVyeUErSy9tM3Qwc1VmWjg2U3V1RS9y?=
+ =?utf-8?B?bnA1S0xscWFiUks1Rm9pcG8wWnhveDRlcmEwcDQxN0pjcnZzUU1zdmhwdVk4?=
+ =?utf-8?B?VWlWbk9ROFNNRjExaFhseXpacWpQQjIvbXprNXNYcWZyVnQxMTd4UExvTWE3?=
+ =?utf-8?B?d3VZREV6cHpJczNaREdIbkI2VjNPWmFjSUowLzJEUGVtNUx5dHFIZnU5Vncw?=
+ =?utf-8?B?bWxVdThGaFA4eVVCcjhndmNRbkwrdkJISUU1SHM2eUg2UEZlODNtZHVmR0hy?=
+ =?utf-8?B?b256Z3RDaWV6VXhjYmVtdS9aZmhqelloWEE5SDVMT3g4aW9Mdy9McUxFS1lX?=
+ =?utf-8?B?WlJjeDVMNXJncGU1WC8rdTNQeGQyOFdjN3dORzlaYmZGK3Ntc1d0VjY4OG4y?=
+ =?utf-8?B?RFB3aTRLdTNOTnZQak9KUHVsSmd5TDRqM2N4VG9nc2hjZXpIMXZyUFp4cytI?=
+ =?utf-8?B?dXNtMlUzNkplMEMzTWZuTDVabkY3Z3VoTW8rRkxIb21paWlnTGJTd3FxaTZS?=
+ =?utf-8?B?QjRxTm9HdEpOa0R2VXNXeGhDdmRNdnltVTIxY083aWtlNng0dk03Wk9xL3Z1?=
+ =?utf-8?B?SlJhcEg0N3duQkFJQmtUcTJQdkJraEhEdHRZbjR5Z292ZTNza3M0RHJ4VGdH?=
+ =?utf-8?B?S3NkM3gyQlRyaWpRdVBxRlI4Q1lqYXNFSjZ0c2NPMGpZTlhKNitCV1ZuUkRm?=
+ =?utf-8?B?MDcxWEJTY05WNmR4RDVWTzM2cEw2N0Y4Ym45MDBTVEl2VzlXRFlqdnROR0RC?=
+ =?utf-8?B?MXdvRnBMTnEyREVvQkI3UDlHL3lqT3d3cHQ5N0xFSmlyWlhrUnJDNmQwMmdm?=
+ =?utf-8?B?SUExS3JGRW5tS1l1UE11NHdJUis3VkNhbkZ1dmNIc1NRRm1iOTBkOEZhd0xS?=
+ =?utf-8?B?aXVxOUNORHRkZnhvTGQ2aXB0MzlkOFhWZThnY2Q2a1JkNGxVUDl4aHUvZ1FT?=
+ =?utf-8?B?Nlc2dDY2ZUVTakNoTVpGY0wzRFl6VVVoY1VLa0F0S0NTbVFjdklCZGRHR0Ux?=
+ =?utf-8?B?ZGJNUW12SFRVZ0pZZm5XV25vc1BiVk9tUHRFK3RSWEU4VWtqRU9QNWw0UjFY?=
+ =?utf-8?B?UDZ3WnZlcFJzOHY4c2xLSU5KbnpUcjlSc3Iyc1R6NlREMTdaVm5wN0IwODA5?=
+ =?utf-8?B?TkhOdElJUGFBVHZZN1JZZHFDaTM0YXVDSEhqU2lyQTFuMmc1bk5SYU1KVHVG?=
+ =?utf-8?B?MkdMOEhKc3c0N3UvREtGRjJpUzZZVVdpeCtKNHNMYW9XUjlLTzdCQiswK1BE?=
+ =?utf-8?B?UC9LY1Y0cVM4dmhlMGNYNFNUYVhQbGRtNkhkSmxjM3duWnJvT1NuZ0txZUdk?=
+ =?utf-8?B?VmROOFgxWllJU2JvY2c5TFpDYkVhVzBKZHdFZVN2V1ZoMGRWS2Y5aWsvVE1q?=
+ =?utf-8?B?NDdERUFKVTNITnZLZjdXa2I2ckVwOVVnMEowNUVWLzA3MUJXQ1NLenFoY3c3?=
+ =?utf-8?B?Mk9yK3hYNzFRdzNsRkRFdWdDdTMyU1ZhKy8xVnptRE5RK1ZrOWMzT2JqeEtH?=
+ =?utf-8?B?bXc2dFBWWWpKRk1WbWJQQ3hoK1htUWxmNnVkZ2ZwaXVSMVhIZDN2a0NWZjcx?=
+ =?utf-8?B?MEJVdUtrOHE2Wk5MZzlXeVgzdmdlRXE4U0hjYkFNZG16bmcxUXVuaFo1S0NF?=
+ =?utf-8?B?eityQjZsZk93WE0reTBaYStET092dmUvNmtGL01mQjZnbGFZSFY4QW1nYVN5?=
+ =?utf-8?B?Z2dXb2FYdERmSzhrL3p5U0RpMGFRM2F0V0c3ZzBsb2tnMDBFUDBVMXpUZXlm?=
+ =?utf-8?B?RENNRmRsMmluVXFYbnFOVHlCaWIzWE41eDRxRkFvTEtrSnZVb1I3cDJodkp2?=
+ =?utf-8?B?ZUE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 30bb0d95-aba0-4caa-6725-08dcf737eb91
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2024 10:04:32.9103 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: EgZkC8VvUml93MkV0AF40jGoIbth/CGSP9kFc3CFShfWkYCyc3wQ1UKQUrYqF2EP9lzSsihASH6BIw4slr3XD767pDo4TAzWe+uMpKrNiMg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9076
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,224 +173,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------tbISfXlCya7khQ2MmZLGMTmB
-Content-Type: multipart/mixed; boundary="------------Dju6aJ2lReiRgtXdVdcbloAX";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-Message-ID: <5dfc0e83-857d-4cfb-ade2-63f3d62d60bc@bp.renesas.com>
-Subject: Re: [PATCH 11/14] net: ravb: Add RZ/G2L Support
-References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
- <20241024152448.102-12-paul.barker.ct@bp.renesas.com>
- <5bd5fe3c-1077-4dc9-8305-b435c426d712@mailbox.org>
-In-Reply-To: <5bd5fe3c-1077-4dc9-8305-b435c426d712@mailbox.org>
+Hi Simon,
 
---------------Dju6aJ2lReiRgtXdVdcbloAX
-Content-Type: multipart/mixed; boundary="------------5fNRHabnaa8Im6KW06siuOpn"
-
---------------5fNRHabnaa8Im6KW06siuOpn
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On 27/10/2024 16:29, Marek Vasut wrote:
-> On 10/24/24 5:24 PM, Paul Barker wrote:
->> The Renesas R9A07G044L (RZ/G2L) SoC includes two Gigabit Ethernet
->> interfaces which can be supported using the ravb driver. Some RZ/G2L
->> specific steps need to be taken during initialization due to differenc=
-es
->> between this SoC and previously supported SoCs. We also need to ensure=
-
->> that the module reset is de-asserted after the module clock is enabled=
-
->> but before any Ethernet register reads/writes take place.
+On 10/27/24 6:16 PM, Simon Glass wrote:
+> Hi Quentin,
+> 
+> On Tue, 15 Oct 2024 at 16:32, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >>
->> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>> From: Quentin Schulz <quentin.schulz@cherry.de>
+>>
+>> People complained that enabling (SPL_)DM_WARN was now totally unusable
+>> due to the amount of messages printed on the console.
+>>
+>> Let's downgrade the log level of some messages that are clearly not on
+>> the error path.
+>>
+>> Note that there's one pr_debug in there, because it is followed by
+>> pr_cont so it made sense to reuse the same family of functions.
+>>
+>> Reported-by: Alexander Dahl <ada@thorsis.com>
+>> Fixes: 6afdb1585112 ("dm: core: migrate debug() messages to use dm_warn")
+>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 >> ---
->>   arch/arm/mach-renesas/Kconfig |   1 +
->>   drivers/net/Kconfig           |   2 +
->>   drivers/net/ravb.c            | 183 ++++++++++++++++++++++++++++++++=
---
->>   3 files changed, 176 insertions(+), 10 deletions(-)
+>> Note that I am not entirely sure about the "not found" and "not large
+>> enough" changes there.
 >>
->> diff --git a/arch/arm/mach-renesas/Kconfig b/arch/arm/mach-renesas/Kco=
-nfig
->> index aeb55da609bd..d373ab56ce91 100644
->> --- a/arch/arm/mach-renesas/Kconfig
->> +++ b/arch/arm/mach-renesas/Kconfig
->> @@ -76,6 +76,7 @@ config RZG2L
->>   	imply MULTI_DTB_FIT
->>   	imply MULTI_DTB_FIT_USER_DEFINED_AREA
->>   	imply PINCTRL_RZG2L
->> +	imply RENESAS_RAVB
->>   	imply RENESAS_SDHI
->>   	imply RZG2L_GPIO
->>   	imply SCIF_CONSOLE
->> diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
->> index 89f7411bdf33..d009acdcd94f 100644
->> --- a/drivers/net/Kconfig
->> +++ b/drivers/net/Kconfig
->> @@ -822,6 +822,8 @@ config RENESAS_RAVB
->>   	depends on RCAR_64
->>   	select PHYLIB
->>   	select PHY_ETHERNET_ID
->> +	select BITBANGMII
->> +	select BITBANGMII_MULTI
->=20
-> Keep the list sorted.
+>> Another note, %#x isn't handled by tinyprintf so it just prints "x"
+>> instead of the value.
+>>
+>> Finally, I don't know how one can enable LOG_DEBUG level without
+>> enabling DEBUG which enables assert() so I just tested that by removing
+>> the #define DEBUG in include/log.h :)
+>> ---
+>>   drivers/core/of_access.c | 36 ++++++++++++-------------
+>>   drivers/core/of_addr.c   | 26 +++++++++---------
+>>   drivers/core/of_extra.c  |  6 ++---
+>>   drivers/core/ofnode.c    | 68 ++++++++++++++++++++++++------------------------
+>>   4 files changed, 68 insertions(+), 68 deletions(-)
+> 
+> This is an improvement, so:
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+> For -EOVERFLOW I think warning would be better, but in that case you
+> need to print a prefix, since otherwise the warning will have nothing
+> before it. So it is a little tricky. I can imagine some support in the
+> log module to help with this, although I haven't thought about it too
+> hard.
+> 
 
-Will fix in v2.
+Agreed. We could also simply print the propname in the dm_warn() call 
+and keep the one at the top of the function to use dm_debug() instead.
 
->=20
->>   	help
->>   	  This driver implements support for the Ethernet AVB block in
->>   	  Renesas M3 and H3 SoCs.
->> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
->> index fb869cd0872e..e2ab929858c8 100644
->> --- a/drivers/net/ravb.c
->> +++ b/drivers/net/ravb.c
->=20
-> [...]
->=20
->> @@ -108,6 +122,16 @@
->>  =20
->>   #define RAVB_TX_TIMEOUT_MS		1000
->>  =20
->> +#define RAVB_RCV_BUFF_MAX		8192
->> +
->> +struct ravb_device_ops {
->> +	int (*mac_init)(struct udevice *dev);
->> +	int (*dmac_init)(struct udevice *dev);
->> +	int (*config)(struct udevice *dev);
->> +	int (*reset_deassert)(struct udevice *dev);
->> +	void (*reset_assert)(struct udevice *dev);
->> +};
->=20
-> [...]
->=20
->> +static int ravb_reset_deassert_rcar(struct udevice *dev)
->> +{
->=20
-> The callsites should check if a callback is assigned or NULL and only=20
-> call the callback if it is assigned. Then you won't need empty callback=
-s=20
-> like this.
->=20
-> Basically add if (ops->reset_deassert) ops->reset_deassert() and remove=
-=20
-> this empty function.
+> Also, we should really remove __func__ when adding logging, since
+> people can enable the option if they want function names to be stored.
+> 
 
-Will fix in v2.
+But then we'll have a bunch of functions printing one of their 
+parameters and "(not found)" for example. A bit odd to me. But on the 
+theoretical level, I agree, enabling the appropriate symbol would 
+already add that line, it's just that I see limit use of those messages 
+if it's not set.
 
->=20
->> +	return 0;
->> +}
->> +
->> +static void ravb_reset_assert_rzg2l(struct udevice *dev)
->> +{
->> +	struct ravb_priv *eth =3D dev_get_priv(dev);
->> +
->> +	reset_assert(&eth->rst);
->> +	reset_free(&eth->rst);
->> +}
->=20
-> A bit of a design question -- would it make sense to have ravb-rcar.c=20
-> and ravb-rzg2l.c to contain the differences between the ravb variants, =
+Thanks for the review!
 
-> and keep common code only in ravb.c ?
-
-That would probably be an improvement. I'll do that for v2.
-
-Thanks,
-
---=20
-Paul Barker
-
---------------5fNRHabnaa8Im6KW06siuOpn
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------5fNRHabnaa8Im6KW06siuOpn--
-
---------------Dju6aJ2lReiRgtXdVdcbloAX--
-
---------------tbISfXlCya7khQ2MmZLGMTmB
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZx9e+gUDAAAAAAAKCRDbaV4Vf/JGvdch
-AP4343Ki/H9PWkEUGgldMzPGOiClpp+j+BQoYnEH+pdEtgEA8DM5WOMzbP14dsJLa5yFFTVXNX3H
-M5Ntm1lSNWQGLAw=
-=Mija
------END PGP SIGNATURE-----
-
---------------tbISfXlCya7khQ2MmZLGMTmB--
+Cheers,
+Quentin
