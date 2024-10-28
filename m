@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91C36D13588
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 03:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8E0D1356B
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 03:19:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FCC488C53;
+	by phobos.denx.de (Postfix) with ESMTP id A922788FD9;
 	Mon, 28 Oct 2024 04:19:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1730085574;
-	bh=V67iAQLXWtwy6SLI0Pn0YmtF+VGnvHWxbcPgHvNmUXQ=;
+	bh=ogmY0un4dXMJFcgoH1UObYsgltkXZ1nWusvjdqr0jNE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=D2mdicYUhjm1ALVvjrfx635+/vfjJYWlsz+5YQyjDmbhcHRzNBBZmA3tWbOADOujn
-	 vWMVgHUxRl0xJXKR1Kq6INXaEZf8cKtznhMXSvtVZOa6I1IJdn/Yx0CiUvBmlQATr+
-	 D8zh4+KSURCTVglkALP/4efpo4VlSfXNmSowJTSA5MrjrwjonAlhq/3jkVtY/rULUO
-	 YnUNPNdMs91Cg6OHSnC8+PQ/VI/3SfyTfQzsrY+3T8DqZxK7v/bUtJLlY5ZOE8Rt4u
-	 V4KqBvzWR74ncPtOqmpYrb27e+Caq4xByL8MP0H/bOOzsvmsr1l3Qu/9w2bDscRPWL
-	 GYBeAYb+3vdgg==
+	b=FyNh+GbsUAG1a3+UFgiWdaSSNwJmdUHxSUiHQixYw528Xio7U/CuNN+KvfB+Gu9qi
+	 ZV7QYdqQUXzGCAGXVleB+WPEbguTQaQpl0PK6qNHKeKNvjiGtlpqB7tzKGzOCVZ39A
+	 WBJBwKqrxuHYj+zFj5KNHbQ7r+HD8dzgnNzx+bV4CvFUfHdb3Gx/xKv7lmsSZAZp5i
+	 UognKdq6rc1/6t0+Gau/MA+INB/iqfIBbwr0ReOcCRaXCuFYghvQ8Zwa06xVwYRfha
+	 0Yg8aXN8N0YQojmE5jJ3fjn75JFToNVtpdUCLsWmODL8ShZL13pZN0bjMvDvs5021+
+	 jja7uDmGC5KoQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id C346988FD6;
- Mon, 28 Oct 2024 04:19:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 941BD88FD9;
+ Mon, 28 Oct 2024 04:19:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1730085568;
- bh=V67iAQLXWtwy6SLI0Pn0YmtF+VGnvHWxbcPgHvNmUXQ=;
+ bh=ogmY0un4dXMJFcgoH1UObYsgltkXZ1nWusvjdqr0jNE=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=pktLbpLwUCNNVHwK1QQu1M+jTLY8Z2NR5+cxYD0ER7+eVVtVmG1NWa48cp8t1uuVX
- OPz/3cqeJpFpkG8WwADxllN8lgg9xwietwkMLgL1vc+23gwj6Jk9wTL6ZfxflWrXaN
- WZmt7v52HRpCz8st7rozrbQb9BYrvY/7DIVHR+Va051zXPUwC4Xjio39lwKLHlFW5+
- HHmoi9Wf/JXn2vfrCGE1l8AgdLZX153o8cJ9tPR8Y8DzKYVOYdDpXjisP489O6pWe6
- k8os2HRH+wzPWv1h/jxJszxrWbvmIBfdV7GEMGT4n6jarWw3xB7gkLGEEgKqyCK3gC
- 51JY85aJWKLeQ==
-Message-ID: <49fac6ee-3602-4860-b475-1148126131ff@denx.de>
-Date: Mon, 28 Oct 2024 03:31:20 +0100
+ b=RQa2PU/K+EMBw0CA7durJyYg/5msOLWkcgEvks/NZPiz018+MrRKecOoEZeGwYdng
+ NpDPsciHx+IJNRw6dA5KnO7Q/NNW2Yg/zU5+IedKDxsbfWPNbfPqEWH0bZYPGOFXGb
+ 6WcmHsXxVZvmOk4dagF3u1Pi0T+eYGbjlyyYs2YBc0wd9j4rTn+l86DjaCBUFw5OC/
+ VSnXDZTwcNSw4hYibqZjduZmqwCQWO6tGmS6QG/E0lRRQ4Xuwk22blTaExj6KM7p1u
+ I4yPpUrgqer/mbLFe0EnOk1VGPk9MZA/thNEPtws5syxISU1RW69m0wfSScSFGWW0k
+ /ykQ2VCo6bNNA==
+Message-ID: <71653cb9-dfd8-48c8-a972-fb75e454cbcf@denx.de>
+Date: Mon, 28 Oct 2024 03:31:49 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] eth: asix88179: Fix drop of large fragmented packets
+Subject: Re: [PATCH 1/2] eth: asix88179: Fix ASIX AX88179A PHY hang
 To: Khoa Hoang <admin@khoahoang.com>
 Cc: u-boot <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 References: <20241027051250.35627-1-admin@khoahoang.com>
- <20241027051250.35627-3-admin@khoahoang.com>
- <45e7d331-f72a-40a2-8519-3c81ab00ec8d@denx.de>
- <192d042cde3.be30af8c153741.7905134334586786560@khoahoang.com>
+ <20241027051250.35627-2-admin@khoahoang.com>
+ <16f8f409-4329-47e3-98dc-f18dc64e15e2@denx.de>
+ <192d05af314.106edbab3154233.8510680526990626189@khoahoang.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <192d042cde3.be30af8c153741.7905134334586786560@khoahoang.com>
+In-Reply-To: <192d05af314.106edbab3154233.8510680526990626189@khoahoang.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,34 +71,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/28/24 12:14 AM, Khoa Hoang wrote:
-> ---- On Sun, 27 Oct 2024 07:43:26 -0700 Marek Vasut  wrote ---
+On 10/28/24 12:41 AM, Khoa Hoang wrote:
+> ---- On Sun, 27 Oct 2024 07:44:59 -0700 Marek Vasut  wrote ---
 > 
 >   > On 10/27/24 6:12 AM, Khoa Hoang wrote:
->   > > When receiving large fragmented packets, the ASIX 88179A can drop
->   > > packets due to an insufficient URB buffer size. This change adjusts
->   > > the URB buffer size to match the configuration used in the Linux
->   > > kernel, resolving packet drop issues observed when performing TFTP
->   > > with a 16KB block size.
->   > Is there a test case ? Can you please include it in the commit message ?
+>   > > In the original code, the MII_ADVERTISE register is modified while
+>   > > auto-negotiation is still in progress, which causes the PHY to lock up
+>   > > with the ASIX AX88179A.
+>   > >
+>   > > This patch disables auto-negotiation and resets the PHY before
+>   > > modifying the MII_ADVERTISE register, then restarts auto-negotiation
+>   > > afterward. This prevents the PHY from locking up.
+>   > >
+>   > > Additionally, both AX88179 and AX88179A variants do not appear to
+>   > > support the ADVERTISE_LPACK (BIT(14)) in the MII_ADVERTISE register,
+>   > > as setting this bit does not seem to have any effect. While I do not
+>   > > have access to the AX88179{,A} datasheet, in most Ethernet PHYs, this
+>   > > bit is reserved as 0, so we should avoid setting it.
+>   > >
+>   > > Signed-off-by: Khoa Hoang admin@khoahoang.com>
+>   > > ---
+>   > >   drivers/usb/eth/asix88179.c | 10 +++++++++-
+>   > >   1 file changed, 9 insertions(+), 1 deletion(-)
+>   > >
+>   > > diff --git a/drivers/usb/eth/asix88179.c b/drivers/usb/eth/asix88179.c
+>   > > index 4bd3b9d1..a856aa2d 100644
+>   > > --- a/drivers/usb/eth/asix88179.c
+>   > > +++ b/drivers/usb/eth/asix88179.c
+>   > > @@ -344,14 +344,22 @@ static int asix_basic_reset(struct ueth_data *dev,
+>   > >            AX_MEDIUM_GIGAMODE | AX_MEDIUM_JUMBO_EN;
+>   > >       asix_write_cmd(dev, AX_ACCESS_MAC, AX_MEDIUM_STATUS_MODE, 2, 2, tmp16);
+>   > >
+>   > > +    /* Disable auto-negotiation and reset the PHY */
+>   > > +    *tmp16 = BMCR_RESET;
 >   >
->   > Thank you
+>   > Why not use the same trick as u16 adv below here ?
 >   >
-> To reproduce this issue, set the following configurations in the config file:
+>   > u16 reset = BMCR_RESET;
+>   > asix_write_cmd(dev, AX_ACCESS_PHY, 0x03, MII_BMCR, 2, &reset);
+>   >
+>   > > +    asix_write_cmd(dev, AX_ACCESS_PHY, 0x03, MII_BMCR, 2, tmp16);
+>   > > +
+>   > >       u16 adv = 0;
+>   >
+> Sure, I can apply this change. I don’t have a strong preference for one approach over the other.
 > 
-> CONFIG_IP_DEFRAG=y
-> CONFIG_TFTP_BLOCKSIZE=16352
-> CONFIG_TFTP_WINDOWSIZE=1468
+> I noticed a mistake in these lines:
 > 
-> Then, run tftpboot, and it will fail to load with a timeout error:
-> => tftpboot zImage
-> Using axg0 device
-> TFTP from server 192.168.128.130; our IP address is 192.168.128.244
-> Filename 'zImage'.
-> Load address: 0x20000000
-> Loading: ##T T T T T T
-> Retry count exceeded; starting again
+> +	/* Restart auto-negotiation */
+> +	*tmp16 = BMCR_ANENABLE | BMCR_ANRESTART | BMCR_RESET;
+> +	asix_write_cmd(dev, AX_ACCESS_PHY, 0x03, MII_BMCR, 2, tmp16);
 > 
-> I’ll include this information in the commit message in the next version.
-
-Thank you!
+> The issue is that I set BMCR_RESET, which would reset the PHY’s settings. This should be changed to:
+> 
+> u16 bmcr = 0;
+> asix_read_cmd(dev, AX_ACCESS_PHY, 0x03, MII_BMCR, 2, &bmcr);
+> bmcr |= BMCR_ANENABLE | BMCR_ANRESTART;
+> asix_write_cmd(dev, AX_ACCESS_PHY, 0x03, MII_BMCR, 2, tmp16);
+> 
+> This avoids resetting the PHY settings while enabling and restarting auto-negotiation correctly.
+> Will test this change and update in next version.
+Nice !
