@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C31D13588
-	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 06:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36A9DD13588
+	for <u-boot@archiver.kernel.org>; Mon, 28 Oct 2024 06:52:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92BD789038;
-	Mon, 28 Oct 2024 07:40:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 77E8E89058;
+	Mon, 28 Oct 2024 07:51:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="devJQJM8";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="P5cwOTTc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21F3689058; Mon, 28 Oct 2024 07:40:40 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 7074C8905F; Mon, 28 Oct 2024 07:51:54 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F9E18887A
- for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 07:40:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CC6D88FE3
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 07:51:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730097628; x=1730702428; i=xypron.glpk@gmx.de;
- bh=RrOnndr5Ud1NL79NrvmeTwGrz6h6v3tmHniK1g9L43A=;
+ s=s31663417; t=1730098302; x=1730703102; i=xypron.glpk@gmx.de;
+ bh=Ly9Hpr9xorB1ZZ4qG8fqv4msnKZUnslnAlVrmUTwBgk=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=devJQJM8BsUAvvPpyu6sSDRh6nDkliigXwMv1ibg/hK5pZkliq/cwYb297awKkqg
- p52XvpJdDxHXEn+10lDdcLhAQmM2Uv13tEfday1LmhCLM5Z6wIL0OABTPty3C4lhm
- kkO0f+z4csJGqO/OyvUArtHwnFcDHt7dsT4zBCWNDwhvpwpV7O+iybou4QpYyD+/o
- 83olx/GncdgvwZbdLKDpH14pmcpts49PUKrn0jfPu4Jm3DEspYlL9648d22EaTyhM
- jeft32daCBa0ERYJkr7EmKDo8lWoJnJHxhAlSeN2oazJHmG8IOCx372RApH+oNgWg
- 8UmgpilqnVH+bhHGCw==
+ b=P5cwOTTcQfreK2LmudeN2qzvAmmdLqhgRhN/DdJEJVtXgEfS6GZNo+0RoyYUvE5R
+ WHcGNVTwSRHbD7i+wleMmizgpMhWOjKKaN063Ud0yWMDIxa3eYaIR8Etjzx6Jk50a
+ Y0ALL40xcByNQHvscqznjGdtYT+F8yDrOhZIIlz3JhP08q/v+5Z2DNS2xYCutrdSI
+ WMeTyf0VpxHROACPAEc8yhQrjugzzCpkrlSSpeITO78fWBVHdY3sSaPd4zDnk89+L
+ pkM1N3sAciZE7gyZA08ANHlZjfbZyeZY+BnF6ZOZX+BDI/Wz7qOkQSQJ1KXrnzzia
+ DjhlZ92wMY7O8dEPVQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [10.43.6.224] ([87.215.50.114]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MKbkM-1tJh0i0Pj2-00MAkV; Mon, 28
- Oct 2024 07:40:28 +0100
-Message-ID: <1334fa3c-95e1-41d7-b0e4-db1452de136d@gmx.de>
-Date: Mon, 28 Oct 2024 07:40:27 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MCsU6-1tE51h3olE-00Giei; Mon, 28
+ Oct 2024 07:51:42 +0100
+Message-ID: <fe62eb15-a3a3-40ac-8226-b1837a2f355d@gmx.de>
+Date: Mon, 28 Oct 2024 07:51:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] lmb: Correctly unmap and free memory on errors
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-References: <20241024104603.1340301-1-ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 0/4] Add pmem node for preserving distro ISO's
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Anton Antonov <Anton.Antonov@arm.com>, Simon Glass <sjg@chromium.org>
+References: <20241025111411.165904-1-sughosh.ganu@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241024104603.1340301-1-ilias.apalodimas@linaro.org>
+In-Reply-To: <20241025111411.165904-1-sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:HvD8XkMcjznqFas5KzR3SQFAM9DV9qqhaOePzsLfnp9Y45lqKeh
- fQQcT20iUaRH6yQy+7pv6KCdUQ8/pZgB0wk98PNN1mhHU4uli9qtEV1ZqEktLQ78MyYUAga
- b31iIFtH5MRlE2lMZP1IdcDSaq9iHSMYjcbsQeZYzNIY2Mmw8ySNXrTXJhvLJA8M9euGWSO
- TQ20QnS1CPikv0L4B3nMQ==
-UI-OutboundReport: notjunk:1;M01:P0:w3YL8rxwWdo=;2/fDedTGtNjyEw4qM1jbJJ0YY9w
- VCLQQPlG4Mcp2OI4I5xtFnpAHuEYBYKsofGG3dofFU3qNTJbxGdEVXVqnO0Z4DwZeTemc7mXA
- 5wlWm9dq7hB3ysLaj7WjJoiKe/dBHPqp4RNVlVh1a9DZYtlJx5g99f1RScv5UI7B+TJl4rgJf
- SV0/s5YFZngdWp1tsRxGqaATtWGTY/kZfgMen4BUbFZPiMMxzQm+WeHFxRtGn6PHXHWI7baWJ
- HKtG3gdXlrP0Dgpy1vGH5hznyVBqMW8fBW1T1KnhZqu6+EECNMFyWKcV8RknJddmzi1jnohl6
- 9tWIiZYHLtNkTmSEMVOVZubsnHJG5UYKJc2DeE4pZ0bMc0L1M8toL8Hdpd/NvqogLTQnBye60
- eJhVCOGMz3exPM+5RNE0QPQDt4e4zkr7A2riskyQea6iQM/04T9FovEY6cO1tSg2/r5A3rjeV
- PgUD3D3EUcIPHfXN89D31NA0VYx2OzXZ1BZj9EZ+snw2vE9dSYigXVkx67ya2c1Fcyx8Kp+3S
- AqNupuSgRttbIR8p5SptEIV5Mb2iUirrwtlcb8dNgIQFW/1eDbjrHn5/+p6g9FIKgubr5/eVI
- e/+JL/nILUr+9qrqHU5KfgeKi3gGGauYq9YMSrjgUldpxOxjQ5yYuzwaRDtWbuO1AAt/efpcr
- AEjPTp5ndpPC89bmSX2maEoxDE5+W2llXIBotRmjf+FG+5/6GQjNU1hjNfFBe4uUB9t6z14qH
- 344eBowoM/uQtQdVlVELJYlFhTlw2b7+Ze9FOfh2+VzAja8q9ZblyDYUl3rAbTDNCZMMIfwqe
- iPfbW1p5NJmrrFYZyZ1n7nIg==
+X-Provags-ID: V03:K1:kO4y11zX3iOfqZStRB7f0xydsBRWnxbPOKsW4CglN8B8YGd8eGS
+ VZSm4A1zc8LF9JWEsx+B7AZcBMwe9TB5gKf42aOrcpCBk0qec48LRk/pUbRtk04hmviNPXe
+ wOpHj+sWxXcd9WQOUdBzndDbf7ixO+eQNKtX61VxR4HCxpWNgR9gweGybTeSKFsIWzD0EDJ
+ 61SHdYT5j29zssw6VdBnQ==
+UI-OutboundReport: notjunk:1;M01:P0:OrYuC05iEig=;ATIVvNRJj+HJe6mquyPrC7bFn3h
+ Ufe1iTMu8RKRXBWsCEUWkiDej6dWtoTe3/bt0ngsntU8T8ibyL7A1wPMSCkhvhz4WABDRYGS7
+ qQ0l5Rv638c7iqAhX9wpvuLCu7yjtVBtYAo8lb1LZF40FICPGdLBeNFQT4okj7aAmy9yuPGIg
+ XuDzqMSNPzeSOEn0ahepoqyyHQlFRnMck8gMuwUZjxPBksj0Vs/0DaQxiSkmrVsJcegsmSMu/
+ R/x1iMwvldG64rRhfDnxLmYjwa28ivlrUsTMUCrG3FjbOwkB0Ahi81hrI10vz+98RTvShwTV+
+ /dCQGTgostRQlUaPhWlUEvJOf8JfHPbKF6W9eHXi7vcAWQ6C5UXF3iM9oDTbfJg2DO45ymv8c
+ WUoWcHSh6pQ5f2UuPWC1FaoleocAZ8ePi9RlBpowJwDk9StjQTblRHn1aDunPva3bBJ9hBUWo
+ s7BK6jsLj5mWlRNWCnoRbk/kagC58xTZOBcPXug3zhTAfmpqJbvgzk+L5YFfn1zvlKG4pVw8a
+ 6TKTap7hrPVk18DNJknZdoM86fPYnSFK7/rB4u5dZzvWSPDYyN1aOFVDmKX8XKcutxu+jcN9W
+ CFUyokjglVEN+MRYSIPDM0dsOxRdKk4fj+j4WFFDtE9t9HTar36y5aGNkUGgqVRJxb/houKcL
+ smJxhuTtbABP4ZpTom+dZqqY1w8uejqXC9swT8fuNYMkaB2A6oejragCGHD51INr5zH4bYiVa
+ gNOG6YGyQSOOuaXDtyTQhKxJNBBXa/M5s8VQck/buyRZpIyY0B1eo7pICm/lafCsCUi8BhW8/
+ KPbyjauwzn9GFCteoqcIiX+A==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,73 +91,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/24/24 12:46, Ilias Apalodimas wrote:
-> We never free and unmap the memory on errors and we never unmap it when
-> freeing it. This won't cause any problems on actual hardware but it will
-> on sandbox
+On 10/25/24 13:14, Sughosh Ganu wrote:
+> When installing a distro via EFI HTTP boot some OS installers expect
+> the .iso image to be preserved and treat it as a "CDROM" to install
+> packages.
 >
-> Fixes: commit 22f2c9ed9f53 ("efi: memory: use the lmb API's for allocati=
-ng and freeing memory")
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->   lib/efi_loader/efi_memory.c | 15 ++++++++++-----
->   1 file changed, 10 insertions(+), 5 deletions(-)
+> This is problematic in EFI, since U-Boot mounts the image, starts the
+> installer, and eventually calls ExitBootServices. At that point the
+> image U-Boot mounted disappears. Some distros don't care and download
+> the missing packages from a web archive, while others halt the
+> installation complaining they can't find certain packages.
 >
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 9f3f08769977..84be5532a655 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -451,7 +451,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
-pe type,
->   				enum efi_memory_type memory_type,
->   				efi_uintn_t pages, uint64_t *memory)
->   {
-> -	u64 len;
-> +	u64 efi_addr, len;
->   	uint flags;
->   	efi_status_t ret;
->   	phys_addr_t addr;
-> @@ -499,14 +499,17 @@ efi_status_t efi_allocate_pages(enum efi_allocate_=
-type type,
->   		return EFI_INVALID_PARAMETER;
->   	}
->
-> -	addr =3D (u64)(uintptr_t)map_sysmem(addr, 0);
-> +	efi_addr =3D (u64)(uintptr_t)map_sysmem(addr, 0);
->   	/* Reserve that map in our memory maps */
-> -	ret =3D efi_add_memory_map_pg(addr, pages, memory_type, true);
-> -	if (ret !=3D EFI_SUCCESS)
-> +	ret =3D efi_add_memory_map_pg(efi_addr, pages, memory_type, true);
-> +	if (ret !=3D EFI_SUCCESS) {
->   		/* Map would overlap, bail out */
-> +		lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
-> +		unmap_sysmem((void *)(uintptr_t)efi_addr);
->   		return  EFI_OUT_OF_RESOURCES;
-> +	}
->
-> -	*memory =3D addr;
-> +	*memory =3D efi_addr;
->
->   	return EFI_SUCCESS;
->   }
-> @@ -548,6 +551,8 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uin=
-tn_t pages)
->   	if (ret !=3D EFI_SUCCESS)
->   		return EFI_NOT_FOUND;
->
-> +	unmap_sysmem((void *)(uintptr_t)memory);
-> +
->   	return ret;
->   }
->
-> --
-> 2.45.2
->
+> If the firmware uses ACPI, this is supported by using NFIT which
+> provides NVDIMM ramdisks to the OS and preserves the image.
+> We don't have anything in place for Device Trees though. Since DT
+> supports persistent memory nodes (pmem) use those and preserve the
+> .iso for installers.
 
-AllocatePages() only provides access to EfiConventionalMemory.
-
-We can safely call map_sysmem() with len =3D 0 and not use unmap_sysmem().
+Are you planning to provide the missing ACPI code for U-Boot?
+QEMU provides ACPI tables which U-Boot passes through.
+The x86 boards also need ACPI support.
 
 Best regards
 
 Heinrich
+
+>
+> The issue can be reproduced by attempting an EFI HTTP boot with Ubuntu
+> live server ISO, or a Rocky Linux ISO. The installation would fail
+> with the failure to locate certain packages.
+>
+>
+>
+> Ilias Apalodimas (2):
+>    efi_loader: add a function to remove memory from the EFI map
+>    efi_loader: preserve installer images in pmem
+>
+> Masahisa Kojima (1):
+>    fdt: add support for adding pmem nodes
+>
+> Sughosh Ganu (1):
+>    efi: add helper functions to insert pmem node for DT fixup
+>
+>   boot/fdt_support.c           | 41 +++++++++++++++++++++++++++--
+>   boot/image-fdt.c             |  9 +++++++
+>   include/efi_loader.h         | 28 +++++++++++++++++---
+>   include/fdt_support.h        | 13 +++++++++
+>   lib/efi_loader/efi_bootmgr.c | 43 ++++++++++++++++++++++++++----
+>   lib/efi_loader/efi_helper.c  | 12 +++++++++
+>   lib/efi_loader/efi_memory.c  | 51 +++++++++++++++++++++++++++---------
+>   lib/lmb.c                    |  4 +--
+>   8 files changed, 175 insertions(+), 26 deletions(-)
+>
+
