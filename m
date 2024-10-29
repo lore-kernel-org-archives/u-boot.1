@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C12AD3A66D
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 15:45:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3928FD3A661
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 15:46:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B35558918A;
-	Tue, 29 Oct 2024 16:45:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1DD7A8919D;
+	Tue, 29 Oct 2024 16:45:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A530yjdO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dlGehbRZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E565188D29; Tue, 29 Oct 2024 16:45:39 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 469078919B; Tue, 29 Oct 2024 16:45:47 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CFC989187
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 16:45:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CDCB88D29
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 16:45:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a998a5ca499so744299966b.0
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 08:45:37 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a99f3a5a44cso680910066b.3
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 08:45:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730216737; x=1730821537; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730216745; x=1730821545; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5XGemX7W11ZQ+Gl3UrcKumYRCE12oEK1g1TETsKxPNE=;
- b=A530yjdOexhjcVQqhwe/wPu3DD6i/RMLPFgEXh50zPwmsnN8TLVfeTZiPno2QyzfQb
- BKF+jmykNE7++Rx8nlbUj32N3Z04aNdEnSqBXD1odFlTy7TWgZPUbC0Z1ct9azSo/TdK
- qGh9juwoyc6p/bNwnyAr7ZDMjiiAK6dRlIYY4=
+ bh=46dfr8iDD5Vw6kEd+4KQNsTWwHocgA/QdmQce6djXcQ=;
+ b=dlGehbRZrMagtmqhmLmTkwXHZPvJqfSwupR2dVYaGVqDsOzKYr1esr3qyrJpSNiaui
+ kZ2gxLSeF04OPCFQWe3TYrXAoGRj2t8zN1XyfOZDEyXaoX+z6croLbNefZ+zTC6pRAtl
+ IiwENnYi8LGZv2hiziO9XYBLcaPuxGC8Vd1uI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730216737; x=1730821537;
+ d=1e100.net; s=20230601; t=1730216745; x=1730821545;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5XGemX7W11ZQ+Gl3UrcKumYRCE12oEK1g1TETsKxPNE=;
- b=ssz4nhAZ2XGufKr904d6/rJC3ZUMTJKZbASCEc9jDfkMD5wBhWLVjr9RzsCg5o5k+G
- wW9Qa+E9hLjUj1696BFCUZG1DIgiGqFB+Eljq4xG2Fl1/BAOCO1WxwCxWD2mZ6yWqjbH
- h14en7cTsvBBnj9Ir06UP1LCXtsbfyVH8cHllKG2sO9ZUgAhOn4uPvx3VjcI/jv0Whk1
- AO5S81gWphj6mNFm4odj1Uw7pBf5ho/3h0NYOqYsQ4fIaWgCptktwOTXIr0kge/lGwWI
- CSLZLkLbs26VACsHePCpgq22l8o/9jDGYhIePzVhDBo2Rs9ym1q+n8GV6d81LppA/frE
- ixaw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUhsfvKnOIWorRDzrSYK1DWkPjiqQTi4ljQKGTaii3S3v7A85FrF3bvMm0c8juSCpWKw+BMJyw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyxv+syKDlztL+n9NdwmUzOkWccaT8+ogeW7qncBkdyjY0tffnh
- BjSp6UmNacFvAmn34MEPppZCgxLa4KDLLDVdeXyjCpOs1+sEX5NsaO9S6uEhAd8se0rMHeG0qxZ
- 4T5BtMpXrBlt/raco4sve5AUOgnWUkBvRXFXQ
-X-Google-Smtp-Source: AGHT+IF/yBClYeXNaioPwbbuF4aWE12Qyt8FUJRTYSlhRBwWWbypn033xCXcJCcUnBpR4SK2bOtYAXPkzjruC8unQkc=
-X-Received: by 2002:a17:906:7315:b0:a99:33db:2035 with SMTP id
- a640c23a62f3a-a9de5f056d8mr1024324366b.26.1730216737013; Tue, 29 Oct 2024
- 08:45:37 -0700 (PDT)
+ bh=46dfr8iDD5Vw6kEd+4KQNsTWwHocgA/QdmQce6djXcQ=;
+ b=wr5Dba/ahizOi2dbsnLK+hb9Uu/N6sRcq1Mc/6B0b9e3Zg4vqy3ZeN8O1S++jsr+mb
+ Kb4T1szE+rsMTX/GXsuKwFyIQeqDtPA2xYoAUgpUjlnhimW8NElrSm77L4F+xOGZKJT8
+ EgmI89j9H7yoZHoHT+OFO4Ou360aqkhH/evjmMaOOwq3kjZ+Hlbl+cX9CHBSRon6nQ3Q
+ 8nkJbx8qrkg7OIjtqqQ3SqNlsOl0MXHku0JIzsIpMuZbNbrJxHAWcfE+4rL5fFd3yz9B
+ VHsOfC1/S0ElJmpnZCFQ6PZxxK4riJcYsFhF1wCzU6vmvB4rnLKjryedEnv6QAy9tTlT
+ zOkw==
+X-Gm-Message-State: AOJu0YxkpLgK2Y1qz1uerxAnT9XuubKPdFnLbwOQR2UzjntT3E5CbTe2
+ Qb96IabDowVNRPpeeELDqk5CGyG+UOQZzYY5yA5Dy8QGd9yKwvsrAXiQL/o8NLxMwIwtxu2IY1D
+ Ou2MI01lDsi2ULTI2nkG7aNzBk3ia6/iEk36i
+X-Google-Smtp-Source: AGHT+IHUDuXLULDrVMuTnDrQIB5sCWFK6W74F5vFP+/CE+vDZ+CKsy0MFwC61xnFJUWAfkuzqeMaaHSpEneoJMVF2o0=
+X-Received: by 2002:a17:906:730f:b0:a9a:1565:1051 with SMTP id
+ a640c23a62f3a-a9de5d6e1fdmr1174273066b.10.1730216744734; Tue, 29 Oct 2024
+ 08:45:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241007130109.227305-1-brian.ruley@gehealthcare.com>
- <20241021073749.63-1-brian.ruley@gehealthcare.com>
- <20241021073749.63-2-brian.ruley@gehealthcare.com>
-In-Reply-To: <20241021073749.63-2-brian.ruley@gehealthcare.com>
+References: <20241028124815.47262-1-sjg@chromium.org>
+ <20241028124815.47262-10-sjg@chromium.org>
+ <CAC_iWj+H_m3jiQ-Q-BK=9vtdMEnw0GHyQT2_LFHUYyEnnZh3EQ@mail.gmail.com>
+In-Reply-To: <CAC_iWj+H_m3jiQ-Q-BK=9vtdMEnw0GHyQT2_LFHUYyEnnZh3EQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 29 Oct 2024 16:45:25 +0100
-Message-ID: <CAFLszTiVrdqvixoKH4nhTadcVOFo0TJ9kFTjDish3ZBuh-YgGw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] binman: expand test coverage to nxp_imx8mcst
-To: Brian Ruley <brian.ruley@gehealthcare.com>
-Cc: Tom Rini <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- ian.ray@gehealthcare.com, u-boot@lists.denx.de
+Date: Tue, 29 Oct 2024 16:45:29 +0100
+Message-ID: <CAFLszTgG423MQ0iK-2XnOHZN+qVy_-xZNkaPGGsQM=Th=kaeGA@mail.gmail.com>
+Subject: Re: [PATCH 09/15] efi_loader: Fix free in
+ ..._media_device_boot_option()
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,112 +87,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Brian,
+Hi Ilias,
 
-On Mon, 21 Oct 2024 at 09:38, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
+On Tue, 29 Oct 2024 at 11:02, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> Add coverage for IMX8M code siging. Create PKI tree and other assets
-> required by `cst' using `hab4_pki_tree.sh' script and `srktool' in
-> `cst_3.4.1' [1].
+> Hi Simon,
 >
-> [1] https://www.nxp.com/webapp/Download?colCode=IMX_CST_TOOL_NEW
+> On Mon, 28 Oct 2024 at 14:48, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Freeing a NULL pointer is an error in EFI, so check the pointer first,
+> > before freeing it.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  lib/efi_loader/efi_bootmgr.c | 3 ++-
+> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> > index a3aa2b8d1b9..431a38704e9 100644
+> > --- a/lib/efi_loader/efi_bootmgr.c
+> > +++ b/lib/efi_loader/efi_bootmgr.c
+> > @@ -1180,7 +1180,8 @@ out:
+> >                         free(opt[i].lo);
+> >         }
+> >         free(opt);
+> > -       efi_free_pool(handles);
+> > +       if (handles)
+> > +               efi_free_pool(handles);
 >
-> Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
-> ---
-> Changes for v2:
-> - Added missing *.pem files
-> - Rebased on top of "[PATCH v4 2/2] binman: add fast authentication
->   method for i.MX8M signing"
-> - Included a test for fast authentication
-> Changes for v3:
-> - Fixed relative path for SRK table and *.pem files in
->   341_nxp_imx8mcst.dts
->
->  tools/binman/ftest.py                         |  11 ++
->  tools/binman/test/340_nxp_imx8mcst.dts        |  58 +++++++++
->  .../test/341_nxp_imx8mcst_fast_auth.dts       |  18 +++
->  .../CSF1_1_sha256_4096_65537_v3_usr_crt.pem   | 121 ++++++++++++++++++
->  .../IMG1_1_sha256_4096_65537_v3_usr_crt.pem   | 121 ++++++++++++++++++
->  .../SRK1_sha256_4096_65537_v3_usr_crt.pem     | 121 ++++++++++++++++++
->  tools/binman/test/cst/crts/SRK_table.bin      | Bin 0 -> 531 bytes
->  .../test/cst/crts/SRK_table_fast_auth.bin     | Bin 0 -> 531 bytes
->  .../CSF1_1_sha256_4096_65537_v3_usr_key.pem   |  54 ++++++++
->  .../IMG1_1_sha256_4096_65537_v3_usr_key.pem   |  54 ++++++++
->  .../SRK1_sha256_4096_65537_v3_usr_key.pem     |  54 ++++++++
->  tools/binman/test/cst/keys/key_pass.txt       |   2 +
->  12 files changed, 614 insertions(+)
->  create mode 100644 tools/binman/test/340_nxp_imx8mcst.dts
->  create mode 100644 tools/binman/test/341_nxp_imx8mcst_fast_auth.dts
->  create mode 100644 tools/binman/test/cst/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
->  create mode 100644 tools/binman/test/cst/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
->  create mode 100644 tools/binman/test/cst/crts/SRK1_sha256_4096_65537_v3_usr_crt.pem
->  create mode 100644 tools/binman/test/cst/crts/SRK_table.bin
->  create mode 100644 tools/binman/test/cst/crts/SRK_table_fast_auth.bin
->  create mode 100644 tools/binman/test/cst/keys/CSF1_1_sha256_4096_65537_v3_usr_key.pem
->  create mode 100644 tools/binman/test/cst/keys/IMG1_1_sha256_4096_65537_v3_usr_key.pem
->  create mode 100644 tools/binman/test/cst/keys/SRK1_sha256_4096_65537_v3_usr_key.pem
->  create mode 100644 tools/binman/test/cst/keys/key_pass.txt
+> We don't need this, efi_free_pool() checks the pointer already.
 
-I am still seeing some sort of problem here:
-
-======================================================================
-ERROR: testNxpImx8mCst (binman.ftest.TestFunctional.testNxpImx8mCst)
-Test that binman can sign an iMX8M image
-----------------------------------------------------------------------
-ValueError: Filename 'cst/crts/SRK_table.bin' not found in input path
-(/tmp/binmant.tryjm0q0) (cwd='/home/sglass/files.local/u-boot')
-
-======================================================================
-ERROR: testNxpImx8mCstFastAuth
-(binman.ftest.TestFunctional.testNxpImx8mCstFastAuth)
-Test that binman can sign an iMX8M image using fast authentication
-----------------------------------------------------------------------
-ValueError: Filename 'cst/crts/SRK_table_fast_auth.bin' not found in
-input path (/tmp/binmant.tryjm0q0)
-(cwd='/home/sglass/files.local/u-boot')
-
-
-but it could be because I had trouble applying it:
-
- git am ~/Downloads/v3-1-2-binman-nxp_imx8mcst-read-certificates-from-input-path.patch
-Applying: binman: nxp_imx8mcst: read certificates from input path
-Applying: binman: expand test coverage to nxp_imx8mcst
-.git/rebase-apply/patch:210: trailing whitespace.
-            X509v3 Basic Constraints:
-.git/rebase-apply/patch:212: trailing whitespace.
-            Netscape Comment:
-.git/rebase-apply/patch:214: trailing whitespace.
-            X509v3 Subject Key Identifier:
-.git/rebase-apply/patch:216: trailing whitespace.
-            X509v3 Authority Key Identifier:
-.git/rebase-apply/patch:337: trailing whitespace.
-            X509v3 Basic Constraints:
-error: patch failed: tools/binman/ftest.py:7804
-error: tools/binman/ftest.py: patch does not apply
-Patch failed at 0002 binman: expand test coverage to nxp_imx8mcst
-hint: Use 'git am --show-current-patch=diff' to see the failed patch
-When you have resolved this problem, run "git am --continue".
-If you prefer to skip this patch, run "git am --skip" instead.
-To restore the original branch and stop patching, run "git am --abort".
-sglass@okaro:~/u$ pm
-patching file tools/binman/ftest.py
-Hunk #2 merged at 7906-7912.
-patching file tools/binman/test/340_nxp_imx8mcst.dts
-patching file tools/binman/test/341_nxp_imx8mcst_fast_auth.dts
-patching file tools/binman/test/cst/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-patching file tools/binman/test/cst/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-patching file tools/binman/test/cst/crts/SRK1_sha256_4096_65537_v3_usr_crt.pem
-File tools/binman/test/cst/crts/SRK_table.bin: git binary diffs are
-not supported.
-File tools/binman/test/cst/crts/SRK_table_fast_auth.bin: git binary
-diffs are not supported.
-patching file tools/binman/test/cst/keys/CSF1_1_sha256_4096_65537_v3_usr_key.pem
-patching file tools/binman/test/cst/keys/IMG1_1_sha256_4096_65537_v3_usr_key.pem
-patching file tools/binman/test/cst/keys/SRK1_sha256_4096_65537_v3_usr_key.pem
-patching file tools/binman/test/cst/keys/key_pass.txt
-
-Could you please rebase on -master and resend?
-
+Yes, but it then returns an error (EFI_INVALID_PARAMETER), which gets
+logged, with this series.
 
 Regards,
 Simon
