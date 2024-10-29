@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC34ED5B840
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 01:44:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6DABD5B861
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 02:53:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C64389124;
-	Tue, 29 Oct 2024 02:44:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 1016E89183;
+	Tue, 29 Oct 2024 03:53:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="L7i5/fhr";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nLrNifXG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NZ6otDwg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AFCE88C3E; Tue, 29 Oct 2024 02:44:13 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1775D8917E; Tue, 29 Oct 2024 03:53:25 +0100 (CET)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C778B89126
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 02:44:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4F238917B
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 03:53:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4XctMt3XrQz9slN;
- Tue, 29 Oct 2024 02:44:10 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730166250;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=asz/WGYm3fFP+Si5bnH+mPp4+k5OFXdvBt5Df7Aa3tQ=;
- b=L7i5/fhr/HH19XNk+eHJUAD21yp8NykBvSHvpaaTBCBM37QeV0eskUfJj2G/bLIPZCwLrE
- QRegezRImeDzqGyE9pu9K/5AjiZVMTEwvieEKgmJuJNDJ1FDN4snjcCUpobYtl7jyL7Uj/
- ncrX6kL+l8JLRm5/SWBZTEhiPRVHIxv1JCpFXqckGMWDLNFebk+uWHGMy87/1/InLb1oXn
- giXC4bv8zP1Ztg5eBPG+DFK7j1h1e2Dg/nRqqFvW0yGOfdXLvQrJfjmYmBo/wpEssYtC1w
- sJcRstMEk0gNmYmki6twZQYtz8Xxjnty6RRViFuci4QDPM3+ZcU0TrP7uFq7Nw==
-Message-ID: <169d92a0-eaf8-41ca-87e1-05db60a2a9e8@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730166248;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=asz/WGYm3fFP+Si5bnH+mPp4+k5OFXdvBt5Df7Aa3tQ=;
- b=nLrNifXGmYONX7ZxtbSlFtetkrpKIBGZ+BkRFS3GoHqknr16NI3vd3ZwyWQURPbCms2Qwv
- vYV1iQls6O6SEn59msJWmoZ3LcRQIFlz7zDah3RXjS8Q2RAo0jSEur2jdh4eIY2FZxJ2Es
- E1/rBOlyaQYhUHuf6dynLxQvBWPuSKECSrl7dfWDkzYuNsMUbtf6M3+7039K/NAPK4ZjCK
- 4bWMks4+RjHwItkGl7UWByBaPxnDpVf7nx68bSdyTDwfn6O8V1ngNjSptn34PYuO08tlIc
- 3xtt46kjuaek2/gtgRyqSlQnTy0D3ZaExq+7OHQA5XnMYbBdPaZ5qTPvkppQ6w==
-Date: Tue, 29 Oct 2024 02:44:06 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7b152a23e9aso385244385a.0
+ for <u-boot@lists.denx.de>; Mon, 28 Oct 2024 19:53:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1730170402; x=1730775202; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XV1ymOjCDz6SPvMldtSzkRWRl1vr+U+CTqp5a7Ig44Y=;
+ b=NZ6otDwga9pHzjiF3VGQTdvYT7ERKdH8x9VhveBRJYNHXE+gNduIgqQT+YmElorJ2T
+ UkEEcq3wc9cM/oPEF7lCNa2smwpxJk/qZlZN8AsKDmFhZAcCb+3zlEagcvN0rHUrDdQl
+ KtTf5Sm+ljRX+VumQSRr6X/p8mZn85IleG97g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730170402; x=1730775202;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XV1ymOjCDz6SPvMldtSzkRWRl1vr+U+CTqp5a7Ig44Y=;
+ b=bdIuAXMkE3b71j45PqDfgf7xN5ZkpQqy8fw/8Jj6oiNYk41a71XboR5tCFzpRpPTl+
+ RnR78p/V9Q5k+auuhyvTmZB97EVGiCWdrBf6voSBHjeluUABuq+ddWXosniKB/VsU0fA
+ 4Ocm83MzjqOI4CMhTZWNgIJloTwoQsOlNmFaQt1GOiZOa75EpCCM4ZcZmj6I68Yo8RiM
+ ut6DDwU3nMpsICI5yqz4WIwW7+3u/l0pHbe1A3BK1qiqwuekkhaged9yCa7azF3BiPQM
+ 4AyG9PawcmiVXh5ilnY4N8Gt2urFiyG8/F34KvAxHZyW4FtTaoB0vYwPGHxLfyb1jyfg
+ hGSQ==
+X-Gm-Message-State: AOJu0YzFFUDOSQAwYm9hWd5ArxHXpyMkvrr3k2YIUq7i3JJPXnyxv/Te
+ 7HX2V83w6Zgh1DgKy0v5xK7lKJKdfUK5vcpE2doh6RiDDNPQnarw/Ok3nCRcGfLNasLTx1JVsX/
+ tYiY=
+X-Google-Smtp-Source: AGHT+IFMhMhRH8RYM3SyzNFqZO0CgcHpj+dqCqzWp8hawXEsMrKzynDq6LR4FKNvTI2qerwbPuqciQ==
+X-Received: by 2002:a05:620a:1a89:b0:7b1:543d:c9f with SMTP id
+ af79cd13be357-7b193f7001amr1605847785a.62.1730170401718; 
+ Mon, 28 Oct 2024 19:53:21 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b18d343c69sm377789885a.105.2024.10.28.19.53.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Oct 2024 19:53:20 -0700 (PDT)
+Date: Mon, 28 Oct 2024 20:53:17 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>
+Subject: Re: [PATCH v1] acpi_table: Fix coverity defect in acpi_write_spcr
+Message-ID: <20241029025317.GZ4959@bill-the-cat>
+References: <20241028080837.1590247-1-patrick.rudolph@9elements.com>
+ <173015803439.2338198.5277824884771902648.b4-ty@konsulko.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] mmc: renesas-sdhi: Add compatible string for rzg2l-sdhi
-To: Jaehoon Chung <jh80.chung@samsung.com>,
- 'Paul Barker' <paul.barker.ct@bp.renesas.com>,
- 'Nobuhiro Iwamatsu' <iwamatsu@nigauri.org>,
- 'Marek Vasut' <marek.vasut+renesas@mailbox.org>,
- 'Peng Fan' <peng.fan@nxp.com>
-Cc: u-boot@lists.denx.de
-References: <20241023105319.334-1-paul.barker.ct@bp.renesas.com>
- <CGME20241027163220epcas1p450e4c0dd3bf0fd840c433e128b6d2447@epcas1p4.samsung.com>
- <1aa8a914-dbd6-429a-a6ad-1c3753cad9c5@mailbox.org>
- <122401db2982$0c2c51c0$2484f540$@samsung.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <122401db2982$0c2c51c0$2484f540$@samsung.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ufcdwjzidm6weikkjqzzfgagup9f1ixq
-X-MBO-RS-ID: 03497049229a9e87dac
-X-Rspamd-Queue-Id: 4XctMt3XrQz9slN
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="lb0q90owcEE/wir3"
+Content-Disposition: inline
+In-Reply-To: <173015803439.2338198.5277824884771902648.b4-ty@konsulko.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,49 +90,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/28/24 10:40 PM, Jaehoon Chung wrote:
-> 
-> 
->> -----Original Message-----
->> From: Marek Vasut <marek.vasut@mailbox.org>
->> Sent: Monday, October 28, 2024 1:31 AM
->> To: Paul Barker <paul.barker.ct@bp.renesas.com>; Nobuhiro Iwamatsu <iwamatsu@nigauri.org>; Marek Vasut
->> <marek.vasut+renesas@mailbox.org>; Peng Fan <peng.fan@nxp.com>; Jaehoon Chung <jh80.chung@samsung.com>
->> Cc: u-boot@lists.denx.de
->> Subject: Re: [PATCH v2] mmc: renesas-sdhi: Add compatible string for rzg2l-sdhi
->>
->> On 10/23/24 12:53 PM, Paul Barker wrote:
->>> After the recent dts/upstream subtree merge, the sdhi compatible string
->>> used in the device tree for RZ/G2L family SoCs is "renesas,rzg2l-sdhi"
->>> not "renesas,rcar-gen3-sdhi". This broke the ability to access the eMMC
->>> and SD card devices on RZ/G2L boards.
->>>
->>> Fix this by adding the new compatible string to the sdhi driver.
->>>
->>> Fixes: 136b7b6d2e98 ("Subtree merge tag 'v6.11-dts' of dts repo [1] into dts/upstream")
->>> Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
->>> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
->>> ---
->>> Changes v1->v2:
->>>     - Moved new entry after "renesas,rcar-gen4-sdhi".
->>>     - Added Reviewed-by tags.
->>>
->>>    drivers/mmc/renesas-sdhi.c | 1 +
->>>    1 file changed, 1 insertion(+)
->>>
->>> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
->>> index 23db2a75c444..92afa6adcdac 100644
->>> --- a/drivers/mmc/renesas-sdhi.c
->>> +++ b/drivers/mmc/renesas-sdhi.c
->>> @@ -864,6 +864,7 @@ static const struct udevice_id renesas_sdhi_match[] = {
->>>    	{ .compatible = "renesas,sdhi-r8a77990", .data = RENESAS_GEN3_QUIRKS },
->>>    	{ .compatible = "renesas,sdhi-r8a77995", .data = RENESAS_GEN3_QUIRKS },
->>>    	{ .compatible = "renesas,rcar-gen4-sdhi", .data = RENESAS_GEN3_QUIRKS },
->>> +	{ .compatible = "renesas,rzg2l-sdhi", .data = RENESAS_GEN3_QUIRKS },
->>>    	{ /* sentinel */ }
->>>    };
->> I can take this via sh tree if that's OK with you ?
-> 
-> If you're asking me, I'm ok.
-All right, thank you, I included the patch in current SH PR.
+
+--lb0q90owcEE/wir3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Oct 28, 2024 at 05:27:14PM -0600, Tom Rini wrote:
+> On Mon, 28 Oct 2024 09:08:35 +0100, Patrick Rudolph wrote:
+>=20
+> > Fix "Integer handling issues  (SIGN_EXTENSION)" in newly added code:
+> > Cast serial_info.reg_offset to u64 to prevent an integer overflow when
+> > shifted too many bits to the left. Currently this never happens as the
+> > shift is supposed to be less than 4.
+>=20
+> Applied to u-boot/master, thanks!
+
+"I'll just bend my rules and apply this before release, it'll be fine" I
+said to myself. But:
+   sandbox:  +   sandbox
++(sandbox) In file included from include/linux/printk.h:4,
++(sandbox)                  from include/linux/kernel.h:5,
++(sandbox)                  from include/linux/libfdt_env.h:13,
++(sandbox)                  from include/linux/libfdt.h:6,
++(sandbox)                  from include/fdtdec.h:17,
++(sandbox)                  from include/dm/ofnode.h:11,
++(sandbox)                  from include/dm/device.h:13,
++(sandbox)                  from include/dm.h:13,
++(sandbox)                  from lib/acpi/acpi_table.c:10:
++(sandbox) lib/acpi/acpi_table.c: In function =E2=80=98acpi_write_spcr=E2=
+=80=99:
++(sandbox) lib/acpi/acpi_table.c:498:15: error: format =E2=80=98%lx=E2=80=
+=99 expects argument of type =E2=80=98long unsigned int=E2=80=99, but argum=
+ent 8 has type =E2=80=98u64=E2=80=99 {aka =E2=80=98long long unsigned int=
+=E2=80=99} [-Werror=3Dformat=3D]
++(sandbox)   498 |         debug("UART type %u @ %lx\n", spcr->interface_ty=
+pe, serial_address);
++(sandbox)       |               ^~~~~~~~~~~~~~~~~~~~~~
++(sandbox) include/log.h:159:21: note: in definition of macro =E2=80=98pr_f=
+mt=E2=80=99
++(sandbox)   159 | #define pr_fmt(fmt) fmt
++(sandbox)       |                     ^~~
++(sandbox) include/log.h:260:17: note: in expansion of macro =E2=80=98log=
+=E2=80=99
++(sandbox)   260 |                 log(LOG_CATEGORY,                       =
+                \
++(sandbox)       |                 ^~~
++(sandbox) include/log.h:282:9: note: in expansion of macro =E2=80=98debug_=
+cond=E2=80=99
++(sandbox)   282 |         debug_cond(_DEBUG, fmt, ##args)
++(sandbox)       |         ^~~~~~~~~~
++(sandbox) lib/acpi/acpi_table.c:498:9: note: in expansion of macro =E2=80=
+=98debug=E2=80=99
++(sandbox)       |         ^~~~~
++(sandbox) lib/acpi/acpi_table.c:498:33: note: format string is defined here
++(sandbox)       |                               ~~^
++(sandbox)       |                                 |
++(sandbox)       |                                 long unsigned int
++(sandbox)       |                               %llx
++(sandbox) cc1: all warnings being treated as errors
++(sandbox) make[3]: *** [scripts/Makefile.build:256: lib/acpi/acpi_table.o]=
+ Error 1
++(sandbox) make[2]: *** [scripts/Makefile.build:398: lib/acpi] Error 2
++(sandbox) make[1]: *** [Makefile:1914: lib] Error 2
++(sandbox) make: *** [Makefile:177: sub-make] Error 2
+
+And most other platforms too. I'm reverting this for now, and if someone
+is packaging v2025.01-rc1 too, just do that too. Sorry.
+
+--=20
+Tom
+
+--lb0q90owcEE/wir3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcgThYACgkQFHw5/5Y0
+tywN3gwApZrbSwwqc2zNM5tbvxYfOvtl34z6B8DXUJ3n8C1Umdda6e5KuPDzlKRf
+HVGVDI3ZcpYiWZLiNZRNTM4wwTsGFt9gkwJ+jV/YjgmdgW767vTvaCkxRvw/YdFx
+g3kEC5fI0lKNykCQQPphj9vO435t+eOfdzYEP+SO8ePVRw2vHULnJizHSZEnfneO
+hrb2zCWd3m24+i/52DMJuwZzfBAsR5kR6TuZ1T9TfTMfQ2J4746dSLtvRGsEY6Ol
+onCf+xa72gbUf8pkiPLhlUqfXxakZ8tzzmKNkbdy0gChxhaoecUQGNi4/l3yti+7
+Na/viJvhcKUR0A/d9iumOId6p2NO+UZUORyq9bZzyl2lOp6AHqu8mKb7pvoFUIKv
+eO1l4e3ySaI1MCvw/tg4aZAtbgb2xUv7MsAaknkSyPEkjUgRamWtp+fb9NMU2xYc
+ykleRbJ1yVYQRKcxsSvSr8UMrYDcx11sKE+pqsA6KJhhiMFRDnKXzYIeKvFldmQU
+se+L8cRq
+=AEdm
+-----END PGP SIGNATURE-----
+
+--lb0q90owcEE/wir3--
