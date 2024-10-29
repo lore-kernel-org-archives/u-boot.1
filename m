@@ -4,70 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFD8AD5B85E
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 01:06:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC34ED5B840
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 01:44:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBB0789167;
-	Tue, 29 Oct 2024 02:06:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C64389124;
+	Tue, 29 Oct 2024 02:44:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Wo63dz8x";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RbTtQeH7";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="L7i5/fhr";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nLrNifXG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E72A88D06; Tue, 29 Oct 2024 02:06:35 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id 4AFCE88C3E; Tue, 29 Oct 2024 02:44:13 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04F5289161
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 02:06:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C778B89126
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 02:44:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
 Received: from smtp2.mailbox.org (smtp2.mailbox.org
  [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4XcsXS5Tz4z9sbl;
- Tue, 29 Oct 2024 02:06:32 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4XctMt3XrQz9slN;
+ Tue, 29 Oct 2024 02:44:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730163992;
+ s=mail20150812; t=1730166250;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=fdNOk225olH/9UZ+TWu98hvVXJ8tyWHmqiFF/z8eSGU=;
- b=Wo63dz8xMd7UynNK/eSf3hMjAEvBUv1wtkLq2Dhha12usNVBZeMo6X6mV6pumbxbYfIdMV
- 8NZhYGiW4xx9EfUt4NgXTKtTZQGZ81tG2QlqtUVWkopEplU37HBcNzrGiHSUUAh2LARMqO
- Dna6fMDCwGJ84OLTitWyJRHS/kfT+gku+AjNG4WCjpuXOza9RrakFsdNeVd6QW1BEmzBL4
- Jw5UvYz2T0MybhY5Z36ECvkuIwwKPzNKvvxuMM9dIvUZohn5edJcSiBT7rcp1BPSjtmwkE
- eW5z59JU/eNGMFlR+7ndCIZwMZnOwBGAL2O68RKPSClTM1hTWSb/gmdlL+rxBg==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=asz/WGYm3fFP+Si5bnH+mPp4+k5OFXdvBt5Df7Aa3tQ=;
+ b=L7i5/fhr/HH19XNk+eHJUAD21yp8NykBvSHvpaaTBCBM37QeV0eskUfJj2G/bLIPZCwLrE
+ QRegezRImeDzqGyE9pu9K/5AjiZVMTEwvieEKgmJuJNDJ1FDN4snjcCUpobYtl7jyL7Uj/
+ ncrX6kL+l8JLRm5/SWBZTEhiPRVHIxv1JCpFXqckGMWDLNFebk+uWHGMy87/1/InLb1oXn
+ giXC4bv8zP1Ztg5eBPG+DFK7j1h1e2Dg/nRqqFvW0yGOfdXLvQrJfjmYmBo/wpEssYtC1w
+ sJcRstMEk0gNmYmki6twZQYtz8Xxjnty6RRViFuci4QDPM3+ZcU0TrP7uFq7Nw==
+Message-ID: <169d92a0-eaf8-41ca-87e1-05db60a2a9e8@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730163990;
+ s=mail20150812; t=1730166248;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=fdNOk225olH/9UZ+TWu98hvVXJ8tyWHmqiFF/z8eSGU=;
- b=RbTtQeH7PfBZSnh2ywlxeKU9JIbhGmNUHYUGkFsdJAYT/DbkalVmssLFf3g4grSIZR1CwP
- Pe0Y7BVPv98ENbrSdRme23wM9MUrvTwQPYeyh1C691Jop5tJU/Haoh08SWjqG4HPxmYOAb
- 2py1zOJ9sYZ9APXSQrwpeiR8Vtivr1j9/FPt3zP97QwSqJzf9hH5hZn1PhdHeVsqgNuAl8
- OBPFOITRFTsrXhPwPcvJYC5ZGU2dJ0BZSy6lRFbK5PhEfZDVjcqLJR4PUgPI0CdZHqMkHq
- O6pnpcsOWpkDo1lMr2nYnXMkhpu3SwaRXd5dv8DGGijwregQIYdkyjG7Fi/eTg==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: [PULL] u-boot-sh/master
-Date: Tue, 29 Oct 2024 02:05:47 +0100
-Message-ID: <20241029010611.175198-1-marek.vasut+renesas@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=asz/WGYm3fFP+Si5bnH+mPp4+k5OFXdvBt5Df7Aa3tQ=;
+ b=nLrNifXGmYONX7ZxtbSlFtetkrpKIBGZ+BkRFS3GoHqknr16NI3vd3ZwyWQURPbCms2Qwv
+ vYV1iQls6O6SEn59msJWmoZ3LcRQIFlz7zDah3RXjS8Q2RAo0jSEur2jdh4eIY2FZxJ2Es
+ E1/rBOlyaQYhUHuf6dynLxQvBWPuSKECSrl7dfWDkzYuNsMUbtf6M3+7039K/NAPK4ZjCK
+ 4bWMks4+RjHwItkGl7UWByBaPxnDpVf7nx68bSdyTDwfn6O8V1ngNjSptn34PYuO08tlIc
+ 3xtt46kjuaek2/gtgRyqSlQnTy0D3ZaExq+7OHQA5XnMYbBdPaZ5qTPvkppQ6w==
+Date: Tue, 29 Oct 2024 02:44:06 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: hbohtadu17ep5wuisop9zbnscw9tfbrx
-X-MBO-RS-ID: 65bc31793d4110a1f25
-X-Rspamd-Queue-Id: 4XcsXS5Tz4z9sbl
+Subject: Re: [PATCH v2] mmc: renesas-sdhi: Add compatible string for rzg2l-sdhi
+To: Jaehoon Chung <jh80.chung@samsung.com>,
+ 'Paul Barker' <paul.barker.ct@bp.renesas.com>,
+ 'Nobuhiro Iwamatsu' <iwamatsu@nigauri.org>,
+ 'Marek Vasut' <marek.vasut+renesas@mailbox.org>,
+ 'Peng Fan' <peng.fan@nxp.com>
+Cc: u-boot@lists.denx.de
+References: <20241023105319.334-1-paul.barker.ct@bp.renesas.com>
+ <CGME20241027163220epcas1p450e4c0dd3bf0fd840c433e128b6d2447@epcas1p4.samsung.com>
+ <1aa8a914-dbd6-429a-a6ad-1c3753cad9c5@mailbox.org>
+ <122401db2982$0c2c51c0$2484f540$@samsung.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <122401db2982$0c2c51c0$2484f540$@samsung.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: ufcdwjzidm6weikkjqzzfgagup9f1ixq
+X-MBO-RS-ID: 03497049229a9e87dac
+X-Rspamd-Queue-Id: 4XctMt3XrQz9slN
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,114 +96,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 3df6145db0ed3430a2af089db5a82372bea3f4d5:
-
-  x86: Missed removal of CMD_BOOTEFI_HELLO_COMPILE (2024-10-27 20:11:36 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
-
-for you to fetch changes up to 400d06cb86a074dbd23cbb7f1210dad26f392807:
-
-  mmc: renesas-sdhi: Add compatible string for rzg2l-sdhi (2024-10-28 16:27:34 +0100)
-
-----------------------------------------------------------------
-Marek Vasut (3):
-      ARM: renesas: Drop old unused clock DT headers
-      ARM: renesas: Drop old unused power DT headers
-      ARM: renesas: Add top level board/renesas/ MAINTAINERS file
-
-Paul Barker (1):
-      mmc: renesas-sdhi: Add compatible string for rzg2l-sdhi
-
- board/renesas/MAINTAINERS                          | 17 ++++
- drivers/mmc/renesas-sdhi.c                         |  1 +
- include/dt-bindings/clock/r8a774a1-cpg-mssr.h      | 59 -------------
- include/dt-bindings/clock/r8a774b1-cpg-mssr.h      | 57 -------------
- include/dt-bindings/clock/r8a774c0-cpg-mssr.h      | 61 --------------
- include/dt-bindings/clock/r8a774e1-cpg-mssr.h      | 59 -------------
- include/dt-bindings/clock/r8a7790-cpg-mssr.h       | 48 -----------
- include/dt-bindings/clock/r8a7791-cpg-mssr.h       | 44 ----------
- include/dt-bindings/clock/r8a7792-cpg-mssr.h       | 39 ---------
- include/dt-bindings/clock/r8a7793-cpg-mssr.h       | 44 ----------
- include/dt-bindings/clock/r8a7794-cpg-mssr.h       | 43 ----------
- include/dt-bindings/clock/r8a7795-cpg-mssr.h       | 66 ---------------
- include/dt-bindings/clock/r8a7796-cpg-mssr.h       | 65 ---------------
- include/dt-bindings/clock/r8a77961-cpg-mssr.h      | 65 ---------------
- include/dt-bindings/clock/r8a77965-cpg-mssr.h      | 62 --------------
- include/dt-bindings/clock/r8a77970-cpg-mssr.h      | 44 ----------
- include/dt-bindings/clock/r8a77980-cpg-mssr.h      | 51 ------------
- include/dt-bindings/clock/r8a77990-cpg-mssr.h      | 62 --------------
- include/dt-bindings/clock/r8a77995-cpg-mssr.h      | 54 ------------
- include/dt-bindings/clock/r8a779a0-cpg-mssr.h      | 55 -------------
- include/dt-bindings/clock/r8a779f0-cpg-mssr.h      | 64 ---------------
- include/dt-bindings/clock/r8a779g0-cpg-mssr.h      | 91 --------------------
- .../dt-bindings/clock/renesas,r8a779h0-cpg-mssr.h  | 96 ----------------------
- include/dt-bindings/clock/renesas-cpg-mssr.h       | 15 ----
- include/dt-bindings/power/r8a774a1-sysc.h          | 31 -------
- include/dt-bindings/power/r8a774b1-sysc.h          | 26 ------
- include/dt-bindings/power/r8a774c0-sysc.h          | 25 ------
- include/dt-bindings/power/r8a774e1-sysc.h          | 36 --------
- include/dt-bindings/power/r8a7790-sysc.h           | 31 -------
- include/dt-bindings/power/r8a7791-sysc.h           | 23 ------
- include/dt-bindings/power/r8a7792-sysc.h           | 23 ------
- include/dt-bindings/power/r8a7793-sysc.h           | 25 ------
- include/dt-bindings/power/r8a7794-sysc.h           | 23 ------
- include/dt-bindings/power/r8a7795-sysc.h           | 38 ---------
- include/dt-bindings/power/r8a7796-sysc.h           | 33 --------
- include/dt-bindings/power/r8a77961-sysc.h          | 32 --------
- include/dt-bindings/power/r8a77965-sysc.h          | 29 -------
- include/dt-bindings/power/r8a77970-sysc.h          | 28 -------
- include/dt-bindings/power/r8a77980-sysc.h          | 43 ----------
- include/dt-bindings/power/r8a77990-sysc.h          | 26 ------
- include/dt-bindings/power/r8a77995-sysc.h          | 20 -----
- include/dt-bindings/power/r8a779a0-sysc.h          | 59 -------------
- include/dt-bindings/power/r8a779f0-sysc.h          | 30 -------
- include/dt-bindings/power/r8a779g0-sysc.h          | 46 -----------
- include/dt-bindings/power/renesas,r8a779h0-sysc.h  | 49 -----------
- 45 files changed, 18 insertions(+), 1920 deletions(-)
- create mode 100644 board/renesas/MAINTAINERS
- delete mode 100644 include/dt-bindings/clock/r8a774a1-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a774b1-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a774c0-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a774e1-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a7790-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a7791-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a7792-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a7793-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a7794-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a7795-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a7796-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a77961-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a77965-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a77970-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a77980-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a77990-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a77995-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a779a0-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a779f0-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/r8a779g0-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/renesas,r8a779h0-cpg-mssr.h
- delete mode 100644 include/dt-bindings/clock/renesas-cpg-mssr.h
- delete mode 100644 include/dt-bindings/power/r8a774a1-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a774b1-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a774c0-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a774e1-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a7790-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a7791-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a7792-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a7793-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a7794-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a7795-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a7796-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a77961-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a77965-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a77970-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a77980-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a77990-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a77995-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a779a0-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a779f0-sysc.h
- delete mode 100644 include/dt-bindings/power/r8a779g0-sysc.h
- delete mode 100644 include/dt-bindings/power/renesas,r8a779h0-sysc.h
+On 10/28/24 10:40 PM, Jaehoon Chung wrote:
+> 
+> 
+>> -----Original Message-----
+>> From: Marek Vasut <marek.vasut@mailbox.org>
+>> Sent: Monday, October 28, 2024 1:31 AM
+>> To: Paul Barker <paul.barker.ct@bp.renesas.com>; Nobuhiro Iwamatsu <iwamatsu@nigauri.org>; Marek Vasut
+>> <marek.vasut+renesas@mailbox.org>; Peng Fan <peng.fan@nxp.com>; Jaehoon Chung <jh80.chung@samsung.com>
+>> Cc: u-boot@lists.denx.de
+>> Subject: Re: [PATCH v2] mmc: renesas-sdhi: Add compatible string for rzg2l-sdhi
+>>
+>> On 10/23/24 12:53 PM, Paul Barker wrote:
+>>> After the recent dts/upstream subtree merge, the sdhi compatible string
+>>> used in the device tree for RZ/G2L family SoCs is "renesas,rzg2l-sdhi"
+>>> not "renesas,rcar-gen3-sdhi". This broke the ability to access the eMMC
+>>> and SD card devices on RZ/G2L boards.
+>>>
+>>> Fix this by adding the new compatible string to the sdhi driver.
+>>>
+>>> Fixes: 136b7b6d2e98 ("Subtree merge tag 'v6.11-dts' of dts repo [1] into dts/upstream")
+>>> Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+>>> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>>> ---
+>>> Changes v1->v2:
+>>>     - Moved new entry after "renesas,rcar-gen4-sdhi".
+>>>     - Added Reviewed-by tags.
+>>>
+>>>    drivers/mmc/renesas-sdhi.c | 1 +
+>>>    1 file changed, 1 insertion(+)
+>>>
+>>> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
+>>> index 23db2a75c444..92afa6adcdac 100644
+>>> --- a/drivers/mmc/renesas-sdhi.c
+>>> +++ b/drivers/mmc/renesas-sdhi.c
+>>> @@ -864,6 +864,7 @@ static const struct udevice_id renesas_sdhi_match[] = {
+>>>    	{ .compatible = "renesas,sdhi-r8a77990", .data = RENESAS_GEN3_QUIRKS },
+>>>    	{ .compatible = "renesas,sdhi-r8a77995", .data = RENESAS_GEN3_QUIRKS },
+>>>    	{ .compatible = "renesas,rcar-gen4-sdhi", .data = RENESAS_GEN3_QUIRKS },
+>>> +	{ .compatible = "renesas,rzg2l-sdhi", .data = RENESAS_GEN3_QUIRKS },
+>>>    	{ /* sentinel */ }
+>>>    };
+>> I can take this via sh tree if that's OK with you ?
+> 
+> If you're asking me, I'm ok.
+All right, thank you, I included the patch in current SH PR.
