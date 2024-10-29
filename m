@@ -4,76 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03D99D3A672
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 16:37:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF614D3A670
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 16:40:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BBCD8919B;
-	Tue, 29 Oct 2024 17:37:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 657A088DC6;
+	Tue, 29 Oct 2024 17:40:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XnnpKycl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MMCc679M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78CDF8857C; Tue, 29 Oct 2024 17:37:36 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id 48FA288E81; Tue, 29 Oct 2024 17:40:35 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57FBF88E81
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 17:37:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B8E478857C
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 17:40:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-5ebbed44918so3761673eaf.0
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 09:37:34 -0700 (PDT)
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-460ad0440ddso41014011cf.3
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 09:40:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730219853; x=1730824653; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730220031; x=1730824831; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=OUoT6GaYz5UtphrE1ldDvmkAH7/jhsC8fmAqdLYtm1M=;
- b=XnnpKycl6EOjOFwhxpR5Jaxe7+2hL7u+1unkk3UJe3MeiSyLpygbFtmcdEt46sCW3K
- uMMOyKsMg9aaP+l9PphjCkqSOKEUdlIXDfIe2R90CJ4gzOi4gzsTFaqoZIEEfqeU34Jx
- t1cJ7ltD02ZaIMSFLbMP+PXMyD+BymZJmXzgM=
+ bh=oAnsX9H3bpx+CFHJ+YMfeb4czLIFNiuFJB2gTXamqLQ=;
+ b=MMCc679Md1US+qDY0n7leywG9nFWIY3om7+ojYJCSXxCtFdXfAb1pNwVG1xdYKVis5
+ 6dnUQFQvz8gz5+fEEForxcQlKTXdMu7pu7fZQtD6q+9GSHEyGioxWnfH6fStTA+6Q78N
+ I6u3tjet947pmny90gp7kEZ3DmWb6QvLocy10=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730219853; x=1730824653;
+ d=1e100.net; s=20230601; t=1730220031; x=1730824831;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OUoT6GaYz5UtphrE1ldDvmkAH7/jhsC8fmAqdLYtm1M=;
- b=PrZOZam4nZLbPK76U/xMj4/Gx5g6NBQdjg8qydyvfatZFH6ljZ32N6jTT3ca+McJWC
- iSohnSCpfNr85q2qKKZNNXXjdeEQXvUhCbHe6l1W7Y3IabmbZFsVLAxWpWaaW+TWttme
- aSCWhtatpmz7BdNZO2Z9CJTSq+JsA0uRxLpcJ3glMET4YglSE95U9AC17KzJebLC+Nl9
- QB2kfcuwbaKqT8rF0TXMKBqPn6T9cnm4WmcxMsBkqrsFQj/dj01tibjvs3LnKdczJV3f
- IAUWlbWOeQUTjb7db0e60/hgQwQKcZM+7pRvxXbTEh5fGdnqOS2UBUIYJXD/oxhVDvD/
- YoLQ==
-X-Gm-Message-State: AOJu0YyMvYPr4JFwYotcaCzCVxQxZ2mXGQeH60h/XnFeicTZpu+onO/E
- WrHPJtx2DJaz7LCGlm0bTDCU1+Hnnfsjoh39lnNRyj7lT7qkTiLtRxElOM/HPhweJd8R/vGrKda
- wNUw=
-X-Google-Smtp-Source: AGHT+IH+AksnQ9osWrZV6lWK38DhYv2femnZw7KJWdUdyQq9i7/VDqmPJLSPb48ob2740UaC4U9fMg==
-X-Received: by 2002:a05:6358:718e:b0:1c3:82f3:883e with SMTP id
- e5c5f4694b2df-1c5e344c168mr47182455d.21.1730219851579; 
- Tue, 29 Oct 2024 09:37:31 -0700 (PDT)
+ bh=oAnsX9H3bpx+CFHJ+YMfeb4czLIFNiuFJB2gTXamqLQ=;
+ b=pgB38abv1hXv2Yq1tc5cTYWoQd+0raTLYq8C1YTSTGBbcX9GNkhBSsHvSUncmZDNae
+ idbzV86UArQqP1SyQ8UXD7oDhQrB7OUuY/1r6DEnFGqTOJ2j0v/koy9NmYD2GXJ3F+jT
+ 1oANc3BdWupKOVn+sEtquwQvwHtUSTlXOX1LrJ2KRsS/5CrMI5CGrZnbcG/QaL/MAlfn
+ v/d7fjJanLNsw0oMudcu2uHjlzA90PRdSlakK0FG64FSn2q2C8wB/ABfCgxf31w2e6B3
+ WO9uhglwCTO1QmDcpxSvODIo+kBbsQkchp/uU0hvWx5O1Ypr3ppBo4Lve3njf1evMtBO
+ 33aA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXneU3y8q6f5DDoAc+am11OpoV09A5kY1X+m3m/E53TBoN5XNNHOVL8AAiZpSQieQGtE4M+xNo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxV7QoYHldyMcUAMLQfcGtLSrxGFTswTnCeXFrulX4QkYMx9fkG
+ xdroUTZYwCtdxAs0lKhd0tpGhLAMu9qClSEDslXpEfWl11ep+/jmTOOh84MWTUg=
+X-Google-Smtp-Source: AGHT+IGBxGf4vlzNWeC/chxzXhypVIsT9E5I4ZuHna5Vwq1c4TX1Ye3BJaDzEh5cfKpbTaqptGnUdw==
+X-Received: by 2002:ac8:5916:0:b0:460:4e67:d67f with SMTP id
+ d75a77b69052e-4613bfc8673mr192892281cf.2.1730220031458; 
+ Tue, 29 Oct 2024 09:40:31 -0700 (PDT)
 Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4613213a5fdsm46045081cf.31.2024.10.29.09.37.30
+ d75a77b69052e-4613237454dsm46218161cf.75.2024.10.29.09.40.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Oct 2024 09:37:30 -0700 (PDT)
-Date: Tue, 29 Oct 2024 10:37:28 -0600
+ Tue, 29 Oct 2024 09:40:30 -0700 (PDT)
+Date: Tue, 29 Oct 2024 10:40:27 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>
-Cc: u-boot@lists.denx.de, Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-Subject: Re: [PATCH 2/4] board/BuR/common: add parameter for reset controller
- I2C bus selection
-Message-ID: <20241029163728.GD4959@bill-the-cat>
-References: <20241029085258.1740289-1-bernhard.messerklinger@br-automation.com>
- <20241029085258.1740289-3-bernhard.messerklinger@br-automation.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Shantur Rathore <i@shantur.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v8 5/8] sandbox: Report host default-filename in native
+ mode
+Message-ID: <20241029164027.GE4959@bill-the-cat>
+References: <20241022120032.196311-1-sjg@chromium.org>
+ <20241022120032.196311-6-sjg@chromium.org>
+ <CAC_iWjKUjsMdqXa2YZGiu1FSsjx_aH6cDQsi+2Ng5i-+9obQhQ@mail.gmail.com>
+ <ea85b8fc-fe7b-4a76-a3e1-bb92b45b027a@gmx.de>
+ <CAFLszTj+jOut1_-E45A-f=smJejn+BTZ4XVuDr1YdJ20=zKQSQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wN2m0uOfbdT3L/QP"
+ protocol="application/pgp-signature"; boundary="dZ6arZLQ92QVZ60X"
 Content-Disposition: inline
-In-Reply-To: <20241029085258.1740289-3-bernhard.messerklinger@br-automation.com>
+In-Reply-To: <CAFLszTj+jOut1_-E45A-f=smJejn+BTZ4XVuDr1YdJ20=zKQSQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,59 +104,222 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---wN2m0uOfbdT3L/QP
+--dZ6arZLQ92QVZ60X
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 29, 2024 at 09:52:10AM +0100, Bernhard Messerklinger wrote:
+On Tue, Oct 29, 2024 at 04:45:54PM +0100, Simon Glass wrote:
+> Hi Heinrich,
+>=20
+> On Mon, 28 Oct 2024 at 20:16, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
+> >
+> > On 10/25/24 11:56, Ilias Apalodimas wrote:
+> > > Hi Simon,
+> > >
+> > >
+> > > On Tue, 22 Oct 2024 at 15:00, Simon Glass <sjg@chromium.org> wrote:
+> > >>
+> > >> When the --native flag is given, pretend to be running the host
+> > >> architecture rather than sandbox.
+> > >>
+> > >> Add an 'efidebug filename' command to report it.
+> > >
+> > > Heinrich does this allow you to continue your testing in native archs?
+> > >
+> > >>
+> > >> Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >> ---
+> > >>
+> > >> Changes in v8:
+> > >> - Add new patch to report host default-filename in native mode
+> > >>
+> > >>   boot/bootmeth_efi.c | 25 ++------------------
+> > >>   boot/efi_fname.c    | 57 +++++++++++++++++++++++++++++++++--------=
+----
+> > >>   cmd/efidebug.c      | 25 ++++++++++++++++++++
+> > >>   include/efi.h       | 25 ++++++++++++++++++++
+> > >>   4 files changed, 94 insertions(+), 38 deletions(-)
+> > >>
+> > >> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+> > >> index 371b36d550b..f836aa655f5 100644
+> > >> --- a/boot/bootmeth_efi.c
+> > >> +++ b/boot/bootmeth_efi.c
+> > >> @@ -25,32 +25,11 @@
+> > >>
+> > >>   #define EFI_DIRNAME    "/EFI/BOOT/"
+> > >>
+> > >> -static int get_efi_pxe_arch(void)
+> > >> -{
+> > >> -       /* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-=
+parameters.xml */
+> > >> -       if (IS_ENABLED(CONFIG_ARM64))
+> > >> -               return 0xb;
+> > >> -       else if (IS_ENABLED(CONFIG_ARM))
+> > >> -               return 0xa;
+> > >> -       else if (IS_ENABLED(CONFIG_X86_64))
+> > >> -               return 0x6;
+> > >> -       else if (IS_ENABLED(CONFIG_X86))
+> > >> -               return 0x7;
+> > >> -       else if (IS_ENABLED(CONFIG_ARCH_RV32I))
+> > >> -               return 0x19;
+> > >> -       else if (IS_ENABLED(CONFIG_ARCH_RV64I))
+> > >> -               return 0x1b;
+> > >> -       else if (IS_ENABLED(CONFIG_SANDBOX))
+> > >> -               return 0;       /* not used */
+> > >> -
+> > >> -       return -EINVAL;
+> > >> -}
+> > >> -
+> > >>   static int get_efi_pxe_vci(char *str, int max_len)
+> > >>   {
+> > >>          int ret;
+> > >>
+> > >> -       ret =3D get_efi_pxe_arch();
+> > >> +       ret =3D efi_get_pxe_arch();
+> > >>          if (ret < 0)
+> > >>                  return ret;
+> > >>
+> > >> @@ -239,7 +218,7 @@ static int distro_efi_read_bootflow_net(struct b=
+ootflow *bflow)
+> > >>          ret =3D get_efi_pxe_vci(str, sizeof(str));
+> > >>          if (ret)
+> > >>                  return log_msg_ret("vci", ret);
+> > >> -       ret =3D get_efi_pxe_arch();
+> > >> +       ret =3D efi_get_pxe_arch();
+> > >>          if (ret < 0)
+> > >>                  return log_msg_ret("arc", ret);
+> > >>          arch =3D ret;
+> > >> diff --git a/boot/efi_fname.c b/boot/efi_fname.c
+> > >> index a6b11383bba..790f9e2fa36 100644
+> > >> --- a/boot/efi_fname.c
+> > >> +++ b/boot/efi_fname.c
+> > >> @@ -9,29 +9,34 @@
+> > >>    */
+> > >>
+> > >>   #include <efi.h>
+> > >> +#include <errno.h>
+> > >>   #include <host_arch.h>
+> > >>
+> > >> -#ifdef CONFIG_SANDBOX
+> > >> -
+> > >>   #if HOST_ARCH =3D=3D HOST_ARCH_X86_64
+> > >> -#define BOOTEFI_NAME "BOOTX64.EFI"
+> > >> +#define HOST_BOOTEFI_NAME "BOOTX64.EFI"
+> > >> +#define HOST_PXE_ARCH 0x6
+> > >>   #elif HOST_ARCH =3D=3D HOST_ARCH_X86
+> > >> -#define BOOTEFI_NAME "BOOTIA32.EFI"
+> > >> +#define HOST_BOOTEFI_NAME "BOOTIA32.EFI"
+> > >> +#define HOST_PXE_ARCH 0x7
+> > >>   #elif HOST_ARCH =3D=3D HOST_ARCH_AARCH64
+> > >> -#define BOOTEFI_NAME "BOOTAA64.EFI"
+> > >> +#define HOST_BOOTEFI_NAME "BOOTAA64.EFI"
+> > >> +#define HOST_PXE_ARCH 0xb
+> > >>   #elif HOST_ARCH =3D=3D HOST_ARCH_ARM
+> > >> -#define BOOTEFI_NAME "BOOTARM.EFI"
+> > >> +#define HOST_BOOTEFI_NAME "BOOTARM.EFI"
+> > >> +#define HOST_PXE_ARCH 0xa
+> > >>   #elif HOST_ARCH =3D=3D HOST_ARCH_RISCV32
+> > >> -#define BOOTEFI_NAME "BOOTRISCV32.EFI"
+> > >> +#define HOST_BOOTEFI_NAME "BOOTRISCV32.EFI"
+> > >> +#define HOST_PXE_ARCH 0x19
+> > >>   #elif HOST_ARCH =3D=3D HOST_ARCH_RISCV64
+> > >> -#define BOOTEFI_NAME "BOOTRISCV64.EFI"
+> > >> +#define HOST_BOOTEFI_NAME "BOOTRISCV64.EFI"
+> > >> +#define HOST_PXE_ARCH 0x1b
+> > >>   #else
+> > >> -#error Unsupported UEFI architecture
+> > >> +#error Unsupported Host architecture
+> > >>   #endif
+> > >>
+> > >> -#else
+> > >> -
+> > >> -#if defined(CONFIG_ARM64)
+> > >> +#if defined(CONFIG_SANDBOX)
+> > >> +#define BOOTEFI_NAME "BOOTSBOX.EFI"
+> > >> +#elif defined(CONFIG_ARM64)
+> > >>   #define BOOTEFI_NAME "BOOTAA64.EFI"
+> > >>   #elif defined(CONFIG_ARM)
+> > >>   #define BOOTEFI_NAME "BOOTARM.EFI"
+> > >> @@ -47,9 +52,31 @@
+> > >>   #error Unsupported UEFI architecture
+> >  >>   #endif>>
+> > >> -#endif
+> > >> -
+> > >>   const char *efi_get_basename(void)
+> > >>   {
+> > >> -       return BOOTEFI_NAME;
+> > >> +       return efi_use_host_arch() ? HOST_BOOTEFI_NAME : BOOTEFI_NAM=
+E;
+> > >> +}
+> > >> +
+> > >> +int efi_get_pxe_arch(void)
+> > >> +{
+> > >> +       if (efi_use_host_arch())
+> > >> +               return HOST_PXE_ARCH;
+> > >> +
+> > >> +       /* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-=
+parameters.xml */
+> > >> +       if (IS_ENABLED(CONFIG_ARM64))
+> > >> +               return 0xb;
+> > >> +       else if (IS_ENABLED(CONFIG_ARM))
+> > >> +               return 0xa;
+> > >> +       else if (IS_ENABLED(CONFIG_X86_64))
+> > >> +               return 0x6;
+> > >> +       else if (IS_ENABLED(CONFIG_X86))
+> > >> +               return 0x7;
+> > >> +       else if (IS_ENABLED(CONFIG_ARCH_RV32I))
+> > >> +               return 0x19;
+> > >> +       else if (IS_ENABLED(CONFIG_ARCH_RV64I))
+> > >> +               return 0x1b;
+> > >> +       else if (IS_ENABLED(CONFIG_SANDBOX))
+> >
+> > Please, add a warning here:
+> >
+> >       log_warn("You are using the sandbox in non-compliant mode\n");
+> >
+> > The riscv64 sandbox can only run riscv64 binaries
+> > The arm64 sandbox can only run arm64 binary.
+> >
+> > We cannot expect a DHCP server to do the expected with the value 0.
+> >
+> > So why should we introduce this?
+> >
+> > >> +               return 0;       /* not used */
+> >
+> > The following comment would fit better:
+> >
+> >      /* This breaks PXE booting on the sandbox.*/
+>=20
+> This line is already in the code. I am just moving it to a new file.
+> PXE booting is not supported on sandbox. Neither is EFI booting, until
+> this series is applied.
 
-> Normally B&R reset controllers are located at I2C bus 0. This patch adds
-> the possibility to change this bus number with BR_RESETC_I2CBUS.
->=20
-> Signed-off-by: Bernhard Messerklinger <bernhard.messerklinger@br-automati=
-on.com>
-> ---
->=20
->  board/BuR/common/br_resetc.c | 9 +++++++--
->  1 file changed, 7 insertions(+), 2 deletions(-)
->=20
-> diff --git a/board/BuR/common/br_resetc.c b/board/BuR/common/br_resetc.c
-> index f5d09fef3d..827ea6ba35 100644
-> --- a/board/BuR/common/br_resetc.c
-> +++ b/board/BuR/common/br_resetc.c
-> @@ -52,10 +52,15 @@ static int resetc_init(void)
->  {
->  	struct udevice *i2cbus;
->  	int rc;
-> +#if !defined(BR_RESETC_I2CBUS)
-> +	int busno =3D 0;
-> +#else
-> +	int busno =3D CONFIG_BR_RESETC_I2CBUS;
-> +#endif
-
-You need to introduce board/BuR/common/Kconfig and add the symbol
-BR_RESETC_I2CBUS there.
+It sounds like EFI booting in sandbox is working and being tested and
+used (as a testing mechanism) right now. And the work and questions
+being raised here are around having your changes not break that existing
+use.
 
 --=20
 Tom
 
---wN2m0uOfbdT3L/QP
+--dZ6arZLQ92QVZ60X
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmchD0gACgkQFHw5/5Y0
-tyzm2Av/TDGKBGpc8GrOp/50vjT95rOQy+TLonjRMfhIhG5WZRQaKtPD1lU3Wb8G
-DaMVbustWltRo3D20vORhEHqkTGLf2/e2+80MSdxo0DWnxlGyiKQMee7s/ETgiEe
-aTpA+4BwOk+IznQH13PW0nFqxMchN9BfmyuZBtxTLnKkR4KRZ9W3GFM1le4pW4Ki
-L0A9IgcMMTNr1O+5c79oZbK3C2BqSkVnOnEQXtpOU7xQUWkK7fdLpYICerl8zGYp
-IgXBASsrgnrk5dnpoYJxsg7QyxtKj2soiDWLidoFTqCjN34CJeFQhvYybENvBI3E
-thWUA0yiJ640YwA4f15zEsP0JK4LF/+vXToGCDatPmrfxVDRjHwqLdiALlfEHVX3
-5pz6YZqciZqwZiwp1r6gsOZw2LSD7uWJQhsRZ7tzMRcUCdDI4p2HKo5GEk3Ufazw
-A0BEOQ4PR57AJDtQ1P5MwdY6bLh+pqWASYvB9siHwFyqOWhUHhx3o99ysXhuIj8z
-WEBg0rYD
-=jsEt
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmchD/sACgkQFHw5/5Y0
+tyyR/gv/cE3ttURXyXaaVPMhsQD/gbGUHYYvugJj0DxzGXaRF/XStZ+cG0lXsIlQ
+MJZuU2B0xyJwrT1IVy6YRRJVNlTd7l7g5fITptUroEBawTYvEUTRwjaYW+zlhWRV
+8mGj7HBUC14bqYZZ0GO1ifLziHRdnBjj7hTt7d2b4R3O0K+0Moc8hMVE8bk9hj55
+I3VKHonQyomSV5mLdYozNqYWmBzeuhTQyAHnInWXFkrBLSyHXprbFh2t25UAG4U7
+xoNCFYyBzjVd2NoVdUICALOwVZP6dr1ab2Q8Rek3Oppn750bdLVkfSsA8UAiIE9k
+DxmS41B8TEUHeCoblppDmm8iqADITQegflGUStlYeamb1hTJa04XqJwAN7SIZ+f7
+PkOEuVOODOSIAlWvYLwDTlwlQs1YYMBZYUHMVS3LrHfceWXN096VXsVTa0rCo8Qq
+Q8TvtYr3ZLEDQ+soeKg5vUR4P9YnxpLE8V8UeVPzinNc73SkAzeWicC74UaINtzy
+gdf1Ctxa
+=cJz0
 -----END PGP SIGNATURE-----
 
---wN2m0uOfbdT3L/QP--
+--dZ6arZLQ92QVZ60X--
