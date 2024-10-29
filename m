@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 508F6D5B16F
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 08:49:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05A5FD5B16F
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 08:53:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD96688EF5;
-	Tue, 29 Oct 2024 09:49:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8466588EF5;
+	Tue, 29 Oct 2024 09:53:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VoKaHkuq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MNUUOIVe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4305489070; Tue, 29 Oct 2024 09:49:12 +0100 (CET)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id 0381989152; Tue, 29 Oct 2024 09:53:07 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00D0088BB7
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 09:49:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D91B588EF5
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 09:53:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-7ea6a4f287bso3289855a12.3
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 01:49:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a9a2cdc6f0cso696599866b.2
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 01:53:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730191748; x=1730796548; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1730191984; x=1730796784; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NMUUqN/x7P2uN2ULMTJJp7PZMiznkY1FrpaFz4UOQuI=;
- b=VoKaHkuqM58XEwxVwb2LSPe76ES+ft4RKwUNOFPZuDCAl3YYdvm1Xl2YToB1uvC2sf
- n0FPtPqwCJFZf91+/9LWbXGRWf493gbJ6A295oyHZu3YzyDlV65lJS3JpadGerJyPwVw
- jDgJtg7hU8iluk/2gf+C1IybXrv+W4itWf/lRo6Fnwg0WZj5nJhNTZzKRmrmoo5p4Gk3
- w4iefkkQfVj/pvFqh0VVSevJI6PR5wysgoROhbU2KekC60XFcVCjSmKrOJz82ZLdYsrN
- oiF+8g82cwlqfdv623SMiiOA1KJ6uANcKv3DM7HzmAaLAXjcSl6si59J1XU1MLaCxRgV
- Q2pw==
+ bh=tOd6XNre5DPIaKzxJ3W/wiqNdiKXw7amStXEhvzuXnA=;
+ b=MNUUOIVeoezaZ0DZFcSpOgZC0tuJoOjQOY0C5Flk2twmJxb1F9fmN0/Wco9st/Ck4u
+ 9Nd5AKeXyq0J7kJiEGqqrM0l9pEqF1XFH7DeSfviVsKcn5EEqO2oVx//u2i83JzkoWCW
+ eMbDHEEdb0PGk+fTM32viHzlLmVM6zp3f5QDBtPCxCRv0HHvmnu+UbQVIo7kmN3TG0dY
+ UnEr+TVXyGrz/XbtXlhU+zZIMRYXlnmvb3QRabDiuJbbSeKzZzlSwH7NRTcEqSls0pQt
+ +jvLdM7+Gb1oYpfA0CH4UdJumgBUjDPZRhe4wxaywkYJ6Xy1okRvfSyFHxcZhZR/VTe3
+ m0kA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730191748; x=1730796548;
+ d=1e100.net; s=20230601; t=1730191984; x=1730796784;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NMUUqN/x7P2uN2ULMTJJp7PZMiznkY1FrpaFz4UOQuI=;
- b=l4Y0NIA341FTFGpW3PzVbj1C/HhibmqHSmBrhwUjgHpD2esDKBftd/FGcXAjVBNfXS
- Jt3QK9/dBMUW0krdqGMbiFaZbuC0TRHntFOiNTHqw2LFSBNQuTLxqyKz/pMKpmpGpxbq
- wrS6gvSeQZ4PDJtkt3q/h8JO9GGPxi4xvJ4hBe6wcH1SaZkOM38WEdCK8VnOCt2tQo03
- kus1JsDULHSSHnPMyAwdtngD4epgHae+cS9jnq5Q+VtD9xlNCn9l9C1iJWrFXOzkMSh0
- w21GOE3j0xUmixe0YgCtJYZqd6ssw6XLDAh7qQ94G/NNImC/dPMD4QW/K9jWvP9VFP+I
- toRQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXCTHEyU6DbNaJgqofh9R/U3Fy+shwZ2TKN+UzRq2xwDtpHh2riPEx/RCRnseWPjtJew40f1kw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzV3R5dfAbkLrkqprTEF+ojSALUYNQryjeF8bSYqiizeRRtUFcb
- 39dl7vMlpDy43VFXQDabJSQ+jrJBxmyztazUVayzVJgBURtdX7HgwTjpLaWyFsuWk8BpU0zmp9Z
- RNHGBD240XYSa8PtF101ULM6bJmWnVthnXOXBuA==
-X-Google-Smtp-Source: AGHT+IHb0mlq3VjMXNh5qcM+v1v0ZaFiHNTaGHFevyNeGGH6qnVyOhnZwVXEY1M8XZnemxCDX5y3AEMk15q/amzfbUM=
-X-Received: by 2002:a05:6a20:d528:b0:1d9:f95:9f97 with SMTP id
- adf61e73a8af0-1d9a83c22b1mr13265327637.16.1730191748530; Tue, 29 Oct 2024
- 01:49:08 -0700 (PDT)
+ bh=tOd6XNre5DPIaKzxJ3W/wiqNdiKXw7amStXEhvzuXnA=;
+ b=WrPTIWECyy/uAh6pHmreXrS5IXC/rC0XzUMj25Cwj1CpU+FxlHcv2TIzlFz/svsaYh
+ BaThqruTetOPFJSZTC+rwE5S1JRsgUf7ylmNeEW2LZ8kXA0SEyrg8UAxBXLzgRSyfHNk
+ l6gkvUPeL50yERJ3NmtPKtSLS1OdQ37XzC8nK9U25rpsPs9Dt/H26A+7Y8bGHxxo3ZEx
+ /mT9HRy86Y7yKyJjMwYk/GBzJvl/+GEaj92fRb7E5C1DU5B5coMfioMYTPPlYsKi6lwn
+ olflJHzebPWV2X9+ESrtaUtFWNkz5tIJ8Len5iAOUlN0n7ceAnr8PB/8rFflklbstTFb
+ ePMw==
+X-Gm-Message-State: AOJu0Yw4SxfmltRpKf9FR6+0zOdb0+KbxH5xQjWWDVB+WyPggCPJg/7c
+ 5uO0fAv9fk3bZRpQBcjXsu/E3CO+t8kOTRY7/5JgQ9e6tD3h90cfLCcwI9uBVG7lyxNnXSMYa9u
+ JXBnU4Ef8yzvuTuT97ZLf9H7yUPithd5oRlBCyw==
+X-Google-Smtp-Source: AGHT+IHj4H+n2V3c8tJy2eUb2XACRxGOjSoLRFITrXBK9UiNM1JaJgBAoIyWQ9bhDhK03KG6G8EUEI4P1WkodOTgoao=
+X-Received: by 2002:a17:906:c14d:b0:a99:e98f:e73d with SMTP id
+ a640c23a62f3a-a9de5ee15f8mr996016166b.37.1730191984182; Tue, 29 Oct 2024
+ 01:53:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241024104625.1340355-1-ilias.apalodimas@linaro.org>
- <06be7096-2e06-44d6-ba00-55ea578121d8@gmx.de>
- <CAC_iWjJdsJLT6arwynmVx5_fTeOr6rZkp8+AdA1rx_zG6Jandw@mail.gmail.com>
-In-Reply-To: <CAC_iWjJdsJLT6arwynmVx5_fTeOr6rZkp8+AdA1rx_zG6Jandw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 29 Oct 2024 10:48:32 +0200
-Message-ID: <CAC_iWjLctP3DuuB8brYUMuhDBwuzpMw6CZ-dhbuaRrSk3O5BYg@mail.gmail.com>
-Subject: Re: [PATCH] lmb: Correctly unmap memory after notifications
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20241029071846.514559-1-sughosh.ganu@linaro.org>
+ <20241029071846.514559-3-sughosh.ganu@linaro.org> <ZyCdj5x3RS_djKqk@robin>
+In-Reply-To: <ZyCdj5x3RS_djKqk@robin>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 29 Oct 2024 14:22:53 +0530
+Message-ID: <CADg8p94Kc13KHdZxJ1-rhkSWzOY=QBDfPsSnQdQzmLpcfzy+VA@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/2] apple: dart: use driver specific instance of LMB
+To: Janne Grunau <j@jannau.net>
+Cc: u-boot@lists.denx.de, Mark Kettenis <kettenis@openbsd.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,71 +87,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
+On Tue, 29 Oct 2024 at 14:02, Janne Grunau <j@jannau.net> wrote:
+>
+> Hej,
+>
+> On Tue, Oct 29, 2024 at 12:48:46PM +0530, Sughosh Ganu wrote:
+> > The LMB module is typically used for managing the platform's RAM
+> > memory. RAM memory gets added to the module's memory map, and
+> > subsequently allocated through various LMB API's.
+> >
+> > The IOMMU driver for the apple platforms also uses the LMB API's for
+> > allocating device virtual addresses(VA). These addresses are different
+> > from the RAM addresses, and cannot be added to the RAM memory map. Add
+> > a separate instance of LMB memory map for the device VA's, which gets
+> > managed by the IOMMU driver. Use lmb_push() and lmb_pop() functions to
+> > set-up the relevant lmb instance.
+>
+> thanks, this fixes the initial brokenness when setting up dma mappings
+> but I still see SError due to translation fault. I don't have time right
+> now to look into it so it could be unrelated to the iommu.
 
-On Tue, 29 Oct 2024 at 10:00, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Heinrich
->
-> On Mon, 28 Oct 2024 at 08:37, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >
-> > On 10/24/24 12:46, Ilias Apalodimas wrote:
-> > > We never unmap the memory used to update the EFI memory map after
-> > > notifications
-> > >
-> > > Fixes: commit 2f6191526a13 ("lmb: notify of any changes to the LMB memory map")
-> > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > ---
-> > >   lib/lmb.c | 1 +
-> > >   1 file changed, 1 insertion(+)
-> > >
-> > > diff --git a/lib/lmb.c b/lib/lmb.c
-> > > index 890e2cbfdf6b..38c6e1d5ba8d 100644
-> > > --- a/lib/lmb.c
-> > > +++ b/lib/lmb.c
-> > > @@ -65,6 +65,7 @@ static int __maybe_unused lmb_map_update_notify(phys_addr_t addr,
-> > >                       status & ~EFI_ERROR_MASK);
-> > >               return -1;
-> > >       }
-> > > +     unmap_sysmem((void *)(uintptr_t)efi_addr);
-> >
-> > If PCI memory was ever mapped via pci_map_physmem(), I don't think that
-> > we want to unmap it here.
->
-> Ok, so looking at it again, not calling unmap_sysmem() here won't
-> break anything, so I guess we can drop this patch.
+Good to know. Thanks for testing the changes.
 
-Looking at it again, for special sandbox tags, we need to correctly
-decrease the refcnt. So why do you think this isnt needed here?
+>
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> >  drivers/iommu/apple_dart.c | 67 +++++++++++++++++++++++++++++++++++++-
+> >  include/lmb.h              |  2 ++
+> >  lib/lmb.c                  |  1 -
+> >  3 files changed, 68 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/iommu/apple_dart.c b/drivers/iommu/apple_dart.c
+> > index 611ac7cd6de..55f60287b0e 100644
+> > --- a/drivers/iommu/apple_dart.c
+> > +++ b/drivers/iommu/apple_dart.c
+> > @@ -3,6 +3,7 @@
+> >   * Copyright (C) 2021 Mark Kettenis <kettenis@openbsd.org>
+> >   */
+> >
+> > +#include <alist.h>
+> >  #include <cpu_func.h>
+> >  #include <dm.h>
+> >  #include <iommu.h>
+> > @@ -70,6 +71,8 @@
+> >
+> >  struct apple_dart_priv {
+> >       void *base;
+> > +     struct lmb apple_dart_lmb;
+> > +     struct lmb ram_lmb;
+> >       u64 *l1, *l2;
+> >       int bypass, shift;
+> >
+> > @@ -87,6 +90,56 @@ struct apple_dart_priv {
+> >       void (*flush_tlb)(struct apple_dart_priv *priv);
+> >  };
+> >
+> > +static int apple_dart_lmb_init(struct apple_dart_priv *priv)
+> > +{
+> > +     bool ret;
+> > +     struct lmb *almb = &priv->apple_dart_lmb;
+> > +
+> > +     ret = alist_init(&almb->free_mem, sizeof(struct lmb_region),
+> > +                      (uint)LMB_ALIST_INITIAL_SIZE);
+> > +     if (!ret) {
+> > +             log_debug("Unable to initialise the list for LMB free memory\n");
+> > +             return -ENOMEM;
+> > +     }
+> > +
+> > +     ret = alist_init(&almb->used_mem, sizeof(struct lmb_region),
+> > +                      (uint)LMB_ALIST_INITIAL_SIZE);
+> > +     if (!ret) {
+> > +             log_debug("Unable to initialise the list for LMB used memory\n");
+> > +             return -ENOMEM;
+> > +     }
+> > +
+> > +     return 0;
+> > +}
+> > +
+> > +static void apple_dart_lmb_uninit(struct apple_dart_priv *priv)
+> > +{
+> > +     struct lmb *almb = &priv->apple_dart_lmb;
+> > +
+> > +     alist_uninit(&almb->free_mem);
+> > +     alist_uninit(&almb->used_mem);
+> > +}
+> > +
+> > +static void apple_dart_lmb_setup(struct apple_dart_priv *priv)
+> > +{
+> > +     struct lmb *almb = &priv->apple_dart_lmb;
+> > +     struct lmb *rlmb = &priv->ram_lmb;
+> > +
+> > +     lmb_push(rlmb);
+> > +
+> > +     lmb_pop(almb);
+>
+> This doesn't look look like a good solution to me. We're conflating two
+> different concepts into the global lmb. This looks error prone to me. I
+> was looking into adding iomb_* entry points into the lmb points which
+> take a pointer.
 
-Thanks
-/Ilias
+Yes, even I was trying to avoid having another instance of LMB as much
+as possible, but given that this is breaking the platform, I thought
+this would be the quickest to fix the break. Personally, I would
+prefer LMB to have a consistent window of RAM addresses for all
+platforms, i.e. ram_base to ram_top. Also, apart from this peculiar
+scenario, I am not sure if there would be other uses of having to
+allocate anything other than RAM addresses by LMB.
+
+-sughosh
+
+
 >
-> >
-> > Why do we map the memory in this notification function first hand?
->
-> Because the memory was added as such in efi_allocate_pages(). So for
-> sandbox we need to find the correct virtual memory that was added.
->
-> > Can't
-> > we use len = 0 when calling map_sysmem()?
->
-> We are using len = 0. But I am not following up on how could this
-> help. All you will get is a warning for sanbox if a pci device mapped
-> more that 0.
->
-> Thanks
-> /Ilias
->
-> >
-> > I guess we have to critically review all map_sysmem() calls.
-> >
-> > Best regards
-> >
-> > Heinrich
-> >
-> > >
-> > >       return 0;
-> > >   }
-> >
+> Janne
