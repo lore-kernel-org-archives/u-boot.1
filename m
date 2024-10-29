@@ -4,51 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DB73D2AB0A
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 09:35:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D44E6D2AB0E
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 09:47:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5844890CE;
-	Tue, 29 Oct 2024 10:35:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 1675A88D3A;
+	Tue, 29 Oct 2024 10:47:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="KGDoEaZv";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1FD28910C; Tue, 29 Oct 2024 10:35:24 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
+ id 6606488D3A; Tue, 29 Oct 2024 10:47:27 +0100 (CET)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 507F38904E
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 10:35:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id 352B288D06
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 10:47:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 49T9ZA3M047964
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Tue, 29 Oct 2024 17:35:10 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 29 Oct
- 2024 17:35:10 +0800
-Date: Tue, 29 Oct 2024 17:35:04 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <rick@andestech.com>
-Subject: Re: [GIT PULL] u-boot-riscv/next
-Message-ID: <ZyCr3a8I52q1gkfZ@swlinux02>
-References: <Zx-C0_rHzfNmG-yt@swlinux02> <20241028152010.GP4959@bill-the-cat>
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: c763c50895da11efbd192953cf12861f-20241029
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=RtdadpyNrVX4AKXxHHsBC9MyQHkIolMRUXiLmh/JYbA=; 
+ b=KGDoEaZvgOZtbfNuRqETu82EWv8ISsUkork8DhOeR5FTni0RcppwSmpGHc1AHWrLgPVpIEhWtaj34V4F46gdCZIAY49wAw9f6bEJn0NhTKaqCdi8sfX5P4hxxwi+tFl1BUek05SiTRTpzCuh5FtX1WCoyUkeFjem8NxrFD/4s6w=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.42, REQID:6fb1ac27-304d-47cd-89a9-a55d4af93134, IP:0,
+ U
+ RL:0,TC:0,Content:12,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+ :release,TS:12
+X-CID-META: VersionHash:b0fcdc3, CLOUDID:35c63ae7-cb6b-4a59-bfa3-98f245b4912e,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:4,EDM:-3,IP:nil,U
+ RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
+ SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: c763c50895da11efbd192953cf12861f-20241029
+Received: from mtkmbs14n2.mediatek.inc [(172.21.101.76)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 656609621; Tue, 29 Oct 2024 17:47:15 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Tue, 29 Oct 2024 17:47:13 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Tue, 29 Oct 2024 17:47:13 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, Daniel
+ Golle <daniel@makrotopia.org>, John Crispin <john@phrozen.org>, Simon Glass
+ <sjg@chromium.org>, Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH v2 1/3] menu: fix the logic checking whether ESC key is pressed
+Date: Tue, 29 Oct 2024 17:47:10 +0800
+Message-ID: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20241028152010.GP4959@bill-the-cat>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 49T9ZA3M047964
+Content-Type: text/plain
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,53 +85,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+It's observed that the bootmenu on a serial console sometimes
+incorrectly quitted with superfluous characters filled to command
+line input:
 
-On Mon, Oct 28, 2024 at 09:20:10AM -0600, Tom Rini wrote:
-> [EXTERNAL MAIL]
-> Date: Mon, 28 Oct 2024 09:20:10 -0600
-> From: Tom Rini <trini@konsulko.com>
-> To: Leo Liang <ycliang@andestech.com>
-> Cc: u-boot@lists.denx.de, rick@andestech.com
-> Subject: Re: [GIT PULL] u-boot-riscv/next
-> 
-> On Mon, Oct 28, 2024 at 08:25:55PM +0800, Leo Liang wrote:
-> > Hi Tom,
-> > 
-> > The following changes since commit 28dc47038edc4e93f32d75a357131bcf01a18d85:
-> > 
-> >   Merge branch 'u-boot-nand-20241005' of https://gitlab.denx.de/u-boot/custodians/u-boot-nand-flash into next (2024-10-05 11:19:24 -0600)
-> > 
-> > are available in the Git repository at:
-> > 
-> >   https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
-> > 
-> > for you to fetch changes up to f07daa5967f65771f90221ee9bfad9814e549647:
-> > 
-> >   riscv: mbv: Align DT with QEMU (2024-10-28 17:49:25 +0800)
-> > 
-> > CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/23049
-> > 
-> > ----------------------------------------------------------------
-> > Michal Simek (1):
-> >       riscv: mbv: Align DT with QEMU
-> > 
-> >  arch/riscv/dts/xilinx-mbv32.dts | 30 ++++++++++--------------------
-> >  board/xilinx/mbv/Kconfig        |  6 +++---
-> >  configs/xilinx_mbv32_defconfig  | 12 ++++++------
-> >  3 files changed, 19 insertions(+), 29 deletions(-)
-> 
-> Why is this for -next and not master? We're not so far in to the cycle
-> that next is open, and this seems clear enough to pull in today. Thanks.
-> 
-> -- 
-> Tom
+>  *** U-Boot Boot Menu ***
+>
+>      1. Startup system (Default)
+>      2. Upgrade firmware
+>      3. Upgrade ATF BL2
+>      4. Upgrade ATF FIP
+>      5. Load image
+>      0. U-Boot console
+>
+>
+>  Press UP/DOWN to move, ENTER to select, ESC to quit
+>MT7988> [B
 
+Analysis shows it was caused by the wrong logic of bootmenu_loop:
 
-Michal said that this patch might have to wait for its counterpart in QEMU be merged.
-(https://lore.kernel.org/all/20241017072507.4033413-1-sai.pavan.boddu@amd.com/)
-But like you said, this seems clear enough for master. I will create another PR for this patch. 
-Thanks!
+At first the bootmenu_loop received the first ESC char correctly.
 
-Best regards,
-Leo
+However, during the second call to bootmenu_loop, there's no data
+in the UART Rx FIFO. Due to the low baudrate, the second char of
+the down array key sequence hasn't be fully received.
+
+But bootmenu_loop just did a mdelay(10), and then treated it as a
+single ESC key press event. It didn't even try tstc() again after
+the 10ms timeout.
+
+This patch fixes this issue by letting bootmenu_loop check tstc()
+twice.
+
+Tested-By: E Shattow <lucent@gmail.com>
+Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+---
+ common/menu.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/common/menu.c b/common/menu.c
+index 8cc9bf06d9c..48ab7f0f398 100644
+--- a/common/menu.c
++++ b/common/menu.c
+@@ -525,14 +525,15 @@ enum bootmenu_key bootmenu_loop(struct bootmenu_data *menu,
+ 				struct cli_ch_state *cch)
+ {
+ 	enum bootmenu_key key;
+-	int c;
++	int c, errchar = 0;
+ 
+ 	c = cli_ch_process(cch, 0);
+ 	if (!c) {
+ 		while (!c && !tstc()) {
+ 			schedule();
+ 			mdelay(10);
+-			c = cli_ch_process(cch, -ETIMEDOUT);
++			c = cli_ch_process(cch, errchar);
++			errchar = -ETIMEDOUT;
+ 		}
+ 		if (!c) {
+ 			c = getchar();
+-- 
+2.45.2
+
