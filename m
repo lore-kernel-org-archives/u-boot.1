@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B70D3A66D
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 16:06:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96ED2D3A672
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 16:36:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B54C289174;
-	Tue, 29 Oct 2024 17:06:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D001F8887A;
+	Tue, 29 Oct 2024 17:36:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ArIqCrSt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BMxj6LdX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9701F8917E; Tue, 29 Oct 2024 17:06:01 +0100 (CET)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 511CD88E81; Tue, 29 Oct 2024 17:36:49 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFAB688EF7
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 17:05:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 337818857C
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 17:36:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2f7657f9f62so48960421fa.3
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 09:05:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6d18dff41cdso16679696d6.0
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 09:36:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730217959; x=1730822759; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UEo/ihWjxrIg/uLX6NcmFdLWWqNiJtRL/o0PNRZBClU=;
- b=ArIqCrStIsH8qz95pRl6Cy6LvnX35OPKoOf+F+b2m8xFiFrf1tv07u2y+0dCQvNp/b
- 4jKn4/xyakCS+vz4mXbKGWO0VuWyNwSwX1YqUdAHgqLwYjxUAIP/1lGQBLb1TtHvB2y0
- UtA4aNRrhaPvq4f0wPGtmBcfU2/hao9yACRXBIHCAidf+XzfIro48V09WDmNUxCNylxc
- iTYBd/yNzVZ1YkQbaK6nb9WEFIHKH9J3N+gp9K6X4uDee+xhUy+zT8nyVTiLLB891QGY
- M/HiBX2WplNNMsl/SS+Xq3YZcgI1P4s9Tk/xDznaQWphmvA1ya6mjftsFsQGTg2q2020
- VYFQ==
+ d=konsulko.com; s=google; t=1730219806; x=1730824606; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TkYUAWQontgHuVf56xMZra4BkkM8CN5V96LdS/wAmec=;
+ b=BMxj6LdX9gJ9XOFcO+/hmutEMgfDY1d8rIF1GgIDx1G5ANAlpEmIKx7o5J0zwxdCRK
+ 6/E4ZRpAyT2cYJ3p82KGguVyCmMO7M0wZtn4sjMMa0paGLM6Hc5c04tK0hyg0HjN7Jar
+ vjUSRjl5awou826x5lLyFpmnjaYsQDa6EBiyA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730217959; x=1730822759;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UEo/ihWjxrIg/uLX6NcmFdLWWqNiJtRL/o0PNRZBClU=;
- b=VYaxxwlgt5yCJOjxmtlL1nqG8lTbDlM4JT48IsAWfkRdZdiLqDKVx6gxhXoXYCWwkI
- c3hV/vQZBesKF/Ct33XVywOAPYywNp7MAlSPCxusCIZzfbNZm1ocTYJLa8p5m/3EeSWB
- i99Z0jaNAvCgn9DwoyZMByEF1LzBsVhE7wsPwLBbQZlSvBHB2Y+ENaKFppYzPx6tzCBH
- YPLRvLN/3jnSmFxJDlaZ5yxVIocR+yyF/ojNVmOx9coZeDU+SxYVp79OG67JWBr3UbUq
- wgi5QlIDLOGy/RFvBzRHdb+noOsTqk3zHM5aqH+x1a1ANGvxJ9zTkmX3XNk33m8kC8+6
- 2boA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZnROU7bEe+XUoJXu+1sahv0WFjyPEMRuBGuQKvidAXy8+l/0+giKtEo0NTJbUnjap4eFsFUY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw/xckNXwfDj42+/befjsnUurTG9cCt+RVJp0eb10LvJH+ULp6Y
- hbQJM/gSx5hCaDfjDFzpwdJ+giF0QYvIOhm8y5b9L4kPgvJYHLFz9PT/zqxDlISkLJoLJoN5ow3
- lQnmY9AIBVyaHAaiqg30fIStgrwg=
-X-Google-Smtp-Source: AGHT+IEbqyXtDXmxMG0mVkKr1FCJ6/OFhKvQzS9dKLTsb9kqLRZtfyPEzTE6rVcEsK5tpwvW4kzQEAseDjG8qoyKGao=
-X-Received: by 2002:a05:651c:50b:b0:2f9:cc40:6afe with SMTP id
- 38308e7fff4ca-2fcbdfae574mr63902441fa.14.1730217958603; Tue, 29 Oct 2024
- 09:05:58 -0700 (PDT)
-MIME-Version: 1.0
-References: <20241007130109.227305-1-brian.ruley@gehealthcare.com>
- <20241021073749.63-1-brian.ruley@gehealthcare.com>
- <20241021073749.63-2-brian.ruley@gehealthcare.com>
- <CAFLszTiVrdqvixoKH4nhTadcVOFo0TJ9kFTjDish3ZBuh-YgGw@mail.gmail.com>
-In-Reply-To: <CAFLszTiVrdqvixoKH4nhTadcVOFo0TJ9kFTjDish3ZBuh-YgGw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 29 Oct 2024 13:05:46 -0300
-Message-ID: <CAOMZO5C2q3EUAT3VJrtA5Mkk4fnOa7gz-cJcXRKbFwatAcm2OQ@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] binman: expand test coverage to nxp_imx8mcst
+ d=1e100.net; s=20230601; t=1730219806; x=1730824606;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TkYUAWQontgHuVf56xMZra4BkkM8CN5V96LdS/wAmec=;
+ b=TD40Slr5VFZ+9LdqLnSdP+ToZYye1HJ+WQlrfY/ETAnh8WoOK6GValxMDdJBBbrBPF
+ 0YNhtS9Q/dYCvk/wLPSDb7RA8cb4XM2yAhEGQGzovL0dz7tiJEJWiEyu7KJSmJjlwnWT
+ dkI3i7bkAGYHa3aEwsy+MyI3vfACou/NnsSQjJHCC3eaIbwxN/W7bxn9vts5PQM4D6Sk
+ HXUKB+AlvIo5bZN+T43qqL6HX0jj8vu3tX/l/eygNpxdo+Q61irEE7ZUOuBZgnn1y4Ns
+ ZhP0sXDPUJOW2D8Z9fRR+n6l1eQD1rVPDXzkpKqV/rlBicjCSFGUcub73amYq4Qr3un+
+ 42TA==
+X-Gm-Message-State: AOJu0Yxloib3HC0J3Vs6J44NqlKW/HxcBrKSPnDDBczWcj8XE5Ecioao
+ Tpis4SkPyn/s6iQmaOBIq6RYMFPcY6/f7vt6GOZHnElN7X9EKYUFHWkbB32hfKU=
+X-Google-Smtp-Source: AGHT+IGcJp0aYQvnDaOFhpEgpbrpJu9YOJPWOKVQ6VKq7uy5SSLptWxT1glBT0OA6pzGeisQmS7DnQ==
+X-Received: by 2002:a05:6214:319f:b0:6d1:7630:fd01 with SMTP id
+ 6a1803df08f44-6d1856f3a86mr151305266d6.25.1730219805845; 
+ Tue, 29 Oct 2024 09:36:45 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d1798a8448sm43465476d6.38.2024.10.29.09.36.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Oct 2024 09:36:45 -0700 (PDT)
+Date: Tue, 29 Oct 2024 10:36:42 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Brian Ruley <brian.ruley@gehealthcare.com>, Tom Rini <trini@konsulko.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, ian.ray@gehealthcare.com,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: Re: [PATCH 03/21] bloblist: test: doc: Move into the common suite
+Message-ID: <20241029163642.GA4959@bill-the-cat>
+References: <20241028124130.32072-1-sjg@chromium.org>
+ <20241028124130.32072-4-sjg@chromium.org>
+ <20241028193310.GS4959@bill-the-cat>
+ <CAFLszTgHHgBPByBdBxGWPpJ0tTkoTfZ=aN3MY80mFBR+CujvLw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="RExodshF3OsyVBWr"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgHHgBPByBdBxGWPpJ0tTkoTfZ=aN3MY80mFBR+CujvLw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,11 +95,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Brian,
 
-On Tue, Oct 29, 2024 at 12:52=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
-te:
+--RExodshF3OsyVBWr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Could you please rebase on -master and resend?
+On Tue, Oct 29, 2024 at 04:45:40PM +0100, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Mon, 28 Oct 2024 at 20:33, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Oct 28, 2024 at 01:41:08PM +0100, Simon Glass wrote:
+> >
+> > > There is no particular need for bloblist to have its own test suite.
+> > > Move it into the common suite instead.
+> > >
+> > > Add the missing help for 'common' and update the docs.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> >
+> > This feels both like churn and weird. I would think "common" tests are
+> > for things that are kinda legacy and too catch-all to have their own
+> > subgroup.
+>=20
+> It's just chosen so that the test for common/ is in test/common - i.e.
+> it makes it easier for people to find it.
 
-Please copy me on v4, thanks.
+Then I really don't understand renaming bloblist from something
+descriptive to common which is not.
+
+> BTW this series removes all tests from test/*.c and moves them into
+> appropriate subdirs. Some of the tests are quite old so have just sat
+> there all these years.
+
+This is good, yes. But perhaps needs a bit more thought then about how
+strong a mapping between filename/directory structure and test suite
+name there needs to be.
+
+--=20
+Tom
+
+--RExodshF3OsyVBWr
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmchDxIACgkQFHw5/5Y0
+tyznlQv/SSd83E1FzY4WQ820kmJIcdPaGOJSFQn+j1/jB+1kKPBuPelpzUOJHIGc
+DyfGOPQd2jZ8lDVCaH5MZ4QrpPx5lBMK+usoVpgusM/a0xnM662oyIJ9jO6I2v+K
+8vhjTRGbW04nHsqXVDknUNOx42I2gi2pyxGKrj4gOSQ4vIiUjARFM2CAmbi+Ud1n
+xbusMNWk3VPkvyLdY+rd/g//1nt+K0pEQgrsF2tIhG92md7P4355ddihnlig9uVC
+0H4OZTILOou4db/tEKapo42USoDXQxFtoRjtKySy3PRBZAG95Sy6cQmdxANzQSab
+yxm2zrrBqTawhto9dyDNxDlTS6u9v9Ieqt/mmkCDVCNNtj/Rp2d2MoYyrgomJt+2
+rvyRR3mlc4heAQuOLvImbe9xBiiFlIqUqVsBFDQMkXtXhHwsYTMkXxGphGToS1xa
+mGEYg0G+/S7eMQWyuql+Lzf8HvymWOIOzWB4nNTee7eICEWEGvsV+Em5+S6aTHsX
+ZLoFuZeo
+=blH9
+-----END PGP SIGNATURE-----
+
+--RExodshF3OsyVBWr--
