@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 900B6D3A692
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 19:23:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5BF2D3A696
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 19:23:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E62DA89197;
-	Tue, 29 Oct 2024 20:22:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A97B891AA;
+	Tue, 29 Oct 2024 20:22:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aHSmcH3J";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Lc1N22Ei";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C65B89197; Tue, 29 Oct 2024 20:22:38 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id D8948891A8; Tue, 29 Oct 2024 20:22:40 +0100 (CET)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BD6F891AA
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 20:22:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D7E39891B6
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 20:22:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9a16b310f5so900523266b.0
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 12:22:36 -0700 (PDT)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2fb5638dd57so54021381fa.0
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 12:22:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730229755; x=1730834555; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730229757; x=1730834557; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8rHSz2fsMRcdSxbd3sELN6bnU3Y/7BPLKxZ5AJpMA8s=;
- b=aHSmcH3JeiFtke0JS0599VYhH0RR0VvEhFLfvhJMTpEwCyGz1i6UDDvD5AOw1hiAIn
- l+YM2QR0MhDIZpSjSBQsMHmbQ9JReV4SpltfgbnUYTg4VUNo0J/f9CaVqEpHgxypafoz
- 5n3VJkKKkkDY2Cswjr4JVlHb+qOjRgFMCHCOc=
+ bh=ofGwYljnh2oh1BIgJMhD1YAKquGpAWcsW2USCwLdKmw=;
+ b=Lc1N22EiUFuBae/niGFjNlZQxhx2YR9LU9bswGBUAqthD4Unsfmbu4EZMU1weEhax0
+ /g79TUYYs/R58Vxpq95MO9Y4dakJ3XVs4vWp1ifHE1jEMx4T+pFVUtzdwVUkEtGUNnQd
+ +9PyQrBZDXo9XT4Vd7lk2tFzxl+jN0FWmaj9o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730229755; x=1730834555;
+ d=1e100.net; s=20230601; t=1730229757; x=1730834557;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8rHSz2fsMRcdSxbd3sELN6bnU3Y/7BPLKxZ5AJpMA8s=;
- b=eVpm1PDncHFEQPvnuQbDIvuRR9pDyG79Tq7OkqW1qrx0a8R5bAzZad47yP9+voYUjF
- Eh9qLoRDIdN9ZbGVPAlAu7XpPNOsjfUjp+G4NMy3LcLWlUbeS3+YkNi4n7pzuBvRCKvZ
- DnEcD1G/k19zZSY9YRhN2P+x29T4wgwObuPQ9IMYsrY7iPp1ZksYzS2siPEH8ioUrROo
- 46aLq/FPlTYrkt3Oh/B0bSkKWWfG56Yd6nmtLglaiAg9GTDdR7bpAPQEkXgr9/cNuQQ8
- BsOljBfa+EznG4zu4QuD52jyHENjwYjoSTVx8dWLdlwewErH8l+2an9Eg4TzFKmoEHv7
- 2Vaw==
-X-Gm-Message-State: AOJu0YyokhAGkgJ8nG8FpV2ZG6frbX2Ztp41xKrtW/8STtHcg5HtRZ0a
- YMc9Tg1DTo0bT26Q1bvsfEiqA5tyax+vHpCfD9O2YamQr+kU+GtBT81gAotNDZPzND9k400kmxI
- 4bOEx
-X-Google-Smtp-Source: AGHT+IGGVcSkEd7t9rT8F6VGHFgIKen1u2SMkcc07W6YHBv1Ja+TuT0Xdz/WXai+GHD5i09i1ZI3DA==
-X-Received: by 2002:a17:906:c105:b0:a9a:10c9:f4b8 with SMTP id
- a640c23a62f3a-a9de62eaf3dmr1280177266b.61.1730229755144; 
- Tue, 29 Oct 2024 12:22:35 -0700 (PDT)
+ bh=ofGwYljnh2oh1BIgJMhD1YAKquGpAWcsW2USCwLdKmw=;
+ b=QsaDCMatjei74Vv6VJCtQP5GoqIkv3O22kTMpwYlu8XtQOejEasY7vt66z8QKm5C4n
+ UpkScBDM2UDB601ULY7XJnooJmMm3OcZs8U2UM1CkEVvmtDLlizK9z5BMSpj2CVqNdRQ
+ K75u1ZCS816YooDd3ifvzMP1PMLsstyIX03H2s3pbxYhw8HB8njqHCtFngu7fEiCYprU
+ BdXPuW4VXrNTei4fXrXtmMGi16mD7u1qT9D0XN0v8d8ltcBkxAzD1+Cf31g4x6FMHfS8
+ kTsfGAhOy60S1WmzpT6OQSNWYw7CQTTeCKSKbkucZRs/STzvEV+ipDkniLvK6T+KqWio
+ 5r4w==
+X-Gm-Message-State: AOJu0YwwxBuegPVH6xmKbKZEarNNvPG+D/iuN3CPi0f8o2YHhTxCpqk/
+ ApJJekEh9BqqfdwRL3pxiePiKJ42l97qjRCyj/U5SnYM3VVPCOptKpzoUdEIQdhtnz4PKKkmMGr
+ tp25h
+X-Google-Smtp-Source: AGHT+IHZP39/O86qQ7M3X4FkoFZUqo13U8/8+XNKJkHf9bQILkpmyZVrNnuGbyR/vuBs4lbno+WbHA==
+X-Received: by 2002:a2e:812:0:b0:2fc:ba7a:c982 with SMTP id
+ 38308e7fff4ca-2fcbe07bbd9mr52661751fa.36.1730229756516; 
+ Tue, 29 Oct 2024 12:22:36 -0700 (PDT)
 Received: from chromium.org ([87.215.50.114]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cbb629f65esm4272770a12.36.2024.10.29.12.22.33
+ 4fb4d7f45d1cf-5cbb629f65esm4272770a12.36.2024.10.29.12.22.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Oct 2024 12:22:33 -0700 (PDT)
+ Tue, 29 Oct 2024 12:22:35 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -71,9 +71,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH v9 04/11] efi: Move default filename to a function
-Date: Tue, 29 Oct 2024 20:22:12 +0100
-Message-ID: <20241029192222.362445-5-sjg@chromium.org>
+Subject: [PATCH v9 05/11] efi_loader: Move get_efi_pxe_arch() to efi_helper
+Date: Tue, 29 Oct 2024 20:22:13 +0100
+Message-ID: <20241029192222.362445-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241029192222.362445-1-sjg@chromium.org>
 References: <20241029192222.362445-1-sjg@chromium.org>
@@ -95,253 +95,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use a function to obtain the device EFI filename, so that we can control
-how sandbox behaves.
+Move this function from the EFI bootmeth to the common efi_helper file.
+No functional change is intended.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v9:
-- Move the function into efi_helper.c
+- Split out into a separate change
 
-Changes in v8:
-- Add new patch to move default filename to a function
-
- boot/bootmeth_efi.c            |  4 +--
- include/efi.h                  |  9 ++++++
- include/efi_default_filename.h | 56 ----------------------------------
- lib/efi_loader/efi_bootmgr.c   | 10 ++++--
- lib/efi_loader/efi_helper.c    | 45 +++++++++++++++++++++++++++
- test/boot/bootflow.c           |  7 +++--
- 6 files changed, 67 insertions(+), 64 deletions(-)
- delete mode 100644 include/efi_default_filename.h
+ boot/bootmeth_efi.c         | 25 ++-----------------------
+ include/efi.h               | 10 ++++++++++
+ lib/efi_loader/efi_helper.c | 23 +++++++++++++++++++++++
+ 3 files changed, 35 insertions(+), 23 deletions(-)
 
 diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index 2ad6d3b4ace..371b36d550b 100644
+index 371b36d550b..f836aa655f5 100644
 --- a/boot/bootmeth_efi.c
 +++ b/boot/bootmeth_efi.c
-@@ -13,7 +13,7 @@
- #include <bootmeth.h>
- #include <command.h>
- #include <dm.h>
--#include <efi_default_filename.h>
-+#include <efi.h>
- #include <efi_loader.h>
- #include <fs.h>
- #include <malloc.h>
-@@ -168,7 +168,7 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
- 	}
+@@ -25,32 +25,11 @@
  
- 	strcpy(fname, EFI_DIRNAME);
--	strcat(fname, BOOTEFI_NAME);
-+	strcat(fname, efi_get_basename());
+ #define EFI_DIRNAME	"/EFI/BOOT/"
  
- 	if (bflow->blk)
- 		 desc = dev_get_uclass_plat(bflow->blk);
+-static int get_efi_pxe_arch(void)
+-{
+-	/* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xml */
+-	if (IS_ENABLED(CONFIG_ARM64))
+-		return 0xb;
+-	else if (IS_ENABLED(CONFIG_ARM))
+-		return 0xa;
+-	else if (IS_ENABLED(CONFIG_X86_64))
+-		return 0x6;
+-	else if (IS_ENABLED(CONFIG_X86))
+-		return 0x7;
+-	else if (IS_ENABLED(CONFIG_ARCH_RV32I))
+-		return 0x19;
+-	else if (IS_ENABLED(CONFIG_ARCH_RV64I))
+-		return 0x1b;
+-	else if (IS_ENABLED(CONFIG_SANDBOX))
+-		return 0;	/* not used */
+-
+-	return -EINVAL;
+-}
+-
+ static int get_efi_pxe_vci(char *str, int max_len)
+ {
+ 	int ret;
+ 
+-	ret = get_efi_pxe_arch();
++	ret = efi_get_pxe_arch();
+ 	if (ret < 0)
+ 		return ret;
+ 
+@@ -239,7 +218,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+ 	ret = get_efi_pxe_vci(str, sizeof(str));
+ 	if (ret)
+ 		return log_msg_ret("vci", ret);
+-	ret = get_efi_pxe_arch();
++	ret = efi_get_pxe_arch();
+ 	if (ret < 0)
+ 		return log_msg_ret("arc", ret);
+ 	arch = ret;
 diff --git a/include/efi.h b/include/efi.h
-index f7419b80d4d..fef88e9c5d6 100644
+index fef88e9c5d6..633f5b4acb5 100644
 --- a/include/efi.h
 +++ b/include/efi.h
-@@ -670,4 +670,13 @@ int efi_get_mmap(struct efi_mem_desc **descp, int *sizep, uint *keyp,
+@@ -679,4 +679,14 @@ void efi_show_tables(struct efi_system_table *systab);
   */
- void efi_show_tables(struct efi_system_table *systab);
+ const char *efi_get_basename(void);
  
 +/**
-+ * efi_get_basename() - Get the default filename to use when loading
++ * efi_get_pxe_arch() - Get the architecture value for PXE
 + *
-+ * E.g. this function returns BOOTAA64.EFI for an aarch target
++ * See:
++ * http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xml
 + *
-+ * Return: Default EFI filename
++ * Return: Architecture value
 + */
-+const char *efi_get_basename(void);
++int efi_get_pxe_arch(void);
 +
  #endif /* _LINUX_EFI_H */
-diff --git a/include/efi_default_filename.h b/include/efi_default_filename.h
-deleted file mode 100644
-index 77932984b55..00000000000
---- a/include/efi_default_filename.h
-+++ /dev/null
-@@ -1,56 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * When a boot option does not provide a file path the EFI file to be
-- * booted is \EFI\BOOT\$(BOOTEFI_NAME).EFI. The architecture specific
-- * file name is defined in this include.
-- *
-- * Copyright (c) 2022, Heinrich Schuchardt <xypron.glpk@gmx.de>
-- * Copyright (c) 2022, Linaro Limited
-- */
--
--#ifndef _EFI_DEFAULT_FILENAME_H
--#define _EFI_DEFAULT_FILENAME_H
--
--#include <host_arch.h>
--
--#undef BOOTEFI_NAME
--
--#ifdef CONFIG_SANDBOX
--
--#if HOST_ARCH == HOST_ARCH_X86_64
--#define BOOTEFI_NAME "BOOTX64.EFI"
--#elif HOST_ARCH == HOST_ARCH_X86
--#define BOOTEFI_NAME "BOOTIA32.EFI"
--#elif HOST_ARCH == HOST_ARCH_AARCH64
--#define BOOTEFI_NAME "BOOTAA64.EFI"
--#elif HOST_ARCH == HOST_ARCH_ARM
--#define BOOTEFI_NAME "BOOTARM.EFI"
--#elif HOST_ARCH == HOST_ARCH_RISCV32
--#define BOOTEFI_NAME "BOOTRISCV32.EFI"
--#elif HOST_ARCH == HOST_ARCH_RISCV64
--#define BOOTEFI_NAME "BOOTRISCV64.EFI"
--#else
--#error Unsupported UEFI architecture
--#endif
--
--#else
--
--#if defined(CONFIG_ARM64)
--#define BOOTEFI_NAME "BOOTAA64.EFI"
--#elif defined(CONFIG_ARM)
--#define BOOTEFI_NAME "BOOTARM.EFI"
--#elif defined(CONFIG_X86_64)
--#define BOOTEFI_NAME "BOOTX64.EFI"
--#elif defined(CONFIG_X86)
--#define BOOTEFI_NAME "BOOTIA32.EFI"
--#elif defined(CONFIG_ARCH_RV32I)
--#define BOOTEFI_NAME "BOOTRISCV32.EFI"
--#elif defined(CONFIG_ARCH_RV64I)
--#define BOOTEFI_NAME "BOOTRISCV64.EFI"
--#else
--#error Unsupported UEFI architecture
--#endif
--
--#endif
--
--#endif
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 431a38704e9..2ea20909491 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -11,10 +11,10 @@
- #include <blkmap.h>
- #include <charset.h>
- #include <dm.h>
-+#include <efi.h>
- #include <log.h>
- #include <malloc.h>
- #include <net.h>
--#include <efi_default_filename.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
- #include <asm/unaligned.h>
-@@ -82,8 +82,12 @@ struct efi_device_path *expand_media_path(struct efi_device_path *device_path)
- 				 &efi_simple_file_system_protocol_guid, &rem);
- 	if (handle) {
- 		if (rem->type == DEVICE_PATH_TYPE_END) {
--			full_path = efi_dp_from_file(device_path,
--						     "/EFI/BOOT/" BOOTEFI_NAME);
-+			char fname[30];
-+
-+			snprintf(fname, sizeof(fname), "/EFI/BOOT/%s",
-+				 efi_get_basename());
-+			full_path = efi_dp_from_file(device_path, fname);
-+
- 		} else {
- 			full_path = efi_dp_dup(device_path);
- 		}
 diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index 00167bd2a10..51e0c4852c5 100644
+index 51e0c4852c5..b8ece1c2e0c 100644
 --- a/lib/efi_loader/efi_helper.c
 +++ b/lib/efi_loader/efi_helper.c
-@@ -12,18 +12,63 @@
- #include <mapmem.h>
- #include <dm.h>
- #include <fs.h>
-+#include <efi.h>
- #include <efi_api.h>
- #include <efi_load_initrd.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
-+#include <host_arch.h>
+@@ -21,6 +21,8 @@
  #include <linux/libfdt.h>
  #include <linux/list.h>
  
-+#ifdef CONFIG_SANDBOX
++#undef BOOTEFI_NAME
 +
-+#if HOST_ARCH == HOST_ARCH_X86_64
-+#define BOOTEFI_NAME "BOOTX64.EFI"
-+#elif HOST_ARCH == HOST_ARCH_X86
-+#define BOOTEFI_NAME "BOOTIA32.EFI"
-+#elif HOST_ARCH == HOST_ARCH_AARCH64
-+#define BOOTEFI_NAME "BOOTAA64.EFI"
-+#elif HOST_ARCH == HOST_ARCH_ARM
-+#define BOOTEFI_NAME "BOOTARM.EFI"
-+#elif HOST_ARCH == HOST_ARCH_RISCV32
-+#define BOOTEFI_NAME "BOOTRISCV32.EFI"
-+#elif HOST_ARCH == HOST_ARCH_RISCV64
-+#define BOOTEFI_NAME "BOOTRISCV64.EFI"
-+#else
-+#error Unsupported UEFI architecture
-+#endif
-+
-+#else
-+
-+#if defined(CONFIG_ARM64)
-+#define BOOTEFI_NAME "BOOTAA64.EFI"
-+#elif defined(CONFIG_ARM)
-+#define BOOTEFI_NAME "BOOTARM.EFI"
-+#elif defined(CONFIG_X86_64)
-+#define BOOTEFI_NAME "BOOTX64.EFI"
-+#elif defined(CONFIG_X86)
-+#define BOOTEFI_NAME "BOOTIA32.EFI"
-+#elif defined(CONFIG_ARCH_RV32I)
-+#define BOOTEFI_NAME "BOOTRISCV32.EFI"
-+#elif defined(CONFIG_ARCH_RV64I)
-+#define BOOTEFI_NAME "BOOTRISCV64.EFI"
-+#else
-+#error Unsupported UEFI architecture
-+#endif
-+
-+#endif
-+
- #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI_LOAD_FILE2_INITRD)
- /* GUID used by Linux to identify the LoadFile2 protocol with the initrd */
- const efi_guid_t efi_lf2_initrd_guid = EFI_INITRD_MEDIA_GUID;
- #endif
+ #ifdef CONFIG_SANDBOX
  
-+const char *efi_get_basename(void)
+ #if HOST_ARCH == HOST_ARCH_X86_64
+@@ -69,6 +71,27 @@ const char *efi_get_basename(void)
+ 	return BOOTEFI_NAME;
+ }
+ 
++int efi_get_pxe_arch(void)
 +{
-+	return BOOTEFI_NAME;
++	/* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xml */
++	if (IS_ENABLED(CONFIG_ARM64))
++		return 0xb;
++	else if (IS_ENABLED(CONFIG_ARM))
++		return 0xa;
++	else if (IS_ENABLED(CONFIG_X86_64))
++		return 0x6;
++	else if (IS_ENABLED(CONFIG_X86))
++		return 0x7;
++	else if (IS_ENABLED(CONFIG_ARCH_RV32I))
++		return 0x19;
++	else if (IS_ENABLED(CONFIG_ARCH_RV64I))
++		return 0x1b;
++	else if (IS_ENABLED(CONFIG_SANDBOX))
++		return 0;	/* not used */
++
++	return -EINVAL;
 +}
 +
  /**
   * efi_create_current_boot_var() - Return Boot#### name were #### is replaced by
   *			           the value of BootCurrent
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 841729bd1ac..7cfb217088e 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -12,7 +12,7 @@
- #include <bootstd.h>
- #include <cli.h>
- #include <dm.h>
--#include <efi_default_filename.h>
-+#include <efi.h>
- #include <expo.h>
- #ifdef CONFIG_SANDBOX
- #include <asm/test.h>
-@@ -184,8 +184,9 @@ static int bootflow_cmd_scan_e(struct unit_test_state *uts)
- 	ut_assert_nextline("  3  efi          media   mmc          0  mmc1.bootdev.whole        ");
- 	ut_assert_nextline("     ** No partition found, err=-2: No such file or directory");
- 	ut_assert_nextline("  4  extlinux     ready   mmc          1  mmc1.bootdev.part_1       /extlinux/extlinux.conf");
--	ut_assert_nextline("  5  efi          fs      mmc          1  mmc1.bootdev.part_1       /EFI/BOOT/"
--			   BOOTEFI_NAME);
-+	ut_assert_nextline(
-+		"  5  efi          fs      mmc          1  mmc1.bootdev.part_1       /EFI/BOOT/%s",
-+		efi_get_basename());
- 
- 	ut_assert_skip_to_line("Scanning bootdev 'mmc0.bootdev':");
- 	ut_assert_skip_to_line(
 -- 
 2.43.0
 
