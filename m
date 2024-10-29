@@ -4,100 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28F2FD3A67C
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 18:34:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3646CD3A694
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 19:12:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37C198918A;
-	Tue, 29 Oct 2024 19:34:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7DFEF88DC6;
+	Tue, 29 Oct 2024 20:12:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pRCPzXx3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cftBp+7D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33B7A88E96; Tue, 29 Oct 2024 19:32:18 +0100 (CET)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id D2F1989185; Tue, 29 Oct 2024 20:12:37 +0100 (CET)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFE2488F12
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 19:32:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AFAD988F69
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 20:12:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-71e8235f0b6so4400620b3a.3
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 11:32:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-460ad98b031so37536741cf.0
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 12:12:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730226734; x=1730831534; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fkjt2SwGiLkbin6e5MFpst3blZNGMRjjQcHVS7Hi4Jo=;
- b=pRCPzXx3vJMXkEJTVJc4f4+xgsiKd569j+Wn5FOyCgSnZd2IucAtfBArGyYnUKXHBt
- nTdjv10Kwe1Rs2V3NEzHx8VQdhcm3qQ6x8F0r1T/fIi3V1ugVYFkcLzXmjGgzgX12zOe
- r8p8JNd3KrDXgH2Dq1J5aDybSaBn+RfuM4Nxkhaw+9AcX/3f/ba9CfMeefDdlwcC1Hnm
- Pb2pQntnGgwkOSZSAKLK5MQsrdzK5OxRojIcz8S8IEEkm7DO3y46Y/3c5bZO2yCd/Q/H
- 0Y/Xmp/ypRZKd91WC6crJvpUuQ96qk0fls164W6pIzDLAdJ5coMYRiUuiMxAkt+WCbkS
- 209g==
+ d=konsulko.com; s=google; t=1730229154; x=1730833954; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dq3NOkZymPx7CdqMv29snOsQsqY4VphTm2WK2py2irM=;
+ b=cftBp+7DxMx2YJIDkolGqU+DwEAQ+p0Nz3SMg5nyDGc6m3LN0Crrfnfk5GNv6DNDHO
+ OYViXjNg+4cA4UGJcjJvUHCMDEy3wVBpwboeAwVt0R/NFRJxvSx3oJZBc0fVJoksvv92
+ FurlastQwtZSsGgynRX/b6YTP4WHYidmXCWjY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730226734; x=1730831534;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fkjt2SwGiLkbin6e5MFpst3blZNGMRjjQcHVS7Hi4Jo=;
- b=QOA2rEiNsqcDYUpq+McP3N0RKAuzLzcAYeQlCQ0cZ+6U/Fzs+9dRj7PKA/7JwDl/uh
- UHARleK8wx+3cXyscmv08NAt0RC6PA8wxOnUp98C1KMVGwyNVAEiFZN6xXLfrmETVsfy
- TZXNkf8fTW82i89utMsavCRav/OeDYc3DKyJASkWLWS+wr9jWyqvDo63bbqlL8XCjLGb
- 7n87INFSvq660Zef8qfrJFsrYpqlFHK/ijcknL9PdJL/let0yyIsFtxowALcmyDITd5a
- i+55v/ovMinpxRqyLPzOOi88DUhJvw9SJQlyS4MbWhtz635HHqkc6uuxFv4rRMIeMzT/
- PdAw==
-X-Gm-Message-State: AOJu0YycK1kjmPWmjkI21/oHSBaqWOK5WPmkzyeZVzcl1Q1Pq/HZSlaG
- UPmKcglQwS5VduuljhiygKLbo3XA2md6X80kKAaRH8e5IgmrCAEKOaNKzg5lxBd9j/Q4QIyzxjA
- W/Svj+IykDr8bMg+Go29urBeoaqRm1Y/YPJBJSg==
-X-Google-Smtp-Source: AGHT+IE6Q4u1xrJyXnL060D5Im97BWoxTMcvSOapYIuIKXLKo2OUnB5r2O86Xeus2r98ixn3GnEJf5+Ud05AKrKsEiw=
-X-Received: by 2002:aa7:8891:0:b0:71e:44f6:6904 with SMTP id
- d2e1a72fcca58-72062fd9eb7mr17907080b3a.13.1730226734119; Tue, 29 Oct 2024
- 11:32:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1730229154; x=1730833954;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dq3NOkZymPx7CdqMv29snOsQsqY4VphTm2WK2py2irM=;
+ b=Hv+xRQJJcG5y8qLU6WmOSpPflYJVwCkghZYEMw12wUBS64x+h8IU5bJCjhp/be7vU+
+ w5/82Rw8oCkNquurofw1C2Nvqr/FwK8NxESEelTO+1l0t5aMBwts0hDjqnfpbD3JazX5
+ +zm4sQZIUUdeDIoLjD5Y5KBRpkNVlLACO4LEPljYn2XFjkg969N3Mq1oBdJRY4mG1IDT
+ 9QP1wHLxd3Gc733JIrgaVRlStwX5tgiYgY61reHAbwuXrs4a+JFKdC+n9dRsVbFHdwlw
+ D8jV0uQjTfccedP3MFebXqhWM9VYzm/nlEV834RXBmbE4h5nXkkN7KouWMj4Ue834IEc
+ FCug==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX2pkily4uks0G4o6UZzDsq9TTO5dyCVCVrtvFii7VdQmNw5XJa0z/fJGsXd8y6Babkh2E8lN0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzLAeVi8Mvdha9I4DGbaWn+OAlKTPtwrDN3HxjJ/zdZS1W5wPkj
+ bggrkFd7y9hBfMgRYt73n5L1yNE0qJK0bAtHQdrH8HnMNgFg2cqR1b3nzzZfF1U=
+X-Google-Smtp-Source: AGHT+IEJz7N8LrUZ9QiSPYdDSJmZtqgxmfwdIzo96nDE8d6xQdUx6tcbZuXenYagcbFaJpSfyR2DQw==
+X-Received: by 2002:a05:622a:148f:b0:461:1396:96fd with SMTP id
+ d75a77b69052e-4613c046cddmr187878381cf.25.1730229154518; 
+ Tue, 29 Oct 2024 12:12:34 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-461323a9640sm47345361cf.91.2024.10.29.12.12.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Oct 2024 12:12:33 -0700 (PDT)
+Date: Tue, 29 Oct 2024 13:12:30 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Vasileios Amoiridis <vassilisamir@gmail.com>
+Cc: michal.simek@amd.com, hs@denx.de, pro@denx.de, sjg@chromium.org,
+ vasileios.amoiridis@cern.ch, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 0/1] bootcount: zynqmp: Add bootcount API
+Message-ID: <20241029191230.GG4959@bill-the-cat>
+References: <20241029185814.7937-1-vassilisamir@gmail.com>
 MIME-Version: 1.0
-References: <20241028124815.47262-1-sjg@chromium.org>
- <CAC_iWjKtaN54B98OKbkoXkC_GmKJ=x+M4=UY_O6roSOpZaDxag@mail.gmail.com>
- <CAFLszTj9Dc-uF=GjSyxTue5Sw3ohUnDaAnAc5sz2dxfQ3gEuxw@mail.gmail.com>
-In-Reply-To: <CAFLszTj9Dc-uF=GjSyxTue5Sw3ohUnDaAnAc5sz2dxfQ3gEuxw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 29 Oct 2024 20:31:37 +0200
-Message-ID: <CAC_iWjJkAfJHp_NDXJMfNPe7OhBp6B_WBMxvwU_qHU5tamm6ZA@mail.gmail.com>
-Subject: Re: [PATCH 00/15] efi_loader: Add support for logging to a buffer
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>, 
- Emil Kronborg <emil.kronborg@protonmail.com>, 
- Etienne Carriere <etienne.carriere@foss.st.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
- Igor Prusov <ivprusov@salutedevices.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Levi Yun <yeoreum.yun@arm.com>, Marek Vasut <marex@denx.de>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Sean Anderson <seanga2@gmail.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, 
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Wei Ming Chen <jj251510319013@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Tue, 29 Oct 2024 19:34:43 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="wbOY02/RRTnFqVkb"
+Content-Disposition: inline
+In-Reply-To: <20241029185814.7937-1-vassilisamir@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,111 +91,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 29 Oct 2024 at 17:45, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Tue, 29 Oct 2024 at 10:58, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Mon, 28 Oct 2024 at 14:48, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > It is a bit of a pain to log EFI boot-services calls at present. The
-> > > output goes to the console so cannot easily be inspected later. Also it
-> > > would be useful to be able to store the log and review it later, perhaps
-> > > after something has gone wrong.
-> > >
-> > > This series makes a start on implementing a log-to-buffer feature. It
-> > > provides a simple 'efidebug log' command to inspect the buffer. For now,
-> > > only memory allocations are logged.
-> >
-> > Why is this problem specific to EFI and no U-Boot in general? Do we
-> > have a similar machinery for malloc()?
->
-> Mostly because an app can make EFI calls and we want to know what they
-> are, e.g. to debug them and figure out what might be wrong when
-> something doesn't boot.
 
-EFI_PRINT() has been proven pretty useful for this. I don't personally
-see the point of adding ~1300 lines of code to replace a print.
-What would make more sense is teach EFI_PRINT to log errors in a buffer.
+--wbOY02/RRTnFqVkb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Tue, Oct 29, 2024 at 07:58:13PM +0100, Vasileios Amoiridis wrote:
+> From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
+>=20
+> Add support for the bootcount API by utilizing the internal Persistent
+> Global General Registers of the PMU. These registers get reset whenever
+> there is a Power-On-Reset so it makes them suitable for the API.
+>=20
+> Questions towards reviewers:
+>=20
+> 	1) Is the licensing of the file ok?
 
-Thanks
-/Ilias
+Yes.
 
-/Ilias
->
-> Regards,
-> Simon
->
->
-> >
-> > Thanks
-> > /Ilias
-> > >
-> > > This feature makes it possible to add tests to check which EFI calls are
-> > > made by U-Boot itself. It may also make it easier to figure out what is
-> > > needed for booting Windows.
-> > >
-> > > Some patches to help with debugging sandbox memory-mapping are included,
-> > > but for now EFI's use of mapping is not adjusted.
-> > >
-> > >
-> > > Simon Glass (15):
-> > >   log: Add a new category for tests
-> > >   test: Allow saving and restoring the bloblist
-> > >   bloblist: test: Mark tests with UTF_BLOBLIST
-> > >   sandbox: Convert sb command to use new macro
-> > >   doc: sandbox: Add docs for the sb command
-> > >   sandbox: Add a way to show the sandbox memory-mapping
-> > >   sandbox: Fix comment for nomap_sysmem() function
-> > >   lmb: Drop extra 16KB of stack space
-> > >   efi_loader: Fix free in ..._media_device_boot_option()
-> > >   efi_loader: Add support for logging EFI calls
-> > >   efi_loader: Create the log on startup
-> > >   efi_loader: Add a command to show the EFI log
-> > >   test: efi_loader: Add a simple test for the EFI log
-> > >   efi_loader: Use the log with memory-related functions
-> > >   efi_loader: Add documentation for the EFI log
-> > >
-> > >  MAINTAINERS                    |   7 +
-> > >  arch/sandbox/cpu/cpu.c         |  13 +
-> > >  arch/sandbox/include/asm/cpu.h |   3 +
-> > >  arch/sandbox/include/asm/io.h  |   2 +-
-> > >  cmd/efidebug.c                 |  53 +++-
-> > >  cmd/sb.c                       |  42 ++--
-> > >  common/log.c                   |   1 +
-> > >  configs/sandbox_defconfig      |   3 +
-> > >  doc/develop/uefi/uefi.rst      |  22 ++
-> > >  doc/usage/cmd/efidebug.rst     | 109 ++++++++
-> > >  doc/usage/cmd/sb.rst           |  79 ++++++
-> > >  doc/usage/index.rst            |   2 +
-> > >  include/bloblist.h             |   1 +
-> > >  include/efi.h                  |   1 +
-> > >  include/efi_log.h              | 316 +++++++++++++++++++++++
-> > >  include/log.h                  |   2 +
-> > >  include/test/test.h            |   3 +
-> > >  lib/efi_loader/Kconfig         |  19 ++
-> > >  lib/efi_loader/Makefile        |   1 +
-> > >  lib/efi_loader/efi_bootmgr.c   |   3 +-
-> > >  lib/efi_loader/efi_log.c       | 444 +++++++++++++++++++++++++++++++++
-> > >  lib/efi_loader/efi_memory.c    | 119 ++++++---
-> > >  lib/efi_loader/efi_setup.c     |   7 +
-> > >  lib/lmb.c                      |   2 -
-> > >  test/common/bloblist.c         |  28 +--
-> > >  test/lib/Makefile              |   1 +
-> > >  test/lib/efi_log.c             |  93 +++++++
-> > >  test/test-main.c               |  13 +
-> > >  28 files changed, 1305 insertions(+), 84 deletions(-)
-> > >  create mode 100644 doc/usage/cmd/efidebug.rst
-> > >  create mode 100644 doc/usage/cmd/sb.rst
-> > >  create mode 100644 include/efi_log.h
-> > >  create mode 100644 lib/efi_loader/efi_log.c
-> > >  create mode 100644 test/lib/efi_log.c
-> > >
-> > > --
-> > > 2.43.0
-> > >
+> 	2) How am I supposed to add a maintainer for this file?
+
+This should be caught already under the zynqmp regex in the top-level
+MAINTAINERS file.
+
+The code itself looks fine, but I'll leave it to Michal to further
+review.
+
+--=20
+Tom
+
+--wbOY02/RRTnFqVkb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmchM5oACgkQFHw5/5Y0
+tyxP0Qv/eOGdN6R4SqeoY1lg/ASwwxye3x8o6gP1S1lMibiUjA5xcr3nbU3dlrFP
+g71jg4b+GSrjhTVtni9EohNgWdcBE6RjgMJqd+T9aiALtSsEt8c3Auyw1HpHs4ry
+bOt3tVY678euJesWQiN85IsFpW3zC+6PgenyIN7d55+uY18aMmBvcAnT3kCJ7yep
+OomsaZjL4fnJBumHgRwtIjuq4sEV9Y8qBx5lmXMtiz5yE4MAfgBwdLe/uPxpFDBi
+xFOGhU+LcGE/PslYQup8desfIZkTShvu9SpSG38xsdOV4irr2hdD7RhdjWc98E+m
+abPpY3YRcbvSJoDix7xgG7UYY9COMKGH9U4j/h/2B6Cg1L2auFCOs0YdTA3vg73n
+/1F4QyVendWvty5yjJxf/RgJNry33/+TCxX7VpVCGtp5W+CLR0XCqtJklh9nuVDX
+jV13XXsbHgdvnwi/5SKfqAH1zN3iAM0tERg0NRH3MjulUlRGxNWRmip9ZHquQmwH
+RDvIlUtX
+=qAn/
+-----END PGP SIGNATURE-----
+
+--wbOY02/RRTnFqVkb--
