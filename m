@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17BA0D3A696
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 20:14:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF4DBD74945
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 22:13:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 853D88918D;
-	Tue, 29 Oct 2024 21:14:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B0CD89198;
+	Tue, 29 Oct 2024 23:13:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ajyTmlSG";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="E3emwl1H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E50C89197; Tue, 29 Oct 2024 21:14:52 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 473A78919B; Tue, 29 Oct 2024 23:13:19 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0573589187
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 21:14:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DAD28918E
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 23:13:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6cbe68f787dso35632716d6.2
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 13:14:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730232889; x=1730837689; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XMP1Jw5ehP8gQoH7JF5PEiM/vLAhxGXd0WE9AfA682k=;
- b=ajyTmlSG/AO+qEfPDNPxl3eECnmn6ttXjhhB69ubLtGzWqfojtUzvhAh3W5xsx41ab
- eQZIB66KubbqiBR8fznS6VFWE0oDtikd0XfLtPBNWS8APeRV/CN4rMiXLHKbFgC5N7/b
- lumotyXnOvMirhfUW8vol4CsdNFao3ESjqxdM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730232889; x=1730837689;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XMP1Jw5ehP8gQoH7JF5PEiM/vLAhxGXd0WE9AfA682k=;
- b=MT/w/e4+f3YrclRpJ0tuz1xNlVAPuSvjtIWZcK6LsrMcUyGNq1RMsBGYT8h+pGAlZB
- ZV7ANrQJXS67tqkSTr2LPyhBJytvIE/zXFKHfvmirfRgzsUgm0H0diyGhCBaRIV6hy7u
- 7tL+CdmwOQE0yPSrw3VcK5x0j2z/H4c2kC3D8N3AkfFaKGHF0YpFtdw8GfyKYiynsHZw
- /qGvkpAtzb67qYeT+Py42M27FFxBZE0CLBxy8U3WO/AK2ey649vvFGqHz4LMJs4Y444x
- fjDwxfKQ3tbkvpbNCtAMD64TdEQFhSwD1+Z4BI3sVHDdnNmB0QDh9spCmREefLEV954b
- DYfg==
-X-Gm-Message-State: AOJu0Yz42wk0OAv05GznM431QA+k/m05TwlKXBEgfHoSseBZ5plC0Z/Z
- xfK9YHAhtLLS3b38vTPKfZCQ1SgnGV1mJyaxY/L9f2kFx5pTn9yQJ5UMA9+jaqo=
-X-Google-Smtp-Source: AGHT+IGfFdLBL1xDEa/2sokwxzoYs/hR6DD8D/rqSTWNpo5VtAZk68w8IaNDQUqytKQFVOHC8z/6bQ==
-X-Received: by 2002:a05:6214:43c7:b0:6cb:8364:b0d3 with SMTP id
- 6a1803df08f44-6d18566567dmr195296626d6.1.1730232888875; 
- Tue, 29 Oct 2024 13:14:48 -0700 (PDT)
-Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d1798a847esm45142446d6.45.2024.10.29.13.14.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Oct 2024 13:14:48 -0700 (PDT)
-Date: Tue, 29 Oct 2024 14:14:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1730239991; x=1730844791; i=xypron.glpk@gmx.de;
+ bh=nI58uvLtMSFWCSo0/yu2zRexgIHircKu9qMmXXyLYk0=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=E3emwl1HjhQbdzumbCDWJovPK5cNKKPZ4SBIKHQDWmB25EjM6N0ezkKnurMFAyhF
+ o1uXt7iqTd94mKlhw2CgaMqBYb2grWQ0sQNjVNuXRuCse4Xqp5H/kvj3RGn7oNnpM
+ 2PGMzNvE1L4+Ur+9rBMPHpGEc/EaOEtfQ0C0VuRHeIDR7LZx1/VoF8i5DzlY1SA80
+ +/dXxn8Tm1u/pKChFR611n49Pai4gVAT69xWLsvpbKbAnyJNPbcN+Zm/o9wJLXEJs
+ FSA9baxNTrHmUqFxJPN7xzJvobgRCeUdhQQDq+jPXEXns6AwEl1R1suNa9MlQFala
+ eUxdfcApEl+wxTzQ2Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([176.5.140.182]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MGQjH-1t4XP80FX3-009IdV; Tue, 29
+ Oct 2024 23:13:11 +0100
+Date: Tue, 29 Oct 2024 23:13:08 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH v9 08/11] efi_loader: Drop sandbox PXE architecture
-Message-ID: <20241029201445.GK4959@bill-the-cat>
-References: <20241029192222.362445-1-sjg@chromium.org>
- <20241029192222.362445-9-sjg@chromium.org>
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_09/15=5D_efi=5Floader=3A_Fix_fr?=
+ =?US-ASCII?Q?ee_in_=2E=2E=2E=5Fmedia=5Fdevice=5Fboot=5Foption=28=29?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAFLszTgG423MQ0iK-2XnOHZN+qVy_-xZNkaPGGsQM=Th=kaeGA@mail.gmail.com>
+References: <20241028124815.47262-1-sjg@chromium.org>
+ <20241028124815.47262-10-sjg@chromium.org>
+ <CAC_iWj+H_m3jiQ-Q-BK=9vtdMEnw0GHyQT2_LFHUYyEnnZh3EQ@mail.gmail.com>
+ <CAFLszTgG423MQ0iK-2XnOHZN+qVy_-xZNkaPGGsQM=Th=kaeGA@mail.gmail.com>
+Message-ID: <B86C7011-6650-4F3D-9078-67150BADFDEA@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="al0i64yi5PwFc9TW"
-Content-Disposition: inline
-In-Reply-To: <20241029192222.362445-9-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:IJ2ziAQJF+ytWpgQBoea2lleTAPeYPkIEQzNKoEAUzjOQzbpIcf
+ hn8pGvVIP7iUQL/XRdvb8nNx3Ye8Kn7jqWHl5CQlov7DbNhNbXYjc1lgMuKO0jXDRZEBBHd
+ JuNhmRrwJrS7UZeLrldVxZQDoSfrlIZVxCLpHugVnz1vtl+Mp0O1/FPbfV04KqLAOkUDh+i
+ bzmoN7Poyk19pTx4G3HBQ==
+UI-OutboundReport: notjunk:1;M01:P0:RiFnAoddhqA=;AecxZeUMkP/ayUChuPMmcZrjFr+
+ fWHJClwWTQgRP0/FxRRkst9Xos1MOnh9xyfMPfKBp4h13p0ffgnmmILQAavr71QSNHRfh9VyN
+ 0SQAiUO7/s54eelTOffgWjq/Tep0pAx+KI8hMvY7w6NXWym1bCNjhajJncv8kueO53UO8kfgl
+ Dx5lZdr9QcFe+LewI3/be5nxTSxKNMZcAmYiKMrKp53dKU/pp9fOZj1HEXyB2LtUcrHnb5rUD
+ W57wIExjNAnNn717fAneRg6cOZDBYZnHU30dJCJ93N4CHXYyYgCmJl8vJG1jAB2RUMaNr+4Wf
+ LLQ+RhNXEd8WpeJYpxM7HOFK0Bd6+g9GmnxnTOGQIwDWW1HQPtdOM/klvV/ZpSqc3NHbKYxte
+ 7D91FWHFWq7k0ireeOF9e+niBccNecpcCD3diPHSD8zOpshz/Plfw06yTkcQBm9VI6JBR+ygG
+ WbWFK6LQiGP6YlfTi8XvH4SFwP6oYPenZinTyPQ4cryG6NkF8RO2jY/Z/4SZM9gQqPIGU3ND1
+ b6f63ZgoabNl1sld7y5Y5pHmMPKcpkW7g20oKG1zS+DtE+LPlW398rAoGr9Bwq8VIWvjAgLRV
+ RrSlCTPxC4m1iRU9kgedpjuKJuWwIcgjR/FElZ63ZjXs3rVjrsGLra/MZLcE51e4Spob7KF1y
+ 2Nzq3rfuwRKXL0z7XZMYP1iARA1BBai56dKnqY80pUEdPx9RrQEA4y5cc5OU8QTfAug+JIqxh
+ /A1E3nF1ZAFenPAfjgcl7OPUOzwB4bt4U1/qH0vJk9W52Il6zLQOXgW5dgRirrUYGQ1fDnDj/
+ 2QHBq+acTKZGm0TJdlN+AWDQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,39 +96,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---al0i64yi5PwFc9TW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 29, 2024 at 08:22:16PM +0100, Simon Glass wrote:
+Am 29=2E Oktober 2024 16:45:29 MEZ schrieb Simon Glass <sjg@chromium=2Eorg=
+>:
+>Hi Ilias,
+>
+>On Tue, 29 Oct 2024 at 11:02, Ilias Apalodimas
+><ilias=2Eapalodimas@linaro=2Eorg> wrote:
+>>
+>> Hi Simon,
+>>
+>> On Mon, 28 Oct 2024 at 14:48, Simon Glass <sjg@chromium=2Eorg> wrote:
+>> >
+>> > Freeing a NULL pointer is an error in EFI, so check the pointer first=
+,
+>> > before freeing it=2E
+>> >
+>> > Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
+>> > ---
+>> >
+>> >  lib/efi_loader/efi_bootmgr=2Ec | 3 ++-
+>> >  1 file changed, 2 insertions(+), 1 deletion(-)
+>> >
+>> > diff --git a/lib/efi_loader/efi_bootmgr=2Ec b/lib/efi_loader/efi_boot=
+mgr=2Ec
+>> > index a3aa2b8d1b9=2E=2E431a38704e9 100644
+>> > --- a/lib/efi_loader/efi_bootmgr=2Ec
+>> > +++ b/lib/efi_loader/efi_bootmgr=2Ec
+>> > @@ -1180,7 +1180,8 @@ out:
+>> >                         free(opt[i]=2Elo);
+>> >         }
+>> >         free(opt);
+>> > -       efi_free_pool(handles);
+>> > +       if (handles)
+>> > +               efi_free_pool(handles);
+>>
+>> We don't need this, efi_free_pool() checks the pointer already=2E
+>
+>Yes, but it then returns an error (EFI_INVALID_PARAMETER), which gets
+>logged, with this series=2E
 
-> Rather than returning 0, just return an error, since sandbox is not used
-> with PXE at present.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+So this is not a problem of the existing code but of your patch series whi=
+ch creates a superfluous log message=2E
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Best regards
 
---=20
-Tom
+Heinrich
 
---al0i64yi5PwFc9TW
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmchQjUACgkQFHw5/5Y0
-tyx/Agv/X0y2RnUmInHX6CfZwQxqkhGz+33wkec2+CHqJdNNLFvUOCah0H1zcbgD
-/p0ZhKXZmwEnwLh6MaUZUaMiGNW/WkRJmAm+14dqj4v0k8s33rnuD78aA1AHUM/r
-8fffr58daLaJ4zdcPeUGZI9/QRWZ19trvpMs1SV4yGJnCbl0qkaL9zQ9pydEpaYZ
-RjFBWZtBWjfbCYg7NHKK/NAna3Dt80ZyqV59GxyHm5MeySrdtWO97QJz7TujQYVo
-8DKRilDmcvC1GCT2sbProo2zJjtlOHalmrL74b1z8r+8n7803wzwvr+Uh+Q0P5jr
-T3+eHawDbw8NyV/tOUtdHkFB1CAK2m+W7J/l9woB+dOlr67/AgthyRQ6KCi9n4td
-3kKq02l8QIU+X8Ov4Z8LR77x5doT3P+KHqNjkUPxu4dvAuKFmyK/pYabo4e73FHF
-ja9VMODvWX62BEMOzSYtraqVzaQgxGNdI0q4JIwbh9MTOR48ptzjet2muAgbJYne
-tQOz+A7P
-=54rD
------END PGP SIGNATURE-----
-
---al0i64yi5PwFc9TW--
+>
+>Regards,
+>Simon
