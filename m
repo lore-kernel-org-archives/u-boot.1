@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCA57D3A66B
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 15:46:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 219CDD3A661
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 15:46:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25C6D89191;
-	Tue, 29 Oct 2024 16:46:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 87FFA88EE1;
+	Tue, 29 Oct 2024 16:46:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HfmAIAZI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wf71QHL7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DCA989191; Tue, 29 Oct 2024 16:46:02 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 0DAF588D29; Tue, 29 Oct 2024 16:46:10 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E97888EE1
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 16:46:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 68B0D891A9
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 16:46:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a7aa086b077so714501966b.0
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 08:46:00 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a99f629a7aaso894074866b.1
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 08:46:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730216759; x=1730821559; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730216767; x=1730821567; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=96hyvaoLBSj0veUFqDGez7TllDUkIcB+heGROl3Th3M=;
- b=HfmAIAZI68GDoEE/SoDMlroPI4lRyY15awK3+kbugs2g8fJ2pXIcR6PgfwYmleU8Ab
- sMNzrrhW+IZ6F+Isb/sl8pT66DE664uy59AaSHPNLJQYX9R9CyM25wJPO8NhFX+w/0QW
- +c3jPKvwMNewcgNDdO2rGd0VZf+8phPSa+aow=
+ bh=h1CWcvY2Q4l5qwd7IzSCBgVkeh2zw1FIxUdX2Jraa8g=;
+ b=Wf71QHL7nl8AanVhzMIQygvyTGVzVimMAc/kaFpcVxaaSwquX2OJMrm1/OdER2mnm5
+ +f4n4tb2rLb3YA8Oodb9PDahc3iZw6tzCwBIkmPmsn/xlhiEAKavu/INc301qVZehe8C
+ lo6lsZi6zTVY558Rv6UjkJimpMWRjXEfczE8I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730216759; x=1730821559;
+ d=1e100.net; s=20230601; t=1730216767; x=1730821567;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=96hyvaoLBSj0veUFqDGez7TllDUkIcB+heGROl3Th3M=;
- b=G1HDkX+JGPd1W/UrLUfRkUFpEHKQeBJdbvyhEMs1yZeqm0BF2VHUW5jiG0kFpi6AuZ
- tcPHKHr0AcKovweCg6Tnoe+NLbo/oiZVBrvLNsrvzz0txUmDgDZkB/vySl89dkPP1xY0
- LGjnp9k3xzM2lcGPwAdswtvvrZiRm0N+0prEWEc3JnCaHaCXF88ZwsksOCiTzFPY0Qah
- zy6dkzV+3frPgy/l1EiZJAExGXP/s88U16VCRbj6xx1zB98ZuO9jFyy9J54f0HUVJvTV
- rAEbfSLcUU57DBFaqVhHIh+8RPkEpemU90KW3x8NQ4pTfwE7DxrLaHyYIfbAiViRp/Dc
- I6+A==
-X-Gm-Message-State: AOJu0Yw6NcyWk6QSmdfEts3dbjawGXczpmE5H8k2Aaijm+dNLxGkBuJS
- 7HQKAGCxumx30ENa7P4uBCQYpp5eKnLDx8v4bWRA3u0MlC2wQi+X0oJJrw5+pIRGdoEnPa2qZta
- NqgYgh8ZRV+4tSgwL9PtJ/qGTkVpGhNFzuaF7
-X-Google-Smtp-Source: AGHT+IEe0yQCT+h0qVTB2qwRCR3aPeAvOCbQybjwwPPLENaZplU06Mm1BS+QazYiAEpyCcb/gCgMs6Rp2jUXjauWgcE=
-X-Received: by 2002:a17:907:3da8:b0:a99:4136:895f with SMTP id
- a640c23a62f3a-a9e3a6c7dc9mr18858166b.41.1730216759515; Tue, 29 Oct 2024
- 08:45:59 -0700 (PDT)
+ bh=h1CWcvY2Q4l5qwd7IzSCBgVkeh2zw1FIxUdX2Jraa8g=;
+ b=L6tBw/rfOpm16tA3ehSRqmi3d+U4OLnKII3iyT50hwiaPA6R333w/Hj7xXNEfo+V+Y
+ /rD70OI797WlzFQowPwBz2IzKUHhPYJ+q5tG/qxhEZW92BiRRehtbKM+9BZKg9cUWcE6
+ D7DcqUVjggtwjMBS9B5E83Xrqjizuvs+oTH6xB5UbtFFl0C6dKeBJObnd/XI6dOSGU2n
+ KWnp8JAJDfXiB5Ow0cRA53eKMd94gz2caaXT5HnczvVXEZnn2fbUhrxJlwR2kG1MFuB9
+ eAow0BGqNrAXv9qO13Q4L8Z/dMWjq+opcOHuDdZyBIY+3jw0tYufiMm1UXIqRO73PAfK
+ mQhw==
+X-Gm-Message-State: AOJu0YwRi+YRYPOvTuVjiraJc/i3N7o6PM0RG0hKrRm8RaIlbPuLdqNz
+ LzzLtpm1zE8/9pyPNRbSAQVZgUCvABodwRUNcgvxrnfDjhgl/iNnUcviOpmzmP6ARNmhMGVO3fS
+ f4cMjsCoJVA5tmyhWlDSQTDTyYx+/IGQr1iI0
+X-Google-Smtp-Source: AGHT+IGv0qtOpEkromDZrFoLJZQiyqlpFby4hMhFT2BIdyrJTfkefpI+dXsKwOMIF55EJHqTdetc4HXQ5CGh1rtG700=
+X-Received: by 2002:a17:906:6a23:b0:a99:f209:cea3 with SMTP id
+ a640c23a62f3a-a9e2b392891mr270392566b.11.1730216766870; Tue, 29 Oct 2024
+ 08:46:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241022200543.116343-1-raymond.mao@linaro.org>
- <20241022200543.116343-7-raymond.mao@linaro.org>
- <CAFLszTjY=BwM8jUk_uRp-PnNu7=cXTdw0=znJwS4XDooWmNJjg@mail.gmail.com>
- <CAEfUkULBfQNz5XwWU0oY4S9tPGrYf06yByaOj-tRiua0x7WfWQ@mail.gmail.com>
-In-Reply-To: <CAEfUkULBfQNz5XwWU0oY4S9tPGrYf06yByaOj-tRiua0x7WfWQ@mail.gmail.com>
+References: <20241022120032.196311-1-sjg@chromium.org>
+ <20241022120032.196311-6-sjg@chromium.org>
+ <CAC_iWjKUjsMdqXa2YZGiu1FSsjx_aH6cDQsi+2Ng5i-+9obQhQ@mail.gmail.com>
+ <ea85b8fc-fe7b-4a76-a3e1-bb92b45b027a@gmx.de>
+In-Reply-To: <ea85b8fc-fe7b-4a76-a3e1-bb92b45b027a@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 29 Oct 2024 16:45:44 +0100
-Message-ID: <CAFLszTijXQCcFo5k5y6G8KUYvQQOLGAYZzNe5GQkt9fpGBam1Q@mail.gmail.com>
-Subject: Re: [PATCH v2 6/8] armv8: Add generic smbios information into the
- device tree
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Stefan Roese <sr@denx.de>, Alexander Gendin <agendin@matrox.com>,
- Michal Simek <michal.simek@amd.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Wan Yee Lau <wan.yee.lau@intel.com>,
+Date: Tue, 29 Oct 2024 16:45:54 +0100
+Message-ID: <CAFLszTj+jOut1_-E45A-f=smJejn+BTZ4XVuDr1YdJ20=zKQSQ@mail.gmail.com>
+Subject: Re: [PATCH v8 5/8] sandbox: Report host default-filename in native
+ mode
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
  Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Max Krummenacher <max.krummenacher@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Peter Robinson <pbrobinson@gmail.com>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Shantur Rathore <i@shantur.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,96 +92,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 28 Oct 2024 at 21:00, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Hi Simon,
->
-> On Mon, 28 Oct 2024 at 13:05, Simon Glass <sjg@chromium.org> wrote:
->>
->> Hi Raymond,
->>
->> On Tue, 22 Oct 2024 at 22:07, Raymond Mao <raymond.mao@linaro.org> wrote:
->> >
->> > Add common smbios information that can be used by all armv8
->> > platforms and set it as default for qemu-arm64.
->> > From now smbios library can load values from here for those fields
->> > doesn't exist in the sysinfo driver.
->> >
->> > To run this with QEMU arm64, please dump the generated DTB
->> > from QEMU first, merge it with the one we build and then re-run
->> > QEMU with the merged DTB.
->> > ```
->> > qemu-system-arm -machine virt -machine dumpdtb=qemu.dtb
->> > cat  <(dtc -I dtb qemu.dtb) <(dtc -I dtb ./dts/dt.dtb | \
->> >   grep -v /dts-v1/) | dtc - -o merged.dtb
->> > qemu-system-arm -machine virt -nographic -bios u-boot.bin \
->> >   -dtb merged.dtb
->>
->> and please talk to Peter about accepting my patch[1]
->>
->>
->> > ```
->> > For details please take reference on dt_qemu.rst
->> >
->> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
->> > ---
->> > Changes in v2
->> > - Initial patch.
->> >
->> >  arch/arm/dts/qemu-arm64.dts      |  4 ++
->> >  arch/arm/dts/smbios_generic.dtsi | 82 ++++++++++++++++++++++++++++++++
->> >  2 files changed, 86 insertions(+)
->> >  create mode 100644 arch/arm/dts/smbios_generic.dtsi
->> >
->> > diff --git a/arch/arm/dts/qemu-arm64.dts b/arch/arm/dts/qemu-arm64.dts
->> > index 096b3910728..95fcf53ed74 100644
->> > --- a/arch/arm/dts/qemu-arm64.dts
->> > +++ b/arch/arm/dts/qemu-arm64.dts
->> > @@ -7,5 +7,9 @@
->> >
->> >  /dts-v1/;
->> >
->> > +#if defined(CONFIG_SYSINFO_SMBIOS) && !defined(QFW_SMBIOS)
->> > +#include "smbios_generic.dtsi"
->> > +#endif
->> > +
->> >  / {
->> >  };
->> > diff --git a/arch/arm/dts/smbios_generic.dtsi b/arch/arm/dts/smbios_generic.dtsi
->> > new file mode 100644
->> > index 00000000000..c9f07283403
->> > --- /dev/null
->> > +++ b/arch/arm/dts/smbios_generic.dtsi
->> > @@ -0,0 +1,82 @@
->> > +// SPDX-License-Identifier: GPL-2.0+
->> > +/*
->> > + * Default SMBIOS information for Arm64 platforms
->> > + *
->> > + * Copyright (c) 2024 Linaro Limited
->> > + * Author: Raymond Mao <raymond.mao@linaro.org>
->> > + */
->> > +#include <config.h>
->> > +#include <smbios_def.h>
->> > +
->> > +/ {
->> > +       smbios {
->> > +               compatible = "u-boot,sysinfo-smbios";
->> > +
->> > +               smbios {
->> > +                       system {
->> > +                               manufacturer = CONFIG_SYS_VENDOR;
->> > +                               product = CONFIG_SYS_BOARD;
->> > +                               version = "Not Specified";
->> > +                               serial = "Not Specified";
->>
->> Does it make sense to add these strings? Perhaps if the property is missing in the DT, it should be missing in the SMBIOS table? Is 'Not Specified' a special string in the SMBIO spec?
->
->
-> This is not defined in the spec and actually those strings can be anything.
-> As currently this is for qemu_arm64 only and we don't have real vendor-defined values,
-> "Not Specified" is used as a placeholder to show an example for other vendors if they
-> want to add similar properties.
+Hi Heinrich,
 
-OK I see.
+On Mon, 28 Oct 2024 at 20:16, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 10/25/24 11:56, Ilias Apalodimas wrote:
+> > Hi Simon,
+> >
+> >
+> > On Tue, 22 Oct 2024 at 15:00, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> When the --native flag is given, pretend to be running the host
+> >> architecture rather than sandbox.
+> >>
+> >> Add an 'efidebug filename' command to report it.
+> >
+> > Heinrich does this allow you to continue your testing in native archs?
+> >
+> >>
+> >> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >> ---
+> >>
+> >> Changes in v8:
+> >> - Add new patch to report host default-filename in native mode
+> >>
+> >>   boot/bootmeth_efi.c | 25 ++------------------
+> >>   boot/efi_fname.c    | 57 +++++++++++++++++++++++++++++++++------------
+> >>   cmd/efidebug.c      | 25 ++++++++++++++++++++
+> >>   include/efi.h       | 25 ++++++++++++++++++++
+> >>   4 files changed, 94 insertions(+), 38 deletions(-)
+> >>
+> >> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+> >> index 371b36d550b..f836aa655f5 100644
+> >> --- a/boot/bootmeth_efi.c
+> >> +++ b/boot/bootmeth_efi.c
+> >> @@ -25,32 +25,11 @@
+> >>
+> >>   #define EFI_DIRNAME    "/EFI/BOOT/"
+> >>
+> >> -static int get_efi_pxe_arch(void)
+> >> -{
+> >> -       /* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xml */
+> >> -       if (IS_ENABLED(CONFIG_ARM64))
+> >> -               return 0xb;
+> >> -       else if (IS_ENABLED(CONFIG_ARM))
+> >> -               return 0xa;
+> >> -       else if (IS_ENABLED(CONFIG_X86_64))
+> >> -               return 0x6;
+> >> -       else if (IS_ENABLED(CONFIG_X86))
+> >> -               return 0x7;
+> >> -       else if (IS_ENABLED(CONFIG_ARCH_RV32I))
+> >> -               return 0x19;
+> >> -       else if (IS_ENABLED(CONFIG_ARCH_RV64I))
+> >> -               return 0x1b;
+> >> -       else if (IS_ENABLED(CONFIG_SANDBOX))
+> >> -               return 0;       /* not used */
+> >> -
+> >> -       return -EINVAL;
+> >> -}
+> >> -
+> >>   static int get_efi_pxe_vci(char *str, int max_len)
+> >>   {
+> >>          int ret;
+> >>
+> >> -       ret = get_efi_pxe_arch();
+> >> +       ret = efi_get_pxe_arch();
+> >>          if (ret < 0)
+> >>                  return ret;
+> >>
+> >> @@ -239,7 +218,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+> >>          ret = get_efi_pxe_vci(str, sizeof(str));
+> >>          if (ret)
+> >>                  return log_msg_ret("vci", ret);
+> >> -       ret = get_efi_pxe_arch();
+> >> +       ret = efi_get_pxe_arch();
+> >>          if (ret < 0)
+> >>                  return log_msg_ret("arc", ret);
+> >>          arch = ret;
+> >> diff --git a/boot/efi_fname.c b/boot/efi_fname.c
+> >> index a6b11383bba..790f9e2fa36 100644
+> >> --- a/boot/efi_fname.c
+> >> +++ b/boot/efi_fname.c
+> >> @@ -9,29 +9,34 @@
+> >>    */
+> >>
+> >>   #include <efi.h>
+> >> +#include <errno.h>
+> >>   #include <host_arch.h>
+> >>
+> >> -#ifdef CONFIG_SANDBOX
+> >> -
+> >>   #if HOST_ARCH == HOST_ARCH_X86_64
+> >> -#define BOOTEFI_NAME "BOOTX64.EFI"
+> >> +#define HOST_BOOTEFI_NAME "BOOTX64.EFI"
+> >> +#define HOST_PXE_ARCH 0x6
+> >>   #elif HOST_ARCH == HOST_ARCH_X86
+> >> -#define BOOTEFI_NAME "BOOTIA32.EFI"
+> >> +#define HOST_BOOTEFI_NAME "BOOTIA32.EFI"
+> >> +#define HOST_PXE_ARCH 0x7
+> >>   #elif HOST_ARCH == HOST_ARCH_AARCH64
+> >> -#define BOOTEFI_NAME "BOOTAA64.EFI"
+> >> +#define HOST_BOOTEFI_NAME "BOOTAA64.EFI"
+> >> +#define HOST_PXE_ARCH 0xb
+> >>   #elif HOST_ARCH == HOST_ARCH_ARM
+> >> -#define BOOTEFI_NAME "BOOTARM.EFI"
+> >> +#define HOST_BOOTEFI_NAME "BOOTARM.EFI"
+> >> +#define HOST_PXE_ARCH 0xa
+> >>   #elif HOST_ARCH == HOST_ARCH_RISCV32
+> >> -#define BOOTEFI_NAME "BOOTRISCV32.EFI"
+> >> +#define HOST_BOOTEFI_NAME "BOOTRISCV32.EFI"
+> >> +#define HOST_PXE_ARCH 0x19
+> >>   #elif HOST_ARCH == HOST_ARCH_RISCV64
+> >> -#define BOOTEFI_NAME "BOOTRISCV64.EFI"
+> >> +#define HOST_BOOTEFI_NAME "BOOTRISCV64.EFI"
+> >> +#define HOST_PXE_ARCH 0x1b
+> >>   #else
+> >> -#error Unsupported UEFI architecture
+> >> +#error Unsupported Host architecture
+> >>   #endif
+> >>
+> >> -#else
+> >> -
+> >> -#if defined(CONFIG_ARM64)
+> >> +#if defined(CONFIG_SANDBOX)
+> >> +#define BOOTEFI_NAME "BOOTSBOX.EFI"
+> >> +#elif defined(CONFIG_ARM64)
+> >>   #define BOOTEFI_NAME "BOOTAA64.EFI"
+> >>   #elif defined(CONFIG_ARM)
+> >>   #define BOOTEFI_NAME "BOOTARM.EFI"
+> >> @@ -47,9 +52,31 @@
+> >>   #error Unsupported UEFI architecture
+>  >>   #endif>>
+> >> -#endif
+> >> -
+> >>   const char *efi_get_basename(void)
+> >>   {
+> >> -       return BOOTEFI_NAME;
+> >> +       return efi_use_host_arch() ? HOST_BOOTEFI_NAME : BOOTEFI_NAME;
+> >> +}
+> >> +
+> >> +int efi_get_pxe_arch(void)
+> >> +{
+> >> +       if (efi_use_host_arch())
+> >> +               return HOST_PXE_ARCH;
+> >> +
+> >> +       /* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xml */
+> >> +       if (IS_ENABLED(CONFIG_ARM64))
+> >> +               return 0xb;
+> >> +       else if (IS_ENABLED(CONFIG_ARM))
+> >> +               return 0xa;
+> >> +       else if (IS_ENABLED(CONFIG_X86_64))
+> >> +               return 0x6;
+> >> +       else if (IS_ENABLED(CONFIG_X86))
+> >> +               return 0x7;
+> >> +       else if (IS_ENABLED(CONFIG_ARCH_RV32I))
+> >> +               return 0x19;
+> >> +       else if (IS_ENABLED(CONFIG_ARCH_RV64I))
+> >> +               return 0x1b;
+> >> +       else if (IS_ENABLED(CONFIG_SANDBOX))
+>
+> Please, add a warning here:
+>
+>       log_warn("You are using the sandbox in non-compliant mode\n");
+>
+> The riscv64 sandbox can only run riscv64 binaries
+> The arm64 sandbox can only run arm64 binary.
+>
+> We cannot expect a DHCP server to do the expected with the value 0.
+>
+> So why should we introduce this?
+>
+> >> +               return 0;       /* not used */
+>
+> The following comment would fit better:
+>
+>      /* This breaks PXE booting on the sandbox.*/
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+This line is already in the code. I am just moving it to a new file.
+PXE booting is not supported on sandbox. Neither is EFI booting, until
+this series is applied.
+
+If you can see your way to drop your other objections on this series,
+I don't mind removing this line and just returning the error code.
+
+Regards,
+Simon
