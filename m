@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A47DD3A66B
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 15:46:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B6F5D3A66B
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 15:46:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9AA98919D;
-	Tue, 29 Oct 2024 16:46:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5DB9C8917E;
+	Tue, 29 Oct 2024 16:46:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fpGcIGex";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QkwpvSHg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21C7189186; Tue, 29 Oct 2024 16:46:32 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 97BAC8918A; Tue, 29 Oct 2024 16:46:49 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E355F8918A
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 16:46:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EE868917E
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 16:46:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a9a26a5d6bfso860297066b.1
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 08:46:29 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a9a26a5d6bfso860348566b.1
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 08:46:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730216789; x=1730821589; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730216806; x=1730821606; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fXPjO/D+3zklaKTK1okljybgad38I15jGKOIOgTLzwg=;
- b=fpGcIGex81oKPNY0/0KREjML0FQMkq/WVXseUBOisNScaUA+GJnfH0PQKNV9vYJUXi
- +HqXBC0XHH1VoFmMq7zaFbjD9SVBDIirLLq0Fb2vDe58iz8CJelVpQrf7wgKe7jJiHNB
- hlhfjIlV9lcjTr2iECx9llKxDPE3WvAgZ64fo=
+ bh=lLyo3Fe6pIq3F35ZHPEpbBbYw1FUEExN45jNBWALAWE=;
+ b=QkwpvSHgqoIF37ACm2b7jq0piaqRtSPhj3XnjQehJkm5NZDSD8FKmxHx73xMdrWtt/
+ kYyS1cRCD+nxjhsbry7O+rEIw98j2jxteBJajfZpbaU2gBr72odpMyhhGWt1oJau2aP1
+ XQbE1Fz2EBTg1g9spsFz6yH2R+ZLVFP9ETtoQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730216789; x=1730821589;
+ d=1e100.net; s=20230601; t=1730216806; x=1730821606;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fXPjO/D+3zklaKTK1okljybgad38I15jGKOIOgTLzwg=;
- b=VXYhjoyxptNT6LTBfQblyUEyhKah5RP/q+ksX61D0aRS74QbCt9Sr01pVX2XVGCIR0
- MHfH2EeEjMgD9ftEIDc3mJ4rWw/BCTJBlLvQ5R4y6QWr0AEkr+g2jkua2WRTCZQrpp8U
- DhNx6n3qJ3LsaGogZRfhN340BRkVW6Bs1ZNCS48ORjjvRA1zXDadtJ51BpUEXwC3Azj1
- rIvXAlXbEYUMXjZT3i23aq+NXbPepx7ZCxO8eMWnr5lOYytOUlHxB7LwgxqFXS41PI+g
- MZuo9QsKE4D73rGixBxss4iLoaduc3Da8qpTNDeAO1WxlybswICG63v4zfRa0lBLvzRW
- lzjw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVRnVO/dQbsWUJIwmX67OWzGLN4X9kD8pa/PhOBqFkyENf8tICW81g02mReWfgs4H+kqkgSzMQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0YK7HPaGjAuTqhk6feGBG1ifWBh8HKGT3VZalxaU9ETyiTxw2
- /kkD/LxyiHPzbheZbiXJ7Xa9OLTK6FcrRkeAgGnxn1uMgH7dESCZP298Nq3Xl9ODTl8eq5KKH6O
- qQFdLrrWeDQCgIZsnHMM/cwqI6Q0xcQVQBZJS
-X-Google-Smtp-Source: AGHT+IFErCA2N4yZ2OeEEyeLz7ezLzbWoRVR6G3rhgfQlVP17H5pv2xfX/rGCe4xTqhWtEsma+0HW9O4BwKEx2Mp6hk=
-X-Received: by 2002:a17:907:7da2:b0:a99:f675:b672 with SMTP id
- a640c23a62f3a-a9de5d842afmr1140880366b.29.1730216789217; Tue, 29 Oct 2024
- 08:46:29 -0700 (PDT)
+ bh=lLyo3Fe6pIq3F35ZHPEpbBbYw1FUEExN45jNBWALAWE=;
+ b=UfoXRfKl97OG7kDhI8PYET9Nf64onDgyGORTjJCB8Y9WKE1mBsYKG9+PfYYJ6C1PYA
+ aQxszSMSHZ39wuVilRMtfH6l9/3vAAzhac/J8yXUr+WD6lnXcGqSJT5jM4Hc8FyYTRVz
+ Buamu5Cpj4PwuLzGOHGm4FK7S7xBzWjV6la6P8G+BqGM0jbukzjHa5L+hAIu0Mj0KDyS
+ ABDMDGlAd2IM/FdvSrsqA5SVGc+3YGwklpGd2SLlN+kMBQIv7/O7Dt65q8n572WpEPVi
+ zSHA6gNAQQJSzkWHdJ87NlsRZHzpOofHvfhZ8OCF54gYj6ojwBFgtCfxQP3F4nuX+EoT
+ KwAA==
+X-Gm-Message-State: AOJu0YzgN3J3BtY4VplGRkOZM42DMpuIIzNu4hvs1J13gwatrruqKm+c
+ IExwnGcXMHw+HOiY+gc4WthUSR/USfRljS25mAvVXYX6o4PicemoIKgwFWXTlaXMulIFwefOAl4
+ anGZ0gYh0Oh82bYaubUKfruMVQ4b0SydIuPpp2b/8RpHh+hktNPwi
+X-Google-Smtp-Source: AGHT+IGoi8CLpiOMJ3NbblYdBW7ebv2bF23J8t/hLFT5kDVbSDjAOU7DHaBMhaV43oHTdHW4GKMBYwJzlzLaWRCP1CI=
+X-Received: by 2002:a17:907:7ea0:b0:a9a:17fb:4c40 with SMTP id
+ a640c23a62f3a-a9de5d6e1e7mr1132763666b.26.1730216805803; Tue, 29 Oct 2024
+ 08:46:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241022120032.196311-1-sjg@chromium.org>
- <20241022120032.196311-3-sjg@chromium.org>
- <9f322139-ad6d-494d-879b-eab3211b874b@gmx.de>
- <CAFLszTgHvUo+0g+SBhC=Xbd_aFxdP_DF=wg_G3ZRTRP-k-2qVg@mail.gmail.com>
- <adacb624-28a8-41a0-a22b-19d2b9d3a5b1@gmx.de>
-In-Reply-To: <adacb624-28a8-41a0-a22b-19d2b9d3a5b1@gmx.de>
+References: <20241028124815.47262-1-sjg@chromium.org>
+ <20241028124815.47262-7-sjg@chromium.org>
+ <CAC_iWjKx_r0TjdehHU+y7sJe3J+qGSs8FnXAbqXpCyyXcA0V2w@mail.gmail.com>
+In-Reply-To: <CAC_iWjKx_r0TjdehHU+y7sJe3J+qGSs8FnXAbqXpCyyXcA0V2w@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 29 Oct 2024 16:46:16 +0100
-Message-ID: <CAFLszThgu+jsDMDGJdESP+UOTRRGJ0ORN-xeDCkOYY7xPJq7-A@mail.gmail.com>
-Subject: Re: [PATCH v8 2/8] efi_loader: Add a test app
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Michal Simek <michal.simek@amd.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Tue, 29 Oct 2024 16:46:34 +0100
+Message-ID: <CAFLszTgNbLjHSp670ghEExe2DJqYFJsV-AuYWjFZT_9RABN2_g@mail.gmail.com>
+Subject: Re: [PATCH 06/15] sandbox: Add a way to show the sandbox
+ memory-mapping
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,244 +85,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Ilias,
 
-On Mon, 28 Oct 2024 at 19:43, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 29 Oct 2024 at 10:59, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On 10/28/24 18:00, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Mon, 28 Oct 2024 at 07:11, Heinrich Schuchardt <xypron.glpk@gmx.de
-> > <mailto:xypron.glpk@gmx.de>> wrote:
-> >  >
-> >  > On 10/22/24 14:00, Simon Glass wrote:
-> >  > > Add a simple app to use for testing. This is intended to do whatever it
-> >  > > needs to for testing purposes. For now it just prints a message and
-> >  > > exits boot services.
-> >  > >
-> >  > > There was a considerable amount of discussion about whether it is OK to
-> >  > > call exit-boot-services and then return to U-Boot. This is not normally
-> >  > > done in a real application, since exit-boot-services is used to
-> >  > > completely disconnect from U-Boot. However, since this is a test, we
-> >  > > need to check the results of running the app, so returning is
-> > necessary.
-> >  > > It works correctly and it provides a nice model of how to test the EFI
-> >  > > code in a simple way.
-> >  > >
-> >  > > Signed-off-by: Simon Glass <sjg@chromium.org <mailto:sjg@chromium.org>>
-> >  > > ---
-> >  > >
-> >  > > (no changes since v7)
-> >  > >
-> >  > > Changes in v7:
-> >  > > - Update commit message
-> >  > >
-> >  > >   lib/efi_loader/Kconfig   | 10 ++++++
-> >  > >   lib/efi_loader/Makefile  |  1 +
-> >  > >   lib/efi_loader/testapp.c | 68 +++++++++++++++++++++++++++++++++++
-> > +++++
-> >  > >   3 files changed, 79 insertions(+)
-> >  > >   create mode 100644 lib/efi_loader/testapp.c
-> >  > >
-> >  > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> >  > > index 69b2c9360d8..6ced29da719 100644
-> >  > > --- a/lib/efi_loader/Kconfig
-> >  > > +++ b/lib/efi_loader/Kconfig
-> >  > > @@ -565,6 +565,16 @@ config BOOTEFI_HELLO_COMPILE
-> >  > >         No additional space will be required in the resulting U-
-> > Boot binary
-> >  > >         when this option is enabled.
-> >  > >
-> >  > > +config BOOTEFI_TESTAPP_COMPILE
-> >  > > +     bool "Compile an EFI test app for testing"
-> >  > > +     default y
-> >  > > +     help
-> >  > > +       This compiles an app designed for testing. It is packed
-> > into an image
-> >  > > +       by the test.py testing frame in the setup_efi_image() function.
-> >  > > +
-> >  > > +       No additional space will be required in the resulting U-
-> > Boot binary
-> >  > > +       when this option is enabled.
-> >  > > +
-> >  > >   endif
-> >  > >
-> >  > >   source "lib/efi/Kconfig"
-> >  > > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> >  > > index 00d18966f9e..87131ab911d 100644
-> >  > > --- a/lib/efi_loader/Makefile
-> >  > > +++ b/lib/efi_loader/Makefile
-> >  > > @@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
-> >  > >   ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
-> >  > >   apps-y += dtbdump
-> >  > >   endif
-> >  > > +apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
-> >  > >
-> >  > >   obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
-> >  > >   obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
-> >  > > diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
-> >  > > new file mode 100644
-> >  > > index 00000000000..feb444c92e9
-> >  > > --- /dev/null
-> >  > > +++ b/lib/efi_loader/testapp.c
-> >  > > @@ -0,0 +1,68 @@
-> >  > > +// SPDX-License-Identifier: GPL-2.0+
-> >  >
-> >  > This is not a valid SPDX identifier. Please, use GPL-2.0-or-later.
-> >  >
-> >  > > +/*
-> >  > > + * Hello world EFI application
-> >  > > + *
-> >  > > + * Copyright 2024 Google LLC
-> >  > > + * Written by Simon Glass <sjg@chromium.org <mailto:sjg@chromium.org>>
-> >  > > + *
-> >  > > + * This test program is used to test the invocation of an EFI
-> > application.
-> >  > > + * It writes a few messages to the console and then exits boot
-> > services
-> >  > > + */
-> >  > > +
-> >  > > +#include <efi_api.h>
-> >  > > +
-> >  > > +static const efi_guid_t loaded_image_guid =
-> > EFI_LOADED_IMAGE_PROTOCOL_GUID;
-> >  > > +
-> >  > > +static struct efi_system_table *systable;
-> >  > > +static struct efi_boot_services *boottime;
-> >  > > +static struct efi_simple_text_output_protocol *con_out;
-> >  > > +
-> >  > > +/**
-> >  > > + * efi_main() - entry point of the EFI application.
-> >  > > + *
-> >  > > + * @handle:  handle of the loaded image
-> >  > > + * @systab:  system table
-> >  > > + * Return:   status code
-> >  > > + */
-> >  > > +efi_status_t EFIAPI efi_main(efi_handle_t handle,
-> >  > > +                          struct efi_system_table *systab)
-> >  > > +{
-> >  > > +     struct efi_loaded_image *loaded_image;
-> >  > > +     efi_status_t ret;
-> >  > > +     efi_uintn_t map_size;
-> >  > > +     efi_uintn_t map_key;
-> >  > > +     efi_uintn_t desc_size;
-> >  > > +     u32 desc_version;
-> >  > > +
-> >  > > +     systable = systab;
-> >  > > +     boottime = systable->boottime;
-> >  > > +     con_out = systable->con_out;
-> >  > > +
-> >  > > +     /* Get the loaded image protocol */
-> >  > > +     ret = boottime->open_protocol(handle, &loaded_image_guid,
-> >  > > +                                   (void **)&loaded_image, NULL, NULL,
-> >  > > +                                   EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-> >  > > +     if (ret != EFI_SUCCESS) {
-> >  > > +             con_out->output_string
-> >  > > +                     (con_out, u"Cannot open loaded image
-> > protocol\r\n");
-> >  > > +             goto out;
-> >  > > +     }
-> >  > > +
-> >  > > +     /* UEFI requires CR LF */
-> >  > > +     con_out->output_string(con_out, u"U-Boot test app for
-> > EFI_LOADER\r\n");
-> >  > > +
-> >  > > +out:
-> >  > > +     map_size = 0;
-> >  > > +     ret = boottime->get_memory_map(&map_size, NULL, &map_key,
-> > &desc_size,
-> >  > > +                                    &desc_version);
-> >  > > +     con_out->output_string(con_out, u"Exiting boot sevices\n");
-> >  >
-> >  > %s/sevices/services/g
-> >  >
-> >  > > +
-> >  > > +     /* exit boot services so that this part of U-Boot can be
-> > tested */
-> >  > > +     boottime->exit_boot_services(handle, map_key);
-> >  > > +
-> >  > > +     /* now exit for real */
-> >  > > +     ret = boottime->exit(handle, ret, 0, NULL);
-> >  >
-> >  > As written before boot services are not available after
-> >  > ExitBootServices(). Please, call the ResetSystem() service.
-> >
-> > I already explained this. If I call reset then U-Boot exits and the
-> > console output cannot be checked by the C test. If I tell sandbox's
-> > reset-driver to ignore the reset request, then it also doesn't come back
-> > to the test.
-> >
-> >  >
-> >  >
-> >  > > +
-> >  > > +     /* We should never arrive here */
-> >  > > +     return ret;
-> >  >
-> >  > After ExitBootServices() you must not return.
-> >  >
-> >  > You can just do an endless loop if ResetSystem() fails:
-> >  >
-> >  > for (;;);
-> >
-> > No, because I need to check the output of the app. Please can you try to
-> > run this test so you can see what it is doing?
+> Hi Simon
 >
-> The Python framework lets you check the output whether you are rebooting
-> or not.
+> This seems completely unrelated to the series.
+>
+> Please send it as a separate patch
 
-Yes, I complained about catching reboots at the time, but it was
-submitted against my wishes. It is not a good design to create a
-problem in a test and then work around it later. It is easier to just
-return, rather than try to catch a reset in the Python test. For one
-thing, it makes using gdb much easier to have the test be
-self-contained.
-
->
-> The test seems not to build on anything but sandbox. We should be able
-> to test the boot methods on QEMU systems.
-
-Most tests run only on sandbox. You are welcome to extend the tests to
-cover more architectures. However I believe the most important thing
-is to test the code itself.
-
->
-> In efi_exit_boot_services() we
->
-> * call dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL)
-> * call bootm_disable_interrupts()
-> * call board_quiesce_devices()
-> * disable all EFI timers
-> * disable EFI notification
->
-> What do you expect U-Boot to do after all of this? You cannot reasonably
-> do any follow on test without rebooting.
-
-OK, well we can always add more code later as needed. So far, this
-seems to pass CI without problems.
-
->
-> EDK II does the following in ExitBootServices():
->
->    //
->    // Clear the non-runtime values of the EFI System Table
->    //
->    gDxeCoreST->BootServices        = NULL;
->    gDxeCoreST->ConIn               = NULL;
->    gDxeCoreST->ConsoleInHandle     = NULL;
->    gDxeCoreST->ConOut              = NULL;
->    gDxeCoreST->ConsoleOutHandle    = NULL;
->    gDxeCoreST->StdErr              = NULL;
->    gDxeCoreST->StandardErrorHandle = NULL;
->
-> As said ExitBootServices is the point of no-return.
->
-> Please, write a compliant test that runs on all UEFI architectures. Then
-> we can review it further.
-
-I am only focused on sandbox, for now. If you look at the bootflow
-tests, they are all for sandbox. That is enough to test the logic of
-bootstd. Of course, you may expand the tests to other architectures,
-but that is not the goal of this series.
+I've moved the initial patches in this series to my queue in patchwork, for now.
 
 Regards,
 Simon
+
+
+>
+> Thanks
+> /Ilias
+>
+> On Mon, 28 Oct 2024 at 14:48, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > This is mostly hidden in the background, but it is sometimes useful to
+> > look at it. Add a function to allow this.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  arch/sandbox/cpu/cpu.c         | 13 +++++++++++++
+> >  arch/sandbox/include/asm/cpu.h |  3 +++
+> >  cmd/sb.c                       | 11 +++++++++++
+> >  doc/usage/cmd/sb.rst           | 25 +++++++++++++++++++++++++
+> >  4 files changed, 52 insertions(+)
+> >
+> > diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
+> > index 06f8c13fab9..d1c4dcf0764 100644
+> > --- a/arch/sandbox/cpu/cpu.c
+> > +++ b/arch/sandbox/cpu/cpu.c
+> > @@ -253,6 +253,19 @@ phys_addr_t map_to_sysmem(const void *ptr)
+> >         return mentry->tag;
+> >  }
+> >
+> > +void sandbox_map_list(void)
+> > +{
+> > +       struct sandbox_mapmem_entry *mentry;
+> > +       struct sandbox_state *state = state_get_current();
+> > +
+> > +       printf("Sandbox memory-mapping\n");
+> > +       printf("%8s  %16s  %6s\n", "Addr", "Mapping", "Refcnt");
+> > +       list_for_each_entry(mentry, &state->mapmem_head, sibling_node) {
+> > +               printf("%8lx  %p  %6d\n", mentry->tag, mentry->ptr,
+> > +                      mentry->refcnt);
+> > +       }
+> > +}
+> > +
+> >  unsigned long sandbox_read(const void *addr, enum sandboxio_size_t size)
+> >  {
+> >         struct sandbox_state *state = state_get_current();
+> > diff --git a/arch/sandbox/include/asm/cpu.h b/arch/sandbox/include/asm/cpu.h
+> > index c97ac7ba95b..682bb3376d1 100644
+> > --- a/arch/sandbox/include/asm/cpu.h
+> > +++ b/arch/sandbox/include/asm/cpu.h
+> > @@ -8,4 +8,7 @@
+> >
+> >  void cpu_sandbox_set_current(const char *name);
+> >
+> > +/* show the mapping of sandbox addresses to pointers */
+> > +void sandbox_map_list(void);
+> > +
+> >  #endif /* __SANDBOX_CPU_H */
+> > diff --git a/cmd/sb.c b/cmd/sb.c
+> > index 9dbb53275b3..9245052492e 100644
+> > --- a/cmd/sb.c
+> > +++ b/cmd/sb.c
+> > @@ -7,6 +7,7 @@
+> >  #include <command.h>
+> >  #include <dm.h>
+> >  #include <spl.h>
+> > +#include <asm/cpu.h>
+> >  #include <asm/global_data.h>
+> >  #include <asm/state.h>
+> >
+> > @@ -29,6 +30,14 @@ static int do_sb_handoff(struct cmd_tbl *cmdtp, int flag, int argc,
+> >  #endif
+> >  }
+> >
+> > +static int do_sb_map(struct cmd_tbl *cmdtp, int flag, int argc,
+> > +                    char *const argv[])
+> > +{
+> > +       sandbox_map_list();
+> > +
+> > +       return 0;
+> > +}
+> > +
+> >  static int do_sb_state(struct cmd_tbl *cmdtp, int flag, int argc,
+> >                        char *const argv[])
+> >  {
+> > @@ -42,8 +51,10 @@ static int do_sb_state(struct cmd_tbl *cmdtp, int flag, int argc,
+> >
+> >  U_BOOT_LONGHELP(sb,
+> >         "handoff     - Show handoff data received from SPL\n"
+> > +       "sb map         - Show mapped memory\n"
+> >         "sb state       - Show sandbox state");
+> >
+> >  U_BOOT_CMD_WITH_SUBCMDS(sb, "Sandbox status commands", sb_help_text,
+> >         U_BOOT_SUBCMD_MKENT(handoff, 1, 1, do_sb_handoff),
+> > +       U_BOOT_SUBCMD_MKENT(map, 1, 1, do_sb_map),
+> >         U_BOOT_SUBCMD_MKENT(state, 1, 1, do_sb_state));
+> > diff --git a/doc/usage/cmd/sb.rst b/doc/usage/cmd/sb.rst
+> > index 6f54f9d9eb7..37431aff7c8 100644
+> > --- a/doc/usage/cmd/sb.rst
+> > +++ b/doc/usage/cmd/sb.rst
+> > @@ -12,6 +12,7 @@ Synopsis
+> >  ::
+> >
+> >      sb handoff
+> > +    sb map
+> >      sb state
+> >
+> >  Description
+> > @@ -26,6 +27,24 @@ sb handoff
+> >  This shows information about any handoff information received from SPL. If
+> >  U-Boot is started from an SPL build, it shows a valid magic number.
+> >
+> > +sb map
+> > +~~~~~~
+> > +
+> > +This shows any mappings between sandbox's emulated RAM and the underlying host
+> > +address-space.
+> > +
+> > +Fields shown are:
+> > +
+> > +Addr
+> > +    Address in emulated RAM
+> > +
+> > +Mapping
+> > +    Equivalent address in the host address-space. While sandbox requests address
+> > +    ``0x10000000`` from the OS, this is not always available.
+> > +
+> > +Refcnt
+> > +    Shows the number of references to this mapping.
+> > +
+> >  sb state
+> >  ~~~~~~~~
+> >
+> > @@ -42,6 +61,12 @@ as ``sandbox_spl``::
+> >      => sb handoff
+> >      SPL handoff magic 14f93c7b
+> >
+> > +This shows output from the *sb map* subcommand, with a single mapping::
+> > +
+> > +    Sandbox memory-mapping
+> > +        Addr           Mapping  Refcnt
+> > +    ff000000  000056185b46d6d0       2
+> > +
+> >  This shows output from the *sb state* subcommand::
+> >
+> >      => sb state
+> > --
+> > 2.43.0
+> >
