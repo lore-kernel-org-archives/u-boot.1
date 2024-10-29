@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9DC3D5B164
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 08:47:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 508F6D5B16F
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 08:49:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D74189123;
-	Tue, 29 Oct 2024 09:47:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CD96688EF5;
+	Tue, 29 Oct 2024 09:49:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rmMMv4SN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VoKaHkuq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F06089070; Tue, 29 Oct 2024 09:47:13 +0100 (CET)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 4305489070; Tue, 29 Oct 2024 09:49:12 +0100 (CET)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19F5F885F5
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 09:47:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00D0088BB7
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 09:49:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-5ebc5b4190eso2940894eaf.3
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 01:47:11 -0700 (PDT)
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-7ea6a4f287bso3289855a12.3
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 01:49:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730191630; x=1730796430; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1730191748; x=1730796548; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0WUtCGKC6oyZnBXWJVWRsbQn07JGpSzdBpvGcUr9EqU=;
- b=rmMMv4SNxdISz3INHHOvKVuwvyzzWm+nUZK9KkSZ8+WQs3wBwW9Glata4+1Vgot2mP
- xnmlzrjBfGhrKfp6ARzkFhTNh/V7/w2nRITg5dOpDdWu/K+eiO2Rc9X2FwD8Yi8DqKMd
- IpHUPXxWHGjwqBJ0LocXh9bqalDnG2DOg2cKQrO/WpVncjBGx7V9j1Xh/Lvd2K2Ibuf7
- TLJ34Vglx3mnyTfGK26a6Q1dq6RBdgh83LVQXh2tAJEnvySm7hJ4Npq5Scx8yz3jupFC
- oE8zu//l1GS1k4UqJWdGUiucmvAIt/RRpWDJtMbXNDwVmvxAkm0kVQAIWkZBtLNiesfq
- a7sw==
+ bh=NMUUqN/x7P2uN2ULMTJJp7PZMiznkY1FrpaFz4UOQuI=;
+ b=VoKaHkuqM58XEwxVwb2LSPe76ES+ft4RKwUNOFPZuDCAl3YYdvm1Xl2YToB1uvC2sf
+ n0FPtPqwCJFZf91+/9LWbXGRWf493gbJ6A295oyHZu3YzyDlV65lJS3JpadGerJyPwVw
+ jDgJtg7hU8iluk/2gf+C1IybXrv+W4itWf/lRo6Fnwg0WZj5nJhNTZzKRmrmoo5p4Gk3
+ w4iefkkQfVj/pvFqh0VVSevJI6PR5wysgoROhbU2KekC60XFcVCjSmKrOJz82ZLdYsrN
+ oiF+8g82cwlqfdv623SMiiOA1KJ6uANcKv3DM7HzmAaLAXjcSl6si59J1XU1MLaCxRgV
+ Q2pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730191630; x=1730796430;
+ d=1e100.net; s=20230601; t=1730191748; x=1730796548;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0WUtCGKC6oyZnBXWJVWRsbQn07JGpSzdBpvGcUr9EqU=;
- b=ueJYwgmqKv9fSJoUtFQbtnFLBarXNBa+fdP26k9uM5Rkuf9H6bzSkTS2mjzyYcf/dq
- zCIyRW/vs2S2rrrwIgHDV83uLpaULh5UDWZzppAkNTJ9kJi7oJmphOK9zPtCtwKSsVbb
- n9MqsF7sk9G6frcKbo4w1qm8KyXrW+c08Dq5jZfsslxa/pSTHilkuZicb3EfpgVUY9Gw
- p4Zbq9B92/WODn/HGnqPegoAt4kTH1XDXcgCwDZ5qMzo3ttsKKbUmglHU7mi83BX6FpH
- XVxTx3dzcJzXSZtkysDMNlwtNIMZG/+6Kl5OITnnGBc1QeCJ5L88YA/pUcSTYG2I1jTH
- ojYQ==
+ bh=NMUUqN/x7P2uN2ULMTJJp7PZMiznkY1FrpaFz4UOQuI=;
+ b=l4Y0NIA341FTFGpW3PzVbj1C/HhibmqHSmBrhwUjgHpD2esDKBftd/FGcXAjVBNfXS
+ Jt3QK9/dBMUW0krdqGMbiFaZbuC0TRHntFOiNTHqw2LFSBNQuTLxqyKz/pMKpmpGpxbq
+ wrS6gvSeQZ4PDJtkt3q/h8JO9GGPxi4xvJ4hBe6wcH1SaZkOM38WEdCK8VnOCt2tQo03
+ kus1JsDULHSSHnPMyAwdtngD4epgHae+cS9jnq5Q+VtD9xlNCn9l9C1iJWrFXOzkMSh0
+ w21GOE3j0xUmixe0YgCtJYZqd6ssw6XLDAh7qQ94G/NNImC/dPMD4QW/K9jWvP9VFP+I
+ toRQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXLD6VDzRLvBanoasuau9XfECo+Gl8WOyaqY5T7M5X39l5alPU9CI1XRESCtDcIauHpQYZObx0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxj3u53Ofe7tiGt4DTDIUdzWX5h6k3hClCr8xJpkj4hvfzG6wLC
- qM9e+cYnxlyUyLISpqOW+nuBwlb7+3LY2QMOdts6YftQvinLKZM/xe5onr4Rru8dxHLJXrxtzK4
- 70Q6NNPR2OuDfHdHftA7ag0bbShaKUynNumIhPA==
-X-Google-Smtp-Source: AGHT+IH+BzjevB2h3EvWOdDenDhHzZahnyjpFJD49AoGxnkJ3H3cw27TDaxHdWOzDrVhsunSUaM9sZmK3Pvg58BzKD8=
-X-Received: by 2002:a05:6870:9688:b0:287:3fa2:8978 with SMTP id
- 586e51a60fabf-29051be48a0mr9231427fac.27.1730191629777; Tue, 29 Oct 2024
- 01:47:09 -0700 (PDT)
+ AJvYcCXCTHEyU6DbNaJgqofh9R/U3Fy+shwZ2TKN+UzRq2xwDtpHh2riPEx/RCRnseWPjtJew40f1kw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzV3R5dfAbkLrkqprTEF+ojSALUYNQryjeF8bSYqiizeRRtUFcb
+ 39dl7vMlpDy43VFXQDabJSQ+jrJBxmyztazUVayzVJgBURtdX7HgwTjpLaWyFsuWk8BpU0zmp9Z
+ RNHGBD240XYSa8PtF101ULM6bJmWnVthnXOXBuA==
+X-Google-Smtp-Source: AGHT+IHb0mlq3VjMXNh5qcM+v1v0ZaFiHNTaGHFevyNeGGH6qnVyOhnZwVXEY1M8XZnemxCDX5y3AEMk15q/amzfbUM=
+X-Received: by 2002:a05:6a20:d528:b0:1d9:f95:9f97 with SMTP id
+ adf61e73a8af0-1d9a83c22b1mr13265327637.16.1730191748530; Tue, 29 Oct 2024
+ 01:49:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241024104603.1340301-1-ilias.apalodimas@linaro.org>
- <1334fa3c-95e1-41d7-b0e4-db1452de136d@gmx.de>
-In-Reply-To: <1334fa3c-95e1-41d7-b0e4-db1452de136d@gmx.de>
+References: <20241024104625.1340355-1-ilias.apalodimas@linaro.org>
+ <06be7096-2e06-44d6-ba00-55ea578121d8@gmx.de>
+ <CAC_iWjJdsJLT6arwynmVx5_fTeOr6rZkp8+AdA1rx_zG6Jandw@mail.gmail.com>
+In-Reply-To: <CAC_iWjJdsJLT6arwynmVx5_fTeOr6rZkp8+AdA1rx_zG6Jandw@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 29 Oct 2024 10:46:33 +0200
-Message-ID: <CAC_iWjKmJYNRRicG7Fpy_WN+4gGKQrnTWW_r02efYN0ceTZ7Pg@mail.gmail.com>
-Subject: Re: [PATCH] lmb: Correctly unmap and free memory on errors
+Date: Tue, 29 Oct 2024 10:48:32 +0200
+Message-ID: <CAC_iWjLctP3DuuB8brYUMuhDBwuzpMw6CZ-dhbuaRrSk3O5BYg@mail.gmail.com>
+Subject: Re: [PATCH] lmb: Correctly unmap memory after notifications
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
@@ -91,78 +92,69 @@ X-Virus-Status: Clean
 
 Hi Heinrich
 
-On Mon, 28 Oct 2024 at 08:40, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 29 Oct 2024 at 10:00, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On 10/24/24 12:46, Ilias Apalodimas wrote:
-> > We never free and unmap the memory on errors and we never unmap it when
-> > freeing it. This won't cause any problems on actual hardware but it will
-> > on sandbox
-> >
-> > Fixes: commit 22f2c9ed9f53 ("efi: memory: use the lmb API's for allocating and freeing memory")
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >   lib/efi_loader/efi_memory.c | 15 ++++++++++-----
-> >   1 file changed, 10 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index 9f3f08769977..84be5532a655 100644
-> > --- a/lib/efi_loader/efi_memory.c
-> > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -451,7 +451,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
-> >                               enum efi_memory_type memory_type,
-> >                               efi_uintn_t pages, uint64_t *memory)
-> >   {
-> > -     u64 len;
-> > +     u64 efi_addr, len;
-> >       uint flags;
-> >       efi_status_t ret;
-> >       phys_addr_t addr;
-> > @@ -499,14 +499,17 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
-> >               return EFI_INVALID_PARAMETER;
-> >       }
-> >
-> > -     addr = (u64)(uintptr_t)map_sysmem(addr, 0);
-> > +     efi_addr = (u64)(uintptr_t)map_sysmem(addr, 0);
-> >       /* Reserve that map in our memory maps */
-> > -     ret = efi_add_memory_map_pg(addr, pages, memory_type, true);
-> > -     if (ret != EFI_SUCCESS)
-> > +     ret = efi_add_memory_map_pg(efi_addr, pages, memory_type, true);
-> > +     if (ret != EFI_SUCCESS) {
-> >               /* Map would overlap, bail out */
-> > +             lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
-> > +             unmap_sysmem((void *)(uintptr_t)efi_addr);
-> >               return  EFI_OUT_OF_RESOURCES;
-> > +     }
-> >
-> > -     *memory = addr;
-> > +     *memory = efi_addr;
-> >
-> >       return EFI_SUCCESS;
-> >   }
-> > @@ -548,6 +551,8 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages)
-> >       if (ret != EFI_SUCCESS)
-> >               return EFI_NOT_FOUND;
-> >
-> > +     unmap_sysmem((void *)(uintptr_t)memory);
-> > +
-> >       return ret;
-> >   }
-> >
-> > --
-> > 2.45.2
-> >
+> Hi Heinrich
 >
-> AllocatePages() only provides access to EfiConventionalMemory.
+> On Mon, 28 Oct 2024 at 08:37, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >
+> > On 10/24/24 12:46, Ilias Apalodimas wrote:
+> > > We never unmap the memory used to update the EFI memory map after
+> > > notifications
+> > >
+> > > Fixes: commit 2f6191526a13 ("lmb: notify of any changes to the LMB memory map")
+> > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > ---
+> > >   lib/lmb.c | 1 +
+> > >   1 file changed, 1 insertion(+)
+> > >
+> > > diff --git a/lib/lmb.c b/lib/lmb.c
+> > > index 890e2cbfdf6b..38c6e1d5ba8d 100644
+> > > --- a/lib/lmb.c
+> > > +++ b/lib/lmb.c
+> > > @@ -65,6 +65,7 @@ static int __maybe_unused lmb_map_update_notify(phys_addr_t addr,
+> > >                       status & ~EFI_ERROR_MASK);
+> > >               return -1;
+> > >       }
+> > > +     unmap_sysmem((void *)(uintptr_t)efi_addr);
+> >
+> > If PCI memory was ever mapped via pci_map_physmem(), I don't think that
+> > we want to unmap it here.
 >
-> We can safely call map_sysmem() with len = 0 and not use unmap_sysmem().
+> Ok, so looking at it again, not calling unmap_sysmem() here won't
+> break anything, so I guess we can drop this patch.
 
-I am not sure I am following you here. We are calling it with len = 0.
-But map/unmap_sysmem keep track of internal ref counters for sandbox
-and the special tag case. Why shouldn't we call unmap_sysmem()?
+Looking at it again, for special sandbox tags, we need to correctly
+decrease the refcnt. So why do you think this isnt needed here?
 
 Thanks
 /Ilias
 >
-> Best regards
+> >
+> > Why do we map the memory in this notification function first hand?
 >
-> Heinrich
+> Because the memory was added as such in efi_allocate_pages(). So for
+> sandbox we need to find the correct virtual memory that was added.
+>
+> > Can't
+> > we use len = 0 when calling map_sysmem()?
+>
+> We are using len = 0. But I am not following up on how could this
+> help. All you will get is a warning for sanbox if a pci device mapped
+> more that 0.
+>
+> Thanks
+> /Ilias
+>
+> >
+> > I guess we have to critically review all map_sysmem() calls.
+> >
+> > Best regards
+> >
+> > Heinrich
+> >
+> > >
+> > >       return 0;
+> > >   }
+> >
