@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2E33D3A696
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 20:14:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17BA0D3A696
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 20:14:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1880E8918D;
-	Tue, 29 Oct 2024 21:14:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 853D88918D;
+	Tue, 29 Oct 2024 21:14:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NGRDkdq3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ajyTmlSG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99C8F89197; Tue, 29 Oct 2024 21:14:06 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 0E50C89197; Tue, 29 Oct 2024 21:14:52 +0100 (CET)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86C3389187
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 21:14:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0573589187
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 21:14:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7b155cca097so21519385a.1
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 13:14:04 -0700 (PDT)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6cbe68f787dso35632716d6.2
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 13:14:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730232843; x=1730837643; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730232889; x=1730837689; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Wf7HEYR2kZfj0qeNz4Vo7JdhQ+cA0IpzRLINQqnI63E=;
- b=NGRDkdq3A9JzvpX8wycjL3XfSx79up7KrjUvd+GPfwrJsA74KN5pD/8Gn2NRBktu9v
- oEvngMgjKmlJT7SHj1OnD45Y9SCn3544nxHIXuQFYgaXJ7gG7OBl/G5k1bFQ8FteHFF+
- dJWyGbzi627E3Fvpoa2R1vz1pLbxgE4hjP/Jk=
+ bh=XMP1Jw5ehP8gQoH7JF5PEiM/vLAhxGXd0WE9AfA682k=;
+ b=ajyTmlSG/AO+qEfPDNPxl3eECnmn6ttXjhhB69ubLtGzWqfojtUzvhAh3W5xsx41ab
+ eQZIB66KubbqiBR8fznS6VFWE0oDtikd0XfLtPBNWS8APeRV/CN4rMiXLHKbFgC5N7/b
+ lumotyXnOvMirhfUW8vol4CsdNFao3ESjqxdM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730232843; x=1730837643;
+ d=1e100.net; s=20230601; t=1730232889; x=1730837689;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Wf7HEYR2kZfj0qeNz4Vo7JdhQ+cA0IpzRLINQqnI63E=;
- b=dDYZWAhJQH5G9YxdCyM18G2e3tCs9bpJGEgRpqeSRSsOby2V5YMh4R+tufsqp7yaah
- I5s9fWJjozEpar+5d9vAtqtO1BzKgG7kGLIVq4rwJ/eskrgqEm5wGlyyV79BNxTgj8mG
- hh5ZkljUhlctvYCneGuWfMKOGL9zbcEhXEefpApWDCA9lVCPZzfkq7EPC6T+v8NROwMP
- jaZ/bUbQG/3G7WnOlOBTTSIrwWMlG7BnR4KCZ6YdjxZN82ZcsGpEyMHjDPmJ7nyoIaCW
- ep+nS36fcqFLrUrfUZHUpZAKokIt3Hlq5jW0z4G0Rbs+rugGsioRazZOOqU2TK3VnFZ9
- x+hA==
-X-Gm-Message-State: AOJu0YxT6tnaiix8UnpnJeiUv5jPeoTF7zKp1HjoHBlVFV0cjZqnp3fl
- 3TlwzYkC/lMkXbCeTPCD7edLVoacVrGyPPElmaZIHnTHiIEMQQPm+I5I3FpwWNM=
-X-Google-Smtp-Source: AGHT+IFOAW5XcJ2P5GTZXYNLxJjBcEz1WSsSVvor3GRv0B66fiGQo1ksrB4c/E74XsDl/1GXU6YPYQ==
-X-Received: by 2002:a05:620a:19aa:b0:7ac:9bdd:6e78 with SMTP id
- af79cd13be357-7b1a9cd41c7mr605219785a.14.1730232843315; 
- Tue, 29 Oct 2024 13:14:03 -0700 (PDT)
+ bh=XMP1Jw5ehP8gQoH7JF5PEiM/vLAhxGXd0WE9AfA682k=;
+ b=MT/w/e4+f3YrclRpJ0tuz1xNlVAPuSvjtIWZcK6LsrMcUyGNq1RMsBGYT8h+pGAlZB
+ ZV7ANrQJXS67tqkSTr2LPyhBJytvIE/zXFKHfvmirfRgzsUgm0H0diyGhCBaRIV6hy7u
+ 7tL+CdmwOQE0yPSrw3VcK5x0j2z/H4c2kC3D8N3AkfFaKGHF0YpFtdw8GfyKYiynsHZw
+ /qGvkpAtzb67qYeT+Py42M27FFxBZE0CLBxy8U3WO/AK2ey649vvFGqHz4LMJs4Y444x
+ fjDwxfKQ3tbkvpbNCtAMD64TdEQFhSwD1+Z4BI3sVHDdnNmB0QDh9spCmREefLEV954b
+ DYfg==
+X-Gm-Message-State: AOJu0Yz42wk0OAv05GznM431QA+k/m05TwlKXBEgfHoSseBZ5plC0Z/Z
+ xfK9YHAhtLLS3b38vTPKfZCQ1SgnGV1mJyaxY/L9f2kFx5pTn9yQJ5UMA9+jaqo=
+X-Google-Smtp-Source: AGHT+IGfFdLBL1xDEa/2sokwxzoYs/hR6DD8D/rqSTWNpo5VtAZk68w8IaNDQUqytKQFVOHC8z/6bQ==
+X-Received: by 2002:a05:6214:43c7:b0:6cb:8364:b0d3 with SMTP id
+ 6a1803df08f44-6d18566567dmr195296626d6.1.1730232888875; 
+ Tue, 29 Oct 2024 13:14:48 -0700 (PDT)
 Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b18d35882asm449934585a.127.2024.10.29.13.14.02
+ 6a1803df08f44-6d1798a847esm45142446d6.45.2024.10.29.13.14.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Oct 2024 13:14:02 -0700 (PDT)
-Date: Tue, 29 Oct 2024 14:14:00 -0600
+ Tue, 29 Oct 2024 13:14:48 -0700 (PDT)
+Date: Tue, 29 Oct 2024 14:14:45 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v9 03/11] sandbox: Add a -N flag to control on-host
- behaviour
-Message-ID: <20241029201400.GJ4959@bill-the-cat>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v9 08/11] efi_loader: Drop sandbox PXE architecture
+Message-ID: <20241029201445.GK4959@bill-the-cat>
 References: <20241029192222.362445-1-sjg@chromium.org>
- <20241029192222.362445-4-sjg@chromium.org>
+ <20241029192222.362445-9-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RZU40u1HCG54UDK3"
+ protocol="application/pgp-signature"; boundary="al0i64yi5PwFc9TW"
 Content-Disposition: inline
-In-Reply-To: <20241029192222.362445-4-sjg@chromium.org>
+In-Reply-To: <20241029192222.362445-9-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,46 +96,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---RZU40u1HCG54UDK3
+--al0i64yi5PwFc9TW
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 29, 2024 at 08:22:11PM +0100, Simon Glass wrote:
+On Tue, Oct 29, 2024 at 08:22:16PM +0100, Simon Glass wrote:
 
-> Sandbox is its own architecture, but sometimes we want to mimic the host
-> architecture, e.g. when running an EFI app not built by U-Boot.
->=20
-> Add a -N/--native flag which tells sandbox to reflect the architecture
-> of the host.
+> Rather than returning 0, just return an error, since sandbox is not used
+> with PXE at present.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
-> (no changes since v8)
 
-I believe Heinrich asked that you invert the logic here and add a flag
-for when you need the unexpected behavior.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---RZU40u1HCG54UDK3
+--al0i64yi5PwFc9TW
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmchQggACgkQFHw5/5Y0
-tywP1Qv7Ba2gxqNVNPQDSolx+lmKdJzsAsdWjDXZvaqspGwK3fZYyA6FR1V/cbro
-wfY5jCTN30+jJ3VgIFf3xRx0GijEJMb2RlpOZR8cnT5gB0ipbsC1k88L6Dx/d1Y7
-p+iMs6jLxaE9JDg51oMNtDumMf5NyZLPvWikd12CoK/evHdc+IIXNuNORQkey3Wj
-dCeLUS58a1SVS5LRcr1SccPD75Y5pb4gJgYo6+4BSX2rEVyUZJoVJ5mYdWmpJIIy
-UgKLNIw+tQQRi9ruF0Po70KBvlXVBchsp35GF6srYLm+kl2wwLhO6Mkleftv8AX8
-ZgNlao0E6NtHGZ7k2ewTTrxvu30DBehr1y73/JFu7NQQFujVyl0U0Gf2rOzJxmmQ
-1tlTfZv3+lrWf9KbmK8KLSzDRZv1DRfLNxkLs4ZsPKkzY2vBGi6hL39whkv9wANU
-Xkt8Q7hOOttqACWXpWeVTSu9jrivWK16ZNPUplG2xKplupyS+yPW0o0tPdFLUkGS
-fq8zxC1u
-=8pGf
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmchQjUACgkQFHw5/5Y0
+tyx/Agv/X0y2RnUmInHX6CfZwQxqkhGz+33wkec2+CHqJdNNLFvUOCah0H1zcbgD
+/p0ZhKXZmwEnwLh6MaUZUaMiGNW/WkRJmAm+14dqj4v0k8s33rnuD78aA1AHUM/r
+8fffr58daLaJ4zdcPeUGZI9/QRWZ19trvpMs1SV4yGJnCbl0qkaL9zQ9pydEpaYZ
+RjFBWZtBWjfbCYg7NHKK/NAna3Dt80ZyqV59GxyHm5MeySrdtWO97QJz7TujQYVo
+8DKRilDmcvC1GCT2sbProo2zJjtlOHalmrL74b1z8r+8n7803wzwvr+Uh+Q0P5jr
+T3+eHawDbw8NyV/tOUtdHkFB1CAK2m+W7J/l9woB+dOlr67/AgthyRQ6KCi9n4td
+3kKq02l8QIU+X8Ov4Z8LR77x5doT3P+KHqNjkUPxu4dvAuKFmyK/pYabo4e73FHF
+ja9VMODvWX62BEMOzSYtraqVzaQgxGNdI0q4JIwbh9MTOR48ptzjet2muAgbJYne
+tQOz+A7P
+=54rD
 -----END PGP SIGNATURE-----
 
---RZU40u1HCG54UDK3--
+--al0i64yi5PwFc9TW--
