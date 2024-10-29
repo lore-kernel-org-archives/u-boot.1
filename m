@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91DBBD2AB0E
-	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 09:47:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4519FD2AB11
+	for <u-boot@archiver.kernel.org>; Tue, 29 Oct 2024 10:00:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45DB389138;
-	Tue, 29 Oct 2024 10:47:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id B00A2890AE;
+	Tue, 29 Oct 2024 11:00:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="no/hkgTy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t9sUluN+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F59F89169; Tue, 29 Oct 2024 10:47:34 +0100 (CET)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8FB9B89070; Tue, 29 Oct 2024 10:59:59 +0100 (CET)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA7FE8914D
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 10:47:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4326089070
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 10:59:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: cdfc9d4a95da11efb88477ffae1fc7a5-20241029
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=SnzhggY9G4JLEKLAEEAsWpDGMudAOpyQbSQpSM9LB4g=; 
- b=no/hkgTyjIWoeB0jEIv2WTWU2oPkt0RuU/K64ufyBSdBLxXqWEW5IkrvCV/JEuBHeqZyuBj0ujdDkaYLkWQlFrdMrUSp9xhkAz3b8d8vVkMS/cRDHTdqJUc9aO6LkUiP1xf2PH5syq7Fwcz2LFWw0Ph5rfvTqkFQWj8yrd79ac8=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.42, REQID:80733eb8-a5eb-4c2c-b013-61ac38ae79d3, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:b0fcdc3, CLOUDID:16245d48-ca13-40ea-8070-fa012edab362,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
- RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
- SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: cdfc9d4a95da11efb88477ffae1fc7a5-20241029
-Received: from mtkmbs13n2.mediatek.inc [(172.21.101.108)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 716569030; Tue, 29 Oct 2024 17:47:26 +0800
-Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Tue, 29 Oct 2024 17:47:25 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Tue, 29 Oct 2024 17:47:24 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, Daniel
- Golle <daniel@makrotopia.org>, John Crispin <john@phrozen.org>, Simon Glass
- <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>, Weijie Gao
- <weijie.gao@mediatek.com>
-Subject: [PATCH v2 3/3] bootmenu: add reprint check
-Date: Tue, 29 Oct 2024 17:47:22 +0800
-Message-ID: <bcc2bfd8917197707929bd1aa86d8012a7675a66.1730194901.git.weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
-References: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-71e49ef3bb9so3656597b3a.1
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 02:59:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730195996; x=1730800796; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5pHd7WeiFnbRauYnRuFZFp53UmVlXnyb0vbM5zmk8Nc=;
+ b=t9sUluN+A4n3rVxjpXjBnrYZlL0MeTHOFhpqZ3bJIELfHddEYipZUAYKFQYxu7+T2I
+ hqdxJAGdPBMZmiuN078pvPAECnpa7bRJmus0t0mRaklqyfJcUo4o/k2zJ7qWvD/PFb6c
+ nmt1y4qKytN+g0FfAVr19BImO2e0YyaRqQz5q1Ra+/ZC43pJXpuXIPu3aBDXIk1cmf2R
+ cqkn6IFKDbdOvURBCX8THpEVEDkfkvyGWguwRev77dGeib2ZWyZfZoXzw8T8w1USyCxc
+ NxYotBMsT4K6jmivF2XTxCQeu8emrFFSe8yjmjHZ9mUljgfY84bUZnOgIK6hcaarHxDL
+ MZtw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730195996; x=1730800796;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5pHd7WeiFnbRauYnRuFZFp53UmVlXnyb0vbM5zmk8Nc=;
+ b=OQZ2kpOjKhj0SW6HIYNeAfI1KaRTNzikekQqgwQSBw2pYxL6+/yqupm1isSKiODt0+
+ 1yFibmkbz3EO0bILYI48BNNgwMo5242dLgRlQBF92GZCCQ35X7+5f+SNHwjRHERk/dHA
+ QqLqH2+muxp2lvoXuOXzTBJ5IXb8ez/vKcexK6yFJ2xNt+tI7kIUI1q4hNm0ud8qXODH
+ D2eXsD+QdRCZojkdJDCra5uvXm3WGWEEsBS4F6GqE8Ov9nvEMkxvbq1RdOoKX44HKoln
+ 3GCC/gUNNgxDGmJFXsn2TxR+Xcwn+ZlXPf/FNZD9TTufGhItZfGu53a2AtVyhf8q9YWg
+ XoWQ==
+X-Gm-Message-State: AOJu0YwTKqxMjlxoxTb9LDM0IHYtivd/9WmuST+sPlqFaAwQdhsh/wRi
+ goApY3gkGKYWEVqsbg7PcdymKIqkbet3pinGB9etpVwMXchcPXl43XicofqpWvY3F/k02W2pIzg
+ 5FpzThmtU8Bc2c8cmCTftPRuTQrnEglBPMSEx9g==
+X-Google-Smtp-Source: AGHT+IHe1SWihZSHZH46N+ZbTSp6ifmq9ZJZtOWsGN99lmXDVE5M/d0F0ctgq4aRvFf0czwk/57L28+Lsh1kdp4QVHo=
+X-Received: by 2002:a05:6a00:3c88:b0:71e:6a57:7288 with SMTP id
+ d2e1a72fcca58-72096bbb3a9mr2329771b3a.5.1730195995665; Tue, 29 Oct 2024
+ 02:59:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+References: <20241028124815.47262-1-sjg@chromium.org>
+ <20241028124815.47262-7-sjg@chromium.org>
+In-Reply-To: <20241028124815.47262-7-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 29 Oct 2024 11:59:19 +0200
+Message-ID: <CAC_iWjKx_r0TjdehHU+y7sJe3J+qGSs8FnXAbqXpCyyXcA0V2w@mail.gmail.com>
+Subject: Re: [PATCH 06/15] sandbox: Add a way to show the sandbox
+ memory-mapping
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,80 +88,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Record the last active menu item and check if it equals to the
-current selected item before reprint.
+Hi Simon
 
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
----
- cmd/bootmenu.c | 16 +++++++++++++++-
- include/menu.h |  1 +
- 2 files changed, 16 insertions(+), 1 deletion(-)
+This seems completely unrelated to the series.
 
-diff --git a/cmd/bootmenu.c b/cmd/bootmenu.c
-index c99605f3398..ffa63a4628d 100644
---- a/cmd/bootmenu.c
-+++ b/cmd/bootmenu.c
-@@ -103,11 +103,13 @@ static char *bootmenu_choice_entry(void *data)
- 
- 		switch (key) {
- 		case BKEY_UP:
-+			menu->last_active = menu->active;
- 			if (menu->active > 0)
- 				--menu->active;
- 			/* no menu key selected, regenerate menu */
- 			return NULL;
- 		case BKEY_DOWN:
-+			menu->last_active = menu->active;
- 			if (menu->active < menu->count - 1)
- 				++menu->active;
- 			/* no menu key selected, regenerate menu */
-@@ -133,6 +135,17 @@ static char *bootmenu_choice_entry(void *data)
- 	return NULL;
- }
- 
-+static bool bootmenu_need_reprint(void *data)
-+{
-+	struct bootmenu_data *menu = data;
-+	bool need_reprint;
-+
-+	need_reprint = menu->last_active != menu->active;
-+	menu->last_active = menu->active;
-+
-+	return need_reprint;
-+}
-+
- static void bootmenu_destroy(struct bootmenu_data *menu)
- {
- 	struct bootmenu_entry *iter = menu->first;
-@@ -332,6 +345,7 @@ static struct bootmenu_data *bootmenu_create(int delay)
- 
- 	menu->delay = delay;
- 	menu->active = 0;
-+	menu->last_active = -1;
- 	menu->first = NULL;
- 
- 	default_str = env_get("bootmenu_default");
-@@ -506,7 +520,7 @@ static enum bootmenu_ret bootmenu_show(int delay)
- 
- 	menu = menu_create(NULL, bootmenu->delay, 1, menu_display_statusline,
- 			   bootmenu_print_entry, bootmenu_choice_entry,
--			   NULL, bootmenu);
-+			   bootmenu_need_reprint, bootmenu);
- 	if (!menu) {
- 		bootmenu_destroy(bootmenu);
- 		return BOOTMENU_RET_FAIL;
-diff --git a/include/menu.h b/include/menu.h
-index 79643af272b..6cede89b950 100644
---- a/include/menu.h
-+++ b/include/menu.h
-@@ -40,6 +40,7 @@ int menu_show(int bootdelay);
- struct bootmenu_data {
- 	int delay;			/* delay for autoboot */
- 	int active;			/* active menu entry */
-+	int last_active;		/* last active menu entry */
- 	int count;			/* total count of menu entries */
- 	struct bootmenu_entry *first;	/* first menu entry */
- };
--- 
-2.45.2
+Please send it as a separate patch
 
+Thanks
+/Ilias
+
+On Mon, 28 Oct 2024 at 14:48, Simon Glass <sjg@chromium.org> wrote:
+>
+> This is mostly hidden in the background, but it is sometimes useful to
+> look at it. Add a function to allow this.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+>  arch/sandbox/cpu/cpu.c         | 13 +++++++++++++
+>  arch/sandbox/include/asm/cpu.h |  3 +++
+>  cmd/sb.c                       | 11 +++++++++++
+>  doc/usage/cmd/sb.rst           | 25 +++++++++++++++++++++++++
+>  4 files changed, 52 insertions(+)
+>
+> diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
+> index 06f8c13fab9..d1c4dcf0764 100644
+> --- a/arch/sandbox/cpu/cpu.c
+> +++ b/arch/sandbox/cpu/cpu.c
+> @@ -253,6 +253,19 @@ phys_addr_t map_to_sysmem(const void *ptr)
+>         return mentry->tag;
+>  }
+>
+> +void sandbox_map_list(void)
+> +{
+> +       struct sandbox_mapmem_entry *mentry;
+> +       struct sandbox_state *state = state_get_current();
+> +
+> +       printf("Sandbox memory-mapping\n");
+> +       printf("%8s  %16s  %6s\n", "Addr", "Mapping", "Refcnt");
+> +       list_for_each_entry(mentry, &state->mapmem_head, sibling_node) {
+> +               printf("%8lx  %p  %6d\n", mentry->tag, mentry->ptr,
+> +                      mentry->refcnt);
+> +       }
+> +}
+> +
+>  unsigned long sandbox_read(const void *addr, enum sandboxio_size_t size)
+>  {
+>         struct sandbox_state *state = state_get_current();
+> diff --git a/arch/sandbox/include/asm/cpu.h b/arch/sandbox/include/asm/cpu.h
+> index c97ac7ba95b..682bb3376d1 100644
+> --- a/arch/sandbox/include/asm/cpu.h
+> +++ b/arch/sandbox/include/asm/cpu.h
+> @@ -8,4 +8,7 @@
+>
+>  void cpu_sandbox_set_current(const char *name);
+>
+> +/* show the mapping of sandbox addresses to pointers */
+> +void sandbox_map_list(void);
+> +
+>  #endif /* __SANDBOX_CPU_H */
+> diff --git a/cmd/sb.c b/cmd/sb.c
+> index 9dbb53275b3..9245052492e 100644
+> --- a/cmd/sb.c
+> +++ b/cmd/sb.c
+> @@ -7,6 +7,7 @@
+>  #include <command.h>
+>  #include <dm.h>
+>  #include <spl.h>
+> +#include <asm/cpu.h>
+>  #include <asm/global_data.h>
+>  #include <asm/state.h>
+>
+> @@ -29,6 +30,14 @@ static int do_sb_handoff(struct cmd_tbl *cmdtp, int flag, int argc,
+>  #endif
+>  }
+>
+> +static int do_sb_map(struct cmd_tbl *cmdtp, int flag, int argc,
+> +                    char *const argv[])
+> +{
+> +       sandbox_map_list();
+> +
+> +       return 0;
+> +}
+> +
+>  static int do_sb_state(struct cmd_tbl *cmdtp, int flag, int argc,
+>                        char *const argv[])
+>  {
+> @@ -42,8 +51,10 @@ static int do_sb_state(struct cmd_tbl *cmdtp, int flag, int argc,
+>
+>  U_BOOT_LONGHELP(sb,
+>         "handoff     - Show handoff data received from SPL\n"
+> +       "sb map         - Show mapped memory\n"
+>         "sb state       - Show sandbox state");
+>
+>  U_BOOT_CMD_WITH_SUBCMDS(sb, "Sandbox status commands", sb_help_text,
+>         U_BOOT_SUBCMD_MKENT(handoff, 1, 1, do_sb_handoff),
+> +       U_BOOT_SUBCMD_MKENT(map, 1, 1, do_sb_map),
+>         U_BOOT_SUBCMD_MKENT(state, 1, 1, do_sb_state));
+> diff --git a/doc/usage/cmd/sb.rst b/doc/usage/cmd/sb.rst
+> index 6f54f9d9eb7..37431aff7c8 100644
+> --- a/doc/usage/cmd/sb.rst
+> +++ b/doc/usage/cmd/sb.rst
+> @@ -12,6 +12,7 @@ Synopsis
+>  ::
+>
+>      sb handoff
+> +    sb map
+>      sb state
+>
+>  Description
+> @@ -26,6 +27,24 @@ sb handoff
+>  This shows information about any handoff information received from SPL. If
+>  U-Boot is started from an SPL build, it shows a valid magic number.
+>
+> +sb map
+> +~~~~~~
+> +
+> +This shows any mappings between sandbox's emulated RAM and the underlying host
+> +address-space.
+> +
+> +Fields shown are:
+> +
+> +Addr
+> +    Address in emulated RAM
+> +
+> +Mapping
+> +    Equivalent address in the host address-space. While sandbox requests address
+> +    ``0x10000000`` from the OS, this is not always available.
+> +
+> +Refcnt
+> +    Shows the number of references to this mapping.
+> +
+>  sb state
+>  ~~~~~~~~
+>
+> @@ -42,6 +61,12 @@ as ``sandbox_spl``::
+>      => sb handoff
+>      SPL handoff magic 14f93c7b
+>
+> +This shows output from the *sb map* subcommand, with a single mapping::
+> +
+> +    Sandbox memory-mapping
+> +        Addr           Mapping  Refcnt
+> +    ff000000  000056185b46d6d0       2
+> +
+>  This shows output from the *sb state* subcommand::
+>
+>      => sb state
+> --
+> 2.43.0
+>
