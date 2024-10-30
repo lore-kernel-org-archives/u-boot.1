@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05764D5CCB8
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 15:02:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A68D5CCB8
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 15:04:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47CEC88FAA;
-	Wed, 30 Oct 2024 16:02:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D4A1388F27;
+	Wed, 30 Oct 2024 16:04:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kPc1cKRc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KR3CG/0Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F00EE88FCB; Wed, 30 Oct 2024 16:02:29 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 574E388FAA; Wed, 30 Oct 2024 16:04:11 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B4EE88F27
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 16:02:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B407F88F1E
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 16:04:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7b1511697a5so502507285a.2
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 08:02:27 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6cbd092f7f0so48431026d6.0
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 08:04:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730300546; x=1730905346; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730300647; x=1730905447; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=c5jO02WTBkZbua+hQQeOHdhINLqdcPrjk2L7IFJ/VTM=;
- b=kPc1cKRc1EhuYLmyJydcYxf6hv3E2/8rrd7/6E+Uw4xYA1PP+TEeZC6uSRUEMKpmXQ
- LeQxQ8hy1weaIjLf2tLMZdpvb1g7HCQ6XWDh0rWbrKhZzacWGnWnFtulea3PJHkYczgW
- eIQ4xGVErroazQjoMh3XACV/X3e07+YTQNbo8=
+ bh=i6U0iqLkR7KwpYKBdOx6AT94LYVTI36icWJy5KMmsoU=;
+ b=KR3CG/0ZeCdwjsDxUHq4FBK3T1gHioFJgJ4yXk6/c3OGine6sKBQFiPp3JMfSmC9F5
+ AbkvNG8gWzgNSvBWfFSeRIkXGax1PbEXG7v5zAnDSRRGQmk37dm9V2+GPwxnldY3th7U
+ F4eRG1exsye7nreXH1aZ6IO+uLdRrPK/DI9mU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730300546; x=1730905346;
+ d=1e100.net; s=20230601; t=1730300647; x=1730905447;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c5jO02WTBkZbua+hQQeOHdhINLqdcPrjk2L7IFJ/VTM=;
- b=bonPrlNU3aarV8ERBqiXLLklZyBHJkUrl0YOGIEV5OEC1AAMrFBJam4h8s0pmCQM3n
- wOYiBruF1XsCmkpFlUpE1x1+xJTbAX/uqnIO2+OwvO0BPlTVlMhofISpTzfUOUF4cvh6
- rDquyWrl2aRirprHFAYm86HU/fKu/0kvxZVAwvGbAMlUksdHl1FRHFhPnit5PLIeuBkK
- wU490MNmHq1gJwd6kCAJokWKqcXLYLGtQEKN5cWMQ1lJLdMeWd6O3TCYfiQHuyKdOe9c
- wfLYVw1bSx3Me9g/jOsKOtVW/QZMzWepMfeN7urg+WNHoMc0/lQck7RqraRNLwH/z2o8
- sKWw==
+ bh=i6U0iqLkR7KwpYKBdOx6AT94LYVTI36icWJy5KMmsoU=;
+ b=G4ksdHbWncM56T8+JKVKdHpMUkCi8qTTfWFBIviiTjI9KrUrfG2B9wLMQeYwh3nB/L
+ opKakUlyfKSen6YDs6QPk3aRD6o1K8EiOcIE8Wj/KCUnYDrf9VbiD8dTrfcMOQeQyGBF
+ mDFMsfBiwhSAv5j5pHsvPgvMQdBzpW14/aLPHzZajiVZQ4VZv/rxZ85Q1Dxnnix8SeLk
+ GZvoX47bfJK5R+OoDxfoKzpSJQs0bCR14mcnNtyfRBdSFclqK0/wOi+5hfarTN2F7epE
+ EMNUfYxDU6a9IbSnBMPU30LsLDQOPYgWDctYIdjbkro4NnwTULxbqQzGWUJFBtspRdeO
+ 0BaA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWiwTS8b2LKwK8DMofRcc/GSOC8kI7nLNBEpJl6hAn1SkMR6yJj71htjZ+L1fSbTw5dkcKt+4U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyfxy+8RvSRPlMHbmGMVplk+POHgIUHblegcDJ3IzeDu4nh9cWf
- loa6+vfXyzBarsIf+AoJMJZqswemzyRBogrrNbuc1Gr9o2XZemt7eMeo4t3xzjk=
-X-Google-Smtp-Source: AGHT+IGD1dv8yA5bJlvz21w/kPq+7B6M0Pmhb8cBVOCiCP38VFkyvKBw645qwOfVRlcLEM3nag+QAg==
-X-Received: by 2002:a05:620a:1913:b0:7b1:7f5b:72c7 with SMTP id
- af79cd13be357-7b193ed48abmr2191201185a.1.1730300546027; 
- Wed, 30 Oct 2024 08:02:26 -0700 (PDT)
+ AJvYcCWRkdS3DkRbGqAoWlMgVUzSYM364ajo/ihiSxZpBLGIHagnRCLAP/+xOoU/Va2Pys/aIMOGtm4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw+adtDQin1xgSNWpO2IkH1HRUuQRwXdDVZOPlaiBWCOuyJ3/7R
+ 1uZ/+I12CpJ5sUYvkbk/cixTuoD87j7145r6hVmSU4rCy7p+vOq4jvaXLtzWYws=
+X-Google-Smtp-Source: AGHT+IFLR0FwVYFFwie9yzHoDGKglsvDDTsIfb29rM/GeOVuw3frOHvqsYmCf3QKzQdbyexsB+3ptA==
+X-Received: by 2002:a05:6214:4802:b0:6d3:45cb:40eb with SMTP id
+ 6a1803df08f44-6d345facd6fmr50679566d6.10.1730300646778; 
+ Wed, 30 Oct 2024 08:04:06 -0700 (PDT)
 Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b18d343e34sm515650485a.100.2024.10.30.08.02.24
+ 6a1803df08f44-6d17991329bsm52571386d6.58.2024.10.30.08.04.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Oct 2024 08:02:25 -0700 (PDT)
-Date: Wed, 30 Oct 2024 09:02:22 -0600
+ Wed, 30 Oct 2024 08:04:06 -0700 (PDT)
+Date: Wed, 30 Oct 2024 09:04:03 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v8 2/8] efi_loader: Add a test app
-Message-ID: <20241030150222.GL2558755@bill-the-cat>
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Shantur Rathore <i@shantur.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v8 5/8] sandbox: Report host default-filename in native
+ mode
+Message-ID: <20241030150403.GM2558755@bill-the-cat>
 References: <20241022120032.196311-1-sjg@chromium.org>
- <20241022120032.196311-3-sjg@chromium.org>
- <9f322139-ad6d-494d-879b-eab3211b874b@gmx.de>
- <CAFLszTgHvUo+0g+SBhC=Xbd_aFxdP_DF=wg_G3ZRTRP-k-2qVg@mail.gmail.com>
- <adacb624-28a8-41a0-a22b-19d2b9d3a5b1@gmx.de>
- <CAFLszThgu+jsDMDGJdESP+UOTRRGJ0ORN-xeDCkOYY7xPJq7-A@mail.gmail.com>
- <20241029164645.GF4959@bill-the-cat>
- <CAFLszThSAcQnnoyhTyd68m4LsO+W+Se0c7DmP9++Nx76zHzijQ@mail.gmail.com>
+ <20241022120032.196311-6-sjg@chromium.org>
+ <CAC_iWjKUjsMdqXa2YZGiu1FSsjx_aH6cDQsi+2Ng5i-+9obQhQ@mail.gmail.com>
+ <ea85b8fc-fe7b-4a76-a3e1-bb92b45b027a@gmx.de>
+ <CAFLszTj+jOut1_-E45A-f=smJejn+BTZ4XVuDr1YdJ20=zKQSQ@mail.gmail.com>
+ <20241029164027.GE4959@bill-the-cat>
+ <CAFLszTh04Mw9PjdMUm5o_Hn7az9iM4B8+OBgP8a6Y69HbW46Xg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="X+TzLU6xNu5xlVPX"
+ protocol="application/pgp-signature"; boundary="E5XRCngLqiDYK+QV"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThSAcQnnoyhTyd68m4LsO+W+Se0c7DmP9++Nx76zHzijQ@mail.gmail.com>
+In-Reply-To: <CAFLszTh04Mw9PjdMUm5o_Hn7az9iM4B8+OBgP8a6Y69HbW46Xg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,363 +106,244 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---X+TzLU6xNu5xlVPX
+--E5XRCngLqiDYK+QV
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 30, 2024 at 08:41:27AM +0100, Simon Glass wrote:
+On Wed, Oct 30, 2024 at 08:44:30AM +0100, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Tue, 29 Oct 2024 at 17:46, Tom Rini <trini@konsulko.com> wrote:
+> On Tue, 29 Oct 2024 at 17:40, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Tue, Oct 29, 2024 at 04:46:16PM +0100, Simon Glass wrote:
+> > On Tue, Oct 29, 2024 at 04:45:54PM +0100, Simon Glass wrote:
 > > > Hi Heinrich,
 > > >
-> > > On Mon, 28 Oct 2024 at 19:43, Heinrich Schuchardt <xypron.glpk@gmx.de=
+> > > On Mon, 28 Oct 2024 at 20:16, Heinrich Schuchardt <xypron.glpk@gmx.de=
 > wrote:
 > > > >
-> > > > On 10/28/24 18:00, Simon Glass wrote:
-> > > > > Hi Heinrich,
+> > > > On 10/25/24 11:56, Ilias Apalodimas wrote:
+> > > > > Hi Simon,
 > > > > >
-> > > > > On Mon, 28 Oct 2024 at 07:11, Heinrich Schuchardt <xypron.glpk@gm=
-x.de
-> > > > > <mailto:xypron.glpk@gmx.de>> wrote:
-> > > > >  >
-> > > > >  > On 10/22/24 14:00, Simon Glass wrote:
-> > > > >  > > Add a simple app to use for testing. This is intended to do =
-whatever it
-> > > > >  > > needs to for testing purposes. For now it just prints a mess=
-age and
-> > > > >  > > exits boot services.
-> > > > >  > >
-> > > > >  > > There was a considerable amount of discussion about whether =
-it is OK to
-> > > > >  > > call exit-boot-services and then return to U-Boot. This is n=
-ot normally
-> > > > >  > > done in a real application, since exit-boot-services is used=
- to
-> > > > >  > > completely disconnect from U-Boot. However, since this is a =
-test, we
-> > > > >  > > need to check the results of running the app, so returning is
-> > > > > necessary.
-> > > > >  > > It works correctly and it provides a nice model of how to te=
-st the EFI
-> > > > >  > > code in a simple way.
-> > > > >  > >
-> > > > >  > > Signed-off-by: Simon Glass <sjg@chromium.org <mailto:sjg@chr=
-omium.org>>
-> > > > >  > > ---
-> > > > >  > >
-> > > > >  > > (no changes since v7)
-> > > > >  > >
-> > > > >  > > Changes in v7:
-> > > > >  > > - Update commit message
-> > > > >  > >
-> > > > >  > >   lib/efi_loader/Kconfig   | 10 ++++++
-> > > > >  > >   lib/efi_loader/Makefile  |  1 +
-> > > > >  > >   lib/efi_loader/testapp.c | 68 ++++++++++++++++++++++++++++=
-+++++++
-> > > > > +++++
-> > > > >  > >   3 files changed, 79 insertions(+)
-> > > > >  > >   create mode 100644 lib/efi_loader/testapp.c
-> > > > >  > >
-> > > > >  > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > > > >  > > index 69b2c9360d8..6ced29da719 100644
-> > > > >  > > --- a/lib/efi_loader/Kconfig
-> > > > >  > > +++ b/lib/efi_loader/Kconfig
-> > > > >  > > @@ -565,6 +565,16 @@ config BOOTEFI_HELLO_COMPILE
-> > > > >  > >         No additional space will be required in the resultin=
-g U-
-> > > > > Boot binary
-> > > > >  > >         when this option is enabled.
-> > > > >  > >
-> > > > >  > > +config BOOTEFI_TESTAPP_COMPILE
-> > > > >  > > +     bool "Compile an EFI test app for testing"
-> > > > >  > > +     default y
-> > > > >  > > +     help
-> > > > >  > > +       This compiles an app designed for testing. It is pac=
-ked
-> > > > > into an image
-> > > > >  > > +       by the test.py testing frame in the setup_efi_image(=
-) function.
-> > > > >  > > +
-> > > > >  > > +       No additional space will be required in the resultin=
-g U-
-> > > > > Boot binary
-> > > > >  > > +       when this option is enabled.
-> > > > >  > > +
-> > > > >  > >   endif
-> > > > >  > >
-> > > > >  > >   source "lib/efi/Kconfig"
-> > > > >  > > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefi=
-le
-> > > > >  > > index 00d18966f9e..87131ab911d 100644
-> > > > >  > > --- a/lib/efi_loader/Makefile
-> > > > >  > > +++ b/lib/efi_loader/Makefile
-> > > > >  > > @@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) +=3D =
-initrddump
-> > > > >  > >   ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
-> > > > >  > >   apps-y +=3D dtbdump
-> > > > >  > >   endif
-> > > > >  > > +apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) +=3D testapp
-> > > > >  > >
-> > > > >  > >   obj-$(CONFIG_CMD_BOOTEFI_HELLO) +=3D helloworld_efi.o
-> > > > >  > >   obj-$(CONFIG_EFI_BOOTMGR) +=3D efi_bootmgr.o
-> > > > >  > > diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testa=
-pp.c
-> > > > >  > > new file mode 100644
-> > > > >  > > index 00000000000..feb444c92e9
-> > > > >  > > --- /dev/null
-> > > > >  > > +++ b/lib/efi_loader/testapp.c
-> > > > >  > > @@ -0,0 +1,68 @@
-> > > > >  > > +// SPDX-License-Identifier: GPL-2.0+
-> > > > >  >
-> > > > >  > This is not a valid SPDX identifier. Please, use GPL-2.0-or-la=
-ter.
-> > > > >  >
-> > > > >  > > +/*
-> > > > >  > > + * Hello world EFI application
-> > > > >  > > + *
-> > > > >  > > + * Copyright 2024 Google LLC
-> > > > >  > > + * Written by Simon Glass <sjg@chromium.org <mailto:sjg@chr=
-omium.org>>
-> > > > >  > > + *
-> > > > >  > > + * This test program is used to test the invocation of an E=
-FI
-> > > > > application.
-> > > > >  > > + * It writes a few messages to the console and then exits b=
-oot
-> > > > > services
-> > > > >  > > + */
-> > > > >  > > +
-> > > > >  > > +#include <efi_api.h>
-> > > > >  > > +
-> > > > >  > > +static const efi_guid_t loaded_image_guid =3D
-> > > > > EFI_LOADED_IMAGE_PROTOCOL_GUID;
-> > > > >  > > +
-> > > > >  > > +static struct efi_system_table *systable;
-> > > > >  > > +static struct efi_boot_services *boottime;
-> > > > >  > > +static struct efi_simple_text_output_protocol *con_out;
-> > > > >  > > +
-> > > > >  > > +/**
-> > > > >  > > + * efi_main() - entry point of the EFI application.
-> > > > >  > > + *
-> > > > >  > > + * @handle:  handle of the loaded image
-> > > > >  > > + * @systab:  system table
-> > > > >  > > + * Return:   status code
-> > > > >  > > + */
-> > > > >  > > +efi_status_t EFIAPI efi_main(efi_handle_t handle,
-> > > > >  > > +                          struct efi_system_table *systab)
-> > > > >  > > +{
-> > > > >  > > +     struct efi_loaded_image *loaded_image;
-> > > > >  > > +     efi_status_t ret;
-> > > > >  > > +     efi_uintn_t map_size;
-> > > > >  > > +     efi_uintn_t map_key;
-> > > > >  > > +     efi_uintn_t desc_size;
-> > > > >  > > +     u32 desc_version;
-> > > > >  > > +
-> > > > >  > > +     systable =3D systab;
-> > > > >  > > +     boottime =3D systable->boottime;
-> > > > >  > > +     con_out =3D systable->con_out;
-> > > > >  > > +
-> > > > >  > > +     /* Get the loaded image protocol */
-> > > > >  > > +     ret =3D boottime->open_protocol(handle, &loaded_image_=
-guid,
-> > > > >  > > +                                   (void **)&loaded_image, =
-NULL, NULL,
-> > > > >  > > +                                   EFI_OPEN_PROTOCOL_GET_PR=
-OTOCOL);
-> > > > >  > > +     if (ret !=3D EFI_SUCCESS) {
-> > > > >  > > +             con_out->output_string
-> > > > >  > > +                     (con_out, u"Cannot open loaded image
-> > > > > protocol\r\n");
-> > > > >  > > +             goto out;
-> > > > >  > > +     }
-> > > > >  > > +
-> > > > >  > > +     /* UEFI requires CR LF */
-> > > > >  > > +     con_out->output_string(con_out, u"U-Boot test app for
-> > > > > EFI_LOADER\r\n");
-> > > > >  > > +
-> > > > >  > > +out:
-> > > > >  > > +     map_size =3D 0;
-> > > > >  > > +     ret =3D boottime->get_memory_map(&map_size, NULL, &map=
-_key,
-> > > > > &desc_size,
-> > > > >  > > +                                    &desc_version);
-> > > > >  > > +     con_out->output_string(con_out, u"Exiting boot sevices=
-\n");
-> > > > >  >
-> > > > >  > %s/sevices/services/g
-> > > > >  >
-> > > > >  > > +
-> > > > >  > > +     /* exit boot services so that this part of U-Boot can =
-be
-> > > > > tested */
-> > > > >  > > +     boottime->exit_boot_services(handle, map_key);
-> > > > >  > > +
-> > > > >  > > +     /* now exit for real */
-> > > > >  > > +     ret =3D boottime->exit(handle, ret, 0, NULL);
-> > > > >  >
-> > > > >  > As written before boot services are not available after
-> > > > >  > ExitBootServices(). Please, call the ResetSystem() service.
 > > > > >
-> > > > > I already explained this. If I call reset then U-Boot exits and t=
-he
-> > > > > console output cannot be checked by the C test. If I tell sandbox=
-'s
-> > > > > reset-driver to ignore the reset request, then it also doesn't co=
-me back
-> > > > > to the test.
+> > > > > On Tue, 22 Oct 2024 at 15:00, Simon Glass <sjg@chromium.org> wrot=
+e:
+> > > > >>
+> > > > >> When the --native flag is given, pretend to be running the host
+> > > > >> architecture rather than sandbox.
+> > > > >>
+> > > > >> Add an 'efidebug filename' command to report it.
 > > > > >
-> > > > >  >
-> > > > >  >
-> > > > >  > > +
-> > > > >  > > +     /* We should never arrive here */
-> > > > >  > > +     return ret;
-> > > > >  >
-> > > > >  > After ExitBootServices() you must not return.
-> > > > >  >
-> > > > >  > You can just do an endless loop if ResetSystem() fails:
-> > > > >  >
-> > > > >  > for (;;);
+> > > > > Heinrich does this allow you to continue your testing in native a=
+rchs?
 > > > > >
-> > > > > No, because I need to check the output of the app. Please can you=
- try to
-> > > > > run this test so you can see what it is doing?
+> > > > >>
+> > > > >> Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > >> ---
+> > > > >>
+> > > > >> Changes in v8:
+> > > > >> - Add new patch to report host default-filename in native mode
+> > > > >>
+> > > > >>   boot/bootmeth_efi.c | 25 ++------------------
+> > > > >>   boot/efi_fname.c    | 57 +++++++++++++++++++++++++++++++++----=
+--------
+> > > > >>   cmd/efidebug.c      | 25 ++++++++++++++++++++
+> > > > >>   include/efi.h       | 25 ++++++++++++++++++++
+> > > > >>   4 files changed, 94 insertions(+), 38 deletions(-)
+> > > > >>
+> > > > >> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+> > > > >> index 371b36d550b..f836aa655f5 100644
+> > > > >> --- a/boot/bootmeth_efi.c
+> > > > >> +++ b/boot/bootmeth_efi.c
+> > > > >> @@ -25,32 +25,11 @@
+> > > > >>
+> > > > >>   #define EFI_DIRNAME    "/EFI/BOOT/"
+> > > > >>
+> > > > >> -static int get_efi_pxe_arch(void)
+> > > > >> -{
+> > > > >> -       /* http://www.iana.org/assignments/dhcpv6-parameters/dhc=
+pv6-parameters.xml */
+> > > > >> -       if (IS_ENABLED(CONFIG_ARM64))
+> > > > >> -               return 0xb;
+> > > > >> -       else if (IS_ENABLED(CONFIG_ARM))
+> > > > >> -               return 0xa;
+> > > > >> -       else if (IS_ENABLED(CONFIG_X86_64))
+> > > > >> -               return 0x6;
+> > > > >> -       else if (IS_ENABLED(CONFIG_X86))
+> > > > >> -               return 0x7;
+> > > > >> -       else if (IS_ENABLED(CONFIG_ARCH_RV32I))
+> > > > >> -               return 0x19;
+> > > > >> -       else if (IS_ENABLED(CONFIG_ARCH_RV64I))
+> > > > >> -               return 0x1b;
+> > > > >> -       else if (IS_ENABLED(CONFIG_SANDBOX))
+> > > > >> -               return 0;       /* not used */
+> > > > >> -
+> > > > >> -       return -EINVAL;
+> > > > >> -}
+> > > > >> -
+> > > > >>   static int get_efi_pxe_vci(char *str, int max_len)
+> > > > >>   {
+> > > > >>          int ret;
+> > > > >>
+> > > > >> -       ret =3D get_efi_pxe_arch();
+> > > > >> +       ret =3D efi_get_pxe_arch();
+> > > > >>          if (ret < 0)
+> > > > >>                  return ret;
+> > > > >>
+> > > > >> @@ -239,7 +218,7 @@ static int distro_efi_read_bootflow_net(stru=
+ct bootflow *bflow)
+> > > > >>          ret =3D get_efi_pxe_vci(str, sizeof(str));
+> > > > >>          if (ret)
+> > > > >>                  return log_msg_ret("vci", ret);
+> > > > >> -       ret =3D get_efi_pxe_arch();
+> > > > >> +       ret =3D efi_get_pxe_arch();
+> > > > >>          if (ret < 0)
+> > > > >>                  return log_msg_ret("arc", ret);
+> > > > >>          arch =3D ret;
+> > > > >> diff --git a/boot/efi_fname.c b/boot/efi_fname.c
+> > > > >> index a6b11383bba..790f9e2fa36 100644
+> > > > >> --- a/boot/efi_fname.c
+> > > > >> +++ b/boot/efi_fname.c
+> > > > >> @@ -9,29 +9,34 @@
+> > > > >>    */
+> > > > >>
+> > > > >>   #include <efi.h>
+> > > > >> +#include <errno.h>
+> > > > >>   #include <host_arch.h>
+> > > > >>
+> > > > >> -#ifdef CONFIG_SANDBOX
+> > > > >> -
+> > > > >>   #if HOST_ARCH =3D=3D HOST_ARCH_X86_64
+> > > > >> -#define BOOTEFI_NAME "BOOTX64.EFI"
+> > > > >> +#define HOST_BOOTEFI_NAME "BOOTX64.EFI"
+> > > > >> +#define HOST_PXE_ARCH 0x6
+> > > > >>   #elif HOST_ARCH =3D=3D HOST_ARCH_X86
+> > > > >> -#define BOOTEFI_NAME "BOOTIA32.EFI"
+> > > > >> +#define HOST_BOOTEFI_NAME "BOOTIA32.EFI"
+> > > > >> +#define HOST_PXE_ARCH 0x7
+> > > > >>   #elif HOST_ARCH =3D=3D HOST_ARCH_AARCH64
+> > > > >> -#define BOOTEFI_NAME "BOOTAA64.EFI"
+> > > > >> +#define HOST_BOOTEFI_NAME "BOOTAA64.EFI"
+> > > > >> +#define HOST_PXE_ARCH 0xb
+> > > > >>   #elif HOST_ARCH =3D=3D HOST_ARCH_ARM
+> > > > >> -#define BOOTEFI_NAME "BOOTARM.EFI"
+> > > > >> +#define HOST_BOOTEFI_NAME "BOOTARM.EFI"
+> > > > >> +#define HOST_PXE_ARCH 0xa
+> > > > >>   #elif HOST_ARCH =3D=3D HOST_ARCH_RISCV32
+> > > > >> -#define BOOTEFI_NAME "BOOTRISCV32.EFI"
+> > > > >> +#define HOST_BOOTEFI_NAME "BOOTRISCV32.EFI"
+> > > > >> +#define HOST_PXE_ARCH 0x19
+> > > > >>   #elif HOST_ARCH =3D=3D HOST_ARCH_RISCV64
+> > > > >> -#define BOOTEFI_NAME "BOOTRISCV64.EFI"
+> > > > >> +#define HOST_BOOTEFI_NAME "BOOTRISCV64.EFI"
+> > > > >> +#define HOST_PXE_ARCH 0x1b
+> > > > >>   #else
+> > > > >> -#error Unsupported UEFI architecture
+> > > > >> +#error Unsupported Host architecture
+> > > > >>   #endif
+> > > > >>
+> > > > >> -#else
+> > > > >> -
+> > > > >> -#if defined(CONFIG_ARM64)
+> > > > >> +#if defined(CONFIG_SANDBOX)
+> > > > >> +#define BOOTEFI_NAME "BOOTSBOX.EFI"
+> > > > >> +#elif defined(CONFIG_ARM64)
+> > > > >>   #define BOOTEFI_NAME "BOOTAA64.EFI"
+> > > > >>   #elif defined(CONFIG_ARM)
+> > > > >>   #define BOOTEFI_NAME "BOOTARM.EFI"
+> > > > >> @@ -47,9 +52,31 @@
+> > > > >>   #error Unsupported UEFI architecture
+> > > >  >>   #endif>>
+> > > > >> -#endif
+> > > > >> -
+> > > > >>   const char *efi_get_basename(void)
+> > > > >>   {
+> > > > >> -       return BOOTEFI_NAME;
+> > > > >> +       return efi_use_host_arch() ? HOST_BOOTEFI_NAME : BOOTEFI=
+_NAME;
+> > > > >> +}
+> > > > >> +
+> > > > >> +int efi_get_pxe_arch(void)
+> > > > >> +{
+> > > > >> +       if (efi_use_host_arch())
+> > > > >> +               return HOST_PXE_ARCH;
+> > > > >> +
+> > > > >> +       /* http://www.iana.org/assignments/dhcpv6-parameters/dhc=
+pv6-parameters.xml */
+> > > > >> +       if (IS_ENABLED(CONFIG_ARM64))
+> > > > >> +               return 0xb;
+> > > > >> +       else if (IS_ENABLED(CONFIG_ARM))
+> > > > >> +               return 0xa;
+> > > > >> +       else if (IS_ENABLED(CONFIG_X86_64))
+> > > > >> +               return 0x6;
+> > > > >> +       else if (IS_ENABLED(CONFIG_X86))
+> > > > >> +               return 0x7;
+> > > > >> +       else if (IS_ENABLED(CONFIG_ARCH_RV32I))
+> > > > >> +               return 0x19;
+> > > > >> +       else if (IS_ENABLED(CONFIG_ARCH_RV64I))
+> > > > >> +               return 0x1b;
+> > > > >> +       else if (IS_ENABLED(CONFIG_SANDBOX))
 > > > >
-> > > > The Python framework lets you check the output whether you are rebo=
-oting
-> > > > or not.
-> > >
-> > > Yes, I complained about catching reboots at the time, but it was
-> > > submitted against my wishes. It is not a good design to create a
-> > > problem in a test and then work around it later. It is easier to just
-> > > return, rather than try to catch a reset in the Python test. For one
-> > > thing, it makes using gdb much easier to have the test be
-> > > self-contained.
-> >
-> > And sometimes a test needs to restart the actual system for the test.
-> > This sounds like another case of that, and not some arbitrary bad design
-> > restart.
->=20
-> Sorry, but I cannot tell the difference. We should not have tests
-> which need to restart, except in extreme circumstances.
-
-That's unfortunate then. Perhaps you'll just have to trust me that there
-are in fact tests where it's only valid to restart the system and not
-fake restart the system.
-
-> > To phrase that another way, you're trying to introduce workarounds in
-> > the code to avoid having to make the test work like a real system. I do
-> > not think that's a good idea for a test.
->=20
-> Which work-around are you referring to?
-
-Everything you're doing here.
-
-> I discussed this somewhat with Heinrich earlier. We didn't really
-> resolve it, but I did point out that if we want to reset/reinit the
-> EFI system within U-Boot (as we do with driver model, devicetree and
-> some other things) we can implement that when it is needed.
-
-That would be even more workaround.
-
-> > > > The test seems not to build on anything but sandbox. We should be a=
-ble
-> > > > to test the boot methods on QEMU systems.
-> > >
-> > > Most tests run only on sandbox. You are welcome to extend the tests to
-> > > cover more architectures. However I believe the most important thing
-> > > is to test the code itself.
-> >
-> > We also need to write things in such a way that we don't have to start
-> > over from scratch when testing on other emulation platforms. It's true
-> > that it's unlikely anyone will run the full cycle of booting various off
-> > the shelf distributions and architectures and boot media for every
-> > change. But I've got ~2 hours between assembling a pull request and
-> > looking at the build results and anything I can throw at a host and come
-> > back to in that time I'll do every time. Things that are automated but
-> > marginally longer I'll do with every tagged release.
->=20
-> I'm not sure how best to attack this, even now. With the Labgrid
-> integration (I am still hoping will land soon) I can boot into QEMU
-> and perhaps into grub, but booting right into a distro is going to
-> need ssh and networking (which is fine, it's just another step).
->=20
-> Anyway, that is a bid sideways of your point. Sandbox tests are always
-> going to be much easier to write than Python ones. They are faster to
-> run, as well. We can't do things like 'assert_nextline()' with QEMU.
-> Also I can't single step into QEMU with the debugger. Also with
-> sandbox, it is possible to check the internal U-Boot-state, whereas
-> with QEMU we have to print something on the console. So I believe that
-> writing a QEMU test is an entirely different job from writing a
-> sandbox test.
-
-I'm not sure how this is at all relevant to the point here. If you make
-the test application follow the UEFI spec this is no different from the
-existing hello world test we have in most respects.
-
-> There is something fundamental here which can be changed. Sandbox is
-> really just better for testing U-Boot code, so long as we design the
-> code properly for testing. Of course if we insist on not designing the
-> code properly for testing, that erodes the advantage. But that would
-> be the wrong direction.
-
-To be frank, I haven't been able to run the whole sandbox test suite
-locally in the last 5+ years if ever, and had to throw it in to docker,
-and then just got tired of fighting it and only see it in CI.
-
-> > > > In efi_exit_boot_services() we
+> > > > Please, add a warning here:
 > > > >
-> > > > * call dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL)
-> > > > * call bootm_disable_interrupts()
-> > > > * call board_quiesce_devices()
-> > > > * disable all EFI timers
-> > > > * disable EFI notification
+> > > >       log_warn("You are using the sandbox in non-compliant mode\n");
 > > > >
-> > > > What do you expect U-Boot to do after all of this? You cannot reaso=
-nably
-> > > > do any follow on test without rebooting.
+> > > > The riscv64 sandbox can only run riscv64 binaries
+> > > > The arm64 sandbox can only run arm64 binary.
+> > > >
+> > > > We cannot expect a DHCP server to do the expected with the value 0.
+> > > >
+> > > > So why should we introduce this?
+> > > >
+> > > > >> +               return 0;       /* not used */
+> > > >
+> > > > The following comment would fit better:
+> > > >
+> > > >      /* This breaks PXE booting on the sandbox.*/
 > > >
-> > > OK, well we can always add more code later as needed. So far, this
-> > > seems to pass CI without problems.
+> > > This line is already in the code. I am just moving it to a new file.
+> > > PXE booting is not supported on sandbox. Neither is EFI booting, until
+> > > this series is applied.
 > >
-> > What EFI-based tests do you run on sandbox after this, without resetting
-> > the system? That would perhaps help clarify the point.
+> > It sounds like EFI booting in sandbox is working and being tested and
+> > used (as a testing mechanism) right now. And the work and questions
+> > being raised here are around having your changes not break that existing
+> > use.
 >=20
-> It depends on the ordering of things in CI. From what I can tell most
-> (or all?) of them run after this test.
+> Well it would be, although at present that flow does not work, due to
+> a problem either with EDK2 or QEMU. It may be fixed at some point.
 
-Well, you shouldn't and I think earlier Heinrich was saying that perhaps
-we need to NULL out a few things more then.
+Since it sounds like Heinrich is testing shim+grub binaries currently,
+I'm not sure what you mean here.
 
-> But if this does cause a problem with future tests that we add, we
-> should be able to fix it easily enough. In fact it would be nice to be
-> able to re-init EFI.
+> With this patch, the -N flag is needed to use this 'native' flow. The
+> flag is not needed for CI, which is what I consider to be the normal
+> 'sandbox' case.
 
-Sounds like a lot of work-around work just to avoid testing that we are
-in fact exiting services and resetting like we should.
+Well, unfortunately your code has escaped in to the wild and is being
+used by other people now. For your still unclear what we need it for use
+case, you should be invoking the magic logic you need, not the other way
+around.
 
 --=20
 Tom
 
---X+TzLU6xNu5xlVPX
+--E5XRCngLqiDYK+QV
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmciSnoACgkQFHw5/5Y0
-tyyBuQwAsEwWLqVvZ0vPtYuz2HC6IVs6aP+C5VysPwoudT7mEZRwvTGIhvycf2z8
-xGRXAHO+RRsbKjOY82AOkt/zWg4lOCNCvvlRccbQ1VAErkLd1MWHSAL5m0yu1xCU
-YorWC6TFV3O7Qtvxy2O/wYJtoHXI/8VLjuXQQjA7Bd0D9Ka7sjqHH/uVXDA1Cg92
-GcmmHoLnWKbs4RwNADXb+8gbdaJUUXJL32WQnTDRx/WqELIv+X9xoZikAPOOB5ws
-LxGD9bC86y46kqUCfHHzbUaedYfi+kQp4J0Ewb2WAW4rbE01G4JHmpnkyuu/rMeI
-3tGVK1aOkp78ub8/tNDBksQs/UK4wjABcb2w6RpPvarS0dHLuPC3gIA85i4Y11CF
-LkTG/FlRctsOtetzU9ItMRFaIJ7oHHp57uqbtqPipfJWGi4cz1doF0B1TRuOEyqd
-9NKKR7L/UBNbhmEMCBEQfVHsmV/qP60xqAm5trQR0seDbdXSMJbHdDG6rnPF7UNg
-38Dk3GOd
-=IXMK
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmciSuMACgkQFHw5/5Y0
+tyx6zAwAjgXGJkcf6BGocKrewB+gcd1Hgi05mPIkjBW7iYy2c+37imbUXF3I+XHI
+npyF+KKUc2XWGj264YMR8kUC+ABVOcg0NiaP0kERwp7zp45tBsOShkEK2toq0pn2
+5Klmm44LO2P7oyGDYh9LTf9FWACA1P/XH7CnNY65/YYEuTSeIqpUSMztEswp2WSN
+IclQourk9bC4855jkJj2ZqUG27pAbcEn6yH6f3Hqyrhsz3yowg06RbF5F+X67SpG
+SbPKhvduRbKsIecq9QiUOyMTTcRrAl6YvccrQRUk24HV6tQ4JPQHmFifK3zhKaJR
+D6ah80APZZa9nVMLlTM+ib3cfENrmzpK7uLRGUZPGEqmnHOvMl5rRuRTQkoJ0TAu
+H3fNV/pyd7xkmNbk/04hysEI4IEJjPKx8soCna6HqmAkU7myqgFU9bEs9lwX+pmY
+ZG7GaBv7KWyfT6hpj8x1Mx8lGt2WF6gvthkOVL+GtKaWvfAD/5m28PwB4Ah6uEa0
+N+4nXQF8
+=X+na
 -----END PGP SIGNATURE-----
 
---X+TzLU6xNu5xlVPX--
+--E5XRCngLqiDYK+QV--
