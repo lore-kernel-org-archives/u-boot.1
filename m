@@ -4,77 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F082CD5CCBC
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 15:20:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1CE9D5CCB9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 15:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CD4B88FD2;
-	Wed, 30 Oct 2024 16:20:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 175DF88F83;
+	Wed, 30 Oct 2024 16:49:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="OS3ce+Se";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="GInA4Ktj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFCED88F83; Wed, 30 Oct 2024 16:20:55 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20610.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::610])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9810188B0C; Wed, 30 Oct 2024 16:49:32 +0100 (CET)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2061e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::61e])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B28768903C
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 16:20:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E3D3288FD2
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 16:49:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DwRxVmuxRH2FRO1nq+ZO2oKEnroeKbwU7jx4+22pmu4a3bsnzJReFB8zAythxUaM/RVLIvrcJ5+Xg+jkFH+ssLnk2aSWSNYkiVXPtFnRwib5nmOL1wg0ZTPHNZS5pVYDL4h2+DPAh5QAxBUCK3driI9e+rb1aVv6Xrw+meCooNdRKeHhqhuDLORaybd55djYZDY9JXlyM1ifnhkJJxx2fx9Vmo0qNZRd0vr6MOxC0K7nQ+s+ke82g942NU9Gegs1f83yrXPQGmMmUGm39H5rZRErXjCWrTjgMbjD+LmjuALgnrTlTw1E6dtcq03qhGB7Oi9ibGcgd1ctajuorL7Ddg==
+ b=G/D7w20n5gr1euHei5QRk040KZhpTiEbi2Wsne6sFUUT6JMsQgMKVcU40GzsVV1+2OVkGD23ha6ZX1hzlVrIxA6o4QvGZNA0T3z4Jo+iTymuO9qIlQXhCTt9EjBJsOE9RMdbP+tyU8Bzv9n+ACxkkEEaFoCrt4wJ75zsc4NvDP5K49vVP9zlH+k0xi5tEPTw0Cv3d4FDhyL+oDElbq/XxFO9uG4R/QfZzI2RCq8F1O4+7bn2Jazfpd5hIAeU93QX6kfiAhygDPrw3evw+QzQulQCrrxrJv1ksvg236m+yb7aVzOMHLPVl852E1CC59lA1D+jADZ6627pdNcmyqQEBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/d1463sYR0Myuu5B0Q1FwiTOq7Ep9dM9PxeDKW/1NIA=;
- b=gEmghIoBvkBYqkSMcEzEr6sBMYhi2ygsnxee+OHLNWP5jpfswxRX2AvqxH93DyT/+zV3siS2KY/h8pYFtJXNO+9M0yoQ/SPRKYO9rCkcnu9l8NMOSChmsginbPzvSlLkz9lTU1o5M36lbkUqSm0Q37Eo4SFHv3vMTPS0xxlDYEAKHpxBeJDXmluF8l9iJbkwmqPsjd7MU5Q5MHsLV5kR2sfC3b0DOvvJl9rmobD0ZgrVHd4l6MZYLWNF2Gt7vbOIUPv/O8tBcMdJEg+D3iKC8sooQv9G9d5zt++1O2msuHoj0IgpwRTBM1hUZfnrjf2DsK01RpKtGKK7EcviElWDBQ==
+ bh=cGZ9+kXG8E9jt/+YtTrpWyqYuOEmzC4cfXiycqQqUoQ=;
+ b=vcX85Z7tACzTOWDQaJb7UGbrVZazVql49ffaN+8PXSKXY0GIK7Zl7C6fGElf4J5SnDVlaQjEQpM5lRtOczrDv+3pSbztpHJbZRQ/bEHAId0V7E1H0eSiZdnOV3wn/R0+aV5UR1tuRGq9w9art0FoIp/SM8MOAppg1VH9+5HsVciNHke7EPTJ2dVSzUnE066BfqRX2bCe1G0ZRj+Wy1i4bK1C7tkNUO+r9p+iQN5Rn0S0Hw5R3B3rwrgAZeygU0eKUUzRIHptyOwibTlik9DxPdyKP1wMF/tUsCUNX+ZwsqbbrNXvrcnFtktKdOkDO9V0cdJxKYJpHige5a5NcG/dEw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/d1463sYR0Myuu5B0Q1FwiTOq7Ep9dM9PxeDKW/1NIA=;
- b=OS3ce+SeieRx5UoJSzlllZG+ZnBre+azN9QQqGEOkHkrJUYB9YKq4yJjBe1H42N9kvVkvzYutIicUG3U2eaB9n+fgVzZlM/loi/fuaQTQM4GK78WxsDj8FnRbTg7rXfVRdo1PaJKWkDacYKLObEnbBzKJ1wCZuAW/1r5Uf5at9o=
+ bh=cGZ9+kXG8E9jt/+YtTrpWyqYuOEmzC4cfXiycqQqUoQ=;
+ b=GInA4Ktjkjoo+PaVkr3H5DZ6LGCmlVTkF2Cu24J3EyvHdT7wAwgBaDEUtcGqfKnkSkLS3pOMe3DzD4OzoFoiDcaFVRDzwAssZ937yWbjQW0T3kPAeukYfCGTZ0JT5IMIVnfiWoOwEW6T8W71h9maeMf2d+Vk4sCcDkDo+0JfQTU=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by SJ1PR12MB6146.namprd12.prod.outlook.com (2603:10b6:a03:45b::6)
+ by IA1PR12MB7615.namprd12.prod.outlook.com (2603:10b6:208:428::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.25; Wed, 30 Oct
- 2024 15:20:48 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.18; Wed, 30 Oct
+ 2024 15:49:21 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%6]) with mapi id 15.20.8093.027; Wed, 30 Oct 2024
- 15:20:48 +0000
-Message-ID: <3835b139-ae37-423e-8a24-a958ece69c0d@amd.com>
-Date: Wed, 30 Oct 2024 16:20:32 +0100
+ 15:49:21 +0000
+Message-ID: <bf1c5738-de6a-49d5-9920-bbeb30ebd879@amd.com>
+Date: Wed, 30 Oct 2024 16:49:10 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/9] mtd: spi-nor: Remove recently added nor->addr_width
- == 3 test
-To: Tudor Ambarus <tudor.ambarus@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Andre Przywara <andre.przywara@arm.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Michael Walle <mwalle@kernel.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, Tom Rini
- <trini@konsulko.com>, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20241026201741.171073-1-marek.vasut+renesas@mailbox.org>
- <CAMty3ZB3ngMezv9S2XrNjXL69q+z9x-=qnQGga51FgTfA4fanQ@mail.gmail.com>
- <19fc4486-f8fe-4286-8941-76ff2a81b7d9@linaro.org>
- <CAMty3ZAJrKvUAxWg9CfKtyrjw+WnHOgwkfAJb+N-7d3NyXUrxA@mail.gmail.com>
- <f797cb27-84ca-41c3-83a5-b9044f2d5e5c@linaro.org>
+Subject: Re: [PATCH v1 1/1] drivers: bootcount: Add ZynqMP specific bootcount
+ support
+To: Vasileios Amoiridis <vassilisamir@gmail.com>
+Cc: trini@konsulko.com, hs@denx.de, pro@denx.de, sjg@chromium.org,
+ vasileios.amoiridis@cern.ch, u-boot@lists.denx.de
+References: <20241029185814.7937-1-vassilisamir@gmail.com>
+ <20241029185814.7937-2-vassilisamir@gmail.com>
+ <c6ad234b-e756-4ea3-8381-63ffca1c2c5c@amd.com>
+ <ZyJE7K8Eo7A6smyT@vamoirid-laptop>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -121,99 +110,99 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <f797cb27-84ca-41c3-83a5-b9044f2d5e5c@linaro.org>
+In-Reply-To: <ZyJE7K8Eo7A6smyT@vamoirid-laptop>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1PR09CA0162.eurprd09.prod.outlook.com
- (2603:10a6:800:120::16) To SJ2PR12MB8109.namprd12.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR09CA0185.eurprd09.prod.outlook.com
+ (2603:10a6:800:120::39) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SJ1PR12MB6146:EE_
-X-MS-Office365-Filtering-Correlation-Id: 886e23c2-57bf-419a-ce86-08dcf8f66eb0
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|IA1PR12MB7615:EE_
+X-MS-Office365-Filtering-Correlation-Id: 65941880-4dc7-4b4f-908b-08dcf8fa6bcd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SCtJSzFzMVFsU2M1VkxBK1pGQlcrcGpZaEt4cUhlcUlhbDhaWU9YZ2ZOQTd4?=
- =?utf-8?B?R0kwZ0cyeHZlbzJuUVAya013NTVwNUlERVZSTDA5R1UzWW4yTEpwK0EvV1Vw?=
- =?utf-8?B?cmpXSnR2dUZqVXRlR0xJZ3J1SGFhdFY1eTZ6TUpKRmJFR0U5NnNrTzZ3MVpj?=
- =?utf-8?B?QzVqOFFEbW9qZHN2bjdNZ3g0N2tRRVFtMUVDSiszeHc3U0R3VmZKTGtNSjZ3?=
- =?utf-8?B?TC9OSTV0emlMM1U5OGRaaWNxbVc2L1piYmY5c2hiVTNEN1BZektzL3d1UHRn?=
- =?utf-8?B?ZzdEQnFHSkt0UnY5UlhYekMxV0ZTd0tCOUxZQnBqVUptWWFDVitWOTJKY1l1?=
- =?utf-8?B?Y1M3Wk0yeTRUcUhNeWRkZHNvd01RQkdYUUs4azNjVlJoZjF3aTFoRlFKQ1dG?=
- =?utf-8?B?ZlB5dkR6M0dRUHMvVjc1TzRBOFdHRzU5L1JTVVBoZ3g4VngzSVU0WThQVjVG?=
- =?utf-8?B?eXUwUDBpMmRnTHpPNlVyNm1aMkVibXJLMnhaOVlzRlo1NW0vMUpoS3FIL1pV?=
- =?utf-8?B?ZlpBazRFeDAwenFIM2JhL1p2eWd2Y0dYdjdzaXd0NEtHKzdJam5rYmpRd2J2?=
- =?utf-8?B?QytlVG4reEFZek5CNUxoQ0VRZmVzTTZycWszTDlRbXBTMlBEVEhUcWlLMjVG?=
- =?utf-8?B?emgrNFhESVZnK3h0RmhNenRYY3d6NFFSZWU1Rm1nSzlWNnh4ZWNQaHBVQkh5?=
- =?utf-8?B?a1BzU2YvUGZXQUFZZzZTVG02Y0dVRXdyWGFUbVhVd0dXaGVHNGp3Qmt5L2dN?=
- =?utf-8?B?c1g3ZFNWZTQrMDNhdFVic09ValVKUHV4cXA4WDVhQXlleWR6Sms5dGhOUGtH?=
- =?utf-8?B?ZTJKSHZzV1U4VVZiYWtQdVJCM3NKVmFiYlBBOGw4cTZ4NHBMeFI3RDN2UmxX?=
- =?utf-8?B?QnljRk85VEhlc3BBWlByN0xZSytSSFA4QlJTQWU0TVV0T1NrcUFjQTJJQ0Zv?=
- =?utf-8?B?UlFqNjIrZTNFeXJRMjU0NWl1dUVnellYZUcxZFBJalZqSmRoUTRBTXV6Y1k2?=
- =?utf-8?B?UjZDMisxbXhJQWlucDczUXJQanlEdmx3QmRDVUtobjVPd3JDS0swWXYwK0FY?=
- =?utf-8?B?eEpXL0hhT0NGcDQ4Rzc5em1lTjRiY1R2cEVYYTJOR205R2pLVWlRc2VCd09Q?=
- =?utf-8?B?NE5BeXZlRldSRzZtbGhOL3RpUmNXSjlQcUcxa0ZUZXhOSVNBb3BpUFBwMHJ1?=
- =?utf-8?B?N29HQVlsd0VFYlN3N0VadHUyRy9zU1RHZGJwNVlKSnBLUHY3MFh0dElmQStF?=
- =?utf-8?B?ekVTYUxkZXdiN0thQVE3UVllbG95b0FJVGthdS9kUnBrMVU5cEloYVAyUTd3?=
- =?utf-8?B?cGRNVnArRG44WlZVR09memJOMkNYN1FvK0tseUxTdkZBTno0MFYyYjRwOHRD?=
- =?utf-8?B?VWY4dVdBVDIzS1JtbW55andIRVlmM3NvUDNpK0NHWkcvWDFNZVRJS2NHUWMr?=
- =?utf-8?B?MVN4WGJReGtBNlJJcWNXQ2M3Ny9BUVF2azZjZU4rWGJpOVNWVzBzK09PMU1m?=
- =?utf-8?B?WDZ2bStvSTBURmovajF0T0RGa0ZFWFQ5V2t5Y0lndUE2SFdLeElvbEEzdjZH?=
- =?utf-8?B?RjhicUpHc3dVdDFUOHZBZ0JyUzdCUUJPRDhPS3Ayd0VONUkzeGd2djh5bmJR?=
- =?utf-8?B?VEMxSElzOXM2UVpOa1dzdlVxcHpCTTNsTjlKdDhUanRNQjBTbUtzZWpkdE9o?=
- =?utf-8?B?Q0Y1WVNzd2l3YW1QWmlxWWR1VjlZR3hNRFpkNTVkempHWFFIVFdteFAzMlVB?=
- =?utf-8?Q?PEST+xDlVTMaOzD6LPSRlSCMuek6Wqy6aiiPihd?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dlNZR1ZUOGZZdFJqWmNHY1lMVjBPRTZLY01ld0RsR2t3OVZGdzNaQ2ludzJv?=
+ =?utf-8?B?aXNEdFhLRW4wb3BqeC9HRk9BNC84ajZpanMzcURoUkFReXVhN2d0SjFoSk8x?=
+ =?utf-8?B?aVQra2N4VEJLQlErVExyQVBRRlpDMllNL2hubmZ4NS9vdTI3eWIwRTFMcjBo?=
+ =?utf-8?B?blF3ZEpISnBkU0dkaDg3UGFJU3dMZmJQV3JJM2xhSGxieE1aZW41TUVWUEFV?=
+ =?utf-8?B?b0I1bU5Yek5ROVBWY1Nkc2tWcnVSMTJrRVpVN1N2WjNPNGJBNXFqNlhkdWdq?=
+ =?utf-8?B?K1ZBelAzVGFNc0s0U0MvMDViVWUzSUlpOWJGSTRsYWNGeWRRKzN0aFAvNzRS?=
+ =?utf-8?B?Qks4NWM0UHREak1mUHhWYlMxWEx1bUtTVFhMTzBSNG5pVUZTRTIyN3M0VkZ1?=
+ =?utf-8?B?Z2ZBaFJrUy81Z0I2OXcvVWlIeDg3ZVdyTGtDdlY2OXZBUkhVZlJ5K0xQYnFi?=
+ =?utf-8?B?dXc4RmN5QTRFSi95THU1K0tkMWRQemY4N0NWWjRjaXFtczhQVXV4a0w5OFlI?=
+ =?utf-8?B?Vjkrd01rUTFIb2ZHUnY1YlFtR1Q2UEdsNTVIbmkvMnJYK3ZGYUJ6RnN4QTla?=
+ =?utf-8?B?RUVFazRKMXBYV0hGMVVQZXh1cmhySzh1M24vTWZjNGZoRDk2V1lZT2hOcVBZ?=
+ =?utf-8?B?bGFSalMyeWd1RklXdkRLN2hRTnYwRGJaTlVWNjRtZDZVZ3cwRFlvbE9RYTFa?=
+ =?utf-8?B?NGJaRyt5Y1JYekxNeE9JZ2tqSEdqZ3FJSVl6UUhzZThkNy8wcXZEYVd0aXht?=
+ =?utf-8?B?aWE3WHFJd0ZWSG5Qc29HK3hPV2svL3FLUDdxeE9pOTJ0ZmxUR1lJTXBqUXZQ?=
+ =?utf-8?B?aHIxMDlBYUxvNXpFR2hEcEF4WGc5RWtUVWM0a01kWFRFSVRzMHdGK25LckdN?=
+ =?utf-8?B?Z2pHUE9SczBtbGRGK1pNNmkrM1Z2YllzTXd1M3lHd0VYUHk0MTZkd0FRT2ZF?=
+ =?utf-8?B?MmZLLy83TUVmRklTMFBVY3I2cEV5bDVrMDNZRGczaFRwODRlUW9tTlFjMEhW?=
+ =?utf-8?B?bUxHNE9GVWszMnpucVNaRVYyZktXRk5kRGdPNFNaYVd0Z1ZJZ3hCVE5NWlR6?=
+ =?utf-8?B?UnU5RnNsMDg2MDdSa1doTXVPd2pYRndBVVo3c3dzbGdyMEFrbkt1MC9HZ1lZ?=
+ =?utf-8?B?YnVGRkFNMEF0MFE2ejFzY1dGbThWaHU4RFpkdjhkODI0dmh4VjROV3hsVmxN?=
+ =?utf-8?B?Y0ZTR1JEdmoyWUsxSy9URDZMYTUxeFJSWWd4OEhmL1ZmbGg3ZGJRVHZFbGk5?=
+ =?utf-8?B?Ymt6RHRKWnQ5WHZETkl0MUJqeWprcTBsUjAwZXo3YkxOMmlvYUwzYWVkdnVl?=
+ =?utf-8?B?Y0c5MktyZFZzL2s3TTMwSEd5OTZESTVxNWkwTmNPQndmUmVrcWpZOHFZcUJM?=
+ =?utf-8?B?cTMvNlkrUWYra3lvU1V5K3RoOGtWUjdFYmwyNmx6YWlHYS9nQUFCQjJ6djYx?=
+ =?utf-8?B?L2h5V0IwUDVMdTA1Z2hLakxHOXFKbWxnZzdvbE5MOW5GUCtNNFgzUEdNRjBw?=
+ =?utf-8?B?OU41dmJEbUxnSnhUaktUTjA5eXNpSkViL3BGeHZZSmNtZEU3Q09QbHlUTHNs?=
+ =?utf-8?B?ZmtvbFAyM3Awdk9US2dpa2xUZVNoM085RnV3MC8vRm5MczU4SzZaaVY2ZDEv?=
+ =?utf-8?B?dWcya0M2SGVhVWFYWWVRTyswb2x0Y0lJQ2ZKaEpsdEx2VHlLNitpL3YvdWdM?=
+ =?utf-8?B?MkQySnk1bFJzbHB5eGNoaHJRcU1KT0I1V1ZsUXR0UXYwUERTMGlZTEdIRTUv?=
+ =?utf-8?Q?sKjp3STolXD0XHXauBRT8vV02SLxBpGP9PFRpLR?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SEgvU3FKTjI5VkRFMGJPenRCdGRnbEF1NGU3V01hL3hhd3luNEwwTDBCWm1E?=
- =?utf-8?B?M1JtMHBzV2Q1WC8xRFAyak1TeUFUak9CK3BXSFVuZGlsZ0tIZ0NrSmJwVlNj?=
- =?utf-8?B?cG5WSDFnVWsxNWZJbXp0R2FKTThSWUViMHNDT2FMUXhlWHVObkd4VzNhRFlz?=
- =?utf-8?B?Z0llMW5ZRzBxRTc3blQrNFhqM2lmY2l2S2JRTkZXMG91VTZqSkdjN0VIbzA0?=
- =?utf-8?B?Z01qcndocC9tOHJKczNhU1g1am8zVHE0UGtHdTJMM2QrRGtKcGhQLzdINkpu?=
- =?utf-8?B?TkdOUnAyZTcxV29ueTAyUUozK09hY2VDcWhYcXlOL0F4NGpQbFRFMUQ0WDMv?=
- =?utf-8?B?aVJDcFh4RlZaTTFla2RDRHpQSEVnRGdJL1F1WjAzbml4WndiMFB1R2hZR3py?=
- =?utf-8?B?c3VMS1R0VVpJNlQ4cFpXaVpDaU1ZcHpvUHVyUTB5b1pROExrWk93TnVPOEEy?=
- =?utf-8?B?VktCeno3YXRCT0R4dEJja2FNeEQ5M0xBa3NvbEFsM0E4OFRQVGkwYWtscTgw?=
- =?utf-8?B?R25CeWtLc3ZTTFJDU2hDS3BNMWlHNDUxbWE2bzY4YUVZcThDdnNDckpISElX?=
- =?utf-8?B?QVQ3bzQ1NmdFbEcra3R4SmZOV0VVYXg0VVNwZ3ZnVWt1SWYzSlpUSkZDNW5v?=
- =?utf-8?B?OUpBQlI2VnhxYmx2WlVHemh4RDhicEVaeFp0TjY1SFV2N1ZMZHFxZ1NHdHg1?=
- =?utf-8?B?N3VuTG9GSFJvaDhTTVBDbnZFRnYyNHdoOFNYUjloMDRyTzF5M0lnNDYzM2ZY?=
- =?utf-8?B?NUVNcEl4RU5TbDE0S09lV1hYYkNoMzNxdDF5Nm9xbEpiNFpmaURCeGlHSE5n?=
- =?utf-8?B?Zi93UndtN1hpZmxTZ0haV20xZU16dEZsSitXbmJPSGo0cGYybVl4MU1FZ0Ez?=
- =?utf-8?B?RW55RkY4U0szZXVhT3BpZGREbzU4eldQd2czWXVPeWUvRk5IUU9BU1RBTnNN?=
- =?utf-8?B?Q3l3Wi84dUdHV1VScmlYSlpFeHpFdENjVVhrOXgxUXFjeGJSWXNCa204QWZ2?=
- =?utf-8?B?R3JnSk5QcnJyTUwxa2Q2UDlpeWpCNVZ4TnFjc1FiVnVFU3JKb1ptL09KVFZh?=
- =?utf-8?B?blFrekw2dE02d1lMclFSRGhSTHlrUzBtRGxUc1U0aHRCdTJ4V1h4NkN4NG5F?=
- =?utf-8?B?Ymw1Y0FFdzU2NnlCZVBwZXFiNlZlenRRRHNpVjNTNmFBd2QzeHhka1Bpc3FG?=
- =?utf-8?B?Z3pSZ1hGZXNlZjNIUzhnbFlFTDB2ZUkzVGdqT3NXUGRuelg5aHRuZ285NUxB?=
- =?utf-8?B?SmQ1YU5pYUpVTDR6cktYcGUvYW5LVUx6UzJzUjkyV0JPWkNXcURpL0RIOVZC?=
- =?utf-8?B?RlJNVTJhZWd4aWFHZ2RDM3dWOEY2S1NrdFlON3JHdUdsK3V6ZG4xNjdhenA4?=
- =?utf-8?B?dXpxaFpyeTc2Sm5VT2lacDkxSUZsWnlsOER5Rk9HVDdHNW5HTGI1WWhrcklw?=
- =?utf-8?B?WG9uVVJHM2t6UG5TczJiVzQ4TU5OWk5BTmpaSVYzT1dXRFRVYTZQK0dzaTNp?=
- =?utf-8?B?WmZ6eW9HREl5dklOVWdvZEhyQ2VqYXBxMENURnlvajU0WVV2U3dYcGdyQjQw?=
- =?utf-8?B?Ymc5MWRIRS80K1JyYTd1OWEvcjdzZFFHSGFRampCV2syUGoxUFRmSVAvWlVw?=
- =?utf-8?B?eU8yZVRXb3JUNlBTeTlJQ0hmKzE5MENMYjBnTzAyRm1FTi9FMjcvSi83U1NW?=
- =?utf-8?B?ZGU0QXgwSFpYdjdRWkgxZkd0V0phaGxUNFIrWUU1Q3czZDMwYnl3UnR4RURv?=
- =?utf-8?B?Nnk5NExVRHkreHp2cU5iQUVCeERJZmkwdG5UVDJTcmRFRUpaYzllTWczZWNp?=
- =?utf-8?B?SG9RUVB4d2hiMk5ERC9DSEJSVkhzVjJrV3I4WDlkSUtqY0NiSFMwTWp4WHJz?=
- =?utf-8?B?M3FiRDcwb2hLblRNL2hHZEdYbENFRWVhTVdnUzhSRXplaUhDRUZvRzZ2VDBw?=
- =?utf-8?B?MjJpbm9ZYWFaeVUzZ2FWRFVsVnN0aDhnSmdzOTJuOUZsbHNmQm9aL2JsZUF5?=
- =?utf-8?B?TGdEdHNWUDVhMXdubzhUaEw1bU02YndFV2xkdUt6d3NLdDNzQlFpMHV0a3dx?=
- =?utf-8?B?NUo4ZzVjMXlaS20reUg3SnZYL1k1UlhCWFBaQmJYdm5FK2FaTVJ1bjZVSHhS?=
- =?utf-8?Q?1pZceirtjuKerBQHO0Wu+Lngd?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UEl3RmVzeThVUGREQ0FyWWk5bWUyd21oSStBekIwKzJqdE1wKzBFOElkMnR6?=
+ =?utf-8?B?RzUvOW4yTkR0TjRjZkkzYW5kcXNQOW9lQzMxZ3IxUnhBajlLYUttNXQySDhm?=
+ =?utf-8?B?Y0tIaG9DT1p6K3dOdlEySEFZRWRUYU5KNi9yb3RjelhmVlZvT0g0R1YwU2w2?=
+ =?utf-8?B?NE0wNlNCRlFRVkVZN280eXhLNWU4OTczVmlCWCtVTmRLMVJmYkpmMkh4clJz?=
+ =?utf-8?B?Q05weVJKblZlNU5pNXNHa0VGUDM5VVBKT20zdTZ1aVNpeDc2dEp6UEo1U0U4?=
+ =?utf-8?B?eVMwVmxNRE1HOUJ3K2pCQWphZmZrQVgxVE9RN2d3dHJMaVdILzNwb3AwMmtF?=
+ =?utf-8?B?dGlCekpIUm9YaDJER0tTaHBsVU1yMlNQU3RBTjRkZlovbnNOdU5WdkJOcStL?=
+ =?utf-8?B?a0NIK1ltMFh1QWEwQTM0NzlveWNTbWw3cU9SRmlRRGtiWHo0aUxidEFPUlN0?=
+ =?utf-8?B?am9yR2VlM2FPKzR3MzE2ZVBaRWNEVE9ELytaVks3d3RNaGc0ZGdjOUsvRzBV?=
+ =?utf-8?B?NmRjZVE3Nko2OCtWME11Qlk1Q1orT1NOQUVWd2lSQ28xSllmK3N4REN0dnJH?=
+ =?utf-8?B?VlRtRmU1MHBtSHYvZlBMT0ZRUGZ1TktnVk9ValhIUWY3OHVrelpCbUh5R0I3?=
+ =?utf-8?B?L09aN0JvakVQWHBmQ05sdFcwdnE3UzdhR3VEYzdHODlUTVhaUnZ2d1JlZ3FS?=
+ =?utf-8?B?eGlGVW1FNVBGVUhmbG1jUTFmTnJVZkRTbk91a24wMUlNSE50Rjg4UTVOQUhT?=
+ =?utf-8?B?QnhLRzBMRVpDM3dHYzAxRWRxaWhHNXlFNkRJblJNdHVJQzRpazQ2RW5VY2JM?=
+ =?utf-8?B?ZDNJM0JVTTNPbFBQN3JRMHNRbTVMWk82OGpYeVJTcURBVUFtQ24zODlwQzNu?=
+ =?utf-8?B?N28zNTc4V3Zzd0d5ei9OcTc0VEpqS0pBTy9XenRKSUJTajBFODVOZTlEWW9H?=
+ =?utf-8?B?WkkvdTJrcHhmYSs0N2FoYmE0aTFxcUJHSC9rSFpDR05wV3dIK0VuYmpkVngr?=
+ =?utf-8?B?U25WNjJtQ2lVOGRMRWlYalIwMFBGZVc5eUtvNXQ1YjJvZ0xsN1NIdis0RVMw?=
+ =?utf-8?B?YXVZNnFja3VTK2RGSm5ZaGZEUFMrNWZ0MGNkdEJXbUNwV2U1MjRRNGlzZzUr?=
+ =?utf-8?B?UnVkdDhuT0YyUVk4ZGJxVTMrazZzTVUySmVYNkRKZmluS095MnhPWmpNVjJa?=
+ =?utf-8?B?bWE1U1pBOGJ1eno3NEtjZm15Vjc0ZGVsZlh2djk2R2NPdExZV0ZqcmNxdjBz?=
+ =?utf-8?B?TUpzc1RjcjA0VWtEd1RTSVpKcW1mS2hSNGYzRDlTQW55T3h3R0Zyaml0WDM2?=
+ =?utf-8?B?alJKcjFnZC9ubkN2NVB0aHFuT2ppRmVWZSt6T1ExeHI2azB2blZiYVlIdFpJ?=
+ =?utf-8?B?Z3dQcjllL2dycmg3aFZiN2VmSkFNeHlkZlhYdjAxdGZGQ0wrem5JVnJLK3dC?=
+ =?utf-8?B?ZnYrQ3JyMkMreTF2eERPcU9rMEh3Zzc4UjhaTXh0WXR1TEVUVUExT3ArdnBG?=
+ =?utf-8?B?T0paLzBReUZVeW16UURNZEd4UGkrNlpreFhhd1FyR0RBb3h4L1dvMTJrakhC?=
+ =?utf-8?B?YlJhMlNJODVpZFRFRCtZZWFYLzI0eVFFeXJZeVM0WHpIZDY3dDFWSTYzR3Bw?=
+ =?utf-8?B?bkNHdUhyLytjdnQ4V1g3NUNhTkQvUkhDNHdkWHhuVlJDZng0OEtGdmIrYmFt?=
+ =?utf-8?B?Nm0zaUd1VWhJK29rUG9ieFFDeHowck1QNmJ5blRDZ2luQjA1MkRwTVg1WCs4?=
+ =?utf-8?B?VlhGQkJ0VG9GaDg2Z3hMbUNFWUhsMXJaS1pncmVHbENlNm5CR2ZheEh3ZDlD?=
+ =?utf-8?B?Z24reVVPUVVTdUgvRkUzY2Q5YU1KR0VyU2kwaDdmTVJLZ1o2ZlRUcVNJT2xP?=
+ =?utf-8?B?Sm9LMVF4ZUVtMTdVdjBvZnRObkRMV1QrMHR4SmNQR2M4U3NwTmNnOGFXUEoy?=
+ =?utf-8?B?MWhCTVRGR2Vla2xDVytJVnZUZ2pqdXJRUm5uaDhDOVdCT2UvaHJlUUhrZE5E?=
+ =?utf-8?B?aFd4T3FCMFRDbmxhZXRKV05ybk9xc1JXOTZNWmxjeWhCYVdUTW9Qdm5NbG9v?=
+ =?utf-8?B?enYrMWI2NnBvc1I1bDJMRWhDcTlyOWhkd1ZyTkRtZDl5aFRGbFRjMkRsbHpI?=
+ =?utf-8?Q?M5ti2fbk7iQWCr1jkxpujC4d3?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 886e23c2-57bf-419a-ce86-08dcf8f66eb0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 65941880-4dc7-4b4f-908b-08dcf8fa6bcd
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2024 15:20:48.3675 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2024 15:49:21.4969 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Hr/l4RvFcCxlLrByUs4W6GveP/S2kamHKq/v5Hc7oHpBRpy+Ib2wRC2MaejwGE18
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6146
+X-MS-Exchange-CrossTenant-UserPrincipalName: RpHfHRTwWw5UoAIjTdq/bFjqOw+8zPyQSQTES2DTlJyv8U1JiNU45RUDy4mgThPU
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7615
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -232,106 +221,131 @@ X-Virus-Status: Clean
 
 
 
-On 10/30/24 15:49, Tudor Ambarus wrote:
-> 
-> 
-> On 10/30/24 2:17 PM, Jagan Teki wrote:
->> On Wed, Oct 30, 2024 at 4:15 PM Tudor Ambarus <tudor.ambarus@linaro.org> wrote:
->>>
->>>
->>>
->>> On 10/30/24 10:33 AM, Jagan Teki wrote:
->>>> Hi Marek,
->>>>
->>>> On Sun, Oct 27, 2024 at 1:48 AM Marek Vasut
->>>> <marek.vasut+renesas@mailbox.org> wrote:
->>>>>
->>>>> Remove undocumented nor->addr_width == 3 test. This was added in commit
->>>>> 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
->>>>> without any explanation in the commit message. Remove it.
->>>>>
->>>>> This also has a bad side-effect which breaks READ operation of every SPI NOR
->>>>> which does not use addr_width == 3, e.g. s25fs512s does not work at all. This
->>>>> is because if addr_width != 3, rem_bank_len is always 0, and if rem_bank_len
->>>>> is 0, then read_len is 0 and if read_len is 0, then the spi_nor_read() returns
->>>>> -EIO.
->>>>>
->>>>> Basic reproducer is as follows:
->>>>> "
->>>>> => sf probe ; sf read 0x50000000 0 0x10000
->>>>> SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB, total 64 MiB
->>>>> device 0 offset 0x0, size 0x10000
->>>>> SF: 65536 bytes @ 0x0 Read: ERROR -5
->>>>> "
->>>>>
->>>>> Fixes: 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
->>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>>> ---
->>>>> Cc: Andre Przywara <andre.przywara@arm.com>
->>>>> Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
->>>>> Cc: Jagan Teki <jagan@amarulasolutions.com>
->>>>> Cc: Michael Walle <mwalle@kernel.org>
->>>>> Cc: Michal Simek <michal.simek@amd.com>
->>>>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->>>>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>>>> Cc: Pratyush Yadav <p.yadav@ti.com>
->>>>> Cc: Quentin Schulz <quentin.schulz@cherry.de>
->>>>> Cc: Sean Anderson <seanga2@gmail.com>
->>>>> Cc: Simon Glass <sjg@chromium.org>
->>>>> Cc: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
->>>>> Cc: Tom Rini <trini@konsulko.com>
->>>>> Cc: Tudor Ambarus <tudor.ambarus@linaro.org>
->>>>> Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
->>>>> Cc: u-boot@lists.denx.de
->>>>> Cc: uboot-stm32@st-md-mailman.stormreply.com
->>>>> ---
->>>>
->>>> Is this patch-set next version for 'previous' reverted series?
->>>>
->>>
->>> my 2c: I think I lean towards reverting the stacked/parallel support.
->>> The only one that benefits of is AMD, while affecting the core code
->>> quality. It also slows down further contributions and I assume it
->>> hardens maintainer's job.
+On 10/30/24 15:38, Vasileios Amoiridis wrote:
+> On Wed, Oct 30, 2024 at 02:13:43PM +0100, Michal Simek wrote:
 >>
->> I did try this before and it is hard to separate from the core. and at
->> the same time it is hard to maintain the core too.
 >>
+>> On 10/29/24 19:58, Vasileios Amoiridis wrote:
+>>> From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
 >>>
->>> Even if I (we?) haven't made my mind on how to best implement this, it's
->>> clear that it shall be above SPI NOR without affecting current devices.
+>>> Add native support of the bootcount mechanism in the ZynqMP by utilising internal
+>>> PMU registers. The Persistent Global Storage Registers of the Platform Management
+>>> Unit can keep their value during reboot cycles unless there is a POR reset, making
+>>> them appropriate for the bootcount mechanism.
 >>>
->>> Not sure if it's fine to revert everything, haven't followed u-boot
->>> lately, your choice to make.
+>>> Signed-off-by: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
+>>> ---
+>>>    drivers/bootcount/Kconfig            |  4 ++++
+>>>    drivers/bootcount/Makefile           |  1 +
+>>>    drivers/bootcount/bootcount_zynqmp.c | 28 ++++++++++++++++++++++++++++
+>>>    3 files changed, 33 insertions(+)
+>>>    create mode 100644 drivers/bootcount/bootcount_zynqmp.c
+>>>
+>>> diff --git a/drivers/bootcount/Kconfig b/drivers/bootcount/Kconfig
+>>> index fa6d8e7128..95b6a9541a 100644
+>>> --- a/drivers/bootcount/Kconfig
+>>> +++ b/drivers/bootcount/Kconfig
+>>> @@ -82,6 +82,10 @@ config BOOTCOUNT_AT91
+>>>    	bool "Boot counter for Atmel AT91SAM9XE"
+>>>    	depends on AT91SAM9XE
+>>> +config BOOTCOUNT_ZYNQMP
+>>> +	bool "Boot counter for Zynq UltraScale+ MPSoC"
+>>> +	depends on ARCH_ZYNQMP
 >>
->> If we find a way (not sure if it's possible) separate like a wrapper
->> or fix the things without revert - these are two points I can see as
->> of now.
+>>
+>> help would help to also described where that count is stored.
 >>
 > 
-> Then this set shall help move in this direction. Some involvement from
-> the stacked/parallel authors would be nice here, and some commitment
-> that the current status in just a temporary situation.
+> Hi Michal,
+> 
+> thanks for the review. Indeed I could add it.
+> 
+>> And why not to have it under DM/U_BOOT_DRIVER?
+>> You don't need to create compatible string for it just instantiate it.
+>>
+>> Look at:
+>>
+>> U_BOOT_DRVINFO(soc_xilinx_zynqmp) = {
+>>           .name = "soc_xilinx_zynqmp",
+>> };
+>>
+> 
+> I was not fully aware of this, I could try it. Just out of curiosity, is
+> this the new/prefered way of adding new drivers?
+> 
+>>
+>>> +
+>>>    config DM_BOOTCOUNT
+>>>            bool "Boot counter in a device-model device"
+>>>    	help
+>>> diff --git a/drivers/bootcount/Makefile b/drivers/bootcount/Makefile
+>>> index 245f879633..487adc1212 100644
+>>> --- a/drivers/bootcount/Makefile
+>>> +++ b/drivers/bootcount/Makefile
+>>> @@ -3,6 +3,7 @@
+>>>    obj-$(CONFIG_BOOTCOUNT_GENERIC)	+= bootcount.o
+>>>    obj-$(CONFIG_BOOTCOUNT_MEM)	+= bootcount.o
+>>>    obj-$(CONFIG_BOOTCOUNT_AT91)	+= bootcount_at91.o
+>>> +obj-$(CONFIG_BOOTCOUNT_ZYNQMP)  += bootcount_zynqmp.o
+>>
+>> please put it to the end of CONFIG_BOOTCOUNT to have it at least in correct location
+>>
+>>>    obj-$(CONFIG_BOOTCOUNT_AM33XX)	+= bootcount_davinci.o
+>>>    obj-$(CONFIG_BOOTCOUNT_RAM)	+= bootcount_ram.o
+>>>    obj-$(CONFIG_BOOTCOUNT_ENV)	+= bootcount_env.o
+>>> diff --git a/drivers/bootcount/bootcount_zynqmp.c b/drivers/bootcount/bootcount_zynqmp.c
+>>> new file mode 100644
+>>> index 0000000000..9bb801e188
+>>> --- /dev/null
+>>> +++ b/drivers/bootcount/bootcount_zynqmp.c
+>>> @@ -0,0 +1,28 @@
+>>> +// SPDX-License-Identifier: GPL-2.0-or-later
+>>> +// SPDX-FileCopyrightText: 2024 CERN (home.cern)
+>>> +
+>>> +#include <bootcount.h>
+>>> +#include <stdio.h>
+>>> +#include <zynqmp_firmware.h>
+>>> +
+>>> +#define PMU_PERS_GLOB_GEN_STORAGE0 0x00FFD80050
+>>
+>> In arch/arm/mach-zynqmp/include/mach/hardware.h
+>> there is already structure defined and gen_storage0 is there too.
+>> Please use it.
+>>
+>> Regarding this location. Exception in PMUFW is using this reg.
+>> It means at the end of day it is up to you if you want to use it or not.
+>>
+> 
+> In master branch (commit 5cca0e3f6e0ff17db92476235ea1bb9cd8cbc9eb) there
+> is no gen_storage0 in the structure pmu_regs, only gen_storage4 and
+> gen_storage6.
 
-I hope that by authors you mean SW owners not really HW authors of this wiring.
-Jagan is aware that we are using this configuration for quite a long time and we 
-are still here and not leaving.
-As you know Amit is trying to find a solution in Linux but nothing has been 
-agreed yet. If there is agreement to separate it to own driver or so we will be 
-definitely working with u-boot to get it to the same state.
+you are right but easy to extend that structure to have it there.
 
-This patchset is using the latest approved DT binding created by Miquel and if 
-new binding is accepted we will be working to align to it.
-Also intention is to bring this functionality to customers and not break others. 
-That's why these patches are pulled into rc1 to get better test coverage.
+> 
+> But in any case though, I don't use gen_storage0 which is the
+> Global General Storage 0 but the Persistent Global General Storage 0
+> which is in the in the offset 0x50 and is defined in [1]. According to
+> this document, only registers {4:7} are used by FSBL and other Xilinx
+> software products so from what I understand registers {0:3} are free to
+> use. If that's not the case, which one of them is free for use?
+> 
+> [1]: https://docs.amd.com/r/en-US/ug1087-zynq-ultrascale-registers/PERS_GLOB_GEN_STORAGE0-PMU_GLOBAL-Register
 
-And to be fair to say version which has been merged was v14 and anybody could 
-comment it before and we are definitely here to help to resolve issues on other 
-boards caused by this patchset. But we need to have help from others because 
-obviously we don't have other boards and they are likely also not wired in CI.
+in embedded sw you can find this
+lib/sw_apps/zynqmp_pmufw/src/xpfw_start.S:77:           addik   r3,     r0, 
+0xffd80050
+lib/sw_apps/zynqmp_pmufw/src/xpfw_start.S:81:           addik   r3,     r0, 
+0xffd80054
 
-Thanks,
-Michal
+And there are 2 pages which describe their usage
 
+https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18841724/PMU+Firmware#PMUFirmware-RegistersreservedforPMUFirmware
 
+https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842019/Zynq+UltraScale+FSBL#ZynqUltraScale+FSBL-WhatarethememoryregionsandregistersreservedforFSBL?
+
+But as I said I am fine if you choose one and you will use it for bootcount.
+
+Thanks
+M
 
