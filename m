@@ -4,78 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60445D5CCAA
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 13:18:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D307D5CCA9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 13:18:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A21389207;
+	by phobos.denx.de (Postfix) with ESMTP id 941A589216;
 	Wed, 30 Oct 2024 14:17:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=vodafonemail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="agqyEfO3";
+	dkim=pass (1024-bit key; secure) header.d=vodafonemail.de header.i=@vodafonemail.de header.b="VQveYEiW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0F2B89216; Wed, 30 Oct 2024 12:02:27 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 91CCA88FCB; Wed, 30 Oct 2024 14:01:03 +0100 (CET)
+Received: from mr4.vodafonemail.de (mr4.vodafonemail.de [145.253.228.164])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8741788F28
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 12:02:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D90588EDE
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 14:01:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=vodafonemail.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2fb5be4381dso62189011fa.2
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 04:02:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730286144; x=1730890944; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/Y0cQjiWhCk8Wo5244r3KjuFQcxI/spvogrmr0fH5U8=;
- b=agqyEfO3qDnSa1NwR699Ns/dpXjyK9wxwaUmgk3CCZAm4iKoLwNnmHZxwZxZqHxC1Q
- 7WUay27KnpD/xnHSFYOj8E1MA6yrAj9jP345J4/nMOqY14h5Zfk8ndQG5xegGrn6NWdb
- /DC6DJhMHw2tC2W7eQGvCIqDSyTMfatDyYwWhDG53iexR2RW1/NZAYFtork8tkYwt2XW
- ipWyTzJsrmiX/r5dzTSNqyIVeZGTDySsQ6DTXtaKJUnBN1cq2U/cxXGonBS0hR0OJWZO
- BTFQHHktPNtGZXTFYDutYDwKcCclPu4aWyfJKgq7VsU3130FRANbJmGPveiGv+FxZgQD
- aZqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730286144; x=1730890944;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/Y0cQjiWhCk8Wo5244r3KjuFQcxI/spvogrmr0fH5U8=;
- b=Fw5Oq4QFagDOc0RmjZwuaswxzuE6OLNLwV/AIq/dHrTBFXE/1qyLBFzt+epfO2tXls
- oX6BUVbc6Oz+fVcjSiaINd7vDFX8f1vccMqiEi+o8yCw1fCSZUcqngn/ld9DdJ/lUKRg
- wjUhTsAGVCF6PipYtu0llqonSXjOn+nZhyyKBgdm80ti7JIhs9+siTGvnUxQzdtwvq6d
- Hz1Lo9kLzv/JgJkM/oy/DrQpfEhR3qza6JB8Mvvol4vrqyR+zxpfTwQxRVLY9VxmD/A+
- tANrPVGCkA6FcP0JP2SuQ48SBcR9eBAPSiwAYO4xyTJioLSpKu8BsbM/Tw2onCwzqPPb
- pieA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXlSAbNj7cT6nf3TZhSqZ/HDA7Cyl5SxX6pYGzGYk5vmg9lauvhjn2t4jMvKT9x7HUhX7PGBvg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwVqyGI0gxwH/eUnHBtNs9272lrLc8euyYzb6iXUMzhwcyrC5QZ
- R/ZvedW8KAMz7r1xY6K3+gjwWDj6EjrkwZRjQgS9SsI/IX+r7eeCzcUZnrG2i78=
-X-Google-Smtp-Source: AGHT+IHda0yXtqXFyW/jdb9Kjch3pzbGwR02iijdopRrxX4zcNVONZWZy+PGucvP4t0i6omDZ3Ww0A==
-X-Received: by 2002:a05:651c:221e:b0:2fb:65c8:b4ca with SMTP id
- 38308e7fff4ca-2fcbe09865amr61951441fa.40.1730286143718; 
- Wed, 30 Oct 2024 04:02:23 -0700 (PDT)
-Received: from ta2.c.googlers.com.com (32.134.38.34.bc.googleusercontent.com.
- [34.38.134.32]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38058b1c3absm15141544f8f.21.2024.10.30.04.02.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Oct 2024 04:02:23 -0700 (PDT)
-From: Tudor Ambarus <tudor.ambarus@linaro.org>
-To: jagan@amarulasolutions.com,
-	vigneshr@ti.com
-Cc: marex@denx.de, trini@konsulko.com, u-boot@lists.denx.de,
- Tudor Ambarus <tudor.ambarus@linaro.org>
-Subject: [PATCH] MAINTAINERS: add tambarus as reviewer for SPI NOR
-Date: Wed, 30 Oct 2024 11:02:21 +0000
-Message-ID: <20241030110221.3321315-1-tudor.ambarus@linaro.org>
-X-Mailer: git-send-email 2.47.0.199.ga7371fff76-goog
+ spf=pass smtp.mailfrom=yuriz@vodafonemail.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vodafonemail.de;
+ s=vfde-mb-mr2-23sep; t=1730293260;
+ bh=VKZJGSeD5HczZPy25NecTEQUX3F24Yap9L2KMVYYvWU=;
+ h=Date:From:To:Subject:Message-ID:Content-Type:From;
+ b=VQveYEiWwwPqqKx3XZ8QT2FCxq36ZRJ4NzTPfezQSNaw9CerVkHQ1m/M3mIRxJFBH
+ +7hEYfDxgwO52kZfFrsQxqucdUoaXBQHtgbyNt8ZTUtP+9/YVWVnrPRwv+yFM5VCay
+ XXqSaXw9sTjj9VyS1uR8Gcw6A6riHuDhPUzJLV8Y=
+Received: from smtp.vodafone.de (unknown [10.0.0.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by mr4.vodafonemail.de (Postfix) with ESMTPS id 4XdnLN2kwyz1y0t
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 13:01:00 +0000 (UTC)
+Received: from qrv-systems.net (ip-095-222-025-162.um34.pools.vodafone-ip.de
+ [95.222.25.162])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
+ server-digest SHA256) (No client certificate requested)
+ by smtp.vodafone.de (Postfix) with ESMTPSA id 4XdnLJ1R2qz905B
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 13:00:53 +0000 (UTC)
+Date: Wed, 30 Oct 2024 14:00:51 +0100
+From: Yuri Zaporozhets <yuriz@vodafonemail.de>
+To: u-boot@lists.denx.de
+Subject: [PATCH] bios_emulator: define the comment symbol for RISC-V
+ assembler too
+Message-ID: <ZyIuA1Ieq4ff7iqV@qrv-systems.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+X-purgate-type: clean
+X-purgate: clean
+X-purgate-size: 976
+X-purgate-ID: 155817::1730293256-9DFFA477-39CECDD0/0/0
 X-Mailman-Approved-At: Wed, 30 Oct 2024 14:17:52 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,26 +75,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I'd like to get Cc'ed to u-boot's SPI NOR patches to help review them.
-The ultimate goal is to have an aligned approach in u-boot and linux.
+The bios_emulator driver cannot be compiled for RISC-V because the x86emu.h
+header file doesn't define the comment symbol ("#") for the assembler.
+With this patch, use the same symbol as for e.g. x86.
 
-Signed-off-by: Tudor Ambarus <tudor.ambarus@linaro.org>
+Signed-off-by: Yuri Zaporozhets <yuriz@qrv-systems.net>
 ---
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/bios_emulator/include/x86emu.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 38c714cf46..df046192ea 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1604,6 +1604,7 @@ F:	drivers/mtd/nand/spi/
- SPI-NOR
- M:	Jagan Teki <jagan@amarulasolutions.com>
- M:	Vignesh R <vigneshr@ti.com>
-+R:	Tudor Ambarus <tudor.ambarus@linaro.org>
- S:	Maintained
- F:	drivers/mtd/spi/
- F:	include/spi_flash.h
+diff --git a/drivers/bios_emulator/include/x86emu.h b/drivers/bios_emulator/include/x86emu.h
+index d2650a8d16..cfdcd7b3e1 100644
+--- a/drivers/bios_emulator/include/x86emu.h
++++ b/drivers/bios_emulator/include/x86emu.h
+@@ -54,7 +54,7 @@ typedef u16 X86EMU_pioAddr;
+ 
+ #if defined(CONFIG_ARM)
+ #define GAS_LINE_COMMENT	"@"
+-#elif defined(CONFIG_MIPS) || defined(CONFIG_PPC) || defined(CONFIG_X86)
++#elif defined(CONFIG_MIPS) || defined(CONFIG_PPC) || defined(CONFIG_X86) || defined(CONFIG_RISCV)
+ #define GAS_LINE_COMMENT	"#"
+ #elif defined (CONFIG_SH)
+ #define GAS_LINE_COMMENT	"!"
 -- 
-2.47.0.199.ga7371fff76-goog
+2.39.5
 
