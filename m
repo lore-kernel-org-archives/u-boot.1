@@ -4,98 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68ECED6B6B3
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 17:20:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35B19D6B6B7
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 17:20:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B01318925A;
-	Wed, 30 Oct 2024 18:20:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 251E789263;
+	Wed, 30 Oct 2024 18:20:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y1K+xzrG";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="RJLUgS7q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64D2F88FCB; Wed, 30 Oct 2024 15:49:16 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 00C5388FD2; Wed, 30 Oct 2024 16:15:42 +0100 (CET)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D956288F1E
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 15:49:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B055288CF1
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 16:15:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-37ed3bd6114so4261529f8f.2
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 07:49:13 -0700 (PDT)
+ spf=none smtp.mailfrom=admin@hifiphile.com
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2fb5740a03bso67026791fa.1
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 08:15:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730299753; x=1730904553; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ih2LJlFP7ouZI4XpcBod+6u3eX6bDouMjqKHkaaXymM=;
- b=Y1K+xzrG2EHR7LLu6MjOWCB1cfHwN27xHXZG405uPCFLmsk3vGQ49EP9dzYfhZEF0M
- QMDRR9pGWqj41uXu5OtpAVISHPLUNMBVe8j77XtwxbAjdTWsX6qGwGOSLZZdIOYsRT7u
- av6l+vrzXepea2VL9RAXDp3GaJr5YgfYZvooTxgZXZabEbgkRJe0hFso17uByaGPblA7
- IIknE2zJqIzKfvFvExa5OX3TBN3qOHlLAPwN1yGUJLKUXsUXmpFc1ElL2ORNnJ3VdTC4
- yUBeXZbu/6WqZcULM3f99u29L9SNUy6Zi2H3fT9JM9pDWdXm/i0q5on9UfHjr4LJaGE/
- Lmsg==
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1730301339; x=1730906139;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=DaHuROcJP1n5j3F/ZcDDPrRn0a0hdPS1v6tq3+FOA80=;
+ b=RJLUgS7q0mpEMnyiYek9+rm5DLXRRLdpb7zvHtaFX5a/ElPJ750WRemGL+LQspxYgm
+ JNAj4pxfO1zciV9gsB4Mgk6NC3+0EU2I4aGUVAtX8Go0eni7xGrfUbnMGBKyaIHHjY4/
+ zJOCShIGJ0TkDD4iVJm5bDt9xTSZ83o2Dc6kGBYnLh2Kyp33g9ApfQ9E25ofG70dWPiu
+ un7rcwjDt2VU0Waa3T+4t2c2KREUYlHRk63JPD07ZTJKs0/fMVQY5Kx6YgJ+XJCihElW
+ IzZpAtJOId23PIsWTCIKwenqPr39dhXIq12sAcKioV2znZNuAkDevlU+KvU4vbCsaA8r
+ g2OA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730299753; x=1730904553;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ih2LJlFP7ouZI4XpcBod+6u3eX6bDouMjqKHkaaXymM=;
- b=gqMPSuKOqMDZyUitcaA1WehUc8AKnnLgQSKI9/m7fP3hBrXGG1Uf1F/8uPX8j/rncZ
- w98Aew4s9z+oPbeRm4ab8VU1q96tz4df5Dmj7LOyAweqUCoGFygaaHqrQoS9uH7se7NT
- dBqHLoCqtBUU0O6voU/XshFpxEHEytaisQbWv4DdkjmVWBZrNA58ADFOhmXp4b7AzI2E
- 6iZ+e8H88m16lk5kKiTSI7MJrSJV2GOrnJao4+kmjtsfHrpw42KN3SNqolX6DJrhFRol
- UtV0MAyQ6jkCWOqxoil25PjPfZP4lUEouJ6dwv2cslEzY/PQcWy8BYHivHrTulv7pHjq
- 2vXw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWr5GOkALaoQKA4CzosnScSJZY/5zk7gOv1n3ROgzW5DwoXaTrPn9SKwAA0s0U9fI9mm5c0Skk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyaoy9vDBA/BcLt4452uBGsVVPkwNMVIQ50ffj5v/YCIY1tyxRB
- rHAn/Y8yOTKN0cOEZegxlGhhzNv5mpQOo2QXs0S35JucqJBlVs/AOra9HDdqlUTzb3Ybeq2o8Fw
- NdFA=
-X-Google-Smtp-Source: AGHT+IFYoOhMxj6VEKeLgltGCkOwtk27OCgc4bLo1XLu2tG7cwUBRJZ/wx0AAKiY5vt42jOifFD7qA==
-X-Received: by 2002:a5d:4f92:0:b0:37d:3985:8871 with SMTP id
- ffacd0b85a97d-380611dbea7mr10884829f8f.39.1730299753154; 
- Wed, 30 Oct 2024 07:49:13 -0700 (PDT)
-Received: from [192.168.0.157] ([79.115.63.43])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38058b3be78sm15647491f8f.31.2024.10.30.07.49.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Oct 2024 07:49:12 -0700 (PDT)
-Message-ID: <f797cb27-84ca-41c3-83a5-b9044f2d5e5c@linaro.org>
-Date: Wed, 30 Oct 2024 14:49:10 +0000
+ d=1e100.net; s=20230601; t=1730301339; x=1730906139;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=DaHuROcJP1n5j3F/ZcDDPrRn0a0hdPS1v6tq3+FOA80=;
+ b=dBlz/l34lnqN6C2YFStsd0eg/+y5ZfRrF/cdsrBxNCgct+SLOwdt2HppRTlYjwZr5A
+ xPODHoZO3rv66ArinPG/kIsVAIe/BJp8+lXyJVQuLpxnNmX2tU54AXzMmYGbmOCF7H9d
+ 9TUV7KKp1gBwDIEAViTHt6HC8X7LT1bUcX+1oX/Vtz0UYPT/VjIAZl0JbMpJCeJa5KRt
+ o1QViWdjvoHs8KII6DeZpOIM7bCMiIehT1jRMSCS/VhTcWNMeqiHXHG/lWn3Ql8fUJjB
+ JgihwIv6w3+LPK1lI8EouyrtxtHlBCMp1i96SVp3ig92oHEULsQeMPfvyMykakEKpPmi
+ Zm/w==
+X-Gm-Message-State: AOJu0Yy/7iWZwe9xTWuTI/U0aCcaNGNEOjmnTgkoeaRw4dQdF4gs2b50
+ z3e+sGWvDn7c/qC9Vox56zhowTApym7I9NWEt3fNZH5C8kY9qBbTMhbRhma2aDIRDBvVn/UEO8q
+ HuWlsrVKZgSTHcDwMugrAwlu1zzlVDHqYG1y9At4SeapQ8zfWpxA9eA==
+X-Google-Smtp-Source: AGHT+IFsjVfZNvO+sftwoe2dsto4bE/KkXbLrL79bT5wcMTIaqhID2OkHZa1vbl5pbAHbyo3+2e96aHmXd6kBRXctC0=
+X-Received: by 2002:a2e:b894:0:b0:2fb:570a:496e with SMTP id
+ 38308e7fff4ca-2fd058fc799mr23980401fa.9.1730301338747; Wed, 30 Oct 2024
+ 08:15:38 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/9] mtd: spi-nor: Remove recently added nor->addr_width
- == 3 test
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Andre Przywara <andre.przywara@arm.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Michael Walle <mwalle@kernel.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, Tom Rini
- <trini@konsulko.com>, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20241026201741.171073-1-marek.vasut+renesas@mailbox.org>
- <CAMty3ZB3ngMezv9S2XrNjXL69q+z9x-=qnQGga51FgTfA4fanQ@mail.gmail.com>
- <19fc4486-f8fe-4286-8941-76ff2a81b7d9@linaro.org>
- <CAMty3ZAJrKvUAxWg9CfKtyrjw+WnHOgwkfAJb+N-7d3NyXUrxA@mail.gmail.com>
-Content-Language: en-US
-From: Tudor Ambarus <tudor.ambarus@linaro.org>
-In-Reply-To: <CAMty3ZAJrKvUAxWg9CfKtyrjw+WnHOgwkfAJb+N-7d3NyXUrxA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+From: Zixun LI <admin@hifiphile.com>
+Date: Wed, 30 Oct 2024 16:15:28 +0100
+Message-ID: <CA+GyqeYN4-Z_LajbPXrXtypDY4mePa2vJQ36NW+7oaZg8ww4pw@mail.gmail.com>
+Subject: env: ENV_WRITEABLE_LIST with ".flags" variable
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de
 X-Mailman-Approved-At: Wed, 30 Oct 2024 18:20:04 +0100
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,96 +85,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello,
 
+I read the code about environment variable protection and an old
+discussion: https://lists.denx.de/pipermail/u-boot/2021-April/446247.html
+but I still have a question.
 
-On 10/30/24 2:17 PM, Jagan Teki wrote:
-> On Wed, Oct 30, 2024 at 4:15 PM Tudor Ambarus <tudor.ambarus@linaro.org> wrote:
->>
->>
->>
->> On 10/30/24 10:33 AM, Jagan Teki wrote:
->>> Hi Marek,
->>>
->>> On Sun, Oct 27, 2024 at 1:48 AM Marek Vasut
->>> <marek.vasut+renesas@mailbox.org> wrote:
->>>>
->>>> Remove undocumented nor->addr_width == 3 test. This was added in commit
->>>> 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
->>>> without any explanation in the commit message. Remove it.
->>>>
->>>> This also has a bad side-effect which breaks READ operation of every SPI NOR
->>>> which does not use addr_width == 3, e.g. s25fs512s does not work at all. This
->>>> is because if addr_width != 3, rem_bank_len is always 0, and if rem_bank_len
->>>> is 0, then read_len is 0 and if read_len is 0, then the spi_nor_read() returns
->>>> -EIO.
->>>>
->>>> Basic reproducer is as follows:
->>>> "
->>>> => sf probe ; sf read 0x50000000 0 0x10000
->>>> SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB, total 64 MiB
->>>> device 0 offset 0x0, size 0x10000
->>>> SF: 65536 bytes @ 0x0 Read: ERROR -5
->>>> "
->>>>
->>>> Fixes: 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
->>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>> ---
->>>> Cc: Andre Przywara <andre.przywara@arm.com>
->>>> Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
->>>> Cc: Jagan Teki <jagan@amarulasolutions.com>
->>>> Cc: Michael Walle <mwalle@kernel.org>
->>>> Cc: Michal Simek <michal.simek@amd.com>
->>>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->>>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>>> Cc: Pratyush Yadav <p.yadav@ti.com>
->>>> Cc: Quentin Schulz <quentin.schulz@cherry.de>
->>>> Cc: Sean Anderson <seanga2@gmail.com>
->>>> Cc: Simon Glass <sjg@chromium.org>
->>>> Cc: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
->>>> Cc: Tom Rini <trini@konsulko.com>
->>>> Cc: Tudor Ambarus <tudor.ambarus@linaro.org>
->>>> Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
->>>> Cc: u-boot@lists.denx.de
->>>> Cc: uboot-stm32@st-md-mailman.stormreply.com
->>>> ---
->>>
->>> Is this patch-set next version for 'previous' reverted series?
->>>
->>
->> my 2c: I think I lean towards reverting the stacked/parallel support.
->> The only one that benefits of is AMD, while affecting the core code
->> quality. It also slows down further contributions and I assume it
->> hardens maintainer's job.
-> 
-> I did try this before and it is hard to separate from the core. and at
-> the same time it is hard to maintain the core too.
-> 
->>
->> Even if I (we?) haven't made my mind on how to best implement this, it's
->> clear that it shall be above SPI NOR without affecting current devices.
->>
->> Not sure if it's fine to revert everything, haven't followed u-boot
->> lately, your choice to make.
-> 
-> If we find a way (not sure if it's possible) separate like a wrapper
-> or fix the things without revert - these are two points I can see as
-> of now.
-> 
+In env_flags_init() we have:
+  if (first_call) {
+    #ifdef CONFIG_ENV_WRITEABLE_LIST
+      flags_list = ENV_FLAGS_LIST_STATIC;
+    #else
+      flags_list = env_get(ENV_FLAGS_VAR);
+    #endif
+    first_call = 0;
+  }
 
-Then this set shall help move in this direction. Some involvement from
-the stacked/parallel authors would be nice here, and some commitment
-that the current status in just a temporary situation.
+When ENV_WRITEABLE_LIST is enabled, why do we have to initialize the list
+with ENV_FLAGS_LIST_STATIC instead of ".flags" ? Doing so makes ".flags"
+being ignored.
 
-All the stacked/parallel code shall be pulled out from SPI NOR
-eventually. The design is treating 2 independent flashes as one.
-Whatever ties them shall be above SPI NOR. In the meantime we all suffer
-until that is achieved. I guess if things become unbearable we can't
-remove everything later on, can we? Or maybe this ship has sailed
-already, I don't know.
+In env_flags_lookup() there is already a fallback when a flag is not
+found, the static list will be checked.
 
-It's really your decision to make because you maintain this code. If
-full revert is chosen, I can agree and ACK that. If we keep it and try
-to sweeten everything a bit, then be it.
+Since default env is firstly loaded in env_load(), external ".flags" are
+rejected and don't affect the security:
+  change_ok() rejected setting variable .flags, skipping it!
 
-Cheers,
-ta
+Advantage of using .flags is being able to use a <board>.env file to
+group all variables together without modifying the included header.
+
+Best regards,
+Zixun
