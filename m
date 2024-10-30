@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08ADCD74963
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 05:23:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59B2AD7496D
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 05:23:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55D42891FC;
-	Wed, 30 Oct 2024 06:22:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 00445891E8;
+	Wed, 30 Oct 2024 06:22:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="df/jmpgy";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="W+l8AvX8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5BBB89206; Wed, 30 Oct 2024 06:22:53 +0100 (CET)
+ id 6A254891F4; Wed, 30 Oct 2024 06:22:55 +0100 (CET)
 Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2060e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::60e])
+ (mail-mw2nam10on20610.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::610])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D97A891E8
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 06:22:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 60039891F9
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 06:22:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NTa2ABDSWIyORxMAnPXrY1ooTp52rxaZ+FESN1zTDExQyV6gdYWeSUzWJ2D5x8q6ZqiNgDHyA28dPy4LDs39W0MSVRC6werylq12dZ1n+yAOVAHKt1+ulOSo48gP8hCTCjNLozwAl25YUrnSIFBA07nrQVCJwmQ+qH8J9O86Rd8Nk9hzuiOPU5rItDdDwY8fH3OxiH7hxpgakzSgJso9LQfSMhYVHsvc0NUtxJCN8KaH7vxm3N+ltgVbXA+fn9USGYYl39LLJchAXeJpGVdQ8lbdcFxKlrV9Z+KwCI3YhJmZpZgjqtd5PtNzo0XPybjh/HiT++cqUc99Jgv7+gBufw==
+ b=f2XspvgZ7QAWbq/jABpdgTxW5vdEQI2HRPGUg1fXuQhfG/Aef4wyfGk1VTRXVV0Hpowte2iqnwYOtmrEx3cvXcGF4i2pYLTPGKsLPypFy4VNG0udxUmkP+07Nvpak7zX85QlHo1as+oQYUNG6ThSmfDMTqTAYE7bTdWoGpxynzgqAZUuWrd3WqOVNLevck0v7fVTqgtfZDEiiabBY8vJEHgb7TH5bHjwGjK2V9xk+ac7Ip+7GzHj0qInJdorXhfSoXfBf/3+cfh06hM8RaWr4nk2tZiS25dD25NWJJRan/gBilmkf6H7MJhHase/wX7xo5L/VtSL5AuHPTJS8kCmXA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=D4THxLWpu0/nm05yaMtP8XsYynmnXI8Z3MVnOeWh+6A=;
- b=S0aTGcTAXUit9gXtKRmLFmPGonBRLA4jFTtB/n2t2AamvbiMFndjR1u2Gy7FJwiyD769wK9M38rYwN0SKhADlg8EG+GBhfCVKP7Pec1MD2DlQRDyHvUf6ZjSVgjooPRNbE09S11HfeaK1uXHCBx6dMrCAhqYQ2HdABvI/HOE6Bni11CYv2A4o6l8gGtUsRZjV+bjd2qZYM7gvE4p/X0ykeAJDcyr283T8Zd47DmbFyQKH8b4EJ4p6DZg4n2ZFHuyDSWJiMRHzgs5T4ZZyRZqoAx7kTKhpNOKyPv6TxDHb+8LV+/G8Ie5by1wyIb8mr5zSz6j5vuCxYEuE4zacnYovQ==
+ bh=Zhu+25n90FlcaBW3hto8wQIfk3wlk/choLOF14snj3M=;
+ b=IedxapqXuK8tN5L1iFbABg+FQmhhgQukXn2Myr9yjInWfrgoMEcwfG/jU/r1uoEbTBEw3+P/ivJXgY+8nnFEpFv7JiSQLMRuyMVI2X+LoVVd+oFyf5HIcQIuGR6p0qjZpqdns9qDsC3FSGGRpk3+LcRuJ3Kz1xXFi2qzBPNPxq/GeI/h/lyjVJho0eZa9rF4EFIYcBg6d4RP7HmKpLzJG3HdhF5NB7Yo5ugbCyRTMOT+mdpZ5w6GX3P7U/ZM+OU2+aaSq6bMcotDpEOFmvy9410fwN4jyEbwgqqAhg8ixBhHBMuEGMYwo1JZObgfcr9lR6k9NZunGlhyMxt20He2Ug==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D4THxLWpu0/nm05yaMtP8XsYynmnXI8Z3MVnOeWh+6A=;
- b=df/jmpgyOHmaU94Tme13idpo8PY+zqIAhtI8BpVYsCOQqkUX5OQkjnSPDrl1vIjPC8exBx3QvA6TkrJyJCeaKn1dHxVTMMObYSWgVOidMsSYOMSPswfIuKRwg5ceNVRpAchl/DGoonWqrUvAFtwh1rrwLsAIF8r3YlZnmQ1GXt4=
-Received: from BLAPR03CA0022.namprd03.prod.outlook.com (2603:10b6:208:32b::27)
- by SA1PR12MB7367.namprd12.prod.outlook.com (2603:10b6:806:2b5::12)
+ bh=Zhu+25n90FlcaBW3hto8wQIfk3wlk/choLOF14snj3M=;
+ b=W+l8AvX8qTxxgevadUL9F8Z/qxSGzsspke15CO+q7W4NTNF7GtyiqQtxHJOVMg1gKak/muAZDVoIFYfvcQ8s0Hw/99iErbeTFFDxh9OMh3NPKUTcsWp4wLOuU3wFHFTiq/GwvQn/qWyQliaXMcNDXqPkZ+LBm0yhaOA98M3zU90=
+Received: from BLAPR03CA0024.namprd03.prod.outlook.com (2603:10b6:208:32b::29)
+ by MW6PR12MB9000.namprd12.prod.outlook.com (2603:10b6:303:24b::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.25; Wed, 30 Oct
- 2024 05:22:42 +0000
+ 2024 05:22:45 +0000
 Received: from MN1PEPF0000ECD8.namprd02.prod.outlook.com
- (2603:10b6:208:32b:cafe::ee) by BLAPR03CA0022.outlook.office365.com
- (2603:10b6:208:32b::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.29 via Frontend
- Transport; Wed, 30 Oct 2024 05:22:42 +0000
+ (2603:10b6:208:32b:cafe::4f) by BLAPR03CA0024.outlook.office365.com
+ (2603:10b6:208:32b::29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.26 via Frontend
+ Transport; Wed, 30 Oct 2024 05:22:44 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,79 +61,75 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  MN1PEPF0000ECD8.mail.protection.outlook.com (10.167.242.137) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8114.16 via Frontend Transport; Wed, 30 Oct 2024 05:22:42 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ 15.20.8114.16 via Frontend Transport; Wed, 30 Oct 2024 05:22:44 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 30 Oct
- 2024 00:22:37 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 30 Oct
- 2024 00:22:16 -0500
+ 2024 00:22:42 -0500
 Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 30 Oct 2024 00:22:14 -0500
+ Transport; Wed, 30 Oct 2024 00:22:41 -0500
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
  <git@amd.com>
-Subject: [PATCH v8 1/7] usb: onboard-hub: Add reset-gpio support
-Date: Wed, 30 Oct 2024 10:51:54 +0530
-Message-ID: <20241030052200.24243-2-venkatesh.abbarapu@amd.com>
+Subject: [PATCH v8 7/7] arm64: zynqmp: Update the usb5744 hub node as per
+ binding
+Date: Wed, 30 Oct 2024 10:52:00 +0530
+Message-ID: <20241030052200.24243-8-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20241030052200.24243-1-venkatesh.abbarapu@amd.com>
 References: <20241030052200.24243-1-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
+Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD8:EE_|SA1PR12MB7367:EE_
-X-MS-Office365-Filtering-Correlation-Id: 34d25498-fe7b-4b16-6b96-08dcf8a2e107
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD8:EE_|MW6PR12MB9000:EE_
+X-MS-Office365-Filtering-Correlation-Id: 863c0b2f-8271-4368-352c-08dcf8a2e255
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?diKQLetSoMWdjpBpZ+IHq4pA1a4B/tnmBx9lQpJXJUB/wZrbSs+lDbgzJTA6?=
- =?us-ascii?Q?a2goiQxnAn93cN9k5QqpjECCrBEm+NINpVTpSeYCwGM224ls5QB1ZFrVH00j?=
- =?us-ascii?Q?NqG5WO/NIw3u90WlZcunwDNB7TZ9hF02+RAF/ZcdoYKYmq0yqCMDgsUiVG+n?=
- =?us-ascii?Q?LmM81QZ/PvOnp2RCVjvHH0fu9tFAN1jOPJyKbr1DOPKa7ZtF1B4IsXU1O9st?=
- =?us-ascii?Q?L3SCyowsWGQNohwj4vKAaAYVdHX3jRdF4WdZoZWrSj9hhjWwoNrtBy3su7RZ?=
- =?us-ascii?Q?u7nVx3pMvlwTGQfJghGttrYxFrXuLs8sQ3SYGlUQjHesOGv0TfV88CPYKqvC?=
- =?us-ascii?Q?1x7DciXHflK7VxeyYpa+KjUEdyuT/uwEY2J2HkgObWo4f3Mggjdq72mdef7G?=
- =?us-ascii?Q?oAL+qPWONDsC8SCqv09Lj3kQ7BjHAX2wfh9c1PoVpU/3xYmeF8/kjsKwr4ri?=
- =?us-ascii?Q?N2+HhwJjPKvAT4ldx9BsXtlV9ZyTtQ5jt5Cq6MxtZI9GvvNGKB1qkuRHyD6G?=
- =?us-ascii?Q?xCqpMoziyHU2jcQSt+EHfeJWTpQv6nsazIRbH+J5Sacbcg37cnOSqUZsI3q9?=
- =?us-ascii?Q?Ddw7/PsSvyT+OdmnZZVEP4IJPJkN6uPA7lNfrtvgEuKf+llhgAGDO53CxeT0?=
- =?us-ascii?Q?iCLcmQTEATejA32V3/iFFiCABL21btXtukovUFIeVbBrmGsvOX0NGIOENnnA?=
- =?us-ascii?Q?B6ubMJglT6k5UguN0wmWtIaN40EXcTnEJnM2aDgxKxBW+0Pz58iHue2NDuu5?=
- =?us-ascii?Q?sH9CzMDA2zJ/GUxznXk04056sHjZmnj1xUrUPJQpkD5kGkzYsYFOQLxGIMDX?=
- =?us-ascii?Q?E3elekvuGzNv0QbedE8aS9C+dQlHjUtm++EPQqG/H4YPcKkgUT7UY2QZg45q?=
- =?us-ascii?Q?IiZw3I1ivSoouhPxFv41/buPzyUHK8+Qn9BdRD2YiCII95DCy5rFnzwGPWTi?=
- =?us-ascii?Q?NtTCKCcU9EPl79wx6Y7j4uDJZf0ns3gsJtKdYuanij4/OrzvaBXm9SyAavMU?=
- =?us-ascii?Q?0l1b6TrXCcBs3OZe8x1ZDLGUyf3I4xJZJaFx/dAm9At44iAEPHBzZfd7t7HB?=
- =?us-ascii?Q?J8LDDZIagERy8ygzz/i/s0v3txrRV0QdrrbO5m9tAFw2hbQIsocDbZWXO24U?=
- =?us-ascii?Q?/i0RGouA/UupXmihIisiGtKFlTqzEpVTSMVrlx8LnthAAqCbfxPIvyFLAP8J?=
- =?us-ascii?Q?yXZfwSoilHMuakuB1k0wju6UFfmwga0hZi4794NnUC4bpwWX9RgFafYEjxR1?=
- =?us-ascii?Q?dRvMNQBj6dvGSzdqq4XaTQ6aD3JTr/h/3aOTLw/wK9wTnes5Y0ebfWgRkPSw?=
- =?us-ascii?Q?czMdE4Fvx1luDWhvLtR+ATvK/31BmLGB7H3BQy2DgQRzCWyWFyjdZqf0eiBl?=
- =?us-ascii?Q?/Dq0UCN8vQTAgEfwr5bc8uRnAsIToqHCUm0t1QB20qK2zRo2Zg=3D=3D?=
+ ARA:13230040|82310400026|36860700013|1800799024|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?498qD/Z7rUPUxxgY2DJqlUZwu5jBEgLTw5bsjsIe5YYkvDrQaqmowub3jbEl?=
+ =?us-ascii?Q?bohcAYI9LFRUpvHvYzvFWos4AdUEs7q+VN8QD3OrSkCQ124cMI1pPombWiuC?=
+ =?us-ascii?Q?LNY6BzMNRCIJniTNsuAond7TZn8uDzBRMdA0lvnjuNpk71wb0G6OwKt3I0Q9?=
+ =?us-ascii?Q?DlTtKmjLjIWwp8ArZU/Fk5I2pK7iXp66n3K8TmWe5x9ClTtYAbPH/0kgScQ3?=
+ =?us-ascii?Q?menWeRfr87+/eVPGzlMnpYi9k0keWTQORg8V3f5Fm3aNvb5ieSS9K4yfmCy+?=
+ =?us-ascii?Q?7C1mvAz4kxAcvhgA1AZ7kW0+v5wMJuYQmDpF+WxwvYLVwhHON1c1turuOzbM?=
+ =?us-ascii?Q?V0hi3jEyJ4vi3cBRWtS6DCCEPU/hFMUlfJ2WmQcSHTSVnsC58lz4z25CdtE2?=
+ =?us-ascii?Q?LgtNFSPW0A9uitXdnrPrBUtS3wek+yn99EVeXJ9NQUBuXAM5B9WYPCT6ugrb?=
+ =?us-ascii?Q?Z/jx4jq4bs60TLdnEY8WkrnLHFu9AOooaDSwDgj17NaWMfLKi3DM9HV/kHU1?=
+ =?us-ascii?Q?0FsaR9ZAqIo9a91m2bNrGeYt+aeOT3tjyXInJWVg1r97RYzmMtFXck5zFjUp?=
+ =?us-ascii?Q?aBlEkVMyb/Icj4+g4AJ7oULFOiJwuioF5lRIBcpXdAKTGttl/kvCV14IXbyM?=
+ =?us-ascii?Q?F0cM72LX74fVWLMTAygQfUH4+ViFwQkJZrCZYx8qKbzn36Q3tWvwESmcOoMy?=
+ =?us-ascii?Q?lFTAv95KP8kEK7RUp80uWgqazaHycDdPdq9UZbZ08/dNxQO28ZtKUfIEKHeq?=
+ =?us-ascii?Q?ye2GgCKx0AUvXE6Ppu/vdkISS+xm+rE3VXwKkHHtDJC5AAwp6A32IkCLRVq6?=
+ =?us-ascii?Q?a5lti6Z3OlLJAcxzK9JV/uX6hd1BjFD+ODWHGxa3c8dlFyZpvcm/OWIrWlZt?=
+ =?us-ascii?Q?PNEZIeMxfrPVXrHjRfsc+yj3WmkwdMYNh+bfI9GTS8qNZs13culfVnyspFKF?=
+ =?us-ascii?Q?5uTJvoKedzDJgdNysl1xlefP3vrV/od5TF/EAINf04qhKI057Z2rlL43OJgL?=
+ =?us-ascii?Q?/YENT8HfX4+ZiTfuAw0GNxu3GCoLRGjY9IC8d7OsAO3H5Vf+WeCz/InM6vjm?=
+ =?us-ascii?Q?wvhVUHJ5BRxJyhJTxwDC1UKyHt7VOGsy3t4pOGsmioPaOi3E4vqzhERgypHg?=
+ =?us-ascii?Q?myY2x6PY1B9YsKP50ZoL7tWohkPAFRuHMBVcyo+5+IRYhw2IDyhbhGxzdh6N?=
+ =?us-ascii?Q?xX6hTKVLcqsNHnKa6FnHg4sXju3VmQei5zcg71fzCO7THfVVQvo+FtGyPyVF?=
+ =?us-ascii?Q?ETNO+UEyM0xMqdfYBH4yw7TVdkXdd9a91mJZbfsRGeX2BQo/XR1FOKiB3RxM?=
+ =?us-ascii?Q?MjsG1US+v8JIH6L1sEoDu6vWfQnNBIa1ZVqYAeSKdaE33w=3D=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
+ SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2024 05:22:42.2736 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 34d25498-fe7b-4b16-6b96-08dcf8a2e107
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2024 05:22:44.4611 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 863c0b2f-8271-4368-352c-08dcf8a2e255
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD8.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7367
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB9000
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,90 +146,247 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As part of the reset, sets the direction of the pin to output before
-toggling the pin. Delay of millisecond is added in between low and
-high to meet the setup and hold time requirement of the reset.
+Updating the usb5744 hub node as per the latest upstream DT binding
+https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/
+tree/Documentation/devicetree/bindings/usb/microchip,usb5744.yaml?h=v6.8.8
 
 Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Acked-by: Michal Simek <michal.simek@amd.com>
 ---
- common/usb_onboard_hub.c | 42 +++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 41 insertions(+), 1 deletion(-)
+ arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 48 ++++++++++++++++++++++++++
+ arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 48 ++++++++++++++++++++++++++
+ arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 18 ++++++++++
+ arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 25 +++++++++++++-
+ 4 files changed, 138 insertions(+), 1 deletion(-)
 
-diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index 68a04ac041..4174575893 100644
---- a/common/usb_onboard_hub.c
-+++ b/common/usb_onboard_hub.c
-@@ -7,14 +7,51 @@
-  * Mostly inspired by Linux kernel v6.1 onboard_usb_hub driver
-  */
- 
-+#include <asm/gpio.h>
- #include <dm.h>
- #include <dm/device_compat.h>
-+#include <linux/delay.h>
- #include <power/regulator.h>
- 
- struct onboard_hub {
- 	struct udevice *vdd;
-+	struct gpio_desc *reset_gpio;
+diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+index 6349a0e108..e40840acb8 100644
+--- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+@@ -105,11 +105,19 @@
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 			reg = <0>;
++			hub_1: usb-hub@2d {
++				compatible = "microchip,usb5744";
++				reg = <0x2d>;
++			};
+ 		};
+ 		usbhub_i2c1: i2c@1 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 			reg = <1>;
++			hub_2: usb-hub@2d {
++				compatible = "microchip,usb5744";
++				reg = <0x2d>;
++			};
+ 		};
+ 		/* Bus 2/3 are not connected */
+ 	};
+@@ -164,6 +172,26 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	/* 2.0 hub on port 1 */
++	hub_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub_3_0>;
++		i2c-bus = <&hub_1>;
++		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
++	};
++
++	/* 3.0 hub on port 2 */
++	hub_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub_2_0>;
++		i2c-bus = <&hub_1>;
++		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
++	};
  };
  
-+struct onboard_hub_data {
-+	unsigned long reset_us;
-+	unsigned long power_on_delay_us;
-+};
+ &usb1 { /* mio64 - mio75 */
+@@ -188,6 +216,26 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
 +
-+int usb_onboard_hub_reset(struct udevice *dev)
-+{
-+	struct onboard_hub_data *data =
-+		(struct onboard_hub_data *)dev_get_driver_data(dev);
-+	struct onboard_hub *hub = dev_get_priv(dev);
-+	int ret;
++	/* 2.0 hub on port 1 */
++	hub1_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub1_3_0>;
++		i2c-bus = <&hub_2>;
++		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
++	};
 +
-+	hub->reset_gpio = devm_gpiod_get_optional(dev, "reset",
-+						  GPIOD_IS_OUT | GPIOD_ACTIVE_LOW);
-+
-+	/* property is optional, don't return error! */
-+	if (!hub->reset_gpio)
-+		return 0;
-+
-+	ret = dm_gpio_set_value(hub->reset_gpio, 1);
-+	if (ret)
-+		return ret;
-+
-+	udelay(data->reset_us);
-+
-+	ret = dm_gpio_set_value(hub->reset_gpio, 0);
-+	if (ret)
-+		return ret;
-+
-+	udelay(data->power_on_delay_us);
-+
-+	return 0;
-+}
-+
- static int usb_onboard_hub_probe(struct udevice *dev)
- {
- 	struct onboard_hub *hub = dev_get_priv(dev);
-@@ -30,7 +67,7 @@ static int usb_onboard_hub_probe(struct udevice *dev)
- 	if (ret)
- 		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
++	/* 3.0 hub on port 2 */
++	hub1_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub1_2_0>;
++		i2c-bus = <&hub_2>;
++		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
++	};
+ };
  
--	return ret;
-+	return usb_onboard_hub_reset(dev);
- }
- 
- static int usb_onboard_hub_remove(struct udevice *dev)
-@@ -38,6 +75,9 @@ static int usb_onboard_hub_remove(struct udevice *dev)
- 	struct onboard_hub *hub = dev_get_priv(dev);
- 	int ret;
- 
-+	if (hub->reset_gpio)
-+		dm_gpio_free(hub->reset_gpio->dev, hub->reset_gpio);
+ &gem0 { /* mdio mio50/51 */
+diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
+index b0d737d3ca..ce1ad2b765 100644
+--- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
++++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
+@@ -117,11 +117,19 @@
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 			reg = <0>;
++			hub_1: usb-hub@2d {
++				compatible = "microchip,usb5744";
++				reg = <0x2d>;
++			};
+ 		};
+ 		usbhub_i2c1: i2c@1 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 			reg = <1>;
++			hub_2: usb-hub@2d {
++				compatible = "microchip,usb5744";
++				reg = <0x2d>;
++			};
+ 		};
+ 		/* Bus 2/3 are not connected */
+ 	};
+@@ -184,6 +192,26 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
 +
- 	ret = regulator_set_enable_if_allowed(hub->vdd, false);
- 	if (ret)
- 		dev_err(dev, "can't disable vdd-supply: %d\n", ret);
++	/* 2.0 hub on port 1 */
++	hub_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub_3_0>;
++		i2c-bus = <&hub_1>;
++		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
++	};
++
++	/* 3.0 hub on port 2 */
++	hub_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub_2_0>;
++		i2c-bus = <&hub_1>;
++		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
++	};
+ };
+ 
+ &usb1 { /* mio64 - mio75 */
+@@ -209,6 +237,26 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	/* 2.0 hub on port 1 */
++	hub1_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub1_3_0>;
++		i2c-bus = <&hub_2>;
++		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
++	};
++
++	/* 3.0 hub on port 2 */
++	hub1_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub1_2_0>;
++		i2c-bus = <&hub_2>;
++		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
++	};
+ };
+ 
+ &gem0 { /* mdio mio50/51 */
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+index 561b546e37..0ef0357bd2 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+@@ -142,6 +142,24 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	/* 2.0 hub on port 1 */
++	hub_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub_3_0>;
++		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
++	};
++
++	/* 3.0 hub on port 2 */
++	hub_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub_2_0>;
++		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
++	};
+ };
+ 
+ &sdhci1 { /* on CC with tuned parameters */
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+index 64683e0ccb..92d8851eb8 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+@@ -92,7 +92,10 @@
+ 		label = "ina260-u14";
+ 		reg = <0x40>;
+ 	};
+-	/* u43 - 0x2d - USB hub */
++	hub: usb-hub@2d {
++		compatible = "microchip,usb5744";
++		reg = <0x2d>;
++	};
+ 	/* u27 - 0xe0 - STDP4320 DP/HDMI splitter */
+ };
+ 
+@@ -146,6 +149,26 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	/* 2.0 hub on port 1 */
++	hub_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub_3_0>;
++		i2c-bus = <&hub>;
++		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
++	};
++
++	/* 3.0 hub on port 2 */
++	hub_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub_2_0>;
++		i2c-bus = <&hub>;
++		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
++	};
+ };
+ 
+ &sdhci1 { /* on CC with tuned parameters */
 -- 
 2.17.1
 
