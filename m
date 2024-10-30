@@ -4,57 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 070E1D74963
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 05:28:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 987C2D7496D
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 06:07:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85FF9891CD;
-	Wed, 30 Oct 2024 06:28:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0C2BE88A24;
+	Wed, 30 Oct 2024 07:07:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1730266115;
-	bh=CJX+pe0oGudQwYXA6nR0XRuiKC9lXFiKSBfYO49/sNw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=m+XC9aRWOTD28OnNhE884cSZQrQdI2GVglKpCRLUNUIU2w4KbhNgiWtO7kX41ya1M
-	 5vwG5v3hjmKr8dwGRe+jBNEWQH0clscD/ZOWcwW8RFdK27arcFiEZRfSpExchlowFT
-	 cf3YmQwyQyZOJG1SH0QxCqrAtquJvE0a3FuHWIr9Udvo/RtpYbDBPXZEEDyhzRsqS6
-	 unGkP9k1dwvPSavo33L7jJtmzYY1nqeQ/fv5D83w8hW4zxEcSKjJ/ROokWbw3/eAWR
-	 WC10iFvl4HGXOMMdcQGBDcqLpBCpl0xS8INZ2iTgdYh1LdPguyB3WdIZRDQe187aAM
-	 gBlFF3IsEbgGQ==
-Received: from [192.168.1.107] (89-186-114-4.pool.digikabel.hu [89.186.114.4])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9615189024;
- Wed, 30 Oct 2024 06:28:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1730266114;
- bh=CJX+pe0oGudQwYXA6nR0XRuiKC9lXFiKSBfYO49/sNw=;
- h=Date:Subject:To:Cc:References:From:Reply-To:In-Reply-To:From;
- b=G3IqYjqlE8VSKBVlttJbHAS23p6JzHeFvt2RncmzcjHkkNH8Mg+KM51xAjknFzAzf
- VN8Ch35sC0dHbS+WC7au503NIqYSNdeyjK66haaea8w6Eq8Kwm05vUVKy6hPVGgiB1
- tZ8CyYtNy2GAS/mgvrJqk5UEKif1aDfpO/+rd/IcbZjhAKrpQ2G3lm8WhUCmgFjN5Q
- wgDW3bW7JMKqx8V8SF0Ah101M1qMMzShWJf5l+ZMq1ihexiF7dEO3K7GHn5eeQG5Mk
- bW+udGgXTYwkx21BSa72LS1X/SeEU2N5YuooyxqykUupqjLpec09o2SbyeVvY0Pd2a
- /k05Jp9f8Mujw==
-Message-ID: <04eec966-517f-fb4b-3082-155043a853f5@denx.de>
-Date: Wed, 30 Oct 2024 06:26:08 +0100
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id DDE36890AE; Wed, 30 Oct 2024 07:07:49 +0100 (CET)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 56670881FD
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 07:07:46 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 49U67ZnE011280; Wed, 30 Oct 2024 15:07:35 +0900
+From: FUKAUMI Naoki <naoki@radxa.com>
+To: u-boot@lists.denx.de
+Cc: eugen.hristev@linaro.org, jonas@kwiboo.se, sjg@chromium.org,
+ philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ FUKAUMI Naoki <naoki@radxa.com>
+Subject: [PATCH v3] rockchip: add support for Radxa ROCK 5A with SPI NOR flash
+ module
+Date: Wed, 30 Oct 2024 06:07:27 +0000
+Message-ID: <20241030060727.1116-1-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v1 1/1] drivers: bootcount: Add ZynqMP specific bootcount
- support
-Content-Language: en-US
-To: Vasileios Amoiridis <vassilisamir@gmail.com>, trini@konsulko.com,
- michal.simek@amd.com, pro@denx.de, sjg@chromium.org
-Cc: vasileios.amoiridis@cern.ch, u-boot@lists.denx.de
-References: <20241029185814.7937-1-vassilisamir@gmail.com>
- <20241029185814.7937-2-vassilisamir@gmail.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20241029185814.7937-2-vassilisamir@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,105 +47,189 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Vasileios,
+on Radxa ROCK 5A, sdhci(eMMC) and fspim0(SPI NOR flash) share pins
+(i.e. eMMC and SPI NOR flash are exclusive), new defconfig and dts
+specifically for SPI NOR flash is required.
 
-On 29.10.24 19:58, Vasileios Amoiridis wrote:
-> From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
-> 
-> Add native support of the bootcount mechanism in the ZynqMP by utilising internal
-> PMU registers. The Persistent Global Storage Registers of the Platform Management
-> Unit can keep their value during reboot cycles unless there is a POR reset, making
-> them appropriate for the bootcount mechanism.
-> 
-> Signed-off-by: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
-> ---
->   drivers/bootcount/Kconfig            |  4 ++++
->   drivers/bootcount/Makefile           |  1 +
->   drivers/bootcount/bootcount_zynqmp.c | 28 ++++++++++++++++++++++++++++
->   3 files changed, 33 insertions(+)
->   create mode 100644 drivers/bootcount/bootcount_zynqmp.c
-> 
-> diff --git a/drivers/bootcount/Kconfig b/drivers/bootcount/Kconfig
-> index fa6d8e7128..95b6a9541a 100644
-> --- a/drivers/bootcount/Kconfig
-> +++ b/drivers/bootcount/Kconfig
-> @@ -82,6 +82,10 @@ config BOOTCOUNT_AT91
->   	bool "Boot counter for Atmel AT91SAM9XE"
->   	depends on AT91SAM9XE
->   
-> +config BOOTCOUNT_ZYNQMP
-> +	bool "Boot counter for Zynq UltraScale+ MPSoC"
-> +	depends on ARCH_ZYNQMP
-> +
->   config DM_BOOTCOUNT
->           bool "Boot counter in a device-model device"
->   	help
-> diff --git a/drivers/bootcount/Makefile b/drivers/bootcount/Makefile
-> index 245f879633..487adc1212 100644
-> --- a/drivers/bootcount/Makefile
-> +++ b/drivers/bootcount/Makefile
-> @@ -3,6 +3,7 @@
->   obj-$(CONFIG_BOOTCOUNT_GENERIC)	+= bootcount.o
->   obj-$(CONFIG_BOOTCOUNT_MEM)	+= bootcount.o
->   obj-$(CONFIG_BOOTCOUNT_AT91)	+= bootcount_at91.o
-> +obj-$(CONFIG_BOOTCOUNT_ZYNQMP)  += bootcount_zynqmp.o
->   obj-$(CONFIG_BOOTCOUNT_AM33XX)	+= bootcount_davinci.o
->   obj-$(CONFIG_BOOTCOUNT_RAM)	+= bootcount_ram.o
->   obj-$(CONFIG_BOOTCOUNT_ENV)	+= bootcount_env.o
-> diff --git a/drivers/bootcount/bootcount_zynqmp.c b/drivers/bootcount/bootcount_zynqmp.c
-> new file mode 100644
-> index 0000000000..9bb801e188
-> --- /dev/null
-> +++ b/drivers/bootcount/bootcount_zynqmp.c
-> @@ -0,0 +1,28 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +// SPDX-FileCopyrightText: 2024 CERN (home.cern)
-> +
-> +#include <bootcount.h>
-> +#include <stdio.h>
-> +#include <zynqmp_firmware.h>
-> +
-> +#define PMU_PERS_GLOB_GEN_STORAGE0 0x00FFD80050
-> +
-> +void bootcount_store(ulong a)
-> +{
-> +	int ret;
-> +
-> +	ret = zynqmp_mmio_write(PMU_PERS_GLOB_GEN_STORAGE0, 0xFF, a);
-> +	if (ret)
-> +		printf("Failed: mmio write\n");
-> +}
-> +
-> +ulong bootcount_load(void)
-> +{
-> +	int ret;
-> +	u32 val;
-> +
-> +	ret = zynqmp_mmio_read(PMU_PERS_GLOB_GEN_STORAGE0, &val);
-> +	if (ret)
-> +		printf("Failed: mmio read\n");
-> +	return val;
+Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+---
+Changes in v3
+- drop first patch
+- fix copyright
+- run savedefconfig
+- sync with changes for LED for Radxa boards
+- add more SPI NOR flash chips
+Changes in v2
+- fix subject
+---
+ arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi | 32 +++++++
+ arch/arm/dts/rk3588s-rock-5a-spi.dts         |  4 +
+ board/radxa/rock5a-rk3588s/MAINTAINERS       |  5 +-
+ configs/rock5a-spi-rk3588s_defconfig         | 87 ++++++++++++++++++++
+ 4 files changed, 125 insertions(+), 3 deletions(-)
+ create mode 100644 arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588s-rock-5a-spi.dts
+ create mode 100644 configs/rock5a-spi-rk3588s_defconfig
 
-Makes it sense to return val, when ret != 0 ? Maybe val is uninitialzed
-in this case... at least please return ret.
-
-
-just Nitpick: Also may at least add the function name to the printf,
-that you have a chance to see on console output, that bootcount read
-gone wrong... may the zynqmp_mmio_write/read functions have already an
-error message on error?
-
-Thanks!
-
-bye,
-Heiko
+diff --git a/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
+new file mode 100644
+index 00000000000..7723931d869
+--- /dev/null
++++ b/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
+@@ -0,0 +1,32 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
++ */
++
++#include "rk3588s-u-boot.dtsi"
++
++/ {
++	leds {
++		io-led {
++			default-state = "on";
++		};
++	};
++};
++
++&fspim0_pins {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&sdhci {
++	status = "disabled";
++};
++
++&sfc {
++	status = "okay";
++
++	flash@0 {
++		bootph-pre-ram;
++		bootph-some-ram;
++	};
++};
+diff --git a/arch/arm/dts/rk3588s-rock-5a-spi.dts b/arch/arm/dts/rk3588s-rock-5a-spi.dts
+new file mode 100644
+index 00000000000..780e90d041b
+--- /dev/null
++++ b/arch/arm/dts/rk3588s-rock-5a-spi.dts
+@@ -0,0 +1,4 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++/dts-v1/;
++#include "rk3588s-rock-5a.dts"
+diff --git a/board/radxa/rock5a-rk3588s/MAINTAINERS b/board/radxa/rock5a-rk3588s/MAINTAINERS
+index a569efa74e3..06ebc9829f4 100644
+--- a/board/radxa/rock5a-rk3588s/MAINTAINERS
++++ b/board/radxa/rock5a-rk3588s/MAINTAINERS
+@@ -4,6 +4,5 @@ R:	Jonas Karlman <jonas@kwiboo.se>
+ S:	Maintained
+ F:	board/radxa/rock5a-rk3588s
+ F:	include/configs/rock5a-rk3588s.h
+-F:	configs/rock5a-rk3588s_defconfig
+-F:	arch/arm/dts/rk3588s-rock-5a.dts
+-F:	arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
++F:	configs/rock5a*
++F:	arch/arm/dts/rk3588s-rock-5a*
+diff --git a/configs/rock5a-spi-rk3588s_defconfig b/configs/rock5a-spi-rk3588s_defconfig
+new file mode 100644
+index 00000000000..d6409a12a56
+--- /dev/null
++++ b/configs/rock5a-spi-rk3588s_defconfig
+@@ -0,0 +1,87 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rk3588s-rock-5a-spi"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_ROCK5A_RK3588=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++# CONFIG_OF_UPSTREAM is not set
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_XTX=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+2.43.0
+
