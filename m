@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88AF5D74977
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 06:30:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2AB4D74977
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 06:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 061E088F83;
-	Wed, 30 Oct 2024 07:30:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 23825891E1;
+	Wed, 30 Oct 2024 07:35:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="PpAizRYv";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="XQzm5lBv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7242388D29; Wed, 30 Oct 2024 07:30:17 +0100 (CET)
-Received: from mail-m118114.qiye.163.com (mail-m118114.qiye.163.com
- [115.236.118.114])
+ id 2BAD1891E1; Wed, 30 Oct 2024 07:35:34 +0100 (CET)
+Received: from mail-m254103.xmail.ntesmail.com
+ (mail-m254103.xmail.ntesmail.com [103.129.254.103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2406188F83
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 07:30:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 030D1890AE
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 07:35:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 14605777;
- Wed, 30 Oct 2024 14:30:07 +0800 (GMT+08:00)
-Message-ID: <30b77026-d2d1-4823-bb73-ea915673bb78@rock-chips.com>
-Date: Wed, 30 Oct 2024 14:30:06 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 1461c567;
+ Wed, 30 Oct 2024 14:35:24 +0800 (GMT+08:00)
+Message-ID: <63bb0a18-eee8-4828-84e2-6c312c620817@rock-chips.com>
+Date: Wed, 30 Oct 2024 14:35:24 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] rockchip: add support for Radxa ROCK 5A with SPI NOR
- flash module
-To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-Cc: eugen.hristev@linaro.org, jonas@kwiboo.se, sjg@chromium.org,
- philipp.tomsich@vrull.eu
-References: <20241030060727.1116-1-naoki@radxa.com>
+Subject: Re: [PATCH v3 1/2] arm64: dts: rockchip: Add support for rk3588 based
+ Cool Pi CM5 GenBook
+To: Andy Yan <andyshrk@163.com>
+Cc: quentin.schulz@cherry.de, u-boot@lists.denx.de, dsimic@manjaro.org,
+ jonas@kwiboo.se, Heiko Stuebner <heiko@sntech.de>
+References: <20241026093438.369567-1-andyshrk@163.com>
+ <20241026093438.369567-2-andyshrk@163.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241030060727.1116-1-naoki@radxa.com>
+In-Reply-To: <20241026093438.369567-2-andyshrk@163.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUoaH1YfSh9DSEpMQhgeHkpWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a92dc1e02cf03afkunm14605777
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh8dSFYYSkMZTEkYTEsdGENWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
+ JVSktLVUpCS0tZBg++
+X-HM-Tid: 0a92dc22db6103afkunm1461c567
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pkk6ERw*TzIsLQNCDUk9NjIM
- ERVPFBhVSlVKTEhLSU1CQ0tDSEJOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOTUpKNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6KxQ6FDo6GjIfTAJMOi42HjYV
+ PCwaCzxVSlVKTEhLSUxLSklNS0tJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS0tOSDcG
 DKIM-Signature: a=rsa-sha256;
- b=PpAizRYvS0vXEItoL8jtxdNxNMfvXiI0qicCnLEG7R++1oWI/GOH7dnaoxtV7VsnVp/kaWRWobaXH6IOM4EwY40BiM8NbWnnarLh9flRTFB1TcGKRqCUShDw3ysXNVq9XMecW3Vp4cUsxaVLns6864NdCJ7tljt2KpuaDrdYRRg=;
+ b=XQzm5lBvniArlXbdTKVd1sgfXj5hDIvvXhggOojbNb6YjEBKX6gfBIi9GKmoUYQazfz82yYP87ZJNJ3ifJDoSvVu1ECDcZTkJHUtZIHiYsjiki//TOf91qayzaNhs/WgdkgfDogeVzdSus1h7uD+EdVZoc0sq+V5NPmzAofAVtI=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=gEfu0juBsifnLWb/wGCwi6HKPPTaOslNmAgrixrEdVI=;
+ bh=1ZoNG0B2jJ+b9V8D3bO2W68VngUXofdsEfPKXDHEqhI=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -74,191 +75,402 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Naoki,
 
-On 2024/10/30 14:07, FUKAUMI Naoki wrote:
-> on Radxa ROCK 5A, sdhci(eMMC) and fspim0(SPI NOR flash) share pins
-> (i.e. eMMC and SPI NOR flash are exclusive), new defconfig and dts
-> specifically for SPI NOR flash is required.
+On 2024/10/26 17:34, Andy Yan wrote:
+> Cool Pi CM5 GenBook works as a carrier board connect with CM5 [0].
 >
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-> ---
-> Changes in v3
-> - drop first patch
-> - fix copyright
-> - run savedefconfig
-> - sync with changes for LED for Radxa boards
-> - add more SPI NOR flash chips
-> Changes in v2
-> - fix subject
-> ---
->   arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi | 32 +++++++
->   arch/arm/dts/rk3588s-rock-5a-spi.dts         |  4 +
->   board/radxa/rock5a-rk3588s/MAINTAINERS       |  5 +-
->   configs/rock5a-spi-rk3588s_defconfig         | 87 ++++++++++++++++++++
->   4 files changed, 125 insertions(+), 3 deletions(-)
->   create mode 100644 arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
->   create mode 100644 arch/arm/dts/rk3588s-rock-5a-spi.dts
->   create mode 100644 configs/rock5a-spi-rk3588s_defconfig
+> Specification:
+> - Rockchip RK3588
+> - LPDDR5X 8/32 GB
+> - eMMC 64 GB
+> - HDMI Type A out x 1
+> - USB 3.0 Host x 1
+> - USB-C 3.0 with DisplayPort AltMode
+> - PCIE M.2 E Key for RTL8852BE Wireless connection
+> - PCIE M.2 M Key for NVME connection
+> - eDP panel with 1920x1080
 >
-> diff --git a/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
+> This patch add basic support to bringup eMMC/USB HOST/WiFi/TouchPad/
+> Battery/PCIE NVME, and can also drive a HDMI output with out of tree
+> hdmi patches.
+>
+> [0] https://www.crowdsupply.com/shenzhen-tianmao-technology-co-ltd/genbook-rk3588
+>
+> Signed-off-by: Andy Yan <andyshrk@163.com>
+> Link: https://lore.kernel.org/r/20240730102433.540260-3-andyshrk@163.com
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>
+> [ upstream commit: 4a8c1161b843c366776fc872a6fe45b743b2983e ]
+>
+> (cherry picked from commit dc6316da23734d9321e09f8c8a7669f4b4cb9f75)
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+
+Thanks,
+- Kever
+>
+> ---
+>
+> (no changes since v2)
+>
+> Changes in v2:
+> - Cherry pick it from https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
+>
+>   .../rockchip/rk3588-coolpi-cm5-genbook.dts    | 349 ++++++++++++++++++
+>   1 file changed, 349 insertions(+)
+>   create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
+>
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts b/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
 > new file mode 100644
-> index 00000000000..7723931d869
+> index 00000000000..6418286efe4
 > --- /dev/null
-> +++ b/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
-> @@ -0,0 +1,32 @@
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
+> @@ -0,0 +1,349 @@
 > +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 > +/*
-> + * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
+> + * Copyright (c) 2024 Rockchip Electronics Co., Ltd.
+> + *
 > + */
 > +
-> +#include "rk3588s-u-boot.dtsi"
+> +/dts-v1/;
+> +
+> +#include <dt-bindings/leds/common.h>
+> +#include "rk3588-coolpi-cm5.dtsi"
 > +
 > +/ {
-> +	leds {
-> +		io-led {
-> +			default-state = "on";
+> +	model = "CoolPi CM5 GenBook";
+> +	compatible = "coolpi,pi-cm5-genbook", "coolpi,pi-cm5", "rockchip,rk3588";
+> +
+> +	backlight: backlight {
+> +		compatible = "pwm-backlight";
+> +		enable-gpios = <&gpio4 RK_PA3 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&bl_en>;
+> +		power-supply = <&vcc12v_dcin>;
+> +		pwms = <&pwm6 0 25000 0>;
+> +	};
+> +
+> +	battery: battery {
+> +		compatible = "simple-battery";
+> +		charge-full-design-microamp-hours = <9800000>;
+> +		voltage-max-design-microvolt = <4350000>;
+> +		voltage-min-design-microvolt = <3000000>;
+> +	};
+> +
+> +	charger: dc-charger {
+> +		compatible = "gpio-charger";
+> +		charger-type = "mains";
+> +		gpios = <&gpio1 RK_PC0 GPIO_ACTIVE_LOW>;
+> +	};
+> +
+> +	leds: leds {
+> +		compatible = "gpio-leds";
+> +
+> +		heartbeat_led: led-0 {
+> +			color = <LED_COLOR_ID_GREEN>;
+> +			function = LED_FUNCTION_STATUS;
+> +			gpios = <&gpio1 RK_PB0 GPIO_ACTIVE_HIGH>;
+> +			linux,default-trigger = "heartbeat";
+> +		};
+> +
+> +		wlan_led: led-1 {
+> +			color = <LED_COLOR_ID_GREEN>;
+> +			function = LED_FUNCTION_WLAN;
+> +			gpios = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
+> +		};
+> +
+> +		charging_red: led-2 {
+> +			function = LED_FUNCTION_CHARGING;
+> +			color = <LED_COLOR_ID_RED>;
+> +			gpios = <&gpio3 RK_PD2 GPIO_ACTIVE_HIGH>;
+> +		};
+> +	};
+> +
+> +	vcc12v_dcin: vcc12v-dcin-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc12v_dcin";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <12000000>;
+> +		regulator-max-microvolt = <12000000>;
+> +	};
+> +
+> +	vcc_sys: vcc-sys-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <7000000>;
+> +		regulator-max-microvolt = <7000000>;
+> +		vin-supply = <&vcc12v_dcin>;
+> +	};
+> +
+> +	vcc5v0_sys: vcc5v0-sys-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <7000000>;
+> +		regulator-max-microvolt = <7000000>;
+> +		vin-supply = <&vcc_sys>;
+> +	};
+> +
+> +	vcc3v3_sys: vcc3v3-sys-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc3v3_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vcc3v3_lcd: vcc3v3-lcd-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc3v3_lcd";
+> +		enable-active-high;
+> +		gpio = <&gpio1 RK_PC4 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&lcdpwr_en>;
+> +		vin-supply = <&vcc3v3_sys>;
+> +	};
+> +
+> +	vcc5v0_usb: vcc5v0-usb-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_usb";
+> +		regulator-boot-on;
+> +		regulator-always-on;
+> +		enable-active-high;
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		gpio = <&gpio1 RK_PD5 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&usb_pwren>;
+> +		vin-supply = <&vcc_sys>;
+> +	};
+> +
+> +	vcc5v0_usb_host0: vcc5v0_usb30_host: vcc5v0-usb-host-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_host";
+> +		regulator-boot-on;
+> +		regulator-always-on;
+> +		enable-active-high;
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		gpio = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&usb_host_pwren>;
+> +		vin-supply = <&vcc5v0_usb>;
+> +	};
+> +};
+> +
+> +&i2c4 {
+> +	status = "okay";
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&i2c4m3_xfer>;
+> +
+> +	cw2015@62 {
+> +		compatible = "cellwise,cw2015";
+> +		reg = <0x62>;
+> +
+> +		cellwise,battery-profile = /bits/ 8 <
+> +			0x17 0x67 0x69 0x63 0x63 0x62 0x62 0x5F
+> +			0x52 0x73 0x4C 0x5A 0x5B 0x4B 0x42 0x3A
+> +			0x33 0x2D 0x29 0x28 0x2E 0x31 0x3C 0x49
+> +			0x2C 0x2C 0x0C 0xCD 0x30 0x51 0x50 0x66
+> +			0x74 0x74 0x75 0x78 0x41 0x1B 0x84 0x5F
+> +			0x0B 0x34 0x1C 0x45 0x89 0x92 0xA0 0x13
+> +			0x2C 0x55 0xAB 0xCB 0x80 0x5E 0x7B 0xCB
+> +			0x2F 0x00 0x64 0xA5 0xB5 0x10 0x18 0x21
+> +			>;
+> +
+> +		cellwise,monitor-interval-ms = <3000>;
+> +		monitored-battery = <&battery>;
+> +		power-supplies = <&charger>;
+> +	};
+> +};
+> +
+> +&i2c5 {
+> +	status = "okay";
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&i2c5m3_xfer>;
+> +
+> +	touchpad: touchpad@2c {
+> +		compatible = "hid-over-i2c";
+> +		reg = <0x2c>;
+> +		interrupt-parent = <&gpio1>;
+> +		interrupts = <RK_PD6 IRQ_TYPE_LEVEL_LOW>;
+> +		hid-descr-addr = <0x0020>;
+> +	};
+> +};
+> +
+> +&gmac0 {
+> +	status = "disabled";
+> +};
+> +
+> +/* M.2 E-Key */
+> +&pcie2x1l0 {
+> +	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_sys>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie_clkreq &pcie_wake &pcie_rst &wifi_pwron &bt_pwron>;
+> +	status = "okay";
+> +};
+> +
+> +&pcie2x1l2 {
+> +	status = "disabled";
+> +};
+> +
+> +&pcie30phy {
+> +	status = "okay";
+> +};
+> +
+> +/* M.2 M-Key ssd */
+> +&pcie3x4 {
+> +	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_sys>;
+> +	status = "okay";
+> +};
+> +
+> +&pinctrl {
+> +	lcd {
+> +		lcdpwr_en: lcdpwr-en {
+> +			rockchip,pins = <1 RK_PC4 RK_FUNC_GPIO &pcfg_pull_down>;
+> +		};
+> +
+> +		bl_en: bl-en {
+> +			rockchip,pins = <4 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	usb {
+> +		usb_pwren: usb-pwren {
+> +			rockchip,pins = <1 RK_PD5 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		usb_otg_pwren: usb-otg-pwren {
+> +			rockchip,pins = <0 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		usb_host_pwren: usb-host-pwren {
+> +			rockchip,pins = <1 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +
+> +	wifi {
+> +		bt_pwron: bt-pwron {
+> +			rockchip,pins = <3 RK_PA6 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		pcie_clkreq: pcie-clkreq {
+> +			rockchip,pins = <4 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		pcie_rst: pcie-rst {
+> +			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		wifi_pwron: wifi-pwron {
+> +			rockchip,pins = <3 RK_PB1 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		pcie_wake: pcie-wake {
+> +			rockchip,pins = <4 RK_PA1 RK_FUNC_GPIO &pcfg_pull_up>;
 > +		};
 > +	};
 > +};
 > +
-> +&fspim0_pins {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
+> +&pwm6 {
+> +	pinctrl-0 = <&pwm6m1_pins>;
+> +	status = "okay";
 > +};
 > +
-> +&sdhci {
+> +&sdmmc {
 > +	status = "disabled";
 > +};
 > +
 > +&sfc {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&fspim2_pins>;
 > +	status = "okay";
 > +
 > +	flash@0 {
-> +		bootph-pre-ram;
-> +		bootph-some-ram;
+> +		compatible = "jedec,spi-nor";
+> +		reg = <0x0>;
+> +		spi-max-frequency = <100000000>;
+> +		spi-rx-bus-width = <4>;
+> +		spi-tx-bus-width = <1>;
 > +	};
 > +};
-> diff --git a/arch/arm/dts/rk3588s-rock-5a-spi.dts b/arch/arm/dts/rk3588s-rock-5a-spi.dts
-> new file mode 100644
-> index 00000000000..780e90d041b
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588s-rock-5a-spi.dts
-> @@ -0,0 +1,4 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 > +
-> +/dts-v1/;
-> +#include "rk3588s-rock-5a.dts"
-> diff --git a/board/radxa/rock5a-rk3588s/MAINTAINERS b/board/radxa/rock5a-rk3588s/MAINTAINERS
-> index a569efa74e3..06ebc9829f4 100644
-> --- a/board/radxa/rock5a-rk3588s/MAINTAINERS
-> +++ b/board/radxa/rock5a-rk3588s/MAINTAINERS
-> @@ -4,6 +4,5 @@ R:	Jonas Karlman <jonas@kwiboo.se>
->   S:	Maintained
->   F:	board/radxa/rock5a-rk3588s
->   F:	include/configs/rock5a-rk3588s.h
-> -F:	configs/rock5a-rk3588s_defconfig
-> -F:	arch/arm/dts/rk3588s-rock-5a.dts
-> -F:	arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> +F:	configs/rock5a*
-> +F:	arch/arm/dts/rk3588s-rock-5a*
-> diff --git a/configs/rock5a-spi-rk3588s_defconfig b/configs/rock5a-spi-rk3588s_defconfig
-> new file mode 100644
-> index 00000000000..d6409a12a56
-> --- /dev/null
-> +++ b/configs/rock5a-spi-rk3588s_defconfig
-> @@ -0,0 +1,87 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_SPEED=24000000
-> +CONFIG_SF_DEFAULT_MODE=0x2000
-> +CONFIG_DEFAULT_DEVICE_TREE="rk3588s-rock-5a-spi"
-> +CONFIG_ROCKCHIP_RK3588=y
-> +CONFIG_ROCKCHIP_SPI_IMAGE=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_ROCK5A_RK3588=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_SF_DEFAULT_BUS=5
-> +CONFIG_DEBUG_UART_BASE=0xFEB50000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-MMC should removed
-> +CONFIG_CMD_USB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +# CONFIG_OF_UPSTREAM is not set
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-
-MMC relate driver should removed
-
-
-Thanks,
-- Kever
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> +CONFIG_SPI_FLASH_GIGADEVICE=y
-> +CONFIG_SPI_FLASH_MACRONIX=y
-> +CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_SPI_FLASH_XTX=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SFC=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_ERRNO_STR=y
+> +&u2phy0 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy0_otg {
+> +	status = "okay";
+> +};
+> +
+> +&usbdp_phy0 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy1 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy1_otg {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy2 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy3 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy2_host {
+> +	phy-supply = <&vcc5v0_usb_host0>;
+> +	status = "okay";
+> +};
+> +
+> +&u2phy3_host {
+> +	phy-supply = <&vcc5v0_usb>;
+> +	status = "okay";
+> +};
+> +
+> +&usbdp_phy1 {
+> +	status = "okay";
+> +};
+> +
+> +/* For Keypad */
+> +&usb_host0_ehci {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host0_ohci {
+> +	status = "okay";
+> +};
+> +
+> +/* Type C port */
+> +&usb_host0_xhci {
+> +	dr_mode = "peripheral";
+> +	maximum-speed = "high-speed";
+> +	status = "okay";
+> +};
+> +
+> +/* connected to a HUB for camera and BT */
+> +&usb_host1_ehci {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host1_ohci {
+> +	status = "okay";
+> +};
+> +
+> +/* USB A out */
+> +&usb_host1_xhci {
+> +	dr_mode = "host";
+> +	status = "okay";
+> +};
