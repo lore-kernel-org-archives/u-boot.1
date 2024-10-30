@@ -4,133 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A81FD7496B
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 05:22:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08ADCD74963
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 05:23:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA0B9891E3;
-	Wed, 30 Oct 2024 06:22:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 55D42891FC;
+	Wed, 30 Oct 2024 06:22:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="HleDy0AY";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="df/jmpgy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D825B891EA; Wed, 30 Oct 2024 06:22:50 +0100 (CET)
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on20614.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2405::614])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D5BBB89206; Wed, 30 Oct 2024 06:22:53 +0100 (CET)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2060e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::60e])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E287891FA
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 06:22:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D97A891E8
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 06:22:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NHCGSvBjfgQGyIbjyBQBA0fwCGFs7f2wrk64uMWyBiedZ0wUiq6JdwmoeDpma7gNs/MCGvNAHKbK/gw06v/zwC1p6njZHae88jNH2GFp+7BNABGZrhwHaJiPIzPHF3poMxCc5sWndLGRMfwzJsZ50XbvYSh+tolEGpJrGvfDSHzXKXE4MfPbTa4js3cfriHJFJF8Fxhks8T0FxiUbeC51735fq/liFN64iMUTodpEi8j/hABHOFpBzr7dal9IoxDLnOpwg8iwzgprotPe5tzj/lG+vb+qjyBY/TDyy1R54fg5qoUFeNUmj0yzuOBeFu6OC4uIqx1OxLxBzUfoPdP1g==
+ b=NTa2ABDSWIyORxMAnPXrY1ooTp52rxaZ+FESN1zTDExQyV6gdYWeSUzWJ2D5x8q6ZqiNgDHyA28dPy4LDs39W0MSVRC6werylq12dZ1n+yAOVAHKt1+ulOSo48gP8hCTCjNLozwAl25YUrnSIFBA07nrQVCJwmQ+qH8J9O86Rd8Nk9hzuiOPU5rItDdDwY8fH3OxiH7hxpgakzSgJso9LQfSMhYVHsvc0NUtxJCN8KaH7vxm3N+ltgVbXA+fn9USGYYl39LLJchAXeJpGVdQ8lbdcFxKlrV9Z+KwCI3YhJmZpZgjqtd5PtNzo0XPybjh/HiT++cqUc99Jgv7+gBufw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GlT/8/Tc3sSlejZ78zLxrCLdeR/7bUUWHC2c4oBzfk8=;
- b=DvjEWdsVW5/0CwAOnvc+0J52sx/81eLAqYj6YGje01NnaMwCix2l+Cw6pHAWiToSJnMwFTJp/e9aZGLodT5RViHiMTylPEyYkQJjarIPzhCKELE1G8tzUg7wLCmdRB4+Y5xcIKsReQrp3i96WM+ti0ZSG4lfHXHsaPTQ9x1HVdDkjRTHHYuFEq/x2zIrqJMaVvdM0jUs5ooiYWYGQIrS5WhKYCe2+NWh6IZ9BtlAvIaw4qI8n7Q/yTe3Pco5CHdWn45auzakR4eA2wrBDbrm1xYTQCuvzRbpcywC/0zd294jTnxXts3Wk1wWeFIjLDeN2+wjZAUY6HGeO8CBwQbRSA==
+ bh=D4THxLWpu0/nm05yaMtP8XsYynmnXI8Z3MVnOeWh+6A=;
+ b=S0aTGcTAXUit9gXtKRmLFmPGonBRLA4jFTtB/n2t2AamvbiMFndjR1u2Gy7FJwiyD769wK9M38rYwN0SKhADlg8EG+GBhfCVKP7Pec1MD2DlQRDyHvUf6ZjSVgjooPRNbE09S11HfeaK1uXHCBx6dMrCAhqYQ2HdABvI/HOE6Bni11CYv2A4o6l8gGtUsRZjV+bjd2qZYM7gvE4p/X0ykeAJDcyr283T8Zd47DmbFyQKH8b4EJ4p6DZg4n2ZFHuyDSWJiMRHzgs5T4ZZyRZqoAx7kTKhpNOKyPv6TxDHb+8LV+/G8Ie5by1wyIb8mr5zSz6j5vuCxYEuE4zacnYovQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GlT/8/Tc3sSlejZ78zLxrCLdeR/7bUUWHC2c4oBzfk8=;
- b=HleDy0AYc7O/mh2rDzzKjhgmdMwK+rqGveprenLCacezVrZC3OEPBc0iL8af/CejOhwJxJuWYSCv+mw2OvSS+rph91t7+ASWrUQGU3223a6kWWAzBwiZuqRFhA48IfWRIV592M7gLKfHSE6cqsdC31yEn6XA9P+tp7VGb7p+dJc=
-Received: from SJ2PR07CA0017.namprd07.prod.outlook.com (2603:10b6:a03:505::17)
- by SJ0PR12MB6781.namprd12.prod.outlook.com (2603:10b6:a03:44b::22)
+ bh=D4THxLWpu0/nm05yaMtP8XsYynmnXI8Z3MVnOeWh+6A=;
+ b=df/jmpgyOHmaU94Tme13idpo8PY+zqIAhtI8BpVYsCOQqkUX5OQkjnSPDrl1vIjPC8exBx3QvA6TkrJyJCeaKn1dHxVTMMObYSWgVOidMsSYOMSPswfIuKRwg5ceNVRpAchl/DGoonWqrUvAFtwh1rrwLsAIF8r3YlZnmQ1GXt4=
+Received: from BLAPR03CA0022.namprd03.prod.outlook.com (2603:10b6:208:32b::27)
+ by SA1PR12MB7367.namprd12.prod.outlook.com (2603:10b6:806:2b5::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.25; Wed, 30 Oct
- 2024 05:22:41 +0000
-Received: from SJ5PEPF000001D1.namprd05.prod.outlook.com
- (2603:10b6:a03:505:cafe::c) by SJ2PR07CA0017.outlook.office365.com
- (2603:10b6:a03:505::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.17 via Frontend
- Transport; Wed, 30 Oct 2024 05:22:41 +0000
+ 2024 05:22:42 +0000
+Received: from MN1PEPF0000ECD8.namprd02.prod.outlook.com
+ (2603:10b6:208:32b:cafe::ee) by BLAPR03CA0022.outlook.office365.com
+ (2603:10b6:208:32b::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.29 via Frontend
+ Transport; Wed, 30 Oct 2024 05:22:42 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SJ5PEPF000001D1.mail.protection.outlook.com (10.167.242.53) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ MN1PEPF0000ECD8.mail.protection.outlook.com (10.167.242.137) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8114.16 via Frontend Transport; Wed, 30 Oct 2024 05:22:41 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.8114.16 via Frontend Transport; Wed, 30 Oct 2024 05:22:42 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 30 Oct
- 2024 00:22:38 -0500
+ 2024 00:22:37 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 30 Oct
+ 2024 00:22:16 -0500
 Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 30 Oct 2024 00:22:37 -0500
+ Transport; Wed, 30 Oct 2024 00:22:14 -0500
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
  <git@amd.com>
-Subject: [PATCH v8 5/7] usb: onboard-hub: Bail out if peer hub is already
- probed
-Date: Wed, 30 Oct 2024 10:51:58 +0530
-Message-ID: <20241030052200.24243-6-venkatesh.abbarapu@amd.com>
+Subject: [PATCH v8 1/7] usb: onboard-hub: Add reset-gpio support
+Date: Wed, 30 Oct 2024 10:51:54 +0530
+Message-ID: <20241030052200.24243-2-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20241030052200.24243-1-venkatesh.abbarapu@amd.com>
 References: <20241030052200.24243-1-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
+Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D1:EE_|SJ0PR12MB6781:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5093140f-6e41-4e64-2c6e-08dcf8a2e05a
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD8:EE_|SA1PR12MB7367:EE_
+X-MS-Office365-Filtering-Correlation-Id: 34d25498-fe7b-4b16-6b96-08dcf8a2e107
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?GOCgzWCafmPqygNhEekMI61IkGuRQIw4upCrCY+aA0XBqnl/dXB6Y5mTmfuG?=
- =?us-ascii?Q?vWoRF5n/jWAUZUSZ9QgG1I7hIuijf2xswW9TzU+9l8PggxRFqv7jqAwN5o2j?=
- =?us-ascii?Q?55CfX1397v9BG3rIJzajZaGbCvSweDRAsYklBaOX1LKKnYPr136SozQoWPDZ?=
- =?us-ascii?Q?ePI1CusCjvQWZBlxIU4S/e635ryoZKmhlMWGKkM8SAPIRwQ3ejrryJEicpkI?=
- =?us-ascii?Q?FgNF7tixzjLxU9zUpOcc3tlMExis2qqT8lbrzvCCQ7m79q01Ww4qk5THrX8e?=
- =?us-ascii?Q?H3DydHS5wjk77gfrd946k6r2itYZL+XMLrMI+AI0HMBfMZOX+UwZmAox8SMa?=
- =?us-ascii?Q?9g9C9YKYFbRxdz4ypGSoxZY0IlC6c9IIcODjV98s+/axHBbuIzxW64O7fuf+?=
- =?us-ascii?Q?E5EtrlZhpDxpQjBHlegfifL427pi76Oh77yQXd9oNgUKPqR6CojrmszXYSHC?=
- =?us-ascii?Q?giAFUSdO+oaNCp361heY7uS1oH+NO871V4Pbgfy5Wtu0riROvPIgC68wlipG?=
- =?us-ascii?Q?uafg4TvMhywx2VuLm91XdELRcRlZjpht2FT9CA16uevJi1HAkDVfj4wCpF6u?=
- =?us-ascii?Q?fyhayQ4oeI/k+KyjXG7lIeTtq3272C9AT5K2a/gsxp8/AW70OYNh2X+WkP6v?=
- =?us-ascii?Q?3Ozw0RcFnTNmAr4UAZncRB7MhcF/w/D/eMuKHzmesCQrNvKigRzzX511KslV?=
- =?us-ascii?Q?MOZ+ScS9JRT6PTRTFU2fMbQN2/H5Akrn/egP/K9xJOf7luQqohMXliESfSRN?=
- =?us-ascii?Q?SsfOk7wG7H+MWEWDUDgze/uTQ6Sw+CAsFAjWGjcIJWtJyTFYQktdlQAOJYkq?=
- =?us-ascii?Q?GIn6HhfTUL8ZpNNx9pbDHsvCtnC/wH511pD6GCqq94xOp1Ou2oi9SALuhi1f?=
- =?us-ascii?Q?ZG3kTUv2v12v1Mfnf6zEmgyylY1oeoCTudcsuivqzvBQgvUGydyZlUg54IXV?=
- =?us-ascii?Q?sp6gk3X0/brVD7ykxB2gEEWtgzvqpyV9xE5a5DpVi+hefc6V8uQ+tu4OpsPV?=
- =?us-ascii?Q?psrksdg5JrIUs22fB8QN/JwEA/RBCvRyJFWK8TxWt9Z8bml80CQEVSYMrLrT?=
- =?us-ascii?Q?PK+t3Hn2X3/u5hx3Jges3qM4eQ6Yr0dhz269g9b+IqTTg6/StGdKpTlAZlyi?=
- =?us-ascii?Q?Q2tL7+frl3mVA9guGLDlR3ot6j9eWWVR7t6AMB1qMrxLZz+iRMAuLi7LHqdS?=
- =?us-ascii?Q?B1j4OiaWTXNIb50KbodjGLvuYj15QK5rFxN+8g6zx7jBvTm1PSfIVn4+tfX1?=
- =?us-ascii?Q?MRr705fLvL664p6vo3dNTlckxQ2y79nJrH3M6fbSC3Dlsu7Ly386ImlqIL9V?=
- =?us-ascii?Q?Jo9bW9zalxTj+SO6KpIKbIGlnYSVGCjAAyW4xLnjBoUDCUWf4WASoobxN0Jz?=
- =?us-ascii?Q?El2xX51J3/7tMDlMAHue5GAbFO+a/z7+c6HXVEwJ5S6aJC3EvQ=3D=3D?=
+ ARA:13230040|36860700013|376014|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?diKQLetSoMWdjpBpZ+IHq4pA1a4B/tnmBx9lQpJXJUB/wZrbSs+lDbgzJTA6?=
+ =?us-ascii?Q?a2goiQxnAn93cN9k5QqpjECCrBEm+NINpVTpSeYCwGM224ls5QB1ZFrVH00j?=
+ =?us-ascii?Q?NqG5WO/NIw3u90WlZcunwDNB7TZ9hF02+RAF/ZcdoYKYmq0yqCMDgsUiVG+n?=
+ =?us-ascii?Q?LmM81QZ/PvOnp2RCVjvHH0fu9tFAN1jOPJyKbr1DOPKa7ZtF1B4IsXU1O9st?=
+ =?us-ascii?Q?L3SCyowsWGQNohwj4vKAaAYVdHX3jRdF4WdZoZWrSj9hhjWwoNrtBy3su7RZ?=
+ =?us-ascii?Q?u7nVx3pMvlwTGQfJghGttrYxFrXuLs8sQ3SYGlUQjHesOGv0TfV88CPYKqvC?=
+ =?us-ascii?Q?1x7DciXHflK7VxeyYpa+KjUEdyuT/uwEY2J2HkgObWo4f3Mggjdq72mdef7G?=
+ =?us-ascii?Q?oAL+qPWONDsC8SCqv09Lj3kQ7BjHAX2wfh9c1PoVpU/3xYmeF8/kjsKwr4ri?=
+ =?us-ascii?Q?N2+HhwJjPKvAT4ldx9BsXtlV9ZyTtQ5jt5Cq6MxtZI9GvvNGKB1qkuRHyD6G?=
+ =?us-ascii?Q?xCqpMoziyHU2jcQSt+EHfeJWTpQv6nsazIRbH+J5Sacbcg37cnOSqUZsI3q9?=
+ =?us-ascii?Q?Ddw7/PsSvyT+OdmnZZVEP4IJPJkN6uPA7lNfrtvgEuKf+llhgAGDO53CxeT0?=
+ =?us-ascii?Q?iCLcmQTEATejA32V3/iFFiCABL21btXtukovUFIeVbBrmGsvOX0NGIOENnnA?=
+ =?us-ascii?Q?B6ubMJglT6k5UguN0wmWtIaN40EXcTnEJnM2aDgxKxBW+0Pz58iHue2NDuu5?=
+ =?us-ascii?Q?sH9CzMDA2zJ/GUxznXk04056sHjZmnj1xUrUPJQpkD5kGkzYsYFOQLxGIMDX?=
+ =?us-ascii?Q?E3elekvuGzNv0QbedE8aS9C+dQlHjUtm++EPQqG/H4YPcKkgUT7UY2QZg45q?=
+ =?us-ascii?Q?IiZw3I1ivSoouhPxFv41/buPzyUHK8+Qn9BdRD2YiCII95DCy5rFnzwGPWTi?=
+ =?us-ascii?Q?NtTCKCcU9EPl79wx6Y7j4uDJZf0ns3gsJtKdYuanij4/OrzvaBXm9SyAavMU?=
+ =?us-ascii?Q?0l1b6TrXCcBs3OZe8x1ZDLGUyf3I4xJZJaFx/dAm9At44iAEPHBzZfd7t7HB?=
+ =?us-ascii?Q?J8LDDZIagERy8ygzz/i/s0v3txrRV0QdrrbO5m9tAFw2hbQIsocDbZWXO24U?=
+ =?us-ascii?Q?/i0RGouA/UupXmihIisiGtKFlTqzEpVTSMVrlx8LnthAAqCbfxPIvyFLAP8J?=
+ =?us-ascii?Q?yXZfwSoilHMuakuB1k0wju6UFfmwga0hZi4794NnUC4bpwWX9RgFafYEjxR1?=
+ =?us-ascii?Q?dRvMNQBj6dvGSzdqq4XaTQ6aD3JTr/h/3aOTLw/wK9wTnes5Y0ebfWgRkPSw?=
+ =?us-ascii?Q?czMdE4Fvx1luDWhvLtR+ATvK/31BmLGB7H3BQy2DgQRzCWyWFyjdZqf0eiBl?=
+ =?us-ascii?Q?/Dq0UCN8vQTAgEfwr5bc8uRnAsIToqHCUm0t1QB20qK2zRo2Zg=3D=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2024 05:22:41.0601 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5093140f-6e41-4e64-2c6e-08dcf8a2e05a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2024 05:22:42.2736 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 34d25498-fe7b-4b16-6b96-08dcf8a2e107
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D1.namprd05.prod.outlook.com
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD8.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6781
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7367
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,55 +150,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The .bind function is implemented to bind the correct
-"half" of the hub that the driver wants to bind,
-and returning -ENODEV for the other "half".
+As part of the reset, sets the direction of the pin to output before
+toggling the pin. Delay of millisecond is added in between low and
+high to meet the setup and hold time requirement of the reset.
 
 Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Reviewed-by: Marek Vasut <marex@denx.de>
 ---
- common/usb_onboard_hub.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+ common/usb_onboard_hub.c | 42 +++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 41 insertions(+), 1 deletion(-)
 
 diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index 1a3569a135..661eeb4bcf 100644
+index 68a04ac041..4174575893 100644
 --- a/common/usb_onboard_hub.c
 +++ b/common/usb_onboard_hub.c
-@@ -177,6 +177,26 @@ err:
- 	return ret;
- }
+@@ -7,14 +7,51 @@
+  * Mostly inspired by Linux kernel v6.1 onboard_usb_hub driver
+  */
  
-+static int usb_onboard_hub_bind(struct udevice *dev)
++#include <asm/gpio.h>
+ #include <dm.h>
+ #include <dm/device_compat.h>
++#include <linux/delay.h>
+ #include <power/regulator.h>
+ 
+ struct onboard_hub {
+ 	struct udevice *vdd;
++	struct gpio_desc *reset_gpio;
+ };
+ 
++struct onboard_hub_data {
++	unsigned long reset_us;
++	unsigned long power_on_delay_us;
++};
++
++int usb_onboard_hub_reset(struct udevice *dev)
 +{
-+	struct ofnode_phandle_args phandle;
-+	const void *fdt = gd->fdt_blob;
-+	int ret, off;
++	struct onboard_hub_data *data =
++		(struct onboard_hub_data *)dev_get_driver_data(dev);
++	struct onboard_hub *hub = dev_get_priv(dev);
++	int ret;
 +
-+	ret = dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0, &phandle);
-+	if (ret)  {
-+		dev_err(dev, "peer-hub not specified\n");
-+		return ret;
-+	}
++	hub->reset_gpio = devm_gpiod_get_optional(dev, "reset",
++						  GPIOD_IS_OUT | GPIOD_ACTIVE_LOW);
 +
-+	off = ofnode_to_offset(phandle.node);
-+	ret = fdt_node_check_compatible(fdt, off, "usb424,5744");
-+	if (!ret)
++	/* property is optional, don't return error! */
++	if (!hub->reset_gpio)
 +		return 0;
 +
-+	return -ENODEV;
++	ret = dm_gpio_set_value(hub->reset_gpio, 1);
++	if (ret)
++		return ret;
++
++	udelay(data->reset_us);
++
++	ret = dm_gpio_set_value(hub->reset_gpio, 0);
++	if (ret)
++		return ret;
++
++	udelay(data->power_on_delay_us);
++
++	return 0;
 +}
 +
- static int usb_onboard_hub_remove(struct udevice *dev)
+ static int usb_onboard_hub_probe(struct udevice *dev)
  {
  	struct onboard_hub *hub = dev_get_priv(dev);
-@@ -213,6 +233,7 @@ static const struct udevice_id usb_onboard_hub_ids[] = {
- U_BOOT_DRIVER(usb_onboard_hub) = {
- 	.name	= "usb_onboard_hub",
- 	.id	= UCLASS_USB_HUB,
-+	.bind   = usb_onboard_hub_bind,
- 	.probe = usb_onboard_hub_probe,
- 	.remove = usb_onboard_hub_remove,
- 	.of_match = usb_onboard_hub_ids,
+@@ -30,7 +67,7 @@ static int usb_onboard_hub_probe(struct udevice *dev)
+ 	if (ret)
+ 		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
+ 
+-	return ret;
++	return usb_onboard_hub_reset(dev);
+ }
+ 
+ static int usb_onboard_hub_remove(struct udevice *dev)
+@@ -38,6 +75,9 @@ static int usb_onboard_hub_remove(struct udevice *dev)
+ 	struct onboard_hub *hub = dev_get_priv(dev);
+ 	int ret;
+ 
++	if (hub->reset_gpio)
++		dm_gpio_free(hub->reset_gpio->dev, hub->reset_gpio);
++
+ 	ret = regulator_set_enable_if_allowed(hub->vdd, false);
+ 	if (ret)
+ 		dev_err(dev, "can't disable vdd-supply: %d\n", ret);
 -- 
 2.17.1
 
