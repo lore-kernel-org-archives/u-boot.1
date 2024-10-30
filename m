@@ -4,71 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35B19D6B6B7
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 17:20:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3932D6B6B7
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 17:21:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 251E789263;
+	by phobos.denx.de (Postfix) with ESMTP id 7AB4A8926D;
 	Wed, 30 Oct 2024 18:20:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="RJLUgS7q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QjU0Cm/i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00C5388FD2; Wed, 30 Oct 2024 16:15:42 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id E58D889035; Wed, 30 Oct 2024 17:04:22 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B055288CF1
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 16:15:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21DFD88FAB
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 17:04:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2fb5740a03bso67026791fa.1
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 08:15:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=vassilisamir@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-539eb97f26aso7151554e87.2
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 09:04:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1730301339; x=1730906139;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=DaHuROcJP1n5j3F/ZcDDPrRn0a0hdPS1v6tq3+FOA80=;
- b=RJLUgS7q0mpEMnyiYek9+rm5DLXRRLdpb7zvHtaFX5a/ElPJ750WRemGL+LQspxYgm
- JNAj4pxfO1zciV9gsB4Mgk6NC3+0EU2I4aGUVAtX8Go0eni7xGrfUbnMGBKyaIHHjY4/
- zJOCShIGJ0TkDD4iVJm5bDt9xTSZ83o2Dc6kGBYnLh2Kyp33g9ApfQ9E25ofG70dWPiu
- un7rcwjDt2VU0Waa3T+4t2c2KREUYlHRk63JPD07ZTJKs0/fMVQY5Kx6YgJ+XJCihElW
- IzZpAtJOId23PIsWTCIKwenqPr39dhXIq12sAcKioV2znZNuAkDevlU+KvU4vbCsaA8r
- g2OA==
+ d=gmail.com; s=20230601; t=1730304259; x=1730909059; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wxyqw6jDLd2eOH1obDVGumlTPuxOg0EfSJ8O0lsHQ48=;
+ b=QjU0Cm/igFc1pg0klhdAEWnDsvT4HKfBE5nxU2c4ygGRQhS+Kkgv3h0zKuJC7WcoFp
+ fUQ2xPRwFHB8PgdvfDp1/5cWR4Wk2FOZT/YJA9lyz03EWtMBXAO5IJn9gMnDaRJ37DYR
+ m8NZZoSIMk3wgIbinoNK0FS5xConp+uyZRWgSjAnoFi7VlargoJN22HDVWGMb9TcORhI
+ cLeSCY4oGExMrhUxJ2WVpCHqHz4k8/4JL6zbRxZkNh8BgHlROVwK8aLCl3sLERhYrLpk
+ worTZcz167y4gkYzW59VSci9MrQenmrKohj57Vx6hIJdzBWVPdoB19RdhqjXIt+DJ2GE
+ WnmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730301339; x=1730906139;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DaHuROcJP1n5j3F/ZcDDPrRn0a0hdPS1v6tq3+FOA80=;
- b=dBlz/l34lnqN6C2YFStsd0eg/+y5ZfRrF/cdsrBxNCgct+SLOwdt2HppRTlYjwZr5A
- xPODHoZO3rv66ArinPG/kIsVAIe/BJp8+lXyJVQuLpxnNmX2tU54AXzMmYGbmOCF7H9d
- 9TUV7KKp1gBwDIEAViTHt6HC8X7LT1bUcX+1oX/Vtz0UYPT/VjIAZl0JbMpJCeJa5KRt
- o1QViWdjvoHs8KII6DeZpOIM7bCMiIehT1jRMSCS/VhTcWNMeqiHXHG/lWn3Ql8fUJjB
- JgihwIv6w3+LPK1lI8EouyrtxtHlBCMp1i96SVp3ig92oHEULsQeMPfvyMykakEKpPmi
- Zm/w==
-X-Gm-Message-State: AOJu0Yy/7iWZwe9xTWuTI/U0aCcaNGNEOjmnTgkoeaRw4dQdF4gs2b50
- z3e+sGWvDn7c/qC9Vox56zhowTApym7I9NWEt3fNZH5C8kY9qBbTMhbRhma2aDIRDBvVn/UEO8q
- HuWlsrVKZgSTHcDwMugrAwlu1zzlVDHqYG1y9At4SeapQ8zfWpxA9eA==
-X-Google-Smtp-Source: AGHT+IFsjVfZNvO+sftwoe2dsto4bE/KkXbLrL79bT5wcMTIaqhID2OkHZa1vbl5pbAHbyo3+2e96aHmXd6kBRXctC0=
-X-Received: by 2002:a2e:b894:0:b0:2fb:570a:496e with SMTP id
- 38308e7fff4ca-2fd058fc799mr23980401fa.9.1730301338747; Wed, 30 Oct 2024
- 08:15:38 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1730304259; x=1730909059;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wxyqw6jDLd2eOH1obDVGumlTPuxOg0EfSJ8O0lsHQ48=;
+ b=m5C+hxE1+/Qg11Mw03l31Jjx8mq4ATmoQTAYynCDZO6lw9UQJHIV8AhftYrv2/kGbs
+ i0d4IWn7a+fhzRQOWdd+Qg0JotR/aTVZXWuYcNURA/sWWQ8ObnTVTmMA41sixR8hCQgb
+ G7M9fsjwLEZK6d+r0Bo2rW3EIwxRL5GoYduZEsf/817/EgVs6c+z7rs1p46km+6qgL+0
+ OFpFI0WDoPF3ibm9DSrb4GeKYtQJ/9AMF3e1vaQROvxntA97/8olnEBSQnXBGS9h7ymI
+ W/tdQLAwqlmsoXl6itDn7WwR93WPecr2JD32h1gm1GQj9DLJ7lV1bp7cOuYbo9GhC4L/
+ ctzQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV3EDe3pL8hV3tupiAsNUJ3EsjYkMVeTKEPJldtYDAkGSL9/pMwCsiG+fyq86fmEC35mo3AaTI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzgreuobnLgnXmWRtpivzDHxj4KFAfz/ckUfu/JJ3fX4+Z22/MJ
+ exFsQis4jrbx0fUsBpCXtXK3JgUw9CC5sF/+KNwZ+ZqKR2+T80fIkPE37Q==
+X-Google-Smtp-Source: AGHT+IGfTJ4hPByRAxTBqxVgQuVSqx0jO6xJrZWXytPfhYg+tH3Whgir62NENbaQrX0QWJ+hHWqwWw==
+X-Received: by 2002:a05:6512:3b95:b0:539:f7de:df6a with SMTP id
+ 2adb3069b0e04-53b86b029efmr2303387e87.52.1730304258782; 
+ Wed, 30 Oct 2024 09:04:18 -0700 (PDT)
+Received: from vamoirid-laptop ([2a04:ee41:82:7577:89e7:cc9d:3a72:92f3])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-431bd8e853esm25806725e9.8.2024.10.30.09.04.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Oct 2024 09:04:18 -0700 (PDT)
+Date: Wed, 30 Oct 2024 17:04:16 +0100
+From: Vasileios Amoiridis <vassilisamir@gmail.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: trini@konsulko.com, hs@denx.de, pro@denx.de, sjg@chromium.org,
+ vasileios.amoiridis@cern.ch, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 1/1] drivers: bootcount: Add ZynqMP specific bootcount
+ support
+Message-ID: <ZyJZAP9e5iRRtRM1@vamoirid-laptop>
+References: <20241029185814.7937-1-vassilisamir@gmail.com>
+ <20241029185814.7937-2-vassilisamir@gmail.com>
+ <c6ad234b-e756-4ea3-8381-63ffca1c2c5c@amd.com>
+ <ZyJE7K8Eo7A6smyT@vamoirid-laptop>
+ <bf1c5738-de6a-49d5-9920-bbeb30ebd879@amd.com>
 MIME-Version: 1.0
-From: Zixun LI <admin@hifiphile.com>
-Date: Wed, 30 Oct 2024 16:15:28 +0100
-Message-ID: <CA+GyqeYN4-Z_LajbPXrXtypDY4mePa2vJQ36NW+7oaZg8ww4pw@mail.gmail.com>
-Subject: env: ENV_WRITEABLE_LIST with ".flags" variable
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <bf1c5738-de6a-49d5-9920-bbeb30ebd879@amd.com>
 X-Mailman-Approved-At: Wed, 30 Oct 2024 18:20:04 +0100
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,35 +99,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+On Wed, Oct 30, 2024 at 04:49:10PM +0100, Michal Simek wrote:
+> 
+> 
+> On 10/30/24 15:38, Vasileios Amoiridis wrote:
+> > On Wed, Oct 30, 2024 at 02:13:43PM +0100, Michal Simek wrote:
+> > > 
+> > > 
+> > > On 10/29/24 19:58, Vasileios Amoiridis wrote:
+> > > > From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
+> > > > 
+> > > > Add native support of the bootcount mechanism in the ZynqMP by utilising internal
+> > > > PMU registers. The Persistent Global Storage Registers of the Platform Management
+> > > > Unit can keep their value during reboot cycles unless there is a POR reset, making
+> > > > them appropriate for the bootcount mechanism.
+> > > > 
+> > > > Signed-off-by: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
+> > > > ---
+> > > >    drivers/bootcount/Kconfig            |  4 ++++
+> > > >    drivers/bootcount/Makefile           |  1 +
+> > > >    drivers/bootcount/bootcount_zynqmp.c | 28 ++++++++++++++++++++++++++++
+> > > >    3 files changed, 33 insertions(+)
+> > > >    create mode 100644 drivers/bootcount/bootcount_zynqmp.c
+> > > > 
+> > > > diff --git a/drivers/bootcount/Kconfig b/drivers/bootcount/Kconfig
+> > > > index fa6d8e7128..95b6a9541a 100644
+> > > > --- a/drivers/bootcount/Kconfig
+> > > > +++ b/drivers/bootcount/Kconfig
+> > > > @@ -82,6 +82,10 @@ config BOOTCOUNT_AT91
+> > > >    	bool "Boot counter for Atmel AT91SAM9XE"
+> > > >    	depends on AT91SAM9XE
+> > > > +config BOOTCOUNT_ZYNQMP
+> > > > +	bool "Boot counter for Zynq UltraScale+ MPSoC"
+> > > > +	depends on ARCH_ZYNQMP
+> > > 
+> > > 
+> > > help would help to also described where that count is stored.
+> > > 
+> > 
+> > Hi Michal,
+> > 
+> > thanks for the review. Indeed I could add it.
+> > 
+> > > And why not to have it under DM/U_BOOT_DRIVER?
+> > > You don't need to create compatible string for it just instantiate it.
+> > > 
+> > > Look at:
+> > > 
+> > > U_BOOT_DRVINFO(soc_xilinx_zynqmp) = {
+> > >           .name = "soc_xilinx_zynqmp",
+> > > };
+> > > 
+> > 
+> > I was not fully aware of this, I could try it. Just out of curiosity, is
+> > this the new/prefered way of adding new drivers?
+> > 
+> > > 
+> > > > +
+> > > >    config DM_BOOTCOUNT
+> > > >            bool "Boot counter in a device-model device"
+> > > >    	help
+> > > > diff --git a/drivers/bootcount/Makefile b/drivers/bootcount/Makefile
+> > > > index 245f879633..487adc1212 100644
+> > > > --- a/drivers/bootcount/Makefile
+> > > > +++ b/drivers/bootcount/Makefile
+> > > > @@ -3,6 +3,7 @@
+> > > >    obj-$(CONFIG_BOOTCOUNT_GENERIC)	+= bootcount.o
+> > > >    obj-$(CONFIG_BOOTCOUNT_MEM)	+= bootcount.o
+> > > >    obj-$(CONFIG_BOOTCOUNT_AT91)	+= bootcount_at91.o
+> > > > +obj-$(CONFIG_BOOTCOUNT_ZYNQMP)  += bootcount_zynqmp.o
+> > > 
+> > > please put it to the end of CONFIG_BOOTCOUNT to have it at least in correct location
+> > > 
+> > > >    obj-$(CONFIG_BOOTCOUNT_AM33XX)	+= bootcount_davinci.o
+> > > >    obj-$(CONFIG_BOOTCOUNT_RAM)	+= bootcount_ram.o
+> > > >    obj-$(CONFIG_BOOTCOUNT_ENV)	+= bootcount_env.o
+> > > > diff --git a/drivers/bootcount/bootcount_zynqmp.c b/drivers/bootcount/bootcount_zynqmp.c
+> > > > new file mode 100644
+> > > > index 0000000000..9bb801e188
+> > > > --- /dev/null
+> > > > +++ b/drivers/bootcount/bootcount_zynqmp.c
+> > > > @@ -0,0 +1,28 @@
+> > > > +// SPDX-License-Identifier: GPL-2.0-or-later
+> > > > +// SPDX-FileCopyrightText: 2024 CERN (home.cern)
+> > > > +
+> > > > +#include <bootcount.h>
+> > > > +#include <stdio.h>
+> > > > +#include <zynqmp_firmware.h>
+> > > > +
+> > > > +#define PMU_PERS_GLOB_GEN_STORAGE0 0x00FFD80050
+> > > 
+> > > In arch/arm/mach-zynqmp/include/mach/hardware.h
+> > > there is already structure defined and gen_storage0 is there too.
+> > > Please use it.
+> > > 
+> > > Regarding this location. Exception in PMUFW is using this reg.
+> > > It means at the end of day it is up to you if you want to use it or not.
+> > > 
+> > 
+> > In master branch (commit 5cca0e3f6e0ff17db92476235ea1bb9cd8cbc9eb) there
+> > is no gen_storage0 in the structure pmu_regs, only gen_storage4 and
+> > gen_storage6.
+> 
+> you are right but easy to extend that structure to have it there.
+> 
+> > 
+> > But in any case though, I don't use gen_storage0 which is the
+> > Global General Storage 0 but the Persistent Global General Storage 0
+> > which is in the in the offset 0x50 and is defined in [1]. According to
+> > this document, only registers {4:7} are used by FSBL and other Xilinx
+> > software products so from what I understand registers {0:3} are free to
+> > use. If that's not the case, which one of them is free for use?
+> > 
+> > [1]: https://docs.amd.com/r/en-US/ug1087-zynq-ultrascale-registers/PERS_GLOB_GEN_STORAGE0-PMU_GLOBAL-Register
+> 
+> in embedded sw you can find this
+> lib/sw_apps/zynqmp_pmufw/src/xpfw_start.S:77:           addik   r3,     r0,
+> 0xffd80050
+> lib/sw_apps/zynqmp_pmufw/src/xpfw_start.S:81:           addik   r3,     r0,
+> 0xffd80054
+> 
+> And there are 2 pages which describe their usage
+> 
+> https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18841724/PMU+Firmware#PMUFirmware-RegistersreservedforPMUFirmware
+> 
+> https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842019/Zynq+UltraScale+FSBL#ZynqUltraScale+FSBL-WhatarethememoryregionsandregistersreservedforFSBL?
+> 
+> But as I said I am fine if you choose one and you will use it for bootcount.
+> 
+> Thanks
+> M
+>
 
-I read the code about environment variable protection and an old
-discussion: https://lists.denx.de/pipermail/u-boot/2021-April/446247.html
-but I still have a question.
+Ah okay I see. It was much easier to look on the UG1087 document, I
+didn't think of looking somewhere else. Thanks!
 
-In env_flags_init() we have:
-  if (first_call) {
-    #ifdef CONFIG_ENV_WRITEABLE_LIST
-      flags_list = ENV_FLAGS_LIST_STATIC;
-    #else
-      flags_list = env_get(ENV_FLAGS_VAR);
-    #endif
-    first_call = 0;
-  }
+In that case I would prefer to use maybe use one of the 2 registers
+that are not used, like pers_gen_storage{2,3}. Would that still be
+okay for you?
 
-When ENV_WRITEABLE_LIST is enabled, why do we have to initialize the list
-with ENV_FLAGS_LIST_STATIC instead of ".flags" ? Doing so makes ".flags"
-being ignored.
-
-In env_flags_lookup() there is already a fallback when a flag is not
-found, the static list will be checked.
-
-Since default env is firstly loaded in env_load(), external ".flags" are
-rejected and don't affect the security:
-  change_ok() rejected setting variable .flags, skipping it!
-
-Advantage of using .flags is being able to use a <board>.env file to
-group all variables together without modifying the included header.
-
-Best regards,
-Zixun
+Cheers,
+Vasilis
