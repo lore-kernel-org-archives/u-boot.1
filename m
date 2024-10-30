@@ -4,80 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1362CD6B6B3
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 16:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E48DD6B6AD
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 16:56:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BBFE89206;
-	Wed, 30 Oct 2024 17:56:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1E6098922C;
+	Wed, 30 Oct 2024 17:56:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QvIFLd3/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ty0K4m1w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA0D089221; Wed, 30 Oct 2024 17:56:04 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 64BAE88C05; Wed, 30 Oct 2024 17:56:27 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE17A88C05
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 17:56:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 038A289234
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 17:56:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730307358; x=1730912158; i=xypron.glpk@gmx.de;
- bh=o8OZw5kV+jGFhKSuIs2RYlfbTry9KWRASoMv+6JZqrI=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=QvIFLd3/KRlCV+HsjusyJxP5jBGfoOX2JAKxV2I5kMFqoFZc2wshT+aJ/bIFrrPI
- VRnkBLGdA+VZFQvfQI7P2OJD7Lwz3VITNW6BNt+J3e4nBPWs7uGPoxJnP8ZF0aUze
- KtHRFIEpSe3zpKAMjdqyV0KxOO2ThySW+ZAXmR6f9HSB7TPGMNPfz13Q58/2V2OwS
- B9JNWLz3fmqaMkvJrIwTSQMciDXcS3hyZdNMf2xJjQyZpWG4bp8ATlv1ytscZdKeZ
- wJGJUBu5VgRCuAWmzbWMfdgGGxSgcm+AJ2riVfKOwMryCImRwsBu+UDheiwJEMZWl
- l7y5ZjkXxvJHdA0/4w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [10.150.8.169] ([145.103.114.43]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MGz1f-1t1V9x0md1-004PHS; Wed, 30
- Oct 2024 17:55:58 +0100
-Message-ID: <28e1ac54-c813-4b3d-b301-1bd408f29e28@gmx.de>
-Date: Wed, 30 Oct 2024 17:55:51 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3e600ae1664so44345b6e.2
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 09:56:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1730307382; x=1730912182; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DWdlYOLLFrU90FDBOVhOfRVXbxYCQ1u8fAV64QQc7Y0=;
+ b=Ty0K4m1wZbJfsVR0hUrwlLeT3uVUArjUwOB0vxBkxEjfR+HrS1x5G/wDXZl1wmaQRc
+ vLEq3Y+AtkyB14vsyVoTj2FvgV2dVNfpyprWv90e8Df7YKiP/0HSJaPyHk7WHWWlaQqe
+ z+5llE3osCVssbTQ0ZECM2O6rBH5fO4TQ1lRA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730307382; x=1730912182;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DWdlYOLLFrU90FDBOVhOfRVXbxYCQ1u8fAV64QQc7Y0=;
+ b=E9zP/4GIIR36UCJgiFnqv/U7P+58YYjlW/Lv3gWoylf8Io6WI8CU+Slui7wh1JiuZa
+ fKZEyD5fj94sw4tKLw/n1KvLUIqGvr0zkdlftE3S2wOmY4IfQ7ssEfG3eL7PQXnvZvWQ
+ rS4Ncm5y2YvbT240FwZbnHDLigVwdUEwgRSX6YsgH3QX6MzLPi/xcCfo3hChWgcVc+6O
+ 3OpUceBk9zdCWOfWluLWfJlKMUYFOwU/TY7D290ug4x8gvwTubIDa5L5Zh/Krg6Izx3t
+ +I08OqG3Ok2upk22jasGkAhfBJL8xdLFKsKmUlVnuJkjCEPoecZ9+mt73dwTMjaNN8vj
+ FvAg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWrFn1kqtWHy84eoVEP8VlfHN4c3cZuawgTzDa+IdApjrKBnvq76VHdDp/Dtv3EKgcjpoENulE=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywz4bqE3UiH1sYPGvP/3miMPpUbtGuWE/Ui90d6fmiKEQ7ZXSSi
+ R7Z5r6NxlFNnVa5nNP/aC8XOgwStmT/YJTYXfPiDbrlb2vCewhQdIGQKUIh1XUc=
+X-Google-Smtp-Source: AGHT+IELV6luA1eV5eFsB5ixgJqsrdDRTkAt0rXOcts03kMdvGw0itPVRb9+3wLndsRmdO7TQlh8eQ==
+X-Received: by 2002:a05:6808:10d0:b0:3e6:25df:2604 with SMTP id
+ 5614622812f47-3e6384432c6mr14695001b6e.14.1730307382549; 
+ Wed, 30 Oct 2024 09:56:22 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d179a02663sm53305116d6.83.2024.10.30.09.56.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Oct 2024 09:56:21 -0700 (PDT)
+Date: Wed, 30 Oct 2024 10:56:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Andre Przywara <andre.przywara@arm.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Michael Walle <mwalle@kernel.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [PATCH 1/9] mtd: spi-nor: Remove recently added nor->addr_width
+ == 3 test
+Message-ID: <20241030165618.GP2558755@bill-the-cat>
+References: <20241026201741.171073-1-marek.vasut+renesas@mailbox.org>
+ <CAMty3ZB3ngMezv9S2XrNjXL69q+z9x-=qnQGga51FgTfA4fanQ@mail.gmail.com>
+ <19fc4486-f8fe-4286-8941-76ff2a81b7d9@linaro.org>
+ <CAMty3ZAJrKvUAxWg9CfKtyrjw+WnHOgwkfAJb+N-7d3NyXUrxA@mail.gmail.com>
+ <f797cb27-84ca-41c3-83a5-b9044f2d5e5c@linaro.org>
+ <3835b139-ae37-423e-8a24-a958ece69c0d@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 02/11] efi_loader: Add a test app
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Michal Simek <michal.simek@amd.com>
-References: <20241029192222.362445-1-sjg@chromium.org>
- <20241029192222.362445-3-sjg@chromium.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241029192222.362445-3-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:su8/10I9IBNvkeCf3PeROWwWOq3BQvBCLYTsQgXUrvhtD4wCZ+3
- TQ/ZudVzvCwr5xLSrlb/ZaBikb3O55II6Ran9rLVR3KO9jpmCSwD4LBLv7Xw949NLKasxOU
- 5JORISN9XdQGPqB+99hSFrQEMTKiohYkjWqKpYag7NyT25OeidsoMLDHANMRgWDsN2NmRKc
- /foJODrX7DQBL58tOVGjA==
-UI-OutboundReport: notjunk:1;M01:P0:MrBMxtAUMMo=;AXLoE1cuNuBgSp2dVGcxgBcmGFd
- m79St4eZINVjvDWTUBm4+6DGY5bMRwJw/eqFH9QwdUl9PM47EgIXwfrqPRZqAvfdV+LmYrIFj
- DNIFH73I1n87DTR9Q3UrpjHYLaTsWwfr8iOlNNAXizqGCNFxT1tyXzQRnuy7VTuRbfj9alBJL
- MQkdSW+kgQYG0y7xzjqYYBwppzASynlOasbZ1zL+w8VBqfJqbFDGELGtN3XKg06pYZM8apxaR
- 2DSom9PiZ3EIK2APIpgrOJ/zPKKxfRKp3+XsCqmRTk8gH3XCirJldbllVYIUok+auAetV3tAV
- tMEwZoe968dDv3wTS4D+OXTrYLlEeW3dbHLbd/Db2EDNSYSBZZzjcyO/RrBkTYWrn1Lf0ZKLE
- htCFz1CK5L97TUUWTq33j0ouh/wS7WgZBEzCnF5scaUI/h84ACKpZh8H4EFXrz54QVbjjduNL
- vAPXLszO4YhqJgxfmNxaQJAyqiGOIaOP7NVVBo3O8cM60wUP2oYSMFCOMm43OuQi0YIqY77i4
- 6xaYcOdNeEw6wUddfxah8pQWPY+NodZDfgltAh5lcPCRP93svMoJ5MLb4XRXZMc0RhneZUsbn
- 0sU8GkFuaDS/vxo/7pvWVy7gvpeh1w/DZNM1AAXY9G9DuNcgT1OOgj01NH1yRRmPPgdf+iLx3
- a8sehaHH1JXh722cJA5StTqLN80Knm58h6MRmXxXcCrUlow5i0BoDmCLyIjlG33458VfZVJae
- vg2wsN7Oxn72+ZD4qUYOPY34HtaZGWLPIVF6XeiL74xngHwronLqwu/SC1xkohnv6LyK+MELD
- kTDAcjE5vIaH5Me2c8vaSWiQ==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="tbTieb52Sljzv7cO"
+Content-Disposition: inline
+In-Reply-To: <3835b139-ae37-423e-8a24-a958ece69c0d@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,163 +108,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/29/24 20:22, Simon Glass wrote:
-> Add a simple app to use for testing. This is intended to do whatever it
-> needs to for testing purposes. For now it just prints a message and
-> exits boot services.
->
-> There was a considerable amount of discussion about whether it is OK to
-> call exit-boot-services and then return to U-Boot. This is not normally
-> done in a real application, since exit-boot-services is used to
-> completely disconnect from U-Boot. However, since this is a test, we
-> need to check the results of running the app, so returning is necessary.
-> It works correctly and it provides a nice model of how to test the EFI
-> code in a simple way.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v9:
-> - Update license
-> - Fix 'sevices' typo
->
-> Changes in v7:
-> - Update commit message
->
->   lib/efi_loader/Kconfig   | 10 ++++++
->   lib/efi_loader/Makefile  |  1 +
->   lib/efi_loader/testapp.c | 68 ++++++++++++++++++++++++++++++++++++++++
->   3 files changed, 79 insertions(+)
->   create mode 100644 lib/efi_loader/testapp.c
->
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 37572c82f54..44319729bda 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -584,6 +584,16 @@ config BOOTEFI_HELLO_COMPILE
->   	  No additional space will be required in the resulting U-Boot binary
->   	  when this option is enabled.
->
-> +config BOOTEFI_TESTAPP_COMPILE
-> +	bool "Compile an EFI test app for testing"
-> +	default y
-> +	help
-> +	  This compiles an app designed for testing. It is packed into an imag=
-e
-> +	  by the test.py testing frame in the setup_efi_image() function.
-> +
-> +	  No additional space will be required in the resulting U-Boot binary
-> +	  when this option is enabled.
-> +
->   endif
->
->   source "lib/efi/Kconfig"
-> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> index 8ec240cb864..7c8b2dd1ad6 100644
-> --- a/lib/efi_loader/Makefile
-> +++ b/lib/efi_loader/Makefile
-> @@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) +=3D initrddump
->   ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
->   apps-y +=3D dtbdump
->   endif
-> +apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) +=3D testapp
->
->   obj-$(CONFIG_CMD_BOOTEFI_HELLO) +=3D helloworld_efi.o
->   obj-$(CONFIG_EFI_BOOTMGR) +=3D efi_bootmgr.o
-> diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
-> new file mode 100644
-> index 00000000000..a28fc17ce5b
-> --- /dev/null
-> +++ b/lib/efi_loader/testapp.c
-> @@ -0,0 +1,68 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Hello world EFI application
-> + *
-> + * Copyright 2024 Google LLC
-> + * Written by Simon Glass <sjg@chromium.org>
-> + *
-> + * This test program is used to test the invocation of an EFI applicati=
-on.
-> + * It writes a few messages to the console and then exits boot services
-> + */
-> +
-> +#include <efi_api.h>
-> +
-> +static const efi_guid_t loaded_image_guid =3D EFI_LOADED_IMAGE_PROTOCOL=
-_GUID;
-> +
-> +static struct efi_system_table *systable;
-> +static struct efi_boot_services *boottime;
-> +static struct efi_simple_text_output_protocol *con_out;
-> +
-> +/**
-> + * efi_main() - entry point of the EFI application.
-> + *
-> + * @handle:	handle of the loaded image
-> + * @systab:	system table
-> + * Return:	status code
-> + */
-> +efi_status_t EFIAPI efi_main(efi_handle_t handle,
-> +			     struct efi_system_table *systab)
-> +{
-> +	struct efi_loaded_image *loaded_image;
-> +	efi_status_t ret;
-> +	efi_uintn_t map_size;
-> +	efi_uintn_t map_key;
-> +	efi_uintn_t desc_size;
-> +	u32 desc_version;
-> +
-> +	systable =3D systab;
-> +	boottime =3D systable->boottime;
-> +	con_out =3D systable->con_out;
-> +
-> +	/* Get the loaded image protocol */
-> +	ret =3D boottime->open_protocol(handle, &loaded_image_guid,
-> +				      (void **)&loaded_image, NULL, NULL,
-> +				      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-> +	if (ret !=3D EFI_SUCCESS) {
-> +		con_out->output_string
-> +			(con_out, u"Cannot open loaded image protocol\r\n");
-> +		goto out;
-> +	}
-> +
-> +	/* UEFI requires CR LF */
-> +	con_out->output_string(con_out, u"U-Boot test app for EFI_LOADER\r\n")=
-;
-> +
-> +out:
-> +	map_size =3D 0;
-> +	ret =3D boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size=
-,
-> +				       &desc_version);
-> +	con_out->output_string(con_out, u"Exiting boot services\n");
-> +
-> +	/* exit boot services so that this part of U-Boot can be tested */
-> +	boottime->exit_boot_services(handle, map_key);
 
-Hello Simon,
+--tbTieb52Sljzv7cO
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I am not NAKing this patch. But maybe you could rethink if this call
-tells us anything new about the correct function of ExitBootServices().
+On Wed, Oct 30, 2024 at 04:20:32PM +0100, Michal Simek wrote:
+>=20
+>=20
+> On 10/30/24 15:49, Tudor Ambarus wrote:
+> >=20
+> >=20
+> > On 10/30/24 2:17 PM, Jagan Teki wrote:
+> > > On Wed, Oct 30, 2024 at 4:15=E2=80=AFPM Tudor Ambarus <tudor.ambarus@=
+linaro.org> wrote:
+> > > >=20
+> > > >=20
+> > > >=20
+> > > > On 10/30/24 10:33 AM, Jagan Teki wrote:
+> > > > > Hi Marek,
+> > > > >=20
+> > > > > On Sun, Oct 27, 2024 at 1:48=E2=80=AFAM Marek Vasut
+> > > > > <marek.vasut+renesas@mailbox.org> wrote:
+> > > > > >=20
+> > > > > > Remove undocumented nor->addr_width =3D=3D 3 test. This was add=
+ed in commit
+> > > > > > 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories =
+support")
+> > > > > > without any explanation in the commit message. Remove it.
+> > > > > >=20
+> > > > > > This also has a bad side-effect which breaks READ operation of =
+every SPI NOR
+> > > > > > which does not use addr_width =3D=3D 3, e.g. s25fs512s does not=
+ work at all. This
+> > > > > > is because if addr_width !=3D 3, rem_bank_len is always 0, and =
+if rem_bank_len
+> > > > > > is 0, then read_len is 0 and if read_len is 0, then the spi_nor=
+_read() returns
+> > > > > > -EIO.
+> > > > > >=20
+> > > > > > Basic reproducer is as follows:
+> > > > > > "
+> > > > > > =3D> sf probe ; sf read 0x50000000 0 0x10000
+> > > > > > SF: Detected s25fs512s with page size 256 Bytes, erase size 256=
+ KiB, total 64 MiB
+> > > > > > device 0 offset 0x0, size 0x10000
+> > > > > > SF: 65536 bytes @ 0x0 Read: ERROR -5
+> > > > > > "
+> > > > > >=20
+> > > > > > Fixes: 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked me=
+mories support")
+> > > > > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> > > > > > ---
+> > > > > > Cc: Andre Przywara <andre.przywara@arm.com>
+> > > > > > Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+> > > > > > Cc: Jagan Teki <jagan@amarulasolutions.com>
+> > > > > > Cc: Michael Walle <mwalle@kernel.org>
+> > > > > > Cc: Michal Simek <michal.simek@amd.com>
+> > > > > > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> > > > > > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> > > > > > Cc: Pratyush Yadav <p.yadav@ti.com>
+> > > > > > Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> > > > > > Cc: Sean Anderson <seanga2@gmail.com>
+> > > > > > Cc: Simon Glass <sjg@chromium.org>
+> > > > > > Cc: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+> > > > > > Cc: Tom Rini <trini@konsulko.com>
+> > > > > > Cc: Tudor Ambarus <tudor.ambarus@linaro.org>
+> > > > > > Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> > > > > > Cc: u-boot@lists.denx.de
+> > > > > > Cc: uboot-stm32@st-md-mailman.stormreply.com
+> > > > > > ---
+> > > > >=20
+> > > > > Is this patch-set next version for 'previous' reverted series?
+> > > > >=20
+> > > >=20
+> > > > my 2c: I think I lean towards reverting the stacked/parallel suppor=
+t.
+> > > > The only one that benefits of is AMD, while affecting the core code
+> > > > quality. It also slows down further contributions and I assume it
+> > > > hardens maintainer's job.
+> > >=20
+> > > I did try this before and it is hard to separate from the core. and at
+> > > the same time it is hard to maintain the core too.
+> > >=20
+> > > >=20
+> > > > Even if I (we?) haven't made my mind on how to best implement this,=
+ it's
+> > > > clear that it shall be above SPI NOR without affecting current devi=
+ces.
+> > > >=20
+> > > > Not sure if it's fine to revert everything, haven't followed u-boot
+> > > > lately, your choice to make.
+> > >=20
+> > > If we find a way (not sure if it's possible) separate like a wrapper
+> > > or fix the things without revert - these are two points I can see as
+> > > of now.
+> > >=20
+> >=20
+> > Then this set shall help move in this direction. Some involvement from
+> > the stacked/parallel authors would be nice here, and some commitment
+> > that the current status in just a temporary situation.
+>=20
+> I hope that by authors you mean SW owners not really HW authors of this w=
+iring.
+> Jagan is aware that we are using this configuration for quite a long time
+> and we are still here and not leaving.
+> As you know Amit is trying to find a solution in Linux but nothing has be=
+en
+> agreed yet. If there is agreement to separate it to own driver or so we w=
+ill
+> be definitely working with u-boot to get it to the same state.
+>=20
+> This patchset is using the latest approved DT binding created by Miquel a=
+nd
+> if new binding is accepted we will be working to align to it.
+> Also intention is to bring this functionality to customers and not break
+> others. That's why these patches are pulled into rc1 to get better test
+> coverage.
+>=20
+> And to be fair to say version which has been merged was v14 and anybody
+> could comment it before and we are definitely here to help to resolve iss=
+ues
+> on other boards caused by this patchset. But we need to have help from
+> others because obviously we don't have other boards and they are likely a=
+lso
+> not wired in CI.
 
-We already have a test of ExitBootServices() in lib/efi_selftest/ and
-maybe we should extend that test to check more.
+To be clear, we need to resolve the problems that have shown up now on
+all of the hardware that was working in v2024.10. My current inclination
+is to merge
+https://patchwork.ozlabs.org/project/uboot/list/?series=3D429932&state=3D*
+(aka this series in question) ASAP.
 
-By removing ExitBootServices() we could keep U-Boot in a well defined
-state which will allow us to run any number of bootmeth tests in
-sequence and keep the EFI sub-system in a consistent state.
+--=20
+Tom
 
-Best regards
+--tbTieb52Sljzv7cO
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Heinrich
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmciZS4ACgkQFHw5/5Y0
+tywzvQv/Yu+CyGNxdBoI2Vjj9Uk1yyi0DJUA4jxscB+AIRHxkikIGCYpMaJEN7xh
+Hxmi4axL0iveZ+FDrLr4eOrxrLWv0xF364jqHwmOFjFiRAUC8/u0xYYtzRy9wRpW
+gEei8SDlUjiXZ9HQgYgUObHObeY5gNI7XpuEjYkFeW1lIK/Hz+g5ZRqt/4uE5fNW
+Prn+O99ryNmxWwKrTCDLfYyzve7fpxmPO8CCVk6w3pdu4zeXiplRYgwyhnF+UFxa
+8zEDPQpGEow+M/9y1DqZlhN5buOW3nQ/3wIT7PAwqwFnVx1/wSKPnDO380Jk5xnp
+aCu8NKvK3Ldbh29sY1gklW97TwNXHHdr/Uz8qMRU2CnU/i0V9d0w361GZ27rNBkH
+hIWDtOVR1YN81MPmImX/PagaGC0ejCxzk1MxTaiMWbolzl25vAWgiQpKeyItgFZY
+8abKL1wkfbyCVhyb4yH0dTBtl7Fr5nTAE1ZjI6P/By0zmURYnR0HmcHGenN+aWN6
+AHNnQo8E
+=Ube/
+-----END PGP SIGNATURE-----
 
-> +
-> +	/* now exit for real */
-> +	ret =3D boottime->exit(handle, ret, 0, NULL);
-> +
-> +	/* We should never arrive here */
-> +	return ret;
-> +}
-
+--tbTieb52Sljzv7cO--
