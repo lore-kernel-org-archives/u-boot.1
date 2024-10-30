@@ -4,82 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28BBED6B6B3
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 17:20:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68ECED6B6B3
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 17:20:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FC4B89253;
+	by phobos.denx.de (Postfix) with ESMTP id B01318925A;
 	Wed, 30 Oct 2024 18:20:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Euy3pZwJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y1K+xzrG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7354B88F83; Wed, 30 Oct 2024 15:38:42 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 64D2F88FCB; Wed, 30 Oct 2024 15:49:16 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1502C88EDE
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 15:38:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D956288F1E
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 15:49:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vassilisamir@gmail.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4319399a411so52102365e9.2
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 07:38:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-37ed3bd6114so4261529f8f.2
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 07:49:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730299119; x=1730903919; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=iy/7AlX8o128c5L6zVnk4oxsRZxAfNCBf5dwdW3o7ig=;
- b=Euy3pZwJWyYRFW66FF73HtKZQFQ3oP7plYt9fdKVcckpl7enYr6xIrE/tSydpJvUbH
- F2rZR+n0JGkMtX+VR/M+C/X/QO8fQ7zaRaNUGbwCrviYt3UlEBbw+oFGv3CLET9CH6nf
- lF2mp9+LrpNZ4ZprkV+g4ci573uxDzlhVvM+NALGNzRuOHIHsaJOqLEXWJBMA3gWfiXN
- f5Z5xjDQJEkUQTc4Rr92DUTVA4Pdp56j/aK5C36Byu79LjpdLoJDW4luV4IQb8V1xBq8
- Fr2repdx6mx5uNdrgSgYzQ4UzMULnrXjb4YHvhU/2j6rTDB7OTM4GW/+yoRHrdnrPw9z
- UjIQ==
+ d=linaro.org; s=google; t=1730299753; x=1730904553; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ih2LJlFP7ouZI4XpcBod+6u3eX6bDouMjqKHkaaXymM=;
+ b=Y1K+xzrG2EHR7LLu6MjOWCB1cfHwN27xHXZG405uPCFLmsk3vGQ49EP9dzYfhZEF0M
+ QMDRR9pGWqj41uXu5OtpAVISHPLUNMBVe8j77XtwxbAjdTWsX6qGwGOSLZZdIOYsRT7u
+ av6l+vrzXepea2VL9RAXDp3GaJr5YgfYZvooTxgZXZabEbgkRJe0hFso17uByaGPblA7
+ IIknE2zJqIzKfvFvExa5OX3TBN3qOHlLAPwN1yGUJLKUXsUXmpFc1ElL2ORNnJ3VdTC4
+ yUBeXZbu/6WqZcULM3f99u29L9SNUy6Zi2H3fT9JM9pDWdXm/i0q5on9UfHjr4LJaGE/
+ Lmsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730299119; x=1730903919;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iy/7AlX8o128c5L6zVnk4oxsRZxAfNCBf5dwdW3o7ig=;
- b=wCCNFZ/FN+QwF2k+S+RXHz7xo7u3J3F6iV74yM8/soyvLQy0JY6HbOE/KwYgXChotf
- iUOh5lEEFNp9nj7agbrdE0P5DYrBqpP2atG6DgsVz/rBGkGH8ftmwCznl7F1iE8RZ/o6
- fYOTkpmfyqABpEUtxmFV+a97qbv1y9vrF/xJ/7L2UrLH0uYTFGZ2hQUxRkSWhdyBlpI9
- zYCa+td2eGN0h9D5vO0Eei8jc9d91y6CcJHPqlrGih4dv3jUdistw4w2yEf080P1OVAR
- 4JJLArLzT3Nd3MVVP6lrZd53weEEV9EKk6ZYAoMzR+opM3e8+2m3DISKG1KNG1SHPfQM
- 3D0Q==
+ d=1e100.net; s=20230601; t=1730299753; x=1730904553;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ih2LJlFP7ouZI4XpcBod+6u3eX6bDouMjqKHkaaXymM=;
+ b=gqMPSuKOqMDZyUitcaA1WehUc8AKnnLgQSKI9/m7fP3hBrXGG1Uf1F/8uPX8j/rncZ
+ w98Aew4s9z+oPbeRm4ab8VU1q96tz4df5Dmj7LOyAweqUCoGFygaaHqrQoS9uH7se7NT
+ dBqHLoCqtBUU0O6voU/XshFpxEHEytaisQbWv4DdkjmVWBZrNA58ADFOhmXp4b7AzI2E
+ 6iZ+e8H88m16lk5kKiTSI7MJrSJV2GOrnJao4+kmjtsfHrpw42KN3SNqolX6DJrhFRol
+ UtV0MAyQ6jkCWOqxoil25PjPfZP4lUEouJ6dwv2cslEzY/PQcWy8BYHivHrTulv7pHjq
+ 2vXw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXmjmThDKkjo1Judf0BNBhYYhh68xN97nvNBEnonFWE11waqQk9FEaQi6KTauUp3GHEtSB3RYg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxBHucUmHKp4R6xO0OspEft3kh79Wl9v8OdQNvHJ1RLOGJe2Iyo
- ls9z2RMDXZSMhBhUIXuIMLKRJCqbKpU7spAK5U6NRace315WGTOi
-X-Google-Smtp-Source: AGHT+IFKbZduL2kaGk2u7eAC54oJooSoPCWD+xf0xaH1wsY/BXmB9QZvSW1v+Hr6Va/2zyWqHQ33GQ==
-X-Received: by 2002:adf:a2d2:0:b0:37d:4647:154e with SMTP id
- ffacd0b85a97d-380610f264fmr10836825f8f.9.1730299119298; 
- Wed, 30 Oct 2024 07:38:39 -0700 (PDT)
-Received: from vamoirid-laptop ([2a04:ee41:82:7577:89e7:cc9d:3a72:92f3])
+ AJvYcCWr5GOkALaoQKA4CzosnScSJZY/5zk7gOv1n3ROgzW5DwoXaTrPn9SKwAA0s0U9fI9mm5c0Skk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyaoy9vDBA/BcLt4452uBGsVVPkwNMVIQ50ffj5v/YCIY1tyxRB
+ rHAn/Y8yOTKN0cOEZegxlGhhzNv5mpQOo2QXs0S35JucqJBlVs/AOra9HDdqlUTzb3Ybeq2o8Fw
+ NdFA=
+X-Google-Smtp-Source: AGHT+IFYoOhMxj6VEKeLgltGCkOwtk27OCgc4bLo1XLu2tG7cwUBRJZ/wx0AAKiY5vt42jOifFD7qA==
+X-Received: by 2002:a5d:4f92:0:b0:37d:3985:8871 with SMTP id
+ ffacd0b85a97d-380611dbea7mr10884829f8f.39.1730299753154; 
+ Wed, 30 Oct 2024 07:49:13 -0700 (PDT)
+Received: from [192.168.0.157] ([79.115.63.43])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38058b929a8sm15655772f8f.103.2024.10.30.07.38.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Oct 2024 07:38:38 -0700 (PDT)
-Date: Wed, 30 Oct 2024 15:38:36 +0100
-From: Vasileios Amoiridis <vassilisamir@gmail.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: trini@konsulko.com, hs@denx.de, pro@denx.de, sjg@chromium.org,
- vasileios.amoiridis@cern.ch, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/1] drivers: bootcount: Add ZynqMP specific bootcount
- support
-Message-ID: <ZyJE7K8Eo7A6smyT@vamoirid-laptop>
-References: <20241029185814.7937-1-vassilisamir@gmail.com>
- <20241029185814.7937-2-vassilisamir@gmail.com>
- <c6ad234b-e756-4ea3-8381-63ffca1c2c5c@amd.com>
+ ffacd0b85a97d-38058b3be78sm15647491f8f.31.2024.10.30.07.49.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Oct 2024 07:49:12 -0700 (PDT)
+Message-ID: <f797cb27-84ca-41c3-83a5-b9044f2d5e5c@linaro.org>
+Date: Wed, 30 Oct 2024 14:49:10 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <c6ad234b-e756-4ea3-8381-63ffca1c2c5c@amd.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/9] mtd: spi-nor: Remove recently added nor->addr_width
+ == 3 test
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Andre Przywara <andre.przywara@arm.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Michael Walle <mwalle@kernel.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, Tom Rini
+ <trini@konsulko.com>, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <20241026201741.171073-1-marek.vasut+renesas@mailbox.org>
+ <CAMty3ZB3ngMezv9S2XrNjXL69q+z9x-=qnQGga51FgTfA4fanQ@mail.gmail.com>
+ <19fc4486-f8fe-4286-8941-76ff2a81b7d9@linaro.org>
+ <CAMty3ZAJrKvUAxWg9CfKtyrjw+WnHOgwkfAJb+N-7d3NyXUrxA@mail.gmail.com>
+Content-Language: en-US
+From: Tudor Ambarus <tudor.ambarus@linaro.org>
+In-Reply-To: <CAMty3ZAJrKvUAxWg9CfKtyrjw+WnHOgwkfAJb+N-7d3NyXUrxA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 30 Oct 2024 18:20:04 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,150 +112,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 30, 2024 at 02:13:43PM +0100, Michal Simek wrote:
+
+
+On 10/30/24 2:17 PM, Jagan Teki wrote:
+> On Wed, Oct 30, 2024 at 4:15 PM Tudor Ambarus <tudor.ambarus@linaro.org> wrote:
+>>
+>>
+>>
+>> On 10/30/24 10:33 AM, Jagan Teki wrote:
+>>> Hi Marek,
+>>>
+>>> On Sun, Oct 27, 2024 at 1:48 AM Marek Vasut
+>>> <marek.vasut+renesas@mailbox.org> wrote:
+>>>>
+>>>> Remove undocumented nor->addr_width == 3 test. This was added in commit
+>>>> 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
+>>>> without any explanation in the commit message. Remove it.
+>>>>
+>>>> This also has a bad side-effect which breaks READ operation of every SPI NOR
+>>>> which does not use addr_width == 3, e.g. s25fs512s does not work at all. This
+>>>> is because if addr_width != 3, rem_bank_len is always 0, and if rem_bank_len
+>>>> is 0, then read_len is 0 and if read_len is 0, then the spi_nor_read() returns
+>>>> -EIO.
+>>>>
+>>>> Basic reproducer is as follows:
+>>>> "
+>>>> => sf probe ; sf read 0x50000000 0 0x10000
+>>>> SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB, total 64 MiB
+>>>> device 0 offset 0x0, size 0x10000
+>>>> SF: 65536 bytes @ 0x0 Read: ERROR -5
+>>>> "
+>>>>
+>>>> Fixes: 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
+>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>> ---
+>>>> Cc: Andre Przywara <andre.przywara@arm.com>
+>>>> Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+>>>> Cc: Jagan Teki <jagan@amarulasolutions.com>
+>>>> Cc: Michael Walle <mwalle@kernel.org>
+>>>> Cc: Michal Simek <michal.simek@amd.com>
+>>>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>>>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>>>> Cc: Pratyush Yadav <p.yadav@ti.com>
+>>>> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+>>>> Cc: Sean Anderson <seanga2@gmail.com>
+>>>> Cc: Simon Glass <sjg@chromium.org>
+>>>> Cc: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+>>>> Cc: Tom Rini <trini@konsulko.com>
+>>>> Cc: Tudor Ambarus <tudor.ambarus@linaro.org>
+>>>> Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+>>>> Cc: u-boot@lists.denx.de
+>>>> Cc: uboot-stm32@st-md-mailman.stormreply.com
+>>>> ---
+>>>
+>>> Is this patch-set next version for 'previous' reverted series?
+>>>
+>>
+>> my 2c: I think I lean towards reverting the stacked/parallel support.
+>> The only one that benefits of is AMD, while affecting the core code
+>> quality. It also slows down further contributions and I assume it
+>> hardens maintainer's job.
 > 
+> I did try this before and it is hard to separate from the core. and at
+> the same time it is hard to maintain the core too.
 > 
-> On 10/29/24 19:58, Vasileios Amoiridis wrote:
-> > From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
-> > 
-> > Add native support of the bootcount mechanism in the ZynqMP by utilising internal
-> > PMU registers. The Persistent Global Storage Registers of the Platform Management
-> > Unit can keep their value during reboot cycles unless there is a POR reset, making
-> > them appropriate for the bootcount mechanism.
-> > 
-> > Signed-off-by: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
-> > ---
-> >   drivers/bootcount/Kconfig            |  4 ++++
-> >   drivers/bootcount/Makefile           |  1 +
-> >   drivers/bootcount/bootcount_zynqmp.c | 28 ++++++++++++++++++++++++++++
-> >   3 files changed, 33 insertions(+)
-> >   create mode 100644 drivers/bootcount/bootcount_zynqmp.c
-> > 
-> > diff --git a/drivers/bootcount/Kconfig b/drivers/bootcount/Kconfig
-> > index fa6d8e7128..95b6a9541a 100644
-> > --- a/drivers/bootcount/Kconfig
-> > +++ b/drivers/bootcount/Kconfig
-> > @@ -82,6 +82,10 @@ config BOOTCOUNT_AT91
-> >   	bool "Boot counter for Atmel AT91SAM9XE"
-> >   	depends on AT91SAM9XE
-> > +config BOOTCOUNT_ZYNQMP
-> > +	bool "Boot counter for Zynq UltraScale+ MPSoC"
-> > +	depends on ARCH_ZYNQMP
+>>
+>> Even if I (we?) haven't made my mind on how to best implement this, it's
+>> clear that it shall be above SPI NOR without affecting current devices.
+>>
+>> Not sure if it's fine to revert everything, haven't followed u-boot
+>> lately, your choice to make.
 > 
->
-> help would help to also described where that count is stored.
+> If we find a way (not sure if it's possible) separate like a wrapper
+> or fix the things without revert - these are two points I can see as
+> of now.
 > 
 
-Hi Michal,
+Then this set shall help move in this direction. Some involvement from
+the stacked/parallel authors would be nice here, and some commitment
+that the current status in just a temporary situation.
 
-thanks for the review. Indeed I could add it.
+All the stacked/parallel code shall be pulled out from SPI NOR
+eventually. The design is treating 2 independent flashes as one.
+Whatever ties them shall be above SPI NOR. In the meantime we all suffer
+until that is achieved. I guess if things become unbearable we can't
+remove everything later on, can we? Or maybe this ship has sailed
+already, I don't know.
 
-> And why not to have it under DM/U_BOOT_DRIVER?
-> You don't need to create compatible string for it just instantiate it.
-> 
-> Look at:
-> 
-> U_BOOT_DRVINFO(soc_xilinx_zynqmp) = {
->          .name = "soc_xilinx_zynqmp",
-> };
-> 
-
-I was not fully aware of this, I could try it. Just out of curiosity, is
-this the new/prefered way of adding new drivers?
-
-> 
-> > +
-> >   config DM_BOOTCOUNT
-> >           bool "Boot counter in a device-model device"
-> >   	help
-> > diff --git a/drivers/bootcount/Makefile b/drivers/bootcount/Makefile
-> > index 245f879633..487adc1212 100644
-> > --- a/drivers/bootcount/Makefile
-> > +++ b/drivers/bootcount/Makefile
-> > @@ -3,6 +3,7 @@
-> >   obj-$(CONFIG_BOOTCOUNT_GENERIC)	+= bootcount.o
-> >   obj-$(CONFIG_BOOTCOUNT_MEM)	+= bootcount.o
-> >   obj-$(CONFIG_BOOTCOUNT_AT91)	+= bootcount_at91.o
-> > +obj-$(CONFIG_BOOTCOUNT_ZYNQMP)  += bootcount_zynqmp.o
-> 
-> please put it to the end of CONFIG_BOOTCOUNT to have it at least in correct location
-> 
-> >   obj-$(CONFIG_BOOTCOUNT_AM33XX)	+= bootcount_davinci.o
-> >   obj-$(CONFIG_BOOTCOUNT_RAM)	+= bootcount_ram.o
-> >   obj-$(CONFIG_BOOTCOUNT_ENV)	+= bootcount_env.o
-> > diff --git a/drivers/bootcount/bootcount_zynqmp.c b/drivers/bootcount/bootcount_zynqmp.c
-> > new file mode 100644
-> > index 0000000000..9bb801e188
-> > --- /dev/null
-> > +++ b/drivers/bootcount/bootcount_zynqmp.c
-> > @@ -0,0 +1,28 @@
-> > +// SPDX-License-Identifier: GPL-2.0-or-later
-> > +// SPDX-FileCopyrightText: 2024 CERN (home.cern)
-> > +
-> > +#include <bootcount.h>
-> > +#include <stdio.h>
-> > +#include <zynqmp_firmware.h>
-> > +
-> > +#define PMU_PERS_GLOB_GEN_STORAGE0 0x00FFD80050
-> 
-> In arch/arm/mach-zynqmp/include/mach/hardware.h
-> there is already structure defined and gen_storage0 is there too.
-> Please use it.
-> 
-> Regarding this location. Exception in PMUFW is using this reg.
-> It means at the end of day it is up to you if you want to use it or not.
-> 
-
-In master branch (commit 5cca0e3f6e0ff17db92476235ea1bb9cd8cbc9eb) there
-is no gen_storage0 in the structure pmu_regs, only gen_storage4 and
-gen_storage6. 
-
-But in any case though, I don't use gen_storage0 which is the
-Global General Storage 0 but the Persistent Global General Storage 0
-which is in the in the offset 0x50 and is defined in [1]. According to
-this document, only registers {4:7} are used by FSBL and other Xilinx
-software products so from what I understand registers {0:3} are free to
-use. If that's not the case, which one of them is free for use?
-
-[1]: https://docs.amd.com/r/en-US/ug1087-zynq-ultrascale-registers/PERS_GLOB_GEN_STORAGE0-PMU_GLOBAL-Register
-
-> > +
-> > +void bootcount_store(ulong a)
-> > +{
-> > +	int ret;
-> > +
-> > +	ret = zynqmp_mmio_write(PMU_PERS_GLOB_GEN_STORAGE0, 0xFF, a);
-> > +	if (ret)
-> > +		printf("Failed: mmio write\n");
-> > +}
-> > +
-> > +ulong bootcount_load(void)
-> > +{
-> > +	int ret;
-> > +	u32 val;
-> 
-> as was said val should be initialized here too.
-> 
-
-Yes indeed.
-
-> > +
-> > +	ret = zynqmp_mmio_read(PMU_PERS_GLOB_GEN_STORAGE0, &val);
-> > +	if (ret)
-> > +		printf("Failed: mmio read\n");
-> > +	return val;
-> > +}
-> 
-> Anyway I expect this driver to be under DM that v2 will change.
-> 
-> Thanks,
-> Michal
-> 
-> 
-> 
-
-Yes, I will try and come back to you in case I don't get something.
-Thanks again for the review.
+It's really your decision to make because you maintain this code. If
+full revert is chosen, I can agree and ACK that. If we keep it and try
+to sweeten everything a bit, then be it.
 
 Cheers,
-Vasilis
+ta
