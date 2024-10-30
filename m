@@ -4,77 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B17D1D6B6D4
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 20:41:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9EF2D6B6D6
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 20:46:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A55B89255;
-	Wed, 30 Oct 2024 21:41:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EC7A189250;
+	Wed, 30 Oct 2024 21:46:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gozo7YfV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Yh0KrVdZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A20EC89257; Wed, 30 Oct 2024 21:41:13 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 0213989255; Wed, 30 Oct 2024 21:46:33 +0100 (CET)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B589789250
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 21:41:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD60D8924B
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 21:46:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-37d4c1b1455so197737f8f.3
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 13:41:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-260e6298635so560506fac.1
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 13:46:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730320871; x=1730925671; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1730321189; x=1730925989; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TSIdJGJ1wGgGaCOpzh4/UzsIRvE+gXp92zLNUF/zjrQ=;
- b=Gozo7YfVeuUkS4iRFSSQJKqkt2Eh/7spR+7QSP0ttjqcDdbYR8tefHDn8puaCBmiCP
- cg7WNGcv6nOZvldcsWVSP093UzfjBNJfaHjUZBJ3KMpZFpGDw6F7dWjFFaIHzFfdVgYu
- e6Rm+DarPN/gcaAg39MBxfv53kY+xtg3qhHI/+y1t9yF4k0uGf966WfOuS0DfV6vGqyn
- ypNB0pmsMrNynLY1auUt8ciARQUnutCjjmnXQIVjRpoCVppGjFwUHqQnM0FF7OuxBTQN
- NJ6cEuKuI9b9CFQ1kkpy98aZsz8z2voH0WYbRXfcyVcDZpG7Lumtj9fpAnoKJlylTk6i
- LvRg==
+ bh=luBjcYhccKa69jDPFIv+blstp2f391ITBeSd0ucRAkA=;
+ b=Yh0KrVdZX9QhM3vt12U0s2F/TNauM2rq5dIVyuSL4PzDJZozMW8z6Y7Q72fjaICL5H
+ aHCBJHxvgjHpSZSJ73RLlWIw3tW1Rccj+setLd1d89IzzRgd62x/AMRVBRgZcGR7/9cJ
+ b1tOecjq8J3/K3+e2W+uXGMHrsxohE43fqi3PtFX3QDQKuWS7m054mXkbA8xwZviCC78
+ k22SUFj8cwQ7B5tWDulYxH/ezKHzFKfnC+PetaFHvMttviytOBKvy47CvDNMGbhHvoyR
+ in4l26/nOwHKL1NjadAE3RtOA6lVZEi9RZdxmRyw8gXJnDOtbWKabjF2zlLTH/anywIW
+ ASdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730320871; x=1730925671;
+ d=1e100.net; s=20230601; t=1730321189; x=1730925989;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TSIdJGJ1wGgGaCOpzh4/UzsIRvE+gXp92zLNUF/zjrQ=;
- b=op+MafiXD73+TAdppHNYEuMmP5DmsXiFGDtLV0kvBjO7aoT4/GDX+1qJKDFrSxezT1
- HbKZk0VtSHNxcLOfNXCEiYrrp3KdoFa6z3N0aautG3gxqF2fJdt2kFEvYeDrXKpLX7aO
- sI09FeQoFbQgoEUv8uhvZ8V6loXmm2BzSjJixVSrxriwK+WfTbOZr6wfsPPUoelin60o
- COFEz7qnbRpweTgDYu96zwAmWjxdkH6u4QmzeMW86by+B0PVwFwO9TleBEeur6U3Dgj0
- NxIE/FruFZsIlQNqsI3Z72xXdNLJ9SErpdSxoroxeyYyJiSo2JdxqG1HAOuJxJ5rjfqD
- mm8w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXinsEatWJsUvmy5vNxC3GDC55yH8vdFMxXib7AjGejpHPvmTn6Dr0EXH2Pr2nA1h4ebITVmbo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyka2FRShQMp+hPVaDXPidIwE3kDZaWMXlJ6JPYh4N1v/6vZFRG
- HqcmSkLqUmx4fgx5ptnoXf6NH0z6bUdKv/wd7tug83wRW6+TEIa2ggF3bzrEfjQ=
-X-Google-Smtp-Source: AGHT+IGQ+M1M2a0KmCzb6DOON5g6vjx8wpzRMYtZm4VYqDb3qTJLtUkCA+9TBCmUU2yvbhl2jMJmfQ==
-X-Received: by 2002:a05:6000:1046:b0:37c:d537:9dc0 with SMTP id
- ffacd0b85a97d-381b70578bemr3502539f8f.12.1730320871046; 
- Wed, 30 Oct 2024 13:41:11 -0700 (PDT)
-Received: from localhost.localdomain (ppp176092143132.access.hol.gr.
- [176.92.143.132]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381c10d49c9sm56346f8f.37.2024.10.30.13.41.09
+ bh=luBjcYhccKa69jDPFIv+blstp2f391ITBeSd0ucRAkA=;
+ b=wrudJpXxEk8XOf+NndkVNHeMXQKFqG9xQJNd4Gk+LR74jBvUwICT40C+13YonwX5xb
+ 8oRheaK+xfmB0HBmazea0Rqz1Ydc5P+rAY+Svk6aCkhJsVjQ9Q0n3vSDFMXL3rNWUhxP
+ u5ApyryC/IJTf4wWs155aIqjcymMbRxYmkBbhM1mtVy/ROsYLrKo9kgCL3x5saTRKaAZ
+ H0jpd3YLwUN5F0lvNbU8yir+RUkMlDt+0JPP97m9j8ZbYHMwNUmkdOisu647arY36MdT
+ sXlMdv/PR20imr7QtEaqKVbMO4MzuldYphlAxGoLOQOlMwPlEta1hwCXa8Af4zuLxNoX
+ 2DOg==
+X-Gm-Message-State: AOJu0YwyheBqe7EqWrQRsFaB6dDHe3/I3STft7AwXEkg0TchuEbO9rhD
+ twQ721wPsxPi3PHpceJcD0AzxR7HlhGoLeLe7NooB+OrB1kWZadCwYtPQexAXhg=
+X-Google-Smtp-Source: AGHT+IGEXDZtnDM9g1IrlMJtt8vEEd3LFsIt8b+qSTVjbeT7w16Jow94/ZsCUYoxskb0/sXjK+1uyQ==
+X-Received: by 2002:a05:6871:791e:b0:277:f713:c101 with SMTP id
+ 586e51a60fabf-294887b8816mr24829fac.15.1730321189274; 
+ Wed, 30 Oct 2024 13:46:29 -0700 (PDT)
+Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-294874c8defsm40062fac.25.2024.10.30.13.46.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Oct 2024 13:41:10 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Raymond Mao <raymond.mao@linaro.org>,
- Tim Harvey <tharvey@gateworks.com>, Eddie James <eajames@linux.ibm.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: Make tcg2_uninit() static
-Date: Wed, 30 Oct 2024 22:40:59 +0200
-Message-ID: <20241030204100.90946-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
+ Wed, 30 Oct 2024 13:46:28 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ Minkyu Kang <promsoft@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] arm: dts: e850-96: Remove TRNG node from appended dts
+Date: Wed, 30 Oct 2024 15:46:27 -0500
+Message-Id: <20241030204627.31757-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,27 +88,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is only used locally, so make it static and quiesce
-the W=1 warning
+Commit 136b7b6d2e98 ("Subtree merge tag 'v6.11-dts' of dts repo [1] into
+dts/upstream") updates the upstream dts for E850-96 board, bringing
+upstream TRNG node. There is no need to keep TRNG node in appended dts
+anymore, so remove it.
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Tested on E850-96 board by running 'rng' command in U-Boot shell.
+
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- lib/efi_loader/efi_tcg2.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/dts/exynos850-e850-96-u-boot.dtsi | 11 -----------
+ 1 file changed, 11 deletions(-)
 
-diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index 45f451ef6b6d..866a529857ef 100644
---- a/lib/efi_loader/efi_tcg2.c
-+++ b/lib/efi_loader/efi_tcg2.c
-@@ -789,7 +789,7 @@ static const struct efi_tcg2_protocol efi_tcg2_protocol = {
- /**
-  * tcg2_uninit - remove the final event table and free efi memory on failures
+diff --git a/arch/arm/dts/exynos850-e850-96-u-boot.dtsi b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
+index 3aa5d8bb10d0..6d7148f7264a 100644
+--- a/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
++++ b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
+@@ -3,17 +3,6 @@
+  * Copyright (c) 2023 Linaro Ltd.
   */
--void tcg2_uninit(void)
-+static void tcg2_uninit(void)
- {
- 	efi_status_t ret;
  
+-&soc {
+-	/* TODO: Remove this node once it appears in upstream dts */
+-	trng: rng@12081400 {
+-		compatible = "samsung,exynos850-trng";
+-		reg = <0x12081400 0x100>;
+-		clocks = <&cmu_core CLK_GOUT_SSS_ACLK>,
+-			 <&cmu_core CLK_GOUT_SSS_PCLK>;
+-		clock-names = "secss", "pclk";
+-	};
+-};
+-
+ &pmu_system_controller {
+ 	bootph-all;
+ 	samsung,uart-debug-1;
 -- 
-2.45.2
+2.39.5
 
