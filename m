@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 432D0D6B6B4
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 22:59:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E047AD6B6DD
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 22:59:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A30889228;
-	Wed, 30 Oct 2024 23:59:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D161989277;
+	Wed, 30 Oct 2024 23:59:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SRTuuNd5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DSAryePm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26DC189265; Wed, 30 Oct 2024 23:59:36 +0100 (CET)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id 1F2F689277; Wed, 30 Oct 2024 23:59:38 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E48689212
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 23:59:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B4B938925C
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 23:59:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-46090640f0cso3360461cf.0
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 15:59:33 -0700 (PDT)
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-4609d75e2f8so13119161cf.1
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 15:59:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730329173; x=1730933973; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730329174; x=1730933974; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yAbHWBKKrkACYdlGoK8J067mzQzmC+W/nAlg4At714Q=;
- b=SRTuuNd5g720nQ7BoYr19wg1BLlsrHHSiwKkOdKW0HWeW9heeMJ+wWFRfZnGqdnInw
- tlFUkHigpyRcyJlIjhnBxzMWty5zu9P0c7cBN5WZotIMVqVbRkBUjtAa+rjmIqQdez0v
- nWUkWI4xu8kWmF1lRx9eTrP4/4um7wCS4UM+U=
+ bh=SKm9c9v+lPR7F73CNEfLMDtLOSB6ZtWoSN0NuORLvbU=;
+ b=DSAryePmAowCB/1glRmXPzb8WPqaXapQFlg6hoetjUMEihqyjZUq9ja+WbFPQ3A47a
+ OTs3XxQSqNSKDY+u5HphqmarBtREIRmoeqxik3gEb+V4/S2SOVPrF5ADZIxOmJlaO+Wu
+ Y1sfyIesg8aB6P1CXnoTC+ONwl6hT0GtFxvUM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730329173; x=1730933973;
+ d=1e100.net; s=20230601; t=1730329174; x=1730933974;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yAbHWBKKrkACYdlGoK8J067mzQzmC+W/nAlg4At714Q=;
- b=fmKfsPAtc8UPDp+LdeIJ6bgeWIRuJGP9K/B1svRdEo//ZaWeUWbeecpgwIOEX9q0Wl
- /tp1cJ+Jd53OgRPKLbDeEzQ9OYyzdv2wss//RyhY2A873POEnquaoMUqlufrilN/tOUz
- wJ7UAZmTDUldBpazDIEKzwU5tWEsOPduMyy+EfZ0zW82nTiHqV1oe8r8gq7j9DyMKX+G
- w+iIdQoj+ZmhftSktQTaVHrvJO44QtTcWIJOpEHpDzk5pnpJJVdJ1GsP87UjrEjXrFDL
- Xq8AQNTfg0HvJeJ4zqUrNA7h+ZHwtt/HsrSS2I6WcEhVEXbGZGfqOEHQwzNo+9IjWM2r
- RKcA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX+xN5YczA+5yoYev/Sve7TIR1ubfxoNtYUIMVmVmEQ89qc+8Pn/MoXnJX16LgJu7ITj0PLCAc=@lists.denx.de
-X-Gm-Message-State: AOJu0YylBsvI59uAcNWNJ/8s9/vAZ8o4TXPd8e/UtXeeFPmpz4p8xSZU
- 0Wv4HTeE5N/h63mMVF/4G+Eiu5dr5s5+/yH3uCA8nSMn6cqoXpNlEzt1JCVUpfY=
-X-Google-Smtp-Source: AGHT+IGZCzCvkrrA6KNUqH49HwxoJM9KIjS4qJ5dSh2S/zU2oHOEJkpHpW1LBk0zFWEFNYuLQ5Z7ZQ==
-X-Received: by 2002:a05:622a:106:b0:460:aac2:5c06 with SMTP id
- d75a77b69052e-4613c181a0cmr248210541cf.57.1730329172974; 
- Wed, 30 Oct 2024 15:59:32 -0700 (PDT)
+ bh=SKm9c9v+lPR7F73CNEfLMDtLOSB6ZtWoSN0NuORLvbU=;
+ b=kKYkgegdvLkwH0wkmmAu3ORMdk770lPOg6XMb/QJ7dxbOHWSccYfZ7mp6uT7fbDejI
+ sBRYZqN7eU8LzyUwuIAjzl2o0A8Zl3E4AkewYTAD3QUIpctZKOPAfnaEEV5IKMnzbXDy
+ ywcKw9ytCAOTUhx/oVclZdYJRrFi8h8secFRO0gs+Kvy0p3H0fMkQ0gOKeWS5esj6qRT
+ GqKJ8NLdkdZicFLa3ozGK58/GYF/ro4WmQKPOA5zcUpCbnVjHRKi5XJR1XeYBvD1oOtv
+ ZiTbJHvPJhkWveQVNPJuJxtXLENtAlW9ePuvS5NBtmHFjArsi4GgdP/+QqWu6VEfYYgN
+ q6TQ==
+X-Gm-Message-State: AOJu0Yw58QM48MTX3EvtbAF3jo1hQtYmgITa16WbAErYRzxnbwB60mJ0
+ zLb11jhHK2V8DOiNXpJ18gL9WFQzK8gbV+HNLPsSJow1gUumCdEfjnn03ck/Ecs=
+X-Google-Smtp-Source: AGHT+IHzMaUPQkwNv/lwLR4ZlN75K7TT0tv8pCVzBNhNb6QoKkhwyda+61T1aS97KIWg4cxb328CYg==
+X-Received: by 2002:ac8:7f16:0:b0:461:22fc:73da with SMTP id
+ d75a77b69052e-462ad2c765emr7092741cf.16.1730329174617; 
+ Wed, 30 Oct 2024 15:59:34 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-462ad0896e9sm1257861cf.11.2024.10.30.15.59.31
+ d75a77b69052e-462ad0896e9sm1257861cf.11.2024.10.30.15.59.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Oct 2024 15:59:32 -0700 (PDT)
+ Wed, 30 Oct 2024 15:59:33 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: jagan@amarulasolutions.com, vigneshr@ti.com, 
- Tudor Ambarus <tudor.ambarus@linaro.org>
-Cc: marex@denx.de, u-boot@lists.denx.de
-In-Reply-To: <20241030110221.3321315-1-tudor.ambarus@linaro.org>
-References: <20241030110221.3321315-1-tudor.ambarus@linaro.org>
-Subject: Re: [PATCH] MAINTAINERS: add tambarus as reviewer for SPI NOR
-Message-Id: <173032917120.2233801.16288081359679513685.b4-ty@konsulko.com>
-Date: Wed, 30 Oct 2024 16:59:31 -0600
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+Cc: u-boot@lists.denx.de, Beleswar Padhi <b-padhi@ti.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>
+In-Reply-To: <20241024-b4-upstream-j784s4-split-v1-1-f1376eed37c5@ti.com>
+References: <20241024-b4-upstream-j784s4-split-v1-1-f1376eed37c5@ti.com>
+Subject: Re: [PATCH] arch: arm: dts: k3-j784s4-r5: Introduce k3-j784s4-r5.dtsi
+Message-Id: <173032917313.2233801.10409943925291389469.b4-ty@konsulko.com>
+Date: Wed, 30 Oct 2024 16:59:33 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -91,10 +89,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 30 Oct 2024 11:02:21 +0000, Tudor Ambarus wrote:
+On Thu, 24 Oct 2024 15:30:04 +0530, Manorit Chawdhry wrote:
 
-> I'd like to get Cc'ed to u-boot's SPI NOR patches to help review them.
-> The ultimate goal is to have an aligned approach in u-boot and linux.
+> Create an SoC R5 dtsi file that could be used at board level R5 files. This
+> would help in keeping the SoC level changes in sync across board files.
 > 
 > 
 
