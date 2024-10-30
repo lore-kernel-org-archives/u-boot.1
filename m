@@ -4,79 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D569D7497E
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 07:58:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CD76D7497D
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 08:01:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17077891D2;
-	Wed, 30 Oct 2024 08:58:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
+	by phobos.denx.de (Postfix) with ESMTP id B67B4891D2;
+	Wed, 30 Oct 2024 09:01:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="ci3L7Lhe";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Z7m/wIyV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48ABB890AE; Wed, 30 Oct 2024 08:58:45 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 76970891F5; Wed, 30 Oct 2024 09:01:09 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0379C891F4
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 08:58:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43932890AE
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 09:01:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sifive.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=nick.hu@sifive.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2e2bb1efe78so477348a91.1
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 00:58:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1730275121; x=1730879921; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1bQgcq6fWj37HuJvQsuLzuAjt+KxlQFbQT8AC/9CdXw=;
- b=ci3L7Lhefu/2YwtTH0ssqzgd8pBLUaa6sf7ZCdaCIyzHykQ7md6io3w60CITX8ovEf
- q4Af+QMLR+fPHkuk43N+r1cbnK9YtUuPhH5iS/qXMPgQGk59fAzbs+J3FuKJNRVW0Qfv
- sFGWHMfCnXzfcBPS3vyWQ8RNJ9RGwvQzLUQvYeudZKSbYzihZIwyavbmoo9osIRITw1P
- tkDY1ASFcB1N4Gb/WSLvlayMC+J0+Mt/+oSMAGTiL0lbz+tJa1WeCfZWoQDwGpuSuFeA
- ZndoHOG8OE+6a5qw2X1SW7KDdFNiDW66Nod8BhbHik8arkeCqj0FlOz3PlLXU/Xw/OiF
- s/bQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730275121; x=1730879921;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1bQgcq6fWj37HuJvQsuLzuAjt+KxlQFbQT8AC/9CdXw=;
- b=oP1dEi5r/SvAx3w8CPwR9x24paSR+DIqOYgzNGqmUpwiDYakSHO/PRiGZtB/89T1xN
- XAL8etQmecZWcnmlXtbCTNaoGhSYK+kKouEsiE9lHiWtOGiALZUyVHfiXbLNkFZhWfkm
- RBuKNGOwr5dTgsp82eh4/7jqYv/wgd0xRXdg1nX/6ck7j6+pP8cmyDUd2rGQ4duBay5j
- 1bIQNmiHA2Tu8MnR3Ft4pxCZdm1QcQ8jGE94ocOP3zDpGPrHvJRN99SJZYh+uPcdaOBr
- js9l4OOhvBKPG/ALJzMn6q03je/rnX1Hufk2iBQex0AUoMFIuzFzIeOmCjSm02xrx4Zd
- f4mw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUs2s5aeAhniAI+jFZUHwmSGXysrTw3FekawLGD6Q38AzMd/8FZMKE+61HTGTeVkn19axRGF0A=@lists.denx.de
-X-Gm-Message-State: AOJu0YyuvOF9h3bmntz8hYSSX1Xn9/partJzxWguGfXNJLXp3WTnCRBI
- dorClrp7MxNao6ulPlxpm0UjlnxFjBqqXz8sIN/W2eS0ShoOIVORFFUTaMtY5to=
-X-Google-Smtp-Source: AGHT+IHEj3zDVTGPwoC+z/H24qD4b0vW00OFgtqvTsoUjuceKsIIrsNBu/RcZxKNAiiZW3KsnZVhmA==
-X-Received: by 2002:a17:90a:780c:b0:2d8:3f7a:edf2 with SMTP id
- 98e67ed59e1d1-2e92f9742demr2256435a91.12.1730275121345; 
- Wed, 30 Oct 2024 00:58:41 -0700 (PDT)
-Received: from hsinchu35-syssw01.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e92fa25742sm1011948a91.19.2024.10.30.00.58.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Oct 2024 00:58:41 -0700 (PDT)
-From: Nick Hu <nick.hu@sifive.com>
-To: trini@konsulko.com, u-boot@lists.denx.de, greentime.hu@sifive.com,
- zong.li@sifive.com
-Cc: Nick Hu <nick.hu@sifive.com>
-Subject: [PATCH] driver: sifive ccache: enable TRUNKCLOCKGATE and
- REGIONCLOCKGATE
-Date: Wed, 30 Oct 2024 15:58:36 +0800
-Message-Id: <20241030075836.3292824-1-nick.hu@sifive.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49U812EG074609;
+ Wed, 30 Oct 2024 03:01:02 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1730275262;
+ bh=4vnz/NR38Ah8fWXR9Ja45+1HsCPF06eLd/potclw5XM=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=Z7m/wIyVRphmQuoM2yCIv4zcvMhqsoLlJeXnITpc4nntiAj5QeCDtTkvft+NAUilD
+ G9UaJDJUCYI6w2huUx+SL1CVfXrYODSsxTKETaW8vlP3yCiSJAhjYaobmHMY06gGU3
+ moE+JHY+JdsmVdSCupPGeKndVgSLXJlcxtUXwHdA=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49U812oW016234
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 30 Oct 2024 03:01:02 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 30
+ Oct 2024 03:01:02 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 30 Oct 2024 03:01:01 -0500
+Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49U811tt122870;
+ Wed, 30 Oct 2024 03:01:01 -0500
+Date: Wed, 30 Oct 2024 13:31:00 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Aniket Limaye <a-limaye@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <u-kumar1@ti.com>,
+ <reidt@ti.com>, <nm@ti.com>
+Subject: Re: [PATCH v2 4/5] arm: mach-k3: j721e-init.c: J7200: Add support
+ for CONFIG_K3_OPP_LOW
+Message-ID: <20241030080100.em6zd5xfhu64xsdp@uda0497581>
+References: <20241023130033.1826413-1-a-limaye@ti.com>
+ <20241023130033.1826413-5-a-limaye@ti.com>
+ <20241029101025.n6xioxbqqwhpbbmz@uda0497581>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20241029101025.n6xioxbqqwhpbbmz@uda0497581>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,82 +82,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the clock gating bit of ccache when the platform has the ccache0.
+Hi Aniket,
 
-Signed-off-by: Nick Hu <nick.hu@sifive.com>
----
- drivers/cache/cache-sifive-ccache.c | 33 ++++++++++++++++++++++++++---
- 1 file changed, 30 insertions(+), 3 deletions(-)
+On 15:40-20241029, Manorit Chawdhry wrote:
+> Hi Aniket,
+> 
+> On 18:27-20241023, Aniket Limaye wrote:
+> > From: Reid Tonking <reidt@ti.com>
+> > 
+> > The default j7200 devicetree and k3_avs driver set 2GHz/1GHz frequency
+> > for A72/MSMC clks and the OPP_NOM voltage.
+> > 
+> > J7200 SOCs may support OPP_LOW Operating Performance Point:
+> > 1GHz/500MHz clks for A72/MSMC and OPP_LOW AVS voltage read from efuse.
+> > 
+> > Hence, add a config check to select OPP_LOW specs:
+> > - Check if OPP_LOW AVS voltage read from efuse is valid.
+> > - Update the clock frequencies in devicetree.
+> > - Program the OPP_LOW AVS voltage for VDD_CPU.
+> > 
+> > Signed-off-by: Reid Tonking <reidt@ti.com>
+> > Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+> > 
+> > ---
+> > v2:
+> > - Fix indentation in fix_freq()
+> > - Remove the efuse data check addition from this commit, as it's not
+> >   related to adding support for CONFIG_K3_OPP_LOW. The same addition
+> >   was moved to the previous patch in this series.
+> > - Link to v1: https://lore.kernel.org/u-boot/20241017062911.2241167-5-a-limaye@ti.com/
+> > ---
+> >  arch/arm/mach-k3/j721e/j721e_init.c | 45 ++++++++++++++++++++++++++++-
+> >  1 file changed, 44 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
+> > index e9ed8cb267c..de10517bb27 100644
+> > --- a/arch/arm/mach-k3/j721e/j721e_init.c
+> > +++ b/arch/arm/mach-k3/j721e/j721e_init.c
+> > @@ -19,6 +19,7 @@
+> >  #include <fdtdec.h>
+> >  #include <mmc.h>
+> >  #include <remoteproc.h>
+> > +#include <k3-avs.h>
+> >  
+> >  #include "../sysfw-loader.h"
+> >  #include "../common.h"
+> > @@ -147,6 +148,32 @@ static void setup_navss_nb(void)
+> >  	writel(NB_THREADMAP_BIT1, (uintptr_t)NAVSS0_NBSS_NB1_CFG_NB_THREADMAP);
+> >  }
+> >  
+> > +int fix_freq(const void *fdt)
 
-diff --git a/drivers/cache/cache-sifive-ccache.c b/drivers/cache/cache-sifive-ccache.c
-index cc00b80f60b..2ff5ca701d6 100644
---- a/drivers/cache/cache-sifive-ccache.c
-+++ b/drivers/cache/cache-sifive-ccache.c
-@@ -14,8 +14,17 @@
- 
- #define SIFIVE_CCACHE_WAY_ENABLE	0x008
- 
-+#define SIFIVE_CCACHE_TRUNKCLOCKGATE	0x1000
-+#define SIFIVE_CCACHE_TRUNKCLOCKGATE_DISABLE	BIT(0)
-+#define SIFIVE_CCACHE_REGIONCLOCKGATE_DISABLE	BIT(1)
-+
- struct sifive_ccache {
- 	void __iomem *base;
-+	bool has_cg;
-+};
-+
-+struct sifive_ccache_quirks {
-+	bool has_cg;
- };
- 
- static int sifive_ccache_enable(struct udevice *dev)
-@@ -30,6 +39,14 @@ static int sifive_ccache_enable(struct udevice *dev)
- 
- 	writel(ways - 1, priv->base + SIFIVE_CCACHE_WAY_ENABLE);
- 
-+	if (priv->has_cg) {
-+		/* enable clock gating bits */
-+		config = readl(priv->base + SIFIVE_CCACHE_TRUNKCLOCKGATE);
-+		config &= ~(SIFIVE_CCACHE_TRUNKCLOCKGATE_DISABLE |
-+				SIFIVE_CCACHE_REGIONCLOCKGATE_DISABLE);
-+		writel(config, priv->base + SIFIVE_CCACHE_TRUNKCLOCKGATE);
-+	}
-+
- 	return 0;
- }
- 
-@@ -50,7 +67,9 @@ static const struct cache_ops sifive_ccache_ops = {
- static int sifive_ccache_probe(struct udevice *dev)
- {
- 	struct sifive_ccache *priv = dev_get_priv(dev);
-+	const struct sifive_ccache_quirks *quirk = (void *)dev_get_driver_data(dev);
- 
-+	priv->has_cg = quirk->has_cg;
- 	priv->base = dev_read_addr_ptr(dev);
- 	if (!priv->base)
- 		return -EINVAL;
-@@ -58,10 +77,18 @@ static int sifive_ccache_probe(struct udevice *dev)
- 	return 0;
- }
- 
-+static const struct sifive_ccache_quirks fu540_ccache = {
-+	.has_cg = false,
-+};
-+
-+static const struct sifive_ccache_quirks ccache0 = {
-+	.has_cg = true,
-+};
-+
- static const struct udevice_id sifive_ccache_ids[] = {
--	{ .compatible = "sifive,fu540-c000-ccache" },
--	{ .compatible = "sifive,fu740-c000-ccache" },
--	{ .compatible = "sifive,ccache0" },
-+	{ .compatible = "sifive,fu540-c000-ccache", .data = (ulong)&fu540_ccache },
-+	{ .compatible = "sifive,fu740-c000-ccache", .data = (ulong)&fu540_ccache },
-+	{ .compatible = "sifive,ccache0", .data = (ulong)&ccache0 },
- 	{}
- };
- 
--- 
-2.34.1
+I think this can be static as well btw, maybe rename it to something
+more descriptive as well. fdt_fixup_a72_clock_frequency?
 
+> > +{
+> > +	int node, ret;
+> > +	u32 opp_low_freq[3];
+> > +
+> > +	node = fdt_node_offset_by_compatible(fdt, -1, "ti,am654-rproc");
+> > +	if (node < 0) {
+> > +		printf("%s: A72 not found\n", __func__);
+> > +		return node;
+> > +	}
+> > +
+> > +	/* j7200 opp low values according to data sheet */
+> > +	opp_low_freq[0] = cpu_to_fdt32(1000000000); /* 202-2 -> A72SS0_CORE0_0_ARM_CLK */
+> > +	opp_low_freq[1] = cpu_to_fdt32(200000000); /* 61-1 -> GTC0_GTC_CLK */
+> > +	opp_low_freq[2] = cpu_to_fdt32(500000000); /* 4-1 -> A72SS0_CORE0_MSMC_CLK */
+> > +
+> > +	ret = fdt_setprop((void *)fdt, node, "assigned-clock-rates",
+> > +			  opp_low_freq, sizeof(opp_low_freq));
+> > +	if (ret) {
+> > +		printf("%s: Can not set value\n", __func__);
+> > +		return ret;
+> > +	}
+> > +
+> > +	return 0;
+> > +}
+> > +
+> >  /*
+> >   * This uninitialized global variable would normal end up in the .bss section,
+> >   * but the .bss is cleared between writing and reading this variable, so move
+> > @@ -301,8 +328,24 @@ void board_init_f(ulong dummy)
+> >  #if defined(CONFIG_CPU_V7R) && defined(CONFIG_K3_AVS0)
+> >  	ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
+> >  					  &dev);
+> > -	if (ret)
+> > +	if (!ret) {
+> > +		if (IS_ENABLED(CONFIG_K3_OPP_LOW)) {
+> 
+> These ifs can be combined into one ig. 
+> 
+> > +			ret = k3_check_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
+> > +			if (!ret) {
+> > +				ret = fix_freq(gd->fdt_blob);
+> > +				if (ret)
+> > +					printf("Failed to set OPP_LOW frequency\n");
+> > +
+> > +				ret = k3_avs_set_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
+> 
+> Even if fix_freq fails, do we want to cascade and still run
+> k3_avs_set_opp? Not sure what the best way to handle this is but seeing
+> a lot of nesting so wondering if there is any better way to handle this
+> control flow..
+
+For this I think it might be a good idea to take this chunk out into
+another function like setup_opp_low as well and keep it there, might be
+more readable that way IMHO.
+
+Regards,
+Manorit
+
+> 
+> Also, better to print ret as well in these cases btw.
+> 
+> Regards,
+> Manorit
+> 
+> > +				if (ret)
+> > +					printf("Failed to set OPP_LOW voltage\n");
+> > +			} else {
+> > +				printf("Failed to enable K3_OPP_LOW\n");
+> > +			}
+> > +		}
+> > +	} else {
+> >  		printf("AVS init failed: %d\n", ret);
+> > +	}
+> >  #endif
+> >  
+> >  #if defined(CONFIG_K3_J721E_DDRSS)
+> > -- 
+> > 2.34.1
+> > 
