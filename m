@@ -4,72 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD2ED5CC9F
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 12:15:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65FDED5CCA5
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 12:24:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F055688DFE;
-	Wed, 30 Oct 2024 13:15:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E49D088F83;
+	Wed, 30 Oct 2024 13:24:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MYenxnLr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WrKoKU5X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 658DF88DFE; Wed, 30 Oct 2024 13:15:53 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D2EBD891AC; Wed, 30 Oct 2024 13:24:01 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E63F788B9F
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 13:15:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8787088F1E
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 13:23:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49UCFmmR046577;
- Wed, 30 Oct 2024 07:15:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1730290548;
- bh=kE41iflDlcNyyGqqtEXYmRWRqCCLCBpqh+yn5Q2Wk4A=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=MYenxnLr+KR4TJ+HPAnGf3JZVYNZnjKgj1P6mTn9r3fP3CSidVlZVlzEvzzA55UER
- o1kxvMBsSeXRH+LdDSqpiA8FXBNJteKQ1M30Wk6iLU9K1QARHsPHl97E44M5Ug/mrr
- GKLAB00LnXGnVaCDHRON3wj/8+AkAiv2kFq27L4U=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49UCFm2i105998
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 30 Oct 2024 07:15:48 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 30
- Oct 2024 07:15:48 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 30 Oct 2024 07:15:47 -0500
-Received: from [172.24.227.91] (psdkl-workstation0.dhcp.ti.com [172.24.227.91])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49UCFjWM025858;
- Wed, 30 Oct 2024 07:15:46 -0500
-Message-ID: <cc186025-c70b-428e-a19f-0581d6a88fa8@ti.com>
-Date: Wed, 30 Oct 2024 17:45:45 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-53a0c160b94so7376013e87.2
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 05:23:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1730291039; x=1730895839; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lpvV7CmcHSvif0p6VecRjryHKypdibhq7xvXyxvFkQk=;
+ b=WrKoKU5XvLtQWNrTReinC8QEQp4QCshRvJFOV0UUl9rpzYk0oInE/fN5MCYagaVaUE
+ /JXnawtgy0OEIhAVGNyvxTtHGExrdvZBRL6UrMb4XtlrkRMV5uBuxUJk/Pz9Hb2VTAZj
+ LWzOF3LfjCo0A6VjIOfHMP8LUNc4ylv/t5F8zJ0haZ7ft1YzQE2dO9aHUyOBu2xfY2X5
+ alP8RG24agi/Mi1mzovtVI60Rl7q01BQCZ4xSIRXx9bmckNQN9KRIQOenzIpqsl+Gegk
+ fVjCYt0Ra4I7w5h9GQAdGbakNYDw0z2jFn7pW4E0O8cdcSfs93NVaD/ByAYL2lgA3vdH
+ +kGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730291039; x=1730895839;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lpvV7CmcHSvif0p6VecRjryHKypdibhq7xvXyxvFkQk=;
+ b=P74fmpuWcYOuw7f83oaNQ6M0ZrRGG0ZwccqBXh7B7l5X9ss+/kYahKCx/fr617Q4T2
+ IBr6C/in/2jZ5wV+IQeand5sp2oLXfMNho3wtVrDytOZ5YYYgpkX6JK23Onp9r6i6wYA
+ ATZCld84eeQWHP7un2WlkdXTUo87nT0M1AGDyeWGUxji/Eu2BOWc55QAvhnJoEM6NvTV
+ ul0An0gcp/5Wru2Agf/zEGWo9sznrAxy742kPsoT2S4m2iHS7HxzbTXiRRG+iO7yOlA2
+ 457GRKhw4rOnf+hPQ1lIs0WQ0xSVS2iNc6EYpISQKK4W55EntgX3q8PPDgRtbA6I71hR
+ Q6kA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWq2MAg5Xpvq+fTzwjcDOxHKOXRqXRuq/pTP5V3TEymIlYt0wQcCrrGYLGmi+xZpJdN9MduSsk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxWB3VMq6j95SH/1hIXKnZguiRgMMF6aquZ60SRL6TH8AsUP/Jb
+ l8J1cK2dTL/8rYIc8GLiUzAyS03XTMBHrhMjwjbX3TqnZiuIR78J5JsBMTRL2K3hhrSoaneuwvj
+ TMUHi5+fwZPxHXiVDevjBaKcwC/I=
+X-Google-Smtp-Source: AGHT+IFuXCfvbBQksamPdJNRm7FGQPMTL6W/c2i8M759pDCMtlyBfYmyRF6qh/vCCOyIxfhEkWZX7xyiwuUrgTGnVUI=
+X-Received: by 2002:a05:6512:31c6:b0:53b:1fe4:3fb9 with SMTP id
+ 2adb3069b0e04-53b34a2d88emr6625145e87.49.1730291038383; Wed, 30 Oct 2024
+ 05:23:58 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/5] arm: mach-k3: j721e-init.c: J7200: Add support for
- CONFIG_K3_OPP_LOW
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <u-kumar1@ti.com>,
- <reidt@ti.com>, <nm@ti.com>
-References: <20241023130033.1826413-1-a-limaye@ti.com>
- <20241023130033.1826413-5-a-limaye@ti.com>
- <20241029101025.n6xioxbqqwhpbbmz@uda0497581>
- <20241030080100.em6zd5xfhu64xsdp@uda0497581>
- <20241030082845.7gmdwicixpjoh7zi@uda0497581>
-Content-Language: en-US
-From: Aniket Limaye <a-limaye@ti.com>
-In-Reply-To: <20241030082845.7gmdwicixpjoh7zi@uda0497581>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241021073749.63-1-brian.ruley@gehealthcare.com>
+ <20241030080753.129-1-brian.ruley@gehealthcare.com>
+ <20241030080753.129-2-brian.ruley@gehealthcare.com>
+In-Reply-To: <20241030080753.129-2-brian.ruley@gehealthcare.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 30 Oct 2024 09:23:46 -0300
+Message-ID: <CAOMZO5CC683+5_xohQw_F0kuiE9mmL2PqjqHk66A1oUXje=oSQ@mail.gmail.com>
+Subject: Re: [PATCH v4 2/2] binman: expand test coverage to nxp_imx8mcst
+To: Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, ian.ray@gehealthcare.com,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,61 +93,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Brian,
+
+On Wed, Oct 30, 2024 at 5:08=E2=80=AFAM Brian Ruley
+<brian.ruley@gehealthcare.com> wrote:
+>
+> Add coverage for IMX8M code siging. Create PKI tree and other assets
+> required by `cst' using `hab4_pki_tree.sh' script and `srktool' in
+> `cst_3.4.1' [1].
+>
+> [1] https://www.nxp.com/webapp/Download?colCode=3DIMX_CST_TOOL_NEW
+>
+> Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+> ---
+> Changes for v4:
+> - Rebased on master:
+>     340_nxp_imx8mcst.dts -> 343_nxp_imx8mcst.dts
+>     341_nxp_imx8mcst_fast_auth.dts -> 344_nxp_imx8mcst_fast_auth.dts
+
+Here is the result when I tried applying and testing this:
+
+$ git am ~/Downloads/v4-1-2-binman-nxp_imx8mcst-read-certificates-from-inpu=
+t-path.patch
+Applying: binman: nxp_imx8mcst: read certificates from input path
+Applying: binman: expand test coverage to nxp_imx8mcst
+.git/rebase-apply/patch:206: trailing whitespace.
+            X509v3 Basic Constraints:
+.git/rebase-apply/patch:208: trailing whitespace.
+            Netscape Comment:
+.git/rebase-apply/patch:210: trailing whitespace.
+            X509v3 Subject Key Identifier:
+.git/rebase-apply/patch:212: trailing whitespace.
+            X509v3 Authority Key Identifier:
+.git/rebase-apply/patch:333: trailing whitespace.
+            X509v3 Basic Constraints:
+warning: squelched 7 whitespace errors
+warning: 12 lines add whitespace errors.
 
 
-On 30/10/24 13:58, Manorit Chawdhry wrote:
-> Hi Neha, Aniket,
-> 
-> On 13:31-20241030, Manorit Chawdhry wrote:
->> Hi Aniket,
->>
->> On 15:40-20241029, Manorit Chawdhry wrote:
->>> Hi Aniket,
->>>
->>> On 18:27-20241023, Aniket Limaye wrote:
->>>> From: Reid Tonking <reidt@ti.com>
->>>>
->>>> The default j7200 devicetree and k3_avs driver set 2GHz/1GHz frequency
->>>> for A72/MSMC clks and the OPP_NOM voltage.
->>>>
->>>> J7200 SOCs may support OPP_LOW Operating Performance Point:
->>>> 1GHz/500MHz clks for A72/MSMC and OPP_LOW AVS voltage read from efuse.
->>>>
->>>> Hence, add a config check to select OPP_LOW specs:
->>>> - Check if OPP_LOW AVS voltage read from efuse is valid.
->>>> - Update the clock frequencies in devicetree.
->>>> - Program the OPP_LOW AVS voltage for VDD_CPU.
->>>>
->>>> Signed-off-by: Reid Tonking <reidt@ti.com>
->>>> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
->>>>
->>>> ---
-> [...]
->>>>   
->>>> +int fix_freq(const void *fdt)
->>
->> I think this can be static as well btw, maybe rename it to something
->> more descriptive as well. fdt_fixup_a72_clock_frequency?
-> 
-> Do you think ft_system_setup is a good place for doing this fixup btw?
-> Was wondering that it would be good to know what all DT fixups are being
-> done at some common place instead of multiple scattered places but not
-> sure when does ft_system_setup kick in, would it be before we startup
-> a72?
+$ ./tools/binman/binman test testNxpImx8mCstFastAuth
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D Ru=
+nning binman tests =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
+E
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+ERROR: testNxpImx8mCstFastAuth (binman.ftest.TestFunctional)
+Test that binman can sign an iMX8M image using fast authentication
+----------------------------------------------------------------------
+ValueError: Error -11 running 'cst -i
+/tmp/binman.tf697xr9/nxp.csf-config-txt.nxp-imx8mcst -o
+/tmp/binman.tf697xr9/nxp.csf-output-blob.nxp-imx8mcst':
 
+----------------------------------------------------------------------
+Ran 1 test in 1.318s
 
-So it looks like ft_system_setup is being called only before booting 
-into linux Kernel.
+FAILED (errors=3D1)
 
-As discussed offline, another place to handle fdt_fixups cleanly could 
-be spl_perform_fixups() in board/ti/j721e/evm.c
-
-I would agree that this dt fixup would be better placed there instead of 
-in board_init_f() directly. Will try doing that.
-
-Thanks,
-Aniket
-
-> 
-> Regards,
-> Manorit
+Any ideas?
