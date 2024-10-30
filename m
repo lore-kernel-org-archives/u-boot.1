@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CFCBD7494E
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 00:08:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CB80D7494F
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 00:11:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01FB8891AC;
-	Wed, 30 Oct 2024 01:08:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 17ADE891B6;
+	Wed, 30 Oct 2024 01:11:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IQAcs9dH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aIf2dLWU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A224891AF; Wed, 30 Oct 2024 01:08:50 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id BCF31891B8; Wed, 30 Oct 2024 01:11:05 +0100 (CET)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB228891A0
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 01:08:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B03FB890AE
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 01:10:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2e2dc61bc41so4382919a91.1
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 17:08:46 -0700 (PDT)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2fb559b0b00so50641731fa.0
+ for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 17:10:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730246925; x=1730851725; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mOnZtDYhLGrL1mrVIY6T//aItRq33UYumLLLv4jpFp0=;
- b=IQAcs9dHyxpGaI4kCHXXtdeTK8weXBGaoO2giH4s6rje+mXJET92F20uZaDIn1R1Z/
- fWvZBc7FMSanTjUuQZt5P9twFwvorh5hjGlhuN2lLQOwY2Ef+73Szi2+P51PdPfvzcBH
- 1R0oYCK/zff9Zv+1zQGG2Jff1ZtZpmMFvirb/AEgod56QICA4GSNergn6r0Fsxw1sFLV
- P+tsh4dVyzHeOKYblgHEvq5DRc6afCA4cDYyiE5i7QcC0IBtyy820ipMqJW9VSlWFyRa
- 2Fh5CuMx+bkS5tIuVGzgRXH//WDac5mRlXPa3oZ7io7QBgsRH7hXHcVIgyob3/xaZli+
- PAzA==
+ d=gmail.com; s=20230601; t=1730247058; x=1730851858; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3y9lOSpeIqvFb7xcrMJWsiK/F7K15/M27YbWeK0Dp1Y=;
+ b=aIf2dLWUCL2r+EyGJrWtoJhuEGo0lCaKV0V36sKxO1gkPY6q6I8wbdQ0f/UPwZLcUA
+ agaCfcNbBT3UhfWMezeaF2XM1EBN4GqgcAA7YpcwspVSx2+5BMDtUT4YCpdVzLnhp3t6
+ +Gmt4UOCY6WWYxiH1NX6NFCrtfu/WB43KsrQmNNdoRDl11DGsQiggF7Sk5YZa0830Kic
+ 1c5bPLPEFP+kbY6qwM9R6x2nwO1Yomo+q1yn/6aZYFujoMcBwAhtoAWWyoB4HEmlpBaD
+ 5/vjEQxIJFeGJ3yfLyFI52Xl034fiU9I6gQepEgK1wb1TKlqYigXerjlAnZYDhAUxUIR
+ YOMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730246925; x=1730851725;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mOnZtDYhLGrL1mrVIY6T//aItRq33UYumLLLv4jpFp0=;
- b=ZlxbE+L/6M3r8uYiX6cUkF1xMJl3173DVWQizX8Xp0VUJOMws2yu13A8TUDVfRZaJB
- gclFL5dZHHV0cyZp1Sg+JUD0+G23XrF1zIUxVUNd7WXV7PCEjmPj7qOLFSFalOreg15K
- b6tKxH6sOhm6bllRQbJ3+8iIJY/1EVav0dBpTL7ma99dVDUClJGGvgHgESTSafN/v9Hr
- JHj209nj1HCXg122vco5oM4yDPbWbZJrY85IXr1/hQR6bfDUVthamo4yzVZevWoEDZ5u
- DT6ECNuVQ6Wegu57Tnsqp/auY6693hfa5KiEbnQsK2a8KE3y/Wz0xExqjXpL9fyVeOks
- W2Pg==
-X-Gm-Message-State: AOJu0Yx1qlmpTqxUX5z9ebBkr8ZiM/mTgquX422L+qaVcpnz+zVqDhkO
- F75gc0/DfSXKY2z5Y/7oPg6p1Nj8VL66X+e3Y04J4R3HvmiQnIhlkm6OLA==
-X-Google-Smtp-Source: AGHT+IHZck7rtFgtgr+FQBlBEA4AhsjJZNGiezPjCD6EGBMb2RYKS1T3EbyV0ruIP6uJtnUwxdfgHA==
-X-Received: by 2002:a17:90b:1c07:b0:2e2:e136:a931 with SMTP id
- 98e67ed59e1d1-2e8f0f5062fmr13764880a91.6.1730246925308; 
- Tue, 29 Oct 2024 17:08:45 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:190a:1425:254d:1e7a])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e92fa89940sm283637a91.40.2024.10.29.17.08.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Oct 2024 17:08:44 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-master-20241029
-Date: Tue, 29 Oct 2024 21:08:41 -0300
-Message-Id: <20241030000841.436660-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1730247058; x=1730851858;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3y9lOSpeIqvFb7xcrMJWsiK/F7K15/M27YbWeK0Dp1Y=;
+ b=bkJpT8zAWdHaAkeXarMV9M41Eui+xF/9+dtHhb/mtMcG/C3IzzmM1E+1jXVLMvqoYS
+ 53vXJsfHIGDZ+YjJ8+Xwfp0X2ilbChByJzoeFDtYKGV6Bk24aeSfGtwMSPlDXRBXaKaM
+ tnqbrGnSe+hKB+7vEFQuhWXqeF3/mTTiggvp4Y1oYJ01xI4hAPv8ShGG5cNFZttOANPM
+ tEEAWF6u4fEihmWrku9nb7vD03YepciFEyIzK+4CTeEQZlVrZu5xKhpWLcl3ExX3TIz6
+ 8XM5HCixfUcHmXyPEi83a+2uaG+/Ic/03hKPkob48hrAa5yDoYlfjO3LtvpEwaaXSOAc
+ XmqA==
+X-Gm-Message-State: AOJu0Ywi2FGKBpsR/7ODIiYY6e2lHJRweN06TVuXD+nux81lSe5WpcFW
+ WUkaeuqPc/wQLMNj/NFHI2QaK1o7/QrKeDT5XDqIa5RBOdAuJ1amQuBZUYGFYTBGN8MUC3C9wtl
+ C5hurmbG7goDFsDVmvI2YWMv3CBg=
+X-Google-Smtp-Source: AGHT+IGhbdVrAW+94IW+8DxF6iM4pD3fjEjgBaZS9cS0bGJsOvQKbe9/sgyz0CKcmOCthnGxDhQA8wQ+BuMvdPXVMME=
+X-Received: by 2002:a05:651c:550:b0:2fa:c913:936 with SMTP id
+ 38308e7fff4ca-2fcbdf61bfcmr65957401fa.1.1730247057733; Tue, 29 Oct 2024
+ 17:10:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241026201455.171001-1-marex@denx.de>
+In-Reply-To: <20241026201455.171001-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 29 Oct 2024 21:10:46 -0300
+Message-ID: <CAOMZO5CUedKJhKSaHina=7b8eqxmtXFr52Q3kLH5nn7VbWGOeQ@mail.gmail.com>
+Subject: Re: [PATCH] arm64: imx: Fix 0Xnn to 0xnn
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,76 +88,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Sat, Oct 26, 2024 at 5:15=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> Use lowercase 0x prefix for hexadecimal number to be consistent
+> No functional change.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-Please pull from u-boot-imx/master, thanks.
-
-The following changes since commit dfe9e29f8381213c377bfa1de4d1ba7587c3b1c3:
-
-  Merge https://source.denx.de/u-boot/custodians/u-boot-sh (2024-10-29 10:05:30 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20241029
-
-for you to fetch changes up to d88bcd6d247a2b5d1683e393d8c9dc0259cd29f0:
-
-  net: dwc_eth_qos: Remove obsolete imx8 includes (2024-10-29 16:25:53 -0300)
-
-u-boot-imx-master-20241029
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/23092
-
-- Implement i.MX93 erratum fix on the dwc_eth_qos driver to fix RMII.
-- Add support for Emcraft Systems NavQ+.
-- Fix the size of IVT + CSF blob tacked on to u-boot.itb.
-----------------------------------------------------------------
-Erik Schumacher (3):
-      net: dwc_eth_qos: Add support for platform specific reset
-      net: dwc_eth_qos_imx: Add platform specific reset for i.MX93
-      net: dwc_eth_qos: Remove obsolete imx8 includes
-
-Gilles Talis (1):
-      board: emcraft: Add support for Emcraft Systems NavQ+
-
-Marek Vasut (1):
-      arm64: imx: Fix 0Xnn to 0xnn
-
-Rasmus Villemoes (1):
-      imx: hab: fix size of IVT+CSF blob tacked on to u-boot.itb
-
- arch/arm/dts/imx8mp-navqp-u-boot.dtsi              |  110 ++
- arch/arm/include/asm/arch-imx8m/imx-regs.h         |    2 +-
- arch/arm/mach-imx/imx8m/Kconfig                    |    8 +
- board/emcraft/imx8mp_navqp/Kconfig                 |   15 +
- board/emcraft/imx8mp_navqp/MAINTAINERS             |    8 +
- board/emcraft/imx8mp_navqp/Makefile                |   13 +
- board/emcraft/imx8mp_navqp/imx8mp_navqp.c          |   10 +
- board/emcraft/imx8mp_navqp/imx8mp_navqp.env        |   18 +
- board/emcraft/imx8mp_navqp/imximage-8mp-lpddr4.cfg |    8 +
- board/emcraft/imx8mp_navqp/lpddr4_timing.c         | 1842 ++++++++++++++++++++
- board/emcraft/imx8mp_navqp/spl.c                   |  132 ++
- configs/imx8mp_navqp_defconfig                     |  104 ++
- doc/board/emcraft/imx8mp-navqp.rst                 |   65 +
- doc/board/emcraft/index.rst                        |    9 +
- doc/board/index.rst                                |    1 +
- drivers/net/dwc_eth_qos.c                          |    7 +-
- drivers/net/dwc_eth_qos.h                          |    1 +
- drivers/net/dwc_eth_qos_imx.c                      |   22 +
- include/configs/imx8mp_navqp.h                     |   37 +
- tools/binman/etype/nxp_imx8mcst.py                 |    2 +
- 20 files changed, 2409 insertions(+), 5 deletions(-)
- create mode 100644 arch/arm/dts/imx8mp-navqp-u-boot.dtsi
- create mode 100644 board/emcraft/imx8mp_navqp/Kconfig
- create mode 100644 board/emcraft/imx8mp_navqp/MAINTAINERS
- create mode 100644 board/emcraft/imx8mp_navqp/Makefile
- create mode 100644 board/emcraft/imx8mp_navqp/imx8mp_navqp.c
- create mode 100644 board/emcraft/imx8mp_navqp/imx8mp_navqp.env
- create mode 100644 board/emcraft/imx8mp_navqp/imximage-8mp-lpddr4.cfg
- create mode 100644 board/emcraft/imx8mp_navqp/lpddr4_timing.c
- create mode 100644 board/emcraft/imx8mp_navqp/spl.c
- create mode 100644 configs/imx8mp_navqp_defconfig
- create mode 100644 doc/board/emcraft/imx8mp-navqp.rst
- create mode 100644 doc/board/emcraft/index.rst
- create mode 100644 include/configs/imx8mp_navqp.h
+Applied, thanks.
