@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FE8BD7497D
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 07:44:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D501D7497D
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 07:44:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C361891D2;
-	Wed, 30 Oct 2024 08:44:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 13C6D8920B;
+	Wed, 30 Oct 2024 08:44:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gEA4cAKR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WSzfKa6/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52BD2891D2; Wed, 30 Oct 2024 08:44:20 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 8C95D89212; Wed, 30 Oct 2024 08:44:27 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CD72891F5
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 08:44:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 71B3A89207
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 08:44:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a99f1fd20c4so899499066b.0
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 00:44:17 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5c903f5bd0eso12379559a12.3
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 00:44:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730274257; x=1730879057; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730274265; x=1730879065; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wtWTxVAsBDAWB86Lz2sPC26mb3hIacVKAhvkp3caemM=;
- b=gEA4cAKRJdXmEyRtIdbL6tNL15HYCgT19tuM+eotRkas9UJCHMXE+hez4ZHH7FdtAQ
- yHYXhERHL5OWoiNe/Ph2ygku9lSXmLxzZ6mBcdbbCDlUupBvs2pIlLWpESZCH9dXO8XY
- fL/QnZf63lmn6//xWks2YwWhhterz+dw9EEZY=
+ bh=edHJVWhnLP5Q9bTiFB7k+KgWeKAnpxFWTQXxl1ICds0=;
+ b=WSzfKa6/IFE2Il3O41VAAgrQ+mFLVOej+RCPq+e+RHBhEuWo9K3muwhJgP91cuZnbS
+ oCnG7TlUUnemXyERJjxcqFf3GAGfwRPL2MNtERycV/11ev5WHfAkPM9lZr4GUUT3IKYL
+ K2aP2h574VT1OXX7lu+fbyuuJY9oNu+wcRW7A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730274257; x=1730879057;
+ d=1e100.net; s=20230601; t=1730274265; x=1730879065;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wtWTxVAsBDAWB86Lz2sPC26mb3hIacVKAhvkp3caemM=;
- b=WmO/UMXYqebC/5YDPmHIORnzbCUv9XBY+oNf4+VPpY0dvykhwbxhyAEIR23hesTGKp
- lWly+CjbxwkZGT00Wlz85nTGdvTwj0R+LN/A+I+tnxX0HcQU76NFlEVuw00tNKrKhb0u
- FViy2Ni0aZDn5QUcRYqOpeBzr2Z6sjDPBcG5PhCK7fTp023WsjSB4VMJxmrhcQtcef6m
- DUezn2hA2h31Mr1rzt5fo7+x00x2yatS9wCYF/ehyVWxxitbpiXjfKmMjcinvEgghQYP
- WRF2BRspC1ZQ3r8sDUKYZUQfqdH+QvoDoWYQvgepIdh8mAEvcern5G4/IxEp8d4eU0zc
- /IFg==
-X-Gm-Message-State: AOJu0YxNfJqcRNjjWRYKqdUAhStCmU+VgHcdp9l4mpgsUzY0FrlM14fS
- lpYhm3z5oqAgTvW1BfoZqhco48RABjj9ZXTDQJwHCiRriCiDEZOrTNLMNCkeJamJOVpftEqIQCa
- O6NoKkxSQYNedo7UJGoxT8i8zQSV+5/V2FEx+
-X-Google-Smtp-Source: AGHT+IFudhSWGAufmU7hVqdG5gcNgb7gwS9iZ4eahwD24X/I6OzlP7NU7FwZIpttNA2cvvR6DBp800rXeSZIdlLWB9Q=
-X-Received: by 2002:a17:907:7f10:b0:a99:f1eb:8deb with SMTP id
- a640c23a62f3a-a9de619b6ecmr1420067766b.62.1730274256759; Wed, 30 Oct 2024
- 00:44:16 -0700 (PDT)
+ bh=edHJVWhnLP5Q9bTiFB7k+KgWeKAnpxFWTQXxl1ICds0=;
+ b=n4pDataxLP4nWNPCSxpdKQnEAK5WWMoxh6fcV7/KBrsUacFAFAVGOCStxJUnFHciRe
+ oT6llKymfyeRymwnq4a+B/pPwf3FYysV2p9XK1AiCRq2jLzdUARBSvxQzIAMjzoGYBCp
+ 1wcz+46Adn47iZ9By4QIjIaPA0d0c/oQO9OGE8M3fNsjowlFdZCviuRV6v61Kowow1jE
+ 7aAbDepzHoAF9mxktM5r9E3yu5Nt7S/CTookw9YgkNOujT2opdwYivjRhkGW29itXaOd
+ 4jnaYEv0Yfx9z8CJeRXoScGlCmMTPuu/Vk5G4nZGCJk8Q7AXFkBwA+dhzEbch/UTHeft
+ FTbQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXxeJd2iwGI24CbOaqovgTTrEpO+qbyoBAKTali9DCbtrWGhkiBqi1r+nVzM5YmWPvnRB25KvE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxnV5OJWwYUrtM0U/HTftL5h9clfiA2i6BAzxUFnQcOikUJZiMd
+ vumZa2SyaB6Me8QQ4LPfmmHXUYyKcVo0J10xVMASoltkg5q+8eU8LMfLoYDc+LFYMlZbWsXPTj6
+ p4k2l+4jQYVxtmZVyQ1yFDFqZE8nrovKya05a
+X-Google-Smtp-Source: AGHT+IHA9LtpcLPLgJARQ6oPmCla6YqS/2zDifeKCsG4iiPKB+4KUi/6ExL6muvW6AtXB2XVpLHeAvbjqh6mkMIPmNM=
+X-Received: by 2002:a17:907:e87:b0:a99:5cd5:5b9c with SMTP id
+ a640c23a62f3a-a9de5ee1155mr1326015566b.36.1730274264937; Wed, 30 Oct 2024
+ 00:44:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241029192222.362445-1-sjg@chromium.org>
- <20241029192222.362445-3-sjg@chromium.org>
- <20241029201259.GI4959@bill-the-cat>
-In-Reply-To: <20241029201259.GI4959@bill-the-cat>
+References: <20241018163423.1562287-1-jonas@kwiboo.se>
+ <20241018163423.1562287-2-jonas@kwiboo.se>
+ <CAFLszTig2pF8pMhUCjjcfcJ6K4KQK2oWahsO7L5Bn9cwq2LEPA@mail.gmail.com>
+ <4484bfde-12f6-4b0d-9e91-d2ba58e551ca@kwiboo.se>
+In-Reply-To: <4484bfde-12f6-4b0d-9e91-d2ba58e551ca@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 30 Oct 2024 08:44:04 +0100
-Message-ID: <CAFLszTiS3stKYmFMQTW5wh4FnV-YD+EucUDk747Uxq-PwUQ0Jg@mail.gmail.com>
-Subject: Re: [PATCH v9 02/11] efi_loader: Add a test app
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Michal Simek <michal.simek@amd.com>
+Date: Wed, 30 Oct 2024 08:44:14 +0100
+Message-ID: <CAFLszTgdvHQHf-KdsudWpGBpb5fEHvqqWNJ07GeVeo0YVzZa_g@mail.gmail.com>
+Subject: Re: [PATCH 1/2] rockchip: rk356x: Implement checkboard() to print SoC
+ variant
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Tom Rini <trini@konsulko.com>, Dragan Simic <dsimic@manjaro.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,41 +90,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Jonas,
 
-On Tue, 29 Oct 2024 at 21:13, Tom Rini <trini@konsulko.com> wrote:
+On Sun, 20 Oct 2024 at 00:24, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
-> On Tue, Oct 29, 2024 at 08:22:10PM +0100, Simon Glass wrote:
+> Hi Simon,
 >
-> > Add a simple app to use for testing. This is intended to do whatever it
-> > needs to for testing purposes. For now it just prints a message and
-> > exits boot services.
+> On 2024-10-19 04:00, Simon Glass wrote:
+> > Hi Jonas,
 > >
-> > There was a considerable amount of discussion about whether it is OK to
-> > call exit-boot-services and then return to U-Boot. This is not normally
-> > done in a real application, since exit-boot-services is used to
-> > completely disconnect from U-Boot. However, since this is a test, we
-> > need to check the results of running the app, so returning is necessary.
-> > It works correctly and it provides a nice model of how to test the EFI
-> > code in a simple way.
+> > On Fri, 18 Oct 2024 at 10:34, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >>
+> >> Implement checkboard() to print current SoC model, e.g. one of:
+> >>
+> >>   SoC:   RK3566 v1
+> >>   SoC:   RK3566 v2
+> >>   SoC:   RK3566T v2
+> >>   SoC:   RK3568 v2
+> >>   SoC:   RK3568B2 v2
+> >>   SoC:   RK3568J v2
+> >>
+> >> when U-Boot proper is started.
+> >>
+> >> Information about what SoC model, variant and version is read from OTP.
+> >>
+> >> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> >> ---
+> >>  arch/arm/dts/rk356x-u-boot.dtsi        |  4 ++
+> >>  arch/arm/mach-rockchip/rk3568/rk3568.c | 65 ++++++++++++++++++++++++++
+> >>  configs/generic-rk3568_defconfig       |  2 +-
+> >>  3 files changed, 70 insertions(+), 1 deletion(-)
+> >>
 > >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Instead of this, can you use add a CPU driver? Then it should happen
+> > automatically - see print_cpuinfo().
 >
-> This approach has been specifically rejected with an explained
-> rationale: It breaks how UEFI applications work and you cannot run
-> further UEFI tests in sandbox without resetting.
+> Unfortunately the CPU driver seem to be more related to the /cpus nodes,
+> e.g. the arm cores included in these SoCs and not really related to the
+> overall SoC used by the board.
 >
-> Since as you note, you can't reset in a C-based test, rework this to be
-> a python test where we can safely reset the system and verify that. I
-> believe Heinrich even noted that a test which checks ExitBootServices()
-> working as expected would be helpful as we only have a watchdog test
-> currently.
+> This instead depend on the DISPLAY_BOARDINFO and its checkboard() as the
+> type of SoC seem more related to the board soc target.
 
-Unfortunately I believe this is the wrong direction, as we are unable
-to check the state of anything once a reset has happened. Thus I
-cannot build on this test, e.g. to see what happened to the devices
-and whether they are still bound. It becomes just a 'black box' test.
-None of the other bootflow tests work this way, BTW.
+OK.
 
-Regards,
-Simon
+Can we get plumb it into try_sysinfo()  somehow? Perhaps add a sysinfo
+driver which returns a new SYSINFO_ID_SOC option?
+
+I'm just trying to handle things using driver model, etc. rather than
+weak functions.
+
+>
+> Regards,
+> Jonas
+>
