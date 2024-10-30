@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A478D6B6B7
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 17:55:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEB8FD6B6C0
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 19:01:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C220189221;
-	Wed, 30 Oct 2024 18:55:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1928F89245;
+	Wed, 30 Oct 2024 20:01:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hm8a/RD6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U+pwB0KK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 033CD89242; Wed, 30 Oct 2024 18:55:07 +0100 (CET)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id 5A8B989241; Wed, 30 Oct 2024 20:01:14 +0100 (CET)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A2FB88F47
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 18:55:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C613D891DD
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 20:01:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-7205b6f51f3so76835b3a.1
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 10:55:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-4611abb6bd5so1530131cf.1
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 12:01:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730310903; x=1730915703; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yLcC2sBUU5z3YanGRDUOV8qP7LxJIDc22NKOL70J2kE=;
- b=hm8a/RD6EhGYJx30UD2ZVhJ10LMDjz1gnyyRad6IfZlDMR787O/2mfFHD5AJN36y/S
- GkKfrsq2itarV7mgHT5NZiI3g5Rm5PF2ckX1/hNhzG7n5kMM7GwJqQguqq2tOQRUb6tn
- 4gx0WC9Ym6f2F1fe6mKoTD7TwSTYAItrovLvf+wqGJ9FXoVsRLIQUdk8wQVbP9WsCg9W
- dDg5DBl2LcBefQ4Fz25S6dUyREoaALx9LAd5xL7+CouxKqdUVb8ACnb4nWo0GdyRck4i
- cYpqS1NnT3hf3jglTrZoGbxFWgxYCq7W0MKaxUCUU9dknxx6wPBCjUATLIBvzB6+xhYd
- xvAw==
+ d=konsulko.com; s=google; t=1730314870; x=1730919670; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8+OsR6lUS2t1JA6zlHrWdb9TAxULqvVMVLNYA+3rHfs=;
+ b=U+pwB0KKjwys5TYstz2hwid76OsdUL2+stYDk8OgGihZ7YxSJjt1NhcdJHrRyA/HkQ
+ AVug3EPOswEVcGcL0CrL6b1bUqbDkEgX76IYzZGFD7Aq2uczZX2pH8hV/FmsLPtv+uky
+ SXz+SOBH+DGH3+RbAG/qbiM2ZsKqqoczr4X/E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730310903; x=1730915703;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yLcC2sBUU5z3YanGRDUOV8qP7LxJIDc22NKOL70J2kE=;
- b=JS4tRg63j2uAQT8MAaxWFoNUHbFmZ0PE5G7++tCSs0DQ5j7gZTYPjeu9TWsHHxWF0O
- cf5hrs72ygl67fhV1OKbct4S/5hJkxTKkyaPg7em9qTPg/kPB73YwlBxxex1YrxdrZs2
- HeZF+EGBkY0y5AqwLKFiu+AmfBiA5Y5rJdiJtkUG912liUOqr+f237fvPRLqfQY4wQ1n
- Ij/F6r5Jp9GJmfygoratDcAKUqolJ8FkRLeaFFYNZPwOLJ10IQ8/7UCX6J2gB06gRpER
- eddIWXeo8aYo0Nk5S1nw/qhi84FB5nRRIfiTjWDZZ5i8BzaOuLlAUkQWRswco8ZZEY5r
- 9vRw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVx3IImmGfChaQFXl7r9Horx/hb3zbrqueBMg/pu/QnVEQsnqLjLpfl+CM4HwcelxIDEIZ2Cs0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzwn2RUqEF5Pq6xzT2wIgy5QGw4wNo+0EPh9EEpja5BGJeG27jK
- vbO6HmqNi2EoOeD37GrjxWhsLBHXsvmuWJp5RDX0ueRuWuL3RdBzmxq2S/vf50N8tWphVhYU1sq
- QXq7x4yLXXJzF6ZPaXdHdzxEgQ+547iz2l/uMEg==
-X-Google-Smtp-Source: AGHT+IH/Qfml4Fmmu7Ct9+A97PrfBZDMSOCrAD+ggbOV0hSkdbHzRBCjWRdQ+5TZPdcK4wtE/ALZBJY1u4dm1jfk03s=
-X-Received: by 2002:a05:6a00:3cc8:b0:71e:e3:608 with SMTP id
- d2e1a72fcca58-7206306ebb4mr21579940b3a.26.1730310902743; Wed, 30 Oct 2024
- 10:55:02 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1730314870; x=1730919670;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8+OsR6lUS2t1JA6zlHrWdb9TAxULqvVMVLNYA+3rHfs=;
+ b=Ws49T6DdCXcJHKniTK/TFSnver1TXcNPY90rcMrafigKqhuSuZeaSD9B3RPc35hwEd
+ aSZu/iCv9eCNzjx1mJucBDt/kDIuzc/rx4gn5MBNC0CcBTlwqRhS7MFjgrvwZ+HJ30/J
+ xDs7dVKoK1V1v2ga187vfSsy+tQ4L8cnkC+9dT/qbpevGe8ovtiZLaZEHoMtSd1gjKJu
+ LvVoymBNV5oCWKbjyEdReWS6zN9fm9c62nbCsxadsl7TbZ1NwoBrSrDmZgLDoiYe+H9i
+ kti9h1G0LxrWms6GgS73IafcZs/DqlamUc4agaLHVtARQ8+vGm8SyMBIYQesMB11jqPK
+ q9Zg==
+X-Gm-Message-State: AOJu0YyKOLRO0r10Z6v2a6aMfbf69Nq0pz39PhyxbkrGiiYnJdixu3qd
+ 5vRb4uq/dB0Z1R8dbV5GgCSYLoFCfKYxZNLm1jEc9LjOWbrnYqKY2QcVlMRefs0=
+X-Google-Smtp-Source: AGHT+IHQ06kbaQVqQhRQ9C4spUSKSxyyuf/kxUtKs26dfS2QEzDszs7Hqcg1GKzeVJjO6ajPldWsPQ==
+X-Received: by 2002:ac8:7e8b:0:b0:461:2b8b:52db with SMTP id
+ d75a77b69052e-4613c19d37amr252893601cf.37.1730314870604; 
+ Wed, 30 Oct 2024 12:01:10 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-461323a1fb3sm57347841cf.85.2024.10.30.12.01.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Oct 2024 12:01:09 -0700 (PDT)
+Date: Wed, 30 Oct 2024 13:01:07 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Markus Volk <f_l_k@t-online.de>, Rudi Heitbaum <rudi@heitbaum.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] scripts/dtc/pylibfdt/libfdt.i_shipped: Use
+ SWIG_AppendOutput
+Message-ID: <20241030190107.GQ2558755@bill-the-cat>
+References: <20241030050716.854676-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-References: <20241029192222.362445-1-sjg@chromium.org>
- <20241029192222.362445-3-sjg@chromium.org>
- <28e1ac54-c813-4b3d-b301-1bd408f29e28@gmx.de>
-In-Reply-To: <28e1ac54-c813-4b3d-b301-1bd408f29e28@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 30 Oct 2024 19:54:25 +0200
-Message-ID: <CAC_iWjL7h0qO3g1hVzqKVmxehR=6zd7jUFV=U5ebN5pOa-di=w@mail.gmail.com>
-Subject: Re: [PATCH v9 02/11] efi_loader: Add a test app
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ia/7xfCv7V/7sKmC"
+Content-Disposition: inline
+In-Reply-To: <20241030050716.854676-1-f_l_k@t-online.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,171 +89,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
 
+--ia/7xfCv7V/7sKmC
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Oct 30, 2024 at 06:07:16AM +0100, Markus Volk wrote:
 
-On Wed, 30 Oct 2024 at 18:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 10/29/24 20:22, Simon Glass wrote:
-> > Add a simple app to use for testing. This is intended to do whatever it
-> > needs to for testing purposes. For now it just prints a message and
-> > exits boot services.
-> >
-> > There was a considerable amount of discussion about whether it is OK to
-> > call exit-boot-services and then return to U-Boot. This is not normally
-> > done in a real application, since exit-boot-services is used to
-> > completely disconnect from U-Boot. However, since this is a test, we
-> > need to check the results of running the app, so returning is necessary.
-> > It works correctly and it provides a nice model of how to test the EFI
-> > code in a simple way.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v9:
-> > - Update license
-> > - Fix 'sevices' typo
-> >
-> > Changes in v7:
-> > - Update commit message
-> >
-> >   lib/efi_loader/Kconfig   | 10 ++++++
-> >   lib/efi_loader/Makefile  |  1 +
-> >   lib/efi_loader/testapp.c | 68 ++++++++++++++++++++++++++++++++++++++++
-> >   3 files changed, 79 insertions(+)
-> >   create mode 100644 lib/efi_loader/testapp.c
-> >
-> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > index 37572c82f54..44319729bda 100644
-> > --- a/lib/efi_loader/Kconfig
-> > +++ b/lib/efi_loader/Kconfig
-> > @@ -584,6 +584,16 @@ config BOOTEFI_HELLO_COMPILE
-> >         No additional space will be required in the resulting U-Boot binary
-> >         when this option is enabled.
-> >
-> > +config BOOTEFI_TESTAPP_COMPILE
-> > +     bool "Compile an EFI test app for testing"
-> > +     default y
-> > +     help
-> > +       This compiles an app designed for testing. It is packed into an image
-> > +       by the test.py testing frame in the setup_efi_image() function.
-> > +
-> > +       No additional space will be required in the resulting U-Boot binary
-> > +       when this option is enabled.
-> > +
-> >   endif
-> >
-> >   source "lib/efi/Kconfig"
-> > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> > index 8ec240cb864..7c8b2dd1ad6 100644
-> > --- a/lib/efi_loader/Makefile
-> > +++ b/lib/efi_loader/Makefile
-> > @@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
-> >   ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
-> >   apps-y += dtbdump
-> >   endif
-> > +apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
-> >
-> >   obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
-> >   obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
-> > diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
-> > new file mode 100644
-> > index 00000000000..a28fc17ce5b
-> > --- /dev/null
-> > +++ b/lib/efi_loader/testapp.c
-> > @@ -0,0 +1,68 @@
-> > +// SPDX-License-Identifier: GPL-2.0-or-later
-> > +/*
-> > + * Hello world EFI application
-> > + *
-> > + * Copyright 2024 Google LLC
-> > + * Written by Simon Glass <sjg@chromium.org>
-> > + *
-> > + * This test program is used to test the invocation of an EFI application.
-> > + * It writes a few messages to the console and then exits boot services
-> > + */
-> > +
-> > +#include <efi_api.h>
-> > +
-> > +static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
-> > +
-> > +static struct efi_system_table *systable;
-> > +static struct efi_boot_services *boottime;
-> > +static struct efi_simple_text_output_protocol *con_out;
-> > +
-> > +/**
-> > + * efi_main() - entry point of the EFI application.
-> > + *
-> > + * @handle:  handle of the loaded image
-> > + * @systab:  system table
-> > + * Return:   status code
-> > + */
-> > +efi_status_t EFIAPI efi_main(efi_handle_t handle,
-> > +                          struct efi_system_table *systab)
-> > +{
-> > +     struct efi_loaded_image *loaded_image;
-> > +     efi_status_t ret;
-> > +     efi_uintn_t map_size;
-> > +     efi_uintn_t map_key;
-> > +     efi_uintn_t desc_size;
-> > +     u32 desc_version;
-> > +
-> > +     systable = systab;
-> > +     boottime = systable->boottime;
-> > +     con_out = systable->con_out;
-> > +
-> > +     /* Get the loaded image protocol */
-> > +     ret = boottime->open_protocol(handle, &loaded_image_guid,
-> > +                                   (void **)&loaded_image, NULL, NULL,
-> > +                                   EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-> > +     if (ret != EFI_SUCCESS) {
-> > +             con_out->output_string
-> > +                     (con_out, u"Cannot open loaded image protocol\r\n");
-> > +             goto out;
-> > +     }
-> > +
-> > +     /* UEFI requires CR LF */
-> > +     con_out->output_string(con_out, u"U-Boot test app for EFI_LOADER\r\n");
-> > +
-> > +out:
-> > +     map_size = 0;
-> > +     ret = boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size,
-> > +                                    &desc_version);
-> > +     con_out->output_string(con_out, u"Exiting boot services\n");
-> > +
-> > +     /* exit boot services so that this part of U-Boot can be tested */
-> > +     boottime->exit_boot_services(handle, map_key);
->
-> Hello Simon,
->
-> I am not NAKing this patch. But maybe you could rethink if this call
-> tells us anything new about the correct function of ExitBootServices().
->
-> We already have a test of ExitBootServices() in lib/efi_selftest/ and
-> maybe we should extend that test to check more.
->
-> By removing ExitBootServices() we could keep U-Boot in a well defined
-> state which will allow us to run any number of bootmeth tests in
-> sequence and keep the EFI sub-system in a consistent state.
+> Swig has changed language specific AppendOutput functions. The helper
+> macro SWIG_AppendOutput remains unchanged. Use that instead
+> of SWIG_Python_AppendOutput, which would require an extra parameter
+> since swig 4.3.0.
+>=20
+> /home/flk/poky/build-test/tmp/work/qemux86_64-poky-linux/u-boot/2024.10/g=
+it/arch/x86/cpu/u-boot-64.lds
+> | scripts/dtc/pylibfdt/libfdt_wrap.c: In function =E2=80=98_wrap_fdt_next=
+_node=E2=80=99:
+> | scripts/dtc/pylibfdt/libfdt_wrap.c:5581:17: error: too few arguments to=
+ function =E2=80=98SWIG_Python_AppendOutput=E2=80=99
+> |  5581 |     resultobj =3D SWIG_Python_AppendOutput(resultobj, val);
+> |       |                 ^~~~~~~~~~~~~~~~~~~~~~~~
+>=20
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
 
-FWIW I proposed exactly the same in [0].
+Ah, I see this has been merged upstream now as well. Rudi posted the
+same patch to U-Boot a bit sooner, but since you have the change merged
+upstream I'll apply yours shortly and give Rudi a Reported-by tag on the
+commit as well, to try and be fair. Thanks!
 
-[0] https://lore.kernel.org/u-boot/CAC_iWjJYqrh6MS50d6MxdStJFGg2pWnf1PHwQ9muYDPmOBP7Lg@mail.gmail.com/
+So that patchwork/b4/etc pick it up:
+Reported-by: Rudi Heitbaum <rudi@heitbaum.com>
+Link: https://github.com/dgibson/dtc/pull/154
 
-Thanks
-/Ilias
->
-> Best regards
->
-> Heinrich
->
->
-> > +
-> > +     /* now exit for real */
-> > +     ret = boottime->exit(handle, ret, 0, NULL);
-> > +
-> > +     /* We should never arrive here */
-> > +     return ret;
-> > +}
->
+--=20
+Tom
+
+--ia/7xfCv7V/7sKmC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcigm8ACgkQFHw5/5Y0
+tyxJTAv/QpXP9NShrwN1YWS5988rCbGi2TKJfDtsUZw8x4INIYwEpFBqMz1fixPJ
+R8/W0RIXN4y0XROt8irqjlhpFMoczu4tQFchH+VayMTjpoQWY0GqnVdaq8PiYXdh
+6Wro6G65UBjlofaW/hnDA0wGWHjBIy2CvVxcS5o8GGjIY38zfj0at71UakLX4WpD
+9d9p2AzlkcyTyzYSqm3Sudgi1769KaKsYolTjj/6n9Io5/Ry+F4FnZiArDUyQz3u
+aAQ+YRB4cu6S0Ev/7lSkKwm+Tt3JX4ZE8PJdK16FD5QKDQFkQGmzkEibwZ7usRKP
+uoFAN2AgIiO+GU61uTJqQOYxcx5x5zFf5WcFUsjmVc12Kcf6XI/KGP6HxQiDqWqm
+A8h2h5GCf62SO3S0t3fDX98Vuy6ux3kFIcDOx54azOu124hTklk851wg/QN+XE0P
+Y4E3OmDwk2wsvMpU6dgJKGKPPx4mCi4SgdcmhwtYQnzNlnrO9qSqGdeJUyxRvLqe
+8+Lmm5VT
+=mW34
+-----END PGP SIGNATURE-----
+
+--ia/7xfCv7V/7sKmC--
