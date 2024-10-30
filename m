@@ -4,77 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D9EFD6B6A4
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 16:09:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7BEDD6B6A8
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 16:21:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5D11891AC;
-	Wed, 30 Oct 2024 17:09:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1FF058920C;
+	Wed, 30 Oct 2024 17:21:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cka6aXNn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y48r0LCJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67A63891E2; Wed, 30 Oct 2024 17:09:46 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 9CEAC89211; Wed, 30 Oct 2024 17:21:52 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BB0F88FD2
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 17:09:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89700891F5
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 17:21:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-460b16d4534so267051cf.3
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 09:09:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-37d473c4bb6so38650f8f.3
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 09:21:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730304583; x=1730909383; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=z6axe4ltH+wbfkToRszoNyTyDtqRQ5pNBQP98WXzrgU=;
- b=Cka6aXNnT+OJ4zjxXH5NHRXjwSgZ/ANfD3GFh+dFN+8BEcrEigiGm8KsHq/mLbGStT
- oxAfuUYV+1YvBOqGUysMigmwfJSpnAfDBZDiDZqS+3aJtVqNUstfhPEYIgYFRWcK+M+c
- zx9n/eZJw55NrCEuzO7XEQ8fQOlwVz6MqNIyk=
+ d=linaro.org; s=google; t=1730305310; x=1730910110; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=iDEfYdk7u246tBJDkC+kMgOCFpv2AesgVlMdKN4PJ5g=;
+ b=Y48r0LCJDiaXplp/yZwN0doz7BkXmz/L8LFTzonH1D9J5vN4qlvwWRZ3pubdhqtCyr
+ 7C0X9FPOF5E+alr48z/AZ6wQYPOO8FvfVs/4LUfh9pxOkThkYresr+I6SIBk6WTc4Oi7
+ 0jYiBezmia6jQsjHBlu6e5KQb8KZw8+FLQybhNBCOY/KALwSFPEC2Znsd2m3LfMDnOVL
+ 9+4oZSfQcYiJ8AsSS15IWZoOPLvH0EqeWrNlXlPqZpLyO5hClN9ruHHW5W6FbCH20WDK
+ v701TtcLFqhXlFFQG6vuD5tbGUvkYEyGrCWWb2WEAok7q4gjbUUCsZwBqTplSs2Z2XAc
+ VqHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730304583; x=1730909383;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=z6axe4ltH+wbfkToRszoNyTyDtqRQ5pNBQP98WXzrgU=;
- b=a5QKKQI4SUY7VicbtPgMKVWAgGgFnYZpaCALJRMjB7OgCnLqS8Q5iI/uz3KhQkcgt0
- Idz3CGDnWXpBUfhElsYEoNCWB2QXpeJ+wwkZIOrNz73HM0GN7a24ENC8WiaxRnu+/ell
- HA3teiBUmDmif9ysv/Ij87ZE063j4NcecuCyDAXWWumfxl23fw/OFU+5B0oKQsL4y2ec
- EsGRKLbLleKqPS8whzQZBLEejSEPQW2clQwuPd12GpQxyFSCXWLt0d2BLTGMgjG86ajF
- AIx3pWa8PpGc3husZluop4aigdkfHkYm1ij0eZcgGJsripqohGDrQW6BYe7d35xccIMS
- 9eYQ==
+ d=1e100.net; s=20230601; t=1730305310; x=1730910110;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=iDEfYdk7u246tBJDkC+kMgOCFpv2AesgVlMdKN4PJ5g=;
+ b=QMNUkWJfvrzYj75Uw5vNRnqW5hW/CnHPimZveb5ukL0UiMudqBHwyGPTCBcRq4tu8y
+ h8t5zfypgDIWBVUuE+564B5MofN7nQUjiCEWNF/ZNqz1bHy95y2Yu6/DWgkWjclzAYvW
+ Uca1vGirbZk5+ZI9I3CMdfRhTtHmEJw5F1DoPAuTOKXHTCXwTsyaf3JwGHlPyN6IWNfL
+ T38nFfDBP6VTUntm9oQZHk+SHPtfPK2DVAqBW3iyn4LldrfzWdEnsPOiqr9OJRZDGIQ7
+ 0cuGrqpoGXFPwN0nNqRxKABKOnRf3AmiY6URylVNzRk2vPDHKxpLsfHjDAWyfBzO9b2N
+ 1eBg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXFnKibIwrUg+CAK7JJkeHcSAu//6I0CfELcMFJu7k+RoUKBdmWIzqCsP4viRVsUq/oETAJDHc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzUURXUPWbTdBlZFhv6nPvSMMZxNyRidgoFrNt9PGTYOSoji8QY
- VIAIMD1uNVQNZynNa8CJjrZHXtBfpbUOVYmto+cOGvllMFaYSdxHDX5zETl+jU4=
-X-Google-Smtp-Source: AGHT+IHTQJcKRveLaH5/RMJKgbAbuydhNbaD/owpkYoPA8mNM2aVOIckJ7XpafyUWgciWA+oQtfnqg==
-X-Received: by 2002:ac8:5787:0:b0:460:bb93:4b00 with SMTP id
- d75a77b69052e-4613c19a915mr263793291cf.50.1730304583125; 
- Wed, 30 Oct 2024 09:09:43 -0700 (PDT)
-Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d17972f601sm53173516d6.6.2024.10.30.09.09.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Oct 2024 09:09:42 -0700 (PDT)
-Date: Wed, 30 Oct 2024 10:09:39 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Tudor Ambarus <tudor.ambarus@linaro.org>
-Cc: jagan@amarulasolutions.com, vigneshr@ti.com, marex@denx.de,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] MAINTAINERS: add tambarus as reviewer for SPI NOR
-Message-ID: <20241030160939.GO2558755@bill-the-cat>
-References: <20241030110221.3321315-1-tudor.ambarus@linaro.org>
+ AJvYcCXxG5CVjXyPrAVxyPadSNqxpI7IlfzO2YOBXRiU50lbEI2yyZ1IoOV4G9g3/3EAbYv4e/CdwCA=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywp59gxLT6bUPRaM3Eh1VqznhxgSODdob2Q70+PM2owgtRjd5Uo
+ JJD8C/seVSB1sbe+lp0BZvq7gXAssofD9k18/bYnHOgfZ+fD19064LzJUlKLIkE=
+X-Google-Smtp-Source: AGHT+IGN6qkLc0QY8I8CKrxRpqAl7Rv4BXiWFsvDjD33zPFaNRungbp7FJqI7I4XFtuzQymmw4kabg==
+X-Received: by 2002:adf:8b5c:0:b0:37d:5130:b380 with SMTP id
+ ffacd0b85a97d-380611a1430mr14679218f8f.23.1730305309884; 
+ Wed, 30 Oct 2024 09:21:49 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:201:dd6:9287:c715?
+ ([2a01:e0a:982:cbb0:201:dd6:9287:c715])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38058b6f838sm15750327f8f.83.2024.10.30.09.21.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Oct 2024 09:21:49 -0700 (PDT)
+Message-ID: <22981cb9-dcfd-4501-baac-7e7f1c212c4d@linaro.org>
+Date: Wed, 30 Oct 2024 17:21:48 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="g7njCcTwkL9KL4PF"
-Content-Disposition: inline
-In-Reply-To: <20241030110221.3321315-1-tudor.ambarus@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] gpio: qcom_pmic: add again the quirk to skip GPIO
+ configuration on PM8550
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20241016-topic-sm8x50-qcom-pmic-re-add-quirk-v1-1-6d4917d9063f@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20241016-topic-sm8x50-qcom-pmic-re-add-quirk-v1-1-6d4917d9063f@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,47 +119,97 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Caleb,
 
---g7njCcTwkL9KL4PF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 16/10/2024 11:16, Neil Armstrong wrote:
+> The qcom_pmic code is broken for new PMICs and should be fixed,
+> without the QUIRK the code is broken and the GPIOs don't work
+> anymore on SM8550 and SM8650 platforms.
+> 
+> Partially revert the revert and only add the quirk on the PM8550
+> PMIC, making the buttons and MMC detect gpio work again.
+> 
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>   drivers/gpio/qcom_pmic_gpio.c | 21 +++++++++++++++++++--
+>   1 file changed, 19 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
+> index f2ef4e5ce14..cd9f3926ac4 100644
+> --- a/drivers/gpio/qcom_pmic_gpio.c
+> +++ b/drivers/gpio/qcom_pmic_gpio.c
+> @@ -69,6 +69,17 @@
+>   #define REG_EN_CTL             0x46
+>   #define REG_EN_CTL_ENABLE      (1 << 7)
+>   
+> +/**
+> + * pmic_gpio_match_data - platform specific configuration
+> + *
+> + * @PMIC_MATCH_READONLY: treat all GPIOs as readonly, don't attempt to configure them.
+> + * This is a workaround for an unknown bug on some platforms where trying to write the
+> + * GPIO configuration registers causes the board to hang.
+> + */
+> +enum pmic_gpio_quirks {
+> +	QCOM_PMIC_QUIRK_READONLY = (1 << 0),
+> +};
+> +
+>   struct qcom_pmic_gpio_data {
+>   	uint32_t pid; /* Peripheral ID on SPMI bus */
+>   	bool     lv_mv_type; /* If subtype is GPIO_LV(0x10) or GPIO_MV(0x11) */
+> @@ -117,8 +128,13 @@ static int qcom_gpio_set_direction(struct udevice *dev, unsigned int offset,
+>   {
+>   	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
+>   	uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
+> +	ulong quirks = dev_get_driver_data(dev);
+>   	int ret = 0;
+>   
+> +	/* Some PMICs don't like their GPIOs being configured */
+> +	if (quirks & QCOM_PMIC_QUIRK_READONLY)
+> +		return 0;
+> +
+>   	/* Disable the GPIO */
+>   	ret = pmic_clrsetbits(dev->parent, gpio_base + REG_EN_CTL,
+>   			      REG_EN_CTL_ENABLE, 0);
+> @@ -262,6 +278,7 @@ static int qcom_gpio_bind(struct udevice *dev)
+>   {
 
-On Wed, Oct 30, 2024 at 11:02:21AM +0000, Tudor Ambarus wrote:
+Gentle ping, without this PMICs gpio are unusable...
 
-> I'd like to get Cc'ed to u-boot's SPI NOR patches to help review them.
-> The ultimate goal is to have an aligned approach in u-boot and linux.
->=20
-> Signed-off-by: Tudor Ambarus <tudor.ambarus@linaro.org>
+Neil
+>   
+>   	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
+> +	ulong quirks = dev_get_driver_data(dev);
+>   	struct udevice *child;
+>   	struct driver *drv;
+>   	int ret;
+> @@ -275,7 +292,7 @@ static int qcom_gpio_bind(struct udevice *dev)
+>   	/* Bind the GPIO driver as a child of the PMIC. */
+>   	ret = device_bind_with_driver_data(dev, drv,
+>   					   dev->name,
+> -					   0, dev_ofnode(dev), &child);
+> +					   quirks, dev_ofnode(dev), &child);
+>   	if (ret)
+>   		return log_msg_ret("bind", ret);
+>   
+> @@ -348,7 +365,7 @@ static const struct udevice_id qcom_gpio_ids[] = {
+>   	{ .compatible = "qcom,pms405-gpio" },
+>   	{ .compatible = "qcom,pm6125-gpio" },
+>   	{ .compatible = "qcom,pm8150-gpio" },
+> -	{ .compatible = "qcom,pm8550-gpio" },
+> +	{ .compatible = "qcom,pm8550-gpio", .data = QCOM_PMIC_QUIRK_READONLY },
+>   	{ }
+>   };
+>   
+> 
+> ---
+> base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
+> change-id: 20241016-topic-sm8x50-qcom-pmic-re-add-quirk-75b24dd86849
+> 
+> Best regards,
 
-Many thanks for volunteering here!
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---g7njCcTwkL9KL4PF
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmciWkAACgkQFHw5/5Y0
-tyw+Hgv2Nf9y3zsAvvEzY2LEweW0ov7xsPoJVzXYY/TC0eigFG2R46Cg6eg6asn9
-XSkx6p5TzmOykwyUlp+uQ/U83yultuptPqbgyQXoWBbzCVc0nKhqHE/oiKOXUJJz
-s55t+HbaTIIAtdBs8FS8SSw7lvkWLSeLmzl2BoU8nRr+1Z5KFUDGytIpz3y4KMJT
-C/uwzNK9ynMMPcPK+EIue1wxCkIhy4qy47cLJJ5O+NrG2pbOyGdGcC9N1zjATLwa
-9B3T1K10avPJFP/mWzRawZv+RxfXVIg8jnCnrhNikm44pBewkUHt7MvsRj584qBG
-/vNC2tD3+Tqa8svbwwohACQpCRwYu8PoM+8Ulgfd2qZshu7Eo82OF4E+MKPnkO0T
-yamp2rGDjEOC7X76ygnITD+dpFmWEzGl5sZlyVFp03XGIc+9WOwQ2xeCWZktIVPD
-sn0ZFy/ZmM1DuYomqsMag7veUa4aQGfptU85on7U0AyMrSwJ+P3phvOvnR/c2Mt/
-2nZBhEE=
-=qPs5
------END PGP SIGNATURE-----
-
---g7njCcTwkL9KL4PF--
