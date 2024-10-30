@@ -4,41 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78833D5CCB4
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 14:52:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05764D5CCB8
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 15:02:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9DAF88F47;
-	Wed, 30 Oct 2024 15:52:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 47CEC88FAA;
+	Wed, 30 Oct 2024 16:02:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D1F4689032; Wed, 30 Oct 2024 15:52:05 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id ECBE788F1E
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 15:51:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.11,245,1725289200"; d="scan'208";a="227434370"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 30 Oct 2024 23:51:57 +0900
-Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.45])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 8E2A84209A80;
- Wed, 30 Oct 2024 23:51:54 +0900 (JST)
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH v2 1/2] ARM: dts: Drop unused RZ/G2L devicetrees
-Date: Wed, 30 Oct 2024 14:51:36 +0000
-Message-Id: <20241030145137.737-1-paul.barker.ct@bp.renesas.com>
-X-Mailer: git-send-email 2.39.5
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kPc1cKRc";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id F00EE88FCB; Wed, 30 Oct 2024 16:02:29 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B4EE88F27
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 16:02:27 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7b1511697a5so502507285a.2
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 08:02:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1730300546; x=1730905346; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=c5jO02WTBkZbua+hQQeOHdhINLqdcPrjk2L7IFJ/VTM=;
+ b=kPc1cKRc1EhuYLmyJydcYxf6hv3E2/8rrd7/6E+Uw4xYA1PP+TEeZC6uSRUEMKpmXQ
+ LeQxQ8hy1weaIjLf2tLMZdpvb1g7HCQ6XWDh0rWbrKhZzacWGnWnFtulea3PJHkYczgW
+ eIQ4xGVErroazQjoMh3XACV/X3e07+YTQNbo8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730300546; x=1730905346;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=c5jO02WTBkZbua+hQQeOHdhINLqdcPrjk2L7IFJ/VTM=;
+ b=bonPrlNU3aarV8ERBqiXLLklZyBHJkUrl0YOGIEV5OEC1AAMrFBJam4h8s0pmCQM3n
+ wOYiBruF1XsCmkpFlUpE1x1+xJTbAX/uqnIO2+OwvO0BPlTVlMhofISpTzfUOUF4cvh6
+ rDquyWrl2aRirprHFAYm86HU/fKu/0kvxZVAwvGbAMlUksdHl1FRHFhPnit5PLIeuBkK
+ wU490MNmHq1gJwd6kCAJokWKqcXLYLGtQEKN5cWMQ1lJLdMeWd6O3TCYfiQHuyKdOe9c
+ wfLYVw1bSx3Me9g/jOsKOtVW/QZMzWepMfeN7urg+WNHoMc0/lQck7RqraRNLwH/z2o8
+ sKWw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWiwTS8b2LKwK8DMofRcc/GSOC8kI7nLNBEpJl6hAn1SkMR6yJj71htjZ+L1fSbTw5dkcKt+4U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyfxy+8RvSRPlMHbmGMVplk+POHgIUHblegcDJ3IzeDu4nh9cWf
+ loa6+vfXyzBarsIf+AoJMJZqswemzyRBogrrNbuc1Gr9o2XZemt7eMeo4t3xzjk=
+X-Google-Smtp-Source: AGHT+IGD1dv8yA5bJlvz21w/kPq+7B6M0Pmhb8cBVOCiCP38VFkyvKBw645qwOfVRlcLEM3nag+QAg==
+X-Received: by 2002:a05:620a:1913:b0:7b1:7f5b:72c7 with SMTP id
+ af79cd13be357-7b193ed48abmr2191201185a.1.1730300546027; 
+ Wed, 30 Oct 2024 08:02:26 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b18d343e34sm515650485a.100.2024.10.30.08.02.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Oct 2024 08:02:25 -0700 (PDT)
+Date: Wed, 30 Oct 2024 09:02:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v8 2/8] efi_loader: Add a test app
+Message-ID: <20241030150222.GL2558755@bill-the-cat>
+References: <20241022120032.196311-1-sjg@chromium.org>
+ <20241022120032.196311-3-sjg@chromium.org>
+ <9f322139-ad6d-494d-879b-eab3211b874b@gmx.de>
+ <CAFLszTgHvUo+0g+SBhC=Xbd_aFxdP_DF=wg_G3ZRTRP-k-2qVg@mail.gmail.com>
+ <adacb624-28a8-41a0-a22b-19d2b9d3a5b1@gmx.de>
+ <CAFLszThgu+jsDMDGJdESP+UOTRRGJ0ORN-xeDCkOYY7xPJq7-A@mail.gmail.com>
+ <20241029164645.GF4959@bill-the-cat>
+ <CAFLszThSAcQnnoyhTyd68m4LsO+W+Se0c7DmP9++Nx76zHzijQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="X+TzLU6xNu5xlVPX"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThSAcQnnoyhTyd68m4LsO+W+Se0c7DmP9++Nx76zHzijQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,2304 +102,364 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We are now using the dts/upstream subtree for the RZ/G2L SoC family so
-we can drop unused devicetree files from arch/arm/dts.
 
-Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
----
-Changes v1->v2:
-  - Improve commit message
+--X+TzLU6xNu5xlVPX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- arch/arm/dts/Makefile                     |    3 -
- arch/arm/dts/r9a07g044.dtsi               | 1273 ---------------------
- arch/arm/dts/r9a07g044l2-smarc.dts        |   39 -
- arch/arm/dts/r9a07g044l2.dtsi             |   13 -
- arch/arm/dts/rz-smarc-common.dtsi         |  183 ---
- arch/arm/dts/rzg2l-smarc-pinfunction.dtsi |  157 ---
- arch/arm/dts/rzg2l-smarc-som.dtsi         |  371 ------
- arch/arm/dts/rzg2l-smarc.dtsi             |  181 ---
- 8 files changed, 2220 deletions(-)
- delete mode 100644 arch/arm/dts/r9a07g044.dtsi
- delete mode 100644 arch/arm/dts/r9a07g044l2-smarc.dts
- delete mode 100644 arch/arm/dts/r9a07g044l2.dtsi
- delete mode 100644 arch/arm/dts/rz-smarc-common.dtsi
- delete mode 100644 arch/arm/dts/rzg2l-smarc-pinfunction.dtsi
- delete mode 100644 arch/arm/dts/rzg2l-smarc-som.dtsi
- delete mode 100644 arch/arm/dts/rzg2l-smarc.dtsi
+On Wed, Oct 30, 2024 at 08:41:27AM +0100, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 29 Oct 2024 at 17:46, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Oct 29, 2024 at 04:46:16PM +0100, Simon Glass wrote:
+> > > Hi Heinrich,
+> > >
+> > > On Mon, 28 Oct 2024 at 19:43, Heinrich Schuchardt <xypron.glpk@gmx.de=
+> wrote:
+> > > >
+> > > > On 10/28/24 18:00, Simon Glass wrote:
+> > > > > Hi Heinrich,
+> > > > >
+> > > > > On Mon, 28 Oct 2024 at 07:11, Heinrich Schuchardt <xypron.glpk@gm=
+x.de
+> > > > > <mailto:xypron.glpk@gmx.de>> wrote:
+> > > > >  >
+> > > > >  > On 10/22/24 14:00, Simon Glass wrote:
+> > > > >  > > Add a simple app to use for testing. This is intended to do =
+whatever it
+> > > > >  > > needs to for testing purposes. For now it just prints a mess=
+age and
+> > > > >  > > exits boot services.
+> > > > >  > >
+> > > > >  > > There was a considerable amount of discussion about whether =
+it is OK to
+> > > > >  > > call exit-boot-services and then return to U-Boot. This is n=
+ot normally
+> > > > >  > > done in a real application, since exit-boot-services is used=
+ to
+> > > > >  > > completely disconnect from U-Boot. However, since this is a =
+test, we
+> > > > >  > > need to check the results of running the app, so returning is
+> > > > > necessary.
+> > > > >  > > It works correctly and it provides a nice model of how to te=
+st the EFI
+> > > > >  > > code in a simple way.
+> > > > >  > >
+> > > > >  > > Signed-off-by: Simon Glass <sjg@chromium.org <mailto:sjg@chr=
+omium.org>>
+> > > > >  > > ---
+> > > > >  > >
+> > > > >  > > (no changes since v7)
+> > > > >  > >
+> > > > >  > > Changes in v7:
+> > > > >  > > - Update commit message
+> > > > >  > >
+> > > > >  > >   lib/efi_loader/Kconfig   | 10 ++++++
+> > > > >  > >   lib/efi_loader/Makefile  |  1 +
+> > > > >  > >   lib/efi_loader/testapp.c | 68 ++++++++++++++++++++++++++++=
++++++++
+> > > > > +++++
+> > > > >  > >   3 files changed, 79 insertions(+)
+> > > > >  > >   create mode 100644 lib/efi_loader/testapp.c
+> > > > >  > >
+> > > > >  > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > > > >  > > index 69b2c9360d8..6ced29da719 100644
+> > > > >  > > --- a/lib/efi_loader/Kconfig
+> > > > >  > > +++ b/lib/efi_loader/Kconfig
+> > > > >  > > @@ -565,6 +565,16 @@ config BOOTEFI_HELLO_COMPILE
+> > > > >  > >         No additional space will be required in the resultin=
+g U-
+> > > > > Boot binary
+> > > > >  > >         when this option is enabled.
+> > > > >  > >
+> > > > >  > > +config BOOTEFI_TESTAPP_COMPILE
+> > > > >  > > +     bool "Compile an EFI test app for testing"
+> > > > >  > > +     default y
+> > > > >  > > +     help
+> > > > >  > > +       This compiles an app designed for testing. It is pac=
+ked
+> > > > > into an image
+> > > > >  > > +       by the test.py testing frame in the setup_efi_image(=
+) function.
+> > > > >  > > +
+> > > > >  > > +       No additional space will be required in the resultin=
+g U-
+> > > > > Boot binary
+> > > > >  > > +       when this option is enabled.
+> > > > >  > > +
+> > > > >  > >   endif
+> > > > >  > >
+> > > > >  > >   source "lib/efi/Kconfig"
+> > > > >  > > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefi=
+le
+> > > > >  > > index 00d18966f9e..87131ab911d 100644
+> > > > >  > > --- a/lib/efi_loader/Makefile
+> > > > >  > > +++ b/lib/efi_loader/Makefile
+> > > > >  > > @@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) +=3D =
+initrddump
+> > > > >  > >   ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+> > > > >  > >   apps-y +=3D dtbdump
+> > > > >  > >   endif
+> > > > >  > > +apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) +=3D testapp
+> > > > >  > >
+> > > > >  > >   obj-$(CONFIG_CMD_BOOTEFI_HELLO) +=3D helloworld_efi.o
+> > > > >  > >   obj-$(CONFIG_EFI_BOOTMGR) +=3D efi_bootmgr.o
+> > > > >  > > diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testa=
+pp.c
+> > > > >  > > new file mode 100644
+> > > > >  > > index 00000000000..feb444c92e9
+> > > > >  > > --- /dev/null
+> > > > >  > > +++ b/lib/efi_loader/testapp.c
+> > > > >  > > @@ -0,0 +1,68 @@
+> > > > >  > > +// SPDX-License-Identifier: GPL-2.0+
+> > > > >  >
+> > > > >  > This is not a valid SPDX identifier. Please, use GPL-2.0-or-la=
+ter.
+> > > > >  >
+> > > > >  > > +/*
+> > > > >  > > + * Hello world EFI application
+> > > > >  > > + *
+> > > > >  > > + * Copyright 2024 Google LLC
+> > > > >  > > + * Written by Simon Glass <sjg@chromium.org <mailto:sjg@chr=
+omium.org>>
+> > > > >  > > + *
+> > > > >  > > + * This test program is used to test the invocation of an E=
+FI
+> > > > > application.
+> > > > >  > > + * It writes a few messages to the console and then exits b=
+oot
+> > > > > services
+> > > > >  > > + */
+> > > > >  > > +
+> > > > >  > > +#include <efi_api.h>
+> > > > >  > > +
+> > > > >  > > +static const efi_guid_t loaded_image_guid =3D
+> > > > > EFI_LOADED_IMAGE_PROTOCOL_GUID;
+> > > > >  > > +
+> > > > >  > > +static struct efi_system_table *systable;
+> > > > >  > > +static struct efi_boot_services *boottime;
+> > > > >  > > +static struct efi_simple_text_output_protocol *con_out;
+> > > > >  > > +
+> > > > >  > > +/**
+> > > > >  > > + * efi_main() - entry point of the EFI application.
+> > > > >  > > + *
+> > > > >  > > + * @handle:  handle of the loaded image
+> > > > >  > > + * @systab:  system table
+> > > > >  > > + * Return:   status code
+> > > > >  > > + */
+> > > > >  > > +efi_status_t EFIAPI efi_main(efi_handle_t handle,
+> > > > >  > > +                          struct efi_system_table *systab)
+> > > > >  > > +{
+> > > > >  > > +     struct efi_loaded_image *loaded_image;
+> > > > >  > > +     efi_status_t ret;
+> > > > >  > > +     efi_uintn_t map_size;
+> > > > >  > > +     efi_uintn_t map_key;
+> > > > >  > > +     efi_uintn_t desc_size;
+> > > > >  > > +     u32 desc_version;
+> > > > >  > > +
+> > > > >  > > +     systable =3D systab;
+> > > > >  > > +     boottime =3D systable->boottime;
+> > > > >  > > +     con_out =3D systable->con_out;
+> > > > >  > > +
+> > > > >  > > +     /* Get the loaded image protocol */
+> > > > >  > > +     ret =3D boottime->open_protocol(handle, &loaded_image_=
+guid,
+> > > > >  > > +                                   (void **)&loaded_image, =
+NULL, NULL,
+> > > > >  > > +                                   EFI_OPEN_PROTOCOL_GET_PR=
+OTOCOL);
+> > > > >  > > +     if (ret !=3D EFI_SUCCESS) {
+> > > > >  > > +             con_out->output_string
+> > > > >  > > +                     (con_out, u"Cannot open loaded image
+> > > > > protocol\r\n");
+> > > > >  > > +             goto out;
+> > > > >  > > +     }
+> > > > >  > > +
+> > > > >  > > +     /* UEFI requires CR LF */
+> > > > >  > > +     con_out->output_string(con_out, u"U-Boot test app for
+> > > > > EFI_LOADER\r\n");
+> > > > >  > > +
+> > > > >  > > +out:
+> > > > >  > > +     map_size =3D 0;
+> > > > >  > > +     ret =3D boottime->get_memory_map(&map_size, NULL, &map=
+_key,
+> > > > > &desc_size,
+> > > > >  > > +                                    &desc_version);
+> > > > >  > > +     con_out->output_string(con_out, u"Exiting boot sevices=
+\n");
+> > > > >  >
+> > > > >  > %s/sevices/services/g
+> > > > >  >
+> > > > >  > > +
+> > > > >  > > +     /* exit boot services so that this part of U-Boot can =
+be
+> > > > > tested */
+> > > > >  > > +     boottime->exit_boot_services(handle, map_key);
+> > > > >  > > +
+> > > > >  > > +     /* now exit for real */
+> > > > >  > > +     ret =3D boottime->exit(handle, ret, 0, NULL);
+> > > > >  >
+> > > > >  > As written before boot services are not available after
+> > > > >  > ExitBootServices(). Please, call the ResetSystem() service.
+> > > > >
+> > > > > I already explained this. If I call reset then U-Boot exits and t=
+he
+> > > > > console output cannot be checked by the C test. If I tell sandbox=
+'s
+> > > > > reset-driver to ignore the reset request, then it also doesn't co=
+me back
+> > > > > to the test.
+> > > > >
+> > > > >  >
+> > > > >  >
+> > > > >  > > +
+> > > > >  > > +     /* We should never arrive here */
+> > > > >  > > +     return ret;
+> > > > >  >
+> > > > >  > After ExitBootServices() you must not return.
+> > > > >  >
+> > > > >  > You can just do an endless loop if ResetSystem() fails:
+> > > > >  >
+> > > > >  > for (;;);
+> > > > >
+> > > > > No, because I need to check the output of the app. Please can you=
+ try to
+> > > > > run this test so you can see what it is doing?
+> > > >
+> > > > The Python framework lets you check the output whether you are rebo=
+oting
+> > > > or not.
+> > >
+> > > Yes, I complained about catching reboots at the time, but it was
+> > > submitted against my wishes. It is not a good design to create a
+> > > problem in a test and then work around it later. It is easier to just
+> > > return, rather than try to catch a reset in the Python test. For one
+> > > thing, it makes using gdb much easier to have the test be
+> > > self-contained.
+> >
+> > And sometimes a test needs to restart the actual system for the test.
+> > This sounds like another case of that, and not some arbitrary bad design
+> > restart.
+>=20
+> Sorry, but I cannot tell the difference. We should not have tests
+> which need to restart, except in extreme circumstances.
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index aeccfa93fc53..e0cc9937acb4 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -979,9 +979,6 @@ dtb-$(CONFIG_ARCH_IMXRT) += imxrt1050-evk.dtb \
- 	imxrt1020-evk.dtb \
- 	imxrt1170-evk.dtb \
- 
--dtb-$(CONFIG_TARGET_RZG2L) += \
--	r9a07g044l2-smarc.dts
--
- ifdef CONFIG_RCAR_64
- DTC_FLAGS += -R 4 -p 0x1000
- endif
-diff --git a/arch/arm/dts/r9a07g044.dtsi b/arch/arm/dts/r9a07g044.dtsi
-deleted file mode 100644
-index 66f68fc2b241..000000000000
---- a/arch/arm/dts/r9a07g044.dtsi
-+++ /dev/null
-@@ -1,1273 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
--/*
-- * Device Tree Source for the RZ/G2L and RZ/G2LC common SoC parts
-- *
-- * Copyright (C) 2021 Renesas Electronics Corp.
-- */
--
--#include <dt-bindings/interrupt-controller/arm-gic.h>
--#include <dt-bindings/clock/r9a07g044-cpg.h>
--
--/ {
--	compatible = "renesas,r9a07g044";
--	#address-cells = <2>;
--	#size-cells = <2>;
--
--	audio_clk1: audio1-clk {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		/* This value must be overridden by boards that provide it */
--		clock-frequency = <0>;
--	};
--
--	audio_clk2: audio2-clk {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		/* This value must be overridden by boards that provide it */
--		clock-frequency = <0>;
--	};
--
--	/* External CAN clock - to be overridden by boards that provide it */
--	can_clk: can-clk {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		clock-frequency = <0>;
--	};
--
--	/* clock can be either from exclk or crystal oscillator (XIN/XOUT) */
--	extal_clk: extal-clk {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		/* This value must be overridden by the board */
--		clock-frequency = <0>;
--	};
--
--	cluster0_opp: opp-table-0 {
--		compatible = "operating-points-v2";
--		opp-shared;
--
--		opp-150000000 {
--			opp-hz = /bits/ 64 <150000000>;
--			opp-microvolt = <1100000>;
--			clock-latency-ns = <300000>;
--		};
--		opp-300000000 {
--			opp-hz = /bits/ 64 <300000000>;
--			opp-microvolt = <1100000>;
--			clock-latency-ns = <300000>;
--		};
--		opp-600000000 {
--			opp-hz = /bits/ 64 <600000000>;
--			opp-microvolt = <1100000>;
--			clock-latency-ns = <300000>;
--		};
--		opp-1200000000 {
--			opp-hz = /bits/ 64 <1200000000>;
--			opp-microvolt = <1100000>;
--			clock-latency-ns = <300000>;
--			opp-suspend;
--		};
--	};
--
--	cpus {
--		#address-cells = <1>;
--		#size-cells = <0>;
--
--		cpu-map {
--			cluster0 {
--				core0 {
--					cpu = <&cpu0>;
--				};
--				core1 {
--					cpu = <&cpu1>;
--				};
--			};
--		};
--
--		cpu0: cpu@0 {
--			compatible = "arm,cortex-a55";
--			reg = <0>;
--			device_type = "cpu";
--			#cooling-cells = <2>;
--			next-level-cache = <&L3_CA55>;
--			enable-method = "psci";
--			clocks = <&cpg CPG_CORE R9A07G044_CLK_I>;
--			operating-points-v2 = <&cluster0_opp>;
--		};
--
--		cpu1: cpu@100 {
--			compatible = "arm,cortex-a55";
--			reg = <0x100>;
--			device_type = "cpu";
--			next-level-cache = <&L3_CA55>;
--			enable-method = "psci";
--			clocks = <&cpg CPG_CORE R9A07G044_CLK_I>;
--			operating-points-v2 = <&cluster0_opp>;
--		};
--
--		L3_CA55: cache-controller-0 {
--			compatible = "cache";
--			cache-unified;
--			cache-size = <0x40000>;
--			cache-level = <3>;
--		};
--	};
--
--	gpu_opp_table: opp-table-1 {
--		compatible = "operating-points-v2";
--
--		opp-500000000 {
--			opp-hz = /bits/ 64 <500000000>;
--			opp-microvolt = <1100000>;
--		};
--
--		opp-400000000 {
--			opp-hz = /bits/ 64 <400000000>;
--			opp-microvolt = <1100000>;
--		};
--
--		opp-250000000 {
--			opp-hz = /bits/ 64 <250000000>;
--			opp-microvolt = <1100000>;
--		};
--
--		opp-200000000 {
--			opp-hz = /bits/ 64 <200000000>;
--			opp-microvolt = <1100000>;
--		};
--
--		opp-125000000 {
--			opp-hz = /bits/ 64 <125000000>;
--			opp-microvolt = <1100000>;
--		};
--
--		opp-100000000 {
--			opp-hz = /bits/ 64 <100000000>;
--			opp-microvolt = <1100000>;
--		};
--
--		opp-62500000 {
--			opp-hz = /bits/ 64 <62500000>;
--			opp-microvolt = <1100000>;
--		};
--
--		opp-50000000 {
--			opp-hz = /bits/ 64 <50000000>;
--			opp-microvolt = <1100000>;
--		};
--	};
--
--	pmu {
--		compatible = "arm,cortex-a55-pmu";
--		interrupts-extended = <&gic GIC_PPI 7 IRQ_TYPE_LEVEL_LOW>;
--	};
--
--	psci {
--		compatible = "arm,psci-1.0", "arm,psci-0.2";
--		method = "smc";
--	};
--
--	soc: soc {
--		compatible = "simple-bus";
--		interrupt-parent = <&gic>;
--		#address-cells = <2>;
--		#size-cells = <2>;
--		ranges;
--
--		mtu3: timer@10001200 {
--			compatible = "renesas,r9a07g044-mtu3",
--				     "renesas,rz-mtu3";
--			reg = <0 0x10001200 0 0xb00>;
--			interrupts = <GIC_SPI 170 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 171 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 172 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 173 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 174 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 175 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 176 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 177 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 178 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 179 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 180 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 181 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 182 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 183 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 184 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 185 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 186 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 187 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 188 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 189 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 190 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 191 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 192 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 193 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 194 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 195 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 196 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 197 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 198 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 199 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 200 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 201 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 202 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 203 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 204 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 205 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 206 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 207 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 208 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 209 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 210 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 211 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 212 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 213 IRQ_TYPE_EDGE_RISING>;
--			interrupt-names = "tgia0", "tgib0", "tgic0", "tgid0",
--					  "tciv0", "tgie0", "tgif0",
--					  "tgia1", "tgib1", "tciv1", "tciu1",
--					  "tgia2", "tgib2", "tciv2", "tciu2",
--					  "tgia3", "tgib3", "tgic3", "tgid3",
--					  "tciv3",
--					  "tgia4", "tgib4", "tgic4", "tgid4",
--					  "tciv4",
--					  "tgiu5", "tgiv5", "tgiw5",
--					  "tgia6", "tgib6", "tgic6", "tgid6",
--					  "tciv6",
--					  "tgia7", "tgib7", "tgic7", "tgid7",
--					  "tciv7",
--					  "tgia8", "tgib8", "tgic8", "tgid8",
--					  "tciv8", "tciu8";
--			clocks = <&cpg CPG_MOD R9A07G044_MTU_X_MCK_MTU3>;
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_MTU_X_PRESET_MTU3>;
--			#pwm-cells = <2>;
--			status = "disabled";
--		};
--
--		ssi0: ssi@10049c00 {
--			compatible = "renesas,r9a07g044-ssi",
--				     "renesas,rz-ssi";
--			reg = <0 0x10049c00 0 0x400>;
--			interrupts = <GIC_SPI 326 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 327 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 328 IRQ_TYPE_EDGE_RISING>;
--			interrupt-names = "int_req", "dma_rx", "dma_tx";
--			clocks = <&cpg CPG_MOD R9A07G044_SSI0_PCLK2>,
--				 <&cpg CPG_MOD R9A07G044_SSI0_PCLK_SFR>,
--				 <&audio_clk1>, <&audio_clk2>;
--			clock-names = "ssi", "ssi_sfr", "audio_clk1", "audio_clk2";
--			resets = <&cpg R9A07G044_SSI0_RST_M2_REG>;
--			dmas = <&dmac 0x2655>, <&dmac 0x2656>;
--			dma-names = "tx", "rx";
--			power-domains = <&cpg>;
--			#sound-dai-cells = <0>;
--			status = "disabled";
--		};
--
--		ssi1: ssi@1004a000 {
--			compatible = "renesas,r9a07g044-ssi",
--				     "renesas,rz-ssi";
--			reg = <0 0x1004a000 0 0x400>;
--			interrupts = <GIC_SPI 330 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 331 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 332 IRQ_TYPE_EDGE_RISING>;
--			interrupt-names = "int_req", "dma_rx", "dma_tx";
--			clocks = <&cpg CPG_MOD R9A07G044_SSI1_PCLK2>,
--				 <&cpg CPG_MOD R9A07G044_SSI1_PCLK_SFR>,
--				 <&audio_clk1>, <&audio_clk2>;
--			clock-names = "ssi", "ssi_sfr", "audio_clk1", "audio_clk2";
--			resets = <&cpg R9A07G044_SSI1_RST_M2_REG>;
--			dmas = <&dmac 0x2659>, <&dmac 0x265a>;
--			dma-names = "tx", "rx";
--			power-domains = <&cpg>;
--			#sound-dai-cells = <0>;
--			status = "disabled";
--		};
--
--		ssi2: ssi@1004a400 {
--			compatible = "renesas,r9a07g044-ssi",
--				     "renesas,rz-ssi";
--			reg = <0 0x1004a400 0 0x400>;
--			interrupts = <GIC_SPI 334 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 337 IRQ_TYPE_EDGE_RISING>;
--			interrupt-names = "int_req", "dma_rt";
--			clocks = <&cpg CPG_MOD R9A07G044_SSI2_PCLK2>,
--				 <&cpg CPG_MOD R9A07G044_SSI2_PCLK_SFR>,
--				 <&audio_clk1>, <&audio_clk2>;
--			clock-names = "ssi", "ssi_sfr", "audio_clk1", "audio_clk2";
--			resets = <&cpg R9A07G044_SSI2_RST_M2_REG>;
--			dmas = <&dmac 0x265f>;
--			dma-names = "rt";
--			power-domains = <&cpg>;
--			#sound-dai-cells = <0>;
--			status = "disabled";
--		};
--
--		ssi3: ssi@1004a800 {
--			compatible = "renesas,r9a07g044-ssi",
--				     "renesas,rz-ssi";
--			reg = <0 0x1004a800 0 0x400>;
--			interrupts = <GIC_SPI 338 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 339 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 340 IRQ_TYPE_EDGE_RISING>;
--			interrupt-names = "int_req", "dma_rx", "dma_tx";
--			clocks = <&cpg CPG_MOD R9A07G044_SSI3_PCLK2>,
--				 <&cpg CPG_MOD R9A07G044_SSI3_PCLK_SFR>,
--				 <&audio_clk1>, <&audio_clk2>;
--			clock-names = "ssi", "ssi_sfr", "audio_clk1", "audio_clk2";
--			resets = <&cpg R9A07G044_SSI3_RST_M2_REG>;
--			dmas = <&dmac 0x2661>, <&dmac 0x2662>;
--			dma-names = "tx", "rx";
--			power-domains = <&cpg>;
--			#sound-dai-cells = <0>;
--			status = "disabled";
--		};
--
--		spi0: spi@1004ac00 {
--			compatible = "renesas,r9a07g044-rspi", "renesas,rspi-rz";
--			reg = <0 0x1004ac00 0 0x400>;
--			interrupts = <GIC_SPI 415 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 413 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 414 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "error", "rx", "tx";
--			clocks = <&cpg CPG_MOD R9A07G044_RSPI0_CLKB>;
--			resets = <&cpg R9A07G044_RSPI0_RST>;
--			dmas = <&dmac 0x2e95>, <&dmac 0x2e96>;
--			dma-names = "tx", "rx";
--			power-domains = <&cpg>;
--			num-cs = <1>;
--			#address-cells = <1>;
--			#size-cells = <0>;
--			status = "disabled";
--		};
--
--		spi1: spi@1004b000 {
--			compatible = "renesas,r9a07g044-rspi", "renesas,rspi-rz";
--			reg = <0 0x1004b000 0 0x400>;
--			interrupts = <GIC_SPI 418 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 416 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 417 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "error", "rx", "tx";
--			clocks = <&cpg CPG_MOD R9A07G044_RSPI1_CLKB>;
--			resets = <&cpg R9A07G044_RSPI1_RST>;
--			dmas = <&dmac 0x2e99>, <&dmac 0x2e9a>;
--			dma-names = "tx", "rx";
--			power-domains = <&cpg>;
--			num-cs = <1>;
--			#address-cells = <1>;
--			#size-cells = <0>;
--			status = "disabled";
--		};
--
--		spi2: spi@1004b400 {
--			compatible = "renesas,r9a07g044-rspi", "renesas,rspi-rz";
--			reg = <0 0x1004b400 0 0x400>;
--			interrupts = <GIC_SPI 421 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 419 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 420 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "error", "rx", "tx";
--			clocks = <&cpg CPG_MOD R9A07G044_RSPI2_CLKB>;
--			resets = <&cpg R9A07G044_RSPI2_RST>;
--			dmas = <&dmac 0x2e9d>, <&dmac 0x2e9e>;
--			dma-names = "tx", "rx";
--			power-domains = <&cpg>;
--			num-cs = <1>;
--			#address-cells = <1>;
--			#size-cells = <0>;
--			status = "disabled";
--		};
--
--		scif0: serial@1004b800 {
--			compatible = "renesas,scif-r9a07g044";
--			reg = <0 0x1004b800 0 0x400>;
--			interrupts = <GIC_SPI 380 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 382 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 383 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 381 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 384 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 384 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "eri", "rxi", "txi",
--					  "bri", "dri", "tei";
--			clocks = <&cpg CPG_MOD R9A07G044_SCIF0_CLK_PCK>;
--			clock-names = "fck";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_SCIF0_RST_SYSTEM_N>;
--			status = "disabled";
--		};
--
--		scif1: serial@1004bc00 {
--			compatible = "renesas,scif-r9a07g044";
--			reg = <0 0x1004bc00 0 0x400>;
--			interrupts = <GIC_SPI 385 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 387 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 388 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 386 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 389 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 389 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "eri", "rxi", "txi",
--					  "bri", "dri", "tei";
--			clocks = <&cpg CPG_MOD R9A07G044_SCIF1_CLK_PCK>;
--			clock-names = "fck";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_SCIF1_RST_SYSTEM_N>;
--			status = "disabled";
--		};
--
--		scif2: serial@1004c000 {
--			compatible = "renesas,scif-r9a07g044";
--			reg = <0 0x1004c000 0 0x400>;
--			interrupts = <GIC_SPI 390 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 392 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 393 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 391 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 394 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 394 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "eri", "rxi", "txi",
--					  "bri", "dri", "tei";
--			clocks = <&cpg CPG_MOD R9A07G044_SCIF2_CLK_PCK>;
--			clock-names = "fck";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_SCIF2_RST_SYSTEM_N>;
--			status = "disabled";
--		};
--
--		scif3: serial@1004c400 {
--			compatible = "renesas,scif-r9a07g044";
--			reg = <0 0x1004c400 0 0x400>;
--			interrupts = <GIC_SPI 395 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 397 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 398 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 396 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 399 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 399 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "eri", "rxi", "txi",
--					  "bri", "dri", "tei";
--			clocks = <&cpg CPG_MOD R9A07G044_SCIF3_CLK_PCK>;
--			clock-names = "fck";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_SCIF3_RST_SYSTEM_N>;
--			status = "disabled";
--		};
--
--		scif4: serial@1004c800 {
--			compatible = "renesas,scif-r9a07g044";
--			reg = <0 0x1004c800 0 0x400>;
--			interrupts = <GIC_SPI 400 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 402 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 403 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 401 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 404 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 404 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "eri", "rxi", "txi",
--					  "bri", "dri", "tei";
--			clocks = <&cpg CPG_MOD R9A07G044_SCIF4_CLK_PCK>;
--			clock-names = "fck";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_SCIF4_RST_SYSTEM_N>;
--			status = "disabled";
--		};
--
--		sci0: serial@1004d000 {
--			compatible = "renesas,r9a07g044-sci", "renesas,sci";
--			reg = <0 0x1004d000 0 0x400>;
--			interrupts = <GIC_SPI 405 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 406 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 407 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 408 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "eri", "rxi", "txi", "tei";
--			clocks = <&cpg CPG_MOD R9A07G044_SCI0_CLKP>;
--			clock-names = "fck";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_SCI0_RST>;
--			status = "disabled";
--		};
--
--		sci1: serial@1004d400 {
--			compatible = "renesas,r9a07g044-sci", "renesas,sci";
--			reg = <0 0x1004d400 0 0x400>;
--			interrupts = <GIC_SPI 409 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 410 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 411 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 412 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "eri", "rxi", "txi", "tei";
--			clocks = <&cpg CPG_MOD R9A07G044_SCI1_CLKP>;
--			clock-names = "fck";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_SCI1_RST>;
--			status = "disabled";
--		};
--
--		canfd: can@10050000 {
--			compatible = "renesas,r9a07g044-canfd", "renesas,rzg2l-canfd";
--			reg = <0 0x10050000 0 0x8000>;
--			interrupts = <GIC_SPI 426 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 427 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 422 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 424 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 428 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 423 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 425 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 429 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "g_err", "g_recc",
--					  "ch0_err", "ch0_rec", "ch0_trx",
--					  "ch1_err", "ch1_rec", "ch1_trx";
--			clocks = <&cpg CPG_MOD R9A07G044_CANFD_PCLK>,
--				 <&cpg CPG_CORE R9A07G044_CLK_P0_DIV2>,
--				 <&can_clk>;
--			clock-names = "fck", "canfd", "can_clk";
--			assigned-clocks = <&cpg CPG_CORE R9A07G044_CLK_P0_DIV2>;
--			assigned-clock-rates = <50000000>;
--			resets = <&cpg R9A07G044_CANFD_RSTP_N>,
--				 <&cpg R9A07G044_CANFD_RSTC_N>;
--			reset-names = "rstp_n", "rstc_n";
--			power-domains = <&cpg>;
--			status = "disabled";
--
--			channel0 {
--				status = "disabled";
--			};
--			channel1 {
--				status = "disabled";
--			};
--		};
--
--		i2c0: i2c@10058000 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "renesas,riic-r9a07g044", "renesas,riic-rz";
--			reg = <0 0x10058000 0 0x400>;
--			interrupts = <GIC_SPI 350 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 348 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 349 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 352 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 353 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 351 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 354 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 355 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "tei", "ri", "ti", "spi", "sti",
--					  "naki", "ali", "tmoi";
--			clocks = <&cpg CPG_MOD R9A07G044_I2C0_PCLK>;
--			clock-frequency = <100000>;
--			resets = <&cpg R9A07G044_I2C0_MRST>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		i2c1: i2c@10058400 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "renesas,riic-r9a07g044", "renesas,riic-rz";
--			reg = <0 0x10058400 0 0x400>;
--			interrupts = <GIC_SPI 358 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 356 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 357 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 360 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 361 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 359 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 362 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 363 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "tei", "ri", "ti", "spi", "sti",
--					  "naki", "ali", "tmoi";
--			clocks = <&cpg CPG_MOD R9A07G044_I2C1_PCLK>;
--			clock-frequency = <100000>;
--			resets = <&cpg R9A07G044_I2C1_MRST>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		i2c2: i2c@10058800 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "renesas,riic-r9a07g044", "renesas,riic-rz";
--			reg = <0 0x10058800 0 0x400>;
--			interrupts = <GIC_SPI 366 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 364 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 365 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 368 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 369 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 367 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 370 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 371 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "tei", "ri", "ti", "spi", "sti",
--					  "naki", "ali", "tmoi";
--			clocks = <&cpg CPG_MOD R9A07G044_I2C2_PCLK>;
--			clock-frequency = <100000>;
--			resets = <&cpg R9A07G044_I2C2_MRST>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		i2c3: i2c@10058c00 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "renesas,riic-r9a07g044", "renesas,riic-rz";
--			reg = <0 0x10058c00 0 0x400>;
--			interrupts = <GIC_SPI 374 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 372 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 373 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 376 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 377 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 375 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 378 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 379 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "tei", "ri", "ti", "spi", "sti",
--					  "naki", "ali", "tmoi";
--			clocks = <&cpg CPG_MOD R9A07G044_I2C3_PCLK>;
--			clock-frequency = <100000>;
--			resets = <&cpg R9A07G044_I2C3_MRST>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		adc: adc@10059000 {
--			compatible = "renesas,r9a07g044-adc", "renesas,rzg2l-adc";
--			reg = <0 0x10059000 0 0x400>;
--			interrupts = <GIC_SPI 347 IRQ_TYPE_EDGE_RISING>;
--			clocks = <&cpg CPG_MOD R9A07G044_ADC_ADCLK>,
--				 <&cpg CPG_MOD R9A07G044_ADC_PCLK>;
--			clock-names = "adclk", "pclk";
--			resets = <&cpg R9A07G044_ADC_PRESETN>,
--				 <&cpg R9A07G044_ADC_ADRST_N>;
--			reset-names = "presetn", "adrst-n";
--			power-domains = <&cpg>;
--			status = "disabled";
--
--			#address-cells = <1>;
--			#size-cells = <0>;
--
--			channel@0 {
--				reg = <0>;
--			};
--			channel@1 {
--				reg = <1>;
--			};
--			channel@2 {
--				reg = <2>;
--			};
--			channel@3 {
--				reg = <3>;
--			};
--			channel@4 {
--				reg = <4>;
--			};
--			channel@5 {
--				reg = <5>;
--			};
--			channel@6 {
--				reg = <6>;
--			};
--			channel@7 {
--				reg = <7>;
--			};
--		};
--
--		tsu: thermal@10059400 {
--			compatible = "renesas,r9a07g044-tsu",
--				     "renesas,rzg2l-tsu";
--			reg = <0 0x10059400 0 0x400>;
--			clocks = <&cpg CPG_MOD R9A07G044_TSU_PCLK>;
--			resets = <&cpg R9A07G044_TSU_PRESETN>;
--			power-domains = <&cpg>;
--			#thermal-sensor-cells = <1>;
--		};
--
--		sbc: spi@10060000 {
--			compatible = "renesas,r9a07g044-rpc-if",
--				     "renesas,rzg2l-rpc-if";
--			reg = <0 0x10060000 0 0x10000>,
--			      <0 0x20000000 0 0x10000000>,
--			      <0 0x10070000 0 0x10000>;
--			reg-names = "regs", "dirmap", "wbuf";
--			interrupts = <GIC_SPI 41 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_SPI_CLK2>,
--				 <&cpg CPG_MOD R9A07G044_SPI_CLK>;
--			resets = <&cpg R9A07G044_SPI_RST>;
--			power-domains = <&cpg>;
--			#address-cells = <1>;
--			#size-cells = <0>;
--			status = "disabled";
--		};
--
--		cru: video@10830000 {
--			compatible = "renesas,r9a07g044-cru", "renesas,rzg2l-cru";
--			reg = <0 0x10830000 0 0x400>;
--			clocks = <&cpg CPG_MOD R9A07G044_CRU_VCLK>,
--				 <&cpg CPG_MOD R9A07G044_CRU_PCLK>,
--				 <&cpg CPG_MOD R9A07G044_CRU_ACLK>;
--			clock-names = "video", "apb", "axi";
--			interrupts = <GIC_SPI 167 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 168 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 169 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "image_conv", "image_conv_err", "axi_mst_err";
--			resets = <&cpg R9A07G044_CRU_PRESETN>,
--				 <&cpg R9A07G044_CRU_ARESETN>;
--			reset-names = "presetn", "aresetn";
--			power-domains = <&cpg>;
--			status = "disabled";
--
--			ports {
--				#address-cells = <1>;
--				#size-cells = <0>;
--
--				port@0 {
--					#address-cells = <1>;
--					#size-cells = <0>;
--
--					reg = <0>;
--					cruparallel: endpoint@0 {
--						reg = <0>;
--					};
--				};
--
--				port@1 {
--					#address-cells = <1>;
--					#size-cells = <0>;
--
--					reg = <1>;
--					crucsi2: endpoint@0 {
--						reg = <0>;
--						remote-endpoint = <&csi2cru>;
--					};
--				};
--			};
--		};
--
--		csi2: csi2@10830400 {
--			compatible = "renesas,r9a07g044-csi2", "renesas,rzg2l-csi2";
--			reg = <0 0x10830400 0 0xfc00>;
--			interrupts = <GIC_SPI 166 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_CRU_SYSCLK>,
--				 <&cpg CPG_MOD R9A07G044_CRU_VCLK>,
--				 <&cpg CPG_MOD R9A07G044_CRU_PCLK>;
--			clock-names = "system", "video", "apb";
--			resets = <&cpg R9A07G044_CRU_PRESETN>,
--				 <&cpg R9A07G044_CRU_CMN_RSTB>;
--			reset-names = "presetn", "cmn-rstb";
--			power-domains = <&cpg>;
--			status = "disabled";
--
--			ports {
--				#address-cells = <1>;
--				#size-cells = <0>;
--
--				port@0 {
--					reg = <0>;
--				};
--
--				port@1 {
--					#address-cells = <1>;
--					#size-cells = <0>;
--					reg = <1>;
--
--					csi2cru: endpoint@0 {
--						reg = <0>;
--						remote-endpoint = <&crucsi2>;
--					};
--				};
--			};
--		};
--
--		dsi: dsi@10850000 {
--			compatible = "renesas,r9a07g044-mipi-dsi",
--				     "renesas,rzg2l-mipi-dsi";
--			reg = <0 0x10850000 0 0x20000>;
--			interrupts = <GIC_SPI 142 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 143 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 144 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 145 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 146 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 147 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 148 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "seq0", "seq1", "vin1", "rcv",
--					  "ferr", "ppi", "debug";
--			clocks = <&cpg CPG_MOD R9A07G044_MIPI_DSI_PLLCLK>,
--				 <&cpg CPG_MOD R9A07G044_MIPI_DSI_SYSCLK>,
--				 <&cpg CPG_MOD R9A07G044_MIPI_DSI_ACLK>,
--				 <&cpg CPG_MOD R9A07G044_MIPI_DSI_PCLK>,
--				 <&cpg CPG_MOD R9A07G044_MIPI_DSI_VCLK>,
--				 <&cpg CPG_MOD R9A07G044_MIPI_DSI_LPCLK>;
--			clock-names = "pllclk", "sysclk", "aclk", "pclk", "vclk", "lpclk";
--			resets = <&cpg R9A07G044_MIPI_DSI_CMN_RSTB>,
--				 <&cpg R9A07G044_MIPI_DSI_ARESET_N>,
--				 <&cpg R9A07G044_MIPI_DSI_PRESET_N>;
--			reset-names = "rst", "arst", "prst";
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		vspd: vsp@10870000 {
--			compatible = "renesas,r9a07g044-vsp2";
--			reg = <0 0x10870000 0 0x10000>;
--			interrupts = <GIC_SPI 149 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_LCDC_CLK_A>,
--				 <&cpg CPG_MOD R9A07G044_LCDC_CLK_P>,
--				 <&cpg CPG_MOD R9A07G044_LCDC_CLK_D>;
--			clock-names = "aclk", "pclk", "vclk";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_LCDC_RESET_N>;
--			renesas,fcp = <&fcpvd>;
--		};
--
--		fcpvd: fcp@10880000 {
--			compatible = "renesas,r9a07g044-fcpvd",
--				     "renesas,fcpv";
--			reg = <0 0x10880000 0 0x10000>;
--			clocks = <&cpg CPG_MOD R9A07G044_LCDC_CLK_A>,
--				 <&cpg CPG_MOD R9A07G044_LCDC_CLK_P>,
--				 <&cpg CPG_MOD R9A07G044_LCDC_CLK_D>;
--			clock-names = "aclk", "pclk", "vclk";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_LCDC_RESET_N>;
--		};
--
--		cpg: clock-controller@11010000 {
--			compatible = "renesas,r9a07g044-cpg";
--			reg = <0 0x11010000 0 0x10000>;
--			clocks = <&extal_clk>;
--			clock-names = "extal";
--			#clock-cells = <2>;
--			#reset-cells = <1>;
--			#power-domain-cells = <0>;
--		};
--
--		sysc: system-controller@11020000 {
--			compatible = "renesas,r9a07g044-sysc";
--			reg = <0 0x11020000 0 0x10000>;
--			interrupts = <GIC_SPI 42 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 43 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 44 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 45 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "lpm_int", "ca55stbydone_int",
--					  "cm33stbyr_int", "ca55_deny";
--			status = "disabled";
--		};
--
--		pinctrl: pinctrl@11030000 {
--			compatible = "renesas,r9a07g044-pinctrl";
--			reg = <0 0x11030000 0 0x10000>;
--			gpio-controller;
--			#gpio-cells = <2>;
--			#interrupt-cells = <2>;
--			interrupt-parent = <&irqc>;
--			interrupt-controller;
--			gpio-ranges = <&pinctrl 0 0 392>;
--			clocks = <&cpg CPG_MOD R9A07G044_GPIO_HCLK>;
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_GPIO_RSTN>,
--				 <&cpg R9A07G044_GPIO_PORT_RESETN>,
--				 <&cpg R9A07G044_GPIO_SPARE_RESETN>;
--		};
--
--		irqc: interrupt-controller@110a0000 {
--			compatible = "renesas,r9a07g044-irqc",
--				     "renesas,rzg2l-irqc";
--			#interrupt-cells = <2>;
--			#address-cells = <0>;
--			interrupt-controller;
--			reg = <0 0x110a0000 0 0x10000>;
--			interrupts = <GIC_SPI 0 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 2 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 3 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 4 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 6 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 7 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 8 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 444 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 445 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 446 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 447 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 448 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 449 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 450 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 451 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 452 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 453 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 454 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 455 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 456 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 457 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 458 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 459 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 460 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 461 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 462 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 463 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 464 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 465 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 466 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 467 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 468 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 469 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 470 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 471 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 472 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 473 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 474 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 475 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_IA55_CLK>,
--				 <&cpg CPG_MOD R9A07G044_IA55_PCLK>;
--			clock-names = "clk", "pclk";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_IA55_RESETN>;
--		};
--
--		dmac: dma-controller@11820000 {
--			compatible = "renesas,r9a07g044-dmac",
--				     "renesas,rz-dmac";
--			reg = <0 0x11820000 0 0x10000>,
--			      <0 0x11830000 0 0x10000>;
--			interrupts = <GIC_SPI 141 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 125 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 126 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 127 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 128 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 129 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 130 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 131 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 132 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 133 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 134 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 135 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 136 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 137 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 138 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 139 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 140 IRQ_TYPE_EDGE_RISING>;
--			interrupt-names = "error",
--					  "ch0", "ch1", "ch2", "ch3",
--					  "ch4", "ch5", "ch6", "ch7",
--					  "ch8", "ch9", "ch10", "ch11",
--					  "ch12", "ch13", "ch14", "ch15";
--			clocks = <&cpg CPG_MOD R9A07G044_DMAC_ACLK>,
--				 <&cpg CPG_MOD R9A07G044_DMAC_PCLK>;
--			clock-names = "main", "register";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_DMAC_ARESETN>,
--				 <&cpg R9A07G044_DMAC_RST_ASYNC>;
--			reset-names = "arst", "rst_async";
--			#dma-cells = <1>;
--			dma-channels = <16>;
--		};
--
--		gpu: gpu@11840000 {
--			compatible = "renesas,r9a07g044-mali",
--				     "arm,mali-bifrost";
--			reg = <0x0 0x11840000 0x0 0x10000>;
--			interrupts = <GIC_SPI 154 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 155 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 153 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 156 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "job", "mmu", "gpu", "event";
--			clocks = <&cpg CPG_MOD R9A07G044_GPU_CLK>,
--				 <&cpg CPG_MOD R9A07G044_GPU_AXI_CLK>,
--				 <&cpg CPG_MOD R9A07G044_GPU_ACE_CLK>;
--			clock-names = "gpu", "bus", "bus_ace";
--			power-domains = <&cpg>;
--			resets = <&cpg R9A07G044_GPU_RESETN>,
--				 <&cpg R9A07G044_GPU_AXI_RESETN>,
--				 <&cpg R9A07G044_GPU_ACE_RESETN>;
--			reset-names = "rst", "axi_rst", "ace_rst";
--			operating-points-v2 = <&gpu_opp_table>;
--		};
--
--		gic: interrupt-controller@11900000 {
--			compatible = "arm,gic-v3";
--			#interrupt-cells = <3>;
--			#address-cells = <0>;
--			interrupt-controller;
--			reg = <0x0 0x11900000 0 0x40000>,
--			      <0x0 0x11940000 0 0x60000>;
--			interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_LOW>;
--		};
--
--		sdhi0: mmc@11c00000 {
--			compatible = "renesas,sdhi-r9a07g044",
--				     "renesas,rcar-gen3-sdhi";
--			reg = <0x0 0x11c00000 0 0x10000>;
--			interrupts = <GIC_SPI 104 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 105 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_SDHI0_IMCLK>,
--				 <&cpg CPG_MOD R9A07G044_SDHI0_CLK_HS>,
--				 <&cpg CPG_MOD R9A07G044_SDHI0_IMCLK2>,
--				 <&cpg CPG_MOD R9A07G044_SDHI0_ACLK>;
--			clock-names = "core", "clkh", "cd", "aclk";
--			resets = <&cpg R9A07G044_SDHI0_IXRST>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		sdhi1: mmc@11c10000 {
--			compatible = "renesas,sdhi-r9a07g044",
--				     "renesas,rcar-gen3-sdhi";
--			reg = <0x0 0x11c10000 0 0x10000>;
--			interrupts = <GIC_SPI 106 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 107 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_SDHI1_IMCLK>,
--				 <&cpg CPG_MOD R9A07G044_SDHI1_CLK_HS>,
--				 <&cpg CPG_MOD R9A07G044_SDHI1_IMCLK2>,
--				 <&cpg CPG_MOD R9A07G044_SDHI1_ACLK>;
--			clock-names = "core", "clkh", "cd", "aclk";
--			resets = <&cpg R9A07G044_SDHI1_IXRST>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		eth0: ethernet@11c20000 {
--			compatible = "renesas,r9a07g044-gbeth",
--				     "renesas,rzg2l-gbeth";
--			reg = <0 0x11c20000 0 0x10000>;
--			interrupts = <GIC_SPI 84 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 85 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "mux", "fil", "arp_ns";
--			phy-mode = "rgmii";
--			clocks = <&cpg CPG_MOD R9A07G044_ETH0_CLK_AXI>,
--				 <&cpg CPG_MOD R9A07G044_ETH0_CLK_CHI>,
--				 <&cpg CPG_CORE R9A07G044_CLK_HP>;
--			clock-names = "axi", "chi", "refclk";
--			resets = <&cpg R9A07G044_ETH0_RST_HW_N>;
--			power-domains = <&cpg>;
--			#address-cells = <1>;
--			#size-cells = <0>;
--			status = "disabled";
--		};
--
--		eth1: ethernet@11c30000 {
--			compatible = "renesas,r9a07g044-gbeth",
--				     "renesas,rzg2l-gbeth";
--			reg = <0 0x11c30000 0 0x10000>;
--			interrupts = <GIC_SPI 87 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 88 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 89 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "mux", "fil", "arp_ns";
--			phy-mode = "rgmii";
--			clocks = <&cpg CPG_MOD R9A07G044_ETH1_CLK_AXI>,
--				 <&cpg CPG_MOD R9A07G044_ETH1_CLK_CHI>,
--				 <&cpg CPG_CORE R9A07G044_CLK_HP>;
--			clock-names = "axi", "chi", "refclk";
--			resets = <&cpg R9A07G044_ETH1_RST_HW_N>;
--			power-domains = <&cpg>;
--			#address-cells = <1>;
--			#size-cells = <0>;
--			status = "disabled";
--		};
--
--		phyrst: usbphy-ctrl@11c40000 {
--			compatible = "renesas,r9a07g044-usbphy-ctrl",
--				     "renesas,rzg2l-usbphy-ctrl";
--			reg = <0 0x11c40000 0 0x10000>;
--			clocks = <&cpg CPG_MOD R9A07G044_USB_PCLK>;
--			resets = <&cpg R9A07G044_USB_PRESETN>;
--			power-domains = <&cpg>;
--			#reset-cells = <1>;
--			status = "disabled";
--		};
--
--		ohci0: usb@11c50000 {
--			compatible = "generic-ohci";
--			reg = <0 0x11c50000 0 0x100>;
--			interrupts = <GIC_SPI 91 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_USB_PCLK>,
--				 <&cpg CPG_MOD R9A07G044_USB_U2H0_HCLK>;
--			resets = <&phyrst 0>,
--				 <&cpg R9A07G044_USB_U2H0_HRESETN>;
--			phys = <&usb2_phy0 1>;
--			phy-names = "usb";
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		ohci1: usb@11c70000 {
--			compatible = "generic-ohci";
--			reg = <0 0x11c70000 0 0x100>;
--			interrupts = <GIC_SPI 96 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_USB_PCLK>,
--				 <&cpg CPG_MOD R9A07G044_USB_U2H1_HCLK>;
--			resets = <&phyrst 1>,
--				 <&cpg R9A07G044_USB_U2H1_HRESETN>;
--			phys = <&usb2_phy1 1>;
--			phy-names = "usb";
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		ehci0: usb@11c50100 {
--			compatible = "generic-ehci";
--			reg = <0 0x11c50100 0 0x100>;
--			interrupts = <GIC_SPI 92 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_USB_PCLK>,
--				 <&cpg CPG_MOD R9A07G044_USB_U2H0_HCLK>;
--			resets = <&phyrst 0>,
--				 <&cpg R9A07G044_USB_U2H0_HRESETN>;
--			phys = <&usb2_phy0 2>;
--			phy-names = "usb";
--			companion = <&ohci0>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		ehci1: usb@11c70100 {
--			compatible = "generic-ehci";
--			reg = <0 0x11c70100 0 0x100>;
--			interrupts = <GIC_SPI 97 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_USB_PCLK>,
--				 <&cpg CPG_MOD R9A07G044_USB_U2H1_HCLK>;
--			resets = <&phyrst 1>,
--				 <&cpg R9A07G044_USB_U2H1_HRESETN>;
--			phys = <&usb2_phy1 2>;
--			phy-names = "usb";
--			companion = <&ohci1>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		usb2_phy0: usb-phy@11c50200 {
--			compatible = "renesas,usb2-phy-r9a07g044",
--				     "renesas,rzg2l-usb2-phy";
--			reg = <0 0x11c50200 0 0x700>;
--			interrupts = <GIC_SPI 94 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_USB_PCLK>,
--				 <&cpg CPG_MOD R9A07G044_USB_U2H0_HCLK>;
--			resets = <&phyrst 0>;
--			#phy-cells = <1>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		usb2_phy1: usb-phy@11c70200 {
--			compatible = "renesas,usb2-phy-r9a07g044",
--				     "renesas,rzg2l-usb2-phy";
--			reg = <0 0x11c70200 0 0x700>;
--			interrupts = <GIC_SPI 99 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_USB_PCLK>,
--				 <&cpg CPG_MOD R9A07G044_USB_U2H1_HCLK>;
--			resets = <&phyrst 1>;
--			#phy-cells = <1>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		hsusb: usb@11c60000 {
--			compatible = "renesas,usbhs-r9a07g044",
--				     "renesas,rza2-usbhs";
--			reg = <0 0x11c60000 0 0x10000>;
--			interrupts = <GIC_SPI 100 IRQ_TYPE_EDGE_RISING>,
--				     <GIC_SPI 101 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 102 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 103 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cpg CPG_MOD R9A07G044_USB_PCLK>,
--				 <&cpg CPG_MOD R9A07G044_USB_U2P_EXR_CPUCLK>;
--			resets = <&phyrst 0>,
--				 <&cpg R9A07G044_USB_U2P_EXL_SYSRST>;
--			renesas,buswait = <7>;
--			phys = <&usb2_phy0 3>;
--			phy-names = "usb";
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		wdt0: watchdog@12800800 {
--			compatible = "renesas,r9a07g044-wdt",
--				     "renesas,rzg2l-wdt";
--			reg = <0 0x12800800 0 0x400>;
--			clocks = <&cpg CPG_MOD R9A07G044_WDT0_PCLK>,
--				 <&cpg CPG_MOD R9A07G044_WDT0_CLK>;
--			clock-names = "pclk", "oscclk";
--			interrupts = <GIC_SPI 49 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 50 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "wdt", "perrout";
--			resets = <&cpg R9A07G044_WDT0_PRESETN>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		wdt1: watchdog@12800c00 {
--			compatible = "renesas,r9a07g044-wdt",
--				     "renesas,rzg2l-wdt";
--			reg = <0 0x12800C00 0 0x400>;
--			clocks = <&cpg CPG_MOD R9A07G044_WDT1_PCLK>,
--				 <&cpg CPG_MOD R9A07G044_WDT1_CLK>;
--			clock-names = "pclk", "oscclk";
--			interrupts = <GIC_SPI 51 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "wdt", "perrout";
--			resets = <&cpg R9A07G044_WDT1_PRESETN>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		ostm0: timer@12801000 {
--			compatible = "renesas,r9a07g044-ostm",
--				     "renesas,ostm";
--			reg = <0x0 0x12801000 0x0 0x400>;
--			interrupts = <GIC_SPI 46 IRQ_TYPE_EDGE_RISING>;
--			clocks = <&cpg CPG_MOD R9A07G044_OSTM0_PCLK>;
--			resets = <&cpg R9A07G044_OSTM0_PRESETZ>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		ostm1: timer@12801400 {
--			compatible = "renesas,r9a07g044-ostm",
--				     "renesas,ostm";
--			reg = <0x0 0x12801400 0x0 0x400>;
--			interrupts = <GIC_SPI 47 IRQ_TYPE_EDGE_RISING>;
--			clocks = <&cpg CPG_MOD R9A07G044_OSTM1_PCLK>;
--			resets = <&cpg R9A07G044_OSTM1_PRESETZ>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--
--		ostm2: timer@12801800 {
--			compatible = "renesas,r9a07g044-ostm",
--				     "renesas,ostm";
--			reg = <0x0 0x12801800 0x0 0x400>;
--			interrupts = <GIC_SPI 48 IRQ_TYPE_EDGE_RISING>;
--			clocks = <&cpg CPG_MOD R9A07G044_OSTM2_PCLK>;
--			resets = <&cpg R9A07G044_OSTM2_PRESETZ>;
--			power-domains = <&cpg>;
--			status = "disabled";
--		};
--	};
--
--	thermal-zones {
--		cpu-thermal {
--			polling-delay-passive = <250>;
--			polling-delay = <1000>;
--			thermal-sensors = <&tsu 0>;
--			sustainable-power = <717>;
--
--			cooling-maps {
--				map0 {
--					trip = <&target>;
--					cooling-device = <&cpu0 0 2>;
--					contribution = <1024>;
--				};
--			};
--
--			trips {
--				sensor_crit: sensor-crit {
--					temperature = <125000>;
--					hysteresis = <1000>;
--					type = "critical";
--				};
--
--				target: trip-point {
--					temperature = <100000>;
--					hysteresis = <1000>;
--					type = "passive";
--				};
--			};
--		};
--	};
--
--	timer {
--		compatible = "arm,armv8-timer";
--		interrupts-extended = <&gic GIC_PPI 13 IRQ_TYPE_LEVEL_LOW>,
--				      <&gic GIC_PPI 14 IRQ_TYPE_LEVEL_LOW>,
--				      <&gic GIC_PPI 11 IRQ_TYPE_LEVEL_LOW>,
--				      <&gic GIC_PPI 10 IRQ_TYPE_LEVEL_LOW>;
--	};
--};
-diff --git a/arch/arm/dts/r9a07g044l2-smarc.dts b/arch/arm/dts/r9a07g044l2-smarc.dts
-deleted file mode 100644
-index 568d49cfe44a..000000000000
---- a/arch/arm/dts/r9a07g044l2-smarc.dts
-+++ /dev/null
-@@ -1,39 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
--/*
-- * Device Tree Source for the RZ/G2L SMARC EVK board
-- *
-- * Copyright (C) 2021 Renesas Electronics Corp.
-- */
--
--/dts-v1/;
--
--/* Enable SCIF2 (SER0) on PMOD1 (CN7) */
--#define PMOD1_SER0	1
--
--/*
-- * To enable MTU3a PWM on PMOD0,
-- * Disable PMOD1_SER0 by setting "#define PMOD1_SER0	0" above and
-- * enable PMOD_MTU3 by setting "#define PMOD_MTU3	1" below.
-- */
--#define PMOD_MTU3	0
--
--#if (PMOD_MTU3 && PMOD1_SER0)
--#error "Cannot set as PMOD_MTU3 and PMOD1_SER0 are mutually exclusive "
--#endif
--
--#define MTU3_COUNTER_Z_PHASE_SIGNAL	0
--
--#if (!PMOD_MTU3 && MTU3_COUNTER_Z_PHASE_SIGNAL)
--#error "Cannot set 1 to MTU3_COUNTER_Z_PHASE_SIGNAL as PMOD_MTU3=0"
--#endif
--
--#include "r9a07g044l2.dtsi"
--#include "rzg2l-smarc-som.dtsi"
--#include "rzg2l-smarc-pinfunction.dtsi"
--#include "rz-smarc-common.dtsi"
--#include "rzg2l-smarc.dtsi"
--
--/ {
--	model = "Renesas SMARC EVK based on r9a07g044l2";
--	compatible = "renesas,smarc-evk", "renesas,r9a07g044l2", "renesas,r9a07g044";
--};
-diff --git a/arch/arm/dts/r9a07g044l2.dtsi b/arch/arm/dts/r9a07g044l2.dtsi
-deleted file mode 100644
-index 91dc10b2cdbb..000000000000
---- a/arch/arm/dts/r9a07g044l2.dtsi
-+++ /dev/null
-@@ -1,13 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
--/*
-- * Device Tree Source for the RZ/G2L R9A07G044L2 SoC specific parts
-- *
-- * Copyright (C) 2021 Renesas Electronics Corp.
-- */
--
--/dts-v1/;
--#include "r9a07g044.dtsi"
--
--/ {
--	compatible = "renesas,r9a07g044l2", "renesas,r9a07g044";
--};
-diff --git a/arch/arm/dts/rz-smarc-common.dtsi b/arch/arm/dts/rz-smarc-common.dtsi
-deleted file mode 100644
-index b7a3e6caa386..000000000000
---- a/arch/arm/dts/rz-smarc-common.dtsi
-+++ /dev/null
-@@ -1,183 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
--/*
-- * Device Tree Source for the RZ/{G2L,G2LC,V2L} SMARC EVK common parts
-- *
-- * Copyright (C) 2022 Renesas Electronics Corp.
-- */
--
--#include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/pinctrl/rzg2l-pinctrl.h>
--
--/*
-- * SSI-WM8978
-- *
-- * This command is required when Playback/Capture
-- *
-- *	amixer cset name='Left Input Mixer L2 Switch' on
-- *	amixer cset name='Right Input Mixer R2 Switch' on
-- *	amixer cset name='Headphone Playback Volume' 100
-- *	amixer cset name='PCM Volume' 100%
-- *	amixer cset name='Input PGA Volume' 25
-- *
-- */
--
--/ {
--	aliases {
--		serial0 = &scif0;
--		i2c0 = &i2c0;
--		i2c1 = &i2c1;
--	};
--
--	chosen {
--		stdout-path = "serial0:115200n8";
--	};
--
--	snd_rzg2l: sound {
--		compatible = "simple-audio-card";
--		simple-audio-card,format = "i2s";
--		simple-audio-card,bitclock-master = <&cpu_dai>;
--		simple-audio-card,frame-master = <&cpu_dai>;
--		simple-audio-card,mclk-fs = <256>;
--
--		simple-audio-card,widgets = "Microphone", "Microphone Jack";
--		simple-audio-card,routing =
--			    "L2", "Mic Bias",
--			    "R2", "Mic Bias",
--			    "Mic Bias", "Microphone Jack";
--
--		cpu_dai: simple-audio-card,cpu {
--		};
--
--		codec_dai: simple-audio-card,codec {
--			clocks = <&versa3 2>;
--			sound-dai = <&wm8978>;
--		};
--	};
--
--	usb0_vbus_otg: regulator-usb0-vbus-otg {
--		compatible = "regulator-fixed";
--
--		regulator-name = "USB0_VBUS_OTG";
--		regulator-min-microvolt = <5000000>;
--		regulator-max-microvolt = <5000000>;
--	};
--
--	vccq_sdhi1: regulator-vccq-sdhi1 {
--		compatible = "regulator-gpio";
--		regulator-name = "SDHI1 VccQ";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <3300000>;
--		gpios-states = <1>;
--		states = <3300000 1>, <1800000 0>;
--	};
--
--	x1: x1-clock {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		clock-frequency = <24000000>;
--	};
--};
--
--&audio_clk1 {
--	clock-frequency = <11289600>;
--};
--
--&audio_clk2 {
--	clock-frequency = <12288000>;
--};
--
--&canfd {
--	pinctrl-0 = <&can0_pins &can1_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--
--	channel0 {
--		status = "okay";
--	};
--
--	channel1 {
--		status = "okay";
--	};
--};
--
--&ehci0 {
--	dr_mode = "otg";
--	status = "okay";
--};
--
--&ehci1 {
--	status = "okay";
--};
--
--&hsusb {
--	dr_mode = "otg";
--	status = "okay";
--};
--
--&i2c0 {
--	pinctrl-0 = <&i2c0_pins>;
--	pinctrl-names = "default";
--
--	status = "okay";
--};
--
--&i2c1 {
--	pinctrl-0 = <&i2c1_pins>;
--	pinctrl-names = "default";
--
--	status = "okay";
--};
--
--&ohci0 {
--	dr_mode = "otg";
--	status = "okay";
--};
--
--&ohci1 {
--	status = "okay";
--};
--
--&phyrst {
--	status = "okay";
--};
--
--&scif0 {
--	pinctrl-0 = <&scif0_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--};
--
--&sdhi1 {
--	pinctrl-0 = <&sdhi1_pins>;
--	pinctrl-1 = <&sdhi1_pins_uhs>;
--	pinctrl-names = "default", "state_uhs";
--
--	vmmc-supply = <&reg_3p3v>;
--	vqmmc-supply = <&vccq_sdhi1>;
--	bus-width = <4>;
--	sd-uhs-sdr50;
--	sd-uhs-sdr104;
--	status = "okay";
--};
--
--&spi1 {
--	pinctrl-0 = <&spi1_pins>;
--	pinctrl-names = "default";
--
--	status = "okay";
--};
--
--&usb2_phy0 {
--	pinctrl-0 = <&usb0_pins>;
--	pinctrl-names = "default";
--
--	vbus-supply = <&usb0_vbus_otg>;
--	status = "okay";
--};
--
--&usb2_phy1 {
--	pinctrl-0 = <&usb1_pins>;
--	pinctrl-names = "default";
--
--	status = "okay";
--};
-diff --git a/arch/arm/dts/rzg2l-smarc-pinfunction.dtsi b/arch/arm/dts/rzg2l-smarc-pinfunction.dtsi
-deleted file mode 100644
-index 18c526c7a4cf..000000000000
---- a/arch/arm/dts/rzg2l-smarc-pinfunction.dtsi
-+++ /dev/null
-@@ -1,157 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
--/*
-- * Device Tree Source for the RZ/{G2L,V2L} SMARC pincontrol parts
-- *
-- * Copyright (C) 2021 Renesas Electronics Corp.
-- */
--
--#include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/pinctrl/rzg2l-pinctrl.h>
--
--&pinctrl {
--	pinctrl-0 = <&sound_clk_pins>;
--	pinctrl-names = "default";
--
--	can0_pins: can0 {
--		pinmux = <RZG2L_PORT_PINMUX(10, 1, 2)>, /* TX */
--			 <RZG2L_PORT_PINMUX(11, 0, 2)>; /* RX */
--	};
--
--	/* SW7 should be at position 2->3 so that GPIO8_CAN0_STB line is activated */
--	can0-stb-hog {
--		gpio-hog;
--		gpios = <RZG2L_GPIO(42, 2) GPIO_ACTIVE_HIGH>;
--		output-low;
--		line-name = "can0_stb";
--	};
--
--	can1_pins: can1 {
--		pinmux = <RZG2L_PORT_PINMUX(12, 1, 2)>, /* TX */
--			 <RZG2L_PORT_PINMUX(13, 0, 2)>; /* RX */
--	};
--
--	/* SW8 should be at position 2->3 so that GPIO9_CAN1_STB line is activated */
--	can1-stb-hog {
--		gpio-hog;
--		gpios = <RZG2L_GPIO(42, 3) GPIO_ACTIVE_HIGH>;
--		output-low;
--		line-name = "can1_stb";
--	};
--
--	i2c0_pins: i2c0 {
--		pins = "RIIC0_SDA", "RIIC0_SCL";
--		input-enable;
--	};
--
--	i2c1_pins: i2c1 {
--		pins = "RIIC1_SDA", "RIIC1_SCL";
--		input-enable;
--	};
--
--	i2c3_pins: i2c3 {
--		pinmux = <RZG2L_PORT_PINMUX(18, 0, 3)>, /* SDA */
--			 <RZG2L_PORT_PINMUX(18, 1, 3)>; /* SCL */
--	};
--
--	mtu3_pins: mtu3 {
--		mtu3-ext-clk-input-pin {
--			pinmux = <RZG2L_PORT_PINMUX(48, 0, 4)>, /* MTCLKA */
--				 <RZG2L_PORT_PINMUX(48, 1, 4)>; /* MTCLKB */
--		};
--
--		mtu3-pwm {
--			pinmux = <RZG2L_PORT_PINMUX(44, 0, 4)>, /* MTIOC3A */
--				 <RZG2L_PORT_PINMUX(44, 1, 4)>, /* MTIOC3B */
--				 <RZG2L_PORT_PINMUX(44, 2, 4)>, /* MTIOC3C */
--				 <RZG2L_PORT_PINMUX(44, 3, 4)>; /* MTIOC3D */
--		};
--
--#if MTU3_COUNTER_Z_PHASE_SIGNAL
--		mtu3-zphase-clk {
--			pinmux = <RZG2L_PORT_PINMUX(19, 0, 3)>; /* MTIOC1A */
--		};
--#endif /* MTU3_COUNTER_Z_PHASE_SIGNAL */
--	};
--
--	scif0_pins: scif0 {
--		pinmux = <RZG2L_PORT_PINMUX(38, 0, 1)>,	/* TxD */
--			 <RZG2L_PORT_PINMUX(38, 1, 1)>;	/* RxD */
--	};
--
--	scif2_pins: scif2 {
--		pinmux = <RZG2L_PORT_PINMUX(48, 0, 1)>, /* TxD */
--			 <RZG2L_PORT_PINMUX(48, 1, 1)>, /* RxD */
--			 <RZG2L_PORT_PINMUX(48, 3, 1)>, /* CTS# */
--			 <RZG2L_PORT_PINMUX(48, 4, 1)>; /* RTS# */
--	};
--
--	sd1-pwr-en-hog {
--		gpio-hog;
--		gpios = <RZG2L_GPIO(39, 2) GPIO_ACTIVE_HIGH>;
--		output-high;
--		line-name = "sd1_pwr_en";
--	};
--
--	sdhi1_pins: sd1 {
--		sd1_data {
--			pins = "SD1_DATA0", "SD1_DATA1", "SD1_DATA2", "SD1_DATA3";
--			power-source = <3300>;
--		};
--
--		sd1_ctrl {
--			pins = "SD1_CLK", "SD1_CMD";
--			power-source = <3300>;
--		};
--
--		sd1_mux {
--			pinmux = <RZG2L_PORT_PINMUX(19, 0, 1)>; /* SD1_CD */
--		};
--	};
--
--	sdhi1_pins_uhs: sd1_uhs {
--		sd1_data_uhs {
--			pins = "SD1_DATA0", "SD1_DATA1", "SD1_DATA2", "SD1_DATA3";
--			power-source = <1800>;
--		};
--
--		sd1_ctrl_uhs {
--			pins = "SD1_CLK", "SD1_CMD";
--			power-source = <1800>;
--		};
--
--		sd1_mux_uhs {
--			pinmux = <RZG2L_PORT_PINMUX(19, 0, 1)>; /* SD1_CD */
--		};
--	};
--
--	sound_clk_pins: sound_clk {
--		pins = "AUDIO_CLK1", "AUDIO_CLK2";
--		input-enable;
--	};
--
--	spi1_pins: spi1 {
--		pinmux = <RZG2L_PORT_PINMUX(44, 0, 1)>, /* CK */
--			 <RZG2L_PORT_PINMUX(44, 1, 1)>, /* MOSI */
--			 <RZG2L_PORT_PINMUX(44, 2, 1)>, /* MISO */
--			 <RZG2L_PORT_PINMUX(44, 3, 1)>; /* SSL */
--	};
--
--	ssi0_pins: ssi0 {
--		pinmux = <RZG2L_PORT_PINMUX(45, 0, 1)>, /* BCK */
--			 <RZG2L_PORT_PINMUX(45, 1, 1)>, /* RCK */
--			 <RZG2L_PORT_PINMUX(45, 2, 1)>, /* TXD */
--			 <RZG2L_PORT_PINMUX(45, 3, 1)>; /* RXD */
--	};
--
--	usb0_pins: usb0 {
--		pinmux = <RZG2L_PORT_PINMUX(4, 0, 1)>, /* VBUS */
--			 <RZG2L_PORT_PINMUX(5, 0, 1)>, /* OVC */
--			 <RZG2L_PORT_PINMUX(5, 1, 1)>; /* OTG_ID */
--	};
--
--	usb1_pins: usb1 {
--		pinmux = <RZG2L_PORT_PINMUX(42, 0, 1)>, /* VBUS */
--			 <RZG2L_PORT_PINMUX(42, 1, 1)>; /* OVC */
--	};
--};
--
-diff --git a/arch/arm/dts/rzg2l-smarc-som.dtsi b/arch/arm/dts/rzg2l-smarc-som.dtsi
-deleted file mode 100644
-index 547859c388ce..000000000000
---- a/arch/arm/dts/rzg2l-smarc-som.dtsi
-+++ /dev/null
-@@ -1,371 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
--/*
-- * Device Tree Source for the RZ/{G2L,V2L} SMARC SOM common parts
-- *
-- * Copyright (C) 2021 Renesas Electronics Corp.
-- */
--
--#include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/interrupt-controller/irqc-rzg2l.h>
--#include <dt-bindings/pinctrl/rzg2l-pinctrl.h>
--
--/* SW1[2] should be at position 2/OFF to enable 64 GB eMMC */
--#define EMMC	1
--
--/*
-- * To enable uSD card on CN3,
-- * SW1[2] should be at position 3/ON.
-- * Disable eMMC by setting "#define EMMC	0" above.
-- */
--#define SDHI	(!EMMC)
--
--/ {
--	aliases {
--		ethernet0 = &eth0;
--		ethernet1 = &eth1;
--	};
--
--	chosen {
--		bootargs = "ignore_loglevel rw root=/dev/nfs ip=on";
--	};
--
--	memory@48000000 {
--		device_type = "memory";
--		/* first 128MB is reserved for secure area. */
--		reg = <0x0 0x48000000 0x0 0x78000000>;
--	};
--
--	reg_1p8v: regulator-1p8v {
--		compatible = "regulator-fixed";
--		regulator-name = "fixed-1.8V";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <1800000>;
--		regulator-boot-on;
--		regulator-always-on;
--	};
--
--	reg_3p3v: regulator-3p3v {
--		compatible = "regulator-fixed";
--		regulator-name = "fixed-3.3V";
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--		regulator-boot-on;
--		regulator-always-on;
--	};
--
--	reg_1p1v: regulator-vdd-core {
--		compatible = "regulator-fixed";
--		regulator-name = "fixed-1.1V";
--		regulator-min-microvolt = <1100000>;
--		regulator-max-microvolt = <1100000>;
--		regulator-boot-on;
--		regulator-always-on;
--	};
--
--	vccq_sdhi0: regulator-vccq-sdhi0 {
--		compatible = "regulator-gpio";
--
--		regulator-name = "SDHI0 VccQ";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <3300000>;
--		states = <3300000 1>, <1800000 0>;
--		regulator-boot-on;
--		gpios = <&pinctrl RZG2L_GPIO(39, 0) GPIO_ACTIVE_HIGH>;
--		regulator-always-on;
--	};
--
--	/* 32.768kHz crystal */
--	x2: x2-clock {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		clock-frequency = <32768>;
--	};
--};
--
--&adc {
--	pinctrl-0 = <&adc_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--
--	/delete-node/ channel@6;
--	/delete-node/ channel@7;
--};
--
--&eth0 {
--	pinctrl-0 = <&eth0_pins>;
--	pinctrl-names = "default";
--	phy-handle = <&phy0>;
--	phy-mode = "rgmii-id";
--	status = "okay";
--
--	phy0: ethernet-phy@7 {
--		compatible = "ethernet-phy-id0022.1640",
--			     "ethernet-phy-ieee802.3-c22";
--		reg = <7>;
--		interrupt-parent = <&irqc>;
--		interrupts = <RZG2L_IRQ2 IRQ_TYPE_LEVEL_LOW>;
--		rxc-skew-psec = <2400>;
--		txc-skew-psec = <2400>;
--		rxdv-skew-psec = <0>;
--		txen-skew-psec = <0>;
--		rxd0-skew-psec = <0>;
--		rxd1-skew-psec = <0>;
--		rxd2-skew-psec = <0>;
--		rxd3-skew-psec = <0>;
--		txd0-skew-psec = <0>;
--		txd1-skew-psec = <0>;
--		txd2-skew-psec = <0>;
--		txd3-skew-psec = <0>;
--	};
--};
--
--&eth1 {
--	pinctrl-0 = <&eth1_pins>;
--	pinctrl-names = "default";
--	phy-handle = <&phy1>;
--	phy-mode = "rgmii-id";
--	status = "okay";
--
--	phy1: ethernet-phy@7 {
--		compatible = "ethernet-phy-id0022.1640",
--			     "ethernet-phy-ieee802.3-c22";
--		reg = <7>;
--		interrupt-parent = <&irqc>;
--		interrupts = <RZG2L_IRQ3 IRQ_TYPE_LEVEL_LOW>;
--		rxc-skew-psec = <2400>;
--		txc-skew-psec = <2400>;
--		rxdv-skew-psec = <0>;
--		txen-skew-psec = <0>;
--		rxd0-skew-psec = <0>;
--		rxd1-skew-psec = <0>;
--		rxd2-skew-psec = <0>;
--		rxd3-skew-psec = <0>;
--		txd0-skew-psec = <0>;
--		txd1-skew-psec = <0>;
--		txd2-skew-psec = <0>;
--		txd3-skew-psec = <0>;
--	};
--};
--
--&extal_clk {
--	clock-frequency = <24000000>;
--};
--
--&gpu {
--	mali-supply = <&reg_1p1v>;
--};
--
--&i2c3 {
--	raa215300: pmic@12 {
--		compatible = "renesas,raa215300";
--		reg = <0x12>, <0x6f>;
--		reg-names = "main", "rtc";
--
--		clocks = <&x2>;
--		clock-names = "xin";
--	};
--};
--
--&ostm1 {
--	status = "okay";
--};
--
--&ostm2 {
--	status = "okay";
--};
--
--&pinctrl {
--	adc_pins: adc {
--		pinmux = <RZG2L_PORT_PINMUX(9, 0, 2)>; /* ADC_TRG */
--	};
--
--	eth0_pins: eth0 {
--		pinmux = <RZG2L_PORT_PINMUX(28, 1, 1)>, /* ET0_LINKSTA */
--			 <RZG2L_PORT_PINMUX(27, 1, 1)>, /* ET0_MDC */
--			 <RZG2L_PORT_PINMUX(28, 0, 1)>, /* ET0_MDIO */
--			 <RZG2L_PORT_PINMUX(20, 0, 1)>, /* ET0_TXC */
--			 <RZG2L_PORT_PINMUX(20, 1, 1)>, /* ET0_TX_CTL */
--			 <RZG2L_PORT_PINMUX(20, 2, 1)>, /* ET0_TXD0 */
--			 <RZG2L_PORT_PINMUX(21, 0, 1)>, /* ET0_TXD1 */
--			 <RZG2L_PORT_PINMUX(21, 1, 1)>, /* ET0_TXD2 */
--			 <RZG2L_PORT_PINMUX(22, 0, 1)>, /* ET0_TXD3 */
--			 <RZG2L_PORT_PINMUX(24, 0, 1)>, /* ET0_RXC */
--			 <RZG2L_PORT_PINMUX(24, 1, 1)>, /* ET0_RX_CTL */
--			 <RZG2L_PORT_PINMUX(25, 0, 1)>, /* ET0_RXD0 */
--			 <RZG2L_PORT_PINMUX(25, 1, 1)>, /* ET0_RXD1 */
--			 <RZG2L_PORT_PINMUX(26, 0, 1)>, /* ET0_RXD2 */
--			 <RZG2L_PORT_PINMUX(26, 1, 1)>, /* ET0_RXD3 */
--			 <RZG2L_PORT_PINMUX(1, 0, 1)>;  /* IRQ2 */
--	};
--
--	eth1_pins: eth1 {
--		pinmux = <RZG2L_PORT_PINMUX(37, 2, 1)>, /* ET1_LINKSTA */
--			 <RZG2L_PORT_PINMUX(37, 0, 1)>, /* ET1_MDC */
--			 <RZG2L_PORT_PINMUX(37, 1, 1)>, /* ET1_MDIO */
--			 <RZG2L_PORT_PINMUX(29, 0, 1)>, /* ET1_TXC */
--			 <RZG2L_PORT_PINMUX(29, 1, 1)>, /* ET1_TX_CTL */
--			 <RZG2L_PORT_PINMUX(30, 0, 1)>, /* ET1_TXD0 */
--			 <RZG2L_PORT_PINMUX(30, 1, 1)>, /* ET1_TXD1 */
--			 <RZG2L_PORT_PINMUX(31, 0, 1)>, /* ET1_TXD2 */
--			 <RZG2L_PORT_PINMUX(31, 1, 1)>, /* ET1_TXD3 */
--			 <RZG2L_PORT_PINMUX(33, 1, 1)>, /* ET1_RXC */
--			 <RZG2L_PORT_PINMUX(34, 0, 1)>, /* ET1_RX_CTL */
--			 <RZG2L_PORT_PINMUX(34, 1, 1)>, /* ET1_RXD0 */
--			 <RZG2L_PORT_PINMUX(35, 0, 1)>, /* ET1_RXD1 */
--			 <RZG2L_PORT_PINMUX(35, 1, 1)>, /* ET1_RXD2 */
--			 <RZG2L_PORT_PINMUX(36, 0, 1)>, /* ET1_RXD3 */
--			 <RZG2L_PORT_PINMUX(1, 1, 1)>;  /* IRQ3 */
--	};
--
--	gpio-sd0-pwr-en-hog {
--		gpio-hog;
--		gpios = <RZG2L_GPIO(4, 1) GPIO_ACTIVE_HIGH>;
--		output-high;
--		line-name = "gpio_sd0_pwr_en";
--	};
--
--	qspi0_pins: qspi0 {
--		qspi0-data {
--			pins = "QSPI0_IO0", "QSPI0_IO1", "QSPI0_IO2", "QSPI0_IO3";
--			power-source = <1800>;
--		};
--
--		qspi0-ctrl {
--			pins = "QSPI0_SPCLK", "QSPI0_SSL", "QSPI_RESET#";
--			power-source = <1800>;
--		};
--	};
--
--	/*
--	 * SD0 device selection is XOR between GPIO_SD0_DEV_SEL and SW1[2]
--	 * The below switch logic can be used to select the device between
--	 * eMMC and microSD, after setting GPIO_SD0_DEV_SEL to high in DT.
--	 * SW1[2] should be at position 2/OFF to enable 64 GB eMMC
--	 * SW1[2] should be at position 3/ON to enable uSD card CN3
--	 */
--	sd0-dev-sel-hog {
--		gpio-hog;
--		gpios = <RZG2L_GPIO(41, 1) GPIO_ACTIVE_HIGH>;
--		output-high;
--		line-name = "sd0_dev_sel";
--	};
--
--	sdhi0_emmc_pins: sd0emmc {
--		sd0_emmc_data {
--			pins = "SD0_DATA0", "SD0_DATA1", "SD0_DATA2", "SD0_DATA3",
--			       "SD0_DATA4", "SD0_DATA5", "SD0_DATA6", "SD0_DATA7";
--			power-source = <1800>;
--		};
--
--		sd0_emmc_ctrl {
--			pins = "SD0_CLK", "SD0_CMD";
--			power-source = <1800>;
--		};
--
--		sd0_emmc_rst {
--			pins = "SD0_RST#";
--			power-source = <1800>;
--		};
--	};
--
--	sdhi0_pins: sd0 {
--		sd0_data {
--			pins = "SD0_DATA0", "SD0_DATA1", "SD0_DATA2", "SD0_DATA3";
--			power-source = <3300>;
--		};
--
--		sd0_ctrl {
--			pins = "SD0_CLK", "SD0_CMD";
--			power-source = <3300>;
--		};
--
--		sd0_mux {
--			pinmux = <RZG2L_PORT_PINMUX(47, 0, 2)>; /* SD0_CD */
--		};
--	};
--
--	sdhi0_pins_uhs: sd0_uhs {
--		sd0_data_uhs {
--			pins = "SD0_DATA0", "SD0_DATA1", "SD0_DATA2", "SD0_DATA3";
--			power-source = <1800>;
--		};
--
--		sd0_ctrl_uhs {
--			pins = "SD0_CLK", "SD0_CMD";
--			power-source = <1800>;
--		};
--
--		sd0_mux_uhs {
--			pinmux = <RZG2L_PORT_PINMUX(47, 0, 2)>; /* SD0_CD */
--		};
--	};
--};
--
--&sbc {
--	pinctrl-0 = <&qspi0_pins>;
--	pinctrl-names = "default";
--	status = "okay";
--
--	flash@0 {
--		compatible = "micron,mt25qu512a", "jedec,spi-nor";
--		reg = <0>;
--		m25p,fast-read;
--		spi-max-frequency = <50000000>;
--		spi-rx-bus-width = <4>;
--
--		partitions {
--			compatible = "fixed-partitions";
--			#address-cells = <1>;
--			#size-cells = <1>;
--
--			boot@0 {
--				reg = <0x00000000 0x2000000>;
--				read-only;
--			};
--			user@2000000 {
--				reg = <0x2000000 0x2000000>;
--			};
--		};
--	};
--};
--
--#if SDHI
--&sdhi0 {
--	pinctrl-0 = <&sdhi0_pins>;
--	pinctrl-1 = <&sdhi0_pins_uhs>;
--	pinctrl-names = "default", "state_uhs";
--
--	vmmc-supply = <&reg_3p3v>;
--	vqmmc-supply = <&vccq_sdhi0>;
--	bus-width = <4>;
--	sd-uhs-sdr50;
--	sd-uhs-sdr104;
--	status = "okay";
--};
--#endif
--
--#if EMMC
--&sdhi0 {
--	pinctrl-0 = <&sdhi0_emmc_pins>;
--	pinctrl-1 = <&sdhi0_emmc_pins>;
--	pinctrl-names = "default", "state_uhs";
--
--	vmmc-supply = <&reg_3p3v>;
--	vqmmc-supply = <&reg_1p8v>;
--	bus-width = <8>;
--	mmc-hs200-1_8v;
--	non-removable;
--	fixed-emmc-driver-type = <1>;
--	status = "okay";
--};
--#endif
--
--&wdt0 {
--	status = "okay";
--	timeout-sec = <60>;
--};
--
--&wdt1 {
--	status = "okay";
--	timeout-sec = <60>;
--};
-diff --git a/arch/arm/dts/rzg2l-smarc.dtsi b/arch/arm/dts/rzg2l-smarc.dtsi
-deleted file mode 100644
-index 37807f1bda4d..000000000000
---- a/arch/arm/dts/rzg2l-smarc.dtsi
-+++ /dev/null
-@@ -1,181 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
--/*
-- * Device Tree Source for the RZ/{G2L,V2L} SMARC EVK common parts
-- *
-- * Copyright (C) 2021 Renesas Electronics Corp.
-- */
--
--#include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/pinctrl/rzg2l-pinctrl.h>
--
--/ {
--	aliases {
--		serial1 = &scif2;
--		i2c3 = &i2c3;
--	};
--
--	osc1: cec-clock {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		clock-frequency = <12000000>;
--	};
--
--	hdmi-out {
--		compatible = "hdmi-connector";
--		type = "d";
--
--		port {
--			hdmi_con_out: endpoint {
--				remote-endpoint = <&adv7535_out>;
--			};
--		};
--	};
--};
--
--&cpu_dai {
--	sound-dai = <&ssi0>;
--};
--
--&dsi {
--	status = "okay";
--
--	ports {
--		#address-cells = <1>;
--		#size-cells = <0>;
--
--		port@0 {
--			reg = <0>;
--			dsi0_in: endpoint {
--			};
--		};
--
--		port@1 {
--			reg = <1>;
--			dsi0_out: endpoint {
--				data-lanes = <1 2 3 4>;
--				remote-endpoint = <&adv7535_in>;
--			};
--		};
--	};
--};
--
--&i2c1 {
--	adv7535: hdmi@3d {
--		compatible = "adi,adv7535";
--		reg = <0x3d>;
--
--		interrupt-parent = <&pinctrl>;
--		interrupts = <RZG2L_GPIO(2, 1) IRQ_TYPE_EDGE_FALLING>;
--		clocks = <&osc1>;
--		clock-names = "cec";
--		avdd-supply = <&reg_1p8v>;
--		dvdd-supply = <&reg_1p8v>;
--		pvdd-supply = <&reg_1p8v>;
--		a2vdd-supply = <&reg_1p8v>;
--		v3p3-supply = <&reg_3p3v>;
--		v1p2-supply = <&reg_1p8v>;
--
--		adi,dsi-lanes = <4>;
--
--		ports {
--			#address-cells = <1>;
--			#size-cells = <0>;
--
--			port@0 {
--				reg = <0>;
--				adv7535_in: endpoint {
--					remote-endpoint = <&dsi0_out>;
--				};
--			};
--
--			port@1 {
--				reg = <1>;
--				adv7535_out: endpoint {
--					remote-endpoint = <&hdmi_con_out>;
--				};
--			};
--		};
--	};
--};
--
--&i2c3 {
--	pinctrl-0 = <&i2c3_pins>;
--	pinctrl-names = "default";
--	clock-frequency = <400000>;
--
--	status = "okay";
--
--	wm8978: codec@1a {
--		compatible = "wlf,wm8978";
--		#sound-dai-cells = <0>;
--		reg = <0x1a>;
--	};
--
--	versa3: clock-generator@68 {
--		compatible = "renesas,5p35023";
--		reg = <0x68>;
--		#clock-cells = <1>;
--		clocks = <&x1>;
--
--		renesas,settings = [
--			80 00 11 19 4c 02 23 7f 83 19 08 a9 5f 25 24 bf
--			00 14 7a e1 00 00 00 00 01 55 59 bb 3f 30 90 b6
--			80 b0 45 c4 95
--		];
--
--		assigned-clocks = <&versa3 0>, <&versa3 1>,
--				  <&versa3 2>, <&versa3 3>,
--				  <&versa3 4>, <&versa3 5>;
--		assigned-clock-rates = <24000000>, <11289600>,
--				       <11289600>, <12000000>,
--				       <25000000>, <12288000>;
--	};
--};
--
--#if PMOD_MTU3
--&mtu3 {
--	pinctrl-0 = <&mtu3_pins>;
--	pinctrl-names = "default";
--
--	status = "okay";
--};
--
--#if MTU3_COUNTER_Z_PHASE_SIGNAL
--/* SDHI cd pin is muxed with counter Z phase signal */
--&sdhi1 {
--	status = "disabled";
--};
--#endif /* MTU3_COUNTER_Z_PHASE_SIGNAL */
--
--&spi1 {
--	status = "disabled";
--};
--#endif /* PMOD_MTU3 */
--
--/*
-- * To enable SCIF2 (SER0) on PMOD1 (CN7)
-- * SW1 should be at position 2->3 so that SER0_CTS# line is activated
-- * SW2 should be at position 2->3 so that SER0_TX line is activated
-- * SW3 should be at position 2->3 so that SER0_RX line is activated
-- * SW4 should be at position 2->3 so that SER0_RTS# line is activated
-- */
--#if PMOD1_SER0
--&scif2 {
--	pinctrl-0 = <&scif2_pins>;
--	pinctrl-names = "default";
--
--	uart-has-rtscts;
--	status = "okay";
--};
--#endif
--
--&ssi0 {
--	pinctrl-0 = <&ssi0_pins>;
--	pinctrl-names = "default";
--
--	status = "okay";
--};
--
--&vccq_sdhi1 {
--	gpios = <&pinctrl RZG2L_GPIO(39, 1) GPIO_ACTIVE_HIGH>;
--};
--- 
-2.43.0
+That's unfortunate then. Perhaps you'll just have to trust me that there
+are in fact tests where it's only valid to restart the system and not
+fake restart the system.
 
+> > To phrase that another way, you're trying to introduce workarounds in
+> > the code to avoid having to make the test work like a real system. I do
+> > not think that's a good idea for a test.
+>=20
+> Which work-around are you referring to?
+
+Everything you're doing here.
+
+> I discussed this somewhat with Heinrich earlier. We didn't really
+> resolve it, but I did point out that if we want to reset/reinit the
+> EFI system within U-Boot (as we do with driver model, devicetree and
+> some other things) we can implement that when it is needed.
+
+That would be even more workaround.
+
+> > > > The test seems not to build on anything but sandbox. We should be a=
+ble
+> > > > to test the boot methods on QEMU systems.
+> > >
+> > > Most tests run only on sandbox. You are welcome to extend the tests to
+> > > cover more architectures. However I believe the most important thing
+> > > is to test the code itself.
+> >
+> > We also need to write things in such a way that we don't have to start
+> > over from scratch when testing on other emulation platforms. It's true
+> > that it's unlikely anyone will run the full cycle of booting various off
+> > the shelf distributions and architectures and boot media for every
+> > change. But I've got ~2 hours between assembling a pull request and
+> > looking at the build results and anything I can throw at a host and come
+> > back to in that time I'll do every time. Things that are automated but
+> > marginally longer I'll do with every tagged release.
+>=20
+> I'm not sure how best to attack this, even now. With the Labgrid
+> integration (I am still hoping will land soon) I can boot into QEMU
+> and perhaps into grub, but booting right into a distro is going to
+> need ssh and networking (which is fine, it's just another step).
+>=20
+> Anyway, that is a bid sideways of your point. Sandbox tests are always
+> going to be much easier to write than Python ones. They are faster to
+> run, as well. We can't do things like 'assert_nextline()' with QEMU.
+> Also I can't single step into QEMU with the debugger. Also with
+> sandbox, it is possible to check the internal U-Boot-state, whereas
+> with QEMU we have to print something on the console. So I believe that
+> writing a QEMU test is an entirely different job from writing a
+> sandbox test.
+
+I'm not sure how this is at all relevant to the point here. If you make
+the test application follow the UEFI spec this is no different from the
+existing hello world test we have in most respects.
+
+> There is something fundamental here which can be changed. Sandbox is
+> really just better for testing U-Boot code, so long as we design the
+> code properly for testing. Of course if we insist on not designing the
+> code properly for testing, that erodes the advantage. But that would
+> be the wrong direction.
+
+To be frank, I haven't been able to run the whole sandbox test suite
+locally in the last 5+ years if ever, and had to throw it in to docker,
+and then just got tired of fighting it and only see it in CI.
+
+> > > > In efi_exit_boot_services() we
+> > > >
+> > > > * call dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL)
+> > > > * call bootm_disable_interrupts()
+> > > > * call board_quiesce_devices()
+> > > > * disable all EFI timers
+> > > > * disable EFI notification
+> > > >
+> > > > What do you expect U-Boot to do after all of this? You cannot reaso=
+nably
+> > > > do any follow on test without rebooting.
+> > >
+> > > OK, well we can always add more code later as needed. So far, this
+> > > seems to pass CI without problems.
+> >
+> > What EFI-based tests do you run on sandbox after this, without resetting
+> > the system? That would perhaps help clarify the point.
+>=20
+> It depends on the ordering of things in CI. From what I can tell most
+> (or all?) of them run after this test.
+
+Well, you shouldn't and I think earlier Heinrich was saying that perhaps
+we need to NULL out a few things more then.
+
+> But if this does cause a problem with future tests that we add, we
+> should be able to fix it easily enough. In fact it would be nice to be
+> able to re-init EFI.
+
+Sounds like a lot of work-around work just to avoid testing that we are
+in fact exiting services and resetting like we should.
+
+--=20
+Tom
+
+--X+TzLU6xNu5xlVPX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmciSnoACgkQFHw5/5Y0
+tyyBuQwAsEwWLqVvZ0vPtYuz2HC6IVs6aP+C5VysPwoudT7mEZRwvTGIhvycf2z8
+xGRXAHO+RRsbKjOY82AOkt/zWg4lOCNCvvlRccbQ1VAErkLd1MWHSAL5m0yu1xCU
+YorWC6TFV3O7Qtvxy2O/wYJtoHXI/8VLjuXQQjA7Bd0D9Ka7sjqHH/uVXDA1Cg92
+GcmmHoLnWKbs4RwNADXb+8gbdaJUUXJL32WQnTDRx/WqELIv+X9xoZikAPOOB5ws
+LxGD9bC86y46kqUCfHHzbUaedYfi+kQp4J0Ewb2WAW4rbE01G4JHmpnkyuu/rMeI
+3tGVK1aOkp78ub8/tNDBksQs/UK4wjABcb2w6RpPvarS0dHLuPC3gIA85i4Y11CF
+LkTG/FlRctsOtetzU9ItMRFaIJ7oHHp57uqbtqPipfJWGi4cz1doF0B1TRuOEyqd
+9NKKR7L/UBNbhmEMCBEQfVHsmV/qP60xqAm5trQR0seDbdXSMJbHdDG6rnPF7UNg
+38Dk3GOd
+=IXMK
+-----END PGP SIGNATURE-----
+
+--X+TzLU6xNu5xlVPX--
