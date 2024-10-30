@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FC96D6B6D1
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 20:29:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B17D1D6B6D4
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 20:41:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E76D8925A;
-	Wed, 30 Oct 2024 21:29:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1A55B89255;
+	Wed, 30 Oct 2024 21:41:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="aevYuEay";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gozo7YfV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 477FD89259; Wed, 30 Oct 2024 21:29:43 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A20EC89257; Wed, 30 Oct 2024 21:41:13 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5209889212
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 21:29:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B589789250
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 21:41:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730320178; x=1730924978; i=xypron.glpk@gmx.de;
- bh=zAez+3gdHPwKWMGaa4tvOnnnPAAoc7NWR8pGKZZP5Hw=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=aevYuEayWQEjQwJGkDlwRnvZ4J66JCH6zHFnqX6QqEyM7xeFAwhelN4NV1e9gSOW
- w6Di+d0q5cAwH7jH1sMXl4UNdtSAKmGaWxTONOcdmKV+9lQs+BQ2VylG6q+dTaDSn
- lRT0R8ZHyU/RHORf2Wo54EimraK82SC9wrBlEAV86qmbY5Wz7RITJfsCuW2cGubl5
- 6hOZnPAsvnyeE2JdAUoBcjQLlNNr2720qtA2I2VFcJ62IPnsfm/ZW7coB/3YWdvzc
- PB1re0vpXrf9jamm4RzTz8/3V83p64TbeTHsjIDiDPzBM7BQjUazgZsroqoL1I5Ck
- dLc/v4kVY/eZUYOjcQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [10.43.6.224] ([87.215.50.114]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M7b6l-1tECsB2IBx-002Ikb; Wed, 30
- Oct 2024 21:29:38 +0100
-Message-ID: <afbab923-73de-4743-8a7b-0891e4edcc96@gmx.de>
-Date: Wed, 30 Oct 2024 21:29:37 +0100
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-37d4c1b1455so197737f8f.3
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 13:41:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730320871; x=1730925671; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TSIdJGJ1wGgGaCOpzh4/UzsIRvE+gXp92zLNUF/zjrQ=;
+ b=Gozo7YfVeuUkS4iRFSSQJKqkt2Eh/7spR+7QSP0ttjqcDdbYR8tefHDn8puaCBmiCP
+ cg7WNGcv6nOZvldcsWVSP093UzfjBNJfaHjUZBJ3KMpZFpGDw6F7dWjFFaIHzFfdVgYu
+ e6Rm+DarPN/gcaAg39MBxfv53kY+xtg3qhHI/+y1t9yF4k0uGf966WfOuS0DfV6vGqyn
+ ypNB0pmsMrNynLY1auUt8ciARQUnutCjjmnXQIVjRpoCVppGjFwUHqQnM0FF7OuxBTQN
+ NJ6cEuKuI9b9CFQ1kkpy98aZsz8z2voH0WYbRXfcyVcDZpG7Lumtj9fpAnoKJlylTk6i
+ LvRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730320871; x=1730925671;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TSIdJGJ1wGgGaCOpzh4/UzsIRvE+gXp92zLNUF/zjrQ=;
+ b=op+MafiXD73+TAdppHNYEuMmP5DmsXiFGDtLV0kvBjO7aoT4/GDX+1qJKDFrSxezT1
+ HbKZk0VtSHNxcLOfNXCEiYrrp3KdoFa6z3N0aautG3gxqF2fJdt2kFEvYeDrXKpLX7aO
+ sI09FeQoFbQgoEUv8uhvZ8V6loXmm2BzSjJixVSrxriwK+WfTbOZr6wfsPPUoelin60o
+ COFEz7qnbRpweTgDYu96zwAmWjxdkH6u4QmzeMW86by+B0PVwFwO9TleBEeur6U3Dgj0
+ NxIE/FruFZsIlQNqsI3Z72xXdNLJ9SErpdSxoroxeyYyJiSo2JdxqG1HAOuJxJ5rjfqD
+ mm8w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXinsEatWJsUvmy5vNxC3GDC55yH8vdFMxXib7AjGejpHPvmTn6Dr0EXH2Pr2nA1h4ebITVmbo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyka2FRShQMp+hPVaDXPidIwE3kDZaWMXlJ6JPYh4N1v/6vZFRG
+ HqcmSkLqUmx4fgx5ptnoXf6NH0z6bUdKv/wd7tug83wRW6+TEIa2ggF3bzrEfjQ=
+X-Google-Smtp-Source: AGHT+IGQ+M1M2a0KmCzb6DOON5g6vjx8wpzRMYtZm4VYqDb3qTJLtUkCA+9TBCmUU2yvbhl2jMJmfQ==
+X-Received: by 2002:a05:6000:1046:b0:37c:d537:9dc0 with SMTP id
+ ffacd0b85a97d-381b70578bemr3502539f8f.12.1730320871046; 
+ Wed, 30 Oct 2024 13:41:11 -0700 (PDT)
+Received: from localhost.localdomain (ppp176092143132.access.hol.gr.
+ [176.92.143.132]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-381c10d49c9sm56346f8f.37.2024.10.30.13.41.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Oct 2024 13:41:10 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Tim Harvey <tharvey@gateworks.com>, Eddie James <eajames@linux.ibm.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: Make tcg2_uninit() static
+Date: Wed, 30 Oct 2024 22:40:59 +0200
+Message-ID: <20241030204100.90946-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] lib: efi_loader: Fix efi_dp_from_mem() call
-To: Moritz Fischer <moritzf@google.com>, u-boot@lists.denx.de
-Cc: ilias.apalodimas@linaro.org, trini@konsulko.com, pwildt@google.com
-References: <20241030201608.1247488-1-moritzf@google.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241030201608.1247488-1-moritzf@google.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:H5lNZ3Q5FiqAurYad4X5A+nAqQkpnjQQn1DYXV9btzdV3e4AJXp
- Ek0zY+RQw9HUGebYpuvLuoEVqhrHtHs8PVwGUbBoE0++AcKWk3UtjEvzESRZLK3y0/02X7/
- vvc1ddUBBLuCHtqAYh0H/UeRpPjWNQzIP9qZf5ngs7bnHhdprhbGI8KJdupfVj0p1Vix3TY
- ylEOoyR+pOXny9bUrAdFw==
-UI-OutboundReport: notjunk:1;M01:P0:FjojhGODKZo=;y0krRzBsVAHxloDPfamxExwVBvF
- YgpYooqjJQn7LTea4Y5QqQNN/UC1KT6Kd45GGHRNsDgBSBdqBm+b/vLEHOZDgsbSJMbL2J4s8
- A8ctS5xmMxPp+LodKqlOpg8GOb4FJrfROGiwAKNhNirjgmigWEtuBcppGN3Nv/65pj+qVS9gl
- XYDf7Uj7s1oIvVMjfLBG4qwKN8HFEQQpCcnHmlvSKlsu30lw25ZdBaACQv1lWFUO/KOjvqcMp
- sVSZrgtJpasTfaRUOonY19viaYTGLaRlnDYD8/5Fn5ytK1JD19pVACoKVCl2d0Q4mnIu8Hyli
- Ry2VxmPU47LFDJfbRo3wLxFyqiDNKNEPuYluNpiV2Guhc+KEkwmmTkHey9+ntpfy+dXXNBA4x
- NS0KcgTZbi8NZEWFEvTIVSvrOLoHcErGPxqUnz4MaiQSAJ0L8X6dZ0cyTv6yOvl++T5tMG3pu
- UWxasfghDwAChw2SmJne3WtDBu03X3xLpDYSoWeJbj6zM6QLkAOMOqYCPcHyTAU4JPQpiFNlH
- iKvOy9BUKhAXqiEFGQKLegci1e1st6jmLlxCkS3nxpSHBQG8FjBMFzGleAR7oHgqJF1tLJC5v
- RuHx2xDoTg5lilw9yFjimJfPmlqfUWimFKDncyUpZE50Z/7AsC+5ZtVvbMSFCv5GuYmJNutui
- mcipsODOOMt3R5JM0nIqVNtI9wC7mq+bWjSglW1p/FLBKZLd7K9MPluxu4AzU76HPbCTbB1Gw
- fJLBrmtmUkiGJFinBHfCsPPOgWCBHiUF+IQEnHxUlAw9f+ih0Y/J5kgMNPe2p5QJ2AJEh4pZg
- 9DPQF+PpcmsgGW7MIMZLYdzw==
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,35 +93,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/30/24 21:16, Moritz Fischer wrote:
-> The function expects an end address but is being called with
-> an size instead.
->
-> Fixes: 6422820ac3 ("efi_loader: split unrelated code from efi_bootmgr.c"=
-)
-> Signed-off-by: Moritz Fischer <moritzf@google.com>
-> ---
->   lib/efi_loader/efi_bootbin.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> index a87006b3c0..798bcd6eee 100644
-> --- a/lib/efi_loader/efi_bootbin.c
-> +++ b/lib/efi_loader/efi_bootbin.c
-> @@ -137,7 +137,8 @@ efi_status_t efi_run_image(void *source_buffer, efi_=
-uintn_t source_size)
->   		 */
->   		file_path =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
->   					    (uintptr_t)source_buffer,
-> -					    source_size);
-> +					    (uintptr_t)source_buffer +
-> +					    (size_t)source_size);
->   		/*
->   		 * Make sure that device for device_path exist
->   		 * in load_image(). Otherwise, shell and grub will fail.
+This function is only used locally, so make it static and quiesce
+the W=1 warning
 
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/efi_loader/efi_tcg2.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-The  efi_dp_from_mem() invocation in  efi_dp_from_name() seems also to
-be affected.
+diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+index 45f451ef6b6d..866a529857ef 100644
+--- a/lib/efi_loader/efi_tcg2.c
++++ b/lib/efi_loader/efi_tcg2.c
+@@ -789,7 +789,7 @@ static const struct efi_tcg2_protocol efi_tcg2_protocol = {
+ /**
+  * tcg2_uninit - remove the final event table and free efi memory on failures
+  */
+-void tcg2_uninit(void)
++static void tcg2_uninit(void)
+ {
+ 	efi_status_t ret;
+ 
+-- 
+2.45.2
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
