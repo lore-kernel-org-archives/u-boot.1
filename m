@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5921D6B6AD
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 16:49:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C20BD6B6AD
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 16:49:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB02C89222;
-	Wed, 30 Oct 2024 17:48:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4FAB189234;
+	Wed, 30 Oct 2024 17:48:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="B2LRbcSL";
+	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="ULXPrRry";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88EDD8924D; Wed, 30 Oct 2024 17:48:38 +0100 (CET)
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur03on20708.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260c::708])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1A39489234; Wed, 30 Oct 2024 17:48:43 +0100 (CET)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20711.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::711])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9000989206
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 17:48:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 250A389206
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 17:48:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q0URUbeG79XLqQevgj6XCkdlne9nf+qtP1q05GPwkIHyjSxcnojtiixefFYyjvqH9mr2abjjiRah2QAVDy9XvopSzTNQEwJg7NaUJ80HAcDcs5N/TNAhcc6JqSZyjZlwbU2LqUzqgnFGh14gLHCyheeRhQRG5I+CSGh7ePbvZnp8YwcelSKa+jTQxZs+YwNi04hsvlNFmQd9u9qN3mUPqkqBXb+h+SNaA4ozVTukq1GLrsM18JmKUYq7Qyszxi4RxNdp7W3xSW9WdjaN6IcmZpBemRnRaJsRUfkW1XX6lK1eH7a47Gc55ddkr5LPJ/nqDXSZfChXmvSsErDc2SnsfA==
+ b=uQpNEpDebSOISC108OHxo/IcP7DDPLl5SxL6zMHrVZNLWOEizPbk5k35tNDtXnuQgR+ErAJQGOL9zMyF4xyLijA9KoI7XGMeuMFsBrGwFVDuEdpwKdWHUUmh31GjC6zTI4UhNrzsFkHA5eZ8ffbAgXF3TIzIg7LtyXlWitqSMUmm68jrfseg/+hnypdpdJmizYi9EcTPp/09/Vsjs+k54uDgoyE7BwmxmV9cpzGxg6IoE2TJxwsvqwn1vdyjLjcyEviC78fpDawmJYE0Cd8GGQ9yy0P6e3v13I94QwCmLXc4Y6lCNmmQpCE1kS0VwJiFLVkEMXAXfkxDKuvKcwSZzA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=O5CP0PexVJbfFkq5TQKweQfYLlUByGbHci1IsNBdv0k=;
- b=nZdjqBYVT3d2L3rbFe7cj1/O709Kodwutlp8I6FMM3vCir+4mM9FQEDg9ctlniOb5WXlgkfqhPUtrYwHeCudKoVz4Q1eccx0lZv1nGWNHcJIv97BJbdi4s4fUEmR7iyRxB7LGC9mUR10B9aEZTqOIC81E9vdnBd1w9TXrAwCeLXbGT+rB+QPeeTyBWYNmyB68cRTjd8IXdIk+X0u+3d4noF+Ie0uzaXhGHy+ay68DvoQdV3+nLLfS45UdXWfmWArNcMvCFILcuErjRjiqD0/2sBy3k+ZQ+sn87gC4XmfMZBf45xawAMKg9XHVMLgI0tRzJ8zY947J32LPEi8yXrH/g==
+ bh=ggcPn6sbY8xvw6hSGU48NLVLmTPnmL0qyXC6sz+PaPQ=;
+ b=QbzYZ7xYVfsrsWO31vUxX4GXpPvF9/qUJ2W8jMb363RiGLeBO7P0P83jof6eWtzHB7EYcGLwtviHpTCwTXbxyPSbi38wHy3K0+JY1Z4UmbVNlEk1ajCjTNrVYU17pltmC1FTZLcj0TLUmwt5sFA9Cg9U4viyjtQHYZZ1n9CT1Vuy0PibTt6PdwuJi3FkyWS3KEB16UDEKKok5PkWkF03vWHXEF0R0disQDTvwvPFn9UzpGc7R5W+GfVBRe7BydJsxBfF30tyHXItVldtHO7dwit2wwzjsqezsOyNDQa03KbpcDkgAaG5M+9PQ4RVKBeNmNcmIN6jtd/+6r9O6FRtWQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
  dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
@@ -42,18 +42,18 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=phytecmesstechnikgmbh.onmicrosoft.com;
  s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=O5CP0PexVJbfFkq5TQKweQfYLlUByGbHci1IsNBdv0k=;
- b=B2LRbcSL4rtXHBoNKQeMLF9JIvVeGqvcszLDQKpyy/Jxbligh4CFbSPhEhMTcxYNq3U8lYPk4oPonmN1YADiC+xw/nkTuh0YeTzEIZEwSqa0vjHC0jWObMeDYVcVyObWF+2T35fkr4rv9jq+g4u/W7lTendj9gVzgyTT3P0oPoI=
-Received: from AM0PR01CA0137.eurprd01.prod.exchangelabs.com
- (2603:10a6:208:168::42) by GV2P195MB2259.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:150:d2::19) with Microsoft SMTP Server (version=TLS1_2,
+ bh=ggcPn6sbY8xvw6hSGU48NLVLmTPnmL0qyXC6sz+PaPQ=;
+ b=ULXPrRryP8d1PU7rYZBG+P5VBbqTThmh5rZJMDdbaIvaXm4ogwtgUpo29DoBm77HTqrlABdxaiHVT1axQweYgop7/4g34wmpsyQIPaPxahc2iQvgPi8Pi8+UManQrnzCzrk/upgCKRsABwoVViQdIAVsVEb/dLDnZsUCNVg7A/Y=
+Received: from AM0PR01CA0109.eurprd01.prod.exchangelabs.com
+ (2603:10a6:208:168::14) by AS1P195MB1517.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:4a2::8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.32; Wed, 30 Oct
- 2024 16:48:30 +0000
+ 2024 16:48:33 +0000
 Received: from AM3PEPF00009BA1.eurprd04.prod.outlook.com
- (2603:10a6:208:168:cafe::b3) by AM0PR01CA0137.outlook.office365.com
- (2603:10a6:208:168::42) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10a6:208:168:cafe::c2) by AM0PR01CA0109.outlook.office365.com
+ (2603:10a6:208:168::14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.29 via Frontend
- Transport; Wed, 30 Oct 2024 16:48:30 +0000
+ Transport; Wed, 30 Oct 2024 16:48:33 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -63,7 +63,7 @@ Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
 Received: from Diagnostix.phytec.de (91.26.50.189) by
  AM3PEPF00009BA1.mail.protection.outlook.com (10.167.16.26) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8114.16 via Frontend Transport; Wed, 30 Oct 2024 16:48:30 +0000
+ 15.20.8114.16 via Frontend Transport; Wed, 30 Oct 2024 16:48:32 +0000
 Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 30 Oct
@@ -71,14 +71,15 @@ Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
 Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 30 Oct
- 2024 17:48:27 +0100
+ 2024 17:48:28 +0100
 From: Wadim Egorov <w.egorov@phytec.de>
 To: <trini@konsulko.com>, <n-francis@ti.com>, <afd@ti.com>, <d-gole@ti.co>,
  <sjg@chromium.org>
 CC: <d.schultz@phytec.de>, <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: [PATCH 5/6] arm: dts: k3-am642-phycore-som-binman: Add SoM overlays
-Date: Wed, 30 Oct 2024 17:48:14 +0100
-Message-ID: <20241030164815.1763506-6-w.egorov@phytec.de>
+Subject: [PATCH 6/6] board: phytec: common: k3: Apply SoM-specific overlays to
+ OS device tree
+Date: Wed, 30 Oct 2024 17:48:15 +0100
+Message-ID: <20241030164815.1763506-7-w.egorov@phytec.de>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241030164815.1763506-1-w.egorov@phytec.de>
 References: <20241030164815.1763506-1-w.egorov@phytec.de>
@@ -90,50 +91,50 @@ X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
  (172.25.0.12)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF00009BA1:EE_|GV2P195MB2259:EE_
-X-MS-Office365-Filtering-Correlation-Id: 586d9e9f-d9cf-41fc-c12d-08dcf902af4f
+X-MS-TrafficTypeDiagnostic: AM3PEPF00009BA1:EE_|AS1P195MB1517:EE_
+X-MS-Office365-Filtering-Correlation-Id: e47c69db-d57a-41b5-8a7d-08dcf902b0bc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?cUmv6HXW4z10SL/KzpBdTv9WBozFg55a2I4mZ3wkSfZbPQ0srUur/OxDEvMl?=
- =?us-ascii?Q?B4LMaTjntxrs4aJ7qu2PMwJXio5asVTI+bIUGS4oa3ZmzDrCWbr/aREtncFC?=
- =?us-ascii?Q?XxX7+8yzGMhbRmqXTRO+YvTk10GeI6qbNiJH6mzQ9tEjZBH024ueYaj3fKMX?=
- =?us-ascii?Q?wnfUm5ZEYbGu5JO1XSGvedqWDuDSHUyl9bpthMbpjhmclxRmgn81kemF0N5+?=
- =?us-ascii?Q?dCzqxIH7gdQAWwiEvPBJLOs+j/QGvUPsGcBxn7IUcssiMxqdR2rl12VZcU7g?=
- =?us-ascii?Q?/Ay0nVGRgfxy4jt1iWSMzfT2UmRQONZg1QcO1KHmH1SSRXOWYqjhjwEUYJHr?=
- =?us-ascii?Q?OAAOHFau+Ge89Z3xkl3yG/1zFX2LN4JF1MR47oZxtY7stNPOVybNseCq6aSk?=
- =?us-ascii?Q?Gl0E1RhWuRvCNG9uCq6INuv5urC6q81RMpf+2ptU1HIy0yGfdD3TLg8ZtpJE?=
- =?us-ascii?Q?adUJEy3uqCNUlPTA6u4VHrUmgcEdCvXpgC9EAIqy2h3woFyUeo1ceH9Wiyl+?=
- =?us-ascii?Q?s0DLkI6Wyh7I4YgsH59RFxutKRbB4x+Y0VSO4gbndWjlB0Axa3SaEHnLQHLq?=
- =?us-ascii?Q?5OzVV6Wzs0/IMxy5lgvTqhY1BShkE8MdcoUAE5KdW8MH6PgMeDblR4HrhRp/?=
- =?us-ascii?Q?I1Ni2kKMgBtlI249UXS0h6TsTtpJwMGZ8psfbaIyOfHr260nlz1pETEK3B3J?=
- =?us-ascii?Q?wAh8kIcE1wSb4AmRrCWR9lY3FP84uAVDnSJy5/OVdKDh2c31PtDUjbOw7pUy?=
- =?us-ascii?Q?XpjxXZPNN+o7dNRyvKqkP1jk1x7mA+jTHbfE3HlwP5NSFwTLi5stLW0S4ivD?=
- =?us-ascii?Q?fVHbKFOJPabIDNcemue7yNUP1OU8RstqJYGqhC+eVpPz7SWy+ht78RRGauSp?=
- =?us-ascii?Q?oOIO1bkVTdQy6z30MkSAuUlfq6xKy5UJpjWI63u6P1mVcRT0W3i8FFUOdFGm?=
- =?us-ascii?Q?LXgiF36eath9JTMy2QSy8p6KxVYiw6sli2B40VrvF1kmDUHW1/oVPVbRRWIG?=
- =?us-ascii?Q?Dh7DEsh+/Dzlu34N9e4leyZRW3ba659r5N54iG+7BzTgqDBShkZH72Ppc6Wp?=
- =?us-ascii?Q?GcpIrt5DUS+1ilxdSq0O4D7brcCpBmZTTXwJsxbFrsr0uB1vnQfqdgf+V4O1?=
- =?us-ascii?Q?DVOiTx4D9B2hIja95TO51DBAgfj0lxNhy1kSCgKPKNU5+SkiKQqlqaZDkWnk?=
- =?us-ascii?Q?IjZCpC93ZyLPijX9y9JVJTYrDci4v3eprnxGSjK+CZu7xMPTJxO9Ea2wYgPJ?=
- =?us-ascii?Q?iDtUlOB97nMRqrNPcJpC4w9nUz5qI5qRqjkwtBUIJ37g1IbDBOTzgTCxQHc4?=
- =?us-ascii?Q?0YIgNmke6v4nqMfE1Cc/zm7uXTIMtJgaZ9DweQwDxC2RnXrNY9LQDXbViCP0?=
- =?us-ascii?Q?xBXcnszsrImz9Zb3VZYxxDJ/qOszDIY14rdCn6oP/3wOZdqI0Q=3D=3D?=
+ ARA:13230040|82310400026|36860700013|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?cjqhKfxfWP5mOwD4smiof3rPmFD/oFY2J8trTR0ID6/i/JEveTzPXC9BW58+?=
+ =?us-ascii?Q?RAdZRq5cHE6MiwwBzkdPuyZrTl9P5PhxnwAwPXJ1dNu+QkmXcOkBTveEN5t1?=
+ =?us-ascii?Q?0zxAh8xK06+9T+uCe1vo3dRxk+O8v/xQvJIskPEtiGmlMJPC+LyswBxMjK94?=
+ =?us-ascii?Q?yv5ESp5m8djTJHN3rg8Is8jRk5OFT11Ap3xHmrHENYygYKJrGqIS1LTwiyjS?=
+ =?us-ascii?Q?mv8jgaUkT0j0W+bhccKP8Spmw5n+hUbQR92NgWm7oU6soY8izsUhubRM0NE6?=
+ =?us-ascii?Q?EYky/2Oo/m//BTm3TiNhhbW0NcvYJ+ORbLodgf8TabMz72uSKEeOjE6z+E8U?=
+ =?us-ascii?Q?XPevJjmADQ/EzB9KrrGCLJARwWzZ8uypKEEXE2pw9kUuzcQNWbvIwpTkM3Av?=
+ =?us-ascii?Q?3B8cCR+TSGBVkDGjMaWcdQVTShG/TmtJLTrYjoEDXverIUXE55+xf4qQIEPT?=
+ =?us-ascii?Q?PelBszpAEp17iGOrrzngi9rKIJ5UcEnvABA1smwe5/VHqBhvUdgHVTHgfbEF?=
+ =?us-ascii?Q?urrViXr1MPxE0RJJCv0fTm1dejVLSGQ9BdTH9FaTwlZslREfz4Sz3fgD2RTe?=
+ =?us-ascii?Q?3q8FpgEiQVc2Cq7GMPX6nwBUwfOvy3Ykx8l1AFW9cOB9KosGKnvFC2BP5l4w?=
+ =?us-ascii?Q?Aa8NglEeDgbS49jy3qbNT16HQCNDZhCn1bEAvaUYI3a8xV+iQood5X8wkNfC?=
+ =?us-ascii?Q?XCw7gw5BNc2fM7skrosgMGxdU6vMzy139d9qcGQS3qGjjyrCd7LRC7jb8JBz?=
+ =?us-ascii?Q?D8wB8pIE7MJrdAL7/WJ2W6pT/lES489q1wFbtEAL4ysGlPyrzpOldWwV3fhJ?=
+ =?us-ascii?Q?uvaolvLNJ67K13bSjFIsBVVAbdJP3AQpHp5/eq463hqH+FXTAzalUgsv85a6?=
+ =?us-ascii?Q?dK+r/DwfbBtY5+NHupG8rry8kn02ua1P8AErZ5584HJMY881tXV604qpwuPQ?=
+ =?us-ascii?Q?INsarSW2HtKXTnXMRP+ttOJbv+7CIV6JDEKgxkkWCJDr7lDOPZXXxutS9KjX?=
+ =?us-ascii?Q?e9NZHDnJ2+/b+bCcnr9uDwZrqcYHvgjAmN5X7vjz01fX6525HgZ2oZ60FiUK?=
+ =?us-ascii?Q?uIbNJNGWJkVKond/Zda+8qc/rKMBF4XtWfe7GeYN2mn6YjcFtr0eKpUr+JHL?=
+ =?us-ascii?Q?6QYMRJWE7qdQ2yBqP4Jo81kMymr2ByrdvtgW3QddMJCwpi8Ao7kx++xtyIm4?=
+ =?us-ascii?Q?ecnzbioRyPDnsBgp1IpDYQn6sJcRAcZ15ou0uaBxlPGrdQlCA+nmtKI/r+SV?=
+ =?us-ascii?Q?3DHCIYziMvgaB1TckytDu/s8ZhErMx9zJlege3QThsOqihu1El8Q4vxRO6e0?=
+ =?us-ascii?Q?f5kuTIla9Tbbq/64tv3IMpkXWrf9xt1XAqSAhQg0FFZWjbibLHH3uO/rYB35?=
+ =?us-ascii?Q?Y16CplSn6jKGNR8EDU+/INNe+CdRYQceoKQ+eM3sPORJfyUGaA=3D=3D?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
+ SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2024 16:48:30.5945 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 586d9e9f-d9cf-41fc-c12d-08dcf902af4f
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2024 16:48:32.9852 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e47c69db-d57a-41b5-8a7d-08dcf902b0bc
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009BA1.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2P195MB2259
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1P195MB1517
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,86 +151,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Include SoM dt-overlays that handle variants of our SoMs into
-u-boot's FIT image.
+Our SoMs are available in multiple configurations, managed via device
+tree overlays. To determine the specific variant in use, we read the
+EEPROM and apply the appropriate overlays during boot to the device tree
+used by the OS.
 
 Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- arch/arm/dts/k3-am642-phycore-som-binman.dtsi | 54 ++++++++++++++++++-
- 1 file changed, 53 insertions(+), 1 deletion(-)
+ board/phytec/common/k3/board.c | 73 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 73 insertions(+)
 
-diff --git a/arch/arm/dts/k3-am642-phycore-som-binman.dtsi b/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
-index dd0967079b6..88d6c40e95c 100644
---- a/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
-+++ b/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
-@@ -344,6 +344,54 @@
- 					description = "U-Boot for AM64 board";
- 				};
+diff --git a/board/phytec/common/k3/board.c b/board/phytec/common/k3/board.c
+index 3d7e090ccaa..346b2b6491a 100644
+--- a/board/phytec/common/k3/board.c
++++ b/board/phytec/common/k3/board.c
+@@ -6,7 +6,9 @@
  
-+				som-no-rtc {
-+					description = "k3-am6xx-phycore-disable-rtc";
-+					type = "flat_dt";
-+					compression = "none";
-+					load = <0x8F000000>;
-+					arch = "arm";
+ #include <env_internal.h>
+ #include <fdt_support.h>
++#include <dm/ofnode.h>
+ #include <spl.h>
++#include <malloc.h>
+ #include <asm/arch/hardware.h>
+ 
+ #include "../am6_som_detection.h"
+@@ -97,8 +99,79 @@ int board_late_init(void)
+ #endif
+ 
+ #if IS_ENABLED(CONFIG_OF_LIBFDT) && IS_ENABLED(CONFIG_OF_BOARD_SETUP)
++static int fdt_apply_overlay_from_fit(const char *overlay_path, void *fdt)
++{
++	u64 loadaddr;
++	ofnode node;
++	int ret;
 +
-+					blob-ext {
-+						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-rtc.dtbo";
-+					};
-+				};
++	node = ofnode_path(overlay_path);
++	if (!ofnode_valid(node))
++		return -FDT_ERR_NOTFOUND;
 +
-+				som-no-spi {
-+					description = "k3-am6xx-phycore-disable-spi-nor";
-+					type = "flat_dt";
-+					compression = "none";
-+					load = <0x8F001000>;
-+					arch = "arm";
++	ret = ofnode_read_u64(node, "load", &loadaddr);
++	if (ret)
++		return ret;
 +
-+					blob-ext {
-+						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-spi-nor.dtbo";
-+					};
-+				};
++	return fdt_overlay_apply_verbose(fdt, (void *)loadaddr);
++}
 +
-+				som-no-eth {
-+					description = "k3-am6xx-phycore-disable-eth-phy";
-+					type = "flat_dt";
-+					compression = "none";
-+					load = <0x8F002000>;
-+					arch = "arm";
++static void fdt_apply_som_overlays(void *blob)
++{
++	void *fdt_copy;
++	u32 fdt_size;
++	struct phytec_eeprom_data data;
++	int err;
 +
-+					blob-ext {
-+						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-eth-phy.dtbo";
-+					};
-+				};
++	fdt_size = fdt_totalsize(blob);
++	fdt_copy = malloc(fdt_size);
++	if (!fdt_copy)
++		goto fixup_error;
 +
-+				som-qspi {
-+					description = "k3-am6xx-phycore-qspi-nor";
-+					type = "flat_dt";
-+					compression = "none";
-+					load = <0x8F003000>;
-+					arch = "arm";
++	memcpy(fdt_copy, blob, fdt_size);
 +
-+					blob-ext {
-+						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-qspi-nor.dtbo";
-+					};
-+				};
++	err = phytec_eeprom_data_setup(&data, 0, EEPROM_ADDR);
++	if (err)
++		goto fixup_error;
 +
- 				fdt-0 {
- 					description = "k3-am642-phyboard-electra-rdk";
- 					type = "flat_dt";
-@@ -368,7 +416,11 @@
- 				conf-0 {
- 					description = "k3-am642-phyboard-electra-rdk";
- 					firmware = "uboot";
--					loadables = "uboot";
-+					loadables = "uboot",
-+						    "som-no-rtc",
-+						    "som-no-spi",
-+						    "som-no-eth",
-+						    "som-qspi";
- 					fdt = "fdt-0";
- 				};
- 			};
++	if (phytec_get_am6_rtc(&data) == 0) {
++		err = fdt_apply_overlay_from_fit("/fit-images/som-no-rtc", fdt_copy);
++		if (err)
++			goto fixup_error;
++	}
++
++	if (phytec_get_am6_spi(&data) == PHYTEC_EEPROM_VALUE_X) {
++		err = fdt_apply_overlay_from_fit("/fit-images/som-no-spi", fdt_copy);
++		if (err)
++			goto fixup_error;
++	}
++
++	if (phytec_get_am6_eth(&data) == 0) {
++		err = fdt_apply_overlay_from_fit("/fit-images/som-no-eth", fdt_copy);
++		if (err)
++			goto fixup_error;
++	}
++
++	if (phytec_am6_is_qspi(&data)) {
++		err = fdt_apply_overlay_from_fit("/fit-images/som-qspi-nor", fdt_copy);
++		if (err)
++			goto fixup_error;
++	}
++
++	memcpy(blob, fdt_copy, fdt_size);
++
++cleanup:
++	free(fdt_copy);
++	return;
++
++fixup_error:
++	pr_err("Failed to apply SoM overlays\n");
++	goto cleanup;
++}
++
+ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
++	fdt_apply_som_overlays(blob);
+ 	fdt_copy_fixed_partitions(blob);
+ 
+ 	return 0;
 -- 
 2.34.1
 
