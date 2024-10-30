@@ -4,80 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D15CD7494E
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 01:15:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA63ED74957
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 03:08:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B951B891BB;
-	Wed, 30 Oct 2024 02:15:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1DF4D891D7;
+	Wed, 30 Oct 2024 04:08:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RHllANpm";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 978DD891CF; Wed, 30 Oct 2024 02:15:04 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AAC1D891D4; Wed, 30 Oct 2024 04:08:36 +0100 (CET)
+Received: from smtpbgeu2.qq.com (smtpbgeu2.qq.com [18.194.254.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A31889198
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 02:15:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B46768918E
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 04:08:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7b15416303aso460579085a.1
- for <u-boot@lists.denx.de>; Tue, 29 Oct 2024 18:15:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730250900; x=1730855700; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ulHz24/NK4m36gG0VE3cZg+Trsarv4qpvgkX2qMv/CU=;
- b=RHllANpmA7MIcOyznKz/B7gGvFNiaTwBtoKlejkU4Zn/NBhQsVDlUkQkejdTqO9E34
- s9QZ/losNi00ODW6PyXndl4sMnSRAMGhy15ngUjmVpzSs70ubwhu70Yf0cnA5uftGcTA
- OoQCtbAIFYCRM/gnt76Reqr7rHnmFR+ncjkAQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730250900; x=1730855700;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ulHz24/NK4m36gG0VE3cZg+Trsarv4qpvgkX2qMv/CU=;
- b=PUwnvo1c8CXBOkyBpTIlm58nAnIA0UyhN5YTUirs0VVtc1vLxbQujuAplkXNCjQkkM
- 9EiL+kPxCj3NOXWZNutPNQW+0jjy8iiS5Yqo1Su6pyR150qUg7EC8fNeDTIWd1hrgbYD
- hsxKqIO11HzwNuWbnmbwGwF9cI57/SUc6KVYB5w6rKdMZrF/GQsvj15eFNHigzp92uc5
- oKUNI08Hm85bJOze77biW7g0RQE87x5GfxxI0Z/N8qOvZZrdzbPIyDndO3dwTWGl1W6A
- NzfLa9GG7zWqHumc1PaBWQggEJ8mUxlXaxMthm+17lX7ck5+oidYWj0mCxdHBqR9gwRV
- 4HBA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXW7R6vNPPYMRixSHlWpFxck+NV5wieLXrEcmUPIirHi0EY4pR+ENPE0ZRHQbsnBU3cVOrtzho=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1Yb7mOKqU1B5ATt1ZgaroA2wijZHH4XlPOTajBzdgrR3utcxo
- DEIzeuKAIc372fSU//h8Q8fRf3dA8toD52UVlWV+CiREkUoduS9cSbGOgPwa8p0=
-X-Google-Smtp-Source: AGHT+IHC1Ta8Vzjl7QCoMPXMgivlB5DIojJ0TKPaiODqGvBPev4WCVh2VuFiDWtuSLHbeFvapSblpw==
-X-Received: by 2002:a05:620a:1a07:b0:7b1:43e2:712b with SMTP id
- af79cd13be357-7b193ed83a2mr1892280385a.11.1730250900444; 
- Tue, 29 Oct 2024 18:15:00 -0700 (PDT)
-Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b18d326206sm469506485a.93.2024.10.29.18.14.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Oct 2024 18:14:59 -0700 (PDT)
-Date: Tue, 29 Oct 2024 19:14:55 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marex@denx.de>, Mark Kettenis <kettenis@openbsd.org>,
- Simon Glass <sjg@chromium.org>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] lib: uuid: fix 32-bit support
-Message-ID: <20241030011455.GJ2558755@bill-the-cat>
-References: <20241030003317.2901772-2-caleb.connolly@linaro.org>
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtpip2t1730257679tc30xg6
+X-QQ-Originating-IP: q72j8URjV+t1DNb5KspNzUhuA3qxBO31zYGh7syMB+o=
+Received: from [IPV6:240f:10b:7440:1:2231:c46: ( [localhost])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Wed, 30 Oct 2024 11:07:55 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 8332746298117862469
+Message-ID: <08A30A7EA30489D4+81cbd3a3-455d-4c98-a75f-0fe107ea7560@radxa.com>
+Date: Wed, 30 Oct 2024 12:07:55 +0900
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lrQAIYGK0OZ44HCI"
-Content-Disposition: inline
-In-Reply-To: <20241030003317.2901772-2-caleb.connolly@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] arm64: dts: rockchip: add (but disabled) SFC node
+ for Radxa ROCK 5A
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ eugen.hristev@collabora.com, jonas@kwiboo.se, sumit.garg@linaro.org,
+ Heiko Stuebner <heiko@sntech.de>
+References: <20240824223343.98577-1-naoki@radxa.com>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <20240824223343.98577-1-naoki@radxa.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: Nn3bY5kS8sjsIqqHBpo+1/zQwHSmBEuJXGcWhgBeSHs+A49tyrgw/ghr
+ nHMew/nDVmPJM7Owyq+nvnvl/evzp1XH8IugERmMSaP1MZUMVqUytw4M8hwQ3+JMHdaH9g1
+ szD6ERoKBP52UOPnmHwb2J4rXg/fYB5SIRviW36bzhn8RudilZHnwC6vc1Ve7z8KXKBCsMc
+ I1/692gzl8qcOzBo5q72JhY+5QDb42yHmjr3bq3V6vZzPEMJfTgfwnNkt5HWvxSRIBSl0w3
+ PsDlos1rJ3ni78IH2vZLTjAj3qluptbpN76pk/cqLnzCKCB30aN3gfKTK3qGQnZusba/LQZ
+ 1f2olGw+6g4YKBAhUJliZBk3kz2PLNgSsedwXQl+6xECTwhib9cSr/yPPtcYutmalGSuM8N
+ as/vvGsTWg8DLvYCCJIY8LHWPUgwd5+WsmbSQsQAAN4yMpM8FMJltuEPF7P7uA7/YGaxYNY
+ 2Rm+GhRogtX9IzoRozZfXGCZX/7kOfVTvqgP5YzpUxg92iRUUDhShML54rYB80Y5lrZ4tRr
+ 3yUWjklOLymKxF8GUQ+wgUhoZfarLOxwC8ar2U5/uOgdilq5KqWKePBZkXCSjBL5v/s3Kfh
+ G5Og2r+ONPHZ5y1Qn9lpsAftW285o+EPgL41T9tMXD35rO4yksi6S+FBr40m4WFiEkKhYjx
+ 5EhIcf72bG2zQ2BMfLq8mdRKVJa6KooQZyUTKs0icc9EBnX5Ck4Zx9r1duHyf5dxi0z2xwP
+ I3J9N+pYzKY47HUTtc01SdJ4rvnNNSL94RT4/tB2/E48jAlHAiGOKummEdeWNFcYBQDgjrf
+ ymffnYd6zlkqeBkFcTx/pzQ0PCM5hxxCHiP47Jr1kibFV5d47fkkpn3EDpdeoX8OqAXNVkz
+ H06Z1qlhpU4Q63vW86IvxZ81ER9CPCoCA/ePR8nfyEf02pNNLOpl1A==
+X-QQ-XMRINFO: MSVp+SPm3vtS1Vd6Y4Mggwc=
+X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,75 +79,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---lrQAIYGK0OZ44HCI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+dts/upstream/src/ inclues this change now, please ignore this patch.
 
-On Wed, Oct 30, 2024 at 01:32:55AM +0100, Caleb Connolly wrote:
-> In 22c48a92cdce (lib: uuid: supporting building as part of host tools),
-> some instances of simple_strtoull() were accidentally replaced with
-> strtoul() instead (spot the difference!).
->=20
-> To keep compatibility with building as part of host tools, re-implement
-> this via a new hextoull macro to handle both cases.
->=20
-> Fixes: 22c48a92cdce (lib: uuid: supporting building as part of host tools)
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> Reported-by: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
+On 8/25/24 07:33, FUKAUMI Naoki wrote:
+> This commit adds SFC node for Radxa ROCK 5A.
+> 
+> since sdhci and sfc on RK3588s share pins(i.e. exclusive), it cannot
+> be enabled both nodes at the same time. so status = "okay" is omitted
+> here.
+> 
+> you may be able to enable sfc (and disable sdhci) by fdt overlay.
+> 
+> SPI NOR flash chip may vary, so use safe(lowest) spi-max-frequency.
+> 
+> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+> Link: https://lore.kernel.org/r/20240623023329.1044-2-naoki@radxa.com
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+> 
+> [ upstream commit: 00224650dd45e166ea6eb1593f5f064583963ccf ]
+> 
+> (cherry picked from commit fde218de3133705f3f56dc8eb26baa878f0e0dc9)
 > ---
-> I've build-tested this but don't have the hardware set up to easily test.
+> Changes in v2
+> - none
 > ---
->  lib/uuid.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
+>   dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts | 13 +++++++++++++
+>   1 file changed, 13 insertions(+)
+> 
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
+> index 3b9a349362d..2e2f7f0e769 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
+> @@ -377,6 +377,19 @@
+>   	status = "okay";
+>   };
+>   
+> +&sfc {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&fspim0_pins>;
+> +
+> +	flash@0 {
+> +		compatible = "jedec,spi-nor";
+> +		reg = <0>;
+> +		spi-max-frequency = <104000000>;
+> +		spi-rx-bus-width = <4>;
+> +		spi-tx-bus-width = <1>;
+> +	};
+> +};
+> +
+>   &spi2 {
+>   	status = "okay";
+>   	assigned-clocks = <&cru CLK_SPI2>;
 
-Close, but not quite:
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-____________________ test_ut[ut_lib_lib_test_dynamic_uuid] ________________=
-_____
-test/py/tests/test_ut.py:592: in test_ut
-    assert output.endswith('Failures: 0')
-E   assert False
-E    +  where False =3D <built-in method endswith of str object at 0x7fd53c=
-a39e30>('Failures: 0')
-E    +    where <built-in method endswith of str object at 0x7fd53ca39e30> =
-=3D 'Test: lib_test_dynamic_uuid: uuid.c\r\ntest/lib/uuid.c:114, lib_test_d=
-ynamic_uuid_case(): expected_uuid =3D uuid_str: E...-8e063312964b", got "92=
-a09169-9f8a-5f94-8635-0d9c2e830a92"\r\nTest lib_test_dynamic_uuid failed 1 =
-times\r\nFailures: 1'.endswith
------------------------------ Captured stdout call ------------------------=
------
-U-Boot> ut lib lib_test_dynamic_uuid
-Test: lib_test_dynamic_uuid: uuid.c
-test/lib/uuid.c:114, lib_test_dynamic_uuid_case(): expected_uuid =3D uuid_s=
-tr: Expected "985f2937-7c2e-5e9a-8a5e-8e063312964b", got "92a09169-9f8a-5f9=
-4-8635-0d9c2e830a92"
-Test lib_test_dynamic_uuid failed 1 times
-Failures: 1
-U-Boot>
-
---=20
-Tom
-
---lrQAIYGK0OZ44HCI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmchiIsACgkQFHw5/5Y0
-tyxa6wv/YROaQtf5UijuYix4sLOjXTLyV/m4EGNFec8lpl9GhuasNCT2oRJasqY3
-qvdA5mdZMKCZ0DCVUyeqnrO00Ar2VzP6AemLat46dfcG9gpYxoPeM8/nAYXHaYeO
-98CP5W/xzbUlwOBhrH0Nhnme37CgjW9m7UG2WnwhNBiXDQM3HBQH7s2p+EII8O7a
-VH5qwdlNX5w6+qlnVmEY1zx3067wxDIQzD2EhbakbMvbGAwBfr/YJq7xKvjoFFCx
-jS0eJmVAPATPxDPtxBewiqwJQH4cq8A+dLnjw9R/RPlO2d2Dm9zJFOj6XK1wUmZZ
-hC5ZmvqsX4KoIHHwKtikcemt5Ize55DKPmy3e0xgW2+3BJmnRpivGXdOBYxcAXml
-q4neF87FuniRWVyaix92UNLeQGBQAiKleU93STeMMSKa893O5xdWDOSQMLJKPrMX
-URfxmhtkAdSkV6lCA6JfR0Cn940L7/9b+6KJo7vz7zXsxCUOwVxBVS9rvWhXc2ha
-GxIxmAHx
-=UjXb
------END PGP SIGNATURE-----
-
---lrQAIYGK0OZ44HCI--
