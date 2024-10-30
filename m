@@ -4,73 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C5ED6B6DA
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 20:59:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ECA6D6B6D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 21:00:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7456689261;
-	Wed, 30 Oct 2024 21:59:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id EE0248926A;
+	Wed, 30 Oct 2024 22:00:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=vodafonemail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="lrgv/hcw";
+	dkim=pass (1024-bit key; secure) header.d=vodafonemail.de header.i=@vodafonemail.de header.b="KeYsDf9g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 648C789261; Wed, 30 Oct 2024 21:59:56 +0100 (CET)
-Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
- [IPv6:2607:f8b0:4864:20::114a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5CDC389228; Wed, 30 Oct 2024 20:38:31 +0100 (CET)
+Received: from mr4.vodafonemail.de (mr4.vodafonemail.de [145.253.228.164])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53BD888B9F
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 21:59:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EF2589246
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 20:38:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=vodafonemail.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=3SZ4iZwcKBlA4690BHxy66y3w.u64C-t66B30ABA.vw5F.vw@flex--moritzf.bounces.google.com
-Received: by mail-yw1-x114a.google.com with SMTP id
- 00721157ae682-6ea527764c3so6295437b3.0
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 13:59:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1730321993; x=1730926793; darn=lists.denx.de;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=+Knw04ZX28aKOcnoJDeVFN77/+A+z51UiHmDCottsH8=;
- b=lrgv/hcw8zKCI7FjGyh0Qbn0CFAgmQYKAHpW4HXHG0SGLNXr+gpXT8/t/b8FenQ/so
- 3DB+jpCevACtiw9N3VvmCYV66PdZ/uNWYQoIWLXC+4/0ed9WonwtPTsZxpjVuWGfmkoE
- 4poBQ6WktKk+nkckXQv7CR2Exc+/L12fJrvwIkgiP/PxX/qvMXhhjjzJD/ekceUaJyfu
- N0vNhfh0XkJCfLIYEwZ8tLcRRNSW8Ga1VXYWEFa918WkKM749b2WJxVeyXIox6D9wBbj
- VBPB1EQZ+S14vdcHkpqAymZkZ+HltS+PRDyOAeQaNo4s2rwJkeE5Ux4jGCd40cnRiw+1
- yZug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730321993; x=1730926793;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+Knw04ZX28aKOcnoJDeVFN77/+A+z51UiHmDCottsH8=;
- b=oxTJuws5iLN4FKvP/hX436zwd49xOZ4wwySdaQnirBAr+rAp6qBcurCSiapaBkMtGa
- tOZ+cwRqFVQ6Kexifth3ICTgnYgIY2nHKCWcRl/XET18JRq0xGYeu0JNqoGGurFR2FOZ
- qC+hm95Whs0VEaaIEeUzqgp63NXkZ9UKqnkIS7/u1dx8KB0cWFyV4RgFiaqzatSDAY7Y
- 7h+eGkf1uF5KKgOGqWQ61xs8N2sYTibcOTrS36YMtTj26MJF5eh9HBsRBM9XxQI+C4jz
- Hv9l7ZK9oH6ZrAar4LCtgUPqvl/XXwuLJBlK4rwCse4xM5MgLDn6OnvqKE9kyTjAGjgk
- /BYw==
-X-Gm-Message-State: AOJu0YxzLFyJ9OLASpQbb9lMpmIsnqTrpmsZhut2Y+s1sWmd4gNgiAW7
- 4ai/j3VCVkYQsGimyCJwYBBE9bH9lEnBKujWZpLw+70oQ8tVaq1/9+GfN+1yXBlJXgxn3Rjg08P
- CNi7CNg==
-X-Google-Smtp-Source: AGHT+IHkPjc/GHqPFrBCW9hMK6ZD1/Eiet5CiGcXdkECPByxFoINwE5h4QAjMWCEeJeK8/IjksDNeYeWhuEi
-X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:13f:f0c:ac12:c151])
- (user=moritzf job=sendgmr) by 2002:a81:be02:0:b0:6a9:3d52:79e9 with SMTP id
- 00721157ae682-6ea3b94f7famr1020277b3.4.1730321993209; Wed, 30 Oct 2024
- 13:59:53 -0700 (PDT)
-Date: Wed, 30 Oct 2024 20:59:52 +0000
-In-Reply-To: <CAC_iWj+h5yeBkHENBzPuVYeQYjESrpidzrOtvrJiEO9ezm_jZg@mail.gmail.com>
-Mime-Version: 1.0
-References: <20241030201608.1247488-1-moritzf@google.com>
- <CAC_iWj+h5yeBkHENBzPuVYeQYjESrpidzrOtvrJiEO9ezm_jZg@mail.gmail.com>
-Message-ID: <roctkvcajrh75xiixe4qfzjk4mtbf6vzzw4pwjgltrpbj5morr@56oiirwrhvzu>
-Subject: Re: [PATCH] lib: efi_loader: Fix efi_dp_from_mem() call
-From: Moritz Fischer <moritzf@google.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, trini@konsulko.com, 
- pwildt@google.com
-Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+ spf=pass smtp.mailfrom=yuriz@vodafonemail.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vodafonemail.de;
+ s=vfde-mb-mr2-23sep; t=1730317109;
+ bh=KnXBCYewnGtUjvFUAn4i2dmU+SVxvUYUhR9NQ8fyLB8=;
+ h=Date:From:To:Subject:Message-ID:Content-Type:From;
+ b=KeYsDf9gpp97RGR8bru95cYt2Dqza0tnD+WmpDaxC1q/w8dahd4txXYgnI6KIgf1s
+ Cuxh9c0Xg2i7QJAfa8CPK8HBRwnpKwB7X/U6cDfup47JHPEVS7ChymNNIgI/ppaSoB
+ UyOUCez9uxDvXY73+103a5gA8qNNmbm6tefQOF0A=
+Received: from smtp.vodafone.de (unknown [10.0.0.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by mr4.vodafonemail.de (Postfix) with ESMTPS id 4Xdy912JlXz21Pt
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 19:38:29 +0000 (UTC)
+Received: from qrv-systems.net (ip-095-222-025-162.um34.pools.vodafone-ip.de
+ [95.222.25.162])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
+ server-digest SHA256) (No client certificate requested)
+ by smtp.vodafone.de (Postfix) with ESMTPSA id 4Xdy8w74qkz9rwG
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 19:38:21 +0000 (UTC)
+Date: Wed, 30 Oct 2024 20:38:20 +0100
+From: Yuri Zaporozhets <yuriz@vodafonemail.de>
+To: u-boot@lists.denx.de
+Subject: [PATCH] bios_emulator: fix first argument of
+ pci_{read,write}_config_* function calls
+Message-ID: <ZyKLLBASJfMDk0QX@qrv-systems.net>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+X-purgate-type: clean
+X-purgate: clean
+X-purgate-size: 2161
+X-purgate-ID: 155817::1730317105-D8FF8466-02B208FC/0/0
+X-Mailman-Approved-At: Wed, 30 Oct 2024 22:00:12 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,50 +75,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 30, 2024 at 10:28:40PM GMT, Ilias Apalodimas wrote:
-> Hi Moritz
+When compiling for riscv64, a bunch of warning is produced for the file
+drivers/bios_emulator/besys.c. This patch fixes a portion of those warnings,
+caused by incorrect first argument to pci_{read,write}_config_* functions.
 
-> Thanks for the patch
+Signed-off-by: Yuri Zaporozhets <yuriz@qrv-systems.net>
+---
+ drivers/bios_emulator/besys.c | 20 ++++++++------------
+ 1 file changed, 8 insertions(+), 12 deletions(-)
 
-> On Wed, 30 Oct 2024 at 22:16, Moritz Fischer <moritzf@google.com> wrote:
-> >
-> > The function expects an end address but is being called with
-> > an size instead.
-> >
-> > Fixes: 6422820ac3 ("efi_loader: split unrelated code from  
-> efi_bootmgr.c")
-> > Signed-off-by: Moritz Fischer <moritzf@google.com>
-> > ---
-> >  lib/efi_loader/efi_bootbin.c | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> > index a87006b3c0..798bcd6eee 100644
-> > --- a/lib/efi_loader/efi_bootbin.c
-> > +++ b/lib/efi_loader/efi_bootbin.c
-> > @@ -137,7 +137,8 @@ efi_status_t efi_run_image(void *source_buffer,  
-> efi_uintn_t source_size)
-> >                  */
-> >                 file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-> >                                             (uintptr_t)source_buffer,
-> > -                                           source_size);
-> > +                                           (uintptr_t)source_buffer +
-> > +                                           (size_t)source_size);
+diff --git a/drivers/bios_emulator/besys.c b/drivers/bios_emulator/besys.c
+index 2fd794f76c..c6c5b7ed44 100644
+--- a/drivers/bios_emulator/besys.c
++++ b/drivers/bios_emulator/besys.c
+@@ -49,6 +49,7 @@
+ 
+ #define __io
+ #include <asm/io.h>
++#include <pci.h>
+ #include "biosemui.h"
+ 
+ /*------------------------- Global Variables ------------------------------*/
+@@ -434,32 +435,27 @@ static u32 BE_accessReg(int regOffset, u32 value, int func)
+ 	if ((function == _BE_env.vgaInfo.function) &&
+ 	    (device == _BE_env.vgaInfo.device) &&
+ 	    (bus == _BE_env.vgaInfo.bus)) {
++                pci_dev_t bdf = PCI_BDF(bus, device, function);
+ 		switch (func) {
+ 		case REG_READ_BYTE:
+-			pci_read_config_byte(_BE_env.vgaInfo.pcidev, regOffset,
+-					     &val8);
++			pci_read_config_byte(bdf, regOffset, &val8);
+ 			return val8;
+ 		case REG_READ_WORD:
+-			pci_read_config_word(_BE_env.vgaInfo.pcidev, regOffset,
+-					     &val16);
++			pci_read_config_word(bdf, regOffset, &val16);
+ 			return val16;
+ 		case REG_READ_DWORD:
+-			pci_read_config_dword(_BE_env.vgaInfo.pcidev, regOffset,
+-					      &val32);
++			pci_read_config_dword(bdf, regOffset, &val32);
+ 			return val32;
+ 		case REG_WRITE_BYTE:
+-			pci_write_config_byte(_BE_env.vgaInfo.pcidev, regOffset,
+-					      value);
++			pci_write_config_byte(bdf, regOffset, value);
+ 
+ 			return 0;
+ 		case REG_WRITE_WORD:
+-			pci_write_config_word(_BE_env.vgaInfo.pcidev, regOffset,
+-					      value);
++			pci_write_config_word(bdf, regOffset, value);
+ 
+ 			return 0;
+ 		case REG_WRITE_DWORD:
+-			pci_write_config_dword(_BE_env.vgaInfo.pcidev,
+-					       regOffset, value);
++			pci_write_config_dword(bdf, regOffset, value);
+ 
+ 			return 0;
+ 		}
+-- 
+2.39.5
 
-> Yes, the change is correct, but we don't need the cast.
-
-> With that changed
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
-Ack. Will send a v2.
-
-
-> >                 /*
-> >                  * Make sure that device for device_path exist
-> >                  * in load_image(). Otherwise, shell and grub will fail.
-> > --
-> > 2.47.0.163.g1226f6d8fa-goog
-> >
-
-Thanks,
-Moritz
