@@ -4,55 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B92C5D5CCAF
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 14:17:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29B44D5CCB2
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 14:24:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E53E88F83;
-	Wed, 30 Oct 2024 15:17:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A502488F27;
+	Wed, 30 Oct 2024 15:24:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1730297852;
-	bh=HVxu76fBGmkbX35tANcfVxDAhz0u1JfwuGd9w1lyvyM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Tj67w7H/fOjF2G341Y+xil6S3aZi6wBZMnCSeWqSY4ZU7k2xsVbQZAHROhYxRbO1O
-	 aH04ga/14PD6O31JIwFDSpR/vkzPk6NdNQ/WgUTaNhtk4sLjztxtWL6JHXJY7vLCly
-	 qgRYTf4hjLfOo7M8UH9LMi6heaGmktRKvNJtdvZ1+BfXVJCWEDZwsBBzSpgA/fEVoV
-	 9cyh9dIpyLNNxHd/8LfivS3VURe4z8lkukxcJgnBoFLrFkjGafXOZjkL62uwVEE9J+
-	 5VycqMimmNLVQ+TeOMEYFdn8+c56WQh7IZVR1QTLSBhpVAgvCD0ktonTY/t9Qn9WDr
-	 nrxmZY5xWB51Q==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="LajDvGSd";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="AaP2wKHK";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 23C6288F95; Wed, 30 Oct 2024 15:24:15 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 1441F88E65;
- Wed, 30 Oct 2024 15:17:31 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1730297851;
- bh=HVxu76fBGmkbX35tANcfVxDAhz0u1JfwuGd9w1lyvyM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=u1nAZ4edCMte1Z0GQ8JoY4vqxacmumguR0ztvGGFD67CxY5HGfMurhSBY0zGM3Ux1
- JODgMkCpQpJ5bLkjrNNU6RPtWU+mXxdFotrObYXBEBYXIOXBEOD3S/KaQm/D2CKKhh
- Pa5MpLRuPtFv4a2WsJnIsnxWoT0MXs9w4bLpHXd0ZAVUBIa/PI87T1AxValLTJs57P
- RFKqzYyGupZD/2SGA1bFcfGy3akqIHW7QvxcGIj+upoikcl8SlGJcQRDBX1i1q+i1i
- +cha5p5EGejA2+tf/oH92TNVReFZf7GLEVEUquQ8fViDeVghR8bz1CWm7xvHNWFyY+
- 6eCAhBHopvxaQ==
-Message-ID: <7597cf81-8c60-4dce-8fba-9181910c3247@denx.de>
-Date: Wed, 30 Oct 2024 13:12:04 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 40B3988EDE
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 15:24:13 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4XdqBP0Lh8z9sp5;
+ Wed, 30 Oct 2024 15:24:13 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1730298253;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4FmEDscBHGz3RWJNG8p3yF7c4SVNfyGuGB9GfZ131QI=;
+ b=LajDvGSdzeBBIeSUDSedDXx6xBCWTXIDlP2C4BxJaB64Qi0Tl+BM9ZPJyKi9qJkrhqaJDC
+ 7q4CtEkdYAbk2I3CL8ZK35EANTR1Qk/fwjSHLaRWxqtPA7TuDwJiqZ5WUuG9/g67ookGhE
+ ZfSAu7btgHcMuJbKCzhKOclsQgBsdAAA9ubfERTTJNvFdW9rf23XJkZaw9daMSauaoVd35
+ jfMhAwULeBdNASzvgCyHhvESckRIylmRgf+JcHBAgJMG6G3fQKLS8s0NysVWRSWcRQ5+mc
+ GU7PjZB8MEb0M7PM2Yccr6q2RSKZOYG6m3BAYIj6oyiDTNJxqdhYfn6K3cfAAw==
+Message-ID: <ac1f22fa-e744-4616-aeb3-ca56860e89cb@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1730298251;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4FmEDscBHGz3RWJNG8p3yF7c4SVNfyGuGB9GfZ131QI=;
+ b=AaP2wKHKCk27kOWnZsVTZBbexWtYPQopyerQunT8hjUMTREilDFtLVQK7mia/Hvl/r+mp7
+ 2Uc8I/eWl46hhzhU5rLlC7daj+wSReE/xBVa0Vcb4jcOCPUHukX1ugzpJHoGezznLJQaIx
+ MUMpY7MZsmD2d43tPJctXRtqukH1AmTGY3i7apXmEJ6RyaGryCeg2amhspMKZ8sJFtJOIl
+ Dl0k991wxYFjoYg/ZYjHequNn/gjgv6+wmNb6k+wmGtGOg1qgnCAusp0HrfozT+of1XG1S
+ NBNdTVxv8Y/LJXApXcr4w+TWr//JYSWU0YBYRUPD3BzPOA0fRiGAfP4TxDLzEQ==
+Date: Wed, 30 Oct 2024 15:22:08 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] MAINTAINERS: add tambarus as reviewer for SPI NOR
-To: Tudor Ambarus <tudor.ambarus@linaro.org>, jagan@amarulasolutions.com,
- vigneshr@ti.com
-Cc: trini@konsulko.com, u-boot@lists.denx.de
-References: <20241030110221.3321315-1-tudor.ambarus@linaro.org>
+Subject: Re: [PATCH] board: rzg2l: Update MAINTAINERS file to match
+ dts/upstream paths
+To: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de
+References: <20241030103543.465-1-paul.barker.ct@bp.renesas.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241030110221.3321315-1-tudor.ambarus@linaro.org>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20241030103543.465-1-paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: ed61a001247c263700f
+X-MBO-RS-META: 8e86rigk5u7wzbn39z9omjj7yhm3d433
+X-Rspamd-Queue-Id: 4XdqBP0Lh8z9sp5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,11 +92,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/30/24 12:02 PM, Tudor Ambarus wrote:
-> I'd like to get Cc'ed to u-boot's SPI NOR patches to help review them.
-> The ultimate goal is to have an aligned approach in u-boot and linux.
+On 10/30/24 11:35 AM, Paul Barker wrote:
+> We are now using the dts/upstream subtree for the RZ/G2L SoC family, so
+> update the board MAINTAINERS file to match rz-smarc dtsi files in this
+> subtree.
 > 
-> Signed-off-by: Tudor Ambarus <tudor.ambarus@linaro.org>
-Acked-by: Marek Vasut <marex@denx.de>
-
-Thanks !
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
