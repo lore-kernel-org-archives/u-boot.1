@@ -4,70 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 837BBD5CC9C
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 11:37:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C16D5CCA1
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 12:09:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB46188EDE;
-	Wed, 30 Oct 2024 12:37:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F65F88DFE;
+	Wed, 30 Oct 2024 13:09:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SzPDrPxH";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="Fkz/MKQ6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B46CE891DD; Wed, 30 Oct 2024 12:37:49 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CC9688113
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 12:37:46 +0100 (CET)
+ id 14E89891AC; Wed, 30 Oct 2024 13:09:50 +0100 (CET)
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
+ by phobos.denx.de (Postfix) with ESMTP id 8F82688DFE
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 13:09:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49UBbiwY069591;
- Wed, 30 Oct 2024 06:37:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1730288264;
- bh=zokY1ERIPHaUs0OfvTwm/U6t+M1nOFWbsdye/rhNDt4=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=SzPDrPxHqd9u7t/pOTKbIQWn5EymjXVr5+gEGlYMQGJo8wgc3XfOWYkZMLierPty0
- 9+/YV15aQsfIHTFKhXtiE1KOFmyDbJSR0QHNi0ZYzyci4lqocgeMYBi7Qtk4sz2XO1
- FpJ3Qsu1UO4R1vnDusH8/Qab7kNJYaoQ7/97t+tc=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49UBbiLY004092
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 30 Oct 2024 06:37:44 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 30
- Oct 2024 06:37:43 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 30 Oct 2024 06:37:43 -0500
-Received: from [172.24.227.91] (psdkl-workstation0.dhcp.ti.com [172.24.227.91])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49UBbfTs110806;
- Wed, 30 Oct 2024 06:37:42 -0500
-Message-ID: <1a90c6e2-73b1-46c6-802a-41a381d424d8@ti.com>
-Date: Wed, 30 Oct 2024 17:07:41 +0530
+ dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:Subject:Date:Message-ID:MIME-Version; bh=eSgDx
+ cmjpgK8nchIz5tMaHf8y2kBb5i0REZxsQkA1tI=; b=Fkz/MKQ6uy6XVQhkwnJC4
+ sQrCUcEeJwLv6i/d8QR9oLHtNA7YyjZo+ge9mKNTTwsbpbJBc6V6zOq9uiLF7HN7
+ +9JgCKGHrsaqBTQ9FAkhB47CT/UGtvi82QxJaJ/rEoOPoxSpIYb7KmzZX59QBGEQ
+ ot7DAohalU1G8DWVDEAQq8=
+Received: from ProDesk.. (unknown [58.22.7.114])
+ by gzsmtp2 (Coremail) with SMTP id PSgvCgD3n7L3ISJn2HV2Ag--.48133S4;
+ Wed, 30 Oct 2024 20:09:34 +0800 (CST)
+From: Andy Yan <andyshrk@163.com>
+To: kever.yang@rock-chips.com
+Cc: quentin.schulz@cherry.de, u-boot@lists.denx.de, dsimic@manjaro.org,
+ jonas@kwiboo.se, Andy Yan <andyshrk@163.com>
+Subject: [PATCH v4 2/2] board: rockchip: Add support for rk3588 GenBook
+Date: Wed, 30 Oct 2024 20:09:20 +0800
+Message-ID: <20241030120926.399775-3-andyshrk@163.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241030120926.399775-1-andyshrk@163.com>
+References: <20241030120926.399775-1-andyshrk@163.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/5] arm: mach-k3: j721e-init.c: J7200: Add support for
- CONFIG_K3_OPP_LOW
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <u-kumar1@ti.com>,
- <reidt@ti.com>, <nm@ti.com>
-References: <20241023130033.1826413-1-a-limaye@ti.com>
- <20241023130033.1826413-5-a-limaye@ti.com>
- <20241029101025.n6xioxbqqwhpbbmz@uda0497581>
- <20241030080100.em6zd5xfhu64xsdp@uda0497581>
-Content-Language: en-US
-From: Aniket Limaye <a-limaye@ti.com>
-In-Reply-To: <20241030080100.em6zd5xfhu64xsdp@uda0497581>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: PSgvCgD3n7L3ISJn2HV2Ag--.48133S4
+X-Coremail-Antispam: 1Uf129KBjvAXoW3Cw1fuw43Cry8tryxArW8JFb_yoW8Jry5Zo
+ WqkF1Fkr4Ikr98Aw1rZayakF4Fga4IkayfJFWUCryDGw1jka4ktF1jya15Cr45ArW5tr18
+ KFySk3yxZ3W8JF97n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+ AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvj4RRrWrDUUUU
+X-Originating-IP: [58.22.7.114]
+X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/1tbiMwGIXmciHA1jpgADs2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,189 +66,401 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Manorit,
+Add support for Cool Pi GenBook, it works as a carrier board
+connect with CM5 SOM.
 
-On 30/10/24 13:31, Manorit Chawdhry wrote:
-> Hi Aniket,
-> 
-> On 15:40-20241029, Manorit Chawdhry wrote:
->> Hi Aniket,
->>
->> On 18:27-20241023, Aniket Limaye wrote:
->>> From: Reid Tonking <reidt@ti.com>
->>>
->>> The default j7200 devicetree and k3_avs driver set 2GHz/1GHz frequency
->>> for A72/MSMC clks and the OPP_NOM voltage.
->>>
->>> J7200 SOCs may support OPP_LOW Operating Performance Point:
->>> 1GHz/500MHz clks for A72/MSMC and OPP_LOW AVS voltage read from efuse.
->>>
->>> Hence, add a config check to select OPP_LOW specs:
->>> - Check if OPP_LOW AVS voltage read from efuse is valid.
->>> - Update the clock frequencies in devicetree.
->>> - Program the OPP_LOW AVS voltage for VDD_CPU.
->>>
->>> Signed-off-by: Reid Tonking <reidt@ti.com>
->>> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
->>>
->>> ---
->>> v2:
->>> - Fix indentation in fix_freq()
->>> - Remove the efuse data check addition from this commit, as it's not
->>>    related to adding support for CONFIG_K3_OPP_LOW. The same addition
->>>    was moved to the previous patch in this series.
->>> - Link to v1: https://lore.kernel.org/u-boot/20241017062911.2241167-5-a-limaye@ti.com/
->>> ---
->>>   arch/arm/mach-k3/j721e/j721e_init.c | 45 ++++++++++++++++++++++++++++-
->>>   1 file changed, 44 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
->>> index e9ed8cb267c..de10517bb27 100644
->>> --- a/arch/arm/mach-k3/j721e/j721e_init.c
->>> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
->>> @@ -19,6 +19,7 @@
->>>   #include <fdtdec.h>
->>>   #include <mmc.h>
->>>   #include <remoteproc.h>
->>> +#include <k3-avs.h>
->>>   
->>>   #include "../sysfw-loader.h"
->>>   #include "../common.h"
->>> @@ -147,6 +148,32 @@ static void setup_navss_nb(void)
->>>   	writel(NB_THREADMAP_BIT1, (uintptr_t)NAVSS0_NBSS_NB1_CFG_NB_THREADMAP);
->>>   }
->>>   
->>> +int fix_freq(const void *fdt)
-> 
-> I think this can be static as well btw, maybe rename it to something
-> more descriptive as well. fdt_fixup_a72_clock_frequency?
-> 
+Specification:
+- Rockchip RK3588
+- LPDDR5X 8/32 GB
+- eMMC 64 GB
+- HDMI Type A out x 1
+- USB 3.0 Host x 1
+- USB-C 3.0 with DisplayPort AltMode
+- PCIE M.2 E Key for RTL8852BE Wireless connection
+- PCIE M.2 M Key for NVME connection
+- eDP panel with 1920x1080
 
-Yeah this can be made static. Will do.
-Rename also makes sense... Since it's updating A72SS0_CORE0_0_ARM_CLK & 
-A72SS0_CORE0_MSMC_CLK, what do you think about:
+Tested by Armbian boot on USB disk.
 
-static int fdt_fixup_a72ss_clock_frequency(const void *fdt) ?
+Signed-off-by: Andy Yan <andyshrk@163.com>
 
->>> +{
->>> +	int node, ret;
->>> +	u32 opp_low_freq[3];
->>> +
->>> +	node = fdt_node_offset_by_compatible(fdt, -1, "ti,am654-rproc");
->>> +	if (node < 0) {
->>> +		printf("%s: A72 not found\n", __func__);
->>> +		return node;
->>> +	}
->>> +
->>> +	/* j7200 opp low values according to data sheet */
->>> +	opp_low_freq[0] = cpu_to_fdt32(1000000000); /* 202-2 -> A72SS0_CORE0_0_ARM_CLK */
->>> +	opp_low_freq[1] = cpu_to_fdt32(200000000); /* 61-1 -> GTC0_GTC_CLK */
->>> +	opp_low_freq[2] = cpu_to_fdt32(500000000); /* 4-1 -> A72SS0_CORE0_MSMC_CLK */
->>> +
->>> +	ret = fdt_setprop((void *)fdt, node, "assigned-clock-rates",
->>> +			  opp_low_freq, sizeof(opp_low_freq));
->>> +	if (ret) {
->>> +		printf("%s: Can not set value\n", __func__);
->>> +		return ret;
->>> +	}
->>> +
->>> +	return 0;
->>> +}
->>> +
->>>   /*
->>>    * This uninitialized global variable would normal end up in the .bss section,
->>>    * but the .bss is cleared between writing and reading this variable, so move
->>> @@ -301,8 +328,24 @@ void board_init_f(ulong dummy)
->>>   #if defined(CONFIG_CPU_V7R) && defined(CONFIG_K3_AVS0)
->>>   	ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
->>>   					  &dev);
->>> -	if (ret)
->>> +	if (!ret) {
->>> +		if (IS_ENABLED(CONFIG_K3_OPP_LOW)) {
->>
->> These ifs can be combined into one ig.
->>
->>> +			ret = k3_check_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
->>> +			if (!ret) {
->>> +				ret = fix_freq(gd->fdt_blob);
->>> +				if (ret)
->>> +					printf("Failed to set OPP_LOW frequency\n");
->>> +
->>> +				ret = k3_avs_set_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
->>
->> Even if fix_freq fails, do we want to cascade and still run
->> k3_avs_set_opp? Not sure what the best way to handle this is but seeing
->> a lot of nesting so wondering if there is any better way to handle this
->> control flow..
-> 
-> For this I think it might be a good idea to take this chunk out into
-> another function like setup_opp_low as well and keep it there, might be
-> more readable that way IMHO.
+---
 
+Changes in v4:
+- Fix a underline too short error in rst doc
 
-Hmm okay, I re-evaluated what we are trying to do here.
-Below is the logical path that should be taken:
+Changes in v3:
+- Remove upstreamed dt in genbook-u-boot.dtsi
+- Remove MMC releated config as there is no SD-card on this machine
+- Enable LED config
+- Enable rk8xx pmic
+- rename defconfig to coolpi-cm5-genbook-rk3588_defconfig
+- redefine BOOT_TARGETS
 
-board_init_f():
--> if CONFIG_K3_OPP_LOW
-	-> if valid efuse for OPP_LOW
-		-> fix_freq() # Update freq to OPP_LOW spec
-clk-k3: ti_clk_set_rate()
--> k3_avs_notify_freq()
-	-> if freq matches OPP_LOW spec
-		-> k3_avs_set_voltage()  # Update volt to OPP_LOW spec
+Changes in v2:
+- split the dts to a separate commit
+- rename to genbook_cm5_rk3588
+- move readme to doc/board, and write as reStructuredText format
+- alphabetically reorder
+- update doc/board/rockchip
 
+ .../dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi |  20 ++++
+ arch/arm/mach-rockchip/rk3588/Kconfig         |  19 ++++
+ board/coolpi/genbook_cm5_rk3588/Kconfig       |  12 +++
+ board/coolpi/genbook_cm5_rk3588/MAINTAINERS   |   7 ++
+ configs/coolpi-cm5-genbook-rk3588_defconfig   | 101 ++++++++++++++++++
+ doc/board/coolpi/genbook_cm5_rk3588.rst       |  68 ++++++++++++
+ doc/board/coolpi/index.rst                    |   9 ++
+ doc/board/rockchip/rockchip.rst               |   1 +
+ include/configs/genbook-cm5-rk3588.h          |  31 ++++++
+ 9 files changed, 268 insertions(+)
+ create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+ create mode 100644 board/coolpi/genbook_cm5_rk3588/Kconfig
+ create mode 100644 board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+ create mode 100644 configs/coolpi-cm5-genbook-rk3588_defconfig
+ create mode 100644 doc/board/coolpi/genbook_cm5_rk3588.rst
+ create mode 100644 doc/board/coolpi/index.rst
+ create mode 100644 include/configs/genbook-cm5-rk3588.h
 
-For that, I propose the following code instead:
+diff --git a/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi b/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+new file mode 100644
+index 00000000000..5a3073d6e7f
+--- /dev/null
++++ b/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk3588-u-boot.dtsi"
++
++&fspim2_pins {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&sfc {
++	flash@0 {
++		bootph-pre-ram;
++		bootph-some-ram;
++	};
++};
++
++/* USB A out */
++&usb_host1_xhci {
++	snps,dis_u3_susphy_quirk;
++};
+diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+index a76a470cc98..c53f6bb926e 100644
+--- a/arch/arm/mach-rockchip/rk3588/Kconfig
++++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+@@ -29,6 +29,24 @@ config TARGET_CM3588_NAS_RK3588
+ 	  - 3.5mm Headphone out, 2.0mm PH-2A Mic in
+ 	  - 5V Fan connector, PWM beeper, IR receiver, RTC battery connector
+ 
++config TARGET_GENBOOK_CM5_RK3588
++	bool "Cool Pi CM5 GenBook"
++	select BOARD_LATE_INIT
++	help
++	  GeenBook is a notebook based on Rockchip RK3588, and works as a carrier
++	  board connect with CM5 SOM.
++
++	  Specification:
++	  - Rockchip RK3588
++	  - LPDDR5X 8/32 GB
++	  - eMMC 64 GB
++	  - HDMI Type A out x 1
++	  - USB 3.0 Host x 1
++	  - USB-C 3.0 with DisplayPort AltMode
++	  - PCIE M.2 E Key for RTL8852BE Wireless connection
++	  - PCIE M.2 M Key for NVME connection
++	  - eDP panel with 1920x1080
++
+ config TARGET_JAGUAR_RK3588
+ 	bool "Theobroma Systems SBC-RK3588-AMR (Jaguar)"
+ 	select BOARD_LATE_INIT
+@@ -361,6 +379,7 @@ config TEXT_BASE
+ 	default 0x00a00000
+ 
+ source "board/armsom/sige7-rk3588/Kconfig"
++source "board/coolpi/genbook_cm5_rk3588/Kconfig"
+ source "board/edgeble/neural-compute-module-6/Kconfig"
+ source "board/friendlyelec/cm3588-nas-rk3588/Kconfig"
+ source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
+diff --git a/board/coolpi/genbook_cm5_rk3588/Kconfig b/board/coolpi/genbook_cm5_rk3588/Kconfig
+new file mode 100644
+index 00000000000..67086ea6297
+--- /dev/null
++++ b/board/coolpi/genbook_cm5_rk3588/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_GENBOOK_CM5_RK3588
++
++config SYS_BOARD
++	default "genbook_cm5_rk3588"
++
++config SYS_VENDOR
++	default "coolpi"
++
++config SYS_CONFIG_NAME
++	default "genbook-cm5-rk3588"
++
++endif
+diff --git a/board/coolpi/genbook_cm5_rk3588/MAINTAINERS b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+new file mode 100644
+index 00000000000..0496cc93b59
+--- /dev/null
++++ b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+@@ -0,0 +1,7 @@
++GENBOOK-CM5-RK3588
++M:	Andy Yan <andyshrk@163.com>
++S:	Maintained
++F:	board/coolpi/genbook-cm5-rk3588
++F:	include/configs/genbook-cm5-rk3588.h
++F:	configs/coolpi-cm5-genbook-rk3588_defconfig
++F:	arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+diff --git a/configs/coolpi-cm5-genbook-rk3588_defconfig b/configs/coolpi-cm5-genbook-rk3588_defconfig
+new file mode 100644
+index 00000000000..3eb5dc968af
+--- /dev/null
++++ b/configs/coolpi-cm5-genbook-rk3588_defconfig
+@@ -0,0 +1,101 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-coolpi-cm5-genbook"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_GENBOOK_CM5_RK3588=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++# CONFIG_ANDROID_BOOT_IMAGE is not set
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-coolpi-cm5-genbook.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++# CONFIG_CMD_BIND is not set
++# CONFIG_CMD_FASTBOOT is not set
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
++CONFIG_SPL_CLK=y
++CONFIG_FASTBOOT_BUF_ADDR=0x800800
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_SPL_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_XMC=y
++CONFIG_SPI_FLASH_XTX=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_ROCKCHIP_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/coolpi/genbook_cm5_rk3588.rst b/doc/board/coolpi/genbook_cm5_rk3588.rst
+new file mode 100644
+index 00000000000..a02e561051a
+--- /dev/null
++++ b/doc/board/coolpi/genbook_cm5_rk3588.rst
+@@ -0,0 +1,68 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++GenBook
++=======
++Cool Pi GenBook is a laptop powered by RK3588, it works with a
++carrier board connect with CM5.
++
++Specification:
++* Rockchip RK3588
++* LPDDR5X 8/32 GB
++* eMMC 64 GB
++* SPI Nor 8 MB
++* HDMI Type A out x 1
++* USB 3.0 Host x 1
++* USB-C 3.0 with DisplayPort AltMode
++* PCIE M.2 E Key for RTL8852BE Wireless connection
++* PCIE M.2 M Key for NVME connection
++* eDP panel with 1920x1080
++
++Here is the step-by-step to compile and boot to U-Boot on GenBook.
++
++Get the TF-A and DDR init (TPL) binaries
++----------------------------------------
++
++.. prompt:: bash
++
++   > cd u-boot
++   > export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.17.bin
++   > export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.46.elf
++   > make coolpi-genbook-cm5-rk3588_defconfig
++   > make CROSS_COMPILE=aarch64-linux-gnu-
++
++This will build ``u-boot-rockchip.bin`` for eMMC and ``u-boot-rockchip-spi.bin`` for SPI Nor.
++
++Write u-boot to eMMC or SPI Nor from a Linux system on the laptop
++-----------------------------------------------------------------
++
++Copy ``u-boot-rockchip.bin`` and ``u-boot-rockchip-spi.bin`` to the laptop.
++
++eMMC
++~~~~
++
++.. prompt:: bash
++
++   dd if=u-boot-rockchip.bin of=/dev/mmcblk0 bs=512 seek=64
++
++SPI Nor
++~~~~~~~
++
++.. prompt:: bash
++
++  dd if=u-boot-rockchip-spi.bin of=/dev/mtdblock0
++
++``upgrade_tool`` allows to flash the on-board SPI Nor via the USB TypeC interface
++with help of the Rockchip loader binary.
++
++To enter the USB flashing mode, connect the laptop and your HOST PC with a USB-C
++cable, reset the laptop with ``Loader Key`` pressed.
++On your PC, check with ``lsusb -d 2207:350b``).
++
++To flash U-Boot on the SPI Nor with ``upgrade_tool``:
++
++.. prompt:: bash
++
++  upgrade_tool db rk3588/MiniLoaderAll.bin
++  upgrade_tool ssd       // Input 5 for SPINOR download mode
++  upgrade_tool wl 0 u-boot-rockchip-spi.bin
++  upgrade_tool rd
+diff --git a/doc/board/coolpi/index.rst b/doc/board/coolpi/index.rst
+new file mode 100644
+index 00000000000..9c9593fd6aa
+--- /dev/null
++++ b/doc/board/coolpi/index.rst
+@@ -0,0 +1,9 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Cool Pi
++=================
++
++.. toctree::
++   :maxdepth: 2
++
++   genbook_cm5_rk3588
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 86d83befb5b..2d6593cba75 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -145,6 +145,7 @@ List of mainline supported Rockchip boards:
+      - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
+      - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
+      - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
++     - Yanyi Tech CoolPi CM5 GenBook (coolpi-cm5-genbook-rk3588)
+ 
+ * rv1108
+      - Rockchip Evb-rv1108 (evb-rv1108)
+diff --git a/include/configs/genbook-cm5-rk3588.h b/include/configs/genbook-cm5-rk3588.h
+new file mode 100644
+index 00000000000..f71f735b113
+--- /dev/null
++++ b/include/configs/genbook-cm5-rk3588.h
+@@ -0,0 +1,31 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ */
++
++#ifndef __GENBOOK_CM5_RK3588_H
++#define __GENBOOK_CM5_RK3588_H
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdout=serial,vidconsole\0" \
++		"stderr=serial,vidconsole\0"
++
++#include <configs/rk3588_common.h>
++
++#undef BOOT_TARGETS
++#define BOOT_TARGETS "usb mmc0"
++
++#undef CFG_EXTRA_ENV_SETTINGS
++
++/*
++ * As a laptop, there is no sdmmc, and we want to
++ * set usb the highest boot priority for third-part
++ * os installation.
++ */
++#define CFG_EXTRA_ENV_SETTINGS \
++	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
++	"partitions=" PARTS_DEFAULT		\
++	ENV_MEM_LAYOUT_SETTINGS			\
++	ROCKCHIP_DEVICE_SETTINGS \
++	"boot_targets=" BOOT_TARGETS "\0"
++
++#endif /* __GENBOOK_CM5_RK3588_H */
+-- 
+2.34.1
 
-ret = uclass_get_device_by_driver(...)
-if(ret){
-	print("AVS init failed: %d\n", ret);
-} else if IS_ENABLED(CONFIG_K3_OPP_LOW) {
-	ret = k3_check_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
-	if (ret) {
-		printf("OPP_LOW: k3_check_opp failed: %d\n", ret);
-	} else {
-		ret = fix_freq(gd->fdt_blob);
-		if (ret)
-			printf("OPP_LOW: fix_freq failed: %d\n", ret);
-	}
-}
-
-Proposed Changes:
-- Add error codes to prints
-- Move error prints (with error codes) before else conditions. Helps
-   with code readability to map error print with the erroneous function
-- Remove k3_avs_set_opp() from here altogether. Reasoning being that the
-   value being set through k3_avs_set_opp() will anyway be (correctly)
-   overridden by the k3_avs_notify_freq() call later in the boot process,
-   when a72 freq is actually set from clk_k3.
-
-Regards,
-Aniket
-
-> 
-> Regards,
-> Manorit
-> 
->>
->> Also, better to print ret as well in these cases btw.
->>
->> Regards,
->> Manorit
->>
->>> +				if (ret)
->>> +					printf("Failed to set OPP_LOW voltage\n");
->>> +			} else {
->>> +				printf("Failed to enable K3_OPP_LOW\n");
->>> +			}
->>> +		}
->>> +	} else {
->>>   		printf("AVS init failed: %d\n", ret);
->>> +	}
->>>   #endif
->>>   
->>>   #if defined(CONFIG_K3_J721E_DDRSS)
->>> -- 
->>> 2.34.1
->>>
