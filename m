@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3932D6B6B7
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 17:21:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A478D6B6B7
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 17:55:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AB4A8926D;
-	Wed, 30 Oct 2024 18:20:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C220189221;
+	Wed, 30 Oct 2024 18:55:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QjU0Cm/i";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hm8a/RD6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E58D889035; Wed, 30 Oct 2024 17:04:22 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 033CD89242; Wed, 30 Oct 2024 18:55:07 +0100 (CET)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21DFD88FAB
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 17:04:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A2FB88F47
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 18:55:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vassilisamir@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-539eb97f26aso7151554e87.2
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 09:04:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-7205b6f51f3so76835b3a.1
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 10:55:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730304259; x=1730909059; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wxyqw6jDLd2eOH1obDVGumlTPuxOg0EfSJ8O0lsHQ48=;
- b=QjU0Cm/igFc1pg0klhdAEWnDsvT4HKfBE5nxU2c4ygGRQhS+Kkgv3h0zKuJC7WcoFp
- fUQ2xPRwFHB8PgdvfDp1/5cWR4Wk2FOZT/YJA9lyz03EWtMBXAO5IJn9gMnDaRJ37DYR
- m8NZZoSIMk3wgIbinoNK0FS5xConp+uyZRWgSjAnoFi7VlargoJN22HDVWGMb9TcORhI
- cLeSCY4oGExMrhUxJ2WVpCHqHz4k8/4JL6zbRxZkNh8BgHlROVwK8aLCl3sLERhYrLpk
- worTZcz167y4gkYzW59VSci9MrQenmrKohj57Vx6hIJdzBWVPdoB19RdhqjXIt+DJ2GE
- WnmQ==
+ d=linaro.org; s=google; t=1730310903; x=1730915703; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yLcC2sBUU5z3YanGRDUOV8qP7LxJIDc22NKOL70J2kE=;
+ b=hm8a/RD6EhGYJx30UD2ZVhJ10LMDjz1gnyyRad6IfZlDMR787O/2mfFHD5AJN36y/S
+ GkKfrsq2itarV7mgHT5NZiI3g5Rm5PF2ckX1/hNhzG7n5kMM7GwJqQguqq2tOQRUb6tn
+ 4gx0WC9Ym6f2F1fe6mKoTD7TwSTYAItrovLvf+wqGJ9FXoVsRLIQUdk8wQVbP9WsCg9W
+ dDg5DBl2LcBefQ4Fz25S6dUyREoaALx9LAd5xL7+CouxKqdUVb8ACnb4nWo0GdyRck4i
+ cYpqS1NnT3hf3jglTrZoGbxFWgxYCq7W0MKaxUCUU9dknxx6wPBCjUATLIBvzB6+xhYd
+ xvAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730304259; x=1730909059;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wxyqw6jDLd2eOH1obDVGumlTPuxOg0EfSJ8O0lsHQ48=;
- b=m5C+hxE1+/Qg11Mw03l31Jjx8mq4ATmoQTAYynCDZO6lw9UQJHIV8AhftYrv2/kGbs
- i0d4IWn7a+fhzRQOWdd+Qg0JotR/aTVZXWuYcNURA/sWWQ8ObnTVTmMA41sixR8hCQgb
- G7M9fsjwLEZK6d+r0Bo2rW3EIwxRL5GoYduZEsf/817/EgVs6c+z7rs1p46km+6qgL+0
- OFpFI0WDoPF3ibm9DSrb4GeKYtQJ/9AMF3e1vaQROvxntA97/8olnEBSQnXBGS9h7ymI
- W/tdQLAwqlmsoXl6itDn7WwR93WPecr2JD32h1gm1GQj9DLJ7lV1bp7cOuYbo9GhC4L/
- ctzQ==
+ d=1e100.net; s=20230601; t=1730310903; x=1730915703;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yLcC2sBUU5z3YanGRDUOV8qP7LxJIDc22NKOL70J2kE=;
+ b=JS4tRg63j2uAQT8MAaxWFoNUHbFmZ0PE5G7++tCSs0DQ5j7gZTYPjeu9TWsHHxWF0O
+ cf5hrs72ygl67fhV1OKbct4S/5hJkxTKkyaPg7em9qTPg/kPB73YwlBxxex1YrxdrZs2
+ HeZF+EGBkY0y5AqwLKFiu+AmfBiA5Y5rJdiJtkUG912liUOqr+f237fvPRLqfQY4wQ1n
+ Ij/F6r5Jp9GJmfygoratDcAKUqolJ8FkRLeaFFYNZPwOLJ10IQ8/7UCX6J2gB06gRpER
+ eddIWXeo8aYo0Nk5S1nw/qhi84FB5nRRIfiTjWDZZ5i8BzaOuLlAUkQWRswco8ZZEY5r
+ 9vRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV3EDe3pL8hV3tupiAsNUJ3EsjYkMVeTKEPJldtYDAkGSL9/pMwCsiG+fyq86fmEC35mo3AaTI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzgreuobnLgnXmWRtpivzDHxj4KFAfz/ckUfu/JJ3fX4+Z22/MJ
- exFsQis4jrbx0fUsBpCXtXK3JgUw9CC5sF/+KNwZ+ZqKR2+T80fIkPE37Q==
-X-Google-Smtp-Source: AGHT+IGfTJ4hPByRAxTBqxVgQuVSqx0jO6xJrZWXytPfhYg+tH3Whgir62NENbaQrX0QWJ+hHWqwWw==
-X-Received: by 2002:a05:6512:3b95:b0:539:f7de:df6a with SMTP id
- 2adb3069b0e04-53b86b029efmr2303387e87.52.1730304258782; 
- Wed, 30 Oct 2024 09:04:18 -0700 (PDT)
-Received: from vamoirid-laptop ([2a04:ee41:82:7577:89e7:cc9d:3a72:92f3])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-431bd8e853esm25806725e9.8.2024.10.30.09.04.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Oct 2024 09:04:18 -0700 (PDT)
-Date: Wed, 30 Oct 2024 17:04:16 +0100
-From: Vasileios Amoiridis <vassilisamir@gmail.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: trini@konsulko.com, hs@denx.de, pro@denx.de, sjg@chromium.org,
- vasileios.amoiridis@cern.ch, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/1] drivers: bootcount: Add ZynqMP specific bootcount
- support
-Message-ID: <ZyJZAP9e5iRRtRM1@vamoirid-laptop>
-References: <20241029185814.7937-1-vassilisamir@gmail.com>
- <20241029185814.7937-2-vassilisamir@gmail.com>
- <c6ad234b-e756-4ea3-8381-63ffca1c2c5c@amd.com>
- <ZyJE7K8Eo7A6smyT@vamoirid-laptop>
- <bf1c5738-de6a-49d5-9920-bbeb30ebd879@amd.com>
+ AJvYcCVx3IImmGfChaQFXl7r9Horx/hb3zbrqueBMg/pu/QnVEQsnqLjLpfl+CM4HwcelxIDEIZ2Cs0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzwn2RUqEF5Pq6xzT2wIgy5QGw4wNo+0EPh9EEpja5BGJeG27jK
+ vbO6HmqNi2EoOeD37GrjxWhsLBHXsvmuWJp5RDX0ueRuWuL3RdBzmxq2S/vf50N8tWphVhYU1sq
+ QXq7x4yLXXJzF6ZPaXdHdzxEgQ+547iz2l/uMEg==
+X-Google-Smtp-Source: AGHT+IH/Qfml4Fmmu7Ct9+A97PrfBZDMSOCrAD+ggbOV0hSkdbHzRBCjWRdQ+5TZPdcK4wtE/ALZBJY1u4dm1jfk03s=
+X-Received: by 2002:a05:6a00:3cc8:b0:71e:e3:608 with SMTP id
+ d2e1a72fcca58-7206306ebb4mr21579940b3a.26.1730310902743; Wed, 30 Oct 2024
+ 10:55:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <bf1c5738-de6a-49d5-9920-bbeb30ebd879@amd.com>
-X-Mailman-Approved-At: Wed, 30 Oct 2024 18:20:04 +0100
+References: <20241029192222.362445-1-sjg@chromium.org>
+ <20241029192222.362445-3-sjg@chromium.org>
+ <28e1ac54-c813-4b3d-b301-1bd408f29e28@gmx.de>
+In-Reply-To: <28e1ac54-c813-4b3d-b301-1bd408f29e28@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 30 Oct 2024 19:54:25 +0200
+Message-ID: <CAC_iWjL7h0qO3g1hVzqKVmxehR=6zd7jUFV=U5ebN5pOa-di=w@mail.gmail.com>
+Subject: Re: [PATCH v9 02/11] efi_loader: Add a test app
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,144 +92,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 30, 2024 at 04:49:10PM +0100, Michal Simek wrote:
-> 
-> 
-> On 10/30/24 15:38, Vasileios Amoiridis wrote:
-> > On Wed, Oct 30, 2024 at 02:13:43PM +0100, Michal Simek wrote:
-> > > 
-> > > 
-> > > On 10/29/24 19:58, Vasileios Amoiridis wrote:
-> > > > From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
-> > > > 
-> > > > Add native support of the bootcount mechanism in the ZynqMP by utilising internal
-> > > > PMU registers. The Persistent Global Storage Registers of the Platform Management
-> > > > Unit can keep their value during reboot cycles unless there is a POR reset, making
-> > > > them appropriate for the bootcount mechanism.
-> > > > 
-> > > > Signed-off-by: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
-> > > > ---
-> > > >    drivers/bootcount/Kconfig            |  4 ++++
-> > > >    drivers/bootcount/Makefile           |  1 +
-> > > >    drivers/bootcount/bootcount_zynqmp.c | 28 ++++++++++++++++++++++++++++
-> > > >    3 files changed, 33 insertions(+)
-> > > >    create mode 100644 drivers/bootcount/bootcount_zynqmp.c
-> > > > 
-> > > > diff --git a/drivers/bootcount/Kconfig b/drivers/bootcount/Kconfig
-> > > > index fa6d8e7128..95b6a9541a 100644
-> > > > --- a/drivers/bootcount/Kconfig
-> > > > +++ b/drivers/bootcount/Kconfig
-> > > > @@ -82,6 +82,10 @@ config BOOTCOUNT_AT91
-> > > >    	bool "Boot counter for Atmel AT91SAM9XE"
-> > > >    	depends on AT91SAM9XE
-> > > > +config BOOTCOUNT_ZYNQMP
-> > > > +	bool "Boot counter for Zynq UltraScale+ MPSoC"
-> > > > +	depends on ARCH_ZYNQMP
-> > > 
-> > > 
-> > > help would help to also described where that count is stored.
-> > > 
-> > 
-> > Hi Michal,
-> > 
-> > thanks for the review. Indeed I could add it.
-> > 
-> > > And why not to have it under DM/U_BOOT_DRIVER?
-> > > You don't need to create compatible string for it just instantiate it.
-> > > 
-> > > Look at:
-> > > 
-> > > U_BOOT_DRVINFO(soc_xilinx_zynqmp) = {
-> > >           .name = "soc_xilinx_zynqmp",
-> > > };
-> > > 
-> > 
-> > I was not fully aware of this, I could try it. Just out of curiosity, is
-> > this the new/prefered way of adding new drivers?
-> > 
-> > > 
-> > > > +
-> > > >    config DM_BOOTCOUNT
-> > > >            bool "Boot counter in a device-model device"
-> > > >    	help
-> > > > diff --git a/drivers/bootcount/Makefile b/drivers/bootcount/Makefile
-> > > > index 245f879633..487adc1212 100644
-> > > > --- a/drivers/bootcount/Makefile
-> > > > +++ b/drivers/bootcount/Makefile
-> > > > @@ -3,6 +3,7 @@
-> > > >    obj-$(CONFIG_BOOTCOUNT_GENERIC)	+= bootcount.o
-> > > >    obj-$(CONFIG_BOOTCOUNT_MEM)	+= bootcount.o
-> > > >    obj-$(CONFIG_BOOTCOUNT_AT91)	+= bootcount_at91.o
-> > > > +obj-$(CONFIG_BOOTCOUNT_ZYNQMP)  += bootcount_zynqmp.o
-> > > 
-> > > please put it to the end of CONFIG_BOOTCOUNT to have it at least in correct location
-> > > 
-> > > >    obj-$(CONFIG_BOOTCOUNT_AM33XX)	+= bootcount_davinci.o
-> > > >    obj-$(CONFIG_BOOTCOUNT_RAM)	+= bootcount_ram.o
-> > > >    obj-$(CONFIG_BOOTCOUNT_ENV)	+= bootcount_env.o
-> > > > diff --git a/drivers/bootcount/bootcount_zynqmp.c b/drivers/bootcount/bootcount_zynqmp.c
-> > > > new file mode 100644
-> > > > index 0000000000..9bb801e188
-> > > > --- /dev/null
-> > > > +++ b/drivers/bootcount/bootcount_zynqmp.c
-> > > > @@ -0,0 +1,28 @@
-> > > > +// SPDX-License-Identifier: GPL-2.0-or-later
-> > > > +// SPDX-FileCopyrightText: 2024 CERN (home.cern)
-> > > > +
-> > > > +#include <bootcount.h>
-> > > > +#include <stdio.h>
-> > > > +#include <zynqmp_firmware.h>
-> > > > +
-> > > > +#define PMU_PERS_GLOB_GEN_STORAGE0 0x00FFD80050
-> > > 
-> > > In arch/arm/mach-zynqmp/include/mach/hardware.h
-> > > there is already structure defined and gen_storage0 is there too.
-> > > Please use it.
-> > > 
-> > > Regarding this location. Exception in PMUFW is using this reg.
-> > > It means at the end of day it is up to you if you want to use it or not.
-> > > 
-> > 
-> > In master branch (commit 5cca0e3f6e0ff17db92476235ea1bb9cd8cbc9eb) there
-> > is no gen_storage0 in the structure pmu_regs, only gen_storage4 and
-> > gen_storage6.
-> 
-> you are right but easy to extend that structure to have it there.
-> 
-> > 
-> > But in any case though, I don't use gen_storage0 which is the
-> > Global General Storage 0 but the Persistent Global General Storage 0
-> > which is in the in the offset 0x50 and is defined in [1]. According to
-> > this document, only registers {4:7} are used by FSBL and other Xilinx
-> > software products so from what I understand registers {0:3} are free to
-> > use. If that's not the case, which one of them is free for use?
-> > 
-> > [1]: https://docs.amd.com/r/en-US/ug1087-zynq-ultrascale-registers/PERS_GLOB_GEN_STORAGE0-PMU_GLOBAL-Register
-> 
-> in embedded sw you can find this
-> lib/sw_apps/zynqmp_pmufw/src/xpfw_start.S:77:           addik   r3,     r0,
-> 0xffd80050
-> lib/sw_apps/zynqmp_pmufw/src/xpfw_start.S:81:           addik   r3,     r0,
-> 0xffd80054
-> 
-> And there are 2 pages which describe their usage
-> 
-> https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18841724/PMU+Firmware#PMUFirmware-RegistersreservedforPMUFirmware
-> 
-> https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842019/Zynq+UltraScale+FSBL#ZynqUltraScale+FSBL-WhatarethememoryregionsandregistersreservedforFSBL?
-> 
-> But as I said I am fine if you choose one and you will use it for bootcount.
-> 
-> Thanks
-> M
+Hi Heinrich
+
+
+
+On Wed, 30 Oct 2024 at 18:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
+> On 10/29/24 20:22, Simon Glass wrote:
+> > Add a simple app to use for testing. This is intended to do whatever it
+> > needs to for testing purposes. For now it just prints a message and
+> > exits boot services.
+> >
+> > There was a considerable amount of discussion about whether it is OK to
+> > call exit-boot-services and then return to U-Boot. This is not normally
+> > done in a real application, since exit-boot-services is used to
+> > completely disconnect from U-Boot. However, since this is a test, we
+> > need to check the results of running the app, so returning is necessary.
+> > It works correctly and it provides a nice model of how to test the EFI
+> > code in a simple way.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v9:
+> > - Update license
+> > - Fix 'sevices' typo
+> >
+> > Changes in v7:
+> > - Update commit message
+> >
+> >   lib/efi_loader/Kconfig   | 10 ++++++
+> >   lib/efi_loader/Makefile  |  1 +
+> >   lib/efi_loader/testapp.c | 68 ++++++++++++++++++++++++++++++++++++++++
+> >   3 files changed, 79 insertions(+)
+> >   create mode 100644 lib/efi_loader/testapp.c
+> >
+> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > index 37572c82f54..44319729bda 100644
+> > --- a/lib/efi_loader/Kconfig
+> > +++ b/lib/efi_loader/Kconfig
+> > @@ -584,6 +584,16 @@ config BOOTEFI_HELLO_COMPILE
+> >         No additional space will be required in the resulting U-Boot binary
+> >         when this option is enabled.
+> >
+> > +config BOOTEFI_TESTAPP_COMPILE
+> > +     bool "Compile an EFI test app for testing"
+> > +     default y
+> > +     help
+> > +       This compiles an app designed for testing. It is packed into an image
+> > +       by the test.py testing frame in the setup_efi_image() function.
+> > +
+> > +       No additional space will be required in the resulting U-Boot binary
+> > +       when this option is enabled.
+> > +
+> >   endif
+> >
+> >   source "lib/efi/Kconfig"
+> > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> > index 8ec240cb864..7c8b2dd1ad6 100644
+> > --- a/lib/efi_loader/Makefile
+> > +++ b/lib/efi_loader/Makefile
+> > @@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
+> >   ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+> >   apps-y += dtbdump
+> >   endif
+> > +apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
+> >
+> >   obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+> >   obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
+> > diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
+> > new file mode 100644
+> > index 00000000000..a28fc17ce5b
+> > --- /dev/null
+> > +++ b/lib/efi_loader/testapp.c
+> > @@ -0,0 +1,68 @@
+> > +// SPDX-License-Identifier: GPL-2.0-or-later
+> > +/*
+> > + * Hello world EFI application
+> > + *
+> > + * Copyright 2024 Google LLC
+> > + * Written by Simon Glass <sjg@chromium.org>
+> > + *
+> > + * This test program is used to test the invocation of an EFI application.
+> > + * It writes a few messages to the console and then exits boot services
+> > + */
+> > +
+> > +#include <efi_api.h>
+> > +
+> > +static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
+> > +
+> > +static struct efi_system_table *systable;
+> > +static struct efi_boot_services *boottime;
+> > +static struct efi_simple_text_output_protocol *con_out;
+> > +
+> > +/**
+> > + * efi_main() - entry point of the EFI application.
+> > + *
+> > + * @handle:  handle of the loaded image
+> > + * @systab:  system table
+> > + * Return:   status code
+> > + */
+> > +efi_status_t EFIAPI efi_main(efi_handle_t handle,
+> > +                          struct efi_system_table *systab)
+> > +{
+> > +     struct efi_loaded_image *loaded_image;
+> > +     efi_status_t ret;
+> > +     efi_uintn_t map_size;
+> > +     efi_uintn_t map_key;
+> > +     efi_uintn_t desc_size;
+> > +     u32 desc_version;
+> > +
+> > +     systable = systab;
+> > +     boottime = systable->boottime;
+> > +     con_out = systable->con_out;
+> > +
+> > +     /* Get the loaded image protocol */
+> > +     ret = boottime->open_protocol(handle, &loaded_image_guid,
+> > +                                   (void **)&loaded_image, NULL, NULL,
+> > +                                   EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> > +     if (ret != EFI_SUCCESS) {
+> > +             con_out->output_string
+> > +                     (con_out, u"Cannot open loaded image protocol\r\n");
+> > +             goto out;
+> > +     }
+> > +
+> > +     /* UEFI requires CR LF */
+> > +     con_out->output_string(con_out, u"U-Boot test app for EFI_LOADER\r\n");
+> > +
+> > +out:
+> > +     map_size = 0;
+> > +     ret = boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size,
+> > +                                    &desc_version);
+> > +     con_out->output_string(con_out, u"Exiting boot services\n");
+> > +
+> > +     /* exit boot services so that this part of U-Boot can be tested */
+> > +     boottime->exit_boot_services(handle, map_key);
+>
+> Hello Simon,
+>
+> I am not NAKing this patch. But maybe you could rethink if this call
+> tells us anything new about the correct function of ExitBootServices().
+>
+> We already have a test of ExitBootServices() in lib/efi_selftest/ and
+> maybe we should extend that test to check more.
+>
+> By removing ExitBootServices() we could keep U-Boot in a well defined
+> state which will allow us to run any number of bootmeth tests in
+> sequence and keep the EFI sub-system in a consistent state.
 
-Ah okay I see. It was much easier to look on the UG1087 document, I
-didn't think of looking somewhere else. Thanks!
+FWIW I proposed exactly the same in [0].
 
-In that case I would prefer to use maybe use one of the 2 registers
-that are not used, like pers_gen_storage{2,3}. Would that still be
-okay for you?
+[0] https://lore.kernel.org/u-boot/CAC_iWjJYqrh6MS50d6MxdStJFGg2pWnf1PHwQ9muYDPmOBP7Lg@mail.gmail.com/
 
-Cheers,
-Vasilis
+Thanks
+/Ilias
+>
+> Best regards
+>
+> Heinrich
+>
+>
+> > +
+> > +     /* now exit for real */
+> > +     ret = boottime->exit(handle, ret, 0, NULL);
+> > +
+> > +     /* We should never arrive here */
+> > +     return ret;
+> > +}
+>
