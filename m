@@ -4,136 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98C14D74977
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 06:45:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBCBFD7495E
+	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 07:41:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DD8289207;
-	Wed, 30 Oct 2024 07:44:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id EEC6D891D2;
+	Wed, 30 Oct 2024 08:41:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="m+nbdtRW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LLnhNAa1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 769E189202; Wed, 30 Oct 2024 07:44:56 +0100 (CET)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2061b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::61b])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EB06D891E1; Wed, 30 Oct 2024 08:41:41 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F24CA89202
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 07:44:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0E70890AE
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 08:41:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=N4LsLuQ2h4sMxy6jP18zbaaQQGYAT8Ke3ZMNr9F/WjqtctcIFw9IG80mrvRlmRlGWLfV1t1DLdxXnMnOzjL9BLoVkTNfxkVXxEK9xMd6NVl00aGRFb1IQyfwYhPgXTH3LY+DYTzcFfqHTbWWzx5pEWx5iOIumz8sTmzV7qqa67Lp0NX9Rmy3NEk6pazdYBAST2EkAHM/5LrDiTvcS+6ezsEwQCx5rroxfvXvPsMK22Jt+ySx0S2UsxpBjtk+rMQD2I75v7ht/CdNo9r3Xmz3hYIZ/IbJ58f5nQWeamkqBn0hADzcb5AJXGIDlhOdxmniQtk3VrqFhG0Gvz+uGTJNdA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Zhu+25n90FlcaBW3hto8wQIfk3wlk/choLOF14snj3M=;
- b=U0d6sSPxdYiWlNB8WvjQ8fT+F+Xf+izVMfq3AaNus1Hz2/V8TJIMDJcm5vaZt6weuzkwembDIXVjKVJr/Ho+9O+OXoiCl9ND183iJtR+bP5ALyD3qwtcoeZTtYe6Xk47qCVMFC5b/va2WbMSsATPbY8mbrSDAnLcoHyOSNS5CYgztAeFGpN40Fcl/OSk7+pxIw+zOHRZoPKe0gCfhlz7weJ1iD/BOIIlfRph20cY2/D5bpepVlvm0yogMcJDMesScmWTx+GdvJTCpDJ2yiwxrQBqTKMphCqjVsAKz3g2lRWY99PZoO+ECDzqSLa4OfIdJwNacItxYUAohk7pHJA2DQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Zhu+25n90FlcaBW3hto8wQIfk3wlk/choLOF14snj3M=;
- b=m+nbdtRWNvASHQ4wtP7XN1S/gfREEA7pPtjT/Pom0NZrbRI9V6IWNVyF/wzjvb31C25dxUD/AZRaCc/xVB7Id/BgR4Q/43XOt4kSM314p68PRyZoe93kGIQnpcWAm2Xqzbd1+jtoO06QzlPPHXlkFJdnEMVAD5OxGDFBk9/3/1g=
-Received: from SA0PR11CA0181.namprd11.prod.outlook.com (2603:10b6:806:1bc::6)
- by CH2PR12MB4214.namprd12.prod.outlook.com (2603:10b6:610:aa::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.32; Wed, 30 Oct
- 2024 06:44:47 +0000
-Received: from SA2PEPF000015CC.namprd03.prod.outlook.com
- (2603:10b6:806:1bc:cafe::fa) by SA0PR11CA0181.outlook.office365.com
- (2603:10b6:806:1bc::6) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.17 via Frontend
- Transport; Wed, 30 Oct 2024 06:44:46 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SA2PEPF000015CC.mail.protection.outlook.com (10.167.241.202) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8114.16 via Frontend Transport; Wed, 30 Oct 2024 06:44:46 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 30 Oct
- 2024 01:44:42 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 30 Oct
- 2024 01:43:36 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 30 Oct 2024 01:43:34 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
- <git@amd.com>
-Subject: [PATCH v9 7/7] arm64: zynqmp: Update the usb5744 hub node as per
- binding
-Date: Wed, 30 Oct 2024 12:13:14 +0530
-Message-ID: <20241030064314.28604-8-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20241030064314.28604-1-venkatesh.abbarapu@amd.com>
-References: <20241030064314.28604-1-venkatesh.abbarapu@amd.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-539fb49c64aso10409386e87.0
+ for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 00:41:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1730274099; x=1730878899; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RH4uEwFYLkCBUecZpOgi75DNQ56wsrX3V0LO4y0tHPA=;
+ b=LLnhNAa1ia/sPbzd+nRx5zrHC1Z1WYA5vjIoClkMtgqctD9zdBMCus3ivTfZNdTtxy
+ gJbHUYOQG7YiHZwP8ZAvXukzhuiv+8K4BqmL+r2hxF+V6Lg0O6drCYIn4St5wL9AnDKG
+ HjeSfuK30u7FnJunX6OI9Y1hmy+H6VAJ8NpJU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730274099; x=1730878899;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RH4uEwFYLkCBUecZpOgi75DNQ56wsrX3V0LO4y0tHPA=;
+ b=Tj+L1zAQqx7Gm6zPfJWy6srpmjyq9SXKNjnwekR9uCkDQR9gzr1tAgWyJn99c3v/PR
+ tZLqG+ZWN+U4TTh5N0PV2P1ak8Rlxyyhz0AhoJa09SyqZNo8ZPfhBIHrIX3Pgqg1hL5c
+ ygBrjjIs3g9AI77saLitjWLPgQfd6VM+4P4rYF9//YNV0iAzvnhDe9RsfHj0cAJQ1qsq
+ Bcan8v40sYWU9cMgRxmSTQLph8sMS0qAAnTai/KZuV0q06Q2W4ArOWhi9BIVhaBygBK2
+ bzYjME1Vr7pAKnBR8H4uZQqG+ie32x4ta9JsrOmhVXyADOR3NMUytX8nBETYuGe3b9LC
+ HmtA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUtZaszGRqDNs34ZZ6p9VzIxUraM8sMEALjoo7v7i+GCtv7y7l0VKq1ASd9Cdd1bymhtOIK964=@lists.denx.de
+X-Gm-Message-State: AOJu0YyMF4GtEMWcqxEMzWLuDWTE5ApXnElpheSKLxHSfN/dy3froShH
+ xXir/tvI8KBcIf6+4OGudvO5BI8gw8AgVDCdaeRGsaX1yjMWmethmyNqPobSzuVUnCuDXU9N3Fj
+ LLFdWKW0QmY9si2J20qxWthJfTlRFQgyyT+Y5
+X-Google-Smtp-Source: AGHT+IH5KVyTgVtTdbVgeX86mXqmRf3F/ifNtinK0ShwyomoBd0xDMeR+eLWpbxBoK5DG1qNQTcFxa+U9PJSDRKJ6ks=
+X-Received: by 2002:a05:6512:3051:b0:52c:9ae0:beed with SMTP id
+ 2adb3069b0e04-53b34a35058mr10995777e87.52.1730274098610; Wed, 30 Oct 2024
+ 00:41:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF000015CC:EE_|CH2PR12MB4214:EE_
-X-MS-Office365-Filtering-Correlation-Id: b426f86d-9395-456c-824f-08dcf8ae5825
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?0lYbZU2ekaOE/igQKubCdFW7bGLl3lkeL+9HMcEDGYabfQU4YbzfqOHN8n/S?=
- =?us-ascii?Q?f2hcXXJbk+HHL0wbh8QEZ0GJNUAbKjVBb969c1z7iYLlZpxQQLb4WoDIl9jD?=
- =?us-ascii?Q?SJaMPe6YroqqY2GKrhmygUFJpCTCjrq5U64AgKcqGjjc3ZT/PAt0j1HGbTkq?=
- =?us-ascii?Q?Mh4XXK5e/wrJaeGksHNRSmCYAJJLxzqoPOSOcjqYdCGf2MA3b/cakflb6QsW?=
- =?us-ascii?Q?qRKExuzVCP9n1XXjEgohIQZV3qn/Fn7pujY8MM0G7vD4ulXqR2ZGLs0ivcMU?=
- =?us-ascii?Q?dbeFD+yPOhHNBkPVkNlqKgGB/KbQZ7c0mbkH8jaEq4T6g238ZZGqvUjWwj3M?=
- =?us-ascii?Q?tioghUPATTKD6rJjBb8W9y2xcMzLMjIzrWlFSSyi1GytHVrwo1UjjzvmWaXR?=
- =?us-ascii?Q?Db4MkDlbpIsJss454jylICSGncoIR0qWX1kZA0rV43qJa+2Fn9jOddS1oby2?=
- =?us-ascii?Q?HsWDgTLj6pVQR3C4/E9RkmO9ZGvmYYgIibbxZkEtZtqaz9KAShZElgFL5m7R?=
- =?us-ascii?Q?7qgVP7ONB1mS2TpHDkyj5e9B6HKherGiDDEEWnksz5rj53It6GI1vVdk4QEp?=
- =?us-ascii?Q?nG7V9C4f4rnfcn6F1cSYJ+o6lUiGdqkodr0uhFUKA4EhPbgUslOOmwm6K9cZ?=
- =?us-ascii?Q?dW5B6cFO+7Ta+msirlESsONIG+B3wM7V4HtZHlUYQK7pKDxgnfpEDlgyPqO1?=
- =?us-ascii?Q?ow2+ZKMWP04/AEn4BoyT1F/ZfnPNR6blaYpQIWjaembsmQxt9idLRd+cFkvm?=
- =?us-ascii?Q?vm1a8iqtZ9FFQ0b56D10U0JUpD2GYntyreCda6DGqUygLJzkUTqLaeBHdU7k?=
- =?us-ascii?Q?rdfPlpjU7E8Nj7vVAQ8eDyqW3LTxvRIxKbic8V1Ullm600NnEvGPeTUirQ0g?=
- =?us-ascii?Q?ba1jcZ9oFt9enkQkpTnzPEAKaoBSrC5azedrTheywzX8dncmQUigB59u5b8G?=
- =?us-ascii?Q?VK33wi/bxEwhO1km3R6emziAO9ipHK8vgMOZDKmNVP+Etb4LPJ8N954ECUzz?=
- =?us-ascii?Q?geb0SbsclcKtIPrV7gNXagPw8ipUHc9LvgB8ADljn2XSox/DoHNg2qUlDYRk?=
- =?us-ascii?Q?6B66pVRocukcyi2CQM2dxoABbXiVCDk+dA1Fgc4ZFoylfzi1dEdTDpJ3iHYt?=
- =?us-ascii?Q?RggTQ4zWVt/9JfVkpC4/RfzrEhuMBgyiMMhXQVIAA7hLAQQUnuahujH07G6x?=
- =?us-ascii?Q?U48zfV/WzrahNZ7L/Nqk564ozHlso4Z8mD76DgujdDv9BU5olCFrehTJyTI7?=
- =?us-ascii?Q?yzIvuFGTH4fOtGRy+pCDK4BzDOyLvJQCtkTkzVDBJbnVdJq2H9ylnZP7qq8p?=
- =?us-ascii?Q?jAJFODj+0BILBjZk7FEqR/y0nNo5aWGLyqP5az4WSaeqFQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2024 06:44:46.5837 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b426f86d-9395-456c-824f-08dcf8ae5825
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF000015CC.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4214
+References: <20241022120032.196311-1-sjg@chromium.org>
+ <20241022120032.196311-3-sjg@chromium.org>
+ <9f322139-ad6d-494d-879b-eab3211b874b@gmx.de>
+ <CAFLszTgHvUo+0g+SBhC=Xbd_aFxdP_DF=wg_G3ZRTRP-k-2qVg@mail.gmail.com>
+ <adacb624-28a8-41a0-a22b-19d2b9d3a5b1@gmx.de>
+ <CAFLszThgu+jsDMDGJdESP+UOTRRGJ0ORN-xeDCkOYY7xPJq7-A@mail.gmail.com>
+ <20241029164645.GF4959@bill-the-cat>
+In-Reply-To: <20241029164645.GF4959@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 30 Oct 2024 08:41:27 +0100
+Message-ID: <CAFLszThSAcQnnoyhTyd68m4LsO+W+Se0c7DmP9++Nx76zHzijQ@mail.gmail.com>
+Subject: Re: [PATCH v8 2/8] efi_loader: Add a test app
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,247 +93,283 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Updating the usb5744 hub node as per the latest upstream DT binding
-https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/
-tree/Documentation/devicetree/bindings/usb/microchip,usb5744.yaml?h=v6.8.8
+Hi Tom,
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Acked-by: Michal Simek <michal.simek@amd.com>
----
- arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 48 ++++++++++++++++++++++++++
- arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 48 ++++++++++++++++++++++++++
- arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 18 ++++++++++
- arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 25 +++++++++++++-
- 4 files changed, 138 insertions(+), 1 deletion(-)
+On Tue, 29 Oct 2024 at 17:46, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Oct 29, 2024 at 04:46:16PM +0100, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Mon, 28 Oct 2024 at 19:43, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > >
+> > > On 10/28/24 18:00, Simon Glass wrote:
+> > > > Hi Heinrich,
+> > > >
+> > > > On Mon, 28 Oct 2024 at 07:11, Heinrich Schuchardt <xypron.glpk@gmx.de
+> > > > <mailto:xypron.glpk@gmx.de>> wrote:
+> > > >  >
+> > > >  > On 10/22/24 14:00, Simon Glass wrote:
+> > > >  > > Add a simple app to use for testing. This is intended to do whatever it
+> > > >  > > needs to for testing purposes. For now it just prints a message and
+> > > >  > > exits boot services.
+> > > >  > >
+> > > >  > > There was a considerable amount of discussion about whether it is OK to
+> > > >  > > call exit-boot-services and then return to U-Boot. This is not normally
+> > > >  > > done in a real application, since exit-boot-services is used to
+> > > >  > > completely disconnect from U-Boot. However, since this is a test, we
+> > > >  > > need to check the results of running the app, so returning is
+> > > > necessary.
+> > > >  > > It works correctly and it provides a nice model of how to test the EFI
+> > > >  > > code in a simple way.
+> > > >  > >
+> > > >  > > Signed-off-by: Simon Glass <sjg@chromium.org <mailto:sjg@chromium.org>>
+> > > >  > > ---
+> > > >  > >
+> > > >  > > (no changes since v7)
+> > > >  > >
+> > > >  > > Changes in v7:
+> > > >  > > - Update commit message
+> > > >  > >
+> > > >  > >   lib/efi_loader/Kconfig   | 10 ++++++
+> > > >  > >   lib/efi_loader/Makefile  |  1 +
+> > > >  > >   lib/efi_loader/testapp.c | 68 +++++++++++++++++++++++++++++++++++
+> > > > +++++
+> > > >  > >   3 files changed, 79 insertions(+)
+> > > >  > >   create mode 100644 lib/efi_loader/testapp.c
+> > > >  > >
+> > > >  > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > > >  > > index 69b2c9360d8..6ced29da719 100644
+> > > >  > > --- a/lib/efi_loader/Kconfig
+> > > >  > > +++ b/lib/efi_loader/Kconfig
+> > > >  > > @@ -565,6 +565,16 @@ config BOOTEFI_HELLO_COMPILE
+> > > >  > >         No additional space will be required in the resulting U-
+> > > > Boot binary
+> > > >  > >         when this option is enabled.
+> > > >  > >
+> > > >  > > +config BOOTEFI_TESTAPP_COMPILE
+> > > >  > > +     bool "Compile an EFI test app for testing"
+> > > >  > > +     default y
+> > > >  > > +     help
+> > > >  > > +       This compiles an app designed for testing. It is packed
+> > > > into an image
+> > > >  > > +       by the test.py testing frame in the setup_efi_image() function.
+> > > >  > > +
+> > > >  > > +       No additional space will be required in the resulting U-
+> > > > Boot binary
+> > > >  > > +       when this option is enabled.
+> > > >  > > +
+> > > >  > >   endif
+> > > >  > >
+> > > >  > >   source "lib/efi/Kconfig"
+> > > >  > > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> > > >  > > index 00d18966f9e..87131ab911d 100644
+> > > >  > > --- a/lib/efi_loader/Makefile
+> > > >  > > +++ b/lib/efi_loader/Makefile
+> > > >  > > @@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
+> > > >  > >   ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+> > > >  > >   apps-y += dtbdump
+> > > >  > >   endif
+> > > >  > > +apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
+> > > >  > >
+> > > >  > >   obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+> > > >  > >   obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
+> > > >  > > diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
+> > > >  > > new file mode 100644
+> > > >  > > index 00000000000..feb444c92e9
+> > > >  > > --- /dev/null
+> > > >  > > +++ b/lib/efi_loader/testapp.c
+> > > >  > > @@ -0,0 +1,68 @@
+> > > >  > > +// SPDX-License-Identifier: GPL-2.0+
+> > > >  >
+> > > >  > This is not a valid SPDX identifier. Please, use GPL-2.0-or-later.
+> > > >  >
+> > > >  > > +/*
+> > > >  > > + * Hello world EFI application
+> > > >  > > + *
+> > > >  > > + * Copyright 2024 Google LLC
+> > > >  > > + * Written by Simon Glass <sjg@chromium.org <mailto:sjg@chromium.org>>
+> > > >  > > + *
+> > > >  > > + * This test program is used to test the invocation of an EFI
+> > > > application.
+> > > >  > > + * It writes a few messages to the console and then exits boot
+> > > > services
+> > > >  > > + */
+> > > >  > > +
+> > > >  > > +#include <efi_api.h>
+> > > >  > > +
+> > > >  > > +static const efi_guid_t loaded_image_guid =
+> > > > EFI_LOADED_IMAGE_PROTOCOL_GUID;
+> > > >  > > +
+> > > >  > > +static struct efi_system_table *systable;
+> > > >  > > +static struct efi_boot_services *boottime;
+> > > >  > > +static struct efi_simple_text_output_protocol *con_out;
+> > > >  > > +
+> > > >  > > +/**
+> > > >  > > + * efi_main() - entry point of the EFI application.
+> > > >  > > + *
+> > > >  > > + * @handle:  handle of the loaded image
+> > > >  > > + * @systab:  system table
+> > > >  > > + * Return:   status code
+> > > >  > > + */
+> > > >  > > +efi_status_t EFIAPI efi_main(efi_handle_t handle,
+> > > >  > > +                          struct efi_system_table *systab)
+> > > >  > > +{
+> > > >  > > +     struct efi_loaded_image *loaded_image;
+> > > >  > > +     efi_status_t ret;
+> > > >  > > +     efi_uintn_t map_size;
+> > > >  > > +     efi_uintn_t map_key;
+> > > >  > > +     efi_uintn_t desc_size;
+> > > >  > > +     u32 desc_version;
+> > > >  > > +
+> > > >  > > +     systable = systab;
+> > > >  > > +     boottime = systable->boottime;
+> > > >  > > +     con_out = systable->con_out;
+> > > >  > > +
+> > > >  > > +     /* Get the loaded image protocol */
+> > > >  > > +     ret = boottime->open_protocol(handle, &loaded_image_guid,
+> > > >  > > +                                   (void **)&loaded_image, NULL, NULL,
+> > > >  > > +                                   EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> > > >  > > +     if (ret != EFI_SUCCESS) {
+> > > >  > > +             con_out->output_string
+> > > >  > > +                     (con_out, u"Cannot open loaded image
+> > > > protocol\r\n");
+> > > >  > > +             goto out;
+> > > >  > > +     }
+> > > >  > > +
+> > > >  > > +     /* UEFI requires CR LF */
+> > > >  > > +     con_out->output_string(con_out, u"U-Boot test app for
+> > > > EFI_LOADER\r\n");
+> > > >  > > +
+> > > >  > > +out:
+> > > >  > > +     map_size = 0;
+> > > >  > > +     ret = boottime->get_memory_map(&map_size, NULL, &map_key,
+> > > > &desc_size,
+> > > >  > > +                                    &desc_version);
+> > > >  > > +     con_out->output_string(con_out, u"Exiting boot sevices\n");
+> > > >  >
+> > > >  > %s/sevices/services/g
+> > > >  >
+> > > >  > > +
+> > > >  > > +     /* exit boot services so that this part of U-Boot can be
+> > > > tested */
+> > > >  > > +     boottime->exit_boot_services(handle, map_key);
+> > > >  > > +
+> > > >  > > +     /* now exit for real */
+> > > >  > > +     ret = boottime->exit(handle, ret, 0, NULL);
+> > > >  >
+> > > >  > As written before boot services are not available after
+> > > >  > ExitBootServices(). Please, call the ResetSystem() service.
+> > > >
+> > > > I already explained this. If I call reset then U-Boot exits and the
+> > > > console output cannot be checked by the C test. If I tell sandbox's
+> > > > reset-driver to ignore the reset request, then it also doesn't come back
+> > > > to the test.
+> > > >
+> > > >  >
+> > > >  >
+> > > >  > > +
+> > > >  > > +     /* We should never arrive here */
+> > > >  > > +     return ret;
+> > > >  >
+> > > >  > After ExitBootServices() you must not return.
+> > > >  >
+> > > >  > You can just do an endless loop if ResetSystem() fails:
+> > > >  >
+> > > >  > for (;;);
+> > > >
+> > > > No, because I need to check the output of the app. Please can you try to
+> > > > run this test so you can see what it is doing?
+> > >
+> > > The Python framework lets you check the output whether you are rebooting
+> > > or not.
+> >
+> > Yes, I complained about catching reboots at the time, but it was
+> > submitted against my wishes. It is not a good design to create a
+> > problem in a test and then work around it later. It is easier to just
+> > return, rather than try to catch a reset in the Python test. For one
+> > thing, it makes using gdb much easier to have the test be
+> > self-contained.
+>
+> And sometimes a test needs to restart the actual system for the test.
+> This sounds like another case of that, and not some arbitrary bad design
+> restart.
 
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-index 6349a0e108..e40840acb8 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-@@ -105,11 +105,19 @@
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			reg = <0>;
-+			hub_1: usb-hub@2d {
-+				compatible = "microchip,usb5744";
-+				reg = <0x2d>;
-+			};
- 		};
- 		usbhub_i2c1: i2c@1 {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			reg = <1>;
-+			hub_2: usb-hub@2d {
-+				compatible = "microchip,usb5744";
-+				reg = <0x2d>;
-+			};
- 		};
- 		/* Bus 2/3 are not connected */
- 	};
-@@ -164,6 +172,26 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	/* 2.0 hub on port 1 */
-+	hub_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub_3_0>;
-+		i2c-bus = <&hub_1>;
-+		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* 3.0 hub on port 2 */
-+	hub_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub_2_0>;
-+		i2c-bus = <&hub_1>;
-+		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &usb1 { /* mio64 - mio75 */
-@@ -188,6 +216,26 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	/* 2.0 hub on port 1 */
-+	hub1_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub1_3_0>;
-+		i2c-bus = <&hub_2>;
-+		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* 3.0 hub on port 2 */
-+	hub1_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub1_2_0>;
-+		i2c-bus = <&hub_2>;
-+		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &gem0 { /* mdio mio50/51 */
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-index b0d737d3ca..ce1ad2b765 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-@@ -117,11 +117,19 @@
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			reg = <0>;
-+			hub_1: usb-hub@2d {
-+				compatible = "microchip,usb5744";
-+				reg = <0x2d>;
-+			};
- 		};
- 		usbhub_i2c1: i2c@1 {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			reg = <1>;
-+			hub_2: usb-hub@2d {
-+				compatible = "microchip,usb5744";
-+				reg = <0x2d>;
-+			};
- 		};
- 		/* Bus 2/3 are not connected */
- 	};
-@@ -184,6 +192,26 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	/* 2.0 hub on port 1 */
-+	hub_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub_3_0>;
-+		i2c-bus = <&hub_1>;
-+		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* 3.0 hub on port 2 */
-+	hub_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub_2_0>;
-+		i2c-bus = <&hub_1>;
-+		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &usb1 { /* mio64 - mio75 */
-@@ -209,6 +237,26 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	/* 2.0 hub on port 1 */
-+	hub1_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub1_3_0>;
-+		i2c-bus = <&hub_2>;
-+		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* 3.0 hub on port 2 */
-+	hub1_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub1_2_0>;
-+		i2c-bus = <&hub_2>;
-+		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &gem0 { /* mdio mio50/51 */
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-index 561b546e37..0ef0357bd2 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-@@ -142,6 +142,24 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	/* 2.0 hub on port 1 */
-+	hub_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub_3_0>;
-+		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* 3.0 hub on port 2 */
-+	hub_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub_2_0>;
-+		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &sdhci1 { /* on CC with tuned parameters */
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-index 64683e0ccb..92d8851eb8 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-@@ -92,7 +92,10 @@
- 		label = "ina260-u14";
- 		reg = <0x40>;
- 	};
--	/* u43 - 0x2d - USB hub */
-+	hub: usb-hub@2d {
-+		compatible = "microchip,usb5744";
-+		reg = <0x2d>;
-+	};
- 	/* u27 - 0xe0 - STDP4320 DP/HDMI splitter */
- };
- 
-@@ -146,6 +149,26 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	/* 2.0 hub on port 1 */
-+	hub_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub_3_0>;
-+		i2c-bus = <&hub>;
-+		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* 3.0 hub on port 2 */
-+	hub_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub_2_0>;
-+		i2c-bus = <&hub>;
-+		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &sdhci1 { /* on CC with tuned parameters */
--- 
-2.17.1
+Sorry, but I cannot tell the difference. We should not have tests
+which need to restart, except in extreme circumstances.
 
+>
+> To phrase that another way, you're trying to introduce workarounds in
+> the code to avoid having to make the test work like a real system. I do
+> not think that's a good idea for a test.
+
+Which work-around are you referring to?
+
+I discussed this somewhat with Heinrich earlier. We didn't really
+resolve it, but I did point out that if we want to reset/reinit the
+EFI system within U-Boot (as we do with driver model, devicetree and
+some other things) we can implement that when it is needed.
+
+>
+> > > The test seems not to build on anything but sandbox. We should be able
+> > > to test the boot methods on QEMU systems.
+> >
+> > Most tests run only on sandbox. You are welcome to extend the tests to
+> > cover more architectures. However I believe the most important thing
+> > is to test the code itself.
+>
+> We also need to write things in such a way that we don't have to start
+> over from scratch when testing on other emulation platforms. It's true
+> that it's unlikely anyone will run the full cycle of booting various off
+> the shelf distributions and architectures and boot media for every
+> change. But I've got ~2 hours between assembling a pull request and
+> looking at the build results and anything I can throw at a host and come
+> back to in that time I'll do every time. Things that are automated but
+> marginally longer I'll do with every tagged release.
+
+I'm not sure how best to attack this, even now. With the Labgrid
+integration (I am still hoping will land soon) I can boot into QEMU
+and perhaps into grub, but booting right into a distro is going to
+need ssh and networking (which is fine, it's just another step).
+
+Anyway, that is a bid sideways of your point. Sandbox tests are always
+going to be much easier to write than Python ones. They are faster to
+run, as well. We can't do things like 'assert_nextline()' with QEMU.
+Also I can't single step into QEMU with the debugger. Also with
+sandbox, it is possible to check the internal U-Boot-state, whereas
+with QEMU we have to print something on the console. So I believe that
+writing a QEMU test is an entirely different job from writing a
+sandbox test.
+
+There is something fundamental here which can be changed. Sandbox is
+really just better for testing U-Boot code, so long as we design the
+code properly for testing. Of course if we insist on not designing the
+code properly for testing, that erodes the advantage. But that would
+be the wrong direction.
+
+>
+> > > In efi_exit_boot_services() we
+> > >
+> > > * call dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL)
+> > > * call bootm_disable_interrupts()
+> > > * call board_quiesce_devices()
+> > > * disable all EFI timers
+> > > * disable EFI notification
+> > >
+> > > What do you expect U-Boot to do after all of this? You cannot reasonably
+> > > do any follow on test without rebooting.
+> >
+> > OK, well we can always add more code later as needed. So far, this
+> > seems to pass CI without problems.
+>
+> What EFI-based tests do you run on sandbox after this, without resetting
+> the system? That would perhaps help clarify the point.
+
+It depends on the ordering of things in CI. From what I can tell most
+(or all?) of them run after this test.
+
+But if this does cause a problem with future tests that we add, we
+should be able to fix it easily enough. In fact it would be nice to be
+able to re-init EFI.
+
+Regards,
+Simon
