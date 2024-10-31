@@ -4,80 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06C13D767F2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 18:02:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DCF3D767F4
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 18:02:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89A6689293;
-	Thu, 31 Oct 2024 19:02:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 081D5892CD;
+	Thu, 31 Oct 2024 19:02:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PcfEH7GS";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="YmZwOpeE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 335DD892E1; Thu, 31 Oct 2024 19:02:09 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D1629892CD; Thu, 31 Oct 2024 19:02:15 +0100 (CET)
+Received: from bali.collaboradmins.com (bali.collaboradmins.com
+ [IPv6:2a01:4f8:201:9162::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07B5189293
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 19:02:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 92D0388B8F
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 19:02:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2e2b549799eso924151a91.3
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 11:02:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730397725; x=1731002525; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=69AT9EWcfDFo486Zmzd07Bp/59MvAOvyQ08Hyr2XWyY=;
- b=PcfEH7GSxfsRdhd/kGxd3+3T0yFLPDPVBIaac76XZPXfvfz22ZKCKFcpMmXTBSpItA
- GIrju7VmkSfaDOVKIICkRTE924y0Uyqk2axsjzxOxk3XQ5/r3fnC+1lKQzG4J+vrEJ04
- pt3UPOabyC87D+cJ/Yw2gXUrU3XyQeRrzmw7g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730397725; x=1731002525;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=69AT9EWcfDFo486Zmzd07Bp/59MvAOvyQ08Hyr2XWyY=;
- b=sqO1JA4XUdmwFWnA6ktUkQI+AmtewQJNVtL6YH0Sbn3JQfdTqQf9+fBV9pjB5ZVFmQ
- V2DtuWfXSiEF5ZxfOq+6RlQ0Bj/lpjj9Bg9ZBUQ1OWcgS2+oMHAvpNV0K4+o9nJJlnm3
- Te7EcJGxcPaBsi+GOAVsWmGOgynWC8cPfqqSEtMU/leCRNn2m0v7vnA2lcAS/rwJ1qYx
- JTik3kmiJMIK2QZmDUktLA1ZhCqTv829NnTIbxCzt9rdM4dq36CUYldU6mse7QZUvYqx
- PDqIIH2HJ2DgwiFPfpD7BETjxp0rtMuADdE20xcmNgFznqvPthLHRsEdDRt+NdvBhnFr
- hOkw==
-X-Gm-Message-State: AOJu0Yz4QnT3R22webqAjsKLSeQSvHP62P8h4hi+hV03k0IEAidEq5BU
- 3xsGCo8g5ZN61e+XvI7nilmTeTEbXBQLHFEmFwm3DfNuAFMs3/gRxoyTxmR3/79U296c8jjm+30
- ixkEI+IYMxUuhbqFZtCsyIsqxy+b9e6QYSdaZ
-X-Google-Smtp-Source: AGHT+IHOeWaTFpAbnAK1WewR8L8bloWL/fW2wp4E/JRxvEqn2hjUTZKffKq/YreNI4JEz/kwvpZ4jX9UANj0PWLG/jc=
-X-Received: by 2002:a17:90b:3886:b0:2e2:b281:536e with SMTP id
- 98e67ed59e1d1-2e94c2bddd7mr1113633a91.15.1730397725586; Thu, 31 Oct 2024
- 11:02:05 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sebastian.reichel@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1730397733;
+ bh=qW4FXsjoMc5zZhgu5TU4zXmmvTInE2tDq1ShIrmmroI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=YmZwOpeEyDaMvg7yYdLsBEvnSWtnfMHt2ZtuAyxT2Btk4BucXRXsbyR9tyJSvxkWq
+ AY/x22glJIbtAIcIruFtY5Qp/UmDfbr4PVkJAHG2Kb5KKZD8shVCH0ltnxpGpwNZAH
+ fpKZ+H943DGw8o6KDQxd9nvThMV1GOSSoBt22c1wEfArNfmf5tiG1575XE9Y7LAqEE
+ RaU1RO+fKtIdSyJ4ftw8Md2QydY5mnJkfA1kZfkeWdWr4XXwiT2X54uU+61EUcXAc5
+ hoctfAPE5qTrKeTxeL9Nv8CDvL+v/YKs7PwpNt8V0C0EShT+kHHo10b1R1wrgR3x/7
+ sZPRICh9AifRg==
+Received: from jupiter.universe (dyndsl-091-248-210-236.ewe-ip-backbone.de
+ [91.248.210.236])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested) (Authenticated sender: sre)
+ by bali.collaboradmins.com (Postfix) with ESMTPSA id 2AE4E17E36BE;
+ Thu, 31 Oct 2024 19:02:13 +0100 (CET)
+Received: by jupiter.universe (Postfix, from userid 1000)
+ id DC4DB480075; Thu, 31 Oct 2024 19:02:12 +0100 (CET)
+From: Sebastian Reichel <sebastian.reichel@collabora.com>
+To: Eugen Hristev <eugen.hristev@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
+ u-boot@lists.denx.de
+Cc: Kever Yang <kever.yang@rock-chips.com>, FUKAUMI Naoki <naoki@radxa.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>
+Subject: [PATCH v1 1/1] rockchip: rock5b-rk3588: Enable automatic PCI
+ enumeration
+Date: Thu, 31 Oct 2024 19:01:56 +0100
+Message-ID: <20241031180212.116330-1-sebastian.reichel@collabora.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20241028124815.47262-1-sjg@chromium.org>
- <20241028124815.47262-11-sjg@chromium.org>
- <A00AAF0F-5E6B-4DE3-B18A-DD564026D3A8@gmx.de>
-In-Reply-To: <A00AAF0F-5E6B-4DE3-B18A-DD564026D3A8@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Oct 2024 19:01:47 +0100
-Message-ID: <CAFLszTj9EhCKkxjBotx-CvuKjuV2T7C6CyJTpHB59nerLavKjA@mail.gmail.com>
-Subject: Re: [PATCH 10/15] efi_loader: Add support for logging EFI calls
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Levi Yun <yeoreum.yun@arm.com>, 
- Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michal Simek <michal.simek@amd.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,28 +73,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+PCI enumeration is required to detect the onboard Ethernet device.
 
-On Tue, 29 Oct 2024 at 23:32, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
->
->
-> Am 28. Oktober 2024 13:48:01 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >The current logging system suffers from some disadvantages, mainly that
-> >it writes its output to the console and cannot be easily reviewed.
-> >
-> >Add a dedicated log, storing records in a binary format and including
-> >the result codes and any return values from each call. The log is built
-> >sequentially in memory and can be reviewed after any EFI operation. It
-> >could potentially be written to media for later review, but that is not
-> >implemented so far.
->
-> An EFI specific solution is not a good approach as it does not scale to other parts of the code.  Please, implement a log driver to collect the messages that you are interested in.
->
+Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+---
+ configs/rock5b-rk3588_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-I can do that too, but it isn't as easy to programmatically parse. I'd
-like to track what calls are made and understand better what is going
-on when Ubuntu boots, etc.
+diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
+index c54e13e8732c..e5b9f7d326b4 100644
+--- a/configs/rock5b-rk3588_defconfig
++++ b/configs/rock5b-rk3588_defconfig
+@@ -17,6 +17,7 @@ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+ CONFIG_SPL_SPI=y
+ CONFIG_PCI=y
++CONFIG_PCI_INIT_R=y
+ CONFIG_DEBUG_UART=y
+ CONFIG_AHCI=y
+ CONFIG_FIT=y
+-- 
+2.45.2
 
-Regards,
-Simon
