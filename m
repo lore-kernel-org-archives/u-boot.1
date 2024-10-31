@@ -4,61 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C7F7D767FA
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 19:17:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39A78D767FA
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 19:35:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF927892CF;
-	Thu, 31 Oct 2024 20:17:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 9EA1188C05;
+	Thu, 31 Oct 2024 20:34:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="dwblDb3c";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KwcV5I3i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15D5488B9E; Thu, 31 Oct 2024 20:17:51 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D157D885F5; Thu, 31 Oct 2024 20:34:57 +0100 (CET)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AA0A88B8F
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 20:17:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A45E288DB6
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 20:34:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8fe9=R4=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1730402260;
- bh=kwcxM6rJkwNZPRIJtR8DQd7KCM/WDdlmqVAmoUUIVKs=;
- b=dwblDb3cRUuxqwTBAEYWeHn1io9H5aPI+0o88Tfj78vsrtCrOkhY+uQazUEgUIv+CbgACoHxh
- l71eYEiMp8w+PsTZRKQ/2z64kdxgGA0MhP3wc/oX6qY1+ou6lGYUfrhOuFLSQUnbQ3zOhtKMYsS
- xllCnTYmYafcorZm/wV5BJ+bMIyH+QNAc6XNkXPCQuejYPmeEVuw3Bt+Ecka7YKO72pfNHVbKGi
- f6Tk4IfjU56lkZ263ffvxr1MMq9/S3xvicsDiq9m+6UiF+8JcvxgCUqSWbBycSSKbQ25XcrtiTp
- r7ZFvkLQ8yMyhM/JOtj9kZ8MIJze3vl/im432vyS1ypQ==
-Message-ID: <1d28e59e-9e92-4570-960c-ed642731a226@kwiboo.se>
-Date: Thu, 31 Oct 2024 20:17:32 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3e612437c09so791541b6e.2
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 12:34:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1730403294; x=1731008094; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=aobzggGum0XRitsUYl1eyQiBWXcEz5432cMk1Pwh59M=;
+ b=KwcV5I3iMWsXawKhLCVFl7FDHRlSInLZuvtWehA2Z+tbrsIGSQOqSup95hfks9ucT8
+ I1lG8IBIC9QICSy8Udr7gEq9ta45OQgkIHhLjTYSoKivFocvl+Fr7oHqnkhWhcmg1JpT
+ ekz0R1hXGldseZeC8envVsxscEvI2caPwtYkc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730403294; x=1731008094;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aobzggGum0XRitsUYl1eyQiBWXcEz5432cMk1Pwh59M=;
+ b=KKmET5+Z9vgK8X4R3yQZMjoZsu1uERKr8VHYpzuw3379AglXi60iUgA3Xi5qNWyBHr
+ 65UG4awBB+CPX27CUOWRSH94+pGMw5ZsVoisMmElHkjgrBlxyKCv1t+U3Z7aU9iwsuSk
+ etpfukAgFPWuNQjSdRbK/nHe+/ir1NsACUBBSAA9MR0Ajp2tfonsdfKgCPn5BgfxUcVN
+ OUGy7121O+w1wcXB21EmzWl3qnU/+9aV54aROabcLb+BeFDCowdwZOkG92wAITbgl/5Y
+ 3/IApzLlR9ORYvZ4dRPyqcOjxbiHz6UONzBQRpzj1bpJk2Aaq3pcpAEc7KN2dEC3YDgZ
+ 6jOQ==
+X-Gm-Message-State: AOJu0Yw8dhtyZcA1f4gQGOekRoKUyBNqWe6WtwARx22axCAX8mWNK0sp
+ jzIgdgIvRJUN5neHqWj2AWMGtjnZywufPbdGMWMTQy4uiAK0CX5UiCwdlDju+fw=
+X-Google-Smtp-Source: AGHT+IFvoZxnkmEh5IgiAT0VNYBUi4wKtI3sPR8PugaG7QcHd30MhiNMvSHYA2sBCFwZgBiTlyvHWw==
+X-Received: by 2002:a05:6808:118d:b0:3e6:2e8a:6ada with SMTP id
+ 5614622812f47-3e6583d6719mr8550638b6e.41.1730403294432; 
+ Thu, 31 Oct 2024 12:34:54 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d35417a2f1sm11036946d6.125.2024.10.31.12.34.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Oct 2024 12:34:52 -0700 (PDT)
+Date: Thu, 31 Oct 2024 13:34:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] mtd: spi-nor: Guard SPI_STACKED_PARALLEL with DM_SPI check
+Message-ID: <20241031193449.GF3600562@bill-the-cat>
+References: <20241031183732.3602102-1-trini@konsulko.com>
+ <20241031185158.GE3600562@bill-the-cat>
+ <1a939c3e-b3d2-4344-baf5-d8e4866c92c9@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/1] rockchip: rock5b-rk3588: Enable automatic PCI
- enumeration
-To: Sebastian Reichel <sebastian.reichel@collabora.com>,
- Eugen Hristev <eugen.hristev@linaro.org>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
- FUKAUMI Naoki <naoki@radxa.com>
-References: <20241031180212.116330-1-sebastian.reichel@collabora.com>
- <e457b630-bd7d-4f7d-bd4e-20f0e3fbc9a2@linaro.org>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <e457b630-bd7d-4f7d-bd4e-20f0e3fbc9a2@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-ForwardEmail-ID: 6723d7d14382f7c758ed7354
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="BKxC5c5gcDW8t047"
+Content-Disposition: inline
+In-Reply-To: <1a939c3e-b3d2-4344-baf5-d8e4866c92c9@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,61 +90,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sebastian,
 
-On 2024-10-31 19:15, Eugen Hristev wrote:
-> Hello Sebastian,
-> 
-> On 10/31/24 20:01, Sebastian Reichel wrote:
->> PCI enumeration is required to detect the onboard Ethernet device.
->>
->> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
->> ---
->>   configs/rock5b-rk3588_defconfig | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
->> index c54e13e8732c..e5b9f7d326b4 100644
->> --- a/configs/rock5b-rk3588_defconfig
->> +++ b/configs/rock5b-rk3588_defconfig
->> @@ -17,6 +17,7 @@ CONFIG_DEBUG_UART_CLOCK=24000000
->>   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->>   CONFIG_SPL_SPI=y
->>   CONFIG_PCI=y
->> +CONFIG_PCI_INIT_R=y
->>   CONFIG_DEBUG_UART=y
->>   CONFIG_AHCI=y
->>   CONFIG_FIT=y
-> 
-> This has been added and removed before, please see
-> 
-> https://lore.kernel.org/all/20231104130451.111020-1-martin.roukala@mupuf.org/T/
-> 
-> this commit adds it
-> 5b269ed404dc ("configs: rockchip: rock5b-rk3588: Enable CONFIG_PCI_INIT_R")
-> 
-> this commit removes it again
-> 191ece249a96 ("rockchip: rk3588-rock-5b: Enable support for PCIe SATA 
-> cards")
+--BKxC5c5gcDW8t047
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-What use-case are you trying to solve with a forced pci enumeration?
+On Thu, Oct 31, 2024 at 08:13:00PM +0100, Marek Vasut wrote:
+> On 10/31/24 7:51 PM, Tom Rini wrote:
+> > On Thu, Oct 31, 2024 at 12:37:32PM -0600, Tom Rini wrote:
+> > > While we want to compile the SPI_STACKED_PARALLEL code everywhere we
+> > > can, it must first be guarded with an #if for DM_SPI as not all cases
+> > > where we have this code built, such as in SPL, will have the relevant
+> > > DM_SPI option enabled.
+> > >=20
+> > > Fixes: 43423cdc5dc1 ("mtd: spi-nor: Always build SPI_STACKED_PARALLEL=
+ code")
+> > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-With standard boot Ethernet should be enabled when it is needed.
+Applied to u-boot/master, thanks!
 
-However for EFI boot Ethernet maybe is not detected? Please see [1] for
-a possible alternative patch that I created when someone reported an
-issue with iPXE boot some time ago.
+--=20
+Tom
 
-I did not get confirmation it fully solved the issue, from what I could
-test it should help get Ethernet detected during EFI boot on a ROCK 5B.
+--BKxC5c5gcDW8t047
+Content-Type: application/pgp-signature; name="signature.asc"
 
-[1] https://github.com/Kwiboo/u-boot-rockchip/commit/90b6d787de0b3e6ed863440be576b01d83ba5789
+-----BEGIN PGP SIGNATURE-----
 
-Regards,
-Jonas
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcj29IACgkQFHw5/5Y0
+tyybogv9GQveAwnzZ++fWBfGSV7jdy83EKO3+omXySeq+7pj0dWBz/bTumcbpVCn
+oO18tIH5z1n04vDcMfx+KMh9jmbTzb1BIh3Ne3zgDpLaPpZMap2xtdKjRQ+IfTOo
+Fwvht7RZDDpmO0eQZqGRxa3Sxf44bFWMSEtz+Yh7v8hlVfdKq01GuBKFSDqYBse9
+frWKBwMS/lGOtD6v6AAY1boP8M0JslxYlTRMObvHQntytIViWKylhWSOoImf0ldO
+1oEjxZDkr9ymKOYSo37pZutrKskdybNPy18Y9uChK35GWrfm/uuM+MvBJarwgUhF
+/WQZDhhgXjST//XdlofnAcWRpsGA7D6OlH9g1of1L4cs2VwXhvZhgeBvMAX3kYYJ
+JyPW57hUW8HAhrO+/bDViMus0dIEBiM5AbYikc4L4ws0Ss8+nks9/F4vvbp39eRg
+WcCTI1tIRvr9oosIszHC7uPpBIQne5DvPL3FBGCgnf4yi+A7d0s/rNWxi4QzvLox
+ZFfhM2iP
+=cJzO
+-----END PGP SIGNATURE-----
 
-> 
-> Eugen
-> 
-> 
-
+--BKxC5c5gcDW8t047--
