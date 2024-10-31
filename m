@@ -4,146 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 336A2D767E9
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E59D767F4
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:50:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9AAE892AA;
-	Thu, 31 Oct 2024 18:13:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=phytec.com
+	by phobos.denx.de (Postfix) with ESMTP id 410D188B0C;
+	Thu, 31 Oct 2024 18:50:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=phytec.com header.i=@phytec.com header.b="e55AftM7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FzJlPAlu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA86F88B8F; Thu, 31 Oct 2024 17:21:34 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20720.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::720])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 69E9688A4C; Thu, 31 Oct 2024 18:50:51 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4D72889EF
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 17:21:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51D7388B55
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:50:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=phytec.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ggiordano@phytec.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pwVpqaDH7nJSwBLNzNmew8ovSHWseWs5S0lEYW0lsfkv24PhOUhYY+ZGx+L5oE5p92T1e9mn9FIoY0OjNZ73T/qsHRiCyHvfN3pYzHesqgMKVI9x4HDpXi+4Qt0/0OvlBPZg/gRucOLFGKi4Ej3OPKdQrn6So9wcNKY9ZLrc74qsy+Bl3LaT0EOygVjTQbBFxDsNrEqyZJ+MbmFdG55Aw/KnJ/RHktb7N5OYOWFBximMWubB4ugov0NYNSqPq5kBpqCpdKNCIbHdNQw883zr9FjuYDVvCutVWNWIsWPmULGrlZ0v0vB7/DUm/usdM00CrABsYDoXaN9XG6dLe7UuKw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1SRXaNmhPKyYqz8vO8964AaMs1GUlA2GDQU8J55Mn0o=;
- b=oiAPw8tarULzLb64pqT93eu4XHKCWX64cH5u3Ce7QMmLj5kM8r3jqcjf5luX5/Z8lncynX6GBqKdLK4oiGMRvr00+lNXUB5ou0yv3YjMLfkVNJebt4mFMYCJsEZtoWjHQuF3vwoHEF6ZfoU3OIX2tnDYD1fyhuolMQ5WYTV3IAMxB6aLHhZjnLBWa6qFbGH5YnWZmITfCYSuc4k7XOKxM9VH+/T716u5XnTUBpM6KOrZZfcao4ElzG87pQMgfjvf5UuqRvNnCcHb5EsL6YCafO5ONX5+DKGcG/3D5aIN1t+qFmxA+yIlBVjgo3mVfYD0Ba9p5x0VkBGdh3WS8yWcSg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=phytec.com; dmarc=pass action=none header.from=phytec.com;
- dkim=pass header.d=phytec.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1SRXaNmhPKyYqz8vO8964AaMs1GUlA2GDQU8J55Mn0o=;
- b=e55AftM7UeJ4CfWnkoGVVHTOMqHgHOecBELLIdoYNYqcymT+Me3REJrKm9cKpuFKy9VT2NYggZoHf6dWvjSnIg0GWe3cOpTKTdPIqFj7ICBMeppv3ET1S6Zw9dltYNq9mcWmYmVTF9j/c2h5ufuVibfKHIgL1Zrd+Pg1Gm8LZ3E=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.com;
-Received: from SJ2PR22MB4354.namprd22.prod.outlook.com (2603:10b6:a03:537::8)
- by PH0PR22MB2955.namprd22.prod.outlook.com (2603:10b6:510:ff::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.18; Thu, 31 Oct
- 2024 16:21:27 +0000
-Received: from SJ2PR22MB4354.namprd22.prod.outlook.com
- ([fe80::789c:e41e:1367:383d]) by SJ2PR22MB4354.namprd22.prod.outlook.com
- ([fe80::789c:e41e:1367:383d%5]) with mapi id 15.20.8093.027; Thu, 31 Oct 2024
- 16:21:27 +0000
-From: Garrett Giordano <ggiordano@phytec.com>
-To: trini@konsulko.com, afd@ti.com, bb@ti.com, w.egorov@phytec.de,
- vaishnav.a@ti.com, hnagalla@ti.com, j-choudhary@ti.com, a-nandan@ti.com,
- nm@ti.com, sjg@chromium.org, a-bhatia1@ti.com
-Cc: u-boot@lists.denx.de,
-	upstream@lists.phytec.de
-Subject: [PATCH v2] arm: mach-k3: am62a7: Provide a way to obtain boot device
- for non SPLs
-Date: Thu, 31 Oct 2024 09:21:03 -0700
-Message-Id: <20241031162103.2835289-1-ggiordano@phytec.com>
-X-Mailer: git-send-email 2.25.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BN1PR12CA0005.namprd12.prod.outlook.com
- (2603:10b6:408:e1::10) To SJ2PR22MB4354.namprd22.prod.outlook.com
- (2603:10b6:a03:537::8)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5cb6b2b7127so1607945a12.1
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:50:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1730397048; x=1731001848; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=py4e7M+ibypEHh/opX8+oYPXbZFxbFrWexVDT+HVz2o=;
+ b=FzJlPAluUbyjV34wy9iItAfhq+9WxslrehkIOb0hM6zxrgtLa2BPz9DF5twH/Ry/Bq
+ ixQVw3GYl3DdiBi4hEuqrlzPNxJIvy0P/pFn0p0dycJsexO14zTJYy+rS1Ho/hojntCC
+ Ext6KuuKedkTjYQkDBwRdr82MPBwGU10Z9MTo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730397048; x=1731001848;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=py4e7M+ibypEHh/opX8+oYPXbZFxbFrWexVDT+HVz2o=;
+ b=Ji8fT6ZBf6ZOxxVAkhtVL9gPXwFgcvvKGBT5ow7g0wZPbURJZzlmMZaQIH7FHHbeJ7
+ DRrYuC4eGzxDRrGZhscPYlwm7IBZ8opXedUEuwXuQwKRhuz83hYVth2J1UG0oDtAihGN
+ 48TBANa/ch87bMn7kZShbUXkdBsanRpcWPwDXlhADvfWr7CwDTaXjKabmD43ScAte3vG
+ DAjBQEjOTatwIqbdYRmNPxXqIC5fuPL+L5lxtQIAplnJWoPDnmQOcHYLypkhp6bdRC3G
+ mMcqS+SGwEj/uTZFitotpaNL4DWY9Xw/SUZGIRyWEuLTIj2zLMPaYSpmpq5lOyQV4uF7
+ QPEA==
+X-Gm-Message-State: AOJu0YxisfQB/sX4JLVpbU0BhRn//nwmBjRmJwooCFrP+aV+kqdTsGiJ
+ jmxGDWlTYogW3q6VPLDPsowaA/EclliCuELCWkBjGr/8xbU0hS9hjpEqeJO7dSCY2zON7/0Raby
+ V0Q==
+X-Google-Smtp-Source: AGHT+IEmvyeH2gliXP4F2VkOM9cjINRE9P/Abo0df95aH3+ZELn9AD70iH5mGpVRfGP44datc7dY8A==
+X-Received: by 2002:a05:6402:520b:b0:5c9:6f20:4cf1 with SMTP id
+ 4fb4d7f45d1cf-5cea971b4b5mr3827565a12.27.1730397047457; 
+ Thu, 31 Oct 2024 10:50:47 -0700 (PDT)
+Received: from chromium.org ([82.132.224.62]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5ceac7ccaecsm765079a12.62.2024.10.31.10.50.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Oct 2024 10:50:46 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Jan Kiszka <jan.kiszka@siemens.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] dm: sysinfo: Shorten the SYSINFO_ID prefix
+Date: Thu, 31 Oct 2024 18:50:23 +0100
+Message-ID: <20241031175025.74124-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR22MB4354:EE_|PH0PR22MB2955:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0008c6f1-e2e0-4b49-2403-08dcf9c811c7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|7416014|52116014|376014|366016|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?S4hZ725vYOwcRgh6Bq6OA4kshi6RJw04XfdWqbCbArD2yNnyR6thR0CDb5VT?=
- =?us-ascii?Q?IuRR0E81XF/mZM7NQxvH2KDUuSxXFChi6BFB5s52oXNQrzbFcF6VnLfWAxQD?=
- =?us-ascii?Q?eKEPrTdFu6TQHgMzPtchRW3/3vDlTxv8KGMwAoZ8F5ZdThRRnpLx3luCK5HU?=
- =?us-ascii?Q?cCbkYIdO4+TnuUINRWUUF1bRs+tFWa7uzR4lAolXCAA0diQCRPZhVCW+j10a?=
- =?us-ascii?Q?WQAwUcyw7w4yqLIkS4xwnKZyYnqr2amlq7u1DXY87UWc7ZdTeAIPleoB237l?=
- =?us-ascii?Q?+il1JxyL3sFUlLRq6WwjWTRqu6qkcF64vr4KuR8n5ghF9gZg6xnOwlLALZTT?=
- =?us-ascii?Q?ZufhXy0sxjfLG8ZMgwc37pJmccnnS/7bMagItan8LQ8IWNkYNq+WD51BRdks?=
- =?us-ascii?Q?VI1RFnZt4h+xR2nIz4xVGUPYjTPx3mQ6i8zOJAZq6Ybcrv7lE/gGR/DSv6NE?=
- =?us-ascii?Q?wCfKpPDpirhZ6UYrDXHDpd6M87xwHXi7NHeMNwmw7QjYSxwEs/OWUnOkujtf?=
- =?us-ascii?Q?jjC1aeZ2kE8ZD/WWcKmDDiNP2fP00xQwOOawvC2v0h5o67qwyG2SMxMRKJgG?=
- =?us-ascii?Q?kSugo1hWH9pU0vd3mGQIgtHBe2Ug2onDIXU0xSZheQRhuCwNFKC0TWDiQOIk?=
- =?us-ascii?Q?w+V/lwGPfg9C1tsdOHZkKvhw9cP5g9IVUUVqMurVFSFokAG0Tpr4gaZiiMYK?=
- =?us-ascii?Q?ri1zMktlj1YCsQPKaWiJH2arpVVkXvPMrPMhzf3MwxpdYPTY+Muuw7pd3Mbo?=
- =?us-ascii?Q?iV4FLkzrSzDLyJAlOnNH1843fcUILgOdHMnRFBC2KYWHUSvEtf1gI25SNegz?=
- =?us-ascii?Q?bH0zWznFDrqzFrX5LqW0tKLQFATSng6kZxOzIQhkAP8e5Gcj8gmOWzO54sdM?=
- =?us-ascii?Q?1E69tyAm2fhgx2YMkIXHPacwnJ8X+uT80on8f/uObcQ44uJQ1m4EeE8tAz0q?=
- =?us-ascii?Q?wHCjqBAsrSXsgb8KsDjY56wbK25z1ZFIjLGbd6Gf6eyHFQPNfIgTdAgxzq7k?=
- =?us-ascii?Q?0yHViX3exz6cMow0L7sTpr9/R1kgE+xdJYbc9Zns+lOA6SqxatLaWne5iu+B?=
- =?us-ascii?Q?jDdcpnBIUCrWu11oFMRMFU2jmwuBpm8MiKk4E17krpro4qcDMIqvUYsxZYqT?=
- =?us-ascii?Q?MKfUfcyMXD2csSPI0lx9sFvxbzA7ValU//w/e0WwdvlhQUcSJMlC4jlsd+W9?=
- =?us-ascii?Q?/O/WEO2L40zMigTArdsNqoq6a9HOqELd6eN0yOBFDSPUokX4qRaqvIWAWbQB?=
- =?us-ascii?Q?Ugs974Xwaf5AkxVs7jUq+usTubNlb63IlJdWXjBQ/Vxu8NuySnsvOyI39PsI?=
- =?us-ascii?Q?npY6s+SIsgvaIfIPnRLNoA50XSq6ZQrEmamH6hf7qzXtx8GTLbBRUDOuREXI?=
- =?us-ascii?Q?PoL86i72ZfwFq0xAtlbDAGXJMlh7?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR22MB4354.namprd22.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(52116014)(376014)(366016)(921020)(38350700014);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?UXPQQT+t7byCoIAKQu2sLplYOHeRFAtd6zqy3qBr7hwSCED9hQeixHZjYLt8?=
- =?us-ascii?Q?ByNSLluxsQUuuWWpbTRK678wcEmHgIyEYcMYyhxi9J/BerXbyx3LR+5NIB7X?=
- =?us-ascii?Q?xzLFqEmq5BEiNqwdEvMWr15t5iZxj1FUXq3+qe3rBXzkXrkyEnkOr1NS7Hda?=
- =?us-ascii?Q?9w4mMl+uSwHpv2sNNat1NqfefYeiR3EIFYZyKTIrQIxucxL0apmHzqpPhHUP?=
- =?us-ascii?Q?j1efkcccm9+WCbfi056r4PnCW8oHA62BVJkcZERfoS3pcIkE2wsT7bsGDbr8?=
- =?us-ascii?Q?NPJrwTMdjlRC8WDNs+VsQldXEnyvwTihNLAYGZ4XYz8LAOjtj6VAZUZ2VSmt?=
- =?us-ascii?Q?WERCJ0f8M8WTndmpVXpbsSN3SnEyi5417lJ3gqmRGzPSSEyaXQiRrEixUnz6?=
- =?us-ascii?Q?80TXHDN+iZauciIxJbJK1uyjl1Fn+SKkGzfOUHzpYfNb1X5w3Hr/Bgep886v?=
- =?us-ascii?Q?/OFOvbISigLd5op9Bd83HizeLTn1PpFli1df1ROgAsNpl9GLly73nv+S/oaC?=
- =?us-ascii?Q?i91MbxZ+8wkWF0gSrWKx9NmCkSqn2wFQGnLDGAiSTCCRjcGG0iagM+pxHT0/?=
- =?us-ascii?Q?CHmFc2W6qkCqx0cd+RXqYayegF0fLJfbv2cbrh50xyV9feFobcWG1OcG8yr1?=
- =?us-ascii?Q?bDgcI1XQlPZBfBKdSdjid+roi5YwEGNJYtjNp+ImqcCjZDQ60Ag7MMkQHje+?=
- =?us-ascii?Q?dS0mfgiIqbkjhXSPay/3SqUTHQB8dHcSieuKfmr6cCsD8zVAy/Rc1IQ2/8Ze?=
- =?us-ascii?Q?Y9ELr++tApyeH/PMKbCwmqmY7sB5bOfs//RINqnoAsJbh+0YcSDBe0/F/9mk?=
- =?us-ascii?Q?2WfcLd/4i+dlpQJBrqvf+lBIT1yj/j6IrTmeYS0T6aThytpFj3IWn6zFX/a8?=
- =?us-ascii?Q?3YXe4ZkSdUBDOD37CvxhwnrYNVmf1BBhg/ykVPG99bjHi8QDqI9+hUniGS0Q?=
- =?us-ascii?Q?4dWiV0UZgrfn27OHJj4UGbPrHOMbbFctQoosH0NgTMaPb829qkEPeU18x68s?=
- =?us-ascii?Q?60IQ/UOYyzucb9qwAiXRbsTIbFUqxKWhORPRdPfgkhWP3ItElGtk2o4d1rEv?=
- =?us-ascii?Q?5C41ASHcrfI9GkzoP0gQTK2lPe8Xl6m8ribEaTMuZSKVUib1lSxzFecaJYmE?=
- =?us-ascii?Q?5wYkDcbPHLj5uinouiapkgzOq7P6bKfN47iTGG3w2OPHQ76jpmAf+GW5BNU5?=
- =?us-ascii?Q?n2H4qDjtzuVDD0ynQ20CiBynLu24rTENyHSk1NSxAoF4xFIB/vv3ysrKPtBl?=
- =?us-ascii?Q?8yAUmheqVR+AIjCdpaXTt5dIOSVXv2WYgqQAU8t8GjiMMyffOM9r72/rfs9Y?=
- =?us-ascii?Q?Gtg543dD6ojARJCHxFI2UpKv+6Gpxe5o0QMP+rdHFUxuHu84CVC6Yogl2jZk?=
- =?us-ascii?Q?bv5QE8jDo/3KmY2qR/FrO5Fe1XavDVezyEz603bGB7MncA/uY1F+KMyH9S7b?=
- =?us-ascii?Q?5opR2RUhZiwc+1Bziw0RL83mR0g3/Q6vqysESrhChjjtQ1XTXijSotFjTK6K?=
- =?us-ascii?Q?tpZEA6RvcES4l/gnJ8oAQVx3JYFawYHuMn6/zYDNjTecv0SYcg3LZlELqEgS?=
- =?us-ascii?Q?laWQd6r/29Bl6IOU1TskUeSY1BbdG6ND+Li2eA1I?=
-X-OriginatorOrg: phytec.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0008c6f1-e2e0-4b49-2403-08dcf9c811c7
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR22MB4354.namprd22.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2024 16:21:26.9203 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 67bcab1a-5db0-4ee8-86f4-1533d0b4b5c7
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bGR/3ow18fhtpsIy0hd36z5BnyG7GerLHqoygSnR3gex93xvyerBfQM3vSh43/8lG8rHslIv1mhM7Ezg91grPw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR22MB2955
-X-Mailman-Approved-At: Thu, 31 Oct 2024 18:13:37 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,251 +97,349 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce get_boot_device() to obtain the booting device. Make it also
-available for non SPL builds so u-boot can also know the device it
-is booting from.
+We are about to add a large number of new entries. Update the prefix to
+be a little shorter.
 
-Signed-off-by: Garrett Giordano <ggiordano@phytec.com>
-Reviewed-by: Bryan Brattlof <bb@ti.com>
+For SMBIOS items, use SYSID_SM_ (for System Management) which is enough
+to distinguish it. For now at least, it seems that most items will be
+for SMBIOS.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
- v2:
-   - Drop duplicate CONFIG_SOC_K3_AM62A7 entry from arch/arm/mach-k3/Makefile
 
- arch/arm/mach-k3/am62ax/Makefile      |   1 +
- arch/arm/mach-k3/am62ax/am62a7_init.c |  97 +----------------------
- arch/arm/mach-k3/am62ax/boot.c        | 106 ++++++++++++++++++++++++++
- 3 files changed, 108 insertions(+), 96 deletions(-)
- create mode 100644 arch/arm/mach-k3/am62ax/boot.c
+ board/coreboot/coreboot/sysinfo.c     |  8 +++----
+ board/google/chromebook_coral/coral.c |  6 ++---
+ board/toradex/common/tdx-common.c     |  2 +-
+ common/board_info.c                   |  8 +++----
+ drivers/sysinfo/gazerbeam.h           |  4 ++--
+ drivers/sysinfo/gpio.c                |  4 ++--
+ drivers/sysinfo/rcar3.c               |  2 +-
+ drivers/sysinfo/sandbox.h             |  2 +-
+ include/sysinfo.h                     | 34 +++++++++++++--------------
+ lib/smbios.c                          | 24 +++++++++----------
+ test/dm/sysinfo-gpio.c                | 12 +++++-----
+ 11 files changed, 53 insertions(+), 53 deletions(-)
 
-diff --git a/arch/arm/mach-k3/am62ax/Makefile b/arch/arm/mach-k3/am62ax/Makefile
-index e2ef88196f8..4e35e0c844d 100644
---- a/arch/arm/mach-k3/am62ax/Makefile
-+++ b/arch/arm/mach-k3/am62ax/Makefile
-@@ -5,3 +5,4 @@
-
- obj-$(CONFIG_OF_SYSTEM_SETUP) += am62a7_fdt.o
- obj-$(CONFIG_XPL_BUILD) += am62a7_init.o
-+obj-y += boot.o
-diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
-index 0f62f39075b..5c0d3ee6869 100644
---- a/arch/arm/mach-k3/am62ax/am62a7_init.c
-+++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
-@@ -171,102 +171,7 @@ void board_init_f(ulong dummy)
- 	debug("am62a_init: %s done\n", __func__);
- }
-
--static u32 __get_backup_bootmedia(u32 devstat)
--{
--	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
--				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
--	u32 bkup_bootmode_cfg =
--			(devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
--				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
--
--	switch (bkup_bootmode) {
--	case BACKUP_BOOT_DEVICE_UART:
--		return BOOT_DEVICE_UART;
--
--	case BACKUP_BOOT_DEVICE_USB:
--		return BOOT_DEVICE_USB;
--
--	case BACKUP_BOOT_DEVICE_ETHERNET:
--		return BOOT_DEVICE_ETHERNET;
--
--	case BACKUP_BOOT_DEVICE_MMC:
--		if (bkup_bootmode_cfg)
--			return BOOT_DEVICE_MMC2;
--		return BOOT_DEVICE_MMC1;
--
--	case BACKUP_BOOT_DEVICE_SPI:
--		return BOOT_DEVICE_SPI;
--
--	case BACKUP_BOOT_DEVICE_I2C:
--		return BOOT_DEVICE_I2C;
--
--	case BACKUP_BOOT_DEVICE_DFU:
--		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
--			return BOOT_DEVICE_USB;
--		return BOOT_DEVICE_DFU;
--	};
--
--	return BOOT_DEVICE_RAM;
--}
--
--static u32 __get_primary_bootmedia(u32 devstat)
--{
--	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
--				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
--	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
--				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
--
--	switch (bootmode) {
--	case BOOT_DEVICE_OSPI:
--		fallthrough;
--	case BOOT_DEVICE_QSPI:
--		fallthrough;
--	case BOOT_DEVICE_XSPI:
--		fallthrough;
--	case BOOT_DEVICE_SPI:
--		return BOOT_DEVICE_SPI;
--
--	case BOOT_DEVICE_ETHERNET_RGMII:
--		fallthrough;
--	case BOOT_DEVICE_ETHERNET_RMII:
--		return BOOT_DEVICE_ETHERNET;
--
--	case BOOT_DEVICE_EMMC:
--		return BOOT_DEVICE_MMC1;
--
--	case BOOT_DEVICE_SPI_NAND:
--		return BOOT_DEVICE_SPINAND;
--
--	case BOOT_DEVICE_MMC:
--		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
--				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
--			return BOOT_DEVICE_MMC2;
--		return BOOT_DEVICE_MMC1;
--
--	case BOOT_DEVICE_DFU:
--		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
--		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
--			return BOOT_DEVICE_USB;
--		return BOOT_DEVICE_DFU;
--
--	case BOOT_DEVICE_NOBOOT:
--		return BOOT_DEVICE_RAM;
--	}
--
--	return bootmode;
--}
--
- u32 spl_boot_device(void)
+diff --git a/board/coreboot/coreboot/sysinfo.c b/board/coreboot/coreboot/sysinfo.c
+index e0bdc7a5a88..d6b19530023 100644
+--- a/board/coreboot/coreboot/sysinfo.c
++++ b/board/coreboot/coreboot/sysinfo.c
+@@ -24,21 +24,21 @@ static int cb_get_str(struct udevice *dev, int id, size_t size, char *val)
+ 	const char *str = NULL;
+ 
+ 	switch (id) {
+-	case SYSINFO_ID_BOARD_MODEL:
++	case SYSID_BOARD_MODEL:
+ 		if (priv->t1)
+ 			str = smbios_string(priv->system,
+ 					    priv->t1->product_name);
+ 		break;
+-	case SYSINFO_ID_BOARD_MANUFACTURER:
++	case SYSID_BOARD_MANUFACTURER:
+ 		if (priv->t1)
+ 			str = smbios_string(priv->system,
+ 					    priv->t1->manufacturer);
+ 		break;
+-	case SYSINFO_ID_PRIOR_STAGE_VERSION:
++	case SYSID_PRIOR_STAGE_VERSION:
+ 		if (priv->t0)
+ 			str = smbios_string(priv->bios, priv->t0->bios_ver);
+ 		break;
+-	case SYSINFO_ID_PRIOR_STAGE_DATE:
++	case SYSID_PRIOR_STAGE_DATE:
+ 		if (priv->t0)
+ 			str = smbios_string(priv->bios,
+ 					    priv->t0->bios_release_date);
+diff --git a/board/google/chromebook_coral/coral.c b/board/google/chromebook_coral/coral.c
+index 3443dc91885..db96534857c 100644
+--- a/board/google/chromebook_coral/coral.c
++++ b/board/google/chromebook_coral/coral.c
+@@ -151,8 +151,8 @@ static int coral_get_str(struct udevice *dev, int id, size_t size, char *val)
+ 		return -ENOSYS;
+ 
+ 	switch (id) {
+-	case SYSINFO_ID_SMBIOS_SYSTEM_VERSION:
+-	case SYSINFO_ID_SMBIOS_BASEBOARD_VERSION: {
++	case SYSID_SM_SYSTEM_VERSION:
++	case SYSID_SM_BASEBOARD_VERSION: {
+ 		ret = get_skuconfig(dev);
+ 
+ 		if (ret < 0)
+@@ -162,7 +162,7 @@ static int coral_get_str(struct udevice *dev, int id, size_t size, char *val)
+ 		sprintf(val, "rev%d", ret);
+ 		break;
+ 	}
+-	case SYSINFO_ID_BOARD_MODEL: {
++	case SYSID_BOARD_MODEL: {
+ 		int mem_config, sku_config;
+ 		const char *model;
+ 
+diff --git a/board/toradex/common/tdx-common.c b/board/toradex/common/tdx-common.c
+index a6b45cdab81..3badeebd149 100644
+--- a/board/toradex/common/tdx-common.c
++++ b/board/toradex/common/tdx-common.c
+@@ -193,7 +193,7 @@ static int tdx_get_str(struct udevice *dev, int id, size_t size, char *val)
+ 	int ret = -ENOTSUPP;
+ 
+ 	switch (id) {
+-	case SYSINFO_ID_BOARD_MODEL:
++	case SYSID_BOARD_MODEL:
+ 		snprintf(val, size,
+ 			 "Toradex %04d %s %s",
+ 			 tdx_hw_tag.prodid,
+diff --git a/common/board_info.c b/common/board_info.c
+index 33c260b404e..dc26e1a33dd 100644
+--- a/common/board_info.c
++++ b/common/board_info.c
+@@ -18,9 +18,9 @@ static const struct to_show {
+ 	const char *name;
+ 	enum sysinfo_id id;
+ } to_show[] = {
+-	{ "Manufacturer", SYSINFO_ID_BOARD_MANUFACTURER},
+-	{ "Prior-stage version", SYSINFO_ID_PRIOR_STAGE_VERSION },
+-	{ "Prior-stage date", SYSINFO_ID_PRIOR_STAGE_DATE },
++	{ "Manufacturer", SYSID_BOARD_MANUFACTURER},
++	{ "Prior-stage version", SYSID_PRIOR_STAGE_VERSION },
++	{ "Prior-stage date", SYSID_PRIOR_STAGE_DATE },
+ 	{ /* sentinel */ }
+ };
+ 
+@@ -39,7 +39,7 @@ static int try_sysinfo(void)
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = sysinfo_get_str(dev, SYSINFO_ID_BOARD_MODEL, sizeof(str), str);
++	ret = sysinfo_get_str(dev, SYSID_BOARD_MODEL, sizeof(str), str);
+ 	if (ret)
+ 		return ret;
+ 	printf("Model: %s\n", str);
+diff --git a/drivers/sysinfo/gazerbeam.h b/drivers/sysinfo/gazerbeam.h
+index 6bf3c0098d1..047f365436f 100644
+--- a/drivers/sysinfo/gazerbeam.h
++++ b/drivers/sysinfo/gazerbeam.h
+@@ -8,8 +8,8 @@
+ #include <sysinfo.h>
+ 
+ enum {
+-	BOARD_HWVERSION = SYSINFO_ID_BOARD_MODEL,
+-	BOARD_MULTICHANNEL = SYSINFO_ID_USER,
++	BOARD_HWVERSION = SYSID_BOARD_MODEL,
++	BOARD_MULTICHANNEL = SYSID_USER,
+ 	BOARD_VARIANT
+ };
+ 
+diff --git a/drivers/sysinfo/gpio.c b/drivers/sysinfo/gpio.c
+index aaca318419b..66d2a913087 100644
+--- a/drivers/sysinfo/gpio.c
++++ b/drivers/sysinfo/gpio.c
+@@ -38,7 +38,7 @@ static int sysinfo_gpio_get_int(struct udevice *dev, int id, int *val)
+ 	struct sysinfo_gpio_priv *priv = dev_get_priv(dev);
+ 
+ 	switch (id) {
+-	case SYSINFO_ID_BOARD_MODEL:
++	case SYSID_BOARD_MODEL:
+ 		*val = priv->revision;
+ 		return 0;
+ 	default:
+@@ -51,7 +51,7 @@ static int sysinfo_gpio_get_str(struct udevice *dev, int id, size_t size, char *
+ 	struct sysinfo_gpio_priv *priv = dev_get_priv(dev);
+ 
+ 	switch (id) {
+-	case SYSINFO_ID_BOARD_MODEL: {
++	case SYSID_BOARD_MODEL: {
+ 		const char *name = NULL;
+ 		int i, ret;
+ 		u32 revision;
+diff --git a/drivers/sysinfo/rcar3.c b/drivers/sysinfo/rcar3.c
+index 37e2cccd9af..2994df9ab1c 100644
+--- a/drivers/sysinfo/rcar3.c
++++ b/drivers/sysinfo/rcar3.c
+@@ -46,7 +46,7 @@ static int sysinfo_rcar_get_str(struct udevice *dev, int id, size_t size, char *
+ 	struct sysinfo_rcar_priv *priv = dev_get_priv(dev);
+ 
+ 	switch (id) {
+-	case SYSINFO_ID_BOARD_MODEL:
++	case SYSID_BOARD_MODEL:
+ 		strncpy(val, priv->boardmodel, size);
+ 		val[size - 1] = '\0';
+ 		return 0;
+diff --git a/drivers/sysinfo/sandbox.h b/drivers/sysinfo/sandbox.h
+index d9c5804c26a..a7cbac0ce18 100644
+--- a/drivers/sysinfo/sandbox.h
++++ b/drivers/sysinfo/sandbox.h
+@@ -5,7 +5,7 @@
+  */
+ 
+ enum {
+-	BOOL_CALLED_DETECT = SYSINFO_ID_USER,
++	BOOL_CALLED_DETECT = SYSID_USER,
+ 	INT_TEST1,
+ 	INT_TEST2,
+ 	STR_VACATIONSPOT,
+diff --git a/include/sysinfo.h b/include/sysinfo.h
+index 8a77ef44856..027a463dc33 100644
+--- a/include/sysinfo.h
++++ b/include/sysinfo.h
+@@ -40,29 +40,29 @@ struct udevice;
+ 
+ /** enum sysinfo_id - Standard IDs defined by U-Boot */
+ enum sysinfo_id {
+-	SYSINFO_ID_NONE,
++	SYSID_NONE,
+ 
+ 	/* For SMBIOS tables */
+-	SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
+-	SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
+-	SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
+-	SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
+-	SYSINFO_ID_SMBIOS_SYSTEM_SKU,
+-	SYSINFO_ID_SMBIOS_SYSTEM_FAMILY,
+-	SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
+-	SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
+-	SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
+-	SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
+-	SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
++	SYSID_SM_SYSTEM_MANUFACTURER,
++	SYSID_SM_SYSTEM_PRODUCT,
++	SYSID_SM_SYSTEM_VERSION,
++	SYSID_SM_SYSTEM_SERIAL,
++	SYSID_SM_SYSTEM_SKU,
++	SYSID_SM_SYSTEM_FAMILY,
++	SYSID_SM_BASEBOARD_MANUFACTURER,
++	SYSID_SM_BASEBOARD_PRODUCT,
++	SYSID_SM_BASEBOARD_VERSION,
++	SYSID_SM_BASEBOARD_SERIAL,
++	SYSID_SM_BASEBOARD_ASSET_TAG,
+ 
+ 	/* For show_board_info() */
+-	SYSINFO_ID_BOARD_MODEL,
+-	SYSINFO_ID_BOARD_MANUFACTURER,
+-	SYSINFO_ID_PRIOR_STAGE_VERSION,
+-	SYSINFO_ID_PRIOR_STAGE_DATE,
++	SYSID_BOARD_MODEL,
++	SYSID_BOARD_MANUFACTURER,
++	SYSID_PRIOR_STAGE_VERSION,
++	SYSID_PRIOR_STAGE_DATE,
+ 
+ 	/* First value available for downstream/board used */
+-	SYSINFO_ID_USER = 0x1000,
++	SYSID_USER = 0x1000,
+ };
+ 
+ struct sysinfo_ops {
+diff --git a/lib/smbios.c b/lib/smbios.c
+index 7c24ea129eb..a36d4b4e54a 100644
+--- a/lib/smbios.c
++++ b/lib/smbios.c
+@@ -270,7 +270,7 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
+ static int smbios_add_prop(struct smbios_ctx *ctx, const char *prop,
+ 			   const char *dval)
  {
--	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
--	u32 bootmedia;
--
--	if (bootindex == K3_PRIMARY_BOOTMODE)
--		bootmedia = __get_primary_bootmedia(devstat);
--	else
--		bootmedia = __get_backup_bootmedia(devstat);
--
--	debug("am62a_init: %s: devstat = 0x%x bootmedia = 0x%x bootindex = %d\n",
--	       __func__, devstat, bootmedia, bootindex);
--	return bootmedia;
-+	return get_boot_device();
+-	return smbios_add_prop_si(ctx, prop, SYSINFO_ID_NONE, dval);
++	return smbios_add_prop_si(ctx, prop, SYSID_NONE, dval);
  }
-diff --git a/arch/arm/mach-k3/am62ax/boot.c b/arch/arm/mach-k3/am62ax/boot.c
-new file mode 100644
-index 00000000000..af7fce1e5e9
---- /dev/null
-+++ b/arch/arm/mach-k3/am62ax/boot.c
-@@ -0,0 +1,106 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+#include <asm/io.h>
-+#include <asm/arch/hardware.h>
-+#include <asm/arch/am62a_spl.h>
-+
-+static u32 __get_backup_bootmedia(u32 devstat)
-+{
-+	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
-+	u32 bkup_bootmode_cfg =
-+			(devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
-+				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bkup_bootmode) {
-+	case BACKUP_BOOT_DEVICE_UART:
-+		return BOOT_DEVICE_UART;
-+
-+	case BACKUP_BOOT_DEVICE_USB:
-+		return BOOT_DEVICE_USB;
-+
-+	case BACKUP_BOOT_DEVICE_ETHERNET:
-+		return BOOT_DEVICE_ETHERNET;
-+
-+	case BACKUP_BOOT_DEVICE_MMC:
-+		if (bkup_bootmode_cfg)
-+			return BOOT_DEVICE_MMC2;
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BACKUP_BOOT_DEVICE_SPI:
-+		return BOOT_DEVICE_SPI;
-+
-+	case BACKUP_BOOT_DEVICE_I2C:
-+		return BOOT_DEVICE_I2C;
-+
-+	case BACKUP_BOOT_DEVICE_DFU:
-+		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
-+			return BOOT_DEVICE_USB;
-+		return BOOT_DEVICE_DFU;
-+	};
-+
-+	return BOOT_DEVICE_RAM;
-+}
-+
-+static u32 __get_primary_bootmedia(u32 devstat)
-+{
-+	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
-+	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bootmode) {
-+	case BOOT_DEVICE_OSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_QSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_XSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_SPI:
-+		return BOOT_DEVICE_SPI;
-+
-+	case BOOT_DEVICE_ETHERNET_RGMII:
-+		fallthrough;
-+	case BOOT_DEVICE_ETHERNET_RMII:
-+		return BOOT_DEVICE_ETHERNET;
-+
-+	case BOOT_DEVICE_EMMC:
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BOOT_DEVICE_SPI_NAND:
-+		return BOOT_DEVICE_SPINAND;
-+
-+	case BOOT_DEVICE_MMC:
-+		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
-+			return BOOT_DEVICE_MMC2;
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BOOT_DEVICE_DFU:
-+		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
-+		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
-+			return BOOT_DEVICE_USB;
-+		return BOOT_DEVICE_DFU;
-+
-+	case BOOT_DEVICE_NOBOOT:
-+		return BOOT_DEVICE_RAM;
-+	}
-+
-+	return bootmode;
-+}
-+
-+u32 get_boot_device(void)
-+{
-+	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
-+	u32 bootmode = *(u32 *)(K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
-+	u32 bootmedia;
-+
-+	if (bootmode == K3_PRIMARY_BOOTMODE)
-+		bootmedia = __get_primary_bootmedia(devstat);
-+	else
-+		bootmedia = __get_backup_bootmedia(devstat);
-+
-+	debug("%s: devstat = 0x%x bootmedia = 0x%x bootmode = %d\n",
-+	      __func__, devstat, bootmedia, bootmode);
-+
-+	return bootmedia;
-+}
---
-2.25.1
+ 
+ static void smbios_set_eos(struct smbios_ctx *ctx, char *eos)
+@@ -393,27 +393,27 @@ static int smbios_write_type1(ulong *current, int handle,
+ 	fill_smbios_header(t, SMBIOS_SYSTEM_INFORMATION, len, handle);
+ 	smbios_set_eos(ctx, t->eos);
+ 	t->manufacturer = smbios_add_prop_si(ctx, "manufacturer",
+-					     SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
++					     SYSID_SM_SYSTEM_MANUFACTURER,
+ 					     NULL);
+ 	t->product_name = smbios_add_prop_si(ctx, "product",
+-					     SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
++					     SYSID_SM_SYSTEM_PRODUCT,
+ 					     NULL);
+ 	t->version = smbios_add_prop_si(ctx, "version",
+-					SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
++					SYSID_SM_SYSTEM_VERSION,
+ 					NULL);
+ 	if (serial_str) {
+ 		t->serial_number = smbios_add_prop(ctx, NULL, serial_str);
+ 		strncpy((char *)t->uuid, serial_str, sizeof(t->uuid));
+ 	} else {
+ 		t->serial_number = smbios_add_prop_si(ctx, "serial",
+-						      SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
++						      SYSID_SM_SYSTEM_SERIAL,
+ 						      NULL);
+ 	}
+ 	t->wakeup_type = SMBIOS_WAKEUP_TYPE_UNKNOWN;
+ 	t->sku_number = smbios_add_prop_si(ctx, "sku",
+-					   SYSINFO_ID_SMBIOS_SYSTEM_SKU, NULL);
++					   SYSID_SM_SYSTEM_SKU, NULL);
+ 	t->family = smbios_add_prop_si(ctx, "family",
+-				       SYSINFO_ID_SMBIOS_SYSTEM_FAMILY, NULL);
++				       SYSID_SM_SYSTEM_FAMILY, NULL);
+ 
+ 	len = t->length + smbios_string_table_len(ctx);
+ 	*current += len;
+@@ -433,20 +433,20 @@ static int smbios_write_type2(ulong *current, int handle,
+ 	fill_smbios_header(t, SMBIOS_BOARD_INFORMATION, len, handle);
+ 	smbios_set_eos(ctx, t->eos);
+ 	t->manufacturer = smbios_add_prop_si(ctx, "manufacturer",
+-					     SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
++					     SYSID_SM_BASEBOARD_MANUFACTURER,
+ 					     NULL);
+ 	t->product_name = smbios_add_prop_si(ctx, "product",
+-					     SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
++					     SYSID_SM_BASEBOARD_PRODUCT,
+ 					     NULL);
+ 	t->version = smbios_add_prop_si(ctx, "version",
+-					SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
++					SYSID_SM_BASEBOARD_VERSION,
+ 					NULL);
+ 
+ 	t->serial_number = smbios_add_prop_si(ctx, "serial",
+-					      SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
++					      SYSID_SM_BASEBOARD_SERIAL,
+ 					      NULL);
+ 	t->asset_tag_number = smbios_add_prop_si(ctx, "asset-tag",
+-						 SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
++						 SYSID_SM_BASEBOARD_ASSET_TAG,
+ 						 NULL);
+ 	t->feature_flags = SMBIOS_BOARD_FEATURE_HOSTING;
+ 	t->board_type = SMBIOS_BOARD_MOTHERBOARD;
+diff --git a/test/dm/sysinfo-gpio.c b/test/dm/sysinfo-gpio.c
+index 155da3b6344..de9483c4291 100644
+--- a/test/dm/sysinfo-gpio.c
++++ b/test/dm/sysinfo-gpio.c
+@@ -29,9 +29,9 @@ static int dm_test_sysinfo_gpio(struct unit_test_state *uts)
+ 	sandbox_gpio_set_flags(gpio, 16, GPIOD_EXT_PULL_DOWN);
+ 	sandbox_gpio_set_flags(gpio, 17, 0);
+ 	ut_assertok(sysinfo_detect(sysinfo));
+-	ut_assertok(sysinfo_get_int(sysinfo, SYSINFO_ID_BOARD_MODEL, &val));
++	ut_assertok(sysinfo_get_int(sysinfo, SYSID_BOARD_MODEL, &val));
+ 	ut_asserteq(19, val);
+-	ut_assertok(sysinfo_get_str(sysinfo, SYSINFO_ID_BOARD_MODEL, sizeof(buf),
++	ut_assertok(sysinfo_get_str(sysinfo, SYSID_BOARD_MODEL, sizeof(buf),
+ 				    buf));
+ 	ut_asserteq_str("rev_a", buf);
+ 
+@@ -43,9 +43,9 @@ static int dm_test_sysinfo_gpio(struct unit_test_state *uts)
+ 	sandbox_gpio_set_flags(gpio, 16, GPIOD_EXT_PULL_UP);
+ 	sandbox_gpio_set_flags(gpio, 17, GPIOD_EXT_PULL_DOWN);
+ 	ut_assertok(sysinfo_detect(sysinfo));
+-	ut_assertok(sysinfo_get_int(sysinfo, SYSINFO_ID_BOARD_MODEL, &val));
++	ut_assertok(sysinfo_get_int(sysinfo, SYSID_BOARD_MODEL, &val));
+ 	ut_asserteq(5, val);
+-	ut_assertok(sysinfo_get_str(sysinfo, SYSINFO_ID_BOARD_MODEL, sizeof(buf),
++	ut_assertok(sysinfo_get_str(sysinfo, SYSID_BOARD_MODEL, sizeof(buf),
+ 				    buf));
+ 	ut_asserteq_str("foo", buf);
+ 
+@@ -57,9 +57,9 @@ static int dm_test_sysinfo_gpio(struct unit_test_state *uts)
+ 	sandbox_gpio_set_flags(gpio, 16, 0);
+ 	sandbox_gpio_set_flags(gpio, 17, GPIOD_EXT_PULL_UP);
+ 	ut_assertok(sysinfo_detect(sysinfo));
+-	ut_assertok(sysinfo_get_int(sysinfo, SYSINFO_ID_BOARD_MODEL, &val));
++	ut_assertok(sysinfo_get_int(sysinfo, SYSID_BOARD_MODEL, &val));
+ 	ut_asserteq(15, val);
+-	ut_assertok(sysinfo_get_str(sysinfo, SYSINFO_ID_BOARD_MODEL, sizeof(buf),
++	ut_assertok(sysinfo_get_str(sysinfo, SYSID_BOARD_MODEL, sizeof(buf),
+ 				    buf));
+ 	ut_asserteq_str("unknown", buf);
+ 
+-- 
+2.43.0
 
