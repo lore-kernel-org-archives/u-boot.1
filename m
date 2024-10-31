@@ -4,62 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DAD7E67488
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 21:52:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74674E67485
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 22:06:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D71F88B9E;
-	Thu, 31 Oct 2024 22:52:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B3ECD88B9F;
+	Thu, 31 Oct 2024 23:06:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="KxDPJOJB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nhzCm7M2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF9F988B9F; Thu, 31 Oct 2024 22:52:15 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 36BA888E67; Thu, 31 Oct 2024 23:06:10 +0100 (CET)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8D3E88360
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 22:52:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04570885F5
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 23:06:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8fe9=R4=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1730411528;
- bh=TTUfqCJKTLS04sQTdLPlkz3eeQVfnVGQcsEQ0GkxrS0=;
- b=KxDPJOJB/guiw1M3ItbDWiMPeSWqFHxWJWNKChae15y4IWXLAL1yk21DtlA1MrGTl/jDLFBm+
- SM+qNaA4YExJ3gdnMx5vzVELGf1hBgN9csAUyclVEu5al+rEqkRBLn4WMEAErKeh8x3Pb3WMD/X
- mh0HeFlhn4vopcanL4q4GtXamYiYXtd0gqAY81f7DS+f/XLGWiQTkcnrZ7BNuoAkHr79fsr6lPZ
- CelIp21G/kyTUQqJfTr/vkS9AjYYQ+2vowFb2jv6ebsgQX+voLG96V6wxDJ3lzuoGn6h/dNMwgg
- 6HFo01ao4Tl1C1781mRKb1yuC1qOoaSl17jups3TmmuQ==
-Message-ID: <b0a713b4-8839-42b5-9a18-2fe79f3256e0@kwiboo.se>
-Date: Thu, 31 Oct 2024 22:52:01 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-3e601b6a33aso898557b6e.0
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 15:06:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730412366; x=1731017166; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qR0zX7trzfvi3Ap7gMmvRhuyQXMXuwd4OGFUCePUp80=;
+ b=nhzCm7M2KoUpySvymub5+HB2fyABjeee3YZ8Kf1IyrQe1PP1v6XdTqSTAUns2080Ol
+ KfDzKIQ2G0sZTBxIInW9ROTxFoy40BNN5olyw9DRs/uyMUZrOZZREqL3QWK9/B7bBZ3L
+ MBWWFjht/saGBHohu4dG+z2wyJKaVbJGrQyKgq1izf6ciu8CNc8Usc+tgrGPja8jXGnK
+ uv7yQRjfzEIlnOTQEbD18Z/9yMKggbOaLEUwvpYObzcrktu10Uf6ZEg7o7ZaBUZFUouH
+ aSs+OiBG+FfBFJOH4bX0lJKUnW4qOesmORcR4/d7KinYHKc0nSm56H8VwkSYvU5L54Hy
+ OMNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730412366; x=1731017166;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qR0zX7trzfvi3Ap7gMmvRhuyQXMXuwd4OGFUCePUp80=;
+ b=JDJh68b1RXqNXAH0k3aw0iSD5IaAKWb2ybeWlTBJYxZvan4UIZv9vzvIMfZ5maZcoy
+ IoBVWlLBhDmqoZA/D+KmjARR5ZkvtmMxW+F8gtF0rNiHf7EJJXfTaEtbYdcqcpEO6dkR
+ qKLvHGHbIuro1bBw3UKsISQhUnj5G6rsFQDaF6dGsKtW82dIFbNMeQvmVdAoXSONdhCc
+ eqAbxVCwo+jHvFG1yLbx/ShDbf9E7iWyMpd87rjV6M2xVCkc+JB6lHb8JUca9WDT4nLc
+ 2dm9gxXRPosY1mGib01Ri+6ioi+unrJie1+c1PWB9Zu/ObH9Xv/CghrnkY5r7G6qqwyY
+ KTsA==
+X-Gm-Message-State: AOJu0YwCqTlz1lRjx7IlOBNSi6D8YR1A+Arn7BgbjRz+DeIvvzVlGEN7
+ EavLbzirCPD1zsgm3M52o6cvKJpsOWw2mP8Dl0TqXralNxE3vyQUzUnGizYFXmc=
+X-Google-Smtp-Source: AGHT+IGcs+8QlTlATmV9ULDypeAqwYmE9VsMtS0E8pJpvUYi0kLE68g/U5mGzGfoU1hrRiSZ/7IaFg==
+X-Received: by 2002:a05:6830:2117:b0:710:f5bf:c4df with SMTP id
+ 46e09a7af769-7189b55edcbmr5166837a34.30.1730412366575; 
+ Thu, 31 Oct 2024 15:06:06 -0700 (PDT)
+Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7189cc597c3sm514952a34.8.2024.10.31.15.06.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Oct 2024 15:06:06 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] armv8: cpu: Implement allow_unaligned()
+Date: Thu, 31 Oct 2024 17:06:05 -0500
+Message-Id: <20241031220605.31684-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/1] rockchip: rock5b-rk3588: Enable automatic PCI
- enumeration
-To: Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: Eugen Hristev <eugen.hristev@linaro.org>, u-boot@lists.denx.de,
- Kever Yang <kever.yang@rock-chips.com>, FUKAUMI Naoki <naoki@radxa.com>
-References: <20241031180212.116330-1-sebastian.reichel@collabora.com>
- <e457b630-bd7d-4f7d-bd4e-20f0e3fbc9a2@linaro.org>
- <1d28e59e-9e92-4570-960c-ed642731a226@kwiboo.se>
- <d2ri4jalkbd2vxpubsbypv35wjpfj4dc25bicxkju45r4awap3@iyzh45ejli2f>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <d2ri4jalkbd2vxpubsbypv35wjpfj4dc25bicxkju45r4awap3@iyzh45ejli2f>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 6723fc064382f7c758edc08a
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,102 +89,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sebastian,
+Usually ARMv8 platforms allow unaligned access for Normal memory. But
+some chips might not allow it by default, having SCTLR.A bit set to 1
+before U-Boot execution. One such example is Exynos850 SoC. As
+allow_unaligned() is not implemented for ARMv8 at the moment, its __weak
+implementation is used, which does nothing. That might lead to unaligned
+access abort, for example when running EFI selftest. Fix that by
+implementing allow_unaligned() for ARMv8.
 
-On 2024-10-31 22:16, Sebastian Reichel wrote:
-> Hi,
-> 
-> On Thu, Oct 31, 2024 at 08:17:32PM +0100, Jonas Karlman wrote:
->> On 2024-10-31 19:15, Eugen Hristev wrote:
->>> On 10/31/24 20:01, Sebastian Reichel wrote:
->>>> PCI enumeration is required to detect the onboard Ethernet device.
->>>>
->>>> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
->>>> ---
->>>>   configs/rock5b-rk3588_defconfig | 1 +
->>>>   1 file changed, 1 insertion(+)
->>>>
->>>> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
->>>> index c54e13e8732c..e5b9f7d326b4 100644
->>>> --- a/configs/rock5b-rk3588_defconfig
->>>> +++ b/configs/rock5b-rk3588_defconfig
->>>> @@ -17,6 +17,7 @@ CONFIG_DEBUG_UART_CLOCK=24000000
->>>>   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->>>>   CONFIG_SPL_SPI=y
->>>>   CONFIG_PCI=y
->>>> +CONFIG_PCI_INIT_R=y
->>>>   CONFIG_DEBUG_UART=y
->>>>   CONFIG_AHCI=y
->>>>   CONFIG_FIT=y
->>>
->>> This has been added and removed before, please see
->>>
->>> https://lore.kernel.org/all/20231104130451.111020-1-martin.roukala@mupuf.org/T/
->>>
->>> this commit adds it
->>> 5b269ed404dc ("configs: rockchip: rock5b-rk3588: Enable CONFIG_PCI_INIT_R")
->>>
->>> this commit removes it again
->>> 191ece249a96 ("rockchip: rk3588-rock-5b: Enable support for PCIe SATA 
->>> cards")
-> 
-> Ah, I should have checked the history. Sorry.
-> 
->> What use-case are you trying to solve with a forced pci enumeration?
->>
->> With standard boot Ethernet should be enabled when it is needed.
->>
->> However for EFI boot Ethernet maybe is not detected? Please see [1] for
->> a possible alternative patch that I created when someone reported an
->> issue with iPXE boot some time ago.
->>
->> I did not get confirmation it fully solved the issue, from what I could
->> test it should help get Ethernet detected during EFI boot on a ROCK 5B.
->>
->> [1] https://github.com/Kwiboo/u-boot-rockchip/commit/90b6d787de0b3e6ed863440be576b01d83ba5789
-> 
-> LAVA by default has a U-Boot script doing the following (IIUIC across all
-> boards), which fails with the current setup:
+The issue was found when running EFI selftest on E850-96 board
+(Exynos850 based):
 
-If you run a boot script you can easily add 'pci enum' before 'dhcp' and
-Ethernet will work for you LAVA script.
+    => bootefi selftest $fdtcontroladdr
 
-> 
-> setenv autoload no
-> setenv initrd_high 0xffffffff
-> setenv fdt_high 0xffffffff
-> dhcp
-> setenv serverip 192.168.201.1
-> tftp 0x0400000 16212093/tftp-deploy-or30pzbe/kernel/vmlinuz
-> tftp 0xa200000 16212093/tftp-deploy-or30pzbe/ramdisk/ramdisk.cpio.gz.uboot
-> setenv initrd_size ${filesize}
-> tftp 0xa100000 16212093/tftp-deploy-or30pzbe/dtb/rk3588-rock-5b.dtb
-> setenv bootargs 'console=ttyS2,1500000n8 root=/dev/nfs rw nfsroot=192.168.201.1:/var/lib/lava/dispatcher/tmp/16212093/extract-nfsrootfs-e0aw1qlf,tcp,hard,v3 rootwait ip=dhcp'
-> booti 0x0400000 0xa200000 0xa100000
-> 
-> Basically it comes down to missing network support when breaking
-> into the U-Boot shell. Also while it is obvious one needs to
-> enumerate the PCI bus for U-Boot developers with knowledge about
-> the Rock 5B, it's unexpected for people with less knowledge. So I
-> think it's sensible to have a default configuration supporting
-> network in the U-Boot shell without extra steps.
+    ...
+    Executing 'HII database protocols'
+    "Synchronous Abort" handler, esr 0x96000021, far 0xbaac0991
+    ...
+    resetting ...
 
-Unfortunately forcing a pci enumeration slow down booting from faster
-boot media, adding at least one second pci timeout delay and an error
-being logged for each unoccupied M.2 slot.
+Unaligned abort happens in u16_strnlen(), which is called from
+efi_hii_sibt_string_ucs2_block_next():
 
-For normal use, standard boot automatically enumerate pci and Ethernet
-once needed, if that is not working then that is an issue to be solved.
+    u16_strlen(blk->string_text)
 
-PCI_INIT_R was rejected earlier because it forces unnecessary slower
-boot times on any user not booting from Ethernet.
+where 'blk' type is struct efi_hii_sibt_string_ucs2_block. Because this
+struct is packed, doing "->string_text" makes 'blk' address incremented
+by 1 byte, which makes it unaligned. Although allow_unaligned() was
+called in efi_init_early() before EFI selftest execution, it wasn't
+implemented for ARMv8 CPUs, so data abort happened.
 
-With use of a boot script, the script should be capable/responsible to
-load any resources that is needed for its custom boot flow.
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+---
+ arch/arm/cpu/armv8/cpu.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Regards,
-Jonas
-
-> 
-> -- Sebastian
+diff --git a/arch/arm/cpu/armv8/cpu.c b/arch/arm/cpu/armv8/cpu.c
+index d568efa427ab..82ecf02f4b03 100644
+--- a/arch/arm/cpu/armv8/cpu.c
++++ b/arch/arm/cpu/armv8/cpu.c
+@@ -94,3 +94,8 @@ void armv8_setup_psci(void)
+ 	secure_ram_addr(psci_arch_init)();
+ }
+ #endif
++
++void allow_unaligned(void)
++{
++	set_sctlr(get_sctlr() & ~CR_A);
++}
+-- 
+2.39.5
 
