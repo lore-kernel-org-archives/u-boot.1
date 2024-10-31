@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50AD7D767F2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 18:03:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEE34D767F4
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 18:03:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCB7988E18;
-	Thu, 31 Oct 2024 19:03:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 593A5892CD;
+	Thu, 31 Oct 2024 19:03:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i53Q8iQm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oZkJsflv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C879C892A2; Thu, 31 Oct 2024 19:03:36 +0100 (CET)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
+ id 07060892CD; Thu, 31 Oct 2024 19:03:48 +0100 (CET)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 758048924F
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 19:03:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4413088B8F
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 19:03:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-7ea8de14848so902422a12.2
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 11:03:34 -0700 (PDT)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-7ee51d9ae30so398855a12.1
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 11:03:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730397813; x=1731002613; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730397823; x=1731002623; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QJL1wsBPVN58YJl0ZyEFHoO7/ie+QijWp7zOdcB9dCE=;
- b=i53Q8iQmvRRfuF4isIdbXVpYYLaQqeCpxHKqBTiQ48hFkBfLLJRD5Ohgs+G0Wn0HDk
- EhBUp3m6RFolEtYr9qAXuAbtvqd5zPE9dVGWtWU/CbUcO+zX5hIY5CR3BE7ZlDEqrvPG
- XrSvgoGShhrytUxRzxE6MmB3YQuf3fHz8zx2w=
+ bh=fvTG+SzJlE9lB4YXkp3TZ0IPiChJiWkokrLVRz5WDZ8=;
+ b=oZkJsflv5svhmuNhdxy0vjILZzbcEQBuP8EbrZQ3DjdVYmAHIFB+aeoGYh8CqC0LPH
+ TxaAvgCJYA4yQe2rgihjsFr5S2JpNdh2OfSFPm5momHkZK+aZ0L4LS1wXw/h4/YZcHN9
+ xj6mTXPvsQQYBrA2cZbttVBQIbcH0xo8TC884=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730397813; x=1731002613;
+ d=1e100.net; s=20230601; t=1730397823; x=1731002623;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QJL1wsBPVN58YJl0ZyEFHoO7/ie+QijWp7zOdcB9dCE=;
- b=bhcSk1lDrZ7TS9srkWTNzpT0AbOX/A8NeegwKlPj2JW8Lrkd/3boJ3OCJ2WIWi6NDH
- HMgNDMmbX9D1Xguz8AlghbTbbfTc5vHqdZh5i6j1GcqguxH3NeMiu0c5Qi3A4DK7fo8w
- Q8mnrgB7IYILRMp8C/SMWuMBfftNcZCp7tXN+sF0/7hjIol+0jVQ+jaXa8d5H2IS8ZXW
- m70E3qCcmZU5JEpKKJXna4URLxa9Ybjzc22K2CbEYTBQjc1KHw3RvHYYDIQs9slMSJqD
- dP4WO0V0LdvOgL8oDxBLimI9QFn777ENmBpn5Dx7+4N1P0x9ZhN1AoVTrj44UgOqSgEX
- d3ww==
-X-Gm-Message-State: AOJu0YyxSknw61qgqUaJTKAECNskcwZt/nr50YD7UHC78qKFgHEvd872
- BkVbWG7u4qhwq0cjvvVn/N8s8xS/b593B736IKwzMQxNMQHGMEVBJ4vkSaX9j+uguX7t997TcMp
- e9EDVdtzbfl18LRb0K5bjEo3SQvcNxuO3mUA5
-X-Google-Smtp-Source: AGHT+IFJug6+0SGTKJ6XlC6HdY6eOvaruv7LyuedWABETRT+N7PYTweDitP7c+eFnn6Gm09PbT7tZYoMB/fJ5BDEk+Y=
-X-Received: by 2002:a17:90b:2dcc:b0:2e2:7f8f:3ad7 with SMTP id
- 98e67ed59e1d1-2e93c1595b5mr5218429a91.7.1730397812851; Thu, 31 Oct 2024
- 11:03:32 -0700 (PDT)
+ bh=fvTG+SzJlE9lB4YXkp3TZ0IPiChJiWkokrLVRz5WDZ8=;
+ b=F4dAumOfog4AGvnaC/adTw4DiebLz33lEGifF+xbsg5biDbRJEFlLJ2/9UkNH7lxIC
+ V3hgyalv/xd+yVSuGaFwHZrYnn5q1rmR2hPsHVnhHwiXY5M5DzeqDAJMxQrz5CBDu0U9
+ XwZfMrBAxhZmDR7eeLXVebnEID3X4ZdJx4Bp3HSAPqMPIVxXTMoLfBQlrFoTZ1tdC+HN
+ Qh7mSWfk6WnQTXWzHyWwDAxboYhllgeo0NlbmXnlISd9pgYhUV79plZ6a8H7P++6hiEU
+ L78X/F03A0Df/C6nUALftvBPilkX6pSpuDEu+uIbDOR5G3m3JDOklni8MiO9QEJ2cINB
+ tdLw==
+X-Gm-Message-State: AOJu0YyRPeTM7ED4M50JxbmnC4leDjiO6eZCHKF7yoOIqLoOtOjwNMQR
+ DkoPX90NNTHQTfAExFQePhTFPi3IwEMBn6fb0ME6YZysCSVWWJLP1JTa03Qv0eGOgwXoE0LA+6d
+ alOwaYC1vFGXIXgAdtoYH5ecnz41r+tKoUzGJ
+X-Google-Smtp-Source: AGHT+IEaEw7H4qfT3ERGsWXk7SumAbRpeWm68iG6Eq6APtkQT2ZuhT3eL/kX9uEqoi2IUgoz2Ybgzu/Y+K0I+dI0Puc=
+X-Received: by 2002:a17:90b:3881:b0:2d8:da35:b4d6 with SMTP id
+ 98e67ed59e1d1-2e94c2b0382mr1068568a91.14.1730397821292; Thu, 31 Oct 2024
+ 11:03:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240920060158.106612-1-sjg@chromium.org>
- <20240920060158.106612-2-sjg@chromium.org>
- <20240923203512.GQ4252@bill-the-cat>
- <CAFLszTjT3RZYChMhBxUDsf6YC-7cZfh1_YhuQrin3sRanSO=Xw@mail.gmail.com>
- <20240925172601.GA4252@bill-the-cat>
- <CAFLszTjFMRpfwFVPJ=-xqKUu=XbH=hq+yP+N17TuFd2b8+rt4g@mail.gmail.com>
- <20240927025159.GR4252@bill-the-cat>
-In-Reply-To: <20240927025159.GR4252@bill-the-cat>
+References: <de1b8dbabd5ab7f20d7aac217ec4f5074d39f1da.1728462767.git.michal.simek@amd.com>
+In-Reply-To: <de1b8dbabd5ab7f20d7aac217ec4f5074d39f1da.1728462767.git.michal.simek@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Oct 2024 19:03:19 +0100
-Message-ID: <CAFLszThvvU8uEYSBh_F6NQViNJ+bFr6mMYzd8yrTAwOp9dhLLw@mail.gmail.com>
-Subject: Re: [PATCH v6 01/19] test: Allow signaling that U-Boot is ready
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Date: Thu, 31 Oct 2024 19:03:22 +0100
+Message-ID: <CAFLszTh6s5n4nzC7UKhFnQuXFOucGA6amjN1eV4NqwjV6-NEeQ@mail.gmail.com>
+Subject: Re: [RFC PATCH] zynqmp: Add binman description for SOM
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, neal.frager@amd.com, 
+ Charlie Johnston <charlie.johnston@loftorbital.com>,
+ Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Prasad Kummari <prasad.kummari@amd.com>, Sumit Garg <sumit.garg@linaro.org>, 
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, Tom Rini <trini@konsulko.com>, 
+ Tony Dinh <mibodhi@gmail.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,133 +90,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Michal,
 
-On Fri, 27 Sept 2024 at 04:52, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 9 Oct 2024 at 10:33, Michal Simek <michal.simek@amd.com> wrote:
 >
-> On Thu, Sep 26, 2024 at 11:36:00PM +0200, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 25 Sept 2024 at 19:26, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Sep 25, 2024 at 02:49:56PM +0200, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Mon, 23 Sept 2024 at 22:35, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Fri, Sep 20, 2024 at 08:01:36AM +0200, Simon Glass wrote:
-> > > > >
-> > > > >
-> > > > > > When Labgrid is used, it can get U-Boot ready for running tests. It
-> > > > > > prints a message when it has done so.
-> > > > > >
-> > > > > > Add logic to detect this message and accept it.
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > ---
-> > > > > >
-> > > > > > (no changes since v1)
-> > > > > >
-> > > > > >  test/py/u_boot_console_base.py | 9 +++++----
-> > > > > >  1 file changed, 5 insertions(+), 4 deletions(-)
-> > > > >
-> > > > > What happens is that labgrid can also be told to look for and then
-> > > > > interrupt autoboot, just like our pytests can do, and the system is at
-> > > > > the prompt. But this is also what it's like for a system with autoboot
-> > > > > disabled. Do we actually need this patch to achieve the functionality
-> > > > > you want? Doesn't that already just happen?
-> > > >
-> > > > The point of this patch is actually to remove code in pytest, by
-> > > > allowing it to skip all the banner-detection stuff. It does not affect
-> > > > things in Labgrid, since it still needs to watch for banners, etc.
-> > >
-> > > But you can't remove code from pytest, people can and will run the suite
-> > > outside of labgrid.
-> >
-> > Yes, that's right. I meant that with Labgrid the code is not used.
+> There is necessary to do some steps to compose boot images. These steps
+> were in scripts in layers for a while. That's why introduce description via
+> binman to simplify wiring and remove all scripting around.
+> This should make sure that everybody is up2date with the latest versions.
 >
-> OK. I still think this (and I assume the related flag to tell whichever
-> helper that was that the platform is ready to go) are too implementation
-> specific.
-
-OK, but it does have the virtue of working properly on all the boards
-I have, rather than just a subset, without this patch.
-
+> The first step is to create fit image with DTBs with descriptions in
+> configuration node which is written as regular expression to match all SOM
+> versions.
+> Description is there for k24 and k26 in spite of low level psu_init
+> configuration is different. The reason is that it goes to u-boot.itb image
+> which is the same for k24 and k26.
+> u-boot.itb is another image which is generated. It is normally generated
+> via arch/arm/mach-zynqmp/mkimage_fit_atf.sh but this script is supposed to
+> be deprecated.
+> FIT image by purpose is using 64bit addresses to have default option to
+> move images to high DDR (above 4GB). TF-A and TEE are optional components
+> but in the most cases TF-A is present all the time and TEE(OP-TEE) is used
+> by some configurations too.
 >
-> > > > Without this patch, we have to tell Labgrid's U-Boot driver to do
-> > > > nothing, so that pytest does it. But that is not a good idea, since
-> > > > Labgrid has a lot more info about the board than pytest has. For
-> > > > example, look at all the SPL-banner-count stuff.
-> > >
-> > > Why do you have to tell it to do nothing? The pytest suite works fine,
-> > > today, if the board stops at the prompt automatically. To be clear, the
-> > > labgrid yaml file I'm using with my scripts has the information to stop
-> > > autoboot in it and it's not causing a problem.
-> >
-> > But if it wasn't causing a problem I would not have invented this
-> > annoying scheme.
+> 3rd generated image is boot.bin with updated user field which contains
+> version number. This image can be used with updated Image Selector
+> which supports A/B update mechanisms with rollback protection.
 >
-> Well, I honestly thought it might be a remnant from development that
-> wasn't needed once everything else was done. I do that from time to time
-> myself.
-
-OK.
-
+> 4th image is image.bin which binary file which contains boot.bin and
+> u-boot.itb together and can be programmed via origin Image Selector.
+> This image can be also used for creating one capsule which contains both
+> boot images (in SPL boot flow).
 >
-> > For several boards, by the time pytest gets to see
-> > the output it is too late to press a key and stop.
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
 >
-> Why / how? Do we perhaps need to adjust the timeout upwards, slightly?
-> Especially in light of the changes you also did to detect a "dead" board
-> and so we don't wait 30 minutes for a test run to fail.
-
-Why / how - because the board prints its SPL banner as soon as reset
-is released, then waits for U-Boot proper to be sent, at which case
-the U-Boot banner is sent .Then labgrid disconnects from the console
-and runs microcom, which connects to the console over ser2net and
-misses some of what has already been sent.
-
-This is actually a fundamental problem, not something we can adjust
-with timeouts.
-
+> Currently I have this for testing purpose only to find missing bits and
+> pieces in binman for cases I want to support.
 >
-> > Also, some boards
-> > have a different prompt which is not detected by pytest.
-> >
-> > For example:
-> > configs/am62x_beagleplay_a53_defconfig:CONFIG_AUTOBOOT_PROMPT="Press
-> > SPACE to abort autoboot in %d seconds\n"
+> This patch depends on
+> https://lore.kernel.org/r/fbed0251437b61a2f7a85596d7403b5b9c8237c1.1728306322.git.michal.simek@amd.com
 >
-> Yeah, I had forgotten that as I turn that off along with turning on
-> other tests via config fragment, on that platform. That really is a
-> deficiency in our pytest version of this.
+> ---
+>  arch/arm/dts/Makefile                |   1 +
+>  arch/arm/dts/zynqmp-som-binman.dts   | 224 +++++++++++++++++++++++++++
+>  arch/arm/mach-zynqmp/Kconfig         |  17 ++
+>  configs/xilinx_zynqmp_kria_defconfig |   2 +
+>  4 files changed, 244 insertions(+)
+>  create mode 100644 arch/arm/dts/zynqmp-som-binman.dts
 
-OK
+I'm pleased to see this. My only suggestion is to use '/bits/ 64'
+instead of the macros, for 64-bit values.
 
->
-> > > > Basically, without this patch we cannot use '-s uboot' to tell the
-> > > > Labgrid strategy to take us to a U-Boot prompt. We must just use a raw
-> > > > console with no strategy, relying on pytest to do all the work.
-> > > >
-> > > > I hope that helps explain the problem?
-> > >
-> > > I think I see what you're saying, and it's based on the assumption that
-> > > we'll make everyone either use labgrid?
-> >
-> > Not at all. I tested this version of the series again with my
-> > pre-Labgrid lab and it works fine. But I do believe that the hooks
-> > that pytest has are not ideal for use with Labgrid.
->
-> OK. But, why can't you make use of the labgrid functionality to pause
-> the board? It's the state flag for labgrid-client yes? Dropping that in
-> with my labgrid support would be just a tweak to the console script to
-> check if the board set labgrid_strategy or something, and I think you
-> could adapt yours to that too?
-
-I am really not sure what to say here. I have explained the reality of
-the situation. I have spent hours debugging it and figuring out the
-root cause. There is no other tweak I can think of that will solve
-this problem.
+[..]
 
 Regards,
 Simon
