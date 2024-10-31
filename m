@@ -4,62 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C794DD767F4
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:54:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6106BD767F4
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:59:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E6F7892A2;
-	Thu, 31 Oct 2024 18:54:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id E8EFD88B8F;
+	Thu, 31 Oct 2024 18:59:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="hHijoMXP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PWI7+yCY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A369B8929F; Thu, 31 Oct 2024 18:54:10 +0100 (CET)
-Received: from bali.collaboradmins.com (bali.collaboradmins.com
- [148.251.105.195])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 302AE88DB6; Thu, 31 Oct 2024 18:59:52 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79942892DA
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:54:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E2DA88B55
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:59:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sebastian.reichel@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1730397245;
- bh=zorlERACLF2S8eMJ5ZJytJvWKMVDGcQWENtfxCEoqVE=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=hHijoMXPZCWWLDIzTmkk4MljP4GvLOusJpQY1tGHQg20FsB/G1qLCtBXE/GwDVimQ
- RKw3Ebz7LLhGqSW9PyL/AKZ/AKUU8RKX3nOJIcH2npu3bbm0WyE88EZ9IhaaYm56IP
- 0HUYaytl+B/mR/g3p6obAsUr62Gm1QA/DxWqMLkpBqrOvRpy2n5pGEqmVJVD/qe48S
- zhI7sjU1likrZOHQ/yR2HbTGIBgr7tCG44Q1cw/6W6FMgAzrH8De1tMf6cW0pDHIdG
- UKuzDekKuwhFrv0GM+ja5p8osA0XTdypCC7WnEGkgSErzfncGfj0j/LLdwK8ERXYaq
- VrNYR767TH9og==
-Received: from jupiter.universe (dyndsl-091-248-210-236.ewe-ip-backbone.de
- [91.248.210.236])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested) (Authenticated sender: sre)
- by bali.collaboradmins.com (Postfix) with ESMTPSA id 07CAB17E36CB;
- Thu, 31 Oct 2024 18:54:05 +0100 (CET)
-Received: by jupiter.universe (Postfix, from userid 1000)
- id 9949E480084; Thu, 31 Oct 2024 18:54:04 +0100 (CET)
-From: Sebastian Reichel <sebastian.reichel@collabora.com>
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>, Soeren Moch <smoch@web.de>
-Cc: Tim Harvey <tharvey@gateworks.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Anand Moon <linux.amoon@gmail.com>, Maxim Kiselev <bigunclemax@gmail.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>
-Subject: [PATCH v1 3/4] usb: tcpm: print error on hard reset
-Date: Thu, 31 Oct 2024 18:50:32 +0100
-Message-ID: <20241031175404.114773-4-sebastian.reichel@collabora.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241031175404.114773-1-sebastian.reichel@collabora.com>
-References: <20241031175404.114773-1-sebastian.reichel@collabora.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a9a156513a1so197725066b.0
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:59:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1730397590; x=1731002390; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=waSN1DVdbRUm7lpYO6vpbtrwdEOakpvqVtR1azCJ4zQ=;
+ b=PWI7+yCY6A784evCeROQWikXwFHfF1gmyzNDVgQBIlUJKuA1Lzhd+pBLq63dEIBHsd
+ /Wt7Nrlh+P5BK2D2mAQf8jis20rL3las3NWdesEEtIUVwyWXMW7vfAuBRFc5VSpemWUv
+ VzYGvR4D0JrwY1a/3gcnlWHCPJPby4sYElwwc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730397590; x=1731002390;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=waSN1DVdbRUm7lpYO6vpbtrwdEOakpvqVtR1azCJ4zQ=;
+ b=KKpTmT0LSEVLlSLSiThkFxFLem2D6CfqMhZ+BHWDNyDleN0+9xmWriVVgNCPxYK+7V
+ enVf+abH/agAaV/w0EkPD/OYrzReAl+Fe8nAI748CQnl+xh466T/xQFDF+w+pFaqb3Wu
+ HzY7UfrFH7O9h/KK9L+bMgaHW2/wLdMVpJAMv0wFDiOt4Yx2Q5gnp3QccjAJ3mYeXwHL
+ TxQ+7oMLWIrgcDZNPcWEmtqs32tKPlilyEWb4bNsfG7/llf0GLVz6YoS/BXEo5/WdCxq
+ y51OXxvARb+NuzIhuXqnYlgKkW+hYlCIU9/nVv1UPKDwadY4iQoNWsytkggmmSDUs4pQ
+ uYPw==
+X-Gm-Message-State: AOJu0YyyBJroYhPbVs8WYoUunyYiHkKsgAnzTrNyQWJjiqo2Xk5LKJxH
+ ofEv0ZgbmEJfwkbWOXHyN2NEYQY26GWpu1k/Chm3qIY1HUcPwllohbCl8AJ5JjymJbozC5bJaXR
+ bpjgxqqsls9jx1z57c0PWJEWzc4qjlgaBWVRTpZiAv/gFJ9kSXA==
+X-Google-Smtp-Source: AGHT+IH9kRHyWPpmXs0ezUoMMXmQ/ksZwcQkEvBpDSyXMk01ROQbocoBXsh1AHE9B3YR//lIO0EGl7i9eI5Dx9L1EXk=
+X-Received: by 2002:a17:906:dc95:b0:a99:f28f:687 with SMTP id
+ a640c23a62f3a-a9de61d1a52mr1883622466b.40.1730397589669; Thu, 31 Oct 2024
+ 10:59:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241010015145.1977999-1-sjg@chromium.org>
+ <20241010015145.1977999-11-sjg@chromium.org>
+ <20241029235250.GA2558755@bill-the-cat>
+In-Reply-To: <20241029235250.GA2558755@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 31 Oct 2024 18:59:37 +0100
+Message-ID: <CAFLszTgVbwiiuwyynfY5ZKOy-r9oqhnTvPSqaEuBadFQofO4oA@mail.gmail.com>
+Subject: Re: [PATCH v7 10/11] test: Support testing with two board-builds
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,45 +83,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A USB-PD hard reset involves removing the voltage from VBUS for some
-time. So basically it has the same effect as removing the USB-C plug
-for a short moment. If the machine is powered from the USB-C port and
-does not have a fallback supply (e.g. a battery), this will result in
-a full machine reset due to power loss.
+Hi Tom,
 
-Ideally we want to avoid triggering a hard reset on these boards. A
-non-working USB-C port is probably better than unplanned reboots. But
-boards with a backup supply should do the hard reset to get everything
-working again.
+On Wed, 30 Oct 2024 at 00:52, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Oct 09, 2024 at 07:51:44PM -0600, Simon Glass wrote:
+>
+> > The Beagleplay board uses two entirely separate builds to produce an
+> > image, rather than using an SPL build for this purpose.
+>
+> JFTR, this is an incorrect explanation of what's going on. The TI K3
+> families have both a Cortex-R core and a Cortex-A core and the R core
+> needs to come up before the A core. But in both cases we have U-Boot SPL
+> and then U-Boot proper being used.
 
-In theory it would be enough to check the self_powered property, but
-it seems the property might not be configured consistently enough in
-system firmwares.
+Yes, I understand that. I will reword the commit message.
 
-USB-PD hard resets should happen rarely in general, so let's at least
-print an error message before the potential board reset happens. This
-is also useful, since it immediately gives away which device triggered
-the hard reset.
+>
+> This is aside from having come back to re-review the series and still
+> feel like this is taking the wrong approach to the problem. We wouldn't
+> add a --optee-build-directory for going off and building OP-TEE and so
+> forth. It's just the case that we need assorted binaries for the system
+> and some of them come from building U-Boot for another platform.
 
-Fixes: 1db4c0ac77e3 ("usb: tcpm: add core framework")
-Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
----
- drivers/usb/tcpm/tcpm.c | 2 ++
- 1 file changed, 2 insertions(+)
+Yes, and that is supported by this integration. For example my rk3399
+board brings in optee as a binary.
 
-diff --git a/drivers/usb/tcpm/tcpm.c b/drivers/usb/tcpm/tcpm.c
-index 786d92fa4c6f..909fe2ef4fcb 100644
---- a/drivers/usb/tcpm/tcpm.c
-+++ b/drivers/usb/tcpm/tcpm.c
-@@ -1711,6 +1711,8 @@ static void run_state_machine(struct udevice *dev)
- 
- 	/* Hard_Reset states */
- 	case HARD_RESET_SEND:
-+		if (!port->self_powered && port->port_type == TYPEC_PORT_SNK)
-+			dev_err(dev, "Initiating hard-reset, which might result in machine power-loss.\n");
- 		tcpm_pd_transmit(dev, TCPC_TX_HARD_RESET, NULL);
- 		tcpm_set_state(dev, HARD_RESET_START, 0);
- 		port->wait_dr_swap_message = false;
--- 
-2.45.2
-
+Regards,
+Simon
