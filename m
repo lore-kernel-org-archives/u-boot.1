@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6106BD767F4
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:59:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35B82D767F2
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 18:00:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8EFD88B8F;
-	Thu, 31 Oct 2024 18:59:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 99E7F89293;
+	Thu, 31 Oct 2024 19:00:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PWI7+yCY";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZCo+P5B1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 302AE88DB6; Thu, 31 Oct 2024 18:59:52 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id DD29F8929D; Thu, 31 Oct 2024 19:00:24 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E2DA88B55
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:59:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EE54588B55
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 19:00:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a9a156513a1so197725066b.0
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:59:50 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a99eb8b607aso134855866b.2
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 11:00:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730397590; x=1731002390; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730397622; x=1731002422; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=waSN1DVdbRUm7lpYO6vpbtrwdEOakpvqVtR1azCJ4zQ=;
- b=PWI7+yCY6A784evCeROQWikXwFHfF1gmyzNDVgQBIlUJKuA1Lzhd+pBLq63dEIBHsd
- /Wt7Nrlh+P5BK2D2mAQf8jis20rL3las3NWdesEEtIUVwyWXMW7vfAuBRFc5VSpemWUv
- VzYGvR4D0JrwY1a/3gcnlWHCPJPby4sYElwwc=
+ bh=Am76qSSAvQW2xhelfC7MrQOk2ldqErPoW8p3YMIYPYg=;
+ b=ZCo+P5B1ya4btehHhW/kkPGjXPinGv823fI4Ca3xPhUgesRMJZeucNpd1SLtbLAxE+
+ ysRNzvI+zCu82AGK6ISbSpxD8mU5uXgxMSEEfeqBbxuKV+GfeWmjNvlBt43ZXtyBTePc
+ +wykB67qmgw0PMaxg6uZ8fTwctj7NeBjKYYwY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730397590; x=1731002390;
+ d=1e100.net; s=20230601; t=1730397622; x=1731002422;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=waSN1DVdbRUm7lpYO6vpbtrwdEOakpvqVtR1azCJ4zQ=;
- b=KKpTmT0LSEVLlSLSiThkFxFLem2D6CfqMhZ+BHWDNyDleN0+9xmWriVVgNCPxYK+7V
- enVf+abH/agAaV/w0EkPD/OYrzReAl+Fe8nAI748CQnl+xh466T/xQFDF+w+pFaqb3Wu
- HzY7UfrFH7O9h/KK9L+bMgaHW2/wLdMVpJAMv0wFDiOt4Yx2Q5gnp3QccjAJ3mYeXwHL
- TxQ+7oMLWIrgcDZNPcWEmtqs32tKPlilyEWb4bNsfG7/llf0GLVz6YoS/BXEo5/WdCxq
- y51OXxvARb+NuzIhuXqnYlgKkW+hYlCIU9/nVv1UPKDwadY4iQoNWsytkggmmSDUs4pQ
- uYPw==
-X-Gm-Message-State: AOJu0YyyBJroYhPbVs8WYoUunyYiHkKsgAnzTrNyQWJjiqo2Xk5LKJxH
- ofEv0ZgbmEJfwkbWOXHyN2NEYQY26GWpu1k/Chm3qIY1HUcPwllohbCl8AJ5JjymJbozC5bJaXR
- bpjgxqqsls9jx1z57c0PWJEWzc4qjlgaBWVRTpZiAv/gFJ9kSXA==
-X-Google-Smtp-Source: AGHT+IH9kRHyWPpmXs0ezUoMMXmQ/ksZwcQkEvBpDSyXMk01ROQbocoBXsh1AHE9B3YR//lIO0EGl7i9eI5Dx9L1EXk=
-X-Received: by 2002:a17:906:dc95:b0:a99:f28f:687 with SMTP id
- a640c23a62f3a-a9de61d1a52mr1883622466b.40.1730397589669; Thu, 31 Oct 2024
- 10:59:49 -0700 (PDT)
+ bh=Am76qSSAvQW2xhelfC7MrQOk2ldqErPoW8p3YMIYPYg=;
+ b=rePpyu459/anWGSmaEHDD+jJlSQJK5jnxor2mchbmMjVCG1XZi7qDzTvltiC6g43lD
+ khy2R0mjR7mGjDZMXtt1EmVb/djc8YoC9gs10tjRWMPc8W+0kCHSINQTIea6RTe5mFCn
+ b0t5rL6UD4oGjirbhX//HycQ1QxJ59dC5aoCYhK4Rv1MPEIwaKgpCHAH+vQbXBVlucNd
+ RKe25ZhDHApMoucVn7mp9LGeQjtKBniNYvgCY69Ack6StTryUgyYqF3oOefB+RqsaAKS
+ owOnMx0oPhrbw9zmh7TE+3Ph6gk+xr1ysoL98evKncAzIT0ljCY7sUEXCbT3pDuOZMBu
+ D80g==
+X-Gm-Message-State: AOJu0YyJXUK5A65R7DklOHmXIu1X8EYSfs5XUlZbflUNP+TfXHcCzsUH
+ hpTQcl2IBvEmvyi9HzO604CaYQ8hiHOfs0woVK+63ynDCH8I5AVxvf7GB5178lyzL+PxIXvpGo2
+ qySwb7QSQ8uenNX3CKEt28EyGRHoYhQkoHkTABd80AqrFavL0bQ==
+X-Google-Smtp-Source: AGHT+IHjH+C5YQ7x2y+/Pdt2irqw3C4L32RWSZjN2ky+8Tt5DziGZADl4dRbpc6BJyxpaUJhF8xctQETNWke1c/mVkw=
+X-Received: by 2002:a17:907:96ac:b0:a99:5d4c:7177 with SMTP id
+ a640c23a62f3a-a9de5d6f1f7mr2059032066b.6.1730397622424; Thu, 31 Oct 2024
+ 11:00:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241010015145.1977999-1-sjg@chromium.org>
- <20241010015145.1977999-11-sjg@chromium.org>
- <20241029235250.GA2558755@bill-the-cat>
-In-Reply-To: <20241029235250.GA2558755@bill-the-cat>
+ <20241010015145.1977999-2-sjg@chromium.org>
+ <20241029235257.GB2558755@bill-the-cat>
+In-Reply-To: <20241029235257.GB2558755@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Oct 2024 18:59:37 +0100
-Message-ID: <CAFLszTgVbwiiuwyynfY5ZKOy-r9oqhnTvPSqaEuBadFQofO4oA@mail.gmail.com>
-Subject: Re: [PATCH v7 10/11] test: Support testing with two board-builds
+Date: Thu, 31 Oct 2024 19:00:10 +0100
+Message-ID: <CAFLszTjBbODQh+Vv=3cckGUyRt2MwXnLQKFcpyMVSgFzB67gWA@mail.gmail.com>
+Subject: Re: [PATCH v7 01/11] test: Allow signaling that U-Boot is ready
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -85,29 +85,55 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Wed, 30 Oct 2024 at 00:52, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 30 Oct 2024 at 00:53, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Wed, Oct 09, 2024 at 07:51:44PM -0600, Simon Glass wrote:
+> On Wed, Oct 09, 2024 at 07:51:35PM -0600, Simon Glass wrote:
 >
-> > The Beagleplay board uses two entirely separate builds to produce an
-> > image, rather than using an SPL build for this purpose.
+> > When Labgrid is used, it can get U-Boot ready for running tests. It
+> > prints a message when it has done so.
+> >
+> > Add logic to detect this message and accept it.
+> >
+> > Note that this does not change pytest, which still (also) looks for the
+> > U-Boot banner. This change merely makes it possible for pytest to
+> > believe Labgrid when it says that the board is ready for use.
+> >
+> > In several cases, the board starts up and Labgrid receives some initial
+> > output, then pytest starts and misses some of that output, because it
+> > came in while Labgrid had the console open. Then pytest fails because
+> > it doesn't see the expected banners.
+> >
+> > With this change, Labgrid handles getting U-Boot to a prompt, in a
+> > fully reliable manner. Then pytest starts up and can simply start
+> > running its tests.
+> >
+> > But, again, this does not prevent pytest from handling a banner if one
+> > is provided (e.g. if not using the Labgrid integration).
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
 >
-> JFTR, this is an incorrect explanation of what's going on. The TI K3
-> families have both a Cortex-R core and a Cortex-A core and the R core
-> needs to come up before the A core. But in both cases we have U-Boot SPL
-> and then U-Boot proper being used.
+> I _may_ see this myself sometimes, but I'm not sure.
 
-Yes, I understand that. I will reword the commit message.
+OK, but it isn't really necessary for you to see it yourself. I've
+described above the repeatable problems I have with this approach.
 
->
-> This is aside from having come back to re-review the series and still
-> feel like this is taking the wrong approach to the problem. We wouldn't
-> add a --optee-build-directory for going off and building OP-TEE and so
-> forth. It's just the case that we need assorted binaries for the system
-> and some of them come from building U-Boot for another platform.
+> But I'm not sure
+> where the bug would be between us and labgrid. Looking at
+> test/py/u_boot_console_exec_attach.py we grab the console and then reset
+> the target. If the spawn hasn't completed, especially before the power
+> cycle has completed (which in labgrid defaults to 2 seconds) we perhaps
+> need our own delay. But as I'll point out further on, NOT counting the
+> banners means we aren't able to verify other functionality. Even if they
+> are tests that I think you don't like because they verify the
+> functionality of resetting the device.
 
-Yes, and that is supported by this integration. For example my rk3399
-board brings in optee as a binary.
+Yes, that's a use case that needs special support. If a board is
+booted from USB, then resets, it will run whatever it can find,
+perhaps just hang. Labgrid doesn't know the board is resetting and
+cannot therefore ensure that it sends the firmware over USB a second
+time (or sets the recovery line on the board). Resetting a board works
+OK using SDwire and some other cases, but will fail on quite a few of
+my boards.
 
 Regards,
 Simon
