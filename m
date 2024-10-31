@@ -4,71 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3191D767F2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 18:04:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85C9DD767F4
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 18:11:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C1998931F;
-	Thu, 31 Oct 2024 19:04:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 07B2C88DB1;
+	Thu, 31 Oct 2024 19:10:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jWz4K02q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g/6Fo8zA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2414589319; Thu, 31 Oct 2024 19:04:38 +0100 (CET)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id E3AE188DB6; Thu, 31 Oct 2024 19:10:57 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C804588B8F
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 19:04:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B96AC88BBE
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 19:10:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-7d4f85766f0so983092a12.2
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 11:04:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7b157c9ad12so68347885a.1
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 11:10:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730397874; x=1731002674; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9qcvzcQOmUEROAo3HbPA5moBoCetXflug5sp4P8QLWs=;
- b=jWz4K02qEZmCZ/LpoWjIATWC9hr8vbQ7Gi+kuZMnvaaHSa8R22r4PxyZVJCFr2luPN
- rU8af6AGnU5QUYEquDQb7dglN43UAFHicCav9yIaEgyD7UnXx380NKxEvFvr0Mx64lyh
- 21aT+j+mQG2uAGc+FMgUY26sb4UYOBMAu7n0A=
+ d=konsulko.com; s=google; t=1730398254; x=1731003054; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=x+IhRdDk6ZQdiEtxzRRfvDN1my19mD6TEvDXhQke4+U=;
+ b=g/6Fo8zACIPpOrmSEDh8dZ0GNzfrWaK82mMvkYlApfR7BqFlIoZy0KH9iIHoR9W9v2
+ sAL9+PQDG5VixS6krELSZ4ki6BkX0X9TaMsv1X6sMdeiP6v1ixprd9nLZHIz7hIArUHO
+ nl9FHSWp4Ff1ntA9ZfkM8LYQ/nlL211IrrUB4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730397874; x=1731002674;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9qcvzcQOmUEROAo3HbPA5moBoCetXflug5sp4P8QLWs=;
- b=l1VatACJZdRd8PYkQFH7UWcmpJJIx4BpzKNma0XDkORGcqjQ0DEIV2aKGegrO+E+wi
- hqskvhEixoaPLTBCJRRnCpsYCZVTeZZYUaPSlhFpD0HwQriLbZwHMcnRXeOirQZ4aQM+
- P7MBSZpSVqacuTsWfyH045xJ8bpsdbCfDEAA+RuKeWOyxy9MxRgASzII7sysDmHr+t3C
- mysgqu67UerO34CEKJGEJFk8n+I0e9MVONiAmSjwvPlPbSag7N5trhTV6ETW6rkt59il
- JVU2Anw8HleHA9cJSKpwoPI/3jdzl3wuzauC2Ca9XCnpuAfOVpUMtXGAgieb2E+rCFfA
- 7y3w==
-X-Gm-Message-State: AOJu0YzPhD7NI8ThVzDwvTnsO+4+2dIA+C9Z1NZVwfLm6VteOuxNiANT
- Mr8Ge627AREzMkkWSl6cTgRWHxDtp0YngtJ3iFnh4JglIRtlkH2Di4LCZnptC8yJqmK7E+7R4um
- UD7ukQlh+MfGdIfneF1qElFPtNsuoO+wTaBfa
-X-Google-Smtp-Source: AGHT+IEb4pDc0ZuvvnzNSvSdrOW71AUKg7Jl+oj/ePk0idGJXGlXYPjMWii5V3H7Cz/FOfXIq9b0XXs9tYZYZoPkb38=
-X-Received: by 2002:a17:90b:4a01:b0:2e2:bd7a:71ea with SMTP id
- 98e67ed59e1d1-2e93c12931bmr4882706a91.8.1730397874370; Thu, 31 Oct 2024
- 11:04:34 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1730398254; x=1731003054;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x+IhRdDk6ZQdiEtxzRRfvDN1my19mD6TEvDXhQke4+U=;
+ b=i9U36hWc/F/uKiGagacVRq4pAoiWPkAuT3gsuu6S/TxLF9gXvG72wNPA1T1/MKjPML
+ q1VKaL2d+tIt2n5b5aq3hC4qAWNo7lnLnKHSUngKW2gzHJA+kFy3dpsQFCvh5IYiF8Xj
+ yCbxoaDD2WdUPM5XWp8w34kzoYVOLre8astDJrX3DZU0LRCP+PdJMQ0doB0pV7Cpe1MN
+ QV9DJQn/sixxTFR4zFGUGYSRQLMmwawQwP2cbOERHduItbS10O0oEQbb5LGh5e0i+UUg
+ aa8UiCRX4KRkfVbzep7JEieGly8uZRAYcP0s7V8zbAU8q6Kfbk5qEYnK7fZJ7UkSsveW
+ PsOQ==
+X-Gm-Message-State: AOJu0YwGnQVRbrPHy8/KWHkK9LvHqkyCJDIude/Tp1aAy3Y1lh+8bkAr
+ WDnIsqhLLB2CgXFz28XDqSfow1eIArNaJ5EHMRet3jSsHhLha8CXpZ9WGwXDAJQ=
+X-Google-Smtp-Source: AGHT+IHKVN2aOX/WcVoOp9mbrWbjXmjLcPoMUCJlEB2ANRRX1Kg/U286kbKDzNXjMLhTS/YM+6Li8g==
+X-Received: by 2002:a05:620a:46a1:b0:7a9:bd5b:eb61 with SMTP id
+ af79cd13be357-7b193efedaamr2978706385a.27.1730398254545; 
+ Thu, 31 Oct 2024 11:10:54 -0700 (PDT)
+Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b2f39f7b85sm92809385a.31.2024.10.31.11.10.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Oct 2024 11:10:53 -0700 (PDT)
+Date: Thu, 31 Oct 2024 12:10:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: Re: [PATCH 03/21] bloblist: test: doc: Move into the common suite
+Message-ID: <20241031181049.GV2558755@bill-the-cat>
+References: <20241028124130.32072-1-sjg@chromium.org>
+ <20241028124130.32072-4-sjg@chromium.org>
+ <20241028193310.GS4959@bill-the-cat>
+ <CAFLszTgHHgBPByBdBxGWPpJ0tTkoTfZ=aN3MY80mFBR+CujvLw@mail.gmail.com>
+ <20241029163642.GA4959@bill-the-cat>
+ <CAFLszTiXXXNFUeGoe+0ivyWgh-9MDYdCETFoWDcskYwHd-c9bA@mail.gmail.com>
 MIME-Version: 1.0
-References: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
-In-Reply-To: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Oct 2024 19:04:16 +0100
-Message-ID: <CAFLszTiv1fVewz4qM5QgZOizgEFSHxASgW4de9jxsPMBuS8gKA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] menu: fix the logic checking whether ESC key is
- pressed
-To: Weijie Gao <weijie.gao@mediatek.com>
-Cc: u-boot@lists.denx.de, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, 
- Daniel Golle <daniel@makrotopia.org>, John Crispin <john@phrozen.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="iphJ3Q/HR8UKQPMG"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTiXXXNFUeGoe+0ivyWgh-9MDYdCETFoWDcskYwHd-c9bA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,70 +97,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 29 Oct 2024 at 10:47, Weijie Gao <weijie.gao@mediatek.com> wrote:
->
-> It's observed that the bootmenu on a serial console sometimes
-> incorrectly quitted with superfluous characters filled to command
-> line input:
->
-> >  *** U-Boot Boot Menu ***
-> >
-> >      1. Startup system (Default)
-> >      2. Upgrade firmware
-> >      3. Upgrade ATF BL2
-> >      4. Upgrade ATF FIP
-> >      5. Load image
-> >      0. U-Boot console
-> >
-> >
-> >  Press UP/DOWN to move, ENTER to select, ESC to quit
-> >MT7988> [B
->
-> Analysis shows it was caused by the wrong logic of bootmenu_loop:
->
-> At first the bootmenu_loop received the first ESC char correctly.
->
-> However, during the second call to bootmenu_loop, there's no data
-> in the UART Rx FIFO. Due to the low baudrate, the second char of
-> the down array key sequence hasn't be fully received.
->
-> But bootmenu_loop just did a mdelay(10), and then treated it as a
-> single ESC key press event. It didn't even try tstc() again after
-> the 10ms timeout.
->
-> This patch fixes this issue by letting bootmenu_loop check tstc()
-> twice.
->
-> Tested-By: E Shattow <lucent@gmail.com>
-> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> ---
->  common/menu.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/common/menu.c b/common/menu.c
-> index 8cc9bf06d9c..48ab7f0f398 100644
-> --- a/common/menu.c
-> +++ b/common/menu.c
-> @@ -525,14 +525,15 @@ enum bootmenu_key bootmenu_loop(struct bootmenu_data *menu,
->                                 struct cli_ch_state *cch)
->  {
->         enum bootmenu_key key;
-> -       int c;
-> +       int c, errchar = 0;
->
->         c = cli_ch_process(cch, 0);
->         if (!c) {
->                 while (!c && !tstc()) {
->                         schedule();
->                         mdelay(10);
-> -                       c = cli_ch_process(cch, -ETIMEDOUT);
-> +                       c = cli_ch_process(cch, errchar);
-> +                       errchar = -ETIMEDOUT;
->                 }
->                 if (!c) {
->                         c = getchar();
-> --
-> 2.45.2
->
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+--iphJ3Q/HR8UKQPMG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Oct 31, 2024 at 07:00:41PM +0100, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 29 Oct 2024 at 17:36, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Oct 29, 2024 at 04:45:40PM +0100, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Mon, 28 Oct 2024 at 20:33, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Mon, Oct 28, 2024 at 01:41:08PM +0100, Simon Glass wrote:
+> > > >
+> > > > > There is no particular need for bloblist to have its own test sui=
+te.
+> > > > > Move it into the common suite instead.
+> > > > >
+> > > > > Add the missing help for 'common' and update the docs.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > >
+> > > > This feels both like churn and weird. I would think "common" tests =
+are
+> > > > for things that are kinda legacy and too catch-all to have their own
+> > > > subgroup.
+> > >
+> > > It's just chosen so that the test for common/ is in test/common - i.e.
+> > > it makes it easier for people to find it.
+> >
+> > Then I really don't understand renaming bloblist from something
+> > descriptive to common which is not.
+>=20
+> Old: test/bloblist.c
+> New: test/common/bloblist.c
+>=20
+> It is only the directory that is changing.
+
+Then some of the commit messages need to be reworked? It looks like it
+stops being "ut bloblist" and part of "ut common" and that's my concern.
+
+--=20
+Tom
+
+--iphJ3Q/HR8UKQPMG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcjyCYACgkQFHw5/5Y0
+tyytuwwAritiR30FnhbmO6SZW2cXMP/mF7bYXsJU3tLiKN0F/8v4bSeRGLhmb1dU
+7+xi6j3UYu2o/DBARxGMMmrpkLypXmy3+JbvotiVXgucyIPwgwFUUfvTV6L8cjYV
+TJTE7iIA571p+XCV8W1Emv5pTcRa+lqbwZUrk5F01piEDJNwT8nd9WMvWYUlnfB4
+ddFxG7n2qS80XbJxbpxwlhIaNLMHygKjjL5bSImKAQySt1ccwtKok568ndi+nSxN
+QFxwNdqhqbuAqvcspouQ2+9Xb89rg0SKtvFzGeZOUqU2J+g4DaD0Ux/PQhtDE4V0
+k4MJ5PvprPUMHgFARVpzZYdth0ftx+vW5C/FeoYjtAv1L9uzvXWnwnyM+ycR6ts3
+UKukwM0JuVM5/sqzxlvr9MS0zL5D0iYeb5KJksHQI/2giqbOR6vvwHtXJNWuhjy8
+FzHlhu1NwRT7F1iRfFepJW/500ap9sFsQxBgcAXy0DCQonGeIO5YM1VbHqYKPWAX
+OB2CgEXP
+=su8M
+-----END PGP SIGNATURE-----
+
+--iphJ3Q/HR8UKQPMG--
