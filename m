@@ -4,75 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EF87D6B6DD
-	for <u-boot@archiver.kernel.org>; Wed, 30 Oct 2024 23:00:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A247EE6894C
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 03:23:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1304A8928E;
-	Wed, 30 Oct 2024 23:59:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F72B89259;
+	Thu, 31 Oct 2024 04:23:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GHHc6BFY";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38BC88929B; Wed, 30 Oct 2024 23:59:42 +0100 (CET)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2BCE08924F; Thu, 31 Oct 2024 04:23:12 +0100 (CET)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FEED89245
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 23:59:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90D63891DD
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 04:23:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6cbceb321b3so2404356d6.3
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 15:59:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730329179; x=1730933979; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iNygn4tsSRcymWeMp8da8j6ORuDkzfHuHFddbwJeym0=;
- b=GHHc6BFYsP/fpcEoe2TNofr8vufEU5uvCKqepyUOBMkWOn02OB12IkdmIF3YG2V6K0
- OlxmmGIJCHlwXTc0DmsNCCN7ZzmbwPTyhTejfEJ2IWyRAfIySfNs7SQob0M/hbvNn+4j
- 1iCcXxVFpzRrHHX/EWBmWzuQKkUIc4KbWtxmo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730329179; x=1730933979;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iNygn4tsSRcymWeMp8da8j6ORuDkzfHuHFddbwJeym0=;
- b=Ygzc5PZMqMZZTB0xFu5LYv67g+9zzrlKplvmj+9pfF8zgSosOj6lHwxmgMsws/rt3B
- ch7g3FxilJGNTvFt9B24fgHcDDCLU3zTFYeV6ccQn8NBBBrsCu9lmgxx0gBB2WDux3gq
- RGzlTFVxNh3YCwX9GLXhsDdGOt+sB6h34qFLatxFX8KVhs39Zak6sWPylXUQCe5rHe8A
- 1TeokRxfJ+duk2ak1CqzqzdfmQz91qmFJPdmx+QX7yy4AWiu6o+Bj4Jhy1kz7+QzhnL9
- fMEH9eBL1DZdJHa/jGRKkfOk9QMj9kF6ZubzWzknO/YYweo1GontSt4QV4093bYH4VAz
- elfg==
-X-Gm-Message-State: AOJu0Yw6LfDuFpNcRozrsGn/c4a+IH/SrvjdGiWDp9Mdd8e0iyryBeVT
- 20pDFtRFLkVdx6oZSN+/ai1VP4otd1NcLE3bf9zOfDf9/LBfIu9ZJdXblsjXL31/A7nzHGOYGur
- SoBSgtA==
-X-Google-Smtp-Source: AGHT+IGKa6FA5aL8Q82aFKYH4WW7GK/KmiOvE9MLiC0iDxtvnA8STgiJWZsTzrfsht/H/hFAfE7ZsQ==
-X-Received: by 2002:a05:622a:45:b0:458:4fe5:b307 with SMTP id
- d75a77b69052e-4613bfb6abdmr246329141cf.10.1730329179138; 
- Wed, 30 Oct 2024 15:59:39 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-462ad0896e9sm1257861cf.11.2024.10.30.15.59.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Oct 2024 15:59:38 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Baruch Siach <baruch@tkos.co.il>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <a65bc69d909e18b9cf138f8f97f4b16b4a4d4de7.1730133875.git.baruch@tkos.co.il>
-References: <a65bc69d909e18b9cf138f8f97f4b16b4a4d4de7.1730133875.git.baruch@tkos.co.il>
-Subject: Re: [PATCH] boot/Kconfig: correct fdt_fixup_memory_banks name typo
-Message-Id: <173032917791.2233801.7346568464786030466.b4-ty@konsulko.com>
-Date: Wed, 30 Oct 2024 16:59:37 -0600
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 49V3Mn32014266; Thu, 31 Oct 2024 12:22:51 +0900
+From: FUKAUMI Naoki <naoki@radxa.com>
+To: u-boot@lists.denx.de
+Cc: eugen.hristev@linaro.org, jonas@kwiboo.se, kever.yang@rock-chips.com,
+ macromorgan@hotmail.com, quentin.schulz@cherry.de,
+ o451686892@gmail.com, sebastian.reichel@collabora.com,
+ FUKAUMI Naoki <naoki@radxa.com>
+Subject: [PATCH 2/3] configs: rockchip: run savedefconfig for TCPM related
+ configs for Radxa ROCK 5B
+Date: Thu, 31 Oct 2024 03:22:44 +0000
+Message-ID: <20241031032245.32749-2-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241031032245.32749-1-naoki@radxa.com>
+References: <20241031032245.32749-1-naoki@radxa.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,14 +55,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 28 Oct 2024 18:44:35 +0200, Baruch Siach wrote:
+run savedefconfig for next patch for Radxa ROCK 5B.
 
-> 
+Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+---
+ configs/rock5b-rk3588_defconfig | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-
-Applied to u-boot/master, thanks!
-
+diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
+index c54e13e8732..47ee2109f8e 100644
+--- a/configs/rock5b-rk3588_defconfig
++++ b/configs/rock5b-rk3588_defconfig
+@@ -34,6 +34,7 @@ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+ CONFIG_SPL_ATF=y
++CONFIG_CMD_TCPM=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+@@ -94,6 +95,8 @@ CONFIG_USB_OHCI_GENERIC=y
+ CONFIG_USB_DWC3=y
+ CONFIG_USB_DWC3_GENERIC=y
+ CONFIG_SPL_USB_DWC3_GENERIC=y
++CONFIG_TYPEC_TCPM=y
++CONFIG_TYPEC_FUSB302=y
+ CONFIG_USB_HOST_ETHER=y
+ CONFIG_USB_ETHER_ASIX=y
+ CONFIG_USB_ETHER_ASIX88179=y
+@@ -106,6 +109,3 @@ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_USB_FUNCTION_ROCKUSB=y
+ CONFIG_ERRNO_STR=y
+-CONFIG_TYPEC_TCPM=y
+-CONFIG_TYPEC_FUSB302=y
+-CONFIG_CMD_TCPM=y
 -- 
-Tom
-
+2.43.0
 
