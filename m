@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4626DE68960
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 09:15:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEF1BE68966
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 09:35:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9820C89241;
-	Thu, 31 Oct 2024 10:15:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CBA198928E;
+	Thu, 31 Oct 2024 10:35:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jms.id.au
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Rk0bOQkd";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FUpiZwbX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A5BD891E2; Thu, 31 Oct 2024 10:15:41 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id 041F789262; Thu, 31 Oct 2024 10:35:39 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBCC989241
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:15:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56E1889291
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:35:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=jms.id.au
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=loic.poulain@linaro.org
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-53a0c160b94so725681e87.2
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 02:15:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=joel.stan@gmail.com
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-20cbb1cf324so6068075ad.0
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 02:35:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730366138; x=1730970938; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1730367334; x=1730972134; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xCZnS4V6uNX47ckEmjyp0Gj9GyTNhhM+2i46PhXaVrw=;
- b=Rk0bOQkdItmdxDRnUvwmYuaVHRAFL28Oi0SKTCquwq3JXYVC0ytk3bcXIKCw62xPSB
- SIYxGA1H5eyxVdV1wJF5ezynpmKJs5Jw9kp1pGURkmvQ6VL3yPXNXiSex7o3NT79T+et
- YEmiDRBUB25siexwIxYLM6cb3FFZ2Vcfk/oJYLmZPsIbn5FrPa0DjJNIh20MC/+9uEkR
- Mq6bxtmGQjAWnJcKZbhGGlIUVEzrXSiCgGKoj1c0IAaurPGwjfNuX+5s2kyW1g6+WIR8
- olFWDmNVaz5caM2kkUsbZ7YeE2r7OKu4QuXG20464ee7wgRyJTycurGx4MFJnXfq5U/G
- eUOg==
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
+ bh=+afli2R0U1OarvTSG/XQ3jnISIV6waxoT9NVG5yU02g=;
+ b=FUpiZwbXS3wJiON+WWPsm7ynVTCj5FjtJDqWQj3G53SHPn4FwZq/3p4Y48WV2midUu
+ DebgK1akcz/bY1qhDl61COKeKzEyDVIpyrSPbUxcPKDaop5cMUMprLsfQkTkjdTzQ3RB
+ E7KEN1/52/7X+HQVtF/HFbdAUWtZyEatjtry9RHS7mzs/lLieOostq7gAyEkGypwCpzV
+ TeB7bzudNOR4Rp57ji/IcFyFt4y67/d+PrD3ZlNUyoB9ngKzYddyYwO/V2UnDpEYYjnB
+ bOg+FBLSRIyS383S8wdWbBsSJef/TGK6HVIaVMsCt5B55MYSOsqNVKl0XQnYQNnKm4IJ
+ AhzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730366138; x=1730970938;
+ d=1e100.net; s=20230601; t=1730367334; x=1730972134;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xCZnS4V6uNX47ckEmjyp0Gj9GyTNhhM+2i46PhXaVrw=;
- b=G/8887PK7fUtjL/R67XBm2g5kjdTIOqvpdbioo+V7EHFAevTQevWyJwf0yYEyhH2cy
- ITr6R3ld2hVwzZvxabd1d3L6lxcv9UrUpD56a/euI6ezm2wpWFWj9M0FnMSIJw59AG6Y
- iRFr42c5TAfOd0yMEdajPe9Ke/8cu4uLPKsb56XYMXFhgakTHS51z5m8KoC135yt9luG
- TUi3LLJ5SrBQXDGFr3dxA+/rqLxQ2NlsD9LbC3ErZdEgn3oH96EOwLSdnCHblT+RTTjR
- 154CHzc81EWoiHiIQUXkfZZ4ByHKmyWUUE0wbabLWeL+9MQLhMq8t2/0ypMIokRimZkE
- 09Eg==
-X-Gm-Message-State: AOJu0YwYlq8ivshI0lgjERws9CJg4JArxatIvaInXTkjVQPSwC2cJYBr
- 3ahEyRF7B1KZCppD1mGq8qGno1OfJsvsPnoC9HWeop4qxkwV/0iLMf/4Fd0wlYo=
-X-Google-Smtp-Source: AGHT+IEk3OGeTABOxAGhhIY1jy/Rk3OsNpoCbFD4yjd84wV4JlsYhWBKhzIsQJ/tlEUNbXeDckiARQ==
-X-Received: by 2002:a05:6512:3094:b0:52e:98f6:c21f with SMTP id
- 2adb3069b0e04-53b348ceb28mr9488997e87.16.1730366138151; 
- Thu, 31 Oct 2024 02:15:38 -0700 (PDT)
-Received: from loic-ThinkPad-T470p.. ([2a01:e0a:82c:5f0:2f09:ca73:75d0:e7d2])
+ :to:from:sender:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+afli2R0U1OarvTSG/XQ3jnISIV6waxoT9NVG5yU02g=;
+ b=dI+3mTYn/Z7e1NmrnadXHywhogw2s/3TLPMopxO3/9+hT6u2Hg1qp1qlqZxAXj39Z9
+ M68OMOE73JBtbtEnyCw72Dk7seilRypzpGgmAIzJOoTY2LXWz2ka4E2e+Si4ZQT/laau
+ U6xhFM0Wy4zAetK51zxj/Y+BDzXn8QZ9Y9/nEiAlZkdTmNbhe5kyinXkGLdi4IVe3rsj
+ 5qzbWqczK1dO6mTBf+9uca7YBLkDJWWp0oZS7WFp+IeBNxd3H807sdDzLmTdmg+IXC7M
+ 9Qq7TQsklkh8F6SirmdkYiNm9f5PqmRO2Ya7v22LS0XJKSd0J8ikFiRR/pO74YTWErw0
+ ZbZg==
+X-Gm-Message-State: AOJu0Yzds7Ms4VJsLuv+5EMRUSyw2sJEG8+o3svQ08WzmTh1w+oUe5RF
+ lzjCajVZtAKjmIv8weI1D/dne37bN6pvBr1XSMmM+zfxnrZaftP8tEwDgw==
+X-Google-Smtp-Source: AGHT+IExU3YJPaO6ILA4YAlZhGdFt634xczyZGihZ6b3RVqYfnmD+PvTPXUqvxVw10YPdTs4lPM+8w==
+X-Received: by 2002:a17:903:2b03:b0:20c:5e86:9b68 with SMTP id
+ d9443c01a7336-210c68a1a99mr285116075ad.4.1730367334170; 
+ Thu, 31 Oct 2024 02:35:34 -0700 (PDT)
+Received: from prometheus.lan ([45.124.203.18])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381c10b7a9esm1520809f8f.21.2024.10.31.02.15.37
+ d9443c01a7336-211057087cfsm6536895ad.87.2024.10.31.02.35.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Oct 2024 02:15:37 -0700 (PDT)
-From: Loic Poulain <loic.poulain@linaro.org>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de, csokas.bence@prolan.hu,
- Loic Poulain <loic.poulain@linaro.org>
-Subject: [PATCH] lib: rsa: Set conventional salt length RSA-PSS parameter
-Date: Thu, 31 Oct 2024 10:15:31 +0100
-Message-Id: <20241031091531.761977-1-loic.poulain@linaro.org>
-X-Mailer: git-send-email 2.34.1
+ Thu, 31 Oct 2024 02:35:33 -0700 (PDT)
+From: Joel Stanley <joel@jms.id.au>
+To: u-boot@lists.denx.de
+Cc: Massimo Pegorer <massimo.pegorer@vimar.com>
+Subject: [RFC PATCH] mkimage: Allow -o to set hash algorithm in auto mode
+Date: Thu, 31 Oct 2024 20:05:10 +1030
+Message-ID: <20241031093511.148082-1-joel@jms.id.au>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,57 +88,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RFC 3447 says that Typical salt length are either 0 or the length
-of the output of the digest algorithm, RFC 4055 also recommends
-hash value length as the salt length. Moreover, By convention,
-most of the signing infrastructures/libraries use the length of
-the digest algorithm (such as google cloud kms:
-                      https://cloud.google.com/kms/docs/algorithms).
+Users would like to be able to create a FIT with hashed images using
+using a given algorithm in auto mode. Allow them to use the existing -o
+option for this.
 
-If the salt-length parameter is not set, openssl default to the
-maximum allowed value, which is a openssl 'specificity', so this
-works well for local signing, but restricts compatibility with
-other engines (e.g pkcs11/libkmsp11):
+In commit b93a65209c4a ("mkimage: fit: Support signed configurations in
+'auto' FITs"), the examples lead me to believe this was already the
+behavior, however -o only affects auto-conf mode.
 
-```
-returning 0x71 from C_SignInit due to status INVALID_ARGUMENT:
-    at rsassa_pss.cc:53: expected salt length for key XX is 32,
-    but 478 was supplied in the parameters
-Could not obtain signature: error:41000070:PKCS#11 module::Mechanism invalid
-```
+The change in this commit does not affect the auto-conf behaviour.
 
-To improve compatibility, we set the default RSA-PSS salt-length
-value to the conventional one. A further improvement could consist
-in making it configurable as signature FIT node attribute.
-
-rfc3447: https://datatracker.ietf.org/doc/html/rfc3447
-rfc4055: https://datatracker.ietf.org/doc/html/rfc4055
-
-Signed-off-by: Loic Poulain <loic.poulain@linaro.org>
+Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- lib/rsa/rsa-sign.c | 9 +++++++++
+RFC. This is useful in testing that the hash infrastructure is working.
+If there's no appetite for changing the mkimage behaviour then I
+understand.
+
+---
+ tools/fit_image.c | 9 +++++++++
  1 file changed, 9 insertions(+)
 
-diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
-index 2304030e32..fa9e143b4c 100644
---- a/lib/rsa/rsa-sign.c
-+++ b/lib/rsa/rsa-sign.c
-@@ -428,6 +428,15 @@ static int rsa_sign_with_key(EVP_PKEY *pkey, struct padding_algo *padding_algo,
- 			ret = rsa_err("Signer padding setup failed");
- 			goto err_sign;
- 		}
+diff --git a/tools/fit_image.c b/tools/fit_image.c
+index 0fccfbb4ebda..b3b0283eca83 100644
+--- a/tools/fit_image.c
++++ b/tools/fit_image.c
+@@ -217,6 +217,12 @@ static void fit_add_hash_or_sign(struct image_tool_params *params, void *fdt,
+ 	const char *hash_algo = "crc32";
+ 	bool do_hash = false;
+ 	bool do_sign = false;
++	char *algo_name = NULL;
 +
-+		/* Per RFC 3447 (and convention) the Typical salt length is the
-+		 * length of the output of the digest algorithm.
-+		 */
-+		if (EVP_PKEY_CTX_set_rsa_pss_saltlen(ckey,
-+						     checksum_algo->checksum_len) <= 0) {
-+			ret = rsa_err("Signer salt length setup failed");
-+			goto err_sign;
-+		}
- 	}
++	if (params->algo_name) {
++		algo_name = strdup(params->algo_name);
++		hash_algo = strtok(algo_name, ",");
++	}
  
- 	for (i = 0; i < region_count; i++) {
+ 	switch (params->auto_fit) {
+ 	case AF_OFF:
+@@ -254,6 +260,9 @@ static void fit_add_hash_or_sign(struct image_tool_params *params, void *fdt,
+ 		fdt_property_string(fdt, FIT_KEY_HINT, params->keyname);
+ 		fdt_end_node(fdt);
+ 	}
++
++	if (algo_name)
++		free(algo_name);
+ }
+ 
+ /**
 -- 
-2.34.1
+2.45.2
 
