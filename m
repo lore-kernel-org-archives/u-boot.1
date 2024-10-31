@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E1EBD767F9
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 19:13:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB88AD767FB
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 19:17:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A5E7892A2;
-	Thu, 31 Oct 2024 20:13:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6467D88B9E;
+	Thu, 31 Oct 2024 20:17:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E441A892CD; Thu, 31 Oct 2024 20:13:51 +0100 (CET)
+ id 6CDDE89245; Thu, 31 Oct 2024 20:17:09 +0100 (CET)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E87A89245
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 20:13:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 818A688B0C
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 20:17:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,23 +26,23 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.98) (envelope-from <daniel@makrotopia.org>)
- id 1t6ac9-000000001kj-2rTl; Thu, 31 Oct 2024 19:13:49 +0000
-Date: Thu, 31 Oct 2024 19:13:42 +0000
+ id 1t6afK-000000001lI-2ZQ0; Thu, 31 Oct 2024 19:17:06 +0000
+Date: Thu, 31 Oct 2024 19:16:59 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Weijie Gao <weijie.gao@mediatek.com>
 Cc: u-boot@lists.denx.de,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Tom Rini <trini@konsulko.com>, John Crispin <john@phrozen.org>,
- Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: Re: [PATCH v2 3/3] bootmenu: add reprint check
-Message-ID: <ZyPW5hnfhdqiXy1Q@pidgin.makrotopia.org>
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v2 1/3] menu: fix the logic checking whether ESC key is
+ pressed
+Message-ID: <ZyPXqwcbREjnPc-1@pidgin.makrotopia.org>
 References: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
- <bcc2bfd8917197707929bd1aa86d8012a7675a66.1730194901.git.weijie.gao@mediatek.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <bcc2bfd8917197707929bd1aa86d8012a7675a66.1730194901.git.weijie.gao@mediatek.com>
+In-Reply-To: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,85 +59,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Oct 29, 2024 at 05:47:22PM +0800, Weijie Gao wrote:
-> Record the last active menu item and check if it equals to the
-> current selected item before reprint.
+On Tue, Oct 29, 2024 at 05:47:10PM +0800, Weijie Gao wrote:
+> It's observed that the bootmenu on a serial console sometimes
+> incorrectly quitted with superfluous characters filled to command
+> line input:
 > 
+> >  *** U-Boot Boot Menu ***
+> >
+> >      1. Startup system (Default)
+> >      2. Upgrade firmware
+> >      3. Upgrade ATF BL2
+> >      4. Upgrade ATF FIP
+> >      5. Load image
+> >      0. U-Boot console
+> >
+> >
+> >  Press UP/DOWN to move, ENTER to select, ESC to quit
+> >MT7988> [B
+> 
+> Analysis shows it was caused by the wrong logic of bootmenu_loop:
+> 
+> At first the bootmenu_loop received the first ESC char correctly.
+> 
+> However, during the second call to bootmenu_loop, there's no data
+> in the UART Rx FIFO. Due to the low baudrate, the second char of
+> the down array key sequence hasn't be fully received.
+> 
+> But bootmenu_loop just did a mdelay(10), and then treated it as a
+> single ESC key press event. It didn't even try tstc() again after
+> the 10ms timeout.
+> 
+> This patch fixes this issue by letting bootmenu_loop check tstc()
+> twice.
+> 
+> Tested-By: E Shattow <lucent@gmail.com>
 > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 
 Reviewed-by: Daniel Golle <daniel@makrotopia.org>
 Tested-by: Daniel Golle <daniel@makrotopia.org>
 
+Together with 2/3 and 3/3 this now avoids dropping into the U-Boot shell
+as long as the menu is short enough. In case of menus with 8 entries of
+more I still manage to drop into shell when holding the arrow down key
+before the last item has been reached.
+That being said, it's already a very big improvement that this now only
+happens when holding down a button traversing over a menu with a high
+number of items.
+
+
 > ---
->  cmd/bootmenu.c | 16 +++++++++++++++-
->  include/menu.h |  1 +
->  2 files changed, 16 insertions(+), 1 deletion(-)
+>  common/menu.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
 > 
-> diff --git a/cmd/bootmenu.c b/cmd/bootmenu.c
-> index c99605f3398..ffa63a4628d 100644
-> --- a/cmd/bootmenu.c
-> +++ b/cmd/bootmenu.c
-> @@ -103,11 +103,13 @@ static char *bootmenu_choice_entry(void *data)
->  
->  		switch (key) {
->  		case BKEY_UP:
-> +			menu->last_active = menu->active;
->  			if (menu->active > 0)
->  				--menu->active;
->  			/* no menu key selected, regenerate menu */
->  			return NULL;
->  		case BKEY_DOWN:
-> +			menu->last_active = menu->active;
->  			if (menu->active < menu->count - 1)
->  				++menu->active;
->  			/* no menu key selected, regenerate menu */
-> @@ -133,6 +135,17 @@ static char *bootmenu_choice_entry(void *data)
->  	return NULL;
->  }
->  
-> +static bool bootmenu_need_reprint(void *data)
-> +{
-> +	struct bootmenu_data *menu = data;
-> +	bool need_reprint;
-> +
-> +	need_reprint = menu->last_active != menu->active;
-> +	menu->last_active = menu->active;
-> +
-> +	return need_reprint;
-> +}
-> +
->  static void bootmenu_destroy(struct bootmenu_data *menu)
+> diff --git a/common/menu.c b/common/menu.c
+> index 8cc9bf06d9c..48ab7f0f398 100644
+> --- a/common/menu.c
+> +++ b/common/menu.c
+> @@ -525,14 +525,15 @@ enum bootmenu_key bootmenu_loop(struct bootmenu_data *menu,
+>  				struct cli_ch_state *cch)
 >  {
->  	struct bootmenu_entry *iter = menu->first;
-> @@ -332,6 +345,7 @@ static struct bootmenu_data *bootmenu_create(int delay)
+>  	enum bootmenu_key key;
+> -	int c;
+> +	int c, errchar = 0;
 >  
->  	menu->delay = delay;
->  	menu->active = 0;
-> +	menu->last_active = -1;
->  	menu->first = NULL;
->  
->  	default_str = env_get("bootmenu_default");
-> @@ -506,7 +520,7 @@ static enum bootmenu_ret bootmenu_show(int delay)
->  
->  	menu = menu_create(NULL, bootmenu->delay, 1, menu_display_statusline,
->  			   bootmenu_print_entry, bootmenu_choice_entry,
-> -			   NULL, bootmenu);
-> +			   bootmenu_need_reprint, bootmenu);
->  	if (!menu) {
->  		bootmenu_destroy(bootmenu);
->  		return BOOTMENU_RET_FAIL;
-> diff --git a/include/menu.h b/include/menu.h
-> index 79643af272b..6cede89b950 100644
-> --- a/include/menu.h
-> +++ b/include/menu.h
-> @@ -40,6 +40,7 @@ int menu_show(int bootdelay);
->  struct bootmenu_data {
->  	int delay;			/* delay for autoboot */
->  	int active;			/* active menu entry */
-> +	int last_active;		/* last active menu entry */
->  	int count;			/* total count of menu entries */
->  	struct bootmenu_entry *first;	/* first menu entry */
->  };
+>  	c = cli_ch_process(cch, 0);
+>  	if (!c) {
+>  		while (!c && !tstc()) {
+>  			schedule();
+>  			mdelay(10);
+> -			c = cli_ch_process(cch, -ETIMEDOUT);
+> +			c = cli_ch_process(cch, errchar);
+> +			errchar = -ETIMEDOUT;
+>  		}
+>  		if (!c) {
+>  			c = getchar();
 > -- 
 > 2.45.2
 > 
