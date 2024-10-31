@@ -4,63 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F24E6748F
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 23:21:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46520E6748F
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 23:21:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E93F88E6F;
-	Fri,  1 Nov 2024 00:20:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=vodafonemail.de
+	by phobos.denx.de (Postfix) with ESMTP id 8796C88E5C;
+	Fri,  1 Nov 2024 00:20:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=vodafonemail.de header.i=@vodafonemail.de header.b="nS3FmUX/";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZJZdrDkW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E80288E41; Thu, 31 Oct 2024 21:23:41 +0100 (CET)
-Received: from mr6.vodafonemail.de (mr6.vodafonemail.de [145.253.228.166])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 26A0888E61; Thu, 31 Oct 2024 18:26:03 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6223388B4B
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 21:23:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=vodafonemail.de
+ by phobos.denx.de (Postfix) with ESMTPS id 3FED488D54
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:26:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yuriz@vodafonemail.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vodafonemail.de;
- s=vfde-mb-mr2-23sep; t=1730406219;
- bh=swDgc/Gp+ZYn+ivrGb0moOPuGhFvWJbNBIAFXkhPzQM=;
- h=Date:From:To:Subject:Message-ID:Content-Type:From;
- b=nS3FmUX/IXxeUljlsDzOcZNi+HcpMOz9bw6pQo3+5/4MBtbMXSUcVNSCfFaHJjXqK
- nmnX05JBWH0DR3UHLTVm0F2ijOkVxhlAWgDFn6HajzcT2prPoudi0INRsy4BdE7COP
- NfsZ/F+hpdpp6MMib5GHAWhmTMrq344NbfmQ+geA=
-Received: from smtp.vodafone.de (unknown [10.0.0.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by mr6.vodafonemail.de (Postfix) with ESMTPS id 4Xfb6g0zmbz1xt8;
- Thu, 31 Oct 2024 20:23:39 +0000 (UTC)
-Received: from qrv-systems.net (ip-095-222-025-162.um34.pools.vodafone-ip.de
- [95.222.25.162])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
- server-digest SHA256) (No client certificate requested)
- by smtp.vodafone.de (Postfix) with ESMTPSA id 4Xfb6W505jz92kY;
- Thu, 31 Oct 2024 20:23:28 +0000 (UTC)
-Date: Thu, 31 Oct 2024 21:23:27 +0100
-From: Yuri Zaporozhets <yuriz@vodafonemail.de>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: bios_emulator: how LOG_inpb() is supposed to work on non-x86 systems?
-Message-ID: <ZyPnP6IWFAOKm9Eh@qrv-systems.net>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=surajsonawane0215@gmail.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5c984352742so1443789a12.1
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:26:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1730395560; x=1731000360; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=bm53QEbFLaieW0PqrxcBefuXiWiUc2YKnRL0gzTbXIU=;
+ b=ZJZdrDkWK6UNOqQ6KokP5Wh5GBPnMq/4QcaeN0auhvtE25jjJi1qzS45jZhrUMry2o
+ wlZ4wQ7LUCJ6wks1CdDBUfyo5a6XS1bIuvG0760gcFoR55/yUPLaXaQ0e7e5CH2djjyA
+ pdWCcZR6MH7jVLN8Zlvb5cuwwzleFUWj7zOL9G5v8z5yHPkF9dIppppKQH87Ci0pxV/N
+ AjCME6HyKidirGrgIglydqXNNbldNsS+LcNj626lJlnVXpUt0TaBatbHCw1eZRKScFcp
+ Qggoq7lSrNvhfb9QGfTwWTmxEgUf/PzlnkVagxHGB7R0fyyf46izClhXx0DQRIJvD4R/
+ GxPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730395560; x=1731000360;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=bm53QEbFLaieW0PqrxcBefuXiWiUc2YKnRL0gzTbXIU=;
+ b=GJFGhcdsxDTcCAxGf6r8rm4h+DRVispXhZqAWgcC8mebUd1FOQ6lx8puH7Z1yLITaU
+ 7O/klc1dyZN1U0e5+5/RnWZhz7CnL/bxx25o+VobgcpNjnRgAjeb8anx03g4zPBdp4q/
+ TEfl0xn0lJ/0FHQgyXnxPev85twYhpn1z80qUYs0jYxvLJRw9xy90FmjjRR6+aQLThn4
+ Tfe3/WDvw62iuqUXIyVVXOFle6WabLnU5L2OX1bqlmBZPUPphFWCYJBFL0WnWs5yi0Hr
+ Syz7T0d3MIvi3k1bhk0U9Y8ROWCnWqFU+uIp3lPsjHHoUbsqHon+2CNOEdoaFCLfMCCB
+ Gpaw==
+X-Gm-Message-State: AOJu0Yz8QeEICqz7b8hafsHaPcaIR49xv/Hi4UwLSg6nJyM72wXj8NmR
+ d1ZSRN1nG2AF1LUZNHbK++wsfYmnJqcVD0sPCR2alFanNCK9XrY2HuVQegi5Ao3Tgr0R+VHilxK
+ +9xOZYmoLAvhGI2aTA7CRYanon6YzeHmLyjc=
+X-Google-Smtp-Source: AGHT+IE1RfphvkEjHeq08Bb4Z1Hr++18Kut0+JjATfxe3Ouabq65WrlxP9Hprp0R06APVDxcr6Dq+ItBLVIROfNG5NA=
+X-Received: by 2002:a17:907:7215:b0:a9a:8028:45d8 with SMTP id
+ a640c23a62f3a-a9de5d6f953mr2061318166b.7.1730395560410; Thu, 31 Oct 2024
+ 10:26:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-purgate-type: clean
-X-purgate: clean
-X-purgate-size: 2603
-X-purgate-ID: 155817::1730406214-1D7F9462-AE5E04C2/0/0
-X-Spam: Yes
-X-Mailman-Approved-At: Fri, 01 Nov 2024 00:20:50 +0100
+From: Suraj Sonawane <surajsonawane0215@gmail.com>
+Date: Thu, 31 Oct 2024 22:55:24 +0530
+Message-ID: <CAHiZj8jq3JC0=o9LasZ5Xz2AvhvaSyLbpZED+fawcfFn5GdVrw@mail.gmail.com>
+Subject: Suggestions for Custom U-Boot Project
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Fri, 01 Nov 2024 00:20:58 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,62 +84,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Hi everyone!
 
-When trying to compile drivers/bios_emulator for RISC-V, I get a
-bunch of the following warnings:
+I'm planning to work on a U-Boot project for learning and would love some
+input. My idea is to create a customized U-Boot bootloader with features
+like dual boot, A/B System Updates, secure boot, and OTA updates. If anyone
+has suggestions to enhance this project or ideas for other interesting
+U-Boot features to explore, I=E2=80=99d really appreciate it!
 
-================
-
-In file included from drivers/bios_emulator/besys.c:51:
-drivers/bios_emulator/besys.c: In function ‘BE_inb’:
-./arch/riscv/include/asm/io.h:18:43: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
-   18 | #define __arch_getb(a)                  (*(volatile unsigned char *)(a))
-      |                                           ^
-./arch/riscv/include/asm/io.h:33:41: note: in expansion of macro ‘__arch_getb’
-   33 | #define __raw_readb(a)                  __arch_getb(a)
-      |                                         ^~~~~~~~~~~
-./arch/riscv/include/asm/io.h:209:39: note: in expansion of macro ‘__raw_readb’
-  209 | #define inb(p)  ({ unsigned int __v = __raw_readb(__io(p)); __v; })
-      |                                       ^~~~~~~~~~~
-drivers/bios_emulator/biosemui.h:131:25: note: in expansion of macro ‘inb’
-  131 | #define PM_inpb(port)   inb(port)
-      |                         ^~~
-drivers/bios_emulator/biosemui.h:138:25: note: in expansion of macro ‘PM_inpb’
-  138 | #define LOG_inpb(port)  PM_inpb(port)
-      |                         ^~~~~~~
-drivers/bios_emulator/besys.c:572:31: note: in expansion of macro ‘LOG_inpb’
-  572 |                         val = LOG_inpb(port);
-
-================
-
-My question is: how _in principle_ is this supposed to work? On non-x86 systems,
-the PCI I/O space must always be accessed using some base address (for example,
-for my PCIe video card it's 0x60080000). In the sequence above
-(inb -> __raw_readb -> __arch_getb) I do not see such base address at all.
-Previously, there was a constant VIDEO_IO_OFFSET added to the port
-(see 70f2030f02696ee1820d8df690e878de078b01b3), but it was removed completely.
-
-In arch/riscv/include/asm/io.h, the I/O primitives are defined as:
-
-#define inb(p)  ({ unsigned int __v = __raw_readb(__io(p)); __v; })
-
-where the __io() macro seems to be an excellent thing to account for the
-I/O base address. I would expect that the driver that uses PCI I/O
-defines something like:
-
-#define __io(port) (base_addr + port)
-
-where base_addr is a runtime variable. But instead both bios.c and besys.c
-have just "#define __io", without any parameters.
-
-I am totally puzzled. I would be grateful for any clarification how this code
-was supposed to work in the first place.
-
-P.S. Simon, adding you to CC: since you were working on this code in the past.
-
-Thanks in advance.
-
--- 
-Regards,
-Yuri
+Thanks in advance for any guidance!
+Best Regards,
+Suraj Sonawane
