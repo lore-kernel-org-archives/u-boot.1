@@ -4,162 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B8DFE68973
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 10:26:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D819EE68975
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 11:14:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94E78891DD;
-	Thu, 31 Oct 2024 11:26:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3A38689262;
+	Thu, 31 Oct 2024 12:14:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ewYklqZa";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="WfJadg43";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FAC98924F; Thu, 31 Oct 2024 11:26:08 +0100 (CET)
+ id 912FF8928E; Thu, 31 Oct 2024 12:13:59 +0100 (CET)
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on2062b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::62b])
+ (mail-vi1eur05on20613.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::613])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9530C891A9
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 11:26:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56DB48904C
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 12:13:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ms42K2hEwymsPVsyuYcIHpxadFXXzkDI5M9gvTtjr/aHqx6TEtfccT4qIu+FB6TrNpNwxzVU2NcOmjHRdFSN25ovXfxm8WWPciMyPDZBVsSuk4Z+5ox5sWuBvvMA/4EkUysuQuG3Qm1RfV83Smv6ZJ2yEdtG1n9/pWZSwacZp92nlNRGLBSfDxzqXoBuntkNSXbvBdeB1o1y5qBhPZfWLgqU43+GCkpU6TS3JZPfwuLGslJjLyCleGee6w4C15lOHxkLJiILhTOPKlp4EU0vNfCsnGr+F1Daqe78MX4mti2+iC+wbqJBa4pp8MaslwNB6y1igk/uf3SVguzA/wThHA==
+ b=FfE8l3FutZZ3XaBJLfQnBqWdV6XTd9YdGD68SpaZxCbOktsbcDVbeCjUBK7Q34NvqCS5+F9sdrXSBV9e9L2sy2SeKcR6ld28o+eyC3hBlpzNGjlcPsCcmAFuB2tKqHMCJjLFrkWAATKtWds4C2iqMuPIG/acl8yXDqX/iUedlXDFkA+K9d0VlIDlVTP3HianSqNukHAQfKPCKsH3khidSVk3D+yx8IZH5x/IeZer91WuLo6XPc8pEGm4RGtcNKDlxGsxoESCz9zSXntknnmm3X4TNZEiAzuXBdI4Wq5nrFVDU8TYBzoQYO6Gue58vkHRb9tNSA17VHoD0nKOPFP/Rg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=a31tV22AqMGOQgH2/3agiWCCHsPFs14pZbtjbygsX58=;
- b=KQB+98eavhBoMaKVFj21LZnChJ/KL1PN7K1kBaasybH0uVDqIHxT7yA8mKbNQ5mModH59TJPrCc108wWpSaDeBOfWm4pgqkc5xg0T76yhMZSxVDbTgExUcFJzfVVkA0nu3BsV297ZT1/3V+USjtmtFobCMm63JGorxzfOAoYY+HO1AX47XF3vVy5ouIth18dFCCxWNRazoryz0QBLdul+W3iqelHaY9WgSjweaDZh8LGnIxqyuAQaRq4tDbCE6pHzP2Uta+Ik/z9Ukoe4aXbO5lJ6KgYzRmub8n2BGaA157m5Vr3naEBaCS/oneqq3ndfGOBxAKdWlPYmELP8hKsyA==
+ bh=K6cUbFDQ6iX9uLkPdeExaXKCRIQ6PuOaEokDn8goyGg=;
+ b=on1zspugYr6pY4nGUsRNaNX7LmmuVR+lRYB0/0fSMvDTMH10+6U11owC7vObUMIk1KCguSbggEYQX5+6DEWi8BviSO+ZGw4wMvYfGP0y4RKbtuAUub4pqYtTKLEVGUq1V71HNzsta2mxqYOIvkScJrEY1HlAvZVk1aLQNSlaEjDeKbMvCdqlFt2POt2Jkaxz/1uRrR09HKdnwuWO7dYcTSDS+L6m2hY0GXHXPh169bQUoX99THXaXrAhR7/rCMxs4Hpslk2s/khCIlTBdehySiKahN2OYq8RvzHliSoIZNNDCm9tYYof5iA8wwuoOBlk9UmSV8y4+SZCNsXJY0OsGw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=a31tV22AqMGOQgH2/3agiWCCHsPFs14pZbtjbygsX58=;
- b=ewYklqZagZYcOQd4m1FeVe0i//i3OmLwg3YEDMj92CNaI0fRyy0cqCMBnPKqS4S4vyliVuiIBbFUpyxDpzimOaY5DNKmVAyZpWBpCz0XfCqPCmCfHB+VGnMDC+KvFaiDwX8sI/Qh0b08oLGMfI0hWrrvP+WtFMj9i5cd+ixSjlk=
+ bh=K6cUbFDQ6iX9uLkPdeExaXKCRIQ6PuOaEokDn8goyGg=;
+ b=WfJadg43ffS7rzAwHe1X/mXWcK/uERg8urV8sWC0feElDCSVgBG26TKZR/C5XmsdY6BKEHe+Xc64m5LxuvIS3LCOJNveCZ4RY3/47tT99+SEi2LYtPlExAp+xnCLg8U9G7jjSFNn8FUBXNQtU7vZW1BN2vqS/9mFLz/ha9c2yWA=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AS1PR04MB9560.eurprd04.prod.outlook.com (2603:10a6:20b:470::6)
+ by GVXPR04MB9850.eurprd04.prod.outlook.com (2603:10a6:150:11a::6)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.32; Thu, 31 Oct
- 2024 10:26:03 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.20; Thu, 31 Oct
+ 2024 11:13:53 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8093.027; Thu, 31 Oct 2024
- 10:26:03 +0000
-Message-ID: <b14fbd0d-55b9-4e4c-a8c1-e04b989efd67@cherry.de>
-Date: Thu, 31 Oct 2024 11:26:01 +0100
+ 11:13:52 +0000
+Message-ID: <83aae0b1-c25d-4b3a-aa68-3590ecbaec1a@cherry.de>
+Date: Thu, 31 Oct 2024 12:13:51 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] rockchip: add support for Radxa ROCK 5A with SPI
- NOR flash module
+Subject: Re: [PATCH 1/3] configs: rockchip: enable RK806 SPI PMIC for Radxa
+ ROCK 5A
 To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- jonas@kwiboo.se, sumit.garg@linaro.org
-References: <20240824223343.98577-1-naoki@radxa.com>
- <20240824223343.98577-2-naoki@radxa.com>
- <A486B5CC87D82BA9+a72f088c-d1ac-442a-86d5-9e1611492000@radxa.com>
- <9cbadcce-3e12-45ba-95f3-a35e29f4dd88@cherry.de>
- <C69FC67529AFD2FD+b0c7fa4d-e4a2-4117-a320-bc8b1a313afa@radxa.com>
+Cc: eugen.hristev@linaro.org, jonas@kwiboo.se, kever.yang@rock-chips.com,
+ macromorgan@hotmail.com, o451686892@gmail.com,
+ sebastian.reichel@collabora.com
+References: <20241031032245.32749-1-naoki@radxa.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <C69FC67529AFD2FD+b0c7fa4d-e4a2-4117-a320-bc8b1a313afa@radxa.com>
+In-Reply-To: <20241031032245.32749-1-naoki@radxa.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR2P281CA0005.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a::15) To AS8PR04MB8897.eurprd04.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FRYP281CA0012.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10::22)
+ To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS1PR04MB9560:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9e80cc58-0fb4-4d94-6e8a-08dcf9966bba
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GVXPR04MB9850:EE_
+X-MS-Office365-Filtering-Correlation-Id: 01394d90-bdb1-4602-b5c4-08dcf99d1a42
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TzUxaHhPZlRic2o2MUM2UHhKbVhtbC9uRlRjSExoVjVJK3hmblhvQjJjYnJX?=
- =?utf-8?B?UU94QUpyaml1RGxYLzZSRFZiSmNNekxjbVhxRzkxcjl6KzNpV0c3czBEMnh3?=
- =?utf-8?B?RytRR1FiNFVpTVJ0Z1RCalp5cVFNUGgxdmh3WVRVdVhEU09TS01heG1FcmQ4?=
- =?utf-8?B?ejBKclAwcDhSL3dBaWwxc0lha2lyUXRhemxVOXNtOFBhNnVvSTdWenkyZU1p?=
- =?utf-8?B?YUFIZU5qT2k5MStxOXZObFNiYjBJTnFkWE5HZGJmeTdXa3FidVpWWTJzY1VB?=
- =?utf-8?B?QVN3N3lyTlF3dVJ6bE1pbjIvNHlXRWNWQWVBWmVGRmFybUkwYklHUXRuRnRz?=
- =?utf-8?B?UkIwZThCSzU4SUM0Z3YxVk93ZE50S1dZZmZ6NXNnT1lndnpjanF2cC9ZTUNs?=
- =?utf-8?B?cFZUbHVHUHpINmJiN3dJdE0rUGRDSzJ6V0JBWEZXcTVJbXFiMzhWdDErKzZB?=
- =?utf-8?B?YXlaZzRmRzBqcDBQSnhpVHdUdU15bkZRR0tLNnAvcVlWdkRLK0tZQjJlOTJ4?=
- =?utf-8?B?cEtIWE8zVW1WUGJNZlJHSnVmbUxseHdLUzBzMkh6SHBKZE8wTUJidC9rYXli?=
- =?utf-8?B?UFZLZnZvQmxBb3E3bnJveTBKRVJnMGZzb1gvV1hNM3dpUXhWa2RLRGduTnZD?=
- =?utf-8?B?RW96R3dUTXEvNm5yM3NiSGdtMVFIanBFNGVMcmpVdENXZ0U3cWYyd1JVTUNa?=
- =?utf-8?B?dHRrS1dkRzFlRW1JYVVBVUc5VFNaU1IvMVYxbkFMNTE0SlRweWM4VGdRRnZS?=
- =?utf-8?B?L2hQTnFjUG43cUkxb0JIYXhRMFNTaFozUU8zZ3RxWjhiTlQ0VnllRDBCZzdm?=
- =?utf-8?B?V0s3anNyZHhxaWNwc2V6ejRSdDk1Q2MrbTZJT25vZTFWME01ekpRT3JkVmZs?=
- =?utf-8?B?eFdqRUJyY3E3WXc1MEV0ZU44U2E5TDNFY21jMmxVYUI2S3ZkdCt3aTdGZzNM?=
- =?utf-8?B?WW5sc09kdDYrSTZHK0l6Q2YwTXozUEZPbWx2N0IyNk9YSGRXWWFiSG5Cb1pF?=
- =?utf-8?B?ckV0NG5NcE5VREd6SktuaDVmZTBoMkZoVnR5d29uQjhUeGtpS3NRZWdWcFFs?=
- =?utf-8?B?UThiNnNJZmkwaWluMHJScGI0eU12VU85NjJRdGVVdnJSaGhVYUQySTVITm5I?=
- =?utf-8?B?QXRQQlFTc0hFY1czaUs2SXJJbW9vbER6cm03UU5UUmVEMGZZVkozSldvYmhu?=
- =?utf-8?B?YjA1OWV1OGltZmVENm5FOXhRclk1aGJ5Yi8yajB3K0wza3hoRmNjcHVYY0RR?=
- =?utf-8?B?ZXB4RFBJaUkvM21Xb0IrYUNLbUpiUFNlRjNlL21wQldML0ZEdTNIZE5VTjVa?=
- =?utf-8?B?Wi9XaXUvTFRsY2pBWlFlTndLQWlGT0VHTUY2SkEzbzhuR0hIVVRrekxtT0xK?=
- =?utf-8?B?eXdlNkhhMk1wVVlTb2FkVmZRKzFjOXJZZjNOUFJYUWFMdlZaQm5GQnF1azM1?=
- =?utf-8?B?RFRTMEVUVEk1ZGZVRnJGbkJqMmlkMUNaWE0zZjJPVUV5bXlaaUUwOUdRby9L?=
- =?utf-8?B?cVhxNHYwd2FCQzczYUFTaGd6WEV3a2ltMUdGRzZISldBUFBvODFwLzhOZjBD?=
- =?utf-8?B?Z1NFVVpVTGlZLzNWOE84T0FzZjBTNEduNEkwOWRJK2JHSytPUE5jUDkxZ1Av?=
- =?utf-8?B?MXBnUXRpNXZrSmMwY2QwYmdTOWdHbjFyNFY2OVVEeGQvTk1SUlMzSGUrSlNB?=
- =?utf-8?Q?mGYSz8drg1+UzELt5JfX?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Vm51Z2xXU28rVFlPK2JFbkdHYUVIYytSM2JVTmlCSXF4ZTdvRzZ5SEpST1ZO?=
+ =?utf-8?B?eEx1ZkNwU2huVDRUcnZzaFF4bmFHOXFUR1R4RnUraHczNEFrTEoxcjZ6eUl4?=
+ =?utf-8?B?WWhFbWNSQ09UcGRDY1IxTHFHVmV1cGdhdW82eWVVYjBObm1yaHJZL2FqMkhk?=
+ =?utf-8?B?Y0tpK2pxczB2OFVWbUdKZnVvNGFkMWZ2UWliTW9lS3RkYjVzRk1YSXB2UVpt?=
+ =?utf-8?B?SUpHaVQ1Rmp2a3FsUm9CTi9lM2lCNVRDQmpOMnZJa20yUC94V0Y0RnJhcVhK?=
+ =?utf-8?B?dythRGU0eGpkSzRhd2tGTVVNRlJmeU1jVlFQeEpiMEdUaFk2c3RTN1p3emw4?=
+ =?utf-8?B?T3VYUnQ5VitkMTlrZTV1eUg3YXF6QSs2anhFMlZZZGh6V1NrZ2UxSW93ZDhC?=
+ =?utf-8?B?aW1uNXZ1cjFtWlBncmVycGFHZXJhSHp1bG9LS0c0Yi84WnFxelZ1QkhJcVZw?=
+ =?utf-8?B?ZkRQa29ObEtWNnh3UVhkb3d3RDZTSHltSVBMaGcycXNjRnNURmdrTXcxVXV5?=
+ =?utf-8?B?UDM2emRjeFl5bk4vVVphVVA4aU9TazBjcXJUMlZMTUVMd1NBNTM4YjBxTWJV?=
+ =?utf-8?B?RDlBbk8xZm5zSkxmR2QxZEY2WVNySHVOWGprRlRsajVhUDBrcDNjUWlJSXlj?=
+ =?utf-8?B?ZlovWXkrNEJvT05qRFhPLzlWR09HalZ0SU1pOEhNd2gyUUg2T0JvYVJaRXFV?=
+ =?utf-8?B?SU1YcFhVS3JLRUxnRDBzbTBNS1FpaVBaUGg3a21tS0g1UzVoNCtOQXg5MHht?=
+ =?utf-8?B?ZmZwOTBsWUErRGp4MEY5V2MwRnR4andtNDBwanEybGQwSkYwOHd5LzljVU43?=
+ =?utf-8?B?ZmV3VjR0VXlLZUs1VnQzZlJ1WWVGSXI0Z2hoZFpKVzJBSEdwVGJSTXR0QkZY?=
+ =?utf-8?B?WlJTYlBrQm56Y3BVTU1Qek41Z1hvR2ovbXdzQzFYK1ppemRYeTdyTHhZS25S?=
+ =?utf-8?B?Z2FQSkF6VVlCSTZFSTJXWlhNMW5tL3FxeGhzSW9kakNXc1d1RU0rY0JkbWY0?=
+ =?utf-8?B?S1NFMWE5L3J6eE1zWHByR3ZmUERQdFVSd216eGN3UFY1UEVwS1dpaG9JMGh4?=
+ =?utf-8?B?VjJHMzZlWFphVmdxcndyZFc0bHFtOGlJd3hHdC9NTzNlRStjYWdFZWloMUJP?=
+ =?utf-8?B?VkEwZ1dmTjJhMHVDRndpQTEzZityS0dwdEJYUldMQXVnVWFvMTFSN1dYRHp1?=
+ =?utf-8?B?Y0pUZnBVQmx3TmJjOHAwYjRGRys3aEtQUjMwZ2d1dDRNRVRQUmNpeWpNd1Ro?=
+ =?utf-8?B?WTlPWnpUNnZieUFJN2NPNzBCODQwMVF1d2lpcnJOdUhEQVJRcWxwajlLLzM0?=
+ =?utf-8?B?NU9WU3dWbVN4WlBGVElGL2JPanI3M1JVNWFJSkRaTWtMaFRBeDErMTdEcm5i?=
+ =?utf-8?B?dzdJT0k1TGJTUEwxVDRoc1hGK2ZTUDArMlZTMEsrZEpucjhLZkxIMnJoN1VO?=
+ =?utf-8?B?WEZDMnFJZmVMY3lXMkc0QXB5Y1ZZeTlUdVB1b2dRNkF5OExEQzlxMWc4Ynh6?=
+ =?utf-8?B?SDJMTmt3SHRYbFBRVHVOUkJCMEtpR0hLMnk2ZDRmMFhHVzh5Q0FObWY3dUl3?=
+ =?utf-8?B?ck1LcU16R0c5L2wrOXFld3FlK1JwQURtNHB6ZHRMWFFHeG9hS1NjNjkvS3lx?=
+ =?utf-8?B?bFFIZnQyUm9kdk5RUUNFK1JBM1E4TStpcVdUTVBPb2VhTHNrSGMrUlNNMTJJ?=
+ =?utf-8?B?UE1qUlgwOHJOUzdmbTlSYm5lY1pTNUZnMTZtOUNhYmxNcTVNb0JWd3ZLTlVj?=
+ =?utf-8?Q?jYlAB6P1indKz8QdG6J+6X39/HnQSW0perp1Ts1?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SUp4ZTlxYzJkZEQ5SS94dUtzRTBIY3QvRWd5RG1SU1FZY3EzYW15T1VrM1F4?=
- =?utf-8?B?NG9ZVlFLc0xxdHhwUnBHNVp6TXUweU9qRHN0Z1gxRi9aelBiQ3dGV0ticnlu?=
- =?utf-8?B?bk0vcXA0ZHJ2UUlGZCs3aVQ1VjZ2S25aS1J2YUp4YlBpNklaSWtwc0xvK0th?=
- =?utf-8?B?VVIwaXh5dlNOcWdlV3VubTg1WTY4TGQzV2EvdWtjRVRTdXpkRDFoeXV5dEtV?=
- =?utf-8?B?OE1pMDNxaWJGdW1vWlNETVZUb1Q4YUhaNit1T2dqYnpGVy84ZHhFTzNQSjc1?=
- =?utf-8?B?WjZ2NmJJb3NnYjdDTk9BSVpERzlIVU1CVnViaVdMREtNNlVwb2x3NWhKNU4v?=
- =?utf-8?B?RzY3VXVVRVhRaHljV0xCRU5HVWw4L0hQbVdybUVPNGxaSVJLbE5YNXR1Mjk3?=
- =?utf-8?B?dWFCTFBMVzhMWXI0OXRUVDFNOERRRnZtY29vYWVHQWJPSFZ5ajhQdmpZV1M1?=
- =?utf-8?B?L09Kc1FtdTZXTzI4RFY5VG15U29JRW5XWW1sNklOMlFkQjU2NFZxM1k2Zk8w?=
- =?utf-8?B?eEw3RFNsQnZxbThaQWpCTTI4MnFhSThLRzVGSnZTMjJDMlZPWFA1cWx2d0s5?=
- =?utf-8?B?eXRMT2JQK1l2cUpOTXVpS1FJMHZjMHFmWlcxVkxpaUhQT1hxT3laZDRXcCtN?=
- =?utf-8?B?Vmtma1d0Z3YvWTZ1U2k1MERWNkU3MlVmb3hsby9aSitCbHJ3WlIyekNvU083?=
- =?utf-8?B?Ym1lK3IvWGVKeFowSExITEdmNXdpZDdvQktvUjErbFhhcmxlUGwraHBxMEhC?=
- =?utf-8?B?UVJYTmdYTXNTUlR3cHJNamtPdS9HR2pxSmlwZ215bmZOZ2dGUVpudFZHVXZK?=
- =?utf-8?B?d2FoUUpZZjRsWnB0bDBuUlBXZ21JaWdMSFhMT1JSLzB2TmhxRHdQMWFhSklz?=
- =?utf-8?B?dWt2bmQyRktqSjlZMUNUV1lOZ2hnVkRwSWxWbnk3R3E5dU9TdlpDa1YrWWhx?=
- =?utf-8?B?cm1JQVdHT2ZXN1ZMVHExZGpTTk1tekF2SUtIbjFleU5NeVhXUGR2SytydmZu?=
- =?utf-8?B?WEZaWkExb2VIM3NSZ1I5UVZLSHVtbm8vaklsVTZLejVqWENqaGR0UU9ZUHA5?=
- =?utf-8?B?eWM4REplS1c3ZGRNTUJFOHpnOVM4UVNla2Zyc0lCVnk1MURTZCtXbkY3MEZU?=
- =?utf-8?B?bWYwUXd0aElWTUNMOEZtTTlrelJCNjVxYTlqUCtEYW4vc1M3d1Z3YXVTZFpq?=
- =?utf-8?B?eFVCdGF3N2pkU0ZhMFJycGxxSjcrQml2RUFoNmErS0gwMys4RGR6UjVwZjRM?=
- =?utf-8?B?UHhES2daTS90QkFKajlnWjFiUGoyQjRDSHh2emVUR3hZMG9UanFBTXpWc3ZD?=
- =?utf-8?B?YmhvTllnOGtSdkF1eEhSd1JPL1F1MEVYc3dEd1R1ekQ0RXZWb2ZiMU1wL2FW?=
- =?utf-8?B?NU9NYWNQMzg0dStEQ29iTUwyUXZ4NW9haUJDMTRmRk5pOFkrZmIvSzhyTnJH?=
- =?utf-8?B?elRybDlMM3ZaVlJldFFYUEVrTUVpUDg2OUQ1RWZaVmxYcUt2dmo0Z09wam4z?=
- =?utf-8?B?QUNQb1Z0bDU3c21hSjMxekttcStIaHhUTFFseGZ1dmw3UXRpTEZkL2Y1Rmdh?=
- =?utf-8?B?ZmFEcGpqeS9WWHNRTW01a3B1bTM5N2oxRXVnckdjS3M4RXFCb1RzNjFGMWVT?=
- =?utf-8?B?MGdKbVYvZENXNkZFckhJd0E2cy9BUm1iOWl4NWRXeGdGMmtmKzFObGR3VURD?=
- =?utf-8?B?R2NzQ1ZXOFZTUHZtVnlGUkRneWdBV2RCeTlwWkx3ZzljUENjMWJiNTdMblFD?=
- =?utf-8?B?SFdidm02ODhIL0dxZ1kzOEt3RTEvbWIybjh6LzArMjZzMVVoV1plL0orclpj?=
- =?utf-8?B?SzNoVGFzcmxwSDgrUmFVRXZZWHJLZDhSN3k0K1Y4NmJidWNDSGE2cktlakZM?=
- =?utf-8?B?U0xIM0ZxdFFtamNrRjN5YWhoRnN0Y0orTDRndng3Q1cyemFveGFpK0J4Z2VO?=
- =?utf-8?B?eGlBazJubHpxQXU2eENrYzVwbnYxUjU5S01PNHh2eFJndWpxbzhkaE9jeU1O?=
- =?utf-8?B?ckFBamlyNEdSdUROSUl5K0hCbk9WdEg3Znl2ek0wYVlwdG95ZXdMMUlrdXZh?=
- =?utf-8?B?RFdIdFhRRlJPK1UxQUtEaXZTZUNYT0piSUVGNFRXbmlqcjdlUnhSRnZTYXFr?=
- =?utf-8?B?UFU5ZlVDdUtvWkc5c29nV08zYmh5UnJUUlJoRGtNNlFyNDM0MThITmZuaXl1?=
- =?utf-8?B?VXc9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bTFOUXdkbnRpSDVQTXNmQ2g0TjZIM1hXc0h6a3J6T0ZnOG9iMHJ3Y0YrTHN4?=
+ =?utf-8?B?azgyZDYrWVNsTzdKa0JQdm1qb1I5eGRlYXRwK2FydVE4Y3BMTE5DQnpNcVMr?=
+ =?utf-8?B?VFZTLys2T2pDN3RWTE9hN1RMcEp5TmVIZE1IQjhFS0xWOG9EMWFqY2toYjVH?=
+ =?utf-8?B?L05Ea1Zxa0owVm5xTmtjd0txSEpJeU5lZlArT3BOSlA5VDh4cDFqODM1Vm9h?=
+ =?utf-8?B?QlcyRlJOeDRlU1gwN0pUK3BaOXpIN1FjNmNSUUQzbmxlUU1xaU4wOVAwTU5Q?=
+ =?utf-8?B?VWFiRUtyWmxGS1NtTWdIVDVIUFdORTYzMkVrYUk5SHR3ZlgxSE92OEtZbzRx?=
+ =?utf-8?B?R1g2c1BrUzlHdHdtWDV3aytGcEMzZDR1cVA1S2JQNXZvdkloUk9ka3hoUzJT?=
+ =?utf-8?B?aXZPdCtYeERKQzZkKzdRWTF3MWxKcC9rR3dXVWVHMjJyK1VNTnljZ0VGb0Z4?=
+ =?utf-8?B?a3ZZY2RGbFZjWHNodjlnSmlIcXE0aDFxN1V2cEpKL1c5bFVlVmxqSkUwYU9W?=
+ =?utf-8?B?eTQvRVFoVUFITWtpQkxrVVVYUStFQkdoeENXRkNMWTlrcGdmQ3pvK01oZ1hT?=
+ =?utf-8?B?YTZxT3NWMzFrbkhOR3c2bXdJL3RibG9BcStJQ0xYeGJORkxNYUZ4Q0NseGdT?=
+ =?utf-8?B?eVFHTDBFbTdKeE1NR3Q2WXdUdXEzZUVWNUMvWjhBc0tjV2ZSOHordjNLek5s?=
+ =?utf-8?B?MWVESmllKzlOMzh1V1hQNTh1VEJ1a3JNTFlPUkZzc1RLdncyMDU0byt3RGhi?=
+ =?utf-8?B?enhCSy8xaHk4aGc3ZkNsZmdTczd5bWNZc2U0Vm4yU0NOQnNhYnZ2MnFtb01x?=
+ =?utf-8?B?c2U2cHYyQWl6ayt5ZU5CQS90akVqYXFKM3l3UlphNzdQeEl0cjc3eGlXaTJm?=
+ =?utf-8?B?RWVJc0s4UWUvTjU2U3RRUGNTUmVRMnZmKzVUQUhtTCt0U1FOWUkxQ0tEMmZW?=
+ =?utf-8?B?cU4rM2NkcWFsTGsvYlpyRXpvb21pQytlcGhqSWRMRzdObnFPNHUrdFl1UDFX?=
+ =?utf-8?B?UWhidzQ2SWttL2Y1dzJTbHVjUFFLNWIxWWh2UjJqcDgwWWtmRWtGVDdqWFpp?=
+ =?utf-8?B?clVDZER4UnhVcG5vTkxHaEQyNUl0Q0RVQ0psdGkrM1lHNTBITGpmc3Y2ckFz?=
+ =?utf-8?B?WFdTbnFpNEpmVXR2MmFQS2ZaVXRUNmZqNDB0dFB4UThSYTcxc2FZQkJUWlEr?=
+ =?utf-8?B?U1o2elhuNGFmOTBMeU1wSFBtTWxhZWVCcWR4bHFCYndEVW1abVI0dldBZXlq?=
+ =?utf-8?B?aXA2dDNNRXZFb0VjclpxUlpWcEFZSlVUbGIveHA4SGg4azlrcXNmNFVWSTVB?=
+ =?utf-8?B?Nlp2dkdKSU9SangxdmhzcTI3WkpnTnAwNWVrRlU2MS9iY1dDTGVBeUhIQVEw?=
+ =?utf-8?B?TkllMUUrRTM0cUxmSm8rZFpUUzd0YWtoK0Jkb01WMnlRaTJZYmFxTVgwaTNx?=
+ =?utf-8?B?d211aUFPL092QUlJLzUxbnBLc0twQmVEN0NFbTU3ekRacVdIYWpZUlcxSWJE?=
+ =?utf-8?B?MlN5V2hiS01Tc2I0c0x2ZHlldzlQUzJ0R3BJeWd5SStidUdWbThaTXo5L0Iy?=
+ =?utf-8?B?Y0NKWEs1MTQ0bnpSTUY0WDVXeUtNeGswOUFueUxVMGxqRjdsR04rRTEzSEsv?=
+ =?utf-8?B?MWxIcGZITHBhTEJNNjdnaFhiaUpoLzVnMXVmRXR1VVdsTXJpOXNOelRMek5h?=
+ =?utf-8?B?UEhIWG5BendVQzEyMWpsdlQ5aHcwL3FWNmE2VFlRaVJBT0pEWERiZ1lVWi9p?=
+ =?utf-8?B?TFc2SU1JUnE2YUdZaEoxN1REUnpCYUNtM3E5eUw5TW1vdmZnM2FZKzV6bjk3?=
+ =?utf-8?B?aVZGeWpTaC9YOHBuUHZXdDdNUDhpZFo5dm9LZTgxZ1Zhc0gwdlcxQkhpWUN5?=
+ =?utf-8?B?M000eExBbHp3V2c1dlZ0ZzJvdjZ2cmM1ZERMUFcvZ0ZVdWw5OWxzaUNjSk1B?=
+ =?utf-8?B?dlc4bWs0cUtUdnpCUUhhWUJIOW4yTmc2MFlCREVVMFU4V2YybkhQNG5QV0Rl?=
+ =?utf-8?B?NnU5THV4S0oySS9wUEF0a2JVTXFTSGJDbkVzTTFpYWZ0WVVmSE9mdUp3eW1i?=
+ =?utf-8?B?R3RjSFBxTVlpc3ZjU2luTWYveERBM1ZLb0JIVlU4VEFiQjUzMTFHRkhNNmRx?=
+ =?utf-8?B?NmVMSWV1bm5PUFdleTdjUmVvRUpjWVVIczM1aDMwd1Fja0p0YW5QN2FyNGJW?=
+ =?utf-8?B?VkE9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9e80cc58-0fb4-4d94-6e8a-08dcf9966bba
+X-MS-Exchange-CrossTenant-Network-Message-Id: 01394d90-bdb1-4602-b5c4-08dcf99d1a42
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2024 10:26:03.0054 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2024 11:13:52.7006 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5GFek0ttXW2GOocKj8L/GmsL8kDFSoaLm5qr6v+YmYK6fdx6WQ6gfU/JmQ4tGhKrnErspoavmyiG6DnqftsNkSOQJGPeyXSO3XT9/mn1Skk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR04MB9560
+X-MS-Exchange-CrossTenant-UserPrincipalName: bCnC/IXFGvXymCd5HuZOXLdrf5uSavut0UIjmrf2Q0ilDVCv+/E+QSbYaBUVwpJTF0w9z8LRqZEFfkFg3LetN6tQSpU7bsxqzWrYp8lf+lA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB9850
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,157 +176,38 @@ X-Virus-Status: Clean
 
 Hi Naoki,
 
-On 10/30/24 11:22 PM, FUKAUMI Naoki wrote:
-> Hi,
+On 10/31/24 4:22 AM, FUKAUMI Naoki wrote:
+> enable RK806 SPI PMIC driver and related cmd/configs for Radxa ROCK 5A.
 > 
-> On 10/30/24 19:39, Quentin Schulz wrote:
->> Hi Naoki,
->>
->> On 10/30/24 4:09 AM, FUKAUMI Naoki wrote:
->>> Hi,
->>>
->>> could you review this patch, anyone?
->>>
->>> Best regards,
->>>
->>> -- 
->>> FUKAUMI Naoki
->>> Radxa Computer (Shenzhen) Co., Ltd.
->>>
->>> On 8/25/24 07:33, FUKAUMI Naoki wrote:
->>>> on Radxa ROCK 5A, sdhci(eMMC) and fspim0(SPI NOR flash) share pins
->>>> (i.e. eMMC and SPI NOR flash are exclusive), new defconfig and dts
->>>> specifically for SPI NOR flash is required.
->>>>
->>>> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
->>>> ---
->>>> Changes in v2
->>>> - fix subject
->>>> ---
->>>>   arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi | 24 ++++++
->>>>   arch/arm/dts/rk3588s-rock-5a-spi.dts         |  4 +
->>>>   board/radxa/rock5a-rk3588s/MAINTAINERS       |  5 +-
->>>>   configs/rock5a-spi-rk3588s_defconfig         | 83 ++++++++++++++++ 
->>>> ++++
->>>>   4 files changed, 113 insertions(+), 3 deletions(-)
->>>>   create mode 100644 arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
->>>>   create mode 100644 arch/arm/dts/rk3588s-rock-5a-spi.dts
->>>>   create mode 100644 configs/rock5a-spi-rk3588s_defconfig
->>>>
->>>> diff --git a/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi b/arch/ 
->>>> arm/ dts/rk3588s-rock-5a-spi-u-boot.dtsi
->>>> new file mode 100644
->>>> index 00000000000..5cd131d3cb1
->>>> --- /dev/null
->>>> +++ b/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
->>>> @@ -0,0 +1,24 @@
->>>> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
->>>> +/*
->>>> + * Copyright (c) 2023 Collabora Ltd.
->>>> + */
->>>> +
->>>> +#include "rk3588s-u-boot.dtsi"
->>>> +
->>>> +&fspim0_pins {
->>>> +    bootph-pre-ram;
->>>> +    bootph-some-ram;
->>>> +};
->>>> +
->>>> +&sdhci {
->>>> +    status = "disabled";
->>>> +};
->>>> +
->>>> +&sfc {
->>>> +    status = "okay";
->>>> +
->>>> +    flash@0 {
->>>> +        bootph-pre-ram;
->>>> +        bootph-some-ram;
->>>> +    };
->>>> +};
->>
->> I assume the board can only be fitted with an SPI NOR or an eMMC and 
->> not both at the same time? If that's the case, then the status = 
->> disabled and status = okay should be in the dts. I assume we want this 
->> to be in the Linux kernel first too, either as a separate DTS or with 
->> a DTSO (not sure what they will want).
+> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+> ---
+>   configs/rock5a-rk3588s_defconfig | 6 ++++++
+>   1 file changed, 6 insertions(+)
 > 
-> maybe it's time to update this patch.
-> 
-> https://eur02.safelinks.protection.outlook.com/? 
-> url=https%3A%2F%2Fpatchwork.kernel.org%2Fproject%2Flinux- 
-> rockchip%2Fpatch%2F20230913064505.77393-2- 
-> naoki%40radxa.com%2F&data=05%7C02%7Cquentin.schulz%40cherry.de%7Cf853dffb859d43c4309f08dcf9315af8%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C638659237600855259%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&sdata=S1k4mVpoTXIf2S4npvbQCoUWTgNWdWae2ELb7PvEwQI%3D&reserved=0
-> 
-> rock-5a-base.dtsi (common part)
-> rock-5a.dts (same as current one)
-> rock-5a-spi-dts
-> 
+> diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
+> index 9618d590009..d2770198ef2 100644
+> --- a/configs/rock5a-rk3588s_defconfig
+> +++ b/configs/rock5a-rk3588s_defconfig
+> @@ -28,6 +28,7 @@ CONFIG_CMD_I2C=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_USB=y
+>   # CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_PMIC=y
+>   CONFIG_CMD_REGULATOR=y
+>   # CONFIG_SPL_DOS_PARTITION is not set
+>   CONFIG_SPL_OF_CONTROL=y
+> @@ -55,11 +56,16 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>   CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+>   CONFIG_PHY_ROCKCHIP_USBDP=y
+>   CONFIG_SPL_PINCTRL=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_SPL_PMIC_RK8XX=y
 
-Nice, we'll need a cherry-pick for those whenever they land in 
-https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git 
-(doesn't seem to be the case right now though...).
+This won't be useful as neither the SPI controller, SPI pinmux nor PMIC 
+nodes are marked as to keep for SPL in the DT as far as I could tell.
 
-THen a -u-boot.dtsi per variant (rock-5a.dts and rock-5a-spi.dts).
-
->>>> diff --git a/arch/arm/dts/rk3588s-rock-5a-spi.dts b/arch/arm/dts/ 
->>>> rk3588s-rock-5a-spi.dts
->>>> new file mode 100644
->>>> index 00000000000..780e90d041b
->>>> --- /dev/null
->>>> +++ b/arch/arm/dts/rk3588s-rock-5a-spi.dts
->>>> @@ -0,0 +1,4 @@
->>>> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
->>>> +
->>>> +/dts-v1/;
->>>> +#include "rk3588s-rock-5a.dts"
->>>> diff --git a/board/radxa/rock5a-rk3588s/MAINTAINERS b/board/radxa/ 
->>>> rock5a-rk3588s/MAINTAINERS
->>>> index a569efa74e3..06ebc9829f4 100644
->>>> --- a/board/radxa/rock5a-rk3588s/MAINTAINERS
->>>> +++ b/board/radxa/rock5a-rk3588s/MAINTAINERS
->>>> @@ -4,6 +4,5 @@ R:    Jonas Karlman <jonas@kwiboo.se>
->>>>   S:    Maintained
->>>>   F:    board/radxa/rock5a-rk3588s
->>>>   F:    include/configs/rock5a-rk3588s.h
->>>> -F:    configs/rock5a-rk3588s_defconfig
->>>> -F:    arch/arm/dts/rk3588s-rock-5a.dts
->>>> -F:    arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
->>>> +F:    configs/rock5a*
->>>> +F:    arch/arm/dts/rk3588s-rock-5a*
->>>> diff --git a/configs/rock5a-spi-rk3588s_defconfig b/configs/rock5a- 
->>>> spi-rk3588s_defconfig
->>>> new file mode 100644
->>>> index 00000000000..297278c7a06
->>>> --- /dev/null
->>>> +++ b/configs/rock5a-spi-rk3588s_defconfig
->>
->> If Radxa starts having many such options, maybe it won't make a lot of 
->> sense to duplicate configs but rather have config fragments to change 
->> the default DT and add a few symbols that differ from the base (I 
->> assume we may have something similar needed for rock 5b+ compared to 
->> rock5b for example?
-> 
-> I'm thinking doing same for ROCK 5C...
-> 
-> https://eur02.safelinks.protection.outlook.com/? 
-> url=https%3A%2F%2Fgithub.com%2FRadxaNaoki%2Fu- 
-> boot%2Fcommits%2Frock-5c%2F&data=05%7C02%7Cquentin.schulz%40cherry.de%7Cf853dffb859d43c4309f08dcf9315af8%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C638659237600880322%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&sdata=R7VN8bJSvmKT14QQDYFbGmymxh5vsxzKLE3lEIwFCOw%3D&reserved=0
-> 
->> Keeping all configs in sync for essentially same board with small 
->> differences may be difficult, maybe using config fragments will help?
-> 
-> any "config fragments" doc/example?
-> 
-
-https://docs.u-boot.org/en/latest/board/phytec/phycore-am64x.html
-
-3.1.1
-
-for how to use it.
-
-I don't know how would one generate it. But if you figure it out, it's 
-probably worth adding to the docs ;)
+Same remark for patch 3 in this series.
 
 Cheers,
 Quentin
