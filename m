@@ -4,83 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E59D767F4
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:50:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B415D767F4
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:51:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 410D188B0C;
-	Thu, 31 Oct 2024 18:50:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A787F88B0C;
+	Thu, 31 Oct 2024 18:51:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FzJlPAlu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eFC/Sx8a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69E9688A4C; Thu, 31 Oct 2024 18:50:51 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id D3FE188DF1; Thu, 31 Oct 2024 18:51:45 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51D7388B55
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:50:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CCD488A4C
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:51:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5cb6b2b7127so1607945a12.1
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:50:49 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a9a6b4ca29bso133357666b.3
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:51:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730397048; x=1731001848; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=py4e7M+ibypEHh/opX8+oYPXbZFxbFrWexVDT+HVz2o=;
- b=FzJlPAluUbyjV34wy9iItAfhq+9WxslrehkIOb0hM6zxrgtLa2BPz9DF5twH/Ry/Bq
- ixQVw3GYl3DdiBi4hEuqrlzPNxJIvy0P/pFn0p0dycJsexO14zTJYy+rS1Ho/hojntCC
- Ext6KuuKedkTjYQkDBwRdr82MPBwGU10Z9MTo=
+ d=chromium.org; s=google; t=1730397103; x=1731001903; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FWjM5ZkPow+T3MX8vYAqm7/FXa59qRTBRLHAm6mgrls=;
+ b=eFC/Sx8asg2GUG+xb10T58/JoKJguFHSZuySREKd9QQCnsCRHxL+g2YwnC/4+JKpul
+ McWuunJwvZ7OFImc+B2DQRYRou06g4DViB6LQGJwjK7W32tiVQcUTyXq+eOjW7E9aZ2g
+ Gf26wShotSo/MgYAg+25B7CHVW/Cl8RW7PJyk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730397048; x=1731001848;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1730397103; x=1731001903;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=py4e7M+ibypEHh/opX8+oYPXbZFxbFrWexVDT+HVz2o=;
- b=Ji8fT6ZBf6ZOxxVAkhtVL9gPXwFgcvvKGBT5ow7g0wZPbURJZzlmMZaQIH7FHHbeJ7
- DRrYuC4eGzxDRrGZhscPYlwm7IBZ8opXedUEuwXuQwKRhuz83hYVth2J1UG0oDtAihGN
- 48TBANa/ch87bMn7kZShbUXkdBsanRpcWPwDXlhADvfWr7CwDTaXjKabmD43ScAte3vG
- DAjBQEjOTatwIqbdYRmNPxXqIC5fuPL+L5lxtQIAplnJWoPDnmQOcHYLypkhp6bdRC3G
- mMcqS+SGwEj/uTZFitotpaNL4DWY9Xw/SUZGIRyWEuLTIj2zLMPaYSpmpq5lOyQV4uF7
- QPEA==
-X-Gm-Message-State: AOJu0YxisfQB/sX4JLVpbU0BhRn//nwmBjRmJwooCFrP+aV+kqdTsGiJ
- jmxGDWlTYogW3q6VPLDPsowaA/EclliCuELCWkBjGr/8xbU0hS9hjpEqeJO7dSCY2zON7/0Raby
- V0Q==
-X-Google-Smtp-Source: AGHT+IEmvyeH2gliXP4F2VkOM9cjINRE9P/Abo0df95aH3+ZELn9AD70iH5mGpVRfGP44datc7dY8A==
-X-Received: by 2002:a05:6402:520b:b0:5c9:6f20:4cf1 with SMTP id
- 4fb4d7f45d1cf-5cea971b4b5mr3827565a12.27.1730397047457; 
- Thu, 31 Oct 2024 10:50:47 -0700 (PDT)
-Received: from chromium.org ([82.132.224.62]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5ceac7ccaecsm765079a12.62.2024.10.31.10.50.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Oct 2024 10:50:46 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Jan Kiszka <jan.kiszka@siemens.com>, Raymond Mao <raymond.mao@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Pavel Herrmann <morpheus.ibis@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] dm: sysinfo: Shorten the SYSINFO_ID prefix
-Date: Thu, 31 Oct 2024 18:50:23 +0100
-Message-ID: <20241031175025.74124-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ bh=FWjM5ZkPow+T3MX8vYAqm7/FXa59qRTBRLHAm6mgrls=;
+ b=PJTdF5kiPl523qdfNfiSyGD4NUSYCRQoMMxOTfYfar0XGblC1wc5YzaBhqCWW2AYZu
+ 2r+lndpF9Gg5M6Ndlex7rj5d7NTB6zaSIh2QWsCKfGnC3kCZy92uCmQRRyGpasl1jjp6
+ o5nlAMHaosXEzeXz5Bov5unZZLjdPX4Ljn6jdpMbdXi0jhjDPVlmD+vg98MeSz9BFjtt
+ PNRO6zZjnENCq/fHap0XYqECLcNcSoseazsZZ56henHtvsY4xgzzHPKmgrcxjH9kKyk1
+ 5CFea83Z0xCjT15RPNNIlHzsKuzq4Kuru/0rJR3aNcLfKJ/x8n/dxtyv4gCg1+IdEmC/
+ WbkQ==
+X-Gm-Message-State: AOJu0YzL8Om36sCh8LbgBRrmKlwjVdiYJ7rlaAFR8846ebmuu0zvVrIW
+ 5mRZ1Ow6MOsVm+abDRNJP1CwmFbqKqZyrsOi1NJO8KfJ/eTa3VFYcyA6aqMEmU7GAp0V1oOyrh6
+ Kqzk/KyQl/CMwrzoA9FCjj7Q4T3QWwbdixO0O
+X-Google-Smtp-Source: AGHT+IGrp/STMCeEyTgblevMHK19qwhcKS/8vjsrh+YO+3h+bYnGYwv5uIfTzPDTIYOcQlgWeSLX7/3Dsxp1CzfGldA=
+X-Received: by 2002:a17:907:7208:b0:a9e:2e72:f8f4 with SMTP id
+ a640c23a62f3a-a9e5089d50cmr352163866b.1.1730397102956; Thu, 31 Oct 2024
+ 10:51:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cover.1729577070.git.jan.kiszka@siemens.com>
+ <64b2dae0ae60feded514b774f0e91c303c81a52d.1729577070.git.jan.kiszka@siemens.com>
+ <CAFLszTgYaBh8ccEVoRAhGDAysY=XY=5es1k6TmF=mWBEHyYUAA@mail.gmail.com>
+ <f1ef1ad7-f4ce-4b96-931b-d51c77a86e8d@siemens.com>
+ <CAFLszTgucPfjD5wt4jeM=_Dk7N9URxtW-5WYoNcdPiSZwm3RMA@mail.gmail.com>
+ <4e8a8120-7ad8-45e4-9373-2d1772ee6304@siemens.com>
+In-Reply-To: <4e8a8120-7ad8-45e4-9373-2d1772ee6304@siemens.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 31 Oct 2024 18:51:30 +0100
+Message-ID: <CAFLszTjk2Sqidf94XJJa-57M-foSCx83v3V1h1ObiseoizBv9Q@mail.gmail.com>
+Subject: Re: [PATCH v2 12/13] sysinfo: Add driver for IOT2050 boards
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>,
+ Nishanth Menon <nm@ti.com>, 
+ "Li, Hua Qian (DI FA CTR IPC CN PRC4)" <huaqian.li@siemens.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,349 +88,370 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We are about to add a large number of new entries. Update the prefix to
-be a little shorter.
+Hi Jan,
 
-For SMBIOS items, use SYSID_SM_ (for System Management) which is enough
-to distinguish it. For now at least, it seems that most items will be
-for SMBIOS.
+On Wed, 23 Oct 2024 at 06:14, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+>
+> On 23.10.24 05:39, Simon Glass wrote:
+> > Hi Jan,
+> >
+> > On Tue, 22 Oct 2024 at 21:59, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+> >>
+> >> On 22.10.24 19:00, Simon Glass wrote:
+> >>> On Tue, 22 Oct 2024 at 08:06, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+> >>>>
+> >>>> From: Li Hua Qian <huaqian.li@siemens.com>
+> >>>>
+> >>>> This brings a sysinfo driver and DT entry for the IOT2050 board series.
+> >>>> It translates the board information passed from SE-Boot to SPL into
+> >>>> values that can be retrieved via the sysinfo API. Will is already used
+> >>>> to fill the SMBIOS table when booting via EFI.
+> >>>>
+> >>>> Signed-off-by: Li Hua Qian <huaqian.li@siemens.com>
+> >>>> [Jan: split-off as separate patch, cleanup]
+> >>>> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+> >>>> ---
+> >>>>  .../dts/k3-am65-iot2050-common-u-boot.dtsi    |  18 +++
+> >>>>  configs/iot2050_defconfig                     |   1 +
+> >>>>  drivers/sysinfo/Kconfig                       |   7 +
+> >>>>  drivers/sysinfo/Makefile                      |   1 +
+> >>>>  drivers/sysinfo/iot2050.c                     | 143 ++++++++++++++++++
+> >>>>  drivers/sysinfo/iot2050.h                     |  26 ++++
+> >>>>  6 files changed, 196 insertions(+)
+> >>>>  create mode 100644 drivers/sysinfo/iot2050.c
+> >>>>  create mode 100644 drivers/sysinfo/iot2050.h
+> >>>
+> >>> I think strlcpy() might be better than strncpy() for this case
+> >>>
+> >>
+> >> Ack.
+> >>
+> >>> The idea with sysinfo is that we use the same enum for all boards, so
+> >>> please add your new things to sysinfo.h
+> >>>
+> >>
+> >> See below.
+> >>
+> >>> Do you actually want all the sysinfo info in capitals? If so, that's
+> >>> fine, just checking...
+> >>>
+> >>
+> >> This is how it is being shipped already, yes.
+> >>
+> >>>>
+> >>>> diff --git a/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi b/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
+> >>>> index b6d2c816acc..55337179f9f 100644
+> >>>> --- a/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
+> >>>> +++ b/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
+> >>>> @@ -14,6 +14,24 @@
+> >>>>                 spi0 = &ospi0;
+> >>>>         };
+> >>>>
+> >>>> +       sysinfo {
+> >>>> +               compatible = "siemens,sysinfo-iot2050";
+> >>>> +               /* TI_SRAM_SCRATCH_BOARD_EEPROM_START */
+> >>>> +               offset = <0x40280000>;
+> >>>> +               bootph-all;
+> >>>> +
+> >>>> +               smbios {
+> >>>> +                       system {
+> >>>> +                               manufacturer = "SIEMENS AG";
+> >>>> +                               product = "SIMATIC IOT2050";
+> >>>> +                       };
+> >>>> +
+> >>>> +                       baseboard {
+> >>>> +                               manufacturer = "SIEMENS AG";
+> >>>> +                       };
+> >>>> +               };
+> >>>> +       };
+> >>>> +
+> >>>>         leds {
+> >>>>                 bootph-all;
+> >>>>                 status-led-red {
+> >>>> diff --git a/configs/iot2050_defconfig b/configs/iot2050_defconfig
+> >>>> index 2624f0cb573..574e232d119 100644
+> >>>> --- a/configs/iot2050_defconfig
+> >>>> +++ b/configs/iot2050_defconfig
+> >>>> @@ -141,6 +141,7 @@ CONFIG_SOC_TI=y
+> >>>>  CONFIG_SPI=y
+> >>>>  CONFIG_DM_SPI=y
+> >>>>  CONFIG_CADENCE_QSPI=y
+> >>>> +CONFIG_SYSINFO=y
+> >>>>  CONFIG_SYSRESET=y
+> >>>>  CONFIG_SPL_SYSRESET=y
+> >>>>  CONFIG_SYSRESET_TI_SCI=y
+> >>>> diff --git a/drivers/sysinfo/Kconfig b/drivers/sysinfo/Kconfig
+> >>>> index 2030e4babc9..df83df69ffb 100644
+> >>>> --- a/drivers/sysinfo/Kconfig
+> >>>> +++ b/drivers/sysinfo/Kconfig
+> >>>> @@ -31,6 +31,13 @@ config SYSINFO_RCAR3
+> >>>>         help
+> >>>>           Support querying SoC version information for Renesas R-Car Gen3.
+> >>>>
+> >>>> +config SYSINFO_IOT2050
+> >>>> +       bool "Enable sysinfo driver for the Siemens IOT2050"
+> >>>> +       depends on TARGET_IOT2050_A53
+> >>>> +       default y if TARGET_IOT2050_A53
+> >>>> +       help
+> >>>> +         Support querying device information for Siemens IOT2050.
+> >>>> +
+> >>>>  config SYSINFO_SANDBOX
+> >>>>         bool "Enable sysinfo driver for the Sandbox board"
+> >>>>         help
+> >>>> diff --git a/drivers/sysinfo/Makefile b/drivers/sysinfo/Makefile
+> >>>> index 680dde77fe8..26ca3150999 100644
+> >>>> --- a/drivers/sysinfo/Makefile
+> >>>> +++ b/drivers/sysinfo/Makefile
+> >>>> @@ -5,6 +5,7 @@
+> >>>>  obj-y += sysinfo-uclass.o
+> >>>>  obj-$(CONFIG_SYSINFO_GAZERBEAM) += gazerbeam.o
+> >>>>  obj-$(CONFIG_SYSINFO_GPIO) += gpio.o
+> >>>> +obj-$(CONFIG_SYSINFO_IOT2050) += iot2050.o
+> >>>>  obj-$(CONFIG_SYSINFO_RCAR3) += rcar3.o
+> >>>>  obj-$(CONFIG_SYSINFO_SANDBOX) += sandbox.o
+> >>>>  obj-$(CONFIG_SYSINFO_SMBIOS) += smbios.o
+> >>>> diff --git a/drivers/sysinfo/iot2050.c b/drivers/sysinfo/iot2050.c
+> >>>> new file mode 100644
+> >>>> index 00000000000..5359d6b8d62
+> >>>> --- /dev/null
+> >>>> +++ b/drivers/sysinfo/iot2050.c
+> >>>> @@ -0,0 +1,143 @@
+> >>>> +// SPDX-License-Identifier: GPL-2.0
+> >>>> +/*
+> >>>> + * Copyright (c) Siemens AG, 2024
+> >>>> + */
+> >>>> +
+> >>>> +#include <dm.h>
+> >>>> +#include <sysinfo.h>
+> >>>> +#include <net.h>
+> >>>> +#include <asm/arch/hardware.h>
+> >>>> +
+> >>>> +#include "iot2050.h"
+> >>>> +
+> >>>> +#define IOT2050_INFO_MAGIC             0x20502050
+> >>>> +
+> >>>> +struct iot2050_info {
+> >>>> +       u32 magic;
+> >>>> +       u16 size;
+> >>>> +       char name[20 + 1];
+> >>>> +       char serial[16 + 1];
+> >>>> +       char mlfb[18 + 1];
+> >>>> +       char uuid[32 + 1];
+> >>>> +       char a5e[18 + 1];
+> >>>> +       u8 mac_addr_cnt;
+> >>>> +       u8 mac_addr[8][ARP_HLEN];
+> >>>> +       char seboot_version[40 + 1];
+> >>>> +       u8 padding[3];
+> >>>> +       u32 ddr_size_mb;
+> >>>> +} __packed;
+> >>>> +
+> >>>> +/**
+> >>>> + * struct sysinfo_iot2050_priv - sysinfo private data
+> >>>> + * @info: iot2050 board info
+> >>>> + */
+> >>>> +struct sysinfo_iot2050_priv {
+> >>>> +       struct iot2050_info *info;
+> >>>> +};
+> >>>> +
+> >>>> +static int sysinfo_iot2050_detect(struct udevice *dev)
+> >>>> +{
+> >>>> +       struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
+> >>>> +
+> >>>> +       if (priv->info == NULL || priv->info->magic != IOT2050_INFO_MAGIC)
+> >>>> +               return -EFAULT;
+> >>>> +
+> >>>> +       return 0;
+> >>>> +}
+> >>>> +
+> >>>> +static int sysinfo_iot2050_get_str(struct udevice *dev, int id, size_t size,
+> >>>> +                                  char *val)
+> >>>> +{
+> >>>> +       struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
+> >>>> +       char byte_str[3] = {0};
+> >>>> +       unsigned int n;
+> >>>> +
+> >>>> +       switch (id) {
+> >>>> +       case BOARD_NAME:
+> >>>> +               strncpy(val, priv->info->name, size);
+> >>>> +               break;
+> >>>> +       case BOARD_SERIAL:
+> >>>> +               strncpy(val, priv->info->serial, size);
+> >>>> +               break;
+> >>>> +       case BOARD_MLFB:
+> >>>> +               strncpy(val, priv->info->mlfb, size);
+> >>>> +               break;
+> >>>> +       case BOARD_UUID:
+> >>>> +               for (n = 0; n < min(size, (size_t)16); n++) {
+> >>>> +                       memcpy(byte_str, priv->info->uuid + n * 2, 2);
+> >>>> +                       val[n] = (char)hextoul(byte_str, NULL);
+> >>>> +               }
+> >>>> +               break;
+> >>>> +       case BOARD_A5E:
+> >>>> +               strncpy(val, priv->info->a5e, size);
+> >>>> +               break;
+> >>>> +       case BOARD_SEBOOT_VER:
+> >>>> +               strncpy(val, priv->info->seboot_version, size);
+> >>>> +               break;
+> >>>> +       case BOARD_MAC_ADDR_1:
+> >>>> +       case BOARD_MAC_ADDR_2:
+> >>>> +       case BOARD_MAC_ADDR_3:
+> >>>> +       case BOARD_MAC_ADDR_4:
+> >>>> +       case BOARD_MAC_ADDR_5:
+> >>>> +       case BOARD_MAC_ADDR_6:
+> >>>> +       case BOARD_MAC_ADDR_7:
+> >>>> +       case BOARD_MAC_ADDR_8:
+> >>>> +               memcpy(val, priv->info->mac_addr[id - BOARD_MAC_ADDR_START],
+> >>>> +                      ARP_HLEN);
+> >>>
+> >>> For this, we really need another parameter to get_str(), i.e. the
+> >>> index, since we don't know how many MACs there will be. So how about
+> >>> adding a few new operations?
+> >>>
+> >>> int (*get_item_count)(struct udevice *dev, int id);
+> >>> int (*get_str_item)(struct udevice *dev, int id, int index, size_t
+> >>> size, char *val);
+> >>
+> >> Ok, makes sense.
+> >>
+> >>>
+> >>>> +               return 0;
+> >>>> +       case BOARD_DDR_SIZE:
+> >>>> +               memcpy(val, &priv->info->ddr_size_mb,
+> >>>> +                      sizeof(priv->info->ddr_size_mb));
+> >>>> +               return 0;
+> >>>> +       default:
+> >>>> +               return -EINVAL;
+> >>>> +       };
+> >>>> +
+> >>>> +       val[size - 1] = '\0';
+> >>>> +       return 0;
+> >>>> +}
+> >>>> +
+> >>>> +static int sysinfo_iot2050_get_int(struct udevice *dev, int id, int *val)
+> >>>> +{
+> >>>> +       struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
+> >>>> +
+> >>>> +       switch (id) {
+> >>>> +       case BOARD_MAC_ADDR_CNT:
+> >>>> +               *val = priv->info->mac_addr_cnt;
+> >>>> +               return 0;
+> >>>> +       default:
+> >>>> +               return -EINVAL;
+> >>>> +       };
+> >>>> +}
+> >>>> +
+> >>>> +static const struct sysinfo_ops sysinfo_iot2050_ops = {
+> >>>> +       .detect = sysinfo_iot2050_detect,
+> >>>> +       .get_str = sysinfo_iot2050_get_str,
+> >>>> +       .get_int = sysinfo_iot2050_get_int,
+> >>>> +};
+> >>>> +
+> >>>> +static int sysinfo_iot2050_probe(struct udevice *dev)
+> >>>> +{
+> >>>> +       struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
+> >>>> +       unsigned long offset;
+> >>>> +
+> >>>> +       offset = dev_read_u32_default(dev, "offset",
+> >>>> +                                     TI_SRAM_SCRATCH_BOARD_EEPROM_START);
+> >>>> +       priv->info = (struct iot2050_info *)offset;
+> >>>> +
+> >>>> +       return 0;
+> >>>> +}
+> >>>> +
+> >>>> +static const struct udevice_id sysinfo_iot2050_ids[] = {
+> >>>> +       { .compatible = "siemens,sysinfo-iot2050" },
+> >>>> +       { /* sentinel */ }
+> >>>> +};
+> >>>> +
+> >>>> +U_BOOT_DRIVER(sysinfo_iot2050) = {
+> >>>> +       .name           = "sysinfo_iot2050",
+> >>>> +       .id             = UCLASS_SYSINFO,
+> >>>> +       .of_match       = sysinfo_iot2050_ids,
+> >>>> +       .ops            = &sysinfo_iot2050_ops,
+> >>>> +       .priv_auto      = sizeof(struct sysinfo_iot2050_priv),
+> >>>> +       .probe          = sysinfo_iot2050_probe,
+> >>>> +};
+> >>>> diff --git a/drivers/sysinfo/iot2050.h b/drivers/sysinfo/iot2050.h
+> >>>> new file mode 100644
+> >>>> index 00000000000..f659a8282b5
+> >>>> --- /dev/null
+> >>>> +++ b/drivers/sysinfo/iot2050.h
+> >>>> @@ -0,0 +1,26 @@
+> >>>> +/* SPDX-License-Identifier: GPL-2.0 */
+> >>>> +/*
+> >>>> + * Copyright (c) Siemens AG, 2024
+> >>>> + */
+> >>>> +
+> >>>> +#include <sysinfo.h>
+> >>>> +
+> >>>> +enum sysinfo_id_iot2050 {
+> >>>> +       BOARD_MLFB              = SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
+> >>>> +       BOARD_SERIAL            = SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
+> >>>> +       BOARD_UUID              = SYSINFO_ID_SMBIOS_SYSTEM_UUID,
+> >>>> +       BOARD_A5E               = SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
+> >>>> +       BOARD_NAME              = SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
+> >>>
+> >>> Do you need to rename these? It seems better to use the standard
+> >>> names, although I do think they are quite long.
+> >>
+> >> We don't rename, we map pre-existing field names in EEPROM and
+> >> pre-existing board-specific U-Boot env vars to sysinfo fields here.
+> >
+> > Yes, that's what I mean. Can you just use the SYSINFO_ID... values
+> > directory, rather than creating mapping?
+> >
+>
+> The mapping is unavoidable ("pre-existing"), and here is the most
+> logical point for me as it avoids that we have to do it twice: first in
+> the sysinfo driver (EEPROM->SYSINFO_ID) and then again in
+> set_board_info_env (SYSINFO_ID->env-vars).
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+If the EEPROM is storing it in an internal format, there should be a mapping.
 
- board/coreboot/coreboot/sysinfo.c     |  8 +++----
- board/google/chromebook_coral/coral.c |  6 ++---
- board/toradex/common/tdx-common.c     |  2 +-
- common/board_info.c                   |  8 +++----
- drivers/sysinfo/gazerbeam.h           |  4 ++--
- drivers/sysinfo/gpio.c                |  4 ++--
- drivers/sysinfo/rcar3.c               |  2 +-
- drivers/sysinfo/sandbox.h             |  2 +-
- include/sysinfo.h                     | 34 +++++++++++++--------------
- lib/smbios.c                          | 24 +++++++++----------
- test/dm/sysinfo-gpio.c                | 12 +++++-----
- 11 files changed, 53 insertions(+), 53 deletions(-)
+>
+> >>
+> >>>
+> >>>> +       BOARD_SEBOOT_VER        = SYSINFO_ID_USER + 0,
+> >>>> +       BOARD_MAC_ADDR_CNT      = SYSINFO_ID_USER + 1,
+> >>>> +       BOARD_MAC_ADDR_1        = SYSINFO_ID_USER + 2,
+> >>>> +       BOARD_MAC_ADDR_START    = BOARD_MAC_ADDR_1,
+> >>>> +       BOARD_MAC_ADDR_2        = SYSINFO_ID_USER + 3,
+> >>>> +       BOARD_MAC_ADDR_3        = SYSINFO_ID_USER + 4,
+> >>>> +       BOARD_MAC_ADDR_4        = SYSINFO_ID_USER + 5,
+> >>>> +       BOARD_MAC_ADDR_5        = SYSINFO_ID_USER + 6,
+> >>>> +       BOARD_MAC_ADDR_6        = SYSINFO_ID_USER + 7,
+> >>>> +       BOARD_MAC_ADDR_7        = SYSINFO_ID_USER + 8,
+> >>>> +       BOARD_MAC_ADDR_8        = SYSINFO_ID_USER + 9,
+> >>>> +       BOARD_DDR_SIZE          = SYSINFO_ID_USER + 10,
+> >>>
+> >>> These are the ones which should be added as standard. Be sure to
+> >>> comment them as necessary.
+> >>
+> >> You mean that BOARD_MAC_ADDR and BOARD_DDR_SIZE should become
+> >> SYSINFO_ID_BOARD_MAC_ADDR and SYSINFO_ID_BOARD_DDR_SIZE? But
+> >> BOARD_SEBOOT_VER is nothing that has any meaning beyond our board.
+> >
+> > For BOARD_SEBOOT_VER, I don't know what it is, but just add a comment
+> > and put it in sysinfo.h. It is OK to add board-specific stufff there.
+> >
+>
+> This still makes no sense to me. What is the point of SYSINFO_ID_USER
+> then? Why does it exists and is being used elsewhere when it shouldn't?
 
-diff --git a/board/coreboot/coreboot/sysinfo.c b/board/coreboot/coreboot/sysinfo.c
-index e0bdc7a5a88..d6b19530023 100644
---- a/board/coreboot/coreboot/sysinfo.c
-+++ b/board/coreboot/coreboot/sysinfo.c
-@@ -24,21 +24,21 @@ static int cb_get_str(struct udevice *dev, int id, size_t size, char *val)
- 	const char *str = NULL;
- 
- 	switch (id) {
--	case SYSINFO_ID_BOARD_MODEL:
-+	case SYSID_BOARD_MODEL:
- 		if (priv->t1)
- 			str = smbios_string(priv->system,
- 					    priv->t1->product_name);
- 		break;
--	case SYSINFO_ID_BOARD_MANUFACTURER:
-+	case SYSID_BOARD_MANUFACTURER:
- 		if (priv->t1)
- 			str = smbios_string(priv->system,
- 					    priv->t1->manufacturer);
- 		break;
--	case SYSINFO_ID_PRIOR_STAGE_VERSION:
-+	case SYSID_PRIOR_STAGE_VERSION:
- 		if (priv->t0)
- 			str = smbios_string(priv->bios, priv->t0->bios_ver);
- 		break;
--	case SYSINFO_ID_PRIOR_STAGE_DATE:
-+	case SYSID_PRIOR_STAGE_DATE:
- 		if (priv->t0)
- 			str = smbios_string(priv->bios,
- 					    priv->t0->bios_release_date);
-diff --git a/board/google/chromebook_coral/coral.c b/board/google/chromebook_coral/coral.c
-index 3443dc91885..db96534857c 100644
---- a/board/google/chromebook_coral/coral.c
-+++ b/board/google/chromebook_coral/coral.c
-@@ -151,8 +151,8 @@ static int coral_get_str(struct udevice *dev, int id, size_t size, char *val)
- 		return -ENOSYS;
- 
- 	switch (id) {
--	case SYSINFO_ID_SMBIOS_SYSTEM_VERSION:
--	case SYSINFO_ID_SMBIOS_BASEBOARD_VERSION: {
-+	case SYSID_SM_SYSTEM_VERSION:
-+	case SYSID_SM_BASEBOARD_VERSION: {
- 		ret = get_skuconfig(dev);
- 
- 		if (ret < 0)
-@@ -162,7 +162,7 @@ static int coral_get_str(struct udevice *dev, int id, size_t size, char *val)
- 		sprintf(val, "rev%d", ret);
- 		break;
- 	}
--	case SYSINFO_ID_BOARD_MODEL: {
-+	case SYSID_BOARD_MODEL: {
- 		int mem_config, sku_config;
- 		const char *model;
- 
-diff --git a/board/toradex/common/tdx-common.c b/board/toradex/common/tdx-common.c
-index a6b45cdab81..3badeebd149 100644
---- a/board/toradex/common/tdx-common.c
-+++ b/board/toradex/common/tdx-common.c
-@@ -193,7 +193,7 @@ static int tdx_get_str(struct udevice *dev, int id, size_t size, char *val)
- 	int ret = -ENOTSUPP;
- 
- 	switch (id) {
--	case SYSINFO_ID_BOARD_MODEL:
-+	case SYSID_BOARD_MODEL:
- 		snprintf(val, size,
- 			 "Toradex %04d %s %s",
- 			 tdx_hw_tag.prodid,
-diff --git a/common/board_info.c b/common/board_info.c
-index 33c260b404e..dc26e1a33dd 100644
---- a/common/board_info.c
-+++ b/common/board_info.c
-@@ -18,9 +18,9 @@ static const struct to_show {
- 	const char *name;
- 	enum sysinfo_id id;
- } to_show[] = {
--	{ "Manufacturer", SYSINFO_ID_BOARD_MANUFACTURER},
--	{ "Prior-stage version", SYSINFO_ID_PRIOR_STAGE_VERSION },
--	{ "Prior-stage date", SYSINFO_ID_PRIOR_STAGE_DATE },
-+	{ "Manufacturer", SYSID_BOARD_MANUFACTURER},
-+	{ "Prior-stage version", SYSID_PRIOR_STAGE_VERSION },
-+	{ "Prior-stage date", SYSID_PRIOR_STAGE_DATE },
- 	{ /* sentinel */ }
- };
- 
-@@ -39,7 +39,7 @@ static int try_sysinfo(void)
- 	if (ret)
- 		return ret;
- 
--	ret = sysinfo_get_str(dev, SYSINFO_ID_BOARD_MODEL, sizeof(str), str);
-+	ret = sysinfo_get_str(dev, SYSID_BOARD_MODEL, sizeof(str), str);
- 	if (ret)
- 		return ret;
- 	printf("Model: %s\n", str);
-diff --git a/drivers/sysinfo/gazerbeam.h b/drivers/sysinfo/gazerbeam.h
-index 6bf3c0098d1..047f365436f 100644
---- a/drivers/sysinfo/gazerbeam.h
-+++ b/drivers/sysinfo/gazerbeam.h
-@@ -8,8 +8,8 @@
- #include <sysinfo.h>
- 
- enum {
--	BOARD_HWVERSION = SYSINFO_ID_BOARD_MODEL,
--	BOARD_MULTICHANNEL = SYSINFO_ID_USER,
-+	BOARD_HWVERSION = SYSID_BOARD_MODEL,
-+	BOARD_MULTICHANNEL = SYSID_USER,
- 	BOARD_VARIANT
- };
- 
-diff --git a/drivers/sysinfo/gpio.c b/drivers/sysinfo/gpio.c
-index aaca318419b..66d2a913087 100644
---- a/drivers/sysinfo/gpio.c
-+++ b/drivers/sysinfo/gpio.c
-@@ -38,7 +38,7 @@ static int sysinfo_gpio_get_int(struct udevice *dev, int id, int *val)
- 	struct sysinfo_gpio_priv *priv = dev_get_priv(dev);
- 
- 	switch (id) {
--	case SYSINFO_ID_BOARD_MODEL:
-+	case SYSID_BOARD_MODEL:
- 		*val = priv->revision;
- 		return 0;
- 	default:
-@@ -51,7 +51,7 @@ static int sysinfo_gpio_get_str(struct udevice *dev, int id, size_t size, char *
- 	struct sysinfo_gpio_priv *priv = dev_get_priv(dev);
- 
- 	switch (id) {
--	case SYSINFO_ID_BOARD_MODEL: {
-+	case SYSID_BOARD_MODEL: {
- 		const char *name = NULL;
- 		int i, ret;
- 		u32 revision;
-diff --git a/drivers/sysinfo/rcar3.c b/drivers/sysinfo/rcar3.c
-index 37e2cccd9af..2994df9ab1c 100644
---- a/drivers/sysinfo/rcar3.c
-+++ b/drivers/sysinfo/rcar3.c
-@@ -46,7 +46,7 @@ static int sysinfo_rcar_get_str(struct udevice *dev, int id, size_t size, char *
- 	struct sysinfo_rcar_priv *priv = dev_get_priv(dev);
- 
- 	switch (id) {
--	case SYSINFO_ID_BOARD_MODEL:
-+	case SYSID_BOARD_MODEL:
- 		strncpy(val, priv->boardmodel, size);
- 		val[size - 1] = '\0';
- 		return 0;
-diff --git a/drivers/sysinfo/sandbox.h b/drivers/sysinfo/sandbox.h
-index d9c5804c26a..a7cbac0ce18 100644
---- a/drivers/sysinfo/sandbox.h
-+++ b/drivers/sysinfo/sandbox.h
-@@ -5,7 +5,7 @@
-  */
- 
- enum {
--	BOOL_CALLED_DETECT = SYSINFO_ID_USER,
-+	BOOL_CALLED_DETECT = SYSID_USER,
- 	INT_TEST1,
- 	INT_TEST2,
- 	STR_VACATIONSPOT,
-diff --git a/include/sysinfo.h b/include/sysinfo.h
-index 8a77ef44856..027a463dc33 100644
---- a/include/sysinfo.h
-+++ b/include/sysinfo.h
-@@ -40,29 +40,29 @@ struct udevice;
- 
- /** enum sysinfo_id - Standard IDs defined by U-Boot */
- enum sysinfo_id {
--	SYSINFO_ID_NONE,
-+	SYSID_NONE,
- 
- 	/* For SMBIOS tables */
--	SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
--	SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
--	SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
--	SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
--	SYSINFO_ID_SMBIOS_SYSTEM_SKU,
--	SYSINFO_ID_SMBIOS_SYSTEM_FAMILY,
--	SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
--	SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
--	SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
--	SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
--	SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
-+	SYSID_SM_SYSTEM_MANUFACTURER,
-+	SYSID_SM_SYSTEM_PRODUCT,
-+	SYSID_SM_SYSTEM_VERSION,
-+	SYSID_SM_SYSTEM_SERIAL,
-+	SYSID_SM_SYSTEM_SKU,
-+	SYSID_SM_SYSTEM_FAMILY,
-+	SYSID_SM_BASEBOARD_MANUFACTURER,
-+	SYSID_SM_BASEBOARD_PRODUCT,
-+	SYSID_SM_BASEBOARD_VERSION,
-+	SYSID_SM_BASEBOARD_SERIAL,
-+	SYSID_SM_BASEBOARD_ASSET_TAG,
- 
- 	/* For show_board_info() */
--	SYSINFO_ID_BOARD_MODEL,
--	SYSINFO_ID_BOARD_MANUFACTURER,
--	SYSINFO_ID_PRIOR_STAGE_VERSION,
--	SYSINFO_ID_PRIOR_STAGE_DATE,
-+	SYSID_BOARD_MODEL,
-+	SYSID_BOARD_MANUFACTURER,
-+	SYSID_PRIOR_STAGE_VERSION,
-+	SYSID_PRIOR_STAGE_DATE,
- 
- 	/* First value available for downstream/board used */
--	SYSINFO_ID_USER = 0x1000,
-+	SYSID_USER = 0x1000,
- };
- 
- struct sysinfo_ops {
-diff --git a/lib/smbios.c b/lib/smbios.c
-index 7c24ea129eb..a36d4b4e54a 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -270,7 +270,7 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
- static int smbios_add_prop(struct smbios_ctx *ctx, const char *prop,
- 			   const char *dval)
- {
--	return smbios_add_prop_si(ctx, prop, SYSINFO_ID_NONE, dval);
-+	return smbios_add_prop_si(ctx, prop, SYSID_NONE, dval);
- }
- 
- static void smbios_set_eos(struct smbios_ctx *ctx, char *eos)
-@@ -393,27 +393,27 @@ static int smbios_write_type1(ulong *current, int handle,
- 	fill_smbios_header(t, SMBIOS_SYSTEM_INFORMATION, len, handle);
- 	smbios_set_eos(ctx, t->eos);
- 	t->manufacturer = smbios_add_prop_si(ctx, "manufacturer",
--					     SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
-+					     SYSID_SM_SYSTEM_MANUFACTURER,
- 					     NULL);
- 	t->product_name = smbios_add_prop_si(ctx, "product",
--					     SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
-+					     SYSID_SM_SYSTEM_PRODUCT,
- 					     NULL);
- 	t->version = smbios_add_prop_si(ctx, "version",
--					SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
-+					SYSID_SM_SYSTEM_VERSION,
- 					NULL);
- 	if (serial_str) {
- 		t->serial_number = smbios_add_prop(ctx, NULL, serial_str);
- 		strncpy((char *)t->uuid, serial_str, sizeof(t->uuid));
- 	} else {
- 		t->serial_number = smbios_add_prop_si(ctx, "serial",
--						      SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
-+						      SYSID_SM_SYSTEM_SERIAL,
- 						      NULL);
- 	}
- 	t->wakeup_type = SMBIOS_WAKEUP_TYPE_UNKNOWN;
- 	t->sku_number = smbios_add_prop_si(ctx, "sku",
--					   SYSINFO_ID_SMBIOS_SYSTEM_SKU, NULL);
-+					   SYSID_SM_SYSTEM_SKU, NULL);
- 	t->family = smbios_add_prop_si(ctx, "family",
--				       SYSINFO_ID_SMBIOS_SYSTEM_FAMILY, NULL);
-+				       SYSID_SM_SYSTEM_FAMILY, NULL);
- 
- 	len = t->length + smbios_string_table_len(ctx);
- 	*current += len;
-@@ -433,20 +433,20 @@ static int smbios_write_type2(ulong *current, int handle,
- 	fill_smbios_header(t, SMBIOS_BOARD_INFORMATION, len, handle);
- 	smbios_set_eos(ctx, t->eos);
- 	t->manufacturer = smbios_add_prop_si(ctx, "manufacturer",
--					     SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
-+					     SYSID_SM_BASEBOARD_MANUFACTURER,
- 					     NULL);
- 	t->product_name = smbios_add_prop_si(ctx, "product",
--					     SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
-+					     SYSID_SM_BASEBOARD_PRODUCT,
- 					     NULL);
- 	t->version = smbios_add_prop_si(ctx, "version",
--					SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
-+					SYSID_SM_BASEBOARD_VERSION,
- 					NULL);
- 
- 	t->serial_number = smbios_add_prop_si(ctx, "serial",
--					      SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
-+					      SYSID_SM_BASEBOARD_SERIAL,
- 					      NULL);
- 	t->asset_tag_number = smbios_add_prop_si(ctx, "asset-tag",
--						 SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
-+						 SYSID_SM_BASEBOARD_ASSET_TAG,
- 						 NULL);
- 	t->feature_flags = SMBIOS_BOARD_FEATURE_HOSTING;
- 	t->board_type = SMBIOS_BOARD_MOTHERBOARD;
-diff --git a/test/dm/sysinfo-gpio.c b/test/dm/sysinfo-gpio.c
-index 155da3b6344..de9483c4291 100644
---- a/test/dm/sysinfo-gpio.c
-+++ b/test/dm/sysinfo-gpio.c
-@@ -29,9 +29,9 @@ static int dm_test_sysinfo_gpio(struct unit_test_state *uts)
- 	sandbox_gpio_set_flags(gpio, 16, GPIOD_EXT_PULL_DOWN);
- 	sandbox_gpio_set_flags(gpio, 17, 0);
- 	ut_assertok(sysinfo_detect(sysinfo));
--	ut_assertok(sysinfo_get_int(sysinfo, SYSINFO_ID_BOARD_MODEL, &val));
-+	ut_assertok(sysinfo_get_int(sysinfo, SYSID_BOARD_MODEL, &val));
- 	ut_asserteq(19, val);
--	ut_assertok(sysinfo_get_str(sysinfo, SYSINFO_ID_BOARD_MODEL, sizeof(buf),
-+	ut_assertok(sysinfo_get_str(sysinfo, SYSID_BOARD_MODEL, sizeof(buf),
- 				    buf));
- 	ut_asserteq_str("rev_a", buf);
- 
-@@ -43,9 +43,9 @@ static int dm_test_sysinfo_gpio(struct unit_test_state *uts)
- 	sandbox_gpio_set_flags(gpio, 16, GPIOD_EXT_PULL_UP);
- 	sandbox_gpio_set_flags(gpio, 17, GPIOD_EXT_PULL_DOWN);
- 	ut_assertok(sysinfo_detect(sysinfo));
--	ut_assertok(sysinfo_get_int(sysinfo, SYSINFO_ID_BOARD_MODEL, &val));
-+	ut_assertok(sysinfo_get_int(sysinfo, SYSID_BOARD_MODEL, &val));
- 	ut_asserteq(5, val);
--	ut_assertok(sysinfo_get_str(sysinfo, SYSINFO_ID_BOARD_MODEL, sizeof(buf),
-+	ut_assertok(sysinfo_get_str(sysinfo, SYSID_BOARD_MODEL, sizeof(buf),
- 				    buf));
- 	ut_asserteq_str("foo", buf);
- 
-@@ -57,9 +57,9 @@ static int dm_test_sysinfo_gpio(struct unit_test_state *uts)
- 	sandbox_gpio_set_flags(gpio, 16, 0);
- 	sandbox_gpio_set_flags(gpio, 17, GPIOD_EXT_PULL_UP);
- 	ut_assertok(sysinfo_detect(sysinfo));
--	ut_assertok(sysinfo_get_int(sysinfo, SYSINFO_ID_BOARD_MODEL, &val));
-+	ut_assertok(sysinfo_get_int(sysinfo, SYSID_BOARD_MODEL, &val));
- 	ut_asserteq(15, val);
--	ut_assertok(sysinfo_get_str(sysinfo, SYSINFO_ID_BOARD_MODEL, sizeof(buf),
-+	ut_assertok(sysinfo_get_str(sysinfo, SYSID_BOARD_MODEL, sizeof(buf),
- 				    buf));
- 	ut_asserteq_str("unknown", buf);
- 
--- 
-2.43.0
+It's just that we should be trying to use common things where we can.
+If everyone creates their own set of MAC addresses, it just gets
+confusing. If you use an implied mapping for your use case, what will
+happen if someone else comes along and changes it?
 
+>
+> > Is BOARD_DDR_SIZE the memory size? Perhaps rename it to RAM_SIZE ?
+> >
+>
+> Yes, and I'm also considering to append "_MB" in order to clarify the unit.
+
+Yes that's a good idea.
+
+I've sent a patch changing the naming, BTW.
+
+Regards,
+Simon
