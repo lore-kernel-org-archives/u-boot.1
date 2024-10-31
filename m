@@ -4,76 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A654ED767F2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:52:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 972B9D767F2
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:52:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C68188E67;
-	Thu, 31 Oct 2024 18:52:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 809628929D;
+	Thu, 31 Oct 2024 18:52:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ij5aVUYq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ihCGps14";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5C8D8929F; Thu, 31 Oct 2024 18:52:03 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id AD44188A4C; Thu, 31 Oct 2024 18:52:07 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8E838928E
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:52:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C6B618929D
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:52:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a9a0c7abaa6so130951966b.2
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:52:01 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a9acafdb745so208820366b.0
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:52:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730397121; x=1731001921; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730397125; x=1731001925; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oGBTSLYSUsIhKYVcfXUqkogO1S8a38cw/NOBVNnh+5c=;
- b=Ij5aVUYqzKrZhTkaBAoZIIKTVivGlAAOhGW/RhmXNoA/g/cB/Z10wM29yTclr93lFW
- HzbAS7ek6Qg/Zlbb9zx+r0GROE0VTzdzhMXsmA0wJvimecB3dkPmO/Dq9poS5aXEs9rD
- x95BLIPTL8B8q4RMtZ+JRVN5kPQ7F+3NftL1Q=
+ bh=EyOPzVxrq4J1OFDx9w1MiPoSVhaayO5BB3S2oky0kO0=;
+ b=ihCGps14/+26EJKVkYLIl/ALMtARGWqQnmmJS9EiGfe5+1fbVST79gpPmYdAMdt7uL
+ iXoiDTpY3vK+UyhymDUjcLNTjf14Il0/byzVzvjO82tDG1qQrItVPAx6EdEcLb1/HqnU
+ 9Gtc3PpbUjoOWoFHUG45N/yIyACJ5OhOpSd3Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730397121; x=1731001921;
+ d=1e100.net; s=20230601; t=1730397125; x=1731001925;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oGBTSLYSUsIhKYVcfXUqkogO1S8a38cw/NOBVNnh+5c=;
- b=pFBWNJCwa2KPyMb+34t7lpF/yu2+Cy8hXajoGtpfclWP3ZNP98/xBX0CoLY733oO9F
- WgvnNSL8JMxN0f6oRmkKs0iqh3Bdk8oR/cUORKe+NMUTTjLE4DwWznjOZuEJL1pMmA69
- LoQ3NQ067M7Hvguh4mDjGUG0ge24qS33+PRXyhW/0pnJRg+QxYHymCXB12S/4qo5FvpG
- q14nKu23hRV5OAkzwgFgnJZHz9cW5DEj/EutvSVt/0vhQjBbOrcx0vIEhswxpY2oMG+x
- K41yoLZF3MzLjBEzb2wDbsupeMAH3bkLRacPm684N4n+nFqAY1fXZQqk6wnG/eDkIqMp
- hCXQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV+10tLnJuvxUjnK7C44DOaZpHq5BdpVsaxTnVXXr1iwdZyjAdSQ/VmbTgtMnT8EIAumVncO3Y=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz0Q9fSwQAAd/5TINHaI7o7Tz9KhYjVYYITVMTohopD5UtwbJlh
- SFiYEfqB3G3d0wbnYxo7s5lGqsihTJqKFTXZc9pptRf6v/MxL0WlZnio3QBzJUoeklnBMgfYtFc
- FRlsbkCWElfq9PE05/JBwnV61q+ElQo5m59A7
-X-Google-Smtp-Source: AGHT+IHSEFAihW8b+d67IQQZIjR82KbFVSMJo34e/Oh30ZOjkBV0f4VdyQ/2x4zM8n4P49vztTWCSVjlFLPtwivZcMA=
-X-Received: by 2002:a17:906:6a03:b0:a8a:8d81:97ac with SMTP id
- a640c23a62f3a-a9e6553ae44mr75968366b.4.1730397121140; Thu, 31 Oct 2024
- 10:52:01 -0700 (PDT)
+ bh=EyOPzVxrq4J1OFDx9w1MiPoSVhaayO5BB3S2oky0kO0=;
+ b=Ls3sbA5417hYNoFDdLffnoahvaTJpwsP4ejiRQNbIBDUqJjIT3QQtwMnFWfyM1ctz6
+ UekAfUlhVB09C+DcADU9F4gQs+gQ82WHHnRMUlST1LsfBI9NeXbaFphD+24g0medzrGa
+ EGU1ovdrCdDeK38EbVxIRhyr00uDD4amwDfmD/UupBxTyIKODMkUMtTue8BXqcd2XS5K
+ gcoKlxe0VRKYHEOpZ4de81J3/vfgECHj8IRjLwt4k2KXJ4D1CxoOfKZwXfyBTp21Rdqy
+ xt0DJ4ry4kNzOEpoISujDtsaCoPyO/8NzERw+UJGTfULMAXZn/OtoOOGDcfm1jgdqg/q
+ VLkw==
+X-Gm-Message-State: AOJu0YzgKXWNrOxX6s6sx2nVDbVIaA/WMp8wpKsUDVDScJ9u29y8/jet
+ x4R0dz2pP9InNnyYHql4ffq32nGVkQozNhtyyx/8Ck0cHN/JZviBGC1CfSpmUXgzZj3JZmPk499
+ n9KbIaBdL4D5dq3V+Pjp02bDLpridHbJEPGQ/Gi/ZYJ4b3psgyQ==
+X-Google-Smtp-Source: AGHT+IFfqJXGk0KP26JpkOOaxVmyCiGBiV7H3+73Rk30J3Ftq/HnwDEQQItVBJSjfDucErItmgG+3Hf3sVWU9RypzU8=
+X-Received: by 2002:a17:907:3f87:b0:a9a:cea7:1294 with SMTP id
+ a640c23a62f3a-a9e65436316mr73863566b.21.1730397125287; Thu, 31 Oct 2024
+ 10:52:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241028124815.47262-1-sjg@chromium.org>
- <20241028124815.47262-10-sjg@chromium.org>
- <CAC_iWj+H_m3jiQ-Q-BK=9vtdMEnw0GHyQT2_LFHUYyEnnZh3EQ@mail.gmail.com>
- <CAFLszTgG423MQ0iK-2XnOHZN+qVy_-xZNkaPGGsQM=Th=kaeGA@mail.gmail.com>
- <B86C7011-6650-4F3D-9078-67150BADFDEA@gmx.de>
-In-Reply-To: <B86C7011-6650-4F3D-9078-67150BADFDEA@gmx.de>
+References: <20241030003649.3506474-1-trini@konsulko.com>
+In-Reply-To: <20241030003649.3506474-1-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Oct 2024 18:51:48 +0100
-Message-ID: <CAFLszTgT4XApKuSdTG9bN=EW56s0+Q2Kv96rnH92-tBnstYieA@mail.gmail.com>
-Subject: Re: [PATCH 09/15] efi_loader: Fix free in
- ..._media_device_boot_option()
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>
+Date: Thu, 31 Oct 2024 18:51:52 +0100
+Message-ID: <CAFLszTgPA0vGCWLw3m_KHVCs7=hCouOGhSeZAx3XxWBHtP7oFg@mail.gmail.com>
+Subject: Re: [PATCH] test/cmd/mem_copy.c: Use CONFIG_SYS_LOAD_ADDR for base
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,51 +81,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Tue, 29 Oct 2024 at 23:13, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Wed, 30 Oct 2024 at 01:36, Tom Rini <trini@konsulko.com> wrote:
 >
+> When reading/writing to memory we cannot assume that a base address of
+> 0x0 is correct and functional. So use CONFIG_SYS_LOAD_ADDR as the base
+> from which we add a bit more padding and being our tests.
 >
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  test/cmd/mem_copy.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Am 29. Oktober 2024 16:45:29 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >Hi Ilias,
-> >
-> >On Tue, 29 Oct 2024 at 11:02, Ilias Apalodimas
-> ><ilias.apalodimas@linaro.org> wrote:
-> >>
-> >> Hi Simon,
-> >>
-> >> On Mon, 28 Oct 2024 at 14:48, Simon Glass <sjg@chromium.org> wrote:
-> >> >
-> >> > Freeing a NULL pointer is an error in EFI, so check the pointer first,
-> >> > before freeing it.
-> >> >
-> >> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> >> > ---
-> >> >
-> >> >  lib/efi_loader/efi_bootmgr.c | 3 ++-
-> >> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >> >
-> >> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> >> > index a3aa2b8d1b9..431a38704e9 100644
-> >> > --- a/lib/efi_loader/efi_bootmgr.c
-> >> > +++ b/lib/efi_loader/efi_bootmgr.c
-> >> > @@ -1180,7 +1180,8 @@ out:
-> >> >                         free(opt[i].lo);
-> >> >         }
-> >> >         free(opt);
-> >> > -       efi_free_pool(handles);
-> >> > +       if (handles)
-> >> > +               efi_free_pool(handles);
-> >>
-> >> We don't need this, efi_free_pool() checks the pointer already.
-> >
-> >Yes, but it then returns an error (EFI_INVALID_PARAMETER), which gets
-> >logged, with this series.
->
-> So this is not a problem of the existing code but of your patch series which creates a superfluous log message.
+> diff --git a/test/cmd/mem_copy.c b/test/cmd/mem_copy.c
+> index 1ba0cebbbe04..67eca328777a 100644
+> --- a/test/cmd/mem_copy.c
+> +++ b/test/cmd/mem_copy.c
+> @@ -21,7 +21,7 @@ struct param {
+>  static int do_test(struct unit_test_state *uts,
+>                    const char *suffix, int d, int s, int count)
+>  {
+> -       const long addr = 0x1000;
+> +       const long addr = CONFIG_SYS_LOAD_ADDR + 0x1000;
 
-Is it an error to free a zero pointer in EFI?
+CFG_SYS_SDRAM_BASE would be better here, since it is the start of
+memory (0 on sandbox and most boards).
+
+>         u8 shadow[BUF_SIZE];
+>         u8 *buf;
+>         int i, w, bytes;
+> --
+> 2.43.0
+>
 
 Regards,
 Simon
