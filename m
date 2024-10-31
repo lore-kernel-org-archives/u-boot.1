@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 130FFD767F2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 18:11:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8DA5D767F4
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 18:14:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E1F5892AA;
-	Thu, 31 Oct 2024 19:11:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4142688DB1;
+	Thu, 31 Oct 2024 19:14:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VnDUGM5D";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lEhnlj5O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 984E488BBE; Thu, 31 Oct 2024 19:11:08 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 120F788E18; Thu, 31 Oct 2024 19:14:12 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76191892AA
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 19:11:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05EBE88C05
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 19:14:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-6e3cdbc25a0so12810477b3.2
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 11:11:06 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7b152a23e9aso79668485a.0
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 11:14:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730398265; x=1731003065; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730398449; x=1731003249; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jUI5nkTd5bm3QA9qRZRETVzlVT5KQq7JNsmxsv7e1fU=;
- b=VnDUGM5DOMXhnucZP7Kw672TK1PIHwFxMEjUeGpDgnzhmn/cdmRiEYROKTzDqyWSvM
- bdN0YSd6k+RIscMJnmMCflnX0HCZ+5qYW1xsPqAE5kOvgojuExXWYJh7mmlbHE8iuLoi
- LVRe4WolGOBOpPP9cWLUUiMSosC/25Ja9T8Xo=
+ bh=n8Lddzz/doCXEGeUEw2spLhKjPEWpYR6eAwd09SBuyk=;
+ b=lEhnlj5OjVhXIIvZ9BrqLLHlWfoD+v3AvgGEVBhui39IFtq5IRmKgJ6b1X0k1y5OAG
+ uPVL2Q7LRCNCV+o4uZZnXrCvyOuSiWe+nNO4nRnoFSY8PJrJa+mrYv85Gi6foSkQTUjJ
+ D4OjsrrI2DRZjOqcWdt2nJ7N8qaeBOFOsdWEg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730398265; x=1731003065;
+ d=1e100.net; s=20230601; t=1730398449; x=1731003249;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jUI5nkTd5bm3QA9qRZRETVzlVT5KQq7JNsmxsv7e1fU=;
- b=oOD2ii6h5PIhAOoV5u8u9umh7iagFjWUEV+yCoHB8E4OPnVzEKBXWGTnLD4c1FeYIv
- +cNTDbQKoJH2USzW8MrUPaFyqE/ILOCgmYcRFbMwcWajIlHPIxM1zOlPQIyfcP0Cb/iq
- yTUAF2reGjiEniEZhYxXGIeS+awnQ6kTJrzIKcFceuTfUq5Yawm2n79/oUnaqRvN2ljw
- BJzAYQZPLGA2RJmGNtbd3rNKPY7psD4rumWULJPpfrZU2PFVwa3vDGHgoBBXgHmEBnQZ
- XRh+q6k0gjn9qauWTkrFUMCt3zGhpLvo/ANl6qazzPdJlgxzOOwuf3TOzn+OHLBRTYHz
- i1iA==
-X-Gm-Message-State: AOJu0YyCg1CvNOVGFjgKLVbocppmJ0SeOTFy5Cqe5NX9KQqast/33w9B
- JtoH/cJGIPb0WnPpxH3oBPRlE0v3lHTltO1JmoXX+5DMau9sHTa24QPwm+8VlUk8LfPj+SGF/X6
- 27A4=
-X-Google-Smtp-Source: AGHT+IHjnfGDni40d2qtTEs+JZ6x5LD5lZsG4mihIA+BzalKmUnYJmt2jwS2Gk/5iM4+Z7uDJn703w==
-X-Received: by 2002:a05:690c:7448:b0:6e2:2c72:3aaf with SMTP id
- 00721157ae682-6ea64bdcd0emr10655507b3.31.1730398264979; 
- Thu, 31 Oct 2024 11:11:04 -0700 (PDT)
+ bh=n8Lddzz/doCXEGeUEw2spLhKjPEWpYR6eAwd09SBuyk=;
+ b=vMEfK3ob8+pRiW1n19sCjQWCjPqdCEcwq60L5zuHgNvodfAExipegpR3A73nn5SNeF
+ HMlc0T7kaNlc3HK/Tk6SMmJAhwUCHJqxkMXBVLJbO4UspCrMLM8qcrz+RsHH18l1pfNi
+ XianOrfdoYQdxRzD31x3f43FPLrizVHo8lDpIjblKQ4hC5K7sqNVeE4CKxOrGQ7btZeE
+ RaW9sQaquJLcaZRNn5QlkVFcKRB2BQv1ClTSIo7teRg54u7ZJDfyoIPVCIdinqcdsd6H
+ poaw+mPRzm67EadQnN/ZbKYyrObrRPk7713JIap3qvE+E+196o9cRrmFobnEZIGU7tWF
+ mLIw==
+X-Gm-Message-State: AOJu0Yze/2EccdJYO9/UFzFNfJ+JHeb7k0KTw7Zq9dfawWczGpF8FD9X
+ aAhj/Lhy96DVqr5rSI6cyJT2u+4mE/uR4voaJpLiijAPaUg1l61gxpw7r4HOiAo=
+X-Google-Smtp-Source: AGHT+IFbK/1cTg3QTr9sHAsxJkLkZlD1Ts/HVTYo3B6NlapXuz+japUa/RRicn8WjBR5/LOj8xQyyg==
+X-Received: by 2002:a05:620a:2445:b0:7b1:5680:164b with SMTP id
+ af79cd13be357-7b193efa878mr3157007185a.26.1730398448892; 
+ Thu, 31 Oct 2024 11:14:08 -0700 (PDT)
 Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-462ad0a004asm9979521cf.23.2024.10.31.11.11.02
+ af79cd13be357-7b2f39eb7b4sm93653885a.16.2024.10.31.11.14.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Oct 2024 11:11:03 -0700 (PDT)
-Date: Thu, 31 Oct 2024 12:11:00 -0600
+ Thu, 31 Oct 2024 11:14:08 -0700 (PDT)
+Date: Thu, 31 Oct 2024 12:14:05 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] test/cmd/mem_copy.c: Use CONFIG_SYS_LOAD_ADDR for base
-Message-ID: <20241031181100.GW2558755@bill-the-cat>
-References: <20241030003649.3506474-1-trini@konsulko.com>
- <CAFLszTgPA0vGCWLw3m_KHVCs7=hCouOGhSeZAx3XxWBHtP7oFg@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v9 03/11] sandbox: Add a -N flag to control on-host
+ behaviour
+Message-ID: <20241031181405.GX2558755@bill-the-cat>
+References: <20241029192222.362445-1-sjg@chromium.org>
+ <20241029192222.362445-4-sjg@chromium.org>
+ <20241029201400.GJ4959@bill-the-cat>
+ <CAFLszTigOBUyyi9pxpnLpXwhiw5hJfGEb6QeZPh4jesc5x4Rzg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QS3xHEHPMndXmNwT"
+ protocol="application/pgp-signature"; boundary="CjNQLJhDKI3/MFsI"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTgPA0vGCWLw3m_KHVCs7=hCouOGhSeZAx3XxWBHtP7oFg@mail.gmail.com>
+In-Reply-To: <CAFLszTigOBUyyi9pxpnLpXwhiw5hJfGEb6QeZPh4jesc5x4Rzg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,61 +95,69 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---QS3xHEHPMndXmNwT
+--CjNQLJhDKI3/MFsI
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 31, 2024 at 06:51:52PM +0100, Simon Glass wrote:
+On Thu, Oct 31, 2024 at 06:52:33PM +0100, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Wed, 30 Oct 2024 at 01:36, Tom Rini <trini@konsulko.com> wrote:
+> On Tue, 29 Oct 2024 at 21:14, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > When reading/writing to memory we cannot assume that a base address of
-> > 0x0 is correct and functional. So use CONFIG_SYS_LOAD_ADDR as the base
-> > from which we add a bit more padding and being our tests.
+> > On Tue, Oct 29, 2024 at 08:22:11PM +0100, Simon Glass wrote:
 > >
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> >  test/cmd/mem_copy.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > Sandbox is its own architecture, but sometimes we want to mimic the h=
+ost
+> > > architecture, e.g. when running an EFI app not built by U-Boot.
+> > >
+> > > Add a -N/--native flag which tells sandbox to reflect the architecture
+> > > of the host.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > (no changes since v8)
 > >
-> > diff --git a/test/cmd/mem_copy.c b/test/cmd/mem_copy.c
-> > index 1ba0cebbbe04..67eca328777a 100644
-> > --- a/test/cmd/mem_copy.c
-> > +++ b/test/cmd/mem_copy.c
-> > @@ -21,7 +21,7 @@ struct param {
-> >  static int do_test(struct unit_test_state *uts,
-> >                    const char *suffix, int d, int s, int count)
-> >  {
-> > -       const long addr =3D 0x1000;
-> > +       const long addr =3D CONFIG_SYS_LOAD_ADDR + 0x1000;
+> > I believe Heinrich asked that you invert the logic here and add a flag
+> > for when you need the unexpected behavior.
 >=20
-> CFG_SYS_SDRAM_BASE would be better here, since it is the start of
-> memory (0 on sandbox and most boards).
+> Yes, but that is not correct, unfortunately. The expected behaviour is
+> for CI to use the same filename for its efi apps, no matter what host
+> architecture it is happens to be running on.
+>=20
+> The use case that Heinrich mentions seems to be broken on x86_64 now,
+> as I mentioned on the other thread, perhaps due to a recently
+> introduced bug in UEFI or QEMU. Just to be clear, this is not a
+> problem with sandbox. I suspect Heinrich will figure that out at some
+> point and then I will be able to try it too. I would also like to run
+> it on sandbox.
+>=20
+> I hope to get an ARM machine running CI eventually, but I need to get
+> my lab running first.
 
-Why do we want start of memory? CONFIG_SYS_LOAD_ADDR is the address for
-where it's safe to load things to memory and fiddle with them.
+I talked with Heinrich about this in private and while neither of us
+understand why you want this behavior, we'll stop objecting to it.
 
 --=20
 Tom
 
---QS3xHEHPMndXmNwT
+--CjNQLJhDKI3/MFsI
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcjyDQACgkQFHw5/5Y0
-tyz3yAv/fHLW2rh8o+7THK1lTFr+pOBxeIzOKScy6sWtE+KtV5Rlu7wGvy2UHaFc
-FxypMa5mC/xl1hBNn4Xv/+vSEhgHJdQG5eepYxwWztJ1rwj0as9ilIXsfB5WYwOv
-oKfUYos52xXPGbMAlVtP8XAzc1+aptxUaVKuKpOBJTB1SnV87Eoou82uTumVGBqb
-YlhFIQv1XmKPya3mbMY6oawgAUCi4Kmu3xUao8kluZilTMu+r2ZAo+oQbrbeOua8
-FvahnB5dGD9i1xKTMZ6/L2tJU3h5wmkjee7v7RARFkteO8B/COcj+yrF/10AMLJi
-/hqfiB9pzjOo2TEvmiW2LUWukvcxo7Z75TVdq83ZDzO90Uw24uv4s28LJeqp6u45
-Xt2FrxTI2lPAi/I3DeeuYujdt0bKvelGMxnXFmVGaNwy1DLpLgB+o9iB7Jq9ZoU1
-0msXYhE3OTus5ktz9mcFi4A3VK4XLgFJRu/15KIUdtMkJ2howAwUCWQmf7qN3vo5
-y4O1uZoj
-=FJ4N
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcjyO0ACgkQFHw5/5Y0
+tyzfygv/VC327hbVDvgR2DAtDDPOyy+KgVzYYhfyeg8Xjed3bvXQcU4dVe7sIQDI
+0TShsMNJ4CafS4/tgxZ6oldhGoSjIyZcjyDyTXOlZmPkTbv46131cVVbVF+jsYWd
++vseZ7E2tprK2XwcxZKrYpddyWb/+H0MmU1iG973j5HeEthEott7WRccGhwmLgbQ
+6Y3V++A+d7A8ZE4DvtZl/myqAw6evMaQwcI+BiHmTIGAxdAUsEmbCy2tzoBMmTfy
+9Ey3XZfbRu2Bky/29eNdfSYhv+SV90ddHbSHprqtf3Nq56vhJ7h7Y6YrcEqStNY5
+Ll9CxwFR/wSQlca3b60x6JbxuZM4rYVsaIhr/KiNW50OJw7Ij/QI+u6+QFKmpvwE
+DjVrBq5DVoTSuUrL1hlI/yMb2cBHY1wb+fHSCvFvBcuSYwM5y9QMHkOkiKyzv85E
+UxypQscVlGd0EBKjkWQmepqHwi0I1LtchCZ+3Cway7mUNGTzYyXIiJNUdQDvJaed
+wwAvALNz
+=Grgf
 -----END PGP SIGNATURE-----
 
---QS3xHEHPMndXmNwT--
+--CjNQLJhDKI3/MFsI--
