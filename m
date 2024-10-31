@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86B42D767F2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 18:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50AD7D767F2
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 18:03:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B80F892EF;
-	Thu, 31 Oct 2024 19:03:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DCB7988E18;
+	Thu, 31 Oct 2024 19:03:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JLHrWc0r";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i53Q8iQm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 943798931A; Thu, 31 Oct 2024 19:03:10 +0100 (CET)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id C879C892A2; Thu, 31 Oct 2024 19:03:36 +0100 (CET)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E67868924F
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 19:03:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 758048924F
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 19:03:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2e2e050b1c3so1765261a91.0
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 11:03:07 -0700 (PDT)
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-7ea8de14848so902422a12.2
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 11:03:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730397786; x=1731002586; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730397813; x=1731002613; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=B+6OqlGa1SLhBH2ZY5XZeSUt0f7nicRk32D+vyxw6/M=;
- b=JLHrWc0r6GSjCrASnuEnxSYnvWYgedvYTEv4SlvIx8KB84v87xC9eqf+Wynti5822k
- BzSWwfDEig+kAALQNoGrP1+e34l8wdIu0PGjYtvatSKItaoUsLwlofdWAwx5pe7Ns7o1
- HFD0oswOyaANeBBRcxlMGcNLUqDnm/Ovub0QA=
+ bh=QJL1wsBPVN58YJl0ZyEFHoO7/ie+QijWp7zOdcB9dCE=;
+ b=i53Q8iQmvRRfuF4isIdbXVpYYLaQqeCpxHKqBTiQ48hFkBfLLJRD5Ohgs+G0Wn0HDk
+ EhBUp3m6RFolEtYr9qAXuAbtvqd5zPE9dVGWtWU/CbUcO+zX5hIY5CR3BE7ZlDEqrvPG
+ XrSvgoGShhrytUxRzxE6MmB3YQuf3fHz8zx2w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730397786; x=1731002586;
+ d=1e100.net; s=20230601; t=1730397813; x=1731002613;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=B+6OqlGa1SLhBH2ZY5XZeSUt0f7nicRk32D+vyxw6/M=;
- b=mUC/6sUG93tw+F6ez3ncJRGqt56qkCTg/GzVbqJZ3lrPFrJgw2bLRK4S7PjaD8O+xk
- OfePlMcs6XaE9CxZ35Btp74wtYH+yoOo5zpqhSoht7cW34tIl0fxV2rTe3QZsdPolbjn
- 10IfR6Hc2I//DK8KHvoW0na5x8j2KOOg+sutZvkrUzg1c38EkdTw5EknoJueCLtMd4Ic
- mgFurDPUAYNiZ0dImbOjVNRxq2RgRZNyK5f4hJAPfZhV9K0xT7Nkvy7FRFDUiobnduMW
- ANd9XKZrUT7l+G89OuyHPCbzJnhzmhkbFwmNFxul3pKi5v9KE0W5XbHS41Kf1AcoGidz
- e6YA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUkVa1ym5LcMeWkh8iMWZ8hqNcKOzBILdDCkY5+AgGQW8LEyYAQgscx5lH6MvT71CUkM72TU3I=@lists.denx.de
-X-Gm-Message-State: AOJu0YzwxA+rr7359krv6N1ITug5GvdLX3muDbLlnpkwzsCEnIx7qBJ4
- MWb6Vuks1XBTs4iv/J+UyxN4tv1i8aGis5PS8DlI88amSDjBrURXiWdNv9lGvHkDENaS3QJ83uW
- 4xyfUGs+ZnQWhycxTSTEQQtZGgUiq3VVGq5FG
-X-Google-Smtp-Source: AGHT+IHinIL1QriDsmmdb4PGU/ZlTviQcm66/hdPZPeWftepac0SxFBmS0z8fNnxxuxnHul6fsM9D7z6UWyXJXGVdMw=
-X-Received: by 2002:a17:90b:1dc5:b0:2e2:7f8f:3ad5 with SMTP id
- 98e67ed59e1d1-2e94bcb6642mr1305587a91.2.1730397786419; Thu, 31 Oct 2024
- 11:03:06 -0700 (PDT)
+ bh=QJL1wsBPVN58YJl0ZyEFHoO7/ie+QijWp7zOdcB9dCE=;
+ b=bhcSk1lDrZ7TS9srkWTNzpT0AbOX/A8NeegwKlPj2JW8Lrkd/3boJ3OCJ2WIWi6NDH
+ HMgNDMmbX9D1Xguz8AlghbTbbfTc5vHqdZh5i6j1GcqguxH3NeMiu0c5Qi3A4DK7fo8w
+ Q8mnrgB7IYILRMp8C/SMWuMBfftNcZCp7tXN+sF0/7hjIol+0jVQ+jaXa8d5H2IS8ZXW
+ m70E3qCcmZU5JEpKKJXna4URLxa9Ybjzc22K2CbEYTBQjc1KHw3RvHYYDIQs9slMSJqD
+ dP4WO0V0LdvOgL8oDxBLimI9QFn777ENmBpn5Dx7+4N1P0x9ZhN1AoVTrj44UgOqSgEX
+ d3ww==
+X-Gm-Message-State: AOJu0YyxSknw61qgqUaJTKAECNskcwZt/nr50YD7UHC78qKFgHEvd872
+ BkVbWG7u4qhwq0cjvvVn/N8s8xS/b593B736IKwzMQxNMQHGMEVBJ4vkSaX9j+uguX7t997TcMp
+ e9EDVdtzbfl18LRb0K5bjEo3SQvcNxuO3mUA5
+X-Google-Smtp-Source: AGHT+IFJug6+0SGTKJ6XlC6HdY6eOvaruv7LyuedWABETRT+N7PYTweDitP7c+eFnn6Gm09PbT7tZYoMB/fJ5BDEk+Y=
+X-Received: by 2002:a17:90b:2dcc:b0:2e2:7f8f:3ad7 with SMTP id
+ 98e67ed59e1d1-2e93c1595b5mr5218429a91.7.1730397812851; Thu, 31 Oct 2024
+ 11:03:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241029192222.362445-1-sjg@chromium.org>
- <20241029192222.362445-3-sjg@chromium.org>
- <28e1ac54-c813-4b3d-b301-1bd408f29e28@gmx.de>
- <CAC_iWjL7h0qO3g1hVzqKVmxehR=6zd7jUFV=U5ebN5pOa-di=w@mail.gmail.com>
-In-Reply-To: <CAC_iWjL7h0qO3g1hVzqKVmxehR=6zd7jUFV=U5ebN5pOa-di=w@mail.gmail.com>
+References: <20240920060158.106612-1-sjg@chromium.org>
+ <20240920060158.106612-2-sjg@chromium.org>
+ <20240923203512.GQ4252@bill-the-cat>
+ <CAFLszTjT3RZYChMhBxUDsf6YC-7cZfh1_YhuQrin3sRanSO=Xw@mail.gmail.com>
+ <20240925172601.GA4252@bill-the-cat>
+ <CAFLszTjFMRpfwFVPJ=-xqKUu=XbH=hq+yP+N17TuFd2b8+rt4g@mail.gmail.com>
+ <20240927025159.GR4252@bill-the-cat>
+In-Reply-To: <20240927025159.GR4252@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Oct 2024 19:02:49 +0100
-Message-ID: <CAFLszTi0gwjS=YhyDFwb+fJPDYSoLr1HAt8eWuu7qv338K1sYg@mail.gmail.com>
-Subject: Re: [PATCH v9 02/11] efi_loader: Add a test app
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Michal Simek <michal.simek@amd.com>
+Date: Thu, 31 Oct 2024 19:03:19 +0100
+Message-ID: <CAFLszThvvU8uEYSBh_F6NQViNJ+bFr6mMYzd8yrTAwOp9dhLLw@mail.gmail.com>
+Subject: Re: [PATCH v6 01/19] test: Allow signaling that U-Boot is ready
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,186 +87,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Tom,
 
-On Wed, 30 Oct 2024 at 18:55, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Fri, 27 Sept 2024 at 04:52, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Heinrich
+> On Thu, Sep 26, 2024 at 11:36:00PM +0200, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Wed, 25 Sept 2024 at 19:26, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Wed, Sep 25, 2024 at 02:49:56PM +0200, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Mon, 23 Sept 2024 at 22:35, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Fri, Sep 20, 2024 at 08:01:36AM +0200, Simon Glass wrote:
+> > > > >
+> > > > >
+> > > > > > When Labgrid is used, it can get U-Boot ready for running tests. It
+> > > > > > prints a message when it has done so.
+> > > > > >
+> > > > > > Add logic to detect this message and accept it.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > >
+> > > > > > (no changes since v1)
+> > > > > >
+> > > > > >  test/py/u_boot_console_base.py | 9 +++++----
+> > > > > >  1 file changed, 5 insertions(+), 4 deletions(-)
+> > > > >
+> > > > > What happens is that labgrid can also be told to look for and then
+> > > > > interrupt autoboot, just like our pytests can do, and the system is at
+> > > > > the prompt. But this is also what it's like for a system with autoboot
+> > > > > disabled. Do we actually need this patch to achieve the functionality
+> > > > > you want? Doesn't that already just happen?
+> > > >
+> > > > The point of this patch is actually to remove code in pytest, by
+> > > > allowing it to skip all the banner-detection stuff. It does not affect
+> > > > things in Labgrid, since it still needs to watch for banners, etc.
+> > >
+> > > But you can't remove code from pytest, people can and will run the suite
+> > > outside of labgrid.
+> >
+> > Yes, that's right. I meant that with Labgrid the code is not used.
 >
->
->
-> On Wed, 30 Oct 2024 at 18:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >
-> > On 10/29/24 20:22, Simon Glass wrote:
-> > > Add a simple app to use for testing. This is intended to do whatever it
-> > > needs to for testing purposes. For now it just prints a message and
-> > > exits boot services.
-> > >
-> > > There was a considerable amount of discussion about whether it is OK to
-> > > call exit-boot-services and then return to U-Boot. This is not normally
-> > > done in a real application, since exit-boot-services is used to
-> > > completely disconnect from U-Boot. However, since this is a test, we
-> > > need to check the results of running the app, so returning is necessary.
-> > > It works correctly and it provides a nice model of how to test the EFI
-> > > code in a simple way.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > Changes in v9:
-> > > - Update license
-> > > - Fix 'sevices' typo
-> > >
-> > > Changes in v7:
-> > > - Update commit message
-> > >
-> > >   lib/efi_loader/Kconfig   | 10 ++++++
-> > >   lib/efi_loader/Makefile  |  1 +
-> > >   lib/efi_loader/testapp.c | 68 ++++++++++++++++++++++++++++++++++++++++
-> > >   3 files changed, 79 insertions(+)
-> > >   create mode 100644 lib/efi_loader/testapp.c
-> > >
-> > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > > index 37572c82f54..44319729bda 100644
-> > > --- a/lib/efi_loader/Kconfig
-> > > +++ b/lib/efi_loader/Kconfig
-> > > @@ -584,6 +584,16 @@ config BOOTEFI_HELLO_COMPILE
-> > >         No additional space will be required in the resulting U-Boot binary
-> > >         when this option is enabled.
-> > >
-> > > +config BOOTEFI_TESTAPP_COMPILE
-> > > +     bool "Compile an EFI test app for testing"
-> > > +     default y
-> > > +     help
-> > > +       This compiles an app designed for testing. It is packed into an image
-> > > +       by the test.py testing frame in the setup_efi_image() function.
-> > > +
-> > > +       No additional space will be required in the resulting U-Boot binary
-> > > +       when this option is enabled.
-> > > +
-> > >   endif
-> > >
-> > >   source "lib/efi/Kconfig"
-> > > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> > > index 8ec240cb864..7c8b2dd1ad6 100644
-> > > --- a/lib/efi_loader/Makefile
-> > > +++ b/lib/efi_loader/Makefile
-> > > @@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
-> > >   ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
-> > >   apps-y += dtbdump
-> > >   endif
-> > > +apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
-> > >
-> > >   obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
-> > >   obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
-> > > diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
-> > > new file mode 100644
-> > > index 00000000000..a28fc17ce5b
-> > > --- /dev/null
-> > > +++ b/lib/efi_loader/testapp.c
-> > > @@ -0,0 +1,68 @@
-> > > +// SPDX-License-Identifier: GPL-2.0-or-later
-> > > +/*
-> > > + * Hello world EFI application
-> > > + *
-> > > + * Copyright 2024 Google LLC
-> > > + * Written by Simon Glass <sjg@chromium.org>
-> > > + *
-> > > + * This test program is used to test the invocation of an EFI application.
-> > > + * It writes a few messages to the console and then exits boot services
-> > > + */
-> > > +
-> > > +#include <efi_api.h>
-> > > +
-> > > +static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
-> > > +
-> > > +static struct efi_system_table *systable;
-> > > +static struct efi_boot_services *boottime;
-> > > +static struct efi_simple_text_output_protocol *con_out;
-> > > +
-> > > +/**
-> > > + * efi_main() - entry point of the EFI application.
-> > > + *
-> > > + * @handle:  handle of the loaded image
-> > > + * @systab:  system table
-> > > + * Return:   status code
-> > > + */
-> > > +efi_status_t EFIAPI efi_main(efi_handle_t handle,
-> > > +                          struct efi_system_table *systab)
-> > > +{
-> > > +     struct efi_loaded_image *loaded_image;
-> > > +     efi_status_t ret;
-> > > +     efi_uintn_t map_size;
-> > > +     efi_uintn_t map_key;
-> > > +     efi_uintn_t desc_size;
-> > > +     u32 desc_version;
-> > > +
-> > > +     systable = systab;
-> > > +     boottime = systable->boottime;
-> > > +     con_out = systable->con_out;
-> > > +
-> > > +     /* Get the loaded image protocol */
-> > > +     ret = boottime->open_protocol(handle, &loaded_image_guid,
-> > > +                                   (void **)&loaded_image, NULL, NULL,
-> > > +                                   EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-> > > +     if (ret != EFI_SUCCESS) {
-> > > +             con_out->output_string
-> > > +                     (con_out, u"Cannot open loaded image protocol\r\n");
-> > > +             goto out;
-> > > +     }
-> > > +
-> > > +     /* UEFI requires CR LF */
-> > > +     con_out->output_string(con_out, u"U-Boot test app for EFI_LOADER\r\n");
-> > > +
-> > > +out:
-> > > +     map_size = 0;
-> > > +     ret = boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size,
-> > > +                                    &desc_version);
-> > > +     con_out->output_string(con_out, u"Exiting boot services\n");
-> > > +
-> > > +     /* exit boot services so that this part of U-Boot can be tested */
-> > > +     boottime->exit_boot_services(handle, map_key);
-> >
-> > Hello Simon,
-> >
-> > I am not NAKing this patch. But maybe you could rethink if this call
-> > tells us anything new about the correct function of ExitBootServices().
-> >
-> > We already have a test of ExitBootServices() in lib/efi_selftest/ and
-> > maybe we should extend that test to check more.
-> >
-> > By removing ExitBootServices() we could keep U-Boot in a well defined
-> > state which will allow us to run any number of bootmeth tests in
-> > sequence and keep the EFI sub-system in a consistent state.
+> OK. I still think this (and I assume the related flag to tell whichever
+> helper that was that the platform is ready to go) are too implementation
+> specific.
 
-In the interests of trying to make some progress, I will drop that
-line and worry about it later, when we can come up with follow-on
-tests. It is exactly the 'exit-boot-services' call which was stopping
-Ubuntu from booting. But since I don't have any test pieces to check
-what happens in that situation, we can leave it for now.
+OK, but it does have the virtue of working properly on all the boards
+I have, rather than just a subset, without this patch.
 
 >
-> FWIW I proposed exactly the same in [0].
+> > > > Without this patch, we have to tell Labgrid's U-Boot driver to do
+> > > > nothing, so that pytest does it. But that is not a good idea, since
+> > > > Labgrid has a lot more info about the board than pytest has. For
+> > > > example, look at all the SPL-banner-count stuff.
+> > >
+> > > Why do you have to tell it to do nothing? The pytest suite works fine,
+> > > today, if the board stops at the prompt automatically. To be clear, the
+> > > labgrid yaml file I'm using with my scripts has the information to stop
+> > > autoboot in it and it's not causing a problem.
+> >
+> > But if it wasn't causing a problem I would not have invented this
+> > annoying scheme.
 >
-> [0] https://lore.kernel.org/u-boot/CAC_iWjJYqrh6MS50d6MxdStJFGg2pWnf1PHwQ9muYDPmOBP7Lg@mail.gmail.com/
+> Well, I honestly thought it might be a remnant from development that
+> wasn't needed once everything else was done. I do that from time to time
+> myself.
+
+OK.
+
 >
-> Thanks
-> /Ilias
+> > For several boards, by the time pytest gets to see
+> > the output it is too late to press a key and stop.
+>
+> Why / how? Do we perhaps need to adjust the timeout upwards, slightly?
+> Especially in light of the changes you also did to detect a "dead" board
+> and so we don't wait 30 minutes for a test run to fail.
+
+Why / how - because the board prints its SPL banner as soon as reset
+is released, then waits for U-Boot proper to be sent, at which case
+the U-Boot banner is sent .Then labgrid disconnects from the console
+and runs microcom, which connects to the console over ser2net and
+misses some of what has already been sent.
+
+This is actually a fundamental problem, not something we can adjust
+with timeouts.
+
+>
+> > Also, some boards
+> > have a different prompt which is not detected by pytest.
 > >
-> > Best regards
+> > For example:
+> > configs/am62x_beagleplay_a53_defconfig:CONFIG_AUTOBOOT_PROMPT="Press
+> > SPACE to abort autoboot in %d seconds\n"
+>
+> Yeah, I had forgotten that as I turn that off along with turning on
+> other tests via config fragment, on that platform. That really is a
+> deficiency in our pytest version of this.
+
+OK
+
+>
+> > > > Basically, without this patch we cannot use '-s uboot' to tell the
+> > > > Labgrid strategy to take us to a U-Boot prompt. We must just use a raw
+> > > > console with no strategy, relying on pytest to do all the work.
+> > > >
+> > > > I hope that helps explain the problem?
+> > >
+> > > I think I see what you're saying, and it's based on the assumption that
+> > > we'll make everyone either use labgrid?
 > >
-> > Heinrich
-> >
-> >
-> > > +
-> > > +     /* now exit for real */
-> > > +     ret = boottime->exit(handle, ret, 0, NULL);
-> > > +
-> > > +     /* We should never arrive here */
-> > > +     return ret;
-> > > +}
-> >
+> > Not at all. I tested this version of the series again with my
+> > pre-Labgrid lab and it works fine. But I do believe that the hooks
+> > that pytest has are not ideal for use with Labgrid.
+>
+> OK. But, why can't you make use of the labgrid functionality to pause
+> the board? It's the state flag for labgrid-client yes? Dropping that in
+> with my labgrid support would be just a tweak to the console script to
+> check if the board set labgrid_strategy or something, and I think you
+> could adapt yours to that too?
+
+I am really not sure what to say here. I have explained the reality of
+the situation. I have spent hours debugging it and figuring out the
+root cause. There is no other tweak I can think of that will solve
+this problem.
 
 Regards,
 Simon
