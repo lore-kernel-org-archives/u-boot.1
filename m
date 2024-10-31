@@ -4,93 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98033E67485
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 22:38:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45A8FE6748F
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 23:07:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13963889A2;
-	Thu, 31 Oct 2024 23:38:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 77FA288DEA;
+	Fri,  1 Nov 2024 00:07:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vvzo9j38";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="oBHfkhiT";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="m3KQWZFX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B0A8889EF; Thu, 31 Oct 2024 23:38:05 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2835A88E0F; Fri,  1 Nov 2024 00:07:56 +0100 (CET)
+Received: from fhigh-a1-smtp.messagingengine.com
+ (fhigh-a1-smtp.messagingengine.com [103.168.172.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B89D889A2
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 23:38:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E27088DEA
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 00:07:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6cbce9e4598so8460766d6.2
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 15:38:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730414282; x=1731019082; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=o5xfSuHjJya1yp3MGV1ay5FScKsdxIrcTJCSPMx25sA=;
- b=Vvzo9j38OcLAcfSC0xmHz1LGeUm1LbmXt7+I0J0hP1TJQVEu1LdPxANgdfysZDOiPo
- n1QoWWR6Sjs0BVBPylX1o4W9nlZU42aG7DU1imGjDqFh9ORSK7XjypE/ZIDO+We0LHto
- I1AdkOL+xyFAow4Zzd8KgoVq6LvWhjXZ3k2BY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730414282; x=1731019082;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=o5xfSuHjJya1yp3MGV1ay5FScKsdxIrcTJCSPMx25sA=;
- b=PKizbo2xH0OsvYR4eqaqD10DtUTuDXnnLlU6LkA1xuOu52mPSzjJbb0pq1aCPu+cbD
- OPXkNC0ABJEsMWMdHVXh314cBhPxLzS5IrBfggN958cc0iB6iB3cjypIk7xrDxB/Ekju
- 2+2I91DrHX/ghUfu7JPpJarMWag5tTHetbO0qYt+IY9Bvn7ETScw+Ck/L5LNZyX9Lz35
- cIM2y+GuSm4fhx5ZpvnN+RNLf4ujnYMLN2uJWsCHHNETP8C+hjiqt7GD+P4JIG4JgfHV
- /EzjdPw1DaBKnJ+FGPU2s1uW7LdmbWr/w67QzuA4KoCtlfZRvqTzE81wbeKEOtxGFALu
- NBeg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWktLujiOmnSV1Iha47BahzhpVgg5pYxBSWMayud0H9mRHToEVeBvk4eyk/3EbMVpJztv/9dj8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzqlaLbCGCO35y3h2gO3jCiUerciaMD7JXtbORmbVzQ/4yAm0by
- /WB6c7UfViZamaeJP7kpWAzGHtXEh/417SEghLjbzEdzBoXmnwUi1RHBIVINrII=
-X-Google-Smtp-Source: AGHT+IGXfxHjclYhNmc9d4A3zwnL7KTrqR8P3RLFLeDm8ctddC45ubgFF6CzBhBkI4zNkpOBvU6GuA==
-X-Received: by 2002:a05:6214:4a86:b0:6cb:255e:61a1 with SMTP id
- 6a1803df08f44-6d35c188ff3mr18315256d6.41.1730414282085; 
- Thu, 31 Oct 2024 15:38:02 -0700 (PDT)
-Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d354179f1csm12575736d6.124.2024.10.31.15.37.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Oct 2024 15:38:01 -0700 (PDT)
-Date: Thu, 31 Oct 2024 16:37:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Levi Yun <yeoreum.yun@arm.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH 10/15] efi_loader: Add support for logging EFI calls
-Message-ID: <20241031223757.GI3600562@bill-the-cat>
-References: <20241028124815.47262-1-sjg@chromium.org>
- <20241028124815.47262-11-sjg@chromium.org>
- <A00AAF0F-5E6B-4DE3-B18A-DD564026D3A8@gmx.de>
- <CAFLszTj9EhCKkxjBotx-CvuKjuV2T7C6CyJTpHB59nerLavKjA@mail.gmail.com>
- <00941595-FD52-44B3-B618-CCC43F7342CB@gmx.de>
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from phl-compute-05.internal (phl-compute-05.phl.internal
+ [10.202.2.45])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 3F47C1140128;
+ Thu, 31 Oct 2024 19:07:51 -0400 (EDT)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-05.internal (MEProxy); Thu, 31 Oct 2024 19:07:51 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm2; t=1730416071; x=1730502471; bh=Ms
+ fYyqNyNn6wcfxl+6IM/K56OGGrWNoakg0hEqPm4mM=; b=oBHfkhiTZqSN937tFH
+ CSs3x3InaTz1e4gEcjIzvshxk8lu72vyhslM20fNTw0tcAJS7CF+3rbie0GHjxKe
+ zX9qw07As89NfxAm1ViGenYUQFY5w7M+qM/E2fIfOlrWdC8vl/c4lxxvQAEsmhZW
+ 1E+2fhtbtY4+pXSZvJLqe6Hscgg0JLfmuh9wpOp50CEMgqpB1VKADqlYO+ABOSTB
+ 4SMrhba4DU4imUEepJAuO/6m7cmnF9l13iOLN9FG563tmVxswF9vhT3ZM2Oy90lk
+ gYN166MiDx9KCagjoTtqbag93/zDxfMXXacg/xuCSLzgz8Cds0NMWOXZ6HMRNM2y
+ Q/TA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm3; t=1730416071; x=1730502471; bh=MsfYyqNyNn6wcfxl+6IM/K56OGGr
+ WNoakg0hEqPm4mM=; b=m3KQWZFX91PiC2mMENjF+qkndxiW2XsJRJkxp+gQ3NhH
+ EBIa6m34+JGoSAXC2ijBWFngLdkhwGPu5OYM2Z27P09A3djz6q4ey+alrEllp1Gq
+ 8i705crTGiWnvrIU0SVWblpT7NfOLGdL2HVeAW4Tb/+5osUiI37vgSJkdv7Gl91G
+ hr8jTAPvmEokG9pAEETz6sPOkI72CajToTO5HuhihMjuZt2t0qoFK+t+Fow6uUWW
+ oo9mJCV2IfQ+zE08nrqK/4iGqsuocUm0VcbEdAFw/lCqpA6nOIjVu6zzXi4skr1n
+ ZI5Fw6lZCyS8MMEO1kYfhnSWvhWySzUVeOol1GfyFQ==
+X-ME-Sender: <xms:xw0kZxaM5GiGrpxOuq8ZOFf06XZW_YeKcUtlFkw2l34peMQ-SEmxZw>
+ <xme:xw0kZ4aFaX-pUzwj-_9vgS8MIdG00q0EcaWQ3lFR8m9srBBFuYxTtY3qfm3y-m9uc
+ KcGwN-kVw0XC9NSv9A>
+X-ME-Received: <xmr:xw0kZz-WzFDBuvoFwMZAKlhAVVX5NnAJknOy08AMZ2jSM1iG57fZVPVI8_CLMoCecUsUZcBrrZ9K6gI9z14pmNIriYDoltJI-hc>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrvdekkedgtdehucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
+ rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnh
+ htshculddquddttddmnecujfgurhephffufffkgggtgffvvefosehtjeertdertdejnecu
+ hfhrohhmpeflrghnnhgvucfirhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecugg
+ ftrfgrthhtvghrnhephfdtueduleejffduvdehkeeutdefhfdtvdeiieegheffleefvedv
+ hfeggeegffefnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
+ homhepjhesjhgrnhhnrghurdhnvghtpdhnsggprhgtphhtthhopeeipdhmohguvgepshhm
+ thhpohhuthdprhgtphhtthhopehkvghtthgvnhhishesohhpvghnsghsugdrohhrghdprh
+ gtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopeighihp
+ rhhonhdrghhlphhksehgmhigrdguvgdprhgtphhtthhopehilhhirghsrdgrphgrlhhoug
+ himhgrsheslhhinhgrrhhordhorhhgpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhs
+ rdguvghngidruggvpdhrtghpthhtohepjhesjhgrnhhnrghurdhnvght
+X-ME-Proxy: <xmx:xw0kZ_r-D5_KTS05iBjOehC_f_Ae79zxas4Zzkb9d4duy4D85pjSXw>
+ <xmx:xw0kZ8rwny-QEHGXNNzY9srICLemyeIMFKReeTiv9wq2jtVLiT2XTw>
+ <xmx:xw0kZ1SejaA1tslYKvpJuitGxiluYKnBAAaZo7gnsCXyjFbm-j7y9w>
+ <xmx:xw0kZ0pzmdj58RF0B2ENU3SXV0JKG0Z_WnAINbAV7zerWOzaojkezw>
+ <xmx:xw0kZ9cihdAKMNxfWsk-pp6KhA2xF5e9IfsAi9igBycP0f_rna95R59e>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 31 Oct 2024 19:07:50 -0400 (EDT)
+From: Janne Grunau <j@jannau.net>
+Subject: [PATCH 0/2] Fix device removal order for Apple dart iommu
+Date: Thu, 31 Oct 2024 23:48:00 +0100
+Message-Id: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8T93rPblaEHTZ3wy"
-Content-Disposition: inline
-In-Reply-To: <00941595-FD52-44B3-B618-CCC43F7342CB@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACAJJGcC/x3MQQqDMBBA0avIrBtworHiVUoJwYw6UJMwqSKId
+ ze4fIv/T8gkTBmG6gShnTPHUICvCsbFhZkU+2LQtW6xblBxXNfNupR+ZL2Tv43iyyLMypieOt2
+ 90aCG0iehiY/n/fle1w2f1ruaawAAAA==
+X-Change-ID: 20241031-iommu_apple_dart_ordering-558e62671512
+To: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=824; i=j@jannau.net; s=yk2024; 
+ h=from:subject:message-id;
+ bh=LiXKjFyturHNnI1p+Cn4BwXjEsJNBiXFLU+Hx4crCgs=; 
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhnQVTgUFS5Xdx+ZbLe35/tjv2Me1fGseG599EDn/NZPAh
+ Pme187zdpSwMIhxMciKKbIkab/sYFhdoxhT+yAMZg4rE8gQBi5OAZhIgTfDd5/U7Mm5Uqzpk9wW
+ SV2f2BOWPyHVqDTQo+TVhlWmVzRVGP4XRDsVtVbU3tkZwG0z79ieDdaxjSfqtS88ydwwdZZK/Hk
+ +AA==
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,75 +121,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Starting with v2024.10 dev_iommu_dma_unmap calls during device removal
+trigger a NULL pointer dereference since the the iommu device is removed
+before its user. The sparsely used DM_FLAG_VITAL flag is intended for
+this dependency.
+This series adds it to the Apple dart iommu driver and implements the
+two phased device removal to the EFI loader.
 
---8T93rPblaEHTZ3wy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+Janne Grunau (2):
+      iommu: apple: Mark device with DM_FLAG_VITAL
+      efi_loader: remove non vital devices first
 
-On Thu, Oct 31, 2024 at 11:30:58PM +0100, Heinrich Schuchardt wrote:
->=20
->=20
-> Am 31. Oktober 2024 19:01:47 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >Hi Heinrich,
-> >
-> >On Tue, 29 Oct 2024 at 23:32, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
-rote:
-> >>
-> >>
-> >>
-> >> Am 28. Oktober 2024 13:48:01 MEZ schrieb Simon Glass <sjg@chromium.org=
->:
-> >> >The current logging system suffers from some disadvantages, mainly th=
-at
-> >> >it writes its output to the console and cannot be easily reviewed.
-> >> >
-> >> >Add a dedicated log, storing records in a binary format and including
-> >> >the result codes and any return values from each call. The log is bui=
-lt
-> >> >sequentially in memory and can be reviewed after any EFI operation. It
-> >> >could potentially be written to media for later review, but that is n=
-ot
-> >> >implemented so far.
-> >>
-> >> An EFI specific solution is not a good approach as it does not scale t=
-o other parts of the code.  Please, implement a log driver to collect the m=
-essages that you are interested in.
-> >>
-> >
-> >I can do that too, but it isn't as easy to programmatically parse. I'd
-> >like to track what calls are made and understand better what is going
-> >on when Ubuntu boots, etc.
->=20
-> What makes calls to log_debug hard to parse? We have __FILE__, __LINE__, =
-__func__, and message text available as individual fields.
->=20
-> What information are you missing?
->=20
-> For tracking function calls we already have a trace capability in U-Boot.
+ drivers/iommu/apple_dart.c    | 2 +-
+ lib/efi_loader/efi_boottime.c | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+---
+base-commit: 1d147b74f437fb0e85821e8271fe52bc5fd30194
+change-id: 20241031-iommu_apple_dart_ordering-558e62671512
 
-Integrating EFI_LOADER with existing U-Boot logging / tracing
-infrastructure sounds like a reasonable path forward to me.
+Best regards,
+-- 
+Janne Grunau <j@jannau.net>
 
---=20
-Tom
-
---8T93rPblaEHTZ3wy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmckBsEACgkQFHw5/5Y0
-tyyKiQv/dkQ3hQamVbmiFZgMsEUT0QU4yICpBoRo0M+RAZzRe/L8xvsHs5ohaXXz
-1fFhhiiyEtcRLQG2vZ3QBBopZ2CIaEV9hrkLhAkIilSS2ZKeyOUeOc0geD8kjNDa
-AzSFgAXSm4jVQPmMoocs9wE2bro7UMNDCDIs3z29PH8frMJv6TuiZV/HdLwAdsr7
-KJEpJ48YRq9BpRgqfT90LGPWQtsBHxSibV3noVV8QNuPLQezR1t/H/IJZEgCZE3h
-MG4UeKkS5aCpd5q5z5qsnQscJKzZ/K+TSaGhxxS+M9+j8t0dUe9b05FQy6iybps9
-AKzcs6XnpG7FlqrZaCTY/NA/3PkrdnPOiLUMK2T4lVlsL+WKI4jaRnzWLrR90ggB
-GVEggXgzg270r33HeOv9SBOaJMqzSyk8tH1IOaaXWw64SJnDY1hKPp7G505mJVE2
-aBBMHtZ/tCNHqiilsmF1E2QUqds3La6Wo04XNoSbQPIAtMKxrqM2NnlxUa+7EE4E
-Fs6SaWu1
-=MC4C
------END PGP SIGNATURE-----
-
---8T93rPblaEHTZ3wy--
