@@ -4,77 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C4C3E6748A
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 22:19:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E958EE67485
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 22:31:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D5DA88E0F;
-	Thu, 31 Oct 2024 23:19:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3C74C889E9;
+	Thu, 31 Oct 2024 23:31:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rad7qIua";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ZCn1E1YK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C52F088E41; Thu, 31 Oct 2024 23:19:08 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 254DA88E0F; Thu, 31 Oct 2024 23:31:15 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 011CF8897F
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 23:19:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CD0B881A5
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 23:31:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6cbe9e8bbb1so9559936d6.1
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 15:19:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730413145; x=1731017945; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=C8ARmKe/GAIDDlmUj/ODsNQ7wZ494W/KvHPG1r3fdKg=;
- b=Rad7qIuaJuzYELhKoNxo723xOxDSZgbARlFcTfRz4876FeDA+4eSXNBWxHDaRmWEkl
- tEuJ0QugyWOeWKoYjDxUzYKY65/GIEMasDSaKvH6KtPvv6/GTRjHKmx0/nKExIx0/q+v
- HctFmu/VxN/vQTUmGyr2AUAPnWIV6SSFqFoxw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730413145; x=1731017945;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=C8ARmKe/GAIDDlmUj/ODsNQ7wZ494W/KvHPG1r3fdKg=;
- b=W8fT1RZCL75IWXDU+jQs8JtMAkI2ME4+n0W0jM4gRAez7lX8yIamVZhz5y21/wccUl
- M8nYuQ2/iSqg9E70R2niziLGZXe4uRx8XSaecIP4kV2q0etziBK4mAF9ZLNVvkmeKgxl
- VwBmNVrv0O7znLpIBBRIjFl+fHjZcQShOw3rQVoR4LUrlXSdme36MiOAHCUULbUU3qZ5
- cwpJI240nFBDYu25B7I/eNlFjjMu7w8FyS0lXOlZaXKGJjF6pTLefk/SBBMt2ZiE0/q1
- Vxyh5JLBhzHsmtnVGrfnT/U7vxXewFaj1oe3LCKSm8rcllAfCev818WoTsHDEnLYtahY
- g9sA==
-X-Gm-Message-State: AOJu0YxFVaRo9/HeD+TW2BRK90sBlXGxS4zTjsU3igVoaXhaVnCCYLhc
- YYPwWqO+15AbtjBHzaFUUWzK/IxdQdCKvteGdqsdMP7vMHhBZON9SAQcuV+gLp0=
-X-Google-Smtp-Source: AGHT+IF7d4lUmLAzA8atrEA4B6XsTcFCOQayECuL2mZJ33AjOIxNIHGJTn2/xCenVZk7EpGF9QgjFA==
-X-Received: by 2002:a05:6214:3981:b0:6cb:d538:cc48 with SMTP id
- 6a1803df08f44-6d35c118ba5mr15403406d6.22.1730413144814; 
- Thu, 31 Oct 2024 15:19:04 -0700 (PDT)
-Received: from bill-the-cat ([187.144.104.2]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d353f9f451sm12375956d6.25.2024.10.31.15.19.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Oct 2024 15:19:04 -0700 (PDT)
-Date: Thu, 31 Oct 2024 16:19:01 -0600
-From: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1730413865; x=1731018665; i=xypron.glpk@gmx.de;
+ bh=HIU1+wamuJC+1r8/fJoWOeDw6FZQ9bwZt7ArLEZYOEQ=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=ZCn1E1YK7f72YRNq4ay1sjQBw/DL8AhgpSFNfMI6gw0yETUaqEuL69ei+Jxa0kNe
+ LS3iBL59A3N1VSIsXBWHNilSjFfsQrt6DUpX6ZazfHHGnBQN5Q3k/bxtMaWn7+G3h
+ 1fDij75PWFfPFPepjMGhn4+3Aa6ACtg9OeNhngxjRkSMdaFvroTeSduy6Y0Ujr4sT
+ Ne+iI3w0q0Yzn8Kpiv779AYHroagWc9XlqDx09I7+POv9YHuGEI39nL88tTYrnLYa
+ 47kwdIEN2tICSGKd+B5uvfXNlqS1wb3IvsgHZsYtSdPL4Rp/jjy09orNb4YPkH23I
+ nr4IYPWtKj4wvon53A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([87.215.50.114]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MbRk3-1tiSPp3Fgv-00h7SP; Thu, 31
+ Oct 2024 23:31:05 +0100
+Date: Thu, 31 Oct 2024 23:30:58 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v7 04/11] test: Introduce the concept of a role
-Message-ID: <20241031221901.GH3600562@bill-the-cat>
-References: <20241010015145.1977999-1-sjg@chromium.org>
- <20241010015145.1977999-5-sjg@chromium.org>
- <20241029235313.GE2558755@bill-the-cat>
- <CAFLszTjh7bxon5mvM2y1cfAA40UqdJVq6G=aR_k7dKr1OZXU9A@mail.gmail.com>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Levi Yun <yeoreum.yun@arm.com>,
+ Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Robert Marko <robert.marko@sartura.hr>, 
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ =?ISO-8859-1?Q?Vincent_Stehl=E9?= <vincent.stehle@arm.com>
+Subject: Re: [PATCH 10/15] efi_loader: Add support for logging EFI calls
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAFLszTj9EhCKkxjBotx-CvuKjuV2T7C6CyJTpHB59nerLavKjA@mail.gmail.com>
+References: <20241028124815.47262-1-sjg@chromium.org>
+ <20241028124815.47262-11-sjg@chromium.org>
+ <A00AAF0F-5E6B-4DE3-B18A-DD564026D3A8@gmx.de>
+ <CAFLszTj9EhCKkxjBotx-CvuKjuV2T7C6CyJTpHB59nerLavKjA@mail.gmail.com>
+Message-ID: <00941595-FD52-44B3-B618-CCC43F7342CB@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2C31Ik+2ClZYXUOn"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjh7bxon5mvM2y1cfAA40UqdJVq6G=aR_k7dKr1OZXU9A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:0g0E+qP0kULFKOEsT7BFQK0ZSJSppuUoV0s8hiXO/AkctJX97hH
+ PY7im3NlFjoslO8nCnzi9BcmssPvbJACnmJIKWL61vP/hkeVtiZ9TUdIOz8uJAhLKT7qywz
+ OAE8bfPdRzYFqUd3mYUbH+4mbQkEfqYqhFzY/einwGI6lw4dyFIT+2x200HoYKkSBEy36j0
+ IEnqSxpXKzLNdoNfQLrAQ==
+UI-OutboundReport: notjunk:1;M01:P0:+cJUJt9hVak=;yVATLtoMXWQwcY5A/zPsjDx2rnm
+ +jMvnT3QPIBDxDEZ69je/Qh60++n95nP2w12ikU0FiftLNX0LbzPdIIz7Fm8kYvnAfsirleUO
+ hjyhxHNDdOap7uYJGZPW8vMxn8EX3UKlgLLH3PrYSho+AyZwtgbttjlKQYG9b9NRnfx/z1XSZ
+ mwF2Cp8cCWj/TUjHaIxA3YxW+C6Yg6jfs+gPJzTm5u5sYvVD78vxb5sZgvskn3EofFkdneZ6p
+ 2eBP7hHbsJQIvRtDel9eF+qV3qsapLZJaYy+8AHQRwx3G7vxo44fsOAESipen5en7jtpZV5zQ
+ DiGCH6v6gICNYI/8wKLkZiC84I6wqnZDrg/jCwUOGKuDphdIC5yTq/fGAkRTnzckwqLTZILgP
+ tcCfCoBuQkDeTTrae/Eb5oL/svrcainYJKk+XPUv/wwKOTdakQfzO6CcOHxAbfaE3TpVud6A/
+ sjLExQDT0F7u1Ms2O9lokSBWVGuHG3jLxjWX84uFyP1hzwhBdSGjDltmOE1ggRMW2Z+lBWEoK
+ +EQKGiRuTUMeoh5JhV2bckqcuGQ432wmpnz3ZIq8NYE8/SAK88JRovZktOo6MdeO2i6MKNgeD
+ HtmzzVvtDdYhRqq6wyPACxEjnh+STu3b0+5XlrLpOidnVH/pHuqR9zQUUvYSl+sd4UqwulacY
+ KPW5Pr/Zh977IHmW2SA/WHwxjMAKbU+AXePdU2vKwk1f3tnorYV0ApzSJikfaieyRTX2pB5Ah
+ d8zdmIM60ZxYhyfkIOzOznWqLiXQb7EL9VV4dIzAE6BgX0Z6EM61Nszfuw1tkuXy7UVuy6ew0
+ lcWRFSXfLVtC1GrHWioVqUNg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,77 +103,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---2C31Ik+2ClZYXUOn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 31, 2024 at 07:01:56PM +0100, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 30 Oct 2024 at 00:53, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Oct 09, 2024 at 07:51:38PM -0600, Simon Glass wrote:
-> >
-> > > In Labgrid there is the concept of a 'role', which is similar to the
-> > > U-Boot board ID in U-Boot's pytest subsystem.
-> > >
-> > > The role indicates both the target and information about the U-Boot
-> > > build to use. It can also provide any amount of other configuration.
-> > > The information is obtained using the 'labgrid-client query' operatio=
-n.
-> > >
-> > > Make use of this in tests, so that only the role is required in gitlab
-> > > and other situations. The board type and other things can be queried
-> > > as needed.
-> > >
-> > > Use a new 'u-boot-test-getrole' script to obtain the requested
-> > > information.
-> > >
-> > > With this it is possible to run lab tests in gitlab with just a single
-> > > 'ROLE' variable for each board.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> >
-> > Aside from the "look ma, only one conf file" trick, I still do not see =
-how
-> > this differs from the typical board/id system we use today. One can
-> > easily make N symlinks to the generic conf file.
->=20
-> You can still do that if you like. I have always found that approach
-> confusing, so I prefer the configuration to be in Labgrid. It also
-> allows me to connect to the boards using an interactive console,
-> something that isn't possible without some kind of mapping.
+Am 31=2E Oktober 2024 19:01:47 MEZ schrieb Simon Glass <sjg@chromium=2Eorg=
+>:
+>Hi Heinrich,
+>
+>On Tue, 29 Oct 2024 at 23:32, Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede=
+> wrote:
+>>
+>>
+>>
+>> Am 28=2E Oktober 2024 13:48:01 MEZ schrieb Simon Glass <sjg@chromium=2E=
+org>:
+>> >The current logging system suffers from some disadvantages, mainly tha=
+t
+>> >it writes its output to the console and cannot be easily reviewed=2E
+>> >
+>> >Add a dedicated log, storing records in a binary format and including
+>> >the result codes and any return values from each call=2E The log is bu=
+ilt
+>> >sequentially in memory and can be reviewed after any EFI operation=2E =
+It
+>> >could potentially be written to media for later review, but that is no=
+t
+>> >implemented so far=2E
+>>
+>> An EFI specific solution is not a good approach as it does not scale to=
+ other parts of the code=2E  Please, implement a log driver to collect the =
+messages that you are interested in=2E
+>>
+>
+>I can do that too, but it isn't as easy to programmatically parse=2E I'd
+>like to track what calls are made and understand better what is going
+>on when Ubuntu boots, etc=2E
 
-This is where we get to the point where I honestly don't know. On the
-one hand, there's the position I usually take. Minimize changes that are
-due to preferences and locally wrap things as needed. I have a wrapper
-around buildman for example, for the tasks I need. I have wrappers
-around labgrid. There's a few things mine does that yours doesn't but
-there's a few things your does that mine doesn't. On the other hand, I'm
-sure I'm not optimally using labgrid for managing the lab. My hesitation
-boils down to that your implementation seems phrased / positioned as the
-only way to do things. And no two labs are alike.
+What makes calls to log_debug hard to parse? We have __FILE__, __LINE__, _=
+_func__, and message text available as individual fields=2E
 
---=20
-Tom
+What information are you missing?
 
---2C31Ik+2ClZYXUOn
-Content-Type: application/pgp-signature; name="signature.asc"
+For tracking function calls we already have a trace capability in U-Boot=
+=2E
 
------BEGIN PGP SIGNATURE-----
+Best regards
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmckAlUACgkQFHw5/5Y0
-tyyzsAv/S+lGfIsepEFvX7037qG3j5wRP7CgTLN571HPrumQLPTvYgcZTgRgc5RZ
-Puld8FrvHwOZhj0YAQsXoOB0f3ieZ9DNCFhsPO1rHG2q8gquSmZybzgJ9pkshdaJ
-Iq525wq03O1MK4IcK3UX0U7LRWPAL++dMR4cQB+Ti1/ZjDoJqA2CBjScUmpMLN9t
-8J96dhJGLC6gP7o7KXnm3W1rDcEZQ/OJKA4I7Qe2ifGgzeEZgxTQ/VJ+zMhJe+x9
-OKuXRzYtpJ5mvzmczifaUc1HUqTv5vqZDk31VH1UGDtUt33phrWwNr+wEJk0Vl3V
-NSKlNFUcO53NRgcwGtNtKT3dvshqp4DnyIdQMtG80okDamsQmObve08PCVRk7sRZ
-wRm9J5KaEDP+3DJYB+m4zMILCaGzI0bvG/7ZN6mkODX2dZcXq3nA+qbRP4mOEDmz
-b5IGBGsS7WUL85oYtoXIJL/5MlUYlK1OMQSDBZZqDQ+hr34CeNt4QFlM19vcaGx0
-F7BhyALX
-=9wWO
------END PGP SIGNATURE-----
+Heinrich
 
---2C31Ik+2ClZYXUOn--
+
+>
+>Regards,
+>Simon
