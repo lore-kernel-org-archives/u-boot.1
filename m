@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB54E68953
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 04:12:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBC13E68956
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 07:01:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C38689241;
-	Thu, 31 Oct 2024 05:12:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id F020489262;
+	Thu, 31 Oct 2024 08:01:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="MS47JroZ";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="kJgG/Kit";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 024C589265; Thu, 31 Oct 2024 05:12:05 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7958989285; Thu, 31 Oct 2024 08:01:51 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC53589212
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 05:12:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3079A89241
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 08:01:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=moritzf@google.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-20c8ac50b79so13315ad.0
- for <u-boot@lists.denx.de>; Wed, 30 Oct 2024 21:12:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1730347921; x=1730952721; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VQJz1UpD9oyBX1DyAekiGuowxNKyOpfx0h+wb45iIuk=;
- b=MS47JroZrDcREBHplp1Ga7eJIsUtb6zHKOBe0Jw0+gagsq1971n4lH0bE5s6VJ3Hbh
- GwShgwPNd3xy6g1hap+ZhwDF5nnrRax9KR4lqWIGJ/IxLHZgN8Xuw8ghmKmj+ZrRYF40
- jBm10/b8vwsSNKrhYilCrl7Tl4A/82s/ezYSXT9j45LqhyLCrdzhv1iS6+neg2yBBR0k
- 2NCcHpSd7o2kMVweZl3bRsTnAUcCyVFMqDBEcgbCIK57KEOw2LJblSnQWBzdQdRhyhzO
- vOslOnkW+rtVf7DQdVL2kKHhIYw6J1dFVA545N1aCgca/1xkmKy/aZdZ2gD57yJ3utV6
- xWHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730347921; x=1730952721;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VQJz1UpD9oyBX1DyAekiGuowxNKyOpfx0h+wb45iIuk=;
- b=Mhm9SEv3lXeoEDV622UThzKUdUNtW7pYHwHSUOboZfh/zmwHN3gyX4munw5Y7ou/Gp
- DxzH1e+zlBqj/jjFPLIq1QtKsXRlR9XUTLB762b4r9Ta1qVdBUeToXGqyMag5BiMjicY
- 8nbsGNY9MDkRIV+YuZv9KVLkWkTM0wa9zxg1oJFotIl1tz5m00glFT8bojvSC0s2PoMC
- 4ovJeUxj+croGrmh2hFsvuGwt8sAfhkAThrA/CdSHkuyGaHcFpY9C/qF/1i0Vm2B86lq
- dZqo7vAPjqBVtEaEWMtaNqcC69cXKvbW3Nb0AGSxqTRkUX7OzBae6+Omd3VRLo51E7O8
- oPWg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWAJg5EpUmlc2tWt3lv9jWA/Y6WUsg9R5F4UGpl6ngXkYWwVUUfettlS9Y+0tsNZEPerY5MlnY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzKva7DzCvwYEFsh/5/1j2Hfp77jfoUVJamYiRcpwibOxBEQd2C
- 8raYtXk87w1Y1PVu8iv8ilCWJhpByxz0/GrrBMfhzhaxFD+smo4wRYpuv8va4NVjBSUTpljJ22Z
- uGl5gx+D3LvCBVvrvKL+/053T+VoSOcSmvDDG
-X-Gm-Gg: ASbGncv9SuhTluSGIkLkaRx+/QFrfmzvqTTrJ4kGHJRx215xy4k+wwc/M52txYdijfr
- Ut8ufy8SeNgUiE14n4H+7JZUoUFuOKRA=
-X-Google-Smtp-Source: AGHT+IG96UmMxMgXRw9iaRAZ77X9vPr7KPJvhYdGcpreiTIqW9F1d9V8cFJ4MjRxQj3yVblAlqyDZoIwP1h19moQtRU=
-X-Received: by 2002:a17:902:ec86:b0:206:ae0b:bfcb with SMTP id
- d9443c01a7336-2110442e8f2mr1599175ad.28.1730347921060; Wed, 30 Oct 2024
- 21:12:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1730358106; x=1730962906; i=xypron.glpk@gmx.de;
+ bh=9NL8QGnIzOMwWNGCJCxtX8LPpE+K0Kcae/8KAjA0fIU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=kJgG/Kitz0ZVErJMUZucYEq+tz09pY/HE+RGizmywVaeiqYnrNWSn9NWAt+DAH+m
+ BTZKCFABhll3k4/uyjj7/+vf65wgpK8hGe/2DJB8vmp/5v6GFMCFpzaZgGP9LC9d2
+ 5izkDnKCkoEsjKGMAe07GB/rHEMvY12e4ymz3Y3+vhtYJLR17DH+RU5n/i5M+aTiS
+ Qg68vf/SCsreR0pn5+MQPHb0PwHMrqbf3uJW72Hlwr2m5etBCwS2ZC0MIZirXLaIL
+ 3IbkoIsuEN2TL4YOKNDlyxySbWI3KERNvIXIggN8eHiUdHQM0WldQQHlZBLygnr4H
+ TBY7vgaaAoQQAoHlIQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [10.43.6.224] ([87.215.50.114]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N5GE1-1tpP2d0b5R-00sgO3; Thu, 31
+ Oct 2024 08:01:46 +0100
+Message-ID: <4a9ac367-e504-4a6f-8614-0084047274ae@gmx.de>
+Date: Thu, 31 Oct 2024 08:01:45 +0100
 MIME-Version: 1.0
-References: <20241030210227.55952-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241030210227.55952-1-heinrich.schuchardt@canonical.com>
-From: Moritz Fischer <moritzf@google.com>
-Date: Wed, 30 Oct 2024 21:11:48 -0700
-Message-ID: <CAFyOScrZRR8vZK3pVyXOUWwtNKB5dZYzAxVqk4wcP=XL2fXjCQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: pass end address to efi_dp_from_mem in
- efi_dp_from_name
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Moritz Fischer <moritzf@google.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request efi-2025-01-rc2
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:bSgZppQu2wNn0e5qxAitJegX9/ipj3eLgOUcK+zNGLe4pCqZYQu
+ Lx9LuK1CrFZHxvHX7meFvGi6BIzvbVxQ3ygAOjnYVOqDb3SJ3MNR6yGtzjHvYYTHEq3luZU
+ NSp9t0QsIIuwJwlGp434qL4iDJGXbChq91qJ3vcJm2b/GyxbZqBVbF1W9X/q/BIHJ+MvQ4A
+ Bqk1MZQ8X3UuVb06c/GNQ==
+UI-OutboundReport: notjunk:1;M01:P0:K3bIpRLBAPY=;52O0jfhZho+U1jOhXWsRweF5d+d
+ 3ipJ1h78PixRp34SSOoEjoiTDZ1jK4y36WyzKChUe6Ugn8HaVOWugjPRGDLmsaE4aI6J2GDgt
+ hARDyKibf3J/aqvQB6jjkHR11BG5vgI5gRbErGSoq6LFK6e39oJn32v1QapCgkq6o3vWpOo2U
+ iC163ATWqCJMVHeviflUPzkHL8bbbOMUPsRcCHXKCXwssY7y3OQg+YvhZtSAfNBijUi9WEV6U
+ VM1LjXzCBmesKy1yX46HmDsYx/9woP6aCOmb5dH3A+vbHalj0r9Sgovf8a3Xhm+5wd9JTPcAZ
+ +/OVTKPMa+G8j97J4MDo9fqZ0SS5dfQugfuog4wKDW4bjloHYgChulZhZYGCzarSaL5APR3NQ
+ FwJVYXEsEc5VumS9S4tRxnkPJ0KnpbaszB2Wy/oqTEgd+AEz2Kb4kUlb+CU02AsLsAJMt1ePw
+ GCCKEyAC7X8D80DaNec2A/Td4DoKCX6jMz05k3LaRUpXdnbvkCox/2v8jUoFM/ozFTw9XTVEn
+ q9geWDy+gNof0S+x6ANN+vqi5QEUShZvbbbeZZRoruEED1y25wlRKSDXVUWwWDPWqqeNiCWiW
+ JKrBYl2fdEm96EyJ1H/g2HkO+JP7rondI7H3/TCFFXJZ9vYq9Ht/thHYirfyOWyDpYTGqtaQ/
+ FgQdrA6w4CY2z1fgYHlHLue51LUnog9VoaXl1ArSm+a6MgHAo6FilgFJboJ25iOn2PTNkmiK0
+ TTgbvYcWuZ6oFr5Z3c4U2zB3NiQvZBLQGU5O/a7C3i3+aYrM9VCkDNhrnlbPw+O3mHZHuetuQ
+ USNSMY3RNA8rPrR21q/aSBjA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,37 +88,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 30, 2024 at 2:02=E2=80=AFPM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> efi_dp_from_mem() expects the last parameter to be the end address and no=
-t
-> the size.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Moritz Fischer <moritzf@google.com>
+Dear Tom,
 
-> ---
->  lib/efi_loader/efi_device_path.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device=
-_path.c
-> index 9de3b95d073..d7444588aa0 100644
-> --- a/lib/efi_loader/efi_device_path.c
-> +++ b/lib/efi_loader/efi_device_path.c
-> @@ -1073,7 +1073,8 @@ efi_status_t efi_dp_from_name(const char *dev, cons=
-t char *devnr,
->                 efi_get_image_parameters(&image_addr, &image_size);
->
->                 dp =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-> -                                    (uintptr_t)image_addr, image_size);
-> +                                    (uintptr_t)image_addr,
-> +                                    (uintptr_t)image_addr + image_size);
->         } else if (IS_ENABLED(CONFIG_NETDEVICES) && !strcmp(dev, "Net")) =
-{
->                 dp =3D efi_dp_from_eth();
->         } else if (!strcmp(dev, "Uart")) {
-> --
-> 2.45.2
->
+The following changes since commit 5cca0e3f6e0ff17db92476235ea1bb9cd8cbc9e=
+b:
+
+   Merge tag 'u-boot-imx-master-20241029' of
+https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-10-29 18:46:08
+-0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-2025-01-rc2
+
+for you to fetch changes up to 7596d77bc1b6be838e38af3fb4e73dbd0a0a078e:
+
+   lib: efi_loader: Fix efi_dp_from_mem() calls (2024-10-31 06:05:39 +0100=
+)
+
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/23113
+
+=2D---------------------------------------------------------------
+Pull request efi-2025-01-rc2
+
+Documentation:
+
+* include semihosting and K3 boards only once in table of contents
+* include file-system API into HTML docs
+* describe struct ext2_inode
+* update Python requirements
+
+UEFI:
+
+* mark local functions static
+* simplify efi_free_pages()
+* pass correct end address value to  efi_dp_from_mem()
+* fix typos in HII test and eficonfig command
+
+=2D---------------------------------------------------------------
+Heinrich Schuchardt (10):
+       efi_selftest: fix typo 'got languages' in HII test
+       efi_selftest: make HII test data static
+       efi_loader: fix CONFIG_EFI_HTTP dependencies
+       doc: semihosting can only be once in TOC
+       doc: do not include K3 boards twice in TOC
+       doc: update Python requirements
+       fs: improve API documentation
+       doc: include file-system API into HTML docs
+       fs: ext4: document struct ext2_inode
+       cmd/eficonfig: capitalize 'enter description'
+
+Ilias Apalodimas (6):
+       efi_loader: Simplify efi_free_pages()
+       efi_loader: Mark efi_bootmgr_release_uridp as static
+       efi_loader: Mark static function in dumpdtb
+       efi_loader: Mark static functions in smbiosdump
+       efi_loader: Remove unused diskid
+       efi_loader: Make tcg2_uninit() static
+
+Moritz Fischer (1):
+       lib: efi_loader: Fix efi_dp_from_mem() calls
+
+  cmd/eficonfig.c                                |  2 +-
+  doc/api/fs.rst                                 |  7 +++
+  doc/api/index.rst                              |  1 +
+  doc/board/emulation/index.rst                  |  5 +-
+  doc/board/ti/k3.rst                            | 11 +++--
+  doc/sphinx/requirements.txt                    | 33 ++++++-------
+  include/ext_common.h                           | 33 +++++++++++--
+  include/fs.h                                   | 66
+++++++++++++++++----------
+  lib/efi_loader/Kconfig                         |  2 +
+  lib/efi_loader/dtbdump.c                       | 12 ++---
+  lib/efi_loader/efi_bootbin.c                   |  1 +
+  lib/efi_loader/efi_bootmgr.c                   |  2 +-
+  lib/efi_loader/efi_device_path.c               |  3 +-
+  lib/efi_loader/efi_disk.c                      |  4 --
+  lib/efi_loader/efi_memory.c                    | 14 +++---
+  lib/efi_loader/efi_tcg2.c                      |  2 +-
+  lib/efi_loader/smbiosdump.c                    |  6 +--
+  lib/efi_selftest/efi_selftest_hii.c            |  2 +-
+  lib/efi_selftest/efi_selftest_hii_data.c       | 28 ++---------
+  test/py/tests/test_eficonfig/test_eficonfig.py |  6 +--
+  20 files changed, 138 insertions(+), 102 deletions(-)
+  create mode 100644 doc/api/fs.rst
