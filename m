@@ -4,72 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6667AD767F2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:52:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 138C7D767F2
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:54:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA1B188B0C;
-	Thu, 31 Oct 2024 18:52:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7DA2689293;
+	Thu, 31 Oct 2024 18:54:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cU8R7zFj";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="HefU4wbs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD2E588DF1; Thu, 31 Oct 2024 18:52:47 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6D2A788B0C; Thu, 31 Oct 2024 18:54:07 +0100 (CET)
+Received: from bali.collaboradmins.com (bali.collaboradmins.com
+ [148.251.105.195])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1B3E88A1C
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:52:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5652F892C0
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:54:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a9aa8895facso183048366b.2
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:52:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730397165; x=1731001965; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1MicHTaHOg3rNOoHGe16M9V9TBJyKkakJfUJUqEjiZI=;
- b=cU8R7zFjq0zyEawN4V4G57HhOu6ZUPozkGHzeG9nXnsTKi2rpss75dVkAtR4hURO2n
- W9CizcYX4dRlVqnuxo5dvHuFmJ7X7lnHpLYIbWeZAXPusQwFpj92TZc/852sC5uTWCFN
- m8vRRKlC5Kz4iahb01VSaPoioUEEKcQtsnkAA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730397165; x=1731001965;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1MicHTaHOg3rNOoHGe16M9V9TBJyKkakJfUJUqEjiZI=;
- b=ffbucALuUTMxkZ6SO0+no38ZfvAr9dYdILzNZLx/Dk41cwpJsJWDPsqmen0U5jT4k8
- Lr5BggNCWi9HY/McYrkgLNCFJ/NxJAhtVZN8m6B94jD8h+VvavR60Td0avu/HHFg20zZ
- L9hBRHLdwBqcsN9u2CPmCDjmict5A648+EYeEuNFA638YSnUH2kYzXgpCpO8DtrNsiCx
- N1DJyf2jHUZdOyfrSxDiMwqSbTm4F1J0uwqIXdq4Esn60GOMFVaoBf7fESVGDHGpZ65/
- lm9Vtqhnozd8MCuC6D/gHlUS7VrjVHsWOGnAXtNjnOzX2SGQj9EEDe4Tk9f0slMypkR4
- zCwQ==
-X-Gm-Message-State: AOJu0YxtW9g/Jgy4knntGSacByZahq4P1RXACC2tfaJuCZZFa/N7rmj1
- yKj/saKZJ2ZsXDjSc4EAgBE/qItdZma0YZQSThrShTIl8a4CHxyiycNzFzbo90ciwi+kfslLPbn
- C92sCB+3ceVkv8NctsJ37d7m8dPwGb3P4g1kh
-X-Google-Smtp-Source: AGHT+IGBXi/uB/pxTUaq7WbM8ldDxIeAxPZGthBDQVfbo+p55ibSLthVH6woOJg1nvBwSRagoKncxcIhvin4OwOF45Q=
-X-Received: by 2002:a17:906:dc95:b0:a99:fc6b:44f3 with SMTP id
- a640c23a62f3a-a9de61ce14amr1881757066b.44.1730397165366; Thu, 31 Oct 2024
- 10:52:45 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sebastian.reichel@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1730397244;
+ bh=Djmv19inRNW1H5XahSGnal8hXt6BX3BFWCjb9eZe2K4=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=HefU4wbsD57OPy6TX/wLRv7deoshUxAFgrqKFvF5LBHgF3qJDCFCKa8Dk9D/GIEb5
+ ijjGi/rHx/n51fNA7u7oHN/Z3b1A+lGjc6Ux8d76bRohcKcB8SQ6wWJBVFugnCe1xJ
+ fjCt2IsY8reqE73dNUWM5rJHYFbNDMqXhK6cbwXuRtj4zo7cdXKa5JReR5uOgrZzxM
+ tKjZBFJB9jYB39892cmwCKvRTsXQCZb1LZyHpJ5kuVaMBEBMxJrrcdaeXSORfifW84
+ h8TLvpFp9fls77qBD3HgGJ4utRCQqKE6Vt/I9tvq4DnmFdqh9Slp1vt0ufFpdfuXHK
+ EwNBIbJmID2ZQ==
+Received: from jupiter.universe (dyndsl-091-248-210-236.ewe-ip-backbone.de
+ [91.248.210.236])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: sre)
+ by bali.collaboradmins.com (Postfix) with ESMTPSA id DF8BA17E36BD;
+ Thu, 31 Oct 2024 18:54:04 +0100 (CET)
+Received: by jupiter.universe (Postfix, from userid 1000)
+ id 976BF480083; Thu, 31 Oct 2024 18:54:04 +0100 (CET)
+From: Sebastian Reichel <sebastian.reichel@collabora.com>
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>, Soeren Moch <smoch@web.de>
+Cc: Tim Harvey <tharvey@gateworks.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Anand Moon <linux.amoon@gmail.com>, Maxim Kiselev <bigunclemax@gmail.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>
+Subject: [PATCH v1 2/4] usb: tcpm: avoid resets for missing source capability
+ messages
+Date: Thu, 31 Oct 2024 18:50:31 +0100
+Message-ID: <20241031175404.114773-3-sebastian.reichel@collabora.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241031175404.114773-1-sebastian.reichel@collabora.com>
+References: <20241031175404.114773-1-sebastian.reichel@collabora.com>
 MIME-Version: 1.0
-References: <20241029192222.362445-1-sjg@chromium.org>
- <20241029192222.362445-4-sjg@chromium.org>
- <20241029201400.GJ4959@bill-the-cat>
-In-Reply-To: <20241029201400.GJ4959@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Oct 2024 18:52:33 +0100
-Message-ID: <CAFLszTigOBUyyi9pxpnLpXwhiw5hJfGEb6QeZPh4jesc5x4Rzg@mail.gmail.com>
-Subject: Re: [PATCH v9 03/11] sandbox: Add a -N flag to control on-host
- behaviour
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,39 +77,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The current TCPM code implements source capability message handling
+according to the USB-PD specification. Unfortunately some USB PD
+sources do not properly follow the specification and do not send
+source capability messages after a soft reset when they already
+negotiated a specific contract before. The currently implemented way
+(and what is described in the specificiation) to resolve this problem
+is triggering a hard reset.
 
-On Tue, 29 Oct 2024 at 21:14, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Oct 29, 2024 at 08:22:11PM +0100, Simon Glass wrote:
->
-> > Sandbox is its own architecture, but sometimes we want to mimic the host
-> > architecture, e.g. when running an EFI app not built by U-Boot.
-> >
-> > Add a -N/--native flag which tells sandbox to reflect the architecture
-> > of the host.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v8)
->
-> I believe Heinrich asked that you invert the logic here and add a flag
-> for when you need the unexpected behavior.
+But a hard reset is fatal on batteryless platforms powered via USB-C PD,
+since that removes VBUS for some time. Since this is triggered at boot
+time, the system may get stuck in a boot loop.
 
-Yes, but that is not correct, unfortunately. The expected behaviour is
-for CI to use the same filename for its efi apps, no matter what host
-architecture it is happens to be running on.
+For example I noticed the following behaviour on a Radxa Rock 5B
+combined with an affected power-supply:
 
-The use case that Heinrich mentions seems to be broken on x86_64 now,
-as I mentioned on the other thread, perhaps due to a recently
-introduced bug in UEFI or QEMU. Just to be clear, this is not a
-problem with sandbox. I suspect Heinrich will figure that out at some
-point and then I will be able to try it too. I would also like to run
-it on sandbox.
+1. The system is booted up with current code
+2. A reboot is requested
+3. U-Boot TCPM / fusb302 driver sends soft reset and waits for the
+   source capability message
+4. No new source capability message is send by the power-supply
+   after the soft reset
+5. U-Boot sends a hard reset
+6. The board resets, but the fusb302 registers are not reset. This
+   is because of a hardware glitch. The serial pins are high when
+   no data is exchanged. Apparently the RK3588 has protection diodes,
+   which leak some voltage into the power-domain. The Rock 5B serial
+   pins and the fusb302 are using the same 3.3V power domain and the
+   leaked voltage is enough to keep the fusb302 registers alive.
+7. After the hard reset the power-supply sends another source capability
+   message, which is auto-acked by fusb302 (because the register state
+   is kept) even though the U-Boot driver has not yet probed. Once the
+   U-Boot driver probes it sends another soft reset and waits for a new
+   source capability message, which never arrives.
 
-I hope to get an ARM machine running CI eventually, but I need to get
-my lab running first.
+Fortunately the affected power-supplies (I have two setups showing this
+behaviour) support sending a source capability message when explicitly
+being asked. Thus an easy workaround to handle this is deviating from
+the USB-PD specification and sending a Get_Source_Cap message and
+waiting some time longer before doing the hard reset.
 
-Regards,
-Simon
+Note, that I recently added the same workaround to the Linux kernel
+with a slightly different rationale (since it needs to take over from
+U-Boot).
+
+Fixes: 1db4c0ac77e3 ("usb: tcpm: add core framework")
+Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+---
+ drivers/usb/tcpm/tcpm-internal.h |  1 +
+ drivers/usb/tcpm/tcpm.c          | 32 +++++++++++++++++++++++++++++---
+ 2 files changed, 30 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/usb/tcpm/tcpm-internal.h b/drivers/usb/tcpm/tcpm-internal.h
+index 561442090027..4861f4d13866 100644
+--- a/drivers/usb/tcpm/tcpm-internal.h
++++ b/drivers/usb/tcpm/tcpm-internal.h
+@@ -30,6 +30,7 @@
+ 	S(SNK_DISCOVERY_DEBOUNCE),		\
+ 	S(SNK_DISCOVERY_DEBOUNCE_DONE),		\
+ 	S(SNK_WAIT_CAPABILITIES),		\
++	S(SNK_WAIT_CAPABILITIES_TIMEOUT),	\
+ 	S(SNK_NEGOTIATE_CAPABILITIES),		\
+ 	S(SNK_TRANSITION_SINK),			\
+ 	S(SNK_TRANSITION_SINK_VBUS),		\
+diff --git a/drivers/usb/tcpm/tcpm.c b/drivers/usb/tcpm/tcpm.c
+index b754b4dcd0b5..786d92fa4c6f 100644
+--- a/drivers/usb/tcpm/tcpm.c
++++ b/drivers/usb/tcpm/tcpm.c
+@@ -1424,7 +1424,8 @@ static inline enum tcpm_state hard_reset_state(struct tcpm_port *port)
+ 		return ERROR_RECOVERY;
+ 	if (port->pwr_role == TYPEC_SOURCE)
+ 		return SRC_UNATTACHED;
+-	if (port->state == SNK_WAIT_CAPABILITIES)
++	if (port->state == SNK_WAIT_CAPABILITIES ||
++	    port->state == SNK_WAIT_CAPABILITIES_TIMEOUT)
+ 		return SNK_READY;
+ 	return SNK_UNATTACHED;
+ }
+@@ -1650,10 +1651,35 @@ static void run_state_machine(struct udevice *dev)
+ 			tcpm_set_state(dev, SOFT_RESET_SEND,
+ 				       PD_T_SINK_WAIT_CAP);
+ 		} else {
+-			tcpm_set_state(dev, hard_reset_state(port),
+-				       PD_T_SINK_WAIT_CAP);
++			if (!port->self_powered)
++				tcpm_set_state(dev, SNK_WAIT_CAPABILITIES_TIMEOUT,
++					       PD_T_SINK_WAIT_CAP);
++			else
++				tcpm_set_state(dev, hard_reset_state(port),
++					       PD_T_SINK_WAIT_CAP);
+ 		}
+ 		break;
++	case SNK_WAIT_CAPABILITIES_TIMEOUT:
++		/*
++		 * There are some USB PD sources in the field, which do not
++		 * properly implement the specification and fail to start
++		 * sending Source Capability messages after a soft reset. The
++		 * specification suggests to do a hard reset when no Source
++		 * capability message is received within PD_T_SINK_WAIT_CAP,
++		 * but that might effectively kil the machine's power source.
++		 *
++		 * This slightly diverges from the specification and tries to
++		 * recover from this by explicitly asking for the capabilities
++		 * using the Get_Source_Cap control message before falling back
++		 * to a hard reset. The control message should also be supported
++		 * and handled by all USB PD source and dual role devices
++		 * according to the specification.
++		 */
++		if (tcpm_pd_send_control(dev, PD_CTRL_GET_SOURCE_CAP))
++			tcpm_set_state_cond(dev, hard_reset_state(port), 0);
++		else
++			tcpm_set_state(dev, hard_reset_state(port), PD_T_SINK_WAIT_CAP);
++		break;
+ 	case SNK_NEGOTIATE_CAPABILITIES:
+ 		port->pd_capable = true;
+ 		port->hard_reset_count = 0;
+-- 
+2.45.2
+
