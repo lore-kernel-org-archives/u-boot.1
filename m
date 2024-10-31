@@ -4,66 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 972B9D767F2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:52:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6667AD767F2
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 17:52:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 809628929D;
-	Thu, 31 Oct 2024 18:52:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EA1B188B0C;
+	Thu, 31 Oct 2024 18:52:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ihCGps14";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cU8R7zFj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD44188A4C; Thu, 31 Oct 2024 18:52:07 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id BD2E588DF1; Thu, 31 Oct 2024 18:52:47 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6B618929D
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:52:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D1B3E88A1C
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 18:52:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9acafdb745so208820366b.0
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:52:05 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a9aa8895facso183048366b.2
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 10:52:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730397125; x=1731001925; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730397165; x=1731001965; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EyOPzVxrq4J1OFDx9w1MiPoSVhaayO5BB3S2oky0kO0=;
- b=ihCGps14/+26EJKVkYLIl/ALMtARGWqQnmmJS9EiGfe5+1fbVST79gpPmYdAMdt7uL
- iXoiDTpY3vK+UyhymDUjcLNTjf14Il0/byzVzvjO82tDG1qQrItVPAx6EdEcLb1/HqnU
- 9Gtc3PpbUjoOWoFHUG45N/yIyACJ5OhOpSd3Q=
+ bh=1MicHTaHOg3rNOoHGe16M9V9TBJyKkakJfUJUqEjiZI=;
+ b=cU8R7zFjq0zyEawN4V4G57HhOu6ZUPozkGHzeG9nXnsTKi2rpss75dVkAtR4hURO2n
+ W9CizcYX4dRlVqnuxo5dvHuFmJ7X7lnHpLYIbWeZAXPusQwFpj92TZc/852sC5uTWCFN
+ m8vRRKlC5Kz4iahb01VSaPoioUEEKcQtsnkAA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730397125; x=1731001925;
+ d=1e100.net; s=20230601; t=1730397165; x=1731001965;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EyOPzVxrq4J1OFDx9w1MiPoSVhaayO5BB3S2oky0kO0=;
- b=Ls3sbA5417hYNoFDdLffnoahvaTJpwsP4ejiRQNbIBDUqJjIT3QQtwMnFWfyM1ctz6
- UekAfUlhVB09C+DcADU9F4gQs+gQ82WHHnRMUlST1LsfBI9NeXbaFphD+24g0medzrGa
- EGU1ovdrCdDeK38EbVxIRhyr00uDD4amwDfmD/UupBxTyIKODMkUMtTue8BXqcd2XS5K
- gcoKlxe0VRKYHEOpZ4de81J3/vfgECHj8IRjLwt4k2KXJ4D1CxoOfKZwXfyBTp21Rdqy
- xt0DJ4ry4kNzOEpoISujDtsaCoPyO/8NzERw+UJGTfULMAXZn/OtoOOGDcfm1jgdqg/q
- VLkw==
-X-Gm-Message-State: AOJu0YzgKXWNrOxX6s6sx2nVDbVIaA/WMp8wpKsUDVDScJ9u29y8/jet
- x4R0dz2pP9InNnyYHql4ffq32nGVkQozNhtyyx/8Ck0cHN/JZviBGC1CfSpmUXgzZj3JZmPk499
- n9KbIaBdL4D5dq3V+Pjp02bDLpridHbJEPGQ/Gi/ZYJ4b3psgyQ==
-X-Google-Smtp-Source: AGHT+IFfqJXGk0KP26JpkOOaxVmyCiGBiV7H3+73Rk30J3Ftq/HnwDEQQItVBJSjfDucErItmgG+3Hf3sVWU9RypzU8=
-X-Received: by 2002:a17:907:3f87:b0:a9a:cea7:1294 with SMTP id
- a640c23a62f3a-a9e65436316mr73863566b.21.1730397125287; Thu, 31 Oct 2024
- 10:52:05 -0700 (PDT)
+ bh=1MicHTaHOg3rNOoHGe16M9V9TBJyKkakJfUJUqEjiZI=;
+ b=ffbucALuUTMxkZ6SO0+no38ZfvAr9dYdILzNZLx/Dk41cwpJsJWDPsqmen0U5jT4k8
+ Lr5BggNCWi9HY/McYrkgLNCFJ/NxJAhtVZN8m6B94jD8h+VvavR60Td0avu/HHFg20zZ
+ L9hBRHLdwBqcsN9u2CPmCDjmict5A648+EYeEuNFA638YSnUH2kYzXgpCpO8DtrNsiCx
+ N1DJyf2jHUZdOyfrSxDiMwqSbTm4F1J0uwqIXdq4Esn60GOMFVaoBf7fESVGDHGpZ65/
+ lm9Vtqhnozd8MCuC6D/gHlUS7VrjVHsWOGnAXtNjnOzX2SGQj9EEDe4Tk9f0slMypkR4
+ zCwQ==
+X-Gm-Message-State: AOJu0YxtW9g/Jgy4knntGSacByZahq4P1RXACC2tfaJuCZZFa/N7rmj1
+ yKj/saKZJ2ZsXDjSc4EAgBE/qItdZma0YZQSThrShTIl8a4CHxyiycNzFzbo90ciwi+kfslLPbn
+ C92sCB+3ceVkv8NctsJ37d7m8dPwGb3P4g1kh
+X-Google-Smtp-Source: AGHT+IGBXi/uB/pxTUaq7WbM8ldDxIeAxPZGthBDQVfbo+p55ibSLthVH6woOJg1nvBwSRagoKncxcIhvin4OwOF45Q=
+X-Received: by 2002:a17:906:dc95:b0:a99:fc6b:44f3 with SMTP id
+ a640c23a62f3a-a9de61ce14amr1881757066b.44.1730397165366; Thu, 31 Oct 2024
+ 10:52:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241030003649.3506474-1-trini@konsulko.com>
-In-Reply-To: <20241030003649.3506474-1-trini@konsulko.com>
+References: <20241029192222.362445-1-sjg@chromium.org>
+ <20241029192222.362445-4-sjg@chromium.org>
+ <20241029201400.GJ4959@bill-the-cat>
+In-Reply-To: <20241029201400.GJ4959@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Oct 2024 18:51:52 +0100
-Message-ID: <CAFLszTgPA0vGCWLw3m_KHVCs7=hCouOGhSeZAx3XxWBHtP7oFg@mail.gmail.com>
-Subject: Re: [PATCH] test/cmd/mem_copy.c: Use CONFIG_SYS_LOAD_ADDR for base
+Date: Thu, 31 Oct 2024 18:52:33 +0100
+Message-ID: <CAFLszTigOBUyyi9pxpnLpXwhiw5hJfGEb6QeZPh4jesc5x4Rzg@mail.gmail.com>
+Subject: Re: [PATCH v9 03/11] sandbox: Add a -N flag to control on-host
+ behaviour
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,37 +88,37 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Wed, 30 Oct 2024 at 01:36, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 29 Oct 2024 at 21:14, Tom Rini <trini@konsulko.com> wrote:
 >
-> When reading/writing to memory we cannot assume that a base address of
-> 0x0 is correct and functional. So use CONFIG_SYS_LOAD_ADDR as the base
-> from which we add a bit more padding and being our tests.
+> On Tue, Oct 29, 2024 at 08:22:11PM +0100, Simon Glass wrote:
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
->  test/cmd/mem_copy.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> > Sandbox is its own architecture, but sometimes we want to mimic the host
+> > architecture, e.g. when running an EFI app not built by U-Boot.
+> >
+> > Add a -N/--native flag which tells sandbox to reflect the architecture
+> > of the host.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v8)
 >
-> diff --git a/test/cmd/mem_copy.c b/test/cmd/mem_copy.c
-> index 1ba0cebbbe04..67eca328777a 100644
-> --- a/test/cmd/mem_copy.c
-> +++ b/test/cmd/mem_copy.c
-> @@ -21,7 +21,7 @@ struct param {
->  static int do_test(struct unit_test_state *uts,
->                    const char *suffix, int d, int s, int count)
->  {
-> -       const long addr = 0x1000;
-> +       const long addr = CONFIG_SYS_LOAD_ADDR + 0x1000;
+> I believe Heinrich asked that you invert the logic here and add a flag
+> for when you need the unexpected behavior.
 
-CFG_SYS_SDRAM_BASE would be better here, since it is the start of
-memory (0 on sandbox and most boards).
+Yes, but that is not correct, unfortunately. The expected behaviour is
+for CI to use the same filename for its efi apps, no matter what host
+architecture it is happens to be running on.
 
->         u8 shadow[BUF_SIZE];
->         u8 *buf;
->         int i, w, bytes;
-> --
-> 2.43.0
->
+The use case that Heinrich mentions seems to be broken on x86_64 now,
+as I mentioned on the other thread, perhaps due to a recently
+introduced bug in UEFI or QEMU. Just to be clear, this is not a
+problem with sandbox. I suspect Heinrich will figure that out at some
+point and then I will be able to try it too. I would also like to run
+it on sandbox.
+
+I hope to get an ARM machine running CI eventually, but I need to get
+my lab running first.
 
 Regards,
 Simon
