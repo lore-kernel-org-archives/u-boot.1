@@ -4,45 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB88AD767FB
-	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 19:17:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C7F7D767FA
+	for <u-boot@archiver.kernel.org>; Thu, 31 Oct 2024 19:17:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6467D88B9E;
-	Thu, 31 Oct 2024 20:17:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
+	by phobos.denx.de (Postfix) with ESMTP id CF927892CF;
+	Thu, 31 Oct 2024 20:17:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="dwblDb3c";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CDDE89245; Thu, 31 Oct 2024 20:17:09 +0100 (CET)
-Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
- [IPv6:2a07:2ec0:3002::65])
+ id 15D5488B9E; Thu, 31 Oct 2024 20:17:51 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 818A688B0C
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 20:17:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=makrotopia.org
+ by phobos.denx.de (Postfix) with ESMTPS id 4AA0A88B8F
+ for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 20:17:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel@makrotopia.org
-Received: from local
- by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.98) (envelope-from <daniel@makrotopia.org>)
- id 1t6afK-000000001lI-2ZQ0; Thu, 31 Oct 2024 19:17:06 +0000
-Date: Thu, 31 Oct 2024 19:16:59 +0000
-From: Daniel Golle <daniel@makrotopia.org>
-To: Weijie Gao <weijie.gao@mediatek.com>
-Cc: u-boot@lists.denx.de,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>, John Crispin <john@phrozen.org>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2 1/3] menu: fix the logic checking whether ESC key is
- pressed
-Message-ID: <ZyPXqwcbREjnPc-1@pidgin.makrotopia.org>
-References: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=8fe9=R4=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1730402260;
+ bh=kwcxM6rJkwNZPRIJtR8DQd7KCM/WDdlmqVAmoUUIVKs=;
+ b=dwblDb3cRUuxqwTBAEYWeHn1io9H5aPI+0o88Tfj78vsrtCrOkhY+uQazUEgUIv+CbgACoHxh
+ l71eYEiMp8w+PsTZRKQ/2z64kdxgGA0MhP3wc/oX6qY1+ou6lGYUfrhOuFLSQUnbQ3zOhtKMYsS
+ xllCnTYmYafcorZm/wV5BJ+bMIyH+QNAc6XNkXPCQuejYPmeEVuw3Bt+Ecka7YKO72pfNHVbKGi
+ f6Tk4IfjU56lkZ263ffvxr1MMq9/S3xvicsDiq9m+6UiF+8JcvxgCUqSWbBycSSKbQ25XcrtiTp
+ r7ZFvkLQ8yMyhM/JOtj9kZ8MIJze3vl/im432vyS1ypQ==
+Message-ID: <1d28e59e-9e92-4570-960c-ed642731a226@kwiboo.se>
+Date: Thu, 31 Oct 2024 20:17:32 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/1] rockchip: rock5b-rk3588: Enable automatic PCI
+ enumeration
+To: Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Eugen Hristev <eugen.hristev@linaro.org>
+Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
+ FUKAUMI Naoki <naoki@radxa.com>
+References: <20241031180212.116330-1-sebastian.reichel@collabora.com>
+ <e457b630-bd7d-4f7d-bd4e-20f0e3fbc9a2@linaro.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <e457b630-bd7d-4f7d-bd4e-20f0e3fbc9a2@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-ForwardEmail-ID: 6723d7d14382f7c758ed7354
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,80 +75,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Oct 29, 2024 at 05:47:10PM +0800, Weijie Gao wrote:
-> It's observed that the bootmenu on a serial console sometimes
-> incorrectly quitted with superfluous characters filled to command
-> line input:
-> 
-> >  *** U-Boot Boot Menu ***
-> >
-> >      1. Startup system (Default)
-> >      2. Upgrade firmware
-> >      3. Upgrade ATF BL2
-> >      4. Upgrade ATF FIP
-> >      5. Load image
-> >      0. U-Boot console
-> >
-> >
-> >  Press UP/DOWN to move, ENTER to select, ESC to quit
-> >MT7988> [B
-> 
-> Analysis shows it was caused by the wrong logic of bootmenu_loop:
-> 
-> At first the bootmenu_loop received the first ESC char correctly.
-> 
-> However, during the second call to bootmenu_loop, there's no data
-> in the UART Rx FIFO. Due to the low baudrate, the second char of
-> the down array key sequence hasn't be fully received.
-> 
-> But bootmenu_loop just did a mdelay(10), and then treated it as a
-> single ESC key press event. It didn't even try tstc() again after
-> the 10ms timeout.
-> 
-> This patch fixes this issue by letting bootmenu_loop check tstc()
-> twice.
-> 
-> Tested-By: E Shattow <lucent@gmail.com>
-> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+Hi Sebastian,
 
-Reviewed-by: Daniel Golle <daniel@makrotopia.org>
-Tested-by: Daniel Golle <daniel@makrotopia.org>
-
-Together with 2/3 and 3/3 this now avoids dropping into the U-Boot shell
-as long as the menu is short enough. In case of menus with 8 entries of
-more I still manage to drop into shell when holding the arrow down key
-before the last item has been reached.
-That being said, it's already a very big improvement that this now only
-happens when holding down a button traversing over a menu with a high
-number of items.
-
-
-> ---
->  common/menu.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+On 2024-10-31 19:15, Eugen Hristev wrote:
+> Hello Sebastian,
 > 
-> diff --git a/common/menu.c b/common/menu.c
-> index 8cc9bf06d9c..48ab7f0f398 100644
-> --- a/common/menu.c
-> +++ b/common/menu.c
-> @@ -525,14 +525,15 @@ enum bootmenu_key bootmenu_loop(struct bootmenu_data *menu,
->  				struct cli_ch_state *cch)
->  {
->  	enum bootmenu_key key;
-> -	int c;
-> +	int c, errchar = 0;
->  
->  	c = cli_ch_process(cch, 0);
->  	if (!c) {
->  		while (!c && !tstc()) {
->  			schedule();
->  			mdelay(10);
-> -			c = cli_ch_process(cch, -ETIMEDOUT);
-> +			c = cli_ch_process(cch, errchar);
-> +			errchar = -ETIMEDOUT;
->  		}
->  		if (!c) {
->  			c = getchar();
-> -- 
-> 2.45.2
+> On 10/31/24 20:01, Sebastian Reichel wrote:
+>> PCI enumeration is required to detect the onboard Ethernet device.
+>>
+>> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+>> ---
+>>   configs/rock5b-rk3588_defconfig | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
+>> index c54e13e8732c..e5b9f7d326b4 100644
+>> --- a/configs/rock5b-rk3588_defconfig
+>> +++ b/configs/rock5b-rk3588_defconfig
+>> @@ -17,6 +17,7 @@ CONFIG_DEBUG_UART_CLOCK=24000000
+>>   CONFIG_SPL_SPI_FLASH_SUPPORT=y
+>>   CONFIG_SPL_SPI=y
+>>   CONFIG_PCI=y
+>> +CONFIG_PCI_INIT_R=y
+>>   CONFIG_DEBUG_UART=y
+>>   CONFIG_AHCI=y
+>>   CONFIG_FIT=y
 > 
+> This has been added and removed before, please see
+> 
+> https://lore.kernel.org/all/20231104130451.111020-1-martin.roukala@mupuf.org/T/
+> 
+> this commit adds it
+> 5b269ed404dc ("configs: rockchip: rock5b-rk3588: Enable CONFIG_PCI_INIT_R")
+> 
+> this commit removes it again
+> 191ece249a96 ("rockchip: rk3588-rock-5b: Enable support for PCIe SATA 
+> cards")
+
+What use-case are you trying to solve with a forced pci enumeration?
+
+With standard boot Ethernet should be enabled when it is needed.
+
+However for EFI boot Ethernet maybe is not detected? Please see [1] for
+a possible alternative patch that I created when someone reported an
+issue with iPXE boot some time ago.
+
+I did not get confirmation it fully solved the issue, from what I could
+test it should help get Ethernet detected during EFI boot on a ROCK 5B.
+
+[1] https://github.com/Kwiboo/u-boot-rockchip/commit/90b6d787de0b3e6ed863440be576b01d83ba5789
+
+Regards,
+Jonas
+
+> 
+> Eugen
+> 
+> 
+
