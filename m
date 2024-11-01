@@ -4,93 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 085E3E6F06C
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 16:23:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD55E6F06C
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 16:24:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DA8B88E3C;
-	Fri,  1 Nov 2024 17:23:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0026B88E3C;
+	Fri,  1 Nov 2024 17:24:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="odAsux8O";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cT+HH2X+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F45F88DEA; Fri,  1 Nov 2024 17:23:48 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id A782D88DEA; Fri,  1 Nov 2024 17:24:37 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A27DA88E3C
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 17:23:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6851F88E3C
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 17:24:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-2e2ed59a35eso1717068a91.0
- for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 09:23:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-6e3cdbc25a0so23581537b3.2
+ for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 09:24:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730478224; x=1731083024; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Gkw1Jjm93sAtReht/ioiasUx5Yzfff9nKnXwUXlP43Q=;
- b=odAsux8OYeVA8tQpA4GtVLOrj0FqiVD2r16jG9xqCPlPIEH3uzQlMPNnsmNsYY7AP2
- LZdQB3m5sajZ21ZB5j0X2wUo3v8uOG8/5GF4ICpRpBHXnmwe+h2uN1r00ACevmU2O29S
- 1ntl/18ZsX5KF4rlZE/NOuU0oyU/Vv6BUo6RNRiu1hy0s1uOEACH0fZCzZgxeWMilUGD
- YwRqI52zwwand1m8MSdagFl10j0bcWxbpzqleLLUm393wZ7VP456KwFVZSJngsG4aYK4
- P6ORSjvQYLvU4yboFP9jUEE575ORQVHKYkAVo8tn7Id2qipqGiUA6IG0dSeR9WzMnT+f
- 6BNg==
+ d=konsulko.com; s=google; t=1730478273; x=1731083073; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=br7KZ05vvM6oERHZBsB/nx0LqUaJC6lVgdNiXH0iqSk=;
+ b=cT+HH2X+jUJoedICf42lHY8asaqhFxfL/FY4kS0CA/+xiMi8DH4Z5hxaXtY98TzXB4
+ flLjsLT4aiaP/9Uw/cckDywCrkGhjzRUzv4a4yvpT3SV+Aymwzsbx9lt32XWOkgppErH
+ QKjfJxROsLq/yuBVF9B+2KxA99k5N4plr7jDo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730478224; x=1731083024;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Gkw1Jjm93sAtReht/ioiasUx5Yzfff9nKnXwUXlP43Q=;
- b=VyHC5Bi0QE7onixQoAJ6+gE5dIPbbBTHbJPlmkQ6tfPiZ+lQAnQ1P5+67Rq+XkMuWG
- swwyQmYioneVJruHjOxpk2cU6FCkZDTO0bqjA25rgRQQGFP4wLssbDaz2hMfSNXiFjsZ
- GOu9Aba0EFt22m1lJ46d4+72X4joTA3c/hHmPdSejcwWcvmsnHL41wPd99mDZMNKmyHo
- RuQCrKzEgbB26UiFxPokdhUh63LGmXJVVnVBE9zS6V0UcxqByddwdrDvIHxW82c7e2Ls
- 5+2dy/bsID4e0rI/bsEwaU037VAAz5fY//KMnLyXk+ZvJ4owXJX+pOmuEIj+rL2nSUzy
- 3GeQ==
+ d=1e100.net; s=20230601; t=1730478273; x=1731083073;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=br7KZ05vvM6oERHZBsB/nx0LqUaJC6lVgdNiXH0iqSk=;
+ b=trPH6YgisqY8fd+WcBCwGPBjf+tKmfYcot6tf1k2TQMDqMXNZnIAorsfFimn7y8RfU
+ IRQwzwfSAmyOD/dn2rwc6MLBSICeUXmiqiQEmPSD7sVc/e2cziuIlZAUdSi4Y3ARc22A
+ 30h85ZKcLhvXdiAE8Ze0QgY7Mvaw8l+WdJKNeTAkaRu+ccLMv7PYWG5lBpwFxMI/6loz
+ ibync1HeqZLZennmCrWBREvhB8+gCgMC5EJiFkBWj+oxvV6UL1zp/SkmgYgBsBPNNHk7
+ 2Hhvbtk6QyH3mq7HhMPq4MYQBiv1bgbTYt5CVA8pXZeeUD4TpJsREtk6t23luaY7gQ1u
+ Dz+g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV2oObTHdsDde137EXlkKUcaRzrgC2dsVMHBCEpzwsYfOXVs8HgRsM2dAdoRTuxCQNorZM6vJI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzvVj7dCOrPEi+yVtLyX8FV4vbLtfgsiQGmKmhZ2y4Xurw9hWAD
- jgykeUGlkOpCQdIU70wgCGiKajVUFsOR7XKM9N5UfWq/5L53yhmMc6KiU+X3bGOxW04d9rffJr7
- fWz7epovTACAzuw2dVFcq39hm/iZQoC4EYl0gTA==
-X-Google-Smtp-Source: AGHT+IFub/G5QYowhrYQljkRBJdoSewC53gGC8K9Xo4j+qgeHh9S8XrrhFYKf8tQwz6C1C5STihqYTCCPdUY8Bj3hNc=
-X-Received: by 2002:a17:90b:3e89:b0:2e2:c69b:669 with SMTP id
- 98e67ed59e1d1-2e95dd7816bmr3503a91.27.1730478224067; Fri, 01 Nov 2024
- 09:23:44 -0700 (PDT)
-MIME-Version: 1.0
-References: <20241022200543.116343-1-raymond.mao@linaro.org>
- <20241022200543.116343-7-raymond.mao@linaro.org>
- <CAFLszTjY=BwM8jUk_uRp-PnNu7=cXTdw0=znJwS4XDooWmNJjg@mail.gmail.com>
- <CAEfUkULBfQNz5XwWU0oY4S9tPGrYf06yByaOj-tRiua0x7WfWQ@mail.gmail.com>
- <CAFLszTijXQCcFo5k5y6G8KUYvQQOLGAYZzNe5GQkt9fpGBam1Q@mail.gmail.com>
- <6BCB1F10-588F-4BAB-9FED-1DBFF9273DB4@gmx.de>
-In-Reply-To: <6BCB1F10-588F-4BAB-9FED-1DBFF9273DB4@gmx.de>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 1 Nov 2024 12:23:30 -0400
-Message-ID: <CAEfUkUJgXATX0m8f9EvMxkoKW6C4QJX5XrR5=kojE+Vjp=3gdw@mail.gmail.com>
-Subject: Re: [PATCH v2 6/8] armv8: Add generic smbios information into the
- device tree
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ AJvYcCXbBFo1Tc2fx+DBp7nVewJioId1xgHA4D3RkJxkYOsk0oyN/7NWf67MqkMH/Ygs31rCqyiNJLA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzS/cKUbwzE6CnV8OreKY3/Xg/L+uYTblAHm3ZW/k34aI92yzs2
+ 2tMHXFCgDO+yd/kQ4CZgTOK+0q0miHSJkb5sPYjfu/8xnEd2zpdg3POkI8HrMIk=
+X-Google-Smtp-Source: AGHT+IFklOdSctWwRl1yQ62nbJ3lXSDxT6i8EqXO7FLUV2to5jwHFwRR7OJICU6N8ZOPHvsc4iBqmg==
+X-Received: by 2002:a05:690c:730a:b0:6e3:6b73:be66 with SMTP id
+ 00721157ae682-6ea64b4e273mr49014307b3.27.1730478273206; 
+ Fri, 01 Nov 2024 09:24:33 -0700 (PDT)
+Received: from bill-the-cat ([189.177.122.145])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-462ad0cc16esm19986321cf.51.2024.11.01.09.24.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 01 Nov 2024 09:24:32 -0700 (PDT)
+Date: Fri, 1 Nov 2024 10:24:28 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Stefan Roese <sr@denx.de>, Alexander Gendin <agendin@matrox.com>,
- Michal Simek <michal.simek@amd.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Wan Yee Lau <wan.yee.lau@intel.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Max Krummenacher <max.krummenacher@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: Re: [PATCH v2] sandbox: Add a build without CMDLINE
+Message-ID: <20241101162428.GO3600562@bill-the-cat>
+References: <20241026120252.865215-1-sjg@chromium.org>
+ <20241026223346.GI4959@bill-the-cat>
+ <CAFLszTg-Lr3uWu41YX1z=JTbBbiT8Gh2oydLHpq5dtyZbRUtKg@mail.gmail.com>
+ <82825184-692b-4245-8935-57d87f84692a@linaro.org>
+ <CAFLszTijo+=OuCXBKfDKKyL=LajNzZosovfqRLGc92B1AccLkw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5G9oB9Qd0MTw+Zsc"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTijo+=OuCXBKfDKKyL=LajNzZosovfqRLGc92B1AccLkw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,113 +104,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On Fri, 1 Nov 2024 at 02:16, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+--5G9oB9Qd0MTw+Zsc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->
->
-> Am 29. Oktober 2024 16:45:44 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >On Mon, 28 Oct 2024 at 21:00, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >>
-> >> Hi Simon,
-> >>
-> >> On Mon, 28 Oct 2024 at 13:05, Simon Glass <sjg@chromium.org> wrote:
-> >>>
-> >>> Hi Raymond,
-> >>>
-> >>> On Tue, 22 Oct 2024 at 22:07, Raymond Mao <raymond.mao@linaro.org>
-> wrote:
-> >>> >
-> >>> > Add common smbios information that can be used by all armv8
-> >>> > platforms and set it as default for qemu-arm64.
-> >>> > From now smbios library can load values from here for those fields
-> >>> > doesn't exist in the sysinfo driver.
-> >>> >
-> >>> > To run this with QEMU arm64, please dump the generated DTB
-> >>> > from QEMU first, merge it with the one we build and then re-run
-> >>> > QEMU with the merged DTB.
-> >>> > ```
-> >>> > qemu-system-arm -machine virt -machine dumpdtb=qemu.dtb
-> >>> > cat  <(dtc -I dtb qemu.dtb) <(dtc -I dtb ./dts/dt.dtb | \
-> >>> >   grep -v /dts-v1/) | dtc - -o merged.dtb
-> >>> > qemu-system-arm -machine virt -nographic -bios u-boot.bin \
-> >>> >   -dtb merged.dtb
-> >>>
-> >>> and please talk to Peter about accepting my patch[1]
-> >>>
-> >>>
-> >>> > ```
-> >>> > For details please take reference on dt_qemu.rst
-> >>> >
-> >>> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> >>> > ---
-> >>> > Changes in v2
-> >>> > - Initial patch.
-> >>> >
-> >>> >  arch/arm/dts/qemu-arm64.dts      |  4 ++
-> >>> >  arch/arm/dts/smbios_generic.dtsi | 82
-> ++++++++++++++++++++++++++++++++
-> >>> >  2 files changed, 86 insertions(+)
-> >>> >  create mode 100644 arch/arm/dts/smbios_generic.dtsi
-> >>> >
-> >>> > diff --git a/arch/arm/dts/qemu-arm64.dts
-> b/arch/arm/dts/qemu-arm64.dts
-> >>> > index 096b3910728..95fcf53ed74 100644
-> >>> > --- a/arch/arm/dts/qemu-arm64.dts
-> >>> > +++ b/arch/arm/dts/qemu-arm64.dts
-> >>> > @@ -7,5 +7,9 @@
-> >>> >
-> >>> >  /dts-v1/;
-> >>> >
-> >>> > +#if defined(CONFIG_SYSINFO_SMBIOS) && !defined(QFW_SMBIOS)
-> >>> > +#include "smbios_generic.dtsi"
-> >>> > +#endif
-> >>> > +
-> >>> >  / {
-> >>> >  };
-> >>> > diff --git a/arch/arm/dts/smbios_generic.dtsi
-> b/arch/arm/dts/smbios_generic.dtsi
-> >>> > new file mode 100644
-> >>> > index 00000000000..c9f07283403
-> >>> > --- /dev/null
-> >>> > +++ b/arch/arm/dts/smbios_generic.dtsi
-> >>> > @@ -0,0 +1,82 @@
-> >>> > +// SPDX-License-Identifier: GPL-2.0+
-> >>> > +/*
-> >>> > + * Default SMBIOS information for Arm64 platforms
-> >>> > + *
-> >>> > + * Copyright (c) 2024 Linaro Limited
-> >>> > + * Author: Raymond Mao <raymond.mao@linaro.org>
-> >>> > + */
-> >>> > +#include <config.h>
-> >>> > +#include <smbios_def.h>
-> >>> > +
-> >>> > +/ {
-> >>> > +       smbios {
-> >>> > +               compatible = "u-boot,sysinfo-smbios";
-> >>> > +
-> >>> > +               smbios {
-> >>> > +                       system {
-> >>> > +                               manufacturer = CONFIG_SYS_VENDOR;
-> >>> > +                               product = CONFIG_SYS_BOARD;
-> >>> > +                               version = "Not Specified";
-> >>> > +                               serial = "Not Specified";
-> >>>
-> >>> Does it make sense to add these strings? Perhaps if the property is
-> missing in the DT, it should be missing in the SMBIOS table? Is 'Not
-> Specified' a special string in the SMBIO spec?
-> >>
->
-> The spec says:
->
-> "If a string field references no string, a null (0) is placed in  that
-> string field."
->
-> Please, remove the 'Not specified' values from the patch and do not
-> provide any property value in the device-tree instead.
->
-> OK, I will remove all 'Not specified' in the next version.
+On Fri, Nov 01, 2024 at 04:37:17PM +0100, Simon Glass wrote:
+> Hi Caleb, Tom,
+>=20
+> On Mon, 28 Oct 2024 at 22:54, Caleb Connolly <caleb.connolly@linaro.org> =
+wrote:
+> >
+> >
+> >
+> > On 27/10/2024 15:52, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Sun, 27 Oct 2024 at 00:33, Tom Rini <trini@konsulko.com> wrote:
+> > >>
+> > >> On Sat, Oct 26, 2024 at 02:02:49PM +0200, Simon Glass wrote:
+> > >>
+> > >>> Something this breaks, so add a build to keep it working. Since san=
+dbox
+> > >>> enables a lot of options, it is a good board to use. The new config=
+ is
+> > >>> created simply by copying the existing sandbox and turning off CMDL=
+INE
+> > >>>
+> > >>> Once we have tests for non-CMDLINE operation, this can be adjusted =
+to
+> > >>> run those tests.
+> > >>>
+> > >>> Create a new build which will be picked up by CI. Update the mainta=
+iner
+> > >>> entry as well.
+> > >>>
+> > >>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >>> ---
+> > >>>
+> > >>> Changes in v2:
+> > >>> - Create a new build instead of messing with CI
+> > >>>
+> > >>>  MAINTAINERS                         |   1 +
+> > >>>  configs/sandbox_nocmdline_defconfig | 365 ++++++++++++++++++++++++=
+++++
+> > >>>  2 files changed, 366 insertions(+)
+> > >>>  create mode 100644 configs/sandbox_nocmdline_defconfig
+> > >>
+> > >> Please use the #include mechanism instead of a full config that will
+> > >> also now have to be kept in sync.
+> > >
+> > > Hmmm we still haven't come up with a way to deal with the #include
+> > > mechanism in buildman. I've forgotten where it got to, or even what
+> > > the problem was?
+> >
+> > qcm6490_defconfig needs to re-define CONFIG_ARM=3Dy for buildman to be =
+happy.
+> >
+> > Why is buildman looking at the defconfig anyway? Maybe it could just run
+> > the pre-processor first?
+>=20
+> It could, but I really want buildman to understand things. If we can
+> say that '#include' in the file is the only thing it needs to deal
+> with, then I believe we can update Kconfiglib to deal with it, or
+> perhaps preprocess the file. That uncertainty (as to what the 'spec'
+> actually is) is what has held me back from looking at it too
+> seriously.
 
-Regards,
-Raymond
+Given https://github.com/llvm/llvm-project/issues/78778 I do not like
+preprocessing the files. I want to stress that
+scripts/kconfig/merge_config.sh is the canonical way to merge fragments.
+So if taking the Kconfiglib approach, implementing the above but in
+python would be good (and we can suggest that #include be the normal way
+one file says to use other fragments but not let us be blocked on making
+this better).
+
+--=20
+Tom
+
+--5G9oB9Qd0MTw+Zsc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmclALwACgkQFHw5/5Y0
+tywVHwwAtmPHjOADLYMOEysdcSzuHgSC1X9jG8hjWzIsosIm990JGfPcwYjnEl9+
+0vw4Wowi2WKYa4gnjYGlZLOgqAFFW4mw3hbE6tTSB2lUDIvK1ZhqEM09xaYKsz4N
+dMEfMeyxxLJNiJPT8MK0tlJdvvkDnhPCw56XDNZs/yCgKeK7Y/lTr6U1Sw0KFiW7
+20ggJ8i3FZ1LjFLVJDCQbP51dNXwADgT1kBJ9pmCT943scseSNX7Gj8P64nZXTDV
+XOa6r3AYl8qQv36h16ugvuWoECd7qqL0G9yGqDpIe9pJ4bpCwr1+BoAJSZI0Rs1b
+fqPa9YJSZ9uA0TrvbjPJseknBkLQlS1gjuPdZ41q4dqZt9KyI9He2qOTUcXGUS1N
+lhVQeeQpgDeu7FoqqsFvRH1K/bLXX0gr4k1YQEwRtnz0TQosxgUtgOFRuxQZ0uxb
+X4tWC5sOBVN0zA3clfLwK6WY82y5jUANVQryM/i/ZUq/vbgIpV+8qJRaSGnHwXcp
+4eECyXI/
+=f4Rk
+-----END PGP SIGNATURE-----
+
+--5G9oB9Qd0MTw+Zsc--
