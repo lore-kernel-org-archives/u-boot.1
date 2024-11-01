@@ -4,90 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1B85E6F069
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:26:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1F67E6F069
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:26:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FF0C88A37;
-	Fri,  1 Nov 2024 16:26:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 918C788E42;
+	Fri,  1 Nov 2024 16:26:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OWtgyPdE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P6i0sESk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EBC788DF5; Fri,  1 Nov 2024 16:26:25 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id A5B8388E2D; Fri,  1 Nov 2024 16:26:26 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A38388606
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:26:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C8D62889EB
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:26:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a9a4031f69fso298929566b.0
- for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:26:23 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a9a4031f69fso298934966b.0
+ for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:26:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730474782; x=1731079582; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6nwYgINmAGo8aML6Idho9Pusz+m3vgBfJQnjy35ZoRM=;
- b=OWtgyPdEwm4Qm/6Wf6Z0uZ4msJt2fTSxisODEsK/omSZQ/fqye02rSAyJHjYa0pYH9
- LB/dPQ6QC8GPZLml1LfOuKMnr64zNLxHbfz5JoH6DGQVkT7/faQzGtAI/VIcfInfcCIo
- tnoZTL9FWHEFtWhy11eFFMm873na4qN4FILZw=
+ d=chromium.org; s=google; t=1730474784; x=1731079584; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8ajO0kE4L7pLjYAYTWLV7R8mXk5S+6K44+EJo4R+uIc=;
+ b=P6i0sESkiPoCTQb3EDx+U62apH5VEq1DB8Z0hvSoH5iBSPBmotMrIJf5TTVmlDtIbX
+ fj+InHgq0IsUEA3zwZdSybrYz2ATFiMrAq1tr6xyB+qjFi5rmGNBK4F7KOUDbz4QQ5Ba
+ MTm9AoYZUmi7kLLiHU3QdUwO6qcDPOS4nrviU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730474782; x=1731079582;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6nwYgINmAGo8aML6Idho9Pusz+m3vgBfJQnjy35ZoRM=;
- b=tWAOCacA9taoHphy45pzddtPC7Fpmq6kaV4y5njDQV8p0jej0XIq0aUoZG3lFvSNkB
- HtYUJHme92IT4MAUOMjmVztBOHLF6SBZyLB4hKpjwVA4Fh+vxkMBf04z9dAPr1FUnAIb
- h7Rz28kmRGxLbia/eDC+OlHS0KlIERokE8DO3xKFTWHqQa/d/hHACIS6U50dHLgLem+c
- ya5Xb42Aei/KJ/1U7qc3MJkybWfvdKAQteRAB66osQptH1r/AHTB2TJy9K74AuCrcC8N
- NH3+P31Z6IrOpYCN6ugnwwkn7seGEXBUEMj6pzenPvIiEqGgMdGROjVswQtNg+mu8VxJ
- xx6w==
-X-Gm-Message-State: AOJu0Yz26RaYA3ECP3uJSwDGS8EkdGSWVpZiFvQEmx+mngqmWKIyGEBq
- 2+oKy+7R0yAu0UgW5gOAlET2YzhF+8H1Gd/NNaTutGlweW3u/22ju5WYvRhRiuxCRzagYnoiJhJ
- 85rJd
-X-Google-Smtp-Source: AGHT+IEG9gpSu/9dwhJ5ggrnEzzcwKpDQWewu+Cf2aF1KWLMM4HbkvBGA7f32l7o3ppzUoIQJDGlUQ==
-X-Received: by 2002:a17:907:7286:b0:a99:fc3d:7c76 with SMTP id
- a640c23a62f3a-a9de5f305f0mr2143566866b.37.1730474782026; 
- Fri, 01 Nov 2024 08:26:22 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1730474784; x=1731079584;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8ajO0kE4L7pLjYAYTWLV7R8mXk5S+6K44+EJo4R+uIc=;
+ b=JtaJkkdYv2jP5Xn3ObmmI4LHrT6ZdyPhZUS1nBAQN6GFdupYBA3bYVJ3pz/rLtoo1T
+ niJWEI2gVtZxXYLchvks2Q2rRJYNp9N4qx4v9n2q/H3Q/yzunCx7TA44Ku1KPAJXGFUW
+ GH5bO6895j+eMtrDHiUhVwtgwlw4kx2hczAORg/tap3iDnxXqN+SaEA0lYJ8pvGDhqI8
+ B7O4PLSFT6sPPbX86Wne9KcieHqozZsd6eL9bxA0FC3Qnjnx0Z8pH3ShubxgnQPaLQtN
+ qZXEqoLucNiXL/DB/Ywl7aEDWsiEA7Q7bqzeIW+nZW2N2T9MjHHIDu2Txv+FZpmf+sBT
+ oEww==
+X-Gm-Message-State: AOJu0Yy2IsPiEy1iUwjSCTjR/fOHorsCFeRZix/xygT2I39LMKWEO0to
+ D+8EwxzizmwViwl4S80Mrf2Ns3GERV/0m6QyAUhsaC22YacXCL167syvG5YN2ZFyqU8J8GXIh9P
+ DJPU7
+X-Google-Smtp-Source: AGHT+IFZ3S/P7OUhHrMFNkDyYBZlVJ8QxkNng+eV1iZtAfnFWSXyAwMX2Kb+t+uD5DNCqlGgGvvUFA==
+X-Received: by 2002:a17:907:724d:b0:a9a:14fc:44a2 with SMTP id
+ a640c23a62f3a-a9de5ee10admr680500766b.30.1730474783738; 
+ Fri, 01 Nov 2024 08:26:23 -0700 (PDT)
 Received: from chromium.org ([87.215.50.114]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9e5649454csm190269466b.8.2024.11.01.08.26.21
+ a640c23a62f3a-a9e5649454csm190269466b.8.2024.11.01.08.26.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Nov 2024 08:26:21 -0700 (PDT)
+ Fri, 01 Nov 2024 08:26:22 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sean Anderson <seanga2@gmail.com>, Shantur Rathore <i@shantur.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Yang Xiwen <forbidden405@outlook.com>
-Subject: [PATCH v9 00/11] efi: Add a test for EFI bootmeth
-Date: Fri,  1 Nov 2024 16:25:58 +0100
-Message-ID: <20241101152614.238747-1-sjg@chromium.org>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH v9 01/11] test: boot: Update bootflow_iter() for console
+ checking
+Date: Fri,  1 Nov 2024 16:25:59 +0100
+Message-ID: <20241101152614.238747-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241101152614.238747-1-sjg@chromium.org>
+References: <20241101152614.238747-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -106,93 +92,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The test coverage for the EFI bootmeth is incomplete since it does not
-actually boot the application.
+This test checks console output so should have the UTF_CONSOLE flag. Add
+it.
 
-This series creates a simple test for this purpose. It includes a few
-patches to make this work:
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-- Revert of an unreviewed patch to change the sandbox efi filename
-- Hang in sandbox virtio due to EFI probing all block devices
+(no changes since v1)
 
-Other necessary fixes have already been applied.
+ test/boot/bootflow.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changes in v10:
-- Drop call to exit-boot-services
-
-Changes in v9:
-- Update license
-- Fix 'sevices' typo
-- Move the function into efi_helper.c
-- Split out into a separate change
-- Split out into its own patch
-- Separate into separate patches
-- Add new patch to drop sandbox PXE architecture
-- Mark the image as complete after writing it
-- Fix 'sevices' typo
-
-Changes in v8:
-- Add new patch to control on-host behaviour
-- Add new patch to move default filename to a function
-- Add new patch to report host default-filename in native mode
-- Add new patch to report host default-filename in native mode
-
-Changes in v7:
-- Update commit message
-- Drop patches already applied
-- Drop patch 'Disable ANSI output for tests'
-- Rebase on -master
-
-Changes in v6:
-- Drop the patch to disable sandbox virtio blk with EFI
-- Add new patch to disable the sandbox virtio blk device
-- Deal with sandbox CONFIG_LOGF_FUNC
-- Rebase on -next
-- Drop patches previously applied
-- Drop mention of helloworld since it is no-longer used by this test
-
-Changes in v4:
-- Add efi_loader tag to some patches
-- Split out non-EFI patches into a different series
-
-Changes in v2:
-- Add many new patches to resolve all the outstanding test issues
-
-Simon Glass (11):
-  test: boot: Update bootflow_iter() for console checking
-  efi_loader: Add a test app
-  sandbox: Add a -N flag to control on-host behaviour
-  efi: Move default filename to a function
-  efi_loader: Move get_efi_pxe_arch() to efi_helper
-  efi_loader: Allow reporting the host defaults
-  sandbox: Report host default-filename in native mode
-  efi_loader: Drop sandbox PXE architecture
-  sandbox: virtio: Disable the sandbox virtio blk device
-  test: efi: boot: Set up an image suitable for EFI testing
-  test: efi: boot: Add a test for the efi bootmeth
-
- arch/Kconfig                        |   3 +-
- arch/sandbox/cpu/start.c            |  10 ++++
- arch/sandbox/dts/test.dts           |   2 +-
- arch/sandbox/include/asm/state.h    |   1 +
- boot/bootmeth_efi.c                 |  29 ++----------
- cmd/efidebug.c                      |  25 ++++++++++
- include/efi.h                       |  34 +++++++++++++
- include/efi_default_filename.h      |  56 ----------------------
- lib/efi_loader/Kconfig              |  10 ++++
- lib/efi_loader/Makefile             |   1 +
- lib/efi_loader/efi_bootmgr.c        |  10 ++--
- lib/efi_loader/efi_helper.c         |  71 ++++++++++++++++++++++++++++
- lib/efi_loader/testapp.c            |  64 +++++++++++++++++++++++++
- test/boot/bootdev.c                 |  18 ++++++-
- test/boot/bootflow.c                |  67 ++++++++++++++++++++++++--
- test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 4924 bytes
- test/py/tests/test_ut.py            |  53 ++++++++++++++++++---
- 17 files changed, 356 insertions(+), 98 deletions(-)
- delete mode 100644 include/efi_default_filename.h
- create mode 100644 lib/efi_loader/testapp.c
- create mode 100644 test/py/tests/bootstd/flash1.img.xz
-
+diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+index 0d4e966892e..841729bd1ac 100644
+--- a/test/boot/bootflow.c
++++ b/test/boot/bootflow.c
+@@ -370,7 +370,7 @@ static int bootflow_iter(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_iter, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_iter, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ #if defined(CONFIG_SANDBOX) && defined(CONFIG_BOOTMETH_GLOBAL)
+ /* Check using the system bootdev */
 -- 
 2.43.0
 
