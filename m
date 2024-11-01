@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A384E6F060
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 14:21:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 219E6E6F061
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 14:21:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B89889324;
-	Fri,  1 Nov 2024 15:20:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 21D3889330;
+	Fri,  1 Nov 2024 15:20:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99FB788F3D; Fri,  1 Nov 2024 15:20:43 +0100 (CET)
+ id 7E236889A2; Fri,  1 Nov 2024 15:20:43 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 84E68892FF
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 15:20:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 9F5F4892E1
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 15:20:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C48591BC0;
- Fri,  1 Nov 2024 07:21:10 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DE8641007;
+ Fri,  1 Nov 2024 07:21:09 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.26.20])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 683C63F528;
- Fri,  1 Nov 2024 07:20:40 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5F1EB3F528;
+ Fri,  1 Nov 2024 07:20:39 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Subject: [PATCH 8/8] arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
-Date: Fri,  1 Nov 2024 14:20:17 +0000
-Message-Id: <20241101142017.79311-9-abdellatif.elkhlifi@arm.com>
+Subject: [PATCH 7/8] arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
+Date: Fri,  1 Nov 2024 14:20:16 +0000
+Message-Id: <20241101142017.79311-8-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241101142017.79311-1-abdellatif.elkhlifi@arm.com>
 References: <20241101142017.79311-1-abdellatif.elkhlifi@arm.com>
@@ -55,65 +55,87 @@ X-Virus-Status: Clean
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Add FFA_MEM_RECLAIM positive and negative test cases
+Add FFA_MEM_RECLAIM support to the FF-A emulator
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 ---
- test/dm/ffa.c | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ drivers/firmware/arm-ffa/ffa-emul-uclass.c | 43 ++++++++++++++++++++++
+ drivers/firmware/arm-ffa/sandbox_ffa.c     |  1 +
+ 2 files changed, 44 insertions(+)
 
-diff --git a/test/dm/ffa.c b/test/dm/ffa.c
-index 4fd21ac3d72..c481964c758 100644
---- a/test/dm/ffa.c
-+++ b/test/dm/ffa.c
-@@ -179,6 +179,27 @@ static int  test_ffa_memory_share(bool test_ack, struct unit_test_state *uts)
- 	return 0;
+diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+index a859d2e26cc..b628e2c5c63 100644
+--- a/drivers/firmware/arm-ffa/ffa-emul-uclass.c
++++ b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+@@ -604,6 +604,46 @@ feedback:
+ 	return ret;
  }
  
-+static int  test_ffa_memory_reclaim(bool test_ack, struct unit_test_state *uts)
++/**
++ * sandbox_ffa_memory_reclaim() - Emulated FFA_MEM_RECLAIM handler
++ * @emul: The sandbox FF-A emulator device
++ * @pargs: The SMC call input arguments a0-a7
++ * @res:  The SMC return data
++ *
++ * Emulate FFA_MEM_RECLAIM FF-A function.
++ *
++ * Return:
++ *
++ * 0 on success. Otherwise, failure
++ */
++static int sandbox_ffa_memory_reclaim(struct udevice *emul, ffa_value_t *pargs,
++				      ffa_value_t *res)
 +{
 +	int ret;
-+	u64 g_handle;
-+	struct udevice *dev;
 +
-+	ut_assertok(uclass_first_device_err(UCLASS_FFA, &dev));
-+
-+	if (test_ack) {
-+		g_handle = PACK_HANDLE(SANDBOX_MEM_HANDLE, SANDBOX_MEM_HANDLE);
-+		ut_assertok(ffa_memory_reclaim(dev, g_handle, 0));
-+	} else {
-+		/* Provide a wrong handle */
-+		g_handle = PACK_HANDLE(SANDBOX_MEM_HANDLE, 0);
-+		ret = ffa_memory_reclaim(dev, g_handle, 0);
-+		ut_asserteq(-EINVAL, ret);
++	if (pargs->a1 != SANDBOX_MEM_HANDLE ||
++	    pargs->a2 != SANDBOX_MEM_HANDLE) {
++		res->a0 = FFA_SMC_32(FFA_ERROR);
++		res->a2 = -INVALID_PARAMETERS;
++		ret = ffa_to_std_errmap[INVALID_PARAMETERS];
++		goto feedback;
 +	}
 +
-+	return 0;
++	res->a0 = FFA_SMC_32(FFA_SUCCESS);
++	res->a2 = 0;
++	ret = 0;
++
++feedback:
++
++	res->a1 = 0;
++	res->a3 = 0;
++
++	/* x4-x7 MBZ */
++	memset(FFA_X4X7_MBZ_REG_START, 0, FFA_X4X7_MBZ_CNT * sizeof(ulong));
++
++	return ret;
 +}
 +
- static int dm_test_ffa_ack(struct unit_test_state *uts)
- {
- 	struct ffa_priv *uc_priv;
-@@ -236,6 +257,9 @@ static int dm_test_ffa_ack(struct unit_test_state *uts)
- 	/* Test FFA_MEM_SHARE */
- 	test_ffa_memory_share(true, uts);
+ /**
+  * sandbox_query_ffa_emul_state() - Inspect the FF-A ABIs
+  * @queried_func_id:	The FF-A function to be queried
+@@ -697,6 +737,9 @@ void sandbox_arm_ffa_smccc_smc(ffa_value_t *args, ffa_value_t *res)
+ 	case FFA_SMC_32(FFA_MEM_SHARE):
+ 		ret = sandbox_ffa_memory_share(emul, args, res);
+ 		break;
++	case FFA_SMC_32(FFA_MEM_RECLAIM):
++		ret = sandbox_ffa_memory_reclaim(emul, args, res);
++		break;
+ 	default:
+ 		log_err("Undefined FF-A interface (%lx)\n",
+ 			args->a0);
+diff --git a/drivers/firmware/arm-ffa/sandbox_ffa.c b/drivers/firmware/arm-ffa/sandbox_ffa.c
+index a81455ce5ff..8af9c8ac005 100644
+--- a/drivers/firmware/arm-ffa/sandbox_ffa.c
++++ b/drivers/firmware/arm-ffa/sandbox_ffa.c
+@@ -92,6 +92,7 @@ static const struct ffa_bus_ops sandbox_ffa_ops = {
+ 	.sync_send_receive = ffa_msg_send_direct_req_hdlr,
+ 	.rxtx_unmap = ffa_unmap_rxtx_buffers_hdlr,
+ 	.memory_share = ffa_memory_share_hdlr,
++	.memory_reclaim = ffa_memory_reclaim_hdlr,
+ };
  
-+	/* Test FFA_MEM_RECLAIM */
-+	test_ffa_memory_reclaim(true, uts);
-+
- 	return 0;
- }
- DM_TEST(dm_test_ffa_ack, UTF_SCAN_FDT | UTF_CONSOLE);
-@@ -297,6 +321,9 @@ static int dm_test_ffa_nack(struct unit_test_state *uts)
- 	/* Test FFA_MEM_SHARE */
- 	test_ffa_memory_share(false, uts);
- 
-+	/* Test FFA_MEM_RECLAIM */
-+	test_ffa_memory_reclaim(false, uts);
-+
- 	return 0;
- }
- DM_TEST(dm_test_ffa_nack, UTF_SCAN_FDT | UTF_CONSOLE);
+ static const struct udevice_id sandbox_ffa_id[] = {
 -- 
 2.25.1
 
