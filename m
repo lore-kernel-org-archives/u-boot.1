@@ -4,76 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29BC4E674AA
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 07:20:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A7C1E674B1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 08:09:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C9ED888EB;
-	Fri,  1 Nov 2024 08:20:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 227E488E1C;
+	Fri,  1 Nov 2024 09:09:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="ZwmAFoym";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="w5VoM6AM";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="nKZtXKQy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 925AD888EB; Fri,  1 Nov 2024 08:20:27 +0100 (CET)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ id 7FFF288F4A; Fri,  1 Nov 2024 09:09:32 +0100 (CET)
+Received: from fout-b7-smtp.messagingengine.com
+ (fout-b7-smtp.messagingengine.com [202.12.124.150])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B5FC88360
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 08:20:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1BAF888D94
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 09:09:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: bcb0a010982111efbd192953cf12861f-20241101
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
- bh=uekRhUeYO6KUawMPL+OY1Ayi/VptuakyrLi756mvbrA=; 
- b=ZwmAFoymc1GdBrzAvv7ms1G0zbBmmDwqX5djA/tEmoADk4J1meOky+lqqiKapCcjIhGb0r4WWlHaXgvwIB708YxlXCPQEzt1zZN1Eg6lHo8COr5su+PJFMPT79Qh+L/4hFJPcoiiFKXnxydCepD/3H8QZMo+cD/4kF2jPQlT/Pw=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.42, REQID:706c3e78-f018-4bf1-b77c-a5c790a8d8d8, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:b0fcdc3, CLOUDID:177a63e7-cb6b-4a59-bfa3-98f245b4912e,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
- RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
- SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0
-X-CID-BAS: 0,_,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: bcb0a010982111efbd192953cf12861f-20241101
-Received: from mtkmbs09n2.mediatek.inc [(172.21.101.94)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1797081364; Fri, 01 Nov 2024 15:20:13 +0800
-Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Fri, 1 Nov 2024 15:20:12 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Fri, 1 Nov 2024 15:20:11 +0800
-Message-ID: <cdb9a83d244a77e5ffb2a3d069607f16447b723e.camel@mediatek.com>
-Subject: Re: [PATCH v2 1/3] menu: fix the logic checking whether ESC key is
- pressed
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: Daniel Golle <daniel@makrotopia.org>
-CC: <u-boot@lists.denx.de>, GSS_MTK_Uboot_upstream
- <GSS_MTK_Uboot_upstream@mediatek.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, "John
- Crispin" <john@phrozen.org>, Simon Glass <sjg@chromium.org>
-Date: Fri, 1 Nov 2024 15:20:11 +0800
-In-Reply-To: <ZyPXqwcbREjnPc-1@pidgin.makrotopia.org>
-References: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
- <ZyPXqwcbREjnPc-1@pidgin.makrotopia.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from phl-compute-08.internal (phl-compute-08.phl.internal
+ [10.202.2.48])
+ by mailfout.stl.internal (Postfix) with ESMTP id 8B0FF11400D9;
+ Fri,  1 Nov 2024 04:09:28 -0400 (EDT)
+Received: from phl-mailfrontend-01 ([10.202.2.162])
+ by phl-compute-08.internal (MEProxy); Fri, 01 Nov 2024 04:09:28 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:subject
+ :subject:to:to; s=fm2; t=1730448568; x=1730534968; bh=LE4EzvwgrV
+ Yfwf6uC4JjkFo3DaYzmfgtIcU7b7PSjzg=; b=w5VoM6AM9Z++f+ePTcI5j7I55V
+ pr+oBpcXemDmai0bsiX2jteRM8VhreR3s0eJSBp1E4l7lV/BYEnKWtMHc6SC31Kp
+ chBHBfkhGWR1JqK2GyZIT/7Y5RDMThJPNYsOlgREGUKsax5G3GZoxfEeAY/VMOrP
+ bA0Ry87yQC2vQsja18UExxj1GCF7PmZ15o2dPrN8WjgQHN4dYqg0/kwmGGx9KeUO
+ wyXqb0ppznLZ/x5Cs0fqz3FPxStKTXrbHMdc3H0HecjQaLN8hAzqmflK89dbTg+O
+ Z0PHFWnK0axJKj3Vz9+svC31wsp0U7sidS/kl4hmS/LnP/KqCA/+/bu6banQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+ 1730448568; x=1730534968; bh=LE4EzvwgrVYfwf6uC4JjkFo3DaYzmfgtIcU
+ 7b7PSjzg=; b=nKZtXKQyPGQ8ALZEIjbpDFoiEo89z6jIMRWmXVUsocUY4bkKHvQ
+ MLcboegTSbZfww/48R+UcgTu6ffKFSL+hcxTGtcRIFCEddoRvDj7iMB+bOhfU8dj
+ XTy5b5Pm/l4BpoeITbpHqdwG/iWC9TQxXpJInSoIB6cUm6FrLWQgiK2BdEVhUtCW
+ JH+I9rGfr8HHQtU34B/IBmHQ4WKuEmx5jOI4Usm5KTl5PrhiOkcMPa9oCu2y/n0I
+ tU/EKBpy1PbKfItJyXWiEMU8eMwInGQn6tSRQWkTMYbLRQvrng8qipFRbiRViCKp
+ ZbDRw6hAHhBtA6PFWdOKbGmbHm2gGEbEbMg==
+X-ME-Sender: <xms:uIwkZ0z-WwUP8uQ1rQtfOlw_P43afH1Lj0AlXcQGPlCqa5VtaWxSvQ>
+ <xme:uIwkZ4SqqYzy6WJ2UZ5RSWCT8_HWe9-H8JGhid9fYGocS13D0jSpez6aYF0aVH-wZ
+ LS7NEDz8zBpRfJfm9o>
+X-ME-Received: <xmr:uIwkZ2WKgPQ8dkOsEREsgH0_Rr9PJgVCAogn2Ta9X4G04Tmqg6iFrREzxG6qqS42_xPpMSRtE-TnziszgAxAJf35xPlycEiyWok>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrvdekkedguddufecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
+ uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivg
+ hnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfhfgggtuggjsehttdortddttdej
+ necuhfhrohhmpeflrghnnhgvucfirhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqne
+ cuggftrfgrthhtvghrnhepvdeviefguddtgedthfeiveekiedtvefhiefhtdekteeihefh
+ keeggfegkeehgfeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
+ hfrhhomhepjhesjhgrnhhnrghurdhnvghtpdhnsggprhgtphhtthhopeeipdhmohguvgep
+ shhmthhpohhuthdprhgtphhtthhopehsuhhghhhoshhhrdhgrghnuheslhhinhgrrhhord
+ horhhgpdhrtghpthhtohepkhgvthhtvghnihhssehophgvnhgsshgurdhorhhgpdhrtghp
+ thhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepgiihphhroh
+ hnrdhglhhpkhesghhmgidruggvpdhrtghpthhtohepihhlihgrshdrrghprghlohguihhm
+ rghssehlihhnrghrohdrohhrghdprhgtphhtthhopehuqdgsohhotheslhhishhtshdrug
+ gvnhigrdguvg
+X-ME-Proxy: <xmx:uIwkZygXEQee63UPYciO1E1B1InNymmpqHa2lqI0hl_Vivt19fe9ig>
+ <xmx:uIwkZ2CQOKLCa0mWdCxhjGhbjQFB2ieAHxoWXWTTZsQKW_iY0c7Tfw>
+ <xmx:uIwkZzJVMr3t_7YpTP3O2RURAYf7lKQTlMEGoeG3bQEdVhFtvBDfdg>
+ <xmx:uIwkZ9DDrh-_El05Box_tctw84m-0UdMA8qWMYWh7hWMJZRXlQI73w>
+ <xmx:uIwkZ42ONXp7L3Jo2CrgVkanVoL5zYN4qmcDekKdBVitwtI9BO9aZzwc>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 1 Nov 2024 04:09:27 -0400 (EDT)
+Date: Fri, 1 Nov 2024 09:09:26 +0100
+From: Janne Grunau <j@jannau.net>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 0/2] Fix device removal order for Apple dart iommu
+Message-ID: <ZySMtvihaERwmqMN@robin>
+References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
+ <CADg8p96v8ocR=8yRLmC7j0CFcCUCFfQv6P9YaST_i-ewUP4RdA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-MTK: N
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CADg8p96v8ocR=8yRLmC7j0CFcCUCFfQv6P9YaST_i-ewUP4RdA@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,97 +110,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
+On Fri, Nov 01, 2024 at 11:52:26AM +0530, Sughosh Ganu wrote:
+> On Fri, 1 Nov 2024 at 04:37, Janne Grunau <j@jannau.net> wrote:
+> >
+> > Starting with v2024.10 dev_iommu_dma_unmap calls during device removal
+> > trigger a NULL pointer dereference since the the iommu device is removed
+> > before its user. The sparsely used DM_FLAG_VITAL flag is intended for
+> > this dependency.
+> > This series adds it to the Apple dart iommu driver and implements the
+> > two phased device removal to the EFI loader.
+> 
+> Is this also the cause of the crash that you were observing with the
+> RFC patches that I had posted earlier?
 
-On Thu, 2024-10-31 at 19:16 +0000, Daniel Golle wrote:
-> External email : Please do not click links or open attachments until
-> you have verified the sender or the content.
-> 
-> 
-> On Tue, Oct 29, 2024 at 05:47:10PM +0800, Weijie Gao wrote:
-> > It's observed that the bootmenu on a serial console sometimes
-> > incorrectly quitted with superfluous characters filled to command
-> > line input:
-> > 
-> > >  *** U-Boot Boot Menu ***
-> > > 
-> > >      1. Startup system (Default)
-> > >      2. Upgrade firmware
-> > >      3. Upgrade ATF BL2
-> > >      4. Upgrade ATF FIP
-> > >      5. Load image
-> > >      0. U-Boot console
-> > > 
-> > > 
-> > >  Press UP/DOWN to move, ENTER to select, ESC to quit
-> > > MT7988> [B
-> > 
-> > Analysis shows it was caused by the wrong logic of bootmenu_loop:
-> > 
-> > At first the bootmenu_loop received the first ESC char correctly.
-> > 
-> > However, during the second call to bootmenu_loop, there's no data
-> > in the UART Rx FIFO. Due to the low baudrate, the second char of
-> > the down array key sequence hasn't be fully received.
-> > 
-> > But bootmenu_loop just did a mdelay(10), and then treated it as a
-> > single ESC key press event. It didn't even try tstc() again after
-> > the 10ms timeout.
-> > 
-> > This patch fixes this issue by letting bootmenu_loop check tstc()
-> > twice.
-> > 
-> > Tested-By: E Shattow <lucent@gmail.com>
-> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> 
-> Reviewed-by: Daniel Golle <daniel@makrotopia.org>
-> Tested-by: Daniel Golle <daniel@makrotopia.org>
-> 
-> Together with 2/3 and 3/3 this now avoids dropping into the U-Boot
-> shell
-> as long as the menu is short enough. In case of menus with 8 entries
-> of
-> more I still manage to drop into shell when holding the arrow down
-> key
-> before the last item has been reached.
-> That being said, it's already a very big improvement that this now
-> only
-> happens when holding down a button traversing over a menu with a high
-> number of items.
+It shouldn't as I applied those patches on top of this. This is a
+separate issue already present in v2024.10. I discovered the LMB changes
+while investigating this.
 
-I didn't encounter with this.
-Did you try enabling CONFIG_SERIAL_RX_BUFFER?
-
-> 
-> 
-> > ---
-> >  common/menu.c | 5 +++--
-> >  1 file changed, 3 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/common/menu.c b/common/menu.c
-> > index 8cc9bf06d9c..48ab7f0f398 100644
-> > --- a/common/menu.c
-> > +++ b/common/menu.c
-> > @@ -525,14 +525,15 @@ enum bootmenu_key bootmenu_loop(struct
-> > bootmenu_data *menu,
-> >                               struct cli_ch_state *cch)
-> >  {
-> >       enum bootmenu_key key;
-> > -     int c;
-> > +     int c, errchar = 0;
-> > 
-> >       c = cli_ch_process(cch, 0);
-> >       if (!c) {
-> >               while (!c && !tstc()) {
-> >                       schedule();
-> >                       mdelay(10);
-> > -                     c = cli_ch_process(cch, -ETIMEDOUT);
-> > +                     c = cli_ch_process(cch, errchar);
-> > +                     errchar = -ETIMEDOUT;
-> >               }
-> >               if (!c) {
-> >                       c = getchar();
-> > --
-> > 2.45.2
-> > 
-
+Janne
