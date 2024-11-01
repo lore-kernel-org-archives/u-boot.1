@@ -4,61 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80773E6F086
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 20:29:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86CADE6F091
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 21:46:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0C0088DC8;
-	Fri,  1 Nov 2024 21:29:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id AEF9688E14;
+	Fri,  1 Nov 2024 22:46:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="CCoM6ybS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CE+u3s6V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7758188E14; Fri,  1 Nov 2024 21:29:56 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8D2C588E24; Fri,  1 Nov 2024 22:46:13 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9080C88D9A
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 21:29:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BF748880B
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 22:46:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 0c20ee7f-9890-11ef-9dde-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 0c20ee7f-9890-11ef-9dde-00505699b430;
- Fri, 01 Nov 2024 21:29:51 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=PF2zdgTJoDT5Ta2l6glFi4aOAEue7QhN2xxHGUEgsVE=;
- b=CCoM6ybS4wgKUaw5XlUQsPwcGX6QfhlP77aAnqoPSyb9agDQq9Snl60esiu/G0zmM3Cdrn4ycgvXk
- VVYtu+WR+IhlKdSe2COlwDYiVx3w8DLERj59YDnUmk7LN9mr32fGTsaA8TdR74F/YiEhqisq2SWmEB
- wH487dSs7/yyZfhSj4XGB6dBbm8tQFsj3plYpG+EnMewvAJ7bEnq+lNv17oVsPNujrpoH5y+0IRCAf
- nehUIKQOQf5uaVbVNhJMznSC/+Wcw7ngYB+tU71ratdEVyAuRB80H2g1nleTDM1HA25DC3nb60G4V2
- krECd+Qs0L9arh/2IOtsVNK4RNPtMcA==
-X-KPN-MID: 33|4RQ3nM3D+LPTPhlzwKznWYGYiU9bTLELn3o5KEoAAybh+JwWFV3oSPe8seZLNnp
- +aYyjcekUp8TeOBm45kTfy+6aWFMJ1oOvW+wTspfH+4I=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|8WwY0EMuFRdnSEzYEg35KQASHfP+7vYIdJ9pu9cyPU3Tjnb6MC7OYXoUtwm/PSE
- /utks4f3DkurFLo0y303BNg==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 0d35a79e-9890-11ef-9749-005056998788;
- Fri, 01 Nov 2024 21:29:54 +0100 (CET)
-Date: Fri, 01 Nov 2024 21:29:53 +0100
-Message-Id: <87zfmi4rzy.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Janne Grunau <j@jannau.net>
-Cc: kettenis@openbsd.org, trini@konsulko.com, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de, j@jannau.net
-In-Reply-To: <20241031-iommu_apple_dart_ordering-v1-2-8a6877946d6b@jannau.net>
- (message from Janne Grunau on Thu, 31 Oct 2024 23:48:02 +0100)
-Subject: Re: [PATCH 2/2] efi_loader: remove non vital devices first
-References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
- <20241031-iommu_apple_dart_ordering-v1-2-8a6877946d6b@jannau.net>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7b153047b29so170012585a.3
+ for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 14:46:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1730497570; x=1731102370; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WaffSH/mhHVE+k2BdxDp//B4XQ4kzipqwyIhT58GIOM=;
+ b=CE+u3s6VFoBB/JJ4qp+iV+00akBB3keHjQprJzhChgpi1fSoeNTiozja9TSVfmr+eL
+ 0/DAbS0bdXBKgFpdbRklsBBS5GGNw9h/cyG6D16Lx/n6oRgwiAfDxK3whxwPR7FbVUc/
+ 7JBqM8VDz3U9XJO1MaoRubc2TdrS4DcFfDPLc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730497570; x=1731102370;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WaffSH/mhHVE+k2BdxDp//B4XQ4kzipqwyIhT58GIOM=;
+ b=KXaDC50qWRzV7z/mTTKsIsz/RbroWe1I0TvM7Ee7gicqasZ1/HtfHnCT7C+jw7ySrV
+ lF4y6q18oH2NO99TEXj9GJH7VAUR4POdEu4zFDnFP8bJYTFPcei4ofgvahdhp9h9sb5j
+ BxVH3IF2OExSqDGjD3Ahfi3UTIASnUw2njkwHiZVL/4HrSXSk76pRZyisEp0mm1uVIVX
+ rOHNiP2VSKPG3hPWguKAyVE5ASFXGViocrYevPKGC5/rdCGuQdKurbmFnDqxlbA/nhWb
+ fMQIRQHflIewHU99BYaGspOmwIsw/aobn+TAy+BAFXvV2r9UHAUeZFL17FkfyBK2MRFY
+ Sa8A==
+X-Gm-Message-State: AOJu0YxiODycnkG0EqIk7YAktd0JbhPGJFBPG5ZNzbIL5MS0JuylsCEa
+ 5iIsEcLPcUNfYQrZHF3eBfLoBe8YMASZkjwJyI1tdl09Hl86yhOoPbuHP3ytGpQ=
+X-Google-Smtp-Source: AGHT+IEAxY0EbYiNsB3aFt8PNOPLZSOij6FOHUe3xzK2Ziz68eUcfbV637pq/GkJjv3FbuvNByj7Cw==
+X-Received: by 2002:a05:620a:44c6:b0:7b1:5f49:6c10 with SMTP id
+ af79cd13be357-7b193f5d452mr3456147485a.63.1730497570154; 
+ Fri, 01 Nov 2024 14:46:10 -0700 (PDT)
+Received: from bill-the-cat ([189.177.122.145])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b2f3a81ab4sm207203085a.112.2024.11.01.14.46.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 01 Nov 2024 14:46:08 -0700 (PDT)
+Date: Fri, 1 Nov 2024 15:46:05 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: Re: [PATCH 01/21] bloblist: test: Move test into common
+Message-ID: <20241101214605.GA3767858@bill-the-cat>
+References: <20241028124130.32072-1-sjg@chromium.org>
+ <20241028124130.32072-2-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="WNM4pF7M6/ScjSUJ"
+Content-Disposition: inline
+In-Reply-To: <20241028124130.32072-2-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,42 +94,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Janne Grunau <j@jannau.net>
-> Date: Thu, 31 Oct 2024 23:48:02 +0100
-> 
-> DM_FLAG_VITAL marks devices which are essential for the operation of
-> other devices. Removing these devices before their users can result in
-> hangs or crashes.
-> This potentially fixes EFI boot of Renesas rcar3 devices. Their clock
-> devices (and with this series the dart iommu) are the only devices
-> markes as vital.
-> The arm boot code already handles devioce removal in this way.
 
-There is a typo in that last sentence of the commit message (devioce).
-Otherwise:
+--WNM4pF7M6/ScjSUJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Signed-off-by: Janne Grunau <j@jannau.net>
+On Mon, Oct 28, 2024 at 01:41:06PM +0100, Simon Glass wrote:
 
-Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
-
+> This test doesn't belong at the top level. Move it into the common/
+> directory, to match its implementation.
+>=20
+> This also fixes the build rule for the bootm test, which was depending
+> on bloblist by mistake.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->  lib/efi_loader/efi_boottime.c | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-> index 4f52284b4c653c252b0ed6c0c87da8901448d4b4..7db3c95782970f8c06a970a8ee86b1804cd848b6 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -2234,6 +2234,7 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
->  		if (IS_ENABLED(CONFIG_USB_DEVICE))
->  			udc_disconnect();
->  		board_quiesce_devices();
-> +		dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL | DM_REMOVE_NON_VITAL);
->  		dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
->  	}
->  
-> 
-> -- 
-> 2.47.0
-> 
-> 
+>=20
+>  test/Makefile                | 3 ---
+>  test/common/Makefile         | 3 +++
+>  test/{ =3D> common}/bloblist.c | 0
+>  3 files changed, 3 insertions(+), 3 deletions(-)
+>  rename test/{ =3D> common}/bloblist.c (100%)
+
+On rpi_3_32b (and presumably others):
+test/py/tests/test_ut.py ss....F
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+_______________________ test_ut[ut_bootm_bootm_test_nop] __________________=
+_____
+test/py/tests/test_ut.py:592: in test_ut
+    assert output.endswith('Failures: 0')
+E   AssertionError: assert False
+E    +  where False =3D <built-in method endswith of str object at 0x2bfcb0=
+0>('Failures: 0')
+E    +    where <built-in method endswith of str object at 0x2bfcb00> =3D '=
+ut - unit tests\r\n\r\nUsage:\r\nut [-r] [-f] [<suite>] - run unit tests\r\=
+n   -r<runs>   Number of times to run each...elated commands\r\nprint  - pr=
+inting things to the console\r\nsetexpr - setexpr command\r\nunicode - Unic=
+ode functions'.endswith
+----------------------------- Captured stdout call ------------------------=
+-----
+U-Boot> ut bootm bootm_test_nop
+ut - unit tests
+
+Usage:
+ut [-r] [-f] [<suite>] - run unit tests
+   -r<runs>   Number of times to run each test
+   -f         Force 'manual' tests to run as well
+   <suite>    Test suite to run, or all
+
+
+Options for <suite>:
+all - execute all enabled tests
+info - show info about tests
+bdinfo - bdinfo command
+bootstd - standard boot implementation
+cmd - test various commands
+env - environment
+fdt - fdt command
+hush - Test hush behavior
+lib - library functions
+log - logging functions
+mem - memory-related commands
+print  - printing things to the console
+setexpr - setexpr command
+unicode - Unicode functions
+U-Boot>=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+--=20
+Tom
+
+--WNM4pF7M6/ScjSUJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmclTBkACgkQFHw5/5Y0
+tywhOQv/ZIdbEr5mEKnptXTfTJJRnOHHSv909R4mzz8Ly1c47tCzauazH/JmrWgT
+Z/sNP3KnU8uolSBy2nldJhMPNsEDs2YcJsyLJ4XO8XrcCWcqdi03ymV94L+YiEWv
+x3Tz3Gj4a5aZoi01OB/ZUvLmoIu5ifzrmXc3XbcYC7Ooj6U1Pxz7eFasIUIWCPfZ
+e3m2eMb2Ge/r0liYoUpk6h9f/pnTozkhW00tCeQ0pQWyntHm3n9+34oUW4phmsDu
+3kGf6v02b7YHUzN2E4lVCrHF+YiVn7IMnTHcB7UDnzs8OAmOF8oN/rctvJ7VEoNa
+124u704dyOxgl5z8w43BmaTQccLBoWQ8P+7NUfAfNuUYhfFlsxxvaYyWZNEil6gt
+rqO0+5dbx03L/drMS/GDI1h+pCqpvvQnAIlq3rfAeUgX/FBuAJJWgOMjhc3HaRrq
+y67H0Jgg/7nBHJQwUodjNwOfEJF9nUOD3o4tQ14UwB01HYzEuK2yGTiAtUfNwFAB
+h2peJ78f
+=DQo2
+-----END PGP SIGNATURE-----
+
+--WNM4pF7M6/ScjSUJ--
