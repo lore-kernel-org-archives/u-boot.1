@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63C89E6B244
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 11:50:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEE0FE6B244
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 11:51:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E26AD892DA;
-	Fri,  1 Nov 2024 12:50:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A558892E5;
+	Fri,  1 Nov 2024 12:50:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OS1pU4B7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wisybpq4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 773A289287; Fri,  1 Nov 2024 12:50:39 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 3B88A892E1; Fri,  1 Nov 2024 12:50:41 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2444892B5
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 12:50:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E237A892A2
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 12:50:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a9932aa108cso279450666b.2
- for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 04:50:35 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a99cc265e0aso296330666b.3
+ for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 04:50:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730461834; x=1731066634; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730461838; x=1731066638; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1A5/GShwAv8OPvokjXq514pcruUol5ddbkfjZG4CRog=;
- b=OS1pU4B7PTWJ/ROb9s+sAYo6dBC/Uqs00/IrrTn+pzqUrspRIUWNmFfP1EgxE+YEEX
- MefV9aG+ZFtQ9ze7Fb8Ks+12qvel1oX8EhQax+3JjOw4PnisUu9dMzrW3gVkRUQ4y/l+
- 77uP5ejCe5Se1z3j/eYH/6PaBzoIOZxh3Ph1o=
+ bh=7aR4uu+yBdWM/WK4DWlVdXDM7WElFkpQM2rMuqNYQ8s=;
+ b=Wisybpq4KuC2xre6tpDatXp2Eh13sioLSbZuyxDP5c57Ni1Oic46qsHrejzrbnMsab
+ qNZ8hRlLKMOIaqMqByPIvRXgZ6DK50MBSY4SyJVZePn2xz4EIkHD9MPSWSM799RYSKVP
+ 1JIVjnyp77lE91pxcja/0aEAsjsLSM8LaTpfk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730461834; x=1731066634;
+ d=1e100.net; s=20230601; t=1730461838; x=1731066638;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1A5/GShwAv8OPvokjXq514pcruUol5ddbkfjZG4CRog=;
- b=QcilM16nDZIAD034yTEz0IyE/0lPLsbAz/NxRF7jwnbhSMo6MA1S5/n/7kbxng73Gf
- a7Rxeo3UPkC4QqB3tRnKm7uIubl98RTvjZPMgPJtu4sqAWuXgsvSTSeYfT56u+BjDcrN
- xetIkLsLaim3Gx4SMf7S0lxRY22FZMmoDHAANFGhKQ+evABX6oSPrfojhKJvLIjEJXie
- EFYYchl7VQJQLz3nYqkA6wKC4R9MZ/BqTSaxmC/rsnipX8w1vTM7e6MigMTVSj/5GirY
- dZu1VGYqF/VgR0AcexFk02ADfeVebWpdlelu53gt1OBemjx/0BowYBO14i3p4CutIjAl
- mrXA==
-X-Gm-Message-State: AOJu0YxWl3uozK6fo9wg0sT3XB6AfgglaUuJNCPtIxhijoWlWKN0ORiz
- JmlpkFd88xIdVNVj5s2xyPeW5UGA7cyxmwCkFLJx9fFDLgjrjyRmOsm6S6dvc1h6Z55C9kNNlrk
- 4xQ==
-X-Google-Smtp-Source: AGHT+IGI0G8r9ABoxqYmgSwUWYBdTJZDuCXEmwqeUmtyGL/CKFg063rlxVbE1TX09UBx2cgDOtHDcw==
-X-Received: by 2002:a17:907:1c04:b0:a9a:423:3278 with SMTP id
- a640c23a62f3a-a9e50b948c5mr575307666b.49.1730461834272; 
- Fri, 01 Nov 2024 04:50:34 -0700 (PDT)
+ bh=7aR4uu+yBdWM/WK4DWlVdXDM7WElFkpQM2rMuqNYQ8s=;
+ b=UwhEdfyVb6GusQ4+NNNt2FzjL3AMYUVCjjJm5mILEKTYC/AUCdbGL1163/m9xXeD5e
+ Zyxk7eqkc1aH3XhQY+WhAi2slI6Vw2gDhH++mzS0A5giJc+lpCDjO3XEG1PeM7T1dzuA
+ d0LaeSh2P10VvurMESptt5x3s5KBAZKwMsHNH42W2OW7nLrO69GZzNB4SJbbCCfhuwKn
+ NgP/y5ikBAgipHNm9lLWWRYVvfY+5YFFAFOgubjPlsM09YpQ9X11PmEta4n9QEXFnCGK
+ 1+nqMBAiz/Vtr8HWXAONwKeaPsVG6PoMFv48qAWLobbgLNIEzYEgJC1MY7A+7rbBdyk5
+ vSiQ==
+X-Gm-Message-State: AOJu0YzBTZBG7LVp6Tn0rLR0Pxz0j8CYOiLYi0jf5SPEkxIO8bFzRGb/
+ ccF0sAcl9Ksg7ni1OaNnWx7oIpSf1Lekf0YwI20mZx3jB6nyZEMKnu2iB2tClXjx5q0gCRZgvgg
+ NHA==
+X-Google-Smtp-Source: AGHT+IGtbGogAR84Jm9BVsfOFG6a33K8fnkqo517IhNtNnGxBIwrtIhh88u6dcGBM54QwKsgZMcslw==
+X-Received: by 2002:a17:907:d29:b0:a99:4b56:cf76 with SMTP id
+ a640c23a62f3a-a9de61d6bb6mr2260956566b.47.1730461837842; 
+ Fri, 01 Nov 2024 04:50:37 -0700 (PDT)
 Received: from chromium.org (43-114-103-145.static.glaslokaal.nl.
  [145.103.114.43]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9e564cc430sm171616566b.88.2024.11.01.04.50.33
+ a640c23a62f3a-a9e564cc430sm171616566b.88.2024.11.01.04.50.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Nov 2024 04:50:33 -0700 (PDT)
+ Fri, 01 Nov 2024 04:50:37 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Marek Vasut <marex@denx.de>, Svyatoslav <clamor95@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
  Devarsh Thakkar <devarsht@ti.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>,
- Richard Weinberger <richard@nod.at>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: [PATCH v2 1/3] common: Drop check for DM in initf_dm()
-Date: Fri,  1 Nov 2024 12:50:24 +0100
-Message-ID: <20241101115028.214678-2-sjg@chromium.org>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 3/3] common: Move autoprobe out to board init
+Date: Fri,  1 Nov 2024 12:50:26 +0100
+Message-ID: <20241101115028.214678-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241101115028.214678-1-sjg@chromium.org>
 References: <20241101115028.214678-1-sjg@chromium.org>
@@ -94,42 +99,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is enabled by all boards, so drop the condition.
+Rather than doing autoprobe within the driver model code, move it out to
+the board-init code. This makes it clear that it is a separate step from
+binding devices.
+
+For now this is always done twice, before and after relocation, but we
+should discuss whether it might be possible to drop the post-relocation
+probe.
+
+For boards with SPL, the autoprobe is still done there as well.
+
+Note that with this change, autoprobe happens after the
+EVT_DM_POST_INIT_R/F events are sent, rather than before.
+
+Update the docs a little, for this feature.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Add autoprobe to SPL also
+- Leave the function name the same
+- Fix 'Prove' typo
+- Update cover letter since SPL is now covered also
+- Update the documentation too, with a discussion link
 
- common/board_f.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ common/board_f.c                    |  4 ++++
+ common/board_r.c                    |  4 ++++
+ common/spl/spl.c                    |  4 ++++
+ doc/develop/driver-model/design.rst | 15 +++++++++++++++
+ drivers/core/root.c                 | 13 ++++++++++++-
+ include/dm/root.h                   | 10 ++++++++++
+ 6 files changed, 49 insertions(+), 1 deletion(-)
 
 diff --git a/common/board_f.c b/common/board_f.c
-index 98dc2591e1d..1e1aa08530a 100644
+index 1e1aa08530a..974eb4f39e9 100644
 --- a/common/board_f.c
 +++ b/common/board_f.c
-@@ -811,9 +811,11 @@ static int initf_bootstage(void)
+@@ -822,6 +822,10 @@ static int initf_dm(void)
+ 	if (ret)
+ 		return ret;
  
- static int initf_dm(void)
- {
--#if defined(CONFIG_DM) && CONFIG_IS_ENABLED(SYS_MALLOC_F)
- 	int ret;
- 
-+	if (!CONFIG_IS_ENABLED(SYS_MALLOC_F))
-+		return 0;
++	ret = dm_autoprobe();
++	if (ret)
++		return ret;
 +
- 	bootstage_start(BOOTSTAGE_ID_ACCUM_DM_F, "dm_f");
- 	ret = dm_init_and_scan(true);
- 	bootstage_accum(BOOTSTAGE_ID_ACCUM_DM_F);
-@@ -825,7 +827,6 @@ static int initf_dm(void)
+ 	if (IS_ENABLED(CONFIG_TIMER_EARLY)) {
+ 		ret = dm_timer_init();
  		if (ret)
- 			return ret;
- 	}
--#endif
+diff --git a/common/board_r.c b/common/board_r.c
+index 62228a723e1..d1507b06f8d 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -241,6 +241,10 @@ static int initr_dm(void)
+ 	if (ret)
+ 		return ret;
  
++	ret = dm_autoprobe();
++	if (ret)
++		return ret;
++
  	return 0;
  }
+ #endif
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 1ceb63daf31..c4256f237ee 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -500,6 +500,10 @@ static int spl_common_init(bool setup_malloc)
+ 			debug("dm_init_and_scan() returned error %d\n", ret);
+ 			return ret;
+ 		}
++
++		ret = dm_autoprobe();
++		if (ret)
++			return ret;
+ 	}
+ 
+ 	return 0;
+diff --git a/doc/develop/driver-model/design.rst b/doc/develop/driver-model/design.rst
+index 8c2c81d7ac9..1dcac1408ff 100644
+--- a/doc/develop/driver-model/design.rst
++++ b/doc/develop/driver-model/design.rst
+@@ -842,6 +842,21 @@ steps (see device_probe()):
+       cause the uclass to do some housekeeping to record the device as
+       activated and 'known' by the uclass.
+ 
++For some platforms, certain devices must be probed to get the platform into
++a working state. To help with this, drivers marked with
++``DM_FLAG_PROBE_AFTER_BIND`` will be probed immediately after all devices are
++bound. For now, this happens in each xPL build as well as in U-Boot proper,
++both before relocation and after relocation.  See the call to ``dm_autoprobe()``
++for where this is done.
++
++Note that autoprobe happens after the ``EVT_DM_POST_INIT_R`` and
++``EVT_DM_POST_INIT_F`` events are sent, since these events relate to
++device-binding.
++
++See here for discussion of this feature:
++
++:Link: https://patchwork.ozlabs.org/project/uboot/patch/20240626235717.272219-1-marex@denx.de/
++
+ Running stage
+ ^^^^^^^^^^^^^
+ 
+diff --git a/drivers/core/root.c b/drivers/core/root.c
+index 2d4f078f97f..371a37fe752 100644
+--- a/drivers/core/root.c
++++ b/drivers/core/root.c
+@@ -299,6 +299,17 @@ static int dm_probe_devices(struct udevice *dev)
+ 	return 0;
+ }
+ 
++int dm_autoprobe(void)
++{
++	int ret;
++
++	ret = dm_probe_devices(gd->dm_root);
++	if (ret)
++		return log_msg_ret("pro", ret);
++
++	return 0;
++}
++
+ /**
+  * dm_scan() - Scan tables to bind devices
+  *
+@@ -331,7 +342,7 @@ static int dm_scan(bool pre_reloc_only)
+ 	if (ret)
+ 		return ret;
+ 
+-	return dm_probe_devices(gd->dm_root);
++	return 0;
+ }
+ 
+ int dm_init_and_scan(bool pre_reloc_only)
+diff --git a/include/dm/root.h b/include/dm/root.h
+index b2f30a842f5..cd240c6a716 100644
+--- a/include/dm/root.h
++++ b/include/dm/root.h
+@@ -136,6 +136,16 @@ int dm_scan_other(bool pre_reloc_only);
+  */
+ int dm_init_and_scan(bool pre_reloc_only);
+ 
++/**
++ * dm_autoprobe() - Probe devices which are marked for probe-after-bind
++ *
++ * This probes all devices with a DM_FLAG_PROBE_AFTER_BIND flag. It checks the
++ * entire tree, so parent nodes need not have the flag set.
++ *
++ * Return: 0 if OK, -ve on error
++ */
++int dm_autoprobe(void);
++
+ /**
+  * dm_init() - Initialise Driver Model structures
+  *
 -- 
 2.43.0
 
