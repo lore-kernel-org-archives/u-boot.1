@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BFC7E6F069
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEFCBE6F069
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:27:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1C86892CE;
-	Fri,  1 Nov 2024 16:26:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 24AF9892EA;
+	Fri,  1 Nov 2024 16:26:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aqXm793x";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="etcMYYFC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54B3E892E6; Fri,  1 Nov 2024 16:26:35 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 2473789301; Fri,  1 Nov 2024 16:26:37 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B70889300
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:26:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC7C588606
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:26:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a99cc265e0aso324827266b.3
- for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:26:32 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a93c1cc74fdso285200966b.3
+ for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:26:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730474791; x=1731079591; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730474793; x=1731079593; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Otig4MT+7NE5EvZ3Wb6FUNyd4tXoWuPjhCR+dMjmZgI=;
- b=aqXm793xukan1/V990JshnhYTO06v9HYKK/GSkmEd+mSaJ6GyYQdpXchMV4RgWCZI+
- crgUFl1D064nL8KKTR4fuKcSjgOn6+h6Ze58/kKpIvsD1235Nib/PdLDEsljiV/D7aAB
- dlMGiuI19Fshbsw48gFS++4Nqld6iQmn83GHE=
+ bh=YI+V/ztQgHnzvzla7o6fXvbMDxKa/O/Qph3dpr60HGQ=;
+ b=etcMYYFCcvguoE4BQeQbnD6stawi5iFay2P+LKESbks6NzUEfHXjr/ssN43aBAJidM
+ alL05Oq9PTwbp/haN2Lif8dG1PWywC1yIM5GknXdKlgButRtDpO9PZ3VaJrB6BdLVQbk
+ HEDO8vKqbBiHQvTZu5ARi/YZFuIjdqaefJnOI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730474791; x=1731079591;
+ d=1e100.net; s=20230601; t=1730474793; x=1731079593;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Otig4MT+7NE5EvZ3Wb6FUNyd4tXoWuPjhCR+dMjmZgI=;
- b=BM59k7+0JSNgJ8JEP66sqxq+erdQ7Yg5iQDOjH0lH9vR7HGeVpeg5hikps6/le604z
- VBuA3wCenFNAFZEU43TGVX+Exdu5l/pF43OBpAP0H04980bEB6T8RrJJWls8JqaMf0A5
- LZU1nApFYViAFywURMv4HNdpqP1fUe/t87ZxQtVBi6chGryHo8ULJNiJtGMDn8zRvj/4
- 6yD7JumUY7QfniXf8gkavB27FFRw4tyrjGzKUkfN8eJe/1bi+5kt/aMGNqm4ub3283wp
- J7x1rqje/10iaTSIVbfMQ40RksK1LlZEtWuBJVTVYgoh+A9CkOzzySoddnYPKS0CiiAI
- RQbQ==
-X-Gm-Message-State: AOJu0YxR2DQdJvra+hDO4KV5BErR+MwlSlO2limr1yubSIUQqZjpM/tI
- M9/WR6R3AalEhx/YDn9lb6TqPiXy6EpV0JyCP3HqRJ7g43yCXseqkP2xL2Jwg/+FblT7y4auT1h
- sqDOz
-X-Google-Smtp-Source: AGHT+IHrS9pCjGa6W/NmkWbMyO7xDrL9UtpDiZnfjf1xcrfcHQw7g4FNKGY498y4/p0+MRC1qoWsbA==
-X-Received: by 2002:a17:907:97cb:b0:a99:92d3:7171 with SMTP id
- a640c23a62f3a-a9de63327dbmr2272541366b.61.1730474791400; 
- Fri, 01 Nov 2024 08:26:31 -0700 (PDT)
+ bh=YI+V/ztQgHnzvzla7o6fXvbMDxKa/O/Qph3dpr60HGQ=;
+ b=p+xMjyp081XrSh+7g9urNrvGsoURYVO3TwsN7NdiCX+qSlf4VU4OtCXUE8Mo/MwqEY
+ xcyC8uAstOqVqL51Yt8thXBza3wcj3A1A8rVlSOfLeD0bKTSesbkucAV/dKmxyoXjOrh
+ xhses+OxeOwJB3KP+hwFr2pefyHzp8eMZ4FBb7DGfYqcMxP8qE92nPneTLde+LJj4kCD
+ rLNRDa+Gt0+dZTh27RhzbS6PqZ9Nz/iRrVaALGMYfscLZZZSf41caiZkhHpnmEQXUVxg
+ 2OYZu9Zx/caGGf36Kb6F1/3elTI+xrnyn5zxu5u1tEjcrRYuenAvUdnQ0n9yhtq7/WUQ
+ XxIg==
+X-Gm-Message-State: AOJu0YxAklzXo3U8TCPpKrkmtRXAvRI+B9x1/SRJgDBJyJj3sq5DFYKC
+ gRb6zGVsJOJ+QnMUkcsJWSH2G4nnSbu4LMn1tUkuDNgiYq6LnnSXKIqgMEmd/UxgUj/8Wyy8xLt
+ PYV6P
+X-Google-Smtp-Source: AGHT+IG6jmZKsqWfLwqxo+wivHBA9aNRD4ijtxku05Nr0nZEtVheBurOX3F03tCUyb1qfeckgRpKzw==
+X-Received: by 2002:a17:906:c145:b0:a80:f840:9004 with SMTP id
+ a640c23a62f3a-a9e6553bf86mr394656366b.12.1730474792889; 
+ Fri, 01 Nov 2024 08:26:32 -0700 (PDT)
 Received: from chromium.org ([87.215.50.114]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9e5649454csm190269466b.8.2024.11.01.08.26.30
+ a640c23a62f3a-a9e5649454csm190269466b.8.2024.11.01.08.26.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Nov 2024 08:26:30 -0700 (PDT)
+ Fri, 01 Nov 2024 08:26:31 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: [PATCH v9 06/11] efi_loader: Allow reporting the host defaults
-Date: Fri,  1 Nov 2024 16:26:04 +0100
-Message-ID: <20241101152614.238747-7-sjg@chromium.org>
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH v9 07/11] sandbox: Report host default-filename in native mode
+Date: Fri,  1 Nov 2024 16:26:05 +0100
+Message-ID: <20241101152614.238747-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241101152614.238747-1-sjg@chromium.org>
 References: <20241101152614.238747-1-sjg@chromium.org>
@@ -91,8 +95,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an 'efidebug filename' command to report the default filename and
-PXE architecture.
+When the --native flag is given, pretend to be running the host
+architecture rather than sandbox.
+
+Allow the same control for PXE too.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -100,64 +106,114 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 (no changes since v9)
 
 Changes in v9:
-- Split out into its own patch
+- Separate into separate patches
 
 Changes in v8:
 - Add new patch to report host default-filename in native mode
 
- cmd/efidebug.c | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ include/efi.h               | 15 +++++++++++++++
+ lib/efi_loader/efi_helper.c | 35 ++++++++++++++++++++---------------
+ 2 files changed, 35 insertions(+), 15 deletions(-)
 
-diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index bba984b2b75..ff6d118876d 100644
---- a/cmd/efidebug.c
-+++ b/cmd/efidebug.c
-@@ -536,6 +536,27 @@ static int do_efi_show_log(struct cmd_tbl *cmdtp, int flag,
- 		return CMD_RET_FAILURE;
- 	}
+diff --git a/include/efi.h b/include/efi.h
+index 633f5b4acb5..817bc56c835 100644
+--- a/include/efi.h
++++ b/include/efi.h
+@@ -679,6 +679,21 @@ void efi_show_tables(struct efi_system_table *systab);
+  */
+ const char *efi_get_basename(void);
  
-+	return 0;
++#ifdef CONFIG_SANDBOX
++#include <asm/state.h>
++#endif
++
++static inline bool efi_use_host_arch(void)
++{
++#ifdef CONFIG_SANDBOX
++	struct sandbox_state *state = state_get_current();
++
++	return state->native;
++#else
++	return false;
++#endif
 +}
 +
-+/**
-+ * do_efi_show_defaults() - show UEFI default filename and PXE architecture
-+ *
-+ * @cmdtp:	Command table
-+ * @flag:	Command flag
-+ * @argc:	Number of arguments
-+ * @argv:	Argument array
-+ * Return:	CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on failure
-+ *
-+ * Implement efidebug "defaults" sub-command.
-+ * Shows the default EFI filename and PXE architecture
-+ */
-+static int do_efi_show_defaults(struct cmd_tbl *cmdtp, int flag,
-+				int argc, char *const argv[])
-+{
-+	printf("Default boot path: EFI\\BOOT\\%s\n", efi_get_basename());
-+	printf("PXE arch: 0x%02x\n", efi_get_pxe_arch());
-+
- 	return CMD_RET_SUCCESS;
+ /**
+  * efi_get_pxe_arch() - Get the architecture value for PXE
+  *
+diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+index b8ece1c2e0c..ab5678eb66c 100644
+--- a/lib/efi_loader/efi_helper.c
++++ b/lib/efi_loader/efi_helper.c
+@@ -23,27 +23,31 @@
+ 
+ #undef BOOTEFI_NAME
+ 
+-#ifdef CONFIG_SANDBOX
+-
+ #if HOST_ARCH == HOST_ARCH_X86_64
+-#define BOOTEFI_NAME "BOOTX64.EFI"
++#define HOST_BOOTEFI_NAME "BOOTX64.EFI"
++#define HOST_PXE_ARCH 0x6
+ #elif HOST_ARCH == HOST_ARCH_X86
+-#define BOOTEFI_NAME "BOOTIA32.EFI"
++#define HOST_BOOTEFI_NAME "BOOTIA32.EFI"
++#define HOST_PXE_ARCH 0x7
+ #elif HOST_ARCH == HOST_ARCH_AARCH64
+-#define BOOTEFI_NAME "BOOTAA64.EFI"
++#define HOST_BOOTEFI_NAME "BOOTAA64.EFI"
++#define HOST_PXE_ARCH 0xb
+ #elif HOST_ARCH == HOST_ARCH_ARM
+-#define BOOTEFI_NAME "BOOTARM.EFI"
++#define HOST_BOOTEFI_NAME "BOOTARM.EFI"
++#define HOST_PXE_ARCH 0xa
+ #elif HOST_ARCH == HOST_ARCH_RISCV32
+-#define BOOTEFI_NAME "BOOTRISCV32.EFI"
++#define HOST_BOOTEFI_NAME "BOOTRISCV32.EFI"
++#define HOST_PXE_ARCH 0x19
+ #elif HOST_ARCH == HOST_ARCH_RISCV64
+-#define BOOTEFI_NAME "BOOTRISCV64.EFI"
++#define HOST_BOOTEFI_NAME "BOOTRISCV64.EFI"
++#define HOST_PXE_ARCH 0x1b
+ #else
+-#error Unsupported UEFI architecture
++#error Unsupported Host architecture
+ #endif
+ 
+-#else
+-
+-#if defined(CONFIG_ARM64)
++#if defined(CONFIG_SANDBOX)
++#define BOOTEFI_NAME "BOOTSBOX.EFI"
++#elif defined(CONFIG_ARM64)
+ #define BOOTEFI_NAME "BOOTAA64.EFI"
+ #elif defined(CONFIG_ARM)
+ #define BOOTEFI_NAME "BOOTARM.EFI"
+@@ -59,8 +63,6 @@
+ #error Unsupported UEFI architecture
+ #endif
+ 
+-#endif
+-
+ #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI_LOAD_FILE2_INITRD)
+ /* GUID used by Linux to identify the LoadFile2 protocol with the initrd */
+ const efi_guid_t efi_lf2_initrd_guid = EFI_INITRD_MEDIA_GUID;
+@@ -68,11 +70,14 @@ const efi_guid_t efi_lf2_initrd_guid = EFI_INITRD_MEDIA_GUID;
+ 
+ const char *efi_get_basename(void)
+ {
+-	return BOOTEFI_NAME;
++	return efi_use_host_arch() ? HOST_BOOTEFI_NAME : BOOTEFI_NAME;
  }
  
-@@ -1589,6 +1610,8 @@ static struct cmd_tbl cmd_efidebug_sub[] = {
- 			 "", ""),
- 	U_BOOT_CMD_MKENT(dh, CONFIG_SYS_MAXARGS, 1, do_efi_show_handles,
- 			 "", ""),
-+	U_BOOT_CMD_MKENT(defaults, CONFIG_SYS_MAXARGS, 1, do_efi_show_defaults,
-+			 "", ""),
- 	U_BOOT_CMD_MKENT(images, CONFIG_SYS_MAXARGS, 1, do_efi_show_images,
- 			 "", ""),
- 	U_BOOT_CMD_MKENT(log, CONFIG_SYS_MAXARGS, 1, do_efi_show_log, "", ""),
-@@ -1688,6 +1711,8 @@ U_BOOT_LONGHELP(efidebug,
- 	"  - show UEFI drivers\n"
- 	"efidebug dh\n"
- 	"  - show UEFI handles\n"
-+	"efidebug defaults\n"
-+	"  - show default EFI filename and PXE architecture\n"
- 	"efidebug images\n"
- 	"  - show loaded images\n"
- 	"efidebug log\n"
+ int efi_get_pxe_arch(void)
+ {
++	if (efi_use_host_arch())
++		return HOST_PXE_ARCH;
++
+ 	/* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xml */
+ 	if (IS_ENABLED(CONFIG_ARM64))
+ 		return 0xb;
 -- 
 2.43.0
 
