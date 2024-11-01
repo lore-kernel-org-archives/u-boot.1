@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C150BE6B243
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 11:46:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7B0DE6B243
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 11:47:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 043C788F92;
-	Fri,  1 Nov 2024 12:46:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 639AF88F92;
+	Fri,  1 Nov 2024 12:47:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="IR5ftM0i";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="StAvlWTt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE81689021; Fri,  1 Nov 2024 12:46:52 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AD931891DD; Fri,  1 Nov 2024 12:47:36 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A11E88E94
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 12:46:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B65688E94
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 12:47:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730461609; x=1731066409; i=xypron.glpk@gmx.de;
- bh=ON4Rw2gCV07/6ssI9+54GMzY/JwO/p7Fr5dR6rWpU20=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=IR5ftM0i9HeVu8iwAAZ3BGCkhgW+X/cSPx8stHPtecbcuhvv35MWjTCKi8JYZEZM
- B9tUU34L+478k5olSkEWaX1KXA8/Wtgl38c74JfCVQTUTOInjmTjdBTMFLnfKSRuk
- zJAt1lohN4XIYs9MNuQg+kizak/c/cjgCl8bXApZJTN/GON1Zt4DnvGSrTWm1EMbn
- 6uvo4Ze14FZem/Cpw7qyimYBU53wP0XR1uIq5twSB68ifPC2aHpK9vte6BDhcGKIy
- lV3P2AYfAVIPHIedI7VT30+14ZKpjDk6qV88oiq1Lq94UucN8K43h3B3YFB7mnsXr
- 2jUhTLnCRG64zrAoEA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [10.150.8.169] ([145.103.114.43]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MYNNo-1tKbVK3oBO-00UPXo; Fri, 01
- Nov 2024 12:46:49 +0100
-Message-ID: <91b284bc-b3ca-4475-8e27-01ece4ef10e4@gmx.de>
-Date: Fri, 1 Nov 2024 12:46:48 +0100
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5c94a7239cfso1173006a12.3
+ for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 04:47:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730461654; x=1731066454; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=n2kqK3Gqoy32R6+rqlsssIZDVlixu9xnj1RqYvwGElk=;
+ b=StAvlWTtvRoc2wxk7r0D3a+dRtRGTt3qS88HZ/1aZXEnO9x9OGls/x2dlZocLaRKtv
+ VaPVNYEUJ6744qT0yUVhdzKs6GFdsxgay9wJhMsguoHEditRrhfOItVMd3aLpKwzYxew
+ gIkKwUeg5e++Q9r6HcOohYLxv1Nk8cTf1o8kjTNQPu8L+RlpQ5BfyKMh+dAuCXMgVFv3
+ KcFIy66JF8sStER+UG9iUZ5q3PIzAZWDwp8QSvrZkTcwmvhGwdPwW/hzTdTK5VKvLIQ1
+ C43PX5lJZIeedjElgqMkHZrOk9NRNiuiz/naoNX+lj6UTAO+2mgMSOE5Nh2vJekbhr4X
+ FOZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730461654; x=1731066454;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=n2kqK3Gqoy32R6+rqlsssIZDVlixu9xnj1RqYvwGElk=;
+ b=plgR6AJ2rcNCzYVCediGiDJfOF713fnQf+oIDptc6goHBiEaz5+dG/p4DH1JEqBsq5
+ DXOfEA86HpKMbZzy2O7I58WnBpqxyxiyExcNdkEsL4EElBUqFVo/FLyks+ILxo7BTdYP
+ b90pDCPRgNuF25961Su5JdsQBu/iheXl0hvg4JYm8vgOaqC7ZI2s7spxhORrcrLlpkpq
+ tmyAo1GTHDQThm7gc+2n1TmlMPnt2Wxl1pO4OJwExRI/vqN4HaHvDBoOwbbH0UYZHltr
+ Qj4MBO4q4ZIY+c4SZNSk5MMpsc7uLoRgFUyEints9rofKaGsz1jBBb3wUeHp97qkNiET
+ lWhQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU6Lip5DcEjp8fqFgyHElZhD0UOSXF5FTW/TFnDnYXm2D5HekP86LnJHDCwdP3bJsvmWjyXW5Y=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywn8RgO/Z2D25kf6bB45jQQrQh2XJ66SvZKPRnuvHFe233q6v1s
+ HSGQg46A9GC9QI0cczkZKB3gzsH9aLM+e6NrAlZ6lqDxF9sa9EZlPl9Jx3hElddpCpiUGqYNcSV
+ yCbj1ShLqmVGXs3CRr9a/eamfsUjcVmSu691XldL3OMv7RULK
+X-Google-Smtp-Source: AGHT+IG2+C8Dg/vunXCZuoAjCiYz4x8CquyA7B5/Whtpeg8vPtPCSQv2huwgW8IzXeWRakQZGJaWdweXEk53n5RpDTA=
+X-Received: by 2002:aa7:ce1a:0:b0:5cb:bebb:38d8 with SMTP id
+ 4fb4d7f45d1cf-5ceb9263166mr2909192a12.14.1730461653758; Fri, 01 Nov 2024
+ 04:47:33 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] armv8: cpu: Implement allow_unaligned()
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20241031220605.31684-1-semen.protsenko@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241031220605.31684-1-semen.protsenko@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:/wtyhtHLh/dVo91N0c8vAS456pS9xhZJEv/fqNnnpqvxFrKxyIb
- 11bRhtGx5RDq/Bccywon/tvnyK012Z2jWhEnPGsEUYX406hcFZMzHYQQgPUz3VXPdHoAA0D
- fHLfqhFeLi1oGeBz4LvIMhMpelePgmp4w65QeLrZwgh+l7B+GP7t6Z52ZmE1disC84qDjlj
- zw+S1+CHbDgFl/prkx2SQ==
-UI-OutboundReport: notjunk:1;M01:P0:PX20jfGKLQo=;YTn1aOZgjZ8NU9r1Y+gtlZnEUDo
- 45uuyaL6xAjXurGnpfi2q8/ljkxl2Vx1IRdHQxUigbZaqZFFLZc4nFkQhq9IFK6C4SsNZytCq
- PJd9SX7LQ0tLnLQaS3eR/Ixv6C8t+g++IFCi77/kBGMHNc/g5ca0VN58Aife4710TUJFTXZTE
- 0JXJKXkSoIipg4DTqyziw9z9197oE4PU2epW1jd7cbRxQZrssDJ09qDxwLxB1pRXw8GmwFBeT
- GF8ieFQeTfK9YCiyRGvVMM8H8kHzymUHD4MVm8EKdranGHMIdWjYXCMJyerZtai6wjTLx3X4b
- TyThbd0GoB1tIDqacFA+IKv4nc/nbWeDaoTm5lkrtW45sNWPMzvjm5CGvOTiweUbRGLaw5TFM
- Rsu1xIUChMMtXG/sU21yvKvswGFp8F0nYo/Sgx+jOE/8Jj+doPDgfMp5ENf8E3BTsGy2lpWDQ
- 4jqygJ+idGkZYJ4HSUx66kiiJ1AMeZ/b/2v1opnvY+ZFRYWxyZeL1xAcZp5WxLCgDKLx3T7z7
- z9ZNLHFkt5A6mkgPckFZrIdc/Tx8gwxKOBo6XG1hwQbDp0C3TtfKv+JQsYeO+75GXP6kqNOY5
- epFPR0Xr/LdZFt+eFiL63sZrF/shxsKKjFtUIIUAMiFUYcUKMWSssGT1/YmoX656XI6hXYRA0
- mFTR3ACgMT63enURmh8uupKdzcc2d+HF6AkrgfiYYtBOW2HT8C+E+WWzUgk2HvGI/6EFOonyp
- q+DffdBrzK8Ocx5/RMkvLl7FqIU63HVuZ9S2J/3x8F2rNRvm3krIIPCasflOqNHtVJcFAC588
- 2+ST7e9ak6/vunorCKT1EBWQ==
+References: <20241101-io_lmb_apple_dart_iommu-v1-0-fe4b9a74d47c@jannau.net>
+In-Reply-To: <20241101-io_lmb_apple_dart_iommu-v1-0-fe4b9a74d47c@jannau.net>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Fri, 1 Nov 2024 17:17:22 +0530
+Message-ID: <CADg8p97H9eqncSEGjZF5EGP2M9Y10MmV28RwSdtsW+T8fSURiw@mail.gmail.com>
+Subject: Re: [PATCH 0/4] Fix IOVA allocation in Apple dart iommu after global
+ LMB mem map changes
+To: Janne Grunau <j@jannau.net>
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,71 +89,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/31/24 23:06, Sam Protsenko wrote:
-> Usually ARMv8 platforms allow unaligned access for Normal memory. But
-> some chips might not allow it by default, having SCTLR.A bit set to 1
-> before U-Boot execution. One such example is Exynos850 SoC. As
-> allow_unaligned() is not implemented for ARMv8 at the moment, its __weak
-> implementation is used, which does nothing. That might lead to unaligned
-> access abort, for example when running EFI selftest. Fix that by
-> implementing allow_unaligned() for ARMv8.
+On Fri, 1 Nov 2024 at 15:47, Janne Grunau <j@jannau.net> wrote:
 >
-> The issue was found when running EFI selftest on E850-96 board
-> (Exynos850 based):
+> The changes in "Make LMB memory map global and persistent" [1] break
+> mapping DMA memory in the USB xHCI driver when using the apple_dart
+> iommu present on Apple silicon systems.
 >
->      =3D> bootefi selftest $fdtcontroladdr
+> The IOVA space used by the u-boot driver (low 4GB) and physical memory
+> do not overlap. The physical memory on this systems starts depending on
+> the SoC either at 0x10_0000_0000 or 0x100_0000_0000. It make no sense to
+> manage these distinct regions in a single LMB map. In addition every
+> device has its own iommu and IO address space so sharing a single memory
+> map between all iommu instances is not necessary.
 >
->      ...
->      Executing 'HII database protocols'
->      "Synchronous Abort" handler, esr 0x96000021, far 0xbaac0991
->      ...
->      resetting ...
+> To fix this issue restore the used subset (add, alloc and free) of the
+> previous pointer based LMB interface with "io_" as prefix.
 >
-> Unaligned abort happens in u16_strnlen(), which is called from
-> efi_hii_sibt_string_ucs2_block_next():
+> To ensure that low level lmb functions do not use the global LMB
+> variable reorder lib/lmb.c so that the variable is not visible.
 >
->      u16_strlen(blk->string_text)
+> Tested with patches from my "Fix device removal order for Apple dart
+> iommu" series [2] to fix a separate issue.
 >
-> where 'blk' type is struct efi_hii_sibt_string_ucs2_block. Because this
-> struct is packed, doing "->string_text" makes 'blk' address incremented
-> by 1 byte, which makes it unaligned. Although allow_unaligned() was
-> called in efi_init_early() before EFI selftest execution, it wasn't
-> implemented for ARMv8 CPUs, so data abort happened.
+> The cosmetic commit has two checkpatch warnings in existing code which I
+> ignored.
 >
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> [1] https://lore.kernel.org/u-boot/20240826115940.3233167-1-sughosh.ganu@linaro.org/
+> [2] https://lore.kernel.org/u-boot/20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net/
+>
+> Signed-off-by: Janne Grunau <j@jannau.net>
 > ---
->   arch/arm/cpu/armv8/cpu.c | 5 +++++
->   1 file changed, 5 insertions(+)
+> Janne Grunau (4):
+>       lmb: Do not use global LMB variable in _lmb_free()
+>       lmb: cosmetic: reorder functions and global LMB variable
+>       lmb: Add basic io_lmb functionality
+>       iommu: apple: Manage IOVA separately from global LMB mem map
+
+Thanks for these changes. I am currently on leave, but will take a
+look at this in detail next week. But on a cursory glance, I have to
+say that I am not entirely satisfied with this solution as well. With
+these patches, we now have a disparity in terms on how we view the LMB
+memory map -- we have a global map for RAM address range, but a per
+device one for IOVA's. I understand that IOVA's are supposed to be
+per-device, but then I think that perhaps LMB is not the right way to
+solve this. This was fine earlier, when the entire LMB implementation
+in U-Boot was local, but that is not the case now. I wonder if there
+can be a different, non-LMB way to implement this. Earlier, we had
+functions for allocating and maintaining a memory map in the EFI
+memory module. I am wondering if we can use those functions in a
+common place, and use that implementation instead of having this in
+LMB. That way, every device which is looking for an IOVA map, can
+maintain one, and use the common functions to add memory space to it's
+map, and then use that memory for allocations. Also, based on your
+explanation above, I think that it should be the responsibility of the
+device to get the IOVA address range, and then pass those addresses to
+the IOMMU driver? Let us see what others have to say on this solution.
+If there is consensus, I can look at a solution once I am back.
+
+-sughosh
+
 >
-> diff --git a/arch/arm/cpu/armv8/cpu.c b/arch/arm/cpu/armv8/cpu.c
-> index d568efa427ab..82ecf02f4b03 100644
-> --- a/arch/arm/cpu/armv8/cpu.c
-> +++ b/arch/arm/cpu/armv8/cpu.c
-> @@ -94,3 +94,8 @@ void armv8_setup_psci(void)
->   	secure_ram_addr(psci_arch_init)();
->   }
->   #endif
-> +
-> +void allow_unaligned(void)
-> +{
-> +	set_sctlr(get_sctlr() & ~CR_A);
-
-Looking at the ARM documentation SCTLR_EL2 is a 64bit register.
-
-https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Registers/=
-SCTLR-EL2--System-Control-Register--EL2-?lang=3Den
-
-But get_sctlr() is defined as
-
-arch/arm/include/asm/system.h:174:
-static inline unsigned int get_sctlr(void)
-
-Your code might not work as expected. Should we adjust the definition of
-get_sctlr() to return a long value?
-
-Best regards
-
-Heinrich
-
-> +}
-
+>  drivers/iommu/apple_dart.c |  16 +-
+>  include/lmb.h              |  47 ++++
+>  lib/lmb.c                  | 608 ++++++++++++++++++++++++++-------------------
+>  3 files changed, 406 insertions(+), 265 deletions(-)
+> ---
+> base-commit: 1d147b74f437fb0e85821e8271fe52bc5fd30194
+> change-id: 20241101-io_lmb_apple_dart_iommu-dc2674ef9036
+>
+> Best regards,
+> --
+> Janne Grunau <j@jannau.net>
+>
