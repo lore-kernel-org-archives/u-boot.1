@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A1BAE6F069
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:34:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CC93E6F06C
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:37:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D7B0892B5;
-	Fri,  1 Nov 2024 16:34:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A2C0088E14;
+	Fri,  1 Nov 2024 16:37:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OVG0Asq2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aE8sZ1Te";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49B82892E8; Fri,  1 Nov 2024 16:34:46 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 92C3688DF5; Fri,  1 Nov 2024 16:37:34 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3392D88DF5
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:34:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A42AA88E14
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:37:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5cebcf96fabso788909a12.3
- for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:34:43 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a9aa8895facso325691866b.2
+ for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:37:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730475283; x=1731080083; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730475452; x=1731080252; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=h8kOrrd9eGHhJERVmcNgxCgJGXY2WtE4qaI8kTGUt8Q=;
- b=OVG0Asq23jl5x/dVjynJoDP92PQVYZ2JcrANotX+dL2iOQ/TmzsLwjajeMNSJH+Sao
- MRNIQon0bmIutUNvV667cr/eCVUS7WW9ylIygiCSIkr/1kQ6k9q913JWSat4pSVLrbXr
- x2ATKvM24G62KH4DNV/bxeRqQF34TdQ08MQgE=
+ bh=JB9RFNqJljcjSQyHgstgjHwzrwrbu6TDhh/Wb/4ehlw=;
+ b=aE8sZ1Tew0FK7qJE4mr/YyVnqvPXbFV/oUEfs1juHWvkXxq9NZ4ppuGbFd3ADvzX0M
+ KQBEgrSbYjDfM0Z/GoKV8ulVasitk+r7oPv3at3wL/Cd10hVBGHF8rhj4szXxxEVaymG
+ UetT6lcTxIuQpyLGBdeohXdxY953bVBYoa2Qc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730475283; x=1731080083;
+ d=1e100.net; s=20230601; t=1730475452; x=1731080252;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=h8kOrrd9eGHhJERVmcNgxCgJGXY2WtE4qaI8kTGUt8Q=;
- b=Tre8NJaBEA4hU5Wsa7nNTDduBsMCCLdBy0GAZtXVvK/lbbsr8A1t2ugtwuuctvPGmV
- esZEnWRxuzRoGKhjivHO/Y2R4pePJKJudRk5C78QJV9lc/NEPELniPBUC/tqwrQ42DdE
- XLY84YYQG7eoS/iDxacVOINP3w0OZczpf/SQCOcBecdxRcNSPhYjxFirdIGnMAHYeEd1
- LOk2VxRlKmsJ4BwUns+YjyAeMdVhgomlnjhPe9Q+USX1OLACYqTN6L3IRkHFzuczDzxO
- WWC0qfE4vBpI41PV3/eNFYY2gdjF00ktoehUzg9wAg+ew5HVIhcmjiD/iK9uQ+FD5JZ6
- 20TQ==
-X-Gm-Message-State: AOJu0YylM/+oxt1DizufRI2SP93+3uI+fK6gXUlM2AO8bTjdThYU2xPv
- iWw3WgXktCShmFB8TU4IO86aFRZUpRrs9jhux+0GgG6J6oPuqx1giV93kwanNFx5iQ2b+GgMsYf
- 4LAvv33MrkzXVFTYNvLTDsNmHrwoXbNgx5NjLoUqab/CeYe44Svbn
-X-Google-Smtp-Source: AGHT+IG6EYHSLITGZzKF4kilvTjsI69YUzf+HI6+NI4zcipbtt7EaEOnoFiYZiR0tzT9E0EFW+nmdn0UMXi4UpVmhqo=
-X-Received: by 2002:a17:907:7e8f:b0:a9a:183a:b84e with SMTP id
- a640c23a62f3a-a9e50b928acmr685179466b.40.1730475282530; Fri, 01 Nov 2024
- 08:34:42 -0700 (PDT)
+ bh=JB9RFNqJljcjSQyHgstgjHwzrwrbu6TDhh/Wb/4ehlw=;
+ b=CO8AlJ57h37I+kJkj4ZFGVB/2tmGpFKiWhpqFkzXU1nvPJ6T2lMQxgh63ZmGSGClWE
+ zF+WWgT3E4By+kI5A6A324GRqEyiKRfzofrisZt+q4nOCvtZ8zjbWKuKG5g++XZeY5mV
+ VV73t9imOTNm3zttds4QJcRwQEvMIQsX2dxBVSUQ3ZAf3QQqsHVSUeRF7GaJznGIi01s
+ qJZbIrHKpJ3/TQq7h2wPcM5vs5bPifDD1oUOq2ERB7IsyhB3rZLNtN11isyHO6BvK/Ql
+ pemzwGb/y6PAZRX10PRv1x43hQ8ht+ZrcqwTJ5GUA4rBIqf+8CJLTnj/1+H+xJ9wlez8
+ tm2g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWCtd75dj9u5vmdpHAOb3jMTpxzdHdM/4QMbLlZALb8A+NpYDc9ph4znyjvoE4utFEhR3hcFkg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzho+2uqv7CdF6TJCcDJ/Wd7cD2hz/zT+kkZx8Jv/5tCvxDtYCZ
+ Mawgk+65AVaA2ucyjhCC5MWuPFqk5GlkNvG/fc53skEtmFHAVFuP/Z+2B4lTneCyma27ppL9Zn3
+ pmHO8GJ7dHnLhan8O1ZXXDvtzzarlvKjAIv4G
+X-Google-Smtp-Source: AGHT+IHXwur5QKCFfkCjAnw3QbPrVm7FcIKP2JESUZPB5cFS+PIHOtTeREMU9M752pc8Sk7cAoi4bTHWKoU36BjMx+c=
+X-Received: by 2002:a17:907:1b92:b0:a9e:45e6:42cb with SMTP id
+ a640c23a62f3a-a9e45e69b52mr592550166b.18.1730475452082; Fri, 01 Nov 2024
+ 08:37:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241021155133.29557-1-sjg@chromium.org>
- <20241021155133.29557-4-sjg@chromium.org>
- <81b0a377-6669-46c6-9da8-c83d9758587e@kwiboo.se>
-In-Reply-To: <81b0a377-6669-46c6-9da8-c83d9758587e@kwiboo.se>
+References: <20241026120252.865215-1-sjg@chromium.org>
+ <20241026223346.GI4959@bill-the-cat>
+ <CAFLszTg-Lr3uWu41YX1z=JTbBbiT8Gh2oydLHpq5dtyZbRUtKg@mail.gmail.com>
+ <82825184-692b-4245-8935-57d87f84692a@linaro.org>
+In-Reply-To: <82825184-692b-4245-8935-57d87f84692a@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 1 Nov 2024 16:34:28 +0100
-Message-ID: <CAFLszTj0xq13UH=xvrwRv+y5PtNfpUNxvOW7kf49CyYg4g-HUw@mail.gmail.com>
-Subject: Re: [PATCH 3/3] common: Move autoprobe out to board init
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Svyatoslav <clamor95@gmail.com>, 
- Artur Rojek <artur@conclusive.pl>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
+Date: Fri, 1 Nov 2024 16:37:17 +0100
+Message-ID: <CAFLszTijo+=OuCXBKfDKKyL=LajNzZosovfqRLGc92B1AccLkw@mail.gmail.com>
+Subject: Re: [PATCH v2] sandbox: Add a build without CMDLINE
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Richard Weinberger <richard@nod.at>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>
+ Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,114 +92,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Caleb, Tom,
 
-On Mon, 21 Oct 2024 at 18:10, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Mon, 28 Oct 2024 at 22:54, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Hi Simon,
 >
-> On 2024-10-21 17:51, Simon Glass wrote:
-> > Rather than doing autoprobe within the driver model code, move it out to
-> > the board-init code. This makes it clear that it is a separate step from
-> > binding devices.
 >
-> It could probably be good to mention that after this patch the events
-> EVT_DM_POST_INIT_R/F will happen before autoprobe instead of after.
-
-Yes, good point.
-
->
+> On 27/10/2024 15:52, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > For now this is always done twice, before and after relocation, but we
-> > should discuss whether it might be possible to drop the post-relocation
-> > probe.
+> > On Sun, 27 Oct 2024 at 00:33, Tom Rini <trini@konsulko.com> wrote:
+> >>
+> >> On Sat, Oct 26, 2024 at 02:02:49PM +0200, Simon Glass wrote:
+> >>
+> >>> Something this breaks, so add a build to keep it working. Since sandbox
+> >>> enables a lot of options, it is a good board to use. The new config is
+> >>> created simply by copying the existing sandbox and turning off CMDLINE
+> >>>
+> >>> Once we have tests for non-CMDLINE operation, this can be adjusted to
+> >>> run those tests.
+> >>>
+> >>> Create a new build which will be picked up by CI. Update the maintainer
+> >>> entry as well.
+> >>>
+> >>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >>> ---
+> >>>
+> >>> Changes in v2:
+> >>> - Create a new build instead of messing with CI
+> >>>
+> >>>  MAINTAINERS                         |   1 +
+> >>>  configs/sandbox_nocmdline_defconfig | 365 ++++++++++++++++++++++++++++
+> >>>  2 files changed, 366 insertions(+)
+> >>>  create mode 100644 configs/sandbox_nocmdline_defconfig
+> >>
+> >> Please use the #include mechanism instead of a full config that will
+> >> also now have to be kept in sync.
+> >
+> > Hmmm we still haven't come up with a way to deal with the #include
+> > mechanism in buildman. I've forgotten where it got to, or even what
+> > the problem was?
 >
-> If you have plans to drop post-relocation probe, I suggest you first
-> look into having OF_LIVE working at pre-reloaction to speed up boot, the
-> use of fdtdec is super slow in getting parent node/offset.
-
-Indeed. I keep hoping someone else will look at this.
-
+> qcm6490_defconfig needs to re-define CONFIG_ARM=y for buildman to be happy.
 >
-> >
-> > This patch also drops autoprobe from SPL. If that is needed, we could
-> > add a call in SPL.
->
-> This patch will break a feature used by the Pine64 PineTab2 because of
-> this change, please restore autoprobe in SPL.
->
-> The PineTab2 have a feature to power itself off when power-on happen
-> because of power cable was plugged in, for this to work it currently
-> depends on DM probe after bind works in SPL.
+> Why is buildman looking at the defconfig anyway? Maybe it could just run
+> the pre-processor first?
 
-OK. We can always make it optional later. At least with this series it
-is explicit.
-
-Regards,
-Simon
-
->
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  common/board_f.c    |  4 ++++
-> >  common/board_r.c    |  4 ++++
-> >  drivers/core/root.c | 17 ++++++++++++++---
-> >  include/dm/root.h   | 10 ++++++++++
-> >  4 files changed, 32 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/common/board_f.c b/common/board_f.c
-> > index 8684ed71284..6564b2ac2f7 100644
-> > --- a/common/board_f.c
-> > +++ b/common/board_f.c
-> > @@ -822,6 +822,10 @@ static int initf_dm(void)
-> >       if (ret)
-> >               return ret;
-> >
-> > +     ret = dm_autoprobe();
-> > +     if (ret)
-> > +             return ret;
-> > +
-> >       if (IS_ENABLED(CONFIG_TIMER_EARLY)) {
-> >               ret = dm_timer_init();
-> >               if (ret)
-> > diff --git a/common/board_r.c b/common/board_r.c
-> > index e5f33f40643..a2948b7b55c 100644
-> > --- a/common/board_r.c
-> > +++ b/common/board_r.c
-> > @@ -243,6 +243,10 @@ static int initr_dm(void)
-> >       if (ret)
-> >               return ret;
-> >
-> > +     ret = dm_autoprobe();
-> > +     if (ret)
-> > +             return ret;
-> > +
-> >       return 0;
-> >  }
-> >  #endif
-> > diff --git a/drivers/core/root.c b/drivers/core/root.c
-> > index 2d4f078f97f..f6bda84b2b9 100644
-> > --- a/drivers/core/root.c
-> > +++ b/drivers/core/root.c
-> > @@ -281,7 +281,7 @@ void *dm_priv_to_rw(void *priv)
-> >  }
-> >  #endif
-> >
-> > -static int dm_probe_devices(struct udevice *dev)
-> > +static int dm_probe_devices_(struct udevice *dev)
->
-> Why is this function renamed?
-
-It's not needed, since I decided on a different name for the function.
-I'll change it back.
-
-Thank you for the review on this.
-
-I am hoping Marek will chime in too!
-
-[..]
+It could, but I really want buildman to understand things. If we can
+say that '#include' in the file is the only thing it needs to deal
+with, then I believe we can update Kconfiglib to deal with it, or
+perhaps preprocess the file. That uncertainty (as to what the 'spec'
+actually is) is what has held me back from looking at it too
+seriously.
 
 Regards,
 Simon
