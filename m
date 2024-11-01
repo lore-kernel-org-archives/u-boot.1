@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFEF8E6F061
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 14:21:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 498C4E6F060
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 14:21:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0E85892DC;
-	Fri,  1 Nov 2024 15:20:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1821789312;
+	Fri,  1 Nov 2024 15:20:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 851C0892E1; Fri,  1 Nov 2024 15:20:40 +0100 (CET)
+ id 3760B892F5; Fri,  1 Nov 2024 15:20:41 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E8BCD892F4
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 15:20:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 00582891DD
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 15:20:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1BE6B1BC0;
- Fri,  1 Nov 2024 07:21:06 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 170DA1007;
+ Fri,  1 Nov 2024 07:21:08 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.26.20])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 961483F528;
- Fri,  1 Nov 2024 07:20:35 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BAAA53F528;
+ Fri,  1 Nov 2024 07:20:37 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Subject: [PATCH 3/8] arm_ffa: Add FFA_MEM_RECLAIM support
-Date: Fri,  1 Nov 2024 14:20:12 +0000
-Message-Id: <20241101142017.79311-4-abdellatif.elkhlifi@arm.com>
+Subject: [PATCH 5/8] arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
+Date: Fri,  1 Nov 2024 14:20:14 +0000
+Message-Id: <20241101142017.79311-6-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241101142017.79311-1-abdellatif.elkhlifi@arm.com>
 References: <20241101142017.79311-1-abdellatif.elkhlifi@arm.com>
@@ -55,223 +55,119 @@ X-Virus-Status: Clean
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Add to the FF-A bus FFA_MEM_RECLAIM ABI
-
-The FFA_MEM_RECLAIM is a memory management ABI described in the FF-A
-v1.0 specification [1].
-
-This ABI restores exclusive access to a memory region back to its Owner.
-
-This work is based on the implementation in Linux [2].
-
-[1]: https://developer.arm.com/documentation/den0077/a/?lang=en
-[2]: commit cc2195fe536c28e192df5d07e6dd277af36814b4
-     File: drivers/firmware/arm_ffa/driver.c
+Add FFA_MEM_SHARE support to the FF-A emulator
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 ---
- doc/arch/arm64.ffa.rst                    |  2 +
- drivers/firmware/arm-ffa/arm-ffa-uclass.c | 70 +++++++++++++++++++++++
- drivers/firmware/arm-ffa/arm-ffa.c        |  1 +
- include/arm_ffa.h                         | 25 +++++++-
- include/arm_ffa_priv.h                    |  3 +-
- 5 files changed, 99 insertions(+), 2 deletions(-)
+ .../include/asm/sandbox_arm_ffa_priv.h        |  5 ++-
+ drivers/firmware/arm-ffa/ffa-emul-uclass.c    | 44 +++++++++++++++++++
+ drivers/firmware/arm-ffa/sandbox_ffa.c        |  3 +-
+ 3 files changed, 50 insertions(+), 2 deletions(-)
 
-diff --git a/doc/arch/arm64.ffa.rst b/doc/arch/arm64.ffa.rst
-index 3eec735d741..d2c4fb49f79 100644
---- a/doc/arch/arm64.ffa.rst
-+++ b/doc/arch/arm64.ffa.rst
-@@ -186,6 +186,7 @@ The following features are provided:
-     - FFA_MSG_SEND_DIRECT_REQ
-     - FFA_MSG_SEND_DIRECT_RESP
-     - FFA_MEM_SHARE
-+    - FFA_MEM_RECLAIM
+diff --git a/arch/sandbox/include/asm/sandbox_arm_ffa_priv.h b/arch/sandbox/include/asm/sandbox_arm_ffa_priv.h
+index b0881822d78..8d04efc32d6 100644
+--- a/arch/sandbox/include/asm/sandbox_arm_ffa_priv.h
++++ b/arch/sandbox/include/asm/sandbox_arm_ffa_priv.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ * Copyright 2022-2024 Arm Limited and/or its affiliates <open-source-office@arm.com>
+  *
+  * Authors:
+  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+@@ -70,6 +70,9 @@
+ #define SANDBOX_SERVICE2_UUID_A3	0x9cc02d72
+ #define SANDBOX_SERVICE2_UUID_A4	0xcdd998a7
  
- - Support for the 64-bit version of the following ABIs:
- 
-@@ -205,6 +206,7 @@ The following features are provided:
-     - ffa_sync_send_receive
-     - ffa_rxtx_unmap
-     - ffa_memory_share
-+    - ffa_memory_reclaim
- 
- - FF-A bus discovery makes sure FF-A framework is responsive and compatible
-   with the driver
-diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-index 8ff666c3757..5eae28386ae 100644
---- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-+++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-@@ -109,6 +109,18 @@ static struct ffa_abi_errmap err_msg_map[FFA_ERRMAP_COUNT] = {
- 			"DENIED: Memory region ownership, permission, access or attributes error",
- 		},
- 	},
-+	[FFA_ID_TO_ERRMAP_ID(FFA_MEM_RECLAIM)] = {
-+		{
-+			[ABORTED] =
-+			"ABORTED: ABI invocation failure",
-+			[INVALID_PARAMETERS] =
-+			"INVALID_PARAMETERS: Invalid handle or flags",
-+			[NO_MEMORY] =
-+			"NO_MEMORY: Failure to create the Owner's mapping",
-+			[DENIED] =
-+			"DENIED: Memory region state issue",
-+		},
-+	},
- };
- 
++/* Globally unique Handle to identify the shared memory region */
++#define SANDBOX_MEM_HANDLE		0xffffffff
++
  /**
-@@ -1115,6 +1127,41 @@ int ffa_memory_share_hdlr(struct udevice *dev, struct ffa_mem_ops_args *args)
- 	return ffa_memory_ops(dev, FFA_MEM_SHARE, args);
+  * struct ffa_rxtxpair_info - structure hosting the RX/TX buffers flags
+  * @rxbuf_owned:	RX buffer ownership flag (the owner is non secure world)
+diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+index 3e8b5288d3b..a859d2e26cc 100644
+--- a/drivers/firmware/arm-ffa/ffa-emul-uclass.c
++++ b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+@@ -563,6 +563,47 @@ static int sandbox_ffa_get_parts(struct udevice *emul, struct ffa_sandbox_data *
+ 	return 0;
  }
  
 +/**
-+ * ffa_memory_reclaim_hdlr() - FFA_MEM_RECLAIM handler function
-+ * @dev: The FF-A bus device
-+ * @g_handle: The memory region globally unique Handle
-+ * @flags: Zero memory and time slicing flags
++ * sandbox_ffa_memory_share() - Emulated FFA_MEM_SHARE handler
++ * @emul: The sandbox FF-A emulator device
++ * @pargs: The SMC call input arguments a0-a7
++ * @res:  The SMC return data
 + *
-+ * Implement FFA_MEM_RECLAIM FF-A function
-+ * to restore exclusive access to a memory region back to its Owner.
++ * Emulate FFA_MEM_SHARE FF-A function.
 + *
 + * Return:
 + *
 + * 0 on success. Otherwise, failure
 + */
-+int ffa_memory_reclaim_hdlr(struct udevice *dev, u64 g_handle, u32 flags)
++static int sandbox_ffa_memory_share(struct udevice *emul, ffa_value_t *pargs,
++				    ffa_value_t *res)
 +{
-+	ffa_value_t res;
-+	int ffa_errno;
++	int ret;
 +
-+	invoke_ffa_fn((ffa_value_t){
-+			.a0 = FFA_SMC_32(FFA_MEM_RECLAIM),
-+			.a1 = HANDLE_LOW(g_handle), .a2 = HANDLE_HIGH(g_handle),
-+			.a3 = flags,
-+			},
-+			&res
-+	);
++	res->a0 = FFA_SMC_32(FFA_ERROR);
++	res->a3 = 0;
 +
-+	if (res.a0 != FFA_SMC_32(FFA_SUCCESS)) {
-+		ffa_errno = res.a2;
-+		ffa_print_error_log(FFA_MEM_RECLAIM, ffa_errno);
-+		return ffa_to_std_errno(ffa_errno);
++	if (!pargs->a1 || (pargs->a1 > (RXTX_BUFFERS_MIN_PAGES * SZ_4K))) {
++		res->a2 = -INVALID_PARAMETERS;
++		ret = ffa_to_std_errmap[INVALID_PARAMETERS];
++		goto feedback;
 +	}
 +
-+	return 0;
-+}
++	res->a0 = FFA_SMC_32(FFA_SUCCESS);
++	res->a2 = SANDBOX_MEM_HANDLE;
++	res->a3 = SANDBOX_MEM_HANDLE;
++	ret = 0;
 +
- /* FF-A driver operations (used by clients for communicating with FF-A)*/
- 
- /**
-@@ -1214,6 +1261,29 @@ int ffa_memory_share(struct udevice *dev, struct ffa_mem_ops_args *args)
- 	return ops->memory_share(dev, args);
- }
- 
-+/**
-+ * ffa_memory_reclaim() - FFA_MEM_RECLAIM driver operation
-+ * @dev: The FF-A bus device
-+ * @g_handle: The memory region globally unique Handle
-+ * @flags: Zero memory and time slicing flags
-+ *
-+ * Driver operation for FFA_MEM_RECLAIM.
-+ * Please see ffa_memory_reclaim_hdlr() description for more details.
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, failure
-+ */
-+int ffa_memory_reclaim(struct udevice *dev, u64 g_handle, u32 flags)
-+{
-+	struct ffa_bus_ops *ops = ffa_get_ops(dev);
++feedback:
 +
-+	if (!ops || !ops->memory_reclaim)
-+		return -ENOSYS;
++	res->a1 = 0;
 +
-+	return ops->memory_reclaim(dev, g_handle, flags);
++	/* x4-x7 MBZ */
++	memset(FFA_X4X7_MBZ_REG_START, 0, FFA_X4X7_MBZ_CNT * sizeof(ulong));
++
++	return ret;
 +}
 +
  /**
-  * ffa_do_probe() - probing FF-A framework
-  * @dev:	the FF-A bus device (arm_ffa)
-diff --git a/drivers/firmware/arm-ffa/arm-ffa.c b/drivers/firmware/arm-ffa/arm-ffa.c
-index c4211c953ef..b7e751e3821 100644
---- a/drivers/firmware/arm-ffa/arm-ffa.c
-+++ b/drivers/firmware/arm-ffa/arm-ffa.c
-@@ -85,6 +85,7 @@ static const struct ffa_bus_ops ffa_ops = {
+  * sandbox_query_ffa_emul_state() - Inspect the FF-A ABIs
+  * @queried_func_id:	The FF-A function to be queried
+@@ -653,6 +694,9 @@ void sandbox_arm_ffa_smccc_smc(ffa_value_t *args, ffa_value_t *res)
+ 	case FFA_SMC_32(FFA_RX_RELEASE):
+ 		ret = sandbox_ffa_rx_release(emul, args, res);
+ 		break;
++	case FFA_SMC_32(FFA_MEM_SHARE):
++		ret = sandbox_ffa_memory_share(emul, args, res);
++		break;
+ 	default:
+ 		log_err("Undefined FF-A interface (%lx)\n",
+ 			args->a0);
+diff --git a/drivers/firmware/arm-ffa/sandbox_ffa.c b/drivers/firmware/arm-ffa/sandbox_ffa.c
+index 44b32a829dd..a81455ce5ff 100644
+--- a/drivers/firmware/arm-ffa/sandbox_ffa.c
++++ b/drivers/firmware/arm-ffa/sandbox_ffa.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ * Copyright 2022-2024 Arm Limited and/or its affiliates <open-source-office@arm.com>
+  *
+  * Authors:
+  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+@@ -91,6 +91,7 @@ static const struct ffa_bus_ops sandbox_ffa_ops = {
+ 	.partition_info_get = ffa_get_partitions_info_hdlr,
  	.sync_send_receive = ffa_msg_send_direct_req_hdlr,
  	.rxtx_unmap = ffa_unmap_rxtx_buffers_hdlr,
- 	.memory_share = ffa_memory_share_hdlr,
-+	.memory_reclaim = ffa_memory_reclaim_hdlr,
++	.memory_share = ffa_memory_share_hdlr,
  };
  
- /* Registering the FF-A driver as an SMCCC feature driver */
-diff --git a/include/arm_ffa.h b/include/arm_ffa.h
-index ce4a3d7f440..965139b166a 100644
---- a/include/arm_ffa.h
-+++ b/include/arm_ffa.h
-@@ -147,8 +147,9 @@ struct ffa_mem_ops_args {
-  * struct ffa_bus_ops - Operations for FF-A
-  * @partition_info_get:	callback for the FFA_PARTITION_INFO_GET
-  * @sync_send_receive:	callback for the FFA_MSG_SEND_DIRECT_REQ
-- * @rxtx_unmap:	callback for the FFA_RXTX_UNMAP
-+ * @rxtx_unmap:		callback for the FFA_RXTX_UNMAP
-  * @memory_share:	callback for the FFA_MEM_SHARE
-+ * @memory_reclaim:	callback for the FFA_MEM_RECLAIM
-  *
-  * The data structure providing all the operations supported by the driver.
-  * This structure is EFI runtime resident.
-@@ -161,6 +162,7 @@ struct ffa_bus_ops {
- 				 bool is_smc64);
- 	int (*rxtx_unmap)(struct udevice *dev);
- 	int (*memory_share)(struct udevice *dev, struct ffa_mem_ops_args *args);
-+	int (*memory_reclaim)(struct udevice *dev, u64 g_handle, u32 flags);
- };
- 
- #define ffa_get_ops(dev)        ((struct ffa_bus_ops *)(dev)->driver->ops)
-@@ -280,6 +282,27 @@ int ffa_memory_share(struct udevice *dev, struct ffa_mem_ops_args *args);
-  */
- int ffa_memory_share_hdlr(struct udevice *dev, struct ffa_mem_ops_args *args);
- 
-+/**
-+ * ffa_memory_reclaim() - FFA_MEM_RECLAIM driver operation
-+ * Please see ffa_memory_reclaim_hdlr() description for more details.
-+ */
-+int ffa_memory_reclaim(struct udevice *dev, u64 g_handle, u32 flags);
-+
-+/**
-+ * ffa_memory_reclaim_hdlr() - FFA_MEM_RECLAIM handler function
-+ * @dev: The FF-A bus device
-+ * @g_handle: The memory region globally unique Handle
-+ * @flags: Zero memory and time slicing flags
-+ *
-+ * Implement FFA_MEM_RECLAIM FF-A function
-+ * to restore exclusive access to a memory region back to its Owner.
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, failure
-+ */
-+int ffa_memory_reclaim_hdlr(struct udevice *dev, u64 g_handle, u32 flags);
-+
- struct ffa_priv;
- 
- /**
-diff --git a/include/arm_ffa_priv.h b/include/arm_ffa_priv.h
-index 02e2cd89937..09205f40907 100644
---- a/include/arm_ffa_priv.h
-+++ b/include/arm_ffa_priv.h
-@@ -133,10 +133,11 @@ enum ffa_abis {
- 	FFA_MSG_SEND_DIRECT_REQ   = 0x6f,
- 	FFA_MSG_SEND_DIRECT_RESP  = 0x70,
- 	FFA_MEM_SHARE             = 0x73,
-+	FFA_MEM_RECLAIM           = 0x77,
- 
- 	/* To be updated when adding new FFA IDs */
- 	FFA_FIRST_ID              = FFA_ERROR, /* Lowest number ID */
--	FFA_LAST_ID               = FFA_MEM_SHARE, /* Highest number ID */
-+	FFA_LAST_ID               = FFA_MEM_RECLAIM, /* Highest number ID */
- };
- 
- enum ffa_abi_errcode {
+ static const struct udevice_id sandbox_ffa_id[] = {
 -- 
 2.25.1
 
