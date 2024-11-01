@@ -4,39 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7B4CE6F060
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 14:20:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80F6EE6F061
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 14:20:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CE0588C05;
-	Fri,  1 Nov 2024 15:20:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id B6130892C6;
+	Fri,  1 Nov 2024 15:20:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F29888C4D; Fri,  1 Nov 2024 15:20:28 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 34832889A2
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 15:20:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
+ id E6FA1892E1; Fri,  1 Nov 2024 15:20:35 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 7D7BA889A2
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 15:20:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.11,250,1725289200"; d="scan'208";a="227647565"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 01 Nov 2024 23:20:24 +0900
-Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.92.230])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 4FAEB4006193;
- Fri,  1 Nov 2024 23:20:22 +0900 (JST)
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] arm: renesas: Fix RZ/G2L GICR base address
-Date: Fri,  1 Nov 2024 14:20:16 +0000
-Message-Id: <20241101142016.77-1-paul.barker.ct@bp.renesas.com>
-X-Mailer: git-send-email 2.39.5
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7E2ED1007;
+ Fri,  1 Nov 2024 07:21:02 -0700 (PDT)
+Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.26.20])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AAB763F528;
+ Fri,  1 Nov 2024 07:20:30 -0700 (PDT)
+From: abdellatif.elkhlifi@arm.com
+To: u-boot@lists.denx.de
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Achin Gupta <achin.gupta@arm.com>, Drew Reed <Drew.Reed@arm.com>,
+ Hugues Kamba Mpiana <Hugues.KambaMpiana@arm.com>
+Subject: [PATCH 0/8] arm_ffa: Add FFA_MEM_SHARE and FFA_MEM_RECLAIM support
+Date: Fri,  1 Nov 2024 14:20:09 +0000
+Message-Id: <20241101142017.79311-1-abdellatif.elkhlifi@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -55,29 +56,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When support for the Renesas RZ/G2L SoC was added, the GICR base address
-for CPU1 was accidentally used. We should instead supply the GICR base
-address for CPU0 so that interrupts are correctly configured for the
-CPU core that U-Boot is actually using.
+From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Fixes: 387d4275ab0e ("arm: rmobile: Add basic RZ/G2L family support")
-Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
----
- arch/arm/mach-renesas/include/mach/rzg2l.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Add to the FF-A bus FFA_MEM_SHARE and FFA_MEM_RECLAIM ABIs.
 
-diff --git a/arch/arm/mach-renesas/include/mach/rzg2l.h b/arch/arm/mach-renesas/include/mach/rzg2l.h
-index 057df5cb9d46..c49a71a6dd41 100644
---- a/arch/arm/mach-renesas/include/mach/rzg2l.h
-+++ b/arch/arm/mach-renesas/include/mach/rzg2l.h
-@@ -8,6 +8,6 @@
- #define __ASM_ARCH_RZG2L_H
- 
- #define GICD_BASE	0x11900000
--#define GICR_BASE	0x11960000
-+#define GICR_BASE	0x11940000
- 
- #endif /* __ASM_ARCH_RZG2L_H */
+These FF-A ABIs are for memory management. They are used for sharing
+memory between U-Boot and secure world.
+
+FFA_MEM_SHARE starts a transaction to grant access to a memory region
+to one or more Borrowers (aka Secure Partitions or endpoints).
+FFA_MEM_RECLAIM restores exclusive access to a memory region back to
+its Owner (U-Boot).
+
+For more details about these ABIs please refer to the FF-A v1.0
+specification [1]. For more details about FF-A in U-Boot please
+refer to the readme [2].
+
+This work is based on the implementation in Linux kernel [3].
+
+This work is provided with sandbox support (emulation and test cases).
+
+[1]: https://developer.arm.com/documentation/den0077/a/?lang=en
+[2]: doc/arch/arm64.ffa.rst
+[3]: commit cc2195fe536c28e192df5d07e6dd277af36814b4
+     Files: drivers/firmware/arm_ffa/driver.c , include/linux/arm_ffa.h
+
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jens Wiklander <jens.wiklander@linaro.org>
+Cc: Achin Gupta <achin.gupta@arm.com>
+Cc: Drew Reed <Drew.Reed@arm.com>
+Cc: Hugues Kamba Mpiana <Hugues.KambaMpiana@arm.com>
+
+Cheers,
+Abdellatif
+
+Abdellatif El Khlifi (8):
+  arm_ffa: Add NULL pointer check to the driver operations
+  arm_ffa: Add FFA_MEM_SHARE support
+  arm_ffa: Add FFA_MEM_RECLAIM support
+  arm_ffa: sandbox: Replace the emulator error log with debug log
+  arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
+  arm_ffa: sandbox: Add FFA_MEM_SHARE tests
+  arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
+  arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
+
+ .../include/asm/sandbox_arm_ffa_priv.h        |   5 +-
+ doc/arch/arm64.ffa.rst                        |   4 +
+ drivers/firmware/arm-ffa/arm-ffa-uclass.c     | 286 +++++++++++++++++-
+ drivers/firmware/arm-ffa/arm-ffa.c            |   4 +-
+ drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  92 +++++-
+ drivers/firmware/arm-ffa/sandbox_ffa.c        |   4 +-
+ include/arm_ffa.h                             | 111 ++++++-
+ include/arm_ffa_priv.h                        | 143 ++++++++-
+ test/dm/ffa.c                                 |  73 ++++-
+ 9 files changed, 707 insertions(+), 15 deletions(-)
+
+
+base-commit: 28dc47038edc4e93f32d75a357131bcf01a18d85
 -- 
-2.43.0
+2.25.1
 
