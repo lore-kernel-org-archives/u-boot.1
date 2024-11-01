@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29C2DE674A8
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 06:22:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8202AE674AA
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 07:12:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98C6488C05;
-	Fri,  1 Nov 2024 07:22:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BCD4088D9A;
+	Fri,  1 Nov 2024 08:12:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f6R6vlaU";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="q9rma3Rb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8E1188CD9; Fri,  1 Nov 2024 07:22:40 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9AD9E88E26; Fri,  1 Nov 2024 08:12:09 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0EF688B9E
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 07:22:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A586388D13
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 08:12:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5cb6b2b7127so2229426a12.1
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 23:22:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730442158; x=1731046958; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=c1YY1jFGv5oVnraeJjIgHN7TbveNNr82eLrz7voFNEA=;
- b=f6R6vlaUspJM037YjYaPzZYCXRjDpBeppI0AYxPlyuW11w3jraAax2p7ZytsF9Ugvq
- NjrOU+/RfykyuEcouplFLR+sZCyiRbFTwtm2NlOKWoqtcto0mnRUhR6xmsrRDvvxkfpu
- ilnW9R1c8biaafTi83Yb9qPLqSgQ+en9rTlLnwFF3LWiZX/FlAGm+FS3s/ZLShStXVgZ
- cOReX7W3a/aqyL5mJjppgIRko+hjamnBQJdOGz6xPcXi6BLLy1zucQwICyOPRtrDvJ0i
- at8OAGTsE0YoQ/gvzvZAyl2ZKx4dRqMkNg84NpbMBdX0WCgKRkjpiFHKQ+b1t9s6vdFj
- I3+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730442158; x=1731046958;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c1YY1jFGv5oVnraeJjIgHN7TbveNNr82eLrz7voFNEA=;
- b=Q7B4CaocG2+bkQqXn1hj6aANyXiaWoSUQPZryUzl7SOgbox+Pl6FG/Xne2J2T69Dye
- Fray6k8z3irqfSlcO0/hgSd+rbEm0DPrFtMt3POpa572oXCXAJZKdRnT0JTqoYMZ+zb1
- UDh3WCu/ysMdXHWGh4LyvzFBHpapHnxBLwZC7zoRk30iIlAA4EWk3HkD15ph5VoyW9lr
- okdr+nJoUKCr9Q/0CaEfSQrslpWgY7pYAmpwo8HT2GgtSt2utsZ6raU6KtUmu72N7gYE
- 07cNEB7t2M0xBH7YGzdg7FLf9Q5VvhivigwDYw2R7eB5vkALcssU/AoQAO7WvmI8cRr4
- NQQQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV934EO7O4rG8gWkSVIF6iqqqwOWpPbuiSmvDzQ7uAsLVh2ibCBu/tJYXwGpqy7HkqqIgVxsDI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpWejvCRO8Khg333zFRrK7pSW05hLbOtUZ9Tt502iQz9p4jdaq
- piEP6fpkPlf2mbusb6tNNCTZ4SKiJ7gehrnKmmUEDpn1OhhC5YJeCpaSpkFNCh7o7QmhJME3Ujh
- Ln/Frfrrqr4vWDh1xb+M77XiVwA1lImldipvLPA==
-X-Google-Smtp-Source: AGHT+IEPneOQzh/XhtAApIp/w9lwPBcuquEQq5YKw7mlcZPWEsZLPyzo3D8Qm5csriKtL92s0aRuL+tgp+S3UuraolA=
-X-Received: by 2002:a05:6402:2687:b0:5c9:7f41:eb19 with SMTP id
- 4fb4d7f45d1cf-5cea966bceemr3990564a12.4.1730442158090; Thu, 31 Oct 2024
- 23:22:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1730445123; x=1731049923; i=xypron.glpk@gmx.de;
+ bh=n74IVT+vdN0WdF2RHnVGQ3G1Ioz1qmRfYQqUCV9Naqk=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=q9rma3RbdVlJ1SIGKPVRIzFO9tFS7AJa/EHYwodEzdEiISusjgA87KCBLxE+ePEv
+ jnGvAm7893olnDJ3Y2E4kbrqjbOyYXZnbTA7yMww7r2jbdnD2DSApiEAs7uhP9b76
+ gNV2+vITkOPI7yq+1zMTDStGsxImdl9fedrLM1BgJv+vk084m//HWk8uEEPGhb1DH
+ MNCG8X0uacCPl8gZz9JmxNPWsK5qu92pR0HybPmjF6Ttw0LwQM6fuKqTvUNao5HVL
+ hzAXCSnTyhQ4QMufk/RKvg5eRes1mUFedVmTIzVgJDeT4qEEEed/TvyQa9A2N+Di8
+ 0HujyfyMOjFBmxdzxA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [10.150.8.169] ([145.103.114.43]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MMXQ5-1tO1A41nIl-00PCvo; Fri, 01
+ Nov 2024 08:12:03 +0100
+Message-ID: <5adc20f8-b363-40a5-89c2-047ac7cc2959@gmx.de>
+Date: Fri, 1 Nov 2024 08:12:00 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] iommu: apple: Mark device with DM_FLAG_VITAL
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Janne Grunau <j@jannau.net>,
+ Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
-In-Reply-To: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Fri, 1 Nov 2024 11:52:26 +0530
-Message-ID: <CADg8p96v8ocR=8yRLmC7j0CFcCUCFfQv6P9YaST_i-ewUP4RdA@mail.gmail.com>
-Subject: Re: [PATCH 0/2] Fix device removal order for Apple dart iommu
-To: Janne Grunau <j@jannau.net>
-Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ <20241031-iommu_apple_dart_ordering-v1-1-8a6877946d6b@jannau.net>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241031-iommu_apple_dart_ordering-v1-1-8a6877946d6b@jannau.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:N1xeKoR64793t3Nif17mjk27dyNp9kQhtkB3Ac9RhgO/dgghEut
+ bcOvzEXwgsTJ9o/XaB/Ozai88wCCwNs9Pp6KRCmA/x04SeCg+FEOBcoWgWWJc99KG3qc4WV
+ 40qU8kRV4VAzCkZIPQlJE7VJf4wcDkTz1VQX5y8OXewP1rXZnEVcyKmoA9/nmCZHIoGkIej
+ oFGejFk8VjCI19Vp3pQzQ==
+UI-OutboundReport: notjunk:1;M01:P0:G4y8DQwMfSI=;NQi7riptzpjicNFII96SvuyXLV2
+ M7Qs2Cs3x4knToa0J/f5OfcMzSuqNH4onF7W3US0+yVrzPBsjB3oVISZfkULCWlRota4ekzLw
+ 3Xi8C6f2d5Zgru5fEdXvokP5Q7dbWCYDmk9gI/OShjDquxPJpeVfttGBbol5QKDcdSnVlXovd
+ TumKlrCYV/ARe3yaK7lhJYoKEcUdroIyHRXr6Xj4odzY1TS1XJy8/8Z8iv0aQwKgle2nwKMO9
+ gXT9Me/dgB3JZxPJfowVGiyzPxA0kfgH3FphhfkwNRIm5oExpr+tugdx4oY9dOWRtqR5/4bEN
+ eGj6PfqKZgkvmFJJoSAUZNPZjFr+ApQDnfZCWN+ibg63HzOrycBmcSG5BeNdBsMFY8mBATqxW
+ oinzKGOyYBC/rqxM38MMF/7piZlkOmmSazOcK/Rn3gP2zicOO2umpSeNcxfdhTEeyKiJkRo2B
+ H6PYxAN8j6HxAlPb3VgskClKKey7vCCeYqG3a8ja6kOk4B62lCLYswwXANrXtfN8XZUPWVsAI
+ XwBZJQRTPtSEDnIApNQY5Oc2U7b8W+jVl9JBjp/5cqXB09xfbOiszDNTAdiS/G3HxqJVrVSAw
+ kxFoRLHVIKcnv0Z5Zaek4YP3sNfIb3C8ERoeiLS+v+7kBroU7AUW2M8rcZpswHJxaTgB+dXSK
+ sEIQeYNqwyFX2aaN88b5LoNMhKayZMrYBpZkuC18oydL4HWb9EuIU9dYS8kxE9Eefct181fbX
+ kljVB72iDrsiXHvNXFlpl0+IgvGOZWqOyimgg2K9EVKLRmbiWr0qeBZiNwR6al7Q3CjDTdxK8
+ jY+Pn23Ds1oUQ0iE7lRzgVZg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,35 +92,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 1 Nov 2024 at 04:37, Janne Grunau <j@jannau.net> wrote:
->
-> Starting with v2024.10 dev_iommu_dma_unmap calls during device removal
-> trigger a NULL pointer dereference since the the iommu device is removed
-> before its user. The sparsely used DM_FLAG_VITAL flag is intended for
-> this dependency.
-> This series adds it to the Apple dart iommu driver and implements the
-> two phased device removal to the EFI loader.
-
-Is this also the cause of the crash that you were observing with the
-RFC patches that I had posted earlier?
-
--sughosh
-
+On 10/31/24 23:48, Janne Grunau wrote:
+> Avoids NULL pointer dereferences in apple_dart_unmap when the iommu
+> device is removed before its user. U-boot's device model does not track
+> dependencies between devices.
+> Observed on a M1 Ultra Mac Studio with v2024.10.
 >
 > Signed-off-by: Janne Grunau <j@jannau.net>
+
+Hello Simon,
+
+could you, please, review this patch.
+
+Best regards
+
+Heinrich
+
 > ---
-> Janne Grunau (2):
->       iommu: apple: Mark device with DM_FLAG_VITAL
->       efi_loader: remove non vital devices first
+>   drivers/iommu/apple_dart.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
->  drivers/iommu/apple_dart.c    | 2 +-
->  lib/efi_loader/efi_boottime.c | 1 +
->  2 files changed, 2 insertions(+), 1 deletion(-)
-> ---
-> base-commit: 1d147b74f437fb0e85821e8271fe52bc5fd30194
-> change-id: 20241031-iommu_apple_dart_ordering-558e62671512
+> diff --git a/drivers/iommu/apple_dart.c b/drivers/iommu/apple_dart.c
+> index 611ac7cd6deb4fccd45ccfe8cbb9b3e36e2af753..9df174f32d721c39079e6573=
+6c91e3e27a72ace2 100644
+> --- a/drivers/iommu/apple_dart.c
+> +++ b/drivers/iommu/apple_dart.c
+> @@ -312,5 +312,5 @@ U_BOOT_DRIVER(apple_dart) =3D {
+>   	.ops =3D &apple_dart_ops,
+>   	.probe =3D apple_dart_probe,
+>   	.remove =3D apple_dart_remove,
+> -	.flags	=3D DM_FLAG_OS_PREPARE
+> +	.flags	=3D DM_FLAG_OS_PREPARE | DM_FLAG_VITAL
+>   };
 >
-> Best regards,
-> --
-> Janne Grunau <j@jannau.net>
->
+
