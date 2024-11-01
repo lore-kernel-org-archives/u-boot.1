@@ -4,76 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 766F5E6F06C
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:33:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D548E6F06C
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:33:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0215892B5;
-	Fri,  1 Nov 2024 16:33:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 05810892FD;
+	Fri,  1 Nov 2024 16:33:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n5P0b+Lq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EYdDOlZB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E6D8892F5; Fri,  1 Nov 2024 16:33:14 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 5BC39892CF; Fri,  1 Nov 2024 16:33:20 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 094CE892DC
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:33:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 72866889A2
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:33:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a99f1fd20c4so266549466b.0
- for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:33:12 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a9a1b71d7ffso319541166b.1
+ for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:33:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730475191; x=1731079991; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730475198; x=1731079998; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6wG8KBOb/8Tg3TehtLsvVjxXsBgb7cg0K+ebuUKosdk=;
- b=n5P0b+LqFpiFpEIcM+jkULijGSi7KjgLWe4PPa+o8hg+0rpghaiIAd+a2YSAJvAGSJ
- fBJE4yxZeelhxEhwGrla4tBcm0JuiYzKZAVwOOAcBUJ6gWWxzu4MiPHuiZIJCRTZWZbu
- /wvBp4Ew9cLqGbwTwML+V19YaGxvmn0uUdzNA=
+ bh=L72yr7e6VaHHBQZ0cT9yRlTyceRJmdu4je5c6L1XlBo=;
+ b=EYdDOlZBzq3tI7Faf/T2QSxT/i3tuBFI2oOAeD/draItM8M3sAyg/NMsSTruIz4NrU
+ 8uQnM4cG9yaRyd5DM6/uArF5qXV4ly9Utf7vo1lT5DIT/09XUKBYD7Wb7lS7eGHGrOB/
+ H7ScnW/QI4GTVRluQmOxz2MYQf1PPRKPT5Nxc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730475191; x=1731079991;
+ d=1e100.net; s=20230601; t=1730475198; x=1731079998;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6wG8KBOb/8Tg3TehtLsvVjxXsBgb7cg0K+ebuUKosdk=;
- b=BuaYxBFztGeCbPuAoXCibYzu/+RB2POFnVsxLiqAlwE18itwbbzHKx4LPQaKeiTy22
- 0z6qmHQ/WOL9ptNqqNGf2niKRukjR3gN5gt4XAiYqDCIyqf/BV+xS8kZZGv19kRS3D4b
- NM5cTwjU1eAg2lHkAscjsBGKdXbTHjxYB0lCgCsF7bTPJMHi2lj0K8RGUT8djQQbHWUy
- Qeh6FOTWxWJez/ikEoIe3MADbNF9w/zT8LTPKD83leg8Xw35WKemhunMdRR3SxpOhqth
- x0aaVTUankajwhvPkjMMxWwAXSrIZ+s13Z6MKnPOBST+Nd+2tUR3WHFl14gXvjwUTA7O
- l1Xw==
-X-Gm-Message-State: AOJu0YwhxJs4rO8h8n+mam0rqXRdam/h2Yr8JYMz5LOaLXt+6DAhLsk4
- WLjD3bjC8BEUPitxo2+etMoINc8hABaUklOdHzR8TITFaZc4liStc+Zr4c9IeQXhox+bFUMYekt
- SR08mFSP1ZTOTH37niG6V15Wj9HlwTKKb05l1
-X-Google-Smtp-Source: AGHT+IGoGDvkZ/sxS6+Gq6HD4D/knrveu9PrXxRbVKkSkfmKaDAZ7j24T3I10KB8nFCK83peyEFHR8dtQQEo/lN1c28=
-X-Received: by 2002:a17:907:868a:b0:a9a:7f84:940b with SMTP id
- a640c23a62f3a-a9e5089d4efmr721088766b.10.1730475191474; Fri, 01 Nov 2024
- 08:33:11 -0700 (PDT)
+ bh=L72yr7e6VaHHBQZ0cT9yRlTyceRJmdu4je5c6L1XlBo=;
+ b=LU3p2bzmJ28g3IaAZ3C6ayD3/yvInOzU3i8To/A9aIzutTj1rV26yukDXcJLZ1aXj2
+ xmoHCV9KaNXmfBIm4VgHFBUFQp+7LDnPHJTZp4S3oPtYkLSCWgmuNtE2djTJxbvashaR
+ +SbPl4LtIsO7WS9EuDXlP3TB4OEtMmWQJRQdbUNZWa0di8WHjTIL7LszQCc4qBrQTfnE
+ SLNFabn3UEVp7IRIlK9T7ZTqUaE6OctX7BxJH9ilWQS2l+gRLAg7jUGWpvCWoi2AwasQ
+ HXpHokk3DelqsMDcxQoiQl736hBlpDI251a9zpYMeHfbNAk7q4B+2xD/L1XplMn1gtPH
+ BLtA==
+X-Gm-Message-State: AOJu0Ywo/H5TPgzJ/IzQ7k/Wdh85xna1JvL0mUWElfNzF2aJD1/84fWy
+ JQnxHj2wGNMDWD0T276YJ1EpoGR5JjirAUqalJVA4wBzj/GG1cLoHABdSZfsKv8zB2syPG8CRKQ
+ HRPkSCSYzRPTgMVYZUNGpzZypB9OeE/X+YKXjH8Nb6J66uMmQQHnG
+X-Google-Smtp-Source: AGHT+IEyt7FCrauNTbIB05o173v9npoWVAc1PrheJWHjxlIpDQpYTcKakzKGFiEFJaRFH/PVyKJA9Yh0WLXAk1Zp2rU=
+X-Received: by 2002:a17:907:9728:b0:a9a:4597:a7f3 with SMTP id
+ a640c23a62f3a-a9e3a7f435bmr1093142366b.62.1730475197861; Fri, 01 Nov 2024
+ 08:33:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241028124130.32072-1-sjg@chromium.org>
- <20241028124130.32072-4-sjg@chromium.org>
- <20241028193310.GS4959@bill-the-cat>
- <CAFLszTgHHgBPByBdBxGWPpJ0tTkoTfZ=aN3MY80mFBR+CujvLw@mail.gmail.com>
- <20241029163642.GA4959@bill-the-cat>
- <CAFLszTiXXXNFUeGoe+0ivyWgh-9MDYdCETFoWDcskYwHd-c9bA@mail.gmail.com>
- <20241031181049.GV2558755@bill-the-cat>
-In-Reply-To: <20241031181049.GV2558755@bill-the-cat>
+References: <20241030003649.3506474-1-trini@konsulko.com>
+ <CAFLszTgPA0vGCWLw3m_KHVCs7=hCouOGhSeZAx3XxWBHtP7oFg@mail.gmail.com>
+ <20241031181100.GW2558755@bill-the-cat>
+In-Reply-To: <20241031181100.GW2558755@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 1 Nov 2024 16:32:56 +0100
-Message-ID: <CAFLszTit0yePZLL-_iNjKOBFhCgKN2Wd=fXxB6OeV4j7Cnb9LA@mail.gmail.com>
-Subject: Re: [PATCH 03/21] bloblist: test: doc: Move into the common suite
+Date: Fri, 1 Nov 2024 16:33:01 +0100
+Message-ID: <CAFLszTh3G2fQEJzD7EMO3idANt_HVYw5-ztnxfRL2DnOa7GjdA@mail.gmail.com>
+Subject: Re: [PATCH] test/cmd/mem_copy.c: Use CONFIG_SYS_LOAD_ADDR for base
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,51 +85,44 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 31 Oct 2024 at 19:10, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 31 Oct 2024 at 19:11, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, Oct 31, 2024 at 07:00:41PM +0100, Simon Glass wrote:
+> On Thu, Oct 31, 2024 at 06:51:52PM +0100, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Tue, 29 Oct 2024 at 17:36, Tom Rini <trini@konsulko.com> wrote:
+> > On Wed, 30 Oct 2024 at 01:36, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Tue, Oct 29, 2024 at 04:45:40PM +0100, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Mon, 28 Oct 2024 at 20:33, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Mon, Oct 28, 2024 at 01:41:08PM +0100, Simon Glass wrote:
-> > > > >
-> > > > > > There is no particular need for bloblist to have its own test suite.
-> > > > > > Move it into the common suite instead.
-> > > > > >
-> > > > > > Add the missing help for 'common' and update the docs.
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > >
-> > > > > This feels both like churn and weird. I would think "common" tests are
-> > > > > for things that are kinda legacy and too catch-all to have their own
-> > > > > subgroup.
-> > > >
-> > > > It's just chosen so that the test for common/ is in test/common - i.e.
-> > > > it makes it easier for people to find it.
+> > > When reading/writing to memory we cannot assume that a base address of
+> > > 0x0 is correct and functional. So use CONFIG_SYS_LOAD_ADDR as the base
+> > > from which we add a bit more padding and being our tests.
 > > >
-> > > Then I really don't understand renaming bloblist from something
-> > > descriptive to common which is not.
+> > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > ---
+> > >  test/cmd/mem_copy.c | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/test/cmd/mem_copy.c b/test/cmd/mem_copy.c
+> > > index 1ba0cebbbe04..67eca328777a 100644
+> > > --- a/test/cmd/mem_copy.c
+> > > +++ b/test/cmd/mem_copy.c
+> > > @@ -21,7 +21,7 @@ struct param {
+> > >  static int do_test(struct unit_test_state *uts,
+> > >                    const char *suffix, int d, int s, int count)
+> > >  {
+> > > -       const long addr = 0x1000;
+> > > +       const long addr = CONFIG_SYS_LOAD_ADDR + 0x1000;
 > >
-> > Old: test/bloblist.c
-> > New: test/common/bloblist.c
-> >
-> > It is only the directory that is changing.
+> > CFG_SYS_SDRAM_BASE would be better here, since it is the start of
+> > memory (0 on sandbox and most boards).
 >
-> Then some of the commit messages need to be reworked? It looks like it
-> stops being "ut bloblist" and part of "ut common" and that's my concern.
+> Why do we want start of memory? CONFIG_SYS_LOAD_ADDR is the address for
+> where it's safe to load things to memory and fiddle with them.
 
-Oh I see...
+Well the load address is for loading images. It doesn't have anything
+to do with this test, so far as I can see. Not a big deal though.
 
-I basically decided that there is no point in having a special suite
-for bloblist, and some other things. A better way to handle this would
-be to allow running tests which match a name, e.g. 'ut common
-bloblist', because we are adding way too many suites IMO.
+I'm pleased you are finding all the issues I had with my lab...once I
+get it running I won't have to send so many patches :-)
 
 Regards,
-Simon
+Imon
