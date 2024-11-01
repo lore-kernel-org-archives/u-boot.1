@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3698CE6F060
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 14:21:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A384E6F060
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 14:21:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 044AC8931C;
+	by phobos.denx.de (Postfix) with ESMTP id 7B89889324;
 	Fri,  1 Nov 2024 15:20:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A34BB89301; Fri,  1 Nov 2024 15:20:41 +0100 (CET)
+ id 99FB788F3D; Fri,  1 Nov 2024 15:20:43 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9B099892D5
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 15:20:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 84E68892FF
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 15:20:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D8F571BC0;
- Fri,  1 Nov 2024 07:21:08 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C48591BC0;
+ Fri,  1 Nov 2024 07:21:10 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.26.20])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 919353F528;
- Fri,  1 Nov 2024 07:20:38 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 683C63F528;
+ Fri,  1 Nov 2024 07:20:40 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Subject: [PATCH 6/8] arm_ffa: sandbox: Add FFA_MEM_SHARE tests
-Date: Fri,  1 Nov 2024 14:20:15 +0000
-Message-Id: <20241101142017.79311-7-abdellatif.elkhlifi@arm.com>
+Subject: [PATCH 8/8] arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
+Date: Fri,  1 Nov 2024 14:20:17 +0000
+Message-Id: <20241101142017.79311-9-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241101142017.79311-1-abdellatif.elkhlifi@arm.com>
 References: <20241101142017.79311-1-abdellatif.elkhlifi@arm.com>
@@ -55,69 +55,36 @@ X-Virus-Status: Clean
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Add positive and negative test cases
+Add FFA_MEM_RECLAIM positive and negative test cases
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 ---
- test/dm/ffa.c | 46 +++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 45 insertions(+), 1 deletion(-)
+ test/dm/ffa.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
 diff --git a/test/dm/ffa.c b/test/dm/ffa.c
-index 593b7177fce..4fd21ac3d72 100644
+index 4fd21ac3d72..c481964c758 100644
 --- a/test/dm/ffa.c
 +++ b/test/dm/ffa.c
-@@ -2,7 +2,7 @@
- /*
-  * Functional tests for UCLASS_FFA  class
-  *
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2024 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -13,6 +13,7 @@
- #include <asm/sandbox_arm_ffa.h>
- #include <asm/sandbox_arm_ffa_priv.h>
- #include <dm/test.h>
-+#include <linux/sizes.h>
- #include <test/test.h>
- #include <test/ut.h>
- 
-@@ -141,6 +142,43 @@ static int test_partitions_and_comms(const char *service_uuid,
+@@ -179,6 +179,27 @@ static int  test_ffa_memory_share(bool test_ack, struct unit_test_state *uts)
  	return 0;
  }
  
-+static int  test_ffa_memory_share(bool test_ack, struct unit_test_state *uts)
++static int  test_ffa_memory_reclaim(bool test_ack, struct unit_test_state *uts)
 +{
-+	struct ffa_mem_ops_args args = {0};
-+	struct ffa_mem_region_attributes attrs = {0};
-+	static u8 buf[SZ_4K];
 +	int ret;
++	u64 g_handle;
 +	struct udevice *dev;
 +
 +	ut_assertok(uclass_first_device_err(UCLASS_FFA, &dev));
 +
-+	args.attrs = &attrs;
-+	args.nattrs = 1;
-+	args.address = buf;
-+	args.pg_cnt = 1;
-+
 +	if (test_ack) {
-+		args.use_txbuf = true;
-+
-+		ut_assertok(ffa_memory_share(dev, &args));
-+		ut_asserteq(HANDLE_LOW(args.g_handle), SANDBOX_MEM_HANDLE);
-+		ut_asserteq(HANDLE_HIGH(args.g_handle), SANDBOX_MEM_HANDLE);
++		g_handle = PACK_HANDLE(SANDBOX_MEM_HANDLE, SANDBOX_MEM_HANDLE);
++		ut_assertok(ffa_memory_reclaim(dev, g_handle, 0));
 +	} else {
-+		/* Do not use the TX buffer as a transaction buffer */
-+		args.use_txbuf = false;
-+		ret = ffa_memory_share(dev, &args);
-+		ut_asserteq(-EPROTONOSUPPORT, ret);
-+
-+		/* No memory region address given */
-+		args.use_txbuf = true;
-+		args.address = NULL;
-+		ret = ffa_memory_share(dev, &args);
++		/* Provide a wrong handle */
++		g_handle = PACK_HANDLE(SANDBOX_MEM_HANDLE, 0);
++		ret = ffa_memory_reclaim(dev, g_handle, 0);
 +		ut_asserteq(-EINVAL, ret);
 +	}
 +
@@ -127,22 +94,22 @@ index 593b7177fce..4fd21ac3d72 100644
  static int dm_test_ffa_ack(struct unit_test_state *uts)
  {
  	struct ffa_priv *uc_priv;
-@@ -195,6 +233,9 @@ static int dm_test_ffa_ack(struct unit_test_state *uts)
- 	ut_assertok(sandbox_query_ffa_emul_state(FFA_RX_RELEASE, &func_data));
- 	check_rxbuf_release_flag(rxbuf_flag, uts);
+@@ -236,6 +257,9 @@ static int dm_test_ffa_ack(struct unit_test_state *uts)
+ 	/* Test FFA_MEM_SHARE */
+ 	test_ffa_memory_share(true, uts);
  
-+	/* Test FFA_MEM_SHARE */
-+	test_ffa_memory_share(true, uts);
++	/* Test FFA_MEM_RECLAIM */
++	test_ffa_memory_reclaim(true, uts);
 +
  	return 0;
  }
  DM_TEST(dm_test_ffa_ack, UTF_SCAN_FDT | UTF_CONSOLE);
-@@ -253,6 +294,9 @@ static int dm_test_ffa_nack(struct unit_test_state *uts)
- 	part_id = uc_priv->partitions.descs[0].info.id;
- 	ut_assertok(ffa_sync_send_receive(dev, part_id, &msg, 1));
+@@ -297,6 +321,9 @@ static int dm_test_ffa_nack(struct unit_test_state *uts)
+ 	/* Test FFA_MEM_SHARE */
+ 	test_ffa_memory_share(false, uts);
  
-+	/* Test FFA_MEM_SHARE */
-+	test_ffa_memory_share(false, uts);
++	/* Test FFA_MEM_RECLAIM */
++	test_ffa_memory_reclaim(false, uts);
 +
  	return 0;
  }
