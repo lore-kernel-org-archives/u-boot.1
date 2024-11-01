@@ -4,40 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80F6EE6F061
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 14:20:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 466EDE6F061
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 14:20:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6130892C6;
-	Fri,  1 Nov 2024 15:20:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 78EC38924F;
+	Fri,  1 Nov 2024 15:20:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6FA1892E1; Fri,  1 Nov 2024 15:20:35 +0100 (CET)
+ id 54FDB891E2; Fri,  1 Nov 2024 15:20:36 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 7D7BA889A2
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 15:20:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 5DE0C891E2
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 15:20:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7E2ED1007;
- Fri,  1 Nov 2024 07:21:02 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9BE5E1BC0;
+ Fri,  1 Nov 2024 07:21:03 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.26.20])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AAB763F528;
- Fri,  1 Nov 2024 07:20:30 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0D5C43F528;
+ Fri,  1 Nov 2024 07:20:32 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Achin Gupta <achin.gupta@arm.com>, Drew Reed <Drew.Reed@arm.com>,
- Hugues Kamba Mpiana <Hugues.KambaMpiana@arm.com>
-Subject: [PATCH 0/8] arm_ffa: Add FFA_MEM_SHARE and FFA_MEM_RECLAIM support
-Date: Fri,  1 Nov 2024 14:20:09 +0000
-Message-Id: <20241101142017.79311-1-abdellatif.elkhlifi@arm.com>
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Subject: [PATCH 1/8] arm_ffa: Add NULL pointer check to the driver operations
+Date: Fri,  1 Nov 2024 14:20:10 +0000
+Message-Id: <20241101142017.79311-2-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20241101142017.79311-1-abdellatif.elkhlifi@arm.com>
+References: <20241101142017.79311-1-abdellatif.elkhlifi@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -58,63 +55,52 @@ X-Virus-Status: Clean
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Add to the FF-A bus FFA_MEM_SHARE and FFA_MEM_RECLAIM ABIs.
+Add NULL pointer check for ops
 
-These FF-A ABIs are for memory management. They are used for sharing
-memory between U-Boot and secure world.
+Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+---
+ drivers/firmware/arm-ffa/arm-ffa-uclass.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-FFA_MEM_SHARE starts a transaction to grant access to a memory region
-to one or more Borrowers (aka Secure Partitions or endpoints).
-FFA_MEM_RECLAIM restores exclusive access to a memory region back to
-its Owner (U-Boot).
-
-For more details about these ABIs please refer to the FF-A v1.0
-specification [1]. For more details about FF-A in U-Boot please
-refer to the readme [2].
-
-This work is based on the implementation in Linux kernel [3].
-
-This work is provided with sandbox support (emulation and test cases).
-
-[1]: https://developer.arm.com/documentation/den0077/a/?lang=en
-[2]: doc/arch/arm64.ffa.rst
-[3]: commit cc2195fe536c28e192df5d07e6dd277af36814b4
-     Files: drivers/firmware/arm_ffa/driver.c , include/linux/arm_ffa.h
-
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jens Wiklander <jens.wiklander@linaro.org>
-Cc: Achin Gupta <achin.gupta@arm.com>
-Cc: Drew Reed <Drew.Reed@arm.com>
-Cc: Hugues Kamba Mpiana <Hugues.KambaMpiana@arm.com>
-
-Cheers,
-Abdellatif
-
-Abdellatif El Khlifi (8):
-  arm_ffa: Add NULL pointer check to the driver operations
-  arm_ffa: Add FFA_MEM_SHARE support
-  arm_ffa: Add FFA_MEM_RECLAIM support
-  arm_ffa: sandbox: Replace the emulator error log with debug log
-  arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
-  arm_ffa: sandbox: Add FFA_MEM_SHARE tests
-  arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
-  arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
-
- .../include/asm/sandbox_arm_ffa_priv.h        |   5 +-
- doc/arch/arm64.ffa.rst                        |   4 +
- drivers/firmware/arm-ffa/arm-ffa-uclass.c     | 286 +++++++++++++++++-
- drivers/firmware/arm-ffa/arm-ffa.c            |   4 +-
- drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  92 +++++-
- drivers/firmware/arm-ffa/sandbox_ffa.c        |   4 +-
- include/arm_ffa.h                             | 111 ++++++-
- include/arm_ffa_priv.h                        | 143 ++++++++-
- test/dm/ffa.c                                 |  73 ++++-
- 9 files changed, 707 insertions(+), 15 deletions(-)
-
-
-base-commit: 28dc47038edc4e93f32d75a357131bcf01a18d85
+diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+index 96c64964bb7..5ec7654ed1c 100644
+--- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
++++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ * Copyright 2022-2024 Arm Limited and/or its affiliates <open-source-office@arm.com>
+  *
+  * Authors:
+  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+@@ -954,7 +954,7 @@ int ffa_partition_info_get(struct udevice *dev, const char *uuid_str,
+ {
+ 	struct ffa_bus_ops *ops = ffa_get_ops(dev);
+ 
+-	if (!ops->partition_info_get)
++	if (!ops || !ops->partition_info_get)
+ 		return -ENOSYS;
+ 
+ 	return ops->partition_info_get(dev, uuid_str, sp_count, sp_descs);
+@@ -979,7 +979,7 @@ int ffa_sync_send_receive(struct udevice *dev, u16 dst_part_id,
+ {
+ 	struct ffa_bus_ops *ops = ffa_get_ops(dev);
+ 
+-	if (!ops->sync_send_receive)
++	if (!ops || !ops->sync_send_receive)
+ 		return -ENOSYS;
+ 
+ 	return ops->sync_send_receive(dev, dst_part_id, msg, is_smc64);
+@@ -1000,7 +1000,7 @@ int ffa_rxtx_unmap(struct udevice *dev)
+ {
+ 	struct ffa_bus_ops *ops = ffa_get_ops(dev);
+ 
+-	if (!ops->rxtx_unmap)
++	if (!ops || !ops->rxtx_unmap)
+ 		return -ENOSYS;
+ 
+ 	return ops->rxtx_unmap(dev);
 -- 
 2.25.1
 
