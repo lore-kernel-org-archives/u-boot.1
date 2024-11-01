@@ -4,145 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 885F6E6F083
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 19:14:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A232E6F086
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 20:28:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E247988FC8;
-	Fri,  1 Nov 2024 20:14:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id 4A29988DC8;
+	Fri,  1 Nov 2024 21:28:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="S2ulrohD";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="j3MrfaeJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E46B98924F; Fri,  1 Nov 2024 14:40:35 +0100 (CET)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on20711.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2606::711])
+ id 7A91288D9A; Fri,  1 Nov 2024 21:28:40 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB1948902F
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 14:40:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 710C188DC8
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 21:28:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andreas.gnau@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=URFcuvBMl9OiJ5gBlfcqSDZimUGlLWLfEJNpQZSVuAVHQf77JdPw48OkwELFJx2XvjzupBGN823jKIsvBdLw1JbCWj2KSz4vwdSfN0pZmCD5TJUBPzWFaF1h6c/ZcpdA/e/rl3uZpY+TbAKFGKSBf9cZLoedaJKEFmjbO4dWqqUVUGSxsQWnIA6CAJtVOCc6r7h5M6Y1270UgeZp2UX5w+bdBDnFPFrkKkq0RD44K/gCl6uDtyLPqEl6oO4o7HhGaoSupc4+dvvM+pmVR5aVeN2qCQCKhmdEdOBZx/+yjTV6HfuAxegENlJAhNZWABaFHNkcof1Hn3eN4ZqWWfuiwQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Oy4CXPNe+nSGStA7SMXGMb6xPE1l0tTniVuApfRBUbU=;
- b=acxnkNO17oD3rbYed9Jem7aFOUohAA71Nr+dOxH4FS9H+c1BRPT3asGAqxXD8++iNsuGvLX57ZNNIvYpT20cp26abkSOXh9j5kpJwGdr07GCz4uV6qBnB6gbzg4szEO6JQLvM0GRskIiQnHLDew3UzhUGJ86lZHPJf0V5yhzQsAKvKzicHDBhcf+1TOWrCdGzcodTsxVz0J3F6ILc0gNwhh0LHmJDAW6vnEBbW7WiVtXGWjS+nF901rPZ1xUEQsTrqt1pUw+W7p/kjogugIgpigemvgGG+ltI9eVfc3uJZSpYBlacccHtZIed8vbd1BikNQnUmGg3GyAyEcC3d35sg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Oy4CXPNe+nSGStA7SMXGMb6xPE1l0tTniVuApfRBUbU=;
- b=S2ulrohDivKQSx2ayOHUVFjBlpLW2szV7tCqyLoYdCLrqD0hdIwXaSSHzbKx3tMT9JPDilE+ZxSeZVkJzBs7GvdFaZXlGzNi7UUHdm2KFSroy9ZUz4KdazsAa4LNNPaZ12Jjma1sTLufRcUJH5Iq6B8+wIYhu8Na2TKyJrgdaSHc80ZOaceF4iVhRVQiSh97SM+EO5hy13KAmCSKhdN3V3lLRjaljLEjuteqi1mk581noST8W4d9bo92RWRfF7Fta3X8+rdgQH84IGPuQewtqIGBN1Ts+t7hUyiIt2V8ksDjKS+/lhsqGtIImG5IHuXLyODNT4D7qKqLmFpjjkhuLQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from DB9PR08MB7512.eurprd08.prod.outlook.com (2603:10a6:10:303::14)
- by PAXPR08MB6543.eurprd08.prod.outlook.com (2603:10a6:102:12f::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.32; Fri, 1 Nov
- 2024 13:40:32 +0000
-Received: from DB9PR08MB7512.eurprd08.prod.outlook.com
- ([fe80::fd8d:f047:ac4f:6d6]) by DB9PR08MB7512.eurprd08.prod.outlook.com
- ([fe80::fd8d:f047:ac4f:6d6%4]) with mapi id 15.20.8093.018; Fri, 1 Nov 2024
- 13:40:32 +0000
-From: Andreas Gnau <andreas.gnau@iopsys.eu>
-To: u-boot@lists.denx.de
-Cc: Andreas Gnau <andreas.gnau@iopsys.eu>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] fdt: Update fdtcontroladdr if fdt_blob changes
-Date: Fri,  1 Nov 2024 14:38:33 +0100
-Message-ID: <20241101133848.2278151-1-andreas.gnau@iopsys.eu>
-X-Mailer: git-send-email 2.47.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: GV2PEPF00006629.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:158:401::3d9) To DB9PR08MB7512.eurprd08.prod.outlook.com
- (2603:10a6:10:303::14)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR08MB7512:EE_|PAXPR08MB6543:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5f7a0def-cab9-4033-98ad-08dcfa7ac166
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|366016|376014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?5Bhp6QbCkpHXZHlZXEqAdmuZt254bPcDtD1DlxwUc+ePmC/FHJJf0I82GO8F?=
- =?us-ascii?Q?kbo63WDt1E6e5TOk2DECljpug2IJ/dPPSYZemAmBrkB8Vp5FTXZA2+SkmmPt?=
- =?us-ascii?Q?JbmGnpecYSILdx3TyHaWT+HRWI3aaiuLcN3H6ED88O5suF95ayntQ7ZF+7A3?=
- =?us-ascii?Q?d4KXwNESnfvznskiSi7wKtwW/9UMIzQcImQ88gIgZXKbq7PV3hBWHXrbE/wH?=
- =?us-ascii?Q?knvG7Z8+KUfh5HX2DHw5MmyTJJw7t422KvcqjOG4GBWlP3tlvX0v/6cfyUNm?=
- =?us-ascii?Q?MjnGl9kvSyncigGFSDRnV9SRF/mpFJpyoQpRoKzUk13VW9Ibb8kQOOtSsYw5?=
- =?us-ascii?Q?R4vC5CDBp5ILXtFkjxJbJ9F2pS8o5sEP52ihtlzGVQa8aPypmcSnwykjV50n?=
- =?us-ascii?Q?93VOqLbj2KXAyzoQ5cvF2LuRUdmWrvlaGCiqtvnOcR9QRRfDolvNIPu2BC0B?=
- =?us-ascii?Q?HBzJB0kOaUadFJ4+lArnnSH4A2mScmNoMll5y5ruN0xJHTMzmJmA85Mwsqb3?=
- =?us-ascii?Q?lnYvpH9P0ghr+ukVUU4dyKdDPe52o/kAGKRyVRMjMxPgqHIYPytniUAW8A/d?=
- =?us-ascii?Q?obkBkb5/+VsPWNx6daFh77DD9orYzvbRsFcZZNiCO4z49VGqdod5me3hA5wn?=
- =?us-ascii?Q?JvcIR0dS3NhPVPrvFnGZtRLFgCppyhObk6362ZRRyTI2zXV4aloabY4PzH+I?=
- =?us-ascii?Q?zo/6hn/f2WKi8g/q4RuLxUWjveCKLl5bouY/yCQfxlJOJUKeZUTfLl42V3F8?=
- =?us-ascii?Q?ZxD1Mm+jz9vO600Y+ytYNg6qgrl5JU9tlb167FVZ8DhXF2mbz4ONVQLYNubM?=
- =?us-ascii?Q?YcbgQHc5zu0LcYATC5YNMMDHk6v13NaICa8jcAXbygBaJzt/Ez1APpJNtyOn?=
- =?us-ascii?Q?TSdXoHwIsgUNGabJh0rSrNa4Uhh1qV/zFYfJftSMrtKDhNecBzKrsmmew8N7?=
- =?us-ascii?Q?+U2zSMuAsYfJj2K+8qkXCwMG5eEn+gCF9FxHALxAcqRMRNA/P+FTfl9lUQ8u?=
- =?us-ascii?Q?cg3gM1+Y6lCZ3G7WZ1EXhDo9CxVackwI+lj2rTsgWKLhADsfuQyqtMduiwwv?=
- =?us-ascii?Q?M9vPbsFEnui7UnLkf9D53pz8qo+7hXb4T1+TIg3pZ51eLJX/L48s/184mf5s?=
- =?us-ascii?Q?8/rMnoxKmd3W6VO+Zf6DLz/YvJqLPeQOegKQawrNTm1G6Q2xhsTB/SeNSBmG?=
- =?us-ascii?Q?ab5ADSIfFa4FVFmfs9u7+BPl+4aTVexzdCBlDRdT0GlHNhvh6FREmRDiftI+?=
- =?us-ascii?Q?blJ9j040h+FteGtbyt/HY6uXCZiSAHPq4HasXfGBAJVN5mh9s86F/1hbZ0vd?=
- =?us-ascii?Q?Ru1QzN9bKLAGc5xT8Ko92Imz5x4UpdZeG7puyYhX9gYjq51L9IWVbVFoy6KC?=
- =?us-ascii?Q?9rhldj4=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR08MB7512.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(366016)(376014)(1800799024)(38350700014); DIR:OUT;
- SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?DV+9FFGxMtn66YqoFs8oFbQ8l/k2M1yhQk+Pc0vTt2t5ZnhLpIXhyAVPrpnX?=
- =?us-ascii?Q?1Oq6vgLv9QlR/XvpCELMtfQMXW1iiTGIyz3eH5KG/VgBLz4mL2YfzBACnDMR?=
- =?us-ascii?Q?ybklLNZyxfWaWERUj84HNUIXTJtUlUP34xr+aBVPqig9lTnNOlOtWu2s3ypR?=
- =?us-ascii?Q?aO7w9l9b97w/9iD1QCNjoRQFnonJurGg9CPGiLe2Q9ltjfrhumgjCwiysXTT?=
- =?us-ascii?Q?s0kHRWiLomdxOP7pi6IXousueVQ3FkJHcZDitLUB2lgqi8ibwGflz//4fLVB?=
- =?us-ascii?Q?KA0wnq5cedwbviGhxmn/Cxyo/yzfAVn5+87sRuMEU3HaqS8qvRUkb3ZGLzLV?=
- =?us-ascii?Q?igA107Ckf0+aGS+bGMO0XXUF2hNCvObr50rcZWzlBO9xDn9dh5s2F8pZkEDk?=
- =?us-ascii?Q?TMo0EEY8w5vQqvKxU9t1/cJZmV4kFl/wkRw1Lx2gsP3Io/+dReOiCnximgAx?=
- =?us-ascii?Q?d2NzzoIeL3mMXx8pEIpe9xikTT/ID4sMcjLf4wRwSJ4y6kyvVshM2hTItRfj?=
- =?us-ascii?Q?nZKlXkdZkiN+4HabI/yhC54JhQJWd9TnYZm/RJZsycdONM8s173ohK6OqDv/?=
- =?us-ascii?Q?xO6AeqhyYZ7EQ2xVTqlX7dO/0Ui3hVlio2rn8V/k4y6GiJUsqj7B9vxm/XyO?=
- =?us-ascii?Q?zWTH0ZiBq8+geX07QF5weeJJpIy45DYZ7rG3a6VDXRpS0H7MNcXli0yogTa8?=
- =?us-ascii?Q?phYLpowVLdwTpffBBRr07Ot3n5cJhTc+0HvLloOgZrSR08fjcupZ5CsZZpRz?=
- =?us-ascii?Q?2oSr8A7Wbq2hBua1qKvvkTUi19RiqNCLWGlDmXmH+26nXZJG2xq9gRnFICLO?=
- =?us-ascii?Q?xOquOxP+mUFdgvXKX8CSAay6fTxSEbpBsUDJIb20At8bA4V22jtnGXh+nE8n?=
- =?us-ascii?Q?YDp5D+oBaDz+hUmDbNsoUmklZbuDgKjsdOIeG65Xqsv4nNRJMWUcLkYckv1G?=
- =?us-ascii?Q?AUte/rhhoVmH0gUceO3uX66deOujvOGyVPmqBV1+ku9Y5TttrrPkEcFPkh71?=
- =?us-ascii?Q?nSjEqppP6gTde570SIqkRHP9e24qNXm9Pc4NXOlS28TV5XrfO6D7Z+ewbsgv?=
- =?us-ascii?Q?vUGE3G2fDZEvYPiNBhNy3fRdJvzjHyuchD/0zDN5TAe3InqtZAVbL1TixkhF?=
- =?us-ascii?Q?s0pIo7fbC8/2MEe0n6OIw2wTZdcEV+bhQ/Jt6NXRnJHITC+eTIjAU8AQJ/L2?=
- =?us-ascii?Q?9AN1OBov++XtrEBlp+9m0CBWllb1BPHbQBgaTpY2BrRMGyFriGTpiSz7Nip8?=
- =?us-ascii?Q?pHSDk14rslJIPcf3LjOD7YfRalWcsN82rzFdjZob8Zgp2Qxyx/rDrX3EoDZw?=
- =?us-ascii?Q?IJKDDmKE5yYDQKuZOIaX7CU8Y6SZTfZElDfissLyFyPSD4uShIa0DqGCYyIS?=
- =?us-ascii?Q?j6dZknFuFDWb6JqZkz+ZcX58N2bqNflHQ7bIJuKqtt/Ns+aOVnSXr4NSvL+n?=
- =?us-ascii?Q?VZ66iCx6NBLst8Lr50/MhRN+9RNqaS73iut1uovHsf2sZHSPlioR4Rxjc0eV?=
- =?us-ascii?Q?kILVDohOYTsxR2X03mnW/YGGsenBO8xADx3H6tlk/xO2W4BB6zr6H6Dh8gVV?=
- =?us-ascii?Q?Fqx9qifmqyjkvBWL/2JYfxNLpQZ1SsdYP7b3YzLR?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5f7a0def-cab9-4033-98ad-08dcfa7ac166
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR08MB7512.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2024 13:40:31.9428 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9EsztzBiplhhBkPwWKi4lw5NyCJDaewCGClSE0HP6nrMSdZP0wyxfW/8W2+eyDzyPP2UAMNDYH271Nf4chSnNQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB6543
-X-Mailman-Approved-At: Fri, 01 Nov 2024 20:14:47 +0100
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: de6e3cf5-988f-11ef-9dde-00505699b430
+Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id de6e3cf5-988f-11ef-9dde-00505699b430;
+ Fri, 01 Nov 2024 21:28:35 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=PzwU5JlpcecC7Xs0Lu6zpyuu74npA5FZwjRWIPzH5aM=;
+ b=j3MrfaeJVtUFnNU1/7xz33ufsqrDDGfjy19RRKuDtPNfPsbiCqnkV97LhI5bD/1E8ioRRkMpUvAir
+ zf2dUJQFuTZmvmc9aPRYqXLOnmvVIb7wXBpkyMEmPU1j5oEaxTSEGTfF837n32JndMUatie4WKd09u
+ u7F3fmANaFdP5YFvZDtzqL4VysGadWIEdBpFSE1hL+bDAWEHzjLfu9W5GSOETFNg57Rm8lr4u0eKVZ
+ eulQOdJ7cxH5DfcC0SE8d95J3fnST+DSbiYnHdbTOEJtNUxTP0l7QP0lbldWZKbIYMdeD23osFRZ8W
+ Y5nhQArBYtvACnFGjhmaHwcBR/d1wXg==
+X-KPN-MID: 33|0l8WKNQ23GFGA+2z6aZbRXHJV4dIBNe51wLw1p7AiCi+2PHNDtaL7L7XNcznp5Z
+ /2I+cTYOyuLHRHsa5/cwelA==
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|7/aBY6FbQik0coOxcF7+9J/2I0XOiPUt0caFd6CzJ2wV6+qa7XjxYfvRqN1y79V
+ zcUMLAiDmm2WIU9t1kuFTjg==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id dcae85ba-988f-11ef-9749-005056998788;
+ Fri, 01 Nov 2024 21:28:37 +0100 (CET)
+Date: Fri, 01 Nov 2024 21:28:32 +0100
+Message-Id: <871pzu66mn.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Janne Grunau <j@jannau.net>
+Cc: kettenis@openbsd.org, trini@konsulko.com, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org, u-boot@lists.denx.de, j@jannau.net
+In-Reply-To: <20241031-iommu_apple_dart_ordering-v1-1-8a6877946d6b@jannau.net>
+ (message from Janne Grunau on Thu, 31 Oct 2024 23:48:01 +0100)
+Subject: Re: [PATCH 1/2] iommu: apple: Mark device with DM_FLAG_VITAL
+References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
+ <20241031-iommu_apple_dart_ordering-v1-1-8a6877946d6b@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,30 +75,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a different FDT blob is chosen via fdtdec_resetup /
-board_fit_config_name_match, update the fdtcontroladdr environment
-variable accordingly. This fixes an issue where fdtcontroladdr would
-still point to the previously used FDT blob.
+> From: Janne Grunau <j@jannau.net>
+> Date: Thu, 31 Oct 2024 23:48:01 +0100
+> 
+> Avoids NULL pointer dereferences in apple_dart_unmap when the iommu
+> device is removed before its user. U-boot's device model does not track
+> dependencies between devices.
+> Observed on a M1 Ultra Mac Studio with v2024.10.
+> 
+> Signed-off-by: Janne Grunau <j@jannau.net>
 
-Signed-off-by: Andreas Gnau <andreas.gnau@iopsys.eu>
----
+Acked-by: Mark Kettenis <kettenis@openbsd.org>
 
- lib/fdtdec.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index b06559880296..e3534b647556 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1759,6 +1759,8 @@ int fdtdec_resetup(int *rescan)
- 
- 		*rescan = 1;
- 		gd->fdt_blob = fdt_blob;
-+		env_set_hex("fdtcontroladdr",
-+			    (unsigned long)map_to_sysmem(gd->fdt_blob));
- 		return fdtdec_prepare_fdt(fdt_blob);
- 	}
- 
--- 
-2.47.0
-
+> ---
+>  drivers/iommu/apple_dart.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/iommu/apple_dart.c b/drivers/iommu/apple_dart.c
+> index 611ac7cd6deb4fccd45ccfe8cbb9b3e36e2af753..9df174f32d721c39079e65736c91e3e27a72ace2 100644
+> --- a/drivers/iommu/apple_dart.c
+> +++ b/drivers/iommu/apple_dart.c
+> @@ -312,5 +312,5 @@ U_BOOT_DRIVER(apple_dart) = {
+>  	.ops = &apple_dart_ops,
+>  	.probe = apple_dart_probe,
+>  	.remove = apple_dart_remove,
+> -	.flags	= DM_FLAG_OS_PREPARE
+> +	.flags	= DM_FLAG_OS_PREPARE | DM_FLAG_VITAL
+>  };
+> 
+> -- 
+> 2.47.0
+> 
+> 
