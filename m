@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8202AE674AA
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 07:12:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA038E674AA
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 07:12:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCD4088D9A;
-	Fri,  1 Nov 2024 08:12:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2E5AA88D13;
+	Fri,  1 Nov 2024 08:12:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="q9rma3Rb";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tRCqUDeY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AD9E88E26; Fri,  1 Nov 2024 08:12:09 +0100 (CET)
+ id 0669888EAF; Fri,  1 Nov 2024 08:12:39 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A586388D13
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 08:12:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 17C3188360
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 08:12:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730445123; x=1731049923; i=xypron.glpk@gmx.de;
- bh=n74IVT+vdN0WdF2RHnVGQ3G1Ioz1qmRfYQqUCV9Naqk=;
+ s=s31663417; t=1730445152; x=1731049952; i=xypron.glpk@gmx.de;
+ bh=FAhoYoMZTkVv+apbVHto6S6iGCzCN9Gw15LXRmVQOgQ=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=q9rma3RbdVlJ1SIGKPVRIzFO9tFS7AJa/EHYwodEzdEiISusjgA87KCBLxE+ePEv
- jnGvAm7893olnDJ3Y2E4kbrqjbOyYXZnbTA7yMww7r2jbdnD2DSApiEAs7uhP9b76
- gNV2+vITkOPI7yq+1zMTDStGsxImdl9fedrLM1BgJv+vk084m//HWk8uEEPGhb1DH
- MNCG8X0uacCPl8gZz9JmxNPWsK5qu92pR0HybPmjF6Ttw0LwQM6fuKqTvUNao5HVL
- hzAXCSnTyhQ4QMufk/RKvg5eRes1mUFedVmTIzVgJDeT4qEEEed/TvyQa9A2N+Di8
- 0HujyfyMOjFBmxdzxA==
+ b=tRCqUDeY5FiV+lPnydWXDIeDqTG9gfw05gufFr8K1Wtu44ERgVyvacfvHCspzNeB
+ fv6HHh2v3S0tc8pvwZNjAG4lWrTij7hajwl4/2cYXJG8CJJ14g9CTMpLed2xMi0o0
+ jC08oqhKsdR5yw/EMUV6CxmeftvfsN6ImkDHlYWh1RQ/M7XGMfR72Mx3muURB01pu
+ EkbJoxo35QUXr47bBx5xnRD+PUezDOUd1QcgzfUNibriRc51ZeIyJe1BwS4ibo6uO
+ s6Zohsue569A2mKmgz5m3ZbiDu3J1RtgsPEZzR03f28zjJ4u38Dm/ijYr2e/8+IE9
+ 0B1qUgMo19KngPQPog==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [10.150.8.169] ([145.103.114.43]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MMXQ5-1tO1A41nIl-00PCvo; Fri, 01
- Nov 2024 08:12:03 +0100
-Message-ID: <5adc20f8-b363-40a5-89c2-047ac7cc2959@gmx.de>
-Date: Fri, 1 Nov 2024 08:12:00 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M3DJv-1t88DN34nt-004upQ; Fri, 01
+ Nov 2024 08:12:32 +0100
+Message-ID: <72d526db-f72b-4690-93aa-444cccdae249@gmx.de>
+Date: Fri, 1 Nov 2024 08:12:33 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/2] iommu: apple: Mark device with DM_FLAG_VITAL
@@ -59,23 +59,23 @@ From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 In-Reply-To: <20241031-iommu_apple_dart_ordering-v1-1-8a6877946d6b@jannau.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:N1xeKoR64793t3Nif17mjk27dyNp9kQhtkB3Ac9RhgO/dgghEut
- bcOvzEXwgsTJ9o/XaB/Ozai88wCCwNs9Pp6KRCmA/x04SeCg+FEOBcoWgWWJc99KG3qc4WV
- 40qU8kRV4VAzCkZIPQlJE7VJf4wcDkTz1VQX5y8OXewP1rXZnEVcyKmoA9/nmCZHIoGkIej
- oFGejFk8VjCI19Vp3pQzQ==
-UI-OutboundReport: notjunk:1;M01:P0:G4y8DQwMfSI=;NQi7riptzpjicNFII96SvuyXLV2
- M7Qs2Cs3x4knToa0J/f5OfcMzSuqNH4onF7W3US0+yVrzPBsjB3oVISZfkULCWlRota4ekzLw
- 3Xi8C6f2d5Zgru5fEdXvokP5Q7dbWCYDmk9gI/OShjDquxPJpeVfttGBbol5QKDcdSnVlXovd
- TumKlrCYV/ARe3yaK7lhJYoKEcUdroIyHRXr6Xj4odzY1TS1XJy8/8Z8iv0aQwKgle2nwKMO9
- gXT9Me/dgB3JZxPJfowVGiyzPxA0kfgH3FphhfkwNRIm5oExpr+tugdx4oY9dOWRtqR5/4bEN
- eGj6PfqKZgkvmFJJoSAUZNPZjFr+ApQDnfZCWN+ibg63HzOrycBmcSG5BeNdBsMFY8mBATqxW
- oinzKGOyYBC/rqxM38MMF/7piZlkOmmSazOcK/Rn3gP2zicOO2umpSeNcxfdhTEeyKiJkRo2B
- H6PYxAN8j6HxAlPb3VgskClKKey7vCCeYqG3a8ja6kOk4B62lCLYswwXANrXtfN8XZUPWVsAI
- XwBZJQRTPtSEDnIApNQY5Oc2U7b8W+jVl9JBjp/5cqXB09xfbOiszDNTAdiS/G3HxqJVrVSAw
- kxFoRLHVIKcnv0Z5Zaek4YP3sNfIb3C8ERoeiLS+v+7kBroU7AUW2M8rcZpswHJxaTgB+dXSK
- sEIQeYNqwyFX2aaN88b5LoNMhKayZMrYBpZkuC18oydL4HWb9EuIU9dYS8kxE9Eefct181fbX
- kljVB72iDrsiXHvNXFlpl0+IgvGOZWqOyimgg2K9EVKLRmbiWr0qeBZiNwR6al7Q3CjDTdxK8
- jY+Pn23Ds1oUQ0iE7lRzgVZg==
+X-Provags-ID: V03:K1:35Fj64e3CAaUw5KMRWw9fo7gi+oVVFp91PleALqHBIwEP3aJaF4
+ ixs1OCND+pgAzHmHc47KYNS83NiGLU6fVDe69q/X38M44V7SqmhJNg9EgHq7N+Pjf/ocMMe
+ bOuz+kfgBpwlP792lZvyhGsu7OEzSVUW1B4MZ3tpardm0ir4+5IXeoYGWk53O77nJFaN5SZ
+ 3dYuuZs8h+3sLNY3FuIqg==
+UI-OutboundReport: notjunk:1;M01:P0:IfsYB/V8lMM=;sQ6k5PQaL+qWAhiXxiSnm1DYp1L
+ L4DJVLioNJG5PF3srMdPZ9udu9RrLT9hEHAH1N+af62Bpd0PT8HY5MrVhTDXDtbwOdd/ASKfD
+ yiyzJj1tMt0h0xXT4bm9pOWqONU31HyuH4wzQVsOOKUYvLaZQ8G5GXYDMN/UpJD5yoGuCu5Ow
+ HQdKIfBDAdf1mUfq/bsXM+rO75oBI1a8IWGQPGXqpF+/jGdRXOaDLh9pkg9pSDro7r9k8Drkp
+ MFWfuPxGv/72V4jZ4A2UDT24Q5RSiHLSZF0LzHD2PGFp2CQDUPVwgnGRqcQ0eIEHYnKlpi2ri
+ 24FiW1kow2X7gTWwbqT9AVkipeATUaaY/g95JMnPqDoOPwuaTARaEjZup3cbnNRz+4XNwJsea
+ TRGTF/PEZ6pIbtR0wk14yzUE3ZKgHePcE0Pj8TSXEqugl3TPwXM0vW/jvuy+UBaUaVxEbE80L
+ AgFrcdq9tcWCzkfcAVj5nsZScj0t6zhttWYBALqVQFTl0uq+ZF7U5Zpl04VDQr1MtAI0eKKtp
+ vjCbED6xUUQrQtP7F8zaVTwOs0afejhBJi06gvpimXm06ctyV6cCB8+/PhXZA2i0lK8nTRjSk
+ N+qHqrwwoCUfIrmm7QQJDJoKfPLw8Zf7cuztqtqv4UIeHXthFnIOfLwrDw+wLGZSltHeXV1zh
+ 8uvIBxX26UxgNOHdINOQ87X55kcFam1OwJxh11pufhEEIcebyVH6xNQmxYTI3WP0Rw+B0JtNR
+ XmJIrnrBvwTzAOfVfYsKBT5pR7Msf1NB2HJ4vlz4ufsJF81c2iPhDCOqP5o52jNjQeCC2Om6b
+ fM0RimUExy3OY6CaqRV8DbUg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,6 +107,7 @@ could you, please, review this patch.
 Best regards
 
 Heinrich
+
 
 > ---
 >   drivers/iommu/apple_dart.c | 2 +-
