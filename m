@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB08ED767F5
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 09:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1831ED767F5
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 09:50:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 524C8889A2;
-	Fri,  1 Nov 2024 10:50:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BFD06891E2;
+	Fri,  1 Nov 2024 10:50:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="PaNVryGd";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="4aV42Lv4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7348988B8F; Fri,  1 Nov 2024 10:50:07 +0100 (CET)
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on2062e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2409::62e])
+ id 57CFC88F4A; Fri,  1 Nov 2024 10:50:12 +0100 (CET)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20614.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::614])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 145E28887A
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 10:50:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A2A688D9A
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 10:50:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vt5bVDJ5e0Lc/TOdE8HVlx0s0KT4cbgWktIXKrViUJ4NAxhCSHnb7qpTkznrVofxFwTwhtOa5M/UTbFUzfA5uFRZQvNmB1Un2FSCT6XldyYkKAd3ltEg+4F/APAJYUqZf1R4QDIaavQj6yQdeItQ0O7rkFxhrnbLukQjyBosh1SPpumMQOqIkA1mboNKZkGLgkJVaG/JvHkXVckMd3rjYDtEZWv3LJxymj8TNb/IP9KRN82oDeby8TxgsN32TUsMGZZ/KzlVwHYNrQjdFumK96m2RNDJzUP8bpK3NeVuBaQTxT+UVtmTntQ3UoGTjanRASg/yUhhJnSi94C3QMcR9g==
+ b=F6z0ncUzpQ3S0k0FjIqMUm3h0P8gjbZjNrJuyMZyv7uVV7aM8kf+ZPW2nq+QDKltdbDQAY+JfwBmiqr1881w24B/Ljq/s0B3MG3YMz/K8sAkM4LQ/kZjdpXT6C/3rILshf07eGXkuzzl2yW3n3fLTiZpx98RBg2V8Mxjn+IEu1uGQLxfOqObKYPuHxxsaXxqc7OAcjlxIlBk7uBx8N5Ixqx5N4eMIh7r4U6b/IwIJSZigGchugkyH930gZb9ugKi/kpeBdp9I6T506KwqXhuvNAsMOKnkdifhUM1kJr+/thmJuvmdSkkZCYJEgls0nsb0GX/F4sR9Qy3HQ4/v5rbZQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9eXmKlXUFSPo17y76WP5WcD8tjrm7lI3d7TxC6K/jP4=;
- b=XAxgjPeIIr2KZNDaxzRnIWXMlv0vwrsdiws8vuUS2Q7co1R25D3m5JhIs4iI7clzSp5ifyuLz7bsxGoATlqUjm8oL8NC97IoVyumJGZTi1td7AcgFBi2F27TFiDqj04JZ+6dPKuddy9+LK/qyjhGXfYWkb0+2910CpU5f9O8lQjJIXIgA4KgAwtnpRUscoQOawgJwma4Q04pBOINL9qszUn0YdkIQY1bcTOsU0yD8bVa2ZmfoqiXuER3ecjFzIhwiKvtBI7AKvbVcW98TFYhqKHA8PlNDfddXKE8a3Z86wgGhHao2Z+Hv2ArdXLmKwzLk+qBavmN3CDT4f3WaZ7gjg==
+ bh=VdjmJfoPR35bFCsQVdtRv23iJrWrPJVWD4TpyMkMtME=;
+ b=OTL3A24dWeBO/NMSs0QDw2VncWCAr9VpEh7oOx1rNoG7jw/VDRVVk52eHXWMzJMJNxaR6PqqoIRkSq7dB22a2yXUCZmoVvR2qBsGzgfTrK2ry2VgdQ2+UKbYJ2bO5BnqNq0I1BYE05ljGBCkl+tVaORFoNS2uTHRJwgvIFWA5UpMeLnK5bDAdVBbj5pqkQO+4uevOegaQJQ9GK0MNuiNiBWmgZFPXVYivjk/UWMYV1bcayQxKMIVhZZUj4LIMtsNJZkC/X/IMmKd70UhZHJRSrLCK77z7finSv22Z7uKT4ljLTISSqdyvNjkdx3xpM0qgdnkp9+KrAaztNk6P0lucg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9eXmKlXUFSPo17y76WP5WcD8tjrm7lI3d7TxC6K/jP4=;
- b=PaNVryGd0+mdK1B6iOD/rBBspsPXYE51FR9rHcZlyaz2mvJIs1tvjdFOLvWrfxj+w+HgP+/OCWAPeu++r2e4jTUbELDOgKCNdCnElzrujb0tB5O1m7040IKzv4hz802389X9ol58RRYI+2cx+bjKA3j0B6UNJbHkH9f4JP7zXcg=
-Received: from PH7PR10CA0014.namprd10.prod.outlook.com (2603:10b6:510:23d::16)
- by DS7PR12MB6333.namprd12.prod.outlook.com (2603:10b6:8:96::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.25; Fri, 1 Nov
- 2024 09:50:01 +0000
+ bh=VdjmJfoPR35bFCsQVdtRv23iJrWrPJVWD4TpyMkMtME=;
+ b=4aV42Lv4zqVMH7KKm843+1AYOLbOAXO3q7lCCROYPsV2ijYKttJP7BRtED/Jkb66FSxfrPw1VRjhY+dOvbdN83qnV2bCzXwwLSDquHXgIjDCimc703UbHltPJN67DxI1MPu9jx4mzQGP34PKvCx2OkBgFEYX97NWxPwBzii1AQs=
+Received: from PH7PR10CA0002.namprd10.prod.outlook.com (2603:10b6:510:23d::28)
+ by SJ2PR12MB7800.namprd12.prod.outlook.com (2603:10b6:a03:4c1::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.31; Fri, 1 Nov
+ 2024 09:50:05 +0000
 Received: from MWH0EPF000A672F.namprd04.prod.outlook.com
- (2603:10b6:510:23d:cafe::f1) by PH7PR10CA0014.outlook.office365.com
- (2603:10b6:510:23d::16) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10b6:510:23d:cafe::4a) by PH7PR10CA0002.outlook.office365.com
+ (2603:10b6:510:23d::28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.23 via Frontend
- Transport; Fri, 1 Nov 2024 09:50:01 +0000
+ Transport; Fri, 1 Nov 2024 09:50:05 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,25 +61,27 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  MWH0EPF000A672F.mail.protection.outlook.com (10.167.249.21) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8114.16 via Frontend Transport; Fri, 1 Nov 2024 09:50:01 +0000
+ 15.20.8114.16 via Frontend Transport; Fri, 1 Nov 2024 09:50:05 +0000
 Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 1 Nov
- 2024 04:49:57 -0500
+ 2024 04:50:01 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
 CC: Leo Yu-Chi Liang <ycliang@andestech.com>, Padmarao Begari
  <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] xilinx: mbv: Place DTB by default to DDR location
-Date: Fri, 1 Nov 2024 10:49:53 +0100
-Message-ID: <e0109cec6a81163f213684758a5b2d67d927ea26.1730454591.git.michal.simek@amd.com>
+Subject: [PATCH 2/2] xilinx: mbv: Align smode_defconfig with upstream QEMU
+Date: Fri, 1 Nov 2024 10:49:54 +0100
+Message-ID: <f7da41aa5222bda46ff6cf869cd45f3088e677ed.1730454591.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <e0109cec6a81163f213684758a5b2d67d927ea26.1730454591.git.michal.simek@amd.com>
+References: <e0109cec6a81163f213684758a5b2d67d927ea26.1730454591.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=828; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=/AnbRVpCBLu0qKt+P9hJN2l1cVSclZ0AGKdKm7FFzB4=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhnSVJY4zZl9zr1W6wVrQdZ6v4E++obcKo4yo7HZb6Z0Zy
- 38xhf/tiGVhEGRikBVTZJG2uXJmb+WMKcIXD8vBzGFlAhnCwMUpABO5v4ZhniZD3/3fLH8m6kde
- y3wVmsij15gvyzBPkfmreyDbdrYn0+zniL9i0uVkVN4LAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1623; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=UOlKZIV8ef/JPUDaRYzKydEIw2iS3pGwhJo/eg+6iZ4=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhnSVJU4bl3r1XEwOmXBKN6DaujklKsZKaFbGd/mVDoHL+
+ 7aoLDnSEcvCIMjEICumyCJtc+XM3soZU4QvHpaDmcPKBDKEgYtTACaSuZBhfsh0iU9f//FMWrOe
+ 8URDzewEd525sxgWzOgrX88nsKP7jvmxhVX7eoqNY6/OBAA=
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
@@ -89,50 +91,50 @@ X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000A672F:EE_|DS7PR12MB6333:EE_
-X-MS-Office365-Filtering-Correlation-Id: 26b2b969-d5cb-452c-5109-08dcfa5a8dc7
+X-MS-TrafficTypeDiagnostic: MWH0EPF000A672F:EE_|SJ2PR12MB7800:EE_
+X-MS-Office365-Filtering-Correlation-Id: 703b1e9b-a585-4376-69ce-08dcfa5a904d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?rgp9zf8NWEWzSFTUg874JjMY2UWvrT5VbxvAMR/iOStu4IN5jHN1GSa05B95?=
- =?us-ascii?Q?7bD9h66W17ogUs02+6YlgrIGPNQsVsgDT7PLFdfLIEjf5x96Gyv321MfMt+D?=
- =?us-ascii?Q?atyk8v2SLy17ynruz16hXlQZUGmzCVxAiFIsOpCU/B6uOU8+wPuLjuCrDMEc?=
- =?us-ascii?Q?DKMdZfKBUy8w1vbRQJFWSp+nkn30h1v/cKzrd0N+anBm8AYzDj0pWt/vRvLt?=
- =?us-ascii?Q?NIIg3ckXws+K7c/u8Vp6JNkVK+VNpmX64OzpvIQ2/SPYvQ7XPdglPrxhWMXF?=
- =?us-ascii?Q?uPfcxziSrt7z21ZAsvRjqciLl1g/GplmTgs8MH5rlU4EBPXQQYlQdl5kF/By?=
- =?us-ascii?Q?+zC+hmyqNdQ6BRIivoK1x41HdtY+Q7Js0RsqVzyWKJ7r6+sgzDBZI8U+YYFR?=
- =?us-ascii?Q?ZZtGw6IvnWry0InhTY98TzFwKGChhGshk+4fICtSwhH8NC8OWBFEO8XB9lIE?=
- =?us-ascii?Q?1a0umEibkeYyny45Z5LgB7EGvHEXc6NP7moM9NcfUakZVJayKvDXxsrqQCEd?=
- =?us-ascii?Q?FrIbMMQalpkZllVi1oYqXEmpcmDzTkwMvBSLfcA4XFcQL8ndB5KG+jqhQujs?=
- =?us-ascii?Q?zm2rSR5rT5f7TIqqYH6EvE6HTS2KF2GoGjAUaqs0gM+ZzNqSnxOcPsntY3rn?=
- =?us-ascii?Q?bdc6exMEbXrsOEEyATq80y/gxKsXrE9K7+e1EHGspzykg9akjJmYwIoo3i2+?=
- =?us-ascii?Q?gYdnz09D8fQI8bqMO4S3g8cFmTuUCxP3GZXHEdloEZ+DCBrQbJxc1O/dYz3a?=
- =?us-ascii?Q?R89Ler1qNswicdNpSihp1ddYOC62klnomY0VGEfVeEQDj7uXHqZwx1PLT+Qg?=
- =?us-ascii?Q?huH0POaA5USEVMi7EmxulArioTHxnYQ46M1o7XUb/H8H41unOEpT/zkt9arN?=
- =?us-ascii?Q?Zq+Sov5aQTvTUEllBAPvL0/GiECgMlX23av+BmuFOpr+vnN13dZ8atKa6A5a?=
- =?us-ascii?Q?XnhLw/NPXPiDa3xIb6bx+tRQQP9bmUgZIPxaINIvICb82/3Fmt4diKt29XBp?=
- =?us-ascii?Q?ukQ7bOpMOv/zT91OwneIjXBpyq1t6JAULDGauE4jCpSKMzH+Eex8zogJUtAh?=
- =?us-ascii?Q?tZiZ4ox14jIpVqrGqO9+xaRE8WG2dKCqFRTd3RaLEdn2LecCUFWgXt1I/CI5?=
- =?us-ascii?Q?pTSpvtmUUv/HV52CpScNaolU4w1uXuv71PgA87UrHL15LQzUBJRc2NZ0Ibna?=
- =?us-ascii?Q?iMesKZrZ43Tz78sKYo1OymL75PlPo5FKytV4KPwAFit3+znPXeOvw/an3fCv?=
- =?us-ascii?Q?Jxb2vpKgkXGLWtJjrMpFkd9pZrT3KAV55KmBCSHq4M+rKXX4XAGjl+nQi1W1?=
- =?us-ascii?Q?HrLVCeUgmwzMQUI6l/8w0gAUVM9uxrL0rpv5oUjJzKjTQ+tG614E0e4cjWT4?=
- =?us-ascii?Q?QvdZInRiLsmetn2FHl8jNkQl3O4C6KZM68aR6Pra6eEo+zbChQ=3D=3D?=
+ ARA:13230040|36860700013|1800799024|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?zitX9ZFhTaEApxztCRun//SCI+JhrfjsNULdgMKPyOGVlB/cIqMbYR1d9zG1?=
+ =?us-ascii?Q?7tELTFuMpOjtJmLLZrzdGSTC6BgLUmIBw3spS0JNSAbGq9tNdTFqor6OTJI0?=
+ =?us-ascii?Q?DF6jAOTVQoqIZ0W8qp7ik/NkPDkA+UG9W8nHDUuL8X4IEJV9o/Y4cXd070kz?=
+ =?us-ascii?Q?uV43Zpnj8s7mMkwdm/Za53ElLh+ikKF92BUHzA8zs826QKxfcZ+kZnkLb0sm?=
+ =?us-ascii?Q?O4VDZZwH0jWRbRVIbzwm9K3J+9zMGQWWGpmaoM/DseHJ9P3FNdBjoInhMvyH?=
+ =?us-ascii?Q?f8omCUu1zS2OO5upgltvZv8gyQcHks3Tfu3w67QnHe9348xenF5ClX266LYh?=
+ =?us-ascii?Q?ltDJlSNwek9+r6FZRF0qfW40/FYdTTWsYdm/b+y3kpB+TQ2C0NQJkiPP/jaT?=
+ =?us-ascii?Q?UEE2EhU46vmD2nWIeAfbEfYxHR+AckjqbhyuJEICnBSW0rN55jrqzACzbNh0?=
+ =?us-ascii?Q?s1bWlaK9X4Flx7rIWSMbEfH6BoX+E85jJpPqVBgT7+msVHkDTEmB6rx/gDc+?=
+ =?us-ascii?Q?tBAB7dzAcTE6YI7vd0qzupNTNSsFUgNBGRntF1OUTnaDUq0BlzQoY+y0noHY?=
+ =?us-ascii?Q?foRuzwWGDBpUQTpwpdq4/rFD2sRpdGIc1UPFu++fYoUdh7iBDNmqe8aSBo+B?=
+ =?us-ascii?Q?7DKJ33zotS+pOKVfm4nQ4/RxpfzsER9ZVHHr4VJpXF6ldxSrNyirSbEcxkNd?=
+ =?us-ascii?Q?14ItCRjYGiW9LGYSH1Zi3wZUe5mPL5I8KTDVyl56GZYDSsW0fVN3bDy/POLw?=
+ =?us-ascii?Q?wlUV8m+iVN9ewGlz371tcEwqVWtteMB2ASiLA8aIXk6mI4AnYmC8BYEaWJj9?=
+ =?us-ascii?Q?v7JYfrCezfsMjMmK3HxGwEa/kopoG/M4YE/ZIZDw2OXSr4z293P/lWXDy8GI?=
+ =?us-ascii?Q?IUPC1NYPmkjKlM9TfeolOA6dl0RHsQo2foNI97zH5PhEJx5xlFreJC8oYBBf?=
+ =?us-ascii?Q?NiSDxxAcLbuHowt90DtBeoFyezO81lWPS/RHDF7+aJKJL1M13E7ICPpLU/Do?=
+ =?us-ascii?Q?jGSTTOEE/FidCtOUUaqmLXmg6Uhalmx9mgZx+8Hcaf48w4hxbww+nroPVuZ+?=
+ =?us-ascii?Q?Mkfm8hB7YcmkWWyXfcw/6xSpxRWO9vdxuAogTyrwR3X6mt26S9N9gOInOOzQ?=
+ =?us-ascii?Q?vUEYgcW7o63ffHYXJSw4hoPSnnzmYYvYV6GCGr4NDe8P2Y5y9xE1TJ91ElBa?=
+ =?us-ascii?Q?moKiSN369enmG68NjLRL+Xsfbjfe/1kxfbIC+4JKrdRcQ7h3BKJ90dIKVGf6?=
+ =?us-ascii?Q?T4+Gk03WgNxl1BC/EdE4DZcJ9ChJlpTyJvmy10WOsECNEjmymkbBjuPii5Om?=
+ =?us-ascii?Q?y4tETvmR2bdi5D3BKip3brhejLX/cXxeTfzr94SeAggeHGGNrZCd0+0nq0+n?=
+ =?us-ascii?Q?E25m5zYnLb3yW1iopVmCiMZ0GqqujI4FcOLz3GCWZCR2LCEV0Q=3D=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2024 09:50:01.0854 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 26b2b969-d5cb-452c-5109-08dcfa5a8dc7
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2024 09:50:05.3042 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 703b1e9b-a585-4376-69ce-08dcfa5a904d
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000A672F.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6333
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB7800
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,28 +151,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DTB should be also placed to DDR. It should be the part of commit
+Align smode defconfig with upstream QEMU. It could be the part of commit
 9d688e6da5c9 ("riscv: mbv: Align DT with QEMU").
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- board/xilinx/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ configs/xilinx_mbv32_smode_defconfig | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/board/xilinx/Kconfig b/board/xilinx/Kconfig
-index c7df4ab5781a..0ff8440e6e06 100644
---- a/board/xilinx/Kconfig
-+++ b/board/xilinx/Kconfig
-@@ -45,7 +45,7 @@ config XILINX_OF_BOARD_DTB_ADDR
- 	default 0x1000 if ARCH_VERSAL || ARCH_VERSAL_NET || ARCH_VERSAL2
- 	default 0x8000 if MICROBLAZE
- 	default 0x100000 if ARCH_ZYNQ || ARCH_ZYNQMP
--	default 0x23000000 if TARGET_XILINX_MBV
-+	default 0x83000000 if TARGET_XILINX_MBV
- 	depends on OF_BOARD || OF_SEPARATE
- 	help
- 	  Offset in the memory where the board configuration DTB is placed.
+diff --git a/configs/xilinx_mbv32_smode_defconfig b/configs/xilinx_mbv32_smode_defconfig
+index 741724f3bdae..820681d505b7 100644
+--- a/configs/xilinx_mbv32_smode_defconfig
++++ b/configs/xilinx_mbv32_smode_defconfig
+@@ -2,13 +2,13 @@ CONFIG_RISCV=y
+ CONFIG_SYS_MALLOC_LEN=0xe00000
+ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x21200000
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x81200000
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
+-CONFIG_SPL_STACK=0x20200000
+-CONFIG_SPL_BSS_START_ADDR=0x24000000
++CONFIG_SPL_STACK=0x80200000
++CONFIG_SPL_BSS_START_ADDR=0x84000000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+-CONFIG_SYS_LOAD_ADDR=0x20200000
++CONFIG_SYS_LOAD_ADDR=0x80200000
+ CONFIG_SPL_SIZE_LIMIT=0x40000
+ CONFIG_SPL=y
+ CONFIG_DEBUG_UART_BASE=0x40600000
+@@ -16,12 +16,12 @@ CONFIG_DEBUG_UART_CLOCK=1000000
+ CONFIG_SYS_CLK_FREQ=100000000
+ CONFIG_BOOT_SCRIPT_OFFSET=0x0
+ CONFIG_TARGET_XILINX_MBV=y
+-CONFIG_SPL_OPENSBI_LOAD_ADDR=0x20100000
++CONFIG_SPL_OPENSBI_LOAD_ADDR=0x80100000
+ CONFIG_RISCV_SMODE=y
+ # CONFIG_SPL_SMP is not set
+ CONFIG_REMAKE_ELF=y
+ CONFIG_FIT=y
+-CONFIG_SPL_LOAD_FIT_ADDRESS=0x20200000
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x80200000
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_DISPLAY_CPUINFO=y
+ CONFIG_DISPLAY_BOARDINFO=y
 -- 
 2.43.0
 
