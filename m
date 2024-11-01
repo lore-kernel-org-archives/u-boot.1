@@ -4,84 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2992E6F07D
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 19:02:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 885F6E6F083
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 19:14:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E12788FBB;
-	Fri,  1 Nov 2024 20:02:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E247988FC8;
+	Fri,  1 Nov 2024 20:14:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YuEtCPLH";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="S2ulrohD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1EC988FC8; Fri,  1 Nov 2024 20:02:28 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E46B98924F; Fri,  1 Nov 2024 14:40:35 +0100 (CET)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on20711.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::711])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96F1188E2D
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 20:02:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB1948902F
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 14:40:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7b1488fde46so171980785a.2
- for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 12:02:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730487745; x=1731092545; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JRKs4BSHqJQWn9O5ZZK8/Tg0zN/luV4mk2Qs7sL0aRI=;
- b=YuEtCPLHjvtIql63WWTAr5kUeJlLFo4N/KPXiB6j5CQQYAH5GSO+QDBlLf2HpYgLCL
- HZKViXMrA75UeFKCMNt0q8isUNuq6LE2Bj00ECjpC7d6RFfB5yOF0RSEbW3tYDDhEn4M
- N+uSiKYcaa+CXRD+IHsP+XTcJZfYCqNSf/0po=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730487745; x=1731092545;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JRKs4BSHqJQWn9O5ZZK8/Tg0zN/luV4mk2Qs7sL0aRI=;
- b=B5EnULZv8kzu47szswpZQrfES5NTpxnEh22yEoUFtW+JsUM8Lsk/XYwl9M//dUoM5s
- iyjTe4Zbtv884lJAEw3fkRm8KGpb6wO2k3VwyRTxq9JAngV2HHtSC/3eYxNRpZjhfPpi
- sM9J4V254134mhrlaCsXKEB7nDLUHsKtxJhHKQbfLnGXznKBeMhhR0uVRkOOcfyPfixd
- j+79d9rTfG+KYuTo2JMbUtVNJ0oCvdn5hJzdciKdEvJ513WXhk15RdXZLNTlkcNWDI4A
- J1dTy8USSHNgRa4bPYdHI77wwa1/tfMTt2WrtWOa6eonfX3JNaipei7UBBrEHdlgjyP/
- BAmw==
-X-Gm-Message-State: AOJu0YzNvqKpnLUP0OXw1QnmQBJm8hkuZAhulbJbaHANG/9pdK2PKWVs
- sCYmhgCjbEb8A9z6TCWbSXfW/p5WjYRMHkEYjcqbknPs8FoMnQriDx+3dMd6N8U=
-X-Google-Smtp-Source: AGHT+IEnyxkdAA5dwTZyuyxtRv+JYSF6UE6SveytlbqKwXCVYCsCYMGNFfxCFCGW4QABcf7O4q1pfg==
-X-Received: by 2002:a05:620a:2410:b0:7a9:abee:992 with SMTP id
- af79cd13be357-7b193f4d8e8mr3514153285a.50.1730487744903; 
- Fri, 01 Nov 2024 12:02:24 -0700 (PDT)
-Received: from bill-the-cat ([189.177.122.145])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b2f3a10500sm195886085a.67.2024.11.01.12.02.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Nov 2024 12:02:24 -0700 (PDT)
-Date: Fri, 1 Nov 2024 13:02:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v6 01/19] test: Allow signaling that U-Boot is ready
-Message-ID: <20241101190221.GS3600562@bill-the-cat>
-References: <20240920060158.106612-1-sjg@chromium.org>
- <20240920060158.106612-2-sjg@chromium.org>
- <20240923203512.GQ4252@bill-the-cat>
- <CAFLszTjT3RZYChMhBxUDsf6YC-7cZfh1_YhuQrin3sRanSO=Xw@mail.gmail.com>
- <20240925172601.GA4252@bill-the-cat>
- <CAFLszTjFMRpfwFVPJ=-xqKUu=XbH=hq+yP+N17TuFd2b8+rt4g@mail.gmail.com>
- <20240927025159.GR4252@bill-the-cat>
- <CAFLszThvvU8uEYSBh_F6NQViNJ+bFr6mMYzd8yrTAwOp9dhLLw@mail.gmail.com>
- <20241031182822.GA3600562@bill-the-cat>
- <CAFLszThB8urxxjBZcvO8teuu5M+eLaRBb0UHEwoRm+GVyF0CdA@mail.gmail.com>
+ spf=pass smtp.mailfrom=andreas.gnau@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=URFcuvBMl9OiJ5gBlfcqSDZimUGlLWLfEJNpQZSVuAVHQf77JdPw48OkwELFJx2XvjzupBGN823jKIsvBdLw1JbCWj2KSz4vwdSfN0pZmCD5TJUBPzWFaF1h6c/ZcpdA/e/rl3uZpY+TbAKFGKSBf9cZLoedaJKEFmjbO4dWqqUVUGSxsQWnIA6CAJtVOCc6r7h5M6Y1270UgeZp2UX5w+bdBDnFPFrkKkq0RD44K/gCl6uDtyLPqEl6oO4o7HhGaoSupc4+dvvM+pmVR5aVeN2qCQCKhmdEdOBZx/+yjTV6HfuAxegENlJAhNZWABaFHNkcof1Hn3eN4ZqWWfuiwQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Oy4CXPNe+nSGStA7SMXGMb6xPE1l0tTniVuApfRBUbU=;
+ b=acxnkNO17oD3rbYed9Jem7aFOUohAA71Nr+dOxH4FS9H+c1BRPT3asGAqxXD8++iNsuGvLX57ZNNIvYpT20cp26abkSOXh9j5kpJwGdr07GCz4uV6qBnB6gbzg4szEO6JQLvM0GRskIiQnHLDew3UzhUGJ86lZHPJf0V5yhzQsAKvKzicHDBhcf+1TOWrCdGzcodTsxVz0J3F6ILc0gNwhh0LHmJDAW6vnEBbW7WiVtXGWjS+nF901rPZ1xUEQsTrqt1pUw+W7p/kjogugIgpigemvgGG+ltI9eVfc3uJZSpYBlacccHtZIed8vbd1BikNQnUmGg3GyAyEcC3d35sg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Oy4CXPNe+nSGStA7SMXGMb6xPE1l0tTniVuApfRBUbU=;
+ b=S2ulrohDivKQSx2ayOHUVFjBlpLW2szV7tCqyLoYdCLrqD0hdIwXaSSHzbKx3tMT9JPDilE+ZxSeZVkJzBs7GvdFaZXlGzNi7UUHdm2KFSroy9ZUz4KdazsAa4LNNPaZ12Jjma1sTLufRcUJH5Iq6B8+wIYhu8Na2TKyJrgdaSHc80ZOaceF4iVhRVQiSh97SM+EO5hy13KAmCSKhdN3V3lLRjaljLEjuteqi1mk581noST8W4d9bo92RWRfF7Fta3X8+rdgQH84IGPuQewtqIGBN1Ts+t7hUyiIt2V8ksDjKS+/lhsqGtIImG5IHuXLyODNT4D7qKqLmFpjjkhuLQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from DB9PR08MB7512.eurprd08.prod.outlook.com (2603:10a6:10:303::14)
+ by PAXPR08MB6543.eurprd08.prod.outlook.com (2603:10a6:102:12f::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.32; Fri, 1 Nov
+ 2024 13:40:32 +0000
+Received: from DB9PR08MB7512.eurprd08.prod.outlook.com
+ ([fe80::fd8d:f047:ac4f:6d6]) by DB9PR08MB7512.eurprd08.prod.outlook.com
+ ([fe80::fd8d:f047:ac4f:6d6%4]) with mapi id 15.20.8093.018; Fri, 1 Nov 2024
+ 13:40:32 +0000
+From: Andreas Gnau <andreas.gnau@iopsys.eu>
+To: u-boot@lists.denx.de
+Cc: Andreas Gnau <andreas.gnau@iopsys.eu>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] fdt: Update fdtcontroladdr if fdt_blob changes
+Date: Fri,  1 Nov 2024 14:38:33 +0100
+Message-ID: <20241101133848.2278151-1-andreas.gnau@iopsys.eu>
+X-Mailer: git-send-email 2.47.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: GV2PEPF00006629.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:158:401::3d9) To DB9PR08MB7512.eurprd08.prod.outlook.com
+ (2603:10a6:10:303::14)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7GBw0fvHd0EesPSd"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThB8urxxjBZcvO8teuu5M+eLaRBb0UHEwoRm+GVyF0CdA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR08MB7512:EE_|PAXPR08MB6543:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5f7a0def-cab9-4033-98ad-08dcfa7ac166
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|366016|376014|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?5Bhp6QbCkpHXZHlZXEqAdmuZt254bPcDtD1DlxwUc+ePmC/FHJJf0I82GO8F?=
+ =?us-ascii?Q?kbo63WDt1E6e5TOk2DECljpug2IJ/dPPSYZemAmBrkB8Vp5FTXZA2+SkmmPt?=
+ =?us-ascii?Q?JbmGnpecYSILdx3TyHaWT+HRWI3aaiuLcN3H6ED88O5suF95ayntQ7ZF+7A3?=
+ =?us-ascii?Q?d4KXwNESnfvznskiSi7wKtwW/9UMIzQcImQ88gIgZXKbq7PV3hBWHXrbE/wH?=
+ =?us-ascii?Q?knvG7Z8+KUfh5HX2DHw5MmyTJJw7t422KvcqjOG4GBWlP3tlvX0v/6cfyUNm?=
+ =?us-ascii?Q?MjnGl9kvSyncigGFSDRnV9SRF/mpFJpyoQpRoKzUk13VW9Ibb8kQOOtSsYw5?=
+ =?us-ascii?Q?R4vC5CDBp5ILXtFkjxJbJ9F2pS8o5sEP52ihtlzGVQa8aPypmcSnwykjV50n?=
+ =?us-ascii?Q?93VOqLbj2KXAyzoQ5cvF2LuRUdmWrvlaGCiqtvnOcR9QRRfDolvNIPu2BC0B?=
+ =?us-ascii?Q?HBzJB0kOaUadFJ4+lArnnSH4A2mScmNoMll5y5ruN0xJHTMzmJmA85Mwsqb3?=
+ =?us-ascii?Q?lnYvpH9P0ghr+ukVUU4dyKdDPe52o/kAGKRyVRMjMxPgqHIYPytniUAW8A/d?=
+ =?us-ascii?Q?obkBkb5/+VsPWNx6daFh77DD9orYzvbRsFcZZNiCO4z49VGqdod5me3hA5wn?=
+ =?us-ascii?Q?JvcIR0dS3NhPVPrvFnGZtRLFgCppyhObk6362ZRRyTI2zXV4aloabY4PzH+I?=
+ =?us-ascii?Q?zo/6hn/f2WKi8g/q4RuLxUWjveCKLl5bouY/yCQfxlJOJUKeZUTfLl42V3F8?=
+ =?us-ascii?Q?ZxD1Mm+jz9vO600Y+ytYNg6qgrl5JU9tlb167FVZ8DhXF2mbz4ONVQLYNubM?=
+ =?us-ascii?Q?YcbgQHc5zu0LcYATC5YNMMDHk6v13NaICa8jcAXbygBaJzt/Ez1APpJNtyOn?=
+ =?us-ascii?Q?TSdXoHwIsgUNGabJh0rSrNa4Uhh1qV/zFYfJftSMrtKDhNecBzKrsmmew8N7?=
+ =?us-ascii?Q?+U2zSMuAsYfJj2K+8qkXCwMG5eEn+gCF9FxHALxAcqRMRNA/P+FTfl9lUQ8u?=
+ =?us-ascii?Q?cg3gM1+Y6lCZ3G7WZ1EXhDo9CxVackwI+lj2rTsgWKLhADsfuQyqtMduiwwv?=
+ =?us-ascii?Q?M9vPbsFEnui7UnLkf9D53pz8qo+7hXb4T1+TIg3pZ51eLJX/L48s/184mf5s?=
+ =?us-ascii?Q?8/rMnoxKmd3W6VO+Zf6DLz/YvJqLPeQOegKQawrNTm1G6Q2xhsTB/SeNSBmG?=
+ =?us-ascii?Q?ab5ADSIfFa4FVFmfs9u7+BPl+4aTVexzdCBlDRdT0GlHNhvh6FREmRDiftI+?=
+ =?us-ascii?Q?blJ9j040h+FteGtbyt/HY6uXCZiSAHPq4HasXfGBAJVN5mh9s86F/1hbZ0vd?=
+ =?us-ascii?Q?Ru1QzN9bKLAGc5xT8Ko92Imz5x4UpdZeG7puyYhX9gYjq51L9IWVbVFoy6KC?=
+ =?us-ascii?Q?9rhldj4=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR08MB7512.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(366016)(376014)(1800799024)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?DV+9FFGxMtn66YqoFs8oFbQ8l/k2M1yhQk+Pc0vTt2t5ZnhLpIXhyAVPrpnX?=
+ =?us-ascii?Q?1Oq6vgLv9QlR/XvpCELMtfQMXW1iiTGIyz3eH5KG/VgBLz4mL2YfzBACnDMR?=
+ =?us-ascii?Q?ybklLNZyxfWaWERUj84HNUIXTJtUlUP34xr+aBVPqig9lTnNOlOtWu2s3ypR?=
+ =?us-ascii?Q?aO7w9l9b97w/9iD1QCNjoRQFnonJurGg9CPGiLe2Q9ltjfrhumgjCwiysXTT?=
+ =?us-ascii?Q?s0kHRWiLomdxOP7pi6IXousueVQ3FkJHcZDitLUB2lgqi8ibwGflz//4fLVB?=
+ =?us-ascii?Q?KA0wnq5cedwbviGhxmn/Cxyo/yzfAVn5+87sRuMEU3HaqS8qvRUkb3ZGLzLV?=
+ =?us-ascii?Q?igA107Ckf0+aGS+bGMO0XXUF2hNCvObr50rcZWzlBO9xDn9dh5s2F8pZkEDk?=
+ =?us-ascii?Q?TMo0EEY8w5vQqvKxU9t1/cJZmV4kFl/wkRw1Lx2gsP3Io/+dReOiCnximgAx?=
+ =?us-ascii?Q?d2NzzoIeL3mMXx8pEIpe9xikTT/ID4sMcjLf4wRwSJ4y6kyvVshM2hTItRfj?=
+ =?us-ascii?Q?nZKlXkdZkiN+4HabI/yhC54JhQJWd9TnYZm/RJZsycdONM8s173ohK6OqDv/?=
+ =?us-ascii?Q?xO6AeqhyYZ7EQ2xVTqlX7dO/0Ui3hVlio2rn8V/k4y6GiJUsqj7B9vxm/XyO?=
+ =?us-ascii?Q?zWTH0ZiBq8+geX07QF5weeJJpIy45DYZ7rG3a6VDXRpS0H7MNcXli0yogTa8?=
+ =?us-ascii?Q?phYLpowVLdwTpffBBRr07Ot3n5cJhTc+0HvLloOgZrSR08fjcupZ5CsZZpRz?=
+ =?us-ascii?Q?2oSr8A7Wbq2hBua1qKvvkTUi19RiqNCLWGlDmXmH+26nXZJG2xq9gRnFICLO?=
+ =?us-ascii?Q?xOquOxP+mUFdgvXKX8CSAay6fTxSEbpBsUDJIb20At8bA4V22jtnGXh+nE8n?=
+ =?us-ascii?Q?YDp5D+oBaDz+hUmDbNsoUmklZbuDgKjsdOIeG65Xqsv4nNRJMWUcLkYckv1G?=
+ =?us-ascii?Q?AUte/rhhoVmH0gUceO3uX66deOujvOGyVPmqBV1+ku9Y5TttrrPkEcFPkh71?=
+ =?us-ascii?Q?nSjEqppP6gTde570SIqkRHP9e24qNXm9Pc4NXOlS28TV5XrfO6D7Z+ewbsgv?=
+ =?us-ascii?Q?vUGE3G2fDZEvYPiNBhNy3fRdJvzjHyuchD/0zDN5TAe3InqtZAVbL1TixkhF?=
+ =?us-ascii?Q?s0pIo7fbC8/2MEe0n6OIw2wTZdcEV+bhQ/Jt6NXRnJHITC+eTIjAU8AQJ/L2?=
+ =?us-ascii?Q?9AN1OBov++XtrEBlp+9m0CBWllb1BPHbQBgaTpY2BrRMGyFriGTpiSz7Nip8?=
+ =?us-ascii?Q?pHSDk14rslJIPcf3LjOD7YfRalWcsN82rzFdjZob8Zgp2Qxyx/rDrX3EoDZw?=
+ =?us-ascii?Q?IJKDDmKE5yYDQKuZOIaX7CU8Y6SZTfZElDfissLyFyPSD4uShIa0DqGCYyIS?=
+ =?us-ascii?Q?j6dZknFuFDWb6JqZkz+ZcX58N2bqNflHQ7bIJuKqtt/Ns+aOVnSXr4NSvL+n?=
+ =?us-ascii?Q?VZ66iCx6NBLst8Lr50/MhRN+9RNqaS73iut1uovHsf2sZHSPlioR4Rxjc0eV?=
+ =?us-ascii?Q?kILVDohOYTsxR2X03mnW/YGGsenBO8xADx3H6tlk/xO2W4BB6zr6H6Dh8gVV?=
+ =?us-ascii?Q?Fqx9qifmqyjkvBWL/2JYfxNLpQZ1SsdYP7b3YzLR?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5f7a0def-cab9-4033-98ad-08dcfa7ac166
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR08MB7512.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2024 13:40:31.9428 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9EsztzBiplhhBkPwWKi4lw5NyCJDaewCGClSE0HP6nrMSdZP0wyxfW/8W2+eyDzyPP2UAMNDYH271Nf4chSnNQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB6543
+X-Mailman-Approved-At: Fri, 01 Nov 2024 20:14:47 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,188 +159,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When a different FDT blob is chosen via fdtdec_resetup /
+board_fit_config_name_match, update the fdtcontroladdr environment
+variable accordingly. This fixes an issue where fdtcontroladdr would
+still point to the previously used FDT blob.
 
---7GBw0fvHd0EesPSd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Andreas Gnau <andreas.gnau@iopsys.eu>
+---
 
-On Fri, Nov 01, 2024 at 04:33:41PM +0100, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 31 Oct 2024 at 19:28, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Oct 31, 2024 at 07:03:19PM +0100, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 27 Sept 2024 at 04:52, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Thu, Sep 26, 2024 at 11:36:00PM +0200, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Wed, 25 Sept 2024 at 19:26, Tom Rini <trini@konsulko.com> wrot=
-e:
-> > > > > >
-> > > > > > On Wed, Sep 25, 2024 at 02:49:56PM +0200, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Mon, 23 Sept 2024 at 22:35, Tom Rini <trini@konsulko.com> =
-wrote:
-> > > > > > > >
-> > > > > > > > On Fri, Sep 20, 2024 at 08:01:36AM +0200, Simon Glass wrote:
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > > When Labgrid is used, it can get U-Boot ready for running=
- tests. It
-> > > > > > > > > prints a message when it has done so.
-> > > > > > > > >
-> > > > > > > > > Add logic to detect this message and accept it.
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > ---
-> > > > > > > > >
-> > > > > > > > > (no changes since v1)
-> > > > > > > > >
-> > > > > > > > >  test/py/u_boot_console_base.py | 9 +++++----
-> > > > > > > > >  1 file changed, 5 insertions(+), 4 deletions(-)
-> > > > > > > >
-> > > > > > > > What happens is that labgrid can also be told to look for a=
-nd then
-> > > > > > > > interrupt autoboot, just like our pytests can do, and the s=
-ystem is at
-> > > > > > > > the prompt. But this is also what it's like for a system wi=
-th autoboot
-> > > > > > > > disabled. Do we actually need this patch to achieve the fun=
-ctionality
-> > > > > > > > you want? Doesn't that already just happen?
-> > > > > > >
-> > > > > > > The point of this patch is actually to remove code in pytest,=
- by
-> > > > > > > allowing it to skip all the banner-detection stuff. It does n=
-ot affect
-> > > > > > > things in Labgrid, since it still needs to watch for banners,=
- etc.
-> > > > > >
-> > > > > > But you can't remove code from pytest, people can and will run =
-the suite
-> > > > > > outside of labgrid.
-> > > > >
-> > > > > Yes, that's right. I meant that with Labgrid the code is not used.
-> > > >
-> > > > OK. I still think this (and I assume the related flag to tell which=
-ever
-> > > > helper that was that the platform is ready to go) are too implement=
-ation
-> > > > specific.
-> > >
-> > > OK, but it does have the virtue of working properly on all the boards
-> > > I have, rather than just a subset, without this patch.
-> > >
-> > > >
-> > > > > > > Without this patch, we have to tell Labgrid's U-Boot driver t=
-o do
-> > > > > > > nothing, so that pytest does it. But that is not a good idea,=
- since
-> > > > > > > Labgrid has a lot more info about the board than pytest has. =
-For
-> > > > > > > example, look at all the SPL-banner-count stuff.
-> > > > > >
-> > > > > > Why do you have to tell it to do nothing? The pytest suite work=
-s fine,
-> > > > > > today, if the board stops at the prompt automatically. To be cl=
-ear, the
-> > > > > > labgrid yaml file I'm using with my scripts has the information=
- to stop
-> > > > > > autoboot in it and it's not causing a problem.
-> > > > >
-> > > > > But if it wasn't causing a problem I would not have invented this
-> > > > > annoying scheme.
-> > > >
-> > > > Well, I honestly thought it might be a remnant from development that
-> > > > wasn't needed once everything else was done. I do that from time to=
- time
-> > > > myself.
-> > >
-> > > OK.
-> > >
-> > > >
-> > > > > For several boards, by the time pytest gets to see
-> > > > > the output it is too late to press a key and stop.
-> > > >
-> > > > Why / how? Do we perhaps need to adjust the timeout upwards, slight=
-ly?
-> > > > Especially in light of the changes you also did to detect a "dead" =
-board
-> > > > and so we don't wait 30 minutes for a test run to fail.
-> > >
-> > > Why / how - because the board prints its SPL banner as soon as reset
-> > > is released, then waits for U-Boot proper to be sent, at which case
-> > > the U-Boot banner is sent .Then labgrid disconnects from the console
-> > > and runs microcom, which connects to the console over ser2net and
-> > > misses some of what has already been sent.
-> > >
-> > > This is actually a fundamental problem, not something we can adjust
-> > > with timeouts.
-> >
-> > Wait, what? *Labgrid* is the thing that's the problem here with dropping
-> > the connection to the board and re-establishing it at some point?
->=20
-> Er, yes. Somehow I must have forgotten to mention that.
->=20
-> I actually have a change proposed to Labgrid to adjust that, but it
-> might take a while...in any case my change is just an option, not the
-> default.
+ lib/fdtdec.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Can you please link to that specific one? Thanks.
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index b06559880296..e3534b647556 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1759,6 +1759,8 @@ int fdtdec_resetup(int *rescan)
+ 
+ 		*rescan = 1;
+ 		gd->fdt_blob = fdt_blob;
++		env_set_hex("fdtcontroladdr",
++			    (unsigned long)map_to_sysmem(gd->fdt_blob));
+ 		return fdtdec_prepare_fdt(fdt_blob);
+ 	}
+ 
+-- 
+2.47.0
 
-[snip]
-> > Well, I hate to get on a tangent here, but I think a common thread is
-> > that after you've spent hours debugging a problem and working out a
-> > solution you then omit much of the details. I'd much rather see a much
-> > longer commit message here describing the problem, or a longer
-> > description under the "---" where you explain that labgrid uses minicom,
-> > gets things up, drops the connection and uses ser2net and so there's a
-> > chance we miss messages and so need something like this. Or, that you've
-> > been debugging on *x86_64* a bunch of EFI_LOADER things and off the
-> > shelf distributions aren't working (and ExitBootServices() is where you
-> > had a problem with Ubuntu I gather still on x86_64).
->=20
-> Sure, I will try to be more descriptive in future.
->=20
-> The problem in some cases is that I write the commits much later
-> (weeks, months) and forget what they were for. It actually took quite
-> a long time to get my lab running with Labgrid and for some of my
-> responses I had to go and try things to figure out what on earth the
-> change was for...some of them I dropped. I should have dug more into
-> this one to really clarify the problem.
-
-A thing I learned this year at some point was that you can pass -m to
-git commit multiple times and get multiple paragraphs. It won't be line
-wrapped correctly however. But it helps make "commit early and often" be
-more like "commit early and often with whatever you were thinking"
-easier to dump more information in to. I think something like that might
-help with review on your patches, which I know is a problem we all want
-to get resolved in a positive manner.
-
---=20
-Tom
-
---7GBw0fvHd0EesPSd
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmclJbkACgkQFHw5/5Y0
-tyz/mwv8CfV9tGV+WyltAP+5a2zX4papkkUBk2rxx/vM6poX3o/WJs76NxXJpaaJ
-uMnTHjIm9BOXu8fjVVB5fqw2+DIgdnBeeMe4hPanM4Lx6u/pRoUTx42fmy+PNhlM
-+hRyxV23e9hMA9B0jzAmEMbL8NW/K8SH5/0yfzPVA7ybFhyd3vRzq6YeSYF9cYqv
-A8/JmTBFU5RIQ5pbCBE8hBy0i8PnFD9u6T5/xYOFDaltRKmATTMUNMGlY03fSUpG
-vOs8Ru73yK3NocZAsIBG3KCyR2ENaSsUZvZXS62WqjM20YvrDmzTVnsplmVTeXPz
-7DH1lyfySnor3U85RK+7XRkQV5/da3bsVMP7pjDqU/EwrLh6elZxPnXsP+f2jUar
-/Kxhe9hWa8BoEFLvFeTVqEXoWtdbqWYqR6ej9p7qFdqzJBP+00O9iA+MDZZMFi1z
-ou0TTx3sCP1xKt4ynIzNjgydylTsiFj8OawuDE4CihzVj43CElow3rLHI7EzPdAu
-M6t7vLBf
-=4Tnq
------END PGP SIGNATURE-----
-
---7GBw0fvHd0EesPSd--
