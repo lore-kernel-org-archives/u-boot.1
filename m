@@ -4,77 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0790AE6F069
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:21:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1B85E6F069
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 731858902F;
-	Fri,  1 Nov 2024 16:21:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3FF0C88A37;
+	Fri,  1 Nov 2024 16:26:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Bp5SXxsh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OWtgyPdE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EED1F888BE; Fri,  1 Nov 2024 16:21:32 +0100 (CET)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 4EBC788DF5; Fri,  1 Nov 2024 16:26:25 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B1618924F
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:21:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A38388606
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:26:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-37d8901cb98so1988039f8f.0
- for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:21:30 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a9a4031f69fso298929566b.0
+ for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:26:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730474490; x=1731079290; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=i4OXjRkK++OZ17olHEnFLCCLb3vVlbpMTso9KM4NXS4=;
- b=Bp5SXxshvNuwT+Sy+ZVp/vgQjGzXTgB206whjTiXgj1L4gq0kLDpctL3XM26SWMx8s
- tzCmJNfsf2zOcRlJQukvFdn9BH2jAHv9PFZ6X6bOyHipN2vhjd8eRnPqGR/1ArzB8CHc
- kGwxmVJSnMsffK1R+h31YJogUdW3glxcmmWe8NgxSrkg9x5Nv6Q2qrOKTl4vnORbookT
- YmY3izC4iGU6uHK/SPUbfw3xLqhea1x1a2P7OGWNZ+ekjv/vIlbHIeBrY7nKVUmS5TKN
- 0U2e0HTGiwjQbG/Chp8FEaKnQvmjZFuOSydP7TZaKFoUWBOkauYnLPAIXb2euHn6T7O9
- nE5Q==
+ d=chromium.org; s=google; t=1730474782; x=1731079582; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6nwYgINmAGo8aML6Idho9Pusz+m3vgBfJQnjy35ZoRM=;
+ b=OWtgyPdEwm4Qm/6Wf6Z0uZ4msJt2fTSxisODEsK/omSZQ/fqye02rSAyJHjYa0pYH9
+ LB/dPQ6QC8GPZLml1LfOuKMnr64zNLxHbfz5JoH6DGQVkT7/faQzGtAI/VIcfInfcCIo
+ tnoZTL9FWHEFtWhy11eFFMm873na4qN4FILZw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730474490; x=1731079290;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=i4OXjRkK++OZ17olHEnFLCCLb3vVlbpMTso9KM4NXS4=;
- b=mxlsOtNmNRV6rmnGv812DeGlEl2fgStoNFHCK9ytXL8otyPY8oj9uIS6j4JK9hntxO
- zECOFqV5FOLmrmiVScWx1RuMNCMvL5c+y7NjQtROext+4xhsn1pB2VuyzjB/k2IrHs98
- FlSl+FYKME1o1S92OpsDCntYTtzw2xN6w02Syv4SHG3UGdX3+uSO2jE9yC1ydb7xDddE
- 6Ffw+QNjMS/OHpdJPZdSzD+VYiFcsU/NxWm/R5JtPODsQySlrxm8CZkGMpielYE5MlIS
- 10/CYPqtGKHtjyPucVpclQkWbsG8D/FLhz+rJ7N9beesdcKaixjoRUz7mxds/E3CYgwH
- 44IQ==
-X-Gm-Message-State: AOJu0YyhoItH1E596XKPwNYhrdv9EHe3aZeB/5yIrvccaoNaK5P/xBIR
- 8GM+RlSgdoxHqfPLCyF8UVjpKMOWKX0eFtXiRtdY5ET9TuWFRnhz3phiPMlEd8o=
-X-Google-Smtp-Source: AGHT+IGsJuPlqqNhEsavjqTPnnomFsyYdImtygtv4DSD8WRx759rQPIu1vS8aQaD8KCHnOMSAqO/mQ==
-X-Received: by 2002:a5d:6c69:0:b0:37e:eee5:80dc with SMTP id
- ffacd0b85a97d-381c14efbe8mr5620949f8f.28.1730474489732; 
- Fri, 01 Nov 2024 08:21:29 -0700 (PDT)
-Received: from hera (ppp176092143132.access.hol.gr. [176.92.143.132])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381c113dd7fsm5489817f8f.70.2024.11.01.08.21.28
+ d=1e100.net; s=20230601; t=1730474782; x=1731079582;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6nwYgINmAGo8aML6Idho9Pusz+m3vgBfJQnjy35ZoRM=;
+ b=tWAOCacA9taoHphy45pzddtPC7Fpmq6kaV4y5njDQV8p0jej0XIq0aUoZG3lFvSNkB
+ HtYUJHme92IT4MAUOMjmVztBOHLF6SBZyLB4hKpjwVA4Fh+vxkMBf04z9dAPr1FUnAIb
+ h7Rz28kmRGxLbia/eDC+OlHS0KlIERokE8DO3xKFTWHqQa/d/hHACIS6U50dHLgLem+c
+ ya5Xb42Aei/KJ/1U7qc3MJkybWfvdKAQteRAB66osQptH1r/AHTB2TJy9K74AuCrcC8N
+ NH3+P31Z6IrOpYCN6ugnwwkn7seGEXBUEMj6pzenPvIiEqGgMdGROjVswQtNg+mu8VxJ
+ xx6w==
+X-Gm-Message-State: AOJu0Yz26RaYA3ECP3uJSwDGS8EkdGSWVpZiFvQEmx+mngqmWKIyGEBq
+ 2+oKy+7R0yAu0UgW5gOAlET2YzhF+8H1Gd/NNaTutGlweW3u/22ju5WYvRhRiuxCRzagYnoiJhJ
+ 85rJd
+X-Google-Smtp-Source: AGHT+IEG9gpSu/9dwhJ5ggrnEzzcwKpDQWewu+Cf2aF1KWLMM4HbkvBGA7f32l7o3ppzUoIQJDGlUQ==
+X-Received: by 2002:a17:907:7286:b0:a99:fc3d:7c76 with SMTP id
+ a640c23a62f3a-a9de5f305f0mr2143566866b.37.1730474782026; 
+ Fri, 01 Nov 2024 08:26:22 -0700 (PDT)
+Received: from chromium.org ([87.215.50.114]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a9e5649454csm190269466b.8.2024.11.01.08.26.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Nov 2024 08:21:28 -0700 (PDT)
-Date: Fri, 1 Nov 2024 17:21:26 +0200
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: abdellatif.elkhlifi@arm.com
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 3/8] arm_ffa: Add FFA_MEM_RECLAIM support
-Message-ID: <ZyTx9rECRTWfZDf1@hera>
-References: <20241101142017.79311-1-abdellatif.elkhlifi@arm.com>
- <20241101142017.79311-4-abdellatif.elkhlifi@arm.com>
+ Fri, 01 Nov 2024 08:26:21 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Sean Anderson <seanga2@gmail.com>, Shantur Rathore <i@shantur.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Yang Xiwen <forbidden405@outlook.com>
+Subject: [PATCH v9 00/11] efi: Add a test for EFI bootmeth
+Date: Fri,  1 Nov 2024 16:25:58 +0100
+Message-ID: <20241101152614.238747-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241101142017.79311-4-abdellatif.elkhlifi@arm.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,95 +106,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[...]
->  }
->
-> +/**
-> + * ffa_memory_reclaim_hdlr() - FFA_MEM_RECLAIM handler function
-> + * @dev: The FF-A bus device
-> + * @g_handle: The memory region globally unique Handle
-> + * @flags: Zero memory and time slicing flags
-> + *
-> + * Implement FFA_MEM_RECLAIM FF-A function
-> + * to restore exclusive access to a memory region back to its Owner.
-> + *
-> + * Return:
-> + *
-> + * 0 on success. Otherwise, failure
-> + */
-> +int ffa_memory_reclaim_hdlr(struct udevice *dev, u64 g_handle, u32 flags)
-> +{
-> +	ffa_value_t res;
-> +	int ffa_errno;
-> +
-> +	invoke_ffa_fn((ffa_value_t){
-> +			.a0 = FFA_SMC_32(FFA_MEM_RECLAIM),
-> +			.a1 = HANDLE_LOW(g_handle), .a2 = HANDLE_HIGH(g_handle),
-> +			.a3 = flags,
-> +			},
-> +			&res
-> +	);
-> +
-> +	if (res.a0 != FFA_SMC_32(FFA_SUCCESS)) {
-> +		ffa_errno = res.a2;
-> +		ffa_print_error_log(FFA_MEM_RECLAIM, ffa_errno);
-> +		return ffa_to_std_errno(ffa_errno);
-> +	}
-> +
-> +	return 0;
-> +}
+The test coverage for the EFI bootmeth is incomplete since it does not
+actually boot the application.
 
-Is there a reason you have to define both ffa_memory_reclaim_hdlr() and ffa_memory_reclaim()?
-Can't you just move the checks of ffa_memory_reclaim() to
-ffa_memory_reclaim_hdlr()?
+This series creates a simple test for this purpose. It includes a few
+patches to make this work:
 
-> +
->  /* FF-A driver operations (used by clients for communicating with FF-A)*/
->
->  /**
-> @@ -1214,6 +1261,29 @@ int ffa_memory_share(struct udevice *dev, struct ffa_mem_ops_args *args)
->  	return ops->memory_share(dev, args);
->  }
->
-> +/**
-> + * ffa_memory_reclaim() - FFA_MEM_RECLAIM driver operation
-> + * @dev: The FF-A bus device
-> + * @g_handle: The memory region globally unique Handle
-> + * @flags: Zero memory and time slicing flags
-> + *
-> + * Driver operation for FFA_MEM_RECLAIM.
-> + * Please see ffa_memory_reclaim_hdlr() description for more details.
-> + *
-> + * Return:
-> + *
-> + * 0 on success. Otherwise, failure
-> + */
-> +int ffa_memory_reclaim(struct udevice *dev, u64 g_handle, u32 flags)
-> +{
-> +	struct ffa_bus_ops *ops = ffa_get_ops(dev);
-> +
-> +	if (!ops || !ops->memory_reclaim)
-> +		return -ENOSYS;
-> +
-> +	return ops->memory_reclaim(dev, g_handle, flags);
-> +}
-> +
->  /**
->   * ffa_do_probe() - probing FF-A framework
->   * @dev:	the FF-A bus device (arm_ffa)
-> diff --git a/drivers/firmware/arm-ffa/arm-ffa.c b/drivers/firmware/arm-ffa/arm-ffa.c
-> index c4211c953ef..b7e751e3821 100644
-> --- a/drivers/firmware/arm-ffa/arm-ffa.c
-> +++ b/drivers/firmware/arm-ffa/arm-ffa.c
-> @@ -85,6 +85,7 @@ static const struct ffa_bus_ops ffa_ops = {
->  	.sync_send_receive = ffa_msg_send_direct_req_hdlr,
->  	.rxtx_unmap = ffa_unmap_rxtx_buffers_hdlr,
->  	.memory_share = ffa_memory_share_hdlr,
-> +	.memory_reclaim = ffa_memory_reclaim_hdlr,
->  };
->
+- Revert of an unreviewed patch to change the sandbox efi filename
+- Hang in sandbox virtio due to EFI probing all block devices
 
-[...]
+Other necessary fixes have already been applied.
 
-Thanks
-/Ilias
+Changes in v10:
+- Drop call to exit-boot-services
+
+Changes in v9:
+- Update license
+- Fix 'sevices' typo
+- Move the function into efi_helper.c
+- Split out into a separate change
+- Split out into its own patch
+- Separate into separate patches
+- Add new patch to drop sandbox PXE architecture
+- Mark the image as complete after writing it
+- Fix 'sevices' typo
+
+Changes in v8:
+- Add new patch to control on-host behaviour
+- Add new patch to move default filename to a function
+- Add new patch to report host default-filename in native mode
+- Add new patch to report host default-filename in native mode
+
+Changes in v7:
+- Update commit message
+- Drop patches already applied
+- Drop patch 'Disable ANSI output for tests'
+- Rebase on -master
+
+Changes in v6:
+- Drop the patch to disable sandbox virtio blk with EFI
+- Add new patch to disable the sandbox virtio blk device
+- Deal with sandbox CONFIG_LOGF_FUNC
+- Rebase on -next
+- Drop patches previously applied
+- Drop mention of helloworld since it is no-longer used by this test
+
+Changes in v4:
+- Add efi_loader tag to some patches
+- Split out non-EFI patches into a different series
+
+Changes in v2:
+- Add many new patches to resolve all the outstanding test issues
+
+Simon Glass (11):
+  test: boot: Update bootflow_iter() for console checking
+  efi_loader: Add a test app
+  sandbox: Add a -N flag to control on-host behaviour
+  efi: Move default filename to a function
+  efi_loader: Move get_efi_pxe_arch() to efi_helper
+  efi_loader: Allow reporting the host defaults
+  sandbox: Report host default-filename in native mode
+  efi_loader: Drop sandbox PXE architecture
+  sandbox: virtio: Disable the sandbox virtio blk device
+  test: efi: boot: Set up an image suitable for EFI testing
+  test: efi: boot: Add a test for the efi bootmeth
+
+ arch/Kconfig                        |   3 +-
+ arch/sandbox/cpu/start.c            |  10 ++++
+ arch/sandbox/dts/test.dts           |   2 +-
+ arch/sandbox/include/asm/state.h    |   1 +
+ boot/bootmeth_efi.c                 |  29 ++----------
+ cmd/efidebug.c                      |  25 ++++++++++
+ include/efi.h                       |  34 +++++++++++++
+ include/efi_default_filename.h      |  56 ----------------------
+ lib/efi_loader/Kconfig              |  10 ++++
+ lib/efi_loader/Makefile             |   1 +
+ lib/efi_loader/efi_bootmgr.c        |  10 ++--
+ lib/efi_loader/efi_helper.c         |  71 ++++++++++++++++++++++++++++
+ lib/efi_loader/testapp.c            |  64 +++++++++++++++++++++++++
+ test/boot/bootdev.c                 |  18 ++++++-
+ test/boot/bootflow.c                |  67 ++++++++++++++++++++++++--
+ test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 4924 bytes
+ test/py/tests/test_ut.py            |  53 ++++++++++++++++++---
+ 17 files changed, 356 insertions(+), 98 deletions(-)
+ delete mode 100644 include/efi_default_filename.h
+ create mode 100644 lib/efi_loader/testapp.c
+ create mode 100644 test/py/tests/bootstd/flash1.img.xz
+
+-- 
+2.43.0
+
