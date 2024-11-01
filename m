@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3590E674BF
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 09:19:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 001B6E674BF
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 09:19:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C964892ED;
-	Fri,  1 Nov 2024 10:18:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 931AD89045;
+	Fri,  1 Nov 2024 10:18:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="4p6l/4tk";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="iE3eSxZw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F90A89045; Fri,  1 Nov 2024 10:18:44 +0100 (CET)
+ id 8B3A8892F4; Fri,  1 Nov 2024 10:18:45 +0100 (CET)
 Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2061b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::61b])
+ (mail-mw2nam12on20606.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::606])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14DEB892B5
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 10:18:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BE78892E3
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 10:18:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tpfJM5QPmdGyQKD4FIVRayWhpjFhBvE8ITdFSzRk/tW55BGGHGP7oRc1NnB+3MlNbvGl3wLYDpmJUGoBAJw9j83vuCGaHuDg+6ZE1+LuGsgLY5DgZtuUam7ZsIbp1bd1Q6E1iZ2QxXqQudXXRTeAKiI4MBz6r0EiMUUu+eqUeebGDR58k7vrzrm6lla2HnZm1MspwNZaHh3pMl91lUmyDtkzRSHzMif7/8Ai4qaFil7HzSKx3SyO8rywAYPt7WE7J7KxBjuF+iy+Wk7LnBARh+YAAdDzivzwl2PFd73t+7VpnAjHdYDS7BaYref+U5YqvYRAn/bo9Hrn/eHcGYrMog==
+ b=yzIp2qnWZpkQYPCIWs2X891N2VIcNkvTv2nHLF+HQ9Q6y7Ycodlp0d2h5rhKZmpAm1P/HiNCLG3VdxKIPE774qDCyTzKFT1ntw/E6dVb6ZDZoHgnPbG4LVKkq+zrQFiOeZZLwbCaDY5xw8Y68C1fpFAC3mY0jxCTUpUbnui9EYP7wty9VEILfG4mLOiLArM2JpSSZcqG7SYUN01176Qaj50uOgKsrRcj+62C7WembZkv2yQp/uyn+rDLJIOuYUMV9f8tH4gweD9efKM6UpRIWz/5vOGn//onFP4Nh8X1PYwBuLNlwIUdC7fBTULRtxYUey6h0aZcge7TUkSLISPWRQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YPjyO61aXgWrkFUXbG5srbrmjKcFruHUCI+6u7z8/zg=;
- b=Ont+Rv8p6PiM+d+sPqV8945hsq1PsnmOf/zmYeCZ0NNarad1izS+Bh4xteBfUtxXbYuKbyubF95prmThz7TJ66Q/Zd8FU6CJRWdHVla9pXOFRzCAHToI4b2C7gRnmUWauyuzQj4ycExlRJaV6eaHgb3rpOOaJhiWwCWgm7/4ZYFZQhN1CZzErMYidI0p4ayCZjVI/BAcI/fcsmBE/juZ6xn6h5jB6pmBgngfyYnX6nGUfOMaWiWeuloRLbHuvflBz6Kinl2sF8n3ObfmwaAtxk8G6fprfzYMTsNFh+3OiNxfUJJACCx7OqARbrLdtqDumDOU6J3M3tXHhdzvdKQdbw==
+ bh=DnvxxswkMKyo9eM7egk5n24dj9FYL34SV/Ze3lgjHqI=;
+ b=LyCMhvaUEjeMVVVerfHw8K6lPHh2DNDeSRkKnCKWnLmKYwbpxsii/OI6Gvo3oOuiIdKLgUbMcBObcDXhviisHnYp90S1Y28eKMqZUb79DgugSoNEOX8BNm3uaOqPQ/DDtxiffdFIpDZKfC3KChbWIs8peuPqHWjXa5YilzyOnIiJpDKvt4PSnRLtzSCq5rvRUrlR9AE8BMEDOOj3E8HOpM+2R4wYA/xDXL9xhy3qdM/u/B8YA1iEo7Co2S4qi8+3CyGlGVKJpE8sTThxxa2zXqWc6iom/D/yNSlzDLip+yw7+cSgan3fK5VfIJu1vaLKa5CpxaS3gcWJ96aRTW75gg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YPjyO61aXgWrkFUXbG5srbrmjKcFruHUCI+6u7z8/zg=;
- b=4p6l/4tkiGIoGbXR5XXnHkLnF+X4V6tUPOx36HuGP7dG3K7rLqTWZ2oMGkG/5sDWSPy8nyFwPIIjoS0F1VoDK/1MNrN4wfDMuCeHmcUS+dhAPXtmArfXqIdg4fdRf1VeXWrGtSmAZKkjh1EB8ZF//SY0Fw/EOX7wcAg3y53K9mg=
-Received: from BN9PR03CA0129.namprd03.prod.outlook.com (2603:10b6:408:fe::14)
- by SJ2PR12MB8953.namprd12.prod.outlook.com (2603:10b6:a03:544::14)
+ bh=DnvxxswkMKyo9eM7egk5n24dj9FYL34SV/Ze3lgjHqI=;
+ b=iE3eSxZw00hTbia/aKIVS7Q47zcz404ffx1uJyDQr6uwyglgtWaR4+aiJZqgmcJnivMZrW171m610hAGx7p3PGULwXl2SISSvUbwWNbhIHucGbc6euSh5p/Uu0JRY7qRYfnO7VG6ELUKbZX7shrCepYOQLuoGz5Qk76cVafM2nw=
+Received: from BN9PR03CA0144.namprd03.prod.outlook.com (2603:10b6:408:fe::29)
+ by CH3PR12MB7547.namprd12.prod.outlook.com (2603:10b6:610:147::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.20; Fri, 1 Nov
- 2024 09:18:35 +0000
+ 2024 09:18:36 +0000
 Received: from BN1PEPF0000468A.namprd05.prod.outlook.com
- (2603:10b6:408:fe:cafe::f8) by BN9PR03CA0129.outlook.office365.com
- (2603:10b6:408:fe::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.20 via Frontend
- Transport; Fri, 1 Nov 2024 09:18:35 +0000
+ (2603:10b6:408:fe:cafe::84) by BN9PR03CA0144.outlook.office365.com
+ (2603:10b6:408:fe::29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.23 via Frontend
+ Transport; Fri, 1 Nov 2024 09:18:36 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,34 +61,30 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  BN1PEPF0000468A.mail.protection.outlook.com (10.167.243.135) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8114.16 via Frontend Transport; Fri, 1 Nov 2024 09:18:35 +0000
+ 15.20.8114.16 via Frontend Transport; Fri, 1 Nov 2024 09:18:36 +0000
 Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 1 Nov
- 2024 04:18:19 -0500
+ 2024 04:18:23 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>, Simon Glass <sjg@chromium.org>, 
  <neal.frager@amd.com>
-CC: Adam Ford <aford173@gmail.com>, Fabio Estevam <festevam@denx.de>, "Jonas
- Karlman" <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, "Marek
- Vasut" <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>, "Oliver
- Gaskell" <Oliver.Gaskell@analog.com>, Prasad Kummari
- <prasad.kummari@amd.com>, Sumit Garg <sumit.garg@linaro.org>, Tejas Bhumkar
- <tejas.arvind.bhumkar@amd.com>, Tom Rini <trini@konsulko.com>, Tony Dinh
- <mibodhi@gmail.com>, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH v2 5/7] arm64: zynqmp: Generate u-boot.itb and QSPI image via
- binman
-Date: Fri, 1 Nov 2024 10:17:58 +0100
-Message-ID: <90b613796aee38158252c8bb1dfc3da0420f089d.1730452668.git.michal.simek@amd.com>
+CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>, Peter Robinson
+ <pbrobinson@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH v2 6/7] arm64: zynqmp: Remove mkimage fit script
+Date: Fri, 1 Nov 2024 10:17:59 +0100
+Message-ID: <cf438091e43c4c9d535a9cfa2886673aa42a4370.1730452668.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1730452668.git.michal.simek@amd.com>
 References: <cover.1730452668.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4690; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=pHTY5hBP3P+O1ABlxikv/xezJeQNDLarfzW9xNFJfyM=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhnSVOUc8Dpvw+xuYhcqc7QxeKecvH3ZIo6TzBpuX7Q4+v
- 3o/Y9WOWBYGQSYGWTFFFmmbK2f2Vs6YInzxsBzMHFYmkCEMXJwCMJGzGxjmSq8VbL2vtNopwYwr
- obhGdolwQ2Qjw1yBDu6TulUMnjxfkviFPT12XC3TMAQA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6758; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=0oLSnPQhIusP/iKj1116s3lB/UOSwTcW99zaFCw5bgE=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhnSVOUf5Yw2P9k//sevahambVGLdV70quS4dOiG8TjPoW
+ o6r+fFvHbEsDIJMDLJiiizSNlfO7K2cMUX44mE5mDmsTCBDGLg4BWAiJd4M830nP7+ZnRPKm8c5
+ of/ezRa/W1aSdxjm+2nueZsvffb2nhgvqW7Nhgpnbo8VAA==
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
@@ -98,50 +94,50 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF0000468A:EE_|SJ2PR12MB8953:EE_
-X-MS-Office365-Filtering-Correlation-Id: b481ce59-6dd6-4fca-c0d3-08dcfa5629e1
+X-MS-TrafficTypeDiagnostic: BN1PEPF0000468A:EE_|CH3PR12MB7547:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5448d19b-b4df-4668-9556-08dcfa562a37
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|7416014|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?J1yaBNMV5MC1k6C4GY8kFibulp/bjWtBZOmS57xnugCp/S0aCYUMr6vOA/XN?=
- =?us-ascii?Q?L0w22kBUCTMqG5c53l3Im5rEHiw4TtPBljpGwjSP/KW1vzdKDEW9pA7ICL8J?=
- =?us-ascii?Q?+xYM6nc+viRJsqg8zlaizH+RZWD/6daLKHui56duvQICmf7w2Pfe/PEApkS6?=
- =?us-ascii?Q?ARWPB/hWcjuDYplxYQ0JgCfZJeqyWqmBv6/xV4eb5tTVgaco/ZNje9UzI6oS?=
- =?us-ascii?Q?YJ7JsTF4SBCvMs8Oid8jQXe4ygwHUn4JZ06RFDhPfeohfp/Uw+J6Zmlnmhxr?=
- =?us-ascii?Q?g1sQJB9VDhu2U7i6i5UZi7EOcHclwLOKEFkoSyq/nGjtQ+swcLCObD+ipbMW?=
- =?us-ascii?Q?pG653WqYUGs6/M6jHWDIaGiEeDHRHSojmr+iP5yu9ddS60d0uEENazb6QaPH?=
- =?us-ascii?Q?UWNptioufEesSdL46d8f5C24FiAo44XGngN6ynt6YROnuiW+S0QbLZ912sAZ?=
- =?us-ascii?Q?hybnvkeaJzrNs+XLjeU2Yi7PbfmeEw2b5nZOVSZd7w1vQ02ZS6+pKIMrD+q3?=
- =?us-ascii?Q?WA0FtvcBVjfqOZmJ7jShzzTNfUoRPLtY5kYrXyONb6yvochsly5La+wptVA8?=
- =?us-ascii?Q?ATETdDPWi/1urnVayQVCASXs4OJ8RD4+yZfUO6raOsL7ZuaKHrH332X89d7K?=
- =?us-ascii?Q?1jZ+8hIA+aAUTG24R2l9zOiIZ6ljJ3HJLXov52dwSgSa2lLeH2XedOk+khlp?=
- =?us-ascii?Q?uouZrtuub2KCozOTO0IPF+7m7P9zkoDFzFwIDAY4fDa4eWzngpaC3DVaozqs?=
- =?us-ascii?Q?8o64JlBXKTf5DZdA2ej/xu4d1HtskEPH3RmrZMyiwjELWlLm1Kvg60M5bONB?=
- =?us-ascii?Q?+Gugz+mP/EK/I8tx1hZxIEdlNM+VRCmj23MRKOLlR1IdCSAyDeeUi9g5ycEd?=
- =?us-ascii?Q?72W4Kyx7lRE41CGzRTtjkY4zgPS0fqhi6dU/WRd3I6PudbbgEPaqgan/MOT/?=
- =?us-ascii?Q?FZOljwSmysbUmrN77BID1KFD/RmtRYxAf1LLleg5Kip1nJaMmt97hxdHAAc0?=
- =?us-ascii?Q?0+IqYznKDURfe2d6mcEemhrwUm8OwnTB3uWWXEOS8kjIonLpWegrF5hUj0fe?=
- =?us-ascii?Q?sIcMyhmZKJ0MEywlwzhpH+LhHooO34i6Nbzv9Pb9QVu2q0Iv7svkP6gK0+8o?=
- =?us-ascii?Q?cbGF85aY3Gcf+Ym+NfZKUI6GG3U2pByOM7ghnVSYH27C9L/q3Md3GgT2sK25?=
- =?us-ascii?Q?N46KnXK8OlI/E86zP4nMmCW7T8aRYVfWqhg9ESelCN4OfASWVMgYjCOCmk8W?=
- =?us-ascii?Q?tiQ3HkbwNNGE1b6qcI8dMuqeM8nIOzlCdLRWq6OitpSoI6A5D1GxvSDV3Olp?=
- =?us-ascii?Q?wuVokPToqaOil5IMt+a2a5kzOyzwybRpSZhouoLfoEQeKncRWc+3zIfB+jWa?=
- =?us-ascii?Q?je4lWdY5p2+UGrE3WBgQAGEIR+z3FCpkuG/sihe72bfLMSG3VQ=3D=3D?=
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?arRWjffCsP8Cvy94Ji6rcq4/Fr/U17XYkv0piHgcYRnJH5VxOeu4cptfb9fV?=
+ =?us-ascii?Q?WzfJt/30D7CtV8xB4FeBSBgf7FoCMNiywVlOzisFvGAPXQMF6GhofOhR0/Px?=
+ =?us-ascii?Q?GQJMCK8Md1+4HsX3TAtTgSPudhKbnbquVyK/cZCUL8B1WcloVO7sktodttSg?=
+ =?us-ascii?Q?E2DKYK4WiEmc4Z6sUQkthbLPt2FDUPx4TIrtB0j/gyKWJcDhxavTRoPnA0MK?=
+ =?us-ascii?Q?cQk+ryvwX/7x+DniM/LuLcuLMLnVmYJz0+cjXJBOw/d3XJ5AVUB7a9SYa5bo?=
+ =?us-ascii?Q?00JJTnYJj9pp8Ii4SbMGCwytsQ+Bz3C+LqOtk1vKxTusyiQfJ/T1TWgBHaGy?=
+ =?us-ascii?Q?2fO4lFZAy+7k6PVEheCI8+BYM7S8KF1ku3Vdj8P3QFIuVEfcPUWj6yvce63F?=
+ =?us-ascii?Q?EQjSEA3dwGJqHjF/hICncCyMb56fcZt5eS9bxT6Qu2bCl48qpa9qe2yDXZrj?=
+ =?us-ascii?Q?l5Cf0aGkZqKvWO2uTHEdWC260rCu26PQsQXVe087cwwIrCXbdiqn6PeFuywW?=
+ =?us-ascii?Q?iOyCc1QzH2CXiXh5RcAlzHrGFvOvnvbUbdVwvvF2I/jXqMjdevLzFLAEFf3K?=
+ =?us-ascii?Q?8o+zAQ48RASUtsWo40nMCw1Gqy42HHmBEAOIuopiv8hpDIiFTiDYAVL0+HYu?=
+ =?us-ascii?Q?dL2Kkr9BxzTqcV/HWJrN4IsGquZhdSCAMNXCQSvVhgn89GuDPpwBqOGVr/2+?=
+ =?us-ascii?Q?BpJ/0Va5gt0gICtyUVDjfeWZmTgDTGz0qcJz2sxBhIhm04rYdZ0AFmC2q22F?=
+ =?us-ascii?Q?Cd5/3fg6QPPjptM8SuLOKfFigxoKOPgzhJCyg0FsGQutBJe3JFSvPMYaC0fP?=
+ =?us-ascii?Q?cZb74ilrH3YGtx/3yJ+7E1aEcLm5CRTYJUUP94aNfQaGx+TKQ5St6eh1k8Ji?=
+ =?us-ascii?Q?icV+9mGpl8yvZAfnT8oGB1LrjPQeHcvT7b8s4EqeY3ZHCzmrHG34LXCL4XHo?=
+ =?us-ascii?Q?xPDyuaNIg3xTAuR7xLKV9XzXi0JClelQ89UNoazUjlJHpEjRTi1MrzaP26me?=
+ =?us-ascii?Q?vv+hDhFd6hlzU8cr2V5h/awJ3wszCaBUlmymVHyk/ZNLFOrBCS+pCZcO9kfl?=
+ =?us-ascii?Q?5MSmcBZR9L5xTlCfNkKOThswK0pfPEXtMJunx28FXm5fPoF6TdFhw49fe+iL?=
+ =?us-ascii?Q?y9kEFG5NnX2hDdLqDiDA0thX6SIOZVeeJJ5iU4Bs2gENhDqYMUvnxPN5ol2X?=
+ =?us-ascii?Q?JCFQ3vKXGEwzSMX9wDrczI0FYQ7Ck6ns1a6R1EXFUGxYVnB1MWnq1YtPoOqK?=
+ =?us-ascii?Q?lmpaurYT3NTTU/1LRFKBpmVJ86uECJ2f3jYb20rH5QeSyTvHDevYA5uAJXrM?=
+ =?us-ascii?Q?ojWGRAiPPB5UArzsjN5n17be6KCr7mlCkLgIYGpAMifUk5Fkr7Q7lAQUr7pf?=
+ =?us-ascii?Q?5Sm6m8KcOpX+muE/9rb9Gur6Tg6uL+I9Ua4hpiQOksphfDZumg=3D=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700013)(7416014)(376014); DIR:OUT;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2024 09:18:35.5935 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b481ce59-6dd6-4fca-c0d3-08dcfa5629e1
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2024 09:18:36.1403 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5448d19b-b4df-4668-9556-08dcfa562a37
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF0000468A.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8953
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7547
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,10 +154,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-u-boot.itb has been generated via mkimage_fit_atf.sh but it is on the way
-out that's why convert it's description to binman.
-Compare to script binman description is not able to configure BL31 and BL32
-load/entry addresses which should be done separately.
+Platform has been switched to binman that's why there is no need for this
+script and also Kconfig symbols.
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
@@ -169,162 +163,269 @@ Signed-off-by: Michal Simek <michal.simek@amd.com>
 Changes in v2:
 - new patch
 
- arch/arm/dts/Makefile                |   1 +
- arch/arm/dts/zynqmp-binman.dts       | 111 +++++++++++++++++++++++++++
- configs/xilinx_zynqmp_virt_defconfig |   3 +
- 3 files changed, 115 insertions(+)
- create mode 100644 arch/arm/dts/zynqmp-binman.dts
+ arch/arm/mach-zynqmp/mkimage_fit_atf.sh | 240 ------------------------
+ boot/Kconfig                            |   1 -
+ 2 files changed, 241 deletions(-)
+ delete mode 100755 arch/arm/mach-zynqmp/mkimage_fit_atf.sh
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 5d28a17b8b8c..25945efa5ae3 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -320,6 +320,7 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-p-a2197-00-revA-x-prc-02-revA.dtb
- dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-p-a2197-00-revA-x-prc-03-revA.dtb
- dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-p-a2197-00-revA-x-prc-04-revA.dtb
- dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-p-a2197-00-revA-x-prc-05-revA.dtb
-+dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-binman.dtb
- 
- zynqmp-sc-vek280-revA-dtbs := zynqmp-sc-revB.dtb zynqmp-sc-vek280-revA.dtbo
- zynqmp-sc-vek280-revB-dtbs := zynqmp-sc-revC.dtb zynqmp-sc-vek280-revB.dtbo
-diff --git a/arch/arm/dts/zynqmp-binman.dts b/arch/arm/dts/zynqmp-binman.dts
-new file mode 100644
-index 000000000000..df0fdf465107
---- /dev/null
-+++ b/arch/arm/dts/zynqmp-binman.dts
-@@ -0,0 +1,111 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * dts file for Xilinx ZynqMP platforms
-+ *
-+ * (C) Copyright 2024, Advanced Micro Devices, Inc.
-+ *
-+ * Michal Simek <michal.simek@amd.com>
-+ */
-+
-+#include <config.h>
-+
-+/dts-v1/;
-+/ {
-+	binman: binman {
-+		multiple-images;
-+
-+		/* u-boot.itb generation in a static way */
-+		itb {
-+			filename = "u-boot.itb";
-+			pad-byte = <0>;
-+
-+			fit {
-+				description = "Configuration for Xilinx ZynqMP SoC";
-+				fit,align = <0x8>;
-+				fit,external-offset = <0x0>;
-+				fit,fdt-list = "of-list";
-+				images {
-+					uboot {
-+						description = "U-Boot (64-bit)";
-+						type = "firmware";
-+						os = "u-boot";
-+						arch = "arm64";
-+						compression = "none";
-+						load = /bits/ 64 <CONFIG_TEXT_BASE>;
-+						entry = /bits/ 64 <CONFIG_TEXT_BASE>;
-+						hash {
-+							algo = "md5";
-+						};
-+						u-boot-nodtb {
-+						};
-+					};
-+					atf {
-+						description = "Trusted Firmware-A";
-+						type = "firmware";
-+						os = "arm-trusted-firmware";
-+						arch = "arm64";
-+						compression = "none";
-+						load = /bits/ 64 <CONFIG_BL31_LOAD_ADDR>;
-+						entry = /bits/ 64 <CONFIG_BL31_LOAD_ADDR>;
-+						hash {
-+							algo = "md5";
-+						};
-+						atf-bl31 {
-+							optional;
-+						};
-+					};
-+					tee {
-+						description = "OP-TEE";
-+						type = "tee";
-+						arch = "arm64";
-+						compression = "none";
-+						os = "tee";
-+						load = /bits/ 64 <CONFIG_BL31_LOAD_ADDR>;
-+						entry = /bits/ 64 <CONFIG_BL31_LOAD_ADDR>;
-+						tee-os {
-+							optional;
-+						};
-+					};
-+					@fdt-SEQ {
-+						description = "NAME";
-+						type = "flat_dt";
-+						arch = "arm64";
-+						compression = "none";
-+						load = <0x0 0x100000>;
-+						hash-1 {
-+							algo = "md5";
-+						};
-+					};
-+				};
-+				configurations {
-+					default = "@conf-DEFAULT-SEQ";
-+					@conf-SEQ {
-+						description = "NAME";
-+						firmware = "atf";
-+						loadables = "tee", "uboot";
-+						fdt = "fdt-SEQ";
-+					};
-+				};
-+			};
-+		};
-+
-+#ifdef CONFIG_SYS_SPI_U_BOOT_OFFS
-+		/* QSPI image for testing QSPI boot mode */
-+		image {
-+			filename = "qspi.bin";
-+			pad-byte = <0>;
-+
-+			blob-ext@1 {
-+				offset = <0x0>;
-+				filename = "spl/boot.bin";
-+			};
-+			blob-ext@2 {
-+				offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
-+				filename = "u-boot.itb";
-+			};
-+			fdtmap {
-+			};
-+		};
-+#endif
-+	};
-+};
-diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
-index 310efdf2338a..09f487acf0dc 100644
---- a/configs/xilinx_zynqmp_virt_defconfig
-+++ b/configs/xilinx_zynqmp_virt_defconfig
-@@ -41,6 +41,7 @@ CONFIG_SYS_PBSIZE=2073
- CONFIG_BOARD_EARLY_INIT_R=y
- CONFIG_CLOCKS=y
- CONFIG_SPL_MAX_SIZE=0x40000
-+# CONFIG_SPL_BINMAN_SYMBOLS is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-@@ -241,6 +242,8 @@ CONFIG_BMP_32BPP=y
- CONFIG_VIRTIO_MMIO=y
- CONFIG_VIRTIO_NET=y
- CONFIG_VIRTIO_BLK=y
-+# CONFIG_BINMAN_FDT is not set
-+CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman.dtb"
- CONFIG_PANIC_HANG=y
- CONFIG_TPM=y
- CONFIG_SPL_GZIP=y
+diff --git a/arch/arm/mach-zynqmp/mkimage_fit_atf.sh b/arch/arm/mach-zynqmp/mkimage_fit_atf.sh
+deleted file mode 100755
+index cdecb1c1d351..000000000000
+--- a/arch/arm/mach-zynqmp/mkimage_fit_atf.sh
++++ /dev/null
+@@ -1,240 +0,0 @@
+-#!/bin/sh
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# script to generate FIT image source for Xilinx ZynqMP boards with
+-# ARM Trusted Firmware and multiple device trees (given on the command line)
+-#
+-# usage: $0 <dt_name> [<dt_name> [<dt_name] ...]
+-
+-BL33="u-boot-nodtb.bin"
+-[ -z "$BL31" ] && BL31="bl31.bin"
+-BL31_ELF="${BL31%.*}.elf"
+-[ -f ${BL31_ELF} ] && ATF_LOAD_ADDR=`${CROSS_COMPILE}readelf -l "${BL31_ELF}" | \
+-awk '/Entry point/ { print $3 }'`
+-
+-[ -z "$ATF_LOAD_ADDR" ] && ATF_LOAD_ADDR="0xfffea000"
+-ATF_LOAD_ADDR_LOW=`printf 0x%x $((ATF_LOAD_ADDR & 0xffffffff))`
+-ATF_LOAD_ADDR_HIGH=`printf 0x%x $((ATF_LOAD_ADDR >> 32))`
+-
+-[ -z "$BL32" ] && BL32="tee.bin"
+-BL32_ELF="${BL32%.*}.elf"
+-[ -f ${BL32_ELF} ] && TEE_LOAD_ADDR=`${CROSS_COMPILE}readelf -l "${BL32_ELF}" | \
+-awk '/Entry point/ { print $3 }'`
+-
+-[ -z "$TEE_LOAD_ADDR" ] && TEE_LOAD_ADDR="0x60000000"
+-TEE_LOAD_ADDR_LOW=`printf 0x%x $((TEE_LOAD_ADDR & 0xffffffff))`
+-TEE_LOAD_ADDR_HIGH=`printf 0x%x $((TEE_LOAD_ADDR >> 32))`
+-
+-if [ -z "$BL33_LOAD_ADDR" ];then
+-	BL33_LOAD_ADDR=`awk '/CONFIG_TEXT_BASE/ { print $3 }' include/generated/autoconf.h`
+-fi
+-BL33_LOAD_ADDR_LOW=`printf 0x%x $((BL33_LOAD_ADDR & 0xffffffff))`
+-BL33_LOAD_ADDR_HIGH=`printf 0x%x $((BL33_LOAD_ADDR >> 32))`
+-
+-DTB_LOAD_ADDR=`awk '/CONFIG_XILINX_OF_BOARD_DTB_ADDR/ { print $3 }' include/generated/autoconf.h`
+-if [ ! -z "$DTB_LOAD_ADDR" ]; then
+-	DTB_LOAD_ADDR_LOW=`printf 0x%x $((DTB_LOAD_ADDR & 0xffffffff))`
+-	DTB_LOAD_ADDR_HIGH=`printf 0x%x $((DTB_LOAD_ADDR >> 32))`
+-	DTB_LOAD="load = <$DTB_LOAD_ADDR_HIGH $DTB_LOAD_ADDR_LOW>;"
+-else
+-	DTB_LOAD=""
+-fi
+-
+-if [ -z "$*" ]; then
+-	DT=arch/arm/dts/${DEVICE_TREE}.dtb
+-else
+-	DT=$*
+-fi
+-
+-if [ ! -f $BL31 ]; then
+-	echo "WARNING: BL31 file $BL31 NOT found, U-Boot will run in EL3" >&2
+-	BL31=/dev/null
+-fi
+-
+-cat << __HEADER_EOF
+-// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+-
+-/dts-v1/;
+-
+-/ {
+-	description = "Configuration for Xilinx ZynqMP SoC";
+-
+-	images {
+-		uboot {
+-			description = "U-Boot (64-bit)";
+-			data = /incbin/("$BL33");
+-			type = "firmware";
+-			os = "u-boot";
+-			arch = "arm64";
+-			compression = "none";
+-			load = <$BL33_LOAD_ADDR_HIGH $BL33_LOAD_ADDR_LOW>;
+-			entry = <$BL33_LOAD_ADDR_HIGH $BL33_LOAD_ADDR_LOW>;
+-			hash {
+-				algo = "md5";
+-			};
+-		};
+-__HEADER_EOF
+-
+-if [ -f $BL31 ]; then
+-cat << __ATF
+-		atf {
+-			description = "Trusted Firmware-A";
+-			data = /incbin/("$BL31");
+-			type = "firmware";
+-			os = "arm-trusted-firmware";
+-			arch = "arm64";
+-			compression = "none";
+-			load = <$ATF_LOAD_ADDR_HIGH $ATF_LOAD_ADDR_LOW>;
+-			entry = <$ATF_LOAD_ADDR_HIGH $ATF_LOAD_ADDR_LOW>;
+-			hash {
+-				algo = "md5";
+-			};
+-		};
+-__ATF
+-fi
+-
+-if [ -f $BL32 ]; then
+-cat << __TEE
+-		tee {
+-			description = "TEE firmware";
+-			data = /incbin/("$BL32");
+-			type = "firmware";
+-			os = "tee";
+-			arch = "arm64";
+-			compression = "none";
+-			load = <$TEE_LOAD_ADDR_HIGH $TEE_LOAD_ADDR_LOW>;
+-			entry = <$TEE_LOAD_ADDR_HIGH $TEE_LOAD_ADDR_LOW>;
+-			hash {
+-				algo = "md5";
+-			};
+-		};
+-__TEE
+-fi
+-
+-MULTI_DTB=`awk '/CONFIG_MULTI_DTB_FIT / { print $3 }' include/generated/autoconf.h`
+-
+-if [ 1"$MULTI_DTB" -eq 11 ]; then
+-	cat << __FDT_IMAGE_EOF
+-		fdt_1 {
+-			description = "Multi DTB fit image";
+-			data = /incbin/("fit-dtb.blob");
+-			type = "flat_dt";
+-			arch = "arm64";
+-			compression = "none";
+-			$DTB_LOAD
+-			hash {
+-				algo = "md5";
+-			};
+-		};
+-	};
+-	configurations {
+-		default = "config_1";
+-__FDT_IMAGE_EOF
+-
+-if [ ! -f $BL31 ]; then
+-cat << __CONF_SECTION1_EOF
+-		config_1 {
+-			description = "Multi DTB without TF-A";
+-			firmware = "uboot";
+-			loadables = "fdt_1";
+-		};
+-__CONF_SECTION1_EOF
+-else
+-if [ -f $BL32 ]; then
+-cat << __CONF_SECTION1_EOF
+-		config_1 {
+-			description = "Multi DTB with TF-A and TEE";
+-			firmware = "atf";
+-			loadables = "uboot", "tee", "fdt_1";
+-		};
+-__CONF_SECTION1_EOF
+-else
+-cat << __CONF_SECTION1_EOF
+-		config_1 {
+-			description = "Multi DTB with TF-A";
+-			firmware = "atf";
+-			loadables = "uboot", "fdt_1";
+-		};
+-__CONF_SECTION1_EOF
+-fi
+-fi
+-
+-cat << __ITS_EOF
+-	};
+-};
+-__ITS_EOF
+-
+-else
+-
+-DEFAULT=1
+-cnt=1
+-for dtname in $DT
+-do
+-	cat << __FDT_IMAGE_EOF
+-		fdt_$cnt {
+-			description = "$(basename $dtname .dtb)";
+-			data = /incbin/("$dtname");
+-			type = "flat_dt";
+-			arch = "arm64";
+-			compression = "none";
+-			$DTB_LOAD
+-			hash {
+-				algo = "md5";
+-			};
+-		};
+-__FDT_IMAGE_EOF
+-
+-[ "x$(basename $dtname .dtb)" = "x${DEVICE_TREE}" ] && DEFAULT=$cnt
+-
+-cnt=$((cnt+1))
+-done
+-
+-cat << __CONF_HEADER_EOF
+-	};
+-	configurations {
+-		default = "config_$DEFAULT";
+-
+-__CONF_HEADER_EOF
+-
+-cnt=1
+-for dtname in $DT
+-do
+-if [ ! -f $BL31 ]; then
+-cat << __CONF_SECTION1_EOF
+-		config_$cnt {
+-			description = "$(basename $dtname .dtb)";
+-			firmware = "uboot";
+-			fdt = "fdt_$cnt";
+-		};
+-__CONF_SECTION1_EOF
+-else
+-if [ -f $BL32 ]; then
+-cat << __CONF_SECTION1_EOF
+-		config_$cnt {
+-			description = "$(basename $dtname .dtb)";
+-			firmware = "atf";
+-			loadables = "uboot", "tee";
+-			fdt = "fdt_$cnt";
+-		};
+-__CONF_SECTION1_EOF
+-else
+-cat << __CONF_SECTION1_EOF
+-		config_$cnt {
+-			description = "$(basename $dtname .dtb)";
+-			firmware = "atf";
+-			loadables = "uboot";
+-			fdt = "fdt_$cnt";
+-		};
+-__CONF_SECTION1_EOF
+-fi
+-fi
+-
+-cnt=$((cnt+1))
+-done
+-
+-cat << __ITS_EOF
+-	};
+-};
+-__ITS_EOF
+-
+-fi
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 7dd30a030e39..e1a79976da1c 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -291,7 +291,6 @@ config USE_SPL_FIT_GENERATOR
+ config SPL_FIT_GENERATOR
+ 	string ".its file generator script for U-Boot FIT image"
+ 	depends on USE_SPL_FIT_GENERATOR
+-	default "arch/arm/mach-zynqmp/mkimage_fit_atf.sh" if SPL_LOAD_FIT && ARCH_ZYNQMP
+ 	help
+ 	  Specifies a (platform specific) script file to generate the FIT
+ 	  source file used to build the U-Boot FIT image file. This gets
 -- 
 2.43.0
 
