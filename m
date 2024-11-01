@@ -4,55 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A828E6F069
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:28:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DF23E6F069
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:32:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C10A488B55;
-	Fri,  1 Nov 2024 16:28:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
+	by phobos.denx.de (Postfix) with ESMTP id C258089048;
+	Fri,  1 Nov 2024 16:32:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="NK1hxghe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kXhpGzuL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1E7E88E42; Fri,  1 Nov 2024 16:28:23 +0100 (CET)
-Received: from smtp-out.freemail.hu (fmfe27.freemail.hu [46.107.16.232])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F202C88E35; Fri,  1 Nov 2024 16:32:54 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E76B892E5
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:28:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DDA48889A2
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:32:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=freemail.hu
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=egyszeregy@freemail.hu
-Received: from localhost.localdomain
- (catv-178-48-208-49.catv.fixed.vodafone.hu [178.48.208.49])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp.freemail.hu (Postfix) with ESMTPSA id 4Xg4WQ29BwzDkS;
- Fri, 01 Nov 2024 16:28:18 +0100 (CET)
-From: egyszeregy@freemail.hu
-To: u-boot@lists.denx.de
-Cc: sbabic@denx.de, festevam@gmail.com, peng.fan@nxp.com,
- =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
-Subject: [PATCH v2] imx9: Improve boot mode autodetection
-Date: Fri,  1 Nov 2024 16:26:18 +0100
-Message-ID: <20241101152618.1118-1-egyszeregy@freemail.hu>
-X-Mailer: git-send-email 2.47.0.windows.2
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a99f3a5a44cso275527966b.3
+ for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:32:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1730475171; x=1731079971; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VR4tmZg8AMlV7QXLzpioAsk0lgG+ZWitP7YhVk2lmjs=;
+ b=kXhpGzuLYGCaUNMKuPv3OS3jHmkswuCtdBCLdfNnmAWBbYp0RKmWbg2OOpjxaMhpzz
+ P7C4sNSukCBPy75uvWoyIL4i86Yn0LmxCwp4d/AtC0WVWp9eNTQ6rY04icyUz+4dnMe0
+ yTtvOdn7Qc1fGd6O/QCw8rjq6iTbNwuo1ccLQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730475171; x=1731079971;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VR4tmZg8AMlV7QXLzpioAsk0lgG+ZWitP7YhVk2lmjs=;
+ b=X9wkuh4lQCgBpWY5I5SbCoD8VJtIwhWRt33/J22LtwpXnXHBU8m/5kBBGy2QRu3Hwd
+ PUm6s9KgKH5n31FKehz23AQPQMSimsicQQTZHvorgN8jDEiakn9A3lS2PHjNL7oQr85S
+ eSSOaFHnjyvOBuSvC9mfRjTX9EeMYdZ77n/F2lSwRvCJJImCYt1yxzN02sh+yUZc2jpj
+ Onh/H1oSo+QOOYC+oWyklOHj9+HqW6z+3KuqzUxbQWU4bnY8bVHP5rzc3wsQ+eQK6D03
+ y+PUpGbKOpZTPLQ18aFVD0zJxTUOw4G8ytL2ZD1HY4VmO/OK124QVGaEVB60HcAKMt5B
+ y/zQ==
+X-Gm-Message-State: AOJu0YxF0I6buTCDR9VIvZpztW2eTG2rQ600oUdkMJ39RsWOXFWlJa+9
+ 3m/2Lf958ZxL0VY4MkUztkCzRgLamluZsQUsRQEUf2VjiAGHWhR5/HkWSqGnQ4ycefOq20zKr8X
+ vrRBcbVT/VSWCakiuUCV3QB1UN7vbYYO0zGvJYVxxe+lmstAbv2yu
+X-Google-Smtp-Source: AGHT+IHjwhwwuXxzySVXfAxcI58SUnlV21SyaUZ+nDdDuc0whHsbOZx8lyOPZc1YaHV4IVdTBykIntF3tZCQ0xFsirc=
+X-Received: by 2002:a17:907:9413:b0:a9a:1f8:6c9b with SMTP id
+ a640c23a62f3a-a9de5fe7455mr2360706366b.37.1730475171331; Fri, 01 Nov 2024
+ 08:32:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1730474898; 
- s=20181004; d=freemail.hu;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
- l=3195; bh=T1MUV51UFA8F5MtMBLiLG8IrE1RxL2mxoV/WX3RfWWQ=;
- b=NK1hxgheb7DDatH1BihbIi6zB+oYPEIohK6pPXqUM3KNGgKs5u4AKg20f3T/5LM8
- pht9GWHNOC4FQ7oN6QYJxz96OY+egMnMu7muGp3mmatksJeKVQUj3JXvOWTCQqp+M0l
- VdVjSEoOO8qprBZeUa8LzUWSQOSKSPF83jo/Ldg259WgcT8U1KNamSaIEvqT1SRl12L
- nDC7iuy3IVorL/WZZndWl9D3phiYapo8t3PCq8BYgVKVeyAyfXwk2jsEIwT7KybZXrW
- wkS479+JC1Y4x75zjbGVUey+q+rHztS22xDkK6EryA2JQvWupYxvOM/zfNhGrEqXuYK
- mrybID0/5g==
+References: <20241101152614.238747-1-sjg@chromium.org>
+In-Reply-To: <20241101152614.238747-1-sjg@chromium.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 1 Nov 2024 16:32:35 +0100
+Message-ID: <CAFLszTgTX+SSqdJq3ASK4aeciSXrh_YAtYgrKFQYGU-LJABj=Q@mail.gmail.com>
+Subject: Re: [PATCH v9 00/11] efi: Add a test for EFI bootmeth
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Julien Masson <jmasson@baylibre.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mark Kettenis <kettenis@openbsd.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Yang Xiwen <forbidden405@outlook.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,104 +102,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Benjamin Szőke <egyszeregy@freemail.hu>
+Hi all,
 
-Improve "mmcautodetect=yes" boot mode autodetection to able to use it
-if CONFIG_ENV_IS_NOWHERE=y is used for i.MX9 SoCs and i.MX93 EVK board.
+On Fri, 1 Nov 2024 at 16:26, Simon Glass <sjg@chromium.org> wrote:
+>
+> The test coverage for the EFI bootmeth is incomplete since it does not
+> actually boot the application.
+>
+> This series creates a simple test for this purpose. It includes a few
+> patches to make this work:
+>
+> - Revert of an unreviewed patch to change the sandbox efi filename
+> - Hang in sandbox virtio due to EFI probing all block devices
+>
+> Other necessary fixes have already been applied.
+>
+> Changes in v10:
+> - Drop call to exit-boot-services
+>
+> Changes in v9:
+> - Update license
+> - Fix 'sevices' typo
+> - Move the function into efi_helper.c
+> - Split out into a separate change
+> - Split out into its own patch
+> - Separate into separate patches
+> - Add new patch to drop sandbox PXE architecture
+> - Mark the image as complete after writing it
+> - Fix 'sevices' typo
+>
+> Changes in v8:
+> - Add new patch to control on-host behaviour
+> - Add new patch to move default filename to a function
+> - Add new patch to report host default-filename in native mode
+> - Add new patch to report host default-filename in native mode
+>
+> Changes in v7:
+> - Update commit message
+> - Drop patches already applied
+> - Drop patch 'Disable ANSI output for tests'
+> - Rebase on -master
+>
+> Changes in v6:
+> - Drop the patch to disable sandbox virtio blk with EFI
+> - Add new patch to disable the sandbox virtio blk device
+> - Deal with sandbox CONFIG_LOGF_FUNC
+> - Rebase on -next
+> - Drop patches previously applied
+> - Drop mention of helloworld since it is no-longer used by this test
+>
+> Changes in v4:
+> - Add efi_loader tag to some patches
+> - Split out non-EFI patches into a different series
+>
+> Changes in v2:
+> - Add many new patches to resolve all the outstanding test issues
+>
+> Simon Glass (11):
+>   test: boot: Update bootflow_iter() for console checking
+>   efi_loader: Add a test app
+>   sandbox: Add a -N flag to control on-host behaviour
+>   efi: Move default filename to a function
+>   efi_loader: Move get_efi_pxe_arch() to efi_helper
+>   efi_loader: Allow reporting the host defaults
+>   sandbox: Report host default-filename in native mode
+>   efi_loader: Drop sandbox PXE architecture
+>   sandbox: virtio: Disable the sandbox virtio blk device
+>   test: efi: boot: Set up an image suitable for EFI testing
+>   test: efi: boot: Add a test for the efi bootmeth
+>
+>  arch/Kconfig                        |   3 +-
+>  arch/sandbox/cpu/start.c            |  10 ++++
+>  arch/sandbox/dts/test.dts           |   2 +-
+>  arch/sandbox/include/asm/state.h    |   1 +
+>  boot/bootmeth_efi.c                 |  29 ++----------
+>  cmd/efidebug.c                      |  25 ++++++++++
+>  include/efi.h                       |  34 +++++++++++++
+>  include/efi_default_filename.h      |  56 ----------------------
+>  lib/efi_loader/Kconfig              |  10 ++++
+>  lib/efi_loader/Makefile             |   1 +
+>  lib/efi_loader/efi_bootmgr.c        |  10 ++--
+>  lib/efi_loader/efi_helper.c         |  71 ++++++++++++++++++++++++++++
+>  lib/efi_loader/testapp.c            |  64 +++++++++++++++++++++++++
+>  test/boot/bootdev.c                 |  18 ++++++-
+>  test/boot/bootflow.c                |  67 ++++++++++++++++++++++++--
+>  test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 4924 bytes
+>  test/py/tests/test_ut.py            |  53 ++++++++++++++++++---
+>  17 files changed, 356 insertions(+), 98 deletions(-)
+>  delete mode 100644 include/efi_default_filename.h
+>  create mode 100644 lib/efi_loader/testapp.c
+>  create mode 100644 test/py/tests/bootstd/flash1.img.xz
 
-If both CONFIG_ENV_IS_IN_MMC=y and CONFIG_ENV_IS_NOWHERE=y are in the
-defconfig, CONFIG_ENV_IS_IN_MMC=y will be overiden default
-CONFIG_ENV_IS_NOWHERE settings.
+I hope this series can meet with approval and go in. I know it isn't
+perfect, but we can then work on things from there. The first thing is
+to drop the various .xz files, which I'll look at once this lands.
 
-Goal is in this patch to able to use the boot mode autodetection
-if defconfig use only CONFIG_ENV_IS_NOWHERE=y option
-(without CONFIG_ENV_IS_IN_MMC) for any i.MX9 SoC.
-
-Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
----
- arch/arm/mach-imx/imx9/soc.c          | 12 +++++++++---
- board/freescale/imx93_evk/imx93_evk.c |  2 +-
- include/configs/imx93_evk.h           |  8 +++++++-
- 3 files changed, 17 insertions(+), 5 deletions(-)
-
-diff --git a/arch/arm/mach-imx/imx9/soc.c b/arch/arm/mach-imx/imx9/soc.c
-index 7c28fa39e14e..21e0e7dd1e80 100644
---- a/arch/arm/mach-imx/imx9/soc.c
-+++ b/arch/arm/mach-imx/imx9/soc.c
-@@ -42,12 +42,18 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- struct rom_api *g_rom_api = (struct rom_api *)0x1980;
- 
--#ifdef CONFIG_ENV_IS_IN_MMC
-+#if CONFIG_IS_ENABLED(ENV_IS_IN_MMC) || CONFIG_IS_ENABLED(ENV_IS_NOWHERE)
- __weak int board_mmc_get_env_dev(int devno)
- {
- 	return devno;
- }
- 
-+#ifdef CONFIG_SYS_MMC_ENV_DEV
-+#define IMX9_MMC_ENV_DEV CONFIG_SYS_MMC_ENV_DEV
-+#else
-+#define IMX9_MMC_ENV_DEV 0
-+#endif
-+
- int mmc_get_env_dev(void)
- {
- 	int ret;
-@@ -59,7 +65,7 @@ int mmc_get_env_dev(void)
- 
- 	if (ret != ROM_API_OKAY) {
- 		puts("ROMAPI: failure at query_boot_info\n");
--		return CONFIG_SYS_MMC_ENV_DEV;
-+		return IMX9_MMC_ENV_DEV;
- 	}
- 
- 	boot_type = boot >> 16;
-@@ -69,7 +75,7 @@ int mmc_get_env_dev(void)
- 
- 	/* If not boot from sd/mmc, use default value */
- 	if (boot_type != BOOT_TYPE_SD && boot_type != BOOT_TYPE_MMC)
--		return env_get_ulong("mmcdev", 10, CONFIG_SYS_MMC_ENV_DEV);
-+		return env_get_ulong("mmcdev", 10, IMX9_MMC_ENV_DEV);
- 
- 	return board_mmc_get_env_dev(boot_instance);
- }
-diff --git a/board/freescale/imx93_evk/imx93_evk.c b/board/freescale/imx93_evk/imx93_evk.c
-index 341831a7d30d..c9171df330e2 100644
---- a/board/freescale/imx93_evk/imx93_evk.c
-+++ b/board/freescale/imx93_evk/imx93_evk.c
-@@ -58,7 +58,7 @@ int board_init(void)
- 
- int board_late_init(void)
- {
--#ifdef CONFIG_ENV_IS_IN_MMC
-+#if CONFIG_IS_ENABLED(ENV_IS_IN_MMC) || CONFIG_IS_ENABLED(ENV_IS_NOWHERE)
- 	board_late_mmc_env_init();
- #endif
- 
-diff --git a/include/configs/imx93_evk.h b/include/configs/imx93_evk.h
-index 53fb8c9b1ba8..260a5043d537 100644
---- a/include/configs/imx93_evk.h
-+++ b/include/configs/imx93_evk.h
-@@ -27,6 +27,12 @@
- #define BOOTENV
- #endif
- 
-+#ifdef CONFIG_SYS_MMC_ENV_DEV
-+#define IMX93_EVK_MMC_ENV_DEV CONFIG_SYS_MMC_ENV_DEV
-+#else
-+#define IMX93_EVK_MMC_ENV_DEV 0
-+#endif
-+
- /* Initial environment variables */
- #define CFG_EXTRA_ENV_SETTINGS		\
- 	BOOTENV \
-@@ -42,7 +48,7 @@
- 	"boot_fit=no\0" \
- 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
- 	"bootm_size=0x10000000\0" \
--	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
-+	"mmcdev=" __stringify(IMX93_EVK_MMC_ENV_DEV)"\0" \
- 	"mmcpart=1\0" \
- 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
- 	"mmcautodetect=yes\0" \
+Regards,
+Simon
