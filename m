@@ -4,84 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A92FEE67492
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 00:31:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 278B7E67492
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 00:58:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF68188CC9;
-	Fri,  1 Nov 2024 01:31:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6887888DEA;
+	Fri,  1 Nov 2024 01:58:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VjWXMSQJ";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="K9qUfbsb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4779088B8F; Fri,  1 Nov 2024 01:31:35 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AC81788DEA; Fri,  1 Nov 2024 01:58:53 +0100 (CET)
+Received: from ec2-44-216-146-141.compute-1.amazonaws.com
+ (ec2-44-216-146-141.compute-1.amazonaws.com [44.216.146.141])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E31A88CC9
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 01:31:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1321888DF1
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 01:58:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-20c714cd9c8so16117665ad.0
- for <u-boot@lists.denx.de>; Thu, 31 Oct 2024 17:31:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730421091; x=1731025891; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vDQke1raFi+5csksNp9AInuGgTGQ+AHuJx3ngpPwEyw=;
- b=VjWXMSQJgWfXo2zycA2a9TSbUse+WDh1dzfNT+adzJwL3aHvvlDcR7f3G7Fa1pInPb
- r+jMQTPye91b/w9FgyYYUORTOJMt43ZzfAgM2plk1ys5KhNh+bdCs0u3NqUZEqQpmlW0
- CBwNSfcrtysv+qI47Cx5y4qmJ5UEolHQpBRzf69+0jiSIx4ROqyv8p+xJKpIdX8na5Kw
- J41SmtwVBqCYvT3NbEaAMTBVMYa+DdtgVKqElqcT3NzUUZbI3Q3U3k6q9kr86FBaOuQp
- QKmOKlOUYA+UlPG4BvewmPCyCn1rFkWlux/ag6FLFDNwWFehQDZZMHw0CeFKfuduMfN2
- AaZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730421091; x=1731025891;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vDQke1raFi+5csksNp9AInuGgTGQ+AHuJx3ngpPwEyw=;
- b=N4U0awpBz3TrgVwTj6IwJ+aHUFbosb41bVc6BjOYLM9pnMPMvULWJGlzWz6NMcQkky
- elEGb+BdmuSSAaRbqHYEzpaWghh/ZXHZzKkHySqrpcQ2aoEQWvGt0MfpSK9Ot5xfUHSI
- ynyB+PGGdwTwPIOfOFEQRdTwxUssdOleNzjFN33ATCQk+5FnkWDcG65bcGRksezemL5e
- ol/hl/meRwhZM4UAee80i075OX2ICWgPaWSetU/dsSpKQDYN4D7FDkyEelxULguguy9u
- UKEi8108bRGtNH8AANpzQeutJhBkhI4SQy75j9UgZM2GY4I9pZYe6+zYvqmUeu/MRkx2
- /GRg==
-X-Gm-Message-State: AOJu0YxGcSzPKt3zo6LEBBiGpCdFPHC7Sn9rJXAYgOAO8qHQo4Kn89UW
- Kogt5Pp1CyqY6WNQq8BmqsoelkbMguwSON1HEeYTMPCM/4h5eUeGvSmNjhuZn0PLMNeqDns4vva
- KSbOPO5C6POjmBYNCQdeZX0ckgQkOEP1+FT2HMA==
-X-Google-Smtp-Source: AGHT+IHDGtNiwGDiTF4x4td2VRQUXzC7de6qpZao1LsOPfZhHcSoJIfPdD1pqCn8rQwhCZjQAgaLA4Bm58iX2zKJTvY=
-X-Received: by 2002:a17:902:da8e:b0:20b:6f04:486a with SMTP id
- d9443c01a7336-2111af8d555mr19951055ad.35.1730421090558; Thu, 31 Oct 2024
- 17:31:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [172.16.12.67] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 17661f1b;
+ Fri, 1 Nov 2024 08:58:42 +0800 (GMT+08:00)
+Message-ID: <47e80c23-9c08-4681-8f5d-04e600610599@rock-chips.com>
+Date: Fri, 1 Nov 2024 08:58:42 +0800
 MIME-Version: 1.0
-References: <20241031175025.74124-1-sjg@chromium.org>
-In-Reply-To: <20241031175025.74124-1-sjg@chromium.org>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 31 Oct 2024 20:31:17 -0400
-Message-ID: <CAEfUkUKFmdzt=Hjz=JXjv206JRmV7eEGtUZrvX8vQX=w5s_M0w@mail.gmail.com>
-Subject: Re: [PATCH] dm: sysinfo: Shorten the SYSINFO_ID prefix
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jan Kiszka <jan.kiszka@siemens.com>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@gmail.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Max Krummenacher <max.krummenacher@toradex.com>,
- Michal Simek <michal.simek@amd.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Pavel Herrmann <morpheus.ibis@gmail.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/2] board: rockchip: Add support for rk3588 GenBook
+To: Andy Yan <andyshrk@163.com>
+Cc: quentin.schulz@cherry.de, u-boot@lists.denx.de, dsimic@manjaro.org,
+ jonas@kwiboo.se
+References: <20241030120926.399775-1-andyshrk@163.com>
+ <20241030120926.399775-3-andyshrk@163.com>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20241030120926.399775-3-andyshrk@163.com>
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0hDT1YYShoZHktPSEIdSUhWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a92e53b50c003afkunm17661f1b
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pwg6FTo5SjIiLUk1MR5PS04Z
+ OQIaCktVSlVKTEhLT0lJTElITEpNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTUNJSTcG
+DKIM-Signature: a=rsa-sha256;
+ b=K9qUfbsbVJ+c97VSLw7NOjfxUFpXQ12//qXVrngMe8fA4KJemS0EB0g4o1YzFHGKkXSyHdisAzQ2M9puny+LRN4jbiJA8u12mHaJ5w6327XPbtT+wH8LjiDR75ayyOpUSgvP7sj8euhagJ5xlFwKT2jnBhMiXYxADSbUqrj+BeQ=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=ylbCoV/DgPk5sfviECYhwJLegvYv28z9BrcBhbNbfF4=;
+ h=date:mime-version:subject:message-id:from;
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,400 +75,415 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Andy,
 
-On Thu, 31 Oct 2024 at 13:50, Simon Glass <sjg@chromium.org> wrote:
-
-> We are about to add a large number of new entries. Update the prefix to
-> be a little shorter.
+On 2024/10/30 20:09, Andy Yan wrote:
+> Add support for Cool Pi GenBook, it works as a carrier board
+> connect with CM5 SOM.
 >
-> For SMBIOS items, use SYSID_SM_ (for System Management) which is enough
-> to distinguish it. For now at least, it seems that most items will be
-> for SMBIOS.
+> Specification:
+> - Rockchip RK3588
+> - LPDDR5X 8/32 GB
+> - eMMC 64 GB
+> - HDMI Type A out x 1
+> - USB 3.0 Host x 1
+> - USB-C 3.0 with DisplayPort AltMode
+> - PCIE M.2 E Key for RTL8852BE Wireless connection
+> - PCIE M.2 M Key for NVME connection
+> - eDP panel with 1920x1080
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Tested by Armbian boot on USB disk.
+>
+> Signed-off-by: Andy Yan<andyshrk@163.com>
+>
 > ---
 >
->  board/coreboot/coreboot/sysinfo.c     |  8 +++----
->  board/google/chromebook_coral/coral.c |  6 ++---
->  board/toradex/common/tdx-common.c     |  2 +-
->  common/board_info.c                   |  8 +++----
->  drivers/sysinfo/gazerbeam.h           |  4 ++--
->  drivers/sysinfo/gpio.c                |  4 ++--
->  drivers/sysinfo/rcar3.c               |  2 +-
->  drivers/sysinfo/sandbox.h             |  2 +-
->  include/sysinfo.h                     | 34 +++++++++++++--------------
->  lib/smbios.c                          | 24 +++++++++----------
->  test/dm/sysinfo-gpio.c                | 12 +++++-----
->  11 files changed, 53 insertions(+), 53 deletions(-)
+> Changes in v4:
+> - Fix a underline too short error in rst doc
 >
-> diff --git a/board/coreboot/coreboot/sysinfo.c
-> b/board/coreboot/coreboot/sysinfo.c
-> index e0bdc7a5a88..d6b19530023 100644
-> --- a/board/coreboot/coreboot/sysinfo.c
-> +++ b/board/coreboot/coreboot/sysinfo.c
-> @@ -24,21 +24,21 @@ static int cb_get_str(struct udevice *dev, int id,
-> size_t size, char *val)
->         const char *str = NULL;
+> Changes in v3:
+> - Remove upstreamed dt in genbook-u-boot.dtsi
+> - Remove MMC releated config as there is no SD-card on this machine
+> - Enable LED config
+> - Enable rk8xx pmic
+> - rename defconfig to coolpi-cm5-genbook-rk3588_defconfig
+> - redefine BOOT_TARGETS
 >
->         switch (id) {
-> -       case SYSINFO_ID_BOARD_MODEL:
-> +       case SYSID_BOARD_MODEL:
->                 if (priv->t1)
->                         str = smbios_string(priv->system,
->                                             priv->t1->product_name);
->                 break;
-> -       case SYSINFO_ID_BOARD_MANUFACTURER:
-> +       case SYSID_BOARD_MANUFACTURER:
->                 if (priv->t1)
->                         str = smbios_string(priv->system,
->                                             priv->t1->manufacturer);
->                 break;
-> -       case SYSINFO_ID_PRIOR_STAGE_VERSION:
-> +       case SYSID_PRIOR_STAGE_VERSION:
->                 if (priv->t0)
->                         str = smbios_string(priv->bios,
-> priv->t0->bios_ver);
->                 break;
-> -       case SYSINFO_ID_PRIOR_STAGE_DATE:
-> +       case SYSID_PRIOR_STAGE_DATE:
->                 if (priv->t0)
->                         str = smbios_string(priv->bios,
->                                             priv->t0->bios_release_date);
-> diff --git a/board/google/chromebook_coral/coral.c
-> b/board/google/chromebook_coral/coral.c
-> index 3443dc91885..db96534857c 100644
-> --- a/board/google/chromebook_coral/coral.c
-> +++ b/board/google/chromebook_coral/coral.c
-> @@ -151,8 +151,8 @@ static int coral_get_str(struct udevice *dev, int id,
-> size_t size, char *val)
->                 return -ENOSYS;
+> Changes in v2:
+> - split the dts to a separate commit
+> - rename to genbook_cm5_rk3588
+> - move readme to doc/board, and write as reStructuredText format
+> - alphabetically reorder
+> - update doc/board/rockchip
 >
->         switch (id) {
-> -       case SYSINFO_ID_SMBIOS_SYSTEM_VERSION:
-> -       case SYSINFO_ID_SMBIOS_BASEBOARD_VERSION: {
-> +       case SYSID_SM_SYSTEM_VERSION:
-> +       case SYSID_SM_BASEBOARD_VERSION: {
->                 ret = get_skuconfig(dev);
->
->                 if (ret < 0)
-> @@ -162,7 +162,7 @@ static int coral_get_str(struct udevice *dev, int id,
-> size_t size, char *val)
->                 sprintf(val, "rev%d", ret);
->                 break;
->         }
-> -       case SYSINFO_ID_BOARD_MODEL: {
-> +       case SYSID_BOARD_MODEL: {
->                 int mem_config, sku_config;
->                 const char *model;
->
-> diff --git a/board/toradex/common/tdx-common.c
-> b/board/toradex/common/tdx-common.c
-> index a6b45cdab81..3badeebd149 100644
-> --- a/board/toradex/common/tdx-common.c
-> +++ b/board/toradex/common/tdx-common.c
-> @@ -193,7 +193,7 @@ static int tdx_get_str(struct udevice *dev, int id,
-> size_t size, char *val)
->         int ret = -ENOTSUPP;
->
->         switch (id) {
-> -       case SYSINFO_ID_BOARD_MODEL:
-> +       case SYSID_BOARD_MODEL:
->                 snprintf(val, size,
->                          "Toradex %04d %s %s",
->                          tdx_hw_tag.prodid,
-> diff --git a/common/board_info.c b/common/board_info.c
-> index 33c260b404e..dc26e1a33dd 100644
-> --- a/common/board_info.c
-> +++ b/common/board_info.c
-> @@ -18,9 +18,9 @@ static const struct to_show {
->         const char *name;
->         enum sysinfo_id id;
->  } to_show[] = {
-> -       { "Manufacturer", SYSINFO_ID_BOARD_MANUFACTURER},
-> -       { "Prior-stage version", SYSINFO_ID_PRIOR_STAGE_VERSION },
-> -       { "Prior-stage date", SYSINFO_ID_PRIOR_STAGE_DATE },
-> +       { "Manufacturer", SYSID_BOARD_MANUFACTURER},
-> +       { "Prior-stage version", SYSID_PRIOR_STAGE_VERSION },
-> +       { "Prior-stage date", SYSID_PRIOR_STAGE_DATE },
->         { /* sentinel */ }
->  };
->
-> @@ -39,7 +39,7 @@ static int try_sysinfo(void)
->         if (ret)
->                 return ret;
->
-> -       ret = sysinfo_get_str(dev, SYSINFO_ID_BOARD_MODEL, sizeof(str),
-> str);
-> +       ret = sysinfo_get_str(dev, SYSID_BOARD_MODEL, sizeof(str), str);
->         if (ret)
->                 return ret;
->         printf("Model: %s\n", str);
-> diff --git a/drivers/sysinfo/gazerbeam.h b/drivers/sysinfo/gazerbeam.h
-> index 6bf3c0098d1..047f365436f 100644
-> --- a/drivers/sysinfo/gazerbeam.h
-> +++ b/drivers/sysinfo/gazerbeam.h
-> @@ -8,8 +8,8 @@
->  #include <sysinfo.h>
->
->  enum {
-> -       BOARD_HWVERSION = SYSINFO_ID_BOARD_MODEL,
-> -       BOARD_MULTICHANNEL = SYSINFO_ID_USER,
-> +       BOARD_HWVERSION = SYSID_BOARD_MODEL,
-> +       BOARD_MULTICHANNEL = SYSID_USER,
->         BOARD_VARIANT
->  };
->
-> diff --git a/drivers/sysinfo/gpio.c b/drivers/sysinfo/gpio.c
-> index aaca318419b..66d2a913087 100644
-> --- a/drivers/sysinfo/gpio.c
-> +++ b/drivers/sysinfo/gpio.c
-> @@ -38,7 +38,7 @@ static int sysinfo_gpio_get_int(struct udevice *dev, int
-> id, int *val)
->         struct sysinfo_gpio_priv *priv = dev_get_priv(dev);
->
->         switch (id) {
-> -       case SYSINFO_ID_BOARD_MODEL:
-> +       case SYSID_BOARD_MODEL:
->                 *val = priv->revision;
->                 return 0;
->         default:
-> @@ -51,7 +51,7 @@ static int sysinfo_gpio_get_str(struct udevice *dev, int
-> id, size_t size, char *
->         struct sysinfo_gpio_priv *priv = dev_get_priv(dev);
->
->         switch (id) {
-> -       case SYSINFO_ID_BOARD_MODEL: {
-> +       case SYSID_BOARD_MODEL: {
->                 const char *name = NULL;
->                 int i, ret;
->                 u32 revision;
-> diff --git a/drivers/sysinfo/rcar3.c b/drivers/sysinfo/rcar3.c
-> index 37e2cccd9af..2994df9ab1c 100644
-> --- a/drivers/sysinfo/rcar3.c
-> +++ b/drivers/sysinfo/rcar3.c
-> @@ -46,7 +46,7 @@ static int sysinfo_rcar_get_str(struct udevice *dev, int
-> id, size_t size, char *
->         struct sysinfo_rcar_priv *priv = dev_get_priv(dev);
->
->         switch (id) {
-> -       case SYSINFO_ID_BOARD_MODEL:
-> +       case SYSID_BOARD_MODEL:
->                 strncpy(val, priv->boardmodel, size);
->                 val[size - 1] = '\0';
->                 return 0;
-> diff --git a/drivers/sysinfo/sandbox.h b/drivers/sysinfo/sandbox.h
-> index d9c5804c26a..a7cbac0ce18 100644
-> --- a/drivers/sysinfo/sandbox.h
-> +++ b/drivers/sysinfo/sandbox.h
-> @@ -5,7 +5,7 @@
->   */
->
->  enum {
-> -       BOOL_CALLED_DETECT = SYSINFO_ID_USER,
-> +       BOOL_CALLED_DETECT = SYSID_USER,
->         INT_TEST1,
->         INT_TEST2,
->         STR_VACATIONSPOT,
-> diff --git a/include/sysinfo.h b/include/sysinfo.h
-> index 8a77ef44856..027a463dc33 100644
-> --- a/include/sysinfo.h
-> +++ b/include/sysinfo.h
-> @@ -40,29 +40,29 @@ struct udevice;
->
->  /** enum sysinfo_id - Standard IDs defined by U-Boot */
->  enum sysinfo_id {
-> -       SYSINFO_ID_NONE,
-> +       SYSID_NONE,
->
->         /* For SMBIOS tables */
-> -       SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
-> -       SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
-> -       SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
-> -       SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
-> -       SYSINFO_ID_SMBIOS_SYSTEM_SKU,
-> -       SYSINFO_ID_SMBIOS_SYSTEM_FAMILY,
-> -       SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
-> -       SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
-> -       SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
-> -       SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
-> -       SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
-> +       SYSID_SM_SYSTEM_MANUFACTURER,
-> +       SYSID_SM_SYSTEM_PRODUCT,
-> +       SYSID_SM_SYSTEM_VERSION,
-> +       SYSID_SM_SYSTEM_SERIAL,
-> +       SYSID_SM_SYSTEM_SKU,
-> +       SYSID_SM_SYSTEM_FAMILY,
-> +       SYSID_SM_BASEBOARD_MANUFACTURER,
-> +       SYSID_SM_BASEBOARD_PRODUCT,
-> +       SYSID_SM_BASEBOARD_VERSION,
-> +       SYSID_SM_BASEBOARD_SERIAL,
-> +       SYSID_SM_BASEBOARD_ASSET_TAG,
->
->         /* For show_board_info() */
-> -       SYSINFO_ID_BOARD_MODEL,
-> -       SYSINFO_ID_BOARD_MANUFACTURER,
-> -       SYSINFO_ID_PRIOR_STAGE_VERSION,
-> -       SYSINFO_ID_PRIOR_STAGE_DATE,
-> +       SYSID_BOARD_MODEL,
-> +       SYSID_BOARD_MANUFACTURER,
-> +       SYSID_PRIOR_STAGE_VERSION,
-> +       SYSID_PRIOR_STAGE_DATE,
->
->         /* First value available for downstream/board used */
-> -       SYSINFO_ID_USER = 0x1000,
-> +       SYSID_USER = 0x1000,
->  };
->
->  struct sysinfo_ops {
-> diff --git a/lib/smbios.c b/lib/smbios.c
-> index 7c24ea129eb..a36d4b4e54a 100644
-> --- a/lib/smbios.c
-> +++ b/lib/smbios.c
-> @@ -270,7 +270,7 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx,
-> const char *prop,
->  static int smbios_add_prop(struct smbios_ctx *ctx, const char *prop,
->                            const char *dval)
->  {
-> -       return smbios_add_prop_si(ctx, prop, SYSINFO_ID_NONE, dval);
-> +       return smbios_add_prop_si(ctx, prop, SYSID_NONE, dval);
->  }
->
->  static void smbios_set_eos(struct smbios_ctx *ctx, char *eos)
-> @@ -393,27 +393,27 @@ static int smbios_write_type1(ulong *current, int
-> handle,
->         fill_smbios_header(t, SMBIOS_SYSTEM_INFORMATION, len, handle);
->         smbios_set_eos(ctx, t->eos);
->         t->manufacturer = smbios_add_prop_si(ctx, "manufacturer",
-> -
-> SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
-> +                                            SYSID_SM_SYSTEM_MANUFACTURER,
->                                              NULL);
->         t->product_name = smbios_add_prop_si(ctx, "product",
-> -
-> SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
-> +                                            SYSID_SM_SYSTEM_PRODUCT,
->                                              NULL);
->         t->version = smbios_add_prop_si(ctx, "version",
-> -                                       SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
-> +                                       SYSID_SM_SYSTEM_VERSION,
->                                         NULL);
->         if (serial_str) {
->                 t->serial_number = smbios_add_prop(ctx, NULL, serial_str);
->                 strncpy((char *)t->uuid, serial_str, sizeof(t->uuid));
->         } else {
->                 t->serial_number = smbios_add_prop_si(ctx, "serial",
-> -
->  SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
-> +
->  SYSID_SM_SYSTEM_SERIAL,
->                                                       NULL);
->         }
->         t->wakeup_type = SMBIOS_WAKEUP_TYPE_UNKNOWN;
->         t->sku_number = smbios_add_prop_si(ctx, "sku",
-> -                                          SYSINFO_ID_SMBIOS_SYSTEM_SKU,
-> NULL);
-> +                                          SYSID_SM_SYSTEM_SKU, NULL);
->         t->family = smbios_add_prop_si(ctx, "family",
-> -                                      SYSINFO_ID_SMBIOS_SYSTEM_FAMILY,
-> NULL);
-> +                                      SYSID_SM_SYSTEM_FAMILY, NULL);
->
->         len = t->length + smbios_string_table_len(ctx);
->         *current += len;
-> @@ -433,20 +433,20 @@ static int smbios_write_type2(ulong *current, int
-> handle,
->         fill_smbios_header(t, SMBIOS_BOARD_INFORMATION, len, handle);
->         smbios_set_eos(ctx, t->eos);
->         t->manufacturer = smbios_add_prop_si(ctx, "manufacturer",
-> -
-> SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
-> +
-> SYSID_SM_BASEBOARD_MANUFACTURER,
->                                              NULL);
->         t->product_name = smbios_add_prop_si(ctx, "product",
-> -
-> SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
-> +                                            SYSID_SM_BASEBOARD_PRODUCT,
->                                              NULL);
->         t->version = smbios_add_prop_si(ctx, "version",
-> -
->  SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
-> +                                       SYSID_SM_BASEBOARD_VERSION,
->                                         NULL);
->
->         t->serial_number = smbios_add_prop_si(ctx, "serial",
-> -
->  SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
-> +                                             SYSID_SM_BASEBOARD_SERIAL,
->                                               NULL);
->         t->asset_tag_number = smbios_add_prop_si(ctx, "asset-tag",
-> -
-> SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
-> +
-> SYSID_SM_BASEBOARD_ASSET_TAG,
->                                                  NULL);
->         t->feature_flags = SMBIOS_BOARD_FEATURE_HOSTING;
->         t->board_type = SMBIOS_BOARD_MOTHERBOARD;
-> diff --git a/test/dm/sysinfo-gpio.c b/test/dm/sysinfo-gpio.c
-> index 155da3b6344..de9483c4291 100644
-> --- a/test/dm/sysinfo-gpio.c
-> +++ b/test/dm/sysinfo-gpio.c
-> @@ -29,9 +29,9 @@ static int dm_test_sysinfo_gpio(struct unit_test_state
-> *uts)
->         sandbox_gpio_set_flags(gpio, 16, GPIOD_EXT_PULL_DOWN);
->         sandbox_gpio_set_flags(gpio, 17, 0);
->         ut_assertok(sysinfo_detect(sysinfo));
-> -       ut_assertok(sysinfo_get_int(sysinfo, SYSINFO_ID_BOARD_MODEL,
-> &val));
-> +       ut_assertok(sysinfo_get_int(sysinfo, SYSID_BOARD_MODEL, &val));
->         ut_asserteq(19, val);
-> -       ut_assertok(sysinfo_get_str(sysinfo, SYSINFO_ID_BOARD_MODEL,
-> sizeof(buf),
-> +       ut_assertok(sysinfo_get_str(sysinfo, SYSID_BOARD_MODEL,
-> sizeof(buf),
->                                     buf));
->         ut_asserteq_str("rev_a", buf);
->
-> @@ -43,9 +43,9 @@ static int dm_test_sysinfo_gpio(struct unit_test_state
-> *uts)
->         sandbox_gpio_set_flags(gpio, 16, GPIOD_EXT_PULL_UP);
->         sandbox_gpio_set_flags(gpio, 17, GPIOD_EXT_PULL_DOWN);
->         ut_assertok(sysinfo_detect(sysinfo));
-> -       ut_assertok(sysinfo_get_int(sysinfo, SYSINFO_ID_BOARD_MODEL,
-> &val));
-> +       ut_assertok(sysinfo_get_int(sysinfo, SYSID_BOARD_MODEL, &val));
->         ut_asserteq(5, val);
-> -       ut_assertok(sysinfo_get_str(sysinfo, SYSINFO_ID_BOARD_MODEL,
-> sizeof(buf),
-> +       ut_assertok(sysinfo_get_str(sysinfo, SYSID_BOARD_MODEL,
-> sizeof(buf),
->                                     buf));
->         ut_asserteq_str("foo", buf);
->
-> @@ -57,9 +57,9 @@ static int dm_test_sysinfo_gpio(struct unit_test_state
-> *uts)
->         sandbox_gpio_set_flags(gpio, 16, 0);
->         sandbox_gpio_set_flags(gpio, 17, GPIOD_EXT_PULL_UP);
->         ut_assertok(sysinfo_detect(sysinfo));
-> -       ut_assertok(sysinfo_get_int(sysinfo, SYSINFO_ID_BOARD_MODEL,
-> &val));
-> +       ut_assertok(sysinfo_get_int(sysinfo, SYSID_BOARD_MODEL, &val));
->         ut_asserteq(15, val);
-> -       ut_assertok(sysinfo_get_str(sysinfo, SYSINFO_ID_BOARD_MODEL,
-> sizeof(buf),
-> +       ut_assertok(sysinfo_get_str(sysinfo, SYSID_BOARD_MODEL,
-> sizeof(buf),
->                                     buf));
->         ut_asserteq_str("unknown", buf);
->
-> --
-> 2.43.0
->
->
-Acked-by: Raymond Mao <raymond.mao@linaro.org>
+>   .../dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi |  20 ++++
+>   arch/arm/mach-rockchip/rk3588/Kconfig         |  19 ++++
+>   board/coolpi/genbook_cm5_rk3588/Kconfig       |  12 +++
+>   board/coolpi/genbook_cm5_rk3588/MAINTAINERS   |   7 ++
+>   configs/coolpi-cm5-genbook-rk3588_defconfig   | 101 ++++++++++++++++++
+>   doc/board/coolpi/genbook_cm5_rk3588.rst       |  68 ++++++++++++
+>   doc/board/coolpi/index.rst                    |   9 ++
+checking consistency... failed
+Warning, treated as error:
 
-And I will mark my patch set depending on this.
+/builds/u-boot/custodians/u-boot-rockchip/doc/board/coolpi/index.rst:document 
+isn't included in any toctree
 
-Regards,
-Raymond
+
+To resolve this, "board/coolpi/index.rst" needs to be listed in 
+doc/board/index.rst
+
+Thanks,
+
+- Kever
+
+>   doc/board/rockchip/rockchip.rst               |   1 +
+>   include/configs/genbook-cm5-rk3588.h          |  31 ++++++
+>   9 files changed, 268 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+>   create mode 100644 board/coolpi/genbook_cm5_rk3588/Kconfig
+>   create mode 100644 board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+>   create mode 100644 configs/coolpi-cm5-genbook-rk3588_defconfig
+>   create mode 100644 doc/board/coolpi/genbook_cm5_rk3588.rst
+>   create mode 100644 doc/board/coolpi/index.rst
+>   create mode 100644 include/configs/genbook-cm5-rk3588.h
+>
+> diff --git a/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi b/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..5a3073d6e7f
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+> @@ -0,0 +1,20 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk3588-u-boot.dtsi"
+> +
+> +&fspim2_pins {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +};
+> +
+> +&sfc {
+> +	flash@0 {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +	};
+> +};
+> +
+> +/* USB A out */
+> +&usb_host1_xhci {
+> +	snps,dis_u3_susphy_quirk;
+> +};
+> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+> index a76a470cc98..c53f6bb926e 100644
+> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+> @@ -29,6 +29,24 @@ config TARGET_CM3588_NAS_RK3588
+>   	  - 3.5mm Headphone out, 2.0mm PH-2A Mic in
+>   	  - 5V Fan connector, PWM beeper, IR receiver, RTC battery connector
+>   
+> +config TARGET_GENBOOK_CM5_RK3588
+> +	bool "Cool Pi CM5 GenBook"
+> +	select BOARD_LATE_INIT
+> +	help
+> +	  GeenBook is a notebook based on Rockchip RK3588, and works as a carrier
+> +	  board connect with CM5 SOM.
+> +
+> +	  Specification:
+> +	  - Rockchip RK3588
+> +	  - LPDDR5X 8/32 GB
+> +	  - eMMC 64 GB
+> +	  - HDMI Type A out x 1
+> +	  - USB 3.0 Host x 1
+> +	  - USB-C 3.0 with DisplayPort AltMode
+> +	  - PCIE M.2 E Key for RTL8852BE Wireless connection
+> +	  - PCIE M.2 M Key for NVME connection
+> +	  - eDP panel with 1920x1080
+> +
+>   config TARGET_JAGUAR_RK3588
+>   	bool "Theobroma Systems SBC-RK3588-AMR (Jaguar)"
+>   	select BOARD_LATE_INIT
+> @@ -361,6 +379,7 @@ config TEXT_BASE
+>   	default 0x00a00000
+>   
+>   source "board/armsom/sige7-rk3588/Kconfig"
+> +source "board/coolpi/genbook_cm5_rk3588/Kconfig"
+>   source "board/edgeble/neural-compute-module-6/Kconfig"
+>   source "board/friendlyelec/cm3588-nas-rk3588/Kconfig"
+>   source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
+> diff --git a/board/coolpi/genbook_cm5_rk3588/Kconfig b/board/coolpi/genbook_cm5_rk3588/Kconfig
+> new file mode 100644
+> index 00000000000..67086ea6297
+> --- /dev/null
+> +++ b/board/coolpi/genbook_cm5_rk3588/Kconfig
+> @@ -0,0 +1,12 @@
+> +if TARGET_GENBOOK_CM5_RK3588
+> +
+> +config SYS_BOARD
+> +	default "genbook_cm5_rk3588"
+> +
+> +config SYS_VENDOR
+> +	default "coolpi"
+> +
+> +config SYS_CONFIG_NAME
+> +	default "genbook-cm5-rk3588"
+> +
+> +endif
+> diff --git a/board/coolpi/genbook_cm5_rk3588/MAINTAINERS b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+> new file mode 100644
+> index 00000000000..0496cc93b59
+> --- /dev/null
+> +++ b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+> @@ -0,0 +1,7 @@
+> +GENBOOK-CM5-RK3588
+> +M:	Andy Yan<andyshrk@163.com>
+> +S:	Maintained
+> +F:	board/coolpi/genbook-cm5-rk3588
+> +F:	include/configs/genbook-cm5-rk3588.h
+> +F:	configs/coolpi-cm5-genbook-rk3588_defconfig
+> +F:	arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+> diff --git a/configs/coolpi-cm5-genbook-rk3588_defconfig b/configs/coolpi-cm5-genbook-rk3588_defconfig
+> new file mode 100644
+> index 00000000000..3eb5dc968af
+> --- /dev/null
+> +++ b/configs/coolpi-cm5-genbook-rk3588_defconfig
+> @@ -0,0 +1,101 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_SPEED=24000000
+> +CONFIG_SF_DEFAULT_MODE=0x2000
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-coolpi-cm5-genbook"
+> +CONFIG_ROCKCHIP_RK3588=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_TARGET_GENBOOK_CM5_RK3588=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_SF_DEFAULT_BUS=5
+> +CONFIG_DEBUG_UART_BASE=0xFEB50000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+> +# CONFIG_ANDROID_BOOT_IMAGE is not set
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-coolpi-cm5-genbook.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> +CONFIG_SPL_ATF=y
+> +# CONFIG_CMD_BIND is not set
+> +# CONFIG_CMD_FASTBOOT is not set
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_AHCI_PCI=y
+> +CONFIG_DWC_AHCI=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_FASTBOOT_BUF_ADDR=0x800800
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_HS400_ES_SUPPORT=y
+> +CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
+> +CONFIG_MMC_HS400_SUPPORT=y
+> +CONFIG_SPL_MMC_HS400_SUPPORT=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_XMC=y
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_PHY_ROCKCHIP_USBDP=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_PWM_ROCKCHIP=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_SCSI=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SFC=y
+> +CONFIG_ROCKCHIP_SPI=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_ERRNO_STR=y
+> diff --git a/doc/board/coolpi/genbook_cm5_rk3588.rst b/doc/board/coolpi/genbook_cm5_rk3588.rst
+> new file mode 100644
+> index 00000000000..a02e561051a
+> --- /dev/null
+> +++ b/doc/board/coolpi/genbook_cm5_rk3588.rst
+> @@ -0,0 +1,68 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +GenBook
+> +=======
+> +Cool Pi GenBook is a laptop powered by RK3588, it works with a
+> +carrier board connect with CM5.
+> +
+> +Specification:
+> +* Rockchip RK3588
+> +* LPDDR5X 8/32 GB
+> +* eMMC 64 GB
+> +* SPI Nor 8 MB
+> +* HDMI Type A out x 1
+> +* USB 3.0 Host x 1
+> +* USB-C 3.0 with DisplayPort AltMode
+> +* PCIE M.2 E Key for RTL8852BE Wireless connection
+> +* PCIE M.2 M Key for NVME connection
+> +* eDP panel with 1920x1080
+> +
+> +Here is the step-by-step to compile and boot to U-Boot on GenBook.
+> +
+> +Get the TF-A and DDR init (TPL) binaries
+> +----------------------------------------
+> +
+> +.. prompt:: bash
+> +
+> +   > cd u-boot
+> +   > export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.17.bin
+> +   > export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.46.elf
+> +   > make coolpi-genbook-cm5-rk3588_defconfig
+> +   > make CROSS_COMPILE=aarch64-linux-gnu-
+> +
+> +This will build ``u-boot-rockchip.bin`` for eMMC and ``u-boot-rockchip-spi.bin`` for SPI Nor.
+> +
+> +Write u-boot to eMMC or SPI Nor from a Linux system on the laptop
+> +-----------------------------------------------------------------
+> +
+> +Copy ``u-boot-rockchip.bin`` and ``u-boot-rockchip-spi.bin`` to the laptop.
+> +
+> +eMMC
+> +~~~~
+> +
+> +.. prompt:: bash
+> +
+> +   dd if=u-boot-rockchip.bin of=/dev/mmcblk0 bs=512 seek=64
+> +
+> +SPI Nor
+> +~~~~~~~
+> +
+> +.. prompt:: bash
+> +
+> +  dd if=u-boot-rockchip-spi.bin of=/dev/mtdblock0
+> +
+> +``upgrade_tool`` allows to flash the on-board SPI Nor via the USB TypeC interface
+> +with help of the Rockchip loader binary.
+> +
+> +To enter the USB flashing mode, connect the laptop and your HOST PC with a USB-C
+> +cable, reset the laptop with ``Loader Key`` pressed.
+> +On your PC, check with ``lsusb -d 2207:350b``).
+> +
+> +To flash U-Boot on the SPI Nor with ``upgrade_tool``:
+> +
+> +.. prompt:: bash
+> +
+> +  upgrade_tool db rk3588/MiniLoaderAll.bin
+> +  upgrade_tool ssd       // Input 5 for SPINOR download mode
+> +  upgrade_tool wl 0 u-boot-rockchip-spi.bin
+> +  upgrade_tool rd
+> diff --git a/doc/board/coolpi/index.rst b/doc/board/coolpi/index.rst
+> new file mode 100644
+> index 00000000000..9c9593fd6aa
+> --- /dev/null
+> +++ b/doc/board/coolpi/index.rst
+> @@ -0,0 +1,9 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +Cool Pi
+> +=================
+> +
+> +.. toctree::
+> +   :maxdepth: 2
+> +
+> +   genbook_cm5_rk3588
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index 86d83befb5b..2d6593cba75 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -145,6 +145,7 @@ List of mainline supported Rockchip boards:
+>        - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
+>        - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
+>        - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
+> +     - Yanyi Tech CoolPi CM5 GenBook (coolpi-cm5-genbook-rk3588)
+>   
+>   * rv1108
+>        - Rockchip Evb-rv1108 (evb-rv1108)
+> diff --git a/include/configs/genbook-cm5-rk3588.h b/include/configs/genbook-cm5-rk3588.h
+> new file mode 100644
+> index 00000000000..f71f735b113
+> --- /dev/null
+> +++ b/include/configs/genbook-cm5-rk3588.h
+> @@ -0,0 +1,31 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + */
+> +
+> +#ifndef __GENBOOK_CM5_RK3588_H
+> +#define __GENBOOK_CM5_RK3588_H
+> +
+> +#define ROCKCHIP_DEVICE_SETTINGS \
+> +		"stdout=serial,vidconsole\0" \
+> +		"stderr=serial,vidconsole\0"
+> +
+> +#include <configs/rk3588_common.h>
+> +
+> +#undef BOOT_TARGETS
+> +#define BOOT_TARGETS "usb mmc0"
+> +
+> +#undef CFG_EXTRA_ENV_SETTINGS
+> +
+> +/*
+> + * As a laptop, there is no sdmmc, and we want to
+> + * set usb the highest boot priority for third-part
+> + * os installation.
+> + */
+> +#define CFG_EXTRA_ENV_SETTINGS \
+> +	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+> +	"partitions=" PARTS_DEFAULT		\
+> +	ENV_MEM_LAYOUT_SETTINGS			\
+> +	ROCKCHIP_DEVICE_SETTINGS \
+> +	"boot_targets=" BOOT_TARGETS "\0"
+> +
+> +#endif /* __GENBOOK_CM5_RK3588_H */
