@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA33FE674A4
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 05:29:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BF76E674A7
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 06:03:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDF9088BBE;
-	Fri,  1 Nov 2024 06:29:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7E7328887A;
+	Fri,  1 Nov 2024 07:02:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tfpxWn9y";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="uBLF8ALT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C18788F20; Fri,  1 Nov 2024 06:29:07 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id C6FA088DEA; Fri,  1 Nov 2024 07:02:57 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66BB388B8F
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 06:29:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 963D488360
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 07:02:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730438930; x=1731043730; i=xypron.glpk@gmx.de;
- bh=hliCwAg/PLTHZuRCxNGkruM8MmKWuzt5e50zPhlX9oY=;
+ s=s31663417; t=1730440957; x=1731045757; i=xypron.glpk@gmx.de;
+ bh=J8Vfu4CG2wWGISpjWVcRupsnbxlmhnyvbv4l4jTOHMY=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=tfpxWn9yV3/JAnXL1UOXAEb36JtQRs3qpRbZexwg16JHkim6V4Z7TWcLWiPSt5dO
- AIhwZm646MrX8JCTyet0zJZhSW5tQ4d47Mhe3rj221sHuw4ukEIyDE4p/wjo5SbEg
- RmBps+s80mekuyF5GSnHeSKZCNfNqUKh8dJCq5O7Wbw8UQpJlldzCbGwtJtkDoLp/
- drsI6/RUhVroa+SAI9G0Q7hUbc5dBq/2Dcb6FordnaO70wdcS7PjKj9aoaH51Fe0D
- YJwqIMC/xFwNUQBaQR+7ycbTiwwAwbYyyVHq12t0WfGkb2JhXJ+GSovCKY2I9BMX1
- KnL2RRJhCTIeAnoqdw==
+ b=uBLF8ALT/TMPCqQNBh3tZXu4lwscTgTk1hD+eF4yrbmR6FaalGKZHO7zRHd1iwXI
+ gjyx6HgwpBzn+JpCrgmoq2jRr1tyXZHouqVG0pqv7jHYwHOvhVq42RWiei7KLAFi6
+ 18cBOQHz4n6WqWjUkMTN+houJWKyG8OTxgsGNNLwCXYkE6VVqZdUULrIZcHuzuewq
+ O7d9O3T2iAUWuKoY7Lxd5V58Cwd73/Sip/UZzkfAcKT7pWrmKx/O0ccHuvgAFbWne
+ 5ElK2uK/SfnM/zSLcZr0ciP+BXUsovFV+PU6OA3J3KX4pQMJmnXxp68YhrQPTKDkB
+ jZhgELRzxey97c4SKA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([87.215.50.114]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M6llE-1tCoUG0RB8-0037PZ; Fri, 01
- Nov 2024 06:28:50 +0100
-Date: Fri, 01 Nov 2024 06:28:45 +0100
+Received: from [127.0.0.1] ([87.215.50.114]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MTiPv-1tGoOe1L4f-00VDTa; Fri, 01
+ Nov 2024 07:02:37 +0100
+Date: Fri, 01 Nov 2024 07:02:32 +0100
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>
 CC: U-Boot Mailing List <u-boot@lists.denx.de>,
@@ -67,28 +67,28 @@ References: <20241022200543.116343-1-raymond.mao@linaro.org>
  <CAFLszTjY=BwM8jUk_uRp-PnNu7=cXTdw0=znJwS4XDooWmNJjg@mail.gmail.com>
  <CAEfUkULBfQNz5XwWU0oY4S9tPGrYf06yByaOj-tRiua0x7WfWQ@mail.gmail.com>
  <CAFLszTijXQCcFo5k5y6G8KUYvQQOLGAYZzNe5GQkt9fpGBam1Q@mail.gmail.com>
-Message-ID: <3FB8A5D5-068D-48FE-99CD-9B0052B0870E@gmx.de>
+Message-ID: <6BCB1F10-588F-4BAB-9FED-1DBFF9273DB4@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:uCcW7lMT/hgnDkTBp6gezSF+mDkmnw5lrriqETChYZZyh8oD9Ms
- 86Fo1FeNjre2rHMInBHAQCzgasQo+e55z4Ul1cAc7Ujq0wjTJ4w6ErziJEKJf0WuV3PpCnV
- O8ZSnB9RJ5H/jBGFoi/e5hIRCgGEA0OnkA7qn71ve4tPBdYJhRIbZaTwuhmXuszUCmy4IXW
- 7NvgDYNaKK6kqVt3/rgkw==
-UI-OutboundReport: notjunk:1;M01:P0:NXp4zuitkpg=;REellBhFi9LpZBlF+O2w+qDh7vl
- NrlfkHk6cBtBpZ0f90CFLItUIf90QWr6tdSqwUEfcXX5IA4kElEDIXx2PNRPdZyhAq95mz3iN
- DuvGH9a+5iLg7py1fDjhhQXYdw7rIuajdRqSJxB03ivhz4agdZnri07N8Djc7OvcoIy2cpPZj
- DjB34ElaGtGflbG7bVXaIK97eXtj2kwMfaGpKbjvV91wKNCfvzbX6o1hNXQC1s1OTrTO39Yrg
- wcEUVqS8M9PltK4EgLsG1ixMGP3IIIilM0sm6yzJnPdz7544uILl6xmKizILjQBxEBcR8joT6
- zHHSLtzTRITwo0jo5rX2vw7Aus7qeqCqmB2Icn1eyAdnLpRsjsMupnUTYg4tMEhDyYiq4LyUd
- bhH0zwMEpv04wzTfdG90p/yoiJSsPrbly/OisweLFnUDyLB5NT6pjQJnb8gKbDrEyKLgpOeTo
- pYdT3hA2pw4kXdpcDDzNWE8mcIV/4l14b/ROxZdTBVDiUd205m5apGMU4SbM5pcGZ5hgJc4SM
- GHvMbztjWL+Yfq/VQtMzXSaHr/NTEqKOayAi3ntRj0yGiyk5Pi5885yjt4TcnfDNPH4nKyD5x
- zXJkPuLLfn2FQC8XtYe85/bjoQMOr6zVqVlNJV3TGVCJRDPlCcOF5Jr2ohGsft9f2N88C6aME
- qY548MiWMaAStIZ6atNQDBH7fbiUb2LJQ3N50ppPoYYcCRFJrmEgS237k41HKBPztGDJgECmu
- yuLyMa8anGTIFN8sOEILrQAheYj6X7y7tK1r0TGkUIcSr8X1DNc7SAh3a9fo7O2jBYa1XhDsv
- qt+dFaKUxg64VKWkZJe1z4bg==
+X-Provags-ID: V03:K1:vHi5E5BONngLjXXcvIH2/hzqlHrWJufiLac5Fhn1WiglubxBYt8
+ FhZXrmgkLSnSW18Yi8g5bwm+ZOhbZYyJWkU65POWrvG1hc1G6AlLhGqrLUJ3skIN6jz6oWf
+ 9zstPrEWr90Myolcc9ud0qlYRoTURM3yKQWS4mTpmNbp/QK55DRwhhs8ck94a+HnShlqa7U
+ WayvOgnBkJ56wIquyjKrA==
+UI-OutboundReport: notjunk:1;M01:P0:RQDQowa1xas=;Or05FKW/1lSBoj1Rk39/3tuxIgz
+ 3x6dwxJOuKub8/gABhaUP2HWUxiijVLiFHw28MhSoMKkf0bYHdC5lC+G1JANj365JHkr9/nEu
+ M80LL0sgQhpr9w1SDqBksBz6HvYshrDJ/3kXzVDa+aBEKCTErvK5CZof/UvUJ13mrD0VJS9QM
+ 9FZdnkWq8Xu4cENMzFIEyqty22iiR9IHE158RGMnwmODSRFF1lnW75GBwxMJrGKjBZHkCEldH
+ 3Th9xyYFVkM7RnatiUoXcWoT7RF4aAyS/Mk+dUbZ1hvcv3IgvubfjrIP2ksZRhyWWsAElVFUj
+ izwcHFvfcj30eqd2298aTX5FzwnyTwg9Cu84e75gIkWtgxpxmqqRyP4gn6W9CjNEDRriUWQ3x
+ J9kWgEjJTw01nvtx13KDtmKGJKUgd43tbofUIK2pPvFRMzfZ84kdu+VnpJalYVWjSyIXrCcVi
+ iLnvAxFFLT4h2OSXSj+RT2byScFY1yezPVm5bRLPDGOcp0AlG+p4za9fBRvlXS3EahlNCz2Ex
+ +nkA64mTBMLELE5cWzZ2aTUXu7Faz7MUgI6Jaj2tEo+mOistvV+tS6Q9CtI/0pmWD8zNkn0pH
+ l3mVFam2st4Hn0YpmNvIk2i6UR+yq6owU188fi4BEMBGSvVWjndRfwOb3kdTW80LzsM3klaxz
+ SbixUdpL0vzd1ybYQgdBzTR3AyASGX4bPsY+JHMiq5aBRdIkNiObwFFvBD67Ob7TEbwm6ui0H
+ vBizQ7OpWgPYzQ9OTMTr+6iatDuvgzk8w5iEpPSmx2WG+/+ncPusx5C02a0PnZxSpfidIWj3s
+ 0HCoU1+vtFlm2kGrUlURYH+Q==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -199,21 +199,21 @@ s_generic=2Edtsi
 >>> Does it make sense to add these strings? Perhaps if the property is mi=
 ssing in the DT, it should be missing in the SMBIOS table? Is 'Not Specifie=
 d' a special string in the SMBIO spec?
+>>
 
+The spec says:
 
-The correct way to handle unknown values is not to provide any string at a=
-ll=2E In the SMBIOS table a string ID number of zero indicates that the val=
-ue is unknown and dmidecode will show this correctly=2E
+"If a string field references no string, a null (0) is placed in  that str=
+ing field=2E"
 
-This is described in the SMBIOS spec=2E
-
-Please, adjust the patch accordingly=2E
+Please, remove the 'Not specified' values from the patch and do not provid=
+e any property value in the device-tree instead=2E
 
 Best regards
 
 Heinrich
 
->>
+
 >>
 >> This is not defined in the spec and actually those strings can be anyth=
 ing=2E
