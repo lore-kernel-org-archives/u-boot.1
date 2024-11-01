@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0644EE6F07D
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 18:10:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE2C6E6F07D
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 18:17:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B0C989048;
-	Fri,  1 Nov 2024 19:10:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3147B89048;
+	Fri,  1 Nov 2024 19:17:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=sebastian.reichel@collabora.com header.b="PvaHdHua";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=sebastian.reichel@collabora.com header.b="gnXZjGYB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E473889048; Fri,  1 Nov 2024 19:10:17 +0100 (CET)
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
- [136.143.188.112])
+ id 50D428902F; Fri,  1 Nov 2024 19:17:52 +0100 (CET)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6BDF8903B
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 19:10:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DB56C88A4C
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 19:17:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sebastian.reichel@collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1730484611; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1730485065; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=fc6U9jaP/FieqgjxA0mLTG3D9fKbiAHgcy+RQZqO05EneEsuK+26VZWsVUl7l2TeBdkAQqTXTExcQVl6os/Poyatal/r6ZnJc91gryFjEun5wxyvrTTQ+xZCTtCA8XlLoNiBG8P4Tn5AdtLGd8n60nHPuat7UFdpocQEK8fygxI=
+ b=mYDSRI6u3eeo7HQiNmE83QfRkD6LMrBl8p8p0RPyx5G27nUGfPX8A2ZL0T4yHrOn6sg4CTw8GYMxxsUMV7t1ZWqIckxb8/cqdPRJC5VJxvQJA9Stt1kB+CsE8UnrfL7lPhXn/Urqm6qfYUvTfHfR/FY2kxe4sMAniqu+PS0ppR4=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1730484611;
+ s=zohoarc; t=1730485065;
  h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=fvQ7dvbNGudXYQiWTseCvd8IIbXaK+srl09sM7zXUTo=; 
- b=GJ3VHzuB4pjaiUFLmIyfgxi5tFiqkS7QZ0AuFPA5gFC1kdLIE4XmksWrxHUaZ+Q+hb2LnprQDi24hmPfjC1T5pAec14MY21yqS60f+YU1Kr/7k0CPfNM2iNvVzLgyhiGZ5NC4cNcMdf6Tme+kLRHLS3xOfIPVfp8g9YH+xZoyp4=
+ bh=O2YZ87dcimYbkfj+whbZnp3aZEYrba9KFgGZ66MsAnk=; 
+ b=irTi6NDiBwq43wHn6yy54lhIApP83+xTiTkXetcGaEtt+ISUo6Eeh3whI89aVfN8Mn2rpqEvXF7XCIKBuR6siYyqbR/B2x0zqP7dWu3Bn6Lxa8TatbEoyXAN0zdTi3OOozHY5BefDzH4BWPm5YPS0+LvEXMAYIrQ32XySEQLqrk=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=collabora.com;
  spf=pass  smtp.mailfrom=sebastian.reichel@collabora.com;
  dmarc=pass header.from=<sebastian.reichel@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1730484611; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1730485065; 
  s=zohomail; d=collabora.com; i=sebastian.reichel@collabora.com;
  h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=fvQ7dvbNGudXYQiWTseCvd8IIbXaK+srl09sM7zXUTo=;
- b=PvaHdHuaz98cYPPa9AfSVHtT/cyHtoBnFW/Mv60SSE8ubd1MDWDNhM/XZfvrGXMI
- TsdxazMGa6Wbjud5ez/mU8lAy+MehuyyGyx6Hkpx06hwGFTkeWlAsCQX69v5SGyxFaU
- VUxJ/r9QIfdqiiOyTzgz4pJKWz7SqXtdKUET+cTM=
-Received: by mx.zohomail.com with SMTPS id 1730484609201135.4156588059667;
- Fri, 1 Nov 2024 11:10:09 -0700 (PDT)
+ bh=O2YZ87dcimYbkfj+whbZnp3aZEYrba9KFgGZ66MsAnk=;
+ b=gnXZjGYBKKRhX6n0WmOrDOXQ3Qg5jZo2Xtw1hcEJ6KsXJsUvVFqx9loBY/E1l0Cs
+ bf+EoPrcCCY6vA3dL3hotDVA6pNPlwmVOZgOXC0AXo4Dx4bb8zOwh1jF7zMeAXdk3YU
+ E5uJW5m95gLKYqaJtePJMWT6XV1/CfgOihjjtVpI=
+Received: by mx.zohomail.com with SMTPS id 173048506404849.696074475269825;
+ Fri, 1 Nov 2024 11:17:44 -0700 (PDT)
 Received: by mercury (Postfix, from userid 1000)
- id AFE5C10604B0; Fri, 01 Nov 2024 19:10:05 +0100 (CET)
-Date: Fri, 1 Nov 2024 19:10:05 +0100
+ id D824810604B0; Fri, 01 Nov 2024 19:17:40 +0100 (CET)
+Date: Fri, 1 Nov 2024 19:17:40 +0100
 From: Sebastian Reichel <sebastian.reichel@collabora.com>
 To: bigunclemax@gmail.com
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
  Wang Jie <dave.wang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
  u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/3] usb: tcpm: fusb302: add missing newline character
- to debug output
-Message-ID: <hw4nw77qclytkbpxlofjzx2hjyvncw4xcsf2mwcjkob2u5iwan@ln2m622kmn45>
+Subject: Re: [PATCH v1 2/3] usb: tcpm: fusb302: add support for set_vbus()
+ callback.
+Message-ID: <mlcweqrj56o53wluowoz7n6fdn4xofx5gtmh6d2ufkpqq7xq34@7qfgnsw6j4ev>
 References: <20241101103501.21432-1-bigunclemax@gmail.com>
- <20241101103501.21432-2-bigunclemax@gmail.com>
+ <20241101103501.21432-3-bigunclemax@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cecc25ghj2a7rqoc"
+ protocol="application/pgp-signature"; boundary="woheweqyax6u6fcz"
 Content-Disposition: inline
-In-Reply-To: <20241101103501.21432-2-bigunclemax@gmail.com>
+In-Reply-To: <20241101103501.21432-3-bigunclemax@gmail.com>
 X-Zoho-Virus-Status: 1
 X-Zoho-AV-Stamp: zmail-av-1.3.1/230.373.91
 X-ZohoMailClient: External
@@ -85,87 +85,166 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---cecc25ghj2a7rqoc
+--woheweqyax6u6fcz
 Content-Type: text/plain; protected-headers=v1; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v1 1/3] usb: tcpm: fusb302: add missing newline character
- to debug output
+Subject: Re: [PATCH v1 2/3] usb: tcpm: fusb302: add support for set_vbus()
+ callback.
 MIME-Version: 1.0
 
 Hi,
 
-On Fri, Nov 01, 2024 at 01:34:50PM +0300, bigunclemax@gmail.com wrote:
+On Fri, Nov 01, 2024 at 01:34:51PM +0300, bigunclemax@gmail.com wrote:
 > From: Maksim Kiselev <bigunclemax@gmail.com>
 >=20
-> Add newline character in dev_dbg end.
+> Add support for VBUS supply regulator.
+>=20
+> When our type-c port acts as a host(SRC), this regulator
+> used for control VBUS supply.
 >=20
 > Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
 > ---
+>  drivers/usb/tcpm/fusb302.c | 44 +++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 43 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/usb/tcpm/fusb302.c b/drivers/usb/tcpm/fusb302.c
+> index ee283782792..2a258d6429b 100644
+> --- a/drivers/usb/tcpm/fusb302.c
+> +++ b/drivers/usb/tcpm/fusb302.c
+> @@ -10,6 +10,7 @@
+>  #include <asm/gpio.h>
+>  #include <linux/delay.h>
+>  #include <linux/err.h>
+> +#include <power/regulator.h>
+>  #include <dm/device_compat.h>
+>  #include <usb/tcpm.h>
+>  #include "fusb302_reg.h"
+> @@ -50,10 +51,13 @@ struct fusb302_chip {
+> =20
+>  	/* port status */
+>  	bool vconn_on;
+> +	bool vbus_on;
+>  	bool vbus_present;
+>  	enum typec_cc_polarity cc_polarity;
+>  	enum typec_cc_status cc1;
+>  	enum typec_cc_status cc2;
+> +
+> +	struct udevice *vbus;
+>  };
+> =20
+>  static int fusb302_i2c_write(struct udevice *dev, u8 address, u8 data)
+> @@ -506,7 +510,28 @@ done:
+> =20
+>  static int fusb302_set_vbus(struct udevice *dev, bool on, bool charge)
+>  {
+> -	return 0;
+> +	struct fusb302_chip *chip =3D dev_get_priv(dev);
+> +	int ret =3D 0;
+> +
+> +	if (chip->vbus_on =3D=3D on) {
+> +		dev_dbg(dev, "vbus is already %s\n", on ? "On" : "Off");
+> +	} else {
+> +		if (CONFIG_IS_ENABLED(DM_REGULATOR) && chip->vbus) {
 
-Acked-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+should be enough to check for chip->vbus, since the regulator
+device should be NULL when DM_REGULATOR is disabled. If due to
+some bug its not NULL regulator_set_enable would fail gracefully
+with -ENOSYS, so that somebody can debug the problem.
+
+> +			if (on)
+> +				ret =3D regulator_set_enable(chip->vbus, true);
+> +			else
+> +				ret =3D regulator_set_enable(chip->vbus, false);
+
+regulator_set_enable(chip->vbus, on);
+
+> +			if (ret < 0) {
+> +				dev_dbg(dev, "cannot %s vbus regulator, ret=3D%d\n",
+> +					on ? "enable" : "disable", ret);
+
+dev_err()?
+
+> +				return ret;
+> +			}
+> +		}
+> +		chip->vbus_on =3D on;
+> +		dev_dbg(dev, "vbus :=3D %s\n", on ? "On" : "Off");
+> +	}
+> +
+> +	return ret;
+
+I suggest converting this to
+
+int ret;
+
+if (chip->vbus_on =3D=3D on) {
+    dev_dbg(...);
+    return 0;
+}
+
+=2E.. remaining code without extra indent ...
+
+Otherwise LGTM.
 
 -- Sebastian
 
->  drivers/usb/tcpm/fusb302.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->=20
-> diff --git a/drivers/usb/tcpm/fusb302.c b/drivers/usb/tcpm/fusb302.c
-> index fe93ff3d339..ee283782792 100644
-> --- a/drivers/usb/tcpm/fusb302.c
-> +++ b/drivers/usb/tcpm/fusb302.c
-> @@ -940,7 +940,7 @@ static int fusb302_get_src_cc_status(struct udevice *=
-dev,
->  		return ret;
+
+>  }
 > =20
->  	fusb302_i2c_read(dev, FUSB_REG_SWITCHES0, &status0);
-> -	dev_dbg(dev, "get_src_cc_status switches: 0x%0x", status0);
-> +	dev_dbg(dev, "get_src_cc_status switches: 0x%0x\n", status0);
+>  static int fusb302_pd_tx_flush(struct udevice *dev)
+> @@ -1293,6 +1318,22 @@ static int fusb302_get_connector_node(struct udevi=
+ce *dev, ofnode *connector_nod
+>  	return 0;
+>  }
 > =20
->  	/* Step 2: Set compararator volt to differentiate between Open and Rd */
->  	ret =3D fusb302_i2c_write(dev, FUSB_REG_MEASURE, rd_mda);
-> @@ -952,7 +952,7 @@ static int fusb302_get_src_cc_status(struct udevice *=
-dev,
->  	if (ret)
->  		return ret;
-> =20
-> -	dev_dbg(dev, "get_src_cc_status rd_mda status0: 0x%0x", status0);
-> +	dev_dbg(dev, "get_src_cc_status rd_mda status0: 0x%0x\n", status0);
->  	if (status0 & FUSB_REG_STATUS0_COMP) {
->  		*cc =3D TYPEC_CC_OPEN;
->  		return 0;
-> @@ -968,7 +968,7 @@ static int fusb302_get_src_cc_status(struct udevice *=
-dev,
->  	if (ret)
->  		return ret;
-> =20
-> -	dev_dbg(dev, "get_src_cc_status ra_mda status0: 0x%0x", status0);
-> +	dev_dbg(dev, "get_src_cc_status ra_mda status0: 0x%0x\n", status0);
->  	if (status0 & FUSB_REG_STATUS0_COMP)
->  		*cc =3D TYPEC_CC_RD;
->  	else
+> +static int fusb302_probe(struct udevice *dev)
+> +{
+> +	struct fusb302_chip *chip =3D dev_get_priv(dev);
+> +	int ret;
+> +
+> +	if (CONFIG_IS_ENABLED(DM_REGULATOR)) {
+> +		ret =3D device_get_supply_regulator(dev, "vbus-supply", &chip->vbus);
+> +		if (ret && ret !=3D -ENOENT) {
+> +			dev_err(dev, "Failed to get vbus-supply regulator\n");
+> +			return ret;
+> +		}
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  static struct dm_tcpm_ops fusb302_ops =3D {
+>  	.get_connector_node =3D fusb302_get_connector_node,
+>  	.init =3D fusb302_init,
+> @@ -1320,4 +1361,5 @@ U_BOOT_DRIVER(fusb302) =3D {
+>  	.of_match =3D fusb302_ids,
+>  	.ops =3D &fusb302_ops,
+>  	.priv_auto =3D sizeof(struct fusb302_chip),
+> +	.probe =3D fusb302_probe,
+>  };
 > --=20
 > 2.45.2
 >=20
 
---cecc25ghj2a7rqoc
+--woheweqyax6u6fcz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmclGXYACgkQ2O7X88g7
-+pofkw/9HPGOvkWQNJDWN7hefu7MkS1xoMzy7EnVy6AKrF4Fw3uz+xtnYhH69F1J
-UDTDafWYugVwLgLcPNX1xYcfz4gdkb3B+u4isjl2W6XiQgeXWyqu00o+3pIsr5iQ
-EZCPKDKZVye90U5vevAvexHsnSHeqS71TO271A7BAWyfoQdBvrEcpmLspi6fAVeK
-HLlSZAtVYcrlt35IWBHCTOyJSszbkJlJwTZieGUDNeA+ZUw5LmvHmUmsSvBoIWXJ
-RJFsJRZVeCjaMXlzYoJIiEsVMBWMz5GcNDpwi+tAOmRKj2RAhOMgYvZqLfuYg7sp
-022yke++Bnb4R5nmHx/reRmAUeQzTfAmyo1MTtMZ/259x3kwLy1S31RS5mbRLa0F
-caRZpnHeDaov25uVIDyVgEs4Ty05LsTHrcsm6QhGVLm6+XkdtorHeKf1vPCaPKz8
-VWAoT1asUfsXE+NaLU/8e7o22GlQadigSq3DuVVpuYTAVPmhZgHGLM31TQtJq9wW
-nEpmX0XeeZxwf1fECCq+PabDBbEuYTYF1cn3KgL3fMOSRvLF5th/QdNNcPTzDJjj
-2Tcif0mGEX7KzsRjWe+dxgn/sSd++cARsVdsagaLLyM64HAvqpuPTkCr/UVFnnu5
-wiL5/bgNOiu8vPuQQQZF/Q/V3euD6dvGpM7NoYiEWHUDAr8r2rs=
-=a9jd
+iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmclG0QACgkQ2O7X88g7
++poUeRAAoDuweSDc1TRDaUem5B1sln5aCm+zA1oqqk7fiaxS0kOY1TTlhoQiOMOe
+m2Eo2kNamU6w+2ov9bUUg84Ha6nJoCc13JnhYLRlrrMbIoeHDFlxs/SIpiqa6uEJ
+B8XqKVyFYGwpp9dUk3oUyjGvO9H94eCOcCVjTrfduRibs3NtGt/EHyFFcpTmiJP2
+Zu8F2N4ndewzcxU59M4dbnDP4xz5XUB97F/0EuHnp2ba1e9TtZD0a4kTg12iGqDA
+5eMI1Mg9f80EaITeEKKctDkg+aj8Pv+R4LNWZV7NhGeVNPI32rTfy7bjnq6C5R4H
+3OZaEoXviEs9dsLNEXsSNA/1q+59cV+lgH8VEEdJXsiq4SGtsNuOQTNH63PLamQ4
+g+ORgpuDGkKr4hM47yTGOXtCx4St+gg7xXJ9JphG2vMt6ZOfj9jrOzywSRdG0CSv
+Ipbq5URnbwmWZRrJZuWPcAgx2dP9iLB8Nt4fYAP6eMoBt5It5AtHN3ix/vW3Mipg
+D9F6W1Hperrl+Mne5XAMbjpx69XePZdH59aUObqCvbaOSL0JZPr36+RTqhqkDKrG
+QX/BVrdNfIQj3Ofrt6j+wB5Ok59B2hlq94xyo98qPsPITuoXMiKxPvo5wfooQ4Sd
+Kk4wJ6OisHvyGYUStDjxeA+DuGPcxagK1dZssZtiu6jAFmZZCiU=
+=jAeI
 -----END PGP SIGNATURE-----
 
---cecc25ghj2a7rqoc--
+--woheweqyax6u6fcz--
