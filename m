@@ -4,73 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93F9CE6F06C
-	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:34:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A1BAE6F069
+	for <u-boot@archiver.kernel.org>; Fri,  1 Nov 2024 15:34:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB6398931C;
-	Fri,  1 Nov 2024 16:34:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1D7B0892B5;
+	Fri,  1 Nov 2024 16:34:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gt03JsrQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OVG0Asq2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4A7188DF5; Fri,  1 Nov 2024 16:34:18 +0100 (CET)
+ id 49B82892E8; Fri,  1 Nov 2024 16:34:46 +0100 (CET)
 Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
  [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0030A88C4D
- for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:34:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3392D88DF5
+ for <u-boot@lists.denx.de>; Fri,  1 Nov 2024 16:34:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5c903f5bd0eso3524081a12.3
- for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:34:16 -0700 (PDT)
+ 4fb4d7f45d1cf-5cebcf96fabso788909a12.3
+ for <u-boot@lists.denx.de>; Fri, 01 Nov 2024 08:34:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730475256; x=1731080056; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730475283; x=1731080083; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MiQPsWkx+0bLhbdnaVqvXhnRKvJnTomqDQGUVt6lrv4=;
- b=Gt03JsrQz/p1QN9kwItuKiXD6YQPfKUfxjLCYnfsh/vcdB7j/a9gtku6hEjOjRAHnr
- OkhaE1h7fe4VmP0G3aPcVd6UtjfbZqvSXEg9MkcSTv/aVmMrNuw3PpnAjklL5HFQACUh
- k0Mk5rdTmJ5dOKlg/t/a42AgK7cwu9wxIdEVM=
+ bh=h8kOrrd9eGHhJERVmcNgxCgJGXY2WtE4qaI8kTGUt8Q=;
+ b=OVG0Asq23jl5x/dVjynJoDP92PQVYZ2JcrANotX+dL2iOQ/TmzsLwjajeMNSJH+Sao
+ MRNIQon0bmIutUNvV667cr/eCVUS7WW9ylIygiCSIkr/1kQ6k9q913JWSat4pSVLrbXr
+ x2ATKvM24G62KH4DNV/bxeRqQF34TdQ08MQgE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730475256; x=1731080056;
+ d=1e100.net; s=20230601; t=1730475283; x=1731080083;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MiQPsWkx+0bLhbdnaVqvXhnRKvJnTomqDQGUVt6lrv4=;
- b=dOQbPkdl5WGD+bhAKGEAX1qZZgu8zw1dYRVK6WFszCYSD5pBcCk5/KWazd6+9Q72Cc
- FkjFKIkqffA18zWBLI5yAs+/bJ+2QLzK10MfIXKJH/8UdtzhrUPkhmD8p4QvfLgKPF40
- 67hasKO2IFwhOA5MLy5UpNCNJ94eRH7pd2j+PJ9m0DjMEkcnwSxdwxM8JQj3Q0wvhltI
- qXpLN8KQY2MMnz7WuG3fVlDjo0tb4Gw96TRgCs+VrFSfa1BPWWy+BuBJkMCHCHgKl4w3
- K54rshjXpp24MgS9l6A9canDU+HAsy9CUmhrLlQAhwDNWtQrID9XHP779z8f4mSYrblU
- uvlw==
-X-Gm-Message-State: AOJu0YzR1l2k74Bgb2XPjVIhpHJ8cHV/QcJwjwH/5zhQ+KDaHqhyIzJn
- lZMmEzepIJe83w6irmB4xDX5yleTxSA0Widkrfif7Q85TtrUgsls282c3GG3KcWubLqUNxPQPSS
- CJJG+rgL7KbSkYiMKqyK160Q7MTkP8UxPRZF7
-X-Google-Smtp-Source: AGHT+IEH7ApFbTB/3Lj9cxIT+cih6ELT0J3dnyo66FRkSzKJ+xZazwHxB1yXV6CReo3Y4c1OvqgD+n3Ogja5/BskKRk=
-X-Received: by 2002:a17:907:7e84:b0:a9a:123d:3f1a with SMTP id
- a640c23a62f3a-a9e508d4af3mr633577166b.17.1730475256418; Fri, 01 Nov 2024
- 08:34:16 -0700 (PDT)
+ bh=h8kOrrd9eGHhJERVmcNgxCgJGXY2WtE4qaI8kTGUt8Q=;
+ b=Tre8NJaBEA4hU5Wsa7nNTDduBsMCCLdBy0GAZtXVvK/lbbsr8A1t2ugtwuuctvPGmV
+ esZEnWRxuzRoGKhjivHO/Y2R4pePJKJudRk5C78QJV9lc/NEPELniPBUC/tqwrQ42DdE
+ XLY84YYQG7eoS/iDxacVOINP3w0OZczpf/SQCOcBecdxRcNSPhYjxFirdIGnMAHYeEd1
+ LOk2VxRlKmsJ4BwUns+YjyAeMdVhgomlnjhPe9Q+USX1OLACYqTN6L3IRkHFzuczDzxO
+ WWC0qfE4vBpI41PV3/eNFYY2gdjF00ktoehUzg9wAg+ew5HVIhcmjiD/iK9uQ+FD5JZ6
+ 20TQ==
+X-Gm-Message-State: AOJu0YylM/+oxt1DizufRI2SP93+3uI+fK6gXUlM2AO8bTjdThYU2xPv
+ iWw3WgXktCShmFB8TU4IO86aFRZUpRrs9jhux+0GgG6J6oPuqx1giV93kwanNFx5iQ2b+GgMsYf
+ 4LAvv33MrkzXVFTYNvLTDsNmHrwoXbNgx5NjLoUqab/CeYe44Svbn
+X-Google-Smtp-Source: AGHT+IG6EYHSLITGZzKF4kilvTjsI69YUzf+HI6+NI4zcipbtt7EaEOnoFiYZiR0tzT9E0EFW+nmdn0UMXi4UpVmhqo=
+X-Received: by 2002:a17:907:7e8f:b0:a9a:183a:b84e with SMTP id
+ a640c23a62f3a-a9e50b928acmr685179466b.40.1730475282530; Fri, 01 Nov 2024
+ 08:34:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241029192222.362445-1-sjg@chromium.org>
- <20241029192222.362445-4-sjg@chromium.org>
- <20241029201400.GJ4959@bill-the-cat>
- <CAFLszTigOBUyyi9pxpnLpXwhiw5hJfGEb6QeZPh4jesc5x4Rzg@mail.gmail.com>
- <20241031181405.GX2558755@bill-the-cat>
-In-Reply-To: <20241031181405.GX2558755@bill-the-cat>
+References: <20241021155133.29557-1-sjg@chromium.org>
+ <20241021155133.29557-4-sjg@chromium.org>
+ <81b0a377-6669-46c6-9da8-c83d9758587e@kwiboo.se>
+In-Reply-To: <81b0a377-6669-46c6-9da8-c83d9758587e@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 1 Nov 2024 16:34:01 +0100
-Message-ID: <CAFLszTiT7UtseESwEJiqmX_pTG2wHSbaqN_o6NLKR5sHCSSr5w@mail.gmail.com>
-Subject: Re: [PATCH v9 03/11] sandbox: Add a -N flag to control on-host
- behaviour
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+Date: Fri, 1 Nov 2024 16:34:28 +0100
+Message-ID: <CAFLszTj0xq13UH=xvrwRv+y5PtNfpUNxvOW7kf49CyYg4g-HUw@mail.gmail.com>
+Subject: Re: [PATCH 3/3] common: Move autoprobe out to board init
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Svyatoslav <clamor95@gmail.com>, 
+ Artur Rojek <artur@conclusive.pl>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Richard Weinberger <richard@nod.at>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,57 +94,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Jonas,
 
-On Thu, 31 Oct 2024 at 19:14, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 21 Oct 2024 at 18:10, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
-> On Thu, Oct 31, 2024 at 06:52:33PM +0100, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 29 Oct 2024 at 21:14, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Oct 29, 2024 at 08:22:11PM +0100, Simon Glass wrote:
-> > >
-> > > > Sandbox is its own architecture, but sometimes we want to mimic the host
-> > > > architecture, e.g. when running an EFI app not built by U-Boot.
-> > > >
-> > > > Add a -N/--native flag which tells sandbox to reflect the architecture
-> > > > of the host.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > (no changes since v8)
-> > >
-> > > I believe Heinrich asked that you invert the logic here and add a flag
-> > > for when you need the unexpected behavior.
-> >
-> > Yes, but that is not correct, unfortunately. The expected behaviour is
-> > for CI to use the same filename for its efi apps, no matter what host
-> > architecture it is happens to be running on.
-> >
-> > The use case that Heinrich mentions seems to be broken on x86_64 now,
-> > as I mentioned on the other thread, perhaps due to a recently
-> > introduced bug in UEFI or QEMU. Just to be clear, this is not a
-> > problem with sandbox. I suspect Heinrich will figure that out at some
-> > point and then I will be able to try it too. I would also like to run
-> > it on sandbox.
-> >
-> > I hope to get an ARM machine running CI eventually, but I need to get
-> > my lab running first.
+> Hi Simon,
 >
-> I talked with Heinrich about this in private and while neither of us
-> understand why you want this behavior, we'll stop objecting to it.
+> On 2024-10-21 17:51, Simon Glass wrote:
+> > Rather than doing autoprobe within the driver model code, move it out to
+> > the board-init code. This makes it clear that it is a separate step from
+> > binding devices.
+>
+> It could probably be good to mention that after this patch the events
+> EVT_DM_POST_INIT_R/F will happen before autoprobe instead of after.
 
-OK, good.
+Yes, good point.
 
-Heinrich mentioned that the RISC-V server did not work, for some
-reason. But eventually we might have one of those.
+>
+> >
+> > For now this is always done twice, before and after relocation, but we
+> > should discuss whether it might be possible to drop the post-relocation
+> > probe.
+>
+> If you have plans to drop post-relocation probe, I suggest you first
+> look into having OF_LIVE working at pre-reloaction to speed up boot, the
+> use of fdtdec is super slow in getting parent node/offset.
 
-I know from my fiddling with 32-bit rpi that even *running* sandbox on
-ARM will be a challenge, let alone passing tests, but we'll see.
+Indeed. I keep hoping someone else will look at this.
 
-We should encourage ARM/Linux to set up an ARM runner at some point.
+>
+> >
+> > This patch also drops autoprobe from SPL. If that is needed, we could
+> > add a call in SPL.
+>
+> This patch will break a feature used by the Pine64 PineTab2 because of
+> this change, please restore autoprobe in SPL.
+>
+> The PineTab2 have a feature to power itself off when power-on happen
+> because of power cable was plugged in, for this to work it currently
+> depends on DM probe after bind works in SPL.
+
+OK. We can always make it optional later. At least with this series it
+is explicit.
+
+Regards,
+Simon
+
+>
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  common/board_f.c    |  4 ++++
+> >  common/board_r.c    |  4 ++++
+> >  drivers/core/root.c | 17 ++++++++++++++---
+> >  include/dm/root.h   | 10 ++++++++++
+> >  4 files changed, 32 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/common/board_f.c b/common/board_f.c
+> > index 8684ed71284..6564b2ac2f7 100644
+> > --- a/common/board_f.c
+> > +++ b/common/board_f.c
+> > @@ -822,6 +822,10 @@ static int initf_dm(void)
+> >       if (ret)
+> >               return ret;
+> >
+> > +     ret = dm_autoprobe();
+> > +     if (ret)
+> > +             return ret;
+> > +
+> >       if (IS_ENABLED(CONFIG_TIMER_EARLY)) {
+> >               ret = dm_timer_init();
+> >               if (ret)
+> > diff --git a/common/board_r.c b/common/board_r.c
+> > index e5f33f40643..a2948b7b55c 100644
+> > --- a/common/board_r.c
+> > +++ b/common/board_r.c
+> > @@ -243,6 +243,10 @@ static int initr_dm(void)
+> >       if (ret)
+> >               return ret;
+> >
+> > +     ret = dm_autoprobe();
+> > +     if (ret)
+> > +             return ret;
+> > +
+> >       return 0;
+> >  }
+> >  #endif
+> > diff --git a/drivers/core/root.c b/drivers/core/root.c
+> > index 2d4f078f97f..f6bda84b2b9 100644
+> > --- a/drivers/core/root.c
+> > +++ b/drivers/core/root.c
+> > @@ -281,7 +281,7 @@ void *dm_priv_to_rw(void *priv)
+> >  }
+> >  #endif
+> >
+> > -static int dm_probe_devices(struct udevice *dev)
+> > +static int dm_probe_devices_(struct udevice *dev)
+>
+> Why is this function renamed?
+
+It's not needed, since I decided on a different name for the function.
+I'll change it back.
+
+Thank you for the review on this.
+
+I am hoping Marek will chime in too!
+
+[..]
 
 Regards,
 Simon
