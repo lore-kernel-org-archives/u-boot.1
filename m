@@ -4,69 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 991BAE67805
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 16:33:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 670D0E67805
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 17:35:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2673D890D9;
-	Sat,  2 Nov 2024 17:33:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 676AD89083;
+	Sat,  2 Nov 2024 18:35:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EHS1zr53";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KodXMdgg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9DF0890D9; Sat,  2 Nov 2024 17:33:36 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id BC03189085; Sat,  2 Nov 2024 18:35:47 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9A3188F24
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 17:33:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E3D689082
+ for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 18:35:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a9abe139088so425170466b.1
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 09:33:34 -0700 (PDT)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5c903f5bd0eso5118697a12.3
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 10:35:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730565214; x=1731170014; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730568944; x=1731173744; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=g9ww2jLNUCoU4JdvIMb7yHlmCjNib92TKv2iO2dpPHA=;
- b=EHS1zr53ZaEoWMejcu1t216xj0B/kb1GMPh4x8zYhiVS1ij5mM43NKLfuhuK9MoT9B
- KSXLGCaDSKrfkWE6KSSrUhgQLiKMD8nbL3/f/YwW8NugRhHUugrbOCU0H17efI4xOx7O
- TkXgL0hwb7a1ZB2n2oR2jMoG9F+rqEE94lnZM=
+ bh=/jFCEU+LAi5cML/5JfEb6v4/kgINJu1vtQL9Z2+wuVA=;
+ b=KodXMdggnsm7HkWZXmd2yGoSrfRcMqiDijqJv1KDsX0xs5xd3jCrn2uA6tLba4dRPg
+ MtN6XUz1W1L7wTgpep0s7r+HrlCoCQ/oS6LuSvERh8mgQbJ/D8UvaEIgGsMsV1YqoBIX
+ hOqgj0tqrh1KkTnllBMNH2KKirwwfGe3j8VPA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730565214; x=1731170014;
+ d=1e100.net; s=20230601; t=1730568944; x=1731173744;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=g9ww2jLNUCoU4JdvIMb7yHlmCjNib92TKv2iO2dpPHA=;
- b=EQcxoMu6NPRy51dToH/TCk852Ty4drcado0CRFr4JhOubg2EuWrTtu1qvrNsrd2aFC
- YqAehbNVXY3b1NLXzA0feNBdQU5U4PDGfyKSgezROYWCP8pSFIpdiuNaZXBdPrZyJUwp
- 2wGEcjlCesrJy9g0ysF/ju/wGibNYk62wwJ1S6hmKeA/IhuYUinC0TUtics6iJpk5aeq
- +bn+teJL4DuR0280cRYs4Yg86hg9nwuhA4wARMDJ78XHxkCRoOV4+LFMSf96YahNdGJy
- Qy2fBuCaYggBBiPOE3wscdHrS6CntUYPYw/ggdBtmmLBGsmqVLeQ0lPWo+DAiUNdAjvL
- A/6g==
-X-Gm-Message-State: AOJu0YznMt7FSFXQ0rjmaMIy+YD4KUGWgmVWfBtShoWx3xmtBG0CcS2c
- YkUuB/4j0VtR3sriPreMRA0MU40K3GQ5H6drl2tIiYlwpXK3eCBnloFhPTxT6Di64baxi1D3+Ji
- BamoMgiHK9PptwGA/vl5V6nCqJh9pdtHvZcdxclOJl0NVO8P3ft+T
-X-Google-Smtp-Source: AGHT+IHfW2ls43DmvzRQWn/Tpg1Gfkr/GixtLc0AxYrFrY28onosT53IJ/hpC8efYQt3sDY1cjtK9rbfX54WZSzLK0c=
-X-Received: by 2002:a17:907:60d6:b0:a99:fb10:1269 with SMTP id
- a640c23a62f3a-a9de5ce4ad3mr2854733766b.17.1730565214198; Sat, 02 Nov 2024
- 09:33:34 -0700 (PDT)
+ bh=/jFCEU+LAi5cML/5JfEb6v4/kgINJu1vtQL9Z2+wuVA=;
+ b=cxIP7wc1/iyti17HXjLDaWe2V6l8n/msyCsI/swLbAABwragWt7jmKVY3WdDWooWyY
+ IhadaLYKUIMUts3qVo7jBrX5p/tYhZfZZGFMG7CZUK90ML3zeqnxvsS+fz6vIAR1pZ51
+ D7rOHrAISCsZ6Kl08X4vDrNUHJ3qFp49eV4pD0PCnrJaDUazrQfsJY4bUccrISM2hUvK
+ fGVUk5SQcxk5fwhWhUTdfpaOT/E4y1zmlWgdSZidl3ub+m8TG3/1Nj7e0G6t6wmwJ1Ky
+ zl5PnHTgCuPs6S2m7jfM2LynZlF+0CQhsEPp5mkoqRnQJU50pzVHUbi8qqUEaa44BzPs
+ Qhgw==
+X-Gm-Message-State: AOJu0YyCS/MEXJIttaKAgzb6M1YfZBJUwWyUQvMo5OvMhIrlVUTwQOLs
+ chxoysvU4HUotnh/JQ/PjX4f2ELGsy9XpQJ52qnMau8D0r9PGFH2SaXwhDVTe01TLEnKu+rsjB3
+ B9UPmDUrNDJpiFl3n5I+3rs7Zrl+iRkZOcjCCCQahwBEYpA942rjy
+X-Google-Smtp-Source: AGHT+IHDNn8cc/NGCRNxqQRPxXI2W3WGGedC/pLX+ZTXzjkwmni2P0kPFbG7dL1ffXzq29hBr5poBeBwOM2rUhPy0Ms=
+X-Received: by 2002:a17:907:318e:b0:a9a:478:2ee3 with SMTP id
+ a640c23a62f3a-a9e50b57ba0mr1096357466b.40.1730568943724; Sat, 02 Nov 2024
+ 10:35:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241101133848.2278151-1-andreas.gnau@iopsys.eu>
-In-Reply-To: <20241101133848.2278151-1-andreas.gnau@iopsys.eu>
+References: <20241017232531.726559-1-sjg@chromium.org>
+ <20241017232531.726559-6-sjg@chromium.org>
+In-Reply-To: <20241017232531.726559-6-sjg@chromium.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 2 Nov 2024 10:33:20 -0600
-Message-ID: <CAFLszTiJzLmm2MjbqphexrtmBNMLWB2OfveC_0mdbY_4gkP7AQ@mail.gmail.com>
-Subject: Re: [PATCH] fdt: Update fdtcontroladdr if fdt_blob changes
-To: Andreas Gnau <andreas.gnau@iopsys.eu>
-Cc: u-boot@lists.denx.de, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+Date: Sat, 2 Nov 2024 11:35:31 -0600
+Message-ID: <CAFLszTihCzaut1MCtQJ=LTzYrhwyT+3On8hM2GMgSd0g6dqKBw@mail.gmail.com>
+Subject: Re: [PATCH v4 5/8] sunxi: Move to bootstd
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+ Michal Simek <michal.simek@amd.com>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,53 +93,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andreas,
+Hi Andre,
 
-On Fri, 1 Nov 2024 at 14:40, Andreas Gnau <andreas.gnau@iopsys.eu> wrote:
+On Thu, 17 Oct 2024 at 17:25, Simon Glass <sjg@chromium.org> wrote:
 >
-> When a different FDT blob is chosen via fdtdec_resetup /
-> board_fit_config_name_match, update the fdtcontroladdr environment
-> variable accordingly. This fixes an issue where fdtcontroladdr would
-> still point to the previously used FDT blob.
+> Drop support for distroboot and move to using bootstd instead.
 >
-> Signed-off-by: Andreas Gnau <andreas.gnau@iopsys.eu>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
->  lib/fdtdec.c | 2 ++
->  1 file changed, 2 insertions(+)
+> (no changes since v2)
 >
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> index b06559880296..e3534b647556 100644
-> --- a/lib/fdtdec.c
-> +++ b/lib/fdtdec.c
-> @@ -1759,6 +1759,8 @@ int fdtdec_resetup(int *rescan)
+> Changes in v2:
+> - Convert the other DISTRO_DEFAULTS in the Kconfig too
 >
->                 *rescan = 1;
->                 gd->fdt_blob = fdt_blob;
-> +               env_set_hex("fdtcontroladdr",
-> +                           (unsigned long)map_to_sysmem(gd->fdt_blob));
->                 return fdtdec_prepare_fdt(fdt_blob);
->         }
->
-> --
-> 2.47.0
->
+>  arch/arm/Kconfig | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
 
-At least as it is documented in doc/develop/devicetree/control.rst
-this variable is used to set the address of the FDT initially, rather
-than reflecting its value after that.
-
-I suggest instead that you add something like:
-
-fdt addr -ce <varname>
-
-to set an environment variable to the current control-FDT address
-
-For your commit message, I sort-of understand the problem you are
-seeing, but not why you want the control FDT in an env var. Can you
-add that info too, please?
-
-Also please consider how to test your change.
+Could this series be applied, please?
 
 Regards,
 Simon
