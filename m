@@ -4,59 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A56CFE67805
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 16:33:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C9B9E67807
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 16:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 547A38917E;
-	Sat,  2 Nov 2024 17:33:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id BE538890F2;
+	Sat,  2 Nov 2024 17:33:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="J0/GWaF0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nem2/NaO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6602B892A2; Sat,  2 Nov 2024 17:33:10 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 960E6892DE; Sat,  2 Nov 2024 17:33:21 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67821890F2
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 17:33:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 30D678919F
+ for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 17:33:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-107-023.46.114.pool.telefonica.de
- [46.114.107.23])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id E88A3408D6; 
- Sat,  2 Nov 2024 16:33:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1730565186;
- bh=8faITywa6drQh3z2dzbfYqArxyKTLtT0QEAoAlCKZuY=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=J0/GWaF0Drw83OtFm4wRdCWwGf0rTyFi1HdZk+d2brdP9dI+oP8hlKtzh7/W7x1g0
- CLjQQZXtB1bIRK7Rgs4GWWMWHJCPi9rhis3HAQ1J/aOFeqiastH7+qtSbJYUJatJPS
- L0Ncd8DhUc6DnlCIlNc7SnKru3N/dTMQI21H8r+Q7LTfbQ/SFvVMOhtmOP7oiAZ0IE
- z76JZPgalagaQe5IwdF0SBNryeIPJOcJVoNp+9BjRhA8zg37Hc+BN0glULAmeEoSul
- VUZNwZ05fBScdPilUEWOhJiJnDiFz7uydIoqbJYZRJ+Zx028krOZRV+3PDNQu7ffwK
- bG+4gJEKXITOA==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Hugo Cornelis <hugo.cornelis@essensium.com>,
- Simon Glass <sjg@chromium.org>, Paul-Erwan Rio <paulerwan.rio@gmail.com>,
- Alexander Kochetkov <al.kochet@gmail.com>,
- Alexander Dahl <ada@thorsis.com>,
- Philippe Reynes <philippe.reynes@softathome.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] tools: use cryptographically safe RNG
-Date: Sat,  2 Nov 2024 17:32:59 +0100
-Message-ID: <20241102163259.305802-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a99ebb390a5so721987666b.1
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 09:33:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1730565196; x=1731169996; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IQn0eY1RQvWzLL5Q1dexEcQ39SkRyv9vPf15g/5Wgok=;
+ b=nem2/NaO+ljNGICRHJZghxpwO042quLeZNxUtiOfXL6oKc/y18veE92tO7UNDO+UOa
+ X8HscTOMsdOSX6bUCR06fs/eryDv8RmutEaIBk8mhwMXh8qugWO3yiNtbozZKF13mZEW
+ P0ejwRgO/DmjEssl1rVrBUkRMyWDKei/uF3bM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730565196; x=1731169996;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IQn0eY1RQvWzLL5Q1dexEcQ39SkRyv9vPf15g/5Wgok=;
+ b=m9KgsUNJqjziwLwucsPGJQzMfnXAITkQlk+Iw6jG+3n7acbbKvuS6GWUj/PrkauwQv
+ tlS96kbAn/2cbQX/qOE/2gZ41sorOIcIjwIFR41nwsZR6oDXHy1Y6m+NF5OA6xAOmUmy
+ UymX52LdaUvekcz6i/jXFjkragE1XreQC/x1bPfEQfyztNvIJcWAH+Vxpui0nYPqFsWx
+ cfbK1Fz1p+CQ3SL2FrcugoAI3+QoYfWZABsV+BZLaBRNdmQc+S8hsEn/E1c48V0qJ4+d
+ Juj1BAY5JsZqrYngjmg2EykxIBwsDPiHBdkN35om+G1m4QiqA20FJtrgsT607CuIx6j2
+ doRQ==
+X-Gm-Message-State: AOJu0YxSxxxfCXRk/Sz7kC2e1ZOgEofrXfNaFVwjo4r63EFr7qibmMWn
+ WZEET3d+N0x7jX+fiVZthBY1GcD6YRM47wQyHc9i1cJg+iDifWZTvi6xjssbAkd9Djg82/bwhL3
+ VRTu18mBTfYuf1zl8ZU+EWajxfN33s52p9K3z
+X-Google-Smtp-Source: AGHT+IHEfgy01Pr8090WH1VvMOlvf6SbMAz0bY50DVwG6lfc5wIk8C66u0qoqawP4XbiYtLDuv86m+/JYH/DEnj6z18=
+X-Received: by 2002:a17:907:9444:b0:a99:f722:2dde with SMTP id
+ a640c23a62f3a-a9e652a3f1amr682212966b.1.1730565196602; Sat, 02 Nov 2024
+ 09:33:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241026120252.865215-1-sjg@chromium.org>
+ <20241026223346.GI4959@bill-the-cat>
+ <CAFLszTg-Lr3uWu41YX1z=JTbBbiT8Gh2oydLHpq5dtyZbRUtKg@mail.gmail.com>
+ <20241027145625.GJ4959@bill-the-cat>
+ <CAFLszTikk2GmY0PNc=JZUAsb-SiYSbheAKaOa_msTBVLpBMueA@mail.gmail.com>
+ <20241101162644.GP3600562@bill-the-cat>
+In-Reply-To: <20241101162644.GP3600562@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 2 Nov 2024 10:33:04 -0600
+Message-ID: <CAFLszTh57pYQYW9KbfG+XkYC6VP07dn68R90MekMFKgBorWsEw@mail.gmail.com>
+Subject: Re: [PATCH v2] sandbox: Add a build without CMDLINE
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,69 +93,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The PRNG implementing the random() function only has 2^31 states and
-therefore is unsafe to use for cryptography. Use arc4random() instead.
+Hi Tom,
 
-Fixes: cc34f04efd63 ("tools: image-host.c: use random instead of rand")
-Addresses-Coverity-ID: 312953 Calling risky function
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- tools/image-host.c | 35 +++--------------------------------
- 1 file changed, 3 insertions(+), 32 deletions(-)
+On Fri, 1 Nov 2024 at 17:26, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Nov 01, 2024 at 04:38:26PM +0100, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Sun, 27 Oct 2024 at 15:56, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sun, Oct 27, 2024 at 03:52:02PM +0100, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Sun, 27 Oct 2024 at 00:33, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Sat, Oct 26, 2024 at 02:02:49PM +0200, Simon Glass wrote:
+> > > > >
+> > > > > > Something this breaks, so add a build to keep it working. Since sandbox
+> > > > > > enables a lot of options, it is a good board to use. The new config is
+> > > > > > created simply by copying the existing sandbox and turning off CMDLINE
+> > > > > >
+> > > > > > Once we have tests for non-CMDLINE operation, this can be adjusted to
+> > > > > > run those tests.
+> > > > > >
+> > > > > > Create a new build which will be picked up by CI. Update the maintainer
+> > > > > > entry as well.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > >
+> > > > > > Changes in v2:
+> > > > > > - Create a new build instead of messing with CI
+> > > > > >
+> > > > > >  MAINTAINERS                         |   1 +
+> > > > > >  configs/sandbox_nocmdline_defconfig | 365 ++++++++++++++++++++++++++++
+> > > > > >  2 files changed, 366 insertions(+)
+> > > > > >  create mode 100644 configs/sandbox_nocmdline_defconfig
+> > > > >
+> > > > > Please use the #include mechanism instead of a full config that will
+> > > > > also now have to be kept in sync.
+> > > >
+> > > > Hmmm we still haven't come up with a way to deal with the #include
+> > > > mechanism in buildman. I've forgotten where it got to, or even what
+> > > > the problem was?
+> > >
+> > > I assume this is related to the issue I filed? Among the problems are
+> > > that buildman doesn't "know" about the architecture for example in time
+> > > and so thinks everything is sandbox (since that's the default). That
+> > > won't be an issue for your use case here (we have a number of defconfigs
+> > > today that work around this issue by setting CONFIG_ARM=y and then a few
+> > > other options too, so that the resulting build ends up correct).
+> >
+> > Yes...OK so I think I understand. If we are happy with the '#include'
+> > scheme then I believe it would be easy enough to implement in
+> > buildman. As Caleb mentions, it could likely run the pre-processor
+> > first, or just process the #includes (which I prefer).
+> >
+> > Is the '#include' in defconfigs documented somewhere in Linux or
+> > U-Boot? I really had no idea about this until you mentioned it.
+>
+> It should be documented somewhere too, yes. But you did review the
+> original in 2027e99e61aa :)
 
-diff --git a/tools/image-host.c b/tools/image-host.c
-index 5e01b853c50..e24e053825b 100644
---- a/tools/image-host.c
-+++ b/tools/image-host.c
-@@ -364,36 +364,6 @@ static int fit_image_read_key_iv_data(const char *keydir, const char *key_iv_nam
- 	return ret;
- }
- 
--static int get_random_data(void *data, int size)
--{
--	unsigned char *tmp = data;
--	struct timespec date;
--	int i, ret;
--
--	if (!tmp) {
--		fprintf(stderr, "%s: pointer data is NULL\n", __func__);
--		ret = -1;
--		goto out;
--	}
--
--	ret = clock_gettime(CLOCK_MONOTONIC, &date);
--	if (ret) {
--		fprintf(stderr, "%s: clock_gettime has failed (%s)\n", __func__,
--			strerror(errno));
--		goto out;
--	}
--
--	srandom(date.tv_nsec);
--
--	for (i = 0; i < size; i++) {
--		*tmp = random() & 0xff;
--		tmp++;
--	}
--
-- out:
--	return ret;
--}
--
- static int fit_image_setup_cipher(struct image_cipher_info *info,
- 				  const char *keydir, void *fit,
- 				  const char *image_name, int image_noffset,
-@@ -465,8 +435,9 @@ static int fit_image_setup_cipher(struct image_cipher_info *info,
- 		if (ret < 0)
- 			goto out;
- 	} else {
--		/* Generate an ramdom IV */
--		ret = get_random_data((void *)info->iv, info->cipher->iv_len);
-+		/* Generate a random IV */
-+		arc4random_buf((void *)info->iv, info->cipher->iv_len);
-+		ret = 0;
- 	}
- 
-  out:
--- 
-2.45.2
+Yes, although my question was never addressed [1]
 
+Regards,
+Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20230829221457.101469-2-afd@ti.com/
