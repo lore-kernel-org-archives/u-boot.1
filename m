@@ -4,86 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA5DE67819
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 23:53:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11A61E67816
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 23:58:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79FC588FFC;
-	Sun,  3 Nov 2024 00:53:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7912B89080;
+	Sun,  3 Nov 2024 00:58:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p5NLuGCq";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="syivnOzE";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="YgNwXXPn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 752D188F50; Sun,  3 Nov 2024 00:53:27 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7206C8908D; Sun,  3 Nov 2024 00:58:11 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 502B58901D
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 00:53:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3681988F50
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 00:58:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7b161fa1c7bso228582485a.0
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 16:53:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730591604; x=1731196404; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FiQk/aX42jOurJfgKaCQ0Uk24vgjzrgaeNUSqefDsrk=;
- b=p5NLuGCqA0iwuo6tIM+lMqPZubpx8jWBq6vXaNozr1CdXaey57dU3wndhH7UjD5QEk
- EDtE7mtxCWn3rmxL9ynQycP3VW03eAQNU7Kvx58hSrX1BtpNtgCtQTTygacnTFpursjG
- kIr5uD/TFQrcS+HOjUGYm0qKTic9mGG2f9Tts=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730591604; x=1731196404;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FiQk/aX42jOurJfgKaCQ0Uk24vgjzrgaeNUSqefDsrk=;
- b=SDpg+/KC967uEIGCR2WvJUMrxZIGMuIMcgj4QhVhY4Eoy1eNtMBO9vTAh+PhtpiA8h
- SOfhrrpwKbKi36oreVzeTm1QWiQwx9D8VMvKz/epB0zOfxBha8SVcJUZmVsMGvcTInnE
- Tpmv0tEDy0rcTRdX4Z2cdbJF/S4e15DMqmsHMxnibEYGWD4ZrrzkF7QsrtPU24LCrW4g
- DLeNADPamGjc4gfTqsNvjJW0g5/4/R8OLKKPJA7ew1Tvq69Bi1MIyANWlsxyXWwL6PIi
- S7WPxaxLOMdvcvyl4t41BscoFLU823SVSre0VFfwYgqgWf7hKJpya5iJW4/zV0VBLCqd
- m1nw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQ8svv/RXlH2wkEmgYsNm/zW1bfT8qHVw/1rK860mtB1J9pJhEcfmBAjP9xrPPFO1+YukhlyM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxcbgjcCUIcXcUmjd9svu0Ivezy8UprZn0fn3CDeWsOlygNfq6a
- DNk3Cd1ZstYL2qmGNzTDz0YOmBk0Q3cmxVGDdtC60EUMIzEfigYduXVaHPlu4Sk=
-X-Google-Smtp-Source: AGHT+IGTlejNPXnPD9c2LW3lZ4EMFbvf7B/IEwzpTQrLbpFqe0rNjuFVDnaSmW4YSx9HM9gD3XzF7Q==
-X-Received: by 2002:a05:620a:244f:b0:7b1:35bc:ae0b with SMTP id
- af79cd13be357-7b193f5b8e0mr4063722085a.57.1730591604164; 
- Sat, 02 Nov 2024 16:53:24 -0700 (PDT)
-Received: from bill-the-cat ([189.177.125.149])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b2f3a858a2sm297953385a.115.2024.11.02.16.53.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 16:53:23 -0700 (PDT)
-Date: Sat, 2 Nov 2024 17:53:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Richard Weinberger <richard@nod.at>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 0/5] fs: ext4: implement opendir, readdir, closedir
-Message-ID: <20241102235319.GY3600562@bill-the-cat>
-References: <20241026064048.370062-1-heinrich.schuchardt@canonical.com>
- <173058992364.1044919.1983318156372551084.b4-ty@konsulko.com>
- <CAOf5uw=292JNb1g03_Hcgav4zyUckh3R1_iphHnynHVeqC82Jw@mail.gmail.com>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4XgvnD6XB0z9scH;
+ Sun,  3 Nov 2024 00:58:08 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1730591888;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+hmoDeqbRhL0xtcz3C1GD8D/d+G26FUR9GW9zoL6j/A=;
+ b=syivnOzEs9r4k27GO88FyWlnwHYDB+W/71Gum7Y3mA05aKr/1n2ZWaP3w50uQ5vYldLiuF
+ WhqaUQC//S0JulnfQkcK0XZQGDFNMTfh4Hi5oqygunp8LxgyzbdaeXHKM7AQ7aWA4OUs9r
+ QRUwkc/k38uh6Qk+fXanceJD52wzikrxs96Y+mslYddieLqWi+YYqoIHskgRg9Gxe/0mwr
+ i9zi5J+bjjuc48vtkaj95rU+6vmmHPGglXoHdbX3bGktt5PVJ0RNqaKJcUlnswYAG7VeO7
+ VY227ztv/pDY35MHLR8opmBs98B+xb6UhjqfYdDXAjNj3X2sE4dm4PvI8rjmHg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1730591887;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+hmoDeqbRhL0xtcz3C1GD8D/d+G26FUR9GW9zoL6j/A=;
+ b=YgNwXXPnwlPeHxSNUjYXA7iL2Z+T+0yQFtcMzjK3xWsLuxMSqC8uWA3/qoPhpxsaB9Z9xq
+ Lic51BWh2oMk8aIstLxfnFaiAE02L4tNLIMV4nJa/Kw4gXxbp9JuQEBkSnzB6J47IS5iJh
+ 6NSaDNgPfqCnBUylSbktOptWvT2Jx7nz9Opod1VJzWT6vVxC9JBXBoO78xrV+lCJW+QvXC
+ WbkvLhJxqKUXorPZSL//UJODUgt2vbPrXklkCZy7E8ZvXp6pyBgB6xglj9ovn+epB2pZBq
+ YFrLdx8anMbmWtcOjfVDUTT+8D4LOixP3PtgwIG7GmaBEKNM/t3qDzDIjtrDTQ==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ William Zhang <william.zhang@broadcom.com>
+Subject: [PATCH] mtd: spi-nor: Fix integer overflow in stacked memories support
+Date: Sun,  3 Nov 2024 00:57:31 +0100
+Message-ID: <20241102235754.74661-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="x4PET3ETXlgp9UuR"
-Content-Disposition: inline
-In-Reply-To: <CAOf5uw=292JNb1g03_Hcgav4zyUckh3R1_iphHnynHVeqC82Jw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 4jiqhpbhj7fe89opp14f1ftucjj7go98
+X-MBO-RS-ID: 2d37b731f866393a7ef
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,94 +90,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
+adds new SPI bus flags, but also introduces a completely new set of
+SPI bus flags in another location. The existing flags field is type
+u8, while the new separate flags are BIT(8) and higher. Use of those
+new flags triggers integer overflow.
 
---x4PET3ETXlgp9UuR
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Drop the newly introduced flags which were never used anywhere in the
+code. Move the one remaining flag which was used in the correct place
+and change it from BIT(8) to BIT(6) so it fits the u8 flags.
 
-On Sun, Nov 03, 2024 at 12:36:38AM +0100, Michael Nazzareno Trimarchi wrote:
-> Hi Tom
->=20
-> On Sun, Nov 3, 2024 at 12:26=E2=80=AFAM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Sat, 26 Oct 2024 08:40:43 +0200, Heinrich Schuchardt wrote:
-> >
-> > > With this series opendir, readdir, closedir are implemented for ext4.
-> > > These functions are needed for the UEFI sub-system to interact with
-> > > the ext4 file system.
-> > >
-> > > To reduce code growth the functions are reused to implement the ls
-> > > command for ext4.
-> > >
-> > > [...]
-> >
-> > Applied to local tree/v2-tidy-test-dir, thanks!
-> >
-> Am I sleeping?
+Fixes: 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
+Addresses-Coverity-ID: 510804 Extra high-order bits
+Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: "Cédric Le Goater" <clg@kaod.org>
+Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: William Zhang <william.zhang@broadcom.com>
+---
+Maybe we should revert the whole stacked patchset until it is fixed properly ?
+---
+ drivers/spi/zynq_qspi.c    | 2 +-
+ drivers/spi/zynqmp_gqspi.c | 6 +++---
+ include/spi.h              | 8 ++------
+ 3 files changed, 6 insertions(+), 10 deletions(-)
 
-=2E.. I always forget b4 compares with checked out branch, that should
-have been master.
+diff --git a/drivers/spi/zynq_qspi.c b/drivers/spi/zynq_qspi.c
+index 4aad3248d9e..e43dbb40c4a 100644
+--- a/drivers/spi/zynq_qspi.c
++++ b/drivers/spi/zynq_qspi.c
+@@ -813,7 +813,7 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
+ 
+ 	priv->is_parallel = false;
+ 	priv->is_stacked = false;
+-	slave->flags &= ~SPI_XFER_MASK;
++	slave->flags &= ~SPI_XFER_LOWER;
+ 	spi_release_bus(slave);
+ 
+ 	return 0;
+diff --git a/drivers/spi/zynqmp_gqspi.c b/drivers/spi/zynqmp_gqspi.c
+index 1d19b2606c5..4251bf28cd3 100644
+--- a/drivers/spi/zynqmp_gqspi.c
++++ b/drivers/spi/zynqmp_gqspi.c
+@@ -870,8 +870,8 @@ static int zynqmp_qspi_exec_op(struct spi_slave *slave,
+ 	priv->bus = 0;
+ 
+ 	if (priv->is_parallel) {
+-		if (slave->flags & SPI_XFER_MASK)
+-			priv->bus = (slave->flags & SPI_XFER_MASK) >> 8;
++		if (slave->flags & SPI_XFER_LOWER)
++			priv->bus = 1;
+ 		if (zynqmp_qspi_update_stripe(op))
+ 			priv->stripe = 1;
+ 	}
+@@ -890,7 +890,7 @@ static int zynqmp_qspi_exec_op(struct spi_slave *slave,
+ 	zynqmp_qspi_chipselect(priv, 0);
+ 
+ 	priv->is_parallel = false;
+-	slave->flags &= ~SPI_XFER_MASK;
++	slave->flags &= ~SPI_XFER_LOWER;
+ 
+ 	return ret;
+ }
+diff --git a/include/spi.h b/include/spi.h
+index 3a92d02f215..6944773b596 100644
+--- a/include/spi.h
++++ b/include/spi.h
+@@ -41,12 +41,6 @@
+ #define SPI_3BYTE_MODE 0x0
+ #define SPI_4BYTE_MODE 0x1
+ 
+-/* SPI transfer flags */
+-#define SPI_XFER_STRIPE	(1 << 6)
+-#define SPI_XFER_MASK	(3 << 8)
+-#define SPI_XFER_LOWER	(1 << 8)
+-#define SPI_XFER_UPPER	(2 << 8)
+-
+ /* Max no. of CS supported per spi device */
+ #define SPI_CS_CNT_MAX	2
+ 
+@@ -169,6 +163,8 @@ struct spi_slave {
+ #define SPI_XFER_ONCE		(SPI_XFER_BEGIN | SPI_XFER_END)
+ #define SPI_XFER_U_PAGE		BIT(4)
+ #define SPI_XFER_STACKED	BIT(5)
++#define SPI_XFER_LOWER		BIT(6)
++
+ 	/*
+ 	 * Flag indicating that the spi-controller has multi chip select
+ 	 * capability and can assert/de-assert more than one chip select
+-- 
+2.45.2
 
-> int ext4fs_opendir(const char *dirname, struct fs_dir_stream **dirsp) {
->     struct ext4_dir_stream *dirs =3D NULL;
->     struct ext2fs_node *dir =3D NULL;
->     int ret;
->=20
->     *dirsp =3D NULL;
->=20
->     dirs =3D calloc(1, sizeof(struct ext4_dir_stream));
->     if (!dirs)
->         return -ENOMEM;
->=20
->     dirs->dirname =3D strdup(dirname);
->     if (!dirs->dirname) {
->         free(dirs);
->         return -ENOMEM;
->     }
->=20
->     ret =3D ext4fs_find_file(dirname, &ext4fs_root->diropen, &dir,
-> FILETYPE_DIRECTORY);
->=20
->     if (ret =3D=3D 1) {
->         ret =3D 0;
->         *dirsp =3D (struct fs_dir_stream *)dirs;
->     } else {
->         ret =3D -ENOENT;
->         free(dirs->dirname);
->         free(dirs);
->     }
->=20
->     if (dir)
->         ext4fs_free_node(dir, &ext4fs_root->diropen);
->=20
->     return ret;
-> }
->=20
-> Should not be like this?
-
-Please elaborate?
-
---=20
-Tom
-
---x4PET3ETXlgp9UuR
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcmu2cACgkQFHw5/5Y0
-tyw8Igv/XshBH+oox4zUplQREoGa0Px5rnlzbS8zS5Usrl5AcnSFWyAuLhh4q4Jb
-g2+BwrHocroXvTzXWSS0CMozgqKt8Hunu+WaAfCzZFxGtoRuw74uIYxk8ffP1LA7
-F04JCmHiYwryhjhWJqumcHdTFh/S2SJaQ48s6Z1zcvWLUxXQXBNOg6OjByXNIwAd
-a/fsrxG0W18mwJKTd/nZZ0yGUKMwBHp6QDd/QNxPpyYGLiOCXs/jc1VGtREkKbGH
-+Mwo38fhI7SYfh6SJ0tUx2OZJm20RX76/7s19jt/rLocvYNUD0uNg2098vGT9p+M
-WMMDlObrRWkoBIvkKVSzItr18Gd5EEFNV8Ct+n8CXC4IUU3wmY+6IJBKHRs+fxoy
-HFElX62T1qp0aqydn8D/8i5dUe5eWzlfQYniZ5MLZY/4g/hu1iGN14U/01ht7YnC
-IpyQmZgUx4Vpd2Hm5BaCDVX2VC/9zaiyBgoRrgPTQR/QahyEu1RUb9ntT6uubLjg
-zFusJye6
-=a6Sr
------END PGP SIGNATURE-----
-
---x4PET3ETXlgp9UuR--
