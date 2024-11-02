@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A53E677E8
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 17:50:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12A83E67805
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 19:36:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E1A3890B9;
-	Sat,  2 Nov 2024 18:50:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4BBB988FD6;
+	Sat,  2 Nov 2024 20:36:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BtRd9C4l";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U8Zqfq6a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E231E890B9; Sat,  2 Nov 2024 18:50:06 +0100 (CET)
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
+ id 92BE388B0B; Sat,  2 Nov 2024 20:36:24 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92BA089083
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 18:50:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 887EB8901D
+ for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 20:36:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-720d14c8dbfso1599895b3a.0
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 10:50:04 -0700 (PDT)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b15467f383so222916085a.3
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 12:36:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730569802; x=1731174602; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730576181; x=1731180981; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gyBTluX2o3v7iq1C01E3X+/axgcNC05wx5GKq5cn7IU=;
- b=BtRd9C4lVX4XeFfwYKhlNGQflz/duVomYvln3AjOHHhMV3mFYDPg9YHlQQJO50ZFl8
- OY6TOX04Wc37SE/DTSvHl0gxrHocJPBcMJzxVOH6ZvxY4eJqDm9+/kvEW+vTp9bz4zfm
- RAmtaCh1I5jCKuCZKxfTb95lNYDoYNo1eLWWM=
+ bh=8YMsP+9cGgf3k/P0Y42Eo/RiI9pBEX+/XPa59EuRgrg=;
+ b=U8Zqfq6ajH6IpVdnf97BGwwihFyQFWcvBBmQOcuRp/qfo7xu6PNZKYgQeZ7J5bxmOC
+ JBVCNLNed7nzD5RB2KAD4Ze4D+THzLTFl41TtxNmxGvxkHe1y2Kcxlk5C4PbZAbGiPY7
+ UrC3ne4Fh2FhhXUptmFi5QogwwXHYhMagdpKM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730569802; x=1731174602;
+ d=1e100.net; s=20230601; t=1730576181; x=1731180981;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gyBTluX2o3v7iq1C01E3X+/axgcNC05wx5GKq5cn7IU=;
- b=Gh/cyghA9hFmCiHtZU4qIL9UttWE8Q6w481oVR++ByEOU8XmYJ77Fkko5m9ZLToFal
- 9auW5b3ygnWh4BzMSKxtL7oIPE5cROxRzXaw36VNfCSfuErH2+FSfZbmhce775hwVqqA
- c6i61+G7XzP3aPI3jtRXoie3ioAn9ODZHDDOfF+zViY2M8Qa4qozY8A4MFAqxem0JKo8
- 1XbwgYvb11et7GYekJXLjapz04m56meDdSzL2UC6XeujqwIuPnxRO0W7RnMG5aPQBtjk
- ie7xYggk9j6BBP6EPbalalAGhdLmyCXTfC5AtPApbkhpmq7QQUV9npRfRJyvYET7vVnm
- dPUg==
-X-Gm-Message-State: AOJu0YzLXJcafxm0BnQbC72iF8YGIXVCETf66bcIcO+FoaFkS+8aWu/+
- WrFNSKCs7Wqvh8UD4d2qSW1TOC8WIVC+b0EQGtHZ6vyC8pkeRc2sPVaQyVmhz/3dAlcy/Gq4/ah
- SqykJ
-X-Google-Smtp-Source: AGHT+IHXuB9NIXAgTDdEEvzpjlgfMXh94wWm8zA2yzP9xtUYKCPk22uld4+SMH8V12T3+/Fnhs93Sg==
-X-Received: by 2002:a05:6a00:1817:b0:71e:5b92:b036 with SMTP id
- d2e1a72fcca58-720b9db47b8mr15427134b3a.22.1730569802469; 
- Sat, 02 Nov 2024 10:50:02 -0700 (PDT)
-Received: from chromium.org ([205.220.129.22])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-720bc1e5cbesm4402403b3a.61.2024.11.02.10.49.53
+ bh=8YMsP+9cGgf3k/P0Y42Eo/RiI9pBEX+/XPa59EuRgrg=;
+ b=g2i7pCIy5yBrfIGexdToZ1ElDaeZ17HwRcubhjgthrktZ0Htai1r6PnvLtGIN1acGk
+ YrKddJs4c0NE2Sk2LX2gcCO+3LbNhJLNmZLHJvxa4l1SvgPOQP+GbOyCkKxMRqHdeG1P
+ 9y6QUmo0nmGr9rwW88GW3ZmvU/P6NwlgZrGYVwPiOl1zaanbwG9yW/BLZouwTlF/grJn
+ ugHZ+lcN23VIGKtyGuO70kfyCMqEJmva8dFuPaHkaoYXf1PiSXlqFDWhEo5DnbQQrtac
+ Xj1Q2PRB4mzK0uvZ7KeJ5MeahfjRrj/YEWw2L6rM0txOy+LlW+xLJ6wBpUnjx0sMcT2i
+ Wrqw==
+X-Gm-Message-State: AOJu0YwP1DJxsGdCivCopsgWhnSCz/dMvfT1kosv96NA0Kbxpw3dIAOE
+ q8CLh+alY6FWhVgPR/b+XNOiKhcN10LAIRYLwXt847ItLuGD+aZnZE0TOKEQoB9Au3KRBug7VMN
+ xN1bo
+X-Google-Smtp-Source: AGHT+IE+2hQEyd1OQJkX+6SDQFtApm/4RcfPmkeyhcda+kLfgHI7Uk+PJQVYVuylQWgqZo1WNa8S7Q==
+X-Received: by 2002:a05:620a:371a:b0:7b1:506f:7796 with SMTP id
+ af79cd13be357-7b2f2534c77mr1629798385a.47.1730576180856; 
+ Sat, 02 Nov 2024 12:36:20 -0700 (PDT)
+Received: from chromium.org ([165.225.8.161]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-462ad1b54e3sm30665761cf.90.2024.11.02.12.36.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 10:50:01 -0700 (PDT)
+ Sat, 02 Nov 2024 12:36:19 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Matthias Brugger <mbrugger@suse.com>,
- Jerry Van Baren <vanbaren@cideas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/2] fdt: Correct condition for receiving bloblist
-Date: Sat,  2 Nov 2024 11:49:41 -0600
-Message-ID: <20241102174944.412088-1-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH v3] sandbox: Add a build without CMDLINE
+Date: Sat,  2 Nov 2024 13:36:11 -0600
+Message-ID: <20241102193615.431681-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -90,31 +90,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The condition for receiving a bloblist from TPL is reversed. This was
-only noticed are the other fixes landed. Fix it.
+Sometimes this breaks, so add a build to keep it working. Since sandbox
+enables a lot of options, it is a good board to use. The new config is
+created simply by copying the existing sandbox and turning off CMDLINE
+
+Once we have tests for non-CMDLINE operation, this can be adjusted to
+run those tests.
+
+Create a new build which will be picked up by CI. Update the maintainer
+entry as well.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Matthias Brugger <mbrugger@suse.com>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Use #include in the defconfig
+- Fix 'Something' typo
 
- lib/fdtdec.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v2:
+- Create a new build instead of messing with CI
 
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index b0655988029..60e28173c03 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1677,7 +1677,7 @@ int fdtdec_setup(void)
- 	 */
- 	if (CONFIG_IS_ENABLED(BLOBLIST) &&
- 	    (xpl_prev_phase() != PHASE_TPL ||
--	     !IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
-+	     IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
- 		ret = bloblist_maybe_init();
- 		if (!ret) {
- 			gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
+ MAINTAINERS                         | 1 +
+ configs/sandbox_nocmdline_defconfig | 2 ++
+ 2 files changed, 3 insertions(+)
+ create mode 100644 configs/sandbox_nocmdline_defconfig
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index df046192ea0..c7044220452 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1544,6 +1544,7 @@ SANDBOX
+ M:	Simon Glass <sjg@chromium.org>
+ S:	Maintained
+ F:	arch/sandbox/
++F:	configs/sandbox*
+ F:	doc/arch/sandbox.rst
+ F:	drivers/*/*sandbox*.c
+ F:	include/dt-bindings/*/sandbox*.h
+diff --git a/configs/sandbox_nocmdline_defconfig b/configs/sandbox_nocmdline_defconfig
+new file mode 100644
+index 00000000000..03173113fd5
+--- /dev/null
++++ b/configs/sandbox_nocmdline_defconfig
+@@ -0,0 +1,2 @@
++#include "sandbox_defconfig"
++# CONFIG_CMDLINE is not set
 -- 
 2.43.0
 
