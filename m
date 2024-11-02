@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DD9DE6780F
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 20:45:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0975EE67814
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 21:30:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE5F989030;
-	Sat,  2 Nov 2024 21:45:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4621989080;
+	Sat,  2 Nov 2024 22:30:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Lfdz/FJy";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="FgR7snfN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DC14890B1; Sat,  2 Nov 2024 21:45:34 +0100 (CET)
+ id F0DC4890B1; Sat,  2 Nov 2024 22:30:20 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D68228901D
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 21:45:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 72F1A89066
+ for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 22:30:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=4e10=R6=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1730580324;
- bh=g+M1tdoRND9xifYJsibdO5aUvTqTE6wMXyWNF+2VxRQ=;
- b=Lfdz/FJyvwKGo64N65qYDfBxvD9+ZmqgXR8OMiq4rjGQM2NsLe4obIzMGdTSOiIObrz7+gtOp
- YwU2qmVYeHFM3aqq5O1MSO2uzT9RS4K+dUX7XephTFAEguV/gmMZ32jNlCFO7FUGOaJ5wRP2UxR
- tAF0Z+q76uDhSJ2F6t5+FTCrcVhqPh8RCJ9opBLePZjtNuPg97K4OL8AV9c/GKO60+0hTu7fsku
- PkgPt6jAjGPIX8AtDhd++0UHyumPO+v1lv3ZAyjtifI146Ywo0laC5Xt4urSY4RhTRci5JHgoZL
- 19nGFCC01rK1AOGw47lZ8QyfAUaFD5+ZyZGVuJt0wphw==
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1730583013;
+ bh=b9Y0kRvW1k1Fj2IwMJZMARKZAPTv6OSwb9eaW3UWlJM=;
+ b=FgR7snfNSk5VHAAv4IQbLUXOfRTp7ZJ1vLMkNtzhLb7F48qMDsGnhHith3qhmXyozGBY3UKIC
+ VEPaaQKnOQXaRvuHOzyJciE315phtVcrRqFxe+1l4n6hy+fC5wJBiFYIOH22ui/Os/qcnSTlT4N
+ Eo/ULrsYwTFAhzI7jK0r2P/w2mrAyb25qX/i+shDXmB+A7cJXaezIoOTYImnpbGkR/qFg+5khTr
+ GMBxYrci6s98hBLCn+PF3/CBk7+CqIYJ4M5W3sMqCFTpvMw/iLivkhAo7qTBXRAqzJ1m/pTZKGt
+ t24j5uTLObDbIuwpodlPIAGTHu1o4FyJwNxJTMYkbHOg==
 From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Jonas Karlman <jonas@kwiboo.se>,
-	u-boot@lists.denx.de
-Subject: [PATCH] rockchip: rk3308: Drop unused rk_board_init()
-Date: Sat,  2 Nov 2024 20:45:13 +0000
-Message-ID: <20241102204516.3633375-1-jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] rockchip: rk35xx-generic: Disable late boardinfo
+Date: Sat,  2 Nov 2024 21:30:01 +0000
+Message-ID: <20241102213004.3644543-1-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -51,7 +50,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  207.246.76.47
-X-ForwardEmail-ID: 67268f62922720f2eae90345
+X-ForwardEmail-ID: 672699e2922720f2eae90bdf
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,122 +67,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Nothing is calling the function rk_board_init() and the io-domain driver
-can handle the functions intended purpose based on information from DT.
+Disable DISPLAY_BOARDINFO_LATE as the early boardinfo print of Model
+should be enough.
 
-Cleanup by removing the unused rk_board_init() function and re-sort
-included headers.
+  U-Boot 2025.01-rc1 (Nov 02 2024 - 16:04:16 +0000)
+
+  Model: Generic RK3566/RK3568
+  DRAM:  8 GiB (effective 7.7 GiB)
+  Core:  250 devices, 24 uclasses, devicetree: separate
+  MMC:   mmc@fe2b0000: 1, mmc@fe310000: 0
+  Loading Environment from nowhere... OK
+  In:    serial@fe660000
+  Out:   serial@fe660000
+  Err:   serial@fe660000
+  Model: Generic RK3566/RK3568
+  Hit any key to stop autoboot:  0
+  =>
+
+Enable CMD_MISC to make it easier to inspect data in OTP.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/mach-rockchip/rk3308/rk3308.c | 69 +-------------------------
- 1 file changed, 1 insertion(+), 68 deletions(-)
+ configs/generic-rk3568_defconfig | 2 +-
+ configs/generic-rk3588_defconfig | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c b/arch/arm/mach-rockchip/rk3308/rk3308.c
-index 03d97e1d7460..6916f1a24441 100644
---- a/arch/arm/mach-rockchip/rk3308/rk3308.c
-+++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
-@@ -3,15 +3,12 @@
-  *Copyright (c) 2018 Rockchip Electronics Co., Ltd
-  */
- #include <init.h>
--#include <malloc.h>
-+#include <asm/armv8/mmu.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/grf_rk3308.h>
- #include <asm/arch-rockchip/hardware.h>
--#include <asm/gpio.h>
--#include <debug_uart.h>
- #include <linux/bitops.h>
- 
--#include <asm/armv8/mmu.h>
- static struct mm_region rk3308_mem_map[] = {
- 	{
- 		.virt = 0x0UL,
-@@ -38,22 +35,6 @@ struct mm_region *mem_map = rk3308_mem_map;
- #define SGRF_BASE	0xff2b0000
- 
- enum {
--	GPIO1C7_SHIFT		= 8,
--	GPIO1C7_MASK		= GENMASK(11, 8),
--	GPIO1C7_GPIO		= 0,
--	GPIO1C7_UART1_RTSN,
--	GPIO1C7_UART2_TX_M0,
--	GPIO1C7_SPI2_MOSI,
--	GPIO1C7_JTAG_TMS,
--
--	GPIO1C6_SHIFT		= 4,
--	GPIO1C6_MASK		= GENMASK(7, 4),
--	GPIO1C6_GPIO		= 0,
--	GPIO1C6_UART1_CTSN,
--	GPIO1C6_UART2_RX_M0,
--	GPIO1C6_SPI2_MISO,
--	GPIO1C6_JTAG_TCLK,
--
- 	GPIO4D3_SHIFT           = 6,
- 	GPIO4D3_MASK            = GENMASK(7, 6),
- 	GPIO4D3_GPIO            = 0,
-@@ -116,60 +97,12 @@ enum {
- 	GPIO2A2_SEL_SRC_CTRL_SEL_PLUS	= 1,
- };
- 
--enum {
--	IOVSEL3_CTRL_SHIFT	= 8,
--	IOVSEL3_CTRL_MASK	= BIT(8),
--	VCCIO3_SEL_BY_GPIO	= 0,
--	VCCIO3_SEL_BY_IOVSEL3,
--
--	IOVSEL3_SHIFT		= 3,
--	IOVSEL3_MASK		= BIT(3),
--	VCCIO3_3V3		= 0,
--	VCCIO3_1V8,
--};
--
--/*
-- * The voltage of VCCIO3(which is the voltage domain of emmc/flash/sfc
-- * interface) can indicated by GPIO0_A4 or io_vsel3. The SOC defaults
-- * use GPIO0_A4 to indicate power supply voltage for VCCIO3 by hardware,
-- * then we can switch to io_vsel3 after system power on, and release GPIO0_A4
-- * for other usage.
-- */
--
--#define GPIO0_A4	4
--
- const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
- 	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff490000",
- 	[BROM_BOOTSOURCE_SPINOR] = "/spi@ff4c0000/flash@0",
- 	[BROM_BOOTSOURCE_SD] = "/mmc@ff480000",
- };
- 
--int rk_board_init(void)
--{
--	static struct rk3308_grf * const grf = (void *)GRF_BASE;
--	u32 val;
--	int ret;
--
--	ret = gpio_request(GPIO0_A4, "gpio0_a4");
--	if (ret < 0) {
--		printf("request for gpio0_a4 failed:%d\n", ret);
--		return 0;
--	}
--
--	gpio_direction_input(GPIO0_A4);
--
--	if (gpio_get_value(GPIO0_A4))
--		val = VCCIO3_SEL_BY_IOVSEL3 << IOVSEL3_CTRL_SHIFT |
--		      VCCIO3_1V8 << IOVSEL3_SHIFT;
--	else
--		val = VCCIO3_SEL_BY_IOVSEL3 << IOVSEL3_CTRL_SHIFT |
--		      VCCIO3_3V3 << IOVSEL3_SHIFT;
--	rk_clrsetreg(&grf->soc_con0, IOVSEL3_CTRL_MASK | IOVSEL3_MASK, val);
--
--	gpio_free(GPIO0_A4);
--	return 0;
--}
--
- #ifdef CONFIG_DEBUG_UART_BOARD_INIT
- __weak void board_debug_uart_init(void)
- {
+diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
+index 1d06f3411fe0..f79f0e84400b 100644
+--- a/configs/generic-rk3568_defconfig
++++ b/configs/generic-rk3568_defconfig
+@@ -22,7 +22,6 @@ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-generic.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+@@ -31,6 +30,7 @@ CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+ CONFIG_SPL_ATF=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
++CONFIG_CMD_MISC=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_ROCKUSB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
+index ebe883ed5972..51e31dce3a96 100644
+--- a/configs/generic-rk3588_defconfig
++++ b/configs/generic-rk3588_defconfig
+@@ -18,13 +18,13 @@ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-generic.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_SPL_ATF=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
++CONFIG_CMD_MISC=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_ROCKUSB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
 -- 
 2.46.2
 
