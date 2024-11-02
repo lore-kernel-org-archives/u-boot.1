@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E794BE67805
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 19:39:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA91E67805
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 19:39:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 238C289118;
-	Sat,  2 Nov 2024 20:37:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7AB9589300;
+	Sat,  2 Nov 2024 20:37:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KeaAOaZU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b2LxCZwU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A1298860B; Sat,  2 Nov 2024 20:37:56 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id 504E98860B; Sat,  2 Nov 2024 20:37:58 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAC0E892CF
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 20:37:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F61B8860B
+ for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 20:37:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6cbe9e8bbb1so21728066d6.1
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 12:37:53 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6ce3fc4e58bso18837536d6.0
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 12:37:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730576272; x=1731181072; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730576274; x=1731181074; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1/XGpASrZTE3TKI298Ztoxlkabo4q3UyskuD86ulKG8=;
- b=KeaAOaZUtFj0tLte9ycU2T09HRFl8G7FNTTTbYFEPGDELdEpo4QzGM3Kz5mh/oKhI2
- x1BrBuzqWKDG3ucc3x3Hz/qdf+wvsIuFR8HpLZEpqE4/056DGBCmwnk8V4O9+JEiNeQf
- aEtdKqtUGutxh802DucYvNcXz+q42AY/1dgpM=
+ bh=9ARjAduz3TwCwd7DyuAdcCzqcx3jmKJDY9/HJD+VYCE=;
+ b=b2LxCZwUxzx2oQBItaN8EU1rIAyxuwQAL1/Omh6oTYmFtgU8JaL+0jwjWJrOjsAo7v
+ CetctUhOuxerOHCNvgc7G+Qq0LaYn1eBAtHKEadgXn67RqbHHRxhBrYT+XAZna8jJ6Kf
+ 2RLRgSd/3a+S+CdXxqSluVxQxTQ9gUsFrUV6U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730576272; x=1731181072;
+ d=1e100.net; s=20230601; t=1730576274; x=1731181074;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1/XGpASrZTE3TKI298Ztoxlkabo4q3UyskuD86ulKG8=;
- b=p6WoyLCRvTb3o6kuP/tYnUPpQxytaSVQjuPPDrOSDSquj6RyyDkVta9nGcAHRK1t5Q
- 1AYdmNYaHX/0MHbuZKj07mr36jg1pUBSYjqYB6Dvyv1H4jUxAHsj/x9Oq9o8RpCYZF71
- CVlplTaR+LVU7NQ+l9PNw7u35KpLaFKRX2K0f8O6X8F5WVHeJtWJOiA7KLnciEts27yH
- xR8PgftGZQEABnEpCFSq5SY9pe1mvYqBx06hkEHpu7S97uLHk8CASYBB/dI5zVYABraB
- Z3AYWHFfuPZTbnCdOhEhiyV6kMn1qHRrPQiUByVNzLlyquq4geOCX86dzprA+a1so6gc
- Cy7g==
-X-Gm-Message-State: AOJu0YxeGgGT2uF4zCHR+MmgYsKpuFS942iHiGy+fi23sCDsF2pdY5cW
- fh/5tIrnLJxeyWQgU6tLbUFfTRNCTS906IK3fejkTYBs7ubEJ02mBrFz86ehuD62Yusc/rFcddj
- /Rb38
-X-Google-Smtp-Source: AGHT+IEMAn6FlEBfCxNCcQR0qIqFVOdj6DRRLVLYmAwLT2RxovhFERigbi5y35LzuTz/3QPfYNwpFg==
-X-Received: by 2002:a05:6214:3a8b:b0:6cb:c199:462a with SMTP id
- 6a1803df08f44-6d35c137657mr125001536d6.27.1730576271861; 
- Sat, 02 Nov 2024 12:37:51 -0700 (PDT)
+ bh=9ARjAduz3TwCwd7DyuAdcCzqcx3jmKJDY9/HJD+VYCE=;
+ b=HZex51RSCrnAtfRt92VsZFt26K+1fmiGVPd5uS7s3ds1/vf9b3Kgnnrjc+ODf846cx
+ 6Glxaw7F2KGIt0v3B6gJWXZvTict8fL+8KyVfkTGJn2qQB7PiA5omuHCqNe4fxPNkrXd
+ W2Wa+l9pGKqsjA7qzTq0xEXDmq+vFjbHDYx+CPDgTsRXxQ3LS7U9W9W6Yu8H+mT2C6p2
+ SeO1hcDPh9U3nyBd+p6+rJnMmgPiT13WLXQuCopcuq76G7olvaTv7li1ZRNzUB4NZz+M
+ 6jZuNonabb48o6d/08bYYo6p4k+PYIL5lJLoUoTHzuQXcT9tlbEDAxkAhBuz4kWKVgK6
+ Muew==
+X-Gm-Message-State: AOJu0Yyw+Jhgcwp4UygSxLzuz9M2As7XDtqHLihjwMM1pMdt7GMdUB0y
+ lQH0LGSkpWWVHiLzW4DSyABY+dL/sbKaZq95F309MQyoznWO8aVAdTZtSDM/ecIFWek0X2X7Ysn
+ d88aZ
+X-Google-Smtp-Source: AGHT+IGytiqkxDXxTJtfYnJPPBBCS1m3Ssy+829ZNbnWFkxUukqgqaqSo9wSPk0OlilzwJkHN2SJIw==
+X-Received: by 2002:a05:6214:5d0e:b0:6cb:c882:b1d9 with SMTP id
+ 6a1803df08f44-6d351abbb4amr161394686d6.21.1730576274255; 
+ Sat, 02 Nov 2024 12:37:54 -0700 (PDT)
 Received: from chromium.org ([165.225.8.161]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d353f9dfeasm32324976d6.14.2024.11.02.12.37.49
+ 6a1803df08f44-6d353f9dfeasm32324976d6.14.2024.11.02.12.37.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 12:37:50 -0700 (PDT)
+ Sat, 02 Nov 2024 12:37:53 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
  Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 13/20] str: test: Move into the lib suite
-Date: Sat,  2 Nov 2024 13:36:58 -0600
-Message-ID: <20241102193715.432529-14-sjg@chromium.org>
+Subject: [PATCH v2 14/20] test: Move unicode_ut test into lib
+Date: Sat,  2 Nov 2024 13:36:59 -0600
+Message-ID: <20241102193715.432529-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241102193715.432529-1-sjg@chromium.org>
 References: <20241102193715.432529-1-sjg@chromium.org>
@@ -89,149 +91,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no particular need for the str tests to have their own test
-suite. Move them into the lib suite instead.
+This test doesn't belong at the top level. Move it into the lib/
+directory, to match its implementation. Rename it to drop the
+unnecessary _ut suffix.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/cmd_ut.c  |  4 ----
- test/lib/str.c | 31 ++++++++++---------------------
- 2 files changed, 10 insertions(+), 25 deletions(-)
+ test/Makefile                        | 1 -
+ test/lib/Makefile                    | 1 +
+ test/{unicode_ut.c => lib/unicode.c} | 0
+ 3 files changed, 1 insertion(+), 1 deletion(-)
+ rename test/{unicode_ut.c => lib/unicode.c} (100%)
 
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 9b47a2c1a93..96bea4747fd 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -114,7 +114,6 @@ static struct cmd_tbl cmd_ut_sub[] = {
- 			 "", ""),
- 	U_BOOT_CMD_MKENT(bootm, CONFIG_SYS_MAXARGS, 1, do_ut_bootm, "", ""),
- #endif
--	U_BOOT_CMD_MKENT(str, CONFIG_SYS_MAXARGS, 1, do_ut_str, "", ""),
- #ifdef CONFIG_CMD_ADDRMAP
- 	U_BOOT_CMD_MKENT(addrmap, CONFIG_SYS_MAXARGS, 1, do_ut_addrmap, "", ""),
- #endif
-@@ -240,9 +239,6 @@ U_BOOT_LONGHELP(ut,
- 	"\npci_mps - PCI Express Maximum Payload Size"
- #endif
- 	"\nsetexpr - setexpr command"
--#ifdef CONFIG_SANDBOX
--	"\nstr - basic test of string functions"
--#endif
- #ifdef CONFIG_CMD_SEAMA
- 	"\nseama - seama command parameters loading and decoding"
- #endif
-diff --git a/test/lib/str.c b/test/lib/str.c
-index 96e048975d8..3cc9dfea6aa 100644
---- a/test/lib/str.c
-+++ b/test/lib/str.c
-@@ -4,7 +4,7 @@
-  */
- 
- #include <vsprintf.h>
--#include <test/suites.h>
-+#include <test/lib.h>
- #include <test/test.h>
- #include <test/ut.h>
- 
-@@ -19,9 +19,6 @@ static const char str5[] = "0x9876543210the last time I was deloused";
- static const char str6[] = "0778octal is seldom used";
- static const char str7[] = "707it is a piece of computing history";
- 
--/* Declare a new str test */
--#define STR_TEST(_name, _flags)		UNIT_TEST(_name, _flags, str_test)
--
- static int str_upper(struct unit_test_state *uts)
- {
- 	char out[TEST_STR_SIZE];
-@@ -58,7 +55,7 @@ static int str_upper(struct unit_test_state *uts)
- 
- 	return 0;
- }
--STR_TEST(str_upper, 0);
-+LIB_TEST(str_upper, 0);
- 
- static int run_strtoul(struct unit_test_state *uts, const char *str, int base,
- 		       ulong expect_val, int expect_endp_offset, bool upper)
-@@ -112,7 +109,7 @@ static int str_simple_strtoul(struct unit_test_state *uts)
- 
- 	return 0;
- }
--STR_TEST(str_simple_strtoul, 0);
-+LIB_TEST(str_simple_strtoul, 0);
- 
- static int run_strtoull(struct unit_test_state *uts, const char *str, int base,
- 			unsigned long long expect_val, int expect_endp_offset,
-@@ -175,7 +172,7 @@ static int str_simple_strtoull(struct unit_test_state *uts)
- 
- 	return 0;
- }
--STR_TEST(str_simple_strtoull, 0);
-+LIB_TEST(str_simple_strtoull, 0);
- 
- static int str_hextoul(struct unit_test_state *uts)
- {
-@@ -187,7 +184,7 @@ static int str_hextoul(struct unit_test_state *uts)
- 
- 	return 0;
- }
--STR_TEST(str_hextoul, 0);
-+LIB_TEST(str_hextoul, 0);
- 
- static int str_dectoul(struct unit_test_state *uts)
- {
-@@ -199,7 +196,7 @@ static int str_dectoul(struct unit_test_state *uts)
- 
- 	return 0;
- }
--STR_TEST(str_dectoul, 0);
-+LIB_TEST(str_dectoul, 0);
- 
- static int str_itoa(struct unit_test_state *uts)
- {
-@@ -219,7 +216,7 @@ static int str_itoa(struct unit_test_state *uts)
- 
- 	return 0;
- }
--STR_TEST(str_itoa, 0);
-+LIB_TEST(str_itoa, 0);
- 
- static int str_xtoa(struct unit_test_state *uts)
- {
-@@ -239,7 +236,7 @@ static int str_xtoa(struct unit_test_state *uts)
- 
- 	return 0;
- }
--STR_TEST(str_xtoa, 0);
-+LIB_TEST(str_xtoa, 0);
- 
- static int str_trailing(struct unit_test_state *uts)
- {
-@@ -271,7 +268,7 @@ static int str_trailing(struct unit_test_state *uts)
- 
- 	return 0;
- }
--STR_TEST(str_trailing, 0);
-+LIB_TEST(str_trailing, 0);
- 
- static int test_str_to_list(struct unit_test_state *uts)
- {
-@@ -351,12 +348,4 @@ static int test_str_to_list(struct unit_test_state *uts)
- 
- 	return 0;
- }
--STR_TEST(test_str_to_list, 0);
--
--int do_ut_str(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	struct unit_test *tests = UNIT_TEST_SUITE_START(str_test);
--	const int n_ents = UNIT_TEST_SUITE_COUNT(str_test);
--
--	return cmd_ut_category("str", "str_", tests, n_ents, argc, argv);
--}
-+LIB_TEST(test_str_to_list, 0);
+diff --git a/test/Makefile b/test/Makefile
+index 220a249c397..0b1affcf445 100644
+--- a/test/Makefile
++++ b/test/Makefile
+@@ -21,7 +21,6 @@ ifeq ($(CONFIG_XPL_BUILD),)
+ obj-y += boot/
+ obj-$(CONFIG_UNIT_TEST) += common/
+ obj-y += log/
+-obj-$(CONFIG_$(XPL_)UT_UNICODE) += unicode_ut.o
+ else
+ obj-$(CONFIG_SPL_UT_LOAD) += image/
+ endif
+diff --git a/test/lib/Makefile b/test/lib/Makefile
+index be20bbc047f..c36c8b0917d 100644
+--- a/test/lib/Makefile
++++ b/test/lib/Makefile
+@@ -27,6 +27,7 @@ obj-$(CONFIG_AES) += test_aes.o
+ obj-$(CONFIG_GETOPT) += getopt.o
+ obj-$(CONFIG_CRC8) += test_crc8.o
+ obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
++obj-$(CONFIG_$(XPL_)UT_UNICODE) += unicode.o
+ obj-$(CONFIG_LIB_UUID) += uuid.o
+ else
+ obj-$(CONFIG_SANDBOX) += kconfig_spl.o
+diff --git a/test/unicode_ut.c b/test/lib/unicode.c
+similarity index 100%
+rename from test/unicode_ut.c
+rename to test/lib/unicode.c
 -- 
 2.43.0
 
