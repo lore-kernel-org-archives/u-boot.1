@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C75A4E677E8
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 19:37:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1B90E67805
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 19:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6268890F8;
-	Sat,  2 Nov 2024 20:37:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3CA4389065;
+	Sat,  2 Nov 2024 20:37:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f678xKFj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oa1gsNU2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C849589109; Sat,  2 Nov 2024 20:37:31 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id C442489117; Sat,  2 Nov 2024 20:37:33 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60783890C4
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 20:37:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA94A89103
+ for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 20:37:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6cbcc2bd7fcso20180966d6.1
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 12:37:29 -0700 (PDT)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6cbf0e6414aso17444946d6.1
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 12:37:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730576246; x=1731181046; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730576249; x=1731181049; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QsPmMlLlwBwvG6LkTiLX82VKIxDt97xl983INMWvS7w=;
- b=f678xKFj2KSHSU9Z5Lyo0HIKZSHWO8AkZIlw0SqbOqBU9H8Vyp6bjhmj4moQcszver
- F6iisZDKEj2MJMwD0ZZ1yFAAmGODSuRqXyWPlePQwFljBrJLKObUruILZYcvVH3LyqbH
- lMJEANek1wwSKn6kCjbPAICpGjwVJkf6Ech98=
+ bh=xM8CSWUEiteeprXfk5eeM9hGBXh3nQTM4DRGnx2hRY4=;
+ b=oa1gsNU2q/mnz7DV9m+yw/QeDlWguMKlcqUNcdayCqJR8xKV/oW8ezWG+eYOZsIYSN
+ A7+um/esKWPGke2puetAheQfGoaB2DIiEs35GWTjg5TfYkYmG8Bqu9oB/0hHceOF2LCw
+ VRgULCLyWOQZdO0jOclq+1yltSqsvgwVCqHUo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730576246; x=1731181046;
+ d=1e100.net; s=20230601; t=1730576249; x=1731181049;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QsPmMlLlwBwvG6LkTiLX82VKIxDt97xl983INMWvS7w=;
- b=aNXoKIBULALqGaEdXUfa9zLL1iytOetC3Kdu67d7fC5gGPPkxcrQcQvXdiBEMBfxH/
- Mt36yJ2c+UX3gsaFoDTl+SrMZ1H1583OTSHSm4j5NkCzujKlrDkh0cVUwxbsNA9Gb3TX
- qImciPHJIGcPOgE1mwRRNsw3mHQSVyhjBcE54uHA2FcFmsaVW//8jw61naI+ChsEK33G
- 4ogLXX/CRUzW7dp3AgfppyA3RF78H5+16lKMIufxjdVx6gQAozIs+DMii86aogxZxlCu
- oL/5oKh2YM8jXwn+QibKZeHStrcLwsSQdn80sc4/JPf0VhG4Ctawj3/je0mddeHy1mCA
- 3E8g==
-X-Gm-Message-State: AOJu0Yx9sDzgxofjm//hwBbaS37bRRNktfQQoDB7t2Z9Qb9SmL5MI4Y9
- BcUN2qNq+ACZtIs3oIfaMI8W4Tfr2quI51eNlBijd8RavhOrdDSQhAyoz1jqF7PYqJsKB7NO9sc
- 5XtPL
-X-Google-Smtp-Source: AGHT+IFs7HfBRTBfAb7LALZGI7kFALBeePRi87MGpyofOk8gSQg0Tfb5KC0HNduBo8JLTXEPU2pegQ==
-X-Received: by 2002:a05:6214:4489:b0:6ce:2fa1:842a with SMTP id
- 6a1803df08f44-6d351aa3ea9mr153025166d6.15.1730576246517; 
- Sat, 02 Nov 2024 12:37:26 -0700 (PDT)
+ bh=xM8CSWUEiteeprXfk5eeM9hGBXh3nQTM4DRGnx2hRY4=;
+ b=qe2VaJqc/bf8YZJqgvAzNWTpngPBhiaTF9+T1giooHsBQzegDZ6MAghO0zYyfviSDE
+ 3eNOFtMicKttoc2+4mNVJRbjmzrKjv1NFQIPYoM4snMJ9ywMIOH0bu0wrFjm/iYR0Ms1
+ bzhkEq474uKXaDpqT0Cqn/ffejAxU7yoRL6TiBovMNJvis22lFEOaI47zl4ZvVaaJTnH
+ xDL7thbka7DoY1raBBbaBAnFMacj6qT/TX8Hup4h/pVHuH9HV595F+Al6hUz99QEVjdt
+ tfAjQX5TyB4S2JaS0Xhz4ycYoPkH1MtrySIkVLRP07jicuYuvhj9nCbzNN9vqEKnkKBU
+ u8jg==
+X-Gm-Message-State: AOJu0Yxsurp/qyOd09jka75LyI/XxL9CvwYJS2kUl6U28q9ZsVR7mW9+
+ RP8eD9+58T5mRFuC6kD6+ECV52pdKeL1lxIP94FLJmzHb74H0aSbjPpH+S0KlbBy7YtFhe4L5p8
+ iLXpY
+X-Google-Smtp-Source: AGHT+IHGySZ1YF/M4e1dBKrz3WWsNPzv6IQz95sfcfAKTyVUdreNG3GqihQTwXkPXwnaVMf/C086ew==
+X-Received: by 2002:a05:6214:2dca:b0:6cb:ef34:9c00 with SMTP id
+ 6a1803df08f44-6d18568f24fmr413541936d6.12.1730576249154; 
+ Sat, 02 Nov 2024 12:37:29 -0700 (PDT)
 Received: from chromium.org ([165.225.8.161]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d353f9dfeasm32324976d6.14.2024.11.02.12.37.24
+ 6a1803df08f44-6d353f9dfeasm32324976d6.14.2024.11.02.12.37.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 12:37:25 -0700 (PDT)
+ Sat, 02 Nov 2024 12:37:27 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 02/20] bloblist: test: Drop global_data declarations
-Date: Sat,  2 Nov 2024 13:36:47 -0600
-Message-ID: <20241102193715.432529-3-sjg@chromium.org>
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 03/20] test: Drop test-trace.sh and common.sh
+Date: Sat,  2 Nov 2024 13:36:48 -0600
+Message-ID: <20241102193715.432529-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241102193715.432529-1-sjg@chromium.org>
 References: <20241102193715.432529-1-sjg@chromium.org>
@@ -89,34 +88,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This pointer is not used any more, so drop the declarations.
+The trace feature is now tested in CI so there is no need for these old
+script. Also they don't work. Drop them.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/common/bloblist.c | 3 ---
- 1 file changed, 3 deletions(-)
+ test/common.sh           | 20 -------------
+ test/trace/test-trace.sh | 64 ----------------------------------------
+ 2 files changed, 84 deletions(-)
+ delete mode 100644 test/common.sh
+ delete mode 100755 test/trace/test-trace.sh
 
-diff --git a/test/common/bloblist.c b/test/common/bloblist.c
-index fd85c7ab79e..7b90fa7f352 100644
---- a/test/common/bloblist.c
-+++ b/test/common/bloblist.c
-@@ -6,13 +6,10 @@
- #include <bloblist.h>
- #include <log.h>
- #include <mapmem.h>
--#include <asm/global_data.h>
- #include <test/suites.h>
- #include <test/test.h>
- #include <test/ut.h>
- 
--DECLARE_GLOBAL_DATA_PTR;
+diff --git a/test/common.sh b/test/common.sh
+deleted file mode 100644
+index 904d579b7bf..00000000000
+--- a/test/common.sh
++++ /dev/null
+@@ -1,20 +0,0 @@
+-#!/bin/sh
 -
- /* Declare a new bloblist test */
- #define BLOBLIST_TEST(_name, _flags) \
- 		UNIT_TEST(_name, _flags, bloblist_test)
+-OUTPUT_DIR=sandbox
+-
+-fail() {
+-	echo "Test failed: $1"
+-	if [ -n ${tmp} ]; then
+-		rm ${tmp}
+-	fi
+-	exit 1
+-}
+-
+-build_uboot() {
+-	echo "Build sandbox"
+-	OPTS="O=${OUTPUT_DIR} $1"
+-	NUM_CPUS=$(nproc)
+-	echo ${OPTS}
+-	make ${OPTS} sandbox_config
+-	make ${OPTS} -s -j${NUM_CPUS}
+-}
+diff --git a/test/trace/test-trace.sh b/test/trace/test-trace.sh
+deleted file mode 100755
+index 5130b2bf017..00000000000
+--- a/test/trace/test-trace.sh
++++ /dev/null
+@@ -1,64 +0,0 @@
+-#!/bin/bash
+-# SPDX-License-Identifier: GPL-2.0+
+-# Copyright (c) 2013 The Chromium OS Authors.
+-#
+-
+-# Simple test script for tracing with sandbox
+-
+-TRACE_OPT="FTRACE=1"
+-
+-BASE="$(dirname $0)/.."
+-. $BASE/common.sh
+-
+-run_trace() {
+-	echo "Run trace"
+-	./${OUTPUT_DIR}/u-boot <<END
+-trace stats
+-hash sha256 0 10000
+-trace pause
+-trace stats
+-hash sha256 0 10000
+-trace stats
+-trace resume
+-hash sha256 0 10000
+-trace pause
+-trace stats
+-reset
+-END
+-}
+-
+-check_results() {
+-	echo "Check results"
+-
+-	# Expect sha256 to run 3 times, so we see the string 6 times
+-	if [ $(grep -c sha256 ${tmp}) -ne 6 ]; then
+-		fail "sha256 error"
+-	fi
+-
+-	# 4 sets of results (output of 'trace stats')
+-	if [ $(grep -c "traced function calls" ${tmp}) -ne 4 ]; then
+-		fail "trace output error"
+-	fi
+-
+-	# Check trace counts. We expect to see an increase in the number of
+-	# traced function calls between each 'trace stats' command, except
+-	# between calls 2 and 3, where tracing is paused.
+-	# This code gets the sign of the difference between each number and
+-	# its predecessor.
+-	counts="$(tr -d ',\r' <${tmp} | awk \
+-		'/traced function calls/ { diff = $1 - upto; upto = $1; \
+-		printf "%d ", diff < 0 ? -1 : (diff > 0 ? 1 : 0)}')"
+-
+-	if [ "${counts}" != "1 1 0 1 " ]; then
+-		fail "trace collection error: ${counts}"
+-	fi
+-}
+-
+-echo "Simple trace test / sanity check using sandbox"
+-echo
+-tmp="$(tempfile)"
+-build_uboot "${TRACE_OPT}"
+-run_trace >${tmp}
+-check_results ${tmp}
+-rm ${tmp}
+-echo "Test passed"
 -- 
 2.43.0
 
