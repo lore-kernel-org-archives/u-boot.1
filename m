@@ -4,47 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B487E67816
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 22:24:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B517E67816
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 23:08:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7096890B1;
-	Sat,  2 Nov 2024 23:24:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
+	by phobos.denx.de (Postfix) with ESMTP id C77F188FD6;
+	Sun,  3 Nov 2024 00:08:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="XM0fs5aF";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92DC8890B9; Sat,  2 Nov 2024 23:24:09 +0100 (CET)
-Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
- [IPv6:2a07:2ec0:3002::65])
+ id 8BD7588FD6; Sun,  3 Nov 2024 00:08:14 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D07489080
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 23:24:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=makrotopia.org
+ by phobos.denx.de (Postfix) with ESMTPS id 7150188FFC
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 00:08:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel@makrotopia.org
-Received: from local
- by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.98) (envelope-from <daniel@makrotopia.org>)
- id 1t7MXL-000000007dI-4038; Sat, 02 Nov 2024 22:24:04 +0000
-Date: Sat, 2 Nov 2024 22:23:36 +0000
-From: Daniel Golle <daniel@makrotopia.org>
-To: Weijie Gao <weijie.gao@mediatek.com>
-Cc: u-boot@lists.denx.de,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>, John Crispin <john@phrozen.org>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2 1/3] menu: fix the logic checking whether ESC key is
- pressed
-Message-ID: <ZyamaLOiEMCd3c92@pidgin.makrotopia.org>
-References: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
- <ZyPXqwcbREjnPc-1@pidgin.makrotopia.org>
- <cdb9a83d244a77e5ffb2a3d069607f16447b723e.camel@mediatek.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4e10=R6=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1730588884;
+ bh=gJ4puArxPobdw/bKKJe1HEkMbtpCabTdaEykarBkTAs=;
+ b=XM0fs5aF/kbE66hfA6Z5KW8I3EvEcKjjTtYjiXjHYxPf+ZQd8PqsbXhYrcPW5cT50YJK0Vorv
+ RF++Ah+b+vm22rRkcRGFfF3pxGGIzNN/r8n5cmmCxl+5F/hHpO3MKWOnnyDw4aHgi6QT/eHfAsJ
+ B+6EDv6H9ehbuMkCCJdsXkyZARsqCWUviCrjDJZI8gFzy0rJ7Y2ItWPYFzZFw6C3Ib6+0t/CtvV
+ bt/urSiwj05tLlSUwfhforNF5f0+tHtwg9X2k9IHYz14aXFW0cbO55rF9Xy53uo+EG9Pa54paXs
+ X5I7Ii7hFE/ZMfqk+JZIQ0uSH6xdKShrrJM8lCbzgL8A==
+Message-ID: <c8d4dcb5-58a1-4251-a37f-6d5006194c23@kwiboo.se>
+Date: Sun, 3 Nov 2024 00:07:58 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cdb9a83d244a77e5ffb2a3d069607f16447b723e.camel@mediatek.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 2/2] board: rockchip: Add support for rk3588 GenBook
+To: Andy Yan <andyshrk@163.com>, kever.yang@rock-chips.com
+Cc: u-boot@lists.denx.de
+References: <20241101120644.420384-1-andyshrk@163.com>
+ <20241101120644.420384-3-andyshrk@163.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20241101120644.420384-3-andyshrk@163.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-ForwardEmail-ID: 6726b0d3922720f2eae9247b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,70 +72,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Nov 01, 2024 at 03:20:11PM +0800, Weijie Gao wrote:
-> Hi Daniel,
+Hi Andy,
+
+On 2024-11-01 13:06, Andy Yan wrote:
+> Add support for Cool Pi GenBook, it works as a carrier board
+> connect with CM5 SOM.
 > 
-> On Thu, 2024-10-31 at 19:16 +0000, Daniel Golle wrote:
-> > External email : Please do not click links or open attachments until
-> > you have verified the sender or the content.
-> > 
-> > 
-> > On Tue, Oct 29, 2024 at 05:47:10PM +0800, Weijie Gao wrote:
-> > > It's observed that the bootmenu on a serial console sometimes
-> > > incorrectly quitted with superfluous characters filled to command
-> > > line input:
-> > > 
-> > > >  *** U-Boot Boot Menu ***
-> > > > 
-> > > >      1. Startup system (Default)
-> > > >      2. Upgrade firmware
-> > > >      3. Upgrade ATF BL2
-> > > >      4. Upgrade ATF FIP
-> > > >      5. Load image
-> > > >      0. U-Boot console
-> > > > 
-> > > > 
-> > > >  Press UP/DOWN to move, ENTER to select, ESC to quit
-> > > > MT7988> [B
-> > > 
-> > > Analysis shows it was caused by the wrong logic of bootmenu_loop:
-> > > 
-> > > At first the bootmenu_loop received the first ESC char correctly.
-> > > 
-> > > However, during the second call to bootmenu_loop, there's no data
-> > > in the UART Rx FIFO. Due to the low baudrate, the second char of
-> > > the down array key sequence hasn't be fully received.
-> > > 
-> > > But bootmenu_loop just did a mdelay(10), and then treated it as a
-> > > single ESC key press event. It didn't even try tstc() again after
-> > > the 10ms timeout.
-> > > 
-> > > This patch fixes this issue by letting bootmenu_loop check tstc()
-> > > twice.
-> > > 
-> > > Tested-By: E Shattow <lucent@gmail.com>
-> > > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> > 
-> > Reviewed-by: Daniel Golle <daniel@makrotopia.org>
-> > Tested-by: Daniel Golle <daniel@makrotopia.org>
-> > 
-> > Together with 2/3 and 3/3 this now avoids dropping into the U-Boot
-> > shell
-> > as long as the menu is short enough. In case of menus with 8 entries
-> > of
-> > more I still manage to drop into shell when holding the arrow down
-> > key
-> > before the last item has been reached.
-> > That being said, it's already a very big improvement that this now
-> > only
-> > happens when holding down a button traversing over a menu with a high
-> > number of items.
+> Specification:
+> - Rockchip RK3588
+> - LPDDR5X 8/32 GB
+> - eMMC 64 GB
+> - HDMI Type A out x 1
+> - USB 3.0 Host x 1
+> - USB-C 3.0 with DisplayPort AltMode
+> - PCIE M.2 E Key for RTL8852BE Wireless connection
+> - PCIE M.2 M Key for NVME connection
+> - eDP panel with 1920x1080
 > 
-> I didn't encounter with this.
-> Did you try enabling CONFIG_SERIAL_RX_BUFFER?
+> Tested by Armbian boot on USB disk.
+> 
+> Signed-off-by: Andy Yan <andyshrk@163.com>
+> 
+> ---
+> 
+> Changes in v5:
+> - Fix document isn't included in any toctree error ini rst doc
+> 
+> Changes in v4:
+> - Fix a underline too short error in rst doc
+> 
+> Changes in v3:
+> - Remove upstreamed dt in genbook-u-boot.dtsi
+> - Remove MMC releated config as there is no SD-card on this machine
+> - Enable LED config
+> - Enable rk8xx pmic
+> - rename defconfig to coolpi-cm5-genbook-rk3588_defconfig
+> - redefine BOOT_TARGETS
+> 
+> Changes in v2:
+> - split the dts to a separate commit
+> - rename to genbook_cm5_rk3588
+> - move readme to doc/board, and write as reStructuredText format
+> - alphabetically reorder
+> - update doc/board/rockchip
+> 
+>  .../dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi |  20 ++++
+>  arch/arm/mach-rockchip/rk3588/Kconfig         |  19 ++++
+>  board/coolpi/genbook_cm5_rk3588/Kconfig       |  12 +++
+>  board/coolpi/genbook_cm5_rk3588/MAINTAINERS   |   7 ++
+>  configs/coolpi-cm5-genbook-rk3588_defconfig   | 101 ++++++++++++++++++
+>  doc/board/coolpi/genbook_cm5_rk3588.rst       |  68 ++++++++++++
+>  doc/board/coolpi/index.rst                    |   9 ++
+>  doc/board/index.rst                           |   1 +
+>  doc/board/rockchip/rockchip.rst               |   1 +
+>  include/configs/genbook-cm5-rk3588.h          |  31 ++++++
+>  10 files changed, 269 insertions(+)
+>  create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+>  create mode 100644 board/coolpi/genbook_cm5_rk3588/Kconfig
+>  create mode 100644 board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+>  create mode 100644 configs/coolpi-cm5-genbook-rk3588_defconfig
+>  create mode 100644 doc/board/coolpi/genbook_cm5_rk3588.rst
+>  create mode 100644 doc/board/coolpi/index.rst
+>  create mode 100644 include/configs/genbook-cm5-rk3588.h
+> 
 
-Combined with CONFIG_SERIAL_RX_BUFFER it does resolve the issue and I no
-longer manage to get dropped into console.
+[snip]
 
-Thank you a lot for taking care of this!
+> diff --git a/include/configs/genbook-cm5-rk3588.h b/include/configs/genbook-cm5-rk3588.h
+> new file mode 100644
+> index 00000000000..f71f735b113
+> --- /dev/null
+> +++ b/include/configs/genbook-cm5-rk3588.h
+> @@ -0,0 +1,31 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + */
+> +
+> +#ifndef __GENBOOK_CM5_RK3588_H
+> +#define __GENBOOK_CM5_RK3588_H
+> +
+> +#define ROCKCHIP_DEVICE_SETTINGS \
+> +		"stdout=serial,vidconsole\0" \
+> +		"stderr=serial,vidconsole\0"
+> +
+> +#include <configs/rk3588_common.h>
+> +
+> +#undef BOOT_TARGETS
+> +#define BOOT_TARGETS "usb mmc0"
+> +
+> +#undef CFG_EXTRA_ENV_SETTINGS
+> +
+> +/*
+> + * As a laptop, there is no sdmmc, and we want to
+> + * set usb the highest boot priority for third-part
+> + * os installation.
+> + */
+> +#define CFG_EXTRA_ENV_SETTINGS \
+> +	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+> +	"partitions=" PARTS_DEFAULT		\
+> +	ENV_MEM_LAYOUT_SETTINGS			\
+> +	ROCKCHIP_DEVICE_SETTINGS \
+> +	"boot_targets=" BOOT_TARGETS "\0"
 
+Having to re-define CFG_EXTRA_ENV_SETTINGS seem redundant, please try
+including below diff for rockchip-common.h and use something like this:
+
+  #define ROCKCHIP_DEVICE_SETTINGS \
+		"stdout=serial,vidconsole\0" \
+		"stderr=serial,vidconsole\0"
+
+  /*
+   * As a laptop, there is no sdmmc, and we want to
+   * set usb the highest boot priority for third-part
+   * os installation.
+   */
+  #define BOOT_TARGETS "usb mmc0"
+
+  #include <configs/rk3588_common.h>
+
+> +
+> +#endif /* __GENBOOK_CM5_RK3588_H */
+
+diff --git a/include/configs/rockchip-common.h b/include/configs/rockchip-common.h
+index 9b8ab3cdf207..d5550a46575a 100644
+--- a/include/configs/rockchip-common.h
++++ b/include/configs/rockchip-common.h
+@@ -13,7 +13,9 @@
+ 
+ #ifndef CONFIG_XPL_BUILD
+ 
++#ifndef BOOT_TARGETS
+ #define BOOT_TARGETS	"mmc1 mmc0 nvme scsi usb pxe dhcp spi"
++#endif
+ 
+ #ifdef CONFIG_ARM64
+ #define ROOT_UUID "B921B045-1DF0-41C3-AF44-4C6F280D3FAE;\0"
+
+Regards,
+Jonas
