@@ -4,109 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33EF4E67819
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 01:40:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27C43E67819
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 01:40:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1F5F890D5;
-	Sun,  3 Nov 2024 02:40:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1274A89109;
+	Sun,  3 Nov 2024 02:40:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KxbRCFyf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d131kXFq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E28BA8901D; Sat,  2 Nov 2024 20:52:25 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 21CB4890B1; Sat,  2 Nov 2024 23:19:01 +0100 (CET)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EF848901D
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 20:52:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD84D89102
+ for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 23:18:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43158625112so25509455e9.3
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 12:52:23 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-71e49ad46b1so2593164b3a.1
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 15:18:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730577143; x=1731181943; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=H5BRaRy7+8se/96g/+njulZxtfLV5c0KdYnAC48O1CQ=;
- b=KxbRCFyfVGZ0SYGSUStuvq5M4kwNdTkOZnpuWgIJz6Q0JKFz01DelWTE1ejUvOBoRD
- HC5r+ktyY+u0Y7F37gQVXz4CXPgIH/4cN21DeEE/dnkDunBSciE1HJdggyCkscRv42PY
- vlp8C59mi3aHL5OGldadh1g2G0MestxhQ0eJTHfo0oBbqcJ9etv+0PXSNbcz9POpkaoq
- +79So1FrjbSlywL/KGqRdCyGrSW/thpzU28teKhPZUkkt/V6TF9UBc53t6NBFDBBb74p
- j2LqA1C5Ac0RHuCF1Q98TwzL/2SEKZGIT6mMvilCQ9fIjfbDqau9pUqkJNrsy1ljFtKh
- QVzg==
+ d=chromium.org; s=google; t=1730585935; x=1731190735; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Pny/6aZrMRKa1cJiQSXpo+LyH2LHLfG8xTW7X1mJzQY=;
+ b=d131kXFqaUAy+epE+mQk9pw2dwJr7hhpF8PpWpT8biXXwT6otPJ9mG0IfK2egD0ANo
+ vBV7DXPRqobxPOI7J2ZuGGyUn79oSq3Y4Urn3Zyyn2lNoxUj47AavIBj/OB434HnhcBn
+ 5RkPQ7IksvIqdNdKIjfNTvl96iJB0MD5uWvz8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730577143; x=1731181943;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=H5BRaRy7+8se/96g/+njulZxtfLV5c0KdYnAC48O1CQ=;
- b=Fc7bpM5F3/Ba0T9at+oowDRGxsTwnPEw5H4+mInudK6b8kqUKQd0mbE2R3xkg6GFu6
- k1u0hmIam/bFj6yLtcZz7Bt55Ss38QDrYeXVSwu8nLc5hbTW9XGaem0YIS5SafB8yTDh
- xmPwi5rBwTmr602aZ8FK7WnrQYUXL9yGcRjEEjvqqIf8xj3yz0+/9jGufrF3izy/bkrn
- 8p60hL/ZFuQUDgAyvYEQGPKadcKw0CMtfY7DMgN54o+9FeliyZQd7qzXcnLfzLr+NHYu
- P9TTV2D1ixih8YSaPQzt/HY6lKFMXHepbnIUrXFjc0dcod4yLwXbodjTr/6ssRDwHuAK
- 7QxA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX/ikIZo3+/rwkJ2Zu5esCS3DSLsXm19Ymicirb/W2Z1B8AtgxLXx7aUbcsFEUIVVhRHWXVB50=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzmkc9iUeEGA1eokdUwX4Hp8By3s8jik6XKBWVuE2hg006yPDLW
- xbe20fJIwTkr3Tc4u/aDgaWw6UktPszVmZVYUeBd8JMwjVzlPMBq
-X-Google-Smtp-Source: AGHT+IHuyjq2AVLMdxjaqp0KP/h1eKi9wMIcpr1mWHxNzCF/CO/EkmZizi3tNWK+fadWBAFCfT1tuA==
-X-Received: by 2002:a5d:6d0e:0:b0:37c:cc60:2c63 with SMTP id
- ffacd0b85a97d-381c7a3a23dmr6480995f8f.5.1730577142826; 
- Sat, 02 Nov 2024 12:52:22 -0700 (PDT)
-Received: from Ansuel-XPS. (93-34-91-161.ip49.fastwebnet.it. [93.34.91.161])
+ d=1e100.net; s=20230601; t=1730585935; x=1731190735;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Pny/6aZrMRKa1cJiQSXpo+LyH2LHLfG8xTW7X1mJzQY=;
+ b=iQMsW+cf1ZkTFJ8R6YSSkh6PpJzIBoSgK2e31A0viPk6qJqh6vro9FGXdlyXLaTf6T
+ HpVtyu2WHVSBAmICqQkPRn+//m5gdwAGuuxk84E5cVb5VehPt54PRrGFKlRfTcZ/cpeV
+ 3NjhRomOdsLvOzrVX6sMB46vHoJWmjOldQPYVbzXGK5TzxM8r4OXq8M5Y39uIZoQ9MO/
+ Ok8di6TvQ2tsFYKNgTJrqPypicOgYoFgf0A9ssCmveFeiuMSHGAQILGn9qtFttcRat/B
+ 4AbQD0n+UkxOiMOymeTvH7q05TzE3mQhebgDaBwMBLO2XBR9tSQEkYWQq+HtG++y6uMQ
+ VEWw==
+X-Gm-Message-State: AOJu0Yzkco6kOKEcqi1+suIKwLDYh20y1WZZSThMhzSIWqBgY/2+qfRn
+ 8tlSo3JfCOWlz3wSul2GzFd5P2y+LGGTrfc6aPSkSSirI47tFDVWn72nFhuxpR8qccK3D8yiUsp
+ AuQ==
+X-Google-Smtp-Source: AGHT+IHGe8V65gtGY5RnTJ65ochndhKXaqi/ybYy6vDG1cXXpq5S8/1BmpJDZWniwNV2Xx38/me+IA==
+X-Received: by 2002:a05:6a20:d81b:b0:1d6:e635:5c5e with SMTP id
+ adf61e73a8af0-1d9a83ab2e5mr35793588637.9.1730585935142; 
+ Sat, 02 Nov 2024 15:18:55 -0700 (PDT)
+Received: from chromium.org ([205.220.129.19])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381c113e856sm8786128f8f.87.2024.11.02.12.52.20
+ 41be03b00d2f7-7ee45a0081esm4386286a12.59.2024.11.02.15.17.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 12:52:21 -0700 (PDT)
-Message-ID: <672682f5.050a0220.361a4b.7e2b@mx.google.com>
-X-Google-Original-Message-ID: <ZyaC7wd2qGrLSsDW@Ansuel-XPS.>
-Date: Sat, 2 Nov 2024 20:52:15 +0100
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
+ Sat, 02 Nov 2024 15:18:54 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Alison Wang <alison.wang@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
+ Andy Fleming <afleming@gmail.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Angelo Dureghello <angelo@sysam.it>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Sean Anderson <seanga2@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Alexander Gendin <agendin@matrox.com>,
- Yang Xiwen <forbidden405@outlook.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Charles Hardin <ckhardin@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Doug Zobel <douglas.zobel@climate.com>,
+ Enric Balletbo i Serra <eballetbo@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Hans de Goede <hdegoede@redhat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>, Heiko Schocher <hs@denx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Martin Kurbanov <mmkurbanov@salutedevices.com>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Artur Rojek <artur@conclusive.pl>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Vasileios Amoiridis <vassilisamir@gmail.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Jens Scharsig <esw@bus-elektronik.de>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kamil Lulko <kamil.lulko@gmail.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mario Six <mario.six@gdsys.cc>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
  Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, John Crispin <john@phrozen.org>
-Subject: Re: [PATCH v5 03/11] led: implement LED boot API
-References: <20241001122511.8832-1-ansuelsmth@gmail.com>
- <20241001122511.8832-4-ansuelsmth@gmail.com>
- <CAFLszTjB4OV-k65rhqJ9pBTmKUnnWthbDJ2Vk3eRxzBgmMeOOg@mail.gmail.com>
- <CAFLszTh9WYnya=8YXXFEcSuVUYuhCGy-+iYFRucgMZq+-1H5UQ@mail.gmail.com>
- <67267f36.df0a0220.87602.7b89@mx.google.com>
- <CAFLszTgP5r56eCTGuG4fbga7Wj8iU97dQZmcvw4ze0UBOhRj1g@mail.gmail.com>
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
+ Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>,
+ Sean Edmond <seanedmond@microsoft.com>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>,
+ Wan Yee Lau <wan.yee.lau@intel.com>, Wolfgang Denk <wd@denx.de>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v3 00/25] led: Remove old status-LED code
+Date: Sat,  2 Nov 2024 16:16:58 -0600
+Message-ID: <20241102221737.547938-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgP5r56eCTGuG4fbga7Wj8iU97dQZmcvw4ze0UBOhRj1g@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 03 Nov 2024 02:40:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -124,47 +129,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Nov 02, 2024 at 01:50:13PM -0600, Simon Glass wrote:
-> Hi Christian,
-> 
-> On Sat, 2 Nov 2024 at 13:36, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> >
-> > On Sat, Nov 02, 2024 at 01:33:10PM -0600, Simon Glass wrote:
-> > > Hi Christian,
-> > >
-> > > On Wed, 2 Oct 2024 at 16:55, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > On Tue, 1 Oct 2024 at 06:25, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> > > > >
-> > > > > Implement LED boot API to signal correct boot of the system.
-> > > > >
-> > > > > led_boot_on/off/blink() are introduced to turn ON, OFF and BLINK the
-> > > > > designated boot LED.
-> > > > >
-> > > > > New Kconfig is introduced, CONFIG_LED_BOOT to enable the feature.
-> > > > > This makes use of the /options/u-boot property "boot-led" to the
-> > > > > define the boot LED.
-> > > > > It's also introduced a new /options/u-boot property "boot-led-period"
-> > > > > to define the default period when the LED is set to blink mode.
-> > > >
-> > > > BTW could you please send a schema update for this so that Linux accepts it?
-> > >
-> > > I'm just checking that you did this?
-> > >
-> >
-> > Yep [0]. Also tagged Rob 2 hours ago. (eh the coincidence)
-> >
-> > Tell me if I should send it with usual way with a dedicated mail. (any
-> > hint on the mailing-list address?)
-> 
-> OK great! Yes, once it lands, please send a patch to bring it into U-Boot
-> 
-> Regards,
-> Simon
-> 
-> > [0] https://github.com/devicetree-org/dt-schema/pull/144
+There has been an LED framework in U-Boot which uses driver model for
+about 9 years now. Recent work is underway to improve it and provide
+more features. It is probably a good time to drop the old code, which
+is only used by 5 boards:
 
-I'm confused what kind of patch I should send to U-Boot? 
+   ./tools/qconfig.py -f LED_STATUS
+   5 matches
+   eb_cpu5282 eb_cpu5282_internal mx23_olinuxino pinephone
+   socfpga_vining_fpga
+
+This series attempts that.
+
+The new /options node provides a way to provide U-Boot settings, and
+LEDs are implemented there. For now I have brought into the options
+schema from upstream. We can update it once the LED additions land
+there.
+
+Changes in v3:
+- Update commit message
+- Combine removal and enable patches
+- Combine removal and enable patches
+- Combine removal and enable patches
+
+Changes in v2:
+- Combine code-removal and defconfig changes
+- Add a patch to enable LED and LED_BOOT for these boards
+- Enable LED on the 5 affected platforms
+- Reorder patches for bisectability
+- Add dt-schema bindings for LED
+
+Simon Glass (25):
+  eb_cpu5282: Drop status-LED code and enable LED
+  vining_fpga: Drop status-LED code and use LED
+  mx23_olinuxino: Drop status-LED code and use LED
+  pinephone: Drop status-LED code and use LED
+  led: Drop LED_STATUS_BOARD_SPECIFIC
+  arm: Drop old LED support
+  common: doc: Drop old LED support
+  st: stm32f429: Drop old LED code
+  led: Make the LED config common
+  led: Drop LED_STATUS from Kconfig
+  led: Drop the legacy LED command
+  misc: Drop gpio_led driver
+  pca9551_led: Delete driver
+  misc: status_led: Delete driver
+  m68k: Drop unused status_led.h header file
+  powerpc: Drop status-LED code
+  igep00x0: Drop unused status_led.h header file
+  sunxi: Drop status-LED code
+  common: Drop status-LED code in board_r
+  image: Drop unused status_led.h header file
+  ide: Drop unused status_led.h header file
+  mpc83xx: Drop status-LED code
+  net: Drop status-LED code
+  led: Drop status_led header file
+  doc: Add devicetree bindings for options
+
+ arch/arm/lib/crt0.S                          |   4 -
+ arch/m68k/lib/bootm.c                        |   3 -
+ arch/powerpc/lib/interrupts.c                |   6 -
+ board/BuS/eb_cpu5282/eb_cpu5282.c            |  20 --
+ board/isee/igep00x0/igep00x0.c               |   1 -
+ board/olimex/mx23_olinuxino/mx23_olinuxino.c |   7 -
+ board/softing/vining_fpga/socfpga.c          |   4 -
+ board/st/stm32f429-discovery/Makefile        |   1 -
+ board/st/stm32f429-discovery/led.c           |  39 ---
+ board/sunxi/board.c                          |   6 -
+ boot/image.c                                 |   4 -
+ cmd/Makefile                                 |   1 -
+ cmd/ide.c                                    |   4 -
+ cmd/legacy_led.c                             | 185 ----------
+ common/board_f.c                             |  22 --
+ common/board_r.c                             |  27 --
+ configs/eb_cpu5282_defconfig                 |   8 +-
+ configs/eb_cpu5282_internal_defconfig        |   8 +-
+ configs/mx23_olinuxino_defconfig             |  10 +-
+ configs/pinephone_defconfig                  |   7 +-
+ configs/socfpga_vining_fpga_defconfig        |  13 +-
+ doc/README.LED                               |  77 -----
+ doc/device-tree-bindings/options.yaml        |  79 +++++
+ doc/device-tree-bindings/options/u-boot.yaml | 136 ++++++++
+ drivers/led/Kconfig                          | 342 +------------------
+ drivers/misc/Kconfig                         |  13 -
+ drivers/misc/Makefile                        |   3 -
+ drivers/misc/gpio_led.c                      | 106 ------
+ drivers/misc/pca9551_led.c                   | 170 ---------
+ drivers/misc/status_led.c                    | 124 -------
+ drivers/timer/mpc83xx_timer.c                |   5 -
+ include/configs/eb_cpu5282.h                 |   6 -
+ include/status_led.h                         | 115 -------
+ net/bootp.c                                  |   7 -
+ net/net.c                                    |  33 --
+ 35 files changed, 236 insertions(+), 1360 deletions(-)
+ delete mode 100644 board/st/stm32f429-discovery/led.c
+ delete mode 100644 cmd/legacy_led.c
+ delete mode 100644 doc/README.LED
+ create mode 100644 doc/device-tree-bindings/options.yaml
+ create mode 100644 doc/device-tree-bindings/options/u-boot.yaml
+ delete mode 100644 drivers/misc/gpio_led.c
+ delete mode 100644 drivers/misc/pca9551_led.c
+ delete mode 100644 drivers/misc/status_led.c
+ delete mode 100644 include/status_led.h
 
 -- 
-	Ansuel
+2.43.0
+
