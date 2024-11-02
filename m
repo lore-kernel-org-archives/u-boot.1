@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65AE3E677EC
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 06:32:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ABB2E677EE
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 06:41:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C73F588EC6;
-	Sat,  2 Nov 2024 07:32:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8F08988EC6;
+	Sat,  2 Nov 2024 07:41:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FEIerhpU";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pQeQRBi2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2833A88EFB; Sat,  2 Nov 2024 07:32:34 +0100 (CET)
+ id 8418F88F50; Sat,  2 Nov 2024 07:41:32 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24A2F88A4C
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 07:32:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADC0E88A4C
+ for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 07:41:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,27 +31,27 @@ Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 679903F136; 
- Sat,  2 Nov 2024 06:32:31 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id D076A3F18F; 
+ Sat,  2 Nov 2024 06:41:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1730529151;
- bh=T+x/dcBmvWg+sVHAg9kY3HQyFv5uyuPo3/ZEbA+NrHA=;
+ s=20210705; t=1730529690;
+ bh=BOyWjVTadbx/Y/xk1hontvCIQhtP7Pbb72KScbmSkW0=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=FEIerhpUOAPRE3UbpTGvbn/EZY3veLFgCatDUxfdHzRMsUIICNzJmgex/yV1SZMnM
- 6p9DQocLLG9c0Bqrxi+qqBG7RnK63Mz/YbYHDsg43LKpj+U35DGecKgr+xYxAK9iSX
- MAljmx+iUcaPZgt6oKqBEysq39DULffgT4glUr1qwxd8G2pWJM1xZ9oHhCihrbJZYa
- sEnehRFqs0k/6tw4swJUs8zT12qFHREQjCY1J/xtbajI560fH7NhstnnuiGDSLDC7h
- IvVAaMWl74G8xH2RaFXbf9kGBprA4BSsF8tYO8OudvKaurWZAixYDEm6Pky4suFBt8
- CI4vNladerI2A==
+ b=pQeQRBi2MVDShSIckoc0map+Io6RqLY67E7weZDrNuWVslQZmdfVyIpAYvIcRGO5Y
+ ILzf5tDql/e9MgX/l+lPCsnWJ+XcUNP/MD1TrhTmlPj/eTCUkRjgNu7M2FyNNIDVl8
+ bJFmXDTV25cHrTS65fPa4vvcsAvnh0TXNvyfeb6u37UnNZHjByKEfC0IJUSQc6wIjM
+ HUa3QQNQ+1pWD5RtFGflAu7htEzg5Vz1S2ROuuxm6+04dZYZpjWN7zOnzM48d9CJbz
+ jUpT8Gvzgqn9DOpebj0oo8q0eEXWrEOa88IiCJtbBlUr1xHmWhV0oOzPFi630Gz/xN
+ 2KK4PDL0QVQyQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] lmb: do not panic in lmb_print_region_flags
-Date: Sat,  2 Nov 2024 07:32:26 +0100
-Message-ID: <20241102063226.39388-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] lmb.c: add missing comma in lmb_dump_region()
+Date: Sat,  2 Nov 2024 07:41:27 +0100
+Message-ID: <20241102064127.41571-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -71,58 +71,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit c3cf0dc64f1c ("lmb: add a check to prevent memory overrun")
-addressed a possible buffer overrun using assert_noisy().
+In the message string " %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: "
+a comma is missing before flags.
 
-Resetting via panic() in lmb_print_region() while allowing invalid
-lmb flags elsewhere is not reasonable.
-
-Instead of panicking print a message indicating the problem.
-
-fls() returns an int. Using a u64 for bitpos does not match.
-Use int instead.
-
-fls() takes an int as argument. Using 1ull << bitpos generates a u64.
-Use 1u << bitpos instead.
+To avoid increasing the code size replace '0x%' by '%#'.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- lib/lmb.c | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+ lib/lmb.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 96a055f951e..00c8888936a 100644
+index 00c8888936a..95adf2e93a4 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -72,16 +72,22 @@ static int __maybe_unused lmb_map_update_notify(phys_addr_t addr,
+@@ -97,7 +97,7 @@ static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
+ 	enum lmb_flags flags;
+ 	int i;
  
- static void lmb_print_region_flags(enum lmb_flags flags)
- {
--	u64 bitpos;
- 	const char *flag_str[] = { "none", "no-map", "no-overwrite", "no-notify" };
-+	unsigned int pflags = flags &
-+			      (LMB_NOMAP | LMB_NOOVERWRITE | LMB_NONOTIFY);
-+
-+	if (flags != pflags) {
-+		printf("invalid %#x\n", flags);
-+		return;
-+	}
-
- 	do {
--		bitpos = flags ? fls(flags) - 1 : 0;
--		assert_noisy(bitpos < ARRAY_SIZE(flag_str));
-+		int bitpos = pflags ? fls(pflags) - 1 : 0;
-+
- 		printf("%s", flag_str[bitpos]);
--		flags &= ~(1ull << bitpos);
--		puts(flags ? ", " : "\n");
--	} while (flags);
-+		pflags &= ~(1u << bitpos);
-+		puts(pflags ? ", " : "\n");
-+	} while (pflags);
- }
+-	printf(" %s.count = 0x%x\n", name, lmb_rgn_lst->count);
++	printf(" %s.count = %#x\n", name, lmb_rgn_lst->count);
  
- static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
+ 	for (i = 0; i < lmb_rgn_lst->count; i++) {
+ 		base = rgn[i].base;
+@@ -105,7 +105,7 @@ static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
+ 		end = base + size - 1;
+ 		flags = rgn[i].flags;
+ 
+-		printf(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: ",
++		printf(" %s[%d]\t[%#llx-%#llx], %#08llx bytes, flags: ",
+ 		       name, i, base, end, size);
+ 		lmb_print_region_flags(flags);
+ 	}
 -- 
 2.45.2
 
