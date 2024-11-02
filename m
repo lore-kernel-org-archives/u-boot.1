@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A5EFE67814
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 22:20:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74CC6E67814
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 22:20:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91DA9890B1;
-	Sat,  2 Nov 2024 23:20:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 031F28910A;
+	Sat,  2 Nov 2024 23:20:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oZcuFe8n";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mrEgy0Z3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0D2C890D9; Sat,  2 Nov 2024 23:20:09 +0100 (CET)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id 4C68389080; Sat,  2 Nov 2024 23:20:19 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5582D89080
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 23:20:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 24DE8892A2
+ for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 23:20:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-71e5a62031aso2484620b3a.1
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 15:20:07 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-20cf3e36a76so32594135ad.0
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 15:20:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730586005; x=1731190805; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730586015; x=1731190815; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u581EJX4sUW51bS4jbnPZtdZVoeef+vK0be1S3L7EUo=;
- b=oZcuFe8nj2nNR36tpEJj7Nv/5tj8v5OBrhiLmmNBEr0ZuYhuYDqYjgtS8/IxQ7URfH
- 7fuiXvfjXDHI0nlVt5jtjck8M6VtZsJh2JedFW7qT86ZH8nVDhPG1ct+pYlcS40Zm1In
- +mNw2EoTFO4pYlilOG6fm6o3BzRDT6A+OD3xA=
+ bh=lAn85OAkLGDECvFRGhP/lDR01d13zdnILV570yMhkzo=;
+ b=mrEgy0Z3sTLHlYWACwVGNrKLF35QImwfa/2XZB+iJjiPAW3repugbF0lybgz4oCFTg
+ gBKEvDB1xgXD9yOZw8xoa+BcoCGX9KXvUZNzNdjDOkIDsr47NBQ9tn9rm6IaLbz2SAOy
+ XsyFCmlrIQQVzCFksQeJJoPzwUZicfmn8hPcc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730586005; x=1731190805;
+ d=1e100.net; s=20230601; t=1730586015; x=1731190815;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=u581EJX4sUW51bS4jbnPZtdZVoeef+vK0be1S3L7EUo=;
- b=Gl9RkXOP4RlnifDvsJ0pgvJ3Wms0yxJdGs9ZILdDOYs93mBsjfoPBHoDu9H4KTYebz
- o59sPVjtXv+ZTxeegEi8qiQYkPk+KcecSVi5Ijf+4ImIvYKUSiRyaMidWuupy/xd4fJh
- 4CTEsqpFsHj4b0IcOWJ/TSsodHArrSVrmqBMQqnew/tTlv6rEe/YcjSEfeIx+agItm5L
- K1WRiZa+Wh1YOntsMEttZNI2+WDLq4Oh2+c1SruPLrOkD81Cc4zLXyisPzQfxLg5BeMM
- fKN/hGHQbkgS/9m+QUP6HQe3LQnd0j7WBnUGvCFPG2dQBksv9+ADjSvX+IaPHEmUOXL9
- zbQA==
-X-Gm-Message-State: AOJu0YwbiRhucqO93L8/5OqGIhb4CY1939Hx3LIsDQsXvbeuDZPcH5sm
- hqgK5ZkIM8XoAitUI4lPI4Su3xUcX8QAdr2xsC78zthgRzjj6nKg5MaEQSiu5HLW9+ZgxNI4zhg
- JpQ==
-X-Google-Smtp-Source: AGHT+IFH7SW0qg7sFvE5Z9iWbTFqgYuO7TRVBCVaccUjZ/Co/dYRPW4sdV2qc40o+4j7A6PP29/IAQ==
-X-Received: by 2002:a05:6a21:1690:b0:1d9:1783:6a2d with SMTP id
- adf61e73a8af0-1dba5343d25mr11180074637.13.1730586004858; 
- Sat, 02 Nov 2024 15:20:04 -0700 (PDT)
+ bh=lAn85OAkLGDECvFRGhP/lDR01d13zdnILV570yMhkzo=;
+ b=tyB/ftITm/hLrgtqhhwV4Xw69LTKRarrwyn9TkVp2u9HNYhyUJG9jJt2TY0gs8cRFJ
+ SI0LDEz0TsA6bMkB1pB49N84lCFrahRaF3dutuykRrJQ9P72guKxuWkSEeHfEl/BECZn
+ /ffhi7E/xenpWGg+9I+AtG9Ulk7vKyqymWSD+S9CMoTEa261PQDm3ADEeq12iFUCv26f
+ zP7fGZsFubxaN/+uCfDkp/StVdnWK/4ftrCejy6wtdIV7jgpxBoP9rOkvbK0hdXpgEju
+ eHaIqPG4pto65pLB7fAeKUCeORbYV/Thls/5MIMK6+CwKaYC4ZweshtQIYNr/KW30P5H
+ uTIw==
+X-Gm-Message-State: AOJu0Yxbw/c5wP20YQ1Hwolr971UONInjyAOx2oQGPLBryWUOAVfUsr7
+ UaICf2KeDvvkOD6y9rrUorAwA9tjQZguB5cmQfU8O49pczpTNlMSCLW+JRg2z8jRQ3gUHR/apb+
+ mqA==
+X-Google-Smtp-Source: AGHT+IHrO0QRoVvq3d6aQARsT4ZjRVfMxN1F4aqULrHE/FtAMIdiwj5UMAJgPs14MdfQHjmafBFw9w==
+X-Received: by 2002:a17:902:cf4c:b0:20b:7be8:8eb9 with SMTP id
+ d9443c01a7336-21103c971c0mr136338635ad.54.1730586014662; 
+ Sat, 02 Nov 2024 15:20:14 -0700 (PDT)
 Received: from chromium.org ([205.220.129.19])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7ee45a0081esm4386286a12.59.2024.11.02.15.19.57
+ 41be03b00d2f7-7ee45a0081esm4386286a12.59.2024.11.02.15.20.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 15:20:04 -0700 (PDT)
+ Sat, 02 Nov 2024 15:20:14 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jens Scharsig <esw@bus-elektronik.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v3 01/25] eb_cpu5282: Drop status-LED code and enable LED
-Date: Sat,  2 Nov 2024 16:16:59 -0600
-Message-ID: <20241102221737.547938-2-sjg@chromium.org>
+ Marek Vasut <marex@denx.de>
+Subject: [PATCH v3 02/25] vining_fpga: Drop status-LED code and use LED
+Date: Sat,  2 Nov 2024 16:17:00 -0600
+Message-ID: <20241102221737.547938-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241102221737.547938-1-sjg@chromium.org>
 References: <20241102221737.547938-1-sjg@chromium.org>
@@ -90,120 +89,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop this old code. Swtich the LED options to use the new approach, in
-the same commit, to maintain build-bisectability.
+This is not used anymore, so drop it.
 
-Both eb_cpu5282 and eb_cpu5282_internal are done together, since they
-share code.
+Enable LED and LED_BOOT instead, since this is the new way to access the
+LED functionality.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v3:
-- Update commit message
+- Combine removal and enable patches
 
-Changes in v2:
-- Combine code-removal and defconfig changes
+ board/softing/vining_fpga/socfpga.c   |  4 ----
+ configs/socfpga_vining_fpga_defconfig | 13 ++-----------
+ 2 files changed, 2 insertions(+), 15 deletions(-)
 
- board/BuS/eb_cpu5282/eb_cpu5282.c     | 20 --------------------
- configs/eb_cpu5282_defconfig          |  8 ++------
- configs/eb_cpu5282_internal_defconfig |  8 ++------
- include/configs/eb_cpu5282.h          |  6 ------
- 4 files changed, 4 insertions(+), 38 deletions(-)
-
-diff --git a/board/BuS/eb_cpu5282/eb_cpu5282.c b/board/BuS/eb_cpu5282/eb_cpu5282.c
-index c254da62bf4..cdd862c57d2 100644
---- a/board/BuS/eb_cpu5282/eb_cpu5282.c
-+++ b/board/BuS/eb_cpu5282/eb_cpu5282.c
-@@ -14,7 +14,6 @@
- #include <bmp_layout.h>
+diff --git a/board/softing/vining_fpga/socfpga.c b/board/softing/vining_fpga/socfpga.c
+index ec2c7ea3631..700184cc575 100644
+--- a/board/softing/vining_fpga/socfpga.c
++++ b/board/softing/vining_fpga/socfpga.c
+@@ -8,7 +8,6 @@
  #include <env.h>
  #include <init.h>
+ #include <net.h>
 -#include <status_led.h>
- #include <bus_vcxk.h>
+ #include <asm/arch/reset_manager.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+@@ -26,9 +25,6 @@ int board_late_init(void)
+ 	const unsigned int usb_nrst_gpio = 35;
+ 	int ret;
  
- /*---------------------------------------------------------------------------*/
-@@ -160,25 +159,6 @@ int misc_init_r(void)
- 	return 1;
- }
+-	status_led_set(1, CONFIG_LED_STATUS_ON);
+-	status_led_set(2, CONFIG_LED_STATUS_ON);
+-
+ 	/* Address of boot parameters for ATAG (if ATAG is used) */
+ 	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
  
--void __led_toggle(led_id_t mask)
--{
--	MCFGPTA_GPTPORT ^= (1 << 3);
--}
--
--void __led_init(led_id_t mask, int state)
--{
--	__led_set(mask, state);
--	MCFGPTA_GPTDDR  |= (1 << 3);
--}
--
--void __led_set(led_id_t mask, int state)
--{
--	if (state == CONFIG_LED_STATUS_ON)
--		MCFGPTA_GPTPORT |= (1 << 3);
--	else
--		MCFGPTA_GPTPORT &= ~(1 << 3);
--}
--
- /*---------------------------------------------------------------------------*/
- 
- /* EOF EB+MCF-EV123.c */
-diff --git a/configs/eb_cpu5282_defconfig b/configs/eb_cpu5282_defconfig
-index 271dbdf4dbb..c51a5db262e 100644
---- a/configs/eb_cpu5282_defconfig
-+++ b/configs/eb_cpu5282_defconfig
-@@ -35,12 +35,8 @@ CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
- CONFIG_SYS_RX_ETH_BUFFER=8
+diff --git a/configs/socfpga_vining_fpga_defconfig b/configs/socfpga_vining_fpga_defconfig
+index 094e9186fca..94018752b40 100644
+--- a/configs/socfpga_vining_fpga_defconfig
++++ b/configs/socfpga_vining_fpga_defconfig
+@@ -77,17 +77,8 @@ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x1000000
+ CONFIG_DWAPB_GPIO=y
  CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_FSL=y
+ CONFIG_SYS_I2C_DW=y
 -CONFIG_LED_STATUS=y
+-CONFIG_LED_STATUS_GPIO=y
 -CONFIG_LED_STATUS0=y
--CONFIG_LED_STATUS_BIT=8
--CONFIG_LED_STATUS_BOOT_ENABLE=y
--CONFIG_LED_STATUS_BOOT=0
+-CONFIG_LED_STATUS_BIT=48
+-CONFIG_LED_STATUS1=y
+-CONFIG_LED_STATUS_BIT1=53
+-CONFIG_LED_STATUS2=y
+-CONFIG_LED_STATUS_BIT2=54
+-CONFIG_LED_STATUS3=y
+-CONFIG_LED_STATUS_BIT3=65
 -CONFIG_LED_STATUS_CMD=y
 +CONFIG_LED=y
 +CONFIG_LED_BOOT=y
- CONFIG_MTD=y
- CONFIG_MTD_NOR_FLASH=y
- CONFIG_FLASH_CFI_DRIVER=y
-diff --git a/configs/eb_cpu5282_internal_defconfig b/configs/eb_cpu5282_internal_defconfig
-index 89a7925dffa..3627d25b990 100644
---- a/configs/eb_cpu5282_internal_defconfig
-+++ b/configs/eb_cpu5282_internal_defconfig
-@@ -33,12 +33,8 @@ CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
- CONFIG_SYS_RX_ETH_BUFFER=8
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_FSL=y
--CONFIG_LED_STATUS=y
--CONFIG_LED_STATUS0=y
--CONFIG_LED_STATUS_BIT=8
--CONFIG_LED_STATUS_BOOT_ENABLE=y
--CONFIG_LED_STATUS_BOOT=0
--CONFIG_LED_STATUS_CMD=y
-+CONFIG_LED=y
-+CONFIG_LED_BOOT=y
- CONFIG_MTD=y
- CONFIG_MTD_NOR_FLASH=y
- CONFIG_FLASH_CFI_DRIVER=y
-diff --git a/include/configs/eb_cpu5282.h b/include/configs/eb_cpu5282.h
-index 26e4ade34ee..a4d1338c8fa 100644
---- a/include/configs/eb_cpu5282.h
-+++ b/include/configs/eb_cpu5282.h
-@@ -14,12 +14,6 @@
- 
- #define CFG_SYS_UART_PORT		(0)
- 
--/*----------------------------------------------------------------------*
-- * Options								*
-- *----------------------------------------------------------------------*/
--
--#define STATUS_LED_ACTIVE		0
--
- /*----------------------------------------------------------------------*
-  * Configuration for environment					*
-  * Environment is in the second sector of the first 256k of flash	*
+ CONFIG_MISC=y
+ CONFIG_I2C_EEPROM=y
+ CONFIG_SYS_I2C_EEPROM_ADDR=0x50
 -- 
 2.43.0
 
