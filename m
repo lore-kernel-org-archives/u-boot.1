@@ -4,72 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A30FFE6781A
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 23:25:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FF05E67816
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 23:26:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64ADF89169;
-	Sun,  3 Nov 2024 00:25:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C096988FFC;
+	Sun,  3 Nov 2024 00:25:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Gv29ryFo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="d9womPps";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C08CC892DB; Sun,  3 Nov 2024 00:25:26 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 3FFE388FFC; Sun,  3 Nov 2024 00:25:29 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA149892CE
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 00:25:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33A5E88C86
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 00:25:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7b155da5b0cso248382785a.2
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 16:25:24 -0700 (PDT)
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-46090640f0cso28803331cf.0
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 16:25:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730589923; x=1731194723; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730589926; x=1731194726; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LH1Kz/vRuHuQg0Wd1+tmF0CON4qzLq8ArDSKX8XeNrc=;
- b=Gv29ryFoagAe6tKuancsKFgqtStjPNZjoDD2OH2aPB9tYB/j+2Parr1+YeeoLDSfCj
- i2KD7VelcLjCtei6102IxdvzuAYnbNnEa6Vq5XNHqINKP1SGgGg/+QmHhGBMUOcTPD9w
- 5vm6aOWp8SatRQt4+gVbYXC+oJ5r5x0HFonfI=
+ bh=D+UhxBRUGwnSxmaCD7obmKINUVJVmiVo58a6vxrhIXg=;
+ b=d9womPpsHYQsoY8pOCwlEJRoQS5N+4h9C3TF8PTBKtbpgePtUgGbc9CmPsJ4zmr5gL
+ 5qsbT/TqtPCxfzqhjN35DpHe6ovMXmWs5v5XdlVu9pWST0u/mL/Klh3j9poxVqwf9Q8D
+ CQ+SYr+UmHCKCZrSjc+henUtJV5MXqlOY4Zug=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730589923; x=1731194723;
+ d=1e100.net; s=20230601; t=1730589926; x=1731194726;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LH1Kz/vRuHuQg0Wd1+tmF0CON4qzLq8ArDSKX8XeNrc=;
- b=Kkb5T6MSac7kkzJ/bQpWGMaYkvG0OngWzx+yH9PU9tnNogPtNbgxorHG/+2Yv7r7v5
- I2m9Yl8gwZ9Ngt8q3SgaHgoqaWlkeh80B7vGx7SBV3U4mCR7iB0v3gdvwtt8b64U7eBJ
- 5kZYecwYBGO5derlM3CMCmFgW40ZelZEgTvSKq7b28e4jxNMr9yncJLNRNH1Xyn7JyU7
- KzFrrL3B+1LAOmISmyvYVJbnyot4a2TBEj+pi06HjyDLiuNTBbEqUEuRBmUQfBO0Q11a
- ewfSM+BWipDhgEKvsXQHBPjaf76lc+4caV5CnC5zmA/v99JSuxn3P42zNiagZwVlj6Ka
- Q6EQ==
-X-Gm-Message-State: AOJu0YwuXuGkuItnxAFdP3MMMymvzoLPSF7M3o+gGxDzUfDMjF3oIZga
- auwUhk0F0w84Ec2TzCYClEKfCgcsJ0l2WrvlOmyf2XUs+9wt/pLmn1ZTtRGwyLNHmuU5yd4FUXW
- X
-X-Google-Smtp-Source: AGHT+IHEEyyho+J4nalvjpoIgy94BUrTyyho1bp9XdzNVJlgiF1xYvN2MlnguI0gYTttNJjl0dFIig==
-X-Received: by 2002:a05:620a:243:b0:7b1:c604:b26c with SMTP id
- af79cd13be357-7b1c604b4a8mr1507424785a.53.1730589923475; 
- Sat, 02 Nov 2024 16:25:23 -0700 (PDT)
+ bh=D+UhxBRUGwnSxmaCD7obmKINUVJVmiVo58a6vxrhIXg=;
+ b=TMAH/EhO5cc/XY6pBPa2mVmuifpdxrQ+//UB5u7mqVKGc02lKehmBrawR05T9UGuAG
+ qB8RV2e5dU7oJ71ZLw0AXzQvQcz/P/8AZqu3e532Q/6Nq0Ms+fx/MylwGS57Ld+sDkxC
+ OtGtq/JEHyXD9S5ameuy6zGDpciibUkp52atyUe6ZRB7X3Dcq6wXd3w8Kdxa/c+ZfLgH
+ tFN1zp9WIfoIqbOqu4Dlvrm/tRPg01xwxus3i/8/7xayagZUyarECZpbM/oJvs+Bp7W7
+ SFAA8HdubqqVzbobda+7k0rxDFzaMzhp+GVhjLR+uzFAFyT7twOtMQSCG277X7aOgxJR
+ xjmg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVEnhud1oXrw+LldVUCd9MLrb9E/JUCcLr9EktOmo43FAelZSwWEpXCAqWEKmAR12J6ngcpwgQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1ZSAfIyk0QPfecktTkx54TwqeT1seZ7k6AvIIhG2Iz3tFSosw
+ DrlPbs1pdoldtmyEh9UseWpjplTLHf+GPn1XI1BPWrxuxT4C1aruASMMct/OKNM=
+X-Google-Smtp-Source: AGHT+IHa9llIVlqvex/uRfmO0AgxxbSRq+SPGboj6PvPnELx8ZnejTm0Nvg9MlJ5eoLeL0S1MyG0MQ==
+X-Received: by 2002:a05:620a:17a2:b0:7b1:43e2:712b with SMTP id
+ af79cd13be357-7b2fb94db55mr1264100785a.11.1730589926059; 
+ Sat, 02 Nov 2024 16:25:26 -0700 (PDT)
 Received: from [127.0.1.1] ([189.177.125.149])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-462ad19b4f5sm32412141cf.83.2024.11.02.16.25.21
+ d75a77b69052e-462ad19b4f5sm32412141cf.83.2024.11.02.16.25.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 16:25:22 -0700 (PDT)
+ Sat, 02 Nov 2024 16:25:25 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241030003649.3506474-1-trini@konsulko.com>
-References: <20241030003649.3506474-1-trini@konsulko.com>
-Subject: Re: [PATCH] test/cmd/mem_copy.c: Use CONFIG_SYS_LOAD_ADDR for base
-Message-Id: <173058992163.1044919.1660170006731631581.b4-ty@konsulko.com>
-Date: Sat, 02 Nov 2024 17:25:21 -0600
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Richard Weinberger <richard@nod.at>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sean Anderson <seanga2@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
+In-Reply-To: <20241026064048.370062-1-heinrich.schuchardt@canonical.com>
+References: <20241026064048.370062-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 0/5] fs: ext4: implement opendir, readdir, closedir
+Message-Id: <173058992364.1044919.1983318156372551084.b4-ty@konsulko.com>
+Date: Sat, 02 Nov 2024 17:25:23 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -90,13 +97,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 29 Oct 2024 18:36:49 -0600, Tom Rini wrote:
+On Sat, 26 Oct 2024 08:40:43 +0200, Heinrich Schuchardt wrote:
 
-> When reading/writing to memory we cannot assume that a base address of
-> 0x0 is correct and functional. So use CONFIG_SYS_LOAD_ADDR as the base
-> from which we add a bit more padding and being our tests.
+> With this series opendir, readdir, closedir are implemented for ext4.
+> These functions are needed for the UEFI sub-system to interact with
+> the ext4 file system.
 > 
+> To reduce code growth the functions are reused to implement the ls
+> command for ext4.
 > 
+> [...]
 
 Applied to local tree/v2-tidy-test-dir, thanks!
 
