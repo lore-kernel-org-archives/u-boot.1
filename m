@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 834CFE67815
-	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 21:40:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A5EFE67814
+	for <u-boot@archiver.kernel.org>; Sat,  2 Nov 2024 22:20:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0528E89117;
-	Sat,  2 Nov 2024 22:40:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 91DA9890B1;
+	Sat,  2 Nov 2024 23:20:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FS5K05oy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oZcuFe8n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4725689100; Sat,  2 Nov 2024 22:40:16 +0100 (CET)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id B0D2C890D9; Sat,  2 Nov 2024 23:20:09 +0100 (CET)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3940C89080
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 22:40:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5582D89080
+ for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 23:20:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6cbceb48613so20691196d6.2
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 14:40:14 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-71e5a62031aso2484620b3a.1
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 15:20:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730583613; x=1731188413; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=BwVhTCyvyWw+nlwrxliXbkGzglTw70fZ0ojoUArWMMs=;
- b=FS5K05oy/foFN/pFezLE3dAilWUrekO4jmhkEnwvhzy9Vl31S+aVn76Tu6f+C6ePCK
- UHgm7p7bZ8k6iHkvjr5EPWtCtTvo+9aEg3eDUhXJA1dirmCFFEI4wl8DMc/Q4GqhAmjj
- EC2Q8W8cyNfidPlA23v0DmF2D3KRKAQARYUyM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730583613; x=1731188413;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1730586005; x=1731190805; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BwVhTCyvyWw+nlwrxliXbkGzglTw70fZ0ojoUArWMMs=;
- b=YEdaC5njqd6TUehYyzUb1IWFsXB7tOQZMflApvp02krFckghi7JUXtmUTZKST4kRb1
- TXV0O+kRxwLkNGi7uULaaB1zk2V2uEA02BcXT8k5d89xxFM01yZjgk3D2SdNAGXztX+K
- 05S/k5br8cAPxRP8Tx5BIamxIy1oRh9yAMU4rPGBhTL3tfk2h69mycNTgXyayuulIcOk
- P40/xy8D0nwv899GVgsjhEF7wZ5m46apcHQptcl9sC+YOhrwCTMJBiNoYCzCQ6ANVA70
- g7b5BJg2NGIeXYq9Ebzpj+aUI583tAS4XYv1VSXuSn2tMwGgzYT/SE/QCJv/3QO2hUcl
- cO8Q==
-X-Gm-Message-State: AOJu0Yxapz9EOKuQjNx939+grwHbPc9wpNo+OLfOq/7ARZiIZ4x3yvpO
- zU96yT2JGWaxp4NPr2uikBSzLkJtrLvMe55cqbiCYbzr5fFrJUrqv8avcUHhXL6rHcEZRYbqo+Q
- y
-X-Google-Smtp-Source: AGHT+IEsVpzV0fP84a8heVXzXGMMwd9RRkI/Hj6mEkMqtcnpj8ma0sK9ZaQGfBZkmBmRl3MNIFQjHQ==
-X-Received: by 2002:a05:6214:4b12:b0:6cb:f561:2a83 with SMTP id
- 6a1803df08f44-6d3460b6b2cmr197612916d6.43.1730583613053; 
- Sat, 02 Nov 2024 14:40:13 -0700 (PDT)
-Received: from bill-the-cat ([189.177.125.149])
+ bh=u581EJX4sUW51bS4jbnPZtdZVoeef+vK0be1S3L7EUo=;
+ b=oZcuFe8nj2nNR36tpEJj7Nv/5tj8v5OBrhiLmmNBEr0ZuYhuYDqYjgtS8/IxQ7URfH
+ 7fuiXvfjXDHI0nlVt5jtjck8M6VtZsJh2JedFW7qT86ZH8nVDhPG1ct+pYlcS40Zm1In
+ +mNw2EoTFO4pYlilOG6fm6o3BzRDT6A+OD3xA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730586005; x=1731190805;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=u581EJX4sUW51bS4jbnPZtdZVoeef+vK0be1S3L7EUo=;
+ b=Gl9RkXOP4RlnifDvsJ0pgvJ3Wms0yxJdGs9ZILdDOYs93mBsjfoPBHoDu9H4KTYebz
+ o59sPVjtXv+ZTxeegEi8qiQYkPk+KcecSVi5Ijf+4ImIvYKUSiRyaMidWuupy/xd4fJh
+ 4CTEsqpFsHj4b0IcOWJ/TSsodHArrSVrmqBMQqnew/tTlv6rEe/YcjSEfeIx+agItm5L
+ K1WRiZa+Wh1YOntsMEttZNI2+WDLq4Oh2+c1SruPLrOkD81Cc4zLXyisPzQfxLg5BeMM
+ fKN/hGHQbkgS/9m+QUP6HQe3LQnd0j7WBnUGvCFPG2dQBksv9+ADjSvX+IaPHEmUOXL9
+ zbQA==
+X-Gm-Message-State: AOJu0YwbiRhucqO93L8/5OqGIhb4CY1939Hx3LIsDQsXvbeuDZPcH5sm
+ hqgK5ZkIM8XoAitUI4lPI4Su3xUcX8QAdr2xsC78zthgRzjj6nKg5MaEQSiu5HLW9+ZgxNI4zhg
+ JpQ==
+X-Google-Smtp-Source: AGHT+IFH7SW0qg7sFvE5Z9iWbTFqgYuO7TRVBCVaccUjZ/Co/dYRPW4sdV2qc40o+4j7A6PP29/IAQ==
+X-Received: by 2002:a05:6a21:1690:b0:1d9:1783:6a2d with SMTP id
+ adf61e73a8af0-1dba5343d25mr11180074637.13.1730586004858; 
+ Sat, 02 Nov 2024 15:20:04 -0700 (PDT)
+Received: from chromium.org ([205.220.129.19])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d353fa5569sm33129976d6.19.2024.11.02.14.40.10
+ 41be03b00d2f7-7ee45a0081esm4386286a12.59.2024.11.02.15.19.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 14:40:12 -0700 (PDT)
-Date: Sat, 2 Nov 2024 15:40:08 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH v3] sandbox: Add a build without CMDLINE
-Message-ID: <20241102214008.GV3600562@bill-the-cat>
-References: <20241102193615.431681-1-sjg@chromium.org>
+ Sat, 02 Nov 2024 15:20:04 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Jens Scharsig <esw@bus-elektronik.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v3 01/25] eb_cpu5282: Drop status-LED code and enable LED
+Date: Sat,  2 Nov 2024 16:16:59 -0600
+Message-ID: <20241102221737.547938-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241102221737.547938-1-sjg@chromium.org>
+References: <20241102221737.547938-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="N/+3Xep/FmGS7kMy"
-Content-Disposition: inline
-In-Reply-To: <20241102193615.431681-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,50 +90,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Drop this old code. Swtich the LED options to use the new approach, in
+the same commit, to maintain build-bisectability.
 
---N/+3Xep/FmGS7kMy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Both eb_cpu5282 and eb_cpu5282_internal are done together, since they
+share code.
 
-On Sat, Nov 02, 2024 at 01:36:11PM -0600, Simon Glass wrote:
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-> Sometimes this breaks, so add a build to keep it working. Since sandbox
-> enables a lot of options, it is a good board to use. The new config is
-> created simply by copying the existing sandbox and turning off CMDLINE
->=20
-> Once we have tests for non-CMDLINE operation, this can be adjusted to
-> run those tests.
->=20
-> Create a new build which will be picked up by CI. Update the maintainer
-> entry as well.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+Changes in v3:
+- Update commit message
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Changes in v2:
+- Combine code-removal and defconfig changes
 
-Note that a handy follow-up would be to use the "N" syntax that
-MAINTAINERS supports and just glob all sandbox stuff that way.
+ board/BuS/eb_cpu5282/eb_cpu5282.c     | 20 --------------------
+ configs/eb_cpu5282_defconfig          |  8 ++------
+ configs/eb_cpu5282_internal_defconfig |  8 ++------
+ include/configs/eb_cpu5282.h          |  6 ------
+ 4 files changed, 4 insertions(+), 38 deletions(-)
 
---=20
-Tom
+diff --git a/board/BuS/eb_cpu5282/eb_cpu5282.c b/board/BuS/eb_cpu5282/eb_cpu5282.c
+index c254da62bf4..cdd862c57d2 100644
+--- a/board/BuS/eb_cpu5282/eb_cpu5282.c
++++ b/board/BuS/eb_cpu5282/eb_cpu5282.c
+@@ -14,7 +14,6 @@
+ #include <bmp_layout.h>
+ #include <env.h>
+ #include <init.h>
+-#include <status_led.h>
+ #include <bus_vcxk.h>
+ 
+ /*---------------------------------------------------------------------------*/
+@@ -160,25 +159,6 @@ int misc_init_r(void)
+ 	return 1;
+ }
+ 
+-void __led_toggle(led_id_t mask)
+-{
+-	MCFGPTA_GPTPORT ^= (1 << 3);
+-}
+-
+-void __led_init(led_id_t mask, int state)
+-{
+-	__led_set(mask, state);
+-	MCFGPTA_GPTDDR  |= (1 << 3);
+-}
+-
+-void __led_set(led_id_t mask, int state)
+-{
+-	if (state == CONFIG_LED_STATUS_ON)
+-		MCFGPTA_GPTPORT |= (1 << 3);
+-	else
+-		MCFGPTA_GPTPORT &= ~(1 << 3);
+-}
+-
+ /*---------------------------------------------------------------------------*/
+ 
+ /* EOF EB+MCF-EV123.c */
+diff --git a/configs/eb_cpu5282_defconfig b/configs/eb_cpu5282_defconfig
+index 271dbdf4dbb..c51a5db262e 100644
+--- a/configs/eb_cpu5282_defconfig
++++ b/configs/eb_cpu5282_defconfig
+@@ -35,12 +35,8 @@ CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+ CONFIG_SYS_RX_ETH_BUFFER=8
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_FSL=y
+-CONFIG_LED_STATUS=y
+-CONFIG_LED_STATUS0=y
+-CONFIG_LED_STATUS_BIT=8
+-CONFIG_LED_STATUS_BOOT_ENABLE=y
+-CONFIG_LED_STATUS_BOOT=0
+-CONFIG_LED_STATUS_CMD=y
++CONFIG_LED=y
++CONFIG_LED_BOOT=y
+ CONFIG_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
+ CONFIG_FLASH_CFI_DRIVER=y
+diff --git a/configs/eb_cpu5282_internal_defconfig b/configs/eb_cpu5282_internal_defconfig
+index 89a7925dffa..3627d25b990 100644
+--- a/configs/eb_cpu5282_internal_defconfig
++++ b/configs/eb_cpu5282_internal_defconfig
+@@ -33,12 +33,8 @@ CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+ CONFIG_SYS_RX_ETH_BUFFER=8
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_FSL=y
+-CONFIG_LED_STATUS=y
+-CONFIG_LED_STATUS0=y
+-CONFIG_LED_STATUS_BIT=8
+-CONFIG_LED_STATUS_BOOT_ENABLE=y
+-CONFIG_LED_STATUS_BOOT=0
+-CONFIG_LED_STATUS_CMD=y
++CONFIG_LED=y
++CONFIG_LED_BOOT=y
+ CONFIG_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
+ CONFIG_FLASH_CFI_DRIVER=y
+diff --git a/include/configs/eb_cpu5282.h b/include/configs/eb_cpu5282.h
+index 26e4ade34ee..a4d1338c8fa 100644
+--- a/include/configs/eb_cpu5282.h
++++ b/include/configs/eb_cpu5282.h
+@@ -14,12 +14,6 @@
+ 
+ #define CFG_SYS_UART_PORT		(0)
+ 
+-/*----------------------------------------------------------------------*
+- * Options								*
+- *----------------------------------------------------------------------*/
+-
+-#define STATUS_LED_ACTIVE		0
+-
+ /*----------------------------------------------------------------------*
+  * Configuration for environment					*
+  * Environment is in the second sector of the first 256k of flash	*
+-- 
+2.43.0
 
---N/+3Xep/FmGS7kMy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcmnDgACgkQFHw5/5Y0
-tyyrvwwAsmgejuPd/N4A9KsuTrRl5ff3tLubU1/jZ/FjpfRcJNLSOdbPeUCKBvtZ
-0/p+KDDyDrQ1fXU7453zhXzjaS7sWCd+sm+PBSpXxpHEpKIe2meJ1uEvMdS9R6Vq
-0KnOtmAqNgR9Jy17zOjiwdydlmbsG1IoEHZ2GH3xlwgEmsxcauYdWvAGoutlFYrT
-htcJO+ShPXSHp546ZpAhAbKGwlHYgdVseBXdIGwDKZtpfMUfwzbnRHJdfWb3HnYb
-DxXlYMG1Ts39rNksxBF+552+WTyocHmoZNbb5B4SQ1q3A+VrEi5udQ7+P1BSqN1f
-0U5YO7KFct4q8AMphEsbOEzjX5hooH8ncTYHfz6wpOrvNXVJszuB1h36SSQgFJXZ
-cMTSYgeIUAOvkLdELPLT3DJ8JzyUanR1R/pxAlboupWN7Zyn4kCAI3M4PM++tEn8
-I2jOd4Paxxwahsahlstgnu6hkR6M1JNyg5yXmpdasRjeatbt50uD9OOvLA7lgowF
-664WcIVB
-=tdvc
------END PGP SIGNATURE-----
-
---N/+3Xep/FmGS7kMy--
