@@ -4,67 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65AE1D11183
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 17:00:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43956D11183
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 17:18:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B83188E14;
-	Sun,  3 Nov 2024 18:00:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 5B5E4889A2;
+	Sun,  3 Nov 2024 18:18:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="i7sR4iil";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="P3hnSp0w";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="JQyaGlc3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E0E788E41; Sun,  3 Nov 2024 18:00:08 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 6119388E41; Sun,  3 Nov 2024 18:18:30 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E540D88DEE
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 18:00:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6892D8899C
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 18:18:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4XhLSP4qW9z9sTH;
- Sun,  3 Nov 2024 18:00:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730653205;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=PFfU0vrYISpopDA9VnovQT9LVpJFnNo0RaSM3HwvgtA=;
- b=i7sR4iilYURyhMn6Z4hMnogP8sdM3V67dEGz5+7eA55/hZJmWH/n60xuX+3ChSKWz+rbJt
- AEcbz14Z6pL+SQ8zspzrU9XQlbmDEwgPPMg1y5ag5c4/5mhGqDlq8m5PTF+suhSLaZFZ3y
- zzRJzyzGMDbyu88dbJ13XFSgGbyNHvOarEPIaIG0+ICozW5OrU7cF2P4ahz43YR2VcAI4E
- krmF1TEq4ipN4466pQSiKi9uEy8sYsm/RT2ew8pD+GNZjEbIkJMHccJ7XJwbHRj7zEG/zM
- BLAyW1uYEFTzuDQyToIbv5SRWvkW7U6jbjyazbTIhm6bRvl2+tmwIMgK5CThFA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730653203;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=PFfU0vrYISpopDA9VnovQT9LVpJFnNo0RaSM3HwvgtA=;
- b=P3hnSp0wLlYaBSz9JXkJXmnSeFdgKr0X6KmErTWAec0CRndMGOJtm303iqWu+y0Hn/1a7J
- /B1e4Wkx2uHAwB/lURnjsRxK9BA7CUIFeu4ay2YWIub2Q9mEgDaIWIbUFIdURqiO0EuKly
- qdv2Ow/0+T4lllsA6xJbKunavCpDKeIDvdPeEejkK1YAHHoRa67kInV+FXPlirPUwmqbHB
- M6yY98Dj1Oo+CHJglUJkF6+XtGKmR3M9Vqt7/8UJanJqY/tJbhCUw6umzhkq3HWaHIok0q
- fzC96+7yjrteQuR00X09OMStMxiZNlEoQXbZ0jvuH/QFAs4A3b+SSgGcA0tsiA==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/master
-Date: Sun,  3 Nov 2024 17:59:27 +0100
-Message-ID: <20241103165951.109723-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1730654302; x=1731259102; i=xypron.glpk@gmx.de;
+ bh=y+yjLkYXZTnQZSYG6qC5zzwcGHVtVGu5RGd08xAuzPI=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=JQyaGlc3xEcjW5YuuL7cBfnTL6cX/Hyi7HxOxQSXxqefh74QULZ95fV30b30526G
+ FOMIuRcwInLi1LhfvWP01mfnkBEKOx1fSLgEt5TMtSYUabnGgaPIuqXk7itWrTmjn
+ NtLzVvvHAVKPKRUnGiOhPtuiRyzsdzPNW9kqCRqQp7CPmJf1ymLh8/LVtamALAWZM
+ 0e9CdS2GSlzk4c1qjTF+v1ClkJE9CS8w6ZXu1OV9246Ui9pouPom7yz+r+Tkhglm5
+ YdoZCso7CCCiXzC/Ozwyf6n1w+940WwszkLn59mTlOEHeV2bmSi00fF6zQVa0Cjh9
+ u6sgVtAH7UiRy8VV2Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MpUUw-1tdN1m2rCG-00kjuT; Sun, 03
+ Nov 2024 18:18:22 +0100
+Message-ID: <3eff8c78-e005-4ebd-8707-6b36b89f10ee@gmx.de>
+Date: Sun, 3 Nov 2024 18:18:21 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 2aa4d95a7dcf01573bf
-X-MBO-RS-META: q7pksco7uw6peexgu6bqmr5twnyk7kzp
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/9] board_f: Correct stack reservation
+To: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Devarsh Thakkar <devarsht@ti.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241103002828.624931-1-sjg@chromium.org>
+ <20241103002828.624931-3-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241103002828.624931-3-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:4Z5Gc0R+3rHJFznd6g06UOjH6lJ9N+84mhtUjdWsEog6jEnGC/Y
+ L/8+RdQoeDS+wmsIpMBScPgLI5dcBSIQSOy07LtKVaBV0wteaC4u2odwBfHtYBV2knrX+qL
+ XE8eh5PUvyh4E+odB4LWwQel2bhBBI8RcVVzwovBbwEdJoiYfSeHe9V0ti6h8jwS5wLrcnw
+ 9V5I0aF9R8cNob3EPa05A==
+UI-OutboundReport: notjunk:1;M01:P0:Cqk/ufvz9W8=;7H+Wm8Lgel7MC5oAmtNKmpK431/
+ 32JUKtCwajil3TK63uI0xqM5U1x1zcG6Xf4rwVKMIhtkzht1b8URQgkSyrzrriUaZJ2S98Yxt
+ M2AUOr20wLm7YyO8u2jVqPZn62Mcf9FJsPMBXpcIKm8H4IZp1N750ptGNInKQJAWr+LK5vg+G
+ 7TTgCvKDGYGZyd87Yo/Digxl1h/e/SkOjm4dCwsE8iz4G+vtgPQvq66Sx0NA1+HfH3MCvX15R
+ vd+mpYKG3KVQ6Vis6bR7/50g77ZD8dlA6oFZFVSzICQeMP3gHoLquEOi9Sy0/Xi+8LChykd1/
+ sYBRCbcOHquS8WPCqsg9idBDY1lBxM8Y5j/KqNvbPEe6NfuXVKzb8qyIKeRMf5nZN3Zb3n3Ia
+ Kty8WEedHcdY+816vIGhdyfYNhpltzqJ6p59fS670+1ETF/UuqeeNSm4JMHnPpHXUzM6+439m
+ hwr/qpYHAeoLooO38qUIGRsmKmrI3/KfuuXXQPQErjzttKeQi/jcH8Svi1U7FRvFm9oQoxTVb
+ MWer11OKZHsSoRVFJ/4u10hqnBaht3c5Shz+P/R1TXD71Dr0VKG0tIKp0y2Q7RAbxUqyP2vKa
+ pLBhikP5HF8G6Lazet84lkza1es5nNUcjf9C9WRHjNNFOZyK0Am5/yLCnwRO5HhVjIUDkU2YH
+ pPIRIG3kfay55DqAuG5mb5hSFfv4+E9zJEYrcbB8ESGJUTNmfxDQ0J5JlEfR2K1X0HPpVz9QD
+ v+yxi88T83bcWeX40I7fUu9T/aI4n74QVcHM1xACCKfjqvrGd3iFw7snwn0lk2LhUGXokpOhQ
+ hQPRUHhvJWAe/JfiXA6MwweA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,59 +94,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 8e5e64d55de9ed97875a0c1b7f293a0286d64312:
+On 11/3/24 01:28, Simon Glass wrote:
+> The reserve_stack_aligned() function already ensures that the resulting
+> address is aligned to a 16-byte boundary. The comment seems to suggest
+> that 16 is passed reserve_stack_aligned() to make it aligned.
+>
+> Change the value to 0, since the stack can start at the current address,
+> if it is suitably aligned already.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> (no changes since v1)
+>
+>   common/board_f.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/common/board_f.c b/common/board_f.c
+> index 98dc2591e1d..677e37d93c0 100644
+> --- a/common/board_f.c
+> +++ b/common/board_f.c
+> @@ -601,7 +601,7 @@ __weak int arch_reserve_stacks(void)
+>   static int reserve_stacks(void)
+>   {
+>   	/* make stack pointer 16-byte aligned */
+> -	gd->start_addr_sp =3D reserve_stack_aligned(16);
+> +	gd->start_addr_sp =3D reserve_stack_aligned(0);
 
-  Merge patch series "fs: ext4: implement opendir, readdir, closedir" (2024-11-01 13:38:05 -0600)
+In 1938f4a5b62f ("Introduce generic pre-relocation board_f.c") you wrote:
 
-are available in the Git repository at:
+/* setup stack pointer for exceptions */
+gd->dest_addr_sp -=3D 16;
+/* leave 3 words for abort-stack, plus 1 for alignment */
+gd->dest_addr_sp -=3D 16;
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+Is that not relevant anymore?
 
-for you to fetch changes up to e2635570e08199bb5644ce164def2a46d1dee9c0:
+Does all and every U-Boot architecture decrement the stack pointer
+before writing values to the stack?
 
-  ARM: renesas: Deduplicate common Renesas defconfig (2024-11-03 12:25:57 +0100)
+E.g. Microblaze, MIPS, RISC-V, and Super-H do not have a dedicated PUSH
+instruction.
 
-----------------------------------------------------------------
-Marek Vasut (6):
-      clk: renesas: Fix missing unbind on driver look up failure
-      ARM: renesas: Deduplicate Renesas R-Car Gen2 defconfigs
-      ARM: renesas: Deduplicate Renesas R-Car Gen3 defconfigs
-      ARM: renesas: Deduplicate Renesas R-Car Gen4 defconfigs
-      ARM: renesas: Deduplicate Renesas R-Car 64bit defconfigs
-      ARM: renesas: Deduplicate common Renesas defconfig
+Best regards
 
- configs/alt_defconfig                | 71 ++----------------------------------
- configs/blanche_defconfig            | 69 +----------------------------------
- configs/gose_defconfig               | 71 ++----------------------------------
- configs/hihope_rzg2_defconfig        | 49 ++-----------------------
- configs/koelsch_defconfig            | 71 ++----------------------------------
- configs/lager_defconfig              | 71 ++----------------------------------
- configs/porter_defconfig             | 71 ++----------------------------------
- configs/r8a77970_eagle_defconfig     | 49 ++-----------------------
- configs/r8a77970_v3msk_defconfig     | 49 ++-----------------------
- configs/r8a77980_condor_defconfig    | 49 ++-----------------------
- configs/r8a77980_v3hsk_defconfig     | 49 ++-----------------------
- configs/r8a77990_ebisu_defconfig     | 49 ++-----------------------
- configs/r8a77995_draak_defconfig     | 49 ++-----------------------
- configs/r8a779a0_falcon_defconfig    | 60 ++----------------------------
- configs/r8a779f0_spider_defconfig    | 58 ++---------------------------
- configs/r8a779g0_whitehawk_defconfig | 58 ++---------------------------
- configs/r8a779h0_grayhawk_defconfig  | 58 ++---------------------------
- configs/rcar3_salvator-x_defconfig   | 49 ++-----------------------
- configs/rcar3_ulcb_defconfig         | 49 ++-----------------------
- configs/renesas_rcar.config          | 27 ++++++++++++++
- configs/renesas_rcar2.config         | 42 +++++++++++++++++++++
- configs/renesas_rcar3.config         |  6 +++
- configs/renesas_rcar4.config         | 17 +++++++++
- configs/renesas_rcar64.config        | 14 +++++++
- configs/rzg2_beacon_defconfig        | 47 ++----------------------
- configs/silinux_ek874_defconfig      | 49 ++-----------------------
- configs/silk_defconfig               | 71 ++----------------------------------
- configs/stout_defconfig              | 71 ++----------------------------------
- drivers/clk/renesas/clk-rcar-gen3.c  | 19 +++++-----
- 29 files changed, 195 insertions(+), 1267 deletions(-)
- create mode 100644 configs/renesas_rcar.config
- create mode 100644 configs/renesas_rcar2.config
- create mode 100644 configs/renesas_rcar3.config
- create mode 100644 configs/renesas_rcar4.config
- create mode 100644 configs/renesas_rcar64.config
+Heinrich
+
+>
+>   	/*
+>   	 * let the architecture-specific code tailor gd->start_addr_sp and
+
