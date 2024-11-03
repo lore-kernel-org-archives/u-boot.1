@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF16D11101
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 14:46:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6B9DD11101
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 14:47:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5191D88EF5;
-	Sun,  3 Nov 2024 15:46:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B973689140;
+	Sun,  3 Nov 2024 15:46:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fToVLpUD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dfHg9hMy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF319890E9; Sun,  3 Nov 2024 15:46:52 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id BBD7F89137; Sun,  3 Nov 2024 15:46:58 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 507EB8862E
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 15:46:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B39098862E
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 15:46:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4315eeb2601so41439685e9.2
- for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 06:46:50 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a9a156513a1so590620666b.0
+ for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 06:46:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730645210; x=1731250010; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730645216; x=1731250016; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AE+3QafnLhsG9pzcICi/kX8Zsp8yOSrPyUS0UKBHGhc=;
- b=fToVLpUDnzVyrJ7fnSErlDJdQe4IK6mc5BVQPyan3X73wrS+RIPapLCp6Ehh/jFSHE
- DrEXF60jUZEjXlWhjM9hoF2kZ9c01eX0vLHayvBk7HFKYH4g8cKLlYXf7fC0pabl1x1N
- /Z48WfW5vzK47dOkBdZqgyUMJ57pKZ10ZH1eY=
+ bh=8NeQKfswvL0+myUBOMhKTuBXvi5nJcRIETdOfxZeopQ=;
+ b=dfHg9hMyvQ191MVeUgS4dvFf0oZVhbngVcbWukAcdchnIiygpsMVd9JBGiF8/gcfrz
+ 0DVZ1eUKfNDciVGJ4Z8atQRv5ancL/U2IWCt6fosXsNiXV3gLYaMMO01u1Jz/V/otcXa
+ 5cCmidg35oibsu/R0yjZrcDgyYI3LkSqwYEG4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730645210; x=1731250010;
+ d=1e100.net; s=20230601; t=1730645216; x=1731250016;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=AE+3QafnLhsG9pzcICi/kX8Zsp8yOSrPyUS0UKBHGhc=;
- b=vomyziojrRwEN9u3C7hDnT+YCkae1y6CILZjaRh2qFZNmR3EiJB7gwYlz9wXTJnVF5
- gh4Z2p6lJBpyzJ5YB9eoXt3fOBOjkKCuG7me7yqgvG8CqnRuhMLPcfVFhoK9R1f7yjc5
- lJKK83hqBQh9TY0QEz3OfgFp/YygaI/EzgqL/m+2VhnGCfRNy7NESH+XILxXqJZENBrj
- SPrc31yLQMSJsxCWNBqoszAiQLoYgmHiwmhzUfJ/4FnhHIbHeKpaiT6c1A9KnmyZ5QFb
- HzdgBgkp03MKDPovd3v55r+Euww/Jk4F+6NF7Qve0ai2uQ9WzrIa/xyvzaiDtin6N2T6
- Y++Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVwI2sdq4r3wfTjNOXDpWK0OV6Uk8aYVKD8M0dQ9EEh76LgjSFihuFLGZrevNQJjywJxa3+j38=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxakbj84hRYmXQNTNYpbRR+URbkDlXBq4quSwBmPOEVr4DVHTih
- ziX3NHcPVBurfJm0tBQHmnv8Q0eju/ltUdpAkF21lnooCkaSBdalHe3EPXEhdovfHRPb7oAY1KZ
- FgexJLRkRu4Sf7K9RYimZfE8CgPS4EuagnOrF
-X-Google-Smtp-Source: AGHT+IHsRHqTE7Jejc4OTVQkbOYAtEJbcoSF17bCYK22lbtGTws8BX7detpBmwiKAKqmREr3BkEbox6YcYDLSx7lI8M=
-X-Received: by 2002:a5d:64cb:0:b0:37d:51b7:5e08 with SMTP id
- ffacd0b85a97d-381c7a5ce0bmr8705477f8f.18.1730645207618; Sun, 03 Nov 2024
- 06:46:47 -0800 (PST)
+ bh=8NeQKfswvL0+myUBOMhKTuBXvi5nJcRIETdOfxZeopQ=;
+ b=FMmHkdVDhehNGPEAXvUaQzp/ptiTeHwhvHpVgM4Po+kkuBzQMc5qq9vPTswaafWTZd
+ o/GtmwT5vt/H7qGX2YY9WFz/YZ7REGZ9zW7Brt/Y8JzgTxO+zsjtKCWvUmnEZR1HYWCB
+ 7Vt8woySsz0LgjkKM0EMoD2MucFa5MJCtQ/dhQJ6wl2wd8AicjCQlffnP26T7I+TdSVR
+ gvt13buz73MwKR8zZBMCZf9b07o7Wzrvm8NnZEOo9fQUnVU830BxyJmXAlDxpKmSl4Q7
+ 2mnl18QIbExs0kLlASmkVKiVBjDFsflJqDZqjwAaU/bKACCS1FCJSI4musoghvHtXrTA
+ Nj5Q==
+X-Gm-Message-State: AOJu0YzW1Gkld0Wjh69hQbD18x2/hLYbKVr6Vnj3WSXFc5HG7px94WSU
+ d37YWiipKP2HR45x6R8d0BLVwZZnTiie6Zzv8oQyvFBXSOF1iqEWoG6EBWsVfWqjVIT5uyffMPO
+ 9cAxmmKALVrh9SLdpMWIMaoZNUnEQYMzAUKir
+X-Google-Smtp-Source: AGHT+IFoOY3x+2VH2raVAs/uznaay+nicTzi1tGbouBajFABxHM4ZW5jO57mFBbJCbOLXQynCkYeTaiw2hV+1QUI2Ag=
+X-Received: by 2002:a17:907:2d89:b0:a99:33dd:d8a0 with SMTP id
+ a640c23a62f3a-a9de5ff9ad3mr2617160166b.38.1730645215946; Sun, 03 Nov 2024
+ 06:46:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20241103002828.624931-1-sjg@chromium.org>
- <20241103002828.624931-5-sjg@chromium.org>
- <bf24a9c2-31fc-4768-80d5-b2a4dea5cc35@gmx.de>
-In-Reply-To: <bf24a9c2-31fc-4768-80d5-b2a4dea5cc35@gmx.de>
+References: <20241017232531.726559-1-sjg@chromium.org>
+ <20241017232531.726559-6-sjg@chromium.org>
+ <CAFLszTihCzaut1MCtQJ=LTzYrhwyT+3On8hM2GMgSd0g6dqKBw@mail.gmail.com>
+ <20241103103626.0d5c76a6@minigeek.lan>
+In-Reply-To: <20241103103626.0d5c76a6@minigeek.lan>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 3 Nov 2024 07:46:35 -0700
-Message-ID: <CAFLszTgPC7mSuhyYcguSWsWPGwbMTPy0iArGvyCM3L4GsXcEoQ@mail.gmail.com>
-Subject: Re: [PATCH v4 4/9] efi: Drop the memset() from efi_alloc()
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sun, 3 Nov 2024 07:46:44 -0700
+Message-ID: <CAFLszThAGC-aBmpk4fDJ0gg+MnNYj+=uJYLQv5kgWjAkaDpyqg@mail.gmail.com>
+Subject: Re: [PATCH v4 5/8] sunxi: Move to bootstd
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,49 +95,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Andre,
 
-On Sun, 3 Nov 2024 at 01:54, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Sun, 3 Nov 2024 at 03:36, Andre Przywara <andre.przywara@arm.com> wrote:
 >
-> On 11/3/24 01:28, Simon Glass wrote:
-> >  From my inspection none of the users need the memory to be zeroed. It
-> > is somewhat unexpected that it does so, since the name gives no clue to
-> > this.
+> On Sat, 2 Nov 2024 11:35:31 -0600
+> Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Simon,
+>
+> > On Thu, 17 Oct 2024 at 17:25, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Drop support for distroboot and move to using bootstd instead.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > (no changes since v2)
+> > >
+> > > Changes in v2:
+> > > - Convert the other DISTRO_DEFAULTS in the Kconfig too
+> > >
+> > >  arch/arm/Kconfig | 10 +++++-----
+> > >  1 file changed, 5 insertions(+), 5 deletions(-)
 > >
-> > Drop the memset() so that it effectively becomes a wrapper around the
-> > normal EFI-pool allocator.
-> >
-> > Another option would be to drop this function and call
-> > efi_allocate_pool() directly, but that increase code size a little.
-> >
-> > Move the function comment to the header file like most other exported
-> > functions in U-Boot.
-> >
-> > Comments were made in v3 that another project uses memset() when
-> > allocating memory, but that is not required by the spec. In any case, as
-> > above, from inspection, none of the users need the memory to be zeroed,
-> > as they fill the entire region with their own data.
+> > Could this series be applied, please?
 >
-> As already written in response to v3 of the series I want to be sure
-> that code that runs on EDK II does not fail on U-Boot.
+> So I played with that a bit:
+> - The FEL script boot method works: it has the highest priority, which
+>   is what we want, because the script would be deliberately injected by
+>   the user to be executed. So thanks for the changes!
+> - However the other global boot method (efimgr) takes precedence over
+>   other, *higher* priority methods (extlinux.conf/boot.scr). This
+>   leads to behavioural regressions, I think, like:
+>   - Say there is a bootaa64.efi on some ESP on the eMMC. If you now
+>     boot from SD card, with boot.scr or extlinux.conf on there, U-Boot
+>     will still find the EFI app first and execute that. I don't think
+>     that's what we want?
+>   - Similar, if you have a boot script on the eMMC, and boot from
+>     there, but with a USB stick carrying a bootaa64.efi plugged in.
+>     Then EFI would win as well. This might be intended, but maybe not,
+>     and I don't see how one would influence that?
 >
-> EFI_DEVICE_PATH_UTILITIES_PROTOCOL.CreateDeviceNode() in EDK II zeros
-> out the returned buffer. We implement this function via efi_alloc().
+> Is there a way to change the bootflow to look for any boot payload on
+> the *boot* media first? So when I boot from SD, it checks this first for
+> EFI, boot.scr, extlinux.conf, then goes to eMMC and USB. Similarly, when
+> booting from eMMC, check there first before considering SD and USB.
+> Maybe I am missing something obvious here?
 >
-> Here is a code example relying on a zeroed out node:
+> So while I am personally happy with EFI being a prominent citizen, I
+> think many sunxi users would still expect more traditional boot methods
+> to at least work - at the moment they might be permanently "shadowed" by
+> some bootaa64.efi sitting *somewhere*. That actually bites me at the
+> moment when working on a new SoC port, where I use an extlinux.conf as
+> an override, to load a custom dev kernel and DTB, but bootstd still
+> finds that grub on that SD card and uses that first :-(
 >
-> https://github.com/acidanthera/gfxutil/blob/5284a662181ff4b81dd19d1279aedb68725b827f/edk2misc.c#L215
+> So I feel like EFI should still be the preferred boot method, but the
+> more custom ways should be allowed to override that.
 >
-> Please, drop the patch.
->
-> I have created issue USWG 0002487
-> https://mantis.uefi.org/mantis/view.php?id=2487) asking to indicate in
-> the specification if the returned device path node should be zeroed out
-> by the firmware.
+> Do you have any ideas how to solve that, or am I holding it wrong?
 
-OK thanks.
+Given that we are past rc1 the easiest thing might be to revert this:
 
-But please ignore this patch. The whole series was sent by mistake.
+f2bfa0cb179 bootstd: Make efi_mgr bootmeth work for non-sandbox setups
+
+until we can figure this out.
+
+Can you try that?
 
 Regards,
 Simon
