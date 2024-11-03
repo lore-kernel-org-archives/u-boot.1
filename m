@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1841D11195
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 22:43:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F9A1D11194
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 22:45:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE25689152;
-	Sun,  3 Nov 2024 23:42:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C70DD88F12;
+	Sun,  3 Nov 2024 23:45:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="grlaQ79o";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="tnc3KtNr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEBEF88F12; Sun,  3 Nov 2024 23:42:39 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id 8184788F3C; Sun,  3 Nov 2024 23:45:11 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC24888F7B
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 23:42:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0C7688EE1
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 23:45:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,33 +31,28 @@ Received: from LT2ubnt.. (dynamic-046-114-105-238.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C0E343FE15; 
- Sun,  3 Nov 2024 22:42:35 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id C9251408DD; 
+ Sun,  3 Nov 2024 22:45:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1730673756;
- bh=VPBQnCrIt4lHZpO2j1hyIy1hVSZx4ZHFp+FQOYqkdPg=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=grlaQ79oMHfkA5TQaW1SauE6y6Wx21ZxsrHoBHxcAZVCE7IuMDDtGwK/iN3XJNYE8
- Vx6W1Zy0Gqb+5KsJ7hBsrutx1i2bZz+tBIlkIH95TyA571iLCc0Rkn2LGY6yWL8N1r
- P2Ma07kFZj42yC6/wTBh7w+61wqlUT10IBeDt2sBuJF4GYQ106dXQWI9BRi+vQe3Hs
- SCRYI04NXDh/0aWRCQRZ1a4tXB/2DgZ34J1POJBDok7BC1Jv2PMF9pUrUJdtQKybt6
- t481XPheESohoHFXKjCBj4rsFl4R9705wbkq3mNYpXng6ZUkg2bDUBVpXGCPjhm7lh
- NWN3crmri/P4A==
+ s=20210705; t=1730673909;
+ bh=x8RtmXF7o3PkzGrYjGU/jIMgwtHwePXzuVi3Ule6ksk=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=tnc3KtNrHVouHZc5TgF2T8dq7f9Qnl8jOLx0hPGrjOrEM5TnVNyUyuuEpc/LGpZss
+ ZDsY8TRJqQBr3PNT/gXINNGb8/mkByAjCJ17A2etGuTsHm/I4r45zaaLSzIu6SaVQg
+ M+Ofdq6hjq59tY1PCB7m5uIdis9+nmIvUdoa6ezIlYJ6qx31aP7CN++qYkftie/gjR
+ A2USM9GzIQ28oXZBxburrYSUZa9G7a8Nj/q/2G0Mg2g6rFqnvFgZcdbIAOiOwVHxCR
+ oZLh8VRVFuBlvXW6WFNwE79qaP7fQVzlwFAgZbbT4qrMSroNA5SdnR+9fvauk/jRTy
+ fGiFnoWoJ4Stg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 4/4] configs: enable UNIT_TEST on qemu_arm_defconfig
-Date: Sun,  3 Nov 2024 23:42:23 +0100
-Message-ID: <20241103224223.195255-5-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] tools: mkeficapsule: use %zd to print ssize_t.
+Date: Sun,  3 Nov 2024 23:45:05 +0100
+Message-ID: <20241103224505.195451-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241103224223.195255-1-heinrich.schuchardt@canonical.com>
-References: <20241103224223.195255-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,28 +71,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The lib_test_uuid_to_le test fails on 32-bit systems. But we never caught
-this in our CI because we never ran any of our C unit tests on 32-bit.
-
-Enable CONFIG_UNIT_TEST on qemu_arm_defconfig.
+For printing a ssize_t variable we must use %zd and not %ld to avoid
+a -Wformat error on 32-bit systems.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
-v2:
-	no change
----
- configs/qemu_arm_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ tools/mkeficapsule.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
-index d042aea49bb..cc4f4540fd5 100644
---- a/configs/qemu_arm_defconfig
-+++ b/configs/qemu_arm_defconfig
-@@ -67,3 +67,4 @@ CONFIG_TPM2_MMIO=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_PCI=y
- CONFIG_TPM=y
-+CONFIG_UNIT_TEST=y
+diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+index 49f5b7849e4..fb6c57f77c1 100644
+--- a/tools/mkeficapsule.c
++++ b/tools/mkeficapsule.c
+@@ -866,12 +866,12 @@ static struct fdt_header *load_dtb(const char *path)
+ 
+ 	dtb = malloc(dtb_size);
+ 	if (!dtb) {
+-		fprintf(stderr, "Can't allocated %ld\n", dtb_size);
++		fprintf(stderr, "Can't allocated %zd\n", dtb_size);
+ 		return NULL;
+ 	}
+ 
+ 	if (fread(dtb, dtb_size, 1, f) != 1) {
+-		fprintf(stderr, "Can't read %ld bytes from %s\n",
++		fprintf(stderr, "Can't read %zd bytes from %s\n",
+ 			dtb_size, path);
+ 		free(dtb);
+ 		return NULL;
 -- 
 2.45.2
 
