@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D31E6F09E
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 14:46:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF16D11101
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 14:46:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72E3B88D70;
-	Sun,  3 Nov 2024 15:46:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5191D88EF5;
+	Sun,  3 Nov 2024 15:46:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AmJMitc/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fToVLpUD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9901B88D70; Sun,  3 Nov 2024 15:46:16 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id AF319890E9; Sun,  3 Nov 2024 15:46:52 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 920B68862E
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 15:46:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 507EB8862E
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 15:46:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a9a977d6cc7so265999766b.3
- for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 06:46:14 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4315eeb2601so41439685e9.2
+ for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 06:46:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730645174; x=1731249974; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730645210; x=1731250010; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=K8g1mTonPtd+4mLLyOZUBwZWnX7C+lWrNPeY4FHtuvY=;
- b=AmJMitc/SLN2GoNxbyN/W/xpWMIicapVlQv98SwNds2amn2tLs+N8gdgLc8j/mdehT
- 9Gj9CqpkVLluq7tAFZB19blRUIxCqDbWoVm/KzRj++9i87bhLWTThTPdUYqHr9Kio0qg
- fhySxnx8UZtNS7dR9ggPFh2F9bymAfnmxEV/rZDNStQEqPbQixqfn8eca+mofWjjIkm0
- YzphRnilz0s0bp3/3U5fTO0vhLP4NbM17shXtSwAtQ/8neykCLX79EAaFW+3nAeFvTDm
- HsLf8qADgKmkNSW55QTC8KSnbMzFyjEf7Tr8OhobJH0oJxoFNccFwvh/mXdzKPyfLBUW
- KanQ==
+ bh=AE+3QafnLhsG9pzcICi/kX8Zsp8yOSrPyUS0UKBHGhc=;
+ b=fToVLpUDnzVyrJ7fnSErlDJdQe4IK6mc5BVQPyan3X73wrS+RIPapLCp6Ehh/jFSHE
+ DrEXF60jUZEjXlWhjM9hoF2kZ9c01eX0vLHayvBk7HFKYH4g8cKLlYXf7fC0pabl1x1N
+ /Z48WfW5vzK47dOkBdZqgyUMJ57pKZ10ZH1eY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730645174; x=1731249974;
+ d=1e100.net; s=20230601; t=1730645210; x=1731250010;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=K8g1mTonPtd+4mLLyOZUBwZWnX7C+lWrNPeY4FHtuvY=;
- b=Sg09w/2ZrbR0n4FQG1/0ahQMFUhnEetllxweFVe+k+Vd/0rqE0aMNckwlLHi4ZNojB
- b8O7pFADaS258w6omUmZgtdYPjsWWg0lbUda1uIiw/YVrnJErj52QYaUNm2Utv6og4n+
- 2bw2QC23J/Lvca1s27Anlr5UOGgAV5h3Vyxx2RtTAItrhHbpIjWCErC2hVGEIoqPq7nb
- 4A9rL2j2VlI6TyhNwMTRx9djxTp6bomNtwnOms5u4wggMLsU9TCmyx5hA5paVcRteed5
- bOGl3RVCVigub5RyJUTSD44IELFWtF4M28dW9fASg/vbINndPdfsJ5VXJupPFjWyWF6z
- ZMWw==
+ bh=AE+3QafnLhsG9pzcICi/kX8Zsp8yOSrPyUS0UKBHGhc=;
+ b=vomyziojrRwEN9u3C7hDnT+YCkae1y6CILZjaRh2qFZNmR3EiJB7gwYlz9wXTJnVF5
+ gh4Z2p6lJBpyzJ5YB9eoXt3fOBOjkKCuG7me7yqgvG8CqnRuhMLPcfVFhoK9R1f7yjc5
+ lJKK83hqBQh9TY0QEz3OfgFp/YygaI/EzgqL/m+2VhnGCfRNy7NESH+XILxXqJZENBrj
+ SPrc31yLQMSJsxCWNBqoszAiQLoYgmHiwmhzUfJ/4FnhHIbHeKpaiT6c1A9KnmyZ5QFb
+ HzdgBgkp03MKDPovd3v55r+Euww/Jk4F+6NF7Qve0ai2uQ9WzrIa/xyvzaiDtin6N2T6
+ Y++Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXTXdQK+Ia0Oj+/0IfuXoJ81ezMeekJ+Z3zRB2bDZld50pE6rZWRa5D2ISKjVKTiz9+W0U6cOM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzC7mqiiVNY8dl8nchJF6ssUNy1WbAjKk2m6gzNslYsfzofx8DD
- Ioy8BvZJoDa0WNrX1uPGGFoWbuKntTZiq5SgfkcZYuNntoZhd+qs37EjJQtRXKkX6P4jrFcnXlT
- qKUSCdCiel1AoK18trTrLTVIa8INhjaLP8WkLHQ==
-X-Google-Smtp-Source: AGHT+IH11WggHn1Refz6TYxbVq1s5VYP+SUkvnQMu4a+X+SY6x/hMPvju0FRKhxWXRnsVPz7UwYAwB0DFBv/Um+vk3Y=
-X-Received: by 2002:a05:6402:510a:b0:5ce:dcb1:b786 with SMTP id
- 4fb4d7f45d1cf-5cedcb1b89emr242137a12.4.1730645173875; Sun, 03 Nov 2024
- 06:46:13 -0800 (PST)
+ AJvYcCVwI2sdq4r3wfTjNOXDpWK0OV6Uk8aYVKD8M0dQ9EEh76LgjSFihuFLGZrevNQJjywJxa3+j38=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxakbj84hRYmXQNTNYpbRR+URbkDlXBq4quSwBmPOEVr4DVHTih
+ ziX3NHcPVBurfJm0tBQHmnv8Q0eju/ltUdpAkF21lnooCkaSBdalHe3EPXEhdovfHRPb7oAY1KZ
+ FgexJLRkRu4Sf7K9RYimZfE8CgPS4EuagnOrF
+X-Google-Smtp-Source: AGHT+IHsRHqTE7Jejc4OTVQkbOYAtEJbcoSF17bCYK22lbtGTws8BX7detpBmwiKAKqmREr3BkEbox6YcYDLSx7lI8M=
+X-Received: by 2002:a5d:64cb:0:b0:37d:51b7:5e08 with SMTP id
+ ffacd0b85a97d-381c7a5ce0bmr8705477f8f.18.1730645207618; Sun, 03 Nov 2024
+ 06:46:47 -0800 (PST)
 MIME-Version: 1.0
-References: <20241102063226.39388-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241102063226.39388-1-heinrich.schuchardt@canonical.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Sun, 3 Nov 2024 20:16:02 +0530
-Message-ID: <CADg8p96T+TUydSAnpdyVP0m8-C2m19gRdWNJToOYy4bAHUYXdA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] lmb: do not panic in lmb_print_region_flags
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+References: <20241103002828.624931-1-sjg@chromium.org>
+ <20241103002828.624931-5-sjg@chromium.org>
+ <bf24a9c2-31fc-4768-80d5-b2a4dea5cc35@gmx.de>
+In-Reply-To: <bf24a9c2-31fc-4768-80d5-b2a4dea5cc35@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 3 Nov 2024 07:46:35 -0700
+Message-ID: <CAFLszTgPC7mSuhyYcguSWsWPGwbMTPy0iArGvyCM3L4GsXcEoQ@mail.gmail.com>
+Subject: Re: [PATCH v4 4/9] efi: Drop the memset() from efi_alloc()
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,72 +90,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 2 Nov 2024 at 12:02, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Commit c3cf0dc64f1c ("lmb: add a check to prevent memory overrun")
-> addressed a possible buffer overrun using assert_noisy().
->
-> Resetting via panic() in lmb_print_region() while allowing invalid
-> lmb flags elsewhere is not reasonable.
->
-> Instead of panicking print a message indicating the problem.
+Hi Heinrich,
 
-I had initially considered only printing an error message in case of
-an invalid flag, but my thinking was that something like an invalid
-flag is a serious issue with a subsystem like lmb. But otoh, your
-argument is correct that we don't take the same action elsewhere in
-the module.
+On Sun, 3 Nov 2024 at 01:54, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 11/3/24 01:28, Simon Glass wrote:
+> >  From my inspection none of the users need the memory to be zeroed. It
+> > is somewhat unexpected that it does so, since the name gives no clue to
+> > this.
+> >
+> > Drop the memset() so that it effectively becomes a wrapper around the
+> > normal EFI-pool allocator.
+> >
+> > Another option would be to drop this function and call
+> > efi_allocate_pool() directly, but that increase code size a little.
+> >
+> > Move the function comment to the header file like most other exported
+> > functions in U-Boot.
+> >
+> > Comments were made in v3 that another project uses memset() when
+> > allocating memory, but that is not required by the spec. In any case, as
+> > above, from inspection, none of the users need the memory to be zeroed,
+> > as they fill the entire region with their own data.
+>
+> As already written in response to v3 of the series I want to be sure
+> that code that runs on EDK II does not fail on U-Boot.
+>
+> EFI_DEVICE_PATH_UTILITIES_PROTOCOL.CreateDeviceNode() in EDK II zeros
+> out the returned buffer. We implement this function via efi_alloc().
+>
+> Here is a code example relying on a zeroed out node:
+>
+> https://github.com/acidanthera/gfxutil/blob/5284a662181ff4b81dd19d1279aedb68725b827f/edk2misc.c#L215
+>
+> Please, drop the patch.
+>
+> I have created issue USWG 0002487
+> https://mantis.uefi.org/mantis/view.php?id=2487) asking to indicate in
+> the specification if the returned device path node should be zeroed out
+> by the firmware.
 
-Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+OK thanks.
 
--sughosh
+But please ignore this patch. The whole series was sent by mistake.
 
->
-> fls() returns an int. Using a u64 for bitpos does not match.
-> Use int instead.
->
-> fls() takes an int as argument. Using 1ull << bitpos generates a u64.
-> Use 1u << bitpos instead.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/lmb.c | 18 ++++++++++++------
->  1 file changed, 12 insertions(+), 6 deletions(-)
->
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 96a055f951e..00c8888936a 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -72,16 +72,22 @@ static int __maybe_unused lmb_map_update_notify(phys_addr_t addr,
->
->  static void lmb_print_region_flags(enum lmb_flags flags)
->  {
-> -       u64 bitpos;
->         const char *flag_str[] = { "none", "no-map", "no-overwrite", "no-notify" };
-> +       unsigned int pflags = flags &
-> +                             (LMB_NOMAP | LMB_NOOVERWRITE | LMB_NONOTIFY);
-> +
-> +       if (flags != pflags) {
-> +               printf("invalid %#x\n", flags);
-> +               return;
-> +       }
->
->         do {
-> -               bitpos = flags ? fls(flags) - 1 : 0;
-> -               assert_noisy(bitpos < ARRAY_SIZE(flag_str));
-> +               int bitpos = pflags ? fls(pflags) - 1 : 0;
-> +
->                 printf("%s", flag_str[bitpos]);
-> -               flags &= ~(1ull << bitpos);
-> -               puts(flags ? ", " : "\n");
-> -       } while (flags);
-> +               pflags &= ~(1u << bitpos);
-> +               puts(pflags ? ", " : "\n");
-> +       } while (pflags);
->  }
->
->  static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
-> --
-> 2.45.2
->
+Regards,
+Simon
