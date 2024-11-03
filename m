@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1452E67819
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 00:38:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37CE3E67816
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 00:38:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 649E98908F;
-	Sun,  3 Nov 2024 01:38:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C1D6288C86;
+	Sun,  3 Nov 2024 01:38:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LOJ/USza";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P44R7obA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DC08890F8; Sun,  3 Nov 2024 01:38:06 +0100 (CET)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id E493A890C1; Sun,  3 Nov 2024 01:38:16 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A54C8908F
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 01:38:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE06E88C86
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 01:38:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-7ea9739647bso2243707a12.0
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 17:38:03 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-20cbca51687so29213065ad.1
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 17:38:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730594281; x=1731199081; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730594293; x=1731199093; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PPEFC5UuvFfHW/m5jiHYWWxLBS9DLPYeUD5NuPr2exU=;
- b=LOJ/USzaxJg7CBOBJEmuRmA4kNbGyoYyUttsuOPC20rDAeci5vuYz81VdDVAA4pl1M
- MlHwa5Xd/2ToI0BtF/DEElpHx3qTPOB11yh60qbwr50jn7TaZ7vWiuRgui9V+2QInaES
- Krxc+ZPTdqPV4ZOoTzyPOepKZAZY0Mj+sS2Hg=
+ bh=vBxNnzLMJWYC9vtI5BNUtoeWvQmYv36CW8LIgAwwRFM=;
+ b=P44R7obAGgALOu6gby7RGEXFcAubiw+20kJjwPOzf+Xq/qElOZldgRLy7OIkV+1NpO
+ K20uU5uFT/alcscY17vElcnnm3PUVq8zEbW7XSZHzIWz0jHYDoW4XrkTCtRcUnXfcsZb
+ V3xauODQ05DGGJeAa6gCgMKgy/03cdXk/H4Sc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730594281; x=1731199081;
+ d=1e100.net; s=20230601; t=1730594293; x=1731199093;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PPEFC5UuvFfHW/m5jiHYWWxLBS9DLPYeUD5NuPr2exU=;
- b=YcR8H4qOfUXI5OweeJNR7lDVVVMsQgDPBiQLFbb5wpL+pccsJjNlBEfbD6v6KG56ec
- LoUkleWi9e0wKkXriqgk2/Bw4eSnPlc5Fja08VNY9ZtcoiI/qd4J1WiZ6hncG67fYstl
- QBzvWe19QY7uEa9rz+KUF2ST3FGkWZh7ipFCzO9rgrUiuyOa48S7Dx9INyLprDjuQyC3
- wP/4Qo/LGlP0X9AVDxKjYMiyc3G6QQ8tEt21ULqJIMhIW4+3xnjaNdVy+UI5OMplKgdR
- HIcIURWKgfVkCZJwO4f3zblGWo9kHQYCSgYaAGQeDfSI9HEJCt6p91R+u/2TL1RwWBR0
- oukw==
-X-Gm-Message-State: AOJu0YyzTphQ4hkV59/ft2KHyEWG+aN57z6o8lggG6EiTNz+PYSI/xli
- 4goeJF6FsFHaB/o3E7D41fcfc9HUEVJB2OkoA2/fRa7YTHKjLQoFomBokRffv+Dl1wxO3xI6pyf
- h4Q==
-X-Google-Smtp-Source: AGHT+IH8mdbwfrJKMwckdipsndK+INFZd3ytDE0ET+7xNbgX9cYLs+8AfNXXGiLYuBcSj+Z99jgelg==
-X-Received: by 2002:a17:903:32c8:b0:20c:e2ff:4a50 with SMTP id
- d9443c01a7336-210c68786dfmr357898005ad.9.1730594281526; 
- Sat, 02 Nov 2024 17:38:01 -0700 (PDT)
+ bh=vBxNnzLMJWYC9vtI5BNUtoeWvQmYv36CW8LIgAwwRFM=;
+ b=tkLX8yMlxatvtd/2V+8J6bhvrO3+JGhU+n2K98SrMu+r5Ln7GPsfIm4MXT3v1Y7c/k
+ Y1mqY/4TQ/HefsaUaccU2uziZufXiwS02qLT6GCN8ipVkTmYyQPuDzLquhlfgZJCrzhk
+ CMtpz64OC6tbkq9SUyILU9JGZfcROobNeVMMdal9AibSlmYL6zod14W3jWTNMV/2q486
+ 7t3SfYUgLjam9ZbMpxNYwB0D/StbaJs/RB7hJlIQj5y1Fg3wGUbVEhFE9e9uFm0b61jn
+ +8+ABKm/avU59nnoU2YQmFUyO6mS5/EiyPvSzejFXWkWaHof+ola+7106MigwjTo0s2z
+ oXzg==
+X-Gm-Message-State: AOJu0Yx2/w7DVByuOnzii5LBB+U+GdHIn616cf0P/PL1uUDvl7KBXM40
+ dsTesAN/zSjPlkJ4Ek8QRLgmbZIA1X8kDnJ4SIFqdvGZOsC2otQLEPIkjozNFYSVrJ/w3OmPfkt
+ TTA==
+X-Google-Smtp-Source: AGHT+IGo2XPV+9SDxacweB+aXSMQOrg9nDpJ1fSImQja0cgI9IZb7ZH6jRuLrE8dONJ2mzLGObXzfw==
+X-Received: by 2002:a17:902:e80a:b0:20c:8907:902 with SMTP id
+ d9443c01a7336-2111af6eac9mr96299635ad.49.1730594292596; 
+ Sat, 02 Nov 2024 17:38:12 -0700 (PDT)
 Received: from chromium.org ([205.220.129.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-211057a63f2sm38987995ad.168.2024.11.02.17.37.43
+ d9443c01a7336-211057a63f2sm38987995ad.168.2024.11.02.17.38.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 17:38:00 -0700 (PDT)
+ Sat, 02 Nov 2024 17:38:11 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Hans de Goede <hdegoede@redhat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>
-Subject: [PATCH v3 18/25] sunxi: Drop status-LED code
-Date: Sat,  2 Nov 2024 18:33:10 -0600
-Message-ID: <20241103003322.626036-19-sjg@chromium.org>
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v3 19/25] common: Drop status-LED code in board_r
+Date: Sat,  2 Nov 2024 18:33:11 -0600
+Message-ID: <20241103003322.626036-20-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241103003322.626036-1-sjg@chromium.org>
 References: <20241103003322.626036-1-sjg@chromium.org>
@@ -100,33 +101,68 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 
 (no changes since v1)
 
- board/sunxi/board.c | 6 ------
- 1 file changed, 6 deletions(-)
+ common/board_r.c | 27 ---------------------------
+ 1 file changed, 27 deletions(-)
 
-diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-index 824c322a0dc..cff7b8eb247 100644
---- a/board/sunxi/board.c
-+++ b/board/sunxi/board.c
-@@ -49,7 +49,6 @@
- #include <spl.h>
- #include <sy8106a.h>
- #include <asm/setup.h>
+diff --git a/common/board_r.c b/common/board_r.c
+index 62228a723e1..caac092c8e7 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -53,7 +53,6 @@
+ #include <pvblock.h>
+ #include <scsi.h>
+ #include <serial.h>
 -#include <status_led.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -550,11 +549,6 @@ void sunxi_board_init(void)
- {
- 	int power_failed = 0;
- 
--#ifdef CONFIG_LED_STATUS
--	if (IS_ENABLED(CONFIG_SPL_DRIVERS_MISC))
--		status_led_init();
--#endif
--
- #ifdef CONFIG_SY8106A_POWER
- 	power_failed = sy8106a_set_vout1(CONFIG_SY8106A_VOUT1_VOLT);
+ #include <stdio_dev.h>
+ #include <timer.h>
+ #include <trace.h>
+@@ -459,29 +458,6 @@ static int initr_malloc_bootparams(void)
+ }
  #endif
+ 
+-static int initr_status_led(void)
+-{
+-	status_led_init();
+-
+-	return 0;
+-}
+-
+-static int initr_boot_led_blink(void)
+-{
+-	status_led_boot_blink();
+-
+-	led_boot_blink();
+-
+-	return 0;
+-}
+-
+-static int initr_boot_led_on(void)
+-{
+-	led_boot_on();
+-
+-	return 0;
+-}
+-
+ #if defined(CONFIG_CMD_NET)
+ static int initr_net(void)
+ {
+@@ -735,8 +711,6 @@ static init_fnc_t init_sequence_r[] = {
+ #if defined(CONFIG_MICROBLAZE) || defined(CONFIG_M68K)
+ 	timer_init,		/* initialize timer */
+ #endif
+-	initr_status_led,
+-	initr_boot_led_blink,
+ 	/* PPC has a udelay(20) here dating from 2002. Why? */
+ #ifdef CONFIG_BOARD_LATE_INIT
+ 	board_late_init,
+@@ -759,7 +733,6 @@ static init_fnc_t init_sequence_r[] = {
+ #if defined(CFG_PRAM)
+ 	initr_mem,
+ #endif
+-	initr_boot_led_on,
+ 	run_main_loop,
+ };
+ 
 -- 
 2.43.0
 
