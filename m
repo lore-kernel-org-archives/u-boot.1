@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4758BD11195
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 22:42:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BE27D11195
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 22:42:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56E0C88F94;
-	Sun,  3 Nov 2024 23:42:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BC96288F12;
+	Sun,  3 Nov 2024 23:42:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="YptZJQJo";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="mQEOc8e6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AEBF8911D; Sun,  3 Nov 2024 23:42:37 +0100 (CET)
+ id 0E6C488F82; Sun,  3 Nov 2024 23:42:38 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1984D88EE1
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 23:42:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 30B30890D1
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 23:42:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,18 +31,19 @@ Received: from LT2ubnt.. (dynamic-046-114-105-238.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 0C9863F1A8; 
- Sun,  3 Nov 2024 22:42:33 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 5631F3FE12; 
+ Sun,  3 Nov 2024 22:42:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1730673753;
- bh=R05tUXMX8aqYiIzPK+tI+tHK2NzxuKmhRxHozB0F9Tw=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=YptZJQJoQrHVP08iFgQ4OG4m6tQzgoOZaECQYSOuwLGBUUslXhs5qbk6lxHQu+t2X
- INMIwhn8hHglQxsgBsbBGnGBUlCLz+CW3S59Bvvoq/W7nKPm2dsh8KaBFKaBJ4MjyP
- 1daCS8yELa+ZLsdOOtyQeNB9nIRmE9nB3r5R+YaleIvtGYvjncq/RjdLqnPMkYEaQP
- X9qK0JMUbxVVSN3XiZ4tdPL/m0IERYaI3Jn/gvLv6O+aM6oC88CT8iKc3mw4woX6FV
- dBFBD2Eat8IyE37gd2+EZdZWSMhQDlcf/oTNEaBBed5qIMK6qjaMyd6I/9aVXCYC06
- DGPgM+90BS57A==
+ s=20210705; t=1730673754;
+ bh=1V92Qdi5CYYUXE978rk9kMr9jy3qTMN1XHh6LjjS2AQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=mQEOc8e6sf/IlgKWrzBaecE/nllQj7Qr8WbBX6k01szZDoILC/Bo4+GUK5LmarHxx
+ XVCAsp9IedWsDJxZ5EWjem2CNmXiRL5TmRMavUzyhY+sVpqM7bFisK445nD1pTaJQL
+ thxBHa9VrSWe7Sbm9YHvqWi47eve13A+tNuVgV4uEt/UE/UyVRld4P0uFpGZiEcYj4
+ rQC7wj6hb4ojxSC4fr8p/C5X7ePFkrtbP7tKO/mF8bQtpM9s+tVTglTDgRwQF3i9FD
+ UlBpwXVGIUg44tTnDn25QxKXCophJNtvyIbjhC3mBkHijBHUOLnQaYZgP9UWIw3uVJ
+ EIch5PZrxzBGQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
@@ -50,11 +51,14 @@ Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
  Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 0/4] lib: uuid: fix uuid_str_to_le_bin() on 32-bit
-Date: Sun,  3 Nov 2024 23:42:19 +0100
-Message-ID: <20241103224223.195255-1-heinrich.schuchardt@canonical.com>
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: [PATCH v2 2/4] lib: uuid: fix uuid_str_to_le_bin() on 32-bit
+Date: Sun,  3 Nov 2024 23:42:21 +0100
+Message-ID: <20241103224223.195255-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241103224223.195255-1-heinrich.schuchardt@canonical.com>
+References: <20241103224223.195255-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -73,30 +77,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The lib_test_uuid_to_le and lib lib_test_dynamic_uuid tests fail on
-32-bit systems. But we never caught this in our CI because we never
-ran any of our C unit tests on 32-bit.
-
-Enable CONFIG_UNIT_TEST on qemu_arm_defconfig.
-
 hextoul() cannot convert a string to a 64-bit number on a 32-bit system.
-Use the new function hextoull() instead.
+Use function hextoull() instead.
 
+Reported-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Fixes: 22c48a92cdce ("lib: uuid: supporting building as part of host tools")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
 v2:
-	fix uuid_str_to_bin() too
+	no change
+---
+ lib/uuid.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Heinrich Schuchardt (4):
-  lib: provide function hextoull()
-  lib: uuid: fix uuid_str_to_le_bin() on 32-bit
-  lib: uuid: fix uuid_str_to_bin() on 32-bit
-  configs: enable UNIT_TEST on qemu_arm_defconfig
+diff --git a/lib/uuid.c b/lib/uuid.c
+index c6a27b7d044..19f33dd1477 100644
+--- a/lib/uuid.c
++++ b/lib/uuid.c
+@@ -35,6 +35,7 @@
+ #ifdef USE_HOSTCC
+ /* polyfill hextoul to avoid pulling in strto.c */
+ #define hextoul(cp, endp) strtoul(cp, endp, 16)
++#define hextoull(cp, endp) strtoull(cp, endp, 16)
+ #endif
 
- configs/qemu_arm_defconfig |  1 +
- include/vsprintf.h         | 13 +++++++++++++
- lib/strto.c                |  5 +++++
- lib/uuid.c                 |  5 +++--
- 4 files changed, 22 insertions(+), 2 deletions(-)
-
+ int uuid_str_valid(const char *uuid)
+@@ -339,7 +340,7 @@ int uuid_str_to_le_bin(const char *uuid_str, unsigned char *uuid_bin)
+ 	tmp16 = cpu_to_le16(hextoul(uuid_str + 19, NULL));
+ 	memcpy(uuid_bin + 8, &tmp16, 2);
+ 
+-	tmp64 = cpu_to_le64(hextoul(uuid_str + 24, NULL));
++	tmp64 = cpu_to_le64(hextoull(uuid_str + 24, NULL));
+ 	memcpy(uuid_bin + 10, &tmp64, 6);
+ 
+ 	return 0;
 -- 
 2.45.2
 
