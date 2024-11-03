@@ -4,77 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD64FE6781B
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 09:54:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8042AE6B252
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 10:36:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B89A8909F;
-	Sun,  3 Nov 2024 10:54:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B4F5F8909F;
+	Sun,  3 Nov 2024 11:36:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XHGI22o/";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C91EE890B9; Sun,  3 Nov 2024 10:54:17 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC3268907E
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 10:54:14 +0100 (CET)
+ id A5DCB890F8; Sun,  3 Nov 2024 11:36:43 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 4CD4B88ECB
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 11:36:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4315839a7c9so28234815e9.3
- for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 01:54:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730627654; x=1731232454; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wQzeNlBoRs7GzrQeHd6MG9ceCCPQkgVTcfJ1c0M5v/U=;
- b=XHGI22o/BQ5cxVQj2hGjGRFDQR/yXWj7N0M/qcoMhUSKtpTAK3B608tL+15V0J0I+H
- 6HuiYe8UFz7qAzva07wN4UlDxX6Xc1yVwv2H0S9kS2GHH5vJUmFwVqqj6+iJuYougRWk
- EqpjBCySI84r2Ort7eZVWbhbIsJ58LaqyJOU8sRo0sTeQ+8PsegrOX1Oi+BuoDCKt8By
- kWuZa47kiR+X2h01WMyq4+XqzQMX5sZk7mZ0y1STc6UIFwq8quVnAdzxwTcAlmg6G2v9
- Dr8Xlv7bOlvRtF4xxMzgwSxWuA5C4Jz89D8Fq30yBR+iphH2dXYaL2pSx87n4m4WTcAe
- luag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730627654; x=1731232454;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wQzeNlBoRs7GzrQeHd6MG9ceCCPQkgVTcfJ1c0M5v/U=;
- b=aNuNMyl0iEKIBgz/u/ihC1cakdS37Ss37bimb/s1HD+V91v6OTBpjxW88MzPeTlf70
- xzPlXM12nqwDVY8L6VV9msjvIZ7/08F0eGThbNd1o4x6q3lL41qZRaQ6t2S7UJ/3Lu7X
- evjpdhpXx7rGZ2V45tqaLBa37nVPr6Khzd1GBXNZPhckOdcEN3JcVnC2ckhIac181d5K
- MW0KxO8z6FrvJkzegNFwomUOiAFllYgwbKXXa8KP4mn7Z/pON+Ehb32ukZuslKjMk8Z+
- Ubr/+ZhAN0qITq229ZdLO4heSHAiRZqfml5QJm/Pfl2xyWgpsbohgnE8NQUTucw1ipIW
- q5Gw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVoVzYtevHTvf08mM0NHfXmZVZs/GqmPVCY38a8EDyn67U+d07FCpxVqkL64ZYG1MaPwh52gzQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwbAJzk6UlBId4aydKOJHqdUpdj0CnTRTexAP/57lAMX+TRl6Ou
- 1HrYAZrKDYc9vOuRwr2Hsihy/S/J1afQcBoRZG4nNL6qnt8m3lOhjENGAyIhLplsNlMympi9U6+
- F3mt4l7yWfxVr2bNnpSiikQ8S54g=
-X-Google-Smtp-Source: AGHT+IHoc3u3XYh6dPBvcQaZMjtja0ehbWKtRbvNl+klveq2DCu4uTkL1ywgVdwjNulxgUDkXi169D5loC+GhoJwwpg=
-X-Received: by 2002:a05:600c:4ec7:b0:42e:93af:61c5 with SMTP id
- 5b1f17b1804b1-4319acad2e4mr256516035e9.14.1730627654193; Sun, 03 Nov 2024
- 01:54:14 -0800 (PST)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6A0A7FEC;
+ Sun,  3 Nov 2024 02:37:10 -0800 (PST)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C53D93F66E;
+ Sun,  3 Nov 2024 02:36:38 -0800 (PST)
+Date: Sun, 3 Nov 2024 10:36:26 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Jagan Teki
+ <jagan@amarulasolutions.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ =?UTF-8?B?Q3PDs2vDoXM=?= Bence <csokas.bence@prolan.hu>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Michal Simek <michal.simek@amd.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Peter Robinson
+ <pbrobinson@gmail.com>, Rayagonda Kokatanur
+ <rayagonda.kokatanur@broadcom.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH v4 5/8] sunxi: Move to bootstd
+Message-ID: <20241103103626.0d5c76a6@minigeek.lan>
+In-Reply-To: <CAFLszTihCzaut1MCtQJ=LTzYrhwyT+3On8hM2GMgSd0g6dqKBw@mail.gmail.com>
+References: <20241017232531.726559-1-sjg@chromium.org>
+ <20241017232531.726559-6-sjg@chromium.org>
+ <CAFLszTihCzaut1MCtQJ=LTzYrhwyT+3On8hM2GMgSd0g6dqKBw@mail.gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-References: <20241102100836.103005-1-heinrich.schuchardt@canonical.com>
- <20241102100836.103005-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241102100836.103005-2-heinrich.schuchardt@canonical.com>
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Sun, 3 Nov 2024 10:54:02 +0100
-Message-ID: <CAByghJZkj4uQDUYGm46vYFdK5etJ1Fup36VGmrPkjkuEeD2Mkg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] cmd: hash: correct parameter count check
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,50 +65,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On Sat, 2 Nov 2024 11:35:31 -0600
+Simon Glass <sjg@chromium.org> wrote:
 
-On Sat, Nov 2, 2024 at 11:09=E2=80=AFAM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Since commit 348ea878508d ("cmd: hash: fix param count check") the hash
-> command cannot be used without the optional variable name parameter if
-> CONFIG_HASH_VERIFY=3Dy. 'hash sha1 $loadaddr $filesize' returns
-> CMD_RET_USAGE.
->
-> The minimum number of arguments is four no matter if verification is
-> enabled or not.
->
-> Fixes: 348ea878508d ("cmd: hash: fix param count check")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  cmd/hash.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/cmd/hash.c b/cmd/hash.c
-> index 60d482b7f87..5b40982b098 100644
-> --- a/cmd/hash.c
-> +++ b/cmd/hash.c
-> @@ -25,7 +25,7 @@ static int do_hash(struct cmd_tbl *cmdtp, int flag, int=
- argc,
->         char *s;
->         int flags =3D HASH_FLAG_ENV;
->
-> -       if (argc < (HARGS - 1))
-> +       if (argc < 4)
->                 return CMD_RET_USAGE;
->
->  #if IS_ENABLED(CONFIG_HASH_VERIFY)
-> --
-> 2.45.2
->
+Hi Simon,
 
-Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+> On Thu, 17 Oct 2024 at 17:25, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Drop support for distroboot and move to using bootstd instead.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v2)
+> >
+> > Changes in v2:
+> > - Convert the other DISTRO_DEFAULTS in the Kconfig too
+> >
+> >  arch/arm/Kconfig | 10 +++++-----
+> >  1 file changed, 5 insertions(+), 5 deletions(-)  
+> 
+> Could this series be applied, please?
 
---=20
-Best regards - Atentamente - Meilleures salutations
+So I played with that a bit:
+- The FEL script boot method works: it has the highest priority, which
+  is what we want, because the script would be deliberately injected by
+  the user to be executed. So thanks for the changes!
+- However the other global boot method (efimgr) takes precedence over
+  other, *higher* priority methods (extlinux.conf/boot.scr). This
+  leads to behavioural regressions, I think, like:
+  - Say there is a bootaa64.efi on some ESP on the eMMC. If you now
+    boot from SD card, with boot.scr or extlinux.conf on there, U-Boot
+    will still find the EFI app first and execute that. I don't think
+    that's what we want?
+  - Similar, if you have a boot script on the eMMC, and boot from
+    there, but with a USB stick carrying a bootaa64.efi plugged in.
+    Then EFI would win as well. This might be intended, but maybe not,
+    and I don't see how one would influence that?
 
-Igor Opaniuk
+Is there a way to change the bootflow to look for any boot payload on
+the *boot* media first? So when I boot from SD, it checks this first for
+EFI, boot.scr, extlinux.conf, then goes to eMMC and USB. Similarly, when
+booting from eMMC, check there first before considering SD and USB.
+Maybe I am missing something obvious here?
 
-mailto: igor.opaniuk@gmail.com
-skype: igor.opanyuk
-https://www.linkedin.com/in/iopaniuk
+So while I am personally happy with EFI being a prominent citizen, I
+think many sunxi users would still expect more traditional boot methods
+to at least work - at the moment they might be permanently "shadowed" by
+some bootaa64.efi sitting *somewhere*. That actually bites me at the
+moment when working on a new SoC port, where I use an extlinux.conf as
+an override, to load a custom dev kernel and DTB, but bootstd still
+finds that grub on that SD card and uses that first :-(
+
+So I feel like EFI should still be the preferred boot method, but the
+more custom ways should be allowed to override that.
+
+Do you have any ideas how to solve that, or am I holding it wrong?
+
+Cheers,
+Andre
