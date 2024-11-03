@@ -4,68 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A50D11187
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 17:54:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25ED1D1118E
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 19:01:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D025D890D1;
-	Sun,  3 Nov 2024 18:54:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 47A7B88EF5;
+	Sun,  3 Nov 2024 20:01:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="VhHK5+L0";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Td1WHZGm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 736558911B; Sun,  3 Nov 2024 18:54:42 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ id 1A7C588EAF; Sun,  3 Nov 2024 20:01:21 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4144488D70
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 18:54:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AAD288A4C
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 20:01:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: b216c2fb-9a0c-11ef-93fe-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id b216c2fb-9a0c-11ef-93fe-005056994fde;
- Sun, 03 Nov 2024 18:54:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=7tV+CyWnfKppQCNddMyDJG/h0vEcvGyWsPcJq3uA9n0=;
- b=VhHK5+L0zeWYapQvfG1MwKp6u+cIOI6UXnlyHBbISWJK6RvSL3JbvGQKwI0wM/JpKzxq5zSLOJnX4
- kFGnDabw+c1TJfVbuEINiZXfGfHjIMGq9f+zG2H+lOKp0EFojcbabtLTMugOnOGLB4zqC8vL8rgJ5/
- 8BlzgxAA+ZcZLCmTlFfcYbLN8g0GDCyRVD1EYn2McRamhRuoVduewArtdcAbIUya87FBCVS8LgERce
- sWImNWTLrREDmLNz4OI1gclXxiTOa8HasBNMgn4BXPWFfzuoAw1dDs8b8lA6mahpRecBrMOZX+79BK
- OV7uIPFHw4R+lWOhZ2hz4m2997DAIPw==
-X-KPN-MID: 33|WMes2u5gT9YDhf4lX1Vf8HhlspBloYJrdCK3eKy0Bv04wKBzsoSknTR9lgkIKKk
- lqV9V3anqjFj4r+N2Ywn6T6wMj4xzHzfJM0NOsONHqJ4=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|JfOb6fkg8tfeST/G1FIYZ8YppA0wKG4UvPGwfk5Lk3BQ13tvGjVvHoWacVpAVQE
- XerrirdHtf03e4vO5oaHSkQ==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id b1caa454-9a0c-11ef-891f-00505699d6e5;
- Sun, 03 Nov 2024 18:54:39 +0100 (CET)
-Date: Sun, 03 Nov 2024 18:54:38 +0100
-Message-Id: <87ldy042zl.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: sjg@chromium.org, u-boot@lists.denx.de,
- jagan@amarulasolutions.com, quentin.schulz@cherry.de,
- trini@konsulko.com, caleb.connolly@linaro.org,
- csokas.bence@prolan.hu, marek.vasut+renesas@mailbox.org,
- michal.simek@amd.com, Oliver.Gaskell@analog.com,
- pbrobinson@gmail.com, rayagonda.kokatanur@broadcom.com,
- sumit.garg@linaro.org, venkatesh.abbarapu@amd.com
-In-Reply-To: <20241103103626.0d5c76a6@minigeek.lan> (message from Andre
- Przywara on Sun, 3 Nov 2024 10:36:26 +0000)
-Subject: Re: [PATCH v4 5/8] sunxi: Move to bootstd
-References: <20241017232531.726559-1-sjg@chromium.org>
- <20241017232531.726559-6-sjg@chromium.org>
- <CAFLszTihCzaut1MCtQJ=LTzYrhwyT+3On8hM2GMgSd0g6dqKBw@mail.gmail.com>
- <20241103103626.0d5c76a6@minigeek.lan>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 1C4C63F9DA; 
+ Sun,  3 Nov 2024 19:01:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1730660478;
+ bh=Ya0Euwq58uKg5YYmLHOVCLSmEI/RUsaI+EU1jbTV64Y=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Td1WHZGmDLupqcIld3p2+tGQH3dyw6CdFNn/iK/4g6Tv50m9pW5XgHs74yGWdDyu8
+ dcIXNg1Oizj2qHOAnPlJCY0SGtYTAtyL5Je/6UZ3w3T4+ovbrSFoAUI5uikyqJjA7Z
+ juyy+3hIEzRWzZ1Ffm5kHu8/T8Fz7XFnM8r1TrXbenCIy2Y3tFyNkde+pPUpxyhRXw
+ F8mm/6oB3TLRnS8f0eVjk9GYxnJoMG0JieJZgdl+RZawdAOrs06lV19cLTupsUFIZq
+ 885uJ7RhHGn+eQEo2pUkvaf3jvS479zcatcVRdzlZNWym16Wi5pu6hcv3xzH3JgP5x
+ a4AcZWd/6CYmA==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] mips: malta: set MIPS_RELOCATION_TABLE_SIZE=0xc000
+Date: Sun,  3 Nov 2024 20:01:13 +0100
+Message-ID: <20241103190113.161289-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,86 +70,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Sun, 3 Nov 2024 10:36:26 +0000
-> From: Andre Przywara <andre.przywara@arm.com>
+MIPS_RELOCATION_TABLE_SIZE=0x8000 is too small to enable UNIT_TEST.
+Increase it by 50 % (16 KiB).
 
-Hi Andre,
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ arch/mips/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-> On Sat, 2 Nov 2024 11:35:31 -0600
-> Simon Glass <sjg@chromium.org> wrote:
-> 
-> Hi Simon,
-> 
-> > On Thu, 17 Oct 2024 at 17:25, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Drop support for distroboot and move to using bootstd instead.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > (no changes since v2)
-> > >
-> > > Changes in v2:
-> > > - Convert the other DISTRO_DEFAULTS in the Kconfig too
-> > >
-> > >  arch/arm/Kconfig | 10 +++++-----
-> > >  1 file changed, 5 insertions(+), 5 deletions(-)  
-> > 
-> > Could this series be applied, please?
-> 
-> So I played with that a bit:
-> - The FEL script boot method works: it has the highest priority, which
->   is what we want, because the script would be deliberately injected by
->   the user to be executed. So thanks for the changes!
-> - However the other global boot method (efimgr) takes precedence over
->   other, *higher* priority methods (extlinux.conf/boot.scr). This
->   leads to behavioural regressions, I think, like:
->   - Say there is a bootaa64.efi on some ESP on the eMMC. If you now
->     boot from SD card, with boot.scr or extlinux.conf on there, U-Boot
->     will still find the EFI app first and execute that. I don't think
->     that's what we want?
->   - Similar, if you have a boot script on the eMMC, and boot from
->     there, but with a USB stick carrying a bootaa64.efi plugged in.
->     Then EFI would win as well. This might be intended, but maybe not,
->     and I don't see how one would influence that?
-> 
-> Is there a way to change the bootflow to look for any boot payload on
-> the *boot* media first? So when I boot from SD, it checks this first for
-> EFI, boot.scr, extlinux.conf, then goes to eMMC and USB. Similarly, when
-> booting from eMMC, check there first before considering SD and USB.
-> Maybe I am missing something obvious here?
+diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
+index b2d0aaadb2a..fce56cb332e 100644
+--- a/arch/mips/Kconfig
++++ b/arch/mips/Kconfig
+@@ -319,6 +319,7 @@ config MIPS_CACHE_DISABLE
+ config MIPS_RELOCATION_TABLE_SIZE
+ 	hex "Relocation table size"
+ 	range 0x100 0x10000
++	default "0xc000" if TARGET_MALTA
+ 	default "0x8000"
+ 	---help---
+ 	  A table of relocation data will be appended to the U-Boot binary
+-- 
+2.45.2
 
-The issue here is that the EFI bootmanager by its very nature
-considers all possible devices for which boot options have been
-included in the BootOptions EFI variable.  So if you have enabled
-bootmeth_efi_mgr (and you probably should), and you have an active
-boot option (that is a boot option that is included in the BootOptions
-EFI variable) that points at eMMC or USB, it will try too boot using
-that boot option.  So you'd think things would be fine as long as you
-don't add boot options for eMMC or USB to the BootOrder variable.
-
-Unfortunately the EFI_LOADER code will automatically generate media
-device boot options for all the block devices that get added and adds
-those to the BootOrder variables in an attempt to implement the
-requirement to boot from removable media if everything else fails.
-But I think that's a mistake.  I can't find a requirement to add boot
-options for these in the spec, let alone a requirement to add those to
-BootOrder.  I suppose this fallback could be implemented as a separate
-bootmeth that can be low priority.
-
-> So while I am personally happy with EFI being a prominent citizen, I
-> think many sunxi users would still expect more traditional boot methods
-> to at least work - at the moment they might be permanently "shadowed" by
-> some bootaa64.efi sitting *somewhere*. That actually bites me at the
-> moment when working on a new SoC port, where I use an extlinux.conf as
-> an override, to load a custom dev kernel and DTB, but bootstd still
-> finds that grub on that SD card and uses that first :-(
-> 
-> So I feel like EFI should still be the preferred boot method, but the
-> more custom ways should be allowed to override that.
-> 
-> Do you have any ideas how to solve that, or am I holding it wrong?
-> 
-> Cheers,
-> Andre
-> 
