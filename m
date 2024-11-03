@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18CFAE67819
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 00:36:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A80EE67819
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 00:36:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A02D4892CF;
-	Sun,  3 Nov 2024 01:36:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F1B9E89157;
+	Sun,  3 Nov 2024 01:36:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mTw+zYon";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PjHOjMbl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A2DD89145; Sun,  3 Nov 2024 01:36:08 +0100 (CET)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id 8A19889145; Sun,  3 Nov 2024 01:36:17 +0100 (CET)
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
+ [IPv6:2607:f8b0:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 787BF89157
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 01:36:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7378D892ED
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 01:36:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-20c7ee8fe6bso28398385ad.2
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 17:36:05 -0700 (PDT)
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-7ee020ec76dso2665121a12.3
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 17:36:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730594163; x=1731198963; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730594171; x=1731198971; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Dpmhzd4cwnqvo5o5lCifZV+3oRAHCEtFw6tykX1rN40=;
- b=mTw+zYonckbK3F6PaYY3NW73pHRd/+DFehBiwirZHOiwUDmogUc0cf1y3343q3V2Su
- 1lxyDVzmd+NvIpKqJM8CrZvOqxj33Dck1ZcHDtmjqIm0qx3gjHHW9GUlPManhlyt7AVm
- S1xmFq49U9WkPudCNFerrSTnKidgIPMasFcNQ=
+ bh=thpjTUOyhnWd/nVJlybJ+mXy6F74da8sVLfOMNC+AKc=;
+ b=PjHOjMblPkHDiY8IkBaTiHeZbokZwixPrut+w8P0ajLUHHVDWf4YhzU/18pFc5QGBb
+ HE9HonPMK8DHugSu1RM2ALvRj58brUINVyPMTTXKkjYMuJIJRu1C9wJfId70e9XfIU80
+ HhJma8soweZ/oQbJnQpVIfuwJQXhNUhFWOeGE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730594163; x=1731198963;
+ d=1e100.net; s=20230601; t=1730594171; x=1731198971;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Dpmhzd4cwnqvo5o5lCifZV+3oRAHCEtFw6tykX1rN40=;
- b=okYdQPbqBIlG/U8bJYkeI+o2ZrQU2WllGpyshA8TwNi7fLzQkSjCZUGYrxVIIe0RIG
- /TMdQ1Pk4Mz2FV6RjYQ5xQfFc+A76O2wC+i/bUm5cRHV5Z7UEQbSaNTE9s5amad3slHE
- 8uhPUU4h+l9WtIEgJXG8hbw9btWCTl0RRj4xCkQ4th5eyjE1bB+AvmAV2UvZqKXSYKke
- s5hfU3jR3zl7mG5iwG7x3I1nbmc8oPwLYCpvEWs1ykKHOidw65EtYVCUwqLMC6mGkVI6
- sNz35RzYSXB6UHKHKBknPRkIfliIFKEltT9cDfqAAww7Kkpxf7Zq9LmMaIc85/qy7Zo3
- aoCg==
-X-Gm-Message-State: AOJu0YwE7UhD/Z/oAH6avTtqAmgEJlHtV5o0/HxT3lWf5XDvwYP61AWH
- IhXJVAKeelvmwCrIHdQT3mlVmBV4s/SPbwOFKexkPyVsw41Ogyz820NXaKCQ/SkNud4tuL8ySkV
- 4fw==
-X-Google-Smtp-Source: AGHT+IGw2aAS77OWF3yCW7ofxj4VogSDHHfunSX6cGL59EYH5FUreIV7aSL1MtH1XUD/wnCcl7t0hg==
-X-Received: by 2002:a17:903:22c5:b0:20b:a10c:9bdf with SMTP id
- d9443c01a7336-210c6c0c4a9mr403141445ad.32.1730594162271; 
- Sat, 02 Nov 2024 17:36:02 -0700 (PDT)
+ bh=thpjTUOyhnWd/nVJlybJ+mXy6F74da8sVLfOMNC+AKc=;
+ b=vkai3zgp27ggHX1uVwJhmzeU+YcPIORYxUs418Ub+zoMt8dSvCgrvW7yLZaMN62Z75
+ jFlEyFMg3MVYoBIitC4EZNqZfiMWloP4oJWGQD72tIYQT1jt3hvjyXHcOPzdkF7kB4Li
+ UGJVAABUlaBxRmyOf/I94+oDSdaPXTRLfXbqMcH9eL4mqcrWeivY8J/lw5W/XWUBKTUy
+ ceTlXvEvgdxz/joYUhiF8XQa95FEgNie+u92/4GXuDkYwMuW6v6Eh/fbTnvZjqa8rpZ0
+ iEftu4w/2gPj6UGv2oANQudt0sLpblfXeKOuNeGDlE+pjVDd/37r/lPQJCCdD5Ivczb2
+ OJog==
+X-Gm-Message-State: AOJu0YxSTXqXZ+gYv9jz1Bd+cRTL3NrYf/0426lfTHWCw6zrcUKfFogp
+ 4b7lsa4i0mtuMI2UU8x8KQ7am6Zs0aFnsJMCc+AFe5Ske2nw9eC1+wkbd3Su6sFbPV+uLRec47O
+ /JQ==
+X-Google-Smtp-Source: AGHT+IGrdfag2sHXPfrK635W8WkXKHHCd9qdsZkifzJUNvtqUJsV8OwDvrGv0FUtY5JY3tIthAMMDA==
+X-Received: by 2002:a17:902:e890:b0:20c:8abc:733a with SMTP id
+ d9443c01a7336-210c6ca8b77mr384551575ad.53.1730594171201; 
+ Sat, 02 Nov 2024 17:36:11 -0700 (PDT)
 Received: from chromium.org ([205.220.129.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-211057a63f2sm38987995ad.168.2024.11.02.17.35.51
+ d9443c01a7336-211057a63f2sm38987995ad.168.2024.11.02.17.36.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 17:36:01 -0700 (PDT)
+ Sat, 02 Nov 2024 17:36:10 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Doug Zobel <douglas.zobel@climate.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: [PATCH v3 10/25] led: Drop LED_STATUS from Kconfig
-Date: Sat,  2 Nov 2024 18:33:02 -0600
-Message-ID: <20241103003322.626036-11-sjg@chromium.org>
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH v3 11/25] led: Drop the legacy LED command
+Date: Sat,  2 Nov 2024 18:33:03 -0600
+Message-ID: <20241103003322.626036-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241103003322.626036-1-sjg@chromium.org>
 References: <20241103003322.626036-1-sjg@chromium.org>
@@ -93,341 +92,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop all of these configs, which are now unused.
+This is not used by any board. Drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- drivers/led/Kconfig | 316 --------------------------------------------
- 1 file changed, 316 deletions(-)
+ cmd/Makefile     |   1 -
+ cmd/legacy_led.c | 145 -----------------------------------------------
+ 2 files changed, 146 deletions(-)
+ delete mode 100644 cmd/legacy_led.c
 
-diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-index 789113a92b5..379b3ce49a5 100644
---- a/drivers/led/Kconfig
-+++ b/drivers/led/Kconfig
-@@ -138,320 +138,4 @@ config SPL_LED_GPIO
- 
- endif # LED
- 
--config LED_STATUS
--	bool "Enable status LED API"
--	help
--	  Allows common u-boot commands to use a board's leds to
--	  provide status for activities like booting and downloading files.
--
--if LED_STATUS
--
--# Hidden constants
--
--config LED_STATUS_OFF
--	int
--	default 0
--
--config LED_STATUS_BLINKING
--	int
--	default 1
--
--config LED_STATUS_ON
--	int
--	default 2
--
--# Hidden constants end
--
--config LED_STATUS_GPIO
--	bool "GPIO status LED implementation"
--	help
--	  The status LED can be connected to a GPIO pin. In such cases, the
--	  gpio_led driver can be used as a status LED backend implementation.
--
--comment "LEDs parameters"
--
--config LED_STATUS0
--	bool "Enable status LED 0"
--
--if LED_STATUS0
--
--config LED_STATUS_BIT
--	int "identification"
--	help
--	  CONFIG_LED_STATUS_BIT is passed into the __led_* functions to identify
--	  which LED is being acted on.  As such, the chosen value must be unique
--	  with respect to the other CONFIG_LED_STATUS_BIT's. Mapping the value
--	  to a physical LED is the responsibility of the __led_* function.
--
--config LED_STATUS_STATE
--	int "initial state"
--	range LED_STATUS_OFF LED_STATUS_ON
--	default LED_STATUS_OFF
--	help
--	  Should be set one of the following:
--	  0 - off
--	  1 - blinking
--	  2 - on
--
--config LED_STATUS_FREQ
--	int "blink frequency"
--	range 2 10
--	default 2
--	help
--	  The LED blink period calculated from LED_STATUS_FREQ:
--	  LED_STATUS_PERIOD = CONFIG_SYS_HZ/LED_STATUS_FREQ
--	  Values range: 2 - 10
--
--endif # LED_STATUS0
--
--config LED_STATUS1
--	bool "Enable status LED 1"
--
--if LED_STATUS1
--
--config LED_STATUS_BIT1
--	int "identification"
--	help
--	  CONFIG_LED_STATUS_BIT1 is passed into the __led_* functions to
--	  identify which LED is being acted on.  As such, the chosen value must
--	  be unique with respect to the other CONFIG_LED_STATUS_BIT's. Mapping
--	  the value to a physical LED is the responsibility of the __led_*
--	  function.
--
--config LED_STATUS_STATE1
--	int "initial state"
--	range LED_STATUS_OFF LED_STATUS_ON
--	default LED_STATUS_OFF
--	help
--	  Should be set one of the following:
--	  0 - off
--	  1 - blinking
--	  2 - on
--
--config LED_STATUS_FREQ1
--	int "blink frequency"
--	range 2 10
--	default 2
--	help
--	  The LED blink period calculated from LED_STATUS_FREQ1:
--	  LED_STATUS_PERIOD1 = CONFIG_SYS_HZ/LED_STATUS_FREQ1
--	  Values range: 2 - 10
--
--endif # LED_STATUS1
--
--config LED_STATUS2
--	bool "Enable status LED 2"
--
--if LED_STATUS2
--
--config LED_STATUS_BIT2
--	int "identification"
--	help
--	  CONFIG_LED_STATUS_BIT2 is passed into the __led_* functions to
--	  identify which LED is being acted on.  As such, the chosen value must
--	  be unique with respect to the other CONFIG_LED_STATUS_BIT's. Mapping
--	  the value to a physical LED is the responsibility of the __led_*
--	  function.
--
--config LED_STATUS_STATE2
--	int "initial state"
--	range LED_STATUS_OFF LED_STATUS_ON
--	default LED_STATUS_OFF
--	help
--	  Should be set one of the following:
--	  0 - off
--	  1 - blinking
--	  2 - on
--
--config LED_STATUS_FREQ2
--	int "blink frequency"
--	range 2 10
--	default 2
--	help
--	  The LED blink period calculated from LED_STATUS_FREQ2:
--	  LED_STATUS_PERIOD2 = CONFIG_SYS_HZ/LED_STATUS_FREQ2
--	  Values range: 2 - 10
--
--endif # LED_STATUS2
--
--config LED_STATUS3
--	bool "Enable status LED 3"
--
--if LED_STATUS3
--
--config LED_STATUS_BIT3
--	int "identification"
--	help
--	  CONFIG_LED_STATUS_BIT3 is passed into the __led_* functions to
--	  identify which LED is being acted on.  As such, the chosen value must
--	  be unique with respect to the other CONFIG_LED_STATUS_BIT's. Mapping
--	  the value to a physical LED is the responsibility of the __led_*
--	  function.
--
--config LED_STATUS_STATE3
--	int "initial state"
--	range LED_STATUS_OFF LED_STATUS_ON
--	default LED_STATUS_OFF
--	help
--	  Should be set one of the following:
--	  0 - off
--	  1 - blinking
--	  2 - on
--
--config LED_STATUS_FREQ3
--	int "blink frequency"
--	range 2 10
--	default 2
--	help
--	  The LED blink period calculated from LED_STATUS_FREQ3:
--	  LED_STATUS_PERIOD3 = CONFIG_SYS_HZ/LED_STATUS_FREQ3
--	  Values range: 2 - 10
--
--endif # LED_STATUS3
--
--config LED_STATUS4
--	bool "Enable status LED 4"
--
--if LED_STATUS4
--
--config LED_STATUS_BIT4
--	int "identification"
--	help
--	  CONFIG_LED_STATUS_BIT4 is passed into the __led_* functions to
--	  identify which LED is being acted on.  As such, the chosen value must
--	  be unique with respect to the other CONFIG_LED_STATUS_BIT's. Mapping
--	  the value to a physical LED is the responsibility of the __led_*
--	  function.
--
--config LED_STATUS_STATE4
--	int "initial state"
--	range LED_STATUS_OFF LED_STATUS_ON
--	default LED_STATUS_OFF
--	help
--	  Should be set one of the following:
--	  0 - off
--	  1 - blinking
--	  2 - on
--
--config LED_STATUS_FREQ4
--	int "blink frequency"
--	range 2 10
--	default 2
--	help
--	  The LED blink period calculated from LED_STATUS_FREQ4:
--	  LED_STATUS_PERIOD4 = CONFIG_SYS_HZ/LED_STATUS_FREQ4
--	  Values range: 2 - 10
--
--endif # LED_STATUS4
--
--config LED_STATUS5
--	bool "Enable status LED 5"
--
--if LED_STATUS5
--
--config LED_STATUS_BIT5
--	int "identification"
--	help
--	  CONFIG_LED_STATUS_BIT5 is passed into the __led_* functions to
--	  identify which LED is being acted on.  As such, the chosen value must
--	  be unique with respect to the other CONFIG_LED_STATUS_BIT's. Mapping
--	  the value to a physical LED is the responsibility of the __led_*
--	  function.
--
--config LED_STATUS_STATE5
--	int "initial state"
--	range LED_STATUS_OFF LED_STATUS_ON
--	default LED_STATUS_OFF
--	help
--	  Should be set one of the following:
--	  0 - off
--	  1 - blinking
--	  2 - on
--
--config LED_STATUS_FREQ5
--	int "blink frequency"
--	range 2 10
--	default 2
--	help
--	  The LED blink period calculated from LED_STATUS_FREQ5:
--	  LED_STATUS_PERIOD5 = CONFIG_SYS_HZ/LED_STATUS_FREQ5
--	  Values range: 2 - 10
--
--endif # LED_STATUS5
--
--config LED_STATUS_BOOT_ENABLE
--	bool "Enable BOOT LED"
--	help
--	  Enable to turn an LED on when the board is booting.
--
--if LED_STATUS_BOOT_ENABLE
--
--config LED_STATUS_BOOT
--	int "LED to light when the board is booting"
--	help
--	  Valid enabled LED device number.
--
--endif # LED_STATUS_BOOT_ENABLE
--
--config LED_STATUS_RED_ENABLE
--	bool "Enable red LED"
--	help
--	  Enable red status LED.
--
--if LED_STATUS_RED_ENABLE
--
--config LED_STATUS_RED
--	int "Red LED identification"
--	help
--	  Valid enabled LED device number.
--
--endif # LED_STATUS_RED_ENABLE
--
--config LED_STATUS_YELLOW_ENABLE
--	bool "Enable yellow LED"
--	help
--	  Enable yellow status LED.
--
--if LED_STATUS_YELLOW_ENABLE
--
--config LED_STATUS_YELLOW
--	int "Yellow LED identification"
--	help
--	  Valid enabled LED device number.
--
--endif # LED_STATUS_YELLOW_ENABLE
--
--config LED_STATUS_BLUE_ENABLE
--	bool "Enable blue LED"
--	help
--	  Enable blue status LED.
--
--if LED_STATUS_BLUE_ENABLE
--
--config LED_STATUS_BLUE
--	int "Blue LED identification"
--	help
--	  Valid enabled LED device number.
--
--endif # LED_STATUS_BLUE_ENABLE
--
--config LED_STATUS_GREEN_ENABLE
--	bool "Enable green LED"
--	help
--	  Enable green status LED.
--
--if LED_STATUS_GREEN_ENABLE
--
--config LED_STATUS_GREEN
--	int "Green LED identification"
--	help
--	  Valid enabled LED device number (0-5).
--
--endif # LED_STATUS_GREEN_ENABLE
--
--config LED_STATUS_CMD
--	bool "Enable status LED commands"
--
--endif # LED_STATUS
--
- endmenu
+diff --git a/cmd/Makefile b/cmd/Makefile
+index d1f369deec0..6052c1dd096 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -101,7 +101,6 @@ obj-$(CONFIG_CMD_IRQ) += irq.o
+ obj-$(CONFIG_CMD_ITEST) += itest.o
+ obj-$(CONFIG_CMD_JFFS2) += jffs2.o
+ obj-$(CONFIG_CMD_CRAMFS) += cramfs.o
+-obj-$(CONFIG_LED_STATUS_CMD) += legacy_led.o
+ obj-$(CONFIG_CMD_LED) += led.o
+ obj-$(CONFIG_CMD_LICENSE) += license.o
+ obj-y += load.o
+diff --git a/cmd/legacy_led.c b/cmd/legacy_led.c
+deleted file mode 100644
+index ef2135e0dba..00000000000
+--- a/cmd/legacy_led.c
++++ /dev/null
+@@ -1,145 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * (C) Copyright 2010
+- * Jason Kridner <jkridner@beagleboard.org>
+- *
+- * Based on cmd_led.c patch from:
+- * http://www.mail-archive.com/u-boot@lists.denx.de/msg06873.html
+- * (C) Copyright 2008
+- * Ulf Samuelsson <ulf.samuelsson@atmel.com>
+- */
+-
+-#include <command.h>
+-#include <status_led.h>
+-#include <vsprintf.h>
+-
+-struct led_tbl_s {
+-	char		*string;	/* String for use in the command */
+-	led_id_t	mask;		/* Mask used for calling __led_set() */
+-	void		(*off)(void);	/* Optional function for turning LED off */
+-	void		(*on)(void);	/* Optional function for turning LED on */
+-	void		(*toggle)(void);/* Optional function for toggling LED */
+-};
+-
+-typedef struct led_tbl_s led_tbl_t;
+-
+-static const led_tbl_t led_commands[] = {
+-#ifdef CONFIG_LED_STATUS_GREEN
+-	{ "green", CONFIG_LED_STATUS_GREEN, green_led_off, green_led_on, NULL },
+-#endif
+-#ifdef CONFIG_LED_STATUS_YELLOW
+-	{ "yellow", CONFIG_LED_STATUS_YELLOW, yellow_led_off, yellow_led_on,
+-	  NULL },
+-#endif
+-#ifdef CONFIG_LED_STATUS_RED
+-	{ "red", CONFIG_LED_STATUS_RED, red_led_off, red_led_on, NULL },
+-#endif
+-#ifdef CONFIG_LED_STATUS_BLUE
+-	{ "blue", CONFIG_LED_STATUS_BLUE, blue_led_off, blue_led_on, NULL },
+-#endif
+-	{ NULL, 0, NULL, NULL, NULL }
+-};
+-
+-enum led_cmd { LED_ON, LED_OFF, LED_TOGGLE, LED_BLINK };
+-
+-enum led_cmd get_led_cmd(char *var)
+-{
+-	if (strcmp(var, "off") == 0)
+-		return LED_OFF;
+-	if (strcmp(var, "on") == 0)
+-		return LED_ON;
+-	if (strcmp(var, "toggle") == 0)
+-		return LED_TOGGLE;
+-	if (strcmp(var, "blink") == 0)
+-		return LED_BLINK;
+-
+-	return -1;
+-}
+-
+-/*
+- * LED drivers providing a blinking LED functionality, like the
+- * PCA9551, can override this empty weak function
+- */
+-void __weak __led_blink(led_id_t mask, int freq)
+-{
+-}
+-
+-int do_legacy_led(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-{
+-	int i, match = 0;
+-	enum led_cmd cmd;
+-	int freq;
+-
+-	/* Validate arguments */
+-	if ((argc < 3) || (argc > 4))
+-		return CMD_RET_USAGE;
+-
+-	cmd = get_led_cmd(argv[2]);
+-	if (cmd < 0) {
+-		return CMD_RET_USAGE;
+-	}
+-
+-	for (i = 0; led_commands[i].string; i++) {
+-		if ((strcmp("all", argv[1]) == 0) ||
+-		    (strcmp(led_commands[i].string, argv[1]) == 0)) {
+-			match = 1;
+-			switch (cmd) {
+-			case LED_ON:
+-				if (led_commands[i].on)
+-					led_commands[i].on();
+-				else
+-					__led_set(led_commands[i].mask,
+-							  CONFIG_LED_STATUS_ON);
+-				break;
+-			case LED_OFF:
+-				if (led_commands[i].off)
+-					led_commands[i].off();
+-				else
+-					__led_set(led_commands[i].mask,
+-						  CONFIG_LED_STATUS_OFF);
+-				break;
+-			case LED_TOGGLE:
+-				if (led_commands[i].toggle)
+-					led_commands[i].toggle();
+-				else
+-					__led_toggle(led_commands[i].mask);
+-				break;
+-			case LED_BLINK:
+-				if (argc != 4)
+-					return CMD_RET_USAGE;
+-
+-				freq = dectoul(argv[3], NULL);
+-				__led_blink(led_commands[i].mask, freq);
+-			}
+-			/* Need to set only 1 led if led_name wasn't 'all' */
+-			if (strcmp("all", argv[1]) != 0)
+-				break;
+-		}
+-	}
+-
+-	/* If we ran out of matches, print Usage */
+-	if (!match) {
+-		return CMD_RET_USAGE;
+-	}
+-
+-	return 0;
+-}
+-
+-U_BOOT_CMD(
+-	led, 4, 1, do_legacy_led,
+-	"["
+-#ifdef CONFIG_LED_STATUS_GREEN
+-	"green|"
+-#endif
+-#ifdef CONFIG_LED_STATUS_YELLOW
+-	"yellow|"
+-#endif
+-#ifdef CONFIG_LED_STATUS_RED
+-	"red|"
+-#endif
+-#ifdef CONFIG_LED_STATUS_BLUE
+-	"blue|"
+-#endif
+-	"all] [on|off|toggle|blink] [blink-freq in ms]",
+-	"[led_name] [on|off|toggle|blink] sets or clears led(s)"
+-);
 -- 
 2.43.0
 
