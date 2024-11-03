@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D1A3E67819
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 00:35:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5B86E67816
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 00:35:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB1F189169;
-	Sun,  3 Nov 2024 01:35:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3E04E8926F;
+	Sun,  3 Nov 2024 01:35:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MrTr76zb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J8kkwQGZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4809891AD; Sun,  3 Nov 2024 01:35:43 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 2536989137; Sun,  3 Nov 2024 01:35:54 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D27BD89157
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 01:35:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DBB888928C
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 01:35:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-210e5369b7dso30764265ad.3
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 17:35:39 -0700 (PDT)
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-20cf6eea3c0so24820225ad.0
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 17:35:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730594137; x=1731198937; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730594150; x=1731198950; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=W6lPGYgtc+6jQZ9TUbI9+VQGxMBaV4EQW1fljF9RDRo=;
- b=MrTr76zbDDnkuvbB5pOuofrGZISfLO1PHWbZ95r1z6X5NjHNeokB5CpOHPHQm5xM9F
- TvKRIuT98/0wXCmjLYUgKJiC6s0CQQ3qK7WChWvMXQwOSYH63podRRRxcYFHh6LxpLTQ
- FMZ4uH/LXTxLIV3jDCBNd6gQDOgDRMs6NDvdc=
+ bh=Ycrp9IOzXJ+/Tg69wI5pj6r6RKyG4SYJ8FcKJR7XiqY=;
+ b=J8kkwQGZOUn8ZT3grCLFJ5KGnH6eRmhaVGJFl2OAVczHMW0bUZw6SrwQdK9eQdhStg
+ 7XNjMpe2tNkVyXMYe9A4gH3K7+1LoZDaIg4ylSf8ItXEZem4UfoUUsdRpKBVT7rkQz9d
+ 9/hyTQa1w2V1w1gopqeQMY44GpSugcfAuOpGg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730594137; x=1731198937;
+ d=1e100.net; s=20230601; t=1730594150; x=1731198950;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=W6lPGYgtc+6jQZ9TUbI9+VQGxMBaV4EQW1fljF9RDRo=;
- b=UCcjRDRQLkQOALUE0iuxtEFn93Z9Q+noRBZ40PyV7++R9V/IC2XR/Y02tidKR1/Grq
- HInn3XNz/xjCJ3wjqijwNw/3xvV/5xIWWySe6rZPeN7vrqE6Ccz/QhZqOAIFozL2NVY4
- R7b3cODC7xOJnSfNF/2Y4r97q6rcUcxwoK/HmZzOpZLnX+xeYDYUPXH+Yym9sc844Fuh
- 2wHkobpCzZAtxan8dx7lYRl/dSWcZBVmP7okabxMFBC6EHVyj9s+lFl6iJEvw7fYNL+k
- 3J4gDTRJrOMY+IdrlFbJ5G71IcL+1vzt+Js+vcadchrGvsIOtIIvsyIhUkDEyH40Qwdf
- E/tQ==
-X-Gm-Message-State: AOJu0YypIFQZoFrInSwB8GWt91p3BiaD4ESuXtBGLx/yN4bUm2kDNPtu
- 2FKVe2OzX0m07ceR5ZpoF2+kww7aTd7+oSyQ822p2IGj8CrR1QXIUxcSAFJxUTgJ2FgOGpU5RHv
- mzg==
-X-Google-Smtp-Source: AGHT+IGkWLuX6ippWlPvGf7rzjNsydx0g+auB/UGfJgLHATHjnp55nyEiEjLO6m1BQYLH+cunXKlZw==
-X-Received: by 2002:a17:903:2350:b0:20f:5443:9ec1 with SMTP id
- d9443c01a7336-2111af6c144mr109929445ad.33.1730594137424; 
- Sat, 02 Nov 2024 17:35:37 -0700 (PDT)
+ bh=Ycrp9IOzXJ+/Tg69wI5pj6r6RKyG4SYJ8FcKJR7XiqY=;
+ b=APLe/VQa9LRStS1PWCYEywA7fH1T48yAkboxHGzhGooHGJR7xJknAWAPNuA2wsS/yu
+ uYln4tEC3MX8laxydNNRQI+cDe8UTmQMb+hq02TP0EqMojDHDiAanSdSf6kRkfDUB9nd
+ tuUrhiIHacfj51EY5F3RwRUiiYRzP2LmhHU5TiV185Tvm7zrInHNguAFydJlZmRXZxhP
+ Yx+xv/9euO6jTDrFjGpcACOviP4wrSjEz4l64rSvLJ3/UadASAFChbZB525vc0SG5vMl
+ AsQMar2WqOV4DmC2tVen3ElIsSPQNmHcXTk2iW4KSHXNdqXmHIbkI+L6bhS0wRkGhOke
+ ILJA==
+X-Gm-Message-State: AOJu0YxTfYXGp/iRt/XmApMl8J3NF1W3YOchyrtgbXfmHpfdA2ErVDUS
+ EmLfq8BKCu0iADqmlS6FucK01AG9WdP8Sa2uUuiPeqH/M8qISqXKtjJoh6+NmoZBjG+UlMbCfII
+ /VQ==
+X-Google-Smtp-Source: AGHT+IH4Oj92+iexBLGM5OIniDnC1s1JFcOFCIyfA4rs6kotVf5PdHbvJCme5ZT0EJuhKhZ6myBchw==
+X-Received: by 2002:a17:902:f543:b0:20b:a5b5:b89 with SMTP id
+ d9443c01a7336-210c6b0171emr351404675ad.35.1730594149765; 
+ Sat, 02 Nov 2024 17:35:49 -0700 (PDT)
 Received: from chromium.org ([205.220.129.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-211057a63f2sm38987995ad.168.2024.11.02.17.35.30
+ d9443c01a7336-211057a63f2sm38987995ad.168.2024.11.02.17.35.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 17:35:36 -0700 (PDT)
+ Sat, 02 Nov 2024 17:35:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Kamil Lulko <kamil.lulko@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v3 08/25] st: stm32f429: Drop old LED code
-Date: Sat,  2 Nov 2024 18:33:00 -0600
-Message-ID: <20241103003322.626036-9-sjg@chromium.org>
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Doug Zobel <douglas.zobel@climate.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Subject: [PATCH v3 09/25] led: Make the LED config common
+Date: Sat,  2 Nov 2024 18:33:01 -0600
+Message-ID: <20241103003322.626036-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241103003322.626036-1-sjg@chromium.org>
 References: <20241103003322.626036-1-sjg@chromium.org>
@@ -92,72 +93,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This predates the LED framework, so drop it.
+Use an if...endif construct to avoid needing to make everything depend
+on LED. Make SPL_LED depend on LED since that seems reasonable.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- board/st/stm32f429-discovery/Makefile |  1 -
- board/st/stm32f429-discovery/led.c    | 39 ---------------------------
- 2 files changed, 40 deletions(-)
- delete mode 100644 board/st/stm32f429-discovery/led.c
+ drivers/led/Kconfig | 22 ++++++++++++----------
+ 1 file changed, 12 insertions(+), 10 deletions(-)
 
-diff --git a/board/st/stm32f429-discovery/Makefile b/board/st/stm32f429-discovery/Makefile
-index 6b02c0fddec..233eafdad3d 100644
---- a/board/st/stm32f429-discovery/Makefile
-+++ b/board/st/stm32f429-discovery/Makefile
-@@ -7,4 +7,3 @@
- # Kamil Lulko, <kamil.lulko@gmail.com>
+diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
+index 268118a6c3a..789113a92b5 100644
+--- a/drivers/led/Kconfig
++++ b/drivers/led/Kconfig
+@@ -9,6 +9,8 @@ config LED
+ 	  can provide access to board-specific LEDs. Use of the device tree
+ 	  for configuration is encouraged.
  
- obj-y	:= stm32f429-discovery.o
--obj-y	+= led.o
-diff --git a/board/st/stm32f429-discovery/led.c b/board/st/stm32f429-discovery/led.c
-deleted file mode 100644
-index 4b8038341b9..00000000000
---- a/board/st/stm32f429-discovery/led.c
-+++ /dev/null
-@@ -1,39 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * (C) Copyright 2015
-- * Kamil Lulko, <kamil.lulko@gmail.com>
-- */
--
--#include <status_led.h>
--#include <asm-generic/gpio.h>
--
--#define RED_LED			110
--#define GREEN_LED		109
--
--void coloured_LED_init(void)
--{
--	gpio_request(RED_LED, "red led");
--	gpio_direction_output(RED_LED, 0);
--	gpio_request(GREEN_LED, "green led");
--	gpio_direction_output(GREEN_LED, 0);
--}
--
--void red_led_off(void)
--{
--	gpio_set_value(RED_LED, 0);
--}
--
--void green_led_off(void)
--{
--	gpio_set_value(GREEN_LED, 0);
--}
--
--void red_led_on(void)
--{
--	gpio_set_value(RED_LED, 1);
--}
--
--void green_led_on(void)
--{
--	gpio_set_value(GREEN_LED, 1);
--}
++if LED
++
+ config LED_BOOT
+ 	bool "Enable LED boot support"
+ 	help
+@@ -35,7 +37,7 @@ config LED_ACTIVITY
+ 
+ config LED_BCM6328
+ 	bool "LED Support for BCM6328"
+-	depends on LED && ARCH_BMIPS
++	depends on ARCH_BMIPS
+ 	help
+ 	  This option enables support for LEDs connected to the BCM6328
+ 	  LED HW controller accessed via MMIO registers.
+@@ -46,7 +48,7 @@ config LED_BCM6328
+ 
+ config LED_BCM6358
+ 	bool "LED Support for BCM6358"
+-	depends on LED && ARCH_BMIPS
++	depends on ARCH_BMIPS
+ 	help
+ 	  This option enables support for LEDs connected to the BCM6358
+ 	  LED HW controller accessed via MMIO registers.
+@@ -54,28 +56,28 @@ config LED_BCM6358
+ 
+ config LED_BCM6753
+ 	bool "LED Support for BCM6753"
+-	depends on LED && BCM6855
++	depends on BCM6855
+ 	help
+ 	  This option enables support for LEDs connected to the BCM6753
+ 	  HW has blinking and fading capabilities and up to 32 LEDs can be controlled.
+ 
+ config LED_BCM6858
+ 	bool "LED Support for BCM6858"
+-	depends on LED && (BCM6856 || BCM6858 || BCM63158)
++	depends on BCM6856 || BCM6858 || BCM63158
+ 	help
+ 	  This option enables support for LEDs connected to the BCM6858
+ 	  HW has blinking capabilities and up to 32 LEDs can be controlled.
+ 
+ config LED_CORTINA
+ 	bool "LED Support for Cortina Access CAxxxx SoCs"
+-	depends on LED && (CORTINA_PLATFORM)
++	depends on CORTINA_PLATFORM
+ 	help
+ 	  This option enables support for LEDs connected to the Cortina
+ 	  Access CAxxxx SOCs.
+ 
+ config LED_LP5562
+ 	bool "LED Support for LP5562"
+-	depends on LED && DM_I2C
++	depends on DM_I2C
+ 	help
+ 	  This option enables support for LEDs connected to the TI LP5562
+ 	  4 channel I2C LED controller.  Driver fully supports blink on the
+@@ -83,14 +85,13 @@ config LED_LP5562
+ 
+ config LED_PWM
+ 	bool "LED PWM"
+-	depends on LED && DM_PWM
++	depends on DM_PWM
+ 	help
+ 	  Enable support for LEDs connected to PWM.
+ 	  Linux compatible ofdata.
+ 
+ config LED_BLINK
+ 	bool "Support hardware LED blinking"
+-	depends on LED
+ 	help
+ 	  Some drivers can support automatic blinking of LEDs with a given
+ 	  period, without needing timers or extra code to handle the timing.
+@@ -99,7 +100,6 @@ config LED_BLINK
+ 
+ config LED_SW_BLINK
+ 	bool "Support software LED blinking"
+-	depends on LED
+ 	select CYCLIC
+ 	help
+ 	  Turns on led blinking implemented in the software, useful when
+@@ -122,7 +122,7 @@ config SPL_LED
+ 
+ config LED_GPIO
+ 	bool "LED support for GPIO-connected LEDs"
+-	depends on LED && DM_GPIO
++	depends on DM_GPIO
+ 	help
+ 	  Enable support for LEDs which are connected to GPIO lines. These
+ 	  GPIOs may be on the SoC or some other device which provides GPIOs.
+@@ -136,6 +136,8 @@ config SPL_LED_GPIO
+ 	  This option is an SPL-variant of the LED_GPIO option.
+ 	  See the help of LED_GPIO for details.
+ 
++endif # LED
++
+ config LED_STATUS
+ 	bool "Enable status LED API"
+ 	help
 -- 
 2.43.0
 
