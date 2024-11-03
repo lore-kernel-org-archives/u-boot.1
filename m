@@ -4,101 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74F0DD11183
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 17:30:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A305D11182
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 17:36:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FEE588E41;
-	Sun,  3 Nov 2024 18:30:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 7CAC588E41;
+	Sun,  3 Nov 2024 18:36:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="LADK0U2J";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="tI0m7hdm";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="X4qqmA3K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41FDE88C53; Sun,  3 Nov 2024 18:30:25 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 5437688E41; Sun,  3 Nov 2024 18:36:43 +0100 (CET)
+Received: from fhigh-b6-smtp.messagingengine.com
+ (fhigh-b6-smtp.messagingengine.com [202.12.124.157])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13F6F88EAF
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 18:30:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 271AB88F7B
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 18:36:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 9A9BF3F2A8
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 17:30:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1730655021;
- bh=QAz7atp1mb56lXYI8KS8/SPr/eYana9ua++NWEK6sT8=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=LADK0U2J6PPq7HulU5hk5XEvWA/ulalozAZ71DufUvAuIp7/OeWZIp/fJWw0q9tNB
- xLQCWZl/DiwhAJjCMz41jnSgQkJ0kuQJThHxkjacmV2InYqNU52wHeKBR7zn+WzlyS
- SdPD4mDsa9NmGWnVhRDT84xhI6MhzmwOhkBGMJytOKvzb/lmQub4KwpLx0CeS9C5hw
- vRkTe/5AzPZeZsXv8n7HjQboB6HR4sKzDgUsoDAuOdCeKSUBpoqoIxvMH5lIL1RiTx
- C4O8gOraEvL6iFvDSZeDpQKdJtGvpX0rSNOHchd2B1gw79WmhCKVegsC4lI+a9gi88
- Nw+hA0HiowezQ==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-43164f21063so20954465e9.2
- for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 09:30:21 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730655021; x=1731259821;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QAz7atp1mb56lXYI8KS8/SPr/eYana9ua++NWEK6sT8=;
- b=aiWXAI8wNNS0jg45adVZ9Wmyz7dliUeuktv+jQfHkqZoz5jiRfBceMV+Bp+u8ARlXS
- aIGzdq40bqk+Tz29u7INd+O8og6aclMxIQa21NZFXLvBRuhsszYSZ7kmVsBUftK/4D2w
- oinImEx8jwB2/48CLU0JwbLe5ZbQTwzGUO8b244RSLxYVSJhDxNEJh8valbCaE+iKGrr
- 7bpjv29Inxj1MBeigbBhqQFUUzGhl/CKLDpgB0gNvG5cDWzXsE6JwOJgYoJA6ZhIIRIk
- ZB7gKXQc3Gwj8eVdCZYQDtRNggEqk6i6g1CZBQdR/h+S6UzO9m0g32T1NdUBBF0eLaa8
- O/ew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX3LRBkZ0Xj5V45MadGpUOhG3NYS0wMpE3N8c4h6F+//xpMTZrw2Vd5yTwf8GwCmJEzoU5eCqY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwZDWxqIKZTzKwn8UxxN0id3Hrzg/rYq7antG8WNCnpF1iM79Os
- xNh5XxDueU1OcDO8VTwD8IrOnorM4HTac7jQlI0mvBEE9CPkQlDRel8/yu88JgCymN1SxlTSgkH
- Y/zIaTJ/Q9SBbKESgXgVPtb54fSyqfHTCk1z+3yxuuTXK5PsnAHEsSmH7AOhzH7xPrhg=
-X-Received: by 2002:a05:600c:a04:b0:42c:b80e:5e50 with SMTP id
- 5b1f17b1804b1-431bb8a01dfmr159555165e9.0.1730655020913; 
- Sun, 03 Nov 2024 09:30:20 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFnO9ihi4KVveKhkSCkVMXSUnXlYYOybcWb1J6SUs+YpNWtVu23LDE8XZzBs+6q+dnKsjhKMw==
-X-Received: by 2002:a05:600c:a04:b0:42c:b80e:5e50 with SMTP id
- 5b1f17b1804b1-431bb8a01dfmr159554915e9.0.1730655020306; 
- Sun, 03 Nov 2024 09:30:20 -0800 (PST)
-Received: from [192.168.123.161]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381c116abdasm11187654f8f.97.2024.11.03.09.30.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 03 Nov 2024 09:30:19 -0800 (PST)
-Message-ID: <535a2657-7cc3-4a7c-a976-c5113b059b8c@canonical.com>
-Date: Sun, 3 Nov 2024 18:30:18 +0100
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from phl-compute-10.internal (phl-compute-10.phl.internal
+ [10.202.2.50])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 96DB62540112;
+ Sun,  3 Nov 2024 12:36:38 -0500 (EST)
+Received: from phl-mailfrontend-01 ([10.202.2.162])
+ by phl-compute-10.internal (MEProxy); Sun, 03 Nov 2024 12:36:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:subject
+ :subject:to:to; s=fm2; t=1730655398; x=1730741798; bh=/pZRVlYqEs
+ 0lVSK4cETfOyUqx8fHTQHTBYPjxP020as=; b=tI0m7hdmWJHimrjIz9q3Plgi5g
+ cMjLIvxMHxruQaMxl+Gm451wBU5vlFoYCVarZJx5FU2bjdyZtHoiIJD7iq8XMOA9
+ Dr3jfRb//0NxhRgXIXpWD2vyQHPJfCRAEUGkp3lOStn4vXNH5GIw0VLzZr8uOqtU
+ 0yKj+803H/h3P6jw1N7ig6ZUx/U9UbIrZI6lVE30tG82U3q161G59MLoEun6xd09
+ xJd7Ei9JCNev6Iasx5/zpHWFw0oTB21JwnbFHbeya1pzqrQ4Z4/xQwFZngqbtIBD
+ EY/CDorleAZ3od1t5j5X/IO0NKyXy5ybVtHb/Jx6JfifcB9UcLhywLDDBWyg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+ 1730655398; x=1730741798; bh=/pZRVlYqEs0lVSK4cETfOyUqx8fHTQHTBYP
+ jxP020as=; b=X4qqmA3KhsFfJWvXCCrDsIBeWZmyfhD5Njq+bwl2dWD4y95wazD
+ J7pBXNFDRRHSJfgoqVa3IXCaldsEWgKNaALRkPctU82ay1f8SDzeFsoM/Tz2ON/E
+ leJ7E313fOD03ihdJL3GtC9Nvg2AmK91URCjnEaX1xpNwKKGpQcvD9IFeu/Vzcuh
+ /hGXehs/LmwC+YaVwsXIxFn5+LGf17cwbLlkr2uONswTPUapFX94i1J2RveZnF3V
+ wNmZ8hL4IBplL5S4PG6P1Kw66Ctt4hcaC552BiA32PjrcBIAfbEHqRjlVSHuJ5i/
+ fdhPhbj4HRfd4MDaQeXbvfDa3B+QNUDZugg==
+X-ME-Sender: <xms:pbQnZ5wZtNH3_6HfRkLkOmkSdtMF6bBCl4VgsRdLXdnTp65YKTiDQA>
+ <xme:pbQnZ5Qrd0QrY3hMnQjmAJtz3CuYyMoUA4A-bXZqpZ9VmQUtQY0h2E-xPIH4-iYTr
+ YCoaA5HGdDAKj2L0ew>
+X-ME-Received: <xmr:pbQnZzXetLMjXvwTcJsYUT1zf8lLnxq2Zez1mhxmvCcrkGJpDBnKlRUtvKG-Jj90f9PtdRJLtY8SGHBaZrVBCILNIcUlIALYepQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrvdelgedguddtgecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
+ uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivg
+ hnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfhfgggtuggjsehttdertddttdej
+ necuhfhrohhmpeflrghnnhgvucfirhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqne
+ cuggftrfgrthhtvghrnhepgfduueffleefkeegueektdehkeejtedtffdtudejhfdvheet
+ gfeigfeltdeufeejnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvg
+ hrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgv
+ thdpnhgspghrtghpthhtohepiedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepsh
+ hughhhohhshhdrghgrnhhusehlihhnrghrohdrohhrghdprhgtphhtthhopehmrghrkhdr
+ khgvthhtvghnihhsseigshegrghllhdrnhhlpdhrtghpthhtohepthhrihhniheskhhonh
+ hsuhhlkhhordgtohhmpdhrtghpthhtohepkhgvthhtvghnihhssehophgvnhgsshgurdho
+ rhhgpdhrtghpthhtohepshhjghestghhrhhomhhiuhhmrdhorhhgpdhrtghpthhtohepuh
+ dqsghoohhtsehlihhsthhsrdguvghngidruggv
+X-ME-Proxy: <xmx:pbQnZ7imZRcZd_BJEChCrV5fQCcvhTpWEJNaSB27cMAEFE1ZFQ1YLw>
+ <xmx:pbQnZ7AQ9cdh0hHMxctxQDvkS1c4Vvs9w37dvcZ9pwk8mDNbCxEJ7A>
+ <xmx:pbQnZ0LXfNNqcG8Y1GgSMb_dVwn47A7N9bkl11tcl-u8h1St3t-M0A>
+ <xmx:pbQnZ6CEAlUTosX6RC9nTb2_gwUdS6etcB2ucaHgzo9ycSrAxo5epA>
+ <xmx:prQnZ90dC20YaUwQlRUGU4n2v2jLZJvYAFzs7rkdpnQvXRueGfESISFX>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
+ 3 Nov 2024 12:36:36 -0500 (EST)
+Date: Sun, 3 Nov 2024 18:36:33 +0100
+From: Janne Grunau <j@jannau.net>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, trini@konsulko.com,
+ kettenis@openbsd.org, sjg@chromium.org, u-boot@lists.denx.de
+Subject: Re: [PATCH 0/4] Fix IOVA allocation in Apple dart iommu after global
+ LMB mem map changes
+Message-ID: <20241103173633.GA664967@robin.jannau.net>
+References: <20241101-io_lmb_apple_dart_iommu-v1-0-fe4b9a74d47c@jannau.net>
+ <CADg8p97H9eqncSEGjZF5EGP2M9Y10MmV28RwSdtsW+T8fSURiw@mail.gmail.com>
+ <87v7x63p3c.fsf@bloch.sibelius.xs4all.nl>
+ <CADg8p96csvFbyWpgajy_ewZMXRCsKstbhGFMnDUcGnG9e+QA3g@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] configs: enable UNIT_TEST on qemu_arm_defconfig
-To: Tom Rini <trini@konsulko.com>
-Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-References: <20241103071200.82853-1-heinrich.schuchardt@canonical.com>
- <20241103071200.82853-4-heinrich.schuchardt@canonical.com>
- <ae7eadd9-175f-4903-b272-71bf9c862e3f@canonical.com>
- <20241103155001.GC3600562@bill-the-cat>
- <6414da69-8cb0-414c-8f6a-02f104559e4a@canonical.com>
- <20241103161239.GD3600562@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241103161239.GD3600562@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CADg8p96csvFbyWpgajy_ewZMXRCsKstbhGFMnDUcGnG9e+QA3g@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,61 +112,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/3/24 17:12, Tom Rini wrote:
-> On Sun, Nov 03, 2024 at 04:56:40PM +0100, Heinrich Schuchardt wrote:
->> On 11/3/24 16:50, Tom Rini wrote:
->>> On Sun, Nov 03, 2024 at 04:45:41PM +0100, Heinrich Schuchardt wrote:
->>>> On 11/3/24 08:12, Heinrich Schuchardt wrote:
->>>>> The lib_test_uuid_to_le test fails on 32-bit systems. But we never caught
->>>>> this in our CI because we never ran any of our C unit tests on 32-bit.
->>>>>
->>>>> Enable CONFIG_UNIT_TEST on qemu_arm_defconfig.
->>>>>
->>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>>> ---
->>>>>     configs/qemu_arm_defconfig | 1 +
->>>>>     1 file changed, 1 insertion(+)
->>>>>
->>>>> diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
->>>>> index d042aea49bb..cc4f4540fd5 100644
->>>>> --- a/configs/qemu_arm_defconfig
->>>>> +++ b/configs/qemu_arm_defconfig
->>>>> @@ -67,3 +67,4 @@ CONFIG_TPM2_MMIO=y
->>>>>     CONFIG_USB_EHCI_HCD=y
->>>>>     CONFIG_USB_EHCI_PCI=y
->>>>>     CONFIG_TPM=y
->>>>> +CONFIG_UNIT_TEST=y
->>>>
->>>> Before merging this patch we also have to fix the lib_test_dynamic_uuid
->>>> which fails on 32-bit.
->>>
->>> Is it the test, or is it the UUID changes? I didn't go so far as to
->>> revert the UUID changes when I hit this on Pi 3 32b, just poked Caleb on
->>> irc.
->>>
->>
->> While on 64-bit the expected GUID is generated (both on sandbox and
->> qemu-riscv64_smode_defconfig), the generated GUID on 32-bit does not match
->> the expected value. The generated GUID should be the same irrespective of
->> the system.
->>
->> Once we have fixed 32-bit little endian, we should start testing big endian.
+On Sun, Nov 03, 2024 at 07:53:36PM +0530, Sughosh Ganu wrote:
+> On Sat, 2 Nov 2024 at 16:00, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+> >
+> > > From: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > Date: Fri, 1 Nov 2024 17:17:22 +0530
+> > >
+> > > On Fri, 1 Nov 2024 at 15:47, Janne Grunau <j@jannau.net> wrote:
+> > > >
+> > > > The changes in "Make LMB memory map global and persistent" [1] break
+> > > > mapping DMA memory in the USB xHCI driver when using the apple_dart
+> > > > iommu present on Apple silicon systems.
+> > > >
+> > > > The IOVA space used by the u-boot driver (low 4GB) and physical memory
+> > > > do not overlap. The physical memory on this systems starts depending on
+> > > > the SoC either at 0x10_0000_0000 or 0x100_0000_0000. It make no sense to
+> > > > manage these distinct regions in a single LMB map. In addition every
+> > > > device has its own iommu and IO address space so sharing a single memory
+> > > > map between all iommu instances is not necessary.
+> > > >
+> > > > To fix this issue restore the used subset (add, alloc and free) of the
+> > > > previous pointer based LMB interface with "io_" as prefix.
+> > > >
+> > > > To ensure that low level lmb functions do not use the global LMB
+> > > > variable reorder lib/lmb.c so that the variable is not visible.
+> > > >
+> > > > Tested with patches from my "Fix device removal order for Apple dart
+> > > > iommu" series [2] to fix a separate issue.
+> > > >
+> > > > The cosmetic commit has two checkpatch warnings in existing code which I
+> > > > ignored.
+> > > >
+> > > > [1] https://lore.kernel.org/u-boot/20240826115940.3233167-1-sughosh.ganu@linaro.org/
+> > > > [2] https://lore.kernel.org/u-boot/20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net/
+> > > >
+> > > > Signed-off-by: Janne Grunau <j@jannau.net>
+> > > > ---
+> > > > Janne Grunau (4):
+> > > >       lmb: Do not use global LMB variable in _lmb_free()
+> > > >       lmb: cosmetic: reorder functions and global LMB variable
+> > > >       lmb: Add basic io_lmb functionality
+> > > >       iommu: apple: Manage IOVA separately from global LMB mem map
+> > >
+> > > Thanks for these changes. I am currently on leave, but will take a
+> > > look at this in detail next week. But on a cursory glance, I have to
+> > > say that I am not entirely satisfied with this solution as well. With
+> > > these patches, we now have a disparity in terms on how we view the LMB
+> > > memory map -- we have a global map for RAM address range, but a per
+> > > device one for IOVA's. I understand that IOVA's are supposed to be
+> > > per-device,
+> >
+> > The IVOA's are per-stream.  Multiple devices might share a single
+> > stream.
+> >
+> > > but then I think that perhaps LMB is not the right way to
+> > > solve this. This was fine earlier, when the entire LMB implementation
+> > > in U-Boot was local, but that is not the case now. I wonder if there
+> > > can be a different, non-LMB way to implement this.
+> >
+> > Of course there can be a different implementation.  But why add a
+> > separate implementation for what is essentially the same problem:
+> > allocate blocks out of an address space.
 > 
-> Right. What I mean is, did this work prior to Caleb's UUID series that
-> was merged with:
-> commit 35394e1ea77ba0ad971d9115bd965a2403c0e031
-> Merge: 9eb0d731d800 7de51622a2cf
-> Author: Tom Rini <trini@konsulko.com>
-> Date:   Fri Sep 13 08:20:25 2024 -0600
-> 
->      Merge tag 'efi-next-20241024' of https://source.denx.de/u-boot/custodians/u-boot-efi into n
-> ext
-> 
-> Or has it always been wrong? To me, Patrick's report implies that it used to work.
-> 
+> My primary concern here is to prevent setting a precedent that it is
+> okay to have a local, per caller lmb instance.
 
-The functionality and the failing test were added by the series.
+I think the issue is thinking this is per caller. It is not (primarily)
+by caller. It is one LMB instance per managed independent address space
+block. Apple silicon SoCs have multiple independent iommus. Each iommu
+can handle multiple address spaces (streams, only partially implemented
+in the u-boot driver.
 
-Best regards
+> If it is allowed for
+> one caller, it becomes difficult to say no to someone proposing a
+> similar approach later. In any case, based on how the allocation logic
+> works, with all the addresses being allocated from the IOMMU driver's
+> map function callback, why can there not be a single instance of an
+> iova lmb structure. That would at least ensure some kind of parity on
+> how the lmb maps are maintained.
 
-Heinrich
+There are multiple fully independent IOVA spaces. I doesn't make sense
+to allocate them from a single pool.
+
+> > Before you changed the goal posts, lmb did exactly that.  The only
+> > problem was that there were multiple lmb instances covering the same
+> > "main memory" address space.
+> 
+> I had provided an explanation of the situation that existed prior to
+> these changes in a writeup [1]. And that writeup had clearly provided
+> the two possible solutions to fix the issue with EFI allocated memory
+> working with LMB. And it was decided through discussion on that
+> writeup as well as on the mailing list that this was the approach to
+> be taken.
+
+That document missed due to unfortunate circumstances one special case
+in the LMB usage. Consolidating all struct lmb referring main memory
+into a single opaque object is useful. Please let's move on to fix the
+single usage which broke due to the change.
+
+From my point of view it's clear that "io_lmb*" is separate from the
+main memory lmb. It manages the IO virtual address space of devices and
+it is fine that there as many (io_)lmb instances as there are IO virtual
+address spaces. These do not have to be managed via struct lmb and
+looking at the minimal io_lmb* API a simpler implementation would work.
+An alternative implementation would be duplicated code and reusing the
+existing tested lmb code is desireable.
+If we want a stronger distinction between lmb and io_lmb we could hide
+struct lmb from io_lmb.
+
+Janne
