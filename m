@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04F55D11141
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 15:46:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2D89D11140
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 15:48:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4526C88E41;
-	Sun,  3 Nov 2024 16:46:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0ECB988E41;
+	Sun,  3 Nov 2024 16:48:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BtAUrL2R";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EFGVb3ye";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8C9588E41; Sun,  3 Nov 2024 16:46:26 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 17D4E88E14; Sun,  3 Nov 2024 16:48:52 +0100 (CET)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7351A88DEE
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 16:46:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DDEF188DEE
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 16:48:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-83aad4a05eeso146098039f.1
- for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 07:46:23 -0800 (PST)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6cc250bbc9eso28504526d6.2
+ for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 07:48:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730648782; x=1731253582; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730648929; x=1731253729; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rYuhAINBplXNRzl6vmd/f7dHuW+6BDIGPoqd693P28g=;
- b=BtAUrL2Rr+F7vhSWgz54ngVSDxp0wdZkGZfpdYaU6vxgb3PsiyZMPnuRg7kRctW41O
- 9B4sP/iKXp5OVfv9ppc+NDoXXU41k4M7Du4Adj4lUgMRzv50YBm9sD4tgJdczUIVVsNo
- qTzeCyFQZHqZx4nwCi3PvEPSkMyst+Lp9DyIk=
+ bh=nCWjHCgjk1FuoardsSQQgfvzfFbVj3RSDCsH1bcLS9I=;
+ b=EFGVb3ye/VNu4Nc5dnZ7KBS3K7idHu6h92xP0hanqPvRrjS/lMKoME9+afmgFYDP+M
+ fqLVDWiXVTTImdTlh5oorImaXsmIBtfWu5iWKSscJjbap2K8aE/vLaYwFJdLzhHUE6Y/
+ 4N9wt9RXdFPVIWcHMOwaUxsLUczAEJT5V7fBY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730648782; x=1731253582;
+ d=1e100.net; s=20230601; t=1730648929; x=1731253729;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rYuhAINBplXNRzl6vmd/f7dHuW+6BDIGPoqd693P28g=;
- b=llH3QhwrF+nl+oF/fwD4mw1d8/DwyJs2OJ412nbQrk+A3+yrawvcMIh5VAgsWOMPpk
- GVyuS9YCD84Wo86MyeqcdC9EcWGTdh7HbQPNci4wJ10aGNjql2VuoDpr6QLwwyURreWI
- JH4G3KyRkpOhoQVr4SeFTAKrVXM0eM2NiTCBwo3cs/SgaC9ydsOP7tbpAXag0WrpGJ30
- HLkPHlGwAKiMo0EqmzLrCUrwF/dGc0NiXeOGHXO7dVHIbyLYtdDbZkXCxfA7jXl/9tc7
- Sft+AJcLHXqIPrGTlsGcquLc8pqRMyNQf6Q3tiY9s5dhkyj4AeQWDW4nOdks73CSJQLl
- nGXA==
+ bh=nCWjHCgjk1FuoardsSQQgfvzfFbVj3RSDCsH1bcLS9I=;
+ b=EfdVJaN+4vSGL8F4pcN0Gfk343XMd49KK+O0Uze1J1Yca7n6+NVIdf0WofwDh6mI2z
+ YgSgAErUoMDSYHJ+fAJ7v7b5RAIlU9/G1sI10ikbY/jEVmlIZsGFp/u6BiUCizFS9xTl
+ KzXnCWkzawMBKBRjoZ7MrGPU4A/N1RQSeyqHHYTfc20NB2G7LLW+BJolk5OXb3HtvK5e
+ qAjPNWf0Y/IjGkwF2SaD5Z37/V856e2la3a87WsTLucUEBtI8/x6Sik2HuMj0Wda7q59
+ /MwER8k0ojVIEgcI5akrygtLk42Zb8UVjtbhA42lCI1f6b4cfTcN7eVs7c8VIuF8e7PM
+ ujbg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVMEA5Ar3R2TmAVss379cQ3tTnzjLwg9nGXqjINg7a9a9BVC8o1Rwa6lgezWmxJj5Vr3a9grsc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxhTLOoaqsTsObLSHebbGGt2X9By/lArF2mL0DtgwWDP6t1m5yF
- i4Hf5leTdnI7gYCMeA224L1UA9veu9hLws+RBQe8m+HDKm/v6lO18a5VmFhXhJc=
-X-Google-Smtp-Source: AGHT+IG6EirT/pxRvas3yl82X/E02aT8LeTlLX1qefnhnYh2zueoELeo+pwTuwe8vR3rkQ7uT+OyYA==
-X-Received: by 2002:a05:6602:2cc8:b0:83a:f447:f0b9 with SMTP id
- ca18e2360f4ac-83b56712446mr1924493739f.9.1730648782152; 
- Sun, 03 Nov 2024 07:46:22 -0800 (PST)
+ AJvYcCVfRvB+/r3Pc8GoP4A8iyoC3f7nS5t0UrMz65uV9uJdqiIKL0Ldu0rVkjyHjpuA+Bk5+dDyu8U=@lists.denx.de
+X-Gm-Message-State: AOJu0YyD0PYywSyHXxP9rfTtfZAoY7MJW4UkQJeUVjytZgRAkSMpvhlI
+ P7A3/ECGIwSFuDHp4+XJ5Jz10HuGjVwOby6m4CoZLCaORmnKFVtrEi07yDfPbPc=
+X-Google-Smtp-Source: AGHT+IEYQMA5mH+5oio5uQt/8SxLL9UBhwgrPTL3ecnlvq8Vc5c2q9gMidMNC9VSzFNe68D5xLzakA==
+X-Received: by 2002:a05:6214:5992:b0:6cb:e5e9:3182 with SMTP id
+ 6a1803df08f44-6d351ad52bemr186408606d6.29.1730648928776; 
+ Sun, 03 Nov 2024 07:48:48 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4de04ac93b3sm1582660173.162.2024.11.03.07.46.19
+ 6a1803df08f44-6d35415a7b3sm39674606d6.93.2024.11.03.07.48.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Nov 2024 07:46:21 -0800 (PST)
-Date: Sun, 3 Nov 2024 09:46:17 -0600
+ Sun, 03 Nov 2024 07:48:48 -0800 (PST)
+Date: Sun, 3 Nov 2024 09:48:44 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
@@ -70,15 +70,15 @@ Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] configs: enable UNIT_TEST on qemu_arm_defconfig
-Message-ID: <20241103154617.GA3600562@bill-the-cat>
+Subject: Re: [PATCH 2/3] lib: uuid: fix uuid_str_to_le_bin() on 32-bit
+Message-ID: <20241103154844.GB3600562@bill-the-cat>
 References: <20241103071200.82853-1-heinrich.schuchardt@canonical.com>
- <20241103071200.82853-4-heinrich.schuchardt@canonical.com>
+ <20241103071200.82853-3-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Aw0K+Sd+FcN0G2A4"
+ protocol="application/pgp-signature"; boundary="r9L6FmuuXzwq8vV/"
 Content-Disposition: inline
-In-Reply-To: <20241103071200.82853-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241103071200.82853-3-heinrich.schuchardt@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,45 +97,70 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Aw0K+Sd+FcN0G2A4
+--r9L6FmuuXzwq8vV/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 03, 2024 at 08:12:00AM +0100, Heinrich Schuchardt wrote:
+On Sun, Nov 03, 2024 at 08:11:59AM +0100, Heinrich Schuchardt wrote:
 
-> The lib_test_uuid_to_le test fails on 32-bit systems. But we never caught
-> this in our CI because we never ran any of our C unit tests on 32-bit.
->=20
-> Enable CONFIG_UNIT_TEST on qemu_arm_defconfig.
+> hextoul() cannot convert a string to a 64-bit number on a 32-bit system.
+> Use function hextoull() instead.
 >=20
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Reported-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Fixes: 22c48a92cdce ("lib: uuid: supporting building as part of host tools")
 
-And it would be good to follow-up and turn it on for all QEMU
-defconfigs, I think at this point we should be able to. And if not,
-that's a few more unit tests to adjust.
+> ---
+>  lib/uuid.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/lib/uuid.c b/lib/uuid.c
+> index c6a27b7d044..19f33dd1477 100644
+> --- a/lib/uuid.c
+> +++ b/lib/uuid.c
+> @@ -35,6 +35,7 @@
+>  #ifdef USE_HOSTCC
+>  /* polyfill hextoul to avoid pulling in strto.c */
+>  #define hextoul(cp, endp) strtoul(cp, endp, 16)
+> +#define hextoull(cp, endp) strtoull(cp, endp, 16)
+>  #endif
+> =20
+>  int uuid_str_valid(const char *uuid)
+> @@ -339,7 +340,7 @@ int uuid_str_to_le_bin(const char *uuid_str, unsigned=
+ char *uuid_bin)
+>  	tmp16 =3D cpu_to_le16(hextoul(uuid_str + 19, NULL));
+>  	memcpy(uuid_bin + 8, &tmp16, 2);
+> =20
+> -	tmp64 =3D cpu_to_le64(hextoul(uuid_str + 24, NULL));
+> +	tmp64 =3D cpu_to_le64(hextoull(uuid_str + 24, NULL));
+>  	memcpy(uuid_bin + 10, &tmp64, 6);
+> =20
+>  	return 0;
+> --=20
+> 2.45.2
+>=20
 
 --=20
 Tom
 
---Aw0K+Sd+FcN0G2A4
+--r9L6FmuuXzwq8vV/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcnmsIACgkQFHw5/5Y0
-tyzE3Av/f+rBu5wYze4K58Yycf/aPy+53HH1HBCnE0YDwFez+h3eR2hhrtaQcD9x
-o/secwo/uJmUu6JwKOqeZhpNUREFfzirUDgz3ZkqhF9KSbjy+v9AsPRlEZGVeupt
-Plc31Mb0wjD7C2GHSLCtvavJn+a/5u8bOLF6e2oVH/9EeWcMXSB0tcOausdFkb6f
-K4ee/ohLC2TcLwXXxakNaQ/7MtaPHqhJxTlAOkj9CB6w/Z94cOiLGZZTYMQ+yMMr
-oQHWHeb6DbxQFV9STFsTH51Z8KEk+GQNcJh79ygjJUgPGMUIUxT2ahrqYfj87dbO
-QmggcdIfvd7N1rZxENFbpQaWHO6ZBHj80k+ZHya5kNzdm0C7nD4YrqoGQ2QpMTkY
-QrNc1AUDhheUhWXQGK3dS4nCTp1DqOiEs2bG1hEKKrz/tSmqSl+C5GOlBdI272yI
-hmAMN9sTv0fxYIZUoMDrmsBWc6L9n754c8GRSCMQjp1hWGMZBkVvf0v3l+ofPoBI
-Nr5BBAa4
-=wQRw
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcnm1wACgkQFHw5/5Y0
+tyzavQv/Xaoptwp6RH/iezdk3GzobfLqD6Du3oVvgvA2+7pltIvt1a4kZReYqnUu
+PKkpSnfBw8Vp+oufJMXJpyzhVLwyCLXblT8t2Mqe1sU8vQ/L1MKN+VgEq+fy8xbW
+djKwcjBoD5VqEneJHwBhsZkEawD2qVNrgP3fvmm1x8jfnQFWxaOTZuRIO9BvUXfY
+4NT5ZMPNEWgBCVOimV3FKEN0lOfuK+WGpV2wOHJTERzKLvOjLBvM6L5773FC7IGi
+JA97bory/qi8Kg9XFcgp0/Sjr4fAY+YqwgQi6+AMEgGsUErLToGo4FQ7TDJKE7v/
+Zmhf8waHZlt0bEesvOv7YXqXga5Ry7Cq/rKe4jYDxYYJUBuxPAhoBgFiMB3BOdd+
+xCaKMCg43hfzJisEbSwHm4b3TtUnHyPxBApRob9TQWqZPmwTSLwpkHWczz4gF0qW
+Ydo1kTiivnGuvZmN1HOVrJrDmdiIKsV9GytzFzYjuUo8k/xAmzfGi9Wfgit6+nZ9
+UJVDvf3+
+=1wzz
 -----END PGP SIGNATURE-----
 
---Aw0K+Sd+FcN0G2A4--
+--r9L6FmuuXzwq8vV/--
