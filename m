@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C51F5E6781B
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 09:38:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B08F3E6781B
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 09:44:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21E178909F;
-	Sun,  3 Nov 2024 10:38:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id A34F5890F8;
+	Sun,  3 Nov 2024 10:43:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="cg73AnI3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fc2c7RhZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6120889102; Sun,  3 Nov 2024 10:38:34 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 41C6E8907E; Sun,  3 Nov 2024 10:43:57 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77DCA8907E
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 10:38:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F1E85890F8
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 10:43:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730626710; x=1731231510; i=xypron.glpk@gmx.de;
- bh=FgC29GHOKTo76skAB2zs3g7SXz/+SOQlqtO/Rycj8bI=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=cg73AnI3bXksnki17j9Kr6fCSIXJG5JVDPHskVif32ZQY28L8I9MtATbkM3aHu/y
- ahUmjg0P/viASkGnMw0GGcEsIaMu5U036zm/X/d7YsgiYhJ7dm9DbOZdOdAST2cl+
- GEyTaUOLleqLbMB4Lc3r3x3oIP8LaaPUugNzi4BWm6HsVysjfbTBppSLzTw+z+oFr
- IhZarNCmWOqgfTM3OhULnT6eXH+B7+VpsST/36NseW57fI2S+Ahu/01W68/e8NrwL
- F/39asEdgGKzeMDZlWxMvRioOF82jiBtfejC5IJCwNHuusGpnz8m8brYNewkOcAcD
- LYql5IUuEvvgNVg9/Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MhD6g-1tkjh62nFy-00j21T; Sun, 03
- Nov 2024 10:38:30 +0100
-Message-ID: <e1332498-0dad-46f8-8cfa-1572b0da0522@gmx.de>
-Date: Sun, 3 Nov 2024 10:38:30 +0100
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-37d4c1b1455so2053785f8f.3
+ for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 01:43:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1730627034; x=1731231834; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PlpXUa/y6hbCSQWXh7uOUac/kfV4pe42UeWXdwzZYkU=;
+ b=fc2c7RhZRDnshx2Qw10MwBKyhGgZi43BbnWdrfSc1ED/7KYKSNnSI57sCkPhLuyAgJ
+ MEgzgAq8N+Qc8zjoT4oTQN/UA3CbHeNaFU539L28bFxvRu/1RrIi+QYZLzbG60GvbNBQ
+ MmCrkdjptMwNTTsgjJXpAjYsPH+Bei7A/RRQYb8vAvySTzuOk8TJ9HYLBWS8o2xlc+We
+ NofUWC23bETw50+jFHLE5WRkZ9jU29/TaVJerdHAqd1+KK/OZkujmM6nTUn8mANtNZoB
+ LB3uB/MThigWHnSGMq4DQpdhCxW/xyQy83sYjVoODpoBdwu8CFDl+fMh5UNg9rLRXJkg
+ iY7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730627034; x=1731231834;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PlpXUa/y6hbCSQWXh7uOUac/kfV4pe42UeWXdwzZYkU=;
+ b=ZPfKIOSbsO7qDICAX/iVyGI3SFT87j00hevbx8ZuXWablxAHhdIh5UoA5XbenOzYSW
+ qTDu9r0vdHJ6hbob6IH8plw14AljC02BGP6hjAFELje95vdKKRMuDTQYPzI9TcW/zhOb
+ XW4v2xI6RQqccEV8OAZ7XqtJv0tdsdFZqI9gLN6gmDjK8vMOBk0F9LYICUWT6+6EhK2h
+ q8qz4jiN/LeqmCnYRMiLwtp+3RLAiDT5Fh6aZVcCoxWuC2ZiNzNDcB1J6bQLnpDiFgBb
+ 6ZEzGxj9iA0Gjp33fwbeASvZdKk9vWA77pfKCwZODkj5ikQo7qzC8noykoeQts+0Yz23
+ KElA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUYNWt+in2fSTz4oEsvbutJZbLjca5UWn8mPCAmUJ4QY0hq5u6hV14/xt435r9H6rg1EpF7UD0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz1Zh845algAMoW+waIHwt3I2maGamj9LzlyvifYydSYkYK9XvI
+ oPGSxt2LER8HTEGcd7+Kf3aaoCzy6KKfbTx45O2zEbNX3+O1pjTlsJl4kLmU8IQOTI3niKNjXTB
+ KRXvyB0Dfa7zlMGilIWpVlbNvn0k=
+X-Google-Smtp-Source: AGHT+IGoNBwdL5SjQdohSFc/ao3VRguiq5OOVyAwqpvDIOjXcCqRUqo+MFdXWyFbmBE9nmzL6gP7de7+rJ1iHfy5LKI=
+X-Received: by 2002:a05:6000:ac1:b0:37d:3280:203a with SMTP id
+ ffacd0b85a97d-381b7057644mr11736299f8f.10.1730627034137; Sun, 03 Nov 2024
+ 01:43:54 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 14/20] test: Move unicode_ut test into lib
-To: Simon Glass <sjg@chromium.org>
-Cc: Francis Laniel <francis.laniel@amarulasolutions.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
- <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20241102193715.432529-1-sjg@chromium.org>
- <20241102193715.432529-15-sjg@chromium.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241102193715.432529-15-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>
+ <20241017-android_ab_master-v5-6-43bfcc096d95@salutedevices.com>
+In-Reply-To: <20241017-android_ab_master-v5-6-43bfcc096d95@salutedevices.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Sun, 3 Nov 2024 10:43:42 +0100
+Message-ID: <CAByghJb+ObC4jQ4B71Bf-eUKhyYcAY1inj=7LSa+qG1t-RBO+Q@mail.gmail.com>
+Subject: Re: [PATCH v5 6/6] common: android_ab: fix slot suffix for abc block
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Mario Six <mario.six@gdsys.cc>, u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ rockosov@gmail.com, kernel@salutedevices.com, 
+ Guillaume La Roque <glaroque@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:vuIaX++bF6xLBRuyz+KwDZu19EM8mcERk/cqM/DyfT1rrHmocBR
- g+ihGyxtv31aJu4UyHT3n8WyDkbSaA6eqYbJ0LvbihlMd0nHYrJpmb9IenywQKI1E/PXebI
- tRWZuxAmlN29vTF4rT9iSjVJDTTedlawJnWaWoMzSdoxIEK3mk6reM2kALbuRtc3xc00Q5a
- 30PrGOPFmTa0XfN/7wpmA==
-UI-OutboundReport: notjunk:1;M01:P0:yppGAq8AZe0=;byQndg/fubkvcSJsH8azb/L4wmy
- 7aRN0xaDM8CsZp+mPi/wZiheDtBTg1V08Z00wApV72oaS4e+wKEwCK9NlHhYFtIotEoBETnKW
- OwaEP6oR7gdt6Zn/rW84ijCFxsNCzb9n/wY/OZslVpASIRlU8KrMrCxwWbvZuZKkq522CWai5
- tNlZ4r6iyfapLj+Q3DB/7I6yj0ODDy/MFU6GMzzA4JFb25p/73P358oLUaQGDDx8Ti6HfIw5s
- bcgrk8ce/J4srvwQnCQVOXI2Z+cM7C5in3BVWsmnIztL4s30D8u6f20n4JxJFnRPmLFqE8Jk2
- vTt/6RTWlv5xXtzGmoPUTe+XjZx3gawNcfi7WHSa9dryHSX4R1G7LvnaNGw8+ouDSWK88SBZC
- sQXMNydJKFKrCtBHAlbz04Ou6nITPt1KgVev5YP+/JdfadwoVne/7kW0XXUbkLvuSDF+H3Yg6
- riN1v4mWwL9Bbg1tvpYk80JY0ErsJGzYsaftGvRTCRM0t7sg1PQbaGYyUJHy6mvZnzcTopgyL
- we3OIQZLn5jlkDHeF7FnILOxr6ZKl+BZL9ZOfPL5xRr+TrKZw/rBb3fjFhl7P8nKbis22XtRI
- 0lo7op1jrKKritrggOtCJg78lZH68h0HjqcEfaQYKny47x5vD2WsEfQb8aWa0NyM0n3Q3qyQe
- tfq5L4KeP1YlwTGdAhnHguXGHtuyN7X/gq4QE9xzFDuBwmYRwvHcuLdD9px1SBzLbZVH11NjE
- VJU++3zt4c/rNNujZvPEaHGnQ6otQ2FfVs6Tiy8idwWeQ0JRzw6VcgaSwFaVMWO/16Ivz+e/F
- 5r5af/eAYmjf8bpDi0OEX9Bw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,11 +96,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/2/24 20:36, Simon Glass wrote:
-> This test doesn't belong at the top level. Move it into the lib/
-> directory, to match its implementation. Rename it to drop the
-> unnecessary _ut suffix.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+Hi Dmitry,
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+On Thu, Oct 17, 2024 at 4:12=E2=80=AFPM Dmitry Rokosov
+<ddrokosov@salutedevices.com> wrote:
+>
+> To align with the official Android BCB (Bootloader Control Block)
+> specifications, it's important to note that the slot_suffix should start
+> with an underscore symbol.
+>
+> For a comprehensive understanding of the expected slot_suffix format in
+> userspace, please refer to the provided reference [1].
+>
+> Links:
+> [1] - https://source.android.com/docs/core/architecture/bootloader/updati=
+ng#slots
+>
+> Based-on: https://android-review.googlesource.com/c/platform/external/u-b=
+oot/+/1446439
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Tested-by: Guillaume La Roque <glaroque@baylibre.com>
+> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> ---
+>  boot/android_ab.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/boot/android_ab.c b/boot/android_ab.c
+> index c93e51541019d0fe793303c4b3d5286df061906f..a287eac04fe88ad08bdcf1b1b=
+1d6e564d503d800 100644
+> --- a/boot/android_ab.c
+> +++ b/boot/android_ab.c
+> @@ -52,7 +52,7 @@ static int ab_control_default(struct bootloader_control=
+ *abc)
+>         if (!abc)
+>                 return -EFAULT;
+>
+> -       memcpy(abc->slot_suffix, "a\0\0\0", 4);
+> +       memcpy(abc->slot_suffix, "_a\0\0", 4);
+>         abc->magic =3D BOOT_CTRL_MAGIC;
+>         abc->version =3D BOOT_CTRL_VERSION;
+>         abc->nb_slot =3D NUM_SLOTS;
+> @@ -328,7 +328,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct =
+disk_partition *part_info,
+>                  * or the device tree.
+>                  */
+>                 memset(slot_suffix, 0, sizeof(slot_suffix));
+> -               slot_suffix[0] =3D BOOT_SLOT_NAME(slot);
+> +               slot_suffix[0] =3D '_';
+> +               slot_suffix[1] =3D BOOT_SLOT_NAME(slot);
+>                 if (memcmp(abc->slot_suffix, slot_suffix,
+>                            sizeof(slot_suffix))) {
+>                         memcpy(abc->slot_suffix, slot_suffix,
+>
+> --
+> 2.43.0
+>
+
+Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+--=20
+Best regards - Atentamente - Meilleures salutations
+
+Igor Opaniuk
+
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+https://www.linkedin.com/in/iopaniuk
