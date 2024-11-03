@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B08F3E6781B
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 09:44:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD64FE6781B
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 09:54:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A34F5890F8;
-	Sun,  3 Nov 2024 10:43:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0B89A8909F;
+	Sun,  3 Nov 2024 10:54:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fc2c7RhZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XHGI22o/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41C6E8907E; Sun,  3 Nov 2024 10:43:57 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id C91EE890B9; Sun,  3 Nov 2024 10:54:17 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1E85890F8
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 10:43:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC3268907E
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 10:54:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-37d4c1b1455so2053785f8f.3
- for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 01:43:54 -0800 (PST)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4315839a7c9so28234815e9.3
+ for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 01:54:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730627034; x=1731231834; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1730627654; x=1731232454; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PlpXUa/y6hbCSQWXh7uOUac/kfV4pe42UeWXdwzZYkU=;
- b=fc2c7RhZRDnshx2Qw10MwBKyhGgZi43BbnWdrfSc1ED/7KYKSNnSI57sCkPhLuyAgJ
- MEgzgAq8N+Qc8zjoT4oTQN/UA3CbHeNaFU539L28bFxvRu/1RrIi+QYZLzbG60GvbNBQ
- MmCrkdjptMwNTTsgjJXpAjYsPH+Bei7A/RRQYb8vAvySTzuOk8TJ9HYLBWS8o2xlc+We
- NofUWC23bETw50+jFHLE5WRkZ9jU29/TaVJerdHAqd1+KK/OZkujmM6nTUn8mANtNZoB
- LB3uB/MThigWHnSGMq4DQpdhCxW/xyQy83sYjVoODpoBdwu8CFDl+fMh5UNg9rLRXJkg
- iY7Q==
+ bh=wQzeNlBoRs7GzrQeHd6MG9ceCCPQkgVTcfJ1c0M5v/U=;
+ b=XHGI22o/BQ5cxVQj2hGjGRFDQR/yXWj7N0M/qcoMhUSKtpTAK3B608tL+15V0J0I+H
+ 6HuiYe8UFz7qAzva07wN4UlDxX6Xc1yVwv2H0S9kS2GHH5vJUmFwVqqj6+iJuYougRWk
+ EqpjBCySI84r2Ort7eZVWbhbIsJ58LaqyJOU8sRo0sTeQ+8PsegrOX1Oi+BuoDCKt8By
+ kWuZa47kiR+X2h01WMyq4+XqzQMX5sZk7mZ0y1STc6UIFwq8quVnAdzxwTcAlmg6G2v9
+ Dr8Xlv7bOlvRtF4xxMzgwSxWuA5C4Jz89D8Fq30yBR+iphH2dXYaL2pSx87n4m4WTcAe
+ luag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730627034; x=1731231834;
+ d=1e100.net; s=20230601; t=1730627654; x=1731232454;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PlpXUa/y6hbCSQWXh7uOUac/kfV4pe42UeWXdwzZYkU=;
- b=ZPfKIOSbsO7qDICAX/iVyGI3SFT87j00hevbx8ZuXWablxAHhdIh5UoA5XbenOzYSW
- qTDu9r0vdHJ6hbob6IH8plw14AljC02BGP6hjAFELje95vdKKRMuDTQYPzI9TcW/zhOb
- XW4v2xI6RQqccEV8OAZ7XqtJv0tdsdFZqI9gLN6gmDjK8vMOBk0F9LYICUWT6+6EhK2h
- q8qz4jiN/LeqmCnYRMiLwtp+3RLAiDT5Fh6aZVcCoxWuC2ZiNzNDcB1J6bQLnpDiFgBb
- 6ZEzGxj9iA0Gjp33fwbeASvZdKk9vWA77pfKCwZODkj5ikQo7qzC8noykoeQts+0Yz23
- KElA==
+ bh=wQzeNlBoRs7GzrQeHd6MG9ceCCPQkgVTcfJ1c0M5v/U=;
+ b=aNuNMyl0iEKIBgz/u/ihC1cakdS37Ss37bimb/s1HD+V91v6OTBpjxW88MzPeTlf70
+ xzPlXM12nqwDVY8L6VV9msjvIZ7/08F0eGThbNd1o4x6q3lL41qZRaQ6t2S7UJ/3Lu7X
+ evjpdhpXx7rGZ2V45tqaLBa37nVPr6Khzd1GBXNZPhckOdcEN3JcVnC2ckhIac181d5K
+ MW0KxO8z6FrvJkzegNFwomUOiAFllYgwbKXXa8KP4mn7Z/pON+Ehb32ukZuslKjMk8Z+
+ Ubr/+ZhAN0qITq229ZdLO4heSHAiRZqfml5QJm/Pfl2xyWgpsbohgnE8NQUTucw1ipIW
+ q5Gw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUYNWt+in2fSTz4oEsvbutJZbLjca5UWn8mPCAmUJ4QY0hq5u6hV14/xt435r9H6rg1EpF7UD0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz1Zh845algAMoW+waIHwt3I2maGamj9LzlyvifYydSYkYK9XvI
- oPGSxt2LER8HTEGcd7+Kf3aaoCzy6KKfbTx45O2zEbNX3+O1pjTlsJl4kLmU8IQOTI3niKNjXTB
- KRXvyB0Dfa7zlMGilIWpVlbNvn0k=
-X-Google-Smtp-Source: AGHT+IGoNBwdL5SjQdohSFc/ao3VRguiq5OOVyAwqpvDIOjXcCqRUqo+MFdXWyFbmBE9nmzL6gP7de7+rJ1iHfy5LKI=
-X-Received: by 2002:a05:6000:ac1:b0:37d:3280:203a with SMTP id
- ffacd0b85a97d-381b7057644mr11736299f8f.10.1730627034137; Sun, 03 Nov 2024
- 01:43:54 -0800 (PST)
+ AJvYcCVoVzYtevHTvf08mM0NHfXmZVZs/GqmPVCY38a8EDyn67U+d07FCpxVqkL64ZYG1MaPwh52gzQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwbAJzk6UlBId4aydKOJHqdUpdj0CnTRTexAP/57lAMX+TRl6Ou
+ 1HrYAZrKDYc9vOuRwr2Hsihy/S/J1afQcBoRZG4nNL6qnt8m3lOhjENGAyIhLplsNlMympi9U6+
+ F3mt4l7yWfxVr2bNnpSiikQ8S54g=
+X-Google-Smtp-Source: AGHT+IHoc3u3XYh6dPBvcQaZMjtja0ehbWKtRbvNl+klveq2DCu4uTkL1ywgVdwjNulxgUDkXi169D5loC+GhoJwwpg=
+X-Received: by 2002:a05:600c:4ec7:b0:42e:93af:61c5 with SMTP id
+ 5b1f17b1804b1-4319acad2e4mr256516035e9.14.1730627654193; Sun, 03 Nov 2024
+ 01:54:14 -0800 (PST)
 MIME-Version: 1.0
-References: <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>
- <20241017-android_ab_master-v5-6-43bfcc096d95@salutedevices.com>
-In-Reply-To: <20241017-android_ab_master-v5-6-43bfcc096d95@salutedevices.com>
+References: <20241102100836.103005-1-heinrich.schuchardt@canonical.com>
+ <20241102100836.103005-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241102100836.103005-2-heinrich.schuchardt@canonical.com>
 From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Sun, 3 Nov 2024 10:43:42 +0100
-Message-ID: <CAByghJb+ObC4jQ4B71Bf-eUKhyYcAY1inj=7LSa+qG1t-RBO+Q@mail.gmail.com>
-Subject: Re: [PATCH v5 6/6] common: android_ab: fix slot suffix for abc block
-To: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Tom Rini <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Mario Six <mario.six@gdsys.cc>, u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- rockosov@gmail.com, kernel@salutedevices.com, 
- Guillaume La Roque <glaroque@baylibre.com>
+Date: Sun, 3 Nov 2024 10:54:02 +0100
+Message-ID: <CAByghJZkj4uQDUYGm46vYFdK5etJ1Fup36VGmrPkjkuEeD2Mkg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] cmd: hash: correct parameter count check
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -96,64 +91,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dmitry,
+Hi Heinrich,
 
-On Thu, Oct 17, 2024 at 4:12=E2=80=AFPM Dmitry Rokosov
-<ddrokosov@salutedevices.com> wrote:
+On Sat, Nov 2, 2024 at 11:09=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> To align with the official Android BCB (Bootloader Control Block)
-> specifications, it's important to note that the slot_suffix should start
-> with an underscore symbol.
+> Since commit 348ea878508d ("cmd: hash: fix param count check") the hash
+> command cannot be used without the optional variable name parameter if
+> CONFIG_HASH_VERIFY=3Dy. 'hash sha1 $loadaddr $filesize' returns
+> CMD_RET_USAGE.
 >
-> For a comprehensive understanding of the expected slot_suffix format in
-> userspace, please refer to the provided reference [1].
+> The minimum number of arguments is four no matter if verification is
+> enabled or not.
 >
-> Links:
-> [1] - https://source.android.com/docs/core/architecture/bootloader/updati=
-ng#slots
->
-> Based-on: https://android-review.googlesource.com/c/platform/external/u-b=
-oot/+/1446439
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Tested-by: Guillaume La Roque <glaroque@baylibre.com>
-> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> Fixes: 348ea878508d ("cmd: hash: fix param count check")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  boot/android_ab.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+>  cmd/hash.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/boot/android_ab.c b/boot/android_ab.c
-> index c93e51541019d0fe793303c4b3d5286df061906f..a287eac04fe88ad08bdcf1b1b=
-1d6e564d503d800 100644
-> --- a/boot/android_ab.c
-> +++ b/boot/android_ab.c
-> @@ -52,7 +52,7 @@ static int ab_control_default(struct bootloader_control=
- *abc)
->         if (!abc)
->                 return -EFAULT;
+> diff --git a/cmd/hash.c b/cmd/hash.c
+> index 60d482b7f87..5b40982b098 100644
+> --- a/cmd/hash.c
+> +++ b/cmd/hash.c
+> @@ -25,7 +25,7 @@ static int do_hash(struct cmd_tbl *cmdtp, int flag, int=
+ argc,
+>         char *s;
+>         int flags =3D HASH_FLAG_ENV;
 >
-> -       memcpy(abc->slot_suffix, "a\0\0\0", 4);
-> +       memcpy(abc->slot_suffix, "_a\0\0", 4);
->         abc->magic =3D BOOT_CTRL_MAGIC;
->         abc->version =3D BOOT_CTRL_VERSION;
->         abc->nb_slot =3D NUM_SLOTS;
-> @@ -328,7 +328,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct =
-disk_partition *part_info,
->                  * or the device tree.
->                  */
->                 memset(slot_suffix, 0, sizeof(slot_suffix));
-> -               slot_suffix[0] =3D BOOT_SLOT_NAME(slot);
-> +               slot_suffix[0] =3D '_';
-> +               slot_suffix[1] =3D BOOT_SLOT_NAME(slot);
->                 if (memcmp(abc->slot_suffix, slot_suffix,
->                            sizeof(slot_suffix))) {
->                         memcpy(abc->slot_suffix, slot_suffix,
+> -       if (argc < (HARGS - 1))
+> +       if (argc < 4)
+>                 return CMD_RET_USAGE;
 >
+>  #if IS_ENABLED(CONFIG_HASH_VERIFY)
 > --
-> 2.43.0
+> 2.45.2
 >
 
 Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+
 --=20
 Best regards - Atentamente - Meilleures salutations
 
