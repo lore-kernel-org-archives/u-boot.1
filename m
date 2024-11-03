@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27C43E67819
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 01:40:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E12E67816
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 01:40:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1274A89109;
+	by phobos.denx.de (Postfix) with ESMTP id 800F18910B;
 	Sun,  3 Nov 2024 02:40:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d131kXFq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IAQb/sb1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21CB4890B1; Sat,  2 Nov 2024 23:19:01 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id EFFD188F50; Sun,  3 Nov 2024 01:34:28 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD84D89102
- for <u-boot@lists.denx.de>; Sat,  2 Nov 2024 23:18:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3313E890FE
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 01:34:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-71e49ad46b1so2593164b3a.1
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 15:18:57 -0700 (PDT)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2e2dcf4b153so2313024a91.1
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 17:34:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730585935; x=1731190735; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730594063; x=1731198863; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=Pny/6aZrMRKa1cJiQSXpo+LyH2LHLfG8xTW7X1mJzQY=;
- b=d131kXFqaUAy+epE+mQk9pw2dwJr7hhpF8PpWpT8biXXwT6otPJ9mG0IfK2egD0ANo
- vBV7DXPRqobxPOI7J2ZuGGyUn79oSq3Y4Urn3Zyyn2lNoxUj47AavIBj/OB434HnhcBn
- 5RkPQ7IksvIqdNdKIjfNTvl96iJB0MD5uWvz8=
+ b=IAQb/sb1JToSe3Iw40PWTuS1gUi7CBvsNCvJc+yxDbEL0r5ZLRdsbGEtjW2kfecrir
+ VPFpHZqtKGvt5ymqiJKGibCObFQLbFdLUG/oV+Lvr/YOnjlsQ1GNE30X789rBQORIdIV
+ VtCq2T9/QT7Zq3RgUGxxC0HJLK27msspflork=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730585935; x=1731190735;
+ d=1e100.net; s=20230601; t=1730594063; x=1731198863;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=Pny/6aZrMRKa1cJiQSXpo+LyH2LHLfG8xTW7X1mJzQY=;
- b=iQMsW+cf1ZkTFJ8R6YSSkh6PpJzIBoSgK2e31A0viPk6qJqh6vro9FGXdlyXLaTf6T
- HpVtyu2WHVSBAmICqQkPRn+//m5gdwAGuuxk84E5cVb5VehPt54PRrGFKlRfTcZ/cpeV
- 3NjhRomOdsLvOzrVX6sMB46vHoJWmjOldQPYVbzXGK5TzxM8r4OXq8M5Y39uIZoQ9MO/
- Ok8di6TvQ2tsFYKNgTJrqPypicOgYoFgf0A9ssCmveFeiuMSHGAQILGn9qtFttcRat/B
- 4AbQD0n+UkxOiMOymeTvH7q05TzE3mQhebgDaBwMBLO2XBR9tSQEkYWQq+HtG++y6uMQ
- VEWw==
-X-Gm-Message-State: AOJu0Yzkco6kOKEcqi1+suIKwLDYh20y1WZZSThMhzSIWqBgY/2+qfRn
- 8tlSo3JfCOWlz3wSul2GzFd5P2y+LGGTrfc6aPSkSSirI47tFDVWn72nFhuxpR8qccK3D8yiUsp
- AuQ==
-X-Google-Smtp-Source: AGHT+IHGe8V65gtGY5RnTJ65ochndhKXaqi/ybYy6vDG1cXXpq5S8/1BmpJDZWniwNV2Xx38/me+IA==
-X-Received: by 2002:a05:6a20:d81b:b0:1d6:e635:5c5e with SMTP id
- adf61e73a8af0-1d9a83ab2e5mr35793588637.9.1730585935142; 
- Sat, 02 Nov 2024 15:18:55 -0700 (PDT)
+ b=DwpbyNeVOH+roQgbOOCD4Eru63uoI9bAGs2XEyLqcSQW8BBX3pkv0h6wA3jcThwbBh
+ 7mq2+gfOCvv8fQ6GNEyI8V3fQykPlVJFrsPe+S5ykJ/kt9hxUrBkGb3+MU5dy8hcsykM
+ zxQoGU5GEqI9NIeus+nSWcrLV8IP5UoTg//Qr/4/1XwkOch2b6uLnU43TVVxl0fzExAB
+ 31PaLvTsT3WzjR/ImN+O1cJq8wIYZOvDC3BAAJtykhRwPiI3KQ9WI/J57WYoE4otZj4W
+ oK35NJsQsddv5FZv1RDzimikZs/Bd8/czjzxg3qGGBJUl7baw+yIcqzcS4ACyDwY4AN6
+ 13yA==
+X-Gm-Message-State: AOJu0YyfMu5jnD9cuTUQxZ6TMbRVWnEBSq/b64iYpUj3XQJ2vLU9hNbS
+ PW/QL0e7Ex7tzrZpsHWBkwoV0q/22nTcRX+SQ1chSCisPm4IG2JPXbMyyXgpgHN04aOQdjUH2hQ
+ dng==
+X-Google-Smtp-Source: AGHT+IGJohvHC7d85jPd8aorv2O2CiWISHpSBQvW4RWftRL0BSGMVTf6aRJDYkoZGTxgVrNjk4kEQw==
+X-Received: by 2002:a17:90b:1801:b0:2e2:ad11:bd36 with SMTP id
+ 98e67ed59e1d1-2e92cf53b68mr17922266a91.37.1730594063105; 
+ Sat, 02 Nov 2024 17:34:23 -0700 (PDT)
 Received: from chromium.org ([205.220.129.19])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7ee45a0081esm4386286a12.59.2024.11.02.15.17.58
+ d9443c01a7336-211057a63f2sm38987995ad.168.2024.11.02.17.33.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Nov 2024 15:18:54 -0700 (PDT)
+ Sat, 02 Nov 2024 17:34:22 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Albert Aribaud <albert.u.boot@aribaud.net>,
- Alison Wang <alison.wang@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
- Andy Fleming <afleming@gmail.com>,
+ Alexander Gendin <agendin@matrox.com>, Alison Wang <alison.wang@nxp.com>,
+ Andre Przywara <andre.przywara@arm.com>, Andy Fleming <afleming@gmail.com>,
  Angelo Dureghello <angelo@kernel-space.org>,
  Angelo Dureghello <angelo@sysam.it>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Charles Hardin <ckhardin@gmail.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Doug Zobel <douglas.zobel@climate.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Doug Zobel <douglas.zobel@climate.com>,
  Enric Balletbo i Serra <eballetbo@gmail.com>,
  Francis Laniel <francis.laniel@amarulasolutions.com>,
  Hans de Goede <hdegoede@redhat.com>,
@@ -96,6 +94,7 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Priyanka Jain <priyanka.jain@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
@@ -107,8 +106,8 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Wan Yee Lau <wan.yee.lau@intel.com>, Wolfgang Denk <wd@denx.de>,
  uboot-stm32@st-md-mailman.stormreply.com
 Subject: [PATCH v3 00/25] led: Remove old status-LED code
-Date: Sat,  2 Nov 2024 16:16:58 -0600
-Message-ID: <20241102221737.547938-1-sjg@chromium.org>
+Date: Sat,  2 Nov 2024 18:32:52 -0600
+Message-ID: <20241103003322.626036-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
