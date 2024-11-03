@@ -4,63 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8C31D11100
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 14:48:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86381D11100
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 15:02:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 464938910B;
-	Sun,  3 Nov 2024 15:48:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id DE03988DEE;
+	Sun,  3 Nov 2024 16:02:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KUdtuow8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o8EvWccA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3406E8914F; Sun,  3 Nov 2024 15:48:04 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 0DA1388DEE; Sun,  3 Nov 2024 16:02:20 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21C868912B
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 15:48:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DFD4D88D70
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 16:02:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a99f1fd20c4so447805866b.0
- for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 06:48:01 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-4609d75e2f8so38431631cf.1
+ for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 07:02:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730645279; x=1731250079; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Ho0J/hvWIowUJnJZ1PdRczPx1x83JD+VDxL2opltbcE=;
- b=KUdtuow8ZKHolLfsFgQy+FMmv112Bz8Hb8ksTvejCiN0xF0qVZY7RN00CiXYb+rhyw
- CO+XoIaBJdEz4MXyXjaotI7eIw2vOuKY2QFQRyG1I+2k/I/Qd5kPItiZlXrx9xAakEuT
- PdMU+bUvV8sdDtsFIlLuu0qnI1E4+la8fCn20=
+ d=konsulko.com; s=google; t=1730646137; x=1731250937; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6sz28AG6p6F+hf/wBqIOtsJmdL5PXto+SSwAKJH6j2s=;
+ b=o8EvWccAG6f9pSWYi66s6Q70bgeuAEDTJfofqiItJRVoiruTkbGOnMUEG8pa83LMBe
+ IvCKayHqga6xdlbogwwQppmmufgsbVJdbLIY9+Bj4sNI9eqzPl142KIvkBbgKTHLDZKJ
+ va0JUnJtr7M7d1LsKE5husQ9BCyCER9cEOXOw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730645279; x=1731250079;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Ho0J/hvWIowUJnJZ1PdRczPx1x83JD+VDxL2opltbcE=;
- b=ccN7/9vYnVhsyJT11n+EZZ7yvIf9hNC957sColJjP0sS4APKhBgp3Fi2kei6DL3jNK
- 1KrXWkkPbFLvLqeXQkkLGw/QdUTcUv5c0I21rolyI+fNIiSo7em7KUlz7Dqpl8DwHwRa
- n+45cjpR98bP1l9PZ9Uu2KvWMzLlpFNN96hVhRvqtIU5hdOV44rVKwvTGV2y2QeXeT1s
- KyHGN+8kNNu8oOG5MbUdL0MFu6hT81QaX3G38GwAQJB4842fC84iVZ6kkYD/Tk7CoP7j
- t8e/WAzJPpS6PclIy/uozbEPsxakOHriRlTzEkSVEij0MKXY3Hc82ckILhoX1uMnXZ2/
- vZeQ==
-X-Gm-Message-State: AOJu0YwEx7XOLSpozv7l8MhakJszZdX0apTWtUJzU6MU3f2nBD4IpiEL
- 4EdTyDn4ytqlHs0T7NufWum26moqatONr7dE8zxKBfgtQ7rTDdmUzR63Np/QVqUGEQSvYSItMi8
- pDSeuGsIpsiG7TIpduq6DEgGKlNFOwMmcmoIy0Fb82v0X1OYDvA==
-X-Google-Smtp-Source: AGHT+IFJigJAkc+0EIPYKxQrJ2W/xhTWBX/5oKAOys2UZRyh3g+ZxN3X5vKocpUdfZJL0v19dq6WZdrTF5x0Va5Yyuo=
-X-Received: by 2002:a17:907:3da1:b0:a9a:4e77:92f with SMTP id
- a640c23a62f3a-a9e50b9e343mr1194730966b.56.1730645278972; Sun, 03 Nov 2024
- 06:47:58 -0800 (PST)
+ d=1e100.net; s=20230601; t=1730646137; x=1731250937;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6sz28AG6p6F+hf/wBqIOtsJmdL5PXto+SSwAKJH6j2s=;
+ b=D+JZp4w59MvPiRoPaFP2wChHaHivTYYMU9cQC2eRdZtHLix3PBSTBUZa0ZOIy6yjkF
+ MxMv7B+JsZ4njVkMm237fViZ4hqj4xDdv0FRvwzow8jtut8BT3KB7cqGDYzTcyPMJkw5
+ s6U3UJUnriUgy/3od19izbRLtI+K+2EbuKcBiDmA9rsTcFPJFUa0hiZecwGLHeGUEqk1
+ BgPvOroKfAP1TLnSf0ZDuAZjUJpXp2WEG2nX6wbMiUqUnH75W2u6Tuk9cgA5fb5DLzYU
+ WVbpD/0z0EjJ0IDr1akR7WiJSmrIuaAlAl0u919TaZt62N079sa9wbZOVc9DeOiEDptX
+ hRIg==
+X-Gm-Message-State: AOJu0YygNk+Qy+2etjxp82jrRnx39k++cm3J993gOgD2D08SBPqnV/Dp
+ pHNv/QCZPp8MUs0vPs8xVtbSMbsjGwF4V0tsjM5IYcoRJlIvCEJcHbr4PTbojSE=
+X-Google-Smtp-Source: AGHT+IH6DpjBwPUlkOvEgAqpSQwjX1cyDs9tuGV1wFeLdhgalQvaiGxfapyx51dAYNZkgMhEhTU5JA==
+X-Received: by 2002:ac8:7f16:0:b0:461:22fc:73da with SMTP id
+ d75a77b69052e-462ad2c765emr201672671cf.16.1730646136453; 
+ Sun, 03 Nov 2024 07:02:16 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-462ad0c2b5asm38087661cf.45.2024.11.03.07.02.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 03 Nov 2024 07:02:14 -0800 (PST)
+Date: Sun, 3 Nov 2024 09:02:11 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] .readthedocs.yml: update Python version and Ubuntu
+ release
+Message-ID: <20241103150211.GZ3600562@bill-the-cat>
+References: <20241103105635.107181-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 3 Nov 2024 07:47:46 -0700
-Message-ID: <CAFLszTj16p8-H1J349FoLowzpO7SNfdwELEDyDmi=U9+gZiCbw@mail.gmail.com>
-Subject: Please pull u-boot-dm
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="plkAByPqdwsMSsG/"
+Content-Disposition: inline
+In-Reply-To: <20241103105635.107181-1-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,111 +90,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/23152
-https://dev.azure.com/simon0972/u-boot/_build/results?buildId=71&view=results
+--plkAByPqdwsMSsG/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The following changes since commit e61ea9f2e5d2967826c2c6e3edba961064fbbaa1:
+On Sun, Nov 03, 2024 at 11:56:35AM +0100, Heinrich Schuchardt wrote:
 
-  mtd: spi-nor: Guard SPI_STACKED_PARALLEL with DM_SPI check
-(2024-10-31 13:34:29 -0600)
+> The current documentation build dependencies are not compatible with
+> Python 3.9. Update to Python 3.12.
+>=20
+> Use the current Ubuntu LTS release, i.e. 24.04 Noble Numbat.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-are available in the Git repository at:
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-  git://git.denx.de/u-boot-dm.git tags/dm-pull-2nov24
+--=20
+Tom
 
-for you to fetch changes up to 572b7b0255f9f33002ce7d2a8b2bac30ab49a48e:
+--plkAByPqdwsMSsG/
+Content-Type: application/pgp-signature; name="signature.asc"
 
-  sandbox: Fix comment for nomap_sysmem() function (2024-11-02 16:14:55 -0600)
+-----BEGIN PGP SIGNATURE-----
 
-----------------------------------------------------------------
-alist enhancements and fixes
-minor test and sandbox fixes
-some more x86/coreboot patches
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcnkG8ACgkQFHw5/5Y0
+tyz2jQv+PBTig7Yq/qXud2d/o92eovwoa3SK6InEveAJI27znEQaADI/IQcmLOJK
+c3wYTgLFfZ4z4pZbsIMMouRM2WE+DdrmXsnLdYBJToOdMQmupuM11s6b3K93Hd+3
+YlZxetwiNVsKy9WWGOPlYh4+nK1549nG4lHsvnN0iVTLo8gOwOb3Gm4sjz/cphqc
+fgBiie16mocdCPSoRgDCSzBAJ71Vd2QjKuryCoLq20x1Lsyt0vDlCdbsxG8wx47Z
+ZaLdAAvz6RZbyzwNNpsyFWRqMYxWE6Bi4yOAgYGJZKeInnA5dDjzIEaRnaBSt5Cb
+AnTG2DV/vf8x+Ig8qiy5KCXAvbF6vMqnwzeeIRLz2KSOWAnnIAI+5go4cvHBQoxj
+IjvnMF8fHpHHeazQ3jTxHy4kEqPjX4eWHOdaEMnx1S9yblTTpYmj5VfDcxJllDPA
+y+pmxGunG80Vj8rpFYhwJphB03xFGL5yiKMczpXgnQhqalQwhjfK7C2x57x9DMep
+J/DDlQ84
+=17r4
+-----END PGP SIGNATURE-----
 
-----------------------------------------------------------------
-Jonas Karlman (1):
-      bootstage: Do not sort records
-
-Simon Glass (27):
-      alist: Mention the error condition in alist_add_placeholder()
-      alist: Add a comment for alist_init_struct()
-      alist: Expand the comment for alist_get()
-      alist: Add a way to get the next element
-      alist: Add for-loop helpers
-      alist: Add a function to empty the list
-      alist: Add a way to efficiently filter an alist
-      alist: Add maintainer
-      dm: core: Add a function to see if a device exists
-      test: boot: Use a consistent name for the script bootmeth
-      test: Expand implementation of ut_list_has_dm_tests()
-      test: Drop the duplicate line in setup_bootmenu_image()
-      test: boot: Update bootflow_iter() for console checking
-      bootstd: cros: Correct the x86-setup address
-      bootstd: Avoid showing an invalid buffer address
-      x86: coreboot: Add a test for cbsysinfo command
-      x86: coreboot: Show the option table
-      x86: coreboot: Enable support for the configuration editor
-      x86: coreboot: Add a command to check and update CMOS RAM
-      x86: coreboot: Allow building an expo for editing CMOS config
-      log: Add a new category for tests
-      test: Allow saving and restoring the bloblist
-      bloblist: test: Mark tests with UTF_BLOBLIST
-      sandbox: Convert sb command to use new macro
-      doc: sandbox: Add docs for the sb command
-      sandbox: Add a way to show the sandbox memory-mapping
-      sandbox: Fix comment for nomap_sysmem() function
-
- MAINTAINERS                       |   7 ++
- arch/sandbox/cpu/cpu.c            |  13 +++
- arch/sandbox/include/asm/cpu.h    |   3 +
- arch/sandbox/include/asm/io.h     |   2 +-
- arch/x86/dts/coreboot.dts         |   7 ++
- boot/Makefile                     |   3 +
- boot/expo_build_cb.c              | 245
-++++++++++++++++++++++++++++++++++++++++++++++++++++
- cmd/Kconfig                       |  11 +++
- cmd/bootflow.c                    |   9 +-
- cmd/cedit.c                       |  28 ++++++
- cmd/sb.c                          |  42 ++++-----
- cmd/x86/Makefile                  |   1 +
- cmd/x86/cbcmos.c                  | 139 ++++++++++++++++++++++++++++++
- cmd/x86/cbsysinfo.c               |  73 +++++++++++++++-
- common/bootstage.c                |  12 +--
- common/log.c                      |   1 +
- configs/coreboot64_defconfig      |   2 +
- configs/coreboot_defconfig        |   2 +
- doc/board/coreboot/coreboot.rst   |   6 ++
- doc/develop/cedit.rst             |   2 +-
- doc/usage/cmd/cbcmos.rst          |  45 ++++++++++
- doc/usage/cmd/cbsysinfo.rst       |  99 +++++++++++++++++++++
- doc/usage/cmd/cedit.rst           |  76 ++++++++++++++++
- doc/usage/cmd/sb.rst              |  79 +++++++++++++++++
- doc/usage/index.rst               |   2 +
- drivers/core/uclass.c             |  11 +++
- include/alist.h                   | 139 +++++++++++++++++++++++++++++-
- include/asm-generic/global_data.h |   2 +
- include/dm/uclass.h               |  11 +++
- include/expo.h                    |   8 ++
- include/log.h                     |   2 +
- include/test/test.h               |   3 +
- lib/alist.c                       |  41 +++++++++
- test/bloblist.c                   |  28 +++---
- test/boot/bootflow.c              |   4 +-
- test/cmd/Makefile                 |   1 +
- test/cmd/coreboot.c               | 119 +++++++++++++++++++++++++
- test/dm/core.c                    |  22 +++++
- test/lib/alist.c                  | 253
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
- test/py/tests/test_ut.py          |   2 -
- test/test-main.c                  |  31 ++++++-
- 41 files changed, 1521 insertions(+), 65 deletions(-)
- create mode 100644 boot/expo_build_cb.c
- create mode 100644 cmd/x86/cbcmos.c
- create mode 100644 doc/usage/cmd/cbcmos.rst
- create mode 100644 doc/usage/cmd/sb.rst
- create mode 100644 test/cmd/coreboot.c
-
-Regards,
-Simon
+--plkAByPqdwsMSsG/--
