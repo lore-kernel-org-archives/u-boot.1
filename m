@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 118C5E67816
-	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 00:32:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 442B0E67816
+	for <u-boot@archiver.kernel.org>; Sun,  3 Nov 2024 00:34:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FDC489080;
-	Sun,  3 Nov 2024 01:32:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B469089058;
+	Sun,  3 Nov 2024 01:34:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R00veVY0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U75Rb/WB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91EB988F50; Sun,  3 Nov 2024 01:32:24 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 6ED6E89080; Sun,  3 Nov 2024 01:34:39 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C831889080
- for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 01:32:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 365D688F50
+ for <u-boot@lists.denx.de>; Sun,  3 Nov 2024 01:34:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-539fb49c64aso4204390e87.0
- for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 17:32:20 -0700 (PDT)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-20cdb889222so30108465ad.3
+ for <u-boot@lists.denx.de>; Sat, 02 Nov 2024 17:34:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730593939; x=1731198739; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CiOQUq1yVKkJEvq26zaLOMDermM70fg+ujJ63eftt8A=;
- b=R00veVY0s+M43EsY460dscRDihBDrTs0zvoBz7XGITV4uk4/2NP+9/LJMowtrWzzgw
- YCnhFkayTTM72c//EWe7AXBYXCSRL4dNCb4F81oWEdmRnbEfUMPD5iaNBPzyWxjZI1Uw
- SqvY7YtKL/UDbdkhlVn3t1cIndJlR2w9qkPRo=
+ d=chromium.org; s=google; t=1730594075; x=1731198875; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=u581EJX4sUW51bS4jbnPZtdZVoeef+vK0be1S3L7EUo=;
+ b=U75Rb/WBvzxZclgF3xpN+dan+x5uSljMbEA7HeuhZ2Q1Zl8t+W+7pQzZNuBu3d09mq
+ E7SDEUSQ+jYH57wZYpgLnVvsEQEU4WwAYQWEiVXa5KBolugTfyeseNNSOl8C+1HHSULo
+ y9OGNVmJM1W5uOxekOmQGM3+nRgjG1bK/nk4E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730593939; x=1731198739;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CiOQUq1yVKkJEvq26zaLOMDermM70fg+ujJ63eftt8A=;
- b=PMYniaA0dY8ggSOWyWXe4JQiLL+xtGqLd34CA8OBx47wUzOxb1Mi0w+2jPjDWt0ZAa
- uOWDJq7G3Sb9HzMzJpeCrwHNTciFKXRkel9+udYYy6puRR+UgWyt/VWlALzuRKKE4DFw
- ZWkVzRI6mKY38QPAkye5U6yCmo6t6B1TZ0isWu2LXZblDt0hdIgwLUZOmsmkOzwKgX4s
- da/Nk/k//OVPwd3ni6FsGk7+zAZhLAfYIMw5xgfBNTXtH6D5qe2fpa1jbUad6G7JGHOY
- kzBWWB+X9H6Xuqjdmy4nRYxsg1Bgen2jW243ohPPExV/ccDC8EC+ENJrqVxRsj4krc30
- /4Vw==
-X-Gm-Message-State: AOJu0YzGsU+4J5HxIyB2N89TGsyhL0lUlVtrFi/9z+UQEPwFaZrpC1vw
- 8gisXai84SUJiRWefqiFZZ1A/iJul72IN+FCdVAOEmwSY9bsxWe0FB5q9YiblTKbUGyWgEQK6M7
- sygA7MVP93PPhEfT+52WiMLHe3NwWpBBmFwMKJenTujECzQzppA==
-X-Google-Smtp-Source: AGHT+IEtlCYv1dbMieNrhsSria+ax7Z0hr56mMDm+sf3kkM/OOz9Fk+aNK5nJDJp9NJyKchjPAElToBYLmBWrTSlLwI=
-X-Received: by 2002:a05:6512:124c:b0:539:9ee4:baab with SMTP id
- 2adb3069b0e04-53d65df2701mr6005397e87.30.1730593938817; Sat, 02 Nov 2024
- 17:32:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20241103002828.624931-1-sjg@chromium.org>
-In-Reply-To: <20241103002828.624931-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1730594075; x=1731198875;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=u581EJX4sUW51bS4jbnPZtdZVoeef+vK0be1S3L7EUo=;
+ b=U8W+sSXlBZRwsWsMT0n1/cb46SMZKw28okqWUO1pFQGQ9DKUxhmVwMnp7Hq6hfEw46
+ 4tqqWWRFb1s2xjD2zjALokrlTYrFw5GLDVPzRbseJ8Qa5CfGvTv56hygKyc2Nw5xv/7u
+ jgJyRaIsQH/uD7cz76OuASDoPf73wjIGNaP5y9cJqj4wg7ggGGi4s/hRA0DRC3ddXuM2
+ +Nnt0BB/eGtDSpNG5CHUeWbPAufpbE8/6sBo4lBuY9qK2U25Ik3wgNH5QAqEK2oIcqvF
+ +SPAS9zOFfGtANVXpol8E0j1drlITfb1JstemGdwXQDBpsh/cxY34cIs6bN67AD+rW/R
+ uN3Q==
+X-Gm-Message-State: AOJu0YyTmN7vth91UyeoPDzlf0wc/Gs4a2LSDL0zjCid8+/xIrWC5wX3
+ MUvZK2ld+OllxnTcBTHqYOB2UMSJ22NYRuWeIiXQjXKrfPPHA3R2FodsB3nYPWNH6MvMHWwnaRF
+ dKg==
+X-Google-Smtp-Source: AGHT+IEHTK+hfqqE1+NBSAwaQtiUfpdlbOC306UU+AqaZpkQ8nnA7K40j2J/zzr8ct0HD40NsQWIgg==
+X-Received: by 2002:a17:902:c40c:b0:20c:7d4c:64db with SMTP id
+ d9443c01a7336-21103c7bfafmr152995755ad.49.1730594075007; 
+ Sat, 02 Nov 2024 17:34:35 -0700 (PDT)
+Received: from chromium.org ([205.220.129.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-211057a63f2sm38987995ad.168.2024.11.02.17.34.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 02 Nov 2024 17:34:34 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 2 Nov 2024 18:32:06 -0600
-Message-ID: <CAFLszTgC5OLLSViWeN_sK37JGivVt_CyJN2_fWkewqJz9ZqDag@mail.gmail.com>
-Subject: Re: [PATCH v4 0/9] Adjust initial EFI memory-allocation to be in the
- U-Boot region
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Joao Marcos Costa <jmcosta944@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Prasad Kummari <prasad.kummari@amd.com>, 
- Rasmus Villemoes <ravi@prevas.dk>, Raymond Mao <raymond.mao@linaro.org>, 
- Richard Weinberger <richard@nod.at>, Stefan Roese <sr@denx.de>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Jens Scharsig <esw@bus-elektronik.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v3 01/25] eb_cpu5282: Drop status-LED code and enable LED
+Date: Sat,  2 Nov 2024 18:32:53 -0600
+Message-ID: <20241103003322.626036-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241103003322.626036-1-sjg@chromium.org>
+References: <20241103003322.626036-1-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,100 +90,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Drop this old code. Swtich the LED options to use the new approach, in
+the same commit, to maintain build-bisectability.
 
-On Sat, 2 Nov 2024 at 18:29, Simon Glass <sjg@chromium.org> wrote:
->
-> U-Boot relocates itself to the top of memory and is supposed to avoid
-> using any memory below that region. This allows the maximum amount of
-> memory to be available for loading images.
->
-> The lmb subsystem automatically protects U-Boot's code and data from
-> being overwritten. It relies on this region being a contiguous area of
-> memory. This setup has worked well for at least 15 years and has been
-> documented in the README for as long.
->
-> The EFI_LOADER subsystem currently uses memory outside the U-Boot region
-> when starting up.
->
-> Some of the downstream problems this causes are:
->
-> 1. It can overwrite images that have been loaded
-> 2. Requires lmb reservations to avoid (1) even if EFI_LOADER is not
->    being used
-> 3. Uses regions which scripts expect to be available, e.g. the existing
->    kernel_addr_r variables
-> 4. Introduces confusion as to what memory U-Boot can use for itself
->
-> This series sets up a very small region of memory which EFI can used at
-> start-up, thus avoiding touching memory outside the U-Boot region.
->
-> There are still a few tables which are not in the bloblist, but that
-> will be resolved separately.
->
-> Other than tables, the amount of API-visible memory allocated by EFI
-> before booting is actually very small: 3 allocations, of a total of
-> about 250 bytes. However, there are some areas where EFI allocations are
-> done unnecessarily. For example efi_disk_add_dev() uses page-allocation
-> to allocate an efi_device_path, then immediately frees it again. In this
-> case it would be better to use malloc(). Since each allocation consumes
-> a page (4KB), 256KB has been chosen for the size here, enough for 64
-> allocations.
->
-> As soon as efi_init_obj_list() is called, we know that the EFI subsystem
-> is to be used, so we can relax the restrictions and allow EFI to use any
-> memory it likes. This is handled using a simple boolean flag in BSS, since
-> it cannot happen before relocation.
->
-> Changes in v5:
-> - Drop the word 'warning'
->
-> Changes in v4:
-> - Expand the commit message
-> - Reword the commit message since this feature is needed
-> - Use a different technique to keep the memory-usage in place
-> - Drop changes to pool allocation
-> - Reorder the patches
-> - Rewrite the cover letter
-> - Make it a debug message for now
->
-> Changes in v3:
-> - Add new patch to drop the memset() from efi_alloc()
-> - Drop patch to convert device_path allocation to use malloc()
->
-> Changes in v2:
-> - Drop patch 'Show more information in efi index'
-> - Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
-> - Add the word 'warning', use log_warning() and show the end address
->
-> Simon Glass (9):
->   kernel: Document ALIGN macros
->   board_f: Correct stack reservation
->   board_f: Rename reserve_stack_aligned()
->   efi: Drop the memset() from efi_alloc()
->   efi: Show the location of the bounce buffer when debugging
->   event: Add a generic way to reserve memory
->   efi: Reserve some memory for initial use
->   efi: Keep early allocations to the U-Boot region
->   wip
->
->  cmd/meminfo.c                     |  7 +++
->  common/board_f.c                  | 15 ++---
->  common/event.c                    |  1 +
->  include/asm-generic/global_data.h | 28 +++++++++
->  include/efi_loader.h              | 33 ++++++++++-
->  include/event.h                   | 11 ++++
->  include/linux/kernel.h            | 31 ++++++++++
->  include/lmb.h                     | 12 ++++
->  lib/efi_loader/efi_bootbin.c      |  9 +++
->  lib/efi_loader/efi_memory.c       | 98 +++++++++++++++++++++++++++++--
->  lib/efi_loader/efi_setup.c        |  5 ++
->  lib/lmb.c                         | 12 ++++
->  test/py/tests/test_event_dump.py  |  1 +
->  13 files changed, 249 insertions(+), 14 deletions(-)
+Both eb_cpu5282 and eb_cpu5282_internal are done together, since they
+share code.
 
-Ignore this, sent by mistake due to my getting confused by a flaky
-internet connection.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Regards,
-Simon
+Changes in v3:
+- Update commit message
+
+Changes in v2:
+- Combine code-removal and defconfig changes
+
+ board/BuS/eb_cpu5282/eb_cpu5282.c     | 20 --------------------
+ configs/eb_cpu5282_defconfig          |  8 ++------
+ configs/eb_cpu5282_internal_defconfig |  8 ++------
+ include/configs/eb_cpu5282.h          |  6 ------
+ 4 files changed, 4 insertions(+), 38 deletions(-)
+
+diff --git a/board/BuS/eb_cpu5282/eb_cpu5282.c b/board/BuS/eb_cpu5282/eb_cpu5282.c
+index c254da62bf4..cdd862c57d2 100644
+--- a/board/BuS/eb_cpu5282/eb_cpu5282.c
++++ b/board/BuS/eb_cpu5282/eb_cpu5282.c
+@@ -14,7 +14,6 @@
+ #include <bmp_layout.h>
+ #include <env.h>
+ #include <init.h>
+-#include <status_led.h>
+ #include <bus_vcxk.h>
+ 
+ /*---------------------------------------------------------------------------*/
+@@ -160,25 +159,6 @@ int misc_init_r(void)
+ 	return 1;
+ }
+ 
+-void __led_toggle(led_id_t mask)
+-{
+-	MCFGPTA_GPTPORT ^= (1 << 3);
+-}
+-
+-void __led_init(led_id_t mask, int state)
+-{
+-	__led_set(mask, state);
+-	MCFGPTA_GPTDDR  |= (1 << 3);
+-}
+-
+-void __led_set(led_id_t mask, int state)
+-{
+-	if (state == CONFIG_LED_STATUS_ON)
+-		MCFGPTA_GPTPORT |= (1 << 3);
+-	else
+-		MCFGPTA_GPTPORT &= ~(1 << 3);
+-}
+-
+ /*---------------------------------------------------------------------------*/
+ 
+ /* EOF EB+MCF-EV123.c */
+diff --git a/configs/eb_cpu5282_defconfig b/configs/eb_cpu5282_defconfig
+index 271dbdf4dbb..c51a5db262e 100644
+--- a/configs/eb_cpu5282_defconfig
++++ b/configs/eb_cpu5282_defconfig
+@@ -35,12 +35,8 @@ CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+ CONFIG_SYS_RX_ETH_BUFFER=8
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_FSL=y
+-CONFIG_LED_STATUS=y
+-CONFIG_LED_STATUS0=y
+-CONFIG_LED_STATUS_BIT=8
+-CONFIG_LED_STATUS_BOOT_ENABLE=y
+-CONFIG_LED_STATUS_BOOT=0
+-CONFIG_LED_STATUS_CMD=y
++CONFIG_LED=y
++CONFIG_LED_BOOT=y
+ CONFIG_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
+ CONFIG_FLASH_CFI_DRIVER=y
+diff --git a/configs/eb_cpu5282_internal_defconfig b/configs/eb_cpu5282_internal_defconfig
+index 89a7925dffa..3627d25b990 100644
+--- a/configs/eb_cpu5282_internal_defconfig
++++ b/configs/eb_cpu5282_internal_defconfig
+@@ -33,12 +33,8 @@ CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+ CONFIG_SYS_RX_ETH_BUFFER=8
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_FSL=y
+-CONFIG_LED_STATUS=y
+-CONFIG_LED_STATUS0=y
+-CONFIG_LED_STATUS_BIT=8
+-CONFIG_LED_STATUS_BOOT_ENABLE=y
+-CONFIG_LED_STATUS_BOOT=0
+-CONFIG_LED_STATUS_CMD=y
++CONFIG_LED=y
++CONFIG_LED_BOOT=y
+ CONFIG_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
+ CONFIG_FLASH_CFI_DRIVER=y
+diff --git a/include/configs/eb_cpu5282.h b/include/configs/eb_cpu5282.h
+index 26e4ade34ee..a4d1338c8fa 100644
+--- a/include/configs/eb_cpu5282.h
++++ b/include/configs/eb_cpu5282.h
+@@ -14,12 +14,6 @@
+ 
+ #define CFG_SYS_UART_PORT		(0)
+ 
+-/*----------------------------------------------------------------------*
+- * Options								*
+- *----------------------------------------------------------------------*/
+-
+-#define STATUS_LED_ACTIVE		0
+-
+ /*----------------------------------------------------------------------*
+  * Configuration for environment					*
+  * Environment is in the second sector of the first 256k of flash	*
+-- 
+2.43.0
+
