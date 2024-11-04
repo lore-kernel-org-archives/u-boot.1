@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73235D111A0
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 04:44:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08A87D111A0
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 04:48:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6DA7890F8;
-	Mon,  4 Nov 2024 05:44:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 71A7A890F8;
+	Mon,  4 Nov 2024 05:48:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="W2OrBxT6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CN4H55t7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D01F9890F8; Mon,  4 Nov 2024 05:44:05 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id F01C088EAF; Mon,  4 Nov 2024 05:48:43 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6E5D8915F
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 05:44:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A86289137
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 05:48:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4A44hvmv120858;
- Sun, 3 Nov 2024 22:43:57 -0600
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4A44mc6A091830;
+ Sun, 3 Nov 2024 22:48:38 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1730695437;
- bh=Xhiw17fsh712o2lb0wXoR8fBoeRDDT04AJ2ZEmmQMyo=;
+ s=ti-com-17Q1; t=1730695718;
+ bh=72KtQAfinMtlqYN2W61vrC49anZyOWbr3xGrszaqCjw=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=W2OrBxT6cCETryFX2/9iPEnvQmUGE1n5x0j5X2tkd22n9NGTkj6J2cetSz9tAmBGm
- NY4sAx+vXkFWyc3OUodxDc2xYdsB+KHwOehqoCrKO8VurwQURbRqkb5q8v4B5hLBLJ
- DKzZv5jN+1NZVoHWFDr6oCG2gIELZcFESs3Ua2Qc=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4A44hvQj091467
+ b=CN4H55t7FtnCpKNfk8nwmD3EjXweO3iWO24LualiXGpQL1wANA4NkW1YyFtty2M4c
+ iGmRY1iIdGBM/tcPi3lYUMBMDeMTYWiPrOJ5uWFbqMIceyMfY0EKBbjLC/3XdI2gFG
+ cM4+3+yUt5XyxFTjGYnHVVBeVGBfv3LTxKeU/koM=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4A44mcd6093655
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sun, 3 Nov 2024 22:43:57 -0600
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Sun, 3 Nov 2024 22:48:38 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 3
- Nov 2024 22:43:57 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2024 22:48:37 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 3 Nov 2024 22:43:57 -0600
+ Frontend Transport; Sun, 3 Nov 2024 22:48:37 -0600
 Received: from [172.24.227.36]
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
  (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4A44hsPI117038;
- Sun, 3 Nov 2024 22:43:55 -0600
-Message-ID: <c448ab28-9968-4222-97bd-ed5eacf35498@ti.com>
-Date: Mon, 4 Nov 2024 10:13:54 +0530
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4A44mVb6086198;
+ Sun, 3 Nov 2024 22:48:33 -0600
+Message-ID: <db93ece3-12a4-452f-87f0-3acd247e7c3c@ti.com>
+Date: Mon, 4 Nov 2024 10:18:30 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/6] arm: dts: k3-am642-phycore-som-binman: Add SoM
- overlays
+Subject: Re: [PATCH 6/6] board: phytec: common: k3: Apply SoM-specific
+ overlays to OS device tree
 To: Wadim Egorov <w.egorov@phytec.de>, <trini@konsulko.com>, <afd@ti.com>,
  <d-gole@ti.co>, <sjg@chromium.org>
 CC: <d.schultz@phytec.de>, <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
 References: <20241030164815.1763506-1-w.egorov@phytec.de>
- <20241030164815.1763506-6-w.egorov@phytec.de>
+ <20241030164815.1763506-7-w.egorov@phytec.de>
 Content-Language: en-US
 From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20241030164815.1763506-6-w.egorov@phytec.de>
+In-Reply-To: <20241030164815.1763506-7-w.egorov@phytec.de>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -85,88 +85,112 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 30/10/24 22:18, Wadim Egorov wrote:
-> Include SoM dt-overlays that handle variants of our SoMs into
-> u-boot's FIT image.
+> Our SoMs are available in multiple configurations, managed via device
+> tree overlays. To determine the specific variant in use, we read the
+> EEPROM and apply the appropriate overlays during boot to the device tree
+> used by the OS.
 > 
 > Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
 > ---
->   arch/arm/dts/k3-am642-phycore-som-binman.dtsi | 54 ++++++++++++++++++-
->   1 file changed, 53 insertions(+), 1 deletion(-)
+>   board/phytec/common/k3/board.c | 73 ++++++++++++++++++++++++++++++++++
+>   1 file changed, 73 insertions(+)
 > 
-> diff --git a/arch/arm/dts/k3-am642-phycore-som-binman.dtsi b/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
-> index dd0967079b6..88d6c40e95c 100644
-> --- a/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
-> +++ b/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
-> @@ -344,6 +344,54 @@
->   					description = "U-Boot for AM64 board";
->   				};
+> diff --git a/board/phytec/common/k3/board.c b/board/phytec/common/k3/board.c
+> index 3d7e090ccaa..346b2b6491a 100644
+> --- a/board/phytec/common/k3/board.c
+> +++ b/board/phytec/common/k3/board.c
+> @@ -6,7 +6,9 @@
 >   
-> +				som-no-rtc {
-> +					description = "k3-am6xx-phycore-disable-rtc";
-> +					type = "flat_dt";
-> +					compression = "none";
-> +					load = <0x8F000000>;
-> +					arch = "arm";
+>   #include <env_internal.h>
+>   #include <fdt_support.h>
+> +#include <dm/ofnode.h>
+>   #include <spl.h>
+> +#include <malloc.h>
+>   #include <asm/arch/hardware.h>
+>   
+>   #include "../am6_som_detection.h"
+> @@ -97,8 +99,79 @@ int board_late_init(void)
+>   #endif
+>   
+>   #if IS_ENABLED(CONFIG_OF_LIBFDT) && IS_ENABLED(CONFIG_OF_BOARD_SETUP)
+> +static int fdt_apply_overlay_from_fit(const char *overlay_path, void *fdt)
+> +{
+> +	u64 loadaddr;
+> +	ofnode node;
+> +	int ret;
 > +
-> +					blob-ext {
-> +						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-rtc.dtbo";
-> +					};
-> +				};
+> +	node = ofnode_path(overlay_path);
+> +	if (!ofnode_valid(node))
+> +		return -FDT_ERR_NOTFOUND;
 > +
-> +				som-no-spi {
-> +					description = "k3-am6xx-phycore-disable-spi-nor";
-> +					type = "flat_dt";
-> +					compression = "none";
-> +					load = <0x8F001000>;
-> +					arch = "arm";
+> +	ret = ofnode_read_u64(node, "load", &loadaddr);
+> +	if (ret)
+> +		return ret;
 > +
-> +					blob-ext {
-> +						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-spi-nor.dtbo";
-> +					};
-> +				};
+> +	return fdt_overlay_apply_verbose(fdt, (void *)loadaddr);
+> +}
 > +
-> +				som-no-eth {
-> +					description = "k3-am6xx-phycore-disable-eth-phy";
-> +					type = "flat_dt";
-> +					compression = "none";
-> +					load = <0x8F002000>;
-> +					arch = "arm";
+> +static void fdt_apply_som_overlays(void *blob)
+> +{
+> +	void *fdt_copy;
+> +	u32 fdt_size;
+> +	struct phytec_eeprom_data data;
+> +	int err;
 > +
-> +					blob-ext {
-> +						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-eth-phy.dtbo";
-> +					};
-> +				};
+> +	fdt_size = fdt_totalsize(blob);
+> +	fdt_copy = malloc(fdt_size);
+> +	if (!fdt_copy)
+> +		goto fixup_error;
 > +
-> +				som-qspi {
-> +					description = "k3-am6xx-phycore-qspi-nor";
-> +					type = "flat_dt";
-> +					compression = "none";
-> +					load = <0x8F003000>;
-> +					arch = "arm";
+> +	memcpy(fdt_copy, blob, fdt_size);
 > +
-> +					blob-ext {
-> +						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-qspi-nor.dtbo";
-> +					};
-> +				};
+> +	err = phytec_eeprom_data_setup(&data, 0, EEPROM_ADDR);
+> +	if (err)
+> +		goto fixup_error;
 > +
->   				fdt-0 {
->   					description = "k3-am642-phyboard-electra-rdk";
->   					type = "flat_dt";
-> @@ -368,7 +416,11 @@
->   				conf-0 {
->   					description = "k3-am642-phyboard-electra-rdk";
->   					firmware = "uboot";
-> -					loadables = "uboot";
-> +					loadables = "uboot",
-> +						    "som-no-rtc",
-> +						    "som-no-spi",
-> +						    "som-no-eth",
-> +						    "som-qspi";
->   					fdt = "fdt-0";
->   				};
->   			};
+> +	if (phytec_get_am6_rtc(&data) == 0) {
+> +		err = fdt_apply_overlay_from_fit("/fit-images/som-no-rtc", fdt_copy);
+> +		if (err)
+> +			goto fixup_error;
+> +	}
+> +
+> +	if (phytec_get_am6_spi(&data) == PHYTEC_EEPROM_VALUE_X) {
+> +		err = fdt_apply_overlay_from_fit("/fit-images/som-no-spi", fdt_copy);
+> +		if (err)
+> +			goto fixup_error;
+> +	}
+> +
+> +	if (phytec_get_am6_eth(&data) == 0) {
+> +		err = fdt_apply_overlay_from_fit("/fit-images/som-no-eth", fdt_copy);
+> +		if (err)
+> +			goto fixup_error;
+> +	}
+> +
+> +	if (phytec_am6_is_qspi(&data)) {
+> +		err = fdt_apply_overlay_from_fit("/fit-images/som-qspi-nor", fdt_copy);
+> +		if (err)
+> +			goto fixup_error;
+> +	}
+> +
+> +	memcpy(blob, fdt_copy, fdt_size);
+> +
+> +cleanup:
+> +	free(fdt_copy);
+> +	return;
+> +
+> +fixup_error:
+> +	pr_err("Failed to apply SoM overlays\n");
+> +	goto cleanup;
+> +}
+> +
+>   int ft_board_setup(void *blob, struct bd_info *bd)
+>   {
+> +	fdt_apply_som_overlays(blob);
+>   	fdt_copy_fixed_partitions(blob);
+>   
+>   	return 0;
 
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+Acked-by: Neha Malcom Francis <n-francis@ti.com>
 
 -- 
 Thanking You
