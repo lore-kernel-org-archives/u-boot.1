@@ -4,161 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB2C6D132B5
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 12:23:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B32BFD132B5
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 12:23:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA96188001;
-	Mon,  4 Nov 2024 13:23:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 4F69A88CC7;
+	Mon,  4 Nov 2024 13:23:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="EpExGKxK";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="TcRcQLco";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9514188360; Mon,  4 Nov 2024 13:23:11 +0100 (CET)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on2060b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::60b])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EFCE80245
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 13:23:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ id D2A2388D3A; Mon,  4 Nov 2024 13:23:24 +0100 (CET)
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.3])
+ by phobos.denx.de (Postfix) with ESMTP id 692C080245
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 13:23:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iXg6+cgJ+XQYFO373yhoyVJLCnXMdqNbkhvVOmsQM9ZDGs3hNC8U0NdPl1tBPiUZakR/JQpdS5qah4KLk9/Mj8FK3nW7OZNGEvumHOikb6QJvN473UVMmcvqLtcKi+GaZsUKm55/anzML6PlLDI+o5o4Y2/qh9sJ1SIbs9Okg8vvkunDgEwr5SG5jzg0ZXg5sucyYRzuIq8fd6EJQxFBS8St4ji9UcgCP3/qUqR+HQBubWgtXX5ADeJC0PId9NRJHjiqVO30pS8Qug4SYon7g4oPw57RkA3aghz0jTjIwrxh32q2gpPHA0IsJPR4JtW0TAEYX3w+SocV7dVMT/FM2g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7I1djrmd1fpnMVJDdIw2VIwJLCH8glMLDf4DTSuxiKE=;
- b=Os3mTcED8zKAVSNrS8+e3kQH8jlizUTSSkSDwQr7RKNqltR2oCO+kwoWS+1yloxLnWMG7WFJBeTpX9FxJYusxyBM0vIEJhuYazlHOH4Yb3DLbTEBH4BKs/YfOumCsAeaxusS9Y6xW0gJIKRMJybS4OEhnMXURbxlo/78QIQd6MehOOXEcIdXNA0vvFKGpkw+3vInqGvUxx+5/o6DUGom5ocP2zpn8iqaLBVgAOu73e+qUNOPA0AXxo0/ueSYTP+LHeRyH+QGC2Thwm9XwL7jQQh/70MtiPdZgE2pRP+NgYwTkehFYhWvYhQhYSqmNdKD0cvOqadSejhncHRRasBj+g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7I1djrmd1fpnMVJDdIw2VIwJLCH8glMLDf4DTSuxiKE=;
- b=EpExGKxKyRqjeL7Fr4akxg+ZGbnBSU35yn1hcmrJbJ4FvKnUF8mBKvKfyO9yEVRcdg/WAo9jB71+ELgtQdn1leqkdHSZZ17CMCzTRcaegq57+djRDyMjgcC/G1GUpUJfMASrqVXJldN2WpnqGyhwwYm+OP6eDNeX7nA5EadRYO4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by DU2PR04MB8837.eurprd04.prod.outlook.com (2603:10a6:10:2e0::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.30; Mon, 4 Nov
- 2024 12:23:07 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8114.028; Mon, 4 Nov 2024
- 12:23:07 +0000
-Message-ID: <ae544735-dd2f-41eb-9518-936d56bca104@cherry.de>
-Date: Mon, 4 Nov 2024 13:23:06 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: Fedora 41 drops OpenSSL ENGINE support, u-boot can't compile
- anymore.
-To: Fabio Estevam <festevam@gmail.com>, =?UTF-8?Q?Bas_Magr=C3=A9?=
- <bas@opvolger.net>, george.mccollister@gmail.com,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <a0da63e8527876ed60cfce25700793600ea2304a.camel@opvolger.net>
- <CAOMZO5BFO_9xHiia-xYy+PU+FQdVnszSoBTXUscPUA+G4f=HpA@mail.gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CAOMZO5BFO_9xHiia-xYy+PU+FQdVnszSoBTXUscPUA+G4f=HpA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR4P281CA0435.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:d1::14) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:Subject:Date:Message-ID:MIME-Version; bh=As4C2
+ XCCkQBr3T7pBKPeEvhANuAaKJnK+hILxl5GhQA=; b=TcRcQLcoyub6T4xChJ1+v
+ uAAYbmPM3pDvJAVAhfZRlD3wn2FI68DS6iayNYcar0YDN/SFSVos/8NzQnpkKz7H
+ nSk1/ooiXUAVcijyZo2zUIRg83MsCG7bs4CWJgI0ZoMINJs2cqjC9leGYEuV7ifO
+ 25ty2LhwiQrCibY6abKBMo=
+Received: from ProDesk.. (unknown [58.22.7.114])
+ by gzsmtp3 (Coremail) with SMTP id PigvCgDXoOOtvChneoIYBA--.28161S5;
+ Mon, 04 Nov 2024 20:23:15 +0800 (CST)
+From: Andy Yan <andyshrk@163.com>
+To: kever.yang@rock-chips.com
+Cc: u-boot@lists.denx.de,
+	jonas@kwiboo.se,
+	Andy Yan <andyshrk@163.com>
+Subject: [PATCH v6 3/3] board: rockchip: Add support for rk3588 GenBook
+Date: Mon,  4 Nov 2024 20:23:00 +0800
+Message-ID: <20241104122307.439776-4-andyshrk@163.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241104122307.439776-1-andyshrk@163.com>
+References: <20241104122307.439776-1-andyshrk@163.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU2PR04MB8837:EE_
-X-MS-Office365-Filtering-Correlation-Id: 178c737e-dece-4a4b-32c1-08dcfccb703b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?b3V6U1BUa2QzYTk2N3UzT3lRcTdkYktiUm5rcThuMm83U1BwRmRUMENJblNG?=
- =?utf-8?B?eGt2eWdSbXBjbFpwS2F3VEU3ZDNDR3NPTnNJcFh4Ry9yanRTQjlEdHl1cFNR?=
- =?utf-8?B?UGo2VWlXcklYRzdIVlovdTd6WlNicGtwbXRFTnluOHlLK3JzMWNta3h0U20v?=
- =?utf-8?B?ZXJ3S0VIb0oyWi9ob2pkQU85UFQ3b0NhZlpnYUY3bWJWMC9lL1VWVEp1eDNw?=
- =?utf-8?B?djRYVjRqMjY2amV6cGxKT1pmZGxXM2FqQldCRWFJMGtvV2I1MGd5SEswK01p?=
- =?utf-8?B?M3ZPUWpQVXJML1RJQk9kaEZpSjVTaUNtdWM3c3AzQy96S3M2YnNqUHVvaHRL?=
- =?utf-8?B?K1RQR29Za3Vlc1U2M0hQTzhBT1ZCWHFtaC84cVByWkZoMG54WDZ4bjZHY0xu?=
- =?utf-8?B?Y3NBODFwaW0wa2loZkZxcXY4ckt5T0lmQWpGLzhUS1FiV2R5TzlzbU1hK250?=
- =?utf-8?B?aTYyVExGNnAvWjBwQnFkU3ZkQU01YTZoVWUyY1FmOUlrWjk0WE5ZdW9HRDk5?=
- =?utf-8?B?TS9iRERsVDdnYmwwVVJGbHVISHBadFd3ZzVaSXI1d1dDWW50K3ROSWY1MXZB?=
- =?utf-8?B?UmZ1MnNYM2EyUDRockhrNXBMVzBHV3lsNXVEc1JGL3BiRnAzS0Q5TCsyWFBp?=
- =?utf-8?B?VElVVXpzMFdTQ3IreE9xTnRHZ1UyLzI2SHZ1cW1IVmlSRWRybjhRbjlUVVJr?=
- =?utf-8?B?QnFIcEZzMDRUVXhUYUZWZWF6U0oxa1Vscytpa2hyZzBjM1JNbTMya09yWUI3?=
- =?utf-8?B?R3VvZlFUdTRUWnBZdWpiMmJ6RU92SkpOQ3djRmo4cTF1QmdpeFNIcmlsUzk0?=
- =?utf-8?B?c2FQMDR6bnJFdVBsazhxYThmdG02a2hpVW1ra1p6RXg3TitRelBXTEkwTWp3?=
- =?utf-8?B?eXNyMTZJc2lQc2J4OVlhK0tFN3Qwck1IMGlhcHhSSTFaZGNCWXZveGN6NXhC?=
- =?utf-8?B?OGw5dTkvVXpFM01RV3o0eDZzbGQ1R0NBcXNubWErWCtPSTBzVmlQSk9EWFRL?=
- =?utf-8?B?Zk81bzFmNUdSYVRhbzdoK1Y0ZTVCd045Y2xtdXJESGNnakhCWVVFT284VUdP?=
- =?utf-8?B?dUV6bEVFVHQ1UDJqKzZPdnhXVndoWlR1RlFOaWJWT2JORGJIdnJMR1U0blVn?=
- =?utf-8?B?YzBiMnlib2dhTWtlWXlYSWR5VnBRUWxVaTMwdW54SU04cUs2Zml2U0R2djNT?=
- =?utf-8?B?UmpxYXBJZHgwQTRkMGh4ZVo1bktyZkpobmhTOThYTUZROFlabnhjK1JOeEoy?=
- =?utf-8?B?YngwUitNZytXTzBYNWJ4R3FEeWxWWUlqMitlOTJsVVlvZm1SWGpnQ0NDME84?=
- =?utf-8?B?Y0kxZ0ZlV1RudG9ibkZ2MGRXOWZ3dkl2UXIzM1BOalJ3dXVldHJDWUZIVnhR?=
- =?utf-8?B?SW16NUJZajZLU09BQVJjcGJvUXNHMGZQODF6N3NBKzFjakthTlhicDFsYmlP?=
- =?utf-8?B?cmN2WlpxZjg4UUpLY1NxZlUveGNCTG1NRTUrQ21MM1llUFE5LzcybWpkUkIy?=
- =?utf-8?B?djBGc3hyLzVPenZzWFU1MWV4MkVjMi9SL1BLOEQ0ODVocXRRM010b1dPZVpv?=
- =?utf-8?B?dm11eGZKYVlBUzEyUmVNYXgzWHBKalZuK0JyQ3A4WVBlQ0J6bmY3UUVubThz?=
- =?utf-8?B?dHhFRHN3bXJUcW5nKzVVbnVUbVNHajhRaDR0OUlEOTIxRGlXcXllT2E4ankz?=
- =?utf-8?B?VDdVZVZnc1JOYmU2ZUl5NU9JWWRhUElYZXlkSlRKalZrbi9ndStieXFWY2l6?=
- =?utf-8?Q?jx9UmmGinFpFAr0/+g6xUtuAT9zfyRxjTRETzxm?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YzZlbXB1MUMrVFhBN0VoVjcxU0FXbWNjdDl3TEIvazhDb0UvUklUUkdxdUV4?=
- =?utf-8?B?cnJTTlVQRFZFajVEVHp3b1N6OHUyd291bjlEZjZXYU0vbVZ1ckJiWG5jcDZu?=
- =?utf-8?B?RHE2eE9tek9URi9CdTh2VXRvMEw2WkZnZ0I3VHZ4Tk43NlJnZ0RLSzBxblhH?=
- =?utf-8?B?a1J5ajlwQ3I5NWYrZFFjM3gwRnA0ODZXTDZLaC8rY3hyL2FoWndtWVEyUlYx?=
- =?utf-8?B?a0hOdDRReDFZN1NDM3FuMnVyZWNBSVdlY0ZSS1FMUVdMVGY5aFBCeFVlV2Vt?=
- =?utf-8?B?dEtjYVR6WFh3NkV5VVpZVUVpTXc1d1FxVTdWbERVWXV6OExMMER1TVlGV3JN?=
- =?utf-8?B?VDFMTmJMV0M4Q05NS3VzUEM2RnZPNDQyT21PZUl2S3p2V3VKS2srQkx4NWc4?=
- =?utf-8?B?eWpUYk9iZkNHdjVlbHNCRkQvYlRmZXdlQm4wUWZOd3kvc3JBRXFSVW5FUDhq?=
- =?utf-8?B?WHhvaTZRUDJzelhvcEtTOXNISll2ZEFkOUFEUm9NZk5hczl3dk9QNHIySmhT?=
- =?utf-8?B?TzVRYjVTcXVSNjhaQ0tJUVh5clJYODFtRzB4dTdNbnZYR3NpRjVZTUtFeTht?=
- =?utf-8?B?dEZQV0krbTU4T0VDOUdWV05MRWEvLzkwdno3MVpoUjhkRG9XSkphRE02LzFS?=
- =?utf-8?B?ZjB0aWxXdDFPUTVXNkNoc2pwTjBqOTg5b0dLeUpVcVpoSGdIVHpjL0dPNnZH?=
- =?utf-8?B?dGlxdHYzSVdGR3pFQXh3VmoxMkVJbm82cDJxTWJHSGlEeWFOcXk1YnR3UnJk?=
- =?utf-8?B?TkIrN3pCLzY2TURyWjB5YmhhS25CNk9wQTVqY1E3Q0dmaXV1UmJIcjZWOWl5?=
- =?utf-8?B?bWs1aVBRalIySHJad2Qzbi96YnFmRlF1d0pJQ29ybG9vakZodTdjb2lMNVgz?=
- =?utf-8?B?SUtrTGhRWHloSW1ZN0Y4SHN3Qys4QXZNSndEb1ExWi8vZUNYc3krbDZJb2lJ?=
- =?utf-8?B?Uk1yTHdEVEt1VU1zV1pSbUNSSDVuT0xIREVDRzlobGhWRTViajUyejVrSGJX?=
- =?utf-8?B?WXhCYnpZc1VZTGpncU80TlZYS2IwRzlSeWdQd0Z3c0sxaFpKQU1XcUFacVlY?=
- =?utf-8?B?aHVuKzlON2V1OWoxa2tIazJVU2ZFcTYxOFJibUs4Nk5DSzZQK1ZSWHZRV2hw?=
- =?utf-8?B?SGpBZ1Z5bitscXRyUlZNRnpFOHZOTXNrcWJXOGxlL2w5dlo3cDBsZU9renZZ?=
- =?utf-8?B?OHFxMHdCMVpMWHhEUHE3RmM0OVoyV1lBUHBIOEM1NWxpTENjQ2JxbHRNREtW?=
- =?utf-8?B?YTQ0bW0rWGJlRGhvc29xbzJpRVduWFU4NURQZ3JGK2RmdzNORExPUXVWZFY3?=
- =?utf-8?B?eUE3dUlCczk3NnRhN0hJMWJ1QTZya1dUaUdnY0hIVVI5L2V1UUI4dVVzL0VQ?=
- =?utf-8?B?UEpTWUc1MVB4TjlxVlJyb09aeUZKLzZRaHBwYUpGNmNtYXhQd0ppYStZTERh?=
- =?utf-8?B?SGpqRkd0MHlpRUUxSG9VakpqUzdMbzgrSTdDRFZRV0RRektKMHdLWGNPYkVB?=
- =?utf-8?B?RzZRV3FBOHZOcHdtUHZBb2lYMlRZeWQ2QWE0ZUhMNTE4M3RMM09vSE5iQ3dT?=
- =?utf-8?B?Q1l5MktIc0RYNzU5cytTU3VnbVgya3ZzS0doYVdxay9Kclh2MFhVVEUrNDVD?=
- =?utf-8?B?aTRKcFFvZENMYVltK2cwMlNLRjJwNEhiUDBENTZJYjd1L3NRU2k3UVpRellN?=
- =?utf-8?B?U2wxS2ZHODNCbWlGN3QvWENGY2ZhOTZHZmdJYVV5aXM0KzVZNUMyaGowVFhr?=
- =?utf-8?B?MXc4V0MyY0d0STgwS09TN2FsOFF5SVp1N1g5UEQyeGphNUpsMnl3cHlsTlJV?=
- =?utf-8?B?bm9vbExNajlTT2xHTlcrcFh6bm15Nmh5dlBTVUNyWncxQnFEUmFYeEZMdVo4?=
- =?utf-8?B?MFAwSWZBZU5FdlQ4bkJ4Q2N2cURERktOYkNmcW5vN1BkWmt3RUVXbUlqb1VL?=
- =?utf-8?B?cXdoT2MyTFdDdE9Scm1ENmNBRU9QU2drcjl3Zm5NYVNFODlXR0lEZ1BTdlVq?=
- =?utf-8?B?ZjV3eXZXMFlkbStISVc2UHgzY2lCNXlTY3g3dmRGaTVCNWIwa0xMUGFWaktJ?=
- =?utf-8?B?ZnlHbzVrQ2NhOHFhcmFuUkRFU0VhQUk5QTBJM3VTWEZROUpScWVHSEdKVFMw?=
- =?utf-8?B?OTV3eTNBenlpanNndnZYTHhXN2dyckJneDNwd25BblR3OEx4WmdUckl2dFJ3?=
- =?utf-8?B?R2c9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 178c737e-dece-4a4b-32c1-08dcfccb703b
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2024 12:23:07.2576 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KVmOiPkeHLOiD8fidUhm6EO76RiuOU1KQdKIlIBMEl9pPexOs5dPneT2NI4SMUIU/k2Qi7mgW9LrgV7aicdHqgw2ss4ClO6qz8fmWWlErlo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8837
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: PigvCgDXoOOtvChneoIYBA--.28161S5
+X-Coremail-Antispam: 1Uf129KBjvAXoW3Cw1DJF4DuFWkWF1DAFy7ZFb_yoW8JrWDGo
+ WqkF1F9r4Ikr98Ar1rZayakF4Fga4xKayfJFWUCryDGw1jka4DtF1jyw45ur15ArW5tF18
+ KFySk3yxZ3W8JF97n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+ AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvjxU8GQDDUUUU
+X-Originating-IP: [58.22.7.114]
+X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/1tbiqQSNXmcovEgGtAAAs3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,19 +67,410 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Add support for Cool Pi GenBook, it works as a carrier board
+connect with CM5 SOM.
 
-On 11/4/24 12:56 PM, Fabio Estevam wrote:
-> Adding George and Tom.
-> 
-> On Mon, Nov 4, 2024 at 12:30 AM Bas Magré <bas@opvolger.net> wrote:
->>
->> On compiling on Fedora 41 you will get the error:
->>
->> fatal error: openssl/engine.h: No such file or directory
->>
+Specification:
+- Rockchip RK3588
+- LPDDR5X 8/32 GB
+- eMMC 64 GB
+- HDMI Type A out x 1
+- USB 3.0 Host x 1
+- USB-C 3.0 with DisplayPort AltMode
+- PCIE M.2 E Key for RTL8852BE Wireless connection
+- PCIE M.2 M Key for NVME connection
+- eDP panel with 1920x1080
 
-dnf install openssl-devel-engine
+Tested by Armbian boot on USB disk.
 
-Cheers,
-Quentin
+Signed-off-by: Andy Yan <andyshrk@163.com>
+
+cool
+
+---
+
+Changes in v6:
+- avoid re-define CFG_EXTRA_ENV_SETTINGS.
+
+Changes in v5:
+- Fix document isn't included in any toctree error ini rst doc
+
+Changes in v4:
+- Fix a underline too short error in rst doc
+
+Changes in v3:
+- Remove upstreamed dt in genbook-u-boot.dtsi
+- Remove MMC releated config as there is no SD-card on this machine
+- Enable LED config
+- Enable rk8xx pmic
+- rename defconfig to coolpi-cm5-genbook-rk3588_defconfig
+- redefine BOOT_TARGETS
+
+Changes in v2:
+- split the dts to a separate commit
+- rename to genbook_cm5_rk3588
+- move readme to doc/board, and write as reStructuredText format
+- alphabetically reorder
+- update doc/board/rockchip
+
+ .../dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi |  20 ++++
+ arch/arm/mach-rockchip/rk3588/Kconfig         |  19 ++++
+ board/coolpi/genbook_cm5_rk3588/Kconfig       |  12 +++
+ board/coolpi/genbook_cm5_rk3588/MAINTAINERS   |   7 ++
+ configs/coolpi-cm5-genbook-rk3588_defconfig   | 101 ++++++++++++++++++
+ doc/board/coolpi/genbook_cm5_rk3588.rst       |  68 ++++++++++++
+ doc/board/coolpi/index.rst                    |   9 ++
+ doc/board/index.rst                           |   1 +
+ doc/board/rockchip/rockchip.rst               |   1 +
+ include/configs/genbook-cm5-rk3588.h          |  19 ++++
+ 10 files changed, 257 insertions(+)
+ create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+ create mode 100644 board/coolpi/genbook_cm5_rk3588/Kconfig
+ create mode 100644 board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+ create mode 100644 configs/coolpi-cm5-genbook-rk3588_defconfig
+ create mode 100644 doc/board/coolpi/genbook_cm5_rk3588.rst
+ create mode 100644 doc/board/coolpi/index.rst
+ create mode 100644 include/configs/genbook-cm5-rk3588.h
+
+diff --git a/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi b/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+new file mode 100644
+index 00000000000..5a3073d6e7f
+--- /dev/null
++++ b/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk3588-u-boot.dtsi"
++
++&fspim2_pins {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&sfc {
++	flash@0 {
++		bootph-pre-ram;
++		bootph-some-ram;
++	};
++};
++
++/* USB A out */
++&usb_host1_xhci {
++	snps,dis_u3_susphy_quirk;
++};
+diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+index 6f28a313325..b5a0e624a53 100644
+--- a/arch/arm/mach-rockchip/rk3588/Kconfig
++++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+@@ -29,6 +29,24 @@ config TARGET_CM3588_NAS_RK3588
+ 	  - 3.5mm Headphone out, 2.0mm PH-2A Mic in
+ 	  - 5V Fan connector, PWM beeper, IR receiver, RTC battery connector
+ 
++config TARGET_GENBOOK_CM5_RK3588
++	bool "Cool Pi CM5 GenBook"
++	select BOARD_LATE_INIT
++	help
++	  GeenBook is a notebook based on Rockchip RK3588, and works as a carrier
++	  board connect with CM5 SOM.
++
++	  Specification:
++	  - Rockchip RK3588
++	  - LPDDR5X 8/32 GB
++	  - eMMC 64 GB
++	  - HDMI Type A out x 1
++	  - USB 3.0 Host x 1
++	  - USB-C 3.0 with DisplayPort AltMode
++	  - PCIE M.2 E Key for RTL8852BE Wireless connection
++	  - PCIE M.2 M Key for NVME connection
++	  - eDP panel with 1920x1080
++
+ config TARGET_JAGUAR_RK3588
+ 	bool "Theobroma Systems SBC-RK3588-AMR (Jaguar)"
+ 	select BOARD_LATE_INIT
+@@ -367,6 +385,7 @@ config TEXT_BASE
+ 	default 0x00a00000
+ 
+ source "board/armsom/sige7-rk3588/Kconfig"
++source "board/coolpi/genbook_cm5_rk3588/Kconfig"
+ source "board/edgeble/neural-compute-module-6/Kconfig"
+ source "board/friendlyelec/cm3588-nas-rk3588/Kconfig"
+ source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
+diff --git a/board/coolpi/genbook_cm5_rk3588/Kconfig b/board/coolpi/genbook_cm5_rk3588/Kconfig
+new file mode 100644
+index 00000000000..67086ea6297
+--- /dev/null
++++ b/board/coolpi/genbook_cm5_rk3588/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_GENBOOK_CM5_RK3588
++
++config SYS_BOARD
++	default "genbook_cm5_rk3588"
++
++config SYS_VENDOR
++	default "coolpi"
++
++config SYS_CONFIG_NAME
++	default "genbook-cm5-rk3588"
++
++endif
+diff --git a/board/coolpi/genbook_cm5_rk3588/MAINTAINERS b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+new file mode 100644
+index 00000000000..0496cc93b59
+--- /dev/null
++++ b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+@@ -0,0 +1,7 @@
++GENBOOK-CM5-RK3588
++M:	Andy Yan <andyshrk@163.com>
++S:	Maintained
++F:	board/coolpi/genbook-cm5-rk3588
++F:	include/configs/genbook-cm5-rk3588.h
++F:	configs/coolpi-cm5-genbook-rk3588_defconfig
++F:	arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+diff --git a/configs/coolpi-cm5-genbook-rk3588_defconfig b/configs/coolpi-cm5-genbook-rk3588_defconfig
+new file mode 100644
+index 00000000000..3eb5dc968af
+--- /dev/null
++++ b/configs/coolpi-cm5-genbook-rk3588_defconfig
+@@ -0,0 +1,101 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-coolpi-cm5-genbook"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_GENBOOK_CM5_RK3588=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++# CONFIG_ANDROID_BOOT_IMAGE is not set
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-coolpi-cm5-genbook.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++# CONFIG_CMD_BIND is not set
++# CONFIG_CMD_FASTBOOT is not set
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
++CONFIG_SPL_CLK=y
++CONFIG_FASTBOOT_BUF_ADDR=0x800800
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_SPL_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_XMC=y
++CONFIG_SPI_FLASH_XTX=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_ROCKCHIP_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/coolpi/genbook_cm5_rk3588.rst b/doc/board/coolpi/genbook_cm5_rk3588.rst
+new file mode 100644
+index 00000000000..a02e561051a
+--- /dev/null
++++ b/doc/board/coolpi/genbook_cm5_rk3588.rst
+@@ -0,0 +1,68 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++GenBook
++=======
++Cool Pi GenBook is a laptop powered by RK3588, it works with a
++carrier board connect with CM5.
++
++Specification:
++* Rockchip RK3588
++* LPDDR5X 8/32 GB
++* eMMC 64 GB
++* SPI Nor 8 MB
++* HDMI Type A out x 1
++* USB 3.0 Host x 1
++* USB-C 3.0 with DisplayPort AltMode
++* PCIE M.2 E Key for RTL8852BE Wireless connection
++* PCIE M.2 M Key for NVME connection
++* eDP panel with 1920x1080
++
++Here is the step-by-step to compile and boot to U-Boot on GenBook.
++
++Get the TF-A and DDR init (TPL) binaries
++----------------------------------------
++
++.. prompt:: bash
++
++   > cd u-boot
++   > export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.17.bin
++   > export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.46.elf
++   > make coolpi-genbook-cm5-rk3588_defconfig
++   > make CROSS_COMPILE=aarch64-linux-gnu-
++
++This will build ``u-boot-rockchip.bin`` for eMMC and ``u-boot-rockchip-spi.bin`` for SPI Nor.
++
++Write u-boot to eMMC or SPI Nor from a Linux system on the laptop
++-----------------------------------------------------------------
++
++Copy ``u-boot-rockchip.bin`` and ``u-boot-rockchip-spi.bin`` to the laptop.
++
++eMMC
++~~~~
++
++.. prompt:: bash
++
++   dd if=u-boot-rockchip.bin of=/dev/mmcblk0 bs=512 seek=64
++
++SPI Nor
++~~~~~~~
++
++.. prompt:: bash
++
++  dd if=u-boot-rockchip-spi.bin of=/dev/mtdblock0
++
++``upgrade_tool`` allows to flash the on-board SPI Nor via the USB TypeC interface
++with help of the Rockchip loader binary.
++
++To enter the USB flashing mode, connect the laptop and your HOST PC with a USB-C
++cable, reset the laptop with ``Loader Key`` pressed.
++On your PC, check with ``lsusb -d 2207:350b``).
++
++To flash U-Boot on the SPI Nor with ``upgrade_tool``:
++
++.. prompt:: bash
++
++  upgrade_tool db rk3588/MiniLoaderAll.bin
++  upgrade_tool ssd       // Input 5 for SPINOR download mode
++  upgrade_tool wl 0 u-boot-rockchip-spi.bin
++  upgrade_tool rd
+diff --git a/doc/board/coolpi/index.rst b/doc/board/coolpi/index.rst
+new file mode 100644
+index 00000000000..9c9593fd6aa
+--- /dev/null
++++ b/doc/board/coolpi/index.rst
+@@ -0,0 +1,9 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Cool Pi
++=================
++
++.. toctree::
++   :maxdepth: 2
++
++   genbook_cm5_rk3588
+diff --git a/doc/board/index.rst b/doc/board/index.rst
+index ca5246e259c..a1925dfff35 100644
+--- a/doc/board/index.rst
++++ b/doc/board/index.rst
+@@ -23,6 +23,7 @@ Board-specific doc
+    bsh/index
+    cloos/index
+    congatec/index
++   coolpi/index
+    coreboot/index
+    emcraft/index
+    emulation/index
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 7b11a2e0a35..af74a7a1636 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -147,6 +147,7 @@ List of mainline supported Rockchip boards:
+      - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
+      - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
+      - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
++     - Yanyi Tech CoolPi CM5 GenBook (coolpi-cm5-genbook-rk3588)
+ 
+ * rv1108
+      - Rockchip Evb-rv1108 (evb-rv1108)
+diff --git a/include/configs/genbook-cm5-rk3588.h b/include/configs/genbook-cm5-rk3588.h
+new file mode 100644
+index 00000000000..194f97469df
+--- /dev/null
++++ b/include/configs/genbook-cm5-rk3588.h
+@@ -0,0 +1,19 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#ifndef __GENBOOK_CM5_RK3588_H
++#define __GENBOOK_CM5_RK3588_H
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdout=serial,vidconsole\0" \
++		"stderr=serial,vidconsole\0"
++
++/*
++ * As a laptop, there is no sdmmc, and we want to
++ * set usb the highest boot priority for third-part
++ * os installation.
++ */
++#define BOOT_TARGETS "usb mmc0"
++
++#include <configs/rk3588_common.h>
++
++#endif /* __GENBOOK_CM5_RK3588_H */
+-- 
+2.34.1
+
