@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5AE4D1CA07
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 22:46:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32543D1CA07
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 22:46:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F1F288ECC;
-	Mon,  4 Nov 2024 23:46:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 948C688F14;
+	Mon,  4 Nov 2024 23:46:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DbPVqaFk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TrkvHyQW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DBD588E96; Mon,  4 Nov 2024 23:46:01 +0100 (CET)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id 9CBF388F0C; Mon,  4 Nov 2024 23:46:04 +0100 (CET)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 621E688D29
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 23:45:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7781588D29
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 23:46:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-83ab21c26f1so194422339f.2
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 14:45:58 -0800 (PST)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-83a9ca86049so173334239f.0
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 14:46:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730760356; x=1731365156; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dIH4/HqUQ86JekoNoaOntmlr0lMBmiErm8zlQgdO4t8=;
- b=DbPVqaFkRrUmLRiSXTV+kZfecJlhgIycKpo+aZf4jfkMOLgoSaqBm2A2/wHBpgMqRw
- vv0JLZkXV1Ni9xXBiLkW6JU72HF/fsN81MDmxtkGRq+JUAIpAxNgpyc9rKE+ucQLj+xJ
- Ph3y8fd7cczV/d7qa22Q7W/mtLH7XBZaeouck=
+ d=chromium.org; s=google; t=1730760360; x=1731365160; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GkejL3D1kj/14ZBU97aYXLqujLRgHMh9ge7doZQ/Xpc=;
+ b=TrkvHyQW0/43yMNfT0S15oAtRKt8yhd2eKbVtN+PJePIe3uBb8KVVA3TAX7/tsS45i
+ BSdz4LB02ywxEE5w6jAwju2E5vlRunbnlJoW1FvgHct7c8YrxXxvdsU9xpmmHofFJpwK
+ bDlHLAWNupVcRgCP/4VzJGNjZ+DE/tIBDAD+k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730760356; x=1731365156;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dIH4/HqUQ86JekoNoaOntmlr0lMBmiErm8zlQgdO4t8=;
- b=JBqok8vIP958wtZ72ykzpCmYUwRfm4iPuRJIo9jeiKHA5855FGv5C+jfI3410h/20L
- sYpl+MKBXTVXQxRTggm+PTmNYNG8E5LC8AMUPdh0Tm4tQz0P/mCkftOz+QN7vGXxsiPh
- wHEafFSiQnjMoK8X8xoXuje/+a0lIJAPl+Z0UxGz0U3f/CEEK50qNnqIBsGFIdAHWK06
- 7j45iLuyCv6fSVTJYjGjfVxB9knxTtgENjXQx0l20ahH9v60/ipU4IQeVNXYKydB9Gim
- ezTKqvRCIAuMIdGqBdCpkyfQETVko7/WGAl9kYtEH2I6JhgpXIdxefMpABcDG3+S4Mlf
- 4VYQ==
-X-Gm-Message-State: AOJu0YyETX0MscpfZCA2Ph2+e4It8ObVHsp3m2EwORu7N/kw4UucUoMT
- sDfw6CeOD8bIKmfAMAeF0hWH4IdVVb/sQ88uIWSMFLEUQii78TpfR+ruzgaMExRRoSllcUXbDsY
+ d=1e100.net; s=20230601; t=1730760360; x=1731365160;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GkejL3D1kj/14ZBU97aYXLqujLRgHMh9ge7doZQ/Xpc=;
+ b=KRGavVnp71isNR31QCVoYH+H6o/8iLkekO7W6KvaIbzc/2FjT/BHG4tIU2aMjfMAc8
+ zPiPEwfCeBpPmKuqB9FFlVe22/5BWE6D+QaGgcmKVcDu1oUXoOwqahRBk0NZvSwqIeFJ
+ 2a0DkFiGCQePIKMwxb0Xt/xNBm2MQSqk9IW63yINAooeFQCmvS3IJUI8UzgnMi0DyQV1
+ ciabSzPfQTabqAEThyyv0qr5YUbU9wl7i6gWgn4gTuKOPr3Hm1z47WD3Vd+SQd+SaqdH
+ +6JLHkJWNscTJlwVJ7EsMRJYsKBKbBBvw5Vf3F03lO/jvY0IQzR3OZf/AxJyDn773Nhc
+ TFPw==
+X-Gm-Message-State: AOJu0Yyb5F7a6AIRGQwDMTzD0g3+gOEBYepqd7nvRHl/dN5VPQxaG2rx
+ EBfm3aNgb408LcSgQRHp1CU6ihNaL82vDT1F1JnB82iH/y6vmhrA4uL7NZ5QNiPlUTbqxr9B4AM
  =
-X-Google-Smtp-Source: AGHT+IFzk/0sy6ocJ0QkvoYECPFByZSzud+mwRKjH9XzQ43oRc9Dd22TDtwD+1uuQaPVYQCZqvEGPQ==
-X-Received: by 2002:a05:6e02:1383:b0:3a4:e99a:cffc with SMTP id
- e9e14a558f8ab-3a5e2512f34mr233142295ab.20.1730760356503; 
- Mon, 04 Nov 2024 14:45:56 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGDHnPWM0dkB7g6gQzGPS7Gm9tkpGEwOwklp6w0D9N+1Qft30U3zCWCvxcNzIVUw7muVUeXjA==
+X-Received: by 2002:a05:6e02:2407:b0:3a6:bf1a:17d5 with SMTP id
+ e9e14a558f8ab-3a6bf1a1e61mr95766315ab.0.1730760360618; 
+ Mon, 04 Nov 2024 14:46:00 -0800 (PST)
 Received: from chromium.org ([50.235.115.130])
  by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a6a97b009csm25535945ab.4.2024.11.04.14.45.53
+ e9e14a558f8ab-3a6a97b009csm25535945ab.4.2024.11.04.14.45.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 14:45:54 -0800 (PST)
+ Mon, 04 Nov 2024 14:45:59 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Love Kumar <love.kumar@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v8 00/11] labgrid: Provide an integration with Labgrid
-Date: Mon,  4 Nov 2024 15:45:27 -0700
-Message-ID: <20241104224550.677442-1-sjg@chromium.org>
+ Love Kumar <love.kumar@amd.com>
+Subject: [PATCH v8 01/11] test: Allow signaling that U-Boot is ready
+Date: Mon,  4 Nov 2024 15:45:28 -0700
+Message-ID: <20241104224550.677442-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241104224550.677442-1-sjg@chromium.org>
+References: <20241104224550.677442-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,116 +89,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Labgrid provides access to a hardware lab in an automated way. It is
-possible to boot U-Boot on boards in the lab without physically touching
-them. It relies on relays, USB UARTs and SD muxes, among other things.
+When Labgrid is used, it can get U-Boot ready for running tests. It
+prints a message when it has done so.
 
-By way of background, about 4 years ago I wrong a thing called Labman[1]
-which allowed my lab of about 30 devices to be operated remotely, using
-tbot for the console and build integration. While it worked OK and I
-used it for many bisects, I didn't take it any further.
+Add logic to detect this message and accept it.
 
-It turns out that there was already an existing program, called Labgrid,
-which I did not know about at time (thank you Tom for telling me). It is
-more rounded than Labman and has a number of advantages:
+Note that this does not change pytest, which still (also) looks for the
+U-Boot banner. This change merely makes it possible for pytest to
+believe Labgrid when it says that the board is ready for use.
 
-- does not need udev rules, mostly
-- has several existing users who rely on it
-- supports multiple machines exporting their devices
+In several cases, the board starts up and Labgrid receives some initial
+output, then pytest starts and misses some of that output, because it
+came in while Labgrid had the console open. Then pytest fails because
+it doesn't see the expected banners.
 
-It lacks a 'lab check' feature and a few other things, but these can be
-remedied.
+With this change, Labgrid handles getting U-Boot to a prompt, in a
+fully reliable manner. Then pytest starts up and can simply start
+running its tests.
 
-On and off over the past several weeks I have been experimenting with
-Labgrid. I have managed to create an initial U-Boot integration (this
-series) by adding various features to Labgrid[2] and the U-Boot test
-hooks.
+But, again, this does not prevent pytest from handling a banner if one
+is provided (e.g. if not using the Labgrid integration).
 
-I hope that this might inspire others to set up boards and run tests
-automatically, rather than relying on infrequent, manual test. Perhaps
-it may even be possible to have a number of labs available.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+---
 
-Included in the integration are a number of simple scripts which make it
-easy to connect to boards and run tests:
-
-ub-int <target>
-    Build and boot on a target, starting an interactive session
-
-ub-cli <target>
-    Build and boot on a target, ensure U-Boot starts and provide an interactive
-    session from there
-
-ub-smoke <target>
-    Smoke test U-Boot to check that it boots to a prompt on a target
-
-ub-bisect <target>
-    Bisect a git tree to locate a failure on a particular target
-
-ub-pyt <target> <testspec>
-    Run U-Boot pytests on a target
-
-Some of these help to provide the same tbot[4] workflow which I have
-relied on for several years, albeit much simpler versions.
-
-The goal here is to create some sort of script which can collect
-patches from the mailing list, apply them and test them on a selection
-of boards. I suspect that script already exists, so please let me know
-what you suggest.
-
-I hope you find this interesting and take a look!
-
-[1] https://github.com/sjg20/u-boot/tree/lab6a
-[2] https://github.com/labgrid-project/labgrid/pull/1411
-[3] https://github.com/sjg20/uboot-test-hooks/tree/labgrid
-[4] https://tbot.tools/index.html
-
-Changes in v8:
-- Use USE_LABGRID_SJG for graceful shutdown
+(no changes since v7)
 
 Changes in v7:
 - Rebase on testb series
 - Expand commit message
-- Rename option to --use-running-system
-- Update --role help and get_details() comment to mention Labgrid-sjg
-- Rebase on broken-out testb series
 
-Changes in v6:
-- Rebase without an earlier patch
-- Avoid doing the special shutdown unless USE_LABGRID is enabled
-- Drop patch 'test: Pass stderr to stdout'
+ test/py/u_boot_console_base.py | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-Changes in v5:
-- Add a few more comments
-- Comment out the debugging, which might be useful later
-- Add a patch to support testing with two board-builds
-
-Changes in v3:
-- Split out most patches into two new series and update cover letter
-
-Changes in v2:
-- Only disable echo if a terminal is detected
-- Avoid running a docker image for skipped lab tests
-
-Simon Glass (11):
-  test: Allow signaling that U-Boot is ready
-  test: Release board after tests complete
-  test: Allow connecting to a running board
-  test: Introduce the concept of a role
-  test: Introduce lab mode
-  test: Improve handling of sending commands
-  test: Avoid double echo when starting up
-  test: Try to shut down the lab console gracefully
-  test: Add a section for closing the connection
-  test: Support testing with two board-builds
-  CI: Allow running tests on sjg lab
-
- .gitlab-ci.yml                        | 153 ++++++++++++++++++++++++++
- test/py/conftest.py                   |  73 ++++++++++--
- test/py/u_boot_console_base.py        | 123 +++++++++++++++------
- test/py/u_boot_console_exec_attach.py |  31 ++++--
- test/py/u_boot_spawn.py               |  36 +++++-
- 5 files changed, 363 insertions(+), 53 deletions(-)
-
+diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
+index d8d0bdf9fd4..965832a4989 100644
+--- a/test/py/u_boot_console_base.py
++++ b/test/py/u_boot_console_base.py
+@@ -23,6 +23,7 @@ pattern_stop_autoboot_prompt = re.compile('Hit any key to stop autoboot: ')
+ pattern_unknown_command = re.compile('Unknown command \'.*\' - try \'help\'')
+ pattern_error_notification = re.compile('## Error: ')
+ pattern_error_please_reset = re.compile('### ERROR ### Please RESET the board ###')
++pattern_ready_prompt = re.compile('U-Boot is ready')
+ 
+ PAT_ID = 0
+ PAT_RE = 1
+@@ -200,15 +201,15 @@ class ConsoleBase(object):
+                                     self.bad_pattern_ids[m - 1])
+             self.u_boot_version_string = self.p.after
+             while True:
+-                m = self.p.expect([self.prompt_compiled,
++                m = self.p.expect([self.prompt_compiled, pattern_ready_prompt,
+                     pattern_stop_autoboot_prompt] + self.bad_patterns)
+-                if m == 0:
++                if m == 0 or m == 1:
+                     break
+-                if m == 1:
++                if m == 2:
+                     self.p.send(' ')
+                     continue
+                 raise BootFail('Bad pattern found on console: ' +
+-                                self.bad_pattern_ids[m - 2])
++                                self.bad_pattern_ids[m - 3])
+ 
+         finally:
+             self.log.timestamp()
 -- 
 2.43.0
 
