@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6318AD1CA08
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 22:47:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A66BD1CA0F
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 23:06:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2130288F73;
-	Mon,  4 Nov 2024 23:46:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 76F4488DE6;
+	Tue,  5 Nov 2024 00:06:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RUph53DK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pmTJxgPU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01FD7890C5; Mon,  4 Nov 2024 23:46:35 +0100 (CET)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id CAB2988E96; Tue,  5 Nov 2024 00:06:42 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2D9A89078
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 23:46:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E076888D29
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 00:06:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-3a6af694220so14127465ab.1
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 14:46:32 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-6e33c65d104so40503927b3.3
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 15:06:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730760390; x=1731365190; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1730761599; x=1731366399; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aNA3iEoJdCg7aw5cfWAVSZbkx1y1S2oBVI5WLcPbj3A=;
- b=RUph53DKAtXdKuIofeiYAkzAKnwWbYPd9cOWR5JTGFKplvaOYHRpMH0EBHwZy0h521
- pLSHDBC2yxqK+3GRMX8dAbwhvY7TRwBd+xz+xhX3Fn8heyMM4KOvuIAb+kbOsq2EVdIJ
- uMDpp5UfviBxVIg2ykOREKBvodZ6NvdRLBeBo=
+ bh=Uui/o0ZsYS5WVwOp/dS3baegzYPblc+/UJ7XOLxLFrE=;
+ b=pmTJxgPUzDF+ReqzFUm6DbfS8h2U+9K+qoryhYl7s94fvNmHbPDUn1Qp9yESGDpQ4S
+ 4z+BBvCydei2/yV1MGye2eVfD7jZok0ZMpf+pYGeillSrja5oY/4Fdl+eFvwIHrBI84B
+ kKUskSXHJR52hRqDIdqgqPIUV0nF6f/Dbgp3jHh1UXdPrsBbWW5iW5p8UFyfgeiPAihb
+ bP8PT3W71et7cuwWcV7rGzdFP4sYkkLXGpAbQN6DTFae94gbHWULp+XhZhUcSZebgtcw
+ Wl3c3qd8JqYUb7estyLPM7+odm3w3s4vwIhLLMwM4Bv8gSX5yBXmHl0gh+2KdPxOggzB
+ 7G9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730760390; x=1731365190;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1730761599; x=1731366399;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aNA3iEoJdCg7aw5cfWAVSZbkx1y1S2oBVI5WLcPbj3A=;
- b=YYLZrnPTOVEosLqJbITIOtIrWpuGTrQQh6NwCNzvVvHWOMPzaaLqdDBVY5siJruNM8
- bzNX9c13c14hajMrD5z+xl70wlryJRktmFAJv59qRd6hsBMnsc9LuRDJMVM30K7e32wV
- BvlM+mKL66Sj45l8G1ybGpigmLkU3NW924kClWB+5H9ckBbsPUYTyIjhbXonEt5UFS1j
- 0TAuliy71oLwrF5PIXnaQT7L+MtpG3L1kpebjbW0TIBi/Z8RvmoK8Bl+YAtjfzNYmGOE
- LSrzvoIHvcv6amDSn2yKCzpp1Eu81oZW9elVzYmFaBsbUAQJLlIzmX3LUKRP6GaxpbnF
- mV0g==
-X-Gm-Message-State: AOJu0Yw1CCVSOCDZnqftDrv6+ZYEfskoYJrXrc9ZNRe5BTvgYnnsSDxK
- +RZTy+9+68LfRZQV8/apTmmlVvSKi/RNHbL2BvsBJmfDIp/kekkmTB3flhjofDVjI3nRjP/rLMo
- =
-X-Google-Smtp-Source: AGHT+IGrp3yccHwuUk8BQhwpyKbP90h/ABz5UzAMtxo9S9TfmVEMF9KDKgEG00S8oiWPrS4wH2AgfQ==
-X-Received: by 2002:a05:6e02:2190:b0:3a6:a9bd:84bc with SMTP id
- e9e14a558f8ab-3a6b038fa0amr125601785ab.18.1730760390567; 
- Mon, 04 Nov 2024 14:46:30 -0800 (PST)
-Received: from chromium.org ([50.235.115.130])
- by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a6a97b009csm25535945ab.4.2024.11.04.14.46.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 14:46:29 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v8 11/11] CI: Allow running tests on sjg lab
-Date: Mon,  4 Nov 2024 15:45:38 -0700
-Message-ID: <20241104224550.677442-12-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241104224550.677442-1-sjg@chromium.org>
-References: <20241104224550.677442-1-sjg@chromium.org>
+ bh=Uui/o0ZsYS5WVwOp/dS3baegzYPblc+/UJ7XOLxLFrE=;
+ b=PZ4XsZCMByVREqFxwrqVKPdMLMPV5ZGIqRc+sFpX+TsHvKBVJeVlL16EAGlTbNAjlE
+ EPSJmIRiFLcA+WQjPDZ5kNMj8V3gA5wQWMZIqt5Wqyrh9oFqcSI7wWCznsmsuoeP5Hwb
+ Nv4ue7RNDLvldEsLJmWb0HfzWfekVlCH8FSL0vgER493FWQSICJnrkjktqeMuR2b/dVm
+ T2846CLHc6D+mpMVuB24EYEJppwJzLZyHO20jE8yYsu0DlPRIlvpDLbD8IvgTys3Usr7
+ knRfTmG0IJBoe78wa7sAKHCs8Bxf0XXjLBWcv8MH0dFHaXaoJUOed3hGX+6Ife19HONP
+ YLdg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX2qj4MOwKSSK0B30aibqvgiuOWtkwKn7hx32d7Fgb1wdgTlVhc1dgEP1QZW+4LH9wEZG0HquQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwGP7A1UDmZZJWetJcJe5Oy6NRcR77e8OpPHP2qqzlPbc7rhyaC
+ Zq/JYdGsEyUH8b1J6xcJ/x9+g0axuzmtJuXoqGtwDNtVVx2Bg1zf0mDa3s8I1U3Ov8rvaWEr3fm
+ UEh2tIoJRJyf0L2Of5c+Pw5osP1F+pM/ZrIyKDg==
+X-Google-Smtp-Source: AGHT+IH1qy24gizr5lfA9Ah/no+7F4niJ4Ykm91JKYFlIgZ+6ZZzjhA/Jf0QNoJJiunbcgZXN/ZRxHKAs+ls0vKQEMA=
+X-Received: by 2002:a05:690c:9a8c:b0:6ea:7198:fb64 with SMTP id
+ 00721157ae682-6ea7198fd57mr86239957b3.41.1730761598706; Mon, 04 Nov 2024
+ 15:06:38 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>
+ <20241017-android_ab_master-v5-6-43bfcc096d95@salutedevices.com>
+In-Reply-To: <20241017-android_ab_master-v5-6-43bfcc096d95@salutedevices.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Mon, 4 Nov 2024 17:06:28 -0600
+Message-ID: <CAPLW+4msra4=oUDCSWx8sfM7uCGgfmJbRi++Q=wf8cQ-ERoHGw@mail.gmail.com>
+Subject: Re: [PATCH v5 6/6] common: android_ab: fix slot suffix for abc block
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Tom Rini <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Mario Six <mario.six@gdsys.cc>, u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ rockosov@gmail.com, kernel@salutedevices.com, 
+ Guillaume La Roque <glaroque@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,206 +96,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a way to run tests on a real hardware lab. This is in the very early
-experimental stages. There are only 23 boards and 3 of those are broken!
-(bob, ff3399, samus). A fourth fails due to problems with the TPM tests.
+On Thu, Oct 17, 2024 at 9:12=E2=80=AFAM Dmitry Rokosov
+<ddrokosov@salutedevices.com> wrote:
+>
+> To align with the official Android BCB (Bootloader Control Block)
+> specifications, it's important to note that the slot_suffix should start
+> with an underscore symbol.
+>
+> For a comprehensive understanding of the expected slot_suffix format in
+> userspace, please refer to the provided reference [1].
+>
+> Links:
+> [1] - https://source.android.com/docs/core/architecture/bootloader/updati=
+ng#slots
+>
+> Based-on: https://android-review.googlesource.com/c/platform/external/u-b=
+oot/+/1446439
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Tested-by: Guillaume La Roque <glaroque@baylibre.com>
+> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
 
-To try this, assuming you have gitlab access, set SJG_LAB=1, e.g.:
+Would be nice to add "Fixes:" tag here, pointing to the corresponding
+commit where the issue was introduced (see kernel docs for details).
+It could be quite useful for possible stable branches and other
+purposes, I'd recommend to add that tag for all fixes if you have more
+in this series.
 
-   git push -o ci.variable="SJG_LAB=1" dm HEAD:try
+> ---
+>  boot/android_ab.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/boot/android_ab.c b/boot/android_ab.c
+> index c93e51541019d0fe793303c4b3d5286df061906f..a287eac04fe88ad08bdcf1b1b=
+1d6e564d503d800 100644
+> --- a/boot/android_ab.c
+> +++ b/boot/android_ab.c
+> @@ -52,7 +52,7 @@ static int ab_control_default(struct bootloader_control=
+ *abc)
+>         if (!abc)
+>                 return -EFAULT;
+>
+> -       memcpy(abc->slot_suffix, "a\0\0\0", 4);
+> +       memcpy(abc->slot_suffix, "_a\0\0", 4);
+>         abc->magic =3D BOOT_CTRL_MAGIC;
+>         abc->version =3D BOOT_CTRL_VERSION;
+>         abc->nb_slot =3D NUM_SLOTS;
+> @@ -328,7 +328,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct =
+disk_partition *part_info,
+>                  * or the device tree.
+>                  */
+>                 memset(slot_suffix, 0, sizeof(slot_suffix));
+> -               slot_suffix[0] =3D BOOT_SLOT_NAME(slot);
+> +               slot_suffix[0] =3D '_';
+> +               slot_suffix[1] =3D BOOT_SLOT_NAME(slot);
 
-This relies on the two previous series targeted at -next as well as the
-bugfix series for -master
+AFAIU, this changes the behavior of two above functions, and
+consequently of "bcb ab_select" command? If so, just to double check:
+were all users of those reworked correspondingly? I can see next
+occurrences (there may be more):
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
----
+$ grep -sIrHn '"_' boot/bootmeth_android.c
 
-(no changes since v7)
+boot/bootmeth_android.c:74:    sprintf(partname, BOOT_PART_NAME "_%s",
+priv->slot);
+boot/bootmeth_android.c:111:    sprintf(partname,
+VENDOR_BOOT_PART_NAME "_%s", priv->slot);
+boot/bootmeth_android.c:156:    sprintf(slot_suffix, "_%s", priv->slot);
+boot/bootmeth_android.c:397:    sprintf(slot_suffix, "_%s", priv->slot);
 
-Changes in v7:
-- Rebase on broken-out testb series
+$ grep -sIrHn 'slot_suffix _' include/configs/
+include/configs/ti_omap5_common.h:107:    "setenv slot_suffix _${slot_name}=
+;"
+include/configs/meson64_android.h:65:        "setenv slot_suffix
+_${current_slot}; " \
 
-Changes in v6:
-- Drop patch 'test: Pass stderr to stdout'
-
-Changes in v3:
-- Split out most patches into two new series and update cover letter
-
-Changes in v2:
-- Avoid running a docker image for skipped lab tests
-
- .gitlab-ci.yml | 153 +++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 153 insertions(+)
-
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 0aeda53bc2d..97361337e21 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -17,6 +17,7 @@ stages:
-   - testsuites
-   - test.py
-   - world build
-+  - sjg-lab
- 
- .buildman_and_testpy_template: &buildman_and_testpy_dfn
-   stage: test.py
-@@ -521,3 +522,155 @@ coreboot test.py:
-     TEST_PY_TEST_SPEC: "not sleep"
-     TEST_PY_ID: "--id qemu"
-   <<: *buildman_and_testpy_dfn
-+
-+.lab_template: &lab_dfn
-+  stage: sjg-lab
-+  rules:
-+    - if: $SJG_LAB == "1"
-+      when: always
-+    - when: manual
-+  tags: [ 'lab' ]
-+  script:
-+    - if [[ -z "${SJG_LAB}" ]]; then
-+        exit 0;
-+      fi
-+    # Environment:
-+    #   SRC  - source tree
-+    #   OUT  - output directory for builds
-+    - export SRC="$(pwd)"
-+    - export OUT="${SRC}/build/${BOARD}"
-+    - export PATH=$PATH:~/bin
-+    - export PATH=$PATH:/vid/software/devel/ubtest/u-boot-test-hooks/bin
-+
-+    # Load it on the device
-+    - ret=0
-+    - echo "role ${ROLE}"
-+    - export strategy="-s uboot -e off"
-+    # export verbose="-v"
-+    - ${SRC}/test/py/test.py --role ${ROLE} --build-dir "${OUT}"
-+        --capture=tee-sys -k "not bootstd"|| ret=$?
-+    - U_BOOT_BOARD_IDENTITY="${ROLE}" u-boot-test-release || true
-+    - if [[ $ret -ne 0 ]]; then
-+        exit $ret;
-+      fi
-+  artifacts:
-+    when: always
-+    paths:
-+      - "build/${BOARD}/test-log.html"
-+      - "build/${BOARD}/multiplexed_log.css"
-+    expire_in: 1 week
-+
-+rpi3:
-+  variables:
-+    ROLE: rpi3
-+  <<: *lab_dfn
-+
-+opi_pc:
-+  variables:
-+    ROLE: opi_pc
-+  <<: *lab_dfn
-+
-+pcduino3_nano:
-+  variables:
-+    ROLE: pcduino3_nano
-+  <<: *lab_dfn
-+
-+samus:
-+  variables:
-+    ROLE: samus
-+  <<: *lab_dfn
-+
-+link:
-+  variables:
-+    ROLE: link
-+  <<: *lab_dfn
-+
-+jerry:
-+  variables:
-+    ROLE: jerry
-+  <<: *lab_dfn
-+
-+minnowmax:
-+  variables:
-+    ROLE: minnowmax
-+  <<: *lab_dfn
-+
-+opi_pc2:
-+  variables:
-+    ROLE: opi_pc2
-+  <<: *lab_dfn
-+
-+bpi:
-+  variables:
-+    ROLE: bpi
-+  <<: *lab_dfn
-+
-+rpi2:
-+  variables:
-+    ROLE: rpi2
-+  <<: *lab_dfn
-+
-+bob:
-+  variables:
-+    ROLE: bob
-+  <<: *lab_dfn
-+
-+ff3399:
-+  variables:
-+    ROLE: ff3399
-+  <<: *lab_dfn
-+
-+coral:
-+  variables:
-+    ROLE: coral
-+  <<: *lab_dfn
-+
-+rpi3z:
-+  variables:
-+    ROLE: rpi3z
-+  <<: *lab_dfn
-+
-+bbb:
-+  variables:
-+    ROLE: bbb
-+  <<: *lab_dfn
-+
-+kevin:
-+  variables:
-+    ROLE: kevin
-+  <<: *lab_dfn
-+
-+pine64:
-+  variables:
-+    ROLE: pine64
-+  <<: *lab_dfn
-+
-+c4:
-+  variables:
-+    ROLE: c4
-+  <<: *lab_dfn
-+
-+rpi4:
-+  variables:
-+    ROLE: rpi4
-+  <<: *lab_dfn
-+
-+rpi0:
-+  variables:
-+    ROLE: rpi0
-+  <<: *lab_dfn
-+
-+snow:
-+  variables:
-+    ROLE: snow
-+  <<: *lab_dfn
-+
-+pcduino3:
-+  variables:
-+    ROLE: pcduino3
-+  <<: *lab_dfn
-+
-+nyan-big:
-+  variables:
-+    ROLE: nyan-big
-+  <<: *lab_dfn
--- 
-2.43.0
-
+>                 if (memcmp(abc->slot_suffix, slot_suffix,
+>                            sizeof(slot_suffix))) {
+>                         memcpy(abc->slot_suffix, slot_suffix,
+>
+> --
+> 2.43.0
+>
