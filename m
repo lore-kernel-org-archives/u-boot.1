@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A639D1BDD4
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 17:51:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7600D1BDD4
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 17:52:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEE4D88E4B;
-	Mon,  4 Nov 2024 18:51:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 218BF88E50;
+	Mon,  4 Nov 2024 18:51:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FwBM9jK6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KSwjuVGJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7469588FAA; Mon,  4 Nov 2024 18:51:28 +0100 (CET)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id A5CC28880B; Mon,  4 Nov 2024 18:51:30 +0100 (CET)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11A1E88DA3
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 18:51:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7353588F95
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 18:51:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-83aac75fcceso155025639f.0
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 09:51:26 -0800 (PST)
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-3a6bf539cabso7310225ab.3
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 09:51:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730742684; x=1731347484; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730742686; x=1731347486; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rlxpAnvzilHql2ijYgWfvMUeiV8hrluRg5hes2LjLTM=;
- b=FwBM9jK6ri92Ei110uCTZfTZaPmrEtCrUkOY5jDoMbMm7tOPLfArhfEWcB4jwcZS9D
- KFGksq3LfeSCWwKiYrbbBONx8Davg4Fpb1GkmvQwaCxSsVo1YfW0VViV0ZM0umVJajrT
- pbhGvOifd5bD2BQnKsDxINtSblzFi5Za+Kspk=
+ bh=ozNG7fiNCfQdI+g22LplNj6OcHOBkmFo6yfCi0oTzto=;
+ b=KSwjuVGJvr04W5MY/oACayq7kwh2eu2jJPpZG1VMEcIPM/k9QQhmUzDGpajdxADuEy
+ CtaaBf8KWnMGIbdo1QxoegZJYs8JPLEdgXqyQ++Wf742cPmpzBzz9bdhrkm9kslrvaZs
+ uR60AVcL93PV8yEpchuM2GDuixCJYbbPDaIeU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730742684; x=1731347484;
+ d=1e100.net; s=20230601; t=1730742686; x=1731347486;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rlxpAnvzilHql2ijYgWfvMUeiV8hrluRg5hes2LjLTM=;
- b=nlFKmOBuil3/e+r5lje9AvUwDGPHpdoyiYPlHNhM4PCRb8f41dWcoAiwbqMYRD+iB1
- QAcLm2kiGBieNB7E/gP61ea4Qt8nhzwph0kgf8eVcNt0DQc/BSY+P4yewhaCzDAkoca+
- 7VXc5R9eA4witC7GRmSWx3JJmLv6CgS7nEV8mMZrwd0fDSvf0sfZ9/5kpRT/w4YT6CAv
- yfhpbPhTHdqlfbMkneERjrS043ES3oEum9lf9MHeUTA2BEQQESSZ/VGJ1x8uDB1mWVG0
- dZ5lSw5L8BlBN3GXt7coghjgEFW3hljIptobS+MJo2gze20fGTjrJrykA4OgqL0Tcmp1
- Mwmg==
-X-Gm-Message-State: AOJu0YyjmH7HRNPyeDVd1MNwjymbhz1EuJlqtpS8YgamrQE3veO5S9Dh
- 4rUn5RwWJ6ZISWwgfzwsjFw/IaqojJOINkUtY6bGHjiQI5x8jZJk3GgHX/EKb3dO0pNA/Epsoaw
+ bh=ozNG7fiNCfQdI+g22LplNj6OcHOBkmFo6yfCi0oTzto=;
+ b=B7N8HG6JJVw13pDKQbOnfhw0jOhHw3jgE1Ce+GDrIeyIlS7pdY2fCbqkhEaiZc50wB
+ dS0Z1qhVTk9I0lwwiNISdpokSN8z6dgvSJUu+LeR87kWsoMPRyy56XzMvSP6r02oyMoc
+ UR1HWT/WMeiQ2BHOiTqwKn7B1rLeIEBJu8//EKHnAMcek7NJW9UWIaKSOISrJINzdnBr
+ aRM6jf/K5y5x/AW+YXiDNC+b+BIrcsaJvTyQHsuXRubb4iIyEBy4prXFrXWYxdsbarOT
+ nyLEarHDvwMdxVJRJtHgZRPw3oGpVjAhiCJCUBAEB206uQ7cTu2goI/RD49Im2q7V9Tg
+ Qs8g==
+X-Gm-Message-State: AOJu0Yzl8krAXIlBRuVP4JYAz3otEtL2pK7ckHGHCUbYU7xZwimsKh0w
+ 11NWqPvKqliaNreKeYu4sKhumsE/7lC1cu5T//SLc6n0jHqSfaMLjTbECAD+JcEFTxpUWu8Ws1c
  =
-X-Google-Smtp-Source: AGHT+IGvvqxoJeaCYdM1ytp5xFLpsW0lynArH8Ib5RxOfNeeORKLuc8845Gj3s2eqO3ExHT8BZMpAw==
-X-Received: by 2002:a05:6602:2c06:b0:83a:bd82:77f with SMTP id
- ca18e2360f4ac-83b719757c9mr1602527439f.8.1730742684190; 
- Mon, 04 Nov 2024 09:51:24 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGPeFJCuO2KL+8kPGVwjjHrUkQmz45Vq7S6nhvJ0vnNiNEvIXoip//fmZqPl0nw+Xrt8i9fvQ==
+X-Received: by 2002:a05:6e02:1688:b0:3a6:be66:ce53 with SMTP id
+ e9e14a558f8ab-3a6be66d4b1mr87825235ab.18.1730742686344; 
+ Mon, 04 Nov 2024 09:51:26 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4de04977b30sm2005288173.116.2024.11.04.09.51.22
+ 8926c6da1cb9f-4de04977b30sm2005288173.116.2024.11.04.09.51.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 09:51:23 -0800 (PST)
+ Mon, 04 Nov 2024 09:51:24 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Dragan Simic <dsimic@manjaro.org>,
  Guillaume La Roque <glaroque@baylibre.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Igor Opaniuk <igor.opaniuk@gmail.com>,
  Julien Masson <jmasson@baylibre.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Shantur Rathore <i@shantur.com>,
- =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH v3 05/19] bootstd: Move the bootflow list into an alist
-Date: Mon,  4 Nov 2024 10:50:56 -0700
-Message-Id: <20241104175110.1048449-6-sjg@chromium.org>
+ Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Shantur Rathore <i@shantur.com>
+Subject: [PATCH v3 06/19] bootstd: Maintain a list of images
+Date: Mon,  4 Nov 2024 10:50:57 -0700
+Message-Id: <20241104175110.1048449-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241104175110.1048449-1-sjg@chromium.org>
 References: <20241104175110.1048449-1-sjg@chromium.org>
@@ -101,342 +96,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use an alist for this data structure as it is somewhat simpler to
-manage. This means that bootstd holds a simple list of bootflow structs
-and can drop it at will, without chasing down lists.
+We want to keep track of images which are loaded, or those which could
+perhaps be loaded. This will make it easier to manage memory allocation,
+as well as permit removal of the EFI set_efi_bootdev() feature.
+
+Add a list of these, attached to the bootflow. For now the list is
+empty.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- Update bootstd_add_bootflow() to return the element number
+(no changes since v2)
 
- boot/bootdev-uclass.c | 47 +++++++++++++------------------------------
- boot/bootflow.c       | 16 ++++-----------
- boot/bootstd-uclass.c | 42 +++++++++++++++++++-------------------
- cmd/bootdev.c         |  2 +-
- cmd/bootflow.c        |  2 +-
- include/bootflow.h    | 11 +++++-----
- include/bootstd.h     |  8 +++++---
- 7 files changed, 51 insertions(+), 77 deletions(-)
+Changes in v2:
+- Add an image type extension in bootflow.h
+- Use the word 'feature' instead of 'hack'
 
-diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-index 81adfb4cfb7..a4e1d79ec9b 100644
---- a/boot/bootdev-uclass.c
-+++ b/boot/bootdev-uclass.c
-@@ -32,41 +32,17 @@ enum {
- 	BOOT_TARGETS_MAX_LEN	= 100,
- };
- 
--struct bootflow *bootdev_next_bootflow_(struct bootstd_priv *std,
--					struct udevice *dev,
--					struct bootflow *prev)
--{
--	struct bootflow *bflow = prev;
--
--	if (bflow) {
--		if (list_is_last(&bflow->glob_node, &std->glob_head))
--			return NULL;
--		bflow = list_entry(bflow->glob_node.next, struct bootflow,
--				   glob_node);
--	} else {
--		if (list_empty(&std->glob_head))
--			return NULL;
--
--		bflow = list_first_entry(&std->glob_head, struct bootflow,
--					 glob_node);
--	}
--
--	while (bflow->dev != dev) {
--		if (list_is_last(&bflow->glob_node, &std->glob_head))
--			return NULL;
--		bflow = list_entry(bflow->glob_node.next, struct bootflow,
--				   glob_node);
--	}
--
--	return bflow;
--}
--
- int bootdev_first_bootflow(struct udevice *dev, struct bootflow **bflowp)
- {
--	struct bootstd_priv *std = bootstd_try_priv();
-+	struct bootstd_priv *std;
- 	struct bootflow *bflow;
-+	int ret;
-+
-+	ret = bootstd_get_priv(&std);
-+	if (ret)
-+		return log_msg_ret("bff", ret);
- 
--	bflow = bootdev_next_bootflow_(std, dev, NULL);
-+	bflow = alist_getw(&std->bootflows, 0, struct bootflow);
- 	if (!bflow)
- 		return -ENOENT;
- 	*bflowp = bflow;
-@@ -76,10 +52,15 @@ int bootdev_first_bootflow(struct udevice *dev, struct bootflow **bflowp)
- 
- int bootdev_next_bootflow(struct bootflow **bflowp)
- {
--	struct bootstd_priv *std = bootstd_try_priv();
-+	struct bootstd_priv *std;
- 	struct bootflow *bflow;
-+	int ret;
-+
-+	ret = bootstd_get_priv(&std);
-+	if (ret)
-+		return log_msg_ret("bff", ret);
- 
--	bflow = bootdev_next_bootflow_(std, (*bflowp)->dev, *bflowp);
-+	bflow = alist_nextw(&std->bootflows, *bflowp);
- 	if (!bflow)
- 		return -ENOENT;
- 	*bflowp = bflow;
+ boot/bootflow.c    | 26 +++++++++++++++++++++++++
+ include/bootflow.h | 48 ++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 74 insertions(+)
+
 diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 804809dc100..7ce04fd92cd 100644
+index 7ce04fd92cd..94f34dcad0f 100644
 --- a/boot/bootflow.c
 +++ b/boot/bootflow.c
-@@ -55,11 +55,10 @@ int bootflow_first_glob(struct bootflow **bflowp)
- 	if (ret)
- 		return ret;
+@@ -23,6 +23,13 @@ enum {
+ 	BF_NO_MORE_DEVICES	= -ENODEV,
+ };
  
--	if (list_empty(&std->glob_head))
-+	if (!std->bootflows.count)
- 		return -ENOENT;
- 
--	*bflowp = list_first_entry(&std->glob_head, struct bootflow,
--				   glob_node);
-+	*bflowp = alist_getw(&std->bootflows, 0, struct bootflow);
- 
- 	return 0;
++static const char *const bootflow_img[BFI_COUNT - BFI_FIRST] = {
++	"extlinux_cfg",
++	"logo",
++	"efi",
++	"cmdline",
++};
++
+ /**
+  * bootflow_state - name for each state
+  *
+@@ -455,10 +462,13 @@ void bootflow_init(struct bootflow *bflow, struct udevice *bootdev,
+ 	bflow->dev = bootdev;
+ 	bflow->method = meth;
+ 	bflow->state = BOOTFLOWST_BASE;
++	alist_init_struct(&bflow->images, struct bootflow_img);
  }
-@@ -67,20 +66,16 @@ int bootflow_first_glob(struct bootflow **bflowp)
- int bootflow_next_glob(struct bootflow **bflowp)
+ 
+ void bootflow_free(struct bootflow *bflow)
  {
- 	struct bootstd_priv *std;
--	struct bootflow *bflow = *bflowp;
- 	int ret;
- 
- 	ret = bootstd_get_priv(&std);
- 	if (ret)
- 		return ret;
- 
--	*bflowp = NULL;
--
--	if (list_is_last(&bflow->glob_node, &std->glob_head))
-+	*bflowp = alist_nextw(&std->bootflows, *bflowp);
-+	if (!*bflowp)
- 		return -ENOENT;
- 
--	*bflowp = list_entry(bflow->glob_node.next, struct bootflow, glob_node);
--
- 	return 0;
++	struct bootflow_img *img;
++
+ 	free(bflow->name);
+ 	free(bflow->subdir);
+ 	free(bflow->fname);
+@@ -467,6 +477,10 @@ void bootflow_free(struct bootflow *bflow)
+ 	free(bflow->os_name);
+ 	free(bflow->fdt_fname);
+ 	free(bflow->bootmeth_priv);
++
++	alist_for_each(img, &bflow->images)
++		free(img->fname);
++	alist_empty(&bflow->images);
  }
- 
-@@ -476,10 +471,7 @@ void bootflow_free(struct bootflow *bflow)
  
  void bootflow_remove(struct bootflow *bflow)
- {
--	list_del(&bflow->glob_node);
--
- 	bootflow_free(bflow);
--	free(bflow);
- }
- 
- #if CONFIG_IS_ENABLED(BOOTSTD_FULL)
-diff --git a/boot/bootstd-uclass.c b/boot/bootstd-uclass.c
-index 91e90bdf43c..8c0fd4e63c3 100644
---- a/boot/bootstd-uclass.c
-+++ b/boot/bootstd-uclass.c
-@@ -6,6 +6,7 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
- 
-+#include <alist.h>
- #include <bootflow.h>
- #include <bootstd.h>
- #include <dm.h>
-@@ -42,13 +43,11 @@ static int bootstd_of_to_plat(struct udevice *dev)
- 
- static void bootstd_clear_glob_(struct bootstd_priv *priv)
- {
--	while (!list_empty(&priv->glob_head)) {
--		struct bootflow *bflow;
-+	struct bootflow *bflow;
- 
--		bflow = list_first_entry(&priv->glob_head, struct bootflow,
--					 glob_node);
-+	alist_for_each(bflow, &priv->bootflows)
- 		bootflow_remove(bflow);
--	}
-+	alist_empty(&priv->bootflows);
- }
- 
- void bootstd_clear_glob(void)
-@@ -64,36 +63,37 @@ void bootstd_clear_glob(void)
- int bootstd_add_bootflow(struct bootflow *bflow)
- {
- 	struct bootstd_priv *std;
--	struct bootflow *new;
- 	int ret;
- 
- 	ret = bootstd_get_priv(&std);
- 	if (ret)
- 		return ret;
- 
--	new = malloc(sizeof(*bflow));
--	if (!new)
--		return log_msg_ret("bflow", -ENOMEM);
--	memcpy(new, bflow, sizeof(*bflow));
--
--	list_add_tail(&new->glob_node, &std->glob_head);
-+	ret = std->bootflows.count;
-+	bflow = alist_add(&std->bootflows, *bflow);
-+	if (!bflow)
-+		return log_msg_ret("bf2", -ENOMEM);
- 
--	return 0;
-+	return ret;
- }
- 
- int bootstd_clear_bootflows_for_bootdev(struct udevice *dev)
- {
- 	struct bootstd_priv *std = bootstd_try_priv();
-+	struct bootflow *from, *to;
- 
--	if (std) {
--		struct bootflow *bflow;
--		struct list_head *pos;
-+	/* if bootstd does not exist we cannot have any bootflows */
-+	if (!std)
-+		return 0;
- 
--		list_for_each(pos, &std->glob_head) {
--			bflow = list_entry(pos, struct bootflow, glob_node);
--			bootflow_remove(bflow);
--		}
-+	/* Drop any bootflows that mention this dev */
-+	alist_for_each_filter(from, to, &std->bootflows) {
-+		if (from->dev == dev)
-+			bootflow_remove(from);
-+		else
-+			*to++ = *from;
- 	}
-+	alist_update_end(&std->bootflows, to);
+@@ -950,3 +964,15 @@ int bootflow_cmdline_auto(struct bootflow *bflow, const char *arg)
  
  	return 0;
  }
-@@ -165,7 +165,7 @@ static int bootstd_probe(struct udevice *dev)
- {
- 	struct bootstd_priv *std = dev_get_priv(dev);
- 
--	INIT_LIST_HEAD(&std->glob_head);
-+	alist_init_struct(&std->bootflows, struct bootflow);
- 
- 	return 0;
- }
-diff --git a/cmd/bootdev.c b/cmd/bootdev.c
-index fa7285ba25e..4bc229e809a 100644
---- a/cmd/bootdev.c
-+++ b/cmd/bootdev.c
-@@ -81,7 +81,7 @@ static int do_bootdev_info(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- 	dev = priv->cur_bootdev;
- 
--	/* Count the number of bootflows, including how many are valid*/
-+	/* Count the number of bootflows, including how many are valid */
- 	num_valid = 0;
- 	for (ret = bootdev_first_bootflow(dev, &bflow), i = 0;
- 	     !ret;
-diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-index 1c1146ce11e..f88995a478f 100644
---- a/cmd/bootflow.c
-+++ b/cmd/bootflow.c
-@@ -208,7 +208,7 @@ static int do_bootflow_scan(struct cmd_tbl *cmdtp, int flag, int argc,
- 		if (!ret)
- 			num_valid++;
- 		ret = bootstd_add_bootflow(&bflow);
--		if (ret) {
-+		if (ret < 0) {
- 			printf("Out of memory\n");
- 			return CMD_RET_FAILURE;
- 		}
++
++const char *bootflow_img_type_name(enum bootflow_img_t type)
++{
++	const char *name;
++
++	if (type >= BFI_FIRST && type < BFI_COUNT)
++		name = bootflow_img[type - BFI_FIRST];
++	else
++		name = genimg_get_type_short_name(type);
++
++	return name;
++}
 diff --git a/include/bootflow.h b/include/bootflow.h
-index 64d1d6c3786..9b24fb5c3eb 100644
+index 9b24fb5c3eb..f407bb356b4 100644
 --- a/include/bootflow.h
 +++ b/include/bootflow.h
-@@ -56,11 +56,8 @@ enum bootflow_flags_t {
- /**
-  * struct bootflow - information about a bootflow
-  *
-- * This is connected into a linked list:
-+ * All bootflows are listed in bootstd's bootflow alist in struct bootstd_priv
-  *
-- *   glob_sibling - links all bootflows in all bootdevs
-- *
-- * @glob_node: Points to siblings in the global list (all bootdev)
-  * @dev: Bootdev device which produced this bootflow, NULL for flows created by
-  *      BOOTMETHF_GLOBAL bootmeths
-  * @blk: Block device which contains this bootflow, NULL if this is a network
-@@ -90,7 +87,6 @@ enum bootflow_flags_t {
-  * @bootmeth_priv: Private data for the bootmeth
-  */
- struct bootflow {
--	struct list_head glob_node;
- 	struct udevice *dev;
- 	struct udevice *blk;
- 	int part;
-@@ -390,7 +386,10 @@ const char *bootflow_state_get_name(enum bootflow_state_t state);
- /**
-  * bootflow_remove() - Remove a bootflow and free its memory
-  *
-- * This updates the linked lists containing the bootflow then frees it.
-+ * This updates the 'global' linked list containing the bootflow, then frees it.
-+ * It does not remove it from bootflows alist in struct bootstd_priv
-+ *
-+ * This does not free bflow itself, since this is assumed to be in an alist
-  *
-  * @bflow: Bootflow to remove
-  */
-diff --git a/include/bootstd.h b/include/bootstd.h
-index 8aff536e3cb..3398e48e88b 100644
---- a/include/bootstd.h
-+++ b/include/bootstd.h
-@@ -9,6 +9,7 @@
- #ifndef __bootstd_h
- #define __bootstd_h
+@@ -7,7 +7,9 @@
+ #ifndef __bootflow_h
+ #define __bootflow_h
  
 +#include <alist.h>
+ #include <bootdev.h>
++#include <image.h>
  #include <dm/ofnode_decl.h>
  #include <linux/list.h>
- #include <linux/types.h>
-@@ -30,7 +31,8 @@ struct udevice;
-  *	terminated)
-  * @cur_bootdev: Currently selected bootdev (for commands)
-  * @cur_bootflow: Currently selected bootflow (for commands)
-- * @glob_head: Head for the global list of all bootflows across all bootdevs
-+ * @bootflows: (struct bootflow) Global list of all bootflows across all
-+ *	bootdevs
-  * @bootmeth_count: Number of bootmeth devices in @bootmeth_order
-  * @bootmeth_order: List of bootmeth devices to use, in order, NULL-terminated
-  * @vbe_bootmeth: Currently selected VBE bootmeth, NULL if none
-@@ -44,7 +46,7 @@ struct bootstd_priv {
- 	const char **env_order;
- 	struct udevice *cur_bootdev;
- 	struct bootflow *cur_bootflow;
--	struct list_head glob_head;
-+	struct alist bootflows;
- 	int bootmeth_count;
- 	struct udevice **bootmeth_order;
- 	struct udevice *vbe_bootmeth;
-@@ -135,7 +137,7 @@ int bootstd_prog_boot(void);
-  *	since this function takes over ownership of these. This functions makes
-  *	a copy of @bflow itself (without allocating its fields again), so the
-  *	caller must dispose of the memory used by the @bflow pointer itself
-- * Return: 0 if OK, -ENOMEM if out of memory
-+ * Return: element number in the list, if OK, -ENOMEM if out of memory
-  */
- int bootstd_add_bootflow(struct bootflow *bflow);
  
+@@ -85,6 +87,7 @@ enum bootflow_flags_t {
+  * @cmdline: OS command line, or NULL if not known (allocated)
+  * @x86_setup: Pointer to x86 setup block inside @buf, NULL if not present
+  * @bootmeth_priv: Private data for the bootmeth
++ * @images: List of loaded images (struct bootstd_img)
+  */
+ struct bootflow {
+ 	struct udevice *dev;
+@@ -109,6 +112,44 @@ struct bootflow {
+ 	char *cmdline;
+ 	void *x86_setup;
+ 	void *bootmeth_priv;
++	struct alist images;
++};
++
++/**
++ * bootflow_img_t: Supported image types
++ *
++ * This uses image_type_t for most types, but extends it
++ *
++ * @BFI_EXTLINUX_CFG: extlinux configuration-file
++ * @BFI_LOGO: logo image
++ * @BFI_EFI: EFI PE image
++ * @BFI_CMDLINE: OS command-line string
++ */
++enum bootflow_img_t {
++	BFI_FIRST = IH_TYPE_COUNT,
++	BFI_EXTLINUX_CFG = BFI_FIRST,
++	BFI_LOGO,
++	BFI_EFI,
++	BFI_CMDLINE,
++
++	BFI_COUNT,
++};
++
++/**
++ * struct bootflow_img - Information about an image which has been loaded
++ *
++ * This keeps track of a single, loaded image.
++ *
++ * @fname: Filename used to load the image (allocated)
++ * @type: Image type (IH_TYPE_...)
++ * @addr: Address to which the image was loaded, 0 if not yet loaded
++ * @size: Size of the image
++ */
++struct bootflow_img {
++	char *fname;
++	enum bootflow_img_t type;
++	ulong addr;
++	ulong size;
+ };
+ 
+ /**
+@@ -565,4 +606,11 @@ int bootflow_cmdline_get_arg(struct bootflow *bflow, const char *arg,
+  */
+ int bootflow_cmdline_auto(struct bootflow *bflow, const char *arg);
+ 
++/**
++ * bootflow_img_type_name() - Get the name for an image type
++ *
++ * @type: Type to check (either enum bootflow_img_t or enum image_type_t
++ * Return: Image name, or "unknown" if not known
++ */
++const char *bootflow_img_type_name(enum bootflow_img_t type);
+ #endif
 -- 
 2.34.1
 
