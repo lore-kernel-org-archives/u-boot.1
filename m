@@ -4,212 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 809A3D111BD
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 08:33:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFCECFB422
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 08:52:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A56028855C;
-	Mon,  4 Nov 2024 09:32:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 7CDEE887FA;
+	Mon,  4 Nov 2024 09:52:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="EMCktY2p";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hPPZPjDg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4494E8852B; Mon,  4 Nov 2024 09:32:57 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20630.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::630])
+ id A9C648880F; Mon,  4 Nov 2024 09:52:45 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BE6A8855C
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 09:32:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A99728862E
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 09:52:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=V040p9hmzjw1KQEUQ6vy8ggaimrWqgEoOr9BgwcLSh9RVrjOlfGjIZJNhB5AAIKZPxR+As58Kr0iheuaEAgy308q6rBDgO6yj7lmIeugPasqg7EmvEiMyQIx45bd9+DUbtctDw510yLsx7B3epKJlBC0/GU+eiQ8bM7W25BcjwsK9JdnfAy5z4pxCD2A8U1sItIM8bIOQ2suht8LLzRXE5gHJfyShbWLSSNx5ZRT1j2Vd2l/nbUiH4Lu+sUuu7KIEzrO61MtifkDGEZ0nFwBCf6fYlDUFQcKPqvy3wTu4bPQb3nQ8cjh+u5MGKUUaILbGKBry7dWwR6GqtxWxcLc8w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZUZqZHuH0wBkegGlBQAyyhgJbq1snFVDKhXeCGatiCw=;
- b=GA3fkFEQnDZJ8CoOiwH3VXa4U4jWokDbrX50IT/AxogiiRzjCFqBpgE3OPkyc8Q8mrzMRvJ0HDVSB5/FfIWzLRJznsvUiqUyB/wnsjZm6Su6ZsB5oRugGnBDg4dzwpZ9UaPz6oM/wLQ9kKVe1t1Gh0E/4TkAGNhAFlk2NVde7uOpEqd41iLkRiPcSKmBIBJRoQu+LykNSIVzFT98cANKPE5STVilXZENTKM4RbUFtLWz49Wa8HjEWQ/oBI3GAJ12fgRB4PnW1BPdb11Za/AcORF0gKCPYI5OG/MMkWndXyWM/VLy/j+4mpo4R19llJPOfe12SMOhcmklXE4CIzQLrQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZUZqZHuH0wBkegGlBQAyyhgJbq1snFVDKhXeCGatiCw=;
- b=EMCktY2p2c527e4f53+8HeGKVVhWoyNOH/x9neHMmyehfoRThqA/nQBlac8OQkm62lQFH3EOkyCSvh0hRkzwfZrsZJmn5ytJ0ZQEzBksKPnXt6Q3cAgVyEI7pPWSG9BmbQ8i8soENMacmLdxJhhKuvP5QxYCIhCRkYjMnurDMI0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by DS7PR12MB5790.namprd12.prod.outlook.com (2603:10b6:8:75::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.30; Mon, 4 Nov
- 2024 08:32:50 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%6]) with mapi id 15.20.8093.035; Mon, 4 Nov 2024
- 08:32:50 +0000
-Message-ID: <c5b1aabb-c9e5-42b8-a73e-1ddab887a774@amd.com>
-Date: Mon, 4 Nov 2024 09:32:34 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] zynqmp: Add binman description for SOM
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, neal.frager@amd.com,
- Charlie Johnston <charlie.johnston@loftorbital.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Prasad Kummari <prasad.kummari@amd.com>, Sumit Garg <sumit.garg@linaro.org>,
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, Tony Dinh <mibodhi@gmail.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <de1b8dbabd5ab7f20d7aac217ec4f5074d39f1da.1728462767.git.michal.simek@amd.com>
- <CAFLszTh6s5n4nzC7UKhFnQuXFOucGA6amjN1eV4NqwjV6-NEeQ@mail.gmail.com>
- <1048553d-4818-4aba-8bd1-c958dc0b7c5e@amd.com>
- <178d29b0-d82c-4b18-a3ed-3d46dcc02446@amd.com>
- <20241101135220.GJ3600562@bill-the-cat>
- <CAFLszTgSX1cn1y3C=QHuVfvVr4486ezaFAL4pmdPAvi6m==Lcg@mail.gmail.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
- howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
- svSoH4WcApYNqvB3rcMtJIna+HUhx8xOk+XCfyKJDnrSuKgx0Svj446qgM5fe7RyFOlGX/wF
- Ae63Hs0RkFo3I/+hLLJP6kwPnOEo3lkvzm3FMMy0D9VxT9e6Y3afe1UTQuhkg8PbABxhowzj
- SEnl0ICoqpBqqROV/w1fOlPrm4WSNlZJunYV4gTEustZf8j9FWncn3QzRhnQOSuzTPFbsbH5
- WVxwDvgHLRTmBuMw1sqvCc7CofjsD1XM9bP3HOBwCxKaTyOxbPJh3D4AdD1u+cF/lj9Fj255
- Es9aATHPvoDQmOzyyRNTQzupN8UtZ+/tB4mhgxWzorpbdItaSXWgdDPDtssJIC+d5+hskys8
- B3jbv86lyM+4jh2URpnL1gqOPwnaf1zm/7sqoN3r64cml94q68jfY4lNTwjA/SnaS1DE9XXa
- XQlkhHgjSLyRjjsMsz+2A4otRLrBbumEUtSMlPfhTi8xUsj9ZfPIUz3fji8vmxZG/Da6jx/c
- a0UQdFFCL4Ay/EMSoGbQouzhC69OQLWNH3rMQbBvrRbiMJbEZwARAQABzSlNaWNoYWwgU2lt
- ZWsgKEFNRCkgPG1pY2hhbC5zaW1la0BhbWQuY29tPsLBlAQTAQgAPgIbAwULCQgHAgYVCgkI
- CwIEFgIDAQIeAQIXgBYhBGc1DJv1zO6bU2Q1ajd8fyH+PR+RBQJkK9VOBQkWf4AXAAoJEDd8
- fyH+PR+ROzEP/1IFM7J4Y58SKuvdWDddIvc7JXcal5DpUtMdpuV+ZiHSOgBQRqvwH4CVBK7p
- ktDCWQAoWCg0KhdGyBjfyVVpm+Gw4DkZovcvMGUlvY5p5w8XxTE5Xx+cj/iDnj83+gy+0Oyz
- VFU9pew9rnT5YjSRFNOmL2dsorxoT1DWuasDUyitGy9iBegj7vtyAsvEObbGiFcKYSjvurkm
- MaJ/AwuJehZouKVfWPY/i4UNsDVbQP6iwO8jgPy3pwjt4ztZrl3qs1gV1F4Zrak1k6qoDP5h
- 19Q5XBVtq4VSS4uLKjofVxrw0J+sHHeTNa3Qgk9nXJEvH2s2JpX82an7U6ccJSdNLYbogQAS
- BW60bxq6hWEY/afbT+tepEsXepa0y04NjFccFsbECQ4DA3cdA34sFGupUy5h5la/eEf3/8Kd
- BYcDd+aoxWliMVmL3DudM0Fuj9Hqt7JJAaA0Kt3pwJYwzecl/noK7kFhWiKcJULXEbi3Yf/Y
- pwCf691kBfrbbP9uDmgm4ZbWIT5WUptt3ziYOWx9SSvaZP5MExlXF4z+/KfZAeJBpZ95Gwm+
- FD8WKYjJChMtTfd1VjC4oyFLDUMTvYq77ABkPeKB/WmiAoqMbGx+xQWxW113wZikDy+6WoCS
- MPXfgMPWpkIUnvTIpF+m1Nyerqf71fiA1W8l0oFmtCF5oTMkzsFNBFFuvDEBEACXqiX5h4IA
- 03fJOwh+82aQWeHVAEDpjDzK5hSSJZDE55KP8br1FZrgrjvQ9Ma7thSu1mbr+ydeIqoO1/iM
- fZA+DDPpvo6kscjep11bNhVa0JpHhwnMfHNTSHDMq9OXL9ZZpku/+OXtapISzIH336p4ZUUB
- 5asad8Ux70g4gmI92eLWBzFFdlyR4g1Vis511Nn481lsDO9LZhKyWelbif7FKKv4p3FRPSbB
- vEgh71V3NDCPlJJoiHiYaS8IN3uasV/S1+cxVbwz2WcUEZCpeHcY2qsQAEqp4GM7PF2G6gtz
- IOBUMk7fjku1mzlx4zP7uj87LGJTOAxQUJ1HHlx3Li+xu2oF9Vv101/fsCmptAAUMo7KiJgP
- Lu8TsP1migoOoSbGUMR0jQpUcKF2L2jaNVS6updvNjbRmFojK2y6A/Bc6WAKhtdv8/e0/Zby
- iVA7/EN5phZ1GugMJxOLHJ1eqw7DQ5CHcSQ5bOx0Yjmhg4PT6pbW3mB1w+ClAnxhAbyMsfBn
- XxvvcjWIPnBVlB2Z0YH/gizMDdM0Sa/HIz+q7JR7XkGL4MYeAM15m6O7hkCJcoFV7LMzkNKk
- OiCZ3E0JYDsMXvmh3S4EVWAG+buA+9beElCmXDcXPI4PinMPqpwmLNcEhPVMQfvAYRqQp2fg
- 1vTEyK58Ms+0a9L1k5MvvbFg9QARAQABwsF8BBgBCAAmAhsMFiEEZzUMm/XM7ptTZDVqN3x/
- If49H5EFAmQr1YsFCRZ/gFoACgkQN3x/If49H5H6BQ//TqDpfCh7Fa5v227mDISwU1VgOPFK
- eo/+4fF/KNtAtU/VYmBrwT/N6clBxjJYY1i60ekFfAEsCb+vAr1W9geYYpuA+lgR3/BOkHlJ
- eHf4Ez3D71GnqROIXsObFSFfZWGEgBtHBZ694hKwFmIVCg+lqeMV9nPQKlvfx2n+/lDkspGi
- epDwFUdfJLHOYxFZMQsFtKJX4fBiY85/U4X2xSp02DxQZj/N2lc9OFrKmFJHXJi9vQCkJdIj
- S6nuJlvWj/MZKud5QhlfZQsixT9wCeOa6Vgcd4vCzZuptx8gY9FDgb27RQxh/b1ZHalO1h3z
- kXyouA6Kf54Tv6ab7M/fhNqznnmSvWvQ4EWeh8gddpzHKk8ixw9INBWkGXzqSPOztlJbFiQ3
- YPi6o9Pw/IxdQJ9UZ8eCjvIMpXb4q9cZpRLT/BkD4ttpNxma1CUVljkF4DuGydxbQNvJFBK8
- ywyA0qgv+Mu+4r/Z2iQzoOgE1SymrNSDyC7u0RzmSnyqaQnZ3uj7OzRkq0fMmMbbrIvQYDS/
- y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
- l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
- 3i3l5DA=
-In-Reply-To: <CAFLszTgSX1cn1y3C=QHuVfvVr4486ezaFAL4pmdPAvi6m==Lcg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0102CA0032.eurprd01.prod.exchangelabs.com
- (2603:10a6:802::45) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1730710361; x=1731315161; i=xypron.glpk@gmx.de;
+ bh=KXXN0GndOxtVhEmGAAtI8x6gSlM18ciNvlXbXRpAESs=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=hPPZPjDgFF62wPXpKNki0weUQNchFom6uymCXRCRIGHjbHhsbuHanjSETBjwclqK
+ sWRMNzKIV+/cwO+ShHaa/wKRAxIVkqcnnHLIUDudwSwBWfpTLJBLBK7+VXlhPX5rE
+ 7/iDyznwTTJtbnFGFN/ktY1HGx6Yc8rrb52R3MF4raq2+F6CZJYX4DzfhkusFlj98
+ Ae/etxLFJjx3DofsAhvcSz/EYMkgJ6m7IM3jh+Ys69o8vp4/yugUi2fRaK4ThL85r
+ yYerE2+JUynzBrvFYAqvCZBZU2ABDuc71CU19hPpVuA3RQ/JMCEG5ncaiPahI3Vnp
+ 0dLpv+O37n1pHGJshw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M4axg-1t9XFn1FaQ-005IZF; Mon, 04
+ Nov 2024 09:52:41 +0100
+Message-ID: <4acd02a1-3c37-42a4-a1d8-a1bcec07ac66@gmx.de>
+Date: Mon, 4 Nov 2024 09:52:40 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS7PR12MB5790:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7dbc9fcb-3868-4a94-39b8-08dcfcab4496
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|7416014|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dyttY3NqV2lhYWpJMndBQzhNZFljSDM4dFJuSHg4RlhXUS83MUJCaEZEUmVD?=
- =?utf-8?B?T29KeDhjeXdBaFJRRDVWb0RZQUkyemJRZTdsL2FKN0ZUVCtXTVJicWk2eEhU?=
- =?utf-8?B?enBSQzJsQVJZQ3B1S3EyQmdwNE9TVG1XbXgrcVNOWE8zb2xPUHJDRHAvMmNC?=
- =?utf-8?B?WUhhb3dCRWRaM3pwN0dBKzN3Y0ZhY1QwRlJMTjdkSHpzK050bTlkSSsybVdu?=
- =?utf-8?B?c1RPNkJzckE1QUQ0UFlRUnRmRWxlY2d3Rm9Cb2MwSEN2UEFHdzIyT1VlRjB5?=
- =?utf-8?B?Y296ZjlwMGZ0UzNhZzJubXJxbG9oZG1uUDk3dG5LT2dhRE9JdndSNVNvZTZx?=
- =?utf-8?B?Mm4yTEsrVStOQllJdEhPeUJDejVlN2h1K21oTXJEbGQ1OUNlSVJMaVE5UzhY?=
- =?utf-8?B?NGlnY2pBSmhRTlFOZS9wdFRlaDZlQ1JqZHh6OFRaV2RNQ3ZaQnNWMGN6Z3Ri?=
- =?utf-8?B?MjFyd3JmZVNmOTRTTk03Q3VINVB3TFZNN2E5OCtWVjNxaGNEdXdZWEozZzJn?=
- =?utf-8?B?aFc4WU0yamRUY1pqemVSV1YyM2JJWThaMGZDN1l1QzFwOFkxa3JCMzUyMWpm?=
- =?utf-8?B?cFJXZ0dQV3dId1Vlblg3cG5xQURpYUxhWllZamo2Sk5DS1NwZzFpS0RiNTJU?=
- =?utf-8?B?SVR1bnNHbFY2SHg3UnZ6QnpMVCtjV3kySU9zL1F0YnBoRXNFR0UwMjY0cENr?=
- =?utf-8?B?UXhQNXNOalBaL2dSSTRRa0p2NVBTaUZNK0ZJcDBoQjBiZ0g4Zzk3UHFTakFK?=
- =?utf-8?B?RDFRb2lVTHZVTGRrUnZxRlVyd3hFWGhyV1hDSnpKWWExN2RDdEplR0NhMWxU?=
- =?utf-8?B?RlR2bitoYlBrN0hHRWxOWk8ySytYMmNRdlNFM2FNaDVrbUV3U3dPNWVHUU5x?=
- =?utf-8?B?dlV1SU5lWWw0QkFSeUFML09Wb3VYa3Y0OTdJOFpHcHBKMkxublR4dkJCd2Rl?=
- =?utf-8?B?NHJQM1N1OXlBVnpLNTNTeldmRlhlbElmd3Y1aHgwSVdENUlpNHVuYXc3Q3Nn?=
- =?utf-8?B?cDB4dDNHTnI4MVBBSzd3dDQyckpJdlBLRzU0Z1U5OHhiUjFRRnhMODRQZkgx?=
- =?utf-8?B?NDJlbnBQUlBPOXNDcGNRcGRkcHFIT0hna2lzTDliTE5VMGxhSEpRYS8xeTdE?=
- =?utf-8?B?dnZiUEczdzh3Rk0rMWR1ZmdGS1VSdXBXYjNtOGY2Q25pbnRZSGVtRUprME1y?=
- =?utf-8?B?TWt1NTBaZ1FveC9oN2Fsd0NXQnJ3L1JwSlZMU3ljckoxUU9LSmNPMDBhcER3?=
- =?utf-8?B?ZHFwZXZQa0JoYlhzTkNlNTBuUjJWcnk2L1l5eEtUc1ZjVFdYcjRCcEpvNWZ2?=
- =?utf-8?B?UEZnOUZuYVc1RDZXNVk3MldRRjJndHZ6anlmS3ZBTDBqVlJzY05YQ1hMT3FH?=
- =?utf-8?B?NCtPSjZiYXduTnlEZElEcWMyUnMrbHNWVHVDNmYwaEhHY0JCaFlWY0hQSHNS?=
- =?utf-8?B?SHJ3bmxjMHl6VkhGWGpxQWdmQytBbjhpejRvN0tlNXRET2FSYVdUVE1pV1RH?=
- =?utf-8?B?dkxUMHU3UVljUGVLbTBrTDBKQUZUb1ZPbEFVRlQxVEUwd2JMc3JVcXV6Slhj?=
- =?utf-8?B?eXNNRHFQRU5mbDBCcjJNUDV1eVhUSC9jV2RkckF2d1RhQStqTGNmTUowQUZt?=
- =?utf-8?B?dmlQdGFpbUFJdkxZd2NScDFScnViMko3eVBHa1dJcHE0WWxOWEpkNXJ2alA4?=
- =?utf-8?B?SG9HdGFFYzVYYndUVFlaUjB3QVpLRnQxanA4bDUwVkZMNHAvTTlscEROVCtP?=
- =?utf-8?Q?rJnZnaERaBeKcXAcJArGyVTRYJcbJhdGnWN8D4F?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(7416014)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SGkzK1hWaFJ1VWhHMDVOWUJ5R05sM3ZOOC9wd2VyQnFBSzVmU21CUk9PdXRZ?=
- =?utf-8?B?cU5XR1NtZ0NlTmMrNDVSeDJLd1VVQ0d5b2p0N25vNUJEZGIyUllhM0VpT0NF?=
- =?utf-8?B?S0IwUTEvajNhRmpWeHNwdXVxb1liYlZoNWRXZUt6L2tOTm54MUlsc0c4SkZz?=
- =?utf-8?B?NzIwd0VDbDJHTTRIVUFLTU5QOVhkWnpYMDJJNE92SE8wWmxxalYzcVc0OURH?=
- =?utf-8?B?anlGekV1MzlyVlRVbzNlaUNRN1pUQ3JQMkZvZ1N4S2NtWTB3YWs3VGs2V0xi?=
- =?utf-8?B?Um9KdElqR0hRVUZuSzIyTU44TmhyUDFWL2JMbFpDazhJajIzQ3BheUJHOEpp?=
- =?utf-8?B?bGVmZmo0MitGVTl4TEZyM01QbFl6Z2IzRzRyazQ0akJoOFJjZEJOakpZQkxh?=
- =?utf-8?B?eDhVbEhpNngxVmhSTWxQUitvYk1SWWVOQzlLWVdsTFpzd21zTmVzZVI3dHZy?=
- =?utf-8?B?VFgrdml3WTJ1Ni9NaGFwLzZKL0Z6MTNRMVlyNTBvTHdBU1djTFpXdGFyRkdD?=
- =?utf-8?B?N0hGSy9SbWNmOTNWa1ovdENVdWpsZE1LS0tSa0xwRnBGUy91RE1jZHhNcDdJ?=
- =?utf-8?B?ZzgwM0ZmQUg0VTU2TGRhWUQwNXFnRUFlNXFwNUlVTytSMklBRXNMMkkyUVpT?=
- =?utf-8?B?NGtqWXRkQm5KazJiSzdYZWZTV2hISFNGOUVNWWI4THBjK1M2WEpaUVFtc0pB?=
- =?utf-8?B?N2JNSVJuREorRWlIdkpBQUNTeFBoT3NwOUI2dkk1SC9hdkpUNXk0eDRCK3FD?=
- =?utf-8?B?aEl5ZHorNjYrZWZqbkV0ZE1sL3NKdXhBQjVwbllwWVRHb3QrOEFZUVR3Ymc2?=
- =?utf-8?B?Z3J3L3BZejRlVERQQ041TWg2REU4dzlBRFRORk1GaGZ6S1cxV0ZYYVB1RlBQ?=
- =?utf-8?B?eUhsSFpFV00wMmgxRFc2VWJYYk55dnlvd1g5MUZhK3ErbWQ1cjJxVktVMjY1?=
- =?utf-8?B?UFRXWEdFVHhqbUk2QWxGWDI1SWVkNko3Y0lVbWw4cGZCc0FKSEtCcUltaVAv?=
- =?utf-8?B?Z2xKUzRLSi9tSzlVOW0rb0pGYWFwVzhKTU1QQm9ONU5hR2o5OHdZREVoT1Q5?=
- =?utf-8?B?VHArdVo4L1BpZDIwQm1lTmwvNzRmSU5lUVUrQnB2Q0JhNDA2THB6WUE0UU82?=
- =?utf-8?B?dS81WXNvVG9tUmwrdXprQlJWMDJmQXZIa3YvcFNHNTAxSThYK3JJS0NaTHJS?=
- =?utf-8?B?cFp1cXhnYXpQVkpsL0JYRkVFaUVsQXIyR2YzR3ZmOS9qcTRFK0Y2My9nRkcy?=
- =?utf-8?B?T2NPUkx6dWpHQk1xczNKV2ZCMWc4VlBlN2NpTjRtT3hENW0xSlkyTnE1eFlU?=
- =?utf-8?B?RHNIbHZLajlzWDR4L0xVbjI3SnJoSDhTZTlNWDdaRy9lS2ZPeDlhTWtJdkVu?=
- =?utf-8?B?bzBISHZSQlNwMzQ5VHlGQ2NFZXo1Q3VNU0dFd2d6RVBEcHY5dHNMSTBWVWt2?=
- =?utf-8?B?eUZ4dUJzYXRZSFFDQmFiUDlIM1poUHgvRGdNVnBrQVVZL3Yxck5ubHp4aGwz?=
- =?utf-8?B?bmRXWEsxYWJkTW5Ia1UzT21uSlVQa09lY2dPRzZLYXcxQjJTbVZkSC9SbC84?=
- =?utf-8?B?Ym1tQ0xCM3QzUzhYUTQyekNjQXFoeG0rZkxNNVNOWG5JUkJMbEV1SzFMNGUr?=
- =?utf-8?B?NHpIcG9YNVF5SXdsREhLRDNRRHZRdXlZdWZvREhiZk9xZ29ibmJoQVRKekti?=
- =?utf-8?B?NEFJNXF3TTdCNFIycGNiS2Q5bkZNK01UY3pnaW9RNnlyZWdUVWJCWC85REt1?=
- =?utf-8?B?eTdWWWZCcWFDZGZ6YmFJeUhJR3AyYlB5dVhUSWM3dzlGeFh6Q28yZjJlbWFs?=
- =?utf-8?B?ZFNUNHpDTDhWSlB0MldBVVBYdFl3OGJHSFgzZVRsYytibU8yWTBBY1RDZFhS?=
- =?utf-8?B?VkVmSG9CMlVKZUlRa0IxQmxiTWxoanIzeHppcjZ4U3UzMVRyYkRSVE1Qckdj?=
- =?utf-8?B?dzdmRkdIbVZhWnVQTzBBNk1SY0V3WWJTdENUUWhacWZVRHFWNWdzWEVTVTMx?=
- =?utf-8?B?VzVpNmhLZDBGUmhOaDNHY0VlSTczUnR1TXI2LytvdS9YYVp0SVNKKy9rTkVq?=
- =?utf-8?B?V1U3VC9KeXV2M3JPM2xkbjVCOGlJV3J5SDNyWFFOVmhtRmk5ZW1LOGMwY0Nh?=
- =?utf-8?Q?tHFXd2r7xKEVAXTu4FPSCxSLA?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7dbc9fcb-3868-4a94-39b8-08dcfcab4496
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2024 08:32:50.2981 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: h4xgleyezGE+RS7s0nPB74VIwU0FxyKmpgmLBy8NHhJ0/A5XiWACLj6O0HBgn1hW
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5790
+User-Agent: Mozilla Thunderbird
+Subject: Re: Please pull u-boot-dm
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <CAFLszTj16p8-H1J349FoLowzpO7SNfdwELEDyDmi=U9+gZiCbw@mail.gmail.com>
+Content-Language: en-US
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAFLszTj16p8-H1J349FoLowzpO7SNfdwELEDyDmi=U9+gZiCbw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:ikLAAHvlM1hrs1/UNDbL9CE8qF1m1KaOkCrS1MzJTJWzUWcoUnu
+ pQv8QJkuRZm/8SWgSNh/b1DXGzzUPGdkf9fvKZRUYdGn8YmyZMsj8sxavz1oSaWBqhIwfpS
+ q6UQAzjew+CDuxoUDR6IC9Z8hX5vW7Feu14oZaLwYZbRFnnq57Nk2yeSbnu1f2fitEXp15B
+ /+M4WKtOVf2+ysKliLrYA==
+UI-OutboundReport: notjunk:1;M01:P0:SLzj7GPjIbc=;KlA6nbt5b1gcFkZ0p1fzDwfZd3W
+ YP50GnSGwOZF47k9betRr/xTDhqFz8Tc84m1kp8PSSzQkezHEuz3njn+xm0vVIemTDcpsnd9x
+ 5SO1TSwazkzVQs0gnuZ0ewCYtDydJ4wmH46jc2NIibSIp8cTN6vMuE7Cxx0MTSpTPGqcT7JLt
+ udvRkI03yQczhbkH7m9huVusnOzKaUFcsuJfK3fV7vMNfxJjxmFrF0yVIubG1nSddvlw5Z5iG
+ gL7slh3s9Zzslp15sw7cz5kVx2cPX8LBu5CGSS2YmtdqodwnGdsQ13Bq/3kEqluRduRIDX/BG
+ u/EAW9Eo5uhVx3hCOOayQx7eDJAsjOMqOet0hEp8V8URxJJDLKkFR4Rr8s7fNwzCdfDI6TJxU
+ Iw5K8p3z+UG7mxII17TmUfXOvaLj8gIm1g0GoiNc4fE0JEQqardMkZ7BhG8MDKQUy3IBqotfc
+ YXWPk33FNf1TZmP+ZgnUoBnwUqN7qol2UgrB9xekpF46ThF0KRFSJnrN/IJmzGncgztNExAPF
+ CJD1uZzkMLNfgYMjz/wff5qdLu90lzQfthY3bWViZTr350Y/LYsrYUsLVIKirM758pjsPg8we
+ nIN0lgMbE9oAH3r+Prrm/j5M+/IBjPh35W29W2ap1/Uham1RvBR/HIauILRl7qedOOwiKN2rd
+ fHUFJakiiC2mmGgiB8y8TzxCSzH5gH5+YfTR5J2nq2XwzOrPjD9HhtNg8XLoKSg987C/kL8Q1
+ +7kpj6Cgc6X+S//m50woE7eWmXIIYAi3ljdPpT9SvzkKtmBIEXANWFJeJrc8pN6D5YfV/zpSm
+ vJBcvbiWBUZuLHq35Pt4yMDw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -226,107 +89,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On 11/3/24 15:47, Simon Glass wrote:
+> Hi Tom,
+>
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/23152
+> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D71&view=
+=3Dresults
+>
+> The following changes since commit e61ea9f2e5d2967826c2c6e3edba961064fbb=
+aa1:
+>
+>    mtd: spi-nor: Guard SPI_STACKED_PARALLEL with DM_SPI check
+> (2024-10-31 13:34:29 -0600)
+>
+> are available in the Git repository at:
+>
+>    git://git.denx.de/u-boot-dm.git tags/dm-pull-2nov24
+>
+> for you to fetch changes up to 572b7b0255f9f33002ce7d2a8b2bac30ab49a48e:
+>
+>    sandbox: Fix comment for nomap_sysmem() function (2024-11-02 16:14:55=
+ -0600)
+>
+> ----------------------------------------------------------------
+> alist enhancements and fixes
+> minor test and sandbox fixes
+> some more x86/coreboot patches
+>
+> ----------------------------------------------------------------
+> Jonas Karlman (1):
+>        bootstage: Do not sort records
+>
+> Simon Glass (27):
+>        alist: Mention the error condition in alist_add_placeholder()
+>        alist: Add a comment for alist_init_struct()
+>        alist: Expand the comment for alist_get()
+>        alist: Add a way to get the next element
+>        alist: Add for-loop helpers
+>        alist: Add a function to empty the list
+>        alist: Add a way to efficiently filter an alist
+>        alist: Add maintainer
+>        dm: core: Add a function to see if a device exists
+>        test: boot: Use a consistent name for the script bootmeth
+>        test: Expand implementation of ut_list_has_dm_tests()
+>        test: Drop the duplicate line in setup_bootmenu_image()
+>        test: boot: Update bootflow_iter() for console checking
+>        bootstd: cros: Correct the x86-setup address
+>        bootstd: Avoid showing an invalid buffer address
+>        x86: coreboot: Add a test for cbsysinfo command
+>        x86: coreboot: Show the option table
+>        x86: coreboot: Enable support for the configuration editor
+>        x86: coreboot: Add a command to check and update CMOS RAM
+>        x86: coreboot: Allow building an expo for editing CMOS config
+>        log: Add a new category for tests
+>        test: Allow saving and restoring the bloblist
+>        bloblist: test: Mark tests with UTF_BLOBLIST
+>        sandbox: Convert sb command to use new macro
+>        doc: sandbox: Add docs for the sb command
 
-On 11/2/24 17:28, Simon Glass wrote:
-> Hi Michal,
-> 
-> On Fri, 1 Nov 2024 at 14:52, Tom Rini <trini@konsulko.com> wrote:
->>
->> On Fri, Nov 01, 2024 at 02:09:38PM +0100, Michal Simek wrote:
->>> Hi Simon,
->>>
->>> On 11/1/24 09:27, Michal Simek wrote:
->>>>
->>>>
->>>> On 10/31/24 19:03, Simon Glass wrote:
->>>>> Hi Michal,
->>>>>
->>>>> On Wed, 9 Oct 2024 at 10:33, Michal Simek <michal.simek@amd.com> wrote:
->>>>>>
->>>>>> There is necessary to do some steps to compose boot images. These steps
->>>>>> were in scripts in layers for a while. That's why introduce description via
->>>>>> binman to simplify wiring and remove all scripting around.
->>>>>> This should make sure that everybody is up2date with the latest versions.
->>>>>>
->>>>>> The first step is to create fit image with DTBs with descriptions in
->>>>>> configuration node which is written as regular expression to match all SOM
->>>>>> versions.
->>>>>> Description is there for k24 and k26 in spite of low level psu_init
->>>>>> configuration is different. The reason is that it goes to u-boot.itb image
->>>>>> which is the same for k24 and k26.
->>>>>> u-boot.itb is another image which is generated. It is normally generated
->>>>>> via arch/arm/mach-zynqmp/mkimage_fit_atf.sh but this script is supposed to
->>>>>> be deprecated.
->>>>>> FIT image by purpose is using 64bit addresses to have default option to
->>>>>> move images to high DDR (above 4GB). TF-A and TEE are optional components
->>>>>> but in the most cases TF-A is present all the time and TEE(OP-TEE) is used
->>>>>> by some configurations too.
->>>>>>
->>>>>> 3rd generated image is boot.bin with updated user field which contains
->>>>>> version number. This image can be used with updated Image Selector
->>>>>> which supports A/B update mechanisms with rollback protection.
->>>>>>
->>>>>> 4th image is image.bin which binary file which contains boot.bin and
->>>>>> u-boot.itb together and can be programmed via origin Image Selector.
->>>>>> This image can be also used for creating one capsule which contains both
->>>>>> boot images (in SPL boot flow).
->>>>>>
->>>>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
->>>>>> ---
->>>>>>
->>>>>> Currently I have this for testing purpose only to find missing bits and
->>>>>> pieces in binman for cases I want to support.
->>>>>>
->>>>>> This patch depends on
->>>>>> https://lore.kernel.org/r/ fbed0251437b61a2f7a85596d7403b5b9c8237c1.1728306322.git.michal.simek@amd.com
->>>>>>
->>>>>> ---
->>>>>>    arch/arm/dts/Makefile                |   1 +
->>>>>>    arch/arm/dts/zynqmp-som-binman.dts   | 224 +++++++++++++++++++++++++++
->>>>>>    arch/arm/mach-zynqmp/Kconfig         |  17 ++
->>>>>>    configs/xilinx_zynqmp_kria_defconfig |   2 +
->>>>>>    4 files changed, 244 insertions(+)
->>>>>>    create mode 100644 arch/arm/dts/zynqmp-som-binman.dts
->>>>>
->>>>> I'm pleased to see this. My only suggestion is to use '/bits/ 64'
->>>>> instead of the macros, for 64-bit values.
->>>>
->>>> When I was playing with it some time ago it didn't work but it works now
->>>> that's why no issue with it.
->>>
->>> One more thing on this one. I pretty much dislike that images are generated
->>> to u-boot root folder. Isn't there a way that they will be written to
->>> separate folder (deploy for example)?
->>
->> Or perhaps $(obj) ?
-> 
-> Yes $(obj) is where they end up today. I consider output files from
-> binman to be on the same level as other files created by the build.
-> Then again, it does end up a bit of a mess, when mixed with the output
-> files.
+Hello Simon,
 
-Some cleanup would be good. I remember a lot of discussion about if people 
-should be using u-boot or u-boot.elf. Answer was simple but if output images are 
-in separate folder it would IMHO better to understand.
+as described in
+https://lore.kernel.org/u-boot/47ada0aa-97fe-4c0a-a662-4b184175a17f@gmx.de=
+/T/#u
+sent after the pull request there are some issues with the documentation.
 
-> I am not keen on 'deploy' as it nothing is being deployed - also it
-> sounds like a satellite or military attack.
+Will you send a follow up patch?
 
-No problem with different name.
+Best regards
 
-> 
-> One long-standing issue is that intermediate files are created in the
-> same directory. Perhaps we could put those in a binman-tmp directory?
-> They are necessary when things go wrong, but don't need to be used all
-> the time.
+Heinrich
 
-+1
 
-But I think we should try to move also that images which users should be using 
-to separate folder completely. Again it doesn't need to be done by default but a 
-way to configure it would be good.
-
-Thanks,
-Michal
+>        sandbox: Add a way to show the sandbox memory-mapping
+>        sandbox: Fix comment for nomap_sysmem() function
+>
+>   MAINTAINERS                       |   7 ++
+>   arch/sandbox/cpu/cpu.c            |  13 +++
+>   arch/sandbox/include/asm/cpu.h    |   3 +
+>   arch/sandbox/include/asm/io.h     |   2 +-
+>   arch/x86/dts/coreboot.dts         |   7 ++
+>   boot/Makefile                     |   3 +
+>   boot/expo_build_cb.c              | 245
+> ++++++++++++++++++++++++++++++++++++++++++++++++++++
+>   cmd/Kconfig                       |  11 +++
+>   cmd/bootflow.c                    |   9 +-
+>   cmd/cedit.c                       |  28 ++++++
+>   cmd/sb.c                          |  42 ++++-----
+>   cmd/x86/Makefile                  |   1 +
+>   cmd/x86/cbcmos.c                  | 139 ++++++++++++++++++++++++++++++
+>   cmd/x86/cbsysinfo.c               |  73 +++++++++++++++-
+>   common/bootstage.c                |  12 +--
+>   common/log.c                      |   1 +
+>   configs/coreboot64_defconfig      |   2 +
+>   configs/coreboot_defconfig        |   2 +
+>   doc/board/coreboot/coreboot.rst   |   6 ++
+>   doc/develop/cedit.rst             |   2 +-
+>   doc/usage/cmd/cbcmos.rst          |  45 ++++++++++
+>   doc/usage/cmd/cbsysinfo.rst       |  99 +++++++++++++++++++++
+>   doc/usage/cmd/cedit.rst           |  76 ++++++++++++++++
+>   doc/usage/cmd/sb.rst              |  79 +++++++++++++++++
+>   doc/usage/index.rst               |   2 +
+>   drivers/core/uclass.c             |  11 +++
+>   include/alist.h                   | 139 +++++++++++++++++++++++++++++-
+>   include/asm-generic/global_data.h |   2 +
+>   include/dm/uclass.h               |  11 +++
+>   include/expo.h                    |   8 ++
+>   include/log.h                     |   2 +
+>   include/test/test.h               |   3 +
+>   lib/alist.c                       |  41 +++++++++
+>   test/bloblist.c                   |  28 +++---
+>   test/boot/bootflow.c              |   4 +-
+>   test/cmd/Makefile                 |   1 +
+>   test/cmd/coreboot.c               | 119 +++++++++++++++++++++++++
+>   test/dm/core.c                    |  22 +++++
+>   test/lib/alist.c                  | 253
+> ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>   test/py/tests/test_ut.py          |   2 -
+>   test/test-main.c                  |  31 ++++++-
+>   41 files changed, 1521 insertions(+), 65 deletions(-)
+>   create mode 100644 boot/expo_build_cb.c
+>   create mode 100644 cmd/x86/cbcmos.c
+>   create mode 100644 doc/usage/cmd/cbcmos.rst
+>   create mode 100644 doc/usage/cmd/sb.rst
+>   create mode 100644 test/cmd/coreboot.c
+>
+> Regards,
+> Simon
 
