@@ -4,79 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C177D111B3
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 07:29:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F979D111BC
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 08:14:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A988888D5;
-	Mon,  4 Nov 2024 08:29:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=edgeble.ai
+	by phobos.denx.de (Postfix) with ESMTP id 7E1C58914F;
+	Mon,  4 Nov 2024 09:14:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=edgeble-ai.20230601.gappssmtp.com header.i=@edgeble-ai.20230601.gappssmtp.com header.b="pbOVUINQ";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FAB188DA0; Mon,  4 Nov 2024 08:29:32 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1730708061;
+	bh=1hZXgaUO9uQa8E3dkt7rOk3x5KL2Kq/eAFF5wJuua90=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=DXSGCh19OhXz9Z6UQToFPNVQAf/Ia47cXpYNv6L1+6DCuN1ZzkcSaLdVJ8omV3moD
+	 69JDcvtl5aV38MN/rEksqFgPwBADWk7Cj9oZLB5zk7ONfHuQ1dv0TXSbkjw4DdeQbH
+	 g9mzxuaaVW/21gR0h0xrR33xsL/hrWuoVD+srQCgytCggUr9t3D8+eHPWSJqs13ea+
+	 g71BTdl3ZC0wRrSCrbaqnHePCv+1NzwJdiqv3Kb2Fy+xBgTdRpH+L6zjk5pbGqxtjt
+	 bpCMzTwaabbSUb0qP1udoXQqQx//ZbQeap+8Rd/RqIM+UClATCpJ67EEXfK6Ncv4ON
+	 S2N+/zWCw+xYw==
+Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 558478862E
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 08:29:30 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=edgeble.ai
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=jagan@edgeble.ai
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-71815313303so1895648a34.1
- for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 23:29:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=edgeble-ai.20230601.gappssmtp.com; s=20230601; t=1730705369; x=1731310169;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oYocf1Q+UFotIVwgY+C1Cab7vUK0ulvWylTZeFsYp3k=;
- b=pbOVUINQ/fEpscyaMstju0dGfISEjBKG9kYzmMXDq1LsV19y/Q5VbdkWTMw25a9Dk4
- JxGT8AF+fR6UvkcN4kDiP/u6oAiRnfUsbfNKNX0VER+7n2vz4KAd0aiVmO1TjaDOTv2J
- WIxwygYT/DrKNSH3X0veBBA2F5VGlLRzw5grwv+hTXmstwSkwCdqnQFeEepoPtxvqjlg
- HmzT8L9zJRSJXF9bXeKJLh+dP1+8IbJ8Oox2SvM3uMGlt4h00CkQCVCLETezC1isRLSt
- RLTcGvbLQdD18imxSIL7nXW6+Jn5TYvuIlFqFLe+MVQgWYJEkgcpRHoYSo8zHS8j/Dwy
- kD6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730705369; x=1731310169;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oYocf1Q+UFotIVwgY+C1Cab7vUK0ulvWylTZeFsYp3k=;
- b=jnWNQ7//6r+CH2R1z+07BdSuKmtNOrZm7L1u3G6Gwd/vakI/FLy6hlPEI8To57GpdF
- JUwSmaJsabsviWqqN7EB9XULVvWSets2iqRo6HJc4nYU+b1Potp4VWQ45w6Q69J63VyI
- GoafSI7sqrVGVqA4w6ZJTxnPP6ZqtMaM73LgEAE626mqme8/NT4u0DwRxF4K+X/6914e
- gMD3eTide6fvqxSKwTf0/wIViZJFJyg0Od2vgSkMN1iZbt4b10Ef2e9aAKKqKI2jFXWn
- u3nw+6TvYTGi3i7gNpu8ew36Rwp9usZB2FHA6RYFXrSQT1Hbi5JSu9FhrOnIYdXTjRSC
- IiQg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW8R9+6sIpd944vkwDgf5qILveh10RFQ+qEOWa2PEx0N4unHW6xhcw7ucU4JkM53eQi0IJcOxo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmVkcom3keqpY0DCOn1PXiRZlujXA+bq6zh7/04AzdLs/QF6/5
- VKxBU4j+5uFdB7UpBIelfoDFY3HT3Jv9Afdj1knWihSH3GXumNngifBeeW9v3jx/fDBT8xqgggo
- phs4jNmYiODItcYNgRusfFKZHlGZDD7jTd7Tdww==
-X-Google-Smtp-Source: AGHT+IEw+GpmwO4S8H33BZiOtMKOa5pr37n0mtR5Xu/q4w4EQpvWdZXPEssSRK1U2KDoUY3MFdwOzfeit7wJ/RecYnU=
-X-Received: by 2002:a05:6870:b24d:b0:288:57fa:961d with SMTP id
- 586e51a60fabf-29051d7140bmr26542888fac.38.1730705369010; Sun, 03 Nov 2024
- 23:29:29 -0800 (PST)
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 24A6C8914D;
+ Mon,  4 Nov 2024 09:14:20 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1730708060;
+ bh=1hZXgaUO9uQa8E3dkt7rOk3x5KL2Kq/eAFF5wJuua90=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=VGc/uK2dcQP2GlK3sdJZ57QZrRhDr7BRTcsdfGEkLQTqCu4ho+d6IpQtrtf9RHzh0
+ x7rT8d+bUK0C5FZj7+DCVVXjw+lmmt9BQ8WT2F+2wxmUY6mwxov9xP184kkrB60jZA
+ XbwrTpzvB+8eKREgRzQ1js28MvQW1+Qi0/E5/DB8vD2OdBaku49438SHd1VX79q3NE
+ gCQ1i+zdLXugKEHw9HW8CUvnLxc9LVVSVk1rYH+r+kJPAzhLdwiwEX1XFw1/KZPSL1
+ T24dcqooFGt7tvO17fZDC7NFILoXiH00bepyNua+TDdWWYWIs4HnIjTT3+jWHCOXOA
+ 7XGcW82TsNyXA==
+Date: Mon, 4 Nov 2024 09:14:18 +0100
+From: Lukasz Majewski <lukma@denx.de>
+To: Adam Ford <aford173@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@gmail.com>,
+ Mamta Shukla <mamta.shukla@leica-geosystems.com>, u-boot@lists.denx.de,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [Binman] Question regarding SPL symbol offsets generation
+Message-ID: <20241104091418.74acd1f1@wsk>
+In-Reply-To: <CAHCN7xK3-iUUGf20-JxAWfK05-te=sskbdpU4kU8ahy8sfROFg@mail.gmail.com>
+References: <20240808110654.4215b129@wsk>
+ <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
+ <20240815221421.61f64a17@wsk>
+ <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
+ <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
+ <20240828100452.2143873d@wsk>
+ <CAHCN7xLY4FxB4HZLcE0pEZsx7V=dhVokh2Wcrn2Jjf+B+SLCJg@mail.gmail.com>
+ <20240905155402.486a7110@wsk>
+ <CAHCN7x+jLfzMGFUcbAfHr9u_2s3Z=LxN-TNCtbzUUop66p4Rpw@mail.gmail.com>
+ <CAHCN7xK3-iUUGf20-JxAWfK05-te=sskbdpU4kU8ahy8sfROFg@mail.gmail.com>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20241102203746.3631481-1-jonas@kwiboo.se>
- <20241102203746.3631481-3-jonas@kwiboo.se>
-In-Reply-To: <20241102203746.3631481-3-jonas@kwiboo.se>
-From: Jagan Teki <jagan@edgeble.ai>
-Date: Mon, 4 Nov 2024 12:59:17 +0530
-Message-ID: <CA+VMnFwXU+wjji4r-2u=BEAvJSDxmwMgN9Bo_+uwF6QD8kGf+w@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] rockchip: rk3588: Implement checkboard() to print
- SoC variant
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, 
- Dragan Simic <dsimic@manjaro.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; boundary="Sig_/Am80uuNOvIoEO3kXiSD0e_R";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,110 +79,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 3 Nov 2024 at 02:08, Jonas Karlman <jonas@kwiboo.se> wrote:
->
-> Implement checkboard() to print current SoC model used by a board,
-> e.g. one of:
->
->   SoC:   RK3582 v1
->   SoC:   RK3588 v0
->   SoC:   RK3588 v1
->   SoC:   RK3588S v0
->   SoC:   RK3588S v1
->   SoC:   RK3588S2 v1
->
-> when U-Boot proper is running.
->
->   U-Boot 2025.01-rc1 (Nov 02 2024 - 20:19:01 +0000)
->
->   Model: Generic RK3588S/RK3588
->   SoC:   RK3588S2 v1
->   DRAM:  8 GiB
->
-> Information about the SoC model, variant and version is read from OTP.
->
-> Also update rk3588s-u-boot.dtsi to include OTP in U-Boot pre-reloc phase,
-> where checkboard() is called.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
-> v2:
-> - Update commit message
-> - Update code comments
-> - Drop generic-rk3588_defconfig change
-> ---
->  arch/arm/dts/rk3588s-u-boot.dtsi       |  4 ++
->  arch/arm/mach-rockchip/rk3588/rk3588.c | 58 ++++++++++++++++++++++++++
->  2 files changed, 62 insertions(+)
->
-> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi
-b/arch/arm/dts/rk3588s-u-boot.dtsi
-> index 09d8b311cec5..8880d162b11c 100644
-> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-> @@ -69,6 +69,10 @@
->         bootph-all;
->  };
->
-> +&otp {
-> +       bootph-some-ram;
-> +};
-> +
->  &pcfg_pull_down {
->         bootph-all;
->  };
-> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c
-b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> index e2dac2a5b806..f9da7a6f1477 100644
-> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> @@ -4,6 +4,8 @@
->   * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
->   */
->
-> +#include <dm.h>
-> +#include <misc.h>
->  #include <spl.h>
->  #include <asm/armv8/mmu.h>
->  #include <asm/arch-rockchip/bootrom.h>
-> @@ -178,3 +180,59 @@ int arch_cpu_init(void)
->         return 0;
->  }
->  #endif
-> +
-> +#define RK3588_OTP_CPU_CODE_OFFSET             0x02
-> +#define RK3588_OTP_SPECIFICATION_OFFSET                0x06
-> +#define RK3588_OTP_CPU_VERSION_OFFSET          0x1c
-> +
-> +int checkboard(void)
-> +{
-> +       u8 cpu_code[2], specification, package, cpu_version;
-> +       struct udevice *dev;
-> +       char suffix[3];
-> +       int ret;
-> +
-> +       ret = uclass_get_device_by_driver(UCLASS_MISC,
-> +                                         DM_DRIVER_GET(rockchip_otp),
-&dev);
-> +       if (ret) {
-> +               debug("%s: could not find otp device, ret=%d\n",
-__func__, ret);
-> +               return 0;
-> +       }
-> +
-> +       /* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
-> +       ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
-> +       if (ret < 0) {
-> +               debug("%s: could not read cpu-code, ret=%d\n", __func__,
-ret);
-> +               return 0;
-> +       }
-> +
-> +       /* specification: SoC variant, e.g. 0xA for RK3588J and 0x13 for
-RK3588S */
-> +       ret = misc_read(dev, RK3588_OTP_SPECIFICATION_OFFSET,
-&specification, 1);
+--Sig_/Am80uuNOvIoEO3kXiSD0e_R
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Any register to find the operating temperature of the chip?
+Hi Adam,
 
-Jagan.
+> On Sun, Nov 3, 2024 at 7:41=E2=80=AFPM Adam Ford <aford173@gmail.com> wro=
+te:
+> >
+> > On Thu, Sep 5, 2024 at 8:54=E2=80=AFAM Lukasz Majewski <lukma@denx.de>
+> > wrote: =20
+> > >
+> > > Hi Adam,
+> > > =20
+> > > > On Wed, Aug 28, 2024 at 3:04=E2=80=AFAM Lukasz Majewski <lukma@denx=
+.de>
+> > > > wrote: =20
+> > > > >
+> > > > > Hi Simon,
+> > > > > =20
+> > > > > > Hi,
+> > > > > >
+> > > > > > On Tue, 27 Aug 2024 at 12:47, Fabio Estevam
+> > > > > > <festevam@gmail.com> wrote: =20
+> > > > > > >
+> > > > > > > Hi Lukasz,
+> > > > > > >
+> > > > > > > On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski
+> > > > > > > <lukma@denx.de> wrote: =20
+> > > > > > > > Unfortunately not - this change is only for properly
+> > > > > > > > setting start address of the u-boot.
+> > > > > > > >
+> > > > > > > > The _real_ problem here is the symbol placement
+> > > > > > > > generated by binman when we try to define the image as
+> > > > > > > > a single one.
+> > > > > > > >
+> > > > > > > > Moreover, this change follows other boards with imx8mm
+> > > > > > > > processor - ./configs/imx8mm_beacon_fspi_defconfig to be
+> > > > > > > > specific.
+> > > > > > > >
+> > > > > > > > The "fix" (for which I'd been now probably opt) for
+> > > > > > > > this issue would be to generate two images with binman
+> > > > > > > > - one for u-boot-spl-ddr.bin and the final flash.bin
+> > > > > > > > with the former one included (as it was before SHA1:
+> > > > > > > > 37e50627efacd8dae18b564e9d8886a033e181bc) =20
+> > > > > > >
+> > > > > > > Is QSPI boot broken on i.MX8MM?
+> > > > > > >
+> > > > > > > I am adding Adam and Mamta who have tested QSPI booting on
+> > > > > > > imx8mm_beacon and imx8mm_evk, respectively. =20
+> > > > > >
+> > > > > > Note also that I sent a series[1] which allows the
+> > > > > > symbols-base to be adjusted, if that helps. =20
+> > > > >
+> > > > > I've seen them - but not yet tested.
+> > > > >
+> > > > > Thanks Simon for the patch series. =20
+> > > >
+> > > > Is it still broken with this patch series?  I have been
+> > > > traveling and haven't had much time to test. =20
+> > >
+> > > Yes, I can confirm that it is still broken. =20
+> >
+> > Sorry for the delay.  I had to return my 8MM to Beacon, and I was
+> > waiting for a replacement.
+> >
+> > To not prolong it anymore, I decided to try it with an 8M Nano, and
+> > I got a boot failure on master. I was able to successfully boot
+> > 2024.01-rc5, but I haven't had time to bisect it yet.  I'll try to
+> > do that this week.  I think once we can bisect the error, it might
+> > become more apparent. =20
+>=20
+> Git bisect narrowed down the git which broke the build:
+>=20
+> commit 37e50627efacd8dae18b564e9d8886a033e181bc (HEAD)
+> Author: Marek Vasut <marex@denx.de>
+> Date:   Fri Apr 26 01:00:37 2024 +0200
+>=20
+>     ARM: dts: imx: Convert i.MX8M flash.bin image generation to binman
+>=20
+> I am guessing the binman isn't prepending the header stuff.  I'll try
+> to investigate it this week.
+
+This is the problem with adjustments.
+
+I've prepared following fixes for it (but are not upstreamable):
+https://github.com/lmajewski/u-boot/commits/phycore-imx8mm-qspi-nvme
+
+(problem is with wrong offsets assigned -> 0x1000 switch)
+
+Unfortunately, I don't have the HW any more at hand.
+
+>=20
+> adam
+>=20
+> >
+> > adam
+> > =20
+> > >
+> > > I've applied:
+> > > https://patchwork.ozlabs.org/project/uboot/cover/20240826191143.42638=
+7-1-sjg@chromium.org/
+> > >
+> > > on top of mainline:
+> > > SHA1: 1630ff26cc960439b5949b80cfc604a2c8aa47dd
+> > >
+> > > Adding symbols-base =3D <0>; to imx8mm-u-boot.dtsi did not help.
+> > > =20
+> > > >
+> > > > adam =20
+> > > > > =20
+> > > > > >
+> > > > > > Regards,
+> > > > > > Simon
+> > > > > >
+> > > > > > [1]
+> > > > > > https://patchwork.ozlabs.org/project/uboot/list/?series=3D421010
+> > > > > > =20
+> > > > >
+> > > > >
+> > > > >
+> > > > >
+> > > > > Best regards,
+> > > > >
+> > > > > Lukasz Majewski
+> > > > >
+> > > > > --
+> > > > >
+> > > > > DENX Software Engineering GmbH,      Managing Director: Erika
+> > > > > Unter HRB 165235 Munich, Office: Kirchenstr.5, D-82194
+> > > > > Groebenzell, Germany Phone: (+49)-8142-66989-59 Fax:
+> > > > > (+49)-8142-66989-80 Email: lukma@denx.de =20
+> > >
+> > >
+> > >
+> > >
+> > > Best regards,
+> > >
+> > > Lukasz Majewski
+> > >
+> > > --
+> > >
+> > > DENX Software Engineering GmbH,      Managing Director: Erika
+> > > Unter HRB 165235 Munich, Office: Kirchenstr.5, D-82194
+> > > Groebenzell, Germany Phone: (+49)-8142-66989-59 Fax:
+> > > (+49)-8142-66989-80 Email: lukma@denx.de =20
+
+
+
+
+Best regards,
+
+Lukasz Majewski
+
+--
+
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/Am80uuNOvIoEO3kXiSD0e_R
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmcogloACgkQAR8vZIA0
+zr0qXgf+L0GuINJNAVTDKT1q0wevh9S3eT2g/IUTDHkzTZpNzC0P9fWvIS0GYI+m
+adouuDXjoQzQsqeYYNSbBvIkbba8s/lNcVG91NIms8qe496vcQ0B81iV+cuM1yjv
+/1WMTYgfTV12hNn1C0zEqu60PFZz98UW0M3Jlqiza/k4cqorAj0gfULKU7uDoZ06
+s6JxJ3uHVs+aGzuSQQT9VdbfLgMBdkqVwRZ3EsNYM1mej6xouf8Shbyaba0isp6l
+P8WVxgMnpvc83sw5c7k1uuvVfYVyn9WvSYs24lJIrl7kzca/o1r0/dauEgY00cva
+q8o9OoghfTPfu/rImWea4b81d/+1hg==
+=mzsh
+-----END PGP SIGNATURE-----
+
+--Sig_/Am80uuNOvIoEO3kXiSD0e_R--
