@@ -4,166 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8C87D132B5
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 12:39:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 685E7D132BB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 12:47:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54ED588618;
-	Mon,  4 Nov 2024 13:39:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id C107788785;
+	Mon,  4 Nov 2024 13:47:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="JWmIRehq";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="k23jt52Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AFA58855C; Mon,  4 Nov 2024 13:39:24 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20602.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::602])
+ id B9AC58852B; Mon,  4 Nov 2024 09:33:09 +0100 (CET)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20616.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2009::616])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B505E88618
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 13:39:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20B9E88001
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 09:33:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ spf=pass smtp.mailfrom=Brian.Ruley@gehealthcare.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lFgD9yNmIcbSn4YIXvh8wzUCOdUmlan0MvJ1BhEJ/BkBwVouyKl8PTcrBG6miv4F6s1bFhmhhJb568NrqbLmdn3dcGzvI7T0c9fQ4VgjKxyC945beExLMB4i+e8uqk71NwTh/M/m9IIKRONPjdw3ttNZJ6/f8lV2s+EKzVwkRD1EKUcMSFtNG0gh2xTIUEpclksTJWQJZkGBPujxb2fvoCmGVcBY6gMG8/7fr5UyZ1y5iQOGoHRLx9KvIbeEKnxwFZG1GP0ry+QGWdt6gm3hKMRbFNPBM8rd2/1s+mMsim9L5vOG/DIE0WSZLbuj0p5QXgJk/9HItaqQ1mUkh7miLA==
+ b=WuYd1Hg5wrnIHgqMdgqtlyYMdcWx2ImxTxLKP8Snz6vMB9T+RL0qmDm30HWd0v888cxhpHZZOOWXcHYfqD6F+AqB15BkdQEVwyVdAi+VxeBMToKJQ/SYj4vNLh6M/BKmQPVra8koXcR3xvAlB9b8hikSOUAeXGyXSpef1lap6zKMOWogy2Uy1OJHmB0zOqJeJFb52Bc9GKO718B/6NcdOJ0nLyFE2ZUajb0rNPJ+nfkQ3SAWdEoFw7PKiOoZxWjwo1BBJtikMP9ek/+PXloCfeWRAf541mZK7tU0GMdAkrVKXeXpRv9MOY2Xgzt6Cuca62PWL2jvrhKRnvrtGIkMKw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CzEh/QvL7ZpeXD2POXa+ykXwopCkepvXfut1w5yiF4w=;
- b=ocZ0gkAvoSCRjhILTpFjtwhlnLip4hvcjoACxksaPJk00B1ifaSG4WCw58UqK9V5y7/PwsaKBG5R9+vbIrU//wH4PzaWaT2ML6qlrP8LDa7XnK3ycxLFqBJUJDjVDsaLUCFAe6gf0Mx1NkpcxpZ4r8NkDAtstrWEZWQswx1BBhhSZcgCZtNGYDSUnax+obScjRoJTnEQBifMxpiSif7jex0e+RzlPkoixj74THHgMuc8q+kJkdAJ89YTQzH9yDwYgidn+XtDxvaNgdb6NbmQk+UEz+YbOZkgd8UM/tLxxjBApcOC4R4VzwHPnqB8bPPjEFVOWm1H2q95Hblwmu53DQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ bh=um4QsGxy+332SvoYoqBD8avwlQDhus+0pWKnD9EVSn8=;
+ b=yKzBwQ9AwFFlsLOAuNeHSlBEOxMvByC3qtk4GmQbraJhwbxGkRC7ruCS0YmgYYzN8dn0toiz9vor6x8ru8GWnafdlNNsoghVbkSwZnui/SsiqhiflZjgENJ+WpqzOoiBBNa9FRjBhUB9VmfFWESUy3g2sRXlzDMfdvefG5yBujNLhLOSKaBLFfQfC43dBBcfthec17bf0D0dx95GhpvY9UNZsntG9Fcuvsv43hkOJauotqCbDHX+2WyDvR1Ezp2KYztYUOfi2gww7dj9EWLzWgM1Gtyi0qQqqCQRzhJrAjsziAZ1tWQ1qDEwVFV5i6A71XZfb7gwayvBFc2LZ0wJKQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 165.85.157.49) smtp.rcpttodomain=lists.denx.de
+ smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
+ pct=100) action=quarantine header.from=gehealthcare.com; dkim=none (message
+ not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CzEh/QvL7ZpeXD2POXa+ykXwopCkepvXfut1w5yiF4w=;
- b=JWmIRehquxv19OHusuxJfOpHioh1xKP+MabqngljohAAmvcFNZYlj+LPliuWZVSwc4b1VLyUs/uYURGMY48ossYL+gNLkvRfOKGbMhSSKpMYXnd0MQ9WqLuP7wntaElG/NGesdQTiAx/glGBJ5k8AzY3KkzfYYD7lbPqxBmMS2eCTJ5nZtqB/j+e9xRFoPPbiXJ7sYq3XBj4OahJLQMQBM73cVxFZNa9qxQqruvRbGiwYJo4VXdubthpuozbCd/AZy6Ja/x6xDEwwfQ/YWL0hv8TvQh56ibpjy5dRM05kV9pQxVmCYhHhGDGIKmNGFmqUXJeby70U60r3uTdDmheKw==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by GVXPR04MB10898.eurprd04.prod.outlook.com (2603:10a6:150:214::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.28; Mon, 4 Nov
- 2024 12:39:20 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8114.028; Mon, 4 Nov 2024
- 12:39:20 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Marek Vasut <marex@denx.de>, "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Sean Anderson
- <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>, Fabio Estevam
- <festevam@gmail.com>
-CC: dl-uboot-imx <uboot-imx@nxp.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Viorel Suman <viorel.suman@nxp.com>, Alice Guo
- <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>, Ranjani Vaidyanathan
- <ranjani.vaidyanathan@nxp.com>
-Subject: RE: [PATCH 00/17] (no cover subject)
-Thread-Topic: [PATCH 00/17] (no cover subject)
-Thread-Index: AQHbH5urN4RhovOdqEOIzMmfBLzS7rKnFviAgAARKxCAAANGgIAAAFsA
-Date: Mon, 4 Nov 2024 12:39:19 +0000
-Message-ID: <PAXPR04MB8459F3E50519ABEED5C806C688512@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20241016-imx95-v1-0-f640c8f3bc1b@oss.nxp.com>
- <ee6519d5-30cc-485c-b87e-89665066a827@denx.de>
- <PAXPR04MB8459B83D68F7365C5C0B5C2A88512@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <77ef2f17-66b7-4f5c-ab99-4b15f5c1a84d@denx.de>
-In-Reply-To: <77ef2f17-66b7-4f5c-ab99-4b15f5c1a84d@denx.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|GVXPR04MB10898:EE_
-x-ms-office365-filtering-correlation-id: f837283c-48b4-4756-65f1-08dcfccdb421
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?eVNtblJuQVJYSWJNWnBvM3o3Yno2emdoU2xQcFpnS3hSdm14SEsrbEE3Q3JX?=
- =?utf-8?B?aHNCR1lncG0xRjRuYnoxckM4Wkk0VmR0cllDdEdjZHYrZWh0R3JQcml0YVV2?=
- =?utf-8?B?UUVFZUxJQ2hEMGlSQTRQT2pTQTVtRFdDejcxaGNOQWVhYXFXd2pHR3N0UUt6?=
- =?utf-8?B?RnBnb3JrTThQQXR1MEdRbU9Uc1RXcFY3b2tKTUVDN25VNlZ2U3ZLRnRadFh2?=
- =?utf-8?B?WVNQekVGNmJ1cUFERUtHT2YxNURMSnhUT3d6c3NvLytjNkd2d3NFZGRKNG1V?=
- =?utf-8?B?cVQrRXUrbDJWRndDRmZYQWxHV292VkNqVzdSemZPSXV5RlRmTmFzS1B6WVNm?=
- =?utf-8?B?QkI1RThvSnNJR1RXN0oxdHZnVjZvK1M1R21BLzQzSDdHV1l4aWJocVZtNVJz?=
- =?utf-8?B?bXlOMWdjbythcUFYZFdjR3Z3QWJEdXRSQWhvYmZtcnFEa1ZkZm82b3VJb292?=
- =?utf-8?B?Y2tOeDAySDIwWlNVM1hnWmxiTGVkd05Vc0FwM3JKMUxNbUFPUU5DZWxXNnVo?=
- =?utf-8?B?dEFlaWR3c3Vxdnd0SWUrQWE2bWswWGpwUjFoVm1OclJVMUhxdW9ibGJWbVlU?=
- =?utf-8?B?WWtGeERxVSt0cXd4WllHZVNLSDhVYzNVYzFkYlkxZzcvSEVQaFovWFQvUUFr?=
- =?utf-8?B?SFVSS2RvSjBXbDRDdzlYQXQ5akdjTUtVUUxOdWFHK2FVbDVGaTVZZkgyeVV2?=
- =?utf-8?B?Y1ZRMDVOazd5VGNJb1NFdmFpTEFxWDJOK0RoSWs5OENnMUI2NHJhSnhPbHhM?=
- =?utf-8?B?ZkRzb1pZM1BhN3FsQUpROEREdHM1Z3hiZ1p5c1RWdHZxOHk1L0p2SDlJOHNq?=
- =?utf-8?B?cnI0WXRGNlY4MmM4RmN2V3VFWWRtQUh4V1NVS245K3ZNSW9Ia2czNHJ1RVdq?=
- =?utf-8?B?bGxscUxkVE9QVGZKWVd1eDgvRkV3ckhpYW9OQmExUDdFemRMaFNCSlkzVytq?=
- =?utf-8?B?Z05PVHFRQXFhVGlrakM2WUM0Z2hlRFF5eEhEVzNMTVF3cHlDd3dKMWxRWlJK?=
- =?utf-8?B?bUI3ZnA5VXZ5bmhxQVltU3Z2SVJXRy80S1VhcFVSS2hyVFBQNEVJbGNSVXh6?=
- =?utf-8?B?V3ZCdUVlTmJEYllNRHJwejgyZThLNEkycVI1U0U0Wm1iWXFFTiszZTM5M3RF?=
- =?utf-8?B?ZnF6Rjc1R0t5VzJCWTBrZno5Tm9FSWFCdXp2TEZ2MnRSZ3hlQ3RvSHh3Zmd2?=
- =?utf-8?B?djY1M0lmVUh2S3o5Q24wRlR4cWNHdDRrSWtJM3BubHZucWlNanVveGxIcnFw?=
- =?utf-8?B?eExUMURyVmdVWEJDZ2VrR3I4Wm9uVk1ZMys2V1MyamNjbkJqdVE0NmZZdHZG?=
- =?utf-8?B?K1RaREp6eWxBbkpiMzFuUXJSRzZQOVY2ZnMrQUN3OVV2WjREd1NrRG5UOHR5?=
- =?utf-8?B?dXFreWRjbDJRS2poNzRGclNUWkxUNldvYVU0MkRwcnJFUG1jeVF6UG9MZmNJ?=
- =?utf-8?B?TWZpa3pFK0lNTmJwd1AyczBhTnFKcWJFbVZ3cnVaMHRNOThKRGdzd0YvdXJq?=
- =?utf-8?B?Ky9jcGNqSU9XOURkbG8yREtMUzNDVWdRZWRzRXdiY2EvbXIxdjhZc3IxWTJv?=
- =?utf-8?B?VnJVMFU1SWQvNVJvOFBCWVNKbkZ0VklnWk56R1l1dkluZFBneWR1S1NKNGxv?=
- =?utf-8?B?QnVJODlmdHNoZUx0ZnRycEdqeGRDSmkyN21KcE94QytaWnBYaC8vS0VjZHpo?=
- =?utf-8?B?T25nOEZ4YXBIR0cxUWQyd0dOV3Z1ZjR3TzJQblo5alJ1N25oSnNJcHNHeXhW?=
- =?utf-8?B?YlltdnI3OG82d3oyY1JNbVJDSzA2YXU1QmswRkRwTHhxNlZMNTFFZkp3Z3lQ?=
- =?utf-8?Q?Mjkn9B2K7exQqALdsGU2tppH923l4uh6G1zLU=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?MTRUUmNBSWVaZHVTckNuL3FkL2haK2dKUU9kYUtDOVVsbGdYVzBHb2lnOS94?=
- =?utf-8?B?czNCUExiRFkyd3NxbktyQkp4eVZLRHh4aDAxSTlHZVVYeENldUVhQ3hFZlFT?=
- =?utf-8?B?WWtBdElNWFpvK1NiTDZIR0JkTmhMRXh5YmlCZ2pvYXRrTVg5cmJXOHNSc3lW?=
- =?utf-8?B?K0oyVzBVTnhrRmRzQkxQOFF6NVJYT3Z5NFVndWhYTGNMYzFTckdlZ1Y5VjNV?=
- =?utf-8?B?bmhXajV5ajJabjY2SWhnRmI0THpBOExoOEtKcXJ4ZE5DM2FEOFBpZXM1cTJy?=
- =?utf-8?B?djJnQjFzY1RXNWZJZENyb0FodVp4TlUxTGtCdDRBdDNEQzR6d0VrQzNCdFND?=
- =?utf-8?B?aWg3dGZJTXI0MnBhVGJNYnl3bzdmTlZ3RmJaNFNpWXFZeGpzNFBEOUhZWGVF?=
- =?utf-8?B?Y3VFYStwWk1Ja3crK1R0QXZPb0ptcDdxMEFJTzE1Z3VFdWQrdG8zbEQyR1Nl?=
- =?utf-8?B?cnNDeU8vN2VFZkF3NUlXL1F6RElvVGF2M0dqaHpaZms3SGxZZ1lwczV6eDNF?=
- =?utf-8?B?N2N6MWc4NUwxU0tYaVhNaGxLQmZCcG52SUNDenRVRGQrdzM0WVNhUWNFakxO?=
- =?utf-8?B?WTFVQko2dUNvSk9kWWp2N25sZkg1ZkhtbUpWQmU4MmVqT0hKVUJ3QjNMQS9p?=
- =?utf-8?B?M0p6NWE1RHJPU0R1dkx4Mm42a3RhMzJkazJ0RzNQL3BoVitvWU9zZ1BOcCtK?=
- =?utf-8?B?RVpmZzhYcjRhYzdHUGNCVURrMmFOWEk0RjNQdTlwTVZJYnFFU0dxa1BKb1pW?=
- =?utf-8?B?RlBlTWloSkIvQnlvaG1Ka2krV1NSSkpSQmgwcEplTWFhNE5KenRFSnpLYi80?=
- =?utf-8?B?MG1YUDh5Rml0MXV5WThZSUk3OFlmekQ5dGpxRmhWNnpCbHRXOHZ2OTRtZzVR?=
- =?utf-8?B?T1lENGFxNDd0SFhDQ1dVQ3g4bWVvSHVoRXdUWDZaYjYxZStBOHptQThmQ0N2?=
- =?utf-8?B?Wjg3eTZoL2d0V1hmeElWZFoxT3BlcW92NVNRUFlLby9HczZjZk5tbjFVbkFy?=
- =?utf-8?B?Zk9ibkR0ZVBSTFZFaHhONFpMRjNkN200eUx5Vm9XVkMxbVF2NHRhSThGZ2lm?=
- =?utf-8?B?Q2hYdDdOY2M3UUpLVWtCanM4cTFJQmd2d2I5VDRXVE5zOHo3UUdPRmhZK0N1?=
- =?utf-8?B?aVBGSlc1Wk1wUWtoMHM0UkU2bjVMc0lraFJIQTBvakJXVzlLMnlIY0IyWFFm?=
- =?utf-8?B?cEtHcVpWUXI5eUJDdEY5cVFtL200cXZBbTdaM0t4eE5JdnB3Y1lQTXE5dzJl?=
- =?utf-8?B?dSszYkR4TkRzVFRVelF3d1FmNTZvYlhWVlBPb1VUeDRhdnZHb0hhd0VCQlIy?=
- =?utf-8?B?dmdYS3dxMWRYT1RXYkVXY2x4UFZuNlB1VlM3cUdHa2djMS9USStxMHdPNWEx?=
- =?utf-8?B?b3AwWXgvQWJaNk9tejEwU2h4ZmMyNzJqcGQ5U3RNTUxxY2JzR0M2L05tREpF?=
- =?utf-8?B?ZDZwSjFiT1JsMEN5OUhaQ0NqaXR2Z01xd0MxZGVZUllUQ2NOTTNZclFrYUhU?=
- =?utf-8?B?Snh0dkF2M3lwc0RCQkplMG1DdUN5ZmNtWU1jZnhiU0pUOWswaWFSSEZPcm5a?=
- =?utf-8?B?R0dtKzBubHpuc21WMDUzSTgwakgrckFXcUUwM2JDcFFYb2s2QjQxbkZ1aVpK?=
- =?utf-8?B?NTVUUHBFU0tVVzVTOVZiQXcwZkNuMzBROFUxcEczMjl6MHFnVnlHcTNFZ051?=
- =?utf-8?B?Mmw2UWdxMUZaSGFRdnB1VitZR0FXQlU4eEQ5S212RWQ5RnVhTi9sR25ESytC?=
- =?utf-8?B?cThQL0FCSnFWUG1hQmFUUE4veUEramdWeVRaOXk5aklScGpDZGNFb3MvSXgz?=
- =?utf-8?B?b3VkV1dqSTFjaGFaVHJkOXVaM2dpOU9Fd3J5ZEdCWVBvQWJoSWh6MWsrRGVQ?=
- =?utf-8?B?eUNDRjR5Ni8ybXZWTmpNMDkzU25DSFNBQjY2bWZKK0VIT1h4bzJ0RGg2ekll?=
- =?utf-8?B?aGZVQVdtYmY5M0t2akNMdWVFc1RGZDdKakhwN2hoOHYrNVlvS0JUQ294aWxX?=
- =?utf-8?B?NmZlblFxUEhVN2E4Y01ud3FPNlNIN1p3dXhmbWxwMUV5OTNiNmE3MWFGc2tG?=
- =?utf-8?B?Smo3WVZNUlFjdlVlQXVEaVhDdmErSmxJNnFHZE45U0xua09zOEJ5TXorVzAz?=
- =?utf-8?Q?BtLk=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ bh=um4QsGxy+332SvoYoqBD8avwlQDhus+0pWKnD9EVSn8=;
+ b=k23jt52YxCs9r2OBeD8f/Z5sU41CBqLyctk+Pz4rO5gwgxP8aEQqSZKNQZEgsmSFJ4fRr6FOFQ0uLPUBnA/WDo2K08dHoRzqHWRXqEe0PU3hkxzomS/KAq6khFdVhcYnhqCaqkvqZJckjA3x/Ae9EKFLPONBC6B7fWCKoegkCOul7A2OrsF/0F+KFW0XsugOqo/qO8cOMYTYmwzjTOsRg2I0AtWJnoXJhHeJRgX8gez8UfMLnkkjK80A2lAczitj8chzYvzIhm+Dd3W0M3tKAOMIyUT5/I/8O1Yrq9H0k5fmMuxaOQNqETQTVCgNeBB7TB0P6M7GXsVVKyAFA8omtA==
+Received: from BL1P223CA0001.NAMP223.PROD.OUTLOOK.COM (2603:10b6:208:2c4::6)
+ by SA1PR22MB3779.namprd22.prod.outlook.com (2603:10b6:806:325::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.30; Mon, 4 Nov
+ 2024 08:33:03 +0000
+Received: from BL6PEPF0001AB4C.namprd04.prod.outlook.com
+ (2603:10b6:208:2c4:cafe::f6) by BL1P223CA0001.outlook.office365.com
+ (2603:10b6:208:2c4::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.30 via Frontend
+ Transport; Mon, 4 Nov 2024 08:33:03 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
+ smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
+Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
+ not designate 165.85.157.49 as permitted sender)
+ receiver=protection.outlook.com; client-ip=165.85.157.49;
+ helo=atlrelay2.compute.ge-healthcare.net;
+Received: from atlrelay2.compute.ge-healthcare.net (165.85.157.49) by
+ BL6PEPF0001AB4C.mail.protection.outlook.com (10.167.242.70) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8137.17 via Frontend Transport; Mon, 4 Nov 2024 08:33:03 +0000
+Received: from zoo11.em.health.ge.com (unknown [10.168.174.93])
+ by builder1.em.health.ge.com (Postfix) with SMTP id 17CE29D4A2;
+ Mon,  4 Nov 2024 10:33:01 +0200 (EET)
+Date: Mon, 4 Nov 2024 10:33:00 +0200
+From: Brian Ruley <brian.ruley@gehealthcare.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: ian.ray@gehealthcare.com, u-boot@lists.denx.de, sjg@chromium.org
+Subject: Re: [PATCH v4 2/2] binman: expand test coverage to nxp_imx8mcst
+Message-ID: <ZyiGvONusmq03cBO@zoo11.em.health.ge.com>
+References: <20241021073749.63-1-brian.ruley@gehealthcare.com>
+ <20241030080753.129-1-brian.ruley@gehealthcare.com>
+ <20241030080753.129-2-brian.ruley@gehealthcare.com>
+ <CAOMZO5CC683+5_xohQw_F0kuiE9mmL2PqjqHk66A1oUXje=oSQ@mail.gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAOMZO5CC683+5_xohQw_F0kuiE9mmL2PqjqHk66A1oUXje=oSQ@mail.gmail.com>
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4C:EE_|SA1PR22MB3779:EE_
+X-MS-Office365-Filtering-Correlation-Id: b5ce5c75-7905-48be-1426-08dcfcab4c85
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?yyGN3P8noIndPulyrRutLdbOsPpnA/s+kUtPy31zvVzM4JbhCpZft7lXAm5e?=
+ =?us-ascii?Q?pQRYyhMCBeSILMxFO6wh3awHho5FVLgN2rlUxu3glF1HbAVzKx74wIkSUjyu?=
+ =?us-ascii?Q?+puT7yOdQkyUa1ZvC7PXR6HJvgtFZ3Ria2a5NnbYBWFSKiJ75eg4oeIoPFea?=
+ =?us-ascii?Q?bCmPyjVbn3PdGRI9f7ttD2J2LFmFJ1kIjZCluPVqFVN0KOVUzIKyKRMSjLtf?=
+ =?us-ascii?Q?fPpehdCehKByGGBMe6OG4Sj7afYSmDJbLgZ+ZBWOVIpvC9jXi5aqNnEwFDiy?=
+ =?us-ascii?Q?XbJDqeDGak9mU0nrFFkR4rZiK6N8OY9DFO7mjHvLyPDeARWxnGH9OKiMu6Nd?=
+ =?us-ascii?Q?jy3J/W91YuhlDDTPKTz9DglOnQVZiR0sk53qFscZg/MHdHqGhXilZXG1EusO?=
+ =?us-ascii?Q?d5N6AfeREahtQm3oF1F8iJw/j7nUOEbHUBZvrHG1imBeZjttT0+9/9/9ithg?=
+ =?us-ascii?Q?nlf1G2RWWiZwjLV7oQBIRLwbzXaxEF95dLVU3BY2J0T33xd8f0iHjjlPiUWX?=
+ =?us-ascii?Q?yw2n/YIOYVz7CEz2kAqqtK9u5vwXESHbtUEFiH1TsOZmu7/HBJ5SMLDpNyWI?=
+ =?us-ascii?Q?QEZk/LGG8NMnGhn/tJ0wHQK30l1gxj2x4poMskSJhGlc3Ni+ZqYs1beVtqlW?=
+ =?us-ascii?Q?7EOMmZkcQJDCPRRhPBfXO3IUVDYE1g80APJbGuwcewQ3J8+Hk0TWaL9Mhy/M?=
+ =?us-ascii?Q?MQP7bbgzb/QGS7m1OFerch/In8wdrXP1n8c7OZm5ZH9iULtaFYIFrXn9EXbx?=
+ =?us-ascii?Q?QgJmyVrkl61Ms+PIP0KvXohzVFTqm1DeYDAmuJrtQXbpeLR/u/qlnDOdyuJ6?=
+ =?us-ascii?Q?DnI0TiGrn1y8grzdwI+qmNvH6JztxbLuR5XqH9NcrMuiMmfCk8Et2E6bs1tY?=
+ =?us-ascii?Q?tHI1kmXWsiGHi7iE7j9JTgkVLvxrkljmugwB0RqCUg07U0l/8Z3gPEJjmtjk?=
+ =?us-ascii?Q?HzA0hmM1JDGBARIy7HBs2f9miV2+yYUHs7iSKhZYqwNq+4b/suX+vV414jeZ?=
+ =?us-ascii?Q?P80x+oGisMIFW+ryy6EYYLp3DdwAHCYtNrUJNEu1UAaj6w4lZaoMGDgC3nE0?=
+ =?us-ascii?Q?0eDKjyUJmQckisQSKtEHyut+pzxyN/WH+1oZ7Q87TAa455VM4Fmus8msbcxA?=
+ =?us-ascii?Q?3FYpF1nlhVUqb1tYOT0R6nCC6meHlyvev98dd7UyIO6JqjkaTpanQ3EW4TYq?=
+ =?us-ascii?Q?s+E4LE3k55XTCaghnrVh0ID3/XyTOXfwIP+TiQA5FTaW9q4MnTkQiSnbnjVe?=
+ =?us-ascii?Q?aTo1qZENT90d8Dv0Zf4SF7xociHScr/ExwOcQ6nq+inRflm06Uxhqaojgz75?=
+ =?us-ascii?Q?FVO0Gm7J8uQvybxUaOab67O9xIznfLcLxABKiXpk3fl4bA0hOUW05RaN8ZLt?=
+ =?us-ascii?Q?YWi15W4dW3gcHIvg2WaSaL7qLIysiz64bB3lQzzM6wdyutFWog=3D=3D?=
+X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:atlrelay2.compute.ge-healthcare.net;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+Content-Transfer-Encoding: 7bit
+X-OriginatorOrg: gehealthcare.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2024 08:33:03.1289 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b5ce5c75-7905-48be-1426-08dcfcab4c85
+X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
+ Helo=[atlrelay2.compute.ge-healthcare.net]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f837283c-48b4-4756-65f1-08dcfccdb421
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Nov 2024 12:39:20.0063 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: LgGR7ezGn37yvse5vRTqUUxSvXG+O9Ll+eyZmPrBAQMMhqp0C5qYY0VyLxTLdsyyc5wMRT46SeSJMFluhOZ4AQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10898
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-BL6PEPF0001AB4C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR22MB3779
+X-Mailman-Approved-At: Mon, 04 Nov 2024 13:47:00 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,24 +147,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PiBTdWJqZWN0OiBSZTogW1BBVENIIDAwLzE3XSAobm8gY292ZXIgc3ViamVjdCkNCj4gDQo+IE9u
-IDExLzQvMjQgMToyMCBQTSwgUGVuZyBGYW4gd3JvdGU6DQo+ID4+IFN1YmplY3Q6IFJlOiBbUEFU
-Q0ggMDAvMTddIChubyBjb3ZlciBzdWJqZWN0KQ0KPiA+Pg0KPiA+PiBPbiAxMC8xNi8yNCA5OjE3
-IEFNLCBBbGljZSBHdW8gd3JvdGU6DQo+ID4+PiBUaGlzIHBhdGNoIHNldCBhZGRzIHRoZSBiYXNp
-YyBzdXBwb3J0IG9mIGkuTVg5NSBhbmQgaGFzIGJlZW4NCj4gdGVzdGVkDQo+ID4+IG9uDQo+ID4+
-PiBpLk1YOTUgMTl4MTkgRVZLLg0KPiA+PiBJIGhhdmUgYSBzb21ld2hhdCBtb3JlIGdlbmVyaWMg
-cXVlc3Rpb24gLS0gY2FuIHdlIHN0YXJ0IFUtQm9vdCBTUEwNCj4gPj4gYW5kIFUtQm9vdCBmaXJz
-dCwgYW5kIHN0YXJ0IHRoZSBFTEUvT3BUZWUvLi4uIHdoYXRldmVyIGZpcm13YXJlcw0KPiA+PiBB
-RlRFUiBVLUJvb3QgaGFzIHN0YXJ0ZWQsIHNvIHRoZXkgY2FuIGJlIHVwZGF0ZWQganVzdCBsaWtl
-IHRoZQ0KPiBrZXJuZWwNCj4gPj4gY2FuIGJlIHVwZGF0ZWQgPw0KPiA+DQo+ID4gRUxFIEZpcm13
-YXJlIHBhY2tlZCBpbiBmbGFzaC5iaW4gaXMgdXNlZCBieSBST00sIG91dCBvZiBjb250cm9sIG9m
-DQo+ID4gU1BML1UtQm9vdC4NCj4gDQo+IFVzZWQgYnkgUk9NIGhvdyA/IERldGFpbHMgcGxlYXNl
-ID8NCg0KRUxFIEZpcm13YXJlIGlzIGZvciBzZWN1cmUgZW5jbGF2ZSB1c2FnZS4gOFVMUC85MyBh
-bHNvIGhhcyBpdC4NCkkgY291bGQgbm90IHNoYXJlIG1vcmUgZGV0YWlscy4NCg0KPiANCj4gPiBP
-UC1UZWUgaXMgb3B0aW9uYWwsIGJ1dCBpZiBpdCBpcyB0aGVyZSwgaXQgY291bGQgb25seSBiZSBs
-b2FkZWQgYnkgU1BMDQo+ID4gYW5kIGtpY2tlZCBieSBBVEYNCj4gV2h5ID8gVS1Cb290IHJ1bm5p
-bmcgaW4gRUwzIGNhbiBzdGFydCBPcFRlZSBPUywgc28gd2hhdCBpcyB0aGUNCj4gcHJvYmxlbSA/
-DQoNCkFoLiBBcyB3ZSBrbm93IHRoZXJlIGlzIGEgd3JhcHBlciBpbiBBVEYgY29udHJvbGxlZCB3
-aXRoIHNwZF9vcHRlZS4NClRlY2huaWNhbGx5IGxldCB1Ym9vdCBpbiBFTDMgdG8ga2ljayBvcHRl
-ZSBpcyBmZWFzaWJsZSwgYnV0IEkgYW0gbm90DQpzdXJlIHBlb3BsZSB3b3VsZCBkbyB0aGlzLg0K
-DQpSZWdhcmRzLA0KUGVuZy4NCg==
+On Wed, Oct 30, 2024 at 09:23:46AM -0300, Fabio Estevam wrote:
+> 
+> WARNING: This email originated from outside of GE HealthCare. Please validate the sender's email address before clicking on links or attachments as they may not be safe.
+> 
+> Hi Brian,
+> 
+> On Wed, Oct 30, 2024 at 5:08???AM Brian Ruley
+> <brian.ruley@gehealthcare.com> wrote:
+> >
+> > Add coverage for IMX8M code siging. Create PKI tree and other assets
+> > required by `cst' using `hab4_pki_tree.sh' script and `srktool' in
+> > `cst_3.4.1' [1].
+> >
+> > [1] https://www.nxp.com/webapp/Download?colCode=IMX_CST_TOOL_NEW
+> >
+> > Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+> > ---
+> > Changes for v4:
+> > - Rebased on master:
+> >     340_nxp_imx8mcst.dts -> 343_nxp_imx8mcst.dts
+> >     341_nxp_imx8mcst_fast_auth.dts -> 344_nxp_imx8mcst_fast_auth.dts
+> 
+> Here is the result when I tried applying and testing this:
+> 
+> $ git am ~/Downloads/v4-1-2-binman-nxp_imx8mcst-read-certificates-from-input-path.patch
+> Applying: binman: nxp_imx8mcst: read certificates from input path
+> Applying: binman: expand test coverage to nxp_imx8mcst
+> .git/rebase-apply/patch:206: trailing whitespace.
+>             X509v3 Basic Constraints:
+> .git/rebase-apply/patch:208: trailing whitespace.
+>             Netscape Comment:
+> .git/rebase-apply/patch:210: trailing whitespace.
+>             X509v3 Subject Key Identifier:
+> .git/rebase-apply/patch:212: trailing whitespace.
+>             X509v3 Authority Key Identifier:
+> .git/rebase-apply/patch:333: trailing whitespace.
+>             X509v3 Basic Constraints:
+> warning: squelched 7 whitespace errors
+> warning: 12 lines add whitespace errors.
+> 
+> 
+> $ ./tools/binman/binman test testNxpImx8mCstFastAuth
+> ======================== Running binman tests ========================
+> E
+> ======================================================================
+> ERROR: testNxpImx8mCstFastAuth (binman.ftest.TestFunctional)
+> Test that binman can sign an iMX8M image using fast authentication
+> ----------------------------------------------------------------------
+> ValueError: Error -11 running 'cst -i
+> /tmp/binman.tf697xr9/nxp.csf-config-txt.nxp-imx8mcst -o
+> /tmp/binman.tf697xr9/nxp.csf-output-blob.nxp-imx8mcst':
+> 
+> ----------------------------------------------------------------------
+> Ran 1 test in 1.318s
+> 
+> FAILED (errors=1)
+> 
+> Any ideas?
+
+Hi Fabio,
+
+Strange, but I don't have a clue. I was able to find the bit of Python
+where things go wrong in my reply to Simon:
+
+> Odd, -11 means that is the resouce is temporarily unavailable, no? I
+> don't see how that could be caused by my changes. I managed to trace it
+> to line 367 in `tools/u_boot_pylib/tools.py`, which takes us to
+> the run_pipe() function in `tools/u_boot_pylib/commands.py`, where we
+> wait on a pipe:
+> 
+>    108:    result.return_code = last_pipe.wait()
+
+I also described the environment I was running:
+
+> I've compiled the NXP Code Signing tool myself from version 3.4.1
+> and added that to path. The system I'm running on is:
+> 
+>    cat /etc/fedora-release && uname -msrv
+>    Fedora release 40 (Forty)
+>    Linux 6.10.12-200.fc40.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Sep 30 21:38:25 UTC 2024 x86_64
+> 
+> Also, prior to running any tests, I've built the `tools-only_defconfig`.
+> I admit that I find the test suites sightly confusing, so I might have
+> missed something.
+
+I can try to run it in different environment to see if I can reproduce
+the issue.
+
+Regards,
+Brian
