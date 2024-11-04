@@ -4,78 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48C97D1BDD4
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 17:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EB9DD1BDD4
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 18:02:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CD4B890C5;
-	Mon,  4 Nov 2024 18:51:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0D9EE88D29;
+	Mon,  4 Nov 2024 19:02:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Cz+rUKKT";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B544588FE2; Mon,  4 Nov 2024 18:51:51 +0100 (CET)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88AD188FAB
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 18:51:49 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-83ac817aac3so175813539f.0
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 09:51:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730742708; x=1731347508; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GCkMrcznTuktTaPZ3PhIzrucNAzZFdOC+8tMnfyeBrM=;
- b=Cz+rUKKTgEaZNtLLuo3rSbUZKMbOzhQNSH5YtnwYMOPH8wXbnr0H8VFzBW6fbn5uGL
- D+/hT6Y1ez/Py2nznDdpunuvGnSe8CZLmJSQjhuJnoE7QrB2kz4vEXJhOpl5mXKhMqxp
- VbiB0Qu9tglEzPO2tEf1w2TjPWk/7NjqtShCc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730742708; x=1731347508;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GCkMrcznTuktTaPZ3PhIzrucNAzZFdOC+8tMnfyeBrM=;
- b=iuDyCEoU+Nks+T0mw4bYPJfT0fdcbIa5qclg2EF5TriTYr0fBWZvgOv5Ty2kNrnSz3
- b7kxXMJCAl9joWT1FKh/4kjF7MB+X7Cjya4yzyPJlIs5Jpne4PyuWXTjCdKr4yXM/5Yf
- g8drKOQICpbtZGubI/7yoi6i3gu8OmyrLFXP8+IX3h0pvfzSAoGEVMUyb21bn07/71IN
- HkEEz8Q3ltSOabpXCVtUqxr6xzB8LDJ1PVbHY32aH1HU41/WQYY1N28t78BDpqxu18q1
- KHRaMnYEMvHsr5NIcuTXqcZrf4ahzOxbgcspf5gCHPjm46IS3I6dlD9X6ixSkIctgPrC
- najQ==
-X-Gm-Message-State: AOJu0YzPBqtRM122s6T5qu1shKK8r0R9haF4eGoSHlaagBpPAFS/FQx8
- aXHcGfdgvnBoKc4jpDAuZoIWyf7/cOGUlu8XXpu34iYuXgb50VObIMF5RsJQictM6Ug3DqTz+8A
- =
-X-Google-Smtp-Source: AGHT+IGpGVEdnIxAn+BaW8ScxtgbYlkxMUhqaFisOQS/AXGYxu1QCn8g5jt3eEay1Lm46io8LLsmvQ==
-X-Received: by 2002:a05:6602:1507:b0:82c:d67d:aa91 with SMTP id
- ca18e2360f4ac-83b566cc65dmr2473578839f.1.1730742707783; 
- Mon, 04 Nov 2024 09:51:47 -0800 (PST)
-Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
- [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4de04977b30sm2005288173.116.2024.11.04.09.51.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 09:51:46 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1730743331;
+	bh=OGbP9sQEcU/T0fqKImAGDHPuDQSKc2rCdK6xc2qT0s0=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=FHtjgveNky8TKoC+RENdAwE/Xt9Va+41bY0+R9FdAKhJdymucXYvBOj3vhFYfYv8y
+	 ztTn4yt5j6EC3ov2MotSZfdKEYcwCDQ62Mbf0r8UjxMkUeaIU2oUjuLZFmupoZ+EIM
+	 THyakk13fLF71semkUrC6QdjU8TE7hPaMRjI0ShdrOd6rbx1Yz8hxlqb5z0LeltJ+/
+	 aUZW8SW4UONCZbaEYwaGA629xOObv81hb4PDwoaAQ/v9MTKKlZ5ljwvJCjaBbD6hqb
+	 /DpsiMAWVs4HK3cFPy1M5EJZwMIeIxMUP1MupTcNjvJwML/rE27zGGsQw3gNQkdT0b
+	 0YYYRf92toPiQ==
+Received: from localhost.localdomain (87-97-112-21.pool.digikabel.hu
+ [87.97.112.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id DBF9188DA3;
+ Mon,  4 Nov 2024 19:02:08 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1730743329;
+ bh=OGbP9sQEcU/T0fqKImAGDHPuDQSKc2rCdK6xc2qT0s0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=tA04hlAx8jPUc6qlOTSBAqZs2vXQevN1/JkKHnzWAXi4km8ErvgaNmsFV0fMdg7hx
+ m7Rsb4k/uKN73U2Jr0Uj7gFvWGuYyYEqZtqYb+dlMNgSb3pPwQeQteUkSWaxVGRl16
+ 111CMm+QF1vs+qJ90eYibMGTWoUbSvU1d8O+jS86ofl0EVxB42FdnTORf7uPUYABvB
+ kqZHVl33qHxdy092cFM3JoWC77iqVOM5fo4MUPe3QxFh+gJAqBwde7D9qqcL8FsYj4
+ SXqgO71Ft9Oq5WZvrJnSGuydkCBjx29TI7darDq4Q8VKl2ZvYZcUmmUl7jcr64OtzB
+ ErQjcpTmqp2Fg==
+From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 19/19] fs: Record loaded files in an ad-hoc bootflow
-Date: Mon,  4 Nov 2024 10:51:10 -0700
-Message-Id: <20241104175110.1048449-20-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241104175110.1048449-1-sjg@chromium.org>
-References: <20241104175110.1048449-1-sjg@chromium.org>
+Cc: Heiko Schocher <hs@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Fabio Estevam <festevam@denx.de>, Gary Bisson <bisson.gary@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] tools: imx8image: add possibility to skip dcd
+Date: Mon,  4 Nov 2024 19:02:03 +0100
+Message-Id: <20241104180203.110395-1-hs@denx.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,124 +65,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This makes a start on dealing with images loaded outside the context of
-bootstd. For now, it just records these images. They can be listed using
-the 'bootstd images' command.
+Currently U-Boot always adds DCD Image to boot container.
+On imx8qxp SoC it is possible to init RAM from within SCFW,
+and adding a DCD image type to the boot container in this case
+breaks booting (No debug output anymore from SCFW! Nor any
+output from SPL), so we need to configure a dcd skip somehow.
 
-Often, very little is known about these images, but future work could
-perhaps use the filename or contents to detect the type.
+This patch adds a new imx8image_cmd entry CMD_DCD_SKIP and a
+new entry in imximage.cfg "DCD_SKIP". If set to "true"
+no DCD image type will be added to the container.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Heiko Schocher <hs@denx.de>
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
+
 ---
+Superseds patch:
+https://patchwork.ozlabs.org/project/uboot/patch/20241009123937.124691-1-hs@denx.de/
 
-Changes in v3:
-- Add new patch to record loaded files in an ad-hoc bootflow
+azure build is fine:
+https://dev.azure.com/hs0298/hs/_build/results?buildId=129&view=results
 
 Changes in v2:
-- Drop patches already applied
-- Drop patches which add new image types
-- Update to use a new image-type enum in bootflow.h
+- removed the RFC tag
+  added Reviewed-by: Peng Fan <peng.fan@nxp.com>
+  rebased patch on mainline commit
+  6ebfafe8c53 ("Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh")
 
- doc/develop/bootstd/overview.rst |  3 +++
- fs/fs.c                          | 15 +++++++++++++++
- test/boot/bootflow.c             | 20 ++++++++++++++++++++
- 3 files changed, 38 insertions(+)
+ include/imx8image.h | 1 +
+ tools/imx8image.c   | 7 ++++++-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-index e3ce97cc4f5..c46bd7a5a90 100644
---- a/doc/develop/bootstd/overview.rst
-+++ b/doc/develop/bootstd/overview.rst
-@@ -486,6 +486,9 @@ be visible.
- Once a bootflow has been selected, images for those that are not selected can
- potentially be dropped from the memory map. For now, this is not implemented.
+diff --git a/include/imx8image.h b/include/imx8image.h
+index 85fb642ae39..6b95e93fb50 100644
+--- a/include/imx8image.h
++++ b/include/imx8image.h
+@@ -146,6 +146,7 @@ struct image_array {
+ enum imx8image_cmd {
+ 	CMD_INVALID,
+ 	CMD_BOOT_FROM,
++	CMD_DCD_SKIP,
+ 	CMD_FUSE_VERSION,
+ 	CMD_SW_VERSION,
+ 	CMD_MSG_BLOCK,
+diff --git a/tools/imx8image.c b/tools/imx8image.c
+index 5eb4b9612c8..96ece28bd6c 100644
+--- a/tools/imx8image.c
++++ b/tools/imx8image.c
+@@ -14,6 +14,7 @@ static soc_type_t soc;
+ static int container = -1;
+ static int32_t core_type = CFG_CORE_INVALID;
+ static bool emmc_fastboot;
++static bool dcd_skip;
+ static image_t param_stack[IMG_STACK_SIZE];
+ static uint8_t fuse_version;
+ static uint16_t sw_version;
+@@ -41,6 +42,7 @@ static int imx8image_check_image_types(uint8_t type)
  
-+In cases where images are loaded outside the context of standard boot, an ad-hoc
-+bootflow is used to keep track of these. They is visible with the
-+``bootstd images`` command (see :doc:`/usage/cmd/bootstd`).
+ static table_entry_t imx8image_cmds[] = {
+ 	{CMD_BOOT_FROM,         "BOOT_FROM",            "boot command",	      },
++	{CMD_DCD_SKIP,          "DCD_SKIP",             "skip DCD init",      },
+ 	{CMD_FUSE_VERSION,      "FUSE_VERSION",         "fuse version",	      },
+ 	{CMD_SW_VERSION,        "SW_VERSION",           "sw version",	      },
+ 	{CMD_MSG_BLOCK,         "MSG_BLOCK",            "msg block",	      },
+@@ -88,6 +90,9 @@ static void parse_cfg_cmd(image_t *param_stack, int32_t cmd, char *token,
+ 		if (!strncmp("emmc_fastboot", token, 13))
+ 			emmc_fastboot = true;
+ 		break;
++	case CMD_DCD_SKIP:
++		if (!strncmp("true", token, 4))
++			dcd_skip = true;
+ 	case CMD_FUSE_VERSION:
+ 		fuse_version = (uint8_t)(strtoll(token, NULL, 0) & 0xFF);
+ 		break;
+@@ -1024,7 +1029,7 @@ int imx8image_copy_image(int outfd, struct image_tool_params *mparams)
+ 	fprintf(stdout, "CONTAINER SW VERSION:\t0x%04x\n", sw_version);
  
- .. _BootflowStates:
+ 	build_container(soc, sector_size, emmc_fastboot,
+-			img_sp, false, fuse_version, sw_version, outfd);
++			img_sp, dcd_skip, fuse_version, sw_version, outfd);
  
-diff --git a/fs/fs.c b/fs/fs.c
-index 1afa0fbeaed..d56c95c1b26 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -5,6 +5,7 @@
- 
- #define LOG_CATEGORY LOGC_CORE
- 
-+#include <bootstd.h>
- #include <command.h>
- #include <config.h>
- #include <display_options.h>
-@@ -734,12 +735,14 @@ int do_size(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
- int do_load(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
- 	    int fstype)
- {
-+	struct blk_desc *dev_desc;
- 	unsigned long addr;
- 	const char *addr_str;
- 	const char *filename;
- 	loff_t bytes;
- 	loff_t pos;
- 	loff_t len_read;
-+	int dev_part;
- 	int ret;
- 	unsigned long time;
- 	char *ep;
-@@ -783,6 +786,10 @@ int do_load(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
- 	else
- 		pos = 0;
- 
-+	/* save globals before they are cleared */
-+	dev_desc = fs_dev_desc;
-+	dev_part = fs_dev_part;
-+
- 	time = get_timer(0);
- 	ret = _fs_read(filename, addr, pos, bytes, 1, &len_read);
- 	time = get_timer(time);
-@@ -806,6 +813,14 @@ int do_load(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
- 	env_set_hex("fileaddr", addr);
- 	env_set_hex("filesize", len_read);
- 
-+	if (IS_ENABLED(CONFIG_BOOTSTD) &&
-+	    bootstd_img_add(dev_desc, dev_part, filename,
-+			    (enum bootflow_img_t)IH_TYPE_INVALID, addr,
-+			    len_read)) {
-+		log_err("Failed to record file\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
  	return 0;
  }
- 
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 670b9253f61..8b11378a085 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1322,3 +1322,23 @@ static int bootstd_images(struct unit_test_state *uts)
- 	return 0;
- }
- BOOTSTD_TEST(bootstd_images, UTF_CONSOLE);
-+
-+/* Check creation of ad-hoc images */
-+static int bootstd_adhoc(struct unit_test_state *uts)
-+{
-+	ut_assertok(run_command("load mmc 1:1 1000 /extlinux/extlinux.conf",
-+				0));
-+	ut_assert_nextlinen("595 bytes read");
-+	ut_assertok(run_command("bootstd images", 0));
-+	ut_assert_nextlinen("Seq");
-+	ut_assert_nextlinen("---");
-+	ut_assert_nextline(
-+		"  0  ad-hoc               invalid             1000       253  /extlinux/extlinux.conf");
-+	ut_assert_nextlinen("---");
-+	ut_assert_nextline("(1 image)");
-+
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(bootstd_adhoc, UTF_CONSOLE);
 -- 
-2.34.1
+2.20.1
 
