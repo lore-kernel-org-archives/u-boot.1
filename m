@@ -4,79 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50798D1BDF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 21:34:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC50ED1BDF5
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 21:35:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAE4488D7E;
-	Mon,  4 Nov 2024 22:34:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 42A6988D7E;
+	Mon,  4 Nov 2024 22:35:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nqQ0C7gI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BLRYBrSM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5F1388E50; Mon,  4 Nov 2024 22:34:29 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id D90A688D7E; Mon,  4 Nov 2024 18:51:19 +0100 (CET)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5472D88D4A
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 22:34:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8899988618
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 18:51:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7b15416303aso356062985a.1
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 13:34:27 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-3a6ababa9f7so14821055ab.1
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 09:51:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730756066; x=1731360866; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HVUsoZocIupg6jejrWuASmclaUbMp6OI9Cx6n0DMJu0=;
- b=nqQ0C7gIyEBmMu9taYSTMwyCqSlftXHbCXw+brvg0hs6Z6I8TBZqSry++N0/zy3sit
- F8YOzyhvd0GFptodB3eb5HrF2B+dwcrKvIFy97cGjqMNePQIrV0Soy10oFSuwelcO0VI
- hk3dTPbAc2PLS8ITL2zS2ZGyPPhRPsG/iOxIo=
+ d=chromium.org; s=google; t=1730742676; x=1731347476; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tmXpHecDw5I7tdST5PlpnSWibe2H84hwGtFmDi9U8pk=;
+ b=BLRYBrSMzPU/TR30K+yeWxRK8x36zTnbro9oFI0cevmrWUP1QGYSvytTm/IxuzSaVZ
+ hthkG0yga1cYTgo3BC4I06t2QsHTnwB1b99ZjF/ukDvygngPRWMX26cd50VkpK97h8ov
+ sklJ2cL7kvKXg63b49bnaAiCiK9nuVDDjGAE8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730756066; x=1731360866;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HVUsoZocIupg6jejrWuASmclaUbMp6OI9Cx6n0DMJu0=;
- b=kWd/h3zoYOpDG4BJ+NmzAXKZ43+Bav3QJu7TP8r1skau70L+PuIBfrmMqwtMhRXF8S
- fdYWA280fapSc861Bn62ffR8HCRA7s1f/W9uQg1E82FsV8GsxTYm4E1L0Xn/YSuvW0/L
- 3vY7UjCYquvvxh+9fXYzaJ3kV3iXpECHbq8xsw1mtRQJBKBj4+K83rUwHSWzjwHsxRqr
- uI4YgrxuGrzDv/lHPTukhklBWRlyHcEf9I03j3GV3ikkpPZqmN+MkKJAQ/1Li24H8G5u
- XB9feVCi7Gt+tKUqFKxUdlqz9trxfGZvGqLCrr0oiidgL70r4cjhE5Xcx2od/WxbLcFp
- vqKQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV1d38H0Z+kfmnlIbe0APm+rMPVqdRkXuxiZbCoODswksG85Q5tHrJK2iQI3JaeeQHjkA6Rx4M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy5f4ne5caP/PEeyxntubmse6IjHCo2eq17qWpQ2VvkZE81bj6P
- fVacy8TBmEEtq4QPwNzGSLtLn7ozb0QLx/y1QV09BzJm7ibZG/raCARdOa3HnWI=
-X-Google-Smtp-Source: AGHT+IG5UE51bDj6+j6YjCufQkH73YX2WTErrks/n9xpxX82Jazly0FQ4UEYXVLOMf3DpgRBQRKnqA==
-X-Received: by 2002:a05:620a:444c:b0:7ab:3ec9:f4c7 with SMTP id
- af79cd13be357-7b2fb982785mr1553963385a.35.1730756066117; 
- Mon, 04 Nov 2024 13:34:26 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b2f3a9ae1bsm459779385a.123.2024.11.04.13.34.24
+ d=1e100.net; s=20230601; t=1730742676; x=1731347476;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tmXpHecDw5I7tdST5PlpnSWibe2H84hwGtFmDi9U8pk=;
+ b=GRLeaAm+0ehEzrtA9mCxcUTI/kIW84tU9vcqkF3t4O5JLDsUbYsQvbzBWTAWz0lzED
+ J/PH5AG0jUTZS8jCXrLmDscHN6Sg9g+4Ucqd6vG3PAP1RQx8cqEAnwJvTTldUKUUG+As
+ fCwBcEj9e+Kto5Ialb4Evc2WT0mh1JFcWIV928dzXPn+hz1ymDjRgKcICcM6BgyeEqpq
+ D40D4yAppxEdgqpNnUFTmx2bzErkeEeYCbz16DAV4u/0BskbpWfknY/K3WmC6Vx5qVGw
+ gsLuv5/SJMyjoOGVDB9IbIs3KTb21pJMYqkLAlQLC5iA7gKQILINrzmd3rkzIWLz9wno
+ OsVw==
+X-Gm-Message-State: AOJu0YwH+3ouV2IW7IjX0CELx+aO9+8Nc88p9BhOAkUl3PnqiMsaAzv3
+ jNBsoenvKs1LRNb+uVeU3OXiUnVVT1d9QBXiV2GSXvu1REUN9ARbF5JCZhw5V4fBeS6zBwiqJyc
+ =
+X-Google-Smtp-Source: AGHT+IHLY2ns1P93OvfwgeSjylDpqbo5bw86HuKGbdRTzpu8bvfe2XFeibBWlNEQxXjCVKlt3tbGTw==
+X-Received: by 2002:a05:6e02:1382:b0:3a6:ab13:2b7d with SMTP id
+ e9e14a558f8ab-3a6ab133d94mr153299835ab.15.1730742675657; 
+ Mon, 04 Nov 2024 09:51:15 -0800 (PST)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4de04977b30sm2005288173.116.2024.11.04.09.51.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 13:34:24 -0800 (PST)
-Date: Mon, 4 Nov 2024 15:34:22 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 4/9] docker: Adjust packages for arm64
-Message-ID: <20241104213422.GX3600562@bill-the-cat>
-References: <20241104133954.840994-1-sjg@chromium.org>
- <20241104133954.840994-5-sjg@chromium.org>
- <FAADE9B2-6D3B-4975-8A5F-F96CADCD1B65@gmx.de>
+ Mon, 04 Nov 2024 09:51:15 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Emil Kronborg <emil.kronborg@protonmail.com>,
+ Etienne Carriere <etienne.carriere@foss.st.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ion Agorria <ion@agorria.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, Moritz Fischer <moritzf@google.com>,
+ Nam Cao <namcao@linutronix.de>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
+ Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+ Tim Harvey <tharvey@gateworks.com>, Tony Dinh <mibodhi@gmail.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH v3 00/19] bootstd: Support recording images
+Date: Mon,  4 Nov 2024 10:50:51 -0700
+Message-Id: <20241104175110.1048449-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ASf1qqz8g3FfaQLL"
-Content-Disposition: inline
-In-Reply-To: <FAADE9B2-6D3B-4975-8A5F-F96CADCD1B65@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 04 Nov 2024 22:35:16 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,63 +115,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series provides a way to keep track of the images used in bootstd,
+including the type of each image.
 
---ASf1qqz8g3FfaQLL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+At present this is sort-of handled by struct bootflow but in quite an
+ad-hoc way. The structure has become quite large and is hard to query.
+Future work will be able to reduce its size.
 
-On Mon, Nov 04, 2024 at 09:58:50PM +0100, Heinrich Schuchardt wrote:
->=20
->=20
-> Am 4. November 2024 14:39:48 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >The package names are slightly different for arm64 and we don't seem to
-> >have a linux-image-kvm package. Provide a different set for arm64
-> >
-> >Signed-off-by: Simon Glass <sjg@chromium.org>
-> >---
-> >
-> > tools/docker/Dockerfile | 12 +++++++-----
-> > 1 file changed, 7 insertions(+), 5 deletions(-)
-> >
-> >diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> >index c9d794082c8..c4c3dc5a901 100644
-> >--- a/tools/docker/Dockerfile
-> >+++ b/tools/docker/Dockerfile
-> >@@ -39,7 +39,12 @@ RUN wget -O - https://mirrors.edge.kernel.org/pub/too=
-ls/crosstool/files/bin/x86_
-> > RUN wget -O - https://github.com/foss-xtensa/toolchain/releases/downloa=
-d/2020.07/x86_64-2020.07-xtensa-dc233c-elf.tar.gz | tar -C /opt -xz
-> >=20
-> > # Update and install things from apt now
-> >-RUN apt-get update && apt-get install -y \
-> >+RUN if [ "$TARGETPLATFORM" =3D "linux/arm64" ]; then \
->=20
-> Please, use 'arm64' and not 'linux/arm64' as variable value.
+Ultimately the 'bootflow info' command may change to also show images as
+a list, but that is left for later, as this series is already fairly
+long. So for now, just introduce the concept and adjust bootstd to use
+it, with a simple command to list the images.
 
-Getting back to your previous comment about documenting these variables,
-I took it that these are NOT free-form but rather what Docker (et al)
-require for proper multi-architecture containering.
+This series includes various alist enhancements, to make use of this new
+data structure a little easier.
 
---=20
-Tom
+Changes in v3:
+- Add a helper in bootflow
+- Add a new patch supporting ad-hoc bootflows
+- Add new patch to export bootdev_get_from_blk()
+- Add new patch to record loaded files in an ad-hoc bootflow
+- Update bootstd_add_bootflow() to return the element number
+- Use the helper function
 
---ASf1qqz8g3FfaQLL
-Content-Type: application/pgp-signature; name="signature.asc"
+Changes in v2:
+- Add an image type extension in bootflow.h
+- Change the tag to bootmeth_efi
+- Drop patches already applied
+- Drop patches which add new image types
+- Update to use a new image-type enum in bootflow.h
+- Use the word 'feature' instead of 'hack'
 
------BEGIN PGP SIGNATURE-----
+Simon Glass (19):
+  bootstd: Move bootflow-adding to bootstd
+  bootstd: Move bootflow-clearing to bootstd
+  bootstd: Add a function to get bootstd only if available
+  bootstd: Drop the bootdev-specific list of bootflows
+  bootstd: Move the bootflow list into an alist
+  bootstd: Maintain a list of images
+  bootstd: Update bootmeth_alloc_file() to record images
+  boot: pxe: Drop the duplicate comment on get_pxe_file()
+  bootmeth_efi: Simplify reading files by using the common function
+  bootmeth: Update the read_file() method to include a type
+  bootmeth_efi: Check the filename-allocation in the network path
+  boot: Update extlinux pxe_getfile_func() to include type
+  boot: Update pxe bootmeth to record images
+  Update bootmeth_alloc_other() to record images
+  bootstd: Update cros bootmeth to record images
+  bootstd: Add a simple command to list images
+  bootstd: Export bootdev_get_from_blk()
+  bootstd: Add the concept of an ad-hoc bootflow
+  fs: Record loaded files in an ad-hoc bootflow
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcpPdoACgkQFHw5/5Y0
-tyyfVQv/QnjJy+/m0IybBWYpn+yC3Z/lbNtdY6B3exs7oUEqROC40HlWuNy2ua2p
-YD/jIBqhB9YGDpV5FZz2yGVVIemHXEV/5iajs2stm75wo6iajd6vJiH7OZ26pWOQ
-OFLedrrjZ9u9Onrz9v6QSp46k4DaB0tnuRVhClKAWpiFGPznAXtRn262PmiCP5zC
-+Tlk5kxyFZk3+0WM3ODKuFaAI6VZd1h/BhJWPsmxK3JY9TLSgEro4hTXYa+FAHtb
-6tasCxh2/cG2h5q7/Lo4Tsg3aFySAYSqWyLYZwHxALug4kh9keK5twEeTE80UxkE
-esyFha3y9euthzKUkcWRvKlIKDHLskD+SQ3/364gBzyq5Efh64INPOQ0Y3361+Mf
-uiR8bZrZSJl/QjU8fDmpGhoU+4zD6Pz9/8s3ZM8zz0Ww41iuy7XyhoRfQi9/xc36
-gNzZJL6zLTcoWchl3+jQPcZ3qcEZdnZHptY2b7rvQC5f/qEx9mOChAOwAuz4yuGL
-AHZwV5TV
-=bcuQ
------END PGP SIGNATURE-----
+ boot/bootdev-uclass.c            |  78 ++++++-------------
+ boot/bootflow.c                  |  77 +++++++++++++++----
+ boot/bootmeth-uclass.c           |  29 +++++--
+ boot/bootmeth_android.c          |   3 +-
+ boot/bootmeth_cros.c             |  17 ++++-
+ boot/bootmeth_efi.c              |  16 ++--
+ boot/bootmeth_efi_mgr.c          |   3 +-
+ boot/bootmeth_extlinux.c         |   7 +-
+ boot/bootmeth_pxe.c              |  10 ++-
+ boot/bootmeth_qfw.c              |   3 +-
+ boot/bootmeth_sandbox.c          |   3 +-
+ boot/bootmeth_script.c           |   7 +-
+ boot/bootstd-uclass.c            | 104 +++++++++++++++++++++++--
+ boot/pxe_utils.c                 |  36 ++++-----
+ boot/vbe_simple.c                |   5 +-
+ cmd/Kconfig                      |   9 +++
+ cmd/Makefile                     |   1 +
+ cmd/bootdev.c                    |   2 +-
+ cmd/bootflow.c                   |  11 +--
+ cmd/bootstd.c                    |  65 ++++++++++++++++
+ cmd/pxe.c                        |   2 +-
+ cmd/sysboot.c                    |   6 +-
+ doc/develop/bootstd/overview.rst |  24 +++++-
+ doc/usage/cmd/bootstd.rst        |  79 +++++++++++++++++++
+ doc/usage/index.rst              |   1 +
+ fs/fs.c                          |  15 ++++
+ include/bootdev.h                |  36 +++------
+ include/bootflow.h               |  88 ++++++++++++++++++---
+ include/bootmeth.h               |  22 ++++--
+ include/bootstd.h                |  69 ++++++++++++++++-
+ include/pxe_utils.h              |  14 +++-
+ test/boot/bootflow.c             | 126 +++++++++++++++++++++++++++++++
+ test/py/tests/test_ut.py         |   3 +-
+ 33 files changed, 788 insertions(+), 183 deletions(-)
+ create mode 100644 cmd/bootstd.c
+ create mode 100644 doc/usage/cmd/bootstd.rst
 
---ASf1qqz8g3FfaQLL--
+-- 
+2.34.1
+
