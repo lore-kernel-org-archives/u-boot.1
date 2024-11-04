@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33FC4D1BDF5
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 21:05:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8406D1BDF2
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 21:18:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57DE888FCC;
-	Mon,  4 Nov 2024 22:05:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5085C88785;
+	Mon,  4 Nov 2024 22:18:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wb73UY7z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kAV56zek";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C920388F33; Mon,  4 Nov 2024 22:05:52 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id C70E888DC7; Mon,  4 Nov 2024 22:18:14 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BAD1884DB
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 22:05:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A82AC8852D
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 22:18:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7b152a23e9aso331442185a.0
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 13:05:50 -0800 (PST)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6cbcd8ce5f9so36798116d6.2
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 13:18:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730754349; x=1731359149; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730755091; x=1731359891; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=coAJ1Opoo9ApI58ljyJ/9Xt8hDD+9QvcFKM1aqvSYno=;
- b=Wb73UY7z+kxEREGeRMKPi53fvhHtPSkN9XJp0mEFtNpHqgCydWJAqgiIUsyYvXWrRe
- tkdaZ1FjuwKBpbADkMpoYOjWahw0Fx+uJD9heBzrsY/XzyMgzX0brbLwBEPOFzS+Lmai
- v/9fG8wJKUAWNZjt0917PlkhgwiQg1TqZMAuA=
+ bh=XYBu1uySsCE+JRKUYkZUKxIa3uCMBKIwhoiIN8xCnMg=;
+ b=kAV56zeklZttTRb0HyOm03yhdCDopZG4pazBQYWNvwl/JV4NxLZhdL4isXqU6M6gG9
+ AMILkk0Fdo7zCg7jfMgBRYxg7/EXqpPnM/BFKQLprZJYxcqJjYvACF1UYJBgwmyqikyK
+ x8/iupxE/6p0pnrRlDcTp1JeOIv4GAtdXzzAc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730754349; x=1731359149;
+ d=1e100.net; s=20230601; t=1730755091; x=1731359891;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=coAJ1Opoo9ApI58ljyJ/9Xt8hDD+9QvcFKM1aqvSYno=;
- b=cTM+65LQLmGK9k6DyEkaiCs8HFN5dzFpVJL5M2OPm5IAgvLO0CIs+188pM7Lf5Gynt
- a/DJahXxALgy6jsAplHRbSgXa07m7zuDM7JoB2IePWXFGI5L7/RE9OQ5NcmZNaYo74Ex
- Zl4NKg3d9YGe7NN0X6WQ1ZjMNatJlaQXzSubZ7+ngqZ+mozABrplc2+JpgWZnMqkPf8n
- fdg3Dt2JDT+NSdhHsNeuTAkrViUSnTDOJaHSYf8vV1arajcBcAB9qCKaVJCRXaoEdD/2
- yas4Hh/LffqpqDfHfLSR60JQwG+O6+lnPQZk9gYCt3HVLJU31NABJBegZiPZrlT9e0/w
- cCcQ==
+ bh=XYBu1uySsCE+JRKUYkZUKxIa3uCMBKIwhoiIN8xCnMg=;
+ b=Qn169hxL+z0/u7RG6cEnWbRL/gW/ZR6hv39sEsDbM/PVe+wSzvp5ECu8yW7KC5dnAB
+ OhMIb2yxhEBCQJ5K+tUo55rSbHQ7QBZLmfpbnZJbTLKyuOvKnxpXdwSI+vY/qjggI0i4
+ oOWNCnRlEXSB85xA6xyXvGNisAHSKw+n7Az/3D6c/le/rxT+MppcAFHjRQ01c/wSvRSH
+ 9OqROw0PKKLWp/PWE4xChvb552X7zuBne+fPmwtw7mSXXtiCEfJydajK+Jg9PsUeYMIB
+ FSecqlQP+HI0EDiEb29cZF5fjkwt9LD8t2Cw4yoL9H36qbi6Mf7S7lgryUldIHq0o4+F
+ mYWw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWggk2xuIzAuE2fWNX0DK3mt57NR39y8+Lfqx/tFnRzUSVXeufLZ1j9J1C/RcLAsKVrmg7+4vQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpLa64tf4B1ggzt0ikXojvZIkzU7AUh1Gn8QO5nOvtCU5y+Yek
- anc//ClaYjMa1P1BH/MmHzDILvd2j3Zw/0O1r7uJnIJyjo8ZwcZs7mWMtjYDlck=
-X-Google-Smtp-Source: AGHT+IErhTo70bBsY6O6g0ifb4EOzpmWIY2Vhvl+YFK+gomLAk3Wj39KgsW9utbyoODowUs+EvcP9w==
-X-Received: by 2002:a05:620a:4456:b0:7a9:dc30:3d3e with SMTP id
- af79cd13be357-7b193efa681mr4863448085a.24.1730754349029; 
- Mon, 04 Nov 2024 13:05:49 -0800 (PST)
+ AJvYcCUgNNIWwpxS8vNewsej19HUes8pcn4tgBf3IsdepyPouoXgP9QDOil3smMGVZPd1+/pwTVr+tw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQ0ow9xbTWGsQbAtHfZ6tPSwMHlltqZWP6Nw4mibEQ5gwcEVIY
+ Y2NAwaCjIPPK5W+rchFak7HMsUKCIUoWtDQEGwgwcm2aVYqq14oqK1r6DqcwfNo=
+X-Google-Smtp-Source: AGHT+IESZE1HauvyKkkHQHzVJ2RuY5wTHFoR0jpKeiKjKN2IH7HufTjAdZEfdViSzPjiiR9KYhfoyg==
+X-Received: by 2002:a05:6214:5890:b0:6cb:4b65:950f with SMTP id
+ 6a1803df08f44-6d35c1aee05mr170425066d6.50.1730755091422; 
+ Mon, 04 Nov 2024 13:18:11 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b2f3a11765sm455776185a.69.2024.11.04.13.05.47
+ 6a1803df08f44-6d353fc66d2sm52469506d6.32.2024.11.04.13.18.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 13:05:47 -0800 (PST)
-Date: Mon, 4 Nov 2024 15:05:45 -0600
+ Mon, 04 Nov 2024 13:18:10 -0800 (PST)
+Date: Mon, 4 Nov 2024 15:18:08 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: Janne Grunau <j@jannau.net>, sughosh.ganu@linaro.org,
- kettenis@openbsd.org, sjg@chromium.org, u-boot@lists.denx.de
-Subject: Re: [PATCH 0/4] Fix IOVA allocation in Apple dart iommu after global
- LMB mem map changes
-Message-ID: <20241104210545.GV3600562@bill-the-cat>
-References: <20241101-io_lmb_apple_dart_iommu-v1-0-fe4b9a74d47c@jannau.net>
- <CADg8p97H9eqncSEGjZF5EGP2M9Y10MmV28RwSdtsW+T8fSURiw@mail.gmail.com>
- <87v7x63p3c.fsf@bloch.sibelius.xs4all.nl>
- <CADg8p96csvFbyWpgajy_ewZMXRCsKstbhGFMnDUcGnG9e+QA3g@mail.gmail.com>
- <20241103173633.GA664967@robin.jannau.net>
- <87jzdk3rtb.fsf@bloch.sibelius.xs4all.nl>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 5/9] docker: Drop grub for arm64
+Message-ID: <20241104211808.GW3600562@bill-the-cat>
+References: <20241104133954.840994-1-sjg@chromium.org>
+ <20241104133954.840994-6-sjg@chromium.org>
+ <E8B9AD50-9DAF-43CF-B512-165DB961CDCB@gmx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="C2qcf1goimc0zrwM"
+ protocol="application/pgp-signature"; boundary="OPVD6jHvYd+wdCrY"
 Content-Disposition: inline
-In-Reply-To: <87jzdk3rtb.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <E8B9AD50-9DAF-43CF-B512-165DB961CDCB@gmx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,168 +94,65 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---C2qcf1goimc0zrwM
+--OPVD6jHvYd+wdCrY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 03, 2024 at 10:56:00PM +0100, Mark Kettenis wrote:
-> > Date: Sun, 3 Nov 2024 18:36:33 +0100
-> > From: Janne Grunau <j@jannau.net>
-> >=20
-> > On Sun, Nov 03, 2024 at 07:53:36PM +0530, Sughosh Ganu wrote:
-> > > On Sat, 2 Nov 2024 at 16:00, Mark Kettenis <mark.kettenis@xs4all.nl> =
-wrote:
-> > > >
-> > > > > From: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > Date: Fri, 1 Nov 2024 17:17:22 +0530
-> > > > >
-> > > > > On Fri, 1 Nov 2024 at 15:47, Janne Grunau <j@jannau.net> wrote:
-> > > > > >
-> > > > > > The changes in "Make LMB memory map global and persistent" [1] =
-break
-> > > > > > mapping DMA memory in the USB xHCI driver when using the apple_=
-dart
-> > > > > > iommu present on Apple silicon systems.
-> > > > > >
-> > > > > > The IOVA space used by the u-boot driver (low 4GB) and physical=
- memory
-> > > > > > do not overlap. The physical memory on this systems starts depe=
-nding on
-> > > > > > the SoC either at 0x10_0000_0000 or 0x100_0000_0000. It make no=
- sense to
-> > > > > > manage these distinct regions in a single LMB map. In addition =
-every
-> > > > > > device has its own iommu and IO address space so sharing a sing=
-le memory
-> > > > > > map between all iommu instances is not necessary.
-> > > > > >
-> > > > > > To fix this issue restore the used subset (add, alloc and free)=
- of the
-> > > > > > previous pointer based LMB interface with "io_" as prefix.
-> > > > > >
-> > > > > > To ensure that low level lmb functions do not use the global LMB
-> > > > > > variable reorder lib/lmb.c so that the variable is not visible.
-> > > > > >
-> > > > > > Tested with patches from my "Fix device removal order for Apple=
- dart
-> > > > > > iommu" series [2] to fix a separate issue.
-> > > > > >
-> > > > > > The cosmetic commit has two checkpatch warnings in existing cod=
-e which I
-> > > > > > ignored.
-> > > > > >
-> > > > > > [1] https://lore.kernel.org/u-boot/20240826115940.3233167-1-sug=
-hosh.ganu@linaro.org/
-> > > > > > [2] https://lore.kernel.org/u-boot/20241031-iommu_apple_dart_or=
-dering-v1-0-8a6877946d6b@jannau.net/
-> > > > > >
-> > > > > > Signed-off-by: Janne Grunau <j@jannau.net>
-> > > > > > ---
-> > > > > > Janne Grunau (4):
-> > > > > >       lmb: Do not use global LMB variable in _lmb_free()
-> > > > > >       lmb: cosmetic: reorder functions and global LMB variable
-> > > > > >       lmb: Add basic io_lmb functionality
-> > > > > >       iommu: apple: Manage IOVA separately from global LMB mem =
-map
-> > > > >
-> > > > > Thanks for these changes. I am currently on leave, but will take a
-> > > > > look at this in detail next week. But on a cursory glance, I have=
- to
-> > > > > say that I am not entirely satisfied with this solution as well. =
-With
-> > > > > these patches, we now have a disparity in terms on how we view th=
-e LMB
-> > > > > memory map -- we have a global map for RAM address range, but a p=
-er
-> > > > > device one for IOVA's. I understand that IOVA's are supposed to be
-> > > > > per-device,
-> > > >
-> > > > The IVOA's are per-stream.  Multiple devices might share a single
-> > > > stream.
-> > > >
-> > > > > but then I think that perhaps LMB is not the right way to
-> > > > > solve this. This was fine earlier, when the entire LMB implementa=
-tion
-> > > > > in U-Boot was local, but that is not the case now. I wonder if th=
-ere
-> > > > > can be a different, non-LMB way to implement this.
-> > > >
-> > > > Of course there can be a different implementation.  But why add a
-> > > > separate implementation for what is essentially the same problem:
-> > > > allocate blocks out of an address space.
-> > >=20
-> > > My primary concern here is to prevent setting a precedent that it is
-> > > okay to have a local, per caller lmb instance.
-> >=20
-> > I think the issue is thinking this is per caller. It is not (primarily)
-> > by caller. It is one LMB instance per managed independent address space
-> > block. Apple silicon SoCs have multiple independent iommus. Each iommu
-> > can handle multiple address spaces (streams, only partially implemented
-> > in the u-boot driver.
-> >=20
-> > > If it is allowed for
-> > > one caller, it becomes difficult to say no to someone proposing a
-> > > similar approach later. In any case, based on how the allocation logic
-> > > works, with all the addresses being allocated from the IOMMU driver's
-> > > map function callback, why can there not be a single instance of an
-> > > iova lmb structure. That would at least ensure some kind of parity on
-> > > how the lmb maps are maintained.
-> >=20
-> > There are multiple fully independent IOVA spaces. I doesn't make sense
-> > to allocate them from a single pool.
-> >=20
-> > > > Before you changed the goal posts, lmb did exactly that.  The only
-> > > > problem was that there were multiple lmb instances covering the same
-> > > > "main memory" address space.
-> > >=20
-> > > I had provided an explanation of the situation that existed prior to
-> > > these changes in a writeup [1]. And that writeup had clearly provided
-> > > the two possible solutions to fix the issue with EFI allocated memory
-> > > working with LMB. And it was decided through discussion on that
-> > > writeup as well as on the mailing list that this was the approach to
-> > > be taken.
-> >=20
-> > That document missed due to unfortunate circumstances one special case
-> > in the LMB usage. Consolidating all struct lmb referring main memory
-> > into a single opaque object is useful. Please let's move on to fix the
-> > single usage which broke due to the change.
-> >=20
-> > >From my point of view it's clear that "io_lmb*" is separate from the
-> > main memory lmb. It manages the IO virtual address space of devices and
-> > it is fine that there as many (io_)lmb instances as there are IO virtual
-> > address spaces. These do not have to be managed via struct lmb and
-> > looking at the minimal io_lmb* API a simpler implementation would work.
-> > An alternative implementation would be duplicated code and reusing the
-> > existing tested lmb code is desireable.
-> > If we want a stronger distinction between lmb and io_lmb we could hide
-> > struct lmb from io_lmb.
+On Mon, Nov 04, 2024 at 10:04:39PM +0100, Heinrich Schuchardt wrote:
 >=20
-> Thanks Janne, you explained that very well and I 100% agree.
+>=20
+> Am 4. November 2024 14:39:49 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> >This doesn't build on arm64 at present, so drop it for now. We only
+> >expect to run sandbox tests, so perhaps it isn't needed.
+> >
+> >Signed-off-by: Simon Glass <sjg@chromium.org>
+> >---
+> >
+> > tools/docker/Dockerfile | 7 +++++--
+> > 1 file changed, 5 insertions(+), 2 deletions(-)
+> >
+> >diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> >index c4c3dc5a901..60106a82801 100644
+> >--- a/tools/docker/Dockerfile
+> >+++ b/tools/docker/Dockerfile
+> >@@ -134,7 +134,9 @@ RUN if [ "$TARGETPLATFORM" =3D "linux/arm64" ]; then=
+ \
+> > RUN chmod +r /boot/vmlinu*
+> >=20
+> > # Build GRUB UEFI targets for ARM & RISC-V, 32-bit and 64-bit
+> >-RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
+> >+# This fails on arm64
+> >+RUN if [ "$TARGETPLATFORM" =3D "linux/amd64" ]; then \
+> >+	git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
+> > 	cd /tmp/grub && \
+> > 	git checkout grub-2.06 && \
+>=20
+> Upstream GRUB builds for arm64 and riscv64.
+>=20
+> Please, retry with grub-2.12.
 
-Yes, thanks, that's a helpful explanation. I believe this series makes
-sense in that regard, and I've reviewed 1/2. I'd like Sughosh at least
-to look at 3, in light of the above.
+Well, lets do that upgrade separately.
 
 --=20
 Tom
 
---C2qcf1goimc0zrwM
+--OPVD6jHvYd+wdCrY
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcpNykACgkQFHw5/5Y0
-tyzJ7gv9EL6cHNzgP/StffAP596wZCRJo6b43+S3ALKQoC5mEpI5bsf2drM8ZPOq
-6fEwJCzAzX57+JZH1zXyfdGx+5T2+6jLeoEMukhN/+Iez6J2Usu5owfVotBMEtg3
-JbwQNwEsZi1O8ksmAj3ALssc+LBVbMVQWJzWVQhO4hf6gq2RHlIdeuj1vRjQeeuf
-W1oTo/e1Eae8O4C/wXBVIH7VQ/F+p2WpcIs5GObEM3rd/HY0ga9e4QFoGlPBI5Jc
-bG5p9hm8mbmAhdbzcBN9ESlw9gbvbcSktr5Llzg7ZE1IXJytQAFW1pWSTxB6PVLP
-z5HB+OHKGe/yUiTRhaFoGwed42XvLBHjMSSxb7HCUUWImVvaP5j40O6VZUmC6hpQ
-MXnmmpys804Zs8TezVzzOQy84RECOmzFhe0X5XaJ7vYwDUCggAgBhiAN1JkXIFn+
-/FzO0fdlUTXWYxTMf/yW31cx+NJG9vG4svrUR+S8uehU/99JKe1Qn+hAsYSpAjVA
-Lt+KtCe4
-=rDU4
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcpOgwACgkQFHw5/5Y0
+tyzznQv+JZR6ldb4bymQ12D0HutjIS1eWmmkOtvk6dBsZKTfwJ8J+xw0GQGH+wO2
+JlfuKtv3SkzpD3VIMdETYOGy1fqgfnrQWvP8OHu6By/rY5UG8CsepS9BPbOqm3kj
+u3qzqp/7WHCjBdxQO1XH+4l0Tz9CQHoSam6yvZOHoIXzYRytWHuXiGNn+aDKzZaZ
+PphROnMw4FEPVKvNGpoUIZCpgpQdHIRgOUBNSUTh/Nm33mDJaiR0+6hFKs0JxvFo
+7JrI/3AShOs1WMBEu3JIp5eFhMaaca707JMV1s0EhRRy7ESyPF+ZuYVZ+7fUC+Ub
+gBLjm8WPNxvdvpmDnteDxZ/NI55GdAxTIQqTJsIJ3N6gCFGWM2xM6uMF1YPM7xTV
+Xo4diO5J01ubR2flRKOqjSMYcA1c/9OJRN2+s0cHRd8kZ01RzlMcIirFvtDOQx34
+Agn6j0nXmPqtE0Ae1KW2eXsB+7t/MAqxaFs+Vuk9TznoerUxAK2VbNaNv8uACEHq
++KOvi+9W
+=r8XG
 -----END PGP SIGNATURE-----
 
---C2qcf1goimc0zrwM--
+--OPVD6jHvYd+wdCrY--
