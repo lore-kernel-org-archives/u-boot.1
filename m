@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 540ABD1BDF3
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 20:46:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFDCDD1BDF2
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 20:50:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8978A88E1C;
-	Mon,  4 Nov 2024 21:46:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3518188E1C;
+	Mon,  4 Nov 2024 21:50:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="e0LYdd0r";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="FcT1XqI+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1123188E50; Mon,  4 Nov 2024 21:46:17 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 9E67988DE6; Mon,  4 Nov 2024 21:49:59 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27EE688DE6
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 21:46:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D8D288E7B
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 21:49:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730753173; x=1731357973; i=xypron.glpk@gmx.de;
- bh=PPfmaNj2PyPXel49b8InGGKUiP8b4Ji6XocA4eW7jy8=;
+ s=s31663417; t=1730753396; x=1731358196; i=xypron.glpk@gmx.de;
+ bh=OlhGhLpC4K+TBJ6dJUmnDujtOIb3HolwU1MUPYVeyFs=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=e0LYdd0r4f6xeWZ1SlsWfKSj4Motg1j19u7ckFYT86F4aRNLup/ohpxYt9Z7YWup
- ekamSr9rL+W1sHYqwHGQXgf+JNuzQZhWCt5Sr5BXcqzB5NKJdgBWqsSfOX0gJe8Do
- verfmB4r1BklHZoGnT5THxXsGWVXk/fr41wY2elWtsCDvfDgfSlaJSVK2yQVaazw1
- R9AnBp0p/+EcfDYZMdfWqXpu3idM20A3/i7eTPvfuNsHtu0kXjJtPUtLYT7xRBVs+
- pPuQhftyDl7QTmZtUxGf6/wsP5g4HQ0m0jQw1PO8a3JsM9wHVh9E2l7BPHiNcY+JU
- Chd88IwX7kb/NAFn5A==
+ b=FcT1XqI+VHFvGkKLCWgcpISrbQMFho7u06hbZNjetr3Rsns5Bc+UdNMEvmyHH0Qi
+ CtAddVXmR51S/sCkpxttovqp6c+2ySJHuoHNOLTXhX+P2cF/REjvssghIjipelBMz
+ BbttaVW4YGce8HoOlWoOddRsVjv2j9J/bjzg/v/tpMuHGATQn2vDjFL4dlInZ0XgS
+ 8aSMkx1IjAYkJfiinaPAaNaj+qW2yW6D5iUL34Fbd70jQM0XXWYHEkNdFo39gL8YP
+ nslO3Rjjs61sw8YdOGMBcggtiUIs4rkcUYamRpgeAl2ynNYaVHzBYM/D2nxiLoTzt
+ Y9zolWxEXqp2BYdDew==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([46.114.108.63]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MLiCo-1tPjN70qh6-00PTst; Mon, 04
- Nov 2024 21:46:13 +0100
-Date: Mon, 04 Nov 2024 21:46:10 +0100
+Received: from [127.0.0.1] ([46.114.108.63]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N1fii-1to2eZ0x8C-00u3Se; Mon, 04
+ Nov 2024 21:49:55 +0100
+Date: Mon, 04 Nov 2024 21:49:52 +0100
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Raymond Mao <raymond.mao@linaro.org>
-Subject: Re: [PATCH 2/9] test: Adjust print_ut test to use unsigned char
+CC: Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 3/9] docker: Support building for multiple architectures
 User-Agent: K-9 Mail for Android
-In-Reply-To: <20241104133954.840994-3-sjg@chromium.org>
+In-Reply-To: <20241104133954.840994-4-sjg@chromium.org>
 References: <20241104133954.840994-1-sjg@chromium.org>
- <20241104133954.840994-3-sjg@chromium.org>
-Message-ID: <F9A7881F-1242-4B52-B48E-F0512264989C@gmx.de>
+ <20241104133954.840994-4-sjg@chromium.org>
+Message-ID: <3BF73C1E-1FC5-4332-B93D-32001DF9157C@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:nWoMqEBgXv7gIA312Poye/q76psZBxYyAIAhDgF3+4Nd8zGdtul
- RnFnEFhw5VNBthWTYXqsjqcygabiP9zmgIDsj8UZczaByMu+3WWGgwCwHM7psNtem+PJrcd
- 6BPf2Cr2vThvy6s4UeshjmKiTj1j5nwsa3RVTuuN9nD7weUs+G2B2wPHJs+C/URSDXvAFPs
- I4voTQwAAD+MbboFTueWA==
-UI-OutboundReport: notjunk:1;M01:P0:YavS/pJnX5o=;YpI9ykoLEvG2q+4NhCqy5XNvnZK
- Gh4ynCcrGFNFPDIw650AQJvZsYoT4h3OuI9rTIJqpmQwWRWqrxsse4GtukhEt2UxrkJIS8Z91
- 1cDJqP/OWUxZGvE9wK7jrNsyRcvhyEboEr5Gcm/T+DVRyAL1+nZJyKXdgDBWWF/oeNiG8QRe3
- Oh7RszDgEsCesbLhX24Kn3ecSpCLeZ5iMgGNn64uGnydxy2fjclXwYG0YAc4KxgwIqcT4bCJg
- Ns/CsN+4+GYo2xOtA8ww/v/kqJZmfqWjZ0Z0bj7fLRsFBUUvYSonRmjsFswMtOXPtDC1DCHty
- RRFKnHMZfCGZ6ZmI/InkV3T6/Ic1plUXwAs3uFqiAm2eQTdHbuWI+qJClbroi8AcdHgg5y0QP
- nnvP0ol7tLgJtOizbsP+hBq0E4qFWolXf+tbLbGyiZLG5Ozg6Yu2hMH9qATxIdYL3+B5qNIbU
- SLAYsT1RZUx7+5kfDFzLeyS2NWKto/MKCrpl2HbjOQcw+BgWw1Xc8+MCtwWBxL3JDakFedzIj
- hjIIHfIKtkosEMbN9QxT0he7w0HdIAlgFWHR5JY5tRL9W9qMNhn3+sfgWjV2mBb/8jU9t9ZhL
- KPh151ZonYnx+cCe7OQcMfeNfEoJywfxW035F+3U5e7UuCH9nHCyvJ15XofBQAfZm3hgO7Dbr
- STLizzz+PQk1KSZhv1p55Nq73547dWC9mxauPQXK9fEL7YBfj3PD1f3wNaoJ4p8jECUxpshJA
- ZTXaPj4C6hvNAGYiMVSpzs7u+ffF2zltKVk3lY8WaoNMZImpZ0lWWPFVT9eHtyURYYkw3G/W2
- HIKGF4++NxZUVqD3VLe8ksXg==
+X-Provags-ID: V03:K1:54KVXQ5px7PJFJ4Uz+G+OROsg6Bis6WWlFZFrf+mMzmJKQvq4yV
+ t1zuiBfmy4Tqnp3pe3olIfGUw7lPIuOytuCcODLI/nx6MPCclF8TK4d0Sbtz8x1gXL0saHN
+ Ph5h2gb3N/Ls8GSoY+bWWig0YUsMjLhirHBPlxh6tQV+86gr5bSeocPO0z9Tn9UzytuDVqA
+ qqSOjxYX/kfVQnFR5juSQ==
+UI-OutboundReport: notjunk:1;M01:P0:HoHrXIN+qms=;S+/zYrgoS2PXU2pFWdZ8bV4rH+X
+ KvNke44JIVLuBPvKOt9JNYfD8jwaIvBOCIQVKcOlZgej6g7zNcn0UHw4Gq3WenjVHHnLnJDeb
+ /vT16un9QqDMdLPL9LPscV0tOP2hDWfjBarhBjLF+S+3td4Bv9U5Gljlje27jfFuePx9oxVQa
+ 6hvZLmls3zif8/OXdyHCDsiyo5W3TPE0+SQOEuS4QSfVXocEangbsy10LjqGGh+3O0QR7iFeq
+ ghZjyvuGSvMrDiGFTPHaKarZDnhociBvoIn26asz/cYv8bpYOlpwv+V0/VrdOmoGI+fVr5Ccq
+ 91VgwdiXf5wZ/xcSSXSaJkI7GP1lmHL5scrgkeyqbo4X2KbmNgoz/szlQJs+5t/FOShYruhvk
+ KaSJEAQ/DpxM8S/RqET4o0F1DpG8ktmEuQeyQvQdS+m0yOWAQfCb5WIsNlyFdpXVR1kYHpofH
+ TNFrWp1+6vAIOOTfON+++u5BNTFj78ersiuuQpw7OhdLT/uI30y2UMQ2q2dKtLI18M42VTZ8p
+ sJwQBSmvg9aprUtdVrjdl6MFdknh/yedE06pJKgDOc49JWaoQAhp8ybEgGpguQhoGShV0Rx2w
+ R/hWFCoeoLJh/t7M+oeJamFyy8Y5qPtSEvpLXMDOrVA8bmkGhTE0XKXU7ViyzC2Y1PgUgPPRz
+ THITuZvy4cW+CraK8uYZI3jzRAM5TmCJNWKda+3No1VZajt0dsqt2lWAAn4cpi85yAARqOFd+
+ /tyNSvmCINjwyek5yzNnwXbP81d0oClNN8+/n/PgMd9b1PMm9zqrcqyjqDorAGB0RJ6NFncla
+ dGXxqjhfSeQcLiO1EQ3bCKsQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,47 +91,53 @@ X-Virus-Status: Clean
 
 
 
-Am 4=2E November 2024 14:39:46 MEZ schrieb Simon Glass <sjg@chromium=2Eorg=
+Am 4=2E November 2024 14:39:47 MEZ schrieb Simon Glass <sjg@chromium=2Eorg=
 >:
->Since char is unsigned on arm64, this test currently fails=2E It seems
->better to use unsigned anyway, since 0xff is written into the string at
->the start=2E
+>Add instructions on how to build the file for multiple architectures=2E
+>Add a message indicating what is happening=2E
 >
 >Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
 >---
 >
-> test/print_ut=2Ec | 6 +++---
-> 1 file changed, 3 insertions(+), 3 deletions(-)
+> tools/docker/Dockerfile | 7 +++++++
+> 1 file changed, 7 insertions(+)
 >
->diff --git a/test/print_ut=2Ec b/test/print_ut=2Ec
->index f5e607b21a3=2E=2E7e5c015f3a7 100644
->--- a/test/print_ut=2Ec
->+++ b/test/print_ut=2Ec
->@@ -242,7 +242,7 @@ PRINT_TEST(print_display_buffer, UTF_CONSOLE);
+>diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+>index 967ac89fbde=2E=2Ec9d794082c8 100644
+>--- a/tools/docker/Dockerfile
+>+++ b/tools/docker/Dockerfile
+>@@ -2,6 +2,9 @@
+> # This Dockerfile is used to build an image containing basic stuff to be=
+ used
+> # to build U-Boot and run our test suites=2E
 >=20
-> static int print_hexdump_line(struct unit_test_state *uts)
-> {
->-	char *linebuf;
->+	u8 *linebuf;
-> 	u8 *buf;
-> 	int i;
+>+# Build with (for example):
+>+# docker buildx build --platform linux/arm64/v8,linux/amd64 --tag sjg20/=
+u-boot-gitlab-ci-runner-multiarch:jammy-20240808-03Nov2024 =2E
+>+
+> FROM ubuntu:jammy-20240808
+> LABEL org=2Eopencontainers=2Eimage=2Eauthors=3D"Tom Rini <trini@konsulko=
+=2Ecom>"
+> LABEL org=2Eopencontainers=2Eimage=2Edescription=3D" This image is for b=
+uilding U-Boot inside a container"
+>@@ -9,6 +12,10 @@ LABEL org=2Eopencontainers=2Eimage=2Edescription=3D" Th=
+is image is for building U-Boot i
+> # Make sure apt is happy
+> ENV DEBIAN_FRONTEND=3Dnoninteractive
 >=20
->@@ -255,10 +255,10 @@ static int print_hexdump_line(struct unit_test_stat=
-e *uts)
-> 	linebuf =3D map_sysmem(0x400, BUF_SIZE);
-> 	memset(linebuf, '\xff', BUF_SIZE);
-> 	ut_asserteq(-ENOSPC, hexdump_line(0, buf, 1, 0x10, 0, linebuf, 75));
->-	ut_asserteq(-1, linebuf[0]);
->+	ut_asserteq(0xff, linebuf[0]);
-> 	ut_asserteq(0x10, hexdump_line(0, buf, 1, 0x10, 0, linebuf, 76));
-> 	ut_asserteq(0, linebuf[75]);
+>+ARG TARGETPLATFORM
+>+ARG BUILDPLATFORM
 
-Should we add a ut_asserteq_str() here to check all characters?
+Please, add comments describing what these variables are used for=2E
 
-Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+Best regards
 
->-	ut_asserteq(-1, linebuf[76]);
->+	ut_asserteq(0xff, linebuf[76]);
->=20
-> 	unmap_sysmem(buf);
->=20
+Heinrich
+
+>+RUN echo "Building $BUILDPLATFORM, for target $TARGETPLATFORM"
+>+
+> # Add LLVM repository
+> RUN apt-get update && apt-get install -y gnupg2 wget xz-utils && rm -rf =
+/var/lib/apt/lists/*
+> RUN wget -O - https://apt=2Ellvm=2Eorg/llvm-snapshot=2Egpg=2Ekey | apt-k=
+ey add -
