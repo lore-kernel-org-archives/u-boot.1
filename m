@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B5CD132C7
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 13:50:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB32ED132C7
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 13:50:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6489088D7E;
-	Mon,  4 Nov 2024 14:50:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C6B0A88D3A;
+	Mon,  4 Nov 2024 14:50:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BC2788C75; Mon,  4 Nov 2024 14:50:35 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id AC86A889D2
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 14:50:31 +0100 (CET)
+ id ADA3288DFB; Mon,  4 Nov 2024 14:50:36 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 210AC88D3A
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 14:50:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chris.paterson2@renesas.com
-X-IronPort-AV: E=Sophos;i="6.11,257,1725289200"; d="scan'208";a="223825495"
+X-IronPort-AV: E=Sophos;i="6.11,257,1725289200"; d="scan'208";a="227814439"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 04 Nov 2024 22:50:29 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 04 Nov 2024 22:50:32 +0900
 Received: from spl2-146.example.org (unknown [10.24.1.209])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id E578541A9A9C;
- Mon,  4 Nov 2024 22:50:20 +0900 (JST)
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 94B3841A9AB3;
+ Mon,  4 Nov 2024 22:50:23 +0900 (JST)
 From: Chris Paterson <chris.paterson2@renesas.com>
 To: Biju Das <biju.das.jz@bp.renesas.com>, Tom Rini <trini@konsulko.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
@@ -34,10 +34,13 @@ To: Biju Das <biju.das.jz@bp.renesas.com>, Tom Rini <trini@konsulko.com>,
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
  u-boot@lists.denx.de, Chris Paterson <chris.paterson2@renesas.com>
-Subject: [PATCH 0/2] board: hoperun: Fix issues caused by upstream DTS changes
-Date: Mon,  4 Nov 2024 13:50:10 +0000
-Message-ID: <20241104135012.45814-1-chris.paterson2@renesas.com>
+Subject: [PATCH 1/2] configs: hihope_rzg2: Set correct MMC device for U-Boot
+ env
+Date: Mon,  4 Nov 2024 13:50:11 +0000
+Message-ID: <20241104135012.45814-2-chris.paterson2@renesas.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241104135012.45814-1-chris.paterson2@renesas.com>
+References: <20241104135012.45814-1-chris.paterson2@renesas.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -56,41 +59,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We've seen some issues after switching to using upstream Linux device
-trees that have stopped the hihope family of platforms from booting
-correctly.
+Currently we set CONFIG_SYS_MMC_ENV_DEV=1 which is wrong:
+  Loading Environment from MMC... MMC: no card present
+  *** Warning - No block device, using default environment
 
-The first patch corrects the MMC device used to store the U-Boot env.
-The second patch removes the U-Boot specific DTS changes so that we use
-the Linux device trees as-is.
+This issue was introduced when we switched to using upstream Linux device
+trees for the hihope boards which named the MMC devices differently.
 
-Kind regards, Chris
+Correct to dev 0 so that the U-Boot environment can be loaded from the
+correct storage device.
 
-Chris Paterson (1):
-  configs: hihope_rzg2: Set correct MMC device for U-Boot env
+Fixes: 18fb23b13158 ("ARM: dts: renesas: Switch to using upstream DT on 64bit Renesas SoCs")
 
-Lad Prabhakar (1):
-  board: hoperun: Switch to use complete DTS files from upstream DTS
+Signed-off-by: Chris Paterson <chris.paterson2@renesas.com>
+Signed-off-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+---
+ configs/hihope_rzg2_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- .../dts/r8a774a1-hihope-rzg2m-ex-u-boot.dtsi  |  8 ++++
- .../arm/dts/r8a774a1-hihope-rzg2m-u-boot.dtsi | 26 -----------
- arch/arm/dts/r8a774a1-u-boot.dtsi             | 42 -----------------
- .../dts/r8a774b1-hihope-rzg2n-ex-u-boot.dtsi  |  8 ++++
- .../arm/dts/r8a774b1-hihope-rzg2n-u-boot.dtsi | 26 -----------
- arch/arm/dts/r8a774b1-u-boot.dtsi             | 40 ----------------
- .../dts/r8a774e1-hihope-rzg2h-ex-u-boot.dtsi  |  8 ++++
- .../arm/dts/r8a774e1-hihope-rzg2h-u-boot.dtsi | 26 -----------
- arch/arm/dts/r8a774e1-u-boot.dtsi             | 46 -------------------
- board/hoperun/hihope-rzg2/hihope-rzg2.c       |  6 +--
- configs/hihope_rzg2_defconfig                 | 10 ++--
- 11 files changed, 32 insertions(+), 214 deletions(-)
- create mode 100644 arch/arm/dts/r8a774a1-hihope-rzg2m-ex-u-boot.dtsi
- delete mode 100644 arch/arm/dts/r8a774a1-hihope-rzg2m-u-boot.dtsi
- create mode 100644 arch/arm/dts/r8a774b1-hihope-rzg2n-ex-u-boot.dtsi
- delete mode 100644 arch/arm/dts/r8a774b1-hihope-rzg2n-u-boot.dtsi
- create mode 100644 arch/arm/dts/r8a774e1-hihope-rzg2h-ex-u-boot.dtsi
- delete mode 100644 arch/arm/dts/r8a774e1-hihope-rzg2h-u-boot.dtsi
-
+diff --git a/configs/hihope_rzg2_defconfig b/configs/hihope_rzg2_defconfig
+index 6266f3cbc564..f51660300c6b 100644
+--- a/configs/hihope_rzg2_defconfig
++++ b/configs/hihope_rzg2_defconfig
+@@ -24,7 +24,7 @@ CONFIG_MULTI_DTB_FIT_LZO=y
+ CONFIG_MULTI_DTB_FIT_USER_DEFINED_AREA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_SYS_MMC_ENV_DEV=0
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_GPIO_HOG=y
+ CONFIG_DM_PCA953X=y
 -- 
 2.43.0
 
