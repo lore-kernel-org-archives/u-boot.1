@@ -4,72 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B117D1BDD4
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 17:51:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 051F1D1BDD4
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 17:51:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65BC288ED9;
-	Mon,  4 Nov 2024 18:51:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CE88088DFA;
+	Mon,  4 Nov 2024 18:51:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nWQdPEwa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XCgPPwYF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03CD088D7E; Mon,  4 Nov 2024 18:51:25 +0100 (CET)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id C8A4F88F4E; Mon,  4 Nov 2024 18:51:26 +0100 (CET)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D565788DFA
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 18:51:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8067188618
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 18:51:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-83ab5b4b048so212339739f.2
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 09:51:22 -0800 (PST)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3e602a73ba1so2471031b6e.2
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 09:51:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730742681; x=1731347481; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730742683; x=1731347483; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Wm4E9xlZw9x6n5A9J58U+VgJ1bv+Wqol7oUbwpKYvJg=;
- b=nWQdPEwadrPigzM4rmlELABqbXbTk5p//5195MnRx0r56J/dSSNKDaMN4RqxAX8aP3
- iWxguaFXe9EPvJiBYOKNs4CFhZ/uhOOXGjCCbb3yN+1xI/4wamJ2rQmhiAcU4XxsYVwU
- BlyBWnGB5SNoLGYeDmr5JNQ+6XiUa2sJmH67c=
+ bh=pBYTjdxWCadibcCbIw2uY5w6dzpPH2gyh9V5jrl7U1s=;
+ b=XCgPPwYF4g1q73PSFUqBcNVedW5vfkoehvQf8Y8spPECkYQSw1SOX8sMFBVyppQHpr
+ CjrgHcOyWwqwmCu9yvvJQiLoPiN97UW7JhbVZkE7HM+G+MH4SEsqaCbSbrtvNd+5E/iH
+ 5JAVxla4Mxy6tMCE6rPu5PLWyZUluJB2SF8fs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730742681; x=1731347481;
+ d=1e100.net; s=20230601; t=1730742683; x=1731347483;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Wm4E9xlZw9x6n5A9J58U+VgJ1bv+Wqol7oUbwpKYvJg=;
- b=AnUD0CQS+fGOBIf9RDFw4C1DGGHvUAezsfTfn97NViHm3s1JhnMh0LSIZbSrELhYA/
- WvCxRVofDC9Ak+IwF3OgmPbzqXxlaREnsKet7uH2QdE9o8xcsm05zXOACjEjZzEsC+ZS
- afH/BXq8t8RZNI+/RQOg0udaAYGLcb3wLN1WSwCVaQQGyyHjnRJPObesVXnnqGHDbQlI
- wavpWSToGtjIQY3zvpMGpKnkZfbI5UsB3gdNdC2hFTXJoUBS92nMtdS6Yuim7h1WmVQf
- SOP8Htm66MAaWp5pw3Pgp8yIBVxlIi2bR5kY477viR20o1+CB4+LmXlzTEuoULXovVVN
- jLNQ==
-X-Gm-Message-State: AOJu0YyiFQ+1y9coxgEvdnFwH40ADyPadRgAIrATAkHiZNj32q8Y1o5m
- vpDKJqbGQqmmHUok4dku/c/Xw6v6l4ltFfGCUDAdRP1AiicKdlaJ9AL8sm7V8GF3ca67jHjUIN8
+ bh=pBYTjdxWCadibcCbIw2uY5w6dzpPH2gyh9V5jrl7U1s=;
+ b=wfrR24XApUOjWGzesXtVeFTRRR1AjBrsMJMU0F6fYQs1fup1J4erHqDElOtAcAhSDi
+ en9AXbcD4zv/IZB6F0eDHlzCaReySMhLeMMf+kAEbrVVpiqTjeNSkvAXCvBnwSUj7T+H
+ uF0RMNvNYuoQD+9OcJIs/nYjIobFRgUvWfxRWJLpd/+pv2r5OBMSUeMveyaBPPxT9fw9
+ KleROJKljCjMmUU/LHIQfBs5afoWOAW+97U04wR0cl7xtyQr6/wE/fNXrKxCR2rMm1IJ
+ OTWVno7rJkUdgNzGgkntR+2V+lwQI7S+CSj2og5xflfA1+TwRh9bz+MW7RKNEQJxhCnn
+ g7Ow==
+X-Gm-Message-State: AOJu0YxubvF82Qpw2TvxYh4VhRVyPuqCUpU6AhGjXlNxHgod/jh9T3M+
+ DIBi2lKp5mBO4K9JKpVzzYpPBd9xUGDTAkrDJdrH3esNfnWs23JOcq5+L2FIX3atxT+t17su9y0
  =
-X-Google-Smtp-Source: AGHT+IGUkdL1xDPoUl341/Fbb7EWT1vyGF0R4jYE3lwJBYn+dOTaOhUSWM4ezXuw7/nIbTaeZHwUbw==
-X-Received: by 2002:a05:6e02:12e1:b0:3a6:ac17:13e4 with SMTP id
- e9e14a558f8ab-3a6ac1717a2mr146600335ab.18.1730742681096; 
- Mon, 04 Nov 2024 09:51:21 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFCUt85+bwixIYLuQ3BEiDpplmU8ZtVmhJslxrEkKjwFT/AhZUbE8FEUOGnTNY0TFUvv2wIZg==
+X-Received: by 2002:a05:6808:1a2a:b0:3e6:1e56:93b6 with SMTP id
+ 5614622812f47-3e66091594amr15062349b6e.38.1730742682622; 
+ Mon, 04 Nov 2024 09:51:22 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4de04977b30sm2005288173.116.2024.11.04.09.51.19
+ 8926c6da1cb9f-4de04977b30sm2005288173.116.2024.11.04.09.51.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 09:51:20 -0800 (PST)
+ Mon, 04 Nov 2024 09:51:21 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Guillaume La Roque <glaroque@baylibre.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH v3 03/19] bootstd: Add a function to get bootstd only if
- available
-Date: Mon,  4 Nov 2024 10:50:54 -0700
-Message-Id: <20241104175110.1048449-4-sjg@chromium.org>
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Nam Cao <namcao@linutronix.de>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Shantur Rathore <i@shantur.com>,
+ =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+ Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH v3 04/19] bootstd: Drop the bootdev-specific list of bootflows
+Date: Mon,  4 Nov 2024 10:50:55 -0700
+Message-Id: <20241104175110.1048449-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241104175110.1048449-1-sjg@chromium.org>
 References: <20241104175110.1048449-1-sjg@chromium.org>
@@ -91,68 +101,228 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a function which is safe to call in the 'unbind' path, which
-returns the bootstd priv data if available.
+This list is only used by two functions, which can be updated to iterate
+through the global list. Take this approach, which allows the bootdev
+list to be dropped.
+
+Overall this makes the code slightly more complicated, but will allow
+moving the bootflow list into an alist
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootstd-uclass.c | 11 +++++++++++
- include/bootstd.h     | 17 +++++++++++++++++
- 2 files changed, 28 insertions(+)
+ boot/bootdev-uclass.c | 61 +++++++++++++++++++++++++++----------------
+ boot/bootflow.c       |  2 --
+ boot/bootstd-uclass.c | 17 +++++-------
+ include/bootdev.h     |  2 --
+ include/bootflow.h    |  5 +---
+ include/bootstd.h     |  2 +-
+ 6 files changed, 48 insertions(+), 41 deletions(-)
 
-diff --git a/boot/bootstd-uclass.c b/boot/bootstd-uclass.c
-index 596d3e5e41d..b2f80808c85 100644
---- a/boot/bootstd-uclass.c
-+++ b/boot/bootstd-uclass.c
-@@ -140,6 +140,17 @@ const char *const *const bootstd_get_prefixes(struct udevice *dev)
- 	return std->prefixes ? std->prefixes : default_prefixes;
- }
+diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
+index 26b003427ec..81adfb4cfb7 100644
+--- a/boot/bootdev-uclass.c
++++ b/boot/bootdev-uclass.c
+@@ -32,30 +32,57 @@ enum {
+ 	BOOT_TARGETS_MAX_LEN	= 100,
+ };
  
-+struct bootstd_priv *bootstd_try_priv(void)
++struct bootflow *bootdev_next_bootflow_(struct bootstd_priv *std,
++					struct udevice *dev,
++					struct bootflow *prev)
 +{
-+	struct udevice *dev;
++	struct bootflow *bflow = prev;
 +
-+	dev = uclass_try_first_device(UCLASS_BOOTSTD);
-+	if (!dev || !device_active(dev))
-+		return NULL;
++	if (bflow) {
++		if (list_is_last(&bflow->glob_node, &std->glob_head))
++			return NULL;
++		bflow = list_entry(bflow->glob_node.next, struct bootflow,
++				   glob_node);
++	} else {
++		if (list_empty(&std->glob_head))
++			return NULL;
 +
-+	return dev_get_priv(dev);
++		bflow = list_first_entry(&std->glob_head, struct bootflow,
++					 glob_node);
++	}
++
++	while (bflow->dev != dev) {
++		if (list_is_last(&bflow->glob_node, &std->glob_head))
++			return NULL;
++		bflow = list_entry(bflow->glob_node.next, struct bootflow,
++				   glob_node);
++	}
++
++	return bflow;
 +}
 +
- int bootstd_get_priv(struct bootstd_priv **stdp)
+ int bootdev_first_bootflow(struct udevice *dev, struct bootflow **bflowp)
  {
+-	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
++	struct bootstd_priv *std = bootstd_try_priv();
++	struct bootflow *bflow;
+ 
+-	if (list_empty(&ucp->bootflow_head))
++	bflow = bootdev_next_bootflow_(std, dev, NULL);
++	if (!bflow)
+ 		return -ENOENT;
+-
+-	*bflowp = list_first_entry(&ucp->bootflow_head, struct bootflow,
+-				   bm_node);
++	*bflowp = bflow;
+ 
+ 	return 0;
+ }
+ 
+ int bootdev_next_bootflow(struct bootflow **bflowp)
+ {
+-	struct bootflow *bflow = *bflowp;
+-	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(bflow->dev);
+-
+-	*bflowp = NULL;
++	struct bootstd_priv *std = bootstd_try_priv();
++	struct bootflow *bflow;
+ 
+-	if (list_is_last(&bflow->bm_node, &ucp->bootflow_head))
++	bflow = bootdev_next_bootflow_(std, (*bflowp)->dev, *bflowp);
++	if (!bflow)
+ 		return -ENOENT;
+-
+-	*bflowp = list_entry(bflow->bm_node.next, struct bootflow, bm_node);
++	*bflowp = bflow;
+ 
+ 	return 0;
+ }
+@@ -911,15 +938,6 @@ void bootdev_list_hunters(struct bootstd_priv *std)
+ 	printf("(total hunters: %d)\n", n_ent);
+ }
+ 
+-static int bootdev_post_bind(struct udevice *dev)
+-{
+-	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
+-
+-	INIT_LIST_HEAD(&ucp->bootflow_head);
+-
+-	return 0;
+-}
+-
+ static int bootdev_pre_unbind(struct udevice *dev)
+ {
+ 	int ret;
+@@ -936,6 +954,5 @@ UCLASS_DRIVER(bootdev) = {
+ 	.name		= "bootdev",
+ 	.flags		= DM_UC_FLAG_SEQ_ALIAS,
+ 	.per_device_plat_auto	= sizeof(struct bootdev_uc_plat),
+-	.post_bind	= bootdev_post_bind,
+ 	.pre_unbind	= bootdev_pre_unbind,
+ };
+diff --git a/boot/bootflow.c b/boot/bootflow.c
+index d8807eb109d..804809dc100 100644
+--- a/boot/bootflow.c
++++ b/boot/bootflow.c
+@@ -476,8 +476,6 @@ void bootflow_free(struct bootflow *bflow)
+ 
+ void bootflow_remove(struct bootflow *bflow)
+ {
+-	if (bflow->dev)
+-		list_del(&bflow->bm_node);
+ 	list_del(&bflow->glob_node);
+ 
+ 	bootflow_free(bflow);
+diff --git a/boot/bootstd-uclass.c b/boot/bootstd-uclass.c
+index b2f80808c85..91e90bdf43c 100644
+--- a/boot/bootstd-uclass.c
++++ b/boot/bootstd-uclass.c
+@@ -77,25 +77,22 @@ int bootstd_add_bootflow(struct bootflow *bflow)
+ 	memcpy(new, bflow, sizeof(*bflow));
+ 
+ 	list_add_tail(&new->glob_node, &std->glob_head);
+-	if (bflow->dev) {
+-		struct bootdev_uc_plat *ucp = dev_get_uclass_plat(bflow->dev);
+-
+-		list_add_tail(&new->bm_node, &ucp->bootflow_head);
+-	}
+ 
+ 	return 0;
+ }
+ 
+ int bootstd_clear_bootflows_for_bootdev(struct udevice *dev)
+ {
+-	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
++	struct bootstd_priv *std = bootstd_try_priv();
+ 
+-	while (!list_empty(&ucp->bootflow_head)) {
++	if (std) {
+ 		struct bootflow *bflow;
++		struct list_head *pos;
+ 
+-		bflow = list_first_entry(&ucp->bootflow_head, struct bootflow,
+-					 bm_node);
+-		bootflow_remove(bflow);
++		list_for_each(pos, &std->glob_head) {
++			bflow = list_entry(pos, struct bootflow, glob_node);
++			bootflow_remove(bflow);
++		}
+ 	}
+ 
+ 	return 0;
+diff --git a/include/bootdev.h b/include/bootdev.h
+index f9cae2fd1fd..991b6229c1c 100644
+--- a/include/bootdev.h
++++ b/include/bootdev.h
+@@ -109,11 +109,9 @@ struct bootdev_hunter {
+  * This is attached to each device in the bootdev uclass and accessible via
+  * dev_get_uclass_plat(dev)
+  *
+- * @bootflows: List of available bootflows for this bootdev
+  * @piro: Priority of this bootdev
+  */
+ struct bootdev_uc_plat {
+-	struct list_head bootflow_head;
+ 	enum bootdev_prio_t prio;
+ };
+ 
+diff --git a/include/bootflow.h b/include/bootflow.h
+index 4d2fc7b69b5..64d1d6c3786 100644
+--- a/include/bootflow.h
++++ b/include/bootflow.h
+@@ -56,12 +56,10 @@ enum bootflow_flags_t {
+ /**
+  * struct bootflow - information about a bootflow
+  *
+- * This is connected into two separate linked lists:
++ * This is connected into a linked list:
+  *
+- *   bm_sibling - links all bootflows in the same bootdev
+  *   glob_sibling - links all bootflows in all bootdevs
+  *
+- * @bm_node: Points to siblings in the same bootdev
+  * @glob_node: Points to siblings in the global list (all bootdev)
+  * @dev: Bootdev device which produced this bootflow, NULL for flows created by
+  *      BOOTMETHF_GLOBAL bootmeths
+@@ -92,7 +90,6 @@ enum bootflow_flags_t {
+  * @bootmeth_priv: Private data for the bootmeth
+  */
+ struct bootflow {
+-	struct list_head bm_node;
+ 	struct list_head glob_node;
  	struct udevice *dev;
+ 	struct udevice *blk;
 diff --git a/include/bootstd.h b/include/bootstd.h
-index 4220ece785d..4535d91e2ad 100644
+index 4535d91e2ad..8aff536e3cb 100644
 --- a/include/bootstd.h
 +++ b/include/bootstd.h
-@@ -89,6 +89,23 @@ const char *const *const bootstd_get_prefixes(struct udevice *dev);
-  */
- int bootstd_get_priv(struct bootstd_priv **stdp);
+@@ -123,7 +123,7 @@ void bootstd_clear_glob(void);
+ int bootstd_prog_boot(void);
  
-+/**
-+ * bootstd_try_priv() - Try to get the (single) state for the bootstd system
-+ *
-+ * The state holds a global list of all bootflows that have been found. This
-+ * function returns the state if available, but takes care not to create the
-+ * device (or uclass) if it doesn't exist.
-+ *
-+ * This function is safe to use in the 'unbind' path. It will always return NULL
-+ * unless the bootstd device is probed and ready, e.g. bootstd_get_priv() has
-+ * previously been called.
-+ *
-+ * TODO(sjg@chromium.org): Consider adding a bootstd pointer to global_data
-+ *
-+ * Return: pointer if the device exists, else NULL
-+ */
-+struct bootstd_priv *bootstd_try_priv(void);
-+
  /**
-  * bootstd_clear_glob() - Clear the global list of bootflows
+- * bootstd_add_bootflow() - Add a bootflow to the bootdev's and global list
++ * bootstd_add_bootflow() - Add a bootflow to the global list
   *
+  * All fields in @bflow must be set up. Note that @bflow->dev is used to add the
+  * bootflow to that device.
 -- 
 2.34.1
 
