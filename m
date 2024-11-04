@@ -4,72 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79EF3D1119A
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 01:49:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CE29D1119B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 02:00:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF1AF890FE;
-	Mon,  4 Nov 2024 02:49:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 8B93388D3A;
+	Mon,  4 Nov 2024 03:00:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="m2XWi32o";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X7tOFCc/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5491A8911A; Mon,  4 Nov 2024 02:49:50 +0100 (CET)
-Received: from mail-vk1-xa4a.google.com (mail-vk1-xa4a.google.com
- [IPv6:2607:f8b0:4864:20::a4a])
+ id E7AB58911A; Mon,  4 Nov 2024 03:00:39 +0100 (CET)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D9DC88ED9
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 02:49:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 57EE688D3A
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 03:00:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=3OigoZwcKBmsVXaRciOPXXPUN.LXVd-KXXcURbcb.MNWg.MN@flex--moritzf.bounces.google.com
-Received: by mail-vk1-xa4a.google.com with SMTP id
- 71dfb90a1353d-50d7265097eso1131412e0c.3
- for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 17:49:48 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-7ea7ad1e01fso2526246a12.0
+ for <u-boot@lists.denx.de>; Sun, 03 Nov 2024 18:00:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1730684987; x=1731289787; darn=lists.denx.de;
- h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=5wBS2MfxEIm+Ba327ldZknhhu1RLabedydjiCFyqJgE=;
- b=m2XWi32oiSlKtpYeU9cb6ISJRUkxKp5DtzjVZbclOFUYRoolVsjzyUT8dQyGY8f+Bs
- 92jpPAuH4D4TlCY6a9x7hG4KHaw+V3GrtfSRHr1S25+h9tLtiTP4w8jxF6XLT5iPfiIP
- E5D7DtAbfY2Lw8+jBgUj3aEuTsijq+0OsYB/KBCt3+vEElXztmgmHTlTNj5U48TAeenQ
- tOCPtHyZHPCz8y8uaSxkmTtvhVpbI4XJuKMHXA66e7P6j7sZbaIP9W3ql6MvSznLZfGm
- fnR01Y4039DQcytRlvWJTXg+uI13L8eS/x1XH6LhkMEMRpxDAAD0xgdsBuf5bxIjpBok
- B4Dw==
+ d=gmail.com; s=20230601; t=1730685636; x=1731290436; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RLF8VwtvhjrzSNK/tAN4F/LJMkR5fbXCyQTX2Ga1DqU=;
+ b=X7tOFCc/z1En483GILWDR0nONHG1prW7iGN6nHAPXiUMCbKMdCklHMAmDuEgMLS9u/
+ SAjzOQk8eSSuH0uDiTFFxsFHfZwZjpuwNv9h8fpugeCXECt/3il6cRH/dL1HdWJT3NzB
+ rXI5B3B3HzQtXyZtbV5fJXEuFVcSPHJL5w7+gKZ80zs1BJf9++3P5ZF1+spKUAAMvEUH
+ VJyvPqJn+4JyDgYzuzUT0VLr8gqJa8SQcy+oYbiTsbw79mN9olfuXWIr4rUAfmeSiWSw
+ otwqTPqPR0Xne/CpaW6NHU9i4/n1OlyUxdbNLj/HsZ4DoouCxRl+7TYbYC1711Z87THD
+ KLew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730684987; x=1731289787;
- h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=5wBS2MfxEIm+Ba327ldZknhhu1RLabedydjiCFyqJgE=;
- b=njT+LIqBMddh/CN+ffxFl1SUWtIoko1Tn0YofT7Ts0ZfdsacP9dBt41ArtbaHiz3vv
- IVuM6da/YzO95ug7tNNG5sRKXYM8lyAC0LLlN+fFwSCs2hhtazV5MYDxQ9bT3N03Lhfq
- LCKpcyV8na1UnN+k7TTdUbCQZoPAaE/jeB5i31tCaZAaHIjX2cgD0oU8NzrugqXwxgHq
- Cv8OFiZbsttA4LgiM8medTGlkIYHpKFsHkK5D7NaaKIHobAikAnYhTlvvZDHL9n0QadB
- z1N0/vL4QEglNyj1hiLMCPRF+bhUf9ahwIwk40StV+RstZ+5/ino0uAnnu7g+TL34jyS
- YSUg==
-X-Gm-Message-State: AOJu0YweZuggDVEJymniMush16ZO/HYo7CXvClUFpEfmGENQLcOYdlFd
- z7LU7Ytm5a2V7EtZNOFD+/Cbt7mlt96iNUwSXv9jQWpcjE82ZD66Mzi/w6weBVJxM8bTCLC7MZU
- BTyFEulIc6HzGmXlRLfD4N15GKoNbO755LUsnzIF1a2jOo94+yyiDpGcScfTEYoQC5Hl3UObg8Z
- zv4f7hkbGs6LpzULcQZRz9boygQRqPW51rq3E=
-X-Google-Smtp-Source: AGHT+IGI8sB4y3L8wVFgchnWbwPlfX02CMgQDjOmE/5qUZ3u39PDIxkNMVh68i6y5SN4GT7r1ZO8VbZCwUrc
-X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:13f:f0c:ac12:c151])
- (user=moritzf job=sendgmr) by 2002:a05:6102:290e:b0:4a4:8bad:f129 with SMTP
- id ada2fe7eead31-4a8cfb25a52mr126059137.1.1730684986101; Sun, 03 Nov 2024
- 17:49:46 -0800 (PST)
-Date: Mon,  4 Nov 2024 01:49:34 +0000
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.47.0.163.g1226f6d8fa-goog
-Message-ID: <20241104014934.2542857-1-moritzf@google.com>
-Subject: [PATCH] efi_loader: Change efi_dp_from_mem() to use size
-From: Moritz Fischer <moritzf@google.com>
-To: u-boot@lists.denx.de
-Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com, 
- pwildt@google.com, Moritz Fischer <moritzf@google.com>
+ d=1e100.net; s=20230601; t=1730685636; x=1731290436;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RLF8VwtvhjrzSNK/tAN4F/LJMkR5fbXCyQTX2Ga1DqU=;
+ b=RNNeZvGUNUJeBJbOLVbCRELLr4qLiiFzGRbds2tmhJ858rxPxp2wHYkCQyx8SHKwDe
+ tQFe71E2zFaZ/BPMe4cLhWEIidFNyyIV12o8qpgbtVpkKDBrkHcX2QyHMw1rUT9aQ1ot
+ jtUTwMxfSZDg09GkGYe75L613oE0gH8EtJsLsqjk/YvBj6mDy3biUCxR/sMt5JJutRwS
+ TARtVcSCQPsqPf/4ojhsTLWeqgFL8crTo3UwXvw3O9fLjlRfT85VrBmfM0AXcoKXFC9Q
+ CCe/o9ZGn8sRNdmThOdvfi2fu3DkHRaeYyaDUlKj8w8DzAPQ7OQ1cT04jF5+EjF1Ryv0
+ bHDA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWUHZBaIKdPxFZPuXCV4EdQm9D0I4f0gBuzxFYOGJ97m0vw6pUiAGSBnxW63eEdQWIBoOuXLNQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyzuSlTpXMDPO1+L6ZICve1NUTlGZW5KgkirZRuxFD/S/hA9KJA
+ MdIiN9icF7iGFFSX2k2jgC2YWRUhC0nreO+dbn9DZNyZkcjWEKYceH+qJ0fFvIXsJFdahbYMZmr
+ wIoZOTIFMZOFMugAdBqyCWdAZVWE=
+X-Google-Smtp-Source: AGHT+IGvJH83syC1oOMu5WHWA+iVKUqjquyVpAXJQxM/HuqcsaBP5c8juR/wa5EynbpMpUncJF2vVtFVJFIIemvUzjU=
+X-Received: by 2002:a17:90b:4f44:b0:2e2:c2b0:d03e with SMTP id
+ 98e67ed59e1d1-2e93e0768damr21537691a91.5.1730685635573; Sun, 03 Nov 2024
+ 18:00:35 -0800 (PST)
+MIME-Version: 1.0
+References: <20240808110654.4215b129@wsk>
+ <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
+ <20240815221421.61f64a17@wsk>
+ <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
+ <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
+ <20240828100452.2143873d@wsk>
+ <CAHCN7xLY4FxB4HZLcE0pEZsx7V=dhVokh2Wcrn2Jjf+B+SLCJg@mail.gmail.com>
+ <20240905155402.486a7110@wsk>
+ <CAHCN7x+jLfzMGFUcbAfHr9u_2s3Z=LxN-TNCtbzUUop66p4Rpw@mail.gmail.com>
+In-Reply-To: <CAHCN7x+jLfzMGFUcbAfHr9u_2s3Z=LxN-TNCtbzUUop66p4Rpw@mail.gmail.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Sun, 3 Nov 2024 20:00:22 -0600
+Message-ID: <CAHCN7xK3-iUUGf20-JxAWfK05-te=sskbdpU4kU8ahy8sfROFg@mail.gmail.com>
+Subject: Re: [Binman] Question regarding SPL symbol offsets generation
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@gmail.com>, 
+ Mamta Shukla <mamta.shukla@leica-geosystems.com>, u-boot@lists.denx.de, 
+ Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,86 +99,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-All call sites are using size rather than end addresses,
-so instead - as previously done - calculating an end address
-everywhere, just modify the function to use size and internally
-calculate the end address
+On Sun, Nov 3, 2024 at 7:41=E2=80=AFPM Adam Ford <aford173@gmail.com> wrote=
+:
+>
+> On Thu, Sep 5, 2024 at 8:54=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
+ote:
+> >
+> > Hi Adam,
+> >
+> > > On Wed, Aug 28, 2024 at 3:04=E2=80=AFAM Lukasz Majewski <lukma@denx.d=
+e> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > > Hi,
+> > > > >
+> > > > > On Tue, 27 Aug 2024 at 12:47, Fabio Estevam <festevam@gmail.com>
+> > > > > wrote:
+> > > > > >
+> > > > > > Hi Lukasz,
+> > > > > >
+> > > > > > On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski <lukma@=
+denx.de>
+> > > > > > wrote:
+> > > > > > > Unfortunately not - this change is only for properly setting
+> > > > > > > start address of the u-boot.
+> > > > > > >
+> > > > > > > The _real_ problem here is the symbol placement generated by
+> > > > > > > binman when we try to define the image as a single one.
+> > > > > > >
+> > > > > > > Moreover, this change follows other boards with imx8mm
+> > > > > > > processor - ./configs/imx8mm_beacon_fspi_defconfig to be
+> > > > > > > specific.
+> > > > > > >
+> > > > > > > The "fix" (for which I'd been now probably opt) for this issu=
+e
+> > > > > > > would be to generate two images with binman - one for
+> > > > > > > u-boot-spl-ddr.bin and the final flash.bin with the former on=
+e
+> > > > > > > included (as it was before SHA1:
+> > > > > > > 37e50627efacd8dae18b564e9d8886a033e181bc)
+> > > > > >
+> > > > > > Is QSPI boot broken on i.MX8MM?
+> > > > > >
+> > > > > > I am adding Adam and Mamta who have tested QSPI booting on
+> > > > > > imx8mm_beacon and imx8mm_evk, respectively.
+> > > > >
+> > > > > Note also that I sent a series[1] which allows the symbols-base
+> > > > > to be adjusted, if that helps.
+> > > >
+> > > > I've seen them - but not yet tested.
+> > > >
+> > > > Thanks Simon for the patch series.
+> > >
+> > > Is it still broken with this patch series?  I have been traveling and
+> > > haven't had much time to test.
+> >
+> > Yes, I can confirm that it is still broken.
+>
+> Sorry for the delay.  I had to return my 8MM to Beacon, and I was
+> waiting for a replacement.
+>
+> To not prolong it anymore, I decided to try it with an 8M Nano, and I
+> got a boot failure on master. I was able to successfully boot
+> 2024.01-rc5, but I haven't had time to bisect it yet.  I'll try to do
+> that this week.  I think once we can bisect the error, it might become
+> more apparent.
 
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Patrick Wildt <pwildt@google.com>
-Signed-off-by: Moritz Fischer <moritzf@google.com>
----
+Git bisect narrowed down the git which broke the build:
 
-Thinking about this some more it seems more sensible to fix this
-in the function rather than patching all the call sites;
-it seems we even missed another call site.
+commit 37e50627efacd8dae18b564e9d8886a033e181bc (HEAD)
+Author: Marek Vasut <marex@denx.de>
+Date:   Fri Apr 26 01:00:37 2024 +0200
 
-- Moritz
+    ARM: dts: imx: Convert i.MX8M flash.bin image generation to binman
 
----
- include/efi_loader.h             | 2 +-
- lib/efi_loader/efi_bootbin.c     | 1 -
- lib/efi_loader/efi_device_path.c | 7 +++----
- 3 files changed, 4 insertions(+), 6 deletions(-)
+I am guessing the binman isn't prepending the header stuff.  I'll try
+to investigate it this week.
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 291eca5c07..39809eac1b 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -858,7 +858,7 @@ struct efi_device_path *efi_dp_from_file(const struct efi_device_path *dp,
- struct efi_device_path *efi_dp_from_eth(void);
- struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
- 					uint64_t start_address,
--					uint64_t end_address);
-+					size_t size);
- /* Determine the last device path node that is not the end node. */
- const struct efi_device_path *efi_dp_last_node(
- 			const struct efi_device_path *dp);
-diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-index bf38392fac..a87006b3c0 100644
---- a/lib/efi_loader/efi_bootbin.c
-+++ b/lib/efi_loader/efi_bootbin.c
-@@ -137,7 +137,6 @@ efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
- 		 */
- 		file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
- 					    (uintptr_t)source_buffer,
--					    (uintptr_t)source_buffer +
- 					    source_size);
- 		/*
- 		 * Make sure that device for device_path exist
-diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index d7444588aa..ee387e1dfd 100644
---- a/lib/efi_loader/efi_device_path.c
-+++ b/lib/efi_loader/efi_device_path.c
-@@ -977,7 +977,7 @@ struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
- /* Construct a device-path for memory-mapped image */
- struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
- 					uint64_t start_address,
--					uint64_t end_address)
-+					size_t size)
- {
- 	struct efi_device_path_memory *mdp;
- 	void *buf, *start;
-@@ -992,7 +992,7 @@ struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
- 	mdp->dp.length = sizeof(*mdp);
- 	mdp->memory_type = memory_type;
- 	mdp->start_address = start_address;
--	mdp->end_address = end_address;
-+	mdp->end_address = start_address + size;
- 	buf = &mdp[1];
- 
- 	*((struct efi_device_path *)buf) = END;
-@@ -1073,8 +1073,7 @@ efi_status_t efi_dp_from_name(const char *dev, const char *devnr,
- 		efi_get_image_parameters(&image_addr, &image_size);
- 
- 		dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
--				     (uintptr_t)image_addr,
--				     (uintptr_t)image_addr + image_size);
-+				     (uintptr_t)image_addr, image_size);
- 	} else if (IS_ENABLED(CONFIG_NETDEVICES) && !strcmp(dev, "Net")) {
- 		dp = efi_dp_from_eth();
- 	} else if (!strcmp(dev, "Uart")) {
--- 
-2.47.0.163.g1226f6d8fa-goog
+adam
 
+>
+> adam
+>
+> >
+> > I've applied:
+> > https://patchwork.ozlabs.org/project/uboot/cover/20240826191143.426387-=
+1-sjg@chromium.org/
+> >
+> > on top of mainline:
+> > SHA1: 1630ff26cc960439b5949b80cfc604a2c8aa47dd
+> >
+> > Adding symbols-base =3D <0>; to imx8mm-u-boot.dtsi did not help.
+> >
+> > >
+> > > adam
+> > > >
+> > > > >
+> > > > > Regards,
+> > > > > Simon
+> > > > >
+> > > > > [1]
+> > > > > https://patchwork.ozlabs.org/project/uboot/list/?series=3D421010
+> > > >
+> > > >
+> > > >
+> > > >
+> > > > Best regards,
+> > > >
+> > > > Lukasz Majewski
+> > > >
+> > > > --
+> > > >
+> > > > DENX Software Engineering GmbH,      Managing Director: Erika Unter
+> > > > HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell,
+> > > > Germany Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email:
+> > > > lukma@denx.de
+> >
+> >
+> >
+> >
+> > Best regards,
+> >
+> > Lukasz Majewski
+> >
+> > --
+> >
+> > DENX Software Engineering GmbH,      Managing Director: Erika Unter
+> > HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> > Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.d=
+e
