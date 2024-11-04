@@ -4,75 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C971D132BF
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 13:07:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A489D132C4
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 13:34:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFDA788936;
-	Mon,  4 Nov 2024 14:07:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 39AB088C7C;
+	Mon,  4 Nov 2024 14:34:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WKId3XEJ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 688D088CA0; Mon,  4 Nov 2024 14:07:38 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 677DF88B58
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 14:07:35 +0100 (CET)
+ id 199DB88CED; Mon,  4 Nov 2024 14:34:43 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id A7D2A88C75
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 14:34:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a9a628b68a7so669075966b.2
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 05:07:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730725655; x=1731330455; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6mL4BSC4KG/bf8bleKXY461p2QDfnD18F9ThU4ByZyk=;
- b=WKId3XEJM/y7HvbnDdniWU38N6UoqYG3NVr9e153mvMVJCYWpn4oS3lCUKQE4ZRcpo
- TpKrrJ/YpWkJWTYa94YBbgJUOXcMTg4Nipn/JLol1vXSmfXmR5AhK5Cai6cknmumVVEO
- TsGiVgG3+/r+WwqCeuXwBEimcusdg2MoHarkw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730725655; x=1731330455;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6mL4BSC4KG/bf8bleKXY461p2QDfnD18F9ThU4ByZyk=;
- b=qoptrFnc6ynjmihv2MBmGkyXJGoJmPduhRRhlumhItbsigyHjTGB53PSvxCRsjCJq9
- HT0J6vFsWMSzpHZePqpEtHBIqwg2VHwOoWgdQ+E7LNIwCBCuoDK7xxx21QScYxVZvmnh
- etWeJtwda2pcUFU0R6tG07BaVO2iAQLMKQwaiXrjfYpOoC7aXVuBR1iz0QC9eDVL2L1O
- bAZk0xWX8zY8CBIoNONk6/yldxMTrBH4Pi0EEY7+gXcz9Zlksnr9D1qdeK4uKQU8Co65
- 8hElKU5LOjlgrHcKfAL450TL8fHAiTJ1IUgT7FHt0IMjGUwdtMOJ4UivpbGKivkylczD
- +Wng==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWS9lg/S73IiE4slORfk7XhT5bIJHfD63uITxZIXsGDTLRpPp6RL75YnhaetcLTNp+zrmQU+H4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzGbKaRkK9ImlAtATtm4Wv8hSaAlYlbk40UEnNv/67zYrQuNUhW
- jWmfoMQTvStEuayj7Ex0kpG3jEJLW3060VdZmdgKVxBtrhx/Pm0IKYTCS6uw84YXAXjXAgR51SE
- axKJF7rwXUpVq0bNO7e7NWBcQ1eoFN+mN6UET+sSLlLQ/xMRuWA==
-X-Google-Smtp-Source: AGHT+IGsrVXkp/y8mo3Ues6SM1j/Aptrtmcl5H72DOOCycjgmPFliU3v/26UwCuGt4Fj/Jbu48+apIe5SAB/BIN6aHs=
-X-Received: by 2002:a17:907:724e:b0:a9a:11f5:8cd9 with SMTP id
- a640c23a62f3a-a9e657fd8d3mr1162697366b.56.1730725655234; Mon, 04 Nov 2024
- 05:07:35 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CED3AFEC;
+ Mon,  4 Nov 2024 05:35:09 -0800 (PST)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BDA1F3F6A8;
+ Mon,  4 Nov 2024 05:34:37 -0800 (PST)
+Date: Mon, 4 Nov 2024 13:34:29 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: sjg@chromium.org, u-boot@lists.denx.de, jagan@amarulasolutions.com,
+ quentin.schulz@cherry.de, trini@konsulko.com, caleb.connolly@linaro.org,
+ csokas.bence@prolan.hu, marek.vasut+renesas@mailbox.org,
+ michal.simek@amd.com, Oliver.Gaskell@analog.com, pbrobinson@gmail.com,
+ rayagonda.kokatanur@broadcom.com, sumit.garg@linaro.org,
+ venkatesh.abbarapu@amd.com
+Subject: Re: [PATCH v4 5/8] sunxi: Move to bootstd
+Message-ID: <20241104133429.09cc7a72@donnerap.manchester.arm.com>
+In-Reply-To: <87ldy042zl.fsf@bloch.sibelius.xs4all.nl>
+References: <20241017232531.726559-1-sjg@chromium.org>
+ <20241017232531.726559-6-sjg@chromium.org>
+ <CAFLszTihCzaut1MCtQJ=LTzYrhwyT+3On8hM2GMgSd0g6dqKBw@mail.gmail.com>
+ <20241103103626.0d5c76a6@minigeek.lan>
+ <87ldy042zl.fsf@bloch.sibelius.xs4all.nl>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-References: <20241103002828.624931-1-sjg@chromium.org>
- <20241103002828.624931-3-sjg@chromium.org>
- <3eff8c78-e005-4ebd-8707-6b36b89f10ee@gmx.de>
-In-Reply-To: <3eff8c78-e005-4ebd-8707-6b36b89f10ee@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 Nov 2024 06:07:24 -0700
-Message-ID: <CAFLszTi4j8ZQAb9YJ9KQdrYic4C-WV9epNAZ5i_+h8p3SE7arg@mail.gmail.com>
-Subject: Re: [PATCH v4 2/9] board_f: Correct stack reservation
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>, 
- Richard Weinberger <richard@nod.at>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,63 +65,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On Sun, 03 Nov 2024 18:54:38 +0100
+Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
 
-On Sun, 3 Nov 2024 at 10:23, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 11/3/24 01:28, Simon Glass wrote:
-> > The reserve_stack_aligned() function already ensures that the resulting
-> > address is aligned to a 16-byte boundary. The comment seems to suggest
-> > that 16 is passed reserve_stack_aligned() to make it aligned.
-> >
-> > Change the value to 0, since the stack can start at the current address,
-> > if it is suitably aligned already.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v1)
-> >
-> >   common/board_f.c | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/common/board_f.c b/common/board_f.c
-> > index 98dc2591e1d..677e37d93c0 100644
-> > --- a/common/board_f.c
-> > +++ b/common/board_f.c
-> > @@ -601,7 +601,7 @@ __weak int arch_reserve_stacks(void)
-> >   static int reserve_stacks(void)
-> >   {
-> >       /* make stack pointer 16-byte aligned */
-> > -     gd->start_addr_sp = reserve_stack_aligned(16);
-> > +     gd->start_addr_sp = reserve_stack_aligned(0);
->
-> In 1938f4a5b62f ("Introduce generic pre-relocation board_f.c") you wrote:
->
-> /* setup stack pointer for exceptions */
-> gd->dest_addr_sp -= 16;
-> /* leave 3 words for abort-stack, plus 1 for alignment */
-> gd->dest_addr_sp -= 16;
->
-> Is that not relevant anymore?
+Hi Mark,
 
-Well that looks like ARM code that has moved to arch_reserve_stacks()
-some time ago.
+> > Date: Sun, 3 Nov 2024 10:36:26 +0000
+> > From: Andre Przywara <andre.przywara@arm.com>  
+> 
+> Hi Andre,
+> 
+> > On Sat, 2 Nov 2024 11:35:31 -0600
+> > Simon Glass <sjg@chromium.org> wrote:
+> > 
+> > Hi Simon,
+> >   
+> > > On Thu, 17 Oct 2024 at 17:25, Simon Glass <sjg@chromium.org> wrote:  
+> > > >
+> > > > Drop support for distroboot and move to using bootstd instead.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > > > (no changes since v2)
+> > > >
+> > > > Changes in v2:
+> > > > - Convert the other DISTRO_DEFAULTS in the Kconfig too
+> > > >
+> > > >  arch/arm/Kconfig | 10 +++++-----
+> > > >  1 file changed, 5 insertions(+), 5 deletions(-)    
+> > > 
+> > > Could this series be applied, please?  
+> > 
+> > So I played with that a bit:
+> > - The FEL script boot method works: it has the highest priority, which
+> >   is what we want, because the script would be deliberately injected by
+> >   the user to be executed. So thanks for the changes!
+> > - However the other global boot method (efimgr) takes precedence over
+> >   other, *higher* priority methods (extlinux.conf/boot.scr). This
+> >   leads to behavioural regressions, I think, like:
+> >   - Say there is a bootaa64.efi on some ESP on the eMMC. If you now
+> >     boot from SD card, with boot.scr or extlinux.conf on there, U-Boot
+> >     will still find the EFI app first and execute that. I don't think
+> >     that's what we want?
+> >   - Similar, if you have a boot script on the eMMC, and boot from
+> >     there, but with a USB stick carrying a bootaa64.efi plugged in.
+> >     Then EFI would win as well. This might be intended, but maybe not,
+> >     and I don't see how one would influence that?
+> > 
+> > Is there a way to change the bootflow to look for any boot payload on
+> > the *boot* media first? So when I boot from SD, it checks this first for
+> > EFI, boot.scr, extlinux.conf, then goes to eMMC and USB. Similarly, when
+> > booting from eMMC, check there first before considering SD and USB.
+> > Maybe I am missing something obvious here?  
+> 
+> The issue here is that the EFI bootmanager by its very nature
+> considers all possible devices for which boot options have been
+> included in the BootOptions EFI variable.  So if you have enabled
+> bootmeth_efi_mgr (and you probably should), and you have an active
+> boot option (that is a boot option that is included in the BootOptions
+> EFI variable) that points at eMMC or USB, it will try too boot using
 
->
-> Does all and every U-Boot architecture decrement the stack pointer
-> before writing values to the stack?
->
-> E.g. Microblaze, MIPS, RISC-V, and Super-H do not have a dedicated PUSH
-> instruction.
+I think that's the point: sunxi is one of the platforms that doesn't
+feature persistent UEFI variables, at least not when set via UEFI RT
+services. So we don't typically have any UEFI variables to help us
+point at the right boot location, which leaves us only with ...
 
-I'm not sure about that, but they certainly need to. I see that
-powerpc seems to write to values above the stack top! I don't think we
-have enough people on this patch to look into powerpc, at least.
+> that boot option.  So you'd think things would be fine as long as you
+> don't add boot options for eMMC or USB to the BootOrder variable.
+> 
+> Unfortunately the EFI_LOADER code will automatically generate media
+> device boot options for all the block devices that get added and adds
+> those to the BootOrder variables in an attempt to implement the
+> requirement to boot from removable media if everything else fails.
 
-For RISC-V, does it use a full-descending stack, or empty? Looking at
-relocate_code() I don't see it subtracting anything from the
-stack-pointer that is passed in.
+... exactly removable media. So UEFI boot so far was relying on
+efi/boot/bootaa64.efi, though I think you can construct a more specific
+entry by manually setting (and storing!) this on the U-Boot shell.
 
-Regards,
-SImon
+Another complication is that very often microSD cards are either the
+only or the preferred "hard disk" for those boards, and they are surely
+removable, even though in those scenarios they are treated more like
+"fixed" disks.
+
+The Allwinner BootROM is writing a boot source ID into SRAM, so we know
+whether we were booted from SD card, eMMC, or SPI flash, and set
+$mmc_bootdev accordingly. I need to check whether and how this is
+reflected in bootstd.
+
+> But I think that's a mistake.  I can't find a requirement to add boot
+> options for these in the spec, let alone a requirement to add those to
+> BootOrder.  I suppose this fallback could be implemented as a separate
+> bootmeth that can be low priority.
+
+Yeah, I also feel like splitting this up might help. So one bootmeth for
+removable media, and one BootOrder variable based.
+
+But I think the culprit in this particular situation is this "global" flag,
+which makes it live outside of the priority scheme, IIUC:
+"When global bootmeths are available, these are typically checked before
+the above bootdev scanning."
+
+Not sure if there is a good solution to this problem? Maybe check at least
+the boot device first, for all bootmeth's, and only then consult global
+bootmeth's? But then again we want to current behaviour for FEL script
+booting, I wonder if this could be modelled as some pseudo bootdev instead
+of marked as global (because we are booting via the BootROM's USB-OTG
+routines in this case).
+
+Cheers,
+Andre
+
+> 
+> > So while I am personally happy with EFI being a prominent citizen, I
+> > think many sunxi users would still expect more traditional boot methods
+> > to at least work - at the moment they might be permanently "shadowed" by
+> > some bootaa64.efi sitting *somewhere*. That actually bites me at the
+> > moment when working on a new SoC port, where I use an extlinux.conf as
+> > an override, to load a custom dev kernel and DTB, but bootstd still
+> > finds that grub on that SD card and uses that first :-(
+> > 
+> > So I feel like EFI should still be the preferred boot method, but the
+> > more custom ways should be allowed to override that.
+> > 
+> > Do you have any ideas how to solve that, or am I holding it wrong?
+> > 
+> > Cheers,
+> > Andre
+> >   
+
