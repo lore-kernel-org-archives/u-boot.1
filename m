@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27920D1CA05
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 22:30:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5AE4D1CA07
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 22:46:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43A0988DE6;
-	Mon,  4 Nov 2024 23:30:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0F1F288ECC;
+	Mon,  4 Nov 2024 23:46:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VA33tPHN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DbPVqaFk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD42688E50; Mon,  4 Nov 2024 23:30:46 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5DBD588E96; Mon,  4 Nov 2024 23:46:01 +0100 (CET)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2AEA88DA3
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 23:30:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 621E688D29
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 23:45:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730759441; x=1731364241; i=xypron.glpk@gmx.de;
- bh=8BQ+7tMNR4JlHz1bOfAK7lbsXH6n3kMX0qqVZgHgWpI=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=VA33tPHN702qIp6DkSPYvw7noawLjLV8H4KdLh0cz2WbhuCk1HMQaubY0FSgYUFk
- wZRLSAWtetqYifsG5zJsfytGVvFTwwwjYgjtfywiRpaZPcQHyNInanIdvCtySUtXB
- +cQWdC2CfzXNaujhugYM6F2y3Xcpvo84yq5AqB02DuGPfpmCVglB3pkHV8zWc6ZAx
- a/uQPLMFk/WvkO6eGEe8dF8IuucSpmK2FtLK130VU9GO8dn7d2oa07rnlItVbl+WB
- MHoHnlZq9lNfVfm8b9K2r7xHznuJcemCiAdK9m5mPwoIb7px5oOmaSBJx/1bJoURx
- G/khCoW/+E5TpTKklw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.108.63]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MgNh1-1tl0e62wBT-00psYb; Mon, 04
- Nov 2024 23:30:41 +0100
-Message-ID: <b2cb7506-e3e9-470a-a5b1-64c889032f01@gmx.de>
-Date: Mon, 4 Nov 2024 23:30:41 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-83ab21c26f1so194422339f.2
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 14:45:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1730760356; x=1731365156; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dIH4/HqUQ86JekoNoaOntmlr0lMBmiErm8zlQgdO4t8=;
+ b=DbPVqaFkRrUmLRiSXTV+kZfecJlhgIycKpo+aZf4jfkMOLgoSaqBm2A2/wHBpgMqRw
+ vv0JLZkXV1Ni9xXBiLkW6JU72HF/fsN81MDmxtkGRq+JUAIpAxNgpyc9rKE+ucQLj+xJ
+ Ph3y8fd7cczV/d7qa22Q7W/mtLH7XBZaeouck=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730760356; x=1731365156;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dIH4/HqUQ86JekoNoaOntmlr0lMBmiErm8zlQgdO4t8=;
+ b=JBqok8vIP958wtZ72ykzpCmYUwRfm4iPuRJIo9jeiKHA5855FGv5C+jfI3410h/20L
+ sYpl+MKBXTVXQxRTggm+PTmNYNG8E5LC8AMUPdh0Tm4tQz0P/mCkftOz+QN7vGXxsiPh
+ wHEafFSiQnjMoK8X8xoXuje/+a0lIJAPl+Z0UxGz0U3f/CEEK50qNnqIBsGFIdAHWK06
+ 7j45iLuyCv6fSVTJYjGjfVxB9knxTtgENjXQx0l20ahH9v60/ipU4IQeVNXYKydB9Gim
+ ezTKqvRCIAuMIdGqBdCpkyfQETVko7/WGAl9kYtEH2I6JhgpXIdxefMpABcDG3+S4Mlf
+ 4VYQ==
+X-Gm-Message-State: AOJu0YyETX0MscpfZCA2Ph2+e4It8ObVHsp3m2EwORu7N/kw4UucUoMT
+ sDfw6CeOD8bIKmfAMAeF0hWH4IdVVb/sQ88uIWSMFLEUQii78TpfR+ruzgaMExRRoSllcUXbDsY
+ =
+X-Google-Smtp-Source: AGHT+IFzk/0sy6ocJ0QkvoYECPFByZSzud+mwRKjH9XzQ43oRc9Dd22TDtwD+1uuQaPVYQCZqvEGPQ==
+X-Received: by 2002:a05:6e02:1383:b0:3a4:e99a:cffc with SMTP id
+ e9e14a558f8ab-3a5e2512f34mr233142295ab.20.1730760356503; 
+ Mon, 04 Nov 2024 14:45:56 -0800 (PST)
+Received: from chromium.org ([50.235.115.130])
+ by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3a6a97b009csm25535945ab.4.2024.11.04.14.45.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Nov 2024 14:45:54 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Love Kumar <love.kumar@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH v8 00/11] labgrid: Provide an integration with Labgrid
+Date: Mon,  4 Nov 2024 15:45:27 -0700
+Message-ID: <20241104224550.677442-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: Change efi_dp_from_mem() to use size
-To: Moritz Fischer <moritzf@google.com>
-Cc: ilias.apalodimas@linaro.org, trini@konsulko.com, pwildt@google.com,
- u-boot@lists.denx.de
-References: <20241104014934.2542857-1-moritzf@google.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241104014934.2542857-1-moritzf@google.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:15dj7ah0QK0Ky0INE5cFQnCkwlJbzB+7uf6vtb8W79Ny5b/EtOC
- gMpPatkm7jKb/mjjW2DFkwDAVBmF65rVn+3cEWk8Vy+AdTMoWwg5TBwUDMh+C7BN1SOlZ5A
- HexWbgVy7hKj0sNcQJDrxgt0KQxoHgoLcHTIfxflD/aB0wa65AP5ydLm+CubzHeekln4hyJ
- S70F5u9120Jf9KJ3W0yTw==
-UI-OutboundReport: notjunk:1;M01:P0:HS90/T8wN24=;o+uWTYDF4HHmdsOtXgoq3aoIKyM
- T9wqDfndISls4OkCQKQy3MxQg88nDyO9/ga6vGEeqJwQljzfJ1tYEw+6CmNujJGZSpqhSZkd+
- tTl8CQbS7CcuNExJO4jF8U8SYxWvMxu4GoKtXp/UP58FMClrRT5O4BSEeiu+lA2+6LL37Lqwm
- /C5CTbuxO7M3PRx4awJ1FMXcHPzmr4endpc6T2z+j6wktsxmerb23OqAVzU3fZ4U+qI9h/pym
- A3jv5lDf2EILgJv46e9D6agUCHeXcnfodfJDsMScMxRJEupwEPRhGDGExaTbmEl1bkg42Nsh6
- kTu2gvhnnW9fhWwZpizQDea3lU3CWeTUaeYI3HiDeRNwo4ajc6XXw7e4GSR5XHme4KNtF00Z5
- DUAsqeumvcEghTsyF2WSXyWHHbISYRxy6l7rPWsi0mjKI3026zh2TJLCVFGJEX3TSN7SEIb9s
- JlRIe/IHEMQvU5GnYFU6gOJB9fpDMHYOLUg6w500DCLT1XMcyYQCW5T1n+ZurAHY5fY1cT0zC
- Va4Fz8NzraHSgPONnlIq0noI4refqozKTmQT2Aq+Ytu55qQkjDivDeUoqaof8y3zVLPJZ2yZG
- fIzrjMyqBpwwjClIFR0nxEd1ECJWnrus4HH+eej80kjEK9Iqca/rPAtexudRTOUAmRLa0ParX
- evJs8ljE8csTuAxsU7pzcp81CXowfMghv8ruPC0On0PoOOklmkxTiEBijXAjmce9VMzq1yZXT
- /5t2AsweC3xURLJIsBRiUA4SxgxQnYDjTO254YBoyAiSo1huNcCHKQ/c9auBYBA5zPHgQXj18
- qkBQyBEZk6kOfcQFb6DW9wFw==
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,96 +90,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/4/24 02:49, Moritz Fischer wrote:
-> All call sites are using size rather than end addresses,
-> so instead - as previously done - calculating an end address
-> everywhere, just modify the function to use size and internally
-> calculate the end address
->
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Patrick Wildt <pwildt@google.com>
-> Signed-off-by: Moritz Fischer <moritzf@google.com>
+Labgrid provides access to a hardware lab in an automated way. It is
+possible to boot U-Boot on boards in the lab without physically touching
+them. It relies on relays, USB UARTs and SD muxes, among other things.
 
-This fixes an incorrect usage in lib/efi_loader/efi_bootmgr.c.
+By way of background, about 4 years ago I wrong a thing called Labman[1]
+which allowed my lab of about 30 devices to be operated remotely, using
+tbot for the console and build integration. While it worked OK and I
+used it for many bisects, I didn't take it any further.
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+It turns out that there was already an existing program, called Labgrid,
+which I did not know about at time (thank you Tom for telling me). It is
+more rounded than Labman and has a number of advantages:
 
-> ---
->
-> Thinking about this some more it seems more sensible to fix this
-> in the function rather than patching all the call sites;
-> it seems we even missed another call site.
->
-> - Moritz
->
-> ---
->   include/efi_loader.h             | 2 +-
->   lib/efi_loader/efi_bootbin.c     | 1 -
->   lib/efi_loader/efi_device_path.c | 7 +++----
->   3 files changed, 4 insertions(+), 6 deletions(-)
->
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 291eca5c07..39809eac1b 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -858,7 +858,7 @@ struct efi_device_path *efi_dp_from_file(const struc=
-t efi_device_path *dp,
->   struct efi_device_path *efi_dp_from_eth(void);
->   struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
->   					uint64_t start_address,
-> -					uint64_t end_address);
-> +					size_t size);
->   /* Determine the last device path node that is not the end node. */
->   const struct efi_device_path *efi_dp_last_node(
->   			const struct efi_device_path *dp);
-> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> index bf38392fac..a87006b3c0 100644
-> --- a/lib/efi_loader/efi_bootbin.c
-> +++ b/lib/efi_loader/efi_bootbin.c
-> @@ -137,7 +137,6 @@ efi_status_t efi_run_image(void *source_buffer, efi_=
-uintn_t source_size)
->   		 */
->   		file_path =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
->   					    (uintptr_t)source_buffer,
-> -					    (uintptr_t)source_buffer +
->   					    source_size);
->   		/*
->   		 * Make sure that device for device_path exist
-> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_devic=
-e_path.c
-> index d7444588aa..ee387e1dfd 100644
-> --- a/lib/efi_loader/efi_device_path.c
-> +++ b/lib/efi_loader/efi_device_path.c
-> @@ -977,7 +977,7 @@ struct efi_device_path __maybe_unused *efi_dp_from_e=
-th(void)
->   /* Construct a device-path for memory-mapped image */
->   struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
->   					uint64_t start_address,
-> -					uint64_t end_address)
-> +					size_t size)
->   {
->   	struct efi_device_path_memory *mdp;
->   	void *buf, *start;
-> @@ -992,7 +992,7 @@ struct efi_device_path *efi_dp_from_mem(uint32_t mem=
-ory_type,
->   	mdp->dp.length =3D sizeof(*mdp);
->   	mdp->memory_type =3D memory_type;
->   	mdp->start_address =3D start_address;
-> -	mdp->end_address =3D end_address;
-> +	mdp->end_address =3D start_address + size;
->   	buf =3D &mdp[1];
->
->   	*((struct efi_device_path *)buf) =3D END;
-> @@ -1073,8 +1073,7 @@ efi_status_t efi_dp_from_name(const char *dev, con=
-st char *devnr,
->   		efi_get_image_parameters(&image_addr, &image_size);
->
->   		dp =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-> -				     (uintptr_t)image_addr,
-> -				     (uintptr_t)image_addr + image_size);
-> +				     (uintptr_t)image_addr, image_size);
->   	} else if (IS_ENABLED(CONFIG_NETDEVICES) && !strcmp(dev, "Net")) {
->   		dp =3D efi_dp_from_eth();
->   	} else if (!strcmp(dev, "Uart")) {
+- does not need udev rules, mostly
+- has several existing users who rely on it
+- supports multiple machines exporting their devices
+
+It lacks a 'lab check' feature and a few other things, but these can be
+remedied.
+
+On and off over the past several weeks I have been experimenting with
+Labgrid. I have managed to create an initial U-Boot integration (this
+series) by adding various features to Labgrid[2] and the U-Boot test
+hooks.
+
+I hope that this might inspire others to set up boards and run tests
+automatically, rather than relying on infrequent, manual test. Perhaps
+it may even be possible to have a number of labs available.
+
+Included in the integration are a number of simple scripts which make it
+easy to connect to boards and run tests:
+
+ub-int <target>
+    Build and boot on a target, starting an interactive session
+
+ub-cli <target>
+    Build and boot on a target, ensure U-Boot starts and provide an interactive
+    session from there
+
+ub-smoke <target>
+    Smoke test U-Boot to check that it boots to a prompt on a target
+
+ub-bisect <target>
+    Bisect a git tree to locate a failure on a particular target
+
+ub-pyt <target> <testspec>
+    Run U-Boot pytests on a target
+
+Some of these help to provide the same tbot[4] workflow which I have
+relied on for several years, albeit much simpler versions.
+
+The goal here is to create some sort of script which can collect
+patches from the mailing list, apply them and test them on a selection
+of boards. I suspect that script already exists, so please let me know
+what you suggest.
+
+I hope you find this interesting and take a look!
+
+[1] https://github.com/sjg20/u-boot/tree/lab6a
+[2] https://github.com/labgrid-project/labgrid/pull/1411
+[3] https://github.com/sjg20/uboot-test-hooks/tree/labgrid
+[4] https://tbot.tools/index.html
+
+Changes in v8:
+- Use USE_LABGRID_SJG for graceful shutdown
+
+Changes in v7:
+- Rebase on testb series
+- Expand commit message
+- Rename option to --use-running-system
+- Update --role help and get_details() comment to mention Labgrid-sjg
+- Rebase on broken-out testb series
+
+Changes in v6:
+- Rebase without an earlier patch
+- Avoid doing the special shutdown unless USE_LABGRID is enabled
+- Drop patch 'test: Pass stderr to stdout'
+
+Changes in v5:
+- Add a few more comments
+- Comment out the debugging, which might be useful later
+- Add a patch to support testing with two board-builds
+
+Changes in v3:
+- Split out most patches into two new series and update cover letter
+
+Changes in v2:
+- Only disable echo if a terminal is detected
+- Avoid running a docker image for skipped lab tests
+
+Simon Glass (11):
+  test: Allow signaling that U-Boot is ready
+  test: Release board after tests complete
+  test: Allow connecting to a running board
+  test: Introduce the concept of a role
+  test: Introduce lab mode
+  test: Improve handling of sending commands
+  test: Avoid double echo when starting up
+  test: Try to shut down the lab console gracefully
+  test: Add a section for closing the connection
+  test: Support testing with two board-builds
+  CI: Allow running tests on sjg lab
+
+ .gitlab-ci.yml                        | 153 ++++++++++++++++++++++++++
+ test/py/conftest.py                   |  73 ++++++++++--
+ test/py/u_boot_console_base.py        | 123 +++++++++++++++------
+ test/py/u_boot_console_exec_attach.py |  31 ++++--
+ test/py/u_boot_spawn.py               |  36 +++++-
+ 5 files changed, 363 insertions(+), 53 deletions(-)
+
+-- 
+2.43.0
 
