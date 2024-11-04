@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFCECFB422
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 08:52:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F34D132A8
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 10:19:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CDEE887FA;
-	Mon,  4 Nov 2024 09:52:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4A0E488C0F;
+	Mon,  4 Nov 2024 11:19:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hPPZPjDg";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E6kfbe/Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9C648880F; Mon,  4 Nov 2024 09:52:45 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8AE828885D; Mon,  4 Nov 2024 11:19:28 +0100 (CET)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A99728862E
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 09:52:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 378A688C3E
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 11:19:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730710361; x=1731315161; i=xypron.glpk@gmx.de;
- bh=KXXN0GndOxtVhEmGAAtI8x6gSlM18ciNvlXbXRpAESs=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
- References:Cc:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=hPPZPjDgFF62wPXpKNki0weUQNchFom6uymCXRCRIGHjbHhsbuHanjSETBjwclqK
- sWRMNzKIV+/cwO+ShHaa/wKRAxIVkqcnnHLIUDudwSwBWfpTLJBLBK7+VXlhPX5rE
- 7/iDyznwTTJtbnFGFN/ktY1HGx6Yc8rrb52R3MF4raq2+F6CZJYX4DzfhkusFlj98
- Ae/etxLFJjx3DofsAhvcSz/EYMkgJ6m7IM3jh+Ys69o8vp4/yugUi2fRaK4ThL85r
- yYerE2+JUynzBrvFYAqvCZBZU2ABDuc71CU19hPpVuA3RQ/JMCEG5ncaiPahI3Vnp
- 0dLpv+O37n1pHGJshw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M4axg-1t9XFn1FaQ-005IZF; Mon, 04
- Nov 2024 09:52:41 +0100
-Message-ID: <4acd02a1-3c37-42a4-a1d8-a1bcec07ac66@gmx.de>
-Date: Mon, 4 Nov 2024 09:52:40 +0100
+ spf=pass smtp.mailfrom=marek.belisko@gmail.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2fb58980711so35018081fa.0
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 02:19:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1730715565; x=1731320365; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NYHYbQcwafiim1FoKS6gvURO4RVfJ9kqJLxTnBPoBZk=;
+ b=E6kfbe/Yj9/xiq/8yS/UfHXn7mejbIrJqstkg27JLlbhYyICaVUz7gNeX4WHRIu4tV
+ 0m6K9kzLGYyxEDzbvWgBP6mGO1+L/7JlZkipQsEHpERGoxEChmXv3Vx1fTw3FHKgaDRP
+ MkcEECLBDrf46xVg8Kfs3nCXlTXmB+Oq/QrSz6TALUOf4QaBx2PqBYKEHvWv/SBE1MCV
+ +OY1CWa4ZGO7quOlUFokoN4/2aLHXvnDwlqNStNqm437pfpvYG1ddyrz2rxgyEnBOGJ3
+ 0ftUJvKHbxOnOm6D5m/IZxBkfQ4ZLNISyyhbfjZJkbtgEj6qj4ayZpWUhqvsGgFTmCxm
+ tJrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730715565; x=1731320365;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NYHYbQcwafiim1FoKS6gvURO4RVfJ9kqJLxTnBPoBZk=;
+ b=Js22Tm7zG8qto4f73sINUNObHtaEbPCR9YRL63Biq37FMbXdJ6LZhXqvDZ/XTk2DRY
+ WKoPbKfb2dnmh0JbrTzW/Zx0Nq/GShvxEtkTWL/kI7GiqgXMFuoOBcQZQD6qFBp9V3IQ
+ XbZNdl13Gtw1wjg/nbUdsY1H0RvnIhj8efIdbrmBjOelGWUtRaJmmwNJuBkhzUmAml29
+ HFHM+7PslDUe1JYmpXDjBX1+E3dXa4yS/YmfIzDQSo6rlU14+mWElpHqC+1JvIm+iWWx
+ I7F5EQuivLPNXPSh1wm05l26uhe0KLa0c+aLe1SlXNM4knHnotoS2pFvND7ejFjXfrXt
+ hBZA==
+X-Gm-Message-State: AOJu0YyVsAJjsPvNorinvfRuIqe85OrUUwj7lPq6zN1gxLY0Bjmdja73
+ 48/Ejh2uFDm2kzjtvhRnSoc5ASyrjUYzHwE8Vt2lRi8MJ8ejcDEtC4N61yqd42EdJemV29PXH5r
+ aiOdr1XcEAzXZ1mgHleW9I/2Wh+U=
+X-Google-Smtp-Source: AGHT+IGszRm3gvUUKDiM4itqTi/hEYg22TTRbaXUrjWESuJlWowW77S/eBA0TRa9iTpDwsdnls9z7mhabusBs3vPPuc=
+X-Received: by 2002:a2e:4c01:0:b0:2fb:4ca9:8e2 with SMTP id
+ 38308e7fff4ca-2fcbe062390mr106503721fa.28.1730715565019; Mon, 04 Nov 2024
+ 02:19:25 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Please pull u-boot-dm
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <CAFLszTj16p8-H1J349FoLowzpO7SNfdwELEDyDmi=U9+gZiCbw@mail.gmail.com>
-Content-Language: en-US
+References: <CAAfyv37co294aQKffpt0ce=ajYutBrcnU23P=pi=s6YN5gT3Fg@mail.gmail.com>
+ <7e901715-35bb-43b9-9471-d8f4573cbf61@kwiboo.se>
+ <CAAfyv36fkumDdFkh_vBrYnc-YKjT5Q18hAcje8+2FHtw7Vw7tA@mail.gmail.com>
+In-Reply-To: <CAAfyv36fkumDdFkh_vBrYnc-YKjT5Q18hAcje8+2FHtw7Vw7tA@mail.gmail.com>
+From: Belisko Marek <marek.belisko@gmail.com>
+Date: Mon, 4 Nov 2024 11:19:13 +0100
+Message-ID: <CAAfyv36ydh07vEN44kGkZ5jphZXyBr=qmfNymYip0eseTdX8SQ@mail.gmail.com>
+Subject: Re: radxa cm3 2024.01 mmc write error
+To: Jonas Karlman <jonas@kwiboo.se>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAFLszTj16p8-H1J349FoLowzpO7SNfdwELEDyDmi=U9+gZiCbw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:ikLAAHvlM1hrs1/UNDbL9CE8qF1m1KaOkCrS1MzJTJWzUWcoUnu
- pQv8QJkuRZm/8SWgSNh/b1DXGzzUPGdkf9fvKZRUYdGn8YmyZMsj8sxavz1oSaWBqhIwfpS
- q6UQAzjew+CDuxoUDR6IC9Z8hX5vW7Feu14oZaLwYZbRFnnq57Nk2yeSbnu1f2fitEXp15B
- /+M4WKtOVf2+ysKliLrYA==
-UI-OutboundReport: notjunk:1;M01:P0:SLzj7GPjIbc=;KlA6nbt5b1gcFkZ0p1fzDwfZd3W
- YP50GnSGwOZF47k9betRr/xTDhqFz8Tc84m1kp8PSSzQkezHEuz3njn+xm0vVIemTDcpsnd9x
- 5SO1TSwazkzVQs0gnuZ0ewCYtDydJ4wmH46jc2NIibSIp8cTN6vMuE7Cxx0MTSpTPGqcT7JLt
- udvRkI03yQczhbkH7m9huVusnOzKaUFcsuJfK3fV7vMNfxJjxmFrF0yVIubG1nSddvlw5Z5iG
- gL7slh3s9Zzslp15sw7cz5kVx2cPX8LBu5CGSS2YmtdqodwnGdsQ13Bq/3kEqluRduRIDX/BG
- u/EAW9Eo5uhVx3hCOOayQx7eDJAsjOMqOet0hEp8V8URxJJDLKkFR4Rr8s7fNwzCdfDI6TJxU
- Iw5K8p3z+UG7mxII17TmUfXOvaLj8gIm1g0GoiNc4fE0JEQqardMkZ7BhG8MDKQUy3IBqotfc
- YXWPk33FNf1TZmP+ZgnUoBnwUqN7qol2UgrB9xekpF46ThF0KRFSJnrN/IJmzGncgztNExAPF
- CJD1uZzkMLNfgYMjz/wff5qdLu90lzQfthY3bWViZTr350Y/LYsrYUsLVIKirM758pjsPg8we
- nIN0lgMbE9oAH3r+Prrm/j5M+/IBjPh35W29W2ap1/Uham1RvBR/HIauILRl7qedOOwiKN2rd
- fHUFJakiiC2mmGgiB8y8TzxCSzH5gH5+YfTR5J2nq2XwzOrPjD9HhtNg8XLoKSg987C/kL8Q1
- +7kpj6Cgc6X+S//m50woE7eWmXIIYAi3ljdPpT9SvzkKtmBIEXANWFJeJrc8pN6D5YfV/zpSm
- vJBcvbiWBUZuLHq35Pt4yMDw==
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,131 +89,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/3/24 15:47, Simon Glass wrote:
-> Hi Tom,
->
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/23152
-> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D71&view=
-=3Dresults
->
-> The following changes since commit e61ea9f2e5d2967826c2c6e3edba961064fbb=
-aa1:
->
->    mtd: spi-nor: Guard SPI_STACKED_PARALLEL with DM_SPI check
-> (2024-10-31 13:34:29 -0600)
->
-> are available in the Git repository at:
->
->    git://git.denx.de/u-boot-dm.git tags/dm-pull-2nov24
->
-> for you to fetch changes up to 572b7b0255f9f33002ce7d2a8b2bac30ab49a48e:
->
->    sandbox: Fix comment for nomap_sysmem() function (2024-11-02 16:14:55=
- -0600)
->
-> ----------------------------------------------------------------
-> alist enhancements and fixes
-> minor test and sandbox fixes
-> some more x86/coreboot patches
->
-> ----------------------------------------------------------------
-> Jonas Karlman (1):
->        bootstage: Do not sort records
->
-> Simon Glass (27):
->        alist: Mention the error condition in alist_add_placeholder()
->        alist: Add a comment for alist_init_struct()
->        alist: Expand the comment for alist_get()
->        alist: Add a way to get the next element
->        alist: Add for-loop helpers
->        alist: Add a function to empty the list
->        alist: Add a way to efficiently filter an alist
->        alist: Add maintainer
->        dm: core: Add a function to see if a device exists
->        test: boot: Use a consistent name for the script bootmeth
->        test: Expand implementation of ut_list_has_dm_tests()
->        test: Drop the duplicate line in setup_bootmenu_image()
->        test: boot: Update bootflow_iter() for console checking
->        bootstd: cros: Correct the x86-setup address
->        bootstd: Avoid showing an invalid buffer address
->        x86: coreboot: Add a test for cbsysinfo command
->        x86: coreboot: Show the option table
->        x86: coreboot: Enable support for the configuration editor
->        x86: coreboot: Add a command to check and update CMOS RAM
->        x86: coreboot: Allow building an expo for editing CMOS config
->        log: Add a new category for tests
->        test: Allow saving and restoring the bloblist
->        bloblist: test: Mark tests with UTF_BLOBLIST
->        sandbox: Convert sb command to use new macro
->        doc: sandbox: Add docs for the sb command
+Hi,
 
-Hello Simon,
+On Wed, Jul 24, 2024 at 9:38=E2=80=AFPM Belisko Marek <marek.belisko@gmail.=
+com>
+wrote:
 
-as described in
-https://lore.kernel.org/u-boot/47ada0aa-97fe-4c0a-a662-4b184175a17f@gmx.de=
-/T/#u
-sent after the pull request there are some issues with the documentation.
-
-Will you send a follow up patch?
-
-Best regards
-
-Heinrich
-
-
->        sandbox: Add a way to show the sandbox memory-mapping
->        sandbox: Fix comment for nomap_sysmem() function
+> Hi Jonas,
 >
->   MAINTAINERS                       |   7 ++
->   arch/sandbox/cpu/cpu.c            |  13 +++
->   arch/sandbox/include/asm/cpu.h    |   3 +
->   arch/sandbox/include/asm/io.h     |   2 +-
->   arch/x86/dts/coreboot.dts         |   7 ++
->   boot/Makefile                     |   3 +
->   boot/expo_build_cb.c              | 245
-> ++++++++++++++++++++++++++++++++++++++++++++++++++++
->   cmd/Kconfig                       |  11 +++
->   cmd/bootflow.c                    |   9 +-
->   cmd/cedit.c                       |  28 ++++++
->   cmd/sb.c                          |  42 ++++-----
->   cmd/x86/Makefile                  |   1 +
->   cmd/x86/cbcmos.c                  | 139 ++++++++++++++++++++++++++++++
->   cmd/x86/cbsysinfo.c               |  73 +++++++++++++++-
->   common/bootstage.c                |  12 +--
->   common/log.c                      |   1 +
->   configs/coreboot64_defconfig      |   2 +
->   configs/coreboot_defconfig        |   2 +
->   doc/board/coreboot/coreboot.rst   |   6 ++
->   doc/develop/cedit.rst             |   2 +-
->   doc/usage/cmd/cbcmos.rst          |  45 ++++++++++
->   doc/usage/cmd/cbsysinfo.rst       |  99 +++++++++++++++++++++
->   doc/usage/cmd/cedit.rst           |  76 ++++++++++++++++
->   doc/usage/cmd/sb.rst              |  79 +++++++++++++++++
->   doc/usage/index.rst               |   2 +
->   drivers/core/uclass.c             |  11 +++
->   include/alist.h                   | 139 +++++++++++++++++++++++++++++-
->   include/asm-generic/global_data.h |   2 +
->   include/dm/uclass.h               |  11 +++
->   include/expo.h                    |   8 ++
->   include/log.h                     |   2 +
->   include/test/test.h               |   3 +
->   lib/alist.c                       |  41 +++++++++
->   test/bloblist.c                   |  28 +++---
->   test/boot/bootflow.c              |   4 +-
->   test/cmd/Makefile                 |   1 +
->   test/cmd/coreboot.c               | 119 +++++++++++++++++++++++++
->   test/dm/core.c                    |  22 +++++
->   test/lib/alist.c                  | 253
-> ++++++++++++++++++++++++++++++++++++++++++++++++++++++
->   test/py/tests/test_ut.py          |   2 -
->   test/test-main.c                  |  31 ++++++-
->   41 files changed, 1521 insertions(+), 65 deletions(-)
->   create mode 100644 boot/expo_build_cb.c
->   create mode 100644 cmd/x86/cbcmos.c
->   create mode 100644 doc/usage/cmd/cbcmos.rst
->   create mode 100644 doc/usage/cmd/sb.rst
->   create mode 100644 test/cmd/coreboot.c
+> On Thu, Jul 11, 2024 at 10:33=E2=80=AFAM Jonas Karlman <jonas@kwiboo.se> =
+wrote:
 >
-> Regards,
-> Simon
+>> Hi Marek,
+>>
+>> On 2024-07-10 21:26, Belisko Marek wrote:
+>> > Hi,
+>> >
+>> > I'm playing with radxa cme and mainline u-boot 2024.01 (present in
+>> > scarthgap yocto).
+>> > I realized that mmc write fails all the time like:
+>> > =3D> md.l $loadaddr
+>> > 00c00800: ff7ff7eb fffdffff fffffff5 ffff9fff  ................
+>> > =3D> mmc write $loadaddr 1fc0 10
+>> >
+>> > MMC write: dev # 0, block # 8128, count 16 ... mmc write failed
+>> > 0 blocks written: ERROR
+>> >
+>> > 1fc0 =3D 8128 is according to rockchip gpt table u-boot env partition.
+>> >
+>> > Is there something I'm doing wrong or its regression?
+>>
+>> Please try with latest U-Boot v2024.07, following fix has been part of
+>> U-Boot since v2024.04-rc2.
+>>
+>> rockchip: rk35xx: Remove use of eMMC DDR52 mode
+>>
+>> https://source.denx.de/u-boot/u-boot/-/commit/ebe293bae79d8c64d9cd428404=
+4e25ddadd074b5
+>
+> Thanks for the tip, it resolved an issue.
+>
+I've added a small u-boot change to store redundant u-boot env. Basically I
+split the env partition to 2 parts. When I set env in uboot like:setenv c 5
+and boot board with fw_printenv I can see the value is c setto 5, but when
+set env in system with fw_setenv a 1 and reboot board such env doesn't
+exist. I'm using u-boot 2024.01. Are you maybe aware of such issue?
 
+>
+>>
+>> Regards,
+>> Jonas
+>>
+>> >
+>> > Thanks and regards,
+>> >
+>> > marek
+>>
+>>
+> BR,
+>
+> marek
+> --
+> as simple and primitive as possible
+> -------------------------------------------------
+> Marek Belisko - OPEN-NANDRA
+> Freelance Developer
+>
+> Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+> Tel: +421 915 052 184
+> skype: marekwhite
+> twitter: #opennandra
+> web: http://open-nandra.com
+>
+
+Thanks and BR,
+
+marek
+
+--=20
+as simple and primitive as possible
+-------------------------------------------------
+Marek Belisko - OPEN-NANDRA
+Freelance Developer
+
+Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+Tel: +421 915 052 184
+skype: marekwhite
+twitter: #opennandra
+web: http://open-nandra.com
