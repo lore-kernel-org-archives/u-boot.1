@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 271B4D132CC
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 13:56:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7499ED132CD
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 13:56:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8290488A0A;
-	Mon,  4 Nov 2024 14:56:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE9A388D90;
+	Mon,  4 Nov 2024 14:56:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e8tfH6US";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bIli1RnR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D836388D3A; Mon,  4 Nov 2024 14:56:38 +0100 (CET)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id 6B17E88D90; Mon,  4 Nov 2024 14:56:48 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9EE688936
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 14:56:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E3ACF88F0C
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 14:56:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-460ad0440ddso26851231cf.3
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 05:56:36 -0800 (PST)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7b18da94ba9so360382285a.0
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 05:56:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730728596; x=1731333396; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730728605; x=1731333405; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sofPgIJ9dLEnEGFQyFFj4s/rvp91oKvPTEoBnSBhGRc=;
- b=e8tfH6US9UQe9Arwd3NZAVAKVWx+9CG6qc5BLaneTZo90hxtL0kYv4nAtKfMO8zAKO
- LAAxlgx1s1AN0ZTO2zdpqwpIm8JCF0bAnkIIDvslOXIhgpwZM6++ZlzCI0Qv312U13bs
- uziqXGrM1oui5DQiXfAk2TQ/F4WcCxl/KHTvs=
+ bh=phepwJTgfNbhAIoXrt1MTNquKLhGjdLoIIOhsg7ccV0=;
+ b=bIli1RnRu9lPnyrGzMPBLr7Vq5rNgjCCVfPIst3x3uVwH05eZypIAVKO0H9+LKeajh
+ KXqutgiRRUJKWbcxF+/VBS1giI8rM4S+FUL2W7qfQaH5ghnMQpj7yNpy774k2iN9lqkb
+ dooTFvzpY4MxyA9d6uE9LSVnh+xMbmEDurKLk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730728596; x=1731333396;
+ d=1e100.net; s=20230601; t=1730728605; x=1731333405;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sofPgIJ9dLEnEGFQyFFj4s/rvp91oKvPTEoBnSBhGRc=;
- b=rt6+RlNtPKNpHsiGcYrLAx6tyFPoQYsVC21uoDGgPuw2UpQioyiW4gu4QVq76M9/Qr
- aT9vJndweiyieUZba9F1zeWiElm6yXyxyFuJjlYU7DTCVbekHaTVCno/0fp7+Z2yr0kC
- XjjmmEFQ8qUu9zR/KzLNcq6uSatbQam8/oCUFgBEnK9OwOfOFMEQYi+ULTsu/JTEKF/3
- DyiPE7q+hrMx/kXa9r5KaOfHJIrGuZpylrXKD3q1jzb4rp4bbkURRhKl+jeeb7LxQ01+
- KfA+e5sn+eZHJ3G3vCE4MhSg2aPD1aDYPSCou9dthT1Y9ZXUalgSSaPuAtbQOTJgmifX
- J0Tg==
-X-Gm-Message-State: AOJu0YyEzN7DqZP/IrGGjS4k00hHbF7sZSM+6Cw8S5RH2JtqIQBHquzR
- DLSeRGe5+7L+VwpfrHRFLd7MOUnwwrii/jlw8weSxmKtWuEFNDJVsMowdjuCnlvbDFNQnNhXXxP
- mwPE=
-X-Google-Smtp-Source: AGHT+IEs9IBhp4xJzGkxCVAPYY0VAz9hBW1Z6hdREMNx2hLecWHHnHhgDH/CwbVxxGrbJXACgcYcZQ==
-X-Received: by 2002:ac8:7d14:0:b0:460:aa51:8411 with SMTP id
- d75a77b69052e-4613bffb691mr510261501cf.24.1730728595706; 
- Mon, 04 Nov 2024 05:56:35 -0800 (PST)
+ bh=phepwJTgfNbhAIoXrt1MTNquKLhGjdLoIIOhsg7ccV0=;
+ b=DoX2Yy9IRIxytOSs5xHgrCbqisn4OZG0gIq6vpuuoBHGYvQs3/MNx3pAHnzubHQ/hp
+ +vlhDlMuvugGMskz7NfYehual72OODhbtVyBsnj95RtLchr1igjK9wOs7jK3+bw9HaYk
+ QMhId/sbAl+C5EoIFzANAvFXW5TwAP3U+rBYn8tU74Ww4ilzJrngc5LCVFaymBkbK5Ym
+ 8ukghIOZvPEoMepwr5qsuZju1GbtBItlTHGIEeUUDesZGbQuAo5vcXsTnnTQJZjRc8K2
+ TjBs8ZwcqZazPNGKoI6vTZ9P9zKL95n+UKWX+Hg76Ed+bGilSfrerns17IHhqYb7Iitu
+ UmWA==
+X-Gm-Message-State: AOJu0YxYneKRY2ngXRoaZlVDPfWqMuzVw9gxEQfqLx4/ImFp6PPvNqpl
+ Q1OJdU5P1rVJ5aD21C3KLxyXPOxtauVh+2E83f9G6y+lyVveTER98YWA3qGrm/w=
+X-Google-Smtp-Source: AGHT+IFtESJGzYcSTAj2+oOuzO3qksCzyhf7w97VnlrNg6pKHog9wDGyhKxHG5Ya/wbK0SaVo9Xuig==
+X-Received: by 2002:a05:620a:318b:b0:7a9:ba35:1863 with SMTP id
+ af79cd13be357-7b2f3cfd61bmr2369379085a.13.1730728604759; 
+ Mon, 04 Nov 2024 05:56:44 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-462ad411faesm46779031cf.21.2024.11.04.05.56.34
+ af79cd13be357-7b2f3a864f3sm420970585a.118.2024.11.04.05.56.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 05:56:34 -0800 (PST)
-Date: Mon, 4 Nov 2024 07:56:32 -0600
+ Mon, 04 Nov 2024 05:56:43 -0800 (PST)
+Date: Mon, 4 Nov 2024 07:56:41 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH 5/9] docker: Drop grub for arm64
-Message-ID: <20241104135632.GK3600562@bill-the-cat>
-References: <20241104133954.840994-1-sjg@chromium.org>
- <20241104133954.840994-6-sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Please pull u-boot-dm
+Message-ID: <20241104135641.GL3600562@bill-the-cat>
+References: <CAFLszTj16p8-H1J349FoLowzpO7SNfdwELEDyDmi=U9+gZiCbw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="aHohQfeAh75g96KN"
+ protocol="application/pgp-signature"; boundary="gQpHVDybWW/2mbuM"
 Content-Disposition: inline
-In-Reply-To: <20241104133954.840994-6-sjg@chromium.org>
+In-Reply-To: <CAFLszTj16p8-H1J349FoLowzpO7SNfdwELEDyDmi=U9+gZiCbw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,46 +90,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---aHohQfeAh75g96KN
+--gQpHVDybWW/2mbuM
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 04, 2024 at 06:39:49AM -0700, Simon Glass wrote:
+On Sun, Nov 03, 2024 at 07:47:46AM -0700, Simon Glass wrote:
 
-> This doesn't build on arm64 at present, so drop it for now. We only
-> expect to run sandbox tests, so perhaps it isn't needed.
+> Hi Tom,
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/23152
+> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D71&view=
+=3Dresults
 >=20
->  tools/docker/Dockerfile | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
+> The following changes since commit e61ea9f2e5d2967826c2c6e3edba961064fbba=
+a1:
+>=20
+>   mtd: spi-nor: Guard SPI_STACKED_PARALLEL with DM_SPI check
+> (2024-10-31 13:34:29 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://git.denx.de/u-boot-dm.git tags/dm-pull-2nov24
+>=20
+> for you to fetch changes up to 572b7b0255f9f33002ce7d2a8b2bac30ab49a48e:
+>=20
+>   sandbox: Fix comment for nomap_sysmem() function (2024-11-02 16:14:55 -=
+0600)
+>=20
 
-What is the build failure? Depending on what other prospects for arm64
-build hardware come through I'm hoping to look harder at more build
-options, not just sandbox (but of course, QEMU shouldn't matter what the
-host is).
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---aHohQfeAh75g96KN
+--gQpHVDybWW/2mbuM
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmco0pAACgkQFHw5/5Y0
-tyyzbAv/ei+HSbQNjNqNTTTR4iz5fg5DxKPXflfd/Znqa+QMohnAy1RAOBLflJ3L
-7HzFcMm8odiP9fWyVL8iDgd9oVUITBeFHgrOiE7IrQP2sASKgkh9EzXpRNfhESvG
-CzHAn31qyNdxtOKDZM40toCS7bUehA2QqaV8/GQdW49A9hvsqVT3VRgkXwku31j1
-n7ELlBanfPwKOcyWZgrhxjQaWAFhN581Df5l9tgo7SVF5JbTkynQYD2pe6s1as01
-lx6IBxcwIRGYvJC0wKGrg/kr8tpJ/W3e7KTZqLTch9rtvk5/3C5e8nTd6XA4gpS0
-jrdg5kjxhuAB3flYsEAZ5xpHXUl0RVtdEXLnuQu/y5mHb6j9Lq6S1JCtDw3tAiGp
-9D4cpLNdERIaj84zpqjblGH2VZScmQSqybwPqCQaYSa0ivSwjiexfPPMIx2qPj4v
-E4K1Db6WQ4DJVrmpqTb5+YeXsPzyn9NGqpT1asTUAr8Z3661mXYO+u/2+OJnqyrb
-EgaYS3pO
-=j/Ro
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmco0pkACgkQFHw5/5Y0
+tyyxaQv+PU+yy/1nUIxiTgmkcUpwuEQmUGcf6RE5WYzUVzLwtTpcOiG+A5EkX9si
+Mfwr4XQvQgf8jjSRiyPs2LKJH2b8e8hlugSWZZNHFlFrjdPFSmQucV3NTmYbAfWo
+YDcjeg3lWtQDDt1uqC9jaeRuEAxUlQ3jhyZxmP1KczFqKIlNbea3kmFTpiYz/01C
+0trymRaIH55l2bIUC4irBXFvddov7ABxGoZopVGzve6CO9g0anBAxYbxqb2VS6+u
+hMyFtjoX5lxM1ms9csMgUEE5QX8QK7ugnzouLb6kmBWN+Q24igILoamQ9g5q1Tum
+Gf1T/82FwwskYBttl/VQF/EloonJjhIao4yCZ0nWF1n4gWCCFrxz2hX7NFv22tJd
+AlR72gRdlMQ80tkXkYVglhelg1QPgcO2HCvoMQpEdSNRX+lSQVBzi7DDf7lHnavp
+PS/s8s8RHS9bSpwLCmVxAJum52sgSGYnCzuig6JhukfjdbqN+NfmJkgGwWoay36D
+uq2Izqy2
+=/Edm
 -----END PGP SIGNATURE-----
 
---aHohQfeAh75g96KN--
+--gQpHVDybWW/2mbuM--
