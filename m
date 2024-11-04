@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF73D132C7
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 13:41:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35D2ED132C8
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 13:41:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36A0A88D90;
+	by phobos.denx.de (Postfix) with ESMTP id A154789076;
 	Mon,  4 Nov 2024 14:40:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Jol1JWZT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EBfDEhOn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6138888C7C; Mon,  4 Nov 2024 14:40:18 +0100 (CET)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 6EB1B88F41; Mon,  4 Nov 2024 14:40:19 +0100 (CET)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9A5D89000
- for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 14:40:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 239B888D13
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 14:40:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-83abe4524ccso156683039f.1
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 05:40:14 -0800 (PST)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-83abcfb9f37so178470839f.1
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 05:40:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730727613; x=1731332413; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730727615; x=1731332415; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tzzcU3cApD8N/Fex954cQUsPauKGOJbCbvA/+ftAKp4=;
- b=Jol1JWZTVwt3ftcGSah/txD690PaNY5iWvd1MlS3x6HNl+zT65JdU+p3VKcYg+QNYf
- YS8/xQ5kEieOI/qrPTSajbC0AGXOAc7jKJ7RIkDV13ltK0NFrFKefVpnefBGQSOsjYBe
- PHIwhKBPr+sfP8Zirf1C7PUz91n6PfQKMpQeY=
+ bh=VKyyy749CEwE0Vln7HQ2ISAnIhx4/RXq0RG6k/UIKp4=;
+ b=EBfDEhOne/hwqXte+ZpFjkl2wtMcL+jA+ufM5dDhQpA5Bmm9uBmhuDjmpedB6u2Kpr
+ +IBwJJ4L0ottKsWLM2AVRgkP48Kf9K7MImW9pjZBtEzquXy99lYfvqJ7yP3HSwrl/Vo9
+ PvhjnOnTuur7fpjbpUR31ecuoyRweJlsCIox0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730727613; x=1731332413;
+ d=1e100.net; s=20230601; t=1730727615; x=1731332415;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tzzcU3cApD8N/Fex954cQUsPauKGOJbCbvA/+ftAKp4=;
- b=i2R0Ypog+IyNW7wVbDuFtIPwdCBd/UNlG+grRfk5GX/plS749SMYzXlMjRTH3KQlGt
- vWN64csBnFGVC/L8hTllCzCJd8ItZz5BRnyR2t0P3MGBp7kayywseHLR9g2rtkl5kQvJ
- Ca1TCSWAd7ZB8aFTdtJjetvt0Anu+HqUHLGWuLe+RzoJN6nm9/c+hLQOOqafRXLtV1z2
- ZJBryfypjsIR7Ry7BYQAQhDzJqfmaGumCmA0eZiMKAJeTILXxEBOqAdG7qrv6i0YuwO9
- tFY7q7cMLWf6S9USfo7GwWdzQgGcV/4ti2EcS/RgsgVoQ59cMXCaRbJKFfRC/3yoXS8z
- TaOw==
-X-Gm-Message-State: AOJu0YzgyGbIwL2qVFD8rjykMJsN9Kmvr6mQ8VAUBJFO6LgBobdlslXg
- F4uLK82KzxhAOh8VJBBdfDnAAb076NZ5XlFasvsBGrFPAKTagtT/2GfPzhZn2sTLfRUeHeAjVY4
+ bh=VKyyy749CEwE0Vln7HQ2ISAnIhx4/RXq0RG6k/UIKp4=;
+ b=qS+MRbbg+JnElMpWeD94r+eHNqGYsTf+ybMXIZ11fXYSWruV25n3do48NONdCvnC9g
+ KkvNGOVAcYWzF/DzLiiS5FpFlYvRalCLOD0zLRz+y48f+Mcaega73HmFTh6dpMLY/Dvs
+ BiTAxfzW06Oko9zPy/+ri5p1GYs5IKeWrBx1YXXfP49qY2hg2zYKhJlYxA4nt1ppnv5v
+ 0ADUXVDXJg8GtBDTynomIZ0SvkKTgsbNg/jic1iOU199aOkDDoaw/5BXHNDdIWbdslCr
+ mv0TO2OB67QR/E2gECj4taVfm7bJs9hAxbq9OqWdIO4R0M5HSl9rpoAM2jJQiFy1Ru8R
+ xPjQ==
+X-Gm-Message-State: AOJu0YypW4nI/C7hV/OqQvU5RGu0x+Eq9vJcIhnt/bzU10wgdEKl5khF
+ LLqXqzwkYpzzwO1JO6C1WHgkgvDldNspgUAIjhEy5200kb1+5Y0/jDgM/6CuWDfg5sSeAgjYLMw
  =
-X-Google-Smtp-Source: AGHT+IGryWFZN0ivN2qk+dWXc6+nGhLZ6s9iFHW5/RmhFJZmFCzlLLRjt2ptoD6QB9HAIMeFJr/5Iw==
-X-Received: by 2002:a05:6602:29ce:b0:82c:ed57:ebd9 with SMTP id
- ca18e2360f4ac-83b650372b4mr1900715839f.10.1730727613067; 
- Mon, 04 Nov 2024 05:40:13 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFf7CqM1y7j4f1alNYvqs9iRBD/f4r4+klzbot1eV4WNjKmYeIay9CwMQ+95M4yXroiXcQPqw==
+X-Received: by 2002:a05:6602:1589:b0:837:7d54:acf1 with SMTP id
+ ca18e2360f4ac-83b1c3b7c50mr3398476039f.2.1730727614625; 
+ Mon, 04 Nov 2024 05:40:14 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4de048895f3sm1935128173.12.2024.11.04.05.40.11
+ 8926c6da1cb9f-4de048895f3sm1935128173.12.2024.11.04.05.40.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 05:40:12 -0800 (PST)
+ Mon, 04 Nov 2024 05:40:13 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH 7/9] docker: Drop coreboot for arm64
-Date: Mon,  4 Nov 2024 06:39:51 -0700
-Message-Id: <20241104133954.840994-8-sjg@chromium.org>
+Subject: [PATCH 8/9] docker: Fix LegacyKeyValueFormat warning with PYTHONPATH
+Date: Mon,  4 Nov 2024 06:39:52 -0700
+Message-Id: <20241104133954.840994-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241104133954.840994-1-sjg@chromium.org>
 References: <20241104133954.840994-1-sjg@chromium.org>
@@ -89,42 +89,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This isn't needed for sandbox builds and coreboot isn't much used on
-arm64, nor does U-Boot have a build that supports running from coreboot
-on any ARM target.
+Fix a warning due to the syntax used for PYTHONPATH:
 
-So drop it.
+   LegacyKeyValueFormat: "ENV key=value" should be used instead of
+      legacy "ENV key value" format (line 304)
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/docker/Dockerfile | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ tools/docker/Dockerfile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 73fdd1a4302..ae3d4685869 100644
+index ae3d4685869..c42e0890897 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -258,7 +258,8 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then  \
-     fi
+@@ -301,4 +301,4 @@ RUN /bin/echo -e "\nx86 = i386" >> ~/.buildman;
  
- # Build coreboot
--RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp -xJ && \
-+RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
-+    wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp -xJ && \
-     cd /tmp/coreboot-24.08 && \
-     make crossgcc-i386 CPUS=$(nproc) && \
-     make -C payloads/coreinfo olddefconfig && \
-@@ -269,7 +270,8 @@ RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp
-     make olddefconfig && \
-     make -j $(nproc) && \
-     sudo mkdir /opt/coreboot && \
--    sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/
-+    sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/; \
-+    fi
- 
- # Create our user/group
- RUN echo uboot ALL=NOPASSWD: ALL > /etc/sudoers.d/uboot
+ # Add mkbootimg tool
+ RUN git clone https://android.googlesource.com/platform/system/tools/mkbootimg /home/uboot/mkbootimg
+-ENV PYTHONPATH "${PYTHONPATH}:/home/uboot/mkbootimg"
++ENV PYTHONPATH="${PYTHONPATH}:/home/uboot/mkbootimg"
 -- 
 2.34.1
 
