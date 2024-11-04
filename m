@@ -4,49 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EB9DD1BDD4
-	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 18:02:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18D50D1BDC0
+	for <u-boot@archiver.kernel.org>; Mon,  4 Nov 2024 18:36:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D9EE88D29;
-	Mon,  4 Nov 2024 19:02:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6202288DEE;
+	Mon,  4 Nov 2024 19:36:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1730743331;
-	bh=OGbP9sQEcU/T0fqKImAGDHPuDQSKc2rCdK6xc2qT0s0=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=FHtjgveNky8TKoC+RENdAwE/Xt9Va+41bY0+R9FdAKhJdymucXYvBOj3vhFYfYv8y
-	 ztTn4yt5j6EC3ov2MotSZfdKEYcwCDQ62Mbf0r8UjxMkUeaIU2oUjuLZFmupoZ+EIM
-	 THyakk13fLF71semkUrC6QdjU8TE7hPaMRjI0ShdrOd6rbx1Yz8hxlqb5z0LeltJ+/
-	 aUZW8SW4UONCZbaEYwaGA629xOObv81hb4PDwoaAQ/v9MTKKlZ5ljwvJCjaBbD6hqb
-	 /DpsiMAWVs4HK3cFPy1M5EJZwMIeIxMUP1MupTcNjvJwML/rE27zGGsQw3gNQkdT0b
-	 0YYYRf92toPiQ==
-Received: from localhost.localdomain (87-97-112-21.pool.digikabel.hu
- [87.97.112.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id DBF9188DA3;
- Mon,  4 Nov 2024 19:02:08 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1730743329;
- bh=OGbP9sQEcU/T0fqKImAGDHPuDQSKc2rCdK6xc2qT0s0=;
- h=From:To:Cc:Subject:Date:From;
- b=tA04hlAx8jPUc6qlOTSBAqZs2vXQevN1/JkKHnzWAXi4km8ErvgaNmsFV0fMdg7hx
- m7Rsb4k/uKN73U2Jr0Uj7gFvWGuYyYEqZtqYb+dlMNgSb3pPwQeQteUkSWaxVGRl16
- 111CMm+QF1vs+qJ90eYibMGTWoUbSvU1d8O+jS86ofl0EVxB42FdnTORf7uPUYABvB
- kqZHVl33qHxdy092cFM3JoWC77iqVOM5fo4MUPe3QxFh+gJAqBwde7D9qqcL8FsYj4
- SXqgO71Ft9Oq5WZvrJnSGuydkCBjx29TI7darDq4Q8VKl2ZvYZcUmmUl7jcr64OtzB
- ErQjcpTmqp2Fg==
-From: Heiko Schocher <hs@denx.de>
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MnbNDDRh";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C1BCA88D4A; Mon,  4 Nov 2024 19:36:51 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6393988CBA
+ for <u-boot@lists.denx.de>; Mon,  4 Nov 2024 19:36:49 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-2887326be3dso1982571fac.1
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 10:36:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1730745407; x=1731350207; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=m4SWiyeBFOySyOiWZIF67DqmDPQdUC8NGvzH+nRI+Zc=;
+ b=MnbNDDRhi1YBtYcyfuDAd4o9WkUbZrg9xWu5BdK11d8euNvKwUHBhBtSCZd3aszSGd
+ ZLTWxhxwabttzDvPLPbjrAaevHS+hxx6HbXiQJkh25nPZjqtr9RLJeXUxeZydiSQXHhO
+ YEX/bINwgoYZyxWbZtrYBQldV3hg3sLuPSlQQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730745407; x=1731350207;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=m4SWiyeBFOySyOiWZIF67DqmDPQdUC8NGvzH+nRI+Zc=;
+ b=CAxsYlfUK2SkZuI5J8N8buXlFZrzag+tzVM4ozFRvM6tivoa3ZKxO7hGvFJvPSAkNO
+ D59KRy3/tVZnni7ekw1CMt+wBkZ0VPc/nu5Vxvq52uy3n+epuQmvIq2LR0a5I7MdAM3v
+ 0m1KhACYbrqTEFI8Bp/VMC8NTgPpT8V6PpifX+rBY2yXU8rCyhoJeSNJY1vBijvzP0UN
+ Dd48iHNZnCTK0VZekmSAcP9seKjJK2w67ColAWGtcfpgmIHGVDNvcR+ZUCHKZHfJstTK
+ xRkYumm6fKzfyPXJSfxxIFbzbiJQAqyd58l0bzsCRJKlCF1ybofrZtt3pbpyNX66F2UW
+ XDAA==
+X-Gm-Message-State: AOJu0YxiQ4kQcGCBbxaj0Q5x5By8auMzpehVQERfewNgj+Kc1/0ea8gj
+ qx1/IL4Jj7xIdDgl8CctkTUB9RipHUev2nBprgAsR0Epm2TggPf1YdKEgA7BwCgY0afxavEJHUc
+ =
+X-Google-Smtp-Source: AGHT+IFVlohjU5OsfyccFRAZoevgNk0RDxaJu4up8jiNrjOVdPfK0WY0On7El2KT+M1/jsxJBcxmcg==
+X-Received: by 2002:a05:6870:46ab:b0:288:71a6:482b with SMTP id
+ 586e51a60fabf-294846d2a06mr11815361fac.47.1730745407170; 
+ Mon, 04 Nov 2024 10:36:47 -0800 (PST)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4de048e372bsm2030285173.74.2024.11.04.10.36.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Nov 2024 10:36:46 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heiko Schocher <hs@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Fabio Estevam <festevam@denx.de>, Gary Bisson <bisson.gary@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] tools: imx8image: add possibility to skip dcd
-Date: Mon,  4 Nov 2024 19:02:03 +0100
-Message-Id: <20241104180203.110395-1-hs@denx.de>
-X-Mailer: git-send-email 2.20.1
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [u-boot-test-hooks PATCH v5 0/3] Add support for Labgrid
+Date: Mon,  4 Nov 2024 11:36:40 -0700
+Message-Id: <20241104183643.1116385-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -65,87 +86,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently U-Boot always adds DCD Image to boot container.
-On imx8qxp SoC it is possible to init RAM from within SCFW,
-and adding a DCD image type to the boot container in this case
-breaks booting (No debug output anymore from SCFW! Nor any
-output from SPL), so we need to configure a dcd skip somehow.
+This adds hooks for use with my integration for Labgrid (called
+Labgrid-sjg). The only existing hook that really does anything with the
+target, with this integration, is the 'console' one. There is also a new
+'getrole' hook which looks up a role to find various things about it,
+such as the U-Boot board name.
 
-This patch adds a new imx8image_cmd entry CMD_DCD_SKIP and a
-new entry in imximage.cfg "DCD_SKIP". If set to "true"
-no DCD image type will be added to the container.
+Changes in v5:
+- Use Labgrid-sjg instead of Labgrid
+- Use LABGRID_SJG to indicates the 'Labgrid-sjg' integration is running
+- Update commit message and cover letter for Labgrid-sjg
 
-Signed-off-by: Heiko Schocher <hs@denx.de>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Changes in v4:
+- Use an environment variable to select the Labgrid hooks
+- Add new patch to add .none scripts for power off/on
+- Support pytest fully with dual-build boards like Beagleplay
 
----
-Superseds patch:
-https://patchwork.ozlabs.org/project/uboot/patch/20241009123937.124691-1-hs@denx.de/
-
-azure build is fine:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=129&view=results
+Changes in v3:
+- Fall back to conf.${board_type}_${board_ident} if conf.all missing
+- Update scripts for latest version of Labgrid integration
+- Add poweroff.none and poweron.none
+- Provide -n flag when querying board info
+- Target the grpc version of Labgrid which is now in -master
+- Update README to cover the changes
 
 Changes in v2:
-- removed the RFC tag
-  added Reviewed-by: Peng Fan <peng.fan@nxp.com>
-  rebased patch on mainline commit
-  6ebfafe8c53 ("Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh")
+- Make use of the common script (only) to set bin_dir
+- Make use of the common script (only) to set bin_dir
 
- include/imx8image.h | 1 +
- tools/imx8image.c   | 7 ++++++-
- 2 files changed, 7 insertions(+), 1 deletion(-)
+Simon Glass (3):
+  Create a common file for test scripts
+  Add .none scripts for power off/on
+  Provide some basic scripts for Labgrid integration
 
-diff --git a/include/imx8image.h b/include/imx8image.h
-index 85fb642ae39..6b95e93fb50 100644
---- a/include/imx8image.h
-+++ b/include/imx8image.h
-@@ -146,6 +146,7 @@ struct image_array {
- enum imx8image_cmd {
- 	CMD_INVALID,
- 	CMD_BOOT_FROM,
-+	CMD_DCD_SKIP,
- 	CMD_FUSE_VERSION,
- 	CMD_SW_VERSION,
- 	CMD_MSG_BLOCK,
-diff --git a/tools/imx8image.c b/tools/imx8image.c
-index 5eb4b9612c8..96ece28bd6c 100644
---- a/tools/imx8image.c
-+++ b/tools/imx8image.c
-@@ -14,6 +14,7 @@ static soc_type_t soc;
- static int container = -1;
- static int32_t core_type = CFG_CORE_INVALID;
- static bool emmc_fastboot;
-+static bool dcd_skip;
- static image_t param_stack[IMG_STACK_SIZE];
- static uint8_t fuse_version;
- static uint16_t sw_version;
-@@ -41,6 +42,7 @@ static int imx8image_check_image_types(uint8_t type)
- 
- static table_entry_t imx8image_cmds[] = {
- 	{CMD_BOOT_FROM,         "BOOT_FROM",            "boot command",	      },
-+	{CMD_DCD_SKIP,          "DCD_SKIP",             "skip DCD init",      },
- 	{CMD_FUSE_VERSION,      "FUSE_VERSION",         "fuse version",	      },
- 	{CMD_SW_VERSION,        "SW_VERSION",           "sw version",	      },
- 	{CMD_MSG_BLOCK,         "MSG_BLOCK",            "msg block",	      },
-@@ -88,6 +90,9 @@ static void parse_cfg_cmd(image_t *param_stack, int32_t cmd, char *token,
- 		if (!strncmp("emmc_fastboot", token, 13))
- 			emmc_fastboot = true;
- 		break;
-+	case CMD_DCD_SKIP:
-+		if (!strncmp("true", token, 4))
-+			dcd_skip = true;
- 	case CMD_FUSE_VERSION:
- 		fuse_version = (uint8_t)(strtoll(token, NULL, 0) & 0xFF);
- 		break;
-@@ -1024,7 +1029,7 @@ int imx8image_copy_image(int outfd, struct image_tool_params *mparams)
- 	fprintf(stdout, "CONTAINER SW VERSION:\t0x%04x\n", sw_version);
- 
- 	build_container(soc, sector_size, emmc_fastboot,
--			img_sp, false, fuse_version, sw_version, outfd);
-+			img_sp, dcd_skip, fuse_version, sw_version, outfd);
- 
- 	return 0;
- }
+ README.md                        | 51 ++++++++++++++++++++++++++++++++
+ bin/console.labgrid-sjg          | 42 ++++++++++++++++++++++++++
+ bin/ellesmere/common-labgrid-sjg | 46 ++++++++++++++++++++++++++++
+ bin/ellesmere/conf.all           | 24 +++++++++++++++
+ bin/getrole.labgrid-sjg          | 25 ++++++++++++++++
+ bin/poweroff.none                | 22 ++++++++++++++
+ bin/poweron.none                 | 22 ++++++++++++++
+ bin/release.labgrid-sjg          | 22 ++++++++++++++
+ bin/release.none                 | 22 ++++++++++++++
+ bin/u-boot-test-common           | 36 ++++++++++++++++++++++
+ bin/u-boot-test-console          |  8 +----
+ bin/u-boot-test-flash            |  8 +----
+ bin/u-boot-test-getrole          | 38 ++++++++++++++++++++++++
+ bin/u-boot-test-power-off        |  8 +----
+ bin/u-boot-test-power-on         |  8 +----
+ bin/u-boot-test-release          | 26 ++++++++++++++++
+ bin/u-boot-test-reset            |  8 +----
+ 17 files changed, 381 insertions(+), 35 deletions(-)
+ create mode 100644 bin/console.labgrid-sjg
+ create mode 100755 bin/ellesmere/common-labgrid-sjg
+ create mode 100644 bin/ellesmere/conf.all
+ create mode 100644 bin/getrole.labgrid-sjg
+ create mode 100755 bin/poweroff.none
+ create mode 100755 bin/poweron.none
+ create mode 100644 bin/release.labgrid-sjg
+ create mode 100644 bin/release.none
+ create mode 100755 bin/u-boot-test-common
+ create mode 100755 bin/u-boot-test-getrole
+ create mode 100755 bin/u-boot-test-release
+
 -- 
-2.20.1
+2.34.1
 
