@@ -4,117 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF71D3E775
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 22:12:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F4E7D3E775
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 22:12:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C35668913F;
-	Tue,  5 Nov 2024 23:12:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 30A4788FD2;
+	Tue,  5 Nov 2024 23:12:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="fPZZS6z/";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="NtAIeumy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A19CC89048; Tue,  5 Nov 2024 23:12:05 +0100 (CET)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AE0058904C; Tue,  5 Nov 2024 23:12:56 +0100 (CET)
+Received: from smtp-out.freemail.hu (fmfe26.freemail.hu [46.107.16.231])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D662C88E43
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 23:11:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 572F588FD2
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 23:12:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=none (p=none dis=none) header.from=freemail.hu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20241105221153epoutp010bec968c48726fcbc3fc563768124b05~FMhi67Dyk1344913449epoutp01G
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 22:11:53 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20241105221153epoutp010bec968c48726fcbc3fc563768124b05~FMhi67Dyk1344913449epoutp01G
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1730844713;
- bh=TGQwuQROTgHAzPri5g4ttobgEwdo3bqjQgmfa8yvgZI=;
- h=From:To:Cc:Subject:Date:References:From;
- b=fPZZS6z/akCEV0AFBnpdjLIMSXegDPQyUE8xw+4Jl2uvdwz+io6MVpdpfiNn7qUxQ
- R3ZukB6nnQnwOBPRlHkQm5cq9lqH0ujVyXmCcUU6f6NJlFxkludEvs3otF26DBHoaX
- 06AdkN1Ki0lZUMVzxsGA1DNraDr21xVX/ZmrXP+0=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20241105221153epcas1p4b177172ce717927392ebe405ea420739~FMhigpwdm0089300893epcas1p4K;
- Tue,  5 Nov 2024 22:11:53 +0000 (GMT)
-Received: from epsmgec1p1.samsung.com (unknown [182.195.36.136]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4XjjHD1qcsz4x9Px; Tue,  5 Nov
- 2024 22:11:52 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 14.23.09435.8289A276; Wed,  6 Nov 2024 07:11:52 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20241105221151epcas1p2096fdad52d8b4977f707e4b1b3a47849~FMhhTpBAN1788417884epcas1p2o;
- Tue,  5 Nov 2024 22:11:51 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241105221151epsmtrp267072ccd5aab9bdf0dca25310330d65e~FMhhS_aDs0884708847epsmtrp2g;
- Tue,  5 Nov 2024 22:11:51 +0000 (GMT)
-X-AuditID: b6c32a36-ac7ff700000024db-af-672a982810d0
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- D0.5E.08227.7289A276; Wed,  6 Nov 2024 07:11:51 +0900 (KST)
-Received: from localhost.localdomain (unknown [10.113.113.235]) by
- epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20241105221151epsmtip2a8cbb2f6349c16a82386ca9481ef2076~FMhg-myJe1998719987epsmtip2Y;
- Tue,  5 Nov 2024 22:11:51 +0000 (GMT)
-From: Jaehoon Chung <jh80.chung@samsung.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, marek.vasut+renesas@mailbox.org,
- laurent.pinchart@ideasonboard.com, m.szyprowski@samsung.com, Jaehoon Chung
- <jh80.chung@samsung.com>
-Subject: [PATCH] boot: image-board: Mismatch a type between variable and
- return value
-Date: Wed,  6 Nov 2024 07:11:49 +0900
-Message-Id: <20241105221149.507119-1-jh80.chung@samsung.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=egyszeregy@freemail.hu
+Received: from [192.168.0.16] (catv-178-48-208-49.catv.fixed.vodafone.hu
+ [178.48.208.49])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.freemail.hu (Postfix) with ESMTPSA id 4XjjJP3RQnzFkC;
+ Tue, 05 Nov 2024 23:12:53 +0100 (CET)
+Message-ID: <40c2800b-86e0-46e8-8b8a-add3b96dfc3d@freemail.hu>
+Date: Tue, 5 Nov 2024 23:10:58 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] imx9: Improve boot device auto-selection
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, "sbabic@denx.de" <sbabic@denx.de>
+References: <20241013174120.1872-1-egyszeregy@freemail.hu>
+ <PAXPR04MB845929FE951FCEC327F9F54788442@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <CAOMZO5DBDDYr+9K8rq56L-=5EGWDNXY514rz5zoqPdXOQ2x=jw@mail.gmail.com>
+ <93d2989d-7d55-40a3-a44b-ef64e1feb511@freemail.hu>
+ <CAOMZO5Bvkqj6uYpSU=JsWd_t7yfvHAqhs9J08fGiEa1nfCX3Hw@mail.gmail.com>
+ <DB9PR04MB8461C9D5EB7ADA89A2D335CE884C2@DB9PR04MB8461.eurprd04.prod.outlook.com>
+ <9a06d2e7-37f8-4371-a4b2-0daaa38e2032@freemail.hu>
+ <CAOMZO5DPZMRV-mYydxbLL8CGTocXp1ex6DSMgL5JJwP_FN1i9Q@mail.gmail.com>
+Content-Language: hu
+From: =?UTF-8?Q?Sz=C5=91ke_Benjamin?= <egyszeregy@freemail.hu>
+In-Reply-To: <CAOMZO5DPZMRV-mYydxbLL8CGTocXp1ex6DSMgL5JJwP_FN1i9Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrGKsWRmVeSWpSXmKPExsWy7bCmnq7GDK10g5ltbBY3frWxWnROXMJu
- sfbIXXaL1pV32Cy+bdnGaDF10mZ2i7d7O9kd2D1mN1xk8ZjdMZPV49WBVeweZ+/sYPTYOXsf
- k0ffllWMAWxR2TYZqYkpqUUKqXnJ+SmZeem2St7B8c7xpmYGhrqGlhbmSgp5ibmptkouPgG6
- bpk5QMcoKZQl5pQChQISi4uV9O1sivJLS1IVMvKLS2yVUgtScgpMC/SKE3OLS/PS9fJSS6wM
- DQyMTIEKE7Iz3l0vKXjLXrFslV4D42a2LkZODgkBE4n7nz6xdzFycQgJ7GCU+HJhFRNIQkjg
- E6PEv2XJEIlvjBLzb31g7GLkAOtYMCsQIr6XUWLx2cnMEM4XRomJaxaBdbMJ6Ehs/3YczBYR
- kJD41X+VEcRmFtjEKNEzSQ3EFhYIl2i/tZYZxGYRUJW4fQeil1fARmL1/l3sEOfJS8y89J0d
- Ii4ocXLmExaIOfISzVtnM0PUXGOXaJ2RBmG7SOw69p4VwhaWeHV8C9QcKYnP7/aygRwqIdDM
- KLF0yUFWCKcH6M2G69DAMJbYv3QyE8ibzAKaEut36UMs45N497WHFeJ7XomONiGIahWJS69f
- MsHMv/vkP9ReD4l/E/4zg5QLCcRKtG7XmMAoNwvJB7OQfDALYdcCRuZVjGKpBcW56anFhgVG
- 8FhMzs/dxAhOgFpmOxgnvf2gd4iRiYPxEKMEB7OSCO+8VPV0Id6UxMqq1KL8+KLSnNTiQ4ym
- wDCdyCwlmpwPTMF5JfGGJpYGJmZGxiYWhmaGSuK8Z66UpQoJpCeWpGanphakFsH0MXFwSjUw
- JUVf2sprce5dZNn+pZEhm245G37eeH/n76Ct5+6tWHSqZ1LwVafrij/990UbstW+7/lt2d7/
- 0r2Ldeaa2S/NDsxbPflTwENh/Vud0f7fsx+fNtlplvBrlVcqz5PwGxHZnVs2r5NyTvVPOFqk
- bpRvyx3v+abzoVZU7ZmPZReuH1gZOOns7PtM+m672YL/ejixrtkrOCHt6oG2sl9HO3b1PP0T
- pe9m9tshndHyzi7dbY/2rXh1tXaWe8rrFc8DfW8anZBZ45d22a6vz5P7Yhwb90kHp0cJ/zz/
- OLa4+ORKTpZYf+DOku8Ms3doWM1mbStKmdHD41B2wu5Y8vu0xs820uY8F34/ZY0tfuWToXD8
- tBJLcUaioRZzUXEiAIpyDsYJBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrALMWRmVeSWpSXmKPExsWy7bCSvK76DK10g1k/tSxu/GpjteicuITd
- Yu2Ru+wWrSvvsFl827KN0WLqpM3sFm/3drI7sHvMbrjI4jG7Yyarx6sDq9g9zt7Zweixc/Y+
- Jo++LasYA9iiuGxSUnMyy1KL9O0SuDLeXS8peMtesWyVXgPjZrYuRg4OCQETiQWzArsYOTmE
- BHYzSlw6xARiSwhISXx+OhWqRFji8OHiLkYuoJJPjBK3T+xhAalhE9CR2P7tOFi9iICExK/+
- q4wgRcwCOxglTnf/ZQVpFhYIlWg+LAFSwyKgKnH7ziKwel4BG4nV+3exQ+ySl5h56Ts7RFxQ
- 4uTMJ2DzmYHizVtnM09g5JuFJDULSWoBI9MqRsnUguLc9NxiwwKjvNRyveLE3OLSvHS95Pzc
- TYzgQNXS2sG4Z9UHvUOMTByMhxglOJiVRHjnpaqnC/GmJFZWpRblxxeV5qQWH2KU5mBREuf9
- 9ro3RUggPbEkNTs1tSC1CCbLxMEp1cA06+oq33QT1pMvPMuudd7fkTXJOal6NZvu//kVc5rV
- Xp8qP//9hcZS6QyhPYumRl+K9/pf0lzi0bomWi2do8hwg37ht8nbcmX3NgsdXmH/9Eh3bgJr
- 2vtVLOej2+Sbn2pN86pdlWC6jE2r58qG1dkmqZpSJ1nvyNwKfudpcy3hS/lklgfKrlczViya
- 0X3zdfKLtlXSl2QCYrfNyDnNteXHkept8s9vZO/32fbH788k9t1nVeSMJV7PYT95++6C863q
- T/7vfG2QyyurqLB83qG2LbFeKVwBekvykpYJX/gctOeKs9eGgLLHx/77Vfh+iGWcXvZY250v
- Rybp94yDD/Oq1FLPaV5TzSkT36P048EbJZbijERDLeai4kQAiYvjm8MCAAA=
-X-CMS-MailID: 20241105221151epcas1p2096fdad52d8b4977f707e4b1b3a47849
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241105221151epcas1p2096fdad52d8b4977f707e4b1b3a47849
-References: <CGME20241105221151epcas1p2096fdad52d8b4977f707e4b1b3a47849@epcas1p2.samsung.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1730844773; 
+ s=20181004; d=freemail.hu;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ l=2669; bh=MVww7rhbPVq2aXJ4No8Cn4xbSlA91eQ5rkmxn/Jwiuk=;
+ b=NtAIeumyJD29oiP6iZyeIjHgJU+j7EhF9l5Va91weAOOV8sefmWOBID2r5jEuCeh
+ TC6hb1YIK+kkzcVnV+WuDIiMR//SjeB68aRI7x4RD0BpiLfqd/tXrFf9GWz64WsqaKZ
+ 2f44mBRR6EcF8g7OVkTNkxsRKlYGAEoPHF6FELwsczgqZBaNqXRCnLZD/A5x4Zig9o7
+ pNCg0g5467Sf2L95Ol6AeHd83eIjOQwxugFIZRoAWlHwOgI2eCa1fvSJwo7T8W51g0w
+ cmbQm2fClo/T4LcMViWbztQaGk0ec9vwATJldYDeA7+Ww+0kfCF8ZR1WRpK7/uefE32
+ HKeokLlsaw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,31 +79,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-phys_addr_t can be used unsigned long long type with CONFIG_PHYS_64BIT.
-But hextoul() is always returning to unsigned long. It can be assigned
-to unexpected value. To avoid wrong behavior, change from hextoul() to
-simple_strtoull().
+2024. 11. 01. 13:30 keltezéssel, Fabio Estevam írta:
+> On Fri, Nov 1, 2024 at 7:56 AM Szőke Benjamin <egyszeregy@freemail.hu> wrote:
+> 
+>> If both CONFIG_ENV_IS_IN_MMC=y and CONFIG_ENV_IS_NOWHERE=y are in the config,
+>> CONFIG_ENV_IS_IN_MMC=y will be overrideing default CONFIG_ENV_IS_NOWHERE
+>> settings, so in imx9 defconfig it is useless to use both of them.
+>>
+>> In my board i can use CONFIG_ENV_IS_NOWHERE=y without CONFIG_ENV_IS_IN_MMC=y in
+>> imX93 EVK board but i needed to make this patch in imx9/soc.c and imx93_evk.c
+>> source files imx9 to get it work.
+>>
+>> It will not break any rules. In this boot mode selection it just a simple
+>> process to set "mmcdev" and "mmcroot" according your actual MMC device IDs from
+>> boot switches states. It never be able to break any rules for UUU booting in
+>> Serial download mode because you have to use manual commands from UUU script
+>> which will never use this mmc variables.
+>> https://elixir.bootlin.com/u-boot/v2024.10/source/board/congatec/common/mmc.c#L41
+>>
+>> Goal in my patch to able to use the boot mode autodecetion in case of use only
+>> CONFIG_ENV_IS_NOWHERE=y option (without CONFIG_ENV_IS_IN_MMC). It works for me.
+>> Please sit down, put your NXP board i your desk and try it, then analyse how
+>> well works for you also.
+> 
+> It would help to put some of the details you add above into the commit log.
+> 
+> There are checkpatch errors in your patch:
+> 
+> $ ./scripts/checkpatch.pl
+> ~/Downloads/imx9-Improve-boot-device-auto-selection.patch
+> WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef'
+> where possible
+> #121: FILE: arch/arm/mach-imx/imx9/soc.c:45:
+> +#if CONFIG_IS_ENABLED(ENV_IS_IN_MMC) || CONFIG_IS_ENABLED(ENV_IS_NOWHERE)
+> 
+> WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef'
+> where possible
+> #127: FILE: arch/arm/mach-imx/imx9/soc.c:51:
+> +#ifndef CONFIG_SYS_MMC_ENV_DEV
+> 
+> ERROR: All CONFIG symbols are managed by Kconfig
+> #128: FILE: arch/arm/mach-imx/imx9/soc.c:52:
+> +#define CONFIG_SYS_MMC_ENV_DEV 0
+> 
+> WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef'
+> where possible
+> #143: FILE: board/freescale/imx93_evk/imx93_evk.c:61:
+> +#if CONFIG_IS_ENABLED(ENV_IS_IN_MMC) || CONFIG_IS_ENABLED(ENV_IS_NOWHERE)
+> 
+> ERROR: All CONFIG symbols are managed by Kconfig
+> #157: FILE: include/configs/imx93_evk.h:32:
+> +#define CONFIG_SYS_MMC_ENV_DEV 0
+> 
+> total: 2 errors, 3 warnings, 0 checks, 37 lines checked
 
-Fixes: a4df06e41fa2 ("boot: fdt: Change type of env_get_bootm_low() to phys_addr_t")
 
-Signed-off-by: Jaehoon Chung <jh80.chung@samsung.com>
----
- boot/image-board.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/boot/image-board.c b/boot/image-board.c
-index 1757e5816d84..977343a8995c 100644
---- a/boot/image-board.c
-+++ b/boot/image-board.c
-@@ -547,7 +547,7 @@ int boot_ramdisk_high(ulong rd_data, ulong rd_len, ulong *initrd_start,
- 		/* a value of "no" or a similar string will act like 0,
- 		 * turning the "load high" feature off. This is intentional.
- 		 */
--		initrd_high = hextoul(s, NULL);
-+		initrd_high = simple_strtoull(s, NULL, 16);
- 		if (initrd_high == ~0)
- 			initrd_copy_to_ram = 0;
- 	} else {
--- 
-2.25.1
+In my next [PATCH v2], these errors were fixed:
+[PATCH v2] imx9: Improve boot mode autodetection
+https://lists.denx.de/pipermail/u-boot/2024-November/570295.html
 
