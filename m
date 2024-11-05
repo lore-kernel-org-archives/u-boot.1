@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C399D2C11B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:12:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04B5DD2C11B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:12:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B7B98913F;
-	Tue,  5 Nov 2024 16:12:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D291F891C7;
+	Tue,  5 Nov 2024 16:12:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C0kHhjxE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MVhl2lSE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 468958915F; Tue,  5 Nov 2024 16:12:46 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 77E76891C3; Tue,  5 Nov 2024 16:12:51 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2926C88F77
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:12:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82344891AF
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:12:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9eaaab29bcso288614766b.2
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:12:44 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a9a628b68a7so861320666b.2
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:12:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730819563; x=1731424363; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730819569; x=1731424369; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9ryudPQMdfx9xn8o2ERbKEc14Nlq1w1BXjs1kCa0XqM=;
- b=C0kHhjxEM6Qadtr1E1dK0axxjT+oFouedAOMaHS13pIl3/tGX7XZPtvH9l1+VD8rZO
- 1hDRGnDP3cVgPZlbP8yNBSGas40SItxXQ87g66r4lRgdBPLpIoUumVr+IbLrJIP0J5SV
- 3h/wXWf9l5eZogD3iwnJieWoNSySoqGGvwb8I=
+ bh=ktKaUKxPcCrrJfnjpvzxlAkgu3O1U7/stBHTHfbWEsw=;
+ b=MVhl2lSEqz5pD21KICXa3VW3V2iaGKGgwVrISDEnDqMPe+dvz+wle/wthh+xu0zOTZ
+ Fp6jOvwAhcXEP4O7ln6LcC2r0c7JtHD6ttI3wwNy7HrM3lxjx3vH4cqhX2WyEDzvMHgq
+ whgpp48jy7oRQ/PjWg7D8GL25IcrtHHjzvQw0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730819563; x=1731424363;
+ d=1e100.net; s=20230601; t=1730819569; x=1731424369;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9ryudPQMdfx9xn8o2ERbKEc14Nlq1w1BXjs1kCa0XqM=;
- b=N899GgQCXGuVCXcmu32BctScHfAYaphETdeCzrdd0vw7fHWDm0ter5CpmfVoNw2RXn
- XSixY6Jukb4nsTvAP+njP50xJnm0OdXfCf6kDW7zxPYSPUFgI19+Ov2ldKjz714Y5M/p
- FTD3VdvpvkPNSF8MqWZ+lBdHojtwYSkUV48i+G//6gqK0PYO9q44JFCIWWacaRx3W6ML
- abNt87I19cBoeD9Cor3KkBWNOgSQVg8tCHO1XW/NitsQ7koa2jepM8Tao9sXCDSaxs22
- Xva/P9sFYsAB1Dm0DzoHJ+ptgEcQQVQiF7ZP9IIIdBSTt1RLbGH9ZpIFXLO3tt1UBHjQ
- Wvvw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXzRelnO+IkN2/gvy1e45YrAOcajXqHz8S5LSZ8UOJ1FTbA6fiY1gP8ozM6bRLefPRUli09F9w=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTLndCX28sPUZRq/0nSKMQqomsyOk7I73gYc4DPwQixF3McTmA
- j6kEB6aSKtLwVwb9sZ5bcgrsPJrzohsW05MhutO+d2YeEbXhozg5bLpSMlei/b83OH/nfG8IGtq
- ohdh/DMYSLYpxHrOcz5bSiiREaTJ3JcMZriJN
-X-Google-Smtp-Source: AGHT+IEiYoOK4KkeGSg3zMCNUCKvv8s+e38pkQqgVVch6PVKkaxDmhbpqXwL9oCEaYJK20vk1SkQeckAJpwSA59i9Fk=
-X-Received: by 2002:a17:907:7f0d:b0:a9e:447b:6f76 with SMTP id
- a640c23a62f3a-a9e50939fcfmr1897368166b.31.1730819563423; Tue, 05 Nov 2024
- 07:12:43 -0800 (PST)
+ bh=ktKaUKxPcCrrJfnjpvzxlAkgu3O1U7/stBHTHfbWEsw=;
+ b=dvQh+3zI4j4Y19+jQ2mi2SUOFrth0WIh5WT48ezVDyeF+Zp9UiNVUanQcLkE1tqQH1
+ 3sCe4cx1Pjl/ZlYuvcf3pv33YAzCRKzfhXFbeVbJ3bt+RFd7MM1BglBxLDMNIIRgXaPd
+ pozUwWnrygKUvUSWrAyLUr60ELZ0LxBFAVWf+6cCBsaNKjjd6xBPuScZa4wvV0TtH9SO
+ hJA2Rbr1SbgNkGdqYdYKLb+Kq5yYDbnQ/u+uVNCsJZF08ke/L582u6In/5c1l3Z4jAoE
+ O1+z1SPdyWpBKjzjEYsct4+4kq8EicJ1wkOkMTEtiSuBBr/h3jc4V7jONsawUpheJ3N8
+ 2ZOQ==
+X-Gm-Message-State: AOJu0YwVReJeVNLPCBTvDt3hHZl6Yi/6uxd3mWPzXPQL8BJnAQWfsubW
+ a6wrswOYPAzkXFsGeA0Uh0KpQYoqpzQ80QhPDf/4KSLrHKzSop94zQ2XIaUVAorjgp09Hrk6SND
+ SpqFJIP+Rq0P6TO2p6Dh1w0UJm/oKOGAvYRI7
+X-Google-Smtp-Source: AGHT+IGNtSv/SqtfG/+IAb70lvDzHkQGBsb1+e8fj8NtyGHJafKOD4KcN30yeC/w1GThA+6vgzlZPgUwcbdmFkxmg3g=
+X-Received: by 2002:a17:907:6d29:b0:a9a:4aa3:728b with SMTP id
+ a640c23a62f3a-a9e657fcd36mr1528411666b.53.1730819568810; Tue, 05 Nov 2024
+ 07:12:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20241102143020.129450-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241102143020.129450-1-heinrich.schuchardt@canonical.com>
+References: <20241105120653.99438-1-jerome.forissier@linaro.org>
+In-Reply-To: <20241105120653.99438-1-jerome.forissier@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Nov 2024 08:12:31 -0700
-Message-ID: <CAFLszTi1r18JmfdZtFLOrUPa1G0m3r5NPajUadkO5tGqXXNTDA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] cmd: upl: initialize unit test state
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>, u-boot@lists.denx.de
+Date: Tue, 5 Nov 2024 08:12:37 -0700
+Message-ID: <CAFLszThT7hmuNmkq7y_sC8pzn0JWVZVqrM+cU0sMTvVN1eG8ag@mail.gmail.com>
+Subject: Re: [PATCH] test/cmd/wget.c: move net_test_wget() to the cmd test
+ suite
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,39 +83,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Sat, 2 Nov 2024 at 08:30, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Tue, 5 Nov 2024 at 05:07, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> do_upl_write() calls upl_get_test_data() which may increment the fail
-> count in the unit test state. We should initialize it.
+> Since net_test_wget() is testing a command and is in test/cmd it
+> should be in the 'cmd' test suite, not 'lib'.
 >
-> Addresses-Coverity-ID: 510465 Uninitialized scalar variable
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reported-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
->  cmd/upl.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/cmd/upl.c b/cmd/upl.c
-> index 4996f36c787..c9a823bbc06 100644
-> --- a/cmd/upl.c
-> +++ b/cmd/upl.c
-> @@ -50,7 +50,7 @@ static int do_upl_write(struct cmd_tbl *cmdtp, int flag, int argc,
->                         char *const argv[])
->  {
->         struct upl s_upl, *upl = &s_upl;
-> -       struct unit_test_state uts;
-> +       struct unit_test_state uts = { 0 };
->         struct abuf buf;
->         oftree tree;
->         ulong addr;
-> --
-> 2.45.2
+>  test/cmd/wget.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
 
-This already exists. A memset() is in upl_init() which is called from
-this function.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
