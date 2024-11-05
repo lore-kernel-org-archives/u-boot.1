@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B925D3177F
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 18:37:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2694AD328DF
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 18:40:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA5198917B;
-	Tue,  5 Nov 2024 19:37:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9A01A88D29;
+	Tue,  5 Nov 2024 19:40:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD3A488A0A; Tue,  5 Nov 2024 19:37:36 +0100 (CET)
+ id 80E4388A0A; Tue,  5 Nov 2024 19:40:17 +0100 (CET)
 Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FDCF891B0
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 19:37:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3018A8919A
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 19:40:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paulk@sys-base.io
 Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 249731F0004D
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:37:33 +0000 (UTC)
+ by leonov.paulk.fr (Postfix) with ESMTPS id 832631F0004B
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:40:13 +0000 (UTC)
 Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 3D9D9A44AF2; Tue,  5 Nov 2024 18:37:32 +0000 (UTC)
+ id 12E9EA44AF5; Tue,  5 Nov 2024 18:40:12 +0000 (UTC)
 Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id 416A9A44AE7;
- Tue,  5 Nov 2024 18:37:31 +0000 (UTC)
-Date: Tue, 5 Nov 2024 19:37:28 +0100
+ by laika.paulk.fr (Postfix) with ESMTPSA id 0CE82A44AEE;
+ Tue,  5 Nov 2024 18:40:11 +0000 (UTC)
+Date: Tue, 5 Nov 2024 19:40:09 +0100
 From: Paul Kocialkowski <paulk@sys-base.io>
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -39,16 +39,16 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Klaus Goger <klaus.goger@cherry.de>, u-boot@lists.denx.de,
  Paul Kocialkowski <contact@paulk.fr>,
  Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH next 3/5] rockchip: tpl: allow to call board/SoC-specific
- code before DRAM init
-Message-ID: <Zypl6BpHOHBZbH7s@collins>
+Subject: Re: [PATCH next 4/5] rockchip: rk3399: allow to handle sysreset-gpio
+ in TPL
+Message-ID: <ZypmiX2sOVxae-O2@collins>
 References: <20241105-rk3399-sysreset-gpio-tpl-v1-0-12caff07a4e4@cherry.de>
- <20241105-rk3399-sysreset-gpio-tpl-v1-3-12caff07a4e4@cherry.de>
+ <20241105-rk3399-sysreset-gpio-tpl-v1-4-12caff07a4e4@cherry.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="K8VrGgLCA23Rijei"
+ protocol="application/pgp-signature"; boundary="VgUrKh3qY8fbXC7e"
 Content-Disposition: inline
-In-Reply-To: <20241105-rk3399-sysreset-gpio-tpl-v1-3-12caff07a4e4@cherry.de>
+In-Reply-To: <20241105-rk3399-sysreset-gpio-tpl-v1-4-12caff07a4e4@cherry.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,7 +66,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---K8VrGgLCA23Rijei
+--VgUrKh3qY8fbXC7e
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -76,47 +76,109 @@ Hi,
 Le Tue 05 Nov 24, 16:36, Quentin Schulz a =C3=A9crit :
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >=20
-> This defines a weak tpl_board_init function that can be used for running
-> board/SoC-specific code before the DRAM init happens, similarly to
-> spl_board_init() for SPL.
+> If TPL_GPIO and TPL_PINCTRL_ROCKCHIP are enabled and a sysreset-gpio is
+> provided in the TPL Device Tree, this will trigger a system reset
+> similar to what's currently been done in SPL whenever the RK3399 "warm"
+> boots.
+>=20
+> There are three reasons for moving this earlier:
+> - faster boot time as we don't need to reach SPL to be able to reset the
+>   system on a condition we know is already met in TPL,
+> - have less code to be impacted by the issue this system reset works
+>   around (that is, "unclean" SoC registers after a reboot),
+> - less confusion around the reason for restarting. Indeed when done from
+>   SPL, the following log can be observed:
+>=20
+> """
+> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
+> Channel 0: DDR3, 666MHz
+> BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D16 CS=3D1 Die BW=3D16 Size=3D2048MB
+> Channel 1: DDR3, 666MHz
+> BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D16 CS=3D1 Die BW=3D16 Size=3D2048MB
+> 256B stride
+> Trying to boot from BOOTROM
+> Returning to boot ROM...
+>=20
+> U-Boot SPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45 =
++0100)
+> Trying to boot from MMC2
+>=20
+> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
+> """
+>=20
+> possibly hinting at an issue within the SPL when loading the fitImage
+> from MMC2 instead of the normal course of events (a system reset).
 >=20
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
 Reviewed-by: Paul Kocialkowski <paulk@sys-base.io>
+
+See a nit below.
 
 Cheers,
 
 Paul
 
 > ---
->  arch/arm/mach-rockchip/tpl.c | 6 ++++++
->  1 file changed, 6 insertions(+)
+>  arch/arm/mach-rockchip/rk3399/rk3399.c | 15 +++++++++++----
+>  1 file changed, 11 insertions(+), 4 deletions(-)
 >=20
-> diff --git a/arch/arm/mach-rockchip/tpl.c b/arch/arm/mach-rockchip/tpl.c
-> index bbb9329e725af79ea4c4049aa7890a4a143e7df5..6b880f19f84e57e7bc0c93b16=
-b188bc56267827e 100644
-> --- a/arch/arm/mach-rockchip/tpl.c
-> +++ b/arch/arm/mach-rockchip/tpl.c
-> @@ -21,6 +21,10 @@
->  #include <timestamp.h>
+> diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockc=
+hip/rk3399/rk3399.c
+> index 7b6a822ed04b8151a5da147056dbf73ffdafd149..26fd04691699d81f5fecd2829=
+64c7b3aff999717 100644
+> --- a/arch/arm/mach-rockchip/rk3399/rk3399.c
+> +++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
+> @@ -169,7 +169,7 @@ void board_debug_uart_init(void)
+>  }
 >  #endif
 > =20
-> +__weak void tpl_board_init(void)
-> +{
-> +}
-> +
->  void board_init_f(ulong dummy)
+> -#if defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD)
+> +#if defined(CONFIG_XPL_BUILD)
+>  static void rk3399_force_power_on_reset(void)
 >  {
->  	struct udevice *dev;
-> @@ -54,6 +58,8 @@ void board_init_f(ulong dummy)
->  	if (IS_ENABLED(CONFIG_SYS_ARCH_TIMER))
->  		timer_init();
+>  	const struct rockchip_cru *cru =3D rockchip_get_cru();
+> @@ -195,9 +195,9 @@ static void rk3399_force_power_on_reset(void)
+>  	if (cru->glb_rst_st =3D=3D 0)
+>  		return;
 > =20
-> +	tpl_board_init();
-> +
->  	ret =3D uclass_get_device(UCLASS_RAM, 0, &dev);
->  	if (ret) {
->  		printf("DRAM init failed: %d\n", ret);
+> -	if (!IS_ENABLED(CONFIG_SPL_GPIO)) {
+> +	if (!CONFIG_IS_ENABLED(GPIO)) {
+>  		debug("%s: trying to force a power-on reset but no GPIO "
+> -		      "support in SPL!\n", __func__);
+> +		      "support in " PHASE_NAME "!\n", __func__);
+>  		return;
+>  	}
+> =20
+> @@ -218,6 +218,7 @@ static void rk3399_force_power_on_reset(void)
+>  	dm_gpio_set_value(&sysreset_gpio, 1);
+>  }
+> =20
+> +# if !defined(CONFIG_TPL_BUILD)
+
+Coding style in the file doesn't put a space after # (even when nested).
+
+>  void __weak led_setup(void)
+>  {
+>  }
+> @@ -228,4 +229,10 @@ void spl_board_init(void)
+> =20
+>  	rk3399_force_power_on_reset();
+>  }
+> -#endif
+> +# else  // !defined(CONFIG_TPL_BUILD)
+
+Ditto and also doesn't have such comments.
+
+> +void tpl_board_init(void)
+> +{
+> +	rk3399_force_power_on_reset();
+> +}
+> +# endif // !defined(CONFIG_TPL_BUILD)
+
+Ditto.
+
+> +#endif // defined(CONFIG_XPL_BUILD)
 >=20
 > --=20
 > 2.47.0
@@ -130,24 +192,24 @@ Free software developer - https://www.paulk.fr/
 
 Specialist in multimedia, graphics and embedded hardware support with Linux.
 
---K8VrGgLCA23Rijei
+--VgUrKh3qY8fbXC7e
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmcqZegACgkQhP3B6o/u
-lQwq2hAAma3oK8WfEj43NMHfj3CYZ/d2SLNEyTz7wET0Mc/Yw2HZ6SVj5A7glSpG
-9L6HZaLOXXaVtFH4Pn24dSgz2IA/O8blunAXYA/9LpqF3Q0Q3DgC7xFUY5c5A2hs
-jn76lU3ssP/4sPK5wGelru/waLCw/plVpV58Atxcs1x0LSk3dFSRLwUWsk7bnNkh
-KQ7Tz7V8llppWZU3sp/jKl3hl+c6F1iX6fyDRnpQb8cM4byWlR4FCJLNfCgXFFaQ
-P89Fwgovb5Xb1A9jh5Roc2BrAG1cBf/0DvkN4vi6ovrvkxuelALynIVTBfNa6ajC
-EvT7FJeVhrI7pgFtGOFpR94Ee4OU/gO0IZYUfMXSxcCm6K9DZwDr0jxcUhKWV/25
-lypzwnH/s/fmLDMpC9HtRPLaVxKMLbgYRt2/+KCU5d4KFzFGOwW+sak6UAGyXG5g
-o0o3uMexo5C6Cms6Fxh7W6hSW5udpZTTjpge6cahmXIxcUFh8UwC1y5jeuGjWhZw
-zCAi8QDDznbBJ+ueMLmwASWi3a08sU81jAVZyXmA17un/h9+jshfZdmYRZf3r+1k
-prP0vO7NLhf+vcbmJxUmtH8b4+561C130dPx1JB37D01fdFvtcVIMS+KUTyEZNe5
-XNNDkJDopCfuwptyOIMqU+Eff2oz1Xhr118qDndiA+TkCDIaCgM=
-=4SfA
+iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmcqZokACgkQhP3B6o/u
+lQxpBBAAmUA3OZRoduc4o0q9SmrN2HoXxG+hArbwVD1/OhjedoQf6r/+fDsxQy0H
+WqzyYuO3lV9QMVSH15T5KzbRkb7+2CEYzPKWJqryemjZ+Tmt1DxgfP7acSbKwd3j
+SMUGip9F7rTaxIhBy3FSQWvNOAt+o3Fzpl7OL0TdtuDwkVxp3YYpp0umzU41RnJq
+f+Y+VIi7nYH0TVn/1ADbTrnIPgxzO2Lr3ru11lfvgxr+pN+2EWZWd+Z5UVyYaL0P
+CLt9Ed73F4r9yK7P3Iba9A1R1Agcg4RGw9jfGNDsUzM9GMMCEwIZpzwYB8Eer14P
+puLJMwZojWxd8iDp5WoI34RAdG+6YaVHrLdGZCHSDb+U3jSNE2uAFAuvHZtJXACZ
+v/lrD/4/Qzi4MYhjyBM1VQze3k+Bt2oT1oJA2CSfTQA0FuOfERB2HfIPLsVF4iIF
+W5xLQzvY5n5OipNEchcnJIM6JFPDlxPSZoEtIKKO/1Zlp2Swbkndk13KSscpg4gf
+U+TLGpu7Rw4wnU1GYeBFHk5lOjHTKl/eKpkL7nrtDlOxduLYew+lGtk6/w2cd2ci
+9eoYZQnd+rIxuPlxTg/J1VuT2b+BfFfpcbHnPgIASQD3Wv6KD1sMhOwc0SmGMywY
+vYU8OiMeE5DOGjO35oC5BEDt5tpxRNt1+h1r30aRg1S5PjQwT/o=
+=yMRL
 -----END PGP SIGNATURE-----
 
---K8VrGgLCA23Rijei--
+--VgUrKh3qY8fbXC7e--
