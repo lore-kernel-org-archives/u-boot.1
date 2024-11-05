@@ -4,95 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0552AD2B941
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:47:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9994D2B950
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:54:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9354788F48;
-	Tue,  5 Nov 2024 16:47:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 69D9B88FCC;
+	Tue,  5 Nov 2024 16:54:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qj3qgfO7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TwTqhKfT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF94588F48; Tue,  5 Nov 2024 16:47:49 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 258618919D; Tue,  5 Nov 2024 15:18:20 +0100 (CET)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0D4D88EC0
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:47:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EA0889070
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 15:18:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b147a2ff04so428979185a.3
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:47:47 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-539f72c913aso8918756e87.1
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 06:18:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730821667; x=1731426467; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Z/rpo/wE4bvs+iWQTCUBr3li3CArZO4t7JmXl7yoCm8=;
- b=Qj3qgfO7bYHEFvy51YrbGDDBXwWJJurlsjxvT67Esv62Yh2qRd5Pis3xQDtxJW3rDW
- 2wyYvWi217Dx+4fignoFBd9paqHGpn/MKTT/JJl/rIMBUbI3MAf8tQxgv9v2BkFaMjKj
- Bf5Lkw+SrpI5hAE/fH7TEZq1ozHF/iuBNBxSw=
+ d=gmail.com; s=20230601; t=1730816297; x=1731421097; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=B8/1rrncbtaVYrVuI47vQflZIOSS+jJo/pj4Vokq6FQ=;
+ b=TwTqhKfTVwGOXEFk7uzxLFLGHpOE56KnC8wlkbdp5cNjHtn2jG368QdFj8iT1FaDk+
+ 6pHycBQ4i6+1l9eddKlNPxWn/Ci78NLsYS8TRY29Ob0+NjTgT63VwcTbox2Qrk0g39Hq
+ fOGPlllLCmpHcbG2eGtx7yFSma6x2ShCtNS3S9boFodYsMFtQabGwVFRrHlyl9E0aNvK
+ cVGk2sH9kBIgbj4T7J2j28V4s/K8jA1Jx4Zz4xLsCZYb18CgMiiA6mL56tfn8R8u7eWg
+ j0JH9oezR2PqKjZlmp0GCfmD0jRfsHel+BAEcWO3qKievD+CKaPb7Wfw9TcEoHs6McLY
+ RGaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730821667; x=1731426467;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Z/rpo/wE4bvs+iWQTCUBr3li3CArZO4t7JmXl7yoCm8=;
- b=EIZkQo32Vmf01GpJdIDLqWpjsH9U1s9w9gtOELwlD9KLYzj3NGHyBJgmUqQ1T4cd/j
- FxMwow1cNISK9RyuaJP6iwla6+gZF2hfAwwxTsjU1jMOYzlGzcaCEA0sJbc7RGtQjrgX
- 47Dr7xWZiczi1o+sPfT446IfVkGeiPhq94ASlHxvoK9nIctmbzOkF09xRSZ6j1iCgs2z
- 2IEbMetJIusMhcOrj1aLKuEqEHxzoW/63p41xa+542V+LcuLcs2erln4i0t3WgE7hqYC
- jftTo0X4pPWMb5wcV+RJQqHm74GBo7tQ+py12UT8iQicC2aOrrpp0zmHb8NALgkM6dal
- AN0w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXBNRhFxsJXLRTccV+QTW3CnsmsR48FHVnTdinJmps9hBEho7/KrTUnwa+vCQ0zr8Ts1C6KA3Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YzbiS7UEd1dRJzhwGsIv+5zVXLu4VLgQUFLHYbyzH6ppPCVT2oO
- /3+/jdpzPgwv4olvdJcY9LQ+KmrGVGGCtRUzqZjKcpW2jqgkSYlIyKZHEsZm2vI=
-X-Google-Smtp-Source: AGHT+IEkfw7X8PUrF79pUlZXTVOJtW6A2Vy9aKEZbslT2SscWFWPaSOD94kMqy715H9L0vKPUIWk0g==
-X-Received: by 2002:a05:620a:4409:b0:7b1:43e2:712e with SMTP id
- af79cd13be357-7b2fb979a54mr1946878885a.17.1730821666275; 
- Tue, 05 Nov 2024 07:47:46 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b2f3a6fd30sm535033885a.88.2024.11.05.07.47.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Nov 2024 07:47:45 -0800 (PST)
-Date: Tue, 5 Nov 2024 09:47:41 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sean Anderson <seanga2@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
- Baruch Siach <baruch@tkos.co.il>, Christian Marangi <ansuelsmth@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v12 00/13] net: tcp: improve tcp support in legacy stack
-Message-ID: <20241105154741.GI3600562@bill-the-cat>
-References: <20241028143143.1807305-1-mikhail.kshevetskiy@iopsys.eu>
- <20241104233227.GA3600562@bill-the-cat>
- <CAFLszThXiK=EzrUStsOBiSQ_pe1-Vdwtg-238BjQd91SMBym7A@mail.gmail.com>
- <CALeDE9M1PDFmm-oZvSEGwBaN_J77CSKUa8kbkEPQf9XATv8STg@mail.gmail.com>
- <CAFLszTjs-7uWNWdaZjhQe-rA5z0qSZxiFeX+WgFofYemW6qiwg@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1730816297; x=1731421097;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=B8/1rrncbtaVYrVuI47vQflZIOSS+jJo/pj4Vokq6FQ=;
+ b=RkLr74W1li28N59GK8urmXkUSBQDvW3f7qFllYc8LPutrCEb8ZrHKi08KwcwSl6O+P
+ zjjhtWbakAydzAMfV87Rnpu7sCxnz5aVMRQC/hrLEMW95vaWrlXDe2cIOLjSG6N3+Eix
+ 4CDYc6zlKJ+Y6iNEehdzVnEZr7aoPZeq9uk7HO2d+IYAjBpmoZcOMFNIPOvAechp3hxu
+ URSZhEbp2efIYI8lexurNNvnTSuF79YI3BhSnl/OvcvEiYdkjTTOl0RxTGkzMpj7czyk
+ E5acj3EGUTjGjuI/rJrIkSzIkUJ/otUphVWiEqtJT8kb6GuE1WDAkh3taVmOa850kQKp
+ J0mg==
+X-Gm-Message-State: AOJu0YwVLBKcuI6nC0DYDY23STHNTPc46CHFiiGtwQ/u5tS3Q35Zy1+s
+ YUOfymVv36U4fDW2RBl2tBToOxfehJ+K6BFToNq9zpabBaZPBhJfAdXEsJISgJAP/QIwMnLPksR
+ +43rA8Q8TYfp2AgwJs27vJGvyHYg=
+X-Google-Smtp-Source: AGHT+IFR3u9G4Brkza8zFIJwpSli83HjLaKrHBaFzotHgeScNAaI8f3AHjEqMhw1IaIjf88FSBaYgdNaduLYrONp9gQ=
+X-Received: by 2002:a2e:bc1d:0:b0:2fa:d317:b777 with SMTP id
+ 38308e7fff4ca-2fcbdf6882emr182698661fa.2.1730816296976; Tue, 05 Nov 2024
+ 06:18:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="AO7u54M/3qcMIF7w"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjs-7uWNWdaZjhQe-rA5z0qSZxiFeX+WgFofYemW6qiwg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241103003322.626036-1-sjg@chromium.org>
+In-Reply-To: <20241103003322.626036-1-sjg@chromium.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 5 Nov 2024 14:18:05 +0000
+Message-ID: <CALeDE9MfWEAb91uzQPa6_jSo6beJv_GNHTY2TeKnSzFm6V97gw@mail.gmail.com>
+Subject: Re: [PATCH v3 00/25] led: Remove old status-LED code
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Alison Wang <alison.wang@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
+ Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@kernel-space.org>,
+ Angelo Dureghello <angelo@sysam.it>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Charles Hardin <ckhardin@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>, 
+ Devarsh Thakkar <devarsht@ti.com>, Doug Zobel <douglas.zobel@climate.com>, 
+ Enric Balletbo i Serra <eballetbo@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Hans de Goede <hdegoede@redhat.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Javier Martinez Canillas <javierm@redhat.com>, 
+ Jens Scharsig <esw@bus-elektronik.de>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Mario Six <mario.six@gdsys.cc>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
+ Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, 
+ Sean Edmond <seanedmond@microsoft.com>, Stefan Roese <sr@denx.de>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>, 
+ Wan Yee Lau <wan.yee.lau@intel.com>, Wolfgang Denk <wd@denx.de>, 
+ uboot-stm32@st-md-mailman.stormreply.com
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Tue, 05 Nov 2024 16:54:11 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,89 +123,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sun, 3 Nov 2024 at 00:34, Simon Glass <sjg@chromium.org> wrote:
+>
+> There has been an LED framework in U-Boot which uses driver model for
+> about 9 years now. Recent work is underway to improve it and provide
+> more features. It is probably a good time to drop the old code, which
+> is only used by 5 boards:
 
---AO7u54M/3qcMIF7w
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I don't believe, from what I can tell, they are feature comparable, at
+the very least I have not been able to get the Pinephone working with
+this so as it stands I still don't think this patch set is ready yet.
 
-On Tue, Nov 05, 2024 at 08:15:25AM -0700, Simon Glass wrote:
-> Hi Peter,
->=20
-> On Tue, 5 Nov 2024 at 06:10, Peter Robinson <pbrobinson@gmail.com> wrote:
-> >
-> > On Tue, 5 Nov 2024 at 13:03, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Tom,
-> > >
-> > > On Mon, 4 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Mon, Oct 28, 2024 at 05:31:30PM +0300, Mikhail Kshevetskiy wrote:
-> > > >
-> > > > > Legacy TCP stack is bad. Here are some of the known issues:
-> > > > >  * tcp packet from other connection can break a current one
-> > > > >  * tcp send sequence always starts from zero
-> > > > >  * bad tcp options processing
-> > > > >  * strange assumptions on packet size for selective acknowledge
-> > > > >  * tcp interface assumes one of the two scenarios:
-> > > > >      - data downloading from remote host to a board
-> > > > >      - request-response exchange with a small packets
-> > > > >    so it's not possible to upload large amount of data from the
-> > > > >    board to remote host.
-> > > > >  * wget test generate bad tcp stream, test should fail but it pas=
-ses instead
-> > > > >
-> > > > > This series of patches fixes all of the above issues.
-> > > >
-> > > > I know Peter asked on the last one, but I want to ask as well. With=
- lwIP
-> > > > merged, why do we want to add features to the old stack? I can see
-> > > > fixing issues, but not adding new functionality as well. Thanks.
-> > > >
-> > >
-> > > Let's apply this. It has tests and the old stack is still used by a
-> > > lot of boards. At present lwip is only used on one. There is more work
-> > > to do on the new stack, including finishing off the sandbox
-> > > implementation.
-> >
-> > I agree with applying the fixes pieces, I do not agree with apply the
-> > HTTP server pieces. This series should actually be split into 3
->=20
-> But what is your objection?
->=20
-> I would much rather just apply it ASAP. It has already gone through 12
-> versions, during which lwip has been prepared and applied.
-
-Yes, and to be blunt, the first bit of feedback I provided was "can you
-please look at the lwIP series instead?".
-
-> The HTTP server is a useful feature and we should be able to use it to
-> test networking in U-Boot in a more self-contained and performant
-> manner.
-
-I very much do not want to add more features to the legacy TCP stack.
-We're likely, long term, to still need some cut-back version of the old
-stack for the limited SPL cases.
-
---=20
-Tom
-
---AO7u54M/3qcMIF7w
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcqPh0ACgkQFHw5/5Y0
-tyxzDQv/YwZEPYa4U0gdN3WJ//kZBi0TbBMsZkpDCtlKoZpLbtB37A7Njwtt2ouN
-fnoLtP+RjBvCwwNAH5h4wNYOoKSemLgMwj68HyBROsFc6Czoycm+5trm4lhkoz8m
-JKEe+zzoSD3KLKFbFMncyy97HZZrbEdC8Zkbp38kjR/8bB7OCP4OukgcM/eim78a
-pXFZGMCynQtX5qKtra+GpiJsjJVafEfOqm7rQcwIG5/Gd/kofgsmHYI2Hmn90ENC
-JIcBIiLLToNHlFkpsGe2K/SnL56nROtC0syfYf2YMxAzlNL/UAD1upsXUqyyr1t9
-vO2TtvDZv9tP1McVaVXIe73+aSc/7skc+B+SAbCKr5lFnfQSEReaOWJT9rS+t7vy
-a4vcpVk5sAQQbXfrp0GpBqdUepi6w4HS2b7EMHYiKzlHVSaXKq71xLzwl+RM9y4f
-ICoAl4LYMhte+ILdwM+nRu8EZ91tY/UuKd5t4k9cErIsk3gDjyXw5c7E3v0vjUin
-12RZo2tx
-=LAOu
------END PGP SIGNATURE-----
-
---AO7u54M/3qcMIF7w--
+>    ./tools/qconfig.py -f LED_STATUS
+>    5 matches
+>    eb_cpu5282 eb_cpu5282_internal mx23_olinuxino pinephone
+>    socfpga_vining_fpga
+>
+> This series attempts that.
+>
+> The new /options node provides a way to provide U-Boot settings, and
+> LEDs are implemented there. For now I have brought into the options
+> schema from upstream. We can update it once the LED additions land
+> there.
+>
+> Changes in v3:
+> - Update commit message
+> - Combine removal and enable patches
+> - Combine removal and enable patches
+> - Combine removal and enable patches
+>
+> Changes in v2:
+> - Combine code-removal and defconfig changes
+> - Add a patch to enable LED and LED_BOOT for these boards
+> - Enable LED on the 5 affected platforms
+> - Reorder patches for bisectability
+> - Add dt-schema bindings for LED
+>
+> Simon Glass (25):
+>   eb_cpu5282: Drop status-LED code and enable LED
+>   vining_fpga: Drop status-LED code and use LED
+>   mx23_olinuxino: Drop status-LED code and use LED
+>   pinephone: Drop status-LED code and use LED
+>   led: Drop LED_STATUS_BOARD_SPECIFIC
+>   arm: Drop old LED support
+>   common: doc: Drop old LED support
+>   st: stm32f429: Drop old LED code
+>   led: Make the LED config common
+>   led: Drop LED_STATUS from Kconfig
+>   led: Drop the legacy LED command
+>   misc: Drop gpio_led driver
+>   pca9551_led: Delete driver
+>   misc: status_led: Delete driver
+>   m68k: Drop unused status_led.h header file
+>   powerpc: Drop status-LED code
+>   igep00x0: Drop unused status_led.h header file
+>   sunxi: Drop status-LED code
+>   common: Drop status-LED code in board_r
+>   image: Drop unused status_led.h header file
+>   ide: Drop unused status_led.h header file
+>   mpc83xx: Drop status-LED code
+>   net: Drop status-LED code
+>   led: Drop status_led header file
+>   doc: Add devicetree bindings for options
+>
+>  arch/arm/lib/crt0.S                          |   4 -
+>  arch/m68k/lib/bootm.c                        |   3 -
+>  arch/powerpc/lib/interrupts.c                |   6 -
+>  board/BuS/eb_cpu5282/eb_cpu5282.c            |  20 --
+>  board/isee/igep00x0/igep00x0.c               |   1 -
+>  board/olimex/mx23_olinuxino/mx23_olinuxino.c |   7 -
+>  board/softing/vining_fpga/socfpga.c          |   4 -
+>  board/st/stm32f429-discovery/Makefile        |   1 -
+>  board/st/stm32f429-discovery/led.c           |  39 ---
+>  board/sunxi/board.c                          |   6 -
+>  boot/image.c                                 |   4 -
+>  cmd/Makefile                                 |   1 -
+>  cmd/ide.c                                    |   4 -
+>  cmd/legacy_led.c                             | 185 ----------
+>  common/board_f.c                             |  22 --
+>  common/board_r.c                             |  27 --
+>  configs/eb_cpu5282_defconfig                 |   8 +-
+>  configs/eb_cpu5282_internal_defconfig        |   8 +-
+>  configs/mx23_olinuxino_defconfig             |  10 +-
+>  configs/pinephone_defconfig                  |   7 +-
+>  configs/socfpga_vining_fpga_defconfig        |  13 +-
+>  doc/README.LED                               |  77 -----
+>  doc/device-tree-bindings/options.yaml        |  79 +++++
+>  doc/device-tree-bindings/options/u-boot.yaml | 136 ++++++++
+>  drivers/led/Kconfig                          | 342 +------------------
+>  drivers/misc/Kconfig                         |  13 -
+>  drivers/misc/Makefile                        |   3 -
+>  drivers/misc/gpio_led.c                      | 106 ------
+>  drivers/misc/pca9551_led.c                   | 170 ---------
+>  drivers/misc/status_led.c                    | 124 -------
+>  drivers/timer/mpc83xx_timer.c                |   5 -
+>  include/configs/eb_cpu5282.h                 |   6 -
+>  include/status_led.h                         | 115 -------
+>  net/bootp.c                                  |   7 -
+>  net/net.c                                    |  33 --
+>  35 files changed, 236 insertions(+), 1360 deletions(-)
+>  delete mode 100644 board/st/stm32f429-discovery/led.c
+>  delete mode 100644 cmd/legacy_led.c
+>  delete mode 100644 doc/README.LED
+>  create mode 100644 doc/device-tree-bindings/options.yaml
+>  create mode 100644 doc/device-tree-bindings/options/u-boot.yaml
+>  delete mode 100644 drivers/misc/gpio_led.c
+>  delete mode 100644 drivers/misc/pca9551_led.c
+>  delete mode 100644 drivers/misc/status_led.c
+>  delete mode 100644 include/status_led.h
+>
+> --
+> 2.43.0
+>
