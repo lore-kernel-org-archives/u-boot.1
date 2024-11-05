@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1928D1CA0E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 01:07:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4160BD1CA13
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 01:07:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7C2E88F4E;
-	Tue,  5 Nov 2024 02:07:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 720AF88E7B;
+	Tue,  5 Nov 2024 02:07:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OY9Tt/PM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OfxgfiPT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B805688CF1; Tue,  5 Nov 2024 02:07:06 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 50FF888F68; Tue,  5 Nov 2024 02:07:07 +0100 (CET)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF43488CF1
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 02:07:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63A0788F14
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 02:07:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6d36f7cf765so20025576d6.0
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 17:07:02 -0800 (PST)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-3e602994635so2690567b6e.0
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 17:07:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730768822; x=1731373622; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730768823; x=1731373623; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PkWh4/3cjxdUk+6ecpAXIH5EcAh+iZSAU4Wj1Kxvov8=;
- b=OY9Tt/PMGkwSxqz0UViDH9pL8v+Zy2ad5nV6KenAfZGUIfzyDh6N8LYXGOJIMQ248S
- eY6vxl0sP1yUucEc7g+ioRa8FgbX/gmZ+0F39I8i2eQ1tyMAwIPOmFgxl4khTSKpEmAs
- lr+Ujvx3ZT00Bwq0TbnAaZk9PMky6UNgbW9rU=
+ bh=R1BmZoCXzRkPTONmFOmwPHXPnYpO40Ie1tIsJ/f2pdU=;
+ b=OfxgfiPTcut+nmOtVyOjvafeUPQvzYF0plCouiakm4Vumk8SgB951dZvnfKjveN2Q+
+ HlmPFyAM6HskpBQ4wu3hLoClPqO+J1dtb/qkO25I94kmnhbolAhrJk9reekraxqXyYIp
+ 1xoCl/jkBtScdN/T6T8wLdg92iGtRinIkIDek=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730768822; x=1731373622;
+ d=1e100.net; s=20230601; t=1730768823; x=1731373623;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PkWh4/3cjxdUk+6ecpAXIH5EcAh+iZSAU4Wj1Kxvov8=;
- b=mNWHBdbPCiVLOjzwLGITBtaQWDXBTTXZ7gWIBgDL0gwWxlxhasocuqvIG5Cm4HGh1W
- jLBZWqDTacjIeBs3BNSQ18Fq6EbeFzR8D6MyBkenWKbbUoYqlgq2hdzDfMvrDYfq5gh8
- Gm2a8ROom8KJQw9HfMbqKp88c+XWHUPf3TYDD7eBlLmcDsngPEH66A81dXO1klEp5fhK
- TjSn+lbIBpPZZ36i4eYCnmUet14GTG/ojDIGFk4gUz85bhG3y5WR/SGrXiuHHW4NLaUA
- dTagX5ksLK7kGpYgnLPiKLkGTo/ZN+0k9FFiDdbVr0elGBoLdKEDUrEqN8sOHVzCXqX0
- mJhw==
-X-Gm-Message-State: AOJu0YxwrXmCYorsRBxjTInsCfDsEEFgJXey2zQWMLJ6mI9rCel5X+mm
- 0FNGxk+1FL5gA/LwqlNpFLD6jq7mzSe87+Ao+KsvSkzJSRxXqCLOkBj14Ch4B0Q=
-X-Google-Smtp-Source: AGHT+IGt5jwME+tR4GGokBesaLN89j8/kwQgWMKZgZoc7X86Q2fktarCXM8qeHqpeSPyWE0GMHNRIg==
-X-Received: by 2002:a05:6214:458f:b0:6cb:7104:f115 with SMTP id
- 6a1803df08f44-6d35c088599mr230742686d6.11.1730768821794; 
- Mon, 04 Nov 2024 17:07:01 -0800 (PST)
+ bh=R1BmZoCXzRkPTONmFOmwPHXPnYpO40Ie1tIsJ/f2pdU=;
+ b=HUTKyHvXlh1K8YVBzY/6lEK14qvviyZA4Y71ieKNBSEwJSyNZLSMfylkYqhdXQjwwy
+ B/SWRSNklD499G8HGYo5xec4kUoaN7CrnrwxU7jHCyBHS9jR6XhroA9BswTS0gsC0xsf
+ Ktu3KCdWJBYcptn9M1sBWhIYRwIGovc12j5gQlpelGfHzUexBeWVmFbDNjo3hc75Uu2I
+ T3WiZS6svRi7x0SQ86cjjTqcPqbIxvo9qf8vSndIc/htpJZyyOq2RU2GBEsWYJQNYIfN
+ P7PlFTEnbIxPEMdzDC0KaKgM7RcJbfORhMvA2He4HtA88+QllycwONDp+H633Ae5Y8sC
+ CkbA==
+X-Gm-Message-State: AOJu0YwZbdQHHre2jPxRKxX0nVF8ulRTVYmINd932qwJQ/VG0U9ArBTC
+ UpnfTZ9kydIT6la8drCbft4qOqgfA8WyAaH08MifFi60RmWkskclShTYLZ1fGZM=
+X-Google-Smtp-Source: AGHT+IEmmoScJ9sonUIGRhW+9gD9t+ltXZU7X81/SYLQNvNEU4VoUTuNwjWya4xZtpJefFhDxsRoqw==
+X-Received: by 2002:a05:6808:2288:b0:3e5:f4fa:5984 with SMTP id
+ 5614622812f47-3e66093a97cmr14339430b6e.38.1730768823115; 
+ Mon, 04 Nov 2024 17:07:03 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d353fcc777sm54436686d6.56.2024.11.04.17.07.00
+ 6a1803df08f44-6d353fcc777sm54436686d6.56.2024.11.04.17.07.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 17:07:01 -0800 (PST)
+ Mon, 04 Nov 2024 17:07:02 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: Love Kumar <love.kumar@amd.com>, Marek Vasut <marex@denx.de>
-In-Reply-To: <20241015121916.1155120-1-andrew.goodbody@linaro.org>
-References: <20241015121916.1155120-1-andrew.goodbody@linaro.org>
-Subject: Re: [PATCH] usb: Fix test failure with multiple partitions
-Message-Id: <173076882046.3917422.11680751214718510415.b4-ty@konsulko.com>
-Date: Mon, 04 Nov 2024 19:07:00 -0600
+In-Reply-To: <20241015141737.1170669-1-andrew.goodbody@linaro.org>
+References: <20241015141737.1170669-1-andrew.goodbody@linaro.org>
+Subject: Re: [PATCH] usb: Fix test dependency on ext4write command
+Message-Id: <173076882194.3917422.4747871193468181014.b4-ty@konsulko.com>
+Date: Mon, 04 Nov 2024 19:07:01 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -88,14 +88,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Oct 2024 13:19:16 +0100, Andrew Goodbody wrote:
+On Tue, 15 Oct 2024 15:17:37 +0100, Andrew Goodbody wrote:
 
-> When test_usb_load finds multiple partitions of the same type then
-> it will cause a test failure. The call to write the test file will
-> write a different test file to each partition but only return the
-> name and size of the last one written. So the test then fails to
-> load the test file from the first partition as it uses the name of
-> a file on a different partition.
+> The tests test_usb_ext4load_ext4write, test_usb_ext2load and
+> test_usb_load depend on the command ext4write being present not just
+> the feature of being able to write to an ext4 file system. So update
+> their dependencies to include the ext4write command itself. This will
+> prevent spurious test failures when running the USB tests against USB
+> storage with an ext2/ext4 partition but no ext4write command available.
 > 
 > [...]
 
