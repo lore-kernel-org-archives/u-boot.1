@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E4F7D1CA13
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 01:08:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 567BED1CA0E
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 01:08:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DD9888FD0;
+	by phobos.denx.de (Postfix) with ESMTP id D2A9B89009;
 	Tue,  5 Nov 2024 02:07:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bHzsJLr2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TJ+HAg7d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0ECD788CF1; Tue,  5 Nov 2024 02:07:15 +0100 (CET)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 3E96E88CF1; Tue,  5 Nov 2024 02:07:16 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C619288FD0
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 02:07:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D38589000
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 02:07:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-5eb9ee4f14cso2227005eaf.1
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 17:07:11 -0800 (PST)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b14443a71eso412761185a.1
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 17:07:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730768830; x=1731373630; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730768831; x=1731373631; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=dD1Fjy+3wkiZxgpnBlvr347/5XfNqAU9EHJcgUZVQCo=;
- b=bHzsJLr24BHAZgMk5jVLWIm3xb4GhGRfdfbnoT+h8ytO9pvgF/EL46Hfk6qq82LV9R
- D708iQG4zIliJC3sdbZ+8zWFS4l29Ge4DgB4xEMQ7pHw9Isp4oAq6rhNubmk4P/C6m1b
- zSFRmjeQ9YerdQ7z1UZgfsfe1YBIZ5VheJif8=
+ :reply-to; bh=OKgdyUdFBsRyeEmbYZMrW4F3Jwk1ZwBDKIz0N35mmtI=;
+ b=TJ+HAg7dBRVJPaIGXsIn4ScWGd2ZcVinFCF8qXD7SuJsplEztGN7QR6jpdH4BGK0ow
+ /JgQCJPtE0qc3ANgY/k/5P6yqKXNCDwrbHXwykcMv91j7rF94K8TlAFnRbNlusuiELIB
+ /LmtsYIMFHtJMCOjW6Fbo+h5bv3HLRFt0lKoQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730768830; x=1731373630;
+ d=1e100.net; s=20230601; t=1730768831; x=1731373631;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dD1Fjy+3wkiZxgpnBlvr347/5XfNqAU9EHJcgUZVQCo=;
- b=oy/bSMhYXgPXUo3aSMbhD2Za+se8g/FWuoJPBFiFuLUpJexp6/sZdwQdmhOUDoBzrz
- pjXOWh5VuBNbjjy/RQAs8PJH8Pf0Uu9qllScw4HiVpzuJlpX8VigEAOiNfgjsMCmMxnk
- HkjSBvxqXhsmgst4AP+c0fg+FQ1gFqHZ9/20YQH2qrYqIYmJyzHOcBj5TODIDyv6u45d
- 3h0tJIrr8u7qaIibiGBIcK2dTumuwLYkp9Wj3XwkUYMS5ND746sp5AixrNuS2yFSuK++
- Y24wTCGJH9HKc2emBfgrlJuehFssBnkibq/LdEewi7OcjPmSDsy0zvXNk6JN/8lhhHvA
- 9y9Q==
-X-Gm-Message-State: AOJu0YwlS8H7MdTNpJdYiQeYy5jmDJw7sOLQLMs4KNB01wS7Qpd96QwY
- AlJP8kXooMtlM4Zx7JdoSdL/iTOPf6AdfVOVsSJc3IrJur162qbuNYmbiImJnj5sW480kkuMMlS
- 7hdQ=
-X-Google-Smtp-Source: AGHT+IFTMipLAeZK53guXaKc4L9LqYVJKFnrJUILUS8dqyi8PYdAoEnN2OnYd3XTdSCOSfsGIxSZPQ==
-X-Received: by 2002:a05:6359:5047:b0:1c3:90ff:9721 with SMTP id
- e5c5f4694b2df-1c5f9a47e1dmr622820755d.23.1730768830417; 
- Mon, 04 Nov 2024 17:07:10 -0800 (PST)
+ bh=OKgdyUdFBsRyeEmbYZMrW4F3Jwk1ZwBDKIz0N35mmtI=;
+ b=uKIzMKSbKFntNem6+XdgXjvxTEzjq95ajppeWaU7u4kz2agWBLnlot44HDrOl+fNpr
+ TjHBrt7N9LTxNQ2YUFpAUpUQUIg8oo2DrRtYzhGAOjUYnk7lUbJGzoPAKVSE02ZeHt+q
+ kXUqTag0IZLtgBJ2Qz8xkqucdmWUE7g4Ql6XJauaGzYcU106MLg6dYAEugxVSpOBCWhN
+ AENcaylL4hIaxY5cjsTFNqepvz8pJPFqFQRCZvggyUE350Q6Ib8I/a/dCOZuyx478izD
+ EX/iCC9ey+NkwFN91zaU9u6G5Vhnazg8ZyVmkLucEUp2c+bVzD4AKEhKWeyjoociAJ8T
+ Cthg==
+X-Gm-Message-State: AOJu0Yzj6c3YNzoeKVD2iImOAEA3EfJvZWBmWrRSt7RcQho9VIbCAOar
+ YSz//jBSEumKpTJqnVuRtwkg6dLrs0ZTWFgaERqshOt9WN3r281L4xl3dTvTe+4=
+X-Google-Smtp-Source: AGHT+IF2oVgYGJyL1xK0phpxDwTZWp9Y3YdC4CEsQ9M3WQ0Iapw9ShHKqvyQ94TeKwb64rEug7EIqA==
+X-Received: by 2002:a05:6214:2f85:b0:6cb:fb58:3d23 with SMTP id
+ 6a1803df08f44-6d35c1aedb4mr186341566d6.43.1730768831522; 
+ Mon, 04 Nov 2024 17:07:11 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d353fcc777sm54436686d6.56.2024.11.04.17.07.09
+ 6a1803df08f44-6d353fcc777sm54436686d6.56.2024.11.04.17.07.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 17:07:09 -0800 (PST)
+ Mon, 04 Nov 2024 17:07:11 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Yuri Zaporozhets <yuriz@vodafonemail.de>
-In-Reply-To: <ZyIx7WVAeVqZ7mY2@qrv-systems.net>
-References: <ZyIx7WVAeVqZ7mY2@qrv-systems.net>
-Subject: Re: [PATCH] drivers/video/vesa: use MTRRs only on x86
-Message-Id: <173076882912.3917422.6576554652309812529.b4-ty@konsulko.com>
-Date: Mon, 04 Nov 2024 19:07:09 -0600
+In-Reply-To: <ZyKLLBASJfMDk0QX@qrv-systems.net>
+References: <ZyKLLBASJfMDk0QX@qrv-systems.net>
+Subject: Re: [PATCH] bios_emulator: fix first argument of
+ pci_{read,write}_config_* function calls
+Message-Id: <173076883058.3917422.16778774532285473707.b4-ty@konsulko.com>
+Date: Mon, 04 Nov 2024 19:07:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -87,10 +87,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 30 Oct 2024 14:17:33 +0100, Yuri Zaporozhets wrote:
+On Wed, 30 Oct 2024 20:38:20 +0100, Yuri Zaporozhets wrote:
 
-> MTRR functionality is available only on x86, so this driver cannot be compiled
-> on other architectures. Fix this with preprocessor directives.
+> When compiling for riscv64, a bunch of warning is produced for the file
+> drivers/bios_emulator/besys.c. This patch fixes a portion of those warnings,
+> caused by incorrect first argument to pci_{read,write}_config_* functions.
 > 
 > 
 
