@@ -4,43 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FE43D2C139
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:37:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AAC5D2C122
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:37:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD75B891C0;
-	Tue,  5 Nov 2024 16:36:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 43B71891C7;
+	Tue,  5 Nov 2024 16:37:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59873891B0; Tue,  5 Nov 2024 16:36:58 +0100 (CET)
-Received: from smtp-bc0f.mail.infomaniak.ch (smtp-bc0f.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::bc0f])
+ id 733CB8900E; Tue,  5 Nov 2024 16:36:58 +0100 (CET)
+Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
+ [83.166.143.169])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 058378900E
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:36:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 85ABC8915F
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:36:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10:40ca:feff:fe05:0])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4XjXWW3ZH4zY6D;
- Tue,  5 Nov 2024 16:36:55 +0100 (CET)
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4XjXWX12cjzZ2j;
+ Tue,  5 Nov 2024 16:36:56 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4XjXWV1F52zPPv; Tue,  5 Nov 2024 16:36:54 +0100 (CET)
+ id 4XjXWW3SBdzNb2; Tue,  5 Nov 2024 16:36:55 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH next 0/5] rockchip: rk3399: allow to trigger sysreset in
- TPL
-Date: Tue, 05 Nov 2024 16:36:31 +0100
-Message-Id: <20241105-rk3399-sysreset-gpio-tpl-v1-0-12caff07a4e4@cherry.de>
+Date: Tue, 05 Nov 2024 16:36:32 +0100
+Subject: [PATCH next 1/5] pinctrl: rockchip: allow to build for TPL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAH87KmcC/x3MQQqDMBBA0avIrB1IotbGq0gXYqZ2sMQwE4oi3
- t3Q5Vv8f4KSMCkM1QlCP1beYoGtK5g/U1wIORSDM6611nQoa9N4j3qokFLGJfGGOX2xMw9n+qe
- dQ/BQ8iT05v2/HiHSnuF1XTfM4O+DcAAAAA==
-X-Change-ID: 20241105-rk3399-sysreset-gpio-tpl-50620781cdd9
+Message-Id: <20241105-rk3399-sysreset-gpio-tpl-v1-1-12caff07a4e4@cherry.de>
+References: <20241105-rk3399-sysreset-gpio-tpl-v1-0-12caff07a4e4@cherry.de>
+In-Reply-To: <20241105-rk3399-sysreset-gpio-tpl-v1-0-12caff07a4e4@cherry.de>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
  Kever Yang <kever.yang@rock-chips.com>, Klaus Goger <klaus.goger@cherry.de>
@@ -65,74 +62,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A sysreset-gpio can be provided in an RK3399 platform's Device Tree and
-if U-Boot detects a "warm" boot was done, it'll toggle that GPIO to
-perform a reset of the PMIC, essentially forcing a cold boot to make
-sure there are no non-default values in SoC registers.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-For now, this was only supported in SPL, probably because when this was
-implemented RK3399 (and specifically Puma) didn't have TPL support so
-SPL was the earliest stage. Now that most RK3399 boards (and
-specifically Puma) have TPL enabled, it makes sense to add support for
-triggering this sysreset from it. It brings the following advantages:
-- faster boot time as we don't need to reach SPL to be able to reset the
-  system on a condition we know is already met in TPL,
-- have less code to be impacted by the issue this system reset works
-  around (that is, "unclean" SoC registers after a reboot),
-- less confusion around the reason for restarting. Indeed when done from
-  SPL, the following log can be observed:
-
-"""
-U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
-Channel 0: DDR3, 666MHz
-BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
-Channel 1: DDR3, 666MHz
-BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
-256B stride
-Trying to boot from BOOTROM
-Returning to boot ROM...
-
-U-Boot SPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45 +0100)
-Trying to boot from MMC2
-
-U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
-"""
-
-possibly hinting at an issue within the SPL when loading the fitImage
-from MMC2 instead of the normal course of events (a system reset).
-
-For this to be possible, the sysreset function is adapted to be able to
-run in SPL and TPL by checking the appropriate symbols and a weak
-callback is added in the TPL main C code so that we can hook this
-sysreset function within the TPL code path.
-
-@Cc Paul since he's trying to add support for this sysreset to the
-Firefly ROC-RK3399-PC[1] and Pine64 ROCKPro64[2]. You'll want to have
-gpio1 with boopth-pre-sram though so it makes it to the TPL DTB.
-
-[1] https://lore.kernel.org/u-boot/20240926183111.1324284-1-paulk@sys-base.io/
-[2] https://lore.kernel.org/u-boot/20240926183111.1324284-2-paulk@sys-base.io/
+A later commit will make use of the pinctrl driver in TPL so let's add
+the ability to build the Rockchip pinctrl driver in TPL.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (5):
-      pinctrl: rockchip: allow to build for TPL
-      rockchip: rk3399: merge CRU check within rk3399_force_power_on_reset
-      rockchip: tpl: allow to call board/SoC-specific code before DRAM init
-      rockchip: rk3399: allow to handle sysreset-gpio in TPL
-      rockchip: configs: puma-rk3399: do the system reset in TPL
+ drivers/pinctrl/Kconfig          | 8 ++++++++
+ drivers/pinctrl/rockchip/Kconfig | 7 +++++++
+ 2 files changed, 15 insertions(+)
 
- arch/arm/mach-rockchip/rk3399/rk3399.c | 58 +++++++++++++++++++---------------
- arch/arm/mach-rockchip/tpl.c           |  6 ++++
- configs/puma-rk3399_defconfig          |  3 ++
- drivers/pinctrl/Kconfig                |  8 +++++
- drivers/pinctrl/rockchip/Kconfig       |  7 ++++
- 5 files changed, 56 insertions(+), 26 deletions(-)
----
-base-commit: 56accc56b9aab87ef4809ccc588e1257969cd271
-change-id: 20241105-rk3399-sysreset-gpio-tpl-50620781cdd9
+diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
+index a1d53cfbdbed5ef1030fff04715e1436f167554b..cff7c3ef45b1c7c29017a4512d4970bce4bac26b 100644
+--- a/drivers/pinctrl/Kconfig
++++ b/drivers/pinctrl/Kconfig
+@@ -127,6 +127,14 @@ config SPL_PINCTRL_GENERIC
+ 	  This option is an SPL-variant of the PINCTRL_GENERIC option.
+ 	  See the help of PINCTRL_GENERIC for details.
+ 
++config TPL_PINCTRL_GENERIC
++	bool "Support generic pin controllers in TPL"
++	depends on TPL_PINCTRL_FULL
++	default y
++	help
++	  This option is an TPL-variant of the PINCTRL_GENERIC option.
++	  See the help of PINCTRL_GENERIC for details.
++
+ config SPL_PINMUX
+ 	bool "Support pin multiplexing controllers in SPL"
+ 	depends on SPL_PINCTRL_GENERIC
+diff --git a/drivers/pinctrl/rockchip/Kconfig b/drivers/pinctrl/rockchip/Kconfig
+index dc4ba34ae5d581be76786fd05d679d26397fd467..6ad6b189715cee20f0e570d93b9b871e5acb99c3 100644
+--- a/drivers/pinctrl/rockchip/Kconfig
++++ b/drivers/pinctrl/rockchip/Kconfig
+@@ -14,4 +14,11 @@ config SPL_PINCTRL_ROCKCHIP
+ 	help
+ 	  This option is an SPL-variant of the PINCTRL_ROCKCHIP option.
+ 
++config TPL_PINCTRL_ROCKCHIP
++	bool "Support Rockchip pin controllers in TPL"
++	depends on ARCH_ROCKCHIP && TPL_PINCTRL_GENERIC
++	default y
++	help
++	  This option is an TPL-variant of the PINCTRL_ROCKCHIP option.
++
+ endif
 
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.47.0
 
