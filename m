@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B131D3177E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 18:37:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B925D3177F
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 18:37:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BBEC88D29;
-	Tue,  5 Nov 2024 19:37:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EA5198917B;
+	Tue,  5 Nov 2024 19:37:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A55689099; Tue,  5 Nov 2024 19:37:05 +0100 (CET)
+ id CD3A488A0A; Tue,  5 Nov 2024 19:37:36 +0100 (CET)
 Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 251D788A0A
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 19:37:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FDCF891B0
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 19:37:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paulk@sys-base.io
 Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id AA80A1F0004F
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:36:59 +0000 (UTC)
+ by leonov.paulk.fr (Postfix) with ESMTPS id 249731F0004D
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:37:33 +0000 (UTC)
 Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 55F1EA44AEC; Tue,  5 Nov 2024 18:36:56 +0000 (UTC)
+ id 3D9D9A44AF2; Tue,  5 Nov 2024 18:37:32 +0000 (UTC)
 Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id 1FEF3A44AE5;
- Tue,  5 Nov 2024 18:36:56 +0000 (UTC)
-Date: Tue, 5 Nov 2024 19:36:53 +0100
+ by laika.paulk.fr (Postfix) with ESMTPSA id 416A9A44AE7;
+ Tue,  5 Nov 2024 18:37:31 +0000 (UTC)
+Date: Tue, 5 Nov 2024 19:37:28 +0100
 From: Paul Kocialkowski <paulk@sys-base.io>
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -39,16 +39,16 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Klaus Goger <klaus.goger@cherry.de>, u-boot@lists.denx.de,
  Paul Kocialkowski <contact@paulk.fr>,
  Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH next 2/5] rockchip: rk3399: merge CRU check within
- rk3399_force_power_on_reset
-Message-ID: <ZyplxTZvoyd9r_v9@collins>
+Subject: Re: [PATCH next 3/5] rockchip: tpl: allow to call board/SoC-specific
+ code before DRAM init
+Message-ID: <Zypl6BpHOHBZbH7s@collins>
 References: <20241105-rk3399-sysreset-gpio-tpl-v1-0-12caff07a4e4@cherry.de>
- <20241105-rk3399-sysreset-gpio-tpl-v1-2-12caff07a4e4@cherry.de>
+ <20241105-rk3399-sysreset-gpio-tpl-v1-3-12caff07a4e4@cherry.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="xtk7vT6nN+phxUn+"
+ protocol="application/pgp-signature"; boundary="K8VrGgLCA23Rijei"
 Content-Disposition: inline
-In-Reply-To: <20241105-rk3399-sysreset-gpio-tpl-v1-2-12caff07a4e4@cherry.de>
+In-Reply-To: <20241105-rk3399-sysreset-gpio-tpl-v1-3-12caff07a4e4@cherry.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,7 +66,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---xtk7vT6nN+phxUn+
+--K8VrGgLCA23Rijei
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -76,9 +76,9 @@ Hi,
 Le Tue 05 Nov 24, 16:36, Quentin Schulz a =C3=A9crit :
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >=20
-> To prepare to support forcing power on reset from TPL which would have
-> the exact same logic, just in an earlier stage, let's merge the CRU
-> check that triggers the power on reset with the rest of the logic.
+> This defines a weak tpl_board_init function that can be used for running
+> board/SoC-specific code before the DRAM init happens, similarly to
+> spl_board_init() for SPL.
 >=20
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
@@ -89,75 +89,34 @@ Cheers,
 Paul
 
 > ---
->  arch/arm/mach-rockchip/rk3399/rk3399.c | 43 +++++++++++++++++-----------=
-------
->  1 file changed, 21 insertions(+), 22 deletions(-)
+>  arch/arm/mach-rockchip/tpl.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 >=20
-> diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockc=
-hip/rk3399/rk3399.c
-> index edccb2a3980d0e3921aa4073b67aea6a00f18b8d..7b6a822ed04b8151a5da14705=
-6dbf73ffdafd149 100644
-> --- a/arch/arm/mach-rockchip/rk3399/rk3399.c
-> +++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
-> @@ -172,9 +172,29 @@ void board_debug_uart_init(void)
->  #if defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD)
->  static void rk3399_force_power_on_reset(void)
->  {
-> +	const struct rockchip_cru *cru =3D rockchip_get_cru();
->  	ofnode node;
->  	struct gpio_desc sysreset_gpio;
-> =20
-> +	/*
-> +	 * The RK3399 resets only 'almost all logic' (see also in the
-> +	 * TRM "3.9.4 Global software reset"), when issuing a software
-> +	 * reset. This may cause issues during boot-up for some
-> +	 * configurations of the application software stack.
-> +	 *
-> +	 * To work around this, we test whether the last reset reason
-> +	 * was a power-on reset and (if not) issue an overtemp-reset to
-> +	 * reset the entire module.
-> +	 *
-> +	 * While this was previously fixed by modifying the various
-> +	 * places that could generate a software reset (e.g. U-Boot's
-> +	 * sysreset driver, the ATF or Linux), we now have it here to
-> +	 * ensure that we no longer have to track this through the
-> +	 * various components.
-> +	 */
-> +	if (cru->glb_rst_st =3D=3D 0)
-> +		return;
-> +
->  	if (!IS_ENABLED(CONFIG_SPL_GPIO)) {
->  		debug("%s: trying to force a power-on reset but no GPIO "
->  		      "support in SPL!\n", __func__);
-> @@ -206,27 +226,6 @@ void spl_board_init(void)
->  {
->  	led_setup();
-> =20
-> -	if (IS_ENABLED(CONFIG_SPL_GPIO)) {
-> -		struct rockchip_cru *cru =3D rockchip_get_cru();
-> -
-> -		/*
-> -		 * The RK3399 resets only 'almost all logic' (see also in the
-> -		 * TRM "3.9.4 Global software reset"), when issuing a software
-> -		 * reset. This may cause issues during boot-up for some
-> -		 * configurations of the application software stack.
-> -		 *
-> -		 * To work around this, we test whether the last reset reason
-> -		 * was a power-on reset and (if not) issue an overtemp-reset to
-> -		 * reset the entire module.
-> -		 *
-> -		 * While this was previously fixed by modifying the various
-> -		 * places that could generate a software reset (e.g. U-Boot's
-> -		 * sysreset driver, the ATF or Linux), we now have it here to
-> -		 * ensure that we no longer have to track this through the
-> -		 * various components.
-> -		 */
-> -		if (cru->glb_rst_st !=3D 0)
-> -			rk3399_force_power_on_reset();
-> -	}
-> +	rk3399_force_power_on_reset();
->  }
+> diff --git a/arch/arm/mach-rockchip/tpl.c b/arch/arm/mach-rockchip/tpl.c
+> index bbb9329e725af79ea4c4049aa7890a4a143e7df5..6b880f19f84e57e7bc0c93b16=
+b188bc56267827e 100644
+> --- a/arch/arm/mach-rockchip/tpl.c
+> +++ b/arch/arm/mach-rockchip/tpl.c
+> @@ -21,6 +21,10 @@
+>  #include <timestamp.h>
 >  #endif
+> =20
+> +__weak void tpl_board_init(void)
+> +{
+> +}
+> +
+>  void board_init_f(ulong dummy)
+>  {
+>  	struct udevice *dev;
+> @@ -54,6 +58,8 @@ void board_init_f(ulong dummy)
+>  	if (IS_ENABLED(CONFIG_SYS_ARCH_TIMER))
+>  		timer_init();
+> =20
+> +	tpl_board_init();
+> +
+>  	ret =3D uclass_get_device(UCLASS_RAM, 0, &dev);
+>  	if (ret) {
+>  		printf("DRAM init failed: %d\n", ret);
 >=20
 > --=20
 > 2.47.0
@@ -171,24 +130,24 @@ Free software developer - https://www.paulk.fr/
 
 Specialist in multimedia, graphics and embedded hardware support with Linux.
 
---xtk7vT6nN+phxUn+
+--K8VrGgLCA23Rijei
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmcqZcUACgkQhP3B6o/u
-lQzDRw/+MMRCscyMWkWULNhMa19pxVLyK6hCQr2pL7mJQOqT3OBjsI2fdxgkV1OR
-E6d/z2+tQd/17NYcUuBxAW9pq1Por1I2Aq46bVLo4S8fSPdOXQftM/bSjsTA7MC3
-vtu6dS9RUYy0ld9XGSK2Fsc8gYustSznWIDMzdi/Lm5eNJwlAEXDetK496YmeSHE
-R0CvsvmiyNFxIzkN9Wu2kQhkCDDw3Hb87yjO0PAgtKF67c340niavwfN39x90F+Q
-QbkaZ3+j0RVplMRpJjJL8NMIOxonY8XRR2iTexfODxvwAbHhnmGM6NVYGspgbdwW
-2Sc8Revb/JxPyR00wARaZF8LEVAJCmOxo8cqXk2WPzCu5aPfkykVawxEfKM6gCFE
-2QeKfq/Oi2nq3erw9lEPViFCSUBMRSYkE6cIx64zIrbqIoD+jOMoauU46n/xVkHU
-LMC4RAorqp8yUc/h5u4EYITGHfbcf/lWu8YlDY+I3Kf84tO1TqBH4YdUVC0P/mOR
-o2LuDkY2IJP8fpOLhM+tIXW27fzOxC/Pt1bgyQD971Zoo+/YpxhNQeygM961JPLP
-8dCz47sNhQSYUqCpmITM9MbuP2f4QMzni6dx9CDjsztH0wL4UPgWSXq8aYVUu5Iw
-FTp/z9VdVeovoPX3t0fgrrx808HjxZzZbRwM7VX8wYP8YYk19r8=
-=oGje
+iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmcqZegACgkQhP3B6o/u
+lQwq2hAAma3oK8WfEj43NMHfj3CYZ/d2SLNEyTz7wET0Mc/Yw2HZ6SVj5A7glSpG
+9L6HZaLOXXaVtFH4Pn24dSgz2IA/O8blunAXYA/9LpqF3Q0Q3DgC7xFUY5c5A2hs
+jn76lU3ssP/4sPK5wGelru/waLCw/plVpV58Atxcs1x0LSk3dFSRLwUWsk7bnNkh
+KQ7Tz7V8llppWZU3sp/jKl3hl+c6F1iX6fyDRnpQb8cM4byWlR4FCJLNfCgXFFaQ
+P89Fwgovb5Xb1A9jh5Roc2BrAG1cBf/0DvkN4vi6ovrvkxuelALynIVTBfNa6ajC
+EvT7FJeVhrI7pgFtGOFpR94Ee4OU/gO0IZYUfMXSxcCm6K9DZwDr0jxcUhKWV/25
+lypzwnH/s/fmLDMpC9HtRPLaVxKMLbgYRt2/+KCU5d4KFzFGOwW+sak6UAGyXG5g
+o0o3uMexo5C6Cms6Fxh7W6hSW5udpZTTjpge6cahmXIxcUFh8UwC1y5jeuGjWhZw
+zCAi8QDDznbBJ+ueMLmwASWi3a08sU81jAVZyXmA17un/h9+jshfZdmYRZf3r+1k
+prP0vO7NLhf+vcbmJxUmtH8b4+561C130dPx1JB37D01fdFvtcVIMS+KUTyEZNe5
+XNNDkJDopCfuwptyOIMqU+Eff2oz1Xhr118qDndiA+TkCDIaCgM=
+=4SfA
 -----END PGP SIGNATURE-----
 
---xtk7vT6nN+phxUn+--
+--K8VrGgLCA23Rijei--
