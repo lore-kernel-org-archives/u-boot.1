@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F06BD3610E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 19:13:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01117D3610E
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 19:19:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCF9388D8D;
-	Tue,  5 Nov 2024 20:13:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3A538891AB;
+	Tue,  5 Nov 2024 20:19:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T0p85ieZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wJ/mOChQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88BE188E3F; Tue,  5 Nov 2024 20:13:17 +0100 (CET)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 9D49889099; Tue,  5 Nov 2024 20:18:59 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A9C488CA2
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 20:13:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 77F4388CA2
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 20:18:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2fb5a9c7420so57056241fa.3
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 11:13:14 -0800 (PST)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-37d473c4bb6so5231648f8f.3
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 11:18:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730833993; x=1731438793; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1730834337; x=1731439137; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3/IiCxRP1urAukCDgGSbjIAVPt0Q+axrgkp/QcaVz7Q=;
- b=T0p85ieZvpPh6p7RmIexojh8PMAqDGq6G9OeRH10h6Sar6CtXjPjIQa0w1y3mEsEM9
- LFQ0uUZ9dCG+XtqdkqfpQC6Zo1MtLGqnIsNZGiDzWfsX6PrMia4IhbgI4bDEG7jokRDs
- 7QLZkn9Tu/wfe5N8Ut2APNi9M+dsOXl/ugZFk8YJg/5vyDLpEyAh1/SDpupdz5ZHFZ1L
- ONPB5XxJ7VEQa9AYKJIew5vsrXS6m0a97FQXltjKs4OdmI8mzdkmbByMWFWZRxyal0Tc
- BF8OiW/Ructtpm+P8g/HNOX5KdTRjF3musc6Elm1VczAS88nsvNab0nU0hos/o1GWMBq
- mnnw==
+ bh=PfjjD/TYPV3kFvMMikEspJ+TId/MwMGuriVYlbUVe3w=;
+ b=wJ/mOChQHjBVVhhfhNBSdGX+94VwrD7oxrA2nSlt2AvuGyOHSQ6UIAMVAQyrFODvLh
+ YrUDqzGKpLOFQAjjLnn4n4VOgEEL5kCHSD4XUUk7+GFWibd+MksBHDXNICQOZ3axK/1T
+ 0GC5IfAE78Hdc9lN2AqYUt3sNDCK4az3q68PpfryhpaClzrPd3X81QE5KR8/qNeV8/93
+ KT1EmTBWj1blBK1L/8a8d4C5xrxJq5NK9MPFa3K05+nIsM3eCOqqVx2WpWIDnkpYKKgl
+ noUGHYQK0teAXOcv0X4Dwbz38iMBbok3pPj0MTrh2kLZyFgiW+KPGMmlv6XO7tws6Vn7
+ cpLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730833993; x=1731438793;
+ d=1e100.net; s=20230601; t=1730834337; x=1731439137;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3/IiCxRP1urAukCDgGSbjIAVPt0Q+axrgkp/QcaVz7Q=;
- b=CCFDLaFhnTyhZpXO7jk5jbK13VDQ2R1w5Dd5s+yrVzxzrnPgHnJHfdcW8AMwumOBBP
- ZlJEA6XQ3kNHW/ne3nB+oA9RHcVtHRShOCjOluiRQYMPrXhKx1payO+BmNoPCM3at/um
- bokQM+AH20uzXqZk3ohLqz5eo+3Z3JlVDqxHGn3TB5uwNB74lAyrNZnRrL6faXrIir1T
- S/S40ub//cZ0OSYaTu+t59aPGBKAySk1tSgeDMN9qOJpkp1mB6Z+/4IM3xUmTbnVhQ3L
- g5kgCP6AoyvyL/4p8FMkhTZ3sXM26hZ0cPfLk+E7cDT0Hye2fyojByVLV1r4vu5OHz4n
- La3Q==
+ bh=PfjjD/TYPV3kFvMMikEspJ+TId/MwMGuriVYlbUVe3w=;
+ b=G5ICwU5x+CglzwcdEGso0AaDuLvW4F/r2ZyJX9SRZgZXHro6i2T3wP+aIVQBxZ45pb
+ Onxt5t/UBarInB6DTrFgeJQn1QHhkJ93uWpRoa4VM3YqBGsIECuh2rWfoZ+e3t2MRP2o
+ uqpTb1YfpYPPSK+F2WwmpdiybyFgkkGhDt/6JxUbdPnjVYSeenJsGOInPQ8o3A3yDxIi
+ G36nAJQpSpad5/YclQyn5g43GmPWJeYNx8tcnKYllbKy8wu9gcJJTeq5ZDcnF81CgwuB
+ gvoWyT4DzL7RnHUcIbf2RTna+6BzF5KQoqkxZkJZw5ORgDReFM6zpiM61GZt7lIlqO0/
+ iQYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW4B7d/uE7rdhdEJrmOh9dMc6TnSGgsOrMYa0QSG+5prMPSVKgp1Q8hMJpFU95V/F/B9zqxWhA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLSP2dM1J67k5z15jOZ09aXmnSQ/Ru08qt3nihb4sEP6T87KG6
- z6TAH57dyi3n9l2xnePBY61KzEIDwug1LPiQFNyXCyGcbap0xbBXH4I88Wr53lDCPIqIqK67YIS
- 12IJQHx1vEhzLvpMm/ogF/jqlgyQvXdIhQlugaA==
-X-Google-Smtp-Source: AGHT+IH5O0vDfZvYwazAO06A1FS0vWSwg6yPgoZryDEtB0wz7KsIwqCmHnfeaoT31j7XfN/D/yWI6o74Pp7gBSA00sk=
-X-Received: by 2002:a05:651c:160f:b0:2f7:64b9:ff90 with SMTP id
- 38308e7fff4ca-2fedb7964a1mr77945461fa.9.1730833993176; Tue, 05 Nov 2024
- 11:13:13 -0800 (PST)
+ AJvYcCViZlGG0L46yBkRedWallCnqJTlyRrffaoK1BcVglqSF5SnmidfrCTZETfKyc5BQfsk9JfjS6Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YxN9rToYUbp6K67u+XGMKDcsQzDQ4q/RA1TPujHRbGE710wwyKm
+ FbEUOcf2ei2XJgk7dILdXLkUYFGvmnCcgeLy/y0Ypn1LHIDPojp1+iWXPnpuYiTiEZBB+JfYdmB
+ SP1ZxaKkv/WmPE+Rc5sVdg6hvvRNCLQr/UH55Yw==
+X-Google-Smtp-Source: AGHT+IEuRSBehabbvkNJx+M+b8ih9GNfdpd/62pdHQcFeyFEBkvR25uw/ElZUmwjG68WsvOGTsdAeLnhD/v95s7BVdQ=
+X-Received: by 2002:a05:6000:2c3:b0:37d:4eeb:7366 with SMTP id
+ ffacd0b85a97d-381c7a461e4mr21153077f8f.4.1730834336850; Tue, 05 Nov 2024
+ 11:18:56 -0800 (PST)
 MIME-Version: 1.0
 References: <20241101-io_lmb_apple_dart_iommu-v1-0-fe4b9a74d47c@jannau.net>
- <CADg8p97H9eqncSEGjZF5EGP2M9Y10MmV28RwSdtsW+T8fSURiw@mail.gmail.com>
- <87v7x63p3c.fsf@bloch.sibelius.xs4all.nl>
- <CADg8p96csvFbyWpgajy_ewZMXRCsKstbhGFMnDUcGnG9e+QA3g@mail.gmail.com>
- <20241103173633.GA664967@robin.jannau.net>
-In-Reply-To: <20241103173633.GA664967@robin.jannau.net>
+ <20241101-io_lmb_apple_dart_iommu-v1-3-fe4b9a74d47c@jannau.net>
+In-Reply-To: <20241101-io_lmb_apple_dart_iommu-v1-3-fe4b9a74d47c@jannau.net>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 6 Nov 2024 00:43:01 +0530
-Message-ID: <CADg8p94t3AQ_tsEwSpQEUu3cc3P0BtbZ=DE8k58Vtp6HFGo-Nw@mail.gmail.com>
-Subject: Re: [PATCH 0/4] Fix IOVA allocation in Apple dart iommu after global
- LMB mem map changes
+Date: Wed, 6 Nov 2024 00:48:45 +0530
+Message-ID: <CADg8p95AbiUTFcmYrs0idPEyvq=hT78FzHbSiR3sPVCUh+ns4w@mail.gmail.com>
+Subject: Re: [PATCH 3/4] lmb: Add basic io_lmb functionality
 To: Janne Grunau <j@jannau.net>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, trini@konsulko.com,
- kettenis@openbsd.org, sjg@chromium.org, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,135 +89,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 3 Nov 2024 at 23:06, Janne Grunau <j@jannau.net> wrote:
+On Fri, 1 Nov 2024 at 15:47, Janne Grunau <j@jannau.net> wrote:
 >
-> On Sun, Nov 03, 2024 at 07:53:36PM +0530, Sughosh Ganu wrote:
-> > On Sat, 2 Nov 2024 at 16:00, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> > >
-> > > > From: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > Date: Fri, 1 Nov 2024 17:17:22 +0530
-> > > >
-> > > > On Fri, 1 Nov 2024 at 15:47, Janne Grunau <j@jannau.net> wrote:
-> > > > >
-> > > > > The changes in "Make LMB memory map global and persistent" [1] break
-> > > > > mapping DMA memory in the USB xHCI driver when using the apple_dart
-> > > > > iommu present on Apple silicon systems.
-> > > > >
-> > > > > The IOVA space used by the u-boot driver (low 4GB) and physical memory
-> > > > > do not overlap. The physical memory on this systems starts depending on
-> > > > > the SoC either at 0x10_0000_0000 or 0x100_0000_0000. It make no sense to
-> > > > > manage these distinct regions in a single LMB map. In addition every
-> > > > > device has its own iommu and IO address space so sharing a single memory
-> > > > > map between all iommu instances is not necessary.
-> > > > >
-> > > > > To fix this issue restore the used subset (add, alloc and free) of the
-> > > > > previous pointer based LMB interface with "io_" as prefix.
-> > > > >
-> > > > > To ensure that low level lmb functions do not use the global LMB
-> > > > > variable reorder lib/lmb.c so that the variable is not visible.
-> > > > >
-> > > > > Tested with patches from my "Fix device removal order for Apple dart
-> > > > > iommu" series [2] to fix a separate issue.
-> > > > >
-> > > > > The cosmetic commit has two checkpatch warnings in existing code which I
-> > > > > ignored.
-> > > > >
-> > > > > [1] https://lore.kernel.org/u-boot/20240826115940.3233167-1-sughosh.ganu@linaro.org/
-> > > > > [2] https://lore.kernel.org/u-boot/20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net/
-> > > > >
-> > > > > Signed-off-by: Janne Grunau <j@jannau.net>
-> > > > > ---
-> > > > > Janne Grunau (4):
-> > > > >       lmb: Do not use global LMB variable in _lmb_free()
-> > > > >       lmb: cosmetic: reorder functions and global LMB variable
-> > > > >       lmb: Add basic io_lmb functionality
-> > > > >       iommu: apple: Manage IOVA separately from global LMB mem map
-> > > >
-> > > > Thanks for these changes. I am currently on leave, but will take a
-> > > > look at this in detail next week. But on a cursory glance, I have to
-> > > > say that I am not entirely satisfied with this solution as well. With
-> > > > these patches, we now have a disparity in terms on how we view the LMB
-> > > > memory map -- we have a global map for RAM address range, but a per
-> > > > device one for IOVA's. I understand that IOVA's are supposed to be
-> > > > per-device,
-> > >
-> > > The IVOA's are per-stream.  Multiple devices might share a single
-> > > stream.
-> > >
-> > > > but then I think that perhaps LMB is not the right way to
-> > > > solve this. This was fine earlier, when the entire LMB implementation
-> > > > in U-Boot was local, but that is not the case now. I wonder if there
-> > > > can be a different, non-LMB way to implement this.
-> > >
-> > > Of course there can be a different implementation.  But why add a
-> > > separate implementation for what is essentially the same problem:
-> > > allocate blocks out of an address space.
-> >
-> > My primary concern here is to prevent setting a precedent that it is
-> > okay to have a local, per caller lmb instance.
+> These functions can be used with struct lmb pointers and will be used to
+> manage IOVA space in the apple_dart iommu driver. This restores part of
+> the pointer base struct lmb API from before commit ed17a33fed29 ("lmb:
+> make LMB memory map persistent and global").
+> io_lmb_add() and io_lmb_free() can trivially reuse exisiting lmb
+> functions. io_lmb_setup() is separate for unique error log messages.
+> io_lmb_alloc() is a simplified copy of _lmb_alloc_base() since the
+> later has unused features and internal use of the global LMB memory map.
 >
-> I think the issue is thinking this is per caller. It is not (primarily)
-> by caller. It is one LMB instance per managed independent address space
-> block. Apple silicon SoCs have multiple independent iommus. Each iommu
-> can handle multiple address spaces (streams, only partially implemented
-> in the u-boot driver.
+> Signed-off-by: Janne Grunau <j@jannau.net>
+> ---
+>  include/lmb.h | 47 +++++++++++++++++++++++++++++++++++++
+>  lib/lmb.c     | 74 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 121 insertions(+)
 >
-> > If it is allowed for
-> > one caller, it becomes difficult to say no to someone proposing a
-> > similar approach later. In any case, based on how the allocation logic
-> > works, with all the addresses being allocated from the IOMMU driver's
-> > map function callback, why can there not be a single instance of an
-> > iova lmb structure. That would at least ensure some kind of parity on
-> > how the lmb maps are maintained.
+> diff --git a/include/lmb.h b/include/lmb.h
+> index 2201d6f2b67bb605dbff015fa2a6a008b780c57a..9cb3ba8289e10ab92bea135d248580e44880e3e2 100644
+> --- a/include/lmb.h
+> +++ b/include/lmb.h
+> @@ -156,6 +156,53 @@ static inline int lmb_read_check(phys_addr_t addr, phys_size_t len)
+>         return lmb_alloc_addr(addr, len) == addr ? 0 : -1;
+>  }
 >
-> There are multiple fully independent IOVA spaces. I doesn't make sense
-> to allocate them from a single pool.
+> +/**
+> + * io_lmb_setup() - Initialize LMB struct
+> + * @lmb: IO LMB to initialize
+> + *
+> + * Add the IOVA space [base, base + size] to be managed by io_lmb.
+> + *
+> + * Returns: 0 on success, negative error code on failure
+> + */
+> +int io_lmb_setup(struct lmb *io_lmb);
+> +
+> +/**
+> + * io_lmb_add() - Add an IOVA range for allocations
+> + * @io_lmb: LMB to add the space to
+> + * @base: Base Address of region to add
+> + * @size: Size of the region to add
+> + *
+> + * Add the IOVA space [base, base + size] to be managed by io_lmb.
+> + *
+> + * Returns: 0 if the region addition was successful, -1 on failure
+> + */
+> +long io_lmb_add(struct lmb *io_lmb, phys_addr_t base, phys_size_t size);
+> +
+> +/**
+> + * io_lmb_alloc() - Allocate specified IO memory address with specified alignment
+> + * @io_lmb: LMB to alloc from
+> + * @size: Size of the region requested
+> + * @align: Required address and size alignment
+> + *
+> + * Allocate a region of IO memory. The base parameter is used to specify the
+> + * base address of the requested region.
+> + *
+> + * Return: base IO address on success, 0 on error
+> + */
+> +phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align);
+> +
+> +/**
+> + * io_lmb_free() - Free up a region of IOVA space
+> + * @io_lmb: LMB to return the IO address space to
+> + * @base: Base Address of region to be freed
+> + * @size: Size of the region to be freed
+> + *
+> + * Free up a region of IOVA space.
+> + *
+> + * Return: 0 if successful, -1 on failure
+> + */
+> +long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size);
+> +
+>  #endif /* __KERNEL__ */
 >
-> > > Before you changed the goal posts, lmb did exactly that.  The only
-> > > problem was that there were multiple lmb instances covering the same
-> > > "main memory" address space.
-> >
-> > I had provided an explanation of the situation that existed prior to
-> > these changes in a writeup [1]. And that writeup had clearly provided
-> > the two possible solutions to fix the issue with EFI allocated memory
-> > working with LMB. And it was decided through discussion on that
-> > writeup as well as on the mailing list that this was the approach to
-> > be taken.
+>  #endif /* _LINUX_LMB_H */
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 2ce91f7521cfe58577b092fdaea8004b17f0eeff..cbf1ee0df93a9cb0cfea571a4caebae09646595e 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -351,6 +351,80 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+>         return addr & ~(size - 1);
+>  }
 >
-> That document missed due to unfortunate circumstances one special case
-> in the LMB usage. Consolidating all struct lmb referring main memory
-> into a single opaque object is useful. Please let's move on to fix the
-> single usage which broke due to the change.
->
-> From my point of view it's clear that "io_lmb*" is separate from the
-> main memory lmb.
+> +/*
+> + * IOVA LMB memory maps using lmb pointers instead of the global LMB memory map.
+> + */
+> +
+> +int io_lmb_setup(struct lmb *io_lmb)
+> +{
+> +       int ret;
+> +
+> +       ret = alist_init(&io_lmb->free_mem, sizeof(struct lmb_region),
+> +                        (uint)LMB_ALIST_INITIAL_SIZE);
+> +       if (!ret) {
+> +               log_debug("Unable to initialise the list for LMB free IOVA\n");
+> +               return -ENOMEM;
+> +       }
+> +
+> +       ret = alist_init(&io_lmb->used_mem, sizeof(struct lmb_region),
+> +                        (uint)LMB_ALIST_INITIAL_SIZE);
+> +       if (!ret) {
+> +               log_debug("Unable to initialise the list for LMB used IOVA\n");
+> +               return -ENOMEM;
+> +       }
+> +
+> +       io_lmb->test = false;
+> +
+> +       return 0;
+> +}
 
-Yes, that is my view as well. Which is why I was proposing a different
-mechanism for the IOVA allocations.
-
- It manages the IO virtual address space of devices and
-> it is fine that there as many (io_)lmb instances as there are IO virtual
-> address spaces. These do not have to be managed via struct lmb and
-> looking at the minimal io_lmb* API a simpler implementation would work.
-
-Okay. Although I wonder, given your explanation of multiple, per
-device IO VA spaces, how would these spaces be identified, if not
-through an instance of the lmb structure.
-
-> An alternative implementation would be duplicated code and reusing the
-> existing tested lmb code is desireable.
-
-Yes, I agree.
-
-> If we want a stronger distinction between lmb and io_lmb we could hide
-> struct lmb from io_lmb.
-
-Okay, but I am not sure how you would be able to achieve that. Are you
-proposing using the region lists directly? If so, I would say that if
-we are using the LMB code for the allocations, we might as well use
-the structure.
+In the current use case, the above data structure is getting allocated
+as part of the driver's probe function. The resource should be free'd
+from the driver's remove function -- that should happen through a
+corresponding alist_uninit() call.
 
 -sughosh
 
+> +
+> +long io_lmb_add(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
+> +{
+> +       return lmb_add_region_flags(&io_lmb->free_mem, base, size, LMB_NONE);
+> +}
+> +
+> +/* derived and simplified from _lmb_alloc_base() */
+> +phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align)
+> +{
+> +       long i, rgn;
+> +       phys_addr_t base = 0;
+> +       phys_addr_t res_base;
+> +       struct lmb_region *lmb_used = io_lmb->used_mem.data;
+> +       struct lmb_region *lmb_memory = io_lmb->free_mem.data;
+> +
+> +       for (i = io_lmb->free_mem.count - 1; i >= 0; i--) {
+> +               phys_addr_t lmbbase = lmb_memory[i].base;
+> +               phys_size_t lmbsize = lmb_memory[i].size;
+> +
+> +               if (lmbsize < size)
+> +                       continue;
+> +               base = lmb_align_down(lmbbase + lmbsize - size, align);
+> +
+> +               while (base && lmbbase <= base) {
+> +                       rgn = lmb_overlaps_region(&io_lmb->used_mem, base, size);
+> +                       if (rgn < 0) {
+> +                               /* This area isn't reserved, take it */
+> +                               if (lmb_add_region_flags(&io_lmb->used_mem, base,
+> +                                                        size, LMB_NONE) < 0)
+> +                                       return 0;
+> +
+> +                               return base;
+> +                       }
+> +
+> +                       res_base = lmb_used[rgn].base;
+> +                       if (res_base < size)
+> +                               break;
+> +                       base = lmb_align_down(res_base - size, align);
+> +               }
+> +       }
+> +       return 0;
+> +}
+> +
+> +long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
+> +{
+> +       return _lmb_free(&io_lmb->used_mem, base, size);
+> +}
+> +
+>  /*
+>   * Low level LMB functions are used to manage IOVA memory maps for the Apple
+>   * dart iommu. They must not access the global LMB memory map.
 >
-> Janne
+> --
+> 2.47.0
+>
