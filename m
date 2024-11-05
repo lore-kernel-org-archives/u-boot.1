@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70394D33A20
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 18:40:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3381D33A22
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 18:45:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2A10891C0;
-	Tue,  5 Nov 2024 19:40:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 18A4B88C44;
+	Tue,  5 Nov 2024 19:45:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B27C88A0A; Tue,  5 Nov 2024 19:40:38 +0100 (CET)
+ id 888B588ED9; Tue,  5 Nov 2024 19:45:12 +0100 (CET)
 Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65325891C0
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 19:40:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3204E88A0A
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 19:45:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paulk@sys-base.io
 Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 025411F0004D
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:40:34 +0000 (UTC)
+ by leonov.paulk.fr (Postfix) with ESMTPS id 86B361F0004D
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:45:08 +0000 (UTC)
 Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 51DF2A44AF6; Tue,  5 Nov 2024 18:40:34 +0000 (UTC)
+ id D21D0A44AF2; Tue,  5 Nov 2024 18:45:07 +0000 (UTC)
 Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id 50132A44AEC;
- Tue,  5 Nov 2024 18:40:33 +0000 (UTC)
-Date: Tue, 5 Nov 2024 19:40:30 +0100
+ by laika.paulk.fr (Postfix) with ESMTPSA id 8DB96A44AF0;
+ Tue,  5 Nov 2024 18:45:06 +0000 (UTC)
+Date: Tue, 5 Nov 2024 19:45:04 +0100
 From: Paul Kocialkowski <paulk@sys-base.io>
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -39,16 +39,15 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Klaus Goger <klaus.goger@cherry.de>, u-boot@lists.denx.de,
  Paul Kocialkowski <contact@paulk.fr>,
  Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH next 5/5] rockchip: configs: puma-rk3399: do the system
- reset in TPL
-Message-ID: <ZypmnjLPPZ9aC26c@collins>
+Subject: Re: [PATCH next 0/5] rockchip: rk3399: allow to trigger sysreset in
+ TPL
+Message-ID: <ZypnsKWG0d1gplk8@collins>
 References: <20241105-rk3399-sysreset-gpio-tpl-v1-0-12caff07a4e4@cherry.de>
- <20241105-rk3399-sysreset-gpio-tpl-v1-5-12caff07a4e4@cherry.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="AoOHWfSgUji7zac5"
+ protocol="application/pgp-signature"; boundary="QFjIwKd+VfnrM6zX"
 Content-Disposition: inline
-In-Reply-To: <20241105-rk3399-sysreset-gpio-tpl-v1-5-12caff07a4e4@cherry.de>
+In-Reply-To: <20241105-rk3399-sysreset-gpio-tpl-v1-0-12caff07a4e4@cherry.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,7 +65,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---AoOHWfSgUji7zac5
+--QFjIwKd+VfnrM6zX
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -74,53 +73,88 @@ Content-Transfer-Encoding: quoted-printable
 Hi,
 
 Le Tue 05 Nov 24, 16:36, Quentin Schulz a =C3=A9crit :
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+> A sysreset-gpio can be provided in an RK3399 platform's Device Tree and
+> if U-Boot detects a "warm" boot was done, it'll toggle that GPIO to
+> perform a reset of the PMIC, essentially forcing a cold boot to make
+> sure there are no non-default values in SoC registers.
 >=20
-> RK3399 Puma can trigger a full system reset at runtime by toggling a
-> GPIO. This is done whenever the system has NOT cold booted (i.e. from a
-> power cycle). For RK3399 Puma, this is currently done in SPL but only
-> because when this was implemented TPL wasn't used on RK3399 (or at least
-> not Puma). Now that we have TPL on RK3399 (and Puma), it makes sense to
-> trigger this reset as early as possible, so let's enable the drivers
-> required in TPL (Rockchip GPIO and pinctrl).
->=20
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> For now, this was only supported in SPL, probably because when this was
+> implemented RK3399 (and specifically Puma) didn't have TPL support so
+> SPL was the earliest stage. Now that most RK3399 boards (and
+> specifically Puma) have TPL enabled, it makes sense to add support for
+> triggering this sysreset from it. It brings the following advantages:
+> - faster boot time as we don't need to reach SPL to be able to reset the
+>   system on a condition we know is already met in TPL,
+> - have less code to be impacted by the issue this system reset works
+>   around (that is, "unclean" SoC registers after a reboot),
+> - less confusion around the reason for restarting. Indeed when done from
+>   SPL, the following log can be observed:
 
-Reviewed-by: Paul Kocialkowski <paulk@sys-base.io>
+Thanks for doing this, I think it makes a lot of sense to have it in the TP=
+L!
 
 Cheers,
 
 Paul
 
+> """
+> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
+> Channel 0: DDR3, 666MHz
+> BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D16 CS=3D1 Die BW=3D16 Size=3D2048MB
+> Channel 1: DDR3, 666MHz
+> BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D16 CS=3D1 Die BW=3D16 Size=3D2048MB
+> 256B stride
+> Trying to boot from BOOTROM
+> Returning to boot ROM...
+>=20
+> U-Boot SPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45 =
++0100)
+> Trying to boot from MMC2
+>=20
+> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
+> """
+>=20
+> possibly hinting at an issue within the SPL when loading the fitImage
+> from MMC2 instead of the normal course of events (a system reset).
+>=20
+> For this to be possible, the sysreset function is adapted to be able to
+> run in SPL and TPL by checking the appropriate symbols and a weak
+> callback is added in the TPL main C code so that we can hook this
+> sysreset function within the TPL code path.
+>=20
+> @Cc Paul since he's trying to add support for this sysreset to the
+> Firefly ROC-RK3399-PC[1] and Pine64 ROCKPro64[2]. You'll want to have
+> gpio1 with boopth-pre-sram though so it makes it to the TPL DTB.
+>=20
+> [1] https://lore.kernel.org/u-boot/20240926183111.1324284-1-paulk@sys-bas=
+e.io/
+> [2] https://lore.kernel.org/u-boot/20240926183111.1324284-2-paulk@sys-bas=
+e.io/
+>=20
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 > ---
->  configs/puma-rk3399_defconfig | 3 +++
->  1 file changed, 3 insertions(+)
+> Quentin Schulz (5):
+>       pinctrl: rockchip: allow to build for TPL
+>       rockchip: rk3399: merge CRU check within rk3399_force_power_on_reset
+>       rockchip: tpl: allow to call board/SoC-specific code before DRAM in=
+it
+>       rockchip: rk3399: allow to handle sysreset-gpio in TPL
+>       rockchip: configs: puma-rk3399: do the system reset in TPL
 >=20
-> diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-> index 67c0ee72c925cdd49066980b0fde4131c86a99a8..7a180b1413036234d83477377=
-8f6c0f0a7e85380 100644
-> --- a/configs/puma-rk3399_defconfig
-> +++ b/configs/puma-rk3399_defconfig
-> @@ -30,6 +30,7 @@ CONFIG_SPL_I2C=3Dy
->  CONFIG_SPL_POWER=3Dy
->  CONFIG_SPL_SPI_LOAD=3Dy
->  CONFIG_TPL=3Dy
-> +CONFIG_TPL_GPIO=3Dy
->  # CONFIG_BOOTM_NETBSD is not set
->  # CONFIG_BOOTM_PLAN9 is not set
->  # CONFIG_BOOTM_RTEMS is not set
-> @@ -78,6 +79,8 @@ CONFIG_ETH_DESIGNWARE=3Dy
->  CONFIG_GMAC_ROCKCHIP=3Dy
->  CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
->  CONFIG_PHY_ROCKCHIP_TYPEC=3Dy
-> +CONFIG_TPL_PINCTRL=3Dy
-> +CONFIG_TPL_PINCTRL_FULL=3Dy
->  CONFIG_DM_PMIC_FAN53555=3Dy
->  CONFIG_PMIC_RK8XX=3Dy
->  CONFIG_SPL_PMIC_RK8XX=3Dy
+>  arch/arm/mach-rockchip/rk3399/rk3399.c | 58 +++++++++++++++++++---------=
+------
+>  arch/arm/mach-rockchip/tpl.c           |  6 ++++
+>  configs/puma-rk3399_defconfig          |  3 ++
+>  drivers/pinctrl/Kconfig                |  8 +++++
+>  drivers/pinctrl/rockchip/Kconfig       |  7 ++++
+>  5 files changed, 56 insertions(+), 26 deletions(-)
+> ---
+> base-commit: 56accc56b9aab87ef4809ccc588e1257969cd271
+> change-id: 20241105-rk3399-sysreset-gpio-tpl-50620781cdd9
 >=20
+> Best regards,
 > --=20
-> 2.47.0
+> Quentin Schulz <quentin.schulz@cherry.de>
 >=20
 
 --=20
@@ -131,24 +165,24 @@ Free software developer - https://www.paulk.fr/
 
 Specialist in multimedia, graphics and embedded hardware support with Linux.
 
---AoOHWfSgUji7zac5
+--QFjIwKd+VfnrM6zX
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmcqZp4ACgkQhP3B6o/u
-lQzOYw/7BD3D0acVd3G9gR0eJEaHDiomxjQDRUeBNwVoZSDAOrPAQXQ2CSrmG8qL
-MOMp5IYchXMG0m0bGprIsI/UWfQZTGXMLhtEjPYjh9e+kcJmt2PiLuq2GgR7g/2O
-Ahh02iJGDmgLbDLjNFiIG8MWt0arx3OAwdJt3pNFD1mr/Kc/HijIEqpj0BZOETG6
-8YSh4qGEIHO8g+LvUFXC0UJQqD5fKALLNc9EYE2Ie2ylkpPclQUc4kzvbzugY4z8
-dxlWANVqSdcwyEIr7FpVVKRxGfn/mx6Cb3ujRHzh2+RABEEIGP4e2tnAdCnNnl6Y
-bQL6VgYpLa8zPMzYBqa1KPMX6o19OJp4WHQ1uMHE5bxVArPYbNvqN5FcapOQISS3
-CqoOWQrUNIy/n1ca/vnHCpmAlipwu7NX0LjEkFDzWfPqSN2NgW2JA0CSIRzvLuIQ
-n/4aviP/QzzTgz7gWxvdNURLvr9VV8VZmq8nD3o2TcKRifuHvb4o7s2skVgIZaf0
-HaZ5QsTSUUDGWjvgGKRZDkAkRZhVwnXWoYD1/G/03LYSnkjRHspkBA0aWPx40sPF
-nR9cEuETZjj+kS3YUHNupSRNAwGSFw1NP+uyn7maURgCa17X9/7vst7AGcVXj9Pa
-8Gk5zMMgRqTOI8cuHueuGZRRgrUh2U7Kcul5m66WPcaTNRGtMc8=
-=pNnT
+iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmcqZ7AACgkQhP3B6o/u
+lQznAw/+O73vDVc3Aapfea3uxT8yoqQO3M7ONS7EQPLhmCvUsSeMpi5GSmJyWsZb
+Z9p/+zPaLg/ogh3zGHdH3Viiilx7k0GMAgxrkNYejztV3us7ufF0CYP5St+3VASb
+cXJrwCziKOa+S6hK4xPsHMUb4U1vLEWUgbklSfm7t89o0L1oGgeYGRQavje1OLMy
+gn6g4b0VaYcpLZrVRXRk7E4kuuTl+OC3NFonWWO3bVjiDglNGr5/bdQdIhbcQmcU
+pDBt8Ybv6tIYsnG+ISHgr5J68ygpomAS+H4ePMMg2f4C77wHgIA1ujPmD27eTXLo
+5hcjcbxXD7zwfNlyKDSeDPm+kXdnKwTzGzvmyzXOP+fmodDVGYb/7GD77FmEkld1
+/nVhm6SHyl4O730koS6CEaaqH3iZEw0slXF7MPpSNiU5Y5Ex+NjJb+TnzD7g5Tf8
+xt+VSADO3xHzfyrn8eVJLLjlVjVyg624DQ0qtEwxkALmAWD/n7J8a33+zwlD0CWl
+Kwa1LfCz0DKsjknr7nblnLcpWfGgSZIspqloQ6edNudoKLccTkLEhbV5T4vxDNYW
+mQmJ3YLZ4M1DvR21GAqPXBG4qFO6LwL52BWz5sKkrpOjuEQFk/PoMuUjqBOxx0Hd
+9HpCxFngb0gyHdjB+RT4Cj5PLejkY6cyum1OAx6SME3PSkkCHRg=
+=IXA3
 -----END PGP SIGNATURE-----
 
---AoOHWfSgUji7zac5--
+--QFjIwKd+VfnrM6zX--
