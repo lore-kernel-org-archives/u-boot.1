@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86C08D3177E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 18:34:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B131D3177E
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 18:37:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DD0688D29;
-	Tue,  5 Nov 2024 19:34:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8BBEC88D29;
+	Tue,  5 Nov 2024 19:37:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F215D88ED9; Tue,  5 Nov 2024 19:34:51 +0100 (CET)
+ id 6A55689099; Tue,  5 Nov 2024 19:37:05 +0100 (CET)
 Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7ADAA88A0A
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 19:34:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 251D788A0A
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 19:37:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paulk@sys-base.io
 Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 313CF1F0004D
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:34:47 +0000 (UTC)
+ by leonov.paulk.fr (Postfix) with ESMTPS id AA80A1F0004F
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:36:59 +0000 (UTC)
 Received: by laika.paulk.fr (Postfix, from userid 65534)
- id D7061A44AE6; Tue,  5 Nov 2024 18:34:45 +0000 (UTC)
+ id 55F1EA44AEC; Tue,  5 Nov 2024 18:36:56 +0000 (UTC)
 Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id 9C118A44ADB;
- Tue,  5 Nov 2024 18:34:44 +0000 (UTC)
-Date: Tue, 5 Nov 2024 19:34:42 +0100
+ by laika.paulk.fr (Postfix) with ESMTPSA id 1FEF3A44AE5;
+ Tue,  5 Nov 2024 18:36:56 +0000 (UTC)
+Date: Tue, 5 Nov 2024 19:36:53 +0100
 From: Paul Kocialkowski <paulk@sys-base.io>
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -39,15 +39,16 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Klaus Goger <klaus.goger@cherry.de>, u-boot@lists.denx.de,
  Paul Kocialkowski <contact@paulk.fr>,
  Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH next 1/5] pinctrl: rockchip: allow to build for TPL
-Message-ID: <ZyplQnbWjlLDRKgr@collins>
+Subject: Re: [PATCH next 2/5] rockchip: rk3399: merge CRU check within
+ rk3399_force_power_on_reset
+Message-ID: <ZyplxTZvoyd9r_v9@collins>
 References: <20241105-rk3399-sysreset-gpio-tpl-v1-0-12caff07a4e4@cherry.de>
- <20241105-rk3399-sysreset-gpio-tpl-v1-1-12caff07a4e4@cherry.de>
+ <20241105-rk3399-sysreset-gpio-tpl-v1-2-12caff07a4e4@cherry.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="MYS+CYmdwEn356fD"
+ protocol="application/pgp-signature"; boundary="xtk7vT6nN+phxUn+"
 Content-Disposition: inline
-In-Reply-To: <20241105-rk3399-sysreset-gpio-tpl-v1-1-12caff07a4e4@cherry.de>
+In-Reply-To: <20241105-rk3399-sysreset-gpio-tpl-v1-2-12caff07a4e4@cherry.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,7 +66,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---MYS+CYmdwEn356fD
+--xtk7vT6nN+phxUn+
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -75,67 +76,88 @@ Hi,
 Le Tue 05 Nov 24, 16:36, Quentin Schulz a =C3=A9crit :
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >=20
-> A later commit will make use of the pinctrl driver in TPL so let's add
-> the ability to build the Rockchip pinctrl driver in TPL.
+> To prepare to support forcing power on reset from TPL which would have
+> the exact same logic, just in an earlier stage, let's merge the CRU
+> check that triggers the power on reset with the rest of the logic.
 >=20
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
 Reviewed-by: Paul Kocialkowski <paulk@sys-base.io>
-
-Just a nit below in case you need to respin.
 
 Cheers,
 
 Paul
 
 > ---
->  drivers/pinctrl/Kconfig          | 8 ++++++++
->  drivers/pinctrl/rockchip/Kconfig | 7 +++++++
->  2 files changed, 15 insertions(+)
+>  arch/arm/mach-rockchip/rk3399/rk3399.c | 43 +++++++++++++++++-----------=
+------
+>  1 file changed, 21 insertions(+), 22 deletions(-)
 >=20
-> diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
-> index a1d53cfbdbed5ef1030fff04715e1436f167554b..cff7c3ef45b1c7c29017a4512=
-d4970bce4bac26b 100644
-> --- a/drivers/pinctrl/Kconfig
-> +++ b/drivers/pinctrl/Kconfig
-> @@ -127,6 +127,14 @@ config SPL_PINCTRL_GENERIC
->  	  This option is an SPL-variant of the PINCTRL_GENERIC option.
->  	  See the help of PINCTRL_GENERIC for details.
+> diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockc=
+hip/rk3399/rk3399.c
+> index edccb2a3980d0e3921aa4073b67aea6a00f18b8d..7b6a822ed04b8151a5da14705=
+6dbf73ffdafd149 100644
+> --- a/arch/arm/mach-rockchip/rk3399/rk3399.c
+> +++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
+> @@ -172,9 +172,29 @@ void board_debug_uart_init(void)
+>  #if defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD)
+>  static void rk3399_force_power_on_reset(void)
+>  {
+> +	const struct rockchip_cru *cru =3D rockchip_get_cru();
+>  	ofnode node;
+>  	struct gpio_desc sysreset_gpio;
 > =20
-> +config TPL_PINCTRL_GENERIC
-> +	bool "Support generic pin controllers in TPL"
-> +	depends on TPL_PINCTRL_FULL
-> +	default y
-> +	help
-> +	  This option is an TPL-variant of the PINCTRL_GENERIC option.
-> +	  See the help of PINCTRL_GENERIC for details.
-
-Typo: "a TPL-variant".
-
->  config SPL_PINMUX
->  	bool "Support pin multiplexing controllers in SPL"
->  	depends on SPL_PINCTRL_GENERIC
-> diff --git a/drivers/pinctrl/rockchip/Kconfig b/drivers/pinctrl/rockchip/=
-Kconfig
-> index dc4ba34ae5d581be76786fd05d679d26397fd467..6ad6b189715cee20f0e570d93=
-b9b871e5acb99c3 100644
-> --- a/drivers/pinctrl/rockchip/Kconfig
-> +++ b/drivers/pinctrl/rockchip/Kconfig
-> @@ -14,4 +14,11 @@ config SPL_PINCTRL_ROCKCHIP
->  	help
->  	  This option is an SPL-variant of the PINCTRL_ROCKCHIP option.
-> =20
-> +config TPL_PINCTRL_ROCKCHIP
-> +	bool "Support Rockchip pin controllers in TPL"
-> +	depends on ARCH_ROCKCHIP && TPL_PINCTRL_GENERIC
-> +	default y
-> +	help
-> +	  This option is an TPL-variant of the PINCTRL_ROCKCHIP option.
-
-Ditto.
-
+> +	/*
+> +	 * The RK3399 resets only 'almost all logic' (see also in the
+> +	 * TRM "3.9.4 Global software reset"), when issuing a software
+> +	 * reset. This may cause issues during boot-up for some
+> +	 * configurations of the application software stack.
+> +	 *
+> +	 * To work around this, we test whether the last reset reason
+> +	 * was a power-on reset and (if not) issue an overtemp-reset to
+> +	 * reset the entire module.
+> +	 *
+> +	 * While this was previously fixed by modifying the various
+> +	 * places that could generate a software reset (e.g. U-Boot's
+> +	 * sysreset driver, the ATF or Linux), we now have it here to
+> +	 * ensure that we no longer have to track this through the
+> +	 * various components.
+> +	 */
+> +	if (cru->glb_rst_st =3D=3D 0)
+> +		return;
 > +
->  endif
+>  	if (!IS_ENABLED(CONFIG_SPL_GPIO)) {
+>  		debug("%s: trying to force a power-on reset but no GPIO "
+>  		      "support in SPL!\n", __func__);
+> @@ -206,27 +226,6 @@ void spl_board_init(void)
+>  {
+>  	led_setup();
+> =20
+> -	if (IS_ENABLED(CONFIG_SPL_GPIO)) {
+> -		struct rockchip_cru *cru =3D rockchip_get_cru();
+> -
+> -		/*
+> -		 * The RK3399 resets only 'almost all logic' (see also in the
+> -		 * TRM "3.9.4 Global software reset"), when issuing a software
+> -		 * reset. This may cause issues during boot-up for some
+> -		 * configurations of the application software stack.
+> -		 *
+> -		 * To work around this, we test whether the last reset reason
+> -		 * was a power-on reset and (if not) issue an overtemp-reset to
+> -		 * reset the entire module.
+> -		 *
+> -		 * While this was previously fixed by modifying the various
+> -		 * places that could generate a software reset (e.g. U-Boot's
+> -		 * sysreset driver, the ATF or Linux), we now have it here to
+> -		 * ensure that we no longer have to track this through the
+> -		 * various components.
+> -		 */
+> -		if (cru->glb_rst_st !=3D 0)
+> -			rk3399_force_power_on_reset();
+> -	}
+> +	rk3399_force_power_on_reset();
+>  }
+>  #endif
 >=20
 > --=20
 > 2.47.0
@@ -149,24 +171,24 @@ Free software developer - https://www.paulk.fr/
 
 Specialist in multimedia, graphics and embedded hardware support with Linux.
 
---MYS+CYmdwEn356fD
+--xtk7vT6nN+phxUn+
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmcqZUIACgkQhP3B6o/u
-lQzsng//U30WIhvS9i29/HKqAUsFaK0gA/GgRWz6O1PlYMVlg6KOtZVGDApkdmLQ
-tjqr3hL1Ox3Or5eC+rx8xh88CXEzXNN67frLlTFUjL7HgjQalz3v1hYyO6UDMvjt
-Cx+lkae9VTc2iwr9OeFBuyGwuhMOSn6QTAKe3oaxgh7lXaXgF8hPZKnD1xEOTaGH
-YJH3uHJKr70mC/KNH1wVPcVCiHS7Q6Iwg2nS9+Yv9JVNvJYux/Hy0CQRveZHzS14
-fvGLJVtfqsR9ZNSHnhqisUnl3PFpimoJfVIwn7in9dBC2UERNABp+hqhHMxtQKh+
-tGQoabxuR7g4snCTQCAToP2rhZfJ3qWfvEZK5TtFBxuZdwmH4GEmO/nCN4svfjJs
-bWKq2EOiRiNE1FpLFWg1t4GBYIB2nWdfHUqIhUNyNCYS4mUnXWzQJuA1eAodrPca
-ggaGdMBmzYRBnHqVbKKHN2usReCWZiUVPrTw71IVmFKsvFwrUErCp2cAx5gXgXKh
-twwOwTUfY5ZoEyeyv7FZCWoSq8QUAq7aBm0kcbm1fpTphS15o+5UT0lKanw4/Gdh
-JuF3z1JiSIQs3wUMWruWmeGuOYVUlNFBFYiqTdlEHeaeTuiGWWQPL45gyXCdNcHp
-M0yDYyoQYUUD4JY7ZCGvZUQT8O9diqNdKNOp3X85k+je6KQE7p0=
-=bbAi
+iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmcqZcUACgkQhP3B6o/u
+lQzDRw/+MMRCscyMWkWULNhMa19pxVLyK6hCQr2pL7mJQOqT3OBjsI2fdxgkV1OR
+E6d/z2+tQd/17NYcUuBxAW9pq1Por1I2Aq46bVLo4S8fSPdOXQftM/bSjsTA7MC3
+vtu6dS9RUYy0ld9XGSK2Fsc8gYustSznWIDMzdi/Lm5eNJwlAEXDetK496YmeSHE
+R0CvsvmiyNFxIzkN9Wu2kQhkCDDw3Hb87yjO0PAgtKF67c340niavwfN39x90F+Q
+QbkaZ3+j0RVplMRpJjJL8NMIOxonY8XRR2iTexfODxvwAbHhnmGM6NVYGspgbdwW
+2Sc8Revb/JxPyR00wARaZF8LEVAJCmOxo8cqXk2WPzCu5aPfkykVawxEfKM6gCFE
+2QeKfq/Oi2nq3erw9lEPViFCSUBMRSYkE6cIx64zIrbqIoD+jOMoauU46n/xVkHU
+LMC4RAorqp8yUc/h5u4EYITGHfbcf/lWu8YlDY+I3Kf84tO1TqBH4YdUVC0P/mOR
+o2LuDkY2IJP8fpOLhM+tIXW27fzOxC/Pt1bgyQD971Zoo+/YpxhNQeygM961JPLP
+8dCz47sNhQSYUqCpmITM9MbuP2f4QMzni6dx9CDjsztH0wL4UPgWSXq8aYVUu5Iw
+FTp/z9VdVeovoPX3t0fgrrx808HjxZzZbRwM7VX8wYP8YYk19r8=
+=oGje
 -----END PGP SIGNATURE-----
 
---MYS+CYmdwEn356fD--
+--xtk7vT6nN+phxUn+--
