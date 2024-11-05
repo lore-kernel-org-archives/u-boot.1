@@ -4,113 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE72D2B944
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:54:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5272ED2B950
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:54:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32B67891AC;
+	by phobos.denx.de (Postfix) with ESMTP id AACDF891C0;
 	Tue,  5 Nov 2024 16:54:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KIMAD4zt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hh77ElA6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2214891A6; Tue,  5 Nov 2024 16:15:45 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 15A718913F; Tue,  5 Nov 2024 16:15:52 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 673F48913F
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:15:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2E58891E4
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:15:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4316f3d3c21so43275195e9.3
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:15:41 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a9e8522445dso543243366b.1
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:15:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730819741; x=1731424541; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=T4ACGCc5ek6TPhQk+7uW62DqTYwnVOTLGW/0qMfzBTo=;
- b=KIMAD4ztFFAiVAJkwHmrZlaxQzSVxc7ficPTR9cBwiRHLddlheBx0LIeLVGVwI8OcK
- K/FuGaCFRKNF8B38lgRe9RMjjIrQD+h3w/J3CaXEdcu/ad/r8Iu+E6FfVWPpaG3ugjT6
- zL891I7JFVtdCAUAqcYG/T+LEEWFEo6smBxYlZFMDAsmFhCBSOCmVyLtU08DuUwyOq+x
- zQI4sIabRuYfOMKh109KQz73fihJos65lXKSepbR1jTPv660C8/YJjB2MWLGSYeXuyQA
- rOMO2+rmA3n5dhNDcnC23QkoFRVjhb4B/JMLxfmfcGTlbt7CmTw+4bQMNh48TKC/wS/Y
- L1Jg==
+ d=chromium.org; s=google; t=1730819747; x=1731424547; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PUq+F/fOhlX2dQRABqwxE+3OjzAWCkgyEDjETl3bw9g=;
+ b=Hh77ElA63TzBIPmjmSigQgXnajYxC+bmhL+rmADrREUCaS+OrVBVPLfmLjP/L9ueP2
+ jespBX5tigXuClFNOtt9WEQcZvToecg29X30hJFy2IzRuWJ8Ovqs/xD439WtOmg7/sPi
+ cr3IeCyMCB7+lFkCO1umDTVqzmafNKdFnaovQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730819741; x=1731424541;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=T4ACGCc5ek6TPhQk+7uW62DqTYwnVOTLGW/0qMfzBTo=;
- b=R1d9O7UtYdUJM8cNiC7rJtt9o47pie7WfOhJSX+IEgpl66u4GbjsIk4H9pWnlG6Bnt
- 3D28UIkvktbZi9eOMXEcEeosETNBe9e1ZlpybMk8EjUMm6lQIq59KjqFoZWhOJztqyW3
- ZSzosH9GBP62EY3WoKDw2uXoQHQvcUClKSIpuVmvErFhRh+q+EAkWQxT2dvhldbINhr+
- 3GdjE2Ju0Qab7K4830u/kqspl/wBzKtbbWnq1U5o568jQdOI2GviwRMmiIcxvZBgiOJ3
- fa5fBaxrWpAwec8vr/DbrY+4lS0UapBqvogbYLhOQ+1lvxlBgZzl2Opfey4ZaaHmkYvM
- +Spg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW8fs3E5yTifaGSdVMRDO/HjylGS6EmRZbeUAEE6mv+sedrHtL0wCpIoZKiACo+z5RaMnFGlxc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzNqCFT3g55x5+s+dr9XOK6K4dMejIDI8RJu+Vg8HASccttMXi
- pgu1tLHKECIErhrUxOuYM4bRoQucMO7zbXh7rsza8CGifpah/K21
-X-Google-Smtp-Source: AGHT+IHY9LQlVDeEFd48PSLFYxYasSOoFzJy4UuvHrPl5IRQQuB4hmh7b6opsi6yYMGfqLGkjKGtlw==
-X-Received: by 2002:a05:600c:5114:b0:431:60ac:9aef with SMTP id
- 5b1f17b1804b1-431bb9de94bmr225223245e9.29.1730819740393; 
- Tue, 05 Nov 2024 07:15:40 -0800 (PST)
-Received: from Ansuel-XPS. (93-34-91-161.ip49.fastwebnet.it. [93.34.91.161])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381c10e7449sm16517891f8f.49.2024.11.05.07.15.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Nov 2024 07:15:40 -0800 (PST)
-Message-ID: <672a369c.5d0a0220.2a81fb.f4b3@mx.google.com>
-X-Google-Original-Message-ID: <Zyo2l6VupoH6PWIu@Ansuel-XPS.>
-Date: Tue, 5 Nov 2024 16:15:35 +0100
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Sean Anderson <seanga2@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Alexander Gendin <agendin@matrox.com>,
- Yang Xiwen <forbidden405@outlook.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>, Heiko Schocher <hs@denx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Martin Kurbanov <mmkurbanov@salutedevices.com>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Artur Rojek <artur@conclusive.pl>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Vasileios Amoiridis <vassilisamir@gmail.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, John Crispin <john@phrozen.org>
-Subject: Re: [PATCH v5 03/11] led: implement LED boot API
-References: <20241001122511.8832-1-ansuelsmth@gmail.com>
- <20241001122511.8832-4-ansuelsmth@gmail.com>
- <CAFLszTjB4OV-k65rhqJ9pBTmKUnnWthbDJ2Vk3eRxzBgmMeOOg@mail.gmail.com>
- <CAFLszTh9WYnya=8YXXFEcSuVUYuhCGy-+iYFRucgMZq+-1H5UQ@mail.gmail.com>
- <67267f36.df0a0220.87602.7b89@mx.google.com>
- <CAFLszTgP5r56eCTGuG4fbga7Wj8iU97dQZmcvw4ze0UBOhRj1g@mail.gmail.com>
- <672682f5.050a0220.361a4b.7e2b@mx.google.com>
- <CAFLszTid7ZhM-mrkP4PQmSMsOp3PxJ+8tkWj292MUwpeZB7v=A@mail.gmail.com>
- <67295533.050a0220.e889.dca0@mx.google.com>
- <CAFLszTjwqrufzc7Ujt3oOhsL5AxPa-Bbr61edrHomChtPqyEjA@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1730819747; x=1731424547;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PUq+F/fOhlX2dQRABqwxE+3OjzAWCkgyEDjETl3bw9g=;
+ b=ZfHTfV/d4wtEwqTaeadlKoAXJsBpYTE/2uiqtugoLZXIZ/kWo3Kr5kdRbWQaoJyRU+
+ ou9c5Q+G4IwRaB8Y6+LDrWs6BObnfXI58X+XRw5FQYhhV2n1Md7ZNNiyQwR20hlU+Omt
+ eGXJPRrm7LuNomttEeXO333zin6tuhHF7H8LaphJ4/Iq6jMVCC7gRnzK6FgMR1tUv3Mk
+ r9KUVml0Vh+3oMeuiUNIcZaH1BhuhujZPFT+mjVb+w217pcMjsS9eBHQhb5dCVLrH3g4
+ f2tMGa2qVmB201A4q5uO+VE862w3MOHRCxnxkKsIC48wFzBFoI/+lThoPZFMZEEKf2Qz
+ XuBw==
+X-Gm-Message-State: AOJu0Yz16ICx5iwSSbki0OgAQu5MAb0TnrQaM6lEubhLXbjsudxjc+K3
+ jurXE/2GDQBwxTXerKfPaY3okQ/S0pe+D9ST1+f04QvSJB99/O4SPVArcZYVTkqh5daCmYZaxLr
+ g+oFM+tnYA5u6wOCM63geSVfhBnvmj9pIN4aH
+X-Google-Smtp-Source: AGHT+IG7FUKFi0QmomJAcgMUzgviYGIB8kYQ3E+P3Lo04LWUC+0Q0U76JUKqFasicDh4xq4TTmvtIZLk/g3d2+Rp2As=
+X-Received: by 2002:a17:907:2d91:b0:a9a:80cc:c972 with SMTP id
+ a640c23a62f3a-a9e655a8980mr1569945666b.27.1730819746951; Tue, 05 Nov 2024
+ 07:15:46 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjwqrufzc7Ujt3oOhsL5AxPa-Bbr61edrHomChtPqyEjA@mail.gmail.com>
+References: <20241103003322.626036-1-sjg@chromium.org>
+ <CALeDE9MfWEAb91uzQPa6_jSo6beJv_GNHTY2TeKnSzFm6V97gw@mail.gmail.com>
+In-Reply-To: <CALeDE9MfWEAb91uzQPa6_jSo6beJv_GNHTY2TeKnSzFm6V97gw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 5 Nov 2024 08:15:34 -0700
+Message-ID: <CAFLszTito2+-qgOc=7bc3i9WmBZZCcAVWSY5hoH0neGjTg6zEQ@mail.gmail.com>
+Subject: Re: [PATCH v3 00/25] led: Remove old status-LED code
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Alison Wang <alison.wang@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
+ Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@kernel-space.org>,
+ Angelo Dureghello <angelo@sysam.it>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Charles Hardin <ckhardin@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>, 
+ Devarsh Thakkar <devarsht@ti.com>, Doug Zobel <douglas.zobel@climate.com>, 
+ Enric Balletbo i Serra <eballetbo@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Hans de Goede <hdegoede@redhat.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Javier Martinez Canillas <javierm@redhat.com>, 
+ Jens Scharsig <esw@bus-elektronik.de>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Mario Six <mario.six@gdsys.cc>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
+ Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, 
+ Sean Edmond <seanedmond@microsoft.com>, Stefan Roese <sr@denx.de>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>, 
+ Wan Yee Lau <wan.yee.lau@intel.com>, Wolfgang Denk <wd@denx.de>, 
+ uboot-stm32@st-md-mailman.stormreply.com
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Tue, 05 Nov 2024 16:54:11 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -128,92 +120,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Nov 05, 2024 at 08:12:47AM -0700, Simon Glass wrote:
-> Hi Christian,
-> 
-> On Mon, 4 Nov 2024 at 16:13, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> >
-> > On Sun, Nov 03, 2024 at 07:46:19AM -0700, Simon Glass wrote:
-> > > Hi Christian,
-> > >
-> > > On Sat, 2 Nov 2024 at 13:52, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> > > >
-> > > > On Sat, Nov 02, 2024 at 01:50:13PM -0600, Simon Glass wrote:
-> > > > > Hi Christian,
-> > > > >
-> > > > > On Sat, 2 Nov 2024 at 13:36, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> > > > > >
-> > > > > > On Sat, Nov 02, 2024 at 01:33:10PM -0600, Simon Glass wrote:
-> > > > > > > Hi Christian,
-> > > > > > >
-> > > > > > > On Wed, 2 Oct 2024 at 16:55, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > >
-> > > > > > > > On Tue, 1 Oct 2024 at 06:25, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> > > > > > > > >
-> > > > > > > > > Implement LED boot API to signal correct boot of the system.
-> > > > > > > > >
-> > > > > > > > > led_boot_on/off/blink() are introduced to turn ON, OFF and BLINK the
-> > > > > > > > > designated boot LED.
-> > > > > > > > >
-> > > > > > > > > New Kconfig is introduced, CONFIG_LED_BOOT to enable the feature.
-> > > > > > > > > This makes use of the /options/u-boot property "boot-led" to the
-> > > > > > > > > define the boot LED.
-> > > > > > > > > It's also introduced a new /options/u-boot property "boot-led-period"
-> > > > > > > > > to define the default period when the LED is set to blink mode.
-> > > > > > > >
-> > > > > > > > BTW could you please send a schema update for this so that Linux accepts it?
-> > > > > > >
-> > > > > > > I'm just checking that you did this?
-> > > > > > >
-> > > > > >
-> > > > > > Yep [0]. Also tagged Rob 2 hours ago. (eh the coincidence)
-> > > > > >
-> > > > > > Tell me if I should send it with usual way with a dedicated mail. (any
-> > > > > > hint on the mailing-list address?)
-> > > > >
-> > > > > OK great! Yes, once it lands, please send a patch to bring it into U-Boot
-> > > > >
-> > > > > Regards,
-> > > > > Simon
-> > > > >
-> > > > > > [0] https://github.com/devicetree-org/dt-schema/pull/144
-> > > >
-> > > > I'm confused what kind of patch I should send to U-Boot?
-> > >
-> > > Something to add the binding to U-Boot also. See my patch at [1]
-> > >
-> > > Regards,
-> > > Simon
-> > >
-> > > [1] https://patchwork.ozlabs.org/project/uboot/patch/20241103003322.626036-26-sjg@chromium.org/
-> >
-> > Ok thanks for the hint.
-> >
-> > Anyway Rob checked the patch (good news) but he request some changes
-> > (bad news)
-> >
-> > I created this PR [1] waiting for CI to confirm everything is ok.
-> >
-> > Would be good if you can check the changes while CI tests.
-> 
-> A few things:
-> - Better to return -ENOENT or -EINVAL if something is missing, since
-> we use -ENODEV in driver model to mean there is no device
-> - 'nodep' instead of 'node' for the parameter, so it is clear that it
-> is returned
-> 
-> Otherwise it looks good to me (with the proviso that's I'm just
-> looking at an emphemal github link!)
+Hi Peter,
+
+On Tue, 5 Nov 2024 at 07:18, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
-
-Thanks a lot. Fighting a bit with the tests but thanks for the feedback.
-
-> 
+> On Sun, 3 Nov 2024 at 00:34, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > [1] https://github.com/u-boot/u-boot/pull/686
-> >
-> > --
-> >         Ansuel
+> > There has been an LED framework in U-Boot which uses driver model for
+> > about 9 years now. Recent work is underway to improve it and provide
+> > more features. It is probably a good time to drop the old code, which
+> > is only used by 5 boards:
+>
+> I don't believe, from what I can tell, they are feature comparable, at
+> the very least I have not been able to get the Pinephone working with
+> this so as it stands I still don't think this patch set is ready yet.
 
--- 
-	Ansuel
+I don't have that hardware, nor the other 4, so cannot do anything
+with this feedback.
+
+Can you please be clear what you are asking me to do?
+
+Regards,
+Simon
