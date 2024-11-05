@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E50C7D2C122
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C19E9D2C122
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:15:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0346891D0;
-	Tue,  5 Nov 2024 16:15:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4830B891DE;
+	Tue,  5 Nov 2024 16:15:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BZyiNQgM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HnnY4J20";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5C1A891CD; Tue,  5 Nov 2024 16:15:13 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 8A20E891D7; Tue,  5 Nov 2024 16:15:20 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB6BA891AC
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:15:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 867A6891AC
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:15:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a9a850270e2so929218566b.0
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:15:11 -0800 (PST)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-539eb97f26aso3487066e87.2
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:15:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730819711; x=1731424511; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730819718; x=1731424518; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5aiv8bhaQIMxoAWezGphrdAUeJiiTDitxc3NLkDWNwI=;
- b=BZyiNQgM8dK+cgnu9epcaiDB6beq+Jv2Nkw8RhWOLLL1fr6bqHSYx03uFyDnCjBhsE
- yIweBF2k0NSZ9870kFCF+GzcJcpvFgjQBqaObRWPOxu0aPAIfqO7kp4+731+oDb6UWkE
- AXjR6VN7g3RK70Vhm5ni8GdZXWA37RRdpWvjw=
+ bh=qs8CIJI9FNLgFYKQ95LnbrwZ5pacpTewgyat0QZZtVU=;
+ b=HnnY4J20phQ3hXNcrmLZHkmwpc10fCGAyKeWR2KkFTFNZI75Sc1zFAzizCp9wrP+Nk
+ BpV2f14z7RN8AsDm9gi3qOebVZuGNt7Rd5YseZUaqHCT62ZT/7aFEawZq8pd7DMzG/V9
+ dHILi72sw3qVg71n09MqfNGyQjJekbMuuV1SE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730819711; x=1731424511;
+ d=1e100.net; s=20230601; t=1730819718; x=1731424518;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5aiv8bhaQIMxoAWezGphrdAUeJiiTDitxc3NLkDWNwI=;
- b=YGqgi1pvkz4mTTiACrPJowxV8Ba9KCshQjWqT65dUI9A/CTgJTjHSU3C8Lg68Gf7AW
- G4lNZNGWlteD3SbBfYnww9E9dC1arKpZyaACWk8af2BbOCc3hhT+elE9tWW2v/fncRDd
- vTo1P3++HQFvZmLe3Wk275PX8wczE5ZKF7jSrks1PXqF+mh/rYwj+I8XgZHmLZ3mSY7C
- X74iY9IQQbA9CKY/APi6UCakgUueSVKJQFPywkf3C8+q5kxtPMLMl7UgFpU+37MCxpJq
- y0QfJBqhWJpul71wYGGyZSQNiVZZ7tJGSzRhJLONY4JXm296+FVB3cx/kuaA8Jp87D4V
- W3lA==
-X-Gm-Message-State: AOJu0YwXAHXoZQoBLIseJSVMchiEwvwoPDlxH2H4hn97DETTLTKl49aJ
- b4ZgWjzs0PEcETQDvldDUU2eKjMygKPA6Ayine90+1cpu36ZZY+LY7fi4Ys86f27lrvAqVBc+fp
- EPgM17t3cBYF5KzNCVM+0VvmvWkPRq9E/m+PO
-X-Google-Smtp-Source: AGHT+IHNxPnCNXh7Fg1W8F8SL/GaoY0IkE64S0+z/xLSc2+9A5yFDkujABmGL2Su+58g2f2XiaMYKPX89u+VqVDXA7w=
-X-Received: by 2002:a17:907:2dac:b0:a9a:82e2:e8ce with SMTP id
- a640c23a62f3a-a9e6587e288mr1803798966b.40.1730819711121; Tue, 05 Nov 2024
- 07:15:11 -0800 (PST)
+ bh=qs8CIJI9FNLgFYKQ95LnbrwZ5pacpTewgyat0QZZtVU=;
+ b=pvDyoBZ6ZfhbI1PgajYsd2Glxn/wOlzM7+EZ+P+NrdNsEagmGMtj0uIZpGljUgLVi4
+ b9Vy55AbcEQPt1rGCwro1LNtzZ4iQfqQp7YyxAk2VFyxYsp4/SU41NBMxBkFs9vLXVoO
+ gHBFR/kNCs37cmUlq4fO9RC06mvgErcu91c10l65w4cBnKuzpa04aRqP65Y/L3X+U1qL
+ Ols+m4BtAaia9phBk5mqQBnt0VYkF7XvfX0q5zz6NRd/dQxyqnf29k5imjFPRl5028kz
+ imkU7OX3t8r4eNSKhUTXqZVE2wU4cl3ZevElSiUnLzBPN2S4QF8wXobH8fkT2EB6c8By
+ iBAQ==
+X-Gm-Message-State: AOJu0Yzn+dwXcdec2V1m9lbCH9c3f9hBGf2qhIhzWQWFBQxwpP2ogVvU
+ CfcRaS8y/JganFgZ7cveSfqGjrOSnNb0TThLajAV1BLP65awk3QRyi4klwM6mmZeROzucYFbzXJ
+ g7he2ppjIlI6C2gZ8WxBr6Ac/oS2z3xV0IwER
+X-Google-Smtp-Source: AGHT+IGtpU35j0ZU50W/w637a4UTIgsBeIjDE0GceUb4IoWwm/yzRM/1DG8SiU+SJW5YjlGSf6gfstIx6UMdxj1Ok08=
+X-Received: by 2002:a05:6512:308a:b0:539:8d67:1b1b with SMTP id
+ 2adb3069b0e04-53b7ecf1ff6mr13159030e87.26.1730819717738; Tue, 05 Nov 2024
+ 07:15:17 -0800 (PST)
 MIME-Version: 1.0
 References: <20241104133954.840994-1-sjg@chromium.org>
- <20241104133954.840994-3-sjg@chromium.org>
- <F9A7881F-1242-4B52-B48E-F0512264989C@gmx.de>
-In-Reply-To: <F9A7881F-1242-4B52-B48E-F0512264989C@gmx.de>
+ <20241104133954.840994-6-sjg@chromium.org>
+ <20241104135632.GK3600562@bill-the-cat>
+In-Reply-To: <20241104135632.GK3600562@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Nov 2024 08:14:58 -0700
-Message-ID: <CAFLszTgJEtuarWu+WGM6q46oLLWqXrDE_yLVTs5QMU92TtL3sw@mail.gmail.com>
-Subject: Re: [PATCH 2/9] test: Adjust print_ut test to use unsigned char
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Raymond Mao <raymond.mao@linaro.org>
+Date: Tue, 5 Nov 2024 08:15:05 -0700
+Message-ID: <CAFLszTi4YEqRCVJ=vRTVHtSP=Ux2C8W=vg=3+VedVAdZuef3+A@mail.gmail.com>
+Subject: Re: [PATCH 5/9] docker: Drop grub for arm64
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,58 +84,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Mon, 4 Nov 2024 at 13:51, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Mon, 4 Nov 2024 at 06:56, Tom Rini <trini@konsulko.com> wrote:
 >
+> On Mon, Nov 04, 2024 at 06:39:49AM -0700, Simon Glass wrote:
 >
+> > This doesn't build on arm64 at present, so drop it for now. We only
+> > expect to run sandbox tests, so perhaps it isn't needed.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  tools/docker/Dockerfile | 7 +++++--
+> >  1 file changed, 5 insertions(+), 2 deletions(-)
 >
-> Am 4. November 2024 14:39:46 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >Since char is unsigned on arm64, this test currently fails. It seems
-> >better to use unsigned anyway, since 0xff is written into the string at
-> >the start.
-> >
-> >Signed-off-by: Simon Glass <sjg@chromium.org>
-> >---
-> >
-> > test/print_ut.c | 6 +++---
-> > 1 file changed, 3 insertions(+), 3 deletions(-)
-> >
-> >diff --git a/test/print_ut.c b/test/print_ut.c
-> >index f5e607b21a3..7e5c015f3a7 100644
-> >--- a/test/print_ut.c
-> >+++ b/test/print_ut.c
-> >@@ -242,7 +242,7 @@ PRINT_TEST(print_display_buffer, UTF_CONSOLE);
-> >
-> > static int print_hexdump_line(struct unit_test_state *uts)
-> > {
-> >-      char *linebuf;
-> >+      u8 *linebuf;
-> >       u8 *buf;
-> >       int i;
-> >
-> >@@ -255,10 +255,10 @@ static int print_hexdump_line(struct unit_test_state *uts)
-> >       linebuf = map_sysmem(0x400, BUF_SIZE);
-> >       memset(linebuf, '\xff', BUF_SIZE);
-> >       ut_asserteq(-ENOSPC, hexdump_line(0, buf, 1, 0x10, 0, linebuf, 75));
-> >-      ut_asserteq(-1, linebuf[0]);
-> >+      ut_asserteq(0xff, linebuf[0]);
-> >       ut_asserteq(0x10, hexdump_line(0, buf, 1, 0x10, 0, linebuf, 76));
-> >       ut_asserteq(0, linebuf[75]);
->
-> Should we add a ut_asserteq_str() here to check all characters?
+> What is the build failure? Depending on what other prospects for arm64
+> build hardware come through I'm hoping to look harder at more build
+> options, not just sandbox (but of course, QEMU shouldn't matter what the
+> host is).
 
-I believe it is...that's why it checks the \0 at the end of the
-string. Or are you asking about the bytes after the string?
+field-initializers -Wnonnull -Woverflow -Wvla -Wpointer-to-int-cast
+-Wstrict-aliasing -Wvariadic-macros -Wvolatile-register-var
+-Wpointer-sign -Wmissing-include-dirs -Wmissing-prototypes
+-Wmissing-declarations -Wformat=2
+686.0 checking for aarch64-gcc...
+/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc
+686.0 checking for aarch64-objcopy...
+/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-objcopy
+686.0 checking for aarch64-strip...
+/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-strip
+686.0 checking for aarch64-nm...
+/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-nm
+686.0 checking for aarch64-ranlib...
+/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-ranlib
+686.0 ./configure: line 32517:
+/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc: No such
+file or directory
+686.1 checking which extra warnings work...
+689.6 checking if compiling with clang... yes
+689.8 checking for options to compile assembly...
+689.8 checking whether -freg-struct-return works... no
+690.0 checking for options to get soft-float... no
+690.8 configure: error: could not force soft-float
 
->
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
->
-> >-      ut_asserteq(-1, linebuf[76]);
-> >+      ut_asserteq(0xff, linebuf[76]);
-> >
-> >       unmap_sysmem(buf);
-> >
+I suspect it is just that the toolchains need fiddling. I'd much
+rather get something running and iterate on it after that.
 
 Regards,
 Simon
