@@ -4,68 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B2ADD2C122
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:13:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 511D9D2C122
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:13:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F374891CD;
-	Tue,  5 Nov 2024 16:13:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9D2A18919A;
+	Tue,  5 Nov 2024 16:13:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fO5Aaftz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cuorJhng";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8C2F891C0; Tue,  5 Nov 2024 16:12:58 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 1D6B0891B2; Tue,  5 Nov 2024 16:13:12 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7AA188F77
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:12:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2110B88F77
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:13:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a9eb3794a04so133572566b.3
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:12:56 -0800 (PST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5cb6ca2a776so8389529a12.0
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:13:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730819576; x=1731424376; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730819589; x=1731424389; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=n8QzA9QkjCBHb04VNsEiRjbHPUJgqDo7VL8DaXgDkCk=;
- b=fO5Aaftz2ghlxzk7NwXYkfn1vhdwmz+mskGrP6mrQfqmorSafnq+TjHtZ6ax4g07+j
- HZkCnCk5mGxzH1HnbVUouCQnlAOrFOAqXyDYx/rwyWo9vJtyjNg9LlR0scV3CszdM2Tv
- V2hzJ7IhbbOcAR6ckxqnxN2iINgXiCMywmxbU=
+ bh=sK7vgpJI0KK9cVJYOgduJx5nvuAmCipysoyL8Rww5/8=;
+ b=cuorJhngk4AkBOAaeAhw4Nwbwg8Jlj/sjw//e/6eaFRru7vuOw1AbualBRl/eVxM4A
+ MyDUpbHQVn7LwbnKdMT2puRps2Fn4fxu5DvUKZ0BXkxUzTkqxYLAssD55eYlsSG68q5G
+ kslCITqbZcnxBtu3Nr1/Jhq3v21gCqLvO5Ycs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730819576; x=1731424376;
+ d=1e100.net; s=20230601; t=1730819589; x=1731424389;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=n8QzA9QkjCBHb04VNsEiRjbHPUJgqDo7VL8DaXgDkCk=;
- b=sJu+H6gGJxtmfbTkjq6X/54tPi287EicyO4fzPTibbODk4uVffkYwwgB9AKzbgYNmn
- cmzYslIH3qLwvlTQmS6L8LF5oMzLjH6XstUzygdWbXmWLZD2+A+MwT2l/kdhkSHE4quj
- 8dDSvQmwU2EefyVnc0NG8srLclgdvBjdUR6BT3vBPeiGbWbWRvyAsjUDl+YOnBLZaN/Z
- 0NqRl5mp/WqBsG6JIEvDtyZsbtMkO+ol0uvcAcD9vMi2p8/o72uAwrtG0RhXcLt05N/U
- DzyODXcvDBai6EAlNefQTqcAOQSwYhR6425dQqhzzajx8abg5sB/AYYS2W1qAGOc5cZE
- E2hg==
-X-Gm-Message-State: AOJu0Yx9Kr1X43ESPOImm5oiRh7gVOPaeL8YBTRpp3niYN/IVgc8mgeQ
- KqIhaF5rQn0h1WEmdlcAoR93d5ylx1waZBagWyIAVmAW/yVEmhbwxbLpfcT7R9WpL/vTErBKcgj
- eBOW7AD46flcdFmIlg1bSoFapXpoy/1RJ+NEm
-X-Google-Smtp-Source: AGHT+IE7NDMlnpb0uY8DVjTO9kKK+srSfadC4LE6Y64zj3/6dNWAk02gC04odACrUFUzE8reoGSNdN7RKx4ltuEynb4=
-X-Received: by 2002:a17:907:74d:b0:a9a:1792:f05 with SMTP id
- a640c23a62f3a-a9e3a620de8mr2396810666b.31.1730819575969; Tue, 05 Nov 2024
- 07:12:55 -0800 (PST)
+ bh=sK7vgpJI0KK9cVJYOgduJx5nvuAmCipysoyL8Rww5/8=;
+ b=eVdVyQzEGWoK8nr1/zHPuR5mc6JzzYa5Rp6gsMiFm7OfT98Q3/r0H3qqOIXWaECtpO
+ vmHzhXnzkX9O0VRSQip2tkEdEixXuZX3xK4/ggmq1vIoiHPn2Ep6897lbMUyT31maHsf
+ A/01ToriD13l7UhJjN2W8b1DEgM5CFm4pYiKqQEXoXT82BH/2a+oqJHF3aENjNTsuOwt
+ bw2DCwchGEumLiRPPyisdJKCtMwC5TwZIJMmE6aaSXAYuNVG9ME20FHtIn6Hcmb0YUoF
+ 6f+n5bP1fRXueZ562xrfFBcTpjRhKjdPSH2e4JxbgD8MvUH0NCekmd3nvLJ5V5UlZpLQ
+ aVrA==
+X-Gm-Message-State: AOJu0YxXlrH1u0MuWPIocT3cOhX+v2vitUl5Qhz9n4PAGAe69TdLt0M0
+ 9LJnDmVDmsytxLwx68RphDRJR4E/7Q+gyOf8P5E/L/EhZv3AmimKMNzVS4Wn+kQF3zvXnD/Jw0w
+ I081wICWkCydcVHzz1BgIjpajvB8zi+ZjFpYJ
+X-Google-Smtp-Source: AGHT+IEw4+7mDNf2HadfNh3bnsIDCIj+PGDFkUybIwZvlIUTBU9zqeG0wasAjcv4NE7wBwv5F5NVve5gBwHfomJfbzw=
+X-Received: by 2002:a17:907:9728:b0:a9a:4597:a7f3 with SMTP id
+ a640c23a62f3a-a9e3a7f435bmr2441484666b.62.1730819589481; Tue, 05 Nov 2024
+ 07:13:09 -0800 (PST)
 MIME-Version: 1.0
-References: <CAFLszTi9XE8oHuZCYrj85UVXVEYFDomqK=KrO5E-fTAn9_f=0w@mail.gmail.com>
- <f3b65417-d35d-49c7-95de-b1db7b283e11@linaro.org>
-In-Reply-To: <f3b65417-d35d-49c7-95de-b1db7b283e11@linaro.org>
+References: <20241104133954.840994-1-sjg@chromium.org>
+ <20241104133954.840994-2-sjg@chromium.org>
+ <183A3E20-0AA1-4E07-A376-5BE270080357@gmx.de>
+In-Reply-To: <183A3E20-0AA1-4E07-A376-5BE270080357@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Nov 2024 08:12:43 -0700
-Message-ID: <CAFLszTgh1QbrirTi_zG7upVHG7OqHxStRFFAVRCEsPqkQpAMmg@mail.gmail.com>
-Subject: Re: wget bug report
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 5 Nov 2024 08:12:57 -0700
+Message-ID: <CAFLszTig+U0f9eHOOzkRUfcv2BcjWSG+xk10Oe+JWw_5FvGH1g@mail.gmail.com>
+Subject: Re: [PATCH 1/9] sandbox: efi_loader: Correct use of addresses as
+ pointers
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,45 +86,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+Hi Heinrich,
 
-On Tue, 5 Nov 2024 at 05:12, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+On Mon, 4 Nov 2024 at 13:37, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Hello Simon,
 >
-> On 10/27/24 17:16, Simon Glass wrote:
-> > Hi Jerome,
+>
+> Am 4. November 2024 14:39:45 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> >The cache-flush function is incorrect which causes a crash in the
+> >remoteproc tests with arm64.
 > >
-> > Just something I noticed earlier...when running 'ut lib' I see this
-> > failure on sandbox:
+> >Fix both problems by using map_sysmem() to convert an address to a
+> >pointer and map_to_sysmem() to convert a pointer to an address.
 > >
-> > test/cmd/wget.c:215, net_test_wget(): 0 == run_command("wget
-> > ${loadaddr} 1.1.2.2:/index.html", 0): Expected 0x0 (0), got 0x1 (1)
+> >Also update the image-loader's cache-flushing logic.
+> >
+> >As discussed some time ago, it would be good to update the way
+> >EFI_LOADER uses addresses and pointers, particularly around memory
+> >allocation. Ideally we would use addresses internally, with pointers
+> >only exposed via the external API, even where pointers are in fact
+> >u64 values.
 >
-> The reason is:
+> No, we should get rid of sandbox virtual addresses where possible, e.g. in LMB.
 >
-> $ make sandbox_defconfig
-> $ make -j$(nproc)
-> $ ./u-boot -c "ut lib"
-> [...]
-> Net:         eth_initialize() No ethernet found.
+> They are are only relevant for the sandbox's command line interface and device-tree.
 >
-> I don't know how sandbox is supposed to instantiate ethernet devices?
+> This will minimize the number of conversions, which only satisfy the needs of the sandbox and have no relevance on real systems including QEMU.
+>
+> Do not wag the dog with the tail.
 
-If you try it before your changes you will see what it is supposed to
-do. There is a sandbox network device and it can be used to send and
-receive data within U-Boot itself, for testing purposes.
+For now I'll just remove that comment from this commit. We use ulong
+in U-Boot for addresses. Everything works fine and we only get in
+trouble when we use a ulong as a pointer. Let's discuss this in more
+detail at some point.
 
 >
+> Best regards
 >
-> > Also, since it is testing a command and is in test/cmd it really
-> > should be in the 'cmd' test suite, not 'lib'.
+> Heinrich
 >
-> Agreed. I've posted a patch for that:
-> https://lore.kernel.org/u-boot/20241105120653.99438-1-jerome.forissier@linaro.org/T/#u
-
-Thanks.
+> >
+> >Signed-off-by: Simon Glass <sjg@chromium.org>
+> >Fixes: 3286d223fd7 ("sandbox: implement invalidate_icache_all()")
+> >---
+> >
+> > arch/sandbox/cpu/cache.c              |  8 +++++++-
+> > drivers/remoteproc/rproc-elf-loader.c | 18 +++++++++++-------
+> > lib/efi_loader/efi_image_loader.c     |  3 ++-
+> > 3 files changed, 20 insertions(+), 9 deletions(-)
+> >
 
 Regards,
 Simon
