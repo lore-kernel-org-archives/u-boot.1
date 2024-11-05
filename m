@@ -4,68 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBC13D31768
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 17:03:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C401CD3176B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 17:22:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E85B488CD9;
-	Tue,  5 Nov 2024 18:03:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 20EFD891D2;
+	Tue,  5 Nov 2024 18:22:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D7S3mAeA";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A11A8904C; Tue,  5 Nov 2024 18:03:54 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EA22D891CD; Tue,  5 Nov 2024 18:22:11 +0100 (CET)
+Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::1909])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32FDD8855C
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:03:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E80898904C
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:22:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9abe139088so841495866b.1
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 09:03:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730826231; x=1731431031; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=U3UnbBOoO3ihOFFR/clQ4yBZ/ky7AyAfEbhBCwGMFi8=;
- b=D7S3mAeAyqhUXzF4csGgriBZqeDkmyxpyeQH59Cdz3S3335HdNtkY4vD0IcJL66I37
- SprYuQut9y5TE6G3/PB+YQS2x8U6okigUJ3xmAJY5JL3kL4s+MvHntVTNvZEYgaVSU0w
- ySq/2OSpBtaJMaQfCzyCZCBqjtK2p7mDMUZsw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730826231; x=1731431031;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=U3UnbBOoO3ihOFFR/clQ4yBZ/ky7AyAfEbhBCwGMFi8=;
- b=IYfCnWZ8ZTVtIdsZCPVRAGM1q0qkplbTrpjd/eG+3Z1GtDHCn56g9yVJSUZlS+Mzf0
- wBuOoRkRkU3D7RVJ2xyQ4egnuiGeWvdY2N1P1hdRmBy6v1qAJ4ghWU9kqd32G1TpJeqA
- 0L2p4ZflTc4OfGvGt4oooCCRsaIkgDfooIKCmUHQ8gXJVJoW8y3eV6lNgZKx2q2i43uK
- DL6nQ030QqGDlny3x/zfdrEnYZDG0LW2dfjUllI2AedB8mfaAI5IPN7CH27CynNi6a0d
- jOsfCqQLqiqxYO9CpuYJJ+or/P2uTMEijyCRrTfRvOt17/0cly9bzyIBXq3JsPAn5wqB
- ObEA==
-X-Gm-Message-State: AOJu0Yyj/uAOxzQHEMfJAoD9aJhZvHIOPUP2xsyCwVaDhDdeA4yd02v5
- wKhm2jFhfexR5oEKZhPfawLOc1CCjgr96t0CzZ8WIElaNqHtIiL6CGUF45A5n7WqUkSqCgcqCXT
- SIOU16o4eg7zJkZ6G/y5Tu8olW9oEmoQS9UHX
-X-Google-Smtp-Source: AGHT+IFWUE50VDA5Fze/6k5htlSQSRHO56RshIIw/MmWcBmEJZAavs2yJStPAEOnQpH+cQg97qwiDKl0qBKugFpkOQI=
-X-Received: by 2002:a17:907:60d6:b0:a99:fb10:1269 with SMTP id
- a640c23a62f3a-a9de5ce4ad3mr3867678366b.17.1730826231424; Tue, 05 Nov 2024
- 09:03:51 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4XjZrx4Z0VzTv7;
+ Tue,  5 Nov 2024 18:22:09 +0100 (CET)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4XjZrw50ZBzw6J; Tue,  5 Nov 2024 18:22:08 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH next RFC 0/5] rockchip: panic() when DRAM init fails
+Date: Tue, 05 Nov 2024 18:21:54 +0100
+Message-Id: <20241105-rk3399-dram-init-v1-0-1e29acdf0966@cherry.de>
 MIME-Version: 1.0
-References: <20241105165357.620796-1-trini@konsulko.com>
-In-Reply-To: <20241105165357.620796-1-trini@konsulko.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Nov 2024 10:03:39 -0700
-Message-ID: <CAFLszThU2T2A4DG-=isO6vP=149Lw6jQaB3vs8ggJ2H8CcDwBg@mail.gmail.com>
-Subject: Re: [PATCH RFC v1] Dockerfile: Have "sandbox" build with i386
- toolchain not x86_64 toolchain
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADJUKmcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxNDQwNT3aJsY2NLS92UosRc3cy8zBJdIwNzYyPTZKMUy+REJaC2gqLUtMw
+ KsJHRSnmpFSUgwSA3Z6XY2loAt3FSW28AAAA=
+X-Change-ID: 20241105-rk3399-dram-init-207325c2d9ca
+To: Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Dragan Simic <dsimic@manjaro.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.2
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,63 +63,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+I am the unfortunate owner of an RK3399 Puma that is failing DRAM init
+every now and then with the following cryptic error message:
+"""
+pctl_start: Failed to init pctl channel 0
+"""
 
-On Tue, 5 Nov 2024 at 09:54, Tom Rini <trini@konsulko.com> wrote:
->
-> A long time ago, we had to use "i386" and "x86_64" toolchains for our
-> x86 platforms, depending on the target. We then moved to being able to
-> use the single "i386" toolchain to support all x86 platforms. At the
-> same time, we had been building sandbox with our "x86_64" toolchain in
-> CI. When x86 switched to being able to use a single toolchain we did not
-> update our CI buildman file to match. Do this now as we want to ensure
-> that sandbox is built with the same compiler version the rest of our
-> platforms are and not the host one.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Simon Glass <sjg@chromium.org>
->
-> I'm posting this as an RFC to start the discussion as when I mentioned
-> this to Simon on IRC, he was very much not in agreement.
->
-> My main argument is this, sandbox needs to use the same toolchain that
-> we compile (virtually) all other platforms with as one of the points is
-> to be able to catch warnings and compiler behavior changes as soon as
-> possible in our CI. And just like how developers can use
-> distribution-provided toolchains today, nothing changes in that regard,
-> we only make CI be more consistent now.
+When it fails, the current logic is implemented in such a way that the
+board enters an infinite while loop. This is not ideal for embedded
+systems that are not easily accessible and also an issue when having
+devices in a CI lab for example.
 
-OK, that makes some sense to me, actually. It isn't the toolchain that
-people will be using, but catching things earlier seems good.
+Therefore, let's simply panic if the DRAM fails to init. This was tested
+only on RK3399 Puma, similar changes may be required for other SoCs to
+properly propagate the errors.
 
-The main concern I have is that we are not testing sandbox on the
-toolchain that everyone will be using. But I haven't noticed failures
-in CI which I cannot repeat locally, so we can cross that bridge when
-we come to it.
+While this is all but a work-around instead of fixing the DRAM init
+sequence, I believe it is important for resilience of devices in the
+field.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Marking this as RFC because:
+1) panic()s for all Rockchip SoCs but only tested on RK3399
+2) unsure about error return values (ENODEV and the likes), not sure
+   what would be better than that though :/
 
-> ---
->  tools/docker/Dockerfile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> index 967ac89fbde8..e158bab6e570 100644
-> --- a/tools/docker/Dockerfile
-> +++ b/tools/docker/Dockerfile
-> @@ -280,7 +280,7 @@ RUN /bin/echo -e "[toolchain]\nroot = /usr" > ~/.buildman
->  RUN /bin/echo -e "kernelorg = /opt/gcc-13.2.0-nolibc/*" >> ~/.buildman
->  RUN /bin/echo -e "\n[toolchain-prefix]\nxtensa = /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-" >> ~/.buildman;
->  RUN /bin/echo -e "\n[toolchain-alias]\nsh = sh2" >> ~/.buildman
-> -RUN /bin/echo -e "\nsandbox = x86_64" >> ~/.buildman
-> +RUN /bin/echo -e "\nsandbox = i386" >> ~/.buildman
->  RUN /bin/echo -e "\nx86 = i386" >> ~/.buildman;
->
->  # Add mkbootimg tool
-> --
-> 2.43.0
->
+Note that one can still hang() if they want by setting PANIC_HANG
+symbol.
 
-Regards,
-Simon
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Quentin Schulz (5):
+      ram: rk3399: allow to fail DRAM init if pctl_start fails
+      ram: rk3399: fail probe if DRAM init failed
+      rockchip: spl/tpl: panic when DRAM init failed
+      ram: rk3399: merge two consecutive ifs with same condition
+      ram: rk3399: fail DRAM init when pctl channel init fails instead of hanging
+
+ arch/arm/mach-rockchip/spl.c        |  7 +++----
+ arch/arm/mach-rockchip/tpl.c        |  6 ++----
+ drivers/ram/rockchip/sdram_rk3399.c | 24 +++++++++++-------------
+ 3 files changed, 16 insertions(+), 21 deletions(-)
+---
+base-commit: 56accc56b9aab87ef4809ccc588e1257969cd271
+change-id: 20241105-rk3399-dram-init-207325c2d9ca
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
+
