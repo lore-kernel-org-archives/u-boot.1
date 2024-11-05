@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE866D2B950
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:02:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA85CD2B950
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:02:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F3E9891E3;
-	Tue,  5 Nov 2024 17:01:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CC2D1891E0;
+	Tue,  5 Nov 2024 17:01:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ZGnnKWzl";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="a4w5WT5O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18145891E0; Tue,  5 Nov 2024 17:01:33 +0100 (CET)
+ id E4403891EB; Tue,  5 Nov 2024 17:01:37 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31C1D891E3
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:01:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76965891DD
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:01:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,12 +28,12 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1730822480; bh=2/vo3C9yPQPsY7QBOf42eMizsXQ9HSOzAJEupnrrV10=;
- b=ZGnnKWzl4odmS3OIj/mvy/zU8D7yPiSc5rWHryB9wr+pIS4SXOs5XcYEJh5j8dNbRCCNd1y1+
- 2ILldGTGOie2/1BumaElx0Y8XMXeJAPaY/eNY3C54l9eBTPQ2EZNiavtxmq5m2EY21RzlsgZI+W
- dlx5Sww48l4nND41K6xqi0Pc9FLaq1rH/ZjXSS/DTQlX2L8vO41lfsDUk3wukr9QNxpRfB1hN74
- RW27DuY7YiqAM5/SCUgpQXzaV4uJu25tnS9Tp7g3d2deCB5K3Y8GrGIPU6gm07RIhhz70a38KHO
- 2XDEc2Xlrkb4QYSRdiSYes9VZWquLq7pJ9owULT1UTqQ==
+ t=1730822485; bh=Q9B5UqICLjFamRUIU82yQ403bZqurvQ+pPCAqEkYvcw=;
+ b=a4w5WT5OL0jXyvCWRjI6Y2mCeUgpGI59XyrTEEbBQjlLVKySGCYwdHt48/07U5VHLYWXVnWWn
+ RcBW3krbe7NxgRgxsgtk4G300HZpZjJIVmJzkBQGvsi0bqMHqHzI5a2/qD7wAtl5dwvMNoMB++u
+ HRcIY9aRvNF8yUzYyRanwNiy/yz4VNSmUfiROiZ6pMORYSCDLv2B8MCfwDvdl8dTgAUgUEQGjyJ
+ nELQmsiAWgIJjj0acYsTBjfdBfs0HiBqcfNcbPMeaEF456VUTMn3kUafA9i5h5sK7CwNY/uNMht
+ VRQpbIzSrP2dtZL1EM0xE4IPMXWdK3aXC6EcEC6/PFvQ==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
@@ -41,10 +41,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Jonas Karlman <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH 05/13] rockchip: rk3288-tinker: Include mmc nodes in pre-reloc
- for env load
-Date: Tue,  5 Nov 2024 16:00:28 +0000
-Message-ID: <20241105160054.1373319-6-jonas@kwiboo.se>
+Subject: [PATCH 06/13] rockchip: rk3288-tinker: Set cpuid and serial env var
+Date: Tue,  5 Nov 2024 16:00:29 +0000
+Message-ID: <20241105160054.1373319-7-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241105160054.1373319-1-jonas@kwiboo.se>
 References: <20241105160054.1373319-1-jonas@kwiboo.se>
@@ -56,7 +55,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  207.246.76.47
-X-ForwardEmail-ID: 672a414fff3e144e4725e0ea
+X-ForwardEmail-ID: 672a4153ff3e144e4725e100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,90 +72,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Include mmc related nodes in U-Boot proper pre-reloc phase to ensure
-environment can be loaded from mmc devices.
+Enable MISC_INIT_R and ROCKCHIP_EFUSE to read cpuid from efuse and set
+the cpuid# and serial# env vars.
+
+Change to read mac address from eeprom in rockchip_early_misc_init_r()
+to ensure the ethaddr env var is set before rockchip_setup_macaddr() try
+to set ethaddr based on cpuid.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3288-tinker-s-u-boot.dtsi | 5 +++++
- arch/arm/dts/rk3288-tinker-u-boot.dtsi   | 7 +++++++
- 2 files changed, 12 insertions(+)
+ board/rockchip/tinker_rk3288/tinker-rk3288.c | 2 +-
+ configs/tinker-rk3288_defconfig              | 2 ++
+ configs/tinker-s-rk3288_defconfig            | 2 ++
+ 3 files changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/rk3288-tinker-s-u-boot.dtsi b/arch/arm/dts/rk3288-tinker-s-u-boot.dtsi
-index a782f2f9804a..614d47ce1801 100644
---- a/arch/arm/dts/rk3288-tinker-s-u-boot.dtsi
-+++ b/arch/arm/dts/rk3288-tinker-s-u-boot.dtsi
-@@ -15,20 +15,25 @@
+diff --git a/board/rockchip/tinker_rk3288/tinker-rk3288.c b/board/rockchip/tinker_rk3288/tinker-rk3288.c
+index e966e9f201ab..dfd553d1aa5f 100644
+--- a/board/rockchip/tinker_rk3288/tinker-rk3288.c
++++ b/board/rockchip/tinker_rk3288/tinker-rk3288.c
+@@ -22,7 +22,7 @@ static int get_ethaddr_from_eeprom(u8 *addr)
+ 	return i2c_eeprom_read(dev, 0, addr, 6);
+ }
  
- &emmc {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
+-int rk3288_board_late_init(void)
++int rockchip_early_misc_init_r(void)
+ {
+ 	u8 ethaddr[6];
  
- &emmc_bus8 {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &emmc_clk {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &emmc_cmd {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &emmc_pwr {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
-diff --git a/arch/arm/dts/rk3288-tinker-u-boot.dtsi b/arch/arm/dts/rk3288-tinker-u-boot.dtsi
-index 4f230739f1c3..7568b1495341 100644
---- a/arch/arm/dts/rk3288-tinker-u-boot.dtsi
-+++ b/arch/arm/dts/rk3288-tinker-u-boot.dtsi
-@@ -33,6 +33,7 @@
- 
- &pcfg_pull_none_drv_8ma {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &pcfg_pull_up {
-@@ -41,26 +42,32 @@
- 
- &pcfg_pull_up_drv_8ma {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &sdmmc {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &sdmmc_bus4 {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &sdmmc_cd {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &sdmmc_clk {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &sdmmc_cmd {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &uart2 {
+diff --git a/configs/tinker-rk3288_defconfig b/configs/tinker-rk3288_defconfig
+index aff820ebfdda..851c312d4db5 100644
+--- a/configs/tinker-rk3288_defconfig
++++ b/configs/tinker-rk3288_defconfig
+@@ -29,6 +29,7 @@ CONFIG_USE_PREBOOT=y
+ CONFIG_DEFAULT_FDT_FILE="rk3288-tinker.dtb"
+ CONFIG_SILENT_CONSOLE=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_NO_BSS_LIMIT=y
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+@@ -63,6 +64,7 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
++CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_I2C_EEPROM=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+diff --git a/configs/tinker-s-rk3288_defconfig b/configs/tinker-s-rk3288_defconfig
+index 6aef775a5717..2269d04ee644 100644
+--- a/configs/tinker-s-rk3288_defconfig
++++ b/configs/tinker-s-rk3288_defconfig
+@@ -29,6 +29,7 @@ CONFIG_USE_PREBOOT=y
+ CONFIG_DEFAULT_FDT_FILE="rk3288-tinker-s.dtb"
+ CONFIG_SILENT_CONSOLE=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_NO_BSS_LIMIT=y
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+@@ -64,6 +65,7 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
++CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_I2C_EEPROM=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
 -- 
 2.46.2
 
