@@ -4,78 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A18A9D2C13E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:44:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0552AD2B941
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:47:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3EE88913F;
-	Tue,  5 Nov 2024 16:44:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9354788F48;
+	Tue,  5 Nov 2024 16:47:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f0ZJRoh/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qj3qgfO7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42CB488D35; Tue,  5 Nov 2024 16:44:55 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id EF94588F48; Tue,  5 Nov 2024 16:47:49 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0637891D0
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:44:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0D4D88EC0
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:47:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7b15416303aso408901585a.1
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:44:52 -0800 (PST)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b147a2ff04so428979185a.3
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:47:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730821491; x=1731426291; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730821667; x=1731426467; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=x3lhu+qxfbIvYCpChl6xJ257fR93tLz84uVZI7w+ZSY=;
- b=f0ZJRoh/A9fEFgj/Es8buqFw7NDbMDIHtNRVwZwkYyMQkMsoMADiLx1fQI2IJ3IAzQ
- HylNI/mnoGdo8HongYpgzqA1t6Y58pev7la0ES4+l1NNLyGX2cAed0YeRskZEFckoB7O
- IAzvtufhGMdoCCkwSMoBBVArGvkblNn+JH0GE=
+ bh=Z/rpo/wE4bvs+iWQTCUBr3li3CArZO4t7JmXl7yoCm8=;
+ b=Qj3qgfO7bYHEFvy51YrbGDDBXwWJJurlsjxvT67Esv62Yh2qRd5Pis3xQDtxJW3rDW
+ 2wyYvWi217Dx+4fignoFBd9paqHGpn/MKTT/JJl/rIMBUbI3MAf8tQxgv9v2BkFaMjKj
+ Bf5Lkw+SrpI5hAE/fH7TEZq1ozHF/iuBNBxSw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730821491; x=1731426291;
+ d=1e100.net; s=20230601; t=1730821667; x=1731426467;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=x3lhu+qxfbIvYCpChl6xJ257fR93tLz84uVZI7w+ZSY=;
- b=Hry9yYuTyn1EUbNEGqxu6uH/SUBLs1ztP+4DhuPZ3gdlH2McukVj1Tx4+dO/Afmfof
- /WXlUzIP3KgRB3mASiCnhtqm8LUoAamDZPp6ryEHVM4iYTlRXV1VOGWD//mWjvGyaCEv
- KHCwQ/pfiTOFRBAdus/kSbzBgHgwlSym9T3kyNq6HS0onzFZRHAIgs/hbIKRvnHYBJlB
- ozU4tHxjuuy7EpS3T1f5gVR2Heomdl/Iy7D4GZoxXJG6XbP/lmn2xwxzZugOD2MNFjB2
- sNututyv1zooG/qFXryeqw/Yg6+WfLzTTqWpMvdMImxwE8OiccW1UJQDnxP15d1F3DgC
- XaKA==
-X-Gm-Message-State: AOJu0YxfkX/tuWdJPg0nQ923l3n9mUqK4JEA6yu9QU341+G72mNTEDkg
- ISDqt8woCnV/NUeM1GtoJ3oyIDh5L0RalJo88saGWO1QZuqEyDHGbiGIIG7zkdQ=
-X-Google-Smtp-Source: AGHT+IFa6MR+2tz0wS90i71/p6Ksl564nSZt1vVjFOkctPSHxtYdygjcKYvJkl9Dg8Pp/n7F+5sLXQ==
-X-Received: by 2002:a05:620a:190c:b0:7b1:3fe8:8f11 with SMTP id
- af79cd13be357-7b2fb982995mr2499988485a.33.1730821491573; 
- Tue, 05 Nov 2024 07:44:51 -0800 (PST)
+ bh=Z/rpo/wE4bvs+iWQTCUBr3li3CArZO4t7JmXl7yoCm8=;
+ b=EIZkQo32Vmf01GpJdIDLqWpjsH9U1s9w9gtOELwlD9KLYzj3NGHyBJgmUqQ1T4cd/j
+ FxMwow1cNISK9RyuaJP6iwla6+gZF2hfAwwxTsjU1jMOYzlGzcaCEA0sJbc7RGtQjrgX
+ 47Dr7xWZiczi1o+sPfT446IfVkGeiPhq94ASlHxvoK9nIctmbzOkF09xRSZ6j1iCgs2z
+ 2IEbMetJIusMhcOrj1aLKuEqEHxzoW/63p41xa+542V+LcuLcs2erln4i0t3WgE7hqYC
+ jftTo0X4pPWMb5wcV+RJQqHm74GBo7tQ+py12UT8iQicC2aOrrpp0zmHb8NALgkM6dal
+ AN0w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXBNRhFxsJXLRTccV+QTW3CnsmsR48FHVnTdinJmps9hBEho7/KrTUnwa+vCQ0zr8Ts1C6KA3Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YzbiS7UEd1dRJzhwGsIv+5zVXLu4VLgQUFLHYbyzH6ppPCVT2oO
+ /3+/jdpzPgwv4olvdJcY9LQ+KmrGVGGCtRUzqZjKcpW2jqgkSYlIyKZHEsZm2vI=
+X-Google-Smtp-Source: AGHT+IEkfw7X8PUrF79pUlZXTVOJtW6A2Vy9aKEZbslT2SscWFWPaSOD94kMqy715H9L0vKPUIWk0g==
+X-Received: by 2002:a05:620a:4409:b0:7b1:43e2:712e with SMTP id
+ af79cd13be357-7b2fb979a54mr1946878885a.17.1730821666275; 
+ Tue, 05 Nov 2024 07:47:46 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b2f3a1172csm533779085a.71.2024.11.05.07.44.49
+ af79cd13be357-7b2f3a6fd30sm535033885a.88.2024.11.05.07.47.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Nov 2024 07:44:50 -0800 (PST)
-Date: Tue, 5 Nov 2024 09:44:47 -0600
+ Tue, 05 Nov 2024 07:47:45 -0800 (PST)
+Date: Tue, 5 Nov 2024 09:47:41 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH 5/9] docker: Drop grub for arm64
-Message-ID: <20241105154447.GH3600562@bill-the-cat>
-References: <20241104133954.840994-1-sjg@chromium.org>
- <20241104133954.840994-6-sjg@chromium.org>
- <20241104135632.GK3600562@bill-the-cat>
- <CAFLszTi4YEqRCVJ=vRTVHtSP=Ux2C8W=vg=3+VedVAdZuef3+A@mail.gmail.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
+ Baruch Siach <baruch@tkos.co.il>, Christian Marangi <ansuelsmth@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v12 00/13] net: tcp: improve tcp support in legacy stack
+Message-ID: <20241105154741.GI3600562@bill-the-cat>
+References: <20241028143143.1807305-1-mikhail.kshevetskiy@iopsys.eu>
+ <20241104233227.GA3600562@bill-the-cat>
+ <CAFLszThXiK=EzrUStsOBiSQ_pe1-Vdwtg-238BjQd91SMBym7A@mail.gmail.com>
+ <CALeDE9M1PDFmm-oZvSEGwBaN_J77CSKUa8kbkEPQf9XATv8STg@mail.gmail.com>
+ <CAFLszTjs-7uWNWdaZjhQe-rA5z0qSZxiFeX+WgFofYemW6qiwg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tNDkEPd2eLhpgWh7"
+ protocol="application/pgp-signature"; boundary="AO7u54M/3qcMIF7w"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTi4YEqRCVJ=vRTVHtSP=Ux2C8W=vg=3+VedVAdZuef3+A@mail.gmail.com>
+In-Reply-To: <CAFLszTjs-7uWNWdaZjhQe-rA5z0qSZxiFeX+WgFofYemW6qiwg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,83 +110,88 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---tNDkEPd2eLhpgWh7
+--AO7u54M/3qcMIF7w
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 05, 2024 at 08:15:05AM -0700, Simon Glass wrote:
-> Hi Tom,
+On Tue, Nov 05, 2024 at 08:15:25AM -0700, Simon Glass wrote:
+> Hi Peter,
 >=20
-> On Mon, 4 Nov 2024 at 06:56, Tom Rini <trini@konsulko.com> wrote:
+> On Tue, 5 Nov 2024 at 06:10, Peter Robinson <pbrobinson@gmail.com> wrote:
 > >
-> > On Mon, Nov 04, 2024 at 06:39:49AM -0700, Simon Glass wrote:
-> >
-> > > This doesn't build on arm64 at present, so drop it for now. We only
-> > > expect to run sandbox tests, so perhaps it isn't needed.
+> > On Tue, 5 Nov 2024 at 13:03, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
+> > > Hi Tom,
 > > >
-> > >  tools/docker/Dockerfile | 7 +++++--
-> > >  1 file changed, 5 insertions(+), 2 deletions(-)
+> > > On Mon, 4 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Mon, Oct 28, 2024 at 05:31:30PM +0300, Mikhail Kshevetskiy wrote:
+> > > >
+> > > > > Legacy TCP stack is bad. Here are some of the known issues:
+> > > > >  * tcp packet from other connection can break a current one
+> > > > >  * tcp send sequence always starts from zero
+> > > > >  * bad tcp options processing
+> > > > >  * strange assumptions on packet size for selective acknowledge
+> > > > >  * tcp interface assumes one of the two scenarios:
+> > > > >      - data downloading from remote host to a board
+> > > > >      - request-response exchange with a small packets
+> > > > >    so it's not possible to upload large amount of data from the
+> > > > >    board to remote host.
+> > > > >  * wget test generate bad tcp stream, test should fail but it pas=
+ses instead
+> > > > >
+> > > > > This series of patches fixes all of the above issues.
+> > > >
+> > > > I know Peter asked on the last one, but I want to ask as well. With=
+ lwIP
+> > > > merged, why do we want to add features to the old stack? I can see
+> > > > fixing issues, but not adding new functionality as well. Thanks.
+> > > >
+> > >
+> > > Let's apply this. It has tests and the old stack is still used by a
+> > > lot of boards. At present lwip is only used on one. There is more work
+> > > to do on the new stack, including finishing off the sandbox
+> > > implementation.
 > >
-> > What is the build failure? Depending on what other prospects for arm64
-> > build hardware come through I'm hoping to look harder at more build
-> > options, not just sandbox (but of course, QEMU shouldn't matter what the
-> > host is).
+> > I agree with applying the fixes pieces, I do not agree with apply the
+> > HTTP server pieces. This series should actually be split into 3
 >=20
-> field-initializers -Wnonnull -Woverflow -Wvla -Wpointer-to-int-cast
-> -Wstrict-aliasing -Wvariadic-macros -Wvolatile-register-var
-> -Wpointer-sign -Wmissing-include-dirs -Wmissing-prototypes
-> -Wmissing-declarations -Wformat=3D2
-> 686.0 checking for aarch64-gcc...
-> /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc
-> 686.0 checking for aarch64-objcopy...
-> /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-objcopy
-> 686.0 checking for aarch64-strip...
-> /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-strip
-> 686.0 checking for aarch64-nm...
-> /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-nm
-> 686.0 checking for aarch64-ranlib...
-> /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-ranlib
-> 686.0 ./configure: line 32517:
-> /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc: No such
-> file or directory
-> 686.1 checking which extra warnings work...
-> 689.6 checking if compiling with clang... yes
-> 689.8 checking for options to compile assembly...
-> 689.8 checking whether -freg-struct-return works... no
-> 690.0 checking for options to get soft-float... no
-> 690.8 configure: error: could not force soft-float
+> But what is your objection?
 >=20
-> I suspect it is just that the toolchains need fiddling. I'd much
-> rather get something running and iterate on it after that.
+> I would much rather just apply it ASAP. It has already gone through 12
+> versions, during which lwip has been prepared and applied.
 
-That's the toolchain that should be used to build sandbox, so you should
-figure out what's going on. And I think you missed fiddling with
-~/.buildman so that it sets the sandbox toolchain to the right one and
-not x86_64.
+Yes, and to be blunt, the first bit of feedback I provided was "can you
+please look at the lwIP series instead?".
+
+> The HTTP server is a useful feature and we should be able to use it to
+> test networking in U-Boot in a more self-contained and performant
+> manner.
+
+I very much do not want to add more features to the legacy TCP stack.
+We're likely, long term, to still need some cut-back version of the old
+stack for the limited SPL cases.
 
 --=20
 Tom
 
---tNDkEPd2eLhpgWh7
+--AO7u54M/3qcMIF7w
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcqPW8ACgkQFHw5/5Y0
-tyxxAAwAj4ZjLwmEV8lnYkBuD+VyEx9U51XxphD70eEVwFwjxuA30hdS7FCPXbKL
-K05981FwchGLhEqpKmiElingg2N2e0hQZWd2v7bXN7UcDZypKhY9b4aVX4BDOkkH
-hU+MqVTQMX0Mr/8CJowL4ykwzIIBXJyc/V8R9zmd4AtxL/A2ivCVhSFa50VtDtwy
-ACCmEATvpwCBWzopWYywG/LXV5ZlLJ2454tw/Z53cNvDjk5ZL/VNIJuBfNPT1sK1
-ncdXh0a/F6WPbGveVBKre3l0lmiVO3MtBoGoHX36fKhhjki42Po16RNtvF2WYWO3
-j81CZIe3unU+TbjenLFTuEKUnqJ1I59Fv8mx+t2tZco3c5y9VivztI78+elroC/d
-m4wzEe7M1awdNqxKgguQp0TkUbUcClSWxXsCw8EY9F87XZUI2c+p+oXkRFGBCQ+i
-p1rhoOyxxY0/vTdwp4m39hHYmcI4PPIQIOwPyvNGoaSrv7XQ16RfEJtMSAxOkQns
-ZD0eOpc8
-=bo8A
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcqPh0ACgkQFHw5/5Y0
+tyxzDQv/YwZEPYa4U0gdN3WJ//kZBi0TbBMsZkpDCtlKoZpLbtB37A7Njwtt2ouN
+fnoLtP+RjBvCwwNAH5h4wNYOoKSemLgMwj68HyBROsFc6Czoycm+5trm4lhkoz8m
+JKEe+zzoSD3KLKFbFMncyy97HZZrbEdC8Zkbp38kjR/8bB7OCP4OukgcM/eim78a
+pXFZGMCynQtX5qKtra+GpiJsjJVafEfOqm7rQcwIG5/Gd/kofgsmHYI2Hmn90ENC
+JIcBIiLLToNHlFkpsGe2K/SnL56nROtC0syfYf2YMxAzlNL/UAD1upsXUqyyr1t9
+vO2TtvDZv9tP1McVaVXIe73+aSc/7skc+B+SAbCKr5lFnfQSEReaOWJT9rS+t7vy
+a4vcpVk5sAQQbXfrp0GpBqdUepi6w4HS2b7EMHYiKzlHVSaXKq71xLzwl+RM9y4f
+ICoAl4LYMhte+ILdwM+nRu8EZ91tY/UuKd5t4k9cErIsk3gDjyXw5c7E3v0vjUin
+12RZo2tx
+=LAOu
 -----END PGP SIGNATURE-----
 
---tNDkEPd2eLhpgWh7--
+--AO7u54M/3qcMIF7w--
