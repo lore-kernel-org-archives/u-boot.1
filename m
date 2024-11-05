@@ -4,73 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08DBED2B92E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 14:13:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C18ABD2B92F
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 14:17:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74F8489000;
-	Tue,  5 Nov 2024 15:13:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 15A3A89156;
+	Tue,  5 Nov 2024 15:17:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="i+J6E3Rk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YBS3V6sK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A3A98900E; Tue,  5 Nov 2024 15:13:08 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id C859D8912C; Tue,  5 Nov 2024 15:17:20 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B776488EDE
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 15:13:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A94489000
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 15:17:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2fb3da341c9so51688071fa.2
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 06:13:06 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7b147a2ff04so421503985a.3
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 06:17:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730815986; x=1731420786; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t2rhwoD+2YIn3hExXcWviQ+I+1yGTnm28Q8a9h5ppbw=;
- b=i+J6E3RkGkX07blyGxsQNO3Vkk5MD8VRdOf7aRdqp6OcfgqCtQrMahWldtOduN/y49
- QNGhkRREDTlQT/wWV6CIQFXYo9nN+gDtsOJkUZY+7eOPZ2SM2d+q7Un6xRL1VposOoAR
- 9j01PzBmaz7/+cRFI6w4OYXkIJ9PtPL1bmS4EooWWydbdWnBvv+p1gkPndUEaXpE5PjB
- Q2inR2T9u6AeZwLx+Wz21obgsA02Jhd+C74acjomXo76MTcIZQzt8FutNI5BB25P2hpU
- Xf9CmWZqV7yEs9EwCq8+29O6twp97x3U9KC771uKSCLQUComPSYxPH3dgnZXk1nRbeJf
- jVOQ==
+ d=konsulko.com; s=google; t=1730816237; x=1731421037; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8msJYFmmT7Bwwpr/gUwUON79nyAFuwkww/7p0OvY8/I=;
+ b=YBS3V6sKmJtDaPrI/zsrhTTs9NtFg9UJg1z09d/niuGVnZQBUSLXZw6f0bxIq5HKRv
+ 7wXn0QBuknRi//d4Wxckg+k98mbLrXNB98WAR2ZVSCPDVyCNQIExiwXYWNPLcSbFVlWx
+ FisoBs071UsiSqxInO4Ddip+mocxGXuA26Fnc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730815986; x=1731420786;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t2rhwoD+2YIn3hExXcWviQ+I+1yGTnm28Q8a9h5ppbw=;
- b=dV+npOFSDOv6CsYndN1d7HHr0asc8r6xIf4dm3IytzBP8V5Snvt4oep/NVoSOBnm6x
- xUY8lPFR+m1tWOsRQQBdo29LT42/2/I6aYxGWkNR3iKjPPqv3XSpS7/EBFfVnyvJnXyF
- uHAsyzaUsS/NCYYFiyOMuYBlNepY7qCGZwDWZTO1U4l4REdvjfnXDYZMAeZqTHPxbu98
- cnW007ayV34MbHGOtNv4SxZFUp0J4dKoJ8ey8UJmHckHssJyRWBMfiwooNvTyC2AstaT
- /Hm2T7x+vDPqXG84b93YlA6ztUj5o+6hJUF1lXLZaZiVWCB3fiFLRpPIfVKDis9o/75i
- L+3w==
-X-Gm-Message-State: AOJu0Yy4kJYkdzZluDGR9g27rR5XBN4dvyFmpcs93ryH8pf8XvtN7oU1
- KEr6x8cv0t/2I/I1ZQ1dz5KDW/OZ/IaLP/Re3R8BcEaT0U/dhhdIbaIE2nO0AaEi3U1bqkfekKl
- H7bn8mChwkwBDZ19vAdaQwjH0NLc=
-X-Google-Smtp-Source: AGHT+IGGsLDCHDC08ODmqFjUkBHoW/AObKen2Z4sOnv6Zpt4ptPiKNOlE2WVc3g1WsMMaR25wE3eb5lvvU1jDs8/Prw=
-X-Received: by 2002:a05:651c:248:b0:2fb:2f7c:28e0 with SMTP id
- 38308e7fff4ca-2fedb786393mr84281211fa.18.1730815985684; Tue, 05 Nov 2024
- 06:13:05 -0800 (PST)
-MIME-Version: 1.0
-References: <20241103003322.626036-1-sjg@chromium.org>
- <20241103003322.626036-5-sjg@chromium.org>
-In-Reply-To: <20241103003322.626036-5-sjg@chromium.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 5 Nov 2024 14:12:53 +0000
-Message-ID: <CALeDE9O9sxCwf_scpbLQEtSxovN64jMWkfEVpUZviJFrXPbHTQ@mail.gmail.com>
-Subject: Re: [PATCH v3 04/25] pinephone: Drop status-LED code and use LED
+ d=1e100.net; s=20230601; t=1730816237; x=1731421037;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8msJYFmmT7Bwwpr/gUwUON79nyAFuwkww/7p0OvY8/I=;
+ b=uOGsQ+lMLjDBrFLATAtd0uruacE1iD2YksbBWDzfLxHkwb37KbJGqNjItyq/BTq89G
+ 0OaBzZnJ6Y4IGFaMM/kvURKdnZKD/qCOng/UAjm1MGX5uM67TtGeKTpqmX6YjZtTaHyg
+ F5ZugCOMrcbjtQr18MRvd35dAi7wGT+1mfMvYoMb+Ab3ZEkiptffg+8qbBfWOVUtnKHX
+ sbggbYZTU7aNlw/CR78x2RRHVRd0MAQDy2EKrD7wpkQG2kMMONNUkAhrvIAgIFSa3JP/
+ 2sGyMvFKs8QzaF+ofomZtkRVDPkWp0WK9s056lsCUFpcdFFGv9dF3OXmBjEaLOvOBmQZ
+ XgBg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVQ5DXEucTvKSLEXMKM79c4M2uY2NP2x2vVd2lurAb0QUY64SBzbCgKMii2ejfAtC+58wV4XcM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNGwkBC6EzGlYgeCxHn0JyUG6ZYT1+PV7i2TBtKCsFu/xLbHEX
+ vGhtlyyEeH7DXUXb6t9Fyx7OkUm91PvD6gx3/G1ddTvFNW01MftX0QK2bFDPRag=
+X-Google-Smtp-Source: AGHT+IEXrt8ImDp4DVyAhDKQS+4jwFFwV4GkhJy7OkSE3BJ5k4MdvbZuqRHn6iF75+JSwrrdSyAPRw==
+X-Received: by 2002:a05:620a:468a:b0:7b1:53c5:8f42 with SMTP id
+ af79cd13be357-7b2fb979256mr2346306585a.15.1730816237500; 
+ Tue, 05 Nov 2024 06:17:17 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b2f3a81530sm520914385a.103.2024.11.05.06.17.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Nov 2024 06:17:16 -0800 (PST)
+Date: Tue, 5 Nov 2024 08:17:12 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Samuel Holland <samuel@sholland.org>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
+ Baruch Siach <baruch@tkos.co.il>, Christian Marangi <ansuelsmth@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v12 00/13] net: tcp: improve tcp support in legacy stack
+Message-ID: <20241105141712.GD3600562@bill-the-cat>
+References: <20241028143143.1807305-1-mikhail.kshevetskiy@iopsys.eu>
+ <20241104233227.GA3600562@bill-the-cat>
+ <CAFLszThXiK=EzrUStsOBiSQ_pe1-Vdwtg-238BjQd91SMBym7A@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="xzpmkw54OeGn9b4F"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThXiK=EzrUStsOBiSQ_pe1-Vdwtg-238BjQd91SMBym7A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,40 +107,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 3 Nov 2024 at 00:42, Simon Glass <sjg@chromium.org> wrote:
->
-> Drop the STATUS_LED options and enable LED and LED_BOOT instead, since
-> this is the new way to access the LED functionality.
 
-This still doesn't work!
+--xzpmkw54OeGn9b4F
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v3:
-> - Combine removal and enable patches
->
-> Changes in v2:
-> - Add a patch to enable LED and LED_BOOT for these boards
->
->  configs/pinephone_defconfig | 7 ++-----
->  1 file changed, 2 insertions(+), 5 deletions(-)
->
-> diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
-> index 9d39204a439..272fce1c1a4 100644
-> --- a/configs/pinephone_defconfig
-> +++ b/configs/pinephone_defconfig
-> @@ -11,8 +11,5 @@ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
->  CONFIG_PINEPHONE_DT_SELECTION=y
->  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->  CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
-> -CONFIG_LED_STATUS=y
-> -CONFIG_LED_STATUS_GPIO=y
-> -CONFIG_LED_STATUS0=y
-> -CONFIG_LED_STATUS_BIT=114
-> -CONFIG_LED_STATUS_STATE=2
-> +CONFIG_LED=y
-> +CONFIG_LED_BOOT=y
-> --
-> 2.43.0
->
+On Tue, Nov 05, 2024 at 06:03:44AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Mon, 4 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Oct 28, 2024 at 05:31:30PM +0300, Mikhail Kshevetskiy wrote:
+> >
+> > > Legacy TCP stack is bad. Here are some of the known issues:
+> > >  * tcp packet from other connection can break a current one
+> > >  * tcp send sequence always starts from zero
+> > >  * bad tcp options processing
+> > >  * strange assumptions on packet size for selective acknowledge
+> > >  * tcp interface assumes one of the two scenarios:
+> > >      - data downloading from remote host to a board
+> > >      - request-response exchange with a small packets
+> > >    so it's not possible to upload large amount of data from the
+> > >    board to remote host.
+> > >  * wget test generate bad tcp stream, test should fail but it passes =
+instead
+> > >
+> > > This series of patches fixes all of the above issues.
+> >
+> > I know Peter asked on the last one, but I want to ask as well. With lwIP
+> > merged, why do we want to add features to the old stack? I can see
+> > fixing issues, but not adding new functionality as well. Thanks.
+> >
+>=20
+> Let's apply this. It has tests and the old stack is still used by a
+> lot of boards. At present lwip is only used on one. There is more work
+> to do on the new stack, including finishing off the sandbox
+> implementation.
+
+Yes, I'm fine with the fixes, but I'm not sure why we want to add
+new features to the old stack.
+
+We've had exactly zero releases with lwIP included, so counting the
+number of boards with it enabled is not helpful. I'm sure that once I
+merge the https support series a whole lot of platforms will switch
+because that's needed for easier SystemReady IR certification.
+
+--=20
+Tom
+
+--xzpmkw54OeGn9b4F
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcqKOQACgkQFHw5/5Y0
+tyxa4AwAhRSdgCcWDl59jw/ANr8oQSPr49EC7khBudQk9bMOqXMHdPjKRp1md3a8
+3W4zjOzu5NSsXJml1ApA27LIZRTyizuLCaKIS9VQ4xzRD7EMsG+XHAcgFnrfFmdb
+vxno8Y40Wol8Lc6V0pfW/1dP12MRtVnlQulDEByT/HMKKjxYNAkTa+r1vTNk2Iop
+2bppdsAc/KlcubbNi32RVvY8v2KgfGCFGGg9I+T4rbGejvD+FPD3kD/aIe043s+8
+DMIvN+2cC+0g7s82putd0/oaerYtcnA4MVCuYQ1mreNrufDGwkXkr1xMPW1NDITN
+14BMt8oXnusi8ZGSv/yKt/TQu4idiDX4JK7hqB4TewHjFeQhhPAUHihvoXJ1JLh2
+k09dxjvOYQGqdzTONPdcW4k4/64klUIxvgex2wwh/n0v5HoR5oBTXYry2TpPRP1v
+p26rMRVFZu9udium9eKBhYIsZEzAlzMPN/miFYRg4xEEKJ4zvSHvQdUXaorJ9Tls
+ObJtwzRX
+=2QWq
+-----END PGP SIGNATURE-----
+
+--xzpmkw54OeGn9b4F--
