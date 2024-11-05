@@ -4,71 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4C6AD2B944
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:07:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 393FED2B944
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:07:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38D588904C;
-	Tue,  5 Nov 2024 17:07:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8F25889048;
+	Tue,  5 Nov 2024 17:07:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Trfxzalb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YdOyBLeK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56C008917B; Tue,  5 Nov 2024 17:07:18 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 50BD9891D0; Tue,  5 Nov 2024 17:07:33 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10FFC88FD2
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:07:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54F0C88FD2
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:07:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9e44654ae3so750061166b.1
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 08:07:16 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a9a0ef5179dso931031966b.1
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 08:07:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730822835; x=1731427635; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730822851; x=1731427651; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bdNCrJsp7gubHIoEJnYBEE4F6ZlRwsxG48bfZ7WBCXM=;
- b=TrfxzalbDfxoGVxIjVSV1Tm+SjVVAdsm+P0X4beASZ0H8iSz0ebx1SNb5Vnhys3Cxx
- Xn5kceEutE+oNP7PO44BL9J8SeXxMkRCDss2TY79cEOi+C72f/xrS8G4y7tCGn7FEcbW
- DOY7ZV++KMju6zBpUaBGLDyrBD0vYVQUUJx6U=
+ bh=J2CK3jgKRouAozI5CfXKMheUT7PFhljHC4onRr2bTr0=;
+ b=YdOyBLeKKKKzX1WzzQqnncE3oQmlP1Lp2sWq1gMntUT2FFcbKkicrJkW1NVJg5V32E
+ 40ewnY6PmlV0DLUrmohICGxpQ6pUrfVIS1d53X6+sWCyPqQZ+1XPJRQS8013MDiRUgBo
+ zTVU8aawX3LKGeEaL2TccAWHc55m61T1IUOX8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730822835; x=1731427635;
+ d=1e100.net; s=20230601; t=1730822851; x=1731427651;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bdNCrJsp7gubHIoEJnYBEE4F6ZlRwsxG48bfZ7WBCXM=;
- b=BQMxFxUSJh6SXF1x2ltAxB4WBnDAPc+NLJCMLxSbAYY6PT7sdXx6DT4nQnMkhiMVlt
- K5LzrdUv4Qsg7ArSz+NzZHMNjsRgOZpAH+vuZeZyA/S7a5rS4TPEPRrxFHvu5/CT3tZB
- zeR+PjSRLJX7QvjmoMa+r4ZA2jG8RrsupK2TZc/fjQfWWl/P7ijJ1oZDVH6IK/yodiet
- AvT8yPGvHuIFZDxckouoPtzddRSZYcnX6fGE5cilMv3v0t5v0L6r0DGdzuAXylX04nTr
- SvaIrljVNA89qX4Yw5zeHX+0a1zzlPqpjPx+eWCVksyr6uIq3hFqVq/lm0oJIDnKwTLf
- 5okQ==
-X-Gm-Message-State: AOJu0YyfspqWhqlNnNRCXJRf/y3kPBYl4Q/XYmBKIkphx7zVADZf+Bye
- d7aCHRYvi3KIaZpZ4LpaG9shOCIkIC50gD4dJzLXKb2yjoYB//vfh3nYEO6IGRqpat6kpx2t1fJ
- vskjkqIgGW1u9nAkjC4FD7eiLW79A6UaNoiDF
-X-Google-Smtp-Source: AGHT+IEd+JBwSx2CwY5LcA1bqXGWsMAXS2ME+4N5XZLtLt5VEv/DFMLJNEjEohY4RPpyiTa+PQ2g8Gcci90j7UmyGwo=
-X-Received: by 2002:a17:907:2da7:b0:a9d:e1d6:41fc with SMTP id
- a640c23a62f3a-a9e50cad380mr1851046966b.53.1730822835529; Tue, 05 Nov 2024
- 08:07:15 -0800 (PST)
+ bh=J2CK3jgKRouAozI5CfXKMheUT7PFhljHC4onRr2bTr0=;
+ b=e11EPGX8rjKxvxmUHOoaiW0UPh+oD7NP9OZd4s86AYqkTmViprfYq6hxAnY8b4UAip
+ YnTF2cyFo1IfoBIRRuBeSGETR/yqqK569MUBPFUuz/FvrW859xYNpg9A/iy8paRdl4BO
+ rKNQiFjbYXPFooJYoEU6hluxGLRY1QJgI3flqLN43uQmjiQ7P5ztxy0wRfe6lNOkVEca
+ f+KhQdGpCDk/zwF9SpG4mw95XGLPq8XLvZuMQJ54dnHS81tlkkknLQpovtoaXt49r0+A
+ /yGumJsENsUu7glRY5Y1aPKFgu5IJLTy3GCL1fOXpnQKVasGU/VUwEbi0+VeRYREFO5g
+ 82Zw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXcc7Mwt0/dI3EUD/FhCHAV55qTgg6dzIiNEGySZs8rawO6c4W7FeaJrPLTRDvI91hUAqzUgTE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzZrJNXZ/3oYmbjMH5f3tDJYlwGimr916vaCXY20IZHOpWXDYT+
+ IUQylygWSrv9liVioAxA8oee0M4ePVr/2vTZCb0qzD5T6YeLsgBqLm0ANnv2aiZHZ2tX+NvVb9e
+ h0fa6XrUSRj3o5+nEhUwNwQo7l91HobA/6anP
+X-Google-Smtp-Source: AGHT+IHGm7CUr+RqmTSpb2/fiOkz08+jA7arCSkIwQwiNJyglTZBvPxntN/RPrx6iYlWsMaxPegujdYV0/x5rGNFrQI=
+X-Received: by 2002:a17:906:f59b:b0:a99:4780:1af with SMTP id
+ a640c23a62f3a-a9de5f6e2eemr3680871466b.31.1730822850722; Tue, 05 Nov 2024
+ 08:07:30 -0800 (PST)
 MIME-Version: 1.0
-References: <20241104133954.840994-1-sjg@chromium.org>
- <20241104133954.840994-6-sjg@chromium.org>
- <20241104135632.GK3600562@bill-the-cat>
- <CAFLszTi4YEqRCVJ=vRTVHtSP=Ux2C8W=vg=3+VedVAdZuef3+A@mail.gmail.com>
- <20241105154447.GH3600562@bill-the-cat>
-In-Reply-To: <20241105154447.GH3600562@bill-the-cat>
+References: <20241028143143.1807305-1-mikhail.kshevetskiy@iopsys.eu>
+ <20241104233227.GA3600562@bill-the-cat>
+ <CAFLszThXiK=EzrUStsOBiSQ_pe1-Vdwtg-238BjQd91SMBym7A@mail.gmail.com>
+ <CALeDE9M1PDFmm-oZvSEGwBaN_J77CSKUa8kbkEPQf9XATv8STg@mail.gmail.com>
+ <CAFLszTjs-7uWNWdaZjhQe-rA5z0qSZxiFeX+WgFofYemW6qiwg@mail.gmail.com>
+ <20241105154741.GI3600562@bill-the-cat>
+In-Reply-To: <20241105154741.GI3600562@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Nov 2024 09:07:03 -0700
-Message-ID: <CAFLszTi3ME4bcKY++YRL1euUWUtEp6sgubtxYoSvtbP3Kqxh-g@mail.gmail.com>
-Subject: Re: [PATCH 5/9] docker: Drop grub for arm64
+Date: Tue, 5 Nov 2024 09:07:17 -0700
+Message-ID: <CAFLszTjntxJShjnWK++NkonNrPdL0S-=zWf-N_AWUaZmfmArtg@mail.gmail.com>
+Subject: Re: [PATCH v12 00/13] net: tcp: improve tcp support in legacy stack
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Peter Robinson <pbrobinson@gmail.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Anand Moon <linux.amoon@gmail.com>, Baruch Siach <baruch@tkos.co.il>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,71 +105,66 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Tue, 5 Nov 2024 at 08:44, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 5 Nov 2024 at 08:47, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Nov 05, 2024 at 08:15:05AM -0700, Simon Glass wrote:
-> > Hi Tom,
+> On Tue, Nov 05, 2024 at 08:15:25AM -0700, Simon Glass wrote:
+> > Hi Peter,
 > >
-> > On Mon, 4 Nov 2024 at 06:56, Tom Rini <trini@konsulko.com> wrote:
+> > On Tue, 5 Nov 2024 at 06:10, Peter Robinson <pbrobinson@gmail.com> wrote:
 > > >
-> > > On Mon, Nov 04, 2024 at 06:39:49AM -0700, Simon Glass wrote:
-> > >
-> > > > This doesn't build on arm64 at present, so drop it for now. We only
-> > > > expect to run sandbox tests, so perhaps it isn't needed.
+> > > On Tue, 5 Nov 2024 at 13:03, Simon Glass <sjg@chromium.org> wrote:
 > > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
+> > > > Hi Tom,
 > > > >
-> > > >  tools/docker/Dockerfile | 7 +++++--
-> > > >  1 file changed, 5 insertions(+), 2 deletions(-)
+> > > > On Mon, 4 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Mon, Oct 28, 2024 at 05:31:30PM +0300, Mikhail Kshevetskiy wrote:
+> > > > >
+> > > > > > Legacy TCP stack is bad. Here are some of the known issues:
+> > > > > >  * tcp packet from other connection can break a current one
+> > > > > >  * tcp send sequence always starts from zero
+> > > > > >  * bad tcp options processing
+> > > > > >  * strange assumptions on packet size for selective acknowledge
+> > > > > >  * tcp interface assumes one of the two scenarios:
+> > > > > >      - data downloading from remote host to a board
+> > > > > >      - request-response exchange with a small packets
+> > > > > >    so it's not possible to upload large amount of data from the
+> > > > > >    board to remote host.
+> > > > > >  * wget test generate bad tcp stream, test should fail but it passes instead
+> > > > > >
+> > > > > > This series of patches fixes all of the above issues.
+> > > > >
+> > > > > I know Peter asked on the last one, but I want to ask as well. With lwIP
+> > > > > merged, why do we want to add features to the old stack? I can see
+> > > > > fixing issues, but not adding new functionality as well. Thanks.
+> > > > >
+> > > >
+> > > > Let's apply this. It has tests and the old stack is still used by a
+> > > > lot of boards. At present lwip is only used on one. There is more work
+> > > > to do on the new stack, including finishing off the sandbox
+> > > > implementation.
 > > >
-> > > What is the build failure? Depending on what other prospects for arm64
-> > > build hardware come through I'm hoping to look harder at more build
-> > > options, not just sandbox (but of course, QEMU shouldn't matter what the
-> > > host is).
+> > > I agree with applying the fixes pieces, I do not agree with apply the
+> > > HTTP server pieces. This series should actually be split into 3
 > >
-> > field-initializers -Wnonnull -Woverflow -Wvla -Wpointer-to-int-cast
-> > -Wstrict-aliasing -Wvariadic-macros -Wvolatile-register-var
-> > -Wpointer-sign -Wmissing-include-dirs -Wmissing-prototypes
-> > -Wmissing-declarations -Wformat=2
-> > 686.0 checking for aarch64-gcc...
-> > /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc
-> > 686.0 checking for aarch64-objcopy...
-> > /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-objcopy
-> > 686.0 checking for aarch64-strip...
-> > /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-strip
-> > 686.0 checking for aarch64-nm...
-> > /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-nm
-> > 686.0 checking for aarch64-ranlib...
-> > /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-ranlib
-> > 686.0 ./configure: line 32517:
-> > /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc: No such
-> > file or directory
-> > 686.1 checking which extra warnings work...
-> > 689.6 checking if compiling with clang... yes
-> > 689.8 checking for options to compile assembly...
-> > 689.8 checking whether -freg-struct-return works... no
-> > 690.0 checking for options to get soft-float... no
-> > 690.8 configure: error: could not force soft-float
+> > But what is your objection?
 > >
-> > I suspect it is just that the toolchains need fiddling. I'd much
-> > rather get something running and iterate on it after that.
+> > I would much rather just apply it ASAP. It has already gone through 12
+> > versions, during which lwip has been prepared and applied.
 >
-> That's the toolchain that should be used to build sandbox, so you should
-> figure out what's going on. And I think you missed fiddling with
-> ~/.buildman so that it sets the sandbox toolchain to the right one and
-> not x86_64.
+> Yes, and to be blunt, the first bit of feedback I provided was "can you
+> please look at the lwIP series instead?".
+>
+> > The HTTP server is a useful feature and we should be able to use it to
+> > test networking in U-Boot in a more self-contained and performant
+> > manner.
+>
+> I very much do not want to add more features to the legacy TCP stack.
+> We're likely, long term, to still need some cut-back version of the old
+> stack for the limited SPL cases.
 
-sandbox should be built with the host toolchain, right? The one it is
-complaining about is the amd64-host aarch64 toolchain, which we don't
-want or need yet.
-
-The grub part (and the cross toolchains) needs more work, but we don't
-need it for sandbox, or at least the sandbox tests seem to pass
-without it. Are you wanting to run qemu on arm64 to boot grub?
-
-I believe I've taken a reasonable stab at a good starting point for
-this work. Do you agree?
+This series has been in progress for a long time and it seems unfair
+to just drop it, with one one board on the new stack.
 
 Regards,
 Simon
