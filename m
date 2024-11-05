@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3BACD31765
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:46:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D0CD31765
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:54:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F3A089001;
-	Tue,  5 Nov 2024 17:46:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5FC1D89001;
+	Tue,  5 Nov 2024 17:54:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c6U7Ep0A";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Tpy136AP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 657598904C; Tue,  5 Nov 2024 17:46:01 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id D75228919A; Tue,  5 Nov 2024 17:54:02 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA80588DE9
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:45:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AFABD88DE9
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:54:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6d382664fadso5033006d6.2
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 08:45:58 -0800 (PST)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7b14f3927ddso435282785a.3
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 08:54:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730825158; x=1731429958; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HGEP/TYDMEoNet3Po65wupd4upVp01oXdtQJuDMN5MI=;
- b=c6U7Ep0AbXzWmryZeyejTFA7Ud8Ec9NJ1Q5lomFJzh6+Q2Gfw9fhvVp8rie0bZYzvM
- +h4Piwr895MUmwkFpg+uCFZWqkkF9gBfM/9hlZ9dYlIrJyJDrVPcAnHh7QbhbkMdQGRU
- TJKQxgV9qWuUtoKdCC18gT/ZhPHRJvxV7SVjA=
+ d=konsulko.com; s=google; t=1730825639; x=1731430439; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GT9r1EdL4TDYYetDadNeuAtH6/phyJsSIC282CB8SRw=;
+ b=Tpy136APIXT5He0Pz0UOntsJuKnJuDcYYrXsILLybgoUO+odxzmO/NF+AzEpW6dJvc
+ 6T17lkHUj1c6fuFzKB4S/TqApZUDIIeab5IqoyGud7IsTGbjcjGsn3SAoFhFhJ8lyp6E
+ 8JsV6ACG/l3gUlu5eko1O+ZVejJh9YYIleqrc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730825158; x=1731429958;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HGEP/TYDMEoNet3Po65wupd4upVp01oXdtQJuDMN5MI=;
- b=dng1W4xu7w4r0QMGwVYACncNoTvRrQZd0T36UowhXpm/p9YZVr+henD6YBr1Ym0pUG
- X20LQcTkfXRB9qVmBYErSnxxe/Sk7eTXi7QWhOAyZq/th94dxWojTg/Jb2/xvlErs+f0
- hy9NUmJba/PL/k3eT7TwcR3P3ZvgzHv3jUoV6mQTz2komExqdvrZydZ/dG6REFuse/hH
- zbLL/+AZrv3vsS/nFxvLj3ipuvCPF7c+MikUq/wjhwJeUx/7v8Ioxf+iiHce/F/5H94O
- A0jANy00mSh5Z31MkYrv/3KYClBVbiKSsqL9yt7VEGpQUkkbG2L3r+Xq3uQ2KJ1jJK6N
- UGqA==
-X-Gm-Message-State: AOJu0YwakgfzmNeqnXJYHB5tPqM2U8c30iZ8bgDiUYOQvjVyVJspUV15
- J9mCJg4E6ph7VVFf4ykET1oyUz+fBq/qIZz6RE1EP/uD8qxz0wO3xUR69zMaKZA=
-X-Google-Smtp-Source: AGHT+IGUUD0OZcN4eo5j3VCMsrHzcnGdMzHze5dRZnlcdc74TCiCntEi0BH3ZEwDZ9ePQQDtElvn1A==
-X-Received: by 2002:a05:6214:5889:b0:6cb:fcbe:b34b with SMTP id
- 6a1803df08f44-6d34609ab17mr321961436d6.32.1730825157761; 
- Tue, 05 Nov 2024 08:45:57 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
+ d=1e100.net; s=20230601; t=1730825639; x=1731430439;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GT9r1EdL4TDYYetDadNeuAtH6/phyJsSIC282CB8SRw=;
+ b=WTqS1J2bJs/X7pqG5qbh5yvsN2yG22CJQ0UsmhwciI+i2WtLO0uXal/ro5Y7MPuDng
+ NpJ1+N2xarmcykjkWEOky4ok4ZFkt3Zqc4cNNEC3CbvMG6CE/1CtR3SI336zigOEnIAv
+ BUXgRvXOmXiIl6x6v8azD2EanJLE5k2YZbrjBBGVmRNh2haaqtPzAqHQEUmBax4L86DJ
+ pEQ277be9XfSuDhIAKAzkYmuJuTNrLsyxUY3JPw1ilU7MqOyyQWbx9DrVg4LXgB7cOn6
+ Mio4jP8jV3LbsV8IJXz5p5wJ4sT7LZTbUYps/gQVXv17Y8G2AOUpgxyoQyK5QheobIZ0
+ wY5w==
+X-Gm-Message-State: AOJu0Ywf15a1m0LrCzbtSIyQC+OCvJB/5sv08EJT3buv0FAL4AgFYvU2
+ tu297DvdAg6/Xq+cpwuwpmPndQbqFANsyGt3vnLuVyHkP93pPzDiwwoIsyqHLkp2wtg2Ob3DdNk
+ r
+X-Google-Smtp-Source: AGHT+IFF880lVxy9eEnqZ2s7vXypqCh04A6CMvy0b034jolhi+tkDcDjIUgyr36ceeohMyjoysUUgw==
+X-Received: by 2002:a05:6214:4a81:b0:6cb:bfb5:6fc with SMTP id
+ 6a1803df08f44-6d1856fb9dcmr672566186d6.25.1730825639554; 
+ Tue, 05 Nov 2024 08:53:59 -0800 (PST)
+Received: from bill-the-cat.tail58a08.ts.net ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d35415b731sm62207886d6.83.2024.11.05.08.45.56
+ 6a1803df08f44-6d35415b1edsm62103156d6.75.2024.11.05.08.53.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Nov 2024 08:45:57 -0800 (PST)
-Date: Tue, 5 Nov 2024 10:45:54 -0600
+ Tue, 05 Nov 2024 08:53:59 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v2 4/9] docker: Adjust packages for arm64
-Message-ID: <20241105164554.GK3600562@bill-the-cat>
-References: <20241105160738.3795497-1-sjg@chromium.org>
- <20241105160738.3795497-5-sjg@chromium.org>
- <20241105161145.GJ3600562@bill-the-cat>
- <CAFLszTj2=0t1LmNr5kY=SBxaZtR8DB6bHwdfcgXwRqAr5ue5UQ@mail.gmail.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH RFC v1] Dockerfile: Have "sandbox" build with i386 toolchain
+ not x86_64 toolchain
+Date: Tue,  5 Nov 2024 10:53:57 -0600
+Message-ID: <20241105165357.620796-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fa0NGRzIgameKSk1"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTj2=0t1LmNr5kY=SBxaZtR8DB6bHwdfcgXwRqAr5ue5UQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,96 +87,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+A long time ago, we had to use "i386" and "x86_64" toolchains for our
+x86 platforms, depending on the target. We then moved to being able to
+use the single "i386" toolchain to support all x86 platforms. At the
+same time, we had been building sandbox with our "x86_64" toolchain in
+CI. When x86 switched to being able to use a single toolchain we did not
+update our CI buildman file to match. Do this now as we want to ensure
+that sandbox is built with the same compiler version the rest of our
+platforms are and not the host one.
 
---fa0NGRzIgameKSk1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Simon Glass <sjg@chromium.org>
 
-On Tue, Nov 05, 2024 at 09:26:10AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 5 Nov 2024 at 09:11, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Nov 05, 2024 at 09:07:33AM -0700, Simon Glass wrote:
-> > > The package names are slightly different for arm64 and we don't seem =
-to
-> > > have a linux-image-kvm package. Provide a different set for arm64
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > Changes in v2:
-> > > - Swap order so that amd64 is the exception
-> > >
-> > >  tools/docker/Dockerfile | 12 +++++++-----
-> > >  1 file changed, 7 insertions(+), 5 deletions(-)
-> > >
-> > > diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> > > index 540718df062..84661b036c6 100644
-> > > --- a/tools/docker/Dockerfile
-> > > +++ b/tools/docker/Dockerfile
-> > > @@ -44,7 +44,12 @@ RUN wget -O - https://mirrors.edge.kernel.org/pub/=
-tools/crosstool/files/bin/x86_
-> > >  RUN wget -O - https://github.com/foss-xtensa/toolchain/releases/down=
-load/2020.07/x86_64-2020.07-xtensa-dc233c-elf.tar.gz | tar -C /opt -xz
-> >
-> > Oh no, here's a big problem ^^^^^
-> > You didn't switch to downloading arm64 toolchains, no wonder everything
-> > else blows up.
->=20
-> Er, yes I know that...I would have to put 'if' statements on each one,
-> but I was hoping we could come up with a better way of handling this.
+I'm posting this as an RFC to start the discussion as when I mentioned
+this to Simon on IRC, he was very much not in agreement.
 
-Yes, hopefully we can do something with $TARGETPLATFORM to set another
-variable that's exposed for wider use.
+My main argument is this, sandbox needs to use the same toolchain that
+we compile (virtually) all other platforms with as one of the points is
+to be able to catch warnings and compiler behavior changes as soon as
+possible in our CI. And just like how developers can use
+distribution-provided toolchains today, nothing changes in that regard,
+we only make CI be more consistent now.
+---
+ tools/docker/Dockerfile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Same with all the variables being set for grub.
->=20
-> >
-> > >  # Update and install things from apt now
-> > > -RUN apt-get update && apt-get install -y \
-> > > +RUN if [ "$TARGETPLATFORM" =3D "linux/amd64" ]; then \
-> > > +             EXTRA_PACKAGES=3D"grub-efi-amd64-bin grub-efi-ia32-bin =
-libc6-i386 linux-image-kvm"; \
-> > > +     else \
-> > > +             EXTRA_PACKAGES=3D"grub-efi linux-image-generic"; \
-> > > +     fi; \
-> >
-> > Again, grub-efi should be used for everyone and linux/amd64 adds
-> > grub-efi-ia32-bin. And linux-image-generic should work for everyone,
-> > too.
->=20
-> So what about this commit?[1]
->=20
-> Regards,
-> Simon
->=20
-> [1] f9abaa53ec8 tools: docker: Install a readable kernel for libguestfs-t=
-ools
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 967ac89fbde8..e158bab6e570 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -280,7 +280,7 @@ RUN /bin/echo -e "[toolchain]\nroot = /usr" > ~/.buildman
+ RUN /bin/echo -e "kernelorg = /opt/gcc-13.2.0-nolibc/*" >> ~/.buildman
+ RUN /bin/echo -e "\n[toolchain-prefix]\nxtensa = /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-" >> ~/.buildman;
+ RUN /bin/echo -e "\n[toolchain-alias]\nsh = sh2" >> ~/.buildman
+-RUN /bin/echo -e "\nsandbox = x86_64" >> ~/.buildman
++RUN /bin/echo -e "\nsandbox = i386" >> ~/.buildman
+ RUN /bin/echo -e "\nx86 = i386" >> ~/.buildman;
+ 
+ # Add mkbootimg tool
+-- 
+2.43.0
 
-Yes, linux-image-generic should also provide a useful image, and you
-would need to check what CI says when using this image.
-
---=20
-Tom
-
---fa0NGRzIgameKSk1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcqS7oACgkQFHw5/5Y0
-tyyflQwApR/F2jhBDbUu9kMIsyXEAKtxk80MVoiOPLea/UFtKAbQ7wCerS7wDLog
-+0tAkppZW0tlVRG9oP3lmBDNtXw4JDRHKAqhNU4WbvaVUS2klKX/ix7GgHN6VkGc
-j49yQrP/61jIWveIJKNDEpa//M/ZlXaf9t5xYgRwrCNRm/v2IJhguw5hoRMdjaQb
-JjjGz/9iAqe0ADm1VzkxN+RsaK8gzsja3KU2ZzN4l8ohQRpODYzEgZl4IA315zw/
-JnFd/6+zH7Fxo10XHxuQKdp7W+nxc7XUAKhN71ndoQtKBkueb4ow7qfX7Jm9qCI0
-PfM/kgJadPkLfKLMcyticvLS/N9ZEUnIxPgZVlUJeI/sCTC+DbWFedygWALPDhzu
-p1GXUu/+Ahm0jc8s7Gae76bnM8DCKKMm7pwEmTBRaLAtuK1UHYM2YBhWt5AxjEID
-3FE+H+/8kfNyamaY4j43h/XSd40ZvEkr1RCIK3Q8muq1k0KNHTOuFV4ZGPuN8ICn
-3H6NvC9i
-=xVyY
------END PGP SIGNATURE-----
-
---fa0NGRzIgameKSk1--
