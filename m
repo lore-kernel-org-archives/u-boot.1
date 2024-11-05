@@ -4,93 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C18ABD2B92F
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 14:17:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D147D2B92F
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 14:17:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15A3A89156;
-	Tue,  5 Nov 2024 15:17:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 848F689070;
+	Tue,  5 Nov 2024 15:17:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YBS3V6sK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kImgv/96";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C859D8912C; Tue,  5 Nov 2024 15:17:20 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id F053A88360; Tue,  5 Nov 2024 14:27:50 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A94489000
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 15:17:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D46B884DB
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 14:27:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7b147a2ff04so421503985a.3
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 06:17:18 -0800 (PST)
+ spf=pass smtp.mailfrom=vassilisamir@gmail.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-43155abaf0bso48378045e9.0
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 05:27:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730816237; x=1731421037; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8msJYFmmT7Bwwpr/gUwUON79nyAFuwkww/7p0OvY8/I=;
- b=YBS3V6sKmJtDaPrI/zsrhTTs9NtFg9UJg1z09d/niuGVnZQBUSLXZw6f0bxIq5HKRv
- 7wXn0QBuknRi//d4Wxckg+k98mbLrXNB98WAR2ZVSCPDVyCNQIExiwXYWNPLcSbFVlWx
- FisoBs071UsiSqxInO4Ddip+mocxGXuA26Fnc=
+ d=gmail.com; s=20230601; t=1730813267; x=1731418067; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IudwDgjqEna/HiNaNnWs2iP4bPZ+OSmK0B4EBhD8JrM=;
+ b=kImgv/961EBiRYxCh1DlbZNAPxvrxd3/MW2AacJ2Nl3SeZqLVSOwjvt20O1MPsIelx
+ b89cYys/jKaYi40ds4l8RXel+paG93bMM4nnNIZ35qgeujTTtu4Zk5VcOSIVGMEaeEjg
+ GOfFpsiG2Ny/oh5CBztkx9ZNslmiOIp+y+gR8w12/lyErw1k1QZ+VNQEbGDNVrwlL9QJ
+ H+Wwp9f3Jm7p72FItxLuMLA/MqVvkNVpFuqqWpLChoonjMBXI/6JL7Afo/cJuyMq2Er5
+ 6E6HknSdggs9CiSo0/bTC4WxfdBytpS0gbTLGoH10Cba+7ACyI1AlP3TEwBErssp8DP/
+ RfIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730816237; x=1731421037;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8msJYFmmT7Bwwpr/gUwUON79nyAFuwkww/7p0OvY8/I=;
- b=uOGsQ+lMLjDBrFLATAtd0uruacE1iD2YksbBWDzfLxHkwb37KbJGqNjItyq/BTq89G
- 0OaBzZnJ6Y4IGFaMM/kvURKdnZKD/qCOng/UAjm1MGX5uM67TtGeKTpqmX6YjZtTaHyg
- F5ZugCOMrcbjtQr18MRvd35dAi7wGT+1mfMvYoMb+Ab3ZEkiptffg+8qbBfWOVUtnKHX
- sbggbYZTU7aNlw/CR78x2RRHVRd0MAQDy2EKrD7wpkQG2kMMONNUkAhrvIAgIFSa3JP/
- 2sGyMvFKs8QzaF+ofomZtkRVDPkWp0WK9s056lsCUFpcdFFGv9dF3OXmBjEaLOvOBmQZ
- XgBg==
+ d=1e100.net; s=20230601; t=1730813267; x=1731418067;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IudwDgjqEna/HiNaNnWs2iP4bPZ+OSmK0B4EBhD8JrM=;
+ b=WP7WCG/zsjcEWARDlYZ8zwk83Y/QunwnLgV8smmMJtf+77m+zqV6MoY5vmNsOOJIFy
+ fTpAIi3wkM1g7MNxrG+yjJSS2Hm1MilpI20u1M1nw8F4GaBRAbfI6gK7VDHqeSoT3MZZ
+ iApywmZ8tfQ8Ao15p5QLS1SCKc0mt0bkbqjDLmm0Vkl8/qkUTL7uM4FfmfEZ08gqi+X6
+ 3j2wtZw1vc+hrgykXlCG4c9hD66/RLhIMwrVJHEjtRGd+wFscKi9q92X/y5c9Ajn1k4u
+ llZ+tPQv35k5b7Lji8YmN/nTGHc2EpBlkd937B8Lq9nhCKsR6E4nRgOURO3uKlteBkt+
+ 1C2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQ5DXEucTvKSLEXMKM79c4M2uY2NP2x2vVd2lurAb0QUY64SBzbCgKMii2ejfAtC+58wV4XcM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwNGwkBC6EzGlYgeCxHn0JyUG6ZYT1+PV7i2TBtKCsFu/xLbHEX
- vGhtlyyEeH7DXUXb6t9Fyx7OkUm91PvD6gx3/G1ddTvFNW01MftX0QK2bFDPRag=
-X-Google-Smtp-Source: AGHT+IEXrt8ImDp4DVyAhDKQS+4jwFFwV4GkhJy7OkSE3BJ5k4MdvbZuqRHn6iF75+JSwrrdSyAPRw==
-X-Received: by 2002:a05:620a:468a:b0:7b1:53c5:8f42 with SMTP id
- af79cd13be357-7b2fb979256mr2346306585a.15.1730816237500; 
- Tue, 05 Nov 2024 06:17:17 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b2f3a81530sm520914385a.103.2024.11.05.06.17.14
+ AJvYcCUNJXmKW9Ur3Bcjgp4KPf1yOu+NYeA93hnmLE/TwtpvPUUipHBlbSde9XxMXEBOfMbyuJmk2tk=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywnb6UdTnoaHGoDxXcqdNADhh10XNVSI+trHIC7valHpV7Mt/6X
+ tbScMAdC1RXoG8EVWlmYi5jJ2l1S1iqWeuszBcQcA/r43+SoSSLa
+X-Google-Smtp-Source: AGHT+IHDPtPIuY3kCbwy4gAEkIRZC+drjEi87cMI0C/xdaz3S893dpS9PVghxNFH4gD4GJ4bu3Ghwg==
+X-Received: by 2002:a05:600c:3b8d:b0:426:6edf:6597 with SMTP id
+ 5b1f17b1804b1-43283255a89mr125115175e9.19.1730813266615; 
+ Tue, 05 Nov 2024 05:27:46 -0800 (PST)
+Received: from vamoirid-laptop.. ([2a04:ee41:82:7577:61c2:fa6e:7930:6c92])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-381c113e595sm16267906f8f.77.2024.11.05.05.27.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Nov 2024 06:17:16 -0800 (PST)
-Date: Tue, 5 Nov 2024 08:17:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sean Anderson <seanga2@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
- Baruch Siach <baruch@tkos.co.il>, Christian Marangi <ansuelsmth@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v12 00/13] net: tcp: improve tcp support in legacy stack
-Message-ID: <20241105141712.GD3600562@bill-the-cat>
-References: <20241028143143.1807305-1-mikhail.kshevetskiy@iopsys.eu>
- <20241104233227.GA3600562@bill-the-cat>
- <CAFLszThXiK=EzrUStsOBiSQ_pe1-Vdwtg-238BjQd91SMBym7A@mail.gmail.com>
+ Tue, 05 Nov 2024 05:27:46 -0800 (PST)
+From: Vasileios Amoiridis <vassilisamir@gmail.com>
+To: trini@konsulko.com, michal.simek@amd.com, hs@denx.de, pro@denx.de,
+ sjg@chromium.org
+Cc: vasileios.amoiridis@cern.ch,
+	u-boot@lists.denx.de
+Subject: [PATCH v3 0/1]: bootcount: zynqmp: Add bootcount API
+Date: Tue,  5 Nov 2024 14:27:43 +0100
+Message-ID: <20241105132744.1572759-1-vassilisamir@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xzpmkw54OeGn9b4F"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThXiK=EzrUStsOBiSQ_pe1-Vdwtg-238BjQd91SMBym7A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 05 Nov 2024 15:17:31 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,71 +93,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
 
---xzpmkw54OeGn9b4F
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Changes in v3:
 
-On Tue, Nov 05, 2024 at 06:03:44AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 4 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Oct 28, 2024 at 05:31:30PM +0300, Mikhail Kshevetskiy wrote:
-> >
-> > > Legacy TCP stack is bad. Here are some of the known issues:
-> > >  * tcp packet from other connection can break a current one
-> > >  * tcp send sequence always starts from zero
-> > >  * bad tcp options processing
-> > >  * strange assumptions on packet size for selective acknowledge
-> > >  * tcp interface assumes one of the two scenarios:
-> > >      - data downloading from remote host to a board
-> > >      - request-response exchange with a small packets
-> > >    so it's not possible to upload large amount of data from the
-> > >    board to remote host.
-> > >  * wget test generate bad tcp stream, test should fail but it passes =
-instead
-> > >
-> > > This series of patches fixes all of the above issues.
-> >
-> > I know Peter asked on the last one, but I want to ask as well. With lwIP
-> > merged, why do we want to add features to the old stack? I can see
-> > fixing issues, but not adding new functionality as well. Thanks.
-> >
->=20
-> Let's apply this. It has tests and the old stack is still used by a
-> lot of boards. At present lwip is only used on one. There is more work
-> to do on the new stack, including finishing off the sandbox
-> implementation.
+	1) Organize correctly headers
+	2) Remove redundant "mio" and change "write" to "read"
+	3) Add "depends on ARCH_ZYNQMP"
 
-Yes, I'm fine with the fixes, but I'm not sure why we want to add
-new features to the old stack.
+v2: https://lore.kernel.org/u-boot/20241105074917.546887-1-vassilisamir@gmail.com/
+v1: https://lore.kernel.org/u-boot/20241029185814.7937-1-vassilisamir@gmail.com/
 
-We've had exactly zero releases with lwIP included, so counting the
-number of boards with it enabled is not helpful. I'm sure that once I
-merge the https support series a whole lot of platforms will switch
-because that's needed for easier SystemReady IR certification.
+Vasileios Amoiridis (1):
+  drivers: bootcount: Add ZynqMP specific bootcount support
 
---=20
-Tom
+ MAINTAINERS                                  |  1 +
+ arch/arm/mach-zynqmp/include/mach/hardware.h |  2 +
+ drivers/bootcount/Kconfig                    |  7 +++
+ drivers/bootcount/Makefile                   |  1 +
+ drivers/bootcount/bootcount_zynqmp.c         | 47 ++++++++++++++++++++
+ 5 files changed, 58 insertions(+)
+ create mode 100644 drivers/bootcount/bootcount_zynqmp.c
 
---xzpmkw54OeGn9b4F
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+base-commit: 56accc56b9aab87ef4809ccc588e1257969cd271
+-- 
+2.34.1
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcqKOQACgkQFHw5/5Y0
-tyxa4AwAhRSdgCcWDl59jw/ANr8oQSPr49EC7khBudQk9bMOqXMHdPjKRp1md3a8
-3W4zjOzu5NSsXJml1ApA27LIZRTyizuLCaKIS9VQ4xzRD7EMsG+XHAcgFnrfFmdb
-vxno8Y40Wol8Lc6V0pfW/1dP12MRtVnlQulDEByT/HMKKjxYNAkTa+r1vTNk2Iop
-2bppdsAc/KlcubbNi32RVvY8v2KgfGCFGGg9I+T4rbGejvD+FPD3kD/aIe043s+8
-DMIvN+2cC+0g7s82putd0/oaerYtcnA4MVCuYQ1mreNrufDGwkXkr1xMPW1NDITN
-14BMt8oXnusi8ZGSv/yKt/TQu4idiDX4JK7hqB4TewHjFeQhhPAUHihvoXJ1JLh2
-k09dxjvOYQGqdzTONPdcW4k4/64klUIxvgex2wwh/n0v5HoR5oBTXYry2TpPRP1v
-p26rMRVFZu9udium9eKBhYIsZEzAlzMPN/miFYRg4xEEKJ4zvSHvQdUXaorJ9Tls
-ObJtwzRX
-=2QWq
------END PGP SIGNATURE-----
-
---xzpmkw54OeGn9b4F--
