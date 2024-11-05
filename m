@@ -4,50 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3381D33A22
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 18:45:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECCDFD33A37
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 18:45:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18A4B88C44;
-	Tue,  5 Nov 2024 19:45:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
+	by phobos.denx.de (Postfix) with ESMTP id 7C7E48900E;
+	Tue,  5 Nov 2024 19:45:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="krNM9obz";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 888B588ED9; Tue,  5 Nov 2024 19:45:12 +0100 (CET)
-Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 249A98917B; Tue,  5 Nov 2024 18:13:01 +0100 (CET)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3204E88A0A
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 19:45:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E76D188A0A
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:12:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=sys-base.io
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paulk@sys-base.io
-Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 86B361F0004D
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:45:08 +0000 (UTC)
-Received: by laika.paulk.fr (Postfix, from userid 65534)
- id D21D0A44AF2; Tue,  5 Nov 2024 18:45:07 +0000 (UTC)
-Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id 8DB96A44AF0;
- Tue,  5 Nov 2024 18:45:06 +0000 (UTC)
-Date: Tue, 5 Nov 2024 19:45:04 +0100
-From: Paul Kocialkowski <paulk@sys-base.io>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Klaus Goger <klaus.goger@cherry.de>, u-boot@lists.denx.de,
- Paul Kocialkowski <contact@paulk.fr>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH next 0/5] rockchip: rk3399: allow to trigger sysreset in
- TPL
-Message-ID: <ZypnsKWG0d1gplk8@collins>
-References: <20241105-rk3399-sysreset-gpio-tpl-v1-0-12caff07a4e4@cherry.de>
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-71e467c3996so4883976b3a.2
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 09:12:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1730826777; x=1731431577; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ye/NHMeab3r+SM0LBWrrrwza8yEYfD+QMogHK+dyuhk=;
+ b=krNM9obzFLAadtCU6IwApvhbv10dLdj8FiimtXaEzNH1OxtlQKy7BWNEWJysZiw+jQ
+ +pAYgv7DsKnByB7nW+VkqPy8oVoTryIbTzFeB+UvWslEKsralOTtU8QWJGtF2oAYz34z
+ RhkKdlaiA2MigmzFCOyBS4pNlq4HHkS4MKGRY642wEe7/vkl1YvrijRUpuVbbTnnk8E1
+ QO3y3tLjnenNyC4XCzlJlh/tm7RePQ1AV3HX+d+04x5En5RrQVerup8dWpz6z1Cet3iH
+ xWyqtI8TTm8+ME0hgsvtFYF1xHjw8f/5RrX8BEg+hMvUXb+2QJS6L/JeXaocEf4EyJUZ
+ PqnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730826777; x=1731431577;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ye/NHMeab3r+SM0LBWrrrwza8yEYfD+QMogHK+dyuhk=;
+ b=OS/Re9jx9HR66FGVQdORF6gMMtjxYwcKOG7p53Pn759EEQCPWaaKXaqOhfe+I5TJ0D
+ t0ykfV069HAXTPMXBY8TqZJJ0r3J04PvI4wcHpIAjd15fg/3NkmZyLkB/1Xkhi/BUzPp
+ 3ld9Wpq6I3FsGXpTf8YU5PmjRP5WqU/0jo3eR37eRkzzw2RRuJGnvOmmkhl1Qql1aOkl
+ 75sy6FvDaTWsKD1dQ0SVSNskuI3pbfyj0xZmlEh20CyAtT5voD/HqP2kVP4NVW/g7+Ag
+ gXFGzrs4+d0wf6WeyB3Nqjb3sPX4ZDH9hYAl7bN+iJkNiZLbsSoTMENalycKzByvXT4Q
+ OWxQ==
+X-Gm-Message-State: AOJu0YyLv38PyDzk5lm8SQjtkWhRsOnh71HM5OwTD3MpEbtPfvfdOG/p
+ glEhWzyTGEP5xSMuW2P6Vm7HvRlHSN4zgn3b9S0UDEOxmezLzPk11/lkEsI6iNo=
+X-Google-Smtp-Source: AGHT+IFaPJpniElTk8zxX964H+oc2GmjYpFuliIgq15ZXgSRL4ou/+LkXSxgP7SnmdA+1PjDUuLOVA==
+X-Received: by 2002:a05:6a21:38c:b0:1cf:4ad8:83b9 with SMTP id
+ adf61e73a8af0-1d9a8514112mr50161261637.43.1730826777352; 
+ Tue, 05 Nov 2024 09:12:57 -0800 (PST)
+Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-720bc2c4a8csm9921772b3a.120.2024.11.05.09.12.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Nov 2024 09:12:56 -0800 (PST)
+From: Adriano Cordova <adrianox@gmail.com>
+To: u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
+ Adriano Cordova <adrianox@gmail.com>
+Subject: [PATCH] net: net_utils: Move ip_to_string to lib/net_utils.c
+Date: Tue,  5 Nov 2024 14:12:14 -0300
+Message-ID: <20241105171214.120364-1-adrianox@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="QFjIwKd+VfnrM6zX"
-Content-Disposition: inline
-In-Reply-To: <20241105-rk3399-sysreset-gpio-tpl-v1-0-12caff07a4e4@cherry.de>
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 05 Nov 2024 19:45:54 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,125 +89,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The function string_to_ip is already in net_utils, which is
+compiled unconditionally, but ip_to_string is currently only
+accessible if the legacy network stack is selected. This
+commit puts ip_to_string in net_utils.c and removes it from the
+legacy network code.
 
---QFjIwKd+VfnrM6zX
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+---
+ include/net-common.h | 10 ++++++++++
+ lib/net_utils.c      | 11 +++++++++++
+ net/net.c            | 11 -----------
+ 3 files changed, 21 insertions(+), 11 deletions(-)
 
-Hi,
+diff --git a/include/net-common.h b/include/net-common.h
+index fd7c5e7b48..cb55816ced 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -425,6 +425,16 @@ void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
+  */
+ struct in_addr string_to_ip(const char *s);
+ 
++/**
++ * ip_to_string() - Convert a string to ip address
++ *
++ * Implemented in lib/net_utils.c (built unconditionally)
++ *
++ * @x: Input ip to parse
++ * @s: string containing the parsed ip address
++ */
++void ip_to_string(struct in_addr x, char *s);
++
+ /* copy a filename (allow for "..." notation, limit length) */
+ void copy_filename(char *dst, const char *src, int size);
+ 
+diff --git a/lib/net_utils.c b/lib/net_utils.c
+index c70fef0d99..621f6512b6 100644
+--- a/lib/net_utils.c
++++ b/lib/net_utils.c
+@@ -152,6 +152,17 @@ out_err:
+ }
+ #endif
+ 
++void ip_to_string(struct in_addr x, char *s)
++{
++	x.s_addr = ntohl(x.s_addr);
++	sprintf(s, "%d.%d.%d.%d",
++		(int) ((x.s_addr >> 24) & 0xff),
++		(int) ((x.s_addr >> 16) & 0xff),
++		(int) ((x.s_addr >> 8) & 0xff),
++		(int) ((x.s_addr >> 0) & 0xff)
++	);
++}
++
+ void string_to_enetaddr(const char *addr, uint8_t *enetaddr)
+ {
+ 	char *end;
+diff --git a/net/net.c b/net/net.c
+index f47e9fbe33..ca35704f66 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -1723,17 +1723,6 @@ int net_parse_bootfile(struct in_addr *ipaddr, char *filename, int max_len)
+ 	return 1;
+ }
+ 
+-void ip_to_string(struct in_addr x, char *s)
+-{
+-	x.s_addr = ntohl(x.s_addr);
+-	sprintf(s, "%d.%d.%d.%d",
+-		(int) ((x.s_addr >> 24) & 0xff),
+-		(int) ((x.s_addr >> 16) & 0xff),
+-		(int) ((x.s_addr >> 8) & 0xff),
+-		(int) ((x.s_addr >> 0) & 0xff)
+-	);
+-}
+-
+ void vlan_to_string(ushort x, char *s)
+ {
+ 	x = ntohs(x);
+-- 
+2.43.0
 
-Le Tue 05 Nov 24, 16:36, Quentin Schulz a =C3=A9crit :
-> A sysreset-gpio can be provided in an RK3399 platform's Device Tree and
-> if U-Boot detects a "warm" boot was done, it'll toggle that GPIO to
-> perform a reset of the PMIC, essentially forcing a cold boot to make
-> sure there are no non-default values in SoC registers.
->=20
-> For now, this was only supported in SPL, probably because when this was
-> implemented RK3399 (and specifically Puma) didn't have TPL support so
-> SPL was the earliest stage. Now that most RK3399 boards (and
-> specifically Puma) have TPL enabled, it makes sense to add support for
-> triggering this sysreset from it. It brings the following advantages:
-> - faster boot time as we don't need to reach SPL to be able to reset the
->   system on a condition we know is already met in TPL,
-> - have less code to be impacted by the issue this system reset works
->   around (that is, "unclean" SoC registers after a reboot),
-> - less confusion around the reason for restarting. Indeed when done from
->   SPL, the following log can be observed:
-
-Thanks for doing this, I think it makes a lot of sense to have it in the TP=
-L!
-
-Cheers,
-
-Paul
-
-> """
-> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
-> Channel 0: DDR3, 666MHz
-> BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D16 CS=3D1 Die BW=3D16 Size=3D2048MB
-> Channel 1: DDR3, 666MHz
-> BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D16 CS=3D1 Die BW=3D16 Size=3D2048MB
-> 256B stride
-> Trying to boot from BOOTROM
-> Returning to boot ROM...
->=20
-> U-Boot SPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45 =
-+0100)
-> Trying to boot from MMC2
->=20
-> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
-> """
->=20
-> possibly hinting at an issue within the SPL when loading the fitImage
-> from MMC2 instead of the normal course of events (a system reset).
->=20
-> For this to be possible, the sysreset function is adapted to be able to
-> run in SPL and TPL by checking the appropriate symbols and a weak
-> callback is added in the TPL main C code so that we can hook this
-> sysreset function within the TPL code path.
->=20
-> @Cc Paul since he's trying to add support for this sysreset to the
-> Firefly ROC-RK3399-PC[1] and Pine64 ROCKPro64[2]. You'll want to have
-> gpio1 with boopth-pre-sram though so it makes it to the TPL DTB.
->=20
-> [1] https://lore.kernel.org/u-boot/20240926183111.1324284-1-paulk@sys-bas=
-e.io/
-> [2] https://lore.kernel.org/u-boot/20240926183111.1324284-2-paulk@sys-bas=
-e.io/
->=20
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
-> Quentin Schulz (5):
->       pinctrl: rockchip: allow to build for TPL
->       rockchip: rk3399: merge CRU check within rk3399_force_power_on_reset
->       rockchip: tpl: allow to call board/SoC-specific code before DRAM in=
-it
->       rockchip: rk3399: allow to handle sysreset-gpio in TPL
->       rockchip: configs: puma-rk3399: do the system reset in TPL
->=20
->  arch/arm/mach-rockchip/rk3399/rk3399.c | 58 +++++++++++++++++++---------=
-------
->  arch/arm/mach-rockchip/tpl.c           |  6 ++++
->  configs/puma-rk3399_defconfig          |  3 ++
->  drivers/pinctrl/Kconfig                |  8 +++++
->  drivers/pinctrl/rockchip/Kconfig       |  7 ++++
->  5 files changed, 56 insertions(+), 26 deletions(-)
-> ---
-> base-commit: 56accc56b9aab87ef4809ccc588e1257969cd271
-> change-id: 20241105-rk3399-sysreset-gpio-tpl-50620781cdd9
->=20
-> Best regards,
-> --=20
-> Quentin Schulz <quentin.schulz@cherry.de>
->=20
-
---=20
-Paul Kocialkowski,
-
-Independent contractor - sys-base - https://www.sys-base.io/
-Free software developer - https://www.paulk.fr/
-
-Specialist in multimedia, graphics and embedded hardware support with Linux.
-
---QFjIwKd+VfnrM6zX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmcqZ7AACgkQhP3B6o/u
-lQznAw/+O73vDVc3Aapfea3uxT8yoqQO3M7ONS7EQPLhmCvUsSeMpi5GSmJyWsZb
-Z9p/+zPaLg/ogh3zGHdH3Viiilx7k0GMAgxrkNYejztV3us7ufF0CYP5St+3VASb
-cXJrwCziKOa+S6hK4xPsHMUb4U1vLEWUgbklSfm7t89o0L1oGgeYGRQavje1OLMy
-gn6g4b0VaYcpLZrVRXRk7E4kuuTl+OC3NFonWWO3bVjiDglNGr5/bdQdIhbcQmcU
-pDBt8Ybv6tIYsnG+ISHgr5J68ygpomAS+H4ePMMg2f4C77wHgIA1ujPmD27eTXLo
-5hcjcbxXD7zwfNlyKDSeDPm+kXdnKwTzGzvmyzXOP+fmodDVGYb/7GD77FmEkld1
-/nVhm6SHyl4O730koS6CEaaqH3iZEw0slXF7MPpSNiU5Y5Ex+NjJb+TnzD7g5Tf8
-xt+VSADO3xHzfyrn8eVJLLjlVjVyg624DQ0qtEwxkALmAWD/n7J8a33+zwlD0CWl
-Kwa1LfCz0DKsjknr7nblnLcpWfGgSZIspqloQ6edNudoKLccTkLEhbV5T4vxDNYW
-mQmJ3YLZ4M1DvR21GAqPXBG4qFO6LwL52BWz5sKkrpOjuEQFk/PoMuUjqBOxx0Hd
-9HpCxFngb0gyHdjB+RT4Cj5PLejkY6cyum1OAx6SME3PSkkCHRg=
-=IXA3
------END PGP SIGNATURE-----
-
---QFjIwKd+VfnrM6zX--
