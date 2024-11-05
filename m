@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF19CD2B944
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:08:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8092D2B950
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:08:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 829E1891D1;
-	Tue,  5 Nov 2024 17:08:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0866A89229;
+	Tue,  5 Nov 2024 17:08:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QWAN5wkI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FAkGkT/T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E76968917B; Tue,  5 Nov 2024 17:08:03 +0100 (CET)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 0B2C98920C; Tue,  5 Nov 2024 17:08:05 +0100 (CET)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B3E8891D2
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:07:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9853789204
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:08:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-8377fd760b0so208075639f.2
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 08:07:56 -0800 (PST)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3a3b4663e40so19268145ab.2
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 08:08:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730822875; x=1731427675; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730822880; x=1731427680; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y2O+2Vb3tgSO1VPiEWlpJ5/OzhTXqtiuniFf7esntAU=;
- b=QWAN5wkIE63ymayODbzgWrH46ESgVNseT0XqiSdQyo0HKuNJwj6OUJyZJ9qDR2CCAb
- u33c0VdLpBvDwtJ8rTs05pToy1pk3cHimC/f77jbGibpuho05f8ouWu5b5v5sqv+26YG
- T4uj3D8hDsoLfiF/Axh4WuQZuvoRXhgN/Yn70=
+ bh=RjZ6cQPmMEZJKMHvvuvAJX3UCCnjOXWIF0uLFIEhf+4=;
+ b=FAkGkT/TPIICiOx85GLPs+sQZOVEfZ8QHTlucgrxDe47NrMHzHxxLBNaPDTosy99AT
+ bA9JZTFiy14j39j/ww2tObyMaXqHglW6iiXQCI1VPwZT7T4S2NIHNkv6DzS22RpnHRoY
+ 1MGHZAUWDkFZDJPHWzeChlIsxWEta+LGkw8C4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730822875; x=1731427675;
+ d=1e100.net; s=20230601; t=1730822880; x=1731427680;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=y2O+2Vb3tgSO1VPiEWlpJ5/OzhTXqtiuniFf7esntAU=;
- b=XXwE9bQ6dXYKv+j/Qh/K05YyCeU0lrQlgGdNuSngTPZmS3hLFLaLYt1Iif2WZ1sUqE
- TgYVzca7yPC2uUy2eoYdcvF1lLnue7ZDk4MZLGA+VPy4KoWeq2k2mwLoVe6jxGIgdMO8
- 5WwIFf/LRl7d2fz+nad3E3/jxZbkj+fDzlhfAqXBM6Az5JFNsObRqG1lsYFXrTAlF0Jo
- Q4JKTeB7FioS/jX9/azKnYoa1pnQJTwR7HlJiyZpPqF1qLaOq8+DlROizikhv0ELi+ba
- ni1mNOCLmpqs1YwT6Y7E6nLzq2DHJpq70pxS8HFuQXeWYqeIRAxnhBq1638WR+dktTBF
- NkDQ==
-X-Gm-Message-State: AOJu0Yze2lTJPvoLI4uln2un4q4/zje0kW5dmXSpYcXLn0uItZ3Z5FWG
- RySKJpxmS26hzlelup1Si62YZSLFYe/XAhF0gY7zhGyYKQFKo5Xa52cwS38InG2HlJgcRqHnduc
+ bh=RjZ6cQPmMEZJKMHvvuvAJX3UCCnjOXWIF0uLFIEhf+4=;
+ b=eW0MO4tbT3uoHd+XJtla21hX/+gkOi4g2I7LfQqCJRoFrv4r5NBevXz8sZVbkh0JJN
+ DSTl6Db1cJDJ16GigpeMMaWPX5lWPMZQq+9CR+Pd9X1VzSzd2khzM9Dn8W0TqnxALEPa
+ 8PhUxFlXasjyxXcON1w1HNwK1a7WcP+bX8ipg5LOwHoZmy6x0NNdM+CnynqYP3wFuqcx
+ xbw+dPEFkCwZhgMUTiHdqzL3ds07z2ZhkYOiIpo1zAg5YkUDGF3RZxgxd5hXO+HKHExT
+ NfQZ6MaqXEEwX9M4sQK7wI2/5WOMt8gNd8r1ihnyX/5jSXZmHfovm3uhxx8Q2Ob9Y2Ct
+ DGeQ==
+X-Gm-Message-State: AOJu0YzjqQraSCL11E0qP5lstalvB4cVLcgBLxpZBnn5uTM+gdutygvZ
+ mZr808l2k4qHOMxYzjxaN1hokgxuSZFpht6A7SAgR4kBEqhP3KXA4qL2hYqEI4uJhEoV58NWyyg
  =
-X-Google-Smtp-Source: AGHT+IEy13McK8jjsddbO0SZ15VZRo+tlvVRR7YS1XjwX+3hqHr5Jnpuj1hYb/ym3jHX2/u3xP90hA==
-X-Received: by 2002:a92:c246:0:b0:3a0:8d2f:2914 with SMTP id
- e9e14a558f8ab-3a4ed2fe5f9mr369393595ab.23.1730822875019; 
- Tue, 05 Nov 2024 08:07:55 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGqc6o2bl/VQ0BA0OZoiMZ9mdwwUhLuBddXZgOR+vxSNQh/OkrU+ERApjY2ZEIqjWPOKqJtBA==
+X-Received: by 2002:a05:6e02:1a8c:b0:39d:2939:3076 with SMTP id
+ e9e14a558f8ab-3a6b0394ec1mr147026875ab.25.1730822879566; 
+ Tue, 05 Nov 2024 08:07:59 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a6a99ccbf5sm29640285ab.44.2024.11.05.08.07.52
+ e9e14a558f8ab-3a6a99ccbf5sm29640285ab.44.2024.11.05.08.07.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Nov 2024 08:07:53 -0800 (PST)
+ Tue, 05 Nov 2024 08:07:58 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 4/9] docker: Adjust packages for arm64
-Date: Tue,  5 Nov 2024 09:07:33 -0700
-Message-Id: <20241105160738.3795497-5-sjg@chromium.org>
+Subject: [PATCH v2 6/9] docker: Drop tracing for arm64
+Date: Tue,  5 Nov 2024 09:07:35 -0700
+Message-Id: <20241105160738.3795497-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241105160738.3795497-1-sjg@chromium.org>
 References: <20241105160738.3795497-1-sjg@chromium.org>
@@ -89,66 +89,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The package names are slightly different for arm64 and we don't seem to
-have a linux-image-kvm package. Provide a different set for arm64
+This doesn't build on arm64 at present, so drop it for now. This can be
+revisited if we wish to support arm64 for the sandbox trace-test.
+
+The error is:
+   /usr/bin/ld: /usr/local/lib64/libtracefs.so: undefined reference to
+      `trace_seq_vprintf'
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Swap order so that amd64 is the exception
+(no changes since v1)
 
- tools/docker/Dockerfile | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ tools/docker/Dockerfile | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 540718df062..84661b036c6 100644
+index 458deb7c1ad..43b789a0c3e 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -44,7 +44,12 @@ RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_
- RUN wget -O - https://github.com/foss-xtensa/toolchain/releases/download/2020.07/x86_64-2020.07-xtensa-dc233c-elf.tar.gz | tar -C /opt -xz
+@@ -245,7 +245,8 @@ RUN git clone https://github.com/stefanberger/swtpm /tmp/swtpm && \
+ 	rm -rf /tmp/swtpm
  
- # Update and install things from apt now
--RUN apt-get update && apt-get install -y \
-+RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
-+		EXTRA_PACKAGES="grub-efi-amd64-bin grub-efi-ia32-bin libc6-i386 linux-image-kvm"; \
-+	else \
-+		EXTRA_PACKAGES="grub-efi linux-image-generic"; \
-+	fi; \
-+	apt-get update && apt-get install -y \
- 	automake \
- 	autopoint \
- 	bc \
-@@ -70,13 +75,10 @@ RUN apt-get update && apt-get install -y \
- 	gnu-efi \
- 	gnutls-dev \
- 	graphviz \
--	grub-efi-amd64-bin \
--	grub-efi-ia32-bin \
- 	help2man \
- 	iasl \
- 	imagemagick \
- 	iputils-ping \
--	libc6-i386 \
- 	libconfuse-dev \
- 	libgit2-dev \
- 	libjson-glib-dev \
-@@ -94,7 +96,6 @@ RUN apt-get update && apt-get install -y \
- 	libtool \
- 	libudev-dev \
- 	libusb-1.0-0-dev \
--	linux-image-kvm \
- 	lzma-alone \
- 	lzop \
- 	mount \
-@@ -131,6 +132,7 @@ RUN apt-get update && apt-get install -y \
- 	xilinx-bootgen \
- 	xxd \
- 	zip \
-+	${EXTRA_PACKAGES} \
- 	&& rm -rf /var/lib/apt/lists/*
+ # Build trace-cmd
+-RUN mkdir /tmp/trace && \
++RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then  \
++    mkdir /tmp/trace && \
+     git clone https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git /tmp/trace/libtraceevent && \
+     cd /tmp/trace/libtraceevent && \
+     make -j$(nproc) && \
+@@ -258,7 +259,8 @@ RUN mkdir /tmp/trace && \
+     cd /tmp/trace/trace-cmd && \
+     make -j$(nproc) && \
+     sudo make install && \
+-    rm -rf /tmp/trace
++    rm -rf /tmp/trace; \
++    fi
  
- # Make kernels readable for libguestfs tools to work correctly
+ # Build coreboot
+ RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp -xJ && \
 -- 
 2.34.1
 
