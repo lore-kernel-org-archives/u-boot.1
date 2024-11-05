@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F486D12699
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 12:07:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB835D12698
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 12:12:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E32188E69;
-	Tue,  5 Nov 2024 13:07:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0E4DF88F68;
+	Tue,  5 Nov 2024 13:12:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NKIhjiQg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CwGUH5Lb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C42048862E; Tue,  5 Nov 2024 13:07:11 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 028C388EDE; Tue,  5 Nov 2024 13:12:27 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EB0F88E17
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 13:07:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 531FE89156
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 13:12:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4314fa33a35so41594445e9.1
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 04:07:09 -0800 (PST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43159c9f617so42462145e9.2
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 04:12:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730808429; x=1731413229; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kr5b4Z2KsFYWaFASfYrLqEcfxS/BrtIZ/h9NP5/4wPI=;
- b=NKIhjiQgYiYVXWZvX10vGG/ac8LdLD5R1RaQS5sqbS9jeOOuBjBCxdU+H+TaIQVOko
- JhddV7ghHaKQL9skra7HalkkXClfbBOOq8+kkPOVMRG6GJq2CQEzZ9JU8AkfCujgJdUd
- /y0L25cgEV8l7VhqFks05nqkcIq7Z77i5DSFrl53I/jfzKXfWzdai5aQte/LAPQOoal5
- nAkwfVarqZ+JK4V37BGWJEA0r56vgJpRqqHpSd/28NfyqU/eu66YRCLKJs2xnz1zAyIL
- 33LoA0BdXUCgAT+dJXwKF8nHRtK6gTj6R7OtFVV5sfs8wQA+ujw5lqpYCm+pDML5iv1u
- dN0w==
+ d=linaro.org; s=google; t=1730808743; x=1731413543; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=QgoxnoK9ZzEb/bnOLf9yjr/3OqeETXfirp+tHaJXfy8=;
+ b=CwGUH5LbuUEbM/yqvRPtT7W1UsD8iZLTqtk3Ad32sdo1XvrnoOLBprtUETYZKcz7yN
+ 74nnMif2GqTutbPMLzwsbXWKcFzf9wHofjRgmzBxKkuAl7MDWqHDtGYlosMxnnnkdzz+
+ s0td/jvurHhyeE2998PghS3RVe61h7YJvK56SnK6HQqRVPDrTQT7fn2t94B5QWgEZm8g
+ 9C8uYOOIewYlWpLsspv35i/9wVVDZzwqwTx8v6WO+8/D220M264cLsf3+XE0dCpTmNyd
+ t/Bd3ycYdpTFoHIqHA9+H4qpa+qzRCV5ChdbBQ90rvBPfV9QcuJkwgNA7fTXUNwE1IKJ
+ obvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730808429; x=1731413229;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kr5b4Z2KsFYWaFASfYrLqEcfxS/BrtIZ/h9NP5/4wPI=;
- b=XCRLZvDBfxWxsFAjupZfSsU6Ko/2R/wt9g9unOg5zIxqchbTn8rzNP81lGAqNyBfpC
- RKkaRfvOZQEoM9Fh1ygFysqDbXElZ/0R5H8koxI1WW6BB2CAegeFOdLujP288gEmIrmt
- Vq0hvPHkw1jB3F7Mh0QReRsjXRZ8/pf7LQ5BCj2i+c9eAaYTjEFygTtxtwuvjKa+hwsy
- 3y/0re9KjKkoYcS/X05OAxNKOszWEdKllkq1Vlpx07ocobk9n2LEctuY1IQ6AsSV5L8G
- XWeSTJsJbKNwo26+toxZIaC7LbTBR9asSH8EDH2lIrFVutSBS1fCgCmlsDMwoO0cT0BW
- aQYQ==
-X-Gm-Message-State: AOJu0YzlnL69+SQOzqA/2zPyI8Qe6W9cGSBpEDt8Rw7rGm1bj/zDPP08
- a7JltsHAaug74j1jPR8NC6gm3m7tOJ4z7WPZhbuHNfVWesoyInSbbiI7r4EECCfEybFM19UG+um
- BXdyjQZJz
-X-Google-Smtp-Source: AGHT+IGrvWP7/4/0nuA5vuvVjjYZ12qt74TSitRVvjRMR0LPgO/goso5yGzWSN6L/NILlYMf2p+S2g==
-X-Received: by 2002:a05:600c:354e:b0:431:55c1:f440 with SMTP id
- 5b1f17b1804b1-431bb9de8a9mr211553245e9.30.1730808427605; 
- Tue, 05 Nov 2024 04:07:07 -0800 (PST)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
+ d=1e100.net; s=20230601; t=1730808743; x=1731413543;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=QgoxnoK9ZzEb/bnOLf9yjr/3OqeETXfirp+tHaJXfy8=;
+ b=hplDtZAevgpRriqXTU3FOdoVvwhBlrnlCR7P2DUPB+kPSecW6YaLcHskxXZlZq+jt2
+ qjIVwmmeLLCbEywxAoGpILy7IYi7/2trxP1jL4thc6yjtS3tcRRXFnH/cf08bGaPVptb
+ 4keAqwbJ08iJKhP4DSDZv2/Ue25uTVh0d8KgAI3ZEUuYcX73GQ8dWvxs82R4JnB86b0N
+ mZgGczgctZLX24YiqI8CVFKwbMxkyzAmwKxMajVBVJNhJktOqwq2Cvyk53qXDDnJKQg4
+ polAOEHQ13ogBc6h2Vt4IiBXTdp2t1AtgD6hMD3AOY3YSuA8zcQ0OfqYSkFJnHsycv74
+ seEg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUCHHpWEyWK/NQ+tG4zLFKLRD9onMtJyVI9f1Is1mc7kbZVUELCDYbdWS7Wp3yrBtWYCB2NO8A=@lists.denx.de
+X-Gm-Message-State: AOJu0YwByEf/gPkmvOgyPSIJFiv8Kl7g25VLU24pSe0xgYxMYm8ZSXm9
+ iFML3B1aoorUcrri5N0649MqwsWdjRP1YWTig+YoZbiDI8WAwib7oU/hL9rNcHtOGlplCYC9rIo
+ W0A9ZgQWF
+X-Google-Smtp-Source: AGHT+IEWmGeN8oUr2xcaMfJOw/Ythq4dfn8zrWiTl+0taFRhDoA1O+Q8gMQiu2rsvkvBBRENBpHzEw==
+X-Received: by 2002:a05:600c:4fcb:b0:425:7bbf:fd07 with SMTP id
+ 5b1f17b1804b1-4319ac6fb93mr323185785e9.5.1730808742563; 
+ Tue, 05 Nov 2024 04:12:22 -0800 (PST)
+Received: from [10.100.0.2] ([194.15.111.158])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-431bd9a9984sm217572145e9.32.2024.11.05.04.07.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Nov 2024 04:07:07 -0800 (PST)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>
-Subject: [PATCH] test/cmd/wget.c: move net_test_wget() to the cmd test suite
-Date: Tue,  5 Nov 2024 13:06:53 +0100
-Message-Id: <20241105120653.99438-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.40.1
+ 5b1f17b1804b1-4327d5bf4e7sm185400015e9.15.2024.11.05.04.12.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Nov 2024 04:12:22 -0800 (PST)
+Message-ID: <f3b65417-d35d-49c7-95de-b1db7b283e11@linaro.org>
+Date: Tue, 5 Nov 2024 12:12:21 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: wget bug report
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <CAFLszTi9XE8oHuZCYrj85UVXVEYFDomqK=KrO5E-fTAn9_f=0w@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAFLszTi9XE8oHuZCYrj85UVXVEYFDomqK=KrO5E-fTAn9_f=0w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,33 +96,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since net_test_wget() is testing a command and is in test/cmd it
-should be in the 'cmd' test suite, not 'lib'.
+Hello Simon,
 
-Reported-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- test/cmd/wget.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+On 10/27/24 17:16, Simon Glass wrote:
+> Hi Jerome,
+> 
+> Just something I noticed earlier...when running 'ut lib' I see this
+> failure on sandbox:
+> 
+> test/cmd/wget.c:215, net_test_wget(): 0 == run_command("wget
+> ${loadaddr} 1.1.2.2:/index.html", 0): Expected 0x0 (0), got 0x1 (1)
 
-diff --git a/test/cmd/wget.c b/test/cmd/wget.c
-index fe26fee54c9..9dde699db58 100644
---- a/test/cmd/wget.c
-+++ b/test/cmd/wget.c
-@@ -19,6 +19,7 @@
- #include <dm/test.h>
- #include <dm/device-internal.h>
- #include <dm/uclass-internal.h>
-+#include <test/cmd.h>
- #include <test/lib.h>
- #include <test/test.h>
- #include <test/ut.h>
-@@ -225,4 +226,4 @@ static int net_test_wget(struct unit_test_state *uts)
- 
- 	return 0;
- }
--LIB_TEST(net_test_wget, UTF_CONSOLE);
-+CMD_TEST(net_test_wget, UTF_CONSOLE);
+The reason is:
+
+$ make sandbox_defconfig
+$ make -j$(nproc)
+$ ./u-boot -c "ut lib"
+[...]
+Net:         eth_initialize() No ethernet found.
+
+I don't know how sandbox is supposed to instantiate ethernet devices?
+
+
+> Also, since it is testing a command and is in test/cmd it really
+> should be in the 'cmd' test suite, not 'lib'.
+
+Agreed. I've posted a patch for that:
+https://lore.kernel.org/u-boot/20241105120653.99438-1-jerome.forissier@linaro.org/T/#u
+
+> 
+> Regards,
+> Simon
+
+Thanks,
 -- 
-2.40.1
-
+Jerome
