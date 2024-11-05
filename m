@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5069D1CA29
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 05:38:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C62D1CA2A
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 05:39:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BD1E88E7B;
-	Tue,  5 Nov 2024 06:38:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3185588E7B;
+	Tue,  5 Nov 2024 06:39:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g6YNfeqI";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UxGE8jpi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFE3888E7B; Tue,  5 Nov 2024 06:38:06 +0100 (CET)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 87E0788F4E; Tue,  5 Nov 2024 06:38:58 +0100 (CET)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E26088F4E
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 06:38:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F82D88D45
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 06:38:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-288a90e4394so2254433fac.0
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 21:38:04 -0800 (PST)
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-28854674160so2002540fac.2
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 21:38:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730785078; x=1731389878; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1730785135; x=1731389935; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QcFFlAaH/RkGGv81PC4da7pPUHS5x6KL2CGZ2ihbzc0=;
- b=g6YNfeqIvDUWCTU+1DoL5xTdGKihLCPuKy6O8BEwfwh+hioNrt6zieSz+Hb61eHblN
- M3CYLea5KGOLLPxVChFqq483280lFCQI2ua13muG/3doO1suCb1mXqOaGTQGsAg0ykdO
- 2B+2DJFFXZaxijoGlgXumFUlB3O4LDjacmThKqWwaC0Q0k2CcrbajQ0JZoAa9D8BEVoJ
- VQRLq9ELreXZ/Tup3bPZxB47T24LZZ0BTKvAn5nWIfXlds6Owp1JMp8ymM4WDIkgPkvr
- Gog1uG3m0qe+dSEHB7vJmkKdQA6LgKe8SaZDaDBPWEnPRg6mb4iAMZw0RuHdm2mFEdBW
- 0ptA==
+ bh=vZhmX/SrhmnhAqkdYfaCHBd1uQ8+aCcWjBeFJxJ8UXs=;
+ b=UxGE8jpiEI3Qa3rqZGOv9F905UYtXPkDE6C0F11U2Pu4wRNps6CMYKMG9zoea4vEcA
+ WhG1iZ9hakvO+LUmUKWFYZy/uvSDSaN72oNDZM4cTarB3KGvvY7FsGWS9JVUK2GqX2NQ
+ 5F5h6BPh3IddvNr+6YcDmO2/gz0cyrplnBEf5jC2jAWfiCJcXLNi0LgExd4CdRL4iYhc
+ MDM4UVNOqJSQmpnUu+ZFb6lhqa+PbMkhmW+CnmawQ24OMI7RhxIIqVD3cfW2FJe7F6np
+ DBpJd9vcGmo+N2ENp6l/EycocmzMbnS5z2lYbcT6BLZCa2m58HDIiEoZfXZHWCZ0BzR0
+ Z1rA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730785078; x=1731389878;
+ d=1e100.net; s=20230601; t=1730785135; x=1731389935;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QcFFlAaH/RkGGv81PC4da7pPUHS5x6KL2CGZ2ihbzc0=;
- b=rRspqGWLacRcQ48bU7U5OHYtArFyLRUIXjquvvEIK0jFIfmlEzbZ8IdvgSC4GodnH6
- Qvgc3ylNocRYAxpH/q2f+YodfmTYyqqkykQTa6fm6I5c5Chj0WHPriPgh+iRha+xTXDA
- ivG9v9IEcTFVWseBllRoH+wNkY5krJXdQMKGoNHFbGqdPxIHfuhHknefSZ5xJMSSY92/
- h4fWkPQVKbPequ9bIFdumjRg9OS6cDWTkFhjvlAP0HZblDKHhPtH0jYLT30vYSTudpL4
- XbEH82DrF5vKk9coTrsHo/hiXzeWhDCldipufz7Q4nfaDebD4FiBf19Ayw/mFhkv/aMq
- zJVg==
+ bh=vZhmX/SrhmnhAqkdYfaCHBd1uQ8+aCcWjBeFJxJ8UXs=;
+ b=iYAKNV0QMCL7GUJ8PWvjJyPO7prxxPfnwt+EGDd2KVst1Fp3R9/DOO6rxaF9ygAEG0
+ vFoQTD2eLhdB0qkD/fg4mnr1LTypS/qRAJzJAwoz4Au1lm6Jr58Uag9PLFf3O54LBl7g
+ F1FyseHNEzaze+TXNM0vb7VXnLjNH8nd64rbkv6b5cAneLqXC6s5RWBe4hJ3931no3b+
+ +D8BbjlED15tu6Zo9iUJV84Q1YF9og2opr88oyVL7rT2oED7oRbiTxB9GvShIoo1j33V
+ mX3P/ZOWVLt2MJ2YjUa+3NIcV671dGne1tIAhJ7HsAqsmpsH0CSSP/Y1xDO12j1hBFtf
+ nqbg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVci+J5WyG5LNkTfyH+CAPvuFvKZp+I3/QmgAyTNjc6bejCaZVd5S7mRs4QH6+xjW9ORaRQPyU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzd1QMGWZKdZK47N9weJ6oCIgRn0ukgoVN1F68z/euBQ/0HwKSU
- wPF2P+yN0BxNKistcoSW0gFi9g4tjw/VurvvzHrZ4aTPg9foqGqJWkxiR9f3W1YVHOvpltQzQ7V
- yfpc4l5Zb2Q+mn/tfigXizM1Ds5I=
-X-Google-Smtp-Source: AGHT+IEGSrIEJ1TtGh0iSDJ7DMi3KnDzpYlRrvKrEO8g/aI3hFflarxIRlCYqgjjkPY/A0uyBHg8CqhXssJKXLxFvBA=
-X-Received: by 2002:a05:6871:378a:b0:278:2c82:e056 with SMTP id
- 586e51a60fabf-294648015b1mr18611510fac.23.1730785078265; Mon, 04 Nov 2024
- 21:37:58 -0800 (PST)
+ AJvYcCWUtbWHw61C4+BHL/OxL3EJpZqAU7XpKFQu41zvF85Ko2qzFl7YkfNK41m3qpf1WBqJXTSXccM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8lBD/8cfafAS6YfwVqDWBHyPn2poSohywHOLQZ/QfJtB+2erQ
+ 0NZxfYm3ZU0Ch1yMfSo+w+OHnOqbUNSeYWsbFVacjh2hjJgLGxKV6Kfm5JXz53ed4LjN6P+S1/M
+ xy4mLTl/N+14z1Pvb3wzQN7Rd3ZEh2A==
+X-Google-Smtp-Source: AGHT+IEuVWYmX9LEumcJeuZTlJGf7AFAPFXyjQoCm/gfS97lMYHWDejTGfqB//3/wARW7y2CPao3lzCCm/3zUfmFatI=
+X-Received: by 2002:a05:6870:3920:b0:277:fd73:8f82 with SMTP id
+ 586e51a60fabf-294846ab92cmr13927362fac.45.1730785134987; Mon, 04 Nov 2024
+ 21:38:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20240910-exynos-pinctrl-v1-1-f220454470ef@grimler.se>
-In-Reply-To: <20240910-exynos-pinctrl-v1-1-f220454470ef@grimler.se>
+References: <20241030204627.31757-1-semen.protsenko@linaro.org>
+In-Reply-To: <20241030204627.31757-1-semen.protsenko@linaro.org>
 From: Minkyu Kang <promsoft@gmail.com>
-Date: Tue, 5 Nov 2024 14:37:46 +0900
-Message-ID: <CALrBrZ3rbEM2wAbwQ=8mbw3-tEpZwQGffVwYYt=n6s5JrpOQ+Q@mail.gmail.com>
-Subject: Re: [PATCH] pinctrl: exynos: fix type of count integer
-To: Henrik Grimler <henrik@grimler.se>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>,
- Minkyu Kang <mk7.kang@samsung.com>, 
- Thomas Abraham <thomas.ab@samsung.com>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Date: Tue, 5 Nov 2024 14:38:43 +0900
+Message-ID: <CALrBrZ3ODz1tOrEuJwEsu+GofKCbnGYBVXz17R=NQhhs5Q8giA@mail.gmail.com>
+Subject: Re: [PATCH] arm: dts: e850-96: Remove TRNG node from appended dts
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -95,48 +93,46 @@ X-Virus-Status: Clean
 Hello,
 
 
-2024=EB=85=84 9=EC=9B=94 11=EC=9D=BC (=EC=88=98) 03:46, Henrik Grimler <hen=
-rik@grimler.se>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+2024=EB=85=84 10=EC=9B=94 31=EC=9D=BC (=EB=AA=A9) 05:46, Sam Protsenko <sem=
+en.protsenko@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
 
-> unsigned int count is used to capture return of dev_read_string_count.
-> When an error occurs dev_read_string_count returns -ve, which can
-> hence not be handled correctly. Use int instead of unsigned int so
-> that errors are detected.
+> Commit 136b7b6d2e98 ("Subtree merge tag 'v6.11-dts' of dts repo [1] into
+> dts/upstream") updates the upstream dts for E850-96 board, bringing
+> upstream TRNG node. There is no need to keep TRNG node in appended dts
+> anymore, so remove it.
 >
-> Fixes: 16ca80adc551 ("pinctrl: Add pinctrl driver support for Exynos7420
-> SoC")
+> Tested on E850-96 board by running 'rng' command in U-Boot shell.
 >
-> Signed-off-by: Henrik Grimler <henrik@grimler.se>
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
->  drivers/pinctrl/exynos/pinctrl-exynos.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  arch/arm/dts/exynos850-e850-96-u-boot.dtsi | 11 -----------
+>  1 file changed, 11 deletions(-)
 >
-> diff --git a/drivers/pinctrl/exynos/pinctrl-exynos.c
-> b/drivers/pinctrl/exynos/pinctrl-exynos.c
-> index b393127c64..b37282fa9d 100644
-> --- a/drivers/pinctrl/exynos/pinctrl-exynos.c
-> +++ b/drivers/pinctrl/exynos/pinctrl-exynos.c
-> @@ -114,8 +114,8 @@ static void exynos_pinctrl_set_pincfg(unsigned long
-> reg_base, u32 pin_num,
->  int exynos_pinctrl_set_state(struct udevice *dev, struct udevice *config=
-)
->  {
->         struct exynos_pinctrl_priv *priv =3D dev_get_priv(dev);
-> -       unsigned int count, idx;
-> -       unsigned int pinvals[PINCFG_TYPE_NUM];
-> +       int count;
-> +       unsigned int idx, pinvals[PINCFG_TYPE_NUM];
+> diff --git a/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
+> b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
+> index 3aa5d8bb10d0..6d7148f7264a 100644
+> --- a/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
+> +++ b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
+> @@ -3,17 +3,6 @@
+>   * Copyright (c) 2023 Linaro Ltd.
+>   */
 >
->         /*
->          * refer to the following document for the pinctrl bindings
->
-> ---
-> base-commit: ce1a2630827a1f9ddadb2598ab7936732e6cb723
-> change-id: 20240910-exynos-pinctrl-c70d952d7f9b
->
-> Best regards,
+> -&soc {
+> -       /* TODO: Remove this node once it appears in upstream dts */
+> -       trng: rng@12081400 {
+> -               compatible =3D "samsung,exynos850-trng";
+> -               reg =3D <0x12081400 0x100>;
+> -               clocks =3D <&cmu_core CLK_GOUT_SSS_ACLK>,
+> -                        <&cmu_core CLK_GOUT_SSS_PCLK>;
+> -               clock-names =3D "secss", "pclk";
+> -       };
+> -};
+> -
+>  &pmu_system_controller {
+>         bootph-all;
+>         samsung,uart-debug-1;
 > --
-> Henrik Grimler <henrik@grimler.se>
+> 2.39.5
 >
 
 applied to u-boot-samsung.
