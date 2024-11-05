@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F5ADD3176B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 17:22:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83AB7D3176B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 17:22:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 228B4891C7;
-	Tue,  5 Nov 2024 18:22:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 89582891CF;
+	Tue,  5 Nov 2024 18:22:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1D70891A6; Tue,  5 Nov 2024 18:22:13 +0100 (CET)
-Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
- [84.16.66.175])
+ id C0AF8891DD; Tue,  5 Nov 2024 18:22:15 +0100 (CET)
+Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::8fa9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE1F2881E7
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:22:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 87BE288C44
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:22:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
  [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4XjZrz4c3HzVhD;
- Tue,  5 Nov 2024 18:22:11 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4XjZs01RBHzW2F;
+ Tue,  5 Nov 2024 18:22:12 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4XjZrz03B7zxWn; Tue,  5 Nov 2024 18:22:10 +0100 (CET)
+ id 4XjZrz4YJWz14Q; Tue,  5 Nov 2024 18:22:11 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 05 Nov 2024 18:21:57 +0100
-Subject: [PATCH next RFC 3/5] rockchip: spl/tpl: panic when DRAM init
- failed
+Date: Tue, 05 Nov 2024 18:21:58 +0100
+Subject: [PATCH next RFC 4/5] ram: rk3399: merge two consecutive ifs with
+ same condition
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241105-rk3399-dram-init-v1-3-1e29acdf0966@cherry.de>
+Message-Id: <20241105-rk3399-dram-init-v1-4-1e29acdf0966@cherry.de>
 References: <20241105-rk3399-dram-init-v1-0-1e29acdf0966@cherry.de>
 In-Reply-To: <20241105-rk3399-dram-init-v1-0-1e29acdf0966@cherry.de>
 To: Simon Glass <sjg@chromium.org>, 
@@ -64,55 +64,41 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-A failed DRAM init is synonym with a broken board, so let's panic
-instead of silently skipping the rest of the xPL stage and making it
-fail later in some other code parts.
+Nothing changes channel_mask in the first if block of the same condition
+so it is safe to merge the two if blocks with the same condition into
+one.
 
-This also has the benefit of (by default) resetting the CPU which could
-help recover the device without human intervention were the DRAM init
-issue related to not-100%-reproducibly fail the DRAM init.
+No intended change in behavior.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/mach-rockchip/spl.c | 7 +++----
- arch/arm/mach-rockchip/tpl.c | 6 ++----
- 2 files changed, 5 insertions(+), 8 deletions(-)
+ drivers/ram/rockchip/sdram_rk3399.c | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
-index f4d29bbdd17e8b57dc0b2fdd90a8600fba6ee866..9b2d7023fb862bf696ad376b6f0b30e834aa41be 100644
---- a/arch/arm/mach-rockchip/spl.c
-+++ b/arch/arm/mach-rockchip/spl.c
-@@ -112,10 +112,9 @@ void board_init_f(ulong dummy)
- #if !defined(CONFIG_TPL) || defined(CONFIG_SPL_RAM)
- 	debug("\nspl:init dram\n");
- 	ret = dram_init();
--	if (ret) {
--		printf("DRAM init failed: %d\n", ret);
--		return;
+diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+index 5a82c7ccbdf161526f0d1450dde6881441e59543..d953dda13cd3daa689fa362dc511c372db454064 100644
+--- a/drivers/ram/rockchip/sdram_rk3399.c
++++ b/drivers/ram/rockchip/sdram_rk3399.c
+@@ -811,9 +811,7 @@ static int pctl_start(struct dram_info *dram,
+ 	if (channel_mask & 1) {
+ 		writel(0x01000000, &ddrc0_con_0);
+ 		clrsetbits_le32(&denali_phy_0[957], 0x3 << 24, 0x2 << 24);
 -	}
-+	if (ret)
-+		panic("DRAM init failed: %d\n", ret);
+ 
+-	if (channel_mask & 1) {
+ 		count = 0;
+ 		while (!(readl(&denali_ctl_0[203]) & (1 << 3))) {
+ 			if (count > 1000) {
+@@ -849,8 +847,7 @@ static int pctl_start(struct dram_info *dram,
+ 	if (channel_mask & 2) {
+ 		writel(0x01000000, &ddrc1_con_0);
+ 		clrsetbits_le32(&denali_phy_1[957], 0x3 << 24, 0x2 << 24);
+-	}
+-	if (channel_mask & 2) {
 +
- 	gd->ram_top = gd->ram_base + get_effective_memsize();
- 	gd->ram_top = board_get_usable_ram_top(gd->ram_size);
- 
-diff --git a/arch/arm/mach-rockchip/tpl.c b/arch/arm/mach-rockchip/tpl.c
-index bbb9329e725af79ea4c4049aa7890a4a143e7df5..5da23913c147cab18377f09b566f28b0bee4e935 100644
---- a/arch/arm/mach-rockchip/tpl.c
-+++ b/arch/arm/mach-rockchip/tpl.c
-@@ -55,10 +55,8 @@ void board_init_f(ulong dummy)
- 		timer_init();
- 
- 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
--	if (ret) {
--		printf("DRAM init failed: %d\n", ret);
--		return;
--	}
-+	if (ret)
-+		panic("DRAM init failed: %d\n", ret);
- }
- 
- int board_return_to_bootrom(struct spl_image_info *spl_image,
+ 		count = 0;
+ 		while (!(readl(&denali_ctl_1[203]) & (1 << 3))) {
+ 			if (count > 1000) {
 
 -- 
 2.47.0
