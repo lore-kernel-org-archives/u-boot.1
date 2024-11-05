@@ -4,57 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB590D1CA15
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 04:20:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5069D1CA29
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 05:38:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C66D188F77;
-	Tue,  5 Nov 2024 05:20:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 1BD1E88E7B;
+	Tue,  5 Nov 2024 06:38:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="oNPMFf0M";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g6YNfeqI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7424B88F77; Tue,  5 Nov 2024 05:20:53 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AFE3888E7B; Tue,  5 Nov 2024 06:38:06 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73B3C88ECC
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 05:20:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E26088F4E
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 06:38:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
- [5.147.80.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id DD97740278; 
- Tue,  5 Nov 2024 04:20:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1730780450;
- bh=dOb7T3VaSJkE9G45Waopw9Y83FWlGWEzUdOGE7298pQ=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=oNPMFf0MOoULaeFqyFrYTMAkTtAIE8RvilSPDXHG1EnTplkwU7Y3qGA5aNmH9zm/Z
- aEpILTXKJxU46F3dQ2gQzB0nm586AjfatsbxUEKsefXaNqNM6PKprPdL30LSiiBmYs
- zCla6nlGESWYnIJCrL4zugMunkuhw/USxcEWK6Ldu+C5cqExEVB8V1aRoe9kYDHGm2
- aPLsK2BYHlaUeMA+ofGibLhlpOymeOKNY8tpnjDaJy1bADGihVy7pk3B6KkqQIcUZp
- jvPp1CuNk4dJFYK+ZzZjdudqGg+op6HEpm8VOG6W9kUDfDTz2G9+MG8lI7nc/C3810
- 9Dkr4KSb3Exew==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Eddie James <eajames@linux.ibm.com>, Raymond Mao <raymond.mao@linaro.org>,
- Tim Harvey <tharvey@gateworks.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: simplify efi_tcg2_hash_log_extend_event()
-Date: Tue,  5 Nov 2024 05:20:45 +0100
-Message-ID: <20241105042045.36435-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=promsoft@gmail.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-288a90e4394so2254433fac.0
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 21:38:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1730785078; x=1731389878; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QcFFlAaH/RkGGv81PC4da7pPUHS5x6KL2CGZ2ihbzc0=;
+ b=g6YNfeqIvDUWCTU+1DoL5xTdGKihLCPuKy6O8BEwfwh+hioNrt6zieSz+Hb61eHblN
+ M3CYLea5KGOLLPxVChFqq483280lFCQI2ua13muG/3doO1suCb1mXqOaGTQGsAg0ykdO
+ 2B+2DJFFXZaxijoGlgXumFUlB3O4LDjacmThKqWwaC0Q0k2CcrbajQ0JZoAa9D8BEVoJ
+ VQRLq9ELreXZ/Tup3bPZxB47T24LZZ0BTKvAn5nWIfXlds6Owp1JMp8ymM4WDIkgPkvr
+ Gog1uG3m0qe+dSEHB7vJmkKdQA6LgKe8SaZDaDBPWEnPRg6mb4iAMZw0RuHdm2mFEdBW
+ 0ptA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730785078; x=1731389878;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QcFFlAaH/RkGGv81PC4da7pPUHS5x6KL2CGZ2ihbzc0=;
+ b=rRspqGWLacRcQ48bU7U5OHYtArFyLRUIXjquvvEIK0jFIfmlEzbZ8IdvgSC4GodnH6
+ Qvgc3ylNocRYAxpH/q2f+YodfmTYyqqkykQTa6fm6I5c5Chj0WHPriPgh+iRha+xTXDA
+ ivG9v9IEcTFVWseBllRoH+wNkY5krJXdQMKGoNHFbGqdPxIHfuhHknefSZ5xJMSSY92/
+ h4fWkPQVKbPequ9bIFdumjRg9OS6cDWTkFhjvlAP0HZblDKHhPtH0jYLT30vYSTudpL4
+ XbEH82DrF5vKk9coTrsHo/hiXzeWhDCldipufz7Q4nfaDebD4FiBf19Ayw/mFhkv/aMq
+ zJVg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVci+J5WyG5LNkTfyH+CAPvuFvKZp+I3/QmgAyTNjc6bejCaZVd5S7mRs4QH6+xjW9ORaRQPyU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzd1QMGWZKdZK47N9weJ6oCIgRn0ukgoVN1F68z/euBQ/0HwKSU
+ wPF2P+yN0BxNKistcoSW0gFi9g4tjw/VurvvzHrZ4aTPg9foqGqJWkxiR9f3W1YVHOvpltQzQ7V
+ yfpc4l5Zb2Q+mn/tfigXizM1Ds5I=
+X-Google-Smtp-Source: AGHT+IEGSrIEJ1TtGh0iSDJ7DMi3KnDzpYlRrvKrEO8g/aI3hFflarxIRlCYqgjjkPY/A0uyBHg8CqhXssJKXLxFvBA=
+X-Received: by 2002:a05:6871:378a:b0:278:2c82:e056 with SMTP id
+ 586e51a60fabf-294648015b1mr18611510fac.23.1730785078265; Mon, 04 Nov 2024
+ 21:37:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240910-exynos-pinctrl-v1-1-f220454470ef@grimler.se>
+In-Reply-To: <20240910-exynos-pinctrl-v1-1-f220454470ef@grimler.se>
+From: Minkyu Kang <promsoft@gmail.com>
+Date: Tue, 5 Nov 2024 14:37:46 +0900
+Message-ID: <CALrBrZ3rbEM2wAbwQ=8mbw3-tEpZwQGffVwYYt=n6s5JrpOQ+Q@mail.gmail.com>
+Subject: Re: [PATCH] pinctrl: exynos: fix type of count integer
+To: Henrik Grimler <henrik@grimler.se>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>,
+ Minkyu Kang <mk7.kang@samsung.com>, 
+ Thomas Abraham <thomas.ab@samsung.com>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,37 +92,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The value of variable nt is never used. Just use NULL when calling
-efi_check_pe().
+Hello,
 
-The API function is not expected to write to the console. Such output might
-have unwanted side effects on the screen layout of an EFI application.
 
-Leave error handling to the caller.
+2024=EB=85=84 9=EC=9B=94 11=EC=9D=BC (=EC=88=98) 03:46, Henrik Grimler <hen=
+rik@grimler.se>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_loader/efi_tcg2.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+> unsigned int count is used to capture return of dev_read_string_count.
+> When an error occurs dev_read_string_count returns -ve, which can
+> hence not be handled correctly. Use int instead of unsigned int so
+> that errors are detected.
+>
+> Fixes: 16ca80adc551 ("pinctrl: Add pinctrl driver support for Exynos7420
+> SoC")
+>
+> Signed-off-by: Henrik Grimler <henrik@grimler.se>
+> ---
+>  drivers/pinctrl/exynos/pinctrl-exynos.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/pinctrl/exynos/pinctrl-exynos.c
+> b/drivers/pinctrl/exynos/pinctrl-exynos.c
+> index b393127c64..b37282fa9d 100644
+> --- a/drivers/pinctrl/exynos/pinctrl-exynos.c
+> +++ b/drivers/pinctrl/exynos/pinctrl-exynos.c
+> @@ -114,8 +114,8 @@ static void exynos_pinctrl_set_pincfg(unsigned long
+> reg_base, u32 pin_num,
+>  int exynos_pinctrl_set_state(struct udevice *dev, struct udevice *config=
+)
+>  {
+>         struct exynos_pinctrl_priv *priv =3D dev_get_priv(dev);
+> -       unsigned int count, idx;
+> -       unsigned int pinvals[PINCFG_TYPE_NUM];
+> +       int count;
+> +       unsigned int idx, pinvals[PINCFG_TYPE_NUM];
+>
+>         /*
+>          * refer to the following document for the pinctrl bindings
+>
+> ---
+> base-commit: ce1a2630827a1f9ddadb2598ab7936732e6cb723
+> change-id: 20240910-exynos-pinctrl-c70d952d7f9b
+>
+> Best regards,
+> --
+> Henrik Grimler <henrik@grimler.se>
+>
 
-diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index 866a529857e..572c6b5bf63 100644
---- a/lib/efi_loader/efi_tcg2.c
-+++ b/lib/efi_loader/efi_tcg2.c
-@@ -607,12 +607,9 @@ efi_tcg2_hash_log_extend_event(struct efi_tcg2_protocol *this, u64 flags,
- 	 * Format"
- 	 */
- 	if (flags & PE_COFF_IMAGE) {
--		IMAGE_NT_HEADERS32 *nt;
--
- 		ret = efi_check_pe((void *)(uintptr_t)data_to_hash,
--				   data_to_hash_len, (void **)&nt);
-+				   data_to_hash_len, NULL);
- 		if (ret != EFI_SUCCESS) {
--			log_err("Not a valid PE-COFF file\n");
- 			ret = EFI_UNSUPPORTED;
- 			goto out;
- 		}
--- 
-2.45.2
+applied to u-boot-samsung.
 
+Thanks.
+Minkyu Kang.
