@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1554D31761
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B060D31764
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:21:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FC1288FD2;
-	Tue,  5 Nov 2024 17:20:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8BF6B88FD2;
+	Tue,  5 Nov 2024 17:21:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=korsgaard.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9DD789001; Tue,  5 Nov 2024 17:20:13 +0100 (CET)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
- [217.70.183.195])
+ id 15E078917B; Tue,  5 Nov 2024 17:21:43 +0100 (CET)
+Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::222])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B702E88DFE
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:20:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2020888DFE
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:21:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=korsgaard.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peter@korsgaard.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 6364A60008;
- Tue,  5 Nov 2024 16:20:10 +0000 (UTC)
-Message-ID: <649bcf3d-5d95-450c-8c0e-149092faa299@korsgaard.com>
-Date: Tue, 5 Nov 2024 17:20:09 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] boot/image-board.c: boot_get_fpga(): pass compatible flag
- to fpga_load()
+ spf=pass smtp.mailfrom=peko@korsgaard.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 60A2C4000C;
+ Tue,  5 Nov 2024 16:21:40 +0000 (UTC)
+Received: from peko by dell.be.48ers.dk with local (Exim 4.96)
+ (envelope-from <peko@dell.be.48ers.dk>) id 1t8MJH-003WR1-24;
+ Tue, 05 Nov 2024 17:21:39 +0100
+From: Peter Korsgaard <peter@korsgaard.com>
 To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Michal Simek <michal.simek@amd.com>
-References: <20241028165557.3061852-1-peter@korsgaard.com>
-Content-Language: en-US
-From: Peter Korsgaard <peter@korsgaard.com>
-In-Reply-To: <20241028165557.3061852-1-peter@korsgaard.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: Peter Korsgaard <peter@korsgaard.com>
+Subject: [PATCH v2] boot/image-board.c: boot_get_fpga(): pass compatible flag
+ to fpga_load()
+Date: Tue,  5 Nov 2024 17:21:36 +0100
+Message-Id: <20241105162136.839633-1-peter@korsgaard.com>
+X-Mailer: git-send-email 2.39.5
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-GND-Sasl: peter@korsgaard.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -56,14 +56,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/28/24 17:55, Peter Korsgaard wrote:
-> For E.G.  signed FPGA bitstreams, similar to how it is done for the FPGA
-> loading from SPL since commit 282eed50ecb7 ("fpga: pass compatible flags to
-> fpga_load()").
+For E.G. signed FPGA bitstreams, similar to how it is done for the FPGA
+loading from SPL since commit 71f1a5392aad ("spl: fit: pass real compatible
+flags to fpga_load()").
 
-Ups, that should have been commit 71f1a5392aad ("spl: fit: pass real 
-compatible flags to fpga_load()"). I'll send a v2.
+Signed-off-by: Peter Korsgaard <peter@korsgaard.com>
+---
+Changes since v1:
+- Reference correct SPL commit
 
+ boot/image-board.c | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
+
+diff --git a/boot/image-board.c b/boot/image-board.c
+index 1757e5816d8..b726bd6b303 100644
+--- a/boot/image-board.c
++++ b/boot/image-board.c
+@@ -624,9 +624,10 @@ int boot_get_fpga(struct bootm_headers *images)
+ 	void *buf;
+ 	int conf_noffset;
+ 	int fit_img_result;
+-	const char *uname, *name;
++	const char *uname, *name, *compatible;
+ 	int err;
+ 	int devnum = 0; /* TODO support multi fpga platforms */
++	int flags = 0;
+ 
+ 	if (!IS_ENABLED(CONFIG_FPGA))
+ 		return -ENOSYS;
+@@ -674,20 +675,29 @@ int boot_get_fpga(struct bootm_headers *images)
+ 			return fit_img_result;
+ 		}
+ 
++		conf_noffset = fit_image_get_node(buf, uname);
++		compatible = fdt_getprop(buf, conf_noffset, "compatible", NULL);
++		if (!compatible) {
++			printf("'fpga' image without 'compatible' property\n");
++		} else {
++			if (CONFIG_IS_ENABLED(FPGA_LOAD_SECURE))
++				flags = fpga_compatible2flag(devnum, compatible);
++		}
++
+ 		if (!fpga_is_partial_data(devnum, img_len)) {
+ 			name = "full";
+ 			err = fpga_loadbitstream(devnum, (char *)img_data,
+ 						 img_len, BIT_FULL);
+ 			if (err)
+ 				err = fpga_load(devnum, (const void *)img_data,
+-						img_len, BIT_FULL, 0);
++						img_len, BIT_FULL, flags);
+ 		} else {
+ 			name = "partial";
+ 			err = fpga_loadbitstream(devnum, (char *)img_data,
+ 						 img_len, BIT_PARTIAL);
+ 			if (err)
+ 				err = fpga_load(devnum, (const void *)img_data,
+-						img_len, BIT_PARTIAL, 0);
++						img_len, BIT_PARTIAL, flags);
+ 		}
+ 
+ 		if (err)
 -- 
-Bye, Peter Korsgaard
+2.39.5
 
