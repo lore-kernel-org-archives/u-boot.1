@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F72BD3610E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 19:21:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E567ED3610E
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 19:22:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C6708917B;
-	Tue,  5 Nov 2024 20:21:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 790F48917B;
+	Tue,  5 Nov 2024 20:21:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bQKTPVoi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hqHyzHs0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BAE4891AB; Tue,  5 Nov 2024 20:21:06 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 18E9388CA2; Tue,  5 Nov 2024 20:21:58 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A660688D8D
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 20:21:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E0DF0891CE
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 20:21:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a93c1cc74fdso935400366b.3
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 11:21:03 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a86e9db75b9so910264166b.1
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 11:21:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730834463; x=1731439263; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1730834515; x=1731439315; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oVUU8qlebiOmTinyrIiM5leftM7Cx8bP6lE3VBD2F8M=;
- b=bQKTPVoijaYnxhtY0Y5dAwI9Ul8jNkrhORUU16sroPAPS9iTXMDeX5wy1tYeiyxx7P
- tZs2/V2MMmFYP5YyzE2m8EHnPHxD+StQZ2C11kPwsNAH9H6UZpTqixSF/OoddrTMF+B3
- 5X/Vqh/BZKmt3iZ19O/bswrT59U5yaPTliZxM=
+ bh=JO6AUgRzsUa7ENcvy31LU3u5bJnpcBrSj+VDJITuxfk=;
+ b=hqHyzHs0Q5syHi/n6xROD1dlIpiY7XoQezlLEiXeRsnYFJUn4WTWpXR4Uc2KVD5T9K
+ SeebfQojWDIcHA02k3R9HAermO034Sw5CStHnvuRi5xNvzjo9GxbHA7zxLpC+XfagnSL
+ /JjWV7n3e20tuL1YXtY/Ke9LxPqbGxTYVDrnQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730834463; x=1731439263;
+ d=1e100.net; s=20230601; t=1730834515; x=1731439315;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oVUU8qlebiOmTinyrIiM5leftM7Cx8bP6lE3VBD2F8M=;
- b=mOLJ1FnfQ3Fwob7HdbGz2blPFhyzOo9Kl64+pX5ZjYVG7RGstAe3X93Cs2uLpEDhoH
- /PVi+trX/mFuL2p7a+YHKMsg5KLwF9ZBHed00VewdO8JvzexDi/28bMMt5SUcB4Hvuea
- C/B7c2d61ShaGCX5QTHZ033lFonODgC80AExvEHkSkMALPDwSG6C9nRIFnQT/mJrH4mN
- s9CSLkZiYrzsv/lkFuTLgFtFhiYJwktngD9CFFvoQJmZcWa0wevQLkNXnI7Na5AwdJ6z
- so+Icl4zM9w2bhIBINLjLLuBoreyiKGn+jHZzBKdQYDI2e+UJ0woZg+2sk4rvaFv7iNo
- Hwiw==
-X-Gm-Message-State: AOJu0YyVrhqNrRjIayxGBitNoDj4cKP7ZcS3OJsmsgerdH1YvH+xIwHd
- HW3ScRJgklFNuZtWLH9GI5m525DeuAD7119H5Pr9TAeO77Yb5vMxwI8FL1+Mfq21mf6S1FQYb8a
- FDl+r3J7QmQOSPcAIVYd4/AsGdK1G93bPM/kb
-X-Google-Smtp-Source: AGHT+IFcC1UW6RKMHuwwhBEz7t0wf1A6v61LRgbEhVHgiCzKIYlQTP7WxZCTs+Bbjn7ZJwvGK5eXzlq8EDcS78q79kY=
-X-Received: by 2002:a17:907:7204:b0:a9a:c57f:964f with SMTP id
- a640c23a62f3a-a9e655705f0mr1812325466b.16.1730834462917; Tue, 05 Nov 2024
- 11:21:02 -0800 (PST)
+ bh=JO6AUgRzsUa7ENcvy31LU3u5bJnpcBrSj+VDJITuxfk=;
+ b=YrBiMpgrUB/gWSh1D63nUOZN8SWqkXDtN9VLqNd84YiN6fRmhxJqzpXUarrRq8B4Bl
+ X7Fo3WE0aJOrvBtZdasGJz6PK42HVmiEOZYMbifelQcTl32rc92Ri5bwj5PFdSWq5oPC
+ ByEh1wULq/BBF+MjyKcnNXdcKdKtRcPu929Cvq8A765R4/dm81KISlV2Pzjj6GvSEvKs
+ snZyPm0AUSrvk2rwP0rc8cgQpmY9d+1U2BfwS0iuKCKxXuvE+cPjU5LuOvcS+vv6MGzo
+ l2lOmKZUMLzF0r1kyQ4U11HPE4RxIPUW8M3ONGw4/3TF4M5GuUubnu93cKp/YkfRoaub
+ 8L5A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVbwAHNns+ZMBZ1o9X4BR0kysGTB6Saiw8BwjmDnhMRNwJqH9ldtPsQavYUoOXyhzlRfXXXAis=@lists.denx.de
+X-Gm-Message-State: AOJu0YxidyW5IgFBYsZaSmLOVQRELvVY0BZ9BeQIeiQjzNtBpkaMFxL7
+ 6Cak17QDc7NxwnBqU6FO/2e5t5M3IUrLVYLvUz4+7AFBQfcDv9r7FHL4Ntqro8soxcqMu9uCH5t
+ 13kXnOnLD/AKpqP+CDvdq7KgZ7dUr/SLPEodr
+X-Google-Smtp-Source: AGHT+IE9/354PmSNLtBfEZjU9FTCZJ/Pb1kTbA+qAtUeAjerCaDff7El5dr75Nb4LEnyuLiVbX/7YglsyiTc0IvVWWg=
+X-Received: by 2002:a17:907:8693:b0:a9a:e6:a031 with SMTP id
+ a640c23a62f3a-a9e50ba22d9mr1748140366b.59.1730834515248; Tue, 05 Nov 2024
+ 11:21:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20241105160738.3795497-1-sjg@chromium.org>
- <20241105160738.3795497-5-sjg@chromium.org>
- <20241105161145.GJ3600562@bill-the-cat>
- <CAFLszTj2=0t1LmNr5kY=SBxaZtR8DB6bHwdfcgXwRqAr5ue5UQ@mail.gmail.com>
- <20241105164554.GK3600562@bill-the-cat>
-In-Reply-To: <20241105164554.GK3600562@bill-the-cat>
+References: <20241104133954.840994-1-sjg@chromium.org>
+ <20241104133954.840994-5-sjg@chromium.org>
+ <FAADE9B2-6D3B-4975-8A5F-F96CADCD1B65@gmx.de>
+ <20241104213422.GX3600562@bill-the-cat>
+In-Reply-To: <20241104213422.GX3600562@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Nov 2024 12:20:51 -0700
-Message-ID: <CAFLszThuzMvK+iSin+6sHP=g2xF5bBTMNG7ig2B733vpi3wxfg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/9] docker: Adjust packages for arm64
+Date: Tue, 5 Nov 2024 12:21:43 -0700
+Message-ID: <CAFLszTi1sH0sRyBWG604OsRv7rd67tMq6R-SVGA1X0jfUyed-A@mail.gmail.com>
+Subject: Re: [PATCH 4/9] docker: Adjust packages for arm64
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,84 +87,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI Tom,
+Hi Tom, Heinrich,
 
-On Tue, 5 Nov 2024 at 09:45, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 4 Nov 2024 at 14:34, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Nov 05, 2024 at 09:26:10AM -0700, Simon Glass wrote:
-> > Hi Tom,
+> On Mon, Nov 04, 2024 at 09:58:50PM +0100, Heinrich Schuchardt wrote:
 > >
-> > On Tue, 5 Nov 2024 at 09:11, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Nov 05, 2024 at 09:07:33AM -0700, Simon Glass wrote:
-> > > > The package names are slightly different for arm64 and we don't seem to
-> > > > have a linux-image-kvm package. Provide a different set for arm64
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > Changes in v2:
-> > > > - Swap order so that amd64 is the exception
-> > > >
-> > > >  tools/docker/Dockerfile | 12 +++++++-----
-> > > >  1 file changed, 7 insertions(+), 5 deletions(-)
-> > > >
-> > > > diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> > > > index 540718df062..84661b036c6 100644
-> > > > --- a/tools/docker/Dockerfile
-> > > > +++ b/tools/docker/Dockerfile
-> > > > @@ -44,7 +44,12 @@ RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_
-> > > >  RUN wget -O - https://github.com/foss-xtensa/toolchain/releases/download/2020.07/x86_64-2020.07-xtensa-dc233c-elf.tar.gz | tar -C /opt -xz
-> > >
-> > > Oh no, here's a big problem ^^^^^
-> > > You didn't switch to downloading arm64 toolchains, no wonder everything
-> > > else blows up.
 > >
-> > Er, yes I know that...I would have to put 'if' statements on each one,
-> > but I was hoping we could come up with a better way of handling this.
+> > Am 4. November 2024 14:39:48 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> > >The package names are slightly different for arm64 and we don't seem to
+> > >have a linux-image-kvm package. Provide a different set for arm64
+> > >
+> > >Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >---
+> > >
+> > > tools/docker/Dockerfile | 12 +++++++-----
+> > > 1 file changed, 7 insertions(+), 5 deletions(-)
+> > >
+> > >diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> > >index c9d794082c8..c4c3dc5a901 100644
+> > >--- a/tools/docker/Dockerfile
+> > >+++ b/tools/docker/Dockerfile
+> > >@@ -39,7 +39,12 @@ RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_
+> > > RUN wget -O - https://github.com/foss-xtensa/toolchain/releases/download/2020.07/x86_64-2020.07-xtensa-dc233c-elf.tar.gz | tar -C /opt -xz
+> > >
+> > > # Update and install things from apt now
+> > >-RUN apt-get update && apt-get install -y \
+> > >+RUN if [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
+> >
+> > Please, use 'arm64' and not 'linux/arm64' as variable value.
 >
-> Yes, hopefully we can do something with $TARGETPLATFORM to set another
-> variable that's exposed for wider use.
+> Getting back to your previous comment about documenting these variables,
+> I took it that these are NOT free-form but rather what Docker (et al)
+> require for proper multi-architecture containering.
 
-I recall that docker doesn't let variables set in one phase affect
-subsequent ones, but perhaps something can be done in the ENV section
-
->
-> > Same with all the variables being set for grub.
-> >
-> > >
-> > > >  # Update and install things from apt now
-> > > > -RUN apt-get update && apt-get install -y \
-> > > > +RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
-> > > > +             EXTRA_PACKAGES="grub-efi-amd64-bin grub-efi-ia32-bin libc6-i386 linux-image-kvm"; \
-> > > > +     else \
-> > > > +             EXTRA_PACKAGES="grub-efi linux-image-generic"; \
-> > > > +     fi; \
-> > >
-> > > Again, grub-efi should be used for everyone and linux/amd64 adds
-> > > grub-efi-ia32-bin. And linux-image-generic should work for everyone,
-> > > too.
-> >
-> > So what about this commit?[1]
-> >
-> > Regards,
-> > Simon
-> >
-> > [1] f9abaa53ec8 tools: docker: Install a readable kernel for libguestfs-tools
->
-> Yes, linux-image-generic should also provide a useful image, and you
-> would need to check what CI says when using this image.
-
-OK, so we don't actually need the kvm one, it seems?
-
-Anyway, the upshot of all of this is that you want arm64 to run the
-full suite of tests, including kvm and world builds. But presumably
-not in addition to the x86_64 ones...? I suppose I am just unclear as
-to what you are looking for. Are you trying to test that QEMU works
-properly, or that U-Boot's code works?
-
-My expectation was that we just want sandbox testing on arm64...I
-don't see much point in anything else. What am I missing?
+Yes, that's my understanding (limited though it is so far)
 
 Regards,
 Simon
