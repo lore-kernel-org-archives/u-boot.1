@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A953D2B950
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:07:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D60D2B950
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:08:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C42A0891E9;
-	Tue,  5 Nov 2024 17:07:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F430891DB;
+	Tue,  5 Nov 2024 17:07:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ao30cew5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Aoz+ilu6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16335891FE; Tue,  5 Nov 2024 17:07:42 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id CE72F891D0; Tue,  5 Nov 2024 17:07:47 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E8C8891F4
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:07:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B054A891A6
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:07:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a9a2209bd7fso987727666b.2
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 08:07:39 -0800 (PST)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-83aacecc8efso186819039f.0
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 08:07:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730822859; x=1731427659; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Zbk2LkQVBD5e4ZCBLgShBPud4OwTYAjRvO5LnR84y/4=;
- b=ao30cew5FYYA3EcE8yjJnPvCyYJ+cTSO4805XpO3p/IKcQseu2CouKB/va62/xn8O7
- +Bk5l8ZVFfB/Gaoz19m9qp4FSbhAiWyHUGfcBC0eKeRHC3p+WG64t7C8SCVQkA4UyMvg
- O+qnfSBUhSvwQYEgkvwBsW92CIeukCC5epX+Q=
+ d=chromium.org; s=google; t=1730822864; x=1731427664; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=50oBfzhFKAiQ8EY0OEIrH+zLVdhNb6Lz5Cog2IUp8Nk=;
+ b=Aoz+ilu6nFMYMMoUlfUMetMdtkUNPw/+MGLwsVeUqrvjXyuaavbI53jpBvjKidn85j
+ 6DmtHdxGJQ+0bCM1VdoX6HIW+tX9lqZ7P26x8x8CePm5H9pxkr1TJlHGTnsw76A+w/+t
+ /ekpspzumPEWtsMEUFi7v62XNp2GnToBTva6E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730822859; x=1731427659;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1730822864; x=1731427664;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Zbk2LkQVBD5e4ZCBLgShBPud4OwTYAjRvO5LnR84y/4=;
- b=V6tl0vw4qG3C0V+t0cKKspfPULrQqvYOgsCtHgkXdMmlUzch5HGDrbvy6Ze24YNQEW
- xlE/u7xsJWIDEX1GTVyFQeH15CtZqKMwxOEGxdVdZB0aDtio4xBtxvcsALuCvV/S/3ev
- gkghB2IKpXLBrDKfs2EcviOmrZrgllxXjTBEcjY0RuOAVnRDb+enjZwdkZ3vvgfOEN8k
- 6pXU7AFIPr5diiXhNCMC1X1XeNOC7lUTZU92tgnvgwRsQidMZJP1wSHZOnUpl+0PiilL
- +qIAsmf/ysx+xP3MHAwKkaqkfK5Q0WPTooanpabSqSwExZLPQ6vReKnX0oKy86hXVI2r
- WWzA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWs3BLcjANeSDhNKfxtH3pG/sH1+XgYh2ugbe1+3V6MYKQOd26ahgvU02tF4d0WgsLHOKBSJuQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyl01bqv5EUcX6zeGUonBQMopGOsdf7hLiOthQrq8dWlNU7/Ve7
- f3+2ANk9vJAk+eu88scIC1ntxTZu9F5nt/vso3I8OIxpwrjiHOkwIVWwMKUVo1Aimxt7sxWcn/6
- Pvbzng/D0gUvcir7qrImlbrhD9GkaG+fMMcHo
-X-Google-Smtp-Source: AGHT+IG3Bs+8K5xOtvOnpzG/WZKGBoMkgSuffe7nWOH1O+3GUjAcEM+hxSnYPknUEhNnmMie4BBlnWNFk+54dKw9iqc=
-X-Received: by 2002:a17:907:7da0:b0:a99:f972:7544 with SMTP id
- a640c23a62f3a-a9de5f40788mr3283173266b.38.1730822858949; Tue, 05 Nov 2024
- 08:07:38 -0800 (PST)
-MIME-Version: 1.0
-References: <20241104175110.1048449-1-sjg@chromium.org>
- <20241104175110.1048449-2-sjg@chromium.org>
- <d2822624-f9a0-4bc6-a911-861c7b2ac88e@gmx.de>
- <CAFLszTg6=FOJa0-=ywoNEkhSSSSoCE2mtHCQyTiWYqvZmQFRCg@mail.gmail.com>
- <20241105153939.GG3600562@bill-the-cat>
-In-Reply-To: <20241105153939.GG3600562@bill-the-cat>
+ bh=50oBfzhFKAiQ8EY0OEIrH+zLVdhNb6Lz5Cog2IUp8Nk=;
+ b=DQk1b4MlR3Va17J4DVefgk/VZyO9rlckJvpT8y8AcfEJxkoerxGGfbYdJzKn9fJuE5
+ QNU0Xd4j9m5HagZSFU0v+RZmk6gbQ/am5eSNq7TOA7dhJ143PSimo7F4RAu+RHqFmM8J
+ nbLVP76D4Hfdu2mgmHO5IkoVOYQ9yMaMd5kJdGupSv3+2cprNv9MMJuVuus6RraagYy9
+ eOQjmRIenGLktaDSvtOPWInXqA96lzBsNacKvTs4Mi7ZbbVrCnNkM+7KFk9UBGD18z77
+ EqkvEkvscFzqGfczb6r2Ni6uQKoKiyp0MNZgrbdiXoH3MBEmPOI2xESRU0h7gCoFeWAt
+ t9lQ==
+X-Gm-Message-State: AOJu0Yx2ntXqdxDwB5qegNRiwHrzoKgdloWxqanDSAcBCkZQpBfdWUal
+ l6+iwoT/uCtWiS/BmP40Yct6hwttCa38C2fU1uCeBMXW7YvYvJwOgktfzaWDnE/zE3goRvc36rQ
+ =
+X-Google-Smtp-Source: AGHT+IF4GSCRbnpT04rxfJ9c3iInXBimg3J2NTanX8PYyv/40DK93se59rH6a6TWftZBwXhyl4bSpw==
+X-Received: by 2002:a05:6e02:2168:b0:3a6:c6d1:8c4b with SMTP id
+ e9e14a558f8ab-3a6c6d18d07mr91369575ab.3.1730822863845; 
+ Tue, 05 Nov 2024 08:07:43 -0800 (PST)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3a6a99ccbf5sm29640285ab.44.2024.11.05.08.07.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Nov 2024 08:07:42 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Nov 2024 09:07:27 -0700
-Message-ID: <CAFLszTjLHO0Ge+NJn7_5JSm8CjFsFXEMyf-Pcb3ZQ3xamPH6nw@mail.gmail.com>
-Subject: Re: [PATCH v3 01/19] bootstd: Move bootflow-adding to bootstd
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Dragan Simic <dsimic@manjaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Nam Cao <namcao@linutronix.de>, Peter Robinson <pbrobinson@gmail.com>, 
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
- Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH v2 0/9] CI: Set up for an arm64 runner
+Date: Tue,  5 Nov 2024 09:07:29 -0700
+Message-Id: <20241105160738.3795497-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,201 +93,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+All gitlab runners are currently amd64 machines. This series attempts to
+create a docker image which can also support arm64 so that sandbox tests
+can be run on it.
 
-On Tue, 5 Nov 2024 at 08:39, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Nov 05, 2024 at 08:13:04AM -0700, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Mon, 4 Nov 2024 at 15:15, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >
-> > > On 11/4/24 18:50, Simon Glass wrote:
-> > > > This relates to more than just the bootdev, since there is a global list
-> > > > of bootflows. Move the function to the bootstd file and rename it.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > (no changes since v1)
-> > > >
-> > > >   boot/bootdev-uclass.c | 25 -------------------------
-> > > >   boot/bootstd-uclass.c | 25 +++++++++++++++++++++++++
-> > > >   cmd/bootflow.c        |  2 +-
-> > > >   include/bootdev.h     | 15 ---------------
-> > > >   include/bootstd.h     | 17 +++++++++++++++++
-> > > >   5 files changed, 43 insertions(+), 41 deletions(-)
-> > > >
-> > > > diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-> > > > index 64ec4fde493..eddbf60600c 100644
-> > > > --- a/boot/bootdev-uclass.c
-> > > > +++ b/boot/bootdev-uclass.c
-> > > > @@ -32,31 +32,6 @@ enum {
-> > > >       BOOT_TARGETS_MAX_LEN    = 100,
-> > > >   };
-> > > >
-> > > > -int bootdev_add_bootflow(struct bootflow *bflow)
-> > > > -{
-> > > > -     struct bootstd_priv *std;
-> > > > -     struct bootflow *new;
-> > > > -     int ret;
-> > > > -
-> > > > -     ret = bootstd_get_priv(&std);
-> > > > -     if (ret)
-> > > > -             return ret;
-> > > > -
-> > > > -     new = malloc(sizeof(*bflow));
-> > > > -     if (!new)
-> > > > -             return log_msg_ret("bflow", -ENOMEM);
-> > > > -     memcpy(new, bflow, sizeof(*bflow));
-> > > > -
-> > > > -     list_add_tail(&new->glob_node, &std->glob_head);
-> > > > -     if (bflow->dev) {
-> > > > -             struct bootdev_uc_plat *ucp = dev_get_uclass_plat(bflow->dev);
-> > > > -
-> > > > -             list_add_tail(&new->bm_node, &ucp->bootflow_head);
-> > > > -     }
-> > > > -
-> > > > -     return 0;
-> > > > -}
-> > > > -
-> > > >   int bootdev_first_bootflow(struct udevice *dev, struct bootflow **bflowp)
-> > > >   {
-> > > >       struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
-> > > > diff --git a/boot/bootstd-uclass.c b/boot/bootstd-uclass.c
-> > > > index fdb8d69e320..bf6e49ad97a 100644
-> > > > --- a/boot/bootstd-uclass.c
-> > > > +++ b/boot/bootstd-uclass.c
-> > > > @@ -61,6 +61,31 @@ void bootstd_clear_glob(void)
-> > > >       bootstd_clear_glob_(std);
-> > > >   }
-> > > >
-> > > > +int bootstd_add_bootflow(struct bootflow *bflow)
-> > > > +{
-> > > > +     struct bootstd_priv *std;
-> > > > +     struct bootflow *new;
-> > > > +     int ret;
-> > > > +
-> > > > +     ret = bootstd_get_priv(&std);
-> > > > +     if (ret)
-> > > > +             return ret;
-> > > > +
-> > > > +     new = malloc(sizeof(*bflow));
-> > > > +     if (!new)
-> > > > +             return log_msg_ret("bflow", -ENOMEM);
-> > > > +     memcpy(new, bflow, sizeof(*bflow));
-> > > > +
-> > > > +     list_add_tail(&new->glob_node, &std->glob_head);
-> > > > +     if (bflow->dev) {
-> > > > +             struct bootdev_uc_plat *ucp = dev_get_uclass_plat(bflow->dev);
-> > > > +
-> > > > +             list_add_tail(&new->bm_node, &ucp->bootflow_head);
-> > > > +     }
-> > > > +
-> > > > +     return 0;
-> > > > +}
-> > > > +
-> > > >   static int bootstd_remove(struct udevice *dev)
-> > > >   {
-> > > >       struct bootstd_priv *priv = dev_get_priv(dev);
-> > > > diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-> > > > index f67948d7368..8962464bbf8 100644
-> > > > --- a/cmd/bootflow.c
-> > > > +++ b/cmd/bootflow.c
-> > > > @@ -207,7 +207,7 @@ static int do_bootflow_scan(struct cmd_tbl *cmdtp, int flag, int argc,
-> > > >               bflow.err = ret;
-> > > >               if (!ret)
-> > > >                       num_valid++;
-> > > > -             ret = bootdev_add_bootflow(&bflow);
-> > > > +             ret = bootstd_add_bootflow(&bflow);
-> > > >               if (ret) {
-> > > >                       printf("Out of memory\n");
-> > > >                       return CMD_RET_FAILURE;
-> > > > diff --git a/include/bootdev.h b/include/bootdev.h
-> > > > index ad4af0d1310..8db198dd56b 100644
-> > > > --- a/include/bootdev.h
-> > > > +++ b/include/bootdev.h
-> > > > @@ -195,21 +195,6 @@ void bootdev_list(bool probe);
-> > > >    */
-> > > >   void bootdev_clear_bootflows(struct udevice *dev);
-> > > >
-> > > > -/**
-> > > > - * bootdev_add_bootflow() - Add a bootflow to the bootdev's list
-> > > > - *
-> > > > - * All fields in @bflow must be set up. Note that @bflow->dev is used to add the
-> > > > - * bootflow to that device.
-> > > > - *
-> > > > - * @dev: Bootdev device to add to
-> > > > - * @bflow: Bootflow to add. Note that fields within bflow must be allocated
-> > > > - *   since this function takes over ownership of these. This functions makes
-> > > > - *   a copy of @bflow itself (without allocating its fields again), so the
-> > > > - *   caller must dispose of the memory used by the @bflow pointer itself
-> > > > - * Return: 0 if OK, -ENOMEM if out of memory
-> > > > - */
-> > > > -int bootdev_add_bootflow(struct bootflow *bflow);
-> > > > -
-> > > >   /**
-> > > >    * bootdev_first_bootflow() - Get the first bootflow from a bootdev
-> > > >    *
-> > > > diff --git a/include/bootstd.h b/include/bootstd.h
-> > > > index ac756e98d84..3fc93a4ec2e 100644
-> > > > --- a/include/bootstd.h
-> > > > +++ b/include/bootstd.h
-> > > > @@ -105,4 +105,21 @@ void bootstd_clear_glob(void);
-> > > >    */
-> > > >   int bootstd_prog_boot(void);
-> > > >
-> > > > +/**
-> > > > + * bootstd_add_bootflow() - Add a bootflow to the bootdev's and global list
-> > > > + *
-> > > > + * All fields in @bflow must be set up. Note that @bflow->dev is used to add the
-> > > > + * bootflow to that device.
-> > > > + *
-> > > > + * The bootflow is also added to the global list of all bootflows
-> > > > + *
-> > > > + * @dev: Bootdev device to add to
-> > >
-> > > This parameter does not exist.
-> > >
-> > > > + * @bflow: Bootflow to add. Note that fields within bflow must be allocated
-> > > > + *   since this function takes over ownership of these. This functions makes
-> > > > + *   a copy of @bflow itself (without allocating its fields again), so the
-> > > > + *   caller must dispose of the memory used by the @bflow pointer itself
-> > >
-> > > Please, add the headers to the API documentation and fix the numerous
-> > > documentation issues like:
-> > >
-> > > ./include/bootdev.h:57: warning: Enum value 'BOOTDEVP_0_NONE' not
-> > > described in enum 'bootdev_prio_t'
-> > > ./include/bootdev.h:57: warning: Enum value 'BOOTDEVP_1_PRE_SCAN' not
-> > > described in enum 'bootdev_prio_t'
-> > > ./include/bootdev.h:57: warning: Enum value 'BOOTDEVP_COUNT' not
-> > > described in enum 'bootdev_prio_t'
-> > > ./include/bootdev.h:57: warning: Excess enum value 'BOOTDEVP_6_PRE_SCAN'
-> > > description in 'bootdev_prio_t'
-> > > ./include/bootdev.h:118: warning: Function parameter or member
-> > > 'bootflow_head' not described in 'bootdev_uc_plat'
-> > > ./include/bootdev.h:118: warning: Function parameter or member 'prio'
-> > > not described in 'bootdev_uc_plat'
-> > > ./include/bootdev.h:412: warning: Function parameter or member 'blk' not
-> > > described in 'bootdev_setup_for_sibling_blk'
-> > > ./include/bootdev.h:412: warning: Excess function parameter 'parent'
-> > > description in 'bootdev_setup_for_sibling_blk'
-> >
-> > I don't mind doing that in a follow-up once this series is in, but it
-> > is out-of-scope here.
->
-> I think that's flipping the priorities. Documenting what all of this is
-> supposed to be doing will help explain to the rest of us what you're
-> intending to do and why it's a good idea and so forth.
+Changes in v2:
+- Drop message about EFI_LOADER
+- Use '\0' instead of 0
+- Update docs also
+- Add comments to the ARG variables
+- Swap order so that amd64 is the exception
+- Expand commit-message to show the problem
 
-The request was to add the header file into sphinx, which is certainly
-out of scope for this series. Do you agree?
+Simon Glass (9):
+  sandbox: efi_loader: Correct use of addresses as pointers
+  test: Adjust print_ut test to use unsigned char
+  docker: Support building for multiple architectures
+  docker: Adjust packages for arm64
+  docker: Drop grub for arm64
+  docker: Drop tracing for arm64
+  docker: Drop coreboot for arm64
+  docker: Fix LegacyKeyValueFormat warning with PYTHONPATH
+  CI: Add platform variable
 
-This series is documented in doc. and bootstd is extremely well
-documented. I'm happy of course to fix up the problem introduced by
-this patch, but bringing all the headers (there are at least 4) into
-Sphinx should be a separate task.
+ .gitlab-ci.yml                        |  1 +
+ arch/sandbox/cpu/cache.c              |  8 ++++-
+ doc/build/docker.rst                  | 16 ++++++++--
+ drivers/remoteproc/rproc-elf-loader.c | 18 ++++++-----
+ lib/efi_loader/efi_image_loader.c     |  3 +-
+ test/print_ut.c                       |  8 ++---
+ tools/docker/Dockerfile               | 45 ++++++++++++++++++++-------
+ 7 files changed, 71 insertions(+), 28 deletions(-)
 
-Regards,
-Simon
+-- 
+2.34.1
+
