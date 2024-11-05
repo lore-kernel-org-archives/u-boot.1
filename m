@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C62D1CA2A
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 05:39:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1531BD1CA38
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 06:48:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3185588E7B;
-	Tue,  5 Nov 2024 06:39:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 617D688EDD;
+	Tue,  5 Nov 2024 07:48:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UxGE8jpi";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QHiQHZid";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87E0788F4E; Tue,  5 Nov 2024 06:38:58 +0100 (CET)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AF81E88F77; Tue,  5 Nov 2024 07:48:06 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F82D88D45
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 06:38:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C59D88D35
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 07:48:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-28854674160so2002540fac.2
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 21:38:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730785135; x=1731389935; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vZhmX/SrhmnhAqkdYfaCHBd1uQ8+aCcWjBeFJxJ8UXs=;
- b=UxGE8jpiEI3Qa3rqZGOv9F905UYtXPkDE6C0F11U2Pu4wRNps6CMYKMG9zoea4vEcA
- WhG1iZ9hakvO+LUmUKWFYZy/uvSDSaN72oNDZM4cTarB3KGvvY7FsGWS9JVUK2GqX2NQ
- 5F5h6BPh3IddvNr+6YcDmO2/gz0cyrplnBEf5jC2jAWfiCJcXLNi0LgExd4CdRL4iYhc
- MDM4UVNOqJSQmpnUu+ZFb6lhqa+PbMkhmW+CnmawQ24OMI7RhxIIqVD3cfW2FJe7F6np
- DBpJd9vcGmo+N2ENp6l/EycocmzMbnS5z2lYbcT6BLZCa2m58HDIiEoZfXZHWCZ0BzR0
- Z1rA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730785135; x=1731389935;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vZhmX/SrhmnhAqkdYfaCHBd1uQ8+aCcWjBeFJxJ8UXs=;
- b=iYAKNV0QMCL7GUJ8PWvjJyPO7prxxPfnwt+EGDd2KVst1Fp3R9/DOO6rxaF9ygAEG0
- vFoQTD2eLhdB0qkD/fg4mnr1LTypS/qRAJzJAwoz4Au1lm6Jr58Uag9PLFf3O54LBl7g
- F1FyseHNEzaze+TXNM0vb7VXnLjNH8nd64rbkv6b5cAneLqXC6s5RWBe4hJ3931no3b+
- +D8BbjlED15tu6Zo9iUJV84Q1YF9og2opr88oyVL7rT2oED7oRbiTxB9GvShIoo1j33V
- mX3P/ZOWVLt2MJ2YjUa+3NIcV671dGne1tIAhJ7HsAqsmpsH0CSSP/Y1xDO12j1hBFtf
- nqbg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWUtbWHw61C4+BHL/OxL3EJpZqAU7XpKFQu41zvF85Ko2qzFl7YkfNK41m3qpf1WBqJXTSXccM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx8lBD/8cfafAS6YfwVqDWBHyPn2poSohywHOLQZ/QfJtB+2erQ
- 0NZxfYm3ZU0Ch1yMfSo+w+OHnOqbUNSeYWsbFVacjh2hjJgLGxKV6Kfm5JXz53ed4LjN6P+S1/M
- xy4mLTl/N+14z1Pvb3wzQN7Rd3ZEh2A==
-X-Google-Smtp-Source: AGHT+IEuVWYmX9LEumcJeuZTlJGf7AFAPFXyjQoCm/gfS97lMYHWDejTGfqB//3/wARW7y2CPao3lzCCm/3zUfmFatI=
-X-Received: by 2002:a05:6870:3920:b0:277:fd73:8f82 with SMTP id
- 586e51a60fabf-294846ab92cmr13927362fac.45.1730785134987; Mon, 04 Nov 2024
- 21:38:54 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1730789267; x=1731394067; i=xypron.glpk@gmx.de;
+ bh=3eZSoaTpnSCHigldls42oW7vyu3BR/q8FerHTLdX7RU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=QHiQHZidlHe8v5LKm8YoXS4hQoS72N5iqnMkmrvCy6lVmL4scdsp7NWzewenhnwi
+ CvrHJD0udvJOilFskh0RDjn2ZZJbGMiC4+EBW8PuNIeI3++axIoLpSso/DzUpMlsJ
+ j0NyRA0Q8ABc8Cep6scL04CePyhZukJfeLYMQWL6oclDz3DfPYFOFv98uvOwu26T3
+ MzH1f4MUE7gSiny5Z6h32651QEm4LUtGo1E+TlvENjjcGM6vRSzfDWNky06ep+tyk
+ aSnToKe1FS9BaG3rcaPLFeD+etdmX1D2s85aAE/Bt9/Xk5tKVMDSTNOW7yYsEVqHJ
+ qvU+GFuLI/pVGx/JJA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mq2j2-1tdN2m3pfG-00kBMx; Tue, 05
+ Nov 2024 07:47:47 +0100
+Message-ID: <e0ee937c-5e73-4055-affb-2a6314608c87@gmx.de>
+Date: Tue, 5 Nov 2024 07:47:37 +0100
 MIME-Version: 1.0
-References: <20241030204627.31757-1-semen.protsenko@linaro.org>
-In-Reply-To: <20241030204627.31757-1-semen.protsenko@linaro.org>
-From: Minkyu Kang <promsoft@gmail.com>
-Date: Tue, 5 Nov 2024 14:38:43 +0900
-Message-ID: <CALrBrZ3ODz1tOrEuJwEsu+GofKCbnGYBVXz17R=NQhhs5Q8giA@mail.gmail.com>
-Subject: Re: [PATCH] arm: dts: e850-96: Remove TRNG node from appended dts
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 13/13] board: starfive: spl: Support multiple DTBs for
+ JH7110 based boards
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de,
+ Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>,
+ H Bell <dmoo_dv@protonmail.com>, E Shattow <lucent@gmail.com>,
+ Conor Dooley <conor.dooley@microchip.com>, Nam Cao <namcao@linutronix.de>,
+ Bo Gan <ganboing@gmail.com>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>
+References: <20241105034328.56439-1-hal.feng@starfivetech.com>
+ <20241105034328.56439-14-hal.feng@starfivetech.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241105034328.56439-14-hal.feng@starfivetech.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Provags-ID: V03:K1:aIvsCaY6pHifBip/5JktDsWx4pbn80cpB+VFX1mfWB1n5kOrBqr
+ KDiPhjDHL6XzHmfTNira50vP5xj1DwHa+CgRRvI07symVv/5dPvJqhuPEEMzfWCqTwIbY94
+ rKCTuBxUByB5c4MPP09JfPXZsLcDNgQ3sSA9Jb6Yn+gZdcsXu2Vx2MsNUb3/xjMHUWaVDKw
+ s2JM62HSJZ8sp20EzqH3w==
+UI-OutboundReport: notjunk:1;M01:P0:/HTMVFSVZUA=;hrhbS3HDW+tad1wcd+njDqEdlj2
+ jrSzk4KJlQ4SPlOWNfWxXaGE1+sa96zCTVjMy4L6P+jckpBS8xFuxf86XJBj/My/19xQCfWKO
+ Vwj1OK8mJVhskhooKI7dB4Px3iN5V1bMnABW9PGJ66ofBeU+Bdn/3JDbX/3+L1HNYtPbQwDHJ
+ IWQ9N4p3QV7hzzOpINy5a1tK1cTlAXYhsqfP5zZ29+3bxU1u6ba+AsauYd3LQEIXVxiEX1mGo
+ RjA+NL+8ET5KO53Oc0RgJdPYwrWRdEb1CxRQ1yrWh1pRoxzAFW1n10leOVWDdPJt+ej5rqMA1
+ xKnjj4jZdxkke9+Q+oa6Y/zAdoB6PXeLfHY3axBQtG2oC2lNxuBBOGg5SCc6gi/908n7SzoLN
+ b9SzgnUtjkh1YspcuMCWYVVl4DSlRJkPPhGW/kplD3UyPuXj4LVKyFy6O1HhU607uywfSLf+H
+ LktkEjDKD7rY8l6G88YtzYSZZd2RtKzS0eqTcQF/ztwbGdwa957t4vRHXz0PsshngLaga1oWM
+ rWkkcznU0JfLHUJnVo3U7lmEmKc6pRoskgmyyGiHRSlA5mefB1dz8XvbhHbU7/kmdsXOhkKb8
+ j0gUVyFG0C2Pi3mioQRW5PhZ3WaujdWjhHk62JJOPGB7pGrSl/MFV5XoCNvGM2J0PryuGdofP
+ Dhb3Uqpe3nkZGv8On02y5IfOO0rrEcDmozzA6Id4UbQJF2MXatNz4JZW83Gjm1NI34UnKv5iy
+ BvluUcfoL1Pe56RxCwNcHxCmMrWmHuEEHNLwjJIAbZt+9GeVPb6NXZsqFrSpRfmx9TZBUxKfE
+ BiDH7XY+WogpGcUkepKHvDMw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,52 +97,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
-
-
-2024=EB=85=84 10=EC=9B=94 31=EC=9D=BC (=EB=AA=A9) 05:46, Sam Protsenko <sem=
-en.protsenko@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
-
-> Commit 136b7b6d2e98 ("Subtree merge tag 'v6.11-dts' of dts repo [1] into
-> dts/upstream") updates the upstream dts for E850-96 board, bringing
-> upstream TRNG node. There is no need to keep TRNG node in appended dts
-> anymore, so remove it.
+On 11/5/24 04:43, Hal Feng wrote:
+> Get product ID and PCB version from EEPROM, use them to select
+> the correct DTB.
 >
-> Tested on E850-96 board by running 'rng' command in U-Boot shell.
->
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 > ---
->  arch/arm/dts/exynos850-e850-96-u-boot.dtsi | 11 -----------
->  1 file changed, 11 deletions(-)
+>   board/starfive/visionfive2/spl.c | 25 +++++++++++++++++++++++--
+>   1 file changed, 23 insertions(+), 2 deletions(-)
 >
-> diff --git a/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
-> b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
-> index 3aa5d8bb10d0..6d7148f7264a 100644
-> --- a/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
-> +++ b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
-> @@ -3,17 +3,6 @@
->   * Copyright (c) 2023 Linaro Ltd.
->   */
->
-> -&soc {
-> -       /* TODO: Remove this node once it appears in upstream dts */
-> -       trng: rng@12081400 {
-> -               compatible =3D "samsung,exynos850-trng";
-> -               reg =3D <0x12081400 0x100>;
-> -               clocks =3D <&cmu_core CLK_GOUT_SSS_ACLK>,
-> -                        <&cmu_core CLK_GOUT_SSS_PCLK>;
-> -               clock-names =3D "secss", "pclk";
-> -       };
-> -};
-> -
->  &pmu_system_controller {
->         bootph-all;
->         samsung,uart-debug-1;
-> --
-> 2.39.5
->
+> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfiv=
+e2/spl.c
+> index cf7f39d5c5..4396583026 100644
+> --- a/board/starfive/visionfive2/spl.c
+> +++ b/board/starfive/visionfive2/spl.c
+> @@ -113,7 +113,28 @@ void board_init_f(ulong dummy)
+>   #if CONFIG_IS_ENABLED(LOAD_FIT)
+>   int board_fit_config_name_match(const char *name)
+>   {
+> -	/* boot using first FIT config */
+> -	return 0;
+> +	const char *product_id;
+> +	u8 version;
+> +
+> +	product_id =3D get_product_id_from_eeprom();
+> +
+> +	if (!strncmp(product_id, "VF7110", 6)) {
+> +		version =3D get_pcb_revision_from_eeprom();
+> +		if ((version =3D=3D 'b' || version =3D=3D 'B') &&
+> +		    !strcmp(name, "jh7110-starfive-visionfive-2-v1.3b"))
+> +			return 0;
+> +
+> +		if ((version =3D=3D 'a' || version =3D=3D 'A') &&
+> +		    !strcmp(name, "jh7110-starfive-visionfive-2-v1.2a"))
+> +			return 0;
+> +	} else if (!strncmp(product_id, "MARS", 4) &&
+> +		   !strcmp(name, "jh7110-milkv-mars")) {
+> +		return 0;
 
-applied to u-boot-samsung.
+Hello Hal,
 
-Thanks.
-Minkyu Kang.
+I have seen
+
+Milk-V Mars CM:      MARC-V10-2340-D004E016-xxxxxxxx
+Milk-V Mars CM lite: MARC-V10-2340-D002E016-xxxxxxxx
+
+Obviously here they got the eMMC size wrong. Milk-V should have used
+E000 for the lite version. But at least they provide a correction
+procedure in
+https://milkv.io/docs/mars/compute-module/update-eeprom
+and confirm the usage of the values MARC and E###.
+
+So here we should be able to detect these two boards, too.
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+> +	}  else if (!strncmp(product_id, "STAR64", 6) &&
+> +		    !strcmp(name, "jh7110-pine64-star64")) {
+> +		return 0;
+> +	}
+> +
+> +	return -EINVAL;
+>   }
+>   #endif
+
