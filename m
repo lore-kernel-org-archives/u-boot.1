@@ -4,82 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC77D31769
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 17:50:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B232BD3177F
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 18:26:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C92AB88E74;
-	Tue,  5 Nov 2024 18:50:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id ECC9588D29;
+	Tue,  5 Nov 2024 19:26:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c3z6Eo8J";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NEwzg980";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 062F288ED9; Tue,  5 Nov 2024 18:50:28 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 0C6EF8900E; Tue,  5 Nov 2024 19:26:28 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D25888E74
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:50:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C505785B66
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 19:26:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43159c9f617so45408235e9.2
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 09:50:25 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7b161fa1c7bso400309785a.0
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 10:26:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730829025; x=1731433825; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+yqb9lk/7zsNvZCSBphDydiaRru8+fJhu5HFMZ6v9fQ=;
- b=c3z6Eo8JrcRxFSR7KfIysYp5vtS+hfcbM+7PB8hoYksJ6RYo5MRbmrCn1NJmqHL63t
- ax9TOMb8tF3oM+0kH312JtGUJeA/Jq2oIQd3iwtkt0HPWlL+z0X0+is0T5n7nj3OQzof
- ELplzbmQz7QxvZMp7VJ6dPd1VU+BRpzJjyZq1CQ+Q4l9bkNqnUaqh908QC4BvTinJJLI
- GyrowFv9sRFOID+Um1FawgqsWD4VROfxy4UZeWnQNNWMY2zzwPX5sFBTxhnvwlAILmmi
- lr+aWJnjjqdNqfUY/iAmL/lj1K4Pjp0gMzVcXAha0xrCkvwsXznDPk4aLxdcuVkP7jYc
- PPAg==
+ d=konsulko.com; s=google; t=1730831184; x=1731435984; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=7DLjzoj4GDhr+2iGy4Je7mZUrLIGGbyB3rXG9NKVvYw=;
+ b=NEwzg980MqWD7YE3d3R35i4nOYZzWtmrRcYd5sNmL7LUAMheb0zG3z+aGgLU9lYIyZ
+ b23QRthzhUf6tMlSQdKlUXNRd4K4VeV3E8YjdIQdB/VGEo8TQOJsxtZfNp1bn/TDZhrg
+ RlBBmqbg/11dGeJtJufDw1DTaW02iERvY8B6w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730829025; x=1731433825;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+yqb9lk/7zsNvZCSBphDydiaRru8+fJhu5HFMZ6v9fQ=;
- b=URXD8ylSsRTFSFvOljRMCVsSblRwY2hzqQ/X+WPyCjpmSz/rRDJCkhzq41bF2tKql9
- Yj/mD9GPWbiQ00A71fGwQFa+dsnXhbMIHTA1CpN7GKi0TABKLeHQ160QfQ8CtgYOBfIn
- AYSp/TTFGWs9dhBjDoA2W6OOvW/54951F8lDNDOMnAhGEXDOBx9BeFgT9L4IH8/GbkMl
- QWMuajHhIhOdaSXfnEbCP634/W61Ls5+IvlYQtvrlMRHCc7LBB1mxklMXcPPzs9Z/yox
- d2x+u3HoC4yYM8ehz9UuY+ga3ePXnDqBym+PcBglN7w2K8lzQ0XMYvIlg+CxjOuSR1nx
- MtpQ==
-X-Gm-Message-State: AOJu0YwDd2QHWIHBRfix35rycgxVrp2DdopJIiXHkQpFJmLOTCP4moSs
- L2un4NXpvI8b2QTquX6Ip1lNBl4LziNRam+SZZ2oe5XIFfU6TqT9gvv6sa7CiGY=
-X-Google-Smtp-Source: AGHT+IEwJ3IyBOhAPUAX+jS67ZuE7NU8dUiq4Ih2HQk2lHppe3iC5GNfz2SVqWgjHESoN5Bd2ugmhw==
-X-Received: by 2002:a05:600c:4f56:b0:431:52c4:1069 with SMTP id
- 5b1f17b1804b1-4319ac997c7mr333122255e9.8.1730829024832; 
- Tue, 05 Nov 2024 09:50:24 -0800 (PST)
-Received: from [172.20.141.182] ([154.14.63.34])
+ d=1e100.net; s=20230601; t=1730831184; x=1731435984;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7DLjzoj4GDhr+2iGy4Je7mZUrLIGGbyB3rXG9NKVvYw=;
+ b=mKJX8CoWRuhQjtPErn7WeTxiWl4vXGqQLub0dKggR9C6nop6/4ae9RiNaipANAdELG
+ a0GXjckjwJBP6BKh9/wFWVowlaVGCE7/MPsXMajgW/lVbDK4JbwY6gdVT7zVJgR1bU7a
+ AIu4q2BAwwn8FQrsMv4c3xKCDm9LHzvdI4fKB3cNW/mv3n/o1z0TiojIRUDPxG8H73mu
+ nWyCSmedc9LH/FZbQRWDTJFM0/vVcdKdmtLuaRabLqj/ZW06dC5TUVA8crB3CsclP+Hb
+ UTrXRFEAzPJb0b3wpZs8X03PZktueev/7AhcMNZxrhI4G8xgDh/lJTBamx/oP0kk+c7T
+ b5sA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX8bm1lXC9sGRz7DD9SqDGKrBcqG/UCpEZoP8LNHMv8XvLkzDM/M5Jqw0WEBQN0M+uc0RyhzvI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwH+vNfTZmn01wOfVW8WuBqR+eXZXq1tAebFIVn43VAGx7nKd2Y
+ X2lsGQMtr9EDjKLdD+hnsYlrx745wI/oVY/TmRRcK6iOfomThgvUsGsRZL3mLcA=
+X-Google-Smtp-Source: AGHT+IEGcUNhKIKQUhxVwRW8dK4O8/Kf97y+hDKOF4QKXFJpwDswWNIf4WrQeFusCa/LZPHdAnK7Zw==
+X-Received: by 2002:a05:620a:2410:b0:7ac:b220:309a with SMTP id
+ af79cd13be357-7b193eea86cmr5244608085a.15.1730831184608; 
+ Tue, 05 Nov 2024 10:26:24 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-431bd91093csm232576765e9.15.2024.11.05.09.50.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Nov 2024 09:50:24 -0800 (PST)
-Message-ID: <7fc675b1-03fd-4a21-8897-893b36e4ef08@linaro.org>
-Date: Tue, 5 Nov 2024 17:50:23 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: wget bug report
+ af79cd13be357-7b2f3a0c1c6sm549051085a.61.2024.11.05.10.26.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Nov 2024 10:26:23 -0800 (PST)
+Date: Tue, 5 Nov 2024 12:26:19 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <CAFLszTi9XE8oHuZCYrj85UVXVEYFDomqK=KrO5E-fTAn9_f=0w@mail.gmail.com>
- <f3b65417-d35d-49c7-95de-b1db7b283e11@linaro.org>
- <CAFLszTgh1QbrirTi_zG7upVHG7OqHxStRFFAVRCEsPqkQpAMmg@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAFLszTgh1QbrirTi_zG7upVHG7OqHxStRFFAVRCEsPqkQpAMmg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
+ Baruch Siach <baruch@tkos.co.il>, Christian Marangi <ansuelsmth@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v12 00/13] net: tcp: improve tcp support in legacy stack
+Message-ID: <20241105182619.GL3600562@bill-the-cat>
+References: <20241028143143.1807305-1-mikhail.kshevetskiy@iopsys.eu>
+ <20241104233227.GA3600562@bill-the-cat>
+ <CAFLszThXiK=EzrUStsOBiSQ_pe1-Vdwtg-238BjQd91SMBym7A@mail.gmail.com>
+ <CALeDE9M1PDFmm-oZvSEGwBaN_J77CSKUa8kbkEPQf9XATv8STg@mail.gmail.com>
+ <CAFLszTjs-7uWNWdaZjhQe-rA5z0qSZxiFeX+WgFofYemW6qiwg@mail.gmail.com>
+ <20241105154741.GI3600562@bill-the-cat>
+ <CAFLszTjntxJShjnWK++NkonNrPdL0S-=zWf-N_AWUaZmfmArtg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="r4pLTuywMsaawwKr"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjntxJShjnWK++NkonNrPdL0S-=zWf-N_AWUaZmfmArtg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,71 +112,110 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--r4pLTuywMsaawwKr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 11/5/24 15:12, Simon Glass wrote:
-> Hi Jerome,
-> 
-> On Tue, 5 Nov 2024 at 05:12, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
->>
->> Hello Simon,
->>
->> On 10/27/24 17:16, Simon Glass wrote:
->>> Hi Jerome,
->>>
->>> Just something I noticed earlier...when running 'ut lib' I see this
->>> failure on sandbox:
->>>
->>> test/cmd/wget.c:215, net_test_wget(): 0 == run_command("wget
->>> ${loadaddr} 1.1.2.2:/index.html", 0): Expected 0x0 (0), got 0x1 (1)
->>
->> The reason is:
->>
->> $ make sandbox_defconfig
->> $ make -j$(nproc)
->> $ ./u-boot -c "ut lib"
->> [...]
->> Net:         eth_initialize() No ethernet found.
->>
->> I don't know how sandbox is supposed to instantiate ethernet devices?
-> 
-> If you try it before your changes you will see what it is supposed to
-> do. There is a sandbox network device and it can be used to send and
-> receive data within U-Boot itself, for testing purposes.
+On Tue, Nov 05, 2024 at 09:07:17AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 5 Nov 2024 at 08:47, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Nov 05, 2024 at 08:15:25AM -0700, Simon Glass wrote:
+> > > Hi Peter,
+> > >
+> > > On Tue, 5 Nov 2024 at 06:10, Peter Robinson <pbrobinson@gmail.com> wr=
+ote:
+> > > >
+> > > > On Tue, 5 Nov 2024 at 13:03, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Mon, 4 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Mon, Oct 28, 2024 at 05:31:30PM +0300, Mikhail Kshevetskiy w=
+rote:
+> > > > > >
+> > > > > > > Legacy TCP stack is bad. Here are some of the known issues:
+> > > > > > >  * tcp packet from other connection can break a current one
+> > > > > > >  * tcp send sequence always starts from zero
+> > > > > > >  * bad tcp options processing
+> > > > > > >  * strange assumptions on packet size for selective acknowled=
+ge
+> > > > > > >  * tcp interface assumes one of the two scenarios:
+> > > > > > >      - data downloading from remote host to a board
+> > > > > > >      - request-response exchange with a small packets
+> > > > > > >    so it's not possible to upload large amount of data from t=
+he
+> > > > > > >    board to remote host.
+> > > > > > >  * wget test generate bad tcp stream, test should fail but it=
+ passes instead
+> > > > > > >
+> > > > > > > This series of patches fixes all of the above issues.
+> > > > > >
+> > > > > > I know Peter asked on the last one, but I want to ask as well. =
+With lwIP
+> > > > > > merged, why do we want to add features to the old stack? I can =
+see
+> > > > > > fixing issues, but not adding new functionality as well. Thanks.
+> > > > > >
+> > > > >
+> > > > > Let's apply this. It has tests and the old stack is still used by=
+ a
+> > > > > lot of boards. At present lwip is only used on one. There is more=
+ work
+> > > > > to do on the new stack, including finishing off the sandbox
+> > > > > implementation.
+> > > >
+> > > > I agree with applying the fixes pieces, I do not agree with apply t=
+he
+> > > > HTTP server pieces. This series should actually be split into 3
+> > >
+> > > But what is your objection?
+> > >
+> > > I would much rather just apply it ASAP. It has already gone through 12
+> > > versions, during which lwip has been prepared and applied.
+> >
+> > Yes, and to be blunt, the first bit of feedback I provided was "can you
+> > please look at the lwIP series instead?".
+> >
+> > > The HTTP server is a useful feature and we should be able to use it to
+> > > test networking in U-Boot in a more self-contained and performant
+> > > manner.
+> >
+> > I very much do not want to add more features to the legacy TCP stack.
+> > We're likely, long term, to still need some cut-back version of the old
+> > stack for the limited SPL cases.
+>=20
+> This series has been in progress for a long time and it seems unfair
+> to just drop it, with one one board on the new stack.
 
-I tried it just before my changes but the result is the same.
+Well, I continue to not say that we should drop the series, but that we
+should take the fixes and not the new features. Because as far as I can
+tell, the current TCP stack is in such a shape that it's not
+production-usable anywhere and so the number of users argument is
+irrelevant.
 
-$ git log --oneline -1 1ca0ddb643f
-1ca0ddb643f Merge commit 'f3f86fd1fe0fb288356bff78f8a6fa2edf89e3fc' as 'lib/lwip/lwip'
-$ git checkout 1ca0ddb643f^
-HEAD is now at d5cab0d6adc Revert "Makefile: Drop SPL_FIT_GENERATOR / SPL_FIT_SOURCE support" changes
-$ make sandbox_defconfig
-$ make -j$(nproc)
-#
-# configuration written to .config
-#
-$ ./u-boot -c "ut lib"
-[...]
-Net:         eth_initialize() No ethernet found.
-[...]
-test/cmd/wget.c:215, net_test_wget(): 0 == run_command("wget ${loadaddr} 1.1.2.2:/index.html", 0): Expected 0x0 (0), got 0x1 (1)
+--=20
+Tom
 
+--r4pLTuywMsaawwKr
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Can you give a commit SHA1 where net_test_wget() passes?
+-----BEGIN PGP SIGNATURE-----
 
-Thanks,
--- 
-Jerome
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcqY0gACgkQFHw5/5Y0
+tyy1bwv7BuiXSm7C/nbSdl+8xESTq4qUMh1goLVrGKhz+2TqUdT+lyjG/JTU9+Cu
+/30RV70o2QM1NkAhGDiFr1ycpZtPVdC5beQEcRVQccYfUI7Jb1lW798LpcoL3qlv
+rDuKGO+27C+f1lj3sP0xM2Akwsv95b3/3/M54DhV48TkppTDDa8YoWsfAyOTbfFC
+LQOD4J4X+m0uqnCC/rWygQAnH8oiYFtr1sR0UJmeJjZwaJy/Ym2LodTdXnc2eC1N
+2QrXsyYXUr+qHzqYsYcEu3OJW4Xx/VGXZoIpCormenar8hvEv5PTPnhCbTTZ/maK
+2WBXwWjlsRUHcnByRKhX0VW9UvQhvwdArcJUxMaRnvA4sXnSOsbrqsuRNO49fhTD
+wDOqIz2zSd1SEYl4JMhoFnGtPnJ+vkqZvuYj219UVgTv04eSRRUW8i8opFK383f5
+wlTiWpnDy5FZgiAQz4BbWFz6ua+IYnrgz78dDf0g/rceryMaEzliAlKSO1qZXyN3
+hlyG8xF7
+=ZqUk
+-----END PGP SIGNATURE-----
 
-
->>
->>> Also, since it is testing a command and is in test/cmd it really
->>> should be in the 'cmd' test suite, not 'lib'.
->>
->> Agreed. I've posted a patch for that:
->> https://lore.kernel.org/u-boot/20241105120653.99438-1-jerome.forissier@linaro.org/T/#u
-> 
-> Thanks.
-> 
-> Regards,
-> Simon
+--r4pLTuywMsaawwKr--
