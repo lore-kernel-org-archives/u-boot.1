@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96653D1CA13
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 01:07:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77E40D1CA13
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 01:07:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5500888F14;
+	by phobos.denx.de (Postfix) with ESMTP id EC53588F83;
 	Tue,  5 Nov 2024 02:07:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q0DQH8lx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EGhYBqyL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B701C88FD2; Tue,  5 Nov 2024 02:07:10 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id F272189021; Tue,  5 Nov 2024 02:07:12 +0100 (CET)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D26288F83
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 02:07:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2500288FCB
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 02:07:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6cbd550b648so37366156d6.0
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 17:07:08 -0800 (PST)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6cbf0769512so32009016d6.3
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 17:07:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730768827; x=1731373627; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1730768829; x=1731373629; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jPpvXINAASwkJKHMUnqTsqFiZb7AGYofEpTYYapxXMA=;
- b=q0DQH8lxwrBo67HL/gK4WrzhCR6p/dPx8UaXj6rPcwD9p3kZzF4YGMNpDeVELfitJC
- A/fWRhsfSiRWNwWXcZwYl6ZMmWZdH9d4MIg0bPyNOSLmcJtKnZ4vCj0jKqA0Tk88h1MH
- RAlnhG/+wQcpP8wBnWU0zIa1H/YEoLmz/Hyx8=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=x9b6maQoNQI4r+2IovVsb+1g5VTAE89iap3LyntQ5h4=;
+ b=EGhYBqyLIGhbqK8VPb+V1n3cMcOoXAjd2nDWwLiJnt8JF1PoO4SuvSUS036jDyjXFZ
+ 6Yf+nzuEhcmH2LDPK+BgZe2nfLpFuzVTdtey7IWH5uZBh2/jGTwvh/NRG3EH/OIOh30/
+ +96/W95nMldvG0XgeGw61zHKrRfP0Uapx8ALY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730768827; x=1731373627;
+ d=1e100.net; s=20230601; t=1730768829; x=1731373629;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jPpvXINAASwkJKHMUnqTsqFiZb7AGYofEpTYYapxXMA=;
- b=PQFbpMyZMGAm0oS4y1qDVOmvWpORZdNteO5k4y/KQ4XAuFsO1UO+kRqgfXKaN5hwf9
- QZJHbUtBXhvjKuPEkQ3M2EqltsVJ9Pj/mEJytu3bmaVgrXGl1X78vdxgDXuOXEjolZB1
- CY2B+5kJnB7BcyNDYRaAoqWjQaRGyTkpdGa43miMHVbXRHbz+Uv14F4kycMcwMeer1dl
- +uslCySvqg8VmMHMWXpY6YTffK3kpUzL3kequSw2+ExCVImXEqzukVcanAG/kIXa4A+C
- Gj0P1C0K1GvPFJy4Vt8EzHBtf7Xd+snQe4VprSirL5CiHRWjbpwNGrW+jWlLgA+cVo3o
- MSww==
-X-Gm-Message-State: AOJu0YxIR3xtsH0kgp24FK7qhz/6uVsiuMKQYCuM4U7lDMIiXWzmOXvj
- /H8O+n9VkA4e/Dl7XNF6HsjVrAiqKmguonpGliwp0qZXMmMdUF4FLkJ3uJaP+Ck=
-X-Google-Smtp-Source: AGHT+IH+t10lxZ2SZEIxKNfNCiO4oyinI5U+d3aGpyli8mgQXrBB01wkoWWgTYaOnjU/+FOl8kEXqg==
-X-Received: by 2002:a05:6214:5981:b0:6cb:e4d3:10a0 with SMTP id
- 6a1803df08f44-6d35c1aea9dmr222475396d6.48.1730768827488; 
- Mon, 04 Nov 2024 17:07:07 -0800 (PST)
+ bh=x9b6maQoNQI4r+2IovVsb+1g5VTAE89iap3LyntQ5h4=;
+ b=Gdo32toRTSU3ZrVWQD4g1MoFL9JrEu5TnkaKxmbO2w70I142SfMXmRZmxNGSs6hsXQ
+ PueR5zSue69kZ6M5ZABsdoxR6LhvxDi5MK+P0kpCmTClX9+N1dPZCCunK5o9JbhAfh7F
+ mXSULHVg/TyhBwwTFcLx/g6b53iCrLZ6E1gew+ywvXEloj3UDOjtRBdlo6xwsDmDy5H5
+ iteJQqRayP88YuUFuLJR3C/nN75Ba/MojrLbVo4X2L00DFdOCaQlr7V9laAMnE5xS0sh
+ YawnHTAyNYHQRJv4pJ++4K8gBVceFPPfnWwGE+Pq3l9Ciqz5fqOj7W0A5cmDOe12YoiI
+ TJ8w==
+X-Gm-Message-State: AOJu0YztmLg3SjDKCo7KbS0m9ViOXuSli1OC77l4erMeVYXfBnxf3H0B
+ V4zMckNiNOPGk6nxA4AFunxR8WYcK9fXHZNKp2yqz+czVc+MsxAq7EUoREALKvmd8t0mzvmXnOY
+ 53j8=
+X-Google-Smtp-Source: AGHT+IGjhtDQpoHu4snr3cPg6+erfJ04x3JkouJpt5386W50QXgFK5C+uZn7fYGImC2r3d4lVH0Uww==
+X-Received: by 2002:a05:6214:4b09:b0:6d1:7438:7b94 with SMTP id
+ 6a1803df08f44-6d351b07b4amr270249886d6.47.1730768828975; 
+ Mon, 04 Nov 2024 17:07:08 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d353fcc777sm54436686d6.56.2024.11.04.17.07.06
+ 6a1803df08f44-6d353fcc777sm54436686d6.56.2024.11.04.17.07.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 17:07:06 -0800 (PST)
+ Mon, 04 Nov 2024 17:07:08 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Weijie Gao <weijie.gao@mediatek.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Daniel Golle <daniel@makrotopia.org>, John Crispin <john@phrozen.org>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
-References: <e6909b36be18c73f378c9e011112ee10b9299194.1730194901.git.weijie.gao@mediatek.com>
-Subject: Re: [PATCH v2 1/3] menu: fix the logic checking whether ESC key is
- pressed
-Message-Id: <173076882609.3917422.16645000092069467592.b4-ty@konsulko.com>
-Date: Mon, 04 Nov 2024 19:07:06 -0600
+To: u-boot@lists.denx.de, Yuri Zaporozhets <yuriz@vodafonemail.de>
+In-Reply-To: <ZyIuA1Ieq4ff7iqV@qrv-systems.net>
+References: <ZyIuA1Ieq4ff7iqV@qrv-systems.net>
+Subject: Re: [PATCH] bios_emulator: define the comment symbol for RISC-V
+ assembler too
+Message-Id: <173076882762.3917422.16172455412540927965.b4-ty@konsulko.com>
+Date: Mon, 04 Nov 2024 19:07:07 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -92,26 +88,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 29 Oct 2024 17:47:10 +0800, Weijie Gao wrote:
+On Wed, 30 Oct 2024 14:00:51 +0100, Yuri Zaporozhets wrote:
 
-> It's observed that the bootmenu on a serial console sometimes
-> incorrectly quitted with superfluous characters filled to command
-> line input:
+> The bios_emulator driver cannot be compiled for RISC-V because the x86emu.h
+> header file doesn't define the comment symbol ("#") for the assembler.
+> With this patch, use the same symbol as for e.g. x86.
 > 
-> >  *** U-Boot Boot Menu ***
-> >
-> >      1. Startup system (Default)
-> >      2. Upgrade firmware
-> >      3. Upgrade ATF BL2
-> >      4. Upgrade ATF FIP
-> >      5. Load image
-> >      0. U-Boot console
-> >
-> >
-> >  Press UP/DOWN to move, ENTER to select, ESC to quit
-> >MT7988> [B
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
