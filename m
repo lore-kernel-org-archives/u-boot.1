@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AFBED2B944
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:01:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC6BD2B950
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:02:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB28C891B8;
-	Tue,  5 Nov 2024 17:01:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 18412891D4;
+	Tue,  5 Nov 2024 17:01:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="suA9g9nX";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ealdwWpS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 004928900E; Tue,  5 Nov 2024 17:01:26 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id E5AF5891D4; Tue,  5 Nov 2024 17:01:26 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98550891B8
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:01:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A054E891CF
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:01:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,12 +28,12 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1730822477; bh=YP2NRGoH0Pgu/TKAeJ+3Wqs7aYivqY1uVSoqLa2wBaM=;
- b=suA9g9nXqhonrnUZ07fmavsulun8kR6KMixDntK684IIzgvgA8y7oKslhJSwPAO2+oEIpAcoX
- Gxgh3NfSNY5kLL9UK/xYj6UURHwg3W7TtX+BGjq1MeZyiUMtAftZPDToEgzhYv5VioZW6NOBmoO
- /te8nQgApK/ZGhx61F3hBrqFMPvQpwGjEvKTK4oE0Np5OdKp2VnVz6xNMoJtsy2VV/VxN6OL333
- iOke224IiOtnagH0J2cLlgKjlvFvPv7SBS9KN6Bg6yuzBHwvC5+rP9xGfGMBtEDFUTkccGLiBqV
- XlUmrJSBWGgmDmPjqntFbJkbLs9uwrnxSwhiV+/GBX6A==
+ t=1730822475; bh=LQ9o+1VQIdCAHCTk/vnlv/lYvqu/VtK4tYQpAnIVS24=;
+ b=ealdwWpS83SpBxuHMmsiNj0itbXeLKGl7A5DBi+jLwEAgYzQLzx01iaAlb2hzogRtEbTvLggC
+ AszmAiKtLpfuTsPW7Ctlv1waAXl+BdEC06OAuqNleeDIzFSIW2AB6tCGGUtZIjO9wD69JpHLCCg
+ U0yJlaxbWciGa784UNCkEkBejyMz8L2ceEfoR22hLyDgBXwPHM4aHDgbOZt+/menzuiRpfgntZg
+ wjHHaqVfQZbRYRegIO1c39JjPNBH6vaHOFnERL/lCMndd9BgqVSd5UTQlwT0BIVJ7oFjSnNYS3q
+ dx7qSgtl7TTEXBzwQ47VJhiXuAS1x9fBIanTjvxq1kBA==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
@@ -41,10 +41,10 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Jonas Karlman <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH 04/13] rockchip: rk3288-tinker: Drop unused vcc_sd regulator
- from SPL
-Date: Tue,  5 Nov 2024 16:00:27 +0000
-Message-ID: <20241105160054.1373319-5-jonas@kwiboo.se>
+Subject: [PATCH 03/13] rockchip: rk3288-tinker: Only include required DT nodes
+ in TPL
+Date: Tue,  5 Nov 2024 16:00:26 +0000
+Message-ID: <20241105160054.1373319-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241105160054.1373319-1-jonas@kwiboo.se>
 References: <20241105160054.1373319-1-jonas@kwiboo.se>
@@ -55,8 +55,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 672a414cff3e144e4725e0d8
+ 207.246.76.47
+X-ForwardEmail-ID: 672a4149ff3e144e4725e0c4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,131 +73,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The sdmmc power come from vcc33_sd pmic regulator and not from the
-vcc_sd fixed regulator, as currently defined in the in-tree DT.
+Drop the unneeded bootph-all prop from dmc node, it is already defined
+in soc u-boot.dtsi.
 
-Drop vcc_sd and the related gpio7 and sdmmc_pwr nodes from being
-included in SPL along with any related Kconfig option. Also enable
-SPL_DM_SEQ_ALIAS to ensure aliases is handled correctly in SPL.
+Remove booth-all prop from gpio7 node, this node is not needed in TPL.
+
+Adjust bootph props to include pinctrl related nodes for UART2.
+
+Remove the explicit bootph-all prop from the pinctrl node, any bootph-
+prop will automatically be propagated to the pinctrl node.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3288-tinker-u-boot.dtsi | 9 ---------
- configs/tinker-rk3288_defconfig        | 7 +------
- configs/tinker-s-rk3288_defconfig      | 7 +------
- 3 files changed, 2 insertions(+), 21 deletions(-)
+ arch/arm/dts/rk3288-tinker-u-boot.dtsi | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
 
 diff --git a/arch/arm/dts/rk3288-tinker-u-boot.dtsi b/arch/arm/dts/rk3288-tinker-u-boot.dtsi
-index 1665e4f5d10f..4f230739f1c3 100644
+index 032dac221c24..1665e4f5d10f 100644
 --- a/arch/arm/dts/rk3288-tinker-u-boot.dtsi
 +++ b/arch/arm/dts/rk3288-tinker-u-boot.dtsi
-@@ -18,7 +18,6 @@
+@@ -6,7 +6,6 @@
+ #include "rk3288-u-boot.dtsi"
+ 
+ &dmc {
+-	bootph-all;
+ 	rockchip,pctl-timing = <0x215 0xc8 0x0 0x35 0x26 0x2 0x70 0x2000d
+ 		0x6 0x0 0x8 0x4 0x17 0x24 0xd 0x6
+ 		0x4 0x8 0x4 0x76 0x4 0x0 0x30 0x0
+@@ -18,6 +17,7 @@
+ };
  
  &gpio7 {
- 	/delete-property/ bootph-all;
--	bootph-pre-ram;
- };
- 
- &i2c2 {
-@@ -64,10 +63,6 @@
++	/delete-property/ bootph-all;
  	bootph-pre-ram;
  };
  
--&sdmmc_pwr {
--	bootph-pre-ram;
--};
--
- &uart2 {
- 	bootph-all;
+@@ -29,7 +29,7 @@
  };
-@@ -76,7 +71,3 @@
- 	bootph-pre-sram;
+ 
+ &pcfg_pull_none {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &pcfg_pull_none_drv_8ma {
+@@ -37,17 +37,13 @@
+ };
+ 
+ &pcfg_pull_up {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &pcfg_pull_up_drv_8ma {
  	bootph-pre-ram;
  };
--
--&vcc_sd {
--	bootph-pre-ram;
+ 
+-&pinctrl {
+-	bootph-all;
 -};
-diff --git a/configs/tinker-rk3288_defconfig b/configs/tinker-rk3288_defconfig
-index 42dbef9c2c30..aff820ebfdda 100644
---- a/configs/tinker-rk3288_defconfig
-+++ b/configs/tinker-rk3288_defconfig
-@@ -4,7 +4,6 @@ CONFIG_TPL_SKIP_LOWLEVEL_INIT_ONLY=y
- CONFIG_SYS_ARCH_TIMER=y
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_TEXT_BASE=0x01000000
--CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
-@@ -33,8 +32,6 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_NO_BSS_LIMIT=y
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--CONFIG_SPL_I2C=y
--CONFIG_SPL_POWER=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
-@@ -54,6 +51,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
-+CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_REGMAP=y
- CONFIG_SPL_REGMAP=y
- CONFIG_SYSCON=y
-@@ -74,10 +72,7 @@ CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_RK8XX=y
--CONFIG_SPL_PMIC_RK8XX=y
--CONFIG_SPL_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM=y
-diff --git a/configs/tinker-s-rk3288_defconfig b/configs/tinker-s-rk3288_defconfig
-index e62a03e066cc..6aef775a5717 100644
---- a/configs/tinker-s-rk3288_defconfig
-+++ b/configs/tinker-s-rk3288_defconfig
-@@ -5,7 +5,6 @@ CONFIG_SYS_ARCH_TIMER=y
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_TEXT_BASE=0x01000000
- CONFIG_SYS_MALLOC_F_LEN=0x4000
--CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
-@@ -33,8 +32,6 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_NO_BSS_LIMIT=y
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--CONFIG_SPL_I2C=y
--CONFIG_SPL_POWER=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
-@@ -55,6 +52,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
-+CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_REGMAP=y
- CONFIG_SPL_REGMAP=y
- CONFIG_SYSCON=y
-@@ -75,10 +73,7 @@ CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_RK8XX=y
--CONFIG_SPL_PMIC_RK8XX=y
--CONFIG_SPL_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM=y
+-
+ &sdmmc {
+ 	bootph-pre-ram;
+ };
+@@ -77,7 +73,8 @@
+ };
+ 
+ &uart2_xfer {
+-	bootph-all;
++	bootph-pre-sram;
++	bootph-pre-ram;
+ };
+ 
+ &vcc_sd {
 -- 
 2.46.2
 
