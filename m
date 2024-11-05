@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A26AD2B950
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:03:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B83D2B944
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:03:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5B3789207;
-	Tue,  5 Nov 2024 17:01:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 37B3589220;
+	Tue,  5 Nov 2024 17:02:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="vEH5+O8E";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="g4aCBOI5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA10F8922A; Tue,  5 Nov 2024 17:01:56 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ id D321789231; Tue,  5 Nov 2024 17:01:58 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A673E891D0
+ by phobos.denx.de (Postfix) with ESMTPS id 1CC34891E8
  for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:01:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
@@ -28,12 +28,12 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1730822506; bh=mTYB6ooyqe7SStlI2IDJ3I7HoBYRZ6+eh4Zvrd55RW4=;
- b=vEH5+O8EcwfHQphjawE9EZ2ElzkDlh8zRbKfvuzz/aK0scm1CiLsK4pqXDQsbYauWp5014fCp
- WmaLlatz9TQA8acLSvWa0HComl+nDI2XcvDTPq9QH2VYcbsnKG4HYBzfaAptwGAWx679s6AC3rq
- Rw6pEjvXHQEVHlvJUM+54M85GSve22CAXeKyw4BVh6F1xkMdXKaNYbL6wnIFi2c7LSvP44xe9D3
- 31CeUBG7dGFCoZ6zlcDmiTCrJ+oTbbTyZjC/5BY+NiiQuJVdYxQm9D3MIawY7B4vlYEWJwGoB4L
- AXVk+dO2hOHY1g7mZZQ32cuqoBXCF6Gr3siEC/vd2y5Q==
+ t=1730822507; bh=va8u4iOXtwIFenOVtk0x5WwtKF0n3zJalAJOINOi7uk=;
+ b=g4aCBOI5F2K9fZeKSwDshe7q3ozreV5msG8tyBvNHSpC1O1sNNLQNB+EZX2Rqw+nFq6TsGoW7
+ KlFPOQdwzm5fO8MEP4pJrdLrmterR0rFx9MUO9cU1LGPZ7ZpdTTI/Tabx8v0lpaJRCkuRJ/p7s5
+ oNLW7FBijjtj427A86qL1IMCPkW+AOuLzENV9ZbiLQAnvk3ZCpbYCQOktQblCP6BYoM8mhzFeFH
+ pr6TVJpTFD5ORYF50PYIzd1gjrDB3mWpW6Oa2zSftI3HpfvJEbkgXm5mw0P64ljLeC7hR1IEBRA
+ 8yJ+0l9g3BU7YGWU9/C5QE2HseYDEdtNcl6yLH2eTBZw==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
@@ -41,9 +41,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Jonas Karlman <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH 12/13] rockchip: rk3288-tinker: Fix slow Ethernet initializion
-Date: Tue,  5 Nov 2024 16:00:35 +0000
-Message-ID: <20241105160054.1373319-13-jonas@kwiboo.se>
+Subject: [PATCH 13/13] rockchip: rk3288-tinker: Change to use FIT
+Date: Tue,  5 Nov 2024 16:00:36 +0000
+Message-ID: <20241105160054.1373319-14-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241105160054.1373319-1-jonas@kwiboo.se>
 References: <20241105160054.1373319-1-jonas@kwiboo.se>
@@ -54,8 +54,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-ForwardEmail-ID: 672a4168ff3e144e4725e1c0
+ 149.28.215.223
+X-ForwardEmail-ID: 672a416bff3e144e4725e1d6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,85 +72,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For some reason the Ethernet PHY reset delay is set to 1 second, this
-cause an unneccecery long boot delay.
+Change to use FIT and FIT_SIGNATURE when loading U-Boot proper in SPL to
+allow checksum validation and fallback loading of FIT from a different
+mmc device.
 
-Tinker Board use RTL8211E or RTL8211F Ethernet PHY, datasheet list an
-initial 10ms delay and then a 30-76ms delay before accessing registers.
-
-Change to use 80ms delay instead of a full second to speed up Ethernet
-initializion in U-Boot.
-
-Also enable PHY_REALTEK, DM_ETH_PHY and PHY_GIGE to improve Ethernet PHY
-support in U-Boot.
+Checksum validation of FIT adds around 140 ms to boot time:
 
 Before:
 
-  1,404,971    960,924  eth_common_init
-  2,438,830  1,033,859  eth_initialize
-  2,444,449      5,619  main_loop
-  2,445,153        704  cli_loop
-
-After:
-
+       Mark    Elapsed  Stage
+          0          0  reset
+         13         13  TPL
+      6,957      6,944  end tpl
+     25,102     18,145  SPL
+    131,932    106,830  end phase
+    132,137        205  board_init_f
+    444,277    312,140  board_init_r
   1,404,987    960,710  eth_common_init
   1,519,110    114,123  eth_initialize
   1,524,734      5,624  main_loop
   1,525,452        718  cli_loop
 
+After:
+
+       Mark    Elapsed  Stage
+          0          0  reset
+         13         13  TPL
+      6,957      6,944  end tpl
+     35,744     28,787  SPL
+    271,220    235,476  end phase
+    271,420        200  board_init_f
+    588,474    317,054  board_init_r
+  1,548,950    960,476  eth_common_init
+  1,663,105    114,155  eth_initialize
+  1,668,734      5,629  main_loop
+  1,669,417        683  cli_loop
+
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-There are more boards having similar full second delay and a fix will be
-sent to upstream Linux to correct this in due time.
----
- arch/arm/dts/rk3288-tinker-u-boot.dtsi | 4 ++++
- configs/tinker-rk3288_defconfig        | 3 +++
- configs/tinker-s-rk3288_defconfig      | 3 +++
- 3 files changed, 10 insertions(+)
+ configs/tinker-rk3288_defconfig   | 7 +++++++
+ configs/tinker-s-rk3288_defconfig | 7 +++++++
+ 2 files changed, 14 insertions(+)
 
-diff --git a/arch/arm/dts/rk3288-tinker-u-boot.dtsi b/arch/arm/dts/rk3288-tinker-u-boot.dtsi
-index 7568b1495341..a6f6f14df93d 100644
---- a/arch/arm/dts/rk3288-tinker-u-boot.dtsi
-+++ b/arch/arm/dts/rk3288-tinker-u-boot.dtsi
-@@ -16,6 +16,10 @@
- 	rockchip,sdram-params = <0x20d266a4 0x5b6 2 533000000 6 9 0>;
- };
- 
-+&gmac {
-+	snps,reset-delays-us = <0 10000 80000>;
-+};
-+
- &gpio7 {
- 	/delete-property/ bootph-all;
- };
 diff --git a/configs/tinker-rk3288_defconfig b/configs/tinker-rk3288_defconfig
-index b7636fe581f4..05dca105d609 100644
+index 05dca105d609..bc5379d43430 100644
 --- a/configs/tinker-rk3288_defconfig
 +++ b/configs/tinker-rk3288_defconfig
-@@ -58,6 +58,9 @@ CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_I2C_EEPROM=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_PHY_GIGE=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_PINCTRL=y
+@@ -17,9 +17,15 @@ CONFIG_DEBUG_UART_BASE=0xff690000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_DEBUG_UART=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3288-tinker.dtb"
+ CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+@@ -91,4 +97,5 @@ CONFIG_VIDEO_ROCKCHIP=y
+ CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+ CONFIG_CONSOLE_SCROLL_LINES=10
+ CONFIG_CMD_DHRYSTONE=y
++CONFIG_SPL_CRC32=y
+ CONFIG_ERRNO_STR=y
 diff --git a/configs/tinker-s-rk3288_defconfig b/configs/tinker-s-rk3288_defconfig
-index e50424746c81..1bee0d094c8d 100644
+index 1bee0d094c8d..f0c8cc5bbc1b 100644
 --- a/configs/tinker-s-rk3288_defconfig
 +++ b/configs/tinker-s-rk3288_defconfig
-@@ -58,6 +58,9 @@ CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_I2C_EEPROM=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_PHY_GIGE=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_PINCTRL=y
+@@ -17,9 +17,15 @@ CONFIG_DEBUG_UART_BASE=0xff690000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_DEBUG_UART=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3288-tinker-s.dtb"
+ CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+@@ -91,4 +97,5 @@ CONFIG_VIDEO_ROCKCHIP=y
+ CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+ CONFIG_CONSOLE_SCROLL_LINES=10
+ CONFIG_CMD_DHRYSTONE=y
++CONFIG_SPL_CRC32=y
+ CONFIG_ERRNO_STR=y
 -- 
 2.46.2
 
