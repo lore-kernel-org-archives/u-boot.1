@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06752D1CA0E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 00:13:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1928D1CA0E
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 01:07:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26B7988E7B;
-	Tue,  5 Nov 2024 01:13:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E7C2E88F4E;
+	Tue,  5 Nov 2024 02:07:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hWiOjnPK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OY9Tt/PM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B589988ECC; Tue,  5 Nov 2024 01:13:11 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id B805688CF1; Tue,  5 Nov 2024 02:07:06 +0100 (CET)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3869088DC7
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 01:13:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF43488CF1
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 02:07:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7b153047b29so318691685a.3
- for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 16:13:09 -0800 (PST)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6d36f7cf765so20025576d6.0
+ for <u-boot@lists.denx.de>; Mon, 04 Nov 2024 17:07:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730765588; x=1731370388; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=j9yL78W7TEeumkLMNrm/grLmgvU0VALK1LHOWTqFyb0=;
- b=hWiOjnPKcUUz2B96XaQk4Wl5J9fIkh7IJujr9xib5VNHi7Z1FozfNuDCv5kkjgzKhM
- QBz+hQh4etbfMOdy6mnSvMWU/zdfltVJJXuhy2vb2NnNnACOwKQCCwU2BoEPPTFAVR2S
- BGGRYYm1u9zc+oREcAIQgNOFhH9kFXJVWQMIA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730765588; x=1731370388;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1730768822; x=1731373622; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j9yL78W7TEeumkLMNrm/grLmgvU0VALK1LHOWTqFyb0=;
- b=PXXDX1eVT6rdqGs+fx7vvhTAw5AhJY+UJ1QE0nWMK3zHfjWay0U07AZ9jezT+KqMdg
- mWMV2Y+K5ylEis6wldcqrPIXDXb2wQi0BAQ7G4d/ZfBminKUVP9UX8DjvYiZqRSC3eYG
- 8UYAOkEwboDEP3+dp8INKAePysTe/VvcwOSPbwYt0OiQCLHWYU2VioLehX3vYpwWZxeo
- sUlHom5WWsD0vtlRyIqX56eO73TG+N4ixpR450CPsUbUSMZGT/vA8ktdTVVqD3yL49Mm
- 6IEldWW19n6QE0X+iqDmVInUKPS6aIMeaBPlr0UCf9BgYckzgNlMYDtugJVo+LsjiOUJ
- kVfg==
-X-Gm-Message-State: AOJu0YzE3m2YTGdz5txlEIAte+LFwVMgkt+Wtpg1m+S3C19ELyU9vkQE
- w4T9JC0X6/uoUoodAPFNEukqlE9O9Ewcyx/XKsC/KGLsTKWjYh3XZorStavGU+U=
-X-Google-Smtp-Source: AGHT+IGTG0PwFEWIz8wa9RGrAU63vZ5v/NBEuenGjxETrBWyqog9zWvmfM6Ck7nCmnEyo73xtW4zWA==
-X-Received: by 2002:a05:6214:498f:b0:6d3:5ca6:b3f6 with SMTP id
- 6a1803df08f44-6d35ca6b434mr193928036d6.45.1730765587786; 
- Mon, 04 Nov 2024 16:13:07 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d353fcaf1csm53988056d6.47.2024.11.04.16.13.06
+ bh=PkWh4/3cjxdUk+6ecpAXIH5EcAh+iZSAU4Wj1Kxvov8=;
+ b=OY9Tt/PMGkwSxqz0UViDH9pL8v+Zy2ad5nV6KenAfZGUIfzyDh6N8LYXGOJIMQ248S
+ eY6vxl0sP1yUucEc7g+ioRa8FgbX/gmZ+0F39I8i2eQ1tyMAwIPOmFgxl4khTSKpEmAs
+ lr+Ujvx3ZT00Bwq0TbnAaZk9PMky6UNgbW9rU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730768822; x=1731373622;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PkWh4/3cjxdUk+6ecpAXIH5EcAh+iZSAU4Wj1Kxvov8=;
+ b=mNWHBdbPCiVLOjzwLGITBtaQWDXBTTXZ7gWIBgDL0gwWxlxhasocuqvIG5Cm4HGh1W
+ jLBZWqDTacjIeBs3BNSQ18Fq6EbeFzR8D6MyBkenWKbbUoYqlgq2hdzDfMvrDYfq5gh8
+ Gm2a8ROom8KJQw9HfMbqKp88c+XWHUPf3TYDD7eBlLmcDsngPEH66A81dXO1klEp5fhK
+ TjSn+lbIBpPZZ36i4eYCnmUet14GTG/ojDIGFk4gUz85bhG3y5WR/SGrXiuHHW4NLaUA
+ dTagX5ksLK7kGpYgnLPiKLkGTo/ZN+0k9FFiDdbVr0elGBoLdKEDUrEqN8sOHVzCXqX0
+ mJhw==
+X-Gm-Message-State: AOJu0YxwrXmCYorsRBxjTInsCfDsEEFgJXey2zQWMLJ6mI9rCel5X+mm
+ 0FNGxk+1FL5gA/LwqlNpFLD6jq7mzSe87+Ao+KsvSkzJSRxXqCLOkBj14Ch4B0Q=
+X-Google-Smtp-Source: AGHT+IGt5jwME+tR4GGokBesaLN89j8/kwQgWMKZgZoc7X86Q2fktarCXM8qeHqpeSPyWE0GMHNRIg==
+X-Received: by 2002:a05:6214:458f:b0:6cb:7104:f115 with SMTP id
+ 6a1803df08f44-6d35c088599mr230742686d6.11.1730768821794; 
+ Mon, 04 Nov 2024 17:07:01 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d353fcc777sm54436686d6.56.2024.11.04.17.07.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Nov 2024 16:13:07 -0800 (PST)
-Date: Mon, 4 Nov 2024 18:13:04 -0600
+ Mon, 04 Nov 2024 17:07:01 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v8 10/11] test: Support testing with two board-builds
-Message-ID: <20241105001304.GB3600562@bill-the-cat>
-References: <20241104224550.677442-1-sjg@chromium.org>
- <20241104224550.677442-11-sjg@chromium.org>
+To: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Love Kumar <love.kumar@amd.com>, Marek Vasut <marex@denx.de>
+In-Reply-To: <20241015121916.1155120-1-andrew.goodbody@linaro.org>
+References: <20241015121916.1155120-1-andrew.goodbody@linaro.org>
+Subject: Re: [PATCH] usb: Fix test failure with multiple partitions
+Message-Id: <173076882046.3917422.11680751214718510415.b4-ty@konsulko.com>
+Date: Mon, 04 Nov 2024 19:07:00 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="65xW/Yr8o6+UDMFi"
-Content-Disposition: inline
-In-Reply-To: <20241104224550.677442-11-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,38 +88,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 15 Oct 2024 13:19:16 +0100, Andrew Goodbody wrote:
 
---65xW/Yr8o6+UDMFi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> When test_usb_load finds multiple partitions of the same type then
+> it will cause a test failure. The call to write the test file will
+> write a different test file to each partition but only return the
+> name and size of the last one written. So the test then fails to
+> load the test file from the first partition as it uses the name of
+> a file on a different partition.
+> 
+> [...]
 
-On Mon, Nov 04, 2024 at 03:45:37PM -0700, Simon Glass wrote:
+Applied to u-boot/master, thanks!
 
-> The Beagleplay board uses two entirely separate builds to produce an
-> image, rather than using an SPL build for this purpose.
-
-You forgot to reword this :)
-
---=20
+-- 
 Tom
 
---65xW/Yr8o6+UDMFi
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcpYwUACgkQFHw5/5Y0
-tyxQ9wv+O1w5KsUBxP6Ds10CqTfSDMbXAi9Ju7IvZ/DrzBDlrlhhkrDwITxU6J3i
-bfhcROMnZUhSqcXeEvMV2fFVYPcL3jJsaQVGr/ulbYSBfaVVKqYJtpNnUuL0uW45
-SJFIsNMXv163jBkirckjnV5oWnGDiGoLmPa8MjkiNFJ1IS+GL+dngQklwXV9i2CZ
-l8ZmKDHxAl12oJB+esfh5gVZOgxo5+IQWPEB8WqF0p0OlEOPwPyJUBXeFRIkhTIv
-HhyEzHjxZTn4qJ/c0J/SOWxpIjB+GpMAluDLvFYJQHvMjWd3ynPo90+AVcCAtZFn
-GY/A7kt7NBb+2tKumeL3Ck/zNKcvSc9DbWIvuK0eA2bvLzpqO/yBASmH6TEXRwwA
-sbwhwhrksOR0VODZ7B+OHxMl0O5WiI99vtgqtpmsXDQ5ZFcVGVJrxsA/BAlGwi0Z
-ebu+g9igTvgT39wEuF+0scEk93mVNB/okTzDte/doDsgeOntKuddiabpsJHc5tww
-bxvrnqbP
-=6yGa
------END PGP SIGNATURE-----
-
---65xW/Yr8o6+UDMFi--
