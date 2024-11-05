@@ -4,90 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DB8AD36107
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 19:04:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F06BD3610E
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 19:13:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D16C088DFE;
-	Tue,  5 Nov 2024 20:04:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CCF9388D8D;
+	Tue,  5 Nov 2024 20:13:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SjUGpBzR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T0p85ieZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E01D488DFE; Tue,  5 Nov 2024 20:04:05 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 88BE188E3F; Tue,  5 Nov 2024 20:13:17 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD99C891AB
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 20:04:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A9C488CA2
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 20:13:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a93c1cc74fdso932896766b.3
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 11:04:02 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2fb5a9c7420so57056241fa.3
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 11:13:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730833442; x=1731438242; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1730833993; x=1731438793; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mV2caLbU3+mfakyfvQoUbbMNL8e9LC3T9ZnM48A/sPk=;
- b=SjUGpBzRJFtYdxixeQiib4qJ6Fu6b7fo3rn+t/X6yDhFLa7fSeiGMLYYSDLkxxUJv0
- FQtLcf9Cl8mOHPx2NdEeXNzFr4t6U44LJxStnREVamQabxx5ax/sbfZTNi5UrUewg3Ss
- Ck7+79cne9iN7MQsApBOYjK5Kunmx1GeHN3gE=
+ bh=3/IiCxRP1urAukCDgGSbjIAVPt0Q+axrgkp/QcaVz7Q=;
+ b=T0p85ieZvpPh6p7RmIexojh8PMAqDGq6G9OeRH10h6Sar6CtXjPjIQa0w1y3mEsEM9
+ LFQ0uUZ9dCG+XtqdkqfpQC6Zo1MtLGqnIsNZGiDzWfsX6PrMia4IhbgI4bDEG7jokRDs
+ 7QLZkn9Tu/wfe5N8Ut2APNi9M+dsOXl/ugZFk8YJg/5vyDLpEyAh1/SDpupdz5ZHFZ1L
+ ONPB5XxJ7VEQa9AYKJIew5vsrXS6m0a97FQXltjKs4OdmI8mzdkmbByMWFWZRxyal0Tc
+ BF8OiW/Ructtpm+P8g/HNOX5KdTRjF3musc6Elm1VczAS88nsvNab0nU0hos/o1GWMBq
+ mnnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730833442; x=1731438242;
+ d=1e100.net; s=20230601; t=1730833993; x=1731438793;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mV2caLbU3+mfakyfvQoUbbMNL8e9LC3T9ZnM48A/sPk=;
- b=SXgqrqZcZ4ITK+YNgc3Ft6/p8u+ppzTyJw2t49awZlRlWTln9fkBC3TjxopIYXrC0N
- yyIHAAsNsoPZQp3DiPUyULmKfsfrB0DD0tmfCebEFE8qVu7hVW8/x1tmGK2Hpu3HnA0f
- GrvdWCE7AJQTJwKW4iEBVj3aZTuOkiFfrNhlrrUupAjoI6OLjKUPOXoYxuyBDQklwrR3
- G/BVXDSlV5hASiHj4JI8SqsNY+wdjP1pUzOBFug9cYNrty9AZbR8Jzru2HwYNNW47O/H
- AaSaKXLBHv0xzzDHExI1z4YHW7wKnvP7nxMbEkrPlxdp57TM4pbcYHx9aaKNRxhJ2JdJ
- 5C2g==
+ bh=3/IiCxRP1urAukCDgGSbjIAVPt0Q+axrgkp/QcaVz7Q=;
+ b=CCFDLaFhnTyhZpXO7jk5jbK13VDQ2R1w5Dd5s+yrVzxzrnPgHnJHfdcW8AMwumOBBP
+ ZlJEA6XQ3kNHW/ne3nB+oA9RHcVtHRShOCjOluiRQYMPrXhKx1payO+BmNoPCM3at/um
+ bokQM+AH20uzXqZk3ohLqz5eo+3Z3JlVDqxHGn3TB5uwNB74lAyrNZnRrL6faXrIir1T
+ S/S40ub//cZ0OSYaTu+t59aPGBKAySk1tSgeDMN9qOJpkp1mB6Z+/4IM3xUmTbnVhQ3L
+ g5kgCP6AoyvyL/4p8FMkhTZ3sXM26hZ0cPfLk+E7cDT0Hye2fyojByVLV1r4vu5OHz4n
+ La3Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUdFhc9yhTt95oRBbqQP61k+hqKZeURr0I5lcsauarfrcGXgG5JPh0tN5xyLegVwPax3n6F11o=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9v1Hs+TKMAK8PnQE6zNDNTt0TrAYuHHcmQyuxyUMARlciIGvH
- mJkKYVJU3T3RSOSY6nFDaKj+caOLem/5MwK3fM9W+G5iYCtuvci1ci579C87SweX3s3OJopWgId
- E8Aa+koaRAKEwJrhjOYf5DOyIene+xDaFEcUV
-X-Google-Smtp-Source: AGHT+IFybBAcTEuw+TUBVdD9k04ZHhmJhN2g5xrs54j52xeKYi/kxbmbWsYJ/wHp6ULbNGMV1NlS5VOkiam8DbYBe9A=
-X-Received: by 2002:a17:907:1c02:b0:a99:a9b6:2eb6 with SMTP id
- a640c23a62f3a-a9e652c179emr1702974266b.0.1730833442087; Tue, 05 Nov 2024
- 11:04:02 -0800 (PST)
+ AJvYcCW4B7d/uE7rdhdEJrmOh9dMc6TnSGgsOrMYa0QSG+5prMPSVKgp1Q8hMJpFU95V/F/B9zqxWhA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwLSP2dM1J67k5z15jOZ09aXmnSQ/Ru08qt3nihb4sEP6T87KG6
+ z6TAH57dyi3n9l2xnePBY61KzEIDwug1LPiQFNyXCyGcbap0xbBXH4I88Wr53lDCPIqIqK67YIS
+ 12IJQHx1vEhzLvpMm/ogF/jqlgyQvXdIhQlugaA==
+X-Google-Smtp-Source: AGHT+IH5O0vDfZvYwazAO06A1FS0vWSwg6yPgoZryDEtB0wz7KsIwqCmHnfeaoT31j7XfN/D/yWI6o74Pp7gBSA00sk=
+X-Received: by 2002:a05:651c:160f:b0:2f7:64b9:ff90 with SMTP id
+ 38308e7fff4ca-2fedb7964a1mr77945461fa.9.1730833993176; Tue, 05 Nov 2024
+ 11:13:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20241028143143.1807305-1-mikhail.kshevetskiy@iopsys.eu>
- <20241104233227.GA3600562@bill-the-cat>
- <CAFLszThXiK=EzrUStsOBiSQ_pe1-Vdwtg-238BjQd91SMBym7A@mail.gmail.com>
- <CALeDE9M1PDFmm-oZvSEGwBaN_J77CSKUa8kbkEPQf9XATv8STg@mail.gmail.com>
- <CAFLszTjs-7uWNWdaZjhQe-rA5z0qSZxiFeX+WgFofYemW6qiwg@mail.gmail.com>
- <20241105154741.GI3600562@bill-the-cat>
- <CAFLszTjntxJShjnWK++NkonNrPdL0S-=zWf-N_AWUaZmfmArtg@mail.gmail.com>
- <20241105182619.GL3600562@bill-the-cat>
-In-Reply-To: <20241105182619.GL3600562@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Nov 2024 12:03:49 -0700
-Message-ID: <CAFLszTjf69huO+NMJ2vSvEamgzcxnxA7DhiSk9qmfsRaP8QAvQ@mail.gmail.com>
-Subject: Re: [PATCH v12 00/13] net: tcp: improve tcp support in legacy stack
-To: Tom Rini <trini@konsulko.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Anand Moon <linux.amoon@gmail.com>, Baruch Siach <baruch@tkos.co.il>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+References: <20241101-io_lmb_apple_dart_iommu-v1-0-fe4b9a74d47c@jannau.net>
+ <CADg8p97H9eqncSEGjZF5EGP2M9Y10MmV28RwSdtsW+T8fSURiw@mail.gmail.com>
+ <87v7x63p3c.fsf@bloch.sibelius.xs4all.nl>
+ <CADg8p96csvFbyWpgajy_ewZMXRCsKstbhGFMnDUcGnG9e+QA3g@mail.gmail.com>
+ <20241103173633.GA664967@robin.jannau.net>
+In-Reply-To: <20241103173633.GA664967@robin.jannau.net>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 6 Nov 2024 00:43:01 +0530
+Message-ID: <CADg8p94t3AQ_tsEwSpQEUu3cc3P0BtbZ=DE8k58Vtp6HFGo-Nw@mail.gmail.com>
+Subject: Re: [PATCH 0/4] Fix IOVA allocation in Apple dart iommu after global
+ LMB mem map changes
+To: Janne Grunau <j@jannau.net>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, trini@konsulko.com,
+ kettenis@openbsd.org, sjg@chromium.org, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,92 +93,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Tue, 5 Nov 2024 at 11:26, Tom Rini <trini@konsulko.com> wrote:
+On Sun, 3 Nov 2024 at 23:06, Janne Grunau <j@jannau.net> wrote:
 >
-> On Tue, Nov 05, 2024 at 09:07:17AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 5 Nov 2024 at 08:47, Tom Rini <trini@konsulko.com> wrote:
+> On Sun, Nov 03, 2024 at 07:53:36PM +0530, Sughosh Ganu wrote:
+> > On Sat, 2 Nov 2024 at 16:00, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
 > > >
-> > > On Tue, Nov 05, 2024 at 08:15:25AM -0700, Simon Glass wrote:
-> > > > Hi Peter,
+> > > > From: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > Date: Fri, 1 Nov 2024 17:17:22 +0530
 > > > >
-> > > > On Tue, 5 Nov 2024 at 06:10, Peter Robinson <pbrobinson@gmail.com> wrote:
+> > > > On Fri, 1 Nov 2024 at 15:47, Janne Grunau <j@jannau.net> wrote:
 > > > > >
-> > > > > On Tue, 5 Nov 2024 at 13:03, Simon Glass <sjg@chromium.org> wrote:
-> > > > > >
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Mon, 4 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Mon, Oct 28, 2024 at 05:31:30PM +0300, Mikhail Kshevetskiy wrote:
-> > > > > > >
-> > > > > > > > Legacy TCP stack is bad. Here are some of the known issues:
-> > > > > > > >  * tcp packet from other connection can break a current one
-> > > > > > > >  * tcp send sequence always starts from zero
-> > > > > > > >  * bad tcp options processing
-> > > > > > > >  * strange assumptions on packet size for selective acknowledge
-> > > > > > > >  * tcp interface assumes one of the two scenarios:
-> > > > > > > >      - data downloading from remote host to a board
-> > > > > > > >      - request-response exchange with a small packets
-> > > > > > > >    so it's not possible to upload large amount of data from the
-> > > > > > > >    board to remote host.
-> > > > > > > >  * wget test generate bad tcp stream, test should fail but it passes instead
-> > > > > > > >
-> > > > > > > > This series of patches fixes all of the above issues.
-> > > > > > >
-> > > > > > > I know Peter asked on the last one, but I want to ask as well. With lwIP
-> > > > > > > merged, why do we want to add features to the old stack? I can see
-> > > > > > > fixing issues, but not adding new functionality as well. Thanks.
-> > > > > > >
-> > > > > >
-> > > > > > Let's apply this. It has tests and the old stack is still used by a
-> > > > > > lot of boards. At present lwip is only used on one. There is more work
-> > > > > > to do on the new stack, including finishing off the sandbox
-> > > > > > implementation.
+> > > > > The changes in "Make LMB memory map global and persistent" [1] break
+> > > > > mapping DMA memory in the USB xHCI driver when using the apple_dart
+> > > > > iommu present on Apple silicon systems.
 > > > > >
-> > > > > I agree with applying the fixes pieces, I do not agree with apply the
-> > > > > HTTP server pieces. This series should actually be split into 3
+> > > > > The IOVA space used by the u-boot driver (low 4GB) and physical memory
+> > > > > do not overlap. The physical memory on this systems starts depending on
+> > > > > the SoC either at 0x10_0000_0000 or 0x100_0000_0000. It make no sense to
+> > > > > manage these distinct regions in a single LMB map. In addition every
+> > > > > device has its own iommu and IO address space so sharing a single memory
+> > > > > map between all iommu instances is not necessary.
+> > > > >
+> > > > > To fix this issue restore the used subset (add, alloc and free) of the
+> > > > > previous pointer based LMB interface with "io_" as prefix.
+> > > > >
+> > > > > To ensure that low level lmb functions do not use the global LMB
+> > > > > variable reorder lib/lmb.c so that the variable is not visible.
+> > > > >
+> > > > > Tested with patches from my "Fix device removal order for Apple dart
+> > > > > iommu" series [2] to fix a separate issue.
+> > > > >
+> > > > > The cosmetic commit has two checkpatch warnings in existing code which I
+> > > > > ignored.
+> > > > >
+> > > > > [1] https://lore.kernel.org/u-boot/20240826115940.3233167-1-sughosh.ganu@linaro.org/
+> > > > > [2] https://lore.kernel.org/u-boot/20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net/
+> > > > >
+> > > > > Signed-off-by: Janne Grunau <j@jannau.net>
+> > > > > ---
+> > > > > Janne Grunau (4):
+> > > > >       lmb: Do not use global LMB variable in _lmb_free()
+> > > > >       lmb: cosmetic: reorder functions and global LMB variable
+> > > > >       lmb: Add basic io_lmb functionality
+> > > > >       iommu: apple: Manage IOVA separately from global LMB mem map
 > > > >
-> > > > But what is your objection?
-> > > >
-> > > > I would much rather just apply it ASAP. It has already gone through 12
-> > > > versions, during which lwip has been prepared and applied.
+> > > > Thanks for these changes. I am currently on leave, but will take a
+> > > > look at this in detail next week. But on a cursory glance, I have to
+> > > > say that I am not entirely satisfied with this solution as well. With
+> > > > these patches, we now have a disparity in terms on how we view the LMB
+> > > > memory map -- we have a global map for RAM address range, but a per
+> > > > device one for IOVA's. I understand that IOVA's are supposed to be
+> > > > per-device,
 > > >
-> > > Yes, and to be blunt, the first bit of feedback I provided was "can you
-> > > please look at the lwIP series instead?".
+> > > The IVOA's are per-stream.  Multiple devices might share a single
+> > > stream.
 > > >
-> > > > The HTTP server is a useful feature and we should be able to use it to
-> > > > test networking in U-Boot in a more self-contained and performant
-> > > > manner.
+> > > > but then I think that perhaps LMB is not the right way to
+> > > > solve this. This was fine earlier, when the entire LMB implementation
+> > > > in U-Boot was local, but that is not the case now. I wonder if there
+> > > > can be a different, non-LMB way to implement this.
 > > >
-> > > I very much do not want to add more features to the legacy TCP stack.
-> > > We're likely, long term, to still need some cut-back version of the old
-> > > stack for the limited SPL cases.
+> > > Of course there can be a different implementation.  But why add a
+> > > separate implementation for what is essentially the same problem:
+> > > allocate blocks out of an address space.
 > >
-> > This series has been in progress for a long time and it seems unfair
-> > to just drop it, with one one board on the new stack.
+> > My primary concern here is to prevent setting a precedent that it is
+> > okay to have a local, per caller lmb instance.
 >
-> Well, I continue to not say that we should drop the series, but that we
-> should take the fixes and not the new features. Because as far as I can
-> tell, the current TCP stack is in such a shape that it's not
-> production-usable anywhere and so the number of users argument is
-> irrelevant.
+> I think the issue is thinking this is per caller. It is not (primarily)
+> by caller. It is one LMB instance per managed independent address space
+> block. Apple silicon SoCs have multiple independent iommus. Each iommu
+> can handle multiple address spaces (streams, only partially implemented
+> in the u-boot driver.
+>
+> > If it is allowed for
+> > one caller, it becomes difficult to say no to someone proposing a
+> > similar approach later. In any case, based on how the allocation logic
+> > works, with all the addresses being allocated from the IOMMU driver's
+> > map function callback, why can there not be a single instance of an
+> > iova lmb structure. That would at least ensure some kind of parity on
+> > how the lmb maps are maintained.
+>
+> There are multiple fully independent IOVA spaces. I doesn't make sense
+> to allocate them from a single pool.
+>
+> > > Before you changed the goal posts, lmb did exactly that.  The only
+> > > problem was that there were multiple lmb instances covering the same
+> > > "main memory" address space.
+> >
+> > I had provided an explanation of the situation that existed prior to
+> > these changes in a writeup [1]. And that writeup had clearly provided
+> > the two possible solutions to fix the issue with EFI allocated memory
+> > working with LMB. And it was decided through discussion on that
+> > writeup as well as on the mailing list that this was the approach to
+> > be taken.
+>
+> That document missed due to unfortunate circumstances one special case
+> in the LMB usage. Consolidating all struct lmb referring main memory
+> into a single opaque object is useful. Please let's move on to fix the
+> single usage which broke due to the change.
+>
+> From my point of view it's clear that "io_lmb*" is separate from the
+> main memory lmb.
 
-It's a strange thing as many people use the existing stack. I
-certainly didn't know it had problems and it has always worked fine
-for me. It just seems like an extreme position, to delay a series for
-such a long time, then drop it because a nascent competition thing has
-landed.
+Yes, that is my view as well. Which is why I was proposing a different
+mechanism for the IOVA allocations.
 
-Let's take it as it is, then say that future bug-fixes and
-enhancements need to be based on lwip (perhaps add something to this
-effect to the headers and docs if not already there?). No one loses
-and everyone should be happy. Once people start using lwip they will
-build confidence in it. I will grow in confidence once it supports the
-sandbox tests.
+ It manages the IO virtual address space of devices and
+> it is fine that there as many (io_)lmb instances as there are IO virtual
+> address spaces. These do not have to be managed via struct lmb and
+> looking at the minimal io_lmb* API a simpler implementation would work.
 
-Regards,
-Simon
+Okay. Although I wonder, given your explanation of multiple, per
+device IO VA spaces, how would these spaces be identified, if not
+through an instance of the lmb structure.
+
+> An alternative implementation would be duplicated code and reusing the
+> existing tested lmb code is desireable.
+
+Yes, I agree.
+
+> If we want a stronger distinction between lmb and io_lmb we could hide
+> struct lmb from io_lmb.
+
+Okay, but I am not sure how you would be able to achieve that. Are you
+proposing using the region lists directly? If so, I would say that if
+we are using the LMB code for the allocations, we might as well use
+the structure.
+
+-sughosh
+
+>
+> Janne
