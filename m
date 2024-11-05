@@ -4,106 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5272ED2B950
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 15:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E2CBD2B950
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:01:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AACDF891C0;
-	Tue,  5 Nov 2024 16:54:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A3B61891A4;
+	Tue,  5 Nov 2024 17:01:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hh77ElA6";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="BHiC46Fe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15A718913F; Tue,  5 Nov 2024 16:15:52 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 32ED1891A4; Tue,  5 Nov 2024 17:01:18 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2E58891E4
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 16:15:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD2A58900E
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:01:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a9e8522445dso543243366b.1
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 07:15:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730819747; x=1731424547; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PUq+F/fOhlX2dQRABqwxE+3OjzAWCkgyEDjETl3bw9g=;
- b=Hh77ElA63TzBIPmjmSigQgXnajYxC+bmhL+rmADrREUCaS+OrVBVPLfmLjP/L9ueP2
- jespBX5tigXuClFNOtt9WEQcZvToecg29X30hJFy2IzRuWJ8Ovqs/xD439WtOmg7/sPi
- cr3IeCyMCB7+lFkCO1umDTVqzmafNKdFnaovQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730819747; x=1731424547;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PUq+F/fOhlX2dQRABqwxE+3OjzAWCkgyEDjETl3bw9g=;
- b=ZfHTfV/d4wtEwqTaeadlKoAXJsBpYTE/2uiqtugoLZXIZ/kWo3Kr5kdRbWQaoJyRU+
- ou9c5Q+G4IwRaB8Y6+LDrWs6BObnfXI58X+XRw5FQYhhV2n1Md7ZNNiyQwR20hlU+Omt
- eGXJPRrm7LuNomttEeXO333zin6tuhHF7H8LaphJ4/Iq6jMVCC7gRnzK6FgMR1tUv3Mk
- r9KUVml0Vh+3oMeuiUNIcZaH1BhuhujZPFT+mjVb+w217pcMjsS9eBHQhb5dCVLrH3g4
- f2tMGa2qVmB201A4q5uO+VE862w3MOHRCxnxkKsIC48wFzBFoI/+lThoPZFMZEEKf2Qz
- XuBw==
-X-Gm-Message-State: AOJu0Yz16ICx5iwSSbki0OgAQu5MAb0TnrQaM6lEubhLXbjsudxjc+K3
- jurXE/2GDQBwxTXerKfPaY3okQ/S0pe+D9ST1+f04QvSJB99/O4SPVArcZYVTkqh5daCmYZaxLr
- g+oFM+tnYA5u6wOCM63geSVfhBnvmj9pIN4aH
-X-Google-Smtp-Source: AGHT+IG7FUKFi0QmomJAcgMUzgviYGIB8kYQ3E+P3Lo04LWUC+0Q0U76JUKqFasicDh4xq4TTmvtIZLk/g3d2+Rp2As=
-X-Received: by 2002:a17:907:2d91:b0:a9a:80cc:c972 with SMTP id
- a640c23a62f3a-a9e655a8980mr1569945666b.27.1730819746951; Tue, 05 Nov 2024
- 07:15:46 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=dc50=SB=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1730822464;
+ bh=noO18jrsyxCl8m4ykSqjKfvWwIjHixTQkYWYe7h+Q9k=;
+ b=BHiC46Fe8rjHGNrB1aHFf2HIgpAfH7W31J10pozE5139a3VYtCN3B6qhppXLofLX09u0y/DdO
+ hlQFiQ98Ks1FZIz7W3z1W7ufA8ar2hzCJd6ZtjoxQhrH/ZK2qa+wgfTSkGLMuqbKljykbPMrL37
+ J/hFBUZqTOTgp5oNvAlwSTt/HhofmDN1SCmnhAIwpvf5oO+NgQyuOkGKLhVK/Ew2nxZ5oi4gMz8
+ YUf2/JbZfMma1hb6Jc1LnwPh/oiupRortoLfyH/awAoLYZj39RCa8dPzPcr00hGUKvkZNV+P/Oz
+ xtEQKPXcYj0+vyO/J6Lsu2B9nRVwvPVJEOCSgN12zmwg==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Lin Huang <hl@rock-chips.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Cc: u-boot@lists.denx.de,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 00/13] rockchip: rk3288-tinker: Migrate to OF_UPSTREAM
+Date: Tue,  5 Nov 2024 16:00:23 +0000
+Message-ID: <20241105160054.1373319-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
-References: <20241103003322.626036-1-sjg@chromium.org>
- <CALeDE9MfWEAb91uzQPa6_jSo6beJv_GNHTY2TeKnSzFm6V97gw@mail.gmail.com>
-In-Reply-To: <CALeDE9MfWEAb91uzQPa6_jSo6beJv_GNHTY2TeKnSzFm6V97gw@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Nov 2024 08:15:34 -0700
-Message-ID: <CAFLszTito2+-qgOc=7bc3i9WmBZZCcAVWSY5hoH0neGjTg6zEQ@mail.gmail.com>
-Subject: Re: [PATCH v3 00/25] led: Remove old status-LED code
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Alexander Gendin <agendin@matrox.com>, 
- Alison Wang <alison.wang@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
- Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@kernel-space.org>,
- Angelo Dureghello <angelo@sysam.it>, Caleb Connolly <caleb.connolly@linaro.org>,
- Charles Hardin <ckhardin@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Doug Zobel <douglas.zobel@climate.com>, 
- Enric Balletbo i Serra <eballetbo@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Hans de Goede <hdegoede@redhat.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jagan Teki <jagan@amarulasolutions.com>,
- Javier Martinez Canillas <javierm@redhat.com>, 
- Jens Scharsig <esw@bus-elektronik.de>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Mario Six <mario.six@gdsys.cc>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
- Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, 
- Sean Edmond <seanedmond@microsoft.com>, Stefan Roese <sr@denx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>, 
- Wan Yee Lau <wan.yee.lau@intel.com>, Wolfgang Denk <wd@denx.de>, 
- uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Tue, 05 Nov 2024 16:54:11 +0100
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-ForwardEmail-ID: 672a413fff3e144e4725e085
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,25 +70,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+This series migrate Tinker Board to use OF_UPSTREAM, cleanup devices and
+pinctrl included in xPL control FDT and finally change to use FIT with
+checksum validation.
 
-On Tue, 5 Nov 2024 at 07:18, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> On Sun, 3 Nov 2024 at 00:34, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > There has been an LED framework in U-Boot which uses driver model for
-> > about 9 years now. Recent work is underway to improve it and provide
-> > more features. It is probably a good time to drop the old code, which
-> > is only used by 5 boards:
->
-> I don't believe, from what I can tell, they are feature comparable, at
-> the very least I have not been able to get the Pinephone working with
-> this so as it stands I still don't think this patch set is ready yet.
+TPL continue to OF_PLATDATA after this series, however boot testing was
+done with and without use of OF_PLATDATA.
 
-I don't have that hardware, nor the other 4, so cannot do anything
-with this feedback.
+Features tested on a Tinker Board S:
+- SD-card boot
+- eMMC boot
+- Ethernet
+- USB gadget
+- USB host
 
-Can you please be clear what you are asking me to do?
+Jonas Karlman (13):
+  board: rockchip: rk3288-tinker: Add myself as reviewer to MAINTAINERS
+  rockchip: rk3288-tinker: Sort u-boot.dtsi nodes alphabetically
+  rockchip: rk3288-tinker: Only include required DT nodes in TPL
+  rockchip: rk3288-tinker: Drop unused vcc_sd regulator from SPL
+  rockchip: rk3288-tinker: Include mmc nodes in pre-reloc for env load
+  rockchip: rk3288-tinker: Set cpuid and serial env var
+  rockchip: rk3288-tinker: Sync defconfig options from rk3288-tinker-s
+  rockchip: rk3288-tinker: Use common bss and stack addresses
+  rockchip: rk3288-tinker: Drop use of silent console and late boardinfo
+  rockchip: rk3288-tinker: Drop USE_PREBOOT Kconfig option
+  rockchip: rk3288-tinker: Migrate to OF_UPSTREAM
+  rockchip: rk3288-tinker: Fix slow Ethernet initializion
+  rockchip: rk3288-tinker: Change to use FIT
 
-Regards,
-Simon
+ arch/arm/dts/Makefile                        |   2 -
+ arch/arm/dts/rk3288-tinker-s-u-boot.dtsi     |  13 +-
+ arch/arm/dts/rk3288-tinker-s.dts             |  29 -
+ arch/arm/dts/rk3288-tinker-u-boot.dtsi       |  53 +-
+ arch/arm/dts/rk3288-tinker.dts               |  33 --
+ arch/arm/dts/rk3288-tinker.dtsi              | 533 -------------------
+ arch/arm/mach-rockchip/rk3288/Kconfig        |   6 +-
+ board/rockchip/tinker_rk3288/MAINTAINERS     |   7 +-
+ board/rockchip/tinker_rk3288/tinker-rk3288.c |   2 +-
+ configs/tinker-rk3288_defconfig              |  41 +-
+ configs/tinker-s-rk3288_defconfig            |  38 +-
+ 11 files changed, 81 insertions(+), 676 deletions(-)
+ delete mode 100644 arch/arm/dts/rk3288-tinker-s.dts
+ delete mode 100644 arch/arm/dts/rk3288-tinker.dts
+ delete mode 100644 arch/arm/dts/rk3288-tinker.dtsi
+
+-- 
+2.46.2
+
