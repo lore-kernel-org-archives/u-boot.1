@@ -4,58 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B83D2B944
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:03:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE8B0D2B944
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:03:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37B3589220;
-	Tue,  5 Nov 2024 17:02:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 91F1F89215;
+	Tue,  5 Nov 2024 17:02:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="g4aCBOI5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ashIb/3O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D321789231; Tue,  5 Nov 2024 17:01:58 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 62499891E8; Tue,  5 Nov 2024 17:02:31 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CC34891E8
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:01:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6278B891D0
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:02:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=dc50=SB=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1730822507; bh=va8u4iOXtwIFenOVtk0x5WwtKF0n3zJalAJOINOi7uk=;
- b=g4aCBOI5F2K9fZeKSwDshe7q3ozreV5msG8tyBvNHSpC1O1sNNLQNB+EZX2Rqw+nFq6TsGoW7
- KlFPOQdwzm5fO8MEP4pJrdLrmterR0rFx9MUO9cU1LGPZ7ZpdTTI/Tabx8v0lpaJRCkuRJ/p7s5
- oNLW7FBijjtj427A86qL1IMCPkW+AOuLzENV9ZbiLQAnvk3ZCpbYCQOktQblCP6BYoM8mhzFeFH
- pr6TVJpTFD5ORYF50PYIzd1gjrDB3mWpW6Oa2zSftI3HpfvJEbkgXm5mw0P64ljLeC7hR1IEBRA
- 8yJ+0l9g3BU7YGWU9/C5QE2HseYDEdtNcl6yLH2eTBZw==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Lin Huang <hl@rock-chips.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH 13/13] rockchip: rk3288-tinker: Change to use FIT
-Date: Tue,  5 Nov 2024 16:00:36 +0000
-Message-ID: <20241105160054.1373319-14-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.46.2
-In-Reply-To: <20241105160054.1373319-1-jonas@kwiboo.se>
-References: <20241105160054.1373319-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5c94a7239cfso3418194a12.3
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 08:02:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1730822549; x=1731427349; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jwE3j/mQoptv+3/683yQFy4D1NKo8ntzsL1wTBI/MpM=;
+ b=ashIb/3ON2q/R5scPazZBY0ruFs6PCitTtgVfM/JYgXfEomGx+kPQBpoeG4Up/qVnm
+ A88G7rGsPBI56QYQw1T5Ley+DiggEhtyJ8Fd3wm9qsPaHEyZEYl6Dabe4ET9v7TP+Gu+
+ 0VSV1oy6mwMupVkbD9jHch5K4npNXMjES0VF2APKWRkNpY0tWZzQalnv6UPo1dsWGMxf
+ P8qgSekYPowHVcssuoWALwG6aRANo7GQT9JdrvLWyY4VKOGBibSM5U9yUsXvFcFRZNrz
+ txEYhrNyIkiZKQ7PbM1lMpcQS0rGG/fSV8fCuSYB4nMnS2YHAdRVSTG3nxe03gduaE5S
+ MB3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730822549; x=1731427349;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jwE3j/mQoptv+3/683yQFy4D1NKo8ntzsL1wTBI/MpM=;
+ b=AQTXjVBW664cfOErulnh0gOuZEaHBOCWZu0GJHooIaXPKrGkdJ55hdfif4J4ZHBrbo
+ tJVRrDEiYYbRcRoFpUchUK7JTS6Es4JuqtMTiXFCqCHu42T+IizYhHlJYJQG/O6mhK2y
+ ajv7A4EsXAYF9SYZ1OzmRdD9tHB3stcGRICOoi4aXmhhw5vkAJL5m3DcngBYtwCkzufv
+ KoDtCxwabVTcurCRqzNLOZTkbVzGlPTSReHvlSdvSDIyyJVfq9FcD/qIZw60hmiXGYzt
+ OhZVAzEHjWfbtcU9JskngvWBFlAZ6/AF47IDTUNjXmLAicychxDxq0AN/vynVIbmjKGV
+ Dtlg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWNhtNTQVNhsHsC0T/10eGXqTmFsTxcuFZ9E/e0eUz1p4jED+0f6QHFJPU4XatFh8m/WM0zE14=@lists.denx.de
+X-Gm-Message-State: AOJu0YzmSJU6w+cXXJ9XQBQS7F3B0kfWhYn1UIOP7wL2hXdCHbuBk7lE
+ /oc+iZk2Em1V1Ear3VoaqdQ4pueun8yglQ7XTieMWx0GSedy+bXKIjT42aW4l3P+45k94mYceCk
+ XpI8LiHk8P4wT7/266PNEIDNsxFE=
+X-Google-Smtp-Source: AGHT+IHylfGJDiGfRpy17p/tVyYBL4Po6HUbY75G1bv9KAoTKS9nx1owCEL00Pgjxjj1CQsVwV3XoaoDlJ5O+1qHvY0=
+X-Received: by 2002:a05:6402:280f:b0:5ce:d435:c26d with SMTP id
+ 4fb4d7f45d1cf-5ced435c318mr10394315a12.19.1730822548424; Tue, 05 Nov 2024
+ 08:02:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 672a416bff3e144e4725e1d6
+References: <20241028143143.1807305-1-mikhail.kshevetskiy@iopsys.eu>
+ <20241104233227.GA3600562@bill-the-cat>
+ <CAFLszThXiK=EzrUStsOBiSQ_pe1-Vdwtg-238BjQd91SMBym7A@mail.gmail.com>
+ <CALeDE9M1PDFmm-oZvSEGwBaN_J77CSKUa8kbkEPQf9XATv8STg@mail.gmail.com>
+ <CAFLszTjs-7uWNWdaZjhQe-rA5z0qSZxiFeX+WgFofYemW6qiwg@mail.gmail.com>
+In-Reply-To: <CAFLszTjs-7uWNWdaZjhQe-rA5z0qSZxiFeX+WgFofYemW6qiwg@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 5 Nov 2024 16:02:16 +0000
+Message-ID: <CALeDE9Ps9hua1+AhZDkA+WtxG0phB_0E7j8RJJa8kY5eqn24NA@mail.gmail.com>
+Subject: Re: [PATCH v12 00/13] net: tcp: improve tcp support in legacy stack
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Anand Moon <linux.amoon@gmail.com>, Baruch Siach <baruch@tkos.co.il>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,100 +105,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change to use FIT and FIT_SIGNATURE when loading U-Boot proper in SPL to
-allow checksum validation and fallback loading of FIT from a different
-mmc device.
+On Tue, 5 Nov 2024 at 15:15, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Peter,
+>
+> On Tue, 5 Nov 2024 at 06:10, Peter Robinson <pbrobinson@gmail.com> wrote:
+> >
+> > On Tue, 5 Nov 2024 at 13:03, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Tom,
+> > >
+> > > On Mon, 4 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Mon, Oct 28, 2024 at 05:31:30PM +0300, Mikhail Kshevetskiy wrote:
+> > > >
+> > > > > Legacy TCP stack is bad. Here are some of the known issues:
+> > > > >  * tcp packet from other connection can break a current one
+> > > > >  * tcp send sequence always starts from zero
+> > > > >  * bad tcp options processing
+> > > > >  * strange assumptions on packet size for selective acknowledge
+> > > > >  * tcp interface assumes one of the two scenarios:
+> > > > >      - data downloading from remote host to a board
+> > > > >      - request-response exchange with a small packets
+> > > > >    so it's not possible to upload large amount of data from the
+> > > > >    board to remote host.
+> > > > >  * wget test generate bad tcp stream, test should fail but it passes instead
+> > > > >
+> > > > > This series of patches fixes all of the above issues.
+> > > >
+> > > > I know Peter asked on the last one, but I want to ask as well. With lwIP
+> > > > merged, why do we want to add features to the old stack? I can see
+> > > > fixing issues, but not adding new functionality as well. Thanks.
+> > > >
+> > >
+> > > Let's apply this. It has tests and the old stack is still used by a
+> > > lot of boards. At present lwip is only used on one. There is more work
+> > > to do on the new stack, including finishing off the sandbox
+> > > implementation.
+> >
+> > I agree with applying the fixes pieces, I do not agree with apply the
+> > HTTP server pieces. This series should actually be split into 3
+>
+> But what is your objection?
+>
+> I would much rather just apply it ASAP. It has already gone through 12
+> versions, during which lwip has been prepared and applied.
 
-Checksum validation of FIT adds around 140 ms to boot time:
+I highlighted my concerns about it all being together all the way back
+in v1, the fact that it should be 3 separate sets of patches.
 
-Before:
+The fact that it's at v12 is irrelevant and should never be used as a
+reason just merge a patch set, it makes no senses.
 
-       Mark    Elapsed  Stage
-          0          0  reset
-         13         13  TPL
-      6,957      6,944  end tpl
-     25,102     18,145  SPL
-    131,932    106,830  end phase
-    132,137        205  board_init_f
-    444,277    312,140  board_init_r
-  1,404,987    960,710  eth_common_init
-  1,519,110    114,123  eth_initialize
-  1,524,734      5,624  main_loop
-  1,525,452        718  cli_loop
+> The HTTP server is a useful feature and we should be able to use it to
+> test networking in U-Boot in a more self-contained and performant
+> manner.
 
-After:
-
-       Mark    Elapsed  Stage
-          0          0  reset
-         13         13  TPL
-      6,957      6,944  end tpl
-     35,744     28,787  SPL
-    271,220    235,476  end phase
-    271,420        200  board_init_f
-    588,474    317,054  board_init_r
-  1,548,950    960,476  eth_common_init
-  1,663,105    114,155  eth_initialize
-  1,668,734      5,629  main_loop
-  1,669,417        683  cli_loop
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- configs/tinker-rk3288_defconfig   | 7 +++++++
- configs/tinker-s-rk3288_defconfig | 7 +++++++
- 2 files changed, 14 insertions(+)
-
-diff --git a/configs/tinker-rk3288_defconfig b/configs/tinker-rk3288_defconfig
-index 05dca105d609..bc5379d43430 100644
---- a/configs/tinker-rk3288_defconfig
-+++ b/configs/tinker-rk3288_defconfig
-@@ -17,9 +17,15 @@ CONFIG_DEBUG_UART_BASE=0xff690000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3288-tinker.dtb"
- CONFIG_MISC_INIT_R=y
- CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
-@@ -91,4 +97,5 @@ CONFIG_VIDEO_ROCKCHIP=y
- CONFIG_DISPLAY_ROCKCHIP_HDMI=y
- CONFIG_CONSOLE_SCROLL_LINES=10
- CONFIG_CMD_DHRYSTONE=y
-+CONFIG_SPL_CRC32=y
- CONFIG_ERRNO_STR=y
-diff --git a/configs/tinker-s-rk3288_defconfig b/configs/tinker-s-rk3288_defconfig
-index 1bee0d094c8d..f0c8cc5bbc1b 100644
---- a/configs/tinker-s-rk3288_defconfig
-+++ b/configs/tinker-s-rk3288_defconfig
-@@ -17,9 +17,15 @@ CONFIG_DEBUG_UART_BASE=0xff690000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3288-tinker-s.dtb"
- CONFIG_MISC_INIT_R=y
- CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
-@@ -91,4 +97,5 @@ CONFIG_VIDEO_ROCKCHIP=y
- CONFIG_DISPLAY_ROCKCHIP_HDMI=y
- CONFIG_CONSOLE_SCROLL_LINES=10
- CONFIG_CMD_DHRYSTONE=y
-+CONFIG_SPL_CRC32=y
- CONFIG_ERRNO_STR=y
--- 
-2.46.2
-
+LWIP has a HTTP server which is widely tested, that is what should be
+used *if* we have to have one, I still have yet to see a useful
+usecase, and no CI is not because ultimately how useful is testing
+against ourselves, the fact is testing the HTTP client against apache
+or nginx is a better real world usecase because the reality is that
+U-Boot being the client and the server in that use case isn't really a
+real world use case.
