@@ -4,73 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D0CD31765
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 16:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBC13D31768
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 17:03:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FC1D89001;
-	Tue,  5 Nov 2024 17:54:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E85B488CD9;
+	Tue,  5 Nov 2024 18:03:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Tpy136AP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D7S3mAeA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D75228919A; Tue,  5 Nov 2024 17:54:02 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 3A11A8904C; Tue,  5 Nov 2024 18:03:54 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFABD88DE9
- for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 17:54:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 32FDD8855C
+ for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:03:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7b14f3927ddso435282785a.3
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 08:54:00 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a9abe139088so841495866b.1
+ for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 09:03:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1730825639; x=1731430439; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=GT9r1EdL4TDYYetDadNeuAtH6/phyJsSIC282CB8SRw=;
- b=Tpy136APIXT5He0Pz0UOntsJuKnJuDcYYrXsILLybgoUO+odxzmO/NF+AzEpW6dJvc
- 6T17lkHUj1c6fuFzKB4S/TqApZUDIIeab5IqoyGud7IsTGbjcjGsn3SAoFhFhJ8lyp6E
- 8JsV6ACG/l3gUlu5eko1O+ZVejJh9YYIleqrc=
+ d=chromium.org; s=google; t=1730826231; x=1731431031; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=U3UnbBOoO3ihOFFR/clQ4yBZ/ky7AyAfEbhBCwGMFi8=;
+ b=D7S3mAeAyqhUXzF4csGgriBZqeDkmyxpyeQH59Cdz3S3335HdNtkY4vD0IcJL66I37
+ SprYuQut9y5TE6G3/PB+YQS2x8U6okigUJ3xmAJY5JL3kL4s+MvHntVTNvZEYgaVSU0w
+ ySq/2OSpBtaJMaQfCzyCZCBqjtK2p7mDMUZsw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730825639; x=1731430439;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1730826231; x=1731431031;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=GT9r1EdL4TDYYetDadNeuAtH6/phyJsSIC282CB8SRw=;
- b=WTqS1J2bJs/X7pqG5qbh5yvsN2yG22CJQ0UsmhwciI+i2WtLO0uXal/ro5Y7MPuDng
- NpJ1+N2xarmcykjkWEOky4ok4ZFkt3Zqc4cNNEC3CbvMG6CE/1CtR3SI336zigOEnIAv
- BUXgRvXOmXiIl6x6v8azD2EanJLE5k2YZbrjBBGVmRNh2haaqtPzAqHQEUmBax4L86DJ
- pEQ277be9XfSuDhIAKAzkYmuJuTNrLsyxUY3JPw1ilU7MqOyyQWbx9DrVg4LXgB7cOn6
- Mio4jP8jV3LbsV8IJXz5p5wJ4sT7LZTbUYps/gQVXv17Y8G2AOUpgxyoQyK5QheobIZ0
- wY5w==
-X-Gm-Message-State: AOJu0Ywf15a1m0LrCzbtSIyQC+OCvJB/5sv08EJT3buv0FAL4AgFYvU2
- tu297DvdAg6/Xq+cpwuwpmPndQbqFANsyGt3vnLuVyHkP93pPzDiwwoIsyqHLkp2wtg2Ob3DdNk
- r
-X-Google-Smtp-Source: AGHT+IFF880lVxy9eEnqZ2s7vXypqCh04A6CMvy0b034jolhi+tkDcDjIUgyr36ceeohMyjoysUUgw==
-X-Received: by 2002:a05:6214:4a81:b0:6cb:bfb5:6fc with SMTP id
- 6a1803df08f44-6d1856fb9dcmr672566186d6.25.1730825639554; 
- Tue, 05 Nov 2024 08:53:59 -0800 (PST)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d35415b1edsm62103156d6.75.2024.11.05.08.53.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Nov 2024 08:53:59 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH RFC v1] Dockerfile: Have "sandbox" build with i386 toolchain
- not x86_64 toolchain
-Date: Tue,  5 Nov 2024 10:53:57 -0600
-Message-ID: <20241105165357.620796-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ bh=U3UnbBOoO3ihOFFR/clQ4yBZ/ky7AyAfEbhBCwGMFi8=;
+ b=IYfCnWZ8ZTVtIdsZCPVRAGM1q0qkplbTrpjd/eG+3Z1GtDHCn56g9yVJSUZlS+Mzf0
+ wBuOoRkRkU3D7RVJ2xyQ4egnuiGeWvdY2N1P1hdRmBy6v1qAJ4ghWU9kqd32G1TpJeqA
+ 0L2p4ZflTc4OfGvGt4oooCCRsaIkgDfooIKCmUHQ8gXJVJoW8y3eV6lNgZKx2q2i43uK
+ DL6nQ030QqGDlny3x/zfdrEnYZDG0LW2dfjUllI2AedB8mfaAI5IPN7CH27CynNi6a0d
+ jOsfCqQLqiqxYO9CpuYJJ+or/P2uTMEijyCRrTfRvOt17/0cly9bzyIBXq3JsPAn5wqB
+ ObEA==
+X-Gm-Message-State: AOJu0Yyj/uAOxzQHEMfJAoD9aJhZvHIOPUP2xsyCwVaDhDdeA4yd02v5
+ wKhm2jFhfexR5oEKZhPfawLOc1CCjgr96t0CzZ8WIElaNqHtIiL6CGUF45A5n7WqUkSqCgcqCXT
+ SIOU16o4eg7zJkZ6G/y5Tu8olW9oEmoQS9UHX
+X-Google-Smtp-Source: AGHT+IFWUE50VDA5Fze/6k5htlSQSRHO56RshIIw/MmWcBmEJZAavs2yJStPAEOnQpH+cQg97qwiDKl0qBKugFpkOQI=
+X-Received: by 2002:a17:907:60d6:b0:a99:fb10:1269 with SMTP id
+ a640c23a62f3a-a9de5ce4ad3mr3867678366b.17.1730826231424; Tue, 05 Nov 2024
+ 09:03:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241105165357.620796-1-trini@konsulko.com>
+In-Reply-To: <20241105165357.620796-1-trini@konsulko.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 5 Nov 2024 10:03:39 -0700
+Message-ID: <CAFLszThU2T2A4DG-=isO6vP=149Lw6jQaB3vs8ggJ2H8CcDwBg@mail.gmail.com>
+Subject: Re: [PATCH RFC v1] Dockerfile: Have "sandbox" build with i386
+ toolchain not x86_64 toolchain
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,45 +82,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A long time ago, we had to use "i386" and "x86_64" toolchains for our
-x86 platforms, depending on the target. We then moved to being able to
-use the single "i386" toolchain to support all x86 platforms. At the
-same time, we had been building sandbox with our "x86_64" toolchain in
-CI. When x86 switched to being able to use a single toolchain we did not
-update our CI buildman file to match. Do this now as we want to ensure
-that sandbox is built with the same compiler version the rest of our
-platforms are and not the host one.
+Hi Tom,
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Simon Glass <sjg@chromium.org>
+On Tue, 5 Nov 2024 at 09:54, Tom Rini <trini@konsulko.com> wrote:
+>
+> A long time ago, we had to use "i386" and "x86_64" toolchains for our
+> x86 platforms, depending on the target. We then moved to being able to
+> use the single "i386" toolchain to support all x86 platforms. At the
+> same time, we had been building sandbox with our "x86_64" toolchain in
+> CI. When x86 switched to being able to use a single toolchain we did not
+> update our CI buildman file to match. Do this now as we want to ensure
+> that sandbox is built with the same compiler version the rest of our
+> platforms are and not the host one.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Simon Glass <sjg@chromium.org>
+>
+> I'm posting this as an RFC to start the discussion as when I mentioned
+> this to Simon on IRC, he was very much not in agreement.
+>
+> My main argument is this, sandbox needs to use the same toolchain that
+> we compile (virtually) all other platforms with as one of the points is
+> to be able to catch warnings and compiler behavior changes as soon as
+> possible in our CI. And just like how developers can use
+> distribution-provided toolchains today, nothing changes in that regard,
+> we only make CI be more consistent now.
 
-I'm posting this as an RFC to start the discussion as when I mentioned
-this to Simon on IRC, he was very much not in agreement.
+OK, that makes some sense to me, actually. It isn't the toolchain that
+people will be using, but catching things earlier seems good.
 
-My main argument is this, sandbox needs to use the same toolchain that
-we compile (virtually) all other platforms with as one of the points is
-to be able to catch warnings and compiler behavior changes as soon as
-possible in our CI. And just like how developers can use
-distribution-provided toolchains today, nothing changes in that regard,
-we only make CI be more consistent now.
----
- tools/docker/Dockerfile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The main concern I have is that we are not testing sandbox on the
+toolchain that everyone will be using. But I haven't noticed failures
+in CI which I cannot repeat locally, so we can cross that bridge when
+we come to it.
 
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 967ac89fbde8..e158bab6e570 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -280,7 +280,7 @@ RUN /bin/echo -e "[toolchain]\nroot = /usr" > ~/.buildman
- RUN /bin/echo -e "kernelorg = /opt/gcc-13.2.0-nolibc/*" >> ~/.buildman
- RUN /bin/echo -e "\n[toolchain-prefix]\nxtensa = /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-" >> ~/.buildman;
- RUN /bin/echo -e "\n[toolchain-alias]\nsh = sh2" >> ~/.buildman
--RUN /bin/echo -e "\nsandbox = x86_64" >> ~/.buildman
-+RUN /bin/echo -e "\nsandbox = i386" >> ~/.buildman
- RUN /bin/echo -e "\nx86 = i386" >> ~/.buildman;
- 
- # Add mkbootimg tool
--- 
-2.43.0
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
+> ---
+>  tools/docker/Dockerfile | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> index 967ac89fbde8..e158bab6e570 100644
+> --- a/tools/docker/Dockerfile
+> +++ b/tools/docker/Dockerfile
+> @@ -280,7 +280,7 @@ RUN /bin/echo -e "[toolchain]\nroot = /usr" > ~/.buildman
+>  RUN /bin/echo -e "kernelorg = /opt/gcc-13.2.0-nolibc/*" >> ~/.buildman
+>  RUN /bin/echo -e "\n[toolchain-prefix]\nxtensa = /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-" >> ~/.buildman;
+>  RUN /bin/echo -e "\n[toolchain-alias]\nsh = sh2" >> ~/.buildman
+> -RUN /bin/echo -e "\nsandbox = x86_64" >> ~/.buildman
+> +RUN /bin/echo -e "\nsandbox = i386" >> ~/.buildman
+>  RUN /bin/echo -e "\nx86 = i386" >> ~/.buildman;
+>
+>  # Add mkbootimg tool
+> --
+> 2.43.0
+>
+
+Regards,
+Simon
