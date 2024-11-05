@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BA0CD3176C
-	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 17:22:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F5ADD3176B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Nov 2024 17:22:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C20F4891B2;
-	Tue,  5 Nov 2024 18:22:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 228B4891C7;
+	Tue,  5 Nov 2024 18:22:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E03348919A; Tue,  5 Nov 2024 18:22:13 +0100 (CET)
-Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::bc0b])
+ id F1D70891A6; Tue,  5 Nov 2024 18:22:13 +0100 (CET)
+Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
+ [84.16.66.175])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 603A7891C0
+ by phobos.denx.de (Postfix) with ESMTPS id EE1F2881E7
  for <u-boot@lists.denx.de>; Tue,  5 Nov 2024 18:22:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10:40ca:feff:fe05:0])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4XjZrz09ZTzXjw;
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4XjZrz4c3HzVhD;
  Tue,  5 Nov 2024 18:22:11 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4XjZry18Qjzxlq; Tue,  5 Nov 2024 18:22:10 +0100 (CET)
+ id 4XjZrz03B7zxWn; Tue,  5 Nov 2024 18:22:10 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 05 Nov 2024 18:21:56 +0100
-Subject: [PATCH next RFC 2/5] ram: rk3399: fail probe if DRAM init failed
+Date: Tue, 05 Nov 2024 18:21:57 +0100
+Subject: [PATCH next RFC 3/5] rockchip: spl/tpl: panic when DRAM init
+ failed
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241105-rk3399-dram-init-v1-2-1e29acdf0966@cherry.de>
+Message-Id: <20241105-rk3399-dram-init-v1-3-1e29acdf0966@cherry.de>
 References: <20241105-rk3399-dram-init-v1-0-1e29acdf0966@cherry.de>
 In-Reply-To: <20241105-rk3399-dram-init-v1-0-1e29acdf0966@cherry.de>
 To: Simon Glass <sjg@chromium.org>, 
@@ -63,27 +64,55 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-We should fail the probe of the DRAM device if the DRAM init failed so
-let's return a negative error-code if rk3399_dmc_init returns non-zero.
+A failed DRAM init is synonym with a broken board, so let's panic
+instead of silently skipping the rest of the xPL stage and making it
+fail later in some other code parts.
+
+This also has the benefit of (by default) resetting the CPU which could
+help recover the device without human intervention were the DRAM init
+issue related to not-100%-reproducibly fail the DRAM init.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- drivers/ram/rockchip/sdram_rk3399.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-rockchip/spl.c | 7 +++----
+ arch/arm/mach-rockchip/tpl.c | 6 ++----
+ 2 files changed, 5 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-index 63d7852555cea3296b7cd9eed422c4d5d1c9776b..5a82c7ccbdf161526f0d1450dde6881441e59543 100644
---- a/drivers/ram/rockchip/sdram_rk3399.c
-+++ b/drivers/ram/rockchip/sdram_rk3399.c
-@@ -3157,7 +3157,7 @@ static int rk3399_dmc_probe(struct udevice *dev)
- 	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
- 	debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
- 	if (phase_sdram_init() && rk3399_dmc_init(dev))
--		return 0;
-+		return -EINVAL;
+diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+index f4d29bbdd17e8b57dc0b2fdd90a8600fba6ee866..9b2d7023fb862bf696ad376b6f0b30e834aa41be 100644
+--- a/arch/arm/mach-rockchip/spl.c
++++ b/arch/arm/mach-rockchip/spl.c
+@@ -112,10 +112,9 @@ void board_init_f(ulong dummy)
+ #if !defined(CONFIG_TPL) || defined(CONFIG_SPL_RAM)
+ 	debug("\nspl:init dram\n");
+ 	ret = dram_init();
+-	if (ret) {
+-		printf("DRAM init failed: %d\n", ret);
+-		return;
+-	}
++	if (ret)
++		panic("DRAM init failed: %d\n", ret);
++
+ 	gd->ram_top = gd->ram_base + get_effective_memsize();
+ 	gd->ram_top = board_get_usable_ram_top(gd->ram_size);
  
- 	/*
- 	 * There is no point in checking the SDRAM size in TPL as it is not
+diff --git a/arch/arm/mach-rockchip/tpl.c b/arch/arm/mach-rockchip/tpl.c
+index bbb9329e725af79ea4c4049aa7890a4a143e7df5..5da23913c147cab18377f09b566f28b0bee4e935 100644
+--- a/arch/arm/mach-rockchip/tpl.c
++++ b/arch/arm/mach-rockchip/tpl.c
+@@ -55,10 +55,8 @@ void board_init_f(ulong dummy)
+ 		timer_init();
+ 
+ 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+-	if (ret) {
+-		printf("DRAM init failed: %d\n", ret);
+-		return;
+-	}
++	if (ret)
++		panic("DRAM init failed: %d\n", ret);
+ }
+ 
+ int board_return_to_bootrom(struct spl_image_info *spl_image,
 
 -- 
 2.47.0
