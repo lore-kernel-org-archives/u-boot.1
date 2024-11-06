@@ -4,77 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 973C0D59F5F
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 00:46:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C692D29FA5
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 00:52:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77D8388DED;
-	Thu,  7 Nov 2024 01:46:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6A44988E39;
+	Thu,  7 Nov 2024 01:52:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ixna7YlD";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="Xpi6/whw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C13C888D51; Thu,  7 Nov 2024 01:46:31 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D95A488CD9; Wed,  6 Nov 2024 22:04:00 +0100 (CET)
+Received: from mail-il1-x163.google.com (mail-il1-x163.google.com
+ [IPv6:2607:f8b0:4864:20::163])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 658FD88E39
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 01:46:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0567C88CD9
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 22:03:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4XkNg72f8jz9t5M;
- Thu,  7 Nov 2024 01:46:27 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730940387;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8DL8F+mvPwTASkeAD7L/JkvUfI9VZXcdNDw0+cayqCU=;
- b=ixna7YlD3m+n3dvzcYFCJNy3eL2GSvw3vHv6pmW6pR3Mfe61T+OuAb5OkIDXX6QI3rEzsp
- FGDfAKZ26L+qpaAwKqKFfEnvE0EcWyPeMo9FjdNuXRyssZ8i22SOKZ7qCsDdr3R1yvHZYl
- s/5l6s7CDtBO0QI71HhZqjk/9KVeI5W+Jn0y4zX8jge6uTNWcgvvA9bOq1jUz9Uz6RLgQw
- IOZH287c8zAsbeIiki+0Ay/iIf6z+qNp9ij6r5PZ20Mz+k83xi8wTmVogqHvaSkl/wPhu5
- DBrRgOYvTM37FiEUpCbt/H39jBhpyPkmq0ufs/kCLAVCYTjFiShjolwNfgTTRA==
-Message-ID: <f7bb335d-681a-4b60-92f6-b605cc6f477f@mailbox.org>
-Date: Thu, 7 Nov 2024 01:46:23 +0100
+ spf=fail smtp.mailfrom=dregan@broadcom.com
+Received: by mail-il1-x163.google.com with SMTP id
+ e9e14a558f8ab-3a3c5d22663so156475ab.2
+ for <u-boot@lists.denx.de>; Wed, 06 Nov 2024 13:03:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=broadcom.com; s=google; t=1730927037; x=1731531837; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CVM7XX0pfQPrT9jpiktWAGsVF6+Go1o2WafEC6azNAs=;
+ b=Xpi6/whwa7AO81WUPScrInbs6gQ+qfuhsLhdQTudVKmvNcle1P416n/zv5GLzAZu5u
+ D73sbCevnui3O8PU2ZHwMh9B4f8dwiOYmGFNlMIQBpJ51JRYInliS73ZKaAeHiCOVTDL
+ lTLEG8qIPJOjvxAVkaG3KE02AGECGPXVSb9NI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730927037; x=1731531837;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=CVM7XX0pfQPrT9jpiktWAGsVF6+Go1o2WafEC6azNAs=;
+ b=MdzKwFwZEgSsdnS6JOzjdkB2Epe+8ZG5rVP6cuTfV+yFU5ZKLjls3S3minI51T9CzP
+ 3xobue7XcMXGXCmec05LkOWHproTzRItF74Qnvf/byQMYL89JH4NQZ187TvuvN70lhh/
+ 7j5o9MYnhh5u0rKtM/5MqLxQq9avrkCYSGlGm8oit8x1DE9woPUKqsb2dZmpwopR9eAC
+ bUzN+etkfIRam0C5fA7s6DaFcBCjmLUgCCykABlJmtgCmfT+dhStTHKTXzokkDiYAqS/
+ g9OFiA0w2pbxOo4/G2Rm8r+6DgoyVMr9nczIjqs9RgELHaeqBOLFmLmfqlqzscSRAkTc
+ 9pZw==
+X-Gm-Message-State: AOJu0YxxNURLiRs3ig3PEgpm1A2WAUs/aCeXHEoSl0BH8IBFYXXAqJp2
+ CsZnAq3SaNMnW+w627JMzOz5a3rAH8ppHg7An2pqYNmqIiyjiwKTqcUPtKoDG9SZ/NVlj0BQgvm
+ GJlCnyKVtUrFVTjpd+aqhvn2Jb8TVaw67uK+m9vYYGy3OvCAmjLQvNsnbJY+yoOZXc8mZ1zZWZB
+ eEj7Z6Wvp7fJ110ZmmGF6/wsD71YJE2zdS1+ndWBkfxU9JxMtzec+x8bReq5hDqYSK5KQL
+X-Google-Smtp-Source: AGHT+IEtNLKGXFmlF4LsWA3EWyQ85zimOwn340u1KBLw3PJx9gkU9trjD1lYG8qboO/jd0O2vePNvO9TQ49e
+X-Received: by 2002:a92:c56f:0:b0:3a6:b5f7:66ae with SMTP id
+ e9e14a558f8ab-3a6e8379cb4mr3705025ab.0.1730927036441; 
+ Wed, 06 Nov 2024 13:03:56 -0800 (PST)
+Received: from bcacpedev-irv-3.lvn.broadcom.net ([192.19.161.250])
+ by smtp-relay.gmail.com with ESMTPS id
+ e9e14a558f8ab-3a6a9a29b37sm8165005ab.71.2024.11.06.13.03.55
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 06 Nov 2024 13:03:56 -0800 (PST)
+X-Relaying-Domain: broadcom.com
+From: david regan <dregan@broadcom.com>
+To: u-boot <u-boot@lists.denx.de>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Anand Gore <anand.gore@broadcom.com>,
+ William Zhang <william.zhang@broadcom.com>,
+ Kursad Oney <kursad.oney@broadcom.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Florian Fainelli <florian.fainelli@broadcom.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@broadcom.com>,
+ David Regan <dregan@mail.com>, Tom Rini <trini@konsulko.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH 0/4] Broadcom BCMBCA nand updates
+Date: Wed,  6 Nov 2024 13:03:44 -0800
+Message-Id: <20241106210348.218507-1-dregan@broadcom.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories support
- in QSPI driver"
-To: Jon Humphreys <j-humphreys@ti.com>, Michal Simek <michal.simek@amd.com>,
- u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Andre Przywara <andre.przywara@arm.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Michael Walle <mwalle@kernel.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Tudor Ambarus <tudor.ambarus@linaro.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
- <b9cb3ec8-b6f2-4f38-8cda-d3d10278f503@amd.com>
- <e9929e0c-aa43-428f-8bf7-7b4cdef0e9c3@mailbox.org>
- <86v7x05fyd.fsf@udb0321960.dhcp.ti.com>
- <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
- <86ses458k3.fsf@udb0321960.dhcp.ti.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <86ses458k3.fsf@udb0321960.dhcp.ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 61ab224edeb8243a9aa
-X-MBO-RS-META: ucb6hs1fm9cgmyfkju787qkjtxhh6891
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 07 Nov 2024 01:52:42 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,78 +99,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/6/24 10:58 PM, Jon Humphreys wrote:
-> Marek Vasut <marek.vasut@mailbox.org> writes:
-> 
->> On 11/6/24 8:18 PM, Jon Humphreys wrote:
->>> Marek Vasut <marek.vasut@mailbox.org> writes:
->>>
->>>> On 10/23/24 10:17 AM, Michal Simek wrote:
->>>>>
->>>>>
->>>>> On 10/22/24 23:06, Marek Vasut wrote:
->>>>>> This reverts commit 1e36d34b52e7a1ebe5a2a5339d6905540f4253aa.
->>>>>>
->>>>>> This parallel/stacked support breaks basic SPI NOR support,
->>>>>> e.g. this no longer works:
->>>>>>
->>>>>> => sf probe && sf update 0x50000000 0 0x160000
->>>>>> SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB,
->>>>>> total 64 MiB
->>>>>> device 0 offset 0x0, size 0x160000
->>>>>> SPI flash failed in read step
->>>>>
->>>>> Reverting everything seems to me too much. Tom has tested it on his HW
->>>>> and didn't see any issue. That's why better to look at code which is
->>>>> causing this.
->>>>> You are reverting everything but likely there is specific patch which is
->>>>> causing this. Which one is it?
->>>>> Which board was used for your testing? Likely we don't have access to it.
->>>>> Is there any QEMU available which can be used for debugging?
->>>>
->>>> The testcase including the exact SPI NOR model is above.
->>>>
->>>> iMX6 with w25q16dw seems to be broken too.
->>>>
->>>> Basically every board I have access no longer has a working "sf probe ;
->>>> sf update" combination ... so yeah, this means this patchset is
->>>> fundamentally broken.
->>>>
->>>
->>> I can also confirm that the patch series:
->>>
->>> f8efc68b30e Merge patch series "spi-nor: Add parallel and stacked memories
->>> support"
->>>
->>> breaks SPI NOR on TI platforms, particularly SK-AM62 and SK-AM62P:
->>>
->>> U-Boot 2024.10-00752-gf8efc68b30e2 (Nov 06 2024 - 12:25:13 -0600)
->>>
->>> SoC:   AM62X SR1.0 HS-FS
->>> Model: Texas Instruments AM625 SK
->>> ...
->>> Hit any key to stop autoboot:  0
->>> => sf probe && sf update ${loadaddr} 0x400000 0x10
->>> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
->>> device 0 offset 0x400000, size 0x10
->>> SPI flash failed in read step
->>> =>
->> Sigh ... can you please test current u-boot/master and see if the error
->> is fixed there ?
->>
-> 
-> Yes I had verified it also fails against master, although the behavior was
-> a bit different.  The .'s below are our DMA engine waiting indefinitely.
-> 
-> => sf probe && sf update ${loadaddr} 0x400000 0x10
-> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
-> device 0 offset 0x400000, size 0x10
-> .....................................................
-> 
-> I have not investigated further.
+These are ports of upstream Linux patches to U-Boot.
 
-Can you try and run some 'git bisect' to find out exactly which commit 
-broke your use case ? There is a bunch of fixes for the worst breakage 
-that landed recently, but clearly there is more.
+Remove device specific nand driver files as they are now replaced
+by a common driver bcmbca_nand.c
 
-Full revert seems increasingly appealing ...
+Make use of OF_UPSTREAM which uses Linux dts.
+
+Add a SoC read data bus shim for BCMBCA to meet the specific SoC need
+and performance improvement using the optimized memcpy function on NAND
+cache memory.
+
+https://lore.kernel.org/linux-mtd/20240223034758.13753-12-william.zhang@broadcom.com/
+
+Update log level messages so that more critical messages can be logged
+to console and help the troubleshooting with field devices.
+
+https://lore.kernel.org/linux-mtd/20240223034758.13753-4-william.zhang@broadcom.com/
+
+david regan (4):
+  mtd: nand: brcmnand: remove device specific nand driver files
+  arm: dts: Use upstream dts
+  mtd: rawnand: brcmnand: Add BCMBCA read data bus interface
+  mtd: rawnand: brcmnand: update log level messages
+
+ arch/arm/dts/bcm47622.dtsi                    | 126 --------
+ arch/arm/dts/bcm4912.dtsi                     | 128 --------
+ arch/arm/dts/bcm63146.dtsi                    | 110 -------
+ arch/arm/dts/bcm63158.dtsi                    | 278 ------------------
+ arch/arm/dts/bcm63178.dtsi                    | 120 --------
+ arch/arm/dts/bcm6756.dtsi                     | 130 --------
+ arch/arm/dts/bcm6813.dtsi                     | 128 --------
+ arch/arm/dts/bcm6855.dtsi                     | 257 ----------------
+ arch/arm/dts/bcm6856.dtsi                     | 253 ----------------
+ arch/arm/dts/bcm6858.dtsi                     | 272 -----------------
+ arch/arm/dts/bcm6878.dtsi                     | 111 -------
+ arch/arm/dts/bcm947622.dts                    |  30 --
+ arch/arm/dts/bcm94912.dts                     |  30 --
+ arch/arm/dts/bcm963146.dts                    |  30 --
+ arch/arm/dts/bcm963158.dts                    |  30 --
+ arch/arm/dts/bcm963178.dts                    |  30 --
+ arch/arm/dts/bcm96756.dts                     |  30 --
+ arch/arm/dts/bcm96813.dts                     |  30 --
+ arch/arm/dts/bcm96855.dts                     |  30 --
+ arch/arm/dts/bcm96856.dts                     |  30 --
+ arch/arm/dts/bcm96858.dts                     |  30 --
+ arch/arm/dts/bcm96878.dts                     |  30 --
+ arch/arm/mach-bcmbca/bcm47622/Kconfig         |   1 +
+ arch/arm/mach-bcmbca/bcm4912/Kconfig          |   1 +
+ arch/arm/mach-bcmbca/bcm63146/Kconfig         |   1 +
+ arch/arm/mach-bcmbca/bcm63158/Kconfig         |   1 +
+ arch/arm/mach-bcmbca/bcm63178/Kconfig         |   1 +
+ arch/arm/mach-bcmbca/bcm6756/Kconfig          |   1 +
+ arch/arm/mach-bcmbca/bcm6813/Kconfig          |   1 +
+ arch/arm/mach-bcmbca/bcm6855/Kconfig          |   1 +
+ arch/arm/mach-bcmbca/bcm6856/Kconfig          |   1 +
+ arch/arm/mach-bcmbca/bcm6858/Kconfig          |   1 +
+ arch/arm/mach-bcmbca/bcm6878/Kconfig          |   1 +
+ configs/bcm947622_defconfig                   |  11 +-
+ configs/bcm94912_defconfig                    |  11 +-
+ configs/bcm963146_defconfig                   |  11 +-
+ configs/bcm963158_defconfig                   |  11 +-
+ configs/bcm963178_defconfig                   |  11 +-
+ configs/bcm96756_defconfig                    |  11 +-
+ configs/bcm96813_defconfig                    |  11 +-
+ configs/bcm96855_defconfig                    |  11 +-
+ configs/bcm96856_defconfig                    |  11 +-
+ configs/bcm96858_defconfig                    |  11 +-
+ configs/bcm96878_defconfig                    |  11 +-
+ drivers/mtd/nand/raw/Kconfig                  |  24 --
+ drivers/mtd/nand/raw/brcmnand/Makefile        |   4 -
+ drivers/mtd/nand/raw/brcmnand/bcm63158_nand.c | 125 --------
+ drivers/mtd/nand/raw/brcmnand/bcm6753_nand.c  | 123 --------
+ drivers/mtd/nand/raw/brcmnand/bcm68360_nand.c | 124 --------
+ drivers/mtd/nand/raw/brcmnand/bcm6858_nand.c  | 125 --------
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c      |  21 +-
+ drivers/mtd/nand/raw/brcmnand/brcmnand.h      |  17 ++
+ 52 files changed, 142 insertions(+), 2796 deletions(-)
+ delete mode 100644 arch/arm/dts/bcm47622.dtsi
+ delete mode 100644 arch/arm/dts/bcm4912.dtsi
+ delete mode 100644 arch/arm/dts/bcm63146.dtsi
+ delete mode 100644 arch/arm/dts/bcm63158.dtsi
+ delete mode 100644 arch/arm/dts/bcm63178.dtsi
+ delete mode 100644 arch/arm/dts/bcm6756.dtsi
+ delete mode 100644 arch/arm/dts/bcm6813.dtsi
+ delete mode 100644 arch/arm/dts/bcm6855.dtsi
+ delete mode 100644 arch/arm/dts/bcm6856.dtsi
+ delete mode 100644 arch/arm/dts/bcm6858.dtsi
+ delete mode 100644 arch/arm/dts/bcm6878.dtsi
+ delete mode 100644 arch/arm/dts/bcm947622.dts
+ delete mode 100644 arch/arm/dts/bcm94912.dts
+ delete mode 100644 arch/arm/dts/bcm963146.dts
+ delete mode 100644 arch/arm/dts/bcm963158.dts
+ delete mode 100644 arch/arm/dts/bcm963178.dts
+ delete mode 100644 arch/arm/dts/bcm96756.dts
+ delete mode 100644 arch/arm/dts/bcm96813.dts
+ delete mode 100644 arch/arm/dts/bcm96855.dts
+ delete mode 100644 arch/arm/dts/bcm96856.dts
+ delete mode 100644 arch/arm/dts/bcm96858.dts
+ delete mode 100644 arch/arm/dts/bcm96878.dts
+ delete mode 100644 drivers/mtd/nand/raw/brcmnand/bcm63158_nand.c
+ delete mode 100644 drivers/mtd/nand/raw/brcmnand/bcm6753_nand.c
+ delete mode 100644 drivers/mtd/nand/raw/brcmnand/bcm68360_nand.c
+ delete mode 100644 drivers/mtd/nand/raw/brcmnand/bcm6858_nand.c
+
+-- 
+2.37.3
+
