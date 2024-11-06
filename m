@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18500D36129
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 02:12:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E615FD3E783
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 02:32:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32DC488A1C;
-	Wed,  6 Nov 2024 03:12:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 5A03389035;
+	Wed,  6 Nov 2024 03:32:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="GhZW3FfR";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XIx4srmu";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D554B88D54; Wed,  6 Nov 2024 03:12:35 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0E60B89035; Wed,  6 Nov 2024 02:55:04 +0100 (CET)
+Received: from smtpbgau2.qq.com (smtpbgau2.qq.com [54.206.34.216])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C614A8852D
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 03:12:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 07A3388E61
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 02:54:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=linux.starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Xjpcx4LW0z9srB;
- Wed,  6 Nov 2024 03:12:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730859153;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dgRREMVu2z1WQu/izn1V8LHto/O2ukvepWQLOglhaAk=;
- b=GhZW3FfRzhefByxmrPEOXj/ZUTapPPvpWCoj1+4WI+IyUgEgF+LbQKcp119feIwKie+QCi
- b36ZhycFys9QxeuhGpLk7jWMBRaKq9WO+Ag1JatSRuunGddg9etmeiYSALV0Xg6E101GCW
- nh5Eg8ftjJyBFX4PjXGh6HZIZopIQbDGwa0Sk6zneNovI02j0kq0YHBGYucJW4tTqcnbMC
- 30d9IcPkcyCD9CUxhUuU92ZkyPT4UcLHMtOpbnjLGcBY2LMcOkvcZiDiOFs5Hk6Jvk5EgT
- hGl3bjzIYWUDAfHyDHxQdlfEsaik3GZ+hUjmzT0IuOPSVGxFo7RI0Y/qV2M3Tg==
-Message-ID: <09770590-c262-443b-955c-2b6dce7a75f0@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730859151;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dgRREMVu2z1WQu/izn1V8LHto/O2ukvepWQLOglhaAk=;
- b=XIx4srmu9dFpe9RvKCh6ohhEyMjzto4f94d4wt0u5w0LQLw4fnb+kKpXcYc1ObV1ynDuX4
- dV/rmSrAyYCAjSHU1c+aLcye6fqvmw3owGzHzgRnF+3/UrGfH0La2d76HAor4S7qTUeIMR
- dXDN1dq90yMEOgxRVGZH60uLc8/bzyY2TaHYq6jVzD53wgNUwqKkNRaFWi4zvGQgEEx/i4
- nNDRmDe9E2IVD+qwoRtPKuVID6mX+T5GEUWHN55NqefAkY8svXsn6QBh0YI1tTvXLe7pNj
- ZvPWHLj3OZaXdhYsWCk1JxBGNWoAUF8DN5C71dXK/TTQwbDR0eDxgqqfIfozBQ==
-Date: Wed, 6 Nov 2024 03:12:29 +0100
+ spf=none smtp.mailfrom=hal.feng@linux.starfivetech.com
+X-QQ-mid: bizesmtp80t1730858030t480j645
+X-QQ-Originating-IP: ABMH4p86u2y6wk7SF55mCDwPvCBC+TD+Ih7LyhYs66U=
+Received: from [192.168.125.182] ( [183.27.96.2])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Wed, 06 Nov 2024 09:53:48 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 17127929888059590232
+Message-ID: <D2C5F4328791C564+9a1aca07-371e-4951-9f51-4e6a96f8ea10@linux.starfivetech.com>
+Date: Wed, 6 Nov 2024 09:53:48 +0800
 MIME-Version: 1.0
-Subject: Re: [PATCH] boot: image-board: Mismatch a type between variable and
- return value
-To: Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, marek.vasut+renesas@mailbox.org,
- laurent.pinchart@ideasonboard.com, m.szyprowski@samsung.com
-References: <CGME20241105221151epcas1p2096fdad52d8b4977f707e4b1b3a47849@epcas1p2.samsung.com>
- <20241105221149.507119-1-jh80.chung@samsung.com>
- <a3ad60cd-c8f4-4377-a30f-80f1530313eb@mailbox.org>
- <02ea01db2fdd$0799f610$16cde230$@samsung.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 13/13] board: starfive: spl: Support multiple DTBs for
+ JH7110 based boards
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <02ea01db2fdd$0799f610$16cde230$@samsung.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 600e1d35b830691ae89
-X-MBO-RS-META: ispwpd89swgsjfy834wo7dwotkx1wrec
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hal Feng <hal.feng@starfivetech.com>
+Cc: Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de,
+ Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>,
+ H Bell <dmoo_dv@protonmail.com>, E Shattow <lucent@gmail.com>,
+ Conor Dooley <conor.dooley@microchip.com>, Nam Cao <namcao@linutronix.de>,
+ Bo Gan <ganboing@gmail.com>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>
+References: <20241105034328.56439-1-hal.feng@starfivetech.com>
+ <20241105034328.56439-14-hal.feng@starfivetech.com>
+ <e0ee937c-5e73-4055-affb-2a6314608c87@gmx.de>
+From: Hal Feng <hal.feng@linux.starfivetech.com>
+In-Reply-To: <e0ee937c-5e73-4055-affb-2a6314608c87@gmx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:linux.starfivetech.com:qybglogicsvrgz:qybglogicsvrgz5a-1
+X-QQ-XMAILINFO: OS13ZwQ+ChhZuPokF6J4JSFspsTi0ePLNnd1pep8DkiUhIXYR+3XrAzS
+ LJ69LvoHVILqKTk/YhEeehRRpwnpb1V+1vmg01JKuVidLNhgkE3WaaJTZDcYynOXwGUWdGy
+ gV80idAtUUED5mVyGQ8fBA+lbf3Jfgxbl+3cjZSQCJZHKLN0aeXPtgJH09CnHMmhPaD5ecs
+ rXKj9GM1iq635AN3M5G8A3O8N45bDkHRKOjFGvebu1xjIa759FqG5B7yikekdR3MbF/vTz5
+ Yq0A5NMnkDB/NKA2FgZ4l0VtYmtSP8JB7Pf8VfS9cu5oNXNYT+R5moaBl6UEmeSuvPyrrv2
+ kl6I0eZ6ajhWsLpps4Z8F1rIeIsZIE09jIGn4zgJj45tPWeHj2RGzdWJUIN2b+EjvWYLZeJ
+ FX64TO/bhWsdMz5aWPaCbQf6SrEpM5e/eL1WrwAkacnLHixLkJ1Pt7eGp9fHUENMgLsvqKF
+ TVFKHNNoCs7NKM+LByuSgjT+O/QeALQINZ3HKCTLTbSjlbpooHawmQqF2ee1ieqDMmDhVBk
+ K6t2I7Ax5FOrjibqr00A930bXSQQ2xqik3CnxFoCSDmMuR/Kl9xVX8dIxvYuNBvlNoMiDvW
+ 8wN8cG8KppgHVj8jHuWK8GzJRmn6giFdQNWxqSwapnpEAzsrOnlnvRPOulvEa2UWPGiSQTG
+ UkRmTj7eemokCn9WrcMwear92e6IaPcmfZqHKeTChmKozUJ1V33TvCsNmOKUIg0+R5MkY0u
+ dIR2mRFnlkYIXcDVw+barMZEYB3U+FmQcYWigeAvd248x5gxKMHo4zK7KbrjWXaJUqPZHM2
+ AwrKCy+16SVkK+g+fqwEykwK2SFrnHlyvzjpCu0x0AWQJLqcrwtVhZgODiK6+XeLslO/dJ3
+ fq8NiwN4a0xWzDWPp7EI4EAJ0o8VSBRE35UXcBKbJ2wMeLhc7J2nUqFqh9LmEy1hkLYFDRY
+ 5ExdkkgtxAJTOSpFv/rCULjDM
+X-QQ-XMRINFO: MPJ6Tf5t3I/ycC2BItcBVIA=
+X-QQ-RECHKSPAM: 0
+X-Mailman-Approved-At: Wed, 06 Nov 2024 03:32:02 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,42 +89,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/6/24 12:47 AM, Jaehoon Chung wrote:
-> 
->> -----Original Message-----
->> From: Marek Vasut <marek.vasut@mailbox.org>
->> Sent: Wednesday, November 6, 2024 7:57 AM
->> To: Jaehoon Chung <jh80.chung@samsung.com>; u-boot@lists.denx.de
->> Cc: trini@konsulko.com; sjg@chromium.org; marek.vasut+renesas@mailbox.org;
->> laurent.pinchart@ideasonboard.com; m.szyprowski@samsung.com
->> Subject: Re: [PATCH] boot: image-board: Mismatch a type between variable and return value
+On 11/5/2024 2:47 PM, Heinrich Schuchardt wrote:
+> On 11/5/24 04:43, Hal Feng wrote:
+>> Get product ID and PCB version from EEPROM, use them to select
+>> the correct DTB.
 >>
->> On 11/5/24 11:11 PM, Jaehoon Chung wrote:
->>> phys_addr_t can be used unsigned long long type with CONFIG_PHYS_64BIT.
->>> But hextoul() is always returning to unsigned long. It can be assigned
->>> to unexpected value. To avoid wrong behavior, change from hextoul() to
->>> simple_strtoull().
->>>
->>> Fixes: a4df06e41fa2 ("boot: fdt: Change type of env_get_bootm_low() to phys_addr_t")
+>> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+>> ---
+>>   board/starfive/visionfive2/spl.c | 25 +++++++++++++++++++++++--
+>>   1 file changed, 23 insertions(+), 2 deletions(-)
 >>
->> Looking at:
->>
->> 7e5f460ec457 ("global: Convert simple_strtoul() with hex to hextoul()")
+>> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
+>> index cf7f39d5c5..4396583026 100644
+>> --- a/board/starfive/visionfive2/spl.c
+>> +++ b/board/starfive/visionfive2/spl.c
+>> @@ -113,7 +113,28 @@ void board_init_f(ulong dummy)
+>>   #if CONFIG_IS_ENABLED(LOAD_FIT)
+>>   int board_fit_config_name_match(const char *name)
+>>   {
+>> -    /* boot using first FIT config */
+>> -    return 0;
+>> +    const char *product_id;
+>> +    u8 version;
+>> +
+>> +    product_id = get_product_id_from_eeprom();
+>> +
+>> +    if (!strncmp(product_id, "VF7110", 6)) {
+>> +        version = get_pcb_revision_from_eeprom();
+>> +        if ((version == 'b' || version == 'B') &&
+>> +            !strcmp(name, "jh7110-starfive-visionfive-2-v1.3b"))
+>> +            return 0;
+>> +
+>> +        if ((version == 'a' || version == 'A') &&
+>> +            !strcmp(name, "jh7110-starfive-visionfive-2-v1.2a"))
+>> +            return 0;
+>> +    } else if (!strncmp(product_id, "MARS", 4) &&
+>> +           !strcmp(name, "jh7110-milkv-mars")) {
+>> +        return 0;
 > 
-> Thanks for informing it.
+> Hello Hal,
 > 
->>
->> do you have to update any of the other hextoul() calls too ?
+> I have seen
 > 
-> I didn't check other hextoul().
-> During booting with initramfs on RPi (32bit), I found the problem that is not working fine because of this.
+> Milk-V Mars CM:      MARC-V10-2340-D004E016-xxxxxxxx
+> Milk-V Mars CM lite: MARC-V10-2340-D002E016-xxxxxxxx
+> 
+> Obviously here they got the eMMC size wrong. Milk-V should have used
+> E000 for the lite version. But at least they provide a correction
+> procedure in
+> https://milkv.io/docs/mars/compute-module/update-eeprom
+> and confirm the usage of the values MARC and E###.
+> 
+> So here we should be able to detect these two boards, too.
+> 
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Please check the other sites too, maybe there are more of these issues 
-lurking around.
+OK, will add detection for these two boards.
+Thanks for your review.
 
->> Maybe we need hextoull() ?
+Best regards,
+Hal
+
 > 
-> IMO, We need hextoull() for some cases.
-> If there is no objection, I will send the patch for adding hextoull().
-> And I will check entire cases.
-No objection from me. Thank you.
+>> +    }  else if (!strncmp(product_id, "STAR64", 6) &&
+>> +            !strcmp(name, "jh7110-pine64-star64")) {
+>> +        return 0;
+>> +    }
+>> +
+>> +    return -EINVAL;
+>>   }
+>>   #endif
+> 
+> 
+
+
