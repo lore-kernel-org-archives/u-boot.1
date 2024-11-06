@@ -4,88 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DA8D29FA5
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 00:53:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B600D29FA5
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 00:53:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC4B3891EB;
-	Thu,  7 Nov 2024 01:52:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C4C4891E9;
+	Thu,  7 Nov 2024 01:52:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=vodafonemail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="hz2p2Yhq";
+	dkim=pass (1024-bit key; secure) header.d=vodafonemail.de header.i=@vodafonemail.de header.b="y6+GFm3X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E1B088CD9; Wed,  6 Nov 2024 22:04:06 +0100 (CET)
-Received: from mail-il1-x161.google.com (mail-il1-x161.google.com
- [IPv6:2607:f8b0:4864:20::161])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7859A88FED; Thu,  7 Nov 2024 00:33:44 +0100 (CET)
+Received: from mr6.vodafonemail.de (mr6.vodafonemail.de [145.253.228.166])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0763E88E26
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 22:04:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A90C88E35
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 00:33:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=broadcom.com
+ header.from=vodafonemail.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=dregan@broadcom.com
-Received: by mail-il1-x161.google.com with SMTP id
- e9e14a558f8ab-3a3ae6ae20dso201335ab.0
- for <u-boot@lists.denx.de>; Wed, 06 Nov 2024 13:04:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1730927043; x=1731531843; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=68L/EjcuPoltvTRm9BWcytkRoSvcCfRHwoc8W/vzhW4=;
- b=hz2p2Yhqkpj5iMxNXTTQ4JPCxsAOurPkOyiEvxVhEYB/WoQ76Ylne9ZyGGMB0OJ1i0
- eD3FR8BS/ayl9hsST+rtJ3ZsVJHMUMXrz0x3IVhgRo1djFyYMHL6drhKTrkWTFvn8W0c
- WeZPssjbj5ugHoSYB9mpu3EqLDf5c1GH5SM+A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730927043; x=1731531843;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=68L/EjcuPoltvTRm9BWcytkRoSvcCfRHwoc8W/vzhW4=;
- b=cF3b4OHyUU3krnMHA7ulb5TD2t8eReb/bm5bAj0pMNAsohMz0G/JjupNthQwjl2gvL
- 9eiKSvaCBCNjgdcxkwLCoqzZZzZlkrT9aKC/hGfM1dpMA5Y81p5oOnYrMeMpeZVShYkX
- /W9Hov1QRDAuaD/Wp9FNIMdIfyx10v8VYwrtOlq8dEAfbQ8Q8N26+oVl7jmuq3EUFrmk
- VQqBx3NvcGfhEy50Unnl2v+jB/l627FIdWgBBKUWmvCGCbQZt7HL7w6tawqyuUgJmvf2
- HuJSRwBa+yhAXYB7J9urykiVYOWIe0Rp8Tqxmz6hKy1DKTzD1NlcJaxSbIkatq+thGzT
- zK3w==
-X-Gm-Message-State: AOJu0Yw0zQnEN1a+knVRaMSSXnvNUr5EbM3863mYPGp2x8PCovmzUTlM
- cjzQD9+M9KT2jyZdSoDNiQ9cdxTjjR0NjlzMJIl+ZrVsTrNSzg0ttszeXMQBbGU4u94zqiKKBt7
- cXEJ4/QZZ1IuCVoYdt3nzxCUc9n0G8gF2IRVlnhkx/wDJQa1W4knu+0cvwyDRTK5RArefU0EumG
- 1salpwqxAdPq+/wybb9ObRQOIGWKm4CM2ZByB5H7GmRLH5j4HwIaeD3C/Pq8tZ10uyu1oB
-X-Google-Smtp-Source: AGHT+IHHYhtxb/O4XvP2pCbtETUDdUe+c2BHWjgsNHVaT2yDNe6DdN9ePRJsg6Fmvcd0mSPKCntVgbapCflH
-X-Received: by 2002:a05:6e02:152d:b0:39a:f126:9d86 with SMTP id
- e9e14a558f8ab-3a6e83745c1mr3737605ab.0.1730927042754; 
- Wed, 06 Nov 2024 13:04:02 -0800 (PST)
-Received: from bcacpedev-irv-3.lvn.broadcom.net ([192.19.161.250])
- by smtp-relay.gmail.com with ESMTPS id
- e9e14a558f8ab-3a6a9a29b37sm8165005ab.71.2024.11.06.13.04.01
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 06 Nov 2024 13:04:02 -0800 (PST)
-X-Relaying-Domain: broadcom.com
-From: david regan <dregan@broadcom.com>
-To: u-boot <u-boot@lists.denx.de>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Anand Gore <anand.gore@broadcom.com>,
- William Zhang <william.zhang@broadcom.com>,
- Kursad Oney <kursad.oney@broadcom.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@broadcom.com>,
- David Regan <dregan@mail.com>, Tom Rini <trini@konsulko.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>
-Subject: [PATCH 4/4] mtd: rawnand: brcmnand: update log level messages
-Date: Wed,  6 Nov 2024 13:03:48 -0800
-Message-Id: <20241106210348.218507-5-dregan@broadcom.com>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <20241106210348.218507-1-dregan@broadcom.com>
-References: <20241106210348.218507-1-dregan@broadcom.com>
+ spf=pass smtp.mailfrom=yuriz@vodafonemail.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vodafonemail.de;
+ s=vfde-mb-mr2-23sep; t=1730936022;
+ bh=NbSSz/x9taAjkSlvm7QUK6dIbtpHcXICizlSryvYy/A=;
+ h=Date:From:To:Subject:Message-ID:Content-Type:From;
+ b=y6+GFm3Xw90qfVlGuj+N5pm1JOVPmB/BBiFfOqdFt0Eg1GRjNjjzR7FOc5081cf59
+ gSTSIy+ehfDgrp0Ae5uyLGd457At59iuV4GsD/BsJMtzJpzd5mbzLYNGavrYri5xDD
+ dMpFPqF8zT3sOW/S0B5lji7B3hQmU0qz8YkcGWro=
+Received: from smtp.vodafone.de (unknown [10.0.0.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by mr6.vodafonemail.de (Postfix) with ESMTPS id 4XkM3B2Kx0z1xyK
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 23:33:42 +0000 (UTC)
+Received: from tachyon.qrv-systems.net
+ (ip-095-222-025-162.um34.pools.vodafone-ip.de [95.222.25.162])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.vodafone.de (Postfix) with ESMTPSA id 4XkM360GRzz91pT
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 23:33:35 +0000 (UTC)
+Received: by tachyon.qrv-systems.net (Postfix, from userid 516)
+ id A062A2E256F; Thu,  7 Nov 2024 00:33:34 +0100 (CET)
+Date: Thu, 7 Nov 2024 00:33:34 +0100
+From: Yuri Zaporozhets <yuriz@vodafonemail.de>
+To: u-boot@lists.denx.de
+Subject: SiFive Unmatched: Linux kernel doesn't start (U-Boot 2024.07)
+Message-ID: <Zyv8zn2oGmmKz5XU@vodafonemail.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 07 Nov 2024 01:52:42 +0100
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+X-purgate-type: clean
+X-purgate: clean
+X-purgate-size: 1008
+X-purgate-ID: 155817::1730936018-3B7FD466-131D9992/0/0
+X-Mailman-Approved-At: Thu, 07 Nov 2024 01:52:53 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,42 +76,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update log level messages so that more critical messages can be logged
-to console and help the troubleshooting with field devices.
+Hi all,
 
-This is a port of the upstream Linux patch to U-Boot.
+To all owners & active users of the SiFive Unmatched board: do you have success
+running any recent upstream U-Boot on your system?
 
-https://lore.kernel.org/linux-mtd/20240223034758.13753-4-william.zhang@broadcom.com/
+I use the default U-Boot from Ubuntu 24.04, and it boots GRUB and Linux
+kernel just fine. Today I flashed the unmodified U-Boot 2024.07 (compiled with
+"make sifive_unmatched_defconfig" and OpenSBI 1.5), and the Ubuntu kernel
+(6.8) doesn't boot at all. The last message I see on the console is:
 
-Signed-off-by: david regan <dregan@broadcom.com>
----
- drivers/mtd/nand/raw/brcmnand/brcmnand.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+EFI stub: Exiting boot services...
 
-diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-index 6eb2fa65cc1e..b33585ecab75 100644
---- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-+++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-@@ -1071,8 +1071,8 @@ static int bcmnand_ctrl_poll_status(struct brcmnand_controller *ctrl,
- 	if ((val & mask) == expected_val)
- 		return 0;
- 
--	dev_warn(ctrl->dev, "timeout on status poll (expected %x got %x)\n",
--		 expected_val, val & mask);
-+	dev_err(ctrl->dev, "timeout on status poll (expected %x got %x)\n",
-+		expected_val, val & mask);
- 
- 	return -ETIMEDOUT;
- }
-@@ -2019,7 +2019,7 @@ try_dmaread:
- 				return err;
- 		}
- 
--		dev_dbg(ctrl->dev, "uncorrectable error at 0x%llx\n",
-+		dev_err(ctrl->dev, "uncorrectable error at 0x%llx\n",
- 			(unsigned long long)err_addr);
- 		mtd->ecc_stats.failed++;
- 		/* NAND layer expects zero on ECC errors */
+Adding "earlycon=sbi debug" doesn't change anything.
+
+The same behavior is also when GRUB is excluded from the process:
+
+=> nvme scan
+=> load nvme 0:5 $kernel_addr_r /boot/vmlinuz
+38603264 bytes read in 47 ms (783.3 MiB/s)
+=> bootefi $kernel_addr_r
+Booting /\boot\vmlinuz
+EFI stub: Booting Linux Kernel...
+EFI stub: EFI_RNG_PROTOCOL unavailable
+EFI stub: Using DTB from configuration table
+EFI stub: Exiting boot services...
+
+Is some additional patch needed to run U-Boot on Unmatched?
+
 -- 
-2.37.3
-
+Regards,
+Yuri
