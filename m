@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06279D59F67
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 21:10:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CBAFD59F73
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 21:10:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88A53890E4;
+	by phobos.denx.de (Postfix) with ESMTP id E3673891D2;
 	Wed,  6 Nov 2024 22:10:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dwvN3NDt";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="oHqF3Ad1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84A0D891BC; Wed,  6 Nov 2024 22:10:24 +0100 (CET)
+ id 8E02E88E63; Wed,  6 Nov 2024 22:10:24 +0100 (CET)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79FAA88E63
+ by phobos.denx.de (Postfix) with ESMTPS id E79A88903B
  for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 22:10:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4CCFE5C4CA0;
- Wed,  6 Nov 2024 21:09:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id AB065C4CED2;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 1983A5C4CA7;
+ Wed,  6 Nov 2024 21:09:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 7E239C4CEC6;
  Wed,  6 Nov 2024 21:10:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1730927418;
- bh=PeHXes+y5s1AbmiG9t2pcr41FQgJzfLa3JOFiZGVK6w=;
+ s=k20201202; t=1730927419;
+ bh=fPLP8YS+pPMZhBa/pDJmZMobDfgKqXREy3BtFkOYj4o=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=dwvN3NDtT02Kg3Z40kjG3sqVJq5pzILUlmsBbZY3cf7Udqmvj5OO2E90WzVvTs3HL
- momKljJlGvyBr3P9D5KT4e9vITfdpwPoZgF6BaTSbntrf5Ma6wys8kbeSdT0weBmxa
- pFxtdVmXVciqFsIw/yfUODjQLzZka1WZunpyw+H18cbTIYR55g/eDr7raWqyfXZLTq
- bij6tHdGWUW+uIJKHlQpioAl+Ei0OAzNTv/M33Sy+GAfQQtkiWHPmQu4Wkt56YdSPf
- /vc5lmKNqopzlgaDGWjCMIQNoUC+LPqJXoN+e1wKUyUsnu00s3yAXL6fkCe4EkMzR1
- hH7ndjt6YLA/A==
+ b=oHqF3Ad1Q1eZMwnyFi/Ze22lyRACbNt/H4i9tWOHamyVXMbhvMB39qDp7kR08+voA
+ xXgltaNOTcl7Qksvdvbu4dhLmrZ+dhyHbO9PD/BuwjbLgxgmrSYAkzQtyPfxkupaqx
+ q/SfupEilMvMB6G8ZbvHM1ek1+cD1SOepra77WP2kxh9XyrZ8q5SKBvPjo3QVhCBbA
+ 3nUVHbGsSt7XBNwwGCFsJb4D7+FaNl1kmynOntV3Q0JXsKCgBM3he6p5OaMnA9yV3t
+ 0IahCi/Rc3IP9RBW0786qxWMSU6VRlTF6z8Uyfphcmm8LxCnZmIKBhROAyzcOksgFO
+ HvX8NoNlQGtTw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 99898D59F67;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 6F737D59F73;
  Wed,  6 Nov 2024 21:10:18 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Wed, 06 Nov 2024 22:10:12 +0100
-Subject: [PATCH v2 4/4] iommu: apple: Manage IOVA separately from global
- LMB mem map
+Date: Wed, 06 Nov 2024 22:10:09 +0100
+Subject: [PATCH v2 1/4] lmb: Do not use global LMB variable in _lmb_free()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241106-io_lmb_apple_dart_iommu-v2-4-0580f4bdb023@jannau.net>
+Message-Id: <20241106-io_lmb_apple_dart_iommu-v2-1-0580f4bdb023@jannau.net>
 References: <20241106-io_lmb_apple_dart_iommu-v2-0-0580f4bdb023@jannau.net>
 In-Reply-To: <20241106-io_lmb_apple_dart_iommu-v2-0-0580f4bdb023@jannau.net>
 To: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
  Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2694; i=j@jannau.net;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1134; i=j@jannau.net;
  s=yk2024; h=from:subject:message-id;
- bh=08kZAPvA4oNAZQc/Pg50HxtG4DgEYxQOQYIzZTgD1O4=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhnTt25ZPRBe0qH1U4bpW/ORH9weFvMUhdxXPmzR2mdsLv
- 4mp1OXvKGVhEONikBVTZEnSftnBsLpGMab2QRjMHFYmkCEMXJwCMBG5jYwMrxVFQqfod6s7Rbd3
- 7fL+wNxibxOazt++zu3gA47uiboqjAyTDCWcbJ23shyU0f3yuU03+eTkLy8i0zRrOK+J7nEsvcI
- MAA==
+ bh=QhJ4eD7au/VVkmrFtpgL/2M1qUSFrO9yqc8R9QLVa48=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhnTt2xYs8yqev8nq/Fhddjrp7pfEVkml6Pc/J0Ub2Rv/f
+ OCb7GbcUcrCIMbFICumyJKk/bKDYXWNYkztgzCYOaxMIEMYuDgFYCLcyQx/pX7/MWGqzohg2xIX
+ VWRQtCGLyfbUw4ZLZ0P3bGnUC94gyMhwW+Krz/s/cQY7r+43e7bg18F4t2d7JnjN2DA9cWf74yY
+ xNgA=
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/yk2024 with auth_id=264
@@ -88,84 +87,40 @@ X-Virus-Status: Clean
 
 From: Janne Grunau <j@jannau.net>
 
-There is no overlap between the IOVA space managed by the iommu (here
-the 32-bit address space) and physical RAM on Apple silicon systems. The
-RAM starts at 0x10_0000_0000 or 0x100_0000_0000 so it's not possible to
-manage the IOVA with the global memory LMB and use 1:1 translation.
-In addition each device has its own iommu and does not need to share the
-address space with all other devices. This should not be problem for
-u-boot's limited use and hardware support.
-Restore the private per instance LMB IOVA map.
+It will be re-used with a lmb list pointer as argument for IOVA
+allocations in the apple_dart iommu driver.
 
-Fixes: ed17a33fed2 ("lmb: make LMB memory map persistent and global")
+Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- drivers/iommu/apple_dart.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+ lib/lmb.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/iommu/apple_dart.c b/drivers/iommu/apple_dart.c
-index 611ac7cd6deb4fccd45ccfe8cbb9b3e36e2af753..3e9e7819e517b8fe62b9e429b7a8ca3eca29741d 100644
---- a/drivers/iommu/apple_dart.c
-+++ b/drivers/iommu/apple_dart.c
-@@ -73,6 +73,8 @@ struct apple_dart_priv {
- 	u64 *l1, *l2;
- 	int bypass, shift;
- 
-+	struct lmb io_lmb;
-+
- 	dma_addr_t dvabase;
- 	dma_addr_t dvaend;
- 
-@@ -123,7 +125,7 @@ static dma_addr_t apple_dart_map(struct udevice *dev, void *addr, size_t size)
- 	off = (phys_addr_t)addr - paddr;
- 	psize = ALIGN(size + off, DART_PAGE_SIZE);
- 
--	dva = lmb_alloc(psize, DART_PAGE_SIZE);
-+	dva = io_lmb_alloc(&priv->io_lmb, psize, DART_PAGE_SIZE);
- 
- 	idx = dva / DART_PAGE_SIZE;
- 	for (i = 0; i < psize / DART_PAGE_SIZE; i++) {
-@@ -159,7 +161,7 @@ static void apple_dart_unmap(struct udevice *dev, dma_addr_t addr, size_t size)
- 			   (unsigned long)&priv->l2[idx + i]);
- 	priv->flush_tlb(priv);
- 
--	lmb_free(dva, psize);
-+	io_lmb_free(&priv->io_lmb, dva, psize);
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 96a055f951e657bf3acc05c9fa804698ce90c312..5be0d9dd89a506dc1e6e6951cc54441a8d4bb0df 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -495,10 +495,10 @@ long lmb_add(phys_addr_t base, phys_size_t size)
+ 	return lmb_map_update_notify(base, size, MAP_OP_ADD, LMB_NONE);
  }
  
- static struct iommu_ops apple_dart_ops = {
-@@ -173,7 +175,7 @@ static int apple_dart_probe(struct udevice *dev)
- 	dma_addr_t addr;
- 	phys_addr_t l2;
- 	int ntte, nl1, nl2;
--	int sid, i;
-+	int ret, sid, i;
- 	u32 params2, params4;
+-static long _lmb_free(phys_addr_t base, phys_size_t size)
++static long _lmb_free(struct alist *lmb_rgn_lst, phys_addr_t base,
++		      phys_size_t size)
+ {
+ 	struct lmb_region *rgn;
+-	struct alist *lmb_rgn_lst = &lmb.used_mem;
+ 	phys_addr_t rgnbegin, rgnend;
+ 	phys_addr_t end = base + size - 1;
+ 	int i;
+@@ -561,7 +561,7 @@ long lmb_free_flags(phys_addr_t base, phys_size_t size,
+ {
+ 	long ret;
  
- 	priv->base = dev_read_addr_ptr(dev);
-@@ -212,7 +214,13 @@ static int apple_dart_probe(struct udevice *dev)
- 	priv->dvabase = DART_PAGE_SIZE;
- 	priv->dvaend = SZ_4G - DART_PAGE_SIZE;
- 
--	lmb_add(priv->dvabase, priv->dvaend - priv->dvabase);
-+	ret = io_lmb_setup(&priv->io_lmb);
-+	if (ret)
-+		return ret;
-+	ret = io_lmb_add(&priv->io_lmb, priv->dvabase,
-+			 priv->dvaend - priv->dvabase);
-+	if (ret)
-+		return -EINVAL;
- 
- 	/* Disable translations. */
- 	for (sid = 0; sid < priv->nsid; sid++)
-@@ -294,6 +302,8 @@ static int apple_dart_remove(struct udevice *dev)
- 	}
- 	priv->flush_tlb(priv);
- 
-+	io_lmb_teardown(&priv->io_lmb);
-+
- 	return 0;
- }
+-	ret = _lmb_free(base, size);
++	ret = _lmb_free(&lmb.used_mem, base, size);
+ 	if (ret < 0)
+ 		return ret;
  
 
 -- 
