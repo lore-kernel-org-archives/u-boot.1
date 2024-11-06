@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49F56D44D75
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 14:14:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0729D44D77
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 14:14:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A400891E3;
+	by phobos.denx.de (Postfix) with ESMTP id ADF2F891E9;
 	Wed,  6 Nov 2024 15:13:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E4QDFPga";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cWTryvzT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1766788C7C; Wed,  6 Nov 2024 14:03:04 +0100 (CET)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
+ id 7C31D891D2; Wed,  6 Nov 2024 14:03:30 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9E9A891BC
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 14:03:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50686891BC
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 14:03:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-71ec997ad06so5388101b3a.3
- for <u-boot@lists.denx.de>; Wed, 06 Nov 2024 05:03:01 -0800 (PST)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-21116b187c4so48005615ad.3
+ for <u-boot@lists.denx.de>; Wed, 06 Nov 2024 05:03:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730898180; x=1731502980; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1730898207; x=1731503007; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2ZlPUz7aCKgGULHI6YF2jOoKlukgWCucAuSDsUlQjlQ=;
- b=E4QDFPgaKKZXKVLKRqzRQI1DYt3xWwGIY6TD6dkIZA7qJFSMHMSxgDkw8eYEdJA+ml
- IUWHzvWztfFlCJUKpXWHfA7elXtEkNak78uPtqzLmufT9dUbjWf59I72QcwBVLJhAy9k
- Ch8U+QlpQ1D/a0y6ko5SXRbfdUDkb2N9G4rkNJXLq2zrs9zN7FvtX/2qLS7gyCAMT0E9
- 0lk2QUzdzaAsS9aRY7xnYF26UqcxCs5NZfMy1Uf0nAoguUcWov3dlx14mHOOeZV9XGes
- 3an1fedw/dRgLBG8gJagR+x/g1C2oUNRwJVrm9I7Vrt/pQpalpv3313VgxxzhRHij3f0
- BTqA==
+ bh=nTcq1xsSMSqUo9ODZN+EvP0e3Vg3LWs2Mru9xD3rYU0=;
+ b=cWTryvzTzBpG2PiZZLOmMoA6gGbs0UVTkCI2QW2rnrVBGJeydQb6cbIPlI0ozn7Mch
+ jdYvuV512dOyjqBEFKeGQjDAKG8qImEQAycui97AJFTckS5L0n/hiu7IY02js9V54s4Z
+ eNloys6xjsri5PS4XYOx8i5PeB7x28o0de/jqzzJb0lHe7C1bzjid/71tYvlMV4KmJus
+ FgW/YEr/92/XzMd+25qdwkKT5QSzSH729XQitjJZexgN54ZPxpGO9k95EYgu47E7HxFO
+ 3sE0mijKORVXE4IQbrI3kT7lT/907WxC+LPVRvjmkn2Kj0o5jakqBqDBuAay+/Scl/mG
+ KdDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730898180; x=1731502980;
+ d=1e100.net; s=20230601; t=1730898207; x=1731503007;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2ZlPUz7aCKgGULHI6YF2jOoKlukgWCucAuSDsUlQjlQ=;
- b=fjLleFK+QklLdfjJWJSTxQ7siXjgKaJJ4E0PNqUqrN+vr72IBYCX9ZOABqd/+6HdCU
- ULRlVlJ5WPzfWKuvBIevdUlDRqTTn1yRJPdtfHeAzkbwqEL+gWkK6hzcYJsTmChmYgEV
- IZiLL8hIa1yMPJoLwwUKTnD0Qh3x/XO6y3W4zKmHlgZ5eF+UL0pWgvlYkZC9aSiKgNbR
- buUkKAK64x0acbpPSCsor7EGXRWJgR7abt12S+BECgTwf2SqopVjOkWanvlvAzz0CYXe
- a+Wjv7ly4EnXqZevtIKVlxDbpmjlvWMf3NNmTZGQxnkAeOcO8zi2OyrB9uEf+tAUn8p1
- LDaw==
-X-Gm-Message-State: AOJu0YzOPVKwcSjEfRhZuoR1cTwASqHoAF/v+hJohXiAwhDUUoH8dc9q
- yHqJQaKenpgNiWg234KVsKlLEi6zniiNAyDoMOwZNWzrbB0ATQIAo4klfM9Ia7E=
-X-Google-Smtp-Source: AGHT+IH/YZqQZ5OUd3hZu1BlF3PDNhZgihFHTyGbJGeYeK7Y7wyhs0KIbGqdvUrIVYlFXTaQUCaqcw==
-X-Received: by 2002:a05:6a00:4644:b0:71e:7636:3323 with SMTP id
- d2e1a72fcca58-720ab3babdemr34706090b3a.7.1730898180248; 
- Wed, 06 Nov 2024 05:03:00 -0800 (PST)
+ bh=nTcq1xsSMSqUo9ODZN+EvP0e3Vg3LWs2Mru9xD3rYU0=;
+ b=Hy6ROpl7S9xRNkzwSFxEKPki+6TC+ivykwlDmgZVklkxbpsio+VLUB2OTHOUJHzicR
+ bYP8DjxLNwBJ+5gdJURbr9jJDySY47CUCRDuVF3XaMNbQGYeiTNUlutEh0wqxfvHk9q3
+ jxmc+MAiLFcc1FlquFCzvebxAW9d9sDLVZ+NRbSxCChnh/9cxjPFRtIaQcpImjAVnE7k
+ kb+QsRyQWuzpFzSx51RnomUF+1rmPtgQcydkAFQaU5WhRJEeZOort4GtNS9HuQuU8C1z
+ ggzd/RbbMoJ+E6qBWiyrOTi9ZfWZgOkS8JhdhP5ZvhZ4bK86ukNZGb/dgiN1H0g1+ePT
+ esZQ==
+X-Gm-Message-State: AOJu0YwaKPQ+8nCvoMR+7/AirTAyAkNzBz2MBYcIVO1vjelaQE+49iRF
+ R5yz0sV3eyNIuJDB6LtyUpvsnTKqKysfj/dUKMo/q+J2Qon/J5pJQ7OXyU/xwYE=
+X-Google-Smtp-Source: AGHT+IGaiaITR2X5ZWA3PdVGEROn+P5FPwBbeK8kzHu2TGR1fLpoF3Px/b+DEOzSkfM6HxzHyJFK4w==
+X-Received: by 2002:a17:902:ce85:b0:20c:a1a3:5373 with SMTP id
+ d9443c01a7336-2111b01c640mr277755555ad.55.1730898206580; 
+ Wed, 06 Nov 2024 05:03:26 -0800 (PST)
 Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-720bc1c9fd4sm11650134b3a.22.2024.11.06.05.02.58
+ 98e67ed59e1d1-2e99a62bfb6sm1411296a91.43.2024.11.06.05.03.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Nov 2024 05:02:59 -0800 (PST)
+ Wed, 06 Nov 2024 05:03:26 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH 1/7] net: Kconfig: add CONFIG_WGET symbol
-Date: Wed,  6 Nov 2024 10:02:55 -0300
-Message-ID: <20241106130255.211041-1-adrianox@gmail.com>
+Subject: [PATCH 2/7] net: wget: add definition of struct wget_http_info
+Date: Wed,  6 Nov 2024 10:03:18 -0300
+Message-ID: <20241106130318.211072-1-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -89,78 +89,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Let net/wget.c and net/lwip/wget.c depend on CONFIG_WGET, and
-cmd/wget.c depend on CONFIG_CMD_WGET. This way, the wget code
-can be used regardless of whether the wget command is available.
+The struct wget_http_info exposes the HTTP information of the last HTTP
+request issued by wget, and it controls whether the efi bootdevice is set,
+and whether the buffer size needs to be checked (lwip stack only). This
+information is otherwise discarded. The wget_http_info struct can be used
+by HTTP drivers to have more control over HTTP requests.
 
 Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 ---
- cmd/Kconfig       | 5 +----
- net/Kconfig       | 9 +++++++++
- net/Makefile      | 2 +-
- net/lwip/Makefile | 2 +-
- 4 files changed, 12 insertions(+), 6 deletions(-)
+ include/net-common.h | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 636833646f..8f3ad94089 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2115,11 +2115,8 @@ config CMD_TFTPBOOT
+diff --git a/include/net-common.h b/include/net-common.h
+index fd7c5e7b48..38ba95cf60 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -8,6 +8,7 @@
+ #include <env.h>
+ #include <hexdump.h>
+ #include <linux/if_ether.h>
++#include <linux/sizes.h>
+ #include <linux/types.h>
+ #include <rand.h>
+ #include <time.h>
+@@ -506,4 +507,30 @@ int wget_with_dns(ulong dst_addr, char *uri);
+ bool wget_validate_uri(char *uri);
+ //int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
  
- config CMD_WGET
- 	bool "wget"
--	depends on CMD_NET
- 	default y if SANDBOX
--	select PROT_TCP if NET
--	select PROT_TCP_LWIP if NET_LWIP
--	select PROT_DNS_LWIP if NET_LWIP
-+	select WGET
- 	help
- 	  wget is a simple command to download kernel, or other files,
- 	  from a http server over TCP.
-diff --git a/net/Kconfig b/net/Kconfig
-index 76ab7d91ee..b4bb68dd61 100644
---- a/net/Kconfig
-+++ b/net/Kconfig
-@@ -244,6 +244,15 @@ config NET_RANDOM_ETHADDR
- 	  generated. It will be saved to the appropriate environment variable,
- 	  too.
- 
-+config WGET
-+	bool "Enable wget"
-+	select PROT_TCP if NET
-+	select PROT_TCP_LWIP if NET_LWIP
-+	select PROT_DNS_LWIP if NET_LWIP
-+	help
-+	  Selecting this will enable wget, an interface to send HTTP requests
-+	  via the network stack.
++enum wget_http_method {
++	WGET_HTTP_METHOD_GET,
++	WGET_HTTP_METHOD_POST,
++	WGET_HTTP_METHOD_PATCH,
++	WGET_HTTP_METHOD_OPTIONS,
++	WGET_HTTP_METHOD_CONNECT,
++	WGET_HTTP_METHOD_HEAD,
++	WGET_HTTP_METHOD_PUT,
++	WGET_HTTP_METHOD_DELETE,
++	WGET_HTTP_METHOD_TRACE,
++	WGET_HTTP_METHOD_MAX
++};
 +
- config TFTP_BLOCKSIZE
- 	int "TFTP block size"
- 	default 1468
-diff --git a/net/Makefile b/net/Makefile
-index 209377aeb2..7c917b318c 100644
---- a/net/Makefile
-+++ b/net/Makefile
-@@ -29,7 +29,7 @@ obj-$(CONFIG_$(PHASE_)TCP_FUNCTION_FASTBOOT)  += fastboot_tcp.o
- obj-$(CONFIG_CMD_WOL)  += wol.o
- obj-$(CONFIG_PROT_UDP) += udp.o
- obj-$(CONFIG_PROT_TCP) += tcp.o
--obj-$(CONFIG_CMD_WGET) += wget.o
-+obj-$(CONFIG_WGET) += wget.o
- 
- # Disable this warning as it is triggered by:
- # sprintf(buf, index ? "foo%d" : "foo", index)
-diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index f2558f8763..79dd6b3fb5 100644
---- a/net/lwip/Makefile
-+++ b/net/lwip/Makefile
-@@ -5,4 +5,4 @@ obj-$(CONFIG_CMD_DHCP) += dhcp.o
- obj-$(CONFIG_CMD_DNS) += dns.o
- obj-$(CONFIG_CMD_PING) += ping.o
- obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
--obj-$(CONFIG_CMD_WGET) += wget.o
-+obj-$(CONFIG_WGET) += wget.o
++#define MAX_HTTP_HEADERS_SIZE SZ_64K
++
++struct wget_http_info {
++	enum wget_http_method method;
++	ulong status_code;
++	ulong file_size;
++	ulong buffer_size;
++	bool set_bootdev;
++	bool check_buffer_size;
++	u32 hdr_cont_len;
++	char *headers;
++};
++
+ #endif /* __NET_COMMON_H__ */
 -- 
 2.43.0
 
