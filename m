@@ -4,58 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BB3ED3E78C
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 09:56:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A44FD3E799
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 10:03:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D300A88DB6;
-	Wed,  6 Nov 2024 10:56:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id A9AE688DB6;
+	Wed,  6 Nov 2024 11:03:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="kLUFoqsZ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="TLYk8IhS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 947578900E; Wed,  6 Nov 2024 10:56:50 +0100 (CET)
-Received: from mail-m49243.qiye.163.com (mail-m49243.qiye.163.com
- [45.254.49.243])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 14B9D8902D; Wed,  6 Nov 2024 11:03:02 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AD8188CD9
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 10:56:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 891FD88CEC
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 11:02:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 1f75306e;
- Wed, 6 Nov 2024 17:56:43 +0800 (GMT+08:00)
-Message-ID: <abf3e0e0-8b6a-4432-8c1c-a581b644638f@rock-chips.com>
-Date: Wed, 6 Nov 2024 17:56:43 +0800
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-539f7606199so4151565e87.0
+ for <u-boot@lists.denx.de>; Wed, 06 Nov 2024 02:02:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1730887379; x=1731492179;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=kfxDX4yZaQG0Bgjg8gnQxBPe6Cdj9nkJg95bDaBzpo8=;
+ b=TLYk8IhSOPpWo1q2cZ4rRwPU98sC1yawPoHPGlnQ9RJonlGBWGHUHtZT16vUvXtM3Q
+ B6AC2AbKUVIyRevO2mTNCUOdSw1eCqt7dkZE7VmnNLCfNv8aclI5OW3PJXSrRpUJv1fB
+ xRJpJFpgPU6sDKBb2lztqPhEcBwH2RWj4mFlsHiyo/Ofa77rQnVYMN483gdl6qMSL0Ia
+ PEVZ+jcsXwEUaDkkeDyNRCtYd3MDyIYczrKOEEn0hEL/RLhrcY+KU/EytgLjwmU0Vatg
+ YUp6bwTL0uYVzA0siHWSpQ++Q8GJEvhKeEg3+7W5YqDyFqdh8ks8gZ7NNGGmtUh9QO2G
+ ggZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730887379; x=1731492179;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kfxDX4yZaQG0Bgjg8gnQxBPe6Cdj9nkJg95bDaBzpo8=;
+ b=jibK+rlAxfflw6NdBOME3/wa5BPoGWjg2GtYuBboNe/6J9vM18pPdRjDQ8fGc7ia3a
+ Nzlm6n6xQgNIStEBOucWOL0c00d0gVmbIdc9rkW2yNctyrOGpnAabXxsugRPgw+vdTPX
+ BiOcMpObh925vxL9saN4+98iWhUawy13ehEeCa+z/2scqv3o3CQCChboSOigR9YQAy2B
+ oDvfTYZKiLIPURHTn+UM9vqV/5/JqS7YlfZSbM1a83MM9036PqrW1iVFVlgIlo8hq4Rh
+ UkQOZ8UlzhCqM0muohjNwiXMeFcB/3CirijjUmE2k+JdoMmsA2SLbF182P3WKf0ALIYe
+ c0JA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUn6Gzrm99cdD3U3aUqmbnHk14/yVXSnF3KdxiLXKmQI/pkpEjcMoWP857C8eLJ0wdwvmUrqts=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy53jHiYGee4EEL1A3QCkOvgBtF4fOdAZ7IZmSf0hc3k/gjbUm4
+ RBvhheo2LPBrTEfvaTehDbRu/XvhK4azd+Q/OuWYCJgLCkri1D4o2GbAz+qzkvg=
+X-Google-Smtp-Source: AGHT+IELi+FkQ46N2paJoErWJVDp3/OtiZNhNYFfhU+AWP0rzBt30VR6RJogwnDpNi7EIsYFEkjZ2A==
+X-Received: by 2002:a05:6512:2245:b0:539:e97c:cb12 with SMTP id
+ 2adb3069b0e04-53b7ecfbe41mr13038494e87.34.1730887378709; 
+ Wed, 06 Nov 2024 02:02:58 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-432aa6c6460sm16484815e9.23.2024.11.06.02.02.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 Nov 2024 02:02:58 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Dmitry Rokosov <ddrokosov@salutedevices.com>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, Tom Rini <trini@konsulko.com>, "Andrew F. Davis"
+ <afd@ti.com>, Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass
+ <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, rockosov@gmail.com, kernel@salutedevices.com,
+ Guillaume La Roque <glaroque@baylibre.com>
+Subject: Re: [PATCH v5 6/6] common: android_ab: fix slot suffix for abc block
+In-Reply-To: <CAPLW+4=-yPgMeDM5XRkBXR-nD4Ni2VtWqTKxJVVrfdU8g2sG4g@mail.gmail.com>
+References: <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>
+ <20241017-android_ab_master-v5-6-43bfcc096d95@salutedevices.com>
+ <CAPLW+4msra4=oUDCSWx8sfM7uCGgfmJbRi++Q=wf8cQ-ERoHGw@mail.gmail.com>
+ <87v7x1soto.fsf@baylibre.com>
+ <CAPLW+4=-yPgMeDM5XRkBXR-nD4Ni2VtWqTKxJVVrfdU8g2sG4g@mail.gmail.com>
+Date: Wed, 06 Nov 2024 11:02:57 +0100
+Message-ID: <875xp08ysu.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk35xx-generic: Disable late boardinfo
-To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20241102213004.3644543-1-jonas@kwiboo.se>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241102213004.3644543-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh4aQ1YaS00dHx8dHUJMS0JWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9300e7ad1803afkunm1f75306e
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OAg6Sgw4LzIYLDEPMCkfEzlW
- Hk0wCw1VSlVKTEhLQ0NMS0tPS0lKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJT0pJNwY+
-DKIM-Signature: a=rsa-sha256;
- b=kLUFoqsZxJ1R1K7uSyho9vE6rD5c+NK13VYE6v0KUbi7Q/in6ZCncpvVFrYMbrg+7+G1HyvpQTW9sq2i1UM+pWDqCz7/EFM2xgENGzC0xkH1DoKdhE00NdPGg2DN3SburmdYIJHIOmf1DCbLGjnmvt3UNvkUe4JEyyLjKr/lT5A=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=g/pKbiSq+4FA8R0iULfBWgfBSfm5YAj5RkytX8NmvIQ=;
- h=date:mime-version:subject:message-id:from;
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,73 +102,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sam,
 
-On 2024/11/3 05:30, Jonas Karlman wrote:
-> Disable DISPLAY_BOARDINFO_LATE as the early boardinfo print of Model
-> should be enough.
->
->    U-Boot 2025.01-rc1 (Nov 02 2024 - 16:04:16 +0000)
->
->    Model: Generic RK3566/RK3568
->    DRAM:  8 GiB (effective 7.7 GiB)
->    Core:  250 devices, 24 uclasses, devicetree: separate
->    MMC:   mmc@fe2b0000: 1, mmc@fe310000: 0
->    Loading Environment from nowhere... OK
->    In:    serial@fe660000
->    Out:   serial@fe660000
->    Err:   serial@fe660000
->    Model: Generic RK3566/RK3568
->    Hit any key to stop autoboot:  0
->    =>
->
-> Enable CMD_MISC to make it easier to inspect data in OTP.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+On mar., nov. 05, 2024 at 18:58, Sam Protsenko <semen.protsenko@linaro.org>=
+ wrote:
 
-Thanks,
-- Kever
-> ---
->   configs/generic-rk3568_defconfig | 2 +-
->   configs/generic-rk3588_defconfig | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
+> On Tue, Nov 5, 2024 at 9:06=E2=80=AFAM Mattijs Korpershoek
+> <mkorpershoek@baylibre.com> wrote:
+>>
+>> Hi Sam,
+>>
 >
-> diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
-> index 1d06f3411fe0..f79f0e84400b 100644
-> --- a/configs/generic-rk3568_defconfig
-> +++ b/configs/generic-rk3568_defconfig
-> @@ -22,7 +22,6 @@ CONFIG_SPL_LOAD_FIT=y
->   CONFIG_LEGACY_IMAGE_FORMAT=y
->   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-generic.dtb"
->   # CONFIG_DISPLAY_CPUINFO is not set
-> -CONFIG_DISPLAY_BOARDINFO_LATE=y
->   CONFIG_SPL_MAX_SIZE=0x40000
->   CONFIG_SPL_PAD_TO=0x7f8000
->   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> @@ -31,6 +30,7 @@ CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
->   CONFIG_SPL_ATF=y
->   CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
-> +CONFIG_CMD_MISC=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_ROCKUSB=y
->   CONFIG_CMD_USB_MASS_STORAGE=y
-> diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
-> index ebe883ed5972..51e31dce3a96 100644
-> --- a/configs/generic-rk3588_defconfig
-> +++ b/configs/generic-rk3588_defconfig
-> @@ -18,13 +18,13 @@ CONFIG_SPL_LOAD_FIT=y
->   CONFIG_LEGACY_IMAGE_FORMAT=y
->   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-generic.dtb"
->   # CONFIG_DISPLAY_CPUINFO is not set
-> -CONFIG_DISPLAY_BOARDINFO_LATE=y
->   CONFIG_SPL_MAX_SIZE=0x40000
->   CONFIG_SPL_PAD_TO=0x7f8000
->   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
->   CONFIG_SPL_ATF=y
->   CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
-> +CONFIG_CMD_MISC=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_ROCKUSB=y
->   CONFIG_CMD_USB_MASS_STORAGE=y
+> Hey Mattijs,
+>
+> [snip]
+>
+>> >> @@ -328,7 +328,8 @@ int ab_select_slot(struct blk_desc *dev_desc, str=
+uct disk_partition *part_info,
+>> >>                  * or the device tree.
+>> >>                  */
+>> >>                 memset(slot_suffix, 0, sizeof(slot_suffix));
+>> >> -               slot_suffix[0] =3D BOOT_SLOT_NAME(slot);
+>> >> +               slot_suffix[0] =3D '_';
+>> >> +               slot_suffix[1] =3D BOOT_SLOT_NAME(slot);
+>> >
+>> > AFAIU, this changes the behavior of two above functions, and
+>> > consequently of "bcb ab_select" command? If so, just to double check:
+>> > were all users of those reworked correspondingly? I can see next
+>> > occurrences (there may be more):
+>> >
+>> > $ grep -sIrHn '"_' boot/bootmeth_android.c
+>>
+>> I thought the same when first reviewing the patch.
+>> Looking a bit closer...
+>>
+>> >
+>> > boot/bootmeth_android.c:74:    sprintf(partname, BOOT_PART_NAME "_%s",
+>> > priv->slot);
+>> > boot/bootmeth_android.c:111:    sprintf(partname,
+>> > VENDOR_BOOT_PART_NAME "_%s", priv->slot);
+>> > boot/bootmeth_android.c:156:    sprintf(slot_suffix, "_%s", priv->slot=
+);
+>> > boot/bootmeth_android.c:397:    sprintf(slot_suffix, "_%s", priv->slot=
+);
+>>
+>> ... We can see that ab_select_slot() returns an integer
+>> That integer is used later on to initialize priv->slot:
+>>
+>> """
+>>         priv->slot[0] =3D BOOT_SLOT_NAME(ret);
+>>         priv->slot[1] =3D '\0';
+>> """
+>>
+>> The change from Dmitry only changes what we **write** to the BCB (into
+>> the misc partition), not what is returned by ab_select_slot().
+>>
+>
+> Sure. Just wanted to double check that the behavior is not changed in
+> any related parts, as the commit message doesn't mention that. Btw,
+> BCB is an interface between the bootloader and AOSP, so if this patch
+> changes what's being written into BCB, does it affect AOSP part of it
+> somehow? Especially for already existing devices with particular BCB
+> data, in case U-Boot gets updated there.
+
+Those are valid concerns.
+
+Per my understanding, on recent Android versions the slot suffix is not
+read from BCB, but from the ro.boot.slot_suffix property:
+
+"""
+  // Initialize the current_slot from the read-only property. If the proper=
+ty
+  // was not set (from either the command line or the device tree), we can =
+later
+  // initialize it from the bootloader_control struct.
+  std::string suffix_prop =3D android::base::GetProperty("ro.boot.slot_suff=
+ix", "");
+  if (suffix_prop.empty()) {
+    LOG(ERROR) << "Slot suffix property is not set";
+    return false;
+  }
+  current_slot_ =3D SlotSuffixToIndex(suffix_prop.c_str());
+"""
+
+See:
+https://cs.android.com/android/platform/superproject/main/+/main:hardware/i=
+nterfaces/boot/1.1/default/boot_control/libboot_control.cpp;l=3D185;drc=3D8=
+6b8f575059a1799c760ca7012f540a528d68a9d;bpv=3D1;bpt=3D1
+
+This has been the case since 2019.
+
+If we look at earlier implementations of libboot_control (which was in
+bootable/recovery)
+https://android-review.googlesource.com/c/platform/bootable/recovery/+/1191=
+517
+
+So implementations before 2019 that do not have this patch:
+https://android-review.googlesource.com/c/platform/bootable/recovery/+/1111=
+899
+
+Will get the slot suffix from the BCB (not from the commandline)
+
+For these older implementations, we will go through the following:
+BootControl::Init()
+  LoadBootloaderControl(device.c_str(), &boot_ctrl)
+  android::base::ReadFully(fd.get(), buffer, sizeof(bootloader_control)
+
+And struct bootloader_control has:
+
+struct bootloader_control {
+    // NUL terminated active slot suffix.
+    char slot_suffix[4];
+
+And if we look at how the BCB is initialized from userspace in:
+https://cs.android.com/android/platform/superproject/main/+/main:hardware/i=
+nterfaces/boot/1.1/default/boot_control/libboot_control.cpp;l=3D120;drc=3D8=
+6b8f575059a1799c760ca7012f540a528d68a9d
+
+We can see that we copy _a, not a (for example, if slot =3D=3D 0).
+
+So I think this is fine.
+
+If needed, I can dig more for behaviour on older devices (<2019), let me kn=
+ow!
+
+>
+>> ab_select_slot() still returns an integer which needs to be converted
+>> via the BOOT_SLOT_NAME() macro.
+>>
+>> >
+>> > $ grep -sIrHn 'slot_suffix _' include/configs/
+>> > include/configs/ti_omap5_common.h:107:    "setenv slot_suffix _${slot_=
+name};"
+>> > include/configs/meson64_android.h:65:        "setenv slot_suffix
+>> > _${current_slot}; " \
+>>
+>> Same goes for these 2 examples, we use:
+>> The "bcb ab_select current_slot" command to store the slot into the
+>> "current_slot" environment variable.
+>> Looking at cmd/bcb.c we can see:
+>>
+>> """
+>>         ret =3D ab_select_slot(dev_desc, &part_info, dec_tries);
+>>         if (ret < 0) {
+>>                 printf("Android boot failed, error %d.\n", ret);
+>>                 return CMD_RET_FAILURE;
+>>         }
+>>
+>>         /* Android standard slot names are 'a', 'b', ... */
+>>         slot[0] =3D BOOT_SLOT_NAME(ret);
+>>         slot[1] =3D '\0';
+>>         env_set(argv[1], slot);
+>>         printf("ANDROID: Booting slot: %s\n", slot);
+>> """
+>>
+>> So I think this is fine.
+>>
+>
+> [snip]
