@@ -4,63 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40C64D59F67
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 21:27:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EA9D59F75
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 21:58:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 774FD88D9C;
-	Wed,  6 Nov 2024 22:27:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id F284F88E00;
+	Wed,  6 Nov 2024 22:58:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="sTCMDtu2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BerD8ffW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 531E28903B; Wed,  6 Nov 2024 22:27:56 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B669B88E2D; Wed,  6 Nov 2024 22:58:33 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B870E88B1F
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 22:27:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 13F2788B55
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 22:58:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5449=SC=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1730928466;
- bh=dOTDvCh2jcbNtJPgXyczt8k2yIStqo5MQmzjH2fOHqQ=;
- b=sTCMDtu2Wttz7kU3v7yelGl2ZWjnlbEqifZovg6KcgsPH8jrXVfQlqfBGgQn3e2/iLSShP7Xj
- zAKDQqfnQcUhDr95gavPYX9rStvvd7eU+PoY5SYbCNRnun7t0AEyN/ZuJ4iqXxKp48vdx+CljYp
- VWzMzJNDybPb5+yUVINgmUUkUwarWhC8HbuQuV0a3dxA/g82FpbJCQqfoefOjNoG+os6+ZTHntU
- xupiRFpK0sVsFiI/a3cJrZAFUP7vmnIexadwbRZhMyUQHZ5GVKZ6T16tWobc8IzgKC5ylKNfyb/
- h8Ik8fEqj3fJXUsaVaJPV0/+M8/XLa36PlI17iRHb5kg==
-Message-ID: <3f63e47c-5086-4d17-847d-6f331c2ae0b6@kwiboo.se>
-Date: Wed, 6 Nov 2024 22:27:40 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4A6Lw5n0080730;
+ Wed, 6 Nov 2024 15:58:05 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1730930285;
+ bh=E8Fdu3U561zZpBgt5O+dvl48V6suMsCevVq6Fp9moqw=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=BerD8ffWaWbmamBmha74/0hdr7z/MzuCXDg9N3PHP5TXmYT7/ZR08ws/FiAXXzSnt
+ Ng/6MjMGuSAavF5cORxuPjMll6cCvcgOyWXH3x8tEQNDio0YufDAB8yPqML33vO7eM
+ H9ak1satM/HyJj4+dGOlsinAnetxUYWinwspeuTc=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4A6Lw5LC095275;
+ Wed, 6 Nov 2024 15:58:05 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
+ Nov 2024 15:58:04 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 6 Nov 2024 15:58:04 -0600
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4A6Lw4xW098798;
+ Wed, 6 Nov 2024 15:58:04 -0600
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Marek Vasut <marek.vasut@mailbox.org>, Michal Simek
+ <michal.simek@amd.com>, <u-boot@lists.denx.de>
+CC: Andre Przywara <andre.przywara@arm.com>, Ashok Reddy Soma
+ <ashok.reddy.soma@amd.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ "Michael Walle" <mwalle@kernel.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Pratyush Yadav
+ <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>, Sean Anderson
+ <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Takahiro Kuwano
+ <Takahiro.Kuwano@infineon.com>, Tom Rini <trini@konsulko.com>, "Tudor
+ Ambarus" <tudor.ambarus@linaro.org>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories
+ support in QSPI driver"
+In-Reply-To: <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
+References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
+ <b9cb3ec8-b6f2-4f38-8cda-d3d10278f503@amd.com>
+ <e9929e0c-aa43-428f-8bf7-7b4cdef0e9c3@mailbox.org>
+ <86v7x05fyd.fsf@udb0321960.dhcp.ti.com>
+ <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
+Date: Wed, 6 Nov 2024 15:58:04 -0600
+Message-ID: <86ses458k3.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] rockchip: rk3288: Use rk3288-cru.h from dts/upstream
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20241104205906.986837-1-jonas@kwiboo.se>
- <20241104205906.986837-3-jonas@kwiboo.se>
- <980f5b97-d82b-412c-9450-68271ebc8ac8@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <980f5b97-d82b-412c-9450-68271ebc8ac8@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 672bdf51e997659fa2f4d69a
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,146 +91,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Marek Vasut <marek.vasut@mailbox.org> writes:
 
-On 2024-11-06 15:35, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 11/4/24 9:58 PM, Jonas Karlman wrote:
->> clock/rk3288-cru.h in include/dt-bindings is almost identical to the
->> version in dts/upstream, remove the copy from include/dt-bindings to
->> only use the version from dts/upstream.
->>
->> One clk, SCLK_MAC_PLL, is not part of the upstream bindings, this clk is
->> not used by any upstream or in-tree DT. For now just ignore this unused
->> clk and only workaround a build issue caused by this removal.
->>
->> No functional change to board DTs is intended with this removal.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->>   .../clock/rockchip,rk3288-cru.txt             |  61 ---
->>   drivers/clk/rockchip/clk_rk3288.c             |   2 +
->>   include/dt-bindings/clock/rk3288-cru.h        | 381 ------------------
->>   3 files changed, 2 insertions(+), 442 deletions(-)
->>   delete mode 100644 doc/device-tree-bindings/clock/rockchip,rk3288-cru.txt
->>   delete mode 100644 include/dt-bindings/clock/rk3288-cru.h
->>
->> diff --git a/doc/device-tree-bindings/clock/rockchip,rk3288-cru.txt b/doc/device-tree-bindings/clock/rockchip,rk3288-cru.txt
->> deleted file mode 100644
->> index c9fbb76573e1..000000000000
->> --- a/doc/device-tree-bindings/clock/rockchip,rk3288-cru.txt
->> +++ /dev/null
->> @@ -1,61 +0,0 @@
->> -* Rockchip RK3288 Clock and Reset Unit
->> -
->> -The RK3288 clock controller generates and supplies clock to various
->> -controllers within the SoC and also implements a reset controller for SoC
->> -peripherals.
->> -
->> -Required Properties:
->> -
->> -- compatible: should be "rockchip,rk3288-cru"
->> -- reg: physical base address of the controller and length of memory mapped
->> -  region.
->> -- #clock-cells: should be 1.
->> -- #reset-cells: should be 1.
->> -
->> -Optional Properties:
->> -
->> -- rockchip,grf: phandle to the syscon managing the "general register files"
->> -  If missing pll rates are not changable, due to the missing pll lock status.
->> -
->> -Each clock is assigned an identifier and client nodes can use this identifier
->> -to specify the clock which they consume. All available clocks are defined as
->> -preprocessor macros in the dt-bindings/clock/rk3288-cru.h headers and can be
->> -used in device tree sources. Similar macros exist for the reset sources in
->> -these files.
->> -
->> -External clocks:
->> -
->> -There are several clocks that are generated outside the SoC. It is expected
->> -that they are defined using standard clock bindings with following
->> -clock-output-names:
->> - - "xin24m" - crystal input - required,
->> - - "xin32k" - rtc clock - optional,
->> - - "ext_i2s" - external I2S clock - optional,
->> - - "ext_hsadc" - external HSADC clock - optional,
->> - - "ext_edp_24m" - external display port clock - optional,
->> - - "ext_vip" - external VIP clock - optional,
->> - - "ext_isp" - external ISP clock - optional,
->> - - "ext_jtag" - external JTAG clock - optional
->> -
->> -Example: Clock controller node:
->> -
->> -	cru: cru@20000000 {
->> -		compatible = "rockchip,rk3188-cru";
->> -		reg = <0x20000000 0x1000>;
->> -		rockchip,grf = <&grf>;
->> -
->> -		#clock-cells = <1>;
->> -		#reset-cells = <1>;
->> -	};
->> -
->> -Example: UART controller node that consumes the clock generated by the clock
->> -  controller:
->> -
->> -	uart0: serial@10124000 {
->> -		compatible = "snps,dw-apb-uart";
->> -		reg = <0x10124000 0x400>;
->> -		interrupts = <GIC_SPI 34 IRQ_TYPE_LEVEL_HIGH>;
->> -		reg-shift = <2>;
->> -		reg-io-width = <1>;
->> -		clocks = <&cru SCLK_UART0>;
->> -	};
->> diff --git a/drivers/clk/rockchip/clk_rk3288.c b/drivers/clk/rockchip/clk_rk3288.c
->> index 43c44fadbe7a..69a2a9429ffd 100644
->> --- a/drivers/clk/rockchip/clk_rk3288.c
->> +++ b/drivers/clk/rockchip/clk_rk3288.c
->> @@ -902,6 +902,7 @@ static int __maybe_unused rk3288_gmac_set_parent(struct clk *clk, struct clk *pa
->>   	const char *clock_output_name;
->>   	int ret;
->>   
->> +#ifdef SCLK_MAC_PLL
->>   	/*
->>   	 * If the requested parent is in the same clock-controller and
->>   	 * the id is SCLK_MAC_PLL ("mac_pll_src"), switch to the internal
->> @@ -912,6 +913,7 @@ static int __maybe_unused rk3288_gmac_set_parent(struct clk *clk, struct clk *pa
->>   		rk_clrsetreg(&cru->cru_clksel_con[21], RMII_EXTCLK_MASK, 0);
->>   		return 0;
->>   	}
->> +#endif
->>   
-> 
-> I don't really like this.
-> 
-> Could we simply remove this part of the code in one commit explaining 
-> why we remove it (in preparation of syncing the device tree and because 
-> there's currently no upstream user of that clock). It would make it much 
-> more obvious from simply the commit title that we did something more 
-> than simply using the dt-binding upstream header AND also would make it 
-> easier to revert if anybody ever needs it.
+> On 11/6/24 8:18 PM, Jon Humphreys wrote:
+>> Marek Vasut <marek.vasut@mailbox.org> writes:
+>> 
+>>> On 10/23/24 10:17 AM, Michal Simek wrote:
+>>>>
+>>>>
+>>>> On 10/22/24 23:06, Marek Vasut wrote:
+>>>>> This reverts commit 1e36d34b52e7a1ebe5a2a5339d6905540f4253aa.
+>>>>>
+>>>>> This parallel/stacked support breaks basic SPI NOR support,
+>>>>> e.g. this no longer works:
+>>>>>
+>>>>> => sf probe && sf update 0x50000000 0 0x160000
+>>>>> SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB,
+>>>>> total 64 MiB
+>>>>> device 0 offset 0x0, size 0x160000
+>>>>> SPI flash failed in read step
+>>>>
+>>>> Reverting everything seems to me too much. Tom has tested it on his HW
+>>>> and didn't see any issue. That's why better to look at code which is
+>>>> causing this.
+>>>> You are reverting everything but likely there is specific patch which is
+>>>> causing this. Which one is it?
+>>>> Which board was used for your testing? Likely we don't have access to it.
+>>>> Is there any QEMU available which can be used for debugging?
+>>>
+>>> The testcase including the exact SPI NOR model is above.
+>>>
+>>> iMX6 with w25q16dw seems to be broken too.
+>>>
+>>> Basically every board I have access no longer has a working "sf probe ;
+>>> sf update" combination ... so yeah, this means this patchset is
+>>> fundamentally broken.
+>>>
+>> 
+>> I can also confirm that the patch series:
+>> 
+>> f8efc68b30e Merge patch series "spi-nor: Add parallel and stacked memories
+>> support"
+>> 
+>> breaks SPI NOR on TI platforms, particularly SK-AM62 and SK-AM62P:
+>> 
+>> U-Boot 2024.10-00752-gf8efc68b30e2 (Nov 06 2024 - 12:25:13 -0600)
+>> 
+>> SoC:   AM62X SR1.0 HS-FS
+>> Model: Texas Instruments AM625 SK
+>> ...
+>> Hit any key to stop autoboot:  0
+>> => sf probe && sf update ${loadaddr} 0x400000 0x10
+>> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
+>> device 0 offset 0x400000, size 0x10
+>> SPI flash failed in read step
+>> =>
+> Sigh ... can you please test current u-boot/master and see if the error 
+> is fixed there ?
+>
 
-Will split/add a commit to remove the code for SCLK_MAC_PLL in a v2.
+Yes I had verified it also fails against master, although the behavior was
+a bit different.  The .'s below are our DMA engine waiting indefinitely.
 
-> 
-> Another option is to upstream that in the Linux kernel first and then we 
-> don't have to work around that issue. That may be a bit more difficult 
-> if there are currently no actual (known) users of that clock.
+=> sf probe && sf update ${loadaddr} 0x400000 0x10
+SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
+device 0 offset 0x400000, size 0x10
+.....................................................
 
-Did a grep for SCLK_MAC_PLL in vendor u-boot, linux 4.4/4.19/5.10/6.1
-and cannot find any reference of SCLK_MAC_PLL, beside rockchip-dwmac.txt:
+I have not investigated further.
 
-  - assigned-clocks: main clock, should be <&cru SCLK_MAC>;
-  - assigned-clock-parents = parent of main clock.
-    can be <&ext_gmac> or <&cru SCLK_MAC_PLL>.
+Jon
 
-Think I prefer to just remove the code from U-Boot :-)
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
-
+> We really should've gone with a full revert I think ...
