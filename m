@@ -4,75 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6211D40D13
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 01:09:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F0A0D3176A
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 01:25:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D8F588D09;
-	Wed,  6 Nov 2024 02:09:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A9C3D89076;
+	Wed,  6 Nov 2024 02:25:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z4W005qi";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7519B88E0F; Wed,  6 Nov 2024 02:09:18 +0100 (CET)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1730856340;
+	bh=UK4t4D/LDFSKdEz2ulBRT+IeHdBKXdg221vA/yZn6X0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=OSRYnbcVV3XTw74c/XDVKs1SuSn6fIStB8UqAJL7UCCx2hLC1xHYWaE+pUoOkAP6U
+	 rwzlZRyTvw9H4r+SiaGu0oYyYsGJ8dH/sU2V53nBLjtcKq5TxLPRuE5FxgkPk/Ydvw
+	 6dW5knlubB9DXgdC9qe8Ofywk10tgFZH7vFsHFHO+lYLY5E5vAjqW6p7empFtdD6DU
+	 9iTp0D2jaswaGqdH3dEHz+n5hPKOqIzgoEEozDac31sb5BHvrGEhKUlUxBUxYhI+h0
+	 yIkqwsyO7uwmcY1cNDV4IaBxhTyjuODE+LhDkRjFI9eNJjv17mspw3qWlLZ/P41MTE
+	 E8Q8tLubY64OQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35ABD88B64
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 02:09:15 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e2e2baf1087so5719522276.2
- for <u-boot@lists.denx.de>; Tue, 05 Nov 2024 17:09:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730855354; x=1731460154; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gd+TjaX/hE5itWZD9v/rEy/7BNji3T5L81P81pMfSFw=;
- b=z4W005qi70FlOTbqpoCkz7qLQlYBUvVJScudMDzuy1XS7GO9h+RWZLj+ER5oFbpM79
- GOprAHMWG8LUry7XQtJLe8oPdx4FaaqqnC7G9AppmBIGZSSDG9hZStIXtKzpvqLmNgfh
- ikJKnoSfroHurBcfV6e7nEJF8ynh0HZ56UrR4lp4IpkxDTV3QWeQpxnpKLeoYc0cSFTC
- Sqq6HH+wGRpiY/HHtdtprtLSTTruX/8u/JXEFhG4DlKI2bLBnaV5vSUXfIIZukaMnB+N
- 4CmPX8nGtQXwgrRFE8nQxttNSf1TwSO0nkHy+UlwLCKr9MR9Ts3dBjAW3Oj3DemyqSuc
- BrtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730855354; x=1731460154;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gd+TjaX/hE5itWZD9v/rEy/7BNji3T5L81P81pMfSFw=;
- b=JPKnHsHgUlQ3qwLO8mvOZ5GjiSS1TdvVEs3PTBS5Pvu16dQPNcPH96lxdH6XDGH/iq
- 6GDj/vS3QDzrMaIUHAzSh5ZpLev3528i77Cb0tlrhcq9L3INbpIXeHjz6oRky05sgSRr
- bWqPqge2fUMNXWcg9FZjSpsXnFTw5TWtxhP42ldps3+LPn4uVJaVC59kIPl0dZcwp/zs
- bRgWqm3a1BDhOoZvbeNRSlrcY9FWkAuiBO34MX63IivDY1htZVLART+ixjnneVnBV9A1
- ZR45PxRPqos90zkId1jP21zbpHyWkeG0q/VkKcSQJ8n+Op0ZBEt62iztEtlVXlvL/fTC
- Ii7w==
-X-Gm-Message-State: AOJu0YzgQbfPkmeNicW8uM66tpaXF1EggfPi5HI9Cy2gfvrA2RddOqLT
- 6FAWmNJRBJvb2LqaXEedIU9d+LqiHHYAiCouuxiiLY7PDeBGQ8pyF6sb2BOdvS75Rn5dpkGNoCL
- +ClK/7ni3orRmvvSaSLv54gzTcpBmAoO3vEx5TA==
-X-Google-Smtp-Source: AGHT+IEVVkqxj3H9Pdb+FJasmNoj8WuOhL/pOO3lLqiVQSynl9wTMjWz0H4hTosJdB6OjWW3gsofhGTT+YXiqcyhuoo=
-X-Received: by 2002:a05:690c:690c:b0:6e2:a129:1623 with SMTP id
- 00721157ae682-6ea64be680dmr190995637b3.38.1730855354018; Tue, 05 Nov 2024
- 17:09:14 -0800 (PST)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 700AA88D9B;
+ Wed,  6 Nov 2024 02:25:39 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1730856339;
+ bh=UK4t4D/LDFSKdEz2ulBRT+IeHdBKXdg221vA/yZn6X0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=xqNk+i8VLRO5yqu2tA0I6NKSN8F9IuN6+sBE9gvGnu4UYzgsttacQjfZf4kHuI541
+ NWVqEmbWQYctZiFFF13ZeuAMZT3dQGyBr6nkYA+nKpGo8do3wiTwiKpCMKyW6CEa3l
+ V0pCOMN0JtBiKYjbNnGMU4MR28s+Ab3fsUbataWn/9oA7d8ZYB27wmtt2TTEc0enao
+ m3N7X+znIenswQnfjARe3Z7SOzx3A7NobS/QT1RJu0+QNx6Ti2vqFUqjq5TCNcWSPV
+ 9/HuXBZhcRB+YHmoynmyEuOij592uEQ7TcSPu0R9xfPcwZk9ef1r8mHGCGu7iFvBG1
+ 4V2WW7UjJmoDQ==
+Message-ID: <1ab82f5b-6e89-4c1d-990e-3936c8ffa489@denx.de>
+Date: Wed, 6 Nov 2024 01:34:12 +0100
 MIME-Version: 1.0
-References: <20241031220605.31684-1-semen.protsenko@linaro.org>
- <91b284bc-b3ca-4475-8e27-01ece4ef10e4@gmx.de>
-In-Reply-To: <91b284bc-b3ca-4475-8e27-01ece4ef10e4@gmx.de>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Tue, 5 Nov 2024 19:09:03 -0600
-Message-ID: <CAPLW+4mzyhQyNkJe7fu7PS+A+KLEvEEM1Be-DXnY1SsZ=cLm6g@mail.gmail.com>
-Subject: Re: [PATCH] armv8: cpu: Implement allow_unaligned()
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 1/7] usb: onboard-hub: Add reset-gpio support
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: michal.simek@amd.com, fabrice.gasnier@foss.st.com, git@amd.com
+References: <20241030064314.28604-1-venkatesh.abbarapu@amd.com>
+ <20241030064314.28604-2-venkatesh.abbarapu@amd.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241030064314.28604-2-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,41 +69,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Nov 1, 2024 at 6:46=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@gmx=
-.de> wrote:
->
-
-[snip]
-
-> > +void allow_unaligned(void)
-> > +{
-> > +     set_sctlr(get_sctlr() & ~CR_A);
->
-> Looking at the ARM documentation SCTLR_EL2 is a 64bit register.
->
-> https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Registers=
-/SCTLR-EL2--System-Control-Register--EL2-?lang=3Den
->
-> But get_sctlr() is defined as
->
-> arch/arm/include/asm/system.h:174:
-> static inline unsigned int get_sctlr(void)
->
-> Your code might not work as expected. Should we adjust the definition of
-> get_sctlr() to return a long value?
->
-
-Hi Heinrich,
-
-Good catch! I totally overlooked it. And it's already used in a
-similar way in a couple of different places. I'll handle that in my v2
-soon.
-
-Thanks!
-
-> Best regards
->
-> Heinrich
->
-> > +}
->
+On 10/30/24 7:43 AM, Venkatesh Yadav Abbarapu wrote:
+> As part of the reset, sets the direction of the pin to output before
+> toggling the pin. Delay of millisecond is added in between low and
+> high to meet the setup and hold time requirement of the reset.
+> 
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> Reviewed-by: Marek Vasut <marex@denx.de>
+> ---
+>   common/usb_onboard_hub.c | 42 +++++++++++++++++++++++++++++++++++++++-
+>   1 file changed, 41 insertions(+), 1 deletion(-)
+> 
+> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
+> index 68a04ac041..4174575893 100644
+> --- a/common/usb_onboard_hub.c
+> +++ b/common/usb_onboard_hub.c
+> @@ -7,14 +7,51 @@
+>    * Mostly inspired by Linux kernel v6.1 onboard_usb_hub driver
+>    */
+>   
+> +#include <asm/gpio.h>
+>   #include <dm.h>
+>   #include <dm/device_compat.h>
+> +#include <linux/delay.h>
+>   #include <power/regulator.h>
+>   
+>   struct onboard_hub {
+>   	struct udevice *vdd;
+> +	struct gpio_desc *reset_gpio;
+>   };
+>   
+> +struct onboard_hub_data {
+> +	unsigned long reset_us;
+> +	unsigned long power_on_delay_us;
+> +};
+> +
+> +int usb_onboard_hub_reset(struct udevice *dev)
+> +{
+> +	struct onboard_hub_data *data =
+> +		(struct onboard_hub_data *)dev_get_driver_data(dev);
+> +	struct onboard_hub *hub = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	hub->reset_gpio = devm_gpiod_get_optional(dev, "reset",
+> +						  GPIOD_IS_OUT | GPIOD_ACTIVE_LOW);
+Is the reset GPIO always active low or should this respect the GPIO 
+flags in DT instead ?
