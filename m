@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A38D59F73
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 20:50:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D07D59F73
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 21:10:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 610C388DB6;
-	Wed,  6 Nov 2024 21:50:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D729288E26;
+	Wed,  6 Nov 2024 22:10:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="l2AnTTFl";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CnAoFidl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1365188E63; Wed,  6 Nov 2024 21:50:42 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 99570891BC; Wed,  6 Nov 2024 22:10:22 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10F2388DB2
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 21:50:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6001588E26
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 22:10:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4XkHR20Hqhz9tGj;
- Wed,  6 Nov 2024 21:50:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1730926238;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Adsvp/X+ew1+kO3La/O3fY9tUd7tBNOZAxDQ2V46kCI=;
- b=l2AnTTFlScEWS0GuZsneVbfypJBIFIFrByfhRtfvSELBI0B+gVxjYyPKGEGY5dxfExUG1x
- gnA7L5MBIbbVSOOqiaSv9SaoyaIUlHSeEZ8DAu5MSf3wu20uogo6CixSoOrkr+FiNpadwu
- j5P+KLMiL/VkjU7pCnK/8xPfeYBd0LmFw3K01ui0wCtPGBItUSLLBozffGdpHJrpeuvkuw
- dXU/jZ6k/h2nYrbb3JAvAVOQeHivduPGccfTodLxKWnRSTo0aW0LfDFdqdAwAWgyiDyP6E
- 1s45KJeCSsDBHTuauvXJanIAjUMA5L6ggTGwn50O6f+QaLbmap9zsPssdt541w==
-Message-ID: <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
-Date: Wed, 6 Nov 2024 21:50:33 +0100
+ spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 3C5A05C4B4F;
+ Wed,  6 Nov 2024 21:09:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 96694C4CECD;
+ Wed,  6 Nov 2024 21:10:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1730927418;
+ bh=UGv881BZFI/XtWoTLXqtNBC/qaLzotK6A0rQ/RIzd2Q=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=CnAoFidl9fCTzoohzJBu8F06voFUTjM5Pn4pri0bzLNKSriThzXMJ5dll5F8Ty603
+ wApQ6MR3bAos013GUEjxu+1Cns8SpJ3JIQcyjzA/WeUeewt+1M7UIFZw0aE+PvPDZ1
+ UBkuNNUT5IWTkxKmFmFXU0/nAHeW1yq3oVbCd5oS9OMlyT106IdwBQMgqPErX5+uq6
+ 0MK5Hc/g7Ye7cjnVx33oY3VAO+E/WBS+QDFyz5dcJZnLjFOC1/WNXOaSpciwzt8I7P
+ whvH5Be32W198Q3Y7rcrrLQFVEUppN2EeRYO4tQ3rxz3IruiLyvytx0QDr3vxQcZoY
+ JxjdzhjqMpecA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 8D8E0D59F78;
+ Wed,  6 Nov 2024 21:10:18 +0000 (UTC)
+From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
+Date: Wed, 06 Nov 2024 22:10:11 +0100
+Subject: [PATCH v2 3/4] lmb: Add basic io_lmb functionality
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories support
- in QSPI driver"
-To: Jon Humphreys <j-humphreys@ti.com>, Michal Simek <michal.simek@amd.com>,
- u-boot@lists.denx.de
-Cc: Andre Przywara <andre.przywara@arm.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Michael Walle <mwalle@kernel.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, Tom Rini
- <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
- <b9cb3ec8-b6f2-4f38-8cda-d3d10278f503@amd.com>
- <e9929e0c-aa43-428f-8bf7-7b4cdef0e9c3@mailbox.org>
- <86v7x05fyd.fsf@udb0321960.dhcp.ti.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <86v7x05fyd.fsf@udb0321960.dhcp.ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: c8kop66z7ecqt676niammtwd5jwfjpk9
-X-MBO-RS-ID: a5578197f46efe02cc7
+Message-Id: <20241106-io_lmb_apple_dart_iommu-v2-3-0580f4bdb023@jannau.net>
+References: <20241106-io_lmb_apple_dart_iommu-v2-0-0580f4bdb023@jannau.net>
+In-Reply-To: <20241106-io_lmb_apple_dart_iommu-v2-0-0580f4bdb023@jannau.net>
+To: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5309; i=j@jannau.net;
+ s=yk2024; h=from:subject:message-id;
+ bh=0j2C6WFeoX5ye6bC9jhyIVnmKclbPYcLT5Ooegg+HRE=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhnTt2xaut/2/v1x8Mcb1YYpRSMLrJ8ss5VsP7fwY+LZ03
+ 03mWyErOkpZGMS4GGTFFFmStF92MKyuUYypfRAGM4eVCWQIAxenAExEfz3DP9vpM9tCn7bstinq
+ nOBrFbmG1/zPzuAz1oxib/4wMk1KZWdkuHv5TLpbgNrWB5zGiS3fn9uGLp7dlCse9OxMsHb8RGk
+ +HgA=
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
+X-Endpoint-Received: by B4 Relay for j@jannau.net/yk2024 with auth_id=264
+X-Original-From: Janne Grunau <j@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,65 +79,184 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j@jannau.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/6/24 8:18 PM, Jon Humphreys wrote:
-> Marek Vasut <marek.vasut@mailbox.org> writes:
-> 
->> On 10/23/24 10:17 AM, Michal Simek wrote:
->>>
->>>
->>> On 10/22/24 23:06, Marek Vasut wrote:
->>>> This reverts commit 1e36d34b52e7a1ebe5a2a5339d6905540f4253aa.
->>>>
->>>> This parallel/stacked support breaks basic SPI NOR support,
->>>> e.g. this no longer works:
->>>>
->>>> => sf probe && sf update 0x50000000 0 0x160000
->>>> SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB,
->>>> total 64 MiB
->>>> device 0 offset 0x0, size 0x160000
->>>> SPI flash failed in read step
->>>
->>> Reverting everything seems to me too much. Tom has tested it on his HW
->>> and didn't see any issue. That's why better to look at code which is
->>> causing this.
->>> You are reverting everything but likely there is specific patch which is
->>> causing this. Which one is it?
->>> Which board was used for your testing? Likely we don't have access to it.
->>> Is there any QEMU available which can be used for debugging?
->>
->> The testcase including the exact SPI NOR model is above.
->>
->> iMX6 with w25q16dw seems to be broken too.
->>
->> Basically every board I have access no longer has a working "sf probe ;
->> sf update" combination ... so yeah, this means this patchset is
->> fundamentally broken.
->>
-> 
-> I can also confirm that the patch series:
-> 
-> f8efc68b30e Merge patch series "spi-nor: Add parallel and stacked memories
-> support"
-> 
-> breaks SPI NOR on TI platforms, particularly SK-AM62 and SK-AM62P:
-> 
-> U-Boot 2024.10-00752-gf8efc68b30e2 (Nov 06 2024 - 12:25:13 -0600)
-> 
-> SoC:   AM62X SR1.0 HS-FS
-> Model: Texas Instruments AM625 SK
-> ...
-> Hit any key to stop autoboot:  0
-> => sf probe && sf update ${loadaddr} 0x400000 0x10
-> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
-> device 0 offset 0x400000, size 0x10
-> SPI flash failed in read step
-> =>
-Sigh ... can you please test current u-boot/master and see if the error 
-is fixed there ?
+From: Janne Grunau <j@jannau.net>
 
-We really should've gone with a full revert I think ...
+These functions can be used with struct lmb pointers and will be used to
+manage IOVA space in the apple_dart iommu driver. This restores part of
+the pointer base struct lmb API from before commit ed17a33fed29 ("lmb:
+make LMB memory map persistent and global").
+io_lmb_add() and io_lmb_free() can trivially reuse exisiting lmb
+functions. io_lmb_setup() is separate for unique error log messages.
+io_lmb_alloc() is a simplified copy of _lmb_alloc_base() since the
+later has unused features and internal use of the global LMB memory map.
+
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+ include/lmb.h | 51 +++++++++++++++++++++++++++++++++++++
+ lib/lmb.c     | 80 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 131 insertions(+)
+
+diff --git a/include/lmb.h b/include/lmb.h
+index 2201d6f2b67bb605dbff015fa2a6a008b780c57a..fa91bf17adea84d335ba43ee7749e2a12a1d44c0 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -156,6 +156,57 @@ static inline int lmb_read_check(phys_addr_t addr, phys_size_t len)
+ 	return lmb_alloc_addr(addr, len) == addr ? 0 : -1;
+ }
+ 
++/**
++ * io_lmb_setup() - Initialize LMB struct
++ * @lmb: IO LMB to initialize
++ *
++ * Returns: 0 on success, negative error code on failure
++ */
++int io_lmb_setup(struct lmb *io_lmb);
++
++/**
++ * io_lmb_teardown() - Tear LMB struct down
++ * @lmb: IO LMB to teardown
++ */
++void io_lmb_teardown(struct lmb *io_lmb);
++
++/**
++ * io_lmb_add() - Add an IOVA range for allocations
++ * @io_lmb: LMB to add the space to
++ * @base: Base Address of region to add
++ * @size: Size of the region to add
++ *
++ * Add the IOVA space [base, base + size] to be managed by io_lmb.
++ *
++ * Returns: 0 if the region addition was successful, -1 on failure
++ */
++long io_lmb_add(struct lmb *io_lmb, phys_addr_t base, phys_size_t size);
++
++/**
++ * io_lmb_alloc() - Allocate specified IO memory address with specified alignment
++ * @io_lmb: LMB to alloc from
++ * @size: Size of the region requested
++ * @align: Required address and size alignment
++ *
++ * Allocate a region of IO memory. The base parameter is used to specify the
++ * base address of the requested region.
++ *
++ * Return: base IO address on success, 0 on error
++ */
++phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align);
++
++/**
++ * io_lmb_free() - Free up a region of IOVA space
++ * @io_lmb: LMB to return the IO address space to
++ * @base: Base Address of region to be freed
++ * @size: Size of the region to be freed
++ *
++ * Free up a region of IOVA space.
++ *
++ * Return: 0 if successful, -1 on failure
++ */
++long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size);
++
+ #endif /* __KERNEL__ */
+ 
+ #endif /* _LINUX_LMB_H */
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 2ce91f7521cfe58577b092fdaea8004b17f0eeff..cfc1763e49a76c6d4d9c85cd2b0342c6e0a7c4cf 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -351,6 +351,86 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+ 	return addr & ~(size - 1);
+ }
+ 
++/*
++ * IOVA LMB memory maps using lmb pointers instead of the global LMB memory map.
++ */
++
++int io_lmb_setup(struct lmb *io_lmb)
++{
++	int ret;
++
++	ret = alist_init(&io_lmb->free_mem, sizeof(struct lmb_region),
++			 (uint)LMB_ALIST_INITIAL_SIZE);
++	if (!ret) {
++		log_debug("Unable to initialise the list for LMB free IOVA\n");
++		return -ENOMEM;
++	}
++
++	ret = alist_init(&io_lmb->used_mem, sizeof(struct lmb_region),
++			 (uint)LMB_ALIST_INITIAL_SIZE);
++	if (!ret) {
++		log_debug("Unable to initialise the list for LMB used IOVA\n");
++		return -ENOMEM;
++	}
++
++	io_lmb->test = false;
++
++	return 0;
++}
++
++void io_lmb_teardown(struct lmb *io_lmb)
++{
++	alist_uninit(&io_lmb->free_mem);
++	alist_uninit(&io_lmb->used_mem);
++}
++
++long io_lmb_add(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
++{
++	return lmb_add_region_flags(&io_lmb->free_mem, base, size, LMB_NONE);
++}
++
++/* derived and simplified from _lmb_alloc_base() */
++phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align)
++{
++	long i, rgn;
++	phys_addr_t base = 0;
++	phys_addr_t res_base;
++	struct lmb_region *lmb_used = io_lmb->used_mem.data;
++	struct lmb_region *lmb_memory = io_lmb->free_mem.data;
++
++	for (i = io_lmb->free_mem.count - 1; i >= 0; i--) {
++		phys_addr_t lmbbase = lmb_memory[i].base;
++		phys_size_t lmbsize = lmb_memory[i].size;
++
++		if (lmbsize < size)
++			continue;
++		base = lmb_align_down(lmbbase + lmbsize - size, align);
++
++		while (base && lmbbase <= base) {
++			rgn = lmb_overlaps_region(&io_lmb->used_mem, base, size);
++			if (rgn < 0) {
++				/* This area isn't reserved, take it */
++				if (lmb_add_region_flags(&io_lmb->used_mem, base,
++							 size, LMB_NONE) < 0)
++					return 0;
++
++				return base;
++			}
++
++			res_base = lmb_used[rgn].base;
++			if (res_base < size)
++				break;
++			base = lmb_align_down(res_base - size, align);
++		}
++	}
++	return 0;
++}
++
++long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
++{
++	return _lmb_free(&io_lmb->used_mem, base, size);
++}
++
+ /*
+  * Low level LMB functions are used to manage IOVA memory maps for the Apple
+  * dart iommu. They must not access the global LMB memory map.
+
+-- 
+2.47.0
+
+
