@@ -4,66 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D07D59F73
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 21:10:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BDC5D59F73
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 21:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D729288E26;
-	Wed,  6 Nov 2024 22:10:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 37A798902D;
+	Wed,  6 Nov 2024 22:10:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CnAoFidl";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="FbsSWQQc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99570891BC; Wed,  6 Nov 2024 22:10:22 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id C5EB988E26; Wed,  6 Nov 2024 22:10:22 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6001588E26
+ by phobos.denx.de (Postfix) with ESMTPS id 468CB88DDA
  for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 22:10:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 3C5A05C4B4F;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 121655C0148;
  Wed,  6 Nov 2024 21:09:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 96694C4CECD;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 72E58C4CEC6;
  Wed,  6 Nov 2024 21:10:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1730927418;
- bh=UGv881BZFI/XtWoTLXqtNBC/qaLzotK6A0rQ/RIzd2Q=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=CnAoFidl9fCTzoohzJBu8F06voFUTjM5Pn4pri0bzLNKSriThzXMJ5dll5F8Ty603
- wApQ6MR3bAos013GUEjxu+1Cns8SpJ3JIQcyjzA/WeUeewt+1M7UIFZw0aE+PvPDZ1
- UBkuNNUT5IWTkxKmFmFXU0/nAHeW1yq3oVbCd5oS9OMlyT106IdwBQMgqPErX5+uq6
- 0MK5Hc/g7Ye7cjnVx33oY3VAO+E/WBS+QDFyz5dcJZnLjFOC1/WNXOaSpciwzt8I7P
- whvH5Be32W198Q3Y7rcrrLQFVEUppN2EeRYO4tQ3rxz3IruiLyvytx0QDr3vxQcZoY
- JxjdzhjqMpecA==
+ bh=n/3JI5xKGf+0A93NRsu52l/dTr3zxXlrZHfyMEpuNCM=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=FbsSWQQclHkc2ejQEf6rSq+B0wh7Eueezwd5mOv4w6rlWZ0PAYAVIUzOu3/u3Vi62
+ 9u2gu1UBmN5cy5nbqAZxFkxainNhgLGs4E7SuK7YQKM06BokbniVdUsj8PrtJXuRZe
+ jQQrouITrQx4fQSgnYUILdPYRaP77cbczuoS8o0vj6FB32B39UfMYTSPt8iOsXcPKl
+ QOipaDmLddlx/Li2/QPZOJWdYDkeFiYWj1JeNQH96fLzgu0KSqi+HceebGbU17dws5
+ YiTmS3s+gbd8kR4ZsFjl7cBlAcDmk7LYcVWlDlSEC4+Uj4lKLwNcRwdFvsCGqiWW4e
+ 7zorSIVqlmr0Q==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 8D8E0D59F78;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 5B8FDD59F67;
  Wed,  6 Nov 2024 21:10:18 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Wed, 06 Nov 2024 22:10:11 +0100
-Subject: [PATCH v2 3/4] lmb: Add basic io_lmb functionality
+Subject: [PATCH v2 0/4] Fix IOVA allocation in Apple dart iommu after
+ global LMB mem map changes
+Date: Wed, 06 Nov 2024 22:10:08 +0100
+Message-Id: <20241106-io_lmb_apple_dart_iommu-v2-0-0580f4bdb023@jannau.net>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241106-io_lmb_apple_dart_iommu-v2-3-0580f4bdb023@jannau.net>
-References: <20241106-io_lmb_apple_dart_iommu-v2-0-0580f4bdb023@jannau.net>
-In-Reply-To: <20241106-io_lmb_apple_dart_iommu-v2-0-0580f4bdb023@jannau.net>
+X-B4-Tracking: v=1; b=H4sIADDbK2cC/4WNQQqDMBBFryKzbkqSBsWueg+REM1Yp2gSEpUW8
+ e5NvUCX78F/f4eEkTDBvdgh4kaJvMsgLwX0o3FPZGQzg+RSCcEFI6+nudMmhAm1NXHR5Od5Zba
+ XZaVwqPmthLwOEQd6n+WmzTxSWnz8nEeb+Nn/zU0wzgZUXW0qZVXVP17GObNeHS7QHsfxBcZy2
+ XC/AAAA
+X-Change-ID: 20241101-io_lmb_apple_dart_iommu-dc2674ef9036
 To: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
  Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5309; i=j@jannau.net;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2221; i=j@jannau.net;
  s=yk2024; h=from:subject:message-id;
- bh=0j2C6WFeoX5ye6bC9jhyIVnmKclbPYcLT5Ooegg+HRE=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhnTt2xaut/2/v1x8Mcb1YYpRSMLrJ8ss5VsP7fwY+LZ03
- 03mWyErOkpZGMS4GGTFFFmStF92MKyuUYypfRAGM4eVCWQIAxenAExEfz3DP9vpM9tCn7bstinq
- nOBrFbmG1/zPzuAz1oxib/4wMk1KZWdkuHv5TLpbgNrWB5zGiS3fn9uGLp7dlCse9OxMsHb8RGk
- +HgA=
+ bh=n/3JI5xKGf+0A93NRsu52l/dTr3zxXlrZHfyMEpuNCM=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhnTt2xZWBseXzbj9Y1/Ju93r+uMTMnn3TYvVfTZzVUZqZ
+ neqqFpfRykLgxgXg6yYIkuS9ssOhtU1ijG1D8Jg5rAygQxh4OIUgIkc/sHwPzr94x7Oe6Za/+7a
+ lfNuN7AQLDy63VV9dcrC9Gl/zK9cmcTIcJH9bM6L2Ftl5yeV/3oW+vlP9tlPE3d/O/vAz/pWSHr
+ UYyYA
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/yk2024 with auth_id=264
@@ -85,178 +90,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Janne Grunau <j@jannau.net>
+The changes in "Make LMB memory map global and persistent" [1] break
+mapping DMA memory in the USB xHCI driver when using the apple_dart
+iommu present on Apple silicon systems.
 
-These functions can be used with struct lmb pointers and will be used to
-manage IOVA space in the apple_dart iommu driver. This restores part of
-the pointer base struct lmb API from before commit ed17a33fed29 ("lmb:
-make LMB memory map persistent and global").
-io_lmb_add() and io_lmb_free() can trivially reuse exisiting lmb
-functions. io_lmb_setup() is separate for unique error log messages.
-io_lmb_alloc() is a simplified copy of _lmb_alloc_base() since the
-later has unused features and internal use of the global LMB memory map.
+The IOVA space used by the u-boot driver (low 4GB) and physical memory
+do not overlap. The physical memory on this systems starts depending on
+the SoC either at 0x10_0000_0000 or 0x100_0000_0000. It make no sense to
+manage these distinct regions in a single LMB map. In addition every
+device has its own iommu and IO address space so sharing a single memory
+map between all iommu instances is not necessary.
+
+To fix this issue restore the used subset (add, alloc and free) of the
+previous pointer based LMB interface with "io_" as prefix.
+
+To ensure that low level lmb functions do not use the global LMB
+variable reorder lib/lmb.c so that the variable is not visible.
+
+Tested with patches from my "Fix device removal order for Apple dart
+iommu" series [2] to fix a separate issue.
+
+The cosmetic commit has two checkpatch warnings in existing code which I
+ignored.
+
+[1] https://lore.kernel.org/u-boot/20240826115940.3233167-1-sughosh.ganu@linaro.org/
+[2] https://lore.kernel.org/u-boot/20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net/
 
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- include/lmb.h | 51 +++++++++++++++++++++++++++++++++++++
- lib/lmb.c     | 80 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 131 insertions(+)
+Changes in v2:
+- added io_lmb_teardown() and use it in dart's remove callback
+- removed leftover from copy-n-paste in io_lmb_setup() documentation
+- added Tom's Rb:
+- Link to v1: https://lore.kernel.org/r/20241101-io_lmb_apple_dart_iommu-v1-0-fe4b9a74d47c@jannau.net
 
-diff --git a/include/lmb.h b/include/lmb.h
-index 2201d6f2b67bb605dbff015fa2a6a008b780c57a..fa91bf17adea84d335ba43ee7749e2a12a1d44c0 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -156,6 +156,57 @@ static inline int lmb_read_check(phys_addr_t addr, phys_size_t len)
- 	return lmb_alloc_addr(addr, len) == addr ? 0 : -1;
- }
- 
-+/**
-+ * io_lmb_setup() - Initialize LMB struct
-+ * @lmb: IO LMB to initialize
-+ *
-+ * Returns: 0 on success, negative error code on failure
-+ */
-+int io_lmb_setup(struct lmb *io_lmb);
-+
-+/**
-+ * io_lmb_teardown() - Tear LMB struct down
-+ * @lmb: IO LMB to teardown
-+ */
-+void io_lmb_teardown(struct lmb *io_lmb);
-+
-+/**
-+ * io_lmb_add() - Add an IOVA range for allocations
-+ * @io_lmb: LMB to add the space to
-+ * @base: Base Address of region to add
-+ * @size: Size of the region to add
-+ *
-+ * Add the IOVA space [base, base + size] to be managed by io_lmb.
-+ *
-+ * Returns: 0 if the region addition was successful, -1 on failure
-+ */
-+long io_lmb_add(struct lmb *io_lmb, phys_addr_t base, phys_size_t size);
-+
-+/**
-+ * io_lmb_alloc() - Allocate specified IO memory address with specified alignment
-+ * @io_lmb: LMB to alloc from
-+ * @size: Size of the region requested
-+ * @align: Required address and size alignment
-+ *
-+ * Allocate a region of IO memory. The base parameter is used to specify the
-+ * base address of the requested region.
-+ *
-+ * Return: base IO address on success, 0 on error
-+ */
-+phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align);
-+
-+/**
-+ * io_lmb_free() - Free up a region of IOVA space
-+ * @io_lmb: LMB to return the IO address space to
-+ * @base: Base Address of region to be freed
-+ * @size: Size of the region to be freed
-+ *
-+ * Free up a region of IOVA space.
-+ *
-+ * Return: 0 if successful, -1 on failure
-+ */
-+long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size);
-+
- #endif /* __KERNEL__ */
- 
- #endif /* _LINUX_LMB_H */
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 2ce91f7521cfe58577b092fdaea8004b17f0eeff..cfc1763e49a76c6d4d9c85cd2b0342c6e0a7c4cf 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -351,6 +351,86 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
- 	return addr & ~(size - 1);
- }
- 
-+/*
-+ * IOVA LMB memory maps using lmb pointers instead of the global LMB memory map.
-+ */
-+
-+int io_lmb_setup(struct lmb *io_lmb)
-+{
-+	int ret;
-+
-+	ret = alist_init(&io_lmb->free_mem, sizeof(struct lmb_region),
-+			 (uint)LMB_ALIST_INITIAL_SIZE);
-+	if (!ret) {
-+		log_debug("Unable to initialise the list for LMB free IOVA\n");
-+		return -ENOMEM;
-+	}
-+
-+	ret = alist_init(&io_lmb->used_mem, sizeof(struct lmb_region),
-+			 (uint)LMB_ALIST_INITIAL_SIZE);
-+	if (!ret) {
-+		log_debug("Unable to initialise the list for LMB used IOVA\n");
-+		return -ENOMEM;
-+	}
-+
-+	io_lmb->test = false;
-+
-+	return 0;
-+}
-+
-+void io_lmb_teardown(struct lmb *io_lmb)
-+{
-+	alist_uninit(&io_lmb->free_mem);
-+	alist_uninit(&io_lmb->used_mem);
-+}
-+
-+long io_lmb_add(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
-+{
-+	return lmb_add_region_flags(&io_lmb->free_mem, base, size, LMB_NONE);
-+}
-+
-+/* derived and simplified from _lmb_alloc_base() */
-+phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align)
-+{
-+	long i, rgn;
-+	phys_addr_t base = 0;
-+	phys_addr_t res_base;
-+	struct lmb_region *lmb_used = io_lmb->used_mem.data;
-+	struct lmb_region *lmb_memory = io_lmb->free_mem.data;
-+
-+	for (i = io_lmb->free_mem.count - 1; i >= 0; i--) {
-+		phys_addr_t lmbbase = lmb_memory[i].base;
-+		phys_size_t lmbsize = lmb_memory[i].size;
-+
-+		if (lmbsize < size)
-+			continue;
-+		base = lmb_align_down(lmbbase + lmbsize - size, align);
-+
-+		while (base && lmbbase <= base) {
-+			rgn = lmb_overlaps_region(&io_lmb->used_mem, base, size);
-+			if (rgn < 0) {
-+				/* This area isn't reserved, take it */
-+				if (lmb_add_region_flags(&io_lmb->used_mem, base,
-+							 size, LMB_NONE) < 0)
-+					return 0;
-+
-+				return base;
-+			}
-+
-+			res_base = lmb_used[rgn].base;
-+			if (res_base < size)
-+				break;
-+			base = lmb_align_down(res_base - size, align);
-+		}
-+	}
-+	return 0;
-+}
-+
-+long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
-+{
-+	return _lmb_free(&io_lmb->used_mem, base, size);
-+}
-+
- /*
-  * Low level LMB functions are used to manage IOVA memory maps for the Apple
-  * dart iommu. They must not access the global LMB memory map.
+---
+Janne Grunau (4):
+      lmb: Do not use global LMB variable in _lmb_free()
+      lmb: cosmetic: reorder functions and global LMB variable
+      lmb: Add basic io_lmb functionality
+      iommu: apple: Manage IOVA separately from global LMB mem map
 
+ drivers/iommu/apple_dart.c |  18 +-
+ include/lmb.h              |  51 ++++
+ lib/lmb.c                  | 614 ++++++++++++++++++++++++++-------------------
+ 3 files changed, 418 insertions(+), 265 deletions(-)
+---
+base-commit: 1d147b74f437fb0e85821e8271fe52bc5fd30194
+change-id: 20241101-io_lmb_apple_dart_iommu-dc2674ef9036
+
+Best regards,
 -- 
-2.47.0
+Janne Grunau <j@jannau.net>
 
 
