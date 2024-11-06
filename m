@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E9BFD59F52
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 16:10:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CECDFD59F50
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 16:11:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2FBB8900E;
-	Wed,  6 Nov 2024 17:10:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 51D43891D2;
+	Wed,  6 Nov 2024 17:11:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b9Qh9xTz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BhrzWgUV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 739BC88F92; Wed,  6 Nov 2024 17:10:36 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id C8A6988F92; Wed,  6 Nov 2024 17:11:05 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6385589020
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 17:10:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D50FF891D2
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 17:10:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bigunclemax@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9eb68e0bd1so259190566b.3
- for <u-boot@lists.denx.de>; Wed, 06 Nov 2024 08:10:33 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a99eb8b607aso902668766b.2
+ for <u-boot@lists.denx.de>; Wed, 06 Nov 2024 08:10:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730909433; x=1731514233; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1730909458; x=1731514258; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5Hj2DlYDz3/TnNaGZcvHVG/u4NpWJ1Cs2HeE9Re98qw=;
- b=b9Qh9xTz/OlBY9pDAZsLQWEhINsI5pXx2Eg2e6/ZiW30NFsM9HcO6Ta/60LFJbAhPk
- FppKGYV2wmAOAEeNRQ/0WVox0MoCa5jf9kEKaKBvseueGSd9f3+WUmJl8N85KAq1guoB
- f7VbT1DGlFx1yXk+wQn4wE7A4es8WXmAKC2UrBak6XPt0rCERXBrCMtQOJMeKZji6Up4
- mTDN2zEGsj/ghpq5KwqxMqLqJl4XRLro2scUiRWYWpCvKjZFAGfHhNhGt/9HA18Y5+Qf
- kwhAAJmez4toOJHbsTceZYgBbBbiodsQO5nwOg/gpQW6ra2+Gp4TCKdzC/x/t8nw2fmO
- oXmw==
+ bh=Eu5E42xuBa2g4RsMh05pISjBBd6t2TEkK4oOJFuRcCw=;
+ b=BhrzWgUVehKurPVv8Z9jCnvFb+7wsVjniPuuYQg9jHQBhvJ5rXHx2bHSYU7tTv4rVa
+ Uuj2A/P30/AzEQuIP0JDWnwMYMNUQlGx246oWjLhP7HGl43+2FD722+CwRVX6JHocy3z
+ dhnACdxo7GRU/c6yLzi4fVNfjN9KSTw1EbhCddzQTA46ukJi3TJ321b8LI7H8gfJTZmF
+ dy8TJON1NJrZjL47hofExCWf/+64iPzBWgnE0BoSQBXZXlcGD2AjY40n7AKENG7amaTW
+ 3+u0YzuAEzOuxPdwwakV/MfrpF4ddloSgNfw7Nx3P6OBIaIigl5sfcM+At5ebYaumvIa
+ 6bMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730909433; x=1731514233;
+ d=1e100.net; s=20230601; t=1730909458; x=1731514258;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5Hj2DlYDz3/TnNaGZcvHVG/u4NpWJ1Cs2HeE9Re98qw=;
- b=RNmBE2qYw6a13qOuwSZsNc7LAVfaj5jfHROH+qndVOIRxiec3cTIvwwRZGuoI1GyQD
- 7g1VmzYlMyHvnc+XZzHcwKnHxhsqzM1/4ncZrR3a/xHO6cLAqX+kvH/UaGR6I0U296y8
- vls8m8XowQZTtX+Km/C/n4ZXMWV/wg9WFu/pR3DYXxbN/Ba7qONN7eazeY7iX8MjrWSP
- 1YGfvk+/S9zphZch8ithrIQhAkbYe6EIXq2aeh5YcklQsHa0llBNOdB6ZhN63QTIYoQx
- Hg+8EnCFMIFmSMTLM9Bl60BzRBxDXf7fUXN1NQKTW5NnvAqbQQS+5W4HjpRZxPGQsWWh
- jGSg==
+ bh=Eu5E42xuBa2g4RsMh05pISjBBd6t2TEkK4oOJFuRcCw=;
+ b=kMElIojP2OjwW5I/NiQgirZoRhAFSpck0ZnqjTgIPxdu1i5POMRsmlHBjFWM4thPpY
+ 3j+xlENYD/zXFe4l4AGyUUmNf9epiY5w4ewuAunhRKrPbiJK6rl0mbjr285qh4X3m80b
+ sikVwOllWqUyBnV34ZoQV5D5wQBVOzPmqDycHJb970YAjJjdGHLW9mGbiwfvxhduB9ak
+ MbnPTsm0k9rnUxCCXX1pYYJzQoZNHmxMvs6Ir++l7fpnbl9FCReFxwkjBFkJZFDg0waH
+ u9NTkEJmZwVaXmT4mdNs/WDzXRU4aJsLvV3QWs6gJcpk2yKiPwWUzEKwfQBqWLFv2y+A
+ XZog==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXcaaK/mkwmOpov6gUrF7F4hEv3yNxKdH6pIRUuXttYQP1ucY9RA4MMed6umUou+6SG/0MYeKU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxlnDzIIdh8Et2gGb6Mo65WVUapCzDNlfubhqlq5wgYazn0n6VC
- hn1yNuVG19XqRi9zqyUXqFM6CrrHQ3y75wz+xSTO3+SpE8pvU/1pEUN6co359yMeuRjYTaDlyBH
- +HCHPlhKJ8ODsiykZuJXZDx/p5rN2FjQI
-X-Google-Smtp-Source: AGHT+IF/YPe5BlrxYMou6E/k5LXKmvd6S9Lh2NbTYJvgOgAH/KnhIu7ffwfSwU7x1dYJuWn8gZGqm3Wq6qDBJOVDDC8=
-X-Received: by 2002:a17:907:1c85:b0:a9a:1f38:e736 with SMTP id
- a640c23a62f3a-a9e654fb423mr2020706866b.31.1730909432567; Wed, 06 Nov 2024
- 08:10:32 -0800 (PST)
+ AJvYcCWT8FEj4s0LuSZqq9H6RRd9qOUN+SOW275fKngLHpyvwLU2ghSek2EIuFkNZHN8hXvnvqgB3dM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzkT12H4RAynr9NnMpddhQ2GYkCAK/fhmXGxAny68FSKhqt1/1u
+ dgRfELTCyLacMjnP/LbFSya3+i8Nzq57HEjSBS5vZb5vRkChx4HEk3+y156x6rz90vwSLl349nY
+ sVRDKdUtXt5lWm/Dp4FGmB/o+AJE=
+X-Google-Smtp-Source: AGHT+IG3wkLxLxHFaXZ4ORJSLOaziyqmKsSZxXJSyiEkQNF+dTAAWy8LVDtzClDORaT2db+H+OEIWb9REShJfW1WXYM=
+X-Received: by 2002:a17:907:728d:b0:a86:8e3d:86e2 with SMTP id
+ a640c23a62f3a-a9de5d6e1f2mr4503656666b.11.1730909458115; Wed, 06 Nov 2024
+ 08:10:58 -0800 (PST)
 MIME-Version: 1.0
 References: <20241101103501.21432-1-bigunclemax@gmail.com>
- <20241101103501.21432-3-bigunclemax@gmail.com>
- <mlcweqrj56o53wluowoz7n6fdn4xofx5gtmh6d2ufkpqq7xq34@7qfgnsw6j4ev>
- <790533ea-92c5-4793-ab32-08b07f40b9d5@kwiboo.se>
-In-Reply-To: <790533ea-92c5-4793-ab32-08b07f40b9d5@kwiboo.se>
+ <20241101103501.21432-4-bigunclemax@gmail.com>
+ <r2umutw5zvze6xyvxe43bcd3dly6ckhvd3anjp3ucbmymnla26@6phsgsuabhwq>
+In-Reply-To: <r2umutw5zvze6xyvxe43bcd3dly6ckhvd3anjp3ucbmymnla26@6phsgsuabhwq>
 From: Maxim Kiselev <bigunclemax@gmail.com>
-Date: Wed, 6 Nov 2024 19:10:21 +0300
-Message-ID: <CALHCpMhdYFDhUe-rn64_fSu_B++WTUC+tGWGu3c0QWMbJkFsvw@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] usb: tcpm: fusb302: add support for set_vbus()
- callback.
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Sebastian Reichel <sebastian.reichel@collabora.com>,
- Marek Vasut <marex@denx.de>, 
- Tom Rini <trini@konsulko.com>, Wang Jie <dave.wang@rock-chips.com>,
- u-boot@lists.denx.de
+Date: Wed, 6 Nov 2024 19:10:47 +0300
+Message-ID: <CALHCpMhhWGALSCp_6NN_Sr1Fv7oFZCdYc=K5MmZJ=JX7H7gKcw@mail.gmail.com>
+Subject: Re: [PATCH v1 3/3] usb: tcpm: fix toggling in host (SRC) mode
+To: Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Jonas Karlman <jonas@kwiboo.se>, 
+ Wang Jie <dave.wang@rock-chips.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -96,24 +93,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi, Sebastian, Jonas
+Hi,
 
-Thanks for your suggestions.
-I'll fix it in v2.
-
-=D0=B2=D1=81, 3 =D0=BD=D0=BE=D1=8F=D0=B1. 2024=E2=80=AF=D0=B3. =D0=B2 02:22=
-, Jonas Karlman <jonas@kwiboo.se>:
-> >> +            chip->vbus_on =3D on;
+=D0=BF=D1=82, 1 =D0=BD=D0=BE=D1=8F=D0=B1. 2024=E2=80=AF=D0=B3. =D0=B2 21:32=
+, Sebastian Reichel
+<sebastian.reichel@collabora.com>:
 >
-> vbus_on could probably be dropped, fixed and gpio regulators is
-> currently already reference counted. Or is the set_vbus ops not called
-> evenly and current state needs to be known?
+> Hi,
+>
+> On Fri, Nov 01, 2024 at 01:34:52PM +0300, bigunclemax@gmail.com wrote:
+> > From: Maksim Kiselev <bigunclemax@gmail.com>
+> >
+> > PU\PD resistors on CC lines must be configured before running the TCPM
+> > state machine.
+> >
+> > Also, when the Type-C port acts as a host (SRC), the VBUS sould be enab=
+led
+> > only after the toggling has been completed. And we have to wait for
+> > the corresponding IRQ to finish the toggling process. But this doesn't
+> > happen because we exit from tcpm_poll_event() if VBUS !=3D OK.
+> >
+> > So, Let's check for VBUS state only when the port acts as a host (SRC)
+> > to solve this problem.
+> >
+> > Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+> > ---
+>
+> I will look into this patch next week and give it a try on the Rock
+> 5B. As a first feedback the commit message seems to confuse data and
+> power roles. SRC (source) and SNK (sink) are for the power direction
+> while "host" and "device" are used for the data direction. With
+> USB-PD these are independent from each other.
 
-Yep, vbus_on could be dropped. It is only necessary to display dev_dbg mess=
-ages,
-which are similar to Linux fusb302_log.
-
-So, do you suggest removing this?
+Yes, you're right. I'll drop a host mention from the commit message in
+the next version.
+This patch is for the case when our board acts as a source (SRC).
 
 Best wishes,
 Maksim
+
+> You seem to have the
+> old USB model in mind where e.g. a USB keyboard ("device") gets
+> power from the PC ("host"). But USB-PD allows setups like a USB-C
+> hub ("device") having its own power-supply and providing a laptop
+> ("host") with power.
+>
+> Greetings,
+>
+> -- Sebastian
+>
+> >  drivers/usb/tcpm/tcpm.c | 8 +++++++-
+> >  1 file changed, 7 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/usb/tcpm/tcpm.c b/drivers/usb/tcpm/tcpm.c
+> > index 0aee57cb2f4..c9f8dbdc795 100644
+> > --- a/drivers/usb/tcpm/tcpm.c
+> > +++ b/drivers/usb/tcpm/tcpm.c
+> > @@ -2122,6 +2122,12 @@ static void tcpm_init(struct udevice *dev)
+> >       else
+> >               port->vbus_vsafe0v =3D true;
+> >
+> > +     if (port->self_powered)
+> > +             tcpm_set_cc(dev, TYPEC_CC_OPEN);
+> > +     else
+> > +             tcpm_set_cc(dev, tcpm_default_state(port) =3D=3D SNK_UNAT=
+TACHED ?
+> > +                             TYPEC_CC_RD : tcpm_rp_cc(port));
+> > +
+> >       tcpm_set_state(dev, tcpm_default_state(port), 0);
+> >
+> >       if (drvops->get_cc(dev, &cc1, &cc2) =3D=3D 0)
+> > @@ -2234,7 +2240,7 @@ static void tcpm_poll_event(struct udevice *dev)
+> >       const struct dm_tcpm_ops *drvops =3D dev_get_driver_ops(dev);
+> >       struct tcpm_port *port =3D dev_get_uclass_plat(dev);
+> >
+> > -     if (!drvops->get_vbus(dev))
+> > +     if (!drvops->get_vbus(dev) && (tcpm_default_state(port) =3D=3D SN=
+K_UNATTACHED))
+> >               return;
+> >
+> >       while (port->poll_event_cnt < TCPM_POLL_EVENT_TIME_OUT) {
+> > --
+> > 2.45.2
+> >
