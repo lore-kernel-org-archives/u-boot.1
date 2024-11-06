@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60256D44D43
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 10:22:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2E0BD44D43
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 10:23:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4549891EA;
-	Wed,  6 Nov 2024 11:22:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4267D891E9;
+	Wed,  6 Nov 2024 11:23:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="V6Q28Cis";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="U10bV8DZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0392F891F4; Wed,  6 Nov 2024 11:22:49 +0100 (CET)
-Received: from mail-m25475.xmail.ntesmail.com (mail-m25475.xmail.ntesmail.com
- [103.129.254.75])
+ id 9A860891F1; Wed,  6 Nov 2024 11:23:13 +0100 (CET)
+Received: from ec2-44-216-146-172.compute-1.amazonaws.com
+ (ec2-44-216-146-172.compute-1.amazonaws.com [44.216.146.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 961A8891CF
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 11:22:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC35888FE5
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 11:23:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 1f801212;
- Wed, 6 Nov 2024 18:22:43 +0800 (GMT+08:00)
-Message-ID: <ae0b4b42-30b3-4a0a-8248-0f74b1774aa4@rock-chips.com>
-Date: Wed, 6 Nov 2024 18:22:42 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 1f81e331;
+ Wed, 6 Nov 2024 18:23:06 +0800 (GMT+08:00)
+Message-ID: <2cb7a3fb-adca-4249-ada8-699d7afeae92@rock-chips.com>
+Date: Wed, 6 Nov 2024 18:23:05 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 12/13] rockchip: rk3288-tinker: Fix slow Ethernet
- initializion
+Subject: Re: [PATCH 13/13] rockchip: rk3288-tinker: Change to use FIT
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Lin Huang <hl@rock-chips.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
 Cc: u-boot@lists.denx.de
 References: <20241105160054.1373319-1-jonas@kwiboo.se>
- <20241105160054.1373319-13-jonas@kwiboo.se>
+ <20241105160054.1373319-14-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241105160054.1373319-13-jonas@kwiboo.se>
+In-Reply-To: <20241105160054.1373319-14-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRlJSlZDT0hOGR9JHxhKQ0pWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUlMQlYZQhlLHx8fGB1IQ05WFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9300ff7ac903afkunm1f801212
+X-HM-Tid: 0a9300ffd3d703afkunm1f81e331
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PCI6OSo5MTIfFjEdCQ89TEhJ
- Ty4KCgpVSlVKTEhLQ0NDTk1PT0pKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTExKNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MVE6Pgw6ETItKDE#Nw4PTE4d
+ SS8wCVZVSlVKTEhLQ0NDTkNMSEJNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISE9KNwY+
 DKIM-Signature: a=rsa-sha256;
- b=V6Q28CisH4SglZCjkKHa6M3AUVbJR+sQ5nHriRY3hUZTcU8Zhe/tH+i3vKfEUfRB/gPcQzXS2uG/q87nXIEYeiATUxxiOH+1foNshIHuZsEHQos3vOK0f8BG8jg6ElGJlLx4kQuzm/6SS8KxhKJvVcFo86sjYd0xetVdBoG934U=;
+ b=U10bV8DZd8rnx375UbHOKcJ9WP+WwJoItq1u/Er0KbllAyqTeXKilbMMISvRECuE3t3O8ROEKM6u4VdWWDSYzWh2oUQ1qK8xjI+51WxTA3IUDniFe7xoPZOnnLhIsLeUFvFVRkkRZk57bYs4P3chYDtiZCEv8iPspGOiK+AmHfA=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=+WybQ6gaoQ/QFdGWP3ixdgjOw2TigPDDPy5tVrtJXjs=;
+ bh=nc/xo9mLQJAQHN1OEjovrVf7C0zDnlKHlRiv/kmA2mk=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,31 +78,41 @@ X-Virus-Status: Clean
 
 
 On 2024/11/6 00:00, Jonas Karlman wrote:
-> For some reason the Ethernet PHY reset delay is set to 1 second, this
-> cause an unneccecery long boot delay.
+> Change to use FIT and FIT_SIGNATURE when loading U-Boot proper in SPL to
+> allow checksum validation and fallback loading of FIT from a different
+> mmc device.
 >
-> Tinker Board use RTL8211E or RTL8211F Ethernet PHY, datasheet list an
-> initial 10ms delay and then a 30-76ms delay before accessing registers.
->
-> Change to use 80ms delay instead of a full second to speed up Ethernet
-> initializion in U-Boot.
->
-> Also enable PHY_REALTEK, DM_ETH_PHY and PHY_GIGE to improve Ethernet PHY
-> support in U-Boot.
+> Checksum validation of FIT adds around 140 ms to boot time:
 >
 > Before:
 >
->    1,404,971    960,924  eth_common_init
->    2,438,830  1,033,859  eth_initialize
->    2,444,449      5,619  main_loop
->    2,445,153        704  cli_loop
->
-> After:
->
+>         Mark    Elapsed  Stage
+>            0          0  reset
+>           13         13  TPL
+>        6,957      6,944  end tpl
+>       25,102     18,145  SPL
+>      131,932    106,830  end phase
+>      132,137        205  board_init_f
+>      444,277    312,140  board_init_r
 >    1,404,987    960,710  eth_common_init
 >    1,519,110    114,123  eth_initialize
 >    1,524,734      5,624  main_loop
 >    1,525,452        718  cli_loop
+>
+> After:
+>
+>         Mark    Elapsed  Stage
+>            0          0  reset
+>           13         13  TPL
+>        6,957      6,944  end tpl
+>       35,744     28,787  SPL
+>      271,220    235,476  end phase
+>      271,420        200  board_init_f
+>      588,474    317,054  board_init_r
+>    1,548,950    960,476  eth_common_init
+>    1,663,105    114,155  eth_initialize
+>    1,668,734      5,629  main_loop
+>    1,669,417        683  cli_loop
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -111,54 +120,59 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
-> There are more boards having similar full second delay and a fix will be
-> sent to upstream Linux to correct this in due time.
-> ---
->   arch/arm/dts/rk3288-tinker-u-boot.dtsi | 4 ++++
->   configs/tinker-rk3288_defconfig        | 3 +++
->   configs/tinker-s-rk3288_defconfig      | 3 +++
->   3 files changed, 10 insertions(+)
+>   configs/tinker-rk3288_defconfig   | 7 +++++++
+>   configs/tinker-s-rk3288_defconfig | 7 +++++++
+>   2 files changed, 14 insertions(+)
 >
-> diff --git a/arch/arm/dts/rk3288-tinker-u-boot.dtsi b/arch/arm/dts/rk3288-tinker-u-boot.dtsi
-> index 7568b1495341..a6f6f14df93d 100644
-> --- a/arch/arm/dts/rk3288-tinker-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3288-tinker-u-boot.dtsi
-> @@ -16,6 +16,10 @@
->   	rockchip,sdram-params = <0x20d266a4 0x5b6 2 533000000 6 9 0>;
->   };
->   
-> +&gmac {
-> +	snps,reset-delays-us = <0 10000 80000>;
-> +};
-> +
->   &gpio7 {
->   	/delete-property/ bootph-all;
->   };
 > diff --git a/configs/tinker-rk3288_defconfig b/configs/tinker-rk3288_defconfig
-> index b7636fe581f4..05dca105d609 100644
+> index 05dca105d609..bc5379d43430 100644
 > --- a/configs/tinker-rk3288_defconfig
 > +++ b/configs/tinker-rk3288_defconfig
-> @@ -58,6 +58,9 @@ CONFIG_ROCKCHIP_EFUSE=y
->   CONFIG_I2C_EEPROM=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DM_ETH_PHY=y
-> +CONFIG_PHY_GIGE=y
->   CONFIG_ETH_DESIGNWARE=y
->   CONFIG_GMAC_ROCKCHIP=y
->   CONFIG_PINCTRL=y
+> @@ -17,9 +17,15 @@ CONFIG_DEBUG_UART_BASE=0xff690000
+>   CONFIG_DEBUG_UART_CLOCK=24000000
+>   CONFIG_DEBUG_UART=y
+>   # CONFIG_ANDROID_BOOT_IMAGE is not set
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3288-tinker.dtb"
+>   CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_GPT=y
+>   CONFIG_CMD_I2C=y
+> @@ -91,4 +97,5 @@ CONFIG_VIDEO_ROCKCHIP=y
+>   CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+>   CONFIG_CONSOLE_SCROLL_LINES=10
+>   CONFIG_CMD_DHRYSTONE=y
+> +CONFIG_SPL_CRC32=y
+>   CONFIG_ERRNO_STR=y
 > diff --git a/configs/tinker-s-rk3288_defconfig b/configs/tinker-s-rk3288_defconfig
-> index e50424746c81..1bee0d094c8d 100644
+> index 1bee0d094c8d..f0c8cc5bbc1b 100644
 > --- a/configs/tinker-s-rk3288_defconfig
 > +++ b/configs/tinker-s-rk3288_defconfig
-> @@ -58,6 +58,9 @@ CONFIG_ROCKCHIP_EFUSE=y
->   CONFIG_I2C_EEPROM=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DM_ETH_PHY=y
-> +CONFIG_PHY_GIGE=y
->   CONFIG_ETH_DESIGNWARE=y
->   CONFIG_GMAC_ROCKCHIP=y
->   CONFIG_PINCTRL=y
+> @@ -17,9 +17,15 @@ CONFIG_DEBUG_UART_BASE=0xff690000
+>   CONFIG_DEBUG_UART_CLOCK=24000000
+>   CONFIG_DEBUG_UART=y
+>   # CONFIG_ANDROID_BOOT_IMAGE is not set
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3288-tinker-s.dtb"
+>   CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_GPT=y
+>   CONFIG_CMD_I2C=y
+> @@ -91,4 +97,5 @@ CONFIG_VIDEO_ROCKCHIP=y
+>   CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+>   CONFIG_CONSOLE_SCROLL_LINES=10
+>   CONFIG_CMD_DHRYSTONE=y
+> +CONFIG_SPL_CRC32=y
+>   CONFIG_ERRNO_STR=y
