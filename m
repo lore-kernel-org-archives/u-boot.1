@@ -4,63 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67116D59F74
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 20:43:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A38D59F73
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 20:50:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B55EF88FC8;
-	Wed,  6 Nov 2024 21:43:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 610C388DB6;
+	Wed,  6 Nov 2024 21:50:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="m0ET5oE8";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="l2AnTTFl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24F6088E63; Wed,  6 Nov 2024 21:43:14 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ id 1365188E63; Wed,  6 Nov 2024 21:50:42 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B46F188FDE
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 21:43:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 10F2388DB2
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 21:50:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5449=SC=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1730925778;
- bh=VpcJ4V+rukzIGqa1HD6F+mOFFX9nx0ylmtn5BncVFuM=;
- b=m0ET5oE8A5tvUOBzDTg4KmbVnrxNnyE+f5PZcC7RadsAePyaPARIJaq7lcjBpv2QYYcrsqGX4
- 7JBZPhuVzXRipVatTf5nvxdcNQj3Z5JEJm0GZXLYbqx22SrBUmh4gfVZZw10dR8V2jrNhaKsRhY
- d55/okjlCGDUTmq6BVH+Wce++VkukQyKRDOe4njZGif9FTpS4KMCzrN8j3zjVsryewalWrhimih
- vJSBdsEODugPb3RodCs+pIXTOZ4A2jS4//Oo37UypkbrO6aVPtc/SmEhr+j1G8eTeIR4o2HpgkE
- OlXvaVWomGbhO/WoR6KuS6Hn5MUOySy6dRF7gX/x+w3w==
-Message-ID: <955f0377-bd81-4f6d-a74b-e35e1efce5a6@kwiboo.se>
-Date: Wed, 6 Nov 2024 21:42:50 +0100
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4XkHR20Hqhz9tGj;
+ Wed,  6 Nov 2024 21:50:38 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1730926238;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Adsvp/X+ew1+kO3La/O3fY9tUd7tBNOZAxDQ2V46kCI=;
+ b=l2AnTTFlScEWS0GuZsneVbfypJBIFIFrByfhRtfvSELBI0B+gVxjYyPKGEGY5dxfExUG1x
+ gnA7L5MBIbbVSOOqiaSv9SaoyaIUlHSeEZ8DAu5MSf3wu20uogo6CixSoOrkr+FiNpadwu
+ j5P+KLMiL/VkjU7pCnK/8xPfeYBd0LmFw3K01ui0wCtPGBItUSLLBozffGdpHJrpeuvkuw
+ dXU/jZ6k/h2nYrbb3JAvAVOQeHivduPGccfTodLxKWnRSTo0aW0LfDFdqdAwAWgyiDyP6E
+ 1s45KJeCSsDBHTuauvXJanIAjUMA5L6ggTGwn50O6f+QaLbmap9zsPssdt541w==
+Message-ID: <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
+Date: Wed, 6 Nov 2024 21:50:33 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] rockchip: rk3588: Implement checkboard() to print
- SoC variant
-To: Jagan Teki <jagan@edgeble.ai>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Dragan Simic <dsimic@manjaro.org>, Quentin Schulz
- <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-References: <20241102203746.3631481-1-jonas@kwiboo.se>
- <20241102203746.3631481-3-jonas@kwiboo.se>
- <CA+VMnFwXU+wjji4r-2u=BEAvJSDxmwMgN9Bo_+uwF6QD8kGf+w@mail.gmail.com>
+Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories support
+ in QSPI driver"
+To: Jon Humphreys <j-humphreys@ti.com>, Michal Simek <michal.simek@amd.com>,
+ u-boot@lists.denx.de
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Michael Walle <mwalle@kernel.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, Tom Rini
+ <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
+ <b9cb3ec8-b6f2-4f38-8cda-d3d10278f503@amd.com>
+ <e9929e0c-aa43-428f-8bf7-7b4cdef0e9c3@mailbox.org>
+ <86v7x05fyd.fsf@udb0321960.dhcp.ti.com>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CA+VMnFwXU+wjji4r-2u=BEAvJSDxmwMgN9Bo_+uwF6QD8kGf+w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <86v7x05fyd.fsf@udb0321960.dhcp.ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-ForwardEmail-ID: 672bd4d0e997659fa2f4bddc
+X-MBO-RS-META: c8kop66z7ecqt676niammtwd5jwfjpk9
+X-MBO-RS-ID: a5578197f46efe02cc7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,123 +89,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jagan,
-
-On 2024-11-04 08:29, Jagan Teki wrote:
-> On Sun, 3 Nov 2024 at 02:08, Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> Implement checkboard() to print current SoC model used by a board,
->> e.g. one of:
->>
->>   SoC:   RK3582 v1
->>   SoC:   RK3588 v0
->>   SoC:   RK3588 v1
->>   SoC:   RK3588S v0
->>   SoC:   RK3588S v1
->>   SoC:   RK3588S2 v1
->>
->> when U-Boot proper is running.
->>
->>   U-Boot 2025.01-rc1 (Nov 02 2024 - 20:19:01 +0000)
->>
->>   Model: Generic RK3588S/RK3588
->>   SoC:   RK3588S2 v1
->>   DRAM:  8 GiB
->>
->> Information about the SoC model, variant and version is read from OTP.
->>
->> Also update rk3588s-u-boot.dtsi to include OTP in U-Boot pre-reloc phase,
->> where checkboard() is called.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->> v2:
->> - Update commit message
->> - Update code comments
->> - Drop generic-rk3588_defconfig change
->> ---
->>  arch/arm/dts/rk3588s-u-boot.dtsi       |  4 ++
->>  arch/arm/mach-rockchip/rk3588/rk3588.c | 58 ++++++++++++++++++++++++++
->>  2 files changed, 62 insertions(+)
->>
->> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi
-> b/arch/arm/dts/rk3588s-u-boot.dtsi
->> index 09d8b311cec5..8880d162b11c 100644
->> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
->> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
->> @@ -69,6 +69,10 @@
->>         bootph-all;
->>  };
->>
->> +&otp {
->> +       bootph-some-ram;
->> +};
->> +
->>  &pcfg_pull_down {
->>         bootph-all;
->>  };
->> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> b/arch/arm/mach-rockchip/rk3588/rk3588.c
->> index e2dac2a5b806..f9da7a6f1477 100644
->> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
->> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
->> @@ -4,6 +4,8 @@
->>   * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
->>   */
->>
->> +#include <dm.h>
->> +#include <misc.h>
->>  #include <spl.h>
->>  #include <asm/armv8/mmu.h>
->>  #include <asm/arch-rockchip/bootrom.h>
->> @@ -178,3 +180,59 @@ int arch_cpu_init(void)
->>         return 0;
->>  }
->>  #endif
->> +
->> +#define RK3588_OTP_CPU_CODE_OFFSET             0x02
->> +#define RK3588_OTP_SPECIFICATION_OFFSET                0x06
->> +#define RK3588_OTP_CPU_VERSION_OFFSET          0x1c
->> +
->> +int checkboard(void)
->> +{
->> +       u8 cpu_code[2], specification, package, cpu_version;
->> +       struct udevice *dev;
->> +       char suffix[3];
->> +       int ret;
->> +
->> +       ret = uclass_get_device_by_driver(UCLASS_MISC,
->> +                                         DM_DRIVER_GET(rockchip_otp),
-> &dev);
->> +       if (ret) {
->> +               debug("%s: could not find otp device, ret=%d\n",
-> __func__, ret);
->> +               return 0;
->> +       }
->> +
->> +       /* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
->> +       ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
->> +       if (ret < 0) {
->> +               debug("%s: could not read cpu-code, ret=%d\n", __func__,
-> ret);
->> +               return 0;
->> +       }
->> +
->> +       /* specification: SoC variant, e.g. 0xA for RK3588J and 0x13 for
-> RK3588S */
->> +       ret = misc_read(dev, RK3588_OTP_SPECIFICATION_OFFSET,
-> &specification, 1);
+On 11/6/24 8:18 PM, Jon Humphreys wrote:
+> Marek Vasut <marek.vasut@mailbox.org> writes:
 > 
-> Any register to find the operating temperature of the chip?
-
-Not that I know of or have looked into, downstream kernel have opp-info
-and leakage nvmem cells, and similar exists on rk356x, however my rk356x
-boards all had 0x0 in opp-info cells.
-
-Regards,
-Jonas
-
+>> On 10/23/24 10:17 AM, Michal Simek wrote:
+>>>
+>>>
+>>> On 10/22/24 23:06, Marek Vasut wrote:
+>>>> This reverts commit 1e36d34b52e7a1ebe5a2a5339d6905540f4253aa.
+>>>>
+>>>> This parallel/stacked support breaks basic SPI NOR support,
+>>>> e.g. this no longer works:
+>>>>
+>>>> => sf probe && sf update 0x50000000 0 0x160000
+>>>> SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB,
+>>>> total 64 MiB
+>>>> device 0 offset 0x0, size 0x160000
+>>>> SPI flash failed in read step
+>>>
+>>> Reverting everything seems to me too much. Tom has tested it on his HW
+>>> and didn't see any issue. That's why better to look at code which is
+>>> causing this.
+>>> You are reverting everything but likely there is specific patch which is
+>>> causing this. Which one is it?
+>>> Which board was used for your testing? Likely we don't have access to it.
+>>> Is there any QEMU available which can be used for debugging?
+>>
+>> The testcase including the exact SPI NOR model is above.
+>>
+>> iMX6 with w25q16dw seems to be broken too.
+>>
+>> Basically every board I have access no longer has a working "sf probe ;
+>> sf update" combination ... so yeah, this means this patchset is
+>> fundamentally broken.
+>>
 > 
-> Jagan.
+> I can also confirm that the patch series:
 > 
+> f8efc68b30e Merge patch series "spi-nor: Add parallel and stacked memories
+> support"
+> 
+> breaks SPI NOR on TI platforms, particularly SK-AM62 and SK-AM62P:
+> 
+> U-Boot 2024.10-00752-gf8efc68b30e2 (Nov 06 2024 - 12:25:13 -0600)
+> 
+> SoC:   AM62X SR1.0 HS-FS
+> Model: Texas Instruments AM625 SK
+> ...
+> Hit any key to stop autoboot:  0
+> => sf probe && sf update ${loadaddr} 0x400000 0x10
+> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
+> device 0 offset 0x400000, size 0x10
+> SPI flash failed in read step
+> =>
+Sigh ... can you please test current u-boot/master and see if the error 
+is fixed there ?
 
+We really should've gone with a full revert I think ...
