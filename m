@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CAEFD44D51
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 11:30:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88286D44D51
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 11:30:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A090389159;
-	Wed,  6 Nov 2024 12:29:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E6301891F4;
+	Wed,  6 Nov 2024 12:29:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E23F891E1; Wed,  6 Nov 2024 12:29:54 +0100 (CET)
-Received: from smtp-8fab.mail.infomaniak.ch (smtp-8fab.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::8fab])
+ id 3F19B89159; Wed,  6 Nov 2024 12:29:55 +0100 (CET)
+Received: from smtp-8faf.mail.infomaniak.ch (smtp-8faf.mail.infomaniak.ch
+ [83.166.143.175])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69ECC89159
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 12:29:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58DF48902D
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 12:29:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10:40ca:feff:fe05:0])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Xk3000hrMzC4r;
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Xk3006kPBzJ8W;
  Wed,  6 Nov 2024 12:29:52 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Xk2zz0sHCzJVH; Wed,  6 Nov 2024 12:29:51 +0100 (CET)
+ id 4Xk30012kYzK0b; Wed,  6 Nov 2024 12:29:52 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 06 Nov 2024 12:29:42 +0100
-Subject: [PATCH next v2 2/4] rockchip: rk3399: merge CRU check within
- rk3399_force_power_on_reset
+Date: Wed, 06 Nov 2024 12:29:43 +0100
+Subject: [PATCH next v2 3/4] rockchip: tpl: allow to call
+ board/SoC-specific code before DRAM init
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241106-rk3399-sysreset-gpio-tpl-v2-2-22aa82189eb6@cherry.de>
+Message-Id: <20241106-rk3399-sysreset-gpio-tpl-v2-3-22aa82189eb6@cherry.de>
 References: <20241106-rk3399-sysreset-gpio-tpl-v2-0-22aa82189eb6@cherry.de>
 In-Reply-To: <20241106-rk3399-sysreset-gpio-tpl-v2-0-22aa82189eb6@cherry.de>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -65,79 +65,40 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-To prepare to support forcing power on reset from TPL which would have
-the exact same logic, just in an earlier stage, let's merge the CRU
-check that triggers the power on reset with the rest of the logic.
+This defines a weak tpl_board_init function that can be used for running
+board/SoC-specific code before the DRAM init happens, similarly to
+spl_board_init() for SPL.
 
 Reviewed-by: Paul Kocialkowski <paulk@sys-base.io>
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/mach-rockchip/rk3399/rk3399.c | 43 +++++++++++++++++-----------------
- 1 file changed, 21 insertions(+), 22 deletions(-)
+ arch/arm/mach-rockchip/tpl.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
-index edccb2a3980d0e3921aa4073b67aea6a00f18b8d..7b6a822ed04b8151a5da147056dbf73ffdafd149 100644
---- a/arch/arm/mach-rockchip/rk3399/rk3399.c
-+++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
-@@ -172,9 +172,29 @@ void board_debug_uart_init(void)
- #if defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD)
- static void rk3399_force_power_on_reset(void)
- {
-+	const struct rockchip_cru *cru = rockchip_get_cru();
- 	ofnode node;
- 	struct gpio_desc sysreset_gpio;
- 
-+	/*
-+	 * The RK3399 resets only 'almost all logic' (see also in the
-+	 * TRM "3.9.4 Global software reset"), when issuing a software
-+	 * reset. This may cause issues during boot-up for some
-+	 * configurations of the application software stack.
-+	 *
-+	 * To work around this, we test whether the last reset reason
-+	 * was a power-on reset and (if not) issue an overtemp-reset to
-+	 * reset the entire module.
-+	 *
-+	 * While this was previously fixed by modifying the various
-+	 * places that could generate a software reset (e.g. U-Boot's
-+	 * sysreset driver, the ATF or Linux), we now have it here to
-+	 * ensure that we no longer have to track this through the
-+	 * various components.
-+	 */
-+	if (cru->glb_rst_st == 0)
-+		return;
-+
- 	if (!IS_ENABLED(CONFIG_SPL_GPIO)) {
- 		debug("%s: trying to force a power-on reset but no GPIO "
- 		      "support in SPL!\n", __func__);
-@@ -206,27 +226,6 @@ void spl_board_init(void)
- {
- 	led_setup();
- 
--	if (IS_ENABLED(CONFIG_SPL_GPIO)) {
--		struct rockchip_cru *cru = rockchip_get_cru();
--
--		/*
--		 * The RK3399 resets only 'almost all logic' (see also in the
--		 * TRM "3.9.4 Global software reset"), when issuing a software
--		 * reset. This may cause issues during boot-up for some
--		 * configurations of the application software stack.
--		 *
--		 * To work around this, we test whether the last reset reason
--		 * was a power-on reset and (if not) issue an overtemp-reset to
--		 * reset the entire module.
--		 *
--		 * While this was previously fixed by modifying the various
--		 * places that could generate a software reset (e.g. U-Boot's
--		 * sysreset driver, the ATF or Linux), we now have it here to
--		 * ensure that we no longer have to track this through the
--		 * various components.
--		 */
--		if (cru->glb_rst_st != 0)
--			rk3399_force_power_on_reset();
--	}
-+	rk3399_force_power_on_reset();
- }
+diff --git a/arch/arm/mach-rockchip/tpl.c b/arch/arm/mach-rockchip/tpl.c
+index bbb9329e725af79ea4c4049aa7890a4a143e7df5..6b880f19f84e57e7bc0c93b16b188bc56267827e 100644
+--- a/arch/arm/mach-rockchip/tpl.c
++++ b/arch/arm/mach-rockchip/tpl.c
+@@ -21,6 +21,10 @@
+ #include <timestamp.h>
  #endif
+ 
++__weak void tpl_board_init(void)
++{
++}
++
+ void board_init_f(ulong dummy)
+ {
+ 	struct udevice *dev;
+@@ -54,6 +58,8 @@ void board_init_f(ulong dummy)
+ 	if (IS_ENABLED(CONFIG_SYS_ARCH_TIMER))
+ 		timer_init();
+ 
++	tpl_board_init();
++
+ 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+ 	if (ret) {
+ 		printf("DRAM init failed: %d\n", ret);
 
 -- 
 2.47.0
