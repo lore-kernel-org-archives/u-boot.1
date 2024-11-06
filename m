@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD8ED29F9D
-	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 06:39:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15BEDD29F9D
+	for <u-boot@archiver.kernel.org>; Wed,  6 Nov 2024 06:40:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4430891AB;
-	Wed,  6 Nov 2024 07:39:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3CC2A891D4;
+	Wed,  6 Nov 2024 07:39:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OwGaBcOc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vD40tK9W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 532BA891CF; Wed,  6 Nov 2024 07:39:40 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 911AD891D2; Wed,  6 Nov 2024 07:39:41 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63A9189032
- for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 07:39:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CF148919A
+ for <u-boot@lists.denx.de>; Wed,  6 Nov 2024 07:39:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4A66dYGH097638;
- Wed, 6 Nov 2024 00:39:34 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4A66daa1074686;
+ Wed, 6 Nov 2024 00:39:36 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1730875174;
- bh=coRf3A3BbWeqNU43RzhwXeSk6ks5o2zo3wkoEK1HCBU=;
+ s=ti-com-17Q1; t=1730875176;
+ bh=X0OB9oNGQI/Kx1vshP6e1U4NTKFHrhD+gF6lqBLmD2w=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=OwGaBcOc5ekWXreJmABZChmj7a7IfEHIRgKJUnN+uEntjO0WUDbeWfEgjK89UjXYB
- YTM1FDL8+AOg0CM+W26mj2a5OZ7ulpLB8ACj1F+lCztI/uWfYcVDXmSP+f+bwaSn+z
- pd398WpCbCa2mvVylEe2Ze8qSuZg6icuYbab8GZ0=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4A66dYCT076164;
- Wed, 6 Nov 2024 00:39:34 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ b=vD40tK9W0dZZmi9xjMY3uSO9iE5YYGKvrX1ff8ph3rtVyDXFbKobIaKtTj1G41bTw
+ QH8l2GRKwDxR+telNzUJo9bGxa8VPNTWGkc6DC1fLzPghANw0L6az0qK7NHsVIPOza
+ ZvLsLY1iKHugGpOcc3hBPGRkTR8NElYweGVuD1bw=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4A66daL0008237
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 6 Nov 2024 00:39:36 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
- Nov 2024 00:39:34 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2024 00:39:35 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 6 Nov 2024 00:39:34 -0600
+ Frontend Transport; Wed, 6 Nov 2024 00:39:35 -0600
 Received: from localhost (jayesh-hp-z2-tower-g5-workstation.dhcp.ti.com
  [10.24.68.218])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4A66dXof129199;
- Wed, 6 Nov 2024 00:39:34 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4A66dZVa129219;
+ Wed, 6 Nov 2024 00:39:35 -0600
 From: Jayesh Choudhary <j-choudhary@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <vigneshr@ti.com>,
  <bb@ti.com>
 CC: <vaishnav.a@ti.com>, <afd@ti.com>, <n-francis@ti.com>, <seanga2@gmail.com>,
  <francesco.dolcini@toradex.com>, <sjg@chromium.org>,
  <w.egorov@phytec.de>, <devarsht@ti.com>, <j-choudhary@ti.com>
-Subject: [PATCH 2/4] arm: mach-k3: am62p: Add QoS support for DSS
-Date: Wed, 6 Nov 2024 12:09:28 +0530
-Message-ID: <20241106063930.59870-3-j-choudhary@ti.com>
+Subject: [PATCH 3/4] configs: j722s_evm_r5_defconfig: Enable CONFIG_K3_QOS
+Date: Wed, 6 Nov 2024 12:09:29 +0530
+Message-ID: <20241106063930.59870-4-j-choudhary@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241106063930.59870-1-j-choudhary@ti.com>
 References: <20241106063930.59870-1-j-choudhary@ti.com>
@@ -82,159 +83,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable Quality of Service (QoS) blocks for Display SubSystem (DSS), by
-servicing the DSS - DDR traffic from the Real-Time (RT) queue. This is
-done by setting the DSS DMA orderID to greater than 7.
-
-The C7x and VPAC can overwhelm the DSS's access to the DDR because of
-their higher frequency DDR accesses. This can cause flickering in
-display with certain edgeAI models running parallely if the DSS traffic
-is being serviced through non-RT queue.
+Enable CONFIG_K3_QOS to set QoS registers in R5 boot stage.
 
 Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 ---
- arch/arm/mach-k3/am62px/am62p5_init.c        |  2 +
- arch/arm/mach-k3/r5/am62px/Makefile          |  1 +
- arch/arm/mach-k3/r5/am62px/am62p_qos.h       | 42 ++++++++++++++
- arch/arm/mach-k3/r5/am62px/am62p_qos_uboot.c | 58 ++++++++++++++++++++
- 4 files changed, 103 insertions(+)
- create mode 100644 arch/arm/mach-k3/r5/am62px/am62p_qos.h
- create mode 100644 arch/arm/mach-k3/r5/am62px/am62p_qos_uboot.c
+ configs/j722s_evm_r5_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
-index 34ed01cd78..2d35a7ce77 100644
---- a/arch/arm/mach-k3/am62px/am62p5_init.c
-+++ b/arch/arm/mach-k3/am62px/am62p5_init.c
-@@ -159,6 +159,8 @@ void board_init_f(ulong dummy)
- 	}
- 
- 	spl_enable_cache();
-+
-+	setup_qos();
- 	debug("am62px_init: %s done\n", __func__);
- }
- 
-diff --git a/arch/arm/mach-k3/r5/am62px/Makefile b/arch/arm/mach-k3/r5/am62px/Makefile
-index 091d4fa5b4..066c3cef8d 100644
---- a/arch/arm/mach-k3/r5/am62px/Makefile
-+++ b/arch/arm/mach-k3/r5/am62px/Makefile
-@@ -4,3 +4,4 @@
- 
- obj-y += clk-data.o
- obj-y += dev-data.o
-+obj-y += am62p_qos_uboot.o
-diff --git a/arch/arm/mach-k3/r5/am62px/am62p_qos.h b/arch/arm/mach-k3/r5/am62px/am62p_qos.h
-new file mode 100644
-index 0000000000..99e2ee4856
---- /dev/null
-+++ b/arch/arm/mach-k3/r5/am62px/am62p_qos.h
-@@ -0,0 +1,42 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Keystone3 Quality of service endpoint definitions
-+ * Auto generated by K3 Resource Partitioning Tool
-+ *
-+ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#define PULSAR_UL_WKUP_0_CPU0_RMST	0x45D14000
-+#define PULSAR_UL_WKUP_0_CPU0_WMST	0x45D14400
-+#define PULSAR_UL_WKUP_0_CPU0_PMST	0x45D14800
-+#define PULSAR_UL_MAIN_0_CPU0_RMST	0x45D15000
-+#define PULSAR_UL_MAIN_0_CPU0_WMST	0x45D15400
-+#define PULSAR_UL_MAIN_0_CPU0_PMST	0x45D15800
-+#define PULSAR_ULS_MCU_0_CPU0_RMST	0x45D18000
-+#define PULSAR_ULS_MCU_0_CPU0_WMST	0x45D18400
-+#define PULSAR_ULS_MCU_0_CPU0_PMST	0x45D18800
-+#define SAM62A_A53_512KB_WRAP_MAIN_0_A53_QUAD_WRAP_CBA_AXI_R	0x45D20400
-+#define SAM62A_A53_512KB_WRAP_MAIN_0_A53_QUAD_WRAP_CBA_AXI_W	0x45D20800
-+#define DEBUGSS_K3_WRAP_CV0_MAIN_0_VBUSMW	0x45D21800
-+#define DEBUGSS_K3_WRAP_CV0_MAIN_0_VBUSMR	0x45D21C00
-+#define GIC500SS_1_4_MAIN_0_MEM_WR_VBUSM	0x45D22000
-+#define GIC500SS_1_4_MAIN_0_MEM_RD_VBUSM	0x45D22400
-+#define EMMCSD4SS_MAIN_0_EMMCSDSS_RD	0x45D23000
-+#define EMMCSD4SS_MAIN_0_EMMCSDSS_WR	0x45D23400
-+#define EMMCSD4SS_MAIN_1_EMMCSDSS_WR	0x45D23800
-+#define EMMCSD4SS_MAIN_1_EMMCSDSS_RD	0x45D23C00
-+#define SA3SS_AM62A_MAIN_0_CTXCACH_EXT_DMA	0x45D25400
-+#define K3_VPU_WAVE521CL_MAIN_0_PRI_M_VBUSM_R_ASYNC	0x45D26800
-+#define K3_VPU_WAVE521CL_MAIN_0_PRI_M_VBUSM_W_ASYNC	0x45D26C00
-+#define K3_VPU_WAVE521CL_MAIN_0_SEC_M_VBUSM_R_ASYNC	0x45D27000
-+#define K3_VPU_WAVE521CL_MAIN_0_SEC_M_VBUSM_W_ASYNC	0x45D27400
-+#define SAM67_GPU_BXS464_WRAP_MAIN_0_M_VBUSM_W_SYNC	0x45D29800
-+#define SAM67_GPU_BXS464_WRAP_MAIN_0_M_VBUSM_R_SYNC	0x45D2A000
-+#define K3_DSS_UL_MAIN_0_VBUSM_DMA	0x45D30000
-+#define K3_DSS_UL_MAIN_1_VBUSM_DMA	0x45D30400
-+#define USB2SS_16FFC_MAIN_0_MSTR0	0x45D34000
-+#define USB2SS_16FFC_MAIN_0_MSTW0	0x45D34400
-+#define EMMC8SS_16FFC_MAIN_0_EMMCSS_WR	0x45D34800
-+#define EMMC8SS_16FFC_MAIN_0_EMMCSS_RD	0x45D34C00
-+#define USB2SS_16FFC_MAIN_1_MSTR0	0x45D35000
-+#define USB2SS_16FFC_MAIN_1_MSTW0	0x45D35400
-diff --git a/arch/arm/mach-k3/r5/am62px/am62p_qos_uboot.c b/arch/arm/mach-k3/r5/am62px/am62p_qos_uboot.c
-new file mode 100644
-index 0000000000..d25512a038
---- /dev/null
-+++ b/arch/arm/mach-k3/r5/am62px/am62p_qos_uboot.c
-@@ -0,0 +1,58 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * am62p Quality of Service (QoS) Configuration Data
-+ *
-+ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <asm/arch/k3-qos.h>
-+#include "am62p_qos.h"
-+
-+struct k3_qos_data qos_data[] = {
-+	/* modules_qosConfig0 - 1 endpoints, 4 channels */
-+	{
-+		.reg = K3_QOS_REG(K3_DSS_UL_MAIN_0_VBUSM_DMA, 0),
-+		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
-+	},
-+	{
-+		.reg = K3_QOS_REG(K3_DSS_UL_MAIN_0_VBUSM_DMA, 1),
-+		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
-+	},
-+	{
-+		.reg = K3_QOS_REG(K3_DSS_UL_MAIN_0_VBUSM_DMA, 2),
-+		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
-+	},
-+	{
-+		.reg = K3_QOS_REG(K3_DSS_UL_MAIN_0_VBUSM_DMA, 3),
-+		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
-+	},
-+
-+	/* modules_qosConfig1 - 1 endpoints, 4 channels */
-+	{
-+		.reg = K3_QOS_REG(K3_DSS_UL_MAIN_1_VBUSM_DMA, 0),
-+		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
-+	},
-+	{
-+		.reg = K3_QOS_REG(K3_DSS_UL_MAIN_1_VBUSM_DMA, 1),
-+		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
-+	},
-+	{
-+		.reg = K3_QOS_REG(K3_DSS_UL_MAIN_1_VBUSM_DMA, 2),
-+		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
-+	},
-+	{
-+		.reg = K3_QOS_REG(K3_DSS_UL_MAIN_1_VBUSM_DMA, 3),
-+		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
-+	},
-+
-+	/* Following registers set 1:1 mapping for orderID MAP1/MAP2
-+	 * remap registers. orderID x is remapped to orderID x again
-+	 * This is to ensure orderID from MAP register is unchanged
-+	 */
-+
-+	/* K3_DSS_UL_MAIN_0_VBUSM_DMA - 0 groups */
-+
-+	/* K3_DSS_UL_MAIN_1_VBUSM_DMA - 0 groups */
-+};
-+
-+u32 qos_count = ARRAY_SIZE(qos_data);
+diff --git a/configs/j722s_evm_r5_defconfig b/configs/j722s_evm_r5_defconfig
+index e574be9e19..d119e46ff1 100644
+--- a/configs/j722s_evm_r5_defconfig
++++ b/configs/j722s_evm_r5_defconfig
+@@ -91,6 +91,7 @@ CONFIG_TI_SCI_PROTOCOL=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_OMAP24XX=y
+ CONFIG_DM_MAILBOX=y
++CONFIG_K3_QOS=y
+ CONFIG_K3_SEC_PROXY=y
+ CONFIG_MMC_HS400_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
 -- 
 2.34.1
 
