@@ -4,108 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE8D1D5D693
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 21:53:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B80F1D5D696
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 22:32:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3883288FE5;
-	Thu,  7 Nov 2024 22:53:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3547D8860B;
+	Thu,  7 Nov 2024 23:32:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EFoOU/q3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Jw1LTRNQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 783B989072; Thu,  7 Nov 2024 20:34:05 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 9DCC78885D; Thu,  7 Nov 2024 23:32:40 +0100 (CET)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A6FA8885D
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 20:34:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 264D288606
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 23:32:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5ceccffadfdso1769442a12.2
- for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 11:34:03 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-83ab5b4b048so59942139f.2
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 14:32:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731008043; x=1731612843; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EiAodyChFL0tXP/vWzaCiE98JOzLepr/iD/RbOGoOF0=;
- b=EFoOU/q3VmDiUo5/NlZIGDWx3zB2RPuAR3DteszGgkMSpyrV34kjD/Pif0a5aWxoiV
- Wun7cKGZYASrGmZeE8hAT4uqF2bGv71ix6tVS2K4g89VxhZCM+DBX+EcVa6oSf257TNi
- AHLy/xKZCzxgJE/19d0QE6U9rNGm/kVglTuPIJCs42Oh6bHMLC8wNRxCWe4g+0sLSkGd
- 4wZNUl7ZQj02zmVzM/XDf0vD/N+Patwwg2BSFxm0lTuylY2MptRySGLcQE+WMu2SKN4Y
- lp/veF4xLwjWbAU2x2KOaw6wyH623Y6f/7p24ji7bKR8LRPJoCRQUWHL29TOar7aBUyr
- 5KGg==
+ d=chromium.org; s=google; t=1731018756; x=1731623556; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=b28DHQ6TfaRqpGnVdSrua6CvKpuoLPo7nvsdJLD7qVk=;
+ b=Jw1LTRNQYy1lB27/ryeLM14JGiLBFJGzvZdwka17lxP4nN5YI99re0V8/jJ3iIO6Jz
+ M1J4Hbx2OlJcfXeRXn99b1SKHmAqR7KpPSKd8XqLOcD8UF4NqgIooK2bS46lq3RCTrI+
+ a3W0eTZg8WM5dcvhAEyqIpLVZUVUA0mFPlu5Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731008043; x=1731612843;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1731018756; x=1731623556;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EiAodyChFL0tXP/vWzaCiE98JOzLepr/iD/RbOGoOF0=;
- b=Td+05jYaP+31s7NYEuSEbZYHbjqlWoyxrFk1kvLiSQ26ueWYxFlDtCccTWgLKxkZNo
- VME7Z1VOuVK370RkdATWjKxCrV8zqoU2ZOuhZNqD7xE2+h5WzFf62z3l420slav/AjQ/
- JaqQNKS7pm6LqPNSw+NKQ2pSsmkrnKU9YhBblG63hleT1gDyyqsBsf5JweQ7cKDEfru3
- BzG4u7gu7brJcdGvhjLi4bcifG3ieESVfowqvMu9gdXb7g0vKQPB7VJUj4fmJk0aele4
- g7NNGXwgsatcl4FMjqHnbCLKWBw2ilIeuSfcLaqPRfl25nBG5UYHSWg4SYNiUFEY6kjA
- vFiA==
-X-Gm-Message-State: AOJu0YziIl9CyFXqa5RDGi6QN/m8UghrSJpFu9bWO9GR/cc+tNe8MPk6
- xYnxZBhoigqndjjQr4BWJu2Iw1jdF3RdfUwbJ6tK04l7b/qO+2SRBRNMGaJbbpd2KEkcMn4xEMU
- B3+WKgwOFfRnGqzrI0fFXvdeXmWQ=
-X-Google-Smtp-Source: AGHT+IFenJ3f2ne1pM3ufhCiRhvTedE3Q1cIkaLpTq+ZlW7vhDBi0Wypawkqm1DuLUaPchqM1dOtDXbwUXuGKs+d9i4=
-X-Received: by 2002:a05:6402:2549:b0:5cb:ad37:4f60 with SMTP id
- 4fb4d7f45d1cf-5cf0a44426bmr23615a12.26.1731008042752; Thu, 07 Nov 2024
- 11:34:02 -0800 (PST)
-MIME-Version: 1.0
-References: <20241103003322.626036-1-sjg@chromium.org>
- <CALeDE9MfWEAb91uzQPa6_jSo6beJv_GNHTY2TeKnSzFm6V97gw@mail.gmail.com>
- <CAFLszTito2+-qgOc=7bc3i9WmBZZCcAVWSY5hoH0neGjTg6zEQ@mail.gmail.com>
-In-Reply-To: <CAFLszTito2+-qgOc=7bc3i9WmBZZCcAVWSY5hoH0neGjTg6zEQ@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 7 Nov 2024 19:33:51 +0000
-Message-ID: <CALeDE9MORdUY440JAgHNXdoqWfJy5V9bC=TK5U242QG4Lc1Ptg@mail.gmail.com>
-Subject: Re: [PATCH v3 00/25] led: Remove old status-LED code
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Alexander Gendin <agendin@matrox.com>, 
- Alison Wang <alison.wang@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
- Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@kernel-space.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Charles Hardin <ckhardin@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
- Doug Zobel <douglas.zobel@climate.com>,
- Enric Balletbo i Serra <eballetbo@gmail.com>, 
+ bh=b28DHQ6TfaRqpGnVdSrua6CvKpuoLPo7nvsdJLD7qVk=;
+ b=vO458Bnlo/ov+gHPE+CLiv5gZvwQIol9NOcgQS4IFZEgBa8TNFvPJj6equ0uA8K8DF
+ YOdA6zs2gI8e8glUr/rIiK/AZ2JYkPrgN7/Iu8RFunqEmIickR3yMUU9/iaLbnn2CCJp
+ v6G99y06CaODL5lQMYYRiWZsvifxd3rfOAxhujcjFqs/hPzWuf7cNIXcDSuzDhcKnBm0
+ qbUmuyp4OlQHg8UQpM2nOZTGMVgGdBPOzz4AesolRDsu3A/ptj/Iqu+/lQE0/5BjQspj
+ mPF31dlJKpf0IEh1Frw02BQtQQjNmtuNDo/LxLfuab/oAgi2jA1zY6w2BXlHDkytzf4W
+ 69Kw==
+X-Gm-Message-State: AOJu0Yy6HnBMZeffaHBN26bfI7PtY7PultFx7YMJ/3n/rXTAuaQ3y2bc
+ Xn8iJckXGrGltLIojHC7UjB3gZvPhVxic9GEuH+qn/T5ckZOKBiStttiwfrB/wJYqAYt8OafcJc
+ =
+X-Google-Smtp-Source: AGHT+IEpFKKQmnCPZJA9yqfmopuQuUzc2Byc0zsQMZwZtIHvI8pvny2MFc9VabmgRLju8RoOsOxKQw==
+X-Received: by 2002:a05:6e02:198b:b0:3a6:ac17:13e9 with SMTP id
+ e9e14a558f8ab-3a6f19e225amr12315665ab.11.1731018756221; 
+ Thu, 07 Nov 2024 14:32:36 -0800 (PST)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3a6ead31427sm5013485ab.72.2024.11.07.14.32.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Nov 2024 14:32:34 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
  Francis Laniel <francis.laniel@amarulasolutions.com>,
- Hans de Goede <hdegoede@redhat.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Javier Martinez Canillas <javierm@redhat.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Mario Six <mario.six@gdsys.cc>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
- Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, 
- Sean Edmond <seanedmond@microsoft.com>, Stefan Roese <sr@denx.de>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>, Moritz Fischer <moritzf@google.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Sean Anderson <seanga2@gmail.com>, Shantur Rathore <i@shantur.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tien Fong Chee <tien.fong.chee@intel.com>, 
- Wan Yee Lau <wan.yee.lau@intel.com>, Wolfgang Denk <wd@denx.de>, 
- uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Thu, 07 Nov 2024 22:53:17 +0100
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Yang Xiwen <forbidden405@outlook.com>
+Subject: [PATCH v10 00/10] efi: Add a test for EFI bootmeth
+Date: Thu,  7 Nov 2024 15:32:18 -0700
+Message-Id: <20241107223228.1914452-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,34 +105,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+The test coverage for the EFI bootmeth is incomplete since it does not
+actually boot the application.
 
-> On Tue, 5 Nov 2024 at 07:18, Peter Robinson <pbrobinson@gmail.com> wrote:
-> >
-> > On Sun, 3 Nov 2024 at 00:34, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > There has been an LED framework in U-Boot which uses driver model for
-> > > about 9 years now. Recent work is underway to improve it and provide
-> > > more features. It is probably a good time to drop the old code, which
-> > > is only used by 5 boards:
-> >
-> > I don't believe, from what I can tell, they are feature comparable, at
-> > the very least I have not been able to get the Pinephone working with
-> > this so as it stands I still don't think this patch set is ready yet.
->
-> I don't have that hardware, nor the other 4, so cannot do anything
-> with this feedback.
+This series creates a simple test for this purpose. It includes a few
+patches to make this work:
 
-Don't you have any HW that has a LED on it that you can substitute to
-see what it does?
+- Revert of an unreviewed patch to change the sandbox efi filename
+- Hang in sandbox virtio due to EFI probing all block devices
 
-> Can you please be clear what you are asking me to do?
+Other necessary fixes have already been applied.
 
-Either produce patches that work on the the pinephone, or docs I, or
-other developers, can use to implement the functionality.
+Changes in v10:
+- Drop call to exit-boot-services
+- Rebase to -master
+- Specify the bootdev order, to avoid including cros device
 
-Currently on the Pinephone the green LED lights up in the TPL/SPL
-(very early before ATF) stage and is lit up right through the the
-various FW stages, with your patch set I get no LED what so ever.
+Changes in v9:
+- Update license
+- Fix 'sevices' typo
+- Move the function into efi_helper.c
+- Split out into a separate change
+- Split out into its own patch
+- Separate into separate patches
+- Add new patch to drop sandbox PXE architecture
+- Mark the image as complete after writing it
+- Fix 'sevices' typo
 
-Peter
+Changes in v8:
+- Add new patch to control on-host behaviour
+- Add new patch to move default filename to a function
+- Add new patch to report host default-filename in native mode
+- Add new patch to report host default-filename in native mode
+
+Changes in v7:
+- Update commit message
+- Drop patches already applied
+- Drop patch 'Disable ANSI output for tests'
+- Rebase on -master
+
+Changes in v6:
+- Drop the patch to disable sandbox virtio blk with EFI
+- Add new patch to disable the sandbox virtio blk device
+- Deal with sandbox CONFIG_LOGF_FUNC
+- Rebase on -next
+- Drop patches previously applied
+- Drop mention of helloworld since it is no-longer used by this test
+
+Changes in v4:
+- Add efi_loader tag to some patches
+- Split out non-EFI patches into a different series
+
+Changes in v2:
+- Add many new patches to resolve all the outstanding test issues
+
+Simon Glass (10):
+  efi_loader: Add a test app
+  sandbox: Add a -N flag to control on-host behaviour
+  efi: Move default filename to a function
+  efi_loader: Move get_efi_pxe_arch() to efi_helper
+  efi_loader: Allow reporting the host defaults
+  sandbox: Report host default-filename in native mode
+  efi_loader: Drop sandbox PXE architecture
+  sandbox: virtio: Disable the sandbox virtio blk device
+  test: efi: boot: Set up an image suitable for EFI testing
+  test: efi: boot: Add a test for the efi bootmeth
+
+ arch/Kconfig                        |   3 +-
+ arch/sandbox/cpu/start.c            |  10 ++++
+ arch/sandbox/dts/test.dts           |   2 +-
+ arch/sandbox/include/asm/state.h    |   1 +
+ boot/bootmeth_efi.c                 |  29 ++---------
+ cmd/efidebug.c                      |  25 +++++++++
+ include/efi.h                       |  34 +++++++++++++
+ include/efi_default_filename.h      |  56 --------------------
+ lib/efi_loader/Kconfig              |  10 ++++
+ lib/efi_loader/Makefile             |   1 +
+ lib/efi_loader/efi_bootmgr.c        |  10 ++--
+ lib/efi_loader/efi_helper.c         |  71 ++++++++++++++++++++++++++
+ lib/efi_loader/testapp.c            |  64 +++++++++++++++++++++++
+ test/boot/bootdev.c                 |  18 ++++++-
+ test/boot/bootflow.c                |  76 ++++++++++++++++++++++++++--
+ test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 4924 bytes
+ test/py/tests/test_ut.py            |  53 ++++++++++++++++---
+ 17 files changed, 366 insertions(+), 97 deletions(-)
+ delete mode 100644 include/efi_default_filename.h
+ create mode 100644 lib/efi_loader/testapp.c
+ create mode 100644 test/py/tests/bootstd/flash1.img.xz
+
+-- 
+2.34.1
+
