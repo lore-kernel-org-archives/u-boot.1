@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82ECBD43341
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 11:21:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8387DD43349
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 11:21:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BA4D89177;
-	Thu,  7 Nov 2024 12:20:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DED1489247;
+	Thu,  7 Nov 2024 12:21:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BEex3b8f";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hn1nhFda";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D0EF8920B; Thu,  7 Nov 2024 12:20:57 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 66DF188FF6; Thu,  7 Nov 2024 12:21:06 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EF3088FF6
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 12:20:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 847918924F
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 12:21:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-37d3ecad390so1133466f8f.1
- for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 03:20:55 -0800 (PST)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-539f84907caso763512e87.3
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 03:21:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730978454; x=1731583254; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1730978462; x=1731583262; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=i5av/cjwHs4odA/m0p8YNr4Znl4Hlqm6z1gEEdgbRXQ=;
- b=BEex3b8fgA/7jWWBxIBF7nm7ZqQBwcClH/c5HLhKstifmztdVhSRAlPR3D3947kyQ7
- 2G8Wtw6r9cpdWXo/VwB3JdbdtKiWCSryBPyHsFItICQtGW7NIgVP4wOYSZW0F5cIy6Az
- IEOkHI5JmSlQk/bwDDgq9NwdwOyEOx6UwFwUiR/8ZGcKTFnRPWLUy4T4wL6JGHjLTnCy
- cOlYeY5yYKqnt6xsq7QSgBVWyoVJ1bbjqJJHYD7xTxFTsgbkcEh29x1w4RYAIWBHaBVt
- GLa17iqYbN8ousfg7HaWWxUFQAmqk/RC8CIHJSRf67k+zZF1gXlHv43+9M82DCuhjFfU
- gpzg==
+ bh=y+2NOUO8hPTG1GUTfJ6ZDLNq1r5uiV9m+8gcvilYKPM=;
+ b=hn1nhFdaTwIKgghBKJv/Eom+NPXrJT7MDshDmOjZv3caoEH7OzrBM+YZbdhokx3DhF
+ s1dcc2912Y41W00nYSRF2x3U11vT0YheX27JLFNhatw6I1ZiGv9iL/39DyhAxW8w9oTW
+ uPBpHshSB9C1S3NiqfXeMxLpQnDuSqNqVC7ZeAN6JedArfXfJaF95HfozLtGESzDWicZ
+ AI6WjbWJFfH2W0NizRn2pGvKYypYWvVR2/onTFw+JZ2JJ03tEMqdyRgBupRVsmNyNASC
+ w5BUagjjE5Lq7u8iDQ+Y9ydqrelIgFSI1qhT2ClTbqgsKr8tz86PECaB3PfCIssQ+zFM
+ Q9TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730978454; x=1731583254;
+ d=1e100.net; s=20230601; t=1730978462; x=1731583262;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=i5av/cjwHs4odA/m0p8YNr4Znl4Hlqm6z1gEEdgbRXQ=;
- b=mXhqjdSQXWTX1OISkpmaxsJE5pR84axVujsp919sDs+IlC43iBewnoa49/Z5HHcsKx
- 6VERqt2LBXbvfQE0Z86S/TLe/TJ6acXm4389gWmhAIjRq7+prX1S00o5Pf+x69uakjjh
- d2UcATFFGmb5FPWdPa3G9fZqLLib8S7HEwfrC/SLAiJkKnYrLCSnq8k8JAJxvYsS0oU1
- oFCRJzij6GryEDxbvXdJWA3DAW+DH62VQ+gM3cEUAmDEFdh9kQ2EcTbsCcCOwQ2satOF
- YTQHtTdRhEZm42hxIE9zE+14N/rWYJPywmyZEsrCafNxIaKruNbq4PsnD+a5i6sVH47o
- wXHw==
+ bh=y+2NOUO8hPTG1GUTfJ6ZDLNq1r5uiV9m+8gcvilYKPM=;
+ b=kNakWfi5HhvuoYuVxYNJi/GXlwn2o3HE2XAPzlBpv53HY681ibl1v+0cVMUquFU1UZ
+ rDF/QbAeQBVrpR3NzJjVfyUL2YHwUPBXk9f0ZCQuJvsfromRMcwfPHavR7TzdobFvV/r
+ pafWkIOhTkmuDGSyjssZtOTi6xRsCeC32/mg5AAkdWGty+2gM7xDGKaRVuvBDcwsolDi
+ zIVUKLdKAomK1gKsNlst9G04v6kwi/TKoECb2zGfdZyx4Wl40cCInEoMxrfJFN6QV4W2
+ OmpEhlOgORyksjM5RDkdA66jVj+WQF+vlNvwVJhYls8hb4wkwKtp8HwnA2STy2iSz4HS
+ aAJQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVyQy+Sn344ZQlyC/4DVsUNANy8iww23+3ekq2LBYeH0KGQvwottr6+G9QRNy2L6d6adl8695w=@lists.denx.de
-X-Gm-Message-State: AOJu0YxeH7cG7BuOLxh+4pZV8o8xkcQWAmZikCZFnHv2bU3AUsZhZzkZ
- 4ZAwh+M2Y9Qcz1UbnGaMp/PBriS3vl0Q1/9xQB3GGkQwCx9BTMP7JoijQTcNnBw=
-X-Google-Smtp-Source: AGHT+IEq2uPbFuHU1Imj/vUzwCs9Yxh31ymMEdlURPnKynyVpGhlXqGicmJP/YfITpQcW5wcLCFuLQ==
-X-Received: by 2002:a05:6000:1a8e:b0:378:8b56:4665 with SMTP id
- ffacd0b85a97d-381ef743de0mr885061f8f.24.1730978454414; 
- Thu, 07 Nov 2024 03:20:54 -0800 (PST)
+ AJvYcCW9tw4i9RIvwMbW91045VRrnsQ79WYV0lKNU3xZ5lvVzHD8N6Y9+X6pJxnKsAz0cwZ6IWgF5FM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZLgltVpBoxsUEH/5de6oKaGRVXdwzuBq/CxF+DmtXBB7QVOkZ
+ UppMtopYRfHY+3JyJzY5FgwuD+mEJyECZbLCu0MxX6lx8LRVloeAQj/YkhHJ8F+IWaxsEs4NoIT
+ 58AZGaA==
+X-Google-Smtp-Source: AGHT+IHnyyBCuLemr+eYsSV/Wwc9hmAYYHwP4gKHeeAdnXPSfOUbvcoxr/L/3g1QltNOi6sNDVsguw==
+X-Received: by 2002:a05:6512:3a88:b0:533:46cc:a71e with SMTP id
+ 2adb3069b0e04-53b34c8dde4mr21047228e87.54.1730978461763; 
+ Thu, 07 Nov 2024 03:21:01 -0800 (PST)
 Received: from [172.16.25.132] ([89.101.134.25])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381ed99a0efsm1451838f8f.58.2024.11.07.03.20.53
+ 5b1f17b1804b1-432b05e6042sm20308645e9.44.2024.11.07.03.21.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Nov 2024 03:20:54 -0800 (PST)
-Message-ID: <377bc757-50b2-4193-8506-729f26e6b665@linaro.org>
-Date: Thu, 7 Nov 2024 11:20:53 +0000
+ Thu, 07 Nov 2024 03:21:01 -0800 (PST)
+Message-ID: <72eb2769-b409-47bd-8a06-d4e180096fb7@linaro.org>
+Date: Thu, 7 Nov 2024 11:21:00 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] net: Kconfig: add CONFIG_WGET symbol
+Subject: Re: [PATCH 2/7] net: wget: add definition of struct wget_http_info
 To: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, xypron.glpk@gmx.de
-References: <20241106130255.211041-1-adrianox@gmail.com>
+References: <20241106130318.211072-1-adrianox@gmail.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241106130255.211041-1-adrianox@gmail.com>
+In-Reply-To: <20241106130318.211072-1-adrianox@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,79 +96,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/6/24 13:02, Adriano Cordova wrote:
-> Let net/wget.c and net/lwip/wget.c depend on CONFIG_WGET, and
-> cmd/wget.c depend on CONFIG_CMD_WGET. This way, the wget code
-> can be used regardless of whether the wget command is available.
+On 11/6/24 13:03, Adriano Cordova wrote:
+> The struct wget_http_info exposes the HTTP information of the last HTTP
+> request issued by wget, and it controls whether the efi bootdevice is set,
+> and whether the buffer size needs to be checked (lwip stack only). This
+> information is otherwise discarded. The wget_http_info struct can be used
+> by HTTP drivers to have more control over HTTP requests.
 > 
 > Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 > ---
->  cmd/Kconfig       | 5 +----
->  net/Kconfig       | 9 +++++++++
->  net/Makefile      | 2 +-
->  net/lwip/Makefile | 2 +-
->  4 files changed, 12 insertions(+), 6 deletions(-)
+>  include/net-common.h | 27 +++++++++++++++++++++++++++
+>  1 file changed, 27 insertions(+)
 > 
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 636833646f..8f3ad94089 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -2115,11 +2115,8 @@ config CMD_TFTPBOOT
+> diff --git a/include/net-common.h b/include/net-common.h
+> index fd7c5e7b48..38ba95cf60 100644
+> --- a/include/net-common.h
+> +++ b/include/net-common.h
+> @@ -8,6 +8,7 @@
+>  #include <env.h>
+>  #include <hexdump.h>
+>  #include <linux/if_ether.h>
+> +#include <linux/sizes.h>
+>  #include <linux/types.h>
+>  #include <rand.h>
+>  #include <time.h>
+> @@ -506,4 +507,30 @@ int wget_with_dns(ulong dst_addr, char *uri);
+>  bool wget_validate_uri(char *uri);
+>  //int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
 >  
->  config CMD_WGET
->  	bool "wget"
-> -	depends on CMD_NET
->  	default y if SANDBOX
-> -	select PROT_TCP if NET
-> -	select PROT_TCP_LWIP if NET_LWIP
-> -	select PROT_DNS_LWIP if NET_LWIP
-> +	select WGET
->  	help
->  	  wget is a simple command to download kernel, or other files,
->  	  from a http server over TCP.
-> diff --git a/net/Kconfig b/net/Kconfig
-> index 76ab7d91ee..b4bb68dd61 100644
-> --- a/net/Kconfig
-> +++ b/net/Kconfig
-> @@ -244,6 +244,15 @@ config NET_RANDOM_ETHADDR
->  	  generated. It will be saved to the appropriate environment variable,
->  	  too.
->  
-> +config WGET
-> +	bool "Enable wget"
-> +	select PROT_TCP if NET
-> +	select PROT_TCP_LWIP if NET_LWIP
-> +	select PROT_DNS_LWIP if NET_LWIP
-> +	help
-> +	  Selecting this will enable wget, an interface to send HTTP requests
-> +	  via the network stack.
+> +enum wget_http_method {
+> +	WGET_HTTP_METHOD_GET,
+> +	WGET_HTTP_METHOD_POST,
+> +	WGET_HTTP_METHOD_PATCH,
+> +	WGET_HTTP_METHOD_OPTIONS,
+> +	WGET_HTTP_METHOD_CONNECT,
+> +	WGET_HTTP_METHOD_HEAD,
+> +	WGET_HTTP_METHOD_PUT,
+> +	WGET_HTTP_METHOD_DELETE,
+> +	WGET_HTTP_METHOD_TRACE,
+> +	WGET_HTTP_METHOD_MAX
+> +};
 > +
->  config TFTP_BLOCKSIZE
->  	int "TFTP block size"
->  	default 1468
-> diff --git a/net/Makefile b/net/Makefile
-> index 209377aeb2..7c917b318c 100644
-> --- a/net/Makefile
-> +++ b/net/Makefile
-> @@ -29,7 +29,7 @@ obj-$(CONFIG_$(PHASE_)TCP_FUNCTION_FASTBOOT)  += fastboot_tcp.o
->  obj-$(CONFIG_CMD_WOL)  += wol.o
->  obj-$(CONFIG_PROT_UDP) += udp.o
->  obj-$(CONFIG_PROT_TCP) += tcp.o
-> -obj-$(CONFIG_CMD_WGET) += wget.o
-> +obj-$(CONFIG_WGET) += wget.o
->  
->  # Disable this warning as it is triggered by:
->  # sprintf(buf, index ? "foo%d" : "foo", index)
-> diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-> index f2558f8763..79dd6b3fb5 100644
-> --- a/net/lwip/Makefile
-> +++ b/net/lwip/Makefile
-> @@ -5,4 +5,4 @@ obj-$(CONFIG_CMD_DHCP) += dhcp.o
->  obj-$(CONFIG_CMD_DNS) += dns.o
->  obj-$(CONFIG_CMD_PING) += ping.o
->  obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
-> -obj-$(CONFIG_CMD_WGET) += wget.o
-> +obj-$(CONFIG_WGET) += wget.o
+> +#define MAX_HTTP_HEADERS_SIZE SZ_64K
+> +
+> +struct wget_http_info {
+> +	enum wget_http_method method;
+> +	ulong status_code;
+> +	ulong file_size;
+> +	ulong buffer_size;
+> +	bool set_bootdev;
+> +	bool check_buffer_size;
+> +	u32 hdr_cont_len;
+> +	char *headers;
+> +};
+> +
+>  #endif /* __NET_COMMON_H__ */
 
 Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
