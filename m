@@ -4,72 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D495D43366
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 14:24:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 065F0D43367
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 14:29:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 845F2892A0;
-	Thu,  7 Nov 2024 15:24:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 60B12892CD;
+	Thu,  7 Nov 2024 15:29:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="mk5PvBzq";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="B8XKaDGb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4A74892B8; Thu,  7 Nov 2024 15:24:13 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
+ id A4381892DA; Thu,  7 Nov 2024 15:29:52 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CF368927A
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 15:24:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AF8988DFA
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 15:29:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: f43d17ef-9d13-11ef-9dde-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id f43d17ef-9d13-11ef-9dde-00505699b430;
- Thu, 07 Nov 2024 15:24:09 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=3mbZuZpvxZNvqnCt1mxCmV/8VCma1LUOVnlL6g6MrlU=;
- b=mk5PvBzqTrPOhWV63DNlsnBqtUGW7rF8knJuzl9Iipbi1yMWdNt9xgSJ/d19bRz/7dOYR7XR5ulP0
- +OgPsmKj60PCk5FqpdXxUZo+kNjGC1Z2mHDQ8d+KwpFHmFQX2WFy+/OIF7MjR5ghK2BSe9Je5qrEEq
- 9D08WjgvKHyP7PIufWGUUJ31HF2TGcXqLK5fzJ4aBFGvWtqcivClR4NsagFCwyOD1GCLj2KCo04bBw
- mFVO25A0uHMSstvhl801iaPlQB8ZHgzKvTzRcJO4ChoUfLPlUm7tL6Kkaz0nPyn6RbQcT/i6OdyH8F
- DzmUQNiqef4eq6lxiJeUqlwZ0ABvezQ==
-X-KPN-MID: 33|v4l1poB35I15rxx+F4M5WN75K8NmBffNayM38QgWvdJFfmG2oxnkBr2bgQYxli8
- qAHhbAu0DgGXPgmJXrbHO9tkyUnBburP8dm+1s+pNwWQ=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|5n3lIxMDJ6uqTcD7EC3E4N/SKef1nJjAnTfAnTy3e2Z8brOuYiubOo5WyeqmZ4n
- mCQ2KA4e/R+qoCdSuJVE7qg==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id f4420c9a-9d13-11ef-974c-005056998788;
- Thu, 07 Nov 2024 15:24:10 +0100 (CET)
-Date: Thu, 07 Nov 2024 15:24:09 +0100
-Message-Id: <87cyj72kc6.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Simon Glass <sjg@chromium.org>, xypron.glpk@gmx.de
-Cc: andre.przywara@arm.com, u-boot@lists.denx.de,
- jagan@amarulasolutions.com, quentin.schulz@cherry.de,
- trini@konsulko.com, caleb.connolly@linaro.org,
- csokas.bence@prolan.hu, marek.vasut+renesas@mailbox.org,
- michal.simek@amd.com, Oliver.Gaskell@analog.com,
- pbrobinson@gmail.com, rayagonda.kokatanur@broadcom.com,
- sumit.garg@linaro.org, venkatesh.abbarapu@amd.com
-In-Reply-To: <CAFLszTjv3z0cfVO8N-+=7J866q6jvCqd7xcvhtqnNg3RUcB8VQ@mail.gmail.com>
- (message from Simon Glass on Tue, 5 Nov 2024 08:14:53 -0700)
-Subject: Re: [PATCH v4 5/8] sunxi: Move to bootstd
-References: <20241017232531.726559-1-sjg@chromium.org>
- <20241017232531.726559-6-sjg@chromium.org>
- <CAFLszTihCzaut1MCtQJ=LTzYrhwyT+3On8hM2GMgSd0g6dqKBw@mail.gmail.com>
- <20241103103626.0d5c76a6@minigeek.lan>
- <87ldy042zl.fsf@bloch.sibelius.xs4all.nl>
- <20241104133429.09cc7a72@donnerap.manchester.arm.com>
- <87cyjb3tm7.fsf@bloch.sibelius.xs4all.nl>
- <CAFLszTjv3z0cfVO8N-+=7J866q6jvCqd7xcvhtqnNg3RUcB8VQ@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=d7e1=SD=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1730989779;
+ bh=GiRxwuTbDJj3qcCTmOE2pWzKkWghue0sSXUMlAH+Wqg=;
+ b=B8XKaDGbci8Vt3nLS+y+31PdaTz9H1x6Vj1ot5lWUlTGBao0EaoG/p2uW6TnaQ7YkiPpILrhv
+ 9vIkrZnzbDoFEzpsU7nTkLvMfDuH8SqfRRpywiuTziXXy6CxjLeYq1LsikpWfY0tV+2IyG4Q7nS
+ WSWSek9Il4Rh5gFy5o88y80wE+CbvymxTyq3J3JSp9u5dTLfawXFWUyiPxRVP8mg+l4+hiBv7H8
+ IBWN2WtnmTQDkYXo++MWZefb2YhpTxymfdSq19gAvVs3ynep9aFxUZLxZ8M4i1iY7Mgb2Z4kNP9
+ dXcGV3E/HbRlkIcEhtWrAR7LBvH3+ih0ve90zITiwtgA==
+Message-ID: <cef9b291-5c27-454c-a24a-565d4510add5@kwiboo.se>
+Date: Thu, 7 Nov 2024 15:29:31 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] rockchip: rk3588: Implement checkboard() to print
+ SoC variant
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
+References: <20241102203746.3631481-1-jonas@kwiboo.se>
+ <20241102203746.3631481-3-jonas@kwiboo.se>
+ <f4f66f6c-3b96-4529-a90c-cd3a0b900a56@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <f4f66f6c-3b96-4529-a90c-cd3a0b900a56@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-ForwardEmail-ID: 672cced15b0439d06bdefeeb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,208 +76,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Simon Glass <sjg@chromium.org>
-> Date: Tue, 5 Nov 2024 08:14:53 -0700
+Hi Quentin,
 
-Heinrich, did you see this discussion concerning the EFI boot manager?
-
-Simon,
-
-> H Mark, Peter,
+On 2024-11-07 13:01, Quentin Schulz wrote:
+> Hi Jonas,
 > 
-> On Mon, 4 Nov 2024 at 08:29, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> >
-> > > Date: Mon, 4 Nov 2024 13:34:29 +0000
-> > > From: Andre Przywara <andre.przywara@arm.com>
-> > >
-> > > On Sun, 03 Nov 2024 18:54:38 +0100
-> > > Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> > >
-> > > Hi Mark,
-> > >
-> > > > > Date: Sun, 3 Nov 2024 10:36:26 +0000
-> > > > > From: Andre Przywara <andre.przywara@arm.com>
-> > > >
-> > > > Hi Andre,
-> > > >
-> > > > > On Sat, 2 Nov 2024 11:35:31 -0600
-> > > > > Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi Simon,
-> > > > >
-> > > > > > On Thu, 17 Oct 2024 at 17:25, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > >
-> > > > > > > Drop support for distroboot and move to using bootstd instead.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > (no changes since v2)
-> > > > > > >
-> > > > > > > Changes in v2:
-> > > > > > > - Convert the other DISTRO_DEFAULTS in the Kconfig too
-> > > > > > >
-> > > > > > >  arch/arm/Kconfig | 10 +++++-----
-> > > > > > >  1 file changed, 5 insertions(+), 5 deletions(-)
-> > > > > >
-> > > > > > Could this series be applied, please?
-> > > > >
-> > > > > So I played with that a bit:
-> > > > > - The FEL script boot method works: it has the highest priority, which
-> > > > >   is what we want, because the script would be deliberately injected by
-> > > > >   the user to be executed. So thanks for the changes!
-> > > > > - However the other global boot method (efimgr) takes precedence over
-> > > > >   other, *higher* priority methods (extlinux.conf/boot.scr). This
-> > > > >   leads to behavioural regressions, I think, like:
-> > > > >   - Say there is a bootaa64.efi on some ESP on the eMMC. If you now
-> > > > >     boot from SD card, with boot.scr or extlinux.conf on there, U-Boot
-> > > > >     will still find the EFI app first and execute that. I don't think
-> > > > >     that's what we want?
-> > > > >   - Similar, if you have a boot script on the eMMC, and boot from
-> > > > >     there, but with a USB stick carrying a bootaa64.efi plugged in.
-> > > > >     Then EFI would win as well. This might be intended, but maybe not,
-> > > > >     and I don't see how one would influence that?
-> > > > >
-> > > > > Is there a way to change the bootflow to look for any boot payload on
-> > > > > the *boot* media first? So when I boot from SD, it checks this first for
-> > > > > EFI, boot.scr, extlinux.conf, then goes to eMMC and USB. Similarly, when
-> > > > > booting from eMMC, check there first before considering SD and USB.
-> > > > > Maybe I am missing something obvious here?
-> > > >
-> > > > The issue here is that the EFI bootmanager by its very nature
-> > > > considers all possible devices for which boot options have been
-> > > > included in the BootOptions EFI variable.  So if you have enabled
-> > > > bootmeth_efi_mgr (and you probably should), and you have an active
-> > > > boot option (that is a boot option that is included in the BootOptions
-> > > > EFI variable) that points at eMMC or USB, it will try too boot using
-> > >
-> > > I think that's the point: sunxi is one of the platforms that doesn't
-> > > feature persistent UEFI variables, at least not when set via UEFI RT
-> > > services. So we don't typically have any UEFI variables to help us
-> > > point at the right boot location, which leaves us only with ...
-> >
-> > Right.  One of the suggested solutions for this was to store EFI
-> > variables on the ESP in a well-defined format and have the OS update
-> > that file directly.  Ilias posted a diff for that some time ago, but I
-> > don't think this was committed.  I did some testing of that approach
-> > on OpenBSD and I'm fairly confident I could make it work.  But you'd
-> > probably need support from at least a few Linux distros to make this
-> > feasable.  Anyway...
-> >
-> > > > that boot option.  So you'd think things would be fine as long as you
-> > > > don't add boot options for eMMC or USB to the BootOrder variable.
-> > > >
-> > > > Unfortunately the EFI_LOADER code will automatically generate media
-> > > > device boot options for all the block devices that get added and adds
-> > > > those to the BootOrder variables in an attempt to implement the
-> > > > requirement to boot from removable media if everything else fails.
-> > >
-> > > ... exactly removable media. So UEFI boot so far was relying on
-> > > efi/boot/bootaa64.efi, though I think you can construct a more specific
-> > > entry by manually setting (and storing!) this on the U-Boot shell.
-> >
-> > You can.  But I don't think that is something you could expect the
-> > average user to do.
-> >
-> > > Another complication is that very often microSD cards are either the
-> > > only or the preferred "hard disk" for those boards, and they are surely
-> > > removable, even though in those scenarios they are treated more like
-> > > "fixed" disks.
-> >
-> > Well "removable media" is a bit of a misnomer here.  The current UEFI
-> > spec says:
-> >
-> >   Searching for a default application to boot happens on both
-> >   removable and fixed media types.
-> >
-> > So the fallback actually needs to happen on "fixed" disks as well.  At
-> > least that is what most UEFI implementations do (and is what EDK2
-> > does).  At this point OpenBSD (on all architectures, include amd64)
-> > pretty much relies on this as we don't configure any boot options at
-> > the moment.  And it works on 99% of the machines out there.
-> >
-> > > The Allwinner BootROM is writing a boot source ID into SRAM, so we know
-> > > whether we were booted from SD card, eMMC, or SPI flash, and set
-> > > $mmc_bootdev accordingly. I need to check whether and how this is
-> > > reflected in bootstd.
-> > >
-> > > > But I think that's a mistake.  I can't find a requirement to add boot
-> > > > options for these in the spec, let alone a requirement to add those to
-> > > > BootOrder.  I suppose this fallback could be implemented as a separate
-> > > > bootmeth that can be low priority.
-> > >
-> > > Yeah, I also feel like splitting this up might help. So one bootmeth for
-> > > removable media, and one BootOrder variable based.
-> > >
-> > > But I think the culprit in this particular situation is this "global" flag,
-> > > which makes it live outside of the priority scheme, IIUC:
-> > > "When global bootmeths are available, these are typically checked before
-> > > the above bootdev scanning."
-> > >
-> > > Not sure if there is a good solution to this problem? Maybe check at least
-> > > the boot device first, for all bootmeth's, and only then consult global
-> > > bootmeth's? But then again we want to current behaviour for FEL script
-> > > booting, I wonder if this could be modelled as some pseudo bootdev instead
-> > > of marked as global (because we are booting via the BootROM's USB-OTG
-> > > routines in this case).
-> >
-> > To some extent, we already have a solution.  We have
-> > BOOTMETH_EFILOADER, which is a per-device boot method which loads the
-> > default application.  So that pretty much does what's needed for the
-> > fallback.
-> >
-> > So if it was possible to disabled the autogeneration of the default
-> > media boot options you'd probably be closer to what you want for
-> > sunxi.  I believe that'd make you lose the EFI boot menu options for
-> > the different devices though.  So maybe the solution is for
-> > BOOTMETH_EFI_MGR to simply skip the autogenerated options and let
-> > BOOTMETH_EFILOADER take care of those?
-> >
-> > Cheers,
-> >
-> > Mark
-> >
-> > > > > So while I am personally happy with EFI being a prominent citizen, I
-> > > > > think many sunxi users would still expect more traditional boot methods
-> > > > > to at least work - at the moment they might be permanently "shadowed" by
-> > > > > some bootaa64.efi sitting *somewhere*. That actually bites me at the
-> > > > > moment when working on a new SoC port, where I use an extlinux.conf as
-> > > > > an override, to load a custom dev kernel and DTB, but bootstd still
-> > > > > finds that grub on that SD card and uses that first :-(
-> > > > >
-> > > > > So I feel like EFI should still be the preferred boot method, but the
-> > > > > more custom ways should be allowed to override that.
-> > > > >
-> > > > > Do you have any ideas how to solve that, or am I holding it wrong?
-> > > > >
-> > > > > Cheers,
-> > > > > Andre
-> > > > >
-> > >
-> > >
+> On 11/2/24 9:37 PM, Jonas Karlman wrote:
+>> Implement checkboard() to print current SoC model used by a board,
+>> e.g. one of:
+>>
+>>    SoC:   RK3582 v1
+>>    SoC:   RK3588 v0
+>>    SoC:   RK3588 v1
+>>    SoC:   RK3588S v0
+>>    SoC:   RK3588S v1
+>>    SoC:   RK3588S2 v1
+>>
+>> when U-Boot proper is running.
+>>
+>>    U-Boot 2025.01-rc1 (Nov 02 2024 - 20:19:01 +0000)
+>>
+>>    Model: Generic RK3588S/RK3588
+>>    SoC:   RK3588S2 v1
+>>    DRAM:  8 GiB
+>>
+>> Information about the SoC model, variant and version is read from OTP.
+>>
+>> Also update rk3588s-u-boot.dtsi to include OTP in U-Boot pre-reloc phase,
+>> where checkboard() is called.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>> v2:
+>> - Update commit message
+>> - Update code comments
+>> - Drop generic-rk3588_defconfig change
+>> ---
+>>   arch/arm/dts/rk3588s-u-boot.dtsi       |  4 ++
+>>   arch/arm/mach-rockchip/rk3588/rk3588.c | 58 ++++++++++++++++++++++++++
+>>   2 files changed, 62 insertions(+)
+>>
+>> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
+>> index 09d8b311cec5..8880d162b11c 100644
+>> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
+>> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
+>> @@ -69,6 +69,10 @@
+>>   	bootph-all;
+>>   };
+>>   
+>> +&otp {
+>> +	bootph-some-ram;
+>> +};
+>> +
+>>   &pcfg_pull_down {
+>>   	bootph-all;
+>>   };
+>> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+>> index e2dac2a5b806..f9da7a6f1477 100644
+>> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
+>> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+>> @@ -4,6 +4,8 @@
+>>    * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
+>>    */
+>>   
+>> +#include <dm.h>
+>> +#include <misc.h>
+>>   #include <spl.h>
+>>   #include <asm/armv8/mmu.h>
+>>   #include <asm/arch-rockchip/bootrom.h>
+>> @@ -178,3 +180,59 @@ int arch_cpu_init(void)
+>>   	return 0;
+>>   }
+>>   #endif
+>> +
+>> +#define RK3588_OTP_CPU_CODE_OFFSET		0x02
+>> +#define RK3588_OTP_SPECIFICATION_OFFSET		0x06
+>> +#define RK3588_OTP_CPU_VERSION_OFFSET		0x1c
+>> +
+>> +int checkboard(void)
+>> +{
+>> +	u8 cpu_code[2], specification, package, cpu_version;
+>> +	struct udevice *dev;
+>> +	char suffix[3];
+>> +	int ret;
+>> +
+>> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
+>> +					  DM_DRIVER_GET(rockchip_otp), &dev);
+>> +	if (ret) {
+>> +		debug("%s: could not find otp device, ret=%d\n", __func__, ret);
 > 
-> I am not seeing an obvious solution here, certainly not one we can
-> implement at rc1.
+> We should probably start using log_debug instead?
+
+I guess we should?, not sure why there is two different and what the
+difference is. Have typically only ever used debug() or printf(), so I
+just went with what was used in the code copied from board.c.
+
 > 
-> Perhaps, Mark, you can carry a patch for your needs until we sort this
-> out? I certainly did not understand the complexities introduced by the
-> patch[1] to enable bootmgr within bootstd.
-
-Well obviously that is possible.  But it doesn't make sense to me.  I
-don't think we should convert more boards to use standard boot if that
-means that U-Boot's EFI bootmanager can't be used for booting those
-boards.
-
-Another thing that doesn't make sense to me is that if you revert that
-commit, the efi_mgr bootmeth only "works" in sandbox.  At that point
-enabling it by default makes no sense anymore.
-
-If you really wanted to switch sunxi to use standard boot and drop the
-EFI bootmanager support, I think you should just disable
-BOOTMETH_EFI_BOOTMGR option for sunxi.
-
-> Regards,
-> SImon
+> I guess with #define LOG_CATEGORY LOGC_ARCH
 > 
-> [1] f2bfa0cb179 bootstd: Make efi_mgr bootmeth work for non-sandbox setups
+> at the top?
+
+I can give it a try, what/how is the log category used for?
+
+My simple debug workflow is just to add a '#define LOG_DEBUG' at top of
+a file when I want some more debug info.
+
 > 
+>> +		return 0;
+>> +	}
+>> +
+>> +	/* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
+>> +	ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
+> 
+> This will fail if CONFIG_MISC=n which is neither selected nor implied 
+> for RK3588.
+
+Good catch, did not test that scenario, will fix in a v3.
+
+> 
+> I tested on multiple RK3588 Jaguar, and the commercial (RK3588) grade 
+> ones all showed RK3588 v0.
+> 
+> The one industrial grade (RK3588J) showed RK3588J v1.
+
+Thanks for confirming this works on a J-variant.
+
+> 
+> I'm really not sure what this version number is for. If even Kever 
+> doesn't know what it means, I am not sure it makes sense to print it?
+
+For rk356x there is some special handling for cpu-version <> 0 in vendor
+code, and DT describe a cpu-version nvmem cell, so thought it could be
+useful debug information. However it may just cause more confusion since
+there is no clear information on what the different cpu-version mean.
+
+Will drop the cpu-version information in a v3.
+
+> 
+> FWIW, the Linux kernel now exposes different nvmem devices for each cell 
+> and since we have a cell defined for the three OTP ranges you're using 
+> here, maybe it'd make sense to use that instead of hardcoding the 
+> offsets and size in here? Not a blocker for this though as I don't think 
+> it brings THAT much value to those fixed NVMEM layouts.
+
+Took a quick peek at nvmem cell support in U-Boot and look like 'bits' prop
+is not supported and nvmem-cells/nvmem-cell-names may have to be used.
+
+Probably easier to use that in a future series that also converts this
+into a possible sysinfo driver using a DT node similar to:
+
+  sysinfo {
+	compatible = "rockchip,rk3588-sysinfo";
+	bootph-some-ram;
+	nvmem-cells = <&cpu_code>, <&otp_id>, ...;
+	nvmem-cell-names = "soc", "id", ...;
+  };
+
+Something for the future :-)
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+
