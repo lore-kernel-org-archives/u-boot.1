@@ -4,59 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B19ED5AE75
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 09:39:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92CDDD5AE79
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 09:41:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 761AA88B64;
-	Thu,  7 Nov 2024 10:39:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id EDB36891FD;
+	Thu,  7 Nov 2024 10:41:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="izM6YbLX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mwSw3Tlx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FBE288C4D; Thu,  7 Nov 2024 10:39:03 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D8C2989218; Thu,  7 Nov 2024 10:41:03 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A348688B4B
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 10:39:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 737C088B4B
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 10:40:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
- [5.147.80.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 9BE1B40286; 
- Thu,  7 Nov 2024 09:38:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1730972339;
- bh=KNgryzr35H2KkTvKvkXh7t09JvYhzLPNphevkUoaATw=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=izM6YbLXlNUJXXqL+P82Orh2G54RIrzWFFUptv5N9iUx32TRW+ZX6fXya3InA6B2R
- uLJkpAlD7KwywIfDJahuUNKGwoGg1tQiBRNIlZpjaF/B4C9h8auLq+DGsV++POgJBZ
- 7PilCu5RzIVT81Y4Z9whdOWAGg/cscDMoaTiHLDEoUldCMMZ8MMsokoJX0S5sDkXEK
- pXg2503O3ef6PbrgJBEz1WxOKYxEr/VtPRWdUzWgBv37Xv41eptom9cX9u2TPLKyyj
- JsacPpGY11rBIIf+haii44UfM8FkPPJRo8bmq5jotzqb5NwWhu5VpdBxpy1VdCT5gk
- 6ya5y9gSGMpgQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] fs: ext4: correct error handling
-Date: Thu,  7 Nov 2024 10:38:53 +0100
-Message-ID: <20241107093854.42184-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-2e2eba31d3aso560904a91.2
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 01:40:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730972455; x=1731577255; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Bu9q3+d235rXzZ+Nhc6JMrk0hcL/GLBjX1/lxszhXf8=;
+ b=mwSw3TlxaR2KaCa+Dky+Oi1i8WEy8IAyh43pcts4aTtkxJ77XCi3LloO9eU24HepNm
+ wM2GCwoeB8NBOKHXxtKFy09buwc/wsfBuK/uG8xYlu8fHy94obwurUxaSOvAYJxffYjp
+ XbXfoOUKCNg6yck2FvQ3QNojoZh19I3P2pvJZl8pxfKERB1xanDxoyJTrFiI+QfcBjim
+ 7jW81ZZRbhPgvmpfXEPm9mmeK4CCpqPcsFO4dKXc+5vS4w5WmMtbC+SSqWUjdLwB39S9
+ aHe8Tixt+VoBnpsigt5NMqZi6Z7kW9B7cMqFlsdK75S2aNSZfodxZQewY3qdl1ER1JnI
+ gzwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730972455; x=1731577255;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Bu9q3+d235rXzZ+Nhc6JMrk0hcL/GLBjX1/lxszhXf8=;
+ b=wW0Vv2m8WL0M2J9Oh0WIvW8s8r6Hnn+wjYfiHbstLzQp50wa8RCCJ/3qmLFkxkfkgi
+ zVTSduUdiGJOtJgd8DlsFx9ESeD5rki8XMsKO+svQkAVmIo3jWnA/E288O0sveppGQCa
+ VPBZTzCnjuhZL9Jwh2ugPcwJ56ipjuMnBpivLvzbbtHgFs8e6lOV9AQu76GQBqPBZDVS
+ xkorcMkfX1kBsEg7+5gi2pKIyM5E+6NAtWwz9+cnCMPeLqahnh0lfK/mU1wrp9VFxhqb
+ K8a1JUErWWX9UgOZG41A/d6N3/n2HEf4jxeCiwD1ba/idIbfMqfT3fU4yJ2da6Lrh7zg
+ Z+EQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVjVChBXJqbNtEtI8A/We0NS5HencM2qpce4qID6Efvd2K0cxrimoblBBDitS8RyfVvC7WxkHs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx7HmQWwejijZGyZwkbT7yKeim/v6cJ47dFMkzeavTw6IQY34bp
+ kUEBDsOI15s2QTSPzvaIwH9ZX0OYdMunfgPhZb6zkrJ7RlR57UuGSXVcgRUDwCV39bOXr5fTqoS
+ oEzcebQY8Qlt7oLFFky0kp7oyyc8Og9c87QHqSA==
+X-Google-Smtp-Source: AGHT+IGRiWFAJisjRKAtXtJ7TIBTYdvTmVGP+QhbncXqngGshj2yBCHMAsYFgrnULTN3vFPKm3pFhGmzMSksZMGYdpc=
+X-Received: by 2002:a17:90a:ca83:b0:2e2:ad29:11a4 with SMTP id
+ 98e67ed59e1d1-2e8f11b894fmr44820674a91.25.1730972454964; Thu, 07 Nov 2024
+ 01:40:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241105193129.28582-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241105193129.28582-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 7 Nov 2024 09:40:19 +0000
+Message-ID: <CAC_iWj+xAGXbs3-Lbs6OErNnkdxu4TuAGvRLsax_L_a6QkjfXw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] board: qemu-arm: select
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,39 +89,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After calling strdup() check the returned pointer.
+On Tue, 5 Nov 2024 at 19:31, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> qemu_arm64_defconfig with CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=n leads to a
+> build error:
+>
+>     arch/arm/lib/crt0_64.S:85:
+>     Error: constant expression expected at operand 2 --
+>     `ldr x0,=((CFG_SYS_INIT_RAM_ADDR+CFG_SYS_INIT_RAM_SIZE-480))'
+>
+> We do not define CFG_SYS_INIT_RAM_ADDR and CFG_SYS_INIT_RAM_SIZE for QEMU.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  board/emulation/qemu-arm/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/board/emulation/qemu-arm/Kconfig b/board/emulation/qemu-arm/Kconfig
+> index e21c135e86f..80ab9d8e1c3 100644
+> --- a/board/emulation/qemu-arm/Kconfig
+> +++ b/board/emulation/qemu-arm/Kconfig
+> @@ -5,6 +5,7 @@ config TEXT_BASE
+>
+>  config BOARD_SPECIFIC_OPTIONS # dummy
+>         def_bool y
+> +       select HAS_CUSTOM_SYS_INIT_SP_ADDR
+>         select QFW if ACPI
+>         select QFW_MMIO if CMD_QFW
+>         imply VIRTIO_MMIO
+> --
+> 2.45.2
+>
 
-Avoid a memory leak if the directory is not found.
-
-Reported-by: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Fixes: 22fdac381f98 ("fs: ext4: implement opendir, readdir, closedir")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- fs/ext4/ext4fs.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
-index dfecfa0b4e8..1727da2dc6d 100644
---- a/fs/ext4/ext4fs.c
-+++ b/fs/ext4/ext4fs.c
-@@ -213,7 +213,7 @@ int ext4fs_opendir(const char *dirname, struct fs_dir_stream **dirsp)
- 	if (!dirs)
- 		return -ENOMEM;
- 	dirs->dirname = strdup(dirname);
--	if (!dirs) {
-+	if (!dirs->dirname) {
- 		free(dirs);
- 		return -ENOMEM;
- 	}
-@@ -224,6 +224,8 @@ int ext4fs_opendir(const char *dirname, struct fs_dir_stream **dirsp)
- 		ret = 0;
- 		*dirsp = (struct fs_dir_stream *)dirs;
- 	} else {
-+		free(dirs->dirname);
-+		free(dirs);
- 		ret = -ENOENT;
- 	}
- 
--- 
-2.45.2
-
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
