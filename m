@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 381DBD5D68A
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 21:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AFF3D5D688
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 21:32:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 948BE88901;
-	Thu,  7 Nov 2024 22:32:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E996189083;
+	Thu,  7 Nov 2024 22:32:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FrGy00sa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dUrQ7SzR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA53988DB2; Thu,  7 Nov 2024 22:32:05 +0100 (CET)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id 33E868878A; Thu,  7 Nov 2024 22:32:09 +0100 (CET)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8A9B8878A
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 22:32:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 12C7888E00
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 22:32:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-3a6bc0600f9so5647035ab.1
- for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 13:32:03 -0800 (PST)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3a6adaee7acso5280665ab.0
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 13:32:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731015122; x=1731619922; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731015125; x=1731619925; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zrE0taTI7pdVEJdlucuJEWGPP0bBZAvBX82ok3msXOE=;
- b=FrGy00saFfRAxGN2pg+dbcSn6KISSrrU93cFti+6gXlY6jS7NKfuPcmHW9IzcAXpgD
- JZ80ZCBO9VrgcD5+UJewy9B1KMpQrhToTyElSuvGGnGFcbvrvnB/Ycyh/c3aXctRsl0W
- mxxdp7H7U/KBzlMLO63Z20YoDvSIsBNQBMcEg=
+ bh=wbfatyAXrs4s7Gt3G9iTgDgJAawmN4+jl1dticW00ZA=;
+ b=dUrQ7SzRLw//c8m16D0nR2xaZoLqzhj/zujp/oq1WZrida6cQttMGvxgkNG8zpYv65
+ AqO2dbOxifROuKf/PNdqawC1Nom825pl9Q6XNa6EGOLSFOqB8qDi7dsef6FaeK0mQn9e
+ Ur3uhZ2ofUAIiMBkMra8enAEKNwYM+32UAtu4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731015122; x=1731619922;
+ d=1e100.net; s=20230601; t=1731015125; x=1731619925;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zrE0taTI7pdVEJdlucuJEWGPP0bBZAvBX82ok3msXOE=;
- b=wxU+ZF7QeWrWsEnhFjzpaapBiQ7mHvu7X7+pwsJUvRBgqLFhY54p/b+zxZoQplLj6b
- Wn/tO/wvPhtt1wSXgj7VuYRm2r4DopFYbtC6QFHuGfFZd6su2KrQ296nYUI5z1kmR73I
- whCj9nWHLM/BMgw3bsdH+9VKqkjsnYCTAH4ZMNL+ed2XV656f3I1WEw4mnUInjgZaBSr
- EMQk1RBFih1glKuDt2Jo01ZKo66BSM5qhi3jkTblhW3HIGsKBRoKdDovbSYQnOWSOx+v
- xxP3vBY+w0+uvERhuCA67cT2M4ZvV/fbxTCm2ozCd+Dp1SeoGtOWZQH7SuFK4wlipXiw
- TPyA==
-X-Gm-Message-State: AOJu0YxvnTIDV0Ag/hJts6POsgHj+d4yiRqgiVmZDLqP/+Ac3I+LdcII
- QVzGkBgHOSS3rVhN6I1TgFUaTK2CnHTJhwdXdXNHO6/XgmdaFuN1+p7C5m6HURw/qLOLh9gpZhc
+ bh=wbfatyAXrs4s7Gt3G9iTgDgJAawmN4+jl1dticW00ZA=;
+ b=caEdg9MCptbwpoWd9qzPg7f0rV2TK1VI0tmICPQYW6yF+CoOtXpBDK1SmYN7yuIome
+ OvHL8aLKH2a/bqeR2gy+AmC3TyBUI7b4p/izfEK/r5qV4xwLFuHxreKj4u6TKMyhPoi/
+ V8OYAiwtpyEENXs7DCmskmV0JzEHLkWhvF54Z/U5GJO/LNQdRkvUyaEIeyGX0cJAHXMY
+ yO/MEZuMgLP6QTXc6QHfhIq/ltfNN6AMPLkQE93Nh+X4E/dR/zybtcIx0+kseoEy+MUv
+ u7oXP+Lvy7TUw9f/HWN60KaB4FRLZLHaYecPrivovq71jxN6l6DfgpwDMd6U5gNDKlUN
+ bndg==
+X-Gm-Message-State: AOJu0YxeOV1npR+Jr9rV9N0wPuomkIxkuo+1JTthsbZldToGJMRqUpKp
+ gv4xjcDCeaqw+kOqMlnK8h8wBLTHBzIdcvAsT3KGcKm2f4wnq6RL7jxCKludmhBIZB+MRbY1soA
  =
-X-Google-Smtp-Source: AGHT+IEREL9cIjDlUrfGYR/UC5lSvBKwQzGCmHtG+mHQfhvaQVoPAxEIKqAQdUhOPbUba2N58xT78A==
-X-Received: by 2002:a92:c264:0:b0:3a6:bb77:a362 with SMTP id
- e9e14a558f8ab-3a6f199037bmr9698495ab.4.1731015121828; 
- Thu, 07 Nov 2024 13:32:01 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IErGn1UxcGmBXRkCoGC+0S4HHZQFX50PaoI8TgHCDJgbRbhAeMe7/ST8Uvu22322s/YuzQ3RA==
+X-Received: by 2002:a92:ca46:0:b0:3a6:b34f:c1de with SMTP id
+ e9e14a558f8ab-3a6f19e85aamr9225005ab.14.1731015124797; 
+ Thu, 07 Nov 2024 13:32:04 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a6ead30a79sm4831745ab.71.2024.11.07.13.31.59
+ e9e14a558f8ab-3a6ead30a79sm4831745ab.71.2024.11.07.13.32.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Nov 2024 13:32:00 -0800 (PST)
+ Thu, 07 Nov 2024 13:32:03 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Michal Simek <michal.simek@amd.com>
-Subject: [PATCH v10 01/10] efi_loader: Add a test app
-Date: Thu,  7 Nov 2024 14:31:41 -0700
-Message-Id: <20241107213150.1711962-2-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v10 02/10] sandbox: Add a -N flag to control on-host behaviour
+Date: Thu,  7 Nov 2024 14:31:42 -0700
+Message-Id: <20241107213150.1711962-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241107213150.1711962-1-sjg@chromium.org>
 References: <20241107213150.1711962-1-sjg@chromium.org>
@@ -92,137 +90,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a simple app to use for testing. This is intended to do whatever it
-needs to for testing purposes. For now it just prints a message and
-exits boot services.
+Sandbox is its own architecture, but sometimes we want to mimic the host
+architecture, e.g. when running an EFI app not built by U-Boot.
 
-There was a considerable amount of discussion about whether it is OK to
-call exit-boot-services and then return to U-Boot. This is not normally
-done in a real application, since exit-boot-services is used to
-completely disconnect from U-Boot. For now, this part is skipped.
+Add a -N/--native flag which tells sandbox to reflect the architecture
+of the host.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v10:
-- Drop call to exit-boot-services
+(no changes since v8)
 
-Changes in v9:
-- Update license
-- Fix 'sevices' typo
+Changes in v8:
+- Add new patch to control on-host behaviour
 
-Changes in v7:
-- Update commit message
+ arch/sandbox/cpu/start.c         | 10 ++++++++++
+ arch/sandbox/include/asm/state.h |  1 +
+ 2 files changed, 11 insertions(+)
 
- lib/efi_loader/Kconfig   | 10 +++++++
- lib/efi_loader/Makefile  |  1 +
- lib/efi_loader/testapp.c | 64 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 75 insertions(+)
- create mode 100644 lib/efi_loader/testapp.c
-
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 066f0ca0da7..58d49789f12 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -567,6 +567,16 @@ config BOOTEFI_HELLO_COMPILE
- 	  No additional space will be required in the resulting U-Boot binary
- 	  when this option is enabled.
+diff --git a/arch/sandbox/cpu/start.c b/arch/sandbox/cpu/start.c
+index 81752edc9f8..2940768cd1c 100644
+--- a/arch/sandbox/cpu/start.c
++++ b/arch/sandbox/cpu/start.c
+@@ -449,6 +449,16 @@ static void setup_ram_buf(struct sandbox_state *state)
+ 	gd->ram_size = state->ram_size;
+ }
  
-+config BOOTEFI_TESTAPP_COMPILE
-+	bool "Compile an EFI test app for testing"
-+	default y
-+	help
-+	  This compiles an app designed for testing. It is packed into an image
-+	  by the test.py testing frame in the setup_efi_image() function.
-+
-+	  No additional space will be required in the resulting U-Boot binary
-+	  when this option is enabled.
-+
- endif
- 
- source "lib/efi/Kconfig"
-diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-index 00d18966f9e..87131ab911d 100644
---- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
- ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
- apps-y += dtbdump
- endif
-+apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
- 
- obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
- obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
-diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
-new file mode 100644
-index 00000000000..1a2f9ef9b6c
---- /dev/null
-+++ b/lib/efi_loader/testapp.c
-@@ -0,0 +1,64 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Hello world EFI application
-+ *
-+ * Copyright 2024 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ *
-+ * This test program is used to test the invocation of an EFI application.
-+ * It writes a few messages to the console and then exits boot services
-+ */
-+
-+#include <efi_api.h>
-+
-+static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
-+
-+static struct efi_system_table *systable;
-+static struct efi_boot_services *boottime;
-+static struct efi_simple_text_output_protocol *con_out;
-+
-+/**
-+ * efi_main() - entry point of the EFI application.
-+ *
-+ * @handle:	handle of the loaded image
-+ * @systab:	system table
-+ * Return:	status code
-+ */
-+efi_status_t EFIAPI efi_main(efi_handle_t handle,
-+			     struct efi_system_table *systab)
++static int sandbox_cmdline_cb_native(struct sandbox_state *state,
++				     const char *arg)
 +{
-+	struct efi_loaded_image *loaded_image;
-+	efi_status_t ret;
++	state->native = true;
 +
-+	systable = systab;
-+	boottime = systable->boottime;
-+	con_out = systable->con_out;
-+
-+	/* Get the loaded image protocol */
-+	ret = boottime->open_protocol(handle, &loaded_image_guid,
-+				      (void **)&loaded_image, NULL, NULL,
-+				      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		con_out->output_string
-+			(con_out, u"Cannot open loaded image protocol\r\n");
-+		goto out;
-+	}
-+
-+	/* UEFI requires CR LF */
-+	con_out->output_string(con_out, u"U-Boot test app for EFI_LOADER\r\n");
-+
-+out:
-+	/*
-+	 * TODO: exit boot services so that this part of U-Boot can be tested
-+	 *
-+	 * map_size = 0;
-+	 * ret = boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size,
-+	 *			       &desc_version);
-+	 * boottime->exit_boot_services(handle, map_key);
-+	 */
-+	con_out->output_string(con_out, u"Exiting test app\n");
-+	ret = boottime->exit(handle, ret, 0, NULL);
-+
-+	/* We should never arrive here */
-+	return ret;
++	return 0;
 +}
++SANDBOX_CMDLINE_OPT_SHORT(native, 'N', 0,
++			  "Use native mode (host-based EFI boot filename)");
++
+ void state_show(struct sandbox_state *state)
+ {
+ 	char **p;
+diff --git a/arch/sandbox/include/asm/state.h b/arch/sandbox/include/asm/state.h
+index e7dc01759e8..dc21a623106 100644
+--- a/arch/sandbox/include/asm/state.h
++++ b/arch/sandbox/include/asm/state.h
+@@ -101,6 +101,7 @@ struct sandbox_state {
+ 	bool disable_eth;		/* Disable Ethernet devices */
+ 	bool disable_sf_bootdevs;	/* Don't bind SPI flash bootdevs */
+ 	bool upl;			/* Enable Universal Payload (UPL) */
++	bool native;			/* Adjust to reflect host arch */
+ 
+ 	/* Pointer to information for each SPI bus/cs */
+ 	struct sandbox_spi_info spi[CONFIG_SANDBOX_SPI_MAX_BUS]
 -- 
 2.34.1
 
