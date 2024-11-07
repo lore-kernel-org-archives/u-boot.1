@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35821D43361
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 14:10:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4218DD43366
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 14:16:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B226389287;
-	Thu,  7 Nov 2024 15:10:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 898D78927F;
+	Thu,  7 Nov 2024 15:16:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="E70SK4BT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eRMP+pup";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F340389293; Thu,  7 Nov 2024 15:10:20 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id B010D892A1; Thu,  7 Nov 2024 15:16:42 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5C4F89270
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 15:10:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 435ED89270
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 15:16:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-e291f1d659aso937127276.3
- for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 06:10:18 -0800 (PST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-6ea5f68e17aso10609737b3.3
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 06:16:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730988618; x=1731593418; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1730988999; x=1731593799; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2HwEn8SWXO78NEgFzTYqshKMm6eYWfa88psQBCh4jjo=;
- b=E70SK4BTvAK9Xdxi795+cH3s6J/8YiGeWY0lXcfqeOpRvHYgRGFZWFM3qO69ohfWyD
- hAHGLTB6NiMLasLTikWOiMJf0rdEJ2ZJUnjd/YNEfhYduDQXxQJIugUW0Z7n7YPJNAKA
- 2fh+TZudn9uKdc9L0MzBvZ5OA5pXKfOC1FBMgdaRpDEcVt13VPOYOePdMoGFayyuH9IR
- QBjAFw4EKveLZxvCZMooyn/Dfp9eLJAecd0wulHdqr95OQ/5QYxsG9BntasYNC9O/oyU
- c8GTnP/+etI+uo5CmTvaU7pGNcoYw+1y2Pc71qpmkcUyboThpHkIJLTDfd0VHPfQ00/2
- I4XA==
+ bh=e+EKd+fuC2X1dZiuS2TRWG4f6GxX9+nR8Ki45pbRHRo=;
+ b=eRMP+pupgBxULSp3UQ/NeHoZYUQhkqKjFvedvYIe3tpAEyCyH+RN+NQEnEnEsqlm3S
+ t+lkaYjIPiZEjnQv2gjOPljuKBdkrQGtk2LWllNtgDLGfK278GoehiSdp3I4SqhVApNf
+ qsTDe4ytniqqtKg6DyECL2s9O4rneqwCw8WqVhMH2oCEttG8nyCbl4/5EotjVt8W7Pcg
+ 2oTxIAmxRIV4peyGjH6iRAxJkeAOncLJmrka/Dn+xJglTqQmQFpvmJxB5AxlYxxCJJ+i
+ rl+gkCP677JvCXidW7eFtWF/Sny0Qi30L+kFw4MLnxBzQAtjWRxvnOhZG9Ku/niySes8
+ Uexw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730988618; x=1731593418;
+ d=1e100.net; s=20230601; t=1730988999; x=1731593799;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2HwEn8SWXO78NEgFzTYqshKMm6eYWfa88psQBCh4jjo=;
- b=U+dtHq+m75wxSE12bEda6z8uGqMamL9J+WVw2xO3eFdZfF/K/i9gYTSKHfs7Ao4B6K
- iiZDhmJHrIbBtjb6oQwn6fQIndJ2HqAkhykPV9r+bEkntdW65OTGACT+r9z5xD6v6DQv
- 9dn+9/d+o2OgbA0JztJgUXLe4mEYT2oIFBPl9JaY6hpm4M4ZdgTId+ILQdAIMyu2FRE5
- e5PDIuM8h8CjryPTu7vBHgg7vYBkZRjKs4TqUvCVT9KGMJGrazWvFrvOiRR0UCyCfnYt
- A2JbDPVYSJ6LADm+gPkXD0Oez6SQ93Sm8MrqRhP82RquYIerB+rmb9ixGtPeybOGq5wR
- 5BIg==
-X-Gm-Message-State: AOJu0Yycf13Y0yCDcuBkm82FdS5EHERMJOkQ30nCSlgXYXdRhfTZZjsb
- OMUL8HsSoJdqwkmwO4nGbTsoUo185RHvIvuZaianH2Fj3NQVyuO5xH9NKSOZBn7UFqXwK+pM8LI
- 3o9wIjH7J3MMywwgbJk+Zp2uQzi3JzLeOebEDqg==
-X-Google-Smtp-Source: AGHT+IHgRnhMajxLKgcQOWnq8JDGFifeTWEKwr9qSjsH8f1yOW5yzRz9wwKBMUn13sZVUYN3ZaFw4aAmmIupA9FpGtU=
-X-Received: by 2002:a05:690c:9b05:b0:6e3:ca30:25f with SMTP id
- 00721157ae682-6ea64b2f420mr240723777b3.25.1730988617674; Thu, 07 Nov 2024
- 06:10:17 -0800 (PST)
+ bh=e+EKd+fuC2X1dZiuS2TRWG4f6GxX9+nR8Ki45pbRHRo=;
+ b=ZxjGvn7vPTyJVq+fiW/6JXFxd4Lo95Bm+tAnHq85VA1q2PodsLNQiRdwrVLW6Z+Kuk
+ LsVs6gEiK9NvP9aoLKMeipMMERufeg4GZq4JXKYRPFe5n4oSd1NWdvgS/FYBueN7pKqO
+ X9I2cf+GegJbnsWcek+0GNhC3+n5PKxkkk4rGrgqZ1SHAo4eMTmZ+debK4YO3NVS3XN0
+ DQI9yJjBSN+UowKyFuNGyTLsuobJes4v8cLVmJZA5z/Sf2V4a2pK+JXjEB56Ghgtiqao
+ C/7vVQHGRSyvtEZqOym7aylDt3Jfh62tBLODC9LQ9AueM88CeTqMJQI35eU8KpI6ceyk
+ La2g==
+X-Gm-Message-State: AOJu0YwwQyQRUXEQv+fVT2FHcLF2zE/ismx4CI4O0v5MzRXJl4H7ToJd
+ I+FavMUsr0LztL3pMhBEb6c+7fCGi1uIXIvXw6k+ckEqEm/ck9CcVzR4DBzpKrqIuwLomhrCUBT
+ BZW+Y33Nnd4yAFxAXYBUdEnUX3RWr5/XOGM8uxZiyI0Kl3aKZeFc=
+X-Google-Smtp-Source: AGHT+IG7QHiG2FIv72Bs2KIabf6o+8U8S7Yl4M7QKweQPLtL8FYkdH4hQY7JokF8YShX+2h1Vz09rxWlo1ubqJUF7VE=
+X-Received: by 2002:a05:690c:f15:b0:6e7:f98e:12dc with SMTP id
+ 00721157ae682-6e9d88cf8cfmr452385887b3.9.1730988999120; Thu, 07 Nov 2024
+ 06:16:39 -0800 (PST)
 MIME-Version: 1.0
 References: <20241106210348.218507-1-dregan@broadcom.com>
- <20241106210348.218507-3-dregan@broadcom.com>
-In-Reply-To: <20241106210348.218507-3-dregan@broadcom.com>
+ <20241106210348.218507-4-dregan@broadcom.com>
+In-Reply-To: <20241106210348.218507-4-dregan@broadcom.com>
 From: Linus Walleij <linus.walleij@linaro.org>
-Date: Thu, 7 Nov 2024 15:10:05 +0100
-Message-ID: <CACRpkdZbcR=zmQGnGgnxeCYoXFw8W8oZX_KsAnTGbEL00BH0Vg@mail.gmail.com>
-Subject: Re: [PATCH 2/4] arm: dts: Use upstream dts
+Date: Thu, 7 Nov 2024 15:16:26 +0100
+Message-ID: <CACRpkdYt64S=X2_-VO5h=0kgZ5hcoVWOnzYRK5k39AX0cMkD_A@mail.gmail.com>
+Subject: Re: [PATCH 3/4] mtd: rawnand: brcmnand: Add BCMBCA read data bus
+ interface
 To: david regan <dregan@broadcom.com>
 Cc: u-boot <u-boot@lists.denx.de>, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
@@ -101,11 +102,26 @@ X-Virus-Status: Clean
 On Wed, Nov 6, 2024 at 10:04=E2=80=AFPM david regan <dregan@broadcom.com> w=
 rote:
 
-> Make use of OF_UPSTREAM which uses Linux dts.
+> The BCMBCA broadband SoC integrates the NAND controller differently than
+> STB, iProc and other SoCs.  It has different endianness for NAND cache
+> data.
+>
+> Add a SoC read data bus shim for BCMBCA to meet the specific SoC need
+> and performance improvement using the optimized memcpy function on NAND
+> cache memory.
+>
+> This is a port of the upstream Linux patch to U-Boot.
+>
+> https://lore.kernel.org/linux-mtd/20240223034758.13753-12-william.zhang@b=
+roadcom.com/
 >
 > Signed-off-by: david regan <dregan@broadcom.com>
 
-Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
+The patch looks fine, but shouldn't the existing brcmnand_read_data_bus()
+in drivers/mtd/nand/raw/brcmnand/brcmnand.c also be replaced with
+brcmnand_soc_data_bus_read()?
+
+Maybe this is a problem in the upstream kernel driver though :/
 
 Yours,
 Linus Walleij
