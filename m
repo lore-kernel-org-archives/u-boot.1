@@ -4,163 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A58FD43341
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 11:04:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82ECBD43341
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 11:21:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04EBA88E3C;
-	Thu,  7 Nov 2024 12:04:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 8BA4D89177;
+	Thu,  7 Nov 2024 12:20:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="dGo3Ag8j";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BEex3b8f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C08CB88E3C; Thu,  7 Nov 2024 12:04:52 +0100 (CET)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20609.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::609])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1D0EF8920B; Thu,  7 Nov 2024 12:20:57 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5876488E31
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 12:04:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 0EF3088FF6
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 12:20:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GqDPTn5KWBXiR8yDp9EFD4SQ6oE3kyT/B2cY/uOzqzc4KVhumd6D7yh0pq+HcBU7nisU/gNwdyEsojT3SzutaCiFgnU6EXC3Q/nPRVkiLJLB5u5cE64wEawfwZqdKwd/fO//DLZJNlbFP9WXFk/VR1IXu8rabE913TdBTPBTgiQNvbTDDm74WP4v4I59Zy0m+V5euE4qUMhcvvvGPFx/r4d+p8gqfXr9ZOkwPeuoFHWXD+gKm9AiAsI3WV5AFheTElRP3dd8j8hRYK2h9hisbT6UqtDtdoaq1KNBjuuT6sizMPuGP8tr4UG9825Rs6/X7kIXr4ckJKaVP70B8oC6Vw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6nZR8Fr9yCHAO1qFvPaG8NFTdpIkSFppFexs8N0uEQk=;
- b=a4i8kp6X/omFV5Gugtnw7N1soClmgrIq7/P4fGf0ysA7AAIDUb9nKoC5JAD6rzVpnEmTWRP+WHZBEu1BhLwwkFMAshrK69NEpBZDzfHXWa5AKa1P7g0dEvIoGU1Q+7YoLdU9loSqTmyR79o/3IRUX7WVr5Hmojo3oMjQhw4qhVGMSVvGHslVlj3lB23sOzJ/sUMnEH88IodPSp9K8f9xnNv2OaJ5S1+Q19BAN4w0OPOpIO+51H/dToFTyGRyNyXTXV2AmY76+ZO/eeeT1B+a9QtsQptLdSI5t7MeQ93/f+ks7Sec5zT3c93e/BhkJEh1pz2ViWVbzgoE2+Ed/QmmvQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6nZR8Fr9yCHAO1qFvPaG8NFTdpIkSFppFexs8N0uEQk=;
- b=dGo3Ag8j3abZg1OIxFZoNZaF+N8X5zD23LGROTNOQwPevtJTsoIxVpOCr8Z9TefjCLzz8qogVLCeZiIjR8Ce4/71cPVddXMxWao5JjnSSQl8jZMUE7lsw/g3mU8oJq8J2f5K544+D7jOj9asEAQ9vDwC4eJfRgBMW7qAovmYA/g=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PR3PR04MB7323.eurprd04.prod.outlook.com (2603:10a6:102:88::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.21; Thu, 7 Nov
- 2024 11:04:47 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8137.019; Thu, 7 Nov 2024
- 11:04:47 +0000
-Message-ID: <5cfa0fbe-5003-4da1-9933-7664da07cd4d@cherry.de>
-Date: Thu, 7 Nov 2024 12:04:46 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next v2 4/4] rockchip: rk3399: move sysreset-gpio logic to
- TPL
-To: Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Klaus Goger <klaus.goger@cherry.de>
-Cc: u-boot@lists.denx.de, Paul Kocialkowski <paulk@sys-base.io>,
- Paul Kocialkowski <contact@paulk.fr>
-References: <20241106-rk3399-sysreset-gpio-tpl-v2-0-22aa82189eb6@cherry.de>
- <20241106-rk3399-sysreset-gpio-tpl-v2-4-22aa82189eb6@cherry.de>
- <149361d4-4cbb-4007-b00f-6b4efbd7978f@rock-chips.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <149361d4-4cbb-4007-b00f-6b4efbd7978f@rock-chips.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0111.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a8::12) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-37d3ecad390so1133466f8f.1
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 03:20:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730978454; x=1731583254; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=i5av/cjwHs4odA/m0p8YNr4Znl4Hlqm6z1gEEdgbRXQ=;
+ b=BEex3b8fgA/7jWWBxIBF7nm7ZqQBwcClH/c5HLhKstifmztdVhSRAlPR3D3947kyQ7
+ 2G8Wtw6r9cpdWXo/VwB3JdbdtKiWCSryBPyHsFItICQtGW7NIgVP4wOYSZW0F5cIy6Az
+ IEOkHI5JmSlQk/bwDDgq9NwdwOyEOx6UwFwUiR/8ZGcKTFnRPWLUy4T4wL6JGHjLTnCy
+ cOlYeY5yYKqnt6xsq7QSgBVWyoVJ1bbjqJJHYD7xTxFTsgbkcEh29x1w4RYAIWBHaBVt
+ GLa17iqYbN8ousfg7HaWWxUFQAmqk/RC8CIHJSRf67k+zZF1gXlHv43+9M82DCuhjFfU
+ gpzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730978454; x=1731583254;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=i5av/cjwHs4odA/m0p8YNr4Znl4Hlqm6z1gEEdgbRXQ=;
+ b=mXhqjdSQXWTX1OISkpmaxsJE5pR84axVujsp919sDs+IlC43iBewnoa49/Z5HHcsKx
+ 6VERqt2LBXbvfQE0Z86S/TLe/TJ6acXm4389gWmhAIjRq7+prX1S00o5Pf+x69uakjjh
+ d2UcATFFGmb5FPWdPa3G9fZqLLib8S7HEwfrC/SLAiJkKnYrLCSnq8k8JAJxvYsS0oU1
+ oFCRJzij6GryEDxbvXdJWA3DAW+DH62VQ+gM3cEUAmDEFdh9kQ2EcTbsCcCOwQ2satOF
+ YTQHtTdRhEZm42hxIE9zE+14N/rWYJPywmyZEsrCafNxIaKruNbq4PsnD+a5i6sVH47o
+ wXHw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVyQy+Sn344ZQlyC/4DVsUNANy8iww23+3ekq2LBYeH0KGQvwottr6+G9QRNy2L6d6adl8695w=@lists.denx.de
+X-Gm-Message-State: AOJu0YxeH7cG7BuOLxh+4pZV8o8xkcQWAmZikCZFnHv2bU3AUsZhZzkZ
+ 4ZAwh+M2Y9Qcz1UbnGaMp/PBriS3vl0Q1/9xQB3GGkQwCx9BTMP7JoijQTcNnBw=
+X-Google-Smtp-Source: AGHT+IEq2uPbFuHU1Imj/vUzwCs9Yxh31ymMEdlURPnKynyVpGhlXqGicmJP/YfITpQcW5wcLCFuLQ==
+X-Received: by 2002:a05:6000:1a8e:b0:378:8b56:4665 with SMTP id
+ ffacd0b85a97d-381ef743de0mr885061f8f.24.1730978454414; 
+ Thu, 07 Nov 2024 03:20:54 -0800 (PST)
+Received: from [172.16.25.132] ([89.101.134.25])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-381ed99a0efsm1451838f8f.58.2024.11.07.03.20.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 Nov 2024 03:20:54 -0800 (PST)
+Message-ID: <377bc757-50b2-4193-8506-729f26e6b665@linaro.org>
+Date: Thu, 7 Nov 2024 11:20:53 +0000
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PR3PR04MB7323:EE_
-X-MS-Office365-Filtering-Correlation-Id: ac6fff85-bda8-4500-c001-08dcff1bfe2f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NzBNTEl6anE3SXhkQ3hLYXpBOTlvVUkrNjcwVVlNVExrNkdSQnBMaENVY0ZB?=
- =?utf-8?B?b0I1ZGZwRjI4WHBJU00yajRIenVWSHQrV2cvVGY1RTNQTWh3cmRFakxERXpw?=
- =?utf-8?B?SytnYWlEdU9xMi9SSGNWczNEU2xpZWVwSSswNy9Kbm1aaWsva3hWMVpPRVNq?=
- =?utf-8?B?WUxBSXpyZkYzcCtUelNaT1NGNU01VTA1MWdUUWJkbXdoV3VtaDk5NFhDdnp1?=
- =?utf-8?B?STlLME9lZXJ3d3JNdjZKT25kS0NvREw3Q3hjdFdEcm04Y0RFT1pubTdUQTYv?=
- =?utf-8?B?cU5iR2JIendzUVdkSkVyT0hGRGIwS05DaVRYWE5PenBrRUtpVDBJTHdaY3Qy?=
- =?utf-8?B?dVh3bklUTndOemJKVSsxcmZ6RWtaT1dUUVQzNTZTd1E4eDhYOUROYWNsU2tk?=
- =?utf-8?B?VC9wblZ4ejVTYU1ialJiZGlxZHBEYi9uczlaMkdSWUUyV2s2WHdFK2NhL2RK?=
- =?utf-8?B?UVNFM2VobTdsVk9EYytWSE5Dd0o5VmlLU1BzTFJXQ0pkZFEwRkR6NjZiZmVG?=
- =?utf-8?B?N2xaalYxKzRwYlFBNDNCbjlCZERuekJ3RTduMFl3N1ppaDIxU04vanBYdnN0?=
- =?utf-8?B?cWhLWHcxcEJYU21hVjkyNFdRWURhQTJsZnVGY1NxTTdsbjV4N2FncHpCZjR3?=
- =?utf-8?B?S2QvdDc1OVlFdXpQNGdwRFowVkk0MkNoNjJMUjh0U3d0Z3R1RjU4VVBWL2Fo?=
- =?utf-8?B?RzVEQzBOSEM4REc1Z3c3VVVJMFl3Z3FXM29BVjRiNUdSREg3aDc1dkpZbXlD?=
- =?utf-8?B?T2hkTzZHWmE1WC9LSVluMmxYbURITkQ1dGxhcWI1KzVOWmZFYnY0a1RZYmlE?=
- =?utf-8?B?QU9RcjBCekV4Nm16UUdhRnczYjFWVnFVbUNpYUdicDA0UGQwRXJxalludzVh?=
- =?utf-8?B?blpjRlBxdTA3cGVTazNtN2lORk04VGtrd1B3bmdQOXMvbkFPNmdyMklsRHda?=
- =?utf-8?B?UDh3RkxXNFRBSGJSME1TRE1JS2JkRVJzSVhkMnpBRCtjU2JXRFVTTk9uTWRX?=
- =?utf-8?B?a2hPU0xLY0dFYlBJY3RBamM4OXJlSlZ4L1hEZnVRTTFWRE5NcWk2aFdBK3p0?=
- =?utf-8?B?RjgvYjgrdFozUDQ2cXhCSVlGbzF2NkRmWmxyak1SNU1XYzFEdmNPajVBaXdD?=
- =?utf-8?B?bnlBK3d2bnFUQ1lUWGdLNW1DSEpUTTRCSlNOZkdxaGpNSitKSGljUUNlZ1ow?=
- =?utf-8?B?UzJZbE9UZ0VwZ1lGeUx5RGxBYkl3Uk8wUVJvVHJRcHJEdVczUUIzVVhtaVA1?=
- =?utf-8?B?LzZwcG81YU9pZnlSRWlxNEtKZ0VTU3llZENWakdxcCtaNFZrOWF3OFhlc2Ju?=
- =?utf-8?B?d3NLV3g3L1hlcTA0U1FTMkliL0kzdUt1S2FuVlpLL08xRFNkS2tNZVNiaGRM?=
- =?utf-8?B?TFBqbi9Ed1Z6cGM4RitQZVVYUTJNVHdLaFdBMmdsNE11VThueHFPRXEyRkhX?=
- =?utf-8?B?clU4bUgxc2lVRFNaOEkxWERrbDJVT0lhdXlsVE95U1NqOEhXa2xaNXZVYm1P?=
- =?utf-8?B?SUR2QVFsZmRlVGdROGF5dVJFdVI2eUY4cHkvVERGaDNBSnlPMm9UZ2F3ekVC?=
- =?utf-8?B?aTlYM3d3ZkQ1Q0FWUzc5cWQ4aEh2WUM1NUcvNmgzTXcvR0MzZGNEUmJjVEMr?=
- =?utf-8?B?S21Ua0FJTGhVSFljYTc3VzM4Z1M0cHNzSGtTc1o3MHVYMWgrSDcvUStubWl5?=
- =?utf-8?Q?8/ww/u7Z4oCWHVflZs1G?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SzFnNmhZRGhBeCsrVTEyb080R0xHZ2dsdHU3V0xqOG5pZFZNMW5xZ0N2NHFQ?=
- =?utf-8?B?T2N4bHg1ZEg4aTNXeWYvbm1TRDhodEUyTllXekZ3aTNNNXI3Mk53Vkt6MzFp?=
- =?utf-8?B?UTk0UTdSMkREWTY3clF3ZUpmdTI2cFJBOWFLdVNwWEUxSkVBcW1jT1Iwbmxa?=
- =?utf-8?B?NHBpKzlPbm1TVHdiUmYwZTMxcE56SmhkZVRnYUFVVTdwVi82dFdnanU5L1Fv?=
- =?utf-8?B?WDREbE5IYzNSYlhReVZ4WWxSeVNJaTRnVWRHdHNNQ0tRNW5PdEUrZlBuMzlU?=
- =?utf-8?B?eUM0NFljTThkVUpnVUcwK2RuTkV1YXFWdjNkdEpMSURPWEM0bVY3QU1yL2V5?=
- =?utf-8?B?NWQxakdhR0Jqb2tER0R4NDBMYWJZODk5WG01cmh0b0ZTYXFWdlFzOFZLaENX?=
- =?utf-8?B?RUlCRjZxMjIwWGw3TlJ5L0Y1UWtvMEJTaEtiMVI1QlFXbzg1YllkazFldWc3?=
- =?utf-8?B?cElBNWFYRWVKZXcyUWRsYVNySTRleTlpTlZuKzhDKzE2WWRBanR4MXZVdVZF?=
- =?utf-8?B?bzIxNENaT1pybmhrSWtMS1VkV2tIeHlIVktIM2REK2lyeGxiMHR3c0Jma21J?=
- =?utf-8?B?SjJtU3RwcXJRVnRqMEp6UjdwMitWWlRSMDBtbnlDNHFwNlpmV2h1Q0FMWXBu?=
- =?utf-8?B?R1VUMVlic0tBUlF3Nm1OZ01YMldRemd1cnIxWGVrRTlYdTg0bE00Zmsxd2VI?=
- =?utf-8?B?cnl6bC95eFNnSjJpMEJrQ0lpblZFeDZpNGRiQ2VaWDl3T1lFeW04YW1rSlpi?=
- =?utf-8?B?bWxDSVN1cmp4UGZZRnB6R1FtNG1PYVRNMklwWnd4b1lkUlNpREhodUNDSlRD?=
- =?utf-8?B?N0VLbVZ2aStiOWR3emV6d2ZGUDduZG04UjNpYlVNQkR1Rzl0TmprdCtkSGdj?=
- =?utf-8?B?V0ZtT25ZblAwK2lLQnRDN3N2MDdqWjNEblFSVmdnQkwxaXNGbDRCOG9xbmN1?=
- =?utf-8?B?b3dDRzg0ME9TWnBvN244aUd3Q0NUc014R3R4R3VWYk9MREZjTjFRanhzVy9P?=
- =?utf-8?B?VEdTUUNnSXJ3b012OFl0TGZVR3ljWE52NFB1VHZvWUczbnVzUkw1VElnS0Jo?=
- =?utf-8?B?WXlzcURVcFBhZnFONnR1T3N4MUR6S1JITXUrNjROeUpLajZWcXRWeU1SNHJN?=
- =?utf-8?B?OVR4cWJTb2NLMWQ4a3NrQXZxbEZqTGRMNUZaZFFmUmV4a3hIaUVyOHJDUU8z?=
- =?utf-8?B?Ykd6d3gvajlFY1BkbDRWaElGSXFWTEM1aEpQQVZ1cDVrc25FR0pCbXR2Rnpy?=
- =?utf-8?B?VFVFcDBBZFBBbVJLUGN5QzVhcm9TN2Y0UjJaOWVZRXVkdlo3cXVzTm8yWG1w?=
- =?utf-8?B?SERUTTlxSHNYdmhYTDJRN1ZmVnZUWlFpQjc0aHY1eXNTdTBvWFQ3L3ZFaEVC?=
- =?utf-8?B?SjNPNkJyVnFGU3dqNVIySHlWOVphVkJCR2E5WkZYZnJoaWFXcm16djhuQTZj?=
- =?utf-8?B?T0VINTh2R3pYbnpZekhlcUx1dStRTWM3VmpLeEZRWVROTGNmNmw5ejJIa05L?=
- =?utf-8?B?RGQza2lWbzhLUjR3Ym8wdnkwbFhzTE9JRnNUa3czYktUblpuVCsrMXRTRlIv?=
- =?utf-8?B?bytjdjJmS0RxQUNFTEVhZFpWZFJsMzNyU2lEWDlocFZldG9YTEtGZkY4WXpm?=
- =?utf-8?B?YTBOTUdxaWhQQ29aOXozT3VOQjBOVjhSK21UODBXQVhIMUsrR1hLSm5tOE5H?=
- =?utf-8?B?dFN4akRESlVnZHFOV044TkdSNmsyODM2eXYyN0NLSkdqenAvUlVqcDR4ekNo?=
- =?utf-8?B?Qk4wNTN4WktRUmU2ekNBdjdmWFVQVCs0MWhmWldjclc3cy9EUUpwUTRWTXg4?=
- =?utf-8?B?SEFmbVpwQnZ3YlRyVEY1REVkSG93U0c2YlRyZVBTQ1hDYjl1cWs5aWRETStq?=
- =?utf-8?B?emZ5NU9KaXBIVVVwalh5WUJLMzdJcGRERDFEb2NLOFc3ZDU3TlZha0JiZnZD?=
- =?utf-8?B?U0RLeUdMYzJXdTJIZ1FqSFh3MzU3VHlqK0dpZFJmS2VOKzVrWlN0SVNlQitM?=
- =?utf-8?B?dkZZTHFoRHNZNzBEVGVkVi9TZjJwT3poT0ZTNDZNNkxIVEc1MjRYdE8rMXpG?=
- =?utf-8?B?WTRMSU16WVNFWkVmU05FWGlQVDMxNGN2bHN6cEVXblQzSXVLbzVsVEI4T0tE?=
- =?utf-8?B?azV6Ti8xUXFKOHdncExpTlFMQ0RiYVRsR3Q2MVlVKzNjZUQxS0c4SmhGbHUx?=
- =?utf-8?B?VGc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: ac6fff85-bda8-4500-c001-08dcff1bfe2f
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2024 11:04:47.5082 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: rz19sgm8gsHM+Xqy/cN9OFWflRWuumsXsZA0KDLBh+Ej7tDljsZdSAGK6Jedq/wBnrY0d2Vg2hO+kJLQrsRZ9vWjllhoV6FjOxQVyWqZkSo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR04MB7323
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/7] net: Kconfig: add CONFIG_WGET symbol
+To: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, xypron.glpk@gmx.de
+References: <20241106130255.211041-1-adrianox@gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20241106130255.211041-1-adrianox@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -177,80 +95,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
-
-On 11/7/24 8:14 AM, Kever Yang wrote:
-> Hi Quentin,
+On 11/6/24 13:02, Adriano Cordova wrote:
+> Let net/wget.c and net/lwip/wget.c depend on CONFIG_WGET, and
+> cmd/wget.c depend on CONFIG_CMD_WGET. This way, the wget code
+> can be used regardless of whether the wget command is available.
 > 
-> On 2024/11/6 19:29, Quentin Schulz wrote:
->> From: Quentin Schulz <quentin.schulz@cherry.de>
->>
->> If TPL_GPIO and TPL_PINCTRL_ROCKCHIP are enabled and a sysreset-gpio is
->> provided in the TPL Device Tree, this will trigger a system reset
->> similar to what's currently been done in SPL whenever the RK3399 "warm"
->> boots. Because there's currently only one user of sysreset-gpio logic,
->> and TPL is enabled on that board, so let's migrate the logic and that
->> board to do it in TPL.
->>
->> There are three reasons for moving this earlier:
+> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+> ---
+>  cmd/Kconfig       | 5 +----
+>  net/Kconfig       | 9 +++++++++
+>  net/Makefile      | 2 +-
+>  net/lwip/Makefile | 2 +-
+>  4 files changed, 12 insertions(+), 6 deletions(-)
 > 
-> Yes, this movement is reasonable and needed for this workaround, 
-> although still not
-> 
-> understand why puma board need this.
-> 
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 636833646f..8f3ad94089 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2115,11 +2115,8 @@ config CMD_TFTPBOOT
+>  
+>  config CMD_WGET
+>  	bool "wget"
+> -	depends on CMD_NET
+>  	default y if SANDBOX
+> -	select PROT_TCP if NET
+> -	select PROT_TCP_LWIP if NET_LWIP
+> -	select PROT_DNS_LWIP if NET_LWIP
+> +	select WGET
+>  	help
+>  	  wget is a simple command to download kernel, or other files,
+>  	  from a http server over TCP.
+> diff --git a/net/Kconfig b/net/Kconfig
+> index 76ab7d91ee..b4bb68dd61 100644
+> --- a/net/Kconfig
+> +++ b/net/Kconfig
+> @@ -244,6 +244,15 @@ config NET_RANDOM_ETHADDR
+>  	  generated. It will be saved to the appropriate environment variable,
+>  	  too.
+>  
+> +config WGET
+> +	bool "Enable wget"
+> +	select PROT_TCP if NET
+> +	select PROT_TCP_LWIP if NET_LWIP
+> +	select PROT_DNS_LWIP if NET_LWIP
+> +	help
+> +	  Selecting this will enable wget, an interface to send HTTP requests
+> +	  via the network stack.
+> +
+>  config TFTP_BLOCKSIZE
+>  	int "TFTP block size"
+>  	default 1468
+> diff --git a/net/Makefile b/net/Makefile
+> index 209377aeb2..7c917b318c 100644
+> --- a/net/Makefile
+> +++ b/net/Makefile
+> @@ -29,7 +29,7 @@ obj-$(CONFIG_$(PHASE_)TCP_FUNCTION_FASTBOOT)  += fastboot_tcp.o
+>  obj-$(CONFIG_CMD_WOL)  += wol.o
+>  obj-$(CONFIG_PROT_UDP) += udp.o
+>  obj-$(CONFIG_PROT_TCP) += tcp.o
+> -obj-$(CONFIG_CMD_WGET) += wget.o
+> +obj-$(CONFIG_WGET) += wget.o
+>  
+>  # Disable this warning as it is triggered by:
+>  # sprintf(buf, index ? "foo%d" : "foo", index)
+> diff --git a/net/lwip/Makefile b/net/lwip/Makefile
+> index f2558f8763..79dd6b3fb5 100644
+> --- a/net/lwip/Makefile
+> +++ b/net/lwip/Makefile
+> @@ -5,4 +5,4 @@ obj-$(CONFIG_CMD_DHCP) += dhcp.o
+>  obj-$(CONFIG_CMD_DNS) += dns.o
+>  obj-$(CONFIG_CMD_PING) += ping.o
+>  obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+> -obj-$(CONFIG_CMD_WGET) += wget.o
+> +obj-$(CONFIG_WGET) += wget.o
 
-Me neither, this predates me joining the company, c.f.:
-https://source.denx.de/u-boot/u-boot/-/commit/ae0d33a7291a164a11ae034bcf4f71226b2bef48
-https://source.denx.de/u-boot/u-boot/-/commit/5f104178bf713615dc404fdfcf0fb53d89c66a07
-https://source.denx.de/u-boot/u-boot/-/commit/07586ee4322abca01db52624b925e5218538f259
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
-What I can tell you is that it seems this is required as Paul (in Cc) is 
-trying to add support for it for the Firefly ROC-RK3399-PC[1] and the 
-ROCKPro64[2], so it seems it's useful for **some** purpose.
-
-[1] 
-https://lore.kernel.org/u-boot/20240926183111.1324284-1-paulk@sys-base.io/
-[2] 
-https://lore.kernel.org/u-boot/20240926183111.1324284-2-paulk@sys-base.io/
-
->> - faster boot time as we don't need to reach SPL to be able to reset the
->>    system on a condition we know is already met in TPL,
->> - have less code to be impacted by the issue this system reset works
->>    around (that is, "unclean" SoC registers after a reboot),
->> - less confusion around the reason for restarting. Indeed when done from
->>    SPL, the following log can be observed:
->>
->> """
->> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
->> Channel 0: DDR3, 666MHz
->> BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
->> Channel 1: DDR3, 666MHz
->> BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
->> 256B stride
->> Trying to boot from BOOTROM
->> Returning to boot ROM...
->>
->> U-Boot SPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 
->> 15:31:45 +0100)
->> Trying to boot from MMC2
->>
->> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
->> """
-> So with this patch set, we can see the TPL banner twice ?
-> 
-> 
-> PS: We are able to merge to master instead of next before next branch is 
-> open, because we still have
-> 
-> enough time to debug before next release.
-> 
-
-My understanding is that once -rc1 is out, we should only do bug fixing 
-in master. BUT at the same time, next branch isn't actually open until -rc2.
-
-Up to you! It's not really urgent, Puma was migrated to TPL only in 
-v2023.01 and we've lived without sysreset-gpio in TPL since then :)
-
-Cheers,
-Quentin
+Thanks,
+-- 
+Jerome
