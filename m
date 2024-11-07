@@ -4,89 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5DA0D5D68A
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 21:32:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 381DBD5D68A
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 21:32:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EE7988B64;
-	Thu,  7 Nov 2024 22:32:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 948BE88901;
+	Thu,  7 Nov 2024 22:32:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FI0/SrxQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FrGy00sa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5990688D9C; Thu,  7 Nov 2024 22:32:02 +0100 (CET)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id EA53988DB2; Thu,  7 Nov 2024 22:32:05 +0100 (CET)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E0708878A
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 22:32:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B8A9B8878A
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 22:32:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-83b2a41b81cso59971939f.0
- for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 13:31:59 -0800 (PST)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3a6bc0600f9so5647035ab.1
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 13:32:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731015118; x=1731619918; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=b28DHQ6TfaRqpGnVdSrua6CvKpuoLPo7nvsdJLD7qVk=;
- b=FI0/SrxQ971PPTsPStNeYqcECo05Enz+FGnnw5cTHTDWqozwYb7rT3VZBKLs9YL9w6
- d0gSMXkykTsb7BORnqHxUkVk6Zx6PRNb2G9iKoXgpKG+CT7TUx/2gYFJ3ZhRMrTheuPR
- 6KD7W6y1JP1ihb+YUS39MA9GxZSW8n3u/T7c8=
+ d=chromium.org; s=google; t=1731015122; x=1731619922; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zrE0taTI7pdVEJdlucuJEWGPP0bBZAvBX82ok3msXOE=;
+ b=FrGy00saFfRAxGN2pg+dbcSn6KISSrrU93cFti+6gXlY6jS7NKfuPcmHW9IzcAXpgD
+ JZ80ZCBO9VrgcD5+UJewy9B1KMpQrhToTyElSuvGGnGFcbvrvnB/Ycyh/c3aXctRsl0W
+ mxxdp7H7U/KBzlMLO63Z20YoDvSIsBNQBMcEg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731015118; x=1731619918;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=b28DHQ6TfaRqpGnVdSrua6CvKpuoLPo7nvsdJLD7qVk=;
- b=addwWTSW15E+Iwr/P6eEF+VxKnbrr34epoZEBcKKUH8veVo9v9cNCVh0IApXbrLsAc
- 7DsEJxe94IZLryAvOiV00TdfErYvFt0D0Dcc3rllpboZRu9t9EDQlq/OPccpYsgBZt0e
- qokn3yYcktvWTFVjbvJ5rD8h65xKPP/HDOyjhDZmlrBcqWtXjqHaCDwzAhmTAJrenjZj
- l9Pvzj780o0Rf2tiAcMEQXdOLz9eU4BVzpLrLQ7hVEEMi3wgseB7Jn1qkULeM7InQuV5
- cqdDRGQcHGzgGd8b5ZxMxDpDnw4om1UeQONP+p4wgCM13dK3LCRzEuwHC4yrwGftLmYf
- wIKQ==
-X-Gm-Message-State: AOJu0YyrOqMv68WH2EaR2+wdALOcvnwU4Zsj5xDDQOoAr1qX//av9lS8
- YHXyp0YUIssTw2rpLLKY/ZTuMrAfk7kT0J6PL+xdIXOGZfDillsLb9PlZgvwOUUABsegfVfYIEA
+ d=1e100.net; s=20230601; t=1731015122; x=1731619922;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zrE0taTI7pdVEJdlucuJEWGPP0bBZAvBX82ok3msXOE=;
+ b=wxU+ZF7QeWrWsEnhFjzpaapBiQ7mHvu7X7+pwsJUvRBgqLFhY54p/b+zxZoQplLj6b
+ Wn/tO/wvPhtt1wSXgj7VuYRm2r4DopFYbtC6QFHuGfFZd6su2KrQ296nYUI5z1kmR73I
+ whCj9nWHLM/BMgw3bsdH+9VKqkjsnYCTAH4ZMNL+ed2XV656f3I1WEw4mnUInjgZaBSr
+ EMQk1RBFih1glKuDt2Jo01ZKo66BSM5qhi3jkTblhW3HIGsKBRoKdDovbSYQnOWSOx+v
+ xxP3vBY+w0+uvERhuCA67cT2M4ZvV/fbxTCm2ozCd+Dp1SeoGtOWZQH7SuFK4wlipXiw
+ TPyA==
+X-Gm-Message-State: AOJu0YxvnTIDV0Ag/hJts6POsgHj+d4yiRqgiVmZDLqP/+Ac3I+LdcII
+ QVzGkBgHOSS3rVhN6I1TgFUaTK2CnHTJhwdXdXNHO6/XgmdaFuN1+p7C5m6HURw/qLOLh9gpZhc
  =
-X-Google-Smtp-Source: AGHT+IEQ6dpjzNSJ0EGNq5lwVCJkLJjb1y5R0DDD4/x19x3v7ihBrE4yHU50epfo+Qqbgckqt5Il9w==
-X-Received: by 2002:a05:6e02:1c03:b0:3a0:8f99:5e00 with SMTP id
- e9e14a558f8ab-3a6f19e891cmr7529845ab.4.1731015118177; 
- Thu, 07 Nov 2024 13:31:58 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEREL9cIjDlUrfGYR/UC5lSvBKwQzGCmHtG+mHQfhvaQVoPAxEIKqAQdUhOPbUba2N58xT78A==
+X-Received: by 2002:a92:c264:0:b0:3a6:bb77:a362 with SMTP id
+ e9e14a558f8ab-3a6f199037bmr9698495ab.4.1731015121828; 
+ Thu, 07 Nov 2024 13:32:01 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a6ead30a79sm4831745ab.71.2024.11.07.13.31.54
+ e9e14a558f8ab-3a6ead30a79sm4831745ab.71.2024.11.07.13.31.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Nov 2024 13:31:56 -0800 (PST)
+ Thu, 07 Nov 2024 13:32:00 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sean Anderson <seanga2@gmail.com>, Shantur Rathore <i@shantur.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Yang Xiwen <forbidden405@outlook.com>
-Subject: [PATCH v10 00/10] efi: Add a test for EFI bootmeth
-Date: Thu,  7 Nov 2024 14:31:40 -0700
-Message-Id: <20241107213150.1711962-1-sjg@chromium.org>
+ Michal Simek <michal.simek@amd.com>
+Subject: [PATCH v10 01/10] efi_loader: Add a test app
+Date: Thu,  7 Nov 2024 14:31:41 -0700
+Message-Id: <20241107213150.1711962-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241107213150.1711962-1-sjg@chromium.org>
+References: <20241107213150.1711962-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -105,94 +92,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The test coverage for the EFI bootmeth is incomplete since it does not
-actually boot the application.
+Add a simple app to use for testing. This is intended to do whatever it
+needs to for testing purposes. For now it just prints a message and
+exits boot services.
 
-This series creates a simple test for this purpose. It includes a few
-patches to make this work:
+There was a considerable amount of discussion about whether it is OK to
+call exit-boot-services and then return to U-Boot. This is not normally
+done in a real application, since exit-boot-services is used to
+completely disconnect from U-Boot. For now, this part is skipped.
 
-- Revert of an unreviewed patch to change the sandbox efi filename
-- Hang in sandbox virtio due to EFI probing all block devices
-
-Other necessary fixes have already been applied.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
 Changes in v10:
 - Drop call to exit-boot-services
-- Rebase to -master
-- Specify the bootdev order, to avoid including cros device
 
 Changes in v9:
 - Update license
 - Fix 'sevices' typo
-- Move the function into efi_helper.c
-- Split out into a separate change
-- Split out into its own patch
-- Separate into separate patches
-- Add new patch to drop sandbox PXE architecture
-- Mark the image as complete after writing it
-- Fix 'sevices' typo
-
-Changes in v8:
-- Add new patch to control on-host behaviour
-- Add new patch to move default filename to a function
-- Add new patch to report host default-filename in native mode
-- Add new patch to report host default-filename in native mode
 
 Changes in v7:
 - Update commit message
-- Drop patches already applied
-- Drop patch 'Disable ANSI output for tests'
-- Rebase on -master
 
-Changes in v6:
-- Drop the patch to disable sandbox virtio blk with EFI
-- Add new patch to disable the sandbox virtio blk device
-- Deal with sandbox CONFIG_LOGF_FUNC
-- Rebase on -next
-- Drop patches previously applied
-- Drop mention of helloworld since it is no-longer used by this test
-
-Changes in v4:
-- Add efi_loader tag to some patches
-- Split out non-EFI patches into a different series
-
-Changes in v2:
-- Add many new patches to resolve all the outstanding test issues
-
-Simon Glass (10):
-  efi_loader: Add a test app
-  sandbox: Add a -N flag to control on-host behaviour
-  efi: Move default filename to a function
-  efi_loader: Move get_efi_pxe_arch() to efi_helper
-  efi_loader: Allow reporting the host defaults
-  sandbox: Report host default-filename in native mode
-  efi_loader: Drop sandbox PXE architecture
-  sandbox: virtio: Disable the sandbox virtio blk device
-  test: efi: boot: Set up an image suitable for EFI testing
-  test: efi: boot: Add a test for the efi bootmeth
-
- arch/Kconfig                        |   3 +-
- arch/sandbox/cpu/start.c            |  10 ++++
- arch/sandbox/dts/test.dts           |   2 +-
- arch/sandbox/include/asm/state.h    |   1 +
- boot/bootmeth_efi.c                 |  29 ++---------
- cmd/efidebug.c                      |  25 +++++++++
- include/efi.h                       |  34 +++++++++++++
- include/efi_default_filename.h      |  56 --------------------
- lib/efi_loader/Kconfig              |  10 ++++
- lib/efi_loader/Makefile             |   1 +
- lib/efi_loader/efi_bootmgr.c        |  10 ++--
- lib/efi_loader/efi_helper.c         |  71 ++++++++++++++++++++++++++
- lib/efi_loader/testapp.c            |  64 +++++++++++++++++++++++
- test/boot/bootdev.c                 |  18 ++++++-
- test/boot/bootflow.c                |  76 ++++++++++++++++++++++++++--
- test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 4924 bytes
- test/py/tests/test_ut.py            |  53 ++++++++++++++++---
- 17 files changed, 366 insertions(+), 97 deletions(-)
- delete mode 100644 include/efi_default_filename.h
+ lib/efi_loader/Kconfig   | 10 +++++++
+ lib/efi_loader/Makefile  |  1 +
+ lib/efi_loader/testapp.c | 64 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 75 insertions(+)
  create mode 100644 lib/efi_loader/testapp.c
- create mode 100644 test/py/tests/bootstd/flash1.img.xz
 
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 066f0ca0da7..58d49789f12 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -567,6 +567,16 @@ config BOOTEFI_HELLO_COMPILE
+ 	  No additional space will be required in the resulting U-Boot binary
+ 	  when this option is enabled.
+ 
++config BOOTEFI_TESTAPP_COMPILE
++	bool "Compile an EFI test app for testing"
++	default y
++	help
++	  This compiles an app designed for testing. It is packed into an image
++	  by the test.py testing frame in the setup_efi_image() function.
++
++	  No additional space will be required in the resulting U-Boot binary
++	  when this option is enabled.
++
+ endif
+ 
+ source "lib/efi/Kconfig"
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index 00d18966f9e..87131ab911d 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
+ ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+ apps-y += dtbdump
+ endif
++apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
+ 
+ obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+ obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
+diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
+new file mode 100644
+index 00000000000..1a2f9ef9b6c
+--- /dev/null
++++ b/lib/efi_loader/testapp.c
+@@ -0,0 +1,64 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Hello world EFI application
++ *
++ * Copyright 2024 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ *
++ * This test program is used to test the invocation of an EFI application.
++ * It writes a few messages to the console and then exits boot services
++ */
++
++#include <efi_api.h>
++
++static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
++
++static struct efi_system_table *systable;
++static struct efi_boot_services *boottime;
++static struct efi_simple_text_output_protocol *con_out;
++
++/**
++ * efi_main() - entry point of the EFI application.
++ *
++ * @handle:	handle of the loaded image
++ * @systab:	system table
++ * Return:	status code
++ */
++efi_status_t EFIAPI efi_main(efi_handle_t handle,
++			     struct efi_system_table *systab)
++{
++	struct efi_loaded_image *loaded_image;
++	efi_status_t ret;
++
++	systable = systab;
++	boottime = systable->boottime;
++	con_out = systable->con_out;
++
++	/* Get the loaded image protocol */
++	ret = boottime->open_protocol(handle, &loaded_image_guid,
++				      (void **)&loaded_image, NULL, NULL,
++				      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
++	if (ret != EFI_SUCCESS) {
++		con_out->output_string
++			(con_out, u"Cannot open loaded image protocol\r\n");
++		goto out;
++	}
++
++	/* UEFI requires CR LF */
++	con_out->output_string(con_out, u"U-Boot test app for EFI_LOADER\r\n");
++
++out:
++	/*
++	 * TODO: exit boot services so that this part of U-Boot can be tested
++	 *
++	 * map_size = 0;
++	 * ret = boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size,
++	 *			       &desc_version);
++	 * boottime->exit_boot_services(handle, map_key);
++	 */
++	con_out->output_string(con_out, u"Exiting test app\n");
++	ret = boottime->exit(handle, ret, 0, NULL);
++
++	/* We should never arrive here */
++	return ret;
++}
 -- 
 2.34.1
 
