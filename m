@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15139D5AE79
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 09:47:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88785D5AE79
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 09:53:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CFE188C7C;
-	Thu,  7 Nov 2024 10:47:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 122618922E;
+	Thu,  7 Nov 2024 10:53:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="SPJLPVMi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yn+nG6wi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4ACCA8920C; Thu,  7 Nov 2024 10:47:44 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 04EA989032; Thu,  7 Nov 2024 10:53:13 +0100 (CET)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A07C288C4D
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 10:47:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C237189235
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 10:53:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730972859; x=1731577659; i=xypron.glpk@gmx.de;
- bh=OD+WNZbWZwLjpLPUQeXra99PJnPxTAI+wlXfjhkpjGE=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=SPJLPVMiCbke9nA4SVYWFNUNrWPZiwG/i5Kg1zCiZ2fkgwFeHd+YWtcCXU5tGy2R
- v7bM+YhkuKSCullxfhdNq6tN+B8Cv0UqykwrMM22jhs68CWt80bA+eCBUqgfRvh0j
- E7rN0UaswyRcX0cU6z5obpk9k61nhB1OxhQ4mtynEhPynL+1Yus+QaC4+WGCTINbQ
- zLrRcX5Z+SN+4/vDborhO/dS6bTlMbgYTubjkRFrcPC1m4/IB0uHYWKPGGU10w3Rk
- +Yqs81Dwmyfp/iKEX2OjrofiCwZTXRwvoL/SuMMmOqhM4Lkw74ptpXHUqtkUvJ4WG
- BKg9caNJLJGw95O9EQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M8QWA-1tDOxP0JJg-003ZCT; Thu, 07
- Nov 2024 10:47:39 +0100
-Message-ID: <bd927540-d3f5-4eb4-babe-13910c735b40@gmx.de>
-Date: Thu, 7 Nov 2024 10:47:38 +0100
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2e30db524c2so621540a91.1
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 01:53:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730973189; x=1731577989; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=87R6eCLun81wOrefjQMgutTQgRCFE8VyHLOM2ExvcZs=;
+ b=yn+nG6wi8BYoZMLleA+AHa/L4hfEEUpdt5XYjzLCY6yWeA5EeaF2Vfi6XOut2QPC0o
+ aoL+b6US4HNHaX9+IAYrZDpNIKWj1AlgWcZ8ey63xD+M0TZcRLMDLNdBM+/8wghVxPl/
+ p9cgzs5it0db6QZpLxwMWrYEIlO4CbhQnk8voFAn1LMf353vaXvYsMfV3WlkEUdan/3b
+ b2UHEaUvhw5Tm4FB9kycO5ZS5vnnl3m6NMXT2+50TD+479tQ7/7aBlvk9atGbNjg6KSa
+ Tn3qdV56kDj1Z2r7PiOYu6My3ZI2yQzqyCrSwb0KUiFhU1+nDWixGgSfRfrPxUGUcwTe
+ g9qQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730973189; x=1731577989;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=87R6eCLun81wOrefjQMgutTQgRCFE8VyHLOM2ExvcZs=;
+ b=D71gxRAwbTUyab656kCZBp7HLwmSYLW4NG/ZgJmXqunLeeGvzfyjtDMlHbUUMZkPW2
+ EjIifr7T2aM9RCfqHcYZsT6q4ZMjkm8gpwKuY1BjXvdivpJiPeOPWghMXnIC9/eBiI/x
+ zmvJnNRn+95xIRSVBxeyUgx9VjEbBi+zRBFsmiRXdNohZZKrFKnKGA+mYm8KwYt/hPbF
+ vCwiM7OqwvL0vCybtWmfTnS5zwkWxh6qIhaVg6nGWrnh+EL08NpI9Py+1exugzhsS1Z7
+ cJBDBXadi1Y05Iu4rPdLarG+0I+AvWW7x6tCc63erihh1Ow9a8nG91oT5lEM9GQOvGnV
+ 2csA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUrBZQrfyVYEm+9pwAaFV3qEzUbhqw7LBkbp94iyurjRdnuYIUpX26FifWl8JehsxtenPyIwX8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxf7yeuxHc69yDQf858y6X+0L9tmKU6n2OEYXFXVSuBHglx8dhv
+ 0YfqyolFWOWft7PBmDcWJLr0vkKq4WT6YpOuMGBb8awUZ8EMkFNuZ0rT9GtM5MXNwMyUdUtA0/4
+ v9U4jDStTfYcGogtHPXmzroUzwGYiIxy8ZCu0dw==
+X-Google-Smtp-Source: AGHT+IGLxjogupitC/eobZ+DUSVbU7qsVk+x9tLA/HmPGsrp3MMS0lY+PhrDMHOvn1eAfGOqR/L9DoAy/nJ8DoVrcJE=
+X-Received: by 2002:a17:90b:3c49:b0:2d8:8430:8a91 with SMTP id
+ 98e67ed59e1d1-2e94c2b3825mr33871932a91.10.1730973189200; Thu, 07 Nov 2024
+ 01:53:09 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/5] fs: ext4: implement opendir, readdir, closedir
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Richard Weinberger <richard@nod.at>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-References: <20241026064048.370062-1-heinrich.schuchardt@canonical.com>
- <173058992364.1044919.1983318156372551084.b4-ty@konsulko.com>
- <CAOf5uw=292JNb1g03_Hcgav4zyUckh3R1_iphHnynHVeqC82Jw@mail.gmail.com>
- <e79be8c7-2461-425f-8f7b-e24ad3884d65@gmx.de>
- <CAOf5uwmXy4qevGpYe04pYCcSJ3r20o9WXzqemDLfi6z5A041LQ@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAOf5uwmXy4qevGpYe04pYCcSJ3r20o9WXzqemDLfi6z5A041LQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Awg3FBWxuy9e9uShZtIJ/E7yaIZeunmq4UoWQcJHZl+D6qCGPqB
- VAEVBLO1DXXISqDUBUDhny92mt02mTIhc0mpg6s2CNxAyhFgBqJUeZKo74dkP+UcyCJyqGu
- Rmg5izGzWw/JrXidfOlfkP2DYJTt4V+xnGxDpTNEjNGQaw98nnEnFchOhuU2nNgbz+EgbDR
- hskax4d8Udx8SqiNj8imQ==
-UI-OutboundReport: notjunk:1;M01:P0:CW8YUR9blQY=;BobYFr8x/cRBLYb0aI5vdMq3TPc
- HQJcUWHjSOmXbM2jPgeT915FKzyc2RZl8BHBiIbddhUDoBfDQmdPtY6EgmsJ63uzEJjDiD5nk
- gTU5kPh3fE/Bayz0cR8Lr6ELX0NCgDYl2OJwJlH0yMDzIjQSxy8Bd6DGVAE/24xzFOuEK6d0U
- GPlnuU1Unpw+QnKq2JKNzZbQzy43zceaZB8Q2YnanIeTTU5usHywgdk8OukWHqapKPYA/MLPu
- forFiJNQIE0g87qtkhx0conOn3XbyX1s/pz7M/6ZPNqDSfm+++RgeSIewT80uptN7US5T4gG0
- zZ0l7JozADOyPTfoqX/PNU4luHIA7zV8HRM/F7KKIF0mrOuRCeQFlUgEVgiIIVZx5xcdaoJ/U
- IPEVEEqc+FyN18P0/hRez/eK7fu6CO2hEcKh0s0IAiJop0Oqzv7nuKh+rK9TKv2Jbnz+CAenw
- udxmZ2S12veyD7nJoDB9uC1KDnYswDFIeWeXUBSX7tEc/IyuEuvBQKaDQfeDLC4wtz1bXMoT8
- ah/U2dRRiDW8wSWvH5AMK3mCQA7rF3pPl/sVgc13HCivKiJ2lfafMap/OV2ck5T0C3TfyPYTI
- AcCxioBzmkhk60B52g+33LoH+vYpbNLeFm7Xk/Dd0OEiDrPxH9vsAx9DEw6XwbqBC8bxGaJGC
- xkMN4M+i8KYWfYkXW3VBv2S9Pzk3WOqlQ5ScBxPDTivo6lMls3BLzpeS9+jvxrcWiRkiyRoYK
- 2H3z3rx3O70fNVnm14PERPaTTX9v09czXbiH5nnR5HFzNdCk55iKXGyEl4LC/8z3/TGumVCYw
- 3Ir0a6GaQcAyJhp5HNYwJcGg==
+References: <20241103071200.82853-1-heinrich.schuchardt@canonical.com>
+ <20241103071200.82853-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241103071200.82853-3-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 7 Nov 2024 09:52:32 +0000
+Message-ID: <CAC_iWjLAcT0DjGs1pm3ZD6YtLAZtWATe1901KDb5KuSk-H=3Sw@mail.gmail.com>
+Subject: Re: [PATCH 2/3] lib: uuid: fix uuid_str_to_le_bin() on 32-bit
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,120 +91,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/7/24 10:31, Michael Nazzareno Trimarchi wrote:
-> Hi
+Thanks Heinrich
+
+On Sun, 3 Nov 2024 at 07:12, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On Thu, Nov 7, 2024 at 10:27=E2=80=AFAM Heinrich Schuchardt <xypron.glpk=
-@gmx.de> wrote:
->>
->> On 11/3/24 00:36, Michael Nazzareno Trimarchi wrote:
->>> Hi Tom
->>>
->>> On Sun, Nov 3, 2024 at 12:26=E2=80=AFAM Tom Rini <trini@konsulko.com> =
-wrote:
->>>>
->>>> On Sat, 26 Oct 2024 08:40:43 +0200, Heinrich Schuchardt wrote:
->>>>
->>>>> With this series opendir, readdir, closedir are implemented for ext4=
-.
->>>>> These functions are needed for the UEFI sub-system to interact with
->>>>> the ext4 file system.
->>>>>
->>>>> To reduce code growth the functions are reused to implement the ls
->>>>> command for ext4.
->>>>>
->>>>> [...]
->>>>
->>>> Applied to local tree/v2-tidy-test-dir, thanks!
->>>>
->>> Am I sleeping?
->>>
->>> int ext4fs_opendir(const char *dirname, struct fs_dir_stream **dirsp) =
-{
->>>       struct ext4_dir_stream *dirs =3D NULL;
->>
->> Thank you for your review.
->>
->> We should not set a value that we do not use.
->>
->>>       struct ext2fs_node *dir =3D NULL;
->>>       int ret;
->>>
->>>       *dirsp =3D NULL;
->>>
->>>       dirs =3D calloc(1, sizeof(struct ext4_dir_stream));
->>>       if (!dirs)
->>>           return -ENOMEM;
->>>
->>>       dirs->dirname =3D strdup(dirname);
->>>       if (!dirs->dirname) {
->>
->> Yes this line in my code is incorrect.
->>
+> hextoul() cannot convert a string to a 64-bit number on a 32-bit system.
+> Use function hextoull() instead.
 >
-> We need to use valgrind in unit test or we need some code analys to
-> automate this process.
-> We are always looking for memory leaks in uboot in exit path or we
-> need to have alloction funciton that
-> automatic free the memory when we go in error path
-
-Coverity probably would have reported this. But I think we only run it
-on tags.
-
-This article describes how Valgrind could be used:
-
-https://developers.redhat.com/articles/2022/03/23/use-valgrind-memcheck-cu=
-stom-memory-manager
-
-Both malloc and LMB would be candidates.
-
-Best regards
-
-Heinrich
-
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/uuid.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> Michael
+> diff --git a/lib/uuid.c b/lib/uuid.c
+> index c6a27b7d044..19f33dd1477 100644
+> --- a/lib/uuid.c
+> +++ b/lib/uuid.c
+> @@ -35,6 +35,7 @@
+>  #ifdef USE_HOSTCC
+>  /* polyfill hextoul to avoid pulling in strto.c */
+>  #define hextoul(cp, endp) strtoul(cp, endp, 16)
+> +#define hextoull(cp, endp) strtoull(cp, endp, 16)
+>  #endif
 >
->>>           free(dirs);
->>>           return -ENOMEM;
->>>       }
->>>
->>>       ret =3D ext4fs_find_file(dirname, &ext4fs_root->diropen, &dir,
->>> FILETYPE_DIRECTORY);
->>>
->>>       if (ret =3D=3D 1) {
->>>           ret =3D 0;
->>>           *dirsp =3D (struct fs_dir_stream *)dirs;
->>>       } else {
->>>           ret =3D -ENOENT;
->>>           free(dirs->dirname);
->>>           free(dirs);
->>
->> Yes, we should avoid a memory leak here.
->>
->> I will send a patch.
->>
->> Best regards
->>
->> Heinrich
->>
->>>       }
->>>
->>>       if (dir)
->>>           ext4fs_free_node(dir, &ext4fs_root->diropen);
->>>
->>>       return ret;
->>> }
->>>
->>> Should not be like this?
->>>
->>>> --
->>>> Tom
->>>>
->>>>
->>>
->>>
->>
+>  int uuid_str_valid(const char *uuid)
+> @@ -339,7 +340,7 @@ int uuid_str_to_le_bin(const char *uuid_str, unsigned char *uuid_bin)
+>         tmp16 = cpu_to_le16(hextoul(uuid_str + 19, NULL));
+>         memcpy(uuid_bin + 8, &tmp16, 2);
 >
+> -       tmp64 = cpu_to_le64(hextoul(uuid_str + 24, NULL));
+> +       tmp64 = cpu_to_le64(hextoull(uuid_str + 24, NULL));
+>         memcpy(uuid_bin + 10, &tmp64, 6);
+>
+>         return 0;
+> --
+> 2.45.2
 >
 
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
