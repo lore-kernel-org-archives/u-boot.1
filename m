@@ -4,92 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18CDDD4335D
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 13:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADA94D43360
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 13:58:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36297892AB;
-	Thu,  7 Nov 2024 14:45:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0E35E88F14;
+	Thu,  7 Nov 2024 14:58:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=aibrahem.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cGBycB/J";
+	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=aibrahem.com header.i=@aibrahem.com header.b="ZCgHRPua";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC816892CF; Thu,  7 Nov 2024 14:45:50 +0100 (CET)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 487C788FBB; Thu,  7 Nov 2024 13:52:16 +0100 (CET)
+Received: from qs51p00im-qukt01080102.me.com (qs51p00im-qukt01080102.me.com
+ [17.57.155.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B4B189248
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 14:45:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3082589259
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 13:52:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-7ee020ec76dso783108a12.3
- for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 05:45:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1730987146; x=1731591946; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cOf2vEm9eJHPc0Zl49Q46DWSk7ExrZR/u/AALP3yScA=;
- b=cGBycB/JETAF2busB38fOTkGk5VwTVz0lJnoxiB86Kg8dDq6mS2XcWJIgB28YZrGVz
- 1DfoqzDzj2CQPZogdabZz4DDBL85P2EEVtOuv6pBL2YprWKv+jOSm2VKq54o2evNNOs9
- kKY5hxqoXkIAxxrg1m48hi3jVVhqM7rPYqK4k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730987146; x=1731591946;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cOf2vEm9eJHPc0Zl49Q46DWSk7ExrZR/u/AALP3yScA=;
- b=e1hKvpgEcYcf6E+iPENUwtX/A+FT6GcGQ44ybdterQMZn4JL7lLxbrUYQVBkwC2Iga
- vel/JMi1Z+NgOM7WGPzZ+doFV3tzDsLhIugSq78+FZy7Ng7hN85I6+w2iFiojKIfg36n
- Z153gwK7Z0rZS3MWpu5eTEyC+Cc4xkDZdwj8lOm69+wKteytuR7xyje7JIB23Ykr4TPI
- kOdlK8t+TwdD1PEM1U0CQhHthD3EqIT0MRXUaTfxPZbHBD9adWYR6mJcttkmYueFTYj/
- dNf/KHAptGmWammSKouL0IE734Y6FAqi82ZT4Z9TquP/Nud39rmi0E+LMgItiPnp7spa
- QuvQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVX+orqNwj5X1UduXfIGhXYWpuV6oBFgCr11GA5f0SnWI9CZqE1emV3x+KQu6V2Q4m2NglYpqo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyWzcQWvhw3qyGU+VymEGmsxpGOespLh1WFcGiZFHpYgL0oIWmm
- FWfpcjtiVk05hSikyliVeQAEavO2waWp6NdFuSEZtEoXJkqErRJeZ6VL03ocr3DhmtZc73xGxWF
- W1RGu1/7gzJLxCm3w7QkSFsCYciZcZmKufH12
-X-Google-Smtp-Source: AGHT+IGnHgAUZPPKaA+DnPI+lpM5fYSsXL65S9eH3V1u5X41Yv1IU0y+sFXPoq/hJP8rttr7Zfqjb0rWI+k500Umt8o=
-X-Received: by 2002:a05:6a20:12ca:b0:1db:f057:151d with SMTP id
- adf61e73a8af0-1dbf057154emr16920917637.35.1730987146631; Thu, 07 Nov 2024
- 05:45:46 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=aibrahem.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mail@aibrahem.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aibrahem.com;
+ s=sig1; t=1730983933;
+ bh=D63eiP0ZQYxInVRUNdGNQZIBKZs1t5nmegIaS2R+2S8=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme;
+ b=ZCgHRPuaVPN6wtEupSM70zi7HGBuFW2TuZsDN/gw02N8rY8dy17Mn9ZiXge7At7A+
+ /+yVALvXX2wc2TpNtXnBkZRPNaC71EUULpW0xSEyAa2TNMKZfaMvH6bq57yM6Q18Vv
+ hAbAcZZcEGqd4tnJwFFmRx/tNO9kXEhqOJ6maaaKa4O4LUpBgemK2T09cKG9Uk6bzN
+ rLleTzip8O53NBQDjGNVvKsODHg/6qXh3PnQcxtYDHIWLDt8ndHbiQ8UA5pCGgeJKp
+ w4DwR6rTpjtEjWWq75HzEC+JusecRwx03C3x57kmmg+CYT7M/89DKJ7t4+dQch269n
+ CMC7SBe/QZvZQ==
+Received: from localhost.localdomain (qs51p00im-dlb-asmtp-mailmevip.me.com
+ [17.57.155.28])
+ by qs51p00im-qukt01080102.me.com (Postfix) with ESMTPSA id 8AD8C1CC00EB;
+ Thu,  7 Nov 2024 12:52:10 +0000 (UTC)
+From: Abdelrahman Ibrahem <mail@aibrahem.com>
+To: u-boot@lists.denx.de
+Cc: Abdelrahman Ibrahem <mail@aibrahem.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm: imx: Remove arch_env_get_location to fix env lockdown
+Date: Thu,  7 Nov 2024 13:50:44 +0100
+Message-ID: <20241107125122.48361-1-mail@aibrahem.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20241101152614.238747-1-sjg@chromium.org>
- <CAFLszTgTX+SSqdJq3ASK4aeciSXrh_YAtYgrKFQYGU-LJABj=Q@mail.gmail.com>
- <bf63e626-0ffa-41a6-b464-9aa3fa3c9cf4@gmx.de>
-In-Reply-To: <bf63e626-0ffa-41a6-b464-9aa3fa3c9cf4@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 Nov 2024 06:44:42 -0700
-Message-ID: <CAFLszTi1PMQwn3RatxAdaD=w+-6UZVp53G=cR+YRUOy_e9d2=Q@mail.gmail.com>
-Subject: Re: [PATCH v9 00/11] efi: Add a test for EFI bootmeth
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Julien Masson <jmasson@baylibre.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mark Kettenis <kettenis@openbsd.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Yang Xiwen <forbidden405@outlook.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: VrVfYe1YjDeNADwdoBTQM0NUtYLyLPz5
+X-Proofpoint-ORIG-GUID: VrVfYe1YjDeNADwdoBTQM0NUtYLyLPz5
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-11-07_04,2024-11-07_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
+ phishscore=0 bulkscore=0
+ clxscore=1030 mlxlogscore=833 suspectscore=0 spamscore=0 malwarescore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2411070100
+X-Mailman-Approved-At: Thu, 07 Nov 2024 14:58:46 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,117 +78,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+This patch resolves an issue encountered with Layerscape SoCs, where
+attempts to restrict write access to environment variables to enforce
+secureboot are ineffective when using the CONFIG_ENV_IS_NOWHERE
+configuration in combination with CONFIG_ENV_IS_IN_xxx.
 
-On Thu, 7 Nov 2024 at 04:29, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 11/1/24 16:32, Simon Glass wrote:
-> > Hi all,
-> >
-> > On Fri, 1 Nov 2024 at 16:26, Simon Glass <sjg@chromium.org> wrote:
-> >>
-> >> The test coverage for the EFI bootmeth is incomplete since it does not
-> >> actually boot the application.
-> >>
-> >> This series creates a simple test for this purpose. It includes a few
-> >> patches to make this work:
-> >>
-> >> - Revert of an unreviewed patch to change the sandbox efi filename
-> >> - Hang in sandbox virtio due to EFI probing all block devices
-> >>
-> >> Other necessary fixes have already been applied.
-> >>
-> >> Changes in v10:
-> >> - Drop call to exit-boot-services
-> >>
-> >> Changes in v9:
-> >> - Update license
-> >> - Fix 'sevices' typo
-> >> - Move the function into efi_helper.c
-> >> - Split out into a separate change
-> >> - Split out into its own patch
-> >> - Separate into separate patches
-> >> - Add new patch to drop sandbox PXE architecture
-> >> - Mark the image as complete after writing it
-> >> - Fix 'sevices' typo
-> >>
-> >> Changes in v8:
-> >> - Add new patch to control on-host behaviour
-> >> - Add new patch to move default filename to a function
-> >> - Add new patch to report host default-filename in native mode
-> >> - Add new patch to report host default-filename in native mode
-> >>
-> >> Changes in v7:
-> >> - Update commit message
-> >> - Drop patches already applied
-> >> - Drop patch 'Disable ANSI output for tests'
-> >> - Rebase on -master
-> >>
-> >> Changes in v6:
-> >> - Drop the patch to disable sandbox virtio blk with EFI
-> >> - Add new patch to disable the sandbox virtio blk device
-> >> - Deal with sandbox CONFIG_LOGF_FUNC
-> >> - Rebase on -next
-> >> - Drop patches previously applied
-> >> - Drop mention of helloworld since it is no-longer used by this test
-> >>
-> >> Changes in v4:
-> >> - Add efi_loader tag to some patches
-> >> - Split out non-EFI patches into a different series
-> >>
-> >> Changes in v2:
-> >> - Add many new patches to resolve all the outstanding test issues
-> >>
-> >> Simon Glass (11):
-> >>    test: boot: Update bootflow_iter() for console checking
-> >>    efi_loader: Add a test app
-> >>    sandbox: Add a -N flag to control on-host behaviour
-> >>    efi: Move default filename to a function
-> >>    efi_loader: Move get_efi_pxe_arch() to efi_helper
-> >>    efi_loader: Allow reporting the host defaults
-> >>    sandbox: Report host default-filename in native mode
-> >>    efi_loader: Drop sandbox PXE architecture
-> >>    sandbox: virtio: Disable the sandbox virtio blk device
-> >>    test: efi: boot: Set up an image suitable for EFI testing
-> >>    test: efi: boot: Add a test for the efi bootmeth
-> >>
-> >>   arch/Kconfig                        |   3 +-
-> >>   arch/sandbox/cpu/start.c            |  10 ++++
-> >>   arch/sandbox/dts/test.dts           |   2 +-
-> >>   arch/sandbox/include/asm/state.h    |   1 +
-> >>   boot/bootmeth_efi.c                 |  29 ++----------
-> >>   cmd/efidebug.c                      |  25 ++++++++++
-> >>   include/efi.h                       |  34 +++++++++++++
-> >>   include/efi_default_filename.h      |  56 ----------------------
-> >>   lib/efi_loader/Kconfig              |  10 ++++
-> >>   lib/efi_loader/Makefile             |   1 +
-> >>   lib/efi_loader/efi_bootmgr.c        |  10 ++--
-> >>   lib/efi_loader/efi_helper.c         |  71 ++++++++++++++++++++++++++++
-> >>   lib/efi_loader/testapp.c            |  64 +++++++++++++++++++++++++
-> >>   test/boot/bootdev.c                 |  18 ++++++-
-> >>   test/boot/bootflow.c                |  67 ++++++++++++++++++++++++--
-> >>   test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 4924 bytes
-> >>   test/py/tests/test_ut.py            |  53 ++++++++++++++++++---
-> >>   17 files changed, 356 insertions(+), 98 deletions(-)
-> >>   delete mode 100644 include/efi_default_filename.h
-> >>   create mode 100644 lib/efi_loader/testapp.c
-> >>   create mode 100644 test/py/tests/bootstd/flash1.img.xz
-> >
-> > I hope this series can meet with approval and go in. I know it isn't
-> > perfect, but we can then work on things from there. The first thing is
-> > to drop the various .xz files, which I'll look at once this lands.
-> >
-> > Regards,
-> > Simon
->
-> I tried to apply the series. But it fails in the CI.
->
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/jobs/941546
+Signed-off-by: Abdelrahman Ibrahem <mail@aibrahem.com>
+---
 
-OK, thanks. The passing run was at [1] but I'll rebase and send a v10.
-I suspect there is a test-ordering issue.
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 41 -------------------------
+ 1 file changed, 41 deletions(-)
 
-Regards,
-Simon
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+index d2d3e346a3..7dd5f429bf 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
++++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+@@ -819,47 +819,6 @@ int mmc_get_env_dev(void)
+ }
+ #endif
+ 
+-enum env_location arch_env_get_location(enum env_operation op, int prio)
+-{
+-	enum boot_src src = get_boot_src();
+-	enum env_location env_loc = ENVL_NOWHERE;
+-
+-	if (prio)
+-		return ENVL_UNKNOWN;
+-
+-#ifdef	CONFIG_ENV_IS_NOWHERE
+-	return env_loc;
+-#endif
+-
+-	switch (src) {
+-	case BOOT_SOURCE_IFC_NOR:
+-		env_loc = ENVL_FLASH;
+-		break;
+-	case BOOT_SOURCE_QSPI_NOR:
+-		/* FALLTHROUGH */
+-	case BOOT_SOURCE_XSPI_NOR:
+-		env_loc = ENVL_SPI_FLASH;
+-		break;
+-	case BOOT_SOURCE_IFC_NAND:
+-		/* FALLTHROUGH */
+-	case BOOT_SOURCE_QSPI_NAND:
+-		/* FALLTHROUGH */
+-	case BOOT_SOURCE_XSPI_NAND:
+-		env_loc = ENVL_NAND;
+-		break;
+-	case BOOT_SOURCE_SD_MMC:
+-		/* FALLTHROUGH */
+-	case BOOT_SOURCE_SD_MMC2:
+-		env_loc =  ENVL_MMC;
+-		break;
+-	case BOOT_SOURCE_I2C1_EXTENDED:
+-		/* FALLTHROUGH */
+-	default:
+-		break;
+-	}
+-
+-	return env_loc;
+-}
+ #endif	/* CONFIG_TFABOOT */
+ 
+ u32 initiator_type(u32 cluster, int init_id)
+-- 
+2.43.0
 
-[1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/23126
