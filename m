@@ -4,99 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F0E5D44D78
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 10:46:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D3F0D35E5D
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 10:56:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E5A089209;
-	Thu,  7 Nov 2024 11:46:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id ED2C188B55;
+	Thu,  7 Nov 2024 11:56:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="WyUveHQS";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="O2R51AoH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E394189229; Thu,  7 Nov 2024 11:46:07 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 7D441891E1; Thu,  7 Nov 2024 11:56:06 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2060d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::60d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9416D891E1
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 11:46:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21EE588B4B
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 11:56:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1730976349; x=1731581149; i=xypron.glpk@gmx.de;
- bh=yDPMV1CLbChKXsTktCE/3wctqSvSHb2JjlvMbEM6VG4=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=WyUveHQSGQvSzuKmnisMmsh1CFXwKc5WMNy8zAbnV8VwOgMyVE6FIN7JtSESGdsD
- zHopr3EPAtBJY8Nf1TYmTGr35WuRRn4vIqbq127y90lyDAE1p0Qr/CygLwstZ3D1Y
- wyAiFjtjxuQiIEYd88ODD2HbBkG69QObiVAkRulz7GdMXc4KvQIdQTl8A2waz28on
- i695EnHjBezcqktZMGohz2Maxtc3A+W9wTLkmZWdNDEevOvuUISh8rKW3S3ZgaT4q
- bl4mx0G5M575RrE/uQnyYnjaTOH5Ct5x/b3WCRz2qW392InCGmTAiBmsSUzvnt6OP
- J+fevZI6cL3ZA+M7PA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MEFzr-1szPmS0Ra1-007RJn; Thu, 07
- Nov 2024 11:45:49 +0100
-Message-ID: <bf63e626-0ffa-41a6-b464-9aa3fa3c9cf4@gmx.de>
-Date: Thu, 7 Nov 2024 11:45:47 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yD7RSD3A46yTthAdnCEXMK2rML+CLOHIkhsgrcv+F4eQcInayngotozPiWoeRI5rqDWT2FzD7EP9oxzesoSn4J/ot2Qojy8qGNiRKWmX2t2pfnV4tOMLVYeQMQnAnkh9e1iVJJHGHrDhGtAxgJmibsCGpnQ0llne5/fJYQxHBFqUc80SzTJKRQekkaPgmd7SFXoBF3ahFZBTDDqQPf+1/WCf4jNRd8tnbskI8DuQGQopo6f2rvYuhTauSI3tN708riC4sNO9kykM/GJiZ6fcYQ74sDqXnBmC/iER4DPykJDETlQqLBFg6xxd9PeEwlsJgol+aVY128yu3ubTIlOwhA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OsjgtkYWgARzr0TE00E+mSGjoEpxDLPVAPZxUG2DQs0=;
+ b=ED71UKgT79SYeUgLF+C8U0ad/tcLpGCtTCLyYh3ILS8hobesbaPJ54ZeoQfOwhbRDiD22+GbLFA5Wxb+WffwEQtKvO9DHnG/ASeIqUsyeJsx6X1uFwvWCYhCQZUTpbaa+8wbmxEtLh+z66nBTj2GXmRRO05OHzZP2bhYOdsoggUsi7NpzPp1zl1ZDZ24HXjhHFnPOg4+eFDazW9oW0Jbr5TwTXmlpoYSylR8wMf9HD6W229nR36WYLPjjWeiMpYwROn74ln2WgflegN3rqyn5SIZCyCbB++nNrm/UTZ+wvtMC6CaS8wbGtmEtimg3ppHHd2JoqW9Cb7mZ24phPUOOQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OsjgtkYWgARzr0TE00E+mSGjoEpxDLPVAPZxUG2DQs0=;
+ b=O2R51AoH6ESsMOosCe+1QO/pcGrJyqjITCcnUp51xR3CyiI1uCgKQ028yo5IeSmKxsum/Z11Dl84zR6DjMbf2SmYLed/XUegm+/Q1i+MwLOTrVJ6bTVOMLbNfy9RtyfOVxAczJtgRYWkUJybNtExcelyncgP/7ac4X0hkytxbBY=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by GV1PR04MB9134.eurprd04.prod.outlook.com (2603:10a6:150:25::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.20; Thu, 7 Nov
+ 2024 10:55:54 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8137.019; Thu, 7 Nov 2024
+ 10:55:54 +0000
+Message-ID: <c5330ea7-0a9e-4473-a672-c9a61a19291d@cherry.de>
+Date: Thu, 7 Nov 2024 11:55:52 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 00/11] efi: Add a test for EFI bootmeth
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sean Anderson <seanga2@gmail.com>, Shantur Rathore <i@shantur.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Yang Xiwen <forbidden405@outlook.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20241101152614.238747-1-sjg@chromium.org>
- <CAFLszTgTX+SSqdJq3ASK4aeciSXrh_YAtYgrKFQYGU-LJABj=Q@mail.gmail.com>
+Subject: Re: [PATCH next RFC 0/5] rockchip: panic() when DRAM init fails
+To: Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Dragan Simic <dsimic@manjaro.org>
+References: <20241105-rk3399-dram-init-v1-0-1e29acdf0966@cherry.de>
+ <e46008d2-19ae-4f48-a223-6d73e528b39a@rock-chips.com>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAFLszTgTX+SSqdJq3ASK4aeciSXrh_YAtYgrKFQYGU-LJABj=Q@mail.gmail.com>
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <e46008d2-19ae-4f48-a223-6d73e528b39a@rock-chips.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Xbrt1r1GXW98Oj6q5ypCgPoZFLtYwI4aIA7m+ZHGPfONVBJqvSz
- BWJtzjT5QYkJZed9FcxHvuc5NJrHfFysQQh7qKc2ueAZv/MvW2n4A0fSQTkbe28aAo2XRoD
- ZYnlsv0+YUEaCHFeoHC7vjQ/xYxiCdKhVbX71yvzLzRocOQL1BGACaA/oCJVtFtqwrvtvIp
- kEVAG0isFWlN5ALNGDjCQ==
-UI-OutboundReport: notjunk:1;M01:P0:bEb4z4Rkmag=;Goillh+UqxydKDtLzVP4if1RfJv
- G2n1Kny8zyCu9LzgUPRHSuU7itGky5Ld2dWwgtkunEj5Aq+XswYhjCd3ie6BgqMQhVOKE2qUF
- u2j+bhV9dlET1W/C5zsrfUxVtFliYFNcs/VSUE0NZImUlI2SiLWuugjUqPJUZCy7ARFVAa2wE
- qkjeMPv/sH845bKLvk83b2lYK42AzuBHpdqw5dvblHv6n1d8fkdIARfjUFk6b1hUivRGksuru
- KeDfsQO0FkK/7TczT14rACBn76HgLqEfg1VlFd4hCtitjDggpOVYSdMRRMYTMq5U7JnetXh8e
- E+l6c0WTbmw+bXwl2xZOzBVV8n6T2vTl05IorH3pwy5jccB9nrk1ClilDsI3o33vqIcgJsSJX
- RtiaS8gvQbxEeUutOul7kV5GQSpC8gpC7vUJhrQ1gBnAmSq0SqAG7i+u5zs4sYhN3Apy0E29g
- soML0/lSdCDG+bWJxxoKjyvmVcFDziVveTuLF+3XXI7PxcZTd7suKZTSeCOmQ/XO1GusLI9qD
- 0rCodhHR2csFU3mELmtqLXJtg+9zptyJgbDtjzpWI36/5AnSJIkRvztwyQE+sig1Cnm693JZ6
- ZJubBHSa3/Fmk0U0tR9xAmTNCSwynVkEsvgK5Y7dYUibCt+jLKIJ6kgWmxcvQvG/46twkiXrZ
- 3ZqpL04YA4CLgDLFt1n2PLoarCbfBb4Ir1jegWvlYcmamsQX67xt+P1H1jkZJN6AeFzSjMCdz
- 0X8x5aHeLr/yJOiKmgVMFeQyJWKiadxPLvUDF+G0b3aDT3D9CVh6qW6z241Gku61HosqcGvCy
- dBsjEpjqmEahGo7JetkIDLLQsTWx/2X1YFtqngV1ExlPvDKLeXzenUnA2U+X63AuZG4QDG7lJ
- KsPwCs0Kt0YICNGmy/3A3YOkCEhLA4Km1+QZ9ptcXf5Yk7UkZYfEbMIVA
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0079.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1f::7) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GV1PR04MB9134:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0759071e-8da4-4923-b1b6-08dcff1ac039
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SEtzM01GdXFUTVZJR0MxcGtjbE5zVnE3K1NXSlFFaStCc0lycGxoQ0x6SGdi?=
+ =?utf-8?B?RlRzVWlGYVcvK3N3Rk5qSEs2aUxVbVBpQ2cwWWIxekxMYlJ2WTk2YjBSZzl6?=
+ =?utf-8?B?T2piRmhEaDVUT1NGUFNQODFvOGcvV3NhR0x2OUV6cU1Da2s0ZXFUVkJGMFFv?=
+ =?utf-8?B?TEx1YlV3TlJQMytNbHBRVTRBYy84dmVKWmxJRVlpSWc0UDJhc250S3ZxekRy?=
+ =?utf-8?B?a0x5blZXV3pNWlVHeDlzaU12c2VVeUE1M3EyaFJ1cXJLYmNGdFR4dlIwaG1P?=
+ =?utf-8?B?bHVQdFlzWHh5Tk11LzdxejRBMEM2cWo4UDNhR2VVYVREWFBZS05oMVBLUmJE?=
+ =?utf-8?B?RFY5SDFtOGZKTE5ZTDkwT3ZKSk5QQS9nT09KSGZPU2tUa0E0dFY0Ukt1cDE4?=
+ =?utf-8?B?VldrYTJ3eWlBaHROMzFSMWJzek4wSGw3cDIzazVTTlZYS1dWZ3F1endCb0Uw?=
+ =?utf-8?B?MGxqM2NmWmhycElrbkRmdDE0dGh6ZFpCWnUwL3BzSWJNOUF3UU9JWGt2aVNM?=
+ =?utf-8?B?Vzh4M20wQjZrYjRCa0R6akREanlsQ0wwbTF5cnc3RFRiYjkvRllvMHVscHpo?=
+ =?utf-8?B?UzlYVlNiaEZSZWxGbDBINldOMi9HamJ4b1pGSzJWWnZlaHJEck43bnhWNHFt?=
+ =?utf-8?B?djFQTEF4YkMrcnZHejVNbDJCeGdhelh0WGlVM3hIMlM0c2NhV2JNakh6QkNL?=
+ =?utf-8?B?ZFJGdmpKc3JuSmNTVTZ2YW5RMXQ2eGFWWDNaS2VvWTZ5eks5bTdXOUdyeFI0?=
+ =?utf-8?B?R1FtNGNYQi85R2dVdFptRmpWZGxkN2RzTzhLcGlyT2JDaEdlN3JzWk85MmpU?=
+ =?utf-8?B?L2M5L0lWTTQ1L0xBUVgyRzBnVFY1WGF5WVllaVI0V1BZT2x6clVUSXdQUTRa?=
+ =?utf-8?B?eW93THVMWVZPMWhmWHZNWkRIVjg5LzJqUkdTQnN0U1pRZGprNHBXbE5KLzdq?=
+ =?utf-8?B?ZHVRVTVWVndqUkFxV1RFVk15U2ZlN1dQZWk1Y3FvMGs0SUM4dkVEVlIyeEho?=
+ =?utf-8?B?bVk4VDJsY0oxZGRGUlE5QnFkc2ExNjJLTno3c2daU09zeFR6T25Vd1kwendB?=
+ =?utf-8?B?YkNBcitVbUJNYURYcFpiUzRsTzA3eHd6THNqV3ZiaWZmRUQrQUduTXlFYnJW?=
+ =?utf-8?B?aW1UdVJacTBTRGc4dDJzVG9uZWdkN2tibjU2MVFmOW52N1NYcUV3SEVRR2ZO?=
+ =?utf-8?B?R3QxWTZHSysxVStIZytnTFZZQzQxRldYMUQwR2diNHFMT2w2VFR3N1pLWUhk?=
+ =?utf-8?B?VVBFTjBEZ1Y4WkRnVmNxbzl1S0ZoSGhMMUQzOWFpbDVxbW5pNjlJV0txWmxW?=
+ =?utf-8?B?RWNzOFl5ck1naThqTWZrVHJOYjBKOHZsOEdBL09idys0ckNzckRkbUxpNzZu?=
+ =?utf-8?B?clhzemFjUlNQdmZzVnFEemVlZmcvVDJHbk5zY3RzUWZWb09xTHhWeEdYQTdp?=
+ =?utf-8?B?OGQyZkEvOVJUUi9SdTRMTEd0bjgreGxXdk5tTWhhakdoNnFRMW1GbEVrenpC?=
+ =?utf-8?B?cHBpOS90YVFvS211L0lhWEwrdXB5ZExvQXJJeVovVDNaaXI5bmdNVHhRdk96?=
+ =?utf-8?B?TmhBOG1NaTgvR0V2WFZjN2ttUEJxWU9hUjhiNlByUDkyQVFkQi81NndRYU5D?=
+ =?utf-8?B?d2tNcFU0aDlVV3d5YkorRXdPN2l3YVJ4d2l3bC9aVEw5OXJIWWZzRk1zQ3Na?=
+ =?utf-8?Q?wVM9srTFHFpLuYI3S4Gi?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SlZNaGpYZzZ1d0xBWUFKamludHE1Yy9wYlhvMTQ1QUR2aHV0QkVTLzA5SmFr?=
+ =?utf-8?B?dm84aXh1TFkyOHdBSWtUVFBsSnpqekxEcmFXNk0wZlk0N2dicE1LTjQ3QXFH?=
+ =?utf-8?B?MkxLd1F3RFArZFJ4MCtYRlFKK2t4biswbVZ1ZFpqU0ZLSDBuUk15aTZWMEV0?=
+ =?utf-8?B?NVkrNkljVFdzNVd0elZVdnpkblBCcDhIUC83ZDE3emMrTWN1dGJWa29FNDgv?=
+ =?utf-8?B?S2ZJaW16RmhyNkpsWi9SRGluV1gxeHJsdGVtNFZCVUY0ZS8vVHVPdFJVRWs5?=
+ =?utf-8?B?ZG5QMzE4d2ZaZi8yTGRLaXNmTXFvSGxiUnFDZ3pZVnEzM3g0a0MxMXM2TGo2?=
+ =?utf-8?B?ZXJaK0dWTFAyMUlXNXBZcExma3JzNU0rU2lEc2I2T2V3MlhWV0tPa2phYjdW?=
+ =?utf-8?B?NWdvUGx2aUtmSDNPOG1rSEZnVXVTZi9xNkJudXRjSmd1M3hyVjlkU3puUXVD?=
+ =?utf-8?B?cTN4aXdUd1FZWXA2RFY3dkFoanlaZ2tqK0JqaHN6azYxSjAzd0hhTm0rcG83?=
+ =?utf-8?B?c0ZFV3cvbGZtQ3dlRjJZcDlDS01KZ0ZIMkVoNHJvR3JZNTZmb2ZGTXVEWjNv?=
+ =?utf-8?B?aDhQNmw5Wm03cFh6WjFVZVhaU29xZVVBVkh6SjBZMDN1L2cwYnBab0I1c1BC?=
+ =?utf-8?B?Q0J0SnFseUo5dHQyQ0JaaW9VS21SZEI1TTNKSXVFZW81M3p5S3dsUVdvRHIx?=
+ =?utf-8?B?Q1p2bXBybjhNaFFXUXl0U0VvNyt2M3hUTi94UEFnZDdKbXdNbURHVlVKVS8x?=
+ =?utf-8?B?OWlpaDhacWNTaU1SR0hINXF2UHBNYUkrY1JKeGlaYm5XVFROOFAxcC9Yd2hU?=
+ =?utf-8?B?cnZ2RDBYNnVTUFVidWtlR0lJNHkxRVZjVjZxVWExeUNqaWxSQVAzOXRaVThL?=
+ =?utf-8?B?ZWZzTjlkb0dQOWl0S0plVy9YRTF1U2tOMktDNHpQR29ZS2lLZFJlSS9qbE5o?=
+ =?utf-8?B?NUVzQk0xbEM4QjNibDV4ek5oekEvSjNCaEppVkdXSmF2RGNCUmFNWlgvWWZE?=
+ =?utf-8?B?ZzU0cFM0eDU1VlhHMVhVSnJmZkdMMVNPQ0FvdVNiQjNJNUdLamJuMXRmZU9u?=
+ =?utf-8?B?ZS9qNTFGY09mTnpEcUJHOGhBcmNRZHpQa0E1T0tWc1psL0pua29Mbk9tblpz?=
+ =?utf-8?B?SHZYY1FIRWIrd3lOZUgzMUNVTDFsd1N0RFdheGVNU21Uc0IxcmVPODl2UkhH?=
+ =?utf-8?B?bXIwQk5XeER1QloyUkVYODdYT05xbW1ZTGlXSWZ0MUlZdUlSUTFGM1NyMFNs?=
+ =?utf-8?B?QXA4dy83L3A2akJXWGZoWncwQmh2bGZ1UnRuK1ovTnhhUlpWVmlGbU9VVU9q?=
+ =?utf-8?B?Q05VSVhOaXZNZUg0M0M0RmhNU242NXFiZU1vREVnQ2M4QjNJd3hxMFZkTkQw?=
+ =?utf-8?B?RmIrcmd0WkVpYTM5NTdETytPcncvK2x5aHlZWGhMQlNlSVphVTZmLzNFWG5T?=
+ =?utf-8?B?U0VKbTJIdm9EemJRb2ZaM0tRejNCNnQ3RUhhY3lTUHcxRWZ6Z0RiaG9jZytw?=
+ =?utf-8?B?ZkgvSndpUzJRd2VCN0orQ3F2aGx6K3ZZTitzRkMwa0N4Q3Y1bEpWZ2xTMDNE?=
+ =?utf-8?B?dDBQUDNwT0s5WHpsRTRuc2I0eHFiencza0gzaHExQUVibm1xeEo2VHFjTzJz?=
+ =?utf-8?B?TG8ydmN5UHlhVmUxRytiS0EyU1ptQkxidmJmZ1hNa3k4enJ6OHFuckdEQ0ln?=
+ =?utf-8?B?VGR3OFJlWFJyZkdOb0NQa0tSQ3pCVkY5Yjk2ajQwMEU3cUVMamZJbHZLM2dE?=
+ =?utf-8?B?akZ6anZIUjVBZmtuNTJZY0NFUGxqVS9LSjYvQmltOElKUVpqT1BqVnVQUUdX?=
+ =?utf-8?B?V3JmemZGeXNLMGl4MTVRb3loczZ4b29qMy93WnFwenJWazBwdnpIMkdXZTVt?=
+ =?utf-8?B?RnZuWERYYzloNlVPSEFZSUhScHc3Y2xaT3dFai9VdFVXZ2dnbjZEU2x0T1JC?=
+ =?utf-8?B?SXFya0JsMlJnQTBBTWNKQVBMSHNmd1FjTkZsUlc0MTJ6T3Q1NDUyREQ0cktp?=
+ =?utf-8?B?cEhOU292ODV4Z3Zmd3o2WXlqbEFWRm9XK2ZXTTlRQmVIK0w3dHpLSUw2MFk3?=
+ =?utf-8?B?ZHNhaXkvM0lHWHRnYmZOOWJuSzBRa3l4bW1vN3A3TGVTbFlTaGVoMjkveXA1?=
+ =?utf-8?B?K0hpOU5uN0l5RU5sOWNkcU91Q09JSWEwZXFpbXRROGpjUE0xT1d3aXR5WUlW?=
+ =?utf-8?B?QlE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0759071e-8da4-4923-b1b6-08dcff1ac039
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2024 10:55:54.0761 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: u0w8NeU4cKay36H2lJnF7mQ0z+mjqTVD4O9oSgAqTgnSiVdTznaPnRuvxJqjJbHI7fPiFr4oLwq+Iqdb10vjl2M6jiQXEksCCEaC2ulfC4o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB9134
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,112 +173,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/1/24 16:32, Simon Glass wrote:
-> Hi all,
->
-> On Fri, 1 Nov 2024 at 16:26, Simon Glass <sjg@chromium.org> wrote:
->>
->> The test coverage for the EFI bootmeth is incomplete since it does not
->> actually boot the application.
->>
->> This series creates a simple test for this purpose. It includes a few
->> patches to make this work:
->>
->> - Revert of an unreviewed patch to change the sandbox efi filename
->> - Hang in sandbox virtio due to EFI probing all block devices
->>
->> Other necessary fixes have already been applied.
->>
->> Changes in v10:
->> - Drop call to exit-boot-services
->>
->> Changes in v9:
->> - Update license
->> - Fix 'sevices' typo
->> - Move the function into efi_helper.c
->> - Split out into a separate change
->> - Split out into its own patch
->> - Separate into separate patches
->> - Add new patch to drop sandbox PXE architecture
->> - Mark the image as complete after writing it
->> - Fix 'sevices' typo
->>
->> Changes in v8:
->> - Add new patch to control on-host behaviour
->> - Add new patch to move default filename to a function
->> - Add new patch to report host default-filename in native mode
->> - Add new patch to report host default-filename in native mode
->>
->> Changes in v7:
->> - Update commit message
->> - Drop patches already applied
->> - Drop patch 'Disable ANSI output for tests'
->> - Rebase on -master
->>
->> Changes in v6:
->> - Drop the patch to disable sandbox virtio blk with EFI
->> - Add new patch to disable the sandbox virtio blk device
->> - Deal with sandbox CONFIG_LOGF_FUNC
->> - Rebase on -next
->> - Drop patches previously applied
->> - Drop mention of helloworld since it is no-longer used by this test
->>
->> Changes in v4:
->> - Add efi_loader tag to some patches
->> - Split out non-EFI patches into a different series
->>
->> Changes in v2:
->> - Add many new patches to resolve all the outstanding test issues
->>
->> Simon Glass (11):
->>    test: boot: Update bootflow_iter() for console checking
->>    efi_loader: Add a test app
->>    sandbox: Add a -N flag to control on-host behaviour
->>    efi: Move default filename to a function
->>    efi_loader: Move get_efi_pxe_arch() to efi_helper
->>    efi_loader: Allow reporting the host defaults
->>    sandbox: Report host default-filename in native mode
->>    efi_loader: Drop sandbox PXE architecture
->>    sandbox: virtio: Disable the sandbox virtio blk device
->>    test: efi: boot: Set up an image suitable for EFI testing
->>    test: efi: boot: Add a test for the efi bootmeth
->>
->>   arch/Kconfig                        |   3 +-
->>   arch/sandbox/cpu/start.c            |  10 ++++
->>   arch/sandbox/dts/test.dts           |   2 +-
->>   arch/sandbox/include/asm/state.h    |   1 +
->>   boot/bootmeth_efi.c                 |  29 ++----------
->>   cmd/efidebug.c                      |  25 ++++++++++
->>   include/efi.h                       |  34 +++++++++++++
->>   include/efi_default_filename.h      |  56 ----------------------
->>   lib/efi_loader/Kconfig              |  10 ++++
->>   lib/efi_loader/Makefile             |   1 +
->>   lib/efi_loader/efi_bootmgr.c        |  10 ++--
->>   lib/efi_loader/efi_helper.c         |  71 +++++++++++++++++++++++++++=
-+
->>   lib/efi_loader/testapp.c            |  64 +++++++++++++++++++++++++
->>   test/boot/bootdev.c                 |  18 ++++++-
->>   test/boot/bootflow.c                |  67 ++++++++++++++++++++++++--
->>   test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 4924 bytes
->>   test/py/tests/test_ut.py            |  53 ++++++++++++++++++---
->>   17 files changed, 356 insertions(+), 98 deletions(-)
->>   delete mode 100644 include/efi_default_filename.h
->>   create mode 100644 lib/efi_loader/testapp.c
->>   create mode 100644 test/py/tests/bootstd/flash1.img.xz
->
-> I hope this series can meet with approval and go in. I know it isn't
-> perfect, but we can then work on things from there. The first thing is
-> to drop the various .xz files, which I'll look at once this lands.
->
-> Regards,
-> Simon
+Hi Kever,
 
-I tried to apply the series. But it fails in the CI.
+On 11/7/24 4:35 AM, Kever Yang wrote:
+> Hi Quentin,
+> 
+> On 2024/11/6 01:21, Quentin Schulz wrote:
+>> I am the unfortunate owner of an RK3399 Puma that is failing DRAM init
+>> every now and then with the following cryptic error message:
+>> """
+>> pctl_start: Failed to init pctl channel 0
+>> """
+>>
+>> When it fails, the current logic is implemented in such a way that the
+>> board enters an infinite while loop. This is not ideal for embedded
+>> systems that are not easily accessible and also an issue when having
+>> devices in a CI lab for example.
+> 
+> It's fine for this patch to make the choice in panic to hang or to reset 
+> the system.
+> 
+> But I don't understand how this help you, does it may success to init 
+> the dram after
+> 
+> the reset in your case? I think in most case the board will keep reset 
+> because this is
+> 
+> more likely hardware issue and not able to became success after reset.
+> 
 
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/jobs/941546
+Exactly. After a reset (manual by pressing the reset button, or by 
+panic()) the board works again. I don't have exact numbers for the 
+probability for this to happen, but I had a board doing boot-into-Linux 
+tests in a loop and it failed multiple times in the same day. Gut 
+feeling is around ~10-20 times for ~2200 reboots.
 
-Best regards
+I am NOT saying this is not related to a HW issue though, but I've been 
+using that RK3399 Puma for a while, and sometimes I have this issue. The 
+rest of the time it seems to "work fine" (haven't run memtest or 
+extensive testing on that unit though).
 
-Heinrich
+I am NOT sure BUT I think applying 
+https://github.com/rockchip-linux/u-boot/commit/e1652d3918b182e107addd5e6f451655f239efbc 
+on upstream U-Boot helped lower the probability (it still happened 
+though!). Could be totally unrelated though and just flukes.
 
-
+Cheers,
+Quentin
