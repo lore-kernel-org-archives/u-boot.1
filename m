@@ -4,150 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F4ED5AE71
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 08:52:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A1E4D5AE71
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 08:54:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C50588A9D;
-	Thu,  7 Nov 2024 09:52:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id EDAE489220;
+	Thu,  7 Nov 2024 09:54:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="MR/LrzEf";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="yC1u6zyf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5873A8855C; Thu,  7 Nov 2024 09:52:32 +0100 (CET)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20702.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::702])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4A5388921C; Thu,  7 Nov 2024 09:54:04 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AE0088A9D
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 09:52:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5C5A8904D
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 09:54:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=L4u87zBAYNBF/7ZtX1PauctI4+ncmCzqGIfRmmP/Y3rlIpbmkNlJtXYGuGaG4donMUtDP5TsNcTRtad3t/UCjbR5p5g4K+qKH82RnCQRCYSsIgNz0bl7dNFRGCRhLGar3kNB0nFSNQgAnmlzuWhHH2nW0y8dbFAuQ/Dk4ZzzCYSW9EEgFxhNcjMAlamEPVQrlgaHtOt0m9qTS6Wt7GjHB2f+nu7/GmczkJTx320OWBX1pB8v1cejCZodIyddBIjFAvlSItjAjTtmoPIt55gGQS/cDpw6LP/HHA1om7OTvN89FoL+Ebvatw1a/ejIQJms9uNx6WyUQxRS7/BdQ+5Tiw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qKimYKU+vlWgxtt4htfYXKchclE25ZDUY/oxECCjzx4=;
- b=yNDvq4h9vjLyK9UR5uw33MZ4ykBbQrV+PaU9lz0NZUB+lNy8G8uNwE94o+IPEoEeRuD94J1SwwYnE6NrfmX3q7bvF6pAcY2+D4t3NHsyWPdNDTWquVkBxwoyVDQAG5k4x+Gu1hpIFPcK65urBVtPnEYlF0BHL275fg/NAte6MTmxILAlI1TBhRMVnVw9Os7k1DKNL+5IVsFXyYuaGRbMVLAfDcqLfxDfmBi7nmI5qrJRDjSDxJ7oVsmhVo//c58vGIDXSAS1N+JzGWoniZnInG4DZZ565b5FIvZFYWFKggxemkLlfXdPbY0uMn203DyIPtqyRAMnUdXP+hw8KJnTog==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=denx.de smtp.mailfrom=phytec.de;
- dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
- arc=none (0)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4315df7b43fso5933865e9.0
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 00:54:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=phytecmesstechnikgmbh.onmicrosoft.com;
- s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qKimYKU+vlWgxtt4htfYXKchclE25ZDUY/oxECCjzx4=;
- b=MR/LrzEfhEsJgSMoNTHYubVxd20gPDDksvvxR2QzKMisI1M2Q0Jov0mdSoY1p9nKYsjk6t5qw6DAXu4vVAeDd1BGgRy7LcK4dFzOqAcB4WvRVsiWHsdSMSdWhh2XZvMJEpg4cw3FrlqfrNrUoHgEJ47xQuDX1onNa+Z3RgY09es=
-Received: from DU7P191CA0016.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:54e::26)
- by DB9P195MB1611.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:37e::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.20; Thu, 7 Nov
- 2024 08:52:27 +0000
-Received: from DB5PEPF00014B93.eurprd02.prod.outlook.com
- (2603:10a6:10:54e:cafe::3c) by DU7P191CA0016.outlook.office365.com
- (2603:10a6:10:54e::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.19 via Frontend
- Transport; Thu, 7 Nov 2024 08:52:27 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- DB5PEPF00014B93.mail.protection.outlook.com (10.167.8.231) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8137.17 via Frontend Transport; Thu, 7 Nov 2024 08:52:27 +0000
-Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 7 Nov 2024
- 09:52:26 +0100
-Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 7 Nov 2024
- 09:52:25 +0100
-Message-ID: <34054407-c686-4ebc-bd38-77ddc0e89625@phytec.de>
-Date: Thu, 7 Nov 2024 09:52:24 +0100
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1730969641; x=1731574441;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=62NebAwLZ0tLPjRJh/RK1QUkF+esVUerAJcHq3e49Ss=;
+ b=yC1u6zyfTHCOSpfUdv+NMT3A/3mLv3B2wAn07cQJZufuO7rI/3xf4aDWmuJONxAzpW
+ 5O26VMJpNIFoEe2+4+q4Mme2LnwjZc5G8oWRSNhi7IJr/40E5VdKNdOjSNSFucGFwNeS
+ EZZbLwmNehBxuQ77yaHOoUpt0BcQNiDlTgFnibcQeVXb8kYYkE76VOiUApinoVLii96W
+ uuZ5OM4G72Kuym1ZdxVwWUNEzVecL3+AQL/Nly1XsA561TccKtrE9qIHTmNicukDqUdG
+ cE8jj2IAWUPpqqOHpKLYi37Ladds599bMb5QwLYGTtriBRgpFGwsT+PdE1+A9sWIKnOm
+ 87IQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730969641; x=1731574441;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=62NebAwLZ0tLPjRJh/RK1QUkF+esVUerAJcHq3e49Ss=;
+ b=CUqfFSK4TH/prRh85V6W3q/aVUFp6E3v6sQs5d37kW6t2F6UiI7LIuTJXc6YR7bwJJ
+ 0nzzjRlT1Wa+CZoYEKgUz8tkOofOqlbHDVnCSrdY7U6jAsfqKOT9AmSSFCHQ/4tRAYHX
+ h9G7afVr/LHPP5fKU41Ad2XQfUBG1J/aIPdZNT6zNB8LRF56LKG7tGN5gH+k+e2To+er
+ g3N+Y8lWKnkcx6NrP6MabVHfttOLrZwSgR4HqjnLoJgT/fIrXl0TYh+154uFmDTotzAO
+ dFyR8rfLclW/UCURFwwUGR3RL58k1Jvw6bqsjzvJDsoLLslmsY7P7zJY7Ks06w2epFIq
+ d9Gg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU+Brl71ThAmwVqI671Hx36gRvG4e62jWfG04hb3Kd0rfi6FCNWdkOe9d4QAqKUtkb7vla3KQc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9Gkz6IoX4ZnkJ9ftZgluGBY7f5Jayk3Jq5Lx+9BmSocOnC7BI
+ 9MwZf+uRLCfghPt36EZ1Lt8L+cqMEsJcrhBpeMEMqfgjtRBEUnKRI5lA2BjcE+k=
+X-Google-Smtp-Source: AGHT+IHBIqidVIVFQZbqwiQ+BAqoIlQ3ALIC3sLzxe+IfgIbyStfR4MUCcKvl1z7RFnIFQT7x5mk5A==
+X-Received: by 2002:a05:600c:4f15:b0:430:5654:45d0 with SMTP id
+ 5b1f17b1804b1-4319acb104dmr396632535e9.14.1730969640485; 
+ Thu, 07 Nov 2024 00:54:00 -0800 (PST)
+Received: from localhost ([2a01:cb19:8f40:f900:f167:cb53:a707:1347])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-381ed97cfefsm1107179f8f.26.2024.11.07.00.53.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Nov 2024 00:53:59 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Dmitry Rokosov <ddrokosov@salutedevices.com>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, Tom Rini <trini@konsulko.com>, "Andrew F. Davis"
+ <afd@ti.com>, Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass
+ <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, rockosov@gmail.com, kernel@salutedevices.com,
+ Guillaume La Roque <glaroque@baylibre.com>
+Subject: Re: [PATCH v5 6/6] common: android_ab: fix slot suffix for abc block
+In-Reply-To: <CAPLW+4=qt++B+wD6zvfsoCxgd=Jmygf7w=Wz71p3Z8GUOZS9oQ@mail.gmail.com>
+References: <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>
+ <20241017-android_ab_master-v5-6-43bfcc096d95@salutedevices.com>
+ <CAPLW+4msra4=oUDCSWx8sfM7uCGgfmJbRi++Q=wf8cQ-ERoHGw@mail.gmail.com>
+ <87v7x1soto.fsf@baylibre.com>
+ <CAPLW+4=-yPgMeDM5XRkBXR-nD4Ni2VtWqTKxJVVrfdU8g2sG4g@mail.gmail.com>
+ <875xp08ysu.fsf@baylibre.com>
+ <CAPLW+4=qt++B+wD6zvfsoCxgd=Jmygf7w=Wz71p3Z8GUOZS9oQ@mail.gmail.com>
+Date: Thu, 07 Nov 2024 09:53:56 +0100
+Message-ID: <87v7wz4e6z.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [Upstream] [PATCH v2 2/6] phycore-imx8mp_defconfig: add optee
- load address
-To: Yannic Moog <y.moog@phytec.de>, Stefano Babic <sbabic@denx.de>, "Fabio
- Estevam" <festevam@gmail.com>, NXP i.MX U-Boot Team <uboot-imx@nxp.com>, "Tom
- Rini" <trini@konsulko.com>
-CC: Manuel Traut <manut@mecka.net>, Tim Harvey <tharvey@gateworks.com>,
- <upstream@lists.phytec.de>, <u-boot@lists.denx.de>, Yashwanth Varakala
- <y.varakala@phytec.de>
-References: <20241107-phytec_imx8m_optee-v2-0-bbc3747a60e8@phytec.de>
- <20241107-phytec_imx8m_optee-v2-2-bbc3747a60e8@phytec.de>
-Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20241107-phytec_imx8m_optee-v2-2-bbc3747a60e8@phytec.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B93:EE_|DB9P195MB1611:EE_
-X-MS-Office365-Filtering-Correlation-Id: a99608d9-8436-43f0-b421-08dcff098194
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZWtrRDF3cGJ0MjJseForTHpxSnVwaEdDb1JVQUw3KzV5RG0wZVV4YVNTL2Nu?=
- =?utf-8?B?TzhpdnJiZzJCYlZjRGJ5bk9STS9veDRsVmdBbmp4dXJEOTFsc0NxKytFSldz?=
- =?utf-8?B?aEVHYXZCNkdvU1dIcjFyb3liYmNpYW5ld3FZamxEbzhNMjlnZTVNV0kwRlRz?=
- =?utf-8?B?M0tpRDg5MUZJOHFOa2ZnMjNqWmZSeG1qMVQ0bS9rZmxjQW1MMktKVWlLL282?=
- =?utf-8?B?dWYwVXRBSkhiaDVJRXhZWDgrNDNoUllIRmdUQVVSeGF0MndaRTVpVldaNkZ4?=
- =?utf-8?B?dnZoUDl1dXhFVUpYZG12Qmpab1J6Mkc4aEYzek5WQW54VXZKMTVJaVZXOTVx?=
- =?utf-8?B?akJCUUZKVFJwK0hFUW5EKzZUT3FKeWRTVWM2eUVPOXhFUGNLb3J3cUhaWnoy?=
- =?utf-8?B?aGtTdnpwbDhOQUN0TEgzUE5aWlVNdFFhYm9ndGczV2VXTmRYV3pKRkx3aFRo?=
- =?utf-8?B?QUpWN2tzdU00TENMdTErcjlqeW1uUDNlY0EvMjBoVFBpQ2NmU0t1Qlhxc0o0?=
- =?utf-8?B?cUltb2Rwam5LN0NZZmhya2FZSlZqMGhHUC9GWStpQ3FzREZGc214NHk3M2ww?=
- =?utf-8?B?WnFtRGdtZHFzV3hkY0oxZjBWbVdjZ1ZLQzcwcXZMVTFmZSt2VXRPcnZ6RWVu?=
- =?utf-8?B?UytmVHBJRzdkOGxoQ2RuV3JtRUVSWWUwV1lLajVTN3RtNTlDKzE4MEdHYlR5?=
- =?utf-8?B?WFp4T0R4disxZ3JzdVFaL3RMTGUzWUtZbU5YRU51Rk1SK3FzRnYvQUFYUnhh?=
- =?utf-8?B?RmQyLzRRSzhnWGlGQWNsdlgvOEY0NUt1RGl5MG1rZWdXRUtkUzN0cmFybGJk?=
- =?utf-8?B?VXhHaEJsK3lIQldzM2tyaU00YlppSlBmU0YzZlNHQll1VVlJWVloZnVrTVR6?=
- =?utf-8?B?VlhpQzRSVi9BYTk5ZXAxZmwrSkJxbDdrc1dtN0x1cUdoQjc2dURPVW5pRG5B?=
- =?utf-8?B?bE12SDhuU2pSSEF1eFBMWmZBVTkrTjdRcG8vRXdTeW9rLytUVkJjcGJJci9p?=
- =?utf-8?B?eFJDQlNUMkR3aEpScjlVeFRydXUwdUtkR2IyQXUrZXk4N3JDRUlnbGFwM2Zu?=
- =?utf-8?B?cDdqU0QzNTdISVJsWnBQYVYvY0I2c2lJRDF4ZUJDVit2cWEwL0pSNFp0S0xr?=
- =?utf-8?B?T0YxTnpnUERYRUpXWHRsMXdpcVlCai90bTFxU3hId0pUNi9UVGJ1RnVqVW14?=
- =?utf-8?B?OXNhWmdmTnhPcXN2QWtXSWJsQTROaWxhVXhGNFZ6M2ZaNFphQVVvZlJUZE53?=
- =?utf-8?B?MGJYODNpTk8weGZzaEtlY3krbTc4RUNCWExPYjJ3VDhqaGV0VEdYREpnajRS?=
- =?utf-8?B?TFhqclg2aTVEVGFNS2o4SkdVS21hUEU1a0VyUWNITTE3S1d3a296dHNYanla?=
- =?utf-8?B?eWNyL2tvUXcva0tRYXQ1Z2ZlNGw5WjR5aWd0Z3A3QlFXMTJwRWQ1NmpiTjdn?=
- =?utf-8?B?aHljVjNSTEJoYmordXFYZFpaRzlYNVFqNEh3dXZudVArNjB5Z1M1THJ5WXdX?=
- =?utf-8?B?dllRVk5WRGNzMldGakJhS2J0V0x5TUoyVTBXUVhZMVhJUCt4ZnpFWE1Ld1Rw?=
- =?utf-8?B?SVd4dFM4NzZpQlhMOTdBMk50VzFqRXBxMXdLZlkzcmtoV0RWNHlvVGdzL1dw?=
- =?utf-8?B?U0g5c00vWGRZVU5hcDExOFpsRTFhcFUwRVVZeDRHQjdrRURzR2Y3RWFrMlo5?=
- =?utf-8?B?a3pZa1RvQkt2bEFrNVpBZThldnRMbGZyWjBEdjFpSVBCaURuUis1OUlwd2sz?=
- =?utf-8?B?amtZSFU2UlQ2UDlzaFRwTmRFc0Q1VzYyM3pycUI1VzQ2RHo1cGlTWEpSSGw4?=
- =?utf-8?B?T2s2Slh4UGFVWS9ueC9HTng0YzZLVVVwRzBJOCtGejlITk55TVFYYW9TVUlW?=
- =?utf-8?B?NHNaRlpER3FZTVgrVC9ONFFaVjg0WVhDMVYvMldtTHJwT1E9PQ==?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2024 08:52:27.2937 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a99608d9-8436-43f0-b421-08dcff098194
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B93.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P195MB1611
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,34 +104,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yannic,
+Hi Sam,
 
-Am 07.11.24 um 09:23 schrieb Yannic Moog:
-> The phyBOARD-Pollux expects 0x56000000 address to load optee.
+On mer., nov. 06, 2024 at 21:17, Sam Protsenko <semen.protsenko@linaro.org>=
+ wrote:
 
-You are already defining a default for IMX8M_OPTEE_LOAD_ADDR in the 
-mach-imx Kconf. You can drop the patches touching the defconfigs.
+> On Wed, Nov 6, 2024 at 4:02=E2=80=AFAM Mattijs Korpershoek
+> <mkorpershoek@baylibre.com> wrote:
+>>
+>> Hi Sam,
+>>
+>> On mar., nov. 05, 2024 at 18:58, Sam Protsenko <semen.protsenko@linaro.o=
+rg> wrote:
+>>
+>> > On Tue, Nov 5, 2024 at 9:06=E2=80=AFAM Mattijs Korpershoek
+>> > <mkorpershoek@baylibre.com> wrote:
+>> >>
+>> >> Hi Sam,
+>> >>
+>> >
+>> > Hey Mattijs,
+>> >
+>> > [snip]
+>> >
+>> >> >> @@ -328,7 +328,8 @@ int ab_select_slot(struct blk_desc *dev_desc, =
+struct disk_partition *part_info,
+>> >> >>                  * or the device tree.
+>> >> >>                  */
+>> >> >>                 memset(slot_suffix, 0, sizeof(slot_suffix));
+>> >> >> -               slot_suffix[0] =3D BOOT_SLOT_NAME(slot);
+>> >> >> +               slot_suffix[0] =3D '_';
+>> >> >> +               slot_suffix[1] =3D BOOT_SLOT_NAME(slot);
+>> >> >
+>> >> > AFAIU, this changes the behavior of two above functions, and
+>> >> > consequently of "bcb ab_select" command? If so, just to double chec=
+k:
+>> >> > were all users of those reworked correspondingly? I can see next
+>> >> > occurrences (there may be more):
+>> >> >
+>> >> > $ grep -sIrHn '"_' boot/bootmeth_android.c
+>> >>
+>> >> I thought the same when first reviewing the patch.
+>> >> Looking a bit closer...
+>> >>
+>> >> >
+>> >> > boot/bootmeth_android.c:74:    sprintf(partname, BOOT_PART_NAME "_%=
+s",
+>> >> > priv->slot);
+>> >> > boot/bootmeth_android.c:111:    sprintf(partname,
+>> >> > VENDOR_BOOT_PART_NAME "_%s", priv->slot);
+>> >> > boot/bootmeth_android.c:156:    sprintf(slot_suffix, "_%s", priv->s=
+lot);
+>> >> > boot/bootmeth_android.c:397:    sprintf(slot_suffix, "_%s", priv->s=
+lot);
+>> >>
+>> >> ... We can see that ab_select_slot() returns an integer
+>> >> That integer is used later on to initialize priv->slot:
+>> >>
+>> >> """
+>> >>         priv->slot[0] =3D BOOT_SLOT_NAME(ret);
+>> >>         priv->slot[1] =3D '\0';
+>> >> """
+>> >>
+>> >> The change from Dmitry only changes what we **write** to the BCB (into
+>> >> the misc partition), not what is returned by ab_select_slot().
+>> >>
+>> >
+>> > Sure. Just wanted to double check that the behavior is not changed in
+>> > any related parts, as the commit message doesn't mention that. Btw,
+>> > BCB is an interface between the bootloader and AOSP, so if this patch
+>> > changes what's being written into BCB, does it affect AOSP part of it
+>> > somehow? Especially for already existing devices with particular BCB
+>> > data, in case U-Boot gets updated there.
+>>
+>> Those are valid concerns.
+>>
+>> Per my understanding, on recent Android versions the slot suffix is not
+>> read from BCB, but from the ro.boot.slot_suffix property:
+>>
+>
+> That probably still leaves the possible combination of some devices
+> running new U-Boot versions (with this patch applied) together with
+> older Android versions. E.g. in case when U-Boot is updated but
+> Android isn't, may be especially relevant for some dev boards out
+> there.
 
-Regards,
-Wadim
+Yes, you are right. Boards with Android older than 2019 and U-Boot v2025.01+
 
-> 
-> Signed-off-by: Yannic Moog <y.moog@phytec.de>
-> ---
->   configs/phycore-imx8mp_defconfig | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
-> index 1240c7fcbd0..910109afd80 100644
-> --- a/configs/phycore-imx8mp_defconfig
-> +++ b/configs/phycore-imx8mp_defconfig
-> @@ -5,6 +5,7 @@ CONFIG_SYS_MALLOC_LEN=0x2000000
->   CONFIG_SPL_GPIO=y
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
-> +CONFIG_IMX8M_OPTEE_LOAD_ADDR=0x56000000
->   CONFIG_PHYTEC_SOM_DETECTION=y
->   CONFIG_SF_DEFAULT_SPEED=80000000
->   CONFIG_ENV_SIZE=0x10000
-> 
+My experience is that most of the time, it's the bootloader that stays
+out of date and the Android that gets updated. But that might not be the
+general case.
 
+>
+>> """
+>>   // Initialize the current_slot from the read-only property. If the pro=
+perty
+>>   // was not set (from either the command line or the device tree), we c=
+an later
+>>   // initialize it from the bootloader_control struct.
+>
+> So even in recent Android versions it's being initialized from BCB in
+> case the property is not set.
+
+Nope, the comment is wrong. If look at the lines below you can see that
+the function exits early when the property is not set.
+
+So in recent Android versions if the propery is not set, we just fail to in=
+itialize.
+
+>
+>>   std::string suffix_prop =3D android::base::GetProperty("ro.boot.slot_s=
+uffix", "");
+>>   if (suffix_prop.empty()) {
+>>     LOG(ERROR) << "Slot suffix property is not set";
+>>     return false;
+>>   }
+>>   current_slot_ =3D SlotSuffixToIndex(suffix_prop.c_str());
+>> """
+>>
+>> See:
+>> https://cs.android.com/android/platform/superproject/main/+/main:hardwar=
+e/interfaces/boot/1.1/default/boot_control/libboot_control.cpp;l=3D185;drc=
+=3D86b8f575059a1799c760ca7012f540a528d68a9d;bpv=3D1;bpt=3D1
+>>
+>> This has been the case since 2019.
+>>
+>> If we look at earlier implementations of libboot_control (which was in
+>> bootable/recovery)
+>> https://android-review.googlesource.com/c/platform/bootable/recovery/+/1=
+191517
+>>
+>> So implementations before 2019 that do not have this patch:
+>> https://android-review.googlesource.com/c/platform/bootable/recovery/+/1=
+111899
+>>
+>> Will get the slot suffix from the BCB (not from the commandline)
+>>
+>> For these older implementations, we will go through the following:
+>> BootControl::Init()
+>>   LoadBootloaderControl(device.c_str(), &boot_ctrl)
+>>   android::base::ReadFully(fd.get(), buffer, sizeof(bootloader_control)
+>>
+>> And struct bootloader_control has:
+>>
+>> struct bootloader_control {
+>>     // NUL terminated active slot suffix.
+>>     char slot_suffix[4];
+>>
+>> And if we look at how the BCB is initialized from userspace in:
+>> https://cs.android.com/android/platform/superproject/main/+/main:hardwar=
+e/interfaces/boot/1.1/default/boot_control/libboot_control.cpp;l=3D120;drc=
+=3D86b8f575059a1799c760ca7012f540a528d68a9d
+>>
+>> We can see that we copy _a, not a (for example, if slot =3D=3D 0).
+>>
+>> So I think this is fine.
+>>
+>> If needed, I can dig more for behaviour on older devices (<2019), let me=
+ know!
+>>
+>
+> My point is, if it's possible to introduce this change but keep the
+> same old behavior (across both U-Boot and AOSP), it's usually better
+> to do that that way. If I'm not missing anything and that's a valid
+> concern, maybe a separate patch can be developed on top of the merged
+> patch series handling that. Anyways, I don't have enough time to work
+> on this right now, so just pointing out what I noticed, if it's useful
+> for anybody. I'll let the maintainers decide :)
+
+Yes, thanks a lot for noticing and taking the time to report your valid
+concerns :)
+
+>
+> Thanks!
+>
+>> >
+>> >> ab_select_slot() still returns an integer which needs to be converted
+>> >> via the BOOT_SLOT_NAME() macro.
+>> >>
+>> >> >
+>> >> > $ grep -sIrHn 'slot_suffix _' include/configs/
+>> >> > include/configs/ti_omap5_common.h:107:    "setenv slot_suffix _${sl=
+ot_name};"
+>> >> > include/configs/meson64_android.h:65:        "setenv slot_suffix
+>> >> > _${current_slot}; " \
+>> >>
+>> >> Same goes for these 2 examples, we use:
+>> >> The "bcb ab_select current_slot" command to store the slot into the
+>> >> "current_slot" environment variable.
+>> >> Looking at cmd/bcb.c we can see:
+>> >>
+>> >> """
+>> >>         ret =3D ab_select_slot(dev_desc, &part_info, dec_tries);
+>> >>         if (ret < 0) {
+>> >>                 printf("Android boot failed, error %d.\n", ret);
+>> >>                 return CMD_RET_FAILURE;
+>> >>         }
+>> >>
+>> >>         /* Android standard slot names are 'a', 'b', ... */
+>> >>         slot[0] =3D BOOT_SLOT_NAME(ret);
+>> >>         slot[1] =3D '\0';
+>> >>         env_set(argv[1], slot);
+>> >>         printf("ANDROID: Booting slot: %s\n", slot);
+>> >> """
+>> >>
+>> >> So I think this is fine.
+>> >>
+>> >
+>> > [snip]
