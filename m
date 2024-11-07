@@ -4,136 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49CB1D4335A
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 12:48:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E32DED4335B
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 12:54:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F026A8926F;
-	Thu,  7 Nov 2024 13:48:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 76A6188FBB;
+	Thu,  7 Nov 2024 13:54:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="isqQddJS";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="kPwAzhs4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 770E689277; Thu,  7 Nov 2024 13:48:20 +0100 (CET)
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on20631.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2407::631])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F376289259; Thu,  7 Nov 2024 13:54:16 +0100 (CET)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2062c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::62c])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 561728926F
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 13:48:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2C0188D9E
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 13:54:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Prasad.Kummari@amd.com
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Gs5171ZNv4uYNhrbz+ROv3aVObBIyIzm+YEUeDw9778q7crnlBvCUIEirROh/fxD8BnQ+bOFv3bVVpkWt9J46ElFX9ggAT9conJY/UFAVThUQsYRyk+MUoXK6zE9eVafKx2cOU4CiQmq7CgNgjroLMEy5HtNiXzNkl8vJNT8gotg2gdEC7Ia1TosDOAyXa/Mw+Ft4H1wMWkT/UaQhGDl/U0CJ1cTSmFKBqY3zJpouHSSy+H4sWDk5ECX/gJjWGqOrBP+bOF1MWyXZjXBIi65kjn8Q1uaguYDLc7EkVYffdSO1kVzrNVoHAkz92l3Yi2qfJ3OiTIoMfuu+vOM8YX6bg==
+ b=usmokVLMqzTbQkMg1SpbExzfH0TSYKrSOjMFgb1ebyZva1gnhNLFX9arNGi5ILj/f1I+2lHsf4TZemc8po8pqs6DHzVd5PVpIsLRgcsWVQbMWiL5t7tzLIsvRg/PLxmOwktbDJ8OB/cw7czjOb+e+kdy+PTI1kh9CR0NjB22QGVbx6IKO9G7igD5kIsbR96O02jE9TqrlOl3cHZMxQB4UhpC5jGC1DY148bWR6JuBTMsraBgsYlAV9scMEzx3j6O5YY8Lcyd6OKHtxXZUASI+JCJpFtRXAdDD+aPj3JBY72bExWohN+cT2/jaen1xrGD90d0qdK2EuFdRLRIIAqSig==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SoeYHyNQPJC6PI4CqtCSqrRibXqQTI+9+fCo+w7Ym6M=;
- b=lZJLoz6h83RQM9++MhSaPpFd6ssQ237DTICnmc/OlvqQhxPm7jY/w8zGSG3kyAQVApam91vS0uGgMB36bxwdxUnFVcaBYZMUl78Zgwjai6HFcs4LT+quUBFl/is7i6HfAawZfkwSBxk4Jdso6KM1/Ns0uyMIRylj18ALjGKQNI5YM+SC2wl6gonpjwD1xARtc8eHlkgXMEEWuib4QDHPWEuZSGa/UhnhWJHNMo0yeOuNj++oheeblEvJIE+pS8YuGo7XrR86B8bXZBypLbxHDOnaXRccLmkS1dt3JTZHjItSik1xjXlvUKZeuMdnW4okwZHHwuZ8YjE5fZzXYNvAqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
+ bh=ypuWdNQIMJMmg5quMS4eKSbC/sgifnFuS5IkZV0nQRE=;
+ b=VzqjT7D8mWrHLJNuzgR9KE12b6XgH8wHfxxvsDzR36vRs8sw4WdlyEegs+XfCuMmkeFYgxriY23rYJxTksqlniqYrDHYo37WRkOMxkOtZ8J6XgqbnWzRnqc3LUgAkToNMWMvuTC/qpR01E6UfgjBs44zM5cVtqoNlnhwbHUCgXAAx13CzKfzyqm+gAV1rctqunQUlOzxEdZvCuDwPAX8Z7HPcyewq78FXSohx9Ez25BEO5jAWnK1Otlh/KuYrLu1VvAVdfVQSWufrUvX8YdZijkVpFAqZ8mCqn1Ufdazega9mB1mDokVvyCxZJvN138on0AJ7L/qNKplchBi3ZIp6Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SoeYHyNQPJC6PI4CqtCSqrRibXqQTI+9+fCo+w7Ym6M=;
- b=isqQddJSLMcnmrJztTrAf+DCSZH7QHemCODhjn2H+AwxXiSjjQ8n6JC5nrZf29riG+l9xoHBRdIOUCYmDgkK5UtK0S9yfa5sY32Rz2E8bvizSjyQG4YYRY1WJhDoUNHK6wahSWqd0vskRtXpNzOPZTIbMvV+XVNePRVS3DCgOlM=
-Received: from CH5P222CA0014.NAMP222.PROD.OUTLOOK.COM (2603:10b6:610:1ee::6)
- by CH3PR12MB8753.namprd12.prod.outlook.com (2603:10b6:610:178::18) with
+ bh=ypuWdNQIMJMmg5quMS4eKSbC/sgifnFuS5IkZV0nQRE=;
+ b=kPwAzhs4dppLC5MriV+ypZZlc3W8ETJJeaKlMG7pCQGTZ6Q0X2XmK36DHjYulxAnFhO/UZ2i/mLGY9BCevOv033Ug1HOPXEEVKR+SxKDvGVAWZy2oC4Q0mj2K4VX8U1GFmDrLVg93WfE+0pkgIPmXUlC2yubyB5r2yfvscbpY1k=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by DS0PR12MB9040.namprd12.prod.outlook.com (2603:10b6:8:f5::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.21; Thu, 7 Nov
- 2024 12:48:14 +0000
-Received: from CH1PEPF0000AD81.namprd04.prod.outlook.com
- (2603:10b6:610:1ee:cafe::f3) by CH5P222CA0014.outlook.office365.com
- (2603:10b6:610:1ee::6) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.20 via Frontend
- Transport; Thu, 7 Nov 2024 12:48:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CH1PEPF0000AD81.mail.protection.outlook.com (10.167.244.89) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8137.17 via Frontend Transport; Thu, 7 Nov 2024 12:48:13 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 7 Nov
- 2024 06:48:12 -0600
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 7 Nov 2024 06:48:09 -0600
-From: Prasad Kummari <prasad.kummari@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
- <padmarao.begari@amd.com>, <git@xilinx.com>, <jagan@amarulasolutions.com>,
- <n-francis@ti.com>, <d-gole@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, "Prasad
- Kummari" <prasad.kummari@amd.com>
-Subject: [PATCH 2/2] spi: cadence_qspi: Fix Versal NET ospi indirect write
- timed out issue
-Date: Thu, 7 Nov 2024 18:17:07 +0530
-Message-ID: <20241107124708.383695-3-prasad.kummari@amd.com>
-X-Mailer: git-send-email 2.44.1
-In-Reply-To: <20241107124708.383695-1-prasad.kummari@amd.com>
-References: <20241107124708.383695-1-prasad.kummari@amd.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.19; Thu, 7 Nov
+ 2024 12:54:09 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30%6]) with mapi id 15.20.8114.031; Thu, 7 Nov 2024
+ 12:54:09 +0000
+Message-ID: <409c2b37-046e-4343-9fe0-7cfb818ecd35@amd.com>
+Date: Thu, 7 Nov 2024 13:53:54 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cadence_qspi: Refactor the flash reset functionality
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
+ "vigneshr@ti.com" <vigneshr@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
+ "trini@konsulko.com" <trini@konsulko.com>,
+ "seanga2@gmail.com" <seanga2@gmail.com>,
+ "caleb.connolly@linaro.org" <caleb.connolly@linaro.org>,
+ "sjg@chromium.org" <sjg@chromium.org>,
+ "william.zhang@broadcom.com" <william.zhang@broadcom.com>,
+ "stefan_b@posteo.net" <stefan_b@posteo.net>, "git (AMD-Xilinx)" <git@amd.com>
+References: <20241028092430.19841-1-venkatesh.abbarapu@amd.com>
+ <f52cea21-8171-4fa3-9fb6-b8e54344fd0d@amd.com>
+ <SA1PR12MB869780A320010907ACB78979985C2@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+In-Reply-To: <SA1PR12MB869780A320010907ACB78979985C2@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VE1PR03CA0016.eurprd03.prod.outlook.com
+ (2603:10a6:802:a0::28) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: prasad.kummari@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD81:EE_|CH3PR12MB8753:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0d9e8ec3-86ee-4f58-946a-08dcff2a7184
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS0PR12MB9040:EE_
+X-MS-Office365-Filtering-Correlation-Id: c6fbeead-2e87-452a-fdce-08dcff2b4518
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?IvEp0GrELpYLDb3uzae74h7khRWnDTu6G6KARQQ4NMAS4qjkgfsNhS/jxzRV?=
- =?us-ascii?Q?4//WDyLR5HAsVUqNmeV9nXKljLHJ8QxVA6sfI0RT9D65CroeehYs8lYQoVZc?=
- =?us-ascii?Q?Sh73pC4g5ud8XDB7LF6ZqmAlP4bKRPfS28UOfILeSoc3TNKpd4enBRjf9MsX?=
- =?us-ascii?Q?KsWeKiUJKypsRHuv0sK8R0xgwJ3qLiiBlNUuE+Z8oorv4/JbY3KMJ8Va3TBq?=
- =?us-ascii?Q?VTxVTjwZsE5gOXfbzQPS17QAqkm9S8i2mt1ZJgyTZSVRJZl3FxSNjAe3N9o5?=
- =?us-ascii?Q?NB/efN1xAeJwp4jALALEItynNOa4N37oKTYsrbSMgNbiJAa0zLmyc/95ISgA?=
- =?us-ascii?Q?+Ywi5Gujid5wSHBQKwGfR0fVgrISjGcUFnj4cMiQ9pj/bopVl8LlwIcgzLAd?=
- =?us-ascii?Q?wVaG+d9HTcgEBEJGeXXQHkgC+0FmB/io1lT/kePShiUYlzpZ788iERAcZAww?=
- =?us-ascii?Q?sJixSTfNg+zol/pQi8IA+3GiefyM3WCWYRY/aHxgyFx4yoJFtjySEExe1dKV?=
- =?us-ascii?Q?rkVKHDiS3yytOk+OT72k6U9kPvlW3Oo2hgIVfbY7tPM35UMByJf/6gGmLYy4?=
- =?us-ascii?Q?B6P0N9+KnbxR+dDxFP23XAHT1FtLFiu40IDO9t7aClreJUfP8RhHvYasziB1?=
- =?us-ascii?Q?OUNbeMtjwwDW55lcLpvRKFd+RLWJVOl7tGAeQR2OG3Ff7ZNGnrfH8dCRDWGs?=
- =?us-ascii?Q?SHpVV7qVZqk7/RsEw6FB1sNCL1E+Uzyiz2H6VJ4Eezf+h+pdSXDZY8uCC5Q2?=
- =?us-ascii?Q?hHZQ1D1GMV5T8xCnusRGqY5iN/5g5eIk1eJ5LdRz5FqZxB0COF+t0LAhSxhU?=
- =?us-ascii?Q?Uiw0D3T0uYdNujXpnIk83ZgkcAsUqJx0SyNCLjOJsLLMceAapYRO2fL+G/3e?=
- =?us-ascii?Q?2C7s9R/8Js0+i3njcYw0UkJsh/ZAUF3QN2d5zJgz7j4A2016iL6qWQfb9EH0?=
- =?us-ascii?Q?MYU3eMa/pkIcr/Ub+42aTQEMvIMFAvp5Y47pxIYTFQs1XcNZzlvymEIlYgXb?=
- =?us-ascii?Q?/Gk3dx1XGSX5cPAPO0y+E3lRlLmFIdcHczrXDh8JopS4MoeX7wGtHbsq+tQ1?=
- =?us-ascii?Q?MCjItG0Z51k0yOcPtpfEfoIGWmHa8VbMEPJsnDljlDJjol8F2SENJKf7W1He?=
- =?us-ascii?Q?1CUFfmoG3lH1PRHYN9iy7r8GmLnxqkdlgv4B8MzANeE0kg4Idw0sIBtQA5TD?=
- =?us-ascii?Q?J2m/VrkydpzppxABbv1YMn+/9rgV7L0LWldfTYUHHmP6HGO9TnPEgvxzdQLV?=
- =?us-ascii?Q?u5vG1UzfGLdL4NXqmX/y6ipv9kylLCvlbj02opGdkQx/xEnEReCsACC0xVTJ?=
- =?us-ascii?Q?+KExtw7KeDUxk2fTQV2EtgvR2417IM+ehOfF8wTBZKgnt1HhjOPe1Q+ioVkl?=
- =?us-ascii?Q?u3kPEcIhvTQfCW/sZKhDcpqxF6cv7r792Llp1rjIaPSBa13aGA=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
- SFP:1101; 
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UUtqZHloOFJsQVdIcDlHQXFlU1RvU3hzL0dIZktOY2ROVE1ZOHQ3N0RLMllN?=
+ =?utf-8?B?OTlrMk4wV1FwVW5UV2pHZXJZdmZwdFQvTnE0cnRlRFpxUHl3dnFvS3JOM0pZ?=
+ =?utf-8?B?YTh5VTh2clNPMUxaNG1QWkZIVGFOQlVLay9hMnF2akdidEt2M3YzOEFGcm13?=
+ =?utf-8?B?bGZ3dEdnMmNBT3hJcFVHd0FqSG8vcjU5dVpJQ3NjUHpWUVN4OTAwL2FETUw0?=
+ =?utf-8?B?eFd3QkE0QzdYYWIzdFUvOXpwd1FaMHJmUGVaT2V4U3hzNnc5R3Blc2NtMld0?=
+ =?utf-8?B?TEJQZ1I0WXRnNS9HZFFvK3R4UmVDTHZlNzR4ckVJTmxzOFExQlU3WUlGdlo0?=
+ =?utf-8?B?Vm5hWjZtWkxoK3hpL0JBMGwzOXdDSldad2dKYnR0blpiL1gzTzZRU0luMmw2?=
+ =?utf-8?B?SHY4em4waDRHVUJCbVErRkswVVhwc05aMGlrZndjMlJwRUVPL0k1TnVYQk9o?=
+ =?utf-8?B?Zk9nV2wrM09LM1I3VE1UelpHaTV4RWVOQkNuMmh4cnQzcTYrTTQyRnRCOEVV?=
+ =?utf-8?B?UG9mRFJzV1BzWkJjZE43RlFuYTJjbm5yVUtmeGpSZGphWWE0RHRRQi9hQzhx?=
+ =?utf-8?B?TUNyVUZWVTNYNVQzdFBKZXFxTmhYT0hKSVI0TUk0WEJvSUdhR3YzVFpUamVu?=
+ =?utf-8?B?aDlCM0M4Ykp3Q2lJaFQ2MXpOSlczRHVxNGFMQ1Z5c25yTmJPMWZyQ2gvRTBq?=
+ =?utf-8?B?alFQL2dKazZ5STJnMGtKbkdldkZicnErOVBIVnhxb01uRitmaVZUMFlxVXdC?=
+ =?utf-8?B?dEFoRXlCYVdrZFRWYWxFZ3d1U2FGNjVRODlKb0tPWXhjKzhJM0tIZkh0SW15?=
+ =?utf-8?B?VVFEVTllekMvaHlEUTVIMFFsWlJ3YktMejU2ZkxObkxNT21PS285dHBpSUN3?=
+ =?utf-8?B?VXZGK0IyamdvOExWRVgvOUNpbWkwY0FpSy9WSG1UejdRaTZSanZPTS9tQlQy?=
+ =?utf-8?B?NDRxb01MbFcyU2lrVTQrMkpRbHpkSUVlMEdqdERSYTFaWHUwS1ByZklCZlFT?=
+ =?utf-8?B?S3dNenZmQUMxRGQ0WG9zQzZmc1RKak4wSDlSZTQ5NW42ZzE3RlZITkZOUnZG?=
+ =?utf-8?B?NXc2UWphZTMrRWR5d1F1SnpDUG9MVW91VmJqWWIyNjUxelpEcTV0bStLeWIy?=
+ =?utf-8?B?bzZEUGJqNmk4R1lsdTZQdGxOQnk5QmVmTHFaUk9rcUV4MVh2R08xbWE2Qngw?=
+ =?utf-8?B?U2VRWmdCTVNOK2RpbzNsa0tXSEhwYzFyamNaa1RkV1JaS0ZoQ0JIYmRUNTJq?=
+ =?utf-8?B?eWpCM01uaWNpVWY4eDhwaDhoRzk3VlpHV2tRRVpHOFkwbXlQdEdPTTVPUVRs?=
+ =?utf-8?B?V3VDa1RUSVFhL0p4Q2hqWjhXczc2UWNZL25vbFF6RGIrZTIxL2hDbEQ5U3RN?=
+ =?utf-8?B?SzN2TXNZcndqRUMzUmkwNzRkUWorcHV2SFd5eHkxYUY4ZGlsaUsvbW1URDMy?=
+ =?utf-8?B?YmdncDBoYlNrTloxUFVwTFVJWUt3YmE1MVR4K1BDbHJQMXFIUWR1K25zSGtW?=
+ =?utf-8?B?eXZKTjJTVGdQLzdzK3ZKMnJpNjg0TzY3UXZyVGRZbSs3V2FEVmRYMG5WWFo1?=
+ =?utf-8?B?WVhpdzBuUE4vZVJWRDQvVFBkc3JxSnNMSEh2bnRJaGFGR04vbWFBY2RBdnFo?=
+ =?utf-8?B?YnltVkRrUlFmZWRyWXFrSmM1RjZvWVB0eXJ5emlVUVVOZm13NlArdmN2T0N1?=
+ =?utf-8?B?aW5LbEF2SHgrWTY2ME12N1E5M2hISmFndXltNWNjZjRIb3pmQ2xlZVgxd0pW?=
+ =?utf-8?Q?8g+h7otqHmE11hMQsW8cz8MsK/g2rfWbzNJM2VR?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(7416014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NWFtSEFaVzlmQjgwK3V4RzBHQjhjdThkZWVQbVBicFpZZGN6OFJVbkQzTE8r?=
+ =?utf-8?B?NGtmZHMrdndYYVlyYjhTaTRueEEvSlZrTm5pbkV1WUVaZ3NGZklUWWhGSGlU?=
+ =?utf-8?B?NFdrOHFUWEx6T0hCWk9wa2VJNGlPdnNJakR0K09CeHAxWG5FRXgrVnVmQ0h6?=
+ =?utf-8?B?OFRVaURkWWF4cml2QU5UNjNmTFdLZ3NVS2swRnZDSkRxZEJ0SXJYNXAyT3c3?=
+ =?utf-8?B?OHVZdUR3VHFPQnBMSEkvUnVsdFcyRHlvM0JiVkJadmFIWFhyeUdGS00wSnhl?=
+ =?utf-8?B?ZjNVdHFHeTRRT1dVS1ptSHJSN28yaE1ZREZDS0ZGMDlCMitCTXRjVlFvQkw4?=
+ =?utf-8?B?NUFEeTlVTnJOWTZ6UDJ0U09GTzdvbm5IT2N0alZCN3pQUUpUTUtsam1aTlpt?=
+ =?utf-8?B?WkZyRmhVYS9ST1RGNzJiZUxrY0dmQnVHUW1BOG9wbmtOSXVzUkUzV1NPVkla?=
+ =?utf-8?B?VmxxRHI5MTlpUU9xYmg3eFFQYkw0RnVEZVhFbTNGRkZxK2dFV1VSeDlqclZS?=
+ =?utf-8?B?c09EdzU5bUdqNzVVVktNZ1BZdHJhSHVwZjVKQU4xYWdGVXJnUklodjhwMUk3?=
+ =?utf-8?B?M1NQNzYzSWhDTnNDZTBoUHNyS2pOaFB5NGZGc0FHZW04clZ2dnpGZDBWejdF?=
+ =?utf-8?B?OElaNUlNUFJSYlMrb2gyT2s0T0s4bVJoODdIaEFuK0NPT2FITnJib25xdnhI?=
+ =?utf-8?B?KzlwMEZXaGZXZ0FEVVdwZmNBVGswOXVkTElGN2dZUDVTS3JuRCtZMmo5OFJR?=
+ =?utf-8?B?bkhGK1dBY3o0RnN6NEpqNWNVRDV4K3JUVjY5Q21WS3RIQkRJUlFoZ1QrZmkw?=
+ =?utf-8?B?Nnl4d25Yei83c2Q1Z1ROWG5lZmlCaHFSb29BQ1Bqd2FMV2U5WHl4MWxsaXdp?=
+ =?utf-8?B?aEZvYlVSLzZJcjdaYVdKWVQ4MDdqMXloa25CekRYeThUUnlvMURVdGkyVjNs?=
+ =?utf-8?B?SVZoQjU2YndSMHUvUGhiSVRoc0FPa1ZoT28xS1VtZWVsQXBBNHJGYVUyQmxh?=
+ =?utf-8?B?Rkp6a2ZIOGNUWXFkd2w1QUtGY29JcDZkeVJ3YzV3V1pNRk1jd2NTS216aXRv?=
+ =?utf-8?B?TVBsYzN2NGRyTGZLVVdyS3U5Q1QwTkpiTDhlbU9PM3ZxVGxuY3M4aEdvS054?=
+ =?utf-8?B?bDhXY0djeFBIQmlITmh6YldSdHJKV2s2ajVJUEpWR3RES28zYkQ0eUxvMVhU?=
+ =?utf-8?B?M0tJOHhITzFUbkdQYXNxTE9zSjNMZzdsb0E5Smd2cHQxOVlHVTFKajNONEZQ?=
+ =?utf-8?B?aDZqWkdtQ3JwVkpUOFRucTYydk53YU40RjNrYytQL0ZiWS9LRVlZbWF0QWFJ?=
+ =?utf-8?B?cHN1M2swZm5VUEZQcVdRTW5QL3YrNE1EazZKcThnWEFCTDRHUTFWeFdKb2Ev?=
+ =?utf-8?B?b1lXdWcrODNGR3VIQ2dGcms5OFcxd3lQK05VSHBWY2N5dzFPS2ZHSkZVRDhK?=
+ =?utf-8?B?bUJLZDhtcGVUck1BNkNqS2IxQW4rNVVWS2xKWUl1N1VKV0krT3pWbGFkU3Ra?=
+ =?utf-8?B?QmF1V0dmNDdyZmh5NGs1VFYrMEUydHRTTGhBdVo5dGpwNjhUUzd0YjdER2JB?=
+ =?utf-8?B?TEJLQXR1MTZQQ0dqZUNTQ3JmTWpxUDloeVNQdy82d2xLUUY1aTF4WVhZQXNO?=
+ =?utf-8?B?VzBVMmZwMDBpY3lnVDhpRHErQmZoSDZCNnN0dzBUYlZXakhYVDhoS1ZsS0Va?=
+ =?utf-8?B?OUJ2NFJGTjhJT2syREVJbnFVMEhnZzdON3RxbS9ieFVuaUZKT0FHZ3VCYW9n?=
+ =?utf-8?B?NFJ4SVV1VkEyTlFCSUo4a2l2aURURm0vQVdDdUtBQ1VEZHIxbDFpSlFMbjcw?=
+ =?utf-8?B?MDhmdk4xVUN5aE9LRTI4SDRucThZV2lIdkVnUDlmOFBDU0VEWjJ5TlJDRElr?=
+ =?utf-8?B?dERXbW5vcURMVyszZXNNZWcyemRjeWJvT2Zjd1cxVG9YWjZNY0lCeVM0NzY2?=
+ =?utf-8?B?V1orTGtXZDY2YWdsVFVib3hCUU52K0VRcmMwTVRHL1hSQWl4V05qaE43ejNv?=
+ =?utf-8?B?aHczWkZJM1RtSkRNWUlUWGljdW1qRURWSE5pbzVmMDNwZE1tZ0doRVZncVBH?=
+ =?utf-8?B?WXpZWW5GV3BTMERzTlpEZ1dsVWlQaHBEWjNuZ0xSckd1dnBYcDZ4Yk5UUFR3?=
+ =?utf-8?Q?UNEuvF6tg9JBJW76QIBpTxDuH?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2024 12:48:13.7210 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0d9e8ec3-86ee-4f58-946a-08dcff2a7184
+X-MS-Exchange-CrossTenant-Network-Message-Id: c6fbeead-2e87-452a-fdce-08dcff2b4518
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2024 12:54:09.0228 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD81.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8753
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: TRFcRwyYNckMJh42psS0yiQlbegA+DSxVJLgI3G1aYc4tpnIUxdR7LpuUMfERztt
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9040
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,50 +181,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The readl_poll_timeout() function is currently polling for the
-indirect operation completion bit with a 10ms timeout, which
-triggers an "Indirect write timed out" error. The indirect done
-status is also using a 10ms timeout, leading to "Indirect write
-clear completion" errors. To resolve these timeouts, the timeout
-value has been increased to 500ms, taking reference from the Linux
-implementation.
 
-Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
----
- drivers/spi/cadence_qspi_apb.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb.c
-index 3c71a5effc..c6bade60a0 100644
---- a/drivers/spi/cadence_qspi_apb.c
-+++ b/drivers/spi/cadence_qspi_apb.c
-@@ -889,7 +889,7 @@ cadence_qspi_apb_indirect_write_execute(struct cadence_spi_priv *priv,
- 
- 		/* Wait up to Indirect Operation Complete bit to set */
- 		ret = readl_poll_timeout(priv->regbase + CQSPI_REG_IRQSTATUS, cr,
--					 cr & CQSPI_REG_IRQ_IND_COMP, 10);
-+					 cr & CQSPI_REG_IRQ_IND_COMP, 500);
- 
- 		if (ret) {
- 			printf("Indirect write timed out (%i)\n", ret);
-@@ -902,7 +902,7 @@ cadence_qspi_apb_indirect_write_execute(struct cadence_spi_priv *priv,
- 
- 	/* Check indirect done status */
- 	ret = wait_for_bit_le32(priv->regbase + CQSPI_REG_INDIRECTWR,
--				CQSPI_REG_INDIRECTWR_DONE, 1, 10, 0);
-+				CQSPI_REG_INDIRECTWR_DONE, 1, 500, 0);
- 	if (ret) {
- 		printf("Indirect write completion error (%i)\n", ret);
- 		goto failwr;
-@@ -917,7 +917,7 @@ cadence_qspi_apb_indirect_write_execute(struct cadence_spi_priv *priv,
- 
- 	/* Check indirect done status */
- 	ret = wait_for_bit_le32(priv->regbase + CQSPI_REG_INDIRECTWR,
--				CQSPI_REG_INDIRECTWR_DONE, 0, 10, 0);
-+				CQSPI_REG_INDIRECTWR_DONE, 0, 500, 0);
- 	if (ret) {
- 		printf("Indirect write clear completion error (%i)\n", ret);
- 		goto failwr;
--- 
-2.44.1
+On 11/7/24 05:57, Abbarapu, Venkatesh wrote:
+> Hi Michal,
+> 
+>> -----Original Message-----
+>> From: Simek, Michal <michal.simek@amd.com>
+>> Sent: Wednesday, November 6, 2024 5:17 PM
+>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; u-boot@lists.denx.de
+>> Cc: jagan@amarulasolutions.com; vigneshr@ti.com; u-kumar1@ti.com;
+>> trini@konsulko.com; seanga2@gmail.com; caleb.connolly@linaro.org;
+>> sjg@chromium.org; william.zhang@broadcom.com; stefan_b@posteo.net; git (AMD-
+>> Xilinx) <git@amd.com>
+>> Subject: Re: [PATCH] cadence_qspi: Refactor the flash reset functionality
+>>
+>>
+>>
+>> On 10/28/24 10:24, Venkatesh Yadav Abbarapu wrote:
+>>> As the flash reset is handled in spi nor core, removing the flash
+>>> reset functionality. As the configuration like tristate and hysterisis
+>>> need to be enabled by the cdo. Handle the flash reset only for mini
+>>> u-boot case.
+>>>
+>>> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+>>> ---
+>>>    drivers/spi/cadence_ospi_versal.c | 43 -------------------------------
+>>>    drivers/spi/cadence_qspi.c        |  7 +++--
+>>>    2 files changed, 5 insertions(+), 45 deletions(-)
+>>>
+>>> diff --git a/drivers/spi/cadence_ospi_versal.c
+>>> b/drivers/spi/cadence_ospi_versal.c
+>>> index 222f828f54..de51e4c37f 100644
+>>> --- a/drivers/spi/cadence_ospi_versal.c
+>>> +++ b/drivers/spi/cadence_ospi_versal.c
+>>> @@ -125,48 +125,6 @@ int cadence_qspi_apb_wait_for_dma_cmplt(struct
+>> cadence_spi_priv *priv)
+>>>    	return 0;
+>>>    }
+>>>
+>>> -#if defined(CONFIG_DM_GPIO)
+>>> -int cadence_qspi_versal_flash_reset(struct udevice *dev) -{
+>>> -	struct gpio_desc gpio;
+>>> -	u32 reset_gpio;
+>>> -	int ret;
+>>> -
+>>> -	/* request gpio and set direction as output set to 1 */
+>>> -	ret = gpio_request_by_name(dev, "reset-gpios", 0, &gpio,
+>>> -				   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
+>>> -	if (ret) {
+>>> -		printf("%s: unable to reset ospi flash device", __func__);
+>>> -		return ret;
+>>> -	}
+>>> -
+>>> -	reset_gpio = PMIO_NODE_ID_BASE + gpio.offset;
+>>> -
+>>> -	/* Request for pin */
+>>> -	xilinx_pm_request(PM_PINCTRL_REQUEST, reset_gpio, 0, 0, 0, NULL);
+>>> -
+>>> -	/* Enable hysteresis in cmos receiver */
+>>> -	xilinx_pm_request(PM_PINCTRL_CONFIG_PARAM_SET, reset_gpio,
+>>> -			  PM_PINCTRL_CONFIG_SCHMITT_CMOS,
+>>> -			  PM_PINCTRL_INPUT_TYPE_SCHMITT, 0, NULL);
+>>> -
+>>> -	/* Disable Tri-state */
+>>> -	xilinx_pm_request(PM_PINCTRL_CONFIG_PARAM_SET, reset_gpio,
+>>> -			  PM_PINCTRL_CONFIG_TRI_STATE,
+>>> -			  PM_PINCTRL_TRI_STATE_DISABLE, 0, NULL);
+>>> -	udelay(1);
+>>> -
+>>> -	/* Set value 0 to pin */
+>>> -	dm_gpio_set_value(&gpio, 0);
+>>> -	udelay(1);
+>>> -
+>>> -	/* Set value 1 to pin */
+>>> -	dm_gpio_set_value(&gpio, 1);
+>>> -	udelay(1);
+>>> -
+>>> -	return 0;
+>>> -}
+>>> -#else
+>>>    int cadence_qspi_versal_flash_reset(struct udevice *dev)
+>>>    {
+>>>    	/* CRP WPROT */
+>>> @@ -209,7 +167,6 @@ int cadence_qspi_versal_flash_reset(struct udevice
+>>> *dev)
+>>>
+>>>    	return 0;
+>>>    }
+>>> -#endif
+>>>
+>>>    void cadence_qspi_apb_enable_linear_mode(bool enable)
+>>>    {
+>>> diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c
+>>> index 9c466f8695..f8c3fe8428 100644
+>>> --- a/drivers/spi/cadence_qspi.c
+>>> +++ b/drivers/spi/cadence_qspi.c
+>>> @@ -258,8 +258,11 @@ static int cadence_spi_probe(struct udevice *bus)
+>>>    		if (priv->read_delay >= 0)
+>>>    			priv->read_delay = -1;
+>>>
+>>> -	/* Reset ospi flash device */
+>>> -	return cadence_qspi_versal_flash_reset(bus);
+>>> +	if (!CONFIG_IS_ENABLED(DM_GPIO))
+>>
+>> I think this is not the right thing to do here.
+>> Because there could be boards which requires to do some other GPIO handling out
+>> of spi core. I think this patch is introducing limitation for nothing.
+>>
+>> I would keep origin code and just move this condition to
+>> drivers/spi/cadence_ospi_versal.c
+> 
+> This function cadence_qspi_versal_flash_reset() is specific to AMD only.
 
+yes I know and we shouldn't really bother generic code about it.
+I think that function name should be more generic that other platforms can hook 
+it up. But logic when versal requires this only when DM_GPIO is not enabled 
+should be in vendor specific file.
+
+M
