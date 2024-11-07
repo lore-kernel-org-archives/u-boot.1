@@ -4,60 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41BE4D4334D
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 11:35:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E84BFD43349
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 11:42:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9C7A89235;
-	Thu,  7 Nov 2024 12:35:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3C1C68920C;
+	Thu,  7 Nov 2024 12:42:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1730979337;
-	bh=GOeYsgrlfC48dOaATB9UkADdr0uG/hVm7zSqiv4X7fk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=mVb0o3FiXT82WhD5SQvAgffkotHEcgRtkrK7E/STUHucMiLb4xk/V3mAljMihPj1b
-	 FnorHWC8M50RAUxU1YGDSZKHcpGt5TfIMhNfQGHijitKM47cCzofnytaTUkBaTvNxK
-	 f/aOE7Br3JE0NJnVj6azdNCWg662rj/MmjE//+yt/SFzbD/v0/FiHOaFbngb+I/VBH
-	 1kn//4sSS3JO+gmzEB56RogWlzpZY04po8jDOFvkp1v8zxTfJgx1tnG+VCZOvnCF1P
-	 QmY57Yg2VTL3H2GKykqZ+3xx53R8qhWgpgazhuEcy4OL814bNerBeFiaW2/8MX2Ilm
-	 E1uVzW6N4+biQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TEomRV/o";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 51E0288FF6; Thu,  7 Nov 2024 12:42:02 +0100 (CET)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id C6E9488FF6;
- Thu,  7 Nov 2024 12:35:35 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1730979336;
- bh=GOeYsgrlfC48dOaATB9UkADdr0uG/hVm7zSqiv4X7fk=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=obdG0scFJqHkhiYa3DlDI1rPgQnFfxWl3mju7ASWojDmgS2q/yjcTBEzG8V//pWFz
- G6sG7KD2S+Imxb/14esIo7AtukK9vjM2DH57q5tuv0VODavKOub0x5yYhK4DSKbCgG
- w6Xy1kITpFOhNy67FTA6L6duczz9jzTXAK4U1B//KnuElaA+oUkbuite/hBVIXnF1P
- dFFT3B7Y3eDJ5GA384Q+GAhF+qWUSeCrLX1DiBGxIhvru3K3FMbcrVVUl6YTeFuODa
- r7fWTTRvAGNuigZlkUGIoLFt60ONQZO0emDdaM4aOTYRqTPKOnf1nB4ENV0htVekoA
- 7RvwVQhWZwhZQ==
-Message-ID: <fd5c36fb-8e27-4146-bec1-52c87045dd71@denx.de>
-Date: Thu, 7 Nov 2024 12:23:28 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 265BA89245
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 12:42:00 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2fb3c3d5513so8050111fa.1
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 03:42:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1730979719; x=1731584519; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fzuasx2z+MyoqXU9x/T5xa5am9ncu133GRa/1xZKG3g=;
+ b=TEomRV/oOxI3kiVqt1Ql2yXkwYku6ccM+4yLMISNqhNwuFcEwHm7PpWTNNQV4VK/29
+ gAvDx3c2J9Rc3rugIjB6uK2Tr/k8OLXABh3HofOSa4xUdPZuI2SjxXu3qHnzu5h7vxDH
+ ekn/pS6gkpId3BX5ZBXmFRYGrPskmzVeYLNwZL1fXUF2e0gmxsVPEmX9t/vCfPOwkCAI
+ kUxHjBTxzXZJ5RZ0LEQuG3LXQteuMAsDgSnDALUy0UKgOtz035vsAoQGgeMYNBgp5SsV
+ YqQWpC4HoT1JlmVa1JSommsAZKHFsr6V1Ue3fLzAcgIutwzInqWmgCWsGYgMPliEvIv/
+ nmzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730979719; x=1731584519;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fzuasx2z+MyoqXU9x/T5xa5am9ncu133GRa/1xZKG3g=;
+ b=D8jNdinsIVsFA4Bcy/sC0JuL+fBnzPSH4LlsWcSfwDnd0sfygWJclhetHEj2H6buh/
+ Z6Qzjuhv5RNZxY99ucqy31II4fyL75lo+LoiwbqGKLgki12YTwj9PlMsjXpJZjzIih7O
+ WVFq/RsHCqO/eWzHIBrR1fA8MtpiPa1kZVJr/Qm4WE8khcbrqu45rPdD4vSN1Gcf1XeA
+ YNe2DtSJp2nEeXrpPrgSDaQsKsBknxX/umtWNNfQCtA8PkN9bIOoheySHff3YiRWH/90
+ 94C+pTRPjHaMuMVuGIQTacoFOroacw9VzmrTx8XmHSi3G7aoK1al8QbAjVI+ufkk/1p9
+ MIGg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXUU45QN/7m/BfsF8at7QyarvSmoDo7M1D3JQVx1Tzm2Ehep4OayVu0BWdbJQfOTjn5yOG5XTc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwflZ8Dna/e3lDE3G6Xzho6PlJBY6fJZhumudNJDggWzjkBVjWP
+ 5k1imW+V23lLA+BkpPpY7TPp5cbPlTyd7x4KZ+feaN3XF2ZY4SBsTU2pm2NhbkmTVZm9hhuGwfB
+ cUiyziV9qqGiWXdZiw5b7VHcpFb6EphbF
+X-Google-Smtp-Source: AGHT+IGXfvdyyfAx9HkGCGFkUnTR84ZDIbIB/MkQBOpvWRMVD7mJC4I8k7/G1axbPAfwv7etruweab43Z92kFbTMmNg=
+X-Received: by 2002:a2e:a803:0:b0:2fb:6027:7bfd with SMTP id
+ 38308e7fff4ca-2ff1aadc9a4mr6268991fa.27.1730979719094; Thu, 07 Nov 2024
+ 03:41:59 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 1/7] usb: onboard-hub: Add reset-gpio support
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "Simek, Michal" <michal.simek@amd.com>,
- "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
- "git (AMD-Xilinx)" <git@amd.com>
 References: <20241030064314.28604-1-venkatesh.abbarapu@amd.com>
  <20241030064314.28604-2-venkatesh.abbarapu@amd.com>
  <1ab82f5b-6e89-4c1d-990e-3936c8ffa489@denx.de>
  <SA1PR12MB869760E4493442CBBFFE6D41985C2@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <SA1PR12MB869760E4493442CBBFFE6D41985C2@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <fd5c36fb-8e27-4146-bec1-52c87045dd71@denx.de>
+In-Reply-To: <fd5c36fb-8e27-4146-bec1-52c87045dd71@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 7 Nov 2024 08:41:47 -0300
+Message-ID: <CAOMZO5B8AANkDA9ktRqrm4fdqXb6izs3wjZcQE8E=0NvtwAB_w@mail.gmail.com>
+Subject: Re: [PATCH v9 1/7] usb: onboard-hub: Add reset-gpio support
+To: Marek Vasut <marex@denx.de>
+Cc: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "Simek,
+ Michal" <michal.simek@amd.com>, 
+ "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
+ "git (AMD-Xilinx)" <git@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,66 +97,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/7/24 7:05 AM, Abbarapu, Venkatesh wrote:
-> Hi,
-> 
->> -----Original Message-----
->> From: Marek Vasut <marex@denx.de>
->> Sent: Wednesday, November 6, 2024 6:04 AM
->> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; u-boot@lists.denx.de
->> Cc: Simek, Michal <michal.simek@amd.com>; fabrice.gasnier@foss.st.com; git
->> (AMD-Xilinx) <git@amd.com>
->> Subject: Re: [PATCH v9 1/7] usb: onboard-hub: Add reset-gpio support
->>
->> On 10/30/24 7:43 AM, Venkatesh Yadav Abbarapu wrote:
->>> As part of the reset, sets the direction of the pin to output before
->>> toggling the pin. Delay of millisecond is added in between low and
->>> high to meet the setup and hold time requirement of the reset.
->>>
->>> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
->>> Reviewed-by: Marek Vasut <marex@denx.de>
->>> ---
->>>    common/usb_onboard_hub.c | 42
->> +++++++++++++++++++++++++++++++++++++++-
->>>    1 file changed, 41 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c index
->>> 68a04ac041..4174575893 100644
->>> --- a/common/usb_onboard_hub.c
->>> +++ b/common/usb_onboard_hub.c
->>> @@ -7,14 +7,51 @@
->>>     * Mostly inspired by Linux kernel v6.1 onboard_usb_hub driver
->>>     */
->>>
->>> +#include <asm/gpio.h>
->>>    #include <dm.h>
->>>    #include <dm/device_compat.h>
->>> +#include <linux/delay.h>
->>>    #include <power/regulator.h>
->>>
->>>    struct onboard_hub {
->>>    	struct udevice *vdd;
->>> +	struct gpio_desc *reset_gpio;
->>>    };
->>>
->>> +struct onboard_hub_data {
->>> +	unsigned long reset_us;
->>> +	unsigned long power_on_delay_us;
->>> +};
->>> +
->>> +int usb_onboard_hub_reset(struct udevice *dev) {
->>> +	struct onboard_hub_data *data =
->>> +		(struct onboard_hub_data *)dev_get_driver_data(dev);
->>> +	struct onboard_hub *hub = dev_get_priv(dev);
->>> +	int ret;
->>> +
->>> +	hub->reset_gpio = devm_gpiod_get_optional(dev, "reset",
->>> +						  GPIOD_IS_OUT |
->> GPIOD_ACTIVE_LOW);
->> Is the reset GPIO always active low or should this respect the GPIO flags in DT
->> instead ?
-> Yes...the reset GPIO is always active low.
-How did you arrive at that conclusion ?
+On Thu, Nov 7, 2024 at 8:35=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
 
-I can very much predict there will show up a hub which expects the reset 
-to be active HIGH and this will have to be removed, so better remove it now.
+> I can very much predict there will show up a hub which expects the reset
+> to be active HIGH and this will have to be removed, so better remove it n=
+ow.
+
+Agreed.
+
+The onboard_usb_dev.c driver in Linux does not assume that the USB hub
+reset is always active low.
+
+It honors the GPIO flag passed via DT:
+
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/dri=
+vers/usb/misc/onboard_usb_dev.c?h=3Dv6.12-rc6#n380
+
+We should do the same in U-Boot.
