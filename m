@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD697D43349
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 11:21:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38E7AD43349
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 11:21:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F1AE8924B;
-	Thu,  7 Nov 2024 12:21:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8F3F889251;
+	Thu,  7 Nov 2024 12:21:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yfvcuS/o";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U0udz4J+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 787008924D; Thu,  7 Nov 2024 12:21:20 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 09BC089253; Thu,  7 Nov 2024 12:21:28 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ADF689235
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 12:21:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB50689266
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 12:21:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43161e7bb25so6776375e9.2
- for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 03:21:18 -0800 (PST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4314fa33a35so6849425e9.1
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 03:21:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730978478; x=1731583278; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1730978485; x=1731583285; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=rTjpPcOB/wtUn1fDtjVbZage/jCxDFmha03MtTsBpAI=;
- b=yfvcuS/odin5oWw9Qk6irbtCGc7z2VJIzFKWeByZfXkK9ojgFlcJkA5GHZ5XLwgDcT
- U0dDg4ePxWGcAK4XKoPFGb/ODnrvYJYWj/ymJmJmJ4lMxsmFDwmn/Qn3TcZ6hS5v+sMp
- dZ+I8dtrpaOhqV1Y63gka1MO7qyrtHi0PIWspev8MEbraC43jkK0UPCsX9RSW7FhyLFy
- eUJf2SJlD5SwV/iml1EjWKbIVNfAvTTq7HlfwaQ67qSmIw2cKi3XqkbUiQcsv8spFwnK
- sOnq2op7vnIAdr6WCHkWksK4Od9WMrHb9VY++lLW3kxBGXVdOiVd1VWINT77RNn4bUUh
- B/5g==
+ bh=SOD5MMy88K0gEs9f1TcrlL+l+Dv2B5Z2dU4f0FPc6aE=;
+ b=U0udz4J+pK8lv3pQFrAP0S5n7zHHv9OBa/RI2kSz7j8H3ben+f0hIQZ8+H0Hes6tbw
+ atfdkz1FqzHKhQcM03+p/Ip/CqemyXAuXVy6MTSIYFNEke1/lXSeEIH3x8G9WfTzzv6M
+ lP0/j15Q5CniPdSimr98Ccszc6AEVJc9ounJMIWDfjrXdF9nYr7LFhHLenwaUr7srkxk
+ h8NZ6khd4+fNoXpUe3UAXcdUUDF9RGvVjPowQ2S0XV+E05LKycRQIXdp6eU3vV8WW9JY
+ 4E6LGZrXWco7E2SaR0/KOidZUaJGxYl/Q90Y2Iqd1M+jV9jnoxZKefDTNG1i5K0lK/oe
+ VJ6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730978478; x=1731583278;
+ d=1e100.net; s=20230601; t=1730978485; x=1731583285;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rTjpPcOB/wtUn1fDtjVbZage/jCxDFmha03MtTsBpAI=;
- b=S4k+tL6ha3uELFgsGoaHdrjPrXpY1gU3VZpfFTQZkZ8eonTEuNojwQ9WRRgn09Sehx
- qiNHSF/O0vQNax0HSf6+UqVQAMAdRpIA/jwTkkPI2XtbDq1D3FInA8f0KC7LUrZW1enN
- Nw3v5dwSK3ER3tQQAEl79m92qCZ6jwkWB/pmMNCtfBDFj2R7f39G22pEnNhPjwNXpHUQ
- 7wM+h6YG0iDiEoIZ2SgPBtlJ6C6mu+k0IUEEYCydamN1oVd2Xd6xonK6JGnkQFuo9qqe
- DCb6/GTggctO5Bwcr3WWXFkY0fBMrwDxnreBkpt4ZC+ZjqL/n0Rz2CQcKbxHVsX5FOVt
- MRVQ==
+ bh=SOD5MMy88K0gEs9f1TcrlL+l+Dv2B5Z2dU4f0FPc6aE=;
+ b=f4lF0hstTNP+gjrIwOErnfZc0hDNpGaO5eWf4l3JpqaMwl1JDhZW0XPaa2vxI2cTqP
+ qyXWNKd1Vv1PWw/uKaD0pemC2ILLwoyVkqj42PY4io53EWanMqUgtL6j8VpqcNALI8mk
+ gf4/ZzGg3UIlej0x5qkL8WU/OvNO9MSPX9b1NBHF4RLb2C+7Wh+99/LX6zKaChOg5T54
+ N0AprDAWNoEt1niWYbNMUavVmYq6VkR6EvBc3xDA8txYy6ffCBBFEGGUECL9Q/Y2RAiM
+ GQ+iyOHTWIJ5fK8foTXMG3lUNWCTEKd4CiQZzM0Z+C5AOj+QvA+SdRAExjU5Sn1Qn7kj
+ Zn2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUcUDiPI5xHZJjG1ohJsgSgY4bp+Euo86Fmiv2Yn4vAWLnNwlZsSsAeq593JpQpQPBBXo/wZqs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmQw5X2xF47pdXDeZJZTQ9TuelsvWXbSToXyrYguHlfewRy1tS
- f2uMZXC/xKlXcP0+s5Mv5Q0TOGAVJPlXSKmKKvP8kKaedVyPhbycIiKIQaWRgZU=
-X-Google-Smtp-Source: AGHT+IE6+djvnRd+6KmZ3yR+trVr+gJHRhcBEJnSWrJgZ/XL1SabCEdKB+8YOUZ/UxwS6knlN4cPHg==
-X-Received: by 2002:a5d:47a1:0:b0:37c:d537:9dc0 with SMTP id
- ffacd0b85a97d-381ef6a48b9mr622015f8f.12.1730978477954; 
- Thu, 07 Nov 2024 03:21:17 -0800 (PST)
+ AJvYcCWXR5XsFbfXPmD70Jo8khxu3sNP8h3k+Vf9imdH6IBjg0izHnwCMx5AVzD1EqGgpIjXW20M5QU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwzFdM9Wa1EGGlWZMS1Do5fy2RzhrVLhqC3aBI2r/Fqe2+2TPXW
+ HaFrOFH5wJ0ggXW5fbD5c5usvNfoCFKGUMq+83upwvNIjqE6pJbJY/4JH9rUC16j1lE0Nn9cEjn
+ Th5lg/w==
+X-Google-Smtp-Source: AGHT+IH1VdvDyM+0j4HoEiXzUYjeNvEWIekj1gi2QEz3d8o28nIFttGUg4E6DL8ZEGlL47jpe8ZEhg==
+X-Received: by 2002:a05:600c:34cb:b0:42f:8287:c24d with SMTP id
+ 5b1f17b1804b1-432b3086a2bmr8178965e9.21.1730978485268; 
+ Thu, 07 Nov 2024 03:21:25 -0800 (PST)
 Received: from [172.16.25.132] ([89.101.134.25])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381eda0517csm1441268f8f.96.2024.11.07.03.21.17
+ 5b1f17b1804b1-432aa73886bsm56987865e9.39.2024.11.07.03.21.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Nov 2024 03:21:17 -0800 (PST)
-Message-ID: <b519fb69-308e-4608-9e61-491679d8f94f@linaro.org>
-Date: Thu, 7 Nov 2024 11:21:16 +0000
+ Thu, 07 Nov 2024 03:21:25 -0800 (PST)
+Message-ID: <3aa5b358-37d6-48b7-ab10-176bdee1e05b@linaro.org>
+Date: Thu, 7 Nov 2024 11:21:24 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/7] net: wget: Add a global struct wget_http_info
+Subject: Re: [PATCH 6/7] net/lwip: wget: put server_name and port into wget_ctx
 To: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, xypron.glpk@gmx.de
-References: <20241106130337.211101-1-adrianox@gmail.com>
+References: <20241106130428.211190-1-adrianox@gmail.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241106130337.211101-1-adrianox@gmail.com>
+In-Reply-To: <20241106130428.211190-1-adrianox@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,53 +96,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/6/24 13:03, Adriano Cordova wrote:
-> Declare and define a global struct wget_http_info. The default
-> values are so that wget works as it used to, but they can be
-> changed by an application before issuing an http request using
-> wget, and restored afterwards. This struct is common to legacy
-> wget and lwip wget.
+On 11/6/24 13:04, Adriano Cordova wrote:
+> Currently server_name and port are local variables in wget_loop.
+> This commit puts them inside ctx, so that they are accessible
+> from the http callbacks.
 > 
 > Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 > ---
->  include/net-common.h |  2 ++
->  net/net-common.c     | 10 ++++++++++
->  2 files changed, 12 insertions(+)
+>  net/lwip/wget.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 > 
-> diff --git a/include/net-common.h b/include/net-common.h
-> index 38ba95cf60..3039dfdce7 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -533,4 +533,6 @@ struct wget_http_info {
->  	char *headers;
+> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> index b495ebd1aa..4add520045 100644
+> --- a/net/lwip/wget.c
+> +++ b/net/lwip/wget.c
+> @@ -23,6 +23,8 @@ enum done_state {
 >  };
 >  
-> +extern struct wget_http_info wget_info;
-> +
->  #endif /* __NET_COMMON_H__ */
-> diff --git a/net/net-common.c b/net/net-common.c
-> index a7f767d5e9..e969d508cc 100644
-> --- a/net/net-common.c
-> +++ b/net/net-common.c
-> @@ -1,4 +1,5 @@
->  // SPDX-License-Identifier: GPL-2.0
-> +#include <net-common.h>
+>  struct wget_ctx {
+> +	char server_name[SERVER_NAME_SIZE];
+> +	u16 port;
+>  	char *path;
+>  	ulong daddr;
+>  	ulong saved_daddr;
+> @@ -209,13 +211,11 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
 >  
->  void copy_filename(char *dst, const char *src, int size)
+>  static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
 >  {
-> @@ -11,3 +12,12 @@ void copy_filename(char *dst, const char *src, int size)
->  		*dst++ = *src++;
->  	*dst = '\0';
->  }
-> +
-> +struct wget_http_info wget_info = {
-> +	.method = WGET_HTTP_METHOD_GET,
-> +	.file_size = 0,
-> +	.buffer_size = 0,
-> +	.set_bootdev = true,
-> +	.check_buffer_size = false,
-> +	.headers = NULL,
-> +};
+> -	char server_name[SERVER_NAME_SIZE];
+>  	httpc_connection_t conn;
+>  	httpc_state_t *state;
+>  	struct netif *netif;
+>  	struct wget_ctx ctx;
+>  	char *path;
+> -	u16 port;
+>  
+>  	ctx.daddr = dst_addr;
+>  	ctx.saved_daddr = dst_addr;
+> @@ -224,7 +224,7 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+>  	ctx.prevsize = 0;
+>  	ctx.start_time = 0;
+>  
+> -	if (parse_url(uri, server_name, &port, &path))
+> +	if (parse_url(uri, ctx.server_name, &ctx.port, &path))
+>  		return CMD_RET_USAGE;
+>  
+>  	netif = net_lwip_new_netif(udev);
+> @@ -234,7 +234,7 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+>  	memset(&conn, 0, sizeof(conn));
+>  	conn.result_fn = httpc_result_cb;
+>  	ctx.path = path;
+> -	if (httpc_get_file_dns(server_name, port, path, &conn, httpc_recv_cb,
+> +	if (httpc_get_file_dns(ctx.server_name, ctx.port, path, &conn, httpc_recv_cb,
+>  			       &ctx, &state)) {
+>  		net_lwip_remove_netif(netif);
+>  		return CMD_RET_FAILURE;
 
 Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
