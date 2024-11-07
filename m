@@ -4,62 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 065F0D43367
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 14:29:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51A17D4336D
+	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 14:58:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60B12892CD;
-	Thu,  7 Nov 2024 15:29:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 9E8F0892A1;
+	Thu,  7 Nov 2024 15:58:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="B8XKaDGb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ziVAGtNN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4381892DA; Thu,  7 Nov 2024 15:29:52 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9DCDE8927E; Thu,  7 Nov 2024 15:58:33 +0100 (CET)
+Received: from mail-ua1-x930.google.com (mail-ua1-x930.google.com
+ [IPv6:2607:f8b0:4864:20::930])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AF8988DFA
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 15:29:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3E89891FA
+ for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 15:58:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=d7e1=SD=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1730989779;
- bh=GiRxwuTbDJj3qcCTmOE2pWzKkWghue0sSXUMlAH+Wqg=;
- b=B8XKaDGbci8Vt3nLS+y+31PdaTz9H1x6Vj1ot5lWUlTGBao0EaoG/p2uW6TnaQ7YkiPpILrhv
- 9vIkrZnzbDoFEzpsU7nTkLvMfDuH8SqfRRpywiuTziXXy6CxjLeYq1LsikpWfY0tV+2IyG4Q7nS
- WSWSek9Il4Rh5gFy5o88y80wE+CbvymxTyq3J3JSp9u5dTLfawXFWUyiPxRVP8mg+l4+hiBv7H8
- IBWN2WtnmTQDkYXo++MWZefb2YhpTxymfdSq19gAvVs3ynep9aFxUZLxZ8M4i1iY7Mgb2Z4kNP9
- dXcGV3E/HbRlkIcEhtWrAR7LBvH3+ih0ve90zITiwtgA==
-Message-ID: <cef9b291-5c27-454c-a24a-565d4510add5@kwiboo.se>
-Date: Thu, 7 Nov 2024 15:29:31 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-84fc5aaccf8so486108241.3
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 06:58:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730991509; x=1731596309; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/p0Ok3rDq5O8CMSSszcA33dM3npCOsdvMIwSqrzSSso=;
+ b=ziVAGtNNexIwsH8/J4tAPmBnbl7ZAw8fiUahoOYZI5wRJ++pFZ6PaW3sEoceKw86GK
+ zjC4k3yZYI8/km7FdYgT1kJj3BDCGppFQVDOLs2aDCrUaP+wxkUPm58+pb34Q7ttfQIU
+ JiEUSJn9yh4nUz0FwXna3/hEo0qhzxMz6Vjb5OIybiNWpPiEGFck7EOIl0ut5gEseI3z
+ q515ZC4m3JEgdxZf2x861CL7SWkcupXyNI+/rddyDp97Bem4k6cbznme0/sMx1ItjqA1
+ crDoQ5I62I3QCwM70zq7ImTUrZ160ZuHiRQqSlQxZJ89Z+RVmzY5ajqTwVYcZQZOw0Td
+ kEog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730991509; x=1731596309;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/p0Ok3rDq5O8CMSSszcA33dM3npCOsdvMIwSqrzSSso=;
+ b=atoazZQVlAn+e4hanhpwbFyZ9p1zutLfSSvTuU34zwta1G9txzy5oHDKxlZCY8pC+9
+ kWnmuEwiVU1Chs23xRQqSNhWnzaOYzR45qUHz7Lpz9xBtlpysYXMz0x5yaIjpY9jSDi4
+ c1z4b6CAv+jwldWDU1bBQkYIidWD+TJfn1JgmcZ4DKGxsEKkM3vU/bMvlaCbUZbp+UWu
+ mu3jeVOLplYQQntdDr2DNhtDCBCnjJMAV3CcoJXIDIghGSy8FTjmZkRkySE/j8/LHABh
+ 6aB0yXeq2TodDcX3lw7PWu0Pp9DEm2gQ1cueRBKtGe0VpB2whAv8mYV7B7FjZFRqtByb
+ PeTA==
+X-Gm-Message-State: AOJu0YxVldlLw4kiLZy6X1NJqOXVsC4rheosAc4/Y109oJ6Ig+hFtXCU
+ Q33vI/LS9K0bjI41s+fP6S7m1q5di6AwZRe2Q1GgFh/1Z6cUeH5vn3snEkB24pIuQaJhcDhWya2
+ dvETXZcBc/ifLpFj6YMDeuS5Ygc0SxzzMf73LQg==
+X-Google-Smtp-Source: AGHT+IGEwyxB4IrJShb4HTkBsB3GlqeSteq/LQmR5SPjb6q8+Y6PzjuXCSHuzQmuc2mXyXemmLlWrg/2Qfmq1csQHrI=
+X-Received: by 2002:a05:6102:f98:b0:4a3:d3d5:4435 with SMTP id
+ ada2fe7eead31-4a962f3a1b8mr24485031137.21.1730991509546; Thu, 07 Nov 2024
+ 06:58:29 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] rockchip: rk3588: Implement checkboard() to print
- SoC variant
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
-References: <20241102203746.3631481-1-jonas@kwiboo.se>
- <20241102203746.3631481-3-jonas@kwiboo.se>
- <f4f66f6c-3b96-4529-a90c-cd3a0b900a56@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <f4f66f6c-3b96-4529-a90c-cd3a0b900a56@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-ForwardEmail-ID: 672cced15b0439d06bdefeeb
+References: <20241106210348.218507-1-dregan@broadcom.com>
+ <20241106210348.218507-3-dregan@broadcom.com>
+In-Reply-To: <20241106210348.218507-3-dregan@broadcom.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Thu, 7 Nov 2024 14:58:17 +0000
+Message-ID: <CAFA6WYOjNjAQxy8fkA9PWE-bxag-v=_p+Y48McuWaHaqK_axHw@mail.gmail.com>
+Subject: Re: [PATCH 2/4] arm: dts: Use upstream dts
+To: david regan <dregan@broadcom.com>
+Cc: u-boot <u-boot@lists.denx.de>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Anand Gore <anand.gore@broadcom.com>, 
+ William Zhang <william.zhang@broadcom.com>,
+ Kursad Oney <kursad.oney@broadcom.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Linus Walleij <linus.walleij@linaro.org>, 
+ Florian Fainelli <florian.fainelli@broadcom.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@mail.com>,
+ Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,168 +97,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+On Thu, 7 Nov 2024 at 00:53, david regan <dregan@broadcom.com> wrote:
+>
+> Make use of OF_UPSTREAM which uses Linux dts.
+>
+> Signed-off-by: david regan <dregan@broadcom.com>
+> ---
+>  arch/arm/dts/bcm47622.dtsi            | 126 ------------
+>  arch/arm/dts/bcm4912.dtsi             | 128 ------------
+>  arch/arm/dts/bcm63146.dtsi            | 110 ----------
+>  arch/arm/dts/bcm63158.dtsi            | 278 --------------------------
+>  arch/arm/dts/bcm63178.dtsi            | 120 -----------
+>  arch/arm/dts/bcm6756.dtsi             | 130 ------------
+>  arch/arm/dts/bcm6813.dtsi             | 128 ------------
+>  arch/arm/dts/bcm6855.dtsi             | 257 ------------------------
+>  arch/arm/dts/bcm6856.dtsi             | 253 -----------------------
+>  arch/arm/dts/bcm6858.dtsi             | 272 -------------------------
+>  arch/arm/dts/bcm6878.dtsi             | 111 ----------
+>  arch/arm/dts/bcm947622.dts            |  30 ---
+>  arch/arm/dts/bcm94912.dts             |  30 ---
+>  arch/arm/dts/bcm963146.dts            |  30 ---
+>  arch/arm/dts/bcm963158.dts            |  30 ---
+>  arch/arm/dts/bcm963178.dts            |  30 ---
+>  arch/arm/dts/bcm96756.dts             |  30 ---
+>  arch/arm/dts/bcm96813.dts             |  30 ---
+>  arch/arm/dts/bcm96855.dts             |  30 ---
+>  arch/arm/dts/bcm96856.dts             |  30 ---
+>  arch/arm/dts/bcm96858.dts             |  30 ---
+>  arch/arm/dts/bcm96878.dts             |  30 ---
+>  arch/arm/mach-bcmbca/bcm47622/Kconfig |   1 +
+>  arch/arm/mach-bcmbca/bcm4912/Kconfig  |   1 +
+>  arch/arm/mach-bcmbca/bcm63146/Kconfig |   1 +
+>  arch/arm/mach-bcmbca/bcm63158/Kconfig |   1 +
+>  arch/arm/mach-bcmbca/bcm63178/Kconfig |   1 +
+>  arch/arm/mach-bcmbca/bcm6756/Kconfig  |   1 +
+>  arch/arm/mach-bcmbca/bcm6813/Kconfig  |   1 +
+>  arch/arm/mach-bcmbca/bcm6855/Kconfig  |   1 +
+>  arch/arm/mach-bcmbca/bcm6856/Kconfig  |   1 +
+>  arch/arm/mach-bcmbca/bcm6858/Kconfig  |   1 +
+>  arch/arm/mach-bcmbca/bcm6878/Kconfig  |   1 +
+>  configs/bcm947622_defconfig           |  11 +-
+>  configs/bcm94912_defconfig            |  11 +-
+>  configs/bcm963146_defconfig           |  11 +-
+>  configs/bcm963158_defconfig           |  11 +-
+>  configs/bcm963178_defconfig           |  11 +-
+>  configs/bcm96756_defconfig            |  11 +-
+>  configs/bcm96813_defconfig            |  11 +-
+>  configs/bcm96855_defconfig            |  11 +-
+>  configs/bcm96856_defconfig            |  11 +-
+>  configs/bcm96858_defconfig            |  11 +-
+>  configs/bcm96878_defconfig            |  11 +-
+>  44 files changed, 121 insertions(+), 2254 deletions(-)
+>  delete mode 100644 arch/arm/dts/bcm47622.dtsi
+>  delete mode 100644 arch/arm/dts/bcm4912.dtsi
+>  delete mode 100644 arch/arm/dts/bcm63146.dtsi
+>  delete mode 100644 arch/arm/dts/bcm63158.dtsi
+>  delete mode 100644 arch/arm/dts/bcm63178.dtsi
+>  delete mode 100644 arch/arm/dts/bcm6756.dtsi
+>  delete mode 100644 arch/arm/dts/bcm6813.dtsi
+>  delete mode 100644 arch/arm/dts/bcm6855.dtsi
+>  delete mode 100644 arch/arm/dts/bcm6856.dtsi
+>  delete mode 100644 arch/arm/dts/bcm6858.dtsi
+>  delete mode 100644 arch/arm/dts/bcm6878.dtsi
+>  delete mode 100644 arch/arm/dts/bcm947622.dts
+>  delete mode 100644 arch/arm/dts/bcm94912.dts
+>  delete mode 100644 arch/arm/dts/bcm963146.dts
+>  delete mode 100644 arch/arm/dts/bcm963158.dts
+>  delete mode 100644 arch/arm/dts/bcm963178.dts
+>  delete mode 100644 arch/arm/dts/bcm96756.dts
+>  delete mode 100644 arch/arm/dts/bcm96813.dts
+>  delete mode 100644 arch/arm/dts/bcm96855.dts
+>  delete mode 100644 arch/arm/dts/bcm96856.dts
+>  delete mode 100644 arch/arm/dts/bcm96858.dts
+>  delete mode 100644 arch/arm/dts/bcm96878.dts
+>
 
-On 2024-11-07 13:01, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 11/2/24 9:37 PM, Jonas Karlman wrote:
->> Implement checkboard() to print current SoC model used by a board,
->> e.g. one of:
->>
->>    SoC:   RK3582 v1
->>    SoC:   RK3588 v0
->>    SoC:   RK3588 v1
->>    SoC:   RK3588S v0
->>    SoC:   RK3588S v1
->>    SoC:   RK3588S2 v1
->>
->> when U-Boot proper is running.
->>
->>    U-Boot 2025.01-rc1 (Nov 02 2024 - 20:19:01 +0000)
->>
->>    Model: Generic RK3588S/RK3588
->>    SoC:   RK3588S2 v1
->>    DRAM:  8 GiB
->>
->> Information about the SoC model, variant and version is read from OTP.
->>
->> Also update rk3588s-u-boot.dtsi to include OTP in U-Boot pre-reloc phase,
->> where checkboard() is called.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->> v2:
->> - Update commit message
->> - Update code comments
->> - Drop generic-rk3588_defconfig change
->> ---
->>   arch/arm/dts/rk3588s-u-boot.dtsi       |  4 ++
->>   arch/arm/mach-rockchip/rk3588/rk3588.c | 58 ++++++++++++++++++++++++++
->>   2 files changed, 62 insertions(+)
->>
->> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
->> index 09d8b311cec5..8880d162b11c 100644
->> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
->> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
->> @@ -69,6 +69,10 @@
->>   	bootph-all;
->>   };
->>   
->> +&otp {
->> +	bootph-some-ram;
->> +};
->> +
->>   &pcfg_pull_down {
->>   	bootph-all;
->>   };
->> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
->> index e2dac2a5b806..f9da7a6f1477 100644
->> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
->> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
->> @@ -4,6 +4,8 @@
->>    * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
->>    */
->>   
->> +#include <dm.h>
->> +#include <misc.h>
->>   #include <spl.h>
->>   #include <asm/armv8/mmu.h>
->>   #include <asm/arch-rockchip/bootrom.h>
->> @@ -178,3 +180,59 @@ int arch_cpu_init(void)
->>   	return 0;
->>   }
->>   #endif
->> +
->> +#define RK3588_OTP_CPU_CODE_OFFSET		0x02
->> +#define RK3588_OTP_SPECIFICATION_OFFSET		0x06
->> +#define RK3588_OTP_CPU_VERSION_OFFSET		0x1c
->> +
->> +int checkboard(void)
->> +{
->> +	u8 cpu_code[2], specification, package, cpu_version;
->> +	struct udevice *dev;
->> +	char suffix[3];
->> +	int ret;
->> +
->> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
->> +					  DM_DRIVER_GET(rockchip_otp), &dev);
->> +	if (ret) {
->> +		debug("%s: could not find otp device, ret=%d\n", __func__, ret);
-> 
-> We should probably start using log_debug instead?
+Glad to see this diff, FWIW:
 
-I guess we should?, not sure why there is two different and what the
-difference is. Have typically only ever used debug() or printf(), so I
-just went with what was used in the code copied from board.c.
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
-> 
-> I guess with #define LOG_CATEGORY LOGC_ARCH
-> 
-> at the top?
-
-I can give it a try, what/how is the log category used for?
-
-My simple debug workflow is just to add a '#define LOG_DEBUG' at top of
-a file when I want some more debug info.
-
-> 
->> +		return 0;
->> +	}
->> +
->> +	/* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
->> +	ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
-> 
-> This will fail if CONFIG_MISC=n which is neither selected nor implied 
-> for RK3588.
-
-Good catch, did not test that scenario, will fix in a v3.
-
-> 
-> I tested on multiple RK3588 Jaguar, and the commercial (RK3588) grade 
-> ones all showed RK3588 v0.
-> 
-> The one industrial grade (RK3588J) showed RK3588J v1.
-
-Thanks for confirming this works on a J-variant.
-
-> 
-> I'm really not sure what this version number is for. If even Kever 
-> doesn't know what it means, I am not sure it makes sense to print it?
-
-For rk356x there is some special handling for cpu-version <> 0 in vendor
-code, and DT describe a cpu-version nvmem cell, so thought it could be
-useful debug information. However it may just cause more confusion since
-there is no clear information on what the different cpu-version mean.
-
-Will drop the cpu-version information in a v3.
-
-> 
-> FWIW, the Linux kernel now exposes different nvmem devices for each cell 
-> and since we have a cell defined for the three OTP ranges you're using 
-> here, maybe it'd make sense to use that instead of hardcoding the 
-> offsets and size in here? Not a blocker for this though as I don't think 
-> it brings THAT much value to those fixed NVMEM layouts.
-
-Took a quick peek at nvmem cell support in U-Boot and look like 'bits' prop
-is not supported and nvmem-cells/nvmem-cell-names may have to be used.
-
-Probably easier to use that in a future series that also converts this
-into a possible sysinfo driver using a DT node similar to:
-
-  sysinfo {
-	compatible = "rockchip,rk3588-sysinfo";
-	bootph-some-ram;
-	nvmem-cells = <&cpu_code>, <&otp_id>, ...;
-	nvmem-cell-names = "soc", "id", ...;
-  };
-
-Something for the future :-)
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
-
+-Sumit
