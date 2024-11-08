@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A033ED5E124
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 03:41:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17000D5E125
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 03:41:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 372AC88C7E;
-	Fri,  8 Nov 2024 04:41:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9BD4D88EEA;
+	Fri,  8 Nov 2024 04:41:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="jEsyL4x0";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="b2uSlKpa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C65E88C7E; Fri,  8 Nov 2024 04:41:25 +0100 (CET)
-Received: from mail-m12818.netease.com (mail-m12818.netease.com
- [103.209.128.18])
+ id C8EDC88EC6; Fri,  8 Nov 2024 04:41:30 +0100 (CET)
+Received: from mail-m60107.netease.com (mail-m60107.netease.com
+ [210.79.60.107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 715B988D9C
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:41:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AC4E88DB6
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:41:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 227c5e28;
- Fri, 8 Nov 2024 11:41:19 +0800 (GMT+08:00)
-Message-ID: <4bd39b19-de77-40ea-a519-85287d7d9ba2@rock-chips.com>
-Date: Fri, 8 Nov 2024 11:41:18 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 227c5e3f;
+ Fri, 8 Nov 2024 11:41:25 +0800 (GMT+08:00)
+Message-ID: <636f2f1e-b125-4461-9b5b-66162e68903b@rock-chips.com>
+Date: Fri, 8 Nov 2024 11:41:25 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/3] arm64: dts: rockchip: Add support for rk3588 based
- Cool Pi CM5 GenBook
+Subject: Re: [PATCH v6 2/3] rockchip: Make it possible to define per board
+ boot_targets
 To: Andy Yan <andyshrk@163.com>
-Cc: u-boot@lists.denx.de, jonas@kwiboo.se, Heiko Stuebner <heiko@sntech.de>
+Cc: u-boot@lists.denx.de, jonas@kwiboo.se
 References: <20241104122307.439776-1-andyshrk@163.com>
- <20241104122307.439776-2-andyshrk@163.com>
+ <20241104122307.439776-3-andyshrk@163.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241104122307.439776-2-andyshrk@163.com>
+In-Reply-To: <20241104122307.439776-3-andyshrk@163.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGk0dHVZOGEtNGEoaGUsaGk9WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh4aQlYaHkhITk1PH0MYTEpWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9309dcb3ad03afkunm227c5e28
+X-HM-Tid: 0a9309dccb4303afkunm227c5e3f
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NRA6Dgw*PjIsFis2FVEUHEI*
- GjEKCUlVSlVKTEhKS0hMSUNLS0JLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS0tOTzcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MRw6KDo4KTIsDisvI1E0EzY2
+ Ok8KFEhVSlVKTEhKS0hMSUNNSk5NVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFCTU43Bg++
 DKIM-Signature: a=rsa-sha256;
- b=jEsyL4x0YFDYBvK9IKx1i0m3FipwKnJPbNizx38OFQEDbeJGcKYizECz1V7ukFRdveFSIOddSjR0LmCKXKv6G++MzXMBkGHzgNng1uaPt1Aymj7oV2eXqN7pvWh97M8e3S8z1UE/pbAND4DIRHn4NapsZAz+t12kZMHYc/jEgtg=;
+ b=b2uSlKpaiHtbY4zeG1sj3c7RC7+gLO5dh8c5zIM7w2j+VD0fW3lScnksTTMK7QkrefqSdgMQlZMlbGCCDBujDytoGlQ2tIJfJOMuwc8woeF+Pyb+R4xbgU9iJFCOVMAhDZGVQm+njRFrRrpOaQAEKzr2ENalB2IQDJslQIA+FJ0=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=xzUxcivzIqCy21zVNxLPIXQA9DMlHIZx6CDABBbi8vE=;
+ bh=9YFm9+BS5fkfhOxtT7bi07xG7J6k+rSlHIqfuuxgwI0=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,401 +76,35 @@ X-Virus-Status: Clean
 
 
 On 2024/11/4 20:22, Andy Yan wrote:
-> Cool Pi CM5 GenBook works as a carrier board connect with CM5 [0].
->
-> Specification:
-> - Rockchip RK3588
-> - LPDDR5X 8/32 GB
-> - eMMC 64 GB
-> - HDMI Type A out x 1
-> - USB 3.0 Host x 1
-> - USB-C 3.0 with DisplayPort AltMode
-> - PCIE M.2 E Key for RTL8852BE Wireless connection
-> - PCIE M.2 M Key for NVME connection
-> - eDP panel with 1920x1080
->
-> This patch add basic support to bringup eMMC/USB HOST/WiFi/TouchPad/
-> Battery/PCIE NVME, and can also drive a HDMI output with out of tree
-> hdmi patches.
->
-> [0] https://www.crowdsupply.com/shenzhen-tianmao-technology-co-ltd/genbook-rk3588
+> Some board may want to have a different boot priority(a laptop
+> may want to usb has the highest boot priority for third-part
+> os installation). So let the board can define it's own
+> boot_targets.
 >
 > Signed-off-by: Andy Yan <andyshrk@163.com>
-> Link: https://lore.kernel.org/r/20240730102433.540260-3-andyshrk@163.com
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
->
-> [ upstream commit: 4a8c1161b843c366776fc872a6fe45b743b2983e ]
->
-> (cherry picked from commit dc6316da23734d9321e09f8c8a7669f4b4cb9f75)
 
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
->
 > ---
 >
-> (no changes since v2)
+> (no changes since v1)
 >
-> Changes in v2:
-> - Cherry pick it from https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
+>   include/configs/rockchip-common.h | 2 ++
+>   1 file changed, 2 insertions(+)
 >
->   .../rockchip/rk3588-coolpi-cm5-genbook.dts    | 349 ++++++++++++++++++
->   1 file changed, 349 insertions(+)
->   create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
->
-> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts b/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
-> new file mode 100644
-> index 00000000000..6418286efe4
-> --- /dev/null
-> +++ b/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
-> @@ -0,0 +1,349 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Copyright (c) 2024 Rockchip Electronics Co., Ltd.
-> + *
-> + */
-> +
-> +/dts-v1/;
-> +
-> +#include <dt-bindings/leds/common.h>
-> +#include "rk3588-coolpi-cm5.dtsi"
-> +
-> +/ {
-> +	model = "CoolPi CM5 GenBook";
-> +	compatible = "coolpi,pi-cm5-genbook", "coolpi,pi-cm5", "rockchip,rk3588";
-> +
-> +	backlight: backlight {
-> +		compatible = "pwm-backlight";
-> +		enable-gpios = <&gpio4 RK_PA3 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&bl_en>;
-> +		power-supply = <&vcc12v_dcin>;
-> +		pwms = <&pwm6 0 25000 0>;
-> +	};
-> +
-> +	battery: battery {
-> +		compatible = "simple-battery";
-> +		charge-full-design-microamp-hours = <9800000>;
-> +		voltage-max-design-microvolt = <4350000>;
-> +		voltage-min-design-microvolt = <3000000>;
-> +	};
-> +
-> +	charger: dc-charger {
-> +		compatible = "gpio-charger";
-> +		charger-type = "mains";
-> +		gpios = <&gpio1 RK_PC0 GPIO_ACTIVE_LOW>;
-> +	};
-> +
-> +	leds: leds {
-> +		compatible = "gpio-leds";
-> +
-> +		heartbeat_led: led-0 {
-> +			color = <LED_COLOR_ID_GREEN>;
-> +			function = LED_FUNCTION_STATUS;
-> +			gpios = <&gpio1 RK_PB0 GPIO_ACTIVE_HIGH>;
-> +			linux,default-trigger = "heartbeat";
-> +		};
-> +
-> +		wlan_led: led-1 {
-> +			color = <LED_COLOR_ID_GREEN>;
-> +			function = LED_FUNCTION_WLAN;
-> +			gpios = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
-> +		};
-> +
-> +		charging_red: led-2 {
-> +			function = LED_FUNCTION_CHARGING;
-> +			color = <LED_COLOR_ID_RED>;
-> +			gpios = <&gpio3 RK_PD2 GPIO_ACTIVE_HIGH>;
-> +		};
-> +	};
-> +
-> +	vcc12v_dcin: vcc12v-dcin-regulator {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc12v_dcin";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <12000000>;
-> +		regulator-max-microvolt = <12000000>;
-> +	};
-> +
-> +	vcc_sys: vcc-sys-regulator {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc_sys";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <7000000>;
-> +		regulator-max-microvolt = <7000000>;
-> +		vin-supply = <&vcc12v_dcin>;
-> +	};
-> +
-> +	vcc5v0_sys: vcc5v0-sys-regulator {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc5v0_sys";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <7000000>;
-> +		regulator-max-microvolt = <7000000>;
-> +		vin-supply = <&vcc_sys>;
-> +	};
-> +
-> +	vcc3v3_sys: vcc3v3-sys-regulator {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc3v3_sys";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		vin-supply = <&vcc5v0_sys>;
-> +	};
-> +
-> +	vcc3v3_lcd: vcc3v3-lcd-regulator {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc3v3_lcd";
-> +		enable-active-high;
-> +		gpio = <&gpio1 RK_PC4 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&lcdpwr_en>;
-> +		vin-supply = <&vcc3v3_sys>;
-> +	};
-> +
-> +	vcc5v0_usb: vcc5v0-usb-regulator {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc5v0_usb";
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +		enable-active-high;
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +		gpio = <&gpio1 RK_PD5 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&usb_pwren>;
-> +		vin-supply = <&vcc_sys>;
-> +	};
-> +
-> +	vcc5v0_usb_host0: vcc5v0_usb30_host: vcc5v0-usb-host-regulator {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc5v0_host";
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +		enable-active-high;
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +		gpio = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&usb_host_pwren>;
-> +		vin-supply = <&vcc5v0_usb>;
-> +	};
-> +};
-> +
-> +&i2c4 {
-> +	status = "okay";
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&i2c4m3_xfer>;
-> +
-> +	cw2015@62 {
-> +		compatible = "cellwise,cw2015";
-> +		reg = <0x62>;
-> +
-> +		cellwise,battery-profile = /bits/ 8 <
-> +			0x17 0x67 0x69 0x63 0x63 0x62 0x62 0x5F
-> +			0x52 0x73 0x4C 0x5A 0x5B 0x4B 0x42 0x3A
-> +			0x33 0x2D 0x29 0x28 0x2E 0x31 0x3C 0x49
-> +			0x2C 0x2C 0x0C 0xCD 0x30 0x51 0x50 0x66
-> +			0x74 0x74 0x75 0x78 0x41 0x1B 0x84 0x5F
-> +			0x0B 0x34 0x1C 0x45 0x89 0x92 0xA0 0x13
-> +			0x2C 0x55 0xAB 0xCB 0x80 0x5E 0x7B 0xCB
-> +			0x2F 0x00 0x64 0xA5 0xB5 0x10 0x18 0x21
-> +			>;
-> +
-> +		cellwise,monitor-interval-ms = <3000>;
-> +		monitored-battery = <&battery>;
-> +		power-supplies = <&charger>;
-> +	};
-> +};
-> +
-> +&i2c5 {
-> +	status = "okay";
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&i2c5m3_xfer>;
-> +
-> +	touchpad: touchpad@2c {
-> +		compatible = "hid-over-i2c";
-> +		reg = <0x2c>;
-> +		interrupt-parent = <&gpio1>;
-> +		interrupts = <RK_PD6 IRQ_TYPE_LEVEL_LOW>;
-> +		hid-descr-addr = <0x0020>;
-> +	};
-> +};
-> +
-> +&gmac0 {
-> +	status = "disabled";
-> +};
-> +
-> +/* M.2 E-Key */
-> +&pcie2x1l0 {
-> +	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
-> +	vpcie3v3-supply = <&vcc3v3_sys>;
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&pcie_clkreq &pcie_wake &pcie_rst &wifi_pwron &bt_pwron>;
-> +	status = "okay";
-> +};
-> +
-> +&pcie2x1l2 {
-> +	status = "disabled";
-> +};
-> +
-> +&pcie30phy {
-> +	status = "okay";
-> +};
-> +
-> +/* M.2 M-Key ssd */
-> +&pcie3x4 {
-> +	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
-> +	vpcie3v3-supply = <&vcc3v3_sys>;
-> +	status = "okay";
-> +};
-> +
-> +&pinctrl {
-> +	lcd {
-> +		lcdpwr_en: lcdpwr-en {
-> +			rockchip,pins = <1 RK_PC4 RK_FUNC_GPIO &pcfg_pull_down>;
-> +		};
-> +
-> +		bl_en: bl-en {
-> +			rockchip,pins = <4 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +
-> +	usb {
-> +		usb_pwren: usb-pwren {
-> +			rockchip,pins = <1 RK_PD5 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +
-> +		usb_otg_pwren: usb-otg-pwren {
-> +			rockchip,pins = <0 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +
-> +		usb_host_pwren: usb-host-pwren {
-> +			rockchip,pins = <1 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +	};
-> +
-> +	wifi {
-> +		bt_pwron: bt-pwron {
-> +			rockchip,pins = <3 RK_PA6 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +
-> +		pcie_clkreq: pcie-clkreq {
-> +			rockchip,pins = <4 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +
-> +		pcie_rst: pcie-rst {
-> +			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +
-> +		wifi_pwron: wifi-pwron {
-> +			rockchip,pins = <3 RK_PB1 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +
-> +		pcie_wake: pcie-wake {
-> +			rockchip,pins = <4 RK_PA1 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +	};
-> +};
-> +
-> +&pwm6 {
-> +	pinctrl-0 = <&pwm6m1_pins>;
-> +	status = "okay";
-> +};
-> +
-> +&sdmmc {
-> +	status = "disabled";
-> +};
-> +
-> +&sfc {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&fspim2_pins>;
-> +	status = "okay";
-> +
-> +	flash@0 {
-> +		compatible = "jedec,spi-nor";
-> +		reg = <0x0>;
-> +		spi-max-frequency = <100000000>;
-> +		spi-rx-bus-width = <4>;
-> +		spi-tx-bus-width = <1>;
-> +	};
-> +};
-> +
-> +&u2phy0 {
-> +	status = "okay";
-> +};
-> +
-> +&u2phy0_otg {
-> +	status = "okay";
-> +};
-> +
-> +&usbdp_phy0 {
-> +	status = "okay";
-> +};
-> +
-> +&u2phy1 {
-> +	status = "okay";
-> +};
-> +
-> +&u2phy1_otg {
-> +	status = "okay";
-> +};
-> +
-> +&u2phy2 {
-> +	status = "okay";
-> +};
-> +
-> +&u2phy3 {
-> +	status = "okay";
-> +};
-> +
-> +&u2phy2_host {
-> +	phy-supply = <&vcc5v0_usb_host0>;
-> +	status = "okay";
-> +};
-> +
-> +&u2phy3_host {
-> +	phy-supply = <&vcc5v0_usb>;
-> +	status = "okay";
-> +};
-> +
-> +&usbdp_phy1 {
-> +	status = "okay";
-> +};
-> +
-> +/* For Keypad */
-> +&usb_host0_ehci {
-> +	status = "okay";
-> +};
-> +
-> +&usb_host0_ohci {
-> +	status = "okay";
-> +};
-> +
-> +/* Type C port */
-> +&usb_host0_xhci {
-> +	dr_mode = "peripheral";
-> +	maximum-speed = "high-speed";
-> +	status = "okay";
-> +};
-> +
-> +/* connected to a HUB for camera and BT */
-> +&usb_host1_ehci {
-> +	status = "okay";
-> +};
-> +
-> +&usb_host1_ohci {
-> +	status = "okay";
-> +};
-> +
-> +/* USB A out */
-> +&usb_host1_xhci {
-> +	dr_mode = "host";
-> +	status = "okay";
-> +};
+> diff --git a/include/configs/rockchip-common.h b/include/configs/rockchip-common.h
+> index 9b8ab3cdf20..d5550a46575 100644
+> --- a/include/configs/rockchip-common.h
+> +++ b/include/configs/rockchip-common.h
+> @@ -13,7 +13,9 @@
+>   
+>   #ifndef CONFIG_XPL_BUILD
+>   
+> +#ifndef BOOT_TARGETS
+>   #define BOOT_TARGETS	"mmc1 mmc0 nvme scsi usb pxe dhcp spi"
+> +#endif
+>   
+>   #ifdef CONFIG_ARM64
+>   #define ROOT_UUID "B921B045-1DF0-41C3-AF44-4C6F280D3FAE;\0"
