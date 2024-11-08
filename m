@@ -4,78 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0060D5C0C5
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:09:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 942CCD5C0C4
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:09:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C501F89207;
-	Fri,  8 Nov 2024 14:06:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 32D82892A1;
+	Fri,  8 Nov 2024 14:06:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=khoahoang.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731071187;
-	bh=z1wZFMvHAHsuq5MF80OeBW2ZF1cM7pobG20Mf787BoA=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=tikU4NPzfCBQQ3oVZpPm7ubTA89RVj+f4/AsZWJF21OKJW8jWqoQtZnlkBE75laKo
-	 GVFbjXowl+/yPoK1spSgLlCDYH6x+InrtDBNgrFw1Kk8Ph+MDtJpyKqmK+5NpV4OIB
-	 ZNkJj1voPDzOSdj6wbek/3ohcp5vcplIu5ABZ5h8BkFlX7dH0RgGnXE4WjqE6oin32
-	 FBB9IvnxAgcialMdsVabxA2+eWSmRUkHIZ8MhOR9nMXJfhRqN3ykOOfvVCUhC3B+wZ
-	 dcgvdr5K7ZCqnpKe5YwNzhqL6rM0CcUupmpoR+RzwkrD79a69TLIQQgiZRsPEyDOJI
-	 aYjlbolV8Leug==
-Received: from localhost.localdomain (87-97-112-21.pool.digikabel.hu
- [87.97.112.21])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=khoahoang.com header.i=admin@khoahoang.com header.b="c9bsSyR2";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3FB7288EC6; Fri,  8 Nov 2024 06:52:02 +0100 (CET)
+Received: from sender4-of-o55.zoho.com (sender4-of-o55.zoho.com
+ [136.143.188.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 43A5A88E39;
- Fri,  8 Nov 2024 06:21:47 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1731043311;
- bh=z1wZFMvHAHsuq5MF80OeBW2ZF1cM7pobG20Mf787BoA=;
- h=From:To:Cc:Subject:Date:From;
- b=EZTm/lF+6akpUrfbavS/sqAe+ktHXlIX3mOQpAyOOvIOJppnnzZRNMBRge6wQ/HcY
- XzONDrRqYzGIlMGIGzD/gIRX0UPW1u4voEsFYSU4xAL3gBny59ufjmv8tGrlbng8Zb
- FCsQRzIQYOgC7qzqD/mzoSneFnJYzSJgQVbYhoK2ue2lHtLZYu1q/33AFurz0iYKZm
- 7q1UpYpgz6VXQwUOsUhaz2iCmKM35zoAH6aaFrfCwFir4b+OEy91mX+1qb/wauZPLY
- Ylo1qactmkwxbrrWDJkVv1/X717ytgS/pTXPgaxRUnd8MNXL5EAsItzgePAFU5XB8G
- MNOxPNYicyVxg==
-From: Heiko Schocher <hs@denx.de>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Enrico Leto <enrico.leto@siemens.com>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Heiko Schocher <hs@denx.de>, Adam Ford <aford173@gmail.com>,
- Alessandro Zini <alessandro.zini@siemens.com>,
- Anatolij Gustschin <agust@denx.de>,
- Andrej Valek <andrej.valek@siemens.com>, Baruch Siach <baruch@tkos.co.il>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Chanho Park <chanho61.park@samsung.com>, Devarsh Thakkar <devarsht@ti.com>,
- Fabio Estevam <festevam@gmail.com>, Gary Bisson <bisson.gary@gmail.com>,
- Igor Opaniuk <igor.opaniuk@foundries.io>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Michal Simek <michal.simek@amd.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Prasad Kummari <prasad.kummari@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ramon Fried <rfried.dev@gmail.com>, Randolph <randolph@andestech.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Stefano Babic <sbabic@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
- Troy Kisky <troy.kisky@boundarydevices.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH v1 00/22] imx8qxp: siemens board: updates / sync with mainline
-Date: Fri,  8 Nov 2024 06:21:21 +0100
-Message-Id: <20241108052143.26874-1-hs@denx.de>
-X-Mailer: git-send-email 2.20.1
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 094F688F62
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 06:51:59 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=khoahoang.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=admin@khoahoang.com
+ARC-Seal: i=1; a=rsa-sha256; t=1731045116; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=ZtrXAK4edjOL22Dr56eKexGJDHeOgO9Aqv2npQNx6HaqFpCr97yztQ55pxKdmSoq/kplVemv0sm4dMb87qU62VSZCLIpqXYP2G29SjzOTK5Zt4ZBKE1a90Jx/KgEuHPBWZjmpaQAvoiKQxRCZ7j80DciVpDopnTrzsSBa9FNflQ=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1731045116;
+ h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=A1gqrSULPiggcOLbxa7zhSLRJB4v88u870K402nXWu8=; 
+ b=gmelbcWLilPtLFy3Pm8QFBZC/5a8D6s8jny4+vjBX/d2itVMD9ZIMQYX4CyObhhBZizoUTlXqOoLsTvdggkJnI8QtHXrTg7a23o2E43X9eNvrDTy2v2tPzzxcaeKxMneAWeAEz1NhG96pDJ2rvmt4ECwD/KpY1pHYnL4kpq5sRU=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=khoahoang.com;
+ spf=pass  smtp.mailfrom=admin@khoahoang.com;
+ dmarc=pass header.from=<admin@khoahoang.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1731045116; 
+ s=zoho; d=khoahoang.com; i=admin@khoahoang.com;
+ h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Transfer-Encoding:Reply-To;
+ bh=A1gqrSULPiggcOLbxa7zhSLRJB4v88u870K402nXWu8=;
+ b=c9bsSyR2umSU8gyQoxKHOcwPvfDZBi8P8ey9xWetb2iBGIAWV3SuElaxMArCG61d
+ QwgkZNp8y454nsiQY4Xc7M3gagQtJTbJY5+tPfKtEqcGSZyk/JQmaUGIWXYqF8l0Oyu
+ +6D8EWgSktnOPu8ETBPex3xR5diyigKRZMybo0Xs=
+Received: by mx.zohomail.com with SMTPS id 1731045115659419.042082439511;
+ Thu, 7 Nov 2024 21:51:55 -0800 (PST)
+From: Khoa Hoang <admin@khoahoang.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Khoa Hoang <admin@khoahoang.com>
+Subject: [PATCH v2 0/2] eth: asix88179: Fixes for ASIX AX88179A variant
+Date: Thu,  7 Nov 2024 21:51:34 -0800
+Message-Id: <20241108055136.50701-1-admin@khoahoang.com>
+X-Mailer: git-send-email 2.39.2 (Apple Git-143)
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
 X-Mailman-Approved-At: Fri, 08 Nov 2024 14:06:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,120 +75,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Updating the imx8qxp based siemens board. The current
-state of the siemens imx8qxp board is in an old not
-really working state.
+This series provides fixes for the ASIX AX88179A Ethernet driver in
+U-Boot, addressing issues with PHY hang and stalling when handling
+large fragmented packets on the ASIX AX88179A variant.
 
-This series brings mainline back working on the siemens
-deneb board, the guedi board is dropped as not longer used.
+v1 -> v2:
+    - Fix PHY reset and auto-negotiation restart logic
+    - Remove ADVERTISE_NPAGE bit from MII_ADVERTISE register
+    - Add reproduction steps for large fragmented packet stall
+    - Adjust AX_RX_URB_SIZE to align with updated bulk-in size
 
-make all runs fine without having all the needed firmware images
-on board, and so CI @azure.
+Tested on a Raspberry Pi 3 Model B V1.2 with the following adapters:
+ - Amazon Basics USB 3.0 to Gigabit Ethernet (B00M77HMU0) - ASIX AX88179
+ - Hiearcool USB C Hub with Gigabit Ethernet (UCN3610) - ASIX AX88179A
+ - Plugable USB C to Ethernet Adapter (USBC-E1000) - ASIX AX88179
 
-If you want to have a working image you need to copy the
-following images to your build directory $BDIR:
+Khoa Hoang (2):
+  eth: asix88179: Fix ASIX AX88179A PHY hang
+  eth: asix88179: packet drop when receiving large fragmented packets
 
-ATF : bl31-imx8dx.bin            -> $BDIR/bl31.bin
-AHAB: mx8qxc0-ahab-container.img -> $BDIR/mx8qxc0-ahab-container.img
-SCFW: deneb-scfw-tcm.bin         -> $BDIR/mx8qx-mek-scfw-tcm.bin
-
-and call make flash.bin
-
-There are also updates for ethernet and USB support, but not
-ready to push upstream currently, hopefully following soon.
-
-Azure build:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=134&view=results
-
-patchseries needs patch:
-https://patchwork.ozlabs.org/project/uboot/patch/20241104180203.110395-1-hs@denx.de/
-
-series is based on mainline commit:
-56accc56b9a ("bios_emulator: fix first argument of pci_{read,write}_config_* function calls")
-
-Ah yes, not to forget, we work at siemens also on a CI setup to
-have a mainline nightly build and test on hardware. We already
-have such a CI for internall U-Boot versions up and running, but
-we do not want again loose sync with mainline.
-
-
-Enrico Leto (5):
-  siemens: capricorn: move to cxg3 reference project with deneb board
-  siemens: capricorn: get ram size from system controller
-  siemens: capricorn: get module name from eeprom
-  siemens: add ddr signal integrity test
-  siemens: capricorn: update maintainers
-
-Heiko Schocher (17):
-  wdt: imx8qxp: add option to control external PMIC wdt via IMX8 SCU
-  net: fec_mxc: fix probing for imx8qxp
-  tools: imx8image: Improve error message
-  imx: imx_cntr_image.sh: prevent warning for missing spl
-  imx8qxp: Fix build when using SPL
-  siemens: imx8qxp-capricorn-u-boot.dtsi: fix boot
-  siemens: capricorn: use DCD_SKIP entry
-  siemens: imximage.cfg: correct comment
-  siemens: imximage.cfg: sync image names
-  siemens: imx8-capricorn-u-boot.dtsi: add fec2
-  siemens: capricorn: add missing ARCH_MISC_INIT
-  siemens: configs/capricorn_cxg3_defconfig: updates
-  siemens: capricorn: sync spl code with 8qxp-mek
-  siemens: imx8-capricorn.dtsi: small adaptions
-  siemens: capricorn: board.c fixes
-  siemens: capricorn: add HW version information to boot log
-  siemens: add ddr full memory test
-
- arch/arm/dts/Makefile                         |   3 +-
- arch/arm/dts/imx8-capricorn-cxg3.dts          | 129 +++++++
- ...u-boot.dtsi => imx8-capricorn-u-boot.dtsi} |  69 ++--
- ...qxp-capricorn.dtsi => imx8-capricorn.dtsi} | 116 +-----
- arch/arm/dts/imx8-deneb.dts                   |  10 -
- arch/arm/dts/imx8-giedi.dts                   |  10 -
- arch/arm/dts/imx8qxp-u-boot.dtsi              |   2 +
- arch/arm/mach-imx/imx8/Kconfig                |  12 +-
- board/boundary/nitrogen6x/nitrogen6x.c        |   2 +-
- board/siemens/capricorn/Kconfig               |  25 +-
- board/siemens/capricorn/MAINTAINERS           |  12 +-
- board/siemens/capricorn/Makefile              |   2 +
- board/siemens/capricorn/board.c               |  69 +++-
- board/siemens/capricorn/imximage.cfg          |  21 +-
- board/siemens/capricorn/spl.c                 |  43 +++
- board/siemens/capricorn/spl_memory_test.c     | 158 ++++++++
- board/siemens/capricorn/spl_memory_test.h     |   7 +
- board/siemens/common/Kconfig                  |   4 +
- board/siemens/common/board.h                  |  44 +++
- board/siemens/common/ddr_si_test.c            | 348 ++++++++++++++++++
- board/siemens/draco/board.h                   |  10 +-
- board/solidrun/mx6cuboxi/mx6cuboxi.c          |   2 +-
- ...neb_defconfig => capricorn_cxg3_defconfig} |  20 +-
- configs/giedi_defconfig                       | 133 -------
- drivers/misc/imx8/scu_api.c                   |  21 ++
- drivers/net/fec_mxc.c                         |  14 +-
- drivers/watchdog/Kconfig                      |   7 +
- drivers/watchdog/Makefile                     |   1 +
- drivers/watchdog/scu_wdt.c                    |  52 +++
- include/configs/capricorn-common.h            |   4 +-
- include/configs/deneb.h                       |  16 -
- include/firmware/imx/sci/rpc.h                |   1 +
- include/firmware/imx/sci/sci.h                |   1 +
- include/netdev.h                              |   2 +-
- tools/imx8image.c                             |   2 +-
- tools/imx_cntr_image.sh                       |   4 +
- 36 files changed, 1006 insertions(+), 370 deletions(-)
- create mode 100644 arch/arm/dts/imx8-capricorn-cxg3.dts
- rename arch/arm/dts/{imx8qxp-capricorn-u-boot.dtsi => imx8-capricorn-u-boot.dtsi} (54%)
- rename arch/arm/dts/{imx8qxp-capricorn.dtsi => imx8-capricorn.dtsi} (64%)
- delete mode 100644 arch/arm/dts/imx8-deneb.dts
- delete mode 100644 arch/arm/dts/imx8-giedi.dts
- create mode 100644 board/siemens/capricorn/spl_memory_test.c
- create mode 100644 board/siemens/capricorn/spl_memory_test.h
- create mode 100644 board/siemens/common/board.h
- create mode 100644 board/siemens/common/ddr_si_test.c
- rename configs/{deneb_defconfig => capricorn_cxg3_defconfig} (89%)
- delete mode 100644 configs/giedi_defconfig
- create mode 100644 drivers/watchdog/scu_wdt.c
- delete mode 100644 include/configs/deneb.h
+ drivers/usb/eth/asix88179.c | 45 ++++++++++++++++++++++++++++++-------
+ 1 file changed, 37 insertions(+), 8 deletions(-)
 
 -- 
-2.20.1
+2.39.2
 
