@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAE32D5C0F5
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 15:57:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33B6FD5C0F5
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 15:57:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EE9C89277;
+	by phobos.denx.de (Postfix) with ESMTP id A48EB89282;
 	Fri,  8 Nov 2024 16:56:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WoBwXM5e";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IOx6cwxi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA6BF8900E; Fri,  8 Nov 2024 14:40:06 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 12BF588D47; Fri,  8 Nov 2024 14:40:09 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9357D88DF5
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 14:40:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C7BC58904E
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 14:40:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-20cbcd71012so24864255ad.3
- for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 05:40:04 -0800 (PST)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-20cb7139d9dso20724255ad.1
+ for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 05:40:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731073203; x=1731678003; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731073205; x=1731678005; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xBb1UvhrH1IuRIsqFNZarbPO9R+rSKaYwlYWQrRj/rU=;
- b=WoBwXM5eGP75EbNWDFAixwNFIGWMjNsX9CScbE22yLIfL942sQPo8NlvrzTVwInzrc
- pF5T//VFPfTfg5LN2a8klLKqk3JpW4PBcO/WMvok0FofVlyuQUAMCNzn8T8vy2qyW9v8
- xN/iJNrr60mzA/wb1k0XC1nTasxJiHoxNLriY7qJSw+fG8+f1rb3NVSjwK7c6YiQf1Q5
- Ny1139ixBNhgqHNmyqfA6dCpA7L1TScilIEPeLhzPF3501RrUsMTu3x3+my9Nz0joUyS
- 2tVWa1hyze18e4GhdagJildGDs8XM405Rop0T1rX/gopiTKDSffoTa5gZllLrobeFLG4
- H1nA==
+ bh=9UYti8F/bM2i9AOYlcSUsokOWSDRnisGipRST7lrwHs=;
+ b=IOx6cwxiX0CnJwBNQgJRjddWcTBrICD6fj59jQSEpR8fm9tngkYypipG1IQ53jrS5F
+ Uvm47wZEfP0y+APsDUKwHbmxbG6bKSYNRtylpYzeVspNwxFoQ/JXhl7//Wc87vRyO+k2
+ Al/r8eJxjlavVL+q/MCQI7tiGyFKEL57RsXUr/CUp4Mei+zrX9lVgTbJ8c+l7FECyJZP
+ XGXoEDXU3C7i6j+7WWAKzd8SLvjRwZOFwdxgl4c3Vr75MZ0++83C68xQbQiCuXP/M12M
+ yeP579ftJtNIj5//xUgdEOVbI/BNXyoFmKFv2k7f05aMBMNkAwoU005kK7Ap/mprqU6S
+ 02Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731073203; x=1731678003;
+ d=1e100.net; s=20230601; t=1731073205; x=1731678005;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xBb1UvhrH1IuRIsqFNZarbPO9R+rSKaYwlYWQrRj/rU=;
- b=UxWBJg0OLIRaupSSSCFW5DlhDCbNNxlQeV019Y2MR0s4YI+6y14EbQaYYvOPXOpx6i
- vodn6kmAWDhTYknS1Xt2eEki0qhnNOebBU3vzAwo+63LUngjT8NsnWaEmMetjUJuz9dk
- r8E+N/73LqXXbNJqEiU6kMi5S2HBEnDc6akZkLLoe5VO5gb7xylHq90ZNJIPtaxd2BDU
- /Ysjyj0N7RiQK+910o52nkGJu0+SGKk9oTDHVZF10CgvRmY/SaPci5seNtIAQq0NwzOL
- ZvLx29MXV1HsseUhis9yVI2gdXcUfcR3s0tB3TiyI2SWkMhQH88ctFov1iBwhIYqUix0
- yf2Q==
-X-Gm-Message-State: AOJu0Yyxlq+DicHbIc+cVNQKT8uPd1EyzblVMXZOi9vRG8pOULudswJm
- v9H6gVhAcNV42PlmyJKcXgE9JQ6uOIY/saNVqEuI5ES2AICdqx6bnketgps4xmU=
-X-Google-Smtp-Source: AGHT+IE30xAZeqYd1zAlrhj4EwHbkDnaiuAnx5dpMY06xFAy+FEhoAm8r/jRWFg4ZVzN04N78oqvDg==
-X-Received: by 2002:a17:903:192:b0:20e:5aaf:32c1 with SMTP id
- d9443c01a7336-21183547d82mr32872355ad.30.1731073202990; 
- Fri, 08 Nov 2024 05:40:02 -0800 (PST)
+ bh=9UYti8F/bM2i9AOYlcSUsokOWSDRnisGipRST7lrwHs=;
+ b=K0y4WhtFj/xKLO+PMoSZcN9HsAhDx9cuh5aeA0oWd2yWvQx9SY8nJ+TSqr/8AOldVf
+ ktF9sZ1xBLlyy/AuwzpCGjcH+D0UyCvR7G5byi9MzZSbxZ0WvuUaB/cEiyGxR+FYkHb/
+ r+h6iNW5a117V0ttV1cuUL0vFrbuX8/aM2yiarGB+LF+n5/pWU1jdk0jxYrCTcI4fwoi
+ olIYP3bmDQ0ZMVu6ZNf9WKEm8dmSxLhc4aVff3w04mPIR+jmtchXa6YLEYZ18srh/0yR
+ m8G5bqXzA/XYKWr4tgwjABxzcdrV3mB8Qx7mGPXLY+vRbHXkcKp38olktxeaNn/jC1OI
+ rIkw==
+X-Gm-Message-State: AOJu0YxfN/2UcDriyb5MwWO8ZVXeg7xuleoBJkwfAcmANKHfBEfSyhFB
+ D2kHeHNiHNPdyuRSxRwJqJSrzXv70yButhOpJZt8alcPqY/fZxFrm6zHJAIdPE8=
+X-Google-Smtp-Source: AGHT+IEYajXPF8iDt9Vg77AgmMUXGnI3pZl9hHDnF+8Lj1G6KodTC2xqkPdcrNMVr0XlFxtPbJtBGQ==
+X-Received: by 2002:a17:902:ce92:b0:20c:f648:e3a7 with SMTP id
+ d9443c01a7336-21183e40826mr35055325ad.50.1731073205202; 
+ Fri, 08 Nov 2024 05:40:05 -0800 (PST)
 Received: from adriano.. ([190.215.83.227]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21177dc8376sm30296295ad.44.2024.11.08.05.40.00
+ d9443c01a7336-21177dc8376sm30296295ad.44.2024.11.08.05.40.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Nov 2024 05:40:02 -0800 (PST)
+ Fri, 08 Nov 2024 05:40:04 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v2 06/15] efi_api: add definitions for HTTP and IP4_CONFIG2
- protocols
-Date: Fri,  8 Nov 2024 10:38:41 -0300
-Message-ID: <20241108133850.431075-7-adrianox@gmail.com>
+Subject: [PATCH v2 07/15] efi_loader: efi_net: add efi_net_set_addr,
+ efi_net_get_addr
+Date: Fri,  8 Nov 2024 10:38:42 -0300
+Message-ID: <20241108133850.431075-8-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241108133850.431075-1-adrianox@gmail.com>
 References: <20241108133850.431075-1-adrianox@gmail.com>
@@ -94,238 +94,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add EFI definitions for EFI_IP4_CONFIG2_PROTOCOL,
-EFI_HTTP_SERVICE_BINDING_PROTOCOL, and EFI_HTTP_PROTOCOL.
-According to UEFI spec 2.10.
+Add the functions efi_net_set_addr and  efi_net_get_addr to set
+and get the ip address from efi code in a network agnostic way.
+This could also go in net_common, or be compiled conditionally
+for each network stack.
 
 Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 ---
- include/efi_api.h | 205 +++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 204 insertions(+), 1 deletion(-)
+ include/efi_loader.h     |  16 +++++++
+ lib/efi_loader/efi_net.c | 100 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 116 insertions(+)
 
-diff --git a/include/efi_api.h b/include/efi_api.h
-index c76519a20a..d026a26fc1 100644
---- a/include/efi_api.h
-+++ b/include/efi_api.h
-@@ -694,7 +694,7 @@ struct efi_device_path_uri {
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 291eca5c07..44d29e7967 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -125,6 +125,22 @@ static inline void efi_set_bootdev(const char *dev, const char *devnr,
+ 				   size_t buffer_size) { }
+ #endif
  
- struct efi_ipv4_address {
- 	u8 ip_addr[4];
--} __attribute__((aligned(4)));
-+} __aligned(4);
++#if CONFIG_IS_ENABLED(NETDEVICES) && CONFIG_IS_ENABLED(EFI_LOADER)
++void efi_net_get_addr(struct efi_ipv4_address *ip,
++		      struct efi_ipv4_address *mask,
++		      struct efi_ipv4_address *gw);
++void efi_net_set_addr(struct efi_ipv4_address *ip,
++		      struct efi_ipv4_address *mask,
++		      struct efi_ipv4_address *gw);
++#else
++static inline void efi_net_get_addr(struct efi_ipv4_address *ip,
++				     struct efi_ipv4_address *mask,
++				     struct efi_ipv4_address *gw) { }
++static inline void efi_net_set_addr(struct efi_ipv4_address *ip,
++				     struct efi_ipv4_address *mask,
++				     struct efi_ipv4_address *gw) { }
++#endif
++
+ /* Maximum number of configuration tables */
+ #define EFI_MAX_CONFIGURATION_TABLES 16
  
- struct efi_device_path_ipv4 {
- 	struct efi_device_path dp;
-@@ -1725,6 +1725,209 @@ struct efi_pxe_base_code_protocol {
- 	struct efi_pxe_mode *mode;
- };
+diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+index 7cd536705f..dd84b3f18d 100644
+--- a/lib/efi_loader/efi_net.c
++++ b/lib/efi_loader/efi_net.c
+@@ -17,6 +17,7 @@
  
-+#define EFI_IP4_CONFIG2_PROTOCOL_GUID \
-+	EFI_GUID(0x5b446ed1, 0xe30b, 0x4faa, \
-+		 0x87, 0x1a, 0x36, 0x54, 0xec, 0xa3, 0x60, 0x80)
+ #include <efi_loader.h>
+ #include <malloc.h>
++#include <vsprintf.h>
+ #include <net.h>
+ 
+ static const efi_guid_t efi_net_guid = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
+@@ -997,3 +998,102 @@ out_of_resources:
+ 	printf("ERROR: Out of memory\n");
+ 	return EFI_OUT_OF_RESOURCES;
+ }
 +
-+enum efi_ip4_config2_data_type {
-+	EFI_IP4_CONFIG2_DATA_TYPE_INTERFACEINFO,
-+	EFI_IP4_CONFIG2_DATA_TYPE_POLICY,
-+	EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
-+	EFI_IP4_CONFIG2_DATA_TYPE_GATEWAY,
-+	EFI_IP4_CONFIG2_DATA_TYPE_DNSSERVER,
-+	EFI_IP4_CONFIG2_DATA_TYPE_MAXIMUM,
-+};
++void efi_net_get_addr(struct efi_ipv4_address *ip,
++		      struct efi_ipv4_address *mask,
++		      struct efi_ipv4_address *gw)
++{
++#ifdef CONFIG_NET_LWIP
++	char *ipstr = "ipaddr\0\0";
++	char *maskstr = "netmask\0\0";
++	char *gwstr = "gatewayip\0\0";
++	int idx;
++	struct in_addr tmp;
++	char *env;
 +
-+struct efi_ip4_config2_protocol {
-+	efi_status_t (EFIAPI * set_data)(struct efi_ip4_config2_protocol *this,
-+					 enum efi_ip4_config2_data_type data_type,
-+					 efi_uintn_t data_size,
-+					 void *data);
-+	efi_status_t (EFIAPI * get_data)(struct efi_ip4_config2_protocol *this,
-+					 enum efi_ip4_config2_data_type data_type,
-+					 efi_uintn_t *data_size,
-+					 void *data);
-+	efi_status_t (EFIAPI * register_data_notify)(struct efi_ip4_config2_protocol *this,
-+						     enum efi_ip4_config2_data_type data_type,
-+						     struct efi_event *event);
-+	efi_status_t (EFIAPI * unregister_data_notify)(struct efi_ip4_config2_protocol *this,
-+						       enum efi_ip4_config2_data_type data_type,
-+						       struct efi_event *event);
-+};
++	idx = dev_seq(eth_get_dev());
 +
-+struct efi_ip4_route_table {
-+	struct efi_ipv4_address subnet_address;
-+	struct efi_ipv4_address subnet_mask;
-+	struct efi_ipv4_address gateway_address;
-+};
++	if (idx < 0 || idx > 99) {
++		log_err("unexpected idx %d\n", idx);
++		return;
++	}
 +
-+#define EFI_IP4_CONFIG2_INTERFACE_INFO_NAME_SIZE 32
++	if (idx) {
++		sprintf(ipstr, "ipaddr%d", idx);
++		sprintf(maskstr, "netmask%d", idx);
++		sprintf(gwstr, "gatewayip%d", idx);
++	}
 +
-+struct efi_ip4_config2_interface_info {
-+	u16 name[EFI_IP4_CONFIG2_INTERFACE_INFO_NAME_SIZE];
-+	u8 if_type;
-+	u32 hw_address_size;
-+	struct efi_mac_address hw_address;
-+	struct efi_ipv4_address station_address;
-+	struct efi_ipv4_address subnet_mask;
-+	u32 route_table_size;
-+	struct efi_ip4_route_table *route_table;
-+};
++	env = env_get(ipstr);
++	if (env && ip) {
++		tmp = string_to_ip(env);
++		memcpy((void *)ip, (void *)&tmp, 4);
++	}
 +
-+enum efi_ip4_config2_policy {
-+	EFI_IP4_CONFIG2_POLICY_STATIC,
-+	EFI_IP4_CONFIG2_POLICY_DHCP,
-+	EFI_IP4_CONFIG2_POLICY_MAX
-+};
++	env = env_get(maskstr);
++	if (env && mask) {
++		tmp = string_to_ip(env);
++		memcpy((void *)mask, (void *)&tmp, 4);
++	}
++	env = env_get(gwstr);
++	if (env && gw) {
++		tmp = string_to_ip(env);
++		memcpy((void *)gw, (void *)&tmp, 4);
++	}
++#else
++	if (ip)
++		memcpy((void *)ip, (void *)&net_ip, 4);
++	if (mask)
++		memcpy((void *)mask, (void *)&net_netmask, 4);
++#endif
++}
 +
-+struct efi_ip4_config2_manual_address {
-+	struct efi_ipv4_address address;
-+	struct efi_ipv4_address subnet_mask;
-+};
++void efi_net_set_addr(struct efi_ipv4_address *ip,
++		      struct efi_ipv4_address *mask,
++		      struct efi_ipv4_address *gw)
++{
++#ifdef CONFIG_NET_LWIP
++	char *ipstr = "ipaddr\0\0";
++	char *maskstr = "netmask\0\0";
++	char *gwstr = "gatewayip\0\0";
++	int idx;
++	struct in_addr *addr;
++	char tmp[46];
 +
-+#define EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID \
-+	EFI_GUID(0xbdc8e6af, 0xd9bc, 0x4379, \
-+		 0xa7, 0x2a, 0xe0, 0xc4, 0xe7, 0x5d, 0xae, 0x1c)
++	idx = dev_seq(eth_get_dev());
 +
-+struct efi_service_binding_protocol {
-+	efi_status_t (EFIAPI * create_child)(struct efi_service_binding_protocol *this,
-+					     efi_handle_t *child_handle);
-+	efi_status_t (EFIAPI * destroy_child)(struct efi_service_binding_protocol *this,
-+					      efi_handle_t child_handle);
-+};
++	if (idx < 0 || idx > 99) {
++		log_err("unexpected idx %d\n", idx);
++		return;
++	}
 +
-+#define EFI_HTTP_PROTOCOL_GUID \
-+	EFI_GUID(0x7A59B29B, 0x910B, 0x4171, \
-+		 0x82, 0x42, 0xA8, 0x5A, 0x0D, 0xF2, 0x5B, 0x5B)
++	if (idx) {
++		sprintf(ipstr, "ipaddr%d", idx);
++		sprintf(maskstr, "netmask%d", idx);
++		sprintf(gwstr, "gatewayip%d", idx);
++	}
 +
-+enum efi_http_version {
-+	HTTPVERSION10,
-+	HTTPVERSION11,
-+	HTTPVERSIONUNSUPPORTED
-+};
++	if (ip) {
++		addr = (struct in_addr *)ip;
++		ip_to_string(*addr, tmp);
++		env_set(ipstr, tmp);
++	}
 +
-+struct efi_httpv4_access_point {
-+	bool use_default_address;
-+	struct efi_ipv4_address local_address;
-+	struct efi_ipv4_address local_subnet;
-+	u16 local_port;
-+};
++	if (mask) {
++		addr = (struct in_addr *)mask;
++		ip_to_string(*addr, tmp);
++		env_set(maskstr, tmp);
++	}
 +
-+union efi_http_access_point {
-+	struct efi_httpv4_access_point *ipv4_node;
-+	struct efi_httpv6_access_point *ipv6_node;
-+};
-+
-+struct efi_http_config_data {
-+	enum efi_http_version http_version;
-+	u32 timeout;
-+	bool is_ipv6;
-+	union efi_http_access_point access_point;
-+};
-+
-+enum efi_http_method {
-+	HTTP_METHOD_GET,
-+	HTTP_METHOD_POST,
-+	HTTP_METHOD_PATCH,
-+	HTTP_METHOD_OPTIONS,
-+	HTTP_METHOD_CONNECT,
-+	HTTP_METHOD_HEAD,
-+	HTTP_METHOD_PUT,
-+	HTTP_METHOD_DELETE,
-+	HTTP_METHOD_TRACE,
-+	HTTP_METHOD_MAX
-+};
-+
-+enum efi_http_status_code {
-+	HTTP_STATUS_UNSUPPORTED_STATUS = 0,
-+	HTTP_STATUS_100_CONTINUE,
-+	HTTP_STATUS_101_SWITCHING_PROTOCOLS,
-+	HTTP_STATUS_200_OK,
-+	HTTP_STATUS_201_CREATED,
-+	HTTP_STATUS_202_ACCEPTED,
-+	HTTP_STATUS_203_NON_AUTHORITATIVE_INFORMATION,
-+	HTTP_STATUS_204_NO_CONTENT,
-+	HTTP_STATUS_205_RESET_CONTENT,
-+	HTTP_STATUS_206_PARTIAL_CONTENT,
-+	HTTP_STATUS_300_MULTIPLE_CHOICES,
-+	HTTP_STATUS_301_MOVED_PERMANENTLY,
-+	HTTP_STATUS_302_FOUND,
-+	HTTP_STATUS_303_SEE_OTHER,
-+	HTTP_STATUS_304_NOT_MODIFIED,
-+	HTTP_STATUS_305_USE_PROXY,
-+	HTTP_STATUS_307_TEMPORARY_REDIRECT,
-+	HTTP_STATUS_400_BAD_REQUEST,
-+	HTTP_STATUS_401_UNAUTHORIZED,
-+	HTTP_STATUS_402_PAYMENT_REQUIRED,
-+	HTTP_STATUS_403_FORBIDDEN,
-+	HTTP_STATUS_404_NOT_FOUND,
-+	HTTP_STATUS_405_METHOD_NOT_ALLOWED,
-+	HTTP_STATUS_406_NOT_ACCEPTABLE,
-+	HTTP_STATUS_407_PROXY_AUTHENTICATION_REQUIRED,
-+	HTTP_STATUS_408_REQUEST_TIME_OUT,
-+	HTTP_STATUS_409_CONFLICT,
-+	HTTP_STATUS_410_GONE,
-+	HTTP_STATUS_411_LENGTH_REQUIRED,
-+	HTTP_STATUS_412_PRECONDITION_FAILED,
-+	HTTP_STATUS_413_REQUEST_ENTITY_TOO_LARGE,
-+	HTTP_STATUS_414_REQUEST_URI_TOO_LARGE,
-+	HTTP_STATUS_415_UNSUPPORTED_MEDIA_TYPE,
-+	HTTP_STATUS_416_REQUESTED_RANGE_NOT_SATISFIED,
-+	HTTP_STATUS_417_EXPECTATION_FAILED,
-+	HTTP_STATUS_500_INTERNAL_SERVER_ERROR,
-+	HTTP_STATUS_501_NOT_IMPLEMENTED,
-+	HTTP_STATUS_502_BAD_GATEWAY,
-+	HTTP_STATUS_503_SERVICE_UNAVAILABLE,
-+	HTTP_STATUS_504_GATEWAY_TIME_OUT,
-+	HTTP_STATUS_505_HTTP_VERSION_NOT_SUPPORTED,
-+	HTTP_STATUS_308_PERMANENT_REDIRECT
-+};
-+
-+struct efi_http_request_data {
-+	enum efi_http_method method;
-+	u16 *url;
-+};
-+
-+struct efi_http_response_data {
-+	enum efi_http_status_code status_code;
-+};
-+
-+struct efi_http_header {
-+	char *field_name;
-+	char *field_value;
-+};
-+
-+struct efi_http_message {
-+	union {
-+		struct efi_http_request_data *request;
-+		struct efi_http_response_data *response;
-+	} data;
-+	efi_uintn_t header_count;
-+	struct efi_http_header *headers;
-+	efi_uintn_t body_length;
-+	void *body;
-+};
-+
-+struct efi_http_token {
-+	struct efi_event *event;
-+	efi_status_t status;
-+	struct efi_http_message *message;
-+};
-+
-+struct efi_http_protocol {
-+	efi_status_t (EFIAPI * get_mode_data)(struct efi_http_protocol *this,
-+					      struct efi_http_config_data *data);
-+	efi_status_t (EFIAPI * configure)(struct efi_http_protocol *this,
-+					  struct efi_http_config_data *data);
-+	efi_status_t (EFIAPI * request)(struct efi_http_protocol *this,
-+					struct efi_http_token *token);
-+	efi_status_t (EFIAPI * cancel)(struct efi_http_protocol *this,
-+				       struct efi_http_token *token);
-+	efi_status_t (EFIAPI * response)(struct efi_http_protocol *this,
-+					 struct efi_http_token *token);
-+	efi_status_t (EFIAPI * poll)(struct efi_http_protocol *this);
-+};
-+
- #define EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID \
- 	EFI_GUID(0x964e5b22, 0x6459, 0x11d2, \
- 		 0x8e, 0x39, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b)
++	if (gw) {
++		addr = (struct in_addr *)gw;
++		ip_to_string(*addr, tmp);
++		env_set(gwstr, tmp);
++	}
++#else
++	if (ip)
++		memcpy((void *)&net_ip, (void *)ip, 4);
++	if (mask)
++		memcpy((void *)&net_netmask, (void *)mask, 4);
++#endif
++}
 -- 
 2.43.0
 
