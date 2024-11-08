@@ -4,63 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F58D5C0C5
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:09:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 649BCD5C0C5
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:09:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7A2F892DB;
-	Fri,  8 Nov 2024 14:06:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=khoahoang.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A3B8892E5;
+	Fri,  8 Nov 2024 14:06:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=khoahoang.com header.i=admin@khoahoang.com header.b="H6uhcRVE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S5yjToYf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 832C088113; Fri,  8 Nov 2024 06:52:13 +0100 (CET)
-Received: from sender4-of-o55.zoho.com (sender4-of-o55.zoho.com
- [136.143.188.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CF55988EBA; Fri,  8 Nov 2024 11:08:56 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 330DD88EC6
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 06:52:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B7E38904D
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 11:08:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=khoahoang.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=admin@khoahoang.com
-ARC-Seal: i=1; a=rsa-sha256; t=1731045124; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=ibRtCKlylOi2m1ttzb5GTZOHFP/NAN+vJtVksMMm0XLZ689Nh4HfmM1JgG7/gHaOS9PTclqaDSFNnLLbeWGuOdvyb/TAPVoZsHSPLaSdZMhP046zHSJjDbJrbwjPfxbivJdOGx8ZcXBlAFZZtEI9uBqs/zab3uverpG5i4OHybo=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1731045124;
- h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=13M1lNBLesFzSQn0LYalG7iS4rpZhZpBEnhRTyaAtks=; 
- b=YRnPCYGGrhKVN5nCEL2R7qsb1EASq8R1rE43ypRVFXpE6oCizrYsTPYQxHKf5Aq1xt0Js8QXgrkwcKrr5Wk48LntqAjZgJUJV6xBbzYjK/ajGVi7RBxOy2yfQunxdjo3pBJsKPa6RrZ9mKrgLTPEjsK8fh7TaSkC+Pc2G+8QiAM=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=khoahoang.com;
- spf=pass  smtp.mailfrom=admin@khoahoang.com;
- dmarc=pass header.from=<admin@khoahoang.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1731045124; 
- s=zoho; d=khoahoang.com; i=admin@khoahoang.com;
- h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
- bh=13M1lNBLesFzSQn0LYalG7iS4rpZhZpBEnhRTyaAtks=;
- b=H6uhcRVE1BZ3B/a4CK2VU8AO4+p4N5+/NkdTH8G/kkNwe/mClat6gTh7LnXde61Z
- oujLzX5GgTae/Bvyk1J7P/z2za2GV6Fj8RPjq4bHLPfGLgY7cfn3TYufc4n+JUl4ZSv
- liZSl5Bs09QAHPCmrqJonFcTNSxySvtcGHcyLPLk=
-Received: by mx.zohomail.com with SMTPS id 1731045122677767.1927025752368;
- Thu, 7 Nov 2024 21:52:02 -0800 (PST)
-From: Khoa Hoang <admin@khoahoang.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Khoa Hoang <admin@khoahoang.com>
-Subject: [PATCH v2 2/2] eth: asix88179: packet drop when receiving large
- fragmented packets
-Date: Thu,  7 Nov 2024 21:51:36 -0800
-Message-Id: <20241108055136.50701-3-admin@khoahoang.com>
-X-Mailer: git-send-email 2.39.2 (Apple Git-143)
-In-Reply-To: <20241108055136.50701-1-admin@khoahoang.com>
-References: <20241108055136.50701-1-admin@khoahoang.com>
+ spf=pass smtp.mailfrom=massonju.eseo@gmail.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-37d808ae924so1232375f8f.0
+ for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 02:08:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1731060534; x=1731665334; darn=lists.denx.de;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DRLYTdOM6l0kAvtmGPa77gHpnx7MiBdeWBTsHLMJxmo=;
+ b=S5yjToYfNouPiLqBmjoYI2rncxSIdNHNUs4WDzFFF9aYli1VcQfDrwXxExaKgxRXCb
+ wCF2JpNXfKErapx5RIk74fhKPMtF4XejapsvNscpYJNQiPvWnYVdhJys+nzb7b1wL7x0
+ GDjKWbslXvMGEOHRFvfCHfJwhQd38xlixDisIfYr7DDaI5BXoBak+EEnZclEM4aYc2EU
+ hU5n8MjFmtm0HYlJW/05OSQdOgCmf7vtBodBWe8pk7RQAoj1uvGnM7DhXP9RRY5p1mmo
+ RqEPg3dqUDVs1cuc33iLGQmuar8/200SNb+kVTYrxenJcI6ET725i/hmx9w/WZd5pxVJ
+ k04w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731060534; x=1731665334;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=DRLYTdOM6l0kAvtmGPa77gHpnx7MiBdeWBTsHLMJxmo=;
+ b=iZZqTTuu1SvCvG9JT/dPhPgb/K8ijTWeiTSTXS19MbUzjLHvmYsTlh5+mn1MIwnvtK
+ sMv/kCXtKL6JL+yqw0ubGvZQ290N4aOxRhGa20tSLSXgQlKY1ZQs14fGLkxE40X6Hub9
+ KhYY3EPfFwmhnFa8oBAXSUmkFDukcQKAN3xhrh8WnbyhupmRDSsqt8zdpUcVw1xpkT2d
+ VF47UUamTKKiKyKifmbWFtsT3HGagNIPvTVq+VsLuqOsYaUZtVuEiPdT886DRgzGHO3F
+ r9uTjVBPXd7ON/0kMg4aewoWCyAQ6afh8ldE0jgQA867lU9V+XAOGpGJJME6BC1dy8rY
+ q7bQ==
+X-Gm-Message-State: AOJu0YxJvNoT176gF5e7w1g6cZztDrbgrecOJpVo8iCFwFcIql3Xr41o
+ wl7u5HBdHTfrMywsK11wISe+ToYRrdNLeDtbMiv8rPMTg2SGFjUS
+X-Google-Smtp-Source: AGHT+IHQAbWx+puJ5qS+WpcRF4XXnLDrl12pxr7CQ6HnnCW0DmfzuKFMcLgprHBLI70LrNS8Q7ra6A==
+X-Received: by 2002:a05:6000:1449:b0:381:b716:2470 with SMTP id
+ ffacd0b85a97d-381f1883dc8mr1832563f8f.40.1731060533858; 
+ Fri, 08 Nov 2024 02:08:53 -0800 (PST)
+Received: from localhost ([2a04:cec2:a:e411:4963:a2f2:7806:b10e])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-381eda04211sm4122711f8f.94.2024.11.08.02.08.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Nov 2024 02:08:53 -0800 (PST)
+From: Julien Masson <massonju.eseo@gmail.com>
+To: Guillaume La Roque <glaroque@baylibre.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>
+Cc: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, Guillaume La Roque
+ <glaroque@baylibre.com>,
+ <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>,
+ <20241017-topic-fastboot-fixes-mkbootimg-v2-0-c3927102d931@linaro.org>
+Subject: Re: [PATCH 1/6] bootstd: android: add support of bootimage v2
+In-Reply-To: <20241017-adnroidv2-v1-1-781c939902c9@baylibre.com>
+References: <20241017-adnroidv2-v1-0-781c939902c9@baylibre.com>
+Date: Fri, 08 Nov 2024 11:08:52 +0100
+Message-ID: <8734k2javf.fsf@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
+Content-Type: text/plain
 X-Mailman-Approved-At: Fri, 08 Nov 2024 14:06:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,67 +94,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ASIX 88179A drops packets when receiving fragmented packets larger
-than the MTU size due to an insufficient URB buffer size. This change
-synchronizes the URB buffer size with the configuration used in the
-Linux kernel, resolving the packet drop issue.
 
-To reproduce the issue, set the following configuration:
-    CONFIG_IP_DEFRAG=y
-    CONFIG_TFTP_BLOCKSIZE=16352
+On Fri 08 Nov 2024 at 11:07, Guillaume La Roque <glaroque@baylibre.com> wrote:
 
-Then, run the `tftp` command. It will fail with a timeout error:
+> Android bootmeth only support boot image v3/4.
+> 
+> Add support of Android Boot Image version 2 [1].
+> Vendor boot image is only supported in version 3 and 4 so don't try to
+> read it when header version if version is less than 3.
+> 
+> 1: https://source.android.com/docs/core/architecture/bootloader/boot-image-header#header-v2
+> 
+> Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
+> ---
+>  boot/bootmeth_android.c | 27 ++++++++++++---------------
+>  1 file changed, 12 insertions(+), 15 deletions(-)
+> 
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> index 19b1f2c377b9..2e7f85e4a708 100644
+> --- a/boot/bootmeth_android.c
+> +++ b/boot/bootmeth_android.c
+> @@ -259,16 +259,12 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+>  		goto free_priv;
+>  	}
+>  
+> -	if (priv->header_version != 4) {
+> -		log_debug("only boot.img v4 is supported %u\n", priv->header_version);
+> -		ret = -EINVAL;
+> -		goto free_priv;
+> -	}
+> -
+> -	ret = scan_vendor_boot_part(bflow->blk, priv);
+> -	if (ret < 0) {
+> -		log_debug("scan vendor_boot failed: err=%d\n", ret);
+> -		goto free_priv;
+> +	if (priv->header_version >= 3) {
+> +		ret = scan_vendor_boot_part(bflow->blk, priv);
+> +		if (ret < 0) {
+> +			log_debug("scan vendor_boot failed: err=%d\n", ret);
+> +			goto free_priv;
+> +		}
+>  	}
+>  
+>  	/*
+> @@ -476,12 +472,13 @@ static int boot_android_normal(struct bootflow *bflow)
+>  	if (ret < 0)
+>  		return log_msg_ret("read boot", ret);
+>  
+> -	ret = read_slotted_partition(desc, "vendor_boot", priv->slot, vloadaddr);
+> -	if (ret < 0)
+> -		return log_msg_ret("read vendor_boot", ret);
+> -
+> +	if (priv->header_version >= 3) {
+> +		ret = read_slotted_partition(desc, "vendor_boot", priv->slot, vloadaddr);
+> +		if (ret < 0)
+> +			return log_msg_ret("read vendor_boot", ret);
+> +		set_avendor_bootimg_addr(vloadaddr);
+> +	}
+>  	set_abootimg_addr(loadaddr);
+> -	set_avendor_bootimg_addr(vloadaddr);
+>  
+>  	ret = bootm_boot_start(loadaddr, bflow->cmdline);
+>  
+> 
+> -- 
+> 2.34.1
+> 
+> 
+>
 
-    U-Boot> tftp zero.bin
-    Using ax88179_eth device
-    TFTP from server 10.0.0.196; our IP address is 10.0.0.18
-    Filename 'zero.bin'
-    Load address: 0x10000000
-    Loading: T T T T T T T T T T T
-    Retry count exceeded; starting again
+Tested on mediatek MT8365 EVK board with boot image V2.
 
-Signed-off-by: Khoa Hoang <admin@khoahoang.com>
----
- drivers/usb/eth/asix88179.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/drivers/usb/eth/asix88179.c b/drivers/usb/eth/asix88179.c
-index 4bd353b9..69d3073b 100644
---- a/drivers/usb/eth/asix88179.c
-+++ b/drivers/usb/eth/asix88179.c
-@@ -173,7 +173,7 @@
- #define USB_BULK_SEND_TIMEOUT 5000
- #define USB_BULK_RECV_TIMEOUT 5000
- 
--#define AX_RX_URB_SIZE 1024 * 0x12
-+#define AX_RX_URB_SIZE 1024 * 0x1a
- #define BLK_FRAME_SIZE 0x200
- #define PHY_CONNECT_TIMEOUT 5000
- #define PHY_RESET_TIMEOUT 500
-@@ -193,10 +193,10 @@
- static const struct {
- 	unsigned char ctrl, timer_l, timer_h, size, ifg;
- } AX88179_BULKIN_SIZE[] =	{
--	{7, 0x4f, 0,	0x02, 0xff},
--	{7, 0x20, 3,	0x03, 0xff},
--	{7, 0xae, 7,	0x04, 0xff},
--	{7, 0xcc, 0x4c, 0x04, 8},
-+	{7, 0x4f, 0,	0x12, 0xff},
-+	{7, 0x20, 3,	0x16, 0xff},
-+	{7, 0xae, 7,	0x18, 0xff},
-+	{7, 0xcc, 0x4c, 0x18, 8},
- };
- 
- /* driver private */
-@@ -332,7 +332,7 @@ static int asix_basic_reset(struct ueth_data *dev,
- 	memcpy(tmp, &AX88179_BULKIN_SIZE[0], 5);
- 	asix_write_cmd(dev, AX_ACCESS_MAC, AX_RX_BULKIN_QCTRL, 5, 5, tmp);
- 
--	dev_priv->rx_urb_size = 128 * 20;
-+	dev_priv->rx_urb_size = 1024 * 20;
- 
- 	/* Water Level configuration */
- 	*tmp = 0x34;
+Tested-by: Julien Masson <jmasson@baylibre.com>
 -- 
-2.39.2
-
+Julien Masson
