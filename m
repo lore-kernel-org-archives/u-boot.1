@@ -4,63 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C97CD5E124
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 03:29:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 411E8D5E124
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 03:40:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A665888F4F;
-	Fri,  8 Nov 2024 04:29:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AD3A888C7E;
+	Fri,  8 Nov 2024 04:40:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="bYj4FCiQ";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="YV3RtALe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 728DA88E96; Fri,  8 Nov 2024 04:29:19 +0100 (CET)
-Received: from mail-m12793.qiye.163.com (mail-m12793.qiye.163.com
- [115.236.127.93])
+ id 79E0D88C86; Fri,  8 Nov 2024 04:40:09 +0100 (CET)
+Received: from mail-m6039.netease.com (mail-m6039.netease.com [210.79.60.39])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11FA788B8F
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:29:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E21C88B8F
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:40:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 2276185e;
- Fri, 8 Nov 2024 11:29:11 +0800 (GMT+08:00)
-Message-ID: <01ff6b9f-9a88-4fb9-ae89-ef6cc9b23865@rock-chips.com>
-Date: Fri, 8 Nov 2024 11:29:11 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 227c5c8d;
+ Fri, 8 Nov 2024 11:40:01 +0800 (GMT+08:00)
+Message-ID: <88812888-4583-44e1-a36f-13239b0aa4d6@rock-chips.com>
+Date: Fri, 8 Nov 2024 11:40:01 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next v2 4/4] rockchip: rk3399: move sysreset-gpio logic to
- TPL
-To: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Klaus Goger <klaus.goger@cherry.de>
-Cc: u-boot@lists.denx.de, Paul Kocialkowski <paulk@sys-base.io>,
- Paul Kocialkowski <contact@paulk.fr>,
- Quentin Schulz <quentin.schulz@cherry.de>
-References: <20241106-rk3399-sysreset-gpio-tpl-v2-0-22aa82189eb6@cherry.de>
- <20241106-rk3399-sysreset-gpio-tpl-v2-4-22aa82189eb6@cherry.de>
+Subject: Re: [PATCH v2 2/3] rockchip: rk3588: Implement checkboard() to print
+ SoC variant
+To: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
+References: <20241102203746.3631481-1-jonas@kwiboo.se>
+ <20241102203746.3631481-3-jonas@kwiboo.se>
+ <f4f66f6c-3b96-4529-a90c-cd3a0b900a56@cherry.de>
+ <cef9b291-5c27-454c-a24a-565d4510add5@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241106-rk3399-sysreset-gpio-tpl-v2-4-22aa82189eb6@cherry.de>
+In-Reply-To: <cef9b291-5c27-454c-a24a-565d4510add5@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRpIQ1ZMTkNIH0hJTklJSRhWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh5DQ1ZOTB5PHkhJS09OQkJWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9309d19b3803afkunm2276185e
+X-HM-Tid: 0a9309db85c603afkunm227c5c8d
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MAw6Hww5HDIsHitIFkkPNjxR
- PDMwCRNVSlVKTEhKS0hNTk5ISU1CVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPSk1CNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MAw6GBw6LTIoTysyMwJJN00W
+ DCxPCQFVSlVKTEhKS0hMSUtJQ01LVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOTUNONwY+
 DKIM-Signature: a=rsa-sha256;
- b=bYj4FCiQZ6tg8RLeJkWw3dZbtrB3MMlBAVRkPj+0UgUI7sKmIvEUhvVh1saKGuan89xsEpYhpe2fXXKpsLcOlweXjT+gaNU9WUnaNLs6G79V0eT8/Oo6JbNVjqXX9EfmBSVTxYslf1kr3aI2UdqRoASQJGtlUb+WqBy9M2TZcu0=;
+ b=YV3RtALeA73bsbUgLlKvR0ppihGhZJGyQdcXRT2+//Ygg8jAcKas7eecJZqe+JUPNHYGjdduhjaGGLjQirjJ0zED7uHig7gF2P1aT07LfrRi7udTD8241QtgyIllqMWDoUFsKCa/g+s8PGTA+/UDp8ttui2EUxIimTBztfj/m+8=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=qwpb39D++c8JKJNvjgxTynWVGs0BgjJu7zcxM7E/zzA=;
+ bh=kxot3Ihwdu95pywIUfVWayCHuFeWaYAImof+q5ZeVHY=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,120 +77,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
 
-On 2024/11/6 19:29, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On 2024/11/7 22:29, Jonas Karlman wrote:
+> Hi Quentin,
 >
-> If TPL_GPIO and TPL_PINCTRL_ROCKCHIP are enabled and a sysreset-gpio is
-> provided in the TPL Device Tree, this will trigger a system reset
-> similar to what's currently been done in SPL whenever the RK3399 "warm"
-> boots. Because there's currently only one user of sysreset-gpio logic,
-> and TPL is enabled on that board, so let's migrate the logic and that
-> board to do it in TPL.
+> On 2024-11-07 13:01, Quentin Schulz wrote:
+>> Hi Jonas,
+>>
+>> On 11/2/24 9:37 PM, Jonas Karlman wrote:
+>>> Implement checkboard() to print current SoC model used by a board,
+>>> e.g. one of:
+>>>
+>>>     SoC:   RK3582 v1
+>>>     SoC:   RK3588 v0
+>>>     SoC:   RK3588 v1
+>>>     SoC:   RK3588S v0
+>>>     SoC:   RK3588S v1
+>>>     SoC:   RK3588S2 v1
+>>>
+>>> when U-Boot proper is running.
+>>>
+>>>     U-Boot 2025.01-rc1 (Nov 02 2024 - 20:19:01 +0000)
+>>>
+>>>     Model: Generic RK3588S/RK3588
+>>>     SoC:   RK3588S2 v1
+>>>     DRAM:  8 GiB
+>>>
+>>> Information about the SoC model, variant and version is read from OTP.
+>>>
+>>> Also update rk3588s-u-boot.dtsi to include OTP in U-Boot pre-reloc phase,
+>>> where checkboard() is called.
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>> ---
+>>> v2:
+>>> - Update commit message
+>>> - Update code comments
+>>> - Drop generic-rk3588_defconfig change
+>>> ---
+>>>    arch/arm/dts/rk3588s-u-boot.dtsi       |  4 ++
+>>>    arch/arm/mach-rockchip/rk3588/rk3588.c | 58 ++++++++++++++++++++++++++
+>>>    2 files changed, 62 insertions(+)
+>>>
+>>> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
+>>> index 09d8b311cec5..8880d162b11c 100644
+>>> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
+>>> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
+>>> @@ -69,6 +69,10 @@
+>>>    	bootph-all;
+>>>    };
+>>>    
+>>> +&otp {
+>>> +	bootph-some-ram;
+>>> +};
+>>> +
+>>>    &pcfg_pull_down {
+>>>    	bootph-all;
+>>>    };
+>>> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+>>> index e2dac2a5b806..f9da7a6f1477 100644
+>>> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
+>>> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+>>> @@ -4,6 +4,8 @@
+>>>     * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
+>>>     */
+>>>    
+>>> +#include <dm.h>
+>>> +#include <misc.h>
+>>>    #include <spl.h>
+>>>    #include <asm/armv8/mmu.h>
+>>>    #include <asm/arch-rockchip/bootrom.h>
+>>> @@ -178,3 +180,59 @@ int arch_cpu_init(void)
+>>>    	return 0;
+>>>    }
+>>>    #endif
+>>> +
+>>> +#define RK3588_OTP_CPU_CODE_OFFSET		0x02
+>>> +#define RK3588_OTP_SPECIFICATION_OFFSET		0x06
+>>> +#define RK3588_OTP_CPU_VERSION_OFFSET		0x1c
+>>> +
+>>> +int checkboard(void)
+>>> +{
+>>> +	u8 cpu_code[2], specification, package, cpu_version;
+>>> +	struct udevice *dev;
+>>> +	char suffix[3];
+>>> +	int ret;
+>>> +
+>>> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
+>>> +					  DM_DRIVER_GET(rockchip_otp), &dev);
+>>> +	if (ret) {
+>>> +		debug("%s: could not find otp device, ret=%d\n", __func__, ret);
+>> We should probably start using log_debug instead?
+> I guess we should?, not sure why there is two different and what the
+> difference is. Have typically only ever used debug() or printf(), so I
+> just went with what was used in the code copied from board.c.
 >
-> There are three reasons for moving this earlier:
-> - faster boot time as we don't need to reach SPL to be able to reset the
->    system on a condition we know is already met in TPL,
-> - have less code to be impacted by the issue this system reset works
->    around (that is, "unclean" SoC registers after a reboot),
-> - less confusion around the reason for restarting. Indeed when done from
->    SPL, the following log can be observed:
+>> I guess with #define LOG_CATEGORY LOGC_ARCH
+>>
+>> at the top?
+> I can give it a try, what/how is the log category used for?
 >
-> """
-> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
-> Channel 0: DDR3, 666MHz
-> BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
-> Channel 1: DDR3, 666MHz
-> BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
-> 256B stride
-> Trying to boot from BOOTROM
-> Returning to boot ROM...
+> My simple debug workflow is just to add a '#define LOG_DEBUG' at top of
+> a file when I want some more debug info.
 >
-> U-Boot SPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45 +0100)
-> Trying to boot from MMC2
+>>> +		return 0;
+>>> +	}
+>>> +
+>>> +	/* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
+>>> +	ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
+>> This will fail if CONFIG_MISC=n which is neither selected nor implied
+>> for RK3588.
+> Good catch, did not test that scenario, will fix in a v3.
 >
-> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
-> """
+>> I tested on multiple RK3588 Jaguar, and the commercial (RK3588) grade
+>> ones all showed RK3588 v0.
+>>
+>> The one industrial grade (RK3588J) showed RK3588J v1.
+> Thanks for confirming this works on a J-variant.
 >
-> possibly hinting at an issue within the SPL when loading the fitImage
-> from MMC2 instead of the normal course of events (a system reset).
+>> I'm really not sure what this version number is for. If even Kever
+>> doesn't know what it means, I am not sure it makes sense to print it?
+> For rk356x there is some special handling for cpu-version <> 0 in vendor
+> code, and DT describe a cpu-version nvmem cell, so thought it could be
+> useful debug information. However it may just cause more confusion since
+> there is no clear information on what the different cpu-version mean.
 >
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Will drop the cpu-version information in a v3.
+
+Yes, this cpu-version does not help users, I think it may be one of the 
+silicon version(
+
+The process may change in foundry), package version(change in package 
+factory),
+
+and we don't know the detail about there difference.
+
+We can print the useful info which sync with the mark on the chip.
+
+For RV series chip set, it may integrate with difference size DRAM in 
+package, and with
+
+different mark name, not sure if we have info for that.
+
 
 Thanks,
 - Kever
-> ---
->   arch/arm/mach-rockchip/rk3399/rk3399.c | 15 ++++++++++-----
->   configs/puma-rk3399_defconfig          |  3 +++
->   2 files changed, 13 insertions(+), 5 deletions(-)
 >
-> diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
-> index 7b6a822ed04b8151a5da147056dbf73ffdafd149..0c28241c603e343c5140322f2778678e95fa84fd 100644
-> --- a/arch/arm/mach-rockchip/rk3399/rk3399.c
-> +++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
-> @@ -169,7 +169,8 @@ void board_debug_uart_init(void)
->   }
->   #endif
->   
-> -#if defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD)
-> +#if defined(CONFIG_XPL_BUILD)
-> +#if defined(CONFIG_TPL_BUILD)
->   static void rk3399_force_power_on_reset(void)
->   {
->   	const struct rockchip_cru *cru = rockchip_get_cru();
-> @@ -195,9 +196,9 @@ static void rk3399_force_power_on_reset(void)
->   	if (cru->glb_rst_st == 0)
->   		return;
->   
-> -	if (!IS_ENABLED(CONFIG_SPL_GPIO)) {
-> +	if (!IS_ENABLED(CONFIG_TPL_GPIO)) {
->   		debug("%s: trying to force a power-on reset but no GPIO "
-> -		      "support in SPL!\n", __func__);
-> +		      "support in TPL!\n", __func__);
->   		return;
->   	}
->   
-> @@ -218,6 +219,11 @@ static void rk3399_force_power_on_reset(void)
->   	dm_gpio_set_value(&sysreset_gpio, 1);
->   }
->   
-> +void tpl_board_init(void)
-> +{
-> +	rk3399_force_power_on_reset();
-> +}
-> +# else
->   void __weak led_setup(void)
->   {
->   }
-> @@ -225,7 +231,6 @@ void __weak led_setup(void)
->   void spl_board_init(void)
->   {
->   	led_setup();
-> -
-> -	rk3399_force_power_on_reset();
->   }
->   #endif
-> +#endif
-> diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-> index 67c0ee72c925cdd49066980b0fde4131c86a99a8..7a180b1413036234d834773778f6c0f0a7e85380 100644
-> --- a/configs/puma-rk3399_defconfig
-> +++ b/configs/puma-rk3399_defconfig
-> @@ -30,6 +30,7 @@ CONFIG_SPL_I2C=y
->   CONFIG_SPL_POWER=y
->   CONFIG_SPL_SPI_LOAD=y
->   CONFIG_TPL=y
-> +CONFIG_TPL_GPIO=y
->   # CONFIG_BOOTM_NETBSD is not set
->   # CONFIG_BOOTM_PLAN9 is not set
->   # CONFIG_BOOTM_RTEMS is not set
-> @@ -78,6 +79,8 @@ CONFIG_ETH_DESIGNWARE=y
->   CONFIG_GMAC_ROCKCHIP=y
->   CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->   CONFIG_PHY_ROCKCHIP_TYPEC=y
-> +CONFIG_TPL_PINCTRL=y
-> +CONFIG_TPL_PINCTRL_FULL=y
->   CONFIG_DM_PMIC_FAN53555=y
->   CONFIG_PMIC_RK8XX=y
->   CONFIG_SPL_PMIC_RK8XX=y
+>> FWIW, the Linux kernel now exposes different nvmem devices for each cell
+>> and since we have a cell defined for the three OTP ranges you're using
+>> here, maybe it'd make sense to use that instead of hardcoding the
+>> offsets and size in here? Not a blocker for this though as I don't think
+>> it brings THAT much value to those fixed NVMEM layouts.
+> Took a quick peek at nvmem cell support in U-Boot and look like 'bits' prop
+> is not supported and nvmem-cells/nvmem-cell-names may have to be used.
+>
+> Probably easier to use that in a future series that also converts this
+> into a possible sysinfo driver using a DT node similar to:
+>
+>    sysinfo {
+> 	compatible = "rockchip,rk3588-sysinfo";
+> 	bootph-some-ram;
+> 	nvmem-cells = <&cpu_code>, <&otp_id>, ...;
+> 	nvmem-cell-names = "soc", "id", ...;
+>    };
+>
+> Something for the future :-)
+>
+> Regards,
+> Jonas
+>
+>> Cheers,
+>> Quentin
 >
