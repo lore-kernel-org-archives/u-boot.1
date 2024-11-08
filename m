@@ -4,65 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62840D5E140
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 07:19:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C383D5E147
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 08:19:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4A7388DFA;
-	Fri,  8 Nov 2024 08:19:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 578E588FC8;
+	Fri,  8 Nov 2024 09:19:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731050356;
-	bh=wt0TmMAMgsR0EUJaNzrEkiy8zO7mM1t+pZ9IkpOiU90=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=MMDJb47u9+Gpg/h3PU5Zh5JaeBNVy6aJlNN2fReW50GSGFLNetoVAA5VeY2U/6Mxb
-	 9pf0Q11KLd3kVN9kiwNUlMRLoWFxwog8IP/SiTYSXfijKxLk6Sv+Ol34ra1UyOGT7f
-	 UkcieCccXLX5m6FUxh52XoCa+d2dMfdSZt+JOPLHE9mkhnJxJF0KziolBS3h0ZLNjC
-	 S55HgKVAMfWY1nwBG6fLhHvfaIFce64aeFiRx7fC4NEbricvOi0Mexh/nwJuavzPk2
-	 RKBOFcJ/IYKNBRnQ/thFWaaTZQhtpvSBPSzJL2Des88sTF5nvBbnS5sRf6OXZiFzSW
-	 8fPs1BUFgXzxg==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D386288DFA; Fri,  8 Nov 2024 08:19:14 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE8B188DF1
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 08:19:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="YgweMOAQ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E02D88900E; Fri,  8 Nov 2024 09:19:35 +0100 (CET)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Xl9Kr1h4lz9tQH;
- Fri,  8 Nov 2024 08:19:12 +0100 (CET)
-Message-ID: <ee022055-6bec-4326-b9bf-3823211d94b6@denx.de>
-Date: Fri, 8 Nov 2024 08:19:06 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 41CA588F62
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 09:19:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-7ee11ff7210so1382848a12.1
+ for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 00:19:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1731053972; x=1731658772;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ea9ihxe3ENWYGzPII7M4qr1HJIT7NK3x82JK1coGJZg=;
+ b=YgweMOAQ7gopGmr8cwaGQWdtciFiaK2AP0RnlkqgGq3Xw2QKqA1iLqTWGZk63VEXUF
+ ynyt/Ob/i2Xi2y7m7qkuPL6KIea/q4L0luTUw47XfLjSVktZKjAyzPjhdMyaA81ZeKqy
+ HVo2JF8BBI/HlyLGKhyqb2DrL7eiT4aGAbH1Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731053972; x=1731658772;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ea9ihxe3ENWYGzPII7M4qr1HJIT7NK3x82JK1coGJZg=;
+ b=MjPlYVp2+PBBRD3QOYoijNXTNCtZm0GIq3aFg8fHpG+Kf4RCh0PqCa2M3lrnBBSDHC
+ fHcXAEBtLxMFQewCqRXd91oI5+/Ru+fUgai2p2keSWMLuLSHkxJwKZk4lEokoqm7bG3E
+ swowuquSIW2WwKEULyIzG4UFBHkYmzCvpt0nfFOxzwDFJXTPLosCJ8c1o7RXhmwS4l+U
+ 3SsT6TyaTL0C9gcbQc6VPwsQXH88oQr2/SjCfaycX/HLE3jlaF+4/sHlTpzaYtGMw9rt
+ 2KalVf7jnpHCff8OcuTpEeVZojgo7NmUkTH85yGOwezpfeDuNQ0z0mUQE0FiZFLfvQJk
+ J7/g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV8FxyI0WiwV4DqGpVUYfOn+dVCOtoH2foY4arSkytrVQ0YGVqHrCiRfrdhqsCeq1y8QdZii8U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx9iWhLFlRlzH1vOeh+8mTRyEge4dHj4CVAi0CQyRtTmnN+Qe8t
+ N8JPh9INFOie4OAq2y0QUy0pPDuc7LGlbCdoL9w363c+PKjJI+RKunpgq0740UVgCm747KllgAP
+ +bP0PqXVkISK0mq3iv589NXZpmTpQBkE2XPTigQ==
+X-Google-Smtp-Source: AGHT+IHZ7DbPsCoNWqTrb55MuDHZqxFi9UO8Jzs14dxN932gKny43y5YHdPVVEcZtx0MhDjc0x3+HeLTmy+bJPeaRY8=
+X-Received: by 2002:a05:6a21:9994:b0:1dc:1147:92dd with SMTP id
+ adf61e73a8af0-1dc22b57976mr2556060637.34.1731053971672; Fri, 08 Nov 2024
+ 00:19:31 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH v1 01/22] wdt: imx8qxp: add option to control external
- PMIC wdt via IMX8 SCU
-To: Heiko Schocher <hs@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Enrico Leto <enrico.leto@siemens.com>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Andrej Valek <andrej.valek@siemens.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Chanho Park <chanho61.park@samsung.com>, Devarsh Thakkar <devarsht@ti.com>,
- Igor Opaniuk <igor.opaniuk@foundries.io>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20241108052143.26874-1-hs@denx.de>
- <20241108052143.26874-2-hs@denx.de>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241108052143.26874-2-hs@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20241106210348.218507-1-dregan@broadcom.com>
+ <20241106210348.218507-4-dregan@broadcom.com>
+ <CACRpkdYt64S=X2_-VO5h=0kgZ5hcoVWOnzYRK5k39AX0cMkD_A@mail.gmail.com>
+ <50f852ca0d50e518dc40b1545bc78d38@mail.gmail.com>
+In-Reply-To: <50f852ca0d50e518dc40b1545bc78d38@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Fri, 8 Nov 2024 09:19:20 +0100
+Message-ID: <CAOf5uwnEmztY+_RVDUm4W30x5_dix7LLRUAybcJtwRfxEsQk=A@mail.gmail.com>
+Subject: Re: [PATCH 3/4] mtd: rawnand: brcmnand: Add BCMBCA read data bus
+ interface
+To: William Zhang <william.zhang@broadcom.com>
+Cc: Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>,
+ u-boot <u-boot@lists.denx.de>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Anand Gore <anand.gore@broadcom.com>, Kursad Oney <kursad.oney@broadcom.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Florian Fainelli <florian.fainelli@broadcom.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@mail.com>,
+ Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,194 +99,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
+Hi all
 
-On 11/8/24 06:21, Heiko Schocher wrote:
-> control the watchdog in the PMIC through SCU.
+On Fri, Nov 8, 2024 at 3:22=E2=80=AFAM William Zhang <william.zhang@broadco=
+m.com> wrote:
+>
+> Hi Linus,
+>
+> > -----Original Message-----
+> > From: Linus Walleij <linus.walleij@linaro.org>
+> > Sent: Thursday, November 7, 2024 6:16 AM
+> > To: david regan <dregan@broadcom.com>
+> > Cc: u-boot <u-boot@lists.denx.de>; Dario Binacchi
+> > <dario.binacchi@amarulasolutions.com>; Michael Trimarchi
+> > <michael@amarulasolutions.com>; Anand Gore
+> > <anand.gore@broadcom.com>; William Zhang
+> > <william.zhang@broadcom.com>; Kursad Oney
+> > <kursad.oney@broadcom.com>; Philippe Reynes
+> > <philippe.reynes@softathome.com>; Florian Fainelli
+> > <florian.fainelli@broadcom.com>; Miquel Raynal
+> > <miquel.raynal@bootlin.com>; Kamal Dasu <kamal.dasu@broadcom.com>;
+> > David Regan <dregan@mail.com>; Tom Rini <trini@konsulko.com>; Jiaxun
+> > Yang <jiaxun.yang@flygoat.com>
+> > Subject: Re: [PATCH 3/4] mtd: rawnand: brcmnand: Add BCMBCA read data
+> > bus interface
+> >
+> > On Wed, Nov 6, 2024 at 10:04=E2=80=AFPM david regan <dregan@broadcom.co=
+m>
+> > wrote:
+> >
+> > > The BCMBCA broadband SoC integrates the NAND controller differently t=
+han
+> > > STB, iProc and other SoCs.  It has different endianness for NAND cach=
+e
+> > > data.
+> > >
+> > > Add a SoC read data bus shim for BCMBCA to meet the specific SoC need
+> > > and performance improvement using the optimized memcpy function on
+> > NAND
+> > > cache memory.
+> > >
+> > > This is a port of the upstream Linux patch to U-Boot.
+> > >
+> > > https://lore.kernel.org/linux-mtd/20240223034758.13753-12-
+> > william.zhang@broadcom.com/
+> > >
+> > > Signed-off-by: david regan <dregan@broadcom.com>
+> >
+> > The patch looks fine, but shouldn't the existing brcmnand_read_data_bus=
+()
+> > in drivers/mtd/nand/raw/brcmnand/brcmnand.c also be replaced with
+> > brcmnand_soc_data_bus_read()?
+> >
+> > Maybe this is a problem in the upstream kernel driver though :/
+> >
+> The upstream kernel driver is correct because it uses exec_op to read the
+> parameter
+> page/ONFI data but exec_op is not available to the u-boot code base.  So
+> this new function
+> brcmnand_soc_data_bus_read tries to do that in generic way to handle the
+> endianness
+> difference between platforms. But I agree it causes confusing to existing
+> brcmnand_read_data_bus.
+>
+> We are working on a better solution and will update.
+>
+> > Yours,
+> > Linus Walleij
 
-A few more details would be good here (please see below).
+I'm thinking of applying this series for a general cleanup. What would
+like to have in cover letter, is what board
+this series was tested, due the fact that some of the code is not
+necessary anymore
 
-> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-> Signed-off-by: Heiko Schocher <hs@denx.de>
-> ---
-> 
->   drivers/misc/imx8/scu_api.c    | 21 ++++++++++++++
->   drivers/watchdog/Kconfig       |  7 +++++
->   drivers/watchdog/Makefile      |  1 +
->   drivers/watchdog/scu_wdt.c     | 52 ++++++++++++++++++++++++++++++++++
->   include/firmware/imx/sci/rpc.h |  1 +
->   include/firmware/imx/sci/sci.h |  1 +
->   6 files changed, 83 insertions(+)
->   create mode 100644 drivers/watchdog/scu_wdt.c
-> 
-> diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
-> index 591d71b096a..edb6923151a 100644
-> --- a/drivers/misc/imx8/scu_api.c
-> +++ b/drivers/misc/imx8/scu_api.c
-> @@ -951,6 +951,27 @@ int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window)
->   	return ret;
->   }
->   
-> +int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd)
-> +{
-> +	struct udevice *dev = gd->arch.scu_dev;
-> +	struct sc_rpc_msg_s msg;
-> +	int size = sizeof(struct sc_rpc_msg_s);
-> +	int ret;
-> +
-> +	RPC_VER(&msg) = SC_RPC_VERSION;
-> +	RPC_SVC(&msg) = (u8)SC_RPC_SVC_TIMER;
-> +	RPC_FUNC(&msg) = (u8)TIMER_FUNC_CTRL_PMIC_WDOG;
-> +	RPC_U8(&msg, 0U) = (u8)cmd;
-> +	RPC_SIZE(&msg) = 2U;
-> +
-> +	ret = misc_call(dev, SC_FALSE, &msg, size, &msg, size);
-> +	if (ret)
-> +		printf("%s: res:%d\n",
-> +		       __func__, RPC_R8(&msg));
+Michael
 
-Nitpicking: Does the printf statement above fit into one line?
 
-> +
-> +	return ret;
-> +}
-> +
->   int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
->   			 sc_faddr_t addr)
->   {
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index 0e45f0a0922..eb9e75abe48 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -428,6 +428,13 @@ config WDT_ARM_SMC
->   	  Select this to enable Arm SMC watchdog timer. This watchdog will manage
->   	  a watchdog based on ARM SMCCC communication.
->   
-> +config WDT_IMX_SCU
-> +	bool "Enable external Watchdog Timer support for IMX"
-> +	depends on IMX8 && WDT
-> +	help
-> +	  Select this to enable the external IMX watchdog driver
-> +	  controlled via IMX8 SCU.
 
-I don't know the details here, but what exactly is "external" here?
-If it's still inside the i.MX then external sounds a bit misleading.
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
-> +
->   config SPL_WDT
->   	bool "Enable driver model for watchdog timer drivers in SPL"
->   	depends on SPL_DM
-> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-> index 0b107c008f7..e943b904bae 100644
-> --- a/drivers/watchdog/Makefile
-> +++ b/drivers/watchdog/Makefile
-> @@ -33,6 +33,7 @@ obj-$(CONFIG_WDT_DA9063) += da9063-wdt.o
->   obj-$(CONFIG_WDT_DAVINCI) += davinci_wdt.o
->   obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
->   obj-$(CONFIG_$(SPL_TPL_)WDT_GPIO) += gpio_wdt.o
-> +obj-$(CONFIG_WDT_IMX_SCU) += scu_wdt.o
-
-Perhaps better to add some "imx" to the source file name?
-
->   obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
->   obj-$(CONFIG_WDT_MCF) += mcf_wdt.o
->   obj-$(CONFIG_WDT_MESON_GXBB) += meson_gxbb_wdt.o
-> diff --git a/drivers/watchdog/scu_wdt.c b/drivers/watchdog/scu_wdt.c
-> new file mode 100644
-> index 00000000000..ad8766dc132
-> --- /dev/null
-> +++ b/drivers/watchdog/scu_wdt.c
-> @@ -0,0 +1,52 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +#include <dm.h>
-> +#include <wdt.h>
-> +#include <firmware/imx/sci/sci.h>
-> +
-> +/* watchdog commands */
-> +#define CMD_START_WDT 0x55
-> +#define CMD_STOP_WDT  0x45
-> +#define CMD_PING_WDT  0x35
-> +
-> +static int scu_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-> +{
-> +	/* start external watchdog via Timer API */
-> +	return sc_timer_control_pmic_wdog(-1, CMD_START_WDT);
-> +}
-> +
-> +static int scu_wdt_stop(struct udevice *dev)
-> +{
-> +	/* stop external watchdog via Timer API */
-> +	return sc_timer_control_pmic_wdog(-1, CMD_STOP_WDT);
-> +}
-> +
-> +static int scu_wdt_reset(struct udevice *dev)
-> +{
-> +	return sc_timer_control_pmic_wdog(-1, CMD_PING_WDT);
-> +}
-> +
-> +static int scu_wdt_probe(struct udevice *dev)
-> +{
-> +	debug("%s(dev=%p)\n", __func__, dev);
-> +	return 0;
-> +}
-> +
-> +static const struct wdt_ops scu_wdt_ops = {
-> +	.reset		= scu_wdt_reset,
-> +	.start		= scu_wdt_start,
-> +	.stop		= scu_wdt_stop,
-> +};
-> +
-> +static const struct udevice_id scu_wdt_ids[] = {
-> +	{ .compatible = "siemens,scu-wdt" },
-
-Really siemens specific? Is this also available in Linux btw?
-Looking into the Linux source, is this driver somehow related to
-this one:
-
-drivers/watchdog/imx_sc_wdt.c ?
-
-Thanks,
-Stefan
-
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(scu_wdt) = {
-> +	.name		= "scu_wdt",
-> +	.id		= UCLASS_WDT,
-> +	.of_match	= scu_wdt_ids,
-> +	.probe		= scu_wdt_probe,
-> +	.ops		= &scu_wdt_ops,
-> +};
-> diff --git a/include/firmware/imx/sci/rpc.h b/include/firmware/imx/sci/rpc.h
-> index 28adec2a8e1..9470f9e7178 100644
-> --- a/include/firmware/imx/sci/rpc.h
-> +++ b/include/firmware/imx/sci/rpc.h
-> @@ -230,5 +230,6 @@ struct sc_rpc_msg_s {
->   #define TIMER_FUNC_SET_SYSCTR_ALARM 16U /* Index for sc_timer_set_sysctr_alarm() RPC call */
->   #define TIMER_FUNC_SET_SYSCTR_PERIODIC_ALARM 17U /* Index for sc_timer_set_sysctr_periodic_alarm() RPC call */
->   #define TIMER_FUNC_CANCEL_SYSCTR_ALARM 18U /* Index for sc_timer_cancel_sysctr_alarm() RPC call */
-> +#define TIMER_FUNC_CTRL_PMIC_WDOG 20U  /*!< Index for sc_timer_ctrl_pmic_wdog() RPC call */
->   
->   #endif /* SC_RPC_H */
-> diff --git a/include/firmware/imx/sci/sci.h b/include/firmware/imx/sci/sci.h
-> index 7d8499f070a..b971b62836d 100644
-> --- a/include/firmware/imx/sci/sci.h
-> +++ b/include/firmware/imx/sci/sci.h
-> @@ -123,6 +123,7 @@ int sc_rm_set_master_sid(sc_ipc_t ipc, sc_rsrc_t resource, sc_rm_sid_t sid);
->   
->   /* Timer API */
->   int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window);
-> +int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd);
->   
->   /* SECO API */
->   int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
-
-Viele Grüße,
-Stefan Roese
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
