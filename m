@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F607D5C0C3
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:06:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDB67D5C0C2
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:06:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C94C89083;
+	by phobos.denx.de (Postfix) with ESMTP id E8131890FC;
 	Fri,  8 Nov 2024 14:06:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aOaeFtjj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MAPcmI8/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B69F988B8F; Fri,  8 Nov 2024 04:35:07 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 117F188DB6; Fri,  8 Nov 2024 04:44:28 +0100 (CET)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83E9E88D5A
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:35:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F2A788B8F
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:44:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-20caccadbeeso18100275ad.2
- for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 19:35:05 -0800 (PST)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-71e4e481692so1565200b3a.1
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 19:44:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731036904; x=1731641704; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731037464; x=1731642264; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/hDsCvgHBO7FxVodrwe4ZzkTd763fpMh5T2pvdGFDvk=;
- b=aOaeFtjjMY0Xhz7aTBFH+rAXRJDcznpi1ItZAIwhs7nmauvYymJ5lzhBTbY5OpY7Ic
- pm64QvgAyyD3/BLYI1s2rnH2i+y98cx3wv3kcyGxb45lgaL8+/tyArc5TqhWB2hVQZXj
- ENgKr4bavFH2G8TfNSh0UDth/Vo5RW3obRDQybYmdpc1q9YzVRqgOZwv4UTnWgi/8bo+
- 714x7KxfAGbD0VxeAFJQ/K44EpVtrtnr3yBNaCe42Gt8Gf5LWqJaZ8/O+JZZm9TlMnrG
- 5wDBpjHM46npch3pupq9oMD5UvECG5ZbDTwJVD7QNq+yGVDxy8+Y2p+Bby/uJfWS3nlH
- R0TA==
+ bh=5dIKOIekOLCKpzbZPNFEs/7b057G/AVDuiEteGuMYQ8=;
+ b=MAPcmI8/2sAiHicqaiIMZqgJA6vcWwL3+3KCQwT+pPtpUev+es9ndX6LPCMV0lBAaq
+ /90kfKRkRTMebkO8MzoSykbovs4IvPvKVAWSOXOCFAva/ncDsOroMddL3XUySkTyD5OV
+ wOlB5h7/1t4tM2YPL2dWXzt6COI9tIKFjC5svPHZd/XVBxhX9i8BMZzWYjDaMwTfsSRP
+ iXZl8LAhlP79wSZbz7vpItuAu9D9D3ayrArDhBMIVHiTMphtCvzXx8l9p18Ee0DEyjPW
+ M8aMsSAULvU2W2QdxPEyDeU8moOoFykrDpeZt11Yn2o/gQG4+ERKECsizyszoUqI9gLj
+ MW0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731036904; x=1731641704;
+ d=1e100.net; s=20230601; t=1731037464; x=1731642264;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/hDsCvgHBO7FxVodrwe4ZzkTd763fpMh5T2pvdGFDvk=;
- b=TbLJt+8H3yDiJlBdm03rnU1FWk4oaepklAvmTxzFiyN7H30DgRa8oOJyoA3q3EMNit
- YYY8N1aaxFnUzqa7Njk7E1+gz283Y6oDwX8kTowppEsv+G3PA6+lF1gmd38/bv8pNtMG
- euSeUPSud3fuFBoWrRLaxoqNpsGw1cmklN6EDbjHaYbxmpl7wbz/nZ29WYidRVXW1JQ7
- 6vveYGKtjUMrAa94HiGufN3xmN3P2fcW2XQ1BlS8sJVvazq1y2QgHOt+M51Z2aGcHrNz
- jT7jk9TF9m1nn8idJM9w1wjcBKgAStEnbGZ2CVkj1UPeM3013Vs5VpgL10NE1/ThBUrv
- M03A==
-X-Gm-Message-State: AOJu0Yw1JJgMYYPKquND9lI4YxbXkOk2zIFTI5TLtcZeZ+AEKJlUc5S4
- DGYsonZ4JllQ6crg3Wwu9qbA8mRdi/Q061e4RqPjtAfmhn0dkCr88/I1GjSwtpc=
-X-Google-Smtp-Source: AGHT+IF9lio7bybXPhm+H6nEsJ9ZclvsU0TnULh2PuyUapUUOtqrZvgxD70fNxUVJBNrfkalqjHjLw==
-X-Received: by 2002:a17:902:ce03:b0:20c:ea0a:9665 with SMTP id
- d9443c01a7336-2118354efbdmr16210595ad.32.1731036903949; 
- Thu, 07 Nov 2024 19:35:03 -0800 (PST)
+ bh=5dIKOIekOLCKpzbZPNFEs/7b057G/AVDuiEteGuMYQ8=;
+ b=f4h/xzdS8MjomxaPJEJLSX60/yoISv4bg69evBWS/n91kssQHVIB9gWHbQnoLKX6EH
+ KbASE3bS2+cuAH53PEwTDaGTZYW7soreeofQcuOYh6L4K321dqJs6xa69Vy+GIJsjQTU
+ +D0TDwX1/H2Y8PsUR2Lpo4m3MUE2WOlGQMaq2atFwL0BtxmubHopFcBAPkdGTQzd9Nz8
+ i4g71RluJQl6e1YvxP9zrFmulFS8VB7BlRSuOxTV7sxpj2V0gIJVlMVgxxRQGIIQMZHy
+ c8EsVPlHq5SunkWFjVlN+cH0tF1hBPQfPj3LoJGhp0EoUiROhPVqOz8O7D5/mdKLcpx9
+ mUyg==
+X-Gm-Message-State: AOJu0YyHekrMGF/IrzRZ0TXUEJJDawJRsn71V0qNkP6a1huqPiHUopJT
+ f6ScW8Z3eGZoXSkYCoXx7bmgO93AXy+FjETlkH0oP54zgAGw7GvwMvxcTAbt04Y=
+X-Google-Smtp-Source: AGHT+IHnFzINo9+7q5gm8rJRnzHpPiGf2/uyJWjYs1AziZt7A7ynAYKY+HQDVvkf6iZ+KFE2zABNMw==
+X-Received: by 2002:a05:6a20:7289:b0:1d9:c615:944f with SMTP id
+ adf61e73a8af0-1dc22937f8cmr2009323637.11.1731037463933; 
+ Thu, 07 Nov 2024 19:44:23 -0800 (PST)
 Received: from adriano.. ([190.215.83.227]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21177e62dd4sm20522955ad.218.2024.11.07.19.35.02
+ d2e1a72fcca58-724079a403fsm2637203b3a.105.2024.11.07.19.44.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Nov 2024 19:35:03 -0800 (PST)
+ Thu, 07 Nov 2024 19:44:23 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
- xypron.glpk@gmx.de, Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH] net: wget: let wget_with_dns work with dns disabled
-Date: Fri,  8 Nov 2024 00:34:44 -0300
-Message-ID: <20241108033445.345514-1-adrianox@gmail.com>
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ Adriano Cordova <adrianox@gmail.com>
+Subject: [PATCH 00/15] efi_loader: efi http and ipconfig drivers
+Date: Fri,  8 Nov 2024 00:44:17 -0300
+Message-ID: <20241108034417.346124-1-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -89,86 +90,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This was marked as TODO in the code:
--Enable use of wget_with_dns even if CMD_DNS is disabled if
-the given uri has the ip address for the http server.
--Check for port in the uri when transforming to legacy wget
-syntax inside wget_with_dns.
--Move the check for CMD_DNS inside wget_with_dns.
+Add support for EFI_HTTP_PROTOCOL, EFI_HTTP_SERVICE_BINDING_PROTOCOL,
+and EFI_IP4_CONFIG2_PROTOCOL.
 
-Signed-off-by: Adriano Cordova <adrianox@gmail.com>
----
- net/wget.c | 38 ++++++++++++++++++++++++--------------
- 1 file changed, 24 insertions(+), 14 deletions(-)
+This series depends on the series 'wget: Expose wget to applications',
+also found at:
+https://github.com/0n41rd4/u-boot/commits/http-driver-wget
 
-diff --git a/net/wget.c b/net/wget.c
-index 2d931c2bc6..5bb61a2b8d 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -528,12 +528,10 @@ void wget_start(void)
- 	wget_send(TCP_SYN, 0, 0, 0);
- }
- 
--#if (IS_ENABLED(CONFIG_CMD_DNS))
- int wget_with_dns(ulong dst_addr, char *uri)
- {
- 	int ret;
--	char *s, *host_name, *file_name, *str_copy;
--
-+	char *s, *host_name, *file_name, *str_copy, *port;
- 	/*
- 	 * Download file using wget.
- 	 *
-@@ -554,18 +552,31 @@ int wget_with_dns(ulong dst_addr, char *uri)
- 	}
- 	file_name = s;
- 
--	/* TODO: If the given uri has ip address for the http server, skip dns */
--	net_dns_resolve = host_name;
--	net_dns_env_var = "httpserverip";
--	if (net_loop(DNS) < 0) {
--		log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
--		ret = -EINVAL;
--		goto out;
--	}
--	s = env_get("httpserverip");
--	if (!s) {
-+	port = host_name;
-+	host_name = strsep(&port, ":");
-+
-+	if (string_to_ip(host_name).s_addr != 0) {
-+		s = host_name;
-+	} else {
-+#if (IS_ENABLED(CONFIG_CMD_DNS))
-+		net_dns_resolve = host_name;
-+		net_dns_env_var = "httpserverip";
-+		if (net_loop(DNS) < 0) {
-+			log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
-+			ret = -EINVAL;
-+			goto out;
-+		}
-+		s = env_get("httpserverip");
-+		if (!s) {
-+			log_err("Error:  %s could not be resolved\n", net_dns_resolve);
-+			ret = -EINVAL;
-+			goto out;
-+		}
-+#else
-+		log_err("Error: dns disabled, %s could not be resolved\n", host_name);
- 		ret = -EINVAL;
- 		goto out;
-+#endif
- 	}
- 
- 	strlcpy(net_boot_file_name, s, sizeof(net_boot_file_name));
-@@ -579,7 +590,6 @@ out:
- 
- 	return ret < 0 ? ret : 0;
- }
--#endif
- 
- /**
-  * wget_validate_uri() - validate the uri for wget
+The fist two patches of this series are not efi specific and have also
+been sent to the corresponding maintainers, but this series depends on
+them, so they are added here for redundancy. A branch with both series
+of patches, concatenated, is at:
+https://github.com/0n41rd4/u-boot/commits/efi-http-driver
+
+Adriano Cordova (13):
+  net: net_utils: Move ip_to_string to lib/net_utils.c
+  net: wget: let wget_with_dns work with dns disabled
+  efi_loader: device_path: add definition of
+    DEVICE_PATH_SUB_TYPE_MSG_IPV4
+  efi_loader: device_path: add efi_dp_from_ipv4
+  efi_api: add definitions for HTTP and IP4_CONFIG2 protocols
+  efi_loader: efi_net: add efi_net_set_addr, efi_net_get_addr
+  efi_loader: device_path: add support for HTTP device path
+  efi_loader: net: set EFI bootdevice device path to HTTP when loaded
+    from wget
+  efi_loader: net: add support to send http requests and parse http
+    headers
+  efi_loader: efi_net: add EFI_IP4_CONFIG2_PROTOCOL
+  efi_loader: efi_net: add EFI_HTTP_PROTOCOL
+  efi_selftest: add test for HTTP protocol
+  efi_selftest: add test for IPv4 Config2 protocol
+
+Heinrich Schuchardt (2):
+  efi_loader: add IPv4() to device path to text protocol
+  lib: uuid: display HTTP and IPV4 Config II protocols
+
+ include/efi_api.h                        | 220 ++++++++++
+ include/efi_loader.h                     |  42 ++
+ include/net-common.h                     |  10 +
+ lib/efi_loader/Kconfig                   |  17 +
+ lib/efi_loader/Makefile                  |   2 +
+ lib/efi_loader/efi_device_path.c         |  91 +++-
+ lib/efi_loader/efi_device_path_to_text.c |  23 +
+ lib/efi_loader/efi_http.c                | 537 +++++++++++++++++++++++
+ lib/efi_loader/efi_ipconfig.c            | 216 +++++++++
+ lib/efi_loader/efi_net.c                 | 287 +++++++++++-
+ lib/efi_selftest/Makefile                |   2 +
+ lib/efi_selftest/efi_selftest_http.c     | 315 +++++++++++++
+ lib/efi_selftest/efi_selftest_ipconfig.c | 173 ++++++++
+ lib/net_utils.c                          |  11 +
+ lib/uuid.c                               |  14 +
+ net/lwip/wget.c                          |   1 +
+ net/net.c                                |  11 -
+ net/wget.c                               |  39 +-
+ 18 files changed, 1979 insertions(+), 32 deletions(-)
+ create mode 100644 lib/efi_loader/efi_http.c
+ create mode 100644 lib/efi_loader/efi_ipconfig.c
+ create mode 100644 lib/efi_selftest/efi_selftest_http.c
+ create mode 100644 lib/efi_selftest/efi_selftest_ipconfig.c
+
 -- 
 2.43.0
 
