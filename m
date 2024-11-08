@@ -4,66 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B2DCD5D69F
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 00:50:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B843D5D69F
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 01:27:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CFBC88C66;
-	Fri,  8 Nov 2024 01:50:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BA0888DB2;
+	Fri,  8 Nov 2024 02:27:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ThDZHRwH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DaasyEk7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75B7388C66; Fri,  8 Nov 2024 01:50:51 +0100 (CET)
-Received: from mail-m19731102.qiye.163.com (mail-m19731102.qiye.163.com
- [220.197.31.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 38FC788DB2; Fri,  8 Nov 2024 02:27:54 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9892F88B8F
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 01:50:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id F185488C66
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 02:27:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 22250aef;
- Fri, 8 Nov 2024 08:50:39 +0800 (GMT+08:00)
-Message-ID: <33edc0c5-29ea-4857-ac60-569c39102f57@rock-chips.com>
-Date: Fri, 8 Nov 2024 08:50:39 +0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5cf04f75e1aso1659979a12.1
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 17:27:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1731029271; x=1731634071; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1yklLnsMDyQoY7GP9CWPr1Sj+pYF/NXCOnqtIDPED5g=;
+ b=DaasyEk7OliFXyr9Rym/HochY+czuHTsqnvFKAaEDVQik3DsIZ5tXPgJomFeD8FhXD
+ ADSTVsea8BaPCu2sgM3FYGLG3u/LoRQCLX6DN2tVW714Ll9oHbqiSODzaJAsPZ9ZD8db
+ 9l9EOxbLzPhFjJM0q4XTf3GZ/woo0uQp/KUTPGoCWPIFd2e9EixE9Dg7yQ9Dh4OO+Dyz
+ +C5bp55RV3K2tKKLo70WOGh5LDQR+D5MIt2bC9mWFjKy9FRF6VLbwC79ZvxpI5xcVNKj
+ OSw4oYp/LtcbRaaXCgzuoQzDmB3mBk3JMgkjKCSyiCcl+UY7w4Ay/DCQTPsv2mwcEROQ
+ UDyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731029271; x=1731634071;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1yklLnsMDyQoY7GP9CWPr1Sj+pYF/NXCOnqtIDPED5g=;
+ b=D2OPQCA5RSpeRUWdpmb2u1N63DJlvm8vchUWNxAL7RxEfa8X2gL4p7IBerWxN2yJ5A
+ YkgDQGAg0+iJn60ZDFDe43W3ydNMp+l4/0eeSmYqTlDwKpLJ4IVi/8kT2gwpwwt8RHuR
+ h3Sw/P3RlhR8L/TjhXpcexNZqtuNCrke8kRchgNIHe8RTm5wMRaWCLzhAXcJF9JX/hEh
+ HBHxzKmX5kDLi8vVZhmzj3gTQ+ZSVgDmUBkVBPEn4Kidw/GS/vsrzY2qdLSaDTj6f+yR
+ bYh5ZDM4Rdm8eLSQw1ew8FyUfMFbasuoflFTd+PI2eehYygac9eVHHUUXkH2qO9zWl1j
+ o3sg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXd/rcbOtHoxbuvvrUmAhP+m5X7+aTjPDTY01Cfb/ZEhk400fIo+LeKlirc947YSEKsm1YgNVU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzJpbsXPZGqIMani54WIP+o7ipmXTprxdmQUgyl+4lppyo2VE1r
+ Irpy8j9zDbpLWcxNIYls6s8Ps2F1ypIizMV6b1ppRMsb7Ww3Mi+y6wg0jerEPM02MlbVqUtm+1/
+ m/5b0Wch+I9OjicjiRzLohO/QY3I=
+X-Google-Smtp-Source: AGHT+IEbN0YQiV9nmtpz3GFKz/JZIXaKtJoWHtS0CCslWkGBPUABpa3oJ/N1/Ofn92Lop7cIdGSPHGtLZpq7/Km5Ba8=
+X-Received: by 2002:a05:6402:42d1:b0:5c7:2122:6ad with SMTP id
+ 4fb4d7f45d1cf-5cf0a31baadmr577463a12.14.1731029271237; Thu, 07 Nov 2024
+ 17:27:51 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next v2 4/4] rockchip: rk3399: move sysreset-gpio logic to
- TPL
-To: Paul Kocialkowski <paulk@sys-base.io>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Klaus Goger <klaus.goger@cherry.de>, u-boot@lists.denx.de,
- Paul Kocialkowski <contact@paulk.fr>
-References: <20241106-rk3399-sysreset-gpio-tpl-v2-0-22aa82189eb6@cherry.de>
- <20241106-rk3399-sysreset-gpio-tpl-v2-4-22aa82189eb6@cherry.de>
- <149361d4-4cbb-4007-b00f-6b4efbd7978f@rock-chips.com>
- <5cfa0fbe-5003-4da1-9933-7664da07cd4d@cherry.de> <ZyyyNttkdcdQmmCw@collins>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <ZyyyNttkdcdQmmCw@collins>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR4eGFYYHUIeT05KTRpDThlWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
- JVSktLVUpCS0tZBg++
-X-HM-Tid: 0a930940759803afkunm22250aef
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OTY6KBw6TjIYTzQ#C0ovAwhW
- AR8KCjhVSlVKTEhKS0lMS09LTE5PVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISEpINwY+
-DKIM-Signature: a=rsa-sha256;
- b=ThDZHRwHBBfDDJQguj378ApAhGw0ySAyWxfewTJ7souGrV7A1MDgXBedCGpyU69KXIx317sXd0wXW8lxQJlTv1FBJBUjGC6NqTfQxkZcA/ueDPBdeQNEOjKIswg6XKZNB8MOLy5LXo+YFRxk6xSBXcFVAvDJrOHryIQ9/mbwQ9A=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=9jsWpW2dfszbluut69i11s6fqbMsceVNN2vxFF5AZq4=;
- h=date:mime-version:subject:message-id:from;
+References: <cover.1730988601.git.namcao@linutronix.de>
+In-Reply-To: <cover.1730988601.git.namcao@linutronix.de>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Thu, 7 Nov 2024 17:27:37 -0800
+Message-ID: <CAJaLiFyMuREzRs3f3-kzwaHpBK6NWh9BvadSWDYxrdqBG7SwvQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] Fix boot failure due to misaligned DMA buffer
+To: Nam Cao <namcao@linutronix.de>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Ion Agorria <ion@agorria.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>, 
+ Sean Anderson <seanga2@gmail.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Javier Fernandez Pastrana <javier.pastrana@linutronix.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,89 +94,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Paul,
+Hi Nam,
 
-On 2024/11/7 20:27, Paul Kocialkowski wrote:
+
+On Thu, Nov 7, 2024 at 1:53=E2=80=AFPM Nam Cao <namcao@linutronix.de> wrote=
+:
+>
 > Hi,
 >
-> Le Thu 07 Nov 24, 12:04, Quentin Schulz a écrit :
->> On 11/7/24 8:14 AM, Kever Yang wrote:
->>> Yes, this movement is reasonable and needed for this workaround,
->>> although still not
->>>
->>> understand why puma board need this.
->> Me neither, this predates me joining the company, c.f.:
->> https://source.denx.de/u-boot/u-boot/-/commit/ae0d33a7291a164a11ae034bcf4f71226b2bef48
->> https://source.denx.de/u-boot/u-boot/-/commit/5f104178bf713615dc404fdfcf0fb53d89c66a07
->> https://source.denx.de/u-boot/u-boot/-/commit/07586ee4322abca01db52624b925e5218538f259
->>
->> What I can tell you is that it seems this is required as Paul (in Cc) is
->> trying to add support for it for the Firefly ROC-RK3399-PC[1] and the
->> ROCKPro64[2], so it seems it's useful for **some** purpose.
-> The initial issue I was seeing was that one of the MMC controllers showed some
-> errors and failed to read data after reboot, while it always worked on cold
-> boot. With this feature enabled, it worked reliably after reboot.
+> We observed the following sporadic boot failure while booting from MMC
+> device:
 >
-> I didn't investigate exactly which component (maybe clocks, maybe regulators)
-> caused the problem, but it clearly wasn't correctly reset.
-
-Are you able to check, how is the 'reboot' happen, does it use the 
-system_reset API from the ATF?
-
-Because there are some operations for clock and PD before trigger the 
-global reset in ATF driver
-
-and the code is very stable and used for millions of devices.
-
-
-Thanks,
-- Kever
+> =3D> boot
+> CACHE: Misaligned operation at range [9efa25f8, 9efa27f8]
+> CACHE: Misaligned operation at range [9efa25f8, 9efa27f8]
+> CACHE: Misaligned operation at range [9efa25f8, 9efa27f8]
+> CACHE: Misaligned operation at range [9efa25f8, 9efa27f8]
+> ** Booting bootflow 'mmc@2194000.bootdev.part_1' with extlinux
+> Ignoring unknown command: =EF=BF=BDD=EF=BF=BD=EF=BF=BD=EF=BF=BDD=EF=BF=BD=
+=EF=BF=BD
+> Boot failed (err=3D-14)
 >
-> Cheers,
+> The reason is because while allocating buffer to read a file from MMC,
+> alignment of 1 byte is used. Thus, the buffer doesn't work for performing
+> DMA, and garbage data is read.
 >
-> Paul
+> While looking at this issue, I also noticed that if no alignment specifie=
+d
+> (align=3D0) then fs_read_alloc() is documented to use the default. But th=
+e
+> default is no alignment. Therefore, other users of fs_read_alloc() which
+> specify align=3D0 may be broken as well.
 >
->> [1]
->> https://lore.kernel.org/u-boot/20240926183111.1324284-1-paulk@sys-base.io/
->> [2]
->> https://lore.kernel.org/u-boot/20240926183111.1324284-2-paulk@sys-base.io/
->>
->>>> - faster boot time as we don't need to reach SPL to be able to reset the
->>>>     system on a condition we know is already met in TPL,
->>>> - have less code to be impacted by the issue this system reset works
->>>>     around (that is, "unclean" SoC registers after a reboot),
->>>> - less confusion around the reason for restarting. Indeed when done from
->>>>     SPL, the following log can be observed:
->>>>
->>>> """
->>>> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
->>>> Channel 0: DDR3, 666MHz
->>>> BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
->>>> Channel 1: DDR3, 666MHz
->>>> BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
->>>> 256B stride
->>>> Trying to boot from BOOTROM
->>>> Returning to boot ROM...
->>>>
->>>> U-Boot SPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 -
->>>> 15:31:45 +0100)
->>>> Trying to boot from MMC2
->>>>
->>>> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
->>>> """
->>> So with this patch set, we can see the TPL banner twice ?
->>>
->>>
->>> PS: We are able to merge to master instead of next before next branch is
->>> open, because we still have
->>>
->>> enough time to debug before next release.
->>>
->> My understanding is that once -rc1 is out, we should only do bug fixing in
->> master. BUT at the same time, next branch isn't actually open until -rc2.
->>
->> Up to you! It's not really urgent, Puma was migrated to TPL only in v2023.01
->> and we've lived without sysreset-gpio in TPL since then :)
->>
->> Cheers,
->> Quentin
+> The first patch changes extlinux_read_bootflow() to use proper buffer
+> alignment for DMA.
+>
+> The second patch changes the default alignment of fs_read_alloc() to be
+> DMA-suitable, to fix other potential bugs.
+>
+> Nam Cao (2):
+>   boot: extlinux: Fix unaligned buffer for reading data from file system
+>   fs: Use ARCH_DMA_MINALIGN as default alignment for fs_read_alloc()
+>
+>  boot/bootmeth_extlinux.c | 3 ++-
+>  fs/fs.c                  | 4 ++++
+>  include/fs.h             | 2 +-
+>  3 files changed, 7 insertions(+), 2 deletions(-)
+>
+> --
+> 2.39.5
+>
+
+FYI, this "CACHE: Misaligned operation" problem was also fixed in
+bootstd script method by this previous patch:
+https://lists.denx.de/pipermail/u-boot/2023-September/530927.html
+
+For the series.
+Reviewed-by: Tony Dinh <mibodhi@gmail.com>
+
+All the best,
+Tony
