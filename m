@@ -4,136 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD223D5E124
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 04:04:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09D66D5E12D
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 05:21:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C1F788FFC;
-	Fri,  8 Nov 2024 05:04:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 35AD188FC4;
+	Fri,  8 Nov 2024 06:21:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="n4mzRQes";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3914A89021; Fri,  8 Nov 2024 05:04:05 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20615.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::615])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1731043313;
+	bh=crm/y1EzTEvmdSpupvjRJ6inXilRNOdZGMlQvOBIj2k=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=nvwjjDCaci2UZY8nQRIUFnC5fC2fZhLnLzmJ4HHz6AkgA02hPZi4FhIZa1jXC/MF3
+	 +/NY0Aj1DXI5Ki4ZGX8d0rdJMrrKkZa8jTSCbDxI0kIblsrcQKh2oPJW+N1Wja/beg
+	 0hP24DW6G6tqRLdfR2CDVnHpv8Vk5jqbNabJbWF5tbEVknKcJ20Hb/mwdBBB85Z3+m
+	 ipXoQ4B9HPDp35Udk7qPr+d3jeQ5nB7W6FXGxxikCu3Xkt6QhCnRoc/M9cllKGFUui
+	 7rLnO4PunFNYOFgjkA4rccMyv7aRDRR9epQK+1aqhXqXpbqoqVVex4PJJfaoLN0NQL
+	 wyrCUal32A5OQ==
+Received: from localhost.localdomain (87-97-112-21.pool.digikabel.hu
+ [87.97.112.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7B5888EE4
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 05:04:02 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZUM3jiawgLjVynFrYo8rIGvzNnQ+6rx38prJvqk6bKVMbAx5kA/m718l7SUeNMJdQKC2mQeVKkKsBDypuhqEc7jktV+D0bDH9oGgG9c5i4GTdrJptslHV5vGIOLWV7jPg2+jYjuQNjonxtWL9/+Iokp9D+sqF6ZVAC7l9o1LMSveNl/vBPpr8xg2gPwbnCMwS/mkWhfUpDc8stXXJjLhv7b0sLrXrnxq1U8p5BUsl2MsnGLzTgmtPaYQHG5zpfyPyCCTA125btOQQ9/xy2zo8wgmsdtSpJulyY0vnamV7Dgh087Sr8+ldHaH/Y+JY//eH0hJ1XQTzPIOjbm3vew9Rg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vkTEfhFQyU+PJw1ypQXAepHMdP9jrrENaZkICh8CUXw=;
- b=vu9vm9Rv3qHoYZ8YKBf1eCHc5EvBbIMNhgGvYjmXjMmQfiIiAPO+aE+a7UxNEW7XtAnFqwIpH93WTh6gzO8dKP0w13pImaBRYtl8xikCyTjxbtd7r6ZTNMekc2XD9XIztobjsHHRZDpxsYaminlpvIdkCZFFzt65xE4wpm0xjY56JFDuc/ziYbu3rcQlx6LvLUyaYwtgBsLM6Vc4yMz5/hQDhT0TQ6t07Z06dGNI5czaIlxpF8/DIRYCRf3gqTPpY/fDVt6eyOX49fZQbmG8r0p60/jtEEfs1Uv++4W7ELGUmBrgtH4UdiJfMWx40t4rttsBVl1Wf+BS/FLTLDw99A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vkTEfhFQyU+PJw1ypQXAepHMdP9jrrENaZkICh8CUXw=;
- b=n4mzRQes+r7EeIWX0tr/jiX9ro0zniCI0gxp6B9evHRHE3xLWyBBK4JBPyzgV+8w2z5PzQsJjWGPll36KBogv0/U/Whz2NzWkuPoB+RF6TX2AfmeDDihfJadTDXCxfqRXo/rM9B2sTGnkp7AJmCOTd7C8N44TyRWa1hdZl7Bmi4=
-Received: from SJ0PR05CA0082.namprd05.prod.outlook.com (2603:10b6:a03:332::27)
- by PH7PR12MB5808.namprd12.prod.outlook.com (2603:10b6:510:1d4::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.19; Fri, 8 Nov
- 2024 04:03:56 +0000
-Received: from CO1PEPF000042AD.namprd03.prod.outlook.com
- (2603:10b6:a03:332:cafe::5a) by SJ0PR05CA0082.outlook.office365.com
- (2603:10b6:a03:332::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.11 via Frontend
- Transport; Fri, 8 Nov 2024 04:03:56 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1PEPF000042AD.mail.protection.outlook.com (10.167.243.42) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8137.17 via Frontend Transport; Fri, 8 Nov 2024 04:03:55 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 7 Nov
- 2024 22:01:20 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 7 Nov
- 2024 22:00:14 -0600
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 7 Nov 2024 22:00:12 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
- <git@amd.com>
-Subject: [PATCH v10 3/7] usb: onboard-hub: add support for Microchip USB5744
-Date: Fri, 8 Nov 2024 09:29:55 +0530
-Message-ID: <20241108035959.19970-4-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20241108035959.19970-1-venkatesh.abbarapu@amd.com>
-References: <20241108035959.19970-1-venkatesh.abbarapu@amd.com>
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3E71C88E3C;
+ Fri,  8 Nov 2024 06:21:51 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1731043312;
+ bh=crm/y1EzTEvmdSpupvjRJ6inXilRNOdZGMlQvOBIj2k=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=VDMYC3JPuc/vsqDArJCTnI2CPb55dEtKWenEiXTYW7J/AoT3goOTWzhVPVcnXBT9a
+ 4xhpqJ03v3B4G46l0siW1V8F+ssXt5PeB+j4J8CObLfTWydrSfh+2uCwHMvAo5fcYQ
+ ALqWcGf2aLSfv0pT07KlBQ95DMZfdGENhamDijzR4/k4Xc5c1N/0z78m4EHXJpp+ox
+ e/IIH+Uem8jxbLoP3trKhTW1zDkRdLJa+9ysXTOq18H4jc/Or5RVGkmPYI1SM4TzPt
+ Xp2rHy0IEHlfukoOjDF4Lx1KoJWVRyLRhzLjRpAaZGa9C9YSXh0hVylVubtMuKGekm
+ JGQTQb7WbS7Qg==
+From: Heiko Schocher <hs@denx.de>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Enrico Leto <enrico.leto@siemens.com>,
+ Walter Schweizer <walter.schweizer@siemens.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Heiko Schocher <hs@denx.de>, Andrej Valek <andrej.valek@siemens.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Chanho Park <chanho61.park@samsung.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 01/22] wdt: imx8qxp: add option to control external PMIC
+ wdt via IMX8 SCU
+Date: Fri,  8 Nov 2024 06:21:22 +0100
+Message-Id: <20241108052143.26874-2-hs@denx.de>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20241108052143.26874-1-hs@denx.de>
+References: <20241108052143.26874-1-hs@denx.de>
 MIME-Version: 1.0
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000042AD:EE_|PH7PR12MB5808:EE_
-X-MS-Office365-Filtering-Correlation-Id: cfa510d5-fdb4-49d7-a783-08dcffaa5d9c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?eagTBseyzLPbzYRKcKOEylG2gNs0tpfYBe8fRvbdrFwX3BNoiX5hytSpBlnx?=
- =?us-ascii?Q?H577ocSTQbfmjT/ntnJ0kdfNaCsNAijMQK3bKZ36UZZdashy/K8sB0rloY8D?=
- =?us-ascii?Q?TPon3crB+AEXw0fUtTyJgRGjqQ/26Fr2+BaxfT7DcVSe47uG0SjBQxf9m3gw?=
- =?us-ascii?Q?497srGsPN7+DRn8Sb5vrfNa5WxW8x/dZur8TtSTWp4t51EA1i6gkX6pQw+px?=
- =?us-ascii?Q?0iWnq8q/dEvm8rUrgV3IelNLIpudOsGK/jLi7Ustm9wGxDWCOHjLo5Ci0NDK?=
- =?us-ascii?Q?rIAvWRmODHPIwcqGLh93ZwZXM37bjCFo4hkMp3sHmXn3zdh7RWbzO5Pgio8g?=
- =?us-ascii?Q?r4xnrfnQV9f9TtGmWc30svb9VRoNnJ8yvS64EaYSMnGhwdyYtz9Cy8gU7HZc?=
- =?us-ascii?Q?Mg1vnd+F9+n1AdvX3n2WIIBYkJ/9a7nQyvpU80RnHr0XthuDhApKhRbeOhvh?=
- =?us-ascii?Q?z1P+4W7eMOQ44MiZfICD2cPLcnJMojacRRIbZXPClhKG87OiKTE/sULd9/eI?=
- =?us-ascii?Q?eaNKe9Vxu2RhP4YrY6uPoODkOnpwAQm3LfG9p/pKqFMzZjCUdyAXs41dILWk?=
- =?us-ascii?Q?Z3AFKgVFIMKhIhyplRRM2Zgu471Oob6Wk2Mx7hSWso9aemE4Jk6oIyMo7Y+M?=
- =?us-ascii?Q?GuqXneqMNhiUwBbkiqsO5Be1/EseT6t7HnmHmQby4H7+FV3qQcb7dyepavNh?=
- =?us-ascii?Q?8OqNGetvELpgE3cDHFn9jKB54xlctTzjmIt0Y4UBaoK8gAPEab1iRy9PTuh9?=
- =?us-ascii?Q?5ElT3IwKZmZ5xnWtsjsToz1qujTK8FcggZ4rGvP6ZCZX9/NP/QTkhu6iuYVo?=
- =?us-ascii?Q?jMw0n5gP+2xjVkLE7wAHo4IBAgZY8MXF5ETbEKix+iCi8QHCP8aF38SwUba6?=
- =?us-ascii?Q?7PmeLLEiEvfrwtdE+yaqluhg7rxdf9+ZKubeHQYJDF4KsylnIm08WLCV1QVn?=
- =?us-ascii?Q?23b+aeJhLka1YP4coQqEz9GNpKl1iQj94rE5l8aIHpvCuWWukEaRWHQF75R1?=
- =?us-ascii?Q?YGD/C0moU4tEzP43Pu3vJWg68NuAwbSSXFJShvHCQH/PUdGjhHwJjR5esBkA?=
- =?us-ascii?Q?dXgtSJTIFnhPLS4YO4uP8AfzDSiaSg+71Tjx0dtPAVDQHFNpUdNyKT26gDBv?=
- =?us-ascii?Q?OTY6gw4N2JJZYPqreqI9n8KEC/tS4CPFzJ+FIK7efzeH8uoq4Sg8s4JWHRJO?=
- =?us-ascii?Q?USfwDCh8X2+ha299dOoHlcreC2PBIHo3sn4CYZyaBmVxQ1fbt7wing70NnKn?=
- =?us-ascii?Q?jHfUvlhH1r69CYkWSx6GQVTxmi8VsWoSM2XV1o1+h6m4CcwZWC9qAc7BeKDX?=
- =?us-ascii?Q?B6d8rhs/QaZ/wo8ilzMJaCBfhEuDzabA6Dg/Kn0V1yZPBej1NgT2wzQBCH8+?=
- =?us-ascii?Q?ugau9D5aJrvIv9xY2bzoAamUL2jcB2ognQeG8ixAAp5DW+fMJQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Nov 2024 04:03:55.8276 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: cfa510d5-fdb4-49d7-a783-08dcffaa5d9c
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000042AD.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5808
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,45 +78,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the Microchip USB5744 USB3.0 and USB2.0 Hub.
-The usb5744 driver trigger hub reset signal after soft reset.
-The usb5744 hub need to reset after the phy initialization,
-which toggles the gpio.
+control the watchdog in the PMIC through SCU.
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Reviewed-by: Marek Vasut <marex@denx.de>
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+Signed-off-by: Heiko Schocher <hs@denx.de>
 ---
- common/usb_onboard_hub.c | 15 +++++++++++++--
- 1 file changed, 13 insertions(+), 2 deletions(-)
 
-diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index 827ecf9b02..e604c86d8a 100644
---- a/common/usb_onboard_hub.c
-+++ b/common/usb_onboard_hub.c
-@@ -88,10 +88,21 @@ static int usb_onboard_hub_remove(struct udevice *dev)
+ drivers/misc/imx8/scu_api.c    | 21 ++++++++++++++
+ drivers/watchdog/Kconfig       |  7 +++++
+ drivers/watchdog/Makefile      |  1 +
+ drivers/watchdog/scu_wdt.c     | 52 ++++++++++++++++++++++++++++++++++
+ include/firmware/imx/sci/rpc.h |  1 +
+ include/firmware/imx/sci/sci.h |  1 +
+ 6 files changed, 83 insertions(+)
+ create mode 100644 drivers/watchdog/scu_wdt.c
+
+diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
+index 591d71b096a..edb6923151a 100644
+--- a/drivers/misc/imx8/scu_api.c
++++ b/drivers/misc/imx8/scu_api.c
+@@ -951,6 +951,27 @@ int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window)
  	return ret;
  }
  
-+static const struct onboard_hub_data usb5744_data = {
-+	.power_on_delay_us = 10000,
-+	.reset_us = 10000,
++int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd)
++{
++	struct udevice *dev = gd->arch.scu_dev;
++	struct sc_rpc_msg_s msg;
++	int size = sizeof(struct sc_rpc_msg_s);
++	int ret;
++
++	RPC_VER(&msg) = SC_RPC_VERSION;
++	RPC_SVC(&msg) = (u8)SC_RPC_SVC_TIMER;
++	RPC_FUNC(&msg) = (u8)TIMER_FUNC_CTRL_PMIC_WDOG;
++	RPC_U8(&msg, 0U) = (u8)cmd;
++	RPC_SIZE(&msg) = 2U;
++
++	ret = misc_call(dev, SC_FALSE, &msg, size, &msg, size);
++	if (ret)
++		printf("%s: res:%d\n",
++		       __func__, RPC_R8(&msg));
++
++	return ret;
++}
++
+ int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
+ 			 sc_faddr_t addr)
+ {
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 0e45f0a0922..eb9e75abe48 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -428,6 +428,13 @@ config WDT_ARM_SMC
+ 	  Select this to enable Arm SMC watchdog timer. This watchdog will manage
+ 	  a watchdog based on ARM SMCCC communication.
+ 
++config WDT_IMX_SCU
++	bool "Enable external Watchdog Timer support for IMX"
++	depends on IMX8 && WDT
++	help
++	  Select this to enable the external IMX watchdog driver
++	  controlled via IMX8 SCU.
++
+ config SPL_WDT
+ 	bool "Enable driver model for watchdog timer drivers in SPL"
+ 	depends on SPL_DM
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index 0b107c008f7..e943b904bae 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -33,6 +33,7 @@ obj-$(CONFIG_WDT_DA9063) += da9063-wdt.o
+ obj-$(CONFIG_WDT_DAVINCI) += davinci_wdt.o
+ obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
+ obj-$(CONFIG_$(SPL_TPL_)WDT_GPIO) += gpio_wdt.o
++obj-$(CONFIG_WDT_IMX_SCU) += scu_wdt.o
+ obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
+ obj-$(CONFIG_WDT_MCF) += mcf_wdt.o
+ obj-$(CONFIG_WDT_MESON_GXBB) += meson_gxbb_wdt.o
+diff --git a/drivers/watchdog/scu_wdt.c b/drivers/watchdog/scu_wdt.c
+new file mode 100644
+index 00000000000..ad8766dc132
+--- /dev/null
++++ b/drivers/watchdog/scu_wdt.c
+@@ -0,0 +1,52 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++
++#include <dm.h>
++#include <wdt.h>
++#include <firmware/imx/sci/sci.h>
++
++/* watchdog commands */
++#define CMD_START_WDT 0x55
++#define CMD_STOP_WDT  0x45
++#define CMD_PING_WDT  0x35
++
++static int scu_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
++{
++	/* start external watchdog via Timer API */
++	return sc_timer_control_pmic_wdog(-1, CMD_START_WDT);
++}
++
++static int scu_wdt_stop(struct udevice *dev)
++{
++	/* stop external watchdog via Timer API */
++	return sc_timer_control_pmic_wdog(-1, CMD_STOP_WDT);
++}
++
++static int scu_wdt_reset(struct udevice *dev)
++{
++	return sc_timer_control_pmic_wdog(-1, CMD_PING_WDT);
++}
++
++static int scu_wdt_probe(struct udevice *dev)
++{
++	debug("%s(dev=%p)\n", __func__, dev);
++	return 0;
++}
++
++static const struct wdt_ops scu_wdt_ops = {
++	.reset		= scu_wdt_reset,
++	.start		= scu_wdt_start,
++	.stop		= scu_wdt_stop,
 +};
 +
- static const struct udevice_id usb_onboard_hub_ids[] = {
- 	/* Use generic usbVID,PID dt-bindings (usb-device.yaml) */
--	{ .compatible = "usb424,2514" }, /* USB2514B USB 2.0 */
--	{ }
-+	{	.compatible = "usb424,2514" /* USB2514B USB 2.0 */
-+	}, {
-+		.compatible = "usb424,2744", /* USB2744 USB 2.0 */
-+		.data = (ulong)&usb5744_data,
-+	}, {
-+		.compatible = "usb424,5744", /* USB5744 USB 3.0 */
-+		.data = (ulong)&usb5744_data,
-+	}
- };
++static const struct udevice_id scu_wdt_ids[] = {
++	{ .compatible = "siemens,scu-wdt" },
++	{ }
++};
++
++U_BOOT_DRIVER(scu_wdt) = {
++	.name		= "scu_wdt",
++	.id		= UCLASS_WDT,
++	.of_match	= scu_wdt_ids,
++	.probe		= scu_wdt_probe,
++	.ops		= &scu_wdt_ops,
++};
+diff --git a/include/firmware/imx/sci/rpc.h b/include/firmware/imx/sci/rpc.h
+index 28adec2a8e1..9470f9e7178 100644
+--- a/include/firmware/imx/sci/rpc.h
++++ b/include/firmware/imx/sci/rpc.h
+@@ -230,5 +230,6 @@ struct sc_rpc_msg_s {
+ #define TIMER_FUNC_SET_SYSCTR_ALARM 16U /* Index for sc_timer_set_sysctr_alarm() RPC call */
+ #define TIMER_FUNC_SET_SYSCTR_PERIODIC_ALARM 17U /* Index for sc_timer_set_sysctr_periodic_alarm() RPC call */
+ #define TIMER_FUNC_CANCEL_SYSCTR_ALARM 18U /* Index for sc_timer_cancel_sysctr_alarm() RPC call */
++#define TIMER_FUNC_CTRL_PMIC_WDOG 20U  /*!< Index for sc_timer_ctrl_pmic_wdog() RPC call */
  
- U_BOOT_DRIVER(usb_onboard_hub) = {
+ #endif /* SC_RPC_H */
+diff --git a/include/firmware/imx/sci/sci.h b/include/firmware/imx/sci/sci.h
+index 7d8499f070a..b971b62836d 100644
+--- a/include/firmware/imx/sci/sci.h
++++ b/include/firmware/imx/sci/sci.h
+@@ -123,6 +123,7 @@ int sc_rm_set_master_sid(sc_ipc_t ipc, sc_rsrc_t resource, sc_rm_sid_t sid);
+ 
+ /* Timer API */
+ int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window);
++int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd);
+ 
+ /* SECO API */
+ int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
 -- 
-2.17.1
+2.20.1
 
