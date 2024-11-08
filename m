@@ -4,62 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 411E8D5E124
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 03:40:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A033ED5E124
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 03:41:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD3A888C7E;
-	Fri,  8 Nov 2024 04:40:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 372AC88C7E;
+	Fri,  8 Nov 2024 04:41:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="YV3RtALe";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="jEsyL4x0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79E0D88C86; Fri,  8 Nov 2024 04:40:09 +0100 (CET)
-Received: from mail-m6039.netease.com (mail-m6039.netease.com [210.79.60.39])
+ id 5C65E88C7E; Fri,  8 Nov 2024 04:41:25 +0100 (CET)
+Received: from mail-m12818.netease.com (mail-m12818.netease.com
+ [103.209.128.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E21C88B8F
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:40:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 715B988D9C
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:41:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 227c5c8d;
- Fri, 8 Nov 2024 11:40:01 +0800 (GMT+08:00)
-Message-ID: <88812888-4583-44e1-a36f-13239b0aa4d6@rock-chips.com>
-Date: Fri, 8 Nov 2024 11:40:01 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 227c5e28;
+ Fri, 8 Nov 2024 11:41:19 +0800 (GMT+08:00)
+Message-ID: <4bd39b19-de77-40ea-a519-85287d7d9ba2@rock-chips.com>
+Date: Fri, 8 Nov 2024 11:41:18 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] rockchip: rk3588: Implement checkboard() to print
- SoC variant
-To: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
-References: <20241102203746.3631481-1-jonas@kwiboo.se>
- <20241102203746.3631481-3-jonas@kwiboo.se>
- <f4f66f6c-3b96-4529-a90c-cd3a0b900a56@cherry.de>
- <cef9b291-5c27-454c-a24a-565d4510add5@kwiboo.se>
+Subject: Re: [PATCH v6 1/3] arm64: dts: rockchip: Add support for rk3588 based
+ Cool Pi CM5 GenBook
+To: Andy Yan <andyshrk@163.com>
+Cc: u-boot@lists.denx.de, jonas@kwiboo.se, Heiko Stuebner <heiko@sntech.de>
+References: <20241104122307.439776-1-andyshrk@163.com>
+ <20241104122307.439776-2-andyshrk@163.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <cef9b291-5c27-454c-a24a-565d4510add5@kwiboo.se>
+In-Reply-To: <20241104122307.439776-2-andyshrk@163.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh5DQ1ZOTB5PHkhJS09OQkJWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGk0dHVZOGEtNGEoaGUsaGk9WFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9309db85c603afkunm227c5c8d
+X-HM-Tid: 0a9309dcb3ad03afkunm227c5e28
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MAw6GBw6LTIoTysyMwJJN00W
- DCxPCQFVSlVKTEhKS0hMSUtJQ01LVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOTUNONwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NRA6Dgw*PjIsFis2FVEUHEI*
+ GjEKCUlVSlVKTEhKS0hMSUNLS0JLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS0tOTzcG
 DKIM-Signature: a=rsa-sha256;
- b=YV3RtALeA73bsbUgLlKvR0ppihGhZJGyQdcXRT2+//Ygg8jAcKas7eecJZqe+JUPNHYGjdduhjaGGLjQirjJ0zED7uHig7gF2P1aT07LfrRi7udTD8241QtgyIllqMWDoUFsKCa/g+s8PGTA+/UDp8ttui2EUxIimTBztfj/m+8=;
+ b=jEsyL4x0YFDYBvK9IKx1i0m3FipwKnJPbNizx38OFQEDbeJGcKYizECz1V7ukFRdveFSIOddSjR0LmCKXKv6G++MzXMBkGHzgNng1uaPt1Aymj7oV2eXqN7pvWh97M8e3S8z1UE/pbAND4DIRHn4NapsZAz+t12kZMHYc/jEgtg=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=kxot3Ihwdu95pywIUfVWayCHuFeWaYAImof+q5ZeVHY=;
+ bh=xzUxcivzIqCy21zVNxLPIXQA9DMlHIZx6CDABBbi8vE=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,176 +74,403 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
 
-On 2024/11/7 22:29, Jonas Karlman wrote:
-> Hi Quentin,
+On 2024/11/4 20:22, Andy Yan wrote:
+> Cool Pi CM5 GenBook works as a carrier board connect with CM5 [0].
 >
-> On 2024-11-07 13:01, Quentin Schulz wrote:
->> Hi Jonas,
->>
->> On 11/2/24 9:37 PM, Jonas Karlman wrote:
->>> Implement checkboard() to print current SoC model used by a board,
->>> e.g. one of:
->>>
->>>     SoC:   RK3582 v1
->>>     SoC:   RK3588 v0
->>>     SoC:   RK3588 v1
->>>     SoC:   RK3588S v0
->>>     SoC:   RK3588S v1
->>>     SoC:   RK3588S2 v1
->>>
->>> when U-Boot proper is running.
->>>
->>>     U-Boot 2025.01-rc1 (Nov 02 2024 - 20:19:01 +0000)
->>>
->>>     Model: Generic RK3588S/RK3588
->>>     SoC:   RK3588S2 v1
->>>     DRAM:  8 GiB
->>>
->>> Information about the SoC model, variant and version is read from OTP.
->>>
->>> Also update rk3588s-u-boot.dtsi to include OTP in U-Boot pre-reloc phase,
->>> where checkboard() is called.
->>>
->>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>> ---
->>> v2:
->>> - Update commit message
->>> - Update code comments
->>> - Drop generic-rk3588_defconfig change
->>> ---
->>>    arch/arm/dts/rk3588s-u-boot.dtsi       |  4 ++
->>>    arch/arm/mach-rockchip/rk3588/rk3588.c | 58 ++++++++++++++++++++++++++
->>>    2 files changed, 62 insertions(+)
->>>
->>> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
->>> index 09d8b311cec5..8880d162b11c 100644
->>> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
->>> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
->>> @@ -69,6 +69,10 @@
->>>    	bootph-all;
->>>    };
->>>    
->>> +&otp {
->>> +	bootph-some-ram;
->>> +};
->>> +
->>>    &pcfg_pull_down {
->>>    	bootph-all;
->>>    };
->>> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
->>> index e2dac2a5b806..f9da7a6f1477 100644
->>> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
->>> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
->>> @@ -4,6 +4,8 @@
->>>     * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
->>>     */
->>>    
->>> +#include <dm.h>
->>> +#include <misc.h>
->>>    #include <spl.h>
->>>    #include <asm/armv8/mmu.h>
->>>    #include <asm/arch-rockchip/bootrom.h>
->>> @@ -178,3 +180,59 @@ int arch_cpu_init(void)
->>>    	return 0;
->>>    }
->>>    #endif
->>> +
->>> +#define RK3588_OTP_CPU_CODE_OFFSET		0x02
->>> +#define RK3588_OTP_SPECIFICATION_OFFSET		0x06
->>> +#define RK3588_OTP_CPU_VERSION_OFFSET		0x1c
->>> +
->>> +int checkboard(void)
->>> +{
->>> +	u8 cpu_code[2], specification, package, cpu_version;
->>> +	struct udevice *dev;
->>> +	char suffix[3];
->>> +	int ret;
->>> +
->>> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
->>> +					  DM_DRIVER_GET(rockchip_otp), &dev);
->>> +	if (ret) {
->>> +		debug("%s: could not find otp device, ret=%d\n", __func__, ret);
->> We should probably start using log_debug instead?
-> I guess we should?, not sure why there is two different and what the
-> difference is. Have typically only ever used debug() or printf(), so I
-> just went with what was used in the code copied from board.c.
+> Specification:
+> - Rockchip RK3588
+> - LPDDR5X 8/32 GB
+> - eMMC 64 GB
+> - HDMI Type A out x 1
+> - USB 3.0 Host x 1
+> - USB-C 3.0 with DisplayPort AltMode
+> - PCIE M.2 E Key for RTL8852BE Wireless connection
+> - PCIE M.2 M Key for NVME connection
+> - eDP panel with 1920x1080
 >
->> I guess with #define LOG_CATEGORY LOGC_ARCH
->>
->> at the top?
-> I can give it a try, what/how is the log category used for?
+> This patch add basic support to bringup eMMC/USB HOST/WiFi/TouchPad/
+> Battery/PCIE NVME, and can also drive a HDMI output with out of tree
+> hdmi patches.
 >
-> My simple debug workflow is just to add a '#define LOG_DEBUG' at top of
-> a file when I want some more debug info.
+> [0] https://www.crowdsupply.com/shenzhen-tianmao-technology-co-ltd/genbook-rk3588
 >
->>> +		return 0;
->>> +	}
->>> +
->>> +	/* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
->>> +	ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
->> This will fail if CONFIG_MISC=n which is neither selected nor implied
->> for RK3588.
-> Good catch, did not test that scenario, will fix in a v3.
+> Signed-off-by: Andy Yan <andyshrk@163.com>
+> Link: https://lore.kernel.org/r/20240730102433.540260-3-andyshrk@163.com
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 >
->> I tested on multiple RK3588 Jaguar, and the commercial (RK3588) grade
->> ones all showed RK3588 v0.
->>
->> The one industrial grade (RK3588J) showed RK3588J v1.
-> Thanks for confirming this works on a J-variant.
+> [ upstream commit: 4a8c1161b843c366776fc872a6fe45b743b2983e ]
 >
->> I'm really not sure what this version number is for. If even Kever
->> doesn't know what it means, I am not sure it makes sense to print it?
-> For rk356x there is some special handling for cpu-version <> 0 in vendor
-> code, and DT describe a cpu-version nvmem cell, so thought it could be
-> useful debug information. However it may just cause more confusion since
-> there is no clear information on what the different cpu-version mean.
->
-> Will drop the cpu-version information in a v3.
+> (cherry picked from commit dc6316da23734d9321e09f8c8a7669f4b4cb9f75)
 
-Yes, this cpu-version does not help users, I think it may be one of the 
-silicon version(
-
-The process may change in foundry), package version(change in package 
-factory),
-
-and we don't know the detail about there difference.
-
-We can print the useful info which sync with the mark on the chip.
-
-For RV series chip set, it may integrate with difference size DRAM in 
-package, and with
-
-different mark name, not sure if we have info for that.
-
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 >
->> FWIW, the Linux kernel now exposes different nvmem devices for each cell
->> and since we have a cell defined for the three OTP ranges you're using
->> here, maybe it'd make sense to use that instead of hardcoding the
->> offsets and size in here? Not a blocker for this though as I don't think
->> it brings THAT much value to those fixed NVMEM layouts.
-> Took a quick peek at nvmem cell support in U-Boot and look like 'bits' prop
-> is not supported and nvmem-cells/nvmem-cell-names may have to be used.
+> ---
 >
-> Probably easier to use that in a future series that also converts this
-> into a possible sysinfo driver using a DT node similar to:
+> (no changes since v2)
 >
->    sysinfo {
-> 	compatible = "rockchip,rk3588-sysinfo";
-> 	bootph-some-ram;
-> 	nvmem-cells = <&cpu_code>, <&otp_id>, ...;
-> 	nvmem-cell-names = "soc", "id", ...;
->    };
+> Changes in v2:
+> - Cherry pick it from https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
 >
-> Something for the future :-)
+>   .../rockchip/rk3588-coolpi-cm5-genbook.dts    | 349 ++++++++++++++++++
+>   1 file changed, 349 insertions(+)
+>   create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
 >
-> Regards,
-> Jonas
->
->> Cheers,
->> Quentin
->
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts b/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
+> new file mode 100644
+> index 00000000000..6418286efe4
+> --- /dev/null
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
+> @@ -0,0 +1,349 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (c) 2024 Rockchip Electronics Co., Ltd.
+> + *
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include <dt-bindings/leds/common.h>
+> +#include "rk3588-coolpi-cm5.dtsi"
+> +
+> +/ {
+> +	model = "CoolPi CM5 GenBook";
+> +	compatible = "coolpi,pi-cm5-genbook", "coolpi,pi-cm5", "rockchip,rk3588";
+> +
+> +	backlight: backlight {
+> +		compatible = "pwm-backlight";
+> +		enable-gpios = <&gpio4 RK_PA3 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&bl_en>;
+> +		power-supply = <&vcc12v_dcin>;
+> +		pwms = <&pwm6 0 25000 0>;
+> +	};
+> +
+> +	battery: battery {
+> +		compatible = "simple-battery";
+> +		charge-full-design-microamp-hours = <9800000>;
+> +		voltage-max-design-microvolt = <4350000>;
+> +		voltage-min-design-microvolt = <3000000>;
+> +	};
+> +
+> +	charger: dc-charger {
+> +		compatible = "gpio-charger";
+> +		charger-type = "mains";
+> +		gpios = <&gpio1 RK_PC0 GPIO_ACTIVE_LOW>;
+> +	};
+> +
+> +	leds: leds {
+> +		compatible = "gpio-leds";
+> +
+> +		heartbeat_led: led-0 {
+> +			color = <LED_COLOR_ID_GREEN>;
+> +			function = LED_FUNCTION_STATUS;
+> +			gpios = <&gpio1 RK_PB0 GPIO_ACTIVE_HIGH>;
+> +			linux,default-trigger = "heartbeat";
+> +		};
+> +
+> +		wlan_led: led-1 {
+> +			color = <LED_COLOR_ID_GREEN>;
+> +			function = LED_FUNCTION_WLAN;
+> +			gpios = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
+> +		};
+> +
+> +		charging_red: led-2 {
+> +			function = LED_FUNCTION_CHARGING;
+> +			color = <LED_COLOR_ID_RED>;
+> +			gpios = <&gpio3 RK_PD2 GPIO_ACTIVE_HIGH>;
+> +		};
+> +	};
+> +
+> +	vcc12v_dcin: vcc12v-dcin-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc12v_dcin";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <12000000>;
+> +		regulator-max-microvolt = <12000000>;
+> +	};
+> +
+> +	vcc_sys: vcc-sys-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <7000000>;
+> +		regulator-max-microvolt = <7000000>;
+> +		vin-supply = <&vcc12v_dcin>;
+> +	};
+> +
+> +	vcc5v0_sys: vcc5v0-sys-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <7000000>;
+> +		regulator-max-microvolt = <7000000>;
+> +		vin-supply = <&vcc_sys>;
+> +	};
+> +
+> +	vcc3v3_sys: vcc3v3-sys-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc3v3_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vcc3v3_lcd: vcc3v3-lcd-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc3v3_lcd";
+> +		enable-active-high;
+> +		gpio = <&gpio1 RK_PC4 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&lcdpwr_en>;
+> +		vin-supply = <&vcc3v3_sys>;
+> +	};
+> +
+> +	vcc5v0_usb: vcc5v0-usb-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_usb";
+> +		regulator-boot-on;
+> +		regulator-always-on;
+> +		enable-active-high;
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		gpio = <&gpio1 RK_PD5 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&usb_pwren>;
+> +		vin-supply = <&vcc_sys>;
+> +	};
+> +
+> +	vcc5v0_usb_host0: vcc5v0_usb30_host: vcc5v0-usb-host-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_host";
+> +		regulator-boot-on;
+> +		regulator-always-on;
+> +		enable-active-high;
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		gpio = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&usb_host_pwren>;
+> +		vin-supply = <&vcc5v0_usb>;
+> +	};
+> +};
+> +
+> +&i2c4 {
+> +	status = "okay";
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&i2c4m3_xfer>;
+> +
+> +	cw2015@62 {
+> +		compatible = "cellwise,cw2015";
+> +		reg = <0x62>;
+> +
+> +		cellwise,battery-profile = /bits/ 8 <
+> +			0x17 0x67 0x69 0x63 0x63 0x62 0x62 0x5F
+> +			0x52 0x73 0x4C 0x5A 0x5B 0x4B 0x42 0x3A
+> +			0x33 0x2D 0x29 0x28 0x2E 0x31 0x3C 0x49
+> +			0x2C 0x2C 0x0C 0xCD 0x30 0x51 0x50 0x66
+> +			0x74 0x74 0x75 0x78 0x41 0x1B 0x84 0x5F
+> +			0x0B 0x34 0x1C 0x45 0x89 0x92 0xA0 0x13
+> +			0x2C 0x55 0xAB 0xCB 0x80 0x5E 0x7B 0xCB
+> +			0x2F 0x00 0x64 0xA5 0xB5 0x10 0x18 0x21
+> +			>;
+> +
+> +		cellwise,monitor-interval-ms = <3000>;
+> +		monitored-battery = <&battery>;
+> +		power-supplies = <&charger>;
+> +	};
+> +};
+> +
+> +&i2c5 {
+> +	status = "okay";
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&i2c5m3_xfer>;
+> +
+> +	touchpad: touchpad@2c {
+> +		compatible = "hid-over-i2c";
+> +		reg = <0x2c>;
+> +		interrupt-parent = <&gpio1>;
+> +		interrupts = <RK_PD6 IRQ_TYPE_LEVEL_LOW>;
+> +		hid-descr-addr = <0x0020>;
+> +	};
+> +};
+> +
+> +&gmac0 {
+> +	status = "disabled";
+> +};
+> +
+> +/* M.2 E-Key */
+> +&pcie2x1l0 {
+> +	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_sys>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie_clkreq &pcie_wake &pcie_rst &wifi_pwron &bt_pwron>;
+> +	status = "okay";
+> +};
+> +
+> +&pcie2x1l2 {
+> +	status = "disabled";
+> +};
+> +
+> +&pcie30phy {
+> +	status = "okay";
+> +};
+> +
+> +/* M.2 M-Key ssd */
+> +&pcie3x4 {
+> +	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_sys>;
+> +	status = "okay";
+> +};
+> +
+> +&pinctrl {
+> +	lcd {
+> +		lcdpwr_en: lcdpwr-en {
+> +			rockchip,pins = <1 RK_PC4 RK_FUNC_GPIO &pcfg_pull_down>;
+> +		};
+> +
+> +		bl_en: bl-en {
+> +			rockchip,pins = <4 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	usb {
+> +		usb_pwren: usb-pwren {
+> +			rockchip,pins = <1 RK_PD5 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		usb_otg_pwren: usb-otg-pwren {
+> +			rockchip,pins = <0 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		usb_host_pwren: usb-host-pwren {
+> +			rockchip,pins = <1 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +
+> +	wifi {
+> +		bt_pwron: bt-pwron {
+> +			rockchip,pins = <3 RK_PA6 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		pcie_clkreq: pcie-clkreq {
+> +			rockchip,pins = <4 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		pcie_rst: pcie-rst {
+> +			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		wifi_pwron: wifi-pwron {
+> +			rockchip,pins = <3 RK_PB1 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		pcie_wake: pcie-wake {
+> +			rockchip,pins = <4 RK_PA1 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +};
+> +
+> +&pwm6 {
+> +	pinctrl-0 = <&pwm6m1_pins>;
+> +	status = "okay";
+> +};
+> +
+> +&sdmmc {
+> +	status = "disabled";
+> +};
+> +
+> +&sfc {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&fspim2_pins>;
+> +	status = "okay";
+> +
+> +	flash@0 {
+> +		compatible = "jedec,spi-nor";
+> +		reg = <0x0>;
+> +		spi-max-frequency = <100000000>;
+> +		spi-rx-bus-width = <4>;
+> +		spi-tx-bus-width = <1>;
+> +	};
+> +};
+> +
+> +&u2phy0 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy0_otg {
+> +	status = "okay";
+> +};
+> +
+> +&usbdp_phy0 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy1 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy1_otg {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy2 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy3 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy2_host {
+> +	phy-supply = <&vcc5v0_usb_host0>;
+> +	status = "okay";
+> +};
+> +
+> +&u2phy3_host {
+> +	phy-supply = <&vcc5v0_usb>;
+> +	status = "okay";
+> +};
+> +
+> +&usbdp_phy1 {
+> +	status = "okay";
+> +};
+> +
+> +/* For Keypad */
+> +&usb_host0_ehci {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host0_ohci {
+> +	status = "okay";
+> +};
+> +
+> +/* Type C port */
+> +&usb_host0_xhci {
+> +	dr_mode = "peripheral";
+> +	maximum-speed = "high-speed";
+> +	status = "okay";
+> +};
+> +
+> +/* connected to a HUB for camera and BT */
+> +&usb_host1_ehci {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host1_ohci {
+> +	status = "okay";
+> +};
+> +
+> +/* USB A out */
+> +&usb_host1_xhci {
+> +	dr_mode = "host";
+> +	status = "okay";
+> +};
