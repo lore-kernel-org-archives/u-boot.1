@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71E3CD64064
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 16:51:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5028BD6406B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 17:07:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6C5F891FE;
-	Fri,  8 Nov 2024 17:51:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B90EF88B0A;
+	Fri,  8 Nov 2024 18:07:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Zqh6VdWv";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="OHnNTJAI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B8888900E; Fri,  8 Nov 2024 17:51:13 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8603D88B8F; Fri,  8 Nov 2024 18:07:48 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 531B588B0B
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 17:51:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CD9B8860B
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 18:07:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5cacb76e924so3413549a12.0
- for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 08:51:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731084671; x=1731689471; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=BBX55xOZPJEkcYK0yt8NiNbN3qUfo6/zcgDWyx9Yipk=;
- b=Zqh6VdWvZh4yIV/TETgWSEjWNBR7eNgT3hz73+bfcO2aedf2JKitYEBgDcjYj61MdX
- 5hC/feQo7ubS+O8emKhI9SBHzxyXlxmhj9azENSYV+LDHZi2/axN+UNseioP8+hxiN/g
- R5+HLxDsuzCUah9rYEptJbabrbtqEweGy919g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731084671; x=1731689471;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BBX55xOZPJEkcYK0yt8NiNbN3qUfo6/zcgDWyx9Yipk=;
- b=KgSr6IcMcAmOoOaKOQkh+lS6SJWsuzIlv0L6MYimzy7kQ9TaoeE7ZZfNJD+t87L9SN
- SdeEkuQrSt0J+obCjW68FR9FKizVWNWcC8XGTJ5BObrqldbC2j+eMAoF37WJcKBai6oj
- Se2syogF60JDu4foIO/pQ8O45s2Ua4jPadBgr/wEHYGug+jUK+dMgGjSJkhMqALZPeEW
- fRVI4BQkNvmLmn6RFM8rpzysHmFvHpMJZflaWF0IzKJi8XkqT7BbGhhRJcGxK/cpT9fr
- 8EBQuhOLZxj98ZfgxHQIrx1LlD9v1D0wTQ9PeHTbXJ5fvoFCHGGVjOiUwQkpIS6dkVFP
- VOeA==
-X-Gm-Message-State: AOJu0Yy8VyR8Em8x9iWIN6LdvD1u+QdQ8sFm6Auk+L2BdcVhMG8N1llq
- lkvvIG1NC6h1Zrg42gVl7tpvVPIZRfBT+PzUsnBuHSwjotej/si7AYNOdcrumWDUXmI8VYgT+1o
- xSB8=
-X-Google-Smtp-Source: AGHT+IE1IZFtE76i8k6FXKNTaSZ7sMDoUm6kG2UD7TNOHSZW0IS3FTCODWWKfx9sVW7YydYXbFmq2Q==
-X-Received: by 2002:a17:907:6d24:b0:a9a:9df:5581 with SMTP id
- a640c23a62f3a-a9eeffeee58mr332479166b.38.1731084670804; 
- Fri, 08 Nov 2024 08:51:10 -0800 (PST)
-Received: from oliver.lan ([23.155.80.164]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0def026sm254154666b.163.2024.11.08.08.51.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Nov 2024 08:51:09 -0800 (PST)
-Date: Fri, 8 Nov 2024 10:51:05 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Leo Liang <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, rick@andestech.com
-Subject: Re: [GIT PULL] u-boot-riscv/master
-Message-ID: <20241108165105.GA38525@oliver.lan>
-References: <ZytdFmEgu6DgeRRf@swlinux02>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1731085661; x=1731690461; i=xypron.glpk@gmx.de;
+ bh=1k6G3btTfLPcBbxXj5Ss6a9vos1tCAHBGz1iY/Ij3I0=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=OHnNTJAIzVWFar1CMKgGHGwhMwcDJjtCwk0UBbHMUYWanZHqw5HDWFyYh/wtxfQR
+ rP8JJKodGTDzNFlhNoECnpoz/gcX1aAIxhCnelhC6WpRNqubPJ36LetSt3X32tA5l
+ Gp0alZisobvcks0ljDeeof1YWCBoOMJNOkxeKwXX76iqTkfeeHsXgfnSQcEeI8cOC
+ APKJvgwG7VZx8IMLxtDrBx2a/W27jpTapfzoDrCgpnGlFD08O8cIcg/pHR2mYY2BR
+ tCclGLgwadfDRXKHvoflNvmgvmNkn7hArjjQ0XPKsB/wPzed5SNfrJMb0YZpAVhb2
+ 9e7kSfk3omLTmJ4UOw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M59GG-1t8Lzl0zTA-00EfJC; Fri, 08
+ Nov 2024 18:07:41 +0100
+Message-ID: <afdca582-9533-43f9-a93d-d2c7a2cdb9a0@gmx.de>
+Date: Fri, 8 Nov 2024 18:07:40 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1RObwvc1TWiUxMWI"
-Content-Disposition: inline
-In-Reply-To: <ZytdFmEgu6DgeRRf@swlinux02>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/7] net: wget: Add a global struct wget_http_info
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20241106130337.211101-1-adrianox@gmail.com>
+ <b519fb69-308e-4608-9e61-491679d8f94f@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <b519fb69-308e-4608-9e61-491679d8f94f@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Tj05W/0O+S/r6Xqq3E2CJRwHHRyAl7URJ56WP1tlFrpM/EdAX5n
+ 33bCf/0yuBh6pKVicwnN7uvA9WSuiHq/Vvz8YlkEZxzEDyK7fNvqzrjWPHuqfvqQHY+wpEG
+ Qwk/165iGLFLAux8HhvxZlzvTEUMGVICkKiWh/rnXslYW9jpixMXO1C+ixXPoylx8qbl6Vj
+ N/mVjuXW2ldfm47QzpepA==
+UI-OutboundReport: notjunk:1;M01:P0:Lrj5Xc7Gf9A=;XZ5EpDAe/xjUbwNVzuwV51XfyVx
+ yDnwHsTWCFJirXNZalynQLEdLEv+ysQFEPLiWJf4xtM2zXMEAleiQEATi9yeWOsw1C/8D+zjk
+ nFiM2xexiRqlXsSajrg+ltTISy+J0+toncZOdN7StG0r45rVXbOii7i1LV4Kvhc7cw+WtkipS
+ W5oIOqABs+YY3RhOfwykRrdeOU0TxDLrY+Hj+rCd8mjDJ7DsFTBCX5sJyTa+sPcHIO7XqwFoJ
+ Q+WZC9DilQSePpKYl9wZHN5+4A5vHTBHyo1YteORcStrSvk3bDNb3mAm26BqnreQKSFo9fNdM
+ 6/mbXbhFY1GLcEy6MnUz72NV/sWAG61+sLmX5cEAVbK/2AJ2NOt6gbu6Kap/dpUp3B/ycg344
+ gk+xsZy+RioodiOUG6EZ+H/ZJXcva1PPCRCBgC8R9VB4qcLS+kZ2aMPU6WznlQL+FdmrptvsC
+ vjWO1Bz8mJf4TxED62Q2ki9/LWs9KQyW8MsSLxIyCMf8HcF3sDUuFqLkuAzkqLQFdG04M0nqb
+ VvdGc5pS3+Eovgq0qbIrmnaohWU2Jxf8bwh1tj/TvcsA7AwKwfNE+gRAHGwhnizMmBpOBR51r
+ ETsYOronQRGLNYhD/ZB/G1zojkogz2xb/TiN3GM6dH6B4aLezw5qEx3GWz7z2gbkdxT7a9EYi
+ /Bw4s8PWfJ48324JIegUuY8L8AnHZwDY527X7XhxMwYokOdPe34cxmf8HTh/lj4GcqiUCSRHH
+ xHWe5RzR23zSZ2aLlL0s8t5Auh0jvE3RtbmUtzmmvw0Xzl3wO8AMWU92A9OIds9nhH7pJEud/
+ k/qfCPHnsdsbbZJVTLd0QxzA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,55 +92,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/7/24 12:21, Jerome Forissier wrote:
+> On 11/6/24 13:03, Adriano Cordova wrote:
+>> Declare and define a global struct wget_http_info. The default
+>> values are so that wget works as it used to, but they can be
+>> changed by an application before issuing an http request using
+>> wget, and restored afterwards. This struct is common to legacy
+>> wget and lwip wget.
+>>
+>> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+>> ---
+>>   include/net-common.h |  2 ++
+>>   net/net-common.c     | 10 ++++++++++
+>>   2 files changed, 12 insertions(+)
+>>
+>> diff --git a/include/net-common.h b/include/net-common.h
+>> index 38ba95cf60..3039dfdce7 100644
+>> --- a/include/net-common.h
+>> +++ b/include/net-common.h
+>> @@ -533,4 +533,6 @@ struct wget_http_info {
+>>   	char *headers;
+>>   };
+>>
+>> +extern struct wget_http_info wget_info;
+>> +
+>>   #endif /* __NET_COMMON_H__ */
+>> diff --git a/net/net-common.c b/net/net-common.c
+>> index a7f767d5e9..e969d508cc 100644
+>> --- a/net/net-common.c
+>> +++ b/net/net-common.c
+>> @@ -1,4 +1,5 @@
+>>   // SPDX-License-Identifier: GPL-2.0
+>> +#include <net-common.h>
+>>
+>>   void copy_filename(char *dst, const char *src, int size)
+>>   {
+>> @@ -11,3 +12,12 @@ void copy_filename(char *dst, const char *src, int s=
+ize)
+>>   		*dst++ =3D *src++;
+>>   	*dst =3D '\0';
+>>   }
+>> +
+>> +struct wget_http_info wget_info =3D {
+>> +	.method =3D WGET_HTTP_METHOD_GET,
+>> +	.file_size =3D 0,
+>> +	.buffer_size =3D 0,
+>> +	.set_bootdev =3D true,
+>> +	.check_buffer_size =3D false,
+>> +	.headers =3D NULL,
 
---1RObwvc1TWiUxMWI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+wget_info is a global symbol. It will be reused in every wget
+transaction. The values initialized here may be overwritten in a first
+transaction and the current initialization would have no impact on a
+second transaction.
 
-On Wed, Nov 06, 2024 at 08:12:06PM +0800, Leo Liang wrote:
+Please, move the initialization to the function that starts a new
+transaction.
 
-> Hi Tom,
->=20
-> The following changes since commit 56accc56b9aab87ef4809ccc588e1257969cd2=
-71:
->=20
->   bios_emulator: fix first argument of pci_{read,write}_config_* function=
- calls (2024-11-04 18:01:58 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
->=20
-> for you to fetch changes up to d5f5e778183d5908caa2954b9438614252b806dd:
->=20
->   riscv: Introduce configuration for 64bit version Microblaze V (2024-11-=
-06 19:42:54 +0800)
->=20
-> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
--riscv/-/pipelines/23239
+For static and global variables only used after relocation it is not
+necessary to initialize members to 0 in the definition.
 
-Applied to u-boot/master, thanks!
+Best regards
 
---=20
-Tom
+Heinrich
 
---1RObwvc1TWiUxMWI
-Content-Type: application/pgp-signature; name="signature.asc"
+>> +};
+>
+> Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+>
+> Thanks,
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcuQXIACgkQFHw5/5Y0
-tyzlMAwArI3C1ha4f9UlQ+MsnqNAvLhhtqBhvb5zsjmqlktRN3waBuI82PqJyFkg
-6XyB08cy6ch8Fh+LIN084Jpq8kVQMbSjhWYjSozdFWvvCTjuvUC6YGXqBwMQ7Rrs
-GokgPyeGV8IoAK2mcDd5DqDd1pRcyZssL0P/9Z1l7h90MulSgy1ZNryKhYPjJZJC
-oLb8xLo/kmzi40/dEv31UyD5f8N5RZLIpogRu0UItcLVN8HFteo81zy/mc6AmDDj
-5XKRXtJ16fudFIwpdxGXNlc8C1QASiu9qeY4fUOB2C/bqZqGrGshUyQv1nmKTKdA
-7eeUmc8Frzy+ZWvUBRMkxynD82lLDka6J3rKxDujemqn+uWwZtszhBCm1kXl+BJy
-6Ea02BomOJqaNEx/Y3+AyKYzq0F9s3/xlmJWvXTgHX78ORTEdMMnFmsYonRkSc6I
-RnHhfcFefN1o+vJ8MvLOwKwN2q8rhSWpoanKSK/WHuI/1Ke4F8eRu8ADqkGu4fWZ
-GQ06ockY
-=pMzV
------END PGP SIGNATURE-----
-
---1RObwvc1TWiUxMWI--
