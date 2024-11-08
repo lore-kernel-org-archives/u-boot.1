@@ -4,80 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22B5CD5C0FF
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 16:19:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C72CDD64061
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 16:21:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C52788AAC;
-	Fri,  8 Nov 2024 17:19:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4161B891E3;
+	Fri,  8 Nov 2024 17:21:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="sz6qC4pN";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8877D8900E; Fri,  8 Nov 2024 17:19:43 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1731082906;
+	bh=ELBKNsinwE1b/BgYo2kl9Vp+bmrhjTNBXP4bdE82vNI=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ej1UsMI2exZVOayBRjJrCiY25z7wuFDcEci9t1gnQ5r/9dWIksnltfyOa0WTio3Vg
+	 XPfqAHdQ+LO0NLk0bTD+6OQAPVgdebj9FhHrNYO3R7n6ywjbD8XUbol35IpXDwLWmU
+	 bmII3a/8V2eGgPfzig9+dAVLoyR4KF3XtjFYrf8votUjwvBbENkaC1rvYrp5R/gdLX
+	 /2b2QjtOyqJp5tP86VMavY/z9X25OLVE93nR029W1+3yL8vPylwI0SL7eS8lA+ACwh
+	 4I0nGNY1Koia+AkFTAeOUqPMb3cLC+wB0qV6cA3E1aB1EnToEid3ZIrjpuw1j9KIFI
+	 hMmKnEOi+p5Kw==
+Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94EC788278
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 17:19:41 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1731082777; x=1731687577; i=xypron.glpk@gmx.de;
- bh=nkGrqdRDh7Y3fQfwlsTMWmigdcRsGSp/Z8r9fwUOYXw=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=sz6qC4pNQvaJe00icDjpFvKYrHyfEzNWI1t3Iy3JzG6AKltRLFPDJu+HPxW9vedq
- xy+jbf7xoP6ktyhuxwiSCEzz8xiHotgtixJDvYCZuXisAoWpZhr93jE9mfceiGKUj
- 0VHk1RI3FcDRxQ28YGs1Oa7z56qCtXT0WnQ9iFuiZfX5KiZFJrebS+uU8T6VxDQOW
- 2/3KhYC8i6d3RV/cWzRVm6w+17ipt0yeFhy389ar19Tvn0RZ8UgfwskMow+rGLOeU
- Sg3/vWwKlNqwhJVP9PyrTEk56V2Dx2gj4Uarl1ktFWsHSvQQAoJCfRU/lGW6TdyBV
- CLB5brMkIrk7CDn+jg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MacOQ-1tg1Mx1PD8-00a9yZ; Fri, 08
- Nov 2024 17:19:37 +0100
-Message-ID: <1c676e33-f171-41e7-9ccd-1e77a01fe472@gmx.de>
-Date: Fri, 8 Nov 2024 17:19:21 +0100
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5DC2B88AAC;
+ Fri,  8 Nov 2024 17:21:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1731082905;
+ bh=ELBKNsinwE1b/BgYo2kl9Vp+bmrhjTNBXP4bdE82vNI=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=WNUrOIbiDcNZEURBXIGBSFj5a/d7Bwjhv6G9qgjf74v4tivtj7sFWz1gLU+1jfZRK
+ oQwOnhydixCbHkAjN6IKVJWuAIugOStR/YLeofvbaOcQBT/9CQ1wXa1W589QVqfNme
+ dJtdxc309cdlEvBqTw92Hrnmu6ttPx5OR+ShLjxDX2vdPGCzxxQf1tuMWh1H1urO39
+ 87phmCji7vYBgjT7SUvy+br+gcwX+nj+dMul1FZGYc2yuWIe4UOfY2jYu9HAtv38Zw
+ v77ffZzH361q41UTwRS4DmpLJBVu8QWaIf6TiGRhYhXL/0tJHIpL0OinsHOAmtzOsm
+ J3FcLeAqN0A0g==
+Date: Fri, 8 Nov 2024 17:21:43 +0100
+From: Lukasz Majewski <lukma@denx.de>
+To: Marek Vasut <marex@denx.de>, Adam Ford <aford173@gmail.com>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Alper
+ Nebi Yasak <alpernebiyasak@gmail.com>, Andrejs Cainikovs
+ <andrejs.cainikovs@toradex.com>, Angus Ainslie <angus@akkea.ca>, Emanuele
+ Ghidoli <emanuele.ghidoli@toradex.com>, Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>, Marcel Ziswiler
+ <marcel.ziswiler@toradex.com>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, Simon Glass <sjg@chromium.org>, Stefan
+ Eichenberger <stefan.eichenberger@toradex.com>, Stefano Babic
+ <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>, Tom Rini
+ <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
+Subject: Re: [PATCH 3/3] ARM: dts: imx: Convert i.MX8M flash.bin image
+ generation to binman
+Message-ID: <20241108172143.77f0e267@wsk>
+In-Reply-To: <bf90d794-7b70-4e9a-ae79-fd9297f2a0fc@denx.de>
+References: <20240423183247.335791-1-marex@denx.de>
+ <20240423183247.335791-3-marex@denx.de>
+ <CAHCN7x+Moru3HsU8VUZ5z53ix2s09qG0UpwgYeh9dPEC81s3uw@mail.gmail.com>
+ <bf90d794-7b70-4e9a-ae79-fd9297f2a0fc@denx.de>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/15] net: net_utils: Move ip_to_string to
- lib/net_utils.c
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de
-References: <20241108133850.431075-1-adrianox@gmail.com>
- <20241108133850.431075-2-adrianox@gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241108133850.431075-2-adrianox@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:l8QzqKj4ninQYnYf2EzO3IcznYsdDh7rX/RQbdVRLM19QhulFXm
- WhFs9/s9QPxUWmo63wmD5l2DUOl2JYq6k3JT6byiGoT72YStsizzFiR++Gqxr/Y+aMvCnrI
- lz8QWOQEMU/xe+R3u9zYWz66Milc6jB+Ty2+wYhXh9L8vzT9pUEVFJNvGsmobQ5bOiWb1Cz
- u4OSXfGcG/gkufzG7ptvg==
-UI-OutboundReport: notjunk:1;M01:P0:J8emNehs6ZA=;5yLbfBm+Zs9HFxOrIv/e30FlBye
- iIqSFkjly25PCyvXk3j6FgShLP34RJEoeWphPOLedgUhzR/bDwfCQN9j4bENdr96vZKNxujUb
- mBDu33ScXKnjzs0yw5/hnFtqLlM7Xk2/sX5JIL44fQnUCNqTg8Ka2w8fJ3KrCLyJD8FyYXKZx
- 3BiZX1+3xCEtiyNxnx+XjO9PBmSkCLnY8a6Rq+7PfaE45b5H5S8KvhUrvVXzDFvHaTDreGMqJ
- +Lo23ti8WcDbdB4ufag1obdRqq9594nGQBhcaUjFNmYD5DlufDd2UT34AEgEj5MtS3roHfQgW
- 4y2z59XoZ8NAVSscEzwzH3obEYuhRigC6oX9EaoVuef2qH3/mjGaDIIudA4C2CdSdEk5h625A
- bDYKDVGcfNtU8K/KpRYwIyvYc+sVPrFuLt6Nkz3VewMAgYuZFPZzhtQtl86rEC/+ZWQXoS8de
- DAvwYKhtb4y876fxq9s4DbqFZQz2Bf+K6vqymxCt5N62k1nvQCCr54Rzu2teUXKVwrul4nvyt
- HrxpGzy/s8/NREga2UyPVdS1u1jY8M4OQ7+ps5AUqow73eo2d7vY+3UvFWmzAy4vvuJCEHr0Q
- B3mJSvLDJjUu6RAYrgfCnJxeRxZt7wbMlAHJRt891koLPT95y9UF2GrYW/n0Bxq/xB9KozFvL
- /upvppq6fCaA2lwpBEL7yofyTMPj2paSctnLdZL8cdyziYlxdy/nD6IubI7FgsFj2DTzMlqmm
- WR6ISy9IOonZbtCqAO8v7VQqGHrwkMuU521llNGGSGT9/eT0etWl5lZzeLdKm2wevGHm7b4x8
- fXKKArDW1WtspP+BImMCcqus97M+4WJilGg4vcJS1G78hjzwGV5WnxpUQ1Q/V4TaWnjrGUFtq
- Gji0k+EG599EVD2BKvVxtRcsZDAHhYrO9eWnL3s5q2PvUxEjFyoNX92aw
+Content-Type: multipart/signed; boundary="Sig_/JcRZKdV47CFdsmrP9K7Egm6";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,88 +81,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/8/24 14:38, Adriano Cordova wrote:
-> The function string_to_ip is already in net_utils, which is
-> compiled unconditionally, but ip_to_string is currently only
-> accessible if the legacy network stack is selected. This
-> commit puts ip_to_string in net_utils.c and removes it from the
-> legacy network code.
->
-> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+--Sig_/JcRZKdV47CFdsmrP9K7Egm6
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Hi Marek, Adam
 
-> ---
->   include/net-common.h | 10 ++++++++++
->   lib/net_utils.c      | 11 +++++++++++
->   net/net.c            | 11 -----------
->   3 files changed, 21 insertions(+), 11 deletions(-)
->
-> diff --git a/include/net-common.h b/include/net-common.h
-> index 11c53766a3..5206b8346d 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -426,6 +426,16 @@ void string_to_enetaddr(const char *addr, uint8_t *=
-enetaddr);
->    */
->   struct in_addr string_to_ip(const char *s);
->
-> +/**
-> + * ip_to_string() - Convert a string to ip address
-> + *
-> + * Implemented in lib/net_utils.c (built unconditionally)
-> + *
-> + * @x: Input ip to parse
-> + * @s: string containing the parsed ip address
-> + */
-> +void ip_to_string(struct in_addr x, char *s);
-> +
->   /* copy a filename (allow for "..." notation, limit length) */
->   void copy_filename(char *dst, const char *src, int size);
->
-> diff --git a/lib/net_utils.c b/lib/net_utils.c
-> index c70fef0d99..621f6512b6 100644
-> --- a/lib/net_utils.c
-> +++ b/lib/net_utils.c
-> @@ -152,6 +152,17 @@ out_err:
->   }
->   #endif
->
-> +void ip_to_string(struct in_addr x, char *s)
-> +{
-> +	x.s_addr =3D ntohl(x.s_addr);
-> +	sprintf(s, "%d.%d.%d.%d",
-> +		(int) ((x.s_addr >> 24) & 0xff),
-> +		(int) ((x.s_addr >> 16) & 0xff),
-> +		(int) ((x.s_addr >> 8) & 0xff),
-> +		(int) ((x.s_addr >> 0) & 0xff)
-> +	);
-> +}
-> +
->   void string_to_enetaddr(const char *addr, uint8_t *enetaddr)
->   {
->   	char *end;
-> diff --git a/net/net.c b/net/net.c
-> index f47e9fbe33..ca35704f66 100644
-> --- a/net/net.c
-> +++ b/net/net.c
-> @@ -1723,17 +1723,6 @@ int net_parse_bootfile(struct in_addr *ipaddr, ch=
-ar *filename, int max_len)
->   	return 1;
->   }
->
-> -void ip_to_string(struct in_addr x, char *s)
-> -{
-> -	x.s_addr =3D ntohl(x.s_addr);
-> -	sprintf(s, "%d.%d.%d.%d",
-> -		(int) ((x.s_addr >> 24) & 0xff),
-> -		(int) ((x.s_addr >> 16) & 0xff),
-> -		(int) ((x.s_addr >> 8) & 0xff),
-> -		(int) ((x.s_addr >> 0) & 0xff)
-> -	);
-> -}
-> -
->   void vlan_to_string(ushort x, char *s)
->   {
->   	x =3D ntohs(x);
+> On 11/7/24 2:55 AM, Adam Ford wrote:
+> > On Tue, Apr 23, 2024 at 1:33=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
+te: =20
+> >>
+> >> Rework the flash.bin image generation such that it uses the new
+> >> binman nxp_imx8mimage etype. This way, the flash.bin is assembled
+> >> in correct order using plain binman, without any workarounds or
+> >> sections assembled in special DT node order.
+> >>
+> >> Signed-off-by: Marek Vasut <marex@denx.de>
+> >> --- =20
+> >=20
+> > This introduced a regression on the 8M Nano with
+> > CONFIG_FSPI_CONF_HEADER set.  As is, the board doesn't appear to do
+> > anything.
+> >=20
+> > Looking at the binary blob that is generated, the offset for the SPL
+> > phase is missing, so SPL starts at 0x5c0 instead of 0x1000, but
+> > adding offset =3D <0x1000> isn't sufficient.
+> >=20
+> > Adding the offset =3D <0x1000>  starts the SPL phase, but it hangs
+> > right away and doesn't past the version message:
+> > U-Boot SPL 2024.07-rc1-00155-g37e50627ef-dirty (Nov 06 2024 -
+> > 19:16:52 -0600)
+> >=20
+> > <hangs here>
+> >=20
+> > I have only tested this on a Nano, but I think the issue would
+> > likely affect Plus since their boot ROM is similar.  I currently
+> > don't have a Mini in my possession right now, so I cannot verify
+> > the behavior on it. =20
+>=20
+> I think Lukasz was able to reproduce it on Mini. I have a few Mini
+> here, but none of them use FSPI.
+>=20
+> iMX8MP never supported FSPI ?
+>=20
+> >  From what I can tell, reverting this patch appears to restore boot
+> > operation.   I don't know enough about the mkimage tool, but I have
+> > tried changing  nxp,boot-from and that doesn't seem to fix it
+> > either.
+> >=20
+> > When I diff the binaries, it looks like a fairly significant about
+> > of the values have changed, but the various magic numbers and offets
+> > appear correct.  This makes me wonder if setting the offsets being
+> > passed to mkimage are getting in the way.
+> >=20
+> > If remove the references to  CONFIG_FSPI_CONF_HEADER in the device
+> > tree, a regular image is built.  I then use dd to create a new file
+> > which has the FSPI header at 0x400, and moves the beginning of the
+> > rest of the image to 0x1000.  This process boots the board just
+> > fine. This leads me to believe that something in the imx8 mkimage
+> > tool is doing something different when fspi is enabled. =20
+>=20
+> [...]
+>=20
+> > I'd like to rework the binman to build a standard flash.bin without
+> > the Flexspi stuff, then create a second file like fspi.bin (or
+> > something similar) which inserts the FSPI header at 0x400 and then
+> > just places the entirely of flash.bin contents placed at 0x1000 in a
+> > way that doesn't pass these offsets to imx8 mkimage tool. =20
+>=20
+> That looks like a workaround . It would be much better if binman
+> would generate suitable flash.bin blob with FSPI header. Maybe the
+> FSPI header needs to be generated by binman using yet another etype,
+> and the SPL/U-Boot have to be positioned properly according to the
+> binman node content in imx8mm-u-boot.dtsi ?
+>=20
+> (I also have hard time with binman tool)
 
+I've managed to nail down which offsets are shifted by 0x1000. The
+"only" only problem is to add this "fix" to binman... :)
+
+Please refer to below discussion/link:
+https://lore.kernel.org/all/CAFLszTh65OkyXnG3L7XTJFK69EYdj4DZwYGxizu4877n-m=
+Cw-w@mail.gmail.com/T/
+
+
+Best regards,
+
+Lukasz Majewski
+
+--
+
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/JcRZKdV47CFdsmrP9K7Egm6
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmcuOpcACgkQAR8vZIA0
+zr07wQf/WENGRbkFFDzo2D/R+WF4s/twhF0BbO2QTWtRj+ITBNpb0BCsWgvvC94d
+VhJxejcgzhiohOC5JV9+QlBBEIt+4ttIFtCIBfwF1PCtgTBfITIm8SytA9mO2agQ
+dVPfI/T8TR3CersIXkCPdJ5/zC5ix9D0i2FllsMxpFhMJeSkaiNYyT1HJTFVTIxm
+Y8RTepXApQIh5qS5as5zRSQW8nQvqjBOdK0PqZJ8EoXb7kQA2eH9PdDKQTSpow9A
+/7F7pk/KH0USGxpW5we64XyLOZLQjcxC30Qhg7cFs1KzjQrBh5pVkCGjTSZc8fvW
+BWw95J4yKvqRlCiVWw+gR/OOB30L8Q==
+=P4/o
+-----END PGP SIGNATURE-----
+
+--Sig_/JcRZKdV47CFdsmrP9K7Egm6--
