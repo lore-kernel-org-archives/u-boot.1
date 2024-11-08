@@ -4,153 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CD06D5C0C3
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:12:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2E0BD5C0C5
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:49:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C40ED88DF5;
-	Fri,  8 Nov 2024 14:12:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id A2A8588B1F;
+	Fri,  8 Nov 2024 14:49:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="STUy3To1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nsL6yvLb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75CB088D70; Fri,  8 Nov 2024 14:12:49 +0100 (CET)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on2071b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::71b])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 93E8F889DA; Fri,  8 Nov 2024 14:49:56 +0100 (CET)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 882EF8900E
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 14:12:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B20E88B1F
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 14:49:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=baXXpNjp2jUG1jcrRl6M9/i9FciPr9mrJCbzL+Ykls9+gm2/147vj06+/7HV8z6mvBI6uaVXdIlEHAs4JGGU750FwX46I2K2WLL13nujv/IHQHxnTtOo1MSUEMqRuD+Z2wPpP9SPZ9/ipbAIE7HEki0V+AZqbV1HxrRf9HX+sB+Vcgj1D4p6d2OYYadmy6b3DE6gjl+FvHBlh0K/qECcc9JStVUeDaVAqF/1apjLX8Kz2XDQoiieGISrVOPG9M5LTUMRQexG0JVok1yBFiArDtiWE8gJKso3SCg0UKG9pdrsrTV72se9+HP6ph4/4ne5nrcvGX7bPp0BURSd99UzDw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=J5pByIo+35pVuEKQhfhNog+mC8ZfqWZjTRjixSu0y8g=;
- b=LxeVwCAjGw6p3okCw+LeGisfPUyacowPfkRMFN+G9/ACcCud3IabMp/nOAOiGVVjnPULX+f2ZXCJhEv9kZc4hTt2X2KT6S6hPIUe4Yh7w8KF/LNlUrHlHPUP0n/nqBCol8/OeKrPRpj8oLmIZkTyWr99lcKsBAsPjEr6u4gikoVDnAuA0OnpjjKIC9FNo4JICrWd1GL77f95/yMvnGdasxuAZke1jJ/fYYD95JJ+xIk6tsj3kXaqFaYOcjMr1Q62xYZO7Xk2h5KBDJ3+ox+0PO3kzv00U+S8DGadBgk5gUAvVMAsNh90jycbMwBzdTJEqmZCFyKqIn4RdD/d/LbPHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=nxp.com smtp.mailfrom=phytec.de;
- dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
- arc=none (0)
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-7f3f1849849so1560576a12.1
+ for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 05:49:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=phytecmesstechnikgmbh.onmicrosoft.com;
- s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=J5pByIo+35pVuEKQhfhNog+mC8ZfqWZjTRjixSu0y8g=;
- b=STUy3To18Rg4QIYw092Vt8b87AEgjs3ZNrXzdf8YeqDzVsdA9rmZrCKvne6o92TX2AQS2b/Q9YmvxvwNMM/N7REXcfhzDoZfntDYCz3AXkE+JZhW1t/7tbLyrH4Hzm0zcEsxCsEVCEWRZYxKeKvDIPJQQ2DOlOhd7R4u1W3+30Y=
-Received: from DU2PR04CA0347.eurprd04.prod.outlook.com (2603:10a6:10:2b4::27)
- by AM8P195MB0866.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:1ec::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.19; Fri, 8 Nov
- 2024 13:12:45 +0000
-Received: from DU6PEPF0000A7DF.eurprd02.prod.outlook.com
- (2603:10a6:10:2b4:cafe::2) by DU2PR04CA0347.outlook.office365.com
- (2603:10a6:10:2b4::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.20 via Frontend
- Transport; Fri, 8 Nov 2024 13:12:44 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- DU6PEPF0000A7DF.mail.protection.outlook.com (10.167.8.36) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8137.17 via Frontend Transport; Fri, 8 Nov 2024 13:12:44 +0000
-Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 8 Nov 2024
- 14:12:44 +0100
-Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 8 Nov 2024
- 14:12:43 +0100
-Message-ID: <fd6491a8-e76b-479c-b57f-7fb5662f3759@phytec.de>
-Date: Fri, 8 Nov 2024 14:12:42 +0100
+ d=gmail.com; s=20230601; t=1731073793; x=1731678593; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9yNYHPFVpKv1MDUI4fleX67IexhRVaQww6XeKamT6E0=;
+ b=nsL6yvLbvypyrYC9I4ivDGBwWNP1ww+Yl6ih863UHkLMRjIi8IfTNvGUbNMR0FsCSQ
+ RMzwOcVYuS1jCL+c06PoP97utkYGmAnRuDZSlxGTTMOawNi8mosyQDaXUGZred/exTNB
+ rbEgoBVrtzBM7yvClTarBp9FjhM7P3/xw36/bMdsMQluTgBr1auYn2Dz6YZf5ESEzqoh
+ WQW2Esi3m0wZfq7oS3VYjC4GGDTPg4q0AV81I1du8G0r0RDK7uvEViitERhhCbW5mdfe
+ EIbQY4uU5dTAwB7MHj4b8rdj0v9/djfkw55GIgh3vWd6eCqiLOJuH3NZUR/LX/JLjJ1T
+ q9sA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731073793; x=1731678593;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9yNYHPFVpKv1MDUI4fleX67IexhRVaQww6XeKamT6E0=;
+ b=swC+2Hdufa1Jilvl18HXy/L72ziQ86q8Y+bfM/COuWWpX015n6FZ/5BOC7ve81cCPQ
+ F6atIvdyX3b4eK3ewnyPiuyffsz/nIcGEXUl+FadQgivFWItnwHVXF26w/8dSumWG9AX
+ X671+3zSNkWEe/0Okyi/eZMvpIRIWnmt5HDjcpSvgrhGlc+cmAkYGrh5nx1JncSq/H9B
+ oU/dEiNQC4JnoWn5hJ7O/ZqrBU19CKq0e32KUFoXBouubOfTEaS+qZdoa2x0571jqPE1
+ KaSnQKddof6lhL01SN/JbniLuUAGITptmpmVhwp18NfgPC4f3R7lioReJHBNxw4GnBmB
+ J9Sg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVxi8b4VhY1t3byiVpJKzrGtZr85bDxXzTfn+tGs8nrpuraCQ34XIcCNYvQ8WNKRxmz0NGLfVU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzISeGokkUB7n8PcZkWL0Lsp8ahfmTbjO6ZbZ0kFJQhlYKWQa7T
+ uJi4fJjTLz+kiGWTqHI9pNRAmkO4QnZ8mS7KuP3Iw1D5u49KHb7gGVFez67tjvmZlbazjLT0oFs
+ cjrDpkkUvPsfDdatQKIM2Rzc6zWg=
+X-Google-Smtp-Source: AGHT+IFHxgJgLnqbajVJdw2raMEqBUpQC0BIvtioadlxBANfSc6302fneNgILIP5jpDdqAeWDWV/231OD2ae/vcbJ8s=
+X-Received: by 2002:a17:90b:2ec3:b0:2e2:8fb4:502d with SMTP id
+ 98e67ed59e1d1-2e9b1681d9cmr4284600a91.16.1731073792529; Fri, 08 Nov 2024
+ 05:49:52 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [Upstream] [PATCH v2 2/6] phycore-imx8mp_defconfig: add optee
- load address
-To: Yannic Moog <Y.Moog@phytec.de>
-CC: "uboot-imx@nxp.com" <uboot-imx@nxp.com>, "manut@mecka.net"
- <manut@mecka.net>, "trini@konsulko.com" <trini@konsulko.com>,
- "festevam@gmail.com" <festevam@gmail.com>, Yashwanth Varakala
- <Y.Varakala@phytec.de>, PHYTEC Upstream <upstream@lists.phytec.de>,
- "sbabic@denx.de" <sbabic@denx.de>, "tharvey@gateworks.com"
- <tharvey@gateworks.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 References: <20241107-phytec_imx8m_optee-v2-0-bbc3747a60e8@phytec.de>
- <20241107-phytec_imx8m_optee-v2-2-bbc3747a60e8@phytec.de>
- <34054407-c686-4ebc-bd38-77ddc0e89625@phytec.de>
- <98dc43a41ed8f8051b6f33761208766d448bc7b2.camel@phytec.de>
-Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <98dc43a41ed8f8051b6f33761208766d448bc7b2.camel@phytec.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU6PEPF0000A7DF:EE_|AM8P195MB0866:EE_
-X-MS-Office365-Filtering-Correlation-Id: d08fd680-c622-406e-b36b-08dcfff708a2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Sm1GTTRVVkJwOUNOQzlJRzlJNCtDWk90cDQ2bVlEb0l1KzlBUlJlT0RBcC9Y?=
- =?utf-8?B?ZTVrYTF4b25yU0hMLzVVUHpmazJEV1BGY29LbWw1UlVqcnFhUzZ2dVZPT25K?=
- =?utf-8?B?V1V1ZnYyYU1DbWk4MEZZOG05R2lqZjVyS3hQS1BEazNUN3dndW1zQlcrZzlE?=
- =?utf-8?B?MUtKZlAxTEVRd2U4L3l0RlZ5c2t2ZzFhOXdqcHVCek9ka3E3dkdrbit5cUZ0?=
- =?utf-8?B?cFRlaFBwc2ZxQmJGWCtOL1BDY2NqMDVPSjJqTW5wcFhEa2M1NWNrRkFwc0hw?=
- =?utf-8?B?NnU5STA3MC81UDBDbmlZcjBMZTRqaXBiUHU3Nm42SlByQ1dueXI4dnJURUFw?=
- =?utf-8?B?WTRzYytuTnZtaE9oSXNtanZ4cnRTSDdmeG9VelFXenlsY2RxcWlubkw5Ny81?=
- =?utf-8?B?ODBCL0daVTRPZDdKMU5ZYjFxK0ZQSTRrNnNaK3dTaXpaNWU4ZnkxSEI2TTRz?=
- =?utf-8?B?SlkzQlhPcnBGR2c2OGU2alk4TVdMOGE4NnNaOVBYM1VPZXJLL3AwSys3YTB2?=
- =?utf-8?B?aUh6QlhTRkRFSTdLdnlLdVVJeTFEWm5kZTYrRkhrNDg1eG8yZFlPeFZONjlk?=
- =?utf-8?B?RGprdUpkQk9HeWV5OVYvWFJQVnhEN1lpaHBMZzZIWHRXMlNUQTJ4STVobURQ?=
- =?utf-8?B?dTdsMEtPWUlxMGxjckVDa0xwRlpLeVhPZ0RHOCtjVFFxdHhPeG53VmNaWGZK?=
- =?utf-8?B?NEhuYUw0bVVjYityZHlKR2NUSTRBUVhnOFRaN1pnNVNSZWtaWmIwR2x3aWJq?=
- =?utf-8?B?RmdVOVNXUWZ1T1RyZVpxdDJwUzdFZ2QyRTZCYTljTXJMZGl5U1liWVdWOWk5?=
- =?utf-8?B?aXA2T3k2UTNOTmV0Q3QvOVJJVERERE0zdW9KZmJNcGVORktZem5GVW1xNytY?=
- =?utf-8?B?Z0MrUHFZU3hINFc5NWcyMEJDeVRRbGI5WllEd1JiV0w3RmwvbWRFcUEwaTdO?=
- =?utf-8?B?bFBOK1BTR09EbEpXM2NHUVVadk9GdGZCRXBLZVgrSDY5S1ZEZkROMHZvQjcz?=
- =?utf-8?B?bHlQUzRrVFZTUVhjVDZ0TEVNV3hhdWYvY3Y3YnlHdUZ4WEJKNXRqT1gvVU5G?=
- =?utf-8?B?WTNERzFRQjlEdkVYYTA0R2QxeDkrcUNxTld1Nmx3NWZzQWthV05QL25zZ2F4?=
- =?utf-8?B?QXpaMXA2YzE2R0FUNDhpSEZ3UG91Ulp3dGtEZEpGWGJTYmU5RU5oMFE3Tmth?=
- =?utf-8?B?N25aaXRGVlo3ZHpmRnRiZE9icGRlS3N4NUJpOVhsUVNObnpRWEJNTy9yQW1E?=
- =?utf-8?B?NE5HUlB2b3RQSitFVXd5MnoxTzFwVFR0SzhnVU5jalEwWVVraEFOSTViSnVl?=
- =?utf-8?B?NVR1ek5kbHBDQUU5NGNlMFVhMkJTalp4WTVRTmlPclhkZ2hidHN4MEdpZy8w?=
- =?utf-8?B?Smd6WHNRZndyL2QzRTNGRnIrMStMUHlpcHFidGM0eUQ0UWhRV01HMVpjTWla?=
- =?utf-8?B?WC9wc2xLaS9WcWV2M2VZQnBOMjZTeW1acjJvOGlnSVdLS1phait3SE01NGxp?=
- =?utf-8?B?disvNk1pZm5zQmx1T1BRWHhjdy9qU1F0K2k1dWJuenJqbUNUaGd2Y3NlNHgw?=
- =?utf-8?B?RFhqbWYydklXWk1Gc2JzOGZHTlA1Si9YYWEzUlZvNnFTQjRtSEpvMC9xSTdH?=
- =?utf-8?B?NlhpVmRhbkxScGdLMHpiYTM0alNwSnZLaXJnWEFQWHVLdjN4endvcUJ1RjJY?=
- =?utf-8?B?MkZlRE8wNjVpRFl0TlM4MWJVM1hMMFRMTGo1bVNsWG42T3h2SWh5dWd3aUpz?=
- =?utf-8?B?cWZJOFZITDlrOTF4YnRibDNLZDZQZTMyOE9zajRGOXF6M00yTVl5Q1VxTWto?=
- =?utf-8?B?K0JCOURVRUtXNncxb0JYeFdacEFLeGlhUTZ1ZFZPTzFhWTBiRmF5eFgvMTFn?=
- =?utf-8?B?SU1Dbmc4ejMwVmNIQ3VIT1FWOUNSUVRtQ3NuYjhPZWVaOVE9PQ==?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Nov 2024 13:12:44.6028 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d08fd680-c622-406e-b36b-08dcfff708a2
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF0000A7DF.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8P195MB0866
+ <20241107-phytec_imx8m_optee-v2-1-bbc3747a60e8@phytec.de>
+In-Reply-To: <20241107-phytec_imx8m_optee-v2-1-bbc3747a60e8@phytec.de>
+From: Adam Ford <aford173@gmail.com>
+Date: Fri, 8 Nov 2024 07:49:40 -0600
+Message-ID: <CAHCN7x+2XzhyERLmAaO-PVwkT6K_rcQgG-+xgTX8HaqstdZyOQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/6] arm: imx8m: add OP-TEE node
+To: Yannic Moog <y.moog@phytec.de>
+Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Manuel Traut <manut@mecka.net>, 
+ Benjamin Hahn <b.hahn@phytec.de>, Teresa Remmet <t.remmet@phytec.de>, 
+ Yashwanth Varakala <y.varakala@phytec.de>, u-boot@lists.denx.de,
+ upstream@lists.phytec.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,57 +95,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Nov 7, 2024 at 2:42=E2=80=AFAM Yannic Moog <y.moog@phytec.de> wrote=
+:
+>
+> Add tee node in SoC u-boot device trees. Use a kconfig entry to specify
+> load and entry addresses for the op-tee image in the respective
+> defconfig.
+>
+> Signed-off-by: Yannic Moog <y.moog@phytec.de>
+> ---
+>  arch/arm/dts/imx8mm-u-boot.dtsi | 17 ++++++++++++++++-
+>  arch/arm/dts/imx8mn-u-boot.dtsi | 17 ++++++++++++++++-
+>  arch/arm/dts/imx8mp-u-boot.dtsi | 17 ++++++++++++++++-
+>  arch/arm/mach-imx/imx8m/Kconfig |  8 ++++++++
+>  4 files changed, 56 insertions(+), 3 deletions(-)
+>
+> diff --git a/arch/arm/dts/imx8mm-u-boot.dtsi b/arch/arm/dts/imx8mm-u-boot=
+.dtsi
+> index d31bc822532..ecc2319279e 100644
+> --- a/arch/arm/dts/imx8mm-u-boot.dtsi
+> +++ b/arch/arm/dts/imx8mm-u-boot.dtsi
+> @@ -164,6 +164,21 @@
+>                                         };
+>  #endif
+>
+> +                                       tee: tee {
+> +                                               description =3D "OP-TEE";
+> +                                               type =3D "tee";
+> +                                               arch =3D "arm64";
+> +                                               compression =3D "none";
+> +                                               os =3D "tee";
+> +                                               load =3D <CONFIG_IMX8M_OP=
+TEE_LOAD_ADDR>;
+> +                                               entry =3D <CONFIG_IMX8M_O=
+PTEE_LOAD_ADDR>;
+> +
+> +                                               tee-os {
+> +                                                       filename =3D "tee=
+.bin";
+> +                                                       optional;
+> +                                               };
+> +                                       };
+> +
+>                                         binman_fip: fip {
+>                                                 arch =3D "arm64";
+>                                                 compression =3D "none";
+> @@ -192,7 +207,7 @@
+>                                                 fdt =3D "fdt-SEQ";
+>                                                 firmware =3D "uboot";
+>  #ifndef CONFIG_ARMV8_PSCI
+> -                                               loadables =3D "atf";
+> +                                               loadables =3D "atf", "tee=
+";
+>  #endif
+>                                         };
+>                                 };
+> diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot=
+.dtsi
+> index 6875c6d44ff..f9108cb75c7 100644
+> --- a/arch/arm/dts/imx8mn-u-boot.dtsi
+> +++ b/arch/arm/dts/imx8mn-u-boot.dtsi
+> @@ -235,6 +235,21 @@
+>                                         };
+>  #endif
+>
+> +                                       tee: tee {
+> +                                               description =3D "OP-TEE";
+> +                                               type =3D "tee";
+> +                                               arch =3D "arm64";
+> +                                               compression =3D "none";
+> +                                               os =3D "tee";
+> +                                               load =3D <CONFIG_IMX8M_OP=
+TEE_LOAD_ADDR>;
+> +                                               entry =3D <CONFIG_IMX8M_O=
+PTEE_LOAD_ADDR>;
+> +
+> +                                               tee-os {
+> +                                                       filename =3D "tee=
+.bin";
+> +                                                       optional;
+> +                                               };
+> +                                       };
+> +
+>                                         binman_fip: fip {
+>                                                 arch =3D "arm64";
+>                                                 compression =3D "none";
+> @@ -263,7 +278,7 @@
+>                                                 fdt =3D "fdt-SEQ";
+>                                                 firmware =3D "uboot";
+>  #ifndef CONFIG_ARMV8_PSCI
+> -                                               loadables =3D "atf";
+> +                                               loadables =3D "atf", "tee=
+";
+>  #endif
+>                                         };
+>                                 };
+> diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot=
+.dtsi
+> index 56749ccacd2..9ede98a11e4 100644
+> --- a/arch/arm/dts/imx8mp-u-boot.dtsi
+> +++ b/arch/arm/dts/imx8mp-u-boot.dtsi
+> @@ -185,6 +185,21 @@
+>                                         };
+>  #endif
+>
+> +                                       tee: tee {
+> +                                               description =3D "OP-TEE";
+> +                                               type =3D "tee";
+> +                                               arch =3D "arm64";
+> +                                               compression =3D "none";
+> +                                               os =3D "tee";
+> +                                               load =3D <CONFIG_IMX8M_OP=
+TEE_LOAD_ADDR>;
+> +                                               entry =3D <CONFIG_IMX8M_O=
+PTEE_LOAD_ADDR>;
+> +
+> +                                               tee-os {
+> +                                                       filename =3D "tee=
+.bin";
+> +                                                       optional;
+> +                                               };
+> +                                       };
+> +
+>                                         @fdt-SEQ {
+>                                                 description =3D "NAME";
+>                                                 type =3D "flat_dt";
+> @@ -204,7 +219,7 @@
+>                                                 fdt =3D "fdt-SEQ";
+>                                                 firmware =3D "uboot";
+>  #ifndef CONFIG_ARMV8_PSCI
+> -                                               loadables =3D "atf";
+> +                                               loadables =3D "atf", "tee=
+";
+>  #endif
+>                                         };
+>                                 };
+> diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kc=
+onfig
+> index b254a50b091..14f14db6a35 100644
+> --- a/arch/arm/mach-imx/imx8m/Kconfig
+> +++ b/arch/arm/mach-imx/imx8m/Kconfig
+> @@ -37,6 +37,14 @@ config SYS_HAS_ARMV8_SECURE_BASE
+>           If enabled, please also define the value for ARMV8_SECURE_BASE,
+>           for i.MX8M, it could be some address in OCRAM.
+>
+> +config IMX8M_OPTEE_LOAD_ADDR
+> +       hex "Load address of OPTEE image"
+> +       default 0x56000000
+> +       help
+> +         The load and entry address for the OPTEE image. This value defa=
+ults to
+> +         0x56000000 if not provided in the board defconfig file.
 
-
-Am 08.11.24 um 13:55 schrieb Yannic Moog:
-> Hi Wadim,
-> 
-> On Thu, 2024-11-07 at 09:52 +0100, Wadim Egorov wrote:
->> Hi Yannic,
->>
->> Am 07.11.24 um 09:23 schrieb Yannic Moog:
->>> The phyBOARD-Pollux expects 0x56000000 address to load optee.
->>
->> You are already defining a default for IMX8M_OPTEE_LOAD_ADDR in the
->> mach-imx Kconf. You can drop the patches touching the defconfigs.
-> 
-> I would like to keep these patches as the default value is "only" there to get a functioning build.
-> To me it would seem there has been no thought put in to what the actual correct value would be if
-> left as default. Does that make sense?
-
-Yes, this makes sense. Up to you, it was just a hint.
-
-Well, it will become de facto standard if you put a default value into 
-the Kconfig regardless if there has been no thoughts on the best 
-location for it. Other boards will probably just follow and reuse it anyway.
-
-
-> 
-> Yannic
-> 
->>
->> Regards,
->> Wadim
->>
->>>
->>> Signed-off-by: Yannic Moog <y.moog@phytec.de>
->>> ---
->>>    configs/phycore-imx8mp_defconfig | 1 +
->>>    1 file changed, 1 insertion(+)
->>>
->>> diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
->>> index 1240c7fcbd0..910109afd80 100644
->>> --- a/configs/phycore-imx8mp_defconfig
->>> +++ b/configs/phycore-imx8mp_defconfig
->>> @@ -5,6 +5,7 @@ CONFIG_SYS_MALLOC_LEN=0x2000000
->>>    CONFIG_SPL_GPIO=y
->>>    CONFIG_SPL_LIBCOMMON_SUPPORT=y
->>>    CONFIG_SPL_LIBGENERIC_SUPPORT=y
->>> +CONFIG_IMX8M_OPTEE_LOAD_ADDR=0x56000000
->>>    CONFIG_PHYTEC_SOM_DETECTION=y
->>>    CONFIG_SF_DEFAULT_SPEED=80000000
->>>    CONFIG_ENV_SIZE=0x10000
->>>
->>
-> 
-
+I think this would need to vary based on the platform.  I think the
+addresses may be different depending on Mini, Nano and Plus and also
+dependent on the available SDRAM.
+> +
+> +
+>  choice
+>         prompt "NXP i.MX8M board select"
+>         optional
+>
+> --
+> 2.43.0
+>
