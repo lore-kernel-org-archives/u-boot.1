@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA6FD5E12D
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 05:23:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EFCFD5E12D
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 05:23:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2794388FC8;
+	by phobos.denx.de (Postfix) with ESMTP id 7D9AE89082;
 	Fri,  8 Nov 2024 06:22:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1731043322;
-	bh=px8EvZHJpPbhByc2E0dVFcxHXpSZ6QTTHCAJrPsNRs0=;
+	bh=MeVWMA4dY5W1hxkDFyaUtLTezPvNUcfVYVZJN4bHXzk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xfd2JYmdU2a+L58dQji9m9d0/mEBVH8QyGuAJOg+9YC5xYiFeGKAIJDGQ1usCytHw
-	 A65YMuA+DDIq2IPcQoyanOwnBii8wcJ0bOpCq337ajjAwCjVKr2BwYtiE5+776WV3P
-	 5JBBjRUhKnkUFnwojDggodUM3+KH3uNWCeH5A6l5mbEuRNOQkTE7vKO9FjfPd1Td32
-	 tV8sRW6TnM/KIkbY3cNmHK6m9bQjXQfkQGIpyvlRahuVNE1plZZqfxGwGuN+i9ziS9
-	 0kUhr2TzmTQe79vN1WHIUfLqn8BT57nn29+TkiBMSbG1FgzWSKcnXeJfB6AGIyRgls
-	 8tXKYYsAMItYQ==
+	b=yC1kHZQlgPuFN0VubhBGlKUUTEFiKiuN8HiVZ5ckgV1KJS8tFdN4uUxNcv5BkKW1V
+	 wprpKgeyd1SV+ikGzT2hUpJQocWlAkJzgcWU7BIARXocJ8XIqCqDpCPG16Z6APo/tl
+	 AI74JhUX2EBjSfRDfHJ9Q6eO6BLMpPAcXu+BpHkHySimPbhKbXivHiNbItTIL+LBV6
+	 MezsBSr0nZs3cMxIAvjsrnmNJ1viRmEbe+nRqmyqGtYr/iv5lu1p+G5kgElMrUB8ZZ
+	 BF+lnmf1uHqkYUI+sAowz7/6BTuJlDyThpVuj+XO/8Qzp/ts+aKE7y8v2L3y9H6BgR
+	 ze8sKRlqH60Cg==
 Received: from localhost.localdomain (87-97-112-21.pool.digikabel.hu
  [87.97.112.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3CCA188EEA;
+ by phobos.denx.de (Postfix) with ESMTPSA id 003C988E3C;
  Fri,  8 Nov 2024 06:21:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1731043319;
- bh=px8EvZHJpPbhByc2E0dVFcxHXpSZ6QTTHCAJrPsNRs0=;
+ s=phobos-20191101; t=1731043320;
+ bh=MeVWMA4dY5W1hxkDFyaUtLTezPvNUcfVYVZJN4bHXzk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=C/OR2MADit5zK+PI6k720HWwQTQzPvYEGpbboaz/bqCittO3DxcOnfBy5jk0b2N2o
- df53idoNNMLzQgFjc7rkloFxEp6EaeureXb9Fvsrg5f8kflDvUvkdYCQYMbsXZyCg8
- SnUyk3tnEMJvJlGp2ImRsA0RGlRI1AQ64diIgtaYZ/y4rq09d8+VKSMH1k/vgwK7CL
- uZOOMTOzxd40aelfEmVvM4qD7IpASO4qmHqpgK7L2F7tyDkXxjsHkpu4a6xVuolD9Y
- kQA/wvGtzbgN8TyRdotbgCbt9+nmbzpYUKVIbmkwVJLNrhyNeTTv38PlzzyXvvzJ9a
- 1X/7rxl3Op5uQ==
+ b=A0pBX9RWg+HNWjwtxM8UCd5TqkADg/8rtylZzZtZBk8RHn2C+t8bI6Gx478q9IPHh
+ 4q4u5tytpIh0lF4tYhCf1K/Eks9+/3DgUzgOIze3MMK4GCvUwBcKWDnb81kjAQACC8
+ RDZQea14ceqUKFoRLEEguHDW8+3hLnqTpNOW17Pl5LXATJzn9Kh3yXb6dd5mZp952q
+ ZGztC95GsdwQKOLUDx8Y43tRwDIQjx8+ozqtcs1vRotC2d5DfJpjCosnqTxmKB9f+Z
+ LBktUtE670RsYc3Gm/NhhkQ5WPqJJnImU2a5HcqPt4VOHb/pint5rW3WL9L9Y+Xdwj
+ 3slrufPjzyYrw==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Enrico Leto <enrico.leto@siemens.com>,
@@ -46,9 +46,9 @@ Cc: Enrico Leto <enrico.leto@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Heiko Schocher <hs@denx.de>, Anatolij Gustschin <agust@denx.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 09/22] siemens: imximage.cfg: correct comment
-Date: Fri,  8 Nov 2024 06:21:30 +0100
-Message-Id: <20241108052143.26874-10-hs@denx.de>
+Subject: [PATCH v1 10/22] siemens: imximage.cfg: sync image names
+Date: Fri,  8 Nov 2024 06:21:31 +0100
+Message-Id: <20241108052143.26874-11-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241108052143.26874-1-hs@denx.de>
 References: <20241108052143.26874-1-hs@denx.de>
@@ -70,25 +70,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-fix wrong comment.
+sync the image names in imximage.cfg with
+the ones used in arch/arm/dts/imx8qxp-u-boot.dtsi
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
 ---
 
- board/siemens/capricorn/imximage.cfg | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ board/siemens/capricorn/imximage.cfg | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
 diff --git a/board/siemens/capricorn/imximage.cfg b/board/siemens/capricorn/imximage.cfg
-index e45f2c9589e..f73c5a7a9b0 100644
+index f73c5a7a9b0..7fd3fb8b72e 100644
 --- a/board/siemens/capricorn/imximage.cfg
 +++ b/board/siemens/capricorn/imximage.cfg
-@@ -21,5 +21,6 @@ APPEND ahab-container.img
+@@ -15,12 +15,18 @@ DCD_SKIP true
+ 
+ /* SoC type IMX8QX */
+ SOC_TYPE IMX8QX
+-/* Append seco container image */
+-APPEND ahab-container.img
++/*
++ * Append seco container image,
++ * use same name as in arch/arm/dts/imx8qxp-u-boot.dtsi
++ */
++APPEND mx8qxc0-ahab-container.img
+ /* Create the 2nd container */
  CONTAINER
- /* Add scfw image with exec attribute */
- IMAGE SCU capricorn-scfw-tcm.bin
--/* Add ATF image with exec attribute */
-+
-+/* Add SPL image with exec attribute */
+-/* Add scfw image with exec attribute */
+-IMAGE SCU capricorn-scfw-tcm.bin
++/*
++ * Add scfw image with exec attribute
++ * use same name as in arch/arm/dts/imx8qxp-u-boot.dtsi
++ */
++IMAGE SCU mx8qx-mek-scfw-tcm.bin
+ 
+ /* Add SPL image with exec attribute */
  IMAGE A35 spl/u-boot-spl.bin 0x00100000
 -- 
 2.20.1
