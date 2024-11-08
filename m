@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2E0BD5C0C5
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:49:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE7FAD5C0C9
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:50:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2A8588B1F;
-	Fri,  8 Nov 2024 14:49:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 168DA8907E;
+	Fri,  8 Nov 2024 14:50:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nsL6yvLb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bv4ev2Mb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93E8F889DA; Fri,  8 Nov 2024 14:49:56 +0100 (CET)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id 28B6C890AD; Fri,  8 Nov 2024 14:50:52 +0100 (CET)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B20E88B1F
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 14:49:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3ED7388B1F
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 14:50:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-7f3f1849849so1560576a12.1
- for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 05:49:54 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-53c78ebe580so3358747e87.1
+ for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 05:50:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731073793; x=1731678593; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731073849; x=1731678649; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9yNYHPFVpKv1MDUI4fleX67IexhRVaQww6XeKamT6E0=;
- b=nsL6yvLbvypyrYC9I4ivDGBwWNP1ww+Yl6ih863UHkLMRjIi8IfTNvGUbNMR0FsCSQ
- RMzwOcVYuS1jCL+c06PoP97utkYGmAnRuDZSlxGTTMOawNi8mosyQDaXUGZred/exTNB
- rbEgoBVrtzBM7yvClTarBp9FjhM7P3/xw36/bMdsMQluTgBr1auYn2Dz6YZf5ESEzqoh
- WQW2Esi3m0wZfq7oS3VYjC4GGDTPg4q0AV81I1du8G0r0RDK7uvEViitERhhCbW5mdfe
- EIbQY4uU5dTAwB7MHj4b8rdj0v9/djfkw55GIgh3vWd6eCqiLOJuH3NZUR/LX/JLjJ1T
- q9sA==
+ bh=8bes1HS07N6dO5cSP9+y8ncn0NuA+U2oCQdE0tHeqUE=;
+ b=bv4ev2Mb/2DtVygKd1duNXGBG4sTa6s1KhBWLKq3XX5SyBdNWwet/enT895nH/47EQ
+ 0VP1yMPDJhm+LRdyH5MJsu7tLgON96fRcSnp2IqRpTzqEhRLXJNglB9YsAA9T/sEoWaR
+ eUarITu9TIaqG48++A9lSs7hsYgvcBr/zVzRbJlBPgJHoLxWu2pMWy4MoUZQTmUOV8bv
+ 9OxNgvAOZ4dDFlDQjbhYAoDkEgDC7aHYPrzAjnSTOJ1h9fyLrY1sCU9GVr5dFyBriitM
+ 5expOyCrVD0A28LSHQUqlvNlJpS7xRJSma56NDTho0/9IoYVHiD3C1p9PPaUPHV9ruEC
+ 5zJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731073793; x=1731678593;
+ d=1e100.net; s=20230601; t=1731073849; x=1731678649;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9yNYHPFVpKv1MDUI4fleX67IexhRVaQww6XeKamT6E0=;
- b=swC+2Hdufa1Jilvl18HXy/L72ziQ86q8Y+bfM/COuWWpX015n6FZ/5BOC7ve81cCPQ
- F6atIvdyX3b4eK3ewnyPiuyffsz/nIcGEXUl+FadQgivFWItnwHVXF26w/8dSumWG9AX
- X671+3zSNkWEe/0Okyi/eZMvpIRIWnmt5HDjcpSvgrhGlc+cmAkYGrh5nx1JncSq/H9B
- oU/dEiNQC4JnoWn5hJ7O/ZqrBU19CKq0e32KUFoXBouubOfTEaS+qZdoa2x0571jqPE1
- KaSnQKddof6lhL01SN/JbniLuUAGITptmpmVhwp18NfgPC4f3R7lioReJHBNxw4GnBmB
- J9Sg==
+ bh=8bes1HS07N6dO5cSP9+y8ncn0NuA+U2oCQdE0tHeqUE=;
+ b=OL+7neZgiUmqDGRq07OuWEfTI3HR1Wf5xnrZ/UoY2zDkgitbC7jikSQ5VzxqW7sWPV
+ hozdyQKsA1dFqnOpkIVToGBc9ipS1RZv0Q3uWd3lgVVIa6Vz6idSl854OvgzJg/LlZt5
+ UC9lm5eCqaQoiUCVVQU/Z6DPAswSmXRGvoJzzot9y8BoMSwlXGWyuIondiWP7ZdRpBwC
+ wsf/m470csHYpBV0iLZYvPk6iE+RySrIVcZC/MKoOmZ16IcBV7/9/sDsn+f95/TOtrAM
+ NQ/MYY3VAeI03jqxrV4fqSdD7YjbL2IRjjXncyH6narqlE6OvRRp8BnIfyPfji94fPrb
+ dOqg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxi8b4VhY1t3byiVpJKzrGtZr85bDxXzTfn+tGs8nrpuraCQ34XIcCNYvQ8WNKRxmz0NGLfVU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzISeGokkUB7n8PcZkWL0Lsp8ahfmTbjO6ZbZ0kFJQhlYKWQa7T
- uJi4fJjTLz+kiGWTqHI9pNRAmkO4QnZ8mS7KuP3Iw1D5u49KHb7gGVFez67tjvmZlbazjLT0oFs
- cjrDpkkUvPsfDdatQKIM2Rzc6zWg=
-X-Google-Smtp-Source: AGHT+IFHxgJgLnqbajVJdw2raMEqBUpQC0BIvtioadlxBANfSc6302fneNgILIP5jpDdqAeWDWV/231OD2ae/vcbJ8s=
-X-Received: by 2002:a17:90b:2ec3:b0:2e2:8fb4:502d with SMTP id
- 98e67ed59e1d1-2e9b1681d9cmr4284600a91.16.1731073792529; Fri, 08 Nov 2024
- 05:49:52 -0800 (PST)
+ AJvYcCUpElXuVH9WQcGpGeJecY+fRTEIyew1eBHABNVJDtWMQGGegYtQxjDoLJG7Guz2yRy5S4jbN0s=@lists.denx.de
+X-Gm-Message-State: AOJu0YwKHVlK5n5D5xqfprDRY4E7zh06n5/y436Y+1QQX6tGUTAy+JhH
+ LGHJLY+dqecGloKukmb2ygJLqYbKLRzaUUqPezhZuB1/kaeFqVuQYgvZWSvAcLDnxKAgrmlDRoq
+ RCiiXI8w59oF7fPCpLIDcdLt4lK8=
+X-Google-Smtp-Source: AGHT+IGI9zN+/4ORsEOphmWhRlHcsOkVZCx2frwL9B25DBgef74GS4K9jaLuSaLznvx2vDuA1xncK/XSO0WmOS9PA9M=
+X-Received: by 2002:a2e:a58a:0:b0:2f7:5ca2:6d10 with SMTP id
+ 38308e7fff4ca-2ff209deb79mr10908391fa.15.1731073849189; Fri, 08 Nov 2024
+ 05:50:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20241107-phytec_imx8m_optee-v2-0-bbc3747a60e8@phytec.de>
- <20241107-phytec_imx8m_optee-v2-1-bbc3747a60e8@phytec.de>
-In-Reply-To: <20241107-phytec_imx8m_optee-v2-1-bbc3747a60e8@phytec.de>
-From: Adam Ford <aford173@gmail.com>
-Date: Fri, 8 Nov 2024 07:49:40 -0600
-Message-ID: <CAHCN7x+2XzhyERLmAaO-PVwkT6K_rcQgG-+xgTX8HaqstdZyOQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/6] arm: imx8m: add OP-TEE node
-To: Yannic Moog <y.moog@phytec.de>
-Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, 
- Tim Harvey <tharvey@gateworks.com>, Manuel Traut <manut@mecka.net>, 
- Benjamin Hahn <b.hahn@phytec.de>, Teresa Remmet <t.remmet@phytec.de>, 
- Yashwanth Varakala <y.varakala@phytec.de>, u-boot@lists.denx.de,
- upstream@lists.phytec.de
+References: <20241108111052.4-1-ian.ray@gehealthcare.com>
+ <20241108111052.4-2-ian.ray@gehealthcare.com>
+In-Reply-To: <20241108111052.4-2-ian.ray@gehealthcare.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 8 Nov 2024 10:50:38 -0300
+Message-ID: <CAOMZO5CPT1o6Fba1HNLoAXdFrKNSRczmdRVTuBs+eS_DikcvBQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] arm: mach-imx: imx8m: re-use SNVS init routine
+To: Ian Ray <ian.ray@gehealthcare.com>
+Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,167 +91,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 7, 2024 at 2:42=E2=80=AFAM Yannic Moog <y.moog@phytec.de> wrote=
-:
+On Fri, Nov 8, 2024 at 8:11=E2=80=AFAM Ian Ray <ian.ray@gehealthcare.com> w=
+rote:
 >
-> Add tee node in SoC u-boot device trees. Use a kconfig entry to specify
-> load and entry addresses for the op-tee image in the respective
-> defconfig.
->
-> Signed-off-by: Yannic Moog <y.moog@phytec.de>
-> ---
->  arch/arm/dts/imx8mm-u-boot.dtsi | 17 ++++++++++++++++-
->  arch/arm/dts/imx8mn-u-boot.dtsi | 17 ++++++++++++++++-
->  arch/arm/dts/imx8mp-u-boot.dtsi | 17 ++++++++++++++++-
->  arch/arm/mach-imx/imx8m/Kconfig |  8 ++++++++
->  4 files changed, 56 insertions(+), 3 deletions(-)
->
-> diff --git a/arch/arm/dts/imx8mm-u-boot.dtsi b/arch/arm/dts/imx8mm-u-boot=
-.dtsi
-> index d31bc822532..ecc2319279e 100644
-> --- a/arch/arm/dts/imx8mm-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mm-u-boot.dtsi
-> @@ -164,6 +164,21 @@
->                                         };
->  #endif
->
-> +                                       tee: tee {
-> +                                               description =3D "OP-TEE";
-> +                                               type =3D "tee";
-> +                                               arch =3D "arm64";
-> +                                               compression =3D "none";
-> +                                               os =3D "tee";
-> +                                               load =3D <CONFIG_IMX8M_OP=
-TEE_LOAD_ADDR>;
-> +                                               entry =3D <CONFIG_IMX8M_O=
-PTEE_LOAD_ADDR>;
-> +
-> +                                               tee-os {
-> +                                                       filename =3D "tee=
-.bin";
-> +                                                       optional;
-> +                                               };
-> +                                       };
-> +
->                                         binman_fip: fip {
->                                                 arch =3D "arm64";
->                                                 compression =3D "none";
-> @@ -192,7 +207,7 @@
->                                                 fdt =3D "fdt-SEQ";
->                                                 firmware =3D "uboot";
->  #ifndef CONFIG_ARMV8_PSCI
-> -                                               loadables =3D "atf";
-> +                                               loadables =3D "atf", "tee=
-";
->  #endif
->                                         };
->                                 };
-> diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot=
-.dtsi
-> index 6875c6d44ff..f9108cb75c7 100644
-> --- a/arch/arm/dts/imx8mn-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mn-u-boot.dtsi
-> @@ -235,6 +235,21 @@
->                                         };
->  #endif
->
-> +                                       tee: tee {
-> +                                               description =3D "OP-TEE";
-> +                                               type =3D "tee";
-> +                                               arch =3D "arm64";
-> +                                               compression =3D "none";
-> +                                               os =3D "tee";
-> +                                               load =3D <CONFIG_IMX8M_OP=
-TEE_LOAD_ADDR>;
-> +                                               entry =3D <CONFIG_IMX8M_O=
-PTEE_LOAD_ADDR>;
-> +
-> +                                               tee-os {
-> +                                                       filename =3D "tee=
-.bin";
-> +                                                       optional;
-> +                                               };
-> +                                       };
-> +
->                                         binman_fip: fip {
->                                                 arch =3D "arm64";
->                                                 compression =3D "none";
-> @@ -263,7 +278,7 @@
->                                                 fdt =3D "fdt-SEQ";
->                                                 firmware =3D "uboot";
->  #ifndef CONFIG_ARMV8_PSCI
-> -                                               loadables =3D "atf";
-> +                                               loadables =3D "atf", "tee=
-";
->  #endif
->                                         };
->                                 };
-> diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot=
-.dtsi
-> index 56749ccacd2..9ede98a11e4 100644
-> --- a/arch/arm/dts/imx8mp-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mp-u-boot.dtsi
-> @@ -185,6 +185,21 @@
->                                         };
->  #endif
->
-> +                                       tee: tee {
-> +                                               description =3D "OP-TEE";
-> +                                               type =3D "tee";
-> +                                               arch =3D "arm64";
-> +                                               compression =3D "none";
-> +                                               os =3D "tee";
-> +                                               load =3D <CONFIG_IMX8M_OP=
-TEE_LOAD_ADDR>;
-> +                                               entry =3D <CONFIG_IMX8M_O=
-PTEE_LOAD_ADDR>;
-> +
-> +                                               tee-os {
-> +                                                       filename =3D "tee=
-.bin";
-> +                                                       optional;
-> +                                               };
-> +                                       };
-> +
->                                         @fdt-SEQ {
->                                                 description =3D "NAME";
->                                                 type =3D "flat_dt";
-> @@ -204,7 +219,7 @@
->                                                 fdt =3D "fdt-SEQ";
->                                                 firmware =3D "uboot";
->  #ifndef CONFIG_ARMV8_PSCI
-> -                                               loadables =3D "atf";
-> +                                               loadables =3D "atf", "tee=
-";
->  #endif
->                                         };
->                                 };
-> diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kc=
-onfig
-> index b254a50b091..14f14db6a35 100644
-> --- a/arch/arm/mach-imx/imx8m/Kconfig
-> +++ b/arch/arm/mach-imx/imx8m/Kconfig
-> @@ -37,6 +37,14 @@ config SYS_HAS_ARMV8_SECURE_BASE
->           If enabled, please also define the value for ARMV8_SECURE_BASE,
->           for i.MX8M, it could be some address in OCRAM.
->
-> +config IMX8M_OPTEE_LOAD_ADDR
-> +       hex "Load address of OPTEE image"
-> +       default 0x56000000
-> +       help
-> +         The load and entry address for the OPTEE image. This value defa=
-ults to
-> +         0x56000000 if not provided in the board defconfig file.
+> Allow unpriv access to SNVS LP for imx8m and imx8mp.
 
-I think this would need to vary based on the platform.  I think the
-addresses may be different depending on Mini, Nano and Plus and also
-dependent on the available SDRAM.
-> +
-> +
->  choice
->         prompt "NXP i.MX8M board select"
->         optional
->
-> --
-> 2.43.0
->
+Please expand the commit log and include the rationale/usecase.
+
+Explain why you need to allow unprivileged access to SNVS LP.
