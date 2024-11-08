@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11CE5D5E12D
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 05:24:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDDA1D5E12D
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 05:24:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6664389221;
-	Fri,  8 Nov 2024 06:22:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 00E4189235;
+	Fri,  8 Nov 2024 06:22:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731043328;
-	bh=+E8z6YVZNtMaEMjGM3qDrYIPNgjH1FykNqF+oM9Mq0Y=;
+	s=phobos-20191101; t=1731043329;
+	bh=kx91WIzjZenScg55sVzP/qbT2rRQ6Scp4HzKWOslLIs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=hiaLlOtlPFyv8/bMjwY6tOmQEoSFSZDYlYaSF99fFhLq8n385BNjyqE9vZg4vC+3U
-	 GOEqIdHaRsJFNexmficDz1uM7QRij/JemRHpQMVNafNyLxMhp9DCt/Axpoif1/EVUA
-	 l+KS0MDMZfWXaZ5ds4Verys5xLM0Wi4R9r8AKM2iC+SARanFQEu8dXl2lHnznB6Iek
-	 WyzPIFG0J4YSUPW2dSbdq0KgALtlrktGXOTYg+ooqdFUyd4Hon1+9A3h+D78IW7IBJ
-	 x5KbxShhzMnHncyKml2Yh23OIKrP9UziC1abGeKn7VE/ZfYso/WVFXguyCmNeR2tj2
-	 He5JJfrX6cxMQ==
+	b=0LrkicnYP8pvMNIIMlFhPIHMIouvMj2SL6tomVX6/DiTEX5ePEa35MEPpTmGzTY1Y
+	 fb+8nTfXtaKtgfkBQ5NCAtyF9gtfnF21Gow4C4JuesnUDo6weMW0CeUPNVlf4IkV0t
+	 shOKmHl0brdrSJEstadJfa1HeEZQYycKb/qCDm2VD0Yp/YIDbSaCcCFg4bQtZdSwlB
+	 UB1S58g2Pfr0ZZiucGILgRYnbILFekfWbb9EXPjxvKeA+USrhVMzRwHEIpAwVdYevk
+	 RnPKkzDlvUqNjOg1TjJR+CEOFLUcZF3WkqmY8qqAIixmIW0THeMfWL/vrI1Kqt7VZN
+	 EePtmxD5g6h0A==
 Received: from localhost.localdomain (87-97-112-21.pool.digikabel.hu
  [87.97.112.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 5B2A48909B;
- Fri,  8 Nov 2024 06:22:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 43A47891BC;
+ Fri,  8 Nov 2024 06:22:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1731043325;
- bh=+E8z6YVZNtMaEMjGM3qDrYIPNgjH1FykNqF+oM9Mq0Y=;
+ bh=kx91WIzjZenScg55sVzP/qbT2rRQ6Scp4HzKWOslLIs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=vqHikNB7mVcOCYaWj4fqvpy9kjM8PuaXIc5i7pyOJCZHobrSr4MT+jDCzcBgFZ/0t
- oq1QnVBldoLl8i5+1vrg7Q3YTdXoXwZREeYzF2KmCBJBVcVTeGFrD+ChyV8xAgf6l/
- j6PpK4hS5Sgs3n1Qo7m2NmYH1LzlAJfj2/4gqf/hQWeu9+5LKWM3mBL1op036FHc/1
- lLki4IAvtEW0fNtv5VKDfgJ+7Ze3COdyRn2QVfnHjqkgvE5zmNW705JcgKMCVNB4Bz
- xI9dCFxELSyNmFZ0ciW/uP71Gw+/hJ5H4ylpoIaMajTigFv76dhXQ1zrJNkungoiPx
- i4ZlPgqMuzHOw==
+ b=zprSS9uRcSXnTsf3LNeFdzHhG/xAQA+RUA3H2Z/KjScySJGqgUC3YJFBkcUh4tRPW
+ /sKJ6ficJfVPZK+qzIvPCpv8jD8V9YEaboMuGaIJUZXbp2e1PJCqaNLbHR2IlUlaWm
+ JwQ+5qkrDR67RBifDyzc+h2sZvrwyZi4Ks0AP1r7FGjo9R/mCzMb4BrC4fsQn/LOw/
+ jslltmm7V0TnZ3XTV+U4fsKzcCpJ+zCIMnAvIDSsdYgs1yYEv/6fCPDx1hBfP/R5xD
+ oM/fRnz5+0a8FQU1lRF7LHE2pGoQwvXiIKh/WuAOXxpybrgyhrR8eXxNWwpqkSo2el
+ lsJpi7bgSXz2w==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Enrico Leto <enrico.leto@siemens.com>,
  Walter Schweizer <walter.schweizer@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Heiko Schocher <hs@denx.de>, Anatolij Gustschin <agust@denx.de>,
- Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Stefano Babic <sbabic@denx.de>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 15/22] siemens: imx8-capricorn.dtsi: small adaptions
-Date: Fri,  8 Nov 2024 06:21:36 +0100
-Message-Id: <20241108052143.26874-16-hs@denx.de>
+Subject: [PATCH v1 16/22] siemens: capricorn: board.c fixes
+Date: Fri,  8 Nov 2024 06:21:37 +0100
+Message-Id: <20241108052143.26874-17-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241108052143.26874-1-hs@denx.de>
 References: <20241108052143.26874-1-hs@denx.de>
@@ -72,42 +72,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-- remove DMA for console
-- add wdt device
+show build_info and only init uart2.
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
 ---
 
- arch/arm/dts/imx8-capricorn.dtsi | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ board/siemens/capricorn/board.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/dts/imx8-capricorn.dtsi b/arch/arm/dts/imx8-capricorn.dtsi
-index 4918bf8f567..f6f9dc7df19 100644
---- a/arch/arm/dts/imx8-capricorn.dtsi
-+++ b/arch/arm/dts/imx8-capricorn.dtsi
-@@ -17,6 +17,22 @@
- 		stdout-path = &lpuart2;
- 	};
+diff --git a/board/siemens/capricorn/board.c b/board/siemens/capricorn/board.c
+index ad474d9baa0..99681d68c3f 100644
+--- a/board/siemens/capricorn/board.c
++++ b/board/siemens/capricorn/board.c
+@@ -63,8 +63,7 @@ int board_early_init_f(void)
+ 	sc_pm_clock_rate_t rate = SC_80MHZ;
+ 	int ret;
  
-+	/* remove DMA for console */
-+	lpuart2: serial@5a080000 {
-+		power-domains = <&pd_dma_lpuart2>;
-+		dma-names = "";
-+		dmas = <0>;
-+	};
-+
-+	/* create device for u-boot wdt command */
-+	scu-wdt {
-+		compatible = "siemens,scu-wdt";
-+	};
-+
-+};
-+
-+&A35_0 {
-+	bootph-all;
- };
+-	ret = sc_pm_setup_uart(SC_R_UART_0, rate);
+-	ret |= sc_pm_setup_uart(SC_R_UART_2, rate);
++	ret = sc_pm_setup_uart(SC_R_UART_2, rate);
+ 	if (ret)
+ 		return ret;
  
- &iomuxc {
+@@ -275,7 +274,7 @@ int checkboard(void)
+ 	 * Running build_info() doesn't work with current SCFW blob.
+ 	 * Uncomment below call when new blob is available.
+ 	 */
+-	/*build_info();*/
++	build_info();
+ 
+ 	print_bootinfo();
+ 	return 0;
 -- 
 2.20.1
 
