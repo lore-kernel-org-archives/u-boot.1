@@ -4,80 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 649BCD5C0C5
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:09:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F0E0D5C0C5
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:09:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A3B8892E5;
+	by phobos.denx.de (Postfix) with ESMTP id 953F889242;
 	Fri,  8 Nov 2024 14:06:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=fr.thalesgroup.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S5yjToYf";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=fr.thalesgroup.com header.i=@fr.thalesgroup.com header.b="WO8GZCY3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF55988EBA; Fri,  8 Nov 2024 11:08:56 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A4A0D88FD0; Fri,  8 Nov 2024 11:35:39 +0100 (CET)
+Received: from esa.hc1631-21.eu.iphmx.com (esa.hc1631-21.eu.iphmx.com
+ [23.90.122.185])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B7E38904D
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 11:08:54 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=massonju.eseo@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-37d808ae924so1232375f8f.0
- for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 02:08:54 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DFDC88B8F
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 11:35:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=fr.thalesgroup.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=christophe.lindheimer@fr.thalesgroup.com
+X-CSE-ConnectionGUID: y1B/MnhbRduT+jLnx3Ydzw==
+X-CSE-MsgGUID: szdKtZWKTLC7w63a+oZkvA==
+Authentication-Results: ob1.hc1631-21.eu.iphmx.com;
+ dkim=pass (signature verified)
+ header.i=@fr.thalesgroup.com
+X-IronPort-AV: E=McAfee;i="6700,10204,11249"; a="22184582"
+X-IronPort-AV: E=Sophos;i="6.12,137,1728943200"; d="scan'208,217";a="22184582"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731060534; x=1731665334; darn=lists.denx.de;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=DRLYTdOM6l0kAvtmGPa77gHpnx7MiBdeWBTsHLMJxmo=;
- b=S5yjToYfNouPiLqBmjoYI2rncxSIdNHNUs4WDzFFF9aYli1VcQfDrwXxExaKgxRXCb
- wCF2JpNXfKErapx5RIk74fhKPMtF4XejapsvNscpYJNQiPvWnYVdhJys+nzb7b1wL7x0
- GDjKWbslXvMGEOHRFvfCHfJwhQd38xlixDisIfYr7DDaI5BXoBak+EEnZclEM4aYc2EU
- hU5n8MjFmtm0HYlJW/05OSQdOgCmf7vtBodBWe8pk7RQAoj1uvGnM7DhXP9RRY5p1mmo
- RqEPg3dqUDVs1cuc33iLGQmuar8/200SNb+kVTYrxenJcI6ET725i/hmx9w/WZd5pxVJ
- k04w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731060534; x=1731665334;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DRLYTdOM6l0kAvtmGPa77gHpnx7MiBdeWBTsHLMJxmo=;
- b=iZZqTTuu1SvCvG9JT/dPhPgb/K8ijTWeiTSTXS19MbUzjLHvmYsTlh5+mn1MIwnvtK
- sMv/kCXtKL6JL+yqw0ubGvZQ290N4aOxRhGa20tSLSXgQlKY1ZQs14fGLkxE40X6Hub9
- KhYY3EPfFwmhnFa8oBAXSUmkFDukcQKAN3xhrh8WnbyhupmRDSsqt8zdpUcVw1xpkT2d
- VF47UUamTKKiKyKifmbWFtsT3HGagNIPvTVq+VsLuqOsYaUZtVuEiPdT886DRgzGHO3F
- r9uTjVBPXd7ON/0kMg4aewoWCyAQ6afh8ldE0jgQA867lU9V+XAOGpGJJME6BC1dy8rY
- q7bQ==
-X-Gm-Message-State: AOJu0YxJvNoT176gF5e7w1g6cZztDrbgrecOJpVo8iCFwFcIql3Xr41o
- wl7u5HBdHTfrMywsK11wISe+ToYRrdNLeDtbMiv8rPMTg2SGFjUS
-X-Google-Smtp-Source: AGHT+IHQAbWx+puJ5qS+WpcRF4XXnLDrl12pxr7CQ6HnnCW0DmfzuKFMcLgprHBLI70LrNS8Q7ra6A==
-X-Received: by 2002:a05:6000:1449:b0:381:b716:2470 with SMTP id
- ffacd0b85a97d-381f1883dc8mr1832563f8f.40.1731060533858; 
- Fri, 08 Nov 2024 02:08:53 -0800 (PST)
-Received: from localhost ([2a04:cec2:a:e411:4963:a2f2:7806:b10e])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381eda04211sm4122711f8f.94.2024.11.08.02.08.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Nov 2024 02:08:53 -0800 (PST)
-From: Julien Masson <massonju.eseo@gmail.com>
-To: Guillaume La Roque <glaroque@baylibre.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>
-Cc: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, Guillaume La Roque
- <glaroque@baylibre.com>,
- <20241017-android_ab_master-v5-0-43bfcc096d95@salutedevices.com>,
- <20241017-topic-fastboot-fixes-mkbootimg-v2-0-c3927102d931@linaro.org>
-Subject: Re: [PATCH 1/6] bootstd: android: add support of bootimage v2
-In-Reply-To: <20241017-adnroidv2-v1-1-781c939902c9@baylibre.com>
-References: <20241017-adnroidv2-v1-0-781c939902c9@baylibre.com>
-Date: Fri, 08 Nov 2024 11:08:52 +0100
-Message-ID: <8734k2javf.fsf@gmail.com>
+ d=fr.thalesgroup.com; i=@fr.thalesgroup.com;
+ s=bbmfo20230504; t=1731062137;
+ h=from:to:subject:date:message-id:mime-version;
+ bh=azKK5E7oCqFzBYDKIYKxCUdbtrEzWiT1sZfwBlTDWSM=;
+ b=WO8GZCY313mMPB+syemGVDQzEkRi5I6sYCrSLA0Zc2bZITr+QBINkoz5
+ m29HAzAuxJ7gav3xIG7ATdNdLNjIC7V4dArMSC9UNa8uVG43PNG7yKwOT
+ OffmmopW+JJg60zyvqnFLYD4WsPWyVRalBcdWmm2+HVMdsbF492WhqRDd
+ yibDSaDoaX/cNMxE2K164kG7TP2kgdkPbq7BhM6qD3QfwEArVJU8PPLLU
+ L1Ya1S8dS1PLQM1BNi6fWcTchtY4liFyMPtWvv1IT/yi3SwWR4jKfmftG
+ xRfZjNErIyNqCAxe5XVIl1kpGx0kdfV4v5viIkPkNFpn+0PUnkWqJdjm8 g==;
+X-CSE-ConnectionGUID: VSdrBxgcT0qsWslNXrcUGQ==
+X-CSE-MsgGUID: qXdGnGHWRBut67blojx+Dw==
+X-CSE-ConnectionGUID: pj1rj4GwQiazAJNNswPudQ==
+X-CSE-MsgGUID: GvdZyT9SRxGyI76S8fHVJg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11249"; a="34491737"
+X-IronPort-AV: E=Sophos;i="6.12,137,1728943200"; d="scan'208,217";a="34491737"
+From: LINDHEIMER Christophe <christophe.lindheimer@fr.thalesgroup.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Utilisation of PHY Driver
+Thread-Topic: Utilisation of PHY Driver
+Thread-Index: AdsxyCzozczgWiW8ScKFDvFNhZ4X3w==
+Date: Fri, 8 Nov 2024 10:35:36 +0000
+Message-ID: <ddb06fd41edf4822876059af3b641a46@fr.thalesgroup.com>
+Accept-Language: fr-FR, en-US
+Content-Language: fr-FR
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-nodisclaimer: 0
 MIME-Version: 1.0
-Content-Type: text/plain
 X-Mailman-Approved-At: Fri, 08 Nov 2024 14:06:21 +0100
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,77 +83,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi
 
-On Fri 08 Nov 2024 at 11:07, Guillaume La Roque <glaroque@baylibre.com> wrote:
+I have started working with UBOOT on a custom board with Ultrascale+.
+I am working with UBoot Xilinx Release 2024.1
 
-> Android bootmeth only support boot image v3/4.
-> 
-> Add support of Android Boot Image version 2 [1].
-> Vendor boot image is only supported in version 3 and 4 so don't try to
-> read it when header version if version is less than 3.
-> 
-> 1: https://source.android.com/docs/core/architecture/bootloader/boot-image-header#header-v2
-> 
-> Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
-> ---
->  boot/bootmeth_android.c | 27 ++++++++++++---------------
->  1 file changed, 12 insertions(+), 15 deletions(-)
-> 
-> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-> index 19b1f2c377b9..2e7f85e4a708 100644
-> --- a/boot/bootmeth_android.c
-> +++ b/boot/bootmeth_android.c
-> @@ -259,16 +259,12 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
->  		goto free_priv;
->  	}
->  
-> -	if (priv->header_version != 4) {
-> -		log_debug("only boot.img v4 is supported %u\n", priv->header_version);
-> -		ret = -EINVAL;
-> -		goto free_priv;
-> -	}
-> -
-> -	ret = scan_vendor_boot_part(bflow->blk, priv);
-> -	if (ret < 0) {
-> -		log_debug("scan vendor_boot failed: err=%d\n", ret);
-> -		goto free_priv;
-> +	if (priv->header_version >= 3) {
-> +		ret = scan_vendor_boot_part(bflow->blk, priv);
-> +		if (ret < 0) {
-> +			log_debug("scan vendor_boot failed: err=%d\n", ret);
-> +			goto free_priv;
-> +		}
->  	}
->  
->  	/*
-> @@ -476,12 +472,13 @@ static int boot_android_normal(struct bootflow *bflow)
->  	if (ret < 0)
->  		return log_msg_ret("read boot", ret);
->  
-> -	ret = read_slotted_partition(desc, "vendor_boot", priv->slot, vloadaddr);
-> -	if (ret < 0)
-> -		return log_msg_ret("read vendor_boot", ret);
-> -
-> +	if (priv->header_version >= 3) {
-> +		ret = read_slotted_partition(desc, "vendor_boot", priv->slot, vloadaddr);
-> +		if (ret < 0)
-> +			return log_msg_ret("read vendor_boot", ret);
-> +		set_avendor_bootimg_addr(vloadaddr);
-> +	}
->  	set_abootimg_addr(loadaddr);
-> -	set_avendor_bootimg_addr(vloadaddr);
->  
->  	ret = bootm_boot_start(loadaddr, bflow->cmdline);
->  
-> 
-> -- 
-> 2.34.1
-> 
-> 
->
+Using a SD card, I managed to boot Linux and network is OK under Linux
 
-Tested on mediatek MT8365 EVK board with boot image V2.
+I would like to be able to use network under UBoot
 
-Tested-by: Julien Masson <jmasson@baylibre.com>
--- 
-Julien Masson
+PHY is a marvell 88E1510.
+CONFIG_PHY_MARVELL is set and marvell.c is compiled.
+
+In the dts file, I set a compatible marvel 88E1510 entry.
+Unfortunately, I get a "Could not get PHY for eth0" when booting.
+
+Adding some trace in marvell.c I see that init function is not called.
+I also add some trace in  \drivers\core\root.c and  \drivers\core\lists.c, =
+I see that UBoot looks for a compatible driver for the marvell but it does =
+not find it.
+I have printed all the drivers that are compared in driver_check_compatible=
+ and there is no marvell driver.
+
+I have the feeling that only the drivers declared with U_BOOT_DRIVER are sh=
+own and not the ones with U_BOOT_PHY_DRIVER.
+Is it right ?
+If so, how can I register and use the driver for my Marvell PHY ?
+
+Thanks
+
+
+
+
+
