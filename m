@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAEE9D5C0ED
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 15:24:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA01AD5C0EE
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 15:24:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26CDE8907E;
-	Fri,  8 Nov 2024 16:23:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7B6BA890CE;
+	Fri,  8 Nov 2024 16:24:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HDw5iOzB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZJqsY+NY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 992C188B1F; Fri,  8 Nov 2024 16:23:57 +0100 (CET)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id B46A4890D5; Fri,  8 Nov 2024 16:23:59 +0100 (CET)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D4E588B1F
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 16:23:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EC2C8904E
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 16:23:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-83aad4a05eeso85480739f.1
- for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 07:23:55 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-83ac05206c9so87738839f.3
+ for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 07:23:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731079433; x=1731684233; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2/fS9vkgssxYnQ8CkOlKyoNCI55An0vyf1B0pp/YPDg=;
- b=HDw5iOzBMj6JL/xCOg+xOl36nfK1HzgPD5pjw8embbHBhRz+1zQvsnsX83M3IEzzM7
- B6V/g6myn5raEuzLkCByAy0a/52/NmPI6twyIQheDUCILFPf2e9Z9pUblpB3Z1dhrAfJ
- SZ6zY/Glfp9mFDAn30CS9zuKJhjkE3qUWeIbs=
+ d=chromium.org; s=google; t=1731079436; x=1731684236; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YJcig0K404Sqah6fdr9/ntO4m1BCi3SwrbsmFwcuwac=;
+ b=ZJqsY+NYXdq+sCnTy88XwiU6W7pPRgIEfSnsZpzn/V5tR2cCyfawmrhqyYKsZLvU66
+ CqwQN9oqfDo8lH4mPDIIxmIqwe9/3X3vv1/oBVzwnhq8Db3HDqsUgPX6A9Wu8H6F6k6I
+ YWIHsupegmEaIosvVJGeueGq1Hzach1Txt4CM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731079433; x=1731684233;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2/fS9vkgssxYnQ8CkOlKyoNCI55An0vyf1B0pp/YPDg=;
- b=ESzqdB2yLiFcL4qaGQ01PmWatb7m2pNGB9NwZ/O39k7P3Sw6viRHqlUmE9tdVNWh8x
- JBs9fAfT+XjF2+E7z5yxONyzFdg3Z/Zoa/E+O99w478hkY21Si2Wa585lzAFaKTzK1Jd
- vzljUjtleFwVrgf0bo2vaoLLSaWlXlVdru/RoTTwrkhebe/ee3hFgxFMhULUUyFz8luE
- oQNoxeKdtHaJvOxCrbHmh0yLjI4d2ThyqDWpKWOTQYhP8Wq19Xw1ywZjCm6/vPrJMCwz
- 9r3ADwpTOi4bKjZDmJ+OlcIyd9FPT3QgdMVpR8WNACwtO0lYVajHlocfcOR/ZRx+prR6
- nyJQ==
-X-Gm-Message-State: AOJu0Yx+JOz+MVpkupCOfA3lPhodwRIux1m7uN0d5B+LUSmcO/qLd1s7
- R7cDfK6IvEi/5MR8fiUpZX+19538QuT9AUVePcZFNVPMuOnomBowVczAq3s5Loy5agnrqgUQh7U
+ d=1e100.net; s=20230601; t=1731079436; x=1731684236;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YJcig0K404Sqah6fdr9/ntO4m1BCi3SwrbsmFwcuwac=;
+ b=ZaOnjbojNv+SjZxXSiuh7cbuGML0UpBI1Ug9ka4rFYw2LIYsETWRx0rJKnmc2uHRWS
+ viCEH1fUmEpUzsEnPik6Dum+4DfaJq5Zv6xNCT96OipnUb6QznHQ5ZfLTL0EbCcVLtaU
+ AlAphBuq+e8oIhgOMLAkfjm9gWKaON9ka0Cn9ERQEMclka5zS/m9d+c2siZoXxz4vcUB
+ JxlgzZLWvdEbqC1m5s7sU75KUUfgudv0xv/ck7yGENZTDh/6ynp30EgZ/TIDNhFbD68H
+ h2S5l83OB/wKLhU82tLEpuL2HTjJHovRXxgPPidW5dvI+6UMe7g49aSOnyz2yYgbYlku
+ ZSVg==
+X-Gm-Message-State: AOJu0YxD6163Gmp+m3iROGB45rPU7ICOSTxotFZSnZcutGbumQ+y+wcE
+ 1rXavYMXcrpn7QymJvXuPWHe07iRJy62zEGBnzEwOD0nCe2PD0X1MnEQwYSss0b7eiOh/WUiiOQ
  =
-X-Google-Smtp-Source: AGHT+IGaVyGVNzngxaeIdl4Jr+jSdugZGigIBsgpOgYza1dTL3XeFjJSLyQHmTwtK5LM2gCYfi+H7Q==
-X-Received: by 2002:a05:6602:1690:b0:82c:ddfc:c57b with SMTP id
- ca18e2360f4ac-83e032d8565mr396047139f.5.1731079433562; 
- Fri, 08 Nov 2024 07:23:53 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGg4x0L/9MoEJYHl/RZpKVIitQG0i2SBCsqbNChrKjROLaeh6AWWzBpAZWlRPae+zy51xYMag==
+X-Received: by 2002:a05:6602:6406:b0:83b:47:8d5 with SMTP id
+ ca18e2360f4ac-83e0329122fmr317629639f.3.1731079435652; 
+ Fri, 08 Nov 2024 07:23:55 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4de5f7e3283sm864420173.6.2024.11.08.07.23.52
+ 8926c6da1cb9f-4de5f7e3283sm864420173.6.2024.11.08.07.23.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Nov 2024 07:23:52 -0800 (PST)
+ Fri, 08 Nov 2024 07:23:54 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Neha Malcom Francis <n-francis@ti.com>, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH 0/9] buildman: Add initial support for config fragments
-Date: Fri,  8 Nov 2024 08:23:41 -0700
-Message-Id: <20241108152350.3686274-1-sjg@chromium.org>
+ Brandon Maier <brandon.maier@collins.com>
+Subject: [PATCH 1/9] buildman: Add a lower-level test for KconfigScanner
+Date: Fri,  8 Nov 2024 08:23:42 -0700
+Message-Id: <20241108152350.3686274-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241108152350.3686274-1-sjg@chromium.org>
+References: <20241108152350.3686274-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,32 +89,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series updates buildman to process #include lines in defconfig
-files. With this, it is no-longer necessary to duplicate lines certain
-lines from the include-file in the defconfig, e.g. CONFIG_ARM and
-CONFIG_SOC_...
+This code is tested by test_scan_defconfigs() but it is useful to have
+some specific tests for the KconfigScanner's operation in U-Boot. Add
+a test which checks that the values are obtained correctly.
 
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Simon Glass (9):
-  buildman: Add a lower-level test for KconfigScanner
-  buildman: Set up the tout library
-  buildman: Support #include files in defconfigs
-  buildman: Correct the indentation in the setting-up section
-  buildman: Document the toolchain-prefix section
-  buildman: Correct logic for adding a toolchain
-  buildman: Support a tilde to represent the home directory
-  buildman: Propose a format for extra boards
-  RFC: Show building with #include in defconfig
+ tools/buildman/func_test.py | 51 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 51 insertions(+)
 
- configs/j721e_sk_a72_defconfig |   5 --
- tools/buildman/boards.py       |  25 +++++++-
- tools/buildman/buildman.rst    | 102 ++++++++++++++++++++++++++++-----
- tools/buildman/func_test.py    |  85 +++++++++++++++++++++++++++
- tools/buildman/main.py         |   9 ++-
- tools/buildman/test.py         |  50 ++++++++++++++++
- tools/buildman/toolchain.py    |  47 ++++++++-------
- 7 files changed, 281 insertions(+), 42 deletions(-)
-
+diff --git a/tools/buildman/func_test.py b/tools/buildman/func_test.py
+index 0ac9fc7e44f..db3c9d63ec4 100644
+--- a/tools/buildman/func_test.py
++++ b/tools/buildman/func_test.py
+@@ -1067,3 +1067,54 @@ endif
+             result = self._RunControl('--print-arch', 'board0')
+         self.assertEqual('arm\n', stdout.getvalue())
+         self.assertEqual('', stderr.getvalue())
++
++    def test_kconfig_scanner(self):
++        """Test using the kconfig scanner to determine important values
++
++        Note that there is already a test_scan_defconfigs() which checks the
++        higher-level scan_defconfigs() function. This test checks just the
++        scanner itself
++        """
++        src = self._git_dir
++        scanner = boards.KconfigScanner(src)
++
++        # First do a simple sanity check
++        norm = os.path.join(src, 'board0_defconfig')
++        tools.write_file(norm, 'CONFIG_TARGET_BOARD0=y', False)
++        res = scanner.scan(norm, True)
++        self.assertEqual(({
++            'arch': 'arm',
++            'cpu': 'armv7',
++            'soc': '-',
++            'vendor': 'Tester',
++            'board': 'ARM Board 0',
++            'config': 'config0',
++            'target': 'board0'}, []), res)
++
++        # Check that the SoC cannot be changed and the filename does not affect
++        # the resulting board
++        tools.write_file(norm, '''CONFIG_TARGET_BOARD2=y
++CONFIG_SOC="fred"
++''', False)
++        res = scanner.scan(norm, True)
++        self.assertEqual(({
++            'arch': 'powerpc',
++            'cpu': 'ppc',
++            'soc': 'mpc85xx',
++            'vendor': 'Tester',
++            'board': 'PowerPC board 1',
++            'config': 'config2',
++            'target': 'board0'}, []), res)
++
++        # Check handling of missing information
++        tools.write_file(norm, '', False)
++        res = scanner.scan(norm, True)
++        self.assertEqual(({
++            'arch': '-',
++            'cpu': '-',
++            'soc': '-',
++            'vendor': '-',
++            'board': '-',
++            'config': '-',
++            'target': 'board0'},
++            ['WARNING: board0_defconfig: No TARGET_BOARD0 enabled']), res)
 -- 
 2.34.1
 
