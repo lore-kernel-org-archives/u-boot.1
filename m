@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE8BD5C0F5
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 15:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 496DAD5C0F5
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 15:56:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 746308910E;
+	by phobos.denx.de (Postfix) with ESMTP id C5D99891E9;
 	Fri,  8 Nov 2024 16:56:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lDcTiGAZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="I0t+qFJ9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3328588ECB; Fri,  8 Nov 2024 14:39:55 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 43CEC88DF5; Fri,  8 Nov 2024 14:39:57 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0427988D47
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 14:39:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 10BE588E81
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 14:39:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-20cb47387ceso23161695ad.1
- for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 05:39:52 -0800 (PST)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-20cceb8d8b4so14617155ad.1
+ for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 05:39:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731073191; x=1731677991; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731073193; x=1731677993; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3smQ/dr0kpZX2NgGlaiaSGmnelhwmV0GUpA67VbGHmc=;
- b=lDcTiGAZjk4cxifSgSwRvLXLOvGlIHCZW5+M6Tvj8cmeF1FfIBloYop2rddXTR3ahb
- 9lwEzSOs26kHEaa1ZnwouIZSqyTwG/78+lvsoZM5XuC86MuFKPVE+6xYxUfZ/LO9EE/5
- RMnnh7yNLvWSieZXoM0Gp1wrO6nkviHoXteb5GuGa0Nv4DNc+pHMQ05rM1Z8MqOgW9LZ
- TL+IHl019rsXk2cx6seXLIqrOCOfFRqapHWN0IjhG4L6csOq0jzlyTxv/BC2Nuu9+7Yg
- 8H4w/u53sWXD40qCACS62KXeam/z+QQE27n9M+b36AgsBq5uErnu6biZXv6omp+QXl5g
- 8frQ==
+ bh=Da/ty0MoRcZdtECQ3eJPi04Qj8kGIZjpNkf5V5IEP9g=;
+ b=I0t+qFJ9gUc7soytSbyle1eCxSQzBJYeYPv5EZFcr4O1yzduoe7olHAkFO3TmEmPLI
+ yDWyL78Cx9idEJG9P6UsHRAfk6gsXiwoZxQIbKbGGHJOqSikj8MiclMM/ml1Pgo6T8lK
+ j8N+TEXK3NczKI6neGo4NcXr3xOU5tybUMriXRo+Mvt6+fNkUFjYd3kbcHAO8c0Wup5t
+ bschVKu5r5MC6HY+d+4Dqwyidg3I37kEDLbPZ1euhysR6Y0hrpQlV9WkFtjT90VjYQee
+ RZJkuaZEQ67RaUL7f0dokbfGRnnPrp6VDcvjvFAxhXN5fcQ5VOkPk8UHi3Yzhc5pM+Ry
+ ZmPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731073191; x=1731677991;
+ d=1e100.net; s=20230601; t=1731073193; x=1731677993;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3smQ/dr0kpZX2NgGlaiaSGmnelhwmV0GUpA67VbGHmc=;
- b=Y9ZT1XcnmLILh5MtQqFN1K0vvLxb4quYWTiDvY3wYZvj0P6T5CLWja9qD1NpjniXVc
- ng2dEVF01g2j5xORX2t2pU5e2p2TS0QTmbkn4koefo4dqgqjC/8FxYIFge3GV84Vu9rn
- AQzOkztqQwPR9QJa9Ij7bE/6SRbeLWl5aSv+1HX3/KfKgcyTmsMpcZoXLT5kIz5n9z7g
- 1OKW5F02sfOgTjAXjQYtTzPL96qegGGOT3u7dAndv5/Dqr7bX0eAxdkcg6FD8xTs6nzN
- FvbpY2NWb6t4r5WnMIHIXroJXzgTY9XTjuwaPXW47Qpo19gtTm9CJH+KupFfN6SjJYZ5
- sBRw==
-X-Gm-Message-State: AOJu0YxEE8leiey6UTphFRExuFk8gaW0SZkuxp4T3g6syV2a4FcKWayE
- whGsVM7VxBg8xGwakVztWAkR+PPT4QaUwYXW/O0/CwBlWJGDVLeN6tDKNkmZ1RQ=
-X-Google-Smtp-Source: AGHT+IFjAT7VPSuaKbF+eG27lLk5zcYl0HErdj9SLHes+31xFneaEcboO7dOfKt1D0E6nyyyrQXQCg==
-X-Received: by 2002:a17:902:f681:b0:20c:7c09:b2ac with SMTP id
- d9443c01a7336-211835cca0emr32639175ad.52.1731073191163; 
- Fri, 08 Nov 2024 05:39:51 -0800 (PST)
+ bh=Da/ty0MoRcZdtECQ3eJPi04Qj8kGIZjpNkf5V5IEP9g=;
+ b=GDo/a8dkC07v6bpZu+RSxtsApeVs1963+55nVsJerx+KP7IP4RxYIf7t/e5BOtxMeo
+ Zv9kzJheJsIUKAFR/lWc+yRtp0vK9mZIzCvUYE/87M8KPcXjOIMI/kFplX+WTumZT3fW
+ L2lbO2xWc6r5B1mkt5379hq/uNVKTs8wJqECD0+vyNONtqjr5C+QPF8VZoJokHiv4Ccv
+ BlXCKU68Azio8hP8G8oLvTGvNAPiN36st/R7pwCui1cSOM6PoWOz9tuKaK+lNUc8X1F7
+ a456YJhnOPzWgkXGznZKJ0Qh6DiMTWL7dXYYzbGMp/IfWB+scOoJPefs6wtIlC04K7gu
+ N4pw==
+X-Gm-Message-State: AOJu0YxU3/SbInJ6yYgmBghK55O4OHdL4xqqRByBbY7kq8mPq5G/swU6
+ CcR7+i1xAWCcsribD5pHD+7M26196HZlySrIKVN7f0RvR09i1AwPV/hpB4bRZ+U=
+X-Google-Smtp-Source: AGHT+IF9gG+poVJXpnbluRVWUWPDgKeNpmbmGScBw2i1ODvBWhsfuc2HFRFQwkCdHCoCbJcgo67UNw==
+X-Received: by 2002:a17:902:f691:b0:211:3295:ec7b with SMTP id
+ d9443c01a7336-2118208a76cmr55551265ad.0.1731073193527; 
+ Fri, 08 Nov 2024 05:39:53 -0800 (PST)
 Received: from adriano.. ([190.215.83.227]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21177dc8376sm30296295ad.44.2024.11.08.05.39.49
+ d9443c01a7336-21177dc8376sm30296295ad.44.2024.11.08.05.39.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Nov 2024 05:39:50 -0800 (PST)
+ Fri, 08 Nov 2024 05:39:53 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v2 01/15] net: net_utils: Move ip_to_string to lib/net_utils.c
-Date: Fri,  8 Nov 2024 10:38:36 -0300
-Message-ID: <20241108133850.431075-2-adrianox@gmail.com>
+Subject: [PATCH v2 02/15] net: wget: let wget_with_dns work with dns disabled
+Date: Fri,  8 Nov 2024 10:38:37 -0300
+Message-ID: <20241108133850.431075-3-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241108133850.431075-1-adrianox@gmail.com>
 References: <20241108133850.431075-1-adrianox@gmail.com>
@@ -93,84 +93,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function string_to_ip is already in net_utils, which is
-compiled unconditionally, but ip_to_string is currently only
-accessible if the legacy network stack is selected. This
-commit puts ip_to_string in net_utils.c and removes it from the
-legacy network code.
+This was marked as TODO in the code:
+-Enable use of wget_with_dns even if CMD_DNS is disabled if
+the given uri has the ip address for the http server.
+-Check for port in the uri when transforming to legacy wget
+syntax inside wget_with_dns.
+-Move the check for CMD_DNS inside wget_with_dns.
 
 Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 ---
- include/net-common.h | 10 ++++++++++
- lib/net_utils.c      | 11 +++++++++++
- net/net.c            | 11 -----------
- 3 files changed, 21 insertions(+), 11 deletions(-)
+ net/wget.c | 38 ++++++++++++++++++++++++--------------
+ 1 file changed, 24 insertions(+), 14 deletions(-)
 
-diff --git a/include/net-common.h b/include/net-common.h
-index 11c53766a3..5206b8346d 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -426,6 +426,16 @@ void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
-  */
- struct in_addr string_to_ip(const char *s);
- 
-+/**
-+ * ip_to_string() - Convert a string to ip address
-+ *
-+ * Implemented in lib/net_utils.c (built unconditionally)
-+ *
-+ * @x: Input ip to parse
-+ * @s: string containing the parsed ip address
-+ */
-+void ip_to_string(struct in_addr x, char *s);
-+
- /* copy a filename (allow for "..." notation, limit length) */
- void copy_filename(char *dst, const char *src, int size);
- 
-diff --git a/lib/net_utils.c b/lib/net_utils.c
-index c70fef0d99..621f6512b6 100644
---- a/lib/net_utils.c
-+++ b/lib/net_utils.c
-@@ -152,6 +152,17 @@ out_err:
+diff --git a/net/wget.c b/net/wget.c
+index 2d931c2bc6..1b6f031b72 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -528,12 +528,10 @@ void wget_start(void)
+ 	wget_send(TCP_SYN, 0, 0, 0);
  }
- #endif
  
-+void ip_to_string(struct in_addr x, char *s)
-+{
-+	x.s_addr = ntohl(x.s_addr);
-+	sprintf(s, "%d.%d.%d.%d",
-+		(int) ((x.s_addr >> 24) & 0xff),
-+		(int) ((x.s_addr >> 16) & 0xff),
-+		(int) ((x.s_addr >> 8) & 0xff),
-+		(int) ((x.s_addr >> 0) & 0xff)
-+	);
-+}
-+
- void string_to_enetaddr(const char *addr, uint8_t *enetaddr)
+-#if (IS_ENABLED(CONFIG_CMD_DNS))
+ int wget_with_dns(ulong dst_addr, char *uri)
  {
- 	char *end;
-diff --git a/net/net.c b/net/net.c
-index f47e9fbe33..ca35704f66 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -1723,17 +1723,6 @@ int net_parse_bootfile(struct in_addr *ipaddr, char *filename, int max_len)
- 	return 1;
- }
- 
--void ip_to_string(struct in_addr x, char *s)
--{
--	x.s_addr = ntohl(x.s_addr);
--	sprintf(s, "%d.%d.%d.%d",
--		(int) ((x.s_addr >> 24) & 0xff),
--		(int) ((x.s_addr >> 16) & 0xff),
--		(int) ((x.s_addr >> 8) & 0xff),
--		(int) ((x.s_addr >> 0) & 0xff)
--	);
--}
+ 	int ret;
+-	char *s, *host_name, *file_name, *str_copy;
 -
- void vlan_to_string(ushort x, char *s)
- {
- 	x = ntohs(x);
++	char *s, *host_name, *file_name, *str_copy, *port;
+ 	/*
+ 	 * Download file using wget.
+ 	 *
+@@ -554,18 +552,31 @@ int wget_with_dns(ulong dst_addr, char *uri)
+ 	}
+ 	file_name = s;
+ 
+-	/* TODO: If the given uri has ip address for the http server, skip dns */
+-	net_dns_resolve = host_name;
+-	net_dns_env_var = "httpserverip";
+-	if (net_loop(DNS) < 0) {
+-		log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
+-		ret = -EINVAL;
+-		goto out;
+-	}
+-	s = env_get("httpserverip");
+-	if (!s) {
++	port = host_name;
++	host_name = strsep(&port, ":");
++
++	if (string_to_ip(host_name).s_addr != 0) {
++		s = host_name;
++	} else {
++#if IS_ENABLED(CONFIG_CMD_DNS)
++		net_dns_resolve = host_name;
++		net_dns_env_var = "httpserverip";
++		if (net_loop(DNS) < 0) {
++			log_err("DNS lookup of %s failed, check setup\n", net_dns_resolve);
++			ret = -EINVAL;
++			goto out;
++		}
++		s = env_get("httpserverip");
++		if (!s) {
++			log_err("DNS could not resolve %s\n", net_dns_resolve);
++			ret = -EINVAL;
++			goto out;
++		}
++#else
++		log_err("DNS disabled, %s could not be resolved\n", host_name);
+ 		ret = -EINVAL;
+ 		goto out;
++#endif
+ 	}
+ 
+ 	strlcpy(net_boot_file_name, s, sizeof(net_boot_file_name));
+@@ -579,7 +590,6 @@ out:
+ 
+ 	return ret < 0 ? ret : 0;
+ }
+-#endif
+ 
+ /**
+  * wget_validate_uri() - validate the uri for wget
 -- 
 2.43.0
 
