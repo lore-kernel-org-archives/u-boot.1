@@ -4,59 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 962F3D5E120
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 03:41:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56742D5E124
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 04:00:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0752E88DB6;
-	Fri,  8 Nov 2024 04:41:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 9806788DD0;
+	Fri,  8 Nov 2024 05:00:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="KRVrAWQi";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="UT1q/wio";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7C9B88DED; Fri,  8 Nov 2024 04:41:41 +0100 (CET)
-Received: from mail-m12820.netease.com (mail-m12820.netease.com
- [103.209.128.20])
+ id 1D08E88D5A; Fri,  8 Nov 2024 05:00:53 +0100 (CET)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2061c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::61c])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBB4888E96
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:41:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id C827688DD0
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 05:00:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 227c5e67;
- Fri, 8 Nov 2024 11:41:35 +0800 (GMT+08:00)
-Message-ID: <842d1271-62bd-4306-9f68-f848206f0895@rock-chips.com>
-Date: Fri, 8 Nov 2024 11:41:35 +0800
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=y466DPWWRadfafH2v0lzxig3dh8rVcf9VBmlIaVUEKpWGioCN2IU8j6duG9HukhWGv7zWcYHLW587xIL5M58vRfNH8jieO5N3Uzyda+LL0Nn7amUSTbM1rAkUsoSiaKy6lbWRuy6ptd9rPP0rm6H3iqwhPCtAcEyPGo2WMIWpMhPCeD7mg6sYbNh5MIxpFnLNKv/U/mk1OgVADQwuYS7qIsiV7i85tb0cYZJ/HitaWmYCEICIVxzKvaIqRsDGCWiwinXjfVQTmbY4jFvzlzFJQMLr5CIIDu+k1r0ySJDXEsT2hrEhyipCcaa6OPOYJF9r9JHh5rozK9YoeA9CTBsJg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XC6JohDEBTJKf8gC41uhw07UpwVf8HZaWZQLszHGntU=;
+ b=tkqj0mVYtwY+HcciLTuxvvz9MzjP+umdyYWm5HHa1uCoKTQErpczaYWY8wMBSfcfTUnvgLALI0fa1HAzx4tyb+CvY/y1EfBs6V/hRbA+m+quw/Fn5HH5bdrWXANu8LjVIWASAVFrl8uT7x8RSElWuhjzBQQ5QBG7AqiW1IiV8KSeY6PFfcwHQE52NgKk8TPhW33jkzzi9q4FHOwSpjkgAcLVLKbGEv7rXAdbuAF6wz8UDatiSygtMRX3HmVdPalMMorB8+gCBADZpgZRyfOjyaW35VJHOXktiw6o51H+NcRSnfKVeYyGZO1knmTrXbkY7lLiPU5nT2M8kDQB7UC+hA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XC6JohDEBTJKf8gC41uhw07UpwVf8HZaWZQLszHGntU=;
+ b=UT1q/wioTQ0GUAIJdCj02jEE2ZMKP96xwm/PDc57s4nNTLAdojH95BYJllNMXt5sPElh0OoPfSkAYsMxVRP5CuYhcautD2mVIMtRz8AVRGUeqxz83YySOMQAdkayZwicUaRRn2zo/hVS3pjYsj+UZg+A2+SJ1kwRqpouTv5X4bU=
+Received: from BLAPR03CA0022.namprd03.prod.outlook.com (2603:10b6:208:32b::27)
+ by CY8PR12MB7610.namprd12.prod.outlook.com (2603:10b6:930:9a::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.19; Fri, 8 Nov
+ 2024 04:00:47 +0000
+Received: from BL02EPF0001A100.namprd03.prod.outlook.com
+ (2603:10b6:208:32b:cafe::54) by BLAPR03CA0022.outlook.office365.com
+ (2603:10b6:208:32b::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.19 via Frontend
+ Transport; Fri, 8 Nov 2024 04:00:47 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BL02EPF0001A100.mail.protection.outlook.com (10.167.242.107) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8137.17 via Frontend Transport; Fri, 8 Nov 2024 04:00:46 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 7 Nov
+ 2024 22:00:43 -0600
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Thu, 7 Nov 2024 22:00:41 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
+ <git@amd.com>
+Subject: [PATCH v10 5/7] usb: onboard-hub: Bail out if peer hub is already
+ probed
+Date: Fri, 8 Nov 2024 09:29:57 +0530
+Message-ID: <20241108035959.19970-6-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20241108035959.19970-1-venkatesh.abbarapu@amd.com>
+References: <20241108035959.19970-1-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 3/3] board: rockchip: Add support for rk3588 GenBook
-To: Andy Yan <andyshrk@163.com>
-Cc: u-boot@lists.denx.de, jonas@kwiboo.se
-References: <20241104122307.439776-1-andyshrk@163.com>
- <20241104122307.439776-4-andyshrk@163.com>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241104122307.439776-4-andyshrk@163.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGU9JTlZKS0MYS0hIGRpMTkpWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9309dcf4c003afkunm227c5e67
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBQ6KBw4NjIpAisLI1E8Ezce
- OREwCw9VSlVKTEhKS0hMSUJNTU9NVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSEpCQjcG
-DKIM-Signature: a=rsa-sha256;
- b=KRVrAWQisYsLXVVtp4JOWFhxdVE88CB9z1O81FKeNkpalElysWeAG4MBp+vyANAOgAFPlm68lrRF1CwIp/sQpybiZPxk5bSiPjkFmQC4zmUTyq7lk4D97700yK24UFUDFabimLtzNmls4fsYTN8yaYIfK2VmEMrDi8yfzlQUPZM=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=rn4pZWF8hn1sViLCnwqs8YfuzWWuhx5gwrGFYviimZw=;
- h=date:mime-version:subject:message-id:from;
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A100:EE_|CY8PR12MB7610:EE_
+X-MS-Office365-Filtering-Correlation-Id: ed65e8b5-635c-4463-4fa2-08dcffa9ecec
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?t4hOokVAKWc392MkEjO0a+n7vZCt2gYstFGdLxixu6tQFaEiILa9kNlDpySi?=
+ =?us-ascii?Q?qAXJVzE1QjfOgICGbEwr2M4+ZZah3FQkQYSGrx6411nI/Ly/+5/ohEST/EUf?=
+ =?us-ascii?Q?m+hEFVRyyNb116wNa8PlDcD4Ul2pjP4cvAXHJ+9HCHnTeeDkVQ+ZR5yl99Kf?=
+ =?us-ascii?Q?ve5teLJPSai/W2pvMVFprKuzgI0fbO60Pt9+2TB2R4386aBq6b4sDOTEi6Ih?=
+ =?us-ascii?Q?FVBeNhKzenm1rX5QtOX62ihaesqtvbhsA0xD/FtEC1cYmGy/DmQbho4zDOXp?=
+ =?us-ascii?Q?ofh1FR9YqFQiW8b6r+LGER8408vHrw+tSXCqT0PIKaKv+VvjUYqvU3YJvkDi?=
+ =?us-ascii?Q?MCoKm8I04kDrZSKq9iIYTtrpxWmVsN5Qp6NjIxv/De0Zvh70JzXBq/bg/oAO?=
+ =?us-ascii?Q?uVfMAbKFvD3fvCYmK0rCQPz6BTJUVWCxdWNh/JpwK/q+SR+6PhB0PMR8fIww?=
+ =?us-ascii?Q?Hae36oNcjmwfgV0LaBt/KNm2Shs8/83ptCyFQwez6FvG+62C3PGzzK2ND46l?=
+ =?us-ascii?Q?gx8aMbisK4i/bGYdMj2SWIUvIsJYJBgqyrlT84Y7VGVNgCy2mSqfn0MFTUlr?=
+ =?us-ascii?Q?dMjFokWEJaxwWP/MvfEuMY4t9tGcsVca1RG9iJgrq/jGiT3iLBqnN7hoczm7?=
+ =?us-ascii?Q?w4EhLgxLpTBMIjH/OjwYWj0RLy/HCp+6/hJXztLZXIRte/8d8G+PzDdmaMpM?=
+ =?us-ascii?Q?WReX4+OtKSN6v6t3kxiFlJbCbhPj+ROeDKd9MIFIL75BLN9U6fsKWyqHiqYJ?=
+ =?us-ascii?Q?ai92VEfeqCw/A+t/aQNXNDp+sEkC/Gw/BisQRus7ZIfDeJMmfmCgVyCFj5fW?=
+ =?us-ascii?Q?SAL0blQSZRKwu/0leCE9gXivMc6xTxxFcsgdAgDanVMG08nWeP/Gq3WtgWuZ?=
+ =?us-ascii?Q?mAT9JhYuJmZVWoSCjHYncruBrVrtmYK976enVBLS9SwJormFYVubx7WNl2Ps?=
+ =?us-ascii?Q?SPLfGN9tWNhHLBnmoEgwhLg+EPFMEkiAiw1pEkv0BPqUh6cbSjDvGdzubGf6?=
+ =?us-ascii?Q?tk8DDDJTZRmB5K3B/Oz9mVdO38H/QCX8Ks38gL4OkYnY90H63jmMuh8DWK2F?=
+ =?us-ascii?Q?uU7gq0mmLMnlCpaIaWeOEhEHhdsptTPxRme3qbSyQPkBoXJCnLxq7a5eJDHp?=
+ =?us-ascii?Q?oPSOcy2za2wbjLpBtePA0DJXumZyEy6GlN+oHvBflDIDtk3m64O88PuqzSQF?=
+ =?us-ascii?Q?/gQ2BO4a+cjH9unnIuiGxNv9OpcPeMyRlpGLUWTz8Sx3ETMhsaSd7S3gtlQh?=
+ =?us-ascii?Q?MB3F271S5LuUqe+/79T523xm/vuIAifLIY4LnhXGk2c+KV8BP4/GFa0EzoGL?=
+ =?us-ascii?Q?Ul8tl4/Gl8C20cjOGNR6bgPD59pc59b2V8tk6GYEOJs/pNYKyaAppjodgWwY?=
+ =?us-ascii?Q?jDQXuFWmaMqHf+S/iDdKrtjfaudxhfGxuVe8xRbe5FQPTtnuXQ=3D=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Nov 2024 04:00:46.8452 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ed65e8b5-635c-4463-4fa2-08dcffa9ecec
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A100.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7610
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,414 +147,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The .bind function is implemented to bind the correct
+"half" of the hub that the driver wants to bind,
+and returning -ENODEV for the other "half".
 
-On 2024/11/4 20:23, Andy Yan wrote:
-> Add support for Cool Pi GenBook, it works as a carrier board
-> connect with CM5 SOM.
->
-> Specification:
-> - Rockchip RK3588
-> - LPDDR5X 8/32 GB
-> - eMMC 64 GB
-> - HDMI Type A out x 1
-> - USB 3.0 Host x 1
-> - USB-C 3.0 with DisplayPort AltMode
-> - PCIE M.2 E Key for RTL8852BE Wireless connection
-> - PCIE M.2 M Key for NVME connection
-> - eDP panel with 1920x1080
->
-> Tested by Armbian boot on USB disk.
->
-> Signed-off-by: Andy Yan <andyshrk@163.com>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Reviewed-by: Marek Vasut <marex@denx.de>
+---
+ common/usb_onboard_hub.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
+index dda41e1a94..cde1662c3b 100644
+--- a/common/usb_onboard_hub.c
++++ b/common/usb_onboard_hub.c
+@@ -176,6 +176,26 @@ err:
+ 	return ret;
+ }
+ 
++static int usb_onboard_hub_bind(struct udevice *dev)
++{
++	struct ofnode_phandle_args phandle;
++	const void *fdt = gd->fdt_blob;
++	int ret, off;
++
++	ret = dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0, &phandle);
++	if (ret)  {
++		dev_err(dev, "peer-hub not specified\n");
++		return ret;
++	}
++
++	off = ofnode_to_offset(phandle.node);
++	ret = fdt_node_check_compatible(fdt, off, "usb424,5744");
++	if (!ret)
++		return 0;
++
++	return -ENODEV;
++}
++
+ static int usb_onboard_hub_remove(struct udevice *dev)
+ {
+ 	struct onboard_hub *hub = dev_get_priv(dev);
+@@ -212,6 +232,7 @@ static const struct udevice_id usb_onboard_hub_ids[] = {
+ U_BOOT_DRIVER(usb_onboard_hub) = {
+ 	.name	= "usb_onboard_hub",
+ 	.id	= UCLASS_USB_HUB,
++	.bind   = usb_onboard_hub_bind,
+ 	.probe = usb_onboard_hub_probe,
+ 	.remove = usb_onboard_hub_remove,
+ 	.of_match = usb_onboard_hub_ids,
+-- 
+2.17.1
 
-Thanks,
-- Kever
->
-> cool
->
-> ---
->
-> Changes in v6:
-> - avoid re-define CFG_EXTRA_ENV_SETTINGS.
->
-> Changes in v5:
-> - Fix document isn't included in any toctree error ini rst doc
->
-> Changes in v4:
-> - Fix a underline too short error in rst doc
->
-> Changes in v3:
-> - Remove upstreamed dt in genbook-u-boot.dtsi
-> - Remove MMC releated config as there is no SD-card on this machine
-> - Enable LED config
-> - Enable rk8xx pmic
-> - rename defconfig to coolpi-cm5-genbook-rk3588_defconfig
-> - redefine BOOT_TARGETS
->
-> Changes in v2:
-> - split the dts to a separate commit
-> - rename to genbook_cm5_rk3588
-> - move readme to doc/board, and write as reStructuredText format
-> - alphabetically reorder
-> - update doc/board/rockchip
->
->   .../dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi |  20 ++++
->   arch/arm/mach-rockchip/rk3588/Kconfig         |  19 ++++
->   board/coolpi/genbook_cm5_rk3588/Kconfig       |  12 +++
->   board/coolpi/genbook_cm5_rk3588/MAINTAINERS   |   7 ++
->   configs/coolpi-cm5-genbook-rk3588_defconfig   | 101 ++++++++++++++++++
->   doc/board/coolpi/genbook_cm5_rk3588.rst       |  68 ++++++++++++
->   doc/board/coolpi/index.rst                    |   9 ++
->   doc/board/index.rst                           |   1 +
->   doc/board/rockchip/rockchip.rst               |   1 +
->   include/configs/genbook-cm5-rk3588.h          |  19 ++++
->   10 files changed, 257 insertions(+)
->   create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
->   create mode 100644 board/coolpi/genbook_cm5_rk3588/Kconfig
->   create mode 100644 board/coolpi/genbook_cm5_rk3588/MAINTAINERS
->   create mode 100644 configs/coolpi-cm5-genbook-rk3588_defconfig
->   create mode 100644 doc/board/coolpi/genbook_cm5_rk3588.rst
->   create mode 100644 doc/board/coolpi/index.rst
->   create mode 100644 include/configs/genbook-cm5-rk3588.h
->
-> diff --git a/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi b/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..5a3073d6e7f
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
-> @@ -0,0 +1,20 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk3588-u-boot.dtsi"
-> +
-> +&fspim2_pins {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
-> +
-> +&sfc {
-> +	flash@0 {
-> +		bootph-pre-ram;
-> +		bootph-some-ram;
-> +	};
-> +};
-> +
-> +/* USB A out */
-> +&usb_host1_xhci {
-> +	snps,dis_u3_susphy_quirk;
-> +};
-> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-> index 6f28a313325..b5a0e624a53 100644
-> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-> @@ -29,6 +29,24 @@ config TARGET_CM3588_NAS_RK3588
->   	  - 3.5mm Headphone out, 2.0mm PH-2A Mic in
->   	  - 5V Fan connector, PWM beeper, IR receiver, RTC battery connector
->   
-> +config TARGET_GENBOOK_CM5_RK3588
-> +	bool "Cool Pi CM5 GenBook"
-> +	select BOARD_LATE_INIT
-> +	help
-> +	  GeenBook is a notebook based on Rockchip RK3588, and works as a carrier
-> +	  board connect with CM5 SOM.
-> +
-> +	  Specification:
-> +	  - Rockchip RK3588
-> +	  - LPDDR5X 8/32 GB
-> +	  - eMMC 64 GB
-> +	  - HDMI Type A out x 1
-> +	  - USB 3.0 Host x 1
-> +	  - USB-C 3.0 with DisplayPort AltMode
-> +	  - PCIE M.2 E Key for RTL8852BE Wireless connection
-> +	  - PCIE M.2 M Key for NVME connection
-> +	  - eDP panel with 1920x1080
-> +
->   config TARGET_JAGUAR_RK3588
->   	bool "Theobroma Systems SBC-RK3588-AMR (Jaguar)"
->   	select BOARD_LATE_INIT
-> @@ -367,6 +385,7 @@ config TEXT_BASE
->   	default 0x00a00000
->   
->   source "board/armsom/sige7-rk3588/Kconfig"
-> +source "board/coolpi/genbook_cm5_rk3588/Kconfig"
->   source "board/edgeble/neural-compute-module-6/Kconfig"
->   source "board/friendlyelec/cm3588-nas-rk3588/Kconfig"
->   source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
-> diff --git a/board/coolpi/genbook_cm5_rk3588/Kconfig b/board/coolpi/genbook_cm5_rk3588/Kconfig
-> new file mode 100644
-> index 00000000000..67086ea6297
-> --- /dev/null
-> +++ b/board/coolpi/genbook_cm5_rk3588/Kconfig
-> @@ -0,0 +1,12 @@
-> +if TARGET_GENBOOK_CM5_RK3588
-> +
-> +config SYS_BOARD
-> +	default "genbook_cm5_rk3588"
-> +
-> +config SYS_VENDOR
-> +	default "coolpi"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "genbook-cm5-rk3588"
-> +
-> +endif
-> diff --git a/board/coolpi/genbook_cm5_rk3588/MAINTAINERS b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
-> new file mode 100644
-> index 00000000000..0496cc93b59
-> --- /dev/null
-> +++ b/board/coolpi/genbook_cm5_rk3588/MAINTAINERS
-> @@ -0,0 +1,7 @@
-> +GENBOOK-CM5-RK3588
-> +M:	Andy Yan <andyshrk@163.com>
-> +S:	Maintained
-> +F:	board/coolpi/genbook-cm5-rk3588
-> +F:	include/configs/genbook-cm5-rk3588.h
-> +F:	configs/coolpi-cm5-genbook-rk3588_defconfig
-> +F:	arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
-> diff --git a/configs/coolpi-cm5-genbook-rk3588_defconfig b/configs/coolpi-cm5-genbook-rk3588_defconfig
-> new file mode 100644
-> index 00000000000..3eb5dc968af
-> --- /dev/null
-> +++ b/configs/coolpi-cm5-genbook-rk3588_defconfig
-> @@ -0,0 +1,101 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_SPEED=24000000
-> +CONFIG_SF_DEFAULT_MODE=0x2000
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-coolpi-cm5-genbook"
-> +CONFIG_ROCKCHIP_RK3588=y
-> +CONFIG_ROCKCHIP_SPI_IMAGE=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_GENBOOK_CM5_RK3588=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_SF_DEFAULT_BUS=5
-> +CONFIG_DEBUG_UART_BASE=0xFEB50000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
-> +# CONFIG_ANDROID_BOOT_IMAGE is not set
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-coolpi-cm5-genbook.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-> +CONFIG_SPL_ATF=y
-> +# CONFIG_CMD_BIND is not set
-> +# CONFIG_CMD_FASTBOOT is not set
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_DWC_AHCI=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_FASTBOOT_BUF_ADDR=0x800800
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_HS400_ES_SUPPORT=y
-> +CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
-> +CONFIG_MMC_HS400_SUPPORT=y
-> +CONFIG_SPL_MMC_HS400_SUPPORT=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> +CONFIG_SPI_FLASH_XMC=y
-> +CONFIG_SPI_FLASH_XTX=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SFC=y
-> +CONFIG_ROCKCHIP_SPI=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/coolpi/genbook_cm5_rk3588.rst b/doc/board/coolpi/genbook_cm5_rk3588.rst
-> new file mode 100644
-> index 00000000000..a02e561051a
-> --- /dev/null
-> +++ b/doc/board/coolpi/genbook_cm5_rk3588.rst
-> @@ -0,0 +1,68 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +GenBook
-> +=======
-> +Cool Pi GenBook is a laptop powered by RK3588, it works with a
-> +carrier board connect with CM5.
-> +
-> +Specification:
-> +* Rockchip RK3588
-> +* LPDDR5X 8/32 GB
-> +* eMMC 64 GB
-> +* SPI Nor 8 MB
-> +* HDMI Type A out x 1
-> +* USB 3.0 Host x 1
-> +* USB-C 3.0 with DisplayPort AltMode
-> +* PCIE M.2 E Key for RTL8852BE Wireless connection
-> +* PCIE M.2 M Key for NVME connection
-> +* eDP panel with 1920x1080
-> +
-> +Here is the step-by-step to compile and boot to U-Boot on GenBook.
-> +
-> +Get the TF-A and DDR init (TPL) binaries
-> +----------------------------------------
-> +
-> +.. prompt:: bash
-> +
-> +   > cd u-boot
-> +   > export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.17.bin
-> +   > export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.46.elf
-> +   > make coolpi-genbook-cm5-rk3588_defconfig
-> +   > make CROSS_COMPILE=aarch64-linux-gnu-
-> +
-> +This will build ``u-boot-rockchip.bin`` for eMMC and ``u-boot-rockchip-spi.bin`` for SPI Nor.
-> +
-> +Write u-boot to eMMC or SPI Nor from a Linux system on the laptop
-> +-----------------------------------------------------------------
-> +
-> +Copy ``u-boot-rockchip.bin`` and ``u-boot-rockchip-spi.bin`` to the laptop.
-> +
-> +eMMC
-> +~~~~
-> +
-> +.. prompt:: bash
-> +
-> +   dd if=u-boot-rockchip.bin of=/dev/mmcblk0 bs=512 seek=64
-> +
-> +SPI Nor
-> +~~~~~~~
-> +
-> +.. prompt:: bash
-> +
-> +  dd if=u-boot-rockchip-spi.bin of=/dev/mtdblock0
-> +
-> +``upgrade_tool`` allows to flash the on-board SPI Nor via the USB TypeC interface
-> +with help of the Rockchip loader binary.
-> +
-> +To enter the USB flashing mode, connect the laptop and your HOST PC with a USB-C
-> +cable, reset the laptop with ``Loader Key`` pressed.
-> +On your PC, check with ``lsusb -d 2207:350b``).
-> +
-> +To flash U-Boot on the SPI Nor with ``upgrade_tool``:
-> +
-> +.. prompt:: bash
-> +
-> +  upgrade_tool db rk3588/MiniLoaderAll.bin
-> +  upgrade_tool ssd       // Input 5 for SPINOR download mode
-> +  upgrade_tool wl 0 u-boot-rockchip-spi.bin
-> +  upgrade_tool rd
-> diff --git a/doc/board/coolpi/index.rst b/doc/board/coolpi/index.rst
-> new file mode 100644
-> index 00000000000..9c9593fd6aa
-> --- /dev/null
-> +++ b/doc/board/coolpi/index.rst
-> @@ -0,0 +1,9 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +Cool Pi
-> +=================
-> +
-> +.. toctree::
-> +   :maxdepth: 2
-> +
-> +   genbook_cm5_rk3588
-> diff --git a/doc/board/index.rst b/doc/board/index.rst
-> index ca5246e259c..a1925dfff35 100644
-> --- a/doc/board/index.rst
-> +++ b/doc/board/index.rst
-> @@ -23,6 +23,7 @@ Board-specific doc
->      bsh/index
->      cloos/index
->      congatec/index
-> +   coolpi/index
->      coreboot/index
->      emcraft/index
->      emulation/index
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 7b11a2e0a35..af74a7a1636 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -147,6 +147,7 @@ List of mainline supported Rockchip boards:
->        - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
->        - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
->        - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
-> +     - Yanyi Tech CoolPi CM5 GenBook (coolpi-cm5-genbook-rk3588)
->   
->   * rv1108
->        - Rockchip Evb-rv1108 (evb-rv1108)
-> diff --git a/include/configs/genbook-cm5-rk3588.h b/include/configs/genbook-cm5-rk3588.h
-> new file mode 100644
-> index 00000000000..194f97469df
-> --- /dev/null
-> +++ b/include/configs/genbook-cm5-rk3588.h
-> @@ -0,0 +1,19 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +
-> +#ifndef __GENBOOK_CM5_RK3588_H
-> +#define __GENBOOK_CM5_RK3588_H
-> +
-> +#define ROCKCHIP_DEVICE_SETTINGS \
-> +		"stdout=serial,vidconsole\0" \
-> +		"stderr=serial,vidconsole\0"
-> +
-> +/*
-> + * As a laptop, there is no sdmmc, and we want to
-> + * set usb the highest boot priority for third-part
-> + * os installation.
-> + */
-> +#define BOOT_TARGETS "usb mmc0"
-> +
-> +#include <configs/rk3588_common.h>
-> +
-> +#endif /* __GENBOOK_CM5_RK3588_H */
