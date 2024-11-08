@@ -4,58 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0109D64084
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 19:55:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92132D64089
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 20:38:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0060789275;
-	Fri,  8 Nov 2024 20:55:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A26BE89080;
+	Fri,  8 Nov 2024 21:38:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731095749;
-	bh=7lcEKxAL+q+FVGP99hSNibZILIDi/Gjxki7dPUPngqo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ExstBPiGodDxHYvU6zVLlpRflx6MNrO2ltb9jFLxx1peVinOlSutDYrQCoGrXbmJu
-	 QoY5XRcXHr8f5TfuJLLj6f65tfDmjoGZw6VRvP0Ifpd8IjBtXGnZxMk5s1ypwVscJc
-	 cZGo0qd0CFIHXHCI6762J15gIjgN1bnWvjumIFZ5ep+TBSGa2hwkw81GiIodQ0zPIo
-	 BN+8ExjbyviZ182zE47ZxSnm6t0H0XLyDtECQ9r6ave7Su7KgL6ZwJ4dJlWi+xbiWW
-	 6bEXAxXVjAKX4f4rGlsJnt+A+2pOVDHwbejGtk3SA/NY13fQqG2DKbYGdPIadQ2kad
-	 X9y1QUYrRDEkg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="clbP03ly";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8FBBB8926F; Fri,  8 Nov 2024 21:38:53 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0C53A88D70;
- Fri,  8 Nov 2024 20:55:46 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1731095747;
- bh=7lcEKxAL+q+FVGP99hSNibZILIDi/Gjxki7dPUPngqo=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=bI5wJkz2+hy0fckr+lz5jnW/+49+CKZ4ZlXnvdFwDqh6AvUe2GR53JKhS2tSXzYoF
- ECSIYgY9EA0LgwpyPbN30NLG920BCRkiSCSxf4S8+v7AqGWFoUdzHVh9HCeoxVbQW2
- NQ7yDaUN3wUxAT6EZy/bxoAPRcrlwvVLBoAi5ibF4duVqMfMGr0ygiOgemalv+0v/M
- JHSTFemUf/L8iAl+6Oj1BrlBAOVN4ieKKBM/n8uWWbe8lw+wzGQiKe16YxX2qDCNon
- yHCcVYjP047gvWPYf7o/FEdkQFVxT4HO5AkL9i3/F22TzS7VlSPmFbfHEAntWSk3Wh
- ejzocZfSuAU5g==
-Message-ID: <bf5944f1-c55b-4e52-b4c4-f396cf71fe78@denx.de>
-Date: Fri, 8 Nov 2024 20:27:20 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 04CAE88EF5
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 21:38:50 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=thaumatec.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a9ed7d8d4e0so378716966b.1
+ for <u-boot@lists.denx.de>; Fri, 08 Nov 2024 12:38:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1731098330; x=1731703130;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RWn2uQKuPBTae6HYZhRY2gWasJbppb12xCMrBh7m6SM=;
+ b=clbP03lybhUrwUjopB1+/cw+++Y+ts0ELPh7YKArQnd7dhY/pg+KN/HSo9SB4V/Mqf
+ b3njzymWS3a+DIwcuwJB3dw0jA0Lo/n9yLNlIhq/VW3ubkkuNkhHmpCixE33mrlnzcrv
+ qkJBFUBVVjnqCMBrv75tgm/E0lq2TF1psS69AIBjMhIbdC3crY8sOByF1gNFaoyetOoo
+ dkVNmtMfmtCX0DkjnL7UPp+Yoi+3pCswJFwius9vwq/ru1dy5HH/v5Vu17r7FcOI1Jka
+ in+zs0rwuuK4iSUa4rLEa1twJR1PnXp4WMstfHMAXczd/Lz+uuxfrlv46yQ/dxuXGvoz
+ ywzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731098330; x=1731703130;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RWn2uQKuPBTae6HYZhRY2gWasJbppb12xCMrBh7m6SM=;
+ b=Aorvknw1fa0tvvCQ5MjiKLQ7ffgUK+LXKQP7aepHU446ZtkJ2WNtcyhPhxiHRWvE5Y
+ /F344AQzpzr/qixHH7Bel/XwulOn3/Hey0DXCnsjr8dxZsmAG+beovFja188oWO0THDI
+ LEye4niY4D1Q8wtymjC7sS2nGrgOX+DiTMOEA3Cxn2fVHUBtpv0r+WNL1vq5fuQK4ux1
+ nJjhmtPIlJKoZef6NtZSldPoH7vJ0XZjIk8sYHxT64Zuc1P4+bMyAR10L9tKImBYtx/7
+ jrqGvN1aKRady7/AjW1WedA3CDhwHH92L5A6HyOMlLVge9hf+dEWKUTKY+FRU54QlpJt
+ z54Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXDHgYCdnkCq1Y2cWo3M1CMiPNz17GL7sKW4iYhAMqC48gFQQ19je4pvSI67Q/edURuODidq80=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz16IKB7G9XF6vX7UoGhLBT6VFSESGe+0isIvP8MHgLWLNDBBe3
+ kfDa+3IMThwqTQaaMsP56QYmKho17AlpIkGZAwG46BGZoGgpEIW4KUdj3tCFgy5z/Mm1hiF1weK
+ tJHE4LlkZ4rYnKv8bj0e9BOO5iXI0QOVxFpSo5Q==
+X-Google-Smtp-Source: AGHT+IH2Tk8pjYm84UzHag6hprdHBWW4s0fNLCiu8SnG3PhWPUiagcN/hF06NU5b4sy64YyQbkB0pFfAoUMfpYaGH/g=
+X-Received: by 2002:a17:907:9816:b0:a99:5773:3612 with SMTP id
+ a640c23a62f3a-a9eeff3a9b5mr370434566b.36.1731098330213; Fri, 08 Nov 2024
+ 12:38:50 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V2] arm64: imx8mp: Read values from M24C32-D
- write-lockable page on DHCOM i.MX8MP
-To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- u-boot@lists.denx.de
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-References: <20241108170633.46504-1-cniedermaier@dh-electronics.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241108170633.46504-1-cniedermaier@dh-electronics.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240918130155.299353-1-lukasz.czechowski@thaumatec.com>
+ <20240918130155.299353-2-lukasz.czechowski@thaumatec.com>
+ <22ae3879-e266-440c-8f25-2d46a5676261@rock-chips.com>
+ <c72f7799-5748-4602-bfb2-c99ba767a614@cherry.de>
+ <076ad029-7788-4f2f-b3fe-58e61fa8cf51@rock-chips.com>
+ <CABd623v=h5SZPcqvH=uoVHyA09RdxuP+mjNUaisOMj7dAm7uTw@mail.gmail.com>
+ <aafa4ae3-bce7-41bc-a8db-5fe4171634d4@cherry.de>
+ <eb9db3bb-069e-41c1-a6b5-8184e7fd7973@rock-chips.com>
+ <049bb164-24c1-4840-9ba1-98127680fcf1@rock-chips.com>
+In-Reply-To: <049bb164-24c1-4840-9ba1-98127680fcf1@rock-chips.com>
+From: =?UTF-8?Q?=C5=81ukasz_Czechowski?= <lukasz.czechowski@thaumatec.com>
+Date: Fri, 8 Nov 2024 21:38:39 +0100
+Message-ID: <CABd623vVxfkC0Msum=LL=kd9Bi3tG4EXWcvF+-N1y97J8NBozw@mail.gmail.com>
+Subject: Re: [PATCH v3 1/4] debug_uart: Replace debug functions with dummies
+ if CONFIG_DEBUG_UART is not set
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
+ trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,466 +100,218 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/8/24 6:06 PM, Christoph Niedermaier wrote:
+Hi Kever,
 
-[...]
+On 2024/10/31 10:33 Kever Yang <kever.yang@rock-chips.com> wrote:
+>
+> Hi Lukasz,
+>
+> On 2024/10/31 17:01, Kever Yang wrote:
+> > Hi Lukasz, Quentin,
+> >
+> > On 2024/10/25 22:56, Quentin Schulz wrote:
+> >> Hi Lukasz,
+> >>
+> >> On 10/25/24 4:27 PM, =C5=81ukasz Czechowski wrote:
+> >>> Hi,
+> >>>
+> >>> On 2024/10/25 14:30, Kever Yang wrote:
+> >>>>
+> >>>> Hi Tom,
+> >>>>
+> >>>>       This is regression of "#ifdef CONFIG", is it possible for us
+> >>>> to go
+> >>>> back to use "#ifdef CONFIG" in this case?
+> >>>>
+> >>>> Or do you have any other suggestion for this issue?
+> >>>>
+> >>>> On 2024/9/30 16:55, Quentin Schulz wrote:
+> >>>>> Hi Kever,
+> >>>>>
+> >>>>> On 9/29/24 3:53 AM, Kever Yang wrote:
+> >>>>>> Hi Lukasz,
+> >>>>>>
+> >>>>>>       I think this will make the error happen like this:
+> >>>>>>
+> >>>>>> +common/console.c: In function 'puts':
+> >>>>>> +common/console.c:746:29: error: unused variable 'ch'
+> >>>>>> [-Werror=3Dunused- variable]
+> >>>>>> +  746 |                         int ch =3D *s++;
+> >>>>>> +      |                             ^~
+> >>>>>> +cc1: all warnings being treated as errors
+> >>>>>> +make[2]: *** [scripts/Makefile.build:257: common/console.o] Error=
+ 1
+> >>>>>>
+> >>>>>>
+> >>>>>> The main reason is that below patch removes "#ifdef":
+> >>>>>>
+> >>>>>> c04f856822a console: remove #ifdef CONFIG when it is possible
+> >>>>>>
+> >>>>>
+> >>>>> Can you please always share the link to the pipelines that fail so
+> >>>>> people have an idea on how to reproduce it locally?
+> >>>>>
+> >>>>> Here I assume it is:
+> >>>>> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipeline=
+s/22455
+> >>>>>
+> >>>>>
+> >>>>> A simple way is to apply the patches, build the pine64-lts for
+> >>>>> example
+> >>>>> and then you'll see warnings (which aren't failing builds locally I
+> >>>>> believe but in CI, yes).
+> >>>>>
+> >>>>> I think we can fool the compiler with the following:
+> >>>>>
+> >>>>> diff --git a/include/debug_uart.h b/include/debug_uart.h
+> >>>>> index dc0f1aa4c98..b19e44d6d0f 100644
+> >>>>> --- a/include/debug_uart.h
+> >>>>> +++ b/include/debug_uart.h
+> >>>>> @@ -204,12 +204,12 @@ void printdec(unsigned int value);
+> >>>>>   #define DEBUG_UART_FUNCS \
+> >>>>>       #warning "DEBUG_UART not defined!"
+> >>>>>
+> >>>>> -#define printch(ch) do{}while(0);
+> >>>>> -#define printascii(str) do{}while(0);
+> >>>>> -#define printhex2(value) do{}while(0);
+> >>>>> -#define printhex4(value) do{}while(0);
+> >>>>> -#define printhex8(value) do{}while(0);
+> >>>>> -#define printdec(value) do{}while(0);
+> >>>>> +#define printch(ch) do{ (void)(ch); }while(0);
+> >>>>> +#define printascii(str) do{ (void)(str); }while(0);
+> >>>>> +#define printhex2(value) do{ (void)(value); }while(0);
+> >>>>> +#define printhex4(value) do{ (void)(value); }while(0);
+> >>>>> +#define printhex8(value) do{ (void)(value); }while(0);
+> >>>>> +#define printdec(value) do{ (void)(value); }while(0);
+> >>>>>
+> >>>>>   #endif
+> >>>>>
+> >>>>> Does this make sense?
+> >>>>
+> >>>> Hi Quentin,
+> >>>>
+> >>>>       Thanks for your information about pipeline and suggestion for
+> >>>> code
+> >>>> change, but this workaround does not looks good :(
+> >>>>
+> >>>
+> >>> Thanks for the suggestions. I think this code can be even simplified
+> >>> to just i.e.:
+> >>>
+> >>> @@ -204,12 +204,12 @@ void printdec(unsigned int value);
+> >>>   #define DEBUG_UART_FUNCS \
+> >>>          #warning "DEBUG_UART not defined!"
+> >>>
+> >>> -#define printch(ch) do{}while(0);
+> >>> -#define printascii(str) do{}while(0);
+> >>> -#define printhex2(value) do{}while(0);
+> >>> -#define printhex4(value) do{}while(0);
+> >>> -#define printhex8(value) do{}while(0);
+> >>> -#define printdec(value) do{}while(0);
+> >>> +#define printch(ch) (void)ch;
+> >>> +#define printascii(str) (void)str;
+> >>> +#define printhex2(value) (void)value;
+> >>> +#define printhex4(value) (void)value;
+> >>> +#define printhex8(value) (void)value;
+> >>> +#define printdec(value) (void)value;
+> >>>
+> >>>   #endif
+> >>>
+> >>> That will allow us to get rid of warnings. What do you think? I can't
+> >>> think of another method besides creating a lot of #ifdefs in every
+> >>> place debug functions are used, which will look even worse than the
+> >>> dummy macros.
+> >>>
+> >>
+> >> You need to surround value/str/ch with parentheses though.
+> >>
+> >> And we should remove the trailing semi-colon too as we cannot
+> >> guarantee it won't be used in contexts in which the semi-colon is not
+> >> allowed.
+> >>
+> >> But I guess that could work? I'm not too verse in C macros so maybe
+> >> I'm missing some corner-cases.
+> >>
+> >> I think Kever is suggesting we revert the commit he linked earlier so
+> >> that the functions used by the macros modified in this commit are
+> >> always defined, just empty.
+> >
+> > At first, what I think first is:
+> >
+> > We go back to use #ifdef in the C code, and then we can apply this
+> > patch directly with below change:
+> >
+> > +++ b/common/console.c
+> > @@ -744,7 +744,8 @@ void puts(const char *s)
+> >                 return;
+> >         }
+> >
+> > -       if (IS_ENABLED(CONFIG_DEBUG_UART) && !(gd->flags &
+> > GD_FLG_SERIAL_READY)) {
+> > +#ifdef CONFIG_DEBUG_UART
+> > +       if (!(gd->flags & GD_FLG_SERIAL_READY)) {
+> >                 while (*s) {
+> >                         int ch =3D *s++;
+> >
+> > @@ -752,6 +753,7 @@ void puts(const char *s)
+> >                 }
+> >                 return;
+> >         }
+> > +#endif
+> >
+> >
+> > Since we need to change code in function puts, then below change looks
+> > better, :
+> >
+> > +++ b/common/console.c
+> > @@ -745,11 +745,7 @@ void puts(const char *s)
+> >         }
+> >
+> >         if (IS_ENABLED(CONFIG_DEBUG_UART) && !(gd->flags &
+> > GD_FLG_SERIAL_READY)) {
+> > -               while (*s) {
+> > -                       int ch =3D *s++;
+> > -
+> > -                       printch(ch);
+> > -               }
+> > +               printascii(s);
+> >                 return;
+> >         }
+> >
+> > But I don't know why use 'printch' at the beginning, maybe try to
+> > convert "(ch =3D=3D '\n')" to '\r' which later move into  "_printch", s=
+o
+> > we can use printascii() now.
+>
+> I have send this change to mailing list[1], if it's accepted, then I
+> will apply this patch set directly without change.
+>
+>
+> Thanks,
+>
+> - Kever
+>
+> [1]
+> https://patchwork.ozlabs.org/project/uboot/patch/20241108163612.1.Ib408a6=
+723ba954c932968419678bd45b0767a470@changeid/
+>
 
-> +int dh_read_eeprom_id_page(u8 *eeprom_buffer, const char *alias)
-> +{
-> +	u8 buffer[DH_EEPROM_ID_PAGE_MAX_SIZE] = { 0 };
-> +	struct eeprom_id_page *eipp;
-> +	struct udevice *dev;
-> +	int eeprom_size;
-> +	char path[128];
-> +	ofnode node;
-> +	int len;
-> +	int ret;
-> +	u8 c8;
+Thank you, that sounds perfect to me.
 
-A more descriptive variable name would be useful. What does 'c8' mean ?
+Best regards,
+Lukasz
 
-> +	node = ofnode_path(alias);
-> +	if (!ofnode_valid(node)) {
-> +		printf("%s: ofnode for %s not found!", __func__, alias);
-> +		return -ENOENT;
-> +	}
-> +
-> +	ret = ofnode_get_path(node, path, sizeof(path));
-> +	if (ret)
-> +		return ret;
-> +
-> +	len = strlen(path);
-> +	if (len <= 0)
-> +		return -EINVAL;
-> +
-> +	if (path[len - 1] == '0')
-> +		path[len - 1] = '8';
-> +	else if (path[len - 1] == '3')
-> +		path[len - 1] = 'b';
-
-Simply add alias to eeprom0wl/eeprom1wl and outright look up the alias:
-
-arch/arm/dts/imx8mp-dhcom-u-boot.dtsi
-"
-#include "imx8mp-u-boot.dtsi"
-
-/ {
-         aliases {
-                 eeprom0 = &eeprom0;
-                 eeprom1 = &eeprom1;
-+               eeprom0wl = &eeprom0wl;
-+               eeprom1wl = &eeprom1wl;
-                 mmc0 = &usdhc2; /* MicroSD */
-                 mmc1 = &usdhc3; /* eMMC */
-                 mmc2 = &usdhc1; /* SDIO */
-         };
-};
-"
-
-node = ofnode_path(alias); // use the eeprom0wl/eeprom1wl alias
-
-> +	else
-> +		return -ENOENT;
-> +
-> +	node = ofnode_path(path);
-> +	if (!ofnode_valid(node))	/* ID page not present in DT */
-> +		return -ENOENT;
-> +
-> +	if (!ofnode_is_enabled(node))	/* ID page not enabled in DT */
-> +		return -ENOENT;
-> +
-> +	eeprom_size = ofnode_read_u32_default(node, "pagesize", 32);
-
-There are two problems here, pagesize != total EEPROM size and pagesize 
-may not be specified in DT but can still be inferred from compatible 
-string. Better use:
-
-board/toradex/common/tdx-eeprom.c
-
-uclass_get_device_by_ofnode(UCLASS_I2C_EEPROM, eeprom, devp);
-
-include/i2c_eeprom.h
-
-int i2c_eeprom_size(struct udevice *dev);
-
-to get the EEPROM size . 24C32 WLP compatible string is already present 
-in drivers/misc/i2c_eeprom.c since:
-
-3c11643b1915 ("eeprom: at24: add ST M24C32-D Additional Write lockable 
-page support")
-
-> +	if (eeprom_size > DH_EEPROM_ID_PAGE_MAX_SIZE) {
-> +		eeprom_size = DH_EEPROM_ID_PAGE_MAX_SIZE;
-> +		log_warning("Warning: Read data from EEPROM ID page truncated to %d bytes\n",
-> +			    DH_EEPROM_ID_PAGE_MAX_SIZE);
-> +	}
-> +
-> +	ret = uclass_get_device_by_ofnode(UCLASS_I2C_EEPROM, node, &dev);
-> +	if (ret) {
-> +		printf("%s: Cannot find ID page! Check DT, maybe EEPROM ID page is enabled but not populated! ret = %d\n",
-> +		       __func__, ret);
-
-Use log_warning() consistently .
-
-> +		return ret;
-> +	}
-> +
-> +	ret = i2c_eeprom_read(dev, 0x0, buffer, eeprom_size);
-> +	if (ret) {
-> +		printf("%s: Error reading ID page! ret = %d\n", __func__, ret);
-> +		return ret;
-> +	}
-> +
-> +	eipp = (struct eeprom_id_page *)buffer;
-> +
-> +	/* Validate header magic */
-> +	if (eipp->id[0] != 'D' || eipp->id[1] != 'H' || eipp->id[2] != 'E')
-> +		return -EINVAL;
-> +
-> +	/* Validate header checksum */
-> +	c8 = crc8(0xff, buffer, offsetof(struct eeprom_id_page, header_crc8));
-> +	if (eipp->header_crc8 != c8)
-> +		return -EINVAL;
-> +
-> +	/* Here the data has a valid header, so that all data can be copied */
-> +	memcpy(eeprom_buffer, buffer, eeprom_size);
-
-No need for the extra local buffer, drop the memcpy() and use 
-eeprom_buffer directly. If the data in eeprom_buffer would be garbage 
-for whatever reason, this function would return -ve anyway and the 
-called should not use the content of eeprom_buffer .
-
-> +
-> +	return 0;
-> +}
-> +
-> +int dh_get_value_from_eeprom_buffer(enum eip_request_values request, u8 *data, int data_len,
-> +				    u8 *eeprom_buffer)
-> +{
-> +	struct eeprom_id_page *eipp;
-
-struct eeprom_id_page *eipp = eeprom_buffer;
-
-> +	char soc;
-> +	u16 c16;
-> +	u8 c8;
-
-A more descriptive variable name would be helpful.
-
-> +
-> +	eipp = (struct eeprom_id_page *)eeprom_buffer;
-> +
-> +	/* Validate header magic */
-> +	if (eipp->id[0] != 'D' || eipp->id[1] != 'H' || eipp->id[2] != 'E')
-> +		return -EINVAL;
-> +
-> +	/* Validate header checksum */
-> +	c8 = crc8(0xff, eeprom_buffer, offsetof(struct eeprom_id_page, header_crc8));
-> +	if (eipp->header_crc8 != c8)
-> +		return -EINVAL;
-> +
-> +	/* Validate header version */
-> +	if (eipp->version != 0x10)
-
-This could use a macro for 0x10.
-
-> +		return -EINVAL;
-> +
-> +	/* Validate structure checksum */
-> +	c16 = crc16(0xffff, eeprom_buffer + offsetof(struct eeprom_id_page, mac0),
-> +		    sizeof(*eipp) - offsetof(struct eeprom_id_page, mac0));
-> +	if (((eipp->data_crc16[1] << 8) | eipp->data_crc16[0]) != c16)
-> +		return -EINVAL;
-
-This entire header and payload validation can be done once in 
-dh_read_eeprom_id_page(), no need to do it every time this function is 
-called on in-memory buffer. Doing so saves you multiple crc8/crc16 
-passes and some wasted CPU cycles.
-
-> +	/* Copy requested data */
-> +	switch (request) {
-> +	case MAC0:
-> +		if (!is_valid_ethaddr(eipp->mac0))
-> +			return -EINVAL;
-> +		if (data_len >= sizeof(eipp->mac0))
-
-Can you return pointer into the eeprom buffer instead of this memcpy ?
-That would save you unnecessary memory copying.
-
-> +			memcpy(data, eipp->mac0, sizeof(eipp->mac0));
-> +		else
-> +			return -EINVAL;
-> +		break;
-> +	case MAC1:
-> +		if (!is_valid_ethaddr(eipp->mac1))
-> +			return -EINVAL;
-> +		if (data_len >= sizeof(eipp->mac1))
-> +			memcpy(data, eipp->mac1, sizeof(eipp->mac1));
-> +		else
-> +			return -EINVAL;
-> +		break;
-> +	case DH_ITEM_NUMBER:
-> +		if (data_len < 8) /* String length must be 7 characters + string termination */
-> +			return -EINVAL;
-> +
-
-const u8 item_prefix = eipp->item_prefix & 0xf;
-
-if (item_prefix == DH_ITEM_PREFIX_NXP)
-	soc = DH_ITEM_PREFIX_NXP_CHR;
-else if (item_prefix == DH_ITEM_PREFIX_ST)
-	soc = DH_ITEM_PREFIX_ST_CHR;
-else
-	return -EINVAL
-
-This has fewer lines.
-
-> +		switch (eipp->item_prefix & 0xf) {
-> +		case DH_ITEM_PREFIX_NXP:
-> +			soc = DH_ITEM_PREFIX_NXP_CHR;
-> +			break;
-> +		case DH_ITEM_PREFIX_ST:
-> +			soc = DH_ITEM_PREFIX_ST_CHR;
-> +			break;
-> +		default:
-> +			return -EINVAL;
-> +		}
-> +		snprintf(data, data_len, "%c%c%05d",
-
-Using a temporary variable for this item_prefix would likely help 
-readability:
-
-
-const char fin_chr = (eipp->item_prefix & DH_ITEM_PREFIX_FIN_BIT) ?
-                      DH_ITEM_PREFIX_FIN_FLASHED_CHR :
-                      DH_ITEM_PREFIX_FIN_HALF_CHR;
-...
-snprintf(data, data_len, "%c%c%05d", fin_chr, soc_chr, ...
-
-> +			 (eipp->item_prefix & DH_ITEM_PREFIX_FIN_BIT) ?
-> +			 DH_ITEM_PREFIX_FIN_FLASHED_CHR : DH_ITEM_PREFIX_FIN_HALF_CHR,
-> +			 soc, (eipp->item_num[0] << 16) | (eipp->item_num[1] << 8)
-> +			       | eipp->item_num[2]);
-> +		break;
-> +	case DH_SERIAL_NUMBER:
-> +		/*
-> +		 * data_len must be greater than the size of eipp->serial,
-> +		 * because there is a string termination needed.
-> +		 */
-> +		if (data_len <= sizeof(eipp->serial))
-> +			return -EINVAL;
-> +
-> +		data[sizeof(eipp->serial)] = 0;
-> +		memcpy(data, eipp->serial, sizeof(eipp->serial));
-> +		break;
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->   int dh_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
->   {
->   	struct udevice *dev;
-> @@ -62,7 +255,7 @@ int dh_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
->   	return 0;
->   }
->   
-> -__weak int dh_setup_mac_address(void)
-> +__weak int dh_setup_mac_address(u8 *eeprom_buffer)
->   {
->   	unsigned char enetaddr[6];
->   
-> @@ -72,6 +265,9 @@ __weak int dh_setup_mac_address(void)
->   	if (dh_get_mac_is_enabled("ethernet0"))
->   		return 0;
->   
-> +	if (!dh_get_value_from_eeprom_buffer(MAC0, enetaddr, sizeof(enetaddr), eeprom_buffer))
-> +		return 0;
-
-Is this missing some eth_env_set_enetaddr("ethaddr", enetaddr); here ?
-
-> +
->   	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
->   		return eth_env_set_enetaddr("ethaddr", enetaddr);
->   
-> diff --git a/board/dhelectronics/common/dh_common.h b/board/dhelectronics/common/dh_common.h
-> index a2de5b1553..60806c452a 100644
-> --- a/board/dhelectronics/common/dh_common.h
-> +++ b/board/dhelectronics/common/dh_common.h
-> @@ -3,6 +3,15 @@
->    * Copyright 2022 DENX Software Engineering GmbH, Philip Oberfichtner <pro@denx.de>
->    */
->   
-> +#define DH_EEPROM_ID_PAGE_MAX_SIZE	64
-> +
-> +enum eip_request_values {
-> +	MAC0,
-> +	MAC1,
-
-Please be consistent with the prefixes, DH_MAC...
-
-> +	DH_ITEM_NUMBER,
-> +	DH_SERIAL_NUMBER,
-> +};
-> +
->   /*
->    * dh_mac_is_in_env - Check if MAC address is already set
->    *
-
-[...]
-
-> +++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-> @@ -40,7 +40,26 @@ int board_phys_sdram_size(phys_size_t *size)
->   	return 0;
->   }
->   
-> -static int dh_imx8_setup_ethaddr(void)
-> +int dh_get_som_rev(void)
-> +{
-> +	int ret;
-> +
-> +	/*
-> +	 * The hardware revision numbers are binary coded with 3 GPIOs:
-> +	 * 0x0 = Rev. 100
-> +	 * 0x1 = Rev. 200
-> +	 * 0x2 = Rev. 300
-> +	 * ...
-> +	 */
-> +	ret = !!(readl(GPIO3_BASE_ADDR) & BIT(14));
-> +	ret |= !!(readl(GPIO4_BASE_ADDR) & BIT(19)) << 1;
-> +	ret |= !!(readl(GPIO3_BASE_ADDR) & BIT(25)) << 2;
-> +	ret = ret * 100 + 100;
-
-This entire function will be unnecessary, see below (*) ...
-
-> +	return ret;
-> +}
-> +
-> +static int dh_imx8_setup_ethaddr(u8 *eeprom_buffer)
->   {
->   	unsigned char enetaddr[6];
->   
-> @@ -53,6 +72,11 @@ static int dh_imx8_setup_ethaddr(void)
->   	if (!dh_imx_get_mac_from_fuse(enetaddr))
->   		goto out;
->   
-> +	/* The EEPROM ID page is available on SoM rev. 200 and greater. */
-> +	if ((dh_get_som_rev() > 100) &&
-> +	    (!dh_get_value_from_eeprom_buffer(MAC0, enetaddr, sizeof(enetaddr), eeprom_buffer)))
-> +		goto out;
-> +
->   	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
->   		goto out;
->   
-> @@ -62,7 +86,7 @@ out:
->   	return eth_env_set_enetaddr("ethaddr", enetaddr);
->   }
->   
-> -static int dh_imx8_setup_eth1addr(void)
-> +static int dh_imx8_setup_eth1addr(u8 *eeprom_buffer)
->   {
->   	unsigned char enetaddr[6];
->   
-> @@ -75,6 +99,11 @@ static int dh_imx8_setup_eth1addr(void)
->   	if (!dh_imx_get_mac_from_fuse(enetaddr))
->   		goto increment_out;
->   
-> +	/* The EEPROM ID page is available on SoM rev. 200 and greater. */
-> +	if ((dh_get_som_rev() > 100) &&
-> +	    (!dh_get_value_from_eeprom_buffer(MAC1, enetaddr, sizeof(enetaddr), eeprom_buffer)))
-> +		goto out;
-> +
->   	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom1"))
->   		goto out;
->   
-> @@ -95,21 +124,58 @@ out:
->   	return eth_env_set_enetaddr("eth1addr", enetaddr);
->   }
->   
-> -int dh_setup_mac_address(void)
-> +int dh_setup_mac_address(u8 *eeprom_buffer)
->   {
->   	int ret;
->   
-> -	ret = dh_imx8_setup_ethaddr();
-> +	ret = dh_imx8_setup_ethaddr(eeprom_buffer);
->   	if (ret)
->   		printf("%s: Unable to setup ethaddr! ret = %d\n", __func__, ret);
->   
-> -	ret = dh_imx8_setup_eth1addr();
-> +	ret = dh_imx8_setup_eth1addr(eeprom_buffer);
->   	if (ret)
->   		printf("%s: Unable to setup eth1addr! ret = %d\n", __func__, ret);
->   
->   	return ret;
->   }
->   
-> +void dh_add_item_number_and_serial_to_env(u8 *eeprom_buffer)
-> +{
-> +	char *item_number_env;
-> +	char item_number[8];	/* String with 7 characters + string termination */
-> +	char *serial_env;
-> +	char serial[10];	/* String with 9 characters + string termination */
-> +	int ret;
-> +
-> +	ret = dh_get_value_from_eeprom_buffer(DH_ITEM_NUMBER, item_number, sizeof(item_number),
-> +					      eeprom_buffer);
-> +	if (ret) {
-> +		printf("%s: Unable to get item number from EEPROM ID page! ret = %d\n",
-> +		       __func__, ret);
-
-log_warning or log_error to be consistent with the rest of this patch.
-
-> +	} else {
-> +		item_number_env = env_get("vendor_item_number");
-
-Can these variables get prefixes, "dh_...", so they are namespaced and 
-it is clear they are not generic U-Boot environment variables ?
-
-> +		if (!item_number_env)
-> +			env_set("vendor_item_number", item_number);
-> +		else if (strcmp(item_number_env, item_number) != 0)
-> +			log_warning("Warning: Environment vendor_item_number differs from EEPROM ID page value (%s != %s)\n",
-> +				    item_number_env, item_number);
-> +	}
-> +
-> +	ret = dh_get_value_from_eeprom_buffer(DH_SERIAL_NUMBER, serial, sizeof(serial),
-> +					      eeprom_buffer);
-> +	if (ret) {
-> +		printf("%s: Unable to get serial from EEPROM ID page! ret = %d\n",
-> +		       __func__, ret);
-
-return ret;
-
-> +	} else {
-> +		serial_env = env_get("SN");
-> +		if (!serial_env)
-> +			env_set("SN", serial);
-> +		else if (strcmp(serial_env, serial) != 0)
-> +			log_warning("Warning: Environment SN differs from EEPROM ID page value (%s != %s)\n",
-> +				    serial_env, serial);
-> +	}
-> +}
-> +
->   int board_init(void)
->   {
->   	return 0;
-> @@ -117,7 +183,19 @@ int board_init(void)
->   
->   int board_late_init(void)
->   {
-> -	dh_setup_mac_address();
-> +	u8 eeprom_buffer[DH_EEPROM_ID_PAGE_MAX_SIZE] = { 0 };
-> +	int ret;
-> +
-> +	/* The EEPROM ID page is available on SoM rev. 200 and greater. */
-> +	if (dh_get_som_rev() > 100) {
-
-If the WLP is not described or disabled in DT (the later is the case for 
-rev.100 SoM) (*), dh_read_eeprom_id_page() will bail and so there is not 
-need for this custom SoM revision check. DT is, after all, a hardware 
-description.
-
-[...]
+> >
+> >
+> > Thanks,
+> >
+> > - Kever
+> >
+> >> Is this something you could test? The downside to this is that we
+> >> would have a lot of unnecessary dead-code with loops calling empty
+> >> functions instead of just not calling functions at all.
+> >>
+> >> Cheers,
+> >> Quentin
+> >>
+> >
