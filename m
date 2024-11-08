@@ -4,91 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B80F1D5D696
-	for <u-boot@archiver.kernel.org>; Thu,  7 Nov 2024 22:32:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B2DCD5D69F
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 00:50:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3547D8860B;
-	Thu,  7 Nov 2024 23:32:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5CFBC88C66;
+	Fri,  8 Nov 2024 01:50:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Jw1LTRNQ";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ThDZHRwH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DCC78885D; Thu,  7 Nov 2024 23:32:40 +0100 (CET)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 75B7388C66; Fri,  8 Nov 2024 01:50:51 +0100 (CET)
+Received: from mail-m19731102.qiye.163.com (mail-m19731102.qiye.163.com
+ [220.197.31.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 264D288606
- for <u-boot@lists.denx.de>; Thu,  7 Nov 2024 23:32:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9892F88B8F
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 01:50:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-83ab5b4b048so59942139f.2
- for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 14:32:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731018756; x=1731623556; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=b28DHQ6TfaRqpGnVdSrua6CvKpuoLPo7nvsdJLD7qVk=;
- b=Jw1LTRNQYy1lB27/ryeLM14JGiLBFJGzvZdwka17lxP4nN5YI99re0V8/jJ3iIO6Jz
- M1J4Hbx2OlJcfXeRXn99b1SKHmAqR7KpPSKd8XqLOcD8UF4NqgIooK2bS46lq3RCTrI+
- a3W0eTZg8WM5dcvhAEyqIpLVZUVUA0mFPlu5Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731018756; x=1731623556;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=b28DHQ6TfaRqpGnVdSrua6CvKpuoLPo7nvsdJLD7qVk=;
- b=vO458Bnlo/ov+gHPE+CLiv5gZvwQIol9NOcgQS4IFZEgBa8TNFvPJj6equ0uA8K8DF
- YOdA6zs2gI8e8glUr/rIiK/AZ2JYkPrgN7/Iu8RFunqEmIickR3yMUU9/iaLbnn2CCJp
- v6G99y06CaODL5lQMYYRiWZsvifxd3rfOAxhujcjFqs/hPzWuf7cNIXcDSuzDhcKnBm0
- qbUmuyp4OlQHg8UQpM2nOZTGMVgGdBPOzz4AesolRDsu3A/ptj/Iqu+/lQE0/5BjQspj
- mPF31dlJKpf0IEh1Frw02BQtQQjNmtuNDo/LxLfuab/oAgi2jA1zY6w2BXlHDkytzf4W
- 69Kw==
-X-Gm-Message-State: AOJu0Yy6HnBMZeffaHBN26bfI7PtY7PultFx7YMJ/3n/rXTAuaQ3y2bc
- Xn8iJckXGrGltLIojHC7UjB3gZvPhVxic9GEuH+qn/T5ckZOKBiStttiwfrB/wJYqAYt8OafcJc
- =
-X-Google-Smtp-Source: AGHT+IEpFKKQmnCPZJA9yqfmopuQuUzc2Byc0zsQMZwZtIHvI8pvny2MFc9VabmgRLju8RoOsOxKQw==
-X-Received: by 2002:a05:6e02:198b:b0:3a6:ac17:13e9 with SMTP id
- e9e14a558f8ab-3a6f19e225amr12315665ab.11.1731018756221; 
- Thu, 07 Nov 2024 14:32:36 -0800 (PST)
-Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
- [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a6ead31427sm5013485ab.72.2024.11.07.14.32.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Nov 2024 14:32:34 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>, Moritz Fischer <moritzf@google.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sean Anderson <seanga2@gmail.com>, Shantur Rathore <i@shantur.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Yang Xiwen <forbidden405@outlook.com>
-Subject: [PATCH v10 00/10] efi: Add a test for EFI bootmeth
-Date: Thu,  7 Nov 2024 15:32:18 -0700
-Message-Id: <20241107223228.1914452-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [172.16.12.67] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 22250aef;
+ Fri, 8 Nov 2024 08:50:39 +0800 (GMT+08:00)
+Message-ID: <33edc0c5-29ea-4857-ac60-569c39102f57@rock-chips.com>
+Date: Fri, 8 Nov 2024 08:50:39 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH next v2 4/4] rockchip: rk3399: move sysreset-gpio logic to
+ TPL
+To: Paul Kocialkowski <paulk@sys-base.io>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Klaus Goger <klaus.goger@cherry.de>, u-boot@lists.denx.de,
+ Paul Kocialkowski <contact@paulk.fr>
+References: <20241106-rk3399-sysreset-gpio-tpl-v2-0-22aa82189eb6@cherry.de>
+ <20241106-rk3399-sysreset-gpio-tpl-v2-4-22aa82189eb6@cherry.de>
+ <149361d4-4cbb-4007-b00f-6b4efbd7978f@rock-chips.com>
+ <5cfa0fbe-5003-4da1-9933-7664da07cd4d@cherry.de> <ZyyyNttkdcdQmmCw@collins>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <ZyyyNttkdcdQmmCw@collins>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR4eGFYYHUIeT05KTRpDThlWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
+ JVSktLVUpCS0tZBg++
+X-HM-Tid: 0a930940759803afkunm22250aef
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OTY6KBw6TjIYTzQ#C0ovAwhW
+ AR8KCjhVSlVKTEhKS0lMS09LTE5PVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISEpINwY+
+DKIM-Signature: a=rsa-sha256;
+ b=ThDZHRwHBBfDDJQguj378ApAhGw0ySAyWxfewTJ7souGrV7A1MDgXBedCGpyU69KXIx317sXd0wXW8lxQJlTv1FBJBUjGC6NqTfQxkZcA/ueDPBdeQNEOjKIswg6XKZNB8MOLy5LXo+YFRxk6xSBXcFVAvDJrOHryIQ9/mbwQ9A=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=9jsWpW2dfszbluut69i11s6fqbMsceVNN2vxFF5AZq4=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,94 +80,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The test coverage for the EFI bootmeth is incomplete since it does not
-actually boot the application.
+Hi Paul,
 
-This series creates a simple test for this purpose. It includes a few
-patches to make this work:
+On 2024/11/7 20:27, Paul Kocialkowski wrote:
+> Hi,
+>
+> Le Thu 07 Nov 24, 12:04, Quentin Schulz a écrit :
+>> On 11/7/24 8:14 AM, Kever Yang wrote:
+>>> Yes, this movement is reasonable and needed for this workaround,
+>>> although still not
+>>>
+>>> understand why puma board need this.
+>> Me neither, this predates me joining the company, c.f.:
+>> https://source.denx.de/u-boot/u-boot/-/commit/ae0d33a7291a164a11ae034bcf4f71226b2bef48
+>> https://source.denx.de/u-boot/u-boot/-/commit/5f104178bf713615dc404fdfcf0fb53d89c66a07
+>> https://source.denx.de/u-boot/u-boot/-/commit/07586ee4322abca01db52624b925e5218538f259
+>>
+>> What I can tell you is that it seems this is required as Paul (in Cc) is
+>> trying to add support for it for the Firefly ROC-RK3399-PC[1] and the
+>> ROCKPro64[2], so it seems it's useful for **some** purpose.
+> The initial issue I was seeing was that one of the MMC controllers showed some
+> errors and failed to read data after reboot, while it always worked on cold
+> boot. With this feature enabled, it worked reliably after reboot.
+>
+> I didn't investigate exactly which component (maybe clocks, maybe regulators)
+> caused the problem, but it clearly wasn't correctly reset.
 
-- Revert of an unreviewed patch to change the sandbox efi filename
-- Hang in sandbox virtio due to EFI probing all block devices
+Are you able to check, how is the 'reboot' happen, does it use the 
+system_reset API from the ATF?
 
-Other necessary fixes have already been applied.
+Because there are some operations for clock and PD before trigger the 
+global reset in ATF driver
 
-Changes in v10:
-- Drop call to exit-boot-services
-- Rebase to -master
-- Specify the bootdev order, to avoid including cros device
+and the code is very stable and used for millions of devices.
 
-Changes in v9:
-- Update license
-- Fix 'sevices' typo
-- Move the function into efi_helper.c
-- Split out into a separate change
-- Split out into its own patch
-- Separate into separate patches
-- Add new patch to drop sandbox PXE architecture
-- Mark the image as complete after writing it
-- Fix 'sevices' typo
 
-Changes in v8:
-- Add new patch to control on-host behaviour
-- Add new patch to move default filename to a function
-- Add new patch to report host default-filename in native mode
-- Add new patch to report host default-filename in native mode
-
-Changes in v7:
-- Update commit message
-- Drop patches already applied
-- Drop patch 'Disable ANSI output for tests'
-- Rebase on -master
-
-Changes in v6:
-- Drop the patch to disable sandbox virtio blk with EFI
-- Add new patch to disable the sandbox virtio blk device
-- Deal with sandbox CONFIG_LOGF_FUNC
-- Rebase on -next
-- Drop patches previously applied
-- Drop mention of helloworld since it is no-longer used by this test
-
-Changes in v4:
-- Add efi_loader tag to some patches
-- Split out non-EFI patches into a different series
-
-Changes in v2:
-- Add many new patches to resolve all the outstanding test issues
-
-Simon Glass (10):
-  efi_loader: Add a test app
-  sandbox: Add a -N flag to control on-host behaviour
-  efi: Move default filename to a function
-  efi_loader: Move get_efi_pxe_arch() to efi_helper
-  efi_loader: Allow reporting the host defaults
-  sandbox: Report host default-filename in native mode
-  efi_loader: Drop sandbox PXE architecture
-  sandbox: virtio: Disable the sandbox virtio blk device
-  test: efi: boot: Set up an image suitable for EFI testing
-  test: efi: boot: Add a test for the efi bootmeth
-
- arch/Kconfig                        |   3 +-
- arch/sandbox/cpu/start.c            |  10 ++++
- arch/sandbox/dts/test.dts           |   2 +-
- arch/sandbox/include/asm/state.h    |   1 +
- boot/bootmeth_efi.c                 |  29 ++---------
- cmd/efidebug.c                      |  25 +++++++++
- include/efi.h                       |  34 +++++++++++++
- include/efi_default_filename.h      |  56 --------------------
- lib/efi_loader/Kconfig              |  10 ++++
- lib/efi_loader/Makefile             |   1 +
- lib/efi_loader/efi_bootmgr.c        |  10 ++--
- lib/efi_loader/efi_helper.c         |  71 ++++++++++++++++++++++++++
- lib/efi_loader/testapp.c            |  64 +++++++++++++++++++++++
- test/boot/bootdev.c                 |  18 ++++++-
- test/boot/bootflow.c                |  76 ++++++++++++++++++++++++++--
- test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 4924 bytes
- test/py/tests/test_ut.py            |  53 ++++++++++++++++---
- 17 files changed, 366 insertions(+), 97 deletions(-)
- delete mode 100644 include/efi_default_filename.h
- create mode 100644 lib/efi_loader/testapp.c
- create mode 100644 test/py/tests/bootstd/flash1.img.xz
-
--- 
-2.34.1
-
+Thanks,
+- Kever
+>
+> Cheers,
+>
+> Paul
+>
+>> [1]
+>> https://lore.kernel.org/u-boot/20240926183111.1324284-1-paulk@sys-base.io/
+>> [2]
+>> https://lore.kernel.org/u-boot/20240926183111.1324284-2-paulk@sys-base.io/
+>>
+>>>> - faster boot time as we don't need to reach SPL to be able to reset the
+>>>>     system on a condition we know is already met in TPL,
+>>>> - have less code to be impacted by the issue this system reset works
+>>>>     around (that is, "unclean" SoC registers after a reboot),
+>>>> - less confusion around the reason for restarting. Indeed when done from
+>>>>     SPL, the following log can be observed:
+>>>>
+>>>> """
+>>>> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
+>>>> Channel 0: DDR3, 666MHz
+>>>> BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+>>>> Channel 1: DDR3, 666MHz
+>>>> BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+>>>> 256B stride
+>>>> Trying to boot from BOOTROM
+>>>> Returning to boot ROM...
+>>>>
+>>>> U-Boot SPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 -
+>>>> 15:31:45 +0100)
+>>>> Trying to boot from MMC2
+>>>>
+>>>> U-Boot TPL 2025.01-rc1-00165-gd79216ca9878-dirty (Nov 05 2024 - 15:31:45)
+>>>> """
+>>> So with this patch set, we can see the TPL banner twice ?
+>>>
+>>>
+>>> PS: We are able to merge to master instead of next before next branch is
+>>> open, because we still have
+>>>
+>>> enough time to debug before next release.
+>>>
+>> My understanding is that once -rc1 is out, we should only do bug fixing in
+>> master. BUT at the same time, next branch isn't actually open until -rc2.
+>>
+>> Up to you! It's not really urgent, Puma was migrated to TPL only in v2023.01
+>> and we've lived without sysreset-gpio in TPL since then :)
+>>
+>> Cheers,
+>> Quentin
