@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D79C6D5C0C3
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:09:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0060D5C0C5
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:09:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D45B89235;
+	by phobos.denx.de (Postfix) with ESMTP id C501F89207;
 	Fri,  8 Nov 2024 14:06:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E1CxX9TR";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6483E88D9C; Fri,  8 Nov 2024 04:48:31 +0100 (CET)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D47C88B8F
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:48:29 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-20cb7139d9dso16709695ad.1
- for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 19:48:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731037707; x=1731642507; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hRUthw12g5yhQVLqV58OvCAn6fm1jpy5J7tx2HAaWto=;
- b=E1CxX9TR/TY+oEx2ZPajjpT/h29U1AG9UmzDV4M0GJgJyNHhKbWekPaMnEKg4pfi5F
- Y86lQvCVHH8xqz2GGt/cH0zXxpx4LPCjJ61IQWv0G/fOZj6sgW6KUfepiTAc60ZEV+Db
- jNHvuq+2403KSmEytut9PxxqdUr5fA1GXT7pModKdM+EQ702OWGarV/J3yWLr2lE1rTq
- ntPc2mbGV42xnSfK1Si8GGwFd8a9aCMowdBELdBUvdh9p6NjGRJLiNeblu4Wwb8CoegM
- OT2pvsOPKldGisXftTsKNUDAQYoVYFqRszZ8JVPGvDhzZ1EQBtf51lYWhaYHCxXHJaM+
- Uzdg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731037707; x=1731642507;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hRUthw12g5yhQVLqV58OvCAn6fm1jpy5J7tx2HAaWto=;
- b=BEPaCSBm3zFPixWEFBVduUmtnyhIPKBwoqTzhZ3goxWFTtKyljhpBghIfFv4CjEwJ9
- i3WDt8q2oy2VXDERx5YNEu8YP6gpFxFWqs/hx6qXP47zqstXLlNiwWUr0wc/pgZ6mzMP
- 0pM6dp1XrAjYdub83NVuebyoYXBiLrH10td5dv0Omkt5SlteQIhm7f0owoTizf1TxIaT
- LeD69im7jWTJQoAYmgaWP3S7+BAoXDxGNS6NoEZjo6Hu22OKbIkFZKopt2hhXLmH/YDJ
- 5crwFSqBo9kCE9wyZ05Q/9Ba/+hmrXi3+n6Pe8x42JAGI4hmpJrfRCzjioblIiGAyd2U
- MCpQ==
-X-Gm-Message-State: AOJu0YyR3wniw6lNQcYfexivfnmoZJXMl6TY8KPwwv9l3af5CdBSUO82
- PRaM9qS8AaJ/JULNxMhH0845oxCD58vBH8Z1eB5v3VjREkHkww5wB7a8/HIgNCY=
-X-Google-Smtp-Source: AGHT+IG56y2vvrfr2r7CqnOtN/L3/YS7u7mPscyYnJpM9lv+QJYUZPD1GJvP7RCrJdrZISP+2Ed7bA==
-X-Received: by 2002:a17:903:234c:b0:20b:6188:fc5e with SMTP id
- d9443c01a7336-21183d66a42mr15233365ad.28.1731037707468; 
- Thu, 07 Nov 2024 19:48:27 -0800 (PST)
-Received: from adriano.. ([190.215.83.227]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21177dc9e25sm20903655ad.27.2024.11.07.19.48.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Nov 2024 19:48:27 -0800 (PST)
-From: Adriano Cordova <adrianox@gmail.com>
-To: u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
- Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH 15/15] efi_selftest: add test for IPv4 Config2 protocol
-Date: Fri,  8 Nov 2024 00:48:22 -0300
-Message-ID: <20241108034822.346575-1-adrianox@gmail.com>
-X-Mailer: git-send-email 2.43.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1731071187;
+	bh=z1wZFMvHAHsuq5MF80OeBW2ZF1cM7pobG20Mf787BoA=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=tikU4NPzfCBQQ3oVZpPm7ubTA89RVj+f4/AsZWJF21OKJW8jWqoQtZnlkBE75laKo
+	 GVFbjXowl+/yPoK1spSgLlCDYH6x+InrtDBNgrFw1Kk8Ph+MDtJpyKqmK+5NpV4OIB
+	 ZNkJj1voPDzOSdj6wbek/3ohcp5vcplIu5ABZ5h8BkFlX7dH0RgGnXE4WjqE6oin32
+	 FBB9IvnxAgcialMdsVabxA2+eWSmRUkHIZ8MhOR9nMXJfhRqN3ykOOfvVCUhC3B+wZ
+	 dcgvdr5K7ZCqnpKe5YwNzhqL6rM0CcUupmpoR+RzwkrD79a69TLIQQgiZRsPEyDOJI
+	 aYjlbolV8Leug==
+Received: from localhost.localdomain (87-97-112-21.pool.digikabel.hu
+ [87.97.112.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 43A5A88E39;
+ Fri,  8 Nov 2024 06:21:47 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1731043311;
+ bh=z1wZFMvHAHsuq5MF80OeBW2ZF1cM7pobG20Mf787BoA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=EZTm/lF+6akpUrfbavS/sqAe+ktHXlIX3mOQpAyOOvIOJppnnzZRNMBRge6wQ/HcY
+ XzONDrRqYzGIlMGIGzD/gIRX0UPW1u4voEsFYSU4xAL3gBny59ufjmv8tGrlbng8Zb
+ FCsQRzIQYOgC7qzqD/mzoSneFnJYzSJgQVbYhoK2ue2lHtLZYu1q/33AFurz0iYKZm
+ 7q1UpYpgz6VXQwUOsUhaz2iCmKM35zoAH6aaFrfCwFir4b+OEy91mX+1qb/wauZPLY
+ Ylo1qactmkwxbrrWDJkVv1/X717ytgS/pTXPgaxRUnd8MNXL5EAsItzgePAFU5XB8G
+ MNOxPNYicyVxg==
+From: Heiko Schocher <hs@denx.de>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Enrico Leto <enrico.leto@siemens.com>,
+ Walter Schweizer <walter.schweizer@siemens.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Heiko Schocher <hs@denx.de>, Adam Ford <aford173@gmail.com>,
+ Alessandro Zini <alessandro.zini@siemens.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Andrej Valek <andrej.valek@siemens.com>, Baruch Siach <baruch@tkos.co.il>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Chanho Park <chanho61.park@samsung.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Fabio Estevam <festevam@gmail.com>, Gary Bisson <bisson.gary@gmail.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Michal Simek <michal.simek@amd.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ramon Fried <rfried.dev@gmail.com>, Randolph <randolph@andestech.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Stefano Babic <sbabic@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ Troy Kisky <troy.kisky@boundarydevices.com>, Ye Li <ye.li@nxp.com>
+Subject: [PATCH v1 00/22] imx8qxp: siemens board: updates / sync with mainline
+Date: Fri,  8 Nov 2024 06:21:21 +0100
+Message-Id: <20241108052143.26874-1-hs@denx.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 08 Nov 2024 14:06:21 +0100
@@ -90,209 +93,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a test for the EFI_IP4_CONFIG2_PROTOCOL. The test sets the ip
-policy to static, adds an ip address, and then reads the current
-ip address and checks for it to be the same as the one that was set.
+Updating the imx8qxp based siemens board. The current
+state of the siemens imx8qxp board is in an old not
+really working state.
 
-Signed-off-by: Adriano Cordova <adrianox@gmail.com>
----
- lib/efi_selftest/Makefile                |   2 +
- lib/efi_selftest/efi_selftest_ipconfig.c | 173 +++++++++++++++++++++++
- 2 files changed, 175 insertions(+)
- create mode 100644 lib/efi_selftest/efi_selftest_ipconfig.c
+This series brings mainline back working on the siemens
+deneb board, the guedi board is dropped as not longer used.
 
-diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
-index 140c08effc..17fbfad116 100644
---- a/lib/efi_selftest/Makefile
-+++ b/lib/efi_selftest/Makefile
-@@ -53,6 +53,8 @@ efi_selftest_watchdog.o
- obj-$(CONFIG_EFI_ECPT) += efi_selftest_ecpt.o
- obj-$(CONFIG_NETDEVICES) += efi_selftest_snp.o
- obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_http.o
-+obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_ipconfig.o
-+
- obj-$(CONFIG_EFI_DEVICE_PATH_TO_TEXT) += efi_selftest_devicepath.o
- obj-$(CONFIG_EFI_UNICODE_COLLATION_PROTOCOL2) += \
- efi_selftest_unicode_collation.o
-diff --git a/lib/efi_selftest/efi_selftest_ipconfig.c b/lib/efi_selftest/efi_selftest_ipconfig.c
-new file mode 100644
-index 0000000000..c584725419
---- /dev/null
-+++ b/lib/efi_selftest/efi_selftest_ipconfig.c
-@@ -0,0 +1,173 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * efi_selftest_ipconfig
-+ *
-+ * This unit test covers the IPv4 Config2 Protocol.
-+ *
-+ */
-+
-+#include <efi_selftest.h>
-+#include <charset.h>
-+#include <net.h>
-+
-+static struct efi_boot_services *boottime;
-+
-+static struct efi_ip4_config2_protocol *ip4_config2;
-+static const efi_guid_t efi_ip4_config2_guid = EFI_IP4_CONFIG2_PROTOCOL_GUID;
-+
-+/*
-+ * Setup unit test.
-+ *
-+ * Open IPv4 Config2 protocol
-+ *
-+ * @handle:	handle of the loaded image
-+ * @systable:	system table
-+ * Return:	EFI_ST_SUCCESS for success
-+ */
-+static int setup(const efi_handle_t handle,
-+		 const struct efi_system_table *systable)
-+{
-+	efi_status_t ret;
-+	efi_handle_t *net_handle;
-+	efi_uintn_t num_handles;
-+	efi_handle_t *handles;
-+
-+	boottime = systable->boottime;
-+
-+	boottime->locate_handle_buffer(BY_PROTOCOL, &efi_ip4_config2_guid,
-+				       NULL, &num_handles, &handles);
-+
-+	for (net_handle = handles; num_handles--; net_handle++) {
-+		ret = boottime->open_protocol(*net_handle, &efi_ip4_config2_guid,
-+					      (void **)&ip4_config2, 0, 0,
-+					      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+		if (ret != EFI_SUCCESS || !ip4_config2)
-+			continue;
-+		break; // Get first handle that supports ipv4
-+	}
-+
-+	if (!ip4_config2) {
-+		efi_st_error("Failed to locate ipv4 config2 protocol\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	return EFI_ST_SUCCESS;
-+}
-+
-+/*
-+ * Execute unit test.
-+ *
-+ *
-+ * Return:	EFI_ST_SUCCESS for success
-+ */
-+static int execute(void)
-+{
-+	efi_status_t ret;
-+	enum efi_ip4_config2_policy policy;
-+	efi_uintn_t data_size;
-+	struct efi_ip4_config2_manual_address manual_address;
-+	struct efi_ip4_config2_manual_address orig_address;
-+	u8 netmask[] = {255, 255, 255, 0};
-+	u8 ip[] = {10, 0, 0, 1};
-+
-+	/* Setup may have failed */
-+	if (!ip4_config2) {
-+		efi_st_error("Setup failure, cannot proceed with test\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Set policy to static */
-+	policy = EFI_IP4_CONFIG2_POLICY_STATIC;
-+	ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_POLICY,
-+			      sizeof(enum efi_ip4_config2_policy), (void *)&policy);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed to set policy\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Save original ip address and netmask */
-+	data_size = sizeof(struct efi_ip4_config2_manual_address);
-+	ret = ip4_config2->get_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
-+			      &data_size, &orig_address);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed to save original ip address and netmask\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Set static ip and netmask */
-+	memcpy((void *)&manual_address.address, (void *)ip,
-+	       sizeof(struct efi_ipv4_address));
-+	memcpy((void *)&manual_address.subnet_mask, (void *)netmask,
-+	       sizeof(struct efi_ipv4_address));
-+	ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
-+			      sizeof(struct efi_ip4_config2_manual_address), &manual_address);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed to get ip address and netmask\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Try to set interface info, this should fail */
-+	ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_INTERFACEINFO, 0, NULL);
-+	if (ret == EFI_SUCCESS) {
-+		efi_st_error("Interface info is read-only\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Get ip address and netmask and check that they match with the previously set ones */
-+	data_size = sizeof(struct efi_ip4_config2_manual_address);
-+	ret = ip4_config2->get_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
-+			      &data_size, &manual_address);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed to get ip address and netmask\n");
-+		return EFI_ST_FAILURE;
-+	}
-+	if (memcmp((void *)ip, (void *)&manual_address.address,
-+	    sizeof(struct efi_ipv4_address)) ||
-+	    memcmp((void *)netmask, (void *)&manual_address.subnet_mask,
-+	    sizeof(struct efi_ipv4_address))) {
-+		efi_st_error("Ip address mismatch\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Restore original ip address and netmask */
-+	ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
-+			      sizeof(struct efi_ip4_config2_manual_address), &orig_address);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed to restore original ip address and netmask\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	efi_st_printf("Efi ipconfig test execute succeeded\n");
-+	return EFI_ST_SUCCESS;
-+}
-+
-+/*
-+ * Tear down unit test.
-+ *
-+ * Close the timer event created in setup.
-+ * Shut down the network adapter.
-+ *
-+ * Return:	EFI_ST_SUCCESS for success
-+ */
-+static int teardown(void)
-+{
-+	int exit_status = EFI_ST_SUCCESS;
-+
-+	return exit_status;
-+}
-+
-+EFI_UNIT_TEST(ipconfig) = {
-+	.name = "IPv4 config2 protocol",
-+	.phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
-+	.setup = setup,
-+	.execute = execute,
-+	.teardown = teardown,
-+#ifdef CONFIG_SANDBOX
-+	/*
-+	 * Running this test on the sandbox requires setting environment
-+	 * variable ethact to a network interface connected to a DHCP server and
-+	 * ethrotate to 'no'.
-+	 */
-+	.on_request = true,
-+#endif
-+};
+make all runs fine without having all the needed firmware images
+on board, and so CI @azure.
+
+If you want to have a working image you need to copy the
+following images to your build directory $BDIR:
+
+ATF : bl31-imx8dx.bin            -> $BDIR/bl31.bin
+AHAB: mx8qxc0-ahab-container.img -> $BDIR/mx8qxc0-ahab-container.img
+SCFW: deneb-scfw-tcm.bin         -> $BDIR/mx8qx-mek-scfw-tcm.bin
+
+and call make flash.bin
+
+There are also updates for ethernet and USB support, but not
+ready to push upstream currently, hopefully following soon.
+
+Azure build:
+https://dev.azure.com/hs0298/hs/_build/results?buildId=134&view=results
+
+patchseries needs patch:
+https://patchwork.ozlabs.org/project/uboot/patch/20241104180203.110395-1-hs@denx.de/
+
+series is based on mainline commit:
+56accc56b9a ("bios_emulator: fix first argument of pci_{read,write}_config_* function calls")
+
+Ah yes, not to forget, we work at siemens also on a CI setup to
+have a mainline nightly build and test on hardware. We already
+have such a CI for internall U-Boot versions up and running, but
+we do not want again loose sync with mainline.
+
+
+Enrico Leto (5):
+  siemens: capricorn: move to cxg3 reference project with deneb board
+  siemens: capricorn: get ram size from system controller
+  siemens: capricorn: get module name from eeprom
+  siemens: add ddr signal integrity test
+  siemens: capricorn: update maintainers
+
+Heiko Schocher (17):
+  wdt: imx8qxp: add option to control external PMIC wdt via IMX8 SCU
+  net: fec_mxc: fix probing for imx8qxp
+  tools: imx8image: Improve error message
+  imx: imx_cntr_image.sh: prevent warning for missing spl
+  imx8qxp: Fix build when using SPL
+  siemens: imx8qxp-capricorn-u-boot.dtsi: fix boot
+  siemens: capricorn: use DCD_SKIP entry
+  siemens: imximage.cfg: correct comment
+  siemens: imximage.cfg: sync image names
+  siemens: imx8-capricorn-u-boot.dtsi: add fec2
+  siemens: capricorn: add missing ARCH_MISC_INIT
+  siemens: configs/capricorn_cxg3_defconfig: updates
+  siemens: capricorn: sync spl code with 8qxp-mek
+  siemens: imx8-capricorn.dtsi: small adaptions
+  siemens: capricorn: board.c fixes
+  siemens: capricorn: add HW version information to boot log
+  siemens: add ddr full memory test
+
+ arch/arm/dts/Makefile                         |   3 +-
+ arch/arm/dts/imx8-capricorn-cxg3.dts          | 129 +++++++
+ ...u-boot.dtsi => imx8-capricorn-u-boot.dtsi} |  69 ++--
+ ...qxp-capricorn.dtsi => imx8-capricorn.dtsi} | 116 +-----
+ arch/arm/dts/imx8-deneb.dts                   |  10 -
+ arch/arm/dts/imx8-giedi.dts                   |  10 -
+ arch/arm/dts/imx8qxp-u-boot.dtsi              |   2 +
+ arch/arm/mach-imx/imx8/Kconfig                |  12 +-
+ board/boundary/nitrogen6x/nitrogen6x.c        |   2 +-
+ board/siemens/capricorn/Kconfig               |  25 +-
+ board/siemens/capricorn/MAINTAINERS           |  12 +-
+ board/siemens/capricorn/Makefile              |   2 +
+ board/siemens/capricorn/board.c               |  69 +++-
+ board/siemens/capricorn/imximage.cfg          |  21 +-
+ board/siemens/capricorn/spl.c                 |  43 +++
+ board/siemens/capricorn/spl_memory_test.c     | 158 ++++++++
+ board/siemens/capricorn/spl_memory_test.h     |   7 +
+ board/siemens/common/Kconfig                  |   4 +
+ board/siemens/common/board.h                  |  44 +++
+ board/siemens/common/ddr_si_test.c            | 348 ++++++++++++++++++
+ board/siemens/draco/board.h                   |  10 +-
+ board/solidrun/mx6cuboxi/mx6cuboxi.c          |   2 +-
+ ...neb_defconfig => capricorn_cxg3_defconfig} |  20 +-
+ configs/giedi_defconfig                       | 133 -------
+ drivers/misc/imx8/scu_api.c                   |  21 ++
+ drivers/net/fec_mxc.c                         |  14 +-
+ drivers/watchdog/Kconfig                      |   7 +
+ drivers/watchdog/Makefile                     |   1 +
+ drivers/watchdog/scu_wdt.c                    |  52 +++
+ include/configs/capricorn-common.h            |   4 +-
+ include/configs/deneb.h                       |  16 -
+ include/firmware/imx/sci/rpc.h                |   1 +
+ include/firmware/imx/sci/sci.h                |   1 +
+ include/netdev.h                              |   2 +-
+ tools/imx8image.c                             |   2 +-
+ tools/imx_cntr_image.sh                       |   4 +
+ 36 files changed, 1006 insertions(+), 370 deletions(-)
+ create mode 100644 arch/arm/dts/imx8-capricorn-cxg3.dts
+ rename arch/arm/dts/{imx8qxp-capricorn-u-boot.dtsi => imx8-capricorn-u-boot.dtsi} (54%)
+ rename arch/arm/dts/{imx8qxp-capricorn.dtsi => imx8-capricorn.dtsi} (64%)
+ delete mode 100644 arch/arm/dts/imx8-deneb.dts
+ delete mode 100644 arch/arm/dts/imx8-giedi.dts
+ create mode 100644 board/siemens/capricorn/spl_memory_test.c
+ create mode 100644 board/siemens/capricorn/spl_memory_test.h
+ create mode 100644 board/siemens/common/board.h
+ create mode 100644 board/siemens/common/ddr_si_test.c
+ rename configs/{deneb_defconfig => capricorn_cxg3_defconfig} (89%)
+ delete mode 100644 configs/giedi_defconfig
+ create mode 100644 drivers/watchdog/scu_wdt.c
+ delete mode 100644 include/configs/deneb.h
+
 -- 
-2.43.0
+2.20.1
 
