@@ -4,51 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EFCFD5E12D
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 05:23:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C67D5E130
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 05:23:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D9AE89082;
-	Fri,  8 Nov 2024 06:22:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DA5DD890AD;
+	Fri,  8 Nov 2024 06:22:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731043322;
-	bh=MeVWMA4dY5W1hxkDFyaUtLTezPvNUcfVYVZJN4bHXzk=;
+	s=phobos-20191101; t=1731043324;
+	bh=jJ9GYPqxF73aapWoFUBqMqm5s0zjZoAqE8Mt/nyY9fE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=yC1kHZQlgPuFN0VubhBGlKUUTEFiKiuN8HiVZ5ckgV1KJS8tFdN4uUxNcv5BkKW1V
-	 wprpKgeyd1SV+ikGzT2hUpJQocWlAkJzgcWU7BIARXocJ8XIqCqDpCPG16Z6APo/tl
-	 AI74JhUX2EBjSfRDfHJ9Q6eO6BLMpPAcXu+BpHkHySimPbhKbXivHiNbItTIL+LBV6
-	 MezsBSr0nZs3cMxIAvjsrnmNJ1viRmEbe+nRqmyqGtYr/iv5lu1p+G5kgElMrUB8ZZ
-	 BF+lnmf1uHqkYUI+sAowz7/6BTuJlDyThpVuj+XO/8Qzp/ts+aKE7y8v2L3y9H6BgR
-	 ze8sKRlqH60Cg==
+	b=QefY3v9NYhqfZWP9+8YH1uU0M1EGjQ/TtO6u+0MoW0Hrule1P7ll2qXm6voo9NCEB
+	 WUFlgPFhnZ0xYbjvZmv1tOyYvKuJBP3K2C6uz5AfSvbbmX8VFLLeIUGZuTr9JsMbBX
+	 9jWVFs09HqE9kZAD5BcHdun/auyhAWqDrADK8VDzgQhndkmL2u1Qdzugq0EZcADqNB
+	 aJTW4arh0TTbZ1S7K4SB5aTJ3tgaJ/fPRzY92BzkLE2uXbjEJzwluRtxHH6rXle5sK
+	 5a3UflS3JEKvpd5diFSF4r5ATqajJ4F3rKMB40M6cVibYQ/KMWk9VSQWn0SLL1T8nz
+	 S5tDCwJw3i/fw==
 Received: from localhost.localdomain (87-97-112-21.pool.digikabel.hu
  [87.97.112.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 003C988E3C;
- Fri,  8 Nov 2024 06:21:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id AF28E88EEA;
+ Fri,  8 Nov 2024 06:22:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1731043320;
- bh=MeVWMA4dY5W1hxkDFyaUtLTezPvNUcfVYVZJN4bHXzk=;
+ s=phobos-20191101; t=1731043321;
+ bh=jJ9GYPqxF73aapWoFUBqMqm5s0zjZoAqE8Mt/nyY9fE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=A0pBX9RWg+HNWjwtxM8UCd5TqkADg/8rtylZzZtZBk8RHn2C+t8bI6Gx478q9IPHh
- 4q4u5tytpIh0lF4tYhCf1K/Eks9+/3DgUzgOIze3MMK4GCvUwBcKWDnb81kjAQACC8
- RDZQea14ceqUKFoRLEEguHDW8+3hLnqTpNOW17Pl5LXATJzn9Kh3yXb6dd5mZp952q
- ZGztC95GsdwQKOLUDx8Y43tRwDIQjx8+ozqtcs1vRotC2d5DfJpjCosnqTxmKB9f+Z
- LBktUtE670RsYc3Gm/NhhkQ5WPqJJnImU2a5HcqPt4VOHb/pint5rW3WL9L9Y+Xdwj
- 3slrufPjzyYrw==
+ b=xC7HrLCeoneaVnrDDgiNHZsURTDyaa7oXNQZ3wa3Js6xM35TY8pYsuKfls7iJA4P4
+ W+786qVDfcif2dBLNsglMgdiv6NID/dQ52qx032rjb5iacVMKINGoLfRGYexXHer0e
+ KqF2FJG/WRlgR69I4hWQS6MvzQBqUrihqMTZdf8k4F7yZ4bTihxrGRP+u6qO40OHpC
+ LqM9T3OxH+kF84vrXrQuKeVmMeFz3rlJVxiVCh3NSoiCFJUxoShhTUNryRztSQZvBo
+ 1k7E951/eF2BzW3scYstqs3xXdDhxd7PtD4QulWuQkiLWsCGfzllO0qh+4DhzfD8dk
+ GLPapcgB6RMMA==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Enrico Leto <enrico.leto@siemens.com>,
  Walter Schweizer <walter.schweizer@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Heiko Schocher <hs@denx.de>, Anatolij Gustschin <agust@denx.de>,
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Stefano Babic <sbabic@denx.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 10/22] siemens: imximage.cfg: sync image names
-Date: Fri,  8 Nov 2024 06:21:31 +0100
-Message-Id: <20241108052143.26874-11-hs@denx.de>
+Subject: [PATCH v1 11/22] siemens: imx8-capricorn-u-boot.dtsi: add fec2
+Date: Fri,  8 Nov 2024 06:21:32 +0100
+Message-Id: <20241108052143.26874-12-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241108052143.26874-1-hs@denx.de>
 References: <20241108052143.26874-1-hs@denx.de>
@@ -70,42 +72,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sync the image names in imximage.cfg with
-the ones used in arch/arm/dts/imx8qxp-u-boot.dtsi
+we use also fec2, so add it.
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
 ---
 
- board/siemens/capricorn/imximage.cfg | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+ arch/arm/dts/imx8-capricorn-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/board/siemens/capricorn/imximage.cfg b/board/siemens/capricorn/imximage.cfg
-index f73c5a7a9b0..7fd3fb8b72e 100644
---- a/board/siemens/capricorn/imximage.cfg
-+++ b/board/siemens/capricorn/imximage.cfg
-@@ -15,12 +15,18 @@ DCD_SKIP true
+diff --git a/arch/arm/dts/imx8-capricorn-u-boot.dtsi b/arch/arm/dts/imx8-capricorn-u-boot.dtsi
+index a1058a09a9a..365cd51ed2f 100644
+--- a/arch/arm/dts/imx8-capricorn-u-boot.dtsi
++++ b/arch/arm/dts/imx8-capricorn-u-boot.dtsi
+@@ -13,6 +13,10 @@
+ 	bootph-all;
+ };
  
- /* SoC type IMX8QX */
- SOC_TYPE IMX8QX
--/* Append seco container image */
--APPEND ahab-container.img
-+/*
-+ * Append seco container image,
-+ * use same name as in arch/arm/dts/imx8qxp-u-boot.dtsi
-+ */
-+APPEND mx8qxc0-ahab-container.img
- /* Create the 2nd container */
- CONTAINER
--/* Add scfw image with exec attribute */
--IMAGE SCU capricorn-scfw-tcm.bin
-+/*
-+ * Add scfw image with exec attribute
-+ * use same name as in arch/arm/dts/imx8qxp-u-boot.dtsi
-+ */
-+IMAGE SCU mx8qx-mek-scfw-tcm.bin
- 
- /* Add SPL image with exec attribute */
- IMAGE A35 spl/u-boot-spl.bin 0x00100000
++&fec2 {
++	bootph-all;
++};
++
+ &clk {
+ 	bootph-all;
+ };
 -- 
 2.20.1
 
