@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFCFFD5E12A
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 05:23:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA6FD5E12D
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 05:23:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE639890C1;
-	Fri,  8 Nov 2024 06:21:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2794388FC8;
+	Fri,  8 Nov 2024 06:22:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731043319;
-	bh=4trGqbnJm4LKdD6/J7Q0uGak99oZnideYCn4NKU6uog=;
+	s=phobos-20191101; t=1731043322;
+	bh=px8EvZHJpPbhByc2E0dVFcxHXpSZ6QTTHCAJrPsNRs0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=WKI9hThZroBx30UYw+CXf0K1CklgFsYX+whsiDpJU4Jtv8Sg++nCZ4pxcsxsn5q4C
-	 J++/rga5zHYs1DlVBsH7oGylEGbDpHjyn/qRA/I4WaMyBLiVF9XF+gFy8f+3a9MgwD
-	 xRk+iy0m+p7K4IFM9c7s0oIw+1CUjNBUa3lv7Qo2mW14uNY00ytVbjM+aOMA+9+U+u
-	 ccK7XsX6yAv1NkDPz94kfGG52TvfjHtgVN/+SaFWaaprxBWv7j5gSKFmisBa2i/SC7
-	 lgaJKSFxERyE6c7wqqmuNIs2CnU49nOHRePLe3Qdhc6zs3t8fkk/bMIiKgvcbGhs76
-	 HbGb/ottYNcpg==
+	b=xfd2JYmdU2a+L58dQji9m9d0/mEBVH8QyGuAJOg+9YC5xYiFeGKAIJDGQ1usCytHw
+	 A65YMuA+DDIq2IPcQoyanOwnBii8wcJ0bOpCq337ajjAwCjVKr2BwYtiE5+776WV3P
+	 5JBBjRUhKnkUFnwojDggodUM3+KH3uNWCeH5A6l5mbEuRNOQkTE7vKO9FjfPd1Td32
+	 tV8sRW6TnM/KIkbY3cNmHK6m9bQjXQfkQGIpyvlRahuVNE1plZZqfxGwGuN+i9ziS9
+	 0kUhr2TzmTQe79vN1WHIUfLqn8BT57nn29+TkiBMSbG1FgzWSKcnXeJfB6AGIyRgls
+	 8tXKYYsAMItYQ==
 Received: from localhost.localdomain (87-97-112-21.pool.digikabel.hu
  [87.97.112.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 80F7288EC6;
- Fri,  8 Nov 2024 06:21:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3CCA188EEA;
+ Fri,  8 Nov 2024 06:21:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1731043319;
- bh=4trGqbnJm4LKdD6/J7Q0uGak99oZnideYCn4NKU6uog=;
+ bh=px8EvZHJpPbhByc2E0dVFcxHXpSZ6QTTHCAJrPsNRs0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=hQv0RkIASLz2Txq1KGablFjJvIatlWt+pemHUo/EVYAy27VtvoFA4J0jPadSzVaXd
- LL6TgiwZZncEQ6yxxyTTOO9fQtGXgFRdajsQAP9/W88hxMcaP+b2BRfmvrITfLZ3em
- l2jff3ybPmKtWmdePRAGaaVd6/xqXCAbYzeCcH4YkyLepb67oIlM4cLQ4eOvcV2BtD
- jvWWsOgRwOPD+mZtNM4R721btuXmGTY+xk9RzrOUX0n9diZC0oGxDTI1dzUbhmXK6d
- KbqsB7wLixU8SayHOyWtCDhgsA+4Se+d1sRk5hBWkluiLmIS823l4HjcK/EPMA37CZ
- iAywH691O+UUQ==
+ b=C/OR2MADit5zK+PI6k720HWwQTQzPvYEGpbboaz/bqCittO3DxcOnfBy5jk0b2N2o
+ df53idoNNMLzQgFjc7rkloFxEp6EaeureXb9Fvsrg5f8kflDvUvkdYCQYMbsXZyCg8
+ SnUyk3tnEMJvJlGp2ImRsA0RGlRI1AQ64diIgtaYZ/y4rq09d8+VKSMH1k/vgwK7CL
+ uZOOMTOzxd40aelfEmVvM4qD7IpASO4qmHqpgK7L2F7tyDkXxjsHkpu4a6xVuolD9Y
+ kQA/wvGtzbgN8TyRdotbgCbt9+nmbzpYUKVIbmkwVJLNrhyNeTTv38PlzzyXvvzJ9a
+ 1X/7rxl3Op5uQ==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Enrico Leto <enrico.leto@siemens.com>,
@@ -46,9 +46,9 @@ Cc: Enrico Leto <enrico.leto@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Heiko Schocher <hs@denx.de>, Anatolij Gustschin <agust@denx.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 08/22] siemens: capricorn: use DCD_SKIP entry
-Date: Fri,  8 Nov 2024 06:21:29 +0100
-Message-Id: <20241108052143.26874-9-hs@denx.de>
+Subject: [PATCH v1 09/22] siemens: imximage.cfg: correct comment
+Date: Fri,  8 Nov 2024 06:21:30 +0100
+Message-Id: <20241108052143.26874-10-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241108052143.26874-1-hs@denx.de>
 References: <20241108052143.26874-1-hs@denx.de>
@@ -70,67 +70,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Boards which use DCD data in SCFW can drop SPL.
-
-We tried in our mainline rework to use this approach
-too as other imx8qxp boards do in mainline. But we
-failed ... it was a hard way to understand the
-reason!
-
-We cannot use DCD image in container as the SCFW
-from siemens, does the RAM init on boot itself!
-
-Siemens SCFW reads the RAM config from i2c eeprom and
-dependent on this settings, initializes the RAM.
-
-Adding DCD data to the bootcontainer will result in
-hang of the SCFW, also DCD data in container image is
-static which do not fit our needs.
-
-So we must drop DCD data image, and this has the side
-effect that we need SPL, as the task which loads the images
-from the container only loads the images to addresses,
-and if executed bit is set, starts them.
-
-As now RAM is not initialized from it, and there is no
-option to "wait until SCFW has setup RAM",  we can only
-load SPL into internal RAM at this point, as than SPL
-and SCFW boot parallel.
-
-The SPL itself than uses the SCU API to communicate
-with the SCFW and it seems that SCFW only responds to
-this API requests when RAM setup is already done by the
-SCFW, which has a side-effect of a "sync" for the RAM
-setup is done by SCFW!
-
-We checked if SPL is always save in accessing RAM for
-loading images to it! For tests, we added in our RAM
-init part in the SCFW long delays (10 seconds and more)
-as we thought there is such a sync missing, and we can
-break the board through delaying RAM setup... but we
-did not managed to fail booting U-Boot from SPL!
+fix wrong comment.
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
 ---
 
- board/siemens/capricorn/imximage.cfg | 4 ++++
- 1 file changed, 4 insertions(+)
+ board/siemens/capricorn/imximage.cfg | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/board/siemens/capricorn/imximage.cfg b/board/siemens/capricorn/imximage.cfg
-index 4350e2967cc..e45f2c9589e 100644
+index e45f2c9589e..f73c5a7a9b0 100644
 --- a/board/siemens/capricorn/imximage.cfg
 +++ b/board/siemens/capricorn/imximage.cfg
-@@ -9,6 +9,10 @@
- 
- /* Boot from SD, sector size 0x400 */
- BOOT_FROM	sd
+@@ -21,5 +21,6 @@ APPEND ahab-container.img
+ CONTAINER
+ /* Add scfw image with exec attribute */
+ IMAGE SCU capricorn-scfw-tcm.bin
+-/* Add ATF image with exec attribute */
 +
-+/* skip DCD data, as firmware initializes the RAM */
-+DCD_SKIP true
-+
- /* SoC type IMX8QX */
- SOC_TYPE IMX8QX
- /* Append seco container image */
++/* Add SPL image with exec attribute */
+ IMAGE A35 spl/u-boot-spl.bin 0x00100000
 -- 
 2.20.1
 
