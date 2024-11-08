@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDB67D5C0C2
-	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:06:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C5AD5C0C3
+	for <u-boot@archiver.kernel.org>; Fri,  8 Nov 2024 13:06:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8131890FC;
-	Fri,  8 Nov 2024 14:06:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4A4478910E;
+	Fri,  8 Nov 2024 14:06:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MAPcmI8/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N/9HazuX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 117F188DB6; Fri,  8 Nov 2024 04:44:28 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id DA67F88DB6; Fri,  8 Nov 2024 04:44:53 +0100 (CET)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F2A788B8F
- for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:44:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A9CA788B8F
+ for <u-boot@lists.denx.de>; Fri,  8 Nov 2024 04:44:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-71e4e481692so1565200b3a.1
- for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 19:44:25 -0800 (PST)
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-71e8235f0b6so1421677b3a.3
+ for <u-boot@lists.denx.de>; Thu, 07 Nov 2024 19:44:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731037464; x=1731642264; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731037490; x=1731642290; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=5dIKOIekOLCKpzbZPNFEs/7b057G/AVDuiEteGuMYQ8=;
- b=MAPcmI8/2sAiHicqaiIMZqgJA6vcWwL3+3KCQwT+pPtpUev+es9ndX6LPCMV0lBAaq
- /90kfKRkRTMebkO8MzoSykbovs4IvPvKVAWSOXOCFAva/ncDsOroMddL3XUySkTyD5OV
- wOlB5h7/1t4tM2YPL2dWXzt6COI9tIKFjC5svPHZd/XVBxhX9i8BMZzWYjDaMwTfsSRP
- iXZl8LAhlP79wSZbz7vpItuAu9D9D3ayrArDhBMIVHiTMphtCvzXx8l9p18Ee0DEyjPW
- M8aMsSAULvU2W2QdxPEyDeU8moOoFykrDpeZt11Yn2o/gQG4+ERKECsizyszoUqI9gLj
- MW0g==
+ bh=3smQ/dr0kpZX2NgGlaiaSGmnelhwmV0GUpA67VbGHmc=;
+ b=N/9HazuX6VE+eVpTOGq9dSdLbXHgB+xDvfWHkxFpdZzjTfFXv6gQxBWBHwXN2nE6SK
+ NKDjAXUJs9FHYuoTtpcvONw4lEpKQ3mhnCRQJgL0gA1yb8vYmp2nb7YnCHct9Mjc2ByS
+ 23Qy+cImuESoqrtFThyPUHjXmb634dAxkoZQ9jXRy8HKgtOwv0PjZ2Cp5jSKYbWlLDMF
+ LRxEZ8/JT8trUcPVzuw0SrVLpwPdrien+iy5HtBWaWpSdij0izhedsVTtK9fhWML+j8m
+ P71STNPBC4eKCPNPHkKHBTEQXqKgLQp0SD6Gv9Np8cCJ9IH0RHjwnPXkWaHOCkLcAive
+ rHMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731037464; x=1731642264;
+ d=1e100.net; s=20230601; t=1731037490; x=1731642290;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5dIKOIekOLCKpzbZPNFEs/7b057G/AVDuiEteGuMYQ8=;
- b=f4h/xzdS8MjomxaPJEJLSX60/yoISv4bg69evBWS/n91kssQHVIB9gWHbQnoLKX6EH
- KbASE3bS2+cuAH53PEwTDaGTZYW7soreeofQcuOYh6L4K321dqJs6xa69Vy+GIJsjQTU
- +D0TDwX1/H2Y8PsUR2Lpo4m3MUE2WOlGQMaq2atFwL0BtxmubHopFcBAPkdGTQzd9Nz8
- i4g71RluJQl6e1YvxP9zrFmulFS8VB7BlRSuOxTV7sxpj2V0gIJVlMVgxxRQGIIQMZHy
- c8EsVPlHq5SunkWFjVlN+cH0tF1hBPQfPj3LoJGhp0EoUiROhPVqOz8O7D5/mdKLcpx9
- mUyg==
-X-Gm-Message-State: AOJu0YyHekrMGF/IrzRZ0TXUEJJDawJRsn71V0qNkP6a1huqPiHUopJT
- f6ScW8Z3eGZoXSkYCoXx7bmgO93AXy+FjETlkH0oP54zgAGw7GvwMvxcTAbt04Y=
-X-Google-Smtp-Source: AGHT+IHnFzINo9+7q5gm8rJRnzHpPiGf2/uyJWjYs1AziZt7A7ynAYKY+HQDVvkf6iZ+KFE2zABNMw==
-X-Received: by 2002:a05:6a20:7289:b0:1d9:c615:944f with SMTP id
- adf61e73a8af0-1dc22937f8cmr2009323637.11.1731037463933; 
- Thu, 07 Nov 2024 19:44:23 -0800 (PST)
+ bh=3smQ/dr0kpZX2NgGlaiaSGmnelhwmV0GUpA67VbGHmc=;
+ b=CKMRBLXUQ6Di57aPBc7/cb3o2L6lkTOWCL6p+nYTrlwOmUqsnWTnjbBPSoJoe0lBzM
+ 1g8/A54XQVD5c9XJpu5YgHzOPR3Rka8SW4e1+ER4ujxn7wJbIwcb/fWHe/Lf0rx7CEaG
+ L/lnu5Y9W8adSKJ47m2CdLxWBhPN0UaIExFyc3/0fpEWfqqxQZKyW9S5XBjTZzpMbEY6
+ KTY9YPJcs31k3dJlEv0JR3+oVt43k6d5LNST8VwS66o/nnclSxNwD2kErjVx2jI7zebZ
+ cMU3p8Lq48hw+KiFKTq84avOtplBgl32AiQAWgxLtpfNeoe08MOSh+8+WaEjytLsOp31
+ 0t9g==
+X-Gm-Message-State: AOJu0YzaJV+8z+NQm72W8hLSWeyFjYxaUUGZ8kpE4vpgSIAfUrfLXQSo
+ 2mpYdDwQ8PFi7x/zpRUr0lW2kbFCarJrA+dPcAyFuJhOL61v92LuIFChDMXqa3Y=
+X-Google-Smtp-Source: AGHT+IF0bgVnPxCiZotqEJZMpkOLJ+sI7vcRmah8cglKxpTMwjVziXpDc9j1EncZONmbOv6AC4icbw==
+X-Received: by 2002:a05:6a21:6d9f:b0:1db:dce8:c26f with SMTP id
+ adf61e73a8af0-1dc22b575e4mr1832795637.33.1731037490199; 
+ Thu, 07 Nov 2024 19:44:50 -0800 (PST)
 Received: from adriano.. ([190.215.83.227]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724079a403fsm2637203b3a.105.2024.11.07.19.44.21
+ d2e1a72fcca58-724078a7e7asm2555659b3a.70.2024.11.07.19.44.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Nov 2024 19:44:23 -0800 (PST)
+ Thu, 07 Nov 2024 19:44:49 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH 00/15] efi_loader: efi http and ipconfig drivers
-Date: Fri,  8 Nov 2024 00:44:17 -0300
-Message-ID: <20241108034417.346124-1-adrianox@gmail.com>
+Subject: [PATCH 01/15] net: net_utils: Move ip_to_string to lib/net_utils.c
+Date: Fri,  8 Nov 2024 00:44:44 -0300
+Message-ID: <20241108034444.346164-1-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -90,65 +90,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for EFI_HTTP_PROTOCOL, EFI_HTTP_SERVICE_BINDING_PROTOCOL,
-and EFI_IP4_CONFIG2_PROTOCOL.
+The function string_to_ip is already in net_utils, which is
+compiled unconditionally, but ip_to_string is currently only
+accessible if the legacy network stack is selected. This
+commit puts ip_to_string in net_utils.c and removes it from the
+legacy network code.
 
-This series depends on the series 'wget: Expose wget to applications',
-also found at:
-https://github.com/0n41rd4/u-boot/commits/http-driver-wget
+Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+---
+ include/net-common.h | 10 ++++++++++
+ lib/net_utils.c      | 11 +++++++++++
+ net/net.c            | 11 -----------
+ 3 files changed, 21 insertions(+), 11 deletions(-)
 
-The fist two patches of this series are not efi specific and have also
-been sent to the corresponding maintainers, but this series depends on
-them, so they are added here for redundancy. A branch with both series
-of patches, concatenated, is at:
-https://github.com/0n41rd4/u-boot/commits/efi-http-driver
-
-Adriano Cordova (13):
-  net: net_utils: Move ip_to_string to lib/net_utils.c
-  net: wget: let wget_with_dns work with dns disabled
-  efi_loader: device_path: add definition of
-    DEVICE_PATH_SUB_TYPE_MSG_IPV4
-  efi_loader: device_path: add efi_dp_from_ipv4
-  efi_api: add definitions for HTTP and IP4_CONFIG2 protocols
-  efi_loader: efi_net: add efi_net_set_addr, efi_net_get_addr
-  efi_loader: device_path: add support for HTTP device path
-  efi_loader: net: set EFI bootdevice device path to HTTP when loaded
-    from wget
-  efi_loader: net: add support to send http requests and parse http
-    headers
-  efi_loader: efi_net: add EFI_IP4_CONFIG2_PROTOCOL
-  efi_loader: efi_net: add EFI_HTTP_PROTOCOL
-  efi_selftest: add test for HTTP protocol
-  efi_selftest: add test for IPv4 Config2 protocol
-
-Heinrich Schuchardt (2):
-  efi_loader: add IPv4() to device path to text protocol
-  lib: uuid: display HTTP and IPV4 Config II protocols
-
- include/efi_api.h                        | 220 ++++++++++
- include/efi_loader.h                     |  42 ++
- include/net-common.h                     |  10 +
- lib/efi_loader/Kconfig                   |  17 +
- lib/efi_loader/Makefile                  |   2 +
- lib/efi_loader/efi_device_path.c         |  91 +++-
- lib/efi_loader/efi_device_path_to_text.c |  23 +
- lib/efi_loader/efi_http.c                | 537 +++++++++++++++++++++++
- lib/efi_loader/efi_ipconfig.c            | 216 +++++++++
- lib/efi_loader/efi_net.c                 | 287 +++++++++++-
- lib/efi_selftest/Makefile                |   2 +
- lib/efi_selftest/efi_selftest_http.c     | 315 +++++++++++++
- lib/efi_selftest/efi_selftest_ipconfig.c | 173 ++++++++
- lib/net_utils.c                          |  11 +
- lib/uuid.c                               |  14 +
- net/lwip/wget.c                          |   1 +
- net/net.c                                |  11 -
- net/wget.c                               |  39 +-
- 18 files changed, 1979 insertions(+), 32 deletions(-)
- create mode 100644 lib/efi_loader/efi_http.c
- create mode 100644 lib/efi_loader/efi_ipconfig.c
- create mode 100644 lib/efi_selftest/efi_selftest_http.c
- create mode 100644 lib/efi_selftest/efi_selftest_ipconfig.c
-
+diff --git a/include/net-common.h b/include/net-common.h
+index 11c53766a3..5206b8346d 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -426,6 +426,16 @@ void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
+  */
+ struct in_addr string_to_ip(const char *s);
+ 
++/**
++ * ip_to_string() - Convert a string to ip address
++ *
++ * Implemented in lib/net_utils.c (built unconditionally)
++ *
++ * @x: Input ip to parse
++ * @s: string containing the parsed ip address
++ */
++void ip_to_string(struct in_addr x, char *s);
++
+ /* copy a filename (allow for "..." notation, limit length) */
+ void copy_filename(char *dst, const char *src, int size);
+ 
+diff --git a/lib/net_utils.c b/lib/net_utils.c
+index c70fef0d99..621f6512b6 100644
+--- a/lib/net_utils.c
++++ b/lib/net_utils.c
+@@ -152,6 +152,17 @@ out_err:
+ }
+ #endif
+ 
++void ip_to_string(struct in_addr x, char *s)
++{
++	x.s_addr = ntohl(x.s_addr);
++	sprintf(s, "%d.%d.%d.%d",
++		(int) ((x.s_addr >> 24) & 0xff),
++		(int) ((x.s_addr >> 16) & 0xff),
++		(int) ((x.s_addr >> 8) & 0xff),
++		(int) ((x.s_addr >> 0) & 0xff)
++	);
++}
++
+ void string_to_enetaddr(const char *addr, uint8_t *enetaddr)
+ {
+ 	char *end;
+diff --git a/net/net.c b/net/net.c
+index f47e9fbe33..ca35704f66 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -1723,17 +1723,6 @@ int net_parse_bootfile(struct in_addr *ipaddr, char *filename, int max_len)
+ 	return 1;
+ }
+ 
+-void ip_to_string(struct in_addr x, char *s)
+-{
+-	x.s_addr = ntohl(x.s_addr);
+-	sprintf(s, "%d.%d.%d.%d",
+-		(int) ((x.s_addr >> 24) & 0xff),
+-		(int) ((x.s_addr >> 16) & 0xff),
+-		(int) ((x.s_addr >> 8) & 0xff),
+-		(int) ((x.s_addr >> 0) & 0xff)
+-	);
+-}
+-
+ void vlan_to_string(ushort x, char *s)
+ {
+ 	x = ntohs(x);
 -- 
 2.43.0
 
