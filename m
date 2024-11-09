@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68CB3D5E367
-	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 12:04:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFB0ED5E366
+	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 12:06:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC36A8909B;
-	Sat,  9 Nov 2024 13:04:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 68C5E8909B;
+	Sat,  9 Nov 2024 13:06:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jtLtZqdS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZlIdpqMH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 655BE89102; Sat,  9 Nov 2024 13:04:05 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 4BCF08910E; Sat,  9 Nov 2024 13:06:26 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79AA189072
- for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 13:04:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B36189072
+ for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 13:06:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-53c73f01284so3709602e87.0
- for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 04:04:03 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-539f53973fdso2966584e87.1
+ for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 04:06:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731153843; x=1731758643; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731153984; x=1731758784; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=adth6QyJRLRWAfGpC9DYVLlG4LiumwEb0Da+ozRvLcY=;
- b=jtLtZqdSliBgl51hyyeBi/LOzT4c29YQ0G2fL1gV0rkdWOBK00uoBGD+oiZP8JlVtY
- d3p8B1Zp+WxToD4wiK9TTZGl6uG6aZJcZR93/bYyiwUuZLGcOTu6hPsyUwt3A9FeeF0f
- A1cnq24wB/j2mx3xFhsGZPrgaysykohMC1SVl87/JP6c0nI0GL5t7dhM9WcuXAkI701L
- pIw04snXL3vRvXFwQOQ4vpIbT8RbvBmCCAoCpMfUeKpy9eGFIMtMQgxIzZyyWcGPPKVP
- nmDKWqXE9gaDDlnovICBg6miSDlJr+seXA0PLbO/BTGAOZX4k7nYQaM2Y2BXbavlQar/
- divQ==
+ bh=fN6v0nm+jHJSKVXVP5ft2eFE6IV8lgazSwgQrU88AMA=;
+ b=ZlIdpqMHjQolb0qUx2UmcgGFCIjL0Yu6iBO7U+9LCvljlgqnwyaHP9tMbQIRZRi/gB
+ BTuaxmY+HmojKmPwI4TLL9SKraSFaSUS4h53b4swgq+lMuJTk5KpTwzhZTk95PKiD6UJ
+ AW24r+uRHpzGl7iGEb0OcesEDBbOvQ8DFxNOv4v5HWd8jhfZr2OWx5PBS8Fqz8k8kFYE
+ Wac9eAyisvBGLuxnjTjN2TWNs/YmlDEVR3SvMGi5QutOfpCTCQq8rKE5kVrs7d6hBx4G
+ ExacOUWKVYzIGCmkINnOeE+FhD/BaYB8FGm9cEPiymvxI6hnHpUnYdsfnd/pGOHqRIeh
+ yWiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731153843; x=1731758643;
+ d=1e100.net; s=20230601; t=1731153984; x=1731758784;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=adth6QyJRLRWAfGpC9DYVLlG4LiumwEb0Da+ozRvLcY=;
- b=ngTWONUTmM/x1HH6gbmvvi8drAEJxOxMNjodRSM5GTPV0iE6GLfApbOeR76MCWuFEV
- xazj0LVOlb6N6IniDj78Fihw6tCB5LDpyrnIJFLDlvQt2pAb2NPeEDCtTvvh7oEkQCc3
- MRj4VdMKJ9yP0HCFGjNkAniOrnJbtk715qW4zdSROfw0FINoc/gg6iXiC2tVoktMtfpp
- c3la48sRhr4HYeED2DDsYUKwHdMFs8G+SsU2a3GXGiYfxEmPmSXI/epAFmvbhtkihujq
- C2+RoeX37uC44bmYtKtO80KubXQH5Ad3q3TrVeYBIQKx5M8t5NhLIdKi906QkOmvJ7Et
- IlPw==
-X-Gm-Message-State: AOJu0YyzvoPatv7jL6sZzmaEeGyB0xFdN3OWtMWoHP0nOnIrrWr/d/5u
- N0oP2vW5w+rQRDGLexPhS2cRkW4mHpc4h6ShsffZ3OteZRn/AxA+8+MsyreZSqpCldISEg3WXUa
- XQabRoo5xCoNiGXdpoV2s1LLp2hM=
-X-Google-Smtp-Source: AGHT+IFgCB3oGnE8juHD5fI0cqL30ylPdrx3XNdOch8GCsp67WmGThRNOvs/Qb+0/7pcrWCj+VxN+HoNGgCkN6ly640=
-X-Received: by 2002:a2e:a887:0:b0:2fb:6277:71d0 with SMTP id
- 38308e7fff4ca-2ff20280dadmr31214731fa.22.1731153842525; Sat, 09 Nov 2024
- 04:04:02 -0800 (PST)
+ bh=fN6v0nm+jHJSKVXVP5ft2eFE6IV8lgazSwgQrU88AMA=;
+ b=KnsBzjREOpJ1Zf69KRA7soMh/N7eHk6bplENstqMXmVzREjelcErw5piq7aMdZyI58
+ UOXJ3z/y952anoa3W5m6xahPQ9qtEHSrdb4NEWFXgSh7YBEuzqr44qgK/7IIUezFLkX3
+ IHelSrggX6mEXciD6iTZfW2hCpyYjA4+e8eo+eRfOJNTf66bRulxvdU3qrRpw6zhKEmm
+ pz/zReXu4zBY3IdhAN1VysdePUMJWJxvPqJ49ci5NYJwVW/Eq2dHK3/KTeq/yq3ippUZ
+ gpSISXyg+Ors2FbxzD7uSEqLd1pCk8g6dzNMDvQ3TtWMfuBL81dI8EPj967NogHQrYSg
+ eCIQ==
+X-Gm-Message-State: AOJu0YztsEFiR8DrLEAMRPO1oPJgBEhKswfXxXUc9TVbZB4YS469aR61
+ QA7USLQ/k72b/gIpPndb76jIsG1hN0kUMIT64gkMe5cGhSdse5NS+ixMsTokEto/ETtakVTpNlh
+ niVa55tm+SsXVQliA4t0iv08+iKA=
+X-Google-Smtp-Source: AGHT+IEaEmMRLN24I8p1j3QpQS8S66v5iul0PZG6FXaFTm3XmysNm9Dq3+XowF1fALESgVpIqYyIFmpjiuKANOlrqso=
+X-Received: by 2002:a05:6512:1395:b0:53b:48f2:459b with SMTP id
+ 2adb3069b0e04-53d85f231b9mr2204618e87.23.1731153983339; Sat, 09 Nov 2024
+ 04:06:23 -0800 (PST)
 MIME-Version: 1.0
 References: <20241108052143.26874-1-hs@denx.de>
- <20241108052143.26874-13-hs@denx.de>
-In-Reply-To: <20241108052143.26874-13-hs@denx.de>
+ <20241108052143.26874-21-hs@denx.de>
+In-Reply-To: <20241108052143.26874-21-hs@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 9 Nov 2024 09:03:51 -0300
-Message-ID: <CAOMZO5Bar=_Z0YJ1ayQbA2ec9ykH70Ngy2JHgmTtQUnejkOSLQ@mail.gmail.com>
-Subject: Re: [PATCH v1 12/22] siemens: capricorn: add missing ARCH_MISC_INIT
+Date: Sat, 9 Nov 2024 09:06:11 -0300
+Message-ID: <CAOMZO5Btc3grPOChT5VQyaLWSx1uyKHdBgH5q3m3b1s_neiCrw@mail.gmail.com>
+Subject: Re: [PATCH v1 20/22] siemens: add ddr full memory test
 To: Heiko Schocher <hs@denx.de>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Enrico Leto <enrico.leto@siemens.com>, 
  Walter Schweizer <walter.schweizer@siemens.com>, 
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>
+ Anatolij Gustschin <agust@denx.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,10 +95,13 @@ X-Virus-Status: Clean
 
 Hi Heiko,
 
-On Fri, Nov 8, 2024 at 2:22=E2=80=AFAM Heiko Schocher <hs@denx.de> wrote:
+On Fri, Nov 8, 2024 at 2:24=E2=80=AFAM Heiko Schocher <hs@denx.de> wrote:
 >
-> add ARCH_MISC_INIT to capricorn configuration. Add
-> it in
-> arch/arm/mach-imx/imx8/Kconfig
+> Add siemens specific memory test. Enable it through Kconfig option
+> SPL_CMT.
+> The test is required from our HW team. It runs over temperature during
+> many days:
+> * must run indefinitively through the whole DDR area
+> * must write/read/check all values
 
-Please explain the reason for doing this.
+Isn't it better to run a utility in Linux like memtester for this purpose?
