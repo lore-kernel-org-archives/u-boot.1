@@ -4,59 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CEB2D5E364
-	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 10:31:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60255D5E367
+	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 12:03:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0501388B99;
-	Sat,  9 Nov 2024 11:31:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DF498909B;
+	Sat,  9 Nov 2024 13:03:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="CVc+VJ76";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FlUQJxXl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C77E88EAF; Sat,  9 Nov 2024 11:31:50 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AB1CC890D5; Sat,  9 Nov 2024 13:03:26 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D521A88B99
- for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 11:31:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE6FD89072
+ for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 13:03:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-106-072.46.114.pool.telefonica.de
- [46.114.106.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 2F68240275; 
- Sat,  9 Nov 2024 10:31:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1731148306;
- bh=3eNFLS3kDBD6jPgmTosBU35CimPVUqp9wW/5wGsRvCA=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=CVc+VJ76CKtbzkxfrmwGrtLt+E+L2hdD1ClRYVmN0XfJiDjvcm2vY5vMEDQralG6M
- OvkdEX0i6K2m1xHWpEu7V3IuXMsg0AzZc29U9Yi8TEuEmOlCerc7o9eLUA1/L01ng/
- JiMgV2PsVSJYZ9b4aDBvEbArgqBODvkM7rEzOmEk9yPEVCNXtsDpypjPCa4k1f9CVE
- ustF9VUW1abFoJnSwcm1KSKmAyVhOwMh8YVJbJFYsvByEj8AghZYG/jtvyEC8bl7Io
- JIKazNYgDjhPilscjkPRfXLS7NDySv60OcWkq5Il/D3Fzt1TtFTE6ZwfOD7IfZuxIV
- GgKTFCxgUSJMw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: provide valid PXE architecture on sandbox
-Date: Sat,  9 Nov 2024 11:31:41 +0100
-Message-ID: <20241109103141.33983-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-539e7e73740so2850418e87.3
+ for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 04:03:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1731153804; x=1731758604; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gt05G9RS6eTDfT2tRcOGvQUqyysyLHElQPwVHRLRz+Y=;
+ b=FlUQJxXl/oDIS2KFxY7ad1G1OTpZJmd05rtdw8VNG7T5B7eNvFeEGWz2sflqb09nf5
+ exOocDI+qpLgBgHKrfeoAHo1Nwa65LgKNUFYhrGnnxk9LGGhBh/aNz5ovwSFvxz5xUGv
+ SviJFdgg0+rF1oF1wLSN1xyWYGxln9odozOAJN89DXuGbZpAIzfkZsTpXTiE0Iuj1hha
+ a8pHcy1MPlan3OLlfwc3zuyFyRh0hw/AImhvKVIkRgfaYZ+6BmrwpS/w/+AXQDscjg8I
+ yqpFjgXX6G62QcqpZNz8fwL8BgnU+mHLWWRZS55tuEyB2VkzblseAvdcMLtHQYDLuPEl
+ XB8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731153804; x=1731758604;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gt05G9RS6eTDfT2tRcOGvQUqyysyLHElQPwVHRLRz+Y=;
+ b=C8MO5zfVtud16yvaV6HMtMwXtKH+wAXUFf9N+3qmsgN2tQoD99Poo8xiuku8kwlPxv
+ Vv4l/EENKgQXuCs7AmkfWkdof2K16l4u1xv0YKr4XS+3gkrfLG5RGkmIejqD2bTB5Ego
+ V4D91aqceUClCKc/2PUldFNv+BVf/e8XW+KQQhl2jaNNGCcSJB9BGl++HMSAXCFwnGo2
+ kTEWcCRixnKCd7ZeaOzqBP/RF9tku+7F+3knrrkTxwLFGz58jcAygyqKa1/utoA9JUqu
+ l828pl+/eN0TwtT7P3YJ/sxd/mVLgcjI2l+tNkDyLA4d884fWFNtZOWkwHbBhtjJC4Nf
+ dIfA==
+X-Gm-Message-State: AOJu0YwzZnPBHSjn4h2NInDkLyMpYhij9Rk8To+aFhEaw9w1vIRQ3z3e
+ a+6ZF6/JoIlmpMgfmw/7N/RXq82V4Jv6X0PyU64XMKHvfaJrB4yzIstsY1JPWzAXaxZK/cv0fPl
+ VO+mpDAA+dUQAV5duhsxKuAjSPkc=
+X-Google-Smtp-Source: AGHT+IEtmsipk/tSVTMD4/T/2WDcnomhGs4dCQkEBZrRrcWz89WAgzOmQ8ywjo5jqCgSM30TG/MW++L5EwteJmVmZeM=
+X-Received: by 2002:a05:651c:b2b:b0:2fb:3ca8:efcd with SMTP id
+ 38308e7fff4ca-2ff2021b3admr29257871fa.12.1731153803621; Sat, 09 Nov 2024
+ 04:03:23 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241108052143.26874-1-hs@denx.de>
+ <20241108052143.26874-16-hs@denx.de>
+In-Reply-To: <20241108052143.26874-16-hs@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 9 Nov 2024 09:03:12 -0300
+Message-ID: <CAOMZO5D77WPgrjXXyBzk-rAApcqxfSS7nZCF8usz2jj_oF1QpA@mail.gmail.com>
+Subject: Re: [PATCH v1 15/22] siemens: imx8-capricorn.dtsi: small adaptions
+To: Heiko Schocher <hs@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Enrico Leto <enrico.leto@siemens.com>, 
+ Walter Schweizer <walter.schweizer@siemens.com>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Anatolij Gustschin <agust@denx.de>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,33 +94,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Before this patch the sandbox uses 0xffffffea as PXE architecture.
+Hi Heiko,
 
-    => efidebug defaults
-    Default boot path: EFI\BOOT\BOOTSBOX.EFI
-    PXE arch: 0xffffffea
+On Fri, Nov 8, 2024 at 2:22=E2=80=AFAM Heiko Schocher <hs@denx.de> wrote:
+>
+> - remove DMA for console
 
-With this patch it uses the PXE architecture that matches the host.
-This allows us to use bootmeth EFI on the sandbox to load an EFI binary.
+Why? Does it cause problems in U-Boot?
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_loader/efi_helper.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> - add wdt device
+>
+> Signed-off-by: Heiko Schocher <hs@denx.de>
+> ---
+>
+>  arch/arm/dts/imx8-capricorn.dtsi | 16 ++++++++++++++++
 
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index bf96f61d3d0..14049378930 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -75,7 +75,7 @@ const char *efi_get_basename(void)
- 
- int efi_get_pxe_arch(void)
- {
--	if (efi_use_host_arch())
-+	if (IS_ENABLED(CONFIG_SANDBOX))
- 		return HOST_PXE_ARCH;
- 
- 	/* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xml */
--- 
-2.45.2
-
+Are there any plans to upstream this dtsi and switch to OF_UPSTREAM?
