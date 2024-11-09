@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41515D5E37F
-	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 21:23:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8617D5E386
+	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 22:24:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E5E289301;
-	Sat,  9 Nov 2024 22:23:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D503889327;
+	Sat,  9 Nov 2024 23:24:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Igh5dCVn";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="qpgOhY0b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0298E89304; Sat,  9 Nov 2024 22:23:39 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 688318932C; Sat,  9 Nov 2024 23:24:04 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDC53892ED
- for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 22:23:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A4AD89318
+ for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 23:24:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a9aa8895facso613940566b.2
- for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 13:23:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731187416; x=1731792216; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vEhPSRnkQ6aq5lZVCvvLuejcyjVPnla+qX8dvtGvZug=;
- b=Igh5dCVnrSorcPrAohgYH1YeBhuBa9gwMwmQd3PoRf4NMzRaH0u9Zw5RZyzBh9lrCd
- o2xhy9HQkwebxa1Kua/PXIjKZXKhIA8Sv+V/kCWh5ySX9D/XrgJQhjgVM2qHr5zu+ytx
- WvKdL1h888VN0j+JvgF1DqhteilkU/EJ/Ok1I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731187416; x=1731792216;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vEhPSRnkQ6aq5lZVCvvLuejcyjVPnla+qX8dvtGvZug=;
- b=pYBABdWSkueg2bzmafLk4nL0fnCtBmVDupctN3xcbRthcgtSU8EToVAlQQdGMQfntr
- ZRcIGklx+Nrrk10gbF3Uied/Tm7ZJ0RNHXvDjE41oCJllgVTFvt8DN687xjKHVNj5N0Z
- VpY6bmYE/DYC3mNDVvE7q+zMFzGioYL9y7S1WjcLP2vGLtUPUC/5MnwghrOKP+wc/brV
- 32gcKPcLuusJ5jjt78qOxlDQszGeXMyDn6cZSTmFFk4u5wC8f07xT8AnmUs1jcq10WS9
- a2krcDJPiz7+JIwsP0pEZqBWAxu5/xQ+PK62mpfn2GLmhj5DJ9o1pjz3WTRdkwbvoiqQ
- WGpg==
-X-Gm-Message-State: AOJu0Yx1PqfD3X75xv99XMetktEUyCk6sH2oweZ89NwHM9ECVT6ylZ42
- pd1aXXSv6TjdUqN9lBOHEUkIGCkXtTbt7n6jFdI+49lkEzvE5DADDMdGrNZyxN8=
-X-Google-Smtp-Source: AGHT+IE1j77yMmgpnveFLxvxRJ4nS8UDvzEGzNg1RWv5B43bz4b50rof0DiSlmzmIY8dA/gCSKZkMg==
-X-Received: by 2002:a17:907:6ea5:b0:a8d:4631:83b0 with SMTP id
- a640c23a62f3a-a9eefe9bb4fmr714467366b.5.1731187415885; 
- Sat, 09 Nov 2024 13:23:35 -0800 (PST)
-Received: from oliver.lan ([23.155.80.164]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0dc4c60sm410187466b.102.2024.11.09.13.23.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Nov 2024 13:23:35 -0800 (PST)
-Date: Sat, 9 Nov 2024 15:23:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20241109
-Message-ID: <20241109212330.GA72527@oliver.lan>
-References: <20241109170826.1995522-1-festevam@gmail.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1731191041; x=1731795841; i=xypron.glpk@gmx.de;
+ bh=uoMG3QgQ88s44QFn/iChFW8LkGWuqQiy/44FaDt/gj4=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=qpgOhY0blC8jDkiw9+rDWpxyN/AODL2fjF7UDiSq7U6HwWmeQTW8pN552sm2ZOli
+ HmNJwbI6R75CYBSPWzdsVv8Kk+jr7DyitLGHcl0EBWtydXRb9BwygGRedqXuqHF0+
+ aCzcYOBbrCcduJklP39MJbtAKB948QJIkyVWwAMoDMMYYH6F1UvGCgowwQp7qnepR
+ 902tqUD9z4+kAYLOQdJU//jZiYo+7z50hNcqF31/uPkaLI6R0u55I/IcrhcskonPZ
+ Hx3yBWC65KVMhzTsPDRs6E9+5EujAVgEHh2gjfDEZfStjWxBtnmZG/7bm7pwdWS5T
+ bf5VIasb+nme1YJJeA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N6KYb-1ttbia1ZhB-014G1Y; Sat, 09
+ Nov 2024 23:24:01 +0100
+Message-ID: <1f44e6b1-eee9-4895-b06f-fdcecb9dfb44@gmx.de>
+Date: Sat, 9 Nov 2024 23:23:55 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="g66gIQBwlj1mGbuv"
-Content-Disposition: inline
-In-Reply-To: <20241109170826.1995522-1-festevam@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: SiFive Unmatched: Linux kernel doesn't start (U-Boot 2024.07)
+To: Yuri Zaporozhets <yuriz@vodafonemail.de>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+References: <Zyv8zn2oGmmKz5XU@vodafonemail.de>
+ <CAFLszTjGEVsFXdLNQdfD6mNNFC76k+4S0VZLJfbMNO7s1V5K6g@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAFLszTjGEVsFXdLNQdfD6mNNFC76k+4S0VZLJfbMNO7s1V5K6g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:4p69NiDiBUKIyXm8vXvkNFnNfpgITVslzf2YOFBnCGoyOA2riHK
+ Oa5vpH5oH/GG5O3hetEWGaZTi+VtWR/Bn0NjkzDB1e4qpqCd9fTvQmT7vRX4o9ItQW9Sz/I
+ mGa4HJWxib+uBOISM3VD8b3L8ZQlRgIkEDteKpeZWPhHK0JCfaYegCh+OzlaZ2flARF5Y/j
+ J6fYsubgjHnYn9M07RSVg==
+UI-OutboundReport: notjunk:1;M01:P0:h5y5t5g5Zyw=;ByATnuIw+truihja4FpoGAzQb7n
+ g/pUyAGl7/QIpsdAxGC/ihgstOo3OG9f4kT55P2aE9myJxWVkWfPqG0TZuOP3iNL/Mohrwbqx
+ GQL7MOS+fCqHaBaajJ34D50Vq818KLshpzHEP8+b4N5bYagH/Q2MqGafQaiuYwKXsllN/iZto
+ n/qjVw0nl0lglD3t00FVygeeKrkh35r2HhwTeMbQQ3UIYNGwoQchnK2DSirIFmPMPhoSK3gVL
+ 8Dh07zY6cxIf//FphLfRSyJv30GGaCKT4ABM0Eupj1hOC//+2qLN8W1tEnj4QM0glbWEMo//k
+ KqCz6Nbk7r11uIbbZc2VQSWjZqtSQsEyqx0iFRge6PcrLnkPrhPTd/6sodQ2ZNw9lldljk8ao
+ y6v8XVW9++D+Dxhh9WgOaJcsYAOEzdeNDqOiPZ7MCWPCD5MZJ4Nv+6WGwMknytHT+Q2J8GBhG
+ ZDUqTe9Lo0rqYb7pn63NlY6fCXFfjhdQM6Hq7sVtAWDTupetb7HPWfYL1dGx2/+Mdgjvk8q+0
+ EGNdrP7Ns5WrhVwkjrL2eqRyAR5jMfKQIXgs8RW7Zj1C9Pf8esdRGq4ReuH8HFBk0pSUpCG3V
+ 7OO2BjrgXqVpnW2u3Hpckmg+IQ2Ic4aLynWy4iOu+6lLLSdbZH0pwtd7etgQOEX36dK7LcNvC
+ KkerTE+bhX/7YX+WmwUWwibF+F2Jwz49KT6UTYIB+QzUz6fxg1fiCLOS8N49w9ZqyTw/Mh2iz
+ k4334jzootMREzDCUcy+GaJZClvX6u7KVppgvwma+ZfTihco2NyANjUvK0Hce1CYOH34XUSzr
+ du3KOpNUQFD8iA0T7Vd6jtUitdQCUlukGvpU/ODErkFaP+QfAGQrN5L5OY3A5j66GnHjJD2ps
+ H9rPRTO/yRINAYHM7vDpgIjWkOvuv7yxkBGLex2koSiVyllP6lf8rCrBn
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,57 +91,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 09.11.24 18:34, Simon Glass wrote:
+> +Heinrich Schuchardt
+>
+> On Wed, 6 Nov 2024 at 17:53, Yuri Zaporozhets <yuriz@vodafonemail.de> wr=
+ote:
+>>
+>> Hi all,
+>>
+>> To all owners & active users of the SiFive Unmatched board: do you have=
+ success
+>> running any recent upstream U-Boot on your system?
+>>
+>> I use the default U-Boot from Ubuntu 24.04, and it boots GRUB and Linux
+>> kernel just fine. Today I flashed the unmodified U-Boot 2024.07 (compil=
+ed with
 
---g66gIQBwlj1mGbuv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+2024.10 has been released, we are currently working on 2025.01.
 
-On Sat, Nov 09, 2024 at 02:08:26PM -0300, Fabio Estevam wrote:
+>> "make sifive_unmatched_defconfig" and OpenSBI 1.5), and the Ubuntu kern=
+el
+>> (6.8) doesn't boot at all. The last message I see on the console is:
+>>
+>> EFI stub: Exiting boot services...
+>>
+>> Adding "earlycon=3Dsbi debug" doesn't change anything.
+>>
+>> The same behavior is also when GRUB is excluded from the process:
+>>
+>> =3D> nvme scan
+>> =3D> load nvme 0:5 $kernel_addr_r /boot/vmlinuz
+>> 38603264 bytes read in 47 ms (783.3 MiB/s)
+>> =3D> bootefi $kernel_addr_r
 
-> Hi Tom,
->=20
-> Please pull from u-boot-imx/master, thanks.
->=20
-> The following changes since commit a7a96a37cbd875994bc8d25adb0536bf00e4a3=
-0e:
->=20
->   Merge https://source.denx.de/u-boot/custodians/u-boot-riscv (2024-11-06=
- 10:44:33 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
--master-20241105
->=20
-> for you to fetch changes up to 28958998f6301bc4a247a9057a623f997ee78c11:
->=20
->   arm: mach-imx: imx8m: re-use SNVS init routine (2024-11-09 08:55:04 -03=
-00)
->=20
-> u-boot-imx-master-20241105
+I would use
 
-Applied to u-boot/master, thanks!
+setenv bootargs earlycon=3Dsbi efi=3Ddebug
 
---=20
-Tom
+to get early output.
 
---g66gIQBwlj1mGbuv
-Content-Type: application/pgp-signature; name="signature.asc"
+>> Booting /\boot\vmlinuz
+>> EFI stub: Booting Linux Kernel...
+>> EFI stub: EFI_RNG_PROTOCOL unavailable
+>> EFI stub: Using DTB from configuration table
+>> EFI stub: Exiting boot services...
+>>
+>> Is some additional patch needed to run U-Boot on Unmatched?
 
------BEGIN PGP SIGNATURE-----
+I just built:
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcv0s4ACgkQFHw5/5Y0
-tyxvjwv+PwR1+K1VacSb+vzEhmTce6cJYTwsvoXTpoc06mys4nLCpoElVcbIQgeR
-3nya3O6hYhD8qR0fBN7QqZzwd5Vq7Ls3si6S42mU7NL1O9JJCsNfT3qxthl+PhgP
-V8nXsoGKgVaWsLLKWkRmBJMyOifVD8CEflDa97zUwX3sOrgHGQQdf+BtD+J9sEb/
-MVBIHK5BNQ1FHcOSf+96iPmg9EVnKVfWncELe4+vjeGjWzH/8sItYU0IjT8FkNqJ
-Gtqic795QH4wQDsXnhH53ZflSwUFkkzRfWtgKaMOjy8g5OxLw/88TeO8TY0nnclT
-VImiybBCZyn/F13Q6FaxyJm8CmWD7XuXviw11JOeFhTidv0r3AVErNXwtK2CoC9S
-b5rGDd01c+aePQZ8fJ5Kn6uLeMzYudPfGd+b/N3fw72uaW7WIMqZEcAej8CHaYk+
-Y46qyjKO2xDh9+RB/pxXdOT/3C7UXwntL/sREah36S5/DOh1IxZTNrRvVpD18LzH
-nxYsw8EZ
-=qTag
------END PGP SIGNATURE-----
+U-Boot 204.07 using OpenSBI origin/master (commit 701948bdec90e290) and
+U-Boot origin/master (commit f448c4517b55f401)
+using OpenSBI origin/master (commit 701948bdec90e290).
 
---g66gIQBwlj1mGbuv--
+With both I had no problem booting into my Ubuntu 24.04.1 (Noble)
+installation via GRUB on the Unmatched board.
+
+=3D> load nvme 0:1 $kernel_addr_r boot/vmlinuz
+38595584 bytes read in 48 ms (766.8 MiB/s)
+=3D> bootefi $kernel_addr_r
+
+runs up to the point were it finds out that there is no initrd.
+
+If you want to boot via UEFI but without GRUB, please, use the eficonfig
+or the efidebug command to define a boot option including an initrd.
+Preferably also specify the device-tree that matches the kernel.
+
+You could also use booti to boot via the legacy entry point of the
+kernel, i.e. without UEFI.
+
+Best regards
+
+Heinrich
