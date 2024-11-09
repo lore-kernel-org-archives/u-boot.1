@@ -4,72 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64244D5E37A
-	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 17:34:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0184D5E37A
+	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 17:34:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF6B2890AD;
-	Sat,  9 Nov 2024 18:34:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 223E189145;
+	Sat,  9 Nov 2024 18:34:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l7qaaR1U";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U1B6Jatn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5B2B88D3C; Sat,  9 Nov 2024 18:34:08 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 29F3889148; Sat,  9 Nov 2024 18:34:32 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63EA5890AD
- for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 18:34:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E33A88D3C
+ for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 18:34:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a9a6b4ca29bso450562766b.3
- for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 09:34:05 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a99cc265e0aso493068066b.3
+ for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 09:34:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731173645; x=1731778445; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731173669; x=1731778469; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=llZSIm9RTwi+d2GMRKcndXolcRLn0SPxRWEjtUkc5bk=;
- b=l7qaaR1UlZ4eYHJrEo2hzs71ODuJeoS4q8M1125XIUAouO80CNOhstA/HqwiIHPiD2
- P9zCC3gK2w8JJxOMlnkPr524+ncLg4v28f3PbgymAZWWRsfpKD1Lxr1UdpeKGl9cW/DN
- QP+qkNBVuPZ+wvictwfU6R3PnUnNT6AsqUxnc=
+ bh=J34ONu2oNVFZPqRnwEFWjp3xuNT4nNq64zcC0gGWBlc=;
+ b=U1B6JatnzV5DjJkzf7S8c/fQtR+r0rumliVmQfKtTd+dXOoJ+Kn0yI1ANoI4ldKJXR
+ yZyyd3T7HGuWA7H0j+PziyGPLJHVykZKjDuP4d5RAJnaIlt1uP2/JnqZx85zkro2KB6J
+ Da4hXHssbsVYjMi0gD50oF4mTWQuBen5Fxhmw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731173645; x=1731778445;
+ d=1e100.net; s=20230601; t=1731173669; x=1731778469;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=llZSIm9RTwi+d2GMRKcndXolcRLn0SPxRWEjtUkc5bk=;
- b=kxWSc3TgBTPrqJ68PxtMaMxVt6Z08X3ruEviU9YSNIE8Tr0ItOV70l40Amv3H4WxOn
- oeCX/ihw+6RM5CQ45zr+jv2GuaJWmYbinD7mRgcb7uCjBZEr8T7sdcJT0koGu7evu6dn
- 4YxVuRNdAf1TKKotpZTwJQTKtDwNQT85EI9GZQLpfTyLmRnlb2dFAW8Iz3NLtDRh0FZm
- QDZbmpi50ZNUMf5ag+NhbxZaWU7zGQloceRYcp2zuKU5OhuNtnyXHHVHTK4QSJigA6aj
- QtFS70EzEqAg1bzujhOSBrznqwPhEdPopBOqZE9Ubc6lnGmxBjQfyjewI7u8DD20NV1m
- eneg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW6M3TlL/CW3CFQOh08ivOwYha+FJmSiCbJR9oM6wtMRUex+CnpSw4NmIzgxw+WzF5np18lEBM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy7U8022GvJYum/X/nW95CeBMYNG6ecAfPQegxlWHsmxiAOmca9
- /Tsg+DyJWLWahnHwKgTWHopWJ6cl6et07FTxe+80A2TDQ0F+AwJ/ObwOo/GTiV1nZ5h4gHAny99
- IgKav3NNMP57ruuwQXKOhixEHFdE69hvypmfr
-X-Google-Smtp-Source: AGHT+IH7I7p5UtoGzZqOyUKX+HJEX/5zZPWzQnP+DZdCbWexV1MMqOLc/F8WgXRr6+eD9sHjqkrEcD6g0q5CYHQtzPk=
-X-Received: by 2002:a17:907:d2a:b0:a9a:684e:9a64 with SMTP id
- a640c23a62f3a-a9ef005043amr628191466b.61.1731173644329; Sat, 09 Nov 2024
- 09:34:04 -0800 (PST)
+ bh=J34ONu2oNVFZPqRnwEFWjp3xuNT4nNq64zcC0gGWBlc=;
+ b=gNhMh7ZE8uViac+V46diVkg+sWqvfIkgxXhvfp/iS+80lS3wXa8KeTJO8uVtRVZ1ax
+ L23zjL1N/9lkAZ5uLRfXxJ80q7abxbNkWFL1MQYtE8ds9krsPPNGDC2sdhdcWj9gsiGM
+ ALtVOeW9dJs5tcdVNEWNfq2culu9QsOf1gy1qREfsRjgDFWpYIRuRalmGhZxMqcYOdij
+ wqjS3YFAbFhm55NdN5LilCABld7h7eVIrJgOQLQExL8oPs4i3trd2x4vgNj8qPQM+neX
+ ia9KQHWmNVUunkE8aR9pUqAyuQfPUnIBObpFlOc2D3o3u9vniSz9c2PiEspLbYEe1Jqn
+ TVgg==
+X-Gm-Message-State: AOJu0Yxq+zgBJ/xwqy0GESl1jCxMe1r8YiMz+6okEjtiajXURTaqbSAS
+ uQgb5n519NIeR9tAF+szl986TUN0mX0LbZDtNKqEgsqj4hl/iPEPdyis5C/DzFYgZaWou55mgOl
+ fk5tPjatC0SQ4xa0zvZ0CFJ+KTpK5FgvFvEwtwmY8nwmidPw=
+X-Google-Smtp-Source: AGHT+IHLlokDGq4BGjWLlSoVV4ny+oZDZYg7M6UN+qEEHhzah20IQKqXKo2xGePqyzeb+VLGlGbM/cE6fAac/5rCnmw=
+X-Received: by 2002:a17:907:3e1d:b0:a99:4aa7:4d6f with SMTP id
+ a640c23a62f3a-a9eefebc409mr723487366b.12.1731173669220; Sat, 09 Nov 2024
+ 09:34:29 -0800 (PST)
 MIME-Version: 1.0
-References: <20241109103141.33983-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241109103141.33983-1-heinrich.schuchardt@canonical.com>
+References: <20241105165357.620796-1-trini@konsulko.com>
+ <CAFLszThU2T2A4DG-=isO6vP=149Lw6jQaB3vs8ggJ2H8CcDwBg@mail.gmail.com>
+In-Reply-To: <CAFLszThU2T2A4DG-=isO6vP=149Lw6jQaB3vs8ggJ2H8CcDwBg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 9 Nov 2024 10:33:51 -0700
-Message-ID: <CAFLszTiKGRg=1PDP39zJ1XthsmE4GL38xL8uxua_dO+DwhqOxA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: provide valid PXE architecture on sandbox
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
+Date: Sat, 9 Nov 2024 10:34:15 -0700
+Message-ID: <CAFLszTjYy-wCuOx5Nv-F1uDcVYJEqi2pwTBTws=UHWB0z026ww@mail.gmail.com>
+Subject: Re: [PATCH RFC v1] Dockerfile: Have "sandbox" build with i386
+ toolchain not x86_64 toolchain
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,51 +83,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Sat, 9 Nov 2024 at 03:31, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Tue, 5 Nov 2024 at 10:03, Simon Glass <sjg@chromium.org> wrote:
 >
-> Before this patch the sandbox uses 0xffffffea as PXE architecture.
+> Hi Tom,
 >
->     => efidebug defaults
->     Default boot path: EFI\BOOT\BOOTSBOX.EFI
->     PXE arch: 0xffffffea
+> On Tue, 5 Nov 2024 at 09:54, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > A long time ago, we had to use "i386" and "x86_64" toolchains for our
+> > x86 platforms, depending on the target. We then moved to being able to
+> > use the single "i386" toolchain to support all x86 platforms. At the
+> > same time, we had been building sandbox with our "x86_64" toolchain in
+> > CI. When x86 switched to being able to use a single toolchain we did not
+> > update our CI buildman file to match. Do this now as we want to ensure
+> > that sandbox is built with the same compiler version the rest of our
+> > platforms are and not the host one.
+> >
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Cc: Simon Glass <sjg@chromium.org>
+> >
+> > I'm posting this as an RFC to start the discussion as when I mentioned
+> > this to Simon on IRC, he was very much not in agreement.
+> >
+> > My main argument is this, sandbox needs to use the same toolchain that
+> > we compile (virtually) all other platforms with as one of the points is
+> > to be able to catch warnings and compiler behavior changes as soon as
+> > possible in our CI. And just like how developers can use
+> > distribution-provided toolchains today, nothing changes in that regard,
+> > we only make CI be more consistent now.
 >
-> With this patch it uses the PXE architecture that matches the host.
-> This allows us to use bootmeth EFI on the sandbox to load an EFI binary.
+> OK, that makes some sense to me, actually. It isn't the toolchain that
+> people will be using, but catching things earlier seems good.
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_helper.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> The main concern I have is that we are not testing sandbox on the
+> toolchain that everyone will be using. But I haven't noticed failures
+> in CI which I cannot repeat locally, so we can cross that bridge when
+> we come to it.
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-The way things are, this isn't a valid thing to do. It is returning an
-error to indicate that. The error should be checked. If you use -N
-then it will do what you want, though.
+This doesn't seem to work, for a few reasons:
 
-But what architectures does this work for, with your setup? I haven't
-been able to get x86_64 to work. I could perhaps try arm64?
+1. Buildman doesn't support setting HOSTCC and CC unless using -O to
+override the toolchain (so the setting in this patch has no effect)
+2. Using the toolchains from kernel.org gives this error:
 
-Should we document this use of sandbox for your use case, once it is working?
-
->
-> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> index bf96f61d3d0..14049378930 100644
-> --- a/lib/efi_loader/efi_helper.c
-> +++ b/lib/efi_loader/efi_helper.c
-> @@ -75,7 +75,7 @@ const char *efi_get_basename(void)
->
->  int efi_get_pxe_arch(void)
->  {
-> -       if (efi_use_host_arch())
-> +       if (IS_ENABLED(CONFIG_SANDBOX))
->                 return HOST_PXE_ARCH;
->
->         /* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xml */
-> --
-> 2.45.2
->
+NO_LTO=1 make O=/tmp/b/sandbox defconfig all
+HOSTCC=/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/x86_64-linux-x86_64-linux-gcc
+CC=/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/x86_64-linux-x86_64-linux-gcc
+ -j30 -s
+/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../lib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
+cannot find crt1.o: No such file or directory
+/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../lib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
+cannot find crti.o: No such file or directory
+/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../lib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
+cannot find -lc: No such file or directory
+/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../lib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
+cannot find crtn.o: No such file or directory
+collect2: error: ld returned 1 exit status
+make[3]: *** [scripts/Makefile.host:95: scripts/basic/fixdep] Error 1
+make[2]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefile:503:
+scripts_basic] Error 2
+make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefile:568:
+__build_one_by_one] Error 2
+make: *** [Makefile:177: sub-make] Error 2
 
 Regards,
 Simon
