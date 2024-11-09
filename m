@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D559D5E373
-	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 15:06:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DD1CD5E373
+	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 15:12:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61BA088C0F;
-	Sat,  9 Nov 2024 16:06:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 43ADA88B9E;
+	Sat,  9 Nov 2024 16:12:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uXuKQfVn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cCvRGWhJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BDF888C0F; Sat,  9 Nov 2024 16:06:41 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 0DCBA88C0F; Sat,  9 Nov 2024 16:12:56 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B44688B9E
- for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 16:06:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AD6B88AE8
+ for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 16:12:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2e34a089cd3so2554972a91.3
- for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 07:06:38 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2fb51e00c05so37093271fa.0
+ for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 07:12:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731164797; x=1731769597; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lozrEDMwb6Dwn4wMJU1UzTV2PaswtJpJwnO5+ylbDk4=;
- b=uXuKQfVnKLWIydbKtcNfVD9tZzHkWhCKAA1QrK/D3yTF8zk9ZfmBp4jlwfPuGlQD68
- bTwUwDb3HHR8Fzq8JDNDQwCP6k1vhDq+tSN6LWccJ2XTx78krvbTqpQsitskWT3eH0LM
- K3m6N9W3AOObDycxI5oDsYgfoxKDy7mMeaME5mTPBqISw9JRkVltSuRKSBYW+8u5FqEb
- 7KViqlAe3OpXBIYbI5q3gMGHtyBSIWhUF7vHY0FPEsSxu8BIHqKxkHCCigOwJqnUOe00
- Y2/F7n4tm1ZbBApWcIU9ak6SHAig9bF2Ga2DyTI3ps0UJwMcpWNReeUHww9I3EAGkJMu
- Mb9Q==
+ d=gmail.com; s=20230601; t=1731165173; x=1731769973; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/r6UZ6UwEM92n5uzdFsM/Casbfgn68C6dWpWE62sbKk=;
+ b=cCvRGWhJhVlcdoX6Nvzv+O6QbqtbYYfXqGTpGQ/W/BvAd5Xa8pZ+/4hydGo7x7ob3g
+ 3E9Ojsz7xR/YRzgvUpn+5ZQwF0whZuIJYJwDDTQzVhImLa/W6Pc3IrMteOhg2APf3uTa
+ pU7I9xS6xbPR+nVWIgfnw9dza7/V3L6+D+wcpeqkvs/kS9fHeEuMG6biZoMYiJnCw2/x
+ XrwqMK6f1Ll3lhW8rT4fykn4/sw1cmeaf6lyGT536x0xepRM8+SI7AlUwPreYuEZhcJQ
+ a+02V9pmY6IZn/lm2ai2QBCrjbOS5+PG49eJN72usW6zrEJqz+DRQdXXtg/9mPktC0Be
+ PWaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731164797; x=1731769597;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lozrEDMwb6Dwn4wMJU1UzTV2PaswtJpJwnO5+ylbDk4=;
- b=AkrzxwzgiMkzzM+ze6P/ITgFG6aRkjm9OStK9WSoyjH9+sIsQRvRkT/kTJ4SheCxnn
- ZtTCzxNdoHvoECLKrSXtc7NQ0UVJI48/FWHDpBORGsPa2wUq6QNP9v0d1y3oON2LDHR0
- p9ILxhugmm7Np8dPhfQ8i++T3LQoJglPjnAVL02zs5q91L+cOY2wGdtD9+WWoXQb7pQ2
- cDfJbvTXXxUt76/sIUCYFvcTETQgsmdQklX10PU5ysR11YGjYQSyZcDj4KL9f5oyTHcJ
- uzlb0Qhe+YBTnXf6yb73HxX6E2mB+n1IA1Vq9e2dw71RQ3xF2XCxgHr1h5Vsc6HIbaYe
- x49w==
+ d=1e100.net; s=20230601; t=1731165173; x=1731769973;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/r6UZ6UwEM92n5uzdFsM/Casbfgn68C6dWpWE62sbKk=;
+ b=OpyidbIf63eLOlwhvqND9GnO3oEOTD3eLos9HFJc9SDcmhWG0Q3xvbCJfWDetfVsYc
+ G1EGPmV2pWsXpjUm6nzn1b8XpYcE6FVewDE7QrEtsJrEb91CechHfTrbbEv1rD4CDeku
+ WSDi4sDQlBDLcUWCC8BtPEyOf9SZ1GM8C3b0tRDg8nnPs/RpQlP2j2Mv3TaFPPBXhfK3
+ ZgL0O7z4RGB/9REmvwb1xkSAglVQzlMIZwqQpROyq5cK2Dr7GhftLGbSIQ3BTYtkPu1q
+ 95N/swb4DFupgCzgU7Lqag37Qm22xmNRZ2MrJMKZM3oRAxSAxLEGcQuDyNh6UNp/HtKA
+ rBdw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXnLQ77uKAVD59RC1raC193V18WXh3RAGFXYf5A58/mM7K4eIYBDHFwMbHpWPHAAV3QQvduy5Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YwvVY4kf3gFNmCtvKrVw6CKD/qwiqm1DKaKQonbfNTcCCtiGKUf
- t5avLE+8ulU0TEBJqiwX7YAH1eEtctxhyESrCCKyk5H6s0s/se6HGx0hfnwwJZrozlcWCUngPkW
- X0rGfTES2ZfspM4PlQxLuP4sluupcpTEHjv1Sbg==
-X-Google-Smtp-Source: AGHT+IEKhvh6GI3P4YVoFDSY6NNRvenc8uDddHB3FyDa2d40nibbtP4EaNUDU+qAdLSYheK+KAogGk4slYk81DTvOoU=
-X-Received: by 2002:a17:90b:1c8a:b0:2e2:8995:dd10 with SMTP id
- 98e67ed59e1d1-2e9b16ee961mr9263148a91.4.1731164797099; Sat, 09 Nov 2024
- 07:06:37 -0800 (PST)
+ AJvYcCUwsy3G/w6H2Wj8z/siFwxPUUPXaz7ObFjfZUpFgzLlFQsN2pvOy33gnO2eiRRn9PGKdhNpODQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzs4pMmXjwhAEGULHpxm+9j6RTnjZfPxnB342h+sjG7xiKIcjg5
+ dbJvph/hSJD6huCGalshrqCBMTVT2+FAqokie5hna9hzJthB+mPATY0bPlwz96nE7iI/g7il4RS
+ f2CHINAhIhLYiIUAVlk4aGABW9aBloOAy
+X-Google-Smtp-Source: AGHT+IFrl9aNA73zvHNb0KJk1Bt3e/yVl0Wz4Ab8yUv7QlHL7KFRoXr7xhOhaBrWcQ9k65dp0ppDqBLpiuvWm7vrmew=
+X-Received: by 2002:a2e:a551:0:b0:2fa:cdac:8732 with SMTP id
+ 38308e7fff4ca-2ff2028ad8fmr49677151fa.30.1731165173033; Sat, 09 Nov 2024
+ 07:12:53 -0800 (PST)
 MIME-Version: 1.0
-References: <20241109103141.33983-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241109103141.33983-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 9 Nov 2024 17:06:00 +0200
-Message-ID: <CAC_iWjLKDZwQ_g3B4pt3j0Vy0KCq4CRKNvKsmhXFaT6tiJMFXw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: provide valid PXE architecture on sandbox
+References: <7ae3c2a0-2a9f-413c-8fff-bac18421c335@canonical.com>
+In-Reply-To: <7ae3c2a0-2a9f-413c-8fff-bac18421c335@canonical.com>
+From: E Shattow <lucent@gmail.com>
+Date: Sat, 9 Nov 2024 07:12:41 -0800
+Message-ID: <CANV2PTNScpCfP3vuwHFchR7ZgP5oDGUe1-9Lg5u2v8-cU48Pig@mail.gmail.com>
+Subject: Re: [BUG] dhcp fails to download file with CONFIG_NET_LWIP=y
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,37 +90,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 9 Nov 2024 at 12:31, Heinrich Schuchardt
+On Sat, Nov 9, 2024 at 6:20=E2=80=AFAM Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> Before this patch the sandbox uses 0xffffffea as PXE architecture.
+> Hello Jerome,
 >
->     => efidebug defaults
->     Default boot path: EFI\BOOT\BOOTSBOX.EFI
->     PXE arch: 0xffffffea
+> Using the old network stack U-Boot's dhcp command can be used to
+> download via TFTP. This fails with the lwIP stack:
 >
-> With this patch it uses the PXE architecture that matches the host.
-> This allows us to use bootmeth EFI on the sandbox to load an EFI binary.
+> StarFive # dhcp $kernel_addr_r 192.168.1.103:/vf2/grubriscv64.efi
+> ethernet@16030000 Waiting for PHY auto negotiation to complete.... done
+> DHCP client bound to address 192.168.1.47 (233 ms)
+> StarFive # tftpboot $kernel_addr_r 192.168.1.103:/vf2/grubriscv64.efi
+> Using ethernet@16030000 device
+> TFTP from server 192.168.1.103; our IP address is 192.168.1.47
+> Filename '/vf2/grubriscv64.efi'.
+> Load address: 0x40200000
+> Loading: ################################################################=
+#
+>           ###############################################################=
+##
+>           ###############################################################=
+##
+>           ###############################################################=
+##
+>           #########
+>           4.1 MiB/s
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_helper.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> We should try to provide the old functionality to make the move to lwIP
+> seamless.
 >
-> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> index bf96f61d3d0..14049378930 100644
-> --- a/lib/efi_loader/efi_helper.c
-> +++ b/lib/efi_loader/efi_helper.c
-> @@ -75,7 +75,7 @@ const char *efi_get_basename(void)
+> In the CI QEMU instances we already have
 >
->  int efi_get_pxe_arch(void)
->  {
-> -       if (efi_use_host_arch())
-> +       if (IS_ENABLED(CONFIG_SANDBOX))
->                 return HOST_PXE_ARCH;
+> test/py/tests/test_net.py
 >
->         /* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xml */
-> --
-> 2.45.2
+> to test tftpboot. We should add an equivalent dhcp test.
 >
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Best regards
+>
+> Heinrich
+
+It is useful to have dhcp assignment without the side-effect of trying
+to load files. Your script can be updated to:
+
+dhcp ; tftpboot $kernel_addr_r 192.168.1.103:/vf2/grubriscv64.efi
+
+I agree this is a change in the user interface, but this change makes
+sense to me. There needs to be a way to boot tftp using the DHCP
+optioned tftp server, but a command 'dhcp' does not have boot in the
+name it is not clear what this command does. All other commands that
+do a boot action have 'boot' in the name? Perhaps dhcpboot or to make
+tftpboot with an option to use DHCP options for the tftp server
+location.
+
+I don't think 'dhcp' should do anything except DHCP.
+
+-E
