@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD989D5E37A
-	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 18:01:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EBB3D5E37A
+	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 18:01:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78BC78920B;
+	by phobos.denx.de (Postfix) with ESMTP id CC49E89274;
 	Sat,  9 Nov 2024 19:01:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X6FjRdQz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NNPwdDVr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21B8289232; Sat,  9 Nov 2024 19:01:14 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 646C389048; Sat,  9 Nov 2024 19:01:17 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 191BA89043
- for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 19:01:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBE4B89145
+ for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 19:01:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-43159c9f617so25131025e9.2
- for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 10:01:12 -0800 (PST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4315eac969aso18522105e9.1
+ for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 10:01:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731175271; x=1731780071; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731175273; x=1731780073; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Oe+mSRWmszNTJyXM2MHyLWm07qc4gVk0kuOSPQO53WY=;
- b=X6FjRdQzFlX5tb5om75C8qhl1QvIJM6ny58TooaUIcHL5/VoI5X0IFQ0sYMeh5azs3
- aMu8gCLVtmuFOVHBNbd9wvBT5K2wePAEdSVDtuHAM9fDZQCZcFsr/UOkQeWjD4klU+CQ
- 1vAnRvJzsgmbMYk4V7F83QbRxGH1XudXD5GOyJg7GDtn6/EjekyOFMeHc3qUSLFYz1+n
- WKKGuJUUUVj+hnaTdWtAiJqGerTULvR/lxXV4Jv8nxSFJkV6qvKhkXYQxtwTaEMBeYTY
- 008CrNH4XISquwpDPXws2wEyyEzjMHYwDSfJ9+BiExx7AdRwXGBu+ERHyzmhN5vahAo3
- f0Jg==
+ :reply-to; bh=SZ+ot6RXhVf2YFVz3WJwnDv+QHsTg1lURx7UI1iVHl8=;
+ b=NNPwdDVrh34y9V1H1wt5yr9ifB1eRLupuvxxRS1LOXaNS9gkWpNlXZWv4Nsbo15Fgm
+ rfzc/d5QTOf7fv6Wp73owWmNXj3FfQEyyCetk5XBtX6EVfDTRdIKCkhMfSepp/f00/0I
+ 22YneZm1VZxI4hla0rvZurXLksaujPigY+Dq2RvEUxeQFx68TjqsG8ZCiyxOZXgI3iF+
+ l0L9Q4onKEVizr4Q3dxOcWisAzHhjYNn6glxuvjVAFGUD7NZLtC/D9G618/oQoi4FNMb
+ O3dYRF5UQ89d/TC0n/+rvo2abw/NhptRzYnOmIiW1v0TqA9u9CW//ToZwMoeZXOtNPdD
+ dpNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731175271; x=1731780071;
+ d=1e100.net; s=20230601; t=1731175273; x=1731780073;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Oe+mSRWmszNTJyXM2MHyLWm07qc4gVk0kuOSPQO53WY=;
- b=TLbiR8BOosSE1zbaErEba9N0OKvBp+KI5/DJ2zG10mUPVIgKzwMioDuLrOFUO810pu
- bb4VUoYPpASy2l27v1YvcJccQOpoo04Gj70pAdDMG/omq2fnzUNEzWxF58ba8J5o0alk
- t5k1yEHtSboziqLe+JE/2C3zxqnsfAOUn3uSx16GwvyY8G0ynOccjhTuNIGmSLGt9u+C
- aLIpyDkRruN8MHMg3tMtDohCKiW9el6IJj9x3yracIGwXGQIrztfCBTwTteLERp7iFEL
- nvXxv62ZptJcQpi4QzWXZFW6AuHpy6G1bChLkCoBS6H65WN3z4ND1E3d39BqD+cuVVic
- OC6g==
+ bh=SZ+ot6RXhVf2YFVz3WJwnDv+QHsTg1lURx7UI1iVHl8=;
+ b=k4sqj+d2YmXf4Z29SZwJJh3YAX1+OmSgPUaExMOgE2YlKVShCt9jMMtdoW6jMRx/Fz
+ kr2A3Hp40DABJDqMRSPvDNjRLK3ESYWfu11Xi4orrAV3G5ASV4v/pEWO+pju5DBwXCbA
+ MJvZ7YloOu0GOmB/ZHpivC2FUzVE6OKXJ0gF7t4BTwI0kKlV73uN+JaZvh8+Cp4IL99S
+ Q19D31JisrXX8gO0iLnQsurHtjw30dT3tgOfVKX5j/ce69sulodrUABjFJoRYdtGXznE
+ PoKNDo1xllzxKc3UU1+DMY+cXf10gyS3X7aTKAeTXI5gszKCL+ORfW+bnF9DdCxhYikY
+ iBPA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX7x9Q7IN8dbi6GH+ik1DKrAOzcatd0qar55LYwcJ63H/qkiNkS6rZe4eMYLMkxxUnUP1bo8K4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw8xvUuFxsLvZUB9c3b+DpgiFrwUjqFXuj9TLJcBoJHOU4ymBE1
- dPAwPy8KUVslSFiED/veyib7IMNGz2fFyyvcPpgarLxvw7sBVhAW
-X-Google-Smtp-Source: AGHT+IFnLNDNlNH6DAqNYzhdvFnUtTHswpMYTWyw/+Bj/ubtYsjDecjkBMekaFa2Ga1Er7BYfJGRMA==
-X-Received: by 2002:a05:6000:2d11:b0:381:f443:21e9 with SMTP id
- ffacd0b85a97d-381f4432614mr3674668f8f.0.1731175271296; 
- Sat, 09 Nov 2024 10:01:11 -0800 (PST)
+ AJvYcCVjXxIH/9UqgZTFluPH8qH9/eW29Ne3R52bkE7Alkb/UKdk/lbg61fDFlMGWJ62FtEfDMGlR7Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YyI/GlYggQaPoWwYRA1A3ckofv+Dc5SptcVY5rr4XAOzR2+YXbT
+ +opXtkfkYnYmH5aXX+x35eGYJaBVUZF7SXz5xWk4FDEnF8SfmpuN
+X-Google-Smtp-Source: AGHT+IFLQ1jvsIn8BkcEVUlwqPsnqEAv/e/OpWiAM1k5lDPp7CEWWX/sqtH2CIKizq2xzjhb2N7drQ==
+X-Received: by 2002:a05:600c:3b11:b0:431:416e:2603 with SMTP id
+ 5b1f17b1804b1-432b684f334mr70101675e9.3.1731175273125; 
+ Sat, 09 Nov 2024 10:01:13 -0800 (PST)
 Received: from localhost.localdomain (93-34-91-161.ip49.fastwebnet.it.
  [93.34.91.161]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-432aa73a2d8sm146095025e9.41.2024.11.09.10.01.10
+ 5b1f17b1804b1-432aa73a2d8sm146095025e9.41.2024.11.09.10.01.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Nov 2024 10:01:10 -0800 (PST)
+ Sat, 09 Nov 2024 10:01:12 -0800 (PST)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
@@ -77,9 +77,9 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Marek Vasut <marex@denx.de>,
  Michael Polyntsov <michael.polyntsov@iopsys.eu>, u-boot@lists.denx.de
-Subject: [PATCH 2/8] test: dm: fix broken dm_test_ofnode_phandle_ot
-Date: Sat,  9 Nov 2024 19:00:27 +0100
-Message-ID: <20241109180038.10344-3-ansuelsmth@gmail.com>
+Subject: [PATCH 3/8] dm: core: implement ofnode/tree_parse_phandle() helper
+Date: Sat,  9 Nov 2024 19:00:28 +0100
+Message-ID: <20241109180038.10344-4-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241109180038.10344-1-ansuelsmth@gmail.com>
 References: <20241109180038.10344-1-ansuelsmth@gmail.com>
@@ -101,172 +101,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix broken dm_test_ofnode_phandle_ot test. They never actually worked
-and were passing test by pure luck by having the same phandle index of
-test.dts that coincicentally had #gpio-cells in the same index node.
-
-It was sufficient to add a phandle to test.dts to make the test fail.
-
-To correctly test these feature, make use oif the new OPs oftree to
-parse phandle.
-
-For consistency with the dm_test_ofnode_phandle, rework the test and
-other.dts to use the same property with the other- prefix to every
-node.
+Implement ofnode/tree_parse_phandle() helper as an equivalent of
+of_parse_phandle to handle simple single value phandle.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- arch/sandbox/dts/other.dts | 26 +++++++++++---
- test/dm/ofnode.c           | 72 +++++++++++++++++++++++++++++++-------
- 2 files changed, 82 insertions(+), 16 deletions(-)
+ drivers/core/ofnode.c | 58 +++++++++++++++++++++++++++++++++++++++++++
+ include/dm/ofnode.h   | 26 +++++++++++++++++++
+ 2 files changed, 84 insertions(+)
 
-diff --git a/arch/sandbox/dts/other.dts b/arch/sandbox/dts/other.dts
-index 395a7923228..110063fa1c6 100644
---- a/arch/sandbox/dts/other.dts
-+++ b/arch/sandbox/dts/other.dts
-@@ -8,14 +8,14 @@
- 
- /dts-v1/;
- 
-+#include <dt-bindings/gpio/gpio.h>
-+
- / {
- 	compatible = "sandbox-other";
- 	#address-cells = <1>;
- 	#size-cells = <1>;
- 
- 	node {
--		target = <&target 3 4>;
--
- 		subnode {
- 			compatible = "sandbox-other2";
- 			str-prop = "other";
-@@ -25,10 +25,28 @@
- 		};
- 	};
- 
-+	other-a-test {
-+		other-test-gpios = <&other_gpio_a 1>, <&other_gpio_a 4>,
-+			<&other_gpio_b 5 GPIO_ACTIVE_HIGH 3 2 1>,
-+			<0>, <&other_gpio_a 12>;
-+		other-phandle-value = <&other_gpio_c 10>, <0xFFFFFFFF 20>, <&other_gpio_a 30>;
-+	};
-+
-+	other_gpio_a: other-gpio-a {
-+		#gpio-cells = <1>;
-+	};
-+
-+	other_gpio_b: other-gpio-b {
-+		#gpio-cells = <5>;
-+	};
-+
-+	other_gpio_c: other-gpio-c {
-+		#gpio-cells = <2>;
-+	};
-+
- 	target: target {
- 		compatible = "sandbox-other2";
--		#gpio-cells = <2>;
--		str-prop = "other";
-+
- 		reg = <0x8000 0x100>;
- 		status = "disabled";
- 	};
-diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index ce996567c3c..5e36a228395 100644
---- a/test/dm/ofnode.c
-+++ b/test/dm/ofnode.c
-@@ -349,30 +349,78 @@ static int dm_test_ofnode_phandle(struct unit_test_state *uts)
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index a2136f61b7d..774b428c43f 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -879,6 +879,64 @@ int ofnode_read_string_list(ofnode node, const char *property,
+ 	return count;
  }
- DM_TEST(dm_test_ofnode_phandle, UTF_SCAN_PDATA | UTF_SCAN_FDT);
  
--/* test ofnode_count_/parse_phandle_with_args() with 'other' tree */
-+/* test oftree_count_/parse_phandle_with_args() with 'other' tree */
- static int dm_test_ofnode_phandle_ot(struct unit_test_state *uts)
++ofnode ofnode_parse_phandle(ofnode node, const char *phandle_name,
++			    int index)
++{
++	ofnode phandle;
++
++	if (ofnode_is_np(node)) {
++		struct device_node *np;
++
++		np = of_parse_phandle(ofnode_to_np(node), phandle_name,
++				      index);
++		if (!np)
++			return ofnode_null();
++
++		phandle = np_to_ofnode(np);
++	} else {
++		struct fdtdec_phandle_args args;
++
++		if (fdtdec_parse_phandle_with_args(ofnode_to_fdt(node),
++						   ofnode_to_offset(node),
++						   phandle_name, NULL,
++						   0, index, &args))
++			return ofnode_null();
++
++		phandle = offset_to_ofnode(args.node);
++	}
++
++	return phandle;
++}
++
++ofnode oftree_parse_phandle(oftree tree, ofnode node, const char *phandle_name,
++			    int index)
++{
++	ofnode phandle;
++
++	if (ofnode_is_np(node)) {
++		struct device_node *np;
++
++		np = of_root_parse_phandle(tree.np, ofnode_to_np(node),
++					   phandle_name, index);
++		if (!np)
++			return ofnode_null();
++
++		phandle = np_to_ofnode(np);
++	} else {
++		struct fdtdec_phandle_args args;
++
++		if (fdtdec_parse_phandle_with_args(tree.fdt,
++						   ofnode_to_offset(node),
++						   phandle_name, NULL,
++						   0, index, &args))
++			return ofnode_null();
++
++		phandle = offset_to_ofnode(args.node);
++	}
++
++	return phandle;
++}
++
+ static void ofnode_from_fdtdec_phandle_args(struct fdtdec_phandle_args *in,
+ 					    struct ofnode_phandle_args *out)
  {
- 	oftree otree = get_other_oftree(uts);
- 	struct ofnode_phandle_args args;
- 	ofnode node;
- 	int ret;
-+	const char prop[] = "other-test-gpios";
-+	const char cell[] = "#gpio-cells";
-+	const char prop2[] = "other-phandle-value";
+diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+index 7ece68874ae..eea6b13217c 100644
+--- a/include/dm/ofnode.h
++++ b/include/dm/ofnode.h
+@@ -847,6 +847,18 @@ int ofnode_read_string_count(ofnode node, const char *property);
+ int ofnode_read_string_list(ofnode node, const char *property,
+ 			    const char ***listp);
  
--	node = oftree_path(otree, "/node");
-+	node = oftree_path(otree, "/other-a-test");
-+	ut_assert(ofnode_valid(node));
- 
--	/* Test ofnode_count_phandle_with_args with cell name */
--	ret = ofnode_count_phandle_with_args(node, "missing", "#gpio-cells", 0);
-+	/* Test oftree_count_phandle_with_args with cell name */
-+	ret = oftree_count_phandle_with_args(otree, node, "missing", cell, 0);
- 	ut_asserteq(-ENOENT, ret);
--	ret = ofnode_count_phandle_with_args(node, "target", "#invalid", 0);
-+	ret = oftree_count_phandle_with_args(otree, node, prop, "#invalid", 0);
- 	ut_asserteq(-EINVAL, ret);
--	ret = ofnode_count_phandle_with_args(node, "target", "#gpio-cells", 0);
--	ut_asserteq(1, ret);
-+	ret = oftree_count_phandle_with_args(otree, node, prop, cell, 0);
-+	ut_asserteq(5, ret);
- 
--	ret = ofnode_parse_phandle_with_args(node, "target", "#gpio-cells", 0,
--					     0, &args);
-+	/* Test oftree_parse_phandle_with_args with cell name */
-+	ret = oftree_parse_phandle_with_args(otree, node, "missing", cell, 0, 0,
-+					     &args);
-+	ut_asserteq(-ENOENT, ret);
-+	ret = oftree_parse_phandle_with_args(otree, node, prop, "#invalid", 0, 0,
-+					     &args);
-+	ut_asserteq(-EINVAL, ret);
-+	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 0, &args);
- 	ut_assertok(ret);
--	ut_asserteq(2, args.args_count);
--	ut_asserteq(3, args.args[0]);
--	ut_asserteq(4, args.args[1]);
-+	ut_asserteq(1, args.args_count);
-+	ut_asserteq(1, args.args[0]);
-+	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 1, &args);
-+	ut_assertok(ret);
-+	ut_asserteq(1, args.args_count);
-+	ut_asserteq(4, args.args[0]);
-+	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 2, &args);
-+	ut_assertok(ret);
-+	ut_asserteq(5, args.args_count);
-+	ut_asserteq(5, args.args[0]);
-+	ut_asserteq(1, args.args[4]);
-+	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 3, &args);
-+	ut_asserteq(-ENOENT, ret);
-+	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 4, &args);
-+	ut_assertok(ret);
-+	ut_asserteq(1, args.args_count);
-+	ut_asserteq(12, args.args[0]);
-+	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 5, &args);
-+	ut_asserteq(-ENOENT, ret);
++/**
++ * ofnode_parse_phandle() - Resolve a phandle property to an ofnode
++ *
++ * @node: node to check
++ * @phandle_name: Name of property holding a phandle value
++ * @index: For properties holding a table of phandles, this is the index into
++ *         the table
++ * Return: ofnode that the phandle points to or ofnode_null() on error.
++ */
++ofnode ofnode_parse_phandle(ofnode node, const char *phandle_name,
++			    int index);
 +
-+	/* Test oftree_count_phandle_with_args with cell count */
-+	ret = oftree_count_phandle_with_args(otree, node, "missing", NULL, 2);
-+	ut_asserteq(-ENOENT, ret);
-+	ret = oftree_count_phandle_with_args(otree, node, prop2, NULL, 1);
-+	ut_asserteq(3, ret);
-+
-+	/* Test oftree_parse_phandle_with_args with cell count */
-+	ret = oftree_parse_phandle_with_args(otree, node, prop2, NULL, 1, 0, &args);
-+	ut_assertok(ret);
-+	ut_asserteq(1, ofnode_valid(args.node));
-+	ut_asserteq(1, args.args_count);
-+	ut_asserteq(10, args.args[0]);
-+	ret = oftree_parse_phandle_with_args(otree, node, prop2, NULL, 1, 1, &args);
-+	ut_asserteq(-EINVAL, ret);
-+	ret = oftree_parse_phandle_with_args(otree, node, prop2, NULL, 1, 2, &args);
-+	ut_assertok(ret);
-+	ut_asserteq(1, ofnode_valid(args.node));
-+	ut_asserteq(1, args.args_count);
-+	ut_asserteq(30, args.args[0]);
-+	ret = oftree_parse_phandle_with_args(otree, node, prop2, NULL, 1, 3, &args);
-+	ut_asserteq(-ENOENT, ret);
+ /**
+  * ofnode_parse_phandle_with_args() - Find a node pointed by phandle in a list
+  *
+@@ -909,6 +921,20 @@ int ofnode_parse_phandle_with_args(ofnode node, const char *list_name,
+ int ofnode_count_phandle_with_args(ofnode node, const char *list_name,
+ 				   const char *cells_name, int cell_count);
  
- 	return 0;
- }
++/**
++ * oftree_parse_phandle() - Resolve a phandle property to an ofnode
++ *			    from a root node
++ *
++ * @tree: device tree to use
++ * @node: node to check
++ * @phandle_name: Name of property holding a phandle value
++ * @index: For properties holding a table of phandles, this is the index into
++ *         the table
++ * Return: ofnode that the phandle points to or ofnode_null() on error.
++ */
++ofnode oftree_parse_phandle(oftree tree, ofnode node, const char *phandle_name,
++			    int index);
++
+ /**
+  * oftree_parse_phandle_with_args() - Find a node pointed by phandle in a list
+  *				      from a root node
 -- 
 2.45.2
 
