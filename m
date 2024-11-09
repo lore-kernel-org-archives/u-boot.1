@@ -4,77 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8617D5E386
-	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 22:24:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07831D5E387
+	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 22:55:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D503889327;
-	Sat,  9 Nov 2024 23:24:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1381388EAB;
+	Sat,  9 Nov 2024 23:55:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="qpgOhY0b";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BUz5U1WH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 688318932C; Sat,  9 Nov 2024 23:24:04 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id AE073890C1; Sat,  9 Nov 2024 23:55:27 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A4AD89318
- for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 23:24:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0B678885D
+ for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 23:55:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1731191041; x=1731795841; i=xypron.glpk@gmx.de;
- bh=uoMG3QgQ88s44QFn/iChFW8LkGWuqQiy/44FaDt/gj4=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=qpgOhY0blC8jDkiw9+rDWpxyN/AODL2fjF7UDiSq7U6HwWmeQTW8pN552sm2ZOli
- HmNJwbI6R75CYBSPWzdsVv8Kk+jr7DyitLGHcl0EBWtydXRb9BwygGRedqXuqHF0+
- aCzcYOBbrCcduJklP39MJbtAKB948QJIkyVWwAMoDMMYYH6F1UvGCgowwQp7qnepR
- 902tqUD9z4+kAYLOQdJU//jZiYo+7z50hNcqF31/uPkaLI6R0u55I/IcrhcskonPZ
- Hx3yBWC65KVMhzTsPDRs6E9+5EujAVgEHh2gjfDEZfStjWxBtnmZG/7bm7pwdWS5T
- bf5VIasb+nme1YJJeA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N6KYb-1ttbia1ZhB-014G1Y; Sat, 09
- Nov 2024 23:24:01 +0100
-Message-ID: <1f44e6b1-eee9-4895-b06f-fdcecb9dfb44@gmx.de>
-Date: Sat, 9 Nov 2024 23:23:55 +0100
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id E0E623F29B
+ for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 22:55:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1731192924;
+ bh=GQwjrYH/6ZCEE+1nqbROmDtEcmYBB8iPLfmWFv0e+rA=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=BUz5U1WHw7yOq9BBDy75r7KFGwvUZZZEcrElsqYBOtknQf0CXW3Qnf0vO7rKRj6FA
+ 7nXGifhqS9dT7JhXPjXXur6Zbt0XezEzFbjAUKGNddUDbdsrS9uUlpqQ75Hhu/wJwO
+ 3rZK2IfzLuA3up73g1J1XBkcnTEzUI7em/nxYa5QGjL8szDc4V3byMZDN0PjLPSC01
+ fJUVcaxhHYbH2JETXvdFHmdu8GxmgWppkRknimYxg3fbd7DXU5keOs4uY47RM1clwn
+ DDWHwzMvWaXG2Yz/MwyrzSbH3eeyuYKwEHh+1Vy25x/LK9YsufNGHQ3fn003gnVFpU
+ S3UBKYCTsaLXw==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-37d458087c0so2579855f8f.1
+ for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 14:55:24 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731192924; x=1731797724;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=GQwjrYH/6ZCEE+1nqbROmDtEcmYBB8iPLfmWFv0e+rA=;
+ b=MnimHEJYkenWty6nYtMYbhLPIxirTGNzqrUBNgpe8Q4RzO+8sg4MXA4WD5PtnsBBgW
+ gzRp1oVz0r7VnXHvgX/I6Fd3amGCK3gVZHjThzdKowk5jg40eauDL57ZPvMJq/uWhGha
+ 4h8HmaALBtXdKKukG/V+I6IjToNC4FF7e0VEjWDd5hMCWaaK2H3NYLz3HjW03YtgOtjJ
+ qqJjZF/tnZgdfd0hMcmTH41adE7jpKBQpUu42PVhCGfWgVtZPg+HNXf+nK2I22lLyld5
+ +7MrrUmGqu/QOAg+lIpUAxSJDmEAdCjyxlRO63/eY8d29ME0a9j3HTsoAq31EkpftomN
+ WnEQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWxZFwk+IqkZOtH7IyJ5IPpzsBVu4Y/FONgUdY/+hL1syEcIH+t1RkW8emEJIL2T83KE0bKtc4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBYd+Owl2ZMeHJeI6LK4UK4LTVdzUXkliEoSxuMPXXQNDgLz1s
+ ukjLwMFvErR08dD6QdcDIrAN3FhUq/EPYb1CFZV/qTim8yTsKbs/xKavipplKr2rYeJQDg2c8Xe
+ 1srkr2okL8mk9zRCTJiBPwC4OUX0b774wWbMK8hcZh1SB1Aal3e7ZuS25T1FhyhuTqQelNk/9ap
+ WirA==
+X-Received: by 2002:a05:6000:4107:b0:381:f587:1c2c with SMTP id
+ ffacd0b85a97d-381f5871d05mr4529443f8f.20.1731192924329; 
+ Sat, 09 Nov 2024 14:55:24 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFj4D8yQPCLRg9WW+rXN0qfl020BT8yj3GsDl6XhVDsHpsr7D1vC41CCLvVzotQmKLrckYSmw==
+X-Received: by 2002:a05:6000:4107:b0:381:f587:1c2c with SMTP id
+ ffacd0b85a97d-381f5871d05mr4529430f8f.20.1731192923874; 
+ Sat, 09 Nov 2024 14:55:23 -0800 (PST)
+Received: from [192.168.103.101]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-432aa709ec7sm161656345e9.35.2024.11.09.14.55.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 09 Nov 2024 14:55:22 -0800 (PST)
+Message-ID: <a6cbb2d2-d346-45be-9edd-22b1d4901b88@canonical.com>
+Date: Sat, 9 Nov 2024 23:55:21 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: SiFive Unmatched: Linux kernel doesn't start (U-Boot 2024.07)
-To: Yuri Zaporozhets <yuriz@vodafonemail.de>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-References: <Zyv8zn2oGmmKz5XU@vodafonemail.de>
- <CAFLszTjGEVsFXdLNQdfD6mNNFC76k+4S0VZLJfbMNO7s1V5K6g@mail.gmail.com>
+Subject: Re: [PATCH 8/9] buildman: Propose a format for extra boards
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241108152350.3686274-1-sjg@chromium.org>
+ <20241108152350.3686274-9-sjg@chromium.org>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAFLszTjGEVsFXdLNQdfD6mNNFC76k+4S0VZLJfbMNO7s1V5K6g@mail.gmail.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241108152350.3686274-9-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:4p69NiDiBUKIyXm8vXvkNFnNfpgITVslzf2YOFBnCGoyOA2riHK
- Oa5vpH5oH/GG5O3hetEWGaZTi+VtWR/Bn0NjkzDB1e4qpqCd9fTvQmT7vRX4o9ItQW9Sz/I
- mGa4HJWxib+uBOISM3VD8b3L8ZQlRgIkEDteKpeZWPhHK0JCfaYegCh+OzlaZ2flARF5Y/j
- J6fYsubgjHnYn9M07RSVg==
-UI-OutboundReport: notjunk:1;M01:P0:h5y5t5g5Zyw=;ByATnuIw+truihja4FpoGAzQb7n
- g/pUyAGl7/QIpsdAxGC/ihgstOo3OG9f4kT55P2aE9myJxWVkWfPqG0TZuOP3iNL/Mohrwbqx
- GQL7MOS+fCqHaBaajJ34D50Vq818KLshpzHEP8+b4N5bYagH/Q2MqGafQaiuYwKXsllN/iZto
- n/qjVw0nl0lglD3t00FVygeeKrkh35r2HhwTeMbQQ3UIYNGwoQchnK2DSirIFmPMPhoSK3gVL
- 8Dh07zY6cxIf//FphLfRSyJv30GGaCKT4ABM0Eupj1hOC//+2qLN8W1tEnj4QM0glbWEMo//k
- KqCz6Nbk7r11uIbbZc2VQSWjZqtSQsEyqx0iFRge6PcrLnkPrhPTd/6sodQ2ZNw9lldljk8ao
- y6v8XVW9++D+Dxhh9WgOaJcsYAOEzdeNDqOiPZ7MCWPCD5MZJ4Nv+6WGwMknytHT+Q2J8GBhG
- ZDUqTe9Lo0rqYb7pn63NlY6fCXFfjhdQM6Hq7sVtAWDTupetb7HPWfYL1dGx2/+Mdgjvk8q+0
- EGNdrP7Ns5WrhVwkjrL2eqRyAR5jMfKQIXgs8RW7Zj1C9Pf8esdRGq4ReuH8HFBk0pSUpCG3V
- 7OO2BjrgXqVpnW2u3Hpckmg+IQ2Ic4aLynWy4iOu+6lLLSdbZH0pwtd7etgQOEX36dK7LcNvC
- KkerTE+bhX/7YX+WmwUWwibF+F2Jwz49KT6UTYIB+QzUz6fxg1fiCLOS8N49w9ZqyTw/Mh2iz
- k4334jzootMREzDCUcy+GaJZClvX6u7KVppgvwma+ZfTihco2NyANjUvK0Hce1CYOH34XUSzr
- du3KOpNUQFD8iA0T7Vd6jtUitdQCUlukGvpU/ODErkFaP+QfAGQrN5L5OY3A5j66GnHjJD2ps
- H9rPRTO/yRINAYHM7vDpgIjWkOvuv7yxkBGLex2koSiVyllP6lf8rCrBn
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,75 +108,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09.11.24 18:34, Simon Glass wrote:
-> +Heinrich Schuchardt
->
-> On Wed, 6 Nov 2024 at 17:53, Yuri Zaporozhets <yuriz@vodafonemail.de> wr=
-ote:
->>
->> Hi all,
->>
->> To all owners & active users of the SiFive Unmatched board: do you have=
- success
->> running any recent upstream U-Boot on your system?
->>
->> I use the default U-Boot from Ubuntu 24.04, and it boots GRUB and Linux
->> kernel just fine. Today I flashed the unmodified U-Boot 2024.07 (compil=
-ed with
+On 08.11.24 16:23, Simon Glass wrote:
+> It has become more common to use config fragments to extend or adjust
+> the functionality of boards in U-Boot.
+> 
+> Propose a format for how to deal with this. It is not implemented as
+> yet.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+>   tools/buildman/buildman.rst | 39 +++++++++++++++++++++++++++++++++++++
+>   1 file changed, 39 insertions(+)
+> 
+> diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
+> index 924564b5700..48705d0e49e 100644
+> --- a/tools/buildman/buildman.rst
+> +++ b/tools/buildman/buildman.rst
+> @@ -1148,6 +1148,45 @@ like::
+>   This is partly because there is no way for Buildman to know which fragments are
+>   valid on which boards.
+>   
+> +Specifying the build matrix with fragments
+> +------------------------------------------
+> +
+> +In order to build boards which can use fragments, Buildman needs to know which
+> +fragments are valid with which boards. The following scheme is proposed, but not
+> +currently implemented.
+> +
+> +In ``defconfig/``, files with a '.buildman' suffix are used to effectively
+> +create new boards for Buildman to build. All such files are processed, but it
+> +might be best to put all the information in a single file for now, e.g.
+> +``extended.buildman``.
+> +
+> +The syntax consists of a number of sections, each introduced by a name. For each
+> +section the fragment file is named (without the implied ``.config`` suffix),
+> +then the targets which can accept that fragment are specified, either by their
+> +board name, with wildcards, or a set of ``CONFIG`` options to check. All
+> +``CONFIG`` options must match for a board to be included in the set. To specify
+> +multiple fragments to be included, add them in the order which they should be
+> +applied, one per line.
+> +
+> +For example::
+> +
+> +   # Build RISC-V QEMU builds with ACPI
+> +   name: ACPI with supporting boards
+> +   fragment: acpi
+> +   targets:
+> +     qemu_riscv*
+> +
+> +   # Build Android variant of 'k3' boards, with DFU
+> +   name USB DFU for am62x boards
+> +   fragment: am62x_r5_usbdfu
+> +   fragment: am62x_a53_android
+> +   targets:
+> +     CONFIG_SYS_SOC="k3"
 
-2024.10 has been released, we are currently working on 2025.01.
+Thank you for looking into this. I don't think that we will have to 
+build every board with each fragment. But for every fragment there 
+should be at least one build.
 
->> "make sifive_unmatched_defconfig" and OpenSBI 1.5), and the Ubuntu kern=
-el
->> (6.8) doesn't boot at all. The last message I see on the console is:
->>
->> EFI stub: Exiting boot services...
->>
->> Adding "earlycon=3Dsbi debug" doesn't change anything.
->>
->> The same behavior is also when GRUB is excluded from the process:
->>
->> =3D> nvme scan
->> =3D> load nvme 0:5 $kernel_addr_r /boot/vmlinuz
->> 38603264 bytes read in 47 ms (783.3 MiB/s)
->> =3D> bootefi $kernel_addr_r
-
-I would use
-
-setenv bootargs earlycon=3Dsbi efi=3Ddebug
-
-to get early output.
-
->> Booting /\boot\vmlinuz
->> EFI stub: Booting Linux Kernel...
->> EFI stub: EFI_RNG_PROTOCOL unavailable
->> EFI stub: Using DTB from configuration table
->> EFI stub: Exiting boot services...
->>
->> Is some additional patch needed to run U-Boot on Unmatched?
-
-I just built:
-
-U-Boot 204.07 using OpenSBI origin/master (commit 701948bdec90e290) and
-U-Boot origin/master (commit f448c4517b55f401)
-using OpenSBI origin/master (commit 701948bdec90e290).
-
-With both I had no problem booting into my Ubuntu 24.04.1 (Noble)
-installation via GRUB on the Unmatched board.
-
-=3D> load nvme 0:1 $kernel_addr_r boot/vmlinuz
-38595584 bytes read in 48 ms (766.8 MiB/s)
-=3D> bootefi $kernel_addr_r
-
-runs up to the point were it finds out that there is no initrd.
-
-If you want to boot via UEFI but without GRUB, please, use the eficonfig
-or the efidebug command to define a boot option including an initrd.
-Preferably also specify the device-tree that matches the kernel.
-
-You could also use booti to boot via the legacy entry point of the
-kernel, i.e. without UEFI.
+qemu-riscv64_smode_defconfig + acpi.config and qemu_arm_defconfig + 
+acpi.config would be enough for acpi.config. x86 anyway uses ACPI.
 
 Best regards
 
 Heinrich
+
+> +
+> +Buildman normally ignores these files. To request that Buildman process these
+> +extended new 'boards', use the ``-X / --extend`` option. Note that this may
+> +significantly increase the number of boards which Buildman builds.
+> +
+>   Building with clang
+>   -------------------
+>   
+
