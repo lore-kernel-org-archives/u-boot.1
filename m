@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68FBED5E379
-	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 17:26:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64244D5E37A
+	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 17:34:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0477890DF;
-	Sat,  9 Nov 2024 18:26:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BF6B2890AD;
+	Sat,  9 Nov 2024 18:34:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lDXpojEU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l7qaaR1U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50BB2890FC; Sat,  9 Nov 2024 18:26:02 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id C5B2B88D3C; Sat,  9 Nov 2024 18:34:08 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F9708909F
- for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 18:26:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63EA5890AD
+ for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 18:34:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a9eb3794a04so482778166b.3
- for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 09:26:00 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a9a6b4ca29bso450562766b.3
+ for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 09:34:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731173159; x=1731777959; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gxBfctbwaMC8ocDpgmOVOD+PskaPMfzs44oTpTHyfyg=;
- b=lDXpojEUO4tgXYhQ9vWpjXcT+6Sg5oA948p9nZvTWTnARIFKMv0A2+ndfgYZbKwOnS
- wAKLJITphUk50lxlvS0vw39p2iGdabZGTPzZQMP1Ylr0a5WEGeUaiZ94wV9ZB6R0josn
- BNpDo3jUVNNi/B6oqeTyNbk7JOVO8TKMi4XYg=
+ d=chromium.org; s=google; t=1731173645; x=1731778445; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=llZSIm9RTwi+d2GMRKcndXolcRLn0SPxRWEjtUkc5bk=;
+ b=l7qaaR1UlZ4eYHJrEo2hzs71ODuJeoS4q8M1125XIUAouO80CNOhstA/HqwiIHPiD2
+ P9zCC3gK2w8JJxOMlnkPr524+ncLg4v28f3PbgymAZWWRsfpKD1Lxr1UdpeKGl9cW/DN
+ QP+qkNBVuPZ+wvictwfU6R3PnUnNT6AsqUxnc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731173159; x=1731777959;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gxBfctbwaMC8ocDpgmOVOD+PskaPMfzs44oTpTHyfyg=;
- b=uphXywaWYe3kUEu9oBkIcS5rgVj3jRmMg/KL18GpCSmuvTtQ+z0mX5PwTD3TS6nk9k
- LzXEQFj5z5a0Ky1msfYcJQs6CrBCfCmv2pLNHCvqhDTIcMz/ZwQmBkzte9XygBmBZO+5
- OOcgY8JB7vrtTEA0/+K/vXGt2ark0oECWlCVZVHtHN3Hh89gQh71AzsG2V7GT8LbxMwh
- fQwQNn4DAQqpbkmo7rl5FO7Ao0fHrC9A6h1pPx5LUL2X8gr9lw5+VTrGGZc3t43WjpPD
- h2WDyTF+Rj/n+twvR1/xqlz+jXfgKHbiQazOYm5lih3pGnPt3T073Q5cV0HLAlNEyXrq
- jtiA==
-X-Gm-Message-State: AOJu0Yz7AJMLPt+9enxYcqDsKnYZGfiZJjb9O+xJhw2wo+ATz5cXOkaz
- 48gl+Fv3Q5fvXYTX9bhML8CjCQ7tr0wDP13aOyedw8h4g6Dv3mkNx6mJ8zT1vi4=
-X-Google-Smtp-Source: AGHT+IFIkAHGGNUe2/FvfChftKLs7u6s/pwSaH5Z2z64xd02ap9tNadkg9hW0k/IimvslkBxSEoesA==
-X-Received: by 2002:a17:907:72c3:b0:a9a:6b4c:9d2c with SMTP id
- a640c23a62f3a-a9ef00239f4mr644776866b.59.1731173159259; 
- Sat, 09 Nov 2024 09:25:59 -0800 (PST)
-Received: from oliver.lan ([23.155.80.164]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0def4f3sm380604466b.161.2024.11.09.09.25.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Nov 2024 09:25:58 -0800 (PST)
-Date: Sat, 9 Nov 2024 11:25:54 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Moritz Fischer <moritzf@google.com>,
- mason1920@use.startmail.com
-Subject: Re: Pull request efi-2025-01-rc2-2
-Message-ID: <20241109172554.GA70092@oliver.lan>
-References: <efa929c9-b8a8-4264-8bd2-8e98bd61c5c6@gmx.de>
+ d=1e100.net; s=20230601; t=1731173645; x=1731778445;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=llZSIm9RTwi+d2GMRKcndXolcRLn0SPxRWEjtUkc5bk=;
+ b=kxWSc3TgBTPrqJ68PxtMaMxVt6Z08X3ruEviU9YSNIE8Tr0ItOV70l40Amv3H4WxOn
+ oeCX/ihw+6RM5CQ45zr+jv2GuaJWmYbinD7mRgcb7uCjBZEr8T7sdcJT0koGu7evu6dn
+ 4YxVuRNdAf1TKKotpZTwJQTKtDwNQT85EI9GZQLpfTyLmRnlb2dFAW8Iz3NLtDRh0FZm
+ QDZbmpi50ZNUMf5ag+NhbxZaWU7zGQloceRYcp2zuKU5OhuNtnyXHHVHTK4QSJigA6aj
+ QtFS70EzEqAg1bzujhOSBrznqwPhEdPopBOqZE9Ubc6lnGmxBjQfyjewI7u8DD20NV1m
+ eneg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW6M3TlL/CW3CFQOh08ivOwYha+FJmSiCbJR9oM6wtMRUex+CnpSw4NmIzgxw+WzF5np18lEBM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy7U8022GvJYum/X/nW95CeBMYNG6ecAfPQegxlWHsmxiAOmca9
+ /Tsg+DyJWLWahnHwKgTWHopWJ6cl6et07FTxe+80A2TDQ0F+AwJ/ObwOo/GTiV1nZ5h4gHAny99
+ IgKav3NNMP57ruuwQXKOhixEHFdE69hvypmfr
+X-Google-Smtp-Source: AGHT+IH7I7p5UtoGzZqOyUKX+HJEX/5zZPWzQnP+DZdCbWexV1MMqOLc/F8WgXRr6+eD9sHjqkrEcD6g0q5CYHQtzPk=
+X-Received: by 2002:a17:907:d2a:b0:a9a:684e:9a64 with SMTP id
+ a640c23a62f3a-a9ef005043amr628191466b.61.1731173644329; Sat, 09 Nov 2024
+ 09:34:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2w7EZZ4tv/v0YtC7"
-Content-Disposition: inline
-In-Reply-To: <efa929c9-b8a8-4264-8bd2-8e98bd61c5c6@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241109103141.33983-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241109103141.33983-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 9 Nov 2024 10:33:51 -0700
+Message-ID: <CAFLszTiKGRg=1PDP39zJ1XthsmE4GL38xL8uxua_dO+DwhqOxA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: provide valid PXE architecture on sandbox
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,57 +87,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
---2w7EZZ4tv/v0YtC7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, 9 Nov 2024 at 03:31, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Before this patch the sandbox uses 0xffffffea as PXE architecture.
+>
+>     => efidebug defaults
+>     Default boot path: EFI\BOOT\BOOTSBOX.EFI
+>     PXE arch: 0xffffffea
+>
+> With this patch it uses the PXE architecture that matches the host.
+> This allows us to use bootmeth EFI on the sandbox to load an EFI binary.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/efi_loader/efi_helper.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Sat, Nov 09, 2024 at 11:09:54AM +0100, Heinrich Schuchardt wrote:
+The way things are, this isn't a valid thing to do. It is returning an
+error to indicate that. The error should be checked. If you use -N
+then it will do what you want, though.
 
-> Dear Tom,
->=20
-> The following changes since commit a7a96a37cbd875994bc8d25adb0536bf00e4a3=
-0e:
->=20
->   Merge https://source.denx.de/u-boot/custodians/u-boot-riscv
-> (2024-11-06 10:44:33 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git efi-2025-01-rc2=
--2
->=20
-> for you to fetch changes up to 70b78d52937b5f18afbbc4257bd3b89b0e75a186:
->=20
->   test: efi: boot: Add a test for the efi bootmeth (2024-11-09 10:01:47
-> +0100)
->=20
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/23260
->=20
+But what architectures does this work for, with your setup? I haven't
+been able to get x86_64 to work. I could perhaps try arm64?
 
-Applied to u-boot/master, thanks!
+Should we document this use of sandbox for your use case, once it is working?
 
---=20
-Tom
+>
+> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> index bf96f61d3d0..14049378930 100644
+> --- a/lib/efi_loader/efi_helper.c
+> +++ b/lib/efi_loader/efi_helper.c
+> @@ -75,7 +75,7 @@ const char *efi_get_basename(void)
+>
+>  int efi_get_pxe_arch(void)
+>  {
+> -       if (efi_use_host_arch())
+> +       if (IS_ENABLED(CONFIG_SANDBOX))
+>                 return HOST_PXE_ARCH;
+>
+>         /* http://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xml */
+> --
+> 2.45.2
+>
 
---2w7EZZ4tv/v0YtC7
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcvmx8ACgkQFHw5/5Y0
-tywpwwv/e90Omy4fm1xrQpW2Ki3t8XJZHKr5I5gOZgZf2IrX380jKZwdhTItAoq6
-LQ7/+9yApk6TWKcZ65o6jE6CEYIAOQ64398fglvbOuDL9SzQtrqcy/8pfA8WznD1
-xuYNxLAqBLMdujOOMmyoPBoH/u1RoJW8RW9FTrxTvDPTDwh9AE34bHCNTvCy2pBU
-pxUjiSeub4YjweiKAGE3CZoiERantjX8YqefFoqNHh++GNiRwCwyJV8yJzauoDMF
-vJ+k4Unqjf/7eU0iirWAHLTynMVHqpMopHT5jL8nVzA8sL85CCOqzpMA1UTjNp0G
-+ohb53rkuUZhdt86F0SodrBMoY3oFOdZgXHV4v26XoOOYyPjehbJhv1NyDmC6e0A
-3d2jqjV+mABhoRUua0D88S+F33WMj69z/7eOAqPj/fKcS95VfK3kjRZ+EDozBRY5
-QIhs+5crZaaCs71Obry6GTyfo0c95ij6bPsjzTpcVwvfvDABUj6DntnKJSyt6O0L
-mBI69THT
-=KQLC
------END PGP SIGNATURE-----
-
---2w7EZZ4tv/v0YtC7--
+Regards,
+Simon
