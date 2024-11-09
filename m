@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 891E1D5E379
-	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 17:49:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2A1D5E37A
+	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 18:01:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9F94890DF;
-	Sat,  9 Nov 2024 18:49:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BA05889235;
+	Sat,  9 Nov 2024 19:01:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KEKM4dxd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mLjQsc7u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2667D881E7; Sat,  9 Nov 2024 18:49:20 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 75E9C88B9E; Sat,  9 Nov 2024 19:01:11 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F8B989145
- for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 18:49:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8779D89048
+ for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 19:01:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4315eeb2601so38959495e9.2
- for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 09:49:17 -0800 (PST)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-37d49ffaba6so2164987f8f.0
+ for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 10:01:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731174556; x=1731779356; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731175269; x=1731780069; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=z0gqgUvpG4TGIzyDkqRTbfHoh3hOSQ1kdapXAw04fzA=;
- b=KEKM4dxdGJz9nNvv6fVMY/jA5o9XBubn/c97PMqsjl3AeDD1jLq8TILvllPLuBwFe/
- p3Vc6VCe67kwsAe9Mftcxe8lFSZluPElh+1ek7YZoLePOx56OQ6VpNH2gz9Ecm7gunQQ
- iUZMmtuCy4vd30m7QBuwB2MkoUr1/S6VTNNDCh7G5I7ljD6D+YhRfTRAKkWXQ2ddPY8f
- lTn5tMfd4UbgPgF1RlSeIafpPYq23AFVyLmP/gDTwH2FN+X2UNQaAah1pZjGNZ5vRx8k
- QdxPsqKXONOkwN+c6Xg1WXl+oEAMJqV3FPstTwXXE4ZXpfmOTBj2RYxYiOoIt/S0uIuc
- l+Sg==
+ bh=goVLxNLspJxwz2GPctR+ELXyVt1pm9Yrrf2UtSkRHzY=;
+ b=mLjQsc7usbTDEJfiMk2emxIk80BtNMfG+rpGFQO/Cn2psevreXSQwwwB12IYsQlcqY
+ InmlRuolI5SKQ7hgRvMlzf5IlPxfSR8U9/hTv5ICuNX60UHA2l/FMUthJ1A0pEY0ofCJ
+ bs5/2hHg0fHUsj1NqWN5GF7iQfoiueDMpA/WYJtNNK0omjC0cFRwZbnthVKLFBnSPw9h
+ c/u6eTYtzrxmnxuwDjBYQS/IeNf1TP2rAgoLNd0YfubkwtckavU6NEFbvT+09RtOHwuq
+ 0KkBlfQGIyR1qUIaH2RPCRjtFN4TmHA5SXSjTs7Lta0zBfXWjxspQ1kqRh0xTWYKlszm
+ roPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731174556; x=1731779356;
+ d=1e100.net; s=20230601; t=1731175269; x=1731780069;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=z0gqgUvpG4TGIzyDkqRTbfHoh3hOSQ1kdapXAw04fzA=;
- b=PI6Qcwu3/rYdc9HSJxEaNJ77YOxPTHY9Vn4wnYu77XtVDSxgh7ctoNOwKyuhYAtwrd
- wEXUE4it5Z1AIFRxsg0wqNP/KHZSZ3FAvAXAChxA1n7L9sh4uLogDHE0NcU8EertG4R+
- l5f9hzAyD7jcxlFYlRglsP4v04KNKikR7usPXSwHgSpu/Y+kEkZ/Fc/nNlwFiaZRpHGI
- 9BQYO1g8nJPF8KGQUxGuxsPsQeeZbxs23FyngM1IrurB2oXNbaaQslvc0NvsFPhKo914
- n7CjgRevIu0LwmH7W5j5CTOMWSDBEw5b/bAcsAgXiJEFvj8nVCtf7xTSf02huVLmQKUn
- TYbQ==
+ bh=goVLxNLspJxwz2GPctR+ELXyVt1pm9Yrrf2UtSkRHzY=;
+ b=gvMKReGtGL4CArRuAJUyxPUFlUAEo4P7CvuBuaDqS44T6YTiSj0AXoCpXBcuJpFd7C
+ sB+WKwpFdW/QWsjes7jkJ3cL1ff/xCEXIyc6NC4/DhIgPGRACtbIHQ7vcifeLDmX5lF4
+ cmlr28GjSD6IB6YmD8esA3avSFiFb091oXbULr8YOLQAwMWTpufBXS+wJAbNe71JvAJx
+ JPwGPzi67wYSBMpTrSKRkx3txIu5fxEuRR4fsSXsXrRQxH2THYhUIiDMAC0tpmxxvVSp
+ tWOX/ziYPlYx0y+yn81BP3K5x+LJ7MvQubQzUzmTzD615GTahpiemCG00zZS93U5NLhX
+ 0sfQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCUpc2A2oAgQ71leDN3bz1jyMBG4lhVzutpgeFEsyNDLZxuXPaatWfrsNfEEnbJFWuME1pgYg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxqlHCS3KbmYb6/iZDGUz0YlGwNsc+9soFUiaOhDOLw46n7NXSZ
- XKbw0p8jJ9RfYl6vpnEK/I7JP97JzH1ictSB/WZzFYHxnkSlywqm
-X-Google-Smtp-Source: AGHT+IG45dCPSSjadotIM4yFeiY4d78R+pdv+Oltib/f6uiuqYu2MRemIFO9rWYWNOeZZYgkPk8UIA==
-X-Received: by 2002:a05:600c:19c8:b0:431:4847:47c0 with SMTP id
- 5b1f17b1804b1-432b74fec2emr76041965e9.7.1731174556292; 
- Sat, 09 Nov 2024 09:49:16 -0800 (PST)
+ AJvYcCXIwLJoq7JJhKCfF6ZfcOoN1PxXw5WQABjwlGWU8PnLFXTreY3iEY/APxfDfT1nNo/jrIGtwMU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyZD9E6jxgWqRpTLSqBwcMx8GIwVhO+P/Jq1fyF1ELkRKKeJbj3
+ C5VwfVdjE8DaWWHw8gi5WvyiXgB35MF/6iLylcF2UaXr48u0GHAT
+X-Google-Smtp-Source: AGHT+IH/WeSAvSvDWyG5St4gzWRnxVkNQN77kgrKyf1qw47ZyAHgrUQyvT27aXG3R+qJLmtG8uHPTg==
+X-Received: by 2002:a05:6000:1f8a:b0:381:bf27:e845 with SMTP id
+ ffacd0b85a97d-381f18270cfmr6423951f8f.1.1731175268787; 
+ Sat, 09 Nov 2024 10:01:08 -0800 (PST)
 Received: from localhost.localdomain (93-34-91-161.ip49.fastwebnet.it.
  [93.34.91.161]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-432b0562860sm114019635e9.22.2024.11.09.09.49.15
+ 5b1f17b1804b1-432aa73a2d8sm146095025e9.41.2024.11.09.10.01.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Nov 2024 09:49:15 -0800 (PST)
+ Sat, 09 Nov 2024 10:01:08 -0800 (PST)
 From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Marek Vasut <marex@denx.de>,
- Andrea Calabrese <andrea.calabrese@amarulasolutions.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH] .gitignore: add test overlay .S and u_boot_logo files
-Date: Sat,  9 Nov 2024 18:48:44 +0100
-Message-ID: <20241109174845.9227-1-ansuelsmth@gmail.com>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sean Anderson <seanga2@gmail.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Marek Vasut <marex@denx.de>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, u-boot@lists.denx.de
+Subject: [PATCH 0/8] led: update LED boot/activity to new property
+ implementation
+Date: Sat,  9 Nov 2024 19:00:25 +0100
+Message-ID: <20241109180038.10344-1-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,37 +99,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add test overlay .S and u_boot_logo file to gitignore as these files are
-generated and should not be committed but ignored.
+This series is split in 2 part.
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- .gitignore | 5 +++++
- 1 file changed, 5 insertions(+)
+While adapting the LED boot and activity code to the new property
+accepted by Rob in dt-schema repository, a big BUG was discovered.
 
-diff --git a/.gitignore b/.gitignore
-index 502a7e6ec70..e93c33da1bd 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -75,6 +75,9 @@ fit-dtb.blob*
- /keep-syms-lto.*
- /*imx8mimage*
- /*imx8mcst*
-+/drivers/video/u_boot_logo.S
-+/test/overlay/test-fdt-overlay.dtbo.S
-+/test/overlay/test-fdt-overlay-stacked.dtbo.S
- 
- #
- # Generated include files
-@@ -83,6 +86,8 @@ fit-dtb.blob*
- /include/config.h
- /include/config/
- /include/generated/
-+/include/bmp_logo.h
-+/include/bmp_logo_data.h
- 
- # stgit generated dirs
- patches-*
+The reason wasn't clear at start and took me some days to figure it
+out.
+
+This was triggered by adding a new phandle in the test.dts to
+introduce test for the new OPs.
+
+This single addition caused the sandbox CI test to fail in the
+dm_test_ofnode_phandle_ot test.
+
+This doesn't make sense as reverting the change made the CI test
+to correctly finish. Also moving the uboot node down
+after the first phandle (in test.dts the gpio one) also made
+the CI test to correctly finish.
+
+A little bit of searching and debugging made me realize the
+parse phandle OPs didn't support other.dts at all and they
+were still referencing phandle index from test.dts.
+(more info in the related commit)
+
+In short the test was broken all along and was working by
+pure luck. The first 4 patch address and fix the problem for good.
+
+The other 4 patch expand and address the property change for
+LED boot/activity.
+
+Posting in a single series as changes are trivial and just
+to speedup review process. (and also because the second
+part depends on the first)
+
+Christian Marangi (8):
+  dm: core: implement oftree variant of parse_phandle OPs
+  test: dm: fix broken dm_test_ofnode_phandle_ot
+  dm: core: implement ofnode/tree_parse_phandle() helper
+  test: dm: Expand dm_test_ofnode_phandle(_ot) with new
+    ofnode/tree_parse_phandle
+  dm: core: implement phandle ofnode_options helper
+  test: dm: Add test for ofnode options phandle helper
+  led: update LED boot/activity to new property implementation
+  test: dm: Update test for LED activity and boot
+
+ arch/sandbox/dts/other.dts |  33 ++++++++--
+ arch/sandbox/dts/test.dts  |  16 +++--
+ drivers/core/of_access.c   |  61 +++++++++++++-----
+ drivers/core/ofnode.c      | 118 ++++++++++++++++++++++++++++++++++
+ drivers/led/led-uclass.c   |  30 ++++++---
+ include/dm/of_access.h     |  86 +++++++++++++++++++++++++
+ include/dm/ofnode.h        | 107 +++++++++++++++++++++++++++++++
+ test/dm/led.c              |  18 +++---
+ test/dm/ofnode.c           | 125 ++++++++++++++++++++++++++++++++-----
+ 9 files changed, 539 insertions(+), 55 deletions(-)
+
 -- 
 2.45.2
 
