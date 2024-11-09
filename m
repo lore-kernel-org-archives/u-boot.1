@@ -4,90 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56FCCD5E37F
-	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 20:07:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59316D5E37F
+	for <u-boot@archiver.kernel.org>; Sat,  9 Nov 2024 20:29:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8EBF892FB;
-	Sat,  9 Nov 2024 21:07:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C8C8789313;
+	Sat,  9 Nov 2024 21:29:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MkXoZ1x2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AmDISvyW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31A7E89313; Sat,  9 Nov 2024 21:07:49 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+ id 5F5B08931E; Sat,  9 Nov 2024 21:29:45 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E2EC892E8
- for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 21:07:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7860589313
+ for <u-boot@lists.denx.de>; Sat,  9 Nov 2024 21:29:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2e2b9480617so2650396a91.1
- for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 12:07:46 -0800 (PST)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4316cce103dso40204005e9.3
+ for <u-boot@lists.denx.de>; Sat, 09 Nov 2024 12:29:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731182865; x=1731787665; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZVeQEnmIY7HsVpkBD/LrsGd2y+wT5gADxEsx4HnoQKY=;
- b=MkXoZ1x2v1GFykZXv36TcxERrxb0Pl7w6VQxV+dHZKggRuETQ0jJAPoz9L99F4CgFc
- o/tbn1v6rnLirtjR54RUhashdV6ByzVQnU+1InWFltigC9kFbSGkt4aKAEC9LVezSnoR
- R97JwqRClJM2r6dkn9iiVuMJUpnNAYJFUWVVPg+qocf3dIq4gm84h6x0LWW1snedPhQT
- Oe8Q4VFZQtKsfBEez81eTY7U1epnYcHo//4ZjO/Et0z8hAr+S7sFwZM/eaBHJXrFQ8iw
- JQh9Qw5YF092hWXigJ3er0GKzKaZ0KovawWL39cn/4cy9ukRNSleUN+AVza56txzzCAb
- KJ9w==
+ d=gmail.com; s=20230601; t=1731184183; x=1731788983; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:to
+ :from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=/DnZNNI5FOZMQJiTuNucJaB0ltRC5SFgEU9n6M+jqOw=;
+ b=AmDISvyWyGCvRQPayzidl9ppvrbuliIvr1/GfnASwhgG22YXPCAe67ceBySczsz6oK
+ nLFILG1dlS1/BZsNKswe9iG9DwEdECQNZKdb7MNIwm88i7wLTWe9oS1F+oLXtTQ3FqBK
+ KJcljrQ2xsfBBYklXU1eAics+vDZVqOm0Yb0fp6RaYQSkm5oHTmw6PJjMO1VJxjDWNK9
+ 80lRAnPSZWa50XVDm4Zyhw+1FjeetJ1ZXaEy0PTtAabgMJGLNatDepw+bjodIjx7W0w8
+ JBDLw30F5XgaLK4MbYPbGifmDTguy7HNAkAefhP+Q7pasrtha6iiqfIhhIiG3nSSRqSA
+ 6pKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731182865; x=1731787665;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZVeQEnmIY7HsVpkBD/LrsGd2y+wT5gADxEsx4HnoQKY=;
- b=IPXWNKrP1N4dOAWCDxeBzimq6+mY/U/7weVsCOq8XpSdZhu0fUAHOr8WUB+QBTZTkC
- UQjrP5ZSEgZRgWqWwa7nZfPx6xX9zp15Y6IFaD33clv/+wQxiTtzjiQ1h6e4WpLdudM8
- 2iPTBHfbpPGqcuTPUpeAWgB+QhhdJlERA7ZDAO6d+QBDwGRACRVX77tmAFSuudDFRH6h
- L5PUPU6DFWPRIf374ADn9AuutbzJi0Jzln67dxXB+Uq5tqwMf1d2yH/3xGg3v+KOWIen
- IuziTbysQcIvLKHEkCZUkIVrtu2BCe/3FAX2etTgZtE5QU4BgOSfqj797YUsrJq07sD1
- pOOA==
+ d=1e100.net; s=20230601; t=1731184183; x=1731788983;
+ h=in-reply-to:content-disposition:mime-version:references:subject:to
+ :from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/DnZNNI5FOZMQJiTuNucJaB0ltRC5SFgEU9n6M+jqOw=;
+ b=vGlyY6WUaPzbiJyd+m4NxhnMzpFTPKBmWiqUt4XvrUAbbRFEL0a9nk1n06AgLrCD+t
+ P1/FJyVqzNRRY3DRcFd+2pilQCyGfC685mc92LUQQgNmaKk7z+I9mwClRlw2Hb3q9YoF
+ J9z0slOuDegKhi0ho43Jil4ABV9y5uQcRsGt9R/dEX44esDTyCSAOVGE0S46Fq9V8TjM
+ zqMArWwWppRDHBBgW7NB1ZmBwe9dTgHg3r4hJlyy8/lJuZ0Is6gGuJdYXPb5JH+KRO6r
+ S+TRzMTmPDwdN/QG194CgOyfBmc6i7k+kbMvANxz+WdHA8Wkxxp+VsvWuNZpt/HTTyS6
+ MFcg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWEZ65ahGswC5ItV/xLWPnAAEd+O/dlmD1qgNnSCtYMs2F4CMbVgvoETB+viUPv54sUoZZnUas=@lists.denx.de
-X-Gm-Message-State: AOJu0YzEY804NdIhFbV7FbDmtrI70iPXljGGYsJH6l34ffRlYenPovgI
- QujqdmBmy4afywdu/f/ttorMDwpmqqDCHDF/iKQvMRr8v/AbfLZY5WeKHYo2rP4kSCkvbIhnSkr
- /mzEK89FdrQKo0D+rZ5lD/OYr5dM=
-X-Google-Smtp-Source: AGHT+IHSouIP+NqICxj26pTjX9b3YiKoXT5c6sdcj/0Q31M7Bio925gGQ2cKUdkU1pMHK5X17L+KD/Vot1PhSQ4L+sw=
-X-Received: by 2002:a17:90b:1d88:b0:2e0:d1fa:fdd7 with SMTP id
- 98e67ed59e1d1-2e9b172af9cmr10094139a91.27.1731182865392; Sat, 09 Nov 2024
- 12:07:45 -0800 (PST)
+ AJvYcCWbr/j16bv4jfD8VFagbe4dQF4QkyInRxkw5xAPG09EqunCRGlG7r6blhGN44bkwKckQuwjge4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx668Ag/xz5OCrKsGXnJcAgQNXE6SmE/VZ23//yEoNl0X2VJqWl
+ cDqtm0B3/RQ2pTLnMOoTm9+GpIv5/WJ2PXC+yZXogWGDj9AaPlZp
+X-Google-Smtp-Source: AGHT+IHWFjVvtGjRTy44343LMAq5/AihV31L3LrA59H1wbEYPwENWXN5Ijp0daPdI3A2qszbgT9TYw==
+X-Received: by 2002:a05:600c:4683:b0:42a:a6b8:f09f with SMTP id
+ 5b1f17b1804b1-432b7518d0bmr75488985e9.23.1731184182773; 
+ Sat, 09 Nov 2024 12:29:42 -0800 (PST)
+Received: from Ansuel-XPS. (93-34-91-161.ip49.fastwebnet.it. [93.34.91.161])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-432aa737c86sm161055095e9.38.2024.11.09.12.29.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 09 Nov 2024 12:29:42 -0800 (PST)
+Message-ID: <672fc636.050a0220.394112.d327@mx.google.com>
+X-Google-Original-Message-ID: <Zy_GMoFBZ1cwlmQf@Ansuel-XPS.>
+Date: Sat, 9 Nov 2024 21:29:38 +0100
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sean Anderson <seanga2@gmail.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Marek Vasut <marex@denx.de>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, u-boot@lists.denx.de
+Subject: Re: [PATCH 0/8] led: update LED boot/activity to new property
+ implementation
+References: <20241109180038.10344-1-ansuelsmth@gmail.com>
 MIME-Version: 1.0
-References: <20240808110654.4215b129@wsk>
- <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
- <20240815221421.61f64a17@wsk>
- <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
- <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
- <20240828100452.2143873d@wsk>
- <CAHCN7xLY4FxB4HZLcE0pEZsx7V=dhVokh2Wcrn2Jjf+B+SLCJg@mail.gmail.com>
- <20240905155402.486a7110@wsk>
- <CAHCN7x+jLfzMGFUcbAfHr9u_2s3Z=LxN-TNCtbzUUop66p4Rpw@mail.gmail.com>
- <CAHCN7xK3-iUUGf20-JxAWfK05-te=sskbdpU4kU8ahy8sfROFg@mail.gmail.com>
- <20241104091418.74acd1f1@wsk>
- <CAHCN7xKGW2+_8P0nnMM6gyJVPQOw15S2pFUhwwuv13JVqY3qNA@mail.gmail.com>
- <CAHCN7x+K14RkvbDdCHPq+YaH7bXSBH-6Sdwnb1+TULCE-H5puw@mail.gmail.com>
- <CAOMZO5CNfgBaEu+eiqq8vnOe5ro+a_fQpJigauV0vcPjdODHrw@mail.gmail.com>
-In-Reply-To: <CAOMZO5CNfgBaEu+eiqq8vnOe5ro+a_fQpJigauV0vcPjdODHrw@mail.gmail.com>
-From: Adam Ford <aford173@gmail.com>
-Date: Sat, 9 Nov 2024 14:07:34 -0600
-Message-ID: <CAHCN7x+ga0E13Lhtw9z_eTVRyB7jzBjxR1XYnHRZzw+JP4v-Bw@mail.gmail.com>
-Subject: Re: [Binman] Question regarding SPL symbol offsets generation
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>, 
- Mamta Shukla <mamta.shukla@leica-geosystems.com>, u-boot@lists.denx.de, 
- Marek Vasut <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241109180038.10344-1-ansuelsmth@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,27 +102,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Nov 8, 2024 at 8:16=E2=80=AFPM Fabio Estevam <festevam@gmail.com> w=
-rote:
+On Sat, Nov 09, 2024 at 07:00:25PM +0100, Christian Marangi wrote:
+> This series is split in 2 part.
+> 
+> While adapting the LED boot and activity code to the new property
+> accepted by Rob in dt-schema repository, a big BUG was discovered.
+> 
+> The reason wasn't clear at start and took me some days to figure it
+> out.
+> 
+> This was triggered by adding a new phandle in the test.dts to
+> introduce test for the new OPs.
+> 
+> This single addition caused the sandbox CI test to fail in the
+> dm_test_ofnode_phandle_ot test.
+> 
+> This doesn't make sense as reverting the change made the CI test
+> to correctly finish. Also moving the uboot node down
+> after the first phandle (in test.dts the gpio one) also made
+> the CI test to correctly finish.
+> 
+> A little bit of searching and debugging made me realize the
+> parse phandle OPs didn't support other.dts at all and they
+> were still referencing phandle index from test.dts.
+> (more info in the related commit)
+> 
+> In short the test was broken all along and was working by
+> pure luck. The first 4 patch address and fix the problem for good.
+> 
+> The other 4 patch expand and address the property change for
+> LED boot/activity.
+> 
+> Posting in a single series as changes are trivial and just
+> to speedup review process. (and also because the second
+> part depends on the first)
 >
-> On Fri, Nov 8, 2024 at 11:12=E2=80=AFPM Adam Ford <aford173@gmail.com> wr=
-ote:
->
-> > I think I have a fix for the Nano.  I want to get my hands on a Mini
-> > again to test it.  My solution creates two files, a flash.bin for
-> > booting SD/eMMC and a second file which adds the FSPI header at 0x400
-> > with the whole standard image starting at 0x1000.  I have been able to
-> > boot both the SD and eMMC's with one config option which can allow me
-> > to remove the FSPI config file and consolidate both configs into one.
-> > Once I can verify it works on Mini, I'll post my proposed fix.
->
-> Thanks, Adam. Appreciate your effort!
 
-No problem. I managed to get my hands on a Mini, and I just sent a
-patch series which restored FSPI booting on both the im8mn-beacon and
-imx8mm-beacon boards.
+For everyone checking this, tomorrow I will push v2 of this series since
+CI catched additional BUGs for flat tree scenario. (I didn't test this
+with sandbox)
 
-If/when I get some more time, I might try to port the stuff I did for
-Nano to the Plus since I think the boot ROM is similar between them.
+I also handle this and everything should be ok.
 
-adam
+-- 
+	Ansuel
