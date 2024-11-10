@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B6F4D3C931
-	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 12:03:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52D47D5E123
+	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 13:15:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 128A488F0C;
-	Sun, 10 Nov 2024 13:03:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 797E089003;
+	Sun, 10 Nov 2024 14:15:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GrkzErvm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VyXIKQ2l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59B4A88FCB; Sun, 10 Nov 2024 13:03:40 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 64776890D1; Sun, 10 Nov 2024 14:15:22 +0100 (CET)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65D9D88EC4
- for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 13:03:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 38B4888FAF
+ for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 14:15:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1731240212; x=1731845012; i=xypron.glpk@gmx.de;
- bh=9O2U0DTIAs0OWd1SXveivC0/3eShef0qWeayRxOuNF0=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=GrkzErvmLl7sbDwSXMe/Ijo71WQT1Xr7Wdt4UIrfvTbpNCoGhHimnZwB2O/KuuyV
- UpiQA1eNwappDPnQvUwYsUTlgzNOVaMSpzP6CXSNf0IMTp5XZDoMCPebtkhf5OW4n
- nRpUJURM4tXbZioYDftpiwCX9Cdhy5f6HqiC1vxW1XwMmCPls4Fq9wk3F2C15su98
- 83xImkqMUsfWK28R2q/CEMiZQXX0t5up41ohoIkiR/xlNWp7vxpWF/D2/elnaqG0Y
- v17OmITtUKSIAay7Sy3w/TqNWvCy31WyOpNG4f/ZArfbGgzxAFtyyX5E+JuYnL5+Q
- r4m2PbQW4hT70adDeg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.110.181]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mbir8-1tn23G2NkU-00bGNV; Sun, 10
- Nov 2024 13:03:32 +0100
-Message-ID: <40438b03-5265-4428-80b0-608041aa6a16@gmx.de>
-Date: Sun, 10 Nov 2024 13:03:27 +0100
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-723f37dd76cso3746732b3a.0
+ for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 05:15:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1731244519; x=1731849319; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hWSwVldVBNWd1seV4qgP64okJSeGPQIjpNc7LukBUcY=;
+ b=VyXIKQ2ldnJWfcXrU3aO1Nk9rWes9hoqqEkc1oSaUmM70c6stbXnRxO73dSqQeapGn
+ AWHuCuOWfM2pmGjFT6j3A3VwSFlzkYQq3Ur2/A9ovBIPmaOdAk6K/+DfR5n8Wj2WPl0s
+ T4HpFmWk2FUTMRPLbvBwd46h4S7qcLVsNIFIVSj/csYvY3ui5tteWwTgUG9YXZ3PA2cW
+ 16jOn4ynO4i+IUG/SR1m+FevWziGZD68nrg6SfEa3jOiK2qqNoNDbRQLs8YDkKtp+D5b
+ BnGplbL7p36RxLlMy64gTrwX1CQRFq/tDjrq5+YZj+WerJst9dTFBgT3XWGgCQNEA2nI
+ qpuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731244519; x=1731849319;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hWSwVldVBNWd1seV4qgP64okJSeGPQIjpNc7LukBUcY=;
+ b=kYc0McJfpfNVeqVqSxB9l2WPdva6PKAXyQcL6QkLrhCND2rZQuzcHw4OOv9F8Cnxxc
+ umRG1YFNrY0LlH69cZBZiTNcEQAI6y2KjBjWETgkcEhJs0rnbUl8+UMtbkCC5KbLENvL
+ ozJL6SPSoxGTQKnj3Lmk4dHZ/+OSwzQiHSLqkdW2NAYX9PQoMf5iJRVL/ZWzCcyb3YAK
+ VpsIUi3w55zpaPo0IeQ+JK4m/DyeBN3g+dxLHVoYUaDmIXAzBQQr0wD66WYccEvy+2P1
+ KFA4YIq+gMLYdj9JeZfAymXklqoqD3PkO4AghvIPdM7XrnNe4DLigSkmHUnYihm8evHu
+ q0Tw==
+X-Gm-Message-State: AOJu0YyX7RvicFWPXVdVr1Y8BrrT15TScWYI0rv6WyOtZLR5kIfvke2t
+ MrDhXiZtdXSDarvZ6yCF9O58wEgRUujvBFIIjUHryLZbjDDFIniM2E5CnXi/wkLIWTynFS9ENzY
+ dKJYRQzFab2V3TWlH5XQRG0fiSXM=
+X-Google-Smtp-Source: AGHT+IFjFsnFoDKYC/sQo/tObSDpP1QGwBGpJ50fCZeP/qpl5GUnsBNlaGbZsNV9cUOYDHcQSzrSAt4Ykm9mb9d9mqw=
+X-Received: by 2002:a17:90b:4b42:b0:2d3:d063:bdb6 with SMTP id
+ 98e67ed59e1d1-2e9b166b6bdmr13413192a91.4.1731244518556; Sun, 10 Nov 2024
+ 05:15:18 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/15] lib: uuid: display HTTP and IPV4 Config II
- protocols
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Adriano Cordova <adrianox@gmail.com>
-References: <20241108133850.431075-1-adrianox@gmail.com>
- <20241108133850.431075-14-adrianox@gmail.com>
- <CAC_iWj+JZ0bEnRL9eRS+eotBcUSh1EKucwAB2EGV5--n0mXSXg@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAC_iWj+JZ0bEnRL9eRS+eotBcUSh1EKucwAB2EGV5--n0mXSXg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20241109200610.1615430-1-aford173@gmail.com>
+ <20241109200610.1615430-2-aford173@gmail.com>
+ <690f6e55-ac68-4ef6-aeda-1f36a36e9a32@denx.de>
+In-Reply-To: <690f6e55-ac68-4ef6-aeda-1f36a36e9a32@denx.de>
+From: Adam Ford <aford173@gmail.com>
+Date: Sun, 10 Nov 2024 07:15:07 -0600
+Message-ID: <CAHCN7xL84i08BhBVBEPZgwPtaj9QFirNpb1k5HpmTwnMttV9LA@mail.gmail.com>
+Subject: Re: [PATCH 1/4] arm64: dts: imx8mn: Fix FSPI booting
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, aford@beaconembedded.com, lukma@denx.de, 
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Peng Fan <peng.fan@nxp.com>, 
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:8M9ziGbPnkRYZUuNXNHAiJYCDTSAtCBoX4KSPZr3Nh7cJiGVL9F
- G6DsgOpYTzzWCtJwxc/vN2TfHRANLXnj60gh8thtE3rBwQfiztBbgV8iccEnCE0yHnJbD6o
- j3WMGnX5//PgZzQ0VCOTVfHNsdeX+n3NBLLgXa86kCKnCYiFyKWKLlmvWyUuDjWxCOQtenS
- yak67NmLJ8ZDnfZR1ZzCg==
-UI-OutboundReport: notjunk:1;M01:P0:MFCPHMFIzDQ=;0xYvs6d5rc2ssa1wNm3sf3Dd/g0
- Sp4U0i5wRe1s32P3qMbqjqDEVmvEGula92RECKYxaId49vMJ+nzUFC59iIqjV/2er+pCf7zAg
- 2wi6V9XhL59OR33Xk2sTq84slhu/DSud5HuZnr1Jxf4NYRyL+jq7tS9ARKYk4GFwxfs1VB8vP
- cf8Ob9sa8G+Xye8E3otBUAfqAU1eBQ/gf0JOlqZdbF7cXMo6VZN7R2WXUse+Zh6B8Gu3nejHj
- YuyguyKrjpdWg0UKpUXy2Gq+oaf2zaaWT3iPKxgkfQAjXmUxbbA6C0bmV39oQW3HAnbQzJvYJ
- 9IKG98GXX0Mr2L0aebbh5oT6cirp56JbkFIGhVwmVUcyKFZJOHdi4R9V5eKkUutCa1BD+bpv4
- OE0GKBnmOeK5DRNXOsA2FndfBJ9pFId+py7IjgYRiYlfSdTi9kEPiHq0FxGG+PGdy84BfQG9O
- aIyaI1Ol9eyp6vo5HdsFh5QpXHc1oYV42JUAhIug+61aQj6WmPqIvpGcQWQUrwus0d2DIazZ5
- +9e99Yuw8ZiKBDAK3JbpaABXoNVzGKshZUQbIFndgUH36asXAB+2s3UAo1USZdnS93AaCspyo
- q0RkajSUiMruQZ+BaaEv5rZOTVILtA7VZx+SNTEseoDlsqvcRJIi3Fau/IzRhaQZc2ViSfODT
- /i2O8VAihnyWsBJQ5EyduuGFIflLUnXSMWw867uo/J/s++NhonOr9Z7FQ3lBlCsMgMaOFXX/U
- x5a7xwsKyy66ztDzPTnOYIwGCqyg2mCJuIYwxSmZ+RDxBK41RnQEyi49ihm9lkTuUOhAsqR50
- SNXMVMPw7mj+IewtdGmQ2JaRkyysGotvwzw8wL7Ra3BfJZVb+LTdTPzE8qElwZ88jUMNY4+ur
- TfTjKKsjcusUfINxd3thvXolaPyKP8G4m7MUeglh4e7qgCRNWxGsuOWzl
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,76 +94,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/10/24 09:41, Ilias Apalodimas wrote:
-> On Fri, 8 Nov 2024 at 15:40, Adriano Cordova <adrianox@gmail.com> wrote:
->>
->> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>
->> Add long texts for
->>
->> * EFI HTTP Protocol
->> * EFI HTTP Service Binding Protocol
->> * EFI IPv4 Configuration II Protocol
->>
->> to the uuid library.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
->> ---
->>   lib/uuid.c | 14 ++++++++++++++
->>   1 file changed, 14 insertions(+)
->>
->> diff --git a/lib/uuid.c b/lib/uuid.c
->> index c6a27b7d04..dfc8218fb5 100644
->> --- a/lib/uuid.c
->> +++ b/lib/uuid.c
->> @@ -174,6 +174,20 @@ static const struct {
->>                  "Firmware Management",
->>                  EFI_FIRMWARE_MANAGEMENT_PROTOCOL_GUID
->>          },
->> +#ifdef CONFIG_EFI_HTTP_PROTOCOL
+On Sat, Nov 9, 2024 at 7:34=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> Can you change this to
-> #if IS_ENABLED(...)
-
-Thank you for the suggestion. Not adding all the strings in SPL builds
-makes sense.
-
-Beyond this patch series some clean-up needed:
-
-There are a lot of other #ifdefs which we probably should replace
-separately from this series.
-
-We have a symbol CONFIG_SPL_UUID but libuuid is built in SPL
-irrespective of it.
-
-In vsprintf we only check CONFIG_LIBUUID.
-
-Best regards
-
-Heinrich
-
+> On 11/9/24 9:06 PM, Adam Ford wrote:
+> > When FSPI_CONF_HEADER is set, the binary needs to be built such
+> > that there is a configuration file located at 0x400 and the start
+> > of the file that would normally be flash.bin starts at 0x1000.
+> > This used to be done properly until the device tree was converted to
+> > nxp_imx8mimage.
+> >
+> > Building these with the offsets built into the binman device tree
+> > changes impacts how the actual image is built and the locations
+> > of the various blobs aren't fetched properly and booting fails.
+> >
+> > Fix this by building a standard image as if it were to boot from
+> > eMMC or SD, then use that image as the input for a second image
 >
->> +       {
->> +               "HTTP",
->> +               EFI_HTTP_PROTOCOL_GUID,
->> +       },
->> +       {
->> +               "HTTP Service Binding",
->> +               EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID,
->> +       },
->> +       {
->> +               "IPv4 Config2",
->> +               EFI_IP4_CONFIG2_PROTOCOL_GUID,
->> +       },
->> +#endif
->>          /* Configuration table GUIDs */
->>          {
->>                  "ACPI table",
->> --
->> 2.43.0
->>
->
-> With the above
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> This seems like a workaround for some broken offset calculation in binman=
+ ?
 
+This used to work until it was migrated to nxp_imx8mimage.
+The blobs appear to be at the proper offsets, but the contents of
+what's stored at those offsets are not the same.
+
+If you're going to claim there is a bug somewhere, I would argue that
+it's somewhere i nxp_imx8mimage.  However, if you look at this series,
+the added benefit is the ability for Nano to be able to build both a
+SD/eMMC image and FSPI images with one config which allows for the
+elimination of extra defconfig files.  I am guessing Plus would have a
+similar benefit since they have similar bootloaders.
+
+adam
