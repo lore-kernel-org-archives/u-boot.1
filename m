@@ -4,74 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C20C3D5E380
-	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 11:38:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0359FD10C0C
+	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 11:51:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7A3D88FAF;
-	Sun, 10 Nov 2024 12:38:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 32C6288969;
+	Sun, 10 Nov 2024 12:51:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="imcVONAl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gxsZvrrP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C58B88FAF; Sun, 10 Nov 2024 12:38:38 +0100 (CET)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id AA6E789009; Sun, 10 Nov 2024 12:51:27 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC14B881FD
- for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 12:38:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C72C788D14
+ for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 12:51:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-7ea8c4ce232so3187755a12.0
- for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 03:38:35 -0800 (PST)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4314b316495so29488435e9.2
+ for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 03:51:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731238714; x=1731843514; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wnvPiycrAIjH/AhlrUit267KcpGX3DrpZQ/vSShug2k=;
- b=imcVONAlx26ZOv2KrJJ7KbEES2FV7p1EdKTq+SRbMNnmCNhhWD9ITbJsgp4PL9m04L
- kBsGegoZDROrCASfpE8vWCCpu9ML6C/MqoInhlztrI/7EoyDf4UfmuqhlJNCdRFaazNW
- 6WLUeoJ6CXqI3jhCHT7Zre0uge5CCflf4alKwQ1Enq+wG7Jwu6ELoL2QopqYfNmWrcTs
- /UcYvfzSFlYEXy7XmbV73uuUcSwzVDDM1UM4ZUDmPUQeqjGGKRsLxyssXgptJD8rpa0e
- fSzAb/GhlhBmABpkZxjwGIARftHZ/IhKI9mscUQhZzc7+vhApOb8sSvj6ubn0xINuJMZ
- 4tYA==
+ d=gmail.com; s=20230601; t=1731239485; x=1731844285; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4TdiMcB/0i/CdAGfR03w/+OwqJEAxPgYqieKWsKwBKE=;
+ b=gxsZvrrPoyNDusTnGsyc/5QBHAvGLdhKqSvGePezV5CPT4c/w6eMmYIBXnaY8O2WAQ
+ 3JtOVdRgURMUCh9/uEUs0YrdV1X33W63QtrlHeV0W6yIuHuVFeWx0bNxtK+2f+hadS2B
+ iwNFchIGH+B3UJ9uG3JnCNXuxXBVo3bKW1fsGfQ8T8DjWNYk2JQwZS0ISImwztozCP79
+ gBkgYwmyiJCqRszDdoTtBwGxTuiWErPoUeUBfwPOshraoSTx78TvkwYC6SxQOnIq5Tjq
+ 6oQHFYGbngZQ8U1cCrvnRM2kyi/06NTwsgn5qH9Mz2Xw+ZI2FNeGEC0yC1yhDZ6DLx4H
+ Z0Lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731238714; x=1731843514;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wnvPiycrAIjH/AhlrUit267KcpGX3DrpZQ/vSShug2k=;
- b=pE381KX4O277RRDiJXrqYcQJNGGVTBIZ20i8TlTkSWdTgxhHdlFqJ6pwAPLSZFh67R
- FCcDPOWTCwgc5a+GvTPyDXFyBKvv9NZyt3vU86QbAcDsaLZzQqa1E5SrKkEjGS+E2Cus
- Q+UjN9qDnjdev7IJDhExaeV6A2C+bq8pwXSeaqUynM16MLkBEZBix+/mMmLcspJmLx/7
- JriVDqrZA1WpKU15ueo9D5hnngIuHRk7rbQkLQUS+uRxKqe5FgWIcbneJbBadm5PVHEl
- X4tTDJjgcBRBb+rhQ7yiPsQNUDRO3YUeO5FzQ3oSCxzwbAfXNbtgXGpH1PwEfJw8gpwU
- RNsg==
-X-Gm-Message-State: AOJu0Yx340HWVrCdDOhqBZtmU63eiH6hWgDN4w95lrrB/u5zaPUjfGUz
- ujYDoGbqMJjnw03e0U8yZ0iLYx66zxQP3ljwP2K2FVLKnpUBb2Mrc+Yr+kLeb0s+p2nQahF/Yug
- mVpJzjvswF99SRR/HcwlTvLJR1jfXYdZepif1Fw==
-X-Google-Smtp-Source: AGHT+IHDP3pc/M0CeJq6sgU831awDufxg61pbnPvqm7M83ltxAj9QCzoyFms9ibpYYHn3oTF+FOWbPjl95PkdFV4g9c=
-X-Received: by 2002:a17:90b:4b88:b0:2e2:c681:51ce with SMTP id
- 98e67ed59e1d1-2e9b16e552fmr13167615a91.1.1731238714192; Sun, 10 Nov 2024
- 03:38:34 -0800 (PST)
+ d=1e100.net; s=20230601; t=1731239485; x=1731844285;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4TdiMcB/0i/CdAGfR03w/+OwqJEAxPgYqieKWsKwBKE=;
+ b=K47/wLsO6YySjLaKnaVcRi40Vy/Y8p23nfeiktRz8uXdmqjMW+n885ge8xh8jWYJz0
+ dvhBVgqm6vtsBAav09UwyQOZAhC7ymazyWvDXVG68H5L7c12pD6666d2i9NpK7bs7QcT
+ aELhPWroU74QrTBcF304Jkf1vowtRPFtDg6/ryCTbTfli210W2H7THsDHHfzE/Ve3Zhq
+ ZsWJ+NpH63PSKKYt4Ama955/uQBJblptPNc2e5TO1uR7UQPcQP/C31y5b+ztbt5kRbDq
+ RmO8Ll+br4sT7KNST9TLFiFSSE2dr6Omgv9jKXYg283J5pTKJpklAGnNC0PVinitcdE0
+ EJLg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVoY91QH9jz7IlwP9WnrPMNnqIrOPRzGF7FopTrV5364TZdjiLZgc0UJoCYh+mXj7HyYw+UAt8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzE/ZX/K7urgJo/nWzlyzFvUKHMPHF0fatnU9PlYsw8h+kfA6Fg
+ 1Tf8aEhIar1wrvsVk1q4bsP0LmtbTzfNZzW1YnG6/2qnNGAXI+cd
+X-Google-Smtp-Source: AGHT+IFdYuarKs/43T2vOgdAIJxrBIzc3eIN145rlWlkafkBNNaWUWKlFIRQh7uIeeEe03gFULhg5A==
+X-Received: by 2002:a5d:584a:0:b0:37c:d23f:e465 with SMTP id
+ ffacd0b85a97d-381f1848a9emr7393586f8f.55.1731239484982; 
+ Sun, 10 Nov 2024 03:51:24 -0800 (PST)
+Received: from localhost.localdomain (93-34-91-161.ip49.fastwebnet.it.
+ [93.34.91.161]) by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-432aa5b5fb1sm181423745e9.8.2024.11.10.03.51.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 10 Nov 2024 03:51:24 -0800 (PST)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Marek Vasut <marex@denx.de>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, u-boot@lists.denx.de
+Subject: [PATCH v2 0/8] led: update LED boot/activity to new property
+ implementation
+Date: Sun, 10 Nov 2024 12:50:19 +0100
+Message-ID: <20241110115054.2555-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20241108133850.431075-1-adrianox@gmail.com>
- <20241108133850.431075-2-adrianox@gmail.com>
-In-Reply-To: <20241108133850.431075-2-adrianox@gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 10 Nov 2024 13:37:58 +0200
-Message-ID: <CAC_iWjJdfkgT9ueo3j1Yw=m3iRkPaxHEc3OWuN6qhW4stuMHHw@mail.gmail.com>
-Subject: Re: [PATCH v2 01/15] net: net_utils: Move ip_to_string to
- lib/net_utils.c
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- jerome.forissier@linaro.org, xypron.glpk@gmx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,88 +98,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 8 Nov 2024 at 15:39, Adriano Cordova <adrianox@gmail.com> wrote:
->
-> The function string_to_ip is already in net_utils, which is
-> compiled unconditionally, but ip_to_string is currently only
-> accessible if the legacy network stack is selected. This
-> commit puts ip_to_string in net_utils.c and removes it from the
-> legacy network code.
->
-> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
-> ---
->  include/net-common.h | 10 ++++++++++
->  lib/net_utils.c      | 11 +++++++++++
->  net/net.c            | 11 -----------
->  3 files changed, 21 insertions(+), 11 deletions(-)
->
-> diff --git a/include/net-common.h b/include/net-common.h
-> index 11c53766a3..5206b8346d 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -426,6 +426,16 @@ void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
->   */
->  struct in_addr string_to_ip(const char *s);
->
-> +/**
-> + * ip_to_string() - Convert a string to ip address
-> + *
-> + * Implemented in lib/net_utils.c (built unconditionally)
-> + *
-> + * @x: Input ip to parse
-> + * @s: string containing the parsed ip address
-> + */
-> +void ip_to_string(struct in_addr x, char *s);
-> +
->  /* copy a filename (allow for "..." notation, limit length) */
->  void copy_filename(char *dst, const char *src, int size);
->
-> diff --git a/lib/net_utils.c b/lib/net_utils.c
-> index c70fef0d99..621f6512b6 100644
-> --- a/lib/net_utils.c
-> +++ b/lib/net_utils.c
-> @@ -152,6 +152,17 @@ out_err:
->  }
->  #endif
->
-> +void ip_to_string(struct in_addr x, char *s)
-> +{
-> +       x.s_addr = ntohl(x.s_addr);
-> +       sprintf(s, "%d.%d.%d.%d",
-> +               (int) ((x.s_addr >> 24) & 0xff),
-> +               (int) ((x.s_addr >> 16) & 0xff),
-> +               (int) ((x.s_addr >> 8) & 0xff),
-> +               (int) ((x.s_addr >> 0) & 0xff)
-> +       );
-> +}
-> +
->  void string_to_enetaddr(const char *addr, uint8_t *enetaddr)
->  {
->         char *end;
-> diff --git a/net/net.c b/net/net.c
-> index f47e9fbe33..ca35704f66 100644
-> --- a/net/net.c
-> +++ b/net/net.c
-> @@ -1723,17 +1723,6 @@ int net_parse_bootfile(struct in_addr *ipaddr, char *filename, int max_len)
->         return 1;
->  }
->
-> -void ip_to_string(struct in_addr x, char *s)
-> -{
-> -       x.s_addr = ntohl(x.s_addr);
-> -       sprintf(s, "%d.%d.%d.%d",
-> -               (int) ((x.s_addr >> 24) & 0xff),
-> -               (int) ((x.s_addr >> 16) & 0xff),
-> -               (int) ((x.s_addr >> 8) & 0xff),
-> -               (int) ((x.s_addr >> 0) & 0xff)
-> -       );
-> -}
-> -
->  void vlan_to_string(ushort x, char *s)
->  {
->         x = ntohs(x);
-> --
-> 2.43.0
->
+This series is split in 2 part.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+While adapting the LED boot and activity code to the new property
+accepted by Rob in dt-schema repository, a big BUG was discovered.
+
+The reason wasn't clear at start and took me some days to figure it
+out.
+
+This was triggered by adding a new phandle in the test.dts to
+introduce test for the new OPs.
+
+This single addition caused the sandbox CI test to fail in the
+dm_test_ofnode_phandle_ot test.
+
+This doesn't make sense as reverting the change made the CI test
+to correctly finish. Also moving the uboot node down
+after the first phandle (in test.dts the gpio one) also made
+the CI test to correctly finish.
+
+A little bit of searching and debugging made me realize the
+parse phandle OPs didn't support other.dts at all and they
+were still referencing phandle index from test.dts.
+(more info in the related commit)
+
+In short the test was broken all along and was working by
+pure luck. The first 4 patch address and fix the problem for good.
+
+The other 4 patch expand and address the property change for
+LED boot/activity.
+
+Posting in a single series as changes are trivial and just
+to speedup review process. (and also because the second
+part depends on the first)
+
+All CI tested with azure pipeline.
+
+Changes v2:
+- Fix handling of flat tree for phandle
+- Fix test and other.dts changes
+
+Christian Marangi (8):
+  dm: core: implement oftree variant of parse_phandle OPs
+  test: dm: fix broken dm_test_ofnode_phandle_ot and get_by_phandle_ot
+  dm: core: implement ofnode/tree_parse_phandle() helper
+  test: dm: Expand dm_test_ofnode_phandle(_ot) with new
+    ofnode/tree_parse_phandle
+  dm: core: implement phandle ofnode_options helper
+  test: dm: Add test for ofnode options phandle helper
+  led: update LED boot/activity to new property implementation
+  test: dm: Update test for LED activity and boot
+
+ arch/sandbox/dts/other.dts |  31 ++++++++-
+ arch/sandbox/dts/test.dts  |  16 +++--
+ drivers/core/of_access.c   |  61 ++++++++++++-----
+ drivers/core/ofnode.c      | 124 ++++++++++++++++++++++++++++++++-
+ drivers/led/led-uclass.c   |  30 +++++---
+ include/dm/of_access.h     |  86 +++++++++++++++++++++++
+ include/dm/ofnode.h        | 107 +++++++++++++++++++++++++++++
+ test/dm/led.c              |  18 +++--
+ test/dm/ofnode.c           | 136 ++++++++++++++++++++++++++++++++-----
+ 9 files changed, 551 insertions(+), 58 deletions(-)
+
+-- 
+2.45.2
+
