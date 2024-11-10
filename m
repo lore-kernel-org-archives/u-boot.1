@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59578D3C931
-	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 11:51:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9551D3C931
+	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 11:51:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77BDA88FCB;
-	Sun, 10 Nov 2024 12:51:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C81DF890D8;
+	Sun, 10 Nov 2024 12:51:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JjQX7xId";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZQeSmBzA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88B1C890D8; Sun, 10 Nov 2024 12:51:30 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 7F81989116; Sun, 10 Nov 2024 12:51:32 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A86F88D14
- for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 12:51:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EC3E890BC
+ for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 12:51:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43159c9f617so27874125e9.2
- for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 03:51:28 -0800 (PST)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-37d4821e6b4so2594075f8f.3
+ for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 03:51:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731239488; x=1731844288; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731239489; x=1731844289; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lSdHZriWMQtQvHlMMJ3ucXqw3XEqLQhophs0aQjovFc=;
- b=JjQX7xIdnCmVuItxCqDw6oYsR3DOzuUhS4O/q/48TLGLktZhW+ugU7wyOLBzQOzw+v
- EdnRDWK2XVSCyEMUkNGdHT48KoUBsTXAKyp4hQt4bRCZsSJ3cyIxvpI93fqPP/6GRSH/
- TRbXZ6R3WyrzgNfd0DkgEToK6V9hY7N2bb0IkekF8lwE946jEFgrGvMHWjB903xVJVsl
- IvD7cxNVc2H+rm+U9xktTYdjAEZcLWzc5bOJLPK3bK0Tua8h0t3D39jW7dIZrFDI0aCR
- wUm2UTtfY7+h3A/aF7lO3ky+9cseq3kF/aek3cTEFXqOA/gOZGC8B7OfKoENcAxQVuQq
- cl5g==
+ :reply-to; bh=JHbUjESrBhGpfCcnCj8/8F3tqxJNGQF3SkkIhOZxPyQ=;
+ b=ZQeSmBzASYcA1IVr7blbZsTs+LyHpAOq79+t8KhqUuTeTdD/IMwhh8ywIt7W7x+8JC
+ 3sDJaP6rGNFiPHgQ1KOkLi5E48t5tAvsEmjTW/5eooy43EzYzxM0l+Zh9D97EAHRrlIV
+ a+1wT4BKqhsilueYDMtrIpF/z0YWjrIhUVZ5yh4+FD/w524w2iQ7jSZ/fYK4Us+RXBjf
+ pJ4mxXimiQc8h5N+TdPNB2jQ/f4ssH/YjpWPD3DQho6L3BQBicG0wmVs9Kj6GnLDjB78
+ Ep+JCzLCUGGnkB9VIrUr0zYG+ZLCKAJPtJtXsQsOLRqjuG7BFjNZgcYa33YiIuR4HGcK
+ AC+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731239488; x=1731844288;
+ d=1e100.net; s=20230601; t=1731239489; x=1731844289;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lSdHZriWMQtQvHlMMJ3ucXqw3XEqLQhophs0aQjovFc=;
- b=Dyqv/8lUV6rQPRsT9C2q3e5WhfdHB07yyfDF0TTkhIl5wPei5pWF2l51dBde0eOS16
- EUc7iIAwjqnQEEnSSHqG9HzT5o8KSBkGWNx1BtFahv31pL3QnDHrCkb6kXcaLBZm5dOO
- oMchlj+VMuXTIOLUZCBpY0TVB4DEWvcZH/r//0FOl6+JNTsrWv7ZQaHvbJobE9nbIWNI
- m4B0pOu1LmIYzWfLHgpH1TU1iygJiK3KC1NjvwWNM1yazG66oN0kVmIM2NCzwgt7tB6p
- eFVtnHIAJmJaxNq09vw/7HgwsP96XnduxOqKx5S+Y6jCm3NfMwCc8GgUvax0sDoZmE1U
- wErw==
+ bh=JHbUjESrBhGpfCcnCj8/8F3tqxJNGQF3SkkIhOZxPyQ=;
+ b=VeYPvlkjsOux1rXQhglRl+bOVX6/Kwpepft068Sh9fAVsCmmqFWRa5cIDfni2HDfpn
+ 7LAG7iV2BPPV8TpfBM0OwNvwK9fbSorlmgi0l/UpOZRItBLokZNQLM7mA2f/8mLKCd1I
+ NhR3/bo07d+Q/fVM+8Cw5q+EYmJYaDKOkA/cOq4S/7QKWDZgmlqxThn/A/S1cSHoORiB
+ VfRpgvnzKxWfu2QQsPqqmsbAl7SVhC0IFIU0JC4J8U0MVZgBOVA/vtCXZlKv4c+1MXs5
+ EE/aewxqA7ejHkAv2eM6lMmwk5Hfem4CL0xKIMdy2peVCYORdClmy0gJ+/Wa+DY9NYZd
+ nOzA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXG3KawQo1hGw7T8Yk47Bm0CQLc4F+Lq7w0Gq6B/u/tcMQLikpLSUuFrYnaVNoyTD6ci2hWUwU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyxTbprXDmngq0cQGesKKuGDwoj4kzL6vmQITMiE5HPEBw0rIk3
- bbZDnvIpcbJG3v5SA33F5hUsPA5Y4HjBEApadQ0/Ge0zC/Ioa7pO
-X-Google-Smtp-Source: AGHT+IEAIhCM7yPcaWnC7SCma2PlPVYSqslGipLbRaXSLR0Ci22PJSnyUeiNQnCxJN2brpIiWVyQrw==
-X-Received: by 2002:a05:600c:6987:b0:426:8884:2c58 with SMTP id
- 5b1f17b1804b1-432bcafd113mr46999815e9.4.1731239487349; 
- Sun, 10 Nov 2024 03:51:27 -0800 (PST)
+ AJvYcCWi+j74FFkhF8YyfAmm876BzodwlrwaO9epfZTtTOS7l5cF+utTylHOXGb+w97JIYY5r29BtBc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzp9zTY4P0umLE8R+SxujFp7YZt25WQ/ByjGqhCZNdJy2SZom/k
+ QZ6uJjK41xd8qnIlD70AqXYDnSjKnyQKqEFGhxFGPeF6+uIXzSAk
+X-Google-Smtp-Source: AGHT+IHVdcZxGO2lMjQSeIDS1ttmWsr9Iuf2s02SLg5YessrnIrv6BBnwFBlN09740Le+bM+gqrPyA==
+X-Received: by 2002:a5d:5847:0:b0:37d:5405:817b with SMTP id
+ ffacd0b85a97d-381f186724cmr7743333f8f.7.1731239489238; 
+ Sun, 10 Nov 2024 03:51:29 -0800 (PST)
 Received: from localhost.localdomain (93-34-91-161.ip49.fastwebnet.it.
  [93.34.91.161]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-432aa5b5fb1sm181423745e9.8.2024.11.10.03.51.25
+ 5b1f17b1804b1-432aa5b5fb1sm181423745e9.8.2024.11.10.03.51.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 10 Nov 2024 03:51:26 -0800 (PST)
+ Sun, 10 Nov 2024 03:51:28 -0800 (PST)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
@@ -76,9 +76,10 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Marek Vasut <marex@denx.de>,
  Michael Polyntsov <michael.polyntsov@iopsys.eu>, u-boot@lists.denx.de
-Subject: [PATCH v2 1/8] dm: core: implement oftree variant of parse_phandle OPs
-Date: Sun, 10 Nov 2024 12:50:20 +0100
-Message-ID: <20241110115054.2555-2-ansuelsmth@gmail.com>
+Subject: [PATCH v2 2/8] test: dm: fix broken dm_test_ofnode_phandle_ot and
+ get_by_phandle_ot
+Date: Sun, 10 Nov 2024 12:50:21 +0100
+Message-ID: <20241110115054.2555-3-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241110115054.2555-1-ansuelsmth@gmail.com>
 References: <20241110115054.2555-1-ansuelsmth@gmail.com>
@@ -100,405 +101,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement oftree variant of parse_phandle OPs.
+Fix broken dm_test_ofnode_phandle_ot test. They never actually worked
+and were passing test by pure luck by having the same phandle index of
+test.dts that coincicentally had #gpio-cells in the same index node.
 
-There is currently a very hidden and laten BUG with parse_phandle OPs
-that doesn't permit the support of multiple DTS in a system. One usage
-example if sandbox with the usage of other.dts
+It was sufficient to add a phandle to test.dts to make the test fail.
 
-The BUG is only present on live scenario where of_... OPs are used and
-it's not present when fdt... OPs are used.
+To correctly test these feature, make use oif the new OPs oftree to
+parse phandle.
 
-This is caused by an assumption made in __of_parse_phandle_with_args,
-with the of_find_node_by_phandle call that pass the first arg as NULL.
+For consistency with the dm_test_ofnode_phandle, rework the test and
+other.dts to use the same property with the other- prefix to every
+node.
 
-This makes of_find_node_by_phandle use the default root node of the
-system and doesn't permit the usage of alternative tree. This is correct
-for normal system and also for the linux kernel where it's assumed a
-single device tree.
-
-It's problematic if other device tree needs to be used.
-
-To fix this, introduce __of_root_parse_phandle_with_args to define a
-root device tree for of_find_node_by_phandle.
-
-Introduce all the variant OPs for this and in ofnode, the oftree OPs
-following how it's done for other OPs with similar task.
-
-For FDT scenario, ofnode_from_fdtdec_phandle_args is reworked to accept
-a new variable, node and noffset_to_ofnode is used instead of
-offset_to_ofnode. This is required to support multiple FDB blob to
-calculate the correct of_offset of the ofnode.
+Also fix dm_test_ofnode_get_by_phandle_ot by making it more robust and
+renaming the phandle property to other-phandle.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/core/of_access.c | 61 ++++++++++++++++++++--------
- drivers/core/ofnode.c    | 51 ++++++++++++++++++++++--
- include/dm/of_access.h   | 86 ++++++++++++++++++++++++++++++++++++++++
- include/dm/ofnode.h      | 66 ++++++++++++++++++++++++++++++
- 4 files changed, 244 insertions(+), 20 deletions(-)
+ arch/sandbox/dts/other.dts | 24 ++++++++++-
+ test/dm/ofnode.c           | 83 +++++++++++++++++++++++++++++++-------
+ 2 files changed, 91 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
-index 77acd766262..b11e36202c1 100644
---- a/drivers/core/of_access.c
-+++ b/drivers/core/of_access.c
-@@ -666,11 +666,12 @@ int of_property_read_string_helper(const struct device_node *np,
- 	return i <= 0 ? -ENODATA : i;
- }
+diff --git a/arch/sandbox/dts/other.dts b/arch/sandbox/dts/other.dts
+index 395a7923228..b32158c6569 100644
+--- a/arch/sandbox/dts/other.dts
++++ b/arch/sandbox/dts/other.dts
+@@ -8,13 +8,15 @@
  
--static int __of_parse_phandle_with_args(const struct device_node *np,
--					const char *list_name,
--					const char *cells_name,
--					int cell_count, int index,
--					struct of_phandle_args *out_args)
-+static int __of_root_parse_phandle_with_args(struct device_node *root,
-+					     const struct device_node *np,
-+					     const char *list_name,
-+					     const char *cells_name,
-+					     int cell_count, int index,
-+					     struct of_phandle_args *out_args)
+ /dts-v1/;
+ 
++#include <dt-bindings/gpio/gpio.h>
++
+ / {
+ 	compatible = "sandbox-other";
+ 	#address-cells = <1>;
+ 	#size-cells = <1>;
+ 
+ 	node {
+-		target = <&target 3 4>;
++		other-phandle = <&target>;
+ 
+ 		subnode {
+ 			compatible = "sandbox-other2";
+@@ -25,9 +27,27 @@
+ 		};
+ 	};
+ 
++	other-a-test {
++		other-test-gpios = <&other_gpio_a 1>, <&other_gpio_a 4>,
++			<&other_gpio_b 5 GPIO_ACTIVE_HIGH 3 2 1>,
++			<0>, <&other_gpio_a 12>;
++		other-phandle-value = <&other_gpio_c 10>, <0xFFFFFFFF 20>, <&other_gpio_a 30>;
++	};
++
++	other_gpio_a: other-gpio-a {
++		#gpio-cells = <1>;
++	};
++
++	other_gpio_b: other-gpio-b {
++		#gpio-cells = <5>;
++	};
++
++	other_gpio_c: other-gpio-c {
++		#gpio-cells = <2>;
++	};
++
+ 	target: target {
+ 		compatible = "sandbox-other2";
+-		#gpio-cells = <2>;
+ 		str-prop = "other";
+ 		reg = <0x8000 0x100>;
+ 		status = "disabled";
+diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
+index ce996567c3c..24b67bbe2b9 100644
+--- a/test/dm/ofnode.c
++++ b/test/dm/ofnode.c
+@@ -141,9 +141,16 @@ static int dm_test_ofnode_get_by_phandle_ot(struct unit_test_state *uts)
  {
- 	const __be32 *list, *list_end;
- 	int rc = 0, cur_index = 0;
-@@ -706,7 +707,7 @@ static int __of_parse_phandle_with_args(const struct device_node *np,
- 			 * below.
- 			 */
- 			if (cells_name || cur_index == index) {
--				node = of_find_node_by_phandle(NULL, phandle);
-+				node = of_find_node_by_phandle(root, phandle);
- 				if (!node) {
- 					dm_warn("%s: could not find phandle\n",
- 						np->full_name);
-@@ -783,39 +784,65 @@ static int __of_parse_phandle_with_args(const struct device_node *np,
- 	return rc;
- }
+ 	oftree otree = get_other_oftree(uts);
+ 	ofnode node;
++	u32 idx;
++	int ret;
  
--struct device_node *of_parse_phandle(const struct device_node *np,
--				     const char *phandle_name, int index)
-+struct device_node *of_root_parse_phandle(struct device_node *root,
-+					  const struct device_node *np,
-+					  const char *phandle_name, int index)
+-	ut_assert(ofnode_valid(oftree_get_by_phandle(oftree_default(), 1)));
+-	node = oftree_get_by_phandle(otree, 1);
++	node = oftree_path(otree, "/node");
++	ut_assert(ofnode_valid(node));
++
++	ret = ofnode_read_u32(node, "other-phandle", &idx);
++	ut_assertok(ret);
++
++	node = oftree_get_by_phandle(otree, idx);
+ 	ut_assert(ofnode_valid(node));
+ 	ut_asserteq_str("target", ofnode_get_name(node));
+ 
+@@ -349,30 +356,78 @@ static int dm_test_ofnode_phandle(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_ofnode_phandle, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+ 
+-/* test ofnode_count_/parse_phandle_with_args() with 'other' tree */
++/* test oftree_count_/parse_phandle_with_args() with 'other' tree */
+ static int dm_test_ofnode_phandle_ot(struct unit_test_state *uts)
  {
- 	struct of_phandle_args args;
+ 	oftree otree = get_other_oftree(uts);
+ 	struct ofnode_phandle_args args;
+ 	ofnode node;
+ 	int ret;
++	const char prop[] = "other-test-gpios";
++	const char cell[] = "#gpio-cells";
++	const char prop2[] = "other-phandle-value";
  
- 	if (index < 0)
- 		return NULL;
+-	node = oftree_path(otree, "/node");
++	node = oftree_path(otree, "/other-a-test");
++	ut_assert(ofnode_valid(node));
  
--	if (__of_parse_phandle_with_args(np, phandle_name, NULL, 0, index,
--					 &args))
-+	if (__of_root_parse_phandle_with_args(root, np, phandle_name, NULL, 0,
-+					      index, &args))
- 		return NULL;
+-	/* Test ofnode_count_phandle_with_args with cell name */
+-	ret = ofnode_count_phandle_with_args(node, "missing", "#gpio-cells", 0);
++	/* Test oftree_count_phandle_with_args with cell name */
++	ret = oftree_count_phandle_with_args(otree, node, "missing", cell, 0);
+ 	ut_asserteq(-ENOENT, ret);
+-	ret = ofnode_count_phandle_with_args(node, "target", "#invalid", 0);
++	ret = oftree_count_phandle_with_args(otree, node, prop, "#invalid", 0);
+ 	ut_asserteq(-EINVAL, ret);
+-	ret = ofnode_count_phandle_with_args(node, "target", "#gpio-cells", 0);
+-	ut_asserteq(1, ret);
++	ret = oftree_count_phandle_with_args(otree, node, prop, cell, 0);
++	ut_asserteq(5, ret);
++
++	/* Test oftree_parse_phandle_with_args with cell name */
++	ret = oftree_parse_phandle_with_args(otree, node, "missing", cell, 0, 0,
++					     &args);
++	ut_asserteq(-ENOENT, ret);
++	ret = oftree_parse_phandle_with_args(otree, node, prop, "#invalid", 0, 0,
++					     &args);
++	ut_asserteq(-EINVAL, ret);
++	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 0, &args);
++	ut_assertok(ret);
++	ut_asserteq(1, args.args_count);
++	ut_asserteq(1, args.args[0]);
++	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 1, &args);
++	ut_assertok(ret);
++	ut_asserteq(1, args.args_count);
++	ut_asserteq(4, args.args[0]);
++	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 2, &args);
++	ut_assertok(ret);
++	ut_asserteq(5, args.args_count);
++	ut_asserteq(5, args.args[0]);
++	ut_asserteq(1, args.args[4]);
++	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 3, &args);
++	ut_asserteq(-ENOENT, ret);
++	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 4, &args);
++	ut_assertok(ret);
++	ut_asserteq(1, args.args_count);
++	ut_asserteq(12, args.args[0]);
++	ret = oftree_parse_phandle_with_args(otree, node, prop, cell, 0, 5, &args);
++	ut_asserteq(-ENOENT, ret);
++
++	/* Test oftree_count_phandle_with_args with cell count */
++	ret = oftree_count_phandle_with_args(otree, node, "missing", NULL, 2);
++	ut_asserteq(-ENOENT, ret);
++	ret = oftree_count_phandle_with_args(otree, node, prop2, NULL, 1);
++	ut_asserteq(3, ret);
  
- 	return args.np;
- }
- 
-+int of_root_parse_phandle_with_args(struct device_node *root,
-+				    const struct device_node *np,
-+				    const char *list_name, const char *cells_name,
-+				    int cell_count, int index,
-+				    struct of_phandle_args *out_args)
-+{
-+	if (index < 0)
-+		return -EINVAL;
-+
-+	return __of_root_parse_phandle_with_args(root, np, list_name, cells_name,
-+						 cell_count, index, out_args);
-+}
-+
-+int of_root_count_phandle_with_args(struct device_node *root,
-+				    const struct device_node *np,
-+				    const char *list_name, const char *cells_name,
-+				    int cell_count)
-+{
-+	return __of_root_parse_phandle_with_args(root, np, list_name, cells_name,
-+						 cell_count, -1, NULL);
-+}
-+
-+struct device_node *of_parse_phandle(const struct device_node *np,
-+				     const char *phandle_name, int index)
-+{
-+	return of_root_parse_phandle(NULL, np, phandle_name, index);
-+}
-+
- int of_parse_phandle_with_args(const struct device_node *np,
- 			       const char *list_name, const char *cells_name,
- 			       int cell_count, int index,
- 			       struct of_phandle_args *out_args)
- {
--	if (index < 0)
--		return -EINVAL;
--
--	return __of_parse_phandle_with_args(np, list_name, cells_name,
--					    cell_count, index, out_args);
-+	return of_root_parse_phandle_with_args(NULL, np, list_name, cells_name,
-+					       cell_count, index, out_args);
- }
- 
- int of_count_phandle_with_args(const struct device_node *np,
- 			       const char *list_name, const char *cells_name,
- 			       int cell_count)
- {
--	return __of_parse_phandle_with_args(np, list_name, cells_name,
--					    cell_count, -1, NULL);
-+	return of_root_count_phandle_with_args(NULL, np, list_name, cells_name,
-+					       cell_count);
- }
- 
- static void of_alias_add(struct alias_prop *ap, struct device_node *np,
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 950895e72a9..b9cc9419407 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -879,11 +879,11 @@ int ofnode_read_string_list(ofnode node, const char *property,
- 	return count;
- }
- 
--static void ofnode_from_fdtdec_phandle_args(struct fdtdec_phandle_args *in,
-+static void ofnode_from_fdtdec_phandle_args(ofnode node, struct fdtdec_phandle_args *in,
- 					    struct ofnode_phandle_args *out)
- {
- 	assert(OF_MAX_PHANDLE_ARGS == MAX_PHANDLE_ARGS);
--	out->node = offset_to_ofnode(in->node);
-+	out->node = noffset_to_ofnode(node, in->node);
- 	out->args_count = in->args_count;
- 	memcpy(out->args, in->args, sizeof(out->args));
- }
-@@ -923,7 +923,40 @@ int ofnode_parse_phandle_with_args(ofnode node, const char *list_name,
- 						     cell_count, index, &args);
- 		if (ret)
- 			return ret;
--		ofnode_from_fdtdec_phandle_args(&args, out_args);
-+		ofnode_from_fdtdec_phandle_args(node, &args, out_args);
-+	}
-+
-+	return 0;
-+}
-+
-+int oftree_parse_phandle_with_args(oftree tree, ofnode node, const char *list_name,
-+				   const char *cells_name, int cell_count,
-+				   int index,
-+				   struct ofnode_phandle_args *out_args)
-+{
-+	if (ofnode_is_np(node)) {
-+		struct of_phandle_args args;
-+		int ret;
-+
-+		ret = of_root_parse_phandle_with_args(tree.np,
-+						      ofnode_to_np(node),
-+						      list_name, cells_name,
-+						      cell_count, index,
-+						      &args);
-+		if (ret)
-+			return ret;
-+		ofnode_from_of_phandle_args(&args, out_args);
-+	} else {
-+		struct fdtdec_phandle_args args;
-+		int ret;
-+
-+		ret = fdtdec_parse_phandle_with_args(tree.fdt,
-+						     ofnode_to_offset(node),
-+						     list_name, cells_name,
-+						     cell_count, index, &args);
-+		if (ret)
-+			return ret;
-+		ofnode_from_fdtdec_phandle_args(node, &args, out_args);
- 	}
+-	ret = ofnode_parse_phandle_with_args(node, "target", "#gpio-cells", 0,
+-					     0, &args);
++	/* Test oftree_parse_phandle_with_args with cell count */
++	ret = oftree_parse_phandle_with_args(otree, node, prop2, NULL, 1, 0, &args);
+ 	ut_assertok(ret);
+-	ut_asserteq(2, args.args_count);
+-	ut_asserteq(3, args.args[0]);
+-	ut_asserteq(4, args.args[1]);
++	ut_asserteq(1, ofnode_valid(args.node));
++	ut_asserteq(1, args.args_count);
++	ut_asserteq(10, args.args[0]);
++	ret = oftree_parse_phandle_with_args(otree, node, prop2, NULL, 1, 1, &args);
++	ut_asserteq(-EINVAL, ret);
++	ret = oftree_parse_phandle_with_args(otree, node, prop2, NULL, 1, 2, &args);
++	ut_assertok(ret);
++	ut_asserteq(1, ofnode_valid(args.node));
++	ut_asserteq(1, args.args_count);
++	ut_asserteq(30, args.args[0]);
++	ret = oftree_parse_phandle_with_args(otree, node, prop2, NULL, 1, 3, &args);
++	ut_asserteq(-ENOENT, ret);
  
  	return 0;
-@@ -941,6 +974,18 @@ int ofnode_count_phandle_with_args(ofnode node, const char *list_name,
- 				cell_count, -1, NULL);
  }
- 
-+int oftree_count_phandle_with_args(oftree tree, ofnode node, const char *list_name,
-+				   const char *cells_name, int cell_count)
-+{
-+	if (ofnode_is_np(node))
-+		return of_root_count_phandle_with_args(tree.np, ofnode_to_np(node),
-+				list_name, cells_name, cell_count);
-+	else
-+		return fdtdec_parse_phandle_with_args(tree.fdt,
-+				ofnode_to_offset(node), list_name, cells_name,
-+				cell_count, -1, NULL);
-+}
-+
- ofnode ofnode_path(const char *path)
- {
- 	if (of_live_active())
-diff --git a/include/dm/of_access.h b/include/dm/of_access.h
-index de740d44674..44143a5a391 100644
---- a/include/dm/of_access.h
-+++ b/include/dm/of_access.h
-@@ -453,6 +453,92 @@ static inline int of_property_count_strings(const struct device_node *np,
- 	return of_property_read_string_helper(np, propname, NULL, 0, 0);
- }
- 
-+/**
-+ * of_root_parse_phandle - Resolve a phandle property to a device_node pointer
-+ *			   from a root node
-+ * @root: Pointer to root device tree node (default root node if NULL)
-+ * @np: Pointer to device node holding phandle property
-+ * @phandle_name: Name of property holding a phandle value
-+ * @index: For properties holding a table of phandles, this is the index into
-+ *         the table
-+ *
-+ * Return:
-+ *   the device_node pointer with refcount incremented.  Use
-+ *   of_node_put() on it when done.
-+ */
-+struct device_node *of_root_parse_phandle(struct device_node *root,
-+					  const struct device_node *np,
-+					  const char *phandle_name, int index);
-+
-+/**
-+ * of_root_parse_phandle_with_args() - Find a node pointed by phandle in a list
-+ *				       from a root node
-+ *
-+ * @root:	pointer to root device tree node (default root node if NULL)
-+ * @np:		pointer to a device tree node containing a list
-+ * @list_name:	property name that contains a list
-+ * @cells_name:	property name that specifies phandles' arguments count
-+ * @cells_count: Cell count to use if @cells_name is NULL
-+ * @index:	index of a phandle to parse out
-+ * @out_args:	optional pointer to output arguments structure (will be filled)
-+ * Return:
-+ *   0 on success (with @out_args filled out if not NULL), -ENOENT if
-+ *   @list_name does not exist, -EINVAL if a phandle was not found,
-+ *   @cells_name could not be found, the arguments were truncated or there
-+ *   were too many arguments.
-+ *
-+ * This function is useful to parse lists of phandles and their arguments.
-+ * Returns 0 on success and fills out_args, on error returns appropriate
-+ * errno value.
-+ *
-+ * Caller is responsible to call of_node_put() on the returned out_args->np
-+ * pointer.
-+ *
-+ * Example:
-+ *
-+ * .. code-block::
-+ *
-+ *   phandle1: node1 {
-+ *       #list-cells = <2>;
-+ *   };
-+ *   phandle2: node2 {
-+ *       #list-cells = <1>;
-+ *   };
-+ *   node3 {
-+ *       list = <&phandle1 1 2 &phandle2 3>;
-+ *   };
-+ *
-+ * To get a device_node of the `node2' node you may call this:
-+ * of_root_parse_phandle_with_args(node3, "list", "#list-cells", 1, &args);
-+ */
-+int of_root_parse_phandle_with_args(struct device_node *root,
-+				    const struct device_node *np,
-+				    const char *list_name, const char *cells_name,
-+				    int cells_count, int index,
-+				    struct of_phandle_args *out_args);
-+
-+/**
-+ * of_root_count_phandle_with_args() - Count the number of phandle in a list
-+ *				       from a root node
-+ *
-+ * @root:	pointer to root device tree node (default root node if NULL)
-+ * @np:		pointer to a device tree node containing a list
-+ * @list_name:	property name that contains a list
-+ * @cells_name:	property name that specifies phandles' arguments count
-+ * @cells_count: Cell count to use if @cells_name is NULL
-+ * Return:
-+ *   number of phandle found, -ENOENT if @list_name does not exist,
-+ *   -EINVAL if a phandle was not found, @cells_name could not be found,
-+ *   the arguments were truncated or there were too many arguments.
-+ *
-+ * Returns number of phandle found on success, on error returns appropriate
-+ * errno value.
-+ */
-+int of_root_count_phandle_with_args(struct device_node *root,
-+				    const struct device_node *np,
-+				    const char *list_name, const char *cells_name,
-+				    int cells_count);
-+
- /**
-  * of_parse_phandle - Resolve a phandle property to a device_node pointer
-  * @np: Pointer to device node holding phandle property
-diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index 0787758926f..7ece68874ae 100644
---- a/include/dm/ofnode.h
-+++ b/include/dm/ofnode.h
-@@ -909,6 +909,72 @@ int ofnode_parse_phandle_with_args(ofnode node, const char *list_name,
- int ofnode_count_phandle_with_args(ofnode node, const char *list_name,
- 				   const char *cells_name, int cell_count);
- 
-+/**
-+ * oftree_parse_phandle_with_args() - Find a node pointed by phandle in a list
-+ *				      from a root node
-+ *
-+ * This function is useful to parse lists of phandles and their arguments.
-+ * Returns 0 on success and fills out_args, on error returns appropriate
-+ * errno value.
-+ *
-+ * Caller is responsible to call of_node_put() on the returned out_args->np
-+ * pointer.
-+ *
-+ * Example:
-+ *
-+ * .. code-block::
-+ *
-+ *   phandle1: node1 {
-+ *       #list-cells = <2>;
-+ *   };
-+ *   phandle2: node2 {
-+ *       #list-cells = <1>;
-+ *   };
-+ *   node3 {
-+ *       list = <&phandle1 1 2 &phandle2 3>;
-+ *   };
-+ *
-+ * To get a device_node of the `node2' node you may call this:
-+ * oftree_parse_phandle_with_args(node3, "list", "#list-cells", 0, 1, &args);
-+ *
-+ * @tree:	device tree to use
-+ * @node:	device tree node containing a list
-+ * @list_name:	property name that contains a list
-+ * @cells_name:	property name that specifies phandles' arguments count
-+ * @cell_count: Cell count to use if @cells_name is NULL
-+ * @index:	index of a phandle to parse out
-+ * @out_args:	optional pointer to output arguments structure (will be filled)
-+ * Return:
-+ *   0 on success (with @out_args filled out if not NULL), -ENOENT if
-+ *   @list_name does not exist, -EINVAL if a phandle was not found,
-+ *   @cells_name could not be found, the arguments were truncated or there
-+ *   were too many arguments.
-+ */
-+int oftree_parse_phandle_with_args(oftree tree, ofnode node, const char *list_name,
-+				   const char *cells_name, int cell_count,
-+				   int index,
-+				   struct ofnode_phandle_args *out_args);
-+
-+/**
-+ * oftree_count_phandle_with_args() - Count number of phandle in a list
-+ *				      from a root node
-+ *
-+ * This function is useful to count phandles into a list.
-+ * Returns number of phandle on success, on error returns appropriate
-+ * errno value.
-+ *
-+ * @tree:	device tree to use
-+ * @node:	device tree node containing a list
-+ * @list_name:	property name that contains a list
-+ * @cells_name:	property name that specifies phandles' arguments count
-+ * @cell_count: Cell count to use if @cells_name is NULL
-+ * Return:
-+ *   number of phandle on success, -ENOENT if @list_name does not exist,
-+ *   -EINVAL if a phandle was not found, @cells_name could not be found.
-+ */
-+int oftree_count_phandle_with_args(oftree tree, ofnode node, const char *list_name,
-+				   const char *cells_name, int cell_count);
-+
- /**
-  * ofnode_path() - find a node by full path
-  *
 -- 
 2.45.2
 
