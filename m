@@ -4,84 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63650D12D53
-	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 20:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50FDBD12D55
+	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 21:44:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CFC3891A8;
-	Sun, 10 Nov 2024 21:56:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 775EB8916B;
+	Sun, 10 Nov 2024 22:44:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UxfHKBNe";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="NlI6deaL";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="EUva7bPK";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="p3DGg1kV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDF7D88E1C; Sun, 10 Nov 2024 21:56:45 +0100 (CET)
+ id E7C348916C; Sun, 10 Nov 2024 22:44:02 +0100 (CET)
 Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
  [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C683389198
- for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 21:56:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B1778916B
+ for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 22:43:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4XmlNC4Ktkz9scM;
- Sun, 10 Nov 2024 21:56:43 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4XmmQl2X3dz9sWQ;
+ Sun, 10 Nov 2024 22:43:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1731272203;
+ s=mail20150812; t=1731275039;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=H801oqgiPcZW6LNi0q/QwQyEIje3gVvp5Gj+pqfPifU=;
- b=UxfHKBNeKt40MfedT0fdFFvJnFqR3BWtjVPfk5XxEp6gjxiWsWekb63bfF1gDZgG9FGmfC
- loXSweHO37bbli78q5dIk3jJJfXlNtFLLDg4jrD7u+QjEtkGIEGkCJicp8/Irh0MFkyiba
- LiV9RzknP9wczAY7+LzylofsK0KpVZy1aqc3LpCefrFjKrRli4HoxbGTFZRqBdwAuYhPf7
- 8C9/eo0dWYqs4lXNYkyRTihfsTISM8zTBGYnHSC15N8fNeKNLFU47GQBzj5MHBqTXj9XrJ
- jWA3q33UU7aMY5D8nSAXd1j8ONDJzKM9nvCH3b3vSnsbj8dzuSAOGmVKuV43MQ==
-Message-ID: <f974c911-e906-4ef4-b902-df971abeb6f6@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=BjSitQOHnz0mqW1nDtlhOyentwmpQigbnVSsuTyogbQ=;
+ b=EUva7bPK0cEUCJ4DHHTez46QP/tn9HqAuoGyWYTEBKd0EdACEoGoUh2Sso6tpO29lM+RP2
+ Wult1txA0IRmHFKCuDn3tGjEW8mB1z1M9BCMIRcTJrr8uP0h2D+D9+j+yQc8uoA+WmRWNV
+ UxF4c/JuD9h8A/i6kfdM6JcG2UnF2MKOcE7oUGL+sQn7ZDAu8co0Svo/uM5e0Nzafa+dCQ
+ ws7elYVCy48o5brCySo8tDWoDdTP37zd0vZ23n8039sTAGP0lY1Iqo38syELX+2lXgTypm
+ fgReksofewiVrYd2Cl+XQFCYAXh1MvvmyKLM/L9G13OkaSkFlLIhVArT+oF7ZA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1731272201;
+ s=mail20150812; t=1731275037;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=H801oqgiPcZW6LNi0q/QwQyEIje3gVvp5Gj+pqfPifU=;
- b=NlI6deaLZUxXEjeig5Rzz4L/TsnLavo9QCF6cgcTZ21vKcj7f92GLYPM9VZqETsP+24rit
- Ix7ljl34wpLWZArXP9mzOiyqBI5Z77+peDXG8mPexTeunxoNaFJhd+42jfwdC3KIIDBKUk
- tl5GKK3IMizBDozP22z1oA4DjEGB5fbbgc2hqRg1rEdZ0VQveLgRsnTfzCc0M9VQQAltzw
- rvd00vd7CuMsOhSP7WXLkWD3w6Sy55/Za0cT34eiiLuyVTDzoZ56remffr4+nsDgzIhbK1
- XZEQaypDp0obHDWhe2f4QTF5e23H6zUt7rGrmeF/PCURqqJC9CstIAanoMnYfA==
-Date: Sun, 10 Nov 2024 19:34:47 +0100
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=BjSitQOHnz0mqW1nDtlhOyentwmpQigbnVSsuTyogbQ=;
+ b=p3DGg1kVPSCW5gus8YJBqlkUoZPdiVACp2DTtTuQ/EGWxA+6IUKh+G0wQ8pj08BENrE/cI
+ sWuaxf4LuxgMgDNA05uW5NVN5HsPl/wOVFHH5N6GAx/G4gSaUj1OqzuOG+g/KS9ZrnLjnc
+ p6nkQfH7x9MfrPpAYwwFEIK7lqZlMAtRfdFamd7P0aRuYvl81FSToex3mkjSwqfSjzFnqA
+ gLjvvBSIphlKTBtHn6sXQ/bnYSbuVitvWVxdUNSyMO2H2Sj/22/1/eePJvurswWHJZO7ne
+ 7TOqX4ZBbAfcFe02kIq8p3kBSR2WIy15lPr96f1dqwNxVCbQDH+3i5A5944c3Q==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Chris Paterson <chris.paterson2@renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: [PULL] u-boot-sh/master
+Date: Sun, 10 Nov 2024 22:43:15 +0100
+Message-ID: <20241110214345.900733-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH 08/14] net: phy: ksz90x1: Simplify
- ksz9131_config_rgmii_delay
-To: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
- <20241024152448.102-9-paul.barker.ct@bp.renesas.com>
- <73609bce-143a-4da2-9e8c-87ac7646a72d@mailbox.org>
- <1dac61de-f6fd-40ee-bfca-64464249623f@bp.renesas.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <1dac61de-f6fd-40ee-bfca-64464249623f@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: c661cb51797812dcf29
-X-MBO-RS-META: mfgto1eke7gozt3xfzgg54ujrwfhzeok
-X-Rspamd-Queue-Id: 4XmlNC4Ktkz9scM
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 7ognfjcamp59eoxfo6i686ksjq6zfn6t
+X-MBO-RS-ID: 43c9555a9175aa93be2
+X-Rspamd-Queue-Id: 4XmmQl2X3dz9sWQ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,65 +87,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/28/24 9:50 AM, Paul Barker wrote:
-> On 27/10/2024 16:20, Marek Vasut wrote:
->> On 10/24/24 5:24 PM, Paul Barker wrote:
->>> We can call phy_modify_mmd() instead of manually calling drv->readext()
->>> and drv->writeext().
->>>
->>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
->>> ---
->>>    drivers/net/phy/micrel_ksz90x1.c | 26 ++++++++------------------
->>>    1 file changed, 8 insertions(+), 18 deletions(-)
->>>
->>> diff --git a/drivers/net/phy/micrel_ksz90x1.c b/drivers/net/phy/micrel_ksz90x1.c
->>> index b64046e0bc72..6515d8feb9be 100644
->>> --- a/drivers/net/phy/micrel_ksz90x1.c
->>> +++ b/drivers/net/phy/micrel_ksz90x1.c
->>> @@ -502,8 +502,7 @@ static int ksz9131_of_load_all_skew_values(struct phy_device *phydev)
->>>    
->>>    static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
->>>    {
->>> -	struct phy_driver *drv = phydev->drv;
->>> -	u16 rxcdll_val, txcdll_val, val;
->>> +	u16 rxcdll_val, txcdll_val;
->>>    	int ret;
->>>    
->>>    	switch (phydev->interface) {
->>> @@ -527,24 +526,15 @@ static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
->>>    		return 0;
->>>    	}
->>>    
->>> -	val = drv->readext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
->>> -			   KSZ9131RN_RXC_DLL_CTRL);
->>> -	val &= ~KSZ9131RN_DLL_CTRL_BYPASS;
->>> -	val |= rxcdll_val;
->>> -	ret = drv->writeext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
->>> -			    KSZ9131RN_RXC_DLL_CTRL, val);
->>> -	if (ret)
->>> +	ret = phy_modify_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
->>> +			     KSZ9131RN_RXC_DLL_CTRL, KSZ9131RN_DLL_CTRL_BYPASS,
->>> +			     rxcdll_val);
->>> +	if (ret < 0)
->>>    		return ret;
->>>    
->>> -	val = drv->readext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
->>> -			   KSZ9131RN_TXC_DLL_CTRL);
->>> -
->>> -	val &= ~KSZ9131RN_DLL_CTRL_BYPASS;
->>> -	val |= txcdll_val;
->>> -	ret = drv->writeext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
->>> -			    KSZ9131RN_TXC_DLL_CTRL, val);
->>> -
->>> -	return ret;
->>> +	return phy_modify_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
->>> +			      KSZ9131RN_TXC_DLL_CTRL, KSZ9131RN_DLL_CTRL_BYPASS,
->>> +			      txcdll_val);
->>>    }
->> Can't you set both bitfields at the same time ? They seem to be in the
->> same register.
-> 
-> These writes are to two different registers (KSZ9131RN_RXC_DLL_CTRL and
-> KSZ9131RN_TXC_DLL_CTRL), using the same bitmask in both cases
-> (KSZ9131RN_DLL_CTRL_BYPASS).
-Uh, right, thanks for clarifying.
+The following changes since commit 9c25cd563179cf32cf3b119d5ae78ef8348d0335:
+
+  Merge tag 'u-boot-imx-master-20241105' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-11-09 11:26:14 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+
+for you to fetch changes up to 5fb5ed2f78656f8f562de37037d58c10b4cc456b:
+
+  board: hoperun: Switch to use complete DTS files from upstream DTS (2024-11-10 19:38:46 +0100)
+
+----------------------------------------------------------------
+Chris Paterson (1):
+      configs: hihope_rzg2: Set correct MMC device for U-Boot env
+
+Lad Prabhakar (1):
+      board: hoperun: Switch to use complete DTS files from upstream DTS
+
+Paul Barker (4):
+      board: rzg2l: Update MAINTAINERS file to match dts/upstream paths
+      ARM: dts: Drop unused RZ/G2L devicetrees
+      dt-bindings: Drop unused RZ/G2L devicetree bindings
+      arm: renesas: Fix RZ/G2L GICR base address
+
+ arch/arm/dts/Makefile                              |    3 -
+ arch/arm/dts/r8a774a1-hihope-rzg2m-ex-u-boot.dtsi  |    8 +
+ arch/arm/dts/r8a774a1-hihope-rzg2m-u-boot.dtsi     |   26 -
+ arch/arm/dts/r8a774a1-u-boot.dtsi                  |   42 -
+ arch/arm/dts/r8a774b1-hihope-rzg2n-ex-u-boot.dtsi  |    8 +
+ arch/arm/dts/r8a774b1-hihope-rzg2n-u-boot.dtsi     |   26 -
+ arch/arm/dts/r8a774b1-u-boot.dtsi                  |   40 -
+ arch/arm/dts/r8a774e1-hihope-rzg2h-ex-u-boot.dtsi  |    8 +
+ arch/arm/dts/r8a774e1-hihope-rzg2h-u-boot.dtsi     |   26 -
+ arch/arm/dts/r8a774e1-u-boot.dtsi                  |   46 -
+ arch/arm/dts/r9a07g044.dtsi                        | 1273 --------------------
+ arch/arm/dts/r9a07g044l2-smarc.dts                 |   39 -
+ arch/arm/dts/r9a07g044l2.dtsi                      |   13 -
+ arch/arm/dts/rz-smarc-common.dtsi                  |  183 ---
+ arch/arm/dts/rzg2l-smarc-pinfunction.dtsi          |  157 ---
+ arch/arm/dts/rzg2l-smarc-som.dtsi                  |  371 ------
+ arch/arm/dts/rzg2l-smarc.dtsi                      |  181 ---
+ arch/arm/mach-renesas/include/mach/rzg2l.h         |    2 +-
+ board/hoperun/hihope-rzg2/hihope-rzg2.c            |    6 +-
+ board/renesas/rzg2l/MAINTAINERS                    |    2 +-
+ configs/hihope_rzg2_defconfig                      |   10 +-
+ include/dt-bindings/clock/r9a07g044-cpg.h          |  220 ----
+ .../dt-bindings/interrupt-controller/irqc-rzg2l.h  |   25 -
+ include/dt-bindings/pinctrl/rzg2l-pinctrl.h        |   23 -
+ 24 files changed, 34 insertions(+), 2704 deletions(-)
+ create mode 100644 arch/arm/dts/r8a774a1-hihope-rzg2m-ex-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/r8a774a1-hihope-rzg2m-u-boot.dtsi
+ create mode 100644 arch/arm/dts/r8a774b1-hihope-rzg2n-ex-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/r8a774b1-hihope-rzg2n-u-boot.dtsi
+ create mode 100644 arch/arm/dts/r8a774e1-hihope-rzg2h-ex-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/r8a774e1-hihope-rzg2h-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/r9a07g044.dtsi
+ delete mode 100644 arch/arm/dts/r9a07g044l2-smarc.dts
+ delete mode 100644 arch/arm/dts/r9a07g044l2.dtsi
+ delete mode 100644 arch/arm/dts/rz-smarc-common.dtsi
+ delete mode 100644 arch/arm/dts/rzg2l-smarc-pinfunction.dtsi
+ delete mode 100644 arch/arm/dts/rzg2l-smarc-som.dtsi
+ delete mode 100644 arch/arm/dts/rzg2l-smarc.dtsi
+ delete mode 100644 include/dt-bindings/clock/r9a07g044-cpg.h
+ delete mode 100644 include/dt-bindings/interrupt-controller/irqc-rzg2l.h
+ delete mode 100644 include/dt-bindings/pinctrl/rzg2l-pinctrl.h
