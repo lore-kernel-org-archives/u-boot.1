@@ -4,58 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B3FAD5E38A
-	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 00:57:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 019BED5E38A
+	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 01:34:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11638892ED;
-	Sun, 10 Nov 2024 01:56:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 2500E89327;
+	Sun, 10 Nov 2024 02:34:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="l2rHXrdA";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id DED1D8934C; Sun, 10 Nov 2024 01:56:47 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1731202471;
+	bh=+E7X0Aq4km1MqCnhyStV6AHo4NZ9ZYAea459CMmFY/o=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ZecEA0p9ePmTVWKtbadNrcYULQgMZnhDAlYqUL8OTWRtJhbHMOjbzAM2ELAaeV4MY
+	 YrO/XyaWMsNI0ARphTRqfeROdXuR0ICQRmWBIqY18mNJU68+9KooADLDA0pUTuR/8E
+	 t74qiCkiJH8xX6NEdsmu/fgNthTkjLcqzll4q2UMlY9MOI/EMUgjJl1GsHaLH2/Hbm
+	 fJUYJ00wvniET9MW2Fy0P2yGx90hht3BXmoiLC6kvraJcugZpU9WfOs4sZo7vn+0rQ
+	 Seu9CpQd5P9qBjU6y+BQWiCn4QxMGsWP7uwwi/B+8B1II6r9N8CVuM1+C+zas3hGY0
+	 Gt7AM2pbk2N0Q==
+Received: from [127.0.0.1] (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA94688D7E
- for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 01:56:45 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f1ff=SF=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1731200199; bh=Jj5tpTMI56ml+u+EcAjpYWD2hwsi2GuOkR0mhhSzQhI=;
- b=l2rHXrdAs8lD/WEyeXD9VKTkqEvt/+kt3VhDROAW4BZAKj+KhYF5/W1S3JRUrkg3DXfwp/I7L
- oVEW1khusoupQFdepoPzOuITM42BoRNkYTB6iRU6vvKoMnhdhzOWOex6GGIqm+ENPLUUWTMQuZi
- WoP/RGbL9j90bM0hNkA0mBPFlFm+iOQRRkp9DbdkJ2aBAc9FoyoW6fFhdHWH+r1bEBSXqM5btYp
- VieWozB6OBb+iI3oNKoFwHcOER++Ffv+RNZxuASCejmDZBFWCDuPUk9Bb5H5G2eVW5okRgndB9K
- fhuai2WdLgEN71yfM0Hj/+ZISFFMaYHXZDxRFzKx4fUw==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v3 3/3] rockchip: rk3308: Implement checkboard() to print SoC
- variant
-Date: Sun, 10 Nov 2024 00:56:17 +0000
-Message-ID: <20241110005622.1515100-4-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.46.2
-In-Reply-To: <20241110005622.1515100-1-jonas@kwiboo.se>
-References: <20241110005622.1515100-1-jonas@kwiboo.se>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 306DF88DE6;
+ Sun, 10 Nov 2024 02:34:29 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1731202469;
+ bh=+E7X0Aq4km1MqCnhyStV6AHo4NZ9ZYAea459CMmFY/o=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=uMhyk69jmBDjYjTG8CDNkkW65kl3/tPpDar8tN8ufWepDcnZ9lQKubABb6yhQXXrP
+ SXF8ksoDqxn4Khezu1QAK2WtBrts/EPMX6WaE6JKSY2yRXFOdpnPvDjJ+oCUmLsAiK
+ VIj7DWOOM2VKJG9Ubmy/Ryo8BVqZAgfgj0KnLObiHM7zE8T9wJEiVXXfuCOP91ZIv0
+ zxKFBaPDFm25Wc5cYKsi5FAA5lvTFc8p1w+wge7VcraE+tqlT/XwYp6DcDvALHWlXg
+ prd76wfs9FZIRaq6Nx5QKBOZ3/p0sd483bXWdfzPrUN+YFq0nfOoVsxpp4y9I7kSox
+ wmHgJdGH0zKdQ==
+Message-ID: <690f6e55-ac68-4ef6-aeda-1f36a36e9a32@denx.de>
+Date: Sun, 10 Nov 2024 02:29:26 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-ForwardEmail-ID: 673004c61e684d476418c061
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] arm64: dts: imx8mn: Fix FSPI booting
+To: Adam Ford <aford173@gmail.com>, u-boot@lists.denx.de
+Cc: aford@beaconembedded.com, lukma@denx.de, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Tim Harvey <tharvey@gateworks.com>, Peng Fan <peng.fan@nxp.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20241109200610.1615430-1-aford173@gmail.com>
+ <20241109200610.1615430-2-aford173@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241109200610.1615430-2-aford173@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,55 +74,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement checkboard() to print current SoC variant used by a board,
-e.g. one of:
+On 11/9/24 9:06 PM, Adam Ford wrote:
+> When FSPI_CONF_HEADER is set, the binary needs to be built such
+> that there is a configuration file located at 0x400 and the start
+> of the file that would normally be flash.bin starts at 0x1000.
+> This used to be done properly until the device tree was converted to
+> nxp_imx8mimage.
+> 
+> Building these with the offsets built into the binman device tree
+> changes impacts how the actual image is built and the locations
+> of the various blobs aren't fetched properly and booting fails.
+> 
+> Fix this by building a standard image as if it were to boot from
+> eMMC or SD, then use that image as the input for a second image
 
-  SoC:   RK3308
-  SoC:   RK3308B
-  SoC:   RK3308B-S
-
-when U-Boot proper is running.
-
-  U-Boot 2025.01-rc1 (Nov 02 2024 - 20:26:25 +0000)
-
-  Model: Radxa ROCK Pi S
-  SoC:   RK3308B
-  DRAM:  512 MiB (effective 510 MiB)
-
-Information about the SoC variant is read from GRF.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-v3: No change
-v2: New patch
----
- arch/arm/mach-rockchip/rk3308/rk3308.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
-
-diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c b/arch/arm/mach-rockchip/rk3308/rk3308.c
-index c6b1a35f47e6..03d97e1d7460 100644
---- a/arch/arm/mach-rockchip/rk3308/rk3308.c
-+++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
-@@ -216,3 +216,19 @@ int arch_cpu_init(void)
- 	return 0;
- }
- #endif
-+
-+#define RK3308_GRF_CHIP_ID	0xFF000800
-+
-+int checkboard(void)
-+{
-+	u32 chip_id = readl(RK3308_GRF_CHIP_ID);
-+
-+	if (chip_id == 0x3308)
-+		printf("SoC:   RK3308B\n");
-+	else if (chip_id == 0x3308c)
-+		printf("SoC:   RK3308B-S\n");
-+	else
-+		printf("SoC:   RK3308\n");
-+
-+	return 0;
-+}
--- 
-2.46.2
-
+This seems like a workaround for some broken offset calculation in binman ?
