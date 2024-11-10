@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E35A6D5E38F
-	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 09:02:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3605D5E380
+	for <u-boot@archiver.kernel.org>; Sun, 10 Nov 2024 09:13:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05D0D88E1C;
-	Sun, 10 Nov 2024 10:02:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D32588B9E;
+	Sun, 10 Nov 2024 10:13:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lJC1+7/n";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IH5m/7Ld";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CB9F892E8; Sun, 10 Nov 2024 10:02:13 +0100 (CET)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 7660A88C0F; Sun, 10 Nov 2024 10:13:55 +0100 (CET)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8D6888D7E
- for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 10:02:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 39396889EF
+ for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 10:13:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2e3fca72a41so2883809a91.1
- for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 01:02:10 -0800 (PST)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2e3d523a24dso2773955a91.0
+ for <u-boot@lists.denx.de>; Sun, 10 Nov 2024 01:13:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731229329; x=1731834129; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1731230032; x=1731834832; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hM7qUWAbH3wRnRzcTQFo/hoeuWmE8pI6I+NWhS9FLPg=;
- b=lJC1+7/n9X4m3bJUezarAvLeDjo043n9YpfvsLv6tvZaOigR9XcwHZC5dCrciv+rBg
- Pe572al3B8+zM5BJuEOm2hCdftTAHsDFLSuVg1p55XmsljcriKcCpq+Mt22BElqtBBuW
- IL/4KSq2xUkk0MxcrocuonmYWzXu36vf3sXwRtorOfWmbZcDdox/PpA8vdzPVHQXQIE9
- b8aqaeDf05v8YBEr5AjJ3jfvtKc/asw02eNRIeDen+UVdYcvhrhcCOeL+/9N/BF+t1gD
- qVHSusHO2bVS6NDeSAtteziCjoqDQIyFPyfsrGVWy4sA9XVuRUqiKfvMNiu2PJVsaKTZ
- Go4w==
+ bh=ah1Mgndxk7/dC0sF4aZ1KLKRFAuUXpN7p2f5m7LuW7o=;
+ b=IH5m/7LdwsjBjFEkvEtIedJHPZ1DKh/VQVRmm474LdkP5aN3P8OMa3wF2fedlgpORh
+ FeTHYnFk6OsEnohWymQGXMnXkUsGq0EwhA+1KIk6EpX53QCsAdY/BDEBF3Blyj6SejX6
+ QrWn0oF3Z96EMzvHA6ngJbB38k5/wX4mQfgye/cJwqKJc/cSngU9jG1aTJ9QkNU7fwrE
+ 4oIxANi+p4CvU2doC/hbvP7uCHccGtx8nOXcez923Vswx8d0rFycXiPwP0Y90/jpCCw1
+ CLyORxi8ItdgewZLtJikP7StFU9bxyOOTdqJGS0jMRR5/RAyqK9f/WpsGK3X8vw21rZW
+ 7KBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731229329; x=1731834129;
+ d=1e100.net; s=20230601; t=1731230032; x=1731834832;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hM7qUWAbH3wRnRzcTQFo/hoeuWmE8pI6I+NWhS9FLPg=;
- b=qDUcg+NVVvRfH0H4jH+GfOyY5Nm/1sL1pQcY9GAj0LoO+s3B0mm03nGoyVkcrYg1BG
- RlFYZXVChCW71nVjDRxDYtQywYDigtVKkB+sypi+VLsWjNoqEGrKzzCx62EmS+saqKgj
- nSSOX7nkQ1dw0p2VorGRnO6f0pIma6RHPZyIhKmJ+1QYbURbJB6p2dTuGyOKUME/PyWG
- E3frjydE4vJNBs4fA2ShhcFMRFe0hhAXwMMEVNBQt3VA7dYgeu0s3zM2yTfz8PJOChUV
- c/OpskRuqf9WR7I+OvGIktw4VHGoFUnfo1l8BeE3nCOwfmh5j1c7ftHJZGIYPKTq3UQE
- WJIw==
-X-Gm-Message-State: AOJu0YzRb11JSmb282N7DqgjKEvEs+YCphc2Y7hpGuezEY4RiB9xTnKg
- NCYe0WNd/FwCS/XHOf/KPj+eBzvnYI6m318XILgkRhso5NjyJn9qMXMKu3iruYrzD/VVmea7I3z
- 4rv1ACz4abmPj+cpEAJBTqPpWf7P3IbJfrnJyYw==
-X-Google-Smtp-Source: AGHT+IFKdr9PCvJ+OBk1ekBG/tqYTyQJFzi4ztG3OJa/B6yJz6J173nFj7l3A6OGM/fOzrAhHyWv+WtXM7774g+Tgw0=
-X-Received: by 2002:a17:90b:5303:b0:2db:2939:d9c0 with SMTP id
- 98e67ed59e1d1-2e9b166b606mr12644597a91.2.1731229329062; Sun, 10 Nov 2024
- 01:02:09 -0800 (PST)
+ bh=ah1Mgndxk7/dC0sF4aZ1KLKRFAuUXpN7p2f5m7LuW7o=;
+ b=IIxPWV+lQWWQJ73QhojQBUYKBIMx+w8oItW1C78DxmoFjJUSWHiqrjFIG8EBUGbeTb
+ 52AyCsNQ+tltZqpvnAWOXogqULPUeG8UfxfSb/5YLcXMvG0KgcPkVsIkV347RsKtt6Vf
+ cJRk6hNo5vBFlDMfcfkBXL6CTnbPFvXwq+WFaqSuCJlZsQCaa3Y75K86F7ZpcMEtusYi
+ rEX450xwLYIZRxAWO4fzVBKc9RQ6/dKrOnCIUoZGNxXRwkheoYCpVk/lJDwGcu5a+2+G
+ X0GAACzaaDNlwGIo1fS7NUIa0p2t2JourBqZgCt+WaP2hFtwqHClOV3ftfog0qJ7EZDW
+ WuxQ==
+X-Gm-Message-State: AOJu0YxQtCJpibyIFBNGn/kbHFLHREPKPkpqb0c1RIepPmFRBmQaN7tz
+ SGhaKWR/n7wiiYUk1jHO3JzY4BoKgzEpSkILZtqc5L+R9AyqjWHNwINZ1iMd2DQQrP9T97QHH5Z
+ z74QjHfNuPJUMIAkLhuI+3O4q8aV78VhuvDaRaw==
+X-Google-Smtp-Source: AGHT+IEnRDcPmt3TVCpeN5HYGYd2g8XSCmEThalx2PqF9uxFJze6Raj6o9PZS5f4YhisCXYeWVLtNvCl+1nU6+zrtlg=
+X-Received: by 2002:a17:90a:d2cc:b0:2e9:c902:d53 with SMTP id
+ 98e67ed59e1d1-2e9c9020e26mr3393076a91.14.1731230031702; Sun, 10 Nov 2024
+ 01:13:51 -0800 (PST)
 MIME-Version: 1.0
 References: <20241108133850.431075-1-adrianox@gmail.com>
- <20241108133850.431075-4-adrianox@gmail.com>
-In-Reply-To: <20241108133850.431075-4-adrianox@gmail.com>
+ <20241108133850.431075-5-adrianox@gmail.com>
+In-Reply-To: <20241108133850.431075-5-adrianox@gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 10 Nov 2024 11:01:32 +0200
-Message-ID: <CAC_iWj+v-tk-8+MgkBiFKnrhTh4S=mtkQRRWKm=MaQxdEN8Ccg@mail.gmail.com>
-Subject: Re: [PATCH v2 03/15] efi_loader: device_path: add definition of
- DEVICE_PATH_SUB_TYPE_MSG_IPV4
+Date: Sun, 10 Nov 2024 11:13:15 +0200
+Message-ID: <CAC_iWj+7tW3qT3cQWTD2YtEtq8iQa9omKd14O3TVgi7_ZfM8hg@mail.gmail.com>
+Subject: Re: [PATCH v2 04/15] efi_loader: device_path: add efi_dp_from_ipv4
 To: Adriano Cordova <adrianox@gmail.com>
 Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
  jerome.forissier@linaro.org, xypron.glpk@gmx.de
@@ -88,62 +87,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Adriano
-
-
 On Fri, 8 Nov 2024 at 15:39, Adriano Cordova <adrianox@gmail.com> wrote:
 >
-> Add definition for DEVICE_PATH_SUB_TYPE_MSG_IPV4 device path
-> subtype.
+> Add efi_dp_from_ipv4 to form a device path from an ipv4 address.
 >
 > Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 > ---
->  include/efi_api.h | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
+>  lib/efi_loader/efi_device_path.c | 38 ++++++++++++++++++++++++++++++++
+>  1 file changed, 38 insertions(+)
 >
-> diff --git a/include/efi_api.h b/include/efi_api.h
-> index f07d074f93..c76519a20a 100644
-> --- a/include/efi_api.h
-> +++ b/include/efi_api.h
-> @@ -616,6 +616,7 @@ struct efi_device_path_acpi_path {
->  #  define DEVICE_PATH_SUB_TYPE_MSG_SCSI                0x02
->  #  define DEVICE_PATH_SUB_TYPE_MSG_USB         0x05
->  #  define DEVICE_PATH_SUB_TYPE_MSG_MAC_ADDR    0x0b
-> +#  define DEVICE_PATH_SUB_TYPE_MSG_IPV4                0x0c
->  #  define DEVICE_PATH_SUB_TYPE_MSG_UART                0x0e
->  #  define DEVICE_PATH_SUB_TYPE_MSG_USB_CLASS   0x0f
->  #  define DEVICE_PATH_SUB_TYPE_MSG_USB_WWI     0x10
-> @@ -691,6 +692,22 @@ struct efi_device_path_uri {
->         u8 uri[];
->  } __packed;
+> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+> index d7444588aa..3e02341224 100644
+> --- a/lib/efi_loader/efi_device_path.c
+> +++ b/lib/efi_loader/efi_device_path.c
+> @@ -974,6 +974,44 @@ struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
+>         return start;
+>  }
 >
-> +struct efi_ipv4_address {
-> +       u8 ip_addr[4];
-> +} __attribute__((aligned(4)));
-
-Is the alignment required by the spec?
-
+> +struct efi_device_path *efi_dp_from_ipv4(struct efi_ipv4_address *ip,
+> +                                        struct efi_ipv4_address *mask,
+> +                                        struct efi_ipv4_address *srv)
+> +{
+> +       struct efi_device_path *dp1, *dp2;
+> +       efi_uintn_t ipv4dp_len;
+> +       struct efi_device_path_ipv4 *ipv4dp;
+> +       char *pos;
 > +
-> +struct efi_device_path_ipv4 {
-> +       struct efi_device_path dp;
-> +       struct efi_ipv4_address local_ip_address;
-> +       struct efi_ipv4_address remote_ip_address;
+> +       ipv4dp_len = sizeof(struct efi_device_path_ipv4);
 
-These are aligned members in a packed struct which might cause
-alignment warnings.
-Commit 7dfab398558 explains why.
+sizeof(*ipv4dp) is usually preferred here
 
-> +       u16 local_port;
-> +       u16 remote_port;
-> +       u16 protocol;
-> +       u8 static_ip_address;
-> +       struct efi_ipv4_address gateway_ip_address;
-> +       struct efi_ipv4_address subnet_mask;
-> +} __packed;
+> +       ipv4dp = efi_alloc(ipv4dp_len + sizeof(END));
+> +       if (!ipv4dp) {
+> +               log_err("Out of memory\n");
+> +               return NULL;
+> +       }
 > +
->  #define DEVICE_PATH_TYPE_MEDIA_DEVICE          0x04
->  #  define DEVICE_PATH_SUB_TYPE_HARD_DRIVE_PATH 0x01
->  #  define DEVICE_PATH_SUB_TYPE_CDROM_PATH      0x02
+> +       ipv4dp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
+> +       ipv4dp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_IPV4;
+> +       ipv4dp->dp.length = ipv4dp_len;
+> +       ipv4dp->protocol = 6;
+
+is this 4 or 6?
+
+> +       if (ip)
+> +               memcpy((void *)&ipv4dp->local_ip_address, (void *)&ip, 4);
+> +       if (mask)
+> +               memcpy((void *)&ipv4dp->subnet_mask, (void *)&mask, 4);
+> +       if (srv)
+> +               memcpy((void *)&ipv4dp->subnet_mask, (void *)&srv, 4);
+
+You can skip the void casts
+
+> +       pos = (char *)ipv4dp + ipv4dp_len;
+
+That's ok, but we tend to do (void *)((uintptr_t) casts nowadays
+
+> +       memcpy(pos, &END, sizeof(END));
+> +
+> +       dp1 = efi_dp_from_eth();
+> +       dp2 = efi_dp_concat(dp1, (const struct efi_device_path *)ipv4dp, 0);
+> +
+> +       efi_free_pool(ipv4dp);
+> +       efi_free_pool(dp1);
+> +
+> +       return dp2;
+> +}
+> +
+>  /* Construct a device-path for memory-mapped image */
+>  struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
+>                                         uint64_t start_address,
 > --
 > 2.43.0
 >
