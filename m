@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76BCDD2E9E4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 12:47:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 870D7D2E9E4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 12:49:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C39C88FAF;
-	Mon, 11 Nov 2024 13:47:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1DAFE88FAF;
+	Mon, 11 Nov 2024 13:49:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z47oom6c";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZWEG30MK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 114AE89275; Mon, 11 Nov 2024 13:47:53 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 2F61889365; Mon, 11 Nov 2024 13:49:43 +0100 (CET)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B746B88C4C
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 13:47:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F080A88C4C
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 13:49:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-20c693b68f5so45490635ad.1
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 04:47:50 -0800 (PST)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2e2b9480617so3617458a91.1
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 04:49:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731329269; x=1731934069; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1731329379; x=1731934179; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zKtT7WX4g6Nc85D7/Lwu8bkRgM/NE8f62PJWIR5GsiY=;
- b=Z47oom6c0LPsXOw2gufjwBkqtSya3yKJxI64bAj1vPHhDS8Wg4otBnsoFE2vCo/kQv
- eBmxv5E5jFqMV7tKzE9JAPXqXmrOJnDJHyQr8RokH8EAWp/ssNTVpHtbBigZCMCcBTnJ
- hAh42hKHbV592xLxiyIrY279HSiCUs9pjmnXk7A84pPaNfBc76/dHtOtzT7PBVp6fY5w
- BCJ2lLDcvfY8cDUzgg6puE/78xMPpXLO3otC1Y2PZxKYt0ZMdfc8Y4kigJDHeF1aFKlV
- WtwChwhjpsZ0Ol+/AvXH+1EEZj3qTyJmp9c48jcPa7MsymOv7VMVvODBEnC3E/AT4C9B
- PK3w==
+ bh=sYm6f4z2FVF9UP+Yzv7Kb+ohb8CPl0RUN8Gzh8am4Mw=;
+ b=ZWEG30MK7QR/E86zUp/wlUID8WwW/YDQV0OmZrkE+UWjW16NYXb2oYUHQNiVew/OW+
+ oWlPjyJfBygE6eMbL+0+8M+ywazBTxXgQ6RAHfjVytP94SsGIh6ILH4SpbAV5C5DrCPT
+ /o+kb/wMzvAbQPdnw9ytVbrE1OUax8gtFpeTMALbRkiLKaQP6OaLE6IZj67XSq/Bs3mS
+ QlSpoHwMgKj79HUj6yob8kwAoRkw9yiq983hjqCOSSzbBi829WVU3m5ogAl4dOlF2tUK
+ EvIyYKsRVN3qOxaA8j3tvH9GSc0ljmMHAYYhyooMMcYX9N6uzjV4sgLSfzQ/E0RBZ9/Y
+ 2nMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731329269; x=1731934069;
+ d=1e100.net; s=20230601; t=1731329379; x=1731934179;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zKtT7WX4g6Nc85D7/Lwu8bkRgM/NE8f62PJWIR5GsiY=;
- b=qEJ1PUDM0n45oNNovzMZsppRMB0EZ4KvPTLmkvKdMzBABKask4MRZU5VXTmuVN9xeI
- eju/oS6CUVH0IxtnoT72AkqAXVRNmPD6S2hUPtRvYROgSw6eySNkAQ41W6pyo1ZzMe4Z
- dAqZ6lP7I3QQhj5rODx39HRtKWHwtZvEHdpnS44yKYJkgkJv9U/64qfUO2zH97fKcJh0
- 2WRwb4LGp8Jur2EzDTb9Zp/jROOW7yGpfKNX1qZ4Bezi9BqdcNgt9HE03FnJh/4vxdJ6
- 26JAh5M/1ZUZ1VU+T1rBpIuzuqnog6n6lCiDyrboetQUOk3t2ubyU8wWOmTpm7j0STSL
- Apfw==
-X-Gm-Message-State: AOJu0YzLm47KP4Ju4YTcGYi0QofroRakF2qsoZgzjPx/PhJvt40lLeNb
- UriiWdEjuxFYs8GI6qbUtuf7p9ffu0TzKUnysRZUAczxeepSFg4FB0xm44TygCWVJZ6LnzQewtP
- OnqWIBmFzxGa3wYJkFP3MRnY75/5uwT65kUG89w==
-X-Google-Smtp-Source: AGHT+IHWMtib5YGZOFLijfzlgVp8/vNHA8NYmDWedZmLfyaY42QdQV1yse9DRphsfUGH6bpJ7RzElG3dk4zM82B9seo=
-X-Received: by 2002:a17:90b:1807:b0:2e2:cd79:ec06 with SMTP id
- 98e67ed59e1d1-2e9b16955c6mr18842725a91.10.1731329269245; Mon, 11 Nov 2024
- 04:47:49 -0800 (PST)
+ bh=sYm6f4z2FVF9UP+Yzv7Kb+ohb8CPl0RUN8Gzh8am4Mw=;
+ b=WJcvOjO9mMs85QD6haSZr5FqK3s0PrnLo8Z+3AwGHW1vI+jIJeiOQ/5+YN5FoTkxnj
+ Dhbkc3IRtI3COYdZnh8+nFhdnuWCnuCEHVlQW6wsnFQeWoDKAr33auxDKEmxiq5RGMGr
+ DkWEZseWifbmr6ljO+u4Y9b9knDMwjuuuukkRjBTJPERkSMDRRRqGRBivlLHPKwC2LaC
+ xy+AnT3pdSMXWZ2fondcmnDUVzmRcJcTJQ1WUL+p8GJSxNtJ2xtKnWfhF4w2PQKlDujG
+ okZvdjQUN2orIs1VQY4xvu9yqxY23VoN5AR/t8kML9Oqc7yy4PAKTsiwCoDePx+7XjBO
+ SbcA==
+X-Gm-Message-State: AOJu0Yyuljtplv8v/vJ55yvhHlSNKfh3WJyAg1zBWl/FZAaFJWgdQCMy
+ 42Y+kHT8LGS03lctD5RiuCJk/UotZMtVLrpz7ERibj1PmOCu2dsdy7J5OB2wgdPNa5ZAFNN5VJP
+ MN4w1jYHqV17PGwVmbszX0pK76AwyHhitBjsDbg==
+X-Google-Smtp-Source: AGHT+IECyAlpLSPOlUMfzmEbC1vt8FH1eLbxZq2BvYKKmyJp6b5qmVj3Y/m6UtSyC73obdJExKxIVxbc6th1gbJP+yI=
+X-Received: by 2002:a17:90b:4b87:b0:2e2:cc47:ce1a with SMTP id
+ 98e67ed59e1d1-2e9b1655632mr18188523a91.1.1731329379433; Mon, 11 Nov 2024
+ 04:49:39 -0800 (PST)
 MIME-Version: 1.0
-References: <20241105110849.41348-1-jerome.forissier@linaro.org>
-In-Reply-To: <20241105110849.41348-1-jerome.forissier@linaro.org>
+References: <20241105102455.10141-1-jerome.forissier@linaro.org>
+In-Reply-To: <20241105102455.10141-1-jerome.forissier@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 11 Nov 2024 14:47:13 +0200
-Message-ID: <CAC_iWjKhO3FnjbAYujbyp5kdfs7w2GLJ6hoyEtK19nh0UHXe5g@mail.gmail.com>
-Subject: Re: [PATCH] nwt: wget: drop Content-Length processing
+Date: Mon, 11 Nov 2024 14:49:03 +0200
+Message-ID: <CAC_iWj+f+kOSZjbJZ25qCHq3+y99a7TwyvoRjf736VUZOFFsbw@mail.gmail.com>
+Subject: Re: [PATCH] sandbox: net: lwip: use EOPNOTSUPP not ENOTSUPP
 To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Yasuharu Shibata <yasuharu.shibata@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,66 +87,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
-
-On Tue, 5 Nov 2024 at 13:09, Jerome Forissier
+On Tue, 5 Nov 2024 at 12:25, Jerome Forissier
 <jerome.forissier@linaro.org> wrote:
 >
-> We don't do anything with Content-Length except a debug print, and the
-> strict_strtoul() call is incorrect (it always returns -EINVAL and leaves
-> content_length to zero due to the presence of trailing characters after
-> the decimal valuoe of Content-Length). So let's just drop this piece of
-> code.
+> EOPNOTSUPP is the recommended SUSV4 error code that should be used
+> instead of ENOTSUPP.
 >
 > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
->  net/wget.c | 13 -------------
->  1 file changed, 13 deletions(-)
+>  drivers/net/sandbox-lwip.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/net/wget.c b/net/wget.c
-> index 635f82efbb3..361817ace65 100644
-> --- a/net/wget.c
-> +++ b/net/wget.c
-> @@ -26,7 +26,6 @@ static const char bootfile1[] = "GET ";
->  static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
->  static const char http_eom[] = "\r\n\r\n";
->  static const char http_ok[] = "200";
-> -static const char content_len[] = "Content-Length";
->  static const char linefeed[] = "\r\n";
->  static struct in_addr web_server_ip;
->  static int our_port;
-> @@ -46,7 +45,6 @@ struct pkt_qd {
->  #define PKTQ_SZ (PKTBUFSRX / 4)
->  static struct pkt_qd pkt_q[PKTQ_SZ];
->  static int pkt_q_idx;
-> -static unsigned long content_length;
->  static unsigned int packets;
+> diff --git a/drivers/net/sandbox-lwip.c b/drivers/net/sandbox-lwip.c
+> index 3721033c310..5c9a0cb1b9f 100644
+> --- a/drivers/net/sandbox-lwip.c
+> +++ b/drivers/net/sandbox-lwip.c
+> @@ -27,7 +27,7 @@ static int sb_lwip_eth_send(struct udevice *dev, void *packet, int length)
+>  {
+>         debug("eth_sandbox_lwip: Send packet %d\n", length);
 >
->  static unsigned int initial_data_seq_num;
-> @@ -251,17 +249,6 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
->                                    "wget: Connected Pkt %p hlen %x\n",
->                                    pkt, hlen);
->
-> -                       pos = strstr((char *)pkt, content_len);
-> -                       if (!pos) {
-> -                               content_length = -1;
-> -                       } else {
-> -                               pos += sizeof(content_len) + 2;
-> -                               strict_strtoul(pos, 10, &content_length);
-> -                               debug_cond(DEBUG_WGET,
-> -                                          "wget: Connected Len %lu\n",
-> -                                          content_length);
+> -       return -ENOTSUPP;
+> +       return -EOPNOTSUPP;
 
-How much work would it be to fix the parsing properly? We could look
-into that value and drop it if the memory is > our available memory
+I think we are fine without this. Isn't EOPNOTSUPP for socket use only?
 
 Thanks
 /Ilias
-> -                       }
-> -
->                         net_boot_file_size = 0;
+>  }
 >
->                         if (len > hlen) {
+>  static int sb_lwip_eth_recv(struct udevice *dev, int flags, uchar **packetp)
 > --
 > 2.40.1
 >
