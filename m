@@ -4,87 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66992D2E9F0
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 14:20:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CF58D2E9F0
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 14:27:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E63DE89319;
-	Mon, 11 Nov 2024 15:20:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AF2E588F41;
+	Mon, 11 Nov 2024 15:27:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="phr73sBi";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NA1SWweR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94B7D8931A; Mon, 11 Nov 2024 15:20:53 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C189F892A1; Mon, 11 Nov 2024 15:27:23 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54EE688F3D
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 15:20:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BEA6B88AE8
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 15:27:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2110a622d76so40348305ad.3
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 06:20:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731334850; x=1731939650; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rZRNJkqDRYlU/Odx+GEaKm3wG80814O2MwyxTFI/mLY=;
- b=phr73sBit8ttjWmG+vaArzCUfUts4860gI++3pv/1ki6MJgX9ieH4wZohz6T6t81Wn
- /qNqpXeRPkiAIpnGmV55lt5twXv7Qz7U91G0eG7aN9vTW43LllgUL0Dx2Xmg1CROdptu
- Ml+o24O1nRCXC6ouklfYsgzeqdC9sT43iwdmQip/U+4weN9q9/AmxuCM4IWFSzE/QUMy
- oiZFbcVhgxPeUP6xz7fpqyWqgPTUfkIp9CUOAPqNS9gYXqQ/gSYej7RwgIw2hKlbU6nf
- WsKUPhxkD7o8OPSyEVagmGkycvYkVRIarnZ3O9ACInLyV8MEWL3u4qWSOHwk8bOxwadd
- bRcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731334850; x=1731939650;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rZRNJkqDRYlU/Odx+GEaKm3wG80814O2MwyxTFI/mLY=;
- b=uTrivd9GOmkhBb2xQ/q6LxlR2XCJrW+g2tXScfxrJn8G/NSONv4FLI45VIwrFJQAKL
- ZgQP2UbXl0ZxRIUgsYIY2qKqpsnlwNGAJKkSXv95uW/t8DO5VaEnhWmtZgTVE+Srj8zP
- cGZbAsn6ZvjKHOXBzd2HWxX3+ccqIpT48ecIXoYPzhrXilfa4kd7Lf5bKE10ppkWFyRa
- QWQvaI1IhFklV7MZ961XivXPcvZhKj/7LDczPUSNghxILq5MRHY81C34peZBh/cxy6QX
- ew/K/wiEJPxnonMrM/yBDwYwDUIW0A2dA2zkuf7s1D185/PMxsEJpsgCwjJB/KuWwYpv
- SdNQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUOnOUquag5q1IGLfS1kFwfXhP4C4Br6+GeSCS3wyhX8hzFLsqrhPgsuFvmcOrTPlRULT5RK+Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YyfwYIrRISIarTlcJcjATNqXk2rayNiowUzWplELF5uec0ls2LM
- bstYRA48BzGgoDL/6OtrFPM/KGFIdIRc8D8fUAbHBNZ9ZkCVMiR6W2SmG8pyA8kcCyitQmPQU+J
- Bp4w8bWVcji3/AxC60l3uIS0Wh4bE9Ay1x2ohCw==
-X-Google-Smtp-Source: AGHT+IFf4Ns5Bj3CfAYidcNu74f9Q4qE3Sh92A8DFweZdf0Po4SrsaA+xugZPGBhdUbYhLN52T2mB5ohATane9e/vXU=
-X-Received: by 2002:a17:902:c411:b0:20c:5b80:930f with SMTP id
- d9443c01a7336-21183c41e75mr140157995ad.12.1731334849845; Mon, 11 Nov 2024
- 06:20:49 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1731335238; x=1731940038; i=xypron.glpk@gmx.de;
+ bh=m/26UblB3AvOkWesLxqFE1tFcZlY1Tw6UekLlu5QQdk=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=NA1SWweR6piSQRdOzpwRqqCq5heIkyMjZ1WoXnmISktRunsvXix8mXKIxpy5x13a
+ XgL0+kWy/WCNnSqkyMjpOygfO1xqmXODqWKugq9tS/UEyttU7ilgfyaoN1vHvrqWO
+ /xR+ViBLpfjaL20hXfbEaPQGh45kFuul3VmMD3ZQBjbi/E8Z+ldEt9aJ9vzLcR2eI
+ c0ssa+kaokUu5hDlpxZOHXqOVn1VtdBMjudehIuRrB2c+Nl/GkY1xiAuBTz10X4Ld
+ VOWMheqO+8jokv6u1AA7tKj04pfl2eRM+Wa2YYDk5VKaAdyFYktmd5RYvB14qoM5q
+ 8uM4qCBZ6BD1zVyhzA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mo6qv-1tYb0f14JP-00k0la; Mon, 11
+ Nov 2024 15:27:18 +0100
+Date: Mon, 11 Nov 2024 15:27:16 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>
+CC: Simon Glass <sjd@chromium.org>, u-boot@lists.denx.de,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH] Makefile: fix empty MK_ARCH when using ccache
+User-Agent: Thunderbird for Android
+In-Reply-To: <20241111-mk_arch-ccache-v1-1-e27f5f605bc4@cherry.de>
+References: <20241111-mk_arch-ccache-v1-1-e27f5f605bc4@cherry.de>
+Message-ID: <9883B8AA-CA7D-4A59-ADB0-ABC86210273F@gmx.de>
 MIME-Version: 1.0
-References: <20241110083017.367565-1-ilias.apalodimas@linaro.org>
- <20241110083017.367565-5-ilias.apalodimas@linaro.org>
- <CAFLszThNpU2cNNvU4uT2vkgFKJr7ss=j_UYfXTFXA_b4=LnurA@mail.gmail.com>
-In-Reply-To: <CAFLszThNpU2cNNvU4uT2vkgFKJr7ss=j_UYfXTFXA_b4=LnurA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 11 Nov 2024 16:20:13 +0200
-Message-ID: <CAC_iWjKFxtBxEqkkXSOhcRqN4fRRgMcsmFRVYeNZOnR4zERrQQ@mail.gmail.com>
-Subject: Re: [PATCH v3 4/6] net: lwip: Enable https:// support for wget
-To: Simon Glass <sjg@chromium.org>
-Cc: jerome.forissier@linaro.org, Anton.Antonov@arm.com, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Jonathan Humphreys <j-humphreys@ti.com>,
- Wei Ming Chen <jj251510319013@gmail.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:KUG+dm/9VYJbw1+JR37ENGvO3ecCgWjgSvXbvPgOEZoiU+QM27C
+ 0NvDLgAJXisNytNLz6mR1lD+dpsQ2Nhkn8AfhTWzRAV8ZPCX2Fy18m/tTYA53cinQ/rV1ZA
+ B2rA9qBnpQg4z90E9ntttFs97Xs3d7rIFKQY8cQWEfSWzggKaWfUfUvX45aDs9RSF8m2N1C
+ n7AocPhv+QrM1DhS8xV3Q==
+UI-OutboundReport: notjunk:1;M01:P0:CtzElPWwyxw=;kNho5Fz1NYIMqfyFeh14q1lMcc7
+ jlFcgw7X1QfS3++hoEKrqmF3txNYWFKGUQGx3Dbsj/l3MVFENhuf74dvZjbRoo+/eaUroDOr/
+ 0ovA1ZvoNXAZgr47GQCRNRBOL+6+KsYgoj/oUh1rs7QCD3lOIpf4g1kaOsQTosrjvf5XRIXvM
+ 37ex17aJPPgr+H1gbs+k/hRT8JECay8S5/nhwDcKNZlbLLuAh+iJZNnBLyniNiDltQ8nOpWrR
+ K8yfSazhoOFjs3LuLvghLwv18yOuUq1Pn/aDvjp44EOrZxXHswRDR9nxgcaYa6wdw6kGkHGOi
+ kCUWnxyCUlU6VYI0X55Se6y4oAnSSO7cI21ZFeokxh4MVqFAUDcliJbPLMOkGnXcq9Z+lNsxe
+ rPg6/DYOCEgi2PX4qzEHOddTM6SxOxoHbXEtC+NOghrYHLtiYtfLfg8gOsBTL1ZXJ2qzAAiGV
+ olIdMxaBasQUlTmoPCI/TfKjkCGOj1Pc+89/I72VBZlxx+3bkyIx4Iy7c5sVB+L3XjKqd+t/M
+ lpvUOD+ngKRNHpJOjweBZRxMmBZB3fUa7oUF8x0AxNnCJvXrsnQv4weG5fLwTCFNrhQZilkJ6
+ 7IUMD75c1wGCv+htvr2nW010Xuk4GCdgoRMTsJYZWsWjKDKjBp7WpNfbs9397Wguoe0Dz47z3
+ 9L9M0Yhwb53r5C54ys/kpBgHacUTuMhr1w28sf5HzqX/mZhYEI8GlY3lX2CCpemE1F/sGRTHX
+ Aq+i9Uz9lA7DyR/w0VfIZuWozP3+ynV047Zx8e91zCleaLc1QeTm1cYWQJzWUg8py1ldPgNf1
+ +Zbti4U71StsrM8UGBVbGLVg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,53 +89,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Simon,
-
-On Mon, 11 Nov 2024 at 15:03, Simon Glass <sjg@chromium.org> wrote:
+Am 11=2E November 2024 14:20:49 MEZ schrieb Quentin Schulz <foss+uboot@0lei=
+l=2Enet>:
+>From: Quentin Schulz <quentin=2Eschulz@cherry=2Ede>
 >
-> On Sun, 10 Nov 2024 at 01:32, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > With the recent changes of lwip & mbedTLS we can now download from
-> > https:// urls instead of just http://.
-> > Adjust our wget lwip version parsing to support both URLs.
-> > While at it adjust the default TCP window for QEMU since https seems to
-> > require at least 16384
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >  cmd/Kconfig      | 19 +++++++++++
-> >  net/lwip/Kconfig |  2 +-
-> >  net/lwip/wget.c  | 86 +++++++++++++++++++++++++++++++++++++++++++-----
-> >  3 files changed, 97 insertions(+), 10 deletions(-)
+>One can use ccache by prefixing the typical CROSS_COMPILE value with
+>"ccache " (e=2Eg=2E "ccache aarch64-gnu-linux-" for Aarch64)=2E This howe=
+ver
+>makes the MK_ARCH empty because sed won't find a match anymore since it
+>expects the CROSS_COMPILE value to start with the actual toolchain (with
+>an unlimited number of white spaces before)=2E
 >
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+>This is failing builds since commit 7506c1566998 ("sandbox: Report host
+>default-filename in native mode")=2E
 >
-> Some nits / questions
+>Add "ccache" prefix to ignore but participate in the matching regex used
+>by sed to identify the target architecture=2E
 >
-> I am not sure what mbedtls_hardware_poll() is,
-
-It's an entropy collector used by mbedTLS to ensure the platform has
-enough entropy.
-It's required if your platform doesn't support standards like the
-/dev/urandom or Windows CryptoAPI.
-
-> but if @len is too
-> short, would it be acceptable to return an error? How many bytes is it
-> requesting in the https case?
-
-If you don't return enough entropy https:// will fail and mbedTLS &
-lwIP will print an error. I think we currently use 128 and the default
-for mbedTLS is 32.
-
+>Signed-off-by: Quentin Schulz <quentin=2Eschulz@cherry=2Ede>
+>---
+>One can use ccache by prefixing the typical CROSS_COMPILE value with
+>"ccache " (e=2Eg=2E "ccache aarch64-gnu-linux-" for Aarch64)=2E This howe=
+ver
+>makes the MK_ARCH empty because sed won't find a match anymore since it
+>expects the CROSS_COMPILE value to start with the actual toolchain (with
+>an unlimited number of white spaces before)=2E
 >
-> uclass_first_device() if you want the first device, not uclass_get_device(...0)
-
-Sure
-
-Thanks
-/Ilias
-
+>This is failing builds since commit 7506c1566998 ("sandbox: Report host
+>default-filename in native mode")=2E
 >
-> Regards,
-> Simon
+>Add "ccache" prefix to ignore but participate in the matching regex used
+>by sed to identify the target architecture=2E
+>---
+> Makefile | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>
+>diff --git a/Makefile b/Makefile
+>index 7275a02f24ca64ebd46c5dc6e769dcdee9917dca=2E=2E71743db16fca930567edd=
+67eb77f1c94e9b7b4e9 100644
+>--- a/Makefile
+>+++ b/Makefile
+>@@ -21,7 +21,7 @@ include include/host_arch=2Eh
+> ifeq ("", "$(CROSS_COMPILE)")
+>   MK_ARCH=3D"${shell uname -m}"
+> else
+>-  MK_ARCH=3D"${shell echo $(CROSS_COMPILE) | sed -n 's/^[[:space:]]*\([^=
+\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
+>+  MK_ARCH=3D"${shell echo $(CROSS_COMPILE) | sed -n 's/^\(ccache\)\?[[:s=
+pace:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\3/p'}"
+
+The target architecture cannot be determined in this way=2E
+
+You could use the riscv64 compiler to compile riscv32 when providing a gcc=
+ flag=2E
+
+You should not make any assumptions about the naming scheme of vendor tool=
+chains=2E
+
+The correct way is to cross-compile a binary=2E Then use readelf to retrie=
+ve the target architecture=2E
+
+Best regards
+
+Heinrich
+
+> endif
+> unexport HOST_ARCH
+> ifeq ("x86_64", $(MK_ARCH))
+>
+>---
+>base-commit: 9c25cd563179cf32cf3b119d5ae78ef8348d0335
+>change-id: 20241111-mk_arch-ccache-7150482cfde8
+>
+>Best regards,
+
