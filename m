@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15829D2E9E3
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 12:41:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76BCDD2E9E4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 12:47:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79DC28935B;
-	Mon, 11 Nov 2024 13:41:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9C39C88FAF;
+	Mon, 11 Nov 2024 13:47:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k3Yp0VQe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z47oom6c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 836AD8936B; Mon, 11 Nov 2024 13:41:41 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 114AE89275; Mon, 11 Nov 2024 13:47:53 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F0EF89357
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 13:41:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B746B88C4C
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 13:47:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a99e3b3a411so948337066b.0
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 04:41:39 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-20c693b68f5so45490635ad.1
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 04:47:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731328899; x=1731933699; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BTJL7L+bVSOvN3CJlBGC9+Vt7G3Gav/rxizVXC700wA=;
- b=k3Yp0VQepKiUtUPcgpsnagD6j0gnuHrE3LLhWMH1znnKLhMlHulorfEpfTEKwiBF5E
- R7/va6hDgggyZKpCOsYVvw7gZuvGmmRWNPPJ/oJznN6ZiPNn2XC6xGu087L4SoNLeW0U
- Mkh+H9oqXCP6so4IB3jfUjoKquAx7tixB5mZQ=
+ d=linaro.org; s=google; t=1731329269; x=1731934069; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zKtT7WX4g6Nc85D7/Lwu8bkRgM/NE8f62PJWIR5GsiY=;
+ b=Z47oom6c0LPsXOw2gufjwBkqtSya3yKJxI64bAj1vPHhDS8Wg4otBnsoFE2vCo/kQv
+ eBmxv5E5jFqMV7tKzE9JAPXqXmrOJnDJHyQr8RokH8EAWp/ssNTVpHtbBigZCMCcBTnJ
+ hAh42hKHbV592xLxiyIrY279HSiCUs9pjmnXk7A84pPaNfBc76/dHtOtzT7PBVp6fY5w
+ BCJ2lLDcvfY8cDUzgg6puE/78xMPpXLO3otC1Y2PZxKYt0ZMdfc8Y4kigJDHeF1aFKlV
+ WtwChwhjpsZ0Ol+/AvXH+1EEZj3qTyJmp9c48jcPa7MsymOv7VMVvODBEnC3E/AT4C9B
+ PK3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731328899; x=1731933699;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BTJL7L+bVSOvN3CJlBGC9+Vt7G3Gav/rxizVXC700wA=;
- b=eb6KSPwXKlQUI0VG7vQrnRCkLMbqgI7xVMm0jEamlSjNlbhw955hQHbWdh7nvUiXW6
- qJyGZfxWsUnvlPuLPqWYTV1U0JsF/+A4iTiHCZeZ2I2WX75kknD8uoJXziK9zH3pBeCY
- p4yHq+Y7VVWujx2aFFaUg3vnuZ00pxVDApW8/eChMWwWXUZ5PQ2AjLoz/yi9lSwvgdYm
- st/FvnCbWStms/NdOr1eipvN7CJuxPe5wAreV4TdK5FpuE18uAvsRqV8bpX4ziIuVFnQ
- 3MxAubbeov3kl/alC2za8rRMZMJoYhdiYTXgqZSTRUTnHv9rlGIttz4zhTFBhFDe0nGY
- F6nA==
-X-Gm-Message-State: AOJu0YxbGIfWRgtqI/KsG2AL8G/2XpKmG6sHcZMmvNZkQhj9rZqnlXZv
- 78rWidNe/nrmNVWsMl30ddkYlOfaOZysqWv2Z7kU8rsV4GsB5INOHO+TTUBtrciQcU4LT+yn3vY
- 5a79QbWuglheiuC1td5MNHnxPfdJHoniS4zES
-X-Google-Smtp-Source: AGHT+IEoHv1Wtr8lm/jq5tN4U+Tc2bH8k3qC8JoTRY+ynK7kitx14Vm+do45b1P/SYWSUp02S9UgutC/k2ircmWTX+4=
-X-Received: by 2002:a17:907:7b89:b0:a9a:5b84:ac81 with SMTP id
- a640c23a62f3a-a9eeffe9032mr801707666b.31.1731328898669; Mon, 11 Nov 2024
- 04:41:38 -0800 (PST)
+ d=1e100.net; s=20230601; t=1731329269; x=1731934069;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zKtT7WX4g6Nc85D7/Lwu8bkRgM/NE8f62PJWIR5GsiY=;
+ b=qEJ1PUDM0n45oNNovzMZsppRMB0EZ4KvPTLmkvKdMzBABKask4MRZU5VXTmuVN9xeI
+ eju/oS6CUVH0IxtnoT72AkqAXVRNmPD6S2hUPtRvYROgSw6eySNkAQ41W6pyo1ZzMe4Z
+ dAqZ6lP7I3QQhj5rODx39HRtKWHwtZvEHdpnS44yKYJkgkJv9U/64qfUO2zH97fKcJh0
+ 2WRwb4LGp8Jur2EzDTb9Zp/jROOW7yGpfKNX1qZ4Bezi9BqdcNgt9HE03FnJh/4vxdJ6
+ 26JAh5M/1ZUZ1VU+T1rBpIuzuqnog6n6lCiDyrboetQUOk3t2ubyU8wWOmTpm7j0STSL
+ Apfw==
+X-Gm-Message-State: AOJu0YzLm47KP4Ju4YTcGYi0QofroRakF2qsoZgzjPx/PhJvt40lLeNb
+ UriiWdEjuxFYs8GI6qbUtuf7p9ffu0TzKUnysRZUAczxeepSFg4FB0xm44TygCWVJZ6LnzQewtP
+ OnqWIBmFzxGa3wYJkFP3MRnY75/5uwT65kUG89w==
+X-Google-Smtp-Source: AGHT+IHWMtib5YGZOFLijfzlgVp8/vNHA8NYmDWedZmLfyaY42QdQV1yse9DRphsfUGH6bpJ7RzElG3dk4zM82B9seo=
+X-Received: by 2002:a17:90b:1807:b0:2e2:cd79:ec06 with SMTP id
+ 98e67ed59e1d1-2e9b16955c6mr18842725a91.10.1731329269245; Mon, 11 Nov 2024
+ 04:47:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20241107213150.1711962-1-sjg@chromium.org>
- <20241107213150.1711962-7-sjg@chromium.org>
- <d2d6f345-cdd0-4b1c-b91e-60910409eb44@cherry.de>
-In-Reply-To: <d2d6f345-cdd0-4b1c-b91e-60910409eb44@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 Nov 2024 05:41:27 -0700
-Message-ID: <CAFLszTgxEGw-_uAJReLPWDAcKzKzSmCKRqJMWKcb=zC3inZkmg@mail.gmail.com>
-Subject: Re: [PATCH v10 06/10] sandbox: Report host default-filename in native
- mode
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>,
+References: <20241105110849.41348-1-jerome.forissier@linaro.org>
+In-Reply-To: <20241105110849.41348-1-jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 11 Nov 2024 14:47:13 +0200
+Message-ID: <CAC_iWjKhO3FnjbAYujbyp5kdfs7w2GLJ6hoyEtK19nh0UHXe5g@mail.gmail.com>
+Subject: Re: [PATCH] nwt: wget: drop Content-Length processing
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
  Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,97 +90,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Jerome,
 
-On Mon, 11 Nov 2024 at 03:03, Quentin Schulz <quentin.schulz@cherry.de> wro=
-te:
+On Tue, 5 Nov 2024 at 13:09, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> Hi Simon,
+> We don't do anything with Content-Length except a debug print, and the
+> strict_strtoul() call is incorrect (it always returns -EINVAL and leaves
+> content_length to zero due to the presence of trailing characters after
+> the decimal valuoe of Content-Length). So let's just drop this piece of
+> code.
 >
-> On 11/7/24 10:31 PM, Simon Glass wrote:
-> > When the --native flag is given, pretend to be running the host
-> > architecture rather than sandbox.
-> >
-> > Allow the same control for PXE too.
-> >
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  net/wget.c | 13 -------------
+>  1 file changed, 13 deletions(-)
 >
-> Commit 7506c1566998 ("sandbox: Report host default-filename in native
-> mode") breaks building jaguar-rk3588_defconfig, I believe it's this patch=
-?
+> diff --git a/net/wget.c b/net/wget.c
+> index 635f82efbb3..361817ace65 100644
+> --- a/net/wget.c
+> +++ b/net/wget.c
+> @@ -26,7 +26,6 @@ static const char bootfile1[] = "GET ";
+>  static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
+>  static const char http_eom[] = "\r\n\r\n";
+>  static const char http_ok[] = "200";
+> -static const char content_len[] = "Content-Length";
+>  static const char linefeed[] = "\r\n";
+>  static struct in_addr web_server_ip;
+>  static int our_port;
+> @@ -46,7 +45,6 @@ struct pkt_qd {
+>  #define PKTQ_SZ (PKTBUFSRX / 4)
+>  static struct pkt_qd pkt_q[PKTQ_SZ];
+>  static int pkt_q_idx;
+> -static unsigned long content_length;
+>  static unsigned int packets;
 >
-> Reverting it makes the build pass again.
+>  static unsigned int initial_data_seq_num;
+> @@ -251,17 +249,6 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+>                                    "wget: Connected Pkt %p hlen %x\n",
+>                                    pkt, hlen);
 >
-> HOST_ARCH is empty in include/generated/version_autogenerated.h for some
-> reason. Though it was also empty before.
->
-> The error is:
->
-> """
-> lib/efi_loader/efi_helper.c:26:15: error: operator '=3D=3D' has no left o=
-perand
->     26 | #if HOST_ARCH =3D=3D HOST_ARCH_X86_64
->        |               ^~
-> lib/efi_loader/efi_helper.c:29:17: error: operator '=3D=3D' has no left o=
-perand
->     29 | #elif HOST_ARCH =3D=3D HOST_ARCH_X86
->        |                 ^~
-> lib/efi_loader/efi_helper.c:32:17: error: operator '=3D=3D' has no left o=
-perand
->     32 | #elif HOST_ARCH =3D=3D HOST_ARCH_AARCH64
->        |                 ^~
-> lib/efi_loader/efi_helper.c:35:17: error: operator '=3D=3D' has no left o=
-perand
->     35 | #elif HOST_ARCH =3D=3D HOST_ARCH_ARM
->        |                 ^~
-> lib/efi_loader/efi_helper.c:38:17: error: operator '=3D=3D' has no left o=
-perand
->     38 | #elif HOST_ARCH =3D=3D HOST_ARCH_RISCV32
->        |                 ^~
-> lib/efi_loader/efi_helper.c:41:17: error: operator '=3D=3D' has no left o=
-perand
->     41 | #elif HOST_ARCH =3D=3D HOST_ARCH_RISCV64
->        |                 ^~
-> lib/efi_loader/efi_helper.c:45:2: error: #error Unsupported Host
-> architecture
->     45 | #error Unsupported Host architecture
->        |  ^~~~~
-> lib/efi_loader/efi_helper.c: In function =E2=80=98efi_get_basename=E2=80=
-=99:
-> lib/efi_loader/efi_helper.c:73:38: error: =E2=80=98HOST_BOOTEFI_NAME=E2=
-=80=99 undeclared
-> (first use in this function); did you mean =E2=80=98BOOTEFI_NAME=E2=80=99=
-?
->     73 |         return efi_use_host_arch() ? HOST_BOOTEFI_NAME :
-> BOOTEFI_NAME;
->        |                                      ^~~~~~~~~~~~~~~~~
->        |                                      BOOTEFI_NAME
-> lib/efi_loader/efi_helper.c:73:38: note: each undeclared identifier is
-> reported only once for each function it appears in
-> lib/efi_loader/efi_helper.c: In function =E2=80=98efi_get_pxe_arch=E2=80=
-=99:
-> lib/efi_loader/efi_helper.c:79:24: error: =E2=80=98HOST_PXE_ARCH=E2=80=99=
- undeclared
-> (first use in this function); did you mean =E2=80=98HOST_ARCH=E2=80=99?
->     79 |                 return HOST_PXE_ARCH;
->        |                        ^~~~~~~~~~~~~
->        |                        HOST_ARCH
-> lib/efi_loader/efi_helper.c: In function =E2=80=98efi_get_basename=E2=80=
-=99:
-> lib/efi_loader/efi_helper.c:74:1: warning: control reaches end of
-> non-void function [-Wreturn-type]
->     74 | }
->        | ^
-> make[2]: *** [scripts/Makefile.build:256: lib/efi_loader/efi_helper.o]
-> Error 1
-> make[1]: *** [scripts/Makefile.build:398: lib/efi_loader] Error 2
-> make: *** [Makefile:1914: lib] Error 2
-> make: *** Waiting for unfinished jobs....
-> """
->
-> The build host for me is Fedora 41.
+> -                       pos = strstr((char *)pkt, content_len);
+> -                       if (!pos) {
+> -                               content_length = -1;
+> -                       } else {
+> -                               pos += sizeof(content_len) + 2;
+> -                               strict_strtoul(pos, 10, &content_length);
+> -                               debug_cond(DEBUG_WGET,
+> -                                          "wget: Connected Len %lu\n",
+> -                                          content_length);
 
-Which cross-toolchain are you using? That variable is set at the top
-of Makefile so it would be worth seeing what MK_ARCH is returning.
+How much work would it be to fix the parsing properly? We could look
+into that value and drop it if the memory is > our available memory
 
-Regards,
-Simon
+Thanks
+/Ilias
+> -                       }
+> -
+>                         net_boot_file_size = 0;
+>
+>                         if (len > hlen) {
+> --
+> 2.40.1
+>
