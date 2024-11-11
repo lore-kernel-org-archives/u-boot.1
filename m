@@ -4,61 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FC2AD3ABD1
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 17:32:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85FADD3ABF5
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 20:45:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F3F989340;
-	Mon, 11 Nov 2024 18:32:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7469889387;
+	Mon, 11 Nov 2024 21:45:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731346327;
-	bh=OjmdmSvNOgaNGisxz/3EvbuCYSsfygaFJ4KtERRdUpo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=AIHoQpBYVWeoJgYo12RKcJWvq1RZwEoJPrrsUQsdbKG/Mh3CqSljNqDERp8FqYiNz
-	 ikPgoy+0XAltlJ5+2w4saOFOIeujRuvt0Cqg9kl1EJGVqxdM4IHe6aYeMsD/Pmu4IB
-	 B8xttt/Vxr2QGJcI++PaIF81wN1qO7uZrTz9F3P0+flN0/nd0ikGNgiws/LGJCDSUf
-	 Upx97kYYAvX8UXRyHZp2YvIiqE3Zb1HBR6FUNoyEBKVfTk+DcOed7eW4Ib9YkPk9Ny
-	 U2AAWaf0nknJoYM+YGwCOAAfsFDGF7SJVdEpUzRGpqdCPkz8xv9JsxA7Ji7mX59mHv
-	 ZRlBAz/E0yMQQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iLovTAxZ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5EFE98938F; Mon, 11 Nov 2024 21:45:09 +0100 (CET)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 287AB89330;
- Mon, 11 Nov 2024 18:32:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1731346326;
- bh=OjmdmSvNOgaNGisxz/3EvbuCYSsfygaFJ4KtERRdUpo=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ao2/YK1pJtO6WiSmetqIjVGgfIuEEvowWbyKgsR7T9s3oDLIjFVwv+i8imdaQL3wk
- 2YXdLhvY+dZZnGHEYXFNDRs8JnO/66Br42HVqI5LGVltYOXanRIYooINDO2GN/UsVB
- FMxyIYZoTJNJ89lj15ynnxI5SJN2mqy9s8DmGhwNkVyr/7YR0nh1HJTAw/JUIl9BF4
- U4mAzI7KdvMXDVa6B2kHxjvytWpA+Ks/lYj1D0wuZYJJILxXwNHvFwbWxhqB+QBsOh
- yfdvQIVbdAPxVZ/FWuHR0fo9MdPqhQdlYxZyHQWn/EI7pH9tPVI5seb9KR3TlyOg91
- n6PaFCXJz0cQA==
-Message-ID: <a8ab9096-deaa-4266-90d5-c746f62515c7@denx.de>
-Date: Mon, 11 Nov 2024 18:03:19 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 2C16D8936B
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 21:45:07 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-7f4324503d7so2286998a12.3
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 12:45:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1731357905; x=1731962705; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nBYZ+1yLicWhvTkEbxs3eEqwvfEAmco8ZnXskuPUY5Q=;
+ b=iLovTAxZDKlpZ3A4H4egzmxYUd/V/PDJmPr0B1XXkz1A1ZfsY8SYrxuVezTqkUPfYM
+ kQZOKlETPHt1tCgxkLnwKzijfTrNlRplyYFzctoY5N7SbMhGTEVMn6Rk0oGyPDaEGfDR
+ qYkUtIkrTIb/+rozRPa4EYYfad+3y99V4nZc93Novxu1t1fWjj9wCnfc+Cz9hTXROeKi
+ 793OvpcBzqfKVarvpscM5jYUkbKZZJxhm/XhQUbrLyAmBQT+TlWUst87PRX7YzQ0rZfr
+ 39W9CfpBp83PM6l3JCryTwF1flsSpdZXY8fGOO+BPe1IfK6PI+wu90t1pw6SIdDaYuq7
+ hcww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731357905; x=1731962705;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nBYZ+1yLicWhvTkEbxs3eEqwvfEAmco8ZnXskuPUY5Q=;
+ b=M01FNRI23hX8Eblt9QNbzgg4w4LSwB9reKE85nXO1DWAV6SeHbcbqnNmmXfWGo6D64
+ y3/UKxsPv4EHYtn7IORz475LNie9CVK2N4fcJVU4RX2DqkeO1qF5rOBK0JO1HY6xaLhl
+ lrK9r9y0JvawiJQLlzc8fDbIqWeHaygeArH0yiCw8+QhWUAw8xjILnCgEBjoYODImpVe
+ 6KnsXeI9rljtpgI+6f//uOev9Wbz81kjHnXH+h4SSX0m1pycPD3vMnYF+XtrhzlnImAZ
+ 8yp7gQn3ybehf9Im2BPIzEM/4pNLusPVW6GOS85/fZBT9KnP8tGwNwE5Llf9zOBOe2Py
+ MVsg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXlU750h9dm7LeA8wOnILICmUI1sIk/Kr+MZs1Nr05rTHUIfA0XSoYwOpAruC09rnJY82ZIqf0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHGya3ThbwzrGpml23Iy2K/yMulCD6S/AIvrNnIbeQovz2vLzs
+ 9wNpvlPuWfQFVU0ENJvDMQucRFrMAmLtlavZXrt52ugEda3Q0loIQRvKiZtQnkLHZI0sChuMsyV
+ g59I292jDVye7f3f32cEk/wQNj/xluB34AD+LdA==
+X-Google-Smtp-Source: AGHT+IGfwuccRsEk+AP20tqdAleJHbuTUM5GvqozUHg/dojlf6jkb8z9xaOmY2XdDf+8ZySWOT4ihP+d8EPLLvOh1p0=
+X-Received: by 2002:a17:90b:2ecb:b0:2e5:5ab5:ba52 with SMTP id
+ 98e67ed59e1d1-2e9b173f1ddmr18863135a91.20.1731357905629; Mon, 11 Nov 2024
+ 12:45:05 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v10 3/7] usb: onboard-hub: add support for Microchip
- USB5744
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "Simek, Michal" <michal.simek@amd.com>,
- "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
- "git (AMD-Xilinx)" <git@amd.com>
-References: <20241108035959.19970-1-venkatesh.abbarapu@amd.com>
- <20241108035959.19970-4-venkatesh.abbarapu@amd.com>
- <33e22746-20fc-4956-a4c9-ef6723af33e0@denx.de>
- <SA1PR12MB869768EB5D98BA2231B89C3898582@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <SA1PR12MB869768EB5D98BA2231B89C3898582@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20241103035015.29486-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241103035015.29486-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 11 Nov 2024 22:44:29 +0200
+Message-ID: <CAC_iWjKytfnvZai4ZT-s83wB5wB_rn-2Mkv0FTNov8BrBn0Lcg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] lib: vsprintf: fix API build
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Raymond Mao <raymond.mao@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,61 +91,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/11/24 3:10 PM, Abbarapu, Venkatesh wrote:
-> Hi Marek,
-> 
->> -----Original Message-----
->> From: Marek Vasut <marex@denx.de>
->> Sent: Monday, November 11, 2024 5:44 PM
->> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; u-boot@lists.denx.de
->> Cc: Simek, Michal <michal.simek@amd.com>; fabrice.gasnier@foss.st.com; git
->> (AMD-Xilinx) <git@amd.com>
->> Subject: Re: [PATCH v10 3/7] usb: onboard-hub: add support for Microchip
->> USB5744
->>
->> On 11/8/24 4:59 AM, Venkatesh Yadav Abbarapu wrote:
->>> Add support for the Microchip USB5744 USB3.0 and USB2.0 Hub.
->>> The usb5744 driver trigger hub reset signal after soft reset.
->>> The usb5744 hub need to reset after the phy initialization, which
->>> toggles the gpio.
->>>
->>> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
->>> Reviewed-by: Marek Vasut <marex@denx.de>
->>> ---
->>>    common/usb_onboard_hub.c | 15 +++++++++++++--
->>>    1 file changed, 13 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c index
->>> 827ecf9b02..e604c86d8a 100644
->>> --- a/common/usb_onboard_hub.c
->>> +++ b/common/usb_onboard_hub.c
->>> @@ -88,10 +88,21 @@ static int usb_onboard_hub_remove(struct udevice *dev)
->>>    	return ret;
->>>    }
->>>
->>> +static const struct onboard_hub_data usb5744_data = {
->>> +	.power_on_delay_us = 10000,
->>> +	.reset_us = 10000,
->>> +};
->>> +
->>>    static const struct udevice_id usb_onboard_hub_ids[] = {
->>>    	/* Use generic usbVID,PID dt-bindings (usb-device.yaml) */
->>> -	{ .compatible = "usb424,2514" }, /* USB2514B USB 2.0 */
->>> -	{ }
->>> +	{	.compatible = "usb424,2514" /* USB2514B USB 2.0 */
->>
->> Does this hub need any power_on_delay_us / reset_us delay too ?
->> Probably yes ? If so, please add the delay in 1/7 , otherwise there will be a fast reset
->> pulse on the reset GPIO line which the hub may either not recognize, or worse, may
->> make the hub latch up.
-> 
-> The hub "usb424,2514" is not part of this series,
+On Sun, 3 Nov 2024 at 05:50, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Avoid a build failure when building with CONFIG_API=3Dy, CONFIG_EXAMPLES=
+=3Dy:
+>
+>     lib/vsprintf.c:312:14: warning:
+>     =E2=80=98device_path_string=E2=80=99 defined but not used [-Wunused-f=
+unction]
+>      312 | static char *device_path_string(char *buf, char *end, void *dp=
+, int field_width,
+>          |              ^~~~~~~~~~~~~~~~~~
+>
+> Fixes: 64b5ba4d293a ("efi_loader: make device path to text protocol custo=
+mizable")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/vsprintf.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/lib/vsprintf.c b/lib/vsprintf.c
+> index e5802866632..c7340a047b2 100644
+> --- a/lib/vsprintf.c
+> +++ b/lib/vsprintf.c
+> @@ -308,7 +308,7 @@ static __maybe_unused char *string16(char *buf, char =
+*end, u16 *s,
+>         return buf;
+>  }
+>
+> -#if CONFIG_IS_ENABLED(EFI_DEVICE_PATH_TO_TEXT)
+> +#if CONFIG_IS_ENABLED(EFI_DEVICE_PATH_TO_TEXT) && !defined(API_BUILD)
+>  static char *device_path_string(char *buf, char *end, void *dp, int fiel=
+d_width,
+>                                 int precision, int flags)
+>  {
+> --
+> 2.45.2
+>
 
-That does not mean it is OK to break support for that chip by adding 
-more functionality into a driver.
-
-[...]
-
-> Am not sure about the power_on_delay_us / reset_us delay for this hub.
-I think it is in the table below Figure 5-1 of the public documentation 
-for this Microchip USB2514 hub. Page 36 .
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
