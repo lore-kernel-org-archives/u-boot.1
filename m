@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE622D41D46
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:49:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5B09D41D44
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:49:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAFBC893EE;
-	Tue, 12 Nov 2024 03:47:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 21E7F893F0;
+	Tue, 12 Nov 2024 03:47:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CiRnbBIQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ivpLaiO+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5598789390; Mon, 11 Nov 2024 22:10:25 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 5BEE089393; Mon, 11 Nov 2024 22:10:27 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23B0B89395
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 22:10:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B7E689308
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 22:10:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-20cd76c513cso41552075ad.3
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 13:10:23 -0800 (PST)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-20cb47387ceso50925455ad.1
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 13:10:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731359422; x=1731964222; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731359423; x=1731964223; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0sUezcTdv8RuYcH1Q5y+Mt47SGoWhsc1w4A5NAw1eM8=;
- b=CiRnbBIQ475l35ta0sixV+cLXTVGc2V8ZATZUe87a2zyo77+YRshBfgzCjSjH3zzVq
- Fb+iRLltH3eurbJ6tYrPoSS6xHIZfGriGODQtfvvW+ir+iy25smo5BAQfc1SL+9N7awj
- keaAH3Nkr2CSBXX3298B37RtJgrDpvFGWOAldMNqTv0m4rmd7VPSYPSBvdemyx9vbIqm
- 9gwnXAS35d+VvZSTyix2ZFDq09NG436gMkRJwQlfB37UrgT0DXnaa+xCe33Nh8SEhWNB
- vIS6B2rD7nXVyy1eaJP5luDKIBBjV4/M8YVwKnzkF56Qd3nA2IBs6nZAFwhhd4ap0/XD
- 9RlQ==
+ bh=e8oCQPlR7IZ2H4OxgGCrWLdLPTWFoK4/m7dblkApzJI=;
+ b=ivpLaiO+gAeaXlPf1Elfm54mxTAOUwrTwqWMvWl8+vSp5YYbLt2WVMRoInrtjl1ol5
+ oTQm80/mhw74+mi1HznoQV0VVCvr4trbpeIZDoOiqEzjyWp0IgqsqR+aQbOtOOX0CVVx
+ GZVClTmg1QTAcc0i8EwcWFqP/G+fglVRDjGIOnFNgCKi+JW3D0oRyHv6Ry1/KXtyyAul
+ QhcGEv5w7HxrGNUUs40bsfHSOMnsW2UWpuRy+ucCeKaDbhKUXtAq4m9FkHP94bcbhC5o
+ axWsxtGRfcNS0MBTOmgsxaVHtM4HTaAO8asgnw21c/n8oqNNM6Vo/hutfPcKI5EfKPQn
+ N/Rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731359422; x=1731964222;
+ d=1e100.net; s=20230601; t=1731359423; x=1731964223;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0sUezcTdv8RuYcH1Q5y+Mt47SGoWhsc1w4A5NAw1eM8=;
- b=iQIfNHuyV2z4LI85OI42iUgkcmkeO80/aI5Lp/u7VjxBViIE6OlFCHZylxv0xKrwb3
- zAFZoTyYpVrbcqSqrogml4BYMzx4CslzwUp7JAE2hd4jgY3D7N8FNh9Gw5m3b8TYx1a3
- S6LF47etw0ZqJhe5tBirpZwHuXLiAQVcYiMIMIXWmn21eI63TBE68bEv3a1U2TES4Io7
- +RA9fJ5QPe22DZPo33SChrxK98B+CZytKMsvwvhxPCyImvqtbucxFFMYlZK/SeeC83cm
- ALKLL9gEJTkbvGFeByNvHzpSRG2PzujKo6ZZVTzmyRFTlgn/fDYn8ZOnH77C+ZGP/Sy8
- HNcg==
-X-Gm-Message-State: AOJu0YwdKn/1NmayG62g2ijpEq6E0VpU42JZ2hpnujsryacLxgOg0in2
- FKwzfM5R2b2245VbY8429ntFhYPdIuZYcA4alet5DbUVevsHTblWmahxaenZ
-X-Google-Smtp-Source: AGHT+IE+eY+ivxmJdHQiqnpp1A/AdSgsKb5ImvNklaqYldLItdvYmQUeW9sfJG4DUYy6/QaX/wGD9A==
-X-Received: by 2002:a17:902:c403:b0:20c:5cdd:a91 with SMTP id
- d9443c01a7336-211ab9c4e94mr1612125ad.41.1731359421650; 
- Mon, 11 Nov 2024 13:10:21 -0800 (PST)
+ bh=e8oCQPlR7IZ2H4OxgGCrWLdLPTWFoK4/m7dblkApzJI=;
+ b=nvWmdH2ijAfaksHxRhuWt9SfxzkgOu+YHJG7Q41FDQxgR8VZ9RgLq1Trr2crvCc65H
+ BqEt1x/cXie0rxJk0oAd2tK1TRO7MY+n9OG8b8IYTfolIgX9rlkr8ow2rK3jIU0oqASK
+ dQw3fGXBc3VC25W59IJSRWZfsNvnC2gjXn8IjZWbBp+rTY2UcvAuBUrxWAx8q7v/U0x6
+ bWfSNr8Wey5OVHkgIsEg5enp2dUqseYDQ+AzLpd2o09Mf2q5Uoev2fCa0ZI9Ekm6I9s5
+ jKmd9xdH3yfFsg/sFQJ1Hzs71muNAYpLci3zO/ziwueFynul/GaN3KveqxrN2yYGF5E0
+ 6c1A==
+X-Gm-Message-State: AOJu0YxfADRm5IARoIUlVNPZgL6yvAcbDm/zmq+ttbdBtUQC8oe9wEfh
+ 2kd0JNvcc3IvOwyKcoKuUmtFjf/uid2vgXsapGI0VVm1yCMx5Ar2iFhDhlJS
+X-Google-Smtp-Source: AGHT+IH9ZX/e7Imz01KcMl9IragSPr0EdNPv9HWU3S8+FgM6JNqGQo2PpjzZ1T3IiYKnzPU+neJPYQ==
+X-Received: by 2002:a17:903:2b08:b0:20c:f292:3a21 with SMTP id
+ d9443c01a7336-21183507b88mr189589315ad.15.1731359423580; 
+ Mon, 11 Nov 2024 13:10:23 -0800 (PST)
 Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21177dc9e25sm80031165ad.27.2024.11.11.13.10.20
+ d9443c01a7336-21177dc9e25sm80031165ad.27.2024.11.11.13.10.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Nov 2024 13:10:21 -0800 (PST)
+ Mon, 11 Nov 2024 13:10:23 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v3 08/15] efi_loader: device_path: add support for HTTP device
- path
-Date: Mon, 11 Nov 2024 18:09:52 -0300
-Message-ID: <20241111210959.560738-9-adrianox@gmail.com>
+Subject: [PATCH v3 09/15] efi_loader: net: set EFI bootdevice device path to
+ HTTP when loaded from wget
+Date: Mon, 11 Nov 2024 18:09:53 -0300
+Message-ID: <20241111210959.560738-10-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241111210959.560738-1-adrianox@gmail.com>
 References: <20241111210959.560738-1-adrianox@gmail.com>
@@ -94,98 +94,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add efi_dp_from_http to form a device path from HTTP. The
-device path is the concatenation of the device path returned
-by efi_dp_from_ipv4 together with an URI node and an END node.
+Set the device path of the efi boot device to an HTTP device path
+(as formed by efi_dp_from_http) when the next boot stage is loaded
+using wget (i.e., when wget is used with wget_info.set_bootdev=1).
 
 Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 ---
 
-Changes in v3:
-- Moved argument checks in efi_dp_from_http to the beginning of the function
+(no changes since v2)
 
- include/efi_loader.h             |  1 +
- lib/efi_loader/efi_device_path.c | 55 ++++++++++++++++++++++++++++++++
- 2 files changed, 56 insertions(+)
+ include/efi_loader.h             |  6 ++++++
+ lib/efi_loader/efi_device_path.c |  2 +-
+ lib/efi_loader/efi_net.c         | 22 +++++++++++++++++++++-
+ net/lwip/wget.c                  |  1 +
+ net/wget.c                       |  1 +
+ 5 files changed, 30 insertions(+), 2 deletions(-)
 
 diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 612bc42816..96b204dfc3 100644
+index 96b204dfc3..f49f8e6be0 100644
 --- a/include/efi_loader.h
 +++ b/include/efi_loader.h
-@@ -872,6 +872,7 @@ struct efi_device_path *efi_dp_part_node(struct blk_desc *desc, int part);
- struct efi_device_path *efi_dp_from_file(const struct efi_device_path *dp,
- 					 const char *path);
- struct efi_device_path *efi_dp_from_eth(void);
-+struct efi_device_path *efi_dp_from_http(const char *server);
- struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
- 					uint64_t start_address,
- 					size_t size);
+@@ -126,6 +126,10 @@ static inline void efi_set_bootdev(const char *dev, const char *devnr,
+ #endif
+ 
+ #if CONFIG_IS_ENABLED(NETDEVICES) && CONFIG_IS_ENABLED(EFI_LOADER)
++/* Call this to update the current device path of the efi net device */
++void efi_net_set_dp(const char *dev, const char *server);
++/* Call this to get the current device path of the efi net device */
++void efi_net_get_dp(void **dp);
+ void efi_net_get_addr(struct efi_ipv4_address *ip,
+ 		      struct efi_ipv4_address *mask,
+ 		      struct efi_ipv4_address *gw);
+@@ -133,6 +137,8 @@ void efi_net_set_addr(struct efi_ipv4_address *ip,
+ 		      struct efi_ipv4_address *mask,
+ 		      struct efi_ipv4_address *gw);
+ #else
++static inline void efi_net_set_dp(const char *dev, const char *server) { }
++static inline void efi_net_get_dp(void **dp) { }
+ static inline void efi_net_get_addr(struct efi_ipv4_address *ip,
+ 				     struct efi_ipv4_address *mask,
+ 				     struct efi_ipv4_address *gw) { }
 diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index 82a45da1fa..158f08b9e5 100644
+index 158f08b9e5..afb4abc3ff 100644
 --- a/lib/efi_loader/efi_device_path.c
 +++ b/lib/efi_loader/efi_device_path.c
-@@ -1012,6 +1012,61 @@ struct efi_device_path *efi_dp_from_ipv4(struct efi_ipv4_address *ip,
- 	return dp2;
+@@ -1168,7 +1168,7 @@ efi_status_t efi_dp_from_name(const char *dev, const char *devnr,
+ 		dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
+ 				     (uintptr_t)image_addr, image_size);
+ 	} else if (IS_ENABLED(CONFIG_NETDEVICES) && !strcmp(dev, "Net")) {
+-		dp = efi_dp_from_eth();
++		efi_net_get_dp((void **)&dp);
+ 	} else if (!strcmp(dev, "Uart")) {
+ 		dp = efi_dp_from_uart();
+ 	} else {
+diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+index dd84b3f18d..d4570d4d7c 100644
+--- a/lib/efi_loader/efi_net.c
++++ b/lib/efi_loader/efi_net.c
+@@ -16,6 +16,7 @@
+  */
+ 
+ #include <efi_loader.h>
++#include <dm.h>
+ #include <malloc.h>
+ #include <vsprintf.h>
+ #include <net.h>
+@@ -31,6 +32,7 @@ static size_t *receive_lengths;
+ static int rx_packet_idx;
+ static int rx_packet_num;
+ static struct efi_net_obj *netobj;
++static struct efi_device_path *net_dp;
+ 
+ /*
+  * The notification function of this event is called in every timer cycle
+@@ -902,8 +904,10 @@ efi_status_t efi_net_register(void)
+ 			     &netobj->net);
+ 	if (r != EFI_SUCCESS)
+ 		goto failure_to_add_protocol;
++	if (!net_dp)
++		efi_net_set_dp("Net", NULL);
+ 	r = efi_add_protocol(&netobj->header, &efi_guid_device_path,
+-			     efi_dp_from_eth());
++			     net_dp);
+ 	if (r != EFI_SUCCESS)
+ 		goto failure_to_add_protocol;
+ 	r = efi_add_protocol(&netobj->header, &efi_pxe_base_code_protocol_guid,
+@@ -999,6 +1003,22 @@ out_of_resources:
+ 	return EFI_OUT_OF_RESOURCES;
  }
  
-+struct efi_device_path *efi_dp_from_http(const char *server)
++void efi_net_set_dp(const char *dev, const char *server)
 +{
-+	struct efi_device_path *dp1, *dp2;
-+	struct efi_device_path_uri *uridp;
-+	efi_uintn_t uridp_len;
-+	char *pos;
-+	char tmp[128];
-+	struct efi_ipv4_address ip;
-+	struct efi_ipv4_address mask;
-+
-+	if ((server && strlen("http://") + strlen(server) + 1  > 128) ||
-+	    (!server && IS_ENABLED(CONFIG_NET_LWIP)))
-+		return NULL;
-+
-+	efi_net_get_addr(&ip, &mask, NULL);
-+
-+	dp1 = efi_dp_from_ipv4(&ip, &mask, NULL);
-+
-+	strcpy(tmp, "http://");
-+
-+#if IS_ENABLED(CONFIG_NET_LWIP)
-+	if (server) {
-+		memcpy(tmp + strlen("http://"), server, strlen(server) + 1);
-+	}
-+#else
-+	if (server) {
-+		memcpy(tmp + strlen("http://"), server, strlen(server) + 1);
-+	} else {
-+		ip_to_string(net_server_ip, tmp + strlen("http://"));
-+	}
-+#endif
-+
-+	uridp_len = sizeof(struct efi_device_path) + strlen(tmp) + 1;
-+	uridp = efi_alloc(uridp_len + sizeof(END));
-+	if (!uridp) {
-+		log_err("Out of memory\n");
-+		return NULL;
-+	}
-+	uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
-+	uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
-+	uridp->dp.length = uridp_len;
-+	debug("device path: setting uri device path to %s\n", tmp);
-+	memcpy(uridp->uri, tmp, strlen(tmp) + 1);
-+
-+	pos = (char *)uridp + uridp_len;
-+	memcpy(pos, &END, sizeof(END));
-+
-+	dp2 = efi_dp_concat(dp1, (const struct efi_device_path *)uridp, 0);
-+
-+	efi_free_pool(uridp);
-+	efi_free_pool(dp1);
-+
-+	return dp2;
++	if (!strcmp(dev, "Net"))
++		net_dp = efi_dp_from_eth();
++	else if (!strcmp(dev, "Http"))
++		net_dp = efi_dp_from_http(server);
 +}
 +
- /* Construct a device-path for memory-mapped image */
- struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
- 					uint64_t start_address,
++void efi_net_get_dp(void **dp)
++{
++	if (!net_dp)
++		efi_net_set_dp("Net", NULL);
++	if (dp && net_dp)
++		*dp = efi_dp_dup(net_dp);
++}
++
+ void efi_net_get_addr(struct efi_ipv4_address *ip,
+ 		      struct efi_ipv4_address *mask,
+ 		      struct efi_ipv4_address *gw)
+diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+index 53c3b169e0..5c44e324be 100644
+--- a/net/lwip/wget.c
++++ b/net/lwip/wget.c
+@@ -217,6 +217,7 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
+ 	print_size(rx_content_len / elapsed * 1000, "/s)\n");
+ 	printf("Bytes transferred = %lu (%lx hex)\n", ctx->size, ctx->size);
+ 	if (wget_info->set_bootdev) {
++		efi_net_set_dp("Http", ctx->server_name);
+ 		efi_set_bootdev("Net", "", ctx->path, map_sysmem(ctx->saved_daddr, 0),
+ 				rx_content_len);
+ 	}
+diff --git a/net/wget.c b/net/wget.c
+index 36158e0a9c..676d4db759 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -442,6 +442,7 @@ static void wget_handler(uchar *pkt, u16 dport,
+ 		net_set_state(wget_loop_state);
+ 		wget_info->file_size = net_boot_file_size;
+ 		if (wget_info->method == WGET_HTTP_METHOD_GET && wget_info->set_bootdev) {
++			efi_net_set_dp("Http", NULL);
+ 			efi_set_bootdev("Net", "", image_url,
+ 					map_sysmem(image_load_addr, 0),
+ 					net_boot_file_size);
 -- 
 2.43.0
 
