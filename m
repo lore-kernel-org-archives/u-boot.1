@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA21D2E9EB
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 13:24:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A2BD2E9EC
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 13:25:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A84A89003;
-	Mon, 11 Nov 2024 14:24:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 67B7F8917A;
+	Mon, 11 Nov 2024 14:25:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q3qrm4rH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uIIwflK0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CB0D8904A; Mon, 11 Nov 2024 14:24:52 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 253168917A; Mon, 11 Nov 2024 14:24:59 +0100 (CET)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2137988EBB
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 14:24:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDE4F88EBB
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 14:24:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3e60fca5350so2595617b6e.2
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 05:24:50 -0800 (PST)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7b13bf566c0so277413385a.3
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 05:24:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731331489; x=1731936289; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=T+7GRuScpdC1APNwfIHu+0MFZW0x3AcOmcgL1KD553U=;
- b=q3qrm4rH5qPdk85qlsF4j7fGQEB7WO8+eIOXlj7zyZCxStIlKKWGjszKgGDw2Z7Pm/
- GIK61dCgTmJM+Xwvgig2zb8e2ZYaX4WPFV1QH6bJ4akne9eef7sOXL5zwrg3FWbd9cpZ
- KPzEDAV4tzlw84JIAhJpo8mKOMp+pOcVoPOs4=
+ d=konsulko.com; s=google; t=1731331495; x=1731936295; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=13RF9jGa1IfLJCFg7WqZ2Yn30yIkjWqpwtqGVTJVExY=;
+ b=uIIwflK0EyzuIlHeZhG5e+ayYH64HSYCgGdSCiAmY0f84LX7VaUUsXsbUgFA+Y9/+X
+ 3gADx3NvIh40kgDGrAlW715tBKlTQLWXkt/juaEfXolRxLg0EICck43uFO31yARgr6zG
+ cqnB4sMvxx4o8E8w9tN8rUFSM+A5NpD1Q/jP8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731331489; x=1731936289;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=T+7GRuScpdC1APNwfIHu+0MFZW0x3AcOmcgL1KD553U=;
- b=BH94JmG4eXXutXt4LoilNG6UuxnpDdsOMmMSRwIUfJYRefwNAMMGOMXv3sls1aJ2SS
- Xyry7haJR23rWerWQawN0iZbV5aSHpbAXlmdMRScysp5IY17PmTkCAQ+XGG3hHBJ8YtT
- R6FwOooLTdrHOH/7PLi3tgy+cdm7Gt22gWcXBkw5CN1vapZAwct9rNrBy4FObCdmBOcj
- 5V0m60vbxlpDCxg6O1eWLkLz6AWq3imk+Pf7eO93YYCRumM+vWYZ9XQct9K9dg4Z+EW1
- iFS3+p2dwOUFdi430XJLFFqr6ACWYAaDSlQTlLMMh4riBCgaaSTCnDtETb6B3vsVh0cC
- SNdg==
-X-Gm-Message-State: AOJu0YxIlfOvynZm8aP6eg4hJDqQDx9d6YMnfSl7vBEUfSyW3lqJ2fYD
- jnjKf/pAdvl8eEtVPetgLTDZ6WUKzSM4x8rXAjwZXmdf/JRgYKl0fyT7ZVVwpQ4=
-X-Google-Smtp-Source: AGHT+IH+jE6Hj6FRHROK4MDGEuIZQPKPe4OtmGC6MzGKZEqBsW+IBNByl9MfxerttWxkTrHuEsOSBQ==
-X-Received: by 2002:a05:6808:1701:b0:3e6:3eff:30bb with SMTP id
- 5614622812f47-3e79468f7e8mr10888092b6e.9.1731331488880; 
- Mon, 11 Nov 2024 05:24:48 -0800 (PST)
-Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d396630e81sm59512166d6.104.2024.11.11.05.24.46
+ d=1e100.net; s=20230601; t=1731331495; x=1731936295;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=13RF9jGa1IfLJCFg7WqZ2Yn30yIkjWqpwtqGVTJVExY=;
+ b=N2fpUQw5zFUfZzLFU3vwTmBWIQNbiM58UxHM1vToZnnz2+11As/+bnAxKzUx63egqT
+ fNiK8wK1ddmXfCxQJ4lOw2CqR2cnucducLqDTbW+SW2PAMhGBUb44B1T1KGk28rVhIIm
+ zKhVlj3TPKAHRFpzkKPfz41J/gAfwYMI1YXjhth5F2UXXNjJi1do0ego3oJEWnmlpeun
+ YcosPCREtyHLUlHzn6YZIe8FllqI8UWIQlsZeeTWI3QcIbmDi8r4UTCvHUAOiw5rlRfA
+ ihZRAYcj/EQzttNTBmzOufyBF0FDco3cHOvbC6p1YA9SV7KEMWyIiXO0DIt+8h7yKurN
+ C4mQ==
+X-Gm-Message-State: AOJu0YxxDXQSdFZ/xGRsUPDYlcuL38sW4b6viaHtIh+NMUhvGb5h0OKA
+ TdY8pf39/QSzNXUwrmSAp1CCPvnsZbsJEaFDuQP18UWuRjOHwJu3x/htTkUgSadatIEbNWXX+f3
+ mUHk=
+X-Google-Smtp-Source: AGHT+IEz3teUTkV/pXBdeCGYSeLRrF/hfC/R4zbFyPIV04HKNUa/4oIku4XS8K+vcntb18azV2kGyA==
+X-Received: by 2002:a05:620a:4108:b0:7b1:52a0:48eb with SMTP id
+ af79cd13be357-7b331de2857mr1724093385a.22.1731331495571; 
+ Mon, 11 Nov 2024 05:24:55 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b32acae433sm493799285a.71.2024.11.11.05.24.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Nov 2024 05:24:48 -0800 (PST)
+ Mon, 11 Nov 2024 05:24:54 -0800 (PST)
+Date: Mon, 11 Nov 2024 07:24:52 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
- William Zhang <william.zhang@broadcom.com>
-In-Reply-To: <20241102235754.74661-1-marek.vasut+renesas@mailbox.org>
-References: <20241102235754.74661-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] mtd: spi-nor: Fix integer overflow in stacked memories
- support
-Message-Id: <173133148676.214395.14221833706182053510.b4-ty@konsulko.com>
-Date: Mon, 11 Nov 2024 07:24:46 -0600
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com
+Subject: Re: [GIT PULL] u-boot-riscv/master
+Message-ID: <20241111132452.GR3600562@bill-the-cat>
+References: <ZytdFmEgu6DgeRRf@swlinux02>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="iFrbLVYWmjzN1SOM"
+Content-Disposition: inline
+In-Reply-To: <ZytdFmEgu6DgeRRf@swlinux02>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,23 +90,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 03 Nov 2024 00:57:31 +0100, Marek Vasut wrote:
 
-> The 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
-> adds new SPI bus flags, but also introduces a completely new set of
-> SPI bus flags in another location. The existing flags field is type
-> u8, while the new separate flags are BIT(8) and higher. Use of those
-> new flags triggers integer overflow.
-> 
-> Drop the newly introduced flags which were never used anywhere in the
-> code. Move the one remaining flag which was used in the correct place
-> and change it from BIT(8) to BIT(6) so it fits the u8 flags.
-> 
-> [...]
+--iFrbLVYWmjzN1SOM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Nov 06, 2024 at 08:12:06PM +0800, Leo Liang wrote:
+
+> Hi Tom,
+>=20
+> The following changes since commit 56accc56b9aab87ef4809ccc588e1257969cd2=
+71:
+>=20
+>   bios_emulator: fix first argument of pci_{read,write}_config_* function=
+ calls (2024-11-04 18:01:58 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
+>=20
+> for you to fetch changes up to d5f5e778183d5908caa2954b9438614252b806dd:
+>=20
+>   riscv: Introduce configuration for 64bit version Microblaze V (2024-11-=
+06 19:42:54 +0800)
+>=20
+> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
+-riscv/-/pipelines/23239
 
 Applied to u-boot/master, thanks!
 
--- 
+--=20
 Tom
 
+--iFrbLVYWmjzN1SOM
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcyBaAACgkQFHw5/5Y0
+tyxtSwwAg52ndI71AkkT7Uuh47JWwrMOAEqh5c1XuKjohiDIfVJt1Q28a/65W0Us
+eiCUC+OvZh2nvnZG9Ngm7UbgTts6kYCPLW4t+d1D/lzHagCGbJ0h3ENH7+3ovOL7
+kz7TOR+Nz/HCVZyWIN4tInmuiYjq2W+n5hMVuof9kr/jg1wSD3zwEORy7MktwFrh
+7bnEI/SXz7QtARbl4w9jZWBLaV/H0Pf0sD55y0kghtKZaIBbhdkEugv/e+ze2oPh
+JFe9VMgkInbLAgFWGoCOJ/rgFyvctiG/dNTVTuF7l6E5hGburIkUCvYPYm6DMeWg
+dw1jjp8DUT3z0bVBTxF4U+awayFYiG7XxzKV5YmGzFXunkU5hZb8ZeJSDT+vKFnd
+Vd6r2/Te5TrjwH0YCq/EaIftxFBsx9vQnIoesUUhKhxEhE/bMcLwvgWdUMfNV1rq
+7lYtqsoYMC9m9yLglQwgpSuDeUF+Q74wXrlD619bGMkqMB1R9a7TjLzfHaS/zosY
+VGScDINe
+=91MH
+-----END PGP SIGNATURE-----
+
+--iFrbLVYWmjzN1SOM--
