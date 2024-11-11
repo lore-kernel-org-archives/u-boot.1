@@ -4,64 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43D51D12D72
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 06:00:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED3B0D12D72
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 06:03:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C12ED891AC;
-	Mon, 11 Nov 2024 07:00:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7323889171;
+	Mon, 11 Nov 2024 07:03:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731304822;
-	bh=NxbyTWfzDFVlIBTxQJXMjVT0AIxTy0AW2s83UFkZSP0=;
+	s=phobos-20191101; t=1731305023;
+	bh=+I4/1YPQY48FMx2BvNztZYwcbbM1VH1Dx+vKgQLXU6M=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=trb3IYuPdnPa63Q+7/mKKTF2D1Z7LwMYZbQCiltPQ7jrf8In13VbpGrUCj+jzG93r
-	 85zcCsgaBfjomRZJnP0ppTdHZvzytSOKaRiYHHR5C+kDu3glmqg1SBWSQUTKHEToDh
-	 NR2CykKr44RDPQ3BFEExXM8f+CaeL5FvblEJZdIdLroc6AnhmeQeDpLgbUQkZSpadM
-	 VZgCc/cmZDpq2Di7PQmW/HKccLrcEE1JSyTIBkXJE+JKgKRb/Gv9J+v6WBl+0JT3M1
-	 PIU/OBIKdBcp+ggldSMFCBTsGOvkSip3+AiujTZ14sUTonL5uME8V45f12o34yPaWk
-	 RtMpw5JS+NfYg==
+	b=sBDG38eYhfP6nYD8mNk+GM+HzPXMozgMLhUDcdDr/aiZ0Yw6RbRL/Eyvn70XM9dr7
+	 J2XsEfxSwcoCm6rrRu16iWP0bxD2tEZAA6vht0WN6wJkU1qfimPsNoTyQAYw8uGgPs
+	 8soYdFwQfCr6PRl4gS9f985xW+XYne+hNtEddwdYkTbfUcOhsKgho7HIrrfPakJJPH
+	 0gsehjQZWBnMEUb47P/AFVq95Pvjrt85cYhlYbR8sBjg/HIloarL85d7ur0Gys89Kw
+	 alOkKbo+Fvg4j+rUKTmsoD2Ms+dujlq4O+BMzN9TNLvvqseGLisuhVSDorMzp6m/Al
+	 CA2zfjclpCQGA==
 Received: from [192.168.1.107] (87-97-106-70.pool.digikabel.hu [87.97.106.70])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id EC6A58911D;
- Mon, 11 Nov 2024 07:00:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id A2EC9890F8;
+ Mon, 11 Nov 2024 07:03:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1731304821;
- bh=NxbyTWfzDFVlIBTxQJXMjVT0AIxTy0AW2s83UFkZSP0=;
+ s=phobos-20191101; t=1731305022;
+ bh=+I4/1YPQY48FMx2BvNztZYwcbbM1VH1Dx+vKgQLXU6M=;
  h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=UnNpVL8Zi0UJOBYyc52X8Wl9r9TIMK0VedJNvi4h+Bdpr1HC4qY56eQLtDZKNxUce
- jsGfl54LTQKJJBpSKxlNfXVWQMm2EwsCE+tGz7yOqsU3/a3fPJVFtNKHZj122anOab
- zZbZ9NwRBXzAvgefoNrMY1iP0APUT1tXgJqT7CoWk8AuOq+HjWYLFZ6YXBsbjGcFEq
- fcQGtZWYrJKsva6c4KOiQxxe5A5K59tZwTCIbfFBqwSCDwEa225niOYpMZK7uLf04M
- zyfS3f/lp+0oH8mKHe6VC+SHq1uwNAu3oK4nAMcb/3i0EFLTcFtyzezECRqPpPgn+s
- y4CP29SqECdnA==
-Message-ID: <3e484e5f-07c3-7317-370f-1ff77b674beb@denx.de>
-Date: Mon, 11 Nov 2024 06:57:44 +0100
+ b=kG610w7WR3Vqho66qaLYWN+U/WiU5zOR71NWuzBoJus4ndwZJPgNeHnzV8EF7RpT5
+ 1nbmUecwy3tw8w2V/RQLDbZTagXSfwA4NDXn6V1OICznzyQ8L77nomUF1zQoZoSL+W
+ unks5PD2vVuuqpGXV+jxhjMiICYwhe8VplbGaFV56C5o0dfo3aYbHKx00DzNWsHczn
+ mGz6FN3Y/QDnWMlR0u3IPVKSgiGqEqz7ysuF7aUDZFi4Ic1069ldzM27s44/UNH/Vu
+ FZTjFyKxzqSIgdnMjRZyBOrPNMXSWm6rqKLDYdpr93BLjYIpHcqrmh3B0vmjjlRwMc
+ TXtY3AziRBgaQ==
+Message-ID: <d0653a79-0299-6549-624d-43e48ee35ff5@denx.de>
+Date: Mon, 11 Nov 2024 07:01:10 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v1 17/22] siemens: capricorn: add HW version information
- to boot log
+Subject: Re: [PATCH v1 16/22] siemens: capricorn: board.c fixes
 Content-Language: en-US
 To: Fabio Estevam <festevam@gmail.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Enrico Leto <enrico.leto@siemens.com>,
  Walter Schweizer <walter.schweizer@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Alessandro Zini <alessandro.zini@siemens.com>,
- Anatolij Gustschin <agust@denx.de>, Michal Simek <michal.simek@amd.com>,
- Nishanth Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
+ Anatolij Gustschin <agust@denx.de>, =?UTF-8?Q?Marek_Beh=c3=ban?=
+ <kabel@kernel.org>, Michal Simek <michal.simek@amd.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 References: <20241108052143.26874-1-hs@denx.de>
- <20241108052143.26874-18-hs@denx.de>
- <CAOMZO5CaibRaKg6N+70B3BmzsN3oJcC1-4okpbV6oU1KA7WWeA@mail.gmail.com>
+ <20241108052143.26874-17-hs@denx.de>
+ <CAOMZO5AY4pD124FV_GSRD9eLNzNdZztLj+jVudHtG2+UgPVq+g@mail.gmail.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <CAOMZO5CaibRaKg6N+70B3BmzsN3oJcC1-4okpbV6oU1KA7WWeA@mail.gmail.com>
+In-Reply-To: <CAOMZO5AY4pD124FV_GSRD9eLNzNdZztLj+jVudHtG2+UgPVq+g@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,29 +79,17 @@ X-Virus-Status: Clean
 
 Hello Fabio,
 
-On 09.11.24 13:09, Fabio Estevam wrote:
-> On Fri, Nov 8, 2024 at 2:24 AM Heiko Schocher <hs@denx.de> wrote:
->>
->> Add the HW version read directly from EEPROM.
->>
->> EEPROM chip data structure is now in a .h file common to draco
->> and capricorn.
->>
->> Therefore move out the definitions in drace board to siemens
+On 09.11.24 17:38, Fabio Estevam wrote:
+> Hi Heiko,
 > 
-> s/drace/draco
+> Please use a more descriptive Subject line.
 > 
->> common place.
->>
->> Signed-off-by: Alessandro Zini <alessandro.zini@siemens.com>
->> Signed-off-by: Heiko Schocher <hs@denx.de>
+> "board.c fixes" is not meaningful.
 > 
-> It's not clear to me who the author of this patch is. If it is
-> Alessandro, then a From line with his name is missing.
-> 
-> Please clarify.
 
-It is from Alessandro, I will add it in next version, thanks!
+Heh, indeed!
+
+Thanks!
 
 bye,
 Heiko
