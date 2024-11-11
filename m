@@ -4,79 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE689D12D7F
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 08:03:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82FDAD5E140
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 08:20:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78F6B892ED;
-	Mon, 11 Nov 2024 09:03:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id ABE4288D14;
+	Mon, 11 Nov 2024 09:20:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="C17y1Vpe";
+	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="fwJM6hqz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21B38892E8; Mon, 11 Nov 2024 09:03:47 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 9181588E17; Mon, 11 Nov 2024 09:20:29 +0100 (CET)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on20726.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::726])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1487E892E8
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 09:03:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9248188A0A
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 09:20:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1731312223; x=1731917023; i=xypron.glpk@gmx.de;
- bh=zkZOjBUSXl8hrux+tyojmrvUkQFmVjZtYbdSWWWPXmM=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=C17y1VpeHCfPSOWCscOgApb9BTBncSLH1tq8vktWt1OfUWb29PNnwhMtao2XorrG
- rW4GpmRm2T5Q+d0JZeVfsyKz1kr+K5G0z4hxLTkPSJxBjHr6qxkwBix+t4y11qA3m
- kTiniFOqtFHbHQFs5oQiO4zE72UhBi2+Isl4biD3wOX33muX44ya1BTxiTk4yGa9w
- dLGoy3AUgTcotup7if16CRZ2eTRyhWowLv08GpiUogHwpU9/I9jmsha+DRE3nLf1z
- G9H6/1UD3abAS26MFaSletrJSSLArBq1vKZnzMtGD8NhMg2flkaldzZkGakaJKQ1S
- xFLuwHwL0eHT80Lj8w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MO9z7-1tPZnK28U5-00Sc5S; Mon, 11
- Nov 2024 09:03:43 +0100
-Message-ID: <22d941ba-3452-4e10-ae59-642786f3d92c@gmx.de>
-Date: Mon, 11 Nov 2024 09:03:42 +0100
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Dp4/sbQsQ4/qS24kzzMB8EPg1fCmiz/MKM3Oce/4Iwpakx3sSF5Fh8ioE4qHDaGT9l79xo0lHBh9ca6Xdx4mf9XuTtdhE3bK5++waVV5dmzO5BJI7OYQs5LcMQgBzpfNf1OS8S70NIMTXnnnTRDOnzjVSCbslnsikVTrYb5f3RvnPHTzhYmWUUzKBc9LOVKfckspYZcR3HAer6dxyC8MYwWnHLCXMUyQMd9RkJd1RtBYhe8aorc60lMdB4l2zmz1o96d00H0sIp+XDOJ8i3dsUnDQJZ8P4wcPKEvdwPxfMrfKWC1OJoHHvZBLVq65A25IFGnq7uHP5aCr30lwhJIZA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=v605TF3g/GrzO1i1g1ijObuZmxBaqRPIFQ9bZvkYQ4I=;
+ b=n1XhLMRWrLS82TlO3s3UC1VjmMRR9DwrKYFqIrVcBt1jkxxR4mYeeBPFQHwaXl1jBDZhBlrz6kRJrmHmiL0otWjNJu1PpV18CgS5cZqN7WSHI2OWI6z3OPAORLH9dPSvjjANLfmCyglUTslcjhrpKqUKQsMykgVxdN944mQR0hrzZzj0g5jhuS7cR5/ShUoOhv47dsgLLjT5IHmNGUlGr63M6pZYcEA4RCtD8Ty7L7rCwGZaeA6VF43KkaQ6whv9/OkVXPttjsE7OvChY5usA8Hp9pt20KafRcABlgshyJasox/N3F7N8f6p85VbrQ7b6KcJgLlsfaZw3VWnVHlACw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
+ dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
+ arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=phytecmesstechnikgmbh.onmicrosoft.com;
+ s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=v605TF3g/GrzO1i1g1ijObuZmxBaqRPIFQ9bZvkYQ4I=;
+ b=fwJM6hqz9KcMnvEF8xP5u0StmLD8+oxo5zQGqhosxK8ALGuLFkwwGWYVHFGz7I8GDVKDNTKIzh5PWSqZYY3bO6iEE2qkKYIuv8N0ku9MVid15IOybVAqRD+fPchET5/MzT3Y7RJhchl1nuReDw2pDHDiOXGCSKGOuee3BuNkMwc=
+Received: from DU2PR04CA0305.eurprd04.prod.outlook.com (2603:10a6:10:2b5::10)
+ by AS8P195MB1953.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:570::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.27; Mon, 11 Nov
+ 2024 08:20:24 +0000
+Received: from DU2PEPF00028D04.eurprd03.prod.outlook.com
+ (2603:10a6:10:2b5:cafe::70) by DU2PR04CA0305.outlook.office365.com
+ (2603:10a6:10:2b5::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.28 via Frontend
+ Transport; Mon, 11 Nov 2024 08:20:24 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ DU2PEPF00028D04.mail.protection.outlook.com (10.167.242.164) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8158.14 via Frontend Transport; Mon, 11 Nov 2024 08:20:24 +0000
+Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 11 Nov
+ 2024 09:20:23 +0100
+Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 11 Nov
+ 2024 09:20:22 +0100
+Message-ID: <dc39488f-31bf-4c4a-9214-37bc2b164463@phytec.de>
+Date: Mon, 11 Nov 2024 09:20:22 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] efi: add helper functions to insert pmem node for DT
- fixup
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>
-References: <20241025111411.165904-1-sughosh.ganu@linaro.org>
- <20241025111411.165904-5-sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 2/2] board: phytec: common: k3: Expose product infos to
+ Linux
+To: Daniel Schultz <d.schultz@phytec.de>, <trini@konsulko.com>,
+ <u-boot@lists.denx.de>
+CC: <d-gole@ti.com>, <upstream@lists.phytec.de>
+References: <20241108181914.3358114-1-d.schultz@phytec.de>
+ <20241108181914.3358114-2-d.schultz@phytec.de>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241025111411.165904-5-sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:apooT60+khVM6D6v7SrwS0yNkMdXfmgXRDY08MkuGk8VuL3rQx0
- oZlHWr7EjI6yOC+M+PJ4cFFZz6TWab6ElPM1hNmxWbbIL3+wnQe5KBsBlNL3kEWqc6L10T7
- fOC9dnLfXmQrgq+rCVQocU8PFTkTvRJ2Bz/wmOaa7Gvs3s+HCuhVJ4HuK6s4eTOeZGtqmtF
- d2pInIepU9DPPxhBQEwXA==
-UI-OutboundReport: notjunk:1;M01:P0:GLt9h8r5gXA=;7YvK+V/LTqfSN3PSlemiJV48g23
- bfgTC+g/sp+jfB2D6zm39IAEBcz6+8IQG4BiZYTfAESpND7Ql5ZeeJ67tXUFW2iArXVlzPUS0
- AQRZKmqJx0XHQEbxaS2b5xb22kxDxX51r7MC6WuPfGqOcOjtp1ebdeUVMU889cFeKVuUkAMJk
- RTAPc8boOctTPg18kN4+yiuYRO6/QcLduDu4tMusdgxT2JqRHHj4fFzR3HUZuB/eZGUMSuh2K
- tMWy18rWEfCD1VxC/ieHKxIj7XrnnUyuJ5vLMlYQRc/fmmjeMTALSHsY4ZQmQww29OmtbzVzb
- 3yuwFjiOkvOo8Qc8mIFbzi2qRTNF4Z2JvxT4p5uAZbLH3dhkH8cPHytQEPguIoPNnsCjoT65q
- +AHq47JAc1jwzDMTgXahUjUdv+bdre2zP8g8I4gt8J/hvRqfsKq7YoprQaz7gZGtAKZMedVYv
- aEJ9R8P1vnWbToVw03KKXg3Cqm2p3VB6gWIPwATbCQXcMwOdNoB9swEEQFEK5h4CoP/LvWzNM
- 4Xtd2f9730EWKRkssYPdtjgmzPlyj0y50UOLtQ41sb6yO/rBrZuX8xQRH2mgHS1ug973GlEco
- KPTRSJTkXJHBd6ffm94KFN8cAetTJMqV0J+bYzD7fhivUJ6lFpFQn+a7pohAV+pi8I1hqXOdh
- XvllsnlGmUeHPh5LAk3mpM9vHGwLnrhPURbtzm16OkNYtTtbQWpY7D+TRzxUnTmYo4z0OcPYB
- jhoqrO5FInvbOA3By+6cVu8tRa+mKaM3pgsoqYfVHw5yO2yrb0fogmOSIXrzWH+QjqabXLb/M
- l1OZBxIlNXaTNuLwSA0RpaMg==
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20241108181914.3358114-2-d.schultz@phytec.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D04:EE_|AS8P195MB1953:EE_
+X-MS-Office365-Filtering-Correlation-Id: c54cf296-f7de-4800-3d75-08dd0229b0e9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?d0dwcE5KZWgvQ3REMGxJRnNqUml4LzluYVN4MlozYkxKMXl5VmNNZG55QW1q?=
+ =?utf-8?B?OFR2YTRVTkV0b2Z6c2J2aDFmRkdhQm9BalArWTE3OEVjN2F4dTNmOVhnTW1T?=
+ =?utf-8?B?OGN3ZEduN1NuMklmRUpiUlJTRU56WWhuRVFjU2g5eUxFNndFUTlPSStuY0oz?=
+ =?utf-8?B?cEl6YU9vaFBQbG5SR2JhUzlaVXZxNmVDNnBJRUJIVWpGelVIdEFUbWFiN2dU?=
+ =?utf-8?B?V3RleEpJMjc1bytMQUZ4VDhPUTRpanhCeGRxSW5WZm1INHprWWI5eXFFUVZW?=
+ =?utf-8?B?eG5UbWZnTXVHaWMra04rb3JNbWRwNkpkTGg2WWllUm4vRHBoOEZpclRzY2pn?=
+ =?utf-8?B?UElkVGVXMkZDdWRoMWUyMStVa2ludmVpbFVOSzFWb1JhMStGMWRkQ2x1U2pw?=
+ =?utf-8?B?NU1PT1FxVmFBSmd6WTBEWUNVUnpPOFZkbmJNM0hkTWZKdDJKOFNZQVlIRUxH?=
+ =?utf-8?B?eSs5TWl1a3RLWVh1WFdMVjNZOUZ6YU1jOWNUdVNBM1hjYzVRUWJoWDVzUHY1?=
+ =?utf-8?B?SFNOOWZ4anNHcXhxblppRXRuNk54a2NJZC9BZ3hhb2FqM0tuNmdrQ0pEeFkx?=
+ =?utf-8?B?WWN5MHBHT1k4dGF4ZHBud3RUdmx5cCt4RGo2T2FFN1FNQ1lNTU9oU25wNU50?=
+ =?utf-8?B?ZWkyZGdQMmZ3T3RKUDN4TkFJaWRsMXUwVlB0VmREdHA4Y2sxSll3Z2IwWnJK?=
+ =?utf-8?B?RlBUaDk1MHY0RFRETDdVVzNTTllReUZTZUhxWFU1a2VtV3VBeHZkbUcxd1Z3?=
+ =?utf-8?B?RTZBK3pUdk4xeEUycHcraHlDSCtqb0lPWThuWGJ2a25IOUtoNm05ckFFZmJw?=
+ =?utf-8?B?RUptRy9GU2Z3VTBBRndKNW5BL3pYWmNrd2JlOXNkdEVFcnA4MjJRWU9PdS9L?=
+ =?utf-8?B?U0VFZkZMWXhmRjYzOXVTNlYxN1djcm94S2kyeTFLdG5JYkd4ZkdRcVdldHdO?=
+ =?utf-8?B?Z2FHTGlQcXB5cXRTWEhJOFJCQXNvQlNZeEUwc09odVB6Q00xOG5IdnJuM3Ni?=
+ =?utf-8?B?M2VQSS9wR214WExBWUEyV25maUt0Ri95Mzl3MG9SSDRtQjVsUmVoOWRyZUVz?=
+ =?utf-8?B?MHM5UEJVb0FjL1g0czZxUldjT1hnQUpzUERIWnFnV3hnTVZqbWlOWW9TcS9Y?=
+ =?utf-8?B?dC9WSk9EL0JwS2lMOXc1bGFhWlNnL1ZtVFZhaWtvOFg5TTJJU3daQXJxV0JB?=
+ =?utf-8?B?Nk5ZMGpHa01VOHFZck0zeDFSSzZ0eW5MYXNSbTZIeFR2UGhHbEVkVnJhcG5S?=
+ =?utf-8?B?bUFaSmNtTkt1dVNWd1paY3RxSUF5ZjlsaE9pQ3I4Ymp4VzArV1QvWm5BYjIz?=
+ =?utf-8?B?OXFxeThKOFJqTHJQYTFWcGNYcEJmN3IrZUlDWmZHRkltSDA5Ly9jUGlmREpR?=
+ =?utf-8?B?Zmo4M0Z2SjVSV0dFcmZJWlhab2RkdmdPcDBQTzFNSW1kTXRqU2lQdXI5TnN5?=
+ =?utf-8?B?S0w1RTU0OVkxWG96eG1SN1A3NXhKVStwRzhlV1VyTWFZZm53c09LRGdIbVhp?=
+ =?utf-8?B?RzlQQ0g5M0Y5UzFHQzI5ZTFkVnhqVERrdmRQcXE4TmVCTGhoc0NnNmlXQUp3?=
+ =?utf-8?B?TmhJNmoycVZ5VTZYQVZrcDdkNkUycHp0dmdqejZ3MnFIMGVzbW1XdGdHc3NM?=
+ =?utf-8?B?WjdRUWYvNWRlaXJSeURqb081UXFoMDVaSWlucXRUbTN1dWRQRm9XaFBsUith?=
+ =?utf-8?B?MkhMbC9ZOStPZXZWRzM0L3JKYUtWVWROYXF5RlZPNGdQcTVqTjdlNXdDdlcr?=
+ =?utf-8?B?Sm5Bc0d1d1BuWnVGdG1YaXhyV3NER2lpbENzY09nbTZocldXU2IxYXhqeEVE?=
+ =?utf-8?B?WSszRXZKSUZIMjlzcUV0S3FVLzRQRkhVL1E1NGpqM3BrR3JIUjNwb2hFSzBh?=
+ =?utf-8?B?MzRjc2pQK044Q25pRXdyVW13Y3BVK2ZHTlZUYWtsaCtrS3c9PQ==?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2024 08:20:24.0843 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c54cf296-f7de-4800-3d75-08dd0229b0e9
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D04.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8P195MB1953
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,174 +161,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/25/24 13:14, Sughosh Ganu wrote:
-> The EFI HTTP boot puts the iso installer image at some location in
-> memory which needs to be reserved in the devicetree as persistent
-> memory (pmem). Add helper functions which add this pmem node when the
-> EFI_DT_FIXUP protocol's fixup callback is invoked.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+
+
+Am 08.11.24 um 19:19 schrieb Daniel Schultz:
+> Call 'phytec_ft_board_fixup' in the common K3 board code
+> to expose the product name and part number to Linux.
+> 
+> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
 > ---
->   boot/image-fdt.c             |  9 +++++++++
->   include/efi_loader.h         | 17 +++++++++++++++++
->   lib/efi_loader/efi_bootmgr.c | 21 +++++++++++++++++++++
->   lib/efi_loader/efi_helper.c  | 12 ++++++++++++
->   4 files changed, 59 insertions(+)
->
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> index 8eda521693..b39e81ad30 100644
-> --- a/boot/image-fdt.c
-> +++ b/boot/image-fdt.c
-> @@ -11,6 +11,7 @@
->   #include <command.h>
->   #include <fdt_support.h>
->   #include <fdtdec.h>
-> +#include <efi_loader.h>
->   #include <env.h>
->   #include <errno.h>
->   #include <image.h>
-> @@ -648,6 +649,14 @@ int image_setup_libfdt(struct bootm_headers *images=
-, void *blob, bool lmb)
->   	if (!ft_verify_fdt(blob))
->   		goto err;
->
-> +	if (CONFIG_IS_ENABLED(EFI_HTTP_BOOT)) {
-> +		fdt_ret =3D fdt_efi_pmem_setup(blob);
+>   board/phytec/common/k3/board.c | 14 ++++++++++++++
+>   1 file changed, 14 insertions(+)
+> 
+> diff --git a/board/phytec/common/k3/board.c b/board/phytec/common/k3/board.c
+> index 3d7e090ccaa..14a10f34e53 100644
+> --- a/board/phytec/common/k3/board.c
+> +++ b/board/phytec/common/k3/board.c
+> @@ -99,8 +99,22 @@ int board_late_init(void)
+>   #if IS_ENABLED(CONFIG_OF_LIBFDT) && IS_ENABLED(CONFIG_OF_BOARD_SETUP)
+>   int ft_board_setup(void *blob, struct bd_info *bd)
+>   {
+> +	struct phytec_eeprom_data data;
+> +	int ret;
+> +
+>   	fdt_copy_fixed_partitions(blob);
+>   
+> +	ret = phytec_eeprom_data_setup(&data, 0, EEPROM_ADDR);
+> +	if (ret || !data.valid)
+> +		return 0;
+> +
+> +	ret = phytec_ft_board_fixup(&data, blob, bd);
+> +	if (ret) {
+> +		pr_err("%s: Failed to add PHYTEC information to fdt.\n",
+> +		       __func__);
+> +		return 0;
 
-I can see no reason why pmem setup should depend on HTTP boot.
+This return is not needed. Other than that, the patch looks good to me.
 
-It should be possible to pass a memory block device to the kernel no
-matter how it was created.
+Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
 
-Best regards
-
-Heinrich
-
-> +		if (fdt_ret) {
-> +			printf("ERROR: HTTP boot pmem fixup failed\n");
-> +			goto err;
-> +		}
 > +	}
 > +
->   	/* after here we are using a livetree */
->   	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
->   		struct event_ft_fixup fixup;
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index d450e304c6..031de18746 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -748,6 +748,15 @@ bool efi_varname_is_load_option(u16 *var_name16, in=
-t *index);
->   efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
->   				    efi_guid_t *guid);
->
-> +/**
-> + * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
-> + *
-> + * @fdt:	Pointer to the devicetree
-> + *
-> + * Return:	0 on success, negative on failure
-> + */
-> +int fdt_efi_pmem_setup(void *fdt);
-> +
->   /**
->    * efi_size_in_pages() - convert size in bytes to size in pages
->    *
-> @@ -964,6 +973,14 @@ efi_status_t efi_set_load_options(efi_handle_t hand=
-le,
->   				  void *load_options);
->   efi_status_t efi_bootmgr_load(efi_handle_t *handle, void **load_option=
-s);
->
-> +/**
-> + * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
-> + *
-> + * @fdt:	Pointer to the DT blob
-> + * Return:	status code
-> + */
-> +efi_status_t efi_bootmgr_pmem_setup(void *fdt);
-> +
->   /**
->    * struct efi_image_regions - A list of memory regions
->    *
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index 16f75555f6..1d9246be61 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -41,6 +41,8 @@ struct uridp_context {
->   	efi_handle_t mem_handle;
->   };
->
-> +static struct uridp_context *uctx;
-> +
->   const efi_guid_t efi_guid_bootmenu_auto_generated =3D
->   		EFICONFIG_AUTO_GENERATED_ENTRY_GUID;
->
-> @@ -423,6 +425,7 @@ efi_status_t efi_bootmgr_release_uridp(struct uridp_=
-context *ctx)
->
->   	efi_free_pool(ctx->loaded_dp);
->   	free(ctx);
-> +	uctx =3D NULL;
->
->   	return ret =3D=3D EFI_SUCCESS ? ret2 : ret;
->   }
-> @@ -443,6 +446,23 @@ static void EFIAPI efi_bootmgr_http_return(struct e=
-fi_event *event,
->   	EFI_EXIT(ret);
->   }
->
-> +/**
-> + * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
-> + *
-> + * @fdt:	Pointer to the DT blob
-> + * Return:	status code
-> + */
-> +efi_status_t efi_bootmgr_pmem_setup(void *fdt)
-> +{
-> +	if (!uctx) {
-> +		log_warning("No EFI HTTP boot context found\n");
-> +		return EFI_SUCCESS;
-> +	}
-> +
-> +	return !fdt_fixup_pmem_region(fdt, uctx->image_addr, uctx->image_size)=
- ?
-> +		EFI_SUCCESS : EFI_INVALID_PARAMETER;
-> +}
-> +
->   /**
->    * try_load_from_uri_path() - Handle the URI device path
->    *
-> @@ -472,6 +492,7 @@ static efi_status_t try_load_from_uri_path(struct ef=
-i_device_path_uri *uridp,
->   	if (!ctx)
->   		return EFI_OUT_OF_RESOURCES;
->
-> +	uctx =3D ctx;
->   	s =3D env_get("loadaddr");
->   	if (!s) {
->   		log_err("Error: loadaddr is not set\n");
-> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> index 00167bd2a1..33cd8b9a50 100644
-> --- a/lib/efi_loader/efi_helper.c
-> +++ b/lib/efi_loader/efi_helper.c
-> @@ -242,6 +242,18 @@ int efi_unlink_dev(efi_handle_t handle)
 >   	return 0;
 >   }
->
-> +/**
-> + * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
-> + *
-> + * @fdt:	Pointer to the devicetree
-> + *
-> + * Return:	0 on success, negative on failure
-> + */
-> +int fdt_efi_pmem_setup(void *fdt)
-> +{
-> +	return efi_bootmgr_pmem_setup(fdt) =3D=3D EFI_SUCCESS ? 0 : -1;
-> +}
-> +
->   static int u16_tohex(u16 c)
->   {
->   	if (c >=3D '0' && c <=3D '9')
+>   #endif
 
