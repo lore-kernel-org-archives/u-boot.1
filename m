@@ -4,166 +4,223 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4522FD2E9E3
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 12:26:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CEBAD2E9E3
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 12:26:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 042488938E;
+	by phobos.denx.de (Postfix) with ESMTP id AC85C89395;
 	Mon, 11 Nov 2024 13:26:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="Ob0Y4eJI";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="h7FPc8YJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CEFE88F8E; Mon, 11 Nov 2024 12:06:32 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 74F8488FC4; Mon, 11 Nov 2024 12:46:33 +0100 (CET)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20614.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2417::614])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61E3D89371
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 12:06:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id E994C88FCE
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 12:46:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4316a44d1bbso35386555e9.3
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 03:06:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1731323188; x=1731927988; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=Hbr4Yo1YiYF2czCSP3VcaxZd4w8wdZAusyqBBQNYlw8=;
- b=Ob0Y4eJIRn5jeqR7SKtj7MXN9fxgLMmviuLeD+20a36pn2/KSO2YOVLn2+oXaF4pBb
- m7tM4zb05DwTk5AhMyJXFDFmrq6DpRKFe+imEoBkhEgPPrGlgBi1xpOBrwQt6+RnqarP
- T8jsr5X1bEX3D+RCtOGrOm8iRJuDKFel/geQmnjiJ3Sl+7p6lR7rFTqej1aZIqmguf9o
- yDhMSuu8mbGhg7DmQftet56NR2nnemUdO0gS3crdLbG8Qcfc1cNn3ZN9BtrM/lJBXwcS
- Fh62NA43qUMENl0zptdrUEtj1ECaub6GudX6ASJ13A/NtNFS2M2jaM9M3JvO/A7JyzS9
- f+GA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731323188; x=1731927988;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Hbr4Yo1YiYF2czCSP3VcaxZd4w8wdZAusyqBBQNYlw8=;
- b=H6SM0UyuaEevksuBoCOL7wOB/ck2P96nPqX3e7tBClnR+UFnacTkoHzn4NXzHwepcP
- g/mZY4oi/ACQ9U8N4QOop4ON/lRXCpl53bX5qXhvxVdu6wVMHTAK4jsoRr8tbLdbGe63
- B2knRwtpFy+4mAOqu6/OURDFhUwD+IeLhD7WnPyMQ2QV2sBMBpCztlk5UxUHaWf2lto5
- FEwD7OBQGW/MmKNN36U7Osk9MrLlUCcSmn96BXo3Denqa6NWcOfoAEqzCaOPZooQRo1F
- roxxcWsCpqa6VH/DvCeWSdHgmHXKklwaUsuA3M+uqdJQEMe+nazflCyfq3Z4dqLH8T5L
- rA7w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWQC8qHr6TkNn8apXvzlDxJo7TPCxK8/EpIChvLVe5Rp/V7KE0gxhvUW9juEaM+v5maDUD07wE=@lists.denx.de
-X-Gm-Message-State: AOJu0YygJBlQyOVpsrbF8+7mbI9galwbR95aeogQwDzyHcdZ9FAqEe78
- e6D9bppKWSMd4vdz86fQLLJqs3LuJHgYDvm5IUgDnlTqJQKoJCU6JmPJonCCb8c=
-X-Google-Smtp-Source: AGHT+IED99HJPoLQe1TktM1d022Qlq4Xp7+t7O1ob5453M2rW3kSyNpC+SCbkDw8ZRztaXK657TB7w==
-X-Received: by 2002:a05:600c:4ec7:b0:431:5f9e:3f76 with SMTP id
- 5b1f17b1804b1-432b750967dmr98746005e9.16.1731323187671; 
- Mon, 11 Nov 2024 03:06:27 -0800 (PST)
-Received: from [192.168.2.177] ([207.188.162.240])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381ed97ce1bsm12554436f8f.36.2024.11.11.03.06.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 Nov 2024 03:06:27 -0800 (PST)
-Message-ID: <b3f491c7-2d95-4f61-af12-88645ed86d59@suse.com>
-Date: Mon, 11 Nov 2024 12:06:23 +0100
-MIME-Version: 1.0
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Kwb4WwTyp7Idhy1UtHUbqnNxPrlcC9NO4LZdcu005C9v16DmcQSr2QbbMR9wV/I2zvVwy+ATHbsx5hm9IUf+MxMdWQUIgxrKTri2unCPsrCsC5vprzndbFXqxKdIGIeoZr51qCBxuIYHx5lQdIHih1XSTk+aiQjyUSxnwJy55EArcKIURNojefgMJ2H1KzMZOax+0t246+OkkI62R69SqHAQnU0a+83+RqJh0bhGFxwc0FxiJZgba6bEcwwGOOQi4++I4GljNbFemYucNowbC/rqUFK/K2f7mnPx6SIT+/rB4+x6yyUuTRcOcsZiMfpUHoWr4hpi4bFXE6bJynBkhw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2eA0aqPwghgU5YuVDHIUXFmbs3e36NTg93OgF/Hdd3A=;
+ b=Rp68kwiLd9kfFtXb/tm7/zYD964aTMQouNXdbE/KaTzoa2yvYTeN7LHWrubUsa6gKJbEOktW0FovDJdIYMEl91MpWRDbsCs7o2VLo/hNieiPw4moA/Wujs7giRzB+tRWwNzUyoszA/MrjFY3b0aZhZ1MaJAUzZBIeAGDZoGQVLSNw9Gi136CTs7iiLspxaC7OK6tfVCUSVZ+o0No/q8B3hL8X/aCXr2S34zdExGIT9aFiGY1DtLH3rRNZVacIsg9Q6uW9hXnQ0jgizBIKs6prctPGTUicVYEK51QpsvngOdBYyCoU1UpYdaUxG7L7dYEUzSS8FaRcr+bvgvOzjTxBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2eA0aqPwghgU5YuVDHIUXFmbs3e36NTg93OgF/Hdd3A=;
+ b=h7FPc8YJh6CMec3xSYJex7uM2/Ohz8+P8gSEV8Ah7R769hlbXZepL77VFucrA5AYS9/eJuodDVyp0FBUpjNTLYSR3/EABRcJJEll7rAoPPQsmqKZ1BA3XfBNBXc8ZB6D04SGGA9w2AJ1+jcGEhNVKr71mp3cas5r5H1VG8excDk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by CY5PR12MB6372.namprd12.prod.outlook.com (2603:10b6:930:e::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.26; Mon, 11 Nov
+ 2024 11:46:27 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30%6]) with mapi id 15.20.8137.027; Mon, 11 Nov 2024
+ 11:46:27 +0000
+Message-ID: <655f3b7b-0e78-4544-b151-e48f8113c6cc@amd.com>
+Date: Mon, 11 Nov 2024 12:46:19 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] fdt: Swap the signature for board_fdt_blob_setup()
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Aaron Williams <awilliams@marvell.com>, Alexander Graf <agraf@csgraf.de>,
- Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
- Andre Przywara <andre.przywara@arm.com>, Anup Patel <anup@brainfault.org>,
- Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- David Feng <fenghua@phytium.com.cn>, E Shattow <lucent@gmail.com>,
- Eric Curtin <ecurtin@redhat.com>, Francois Berder <fberder@outlook.fr>,
- Green Wan <green.wan@sifive.com>, H Bell <dmoo_dv@protonmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@foundries.io>, "Ivan T. Ivanov"
- <iivanov@suse.de>, James Hilliard <james.hilliard1@gmail.com>,
- Janne Grunau <j@jannau.net>, Jerry Van Baren <vanbaren@cideas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- Liviu Dudau <liviu.dudau@foss.arm.com>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <kettenis@openbsd.org>, Michal Simek <michal.simek@amd.com>,
- Minda Chen <minda.chen@starfivetech.com>,
+Subject: Re: [PATCH v2 0/7] arm64: zynqmp: Convert platforms to use binman
+From: Michal Simek <michal.simek@amd.com>
+To: u-boot@lists.denx.de, git@xilinx.com, Simon Glass <sjg@chromium.org>,
+ neal.frager@amd.com
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>, Adam Ford <aford173@gmail.com>, 
+ Bryan Brattlof <bb@ti.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Charlie Johnston <charlie.johnston@loftorbital.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>,
+ Fabio Estevam <festevam@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Hoyes <Peter.Hoyes@arm.com>, Peter Robinson <pbrobinson@gmail.com>,
- Randolph <randolph@andestech.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, Rick Chen <rick@andestech.com>,
- Sam Day <me@samcday.com>, Stefan Roese <sr@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, Tim Harvey
- <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- William Zhang <william.zhang@broadcom.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>, u-boot-qcom@groups.io,
- uboot-stm32@st-md-mailman.stormreply.com,
- =?UTF-8?Q?=C5=81ukasz_Stelmach?= <l.stelmach@samsung.com>
-References: <20241102174944.412088-1-sjg@chromium.org>
- <20241102174944.412088-2-sjg@chromium.org>
-Content-Language: en-US, ca-ES, es-ES
-From: Matthias Brugger <mbrugger@suse.com>
-Autocrypt: addr=mbrugger@suse.com; keydata=
- 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
- PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <20241102174944.412088-2-sjg@chromium.org>
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, Tom Rini <trini@konsulko.com>,
+ Tony Dinh <mibodhi@gmail.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <cover.1730452668.git.michal.simek@amd.com>
+Content-Language: en-US
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <cover.1730452668.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SJ0PR03CA0259.namprd03.prod.outlook.com
+ (2603:10b6:a03:3a0::24) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CY5PR12MB6372:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1ddadc8f-a206-4bc2-2ef3-08dd024679dc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MmJwcVBFODRhRUQ4N2plWjhSR1BOdFphV2N4bjhscTVZYXVocjMvODErTEtH?=
+ =?utf-8?B?ZFlpVDdtYWFNZkxNVkUrWlRSSlJDUnpFWXJSaFh0akp1eHRKNDkrQ2psWThR?=
+ =?utf-8?B?aTlpdFRaeG1QNE1lbkxKenAzZ1pDY1JndS8vUGRoTS9iM0JTSHhNc1ZZK0Jr?=
+ =?utf-8?B?cjNHdnlEL3ZKUlV4dzhobFRiWEdaRGxaZTY5cXdDcXFLZ1VqZlB0RnQ1Wmh0?=
+ =?utf-8?B?ZktFRklvbEhDVGhhdkNWZVRqeW5KNzhTZjZoU2c3elZWemhOWlBpbWVyaTdt?=
+ =?utf-8?B?a0xhNkdxdENGRU1CczUrcE5hQ3JyWGYwYnZLaHV4TlRsUWNmUkZyd1RVcVRw?=
+ =?utf-8?B?UXNRZW85SFNtSm5aQnVyajFQNWZDRGVOa1RqcUVZSDI5THJocHIwTlZjYVF5?=
+ =?utf-8?B?R2JxV0RNQWd4YmErU0RZZVBuZUNhaVlJUC9adUxKN0lRZFpSMVNrZFVyUDFJ?=
+ =?utf-8?B?N1BXa3hSWjRoNWs1YTdIYXlmV0JmYmJCa1NzRkJVL0JadVUwZ3lVZWxwYncx?=
+ =?utf-8?B?NW0xY2Njb2pyWTM5eXRuMTl0RW1KRVFsRDU2T2l1dVUvKzRXQjBkWGVTN1dG?=
+ =?utf-8?B?YlJldkZlSjJSa1VoVERVVTFUT091SUZNVVRRaTJwVFduVGFlQjJ0czFURVI3?=
+ =?utf-8?B?NmE5WkNsSHhoRVdWcXJVSEZjTmlVejRSRVN5dEdSdk1tT09MN0I3Mml5ck1y?=
+ =?utf-8?B?SGUyalh4TmJKSHFaWEU2aFhDQXFTZ1BCWEtHY05hRDdKd3k0L25jVDRDZDRt?=
+ =?utf-8?B?alFEYXloU2tTd0MvNWcxUGd4amtUWUd1Vjhsb3RXa2liWXNkejdDeHdKZzNI?=
+ =?utf-8?B?dDBRcW53UUVKb2ZWQ1R2djZuY0pkdXRMb0cxTWlNUXJNSm4vRGtianZRU2R6?=
+ =?utf-8?B?Q0dVTUlpdXowaldOTndlTzN3T05VcXhNVVpOcFBGMlROeTRiUklUOUcwVjZ2?=
+ =?utf-8?B?b0VCM3ZyTUZ5dWUwZE5VVXhpcmJ4SnY0UlQ2OWxkWXUyZUgvdkVwdDhIL2Q0?=
+ =?utf-8?B?Mzg0V09wcC9zWmMxZTJzd0pJMFRsZzVITUNkanZlRFRGYnBZTXZHTlBHTGpL?=
+ =?utf-8?B?VitBMG9zNUNtNkFBcTZuMDRDZVZ1V3VOMW9vbHlEUWZtNFdqQmRLTDUyVG9v?=
+ =?utf-8?B?QW5uT1ZCbVMvZVRPTU9zMjU5UzNwUjNnNU42TzI0OG9yVFpldEU2YzdQQlFr?=
+ =?utf-8?B?YTQrVGFpTkJua2R3UGZlOXREay91Nkk4WnQwdDk5TW11bzUrV281Q0FCMVVy?=
+ =?utf-8?B?NGYvaWIwSWZmTzZLUGtYT04rZnhYVktuRTNwTWdRVHR5RHJSeENuemJMSzND?=
+ =?utf-8?B?ZC9aOTRSK1QwdWVuVDFTazUxeGdXMER0QVF3WWMwNkIxQ0hldlJCY21MVm1a?=
+ =?utf-8?B?bUpiZ1RZVUFFQWdwZFM2clZwSlZoZklmQ0hEVGRCZjdVN1BWL2JWUGNZWWFE?=
+ =?utf-8?B?RzZONklmUjE2d0t3bTZaVDlWT2xkRVdxdGFNMU8xU05EdHJaZmViY2ZTOFVQ?=
+ =?utf-8?B?TGptSG1oSEkxbTJvQVlHN2JvT0ZmOEJub1FNMEF2NitSbDZCSW5ieGFTQkNF?=
+ =?utf-8?B?SGtJbDBMbzlKZ2tIeXYxeFNFcUxqZHAzYnF3ZWpadDRUQXVhS2F0eUtuTVJ3?=
+ =?utf-8?B?Wm8xYlBGK3Byc2dIaU9hS0NScUlKQUltYjBwUDdwVnhOc2pMTDZWTWF6bGdO?=
+ =?utf-8?B?UnczZ3hyTzFjMVF2RlVRWGZicmMyU0E0RlR3U0NnbTdGS2tvekJVNllxYk9N?=
+ =?utf-8?Q?gK01zRwLOkBqiSlgd0fQq7JD5dI7WUnZrzF099w?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MW9KSks3YXdIcDNwcjBzdHFyRi9ubFE1NkpMdWtXRzNtVXJNR21JNFZ0Um52?=
+ =?utf-8?B?cUFqRDN2MjRMbFFNVEZVMTJGZksyVGdERGR3MStOUko3WDBQbTh5SUZCM1FY?=
+ =?utf-8?B?NHU5RmcxNTN1S293MUNub05Cc0M3anJZT0J4RWVmQjBpTVNjNzlhek9jamgv?=
+ =?utf-8?B?KzZDN2pXRjBNU3VPRDBiQTM5RjV0MGkzMkpGUDZKNzJwTmx0WkF6Z292WlNY?=
+ =?utf-8?B?QXY5QkN6MHpKRGJYREQ4SlJSd3hTTHRGMVhZc0FreEVkQ2hxMldjMEk4eFpY?=
+ =?utf-8?B?azFiUG40V2ZyYlAvOWx6OXIwMmpXK0E5b3JqbERLUEM2cnlQQVhKZ1F5Z3g5?=
+ =?utf-8?B?dHdaT3hoeU1pTHFOd2NpTnI1em94MjNpWnJ3U1FDcWEvSkhKSjlsMTkxNHNj?=
+ =?utf-8?B?ZHRUQlVHOGhEdjh0UzcwRXBvcUp1Y09LZVlXemVhak95aTVtK3BWcDJFb1FG?=
+ =?utf-8?B?TWxrL1lsU1ZxZGJ3bUxMVU8vb3VsY3QyKzJUUGVIWmVZK0hCdEZxNGd4NjVZ?=
+ =?utf-8?B?QnNaRG92Y3FiL1ZzcDJsYzlpYlJ5a2U5RnFyNUpDNktKSzZDaG5VM0xxRWNP?=
+ =?utf-8?B?VlhlY1VTRjVpSkVkL1Ftay9QdWxwV1dxMlFvdkZyOFRWODN3cVZNU2p5UUsz?=
+ =?utf-8?B?UlVBSVU1Z240cW1tYXR5VlFKQmF4SzVzU0hLaTVKbnVtYjN2a0FqVUdKbUR4?=
+ =?utf-8?B?Tk5kT25DcFEwSHJtOVNMMWlodDM0YitONUNEOVZIZC82THJTWWFkMnlvQ2pz?=
+ =?utf-8?B?aHYvdFg5dDV5N2dLN3gzd2w0SlB6UG4wMExvaWppYnV3WVQ1SWV4dGxUOVRQ?=
+ =?utf-8?B?WjVpSjBnUExQL1B0WVo2QTdReFpZYnJRN3d5bGpieG1iMi9INWFjTEVPRlBh?=
+ =?utf-8?B?UjFPd09JdDR1aWw1T1FCeTEwWTZCYjYydDd5Z0k0SldEc3NPcjlQbmR0UVVw?=
+ =?utf-8?B?VEZ2dktKaEtZMHFGTnpGeWhJWExlanZ2czkxQzMxa0dFbnV4bGxhLzl3ZDlN?=
+ =?utf-8?B?ZUtBTDBpRUViQi81U1g1cFdHZkovUGxtdDJqUm54b05QV1NjeVEyMTRkUUV3?=
+ =?utf-8?B?ZmZtZm1MaHVtNVM1YnUwTnlYT0lBVGlKTHFKODR3V1l0QzJJQzRDSkxqT2JQ?=
+ =?utf-8?B?M1dRS0Y5NC8xSlRXSkhOSlFzSE9hZXc1THNzd2xpU1h0cW1HZzdjVUwvOWFW?=
+ =?utf-8?B?TFJ1U2JBUjNiUTRhSzh2bkhnaGc1NHowNDRRSWVzMnlDeFlFdkNyZ2szTy9p?=
+ =?utf-8?B?SENtQzNaUHA0czU5Z3E1QXRFNU5welJ5NCtDWTFiM2xiRzRKVmJBcDcwZWJa?=
+ =?utf-8?B?c1hQT1BRQlBqaGRONHY5R0tQZ3gvUGs3TWx0WUhndy9QQlJhY1RmZVluaFlP?=
+ =?utf-8?B?emx4T3lSUFZ1djFnaVFkR0dYVWpyclQ5MzJlRU5rcnpaNVFMWUVGV3RkMHd2?=
+ =?utf-8?B?UTJZcHVDUkxWenR4N1FDYWxKZFNScXNkVHY2eXd5bW90OFVMMmFEQXQ4blRv?=
+ =?utf-8?B?WnRXS210T21QeWlhNTY4Q052ditDTjJPNzNhdWZ5RHYzTUQxWVhCL0M3MDdH?=
+ =?utf-8?B?WHNHOExMcXlZUHB1elZBNncrSDNIcmRRL1gwZ1oydWhtcjFjRTBJUTBmM3Vv?=
+ =?utf-8?B?RnUxMFdrOHhhZG1nK0hnMFB5YTRMUTNXM2pHa1FKUVg2WGxrb0hwdWt6WmhB?=
+ =?utf-8?B?QnJTazh0bHk1akFPKzIyMEdyTnZGRkkvYURyTFhsdG5WekJBZll2VVZSR2E5?=
+ =?utf-8?B?REhQMEkxbTlNTzF4TGNPb2NtQVpCMnBqL012T1Nxd1FRWXVTd1g5Wll4SUx5?=
+ =?utf-8?B?QXNTbmJPbk5lQTNkSHZQNzBPWkpIcUI1MWppbGM4NUl2dnBJZnpyS1ZZRElE?=
+ =?utf-8?B?NE5DZklOY1oyMElwdjJGMWZOdU1BcFhoN1Q5M2Qwd1AzbDhzdFpGY2c5Zmhy?=
+ =?utf-8?B?aVNaNjNXYitsc3RNVkNLSmdsNnBTemJHTWZ1dm9KM3hlSGNPWkQzNVlUSEZ4?=
+ =?utf-8?B?dytZT2ljVVNIdjRqKytLVys2U0g2TmcrRC9wcjk3K3YvZFQ4bHhzeHUrUjA3?=
+ =?utf-8?B?Z0cvQnduS0RrWTl0NDNWNzV3a3BNYXpSVUk2a1Q2NW1xeUljR1NhaWFrVkQ4?=
+ =?utf-8?Q?vU/ousK2hbHXCIGHYrggxGfOU?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ddadc8f-a206-4bc2-2ef3-08dd024679dc
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2024 11:46:27.2864 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vxFrWZcKc116yi7oOXERQ68g5xBtnixKR8JPkgCk6LNF/rwe1hV600zQ7Bp9RDK2
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6372
 X-Mailman-Approved-At: Mon, 11 Nov 2024 13:26:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -181,84 +238,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
-
-On 02/11/2024 18:49, Simon Glass wrote:
-> This returns a devicetree and updates a parameter with an error code.
-> Swap it, since this fits better with the way U-Boot normally works. It
-> also (more easily) allows leaving the existing pointer unchanged.
+On 11/1/24 10:17, Michal Simek wrote:
+> Hi,
 > 
-> No yaks were harmed in this change, but there is a very small code-size
-> reduction.
+> I have put togethere couple of patches to convert platforms to use binman.
+> The first patch has been sent separately. The third (SOM description) has
+> been also sent out for ilustration as RFC.
+> The last one is just cherry-pick the patch which has been reverted because
+> our platform wasn't converted to binman yet.
 > 
-> For sifive, the OF_BOARD option must be set for the function to be
-> called, so there is no point in checking it again. Also OF_SEPARATE is
-> defined always.
+> v1 of external description
+> https://lore.kernel.org/r/fbed0251437b61a2f7a85596d7403b5b9c8237c1.1728306322.git.michal.simek@amd.com
 > 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> RFC for SOM:
+> https://lore.kernel.org/r/de1b8dbabd5ab7f20d7aac217ec4f5074d39f1da.1728462767.git.michal.simek@amd.com
+> 
+> Thanks,
+> Michal
 > 
 > Changes in v2:
-> - Set up the existing FDT in case the board wants to check it
-> - Update snapdragon to return -EEXIST
-> - Set the existing FDT before calling board_fd_blob_setup()
-> - Update sandbox to return -EEXIST if an fdt comes from a bloblist
-> - Update do_go_uboot() to set the existing FDT
-> - Drop unnecessary setting of FDT in vexpress64
-> - Tidy up redundant RISC-V code
+> - Change subject, align commit message
+> - binman - rename variable
+> - Use relative path
+> - Use separate variable in makefile to also handle empty string and default
+>    to u-boot.dtb
+> - new patch
+> - new patch
+> - Align fit,fdt-list-val to have shorter lines
+> - Add reference to defconfig
+> - Rename zynqmp-som-binman.dts to zynqmp-binman-som.dts
+> - Use conf instead of config
+> - Change image name from image.bin to qspi.bin
+> - Remove RFC
+> - Change default addresses for BL31/BL32
+> - new patch
+> - new patch
+> - Rebase on the top of my series which do conversion to binman
+> - Taken from git with all tags
 > 
->   arch/arm/mach-apple/board.c                   |  7 ++--
->   arch/arm/mach-snapdragon/board.c              |  9 ++---
->   arch/arm/mach-stm32mp/boot_params.c           | 19 ++++++-----
->   arch/sandbox/cpu/cpu.c                        | 34 +++++++++----------
->   board/Marvell/octeontx/board-fdt.c            | 12 +++----
->   board/Marvell/octeontx2/board-fdt.c           | 12 +++----
->   board/Marvell/octeontx2/board.c               |  3 +-
->   board/andestech/ae350/ae350.c                 | 23 +++++++------
->   board/armltd/vexpress64/vexpress64.c          | 33 ++++++++----------
->   board/broadcom/bcmstb/bcmstb.c                |  7 ++--
->   board/emulation/qemu-arm/qemu-arm.c           |  7 ++--
->   board/emulation/qemu-ppce500/qemu-ppce500.c   | 12 +++----
->   board/emulation/qemu-riscv/qemu-riscv.c       |  7 ++--
->   board/highbank/highbank.c                     |  7 ++--
->   board/raspberrypi/rpi/rpi.c                   | 13 ++++---
->   board/sifive/unleashed/unleashed.c            | 12 +++----
->   board/sifive/unmatched/unmatched.c            | 11 +++---
->   .../visionfive2/starfive_visionfive2.c        | 11 +++---
->   board/xen/xenguest_arm64/xenguest_arm64.c     | 14 ++++----
->   board/xilinx/common/board.c                   | 26 ++++++++------
->   include/fdtdec.h                              |  9 ++---
->   lib/fdtdec.c                                  | 14 +++++---
->   22 files changed, 152 insertions(+), 150 deletions(-)
+> Marek Vasut (1):
+>    Makefile: Drop SPL_FIT_GENERATOR support
 > 
-[...]
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index 9122f33d88d..c46fe4b2350 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -508,15 +508,14 @@ int board_init(void)
->   /*
->    * If the firmware passed a device tree use it for U-Boot.
->    */
-> -void *board_fdt_blob_setup(int *err)
-> +int board_fdt_blob_setup(void **fdtp)
->   {
-> -	*err = 0;
-> -	if (fdt_magic(fw_dtb_pointer) != FDT_MAGIC) {
-> -		*err = -ENXIO;
-> -		return NULL;
-> -	}
-> +	if (fdt_magic(fw_dtb_pointer) != FDT_MAGIC)
-> +		return -ENXIO;
->   
-> -	return (void *)fw_dtb_pointer;
-> +	*fdtp = (void *)fw_dtb_pointer;
-> +
-> +	return 0;
->   }
->   
->   int copy_property(void *dst, void *src, char *path, char *property)
+> Michal Simek (6):
+>    binman: Add option for pointing to separate description
+>    common: binman: Calling initr_binman() when BINMAN_FDT
+>    arm64: zynqmp: Describe empty binman node
+>    arm64: zynqmp: Add binman description for SOM
+>    arm64: zynqmp: Generate u-boot.itb and QSPI image via binman
+>    arm64: zynqmp: Remove mkimage fit script
+> 
+>   Makefile                                      |  29 +--
+>   arch/arm/Kconfig                              |   1 +
+>   arch/arm/dts/Makefile                         |   3 +
+>   arch/arm/dts/zynqmp-binman-mini.dts           |  10 +
+>   arch/arm/dts/zynqmp-binman-som.dts            | 225 ++++++++++++++++
+>   arch/arm/dts/zynqmp-binman.dts                | 111 ++++++++
+>   arch/arm/dts/zynqmp-u-boot.dtsi               |  11 +
+>   arch/arm/mach-zynqmp/Kconfig                  |  14 +
+>   arch/arm/mach-zynqmp/mkimage_fit_atf.sh       | 240 ------------------
+>   boot/Kconfig                                  |  15 --
+>   common/board_r.c                              |   7 +-
+>   configs/xilinx_zynqmp_kria_defconfig          |   3 +
+>   configs/xilinx_zynqmp_mini_defconfig          |   2 +
+>   configs/xilinx_zynqmp_mini_emmc0_defconfig    |   3 +
+>   configs/xilinx_zynqmp_mini_emmc1_defconfig    |   3 +
+>   configs/xilinx_zynqmp_mini_nand_defconfig     |   2 +
+>   .../xilinx_zynqmp_mini_nand_single_defconfig  |   2 +
+>   configs/xilinx_zynqmp_mini_qspi_defconfig     |   3 +
+>   configs/xilinx_zynqmp_virt_defconfig          |   3 +
+>   doc/usage/fit/howto.rst                       |   4 -
+>   lib/Kconfig                                   |   9 +
+>   21 files changed, 418 insertions(+), 282 deletions(-)
+>   create mode 100644 arch/arm/dts/zynqmp-binman-mini.dts
+>   create mode 100644 arch/arm/dts/zynqmp-binman-som.dts
+>   create mode 100644 arch/arm/dts/zynqmp-binman.dts
+>   create mode 100644 arch/arm/dts/zynqmp-u-boot.dtsi
+>   delete mode 100755 arch/arm/mach-zynqmp/mkimage_fit_atf.sh
+> 
 
-For Raspberry Pi:
+Any issue with this series?
 
-Reviewed-by: Matthias Brugger <mbrugger@suse.com>
+Thanks,
+Michal
+
