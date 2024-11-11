@@ -4,96 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0CC7D12D79
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 07:02:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3D68D12D7C
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 07:14:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3759B8921A;
-	Mon, 11 Nov 2024 08:01:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
+	by phobos.denx.de (Postfix) with ESMTP id 591B189100;
+	Mon, 11 Nov 2024 08:14:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="jsHcaHp+";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Ra6HuUoS";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="nMC9/xr+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13E7E8921A; Mon, 11 Nov 2024 08:01:58 +0100 (CET)
-Received: from fhigh-a1-smtp.messagingengine.com
- (fhigh-a1-smtp.messagingengine.com [103.168.172.152])
+ id 1465389100; Mon, 11 Nov 2024 08:14:17 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06C9989110
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 08:01:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8573088A0A
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 08:14:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=jannau.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
-Received: from phl-compute-06.internal (phl-compute-06.phl.internal
- [10.202.2.46])
- by mailfhigh.phl.internal (Postfix) with ESMTP id 0898C11400EC;
- Mon, 11 Nov 2024 02:01:53 -0500 (EST)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-06.internal (MEProxy); Mon, 11 Nov 2024 02:01:53 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
- :cc:content-type:content-type:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:subject
- :subject:to:to; s=fm2; t=1731308513; x=1731394913; bh=UGN4952wFO
- 2UEAN5nzEC6tp4dDNhj3mFVOGWA78wVQs=; b=jsHcaHp+5LLgw5s+Mnqa05lBq+
- 2BYynFd9qd1rUMIG27Su4RuGpI7ng6+bzMtnnrhdrDjWrnhpgizhRxj3D90IiZOg
- 5/2AqLZlwZs4qE9fximk6aVIXTrop3tTup+1lrBipOYdYALLh0n6aNx3rGFXgI/y
- fvmbby8Fr3gKUKqYPdafXmfyIgNcx0PinXiJl7fLsBXFEHD3d68/mFF7QqkjUQ7o
- FHvcnBlC4X8SgxzKzuvK47W0Q/V/mnDuAMJFh1mEUHnHfrcGgggxF9H9/NfDqgIb
- 8B7tESnYhByYwtTp+X2I+OqmV2+gMl6rRqDaAWkGxViTZrtE0k+g00pcYS7A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
- 1731308513; x=1731394913; bh=UGN4952wFO2UEAN5nzEC6tp4dDNhj3mFVOG
- WA78wVQs=; b=Ra6HuUoSkzVL/oZMUGcKJYBt2FEMXcsn8Ykl7NB6AVnOyafjLqh
- UKKXaFO42Gif1FRkb8s6qZhjO717cm6OLmEqG44Xa/vimEPZQ0JMbVAELpBY21+6
- SMeaRXWVwZ4Z382SObuviB6MooTuuOcKPXEXhkHXnPos9rH3PyFH4Oor3s1rwass
- hNTNXxmczoR3Y+LPuTb/CDbB/tcF5hcha2yaP1VCfT3j7EfQUGPP3u9+AAIs9Mce
- mAg7BhNlye8SrcW1d2QPXUgmUs1DWnyOUlncsZ9aRyjGn1nbTSGhjG+QSfJfqk7X
- nz2hmrCO4jA+hbl2JDh3lSHnD+j6mMtMUBw==
-X-ME-Sender: <xms:4KsxZ2O0tRDD-Cd2IVeGR4LGxfGNQ1brv0pR4sNDhfNalM3X2LLT_g>
- <xme:4KsxZ0_cqMqfbT0AvoOWjaM_1HnJ2Ucq-BrQ7e_MzJMGn7uCezafKVkwGByeTeCkW
- aB8ECM75F0McnpDWcA>
-X-ME-Received: <xmr:4KsxZ9QfCZKN3OAl_Llv09aKI3V9k_EiP4dfaJG7jCNUiKjNtHj6bi9idoKXpv3zKIMXRe1LO0fdBAUltnbYd9cQjqYUL9vxL8I>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefuddruddugddutddvucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
- rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnh
- htshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesthdtredttddtjeen
- ucfhrhhomheplfgrnhhnvgcuifhruhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenuc
- ggtffrrghtthgvrhhnpefgudeuffelfeekgeeukedtheekjeettdfftddujefhvdehtefg
- iefgledtueefjeenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrh
- fuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhesjhgrnhhnrghurdhnvght
- pdhnsggprhgtphhtthhopeehpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehtrh
- hinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehkvghtthgvnhhishesohhp
- vghnsghsugdrohhrghdprhgtphhtthhopehsuhhghhhoshhhrdhgrghnuheslhhinhgrrh
- hordhorhhgpdhrtghpthhtohepshhjghestghhrhhomhhiuhhmrdhorhhgpdhrtghpthht
- ohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggv
-X-ME-Proxy: <xmx:4KsxZ2txztTJPUWW0BNtGvAW71DIsPHxZ-_y-bYFF9Yy1ZOvz7puHw>
- <xmx:4KsxZ-cwtKrKScGYbbdPcdqKiYkpp7TEAJ9ivPNH8QlJg8UOfUtQmw>
- <xmx:4KsxZ634gnoJqe26Vp72NmKJosK_1RnZDsL5DR-tIfnogBysEml6_A>
- <xmx:4KsxZy_hSI2rrhTcdjosCu-oAEsJ-q4lqcxQHy2uqPfbSWSBut7ulA>
- <xmx:4KsxZ7EWqqjQguXmWM7qneX3g8iZRZUYfkrmLWKLnpfU-0UqSlXVSv8n>
-Feedback-ID: i47b949f6:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 11 Nov 2024 02:01:52 -0500 (EST)
-Date: Mon, 11 Nov 2024 08:01:50 +0100
-From: Janne Grunau <j@jannau.net>
-To: Tom Rini <trini@konsulko.com>
-Cc: Mark Kettenis <kettenis@openbsd.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/4] Fix IOVA allocation in Apple dart iommu after
- global LMB mem map changes
-Message-ID: <20241111070150.GA1962490@robin.jannau.net>
-References: <20241106-io_lmb_apple_dart_iommu-v2-0-0580f4bdb023@jannau.net>
- <20241111025211.GQ3600562@bill-the-cat>
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1731309236; x=1731914036; i=xypron.glpk@gmx.de;
+ bh=cSai625galgriVndS1gbeMQcBAFJrN9Jt7PdG/I7u0Q=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=nMC9/xr+1Gbdysv/klfPk/HzmMkRY44dcEGg0CHAqMb9efr5z6IM9ChnM+785YsA
+ 7C1ix25PDLPqlGjgrT2+CNqquDR8sQe5B3ObUyPkfg8GiHcUnejSJ2JZv0cgf4dIL
+ 3x9k7IkfRvXquJ1IOS/jag63JDfkyUlDlLeav1wJE2+HK6J1Q49FseVxR80jPB6nu
+ rMye6MxBl8cIoS2MPlvY0uUs6MAmHxbwRCnwKTJLbRb46grv001FDQR9zx5j+1uIz
+ kd5fcETS1GZkuxbJULy+F2VjCpL03g+KRAsEYSmybfiTRkm3arbtPKNqrVfJyaHa1
+ +4Rdr6EqZ1MN+zuhCQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MbRjt-1tlNCU2maX-00ZL07; Mon, 11
+ Nov 2024 08:13:56 +0100
+Date: Mon, 11 Nov 2024 08:13:52 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Rick Chen <rick@andestech.com>, H Bell <dmoo_dv@protonmail.com>,
+ E Shattow <lucent@gmail.com>, Conor Dooley <conor.dooley@microchip.com>,
+ Nam Cao <namcao@linutronix.de>, Bo Gan <ganboing@gmail.com>
+CC: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v4_12/13=5D_board=3A_starfive=3A_spl?=
+ =?US-ASCII?Q?=3A_Fix_the_wrong_use_of_CONFIG=5FIS=5FENABLED=28=29?=
+User-Agent: Thunderbird for Android
+In-Reply-To: <20241111020808.38974-13-hal.feng@starfivetech.com>
+References: <20241111020808.38974-1-hal.feng@starfivetech.com>
+ <20241111020808.38974-13-hal.feng@starfivetech.com>
+Message-ID: <EEAE3A6C-C3A1-474D-9DD7-83FE425FE5CA@gmx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20241111025211.GQ3600562@bill-the-cat>
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:xOmE5Hv7+iYgGQNH0sgjUcfhE5At2COKA/ZBCV7EGXnG5pX22wC
+ 4pmHbRNXFSeBWgAoce2QRh+NbZ7DC7ZUGn/PHUGRjHjZ9QsSWyX6qpTFDeOQDeuB6rFYqaQ
+ OI85Si3u+bQBsmaSQSfEfv7C1Mh7/7p35CAocoFBvjZNevhxacxmaorHQHAaI3gwQnuzBvi
+ VBKg0sTOM7dWnMsMj5rbg==
+UI-OutboundReport: notjunk:1;M01:P0:r3vtiuLasRc=;P4FFkpJBw/U1zS8uritSkx9+/3D
+ X+/oD/7Atr6SuBnD0PfGsV0aaiIHfhEiZ1oAnFG8kzU+KnIy23WdjTBlaii2Tde9/7pxlAsMC
+ c+ZIx8UtT/G0hKXBdKwkgbVnXvzPsU/DNYiVayh2jQtrtEGnX3oHaEQa49Xd+4PKqmN58+Q70
+ KFCC0KIJTIOGE3wX4fXhyjF9njnMUcUBi8gEjjJRPE+i4gl5YpD5MQjBcPFCeJA+QLouXf0H+
+ rgLjjBgDpk7lw9j8dmHf86I4u78WHhkyq4EoItVoihQbp0uq2T2Vfb9BMSTwHhsEzp1oFxZVo
+ k2KdV74NVpNs4sbHQwHZrI24lurR2Bh980LRukVd7QlIDb+5lQ++GWWeQ5scirjxNQ/asJNhQ
+ 9zeleOZk2XOYk9ZRpuuCYLzad0Pc48p8kagCU7PL1wW+ZTgz4e9sBAYywyPpVdroUYeK6dQIc
+ 6EciwPHadufo/ve5prL01x647aMm3fpA8Ql+68k0rjkukM7RzWfvafDntdYN4Wq3DflsYRhZ7
+ OnlxZR6UenXR6pW727Xk2V48xlgif7rYYbmK/9cQAafnWM8IGBYd+33IF6a/Sv4mK70z1GObX
+ C/HCwMh0TgcwrXRzCOnFhA6y4/rZA7yLp7Gll5uY30ofgkb7Ssvb0Mw4QEtRDrVCe85GDSSRB
+ tA/SDDFLDvsHUHJZkBnyw7jGlFynLGeS8g6eSBfsrSWpp9AJVVd00/rSt5iukA/izGO/y+oOo
+ lqYuzXBHS5ntZrqvNajKVvSxok3LplKrn7kDoU1RgD21wA0ONiGZQJjJ0N3+CAJzMXGG02fQu
+ zSky3tTk/ARL+0AxJ/p+qroPHcxdOmFWAABadd1vUUrr7ZHr3yAurUCCU1yQWhV7gKQNs07xK
+ GKPM6WFK8jCmMmgZdaq2442DbQR3/NF+jSHWKPxaXPfggVQN89TXMgSuL
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,52 +96,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Nov 10, 2024 at 08:52:11PM -0600, Tom Rini wrote:
-> On Wed, Nov 06, 2024 at 10:10:08PM +0100, Janne Grunau via B4 Relay wrote:
-> 
-> > The changes in "Make LMB memory map global and persistent" [1] break
-> > mapping DMA memory in the USB xHCI driver when using the apple_dart
-> > iommu present on Apple silicon systems.
-> > 
-> > The IOVA space used by the u-boot driver (low 4GB) and physical memory
-> > do not overlap. The physical memory on this systems starts depending on
-> > the SoC either at 0x10_0000_0000 or 0x100_0000_0000. It make no sense to
-> > manage these distinct regions in a single LMB map. In addition every
-> > device has its own iommu and IO address space so sharing a single memory
-> > map between all iommu instances is not necessary.
-> > 
-> > To fix this issue restore the used subset (add, alloc and free) of the
-> > previous pointer based LMB interface with "io_" as prefix.
-> > 
-> > To ensure that low level lmb functions do not use the global LMB
-> > variable reorder lib/lmb.c so that the variable is not visible.
-> > 
-> > Tested with patches from my "Fix device removal order for Apple dart
-> > iommu" series [2] to fix a separate issue.
-> > 
-> > The cosmetic commit has two checkpatch warnings in existing code which I
-> > ignored.
-> > 
-> > [1] https://lore.kernel.org/u-boot/20240826115940.3233167-1-sughosh.ganu@linaro.org/
-> > [2] https://lore.kernel.org/u-boot/20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net/
-> > 
-> > Signed-off-by: Janne Grunau <j@jannau.net>
-> > ---
-> > Changes in v2:
-> > - added io_lmb_teardown() and use it in dart's remove callback
-> > - removed leftover from copy-n-paste in io_lmb_setup() documentation
-> > - added Tom's Rb:
-> > - Link to v1: https://lore.kernel.org/r/20241101-io_lmb_apple_dart_iommu-v1-0-fe4b9a74d47c@jannau.net
-> 
-> Sorry for the late reply here, can you please rebase on top of current
-> master? A few other changes / clean-ups have gone in and I can't easily
-> rebase and confirm the changes right now. Thanks!
+Am 11=2E November 2024 03:08:07 MEZ schrieb Hal Feng <hal=2Efeng@starfivete=
+ch=2Ecom>:
+>The prefix "SPL_" is not needed when using CONFIG_IS_ENABLED()=2E
+>
+>Fixes: 5ecf9b0b8a75 ("board: starfive: add StarFive VisionFive v2 board s=
+upport")
+>Signed-off-by: Hal Feng <hal=2Efeng@starfivetech=2Ecom>
 
-done. I redid the cosmetic reorder patch to ensure the other changes to
-lib/lmb.c are not inadvertently reverted. Please apply Patch 1 + 2
-quickly to avoid the risk of having to do it again.
 
-best regards
+Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
 
-Janne
+>---
+> board/starfive/visionfive2/spl=2Ec | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>
+>diff --git a/board/starfive/visionfive2/spl=2Ec b/board/starfive/visionfi=
+ve2/spl=2Ec
+>index 38132ecccd=2E=2Ecf7f39d5c5 100644
+>--- a/board/starfive/visionfive2/spl=2Ec
+>+++ b/board/starfive/visionfive2/spl=2Ec
+>@@ -110,7 +110,7 @@ void board_init_f(ulong dummy)
+> 	}
+> }
+>=20
+>-#if CONFIG_IS_ENABLED(SPL_LOAD_FIT)
+>+#if CONFIG_IS_ENABLED(LOAD_FIT)
+> int board_fit_config_name_match(const char *name)
+> {
+> 	/* boot using first FIT config */
 
