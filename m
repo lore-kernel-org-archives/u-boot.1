@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F382DD41D44
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:47:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83D07D41D46
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:47:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29846893BA;
+	by phobos.denx.de (Postfix) with ESMTP id 84EDF893BE;
 	Tue, 12 Nov 2024 03:47:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YCEdEvQZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UgJWEwHb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66F7F89308; Mon, 11 Nov 2024 22:09:18 +0100 (CET)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id 136BF89393; Mon, 11 Nov 2024 22:09:20 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D50289393
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 22:09:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D9CFB8931D
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 22:09:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-21145812538so45352095ad.0
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 13:09:16 -0800 (PST)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-20c6f492d2dso54403715ad.0
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 13:09:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731359354; x=1731964154; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731359356; x=1731964156; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lN6tD7WsCiG4Mi8bzkuLQbM7O7AuO+NzG5eK4Z4uCAY=;
- b=YCEdEvQZocP0oH/zaHAXasqk17kn51eEaVLOeUgiB36Ai3ALPn+kuMsSLx/Y1XStyb
- C6gtuZ45L+nL1Nkkhf9vi46CWj5q73lQCLpHv/cn4X8UbuLtWgAumNiohdsKW1jW9Bw3
- ExgfGHP7pYLAkb732gbBG6NzuJ39Lv7u4TQRHteFLyLLnutQqqco+9GVYNbILWuj2y79
- VLWJDv0s+AnQJtXPx9p4TgwU8+CkdHzlN/RJPkEnZy1mSof92vZThsz/3G1L4gQwyr3D
- BuL9d2aXq+PFswjqkACSRBpLxQCtCmlc9olLHCAo7sF3xsB2qlfACnvv6XwzTxA1E1pb
- rI2A==
+ bh=ZtQDfjVZKJaazOG3mwifxz6rNtT2yBhIiysJWigZBAE=;
+ b=UgJWEwHbPEKAjsy4gIN5IvLfqIE2nJ6lffPgP/kd4cflRtnMddFYe6a0sQu9FvAhig
+ x6UAuTK2Dtgxcwvzd88C8iQ89p2rNO+8rwIHRz9uy6oJ0KAQJ+zCwCYngJmAV90vtNHP
+ WmZsHFLKIq8fUBjYPalmGuGvqE0qhm8e3nfN7bQ7UA98sjA+5FHACzdF8lhMlJNeEJ1v
+ upjhu57p7ow+2ocCHvXx885kd+/pppzsZd78o/LDgEeUz2GXwV/SpGxViIwAmfJlR6Je
+ nsgnHEbg5e9m/Vmya29Pd1l0LOg9inC6VqDxKvAHqWQxNbr6VkdZxw31FAv9mC3LKvHO
+ DpVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731359354; x=1731964154;
+ d=1e100.net; s=20230601; t=1731359356; x=1731964156;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lN6tD7WsCiG4Mi8bzkuLQbM7O7AuO+NzG5eK4Z4uCAY=;
- b=ZAfqwQkLHx3sl2mG80IypoeaLslZLJwEAFVQezQpfoJw0hlbIP3897Uoi6gn0wVcfj
- 277PVSCFYbQPt7VR2LwggFTHv2JAxXsuEbGEpWV37Sig0FhDU/93KabgstkA5k2JEA3b
- fLwlGeyNdvXmd4Ls6m8Ydt7no80HIQmCB5RMIhSoYRRN0Q5HMlBcrEJvyd8Rcj4CSI7K
- SHxs+LuT0FeTjlvOD4aBC1nGcQ6xyfRxqJ0PrXgi5RTmlrfXg0BMcfB/1TKbJLfDJ12d
- Z+ZOL/ggoIkRRKhUaRx3AaL6d9m9CkmRLD3dHmrEuArl234mFaRfZ6jRzNlyxSGy8uva
- U0kQ==
-X-Gm-Message-State: AOJu0YzVVpWDCkOE3eYklldnw2eOPNAcyYZTxSAFdfy5QYC0RYWhSr2w
- qPuEYqi/Lw58KploC28IxOgD4xscMl/9JBq1+9bpKRz7YcTHNF9eyzIibKrN
-X-Google-Smtp-Source: AGHT+IF2sVGqCNUmf65qhShL8ttD/dYF0F1hX9zq7tSwZEj7TbRfA5dShfwxvamSso9QqoCp0t8N9w==
-X-Received: by 2002:a17:902:e5c6:b0:20b:57f0:b38b with SMTP id
- d9443c01a7336-21183c97540mr207869395ad.19.1731359354586; 
- Mon, 11 Nov 2024 13:09:14 -0800 (PST)
+ bh=ZtQDfjVZKJaazOG3mwifxz6rNtT2yBhIiysJWigZBAE=;
+ b=tSiJSUBWVMmnjBqG00wVlq8NJ1j1MQo+6QdvEpK0EuhylMcWHEAYCB2txq8pIWd02c
+ 8itEjWlY7hMxp8cVyXyUxTZQGMOr+EurIIQhik4g3gslPekubsaYHrqLE4/qkovwSixm
+ uSeonU6hl+K4s4Ahtm5PIpL/Lqm9X2DIxDrArwYV1f5K873Vio7S93vIdzUxrr0kGRs6
+ qQvQoMyYk3iQXIcMB5FKa+k0oJDD3lMxlo+cyANG8aHgc/r7QBEIN7K52eXWd9/j7U89
+ gI3VZduze7v8ZdtdbUpTCkDHnXOQl9CZ8sfcjdAxz+kGSj9zpKOXNsgnj7KMEqAVMSDj
+ 1ilg==
+X-Gm-Message-State: AOJu0YxL8Gyd1Pv8ujFD/bV10XK19SQoHj31CmKJ4nIWshXrdaw72Srk
+ cGCyH+21I2CJL5alYiBUSFTQpJef2uu+vAR1v0YmhjFmkR3RNYzin0vkCZ5K
+X-Google-Smtp-Source: AGHT+IG2M2wBa0MZEp/Si6BnX7xuh7PpqMm2oprWGzlcgWKFO+DGUmriyAha4N7IBf7UbpaP+b955g==
+X-Received: by 2002:a17:903:98c:b0:20c:9da6:65b0 with SMTP id
+ d9443c01a7336-2118358c055mr214977245ad.35.1731359356416; 
+ Mon, 11 Nov 2024 13:09:16 -0800 (PST)
 Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21177dc9068sm79807415ad.2.2024.11.11.13.09.12
+ d9443c01a7336-21177dc9068sm79807415ad.2.2024.11.11.13.09.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Nov 2024 13:09:14 -0800 (PST)
+ Mon, 11 Nov 2024 13:09:16 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v2 4/7] net: wget: integrate struct wget_info into legacy wget
- code
-Date: Mon, 11 Nov 2024 18:08:58 -0300
-Message-ID: <20241111210901.560691-5-adrianox@gmail.com>
+Subject: [PATCH v2 5/7] net: wget: make wget_with_dns return value compatible
+ with its lwip version
+Date: Mon, 11 Nov 2024 18:08:59 -0300
+Message-ID: <20241111210901.560691-6-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241111210901.560691-1-adrianox@gmail.com>
 References: <20241111210901.560691-1-adrianox@gmail.com>
@@ -94,189 +94,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Each wget request now fills the struct wget_info. The efi
-bootdevice is now set conditionally to the set_bootdevice
-variable in wget_info, and the same holds for lmb memory check.
+There are two wget_with_dns functions, one in the legacy network
+stack and one in lwip, but the return values are not compatible.
+This commit modifies the legacy version of wget_with_dns so that
+the return values are compatible: 0 on success, otherwise a negative
+error. This way wget_with_dns can be called in a network stack
+agnostic way.
 
 Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 ---
 
 Changes in v2:
-- wget_info is now a pointer to a wget_http_info, which defaults to
-  default_wget_http_info.
-- wget_fill_info now uses the global wget_info instead of receiving it
-  as a parameter.
+- Remove wget_with_dns from include/net-lwip.h, as it already is in include/net-common.h
+- Adjust return value in the documentation of wget_with_dns.
 
- cmd/net.c  |  2 ++
- net/wget.c | 91 +++++++++++++++++++++++++++++++++++++++++-------------
- 2 files changed, 72 insertions(+), 21 deletions(-)
+ include/net-common.h | 2 +-
+ include/net-lwip.h   | 9 ---------
+ net/wget.c           | 2 +-
+ 3 files changed, 2 insertions(+), 11 deletions(-)
 
-diff --git a/cmd/net.c b/cmd/net.c
-index c90578e1b9..79525f73a5 100644
---- a/cmd/net.c
-+++ b/cmd/net.c
-@@ -196,6 +196,8 @@ U_BOOT_CMD(
- #if defined(CONFIG_CMD_WGET)
- static int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
- {
-+	wget_info = &default_wget_info;
-+
- 	return netboot_common(WGET, cmdtp, argc, argv);
- }
+diff --git a/include/net-common.h b/include/net-common.h
+index 1efb0db9ff..3cd0f34374 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -495,7 +495,7 @@ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+  *
+  * @dst_addr:	destination address to download the file
+  * @uri:	uri string of target file of wget
+- * Return:	downloaded file size, negative if failed
++ * Return:	zero on success, negative if failed
+  */
+ int wget_with_dns(ulong dst_addr, char *uri);
+ /**
+diff --git a/include/net-lwip.h b/include/net-lwip.h
+index 1c3583f82a..4d7f9387d1 100644
+--- a/include/net-lwip.h
++++ b/include/net-lwip.h
+@@ -16,15 +16,6 @@ void net_lwip_remove_netif(struct netif *netif);
+ struct netif *net_lwip_get_netif(void);
+ int net_lwip_rx(struct udevice *udev, struct netif *netif);
  
+-/**
+- * wget_with_dns() - runs dns host IP address resulution before wget
+- *
+- * @dst_addr:	destination address to download the file
+- * @uri:	uri string of target file of wget
+- * Return:	downloaded file size, negative if failed
+- */
+-
+-int wget_with_dns(ulong dst_addr, char *uri);
+ /**
+  * wget_validate_uri() - varidate the uri
+  *
 diff --git a/net/wget.c b/net/wget.c
-index 635f82efbb..21f1875866 100644
+index 21f1875866..3bc2522cde 100644
 --- a/net/wget.c
 +++ b/net/wget.c
-@@ -22,10 +22,10 @@ DECLARE_GLOBAL_DATA_PTR;
- /* The default, change with environment variable 'httpdstp' */
- #define SERVER_PORT		80
+@@ -579,7 +579,7 @@ int wget_with_dns(ulong dst_addr, char *uri)
+ out:
+ 	free(str_copy);
  
--static const char bootfile1[] = "GET ";
-+static const char bootfileGET[] = "GET ";
-+static const char bootfileHEAD[] = "HEAD ";
- static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
- static const char http_eom[] = "\r\n\r\n";
--static const char http_ok[] = "200";
- static const char content_len[] = "Content-Length";
- static const char linefeed[] = "\r\n";
- static struct in_addr web_server_ip;
-@@ -77,7 +77,7 @@ static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
- 	ulong newsize = offset + len;
- 	uchar *ptr;
- 
--	if (CONFIG_IS_ENABLED(LMB)) {
-+	if (CONFIG_IS_ENABLED(LMB) && wget_info->set_bootdev) {
- 		if (store_addr < image_load_addr ||
- 		    lmb_read_check(store_addr, len)) {
- 			printf("\nwget error: ");
-@@ -132,8 +132,17 @@ static void wget_send_stored(void)
- 			IP_TCP_HDR_SIZE + TCP_TSOPT_SIZE + 2;
- 		offset = ptr;
- 
--		memcpy(offset, &bootfile1, strlen(bootfile1));
--		offset += strlen(bootfile1);
-+		switch (wget_info->method) {
-+		case WGET_HTTP_METHOD_HEAD:
-+			memcpy(offset, &bootfileHEAD, strlen(bootfileHEAD));
-+			offset += strlen(bootfileHEAD);
-+			break;
-+		case WGET_HTTP_METHOD_GET:
-+		default:
-+			memcpy(offset, &bootfileGET, strlen(bootfileGET));
-+			offset += strlen(bootfileGET);
-+			break;
-+		}
- 
- 		memcpy(offset, image_url, strlen(image_url));
- 		offset += strlen(image_url);
-@@ -193,6 +202,47 @@ static void wget_timeout_handler(void)
- #define PKT_QUEUE_OFFSET 0x20000
- #define PKT_QUEUE_PACKET_SIZE 0x800
- 
-+static void wget_fill_info(const uchar *pkt, int hlen)
-+{
-+	const char *first_space;
-+	const char *second_space;
-+	char *pos, *end;
-+
-+	if (wget_info->headers && hlen < MAX_HTTP_HEADERS_SIZE)
-+		strncpy(wget_info->headers, pkt, hlen);
-+
-+	//Get status code
-+	first_space = strchr(pkt, ' ');
-+	if (!first_space) {
-+		wget_info->status_code = -1;
-+		return;
-+	}
-+
-+	second_space = strchr(first_space + 1, ' ');
-+	if (!second_space) {
-+		wget_info->status_code = -1;
-+		return;
-+	}
-+
-+	wget_info->status_code = (u32)simple_strtoul(first_space + 1, &end, 10);
-+
-+	if (second_space != end)
-+		wget_info->status_code = -1;
-+
-+	pos = strstr((char *)pkt, content_len);
-+
-+	if (pos) {
-+		pos += sizeof(content_len) + 1;
-+		while (*pos == ' ')
-+			pos++;
-+		content_length = simple_strtoul(pos, &end, 10);
-+		debug_cond(DEBUG_WGET,
-+			   "wget: Connected Len %lu\n",
-+			   content_length);
-+		wget_info->hdr_cont_len = content_length;
-+	}
-+}
-+
- static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
- 			   u8 action, unsigned int tcp_ack_num, unsigned int len)
- {
-@@ -241,7 +291,11 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
- 		initial_data_seq_num = tcp_seq_num + hlen;
- 		next_data_seq_num    = tcp_seq_num + len;
- 
--		if (strstr((char *)pkt, http_ok) == 0) {
-+		wget_fill_info(pkt, hlen);
-+		debug_cond(DEBUG_WGET,
-+			   "wget: HTTP Status Code %d\n", wget_info->status_code);
-+
-+		if (wget_info->status_code != 200) {
- 			debug_cond(DEBUG_WGET,
- 				   "wget: Connected Bad Xfer\n");
- 			wget_loop_state = NETLOOP_FAIL;
-@@ -251,17 +305,6 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
- 				   "wget: Connected Pkt %p hlen %x\n",
- 				   pkt, hlen);
- 
--			pos = strstr((char *)pkt, content_len);
--			if (!pos) {
--				content_length = -1;
--			} else {
--				pos += sizeof(content_len) + 2;
--				strict_strtoul(pos, 10, &content_length);
--				debug_cond(DEBUG_WGET,
--					   "wget: Connected Len %lu\n",
--					   content_length);
--			}
--
- 			net_boot_file_size = 0;
- 
- 			if (len > hlen) {
-@@ -397,10 +440,13 @@ static void wget_handler(uchar *pkt, u16 dport,
- 	case WGET_TRANSFERRED:
- 		printf("Packets received %d, Transfer Successful\n", packets);
- 		net_set_state(wget_loop_state);
--		efi_set_bootdev("Net", "", image_url,
--				map_sysmem(image_load_addr, 0),
--				net_boot_file_size);
--		env_set_hex("filesize", net_boot_file_size);
-+		wget_info->file_size = net_boot_file_size;
-+		if (wget_info->method == WGET_HTTP_METHOD_GET && wget_info->set_bootdev) {
-+			efi_set_bootdev("Net", "", image_url,
-+					map_sysmem(image_load_addr, 0),
-+					net_boot_file_size);
-+			env_set_hex("filesize", net_boot_file_size);
-+		}
- 		break;
- 	}
+-	return ret;
++	return ret < 0 ? ret : 0;
  }
-@@ -425,6 +471,9 @@ static unsigned int random_port(void)
+ #endif
  
- void wget_start(void)
- {
-+	if (!wget_info)
-+		wget_info = &default_wget_info;
-+
- 	image_url = strchr(net_boot_file_name, ':');
- 	if (image_url > 0) {
- 		web_server_ip = string_to_ip(net_boot_file_name);
 -- 
 2.43.0
 
