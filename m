@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61EB4D3ABC9
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 16:11:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE677D3ABCA
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 16:12:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C829888EC9;
-	Mon, 11 Nov 2024 17:11:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 388FB88EC9;
+	Mon, 11 Nov 2024 17:12:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZRS8hwma";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SEIcxEj/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5967488E75; Mon, 11 Nov 2024 17:11:17 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id BC6A888EC9; Mon, 11 Nov 2024 17:11:59 +0100 (CET)
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3934C88EC9
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 17:11:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 647F088E75
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 17:11:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-7b14443a71eso373602185a.1
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 08:11:15 -0800 (PST)
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-4613162181dso35422911cf.3
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 08:11:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731341474; x=1731946274; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8QGZZ5Cr3zabIUoC5ldkc57xh9owp79rd5S2TJBIcaU=;
- b=ZRS8hwmaNA5FzGBM45w7SpJQ8Ib5pY4BepaWE4FmO839+tg6urS0oBdrwOlZHgPoF1
- E32o2bx/xB5k/KfJBq/bO4pM1ilrTrog7EVa9BxA4ofml3ZPxR20DhZuUZ/OMOl2uqAA
- DHuzSxSlXf4iXopK54uIqvtD5kFtmhmP+1WBg=
+ d=konsulko.com; s=google; t=1731341516; x=1731946316; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=JMRMhY9/3sDLiIt78BTgjQKgfEZozy9af1wHD2Yi828=;
+ b=SEIcxEj/AY+dt1LhFfZTIu0tQOXaXXq9mcDDgVJrBkXDSesAH7j3vPJM05wZUOTzRl
+ 5k9oujkEnvywqZfYcBRl+AvJOhITXhejiUXKD7xRGqPw3wV6fgzn/mn9w9AoJqCJYyOC
+ 29nsh00VXvMcIAHHWBE2gNbGgpm9FLmbRS1F8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731341474; x=1731946274;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8QGZZ5Cr3zabIUoC5ldkc57xh9owp79rd5S2TJBIcaU=;
- b=UYWslnipJLVF4SiNETBxCnh8jW7xE1bPy4Q06tPKn8pOaX+PQGyoOx4geH4a2lbB57
- IKxJI0VIy4zmbeQWlFRDdIkc0bJLfpocYlz5qxfNqlgdkTu6AHkxelji2s9y+OoueJEu
- ZqIGQTYU7A2aVEQqxhW2hdP5dolG7QL8FBCLid3mmgMMeYJZ59wJcgD9WZ2g799kL3Bj
- AWJUv1teoPc1p+eb6mtGau9j9t6b3F3nDus1B61+t2LJZyoEWUN43xaM1O2dnCQ4TYKL
- HzypeeCkuRV2BYFqeDhGQC67rigtG0mvSeQe8OqOSRNM2cu7Ip2STlYhHsC4Ow40e9Tw
- bQ6w==
-X-Gm-Message-State: AOJu0YzAd2kPSx+Zd8JsGDSTD5Zpg8hCavdiZobre2FWTJtjj+85YcqO
- /IU1xZRHKg3eocBkTM5MvObtjDjx3PDCvEG2W6nM5YWNCfSrmG5AKg7603EFcctLmSH247EynkF
- 6DP4=
-X-Google-Smtp-Source: AGHT+IGVAmg6QFHHLjNaDPi8nU8tVD2Vj2mCUbdhq4enMOvG8klOskiiYXaibuchLxd+v9QBXfSOGA==
-X-Received: by 2002:a05:6214:5413:b0:6d3:b636:eccc with SMTP id
- 6a1803df08f44-6d3b63717f3mr96542376d6.21.1731341473939; 
- Mon, 11 Nov 2024 08:11:13 -0800 (PST)
-Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d396630f80sm61247146d6.103.2024.11.11.08.11.12
+ d=1e100.net; s=20230601; t=1731341516; x=1731946316;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JMRMhY9/3sDLiIt78BTgjQKgfEZozy9af1wHD2Yi828=;
+ b=aZ0JBsX3BD9bpUJKmwgvyTCZj49XZuE3K9uxhb0AzRqYXcl/Rnn2HWihqpIH+jTT2q
+ R4sZm04EyRa6/Yyp1G5YWJGKilqP6CCKVZEZOFhND8kfGv946nP1hkdHe0ktI8Gh87gv
+ 9D/xWReYi9xMFAUDhMceyKUxw+2XtoFgIsPLcgLv/1DGoyJvFCWAbVKDrf21wsluLgrc
+ unD7TggiUE9gKZbz0iIB0HVwUOWE1kWOWfpLK0rloo3owgzVUHQXcKJ7uyM5ljlTGDD1
+ jb8tfZ6jif4AeCjM2XbZ3tiFzoSdboPj3cFZUZzWlsKLhZzGoRnx8IpGNAul79m7WFqJ
+ g+tw==
+X-Gm-Message-State: AOJu0YyxPOd7G5QYOyTw3QjQymIFkv9Mh+afKaEdJGlOUQyXpC5B2adu
+ YRhwTMMLwSSmQMWFHeuWMhmkL/wximY4V0GtKrEbUePDp/VtAd2qk/faYKwhw4Hblno5ac8AZYV
+ NMO4=
+X-Google-Smtp-Source: AGHT+IGSF/RmXlwYLo0easw2wb/bsAZ4ulodvZr3uzGCk7rZUAe+2G8Srm1XbkoCnQuquxLOJ2wjLQ==
+X-Received: by 2002:ac8:6784:0:b0:463:17d2:4b8e with SMTP id
+ d75a77b69052e-46317d24eb4mr82793971cf.55.1731341516134; 
+ Mon, 11 Nov 2024 08:11:56 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-462ff3df2d8sm64234291cf.7.2024.11.11.08.11.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Nov 2024 08:11:13 -0800 (PST)
+ Mon, 11 Nov 2024 08:11:55 -0800 (PST)
+Date: Mon, 11 Nov 2024 10:11:53 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Mark Kettenis <kettenis@openbsd.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Janne Grunau <j@jannau.net>
+To: Kever Yang <kever.yang@rock-chips.com>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20241111-io_lmb_apple_dart_iommu-v3-0-32c05da51d72@jannau.net>
-References: <20241111-io_lmb_apple_dart_iommu-v3-0-32c05da51d72@jannau.net>
-Subject: Re: [PATCH v3 0/4] Fix IOVA allocation in Apple dart iommu after
- global LMB mem map changes
-Message-Id: <173134147259.373368.13366241380547526820.b4-ty@konsulko.com>
-Date: Mon, 11 Nov 2024 10:11:12 -0600
+Subject: Re: Pull request: u-boot-rockchip-20241111
+Message-ID: <20241111161153.GU3600562@bill-the-cat>
+References: <20241111095800.293704-1-kever.yang@rock-chips.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QtuixkMUNbb3mBPz"
+Content-Disposition: inline
+In-Reply-To: <20241111095800.293704-1-kever.yang@rock-chips.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,24 +90,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 11 Nov 2024 07:56:30 +0100, Janne Grunau wrote:
 
-> The changes in "Make LMB memory map global and persistent" [1] break
-> mapping DMA memory in the USB xHCI driver when using the apple_dart
-> iommu present on Apple silicon systems.
-> 
-> The IOVA space used by the u-boot driver (low 4GB) and physical memory
-> do not overlap. The physical memory on this systems starts depending on
-> the SoC either at 0x10_0000_0000 or 0x100_0000_0000. It make no sense to
-> manage these distinct regions in a single LMB map. In addition every
-> device has its own iommu and IO address space so sharing a single memory
-> map between all iommu instances is not necessary.
-> 
-> [...]
+--QtuixkMUNbb3mBPz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Nov 11, 2024 at 05:58:00PM +0800, Kever Yang wrote:
+
+> Hi Tom,
+>=20
+> Please pull the updates for rockchip platform:
+> - Add board:
+> 	rk3328: FriendlyElec NanoPi R2S Plus
+> 	rk3568: Qnap TS433
+> 	rk3588: Cool Pi CM5 GenBook
+> - Move rk3399_force_power_on_reset to TPL for puma board;
+>=20
+> CI:
+> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/23280
+>=20
+> Thanks,
+> - Kever
+>=20
+> The following changes since commit 56accc56b9aab87ef4809ccc588e1257969cd2=
+71:
+>=20
+>   bios_emulator: fix first argument of pci_{read,write}_config_* function=
+ calls (2024-11-04 18:01:58 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boo=
+t-rockchip-20241111
+>=20
+> for you to fetch changes up to 0a17123dedf827f4ca9b158252279adf03906307:
+>=20
+>   rockchip: rk3399: move sysreset-gpio logic to TPL (2024-11-11 15:14:15 =
++0800)
+>=20
 
 Applied to u-boot/master, thanks!
 
--- 
+--=20
 Tom
 
+--QtuixkMUNbb3mBPz
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcyLMgACgkQFHw5/5Y0
+tyza/wv/U6uzWTZoid+r5g6sS3B7NnV9bKVxrFZOzvcKiB4E3AmNaedE/39Hei7G
+4AY0gYMm0zKBeQ400+jnVjA3cBTxhWfXrNNOJUlp0E9m2hfU8/NfqqmJzh/Ovxfd
+VjUwTlruhrUQDzteHOChPgIqF9KyTTMm9iANjfDJKTT1lquiRSB5tyXWkIKi5qH1
+owJYpYgqwp+2EYzCqoBward823EcQ5W0rx3je4q9siJRsUwxqnwjQywIMOuWP6/n
+lRVVTFPAOn7zSyRvxY0d3/iFwUs66U7NRH3W9n5vrIH8CassntX8dw0Op4+jVMAj
+SEeU6HfQfbJJmf4HbMnSB/jBNlTtmT7beSevVZg0B3tU/mb6G/JFfAS0sr+JRtwR
+DQsJKTMR+1Tn/5NmVIHVItPoFkCBkxM1RFulbkXVCqlqXgIE2j4Tw1UrCebMjec9
+B4ErdXM3cS3o4lrEczOCJ/6UpJoE0wsnn5cedykPrE05VCAaX+sHyjWbso51omW8
+Nq3vXzwd
+=Tkpg
+-----END PGP SIGNATURE-----
+
+--QtuixkMUNbb3mBPz--
