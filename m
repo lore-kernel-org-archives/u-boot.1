@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1A44D2E9DA
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 11:15:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0648D2E9D8
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 11:23:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00B6889366;
-	Mon, 11 Nov 2024 12:15:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 13BA089099;
+	Mon, 11 Nov 2024 12:23:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PmGZG/hW";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="DCtXT4CQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAC678936B; Mon, 11 Nov 2024 12:15:25 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 888E58917A; Mon, 11 Nov 2024 12:23:04 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A533788F8E
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 12:15:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7102388FBF
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 12:23:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2e2e6a1042dso3521877a91.2
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 03:15:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731323722; x=1731928522; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=X5LmZmxcLSfVrRTae+pscOVfIAEqhriVN/sWSA99zN4=;
- b=PmGZG/hWUbkHisVsCRmUt+62+Rq91uukIrThVF1ZQNzZ3D2xzakLmyU6jdP3YoNjkv
- jJvl+55oB96NdQaEdshdL3efRe2p4l35CY+Ml9iVh9oJD/V1BPFTFYj4yJXaq+gwrDHb
- 4ybJ1a4qrzjCbAqcd4ItENo+w8yBiFyzg8KGoeXb0QvS2YMgZztzlzBSDVmyq2738JpS
- 4KEel0M27JhkMdxH/icOVuhItIYGj7X8CHo0IET7CdAAyPgct6mDH2oF35XwOKUYOZpx
- vFtt5/wX+FqaMVguUhQl92oaeUgL3J9vGSkBEzBW+3lXUoE2TK9Zb2nLGuj18z8WJQ/T
- unUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731323722; x=1731928522;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=X5LmZmxcLSfVrRTae+pscOVfIAEqhriVN/sWSA99zN4=;
- b=asfoUo1dKQIw+spejQhrwqSsf3Wm/O3ZVC6M1n60B0UnbMoPufaF+Ho4yQAoNpil6d
- vDJx6P25cyeU960X7tx9/J5jyRtcSECq86uJlI7ALSpfzfSt90Pm10kuGz2MZrDAWjXc
- 8sxR3O6kAnH8fy5wLkSzpsmQqFnrTpF+Pnr6bWm0LeIRLrF1eq0rzqdZ0T4oE8JqiTIo
- 1pngi4whRQMDXJWDbWLkMee7wJIF/3Unwclo0VCadlYp76FW+Pby2OY4cuevQ1CoasfV
- RwEAufYU4BU9qNHklMRSx8gnlrqHFPz6v9syMIalK+JKE4TkuFXU11k4uHcZqkEOoJ9t
- ybGA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUDpZmHiVUN/NbjpEwjK8vFisoO9HJHxevQp0vD0kh9xJITkrAMVnkAqDsMaClDBDya7IWxfxA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz1XqKbHUF7Bo6WJgBOu2b310cfOVt+a22EGpvcd+cxzsCTbnAj
- 61WRFiASqPI2Y1I6F9IPMZD6qoMVEvlkF7/P758meT+P4uhjXW8cjS0uNCXE5UZRxGULC1xj3VY
- QxRd590A0M1p4ky5bIUu+t3Jwvh20EddFivXJPQ==
-X-Google-Smtp-Source: AGHT+IES1D51RgEs7pdL0ZbhQTQkMVqU6PA5qzA81qFRlmrmV+QM/tcHDn0KBndg9oaijx3OoDwK6H+nhaCJJ+eh4M8=
-X-Received: by 2002:a17:90b:4b88:b0:2e2:c681:51ce with SMTP id
- 98e67ed59e1d1-2e9b16e552fmr17245950a91.1.1731323722057; Mon, 11 Nov 2024
- 03:15:22 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1731324180; x=1731928980; i=xypron.glpk@gmx.de;
+ bh=SrqX32lh188RRJnnIEVW0DA4dRxwy9C6wFbq0StnXPI=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=DCtXT4CQ5Coh5D40ZMUdXAmseHgB7U8UlEp51H0J6tOE6q6Q9BYbWqLVGZQ1F2c+
+ AJWPs/cZ4SPMaZCucWtrSsx1qzwPRPdjILQt0pd/s8HZbuGVLEdHNUUf3FB5QiGgy
+ v/1xw9oupBvzlaaAo+InWzeb0SaPch/Dlu+6vdEkK79S3C6fPxGmPxf7TI6xSFfzG
+ O2RiEbj1H4oF+5oLKKD9txdBElho4Cr5+CxrgUOgPTjwjcB7i2HF6MEApzYjD46rY
+ whhmVZEmkTrPoP4XEreg0p30YpWVPAnpic3xuWCPxQ37a1bhsfvIbNXCuB6zjm9oH
+ C+IV2lK5eluanr+Gjw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N8GMq-1tnpki37zc-016jta; Mon, 11
+ Nov 2024 12:23:00 +0100
+Message-ID: <1321cc2e-5234-4be1-b50c-f50de04c3d06@gmx.de>
+Date: Mon, 11 Nov 2024 12:23:00 +0100
 MIME-Version: 1.0
-References: <20241102102737.107531-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241102102737.107531-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 11 Nov 2024 13:14:45 +0200
-Message-ID: <CAC_iWjJ3d7qtw76M2aWHwRkzBg7F_nJnAjg6Td0_PtkqFQXL_g@mail.gmail.com>
-Subject: Re: [PATCH 1/1] tpm: use memmove() for overlapping buffers
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/4] efi_loader: preserve installer images in pmem
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+References: <20241025111411.165904-1-sughosh.ganu@linaro.org>
+ <20241025111411.165904-4-sughosh.ganu@linaro.org>
+ <35b2ecd1-5d92-4bbe-886a-82c567f0e20d@gmx.de>
+ <CAC_iWjKikR4QuPODRbAw3i7v0jjC3JnEaHJ3eTcj4=P4_S0pSw@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAC_iWjKikR4QuPODRbAw3i7v0jjC3JnEaHJ3eTcj4=P4_S0pSw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:0RPS0SMlOWjAga+Vzq0a9jb4E/FDcBVCVz9CQCXF7llA6cPQSBG
+ n48mqSwveDg7u8jw5lsBwpg7tiEGr5ZFEepulKuz6kjeLxXvUaPeY00XoIJQX2DHny+P9CP
+ /U4kheLXp3voPTaIcbKklbWo6iRQrv7rULYs3foRep+kdnahsXsgdAjYyB72LtC2ZwddkK1
+ a/braFHi9gujhYTAXMGOA==
+UI-OutboundReport: notjunk:1;M01:P0:/aJN7BGnxwQ=;Qg+2SJ+7dHrsOju2n6bD70W70zX
+ qc3tlogOrvEGgzOjrkHvYhKfKRN4P6GYGUPQzDwehc3lH8Q+RaOV+DX8AMORHZLHE+B673HiL
+ CV6Basn+jWquirGaWmSYH5AuPKE4NMHALScuuMSvKPX9jed1CUvRt8gGGXSmELjlzn8tsap3t
+ tzePzJcuaPHrezXrDLjMaIsZ6YWwRlLEtxt4+1f1CR+7CBfQKgGnAzZviUMyHnp/pnus6/msh
+ WaoP0CZDKNv3Uc3n25sAany4jRsY1WYCrBGQyLLblLtTw7OyCTvrvuslTzJsGWbGDZPu+zM7u
+ 9wDWx6CTAgxPS8cBhJiZmAqEQ7N0Ew7GgoTHci9dqZ1VmaxKVWkdFp4HT/oGuFY+9DN1J0Ei6
+ cxY+x2Jy2WpQ293bGUhK/0y61DAQzmE/LNFbwd4j17NI+FNarzwWI9nZJ3+QahI8Xa03/pUDV
+ Si2D239rPiVhO2Z2v/hNGgg5S28Ci7sdL7pyHO+jzwapARYnSJWxiLRxvDVY1pkdLZCTg5e90
+ rGXdS2I0x1L7vr4WyCEX1wZeFgfVpO6vSnGwWoooAKUsF5rBhX4JSULiN5U8Z5klPihOcfDCL
+ w/z2N6Bo80CyMzd6tr/86eI71ygPJkNKNakl6WQCc6LwNO5mUiJ3lA+cxJN7b3FoIY6haYRL9
+ vt9Zt1riGxsAbBq0K23QmnnPAkXpWvkyskvXpjFasqMZZLG/T4jiP/V5M5g4t20nJ1eW709hw
+ 97SopMDW6OepsEMwy0bM4E+8zk2jm/+4uv4Go7k1kKXqNUoGYCYS7ucl2lK3LCa8vnKZu/lCG
+ XDGjULriZyaU/Ucgu1oFZZVzMo1UfJlsGkPosaHckPyftVhbpy7wqmDCnYjh740DjgPRQCAAy
+ 9Q32GPBHSvDJsRkRRkRC5xwFHeWlWOl0ybHukkL7McuCYZMCmIWQKy/4e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,33 +94,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 2 Nov 2024 at 12:27, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On 11/11/24 11:46, Ilias Apalodimas wrote:
+> On Mon, 11 Nov 2024 at 10:05, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
+rote:
+>>
+>> On 10/25/24 13:14, Sughosh Ganu wrote:
+>>> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>>>
+>>> One of the problems OS installers face, when running in EFI, is that
+>>> the mounted ISO after calling ExitBootServices goes away. For some
+>>> distros this is a problem since they rely on finding some core package=
+s
+>>> before continuing the installation. Distros have works around this --
+>>> e.g Fedora has a special kernel command line parameter called
+>>> inst.stage2 [0].
+>>>
+>>> ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
+>>> don't have anything in place for DTs. Linux and device trees have supp=
+ort
+>>> for persistent memory devices.
+>>>
+>>> It's worth noting that for linux to instantiate the /dev/pmemX device,
+>>> the memory described in the pmem node has to be omitted from the EFI
+>>> memory map we hand over to the OS if ZONE_DEVICES and SPARSEMEM is
+>>> enabled. With those enabled the pmem driver ends up calling
+>>> devm_memremap_pages() instead of devm_memremap(). The latter works
+>>> whether the memory is omitted or marked as reserved, but mapping pages
+>>> only works if the memory is omitted.
+>>>
+>>> On top of that, depending on how the kernel is configured, that memory
+>>> area must be page aligned or 2MB aligned. PowerPC is an exception here
+>>> and requires 16MB alignment, but since we don't have EFI support for
+>>> it, limit the alignment to 2MB.
+>>>
+>>> Ensure that the ISO image is 2MB aligned and remove the region
+>>> occupied by the image from the EFI memory map.
+>>>
+>>> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+>>> ---
+>>>    lib/efi_loader/efi_bootmgr.c | 22 +++++++++++++++++-----
+>>>    1 file changed, 17 insertions(+), 5 deletions(-)
+>>>
+>>> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr=
+.c
+>>> index a3aa2b8d1b..16f75555f6 100644
+>>> --- a/lib/efi_loader/efi_bootmgr.c
+>>> +++ b/lib/efi_loader/efi_bootmgr.c
+>>> @@ -18,6 +18,8 @@
+>>>    #include <efi_loader.h>
+>>>    #include <efi_variable.h>
+>>>    #include <asm/unaligned.h>
+>>> +#include <linux/kernel.h>
+>>> +#include <linux/sizes.h>
+>>>
+>>>    static const struct efi_boot_services *bs;
+>>>    static const struct efi_runtime_services *rs;
+>>> @@ -358,13 +360,16 @@ static efi_status_t prepare_loaded_image(u16 *la=
+bel, ulong addr, ulong size,
+>>>        }
+>>>
+>>>        /*
+>>> -      * TODO: expose the ramdisk to OS.
+>>> -      * Need to pass the ramdisk information by the architecture-spec=
+ific
+>>> -      * methods such as 'pmem' device-tree node.
+>>> +      * Linux supports 'pmem' which allows OS installers to find, rec=
+laim
+>>> +      * the mounted images and continue the installation since the co=
+ntents
+>>> +      * of the pmem region are treated as local media.
+>>> +      *
+>>> +      * The memory regions used for it needs to be carved out of the =
+EFI
+>>> +      * memory map.
+>>>         */
+>>> -     ret =3D efi_add_memory_map(addr, size, EFI_RESERVED_MEMORY_TYPE)=
+;
+>>> +     ret =3D efi_remove_memory_map(addr, size, EFI_CONVENTIONAL_MEMOR=
+Y);
+>>>        if (ret !=3D EFI_SUCCESS) {
+>>> -             log_err("Memory reservation failed\n");
+>>> +             log_err("Failed to reserve memory\n");
+>>>                goto err;
+>>>        }
+>>>
+>>> @@ -486,6 +491,13 @@ static efi_status_t try_load_from_uri_path(struct=
+ efi_device_path_uri *uridp,
+>>>                ret =3D EFI_INVALID_PARAMETER;
+>>>                goto err;
+>>>        }
+>>> +     /*
+>>> +      * Depending on the kernel configuration, pmem memory area must =
+be page
+>>> +      * aligned or 2MB aligned. PowerPC is an exception here and requ=
+ires
+>>> +      * 16MB alignment, but since we don't have EFI support for it, l=
+imit
+>>> +      * the alignment to 2MB.
+>>> +      */
+>>> +     image_size =3D ALIGN(image_size, SZ_2M);
+>>
+>> The code regarding .iso and .img handling seems to be misplaced. Why
+>> should we treat a file loaded from a block device differently to a file
+>> loaded from the network?
 >
-> The behavior of memcpy() for overlapping buffers is undefined.
->
-> Fixes: 4c57ec76b725 ("tpm: Implement state command for Cr50")
-> Addresses-Coverity-ID: 356664 Overlapping buffer in memory copy
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/tpm-v2.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> index 59e6cbafafa..ad2b5ab0c32 100644
-> --- a/lib/tpm-v2.c
-> +++ b/lib/tpm-v2.c
-> @@ -821,7 +821,7 @@ u32 tpm2_report_state(struct udevice *dev, uint vendor_cmd, uint vendor_subcmd,
->         if (*recv_size < 12)
->                 return -ENODATA;
->         *recv_size -= 12;
-> -       memcpy(recvbuf, recvbuf + 12, *recv_size);
-> +       memmove(recvbuf, recvbuf + 12, *recv_size);
->
->         return 0;
->  }
-> --
-> 2.45.2
->
+> If the installer is located in a block device, the kernel will find
+> the image when it scans those devices during boot. It's only when we
+> have it on a memory area that we need to preserve it
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+I meant we could have a block device with an '*.iso' file on it, which
+we load into memory.
+
+Simon has been working on keeping track of loaded images. Possibly
+besides EFI binaries we can keep track of loaded ISOs in the same way in
+future.
+
+For the moment being let't use the patch as is.
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+>
+> Thanks
+> /Ilias
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>>>
+>>>        /*
+>>>         * If the file extension is ".iso" or ".img", mount it and try =
+to load
+>>
+
