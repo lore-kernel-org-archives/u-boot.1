@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4000FD41D44
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:39:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F334D41D44
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:47:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D185893A5;
-	Tue, 12 Nov 2024 03:39:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7442289394;
+	Tue, 12 Nov 2024 03:47:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="coO7Ic70";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MTGEhzNe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 695CD893A1; Tue, 12 Nov 2024 03:39:06 +0100 (CET)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
+ id 523D089390; Mon, 11 Nov 2024 22:09:11 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32393893A5
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 03:39:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 84EC489397
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 22:09:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-7eab7622b61so3495160a12.1
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 18:39:02 -0800 (PST)
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-20c693b68f5so50735105ad.1
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 13:09:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731379140; x=1731983940; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1731359347; x=1731964147; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dfgkUf5q2+uzcMQb76Hirvf0Fv6h6PUf5JdtsS7RHWc=;
- b=coO7Ic709G72V8In8Wd+IUKMxx1anAhojpXg6k2AMasVMkZVTnAKq3ySC9VqBxvY/F
- +vPlhFBfOwbG9xh3IHNzP0Q5hQ739Zj7WHBcPqPVRSm0Md8trUKmykCP4aYpYeUf+4de
- T12/H1NNJcltZeIec1KRzfjFgWMKfSKviqHFw5qas/8DgJyUZhQL4YpZm0P4X1P/J6Xf
- dcrfnFiVZySLW9bWIHK+mdpUWTwsjkbdEM6FaR45i2Ba7Yc3KfdAdl4sdGOmynIntJ4w
- NJfr/rsxpww4oTPTXhNiqeJoP9Ym2IYTqoZkVah7o9CexYyj1Xfe170UCf2qkWP7Y614
- dtxA==
+ bh=tskGRX/EyISPYXwDxoVvBJsjOZnxqvqbqrVpw9s8Zig=;
+ b=MTGEhzNenQBcp+Vnv0JYhcQC8eunbGPWRce8nm2Mg/ZAG4BF42kr0b0lveO/68yp95
+ UhLfgKTvoWYXzj3GCGyJI+vbif/tmzeqHK/fr1dVjdPOep/znzYEzTN7gHqypJxIDc+F
+ 170d2V+vxIv+nm4js4Ia3PN6bP+hfxW4MBQWH4GPNpaQBSMqim754sGf1yBkPZkqYZOm
+ uNv8Zm4g9Kbyv0MSSpFBD928dN+VvXyawxvA8qdKUnSEUcDuG5rw5WBxTo4ihkM4ffXZ
+ g+MS0cK6LhMkAyAW5wYk3Tm+odQHm8+0hmzdyHnxWH3thWsRLf+CPlejjxfAz+DYNF/I
+ WAXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731379140; x=1731983940;
+ d=1e100.net; s=20230601; t=1731359347; x=1731964147;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dfgkUf5q2+uzcMQb76Hirvf0Fv6h6PUf5JdtsS7RHWc=;
- b=u29bJ+oresh1XoWL8S8WA55jKh3WhNdXF1a7QUHWN8ASEK2ugvNyKK0noiYavnPHJR
- zAkkI5XBTF0irqZ9XPfThgQZPOKe2P7FjcRcPMEu61eN64DA9hOZGuPgvBGBtSRy4DuI
- wQ3tPBsjMp7ftUilaob0gZh77yfFCldX7JWd+unBS7mx/evNZIn3skmLAIxCYLQKNQol
- w+AYgPfKkbePkU36Av98FMFzM0/+Tv0iyRkD0yUBiEngBHdkJ8bK8ocK34peo+Aw9Taw
- 8wLTgDjk+x2l69roiYAd+QspPparTd0+wKjVztnxS1g0T99Z7g70JuaNffB6GuEpAbmH
- LaHA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/Lwt4/LHQlzHMdG9ebcwCEPqQfF9mhvdbcXXxAwLh5Gz6QWARar6At80D96AvJH9phbmdpBg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzlE0lIkJhlBh0n8r4eJTXgvQea/Ffk1kVoE1FyO6jNVNea4IkV
- kNqsd2I0bZ/L3yjSA5kWQRMdnWWpwy+aclRtsbRietQXHapNE6fjf466tw==
-X-Google-Smtp-Source: AGHT+IEJVSxhMkQvgAOI8X2XpkBGaDuebIfz08K6zZd4vFD2kwOxfnAPEGn+sD5RQjfJ/ljzKgMYGg==
-X-Received: by 2002:a17:902:d2c8:b0:211:6b21:2370 with SMTP id
- d9443c01a7336-21183ced53dmr205779665ad.29.1731379140451; 
- Mon, 11 Nov 2024 18:39:00 -0800 (PST)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:be16:bfad:7211:61df])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21177e45ef0sm82748305ad.153.2024.11.11.18.38.58
+ bh=tskGRX/EyISPYXwDxoVvBJsjOZnxqvqbqrVpw9s8Zig=;
+ b=WLmn9ynP1HCWSkXzVnndKT1dQPwb6ldHPZh5eiJGdH8V+qVHvP4SsfcmpIXDgX+8Ix
+ 1O3JrB6i8lTcmBW9DKA73T52127iPb4eiW5G/rE0xFcKhEjBWpF1xhEYCkhewLtMzHwS
+ PlDH3Tb1Vm2rnho0UrV6f3ArqiyETivXPci6excKcqZT3WwG1/SiaFrbtgqcsm+8pRgK
+ Pjf78Z/bPMvGD5Idov4X7LwWRvfwGJZuQBfWdidFPafGBsmgZlPn7tR4OJk1YZO+2rf7
+ Y2vAK7MkugOSoY5dXlgE8edXKHmnmwmhbS7hjwZ9KALu4dL3L3FONp/qf19RmTR4NE5M
+ yRMg==
+X-Gm-Message-State: AOJu0Yz606D1A8wirExGTIf0Kbaasp45crvPYOaX9rV6p3EhBv1ttpYh
+ BUQDLPsxpGsbQ3fEgXvKAQL3zg6e2pK37n6kWpBD2U9A0aSe+jQ4hPZNJQXP
+X-Google-Smtp-Source: AGHT+IEncjgC6L2hcnkbXWKn/ZARKhrFnvUFleLQHhp7bdLKHE80aBmrwVsbBcONZ73v+tGo7WRUuA==
+X-Received: by 2002:a17:903:244f:b0:20b:7ec0:ee21 with SMTP id
+ d9443c01a7336-2118352689emr210249515ad.19.1731359346929; 
+ Mon, 11 Nov 2024 13:09:06 -0800 (PST)
+Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-21177dc9068sm79807415ad.2.2024.11.11.13.09.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Nov 2024 18:38:59 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: hs@denx.de,
-	u-boot@lists.denx.de,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] tools: imx8image: Add missing break for CMD_DCD_SKIP
-Date: Mon, 11 Nov 2024 23:38:54 -0300
-Message-Id: <20241112023854.2289656-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Mon, 11 Nov 2024 13:09:06 -0800 (PST)
+From: Adriano Cordova <adrianox@gmail.com>
+To: u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ Adriano Cordova <adrianox@gmail.com>
+Subject: [PATCH v2 0/7] wget: Expose wget to applications
+Date: Mon, 11 Nov 2024 18:08:54 -0300
+Message-ID: <20241111210901.560691-1-adrianox@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 12 Nov 2024 03:47:02 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,31 +90,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+Currently the wget command is focused on downloading the next boot stage.
+This series proposes to set wget as a general purpose HTTP request interface.
+This series splits the wget code from the wget command and exposes wget HTTP
+requests for applications to use. This comes in preparation for an efi HTTP 
+driver.
 
-The CMD_DCD_SKIP case misses a break statement.
+This series proposes to expose wget via the following struct:
 
-Add it.
+/**
+ * struct wget_http_info - wget parameters
+ * @method:		HTTP Method. Filled by client.
+ * @status_code:	HTTP status code. Filled by wget.
+ * @file_size:		download size. Filled by wget.
+ * @buffer_size:	size of client-provided buffer. Filled by client.
+ * @set_bootdev:	set boot device with download. Filled by client.
+ * @check_buffer_size:	check download does not exceed buffer size.
+ *			Filled by client.
+ * @hdr_cont_len:	content length according to headers. Filled by wget
+ * @headers:		buffer for headers. Filled by wget.
+ */
+struct wget_http_info {
+	enum wget_http_method method;
+	u32 status_code;
+	ulong file_size;
+	ulong buffer_size;
+	bool set_bootdev;
+	bool check_buffer_size;
+	u32 hdr_cont_len;
+	char *headers;
+};
 
-Fixes: 254c00803b63 ("tools: imx8image: add possibility to skip dcd")
-Addresses-Coverity-ID: 514648: Control flow issues (MISSING_BREAK)
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- tools/imx8image.c | 1 +
- 1 file changed, 1 insertion(+)
+The client can then pass such struct to wget in a network stack 
+agnostic way.
 
-diff --git a/tools/imx8image.c b/tools/imx8image.c
-index 96ece28bd6..7a060811c7 100644
---- a/tools/imx8image.c
-+++ b/tools/imx8image.c
-@@ -93,6 +93,7 @@ static void parse_cfg_cmd(image_t *param_stack, int32_t cmd, char *token,
- 	case CMD_DCD_SKIP:
- 		if (!strncmp("true", token, 4))
- 			dcd_skip = true;
-+		break;
- 	case CMD_FUSE_VERSION:
- 		fuse_version = (uint8_t)(strtoll(token, NULL, 0) & 0xFF);
- 		break;
+
+Adriano Cordova (7):
+  net: Kconfig: add CONFIG_WGET symbol
+  net: wget: add definition of struct wget_http_info
+  net: wget: Add interface to issue wget_requests using wget_http_info
+  net: wget: integrate struct wget_info into legacy wget code
+  net: wget: make wget_with_dns return value compatible with its lwip
+    version
+  net/lwip: wget: put server_name and port into wget_ctx
+  net/lwip: wget: integrate struct wget_info into wget code
+
+ cmd/Kconfig          |  5 +--
+ cmd/net.c            |  2 +
+ include/net-common.h | 54 ++++++++++++++++++++++++-
+ include/net-lwip.h   |  9 -----
+ net/Kconfig          |  9 +++++
+ net/Makefile         |  2 +-
+ net/lwip/Makefile    |  2 +-
+ net/lwip/wget.c      | 50 +++++++++++++++++++++---
+ net/net-common.c     | 14 +++++++
+ net/wget.c           | 93 +++++++++++++++++++++++++++++++++-----------
+ 10 files changed, 196 insertions(+), 44 deletions(-)
+
 -- 
-2.34.1
+2.43.0
 
