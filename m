@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6900D2E9F0
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 14:18:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66992D2E9F0
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 14:20:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 656CC88AE8;
-	Mon, 11 Nov 2024 15:18:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E63DE89319;
+	Mon, 11 Nov 2024 15:20:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rc8tEcqT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="phr73sBi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9985788599; Mon, 11 Nov 2024 15:18:50 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49EDF88FAF
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 15:18:48 +0100 (CET)
+ id 94B7D8931A; Mon, 11 Nov 2024 15:20:53 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 54EE688F3D
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 15:20:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4ABEIKaj2514395
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 11 Nov 2024 08:18:20 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1731334700;
- bh=mexHF/HfvnPJXZzDI+nyeRMjMYRV9SgopAZvmZYte+w=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=rc8tEcqTPSXrYN1nDcir7/+KmWLNk/asoH5Pd8uzPjOkyiMdK/HjbApFsAZ30q4sk
- ne5+zVSsihBf/nFgOrn0ykNGrtztaZGokuGyhvgvzcaUlCGgYnQUvoPTVp3vIyLghW
- 052GFWT2LvoptMygqer5/GiRyNY02q3DHCy8MNLI=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ABEIKGt032660
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 11 Nov 2024 08:18:20 -0600
-Received: from lewvowa01.ent.ti.com (10.180.75.79) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 11
- Nov 2024 08:18:20 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by lewvowa01.ent.ti.com
- (10.180.75.79) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.34; Mon, 11 Nov
- 2024 08:18:20 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 11 Nov 2024 08:18:19 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ABEIKLJ059860;
- Mon, 11 Nov 2024 08:18:20 -0600
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, Michal Simek
- <michal.simek@amd.com>, <u-boot@lists.denx.de>,
- Tom Rini <trini@konsulko.com>
-CC: Andre Przywara <andre.przywara@arm.com>, Ashok Reddy Soma
- <ashok.reddy.soma@amd.com>, Jagan Teki <jagan@amarulasolutions.com>,
- "Michael Walle" <mwalle@kernel.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Pratyush Yadav
- <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>, Sean Anderson
- <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Takahiro Kuwano
- <Takahiro.Kuwano@infineon.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories
- support in QSPI driver"
-In-Reply-To: <33e99705-77e3-4acf-95f7-fad65f60ae62@mailbox.org>
-References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
- <b9cb3ec8-b6f2-4f38-8cda-d3d10278f503@amd.com>
- <e9929e0c-aa43-428f-8bf7-7b4cdef0e9c3@mailbox.org>
- <86v7x05fyd.fsf@udb0321960.dhcp.ti.com>
- <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
- <86ses458k3.fsf@udb0321960.dhcp.ti.com>
- <f7bb335d-681a-4b60-92f6-b605cc6f477f@mailbox.org>
- <86pln759j9.fsf@udb0321960.dhcp.ti.com>
- <33e99705-77e3-4acf-95f7-fad65f60ae62@mailbox.org>
-Date: Mon, 11 Nov 2024 08:18:20 -0600
-Message-ID: <86ldxp6ehf.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-2110a622d76so40348305ad.3
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 06:20:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1731334850; x=1731939650; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=rZRNJkqDRYlU/Odx+GEaKm3wG80814O2MwyxTFI/mLY=;
+ b=phr73sBit8ttjWmG+vaArzCUfUts4860gI++3pv/1ki6MJgX9ieH4wZohz6T6t81Wn
+ /qNqpXeRPkiAIpnGmV55lt5twXv7Qz7U91G0eG7aN9vTW43LllgUL0Dx2Xmg1CROdptu
+ Ml+o24O1nRCXC6ouklfYsgzeqdC9sT43iwdmQip/U+4weN9q9/AmxuCM4IWFSzE/QUMy
+ oiZFbcVhgxPeUP6xz7fpqyWqgPTUfkIp9CUOAPqNS9gYXqQ/gSYej7RwgIw2hKlbU6nf
+ WsKUPhxkD7o8OPSyEVagmGkycvYkVRIarnZ3O9ACInLyV8MEWL3u4qWSOHwk8bOxwadd
+ bRcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731334850; x=1731939650;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rZRNJkqDRYlU/Odx+GEaKm3wG80814O2MwyxTFI/mLY=;
+ b=uTrivd9GOmkhBb2xQ/q6LxlR2XCJrW+g2tXScfxrJn8G/NSONv4FLI45VIwrFJQAKL
+ ZgQP2UbXl0ZxRIUgsYIY2qKqpsnlwNGAJKkSXv95uW/t8DO5VaEnhWmtZgTVE+Srj8zP
+ cGZbAsn6ZvjKHOXBzd2HWxX3+ccqIpT48ecIXoYPzhrXilfa4kd7Lf5bKE10ppkWFyRa
+ QWQvaI1IhFklV7MZ961XivXPcvZhKj/7LDczPUSNghxILq5MRHY81C34peZBh/cxy6QX
+ ew/K/wiEJPxnonMrM/yBDwYwDUIW0A2dA2zkuf7s1D185/PMxsEJpsgCwjJB/KuWwYpv
+ SdNQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUOnOUquag5q1IGLfS1kFwfXhP4C4Br6+GeSCS3wyhX8hzFLsqrhPgsuFvmcOrTPlRULT5RK+Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YyfwYIrRISIarTlcJcjATNqXk2rayNiowUzWplELF5uec0ls2LM
+ bstYRA48BzGgoDL/6OtrFPM/KGFIdIRc8D8fUAbHBNZ9ZkCVMiR6W2SmG8pyA8kcCyitQmPQU+J
+ Bp4w8bWVcji3/AxC60l3uIS0Wh4bE9Ay1x2ohCw==
+X-Google-Smtp-Source: AGHT+IFf4Ns5Bj3CfAYidcNu74f9Q4qE3Sh92A8DFweZdf0Po4SrsaA+xugZPGBhdUbYhLN52T2mB5ohATane9e/vXU=
+X-Received: by 2002:a17:902:c411:b0:20c:5b80:930f with SMTP id
+ d9443c01a7336-21183c41e75mr140157995ad.12.1731334849845; Mon, 11 Nov 2024
+ 06:20:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241110083017.367565-1-ilias.apalodimas@linaro.org>
+ <20241110083017.367565-5-ilias.apalodimas@linaro.org>
+ <CAFLszThNpU2cNNvU4uT2vkgFKJr7ss=j_UYfXTFXA_b4=LnurA@mail.gmail.com>
+In-Reply-To: <CAFLszThNpU2cNNvU4uT2vkgFKJr7ss=j_UYfXTFXA_b4=LnurA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 11 Nov 2024 16:20:13 +0200
+Message-ID: <CAC_iWjKFxtBxEqkkXSOhcRqN4fRRgMcsmFRVYeNZOnR4zERrQQ@mail.gmail.com>
+Subject: Re: [PATCH v3 4/6] net: lwip: Enable https:// support for wget
+To: Simon Glass <sjg@chromium.org>
+Cc: jerome.forissier@linaro.org, Anton.Antonov@arm.com, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Wei Ming Chen <jj251510319013@gmail.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,104 +101,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Marek Vasut <marek.vasut@mailbox.org> writes:
+Thanks Simon,
 
-> On 11/7/24 4:49 PM, Jon Humphreys wrote:
->> Marek Vasut <marek.vasut@mailbox.org> writes:
->> 
->>> On 11/6/24 10:58 PM, Jon Humphreys wrote:
->>>> Marek Vasut <marek.vasut@mailbox.org> writes:
->>>>
->>>>> On 11/6/24 8:18 PM, Jon Humphreys wrote:
->>>>>> Marek Vasut <marek.vasut@mailbox.org> writes:
->>>>>>
->>>>>>> On 10/23/24 10:17 AM, Michal Simek wrote:
->>>>>>>>
->>>>>>>>
->>>>>>>> On 10/22/24 23:06, Marek Vasut wrote:
->>>>>>>>> This reverts commit 1e36d34b52e7a1ebe5a2a5339d6905540f4253aa.
->>>>>>>>>
->>>>>>>>> This parallel/stacked support breaks basic SPI NOR support,
->>>>>>>>> e.g. this no longer works:
->>>>>>>>>
->>>>>>>>> => sf probe && sf update 0x50000000 0 0x160000
->>>>>>>>> SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB,
->>>>>>>>> total 64 MiB
->>>>>>>>> device 0 offset 0x0, size 0x160000
->>>>>>>>> SPI flash failed in read step
->>>>>>>>
->>>>>>>> Reverting everything seems to me too much. Tom has tested it on his HW
->>>>>>>> and didn't see any issue. That's why better to look at code which is
->>>>>>>> causing this.
->>>>>>>> You are reverting everything but likely there is specific patch which is
->>>>>>>> causing this. Which one is it?
->>>>>>>> Which board was used for your testing? Likely we don't have access to it.
->>>>>>>> Is there any QEMU available which can be used for debugging?
->>>>>>>
->>>>>>> The testcase including the exact SPI NOR model is above.
->>>>>>>
->>>>>>> iMX6 with w25q16dw seems to be broken too.
->>>>>>>
->>>>>>> Basically every board I have access no longer has a working "sf probe ;
->>>>>>> sf update" combination ... so yeah, this means this patchset is
->>>>>>> fundamentally broken.
->>>>>>>
->>>>>>
->>>>>> I can also confirm that the patch series:
->>>>>>
->>>>>> f8efc68b30e Merge patch series "spi-nor: Add parallel and stacked memories
->>>>>> support"
->>>>>>
->>>>>> breaks SPI NOR on TI platforms, particularly SK-AM62 and SK-AM62P:
->>>>>>
->>>>>> U-Boot 2024.10-00752-gf8efc68b30e2 (Nov 06 2024 - 12:25:13 -0600)
->>>>>>
->>>>>> SoC:   AM62X SR1.0 HS-FS
->>>>>> Model: Texas Instruments AM625 SK
->>>>>> ...
->>>>>> Hit any key to stop autoboot:  0
->>>>>> => sf probe && sf update ${loadaddr} 0x400000 0x10
->>>>>> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
->>>>>> device 0 offset 0x400000, size 0x10
->>>>>> SPI flash failed in read step
->>>>>> =>
->>>>> Sigh ... can you please test current u-boot/master and see if the error
->>>>> is fixed there ?
->>>>>
->>>>
->>>> Yes I had verified it also fails against master, although the behavior was
->>>> a bit different.  The .'s below are our DMA engine waiting indefinitely.
->>>>
->>>> => sf probe && sf update ${loadaddr} 0x400000 0x10
->>>> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
->>>> device 0 offset 0x400000, size 0x10
->>>> .....................................................
->>>>
->>>> I have not investigated further.
->>>
->>> Can you try and run some 'git bisect' to find out exactly which commit
->>> broke your use case ? There is a bunch of fixes for the worst breakage
->>> that landed recently, but clearly there is more.
->>>
->>> Full revert seems increasingly appealing ...
->> 
->> commit 5d40b3d384d
-> So there is still something broken in that specific commit that I missed 
-> when removing the defects ? Sigh ... can you try to narrow it down ?
+On Mon, 11 Nov 2024 at 15:03, Simon Glass <sjg@chromium.org> wrote:
+>
+> On Sun, 10 Nov 2024 at 01:32, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > With the recent changes of lwip & mbedTLS we can now download from
+> > https:// urls instead of just http://.
+> > Adjust our wget lwip version parsing to support both URLs.
+> > While at it adjust the default TCP window for QEMU since https seems to
+> > require at least 16384
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >  cmd/Kconfig      | 19 +++++++++++
+> >  net/lwip/Kconfig |  2 +-
+> >  net/lwip/wget.c  | 86 +++++++++++++++++++++++++++++++++++++++++++-----
+> >  3 files changed, 97 insertions(+), 10 deletions(-)
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> Some nits / questions
+>
+> I am not sure what mbedtls_hardware_poll() is,
 
-Hi Marek, I tried to narrow the changes in commit
-5d40b3d384dc536ec26ce9b76b20b0b84749d2d1 a bit by first applying all of the
-changes in the .h files, and then for spi-nor-core.c, only applying changes
-per function. The only function change that causes errors was
-spi_nor_read(). With the changes in spi_nor_read() in commit
-5d40b3d384dc536ec26ce9b76b20b0b84749d2d1 applied to the prior commit
-fbe16bc2801, did I get:
+It's an entropy collector used by mbedTLS to ensure the platform has
+enough entropy.
+It's required if your platform doesn't support standards like the
+/dev/urandom or Windows CryptoAPI.
 
-=> sf probe && sf update ${loadaddr} 0x400000 0x10
-SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
-device 0 offset 0x400000, size 0x10
-SPI flash failed in read step
+> but if @len is too
+> short, would it be acceptable to return an error? How many bytes is it
+> requesting in the https case?
 
-Let me know if this helps.  
+If you don't return enough entropy https:// will fail and mbedTLS &
+lwIP will print an error. I think we currently use 128 and the default
+for mbedTLS is 32.
 
-Jon
+>
+> uclass_first_device() if you want the first device, not uclass_get_device(...0)
+
+Sure
+
+Thanks
+/Ilias
+
+>
+> Regards,
+> Simon
