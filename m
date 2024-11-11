@@ -4,70 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7521D2E9E4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 13:03:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9049ED2E9E4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 13:03:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17D3288FCE;
-	Mon, 11 Nov 2024 14:03:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1B05E89386;
+	Mon, 11 Nov 2024 14:03:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K81O5qDW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KNkE3jz9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30A3289339; Mon, 11 Nov 2024 14:03:38 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id A990589365; Mon, 11 Nov 2024 14:03:43 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15ED989300
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 14:03:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3CD888F41
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 14:03:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9e8522445dso806620966b.1
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 05:03:36 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a9a0c7abaa6so588657066b.2
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 05:03:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731330215; x=1731935015; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731330221; x=1731935021; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NzFvZ5hhhTuIczt84vn19unX4oQ4JlFlaDTyu7Flv2I=;
- b=K81O5qDWcCjW2k5KdZqRRhn6NydI+udGsmSm0w6PvxL8nhvvt6PuvOCqLUAU9XNoQV
- Hb6zZFhmQCZ0vgy8DJGV7rMWu6Y2qziJT0g/Jk/0E4MT28qP0knuUguol1SkATEAWuJc
- /TRHfMM2uWn1yAahJtBgdrNs9qHDO8tPY3iko=
+ bh=oQtfyBlinmi5xGwk/HSWIfDw0s8hF5dSF6JcLORr2Pk=;
+ b=KNkE3jz9DaiBNIMFflxYPNeZN1MZfXsIRTSPgsu0chL/DTuo+9YYiRIKFkUGCbETMZ
+ c7GKZGfA8ZRUakWYmD1YtWzIB06rjFy6Px6Zbq6MIdeurYCWvhmEAhauk2A433qLmTRB
+ GzERWkGHBN7U/nbB8OZa9vQWNyX8mUMtH9Uko=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731330215; x=1731935015;
+ d=1e100.net; s=20230601; t=1731330221; x=1731935021;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NzFvZ5hhhTuIczt84vn19unX4oQ4JlFlaDTyu7Flv2I=;
- b=MwOTNvUTcMZPX9cM2TtrEoucBV3La0sgVAZgwpvoOEPwxlWyjr9I6HfnQV//CeWGML
- AXJhv2pwUilVVtISTTXGIobkUQZpDGUuTXSVPDrck+0RAkICCSdAA1j9+SrRWKmdcKk/
- 3U917ch/OOH2PJHPflZorMiU9OZ6acfJru5YNTD1z8qW1fNnE9ChnWYhm9I25a/vrZLe
- UeKWCqhDgWipYx1o2xUn+vmZebXjTr5sDdDqoKwfpBZopm3O3FL1wdVhrqR+CIGgusBg
- cyPjGiTe+UDID+Meg6gKiyzYS1kGszEpbEbUa1QvzsXsfxi6OMmmXEGhqpOhZN7zpTtZ
- kipQ==
+ bh=oQtfyBlinmi5xGwk/HSWIfDw0s8hF5dSF6JcLORr2Pk=;
+ b=wTGAvhEZ7vguuoNnH1G8siIbvKYvO/QUM79vZBZFRyeo2LsKyYwMNrlZp6Ic/fAZGU
+ gAWeH2zLb2HaTeFsuqYTZs9ADftddL2d7FlUFhEMxA6vSSZenZ0fzN/MxUijKx6PeT0n
+ AFxHHh0vIJh23oUDP+YNKZJUqrI7OInt+ln7yyiq81N85yrCPv7rjXx2lFF/l8CSAtvI
+ XJEaMAqZn2Ex07wxX/ZbeffExd7GtTF3mdcJkjK8kntMqtqVIKqbBz1+jazQKZwWhuM0
+ eV+eX//tQyYFaFZ4FI1ox1zWXHufVIzW7wZnHSS0qVHhK4QvoE1nUsio6o9JiAUfO7HE
+ t4Ug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXnAbrvoE24nWO0OKUKEWWiiktfv4cu7bKc+tV3fYhT9xno/62kzXp9z2B5gn2LRj/svD5P2Xc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwDn2ZqhhUc9OczLHttQPSO4/dvZ2k6sQ9UDqdP2FxDI9ANQvis
- r2xG/byw0aoek/XIqJVpjnErDhkAOTv1VIcCp07cw/K3GDND3MJZoZGcktzftZj3/pB0BPwGKy7
- nfaEUmh1vcGYcP8YeWvCekb9wdOe09psfMJln
-X-Google-Smtp-Source: AGHT+IHSIH0fUayXoOFiB9UI7mcQ02FSoLqmAMKilnZZCqdaGLFcnDwgJKvAse+twCutNffGy69R9BNo7iQMU5UbrwA=
-X-Received: by 2002:a17:907:3f8a:b0:a99:4136:5b07 with SMTP id
- a640c23a62f3a-a9ef001c671mr1054343966b.60.1731330215393; Mon, 11 Nov 2024
- 05:03:35 -0800 (PST)
+ AJvYcCUaGaeNArXXMkTc67SJuAJGGfi7CPaxJ5LgToe7XtiVQWqw+pNYU0F4XbIXH8OatRp4RymxTr0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx+PLrJQreMETBrnqzgFgJB4GJr0qysIZ1FbICsQGh5uLdXsjFH
+ Ic3rGKrBiEV2KxPH+GV8RZW8dj/oQ+oJxHT9VZfbSnjZC+ZDbEoXS9YMfLfNjGAd5IkPoED3R0G
+ aFoAyL4N9A2aggiwXa6u5qKREzSBH7IgBAXyS
+X-Google-Smtp-Source: AGHT+IGcJ7jEHthO8gJ28wkihQctvCJlGRa518kzACjWPB/vx2XIeyPqqvjA5zpWuz3I58l/5YI5kQRoqmA/1rs2/Yk=
+X-Received: by 2002:a17:906:6a20:b0:a9e:26ad:d0a with SMTP id
+ a640c23a62f3a-a9ef001973cmr1330862466b.58.1731330221094; Mon, 11 Nov 2024
+ 05:03:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20241111-io_lmb_apple_dart_iommu-v3-0-32c05da51d72@jannau.net>
- <20241111-io_lmb_apple_dart_iommu-v3-3-32c05da51d72@jannau.net>
-In-Reply-To: <20241111-io_lmb_apple_dart_iommu-v3-3-32c05da51d72@jannau.net>
+References: <20241110083017.367565-1-ilias.apalodimas@linaro.org>
+ <20241110083017.367565-5-ilias.apalodimas@linaro.org>
+In-Reply-To: <20241110083017.367565-5-ilias.apalodimas@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 Nov 2024 06:03:23 -0700
-Message-ID: <CAFLszThZ=RJcpSc++tTjYANd5v8sAbiq=PK-6=LmTVmWONL_=g@mail.gmail.com>
-Subject: Re: [PATCH v3 3/4] lmb: Add basic io_lmb functionality
-To: j@jannau.net
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
+Date: Mon, 11 Nov 2024 06:03:27 -0700
+Message-ID: <CAFLszThNpU2cNNvU4uT2vkgFKJr7ss=j_UYfXTFXA_b4=LnurA@mail.gmail.com>
+Subject: Re: [PATCH v3 4/6] net: lwip: Enable https:// support for wget
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: jerome.forissier@linaro.org, Anton.Antonov@arm.com, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Wei Ming Chen <jj251510319013@gmail.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,30 +96,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Sun, 10 Nov 2024 at 23:56, Janne Grunau via B4 Relay
-<devnull+j.jannau.net@kernel.org> wrote:
+On Sun, 10 Nov 2024 at 01:32, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> From: Janne Grunau <j@jannau.net>
+> With the recent changes of lwip & mbedTLS we can now download from
+> https:// urls instead of just http://.
+> Adjust our wget lwip version parsing to support both URLs.
+> While at it adjust the default TCP window for QEMU since https seems to
+> require at least 16384
 >
-> These functions can be used with struct lmb pointers and will be used to
-> manage IOVA space in the apple_dart iommu driver. This restores part of
-> the pointer base struct lmb API from before commit ed17a33fed29 ("lmb:
-> make LMB memory map persistent and global").
-> io_lmb_add() and io_lmb_free() can trivially reuse exisiting lmb
-> functions. io_lmb_setup() is separate for unique error log messages.
-> io_lmb_alloc() is a simplified copy of _lmb_alloc_base() since the
-> later has unused features and internal use of the global LMB memory map.
->
-> Signed-off-by: Janne Grunau <j@jannau.net>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
->  include/lmb.h | 51 +++++++++++++++++++++++++++++++++++++
->  lib/lmb.c     | 80 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 131 insertions(+)
+>  cmd/Kconfig      | 19 +++++++++++
+>  net/lwip/Kconfig |  2 +-
+>  net/lwip/wget.c  | 86 +++++++++++++++++++++++++++++++++++++++++++-----
+>  3 files changed, 97 insertions(+), 10 deletions(-)
 
-This lmb wrong-direction is really getting out of control, IMO. I hope
-we can resolve this before too long.
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Some nits / questions
+
+I am not sure what mbedtls_hardware_poll() is, but if @len is too
+short, would it be acceptable to return an error? How many bytes is it
+requesting in the https case?
+
+uclass_first_device() if you want the first device, not uclass_get_device(...0)
 
 Regards,
 Simon
