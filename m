@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44AEED2E9D0
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 10:09:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9BBBD2E9D3
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 10:12:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEA3F8932C;
-	Mon, 11 Nov 2024 11:09:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 6407E88FBF;
+	Mon, 11 Nov 2024 11:12:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="MlCUR1Uv";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="FOnSGWfM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA16089342; Mon, 11 Nov 2024 11:09:26 +0100 (CET)
-Received: from mail-m121144.qiye.163.com (mail-m121144.qiye.163.com
- [115.236.121.144])
+ id 05BEF88DB5; Mon, 11 Nov 2024 11:12:32 +0100 (CET)
+Received: from mail-m25480.xmail.ntesmail.com (mail-m25480.xmail.ntesmail.com
+ [103.129.254.80])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D09B38931A
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 11:09:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B182F88FCE
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 11:12:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 267b1cc6;
- Mon, 11 Nov 2024 18:09:18 +0800 (GMT+08:00)
-Message-ID: <1438d4a4-fbd8-4b45-a120-b032f07bb82b@rock-chips.com>
-Date: Mon, 11 Nov 2024 18:09:18 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 267d4a26;
+ Mon, 11 Nov 2024 18:12:25 +0800 (GMT+08:00)
+Message-ID: <838f37e2-6ad9-4bbd-887b-0d65b239c32a@rock-chips.com>
+Date: Mon, 11 Nov 2024 18:12:24 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk3308: Drop unused rk_board_init()
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de
-References: <20241102204516.3633375-1-jonas@kwiboo.se>
- <0832ba14-20b4-4db4-9e91-e64b0b3a14c7@rock-chips.com>
- <0c14ca7b-f534-49f4-820f-b17ebd3c09d4@kwiboo.se>
-Content-Language: en-US
+Subject: Re: [PATCH v3 18/18] board: rockchip: add support for Qnap TS433
+ devices
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <0c14ca7b-f534-49f4-820f-b17ebd3c09d4@kwiboo.se>
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGktPTFZMSEpOTh5OQk5PGE5WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a931ab2fe8c03afkunm267b1cc6
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MxA6KTo5OjIYDiIXNzUcOU0O
- EioKFBRVSlVKTEhKSEpCTE5CSE9LVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSU1CQjcG
-DKIM-Signature: a=rsa-sha256;
- b=MlCUR1Uv7apXSD8L95RqXItRhfLdl77yJWmn+sJH5InvGJBtzB083hAoKIhmhdsqXzNyJfLcu+Mble87tGGNCb8WwtPqmZSJG533QMxwAKgzCzOQQRE5QQw5TCMDd+IfQWrNnAdGp2EkklgMI44x4ksTjcEhiKICANdDAIOSXZY=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=4EcFeGWoHhEKB4ILsRsSgNnxW81ef+MF0X8Vfz7Wqgo=;
- h=date:mime-version:subject:message-id:from;
+To: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
+ philipp.tomsich@vrull.eu, sjg@chromium.org
+References: <20241028190034.143122-1-heiko@sntech.de>
+ <20241028190034.143122-19-heiko@sntech.de>
+ <260b5573-1860-46a3-a57c-c4239b02ceb4@rock-chips.com>
+Content-Language: en-US
+In-Reply-To: <260b5573-1860-46a3-a57c-c4239b02ceb4@rock-chips.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUoYH1YZS0oZTBhIGUwaHUxWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a931ab5d77c03afkunm267d4a26
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OQg6ATo4DjIuCiJDNxENNjJC
+ CFYKCzNVSlVKTEhKSEpCQk9NSUlMVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSE9JSzcG
+DKIM-Signature: a=rsa-sha256;
+ b=FOnSGWfMyoAU8syFpdkJLhVriysGj22cyp96HvjEpK7nrYMdzc+KlxXVk5weKiVKrAogI6eK7/AvRfz5RwAYo4iX2P5pM+DGPr9vqptmVebZeJ497otDnpVMXZlcnYfChwm7CSWctdhlTUI9MvMlBW4ftXH845sNGemRDONvRZc=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=EyFkuZYtiRI2Cfzi/6Ap2rZPta+j6TUHiKeKGS0DpyQ=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,174 +75,401 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Heiko,
 
-On 2024/11/11 17:41, Jonas Karlman wrote:
-> Hi Kever,
+On 2024/11/8 18:32, Kever Yang wrote:
+> Hi Heiko,
 >
-> On 2024-11-07 02:45, Kever Yang wrote:
->> Hi Jonas,
->>
->> On 2024/11/3 04:45, Jonas Karlman wrote:
->>> Nothing is calling the function rk_board_init() and the io-domain driver
->>> can handle the functions intended purpose based on information from DT.
->> Yes, this  should be take care by the new io-domain driver if the dts
->> also has correctly config.
->>
->> The io-domain driver is used for rk3568 firstly, because the IO will
->> broken if the io voltage is not
->>
->> setting correctly(the IO looks working before it's broken).
->>
->> The cleanup is fine because there is no one to use it, and it would be
->> better to make sure the
->>
->> IO voltage of  rk3308 VCCIO3 is also setting correctly for all boards.
-> All current supported rk3308 boards in mainline Linux and U-Boot
-> correctly signal IO voltage using GPIO0_A4 according to schematics.
->
-> rk3308-evb.dts and rk3308-roc-cc.dts is missing the io_domains node in
-> Linux, as I only added the node to boards I had (Rock Pi S and ROCK S0).
->
-> Is there something more you want me to do in regards to this patch?
-I just want to make sure the io-domain driver also works correctly for 
-rk3308, because it's
-first used for rk3568 and potentially not correctly adapt for rk3308 in 
-driver side or dts side.
-For this patch itself, it's OK to apply  because the board does not 
-really use it.
+> Again, I got a warning/error from CI system for the doc :(
 
-In some board design, theGPIO0_A4 in rk3308 board is used to signal IO 
-voltage at the beginning,
-and then this IO can be release to use for other purpose, that's why we 
-have to init this in U-Boot
-and out of the io-domain frame work which the GPIO0_A4 in dts can only 
-used for only one purpose.
+
+I have fix this with replace the "bash"  with "none", and apply this 
+patch set.
+
 
 Thanks,
 - Kever
 >
-> Can possible add a second/send a separate patch that enable
-> ROCKCHIP_IODOMAIN for ROCKCHIP_RK3308, then someone just have to submit
-> io_domains patches to Linux and it will eventually be synced to U-Boot
-> during a future dts/upstream sync.
+> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/jobs/941781
 >
-> Regards,
-> Jonas
+> /builds/u-boot/custodians/u-boot-rockchip/doc/board/qnap/ts433.rst:66: 
+> WARNING: Lexing literal_block ",_  _.\n|1234|  1=TX 2=VCC\n`----' 3=RX 
+> 4=GND" as "bash" resulted in an error at token: "'". Retrying in 
+> relaxed mode. [misc.highlighting_failure]
 >
->> Thanks,
->> - Kever
->>> Cleanup by removing the unused rk_board_init() function and re-sort
->>> included headers.
->>>
->>> Signed-off-by: Jonas Karlman<jonas@kwiboo.se>
->>> ---
->>>    arch/arm/mach-rockchip/rk3308/rk3308.c | 69 +-------------------------
->>>    1 file changed, 1 insertion(+), 68 deletions(-)
->>>
->>> diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c b/arch/arm/mach-rockchip/rk3308/rk3308.c
->>> index 03d97e1d7460..6916f1a24441 100644
->>> --- a/arch/arm/mach-rockchip/rk3308/rk3308.c
->>> +++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
->>> @@ -3,15 +3,12 @@
->>>     *Copyright (c) 2018 Rockchip Electronics Co., Ltd
->>>     */
->>>    #include <init.h>
->>> -#include <malloc.h>
->>> +#include <asm/armv8/mmu.h>
->>>    #include <asm/arch-rockchip/bootrom.h>
->>>    #include <asm/arch-rockchip/grf_rk3308.h>
->>>    #include <asm/arch-rockchip/hardware.h>
->>> -#include <asm/gpio.h>
->>> -#include <debug_uart.h>
->>>    #include <linux/bitops.h>
->>>    
->>> -#include <asm/armv8/mmu.h>
->>>    static struct mm_region rk3308_mem_map[] = {
->>>    	{
->>>    		.virt = 0x0UL,
->>> @@ -38,22 +35,6 @@ struct mm_region *mem_map = rk3308_mem_map;
->>>    #define SGRF_BASE	0xff2b0000
->>>    
->>>    enum {
->>> -	GPIO1C7_SHIFT		= 8,
->>> -	GPIO1C7_MASK		= GENMASK(11, 8),
->>> -	GPIO1C7_GPIO		= 0,
->>> -	GPIO1C7_UART1_RTSN,
->>> -	GPIO1C7_UART2_TX_M0,
->>> -	GPIO1C7_SPI2_MOSI,
->>> -	GPIO1C7_JTAG_TMS,
->>> -
->>> -	GPIO1C6_SHIFT		= 4,
->>> -	GPIO1C6_MASK		= GENMASK(7, 4),
->>> -	GPIO1C6_GPIO		= 0,
->>> -	GPIO1C6_UART1_CTSN,
->>> -	GPIO1C6_UART2_RX_M0,
->>> -	GPIO1C6_SPI2_MISO,
->>> -	GPIO1C6_JTAG_TCLK,
->>> -
->>>    	GPIO4D3_SHIFT           = 6,
->>>    	GPIO4D3_MASK            = GENMASK(7, 6),
->>>    	GPIO4D3_GPIO            = 0,
->>> @@ -116,60 +97,12 @@ enum {
->>>    	GPIO2A2_SEL_SRC_CTRL_SEL_PLUS	= 1,
->>>    };
->>>    
->>> -enum {
->>> -	IOVSEL3_CTRL_SHIFT	= 8,
->>> -	IOVSEL3_CTRL_MASK	= BIT(8),
->>> -	VCCIO3_SEL_BY_GPIO	= 0,
->>> -	VCCIO3_SEL_BY_IOVSEL3,
->>> -
->>> -	IOVSEL3_SHIFT		= 3,
->>> -	IOVSEL3_MASK		= BIT(3),
->>> -	VCCIO3_3V3		= 0,
->>> -	VCCIO3_1V8,
->>> -};
->>> -
->>> -/*
->>> - * The voltage of VCCIO3(which is the voltage domain of emmc/flash/sfc
->>> - * interface) can indicated by GPIO0_A4 or io_vsel3. The SOC defaults
->>> - * use GPIO0_A4 to indicate power supply voltage for VCCIO3 by hardware,
->>> - * then we can switch to io_vsel3 after system power on, and release GPIO0_A4
->>> - * for other usage.
->>> - */
->>> -
->>> -#define GPIO0_A4	4
->>> -
->>>    const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
->>>    	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff490000",
->>>    	[BROM_BOOTSOURCE_SPINOR] = "/spi@ff4c0000/flash@0",
->>>    	[BROM_BOOTSOURCE_SD] = "/mmc@ff480000",
->>>    };
->>>    
->>> -int rk_board_init(void)
->>> -{
->>> -	static struct rk3308_grf * const grf = (void *)GRF_BASE;
->>> -	u32 val;
->>> -	int ret;
->>> -
->>> -	ret = gpio_request(GPIO0_A4, "gpio0_a4");
->>> -	if (ret < 0) {
->>> -		printf("request for gpio0_a4 failed:%d\n", ret);
->>> -		return 0;
->>> -	}
->>> -
->>> -	gpio_direction_input(GPIO0_A4);
->>> -
->>> -	if (gpio_get_value(GPIO0_A4))
->>> -		val = VCCIO3_SEL_BY_IOVSEL3 << IOVSEL3_CTRL_SHIFT |
->>> -		      VCCIO3_1V8 << IOVSEL3_SHIFT;
->>> -	else
->>> -		val = VCCIO3_SEL_BY_IOVSEL3 << IOVSEL3_CTRL_SHIFT |
->>> -		      VCCIO3_3V3 << IOVSEL3_SHIFT;
->>> -	rk_clrsetreg(&grf->soc_con0, IOVSEL3_CTRL_MASK | IOVSEL3_MASK, val);
->>> -
->>> -	gpio_free(GPIO0_A4);
->>> -	return 0;
->>> -}
->>> -
->>>    #ifdef CONFIG_DEBUG_UART_BOARD_INIT
->>>    __weak void board_debug_uart_init(void)
->>>    {
+>
+> Maybe you can try with below  command in your environment?
+>
+> $ make htmldocs KDOC_WERROR=1
+>
+> I didn't success to run this on my computer due to lots of modules 
+> missing one after another.
+>
+>
+> Thanks,
+> - Kever
+> On 2024/10/29 03:00, Heiko Stuebner wrote:
+>> The Qnap TS433 is a 4-bay NAS based around the RK3568.
+>>
+>> Two SATA bays are connected to the RK3568's own SATA controllers while
+>> the other two are connected to a JMicron SATA controller living on the
+>> PCIe bus.
+>>
+>> It provides one 2.5Gb and one 1Gb ethernet port as well as 3 usb ports.
+>>
+>> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>> ---
+>>   arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi |  6 ++
+>>   arch/arm/mach-rockchip/rk3568/Kconfig      | 14 ++++
+>>   board/qnap/ts433/Kconfig                   | 12 +++
+>>   board/qnap/ts433/MAINTAINERS               |  8 ++
+>>   configs/qnap-ts433-rk3568_defconfig        | 87 +++++++++++++++++++++
+>>   doc/board/index.rst                        |  1 +
+>>   doc/board/qnap/index.rst                   |  9 +++
+>>   doc/board/qnap/ts433.rst                   | 91 ++++++++++++++++++++++
+>>   doc/board/rockchip/rockchip.rst            |  1 +
+>>   include/configs/qnap_ts433.h               | 10 +++
+>>   10 files changed, 239 insertions(+)
+>>   create mode 100644 arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+>>   create mode 100644 board/qnap/ts433/Kconfig
+>>   create mode 100644 board/qnap/ts433/MAINTAINERS
+>>   create mode 100644 configs/qnap-ts433-rk3568_defconfig
+>>   create mode 100644 doc/board/qnap/index.rst
+>>   create mode 100644 doc/board/qnap/ts433.rst
+>>   create mode 100644 include/configs/qnap_ts433.h
+>>
+>> diff --git a/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi 
+>> b/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+>> new file mode 100644
+>> index 00000000000..19acbceb468
+>> --- /dev/null
+>> +++ b/arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+>> @@ -0,0 +1,6 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * (C) Copyright 2024 Heiko Stuebner <heiko@sntech.de>
+>> + */
+>> +
+>> +#include "rk356x-u-boot.dtsi"
+>> diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig 
+>> b/arch/arm/mach-rockchip/rk3568/Kconfig
+>> index e646f714c92..ce327ed6f9e 100644
+>> --- a/arch/arm/mach-rockchip/rk3568/Kconfig
+>> +++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+>> @@ -32,6 +32,19 @@ config TARGET_POWKIDDY_X55_RK3566
+>>       help
+>>         Powkiddy X55 handheld gaming console with an RK3566 SoC.
+>>   +config TARGET_QNAP_TS433_RK3568
+>> +    bool "QNAP-TS433"
+>> +    help
+>> +      Qnap TS433 4-bay NAS with a RK3568 SoC.
+>> +
+>> +      It provides the following featureset:
+>> +       * 4GB LPDDR4
+>> +       * 4GB eMMC
+>> +       * 2 SATA ports connected to two RK3568's SATA controllers
+>> +       * 2 SATA ports connected to a JMicron JMB58x AHCI SATA 
+>> controller
+>> +       * 1 1G network controller
+>> +       * 1 2.5G Realtek RTL8125 network controller
+>> +
+>>   config TARGET_QUARTZ64_RK3566
+>>       bool "Pine64 Quartz64"
+>>       help
+>> @@ -70,6 +83,7 @@ source "board/hardkernel/odroid_m1/Kconfig"
+>>   source "board/hardkernel/odroid_m1s/Kconfig"
+>>   source "board/pine64/quartz64_rk3566/Kconfig"
+>>   source "board/powkiddy/x55/Kconfig"
+>> +source "board/qnap/ts433/Kconfig"
+>>   source "board/radxa/zero3-rk3566/Kconfig"
+>>   source "board/xunlong/orangepi-3b-rk3566/Kconfig"
+>>   diff --git a/board/qnap/ts433/Kconfig b/board/qnap/ts433/Kconfig
+>> new file mode 100644
+>> index 00000000000..b00e1f9f2ef
+>> --- /dev/null
+>> +++ b/board/qnap/ts433/Kconfig
+>> @@ -0,0 +1,12 @@
+>> +if TARGET_QNAP_TS433_RK3568
+>> +
+>> +config SYS_BOARD
+>> +    default "qnap_ts433"
+>> +
+>> +config SYS_VENDOR
+>> +    default "qnap"
+>> +
+>> +config SYS_CONFIG_NAME
+>> +    default "qnap_ts433"
+>> +
+>> +endif
+>> diff --git a/board/qnap/ts433/MAINTAINERS b/board/qnap/ts433/MAINTAINERS
+>> new file mode 100644
+>> index 00000000000..c2b31ad9794
+>> --- /dev/null
+>> +++ b/board/qnap/ts433/MAINTAINERS
+>> @@ -0,0 +1,8 @@
+>> +QNAP-TS433
+>> +M:    Heiko Stuebner <heiko@sntech.de>
+>> +S:    Maintained
+>> +F:    board/qnap/ts433/
+>> +F:    doc/board/qnap/
+>> +F:    include/configs/qnap_ts433.h
+>> +F:    configs/qnap-ts433-rk3568_defconfig
+>> +F:    arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+>> diff --git a/configs/qnap-ts433-rk3568_defconfig 
+>> b/configs/qnap-ts433-rk3568_defconfig
+>> new file mode 100644
+>> index 00000000000..840da7f3759
+>> --- /dev/null
+>> +++ b/configs/qnap-ts433-rk3568_defconfig
+>> @@ -0,0 +1,87 @@
+>> +CONFIG_ARM=y
+>> +CONFIG_SKIP_LOWLEVEL_INIT=y
+>> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+>> +CONFIG_COUNTER_FREQUENCY=24000000
+>> +CONFIG_ARCH_ROCKCHIP=y
+>> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-qnap-ts433"
+>> +CONFIG_ROCKCHIP_RK3568=y
+>> +CONFIG_SPL_SERIAL=y
+>> +CONFIG_TARGET_QNAP_TS433_RK3568=y
+>> +CONFIG_DEBUG_UART_BASE=0xFE660000
+>> +CONFIG_DEBUG_UART_CLOCK=24000000
+>> +CONFIG_SYS_LOAD_ADDR=0xc00800
+>> +CONFIG_PCI=y
+>> +CONFIG_DEBUG_UART=y
+>> +CONFIG_AHCI=y
+>> +CONFIG_FIT=y
+>> +CONFIG_FIT_VERBOSE=y
+>> +CONFIG_SPL_FIT_SIGNATURE=y
+>> +CONFIG_SPL_LOAD_FIT=y
+>> +CONFIG_LEGACY_IMAGE_FORMAT=y
+>> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-qnap-ts433.dtb"
+>> +# CONFIG_DISPLAY_CPUINFO is not set
+>> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+>> +CONFIG_SPL_MAX_SIZE=0x40000
+>> +CONFIG_SPL_PAD_TO=0x7f8000
+>> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>> +CONFIG_SPL_ATF=y
+>> +CONFIG_CMD_GPIO=y
+>> +CONFIG_CMD_GPT=y
+>> +CONFIG_CMD_I2C=y
+>> +CONFIG_CMD_MMC=y
+>> +CONFIG_CMD_PCI=y
+>> +CONFIG_CMD_SATA=y
+>> +CONFIG_CMD_USB=y
+>> +CONFIG_CMD_ROCKUSB=y
+>> +CONFIG_CMD_USB_MASS_STORAGE=y
+>> +# CONFIG_CMD_SETEXPR is not set
+>> +CONFIG_CMD_PMIC=y
+>> +CONFIG_CMD_REGULATOR=y
+>> +# CONFIG_SPL_DOS_PARTITION is not set
+>> +CONFIG_SPL_OF_CONTROL=y
+>> +CONFIG_OF_LIVE=y
+>> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent 
+>> assigned-clocks assigned-clock-rates assigned-clock-parents"
+>> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>> +CONFIG_SPL_DM_SEQ_ALIAS=y
+>> +CONFIG_SPL_REGMAP=y
+>> +CONFIG_SPL_SYSCON=y
+>> +CONFIG_AHCI_PCI=y
+>> +CONFIG_DWC_AHCI=y
+>> +CONFIG_SPL_CLK=y
+>> +CONFIG_ROCKCHIP_GPIO=y
+>> +CONFIG_SYS_I2C_ROCKCHIP=y
+>> +CONFIG_LED=y
+>> +CONFIG_LED_GPIO=y
+>> +CONFIG_MISC=y
+>> +CONFIG_SUPPORT_EMMC_RPMB=y
+>> +CONFIG_MMC_DW=y
+>> +CONFIG_MMC_DW_ROCKCHIP=y
+>> +CONFIG_MMC_SDHCI=y
+>> +CONFIG_MMC_SDHCI_SDMA=y
+>> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+>> +CONFIG_DWC_ETH_QOS=y
+>> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+>> +CONFIG_RTL8169=y
+>> +CONFIG_PCIE_DW_ROCKCHIP=y
+>> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+>> +CONFIG_SPL_PINCTRL=y
+>> +CONFIG_DM_PMIC=y
+>> +CONFIG_DM_PMIC_FAN53555=y
+>> +CONFIG_PMIC_RK8XX=y
+>> +CONFIG_REGULATOR_RK8XX=y
+>> +CONFIG_PWM_ROCKCHIP=y
+>> +CONFIG_SPL_RAM=y
+>> +CONFIG_SCSI=y
+>> +CONFIG_DEBUG_UART_SHIFT=2
+>> +CONFIG_SYS_NS16550_MEM32=y
+>> +CONFIG_SYSRESET=y
+>> +CONFIG_USB=y
+>> +CONFIG_USB_XHCI_HCD=y
+>> +CONFIG_USB_EHCI_HCD=y
+>> +CONFIG_USB_EHCI_GENERIC=y
+>> +CONFIG_USB_OHCI_HCD=y
+>> +CONFIG_USB_OHCI_GENERIC=y
+>> +CONFIG_USB_DWC3=y
+>> +CONFIG_USB_DWC3_GENERIC=y
+>> +CONFIG_ERRNO_STR=y
+>> diff --git a/doc/board/index.rst b/doc/board/index.rst
+>> index 3fb7c84f10c..fe775b1b05d 100644
+>> --- a/doc/board/index.rst
+>> +++ b/doc/board/index.rst
+>> @@ -42,6 +42,7 @@ Board-specific doc
+>>      phytec/index
+>>      purism/index
+>>      qualcomm/index
+>> +   qnap/index
+>>      renesas/index
+>>      rockchip/index
+>>      samsung/index
+>> diff --git a/doc/board/qnap/index.rst b/doc/board/qnap/index.rst
+>> new file mode 100644
+>> index 00000000000..652ea11a056
+>> --- /dev/null
+>> +++ b/doc/board/qnap/index.rst
+>> @@ -0,0 +1,9 @@
+>> +.. SPDX-License-Identifier: GPL-2.0+
+>> +
+>> +Qnap
+>> +====
+>> +
+>> +.. toctree::
+>> +   :maxdepth: 2
+>> +
+>> +   ts433.rst
+>> diff --git a/doc/board/qnap/ts433.rst b/doc/board/qnap/ts433.rst
+>> new file mode 100644
+>> index 00000000000..5c7fd314b7a
+>> --- /dev/null
+>> +++ b/doc/board/qnap/ts433.rst
+>> @@ -0,0 +1,91 @@
+>> +.. SPDX-License-Identifier: GPL-2.0+
+>> +
+>> +U-Boot for Qnap TS433 Devices
+>> +=================================
+>> +
+>> +This allows U-Boot to boot the Qnap TS433 NAS
+>> +
+>> +Preparing the serial
+>> +--------------------
+>> +
+>> +Qnap devices run their serial console with a 115200 baudrate. As the
+>> +binary DDR-init and maskrom-downloader expect a 1500000 rate, it is
+>> +necessary to adapt the binaries if their output is needed.
+>> +
+>> +This can be done with a binary provided in the rkbin repository.
+>> +First the ddrbin_param.txt in the rkbin repo needs to be modified:
+>> +
+>> +.. code-block:: bash
+>> +
+>> +    diff --git a/tools/ddrbin_param.txt b/tools/ddrbin_param.txt
+>> +    index 0dfdd318..82ade7e7 100644
+>> +    --- a/tools/ddrbin_param.txt
+>> +    +++ b/tools/ddrbin_param.txt
+>> +    @@ -11,7 +11,7 @@ lp5_freq=
+>> +
+>> +     uart id=
+>> +     uart iomux=
+>> +    -uart baudrate=
+>> +    +uart baudrate=115200
+>> +
+>> +     sr_idle=
+>> +     pd_idle=
+>> +
+>> +And after that the ddrbin_tool binary can be used to modify apply this
+>> +modification and also a new maskrom downloader can be build:
+>> +
+>> +.. code-block:: bash
+>> +
+>> +    $ tools/ddrbin_tool rk3568 tools/ddrbin_param.txt 
+>> bin/rk35/rk3568_ddr_1560MHz_v1.21.bin
+>> +    $ tools/boot_merger RKBOOT/RK3568MINIALL.ini
+>> +
+>> +Building U-Boot
+>> +---------------
+>> +
+>> +.. code-block:: bash
+>> +
+>> +    $ export CROSS_COMPILE=aarch64-linux-gnu-
+>> +    $ export BL31=../rkbin/bin/rk35/rk3568_bl31_v1.34.elf
+>> +    $ export 
+>> ROCKCHIP_TPL=../rkbin/bin/rk35/rk3568_ddr_1056MHz_v1.13.bin
+>> +    $ make qnap-ts433-rk3568_defconfig
+>> +    $ make
+>> +
+>> +This will build ``u-boot-rockchip.bin`` which can be written to the
+>> +on-board eMMC.
+>> +
+>> +Image installation
+>> +------------------
+>> +
+>> +The Qnap thankfully provides an easily accessible serial header as 
+>> well as
+>> +a very user-friendly jumper-header to bring the device into maskrom 
+>> mode.
+>> +
+>> +To access both, the drive trays need to be removed. Looking at the 
+>> board,
+>> +through the upper cutout of the metal frame the white 4-port 
+>> serial-header
+>> +can be seen next to a barcode sticker. It's pinout is as follows:
+>> +
+>> +.. code-block:: bash
+>> +
+>> +   ,_  _.
+>> +   |1234|  1=TX 2=VCC
+>> +   `----'  3=RX 4=GND
+>> +
+>> +
+>> +Directly below it, the mentioned 2-pin jumper header can be seen.
+>> +
+>> +To write your u-boot to the device, it needs to be powered off 
+>> first. Then
+>> +a jumper or suitable cable needs to be used to connect the two pins 
+>> of the
+>> +maskrom header. Turning on the device now will start it in maskrom 
+>> mode.
+>> +
+>> +It is important that the jumper gets removed after that stop and before
+>> +actually trying to write to the emmc.
+>> +
+>> +The front usb-port needs to be connected to the host with an USB-A-to-A
+>> +cable to allow flashing.
+>> +
+>> +The flashing itself is done via rkdeveloptool, which can be found for
+>> +example as package of that name in Debian-based distributions:
+>> +
+>> +.. code-block:: bash
+>> +
+>> +    $ rkdeveloptool db rk356x_spl_loader_v1.21.113.bin
+>> +    $ rkdeveloptool wl 64 u-boot-rockchip.bin
+>> diff --git a/doc/board/rockchip/rockchip.rst 
+>> b/doc/board/rockchip/rockchip.rst
+>> index 7b11a2e0a35..0783603ec50 100644
+>> --- a/doc/board/rockchip/rockchip.rst
+>> +++ b/doc/board/rockchip/rockchip.rst
+>> @@ -119,6 +119,7 @@ List of mainline supported Rockchip boards:
+>>        - FriendlyElec NanoPi R5S (nanopi-r5s-rk3568)
+>>        - Generic RK3566/RK3568 (generic-rk3568)
+>>        - Hardkernel ODROID-M1 (odroid-m1-rk3568)
+>> +     - QNAP TS-433 (qnap-ts433-rk3568)
+>>        - Radxa E25 Carrier Board (radxa-e25-rk3568)
+>>        - Radxa ROCK 3A (rock-3a-rk3568)
+>>        - Radxa ROCK 3B (rock-3b-rk3568)
+>> diff --git a/include/configs/qnap_ts433.h b/include/configs/qnap_ts433.h
+>> new file mode 100644
+>> index 00000000000..aee4546bf07
+>> --- /dev/null
+>> +++ b/include/configs/qnap_ts433.h
+>> @@ -0,0 +1,10 @@
+>> +/* SPDX-License-Identifier: GPL-2.0+ */
+>> +
+>> +#ifndef __QNAP_TS433_H
+>> +#define __QNAP_TS433_H
+>> +
+>> +#define ROCKCHIP_DEVICE_SETTINGS
+>> +
+>> +#include <configs/rk3568_common.h>
+>> +
+>> +#endif
 >
