@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5D84D41D46
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:48:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D47D41D46
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:48:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54BD98936C;
+	by phobos.denx.de (Postfix) with ESMTP id B4455893CD;
 	Tue, 12 Nov 2024 03:47:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LMhYdXea";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MGe8sqSC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 053E389390; Mon, 11 Nov 2024 22:09:24 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 085D189399; Mon, 11 Nov 2024 22:10:09 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C373489308
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 22:09:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 818DE89395
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 22:10:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-20ca1b6a80aso52896325ad.2
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 13:09:21 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-20e6981ca77so56381395ad.2
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 13:10:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731359360; x=1731964160; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kEWp96VSHpRvpYgoXgS9nEZCB6a4+/TUWxB68SOPSzQ=;
- b=LMhYdXeafkyredmYmQoAeSxAarLcA5ekhggsk+2R62PeF1iwyBFjTZPlO8w65WTaLR
- Fv1s53lYa02Vu1cfoNJ2ZhqZCNPbpMtnEOdTwArfQyclJ5j+g2uxZV0qebcu86E0uwW+
- zKd+pwDgizJjKmCfeIDGmtyCFKrKuH3xgcOPZvZ8luSbompZ3kAPESrHzT46fgjgTANI
- Nnv4OdSA9B9zLYH7WPwIbB9aGCYcniTNyYxaRgOPquo8jrpW6vxka2kUxGx2jrTudOFC
- atqr/OgQsX/O7MlYpDXHaFFfVHlt85fD+36zunLaeV7a7cARMQO55wjm7XqyL2dg4OSU
- H1Wg==
+ d=gmail.com; s=20230601; t=1731359405; x=1731964205; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/9jmYZ+TvokwtXaM1I0CP60QTo21jf1Ualc1cSvqQms=;
+ b=MGe8sqSCFQ78QHbNgIqC/xUBQd/ZFsSUHbuDocJo53FVh6k+ns81bu8E1tZxvVtZE2
+ ybdWG4W0sqCAVQE2jnTEfnIikMo4KOQbsGMjaOGU8Uxh38tQgnREYheQlybOHHfNCzNP
+ 77AeglRUZRQvVQ44OzdTj9BFxGENWIKEVIX33kzd7j+ttnzju3NKbcH80KQ+0by2xjlK
+ gBMS+AOIsEtpwiftidoAEJuC/sR+EC2IyyeLr7RYnOyLIHIJSsJvMAaf+nIpCUOegPUZ
+ QwdAXWBnUqfi8cb+yVszoMCGeBxPXaGW9zIDKczmkRiOkIcYKcfynZd5iY+DcLz1SznY
+ wyqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731359360; x=1731964160;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kEWp96VSHpRvpYgoXgS9nEZCB6a4+/TUWxB68SOPSzQ=;
- b=H/11O6qem5XUidmiFZNHHNQgt2gJBKik0/ni35E038lQisvUmg5v33tlISp1XgTnht
- t0dpvZSqUz0J0rwUrSDrF0caGqMAnOX3qgMSO274FBpZkriwjqV9aPXu6caYqUoZHEcI
- /eH5kL0hFVoQK0bnyeVZJUSbPrDrJnsnIJMErCXj/BZ5Xc0uCWmaeCLKEaxZkoNso/JQ
- 0Meiwm1VnySUgV63U43Vns+aZqiH8Sux+XgvVuDpLbfSWwefkeDDMy4ym0yX/DWnfpNM
- 2d54ILt1Gk+bsVNowJCZqLGCJ6vhDFfJCa7ABGLSFJ4THsWg84rSMXyhcMqGSa6iLewI
- oPVw==
-X-Gm-Message-State: AOJu0Ywwkdg1kWNBX0JB6M7aj0miDEBKmeyZMjhopobctXAo9Z0TIY+H
- H/HHCxCU8E5YEBY3wUp4l+Dy/7CnclqZ9b9ue+EABztMWzrGapjqsmde09TZ
-X-Google-Smtp-Source: AGHT+IGlVieiAHmMpGVyyQEayb8VHovO10Lyt8BEC+g2fVHCMn+lNc51S91HXcudF3RG7ocJwgCZIA==
-X-Received: by 2002:a17:902:cecf:b0:20c:93c2:9175 with SMTP id
- d9443c01a7336-21183d191bbmr164773385ad.30.1731359360215; 
- Mon, 11 Nov 2024 13:09:20 -0800 (PST)
+ d=1e100.net; s=20230601; t=1731359405; x=1731964205;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/9jmYZ+TvokwtXaM1I0CP60QTo21jf1Ualc1cSvqQms=;
+ b=mIbKRQd/UR8H2Xf9vlYqdhj7E8PiV3yE4Ma3bwe3fnjtYtZwprMjyGVpR7NUbguBfr
+ bAGo2DwPkiJ43cw1V4FXoK/CwFKGp5Dcp4C4USjjBvN7NQ5orYsYWBXyW0GLWv9hhR7R
+ 6tKnTCLse+XTmTX6AYOaRD64fFh3wmavZ1dGw+O4gwM2r+5mJAYAfBVHAgpCpxdC2auI
+ fL/yYInE7SEfHysUc19PMTPtlFgsj2+c3NzA9i5FsfKU2k0iUlgYXeSBtFO1nQfJCGyl
+ wwpPnRDQ5RhJI/eym6/Kot66phYVu9HiUcPqFuMU/F788m9nhSclvVdsL4YbZNBGAbXr
+ trzA==
+X-Gm-Message-State: AOJu0YzeV7bIYgq/70f4H90AvojWzsIQBAIqlUId1i33wuEbGnbQg+Xm
+ EpYyU3rkTHvc4r226LXR2EsHtSuSMtOlYtzPMFIVtxG9ifPvjEGTZoq06/tJ
+X-Google-Smtp-Source: AGHT+IERoi1r/+5DFnAsK4zChmr4bZHzUfvvPumCGZx7u2gUOrjHS+M7X2RIq6RLqNAz0Fy8nC2+Tw==
+X-Received: by 2002:a17:903:94d:b0:20c:90a0:f064 with SMTP id
+ d9443c01a7336-211834f3a6bmr198699875ad.10.1731359405043; 
+ Mon, 11 Nov 2024 13:10:05 -0800 (PST)
 Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21177dc9068sm79807415ad.2.2024.11.11.13.09.18
+ d9443c01a7336-21177dc9e25sm80031165ad.27.2024.11.11.13.10.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Nov 2024 13:09:19 -0800 (PST)
+ Mon, 11 Nov 2024 13:10:04 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v2 7/7] net/lwip: wget: integrate struct wget_info into wget
- code
-Date: Mon, 11 Nov 2024 18:09:01 -0300
-Message-ID: <20241111210901.560691-8-adrianox@gmail.com>
+Subject: [PATCH v3 00/15] efi_loader: efi http and ipconfig drivers
+Date: Mon, 11 Nov 2024 18:09:44 -0300
+Message-ID: <20241111210959.560738-1-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241111210901.560691-1-adrianox@gmail.com>
-References: <20241111210901.560691-1-adrianox@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 12 Nov 2024 03:47:02 +0100
@@ -94,118 +90,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Each wget request now fills the struct wget_info. Also, the
-efi bootdevice is now set conditionally to the set_bootdevice
-variable in wget_info and a buffer size check is performed if
-check_buffer_size is set.
+Add support for EFI_HTTP_PROTOCOL, EFI_HTTP_SERVICE_BINDING_PROTOCOL,
+and EFI_IP4_CONFIG2_PROTOCOL.
 
-Signed-off-by: Adriano Cordova <adrianox@gmail.com>
----
+This series depends on the series 'wget: Expose wget to applications',
+also found at:
+https://github.com/0n41rd4/u-boot/commits/http-driver-wget
 
-Changes in v2:
-- wget_info is now a pointer
-- wget_lwip_fill_info now directly uses wget_info instead of receiving a pointer to it
-  as an argument.
-- Set default_wget_info as the default wget_http_info.
+The fist two patches of this series are not efi specific and have also
+been sent to the corresponding maintainers, but this series depends on
+them, so they are added here for redundancy. A branch with both series
+of patches, concatenated, is at:
+https://github.com/0n41rd4/u-boot/commits/efi-http-driver
 
- net/lwip/wget.c | 42 ++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 40 insertions(+), 2 deletions(-)
+Adriano Cordova (13):
+  net: net_utils: Move ip_to_string to lib/net_utils.c
+  net: wget: let wget_with_dns work with dns disabled
+  efi_loader: device_path: add definition of
+    DEVICE_PATH_SUB_TYPE_MSG_IPV4
+  efi_loader: device_path: add efi_dp_from_ipv4
+  efi_api: add definitions for HTTP and IP4_CONFIG2 protocols
+  efi_loader: efi_net: add efi_net_set_addr, efi_net_get_addr
+  efi_loader: device_path: add support for HTTP device path
+  efi_loader: net: set EFI bootdevice device path to HTTP when loaded
+    from wget
+  efi_loader: net: add support to send http requests and parse http
+    headers
+  efi_loader: efi_net: add EFI_IP4_CONFIG2_PROTOCOL
+  efi_loader: efi_net: add EFI_HTTP_PROTOCOL
+  efi_selftest: add test for HTTP protocol
+  efi_selftest: add test for IPv4 Config2 protocol
 
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index 4add520045..53c3b169e0 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -34,6 +34,18 @@ struct wget_ctx {
- 	enum done_state done;
- };
- 
-+static void wget_lwip_fill_info(struct pbuf *hdr, u16_t hdr_len, u32_t hdr_cont_len)
-+{
-+	if (wget_info->headers && hdr_len < MAX_HTTP_HEADERS_SIZE)
-+		pbuf_copy_partial(hdr, (void *)wget_info->headers, hdr_len, 0);
-+	wget_info->hdr_cont_len = (u32)hdr_cont_len;
-+}
-+
-+static void wget_lwip_set_file_size(u32_t rx_content_len)
-+{
-+	wget_info->file_size = (ulong)rx_content_len;
-+}
-+
- static int parse_url(char *url, char *host, u16 *port, char **path)
- {
- 	char *p, *pp;
-@@ -178,6 +190,13 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
- 	struct wget_ctx *ctx = arg;
- 	ulong elapsed;
- 
-+	wget_info->status_code = (u32)srv_res;
-+
-+	if (err == ERR_BUF) {
-+		ctx->done = FAILURE;
-+		return;
-+	}
-+
- 	if (httpc_result != HTTPC_RESULT_OK) {
- 		log_err("\nHTTP client error %d\n", httpc_result);
- 		ctx->done = FAILURE;
-@@ -197,8 +216,11 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
- 	printf("%u bytes transferred in %lu ms (", rx_content_len, elapsed);
- 	print_size(rx_content_len / elapsed * 1000, "/s)\n");
- 	printf("Bytes transferred = %lu (%lx hex)\n", ctx->size, ctx->size);
--	efi_set_bootdev("Net", "", ctx->path, map_sysmem(ctx->saved_daddr, 0),
--			rx_content_len);
-+	if (wget_info->set_bootdev) {
-+		efi_set_bootdev("Net", "", ctx->path, map_sysmem(ctx->saved_daddr, 0),
-+				rx_content_len);
-+	}
-+	wget_lwip_set_file_size(rx_content_len);
- 	if (env_set_hex("filesize", rx_content_len) ||
- 	    env_set_hex("fileaddr", ctx->saved_daddr)) {
- 		log_err("Could not set filesize or fileaddr\n");
-@@ -209,6 +231,17 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
- 	ctx->done = SUCCESS;
- }
- 
-+static err_t httpc_headers_done_cb(httpc_state_t *connection, void *arg, struct pbuf *hdr,
-+				   u16_t hdr_len, u32_t content_len)
-+{
-+	wget_lwip_fill_info(hdr, hdr_len, content_len);
-+
-+	if (wget_info->check_buffer_size && (ulong)content_len > wget_info->buffer_size)
-+		return ERR_BUF;
-+
-+	return ERR_OK;
-+}
-+
- static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
- {
- 	httpc_connection_t conn;
-@@ -233,6 +266,7 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
- 
- 	memset(&conn, 0, sizeof(conn));
- 	conn.result_fn = httpc_result_cb;
-+	conn.headers_done_fn = httpc_headers_done_cb;
- 	ctx.path = path;
- 	if (httpc_get_file_dns(ctx.server_name, ctx.port, path, &conn, httpc_recv_cb,
- 			       &ctx, &state)) {
-@@ -259,6 +293,9 @@ int wget_with_dns(ulong dst_addr, char *uri)
- {
- 	eth_set_current();
- 
-+	if (!wget_info)
-+		wget_info = &default_wget_info;
-+
- 	return wget_loop(eth_get_dev(), dst_addr, uri);
- }
- 
-@@ -285,6 +322,7 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
- 	if (parse_legacy_arg(url, nurl, sizeof(nurl)))
- 	    return CMD_RET_FAILURE;
- 
-+	wget_info = &default_wget_info;
- 	if (wget_with_dns(dst_addr, nurl))
- 		return CMD_RET_FAILURE;
- 
+Heinrich Schuchardt (2):
+  efi_loader: add IPv4() to device path to text protocol
+  lib: uuid: display HTTP and IPV4 Config II protocols
+
+ include/efi_api.h                        | 220 +++++++++
+ include/efi_loader.h                     |  42 ++
+ include/net-common.h                     |  10 +
+ lib/efi_loader/Kconfig                   |  17 +
+ lib/efi_loader/Makefile                  |   2 +
+ lib/efi_loader/efi_device_path.c         |  95 +++-
+ lib/efi_loader/efi_device_path_to_text.c |  23 +
+ lib/efi_loader/efi_http.c                | 563 +++++++++++++++++++++++
+ lib/efi_loader/efi_ipconfig.c            | 216 +++++++++
+ lib/efi_loader/efi_net.c                 | 316 ++++++++++++-
+ lib/efi_selftest/Makefile                |   2 +
+ lib/efi_selftest/efi_selftest_http.c     | 315 +++++++++++++
+ lib/efi_selftest/efi_selftest_ipconfig.c | 173 +++++++
+ lib/net_utils.c                          |  11 +
+ lib/uuid.c                               |  14 +
+ net/lwip/wget.c                          |   1 +
+ net/net.c                                |  11 -
+ net/wget.c                               |  39 +-
+ 18 files changed, 2038 insertions(+), 32 deletions(-)
+ create mode 100644 lib/efi_loader/efi_http.c
+ create mode 100644 lib/efi_loader/efi_ipconfig.c
+ create mode 100644 lib/efi_selftest/efi_selftest_http.c
+ create mode 100644 lib/efi_selftest/efi_selftest_ipconfig.c
+
 -- 
 2.43.0
 
