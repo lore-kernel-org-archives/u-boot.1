@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41822D2E9D5
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 10:46:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BA2CD2E9D6
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 10:47:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7298289365;
-	Mon, 11 Nov 2024 11:46:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D6BF689365;
+	Mon, 11 Nov 2024 11:47:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fwagh4cZ";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="iw3IOEUa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DF2B88A0A; Mon, 11 Nov 2024 11:46:14 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1E70B89371; Mon, 11 Nov 2024 11:47:09 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D94588936F
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 11:46:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EDEB788A0A
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 11:47:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2e2e050b1c3so4044474a91.0
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 02:46:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731321969; x=1731926769; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vJCR84HY5EvJ3f937LKpp3HCCvSDtgLz3F6U86nNqhs=;
- b=Fwagh4cZRoM60B1lpGSAhc3w0gcYqWXMKZVIv3NWoXmyMz1zDq2a0dcE9wj1K68aU9
- eDsTTYcB9+IQdKe+2bEX3V7snRNw5is8d2/rzndMVJJOSoTWaRMiZWJazd2pmrg/BgjC
- zieWgmlVUXhoTOCdNFJ+vQTqjbY1sskmsuo4ERIpMRwdCpAszJ0wsXklqcBGOdB9qLj1
- MxD0BqgaWwKL+QA+DpNefB2xuxbR2NQpLVtJvU43xlKSef0dwE0X0orOJkxhEHmu1ZUm
- ajDhZoYvKqTgqaUyKkkI76hdtL/w5q/lnOaV+JvOX5I2VnzJgWfSlMz7mqM9CacYVB+P
- 1CpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731321969; x=1731926769;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vJCR84HY5EvJ3f937LKpp3HCCvSDtgLz3F6U86nNqhs=;
- b=ZYrgqNlnlBV0er2z6/pDdJrJ5xd7aMmSNuNAn8NBM7+ePs6XNBTnfiFm2CeDRX8Viv
- nUFSRfcl7Y+s4dcdzCCRhuJ2qtO/z2ysvgUi8KnC1UGj2JSbQq/aqLXrrUKxihgGXUc9
- 9zHnraKI1VmdxYseNLqJu3QJTLATR5SDsDS5YrWEhi/UW75bl0avsHPtwIQ8jxmKZh+3
- 2vYwfEyZ7K99H8gXujSLHStBB/TP/GgCis4ah3rJbvaLhWIsZwJLr0M9iUAptzut1KmI
- WeLesWWU8sRUtyGPZQ0D+vMT8bwhCwHDRFSLwt7F5YrjJfNlLJX1AjtRhuMfAXNvaMq7
- EmDQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXSZBJXSIWBzlFaWmAFn0vaj2EcqgboWNQ410aXALwBhu0Z0X1odnsVOy8tP3xCb4CPVQBaQgI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxzb4XiAhqS/o2Y87plyxQceaMUnRkI0BCV40oo6xLVqJIF/yQb
- qJt6F3YrSg2FPBT+2+x3Uw27jGSqotP9oKCWAZAlWCzfPRUaBgPG+QSS0KWhkDJ9lK0klSfmZTC
- M9Eu87b0uypnsMgLsClJGV8BtFceuwNcsSKShBHiKwxpIWtCt
-X-Google-Smtp-Source: AGHT+IELFOyiZUbmJF68F5Q4ACqDAJHDeybW/74EHjjfQYrhlfouk1K0iYJt7wTQTli40UATy9OmhcEFvIXPGFINtpc=
-X-Received: by 2002:a17:90b:4a08:b0:2d8:85fc:464c with SMTP id
- 98e67ed59e1d1-2e9b0b178dcmr18301505a91.11.1731321969364; Mon, 11 Nov 2024
- 02:46:09 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1731322025; x=1731926825; i=xypron.glpk@gmx.de;
+ bh=uNTiIMscBgTqZXpBI2wtLxcRxqrx59nuGgJEcbVA2dE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=iw3IOEUam0WjPGN7E66vC8sZlK73QPtTHh+a0Bij/7BEQxy/yk8HSMhRP+azxkHB
+ uXSVHSO3YQtMqmk1FkNEkKhImGk+hLdy/GMcGtohQ1xXfuD+xd0Ngyoe7M+9TUNhw
+ e66X8K2FoNFDxHM/X/rO2AXgnx2yNzdaE9I7SGt2G/gXEGRouaS6HEWL4mo9T4Q+p
+ Wv+VyzJjMwPVSPHjFujCYv4FGfJAnoi9uhWgXJBro0zSUdXPn24aAHapJsScnmaMB
+ jhweyltFp7Yr9DnDsCQo84WSYY6ytX3umWsOdqGm3UTEtmWc2JstVoZAa8I93HYvn
+ YEJc9ESSr1mjcGdo5w==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N2V0B-1tvnSo0QQx-00zFPJ; Mon, 11
+ Nov 2024 11:47:05 +0100
+Message-ID: <c2abb147-43eb-482e-85ae-1dd4d857ef96@gmx.de>
+Date: Mon, 11 Nov 2024 11:47:04 +0100
 MIME-Version: 1.0
-References: <20241025111411.165904-1-sughosh.ganu@linaro.org>
- <20241025111411.165904-5-sughosh.ganu@linaro.org>
- <22d941ba-3452-4e10-ae59-642786f3d92c@gmx.de>
-In-Reply-To: <22d941ba-3452-4e10-ae59-642786f3d92c@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 11 Nov 2024 12:45:33 +0200
-Message-ID: <CAC_iWjL9QDD55xiSzSYgb5FB7mBfP=m+KLOGAC5JGA_y4O1LUg@mail.gmail.com>
-Subject: Re: [PATCH 4/4] efi: add helper functions to insert pmem node for DT
- fixup
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] lmb: Correctly unmap and free memory on errors
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20241024104603.1340301-1-ilias.apalodimas@linaro.org>
+ <1334fa3c-95e1-41d7-b0e4-db1452de136d@gmx.de>
+ <CAC_iWjKmJYNRRicG7Fpy_WN+4gGKQrnTWW_r02efYN0ceTZ7Pg@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAC_iWjKmJYNRRicG7Fpy_WN+4gGKQrnTWW_r02efYN0ceTZ7Pg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Vu/ycYWDl8oKv/Il504XrdvVGo4V2yF3Apq0t034O/mm2qTPxRM
+ VPxQoKZ6WWTkEoymH7jQw8lzV53ae27XanM65fnxXCiL+8eOHWbr6ClrKOmAgGDtK3k6HcJ
+ 3WYN1KxkJWzIqHBGVhrOfYOyK1cT3IrHoKWAye6RVZsdRyuZz+YHs6dP26FVGNLYONu/acE
+ aWJwMXVixtD6EYuxRF5vQ==
+UI-OutboundReport: notjunk:1;M01:P0:KixCJ3A6kBQ=;trdrMM2CBdnZi+TGL0RdapRBBHq
+ 8pi9Lymgzv9TAlglqfVc86l4QsMRYCj94P+su1+arvme/asvCHGLzpp2ZBqC+jLNIl8ZE/u//
+ O96/M8yY776ugSH0WnN1Q1OG2/N6dJAPN3cnJNce2O3dIMowzQcOjXpZEZihHmhJaxH4apI6Z
+ mDTz31AMztia2q4jmPiG8xZDm1iA4lTYo0PmIDT2VVeKlaR5qkyXbTPYlZGAmJgEqlw/6xaZQ
+ Dc+tOfrE8RPpK38wqOw4NquNl/kntXL4ZiJ1Sp4JmL/FYwFi96exWYuGRVOI/in5rZBH7M4p6
+ Sb0wMiVIUPxtaezvMUDW4hnsjhrvZCwUoWjEmfSLFXyQYfGZKWKhI5ZA13PYleD+//2EjnRo6
+ 1owurng5aXmPzrN59z60/tjhir3FiIsdVpX7FpmCAHFJOT3obKZN4illbkTUuPi9hMXQP1pTR
+ 4tX8ngtPtYv2HT8L59CqLlnkowugj3aCQQlGlHQolQVSSBSNprxT+MtaIBT+BUiymay75W9U1
+ wgSKG3GsgLq3ebf9kVBTDPWaCh1XbFriqQ3GRtAXpi1Yvy55Ko+TdVWVDcqqNO5JLGNpydTXl
+ j8sS690J2dXorDmjcrr1OEQGUfT567oiwI+uOAoFZZOJ8gbIJ5UsQUKw9Mf4oSFnzBXCrkV38
+ ciYSn+c9UNwPyP/bQ/Q544N8tEvuehSU/bax0Hz0bXBsAilqTVL7l03ObHCl70ZHHzDqSqZzZ
+ M/5iH7KFuj7ZfkiYt90loY4Zt9TaVv2azl+D4jfRD9WXCNQHRAGDqVerF8T+FRN11ufclFHbX
+ 3IMmyUwKOJPAQJcnDunjWLVw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,183 +92,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
+On 10/29/24 09:46, Ilias Apalodimas wrote:
+> Hi Heinrich
+>
+> On Mon, 28 Oct 2024 at 08:40, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
+rote:
+>>
+>> On 10/24/24 12:46, Ilias Apalodimas wrote:
+>>> We never free and unmap the memory on errors and we never unmap it whe=
+n
+>>> freeing it. This won't cause any problems on actual hardware but it wi=
+ll
+>>> on sandbox
+>>>
+>>> Fixes: commit 22f2c9ed9f53 ("efi: memory: use the lmb API's for alloca=
+ting and freeing memory")
+>>> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>>> ---
+>>>    lib/efi_loader/efi_memory.c | 15 ++++++++++-----
+>>>    1 file changed, 10 insertions(+), 5 deletions(-)
+>>>
+>>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+>>> index 9f3f08769977..84be5532a655 100644
+>>> --- a/lib/efi_loader/efi_memory.c
+>>> +++ b/lib/efi_loader/efi_memory.c
+>>> @@ -451,7 +451,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_=
+type type,
+>>>                                enum efi_memory_type memory_type,
+>>>                                efi_uintn_t pages, uint64_t *memory)
+>>>    {
+>>> -     u64 len;
+>>> +     u64 efi_addr, len;
+>>>        uint flags;
+>>>        efi_status_t ret;
+>>>        phys_addr_t addr;
+>>> @@ -499,14 +499,17 @@ efi_status_t efi_allocate_pages(enum efi_allocat=
+e_type type,
+>>>                return EFI_INVALID_PARAMETER;
+>>>        }
+>>>
+>>> -     addr =3D (u64)(uintptr_t)map_sysmem(addr, 0);
+>>> +     efi_addr =3D (u64)(uintptr_t)map_sysmem(addr, 0);
+>>>        /* Reserve that map in our memory maps */
+>>> -     ret =3D efi_add_memory_map_pg(addr, pages, memory_type, true);
+>>> -     if (ret !=3D EFI_SUCCESS)
+>>> +     ret =3D efi_add_memory_map_pg(efi_addr, pages, memory_type, true=
+);
+>>> +     if (ret !=3D EFI_SUCCESS) {
+>>>                /* Map would overlap, bail out */
+>>> +             lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags=
+);
+>>> +             unmap_sysmem((void *)(uintptr_t)efi_addr);
+>>>                return  EFI_OUT_OF_RESOURCES;
+>>> +     }
+>>>
+>>> -     *memory =3D addr;
+>>> +     *memory =3D efi_addr;
+>>>
+>>>        return EFI_SUCCESS;
+>>>    }
+>>> @@ -548,6 +551,8 @@ efi_status_t efi_free_pages(uint64_t memory, efi_u=
+intn_t pages)
+>>>        if (ret !=3D EFI_SUCCESS)
+>>>                return EFI_NOT_FOUND;
+>>>
+>>> +     unmap_sysmem((void *)(uintptr_t)memory);
+>>> +
+>>>        return ret;
+>>>    }
+>>>
+>>> --
+>>> 2.45.2
+>>>
+>>
+>> AllocatePages() only provides access to EfiConventionalMemory.
+>>
+>> We can safely call map_sysmem() with len =3D 0 and not use unmap_sysmem=
+().
+>
+> I am not sure I am following you here. We are calling it with len =3D 0.
+> But map/unmap_sysmem keep track of internal ref counters for sandbox
+> and the special tag case. Why shouldn't we call unmap_sysmem()?
 
-On Mon, 11 Nov 2024 at 10:08, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 10/25/24 13:14, Sughosh Ganu wrote:
-> > The EFI HTTP boot puts the iso installer image at some location in
-> > memory which needs to be reserved in the devicetree as persistent
-> > memory (pmem). Add helper functions which add this pmem node when the
-> > EFI_DT_FIXUP protocol's fixup callback is invoked.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> >   boot/image-fdt.c             |  9 +++++++++
-> >   include/efi_loader.h         | 17 +++++++++++++++++
-> >   lib/efi_loader/efi_bootmgr.c | 21 +++++++++++++++++++++
-> >   lib/efi_loader/efi_helper.c  | 12 ++++++++++++
-> >   4 files changed, 59 insertions(+)
-> >
-> > diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> > index 8eda521693..b39e81ad30 100644
-> > --- a/boot/image-fdt.c
-> > +++ b/boot/image-fdt.c
-> > @@ -11,6 +11,7 @@
-> >   #include <command.h>
-> >   #include <fdt_support.h>
-> >   #include <fdtdec.h>
-> > +#include <efi_loader.h>
-> >   #include <env.h>
-> >   #include <errno.h>
-> >   #include <image.h>
-> > @@ -648,6 +649,14 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
-> >       if (!ft_verify_fdt(blob))
-> >               goto err;
-> >
-> > +     if (CONFIG_IS_ENABLED(EFI_HTTP_BOOT)) {
-> > +             fdt_ret = fdt_efi_pmem_setup(blob);
->
-> I can see no reason why pmem setup should depend on HTTP boot.
+As discussed on IRC the sandbox currently does not do reference counting
+for conventional memory. Ilias suggested to leave it here for consistency.
 
-The reason is that we *know* we want to preserve image on HTTP
-installers. but we should only add it if that image is booted, not
-unconditionally if EFI_HTTP is enabled
+Moving the patch to the EFI patch queue.
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
 >
-> It should be possible to pass a memory block device to the kernel no
-> matter how it was created.
+> Thanks
+> /Ilias
+>>
+>> Best regards
+>>
+>> Heinrich
 
-Yes, we can. But how do we know we need to setup a pmem node? In this
-specific case, we know http installers need the image.
-If we can find similar rules (or perhaps a command line option), we
-can preserve it for all images
-
-Thanks
-/Ilias
->
-> Best regards
->
-> Heinrich
->
-> > +             if (fdt_ret) {
-> > +                     printf("ERROR: HTTP boot pmem fixup failed\n");
-> > +                     goto err;
-> > +             }
-> > +     }
-> > +
-> >       /* after here we are using a livetree */
-> >       if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
-> >               struct event_ft_fixup fixup;
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index d450e304c6..031de18746 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -748,6 +748,15 @@ bool efi_varname_is_load_option(u16 *var_name16, int *index);
-> >   efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
-> >                                   efi_guid_t *guid);
-> >
-> > +/**
-> > + * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
-> > + *
-> > + * @fdt:     Pointer to the devicetree
-> > + *
-> > + * Return:   0 on success, negative on failure
-> > + */
-> > +int fdt_efi_pmem_setup(void *fdt);
-> > +
-> >   /**
-> >    * efi_size_in_pages() - convert size in bytes to size in pages
-> >    *
-> > @@ -964,6 +973,14 @@ efi_status_t efi_set_load_options(efi_handle_t handle,
-> >                                 void *load_options);
-> >   efi_status_t efi_bootmgr_load(efi_handle_t *handle, void **load_options);
-> >
-> > +/**
-> > + * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
-> > + *
-> > + * @fdt:     Pointer to the DT blob
-> > + * Return:   status code
-> > + */
-> > +efi_status_t efi_bootmgr_pmem_setup(void *fdt);
-> > +
-> >   /**
-> >    * struct efi_image_regions - A list of memory regions
-> >    *
-> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> > index 16f75555f6..1d9246be61 100644
-> > --- a/lib/efi_loader/efi_bootmgr.c
-> > +++ b/lib/efi_loader/efi_bootmgr.c
-> > @@ -41,6 +41,8 @@ struct uridp_context {
-> >       efi_handle_t mem_handle;
-> >   };
-> >
-> > +static struct uridp_context *uctx;
-> > +
-> >   const efi_guid_t efi_guid_bootmenu_auto_generated =
-> >               EFICONFIG_AUTO_GENERATED_ENTRY_GUID;
-> >
-> > @@ -423,6 +425,7 @@ efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
-> >
-> >       efi_free_pool(ctx->loaded_dp);
-> >       free(ctx);
-> > +     uctx = NULL;
-> >
-> >       return ret == EFI_SUCCESS ? ret2 : ret;
-> >   }
-> > @@ -443,6 +446,23 @@ static void EFIAPI efi_bootmgr_http_return(struct efi_event *event,
-> >       EFI_EXIT(ret);
-> >   }
-> >
-> > +/**
-> > + * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
-> > + *
-> > + * @fdt:     Pointer to the DT blob
-> > + * Return:   status code
-> > + */
-> > +efi_status_t efi_bootmgr_pmem_setup(void *fdt)
-> > +{
-> > +     if (!uctx) {
-> > +             log_warning("No EFI HTTP boot context found\n");
-> > +             return EFI_SUCCESS;
-> > +     }
-> > +
-> > +     return !fdt_fixup_pmem_region(fdt, uctx->image_addr, uctx->image_size) ?
-> > +             EFI_SUCCESS : EFI_INVALID_PARAMETER;
-> > +}
-> > +
-> >   /**
-> >    * try_load_from_uri_path() - Handle the URI device path
-> >    *
-> > @@ -472,6 +492,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
-> >       if (!ctx)
-> >               return EFI_OUT_OF_RESOURCES;
-> >
-> > +     uctx = ctx;
-> >       s = env_get("loadaddr");
-> >       if (!s) {
-> >               log_err("Error: loadaddr is not set\n");
-> > diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> > index 00167bd2a1..33cd8b9a50 100644
-> > --- a/lib/efi_loader/efi_helper.c
-> > +++ b/lib/efi_loader/efi_helper.c
-> > @@ -242,6 +242,18 @@ int efi_unlink_dev(efi_handle_t handle)
-> >       return 0;
-> >   }
-> >
-> > +/**
-> > + * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
-> > + *
-> > + * @fdt:     Pointer to the devicetree
-> > + *
-> > + * Return:   0 on success, negative on failure
-> > + */
-> > +int fdt_efi_pmem_setup(void *fdt)
-> > +{
-> > +     return efi_bootmgr_pmem_setup(fdt) == EFI_SUCCESS ? 0 : -1;
-> > +}
-> > +
-> >   static int u16_tohex(u16 c)
-> >   {
-> >       if (c >= '0' && c <= '9')
->
