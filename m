@@ -4,79 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49610D12D7F
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 07:47:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2108DD12D7F
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 07:48:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CCB188D61;
-	Mon, 11 Nov 2024 08:47:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5FC2088DB5;
+	Mon, 11 Nov 2024 08:48:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Nugkv7A7";
+	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="ukkzW2iY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA29888DB5; Mon, 11 Nov 2024 08:47:00 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id 7EC3C8911D; Mon, 11 Nov 2024 08:48:08 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2072b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::72b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8837F88A0A
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 08:46:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DC5B88A0A
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 08:48:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1731311217; x=1731916017; i=xypron.glpk@gmx.de;
- bh=juwacjPz5aLEVr8hVfFzhBDcwRQV+Qd1AY+brtdQCt8=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=Nugkv7A71by1cBJyzkb/ZkUsxn5rMMzjmK9ulw7Ur7m9rHscwOd+uzxrrGH9MyiO
- K/8wxIOY3+0NDwLVwBuLjh3Go3jnVHLFCU+PdMSisiYJiUwQ7lHCcuiibYjUPJ7lb
- uofQ2ze1BZTU78xTYtkuxadywJSesjgMEcpqPq7mxysW5VQLodCiBJrfdLSN0Mith
- tae5fJzKukaF3X8Orlm5bkbtclqffdKbvYxWnguZoVfYmEo1+8mopP9w4H791/DTe
- yJUze3qlFyYvaAEahsvCL9m6rQmyKZbwaM08911DoTj3JY21Ozla9Vw+fOKM0dPBk
- Se4ZxBsTSSYSXbKfIA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MaJ3t-1tFdu13tNV-00IlEu; Mon, 11
- Nov 2024 08:46:57 +0100
-Message-ID: <1b4cc312-3a54-4816-87db-f026b9060c2d@gmx.de>
-Date: Mon, 11 Nov 2024 08:46:51 +0100
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=s/xahEEL4OJKqCQcYT6lM/3Cc0atD6dhq+M5WNbSpJBMZ3hDb6GQJeYPGr6eHg8Mo8SM/XhxIPq0H9XBNfTgHkEaWHxWhAlu11oFyHMHr8AEJxv+f5uXVlybIVH5b4zlSyPDdWJOh9cS1eQkOavnBIEmYyWv5q6845mqvFPbk30qblTY3RoNTmTxXiUmqFiX5jWA9MHeWup2cDzbGC5bLVkoP9mtimontsyVfztWu+4PEA6i8qgB22a9c3HMauMq+ymyU3THblT0wv9ftMCQ+UTQXAPbow8shasDAoVywrA1ASFuC6y5Z/3p0wFLXH2fTDuXsMeaf/oG71FW6Q7NPg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gW1VkooV2UgEpThLOgZE6Gp2o0EN1kyOMx73oyHc1iw=;
+ b=d6l5U+Is9BLcakdTT1vN0lmnmgVXRi4VLBkhShqWnozNQqpj2MqdgrjsdPOhExQSgWOtk7pNXxDqdc8xyAzWcQ+6Rf00nbNv7UlXLU3q8QkjQZuxmpvblOzjcRrjcjB3FMEBi+u6nLSVsNh6IYDtwdaGl7YrQHCcXm+1HA3YP9CLXOuzlhyHQIH8fOEka5Qpin491TP8eX1U61BsTyUZmNQDZQqMtyP354IP5AvpKjQ0h9Tifc6qFReYorEbpOqbHnkFzUho26GSfjys7qb2KY5A5WEKFICzxgd3ByREUg0R5pzNJKTLrcjFtgdlDI+KEQ+mhEGc8E3neJxtUmNQWQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=gmail.com smtp.mailfrom=phytec.de;
+ dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
+ arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=phytecmesstechnikgmbh.onmicrosoft.com;
+ s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gW1VkooV2UgEpThLOgZE6Gp2o0EN1kyOMx73oyHc1iw=;
+ b=ukkzW2iYYldEic5eP3j28VIqXXsOtjGzPCBxjXadAoXel3ndMzZuJLn4fGaWMliYb0Nt456iXSQ5ZuKXdaMFGjQzD7r7T1HHV+9NZ4AKSBlbZm7hEjxbPoVMmzDQusWaUSjzaaN8udd7j/bGFWyCkxz3IDNeSMnU97WTN5ZUv2A=
+Received: from DB3PR08CA0002.eurprd08.prod.outlook.com (2603:10a6:8::15) by
+ DBAP195MB0860.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:1cb::24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8137.28; Mon, 11 Nov 2024 07:48:01 +0000
+Received: from DU2PEPF0001E9C5.eurprd03.prod.outlook.com
+ (2603:10a6:8:0:cafe::27) by DB3PR08CA0002.outlook.office365.com
+ (2603:10a6:8::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.28 via Frontend
+ Transport; Mon, 11 Nov 2024 07:48:01 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ DU2PEPF0001E9C5.mail.protection.outlook.com (10.167.8.74) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8158.14 via Frontend Transport; Mon, 11 Nov 2024 07:48:01 +0000
+Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 11 Nov
+ 2024 08:48:01 +0100
+Received: from Berlix.phytec.de (172.25.0.12) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 11 Nov
+ 2024 08:48:01 +0100
+Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
+ berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
+ Mon, 11 Nov 2024 08:48:01 +0100
+From: Yannic Moog <Y.Moog@phytec.de>
+To: "aford173@gmail.com" <aford173@gmail.com>, "tharvey@gateworks.com"
+ <tharvey@gateworks.com>
+CC: "manut@mecka.net" <manut@mecka.net>, "uboot-imx@nxp.com"
+ <uboot-imx@nxp.com>, "trini@konsulko.com" <trini@konsulko.com>,
+ "festevam@gmail.com" <festevam@gmail.com>, Yashwanth Varakala
+ <Y.Varakala@phytec.de>, "sbabic@denx.de" <sbabic@denx.de>, Benjamin Hahn
+ <B.Hahn@phytec.de>, PHYTEC Upstream <upstream@lists.phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Teresa Remmet
+ <T.Remmet@phytec.de>
+Subject: Re: [PATCH v2 1/6] arm: imx8m: add OP-TEE node
+Thread-Topic: [PATCH v2 1/6] arm: imx8m: add OP-TEE node
+Thread-Index: AQHbMO5mBj+Q3w10a0S5jSSS6cE60bKtV3wAgABHXgCABAqUAA==
+Date: Mon, 11 Nov 2024 07:48:00 +0000
+Message-ID: <79a2c61150260a98aaaa1baf583615a677ae75f1.camel@phytec.de>
+References: <20241107-phytec_imx8m_optee-v2-0-bbc3747a60e8@phytec.de>
+ <20241107-phytec_imx8m_optee-v2-1-bbc3747a60e8@phytec.de>
+ <CAHCN7x+2XzhyERLmAaO-PVwkT6K_rcQgG-+xgTX8HaqstdZyOQ@mail.gmail.com>
+ <CAJ+vNU3hpUwBdgCWGAWjpbc8o0wUwjRRQNdFNhJ-c9QHuKcPgw@mail.gmail.com>
+In-Reply-To: <CAJ+vNU3hpUwBdgCWGAWjpbc8o0wUwjRRQNdFNhJ-c9QHuKcPgw@mail.gmail.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.25.0.11]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <CE5D356DF9AA154B9F296CD2EFF9E068@phytec.de>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] efi_loader: add a function to remove memory from the
- EFI map
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>
-References: <20241025111411.165904-1-sughosh.ganu@linaro.org>
- <20241025111411.165904-3-sughosh.ganu@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241025111411.165904-3-sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:SiZcdr98Xqus2DrIxFSL/crIb1Q4CtEos2ULG9IEKjVKjv9jY9j
- cCx8kc7fjyvfXXYEsQp6X4NEg9TD9UqsTUdsb3SF9RPpoZan5V4ujzp3sLAIuPm9wqmyKsF
- wRd0NZq7uV0VYxcFIZtjKrm2zfT4Dp/H2kZ//YMq3fV6j7xoJ88JhE94JgGKi8b8lneTntM
- yq6y4ZHoA3HtqiImz7cZg==
-UI-OutboundReport: notjunk:1;M01:P0:FyFs+4+L0xc=;TL2V2PSpiJfN08XeV7UqZTysVQz
- CLm9YHhqx/ya7sFpfGHrxWg2PELkQOeP4yHBJ68eH/LuEfvZPgKIXYPgD4o014mNzmDRUfffg
- RA0h81yLbdgJdnUNuewEKAL9cOT+BlcOnWvKQ/lv/QcmQPB0iNO+vd/hMX15Hfeh47yUzUe6r
- KYtbNhSXPD20EowT3er/+AhNZdoMEAX1gt89/kTNa/3jcIBYojflKz5UK6wZoR9cKElEkGPL+
- M6UzP7hvhGOBEAPDjqeEBgyUCfrBl5hdVsafa2Zog8rS4bH5hWB5WWcNQcZJI3x1WToLfEsxe
- KxlrCh62U1GrWkSydEahwMeY39/6+iL2t7d2zcsiWmDj2mpzk2nK3nTcgEJXqx4HUGzg/VJww
- 5BXALgBzKM3I/oULfuTu/X5C22toirUm3Gk+ApW3ERoLGjT/02Z0fTCXlkFpAbY4FbeZQQmnF
- vQAOWnafZvWW2W4aH/Gh2ny5LtRIYqS5yNMnSh4DwAi7dgFiwjjgH+R6KR/tPTS9zZoIkQUAZ
- NLa8wYkRrinNGRgqu82C4VL6XbzodsCD0FUKkR4L8iAQFtKK2+uCBhz+YFanIdYGr0kPFt2Up
- X2oevFzmmcBtGcEKETP4iX1pFBbY3aj5JUdRup1hAw8WgrF3via8Y248aIN+vXXkF2VzTI5Uq
- WCvSyQ+TpD9lWwEQW/hvbCJBI8z1Ak6XXXoqrFla3CSl+Wl6wftKrl8L6OQa7Gm/S9hIvWaqg
- +OBIpWhwuP7wlM9Jiq8uPSeiOgHJoiad44816++aBavX7o3N3fYFd/vDhBkccemSIFu46R9JB
- y1fI+6/nW9Ia+licCLjl1/gA==
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PEPF0001E9C5:EE_|DBAP195MB0860:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0fd1e7c2-133a-408a-d1a4-08dd02252b34
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|1800799024|376014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?YzFHZTRUTlA1cmYxLzNSSVIzejgwQmJqZmc0aXhyUVB0bmY5RTVDRmlFbU1H?=
+ =?utf-8?B?WnRkL2xGMXZDVHI0YXFoUm8vcVRGUStSdFd5a0I2Z1FHejBnL2pORjRhb0RD?=
+ =?utf-8?B?QlZNM0owU3hWK3hZcEdZUGdHc0luNE5NQ28vaGhKbkFRYThkUWdIK0JiZFZS?=
+ =?utf-8?B?cXdiaXQ0Z0lYeGVHS0RMWlpnVksrVCtlWnVmVlRKeFg2WXUvQ2NudnJmZGdO?=
+ =?utf-8?B?cjQvRTJJSWNHNUZocGRSTUVJTHZ2ZnJVYTNSOUhBUGcrODZyTzFSQW5rNjlv?=
+ =?utf-8?B?TFp1dnF6WDZTRTV0YXVkRmVwQ201VXMzWW5rUUV2MHdWS3pXbXZqVy8rMVh6?=
+ =?utf-8?B?cVppY1RCcGJ0OFQyczhzVnBjQkZqOURlSTliVFhmOEFWenBCY2t0cUJ1M3J2?=
+ =?utf-8?B?blg0Qnl5bFNuNkUwQnA4RjgzQkY5SzZDcjhDN2FENlIwMEUveks5SE5WNVJo?=
+ =?utf-8?B?dEg3R1Bsa3ovK2hvaFd5aUpZbTVpaExjSjVIMmI5L09jYVBFREpxdVVQUkVj?=
+ =?utf-8?B?bWx0VmMxeFVTUjhEWEgyMU0rY0laTFRyQTd2ak91YlZVU3ovYUNvV2xSVGlF?=
+ =?utf-8?B?eU1MS3JzRmMyblFqRExRMzBvM1ZqT0xuUDA4R2lzTEZzWUFVNUNGekF5djQ1?=
+ =?utf-8?B?SGtqenpvZU5HbmxGdHV0WTFjUThNdFZCbi9PR0M4TXljNlFzUWVmQmVZMHlB?=
+ =?utf-8?B?clczUk0wbEdNNG1vSDd6NWk3Vkk4ZmlGTGtUZU8veXQ5d2c0UXBVYjlzbGRI?=
+ =?utf-8?B?RlhLMStXQVRmUlFXWGI0U0Q0Rk4ybVNON0lpdWtIS01oU1lmbmhuT0RSN1Jo?=
+ =?utf-8?B?YUlJR01NVGJ0YS9mcFNMckVqZk53NzhBbmlZa2NqYXNsWFRnYmd0OG9oZWE0?=
+ =?utf-8?B?TkFBaXJZUnRNUmxtNTBNcGdIdGo5QjNqWmJLY1A2eVJmcjB0Z1VvaktVTGtX?=
+ =?utf-8?B?NFhBZ2RjL2tWQTU2d1FmYjJYQUcxclRQaHN1UWdZUjRkbDhRdmYrejJoUTFD?=
+ =?utf-8?B?V2ZNYTJBYzV2VjNOdVcwbmRpL25VZWw3dDRIQ2RQQ0R4Tk1jOFMwNUpwa0d6?=
+ =?utf-8?B?T1k5Tkw1aTBiQ1dDUlBBNmlNNXRrMmNXRWpnVUxpSTY4Qmp1dGlmUGhFNmp4?=
+ =?utf-8?B?YTM0V3JJdlkwWWZRcUplMzc4VG50R285K3kxcW9oVjhBSFFESjJHTEx6ZE9Y?=
+ =?utf-8?B?ZnUrbWVUd1lIQWRKdUlmSDBlcFA5VTJMSnFmb3EvWEZjVWFXK3ZZY1o1MjlY?=
+ =?utf-8?B?dkNyUW43ditoRGtPQ1pZVi9DQTRWUHNDOE1RWTU5UXBjQTBFVmx4WUtJU3dr?=
+ =?utf-8?B?MmFaWUFObWgrdTJyMmFjVi9jRWtYalczckJ3UFJtVjE2aTNMRjAvbXVlK1pN?=
+ =?utf-8?B?RkN4M1dhSklnYzU3M2JRdEQ5NTRlRUs1bHVlRHFncnM0THg3VzIvUFRmRHNQ?=
+ =?utf-8?B?Q0dKT2pWR2FFS0xpeDBybE1JTGZ5Z0pKNnNndHB4c0xlMkhvWUZRdHJ2WC8r?=
+ =?utf-8?B?QkV1RVRjTXlhamVrNWd6Z3BaajJrZTlFU2JaODh0eGd1NzhDVDlyMXZSMGpu?=
+ =?utf-8?B?WE55OWFrTHN1Zm15RzdwSWhyWFRVLzZOSTFpVjA4MW1PVjd0b2NrbUhDbzhv?=
+ =?utf-8?B?bWd5blgvYW9RaHcvbjVhVndvVVEzSktrUjBUaE5ZZ01XcGtZOHU2UEJQbExk?=
+ =?utf-8?B?NHdzRG9VaGZYQVY2ZmVQeWhvMDdiZWxXbldqVmxrQWVuRjNRL1lzUTNVanpO?=
+ =?utf-8?B?K0FZMVVpSjRWWVN2VVN1YjM2dzQ5Q0I0SXpnZDJpMitqNG5qMUpyRlRnZy8y?=
+ =?utf-8?B?M3pOSGVkb29ySWttTElER2F0SmtyTDhtMXJrOWZTTjF0emJxSFhmWmlQZjFt?=
+ =?utf-8?B?ZTZZS0YyOEJ4bHRtclZCMnkxdWxHSmFVcDlVSHVKRjNFNlE9PQ==?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2024 07:48:01.7624 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0fd1e7c2-133a-408a-d1a4-08dd02252b34
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF0001E9C5.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAP195MB0860
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,216 +172,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/25/24 13:14, Sughosh Ganu wrote:
-> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->
-> With upcoming changes supporting pmem nodes, we need to ommit the
-
-Nits:
-%s/ommit/remove/
-
-> pmem area rfom the EFI memory map. Add a function to do that
-
-%s/rfom/from/
-%s/that/that./
-
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-
-The patch is not applicable. Please, rebase on origin/master.
-
-In the medium term we should get rid of the double book keeping. The
-memory map should be generated on the fly from LMB data.
-
-Best regards
-
-Heinrich
-
-> ---
->   include/efi_loader.h        | 11 +++++---
->   lib/efi_loader/efi_memory.c | 51 +++++++++++++++++++++++++++----------
->   lib/lmb.c                   |  4 +--
->   3 files changed, 47 insertions(+), 19 deletions(-)
->
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 291eca5c07..d450e304c6 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -786,7 +786,7 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_=
-map_size,
->   efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
->
->   /**
-> - * efi_add_memory_map_pg() - add pages to the memory map
-> + * efi_update_memory_map() - update the memory map by adding/removing p=
-ages
->    *
->    * @start:			start address, must be a multiple of
->    *				EFI_PAGE_SIZE
-> @@ -794,11 +794,14 @@ efi_status_t efi_add_memory_map(u64 start, u64 siz=
-e, int memory_type);
->    * @memory_type:		type of memory added
->    * @overlap_conventional:	region may only overlap free(conventional)
->    *				memory
-> + * @remove:			remove memory map
->    * Return:			status code
->    */
-> -efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
-> -				   int memory_type,
-> -				   bool overlap_conventional);
-> +efi_status_t efi_update_memory_map(u64 start, u64 pages, int memory_typ=
-e,
-> +				   bool overlap_conventional, bool remove);
-> +
-> +/* Remove memory from the EFI memory map */
-> +efi_status_t efi_remove_memory_map(u64 start, u64 size, int memory_type=
-);
->
->   /* Called by board init to initialize the EFI drivers */
->   efi_status_t efi_driver_init(void);
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 3d742fa191..cb93bfa55f 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -258,7 +258,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *ma=
-p,
->   }
->
->   /**
-> - * efi_add_memory_map_pg() - add pages to the memory map
-> + * efi_update_memory_map() - update the memory map by adding/removing p=
-ages
->    *
->    * @start:			start address, must be a multiple of
->    *				EFI_PAGE_SIZE
-> @@ -266,11 +266,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *=
-map,
->    * @memory_type:		type of memory added
->    * @overlap_conventional:	region may only overlap free(conventional)
->    *				memory
-> + * @remove:			remove memory map
->    * Return:			status code
->    */
-> -efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
-> -				   int memory_type,
-> -				   bool overlap_conventional)
-> +efi_status_t efi_update_memory_map(u64 start, u64 pages, int memory_typ=
-e,
-> +				   bool overlap_conventional, bool remove)
->   {
->   	struct efi_mem_list *lmem;
->   	struct efi_mem_list *newlist;
-> @@ -278,9 +278,9 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pa=
-ges,
->   	uint64_t carved_pages =3D 0;
->   	struct efi_event *evt;
->
-> -	EFI_PRINT("%s: 0x%llx 0x%llx %d %s\n", __func__,
-> +	EFI_PRINT("%s: 0x%llx 0x%llx %d %s %s\n", __func__,
->   		  start, pages, memory_type, overlap_conventional ?
-> -		  "yes" : "no");
-> +		  "yes" : "no", remove ? "remove" : "add");
->
->   	if (memory_type >=3D EFI_MAX_MEMORY_TYPE)
->   		return EFI_INVALID_PARAMETER;
-> @@ -363,7 +363,10 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 p=
-ages,
->   	}
->
->   	/* Add our new map */
-> -        list_add_tail(&newlist->link, &efi_mem);
-> +	if (!remove)
-> +		list_add_tail(&newlist->link, &efi_mem);
-> +	else
-> +		free(newlist);
->
->   	/* And make sure memory is listed in descending order */
->   	efi_mem_sort();
-> @@ -400,7 +403,29 @@ efi_status_t efi_add_memory_map(u64 start, u64 size=
-, int memory_type)
->   	pages =3D efi_size_in_pages(size + (start & EFI_PAGE_MASK));
->   	start &=3D ~EFI_PAGE_MASK;
->
-> -	return efi_add_memory_map_pg(start, pages, memory_type, false);
-> +	return efi_update_memory_map(start, pages, memory_type, false, false);
-> +}
-> +
-> +/**
-> + * efi_remove_memory_map() - remove memory area to the memory map
-> + *
-> + * @start:		start address of the memory area
-> + * @size:		length in bytes of the memory area
-> + * @memory_type:	type of memory removed
-> + *
-> + * Return:		status code
-> + *
-> + * This function automatically aligns the start and size of the memory =
-area
-> + * to EFI_PAGE_SIZE.
-> + */
-> +efi_status_t efi_remove_memory_map(u64 start, u64 size, int memory_type=
-)
-> +{
-> +	u64 pages;
-> +
-> +	pages =3D efi_size_in_pages(size + (start & EFI_PAGE_MASK));
-> +	start &=3D ~EFI_PAGE_MASK;
-> +
-> +	return efi_update_memory_map(start, pages, memory_type, false, true);
->   }
->
->   /**
-> @@ -500,7 +525,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
-pe type,
->
->   	addr =3D (u64)(uintptr_t)map_sysmem(addr, 0);
->   	/* Reserve that map in our memory maps */
-> -	ret =3D efi_add_memory_map_pg(addr, pages, memory_type, true);
-> +	ret =3D efi_update_memory_map(addr, pages, memory_type, true, false);
->   	if (ret !=3D EFI_SUCCESS)
->   		/* Map would overlap, bail out */
->   		return  EFI_OUT_OF_RESOURCES;
-> @@ -542,8 +567,8 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uin=
-tn_t pages)
->   	if (status)
->   		return EFI_NOT_FOUND;
->
-> -	ret =3D efi_add_memory_map_pg(memory, pages, EFI_CONVENTIONAL_MEMORY,
-> -				    false);
-> +	ret =3D efi_update_memory_map(memory, pages, EFI_CONVENTIONAL_MEMORY,
-> +				    false, false);
->   	if (ret !=3D EFI_SUCCESS)
->   		return EFI_NOT_FOUND;
->
-> @@ -828,8 +853,8 @@ static void add_u_boot_and_runtime(void)
->   	runtime_end =3D (uintptr_t)__efi_runtime_stop;
->   	runtime_end =3D (runtime_end + runtime_mask) & ~runtime_mask;
->   	runtime_pages =3D (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
-> -	efi_add_memory_map_pg(runtime_start, runtime_pages,
-> -			      EFI_RUNTIME_SERVICES_CODE, false);
-> +	efi_update_memory_map(runtime_start, runtime_pages,
-> +			      EFI_RUNTIME_SERVICES_CODE, false, false);
->   }
->
->   int efi_memory_init(void)
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 7e90f17876..05f3cd093d 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -55,11 +55,11 @@ static int __maybe_unused lmb_map_update_notify(phys=
-_addr_t addr,
->   	pages =3D efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
->   	efi_addr &=3D ~EFI_PAGE_MASK;
->
-> -	status =3D efi_add_memory_map_pg(efi_addr, pages,
-> +	status =3D efi_update_memory_map(efi_addr, pages,
->   				       op =3D=3D MAP_OP_RESERVE ?
->   				       EFI_BOOT_SERVICES_DATA :
->   				       EFI_CONVENTIONAL_MEMORY,
-> -				       false);
-> +				       false, false);
->   	if (status !=3D EFI_SUCCESS) {
->   		log_err("%s: LMB Map notify failure %lu\n", __func__,
->   			status & ~EFI_ERROR_MASK);
-
+SGksCgpPbiBGcmksIDIwMjQtMTEtMDggYXQgMTA6MDUgLTA4MDAsIFRpbSBIYXJ2ZXkgd3JvdGU6
+Cj4gT24gRnJpLCBOb3YgOCwgMjAyNCBhdCA1OjQ54oCvQU0gQWRhbSBGb3JkIDxhZm9yZDE3M0Bn
+bWFpbC5jb20+IHdyb3RlOgo+ID4gCj4gPiBPbiBUaHUsIE5vdiA3LCAyMDI0IGF0IDI6NDLigK9B
+TSBZYW5uaWMgTW9vZyA8eS5tb29nQHBoeXRlYy5kZT4gd3JvdGU6Cj4gPiA+IAo+ID4gPiBBZGQg
+dGVlIG5vZGUgaW4gU29DIHUtYm9vdCBkZXZpY2UgdHJlZXMuIFVzZSBhIGtjb25maWcgZW50cnkg
+dG8gc3BlY2lmeQo+ID4gPiBsb2FkIGFuZCBlbnRyeSBhZGRyZXNzZXMgZm9yIHRoZSBvcC10ZWUg
+aW1hZ2UgaW4gdGhlIHJlc3BlY3RpdmUKPiA+ID4gZGVmY29uZmlnLgo+ID4gPiAKPiA+ID4gU2ln
+bmVkLW9mZi1ieTogWWFubmljIE1vb2cgPHkubW9vZ0BwaHl0ZWMuZGU+Cj4gPiA+IC0tLQo+ID4g
+PiDCoGFyY2gvYXJtL2R0cy9pbXg4bW0tdS1ib290LmR0c2kgfCAxNyArKysrKysrKysrKysrKysr
+LQo+ID4gPiDCoGFyY2gvYXJtL2R0cy9pbXg4bW4tdS1ib290LmR0c2kgfCAxNyArKysrKysrKysr
+KysrKysrLQo+ID4gPiDCoGFyY2gvYXJtL2R0cy9pbXg4bXAtdS1ib290LmR0c2kgfCAxNyArKysr
+KysrKysrKysrKysrLQo+ID4gPiDCoGFyY2gvYXJtL21hY2gtaW14L2lteDhtL0tjb25maWcgfMKg
+IDggKysrKysrKysKPiA+ID4gwqA0IGZpbGVzIGNoYW5nZWQsIDU2IGluc2VydGlvbnMoKyksIDMg
+ZGVsZXRpb25zKC0pCj4gPiA+IAo+ID4gPiBkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vZHRzL2lteDht
+bS11LWJvb3QuZHRzaSBiL2FyY2gvYXJtL2R0cy9pbXg4bW0tdS1ib290LmR0c2kKPiA+ID4gaW5k
+ZXggZDMxYmM4MjI1MzIuLmVjYzIzMTkyNzllIDEwMDY0NAo+ID4gPiAtLS0gYS9hcmNoL2FybS9k
+dHMvaW14OG1tLXUtYm9vdC5kdHNpCj4gPiA+ICsrKyBiL2FyY2gvYXJtL2R0cy9pbXg4bW0tdS1i
+b290LmR0c2kKPiA+ID4gQEAgLTE2NCw2ICsxNjQsMjEgQEAKPiA+ID4gwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIH07Cj4gPiA+IMKgI2VuZGlmCj4gPiA+IAo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCB0ZWU6IHRlZSB7Cj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBk
+ZXNjcmlwdGlvbiA9ICJPUC1URUUiOwo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgdHlwZSA9ICJ0ZWUiOwo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgYXJjaCA9ICJhcm02NCI7Cj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCBjb21wcmVzc2lvbiA9ICJub25lIjsKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIG9zID0gInRlZSI7Cj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCBsb2FkID0gPENPTkZJR19JTVg4TV9PUFRFRV9MT0FEX0FERFI+Owo+
+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZW50cnkgPSA8Q09ORklH
+X0lNWDhNX09QVEVFX0xPQURfQUREUj47Cj4gPiA+ICsKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHRlZS1vcyB7Cj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmlsZW5hbWUgPSAidGVlLmJpbiI7Cj4gPiA+
+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgb3B0
+aW9uYWw7Cj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Owo+ID4g
+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Owo+ID4gPiArCj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCBiaW5tYW5fZmlwOiBmaXAgewo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIGFyY2ggPSAiYXJtNjQiOwo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIGNvbXByZXNzaW9uID0gIm5vbmUiOwo+ID4gPiBAQCAtMTkyLDcgKzIwNyw3
+IEBACj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmR0ID0gImZk
+dC1TRVEiOwo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGZpcm13
+YXJlID0gInVib290IjsKPiA+ID4gwqAjaWZuZGVmIENPTkZJR19BUk1WOF9QU0NJCj4gPiA+IC3C
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBsb2FkYWJsZXMgPSAiYXRmIjsKPiA+
+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGxvYWRhYmxlcyA9ICJhdGYi
+LCAidGVlIjsKPiA+ID4gwqAjZW5kaWYKPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH07Cj4g
+PiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIH07Cj4gPiA+IGRpZmYgLS1naXQgYS9hcmNoL2FybS9kdHMvaW14OG1uLXUtYm9v
+dC5kdHNpIGIvYXJjaC9hcm0vZHRzL2lteDhtbi11LWJvb3QuZHRzaQo+ID4gPiBpbmRleCA2ODc1
+YzZkNDRmZi4uZjkxMDhjYjc1YzcgMTAwNjQ0Cj4gPiA+IC0tLSBhL2FyY2gvYXJtL2R0cy9pbXg4
+bW4tdS1ib290LmR0c2kKPiA+ID4gKysrIGIvYXJjaC9hcm0vZHRzL2lteDhtbi11LWJvb3QuZHRz
+aQo+ID4gPiBAQCAtMjM1LDYgKzIzNSwyMSBAQAo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+fTsKPiA+ID4gwqAjZW5kaWYKPiA+ID4gCj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHRlZTog
+dGVlIHsKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGRlc2NyaXB0
+aW9uID0gIk9QLVRFRSI7Cj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCB0eXBlID0gInRlZSI7Cj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBhcmNoID0gImFybTY0IjsKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIGNvbXByZXNzaW9uID0gIm5vbmUiOwo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgb3MgPSAidGVlIjsKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIGxvYWQgPSA8Q09ORklHX0lNWDhNX09QVEVFX0xPQURfQUREUj47Cj4gPiA+ICvC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBlbnRyeSA9IDxDT05GSUdfSU1YOE1f
+T1BURUVfTE9BRF9BRERSPjsKPiA+ID4gKwo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgdGVlLW9zIHsKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmaWxlbmFtZSA9ICJ0ZWUuYmluIjsKPiA+ID4gK8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBvcHRpb25hbDsK
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH07Cj4gPiA+ICvCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIH07Cj4gPiA+ICsKPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJp
+bm1hbl9maXA6IGZpcCB7Cj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgYXJjaCA9ICJhcm02NCI7Cj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgY29tcHJlc3Npb24gPSAibm9uZSI7Cj4gPiA+IEBAIC0yNjMsNyArMjc4LDcgQEAKPiA+
+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmZHQgPSAiZmR0LVNFUSI7
+Cj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmlybXdhcmUgPSAi
+dWJvb3QiOwo+ID4gPiDCoCNpZm5kZWYgQ09ORklHX0FSTVY4X1BTQ0kKPiA+ID4gLcKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGxvYWRhYmxlcyA9ICJhdGYiOwo+ID4gPiArwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbG9hZGFibGVzID0gImF0ZiIsICJ0ZWUi
+Owo+ID4gPiDCoCNlbmRpZgo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfTsKPiA+ID4gwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgfTsKPiA+ID4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9pbXg4bXAtdS1ib290LmR0c2kg
+Yi9hcmNoL2FybS9kdHMvaW14OG1wLXUtYm9vdC5kdHNpCj4gPiA+IGluZGV4IDU2NzQ5Y2NhY2Qy
+Li45ZWRlOThhMTFlNCAxMDA2NDQKPiA+ID4gLS0tIGEvYXJjaC9hcm0vZHRzL2lteDhtcC11LWJv
+b3QuZHRzaQo+ID4gPiArKysgYi9hcmNoL2FybS9kdHMvaW14OG1wLXUtYm9vdC5kdHNpCj4gPiA+
+IEBAIC0xODUsNiArMTg1LDIxIEBACj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Owo+ID4g
+PiDCoCNlbmRpZgo+ID4gPiAKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdGVlOiB0ZWUgewo+
+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZGVzY3JpcHRpb24gPSAi
+T1AtVEVFIjsKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHR5cGUg
+PSAidGVlIjsKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGFyY2gg
+PSAiYXJtNjQiOwo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgY29t
+cHJlc3Npb24gPSAibm9uZSI7Cj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCBvcyA9ICJ0ZWUiOwo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgbG9hZCA9IDxDT05GSUdfSU1YOE1fT1BURUVfTE9BRF9BRERSPjsKPiA+ID4gK8KgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVudHJ5ID0gPENPTkZJR19JTVg4TV9PUFRFRV9M
+T0FEX0FERFI+Owo+ID4gPiArCj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCB0ZWUtb3Mgewo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIGZpbGVuYW1lID0gInRlZS5iaW4iOwo+ID4gPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG9wdGlvbmFsOwo+ID4gPiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfTsKPiA+ID4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgfTsKPiA+ID4gKwo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgQGZkdC1TRVEg
+ewo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGRlc2NyaXB0aW9u
+ID0gIk5BTUUiOwo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHR5
+cGUgPSAiZmxhdF9kdCI7Cj4gPiA+IEBAIC0yMDQsNyArMjE5LDcgQEAKPiA+ID4gwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmZHQgPSAiZmR0LVNFUSI7Cj4gPiA+IMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmlybXdhcmUgPSAidWJvb3QiOwo+ID4g
+PiDCoCNpZm5kZWYgQ09ORklHX0FSTVY4X1BTQ0kKPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIGxvYWRhYmxlcyA9ICJhdGYiOwo+ID4gPiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgbG9hZGFibGVzID0gImF0ZiIsICJ0ZWUiOwo+ID4gPiDCoCNl
+bmRpZgo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfTsKPiA+ID4gwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfTsKPiA+ID4g
+ZGlmZiAtLWdpdCBhL2FyY2gvYXJtL21hY2gtaW14L2lteDhtL0tjb25maWcgYi9hcmNoL2FybS9t
+YWNoLWlteC9pbXg4bS9LY29uZmlnCj4gPiA+IGluZGV4IGIyNTRhNTBiMDkxLi4xNGYxNGRiNmEz
+NSAxMDA2NDQKPiA+ID4gLS0tIGEvYXJjaC9hcm0vbWFjaC1pbXgvaW14OG0vS2NvbmZpZwo+ID4g
+PiArKysgYi9hcmNoL2FybS9tYWNoLWlteC9pbXg4bS9LY29uZmlnCj4gPiA+IEBAIC0zNyw2ICsz
+NywxNCBAQCBjb25maWcgU1lTX0hBU19BUk1WOF9TRUNVUkVfQkFTRQo+ID4gPiDCoMKgwqDCoMKg
+wqDCoMKgwqAgSWYgZW5hYmxlZCwgcGxlYXNlIGFsc28gZGVmaW5lIHRoZSB2YWx1ZSBmb3IgQVJN
+VjhfU0VDVVJFX0JBU0UsCj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoCBmb3IgaS5NWDhNLCBpdCBj
+b3VsZCBiZSBzb21lIGFkZHJlc3MgaW4gT0NSQU0uCj4gPiA+IAo+ID4gPiArY29uZmlnIElNWDhN
+X09QVEVFX0xPQURfQUREUgo+ID4gPiArwqDCoMKgwqDCoMKgIGhleCAiTG9hZCBhZGRyZXNzIG9m
+IE9QVEVFIGltYWdlIgo+ID4gPiArwqDCoMKgwqDCoMKgIGRlZmF1bHQgMHg1NjAwMDAwMAo+ID4g
+PiArwqDCoMKgwqDCoMKgIGhlbHAKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqAgVGhlIGxvYWQgYW5k
+IGVudHJ5IGFkZHJlc3MgZm9yIHRoZSBPUFRFRSBpbWFnZS4gVGhpcyB2YWx1ZSBkZWZhdWx0cyB0
+bwo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoCAweDU2MDAwMDAwIGlmIG5vdCBwcm92aWRlZCBpbiB0
+aGUgYm9hcmQgZGVmY29uZmlnIGZpbGUuCj4gPiAKPiA+IEkgdGhpbmsgdGhpcyB3b3VsZCBuZWVk
+IHRvIHZhcnkgYmFzZWQgb24gdGhlIHBsYXRmb3JtLsKgIEkgdGhpbmsgdGhlCj4gPiBhZGRyZXNz
+ZXMgbWF5IGJlIGRpZmZlcmVudCBkZXBlbmRpbmcgb24gTWluaSwgTmFubyBhbmQgUGx1cyBhbmQg
+YWxzbwo+ID4gZGVwZW5kZW50IG9uIHRoZSBhdmFpbGFibGUgU0RSQU0uCj4gCj4gSW5kZWVkIHRo
+ZSBhZGRyZXNzIGRpZmZlcnMgZm9yIHBsYXRmb3JtIChhcyB0aGUgRFJBTSBiYXNlIGFkZHJlc3MK
+PiBkb2VzKSBhbmQgaXMgYWxzbyBiYXNlZCBvbiB0aGUgRFJBTSBzaXplIG9mIHRoZSBib2FyZC4g
+SGVyZSBhcmUgbXkKPiBub3RlcyBmb3IgSU1YOE06Cj4gCj4gVGhlIGFkZHJlc3MgaXMgdGhlIGxp
+bmsvbG9hZCBhZGRyZXNzIGZvciBURUUgdGhhdCBzaG91bGQgbWF0Y2gKPiBCTDMyX0JBU0UgZm9y
+IHRoZSBBVEYgKGZvciBpbXg4bSkgYW5kIENGR19UWkRSQU1fU1RBUlQgZm9yIE9QVEVFLiBUaGUK
+PiBCTDMyX0JBU0UgaXMgdGhlIHNhbWUgZm9yIGlteDhtbS9uL3AgYnV0IGl0IGRvZXMgZGVwZW5k
+IG9uIHRoZSBzaXplIG9mCj4gRFJBTS4gVGhlIGFkZHJlc3Mgc2hvdWxkIGJlIHRoZSB0b3AgMzJN
+aUIgb2YgRFJBTSBidXQgYmVjYXVzZSBVLUJvb3QKPiBpcyBsb2FkaW5nIHRlZS5iaW4gZnJvbSBh
+IEZJVCBpbWFnZSBpbnRvIERSQU0gaXQgbmVlZHMgdG8gYmUgYSAzMmJpdAo+IGFkZHJlc3MgYW5k
+IHRodXMgbmVlZHMgdG8gYmUgYWRqdXN0ZWQgZG93biBpZiB5b3UgYXJlIG9uIGEgYm9hcmQgd2l0
+aAo+IDRHaUI6Cj4gMUdpQiBEUkFNIHVzZSAweDdlMDAwMDAwCj4gMkdpQiBEUkFNIHVzZSAweGJl
+MDAwMDAwCj4gM0dpQiBvciBsYXJnZXIgdXNlIDB4ZmUwMDAwMDAKCkkgYWdyZWUgdGhlIGFkZHJl
+c3NlcyBtYXkgYmUgZGlmZmVyZW50LiBUbyBteSBrbm93bGVkZ2UgeW91IGNhbiB0YWtlIHdoYXRl
+dmVyICgzMmJpdCkgYWRkcmVzcyB5b3UKd2FudCB3aXRoaW4gYWRkcmVzc2FibGUgUkFNIGFzIGxv
+YWQgYWRkcmVzcy4gSSBhc3N1bWUgeW91IGFyZSBsb29raW5nIGZvciBzZW5zaWJsZSBkZWZhdWx0
+cyBoZXJlLgpJdCBhcHBlYXJzIHRvIG1lIHRoZSBjaGFsbGVuZ2UgaXMgYWdyZWVpbmcgb24gYSBz
+ZW5zaWJsZSB2YWx1ZS4KRG8geW91IGhhdmUgYW55IHN1Z2dlc3Rpb25zPwoKWWFubmljCgo+IAo+
+IEJlc3QgUmVnYXJkcywKPiAKPiBUaW0KCg==
