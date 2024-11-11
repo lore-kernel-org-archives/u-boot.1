@@ -4,83 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B343D2E9D0
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 09:56:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AEA0D2E9D0
+	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 09:58:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74E628931A;
-	Mon, 11 Nov 2024 10:56:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id DBF6E89342;
+	Mon, 11 Nov 2024 10:58:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hHAIQdho";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Eww/jQRZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3E618934F; Mon, 11 Nov 2024 10:56:48 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id 685A689363; Mon, 11 Nov 2024 10:58:09 +0100 (CET)
+Received: from mail-m17238.xmail.ntesmail.com (mail-m17238.xmail.ntesmail.com
+ [45.195.17.238])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCED28930E
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 10:56:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BF638930E
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 10:58:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1731318991; x=1731923791; i=xypron.glpk@gmx.de;
- bh=aPLoAqA3JZYG1NW55aR9J2pgrWBk2jAcGz0zTq9UsKs=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=hHAIQdho+IvHuztmKVGOcCIHPuF9Ts+JTUff7D5oEx9gbOQbk0QutLlGNcbEkoQz
- MB//XhgT8Gln1EAIFMzwemSB9uys/nDsKDyW05L/7o5cNxKAmwmrIZrUABoGd0CuL
- stibh1AwVFlqkkLCCVrol6kR8EwQXspCFIKPCZblJy5njEzM4KLBRYKuZpdHn+uOM
- 1wVGcnVAAgUE99PmpZGyFLxSIruivN2Mtt/eHNzasMcmHlyEeT6Ihq5xZSy6U8Dyt
- bGcKgFqHHM0IrgPLoxPPztgMJCXlFIdSrHH/843af5dQSbihoXcNNw/iWzIlnd1RS
- Ni8FVbPluIOQ8sH+og==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MCKBm-1t2Dxl110c-00Bs6g; Mon, 11
- Nov 2024 10:56:31 +0100
-Message-ID: <75aab841-5e11-46b1-b747-59059a7fc4cd@gmx.de>
-Date: Mon, 11 Nov 2024 10:56:28 +0100
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from localhost.localdomain (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 2675d5b9;
+ Mon, 11 Nov 2024 17:58:00 +0800 (GMT+08:00)
+From: Kever Yang <kever.yang@rock-chips.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: Pull request: u-boot-rockchip-20241111
+Date: Mon, 11 Nov 2024 17:58:00 +0800
+Message-Id: <20241111095800.293704-1-kever.yang@rock-chips.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 01/13] dts: starfive: Switch to using upstream DT
-To: Hal Feng <hal.feng@starfivetech.com>
-Cc: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
- Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de,
- Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>,
- E Shattow <lucent@gmail.com>, Conor Dooley <conor.dooley@microchip.com>,
- Nam Cao <namcao@linutronix.de>, Bo Gan <ganboing@gmail.com>
-References: <20241111020808.38974-1-hal.feng@starfivetech.com>
- <20241111020808.38974-2-hal.feng@starfivetech.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241111020808.38974-2-hal.feng@starfivetech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:npLqEKPj2HZnToo7QGNdO5jn/9MAh0Fkv2KK3mnm8SXpuDbPJ2o
- d3q7M8zEGvKRoqzmK3dRQEnEu7NnY6r9TjSffJkQ+5wnlxVRLe2n/62fjHBg0gitrOLklEF
- msuiBBtPAvYOT3XX6u7syHL8MOMsKP0s3cyYuz8RPa2eDI8SOD/iPPBjXUVo23JhYtj9DKU
- PYZ/hA6gVCJn86aacUXAA==
-UI-OutboundReport: notjunk:1;M01:P0:BT2blKjgOYA=;ZIjN5riItERJLA33AY8cg4SNSRo
- SqeBSQxJZRZFdw09RzOD5+kCgP+r7L+zmMlQ8X9a/id0lToDuISAz3QE33TJDv/O5re/RNV/c
- mu7aj/m45BYPTKNbs03Cq2TDc7TK4174kOf4alFyU4SN7lVS1Tu8jLmX+lIwA2x0Yf0e5peiz
- jCAhOhB/kBjFrLexEVizfFXJeOt7XwQsMrngL6/nrY+ndKjHG+FE4LaoAnsy5L2aAbeF0XmOu
- f4mkBO1gj6HSweGrsnRVo627jOVZhpzUvBU9ExStlZcuOU/N2F4OfSzcVG5NIeytd0UWkwopk
- jlNcIAAicci9tukZYhqjE7sAPVi7yiZ49xThHzyxGDwSD2ZEyBcJdL/kVXMW7rMJINUUSqxXc
- wACAgPFdVmslZu40OTNSFGwzjqLjNeh/qMY1A/MvvnnssMsVsOXS2R8F5k3rjxpA2B+GbrELA
- 4lbqiOiQwzRrujxbk7ut1qH286sS1UQT+npX5zzm+Y+aE23IphuTjoz02YpBRKbJQLVWblVWd
- fd9k7eGioEeRlXMASbYXjtSaForgmcH8kQKX3oRPhEC9NmHfimNYh1PjoArotyRxelb27qCRV
- iKuLrsNhGBdeqakJbin0KMwmNSpfJoekY2DwMCcioaNLuAnFM94gH0okZQd0f9FsoZ98aR7kF
- r5XZL+iU8v2nYQMZd8r8736eT/qmWz/KyA4ic2Z0eGMu3yyRUtg4JzIZTnJBFwQ+2Nkj22gKU
- o78ZOyMFTMsuqrA6t5/skKDVfbda+Kp5cUvTwQSB06cW0FjJ1kWo0y14MkAsBbJYITVJ/RCID
- oJQbGavgkJY5MpE5asHB3ujthv85LrISXyQ89HXbmHcKj6bsHbfgkBruGhKrcHnpiLWNd8Jou
- 5qsgjnagVlYQ6YqM9pfuf2oHTwuKhwxVmMhCXUZMIoljlZOsoNWUFtIv8
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQxhMQ1YdH0JDSB4fGh9NQ0pWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a931aa8a65403afkunm2675d5b9
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ngg6CCo5UTIfKCIhGh8sCikz
+ MjRPFAJVSlVKTEhKSEpCS0NKSE9LVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOQk1JNwY+
+DKIM-Signature: a=rsa-sha256;
+ b=Eww/jQRZJwdnpz1rtcLKskxUtKCfNJSeJvTGmhpu9Kn0muH06jg4lTw3CeMJCrGie1a++JmK6FUjzhlds0Fo6Jay+ymOn16uu/W/8msydEFsiJB0ZqX11A8q5U62y5q9PglKGGzEtrHV4PUJ0visQ7c2sstwe1A2L76xIsTGjnM=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=F2XqdHSBZhQsLO/PKzhbuXcwzP7TyZqbEMO9eoGo6JY=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,60 +69,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/11/24 03:07, Hal Feng wrote:
-> Enable OF_UPSTREAM to use upstream DT and add starfive/ prefix to
-> the DEFAULT_DEVICE_TREE. Rename jh7110-starfive-visionfive-2-u-boot.dtsi
-> to jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi and set
-> the v1.3b device tree as the default device tree.
->
-> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
-> ---
->   arch/riscv/cpu/jh7110/Kconfig                                   | 1 +
->   ...boot.dtsi =3D> jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi} | 0
->   configs/starfive_visionfive2_defconfig                          | 2 +-
->   3 files changed, 2 insertions(+), 1 deletion(-)
->   rename arch/riscv/dts/{jh7110-starfive-visionfive-2-u-boot.dtsi =3D> j=
-h7110-starfive-visionfive-2-v1.3b-u-boot.dtsi} (100%)
->
-> diff --git a/arch/riscv/cpu/jh7110/Kconfig b/arch/riscv/cpu/jh7110/Kconf=
-ig
-> index e5549a01b8..9904a60ddd 100644
-> --- a/arch/riscv/cpu/jh7110/Kconfig
-> +++ b/arch/riscv/cpu/jh7110/Kconfig
-> @@ -19,6 +19,7 @@ config STARFIVE_JH7110
->   	imply MMC
->   	imply MMC_BROKEN_CD
->   	imply MMC_SPI
-> +	imply OF_UPSTREAM
+Hi Tom,
 
-IIRC the imply statement should be sorted in the sequence of appearance
-in .config to avoid dependency issues. In a follow up patch to this
-series you might want to sort the whole list of imply statements
-accordingly.
+Please pull the updates for rockchip platform:
+- Add board:
+	rk3328: FriendlyElec NanoPi R2S Plus
+	rk3568: Qnap TS433
+	rk3588: Cool Pi CM5 GenBook
+- Move rk3399_force_power_on_reset to TPL for puma board;
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+CI:
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/23280
 
->   	imply RISCV_TIMER if (RISCV_SMODE || SPL_RISCV_SMODE)
->   	imply SIFIVE_CACHE
->   	imply SIFIVE_CCACHE
-> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi b/a=
-rch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
-> similarity index 100%
-> rename from arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-> rename to arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
-> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_v=
-isionfive2_defconfig
-> index 11e1332f87..40f553816e 100644
-> --- a/configs/starfive_visionfive2_defconfig
-> +++ b/configs/starfive_visionfive2_defconfig
-> @@ -9,7 +9,7 @@ CONFIG_SF_DEFAULT_SPEED=3D100000000
->   CONFIG_ENV_SIZE=3D0x10000
->   CONFIG_ENV_OFFSET=3D0xf0000
->   CONFIG_SPL_DM_SPI=3Dy
-> -CONFIG_DEFAULT_DEVICE_TREE=3D"jh7110-starfive-visionfive-2"
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"starfive/jh7110-starfive-visionfive-2-v1.=
-3b"
->   CONFIG_SPL_TEXT_BASE=3D0x8000000
->   CONFIG_OF_LIBFDT_OVERLAY=3Dy
->   CONFIG_DM_RESET=3Dy
+Thanks,
+- Kever
 
+The following changes since commit 56accc56b9aab87ef4809ccc588e1257969cd271:
+
+  bios_emulator: fix first argument of pci_{read,write}_config_* function calls (2024-11-04 18:01:58 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20241111
+
+for you to fetch changes up to 0a17123dedf827f4ca9b158252279adf03906307:
+
+  rockchip: rk3399: move sysreset-gpio logic to TPL (2024-11-11 15:14:15 +0800)
+
+----------------------------------------------------------------
+Andy Yan (3):
+      arm64: dts: rockchip: Add support for rk3588 based Cool Pi CM5 GenBook
+      rockchip: Make it possible to define per board boot_targets
+      board: rockchip: Add support for rk3588 GenBook
+
+Heiko Stuebner (17):
+      arm64: dts: rockchip: add PCIe supply regulator to Qnap-TS433
+      arm64: dts: rockchip: enable second PCIe controller on the Qnap-TS433
+      arm64: dts: rockchip: enable uart0 on Qnap-TS433
+      arm64: dts: rockchip: enable usb ports on Qnap-TS433
+      arm64: dts: rockchip: add stdout path on Qnap-TS433
+      arm64: dts: rockchip: enable sata1+2 on Qnap-TS433
+      arm64: dts: rockchip: add board-aliases for Qnap-TS433
+      arm64: dts: rockchip: add hdd leds to Qnap-TS433
+      arm64: dts: rockchip: enable the tsadc on the Qnap-TS433
+      arm64: dts: rockchip: add gpio-keys to Qnap-TS433
+      arm64: dts: rockchip: define cpu-supply on the Qnap-TS433
+      arm64: dts: rockchip: add missing pmic information on Qnap-TS433
+      arm64: dts: rockchip: enable gpu on Qnap-TS433
+      arm64: dts: rockchip: add 2 pmu_io_domain supplies for Qnap-TS433
+      arm64: dts: rockchip: actually enable pmu-io-domains on qnap-ts433
+      arm64: dts: rockchip: add product-data eeproms to QNAP TS433
+      board: rockchip: add support for Qnap TS433 devices
+
+Jonas Karlman (2):
+      board: rockchip: Add FriendlyElec NanoPi R2S Plus
+      rockchip: rk35xx-generic: Disable late boardinfo
+
+Quentin Schulz (4):
+      pinctrl: rockchip: allow to build for TPL
+      rockchip: rk3399: merge CRU check within rk3399_force_power_on_reset
+      rockchip: tpl: allow to call board/SoC-specific code before DRAM init
+      rockchip: rk3399: move sysreset-gpio logic to TPL
+
+Sergey Bostandzhyan (1):
+      arm64: dts: rockchip: Add DTS for FriendlyARM NanoPi R2S Plus
+
+Uwe Kleine-König (1):
+      arm64: dts: rockchip: Simplify network PHY connection on qnap-ts433
+
+ arch/arm/dts/rk3328-nanopi-r2s-plus-u-boot.dtsi    |   3 +
+ arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi         |   6 +
+ arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi |  20 +
+ arch/arm/mach-rockchip/rk3399/rk3399.c             |  56 +-
+ arch/arm/mach-rockchip/rk3568/Kconfig              |  14 +
+ arch/arm/mach-rockchip/rk3588/Kconfig              |  19 +
+ arch/arm/mach-rockchip/tpl.c                       |   6 +
+ board/coolpi/genbook_cm5_rk3588/Kconfig            |  12 +
+ board/coolpi/genbook_cm5_rk3588/MAINTAINERS        |   7 +
+ board/qnap/ts433/Kconfig                           |  12 +
+ board/qnap/ts433/MAINTAINERS                       |   8 +
+ board/rockchip/evb_rk3328/MAINTAINERS              |   6 +
+ configs/coolpi-cm5-genbook-rk3588_defconfig        | 101 ++++
+ configs/generic-rk3568_defconfig                   |   2 +-
+ configs/generic-rk3588_defconfig                   |   2 +-
+ configs/nanopi-r2s-plus-rk3328_defconfig           | 108 ++++
+ configs/puma-rk3399_defconfig                      |   3 +
+ configs/qnap-ts433-rk3568_defconfig                |  87 ++++
+ doc/board/coolpi/genbook_cm5_rk3588.rst            |  68 +++
+ doc/board/coolpi/index.rst                         |   9 +
+ doc/board/index.rst                                |   2 +
+ doc/board/qnap/index.rst                           |   9 +
+ doc/board/qnap/ts433.rst                           |  91 ++++
+ doc/board/rockchip/rockchip.rst                    |   3 +
+ drivers/pinctrl/Kconfig                            |   8 +
+ drivers/pinctrl/rockchip/Kconfig                   |   7 +
+ .../src/arm64/rockchip/rk3328-nanopi-r2s-plus.dts  |  32 ++
+ .../src/arm64/rockchip/rk3568-qnap-ts433.dts       | 571 ++++++++++++++++++++-
+ .../arm64/rockchip/rk3588-coolpi-cm5-genbook.dts   | 349 +++++++++++++
+ include/configs/genbook-cm5-rk3588.h               |  19 +
+ include/configs/qnap_ts433.h                       |  10 +
+ include/configs/rockchip-common.h                  |   2 +
+ 32 files changed, 1618 insertions(+), 34 deletions(-)
+ create mode 100644 arch/arm/dts/rk3328-nanopi-r2s-plus-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+ create mode 100644 board/coolpi/genbook_cm5_rk3588/Kconfig
+ create mode 100644 board/coolpi/genbook_cm5_rk3588/MAINTAINERS
+ create mode 100644 board/qnap/ts433/Kconfig
+ create mode 100644 board/qnap/ts433/MAINTAINERS
+ create mode 100644 configs/coolpi-cm5-genbook-rk3588_defconfig
+ create mode 100644 configs/nanopi-r2s-plus-rk3328_defconfig
+ create mode 100644 configs/qnap-ts433-rk3568_defconfig
+ create mode 100644 doc/board/coolpi/genbook_cm5_rk3588.rst
+ create mode 100644 doc/board/coolpi/index.rst
+ create mode 100644 doc/board/qnap/index.rst
+ create mode 100644 doc/board/qnap/ts433.rst
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3328-nanopi-r2s-plus.dts
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
+ create mode 100644 include/configs/genbook-cm5-rk3588.h
+ create mode 100644 include/configs/qnap_ts433.h
