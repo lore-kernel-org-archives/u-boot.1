@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DAD5D42B85
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 14:11:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61D89D42B86
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 14:11:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F5F989468;
-	Tue, 12 Nov 2024 15:11:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 537368944F;
+	Tue, 12 Nov 2024 15:11:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IxE6lq93";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JskV5JWD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C37398943F; Tue, 12 Nov 2024 15:11:20 +0100 (CET)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id D4C6F8943F; Tue, 12 Nov 2024 15:11:23 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46B698944B
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 15:11:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBC2089459
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 15:11:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-83aa3ced341so212639339f.0
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 06:11:18 -0800 (PST)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-83ab694ebe5so221756639f.0
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 06:11:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731420676; x=1732025476; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731420678; x=1732025478; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pPtKND5VfOaQX5F+AetuAfaHyvQgHWYUO8/YhNNL0Zw=;
- b=IxE6lq93YpUVOBBKdW/2pW01EY8Up+TV5DEsdoKazTJdlXg4T08BkNundSfHG4lWVR
- BeieGOILOWURF97vQWa1x7eAidZDYj3q07MwlXVL9KTb+qblr5QR7gj2kDaXU2m1ZRNU
- sf9hQsQ72NiyRTg6xA6cmEg6Fwu3kJOIL3D9s=
+ bh=+8KYMf1OGVkuejF+Xja0ZzGTLvaIRigLbVU1Pj9rW/c=;
+ b=JskV5JWDrNBxvdITREzUIvM+huXF4uNyrGZTSzcz8aE6mSlz/T2+fhlqp12i9OLarc
+ 6hApUF2q0BtY5DKt0OnWW1KV8RItF4vr8nw/yqnNhRbyMpyIoTvPKTQ5MlMEe1+4MtW/
+ C8Yb4e1Mq4nFJQF0EAGrNqCgLrX7OxnpErHzY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731420676; x=1732025476;
+ d=1e100.net; s=20230601; t=1731420678; x=1732025478;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pPtKND5VfOaQX5F+AetuAfaHyvQgHWYUO8/YhNNL0Zw=;
- b=BXQillYrKSf5zlbyobEocMPfHoRKE3caoib5EoMCITrlHEt36RoIK+AKe/0yEkOM82
- fEfxLwNxWHCk3ILN0SJudFivVjvh1DiAukBZp5hb+xpGauD00lGiTYq1ZRKnUmZym9y6
- Vx/La5agP8XS3+XyO/VqCN/Soe0jsJndz9j+pRQUZrxPVNCEN4QFqQdetLl/d7FJe8uZ
- PRCLt0QQUFIuabbwKqvObzOyfMb5JiEeN+nRswpOU1wnoagID8lTXX3o6cOPSzGUGLi5
- wFGeRc190xCjMvPcfUPegVVAlN08JUXMXXcLW8ZcniaTlV9nbu4z/1T3T1S5kDa/RrX+
- eU5A==
-X-Gm-Message-State: AOJu0Yy37eQHJun6sn3I7mlS4ISGOwTekwAHEM5H+4trxqoHCUdxr3bO
- Ey8jYESb16N67bPzj2M5LgmIBi+D7IN4VDsYcboRf3iRUdSm8XtSR2KGMJge1Cr2c5YZvSkF1Dc
+ bh=+8KYMf1OGVkuejF+Xja0ZzGTLvaIRigLbVU1Pj9rW/c=;
+ b=sZlN5IsV4qKvYhpyJC2hiP7zI1ZPp3SzQ64pzu5DaA6eTSywFZ+HjEnhcP96f9nOyw
+ OKohTFcwcsvtxge56liLYyyTsvBGy/cazDO1qvVXVoCmM8RYrkSulffOMp+pI7iSqs+b
+ YN1h6aPnWsqY9070tMb6A0e8Xk+j2tkHVcckw6NJUfW1BhCJwRTHhA/2Rz2WNDCATjhZ
+ rpQROk37APGuNNwO1Jj6/V4XzONuk6Z+0UpXgbIPB6c6ZFx2835sewbNnyX/Zf59GE/M
+ umSUSVVludQAtZqzzk3/o4HQQVbUwbcshw8PT3t43dzaWgwnJuZ28eUN58UebOq7asA+
+ sOLw==
+X-Gm-Message-State: AOJu0YwJPNfwuzQ+qPnFECR6ZuCSocIB911jEJ1G9Zni2uAu7adaCoAW
+ EhIO7wDTaBUOqInOj6JpdxuBjhWJLxgnxvi8ceZgzWdn2n8R6O89hF2aOydS73BBPJudpt6OvF0
  =
-X-Google-Smtp-Source: AGHT+IGVwO1C8yP3DdWbNe25zO1kZzU6sRB9ghWvCCCzHqlxCCLENVDmokmC09FiLcIKToKqgOomQQ==
-X-Received: by 2002:a05:6602:3fd0:b0:83a:639b:bc44 with SMTP id
- ca18e2360f4ac-83e03289e44mr1917993739f.3.1731420676225; 
- Tue, 12 Nov 2024 06:11:16 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEcM3Tz4UGWN6WdVaiEwxcpdcOBYEwgQUgwfjRtfObtuJdvkHIKcPrLNaDQ+YkvtLcDhRnvsg==
+X-Received: by 2002:a05:6602:2dd3:b0:82a:3552:6b26 with SMTP id
+ ca18e2360f4ac-83e033704b2mr1318880739f.15.1731420678044; 
+ Tue, 12 Nov 2024 06:11:18 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4de783d11f0sm1977776173.0.2024.11.12.06.11.14
+ 8926c6da1cb9f-4de783d11f0sm1977776173.0.2024.11.12.06.11.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 06:11:15 -0800 (PST)
+ Tue, 12 Nov 2024 06:11:16 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: [PATCH v3 3/9] docker: Support building for multiple architectures
-Date: Tue, 12 Nov 2024 07:10:59 -0700
-Message-Id: <20241112141105.640189-4-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 4/9] docker: Adjust packages for arm64
+Date: Tue, 12 Nov 2024 07:11:00 -0700
+Message-Id: <20241112141105.640189-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241112141105.640189-1-sjg@chromium.org>
 References: <20241112141105.640189-1-sjg@chromium.org>
@@ -90,98 +89,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add instructions on how to build the file for multiple architectures.
-Add a message indicating what is happening.
-
-Update the documentation as well. Drop the 'sudo' since these should not
-be needed if Docker is correctly configured.
+The package names are slightly different for arm64 and we don't seem to
+have a linux-image-kvm package. Provide some extra ones for x86
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v3:
-- Move ARGs to the top
-- Revise documentation to explain a common error and building on arm64
+- Use grub-efi and linux-image-generic for both archs
 
 Changes in v2:
-- Update docs also
-- Add comments to the ARG variables
+- Swap order so that amd64 is the exception
 
- doc/build/docker.rst    | 25 ++++++++++++++++++++++---
- tools/docker/Dockerfile | 12 ++++++++++++
- 2 files changed, 34 insertions(+), 3 deletions(-)
+ tools/docker/Dockerfile | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/doc/build/docker.rst b/doc/build/docker.rst
-index 45659b3b89d..b8fd12ead71 100644
---- a/doc/build/docker.rst
-+++ b/doc/build/docker.rst
-@@ -1,14 +1,33 @@
- GitLab CI / U-Boot runner container
- ===================================
- 
--In order to have a reproducible and portable build environment for CI we use a container for building in.  This means that developers can also reproduce the CI environment, to a large degree at least, locally.  This file is located in the tools/docker directory.  To build the image yourself
-+In order to have a reproducible and portable build environment for CI we use a container for building in.  This means that developers can also reproduce the CI environment, to a large degree at least, locally.  This file is located in the tools/docker directory.
-+
-+The docker image supports both amd64 and arm64. Ensure that the
-+'docker-buildx' Debian package is installed (or the equivalent on another
-+distribution).
-+
-+You will need a multi-platform container, otherwise this error is shown::
-+
-+    ERROR: Multi-platform build is not supported for the docker driver.
-+    Switch to a different driver, or turn on the containerd image store, and try again.
-+
-+You can add one with::
-+
-+    docker buildx create --name multiarch --driver docker-container --use
-+
-+Building is supported on both amd64 (i.e. 64-bit x86) and arm64 machines. While
-+both amd64 and arm64 happen in parallel, the non-native part will take
-+considerably longer as it must use QEMU to emulate the foreign code.
-+
-+To build the image yourself::
- 
- .. code-block:: bash
- 
--    sudo docker build -t your-namespace:your-tag .
-+    docker buildx build --platform linux/arm64/v8,linux/amd64 -t your-namespace:your-tag .
- 
- Or to use an existing container
- 
- .. code-block:: bash
- 
--    sudo docker pull trini/u-boot-gitlab-ci-runner:jammy-20240227-14Mar2024
-+    docker pull trini/u-boot-gitlab-ci-runner:jammy-20240227-14Mar2024
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 967ac89fbde..7f4b17ab0a4 100644
+index 7f4b17ab0a4..fd4835e9562 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -2,13 +2,25 @@
- # This Dockerfile is used to build an image containing basic stuff to be used
- # to build U-Boot and run our test suites.
+@@ -44,7 +44,10 @@ RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_
+ RUN wget -O - https://github.com/foss-xtensa/toolchain/releases/download/2020.07/x86_64-2020.07-xtensa-dc233c-elf.tar.gz | tar -C /opt -xz
  
-+# Build with (for example):
-+# docker buildx build --platform linux/arm64/v8,linux/amd64 --tag sjg20/u-boot-gitlab-ci-runner-multiarch:jammy-20240808-03Nov2024 .
-+
- FROM ubuntu:jammy-20240808
- LABEL org.opencontainers.image.authors="Tom Rini <trini@konsulko.com>"
- LABEL org.opencontainers.image.description=" This image is for building U-Boot inside a container"
+ # Update and install things from apt now
+-RUN apt-get update && apt-get install -y \
++RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
++		EXTRA_PACKAGES="grub-efi-ia32-bin libc6-i386"; \
++	fi; \
++	apt-get update && apt-get install -y \
+ 	automake \
+ 	autopoint \
+ 	bc \
+@@ -70,13 +73,11 @@ RUN apt-get update && apt-get install -y \
+ 	gnu-efi \
+ 	gnutls-dev \
+ 	graphviz \
+-	grub-efi-amd64-bin \
+-	grub-efi-ia32-bin \
++	grub-efi \
+ 	help2man \
+ 	iasl \
+ 	imagemagick \
+ 	iputils-ping \
+-	libc6-i386 \
+ 	libconfuse-dev \
+ 	libgit2-dev \
+ 	libjson-glib-dev \
+@@ -94,7 +95,7 @@ RUN apt-get update && apt-get install -y \
+ 	libtool \
+ 	libudev-dev \
+ 	libusb-1.0-0-dev \
+-	linux-image-kvm \
++	linux-image-generic \
+ 	lzma-alone \
+ 	lzop \
+ 	mount \
+@@ -131,6 +132,7 @@ RUN apt-get update && apt-get install -y \
+ 	xilinx-bootgen \
+ 	xxd \
+ 	zip \
++	${EXTRA_PACKAGES} \
+ 	&& rm -rf /var/lib/apt/lists/*
  
-+# Used by docker to set the target platform: valid values are linux/arm64/v8
-+# and linux/amd64
-+ARG TARGETPLATFORM
-+
-+# Used by docker to set the build platform: the only valid value is linux/amd64
-+ARG BUILDPLATFORM
-+
- # Make sure apt is happy
- ENV DEBIAN_FRONTEND=noninteractive
- 
-+RUN echo "Building on $BUILDPLATFORM, for target $TARGETPLATFORM"
-+
- # Add LLVM repository
- RUN apt-get update && apt-get install -y gnupg2 wget xz-utils && rm -rf /var/lib/apt/lists/*
- RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
+ # Make kernels readable for libguestfs tools to work correctly
 -- 
 2.34.1
 
