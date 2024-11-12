@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97818D42B82
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 14:00:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7DEDD42B82
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 14:00:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3012D89431;
-	Tue, 12 Nov 2024 14:59:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8A81C89462;
+	Tue, 12 Nov 2024 14:59:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CXBHgX1b";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OKlJux8N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2982D89452; Tue, 12 Nov 2024 14:59:41 +0100 (CET)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id B44D089459; Tue, 12 Nov 2024 14:59:42 +0100 (CET)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A4F189430
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 14:59:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 98535893C2
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 14:59:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-83aba237c03so229403039f.3
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 05:59:38 -0800 (PST)
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-83ab21c26f1so219910339f.2
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 05:59:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731419977; x=1732024777; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731419979; x=1732024779; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=meZSkW/KpZC3yrnqAzdQzJHpxuq2GB8ec6FamATdohQ=;
- b=CXBHgX1bNdcH/goAEIuJC0/6ZN+/rTda5wMwVOdWAFgX9OuWSsBXKidI/c6ToPDand
- gt4h4bu/Cea7aV27kDktMAZHF8zjHjjFdWQkZmqBtDFXTdSiowtJDXoya9JqQfzM9V1b
- lfd4UtxG3xITf1LymXh+tmaLPSPocvSI0nfII=
+ bh=lDwtn31JD9K6ZyMSG8kCn2YHfnKQHNMeVz6FRkH60SM=;
+ b=OKlJux8NmvcUW3BmkwGMOW9UuAJQfjlp98YTj+ZkwvxZ479aqPOucCiMJU0i7WVYkL
+ wbclo5vUX+OxSJsyIK4uJrDuFyGIlGFcJynYliNAQYC33aAdoA4txxlYQ5MhZQgdboo3
+ WWrPvlOdGAISnHkahHBaJ8pxbnPWB0WgWJeRU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731419977; x=1732024777;
+ d=1e100.net; s=20230601; t=1731419979; x=1732024779;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=meZSkW/KpZC3yrnqAzdQzJHpxuq2GB8ec6FamATdohQ=;
- b=STrXL3weAND9/4yWRRESbmSEN66RDwCaCuha6Rl1DQqjB/Z8gSaGX3xIC5Wdpu3AlE
- 6J7SnNZpWJLPFumLDXQzH9rdtSHP6cv5iId3B41I9cFqflfyj3uX6Dl3EgAj2sQqQDmQ
- hkz5+oc5qYKP8wJtu5o+YO8hw10yQekV8w+ZqyCuAroSJyIX6lUbJupyz2vlHAceylnb
- bJns/Pa1AaYFUFmUmn+yXEnwO3ft7LWogL21BDB28KiXBDX5jr4LP8mqnJbHUZlUfRXh
- 9JPmwrh9TLH8wUINYIMS8VqHJEd1Q+L5YD9TBGo2Q4SZbDg7YMLEjKAjF7huq0aW09ZM
- NdZg==
-X-Gm-Message-State: AOJu0Ywk9gDGNDCKTowEcKJEHVKCCi8hhyNd9jQxJ9LcGN5iG2+CZYdp
- ZNXKrGvf9aDZ96U5YmdkBAIpU7UKbdhoIbUu9uqj9Nmy2u/hLsarYM82zJNpYljnBSUsnVn3fw4
+ bh=lDwtn31JD9K6ZyMSG8kCn2YHfnKQHNMeVz6FRkH60SM=;
+ b=OtO8OJhfyCu5R6hdL/Wu0phkVyOsv+blCqaD+lVIeiYGWKtVDBiWQnegs+86F4sFvd
+ i+EDk12e3veHvyYdZHYHNBez/PhqJtt6YX5hOn2JcBkhTmqPJCBxskcEIuu0jhj4mG+I
+ MzwK1moANdljL3eNjEEGSoKCKt1/iMxPIRiNLeBRzQt3V1f6MCstv7pjplbCltjGj8SQ
+ 345OZec/WYQ7YeqjYdW35B00ScVKlWxfPfDj/Hl35RbA7PiA+rYS3ft6pGDEpKbuJHUJ
+ c+l+XEPxLmyoeGsBpTTr6uIcElsgbV273CdLRCmQBjU+xzgxAmHB33F+pXrhi7oFX0Er
+ svig==
+X-Gm-Message-State: AOJu0YwkBdJ5Y+lSREDG86CmUuV69mUfUQy8SOlk7jxBvTOYJ/pwOhSk
+ AqWjalOqMnxkD4k7YYd7+bnRbFiKZCCU2UDJA1+ruS3x5SAqf/4StI8k1O3TPeV8LKEdamjvMJ4
  =
-X-Google-Smtp-Source: AGHT+IGGnulNLd2O+ik74tJVc8S+m3d8DlVrueGb4U5VbLkVCda7IZb8VLCIneqkZOwTyIGB0IAFtw==
-X-Received: by 2002:a05:6602:29c7:b0:803:5e55:ecb2 with SMTP id
- ca18e2360f4ac-83e03068fe6mr2057497739f.0.1731419977025; 
- Tue, 12 Nov 2024 05:59:37 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHCm7eCSaDZCtHC1EYpq1641uaGdlJn8zdXwhVBLvYQOceurJxAYpd3DhKkaqYjKCawWE7csA==
+X-Received: by 2002:a05:6602:15c5:b0:82d:16fa:52dd with SMTP id
+ ca18e2360f4ac-83e431d3082mr321524639f.7.1731419978709; 
+ Tue, 12 Nov 2024 05:59:38 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-83e132c01besm189203039f.30.2024.11.12.05.59.35
+ ca18e2360f4ac-83e132c01besm189203039f.30.2024.11.12.05.59.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 05:59:35 -0800 (PST)
+ Tue, 12 Nov 2024 05:59:37 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Tom Rini <trini@konsulko.com>, qemu-devel@nongnu.org
-Subject: [PATCH 04/18] x86: qemu: Enable dhrystone
-Date: Tue, 12 Nov 2024 06:58:57 -0700
-Message-Id: <20241112135911.630586-5-sjg@chromium.org>
+Subject: [PATCH 05/18] x86: qemu: Avoid accessing BSS too early
+Date: Tue, 12 Nov 2024 06:58:58 -0700
+Message-Id: <20241112135911.630586-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241112135911.630586-1-sjg@chromium.org>
 References: <20241112135911.630586-1-sjg@chromium.org>
@@ -89,36 +90,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide the 'dhry' command, which helps to check that kvm is being used
-properly with QEMU.
+BSS is placed in DRAM which is actually available early with QEMU. But
+it is cleared by the init sequence, so values stored there are lost.
+
+Move the system-type flag into a function, instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- configs/qemu-x86_64_defconfig | 1 +
- configs/qemu-x86_defconfig    | 1 +
- 2 files changed, 2 insertions(+)
+ arch/x86/cpu/qemu/qemu.c | 20 ++++++++++++++------
+ 1 file changed, 14 insertions(+), 6 deletions(-)
 
-diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
-index 1670c122002..151c5f3e0e7 100644
---- a/configs/qemu-x86_64_defconfig
-+++ b/configs/qemu-x86_64_defconfig
-@@ -87,4 +87,5 @@ CONFIG_CONSOLE_SCROLL_LINES=5
- CONFIG_SPL_VIDEO=y
- # CONFIG_SPL_USE_TINY_PRINTF is not set
- CONFIG_GENERATE_ACPI_TABLE=y
-+CONFIG_CMD_DHRYSTONE=y
- # CONFIG_GZIP is not set
-diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
-index 40c2f1cd362..5c5cacd734c 100644
---- a/configs/qemu-x86_defconfig
-+++ b/configs/qemu-x86_defconfig
-@@ -62,4 +62,5 @@ CONFIG_VIDEO_BOCHS=y
- # CONFIG_VIDEO_VESA is not set
- CONFIG_CONSOLE_SCROLL_LINES=5
- CONFIG_GENERATE_ACPI_TABLE=y
-+CONFIG_CMD_DHRYSTONE=y
- # CONFIG_GZIP is not set
+diff --git a/arch/x86/cpu/qemu/qemu.c b/arch/x86/cpu/qemu/qemu.c
+index 563f63e2bc8..e846ccd44aa 100644
+--- a/arch/x86/cpu/qemu/qemu.c
++++ b/arch/x86/cpu/qemu/qemu.c
+@@ -15,14 +15,21 @@
+ #include <asm/arch/qemu.h>
+ #include <asm/u-boot-x86.h>
+ 
+-static bool i440fx;
+-
+ #if CONFIG_IS_ENABLED(QFW_PIO)
+ U_BOOT_DRVINFO(x86_qfw_pio) = {
+ 	.name = "qfw_pio",
+ };
+ #endif
+ 
++static bool is_i440fx(void)
++{
++	u16 device;
++
++	pci_read_config16(PCI_BDF(0, 0, 0), PCI_DEVICE_ID, &device);
++
++	return device == PCI_DEVICE_ID_INTEL_82441;
++}
++
+ static void enable_pm_piix(void)
+ {
+ 	u8 en;
+@@ -50,16 +57,17 @@ static void enable_pm_ich9(void)
+ 
+ void qemu_chipset_init(void)
+ {
+-	u16 device, xbcs;
++	bool i440fx;
++	u16 xbcs;
+ 	int pam, i;
+ 
++	i440fx = is_i440fx();
++
+ 	/*
+ 	 * i440FX and Q35 chipset have different PAM register offset, but with
+ 	 * the same bitfield layout. Here we determine the offset based on its
+ 	 * PCI device ID.
+ 	 */
+-	pci_read_config16(PCI_BDF(0, 0, 0), PCI_DEVICE_ID, &device);
+-	i440fx = (device == PCI_DEVICE_ID_INTEL_82441);
+ 	pam = i440fx ? I440FX_PAM : Q35_PAM;
+ 
+ 	/*
+@@ -123,7 +131,7 @@ int mp_determine_pci_dstirq(int bus, int dev, int func, int pirq)
+ {
+ 	u8 irq;
+ 
+-	if (i440fx) {
++	if (is_i440fx()) {
+ 		/*
+ 		 * Not like most x86 platforms, the PIRQ[A-D] on PIIX3 are not
+ 		 * connected to I/O APIC INTPIN#16-19. Instead they are routed
 -- 
 2.34.1
 
