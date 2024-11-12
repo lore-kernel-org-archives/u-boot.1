@@ -4,72 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C52ED41D45
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:11:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4000FD41D44
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:39:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF229893A6;
-	Tue, 12 Nov 2024 03:11:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5D185893A5;
+	Tue, 12 Nov 2024 03:39:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Oys7O9j6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="coO7Ic70";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C27AC893AB; Tue, 12 Nov 2024 03:11:42 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 695CD893A1; Tue, 12 Nov 2024 03:39:06 +0100 (CET)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D87F89380
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 03:11:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 32393893A5
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 03:39:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7b155cca097so436598985a.1
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 18:11:40 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-7eab7622b61so3495160a12.1
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 18:39:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731377499; x=1731982299; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=aWcELHs4WrdkPZe6zAgNCAvuD8bVwQIXAFek3/oaQhw=;
- b=Oys7O9j6C94xlybqZWoyVtGBFowb0Ej7SJgrZCoBAV8Rk2kT6WMLSy1U9DZEXXczSu
- vDydPSlL0wke6MlSle5YgcHcPuGypKajyVNbwbluE96b5TdLovbpTAqo40P/ASErj7eS
- 2nIXLgZyU6yIoyocYLIwb6zKXpuiICSZxK2X4=
+ d=gmail.com; s=20230601; t=1731379140; x=1731983940; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dfgkUf5q2+uzcMQb76Hirvf0Fv6h6PUf5JdtsS7RHWc=;
+ b=coO7Ic709G72V8In8Wd+IUKMxx1anAhojpXg6k2AMasVMkZVTnAKq3ySC9VqBxvY/F
+ +vPlhFBfOwbG9xh3IHNzP0Q5hQ739Zj7WHBcPqPVRSm0Md8trUKmykCP4aYpYeUf+4de
+ T12/H1NNJcltZeIec1KRzfjFgWMKfSKviqHFw5qas/8DgJyUZhQL4YpZm0P4X1P/J6Xf
+ dcrfnFiVZySLW9bWIHK+mdpUWTwsjkbdEM6FaR45i2Ba7Yc3KfdAdl4sdGOmynIntJ4w
+ NJfr/rsxpww4oTPTXhNiqeJoP9Ym2IYTqoZkVah7o9CexYyj1Xfe170UCf2qkWP7Y614
+ dtxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731377499; x=1731982299;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=aWcELHs4WrdkPZe6zAgNCAvuD8bVwQIXAFek3/oaQhw=;
- b=MlG55gG9bWbWuhKddaI7MWiEwDUAXsPuga5EPs0WyWdBg6ZrpqNQxAoaHxy6ZvNBAl
- lyQ6m4kymKCpu/IHrda7xGlJlOXvPpm90rAUUcAAvO+b5RlQw9I+oZUZlIABv29cAKZH
- 32l4nX3tuJPe68/WeVIkbNbSJNB0lY8wUOUYCmw+/5ulhsCAzQPjSuetRbJ4WssgO/yd
- NtmcHLBEXr7Mi1FhxnkUQZ9RB+RFUNxO/Vwe0iAjss973cHPjBdnBdpT356KDWAUs3sf
- w47Uof09c3vkULugOsvr9yR6LE1EbYk0mniDBlF/fQBOHbrv3rCV/7oyiBL77u0YCFYh
- zuVw==
-X-Gm-Message-State: AOJu0Yz26BdAkSLqX6PWwIqMDAeGqK00oKIx0PYNPTB7Fx57+rXrkq2V
- mrN/kYTjiJhxjVSc+yfWUbE1bmwZSfxMS3cdxRRyy/bohk8uQs623jfs5RjYTpCIoo87KFH4avL
- wH84=
-X-Google-Smtp-Source: AGHT+IGEr8wT2sexfK83/4jtwzkTr0A7WieBROipgI6bxqRsPpgd1Gj3lfblsRw8lklBA5/ZAQmKDA==
-X-Received: by 2002:a05:620a:3948:b0:7a9:a356:a5dd with SMTP id
- af79cd13be357-7b3329329bamr1839864785a.20.1731377499360; 
- Mon, 11 Nov 2024 18:11:39 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
+ d=1e100.net; s=20230601; t=1731379140; x=1731983940;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dfgkUf5q2+uzcMQb76Hirvf0Fv6h6PUf5JdtsS7RHWc=;
+ b=u29bJ+oresh1XoWL8S8WA55jKh3WhNdXF1a7QUHWN8ASEK2ugvNyKK0noiYavnPHJR
+ zAkkI5XBTF0irqZ9XPfThgQZPOKe2P7FjcRcPMEu61eN64DA9hOZGuPgvBGBtSRy4DuI
+ wQ3tPBsjMp7ftUilaob0gZh77yfFCldX7JWd+unBS7mx/evNZIn3skmLAIxCYLQKNQol
+ w+AYgPfKkbePkU36Av98FMFzM0/+Tv0iyRkD0yUBiEngBHdkJ8bK8ocK34peo+Aw9Taw
+ 8wLTgDjk+x2l69roiYAd+QspPparTd0+wKjVztnxS1g0T99Z7g70JuaNffB6GuEpAbmH
+ LaHA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW/Lwt4/LHQlzHMdG9ebcwCEPqQfF9mhvdbcXXxAwLh5Gz6QWARar6At80D96AvJH9phbmdpBg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzlE0lIkJhlBh0n8r4eJTXgvQea/Ffk1kVoE1FyO6jNVNea4IkV
+ kNqsd2I0bZ/L3yjSA5kWQRMdnWWpwy+aclRtsbRietQXHapNE6fjf466tw==
+X-Google-Smtp-Source: AGHT+IEJVSxhMkQvgAOI8X2XpkBGaDuebIfz08K6zZd4vFD2kwOxfnAPEGn+sD5RQjfJ/ljzKgMYGg==
+X-Received: by 2002:a17:902:d2c8:b0:211:6b21:2370 with SMTP id
+ d9443c01a7336-21183ced53dmr205779665ad.29.1731379140451; 
+ Mon, 11 Nov 2024 18:39:00 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:be16:bfad:7211:61df])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b32ace7c70sm546902885a.113.2024.11.11.18.11.37
+ d9443c01a7336-21177e45ef0sm82748305ad.153.2024.11.11.18.38.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Nov 2024 18:11:38 -0800 (PST)
-Date: Mon, 11 Nov 2024 20:11:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Heiko Schocher <hs@denx.de>
-Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20241112021135.GX3600562@bill-the-cat>
+ Mon, 11 Nov 2024 18:38:59 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: hs@denx.de,
+	u-boot@lists.denx.de,
+	Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] tools: imx8image: Add missing break for CMD_DCD_SKIP
+Date: Mon, 11 Nov 2024 23:38:54 -0300
+Message-Id: <20241112023854.2289656-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9wVK/HKjURB96Ovn"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,81 +92,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Fabio Estevam <festevam@denx.de>
 
---9wVK/HKjURB96Ovn
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The CMD_DCD_SKIP case misses a break statement.
 
-Here's the latest Coverity report.
+Add it.
 
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Mon, Nov 11, 2024 at 10:24=E2=80=AFAM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
+Fixes: 254c00803b63 ("tools: imx8image: add possibility to skip dcd")
+Addresses-Coverity-ID: 514648: Control flow issues (MISSING_BREAK)
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ tools/imx8image.c | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/tools/imx8image.c b/tools/imx8image.c
+index 96ece28bd6..7a060811c7 100644
+--- a/tools/imx8image.c
++++ b/tools/imx8image.c
+@@ -93,6 +93,7 @@ static void parse_cfg_cmd(image_t *param_stack, int32_t cmd, char *token,
+ 	case CMD_DCD_SKIP:
+ 		if (!strncmp("true", token, 4))
+ 			dcd_skip = true;
++		break;
+ 	case CMD_FUSE_VERSION:
+ 		fuse_version = (uint8_t)(strtoll(token, NULL, 0) & 0xFF);
+ 		break;
+-- 
+2.34.1
 
-Hi,
-
-Please find the latest report on new defect(s) introduced to Das
-U-Boot found with Coverity Scan.
-
-1 new defect(s) introduced to Das U-Boot found with Coverity Scan.
-4 defect(s), reported by Coverity Scan earlier, were marked fixed in
-the recent build analyzed by Coverity Scan.
-
-New defect(s) Reported-by: Coverity Scan
-Showing 1 of 1 defect(s)
-
-
-** CID 514648:  Control flow issues  (MISSING_BREAK)
-/tools/imx8image.c: 93 in parse_cfg_cmd()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 514648:  Control flow issues  (MISSING_BREAK)
-/tools/imx8image.c: 93 in parse_cfg_cmd()
-87              sector_size =3D get_table_entry_id(imx8image_sector_size,
-88                                               "imximage boot option",
-89                                               token);
-90              if (!strncmp("emmc_fastboot", token, 13))
-91                      emmc_fastboot =3D true;
-92              break;
->>>     CID 514648:  Control flow issues  (MISSING_BREAK)
->>>     The case for value "CMD_DCD_SKIP" is not terminated by a "break" st=
-atement.
-93      case CMD_DCD_SKIP:
-94              if (!strncmp("true", token, 4))
-95                      dcd_skip =3D true;
-96      case CMD_FUSE_VERSION:
-97              fuse_version =3D (uint8_t)(strtoll(token, NULL, 0) & 0xFF);
-98              break;
-
-
-___________________________________________________________________________=
-_____________________________
-
---=20
-Tom
-
---9wVK/HKjURB96Ovn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcyuUwACgkQFHw5/5Y0
-tyys3AwAgKGKhmm7m6sUMd5Km1/r/Ziow/PCxneQCZ8KIAflFAJYo/5uECq82hFO
-nLbhjD+c623T2nQSB0xjkpwM7hQYK+5DWEInOTs82NiRZFs6OZKUAwukZpUscp6E
-Cl2NsikbHdhoxybDdnsR2MJr65IqfChqtLEvmTRaRXvDy+XDD4DbrH/SWDs9zg14
-FSZhlmu7+LJDdzK9qoZYYhpcTLAHC5s84uFVMV9+ePjFlvNSl4zEv3U95dl/pCby
-YN0U3R7N/ARv8zmFoyOMd+5mxR7JxR9G7RkI6lqK2p445GzKKB0aoJbB0Cuf74BW
-FH1Xqa2ca8Ib3AQxFDWgo8yt3B1oOM9uD1Oa7FuTwXDpg/zHTau4BJmXDoUwlPyd
-R6ZQRwR/TrwYTLmxV6mfFjkpSitoCvPCSTDiuzdiwbLytl0EUGJ2I1br94d/AAe/
-RlYwwLz5yQtj31EHbo1UIZEgus9oIPdLM1WAXwqNOh8fVqZugPvKSeYGuip2qXs6
-RxaDf7WN
-=VRI6
------END PGP SIGNATURE-----
-
---9wVK/HKjURB96Ovn--
