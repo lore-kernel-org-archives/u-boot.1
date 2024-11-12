@@ -4,72 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45125D42B91
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 15:10:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4006BD42B9B
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 15:45:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C07DE88B9E;
-	Tue, 12 Nov 2024 16:10:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7349788DEF;
+	Tue, 12 Nov 2024 16:45:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ebKbH5qk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JlFnbdNd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D8AF88B9F; Tue, 12 Nov 2024 16:10:06 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id B823488DEF; Tue, 12 Nov 2024 16:45:10 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83C2788965
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 16:10:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FA2288DEF
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 16:45:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a9ef275b980so759592666b.0
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 07:10:03 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-431548bd1b4so49781505e9.3
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 07:45:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731424203; x=1732029003; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZOY0lph07beS5MWaoMURahw5d3ssUbJYusqezl2WLbo=;
- b=ebKbH5qkdEQC1COPAIcgFwR/Mmz71vKfMQEj68Srd+TtwdkKnLVhncOjjfBZ/RK17F
- bzMQkc4Vbs5RD1gWz2P3K/7u/WW5L8lND8aeK1CYhgdvJbloHy7sGzDDxL917ZjqoauN
- 3p8+3oEfDFd9E/gITl48b1iEav2LQuBxihxUY=
+ d=linaro.org; s=google; t=1731426306; x=1732031106; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+IJluINCicvYulMvjf2XKqIIkEt1uTzbWhFIVUUbEyQ=;
+ b=JlFnbdNdwVE8F93bOd2lokWsWbToe6M+qnA3ZqTSg9k8YJaYgk9Yfh8d46khxR4F9q
+ sAdatgDgRc3PHQhUpoE+7vkTZDARYiFl/BLvi2j/QnR8W4enwNqw4N9/spjLi+mremG0
+ SDk9dwkM4nMfsWexFwyNhCWqQllhSNPbugyrnDJhKAD6BwAO7vIB1RG/F7Jkl/rcnkUU
+ POdt2JK7HjEpiiwQzxEzxlW+eQpwv9vCr7bac7RV7y2y+9vldL6RFV5XjYsYgytVk6db
+ 8hF2oc5YF1doFNYm/wI2drMp/AidlJRT7XV9NrDEm5DXGh/AukiWb6xJgglJ0mbwyzob
+ St6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731424203; x=1732029003;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1731426306; x=1732031106;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZOY0lph07beS5MWaoMURahw5d3ssUbJYusqezl2WLbo=;
- b=Zuh7FckQzGhbF+fXMIVtLpqshr0MB+Joew4TA3F09XuX7U6meiCp9JqullosFHfegF
- txYNXLQScuchRfcRsGbDM+ZQzlBw2NORcUtkbD4lgI+9AZGt0FFAJqDMROiZoJx3dGAQ
- qVIRmrIovcK7h8CJ0eJ6JDTKTXIXT+UcNeZTSbFC66TWFf1n+2AmYiCFZrQryVwT4N4+
- 5kn32xOy8abHOgGzmPVUaNGfS0bTDzNuc6a+Z++kwM1wi87MEGHsTAetcT66DFe8/PDm
- X5cQsXHDFXdFxy0oES8DphJd5SnfoaXDWM9M6+QW01mGqmW0mxso4+ShFs9iTEjgPEc4
- 7qYg==
-X-Gm-Message-State: AOJu0Yz0rpkVFHnSv6CLPdaklv6PP2Ehu+ki4vrRaPaNhGmyaQjC1D7d
- eZzBFbHutBN0swuXoFr5UBPQMbkLQ3WTN+cCqTaYqCuTHT6CGy2d4vam4LhFieTNJ+gabqhSlr6
- Fw22X/rmnzm99J8A2/uoPLDEtdRYJv8/uET92
-X-Google-Smtp-Source: AGHT+IGWQRyPEmq8cBVGKLrgaeO2r2/AXoenVGjgW6CFfSQbF16+//y4UUUb3tKVWdqwdKwInq1xwveSp9wFme5sk6Y=
-X-Received: by 2002:a17:907:9815:b0:a9e:e1be:159 with SMTP id
- a640c23a62f3a-a9eeff3785emr1550122966b.26.1731424202823; Tue, 12 Nov 2024
- 07:10:02 -0800 (PST)
-MIME-Version: 1.0
-References: <20241112141105.640189-1-sjg@chromium.org>
- <20241112141105.640189-2-sjg@chromium.org>
- <c18f70de-9fc4-4a35-be17-bd3144664c1b@gmx.de>
-In-Reply-To: <c18f70de-9fc4-4a35-be17-bd3144664c1b@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 12 Nov 2024 08:09:50 -0700
-Message-ID: <CAFLszTjvH0CA+fwVhb-UGM-Kww6SVC3YDAQJL5ZW0gsYCD0QuA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/9] sandbox: efi_loader: Correct use of addresses as
- pointers
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ bh=+IJluINCicvYulMvjf2XKqIIkEt1uTzbWhFIVUUbEyQ=;
+ b=c69+IfQU+DLyIKkQ/ESbbgJlRZ9yTjXhA/AVDp88jNq3HVpcS1BltLFwJ7tsOJNkwu
+ O3cpTw7Fp63n7EWTg1Mo/ht14pHqy7qWvveevDXCnkSsOYU7k5+He5dEHzwSIoRnvVgr
+ 9rmznmQG3RyCSWMttuTNg/U+PJSIRa+yKD3Zl/QFgg1l5JjgWk8fhFLTxj8lr4fsPk8S
+ 56E5SgBU/VlpHm9pWoKoSmChR4DrgikKs1YOhNZH9qqDFtise6YIHjwrSfTfMHbzbQ8n
+ z2QTQHlZN971EELs4NRubXQaJqtnfc6nKy6NzBWTkT0dTUjaYlvBG0uxCc7LwMJCBj83
+ V0JA==
+X-Gm-Message-State: AOJu0YzLEbSYgHV82avQhBFcGDIebj/YunZ9acxmBnJC3jTt9oa04ngA
+ lzgiLtIDggXd4aCmM2HTgUxw3Gqyn+9rN/Aup83bk10azx79aww+ZNMVTMmT2kfIoRgRC6MOzJh
+ 1XfE=
+X-Google-Smtp-Source: AGHT+IF6dJVcYO8eto4UWhWc/Jff/2F6sXjtLucPLvZN9KVrembeDoIXAI+lCFB6kVOXAiJ4AozvpA==
+X-Received: by 2002:a05:600c:34d1:b0:42f:7ed4:4c25 with SMTP id
+ 5b1f17b1804b1-432b7505ad9mr147488225e9.14.1731426306238; 
+ Tue, 12 Nov 2024 07:45:06 -0800 (PST)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:3aa3:af95:97ed:dd98])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-432d0289f02sm9709715e9.1.2024.11.12.07.45.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Nov 2024 07:45:05 -0800 (PST)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul Kocialkowski <contact@paulk.fr>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Greg Malysa <greg.malysa@timesys.com>, Marek Vasut <marex@denx.de>,
+ Jonas Karlman <jonas@kwiboo.se>, Hiago De Franco <hiago.franco@toradex.com>
+Subject: [PATCH v2] Kconfig: describe NET, NO_NET, LWIP_DEBUG and LWIP_ASSERT
+Date: Tue, 12 Nov 2024 16:44:29 +0100
+Message-Id: <20241112154429.1532647-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,23 +97,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Some Kconfig symbols introduced in commit 8cb330355bd5 ("net: introduce
+alternative implementation as net/lwip/") need a full description. The
+NET symbol needs one, too.
 
-On Tue, 12 Nov 2024 at 07:28, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 12.11.24 15:10, Simon Glass wrote:
-> > The cache-flush function is incorrect which causes a crash in the
-> > remoteproc tests with arm64.
->
-> We should throw out all these sandbox virtual addresses where they are
-> not needed.
->
-> Just add the missing conversion to drivers/remoteproc/rproc-elf-loader.c.
->
-> And change flush_cache() on all architectures to use void *.
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ Kconfig          | 5 +++++
+ net/lwip/Kconfig | 7 +++++++
+ 2 files changed, 12 insertions(+)
 
-No, that is not the right approach. U-Boot uses addresses throughout
-(ulong), except when a pointer is strictly needed.
+Changes in v2:
 
-Regards,
-Simon
+- s/linrary/library/
+- s/own/internal/
+
+diff --git a/Kconfig b/Kconfig
+index eb55f2511d9..1f5b0f1972d 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -765,10 +765,15 @@ choice
+ 
+ config NO_NET
+ 	bool "No networking support"
++	help
++	  Do not include networking support
+ 
+ config NET
+ 	bool "Legacy U-Boot networking stack"
+ 	imply NETDEVICES
++	help
++	  Include networking support with U-Boot's internal implementation of
++	  the TCP/IP protocol stack.
+ 
+ config NET_LWIP
+ 	bool "Use lwIP for networking stack"
+diff --git a/net/lwip/Kconfig b/net/lwip/Kconfig
+index 8a67de4cf33..5d719a1e420 100644
+--- a/net/lwip/Kconfig
++++ b/net/lwip/Kconfig
+@@ -6,9 +6,16 @@ if NET_LWIP
+ 
+ config LWIP_DEBUG
+ 	bool "Enable debug traces in the lwIP library"
++	help
++	  Prints messages to the console regarding network packets that go in
++          and out of the lwIP library.
+ 
+ config LWIP_ASSERT
+ 	bool "Enable assertions in the lwIP library"
++	help
++	  Compiles additional error checking code into the lwIP library. These
++	  checks are related to conditions that should not happen in typical
++	  use, but may be helpful to debug new features.
+ 
+ config PROT_DHCP_LWIP
+ 	bool
+-- 
+2.40.1
+
