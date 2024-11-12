@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8693DD597B6
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 23:11:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FEC5D597B6
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 23:11:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34633894C1;
-	Wed, 13 Nov 2024 00:11:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 99180894CD;
+	Wed, 13 Nov 2024 00:11:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BlQv/bIg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cinpsaru";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46DF6894C0; Wed, 13 Nov 2024 00:11:21 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id BECA7894C0; Wed, 13 Nov 2024 00:11:28 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3910488C0F
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 00:11:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 685D688C0F
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 00:11:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7b15467f383so464040185a.3
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 15:11:19 -0800 (PST)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-e35e0543b07so1228617276.2
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 15:11:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731453078; x=1732057878; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731453085; x=1732057885; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=V/z3iSG7roPnGO7fYFrB58XiD/+M5rK6Cjkx/2Bmho4=;
- b=BlQv/bIgaU/vUFeqFsw1xlVBocDol0jwHqbQljCUTooRwBE/51PhCVCNt3sC7V8pxK
- oPIz6ws44msjSH1CgXt9ScRUxGaKuU2uffzkvb4RsTMn7T3TJCr2+hzSGrFbU1Pxoag0
- SGadAH6XL5Fma3gY/cqfaQnh53gvVdt5EXAp0=
+ bh=8zOqp+Zrd0jEFIOJ4/ERJzZtr9pRRoGiSvrGI6iV3Dc=;
+ b=CinpsarumI00dT0CHaVbVcRunQJKqsjvPgBFQBdiWMPApvNEv2qPChJU/BlS5xSZza
+ E5NFgGX5fxugIIuzuxu8Jqsg87SGVg6pPsQOmUwk687Xd4ubHr3ZWBlXgRbCtAUUyMXU
+ BJYJO0RNsIxVpLvr/dW940cibC8DefUEtDP6A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731453078; x=1732057878;
+ d=1e100.net; s=20230601; t=1731453085; x=1732057885;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V/z3iSG7roPnGO7fYFrB58XiD/+M5rK6Cjkx/2Bmho4=;
- b=d/gcpPDV7F0yOHOCCbiWLzP/0azqJgm0+Oog70rgvXjQ5aJVNvnLjZpvBKkeC1pCq/
- RaxsEcFHheKcqVXsXikmhhIvN2zcWTJRKBp/3lZHEUeSlJt7KIMhzctzXhbGGYWNkvT/
- f/MhcFRs0TJIcdO2M3eysQd645sf8RoSm+JqMzpsGBGJvZOj8ODtMSBBoPv1Y1XnPwck
- R0d4fsBjvcHYpefA1UKSrn1twGsSV8SnHOCt0KgQFAEVF1D0cYSBGP+MfGio0PceUVdX
- 2+n0PYWi3cgXsfll650gk7faIF9OSu8g3FPpmgZehuhYisJ87ZDgbD1xsBtt0JBqEiSB
- kCQQ==
-X-Gm-Message-State: AOJu0YxjQ41+HYaVEMLfRidu2yrUgzqPwPWYPwGOL8bQAipf0TibQ8Kp
- crczqUSMjEkMRTvHgbyQG/f6mBMnwQQPGY4o0D9lC66lqK62rACXJEKV+ihEiiU=
-X-Google-Smtp-Source: AGHT+IGEq7ZHDIXaq7m7o4ldLUP6Sby7Fd0+1+FEnwztNjOiq9IEm+t1YTJwB6cah9WHhW8ADdcMuw==
-X-Received: by 2002:a05:620a:400d:b0:7b1:14ee:2948 with SMTP id
- af79cd13be357-7b3528fbbb6mr92342085a.41.1731453078114; 
- Tue, 12 Nov 2024 15:11:18 -0800 (PST)
+ bh=8zOqp+Zrd0jEFIOJ4/ERJzZtr9pRRoGiSvrGI6iV3Dc=;
+ b=YiPYdvwDk+U/GgjFY/cjFxraZ865tgnu84fQO0SyzNYEHWC0QRqmU4zwv9D1XrFUOW
+ mz3aVWq4GhzPltF0k2hfLCXBmKw14baHBNGvzCPw97j2MBMHwSMSNJHAUnoViLS7Ao0P
+ ltbsKaKMrEYfohT1SWOHYkIzJkVnYy3SKyS7UoMp/xZMao6+buwFM+MriU37dPmKOS0P
+ xDc+5zeb4HUATBF5iU045mARYsjiYxcL8khebEbZhCi7C3VfDmDG40U+sFVJNMGlYXol
+ UjiNs7XSYoPY/GVdEz7c8TudC9MEU0LP55rgHMyLgwO/o7AjAXogiw5atV6H9sNv3Lpa
+ yveQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVPDJoxCqTlR38G82aTj9jOza7/04NDMzmZxdwR0f++o1JdUmIDdCMKSmaylmSGzr5hP0OZGZY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxMeT+eAibUFo+mOACEMb5pJg2YkdpIM5tEKMMZL1E69gSrazaC
+ J0HnxdulR1IDFue28wRf2mim6WpMzumW2eDxHdlWBlp/efn+ZwGmrmIH3Mrv6LeRY9NfkNeTzyt
+ WQrI=
+X-Google-Smtp-Source: AGHT+IHXx4vljpGm7Ohr9Akc+vxfJLCeQQlcVHqtWgQR9xtZ+mzNSIUvhrrDIKf7FFK0TyXRH02l1A==
+X-Received: by 2002:a05:690c:6a0b:b0:6e7:e22b:fb7a with SMTP id
+ 00721157ae682-6eca4666828mr49021297b3.18.1731453085269; 
+ Tue, 12 Nov 2024 15:11:25 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b32ac54e5fsm636618985a.49.2024.11.12.15.11.16
+ 6a1803df08f44-6d3966310b7sm76926596d6.112.2024.11.12.15.11.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 15:11:17 -0800 (PST)
-Date: Tue, 12 Nov 2024 17:11:15 -0600
+ Tue, 12 Nov 2024 15:11:24 -0800 (PST)
+Date: Tue, 12 Nov 2024 17:11:21 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v3 7/9] docker: Install toolchains on arm64 host
-Message-ID: <20241112231115.GC3600562@bill-the-cat>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 3/9] docker: Support building for multiple architectures
+Message-ID: <20241112231121.GD3600562@bill-the-cat>
 References: <20241112141105.640189-1-sjg@chromium.org>
- <20241112141105.640189-8-sjg@chromium.org>
+ <20241112141105.640189-4-sjg@chromium.org>
+ <5604ea68-5b31-461a-a4a2-22da37e64dac@gmx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HfHfOce4AnfZPEXz"
+ protocol="application/pgp-signature"; boundary="w+ir41qT7Y985cdP"
 Content-Disposition: inline
-In-Reply-To: <20241112141105.640189-8-sjg@chromium.org>
+In-Reply-To: <5604ea68-5b31-461a-a4a2-22da37e64dac@gmx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,42 +97,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---HfHfOce4AnfZPEXz
+--w+ir41qT7Y985cdP
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 12, 2024 at 07:11:03AM -0700, Simon Glass wrote:
-
-> Refactor the code to support downloading toolchains for arm64 as well as
-> x86_64
+On Tue, Nov 12, 2024 at 04:08:17PM +0100, Heinrich Schuchardt wrote:
+> On 12.11.24 15:10, Simon Glass wrote:
+> > Add instructions on how to build the file for multiple architectures.
+> > Add a message indicating what is happening.
+> >=20
+> > Update the documentation as well. Drop the 'sudo' since these should not
+> > be needed if Docker is correctly configured.
 >=20
-> There doesn't seem to be an xtensa toolchain for arm64 at the same
-> location, so download that only on x86
+> Please, explain what you mean by correctly configured.
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> By default Ubuntu requires sudo to execute docker.
+>=20
+> https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-a=
+s-a-non-root-user
+> teaches us:
+>=20
+> "The docker group grants root-level privileges to the user. For details
+> on how this impacts security in your system, see Docker Daemon Attack
+> Surface."
+>=20
+> So adding a user to the docker group may not be the best idea.
+>=20
+> Installing Docker in rootless mode is possible
+> (https://docs.docker.com/engine/security/rootless/) but as said it is
+> not necessarily the distro default.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Yes, please drop this patch as we expect to handle things in the
+broadest possible way, so not assuming that the user is in the docker
+group.
 
 --=20
 Tom
 
---HfHfOce4AnfZPEXz
+--w+ir41qT7Y985cdP
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcz4JMACgkQFHw5/5Y0
-tywW/wv/axaBedmThQFONqDsk5cihGd0hlVIcsVBzzcYinDcQAdGlW0KJmFIRFnu
-B/ViWRMcKINU7yKgHodqnMOMAhitf+o07jtyfr5tSP6LDxqSK2K3pZmlSIEiqBZ2
-NOtrhyLfOpdpKvC+SnOrdo1Bck0GmZpaNnPqla6H0x1hFuYxNW6+TG69pL1ENhYT
-LC48S00nFh4DKSZU2CWaALhLu2v8KYSMLLL4aExeMsU9AoNpZMN8KjOUMU0vgI96
-DXC6eo9iUUv5NaojOH7DiNfu+tOtJXJ5nL5IuecXEkIE/p6k0tGH1NdxbCi+11Dr
-cVhd0TkGlHKQAuw0q2P746DtC82jiOjvm8UuiRYSDFeN7FoynetcWwN6E+ykYE/a
-wH2tHsdmPzSfK2eJ1+LL0/S4hqgARO2OK9RgmZ8hJpPruevqlUnsuuYI1e1fM69q
-3bJAfKhc0dmOJTbw1MFLG2/qnJLjwDdUPrbxM+lsEbIhSNOlebpUhwDoHFL/OCYy
-LxtX/Hzj
-=d4kp
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcz4JkACgkQFHw5/5Y0
+tyyyHwv/ZS2Xw6H/yo+20EPG9LVgqBkM9OHu66vBx+gPcHtiwVRnuFSpm/FyopYF
+/lmGrgIScG7MmSwKxtcGTEGEvcyTtD8PvGIfr9KC0L8itEZx05WKPqly1NxFh6ob
++gppVrhlzolQbhhPMcWubSpUnS7C/dWOO0BpKo49RlcC0smeOJKhWp8smnvXXUgj
+d4VMEQed6hpC8wdYqEYOYkuaa5G3VkEK0gUXLyJlnqQvc4ZjBvENdcR1/PmMiznh
+k0obnYrAVUUJLRYd7zZCEyT5HRDBragA7u5YB8wBB+Q4kusjfy31OebOuHvDBsFH
+anC0XzGilkHeVVKbHLjmHFtNSylKMK8lKfb9tsR3DMuj8PD1fAfQ81GZrETJWiu6
+CRjPTPwMETvZNcG6Ys/sKDBi0NVar6cShKkeNmsGeNcxTW2AGj2LDkKEfO0fUHtC
+LeMygN8BvXp5pHig/UxjZryFCAi/OAOp5tQwb+geL1L+p7m2JO8PBr1BKnsSbXr8
+myJOqW1B
+=mmHi
 -----END PGP SIGNATURE-----
 
---HfHfOce4AnfZPEXz--
+--w+ir41qT7Y985cdP--
