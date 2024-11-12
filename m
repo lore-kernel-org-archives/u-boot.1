@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D571DD32D84
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 10:24:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A942D32D8C
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 10:26:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DE25893B3;
-	Tue, 12 Nov 2024 11:24:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A4081893C2;
+	Tue, 12 Nov 2024 11:26:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="deU/xSgT";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AVnCfa0l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9660B893AD; Tue, 12 Nov 2024 11:24:25 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id A64378931D; Tue, 12 Nov 2024 11:26:51 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9591E88E3F
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 11:24:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3CC2893BC
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 11:26:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id EE74040C4C
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 10:24:22 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 83C8A3F215
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 10:26:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1731407062;
- bh=Xc4J1v1u7nhW8tXys/mzRcQkpVuzpotkRcAgO9OVUEw=;
+ s=20210705; t=1731407208;
+ bh=vEVjBcCw7DPTgRmI9UO+Tg4tnBGoY70B4ucpCdvZ3+o=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=deU/xSgTYccT19pRENNBtvBaXU7GwavaEZOKR1UbR23+No3Tj/oOKOGudKXglMSxH
- uVHbKQIq9dGgaLMRRbI3NrcxXJ0NFE7Kl1edgF/bbheaKMV+gkbXcgSeSVt25ENeMK
- tMbgSPjLhcsGJQIt4/nf13sC+BH2aAF7hVE7oYeKJeBBenWFhyt+KxNIfVpgppZP0I
- l/pdSDqGhBqMQrnhvXzXh/HCvCsh4u1bK0i4UmXIUnyfVbwlCGDgc5pnImj3jf9hAd
- vPF/rNmgG7DoJxT8HIElmogxHlX4DZBzhnBBZvQHORJVBx2WkFk3DnKNKeGr5UJODa
- V3kET663euTVw==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-37d662dd3c8so3339257f8f.1
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 02:24:22 -0800 (PST)
+ b=AVnCfa0l1fuHRWPOzLckY0iYve1womnZbW4SZwvg3gQfGrUZSiE6DCrFAgjGLBmsu
+ NX1DUJYnjfk3UBFGSkNNDGlcHrFlkVAwjtP0Cz9RAnfBFMfAwb/7fMnaE1e/Anhnee
+ nfVv523r6SUpYCzN+VJi+4EOFAMAA0kQcQIJu0EHrYhJtihmSvDN4s3lHxnd999Us7
+ CuFn6lB04VDIe9xpoR7Um8oYjPcLL5Y4xpyCYPZ1QNLsZ8MJS53sLpzxIBcAJ5G2Ac
+ C/h5rEC7v2MX+bu1mQ0rzgOB3q/vVrUsDyf1IJcOOclJScDz9QpQw3SFrVsrUFKgwi
+ 8gZomxqcUsx5A==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-43159c07193so51244295e9.0
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 02:26:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731407062; x=1732011862;
+ d=1e100.net; s=20230601; t=1731407208; x=1732012008;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Xc4J1v1u7nhW8tXys/mzRcQkpVuzpotkRcAgO9OVUEw=;
- b=BU7wUvGejFbMsJer3uaIlrfBogCoZXUV2HsU4LR2tuVzTisX1Iykn2lrh66tM7td9A
- bcjP66P0WizGErLM50qGQlsWWZg0M11IYaKb/bfTEaRGQLmpC5UDaby+B+E3l8P/uIjg
- YSgkCNYHznu/5BOIFwYNvjNEvQDg6wgHCMpUCSfZgX7SLOQAcOXidUvejRW+gISUOlOJ
- gRrY+SuNgDGTpE5l+AKaNi5oAe/lI4cgQSDigH5asWoqLhzqZ0JfMOPfbyMXS1R0bg5M
- exya3vqUqOpx/mu5EweGToY5qVTCI9MIjFUBuMjzIowByoAiae1gxrlAd3S88crGAZ0d
- ea0w==
+ bh=vEVjBcCw7DPTgRmI9UO+Tg4tnBGoY70B4ucpCdvZ3+o=;
+ b=gn5AlyQ2akAlJlNqvlEnOO78zMZvBH5WPBQy3fahgdOOvpsvbiN7IPd6OLFLZV0NK6
+ 340BQi8TqJG97y5+gqE0SeERoa5v7EdXFewdwayxFFHOliomR+zUSWTVBjULQ8ogQEiM
+ no70hk5CZuO1SXp2hnDwve71ZIihw89As9isY7Pi2Czi4qURx3aI/d/d/zx2SUt5PK6S
+ AL7L/f81KuL27FJKAr7Qo4iugvYnof5Q3b5c+csDlji1VzcKf4PZt1VGB7hWvHqHIT98
+ ogtD0T58xOwH4s230QciWYXI1qoxr9FCTVFpxdV7SD6neGeydMli3sVC+CtN/cE3xm2t
+ sBWw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWAIbVzkpCYDeVGo3M2g/1qquEUSQM3fITTsRKm0Pd15K94rQmjPzWz3GNS1aUM/m3bnwa5ZJc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxBJ5EzKj4nvceoPTwZFs7aXCi0M960KLeFo+LrZV3EotV2a7eX
- eQpc9JA/v3AEMqjlZj448xE4921o3kQl31GxicJRb7bkpIgl3n82Y4i65x/x3VC+ch+0XJ/ylwN
- iEYNCNXB9x8ViX6Tbn/mCiNPP+ckETUeZDtLlXsvYKD4cTS/mB81Q5qv3YBKI3NU97+k=
-X-Received: by 2002:a05:6000:691:b0:37d:36f2:e2cb with SMTP id
- ffacd0b85a97d-382080817d9mr1764628f8f.0.1731407062171; 
- Tue, 12 Nov 2024 02:24:22 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFHRTHjlIiaGe+GA+dNDGYVN3HB/YWwSW9GUsts4S/+rQf9x/Huz+KSWMjDB1dYGwzS0G1FVA==
-X-Received: by 2002:a05:6000:691:b0:37d:36f2:e2cb with SMTP id
- ffacd0b85a97d-382080817d9mr1764606f8f.0.1731407061746; 
- Tue, 12 Nov 2024 02:24:21 -0800 (PST)
+ AJvYcCUKLV/RXCgONRamy15c/wCENySpv1WX/+jJZueIZUNHRHtD5Ca0fhUEnv263n+fVNM7GqivYIQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwxMbwmVZCqtbvR1Q+TGVDw3Rj9TkWtQARJ5nusmMhwGslLVR0s
+ Asv8et2aBJSaS+s8TMO8Dk9l5T634S8Dm21jQhLWJhKy2ZIj2tw4eqDnpdbxbNcclAZRbKFyRl5
+ u/M4zjATI9Twj5B+B6THa8MTmtixvLPdbkcxtvbYsuvW208ds6b3FW9arRSU8eVDPvF0=
+X-Received: by 2002:a05:600c:468b:b0:431:b264:bad9 with SMTP id
+ 5b1f17b1804b1-432b7505af7mr174877615e9.14.1731407208094; 
+ Tue, 12 Nov 2024 02:26:48 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGjGey2WwnvxY8OyQgRAYgDdIWx+BaiG6BlnwAZ9GZE3UXzLzaI9Liem8ZzsBkGwWgqm4CozA==
+X-Received: by 2002:a05:600c:468b:b0:431:b264:bad9 with SMTP id
+ 5b1f17b1804b1-432b7505af7mr174877485e9.14.1731407207774; 
+ Tue, 12 Nov 2024 02:26:47 -0800 (PST)
 Received: from localhost.localdomain
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381ed97e206sm14860732f8f.25.2024.11.12.02.24.20
+ 5b1f17b1804b1-432bbf436ffsm141918695e9.44.2024.11.12.02.26.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 02:24:21 -0800 (PST)
+ Tue, 12 Nov 2024 02:26:47 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>
 Cc: Yong-Xuan Wang <yongxuan.wang@sifive.com>, u-boot@lists.denx.de,
  Yuri Zaporozhets <yuriz@vodafonemail.de>, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] configs: add 'nvme scan' to preboot
-Date: Tue, 12 Nov 2024 11:24:15 +0100
-Message-ID: <20241112102415.37335-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] configs: SiFive Unmatched: add 'nvme scan' to preboot
+Date: Tue, 12 Nov 2024 11:26:44 +0100
+Message-ID: <20241112102644.37459-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -130,6 +130,9 @@ With 'nmve scan' booting works as expected.
 
 Reported by Yuri Zaporozhets <yuriz@vodafonemail.de>
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	mention board in subject
 ---
  configs/sifive_unmatched_defconfig | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
