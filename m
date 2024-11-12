@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE946D42B82
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 14:01:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAAFFD42B84
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 14:01:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08EB58946E;
-	Tue, 12 Nov 2024 14:59:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6D9DA89472;
+	Tue, 12 Nov 2024 14:59:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aMeBz6a1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vysj+ONP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D44F89467; Tue, 12 Nov 2024 14:59:51 +0100 (CET)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id 5F0B189472; Tue, 12 Nov 2024 14:59:53 +0100 (CET)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 126C48944E
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 14:59:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 461DE8942F
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 14:59:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-83ac817aac3so238460239f.0
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 05:59:49 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-83ab694ebe5so221432139f.0
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 05:59:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731419987; x=1732024787; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731419989; x=1732024789; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=REsVh+x8BFaXgK5WDaMptVAYtki23vGmahlsFPyj1aA=;
- b=aMeBz6a1jcgpIIXI0IhUKywgu3uY3+mcTU/i1vqyY8m5tX1yMoFNKiVfnm5Yg2Ll9W
- sa95Lf+/QP4+/D43eGSDH8rkubmG3h6SOGEH/FnIY2OF3L9DN5eYzy202eRtmNuGp6oZ
- U+K+i50i6qWAxeShd6Hhu2GKUxjr8iQCSlQDk=
+ bh=F02VXYi7Slsrq6nVv8c4R2YZ1Q5SwEbsT5v+hYeoXO4=;
+ b=Vysj+ONPvXvhK6waJRQVe+aCXQf2+sZa7ZHt0B8Og7zd/wexuVEr2c0pzxOCDUKstd
+ IOJ0G1NpeoQmStq0SsdaYAwuU3ybeuiViGpWaKZb/JIX3aUORgSMpZpNpH2GQP0ejAxw
+ G+iTePCwIc7snnbb5VAKZqwmMkiTmy6fz8P38=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731419987; x=1732024787;
+ d=1e100.net; s=20230601; t=1731419989; x=1732024789;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=REsVh+x8BFaXgK5WDaMptVAYtki23vGmahlsFPyj1aA=;
- b=s3lcmwvkOXRUdS6nDhWdOtH61jhRHbT7BLJNYU7pSXWw7tGS7oTS9u/KWbRsCzI+5M
- uFDyKpNN3PA8h3rr8ejjdc7BCn/ll68ZNjqPPaKqK92fn8mfbPC+KbYTt1IMAlgxGY75
- 2v5dM2OG84tOhQfduMTOBuK8KQ+GvsKnnPtaForbRuVR3MNVx4x+SmL1MA7tUIQLIF+V
- kVv68iab8h967Lm5K3WIJ3oPkQzPBGQFr3oq11kMN1zDIDTY1jo9Y2kzHZ+ZQwnSSJ3e
- 1dzszuFETYLcjiNIBMbiEagmR0Zupt2s8bDYxmpaNvjOCOt+zmoXjVtP4GN/Mt2JsA51
- FpdA==
-X-Gm-Message-State: AOJu0YxHAsJNZYFd+O6CkDcwmp25cIzctNHs8y/0kNPqz0xfEU7nEAre
- oypuFa8kXa3JnBJyyZ73iDxOMK+7fl/1OdBBGIfxZPuRUeXtQyEilvDPFKmOhbTtqKNQJTJdGQY
+ bh=F02VXYi7Slsrq6nVv8c4R2YZ1Q5SwEbsT5v+hYeoXO4=;
+ b=Cv0eRoZ657VDqcASn7BjCczDVucHhXcnSlXSn0tOkqSZxBut3mvv6Gap6W4iUdHbLU
+ du5mmcRdWyJ6siH0dJIZAx2PUKyrsoaZS9ztPNuccZnwDkirNQuzxmc1Q7jv2ULVpOMV
+ 7pDY08BCHaO/MDJeuCwlg5mzv0qpMpTe0WI2Wm7TiCKqtbnmaikGv3UiW2b7PfIRC+aB
+ oI1MGFyrwocEz14+gDXv6SQkF0udvHUlYIIRxWDjNmAb9CRXC1fwU1pZa4yhLgwbEI/5
+ 1ftCzl5CQVH0wsCP55eyvSbZL4Lv2dJIQzbo4Jh1UUy+1JsaaXVmFCzJOsUrEg7DUq86
+ k7aQ==
+X-Gm-Message-State: AOJu0YzxHOmDPo/yUIfwXcC49cF/NPymAn4qHvCr+18Xl6Eo+l4Bc2Rv
+ ZqatFB11d/T67bois2eHCLJf37476T6Pd/kskhL4AEPwHRqPdadbgO3zv9DtWkUtZgw5aJg29CQ
  =
-X-Google-Smtp-Source: AGHT+IGRL/FPb/4ZwV6Gc/r13vNdtx/J6r3cLjyYS2NyBMJ+lfvBu5qwHX22RszJLW2Zc90FeUb+CA==
-X-Received: by 2002:a05:6602:1512:b0:83a:872f:4b98 with SMTP id
- ca18e2360f4ac-83e43175db5mr310126339f.2.1731419987256; 
- Tue, 12 Nov 2024 05:59:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHl+TKppKBfZvhVwMQqzaFTF2uaqicaKBxWnwo0ZRiWWT7yLZqfjJYJHZHSVm4H2bl34ZPaKA==
+X-Received: by 2002:a05:6602:14c1:b0:835:45f9:c2ee with SMTP id
+ ca18e2360f4ac-83e032a8e61mr1959354139f.4.1731419989244; 
+ Tue, 12 Nov 2024 05:59:49 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-83e132c01besm189203039f.30.2024.11.12.05.59.46
+ ca18e2360f4ac-83e132c01besm189203039f.30.2024.11.12.05.59.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 05:59:46 -0800 (PST)
+ Tue, 12 Nov 2024 05:59:47 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 09/18] x86: Avoid clearing the VESA display
-Date: Tue, 12 Nov 2024 06:59:02 -0700
-Message-Id: <20241112135911.630586-10-sjg@chromium.org>
+Subject: [PATCH 10/18] x86: Add 64-bit entries to the GDT
+Date: Tue, 12 Nov 2024 06:59:03 -0700
+Message-Id: <20241112135911.630586-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241112135911.630586-1-sjg@chromium.org>
 References: <20241112135911.630586-1-sjg@chromium.org>
@@ -89,33 +89,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot clears the display when it starts up, so there is no need to ask
-the VESA driver to do this. Fix this and add a comment explaining the
-flags.
+At present it is not possible to execution 64-bit code without
+installing an entire new Global Descriptor Table. This is inconvenient
+since kvm does not seem to like switching into long mode with a new
+table.
+
+It isn't actually necessary, since we can just extend the existing
+table. Add some new entries to this effect.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/x86/lib/bios.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ arch/x86/cpu/i386/cpu.c          | 3 +++
+ arch/x86/include/asm/processor.h | 5 ++++-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/arch/x86/lib/bios.c b/arch/x86/lib/bios.c
-index 5dfe5a647eb..de4578666fb 100644
---- a/arch/x86/lib/bios.c
-+++ b/arch/x86/lib/bios.c
-@@ -231,7 +231,11 @@ static void vbe_set_graphics(int vesa_mode, struct vesa_state *mode_info)
- {
- 	unsigned char *framebuffer;
+diff --git a/arch/x86/cpu/i386/cpu.c b/arch/x86/cpu/i386/cpu.c
+index a51a24498a7..3bbad3b2eca 100644
+--- a/arch/x86/cpu/i386/cpu.c
++++ b/arch/x86/cpu/i386/cpu.c
+@@ -160,6 +160,9 @@ void arch_setup_gd(gd_t *new_gd)
  
--	mode_info->video_mode = (1 << 14) | vesa_mode;
-+	/*
-+	 * bit 14 is linear-framebuffer mode
-+	 * bit 15 means don't clear the display
-+	 */
-+	mode_info->video_mode = (1 << 14) | (1 << 15) | vesa_mode;
- 	vbe_get_mode_info(mode_info);
+ 	gdt_addr[X86_GDT_ENTRY_16BIT_FLAT_CS] = GDT_ENTRY(0x809b, 0, 0xfffff);
+ 	gdt_addr[X86_GDT_ENTRY_16BIT_FLAT_DS] = GDT_ENTRY(0x8093, 0, 0xfffff);
++	gdt_addr[X86_GDT_ENTRY_64BIT_CS] = GDT_ENTRY(0xaf9b, 0, 0xfffff);
++	gdt_addr[X86_GDT_ENTRY_64BIT_TS1] = GDT_ENTRY(0x8980, 0, 0xfffff);
++	gdt_addr[X86_GDT_ENTRY_64BIT_TS2] = 0;
  
- 	framebuffer = (unsigned char *)(ulong)mode_info->vesa.phys_base_ptr;
+ 	load_gdt(gdt_addr, X86_GDT_NUM_ENTRIES);
+ 	load_ds(X86_GDT_ENTRY_32BIT_DS);
+diff --git a/arch/x86/include/asm/processor.h b/arch/x86/include/asm/processor.h
+index d7b68367861..ad8240be387 100644
+--- a/arch/x86/include/asm/processor.h
++++ b/arch/x86/include/asm/processor.h
+@@ -18,7 +18,10 @@
+ #define X86_GDT_ENTRY_16BIT_DS		6
+ #define X86_GDT_ENTRY_16BIT_FLAT_CS	7
+ #define X86_GDT_ENTRY_16BIT_FLAT_DS	8
+-#define X86_GDT_NUM_ENTRIES		9
++#define X86_GDT_ENTRY_64BIT_CS		9
++#define X86_GDT_ENTRY_64BIT_TS1		10
++#define X86_GDT_ENTRY_64BIT_TS2		11
++#define X86_GDT_NUM_ENTRIES		12
+ 
+ #define X86_GDT_SIZE		(X86_GDT_NUM_ENTRIES * X86_GDT_ENTRY_SIZE)
+ 
 -- 
 2.34.1
 
