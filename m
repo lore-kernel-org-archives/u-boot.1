@@ -4,137 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE4AFD41D52
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 05:13:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE01AD41D53
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 05:13:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7ECE1893AC;
+	by phobos.denx.de (Postfix) with ESMTP id DC126893B5;
 	Tue, 12 Nov 2024 06:13:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="fUOiMQo5";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="pS9MLSyU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84729893AB; Tue, 12 Nov 2024 06:13:10 +0100 (CET)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20605.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::605])
+ id CE7DE893AB; Tue, 12 Nov 2024 06:13:10 +0100 (CET)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2060e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::60e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9F6E893AC
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 06:13:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E45D889D2
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 06:13:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gUXSGVyf0dFqjHln4nLPTvcv3Nx+stgMSxEgZHGB0UEKWa1b4lH0YJVrKaPlhWboqxM5vOn5RALzY2m4xHktSzZM7MbaIo1J6Lyl/ipB6XOKut80y+EKp1yNLQIwGehRliMAGs0xP7n5aQhJt7+wqqDzViTguqZs1lMUoHrPLab7jCcJKp2Z5Ze/j3UIty1b27hHqV2vPnMqQEvd9jR7zlz9bpuU+js361O2A9aYCMtLtT9LY7ash+RG47wDoA4iilm0qhrtf1PbXUV78YM5zDvxLZQzY9UAYT7AqxmJ5hmE5sWnUB/8aQbC3G51wa7uh94Z93SWSDq/wpRX/rnxmA==
+ b=NNXkqs4zxtfJ8xC/BqbI6ym1EWQvLqQvTrkdR3EH/bym6XfneLmqWRh7jrLAN0rDgtNuvkvYf1V87FP6bfxSr/zlwvJLm0Trr3y0kmQl9QgMwbIHw8BAI5YwI9hB5vuc7vlF/ToowQUBTYlsv7r5FkpjKvwuBgSsKKkCeA6xMH2N2bFvAb4E5m2BxrmVMIS9XBXlNubuyi7ZlOcZFc+anbSusXZkDlKKLfqIGWxdPTXs3vmF6ZETv9f5Ohh+zp0qRg4FkL7R2wYTpqt3s1dxF8NgVDxZYAh9bat6iznnpiSGFKKvOB9Rq8DJAkCjBuqXAA7kK1zTCkgjER76S6iWBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=h6rFVr5I1DCrAmmLb2wCenpMCR6S/ZYjh9agToJLi84=;
- b=s9S/HgA8IQsWH3Eix6hi2NXM6rxL6KvIQL9TgG8KOMgDrr8MLy0kfGVk4XeRhIgoUArwHRlgv6ybLPuQUG3jehjZqdzUSw8hvDWpeieF/aybjncDcRFiKHytFvl9PKA4qK+Lhet9uE2YZEUfgx9qLBdhLdH1N8hwR5XrvCL1EP5bu2b6Y+HVS5+QdivnvaU+x3+VKTFF9ChdMPII4O4dtdjjKOTgjTDIXU47d7/UNZLpDp+TimwPhXiHw7gd/pW93+cQ6+FOqRCT/1w74/WSY7FyigPagrff4bfpNy2PYflxG9cfwv/V1Qu8MmKx9g+6VpN6ji/7C+or5kgosJ0F7g==
+ bh=k40IA2EFa7GRLDDDkFx0Ms+0tLqMjbW9/5P5w0rZr9Y=;
+ b=i0vmipfWEE10gBYLPSiKh+S6Rk+9SMKk1lraORKlpgtMGpBpwScscDe+pN2YmneTtLPv5eQnEked2t5E3dUEq31yizNRXquzs6pGOulaTzgRco3vZLhm1W+XHVId5G9rwreqScF22szaymsj4mm0JbxxdJLZ34laQ33TYzle+KPSDwQqt/tNhY7Y880KCneDoMCJsuY1SROXK5z8pm6bT/p+D2nPI5M7nvIbBC9jZRn+BL0Z2S/wotrwFI76OyJY9Sb+iCAvIKK0KLXBHREb581myddERAAXIobkzDfnOT2YYEMPSoG2yQfLTkY3v5rcapOI2ywGfMYqGwan7AHMVA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=h6rFVr5I1DCrAmmLb2wCenpMCR6S/ZYjh9agToJLi84=;
- b=fUOiMQo5jh5j+jImH5GbDfAXk3H27DnRv374g1pgHFFmc6XQbBRvU6ms9kVN2xfJ8Jc9fiZc3iBiNEpuBu4Z+18Chk4YIcshE8Y+hHcZQfTbZg0+dJqL/rvs9xvd7eNtU17+mMJWYKBIVG+Yx0l6ZGKwTC8Xjc82CB1SZ7S736w=
-Received: from BL6PEPF00016417.NAMP222.PROD.OUTLOOK.COM
- (2603:10b6:22e:400:0:1004:0:5) by CH2PR12MB4199.namprd12.prod.outlook.com
- (2603:10b6:610:a7::13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.29; Tue, 12 Nov
- 2024 05:13:03 +0000
-Received: from BL6PEPF0001AB72.namprd02.prod.outlook.com
- (2a01:111:f403:f901::3) by BL6PEPF00016417.outlook.office365.com
- (2603:1036:903:4::a) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.28 via Frontend
- Transport; Tue, 12 Nov 2024 05:13:02 +0000
+ bh=k40IA2EFa7GRLDDDkFx0Ms+0tLqMjbW9/5P5w0rZr9Y=;
+ b=pS9MLSyU2gKqjLbheYISOrhYtPPTxQmQtUS4lAE8qYNlLYEtbsZS0WIUMZ9U9c7PerICRTJljLr9hh+swMm8vBlx1jMjkQp4UXAtpEfdLQy8IL4tbYX6i3P8HAeCnGA1kgaex/erUcxrrOMZCAZMTb++q7lz6N/UB5kp55ueU3o=
+Received: from SN6PR05CA0032.namprd05.prod.outlook.com (2603:10b6:805:de::45)
+ by BL1PR12MB5705.namprd12.prod.outlook.com (2603:10b6:208:384::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.27; Tue, 12 Nov
+ 2024 05:13:05 +0000
+Received: from SN1PEPF0002529D.namprd05.prod.outlook.com
+ (2603:10b6:805:de:cafe::e6) by SN6PR05CA0032.outlook.office365.com
+ (2603:10b6:805:de::45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.15 via Frontend
+ Transport; Tue, 12 Nov 2024 05:13:05 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL6PEPF0001AB72.mail.protection.outlook.com (10.167.242.165) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF0002529D.mail.protection.outlook.com (10.167.242.4) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8158.14 via Frontend Transport; Tue, 12 Nov 2024 05:13:02 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.8158.14 via Frontend Transport; Tue, 12 Nov 2024 05:13:04 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 11 Nov
- 2024 23:12:18 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 11 Nov
- 2024 23:12:06 -0600
+ 2024 23:10:13 -0600
 Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 11 Nov 2024 23:12:04 -0600
+ Transport; Mon, 11 Nov 2024 23:10:12 -0600
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
  <git@amd.com>
-Subject: [PATCH v11 5/7] usb: onboard-hub: Bail out if peer hub is already
- probed
-Date: Tue, 12 Nov 2024 10:37:38 +0530
-Message-ID: <20241112050740.15343-6-venkatesh.abbarapu@amd.com>
+Subject: [PATCH v11 4/7] usb: onboard-hub: Add i2c initialization for usb5744
+ hub
+Date: Tue, 12 Nov 2024 10:37:37 +0530
+Message-ID: <20241112050740.15343-5-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20241112050740.15343-1-venkatesh.abbarapu@amd.com>
 References: <20241112050740.15343-1-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB72:EE_|CH2PR12MB4199:EE_
-X-MS-Office365-Filtering-Correlation-Id: 032c73f6-007b-4641-3fac-08dd02d8aeea
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002529D:EE_|BL1PR12MB5705:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9d4c16d7-7343-42b9-3121-08dd02d8b023
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?bKgi6DgA8dw9pjzlfpvo1FL3u1Ox9DpR/dqpRE5cPv3jn9MCyndssiVAnYbM?=
- =?us-ascii?Q?TJQ5Kidr6Q/QOM1w+jYRl8tM46NQKZ6qLB/jLxkEAOJWzY8gPV3mQQlYKIBh?=
- =?us-ascii?Q?cD9DjvbPnJJyFEKBpGaKJ4NovbNKJ3Fojc950eFfosYTcOCx2faJ8iDf7ldw?=
- =?us-ascii?Q?U/dVKzSGL6EAu/B3jBLC5lgmQMr68zSxzPS/0mtcE5BtUpEF7/VyRk/Jck1d?=
- =?us-ascii?Q?Mx5MH5j2jD/Z6OG0jjpFLdoKgbyAhFG45VwABohH47XyGqKB2jLE5diZYp+8?=
- =?us-ascii?Q?EvljYykQY+aD1qrRTmjtYCop7pQXhqZvAbbi1jDL3tbhecsL9kk+T69ybC0J?=
- =?us-ascii?Q?uBEx2bqnx1T5GaL3Ps0WiV/WAAM4n2OEBzFJVVbH7VrrMt6v+67KQmQ4Szbs?=
- =?us-ascii?Q?kQD5Wd3FfM/02LdyHeNLKgHGbuQjvZjoqg3SqerGmC3sVqTRxmC6a/E5g2TO?=
- =?us-ascii?Q?yTIFIGo+s0ENTpPVUzP4rgJTDPF5zOZ8giGO5DfR0BwD86TCDnEndOyq0epa?=
- =?us-ascii?Q?7TlDeRyZoHIh77u5juEC59C8eU8XPGsMtexHohboJBYReHdd7QCAfdqjpLMh?=
- =?us-ascii?Q?jaOQvB8HqHrAr7Yty3uJf5f5G0gdd9dNbN0RW6hDDEJGncTGc6ji5sAVUeig?=
- =?us-ascii?Q?0ekGlLyozBOcslyUIUlgszteVDfadDox04S/SNuC7bsgBV47nUchBNhbsjx5?=
- =?us-ascii?Q?ZIbWGpwfI9SaFw/csgd9umYJJW7MDNVigj68UHrype5Gcc3kWYPsuELFMv2/?=
- =?us-ascii?Q?IIg9iDkOdDcUR2cFcURUDaEXvYZTGXn27Z8NN5IkYfo6Iu8R94euzYm1izgS?=
- =?us-ascii?Q?BIhsIiOekJp7J5SDO+qYduAhDa1a2vG3Z1TUbELtsWRQOEmiIM/R31iQa7Fj?=
- =?us-ascii?Q?rP9auSUUgd2t+9Rvv5N8/4hbcTQztQUd6lBMaNfRPdU66vUuZVGSCRTn3tmo?=
- =?us-ascii?Q?ZI0i/9cUz0GrTdCFCpZgYceAzQaEstAX0rRhznDeNh6t/+N2s8ePuAVIyKNd?=
- =?us-ascii?Q?yVaQibrQ25sNEzkIfTse+3d5URtFvR/cKHma2WD/RuLnNZ/GCrw+xqcnrvNp?=
- =?us-ascii?Q?KrST+NrkdiOLnGaGreb1n32ZbLqNpR68tHXrD2CPbM6iv6FxOhIwRL9+IFnk?=
- =?us-ascii?Q?zwXzcUoDYpngsemGrSrAeiAJIhkuk/j9zPYoO6s4448+YqSU9B3LJJLrPHiF?=
- =?us-ascii?Q?oqxep79Y7Nfg1+iD32nMycKjFJ0Ks87DmEf4Kiq1f9q+vSWfgl6rY8oIbsFH?=
- =?us-ascii?Q?FNu1B4ayrA6xSRi1c8jspS7oPIxl7rTXbskIZmFqaKb6I+0a0BYUoGN3Hu7n?=
- =?us-ascii?Q?5JnxIYvgpDB1jqlZed5o6qmmmN0V+hbL+jo4R4LT/srMOhcXm7AaAX/nf/8k?=
- =?us-ascii?Q?HR0wamUXAZbS0XoNURLBg06z7+P5SLr+/aKxhxQdRDOiXpq6OA=3D=3D?=
+ ARA:13230040|376014|1800799024|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SU9HQk5QVlRad0ZldzBXbStjSzM5K2V4ajNLeitybmFnTWRDVVl2dGRBeFpk?=
+ =?utf-8?B?bzZTdmo5aUZOaVJkRUhoMVhjdXc0ZTltcHQ4Q2RaS3hrczhqcENKdDhXSjVz?=
+ =?utf-8?B?RmN1dGNlaHVOdDRDaE8zYjdWdktvRytPbzRaSGgxSkc0OXkvY0l1QlN4eHM5?=
+ =?utf-8?B?elEzbElDNjNGVVhhbE9CaGozSzVzMnFHaGhPZW8vZnRwM1Zla2dZeE4wN2Zo?=
+ =?utf-8?B?bjZRM2tVbVQ4TEwrdzkyS1VKMFRRdVdNK3FRaHBqRTFkWERleVdjWE91VTFD?=
+ =?utf-8?B?SEU1OFdiaE54aEpockVzNU5rQmNCSmlyK1Q2Wk9xZ2VOSmNQL2h2Y1ZKSDU3?=
+ =?utf-8?B?SkRVdWdLQTNNSzcwVklLQVFxLy83VTlvaEpMRWJUamV1UmJ2K2VRclprL0U3?=
+ =?utf-8?B?RVhSTUExSC9KdGZIc2NZQ1RDREtaRzc3S2NrREl1SFJQbUZzY1V0S3VCNzZs?=
+ =?utf-8?B?dUZtRUF3Yys4SEc3cmlUU043REFSeGVXS3ExMDg0YTI5dlAxMFRwUDVnVEw3?=
+ =?utf-8?B?RVl5RnZrVVhZOTRFalFPZFBtYjF2aWZMcUhZdkZvODhZeTNiOE5hT0FrK1Bk?=
+ =?utf-8?B?Nys2Y28xd3ZpbjI2Rm1rTXlvU0d0Z0NUU3BPSk5RWFhuOEUrVDVnM2FicFNE?=
+ =?utf-8?B?cVlreWQ3Nld1Q1dpOGMwWnRuZkhaYmQxeDV3UzRSajlHenIzS2pCVDZaVXVQ?=
+ =?utf-8?B?Sy9pOVpiNWxNWVhhd3RhTlJhQjVzSndvL01STnZ2SGk3SXlYeXpKa0xtcVhL?=
+ =?utf-8?B?OUV1TWxtcWZkTWFTTDdOT1dpRzI1Zk13OWhVNm14UnpKS01qVXArbXlRSm9n?=
+ =?utf-8?B?RXNLVGFDRzZDQkxiY2FSN2lGdFkxT1hvZ296NVA3aGI1YktBWEZScHFoNko3?=
+ =?utf-8?B?ajR1QllHZ3MrSzZ5d3RKTEZnSG5UcGxXT3dhcUozN3ZLUEIzQlhkWTlaZkNH?=
+ =?utf-8?B?eFpoZjZZZnJhaFVoSTZ5MDdYZ3hHamtINTR0R0swK0hVNUZaUCt1eE91VHly?=
+ =?utf-8?B?aG1NK1ZyMGxOQjAwYUgrNk8vRTdVVHVoNHdrRjM4RWo0ZjJmekk5YUQ2UHlp?=
+ =?utf-8?B?VXB2dXNKU0Z5YTZLblNhUE52WUJhK1JDTDJLS1VBdnExQjM4cGh4MTc5a1FK?=
+ =?utf-8?B?YnNsQnU0WHRiKy9sKzZ0VDRtcFJYaHBrRC81Z0hxUWxjb0RCR0t5YklyUmFo?=
+ =?utf-8?B?cXFUK3JhalYycXc3Wkc1ZmsxWkhBd0FyL1BqK1J0dlVmTFhBdUVUcTVpbFpS?=
+ =?utf-8?B?UXFOejFuUEs3UXhPTVZ0RUNkVFVlcG9hYnpYK05QVVQ3czg0dkJiN1VCTHhW?=
+ =?utf-8?B?ZVZiODNiNnZkcDZoMU55QWJsSmZlaURha04wVng3UEZaa050dSswYUhCOERW?=
+ =?utf-8?B?cXJHQ1hEaUdYZmNIZ0V1MmgzQ2g3eW1pbnd2a1NUNWdGUzVGZmp2RW1qMWFS?=
+ =?utf-8?B?S3pYc2R6T3FTZlNXVllXNnFXdEZDWGYreUhpV0tPNTFsZUxEWW1DeXFVU3Bu?=
+ =?utf-8?B?cHArRHEyb0c3QWRhQ0JhRXNydUxhS1Z4MTIya0M1MEQwN1h4aCtLeTczZ0JN?=
+ =?utf-8?B?di83V0RBWDdWU3h2Mkl3Wkp6bW92TXdWMEc0dzhzQ2tlQVNqcEdRQlJkWERG?=
+ =?utf-8?B?UnA3N056blg3amxxRjhNYzFka2ZVTXhaY0hac0RQVHFydSt6YzJoMkVQZEpv?=
+ =?utf-8?B?eTgwNkhVRHVLeW9kU2VvMUM2S3dyU08wSWxCUHBSS2p5WUdwSWNINmRwVlls?=
+ =?utf-8?B?cG1RWTZHN0N3RW4wd2hHMzFHTWNsUmlzMmJtNUI4ZndDekJJaTdxV0Ywendp?=
+ =?utf-8?B?VE1CdmY1bGp6eHNwRlE2alE0bnY2a3hnMmtTY0tscnorV3JRdXB4Njgzd1VY?=
+ =?utf-8?B?cTNvOWt5UFJmQTBSK3Q3UFdsaWZsNDFxbnllcWh1ZEVqUnc9PQ==?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2024 05:13:02.6476 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 032c73f6-007b-4641-3fac-08dd02d8aeea
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2024 05:13:04.6047 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9d4c16d7-7343-42b9-3121-08dd02d8b023
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB72.namprd02.prod.outlook.com
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002529D.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4199
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5705
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,55 +156,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The .bind function is implemented to bind the correct
-"half" of the hub that the driver wants to bind,
-and returning -ENODEV for the other "half".
+Add i2c initialization hook and set usb5744 platform
+data with function having required i2c initialization sequence.
+
+Apart from the USB command attach, prevent the hub from suspend.
+when the “USB Attach with SMBUS (0xAA56)” command is issued to the hub,
+the hub is getting enumerated and then it puts in a suspend mode.
+This causes the hub to NAK any SMBUS access made by the SMBUS Master
+during this period and not able to see the hub's slave address while
+running the "i2c probe" command.
+
+Prevent the MCU from the putting the HUB in suspend mode through register
+write. The BYPASS_UDC_SUSPEND bit (Bit 3) of the RuntimeFlags2 register at
+address 0x411D controls this aspect of the hub. The BYPASS_UDC_SUSPEND
+bit in register 0x411Dh must be set to ensure that the MCU is always
+enabled and ready to respond to SMBus runtime commands. This register
+needs to be written before the USB attach command is issued.
+The byte sequence is as follows:
+Slave addr: 0x2d           00 00 05 00 01 41 1D 08
+Slave addr: 0x2d           99 37 00
+Slave addr: 0x2d           AA 56 00
 
 Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 Reviewed-by: Marek Vasut <marex@denx.de>
 ---
- common/usb_onboard_hub.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+ common/usb_onboard_hub.c | 106 ++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 105 insertions(+), 1 deletion(-)
 
 diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index e209964f17..3c5f88387f 100644
+index 1d146eccee..e209964f17 100644
 --- a/common/usb_onboard_hub.c
 +++ b/common/usb_onboard_hub.c
-@@ -176,6 +176,26 @@ err:
- 	return ret;
- }
+@@ -10,9 +10,15 @@
+ #include <asm/gpio.h>
+ #include <dm.h>
+ #include <dm/device_compat.h>
++#include <i2c.h>
+ #include <linux/delay.h>
+ #include <power/regulator.h>
  
-+static int usb_onboard_hub_bind(struct udevice *dev)
-+{
-+	struct ofnode_phandle_args phandle;
-+	const void *fdt = gd->fdt_blob;
-+	int ret, off;
++#define USB5744_COMMAND_ATTACH		0x0056
++#define USB5744_COMMAND_ATTACH_LSB	0xAA
++#define USB5744_CONFIG_REG_ACCESS	0x0037
++#define USB5744_CONFIG_REG_ACCESS_LSB	0x99
 +
-+	ret = dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0, &phandle);
-+	if (ret)  {
-+		dev_err(dev, "peer-hub not specified\n");
+ struct onboard_hub {
+ 	struct udevice *vdd;
+ 	struct gpio_desc *reset_gpio;
+@@ -21,8 +27,89 @@ struct onboard_hub {
+ struct onboard_hub_data {
+ 	unsigned long reset_us;
+ 	unsigned long power_on_delay_us;
++	int (*init)(struct udevice *dev);
+ };
+ 
++static int usb5744_i2c_init(struct udevice *dev)
++{
++	/*
++	 *  Prevent the MCU from the putting the HUB in suspend mode through register write.
++	 *  The BYPASS_UDC_SUSPEND bit (Bit 3) of the RuntimeFlags2 register at address
++	 *  0x411D controls this aspect of the hub.
++	 *  Format to write to hub registers via SMBus- 2D 00 00 05 00 01 41 1D 08
++	 *  Byte 0: Address of slave 2D
++	 *  Byte 1: Memory address 00
++	 *  Byte 2: Memory address 00
++	 *  Byte 3: Number of bytes to write to memory
++	 *  Byte 4: Write configuration register (00)
++	 *  Byte 5: Write the number of data bytes (01- 1 data byte)
++	 *  Byte 6: LSB of register address 0x41
++	 *  Byte 7: MSB of register address 0x1D
++	 *  Byte 8: value to be written to the register
++	 */
++	u8 data_buf[8] = {0x0, 0x5, 0x0, 0x1, 0x41, 0x1D, 0x08};
++	u8 config_reg_access_buf = USB5744_CONFIG_REG_ACCESS;
++	struct udevice *i2c_bus = NULL, *i2c_dev;
++	struct ofnode_phandle_args phandle;
++	u8 buf = USB5744_COMMAND_ATTACH;
++	struct dm_i2c_chip *i2c_chip;
++	int ret, slave_addr;
++
++	ret = dev_read_phandle_with_args(dev, "i2c-bus", NULL, 0, 0, &phandle);
++	if (ret) {
++		dev_err(dev, "i2c-bus not specified\n");
 +		return ret;
 +	}
 +
-+	off = ofnode_to_offset(phandle.node);
-+	ret = fdt_node_check_compatible(fdt, off, "usb424,5744");
-+	if (!ret)
-+		return 0;
++	ret = device_get_global_by_ofnode(ofnode_get_parent(phandle.node), &i2c_bus);
++	if (ret) {
++		dev_err(dev, "Failed to get i2c node, err: %d\n", ret);
++		return ret;
++	}
 +
-+	return -ENODEV;
++	ret = ofnode_read_u32(phandle.node, "reg", &slave_addr);
++	if (ret)
++		return ret;
++
++	ret = i2c_get_chip(i2c_bus, slave_addr, 1, &i2c_dev);
++	if (ret) {
++		dev_err(dev, "%s: can't find i2c chip device for addr 0x%x\n", __func__,
++			slave_addr);
++		return ret;
++	}
++
++	i2c_chip = dev_get_parent_plat(i2c_dev);
++	if (!i2c_chip) {
++		dev_err(dev, "parent platform data not found\n");
++		return -EINVAL;
++	}
++
++	i2c_chip->flags &= ~DM_I2C_CHIP_WR_ADDRESS;
++	/* SMBus write command */
++	ret = dm_i2c_write(i2c_dev, 0, (uint8_t *)&data_buf, 8);
++	if (ret) {
++		dev_err(dev, "data_buf i2c_write failed, err:%d\n", ret);
++		return ret;
++	}
++
++	/* Configuration register access command */
++	ret = dm_i2c_write(i2c_dev, USB5744_CONFIG_REG_ACCESS_LSB,
++			   &config_reg_access_buf, 2);
++	if (ret) {
++		dev_err(dev, "config_reg_access i2c_write failed, err: %d\n", ret);
++		return ret;
++	}
++
++	/* USB Attach with SMBus */
++	ret = dm_i2c_write(i2c_dev, USB5744_COMMAND_ATTACH_LSB, &buf, 2);
++	if (ret) {
++		dev_err(dev, "usb_attach i2c_write failed, err: %d\n", ret);
++		return ret;
++	}
++
++	return 0;
 +}
 +
- static int usb_onboard_hub_remove(struct udevice *dev)
+ int usb_onboard_hub_reset(struct udevice *dev)
  {
+ 	struct onboard_hub_data *data =
+@@ -53,6 +140,8 @@ int usb_onboard_hub_reset(struct udevice *dev)
+ 
+ static int usb_onboard_hub_probe(struct udevice *dev)
+ {
++	struct onboard_hub_data *data =
++		(struct onboard_hub_data *)dev_get_driver_data(dev);
  	struct onboard_hub *hub = dev_get_priv(dev);
-@@ -217,6 +237,7 @@ static const struct udevice_id usb_onboard_hub_ids[] = {
- U_BOOT_DRIVER(usb_onboard_hub) = {
- 	.name	= "usb_onboard_hub",
- 	.id	= UCLASS_USB_HUB,
-+	.bind   = usb_onboard_hub_bind,
- 	.probe = usb_onboard_hub_probe,
- 	.remove = usb_onboard_hub_remove,
- 	.of_match = usb_onboard_hub_ids,
+ 	int ret;
+ 
+@@ -70,7 +159,21 @@ static int usb_onboard_hub_probe(struct udevice *dev)
+ 		}
+ 	}
+ 
+-	return usb_onboard_hub_reset(dev);
++	ret = usb_onboard_hub_reset(dev);
++	if (ret)
++		return ret;
++
++	if (data->init) {
++		ret = data->init(dev);
++		if (ret) {
++			dev_err(dev, "onboard i2c init failed: %d\n", ret);
++			goto err;
++		}
++	}
++	return 0;
++err:
++	dm_gpio_set_value(hub->reset_gpio, 0);
++	return ret;
+ }
+ 
+ static int usb_onboard_hub_remove(struct udevice *dev)
+@@ -93,6 +196,7 @@ static const struct onboard_hub_data usb2514_data = {
+ };
+ 
+ static const struct onboard_hub_data usb5744_data = {
++	.init = usb5744_i2c_init,
+ 	.power_on_delay_us = 10000,
+ 	.reset_us = 10000,
+ };
 -- 
 2.17.1
 
