@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A67ECD3ABFB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 13:13:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55010D3ABFB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 13:18:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E796D89383;
-	Tue, 12 Nov 2024 14:13:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A30EE88FBA;
+	Tue, 12 Nov 2024 14:18:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FZ04ivQ7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BEXEZ9GF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB2E6893C3; Tue, 12 Nov 2024 14:13:29 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id D735888FBA; Tue, 12 Nov 2024 14:18:44 +0100 (CET)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B59518910B
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 14:13:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD864891E4
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 14:18:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43161c0068bso48128405e9.1
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 05:13:27 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3a4ccfde548so16014185ab.1
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 05:18:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731417207; x=1732022007; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=LV2nbfrBdzsTy47x5jlXo58EgXtIn+YrL696ZrBSKBA=;
- b=FZ04ivQ7SyLbR3KchwwSXZ3vcjVo94Y1DSmf0rRcV4xdHSLEiMqg9D7+rJ9xUyPyFL
- dY/+3oS/QQRDKYfjbkrJ7DObDO1uGXOCI4gs5sA/blwsSW2/qKKpJYfq41glexT3YCXL
- VoRawiAoWM0+5Nh1vX8v8TRJsG9xR4ph38Y6LIUoqm4MxBzx0F+Dd5Ubs3o/YvTjNExW
- UlDBbcGn8iQEgxzVACTMNJPCH2FmQgxpQXeB+7jR0DEROD3WQ2x1iJb10YZykWEBVPPT
- qhdAEqwx4hCbKeQVcWklEV66V+UbeBVBh7KympPOiArn8UknYWlooHC8/N79yIADZbz8
- 0qTw==
+ d=chromium.org; s=google; t=1731417521; x=1732022321; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7yvsfWujFoBuhlh3UQ3aJFbTH4WeHRJ1Z6M0rQGBaPM=;
+ b=BEXEZ9GFBj7UAgdrIFyCUf6dQ+T77epHAEizy7e6X8TdtTsRGpk4ybOH9e1/woVKzR
+ 53oQORR+fGSDf9bBtnsSvuSkmqZFRUyGjr2Iqh862CK2x96XDi6ppjTPbnM+7mhXp3tL
+ QtMwiEc1ab+7SrvLb6GG6yUFM18LTmGnyr0Ws=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731417207; x=1732022007;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LV2nbfrBdzsTy47x5jlXo58EgXtIn+YrL696ZrBSKBA=;
- b=Rg6CQnGW581qe+opREvULEJ2cklf4qCNF7wIHK2wmNCgZqQxDnHrEszqdUw/IUpoAn
- RL1H/5TEEUb235VpBKa4XSQRwuISeOckd8TLlW48At4nDzUrwFjyIyIkDr6RgJyJB9q9
- cMieUG9DAuEqhPQDqbG+FTeMGm1O4PWsbULg4MpSSkmCPrBMIaelo5n+ezUVp+jS6VR+
- sinIzCe+TmaUR+frxaC1qJWCO3uvV7ICMQdErRjsw+W7WBCuf5DcGZWwqV8QsyD7b0xX
- jFVIFmEjOK2VzaSh9W6V6JVt5gxL9axS1AdhKpbCG93drgWxKATZ+jPDBhpmgzgY8xJE
- y57Q==
-X-Gm-Message-State: AOJu0YxWMV7ib2pr2snTuta4u1ZxRJR0PGHKHOZg1fIRgklSlwpRl6T2
- LOkOPlFDMpa7yyWTbVsFAvRZ8Kk0UMZoxVypyXjPl8EqL/sHOOLnWhmpW0XwIwj8fXeZO+4/yf5
- D
-X-Google-Smtp-Source: AGHT+IEawtOQF7DkNDVcT8+TagoeahXrXx1vzUNG757pC4TlwpnOZTNPvU9gD/eLZKkRFzws6xfDDA==
-X-Received: by 2002:a05:600c:4ecf:b0:430:563a:b20a with SMTP id
- 5b1f17b1804b1-432b7505786mr131928535e9.11.1731417207111; 
- Tue, 12 Nov 2024 05:13:27 -0800 (PST)
-Received: from [192.168.0.187] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432b05319aesm206542815e9.8.2024.11.12.05.13.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Nov 2024 05:13:26 -0800 (PST)
-Message-ID: <2637a7bd-fdc6-4102-80c1-43d0d058cd97@linaro.org>
-Date: Tue, 12 Nov 2024 15:13:26 +0200
+ d=1e100.net; s=20230601; t=1731417521; x=1732022321;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7yvsfWujFoBuhlh3UQ3aJFbTH4WeHRJ1Z6M0rQGBaPM=;
+ b=JyHxcWHlLDDr0XjeK8KKFh+gD5f4omzR4GP1mi8leuq51dbe6tjoESkjYnzNZuDYt2
+ lKn8x7A4chR8JgbFnMgcqS/Br3ZnROtZR0bjCzbDAz0k+XMjjzz2C+j5cfvY1jkz3XBG
+ ujj9NmipZ26UAMTOHS6KZjorXsoahIpxld10l8XPL0i5iB3/fXnysfgsXXZvgUYKe5xh
+ 5b+Uh1f+BejlIMn4fzFiSREDi+e0MxomjB8GfUw00Fz+VKCEL7veKMUeVoMlBuZv0bL3
+ SvtykNijvrcMAs9LTVjZd64CePgJBoG68MqfC2b8pAX0DRcVjr8Yo5W5Hz5pCdhp3+mj
+ VOBA==
+X-Gm-Message-State: AOJu0Yx2G23DAuPimnyFsvnYWgrzeyViDQQa8vp6lzcRDNd777pF98QH
+ hTF+vFV6mmjIP7KaG3H0vDmj9uC9C5+i6g/7jPDkHRRap3a7Sdu9mtzonMQCnEMfcA9gVPLF2xU
+ =
+X-Google-Smtp-Source: AGHT+IHJsAP28I5KJqYkDs6FF+hCU5tyP2vagEFIsHTWKPfnhjKZfH4t7JQ+zgF9RfIlxyck+jcbDA==
+X-Received: by 2002:a92:c803:0:b0:3a0:c8b8:1b0f with SMTP id
+ e9e14a558f8ab-3a6f114bdbemr142428985ab.2.1731417520653; 
+ Tue, 12 Nov 2024 05:18:40 -0800 (PST)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4de787d6cddsm2000923173.102.2024.11.12.05.18.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Nov 2024 05:18:39 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH] Revert "efi_memory: do not add U-Boot memory to the memory
+ map"
+Date: Tue, 12 Nov 2024 06:18:30 -0700
+Message-Id: <20241112131830.576864-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] gpio: at91: Implement GPIOF_FUNC in get_function()
-To: Zixun LI <admin@hifiphile.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-References: <20241018202715.283011-1-admin@hifiphile.com>
-From: Eugen Hristev <eugen.hristev@linaro.org>
-Content-Language: en-US
-In-Reply-To: <20241018202715.283011-1-admin@hifiphile.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,50 +88,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+A bisect of Ubuntu 2022.04 boot-failure on qemu-x86_64 resulted in this
+patch. I am not sure how to investigate it.
 
-On 10/18/24 23:27, Zixun LI wrote:
-> This patch adds support for determining whether a gpio pin is mapped as
-> peripheral function.
-> 
-> Signed-off-by: Zixun LI <admin@hifiphile.com>
-> ---
->  drivers/gpio/at91_gpio.c | 13 ++++++++++++-
->  1 file changed, 12 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpio/at91_gpio.c b/drivers/gpio/at91_gpio.c
-> index 1409db5dc1..64a6e8a4a5 100644
-> --- a/drivers/gpio/at91_gpio.c
-> +++ b/drivers/gpio/at91_gpio.c
-> @@ -220,6 +220,15 @@ static bool at91_get_port_output(struct at91_port *at91_port, int offset)
->  	val = readl(&at91_port->osr);
->  	return val & mask;
->  }
-> +
-> +static bool at91_get_port_pio(struct at91_port *at91_port, int offset)
+The boot hangs at some point during booting of the install image, before
+the Ubuntu logo appears.
 
-The name get_port_pio is a bit confusing, can you rename it to something
-more meaningful, like maybe is_periph_func or something ?
+I will sent a series with a script showing how it is run.
 
-> +{
-> +	u32 mask, val;
-> +
-> +	mask = 1 << offset;
-> +	val = readl(&at91_port->psr);
-> +	return val & mask;
-> +}
->  #endif
->  
->  static void at91_set_port_input(struct at91_port *at91_port, int offset,
-> @@ -550,7 +559,9 @@ static int at91_gpio_get_function(struct udevice *dev, unsigned offset)
->  {
->  	struct at91_port_priv *port = dev_get_priv(dev);
->  
-> -	/* GPIOF_FUNC is not implemented yet */
-> +	if (!at91_get_port_pio(port->regs, offset))
-> +		return GPIOF_FUNC;
-> +
->  	if (at91_get_port_output(port->regs, offset))
->  		return GPIOF_OUTPUT;
->  	else
+This reverts commit a68c9ac5d8afc51c619c5d3e865fcf147bea90cb.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+ lib/efi_loader/efi_memory.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index d2f5d563f2a..c7400ec9854 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -809,6 +809,16 @@ static void add_u_boot_and_runtime(void)
+ {
+ 	unsigned long runtime_start, runtime_end, runtime_pages;
+ 	unsigned long runtime_mask = EFI_PAGE_MASK;
++	unsigned long uboot_start, uboot_pages;
++	unsigned long uboot_stack_size = CONFIG_STACK_SIZE;
++
++	/* Add U-Boot */
++	uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
++		       uboot_stack_size) & ~EFI_PAGE_MASK;
++	uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
++		       uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
++	efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
++			      false);
+ 
+ #if defined(__aarch64__)
+ 	/*
+-- 
+2.34.1
 
