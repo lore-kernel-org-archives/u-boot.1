@@ -4,147 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 754E1D32D97
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 19:54:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1B70D597A4
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 21:12:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF53688FCE;
-	Tue, 12 Nov 2024 20:54:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id F117C894A0;
+	Tue, 12 Nov 2024 22:12:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="UGDhec8m";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PPtSI6bo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 775BE88F2A; Tue, 12 Nov 2024 20:54:31 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2071c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::71c])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0BEEA894A3; Tue, 12 Nov 2024 22:12:07 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71A4588E5C
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 20:54:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFDB28947C
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 22:12:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hAofgvqggRRwZAx/zNAo1XPgeOn4H8oMJ2AULaY31hctf4FUXgwQWPP7wamkSyyX9WAHGRLGL2SJOABYwn8oeFog55/1zcMhoZJGXX7YIr/wvQOtx6dVmklZbumcXboMiGo8dKMsCc1EhLrMHiUXUnyMSLC5eEjn1sxEbj4PLO5Jr1kou/ojfNsz435SfBinjz1QBq/Ho9pcfrLNf6GntsG7WJ8mGzw4i51i7aTskwEXEU4EGTtodqlXrAIgRMSJMnr98YR6Gc4Hv82xSXBS4Mbp51BXQA99UBWAxwhP0ORsaC9bQ19ltjIXxNdG7SsXjdHWdcVpH+l9RHbG1U4nTQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/5zrEYZ+XEHrvUCxZj7MAw1urnwqhUmpBf7A5crsUoU=;
- b=iXAZ/q8MDNBD+2NXVLrY/SYsUJo+dJNXpDK2Exbu3L3/7jguinSfRkDUFvk9yZahMhBejGsPe52VAuwQEYo192E3uN97r7vXDiYEYpP4hrMzsvHsyWG9rjaWwSSGgCOfVC2nd7WBkypCwz+Wy0cN7lhTEqsIGme4ST1f3HRrg9NgsvxkZOJlT/xqoUzAy10G9tNjtO21untM8r5Omq+i2sWzKcqpiNYUv1qZQTjoSxnTHbSCNOTfps9myDwtvbW67nuVSfM4VgBB6SKLxc8zWYHYx7WqgjUbFs3AtoKPFXonjEbE4MWTCMCmb+BObqgPtm/bIBG05SBHCLq1BBjBpw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=phytec.com smtp.mailfrom=phytec.de;
- dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
- arc=none (0)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b14077ec5aso8632685a.1
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 13:12:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=phytecmesstechnikgmbh.onmicrosoft.com;
- s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/5zrEYZ+XEHrvUCxZj7MAw1urnwqhUmpBf7A5crsUoU=;
- b=UGDhec8mlEAShG1v6teypsXj7Vml/VGyKBBnJt+XwmEG/YSHAkcD6ZBsCjkJQ0RMLoc11eK19Y8wNWu4SazKAUwhCgUnXXc/PK0jqh1dQraD4pxPCWv2krAb0TXOhYG/2fECQBrfa2a3ZJphHGkWnCvvscwh7PiHl3ZImeawAjM=
-Received: from DU7P194CA0029.EURP194.PROD.OUTLOOK.COM (2603:10a6:10:553::22)
- by DU0P195MB1959.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:3e4::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.28; Tue, 12 Nov
- 2024 19:54:27 +0000
-Received: from DU2PEPF00028D07.eurprd03.prod.outlook.com
- (2603:10a6:10:553:cafe::ba) by DU7P194CA0029.outlook.office365.com
- (2603:10a6:10:553::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.29 via Frontend
- Transport; Tue, 12 Nov 2024 19:54:27 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- DU2PEPF00028D07.mail.protection.outlook.com (10.167.242.167) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8158.14 via Frontend Transport; Tue, 12 Nov 2024 19:54:25 +0000
-Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 12 Nov
- 2024 20:54:25 +0100
-Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 12 Nov
- 2024 20:54:24 +0100
-Message-ID: <a53a67ee-0330-498e-9995-3b08468ed42a@phytec.de>
-Date: Tue, 12 Nov 2024 20:54:23 +0100
+ d=konsulko.com; s=google; t=1731445923; x=1732050723; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RvQyylS8ZG/TRGmrQKgQ5B0mKol1zkxVHRmDj2wJGSk=;
+ b=PPtSI6boRZIZ1z35XR/Ly0P5pVQ/b7EuNKXfEQy1wdQf62x1jYA5blzWZCiyI41sYs
+ qPKlWy55EKxyyGXU6FDqllveEHZ99U2OuoLTMXvh94NLtB31+TLTNnm0iw9q9WlEU7aV
+ Yb1dbzVApF8L7f1aIMah4cqSYRG3+xvb+YLvI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731445923; x=1732050723;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RvQyylS8ZG/TRGmrQKgQ5B0mKol1zkxVHRmDj2wJGSk=;
+ b=lJsJSVcnSaTZlN1RuYWwD75B9SQjVknnbpnFYRclPqM9vi3r8Jk+ug1tK75ormQ60c
+ abA1AKjr0cm2y2e20HcYEiyysG5cFtK2j0X4qV/yU5lh8Nzt/lIDFJGc5s+ns3Xfv8gH
+ oTyJjv9gLk0gJ2CnZwNjuNOJOV+1o63wwPwzf6tXDS0MGNcqMsJ9IlPuL8+cGfhe6q+J
+ /trykynmFTWdwjuwIvRTXivQ4l+vDa7qCBBEIrkKM/qOukzHUK/Pod/++UlcTb4L/bfa
+ grUdMIiFgXkW0WaxhDEkFR9mMD/MlxIFjoNz5Wy4PJH/BvVLbNUAtTYi7fIPCQHqdVJW
+ lo6w==
+X-Gm-Message-State: AOJu0YzYraCSTTWMvFWrX+06dRRwuPJ9gc9CpI6IKJCVW57PpqKhVLck
+ /5gRz8EBF4A8gRCGhjhlvyOazdFgN4BhBSnITMlzJNoU2tOOyqO4Q+QO1Eq44q4=
+X-Google-Smtp-Source: AGHT+IHmDJohccLSHglnMm+FTLbLoTbFP7Qo5QtEbNMpTQR944qL0tuEF9lJTNtoZq+YrM8Ilq8Phw==
+X-Received: by 2002:a05:620a:424d:b0:7b1:ab32:b71e with SMTP id
+ af79cd13be357-7b3327bd559mr2609209585a.0.1731445923404; 
+ Tue, 12 Nov 2024 13:12:03 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b32acdee2bsm630223385a.104.2024.11.12.13.12.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Nov 2024 13:12:02 -0800 (PST)
+Date: Tue, 12 Nov 2024 15:11:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH] Revert "efi_memory: do not add U-Boot memory to the
+ memory map"
+Message-ID: <20241112211158.GY3600562@bill-the-cat>
+References: <20241112131830.576864-1-sjg@chromium.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC U-Boot Upstream] board: phytec: common: Introduce
- CONFIG_PHYTEC_K3_DDR_PATCH
-To: Garrett Giordano <ggiordano@phytec.com>, <trini@konsulko.com>,
- <afd@ti.com>, <d-gole@ti.com>, <marcel.ziswiler@toradex.com>,
- <sumit.garg@linaro.org>, <nm@ti.com>, <d.schultz@phytec.de>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-References: <20241112184029.1030756-1-ggiordano@phytec.com>
-Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20241112184029.1030756-1-ggiordano@phytec.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D07:EE_|DU0P195MB1959:EE_
-X-MS-Office365-Filtering-Correlation-Id: d69a9812-eed2-47df-9179-08dd0353cf93
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?blF1M3VRZ2Z1WEIwQTV2TDE3ZmN6K3NBSGtTRUhwZExzb1pBb1p6YlZrQzVX?=
- =?utf-8?B?RElMR1d4cXB1cFpJN3RONTRPUitnR04ybHJpUDBGQmg1clBrUDRwRXl3WVVS?=
- =?utf-8?B?Y0JGS0RueU9CVzNJSEhaaXg3cWRIQUtKaVpTMG14Ymt5TVg5bHpMS2ZUaDJ5?=
- =?utf-8?B?NVl5UEsyaUl2bnVkNGdlNE5DN2hGejBMUVZBOUxEaWpFTzNTVk1FcFcyWGRD?=
- =?utf-8?B?MXpGb0cvYXAvZzYxZE1odHVTeFBVQTM4aitzWGdNRGZ1dFFhbWtuYnBQaXRP?=
- =?utf-8?B?RVhQM2FISTR4OENTOWQwcU1yeGhoUDRrRWVxQ24vcklFRGlxQ1QrNFlQei9x?=
- =?utf-8?B?aHN2V0k2bzNPL05GS1NhdFVUS1dGYTBOODEvT2dBTHhXNzRyWGZWalE1WHgy?=
- =?utf-8?B?QXBjaXprM1hxeXJLR1U2Qzl5eWYwbXBmQ0pCK3U1cnVtK2hjNTVHbEIxR3dX?=
- =?utf-8?B?OUtvbE4veGx3UWVGbmJBRUYyWXpJbnUyMUUxMmRIb00yZWkrSjcyRWZWL1BQ?=
- =?utf-8?B?UWw3YzBDUDN5MStvRFhqdnozQ3FMK1FhZUJiLzUvTEYyUkMwSWJpSnM2NmR3?=
- =?utf-8?B?VHVDSlRxZHlGYjZxajNJWDJlM0hjbkhQalB2Y2pMS0pFNE5nRTdNQ2F1cXA1?=
- =?utf-8?B?bWxpa3Y4L2ZsL251Y1pHcjlVYUt4MG13NUtpYnJYK0tPSFJISDZLWlowTkxH?=
- =?utf-8?B?MHltdWo1U1hnWVZ0dSsyQ0tsdDdEdUNySUNUbk1rQS96TUVwRFNpdmt3T1lF?=
- =?utf-8?B?R0VOMnRQM3dldzYzOUE5WGxXRjF1dE80MVNTcnUrQXM5eWJCOWFMNGNkTGpL?=
- =?utf-8?B?VTBXSjdkUmU2aDdSUkpUVXVqTnBJTUpNa3liZlpHNWF2QkQ4OHBLTlRmdGJv?=
- =?utf-8?B?dWg4Skt1bnNUUWZBTENIVnE3Vk9IVzluUU1xQzd1WWo1ZnZUdzVYc3BMVis5?=
- =?utf-8?B?ajl0dkNkaGVqRWxhYWZ3d0NwQU1zOUtTQnVsY0Q5M1hEV2g2ejdMcGp5eTFw?=
- =?utf-8?B?bUdlb0E0RzhKeWdRVll2TTU4eHEySnpDVUpGaWltWmVvaHU4RVBxMTRpbzRh?=
- =?utf-8?B?YitoOVp4Sm9IaGFVQ2FiZ0M5elhqTWNxbFg0NkxqaGRUU3NZWnQrV2hXTlRv?=
- =?utf-8?B?SitBSC9rWVNsUkNjelB4RUQwVWNGaXVlcWxIbkJaMXAreWRxUXQzZ2lLQWpl?=
- =?utf-8?B?L0dBV3RsVzB3c2x5L20vQng0RWZyWExTUlR5bll1Mnl3QndYcWNjbnB2ZlVG?=
- =?utf-8?B?aHpUbmQ3MTRGMFR2aUhGOXJYcHFwN0VTSDBJc1ZzdHJCRlFwZEMrd3ptaHFS?=
- =?utf-8?B?bHVGK0s5aytEM29nMTZQOFhMZ2szQ1IzMmNRVWhpSjZ6Tjk4ZXlQY3A2bUEv?=
- =?utf-8?B?bVE0c2ZlWVZlN2FUZTN2dXV0N21HdnRhOWxqU0w4N3NtZTNrRFg2SXdTQzR1?=
- =?utf-8?B?VlFoM0UyY2JyRlY5NTNJSjBYdzI3Z1hxOUhGM0xNVi80Unp4K1JMcUtsSER5?=
- =?utf-8?B?SVlmcDFmNnk1K2Rzb2ozNHgxb0s1ODJMT215N3FDNHZrRkJFRTBVQzA1a3VV?=
- =?utf-8?B?Zkh6Zlpod1I4bWFsdmtxZXIrYUZFQXlUeEFCNTB5WDd1YU9vdG5qUGdIY3Rr?=
- =?utf-8?B?VE5zQ2tGRUUyVEJubzVtd1VGRDkveXdhdkxFTVZ0OUpQTVJHOTRLUXNTWk91?=
- =?utf-8?B?b28zamhrMkxaTDB6S3pGQjN2MGJ2cEI4ai9rdnR0VzRFVk95NXowMFZraStv?=
- =?utf-8?B?T1Nqejkzc2RBSFZRY1VwMDRiUzN4S1lTQ0EzQ1ZWNDFNUG5tYlpJWXFBZWZh?=
- =?utf-8?B?MmZNV053cG4zWXkrd0VFVlNPcFRBek1WSHNjR0hUdXhvbFVwTEcrQ0tVL1VU?=
- =?utf-8?B?NjhxbzN6NU1IcGRJa0EvcFppQmVKUURjbDRFUWFnQUcxVFE9PQ==?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2024 19:54:25.5108 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d69a9812-eed2-47df-9179-08dd0353cf93
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D07.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P195MB1959
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rbI3dz91BLFG5fWM"
+Content-Disposition: inline
+In-Reply-To: <20241112131830.576864-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,72 +93,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Garrett,
 
-no need to tag as RFC. Otherwise, it looks good to me.
+--rbI3dz91BLFG5fWM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Am 12.11.24 um 19:40 schrieb Garrett Giordano:
-> Introduce CONFIG_PHYTEC_K3_DDR_PATCH to make DDR timing patch code
-> optional for PHYTEC K3 boards. This allows better control over which
-> boards receive DDR timing patches, rather than compiling the code for
-> all boards with K3_DDRSS enabled.
-> 
-> Also enable the feature by default for PHYCORE_AM62X_R5.
-> 
-> Signed-off-by: Garrett Giordano <ggiordano@phytec.com>
+On Tue, Nov 12, 2024 at 06:18:30AM -0700, Simon Glass wrote:
 
-Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
+> A bisect of Ubuntu 2022.04 boot-failure on qemu-x86_64 resulted in this
+> patch. I am not sure how to investigate it.
+>=20
+> The boot hangs at some point during booting of the install image, before
+> the Ubuntu logo appears.
+>=20
+> I will sent a series with a script showing how it is run.
+>=20
+> This reverts commit a68c9ac5d8afc51c619c5d3e865fcf147bea90cb.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-> ---
->   arch/arm/mach-k3/am62x/Kconfig     | 1 +
->   board/phytec/common/k3/Kconfig     | 5 +++++
->   board/phytec/common/k3/Makefile    | 2 +-
->   board/phytec/phycore_am62x/Kconfig | 1 +
->   4 files changed, 8 insertions(+), 1 deletion(-)
->   create mode 100644 board/phytec/common/k3/Kconfig
-> 
-> diff --git a/arch/arm/mach-k3/am62x/Kconfig b/arch/arm/mach-k3/am62x/Kconfig
-> index 8b0cdd74f4f..81199ada3a1 100644
-> --- a/arch/arm/mach-k3/am62x/Kconfig
-> +++ b/arch/arm/mach-k3/am62x/Kconfig
-> @@ -42,6 +42,7 @@ config TARGET_PHYCORE_AM62X_R5
->   	select SPL_RAM
->   	select K3_DDRSS
->   	select BINMAN
-> +	select PHYTEC_K3_DDR_PATCH
->   	imply SYS_K3_SPL_ATF
->   
->   config TARGET_VERDIN_AM62_A53
-> diff --git a/board/phytec/common/k3/Kconfig b/board/phytec/common/k3/Kconfig
-> new file mode 100644
-> index 00000000000..282f4b79742
-> --- /dev/null
-> +++ b/board/phytec/common/k3/Kconfig
-> @@ -0,0 +1,5 @@
-> +config PHYTEC_K3_DDR_PATCH
-> +	bool "Patch DDR timings on PHYTEC K3 SoMs"
-> +	help
-> +	   Allow to override default DDR timings prior to
-> +	   DDRSS driver probing.
-> diff --git a/board/phytec/common/k3/Makefile b/board/phytec/common/k3/Makefile
-> index 40e91a43e99..6861c70e17e 100644
-> --- a/board/phytec/common/k3/Makefile
-> +++ b/board/phytec/common/k3/Makefile
-> @@ -1,3 +1,3 @@
->   # SPDX-License-Identifier: GPL-2.0+
->   obj-y += board.o
-> -obj-$(CONFIG_K3_DDRSS) += k3_ddrss_patch.o
-> +obj-$(CONFIG_PHYTEC_K3_DDR_PATCH) += k3_ddrss_patch.o
-> diff --git a/board/phytec/phycore_am62x/Kconfig b/board/phytec/phycore_am62x/Kconfig
-> index 7c179ef0078..ecee5873c0c 100644
-> --- a/board/phytec/phycore_am62x/Kconfig
-> +++ b/board/phytec/phycore_am62x/Kconfig
-> @@ -33,6 +33,7 @@ config SPL_LDSCRIPT
->   	default "arch/arm/mach-omap2/u-boot-spl.lds"
->   
->   source "board/phytec/common/Kconfig"
-> +source "board/phytec/common/k3/Kconfig"
->   
->   endif
->   
+You forgot to prefix this with "RFC" or "DEBUG" as we're not going to
+revert these changes, but we'll figure out why x86 doesn't behave like
+arm and riscv do and then Fixes the resulting commit. Thanks.
 
+--=20
+Tom
+
+--rbI3dz91BLFG5fWM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmczxJsACgkQFHw5/5Y0
+tyynqwv+OjE1vDsIr1KGFS2rTKqa0v+LAuQoUJt/ea1Q5POhF3djTxHLV/Zq9ET/
+dskvjHInx+riJfSUfhrz4+el6Yi9YeOwLgNYqCkxUxC6J7ZihzlfotqbiqKi/ICa
+DOgwznzwlCCNP9HziiI1eUAAbXh1Q5obZE0DLEY4xIgNN3a0I9yX7ivhRWBsEyyy
+11uJKu/Hzg3AxgI5cTT0rq9AbcLzCjIvtmy3Uimmn/Tp32BHjcfWF2qons8MvUPb
+RQK5D3hGHMGMYI1H5RHLmqzg/07TWaP58auxQFmXar2g/4LA5TyoWKxJOkfCBrRT
+u066u5OcXiGN32B4EpTrNxi3VUs3bw6zjfFjIzXDX3M9tHxNCTeddDz9+KVcrIOE
+E5BfH9oYtWgHgpVF1j8E6jhErgeJVQKanJZDCa5mxFhnuV+Vgi0guDXAo4kREk66
+sYIE/62tH662XnBqMINojPcM6UaCmG38a3+9ikHQY4o75GfUWVX2FNdyBji3obzz
+2r7ur35t
+=JmQN
+-----END PGP SIGNATURE-----
+
+--rbI3dz91BLFG5fWM--
