@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12852D42BA4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 16:22:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7898CD42BA6
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 16:27:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4693489294;
-	Tue, 12 Nov 2024 17:22:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DBB118910B;
+	Tue, 12 Nov 2024 17:27:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jHFFbF4b";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="zw22XqkD";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="Axs0RLKx";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="zw22XqkD";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="Axs0RLKx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D10F38907D; Tue, 12 Nov 2024 17:22:24 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0F2D98918E; Tue, 12 Nov 2024 17:27:25 +0100 (CET)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de
+ [IPv6:2a07:de40:b251:101:10:150:64:1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B79D89270
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 17:22:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 206DD890FD
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 17:27:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4316f3d3c21so47704225e9.3
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 08:22:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731428542; x=1732033342; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7wXKJtUe5OS7iT/Htv6a6uOej17/w2Rz+ypgsKkNbLw=;
- b=jHFFbF4b66fseGpyKbXcMv5BBxZ4rjoFqGQiml5lTe0qpCFYUsDeB8Ks3o4jxoTEDh
- x5xSkD2dzinRr8WdicKx+ioAkSVREj8T6b5WiJGccNxlL2Yv+M3q2sjdiIc3od252a1G
- ucYJHfZRcCvhjJrYx1odrZDI3AKL8ua6ghPLsc5cUMIY6hCI+VGChTKWWDVRrQWJeK5V
- b6aeHzareN5lAvEiGoLW6UVkDtWyjglApQjPq4jkrmwE2XnvaCdtJiUXIKsstc4+zNhj
- 67elJYiYH9XN+IK3ThYdy7QrO2Y7dWIvVO5kZQiv2YtH84ErF5AwkoqBsCQfFJ9lDIZ2
- 8R5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731428542; x=1732033342;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7wXKJtUe5OS7iT/Htv6a6uOej17/w2Rz+ypgsKkNbLw=;
- b=V02+OtCfs6uWwNY+8u2ZqSXnxmogQwIYZCTqWlZsk8VH7qhDpiPAE3siPGg9bGwmVX
- jYm5DQ6dmqO2nlJ6O+LZX+CwwkndyJCzN+WJTO8Qk0GDwZXIqLQHfXhpeV0nLOfguZ/g
- jP8kmkIUKLCzgV52G757JHMew4pWq5d+9tCHqs2kjRXD1NytSEgd7DHS/fsVSmTQIZzw
- Ma3FvjgED8aLo58s5+Q3LpSzcHlKMOPTwDtfib6EayQx1ILnNWVhhzdMwFyGsaGZkG/p
- BLLvVo+AX/0pevGvJANRaW0oKMENV6bX054Nva7P6Njpy0ZxfuZhRcpPgSqYVRLAOoua
- 4H9A==
-X-Gm-Message-State: AOJu0Yx9xIH60TbrNSD79WGfgf8bnk1dcR9wPFZE8iJSgfemPNq87gOf
- Od5CRPpRMcMnp+buG6ASeA5NLPnUYYWtInYWM7Fm2b2IriuejVy7lqpiTr0G4L0=
-X-Google-Smtp-Source: AGHT+IFaDrDkR/Q6I/A4NETWHonuNupB6+CyMN/0LMqXQd09813E3VEH9AM+jtHBjXI3UPTjyHuIIw==
-X-Received: by 2002:a05:600c:3b19:b0:431:5a93:4e3c with SMTP id
- 5b1f17b1804b1-432cce77fe7mr28729555e9.16.1731428512185; 
- Tue, 12 Nov 2024 08:21:52 -0800 (PST)
-Received: from [192.168.0.187] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432b05c0d33sm218595655e9.27.2024.11.12.08.21.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Nov 2024 08:21:51 -0800 (PST)
-Message-ID: <36aca447-85dc-4af3-a3dd-d4ec55c79908@linaro.org>
-Date: Tue, 12 Nov 2024 18:21:51 +0200
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=schwab@suse.de
+Received: from hawking.nue2.suse.org (unknown [10.168.4.11])
+ by smtp-out1.suse.de (Postfix) with ESMTP id 87D3721274
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 16:27:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1731428842; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+ mime-version:mime-version:content-type:content-type;
+ bh=J3CpLQ8Gv1f2aThzu8PE3enWIjgBUnlHhAr0RX4vv5A=;
+ b=zw22XqkDxPhqlv1CQnG6ea0Mt09UJqgAvKIBhIBhjT/aGRfmBUk8Pc0/HZB/DYw6zv04Go
+ IZleZwa3CijG+ribYtclMYa//+lkapeO36hTWs1bShM/0aealuR9/nVMQZpGy61DeZlPDN
+ fuc3rA/1z137884joZG5lI7kFvuHWqc=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1731428842;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+ mime-version:mime-version:content-type:content-type;
+ bh=J3CpLQ8Gv1f2aThzu8PE3enWIjgBUnlHhAr0RX4vv5A=;
+ b=Axs0RLKxuQdXMqxIdNWndl0LksmFTqn4/nTI6AtyTxiioLzj7ooWoNhoC2aTK9GUEQ6fUx
+ l0JQiPFg68hXodAA==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1731428842; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+ mime-version:mime-version:content-type:content-type;
+ bh=J3CpLQ8Gv1f2aThzu8PE3enWIjgBUnlHhAr0RX4vv5A=;
+ b=zw22XqkDxPhqlv1CQnG6ea0Mt09UJqgAvKIBhIBhjT/aGRfmBUk8Pc0/HZB/DYw6zv04Go
+ IZleZwa3CijG+ribYtclMYa//+lkapeO36hTWs1bShM/0aealuR9/nVMQZpGy61DeZlPDN
+ fuc3rA/1z137884joZG5lI7kFvuHWqc=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1731428842;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+ mime-version:mime-version:content-type:content-type;
+ bh=J3CpLQ8Gv1f2aThzu8PE3enWIjgBUnlHhAr0RX4vv5A=;
+ b=Axs0RLKxuQdXMqxIdNWndl0LksmFTqn4/nTI6AtyTxiioLzj7ooWoNhoC2aTK9GUEQ6fUx
+ l0JQiPFg68hXodAA==
+Received: by hawking.nue2.suse.org (Postfix, from userid 17005)
+ id 5AE8A4A0564; Tue, 12 Nov 2024 17:27:22 +0100 (CET)
+From: Andreas Schwab <schwab@suse.de>
+To: u-boot@lists.denx.de
+Subject: [PATCH] configs: visionfive2: re-enable SPL_SYS_MMCSD_RAW_MODE
+Date: Tue, 12 Nov 2024 17:27:22 +0100
+Message-ID: <mvmy11ov2mt.fsf@suse.de>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] gpio: at91: Implement GPIOF_FUNC in get_function()
-To: Zixun LI <admin@hifiphile.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-References: <20241018202715.283011-1-admin@hifiphile.com>
- <2637a7bd-fdc6-4102-80c1-43d0d058cd97@linaro.org>
- <CA+Gyqebjmuiwn0UyUEJK0vh7wimTkGXPeVCrf7feYxzFLF_Oxw@mail.gmail.com>
- <fc0f7532-c260-4b6d-b8aa-5ce2ff2deb6f@linaro.org>
- <CA+Gyqebs11SSv2OGtAAg2tO9K_g9kz1uCJK+JG05+0gObgQQCw@mail.gmail.com>
-Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <CA+Gyqebs11SSv2OGtAAg2tO9K_g9kz1uCJK+JG05+0gObgQQCw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Spamd-Result: default: False [-4.15 / 50.00]; BAYES_HAM(-3.00)[99.99%];
+ NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.15)[-0.766]; MIME_GOOD(-0.10)[text/plain];
+ RCVD_NO_TLS_LAST(0.10)[]; ARC_NA(0.00)[];
+ RCPT_COUNT_ONE(0.00)[1]; MIME_TRACE(0.00)[0:+];
+ RCVD_COUNT_ONE(0.00)[1]; MID_RHS_MATCH_FROM(0.00)[];
+ FROM_HAS_DN(0.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
+ FROM_EQ_ENVFROM(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ TO_DN_NONE(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid,suse.de:email]
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,46 +98,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+To restore MMC boot, enable SPL_SYS_MMCSD_RAW_MODE and recover
+SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION and
+SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION.
+
+Fixes: 2a00d73d081 ("spl: mmc: Try to clean up raw-mode options")
+Signed-off-by: Andreas Schwab <schwab@suse.de>
+---
+ configs/starfive_visionfive2_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
+index c3508926d6c..11e1332f875 100644
+--- a/configs/starfive_visionfive2_defconfig
++++ b/configs/starfive_visionfive2_defconfig
+@@ -55,6 +55,9 @@ CONFIG_SPL_PAD_TO=0x0
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+ CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80000000
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x2
+ CONFIG_SPL_SYS_MALLOC_SIZE=0x400000
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_DM_SPI_FLASH=y
+-- 
+2.47.0
 
 
-On 11/12/24 18:17, Zixun LI wrote:
-> On Tue, Nov 12, 2024 at 4:59 PM Eugen Hristev <eugen.hristev@linaro.org> wrote:
->>
->>
->>
->> On 11/12/24 17:57, Zixun LI wrote:
->>> Hello,
->>>
->>>
->>> On Tue, Nov 12, 2024 at 2:13 PM Eugen Hristev <eugen.hristev@linaro.org> wrote:
->>>>
->>>>
->>>>> +static bool at91_get_port_pio(struct at91_port *at91_port, int offset)
->>>>
->>>> The name get_port_pio is a bit confusing, can you rename it to something
->>>> more meaningful, like maybe is_periph_func or something ?
->>>
->>> How about at91_is_port_pio_active, more inline to the datasheet.
->>
->>
->> I am not sure. It appears confusing to me.
->> The pin is either in GPIO or peripheral function mode.
->> Being 'PIO active' appears to be something different, or common to both
->> options.
->> What does the datasheet say exactly ?
-> 
-> From SAM9G25 datasheet, 22.6.3 PIO Status Register
-> 
-> 0: PIO is inactive on the corresponding I/O line (peripheral is active).
-> 1: PIO is active on the corresponding I/O line (peripheral is inactive).
-> 
-> "PIO" is the port controller itself but also means GPIO which is not very clear.
-> 
-> Or at91_is_port_gpio ?
-
-That sounds better (and have the binary logic reversed)
-
-IIRC on SAM datasheets and naming, 'pio' is a general term for a pin,
-and this pin can either work as a GPIO or it can be tied to a specific
-hardware block (hence the function)
-
+-- 
+Andreas Schwab, SUSE Labs, schwab@suse.de
+GPG Key fingerprint = 0196 BAD8 1CE9 1970 F4BE  1748 E4D4 88E3 0EEA B9D7
+"And now for something completely different."
