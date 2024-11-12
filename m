@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70F9DD42B84
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 14:00:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1112D42B84
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 14:00:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43B038945B;
-	Tue, 12 Nov 2024 14:59:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A350189430;
+	Tue, 12 Nov 2024 14:59:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bTYThl5g";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TMZNtxW+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E943C8942F; Tue, 12 Nov 2024 14:59:47 +0100 (CET)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 9F00789461; Tue, 12 Nov 2024 14:59:49 +0100 (CET)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAF9E8945A
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 14:59:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8513E89430
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 14:59:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-83aba65556cso226896539f.3
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 05:59:45 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-83ab21c26f1so219913739f.2
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 05:59:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731419984; x=1732024784; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731419986; x=1732024786; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SoWzMr5PuryPEZl/dXJ4v8W6VN0w5LKOiFyccyNyqhQ=;
- b=bTYThl5gYb/cmvRcTlYC8ld55KMeuxjWeygMKSP2TrWQiCWcPt1bIkRv2VDui58h71
- hXF+52tV934d8hmCLYOGsE0ITlHv5NSq6IX1n5OPwsebKYWzaGQjJZ/X3Sho/n1QbUcZ
- LnuLRNntJftf8evtGeA8XMcAKyWrSESRrGGpA=
+ bh=mox9fZ+I66WAXDkqf7w0uXnFvuIzFRIFpSjOfdmBgAU=;
+ b=TMZNtxW+494efKKA3TYi/cF6DLwEiYe97AdPlEXJzhcmV4EF09UxmAXzRK51Xf9NM2
+ Ik+B/PIAScXdgtEcpV9Gbu3AqFSzRQ3PayBFYnVnWKO3ry3CxqRkd1VsEFDcPYGaMeYK
+ Wnq06mr6icgfGt6/xZocJgmlC8dB9Mr5SYOUI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731419984; x=1732024784;
+ d=1e100.net; s=20230601; t=1731419986; x=1732024786;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SoWzMr5PuryPEZl/dXJ4v8W6VN0w5LKOiFyccyNyqhQ=;
- b=dyzs1kOAaqxq3ey1ftYogHfRfJhN/u2XM5lEw1XtQkOcRtDyLV6wLIAleORIUNmXHp
- QX2uHFr3bk8f88XDiAEsNsyqndlDieo40Aoi9zAb5HSmjOFBfjMlpDw6maxHMXnXEE0e
- TB94WsftB2dwplsXOF8HIJUYS2TRwnzbMdhIRS1BQMUWBVP3Mvhb7pYLyA2vX6YpNChT
- 0PnsYLWVfZZ+lsF+ZAtQPpIKM5UzMx1curPApYRb0tXKpG9CGJsnNiGN9lhX4om34IHR
- jHonNJZQyFb+8CWXSqZZWWtvFg1DUR4onZF6tuJ5Gq8pQaZE9EZsgeq5CR90c2lYa24M
- 3jrA==
-X-Gm-Message-State: AOJu0YyjRNwaIszSR323jRW0ppRSEvpvufHHXLsng2koea6ua/Xw/OZM
- RTsbHTjLzylBhb5buogzRS0gc5i6twIkETx96Y0I4d9cP/SEOQfnTg0Po8iXO9NZAuebpbhu3PQ
+ bh=mox9fZ+I66WAXDkqf7w0uXnFvuIzFRIFpSjOfdmBgAU=;
+ b=cLihqThpIRQpLcivn2whypn6Yp9LqrNVYGeEsQmr6jTY7Gy2M1m2j5VnvRtHKO6Bzz
+ Q46mnG4aiveZg6VwU3/voYAegG2OQNnIV3FUtnyadcxf+4X9BeRjsghoKYJNF7I+X9yW
+ 0Or7mbXhcHAWzZuWyGN/022766FaXkV7OoGTPkZT4rbTZZ84DzNkxFhFgCg5RNr1rl9S
+ rR5weiG3poyJxvfVXNTgc/8JNPkqo27a9vpg7EHu1JywaODfWP+BVDySLOUt83GkTmi/
+ 8Rd1/k6SFx8iGzuQz7HpcZ3mdlrZ97C/IF/kT4kUHIMDyDDu/9H8SP2CZX3qagf+Yrm6
+ 6n2Q==
+X-Gm-Message-State: AOJu0YwRliQKw7yt09Ily/HfMOQDcgtwOMZOX7tVkBbigWAnxHBCnlPd
+ 0ix9pwI1ppNkhBgD593JxIPHgd45vQ0HZesj4DWZbMpUKDl6LNoBjEYW7DTVK+dQQRK7cL7ARSA
  =
-X-Google-Smtp-Source: AGHT+IGS3rpJ1Wwtl+uHFRoWrIwAxnVmDTbGPCW/FbBdeObJ7S/F5/S6tFiqJSNp96r1phlW/ULaZg==
-X-Received: by 2002:a05:6602:6d8d:b0:834:f2d5:c758 with SMTP id
- ca18e2360f4ac-83e0337cae1mr1658168239f.13.1731419983971; 
- Tue, 12 Nov 2024 05:59:43 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHjcqQvMyhtTF+ivR0jrsdk/C4/LNm/xPsWwsuYhyY3F7uZkQbY01MSbFyPzCSfv6qkUYDeSQ==
+X-Received: by 2002:a05:6602:1512:b0:83a:872f:4b98 with SMTP id
+ ca18e2360f4ac-83e43175db5mr310119539f.2.1731419985696; 
+ Tue, 12 Nov 2024 05:59:45 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-83e132c01besm189203039f.30.2024.11.12.05.59.41
+ ca18e2360f4ac-83e132c01besm189203039f.30.2024.11.12.05.59.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 05:59:42 -0800 (PST)
+ Tue, 12 Nov 2024 05:59:44 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 07/18] x86: Add some log categories
-Date: Tue, 12 Nov 2024 06:59:00 -0700
-Message-Id: <20241112135911.630586-8-sjg@chromium.org>
+Subject: [PATCH 08/18] x86: Drop use of CONFIG_REALMODE_DEBUG
+Date: Tue, 12 Nov 2024 06:59:01 -0700
+Message-Id: <20241112135911.630586-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241112135911.630586-1-sjg@chromium.org>
 References: <20241112135911.630586-1-sjg@chromium.org>
@@ -89,57 +89,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add categories for i8259 and bios files, so that log statements have the
-right category.
+This option is not actually defined in Kconfig anymore. Use a normal
+debug print instead, which has a similar effect.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/x86/lib/bios.c            | 3 +++
- arch/x86/lib/bios_interrupts.c | 2 ++
- arch/x86/lib/i8259.c           | 2 ++
- 3 files changed, 7 insertions(+)
+ arch/x86/lib/bios.c            | 18 ++++++++----------
+ arch/x86/lib/bios_interrupts.c |  6 ++----
+ 2 files changed, 10 insertions(+), 14 deletions(-)
 
 diff --git a/arch/x86/lib/bios.c b/arch/x86/lib/bios.c
-index 03f7360032c..acae635cf19 100644
+index acae635cf19..5dfe5a647eb 100644
 --- a/arch/x86/lib/bios.c
 +++ b/arch/x86/lib/bios.c
-@@ -5,6 +5,9 @@
-  * Copyright (C) 2007 Advanced Micro Devices, Inc.
-  * Copyright (C) 2009-2010 coresystems GmbH
-  */
-+
-+#define LOG_CATEGRORY	LOGC_ARCH
-+
- #include <compiler.h>
- #include <bios_emul.h>
- #include <irq_func.h>
+@@ -301,16 +301,14 @@ asmlinkage int interrupt_handler(u32 intnumber, u32 gsfs, u32 dses,
+ 	cs = cs_ip >> 16;
+ 	flags = stackflags;
+ 
+-#ifdef CONFIG_REALMODE_DEBUG
+-	debug("oprom: INT# 0x%x\n", intnumber);
+-	debug("oprom: eax: %08x ebx: %08x ecx: %08x edx: %08x\n",
+-	      eax, ebx, ecx, edx);
+-	debug("oprom: ebp: %08x esp: %08x edi: %08x esi: %08x\n",
+-	      ebp, esp, edi, esi);
+-	debug("oprom:  ip: %04x      cs: %04x   flags: %08x\n",
+-	      ip, cs, flags);
+-	debug("oprom: stackflags = %04x\n", stackflags);
+-#endif
++	log_debug("oprom: INT# 0x%x\n", intnumber);
++	log_debug("oprom: eax: %08x ebx: %08x ecx: %08x edx: %08x\n",
++		  eax, ebx, ecx, edx);
++	log_debug("oprom: ebp: %08x esp: %08x edi: %08x esi: %08x\n",
++		  ebp, esp, edi, esi);
++	log_debug("oprom:  ip: %04x      cs: %04x   flags: %08x\n",
++		  ip, cs, flags);
++	log_debug("oprom: stackflags = %04x\n", stackflags);
+ 
+ 	/*
+ 	 * Fetch arguments from the stack and put them to a place
 diff --git a/arch/x86/lib/bios_interrupts.c b/arch/x86/lib/bios_interrupts.c
-index b2cf1527b1c..3ae6c193ec7 100644
+index 3ae6c193ec7..e0c2284a901 100644
 --- a/arch/x86/lib/bios_interrupts.c
 +++ b/arch/x86/lib/bios_interrupts.c
-@@ -7,6 +7,8 @@
-  * Copyright (C) 2007-2009 coresystems GmbH
-  */
- 
-+#define LOG_CATEGRORY	LOGC_ARCH
-+
- #include <log.h>
- #include <asm/pci.h>
- #include "bios_emul.h"
-diff --git a/arch/x86/lib/i8259.c b/arch/x86/lib/i8259.c
-index 465ff70146f..088f78f4661 100644
---- a/arch/x86/lib/i8259.c
-+++ b/arch/x86/lib/i8259.c
-@@ -13,6 +13,8 @@
-  * Programmable Interrupt Controllers.
-  */
- 
-+#define LOG_CATEGORY	UCLASS_IRQ
-+
- #include <log.h>
- #include <asm/io.h>
- #include <asm/i8259.h>
+@@ -200,10 +200,8 @@ int int1a_handler(void)
+ 			dm_pci_write_config32(dev, reg, dword);
+ 			break;
+ 		}
+-#ifdef CONFIG_REALMODE_DEBUG
+-		debug("0x%x: bus %d devfn 0x%x reg 0x%x val 0x%x\n", func,
+-		      bus, devfn, reg, M.x86.R_ECX);
+-#endif
++		log_debug("0x%x: bus %d devfn 0x%x reg 0x%x val 0x%x\n", func,
++			  bus, devfn, reg, M.x86.R_ECX);
+ 		M.x86.R_EAX &= 0xffff00ff; /* Clear AH */
+ 		M.x86.R_EAX |= PCIBIOS_SUCCESSFUL;
+ 		retval = 1;
 -- 
 2.34.1
 
