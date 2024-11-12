@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49ED6D32D81
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 18:41:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EE76D32D81
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 18:41:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F0F3893C2;
+	by phobos.denx.de (Postfix) with ESMTP id A7DCF89426;
 	Tue, 12 Nov 2024 19:41:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Uw3nXczz";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="dfSWkNM9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D038C89452; Tue, 12 Nov 2024 15:57:51 +0100 (CET)
+ id BFDFD88DFE; Tue, 12 Nov 2024 15:57:53 +0100 (CET)
 Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
  [IPv6:2001:4b98:dc4:8::222])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2FAF88DFE
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 15:57:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67AF88927A
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 15:57:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thomas.bonnefille@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id A7B6440004;
- Tue, 12 Nov 2024 14:57:48 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id A576A40002;
+ Tue, 12 Nov 2024 14:57:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1731423469;
+ t=1731423470;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=vgYZauMPmY1eEMMheGBblrqQtPgWs2Wq8SvOTF9qJVM=;
- b=Uw3nXczzEL9MwLyZEiKapJvhFcDHinE+S91Dw37yYE5yyKid8moMZpmaeSJxZnEYv6Hq2r
- AU2E15gSTrPB35ukuGTwKRLyA6HjH8OJN7TsMVEbB8vfpNZnz9vyHkJOjtCjRR+TiZlu0G
- dyVUTwvUf0QtnmAo5i9yykcsO9nu+8nQD5sYS8aut+47qgV4pIDEruk/0tAr/6lOb24EFe
- 4LX4NfcXNxlgBAud8JrpkSWDE1bm8PaW+OjN0yYVXQ8HVXzk4fxVB3W4+1XbSBEIoPLKfH
- Gu7GYjFp/+RIWkTmgEdyfpAZ+6wTjhgWyu6sn/EEoVk7Hr38IGmcmLr1zG+tfQ==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=N/E7V204FS1dHJ2GmL5kT0cSExoGHkI+QgIZyng2Jrc=;
+ b=dfSWkNM9fT4VX4D9HHxqILSJRcd+YjVWg8M8hnXM9AJ0oEsf8rqLIP8/sqj/kPBrot2cka
+ ue3YtiwwOk038ch4XQzb85FlkCFRzGno4z57ll4jj7dNrm/L4NVHXGLirv80K1EMWpqbsJ
+ y1fmitUThj6n0uKtNvLyWXyBT1+laFjseQw2g2qPKu1fN1vrmmRcflQb0f3zR6EbKI4wsb
+ 60tBmFtJr/j2oZ7n8zVBOllfCTw11YzYI8yPK9/DbXf9f94gehJGqJxZxhCSj2eOxOUZ88
+ eCYhAiutePAMZBHeMDdLtMHrN+q6EOvoTQonf9ExbYSazuaSFf59okvbW+eMuQ==
 From: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
-Subject: [PATCH 0/3] Add support for LicheeRV Nano
-Date: Tue, 12 Nov 2024 15:57:35 +0100
-Message-Id: <20241112-licheerv-nano-v1-0-bf75d1eb560e@bootlin.com>
+Date: Tue, 12 Nov 2024 15:57:36 +0100
+Subject: [PATCH 1/3] doc: add LicheeRV Nano and SG2002 SoC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAN9sM2cC/x2MSwqAIBQAryJvneCPoK4SLUxf+SA0FCQQ7560m
- MUsZhoUzIQFVtYgY6VCKQ6REwMXbLyQkx8OSigjB/wmFxBz5dHGxJ2evTBaLUYfMJon40nv/9v
- 23j/hNPSxXwAAAA==
-X-Change-ID: 20241024-licheerv-nano-c36d0432943b
+Message-Id: <20241112-licheerv-nano-v1-1-bf75d1eb560e@bootlin.com>
+References: <20241112-licheerv-nano-v1-0-bf75d1eb560e@bootlin.com>
+In-Reply-To: <20241112-licheerv-nano-v1-0-bf75d1eb560e@bootlin.com>
 To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
  Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>, 
  Leo <ycliang@andestech.com>, Kongyang Liu <seashell11234455@gmail.com>
@@ -75,33 +74,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series adds support in U-Boot for the Sophgo SG2002 RISCV SoC
-and one board using this SoC, the LicheeRV Nano.
+Provide a page describing the usage of U-Boot on the LicheeRV Nano and a
+description of the board.
 
 Signed-off-by: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
 ---
-Thomas Bonnefille (3):
-      doc: add LicheeRV Nano and SG2002 SoC
-      riscv: dts: sophgo: add device tree for LicheeRV Nano
-      board: add support for LicheeRV Nano
+ doc/board/sophgo/licheerv_nano.rst | 72 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 72 insertions(+)
 
- arch/riscv/Kconfig                        |  4 ++
- arch/riscv/dts/Makefile                   |  1 +
- arch/riscv/dts/sg2002-licheerv-nano-b.dts | 45 +++++++++++++++++++
- arch/riscv/dts/sg2002.dtsi                | 34 +++++++++++++++
- board/sophgo/licheerv_nano/Kconfig        | 28 ++++++++++++
- board/sophgo/licheerv_nano/MAINTAINERS    |  4 ++
- board/sophgo/licheerv_nano/Makefile       |  5 +++
- board/sophgo/licheerv_nano/board.c        |  9 ++++
- configs/sipeed_licheerv_nano_defconfig    | 47 ++++++++++++++++++++
- doc/board/sophgo/licheerv_nano.rst        | 72 +++++++++++++++++++++++++++++++
- include/configs/licheerv_nano.h           | 24 +++++++++++
- 11 files changed, 273 insertions(+)
----
-base-commit: 3f772959501c99fbe5aa0b22a36efe3478d1ae1c
-change-id: 20241024-licheerv-nano-c36d0432943b
+diff --git a/doc/board/sophgo/licheerv_nano.rst b/doc/board/sophgo/licheerv_nano.rst
+new file mode 100644
+index 0000000000000000000000000000000000000000..70401e295c4a56845353c3a92ab4ec98678a1180
+--- /dev/null
++++ b/doc/board/sophgo/licheerv_nano.rst
+@@ -0,0 +1,72 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++LicheeRV Nano
++==========
++
++SG2002 RISC-V SoC
++------------------
++The SG2002 is a high-performance, low-power 64-bit RISC-V/ARM SoC from Sophgo.
++
++Mainline support
++----------------
++The support for following drivers are already enabled:
++1. ns16550 UART Driver.
++2. Synopsys Designware MSHC Driver
++
++Building
++~~~~~~~~
++1. Add the RISC-V toolchain to your PATH.
++2. Setup ARCH & cross compilation environment variable:
++
++.. code-block:: console
++
++   export CROSS_COMPILE=<riscv64 toolchain prefix>
++   cd <U-Boot-dir>
++   make licheerv_nano_defconfig
++   make
++
++This will generate u-boot.bin
++
++Booting
++~~~~~~~
++Currently, we rely on vendor FSBL (First Stage Boot Loader) to initialize the
++clock and load the u-boot image, then bootup from it.
++
++To run u-boot.bin on top of FSBL, follow these steps:
++
++1. Use mainline OpenSBI with a newer version than 1.5 to generate fw_dynamic.
++
++2. Generate a compatible u-boot.bin using U-Boot with the LicheeRV Nano default
++   configuration.
++
++3. Use the vendor-provided tool [1] to create a unified fip.bin file containing
++   FSBL, OpenSBI, and U-Boot.
++   Note that you will have to use the file cv181x.bin as the FSBL.
++
++2. Place the generated fip.bin file into the FAT partition of the SD card.
++
++3. Insert the SD card into the board and power it on.
++
++The board will automatically execute the FSBL from the fip.bin file.
++Subsequently, it will transition to OpenSBI, and finally, OpenSBI will invoke
++U-Boot.
++
++[1]: https://github.com/sophgo/fiptool
++
++
++Sample boot log from LicheeRV Nano board
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++.. code-block:: none
++
++   U-Boot 2024.10 (Oct 24 2024 - 15:00:20 +0200)licheerv_nano
++
++   DRAM:  256 MiB
++   Core:  19 devices, 11 uclasses, devicetree: separate
++   MMC:   mmc@4310000: 0
++   Loading Environment from nowhere... OK
++   In:    serial@4140000
++   Out:   serial@4140000
++   Err:   serial@4140000
++   Net:   No ethernet found.
++   Hit any key to stop autoboot:  0 
++   licheerv_nano# 
 
-Best regards,
 -- 
-Thomas Bonnefille <thomas.bonnefille@bootlin.com>
+2.47.0
 
