@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 443EAD42B85
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 15:05:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4930D42BA2
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 15:08:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8708289440;
-	Tue, 12 Nov 2024 16:05:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 229C0891B0;
+	Tue, 12 Nov 2024 16:08:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UnJ5z2bw";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="T7XMZ0Tc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4599890FD; Tue, 12 Nov 2024 16:05:37 +0100 (CET)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CD661890FD; Tue, 12 Nov 2024 16:08:21 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C0DB89440
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 16:05:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FF8489444
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 16:08:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-7ee386ce3dfso5159843a12.1
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 07:05:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731423933; x=1732028733; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Rg9mr1ZuvIKPizw/ZWvqxjYDAsZ8cerD4vo4kesClzU=;
- b=UnJ5z2bwH7aKmVsuEv2kD9jnNfCBy40K960Q9VuafDOyl3zPuEwysQuoQEHI8xOmIa
- coXutNF6QRXectiC86S6a6JQUBdD4K02j9zMNBt3s0RtkJn5YuCZrniV2ovY46Ji+V2t
- U6b2BAAUy2zbexLVPzyP+XkKpT7VOSsbwgY7R2mu3Mdwyi2vO4jrAkMdYwSWsrkHVB+J
- kETDcUYm3TcwXt3EPXMlRltthwSn8QNvNoGJ7hsL+2B1aHHmzk1VYmfYtKacQFy7uA5i
- ETCLqzDdxIQ4QKG4aiM3dBJhZgMrpz+3inCfbvmoGc84PCqUq/ln/tUahIum6W4pODm1
- WNTg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731423933; x=1732028733;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Rg9mr1ZuvIKPizw/ZWvqxjYDAsZ8cerD4vo4kesClzU=;
- b=wgaKosVH8JtcPiecMLnPdtZu2UrIDHbu9Y1veRD2xurgX/UKQNYKCsyEU7rTpBRrcs
- 9boXeGLl1kv6vSiRz+WHA6b6vo0WZL7jbdV8Tr4ePaiar6ZjCWHIiUXVAbXLNXdo83cK
- /k39/I11xkiVGgTGC5HklTWLTfQXRuGIssqBzXiPeBQbOw/220ctNYSmHNwT9t372BA4
- c/4DcYRjfKqKSAWohGi99vA0tbkDhew4uEKAcKzR1M8ZWd5I1K8HqSxhVAD1+67VSYDV
- INduVBT39/HKla5hfckJ//D+xMWMJM1rsKxPBTzo8DxsLvJ5wKmehK1p6aYfKRUZ+vC0
- r2mw==
-X-Gm-Message-State: AOJu0YypKbMvO846O0whoikZttuXSKPOHa7+uWZV8FBwJxT8CS/69rp5
- CSBtSKZFyXhNpN61r/tNB1VIHrbDOOMwI1HqxzreL6wMOvRSK8L+h07YOHPPbm31KINSZ3q/qby
- KIGCA/KckYi/RSgIKG5jRJBl7gWZ9/imwwhG8jQ==
-X-Google-Smtp-Source: AGHT+IECGqiQHWiokSwQBiQo2q8LVQ14fh4cuL8ZUbre7sio93ygpQefIVhPRE7DrQ98UUTy9NcSoe0PhWkiLPW9zVg=
-X-Received: by 2002:a17:90b:4c06:b0:2da:88b3:cff8 with SMTP id
- 98e67ed59e1d1-2e9b1edf2f4mr25839358a91.6.1731423932613; Tue, 12 Nov 2024
- 07:05:32 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1731424098; x=1732028898; i=xypron.glpk@gmx.de;
+ bh=wE2/iZ9lOrXfylniHm9HSuF1tbbpcpZiOfQWEP7tqOM=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=T7XMZ0TcWLuG9Dm2fMpmORJkSwRjewBjdw3MVipUalWoEIBAIgu1YAcalc5/QwhP
+ 2in61o42n680n7fntnlWMOX/vtygS45uNB5qDourRJfrI8BL1CUDIPuHufo3eHHem
+ Lgrfzn7W5KECp01OgoiN0rAoZ+zSTVg8eRFhVo/hcjUTnGtFozsauROxHkN+LtsY4
+ ye3FAgXF4JHKer4MOKzr8glW4K32poMzcK0djxLA95SG+JARU7UROIDuZ7/dsrp6Z
+ 5o+WP1Q1qNVOkECOItCEW46dN7fNg1/pcHrTvaih2BSVFeyy4SvCf3xHAOO4aWyiK
+ MhD2stdFEkiFv6+etg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N17UW-1tuY5z3nHW-00wVTh; Tue, 12
+ Nov 2024 16:08:17 +0100
+Message-ID: <5604ea68-5b31-461a-a4a2-22da37e64dac@gmx.de>
+Date: Tue, 12 Nov 2024 16:08:17 +0100
 MIME-Version: 1.0
-References: <PA4PR03MB67848E8118A8AF7AC8AF3C1BFA592@PA4PR03MB6784.eurprd03.prod.outlook.com>
- <CAC_iWj+2rBgsfNCjmW_Z8s9Zwu2NjzQFLUNAzehOgBszSYmCrQ@mail.gmail.com>
- <ZzNkjdHYGXQy_kUa@mt.com>
- <CAC_iWjJEiNj+tCj64TXs5i+oqOMnEvevs1YrwPGQJ_XVkWsgsA@mail.gmail.com>
- <ZzNsZyVFuXAry8qT@mt.com>
-In-Reply-To: <ZzNsZyVFuXAry8qT@mt.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 12 Nov 2024 17:04:55 +0200
-Message-ID: <CAC_iWj+hqrEPYqD2FvtL4Yh0GEfaREp+Y8bozHJLN+AkajSi_w@mail.gmail.com>
-Subject: Re: EFI File renaming
-To: Traut Manuel LCPF-CH <Manuel.Traut@mt.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Venzin Daniel LCPF-CH <Daniel.Venzin@mt.com>, 
- Gujan Armin LCPF-CH <Armin.Gujan@mt.com>, Manuel Traut <manut@mecka.net>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Burak Gerz <burak@gerz.io>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/9] docker: Support building for multiple architectures
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241112141105.640189-1-sjg@chromium.org>
+ <20241112141105.640189-4-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241112141105.640189-4-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:cLacMCxGur3PmRAnaPE03beEcVjBTzInsZDeLf4e7CA6aM2Ru0a
+ PXkLjbuxcjjAsbFGTTOkXQV6X8UcO8CxJGkR56uxIiKrcSG02LS6YEHAWlvWMauaqTU7YF1
+ wcYw1i9g7ccilj139Ih7+h5E/rC1sc1Qs+PBHpVuCAcupft2urF6PFaw51StvjkFqz3I3WG
+ 5GCJGZKdXWQT9+vILlN9g==
+UI-OutboundReport: notjunk:1;M01:P0:xYFCWYYJ6cY=;VovyBxWa6m6zFrn8axZ1wLpDnS2
+ mCIwAo3vFX9WE2k/LFsxlw6lFPgP3cMEL1mfEmjhae8P9Xz5SJY672dJ6h18x2jISMFGPlw/x
+ vs5ZlUTHJHXq248MGaNn1+5O0kTvoYQFEIHzpXRKZplXEZgSBG48YUHz3YNuUsaURERkR18p/
+ 0EPEvRkzl5b2CCMDszynhW/MuPJ9+a6zE/StCcyuXWTniOtBrf2Skm4JfxZsmtFai6RIFLoDN
+ d0Plemlj4A2qUqN4lCgCaleTm/KSnebOGm8BRqeuQT/L8RUpN7Otz/Bes3CrftFKfTn/C3b+l
+ IfqJob0mifHRFjuRLiah2h59yW8MECFQS2ZoYVDdVMh+b36dxVgqJFXaYjHKJOVzLYyOwkN0p
+ JzkYy8/Zu5zgV6Rz/RDsCz0l09tC8O0/h/fwgMAIQuGRDs5tArLoi+E4sbqzHApUYu2DSmT1O
+ 2VdHV4ThymBfnRsepd/YyoJWeK/zJTtzReuApS0r/ozWs76blvUiw62cPqjfZOXxA6fje2KsN
+ 5835YiEIFYrdkuSO3t2z47AwhnbeNGXL2lyc3NSPqDSbOOISYvhd/JceqhsE2RcRgrXf+sF1c
+ GKQPFGSRgd5GwAvWe4UlvMWaoFChePe5Unt1MCiaONdFrw/2sYaiNEXL3ozOB43qi+bXB0lOh
+ SCC86Yjb2eMMFvORKDLW7Y601yLNkXEr/75+j/cz6ZFLSFNeIvT1fDavNkKWL12rIALelwOq2
+ HASOkaTTKN6ZK/DPhHgLwJz4MqpRP+0JqxFhn4SuR2icNar6rJtGD4v9LueLGzClJr5/cch1R
+ 34fCgjy4W/nbqNk5kj5gp+v3WWaHkVkX0k0QhBUPbPOfMzIOaYq+UYeWr5pp6J1rg4M3n1iXg
+ vO0BjhF5U2YxJ9jkCJLsfn8wa9HWeuhm7JRZaAmEOR6li6bUqonyo4K1t
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,58 +93,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 Nov 2024 at 16:55, Traut Manuel LCPF-CH <Manuel.Traut@mt.com> wrote:
+On 12.11.24 15:10, Simon Glass wrote:
+> Add instructions on how to build the file for multiple architectures.
+> Add a message indicating what is happening.
 >
-> > > > > systemd-boot counting logic requires [0] to be implemented.
-> > >
-> > > > > If not we plan to add the functionality in fs/fs.c and fs/fat - correct?
-> > > >
-> > > > We don't have plans for it, but explaining any use cases you have might help
-> > >
-> > > systemd-boot is able to do bootcounting by renaming the UKI image [0]
-> > > the code that triggers the not implemented code section is here [1].
-> > >
-> > > With this it is possible to have watchdog based A/B switching on systems
-> > > without a writeable u-boot environment. And therefore it is a nice
-> > > method to implement measured boot.
-> >
-> > The A/B is ok, but I cant understand how that realted to measured
-> > boot. The TPM access, UKI infrastucture etc, will work fine without
-> > A/B
->
-> Yes, TPM, UKI works fine right now :)
->
-> systemd-boot is renaming the UKI before it starts it, by increasing
-> the bootcounter that is part of the filename. If the system is fully
-> booted the file gets renamed again to reset the bootcounter.
->
-> If the bootcounter exceeds systemd-boot tries the next UKI.
-> The UKIs can be signed and are still valid after rename.
->
-> I expect that changes to the u-boot env will change a PCR measurement.
+> Update the documentation as well. Drop the 'sudo' since these should not
+> be needed if Docker is correctly configured.
 
-No env changes are not and IIRC it isnt necesarry. We measure what's
-described in the PC client spec. So the loaded image PCRs would
-change, but that's a user decision (which PCRS to use and seal
-secrets)
+Please, explain what you mean by correctly configured.
 
-> At least it should be like this, since it might alter the boot path?
->
-> For trusted systems it would be nice to have a meaurement of the EFI
-> variables and beside that have no dynamic environment.
+By default Ubuntu requires sudo to execute docker.
 
-We do measure EFI variables and Boot#### variables in PCR7
+https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as=
+-a-non-root-user
+teaches us:
+
+"The docker group grants root-level privileges to the user. For details
+on how this impacts security in your system, see Docker Daemon Attack
+Surface."
+
+So adding a user to the docker group may not be the best idea.
+
+Installing Docker in rootless mode is possible
+(https://docs.docker.com/engine/security/rootless/) but as said it is
+not necessarily the distro default.
+
+Best regards
+
+Heinrich
 
 >
-> Hope this explanation is understandable?
-
-Yes thanks
-
-/Ilias
-> Manuel
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >
-> > > [0] https://uapi-group.org/specifications/specs/boot_loader_specification/#boot-counting
-> > > [1] https://github.com/systemd/systemd/blob/3304a029b847e87da51f7a8ad8c118111508e009/src/boot/boot.c#L1407
-> > >
-> > > > >
-> > > > > [0] https://elixir.bootlin.com/u-boot/v2025.01-rc1/source/lib/efi_loader/efi_file.c#L971
+> Changes in v3:
+> - Move ARGs to the top
+> - Revise documentation to explain a common error and building on arm64
+>
+> Changes in v2:
+> - Update docs also
+> - Add comments to the ARG variables
+>
+>   doc/build/docker.rst    | 25 ++++++++++++++++++++++---
+>   tools/docker/Dockerfile | 12 ++++++++++++
+>   2 files changed, 34 insertions(+), 3 deletions(-)
+>
+> diff --git a/doc/build/docker.rst b/doc/build/docker.rst
+> index 45659b3b89d..b8fd12ead71 100644
+> --- a/doc/build/docker.rst
+> +++ b/doc/build/docker.rst
+> @@ -1,14 +1,33 @@
+>   GitLab CI / U-Boot runner container
+>   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>
+> -In order to have a reproducible and portable build environment for CI w=
+e use a container for building in.  This means that developers can also re=
+produce the CI environment, to a large degree at least, locally.  This fil=
+e is located in the tools/docker directory.  To build the image yourself
+> +In order to have a reproducible and portable build environment for CI w=
+e use a container for building in.  This means that developers can also re=
+produce the CI environment, to a large degree at least, locally.  This fil=
+e is located in the tools/docker directory.
+> +
+> +The docker image supports both amd64 and arm64. Ensure that the
+> +'docker-buildx' Debian package is installed (or the equivalent on anoth=
+er
+> +distribution).
+> +
+> +You will need a multi-platform container, otherwise this error is shown=
+::
+> +
+> +    ERROR: Multi-platform build is not supported for the docker driver.
+> +    Switch to a different driver, or turn on the containerd image store=
+, and try again.
+> +
+> +You can add one with::
+> +
+> +    docker buildx create --name multiarch --driver docker-container --u=
+se
+> +
+> +Building is supported on both amd64 (i.e. 64-bit x86) and arm64 machine=
+s. While
+> +both amd64 and arm64 happen in parallel, the non-native part will take
+> +considerably longer as it must use QEMU to emulate the foreign code.
+> +
+> +To build the image yourself::
+>
+>   .. code-block:: bash
+>
+> -    sudo docker build -t your-namespace:your-tag .
+> +    docker buildx build --platform linux/arm64/v8,linux/amd64 -t your-n=
+amespace:your-tag .
+>
+>   Or to use an existing container
+>
+>   .. code-block:: bash
+>
+> -    sudo docker pull trini/u-boot-gitlab-ci-runner:jammy-20240227-14Mar=
+2024
+> +    docker pull trini/u-boot-gitlab-ci-runner:jammy-20240227-14Mar2024
+> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> index 967ac89fbde..7f4b17ab0a4 100644
+> --- a/tools/docker/Dockerfile
+> +++ b/tools/docker/Dockerfile
+> @@ -2,13 +2,25 @@
+>   # This Dockerfile is used to build an image containing basic stuff to =
+be used
+>   # to build U-Boot and run our test suites.
+>
+> +# Build with (for example):
+> +# docker buildx build --platform linux/arm64/v8,linux/amd64 --tag sjg20=
+/u-boot-gitlab-ci-runner-multiarch:jammy-20240808-03Nov2024 .
+> +
+>   FROM ubuntu:jammy-20240808
+>   LABEL org.opencontainers.image.authors=3D"Tom Rini <trini@konsulko.com=
+>"
+>   LABEL org.opencontainers.image.description=3D" This image is for build=
+ing U-Boot inside a container"
+>
+> +# Used by docker to set the target platform: valid values are linux/arm=
+64/v8
+> +# and linux/amd64
+> +ARG TARGETPLATFORM
+> +
+> +# Used by docker to set the build platform: the only valid value is lin=
+ux/amd64
+> +ARG BUILDPLATFORM
+> +
+>   # Make sure apt is happy
+>   ENV DEBIAN_FRONTEND=3Dnoninteractive
+>
+> +RUN echo "Building on $BUILDPLATFORM, for target $TARGETPLATFORM"
+> +
+>   # Add LLVM repository
+>   RUN apt-get update && apt-get install -y gnupg2 wget xz-utils && rm -r=
+f /var/lib/apt/lists/*
+>   RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add=
+ -
+
