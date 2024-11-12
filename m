@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67D76D42B82
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 14:02:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E3A8D42B82
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 14:02:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D4468946B;
-	Tue, 12 Nov 2024 15:00:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 993208942F;
+	Tue, 12 Nov 2024 15:00:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nPXNsFG3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hexA0eGz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBC748947D; Tue, 12 Nov 2024 15:00:06 +0100 (CET)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id AB335893C2; Tue, 12 Nov 2024 15:00:08 +0100 (CET)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C67EA89461
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 15:00:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C8C78947A
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 15:00:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-83abdaf8a26so217592739f.1
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 06:00:03 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-83aa3ced341so212293139f.0
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 06:00:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731420002; x=1732024802; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731420003; x=1732024803; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c+yH1t4X/23Sg/WHL3paGyxVRgZzLq5jNwuZ+a56L6Q=;
- b=nPXNsFG3rVwXeKbgBSXrdUnOgCQALmLp702iTYCWPfkyjlTGt240Ibc2VUCVafaI+O
- RdVgZQ7sNAq7Wn3uhgC1UZZO3L6eNDX5CpFB2UjW/NtitFbn0Atu0XiuQrida6wguBxa
- R5pXNPjJYeLXUzMeHsaQOsqT6idICnIycsIKw=
+ bh=P2Z0gmtHtSovh/pZ69sAg7Nagb3NXeZnmLDGxbBwNew=;
+ b=hexA0eGz4uReGTIbXMkLiwAqubDGhDc8VxkMv9yeBeVsiSAt42PRUqEQ/67nmhrN81
+ 1ZREvPJrQ1pV6t2hcGAZuCPjchq0mVtea6mFynIjvMnPB0zELlwp8aIBXJt8IvP4DIub
+ icDowRAT58depwTbFHlha3cRaIbB4TXBYzvtU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731420002; x=1732024802;
+ d=1e100.net; s=20230601; t=1731420003; x=1732024803;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=c+yH1t4X/23Sg/WHL3paGyxVRgZzLq5jNwuZ+a56L6Q=;
- b=MEwUbzI2NJlPCXx+RzvRVUyNT9kP1jRDSHPtYiD7mbogdMNP7CGpwUgu2kf2f6N4gQ
- GBiJT73mv7ef1Ws9r98T0G3vH2h2pKyM9YDMFsi6bI7YuJzbZ+ncgHPkLx1/po/B7CPB
- 8IDtNQoDF6SrKPQULc5fE/Y50JvUXznQ9KYFJIrIdZqGmTqRzJjJ+To/FSzs3xS1F6gg
- 2/9LhOpn8SeHmXNftTWwW/bl+rI5/X4s/3YC1J2USDM4DLW1NIvLkMUVF+u09+UkqZPz
- Phz2sxFBVRq/RakxTE/MBBjyXjMz+pgC3QMqvM6gNDVkv9cJqbCp0mwVyFdJJmBIA3Aa
- asGA==
-X-Gm-Message-State: AOJu0YyksLBeucOkoHRIVlSJ7x2+bxFN+m7M6QNktxtDsjFqhgTiR2pP
- yBBXSKMjB9iWFZE9h+FFc8wTA/w7i7OK3YjOqgjlww5n8Ax/VV9kBR9/4GXFXgZkgp23OvUt/7I
+ bh=P2Z0gmtHtSovh/pZ69sAg7Nagb3NXeZnmLDGxbBwNew=;
+ b=jruwbgcXhvC7f24fTNO8R7d70GDPOV5EVVfc0D7yw6oyFsN1Gwr3zKT4MMFKb7kEuX
+ mgbWSbO5YQK9UKiYyvCfQqvDCkcFQMHB2waTSTyidbZBHpWPUCy7FczjfRbYKqe/nEp4
+ IDQ10ECGQBsA1sMT7wNf4tXwvm8+Y9Etwtnz65TRsIxUa1n3hwNBD1kdqGAopFSHuOzO
+ j+yDgeqtI8jhm/+2j8wTJkbGL8V/6y3pySDd+XcHhyUxVs0IcYMyd4hXvEAOJGVEYhoV
+ SDawekRKizk86PhzZJ+VJ90zt1Vhv4N1Rfy+0BDMxet7KbgSCkCsOhKdy3MCgCnL8y8l
+ TxSA==
+X-Gm-Message-State: AOJu0YyVWk0ScozgYccHBAELm+E/nvlF9xeyjJcvutibYZ0Tn3ySTl9H
+ fYAA2oTWbd5JzZHhQaF48vbulduKjAUVdwnUEqTTJSicPYeYHJ01Aq5LiuO6LfdnQm+vkzJt1QI
  =
-X-Google-Smtp-Source: AGHT+IGJFzo3a1tucBw7Y/gnWoZz268qFrdl+oSmUR7KdFFBuzfJvU1YrfSYDxM2DpVbiJlwJUk5rA==
-X-Received: by 2002:a05:6602:2d91:b0:81f:75bf:6570 with SMTP id
- ca18e2360f4ac-83e0329dc3dmr1900325839f.5.1731420001840; 
- Tue, 12 Nov 2024 06:00:01 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGC3QitBvdJxgxUB2UrgwSI0Va9CK7+6ImnSyYG4qSiRobVx0dgaI9rVZMTPGSqZ1GjeOtL6g==
+X-Received: by 2002:a05:6602:160e:b0:832:40d0:902a with SMTP id
+ ca18e2360f4ac-83e032a1a31mr1539659539f.6.1731420003491; 
+ Tue, 12 Nov 2024 06:00:03 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-83e132c01besm189203039f.30.2024.11.12.06.00.00
+ ca18e2360f4ac-83e132c01besm189203039f.30.2024.11.12.06.00.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 06:00:00 -0800 (PST)
+ Tue, 12 Nov 2024 06:00:02 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 17/18] x86: Use the same GDT when jumping to long mode
-Date: Tue, 12 Nov 2024 06:59:10 -0700
-Message-Id: <20241112135911.630586-18-sjg@chromium.org>
+Subject: [PATCH 18/18] x86: Use a simple jump into long mode
+Date: Tue, 12 Nov 2024 06:59:11 -0700
+Message-Id: <20241112135911.630586-19-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241112135911.630586-1-sjg@chromium.org>
 References: <20241112135911.630586-1-sjg@chromium.org>
@@ -89,65 +89,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make use the existing GDT which now includes entries for 64-bit code.
-Leave the interrupt descriptors alone. They can be tidied up once U-Boot
-starts up.
+With the 64-bit descriptor we can use a jump instruction, rather than
+pushing things on the stack.
 
-With this, kvm mode works with QEMU.
+Since the processor is in 64-bit mode by this point, pop a 64-bit value
+from the stack, containing the target address.
+
+This simplifies the code slightly, in particular its use of the stack.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/31
 ---
 
- arch/x86/cpu/i386/call64.S | 14 ++------------
- 1 file changed, 2 insertions(+), 12 deletions(-)
+ arch/x86/cpu/i386/call64.S | 17 +++++++----------
+ 1 file changed, 7 insertions(+), 10 deletions(-)
 
 diff --git a/arch/x86/cpu/i386/call64.S b/arch/x86/cpu/i386/call64.S
-index e5a0420d1ba..3137ec17d31 100644
+index 3137ec17d31..c6308b92e25 100644
 --- a/arch/x86/cpu/i386/call64.S
 +++ b/arch/x86/cpu/i386/call64.S
-@@ -7,6 +7,7 @@
-  */
- 
- #include <asm/msr-index.h>
-+#include <asm/processor.h>
- #include <asm/processor-flags.h>
- 
- .code32
-@@ -30,11 +31,6 @@ cpu_call64:
- 	andl	$~X86_CR0_PG, %eax
+@@ -22,6 +22,7 @@ cpu_call64:
+ 	 * ecx - target
+ 	 */
+ 	cli
++	pushl	$0		/* top 64-bits of target */
+ 	push	%ecx		/* arg2 = target */
+ 	push	%edx		/* arg1 = setup_base */
+ 	mov	%eax, %ebx
+@@ -32,7 +33,8 @@ cpu_call64:
  	movl	%eax, %cr0
  
--	/* Load new GDT with the 64bit segments using 32bit descriptor */
--	leal	gdt, %eax
--	movl	%eax, gdt+2
--	lgdt	gdt
--
  	/* Enable PAE mode */
- 	movl	$(X86_CR4_PAE), %eax
+-	movl	$(X86_CR4_PAE), %eax
++	movl	%cr4, %eax
++	orl	$X86_CR4_PAE, %eax
  	movl	%eax, %cr4
-@@ -49,12 +45,6 @@ cpu_call64:
- 	btsl	$_EFER_LME, %eax
- 	wrmsr
  
--	/* After gdt is loaded */
--	xorl	%eax, %eax
--	lldt	%ax
--	movl    $0x20, %eax
--	ltr	%ax
--
- 	/*
- 	 * Setup for the jump to 64bit mode
- 	 *
-@@ -67,7 +57,7 @@ cpu_call64:
+ 	/* Enable the boot page tables */
+@@ -57,23 +59,18 @@ cpu_call64:
  	 */
  	pop	%esi			/* setup_base */
  
--	pushl	$0x10
-+	pushl	$(X86_GDT_ENTRY_64BIT_CS * X86_GDT_ENTRY_SIZE)
- 	leal	lret_target, %eax
- 	pushl	%eax
+-	pushl	$(X86_GDT_ENTRY_64BIT_CS * X86_GDT_ENTRY_SIZE)
+-	leal	lret_target, %eax
+-	pushl	%eax
+-
+ 	/* Enter paged protected Mode, activating Long Mode */
+ 	movl	%cr0, %eax
+ 	orl	$X86_CR0_PG, %eax
+ 	movl	%eax, %cr0
  
+ 	/* Jump from 32bit compatibility mode into 64bit mode. */
+-	lret
++	ljmp	$(X86_GDT_ENTRY_64BIT_CS * X86_GDT_ENTRY_SIZE), $lret_target
+ 
+-code64:
++.code64
+ lret_target:
+-	pop	%eax			/* target */
+-	mov	%eax, %eax		/* Clear bits 63:32 */
+-	jmp	*%eax			/* Jump to the 64-bit target */
++	pop	%rax			/* target */
++	jmp	*%rax			/* Jump to the 64-bit target */
+ 
+ .globl call64_stub_size
+ call64_stub_size:
 -- 
 2.34.1
 
