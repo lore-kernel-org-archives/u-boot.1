@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FEC5D597B6
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 23:11:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E60B4D597B6
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 23:11:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99180894CD;
-	Wed, 13 Nov 2024 00:11:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 12AE1894BF;
+	Wed, 13 Nov 2024 00:11:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cinpsaru";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AScY/4fl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BECA7894C0; Wed, 13 Nov 2024 00:11:28 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id CDFE788C0F; Wed, 13 Nov 2024 00:11:34 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 685D688C0F
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 00:11:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE925894BF
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 00:11:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-e35e0543b07so1228617276.2
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 15:11:26 -0800 (PST)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6cbd550b648so46985046d6.0
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 15:11:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731453085; x=1732057885; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731453091; x=1732057891; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8zOqp+Zrd0jEFIOJ4/ERJzZtr9pRRoGiSvrGI6iV3Dc=;
- b=CinpsarumI00dT0CHaVbVcRunQJKqsjvPgBFQBdiWMPApvNEv2qPChJU/BlS5xSZza
- E5NFgGX5fxugIIuzuxu8Jqsg87SGVg6pPsQOmUwk687Xd4ubHr3ZWBlXgRbCtAUUyMXU
- BJYJO0RNsIxVpLvr/dW940cibC8DefUEtDP6A=
+ bh=6osKejeTojpTCTb5N9WYWdrmc7v02LmsmGlK00388fg=;
+ b=AScY/4fl9G6uYRxGgKNnbBA3byDa8/ugzaH94MLa99bW8nMhhJdouz9GKhqHqNvhYn
+ Vte7Ja4w8lnVes7ThfZLMRA5kl4K877/s7+y54pi0LxeMGC/mvyUO4AsgKqD56HZtbhE
+ QZLO32RRjv/dXNf1+8LzR6IT4ZMT8lK9grqXY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731453085; x=1732057885;
+ d=1e100.net; s=20230601; t=1731453091; x=1732057891;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8zOqp+Zrd0jEFIOJ4/ERJzZtr9pRRoGiSvrGI6iV3Dc=;
- b=YiPYdvwDk+U/GgjFY/cjFxraZ865tgnu84fQO0SyzNYEHWC0QRqmU4zwv9D1XrFUOW
- mz3aVWq4GhzPltF0k2hfLCXBmKw14baHBNGvzCPw97j2MBMHwSMSNJHAUnoViLS7Ao0P
- ltbsKaKMrEYfohT1SWOHYkIzJkVnYy3SKyS7UoMp/xZMao6+buwFM+MriU37dPmKOS0P
- xDc+5zeb4HUATBF5iU045mARYsjiYxcL8khebEbZhCi7C3VfDmDG40U+sFVJNMGlYXol
- UjiNs7XSYoPY/GVdEz7c8TudC9MEU0LP55rgHMyLgwO/o7AjAXogiw5atV6H9sNv3Lpa
- yveQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVPDJoxCqTlR38G82aTj9jOza7/04NDMzmZxdwR0f++o1JdUmIDdCMKSmaylmSGzr5hP0OZGZY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxMeT+eAibUFo+mOACEMb5pJg2YkdpIM5tEKMMZL1E69gSrazaC
- J0HnxdulR1IDFue28wRf2mim6WpMzumW2eDxHdlWBlp/efn+ZwGmrmIH3Mrv6LeRY9NfkNeTzyt
- WQrI=
-X-Google-Smtp-Source: AGHT+IHXx4vljpGm7Ohr9Akc+vxfJLCeQQlcVHqtWgQR9xtZ+mzNSIUvhrrDIKf7FFK0TyXRH02l1A==
-X-Received: by 2002:a05:690c:6a0b:b0:6e7:e22b:fb7a with SMTP id
- 00721157ae682-6eca4666828mr49021297b3.18.1731453085269; 
- Tue, 12 Nov 2024 15:11:25 -0800 (PST)
+ bh=6osKejeTojpTCTb5N9WYWdrmc7v02LmsmGlK00388fg=;
+ b=B9zHqJGSuKX0bJlB2o+H1KHJtk8Sg4FLAunf8bo1MuruAzXcTwf4o75Ye9GNemhr6j
+ jdKntGAdcFYbD1FwPGhHS+kublkhle3GBonPIDDC5+NoVQ4W7oByVdsnnWuiLHSapg+Q
+ ujl/oRrW7ZL8Mqq8lvKnUPxYkZg3VAGiGHrBWI7vAaZDaG0mxjukckJjVm3BXwWwodV0
+ 9ZXHV6Qt7MK9imyoJsipP+7JggwxqO7ZQGcKfTn3aRtrj70nJBc0QtRFMNgrBgLQk6MX
+ bMsrv2TnjoFF4DectWpnOnmMQ/sBK7gFNapy4m5iKxnvBjGQL8WfxStjFj6POreY+7M3
+ wRxA==
+X-Gm-Message-State: AOJu0Yz1W1FIIC3kI+EzSxzIhePIr/XzYMYyyhDXs5xgDQ5HrjV0Y9ma
+ CozVS/C1s9mdJmXcIEGk15KRUbz8MX4f9WbAYucgc4Uurtd7JWl5WdomtiQ5f8Y=
+X-Google-Smtp-Source: AGHT+IEdmcX7oFn/xtGjj0cgaBPEKMDZy8LAP8Tc/TBMA9Jf6uRJe4kQ2FPqfdkWpJG08CSc8MS2WA==
+X-Received: by 2002:a05:6214:5d8a:b0:6d3:6577:ab11 with SMTP id
+ 6a1803df08f44-6d39e1a5394mr277604256d6.30.1731453091617; 
+ Tue, 12 Nov 2024 15:11:31 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d3966310b7sm76926596d6.112.2024.11.12.15.11.23
+ 6a1803df08f44-6d396631aeesm77161766d6.120.2024.11.12.15.11.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 15:11:24 -0800 (PST)
-Date: Tue, 12 Nov 2024 17:11:21 -0600
+ Tue, 12 Nov 2024 15:11:30 -0800 (PST)
+Date: Tue, 12 Nov 2024 17:11:27 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>,
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Marek Vasut <marex@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 3/9] docker: Support building for multiple architectures
-Message-ID: <20241112231121.GD3600562@bill-the-cat>
-References: <20241112141105.640189-1-sjg@chromium.org>
- <20241112141105.640189-4-sjg@chromium.org>
- <5604ea68-5b31-461a-a4a2-22da37e64dac@gmx.de>
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: Re: [PATCH 01/18] scripts: Add a script for building and booting QEMU
+Message-ID: <20241112231127.GE3600562@bill-the-cat>
+References: <20241112135911.630586-1-sjg@chromium.org>
+ <20241112135911.630586-2-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="w+ir41qT7Y985cdP"
+ protocol="application/pgp-signature"; boundary="dbyoobo02OlySp5X"
 Content-Disposition: inline
-In-Reply-To: <5604ea68-5b31-461a-a4a2-22da37e64dac@gmx.de>
+In-Reply-To: <20241112135911.630586-2-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,60 +102,48 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---w+ir41qT7Y985cdP
+--dbyoobo02OlySp5X
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 12, 2024 at 04:08:17PM +0100, Heinrich Schuchardt wrote:
-> On 12.11.24 15:10, Simon Glass wrote:
-> > Add instructions on how to build the file for multiple architectures.
-> > Add a message indicating what is happening.
-> >=20
-> > Update the documentation as well. Drop the 'sudo' since these should not
-> > be needed if Docker is correctly configured.
->=20
-> Please, explain what you mean by correctly configured.
->=20
-> By default Ubuntu requires sudo to execute docker.
->=20
-> https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-a=
-s-a-non-root-user
-> teaches us:
->=20
-> "The docker group grants root-level privileges to the user. For details
-> on how this impacts security in your system, see Docker Daemon Attack
-> Surface."
->=20
-> So adding a user to the docker group may not be the best idea.
->=20
-> Installing Docker in rootless mode is possible
-> (https://docs.docker.com/engine/security/rootless/) but as said it is
-> not necessarily the distro default.
+On Tue, Nov 12, 2024 at 06:58:54AM -0700, Simon Glass wrote:
 
-Yes, please drop this patch as we expect to handle things in the
-broadest possible way, so not assuming that the user is in the docker
-group.
+> It is handy to be able to quickly build and boot a QEMU image for a
+> particular architecture and distro.
+>=20
+> Add a script for this purpose. It supports only arm and x86 at present.
+> For distros it only supports Ubuntu. Both 32- and 64-bit builds are
+> supported.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+
+I don't know that this is an appropriate thing to merge. It's missing
+all of the other architectures and platforms we support via QEMU and run
+in CI all of the time. I feel it would be better to document how to
+"read" the combination of CI yaml files and u-boot-test-hooks to see the
+common cases of "fire up QEMU with U-Boot" instead of adding yet another
+tool to support.
 
 --=20
 Tom
 
---w+ir41qT7Y985cdP
+--dbyoobo02OlySp5X
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcz4JkACgkQFHw5/5Y0
-tyyyHwv/ZS2Xw6H/yo+20EPG9LVgqBkM9OHu66vBx+gPcHtiwVRnuFSpm/FyopYF
-/lmGrgIScG7MmSwKxtcGTEGEvcyTtD8PvGIfr9KC0L8itEZx05WKPqly1NxFh6ob
-+gppVrhlzolQbhhPMcWubSpUnS7C/dWOO0BpKo49RlcC0smeOJKhWp8smnvXXUgj
-d4VMEQed6hpC8wdYqEYOYkuaa5G3VkEK0gUXLyJlnqQvc4ZjBvENdcR1/PmMiznh
-k0obnYrAVUUJLRYd7zZCEyT5HRDBragA7u5YB8wBB+Q4kusjfy31OebOuHvDBsFH
-anC0XzGilkHeVVKbHLjmHFtNSylKMK8lKfb9tsR3DMuj8PD1fAfQ81GZrETJWiu6
-CRjPTPwMETvZNcG6Ys/sKDBi0NVar6cShKkeNmsGeNcxTW2AGj2LDkKEfO0fUHtC
-LeMygN8BvXp5pHig/UxjZryFCAi/OAOp5tQwb+geL1L+p7m2JO8PBr1BKnsSbXr8
-myJOqW1B
-=mmHi
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcz4J8ACgkQFHw5/5Y0
+tyyjswwAp8sCOh+xhiSRSm09YJzhKDnqDm09shiHN+jzbWMWuCE9CaiyYKVf98Tm
+CLvVIZ+yJbxClL7rbpVYNxpPra4xffZ6UvLiCjn8iGyobOL9z8hfq9FQXa4pYVWW
+SjYolWsBSIaP59LolkDtuuVPK7Orp2FLQM7ymlWTRrdh5PJPbREE9FSuHPuZ4OLN
+osnH/jZZ1g84Ri4xYCsOrw3VBK9qgl+yaW+DYjzyQfa6D821/CwTicOmIyaeHMZH
+GtrV03pt95//u1SwDukq0ZbwMHHKX0SKE6lU6INAQDlLLu3n7vQJS/idrOb7d9++
+exbVBsPvYEmJKzomE2ELCBy1t255k915GKbW7p3c6zRvc+t/KZ87nB4LEEeFjKRr
+feK6M0MTcYiAdZIJK2IB9ZYbqFedT42J7zmkb377Vm4m9hrgP6jCbiMxtFfFRTOd
+bhWwRAs9IilNegXwamWaTrKDsibrMQ7tHeNcWPmajVkZVgYBqCcJUNINsk4ieMoP
+b3kRR95P
+=mZiD
 -----END PGP SIGNATURE-----
 
---w+ir41qT7Y985cdP--
+--dbyoobo02OlySp5X--
