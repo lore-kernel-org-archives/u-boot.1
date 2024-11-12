@@ -4,37 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B222D41D44
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:50:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0403D41D46
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:51:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A4C588E78;
+	by phobos.denx.de (Postfix) with ESMTP id 8F11A893B9;
 	Tue, 12 Nov 2024 03:47:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7F8A89383; Tue, 12 Nov 2024 02:53:46 +0100 (CET)
-Received: from smtpbgsg2.qq.com (smtpbgsg2.qq.com [54.254.200.128])
+ id 292B289394; Tue, 12 Nov 2024 03:26:07 +0100 (CET)
+Received: from smtpbguseast2.qq.com (smtpbguseast2.qq.com [54.204.34.130])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E127C8904A
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 02:53:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8928289383
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 03:25:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=linux.starfivetech.com
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=hal.feng@linux.starfivetech.com
-X-QQ-mid: bizesmtpsz5t1731376337tu9slxe
-X-QQ-Originating-IP: rxajmnZs7layJczrZcLYSszcR1QY7old+BVRD3RLHAg=
+X-QQ-mid: bizesmtpsz6t1731378296t8ger5z
+X-QQ-Originating-IP: 7Rq4y8v1SlzQn7lOdDBEaLiX5UREc23E1Ec+4ggWNe4=
 Received: from [192.168.125.182] ( [183.27.99.69])
  by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 12 Nov 2024 09:52:16 +0800 (CST)
+ id ; Tue, 12 Nov 2024 10:24:54 +0800 (CST)
 X-QQ-SSF: 0000000000000000000000000000000
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 721915833505858517
-Message-ID: <A6BDA210C0B1EBD7+29e1a846-b4e0-4bba-adee-8bbbc6db7841@linux.starfivetech.com>
-Date: Tue, 12 Nov 2024 09:52:15 +0800
+X-BIZMAIL-ID: 11365542632168157020
+Message-ID: <3F07CA2BB3D8B31A+95145369-d997-41e3-a8f0-28417f9ab840@linux.starfivetech.com>
+Date: Tue, 12 Nov 2024 10:24:54 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 01/13] dts: starfive: Switch to using upstream DT
+Subject: Re: [PATCH v4 03/13] dt-bindings: Remove StarFive JH7110 clock and
+ reset definitions
+Content-Language: en-US
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Hal Feng <hal.feng@starfivetech.com>
 Cc: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
@@ -45,31 +47,30 @@ Cc: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
  Conor Dooley <conor.dooley@microchip.com>, Nam Cao <namcao@linutronix.de>,
  Bo Gan <ganboing@gmail.com>
 References: <20241111020808.38974-1-hal.feng@starfivetech.com>
- <20241111020808.38974-2-hal.feng@starfivetech.com>
- <75aab841-5e11-46b1-b747-59059a7fc4cd@gmx.de>
-Content-Language: en-US
+ <20241111020808.38974-4-hal.feng@starfivetech.com>
+ <da0f9fde-4ddc-4f03-ad3f-21887a967d94@gmx.de>
 From: Hal Feng <hal.feng@linux.starfivetech.com>
-In-Reply-To: <75aab841-5e11-46b1-b747-59059a7fc4cd@gmx.de>
+In-Reply-To: <da0f9fde-4ddc-4f03-ad3f-21887a967d94@gmx.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtpsz:linux.starfivetech.com:qybglogicsvrgz:qybglogicsvrgz5a-1
-X-QQ-XMAILINFO: NpWR2/YALQX3CR9tjfDPnf9kichJhU0SkTBmwJ3C5ynAJzWFwu9BH8VV
- EueCQEdhKdzgdmjYA4KEFTZ0UluB923cFBqMLI0DOhfPGKSEjNFUukXkAnx3vOGZPlsGHBl
- ye3qXySLmpE/evkbZ0n8JSyEsqjEZOwOviIqFuy3vTkHyL3q4EI61RdcmEWgBs17PH/ei1+
- zUm6JqcELO62Ft3p6KPXLfTn/+AERstXN7hgQJp4l9TdRWIr1JrqQqmpm7BE3fulKtiUnvz
- 39UZOZYSshyF/IepoaYD/lRzLB2IIFt6MmaI2YBn47sT+/9VyRLO4vZfO7uD/aqT55ORo2z
- Ue1ud6d/UEE8MJQIrS0OENLYQuI8fEC3DBIDsaFa7VpqagAywEdxtL9ILoUBnzxjjaBWYL4
- zYPCKQ9Wd4XPvZ1MhQ0ZADW/+OqslzKqWsFoBR/20hBzDbZazVl/SiAw+FDtrFs0X44ZHmM
- BHJJM205DIbFYah/2xM/pTRMsuTrPBFt+QJIZHwI6qL62sLlKmKcnlk067hmGT8g/0MyKWc
- x2Idl5rDPtKgjjMX4ZljgVyGuKxj9lYIRu6h4lFmbHPGgoRgTBCKqi/2kQU49IJggnZEQdl
- 2vXtlvz3IJZR2QRU77UlUNu130xVohjei2dSZlG8PtuGwQRwEgsVVw/5lH/anodIHmM3QMF
- aAVuXs8ZJ2958LiYViwXbB/cpaApQWTvDVeczDMXY0aHbtT4KmTuFVs77RI5gAH5NZw0/3B
- Ie1STcT/rCSbSq4u1z4kxzq9j2Yhcr+wiWBb2Sh8BPdIA+y8UsOoT1N/+APfbJUzM18Kov/
- bn0fblE897g2uREx+WzBeQipCqqeHMMbGo8AnkakPodX/sR55hx/6fMC7m6BtWxUmxFz8Ez
- zse3yEz1bXlpFvknbPLUcT+jvsMNwpyHeufB+Bn9OItJvCMGXBG1yDwAe4v3vfx0sDhrY4i
- 2pmNzS66YIuiX/gyq6PP56IMR
-X-QQ-XMRINFO: MPJ6Tf5t3I/ycC2BItcBVIA=
+X-QQ-XMAILINFO: N/SjMk6IgvyQ7nCWjSPo+xseR+kh9FwYZZz3Gi3OI3RG87gtsC2SmIFa
+ rmSQNL8XQDDuK9icv3/zYJQc9rGjdkRB4uDGjyNzpKLg6q2bArpAxZYpLnVOPoghqc65eFs
+ 7QJRaQhww7jrm6SkU6cLvTzXgsfbOcVtKM8X0cFYDvSyNge2TpZYzS0Vk0wnhsj4YVu473x
+ c9kCk6AMHlIx1ZUpRHSyMO5BKE2A/PXxMqLphMWYdbYWtRzedoJfJR7NpOHa2prPXdutVsG
+ sz7bJizxnUtzHdPKpdCDR4YMAL6EEKUqqlz9x04ArT4u40Y9Kgf+pCDbRZKOswaqGVwc0OB
+ kZHUyUvMhcDaaMDFpW/XjU2tFjvKNqTrOHonUqiThogBR4ectwOX1Gt4uQX2maY8wANB16m
+ /EX3mWaJuZ66ZB/5UQIdlCvlHeBW0JaWtxcVuC4RoyLbYLb5jxfZnC9iBK+NBm5D4b0YxaD
+ xA2tP11DS/g5U6vXbsgpkogPAe/NwRpQOqKLOs5dXt6rLE+PtKRsM45gmwmCq97t5168l6V
+ adoz8OWGsVPZniPPLoZorIlelL7Pqjr52t1nx4my4zSxbIUgQOmJ38PweYZh0JrxJyTGx0Q
+ n6YHr/YjsjExlf9qnbrg424gr7vyo219jGV3s0PO/0seq8epGUgQH5PYIk+YbOgOIwOeiPQ
+ J4hWnVx18xTHQDd69mEMDecYJ0hJ7v0LIdHaOQVK2hP8LWMXyr9kaxcWiX08Bqxi8j+FWVB
+ AGTKacDqkFpps/53KU3YQT7DstWhZWuBwrI+6qhEss9gi0LNvact9b/KBfZHsjgmXh6uinB
+ XPvCyWIS9Zd1GYOFmlNrMX3lCAnATG+vuCuw/uTKtsNN/1I1k3gqL1iCLnPp5XaGMvIfC9k
+ Tb9uqluXO7EheViEXmmED5P6TSkUEajePdozTFOeJXuW8pGUjbDpC3TcX7Ozk/xe3jrW4na
+ qc0fnuw5CCjn9isah/3k0TuTgdCe2YcL2vTY=
+X-QQ-XMRINFO: MSVp+SPm3vtS1Vd6Y4Mggwc=
 X-QQ-RECHKSPAM: 0
 X-Mailman-Approved-At: Tue, 12 Nov 2024 03:47:32 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -88,66 +89,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/11/2024 5:56 PM, Heinrich Schuchardt wrote:
+On 11/11/2024 6:52 PM, Heinrich Schuchardt wrote:
 > On 11/11/24 03:07, Hal Feng wrote:
->> Enable OF_UPSTREAM to use upstream DT and add starfive/ prefix to
->> the DEFAULT_DEVICE_TREE. Rename jh7110-starfive-visionfive-2-u-boot.dtsi
->> to jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi and set
->> the v1.3b device tree as the default device tree.
+>> As JH7110 switch to use OF_UPSTREAM dt-bindings,
+>> remove the redundant clock and reset definitions.
 >>
 >> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
->> ---
->>   arch/riscv/cpu/jh7110/Kconfig                                   | 1 +
->>   ...boot.dtsi => jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi} | 0
->>   configs/starfive_visionfive2_defconfig                          | 2 +-
->>   3 files changed, 2 insertions(+), 1 deletion(-)
->>   rename arch/riscv/dts/{jh7110-starfive-visionfive-2-u-boot.dtsi => jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi} (100%)
->>
->> diff --git a/arch/riscv/cpu/jh7110/Kconfig b/arch/riscv/cpu/jh7110/Kconfig
->> index e5549a01b8..9904a60ddd 100644
->> --- a/arch/riscv/cpu/jh7110/Kconfig
->> +++ b/arch/riscv/cpu/jh7110/Kconfig
->> @@ -19,6 +19,7 @@ config STARFIVE_JH7110
->>       imply MMC
->>       imply MMC_BROKEN_CD
->>       imply MMC_SPI
->> +    imply OF_UPSTREAM
 > 
-> IIRC the imply statement should be sorted in the sequence of appearance
-> in .config to avoid dependency issues. In a follow up patch to this
-> series you might want to sort the whole list of imply statements
-> accordingly.
+> After merging patches 1-3 I get:
 > 
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>   CC      env/common.o
+> drivers/clk/starfive/clk-jh7110.c: In function ‘jh7110_stgcrg_init’:
+> drivers/clk/starfive/clk-jh7110.c:498:36: error: ‘JH7110_STGCLK_USB_APB’
+> undeclared (first use in this function); did you mean
+> ‘JH7110_STGCLK_USB0_APB’?
+>   498 |         clk_dm(JH7110_STG_ID_TRANS(JH7110_STGCLK_USB_APB),
+>       |                                    ^~~~~~~~~~~~~~~~~~~~~
+> 
+> We want git bisect to work. This requires successfully building after
+> each individual patch.
+> 
 
-OK, will add a new patch to sort this list in the next version.
-Thanks for your review.
+Got it. Will make some changes to make sure git bisect works. Thanks.
 
 Best regards,
 Hal
-
-> 
->>       imply RISCV_TIMER if (RISCV_SMODE || SPL_RISCV_SMODE)
->>       imply SIFIVE_CACHE
->>       imply SIFIVE_CCACHE
->> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
->> similarity index 100%
->> rename from arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
->> rename to arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
->> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
->> index 11e1332f87..40f553816e 100644
->> --- a/configs/starfive_visionfive2_defconfig
->> +++ b/configs/starfive_visionfive2_defconfig
->> @@ -9,7 +9,7 @@ CONFIG_SF_DEFAULT_SPEED=100000000
->>   CONFIG_ENV_SIZE=0x10000
->>   CONFIG_ENV_OFFSET=0xf0000
->>   CONFIG_SPL_DM_SPI=y
->> -CONFIG_DEFAULT_DEVICE_TREE="jh7110-starfive-visionfive-2"
->> +CONFIG_DEFAULT_DEVICE_TREE="starfive/jh7110-starfive-visionfive-2-v1.3b"
->>   CONFIG_SPL_TEXT_BASE=0x8000000
->>   CONFIG_OF_LIBFDT_OVERLAY=y
->>   CONFIG_DM_RESET=y
-> 
-> 
-
-
