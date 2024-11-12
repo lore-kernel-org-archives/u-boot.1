@@ -4,89 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A942D32D8C
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 10:26:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A80A4D32D8B
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 10:40:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4081893C2;
-	Tue, 12 Nov 2024 11:26:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 1381289215;
+	Tue, 12 Nov 2024 11:40:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AVnCfa0l";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Yd17DxFV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A64378931D; Tue, 12 Nov 2024 11:26:51 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 19468893B6; Tue, 12 Nov 2024 11:40:15 +0100 (CET)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3CC2893BC
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 11:26:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3520F88B9F
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 11:40:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 83C8A3F215
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 10:26:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1731407208;
- bh=vEVjBcCw7DPTgRmI9UO+Tg4tnBGoY70B4ucpCdvZ3+o=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=AVnCfa0l1fuHRWPOzLckY0iYve1womnZbW4SZwvg3gQfGrUZSiE6DCrFAgjGLBmsu
- NX1DUJYnjfk3UBFGSkNNDGlcHrFlkVAwjtP0Cz9RAnfBFMfAwb/7fMnaE1e/Anhnee
- nfVv523r6SUpYCzN+VJi+4EOFAMAA0kQcQIJu0EHrYhJtihmSvDN4s3lHxnd999Us7
- CuFn6lB04VDIe9xpoR7Um8oYjPcLL5Y4xpyCYPZ1QNLsZ8MJS53sLpzxIBcAJ5G2Ac
- C/h5rEC7v2MX+bu1mQ0rzgOB3q/vVrUsDyf1IJcOOclJScDz9QpQw3SFrVsrUFKgwi
- 8gZomxqcUsx5A==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-43159c07193so51244295e9.0
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 02:26:48 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2fb51f39394so45575891fa.2
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 02:40:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1731408012; x=1732012812; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ek1SnbCqQq1MbWNqXiVwTdKJnSCEdMZgNsG6jicryoU=;
+ b=Yd17DxFVd9mCBT3udjlbSSYgto/pBPnk5f/JMSjJIHmfJCcHqk1DDe61GV9LfQ2NU0
+ gQ374CxmqFaS2S/o7P23TWIVfzx4bc2wSJwozhG4rp+5PFro3ylWWOJ2f4UxdWV4Cebq
+ PqYqNMmGI4iyVXSBIxqArI6JoNgbCZJGlqAo7gpt7DMm8qnT6sKl/9vrPhksLzjibhfU
+ MKgBEal/eUaFg3LqYF34mXbciRW/uVfMKJAWGp5L+cPmGzdqRhlRYBPPZlHjlv0HJIAS
+ ggOIRLBHk+MtHaDng9dYvEwJ/u8mdC7mxZ12SGO8NVEAaOR2+dalicO1kPdiAk3NtFo4
+ mM7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731407208; x=1732012008;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vEVjBcCw7DPTgRmI9UO+Tg4tnBGoY70B4ucpCdvZ3+o=;
- b=gn5AlyQ2akAlJlNqvlEnOO78zMZvBH5WPBQy3fahgdOOvpsvbiN7IPd6OLFLZV0NK6
- 340BQi8TqJG97y5+gqE0SeERoa5v7EdXFewdwayxFFHOliomR+zUSWTVBjULQ8ogQEiM
- no70hk5CZuO1SXp2hnDwve71ZIihw89As9isY7Pi2Czi4qURx3aI/d/d/zx2SUt5PK6S
- AL7L/f81KuL27FJKAr7Qo4iugvYnof5Q3b5c+csDlji1VzcKf4PZt1VGB7hWvHqHIT98
- ogtD0T58xOwH4s230QciWYXI1qoxr9FCTVFpxdV7SD6neGeydMli3sVC+CtN/cE3xm2t
- sBWw==
+ d=1e100.net; s=20230601; t=1731408012; x=1732012812;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ek1SnbCqQq1MbWNqXiVwTdKJnSCEdMZgNsG6jicryoU=;
+ b=KM3vUzSQaFvIKUzZFxXNAZKlWZXaqdPGMJjlGqmmpILx/PMIE7FE+uHnT5gTcGjyce
+ x9SbiAbd4U8b23qnuZg67I61HgpLgWJ6hZ5KE79MMnXX5M1TrEGb/1saz/v8LyAG3cuB
+ 9bdtBiVLF4txh/6v39gx1RvUO0R3EusOGKOXESjzHU+bVF1PhF4Lo9Mc3kU+cT7I+TiP
+ Nk9Im8yNbBodyba8VZmd2tz0j6wU1x5nsTK8fLRLmnkjUdJbJcSvtjWoSKZveLoRA1D7
+ jaaeSJK2ChRb14Tpxx0XH/bhPPhZHd7FLXSwcYrislLgeX0PqEZTDCcCebsS86lM4T1t
+ ceOQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUKLV/RXCgONRamy15c/wCENySpv1WX/+jJZueIZUNHRHtD5Ca0fhUEnv263n+fVNM7GqivYIQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwxMbwmVZCqtbvR1Q+TGVDw3Rj9TkWtQARJ5nusmMhwGslLVR0s
- Asv8et2aBJSaS+s8TMO8Dk9l5T634S8Dm21jQhLWJhKy2ZIj2tw4eqDnpdbxbNcclAZRbKFyRl5
- u/M4zjATI9Twj5B+B6THa8MTmtixvLPdbkcxtvbYsuvW208ds6b3FW9arRSU8eVDPvF0=
-X-Received: by 2002:a05:600c:468b:b0:431:b264:bad9 with SMTP id
- 5b1f17b1804b1-432b7505af7mr174877615e9.14.1731407208094; 
- Tue, 12 Nov 2024 02:26:48 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGjGey2WwnvxY8OyQgRAYgDdIWx+BaiG6BlnwAZ9GZE3UXzLzaI9Liem8ZzsBkGwWgqm4CozA==
-X-Received: by 2002:a05:600c:468b:b0:431:b264:bad9 with SMTP id
- 5b1f17b1804b1-432b7505af7mr174877485e9.14.1731407207774; 
- Tue, 12 Nov 2024 02:26:47 -0800 (PST)
-Received: from localhost.localdomain
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432bbf436ffsm141918695e9.44.2024.11.12.02.26.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 02:26:47 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>
-Cc: Yong-Xuan Wang <yongxuan.wang@sifive.com>, u-boot@lists.denx.de,
- Yuri Zaporozhets <yuriz@vodafonemail.de>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] configs: SiFive Unmatched: add 'nvme scan' to preboot
-Date: Tue, 12 Nov 2024 11:26:44 +0100
-Message-ID: <20241112102644.37459-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ AJvYcCXMof7M/fDnsrF6lK+3T8Rv6IkFjvQ70I7H3q0SmqdRT3JEnWP2FmgLLHKfNeYXlemMkriHJmA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzelGkChlPzw5MbsJZhBZpK64EA4M/3RpRKZXsUag5UqTv8X0d5
+ hWF2f4QrLcAWmTGtmIRu6VkjaPyNCdizsfotdOL4oknDZobYAUe3gtaHzsKwWqTU8+fXQtutlfH
+ i5onyEDkVSXESN8IgHhauJSvk2Ps=
+X-Google-Smtp-Source: AGHT+IFeAk1iZHXXkec5hen2+3Pim75DXa0d8GzjgOV41+g6UIpCXMhU7lJ9Na3OD+8/ILYU1RB5+hAUYP1iJKfMefs=
+X-Received: by 2002:a2e:9b11:0:b0:2fc:9550:d658 with SMTP id
+ 38308e7fff4ca-2ff2028c40fmr52213341fa.24.1731408012134; Tue, 12 Nov 2024
+ 02:40:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241112102415.37335-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241112102415.37335-1-heinrich.schuchardt@canonical.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 12 Nov 2024 07:40:00 -0300
+Message-ID: <CAOMZO5Afp9R_BHVv5Y72YUpRjrLpS083fs_PUenmLv95qHNEAg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] configs: add 'nvme scan' to preboot
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>,
+ Yong-Xuan Wang <yongxuan.wang@sifive.com>, u-boot@lists.denx.de, 
+ Yuri Zaporozhets <yuriz@vodafonemail.de>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,53 +91,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Without 'nvme scan' the ESP on the NVMe drive is not found early.
-EFI variables cannot be persisted.
+On Tue, Nov 12, 2024 at 7:33=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 
-    Hit any key to stop autoboot:  0
-    Cannot persist EFI variables without system partition
-    ** Booting bootflow '<NULL>' with efi_mgr
-    Loading Boot0000 'mmc 0' failed
-    EFI boot manager: Cannot load any image
-    Boot failed (err=-14)
-    scanning bus for devices...
-    ** Booting bootflow 'nvme#1.blk#1.bootdev.part_1' with efi
-    Booting /\EFI\BOOT\BOOTRISCV64.EFI
-    error: no suitable video mode found.
-    GNU GRUB  version 2.12
+The 'configs' in the Subject is too generic.
 
-With 'nmve scan' booting works as expected.
+It would be better to add write:
 
-    Hit any key to stop autoboot:  0
-    ** Booting bootflow '<NULL>' with efi_mgr
-    Loading Boot0000 'mmc 0' failed
-    Loading Boot0001 'nvme 0' failed
-    Booting: nvme 1
-    error: no suitable video mode found.
-    GNU GRUB  version 2.12
-
-Reported by Yuri Zaporozhets <yuriz@vodafonemail.de>
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	mention board in subject
----
- configs/sifive_unmatched_defconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/configs/sifive_unmatched_defconfig b/configs/sifive_unmatched_defconfig
-index 058e5fab683..1ea744ffa80 100644
---- a/configs/sifive_unmatched_defconfig
-+++ b/configs/sifive_unmatched_defconfig
-@@ -27,7 +27,7 @@ CONFIG_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x84000000
- CONFIG_BOOTSTD_DEFAULTS=y
- CONFIG_USE_PREBOOT=y
--CONFIG_PREBOOT="setenv fdt_addr ${fdtcontroladdr};fdt addr ${fdtcontroladdr};"
-+CONFIG_PREBOOT="setenv fdt_addr ${fdtcontroladdr};fdt addr ${fdtcontroladdr};nvme scan"
- CONFIG_DEFAULT_FDT_FILE="sifive/hifive-unmatched-a00.dtb"
- CONFIG_SYS_CBSIZE=256
- CONFIG_SYS_PBSIZE=276
--- 
-2.45.2
-
+sifive_unmatched: add 'nvme scan' to preboot
