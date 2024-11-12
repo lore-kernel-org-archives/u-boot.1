@@ -4,79 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1B70D597A4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 21:12:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF499D597AA
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 21:53:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F117C894A0;
-	Tue, 12 Nov 2024 22:12:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2947088F70;
+	Tue, 12 Nov 2024 22:53:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PPtSI6bo";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BEEA894A3; Tue, 12 Nov 2024 22:12:07 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1731448426;
+	bh=uTsapN8GRsewUGr7+LqoF6gvMusv1iIVoP5Sec/i8Ro=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=CrWvY1Cv9z1YUsEW35w4UlM0jZQNCxLeYNv6WE2aw5KMg3WBCJ0CF2ZBjOKjHCAoU
+	 srxtce/336oQl7IFI+cUNmOSi7MqqZUQFT9o8yQ/Iyu1cucVR093vI7+oOA6G73NR6
+	 pQFkvPlyzGBuyo35LggG/e1t+Ig7qkU8Lo8DE0P8IMPjiV2ZW3c7ZE4xGmkR8S6Xvy
+	 bSJGY7+0AtYkzIEJotWu1NcMSIM2R59QdaFi0qm/AOlZRYGpUXAo30VeoUF3jvV4JI
+	 2VJ8HzkR3IyFGMOGKyBeHfjIhIUriugX7/yEVZ0aP89JS4hQy32JV/xiE95YgexQO4
+	 E5LBaVwDetmEw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFDB28947C
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 22:12:04 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b14077ec5aso8632685a.1
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 13:12:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731445923; x=1732050723; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RvQyylS8ZG/TRGmrQKgQ5B0mKol1zkxVHRmDj2wJGSk=;
- b=PPtSI6boRZIZ1z35XR/Ly0P5pVQ/b7EuNKXfEQy1wdQf62x1jYA5blzWZCiyI41sYs
- qPKlWy55EKxyyGXU6FDqllveEHZ99U2OuoLTMXvh94NLtB31+TLTNnm0iw9q9WlEU7aV
- Yb1dbzVApF8L7f1aIMah4cqSYRG3+xvb+YLvI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731445923; x=1732050723;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RvQyylS8ZG/TRGmrQKgQ5B0mKol1zkxVHRmDj2wJGSk=;
- b=lJsJSVcnSaTZlN1RuYWwD75B9SQjVknnbpnFYRclPqM9vi3r8Jk+ug1tK75ormQ60c
- abA1AKjr0cm2y2e20HcYEiyysG5cFtK2j0X4qV/yU5lh8Nzt/lIDFJGc5s+ns3Xfv8gH
- oTyJjv9gLk0gJ2CnZwNjuNOJOV+1o63wwPwzf6tXDS0MGNcqMsJ9IlPuL8+cGfhe6q+J
- /trykynmFTWdwjuwIvRTXivQ4l+vDa7qCBBEIrkKM/qOukzHUK/Pod/++UlcTb4L/bfa
- grUdMIiFgXkW0WaxhDEkFR9mMD/MlxIFjoNz5Wy4PJH/BvVLbNUAtTYi7fIPCQHqdVJW
- lo6w==
-X-Gm-Message-State: AOJu0YzYraCSTTWMvFWrX+06dRRwuPJ9gc9CpI6IKJCVW57PpqKhVLck
- /5gRz8EBF4A8gRCGhjhlvyOazdFgN4BhBSnITMlzJNoU2tOOyqO4Q+QO1Eq44q4=
-X-Google-Smtp-Source: AGHT+IHmDJohccLSHglnMm+FTLbLoTbFP7Qo5QtEbNMpTQR944qL0tuEF9lJTNtoZq+YrM8Ilq8Phw==
-X-Received: by 2002:a05:620a:424d:b0:7b1:ab32:b71e with SMTP id
- af79cd13be357-7b3327bd559mr2609209585a.0.1731445923404; 
- Tue, 12 Nov 2024 13:12:03 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b32acdee2bsm630223385a.104.2024.11.12.13.12.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 13:12:02 -0800 (PST)
-Date: Tue, 12 Nov 2024 15:11:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] Revert "efi_memory: do not add U-Boot memory to the
- memory map"
-Message-ID: <20241112211158.GY3600562@bill-the-cat>
-References: <20241112131830.576864-1-sjg@chromium.org>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 47E7588D9E;
+ Tue, 12 Nov 2024 22:53:45 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1731448425;
+ bh=uTsapN8GRsewUGr7+LqoF6gvMusv1iIVoP5Sec/i8Ro=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=WvBOWbbp0xLKIzDf7qawuFYN1aFURCSJbOeIS4TJKD2OdJXapVFgJ55dA6KfnmRw8
+ boNzTbBGW0YkxbwyGE5X4O8xuUbyO5QDWxV0CrjcbNPAxiZTSoPkWhH5o3LfzlRGTX
+ +140NcdJM51zI5zKs3r9xLbThN9sU/41OmofTrWROnFnzh6oOmNFfE6lKiMZoJ592V
+ qn71qMCVuCuXDxiN2lr/BgIu+Fz52g9FbM1JfkP7rDfgimmj+dzJ7lU30+1gUROGyU
+ Cc6V3E0oqngQj5x1mVOBiHdoSTOFejBNcN1Hl38fPx8RYI+Q4qd+GHs+Lv1i2Zf2y0
+ YfTm6FMfQONsg==
+Message-ID: <5c4c73e1-4b47-427a-b84c-099b044d07a8@denx.de>
+Date: Tue, 12 Nov 2024 20:45:26 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rbI3dz91BLFG5fWM"
-Content-Disposition: inline
-In-Reply-To: <20241112131830.576864-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 3/7] usb: onboard-hub: add support for Microchip
+ USB5744
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "Simek, Michal" <michal.simek@amd.com>,
+ "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
+ "git (AMD-Xilinx)" <git@amd.com>
+References: <20241112050740.15343-1-venkatesh.abbarapu@amd.com>
+ <20241112050740.15343-4-venkatesh.abbarapu@amd.com>
+ <d61ab683-744d-4024-a5d3-71b372e85d02@denx.de>
+ <SA1PR12MB869770E331845B38B0BC2AC098592@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <SA1PR12MB869770E331845B38B0BC2AC098592@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,49 +75,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---rbI3dz91BLFG5fWM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Nov 12, 2024 at 06:18:30AM -0700, Simon Glass wrote:
-
-> A bisect of Ubuntu 2022.04 boot-failure on qemu-x86_64 resulted in this
-> patch. I am not sure how to investigate it.
->=20
-> The boot hangs at some point during booting of the install image, before
-> the Ubuntu logo appears.
->=20
-> I will sent a series with a script showing how it is run.
->=20
-> This reverts commit a68c9ac5d8afc51c619c5d3e865fcf147bea90cb.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-
-You forgot to prefix this with "RFC" or "DEBUG" as we're not going to
-revert these changes, but we'll figure out why x86 doesn't behave like
-arm and riscv do and then Fixes the resulting commit. Thanks.
-
---=20
-Tom
-
---rbI3dz91BLFG5fWM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmczxJsACgkQFHw5/5Y0
-tyynqwv+OjE1vDsIr1KGFS2rTKqa0v+LAuQoUJt/ea1Q5POhF3djTxHLV/Zq9ET/
-dskvjHInx+riJfSUfhrz4+el6Yi9YeOwLgNYqCkxUxC6J7ZihzlfotqbiqKi/ICa
-DOgwznzwlCCNP9HziiI1eUAAbXh1Q5obZE0DLEY4xIgNN3a0I9yX7ivhRWBsEyyy
-11uJKu/Hzg3AxgI5cTT0rq9AbcLzCjIvtmy3Uimmn/Tp32BHjcfWF2qons8MvUPb
-RQK5D3hGHMGMYI1H5RHLmqzg/07TWaP58auxQFmXar2g/4LA5TyoWKxJOkfCBrRT
-u066u5OcXiGN32B4EpTrNxi3VUs3bw6zjfFjIzXDX3M9tHxNCTeddDz9+KVcrIOE
-E5BfH9oYtWgHgpVF1j8E6jhErgeJVQKanJZDCa5mxFhnuV+Vgi0guDXAo4kREk66
-sYIE/62tH662XnBqMINojPcM6UaCmG38a3+9ikHQY4o75GfUWVX2FNdyBji3obzz
-2r7ur35t
-=JmQN
------END PGP SIGNATURE-----
-
---rbI3dz91BLFG5fWM--
+On 11/12/24 7:42 AM, Abbarapu, Venkatesh wrote:
+> Hi,
+> 
+>> -----Original Message-----
+>> From: Marek Vasut <marex@denx.de>
+>> Sent: Tuesday, November 12, 2024 11:28 AM
+>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; u-boot@lists.denx.de
+>> Cc: Simek, Michal <michal.simek@amd.com>; fabrice.gasnier@foss.st.com; git
+>> (AMD-Xilinx) <git@amd.com>
+>> Subject: Re: [PATCH v11 3/7] usb: onboard-hub: add support for Microchip
+>> USB5744
+>>
+>> On 11/12/24 6:07 AM, Venkatesh Yadav Abbarapu wrote:
+>>> Add support for the Microchip USB5744 USB3.0 and USB2.0 Hub.
+>>> The usb5744 driver trigger hub reset signal after soft reset.
+>>> The usb5744 hub need to reset after the phy initialization, which
+>>> toggles the gpio.
+>>> Also update the usb2514 hub_data with the reset delay as 1us.
+>>>
+>>> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+>>> Reviewed-by: Marek Vasut <marex@denx.de>
+>>> ---
+>>>    common/usb_onboard_hub.c | 20 ++++++++++++++++++--
+>>>    1 file changed, 18 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c index
+>>> 827ecf9b02..1d146eccee 100644
+>>> --- a/common/usb_onboard_hub.c
+>>> +++ b/common/usb_onboard_hub.c
+>>> @@ -88,10 +88,26 @@ static int usb_onboard_hub_remove(struct udevice *dev)
+>>>    	return ret;
+>>>    }
+>>>
+>>> +static const struct onboard_hub_data usb2514_data = {
+>>> +	.reset_us = 1,
+>>> +};
+>>> +
+>>> +static const struct onboard_hub_data usb5744_data = {
+>>> +	.power_on_delay_us = 10000,
+>>> +	.reset_us = 10000,
+>>> +};
+>>> +
+>>>    static const struct udevice_id usb_onboard_hub_ids[] = {
+>>>    	/* Use generic usbVID,PID dt-bindings (usb-device.yaml) */
+>>> -	{ .compatible = "usb424,2514" }, /* USB2514B USB 2.0 */
+>>> -	{ }
+>>> +	{	.compatible = "usb424,2514", /* USB2514B USB 2.0 */
+>>> +		.data = (ulong)&usb2514_data,
+>> This ^ hub has to be updated in 1/7 , otherwise if only 1/7 is applied (e.g. during
+>> bisect), this hub reset will be operated out of specification.
+>>
+>> Also, looking at the USB2514 datasheet figure 5-3, it seems the hub needs t4=500us
+>> recovery time in SMBus mode. Does that mean usb2514_data .power_on_delay_us
+>> = 500 is missing too ?
+>>
+>> Also, it seems t_rstio is 5us in USB5477 datasheet figure 10-4 , where do these
+>> 10000us figures above come from ?
+> 
+> We were seeing i2c failures when we update the reset delay and power on delay values mentioned from the datasheet so updated to 10000us, the linux reference is below
+> https://github.com/torvalds/linux/commit/908f61bedb2c40c6d856bbfd7f870b967a4cb498
+Is there a matching delay requirement specified in the USB hub datasheet 
+or is this a workaround for some board-specific behavior ?
