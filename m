@@ -4,77 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85FADD3ABF5
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 20:45:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C52ED41D45
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 02:11:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7469889387;
-	Mon, 11 Nov 2024 21:45:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CF229893A6;
+	Tue, 12 Nov 2024 03:11:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iLovTAxZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Oys7O9j6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EFE98938F; Mon, 11 Nov 2024 21:45:09 +0100 (CET)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id C27AC893AB; Tue, 12 Nov 2024 03:11:42 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C16D8936B
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 21:45:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D87F89380
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 03:11:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-7f4324503d7so2286998a12.3
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 12:45:07 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7b155cca097so436598985a.1
+ for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 18:11:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731357905; x=1731962705; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nBYZ+1yLicWhvTkEbxs3eEqwvfEAmco8ZnXskuPUY5Q=;
- b=iLovTAxZDKlpZ3A4H4egzmxYUd/V/PDJmPr0B1XXkz1A1ZfsY8SYrxuVezTqkUPfYM
- kQZOKlETPHt1tCgxkLnwKzijfTrNlRplyYFzctoY5N7SbMhGTEVMn6Rk0oGyPDaEGfDR
- qYkUtIkrTIb/+rozRPa4EYYfad+3y99V4nZc93Novxu1t1fWjj9wCnfc+Cz9hTXROeKi
- 793OvpcBzqfKVarvpscM5jYUkbKZZJxhm/XhQUbrLyAmBQT+TlWUst87PRX7YzQ0rZfr
- 39W9CfpBp83PM6l3JCryTwF1flsSpdZXY8fGOO+BPe1IfK6PI+wu90t1pw6SIdDaYuq7
- hcww==
+ d=konsulko.com; s=google; t=1731377499; x=1731982299; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=aWcELHs4WrdkPZe6zAgNCAvuD8bVwQIXAFek3/oaQhw=;
+ b=Oys7O9j6C94xlybqZWoyVtGBFowb0Ej7SJgrZCoBAV8Rk2kT6WMLSy1U9DZEXXczSu
+ vDydPSlL0wke6MlSle5YgcHcPuGypKajyVNbwbluE96b5TdLovbpTAqo40P/ASErj7eS
+ 2nIXLgZyU6yIoyocYLIwb6zKXpuiICSZxK2X4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731357905; x=1731962705;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nBYZ+1yLicWhvTkEbxs3eEqwvfEAmco8ZnXskuPUY5Q=;
- b=M01FNRI23hX8Eblt9QNbzgg4w4LSwB9reKE85nXO1DWAV6SeHbcbqnNmmXfWGo6D64
- y3/UKxsPv4EHYtn7IORz475LNie9CVK2N4fcJVU4RX2DqkeO1qF5rOBK0JO1HY6xaLhl
- lrK9r9y0JvawiJQLlzc8fDbIqWeHaygeArH0yiCw8+QhWUAw8xjILnCgEBjoYODImpVe
- 6KnsXeI9rljtpgI+6f//uOev9Wbz81kjHnXH+h4SSX0m1pycPD3vMnYF+XtrhzlnImAZ
- 8yp7gQn3ybehf9Im2BPIzEM/4pNLusPVW6GOS85/fZBT9KnP8tGwNwE5Llf9zOBOe2Py
- MVsg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXlU750h9dm7LeA8wOnILICmUI1sIk/Kr+MZs1Nr05rTHUIfA0XSoYwOpAruC09rnJY82ZIqf0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwHGya3ThbwzrGpml23Iy2K/yMulCD6S/AIvrNnIbeQovz2vLzs
- 9wNpvlPuWfQFVU0ENJvDMQucRFrMAmLtlavZXrt52ugEda3Q0loIQRvKiZtQnkLHZI0sChuMsyV
- g59I292jDVye7f3f32cEk/wQNj/xluB34AD+LdA==
-X-Google-Smtp-Source: AGHT+IGfwuccRsEk+AP20tqdAleJHbuTUM5GvqozUHg/dojlf6jkb8z9xaOmY2XdDf+8ZySWOT4ihP+d8EPLLvOh1p0=
-X-Received: by 2002:a17:90b:2ecb:b0:2e5:5ab5:ba52 with SMTP id
- 98e67ed59e1d1-2e9b173f1ddmr18863135a91.20.1731357905629; Mon, 11 Nov 2024
- 12:45:05 -0800 (PST)
+ d=1e100.net; s=20230601; t=1731377499; x=1731982299;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=aWcELHs4WrdkPZe6zAgNCAvuD8bVwQIXAFek3/oaQhw=;
+ b=MlG55gG9bWbWuhKddaI7MWiEwDUAXsPuga5EPs0WyWdBg6ZrpqNQxAoaHxy6ZvNBAl
+ lyQ6m4kymKCpu/IHrda7xGlJlOXvPpm90rAUUcAAvO+b5RlQw9I+oZUZlIABv29cAKZH
+ 32l4nX3tuJPe68/WeVIkbNbSJNB0lY8wUOUYCmw+/5ulhsCAzQPjSuetRbJ4WssgO/yd
+ NtmcHLBEXr7Mi1FhxnkUQZ9RB+RFUNxO/Vwe0iAjss973cHPjBdnBdpT356KDWAUs3sf
+ w47Uof09c3vkULugOsvr9yR6LE1EbYk0mniDBlF/fQBOHbrv3rCV/7oyiBL77u0YCFYh
+ zuVw==
+X-Gm-Message-State: AOJu0Yz26BdAkSLqX6PWwIqMDAeGqK00oKIx0PYNPTB7Fx57+rXrkq2V
+ mrN/kYTjiJhxjVSc+yfWUbE1bmwZSfxMS3cdxRRyy/bohk8uQs623jfs5RjYTpCIoo87KFH4avL
+ wH84=
+X-Google-Smtp-Source: AGHT+IGEr8wT2sexfK83/4jtwzkTr0A7WieBROipgI6bxqRsPpgd1Gj3lfblsRw8lklBA5/ZAQmKDA==
+X-Received: by 2002:a05:620a:3948:b0:7a9:a356:a5dd with SMTP id
+ af79cd13be357-7b3329329bamr1839864785a.20.1731377499360; 
+ Mon, 11 Nov 2024 18:11:39 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b32ace7c70sm546902885a.113.2024.11.11.18.11.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Nov 2024 18:11:38 -0800 (PST)
+Date: Mon, 11 Nov 2024 20:11:35 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Heiko Schocher <hs@denx.de>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20241112021135.GX3600562@bill-the-cat>
 MIME-Version: 1.0
-References: <20241103035015.29486-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241103035015.29486-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 11 Nov 2024 22:44:29 +0200
-Message-ID: <CAC_iWjKytfnvZai4ZT-s83wB5wB_rn-2Mkv0FTNov8BrBn0Lcg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] lib: vsprintf: fix API build
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Raymond Mao <raymond.mao@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9wVK/HKjURB96Ovn"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,43 +86,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 3 Nov 2024 at 05:50, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Avoid a build failure when building with CONFIG_API=3Dy, CONFIG_EXAMPLES=
-=3Dy:
->
->     lib/vsprintf.c:312:14: warning:
->     =E2=80=98device_path_string=E2=80=99 defined but not used [-Wunused-f=
-unction]
->      312 | static char *device_path_string(char *buf, char *end, void *dp=
-, int field_width,
->          |              ^~~~~~~~~~~~~~~~~~
->
-> Fixes: 64b5ba4d293a ("efi_loader: make device path to text protocol custo=
-mizable")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/vsprintf.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/lib/vsprintf.c b/lib/vsprintf.c
-> index e5802866632..c7340a047b2 100644
-> --- a/lib/vsprintf.c
-> +++ b/lib/vsprintf.c
-> @@ -308,7 +308,7 @@ static __maybe_unused char *string16(char *buf, char =
-*end, u16 *s,
->         return buf;
->  }
->
-> -#if CONFIG_IS_ENABLED(EFI_DEVICE_PATH_TO_TEXT)
-> +#if CONFIG_IS_ENABLED(EFI_DEVICE_PATH_TO_TEXT) && !defined(API_BUILD)
->  static char *device_path_string(char *buf, char *end, void *dp, int fiel=
-d_width,
->                                 int precision, int flags)
->  {
-> --
-> 2.45.2
->
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+--9wVK/HKjURB96Ovn
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Here's the latest Coverity report.
+
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Mon, Nov 11, 2024 at 10:24=E2=80=AFAM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
+
+
+Hi,
+
+Please find the latest report on new defect(s) introduced to Das
+U-Boot found with Coverity Scan.
+
+1 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+4 defect(s), reported by Coverity Scan earlier, were marked fixed in
+the recent build analyzed by Coverity Scan.
+
+New defect(s) Reported-by: Coverity Scan
+Showing 1 of 1 defect(s)
+
+
+** CID 514648:  Control flow issues  (MISSING_BREAK)
+/tools/imx8image.c: 93 in parse_cfg_cmd()
+
+
+___________________________________________________________________________=
+_____________________________
+*** CID 514648:  Control flow issues  (MISSING_BREAK)
+/tools/imx8image.c: 93 in parse_cfg_cmd()
+87              sector_size =3D get_table_entry_id(imx8image_sector_size,
+88                                               "imximage boot option",
+89                                               token);
+90              if (!strncmp("emmc_fastboot", token, 13))
+91                      emmc_fastboot =3D true;
+92              break;
+>>>     CID 514648:  Control flow issues  (MISSING_BREAK)
+>>>     The case for value "CMD_DCD_SKIP" is not terminated by a "break" st=
+atement.
+93      case CMD_DCD_SKIP:
+94              if (!strncmp("true", token, 4))
+95                      dcd_skip =3D true;
+96      case CMD_FUSE_VERSION:
+97              fuse_version =3D (uint8_t)(strtoll(token, NULL, 0) & 0xFF);
+98              break;
+
+
+___________________________________________________________________________=
+_____________________________
+
+--=20
+Tom
+
+--9wVK/HKjURB96Ovn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcyuUwACgkQFHw5/5Y0
+tyys3AwAgKGKhmm7m6sUMd5Km1/r/Ziow/PCxneQCZ8KIAflFAJYo/5uECq82hFO
+nLbhjD+c623T2nQSB0xjkpwM7hQYK+5DWEInOTs82NiRZFs6OZKUAwukZpUscp6E
+Cl2NsikbHdhoxybDdnsR2MJr65IqfChqtLEvmTRaRXvDy+XDD4DbrH/SWDs9zg14
+FSZhlmu7+LJDdzK9qoZYYhpcTLAHC5s84uFVMV9+ePjFlvNSl4zEv3U95dl/pCby
+YN0U3R7N/ARv8zmFoyOMd+5mxR7JxR9G7RkI6lqK2p445GzKKB0aoJbB0Cuf74BW
+FH1Xqa2ca8Ib3AQxFDWgo8yt3B1oOM9uD1Oa7FuTwXDpg/zHTau4BJmXDoUwlPyd
+R6ZQRwR/TrwYTLmxV6mfFjkpSitoCvPCSTDiuzdiwbLytl0EUGJ2I1br94d/AAe/
+RlYwwLz5yQtj31EHbo1UIZEgus9oIPdLM1WAXwqNOh8fVqZugPvKSeYGuip2qXs6
+RxaDf7WN
+=VRI6
+-----END PGP SIGNATURE-----
+
+--9wVK/HKjURB96Ovn--
