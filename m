@@ -4,64 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31F54D42B83
-	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 13:57:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF8EAD42B83
+	for <u-boot@archiver.kernel.org>; Tue, 12 Nov 2024 13:59:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67BAB89426;
-	Tue, 12 Nov 2024 14:57:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 253B689440;
+	Tue, 12 Nov 2024 14:59:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="qvLAYgty";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="bY1EIKjU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iWtJWmn9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5883289431; Tue, 12 Nov 2024 14:57:48 +0100 (CET)
-Received: from galois.linutronix.de (Galois.linutronix.de
- [IPv6:2a0a:51c0:0:12e:550::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F0BE7893C2; Tue, 12 Nov 2024 14:59:22 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D444893C2
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 14:57:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE19989431
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 14:59:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=b.spranger@linutronix.de
-Date: Tue, 12 Nov 2024 14:57:45 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1731419866;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Ss90qWl/Qxk2e5xYh9eUgvPCBc3Di1ys9vJEXQY1FaI=;
- b=qvLAYgtypAwlfKhClKZlrzpWHyCwijpOyB2dr8FBHWwDoQFFtCt9FXOc6pvDqONyI6YuuC
- aHpokaW7pw5oBWMjMRP1m367cUvhWrPRit6BRszCJA12d6i8wHeEYQ98r5nPEJJjs6pjp8
- 5rJlAL1CXgAf7VXC/0/zgZsvo0f/FPIgYAAzUeD8U8Suh5+umKKXmvOrnnxygc1gttmDdX
- g8BlpjTOhumcqoGu7uX9N2JDdQBjBkC2sfZihyj3EqNt6IMN4I0NRV4G2bsmMwfA8rouF/
- okLJp4pzYZ1C53zg6u7pERJ6eYFNntCa9DOFl+xKBkU+RdUR2loufRMWkV1l6g==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1731419866;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Ss90qWl/Qxk2e5xYh9eUgvPCBc3Di1ys9vJEXQY1FaI=;
- b=bY1EIKjU42/RVbQjsa4DJdVJI7qJq3cRJwQTf8XKW9Nmj3Y/g3VIJacFe6Boy+3Pz+fgHg
- NdexrtywwB/FdcAQ==
-From: Benedikt Spranger <b.spranger@linutronix.de>
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: John Ogness <john.ogness@linutronix.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH 4/5] mtd: nand: Update NAND manufacturer Ids
-Message-ID: <20241112145745.72d14afc@mitra>
-In-Reply-To: <56e48bdf-0dd0-469a-9acb-7c5b75c1a48e@linaro.org>
-References: <20241018083006.10349-1-b.spranger@linutronix.de>
- <20241018083006.10349-6-b.spranger@linutronix.de>
- <56e48bdf-0dd0-469a-9acb-7c5b75c1a48e@linaro.org>
-Organization: Linutronix GmbH
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-83abe4524ccso222863639f.1
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 05:59:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1731419958; x=1732024758; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DtbbIOccD3ypn8aFqTUyq79fII/Aidcsb4TcLjK5hMY=;
+ b=iWtJWmn9ODhyErv6ylMmpvh6YtNZTtAA1+osDIA7SIPMS8GZHlX4Wql/cXpVXdkawj
+ SfN44O+sdTZEV2bHtzXXVjgUOyWPWsq2JxsZ1sAGbUAuXhl37sMsZ2dqd3YUbIwibAKl
+ x/AiQELvi1PWhhmYZCfGn9hbjn/YFyjNljgZA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731419958; x=1732024758;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DtbbIOccD3ypn8aFqTUyq79fII/Aidcsb4TcLjK5hMY=;
+ b=J9YfuZlugshBcTs0rvIwsznyvfLM2iE4JimseSvSsidUl6nMSCq46PDjj3fgHScjsx
+ /+2aiZ6GH9y6i3+ki+yy+mIOeuoX03rbBlyMuPaA3bw7+I//MKh6XDvwkm0GtuA0kN/7
+ HiIc6zzCt52a4FR6SkZCe7xXRAMd9zZ2c17MIhpEOolqYXlvwhVkMasmyF2nGt5xrv9q
+ 0CC7qt6AjmMJ+UWy/3WDcVIZVwi0943V5OCbXSpFXdVaIDTytIi6VOdM9CszK6I6HMVJ
+ BZ84iNeD4GOsrGCgGas3hyfaYkWAUwFytNiT08eP32a21rJlxgyonK18m8ogOzz6TRhb
+ Qv7g==
+X-Gm-Message-State: AOJu0Yy8FOV/No+zNiQvOl49aPvCuFMp6QAQ8VLkcDKAeTG6MmW1P1en
+ iEIoUgKFP37VbfKjda2S/7i0JvRoJ2IDZ+WB0WScuKniMzVl9MtNeHq66ce6RVUsA82b0b6jD/E
+ =
+X-Google-Smtp-Source: AGHT+IHgOnnp4pNiA/5SFn1eOzk3Qyljr5fR2216TrKppaea3I8TFWkRKb0DCjzu1qnp+gSKHjt49Q==
+X-Received: by 2002:a05:6602:2d84:b0:83a:95fc:b242 with SMTP id
+ ca18e2360f4ac-83e032fa8c5mr1546439339f.7.1731419958358; 
+ Tue, 12 Nov 2024 05:59:18 -0800 (PST)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-83e132c01besm189203039f.30.2024.11.12.05.59.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Nov 2024 05:59:17 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ qemu-devel@nongnu.org
+Subject: [PATCH 00/18] x86: Improve operation under QEMU
+Date: Tue, 12 Nov 2024 06:58:53 -0700
+Message-Id: <20241112135911.630586-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,38 +100,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 Nov 2024 15:39:23 +0200
-Eugen Hristev <eugen.hristev@linaro.org> wrote:
+U-Boot can start and boot an OS in both qemu-x86 and qemu-x86_64 but it
+is not perfect.
 
-Hi Eugen,
-> On 10/18/24 11:30, Benedikt Spranger wrote:
-> > Align manufacturer Ids with the Id list from Linux kernel v6.11.
-> > While at it, sort the entries in alphabetical order.
-> > 
-> > Signed-off-by: Benedikt Spranger <b.spranger@linutronix.de>
-> > Reviewed-by: John Ogness <john.ogness@linutronix.de>
-> > ---
-> >  drivers/mtd/nand/raw/nand_ids.c | 22 ++++++++++++----------
-> >  include/linux/mtd/rawnand.h     | 23 +++++++++++++----------
-> >  2 files changed, 25 insertions(+), 20 deletions(-)
-> > 
-> > diff --git a/drivers/mtd/nand/raw/nand_ids.c b/drivers/mtd/nand/raw/nand_ids.c
-> > index 4f46378ffe1..e40facf774c 100644
-> > --- a/drivers/mtd/nand/raw/nand_ids.c
-> > +++ b/drivers/mtd/nand/raw/nand_ids.c
-> > @@ -180,20 +180,22 @@ struct nand_flash_dev nand_flash_ids[] = {
-> >  
-> >  /* Manufacturer IDs */
-> >  struct nand_manufacturer nand_manuf_ids[] = {
-> > -	{NAND_MFR_TOSHIBA, "Toshiba", &toshiba_nand_manuf_ops},
-> > -	{NAND_MFR_SAMSUNG, "Samsung", &samsung_nand_manuf_ops},
-> > +	{NAND_MFR_AMD, "AMD/Spansion", &amd_nand_manuf_ops},
-> > +	{NAND_MFR_ATO, "ATO"},
-> > +	{NAND_MFR_EON, "Eon"},
-> > +	{NAND_MFR_EON, "ESMT"},
-> 
-> Did you mean NAND_MFR_ESMT here ?
-Yes, fatfingered that...
+With both builds, executing the VESA ROM causes an intermittent hang, at
+least on some AMD CPUs.
 
-Regards
-    Benedikt Spranger
+With qemu-x86_64 kvm cannot be used since the move to long mode (64-bit)
+is done in a way that works on real hardware but not with QEMU. This
+means that performance is 4-5x slower than it could be, at least on my
+CPU.
+
+We can work around the first problem by using Bochs, which is anyway a
+better choice than VESA for QEMU. But this results in the Ubuntu
+installer failing to boot via EFI. It isn't clear whether this due to
+a problem with the UEFI GOP, or something else. It hangs before the
+Ubuntu logo appears.
+
+So this series is unfinished. I thought it best to post what is here in
+the hope that others can help work out the kinks.
+
+
+Simon Glass (18):
+  scripts: Add a script for building and booting QEMU
+  x86: Expand x86_64 early memory
+  RFC: x86: qemu: Switch to bochs display
+  x86: qemu: Enable dhrystone
+  x86: qemu: Avoid accessing BSS too early
+  x86: Drop mpspec from the SPL build
+  x86: Add some log categories
+  x86: Drop use of CONFIG_REALMODE_DEBUG
+  x86: Avoid clearing the VESA display
+  x86: Add 64-bit entries to the GDT
+  x86: Use defines for the cache flags
+  x86: spl: Drop duplicate CPU init
+  x86: Drop the message about features missing in 64-bit
+  x86: Include stdbool.h in interrupt header
+  x86: Tidy up the GDT size in start/16.S
+  x86: Disable paging before changing to long mode
+  x86: Use the same GDT when jumping to long mode
+  x86: Use a simple jump into long mode
+
+ MAINTAINERS                      |   8 ++
+ arch/x86/cpu/i386/call64.S       |  35 +++----
+ arch/x86/cpu/i386/cpu.c          |  18 +++-
+ arch/x86/cpu/qemu/qemu.c         |  20 ++--
+ arch/x86/cpu/start.S             |   4 +-
+ arch/x86/cpu/start16.S           |   3 +-
+ arch/x86/include/asm/interrupt.h |   1 +
+ arch/x86/include/asm/processor.h |   5 +-
+ arch/x86/lib/Makefile            |   2 +
+ arch/x86/lib/bios.c              |  27 +++--
+ arch/x86/lib/bios_interrupts.c   |   8 +-
+ arch/x86/lib/i8259.c             |   2 +
+ arch/x86/lib/spl.c               |   4 +-
+ configs/qemu-x86_64_defconfig    |  10 +-
+ configs/qemu-x86_defconfig       |   6 +-
+ doc/board/emulation/index.rst    |   1 +
+ doc/board/emulation/script.rst   |  61 +++++++++++
+ scripts/build-qemu.sh            | 175 +++++++++++++++++++++++++++++++
+ 18 files changed, 331 insertions(+), 59 deletions(-)
+ create mode 100644 doc/board/emulation/script.rst
+ create mode 100755 scripts/build-qemu.sh
+
+-- 
+2.34.1
+
