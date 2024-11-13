@@ -4,89 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59411D462D3
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 16:26:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF32FD462D3
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 16:28:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE8228959F;
-	Wed, 13 Nov 2024 17:26:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 445808955B;
+	Wed, 13 Nov 2024 17:28:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kdwbGlxK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V936Xwbk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 953B889586; Wed, 13 Nov 2024 17:26:55 +0100 (CET)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 8894689586; Wed, 13 Nov 2024 17:28:07 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 643A68955B
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 17:26:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 253738934F
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 17:28:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-295d27f9fc9so1194969fac.0
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 08:26:53 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-539f76a6f0dso7826908e87.1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 08:28:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731515212; x=1732120012; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bPI8eck5zJLQoN1MbImtJfzn8brW2eRPXbZk9g9k5+Q=;
- b=kdwbGlxK5uSrqHG7MJH/8WoQFwlD7QAdXQWdf7YhDnDyjwlrJ71IWGlZ3G6zLeAMEe
- 5rQ4Tng+sTL2NN+vW4LB1m8gPzHUXv5p+UagtkBOZLjYH8d69FrUueObXnLptuiCQkOQ
- ihQylo7JgcplB+Nk+Cr5Tka+gcrsEFSpgS0jc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731515212; x=1732120012;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1731515284; x=1732120084; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bPI8eck5zJLQoN1MbImtJfzn8brW2eRPXbZk9g9k5+Q=;
- b=aBUd2JP7Lb+kx7Eb5Zrxj8RFsNxYCKlWgfxSNmIK3vZ1dYI/6ZbuIWJfIoCLYkIQBG
- S0VigTD4Y0JFgQOwgnSn25DD2mc9W+jlf4XSG13mH54dkn9IDJ8OGE/quGOaHH/8Sv3N
- PS8KRnveB26tkX5axP2ecf9UvibXvgAeKIP+bfBZRKs7ZAARF/v3qHBX/QjskSTZ3hkc
- G6Gvz1qdgrnQjJ58pRvqqy5c7qTts69LrueA3hbYdTPDanMiTV7N5sMbewzt2OLdtIdc
- Pq7kRiTlh/D5T8wt+RUHhC9vhlsA+2T4gZJLFwgwWqD0VeccoGqd1aE3zDwjH6DsYftB
- uWHw==
+ bh=RVgpKx+NgZYXAl/aW/Jl4A8qQA0ZfLwgsRKW8oitPV0=;
+ b=V936XwbkhP02iBrWxgDfoJWCkwCiTU4Tx7SbiZvpEM3yx4o497mBFduaiXWJlzpmxi
+ lHw0tQIieaCsyNd4QPLEdNEWGHkBZTFesSIg8TCGyPf3yWjnyEjuohQsqibaNtO/UrRs
+ TmAM5KxrxBKhdHnhHZxAVBMOPceCVSaxoF/6Krwl0tbpWnmMPtATMdw0Sie9bPOHhlWV
+ Bs90Q1vi2UmIW/pyeOi/OsQQ5W7DXpSE69dPQuc4OjS0ypuGEqX9KosYhzHRlNAyd2sK
+ eQwTkIWtMh7SZoArSNhOYwwNXdsqA1L/LYR5U2SGI0M0Ij3IhrT52Tu9FchnaRozAPBM
+ 4cTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731515284; x=1732120084;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RVgpKx+NgZYXAl/aW/Jl4A8qQA0ZfLwgsRKW8oitPV0=;
+ b=UOirl9wyVgq/FXuUkMsOSkBmtZpd9e9dka+A4TEP3ZjohPVRHoj0Cm4VgFVnDA33mv
+ 2D71ASvEKfuc2g7yf0LIDXWTDRUkPGSRzfMS4mN9Oem0nNt3AenjdxkFoko1IiIvKEje
+ arNhQ81Jt9uUvOTG0i6jGCKnE7mYjmeybkDVGMg+9HPxB/Ja9Qf6EPDH/eFM89xS/aCF
+ qAfaJa8RtyX7YaayVPpl7yOK718/dWyEIkIJ2wvOHmF+4LX27eb6ht43SKBDHBSnF2rR
+ nOXCgO4jQzVEkeqje9Pn8Kx0ce+lUUB03FFwX7qnaPcYpivHm8wKG36Gp4cw/D03R5KV
+ njHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU3CiyygWvbnFauqWwVOrDBiGQcEHpQKOwAm/EoMEpNWTEs2iQLm/A5+xDl2tGPM5S9DtahApQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyiQL+NXl4sXyNv3cCKPFNz6J/WXQFiG5F1z+NbkRWzZoo3SHqw
- O/DPHHsJQnQMTbdkIhWrG/YdmxtO0kYaQW2PJ+mSMQWsD3BeTnbz0Y95qPEDHJM=
-X-Google-Smtp-Source: AGHT+IGQQDyCpNluBR2pLDZjRtXJYRl6RmgA30/hQjX+iPlyjH2U+GI7elMaMxLDh3rJU9iy0VUZyQ==
-X-Received: by 2002:a05:6871:230e:b0:270:1eca:e9fd with SMTP id
- 586e51a60fabf-2956000776cmr18316582fac.3.1731515212136; 
- Wed, 13 Nov 2024 08:26:52 -0800 (PST)
-Received: from bill-the-cat ([145.14.135.248])
+ AJvYcCUOrcJVF6YYeJYm3NU36gAnAtRvYQy3LzgS5pFgPoch+FnNpDKHFs11f9oD62HeJgi0TxOCSLw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyZNnZwpGvteYDpD8Qz5cYOvbTBFGFfwX5cVSU2EV/4kqH0TUU9
+ lwxeTQklg1OzSOaUfnwHO/92Y8x6X36oeicbAJDFBriqM2rj+eebrWjB+yfQ6h1TLBoYYvjqeTl
+ B
+X-Google-Smtp-Source: AGHT+IGco0f7ogPci6cEJNVwPLqrxJIZZ/9aldgO7fcstWlsWUUAZSChoqf3dMduXYerNGqJZeYWqA==
+X-Received: by 2002:a05:6512:33cb:b0:53d:a3bb:b509 with SMTP id
+ 2adb3069b0e04-53da3bbb519mr771878e87.41.1731515284220; 
+ Wed, 13 Nov 2024 08:28:04 -0800 (PST)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-295e9334fecsm853512fac.45.2024.11.13.08.26.50
+ 5b1f17b1804b1-432d54e0fecsm31181045e9.4.2024.11.13.08.28.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 08:26:51 -0800 (PST)
-Date: Wed, 13 Nov 2024 10:26:48 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 3/8] bootstd: Avoid depending on BLK
-Message-ID: <20241113162648.GQ3600562@bill-the-cat>
-References: <CAFLszTjDeYRPoTneoKOkB1dRaSNM3AUEApGc+rmxKmLvQVvEqA@mail.gmail.com>
- <20241018151152.GX4959@bill-the-cat>
- <CAFLszTj=u-NSYq3RXJP=wcbPZ0C=ikvX62yyOPF1D+vw11RUiQ@mail.gmail.com>
- <20241018175254.GB4959@bill-the-cat>
- <CAFLszTiQHArgoS5zK6aKpi1kiTBcAT4wEkbFaVSt5FjVQ8vmpQ@mail.gmail.com>
- <20241018182937.GE4959@bill-the-cat>
- <CAFLszTjKs0NocoePYyCZMufYg5ahKEHNcux_EwJkT6N1=1T+cQ@mail.gmail.com>
- <CAFLszTj8MK4QmxrQqALXi01EuXHrT2zXwbhR9qmC=txE1nqgLw@mail.gmail.com>
- <20241113152423.GP3600562@bill-the-cat>
- <CAFLszTjbHKtukCQVp+hkhtFV6_E5k6az+VnBR_sUVfSQxu8vrA@mail.gmail.com>
+ Wed, 13 Nov 2024 08:28:03 -0800 (PST)
+From: neil.armstrong@linaro.org
+To: trini@konsulko.com
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v1 0/4] Remove legacy Amlogic dtsi and bindings
+Date: Wed, 13 Nov 2024 17:28:01 +0100
+Message-Id: <173151524505.641625.14064529005947453709.b4-ty@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241112125836.3239832-1-avromanov@salutedevices.com>
+References: <20241112125836.3239832-1-avromanov@salutedevices.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3hlIBbPtGs0hOEqW"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjbHKtukCQVp+hkhtFV6_E5k6az+VnBR_sUVfSQxu8vrA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,48 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Neil Armstrong <neil.armstrong@linaro.org>
 
---3hlIBbPtGs0hOEqW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Wed, Nov 13, 2024 at 09:03:22AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 13 Nov 2024 at 08:24, Tom Rini <trini@konsulko.com> wrote:
-[snip]
-> > We're not going to get the sunxi series in for v2025.01, so we have time
-> > to think about this still and try and get the code to match up with the
-> > use cases.
->=20
-> That's quite unfortunate. This series was first sent 3 months ago.
+On Tue, 12 Nov 2024 15:58:32 +0300, Alexey Romanov wrote:
+> We should remove bindings and dtsi from include/ folder for A1
+> and AXG Amlogic devices. We have exactly the same, or with minor
+> differences in dts/upstream folder.
+> 
+> I tested this changes on devices closes to reference A1 and AXG SoCs
+> devices and didn't receive any problems.
+> 
+> [...]
 
-And unfortunately it's not yet ready. The point of the migration was to
-find further real world challenges when used on a more wide variety of
-hardware, and in that regard it's been a wild success. So we need to
-make sure we don't get that wrong and have v2025.01 suddenly fail to
-work on some platforms.
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic)
 
---=20
-Tom
+[1/4] arm: dts: meson: remove meson-a1.dtsi
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/ea2273911d3e36cca45f73ae82f311a05df4052a
+[2/4] dt-bindings: remove a1 bindings from include/
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/a5ed242ba6a8dbcf543b670fd8c11f1683b4baac
+[3/4] dt-bindings: remove axg bindings from include/
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/827edb6c00be861bfb84391dcd0586b1402f354f
+[4/4] dt-bindings: interrupt-controller: remove arm-gic.h from include/
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/1cdb4e03e684d94456dee0cc30c935d7e25b263d
 
---3hlIBbPtGs0hOEqW
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc000QACgkQFHw5/5Y0
-tyzVRAv/X6UCkIGJIfEwIzohKZnyP06+XaoQkLq63M48M90l9AE2PnUYKkYECJfJ
-ddzwJnPd5Txq8vqXHe82b13ANTg0TH6X/7fTASTIc0UZH2XXVqBfQ7d0k44o/le0
-J7cBF5Y9UeeeCd7BMCZO2GUEMnqqc3mEBW+l7jf05XHoeDt86iR4fOg4Tc+AkaxC
-xV6AyTS1O+ebc+yhj3UjNRnWrEgHEem+w5XFFfvAq3Cb3gPos6SNR83qr368a7qE
-6sV2nT3uB95OB0XuF/XBKARxAYVFYCTLQpbvg2lJetwrPxy4Skb47NXt18+1hTxU
-0azMC4WrQVerfsl53kk3fN/0rt0gPUp1H0VrPLllO6CrkET+mCsEXZpwLHqStKk+
-Em9QAOAqhXIcEnNBSQctxbMZuEvYTad3pap4eM+FnsH4cBRanYcaGkcy7sP9qdW+
-B4OYWaVGScyPtvsFcS8lcZhWnoX66bB6177vG0bsaB87en1Chdtkmzv28/lCYcWe
-xSJZvmnx
-=zkA3
------END PGP SIGNATURE-----
-
---3hlIBbPtGs0hOEqW--
+-- 
+Neil
