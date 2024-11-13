@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD897D462B2
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 14:39:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09FAFD462B3
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 14:39:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D90089049;
-	Wed, 13 Nov 2024 15:39:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 89B7888DD0;
+	Wed, 13 Nov 2024 15:39:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jZKkpUwb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VfGzstDv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96E2889170; Wed, 13 Nov 2024 15:39:36 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id A621D88F94; Wed, 13 Nov 2024 15:39:52 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D36588CEC
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 15:39:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43E7088CEC
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 15:39:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5cf04f75e1aso8283408a12.1
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:39:34 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a9e8522445dso1241248766b.1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:39:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731508774; x=1732113574; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731508790; x=1732113590; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pEKIYJjy36b66qsTOWX3KlE2V2AUg8787ImmXlErLIs=;
- b=jZKkpUwbZ6vuOtUzYdU4LPmUr4Auxhx/DcIB48cllIap1MGMDhgDvVjWL/3ZU9JRRF
- eDesFzZaM11C1dspnQAQ0aGCgtpWnpuN6vAJE3sa2kK9poDtv97hQdCeABCS1MIABpw/
- 8j14c9Fnu8/1sBBxXwEMmC7DMFmx9+G64dfjQ=
+ bh=9meZZPRCb9fsfHiCEXDFyQ+4gbyqLh2HW23iWi1h46E=;
+ b=VfGzstDv/FP+f/zuRupd7LoMCkJB4b2pZzS2meOD0raQIeoDGhfzuKoFLYeSuSpQxL
+ EZqCcNDOU3tU6q3lIRzuWvkrizG8htZCvjnn5G+watjTlJ0CSDzHtv45P9adV3KrMMkM
+ PbvZMK+gBWBtxqtUbmwYb2AGo9j0du5XMkDps=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731508774; x=1732113574;
+ d=1e100.net; s=20230601; t=1731508790; x=1732113590;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=pEKIYJjy36b66qsTOWX3KlE2V2AUg8787ImmXlErLIs=;
- b=JINIAlIYtlzVt5ds3ntYqmDkdJv0oyK9rqxEzvRFjWmTDR4AcuywsxQjlCaaKMebV6
- aGo40oQX38sFgcXtQrMD1n/ZtMKhadMEfAmAfuiEx43ayJPKaNwxdsJQfhlIPjPHDDG0
- psFLYtYj85P6xblMNUggbdk+pGiZBye7efPp0OjSUvSHVC0Sa94WNnPJ6m/pUxwdez2A
- GdbHBO7p93Phg0pzvnz8MF8kPWcWt/xAZSCXnljFBlzFscFfq4z8assr5/esl2k6ndAd
- NqH02jKHzySfvuXq8glctgbY3l6a7aYjSvWVvWoTe5XzjHgGAzNryRuafJbu5X/ObwQ+
- my0Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWyKq8Wz42s4EIP5V5sKUSp/siVVRHgI2fSkpEfLXb6/xo0oO0g9YAiKdfy96XncyRxgB5X3aw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzUXfYlHl4VrPTKhNWgpc5/M6e5NetiDRJG1+FHyouATXh2N+aO
- YfLNg7xhx5LIAHMRqUXr6VrlrrKgXed5q7nZnhj73/sziMyVM5LB2FlfRCxzGYHRGKojwYO0lcr
- KgaweBJHmqs44D5ltGwtsiMzIFtkOMnUAToHs
-X-Google-Smtp-Source: AGHT+IEvtTHavfbI5+Nst7Z/6Gakz/7vcuBZYK1uWz5hPE41+84lhkYbzKXGzwrcszly7FK9EpslpGWkpxMo4+30auo=
-X-Received: by 2002:a17:906:c10f:b0:a9a:8028:45d8 with SMTP id
- a640c23a62f3a-a9eefe9bb73mr2142410166b.7.1731508773948; Wed, 13 Nov 2024
- 06:39:33 -0800 (PST)
+ bh=9meZZPRCb9fsfHiCEXDFyQ+4gbyqLh2HW23iWi1h46E=;
+ b=NSn3/FGCk0v/OGzll8VLJVz1k1eD/f7MaM0+VjYU3t7RaRQe2qRbKspp/VSwXE5bPK
+ bLmXkf6TKqt11udmoWkVEDw3Ax93e1Q32WK0f6+mZoWgrKNddEVoJugavMTbMhP4bhtA
+ xaJE//Phmfur/CT45ovgGx93JQxnFCBmt8CyAIi38RcLfzap8CSKMX//OV5DAqs3G4RS
+ CjvoI3jlemapGaKL1yzHUGpA3uKq3b/NNN18y75rIO42pmufT0OTK3elJIaFRQMP1KWC
+ b6wge8XMrhtGBRwfvmLhrZ6s9pd/evIJVAqOX7s7h4I0Mnf2bMXdsC587r7YWD9AUrC2
+ ZwCQ==
+X-Gm-Message-State: AOJu0YzsK9zU00HQvNyMmO0VDwdZhTWQ1UWdqHqpMLuEvaKvEpD28sdd
+ 65JVDCc8qGFC486jcV/dynPUb63ovU+okYlmbVzehOcpighqwAt+Z5d9tWfP1Ev4AxOpwJt8tLH
+ A+EL7whW9qK6n6McaBYNFgEakI1F3f8kP17AqT3wdeSJZ99Y=
+X-Google-Smtp-Source: AGHT+IF6nk+Uz1etTa/mKvZ1bwj1DYjRNMlxa0TUaMRwjgATohMo7BknrNPWYIcBtpH76UvhFiq9s7bNSOCrt2lr404=
+X-Received: by 2002:a17:907:a4b:b0:a9a:55de:11f4 with SMTP id
+ a640c23a62f3a-a9ef0016b6emr1971198766b.54.1731508789717; Wed, 13 Nov 2024
+ 06:39:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
- <20241031-iommu_apple_dart_ordering-v1-2-8a6877946d6b@jannau.net>
- <87zfmi4rzy.fsf@bloch.sibelius.xs4all.nl>
- <4ff61e8e-03c7-42d2-b2fe-8dba1697641f@gmx.de>
-In-Reply-To: <4ff61e8e-03c7-42d2-b2fe-8dba1697641f@gmx.de>
+References: <20241108152350.3686274-1-sjg@chromium.org>
+ <20241108152350.3686274-4-sjg@chromium.org>
+ <20241113024035.GI3600562@bill-the-cat>
+In-Reply-To: <20241113024035.GI3600562@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Nov 2024 07:39:22 -0700
-Message-ID: <CAFLszTjDaQGaaL9qM_s+oxNrAkGhunGkbAjyR1giEDgnShUfzw@mail.gmail.com>
-Subject: Re: [PATCH 2/2] efi_loader: remove non vital devices first
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Janne Grunau <j@jannau.net>, kettenis@openbsd.org, trini@konsulko.com, 
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de, 
- Mark Kettenis <mark.kettenis@xs4all.nl>
+Date: Wed, 13 Nov 2024 07:39:37 -0700
+Message-ID: <CAFLszTibM9CwXeTbF6OuFrW4YSSs058qa0OysY+fWy7vV6WRkQ@mail.gmail.com>
+Subject: Re: [PATCH 3/9] buildman: Support #include files in defconfigs
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Brandon Maier <brandon.maier@collins.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,57 +85,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Tom,
 
-On Wed, 13 Nov 2024 at 05:52, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 12 Nov 2024 at 19:40, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 11/1/24 21:29, Mark Kettenis wrote:
-> >> From: Janne Grunau <j@jannau.net>
-> >> Date: Thu, 31 Oct 2024 23:48:02 +0100
-> >>
-> >> DM_FLAG_VITAL marks devices which are essential for the operation of
-> >> other devices. Removing these devices before their users can result in
-> >> hangs or crashes.
-> >> This potentially fixes EFI boot of Renesas rcar3 devices. Their clock
-> >> devices (and with this series the dart iommu) are the only devices
-> >> markes as vital.
-> >> The arm boot code already handles devioce removal in this way.
-> >
-> > There is a typo in that last sentence of the commit message (devioce).
-> > Otherwise:
-> >
-> >> Signed-off-by: Janne Grunau <j@jannau.net>
-> >
-> > Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
-> >
-> >> ---
-> >>   lib/efi_loader/efi_boottime.c | 1 +
-> >>   1 file changed, 1 insertion(+)
-> >>
-> >> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-> >> index 4f52284b4c653c252b0ed6c0c87da8901448d4b4..7db3c95782970f8c06a970a8ee86b1804cd848b6 100644
-> >> --- a/lib/efi_loader/efi_boottime.c
-> >> +++ b/lib/efi_loader/efi_boottime.c
-> >> @@ -2234,6 +2234,7 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
-> >>              if (IS_ENABLED(CONFIG_USB_DEVICE))
-> >>                      udc_disconnect();
-> >>              board_quiesce_devices();
-> >> +            dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL | DM_REMOVE_NON_VITAL);
-> >>              dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
+> On Fri, Nov 08, 2024 at 08:23:44AM -0700, Simon Glass wrote:
 >
-> Simon's patch 6224dc9ba428 ("arm: Remove vital devices last") addressed
-> the same issue for bootm on arm. But what about about other architectures?
+> > This is used by some boards in U-Boot and is a convenient way to deal
+> > with common settings where using a Kconfig files is not desirable.
+> >
+> > Detect #include files and process them as if they were part of the
+> > original file.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/30
+> [snip]
+> > +defconfig fragments
+> > +-------------------
+> > +
+> > +Buildman provides some initial support for configuration fragments. It can scan
+> > +these when present in defconfig files and handle the resuiting Kconfig
+> > +correctly. Thus it is possible to build a board which has a ``#include`` in the
+> > +defconfig file.
+> > +
+> > +For now, Buildman simply includes the files to produce a single output file,
+> > +using the C preprocessor. It does not call the ``merge_config.sh`` script. The
+> > +redefined/redundant logic in that script could fairly easily be repeated in
+> > +Buildman, to detect potential problems. For now it is not clear that this is
+> > +useful.
 >
-> This logic should be moved to drivers/core/root.c instead of replicating
-> code.
+> I don't like this logic because the whole point of merge_config.sh is
+> that it IS the canonical way to handle Kconfig config files + fragments
+> and provides handy feedback like "You expected CONFIG_FOO=y but you
+> ended up with '# CONFIG_FOO is not set'". It's frankly an at least small
+> problem of our current cpp rule, but calling that for every defconfig
+> would be a performance nightmare too.
 
-We could have a common helper, but it should not be in driver/core as
-this ordering is more of a policy decision. Unless we can add a
-parameter telling dm exactly what to do...
+Here is the part of scripts/kconfig/merge_config.sh which actually
+does something:
 
-BTW, Heinrich, this behaviour is exactly what my bootflow_efi() test
-was supposed to check. But since it doesn't have the
-exit-boot-services piece at your request...
+# Merge files, printing warnings on overridden values
+for MERGE_FILE in $MERGE_LIST ; do
+        echo "Merging $MERGE_FILE"
+        if [ ! -r "$MERGE_FILE" ]; then
+                echo "The merge file '$MERGE_FILE' does not exist.  Exit." >&2
+                exit 1
+        fi
+        CFG_LIST=$(sed -n -e "$SED_CONFIG_EXP1" -e "$SED_CONFIG_EXP2"
+$MERGE_FILE)
+
+        for CFG in $CFG_LIST ; do
+                grep -q -w $CFG $TMP_FILE || continue
+                PREV_VAL=$(grep -w $CFG $TMP_FILE)
+                NEW_VAL=$(grep -w $CFG $MERGE_FILE)
+                if [ "x$PREV_VAL" != "x$NEW_VAL" ] ; then
+                        echo Value of $CFG is redefined by fragment $MERGE_FILE:
+                        echo Previous  value: $PREV_VAL
+                        echo New value:       $NEW_VAL
+                        echo
+                elif [ "$WARNREDUN" = "true" ]; then
+                        echo Value of $CFG is redundant by fragment $MERGE_FILE:
+                fi
+                sed -i "/$CFG[ =]/d" $TMP_FILE
+        done
+        cat $MERGE_FILE >> $TMP_FILE
+done
+
+So for every line in the fragment it greps the file to check for
+redefines/redundancies. I feel we can do this in a much more efficient
+way in Python.
+
+>
+> > +To specify the C preprocessor to use, set the ``CPP`` environment variable. The
+> > +default is ``cpp``.
+>
+> Uh, I was hoping it would get the correct CPP and flags from the
+> Makefile? Otherwise this is going to fall down in some corner cases such
+> as I expect clang.
+
+I don't want to parse Makefile, if that's what you're suggesting.
+
+It shouldn't really matter which cpp we use. U-Boot seems to use
+'$(CC) -E' so we could do the same in buildman, perhaps.
+
+But actually, having thought about this patch a bit, I think the
+better thing is to process the #include in buildman, rather than
+running the CPP. That way we can avoid people adding #defines in
+there, etc. It locks down the format a bit better.
+
+>
+> > +Note that Buildman does not support adding fragments to existing boards, e.g.
+> > +like::
+> > +
+> > +    make qemu_riscv64_defconfig acpi.config
+> > +
+> > +This is partly because there is no way for Buildman to know which fragments are
+> > +valid on which boards.
+>
+> That seems like a really weird deficiency and non-sequitur. I don't know
+> why buildman would be attempting any sort of validation beyond syntax
+> validation. It's more that we don't have any way to pass additional
+> arguments to the "make defconfig" part of the build, yes? And then in
+> turn because buildman reads the defconfig itself too, prior to that
+> stage?
+
+Yes, everything is seeming weird at the moment for me too.
+
+Buildman needs to know the architecture, so it can select the
+toolchain. So it generates a boards.cfg file. It does this using
+Kconfiglib, which processes the defconfig along with the Kconfig files
+in U-Boot, to produce a final .config - see KconfigScanner
+
+Anyway, this problem[1] is exactly why I complained about fragments a
+year or so back[2]. I'm not sure what the disconnect here is. IMO
+unless we build boards with the fragments in CI they may stop working
+at any time. Therefore IMO we need a file which collects the defconfig
+and its fragments, so we can build the valid combination in CI.
+
+What am I missing?
 
 Regards,
 Simon
+
+[1] https://lore.kernel.org/u-boot/4d55f212-ee39-4886-9246-3596fc4268f7@gmx.de/
+[2] https://lore.kernel.org/u-boot/CAPnjgZ14CUVt=rM943hh9PQUhK9LJDgZYPxUsATYQe3wwOUYqQ@mail.gmail.com/
