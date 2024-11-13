@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E534D41C3E
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 13:01:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA793D41C3F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 13:01:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04C5A8959F;
+	by phobos.denx.de (Postfix) with ESMTP id 674E5895A5;
 	Wed, 13 Nov 2024 14:00:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="3fODM8k0";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="Pf8xTmmL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 713528904A; Wed, 13 Nov 2024 11:10:49 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id 6ED3289558; Wed, 13 Nov 2024 11:11:01 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7143389554
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 11:10:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 797B989554
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 11:10:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2fb4af0b6beso92020541fa.3
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 02:10:47 -0800 (PST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-539d9fffea1so6661104e87.2
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 02:10:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1731492647; x=1732097447;
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1731492659; x=1732097459;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZnCJ4+6ymcqhIURLlrgRj3oo9xvZ6lElRnwG/wDdvuQ=;
- b=3fODM8k015KX6B0kLBofqJTSktevJftXxBSWlTygNbPIETz9EPIfkIiEkpgwQ0O1/O
- bKwVPMLA0tVhXUkj3Fw5UmLMthdjbGL1x8st9OVmaJaqULXPpFrsiz19VdY1I47UQ0zR
- OPzqPKZ53g+kNYcVM5TaaJMmJOCodqyikkn69o88Ao0EihETLAGqlvl1+DYhOuJjtCdc
- uiC9DpBqIiteMvriXZEuRcZ5ABUGgS7xdlPoaY2IrvF/gGT7lcm4VXWvCCGz+zrT/OZN
- Tqcz/EIVqOVJK4dgHx/e9uQC7E7/d3Hn2v1jqkkEpu3WARLuerwjTQp9TcHkkdPGy9E2
- Xi6g==
+ bh=6sX9NOZfe40mSuYEvP7zVXvSADO0t5wDn0QeB6fKmeA=;
+ b=Pf8xTmmLyapgaprnpQD0VILBQTLbu70K4Yd/r2fB1uge3XbkVtiABOFoxwHqXUaTIQ
+ 2yCCNzmKLc4XOO5w+zinntQsQJJYaYkkODb0ic7Fn30G8mi8hMwz3MUc5XO/E3ko5onP
+ d2xBlOFz7rDX7Uz9sEGG1BoRaSN0Oc/fSBTCUpQUmUZraYrPWEdUaugnURywuXQSi73F
+ zkx8az4y8atETEUjK5lLlOJEfR/HGC7ympDnuZTHanXGU6J7zfi27nxMKJg+3kl/Ntkt
+ LeTAUcN9xkZW3mSJgWIzlZairwcriGzmXjIquhD/HdDjW+oFkS6Wwj0Og8UBF3cns4ND
+ llBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731492647; x=1732097447;
+ d=1e100.net; s=20230601; t=1731492659; x=1732097459;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZnCJ4+6ymcqhIURLlrgRj3oo9xvZ6lElRnwG/wDdvuQ=;
- b=Xsgm1Ad0u/OYvJ7ZJ2V0WvcgrnmAXU14Xi0Xbt6JL+pdatS1mT2Uoj3R0RnnlcJ5Po
- CVt8ZK5VrT9aQiQHrIrC8TBhnjlSKm7fMe/prZsXVyw78Y/h9dI6dFoiCYco4WfvUpn9
- x1VDIdRw6Io6dvIsZ6pxzyzxCRbUxS/8Rpt9mGv+ED8ea9f1Rfu78PBGahdN4FoVbUf0
- xLcUl+MHR6jgVYvAKdBsdLkMANenkv9EheCFQm3hPtnsL1dxcPZNCPZBoViPKRwk8qFi
- syXV2u/wFzCemasEzv5nyvLMCfryEmYH9/LbmUvWO9s4pPLc93mpUqaD2Ycfa2HnDO6k
- d1OA==
-X-Gm-Message-State: AOJu0YwGLddauc9NjSa+X8YGyw2qviGXbBrv+sugIKUUyAjaSmUyuyph
- 6LlhNQRjqSpdaych9sieg1Y7OeY3GCBwgTkSupXPqDPdsAMJOEtmrUgnT+VzPm0=
-X-Google-Smtp-Source: AGHT+IHcjRzKmcQwQO7GHO772d7eKj+tL5M5bSbtckRGBOw/BvOjhtuzOMvjv0xNq3IQignecWgx9g==
-X-Received: by 2002:a2e:bd02:0:b0:2f7:5a41:b0b with SMTP id
- 38308e7fff4ca-2ff2028aa9dmr150354181fa.26.1731492646539; 
- Wed, 13 Nov 2024 02:10:46 -0800 (PST)
+ bh=6sX9NOZfe40mSuYEvP7zVXvSADO0t5wDn0QeB6fKmeA=;
+ b=d8Tv/XDw4dcACBfjeqZHUhAeW2kPnCRdtncf5XanZ10hDdOVY6SBCVEg/T1P7nZ3Nq
+ lZpD4xjY97llZ86VoxUZpjsaBVvyNqsx5VGqg939rG0x05vMDrlaV8DWW/MdchNeOwJs
+ UR/Ba3QUFZ0jQmIN4bHpxAK715iAmNpUkd30zlzI8XjsabPeyzrAFBY1izLky6tYD+6/
+ KT4gM/XPP41qgPklsJoZ9lV4nar3R64M155Q1Ih4VYxeFDT3MvS+TIXEu9IjcHj81+UN
+ iCxGxmz6rihFZXDxzyhUDxNRVRPaPQuLF6pAxl5cDxOa+aIWm1a1kblh2aJ5VSWrX9x9
+ xQAg==
+X-Gm-Message-State: AOJu0YzhgmanSvsoO1aJ796qb71bbmmD24voSqfMMJ7/MwqhTVhhmoDV
+ FbZUEsn3QV6wnDXE7RHa9kXtsYWqEo4FFXiJuDqvVw+M3MvfBUb3MQz3Zu2rCCc=
+X-Google-Smtp-Source: AGHT+IF+XvJ4MFBz8KX/H2PMAv0eW+JYYo3m8/CLYUXOe7NgLIkQ0PJp8rDOLA6AMAT2vENUojRLWg==
+X-Received: by 2002:a05:6512:3c97:b0:536:73b5:d971 with SMTP id
+ 2adb3069b0e04-53d862ebeccmr10367937e87.38.1731492658570; 
+ Wed, 13 Nov 2024 02:10:58 -0800 (PST)
 Received: from localhost.localdomain ([78.199.60.143])
  by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-432d550bf33sm19422835e9.31.2024.11.13.02.10.45
+ 5b1f17b1804b1-432d54f829asm18997075e9.13.2024.11.13.02.10.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 02:10:46 -0800 (PST)
+ Wed, 13 Nov 2024 02:10:58 -0800 (PST)
 From: Zixun LI <admin@hifiphile.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heiko Schocher <hs@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de,
 	Zixun LI <admin@hifiphile.com>
-Subject: [PATCH v2 1/3] gpio: at91: Implement GPIOF_FUNC in get_function()
-Date: Wed, 13 Nov 2024 11:10:22 +0100
-Message-ID: <20241113101022.2915364-1-admin@hifiphile.com>
+Subject: [PATCH v2 2/3] gpio: at91: Implement ops set_flags
+Date: Wed, 13 Nov 2024 11:10:54 +0100
+Message-ID: <20241113101054.2915628-1-admin@hifiphile.com>
 X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,48 +93,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds support for determining whether a gpio pin is mapped as
-peripheral function.
+Support GPIO configuration with following flags:
+- in, out, out_active
+- open_drain, pull_up
 
 Signed-off-by: Zixun LI <admin@hifiphile.com>
 ---
 Changes in v2:
-- Rename function
+- Return ENOTSUPP if flag is unsupported.
+- Inline port output variable.
 ---
- drivers/gpio/at91_gpio.c | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+ drivers/gpio/at91_gpio.c | 39 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
 
 diff --git a/drivers/gpio/at91_gpio.c b/drivers/gpio/at91_gpio.c
-index 1409db5dc1..173315d45f 100644
+index 173315d45f..758cb4a806 100644
 --- a/drivers/gpio/at91_gpio.c
 +++ b/drivers/gpio/at91_gpio.c
-@@ -220,6 +220,15 @@ static bool at91_get_port_output(struct at91_port *at91_port, int offset)
- 	val = readl(&at91_port->osr);
- 	return val & mask;
+@@ -229,6 +229,17 @@ static bool at91_is_port_gpio(struct at91_port *at91_port, int offset)
+ 	val = readl(&at91_port->psr);
+ 	return !!(val & mask);
  }
 +
-+static bool at91_is_port_gpio(struct at91_port *at91_port, int offset)
++static void at91_set_port_multi_drive(struct at91_port *at91_port, int offset, int is_on)
 +{
-+	u32 mask, val;
++	u32 mask;
 +
 +	mask = 1 << offset;
-+	val = readl(&at91_port->psr);
-+	return !!(val & mask);
++	if (is_on)
++		writel(mask, &at91_port->mder);
++	else
++		writel(mask, &at91_port->mddr);
 +}
  #endif
 
  static void at91_set_port_input(struct at91_port *at91_port, int offset,
-@@ -550,7 +559,9 @@ static int at91_gpio_get_function(struct udevice *dev, unsigned offset)
- {
- 	struct at91_port_priv *port = dev_get_priv(dev);
+@@ -568,6 +579,33 @@ static int at91_gpio_get_function(struct udevice *dev, unsigned offset)
+ 		return GPIOF_INPUT;
+ }
 
--	/* GPIOF_FUNC is not implemented yet */
-+	if (!at91_is_port_gpio(port->regs, offset))
-+		return GPIOF_FUNC;
++static int at91_gpio_set_flags(struct udevice *dev, unsigned int offset,
++			       ulong flags)
++{
++	struct at91_port_priv *port = dev_get_priv(dev);
++	ulong supported_mask;
 +
- 	if (at91_get_port_output(port->regs, offset))
- 		return GPIOF_OUTPUT;
- 	else
++	supported_mask = GPIOD_OPEN_DRAIN | GPIOD_MASK_DIR | GPIOD_PULL_UP;
++	if (flags & ~supported_mask)
++		return -ENOTSUPP;
++
++	if (flags & GPIOD_IS_OUT) {
++		if (flags & GPIOD_OPEN_DRAIN)
++			at91_set_port_multi_drive(port->regs, offset, true);
++		else
++			at91_set_port_multi_drive(port->regs, offset, false);
++
++		at91_set_port_output(port->regs, offset, flags & GPIOD_IS_OUT_ACTIVE);
++
++	} else if (flags & GPIOD_IS_IN) {
++		at91_set_port_input(port->regs, offset, false);
++	}
++	if (flags & GPIOD_PULL_UP)
++		at91_set_port_pullup(port->regs, offset, true);
++
++	return 0;
++}
++
+ static const char *at91_get_bank_name(uint32_t base_addr)
+ {
+ 	switch (base_addr) {
+@@ -596,6 +634,7 @@ static const struct dm_gpio_ops gpio_at91_ops = {
+ 	.get_value		= at91_gpio_get_value,
+ 	.set_value		= at91_gpio_set_value,
+ 	.get_function		= at91_gpio_get_function,
++	.set_flags		= at91_gpio_set_flags,
+ };
+
+ static int at91_gpio_probe(struct udevice *dev)
 --
 2.46.2
 
