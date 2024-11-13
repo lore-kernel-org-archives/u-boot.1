@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2428AD637C4
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 21:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0280BD637C4
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 21:15:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5407F89043;
-	Wed, 13 Nov 2024 22:06:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 81AAA8921F;
+	Wed, 13 Nov 2024 22:15:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="rdRnUaFM";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="dU93nQWU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3EBE89198; Wed, 13 Nov 2024 22:06:54 +0100 (CET)
+ id B339789220; Wed, 13 Nov 2024 22:15:17 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B75C489040
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 22:06:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C692F890DA
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 22:15:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
- [5.147.80.91])
+Received: from LT2ubnt.. (dynamic-046-114-104-190.46.114.pool.telefonica.de
+ [46.114.104.190])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 1D53840928; 
- Wed, 13 Nov 2024 21:06:51 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 29ABE402ED; 
+ Wed, 13 Nov 2024 21:15:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1731532011;
- bh=2onuO1trqWGNlT3y7ISqxpFq0+MZhjSkfMsuWNUj6mg=;
+ s=20210705; t=1731532515;
+ bh=t18PVQ6pyrFfDoroyrPb1kmPWykEo0tq8Dsn69VcF+M=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=rdRnUaFMOu/5oVNIx3wEFPnQg+JYWzJqKZ+wq+3VchFs2OLQ2Yzzaisn6kxnKQKIX
- 5QD828M2hGk4RQJRc+AJa0M8MuGnVXx3V3O5d8gd1tCyKJCpFqj/ti+Vb9a4wJC9D1
- PKqwKRbbTgvcktqePL2FA8mjvUNBhl9HjrgnMGxyEpERSKnvaRXRfgxpuT4wIsVO0J
- Ao7grZx3Kbo+q/lLFazYLKHJOa6EQfWWQ2g5smNqh+Uenp1OHjB5WYoE4StV0GwhZK
- o/TkRuZIg89MSgmSr49oyRlOPJq8VY6q/1uP0ofHGklz/mkqDeg/UEwHCtRYDcWSjr
- KB6F7olsMmk9Q==
+ b=dU93nQWUEm7iRn1zHiDqkJOxnPg2s70G9DsJYCO7LviwEy0zK0a6kbZTvgkGlcnZg
+ 08awaT+bqSiejZsufc9NYNCcReiwfzeRbJzvpRJi3wCQMwD8Yx/JmzTTyxMp5hojJ8
+ MSJ1+ak5u9VC5cROGWgtsiZ/ryEcDWUAPeqL8huw21wZN3a5lXUCURQ/VKCkYKaXru
+ i98ZhXft2b3k2vZXpN0CvGqSYhfaFXqjDVVMerczwhDb3bMXSVYLrMmbeo3jYmDfNs
+ Z6JQCEgIOYAaQ5bB6YcDONi+/7M9sVQpUZBZviiyN0KUiVL4G+g5wRhFhm2EFeBXuu
+ Z6aGMeH24vVuQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] test: str_ut.c depends on CONFIG_STRTO
-Date: Wed, 13 Nov 2024 22:06:46 +0100
-Message-ID: <20241113210646.88937-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] test: unit test for hextoull()
+Date: Wed, 13 Nov 2024 22:15:12 +0100
+Message-ID: <20241113211512.93184-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -69,27 +69,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The string conversion functions are implemented in lib/strto.c which is
-only compiled if CONFIG_STRTO=y.
+Provide a unit test for the hextoull() function.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ test/str_ut.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/test/Makefile b/test/Makefile
-index 145c952d2c3..efd5ba7acfd 100644
---- a/test/Makefile
-+++ b/test/Makefile
-@@ -21,7 +21,7 @@ ifneq ($(CONFIG_HUSH_PARSER),)
- obj-$(CONFIG_$(XPL_)CMDLINE) += hush/
- endif
- obj-$(CONFIG_$(XPL_)CMDLINE) += print_ut.o
--obj-$(CONFIG_$(XPL_)CMDLINE) += str_ut.o
-+obj-$(CONFIG_$(PHASE_)STRTO) += str_ut.o
- obj-$(CONFIG_UT_TIME) += time_ut.o
- obj-y += ut.o
+diff --git a/test/str_ut.c b/test/str_ut.c
+index 96e048975d8..1110971d995 100644
+--- a/test/str_ut.c
++++ b/test/str_ut.c
+@@ -18,6 +18,8 @@ static const char str4[] = "1234567890123 I lost closer friends";
+ static const char str5[] = "0x9876543210the last time I was deloused";
+ static const char str6[] = "0778octal is seldom used";
+ static const char str7[] = "707it is a piece of computing history";
++static const char str8[] = "0x887e2561352d80fa";
++static const char str9[] = "614FF7EAA63009DA";
  
+ /* Declare a new str test */
+ #define STR_TEST(_name, _flags)		UNIT_TEST(_name, _flags, str_test)
+@@ -189,6 +191,22 @@ static int str_hextoul(struct unit_test_state *uts)
+ }
+ STR_TEST(str_hextoul, 0);
+ 
++static int str_hextoull(struct unit_test_state *uts)
++{
++	char *endp;
++
++	/* Just a simple test, since we know this uses simple_strtoull() */
++	ut_asserteq_64(0x887e2561352d80faULL, hextoull(str8, &endp));
++	ut_asserteq_64(0x12, endp - str8);
++	ut_asserteq_64(0x614ff7eaa63009daULL, hextoull(str9, &endp));
++	ut_asserteq_64(0x10, endp - str9);
++	ut_asserteq_64(0x887e2561352d80faULL, hextoull(str8, NULL));
++	ut_asserteq_64(0x614ff7eaa63009daULL, hextoull(str9, NULL));
++
++	return 0;
++}
++STR_TEST(str_hextoull, 0);
++
+ static int str_dectoul(struct unit_test_state *uts)
+ {
+ 	char *endp;
 -- 
 2.45.2
 
