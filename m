@@ -4,81 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3665AD637A3
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 17:41:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B78C0D637A3
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 17:45:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EECA891A0;
-	Wed, 13 Nov 2024 18:40:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4630588FFC;
+	Wed, 13 Nov 2024 18:45:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N3491p59";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kj0ZuDWM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92D518955B; Wed, 13 Nov 2024 18:40:50 +0100 (CET)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 7906389177; Wed, 13 Nov 2024 18:45:27 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42A1689417
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 18:40:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3299788D56
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 18:45:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-3e6075cba82so3804443b6e.0
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 09:40:48 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-37d6a2aa748so4403010f8f.1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 09:45:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731519647; x=1732124447; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sdywctmGZ1vRwO51xLgqcEOfuznU21waWJ9AuZrZ+d8=;
- b=N3491p59s5uP7KFbxBpIBh2RXJCnAFNvQ6thV+v9cWk+f0eQbxivBzRSNspZ86Jj++
- X2vAcvFajFSfVQnSR3JzivLjCF4PM4Otc5OkI3mo6Y2QXEmstenem0bPlJcToF5C3VLb
- msgn2jPGDEDmF+gsKGbgPErZzNPHx2tJj9iFM=
+ d=linaro.org; s=google; t=1731519924; x=1732124724; darn=lists.denx.de;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Uvyp5aHJ1Z7JGiBkv2RmSv2DsxVkKk5hPpUi2GOqfns=;
+ b=kj0ZuDWMcE92cl4OedV7wWNu54WnbSZvUJ3qHHZKooVE3SlSe9HQIzQyQ17V86NL+Z
+ N1Bmrx/DN5cv9tGmU2vZ4vh17P52JbPxMBTMw6UiffgL5Aw/0tBuE6Oc1EcGvDLbwduB
+ jOK4L9MA0Gy2/MtpPfWnRFgcJ8EOC5E8Ms84OGsobGgNdLt5Cql/CgS0pceNsBEyVMZI
+ eHCHARz+dLn4x+NAWek7Q+kZF2r7v8tZX01x2MJye4Z0ALi39b/fLuxNXeSJ2aP2yk3f
+ LWft0LLGe+WrZZ0/3cIxzeSW8KaMC8XaCiJeQfYsf3PNdMBTcjLCjOISsb+MlKpkD4pq
+ c+OQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731519647; x=1732124447;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sdywctmGZ1vRwO51xLgqcEOfuznU21waWJ9AuZrZ+d8=;
- b=rlsP2meBqNvbEOu/Fc/O6F6CzZM1UiQ9Qe+QxfzHJOAK5HsN9NJiptwnqHq85am57Z
- egIAjbB0j9FpFCT6FI1k2UPKCzC13NZ1yTWJ287Za8a9OFts5eq/yE8lQDRwoxin+nh5
- mU8Vw+3NDImqhPW/vLgrLxZborzlN9hy2n1Oeo9GI5NI0M4mJJCMALF8y5It3khcOXEB
- 7RiHbXjJ6RuUzHEhofvK3l4Yw82ylpIefof8AUG99nqpR8HivKGo25H15b9B6Hx7pB1Y
- htf6uvrW2HqOXe4OQHVZFvKVIZl7ofJDsW5BKOlxW/RkKMydnzhy9ChcCmPT0EkY43LV
- W9DQ==
+ d=1e100.net; s=20230601; t=1731519924; x=1732124724;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Uvyp5aHJ1Z7JGiBkv2RmSv2DsxVkKk5hPpUi2GOqfns=;
+ b=i47VHkRIG0KDUgp9ntA2GORbr8hglx7alDMJorX0rveac5kDDLkd0x3cu/0m9ypfai
+ otcb3NmglmLF3IOEtVjpE5nugj+cqyAhh76xGgrSnPQ7B7ew+twtHWx0E2t5tzTvYf2X
+ +PhVMU/Ua1vz3BWVIr9e7KVCuWPboGs4fzJV/dcaZay3IsFr8vKccoaFDFViMaKnQ3nH
+ alIU2kBPsctPS+tprReecF1aEdut5rrwWyvDpNBnn3MEMK5FsY85gT5rJRGH6cmHAqlE
+ ZwjnTBXBN9BaErRKOruIv8AxSfl7h9BM3BQK06h8deiA6F3x8utE//DKLNgldrbwgfS/
+ 4/xQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVwzDV1fVCFZJeEmXfbgV/9YAmFv3NRaPQ6RLzzwKgpYEZE6LtSWAmJ3tAPvxbuxUHbuo6oVRo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxMAlS23zJgaHq8Xc7qf2zJOpQGBLEEW9WXd0jRIa7mjZFY+3s6
- CcVJvbSL+IJqlVSCQHSFu4FIs9naK7fQX3mIof6oFPFA3gIc+zyuKfe0vI3dnEx7hptl8XXZPu/
- GtFM=
-X-Google-Smtp-Source: AGHT+IFz8rwkDESm8WRuDFNKoeEWt7yLYFMdmKt87yespB5G3Z5wMsWej6qU7QCnLi4yaQa9ys360Q==
-X-Received: by 2002:a05:6808:201b:b0:3e6:5f5:5e25 with SMTP id
- 5614622812f47-3e7946a5fd0mr20559350b6e.19.1731519647085; 
- Wed, 13 Nov 2024 09:40:47 -0800 (PST)
-Received: from [127.0.1.1] ([145.14.135.248]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3e7b096bdabsm736295b6e.21.2024.11.13.09.40.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 09:40:46 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
-In-Reply-To: <20241107093854.42184-1-heinrich.schuchardt@canonical.com>
-References: <20241107093854.42184-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] fs: ext4: correct error handling
-Message-Id: <173151964557.1299521.10602933653472960986.b4-ty@konsulko.com>
-Date: Wed, 13 Nov 2024 11:40:45 -0600
+ AJvYcCVHN5jMcfxfXv6Xv9fX+vyuG3dSROfIpZVZ3A+rZc3oaaf9XLvSnYyZ/FsfcjG9Egleis8wLUY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwpRPZfZk6acE/JpfSzteMawh4e7R6VUQTklChzyy9JYCq0hEp3
+ YPAnlikLyvQFl2H16wiXaqW9yxg6bk3sZKYo3btBa7xSPL0BHuR5NRH2odzHQFQtBMl2c9+V3bC
+ P
+X-Google-Smtp-Source: AGHT+IH1vh0n17Nih4qZdtZq6M8bInGGG8ibt19OQwFpr6y4fky9AiYt0mXkBi3ZZvbC5/Yov/0FMg==
+X-Received: by 2002:a5d:47ae:0:b0:37d:481e:8e29 with SMTP id
+ ffacd0b85a97d-381f186bfdemr17651728f8f.25.1731519924572; 
+ Wed, 13 Nov 2024 09:45:24 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:e35e:22ff:8c36:1a4a?
+ ([2a01:e0a:982:cbb0:e35e:22ff:8c36:1a4a])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-381ed987d95sm19159878f8f.44.2024.11.13.09.45.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 13 Nov 2024 09:45:24 -0800 (PST)
+Message-ID: <6d6d1630-838b-460b-ac4f-1c4923bfb40b@linaro.org>
+Date: Wed, 13 Nov 2024 18:45:23 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [GIT PULL] Please pull u-boot-amlogic-next-20241113
+To: trini@konsulko.com
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,22 +115,64 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 07 Nov 2024 10:38:53 +0100, Heinrich Schuchardt wrote:
+Hi Tom,
 
-> After calling strdup() check the returned pointer.
-> 
-> Avoid a memory leak if the directory is not found.
-> 
-> 
+Here's a small fix for khadas-vim3{l} android config, and a drop of
+obsolete dtsi and include bindings in favor or the upstream ones.
 
-Applied to u-boot/master, thanks!
+Thanks,
+Neil
 
--- 
-Tom
+The following changes since commit 56accc56b9aab87ef4809ccc588e1257969cd271:
 
+   bios_emulator: fix first argument of pci_{read,write}_config_* function calls (2024-11-04 18:01:58 -0600)
 
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-next-20241113
+
+for you to fetch changes up to 1cdb4e03e684d94456dee0cc30c935d7e25b263d:
+
+   dt-bindings: interrupt-controller: remove arm-gic.h from include/ (2024-11-13 17:25:07 +0100)
+
+----------------------------------------------------------------
+- khadas-vim3{l}: fix userdata size for android config
+- drop A1 dtsi and other bindings includes in favor of Upstream ones
+
+----------------------------------------------------------------
+Alexey Romanov (4):
+       arm: dts: meson: remove meson-a1.dtsi
+       dt-bindings: remove a1 bindings from include/
+       dt-bindings: remove axg bindings from include/
+       dt-bindings: interrupt-controller: remove arm-gic.h from include/
+
+Guillaume La Roque (1):
+       configs: khadas-vim3{l}: fix userdata size
+
+  arch/arm/dts/meson-a1.dtsi                         | 518 ---------------------
+  include/configs/khadas-vim3_android.h              |   4 +-
+  include/configs/khadas-vim3l_android.h             |   4 +-
+  .../clock/amlogic,a1-peripherals-clkc.h            | 168 -------
+  include/dt-bindings/clock/amlogic,a1-pll-clkc.h    |  25 -
+  include/dt-bindings/clock/axg-audio-clkc.h         |  94 ----
+  include/dt-bindings/clock/axg-clkc.h               | 100 ----
+  include/dt-bindings/gpio/meson-a1-gpio.h           |  73 ---
+  include/dt-bindings/interrupt-controller/arm-gic.h |  23 -
+  include/dt-bindings/power/meson-a1-power.h         |  32 --
+  include/dt-bindings/reset/amlogic,meson-a1-reset.h |  76 ---
+  11 files changed, 4 insertions(+), 1113 deletions(-)
+  delete mode 100644 arch/arm/dts/meson-a1.dtsi
+  delete mode 100644 include/dt-bindings/clock/amlogic,a1-peripherals-clkc.h
+  delete mode 100644 include/dt-bindings/clock/amlogic,a1-pll-clkc.h
+  delete mode 100644 include/dt-bindings/clock/axg-audio-clkc.h
+  delete mode 100644 include/dt-bindings/clock/axg-clkc.h
+  delete mode 100644 include/dt-bindings/gpio/meson-a1-gpio.h
+  delete mode 100644 include/dt-bindings/interrupt-controller/arm-gic.h
+  delete mode 100644 include/dt-bindings/power/meson-a1-power.h
+  delete mode 100644 include/dt-bindings/reset/amlogic,meson-a1-reset.h
