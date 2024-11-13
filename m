@@ -4,68 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD6E1D462CF
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 16:03:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF84FD462CF
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 16:04:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C2E188EE0;
-	Wed, 13 Nov 2024 17:03:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6AAEB895AD;
+	Wed, 13 Nov 2024 17:04:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YgRMmmro";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bYdCKHMF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5BED89586; Wed, 13 Nov 2024 17:03:50 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 66DBC895A3; Wed, 13 Nov 2024 17:04:06 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB93C88DFA
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 17:03:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3024788DFA
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 17:04:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aa1f1f2d508so195201766b.2
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 08:03:48 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a9f1c590ecdso628910566b.1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 08:04:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731513828; x=1732118628; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731513843; x=1732118643; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sEUePyulAtBttEBj3pDuZ0c0e+xTxdthhxy03UT3KGc=;
- b=YgRMmmrovhsctDomoNuExb4i///UVepsjtjXpAiX8CtNT4Alz21uwGvU0dbuRFtVAn
- u11b9XkCQsyh26TAgHrtWpXkNPVgBfguHSQ1ovpto1Jd3vhTMMfmTtg89FyGm6EIffB0
- nmhSuaGz9QLSvrk3DT3JqUmKK5+UemcDWEfxg=
+ bh=bb5b9VQqkJ/l/yz3mqefkY4PduUJrXpgcAKGRRXbKTs=;
+ b=bYdCKHMFfazeRrg/RdFkAkQC0IB6juADQ7/Ksv9cHB7LOpmYaURyH7oHCtT/3B3ryW
+ 15S8EHY0o5A0hfW9XItkReozaqAtIVIaQNpCvQ9/3iLye9w9uz7280UHFsKwPUNXkbgJ
+ vLE7U0mLh1Bzz0Zh9VZpowCa2Hj2Pme2WeJBA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731513828; x=1732118628;
+ d=1e100.net; s=20230601; t=1731513843; x=1732118643;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sEUePyulAtBttEBj3pDuZ0c0e+xTxdthhxy03UT3KGc=;
- b=SG/GpAoynu9079gVti3FTudG6DXLg8kpfwHn01K1qsXK9sX0GRX0ZqiAG9CMVaqsCU
- UB1WF7YP/4+9mGd1Sz3QZv7G/uqoNJIrGp0s1KbeJbmLTJ1fD8GejpvwAG+VijSDy6Iv
- T/qOqIDHTvtWj8BMl9DcoCxMfcTtAbo+lPGZIAHrZ9EVxLtEJjwz/AMj1pvh9LgdBMUn
- 8R0oJbxohzL1PKwj/XtWh22rgxTvvxacv/18x4CFUJqps1FAp/Yd0uFUvVlNifoo1Ddh
- ctYuI5s9My4VkT0GGK0P/LML8kId97wKaG98Mc0KiTVZxKQ+4ctH8hP1B+6GYctWvcM/
- lOcw==
-X-Gm-Message-State: AOJu0Yyw+tMyxMtotFIq9x56M0gjbcsw3l6QPaA/wsc/i2sM3V9KABe0
- WGlrlbMpKF/z19gBeEZDDS0DdW7WMFhL9MNxq5vAz5ZGviUbAT5NFt5LNedracZ40+khnurPEPa
- rP/+V1jGU0hedJK6X6+S7yuRcihG51lk/HRlxf9E0JfqyVMc=
-X-Google-Smtp-Source: AGHT+IHYSesxc/iy+PyyywSYVP8oBlREvf+vDhzX9MaAhg30HyOFn75A6cZ454bcizbOnorCcmaFQAxfMYhTY0n9v5g=
-X-Received: by 2002:a17:906:ee83:b0:a9e:6712:c27 with SMTP id
- a640c23a62f3a-a9ef0048e17mr2043689266b.49.1731513828023; Wed, 13 Nov 2024
- 08:03:48 -0800 (PST)
+ bh=bb5b9VQqkJ/l/yz3mqefkY4PduUJrXpgcAKGRRXbKTs=;
+ b=GDMH9l90uIatw80YnzZGhZujGACQqwp+OC7pgyLc1QWNg2MJ3FUmrUZkMn2vKi4WH6
+ KRROT0kGn6SPUhfnz5ekWWoqvz72IvOJ4raDQTcW5siJlW5k+QNBfrd142yqi11qqbGk
+ XD2jZQNF+eMbGz4HMChO/m0umcWuvi14WknRDKvuITBP/23ltdnKJy2iTIzvRvqVFeCn
+ cm5kNIsFvCo9X0R+WRZTKlkhfzkqkc9v5AtYuseIPjmuLEonCjiOtBQjVTUorskd6PEm
+ DGNHR55hiSc51P8g89i6NleV2+OJWWBouuf70vcxi4Z7tSsXumFEe2ji+wMApXEd2DXU
+ wEAA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXZNBfODkxvOB6Laoh+nJC0DSSOtymqa05buCl99EJvlb8USH2mkph/6KIzPWkLHUh2bG145yA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwPoJbq5P/kGVpaMff6TSuagT8tpZ0nBMNZpVb85PJo+Chme1EO
+ M/THiyLb7PlFccNPm2AyntrQq4NtqLSxo2fu1P/sx3wKQwi+AjpUprujOAeGMwIXXDQcQ+Ns5PC
+ DJECHuyNgWd33vICEBirhaFHT6ImcghylOLBe
+X-Google-Smtp-Source: AGHT+IFO+XHpye0glQzumQ/MSeKBLnBDWyYP/8TuTh0a1fc7PgopBGp8k9bvfdTH0sUGLinS5ignTmnk/Gsdydfswu8=
+X-Received: by 2002:a17:907:31c2:b0:a99:fb56:39cc with SMTP id
+ a640c23a62f3a-aa1f810644amr321797566b.38.1731513843191; Wed, 13 Nov 2024
+ 08:04:03 -0800 (PST)
 MIME-Version: 1.0
-References: <20241108152350.3686274-1-sjg@chromium.org>
- <20241108152350.3686274-9-sjg@chromium.org>
- <20241113024029.GH3600562@bill-the-cat>
-In-Reply-To: <20241113024029.GH3600562@bill-the-cat>
+References: <20241110083017.367565-1-ilias.apalodimas@linaro.org>
+ <20241110083017.367565-5-ilias.apalodimas@linaro.org>
+ <CAFLszThNpU2cNNvU4uT2vkgFKJr7ss=j_UYfXTFXA_b4=LnurA@mail.gmail.com>
+ <CAC_iWjKFxtBxEqkkXSOhcRqN4fRRgMcsmFRVYeNZOnR4zERrQQ@mail.gmail.com>
+ <CAFLszTjou7yq-psYT3jBU7L8g81+bWUqc9Xj007zqfpfpnP9gg@mail.gmail.com>
+ <CAC_iWjJdK6D+inVSMqJ941yvpDvK4j5XufvA1Fije3aqZvm=1g@mail.gmail.com>
+ <CAFLszTiG9AMPs7q9QJgD5bP4=QwXVxQrOJqpWARamkPXS8p4wg@mail.gmail.com>
+ <CAC_iWjL6BDhRHTYWW25N2v8Aw_MbwTzc+FAX1c6akGKypLKFEA@mail.gmail.com>
+In-Reply-To: <CAC_iWjL6BDhRHTYWW25N2v8Aw_MbwTzc+FAX1c6akGKypLKFEA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Nov 2024 09:03:35 -0700
-Message-ID: <CAFLszTirek2=_j15W5LCZERTs2TZXawV0o3aGO12dgDJpzTdQw@mail.gmail.com>
-Subject: Re: [PATCH 8/9] buildman: Propose a format for extra boards
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Wed, 13 Nov 2024 09:03:51 -0700
+Message-ID: <CAFLszTiPNMEGFPsbsuagcVooPDb_eawafnb=7hWGaDmNYbrqyg@mail.gmail.com>
+Subject: Re: [PATCH v3 4/6] net: lwip: Enable https:// support for wget
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Anton Antonov <Anton.Antonov@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Wei Ming Chen <jj251510319013@gmail.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -84,35 +104,169 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ilias,
 
-On Tue, 12 Nov 2024 at 19:40, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 13 Nov 2024 at 08:11, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 >
-> On Fri, Nov 08, 2024 at 08:23:49AM -0700, Simon Glass wrote:
->
-> > It has become more common to use config fragments to extend or adjust
-> > the functionality of boards in U-Boot.
+> On Wed, 13 Nov 2024 at 17:09, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Propose a format for how to deal with this. It is not implemented as
-> > yet.
+> > Hi Ilias,
 > >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > On Wed, 13 Nov 2024 at 07:46, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > On Wed, 13 Nov 2024 at 15:39, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > HI Ilias,
+> > > >
+> > > > On Mon, 11 Nov 2024 at 07:20, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > Thanks Simon,
+> > > > >
+> > > > > On Mon, 11 Nov 2024 at 15:03, Simon Glass <sjg@chromium.org>
+wrote:
+> > > > > >
+> > > > > > On Sun, 10 Nov 2024 at 01:32, Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >
+> > > > > > > With the recent changes of lwip & mbedTLS we can now download
+from
+> > > > > > > https:// urls instead of just http://.
+> > > > > > > Adjust our wget lwip version parsing to support both URLs.
+> > > > > > > While at it adjust the default TCP window for QEMU since
+https seems to
+> > > > > > > require at least 16384
+> > > > > > >
+> > > > > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > > > > ---
+> > > > > > >  cmd/Kconfig      | 19 +++++++++++
+> > > > > > >  net/lwip/Kconfig |  2 +-
+> > > > > > >  net/lwip/wget.c  | 86
++++++++++++++++++++++++++++++++++++++++++++-----
+> > > > > > >  3 files changed, 97 insertions(+), 10 deletions(-)
+> > > > > >
+> > > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > > > >
+> > > > > > Some nits / questions
+> > > > > >
+> > > > > > I am not sure what mbedtls_hardware_poll() is,
+> > > > >
+> > > > > It's an entropy collector used by mbedTLS to ensure the platform
+has
+> > > > > enough entropy.
+> > > > > It's required if your platform doesn't support standards like the
+> > > > > /dev/urandom or Windows CryptoAPI.
+> > > > >
+> > > > > > but if @len is too
+> > > > > > short, would it be acceptable to return an error? How many
+bytes is it
+> > > > > > requesting in the https case?
+> > > > >
+> > > > > If you don't return enough entropy https:// will fail and mbedTLS
+&
+> > > > > lwIP will print an error. I think we currently use 128 and the
+default
+> > > > > for mbedTLS is 32.
+> > > >
+> > > > OK, then the code is quite strange to me. It seems like it should
+> > > > check that 'len' is large enough.
+> > > >
+> > > > But what does 'len' actually mean? Its arguments are not described
+in
+> > > > mbedtls. Shouldn't you just pass it on to the dm_rng_read()
+function?
+> > >
+> > > The entry point is mbedtls_entropy_func(). mbedtls then calls
+> > > entropy_gather_internal() which asks for some bytes of entropy and is
+> > > controlled by a config option (and defaults to 128 for the config we
+> > > use in U-Boot -- MBEDTLS_ENTROPY_MAX_GATHER). len is actually
+> > > MBEDTLS_ENTROPY_MAX_GATHER.
+> > >
+> > > > Why call it with only 8 bytes? It might be more bytes than is
+> > > > requested (and larger than the buffer), or fewer.
+> > >
+> > > It doesn't matter because we copy back the correct amount of
+> > > bytes(what the caller requested). If it's less mbedTLS calls that
+> > > function until it gathers all requested entropy.
+> > >
+> > > > It seems that your
+> > > > function is written with knowledge of the internals of mbedtls.
+> > >
+> > > Ofc it is. It's a function needed by mbedTLS -- not U-Boot, it
+> > > requires internal knowledge of it (and is probably part of the ABI,
+> > > but I'll have to check that).
+> > >
+> > > What happens in the TLS case is that 64b are required. We either make
+> > > 8 calls of 8b or make a single call with MBEDTLS_ENTROPY_MAX_GATHER.
+> > >
+> > >  I could rewrite it as
+> > >         uclass_first_device(UCLASS_RNG, &dev);
+> > >         if (!dev) {
+> > >                 log_err("Failed to get an rng device\n");
+> > >                 return ret;
+> > >         }
+> > >
+> > >         rng = malloc(len);
+> > >         if (!rng)
+> > >                 return -ENOMEM;
+> > >
+> > >         ret = dm_rng_read(dev, rng, len);
+> > >         if (ret) {
+> > >                 free(rng);
+> > >                 return ret;
+> > >         }
+> > >
+> > >         memcpy(output, rng, len);
+> > >         *olen = len;
+> > >         free(rng);
+> > >
+> > > It does the same thing but gets 128b in one go. I don't have a strong
+> > > opinion on that. Let me know what you prefer
+> > > The tradeoff seems pretty straightforward. you either gather
+> > > potentially more entropy than required and call that function once, or
+> > > you gather exactly what's required on 8b steps -- but call that
+> > > function multiple times.
+> > >
+> > > >
+> > > > BTW mbedtls_hardware_poll() is a strange name as it actually reads
+> > > > random data, so I think it should be renamed.
+> > >
+> > > I don't think that can't change as you would break all projects using
+> > > it, but you can try sending a patch.
+> >
+> > I am wondering why we can't just do:
+> >
+> > ret = dm_rng_read(dev, rng, len);
+> > if (ret)
+> >    return ret;
+> >
+> > *olen = len;
 >
-> I think that the first problem is that this patch series is an
-> inappropriate method and place to start the discussion.
+> I am not sure I am following. Do that were?
 
-We had a discussion a year ago but it trailed off.
+Oh, I had that wrong, so very confusing, sorry. Something like this:
 
->
-> I also think this gets things backwards as the common case is "make",
-> not "buildman". We need more defconfig's that are just base +
-> fragment(s) if they're important enough to be a combination that needs
-> to be tested and work. A board is not a time-expensive part of CI. A
-> pytest run is, a new job itself is.
-
-OK, that would work too. It would also avoid the problem of combinatorial
-explosion. But I am not seeing people actually doing that, with rare
-exceptions.
++int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len,
++                         size_t *olen)
++{
++       struct udevice *dev;
++       int ret;
++
++       ret = uclass_get_device(UCLASS_RNG, 0, &dev);
++       if (ret) {
++               log_err("Failed to get an rng: %d\n", ret);
++               return ret;
++       }
++       ret = dm_rng_read(dev, output, len);
++       if (ret)
++               return ret;
++
++       *olen = len;
++
++       return 0;
++}
 
 Regards,
 Simon
