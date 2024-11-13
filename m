@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F20AD462BF
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 15:10:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D5B7D462BF
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 15:10:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECB70895B4;
-	Wed, 13 Nov 2024 16:10:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5BA82895BE;
+	Wed, 13 Nov 2024 16:10:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CFPLTF+7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PylLaVI2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0A21895B4; Wed, 13 Nov 2024 16:10:06 +0100 (CET)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 8990A89021; Wed, 13 Nov 2024 16:10:07 +0100 (CET)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB6C289417
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 16:10:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6893789595
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 16:10:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-3a71938df57so2091015ab.1
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 07:10:04 -0800 (PST)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-3a3f8543f5eso2651485ab.0
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 07:10:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1731510603; x=1732115403; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GNI8lB63U89LZH6xOeL54DM3rDn+YQ+TLcEmCUhm+Oo=;
- b=CFPLTF+7YvNxMZCSwS9J7+tVpYELWnkP48LT1jC/IC5UuZ00Uo76cdPjE/0hItw0Nq
- rlFnfN0toVqq66SwYjxiuUx8rZF3HWr2g06a1yIejuyLygWzb97z4YLeFs2+n3m2hTwR
- cqZJQgWXWpLsUuqPbQ9i36432UxDJIogL6sz8=
+ bh=xDiSGvZEB8UAa0O5LCj0dybfZf7akhqLiggva7GHgsM=;
+ b=PylLaVI2kPD4onJQ6E6I6Dwct6nqz752CaMr/JQpiGDwqV3fS2shaGQpZnQCLUWJ6L
+ EFxORTL4QrER/Fcy+TJv0uKRf3WWoDnJnJpkRIRuozQgQGJ9MlpSpd0uh7SfM0KGX9cD
+ ycNwZQN/c10epnv77f9hBR/rdcY4BbeZC/NzA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1731510603; x=1732115403;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GNI8lB63U89LZH6xOeL54DM3rDn+YQ+TLcEmCUhm+Oo=;
- b=s4917K7c7mLpZ+oJQRAXUeVqGMsWWGd+hn7ZwkL880eJt1WiBpTKCGCwfN48Ds27CY
- WQcDSOhmqSbLHTV4K75RfthO6ggDP5CxoJ5oM3t80zYOFVl7nTt+HHVAkpDQm689NcS8
- I/wkkqI+rZNbSJ0Ngo+tEiVihOxi3gHBMSmMSTxrxQfuAf92Tlp2zbVIUd5cLPAjOSGF
- fCrzADC8qFoi/is9aSGcTh5LuaabuFwZnqmS80+xrTBDUYYx+M84ch72oDXERpVtWwLU
- 6OybJ97NSYNB9yPEDaseBcseaEVQpdQ7OplTa303iihjQ5FC3nn0PDD7WNX5/6P44Kb0
- B+Lw==
-X-Gm-Message-State: AOJu0YwJTbA1htH2m5wVLFVZI+Jq8dawlO0vn7qHUK/mPpvZjdpNG/1u
- 0hNKTJwShlEfwyEuZJPiO8vR9iEGJka5Gn0k4JA2Ow0+sTmYh2AP79XjUDj/y7zVFEagdQrJIV0
+ bh=xDiSGvZEB8UAa0O5LCj0dybfZf7akhqLiggva7GHgsM=;
+ b=T+VE5+mpxZVPvwDf+u3JXa2bDVzqTNwMA3yA7D8fteXNShj3HayvZQxp7EuZz4eYfW
+ 59yEXc8nk8tcARcY6vYXHrM2QAcfXsa9ED/ZuO8p7iKn/M38MkPocYFF/1Jz5PTmIEra
+ dzfzYYb5rtpC5imd3c9b24EYiZhbyC4MmCFlA+xHsHfpNZAv9hIqoLL02oidahDftwEN
+ jhHeVIm/3hE1byUVS8SchpNr5sMDs+W4ArN3uDaRXlV2DRElGbwnN0euKUgo3ni5zAY3
+ uApYEk+CPZlGI0rDdEIL1suHEvCplEHryf2iekJ415qu50RHKpZ4jRVAHeRPUTYzFhEg
+ YDqQ==
+X-Gm-Message-State: AOJu0Yywxmtn2S6l+s11VYR1uyxUfgqDtiTvFUTX0knelQOQyBfWpngP
+ 4CesxQpLlWz43ltrCe5LRrZ699IZGuQPlVvizgeGnp1QuRh66gt1ZFi9fRu/sYwPM4rHUr5Aih8
  =
-X-Google-Smtp-Source: AGHT+IEopUZU/e669oxNQBgLKJozf0Ob/2eaNP0AJqetEJdnWP0HvFPyihV0lC7vW1QE6VaDLUsWWQ==
-X-Received: by 2002:a92:c242:0:b0:3a7:1aad:e34f with SMTP id
- e9e14a558f8ab-3a71aade413mr15615645ab.11.1731510602752; 
- Wed, 13 Nov 2024 07:10:02 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGv819XIAuP8N8vufcpWgr5Brnay3eeqdyoHiAdjkzFj6F+mUsClNREPc3exGgVdkOgIKJe3Q==
+X-Received: by 2002:a05:6e02:1a69:b0:3a1:a2b4:6665 with SMTP id
+ e9e14a558f8ab-3a6f25615c4mr165555645ab.12.1731510599243; 
+ Wed, 13 Nov 2024 07:09:59 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a719d6b62fsm2710105ab.18.2024.11.13.07.09.59
+ e9e14a558f8ab-3a719d6b62fsm2710105ab.18.2024.11.13.07.09.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 07:10:01 -0800 (PST)
+ Wed, 13 Nov 2024 07:09:58 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
- =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v5 5/8] sunxi: Move to bootstd
-Date: Wed, 13 Nov 2024 08:09:35 -0700
-Message-Id: <20241113150938.1534931-6-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>
+Subject: [PATCH v5 4/8] RFC: Revert "bootstd: Make efi_mgr bootmeth work for
+ non-sandbox setups"
+Date: Wed, 13 Nov 2024 08:09:34 -0700
+Message-Id: <20241113150938.1534931-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241113150938.1534931-1-sjg@chromium.org>
 References: <20241113150938.1534931-1-sjg@chromium.org>
@@ -99,54 +95,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop support for distroboot and move to using bootstd instead.
+This is another option to fix sunxi booting with bootstd, which may be
+better since it will work for all boards. We can then figure out how to
+automatically and deterministicaly decide when bootmgr should be used.
+
+This reverts commit f2bfa0cb17948aa4a0fa20fdf9014296b9c4d9c7.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
+If this patch is applied, we don't need to drop bootmgr for sunxi
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Convert the other DISTRO_DEFAULTS in the Kconfig too
+ boot/bootmeth_efi_mgr.c | 18 +-----------------
+ 1 file changed, 1 insertion(+), 17 deletions(-)
 
- arch/arm/Kconfig | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 7282c4123b0..b08d8d4ff27 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1155,7 +1155,7 @@ config ARCH_SUNXI
- 	select BINMAN
- 	select CMD_GPIO
- 	select CMD_MMC if MMC
--	select CMD_USB if DISTRO_DEFAULTS && USB_HOST
-+	select CMD_USB if BOOTSTD_DEFAULTS && USB_HOST
- 	select CLK
- 	select DM
- 	select DM_GPIO
-@@ -1177,9 +1177,9 @@ config ARCH_SUNXI
- 	select SUNXI_GPIO
- 	select SYS_NS16550
- 	select SYS_THUMB_BUILD if !ARM64
--	select USB if DISTRO_DEFAULTS
--	select USB_KEYBOARD if DISTRO_DEFAULTS && USB_HOST
--	select USB_STORAGE if DISTRO_DEFAULTS && USB_HOST
-+	select USB if BOOTSTD_DEFAULTS
-+	select USB_KEYBOARD if BOOTSTD_DEFAULTS && USB_HOST
-+	select USB_STORAGE if BOOTSTD_DEFAULTS && USB_HOST
- 	select SPL_USE_TINY_PRINTF if SPL
- 	select USE_PREBOOT
- 	select SYS_RELOC_GD_ENV_ADDR
-@@ -1187,7 +1187,7 @@ config ARCH_SUNXI
- 	imply CMD_DM
- 	imply CMD_GPT
- 	imply CMD_UBI if MTD_RAW_NAND
--	imply DISTRO_DEFAULTS
-+	imply BOOTSTD_DEFAULTS
- 	imply DM_REGULATOR
- 	imply DM_REGULATOR_FIXED
- 	imply FAT_WRITE
+diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
+index 23ae1e610ac..095fa74fc60 100644
+--- a/boot/bootmeth_efi_mgr.c
++++ b/boot/bootmeth_efi_mgr.c
+@@ -14,8 +14,6 @@
+ #include <command.h>
+ #include <dm.h>
+ #include <efi_loader.h>
+-#include <efi_variable.h>
+-#include <malloc.h>
+ 
+ /**
+  * struct efi_mgr_priv - private info for the efi-mgr driver
+@@ -48,27 +46,13 @@ static int efi_mgr_check(struct udevice *dev, struct bootflow_iter *iter)
+ static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+ {
+ 	struct efi_mgr_priv *priv = dev_get_priv(dev);
+-	efi_status_t ret;
+-	efi_uintn_t size;
+-	u16 *bootorder;
+ 
+ 	if (priv->fake_dev) {
+ 		bflow->state = BOOTFLOWST_READY;
+ 		return 0;
+ 	}
+ 
+-	ret = efi_init_obj_list();
+-	if (ret)
+-		return log_msg_ret("init", ret);
+-
+-	/* Enable this method if the "BootOrder" UEFI exists. */
+-	bootorder = efi_get_var(u"BootOrder", &efi_global_variable_guid,
+-				&size);
+-	if (bootorder) {
+-		free(bootorder);
+-		bflow->state = BOOTFLOWST_READY;
+-		return 0;
+-	}
++	/* To be implemented */
+ 
+ 	return -EINVAL;
+ }
 -- 
 2.34.1
 
