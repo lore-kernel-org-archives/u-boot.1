@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9885DD41C33
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 11:29:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E199D41C39
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 11:47:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAD3C8905E;
-	Wed, 13 Nov 2024 12:29:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 797D289449;
+	Wed, 13 Nov 2024 12:47:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gbkac4ZT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ocJc3/Mw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5541A8905E; Wed, 13 Nov 2024 12:29:11 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 88BFC894AB; Wed, 13 Nov 2024 12:47:05 +0100 (CET)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1ECD8904C
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 12:29:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8A5188F8E
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 12:47:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-71e61b47c6cso6138110b3a.2
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 03:29:08 -0800 (PST)
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-720b2d8bb8dso4953136b3a.1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 03:47:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731497347; x=1732102147; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=91W9iX7UAyvG/MbT31rKAJzSjCQxpaJYJ5GJfihoSFM=;
- b=gbkac4ZT9d+o1tFN8AqmtIRS1+HDFmsuDiaYse2XVQQIojB9+PJzEwpmM09Sv275D9
- ra/U/HHHcdLDjVo/KJPb99YtoCirqy76DWFdq1oULM3bvwHZtD028iVysJuc1loxGnVU
- UvY7EOXYVxat+AzPvukxJOQogd1XsaIA0OeVPz5Q+nEjwiq0729X4fp4RiLlz2Dz/RMe
- +9K/innUbVC3Iz2h482QG6EhJN+idIOOn5fmMW5Kbq76ia8t8ZTVtQmb5JoOLfGhwXHo
- f1tBpEKKRqvZk5f+IO4OzhY485VGdkxcRPnlmn6P41+21VQJnq5URRPJ9p0wUe+FgvpP
- +GJw==
+ d=linaro.org; s=google; t=1731498421; x=1732103221; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=smmidwOxcivwu06j5bNJP7K8bt+xykkJpw57j0p6Ib0=;
+ b=ocJc3/Mw3J8ehXIdur07s9dwXCZXmJewmPUQpHhOjsPQgc1+KhuF0KKPVq7dM/hfMZ
+ wEkpQtfMl4Bhwl67lcbE0TETX9Y3L3Vz3dUoHLE+ErjzNPeN6Zo99Fetj3N/5IRRpWOB
+ wIEZFuQutRhiYv4KAYUf+QpWqMaohormUzQMdwKspmil4EQiwRGIXtmcNmaxWv5M6qwl
+ whesrv5ekyYuIux5d92KtbY3T4eRCP5PkMM7k9k9HkxLT14nWKIM+np/Gk86lcqbr41Z
+ Hvcf18RUcaYehI7xjhHHrb7X/KmnRIoCklYp1U4GA92fqCpIM27uuWuab0cynFC/+mw3
+ tOLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731497347; x=1732102147;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=91W9iX7UAyvG/MbT31rKAJzSjCQxpaJYJ5GJfihoSFM=;
- b=G28zZOeXILoRpNcXDOzWs/JOFQD6dWBhMhsq4oa/G8LgL9/xi76izaUGDqI16v670B
- SpTtVLeezsn9wW3Cb4OIEwypQ77E1RgoKtLQ1OMccye3fEkxobdKDNJMVkHUKsMKTfXx
- k2nxbqLW5G+oHxZsxbTBC7/XXoTt0Xb8DIenDcGXGHjNmH3VGfNGt5r6pIaKG8cWvusI
- JBay2AS9osK1tetF7ed4AdkANYtp0YjBEjFCwbdN7EIzgN+nEpoRdkI/OgAb1ImSkDg/
- vaVIW76/GTAzxH21mtvQ2r6iNdKivhujQbEnjKq5bsGKhi7p6Cdz0HYSRRfJVn7cvtyr
- 8UNQ==
+ d=1e100.net; s=20230601; t=1731498421; x=1732103221;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=smmidwOxcivwu06j5bNJP7K8bt+xykkJpw57j0p6Ib0=;
+ b=GUAG+YEDad2vPT8njKkidXaDFFLvwnsLhagRnZAe3FqKwFvwIzeumJ5Z4H5TSLKdXe
+ K3i9nm+AzD11eWmHlVkrYMJn3Eu8nJbTGN3X0XtFdsj9ZRAPWTJq15U37TpSJXs1GFbx
+ 2wtwDey8NohUgRFUM8qUUrfBPhPemHfIqBAPvFbnxVV52yUtLlI4TwCgoIjPbF5Gv9zJ
+ VL/lkkQG4KTcnsJWxS2D4oXoqER6h/VTUdIlmQWYUDENvLm7qDOViSM4IGxCQTu922Ic
+ MP/3DapgZ4JqxQCqtFCKErB+8/n/bYglo2M5GuyEGWYXJNRSQ/p+pyVSYPJxOKYVi/Aj
+ 9VEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVlpY8tjT6hr1Lr+oHEsk2hTxPw4VRC3z/n/C+hfZFP795Ydn/tzgKkVQgVYdR5HTrQl0Cp21M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz1Nmnk0izqFrnS0vrWKtbw4qu/luMN3SEWyXYSMCwlMu48wK7X
- T9rAm5pubAm+UqWQHct1aTCou5ov2NFuxwm9QUjg1qa/pWsH2p8I3DmWoGoqyiQTDsMgtexBb5W
- 6TCkRF9hg7TFegssR0hcGPc8+cwdgMQaUrBQ+pA==
-X-Google-Smtp-Source: AGHT+IE2fY2YolCFyTzeiR92s94q8IPDr3a4Zyy2E0BUH39rDf+QrrwaLsXaF2oDY9iJrC0uZM96LhPfq1Wgas912iI=
-X-Received: by 2002:a17:90b:1a8c:b0:2e2:cef9:4d98 with SMTP id
- 98e67ed59e1d1-2e9b177bad9mr26384571a91.25.1731497347491; Wed, 13 Nov 2024
- 03:29:07 -0800 (PST)
+ AJvYcCVvirysoHhY/O1CVqBzyeXhsRsyaIKNwCd0CsLE/UK2Foivjkcw1KX3kHszEZ443+VD9QUdqVo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1gh8n6EyHYz4krouhFYvPulGNrupn77k22YHJ1IhfJPPfA0hT
+ M5t0p/EUlsCCEE1Rvp5jSGIBPwEnLkJg1WFsXcd2OUIkz4e9HRYyrP/6FJt48yHW7Azyn0JaqRj
+ Eg68biWKgaHObCwJJ6vN+pNR3t4qhiewG15RC/Xep1OoJ51m+q6s=
+X-Google-Smtp-Source: AGHT+IEg57XWtKNyrtGGMoXZT6c0ZhFNz0Lgj8K8wD63AhB/yfQO6M2+IWmv6KYPly2gxCNYGVu2VIqeo+42g7HeheE=
+X-Received: by 2002:a17:90b:38ce:b0:2cb:4e14:fd5d with SMTP id
+ 98e67ed59e1d1-2e9b173c84cmr27126125a91.17.1731498421334; Wed, 13 Nov 2024
+ 03:47:01 -0800 (PST)
 MIME-Version: 1.0
-References: <20241112131830.576864-1-sjg@chromium.org>
- <CADg8p949qx=irjZKgf9-B4wtCYx1pDj29LFH86YR4T1zyKtAvg@mail.gmail.com>
-In-Reply-To: <CADg8p949qx=irjZKgf9-B4wtCYx1pDj29LFH86YR4T1zyKtAvg@mail.gmail.com>
+References: <20241107025831.5459-1-semen.protsenko@linaro.org>
+ <CAC_iWjJVRvi2WB5ChTq26KLVdhoACq2FyFqM5jrk5uKM_CZ93A@mail.gmail.com>
+ <CAPLW+4kuBoprcOXL-rYCWU5w9-Q8X78eE4=7KmnCdDT=4HiaTA@mail.gmail.com>
+In-Reply-To: <CAPLW+4kuBoprcOXL-rYCWU5w9-Q8X78eE4=7KmnCdDT=4HiaTA@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 13 Nov 2024 13:28:31 +0200
-Message-ID: <CAC_iWj+U945S96mE4E3d_bLxQ-9iQhErXBaJW0WCpLB1X=VVqQ@mail.gmail.com>
-Subject: Re: [PATCH] Revert "efi_memory: do not add U-Boot memory to the
- memory map"
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Date: Wed, 13 Nov 2024 13:46:25 +0200
+Message-ID: <CAC_iWj+i9-jifxC2tndP3Y6m0Sy7b4x91kOGGKQgsXe_CYqFhw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] armv8: Fix get_sctlr() return type
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ David Feng <fenghua@phytium.com.cn>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,78 +92,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh
-
-On Tue, 12 Nov 2024 at 20:46, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Wed, 13 Nov 2024 at 04:30, Sam Protsenko <semen.protsenko@linaro.org> wr=
+ote:
 >
-> On Tue, 12 Nov 2024 at 18:48, Simon Glass <sjg@chromium.org> wrote:
+> On Mon, Nov 11, 2024 at 8:48=E2=80=AFAM Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > A bisect of Ubuntu 2022.04 boot-failure on qemu-x86_64 resulted in this
-> > patch. I am not sure how to investigate it.
+> > On Thu, 7 Nov 2024 at 04:58, Sam Protsenko <semen.protsenko@linaro.org>=
+ wrote:
+> > >
+> > > SCTLR_EL2 is a 64-bit register [1]. Return its value as long (64 bit)
+> > > instead of int (32 bit) in get_sctlr() to make sure it's not trimmed.
+> > >
+> > > [1] https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-R=
+egisters/SCTLR-EL2--System-Control-Register--EL2-?lang=3Den
+> > >
+> > > Fixes: 0ae7653128c8 ("arm64: core support")
+> > > Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> > > ---
+> > > Changes in v2:
+> > >   - None (this patch was introduced in v2)
+> > >
+> > >  arch/arm/cpu/armv8/cache_v8.c | 2 +-
+> > >  arch/arm/include/asm/system.h | 2 +-
+> > >  2 files changed, 2 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache=
+_v8.c
+> > > index e6be6359c5d9..5d6953ffedd1 100644
+> > > --- a/arch/arm/cpu/armv8/cache_v8.c
+> > > +++ b/arch/arm/cpu/armv8/cache_v8.c
+> > > @@ -825,7 +825,7 @@ void dcache_enable(void)
+> > >
+> > >  void dcache_disable(void)
+> > >  {
+> > > -       uint32_t sctlr;
+> > > +       unsigned long sctlr;
 > >
-> > The boot hangs at some point during booting of the install image, before
-> > the Ubuntu logo appears.
+> > Although that's correct since it's a 64bit platform, isn't it better
+> > to define it as u64 to be sure we'll have at least 64 bits?
 > >
-> > I will sent a series with a script showing how it is run.
-> >
-> > This reverts commit a68c9ac5d8afc51c619c5d3e865fcf147bea90cb.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
 >
-> This seems to be an issue specific to the x86 architecture. The
-> installation works on arm64 and riscv (confirmed by Heinrich)
-> architectures. I checked the output of the EFI memory map with the
-> above commit against the master branch, and the only difference is
-> that with this revert, the EFI memory map has the u-boot memory region
-> marked as EFI_BOOT_SERVICES_CODE, whereas without this commit, that
-> region is marked as reserved.
+> Thanks for reviewing this! I considered making it uint64_t while
+> reworking this bit. This 'sctlr' variable is assigned to get_sctlr()
+> return value, and then passed to set_sctlr() as a parameter, both of
+> which are 'unsigned long'. So I made 'sctlr' unsigned long too, just
+> to match the signatures of mentioned functions. As for get_sctlr(), I
+> just followed the style already existed inside and around that
+> function. As you said, both u64 and unsigned long are 64-bit long
+> types on ARMv8, and that's definitely ARMv8 specific file, so I guess
+> that should be fine? In any case, if you have a strong opinion about
+> this, please let me know and I'll rework it; both u64 and unsigned
+> long look ok to me in this context.
 
-Hmm why? LMB is adding this with EFI_BOOT_SERVICES_CODE  in
-lmb_map_update_notify(). Who's switching it to reserved?
-This is a pretty big change since the memory switches from reusable to
-reserved for the OS.
-
-> I need to look into this in more detail,
-> but it would seem like the x86 kernel (or some efi stub code ?) is
-> expecting some region of memory marked as EFI_BOOT_SERVICES_CODE,
-> which is not the case for other architectures.
-
-Not EFI_BOOT_SERVICES_CODE explicitly, probably just a reusable type of memory.
-
-Cheers
-/Ilias
-
-
+Yea perhaps I am nitpicking too much
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 >
-> -sughosh
->
-> >
-> >  lib/efi_loader/efi_memory.c | 10 ++++++++++
-> >  1 file changed, 10 insertions(+)
-> >
-> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index d2f5d563f2a..c7400ec9854 100644
-> > --- a/lib/efi_loader/efi_memory.c
-> > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -809,6 +809,16 @@ static void add_u_boot_and_runtime(void)
-> >  {
-> >         unsigned long runtime_start, runtime_end, runtime_pages;
-> >         unsigned long runtime_mask = EFI_PAGE_MASK;
-> > +       unsigned long uboot_start, uboot_pages;
-> > +       unsigned long uboot_stack_size = CONFIG_STACK_SIZE;
-> > +
-> > +       /* Add U-Boot */
-> > +       uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
-> > +                      uboot_stack_size) & ~EFI_PAGE_MASK;
-> > +       uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
-> > +                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
-> > +       efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
-> > +                             false);
-> >
-> >  #if defined(__aarch64__)
-> >         /*
-> > --
-> > 2.34.1
-> >
+> > Thanks
+> > /Ilias
+> > >
+> > >         sctlr =3D get_sctlr();
+> > >
+> > > diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/sys=
+tem.h
+> > > index 52f6c9b934d7..dbf9ab43e280 100644
+> > > --- a/arch/arm/include/asm/system.h
+> > > +++ b/arch/arm/include/asm/system.h
+> > > @@ -171,7 +171,7 @@ static inline unsigned int current_el(void)
+> > >         return 3 & (el >> 2);
+> > >  }
+> > >
+> > > -static inline unsigned int get_sctlr(void)
+> > > +static inline unsigned long get_sctlr(void)
+> > >  {
+> > >         unsigned int el;
+> > >         unsigned long val;
+> > > --
+> > > 2.39.5
+> > >
