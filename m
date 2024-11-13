@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CBD8D637A4
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 17:50:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 982EFD637A4
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 17:52:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72F1388FFC;
-	Wed, 13 Nov 2024 18:50:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 071DF88FFC;
+	Wed, 13 Nov 2024 18:52:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MuhgbQdJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ORnt1MWs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DB00891E3; Wed, 13 Nov 2024 18:50:24 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 5F02A88D56; Wed, 13 Nov 2024 18:52:35 +0100 (CET)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97FF388D56
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 18:50:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3731088FFC
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 18:52:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7181285c7c4so3788031a34.0
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 09:50:21 -0800 (PST)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-5ee461f5dedso4105475eaf.0
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 09:52:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731520220; x=1732125020; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731520352; x=1732125152; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LKwziRZvD+J/iXYTBJ3FczttEeM8pjnzwoTfIvBMLsw=;
- b=MuhgbQdJ2h8X8E6PK00BhDo60L9IqsAKR43J52EIkeH7MgQpJ7plPXQeJirIy3JIBO
- f5y6id0TOFdniliOHuBlFEtRMqRmoKfPPyqcXJhGnwBVqrvFddZyWyJ+IvGZucbgf5Aw
- hXnyyOhlVC7csFBu5luQqwkBnSELdyBE+RbZk=
+ bh=Pk8TE37F6JznX3g6PZ9CtSjn4SoDHeWDRYeV1sANrCY=;
+ b=ORnt1MWslhYllg66qyCp30ystfvgylVfjlyxfAOKcoriqO1ZW8+YJe+jj+R/v62tVo
+ 0jCzQtjoXHdum6mOK7GLU1GXzBquRg9BUhlgnbO4YpMr/aEtFbd7Mk1RK1sQmPl92h1k
+ m+EYSEINYWompylhZJhDPFcbdbcJ+52aWT3Bo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731520220; x=1732125020;
+ d=1e100.net; s=20230601; t=1731520352; x=1732125152;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LKwziRZvD+J/iXYTBJ3FczttEeM8pjnzwoTfIvBMLsw=;
- b=H3Nv6w/vl8DQizUyTBFOQNIKL1aCCk44Gky8J7Zb85JJcuspMqaiGnGvQGslRqmuTv
- nddeWSh/XkjhW5sKj1ATeWk1XZA1YHC7KAZXyqNwNtHH2Y8u10oRWCXdNhPx39qu4NMe
- HyX2lMXdSiwlZnwo1Eh5YAyT4LTFEkFf+pS6P+VxbcsnBGMuPMZK+V6VEjrDrSH7ETKL
- jrLUQrfkhhit5i+ybBL3gIKv7iELeqvPK5NKDLmAq6BwwcUx87yrh6jCZ88HJ0UWxQ58
- 9nUoN4RBw2reBawHdVcTyTaGYlSzlyM0l6wzyU5zDG8DHUhVSrqp5oMgd/6UUa2Dj6zm
- w0+w==
-X-Gm-Message-State: AOJu0Yy4hNcJcQqF0Ds/GLbqaYMvHqH27a4D2Agky0PlVRTMv4LIwp8F
- DGdZhWr9buUVgkW5mBDhQZgAgFoD1GA3S7T9pSHW5n908IO4J5y40S227cKeGPU=
-X-Google-Smtp-Source: AGHT+IEO7GpK+iF5ip3haYWUvVmC94FptV8h6NrB4YASwuA/DqOQJc0FvUw0qTaQoaPgUfSMl8hl6g==
-X-Received: by 2002:a05:6830:3c0e:b0:715:4a9c:a7f2 with SMTP id
- 46e09a7af769-71a1c28adb6mr19389642a34.24.1731520220355; 
- Wed, 13 Nov 2024 09:50:20 -0800 (PST)
+ bh=Pk8TE37F6JznX3g6PZ9CtSjn4SoDHeWDRYeV1sANrCY=;
+ b=mi6PlX99t7/bSh79ychZLdDDQbdlvv4Wa1IGmVUBW2O5KstE8Gd+KboRZFoBUVc9ij
+ CjMprSqh76ucE52Vcr/6eeSCgEHXo5cbH05W0bh3LMiRGzkd6xu+JYiaTcV1A8eZN3/H
+ x9JBSk0A6zgnfQmEaCFw1meEp1kkPtqktZi8V/8tajLYYDgrrXfZkfhG+5swiw+UiCiH
+ vixOY71EErdsujWohXnCtmssInSyM9+UCGNGOAeE12+1NFkUtFBUf+zkxadZAhTD50mh
+ sLUJh23jcFI9F9Dz1M9mj3o1WfMV6xfKU5UcKJD5RaLioWT6I6y0JnZo3hcxNyro5ICA
+ cIKw==
+X-Gm-Message-State: AOJu0Yxy68yNiwCWo2w4P2XrCcndDKVSdh31I4DtVn0LpnohijTxoUiN
+ NmyncZ4uRyiupm8lGw+H9BardM4iNB6aFofjukJEUpxhjd8gwAO7XMuDzwYpr02D6cDSwLmLwMh
+ P+l4=
+X-Google-Smtp-Source: AGHT+IEqaTZNOUTY6MgGlIdYxjpY5RahV77zg7NQJjUtknn/pG/14XFEas2FUo692qu7qgqZDJomMw==
+X-Received: by 2002:a05:6820:4b0a:b0:5eb:c6ba:796d with SMTP id
+ 006d021491bc7-5ee57ba9b64mr15919529eaf.1.1731520351894; 
+ Wed, 13 Nov 2024 09:52:31 -0800 (PST)
 Received: from bill-the-cat ([145.14.135.248])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-71a5fe8eb32sm785658a34.26.2024.11.13.09.50.18
+ 006d021491bc7-5ee4950f88bsm3097211eaf.17.2024.11.13.09.52.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 09:50:19 -0800 (PST)
-Date: Wed, 13 Nov 2024 11:50:17 -0600
+ Wed, 13 Nov 2024 09:52:31 -0800 (PST)
+Date: Wed, 13 Nov 2024 11:52:28 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: Re: [PATCH v5 3/8] efi_loader: bootstd: Drop bootmgr for sunxi
-Message-ID: <20241113175017.GS3600562@bill-the-cat>
+ Mark Kettenis <kettenis@openbsd.org>
+Subject: Re: [PATCH v5 4/8] RFC: Revert "bootstd: Make efi_mgr bootmeth work
+ for non-sandbox setups"
+Message-ID: <20241113175228.GT3600562@bill-the-cat>
 References: <20241113150938.1534931-1-sjg@chromium.org>
- <20241113150938.1534931-4-sjg@chromium.org>
+ <20241113150938.1534931-5-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mbbmCgdKfKHOULEm"
+ protocol="application/pgp-signature"; boundary="bQp1cWZddDGMaQ/n"
 Content-Disposition: inline
-In-Reply-To: <20241113150938.1534931-4-sjg@chromium.org>
+In-Reply-To: <20241113150938.1534931-5-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,45 +100,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---mbbmCgdKfKHOULEm
+--bQp1cWZddDGMaQ/n
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 13, 2024 at 08:09:33AM -0700, Simon Glass wrote:
+On Wed, Nov 13, 2024 at 08:09:34AM -0700, Simon Glass wrote:
 
-> This causes problems with the boot order, so drop it until we can figure
-> out a better way to know when bootmgr should be used.
+> This is another option to fix sunxi booting with bootstd, which may be
+> better since it will work for all boards. We can then figure out how to
+> automatically and deterministicaly decide when bootmgr should be used.
 >=20
-> Link: https://lore.kernel.org/u-boot/20241112171205.4e80548d@donnerap.man=
-chester.arm.com/
+> This reverts commit f2bfa0cb17948aa4a0fa20fdf9014296b9c4d9c7.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> If this patch is applied, we don't need to drop bootmgr for sunxi
+>=20
+> (no changes since v1)
+>=20
+>  boot/bootmeth_efi_mgr.c | 18 +-----------------
+>  1 file changed, 1 insertion(+), 17 deletions(-)
 
-I would really prefer a short summary of the contents of the link in the
-commit message. I'm not NAK'ing the patch as-is, but it would be helpful
-when revisiting this if there was a short explanation of the problem to
-solve here and not just "problems with the boot order". Thanks.
+This seems like the wrong direction to go since one of the common cases
+should be "Do we just want to fire off the EFI boot manager? Yes" since
+lots of "off the shelf" operating systems want to treat ARM just like
+x86 and not have to special-case things.
 
 --=20
 Tom
 
---mbbmCgdKfKHOULEm
+--bQp1cWZddDGMaQ/n
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc05tkACgkQFHw5/5Y0
-tyw3rAv8DJX8Yk3B4iHfjlsVqmdHUV3EYmFccjDxh3qBdOweUd5pe4idXjgvpVRp
-YLkiO3S4j/80l+YvXOqI+L7M3y6V3EMQIOnFVe6qxH+OpGxuZqewuGjRF2/XbzVy
-AeOnzQxd1qxhZI6VT67Ytf+0jbTtqyk1o3Jsq/YRxa+4T95StAO7iBM9dcs4eFFg
-+PEebptIrt7+p8haC99Oyw6GnsoFUwbVQnDhW/rkPa5juwO6F12NVNJhXnF52rEX
-ppI7IyeD48sdzLw+ZO2UIxrW8pV826dtKy+oojN4Cd2jCxI5yahX5mdtI1hvKkO1
-s2RqN6MObDKIITXIagpnyNfZt4pk46vwMsbKO33x6QDEFYyJJjM7BypbXBnDLNLG
-xJH+n3ZPAfoEBZnIcPok+9ZZmvJlo4HHHFLgX7ycl2sT7GPdWnq8Zx+KCtqRcu08
-4nM5LkIjapESbARCpjSkwxN/MSLmXy+VvKKK37AF4+D0HQ+Yqx/i8hYeEXZ1Db8l
-d2jJtz0b
-=6AZX
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc051wACgkQFHw5/5Y0
+tyw9kwv+MWKpvaLouewqw5y6jmlrYS2JsgwD3FYNa9bUow0/sQ03tYcuQ4Atluq7
+g8IY6g0DTNqAHVmZdGBM4SuD8uX9I68E4IYZRGnp9QazFtAnQAhiflK9uSIhSnc7
+jp/z7DoR/pEJ9fxmsqnLMMtiuooZ26I4lXLhPG1/axGBUaesTv3Dj5MM/nJGpJHS
+HvgtUbet+z0cRiQ7EVuZ7ZGREqzyB4KFs7hVf82UJg+ENYFNl4MYfpWQuzpJ9Rez
+NvT9j+bunoJf5M76i7QDggA45C2N7jJncsdmPU1MYtJyYD9o//if+qxvYsn9RUKO
+XMC3+Nb5Ypy5xoyLmrK4GzlP1dpvRpyRnXTJGBKXIniOY7afizOKbyp7XlVGo4DP
+2cEnFRg89v2MwaOnmtHAiy/Y495jFhyxWQXeiabK5C5uMO1Xq8V2cv+Kh8lsQfkG
+Xpt/7A5VqmOr1ZF7R95gZgaYJrUvdifWYg/97MdqBCvghn4n7Q/5dl0j57E4JyTo
+TJeOAWjc
+=LQ2O
 -----END PGP SIGNATURE-----
 
---mbbmCgdKfKHOULEm--
+--bQp1cWZddDGMaQ/n--
