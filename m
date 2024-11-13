@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B44DD41C02
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 05:06:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E935D41C00
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 05:09:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B3D688E3F;
-	Wed, 13 Nov 2024 06:06:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 21468894E8;
+	Wed, 13 Nov 2024 06:09:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wOuNeb/8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xB/dEi3+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A9CA8952B; Wed, 13 Nov 2024 06:06:22 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id E62C8894F3; Wed, 13 Nov 2024 06:09:44 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B308884D2
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:06:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC4FC88C0F
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:09:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5cedf5fe237so7822729a12.3
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 21:06:20 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-aa1f1f2d508so96569866b.2
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 21:09:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731474379; x=1732079179; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1731474582; x=1732079382; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wAX5Ef2SrOxGF+xYVjbG4OIUse+l2G80GuismvHqiWE=;
- b=wOuNeb/8rAqdEdyAEJkKG/oCXXewFF3k6Smkmbk/7qlsZRqWzW+jH4/HvT6vwcL7zN
- aMD7HVYLifbnfwoM2F7CKLIJpQl7SL8NDlEVg7qCcy+zS4B9ntJ5XmbC7avYj5a/QnP/
- g/KekO7QYaKOFPpgZ3bqwI39AsdN3erkQWID5vad1uUrO+J7hQRXrab135uvVf01Zz7c
- m9xz5vKvq5+l+/v11ilHivCr9pzsNQlGb8ZFR8jGJadK3PXiBEHg08i81mwz1+bPf8B8
- PxGr+21/Gn4/o1U8UNql2GnEhXbnalWa9n8LCPVYUf3MGLWl03qIAyCAJULG9M46+Mul
- x7YA==
+ bh=V3qbSGEhVxxKLIcrYq2faMiNq6QqZgNMoK53D0Qu75I=;
+ b=xB/dEi3+YwRP6qKmAkKjtI16Yzhv0IlwekzhCJSeLcKkC6N4yMD/FSBwT/pvYsI2aO
+ 77iQAw0AKBkTF7AnN+v4grEfC0FHjSoZKx99LkiCCyjyduJycrogz7EWMAuCuy3hSMuu
+ HGn/er3VMODaitECWxDNUS7s5vpqc0S0GsZAF+LEFAfKv5XerWmJOTSZ1bMNzYcT0fie
+ Ztc6Cm/XfqgPZhSZYZyxX3arxIeSw5KfEQgMKqHjjfBCcbeFVeQCI6Fc4weIRWHqYC9a
+ X86WusrfETf24reNOGdtg0hl27/RhiKI8UcRYFyP8zvE/p2FRL34hFHvJFkcZ91z22/3
+ BJ/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731474379; x=1732079179;
+ d=1e100.net; s=20230601; t=1731474582; x=1732079382;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wAX5Ef2SrOxGF+xYVjbG4OIUse+l2G80GuismvHqiWE=;
- b=Zr/MPrGwD+AnlI3DzTWbB0F/RVQeYu7YvA3H3iz+xch6MhzCKBd7EKt7LvGnqVofaQ
- 382ZUKrmSomjxmNLKtGaKcl4tOas/7hopIvBlux8G63eNFZSwYim2RTnyVA4BWbtYEDX
- DyKZrPFQ9wGsdY7KAaAPKoAISCaf6GwGMRfbNifyZmLOzmYMiXeYbcHC86eoXbjt164T
- wW/6koMJxuyYB3UDPgHrvmCTAjzSdTOs99EAiw6DAZBl2R+oWT2eeG2ByffZMLohdvbA
- QcNR8O0b4AjpjTfAmQ/lrXBmOvHVjvdKeM5QfcfUbsbQHnMUVuYKYhsJxRvzY0m7RrZb
- ZpiA==
-X-Gm-Message-State: AOJu0YzzK9lYziyem1oEs1DMLKVVNkO2ob5Gmv9RxrNmb74g9IohySRn
- /s8gPj7zVlY4FGJNJe2ajLDGK85H+nHwweNlVNwaONIqd0WlW9jq5DMMJUS9Wi4=
-X-Google-Smtp-Source: AGHT+IF5VVz9fb998T6h9p2LwdBce90TtEmd0tJbKc9qzKKvwrEel52xcdD9hFlgj9UjY3CoVHd7Rg==
-X-Received: by 2002:a05:6402:1d4b:b0:5c9:5e43:9480 with SMTP id
- 4fb4d7f45d1cf-5cf0a310c43mr11753368a12.7.1731474379542; 
- Tue, 12 Nov 2024 21:06:19 -0800 (PST)
+ bh=V3qbSGEhVxxKLIcrYq2faMiNq6QqZgNMoK53D0Qu75I=;
+ b=cQLJq8Ves4A92CaYvJOWZG3Yatyu3zImmZkm9KqVkRVNSHKKXZuBUqScnJ9XGbjAdR
+ mEcfMz1AgZar0mViOsU1sEW99ywj+GXqqB/ZCy/sx/BnXaxnElpwsn7o/uQSCRhmsiaZ
+ 2zkB+37W4qFnQ1rqaCux+j/vzpUjVP79B8A575KMbgiXoGqU1oM0RTwqIEeemSMhVGKk
+ wr4VNbglf7HWu8R04xemR1EbNhQrNB/u8wU3Qn512V1HaDKWxDoUGMNEfiN0zGGp+sTd
+ XAligYHf0vtxq8FI6dDwINW1dXfopBxzb8igAWCiBmv6VgGOW16+7Jvi5mkFi/yiK8eM
+ hkAg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXBMYotcJqjGJ5YD0x7vR27qnEA1APfptFI5F7gNM26j+zp6063uk6vkIHC3FHJHm2YZ6nnYfs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw/h3G0SeELqWN9Vb09lHX0P8CvKuqOQ0S700f95XFQmsYnez9c
+ MKPT3ajK4JkGq/WibCLDapLjV626E3pzWFFWLv22u+lAyUNbiWxqsfvEfeCxr3c=
+X-Google-Smtp-Source: AGHT+IGi8Wb6ZqE2op3ktwKXpHSotQnoCVtiiiUd1cGBU31F5oQv8v6fbH/IHYdZthFTGRIJzevwXg==
+X-Received: by 2002:a17:906:d554:b0:a9e:8612:eeca with SMTP id
+ a640c23a62f3a-a9ef001710dmr1900189666b.48.1731474582302; 
+ Tue, 12 Nov 2024 21:09:42 -0800 (PST)
 Received: from lion.caleb.rex.connolly.tech
  ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cf03c7ce0asm6727970a12.85.2024.11.12.21.06.17
+ a640c23a62f3a-a9ee0dc4cbdsm827746166b.108.2024.11.12.21.09.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 21:06:18 -0800 (PST)
+ Tue, 12 Nov 2024 21:09:41 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>, Ion Agorria <ion@agorria.com>,
+To: Caleb Connolly <caleb.connolly@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] fastboot: properly handle unknown partition type
-Date: Wed, 13 Nov 2024 06:05:59 +0100
-Message-ID: <20241113050607.1850472-1-caleb.connolly@linaro.org>
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io,
+	u-boot@lists.denx.de
+Subject: [PATCH] iommu: qcom-smmu: handle running in el2
+Date: Wed, 13 Nov 2024 06:09:24 +0100
+Message-ID: <20241113050931.1853447-1-caleb.connolly@linaro.org>
 X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,37 +95,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In getvar_partition_type() we attempt to find a filesystem driver for
-the partition (of the list of driver enabled in U-Boot), on failure we
-return the error to fastboot and completely bail out of the operation.
-
-However, this should not be a failure, instead we should just default to
-"raw". This allows commands like "fastboot format:ext4 userdata" to work
-if userdata didn't already have an ext4 partition table (or if FS_EXT4
-is disabled in U-Boot), as failing to determine the current partition
-type is not an error in this case.
+We only need to configure the SMMU when running in EL1. In EL2 the
+hypervisor isn't running so peripherals can just do DMA as they wish.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/fastboot/fb_getvar.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/iommu/qcom-hyp-smmu.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
-index 93cbd598e024..9c2ce65a4e5b 100644
---- a/drivers/fastboot/fb_getvar.c
-+++ b/drivers/fastboot/fb_getvar.c
-@@ -229,9 +229,10 @@ static void __maybe_unused getvar_partition_type(char *part_name, char *response
- 				       response);
- 	if (r >= 0) {
- 		r = fs_set_blk_dev_with_part(dev_desc, r);
- 		if (r < 0)
--			fastboot_fail("failed to set partition", response);
-+			/* If we don't know then just default to raw */
-+			fastboot_okay("raw", response);
- 		else
- 			fastboot_okay(fs_get_type_name(), response);
- 	}
- }
+diff --git a/drivers/iommu/qcom-hyp-smmu.c b/drivers/iommu/qcom-hyp-smmu.c
+index 1b5a09bb7b39..7b7b3ba01a07 100644
+--- a/drivers/iommu/qcom-hyp-smmu.c
++++ b/drivers/iommu/qcom-hyp-smmu.c
+@@ -90,8 +90,10 @@ enum arm_smmu_s2cr_type {
+ struct qcom_smmu_priv {
+ 	phys_addr_t base;
+ 	struct list_head devices;
+ 	struct udevice *dev;
++	/* SMMU is not needed when running in EL2 */
++	bool disable;
+ 
+ 	/* Read-once config */
+ 	int num_cb;
+ 	int num_smr;
+@@ -276,8 +278,11 @@ static int qcom_smmu_connect(struct udevice *dev)
+ 	priv = dev_get_priv(dev->iommu);
+ 	if (WARN_ON(!priv))
+ 		return -EINVAL;
+ 
++	if (priv->disable)
++		return 0;
++
+ 	mdev = alloc_dev(dev);
+ 	if (IS_ERR(mdev) && PTR_ERR(mdev) != -EEXIST) {
+ 		printf("%s: %s Couldn't create mmu context\n", __func__,
+ 		       dev->name);
+@@ -347,8 +352,10 @@ static int qcom_smmu_probe(struct udevice *dev)
+ 	priv->dev = dev;
+ 	priv->base = dev_read_addr(dev);
+ 	INIT_LIST_HEAD(&priv->devices);
+ 
++	priv->disable = current_el() > 1;
++
+ 	/* Read SMMU config */
+ 	val = gr0_readl(priv, ARM_SMMU_GR0_ID0);
+ 	priv->num_smr = FIELD_GET(ARM_SMMU_ID0_NUMSMRG, val);
+ 
 -- 
 2.47.0
 
