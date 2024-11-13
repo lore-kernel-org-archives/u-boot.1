@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EF99D597C2
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 00:54:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94EB2D597C2
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 00:55:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96642894B3;
-	Wed, 13 Nov 2024 01:54:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 123B8894CD;
+	Wed, 13 Nov 2024 01:55:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RZfof8bY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eEr04H7/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A522894CD; Wed, 13 Nov 2024 01:54:57 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 07B73894CE; Wed, 13 Nov 2024 01:55:26 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91DD2894B3
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 01:54:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D1AAE894C4
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 01:55:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7b15d7b7a32so488661085a.1
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 16:54:54 -0800 (PST)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6cbe3e99680so33564906d6.3
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 16:55:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731459293; x=1732064093; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731459323; x=1732064123; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NQb5HBKdAp1zAFOGxXBtVcsebq5DNWL0ChAv1frzH/s=;
- b=RZfof8bYrfYAnXxxwIRbXebF0/8QuI5sT/Rdm4wnbSsfJUpVXFguFYyLcG7xGKVLTP
- qwivCTX7Y/a1EzQkvQce9riS6FaNzRmHiWD4fZHIXpZhTi/LwztgXEIbQopouevIJ/a/
- DuL4ND5kf1ReQeOXFzC2fIp0XeSdggVcG5+ws=
+ bh=0JHGLSnxVIe0EL+cO6O6sN68jHZsfVWPmbcduJE1PeM=;
+ b=eEr04H7/xgtbuSCXdvtAJdtUZSbe16li8yZAOuZtMCvKzknm8jpdx/13HGLWSokgEJ
+ cOzfDe6AyK/hbVw2Si3oPWclTyibZWLX9gd4jlDTtQLS1imNVrlP+OcbO7TZ8/mILAAO
+ xDgB5johMpnftP5lH1zsaIhTaGy0x8np+mc7E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731459293; x=1732064093;
+ d=1e100.net; s=20230601; t=1731459323; x=1732064123;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NQb5HBKdAp1zAFOGxXBtVcsebq5DNWL0ChAv1frzH/s=;
- b=w+eH5ekBo5obs6prMwXv4lOJR4KhaaXjGQ3Oyx4WX+rlKVXJy6B7LYQ22ojGlMUmov
- GBMYPhFbuc9aw13gvN4D1hfktY1c5BKSEX44pDARzDasfENRbesYgBlZpqh/SUP3/6/Z
- JULpecMgJODh/wEFg+8xIWuT1yVhXjVKhexMqYNHUztvNfpz/DayZDAhxv8lTAgBU0SQ
- MF88f4zrZXaYifq7GwgGBrwZvWdZSYvfLUmZHhEE0D7jK8qVkU7owDuc2FzeN90YfsXh
- gCprRi5Dq+MtO3sekx5eF6yXuIEcfrHaDtIkfZ9pFPK5HrQ/xbzc0rH7j2CRTJeZvY2P
- HPBA==
-X-Gm-Message-State: AOJu0YyKqynerf47WjOcYn9ZMF/tg/TARmXc92bSTrAFNdJ99iz2+ZZG
- Mek24D31y/AexhJFSR66pdQa5e/DoJR0jeM9e2x0WnmZFtqqwJCogZL/8RDEuXY=
-X-Google-Smtp-Source: AGHT+IEGOaWeL5BjtW9AA7gpIpUneDlL/Dxo5nl5JQ4R/ofHezdwKvikjEfgvENyFuYl8T5FYrL6jw==
-X-Received: by 2002:a05:620a:24d0:b0:7a9:a991:f6d7 with SMTP id
- af79cd13be357-7b331f1841dmr2447707585a.48.1731459293332; 
- Tue, 12 Nov 2024 16:54:53 -0800 (PST)
+ bh=0JHGLSnxVIe0EL+cO6O6sN68jHZsfVWPmbcduJE1PeM=;
+ b=mc7lIH6VYRP4BLlnKEhyzHCpXA9S+qw5YOcFrUaA5KxGzLJjet4Mxc7TIkyYR49XzY
+ mJERvUULL2qnI0XBdYwnpHzCKGe43cisCMzGGf3Zx4rLTM5jwAuZ8EES9jdfeQ23EjrU
+ TM6Y2iP0GJOPwxZFhZGmU0kf9Xhy9uJa77WYq4zEzFahiNxhjvExtfrj2A2eVTGBiv9i
+ mE+DHTY+VtBE7Xi4KKYA51/HplOBrvJQuEFRGBzgjVyG7R/L9/mzcKwIFqs0dC7Ita7M
+ HDirpb2hulVxFCPMq41iWwsy/PMGamswnWQTgt2l/0T4+2IKmMJ46QTcfso5E7IjLAkh
+ aGpQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXiypBvLF5E7SRQ/4JkUcbEvuNnOutKkxEYGak4XQwUe6jaPu295Gg9OROmUkD1Czco9rnQ4OA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzhzvleWF33aoV6Wz5Wddw9RMzi86yCd5xLPhWB3WAWRfC98AwZ
+ 0ZFylrU8nnCBAsWyELpi/aaEUumec0vnCQu7qvtWG+z70wnDFgTpUU7G8FUT0Kg=
+X-Google-Smtp-Source: AGHT+IEJjYyYDHLrsm1ngVWOuOIw9OyIv8/8FYtk50U54CvDO+zkRiGc1j2xjRSCTv94+BbAXpmngA==
+X-Received: by 2002:a05:6214:3d8d:b0:6cb:ef1f:d1ab with SMTP id
+ 6a1803df08f44-6d39e1e08b0mr279220716d6.30.1731459322672; 
+ Tue, 12 Nov 2024 16:55:22 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b32ac88721sm642839085a.65.2024.11.12.16.54.49
+ 6a1803df08f44-6d3961f4d37sm77134466d6.51.2024.11.12.16.55.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 16:54:50 -0800 (PST)
-Date: Tue, 12 Nov 2024 18:54:47 -0600
+ Tue, 12 Nov 2024 16:55:21 -0800 (PST)
+Date: Tue, 12 Nov 2024 18:55:18 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
-	Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Marek Vasut <marex@denx.de>,
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Johan Jonker <jbx6244@gmail.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH 01/18] scripts: Add a script for building and booting QEMU
-Message-ID: <20241113005447.GF3600562@bill-the-cat>
-References: <20241112135911.630586-1-sjg@chromium.org>
- <20241112135911.630586-2-sjg@chromium.org>
- <1529CE41-E674-400F-BB4E-00C27711F523@gmx.de>
+ Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH] cmd: add a fetch utility
+Message-ID: <20241113005518.GG3600562@bill-the-cat>
+References: <20240808163153.2069650-1-caleb.connolly@linaro.org>
+ <0194AFA0-5D56-46F8-A385-D23AF7CDDD43@gmx.de>
+ <c25c559d-97ab-4abf-bee3-77dc38802e71@linaro.org>
+ <20240809220255.GC1626301@bill-the-cat>
+ <CAJaLiFy1sAB3GV-2Rbg=LkjkAXk_KfaF06_cniRrxqG-H5uzZQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oQJ0esxR+mky2YRu"
+ protocol="application/pgp-signature"; boundary="ItSGIqknyhA5wMwD"
 Content-Disposition: inline
-In-Reply-To: <1529CE41-E674-400F-BB4E-00C27711F523@gmx.de>
+In-Reply-To: <CAJaLiFy1sAB3GV-2Rbg=LkjkAXk_KfaF06_cniRrxqG-H5uzZQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,387 +104,123 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---oQJ0esxR+mky2YRu
-Content-Type: text/plain; charset=us-ascii
+--ItSGIqknyhA5wMwD
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 13, 2024 at 01:49:30AM +0100, Heinrich Schuchardt wrote:
-> Am 12. November 2024 14:58:54 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >It is handy to be able to quickly build and boot a QEMU image for a
-> >particular architecture and distro.
+On Tue, Nov 12, 2024 at 04:40:44PM -0800, Tony Dinh wrote:
+> Hi Tom,
+>=20
+> On Fri, Aug 9, 2024 at 3:41=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
 > >
-> >Add a script for this purpose. It supports only arm and x86 at present.
-> >For distros it only supports Ubuntu. Both 32- and 64-bit builds are
-> >supported.
+> > On Fri, Aug 09, 2024 at 07:23:42PM +0200, Caleb Connolly wrote:
+> > >
+> > >
+> > > On 09/08/2024 08:18, Heinrich Schuchardt wrote:
+> > > >
+> > > >
+> > > > Am 8. August 2024 18:24:24 MESZ schrieb Caleb Connolly <caleb.conno=
+lly@linaro.org>:
+> > > > > While U-Boot does a pretty good job at printing information at st=
+artup
+> > > > > about what hardware it's running on, it can be hard to take pretty
+> > > > > pictures of this to show off on the internet (by far the most
+> > > > > important aspect of porting a device in 2024!).
+> > > > >
+> > > > > Add a small utility "ufetch" for displaying some information abou=
+t U-Boot and
+> > > > > the hardware it's running on in a similar fashion to the popular =
+neofetch tool
+> > > > > for *nix's [1].
+> > > > >
+> > > > > While the output is meant to be useful, it should also be pleasin=
+g to look at
+> > > > > and look good in screenshots. The ufetch command brings this to U=
+-Boot,
+> > > > > featuring a colorful ASCII art version of the U-Boot logo and a f=
+ancy layout.
+> > > > >
+> > > > > Finally, tireless device porters can properly show off their hard=
+ work and get
+> > > > > the internet points they so deserve!
+> > > > >
+> > > > > Not everything is fully supported yet, but this seemed good enoug=
+h for initial
+> > > > > inclusion. Only one MMC device is detected, and other than SCSI o=
+ther storage
+> > > > > devices aren't supported.
+> > > >
+> > > >
+> > > > This command is not very generic. E.g. it supports SCSI drives but =
+not SATA. Many boards have eMMC and SD-card. This lks more ike an RFC tan s=
+omething ready to merge.
+> > >
+> > > Honestly it didn't even occur to me to send an RFC since this is pure=
+ly a
+> > > vanity thing...
+> > >
+> > > I'll make it generic over UCLASS_BLK if possible for the next revisio=
+n.
+> > > >
+> > > > Why don't you use a script or an EFI program to print whatever info=
+rmation you need?
+> > >
+> > > Well , then you'd need to have a way to load the script or EFI binary=
+, which
+> > > might not be possible for an early U-Boot port which doesn't have sto=
+rage
+> > > support yet (or at least, be a bunch of effort).
+> > >
+> > > The only motivation to have this in U-Boot is really because
+> > >
+> > > a) it's cute
+> > > b) it motivates "reward oriented" people like myself to get U-Boot bo=
+oting
+> > > on new/interesting devices because now it can be really easily shown =
+off.
+> > >
+> > > Maybe it's a cynical take, but I think stuff like this really has the
+> > > potential to get more folks interested. Nobody likes doing the invisi=
+ble
+> > > background work, so why not bring some visibility to things?
+> > >
+> > > Assuming I did a bad job at conveying my intent in the patch descript=
+ion:
+> > > the point here is not to convey useful debugging information to devel=
+opers,
+> > > it's to show off, look pretty, and be amusing. Plenty of other U-Boot
+> > > commands can convey information, this one is more like the 2048 port.
 > >
-> >Signed-off-by: Simon Glass <sjg@chromium.org>
-> >---
-> >
-> > MAINTAINERS                    |   8 ++
-> > doc/board/emulation/index.rst  |   1 +
-> > doc/board/emulation/script.rst |  61 ++++++++++++
-> > scripts/build-qemu.sh          | 175 +++++++++++++++++++++++++++++++++
-> > 4 files changed, 245 insertions(+)
-> > create mode 100644 doc/board/emulation/script.rst
-> > create mode 100755 scripts/build-qemu.sh
-> >
-> >diff --git a/MAINTAINERS b/MAINTAINERS
-> >index 0399ed1dbf6..b45bb96d5a5 100644
-> >--- a/MAINTAINERS
-> >+++ b/MAINTAINERS
-> >@@ -1110,6 +1110,14 @@ F:	tools/efivar.py
-> > F:	tools/file2include.c
-> > F:	tools/mkeficapsule.c
-> >=20
-> >+EMULATION
-> >+M:	Simon Glass <sjg@chromium.org>
-> >+S:	Maintained
-> >+W:	https://docs.u-boot.org/en/latest/board/emulation/script.html
-> >+F:	configs/qemu_x86*
-> >+F:	doc/board/emulation/script.rst
-> >+F:	scripts/build-qemu.sh
+> > So, at the high level, yes, this is something that ought to get merged
+> > as it's handy enough, but not intended to replace for example smbios
+> > information.
 >=20
-> Please, avoid misnomers. This script does not build QEMU.
->=20
-> >+
-> > ENVIRONMENT
-> > M:	Joe Hershberger <joe.hershberger@ni.com>
-> > S:	Maintained
-> >diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.r=
-st
-> >index f8908166276..5a2a00ae225 100644
-> >--- a/doc/board/emulation/index.rst
-> >+++ b/doc/board/emulation/index.rst
-> >@@ -8,6 +8,7 @@ Emulation
-> >=20
-> >    acpi
-> >    blkdev
-> >+   script
-> >    qemu-arm
-> >    qemu-mips
-> >    qemu-ppce500
-> >diff --git a/doc/board/emulation/script.rst b/doc/board/emulation/script=
-=2Erst
->=20
-> Just another misnomer. This page is not about script.sh.
->=20
-> >new file mode 100644
-> >index 00000000000..23981e333cb
-> >--- /dev/null
-> >+++ b/doc/board/emulation/script.rst
-> >@@ -0,0 +1,61 @@
-> >+.. SPDX-License-Identifier: GPL-2.0+
->=20
-> This is not a valid SPDX identifier.
->=20
-> >+
-> >+Script for building and running
-> >+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
-> >+
-> >+You may find the script `scripts/build-qemu.sh` helpful for building an=
-d testing
-> >+U-Boot on QEMU.
-> >+
-> >+If uses a environment variables to control how it works:
-> >+
-> >+ubdir
-> >+    base directory for building U-Boot, with each board being in its own
-> >+    subdirectory
-> >+
-> >+imagedir
-> >+    directory containing OS images, containin a subdirectory for each d=
-istro
-> >+    type (e.g. ubuntu/
-> >+
-> >+Once configured, you can build and run QEMU for arm64 like this::
->=20
-> This downloads the QEMU source and builds it?
->=20
-> >+
-> >+    scripts/build-qemu.sh -rsw
-> >+
-> >+No support is currently included for specifying a root disk, so this sc=
-ript can
-> >+only be used to start installers.
-> >+
-> >+Options
-> >+~~~~~~~
-> >+
-> >+Options are available to control the script:
-> >+
-> >+-a <arch>
-> >+    Select architecture (default arm, x86)
-> >+
-> >+-B
-> >+    Don't build; assume a build exists
-> >+
-> >+-k
-> >+    Use kvm - kernel-based Virtual Machine. By default QEMU uses its own
-> >+    emulator
-> >+
-> >+-o <os>
-> >+    Run an Operating System. For now this only supports 'ubuntu'. The n=
-ame of
-> >+    the OS file must remain unchanged from its standard name on the Ubu=
-ntu
-> >+    website.
->=20
-> The U-Boot project should remain open to all operating systems. How will =
-this work with OpenBSD?
->=20
-> Use the URL of the image as argument.
->=20
-> >+
-> >+-r
-> >+    Run QEMU with the image (by default this is not done)
-> >+
-> >+-R
-> >+    Select OS release (e.g. 24.04).
-> >+
-> >+-s
-> >+    Use serial only (no display)
-> >+
-> >+-w
-> >+    Use word version (32-bit). By default, 64-bit is used
->=20
-> "word version" is not helpful as explanation.
->=20
-> Look at <https://en.m.wikipedia.org/wiki/Word_(computer_architecture)> wh=
-ich says a word is 64 bit on a 64-bit system and 16 bit on a 16-bit system.
->=20
-> >+
-> >+.. note::
-> >+
-> >+    Note: For now this is a shell script, but if it expands it might be=
- better
-> >+    as Python, accepting the slower startup.
-> >diff --git a/scripts/build-qemu.sh b/scripts/build-qemu.sh
-> >new file mode 100755
-> >index 00000000000..0ff53593cf9
-> >--- /dev/null
-> >+++ b/scripts/build-qemu.sh
-> >@@ -0,0 +1,175 @@
-> >+#!/bin/bash
-> >+# SPDX-License-Identifier: GPL-2.0+
->=20
-> This is not a valid SPDX identifier.
->=20
-> >+#
-> >+# Script to build U-Boot suitable for booting with QEMU, possibly runni=
-ng
-> >+# it, possibly with an OS image
-> >+
-> >+# This just an example. It assumes that
-> >+
-> >+# - you build U-Boot in ${ubdir}/<name> where <name> is the U-Boot boar=
-d config
-> >+# - your OS images are in ${imagedir}/{distroname}/...
-> >+
-> >+# So far the script supports only ARM and x86.
->=20
-> Why support obsolete i386 but not riscv64?
->=20
-> >+
-> >+set -e
-> >+
-> >+usage() {
-> >+	(
-> >+	if [[ -n "$1" ]]; then
-> >+		echo "$1"
-> >+		echo
-> >+	fi
-> >+	echo "Usage: $0 -aBkrsw"
-> >+	echo
-> >+	echo "   -a   - Select architecture (arm, x86)"
-> >+	echo "   -B   - Don't build; assume a build exists"
-> >+	echo "   -k   - Use kvm (kernel-based Virtual Machine)"
-> >+	echo "   -o   - Run Operating System ('ubuntu' only for now)"
-> >+	echo "   -r   - Run QEMU with the image"
-> >+	echo "   -R   - Select OS release (e.g. 24.04)"
-> >+	echo "   -s   - Use serial only (no display)"
-> >+	echo "   -w   - Use word version (32-bit)" ) >&2
-> >+	exit 1
-> >+}
-> >+
-> >+# Directory tree for OS images
-> >+imagedir=3D${imagedir-/vid/software/linux}
-> >+
-> >+# architecture (arm or x86)
-> >+arch=3Darm
-> >+
-> >+# 32- or 64-bit build
-> >+bitness=3D64
-> >+
-> >+# Build U-Boot
-> >+build=3Dyes
-> >+
-> >+# Extra setings
-> >+extra=3D
-> >+
-> >+# Operating System to boot (ubuntu)
-> >+os=3D
-> >+
-> >+release=3D24.04.1
-> >+
-> >+# run the image with QEMU
-> >+run=3D
-> >+
-> >+# run QEMU without a display (U-Boot must be set to stdout=3Dserial)
-> >+serial=3D
-> >+
-> >+# Use kvm
-> >+kvm=3D
-> >+
-> >+# Set ubdir to the build directory where you build U-Boot out-of-tree
-> >+# We avoid in-tree build because it gets confusing trying different bui=
-lds
-> >+ubdir=3D${ubdir-/tmp/b}
-> >+
-> >+while getopts "a:Bko:rR:sw" opt; do
-> >+	case "${opt}" in
-> >+	a)
-> >+		arch=3D$OPTARG
-> >+		;;
-> >+	B)
-> >+		build=3D
-> >+		;;
-> >+	k)
-> >+		kvm=3D"-enable-kvm"
-> >+		;;
-> >+	o)
-> >+		os=3D$OPTARG
-> >+
-> >+		# Expand memory and CPUs
-> >+		extra+=3D" -m 4G -smp 4"
-> >+		;;
-> >+	r)
-> >+		run=3D1
-> >+		;;
-> >+	R)
-> >+		release=3D$OPTARG
-> >+		;;
-> >+	s)
-> >+		serial=3D1
-> >+		;;
-> >+	w)
-> >+		bitness=3D32
-> >+		;;
-> >+	*)
-> >+		usage
-> >+		;;
-> >+	esac
-> >+done
-> >+
-> >+# Build U-Boot for the selected board
-> >+build_u_boot() {
-> >+	buildman -w -o $DIR --board $BOARD -I || exit $?
-> >+}
-> >+
-> >+# Run QEMU with U-Boot
-> >+run_qemu() {
-> >+	if [[ -n "${os_image}" ]]; then
-> >+		extra+=3D" -drive if=3Dvirtio,file=3D${os_image},format=3Draw,id=3Dhd=
-0"
-> >+	fi
-> >+	if [[ -n "${serial}" ]]; then
-> >+		extra+=3D" -display none -serial mon:stdio"
-> >+	else
-> >+		extra+=3D" -serial mon:stdio"
-> >+	fi
-> >+	echo "Running ${qemu} ${extra}"
-> >+	"${qemu}" -bios "$DIR/${BIOS}" \
-> >+		-m 512 \
->=20
-> Ubuntu suggests 4 GiB as minimum for a desktop.
->=20
-> >+		-nic none \
->=20
-> Who wants to run without network?
-> Use the virtio nic.
->=20
-> >+		${kvm} \
-> >+		${extra}
-> >+}
-> >+
-> >+# Check architecture
-> >+case "${arch}" in
-> >+arm)
-> >+	BOARD=3D"qemu_arm"
-> >+	BIOS=3D"u-boot.bin"
-> >+	qemu=3Dqemu-system-arm
-> >+	extra+=3D" -machine virt"
-> >+	suffix=3D"arm"
-> >+	if [[ "${bitness}" =3D=3D "64" ]]; then
-> >+		BOARD=3D"qemu_arm64"
-> >+		qemu=3Dqemu-system-aarch64
-> >+		extra+=3D" -cpu cortex-a57"
->=20
-> That CPU is 12 years old and not all distros are stuck on ARM v8.0. See <=
-https://en.opensuse.org/Arm_architecture_support>.
->=20
-> -cpu max works fine with both tcg and kvm.
->=20
-> >+		suffix=3D"arm64"
->=20
-> >+	fi
-> >+	;;
-> >+x86)
-> >+	BOARD=3D"qemu-x86"
-> >+	BIOS=3D"u-boot.rom"
-> >+	qemu=3Dqemu-system-i386
-> >+	suffix=3D"i386"
-> >+	if [[ "${bitness}" =3D=3D "64" ]]; then
-> >+		BOARD=3D"qemu-x86_64"
-> >+		qemu=3Dqemu-system-x86_64
-> >+		suffix=3D"amd64"
-> >+	fi
-> >+	;;
-> >+*)
-> >+	usage "Unknown architecture '${arch}'"
-> >+esac
-> >+
-> >+# Check OS
-> >+case "${os}" in
-> >+ubuntu)
-> >+	os_image=3D"${imagedir}/${os}/${os}-${release}-desktop-${suffix}.iso"
->=20
-> There is no ARM 32-bit Ubuntu desktop. And for i386 there is no image in =
-24.04.1.
->=20
-> Running a foreign architecture desktop with tcg is not enjoyable.
->=20
-> For testing U-Boot a server image is all it takes.
+> Up vote for this patch. Can we merge this to next?
 
-And _all_ of this is why I don't want to add a useful personal script
-as an additional tool we support. I've seen how much work goes in to the
-OpenEmbedded runqemu script, we don't have the spare cycles for
-something like that. Doubly so when ultimately I believe we would be
-well served by having a document that says (in much more words) to look
-at u-boot-test-hooks for how to invoke QEMU for a large number of
-architectures and platforms and to then further leverage general QEMU
-tips and guides on how to run an OS of your choice with that.
+I think I was expecting another iteration from Caleb based on some minor
+feedback?
 
 --=20
 Tom
 
---oQJ0esxR+mky2YRu
+--ItSGIqknyhA5wMwD
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcz+NMACgkQFHw5/5Y0
-tyz9AQv+PD4L2hUmQRnZgYldrINIkHXkdGfZMIZAGCVDoaTkIyq1ZAa6DlGzyeTC
-XAjqQrCxZSxvdqkcmp9GlwwndC+FCgHczfsr3eCA1z6p9iuJy17DnBY+A8Fm/e+X
-l8r3i6Oqicj0d72I/5snd4sx+wzslsiFC6k1vB1IsYHg4fWb0uI7W+oO5wEMb7oS
-kEdaHgkPZr4za8xsmKWrXxNXwvDqXc86/0di2kSLRz3XQRnB6J7VKl/Nt9oAfCFJ
-lgBO5K1eJG2xIK97rn7jSbQ/A4cgSxkMOJfPFYTN0oN+97pv//G2A0aIsAxiiA28
-02sRlJmk1XxYZBZ8cX2NHMasjnBbJMg/O2INnNBlnVr+2ScrUZyyRChi5VZir+SM
-hyawFKCDqOY7qNSD9npOvHa6og75z1fIpbmSFjE6mnFFiAPXGmPYRp3XiUoOjwIh
-7btw1bTEOs8JUMqEPlal014bR1SNMao2ZZ8Y73mmybiJBDM4aoOddGeg+92ZP8ei
-qpcyNzch
-=GtpL
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcz+PUACgkQFHw5/5Y0
+tyxzpgwAhm/rMvvDzYLaRpJKGSCIinHH2/6wY8QJv3wfAI1y9WcKd8jbn7eiEg5W
+K4xGUo3OyhM2MElpRfH5yhXkuYAClWxKOZYskr0qjItGibZ2eD3deRzm/zRgFWZH
+QWGSWZ3udU1g9gErNzGNFtuKEAz7Xv6lgia8lSOyN+LErfqXFtbuvwp+mH2bT/Wx
+GoLqsxWDFli2+9U7/lZp0xdmQ7PcUgZYnDenzQQpyIsC0xvTdvz/rxFuTMgvy/A1
+BupV7DWYX1YePFpDteRI11uvLYkQtfBdiSm/x1xJ+yzCC2p20R8iPhU4UTNHeaq9
+fPkV4+Q3uE11ZUsMA1ItmsgqTtSb7j/xpHKJiQHdcPAm8aWbIpSRqVK9kyzMxH17
+hTbH1theNejkq7oSJ8zz0EoQlkXWgM66jVFtsYsef8zAxHlObux8bApYs76RJnxd
+yfIyN3gF/6A6BvXdAprOc3ax7spsrTWvuzY4oCY429smCCeE6MAHXfy99+KPxaAk
+sU0BP8Aw
+=Uv9l
 -----END PGP SIGNATURE-----
 
---oQJ0esxR+mky2YRu--
+--ItSGIqknyhA5wMwD--
