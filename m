@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F849D637A8
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 18:54:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784A7D637A8
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 18:54:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AAF6891B0;
-	Wed, 13 Nov 2024 19:53:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4DFE98870D;
+	Wed, 13 Nov 2024 19:53:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F9yozaDI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gc3581Vl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5ACD8934F; Wed, 13 Nov 2024 19:53:53 +0100 (CET)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 97D578931D; Wed, 13 Nov 2024 19:53:57 +0100 (CET)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8141C88216
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 19:53:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DE2D8936F
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 19:53:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3a6bc0600f9so26041265ab.1
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 10:53:51 -0800 (PST)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3a3b8b34be9so24254845ab.2
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 10:53:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731524030; x=1732128830; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731524033; x=1732128833; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P8Eae7xuOnX0JnF3NK03OCCAtA+xmDmYTmUTih0+OyM=;
- b=F9yozaDI0teNX7cLr4y8YND5ulaMUkmZ8pDR+5mXCNV32wJ4xyr/u6OedpGs3lxHY9
- xdwx2rUmQ0IYUua5n7nMwNFvv8AE7mz94UVFCC+oYxSfkPWSmnf2Neb9c0VuQUPAKGZ7
- poMEKVKP/tfv0Omx3rMdEK9hSUak7VkrDOFc8=
+ bh=JmLRp7fU0BiNomCggLq0JwL7ZvNwMWVFWYgjLyF2XCQ=;
+ b=Gc3581VlZE2i+v9G1QFFEpdx+9r4iYB/0NOo/2cN1GYgsP+v47duibk2vXLsnA/ftT
+ Jf7IxpRlhgtEZH6oOk1wk28Xrcd00L9eZSkzZiPaDVffHxUE1rgiVtn1uvvHL5Sf6aQp
+ B1qhRY22J1IZOW0uRcan6hkRAMyD08TCpemuc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731524030; x=1732128830;
+ d=1e100.net; s=20230601; t=1731524033; x=1732128833;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=P8Eae7xuOnX0JnF3NK03OCCAtA+xmDmYTmUTih0+OyM=;
- b=pMf9OpOpyPoRHH+469Pil0JoXOHymuOWk8FMU4vw5Lg0rZJmKcdJLzNhmbt1SLf+13
- XvIQjLDuCR9GgTfVd3o9vWQRAf+LAjNUcJS6qZBuZa3MwBve0LUgdvCeHuNNq4Yx4yKT
- SXn6MXh65pyP5SfEtgXWpjiAvC0pTf/vNAyN5oDb9YZWv8Jry55cmHD97nCVUIgMbPB4
- 1tCVmI1E/jkhpj9s5ihPDnSIH+sGuBxpG4VtqfDXsltldvefBX0st8+Fve4Pjmk8VLwq
- vFMNArdcoYfiNA4sKhX20xi37RwoqPv0YWSIMwNNVFRbTqM2LYbww3UcD2Mv5z1uTj1F
- qCpw==
-X-Gm-Message-State: AOJu0Yx8vPK+3v/yuy5NKHqrPgkpc/K2JPzhT3RDoN1HP4FY6QJNrPRa
- eZpnYKS3lx46iLPWm+S2KWW3JLwYb+eTSZov57Ru6VslzFjzHKsLTdVEy/IHpUL5PSyArxnfm+0
+ bh=JmLRp7fU0BiNomCggLq0JwL7ZvNwMWVFWYgjLyF2XCQ=;
+ b=mBXzLOZn7tZPsQIa3bXPRq7L7KpOqInK9RlcJxqhybuH63jsHGSmaKA0vMIH9IUgct
+ 1Cfb9Eu0qcb1u5nHqBU1bHOzwXH/DWpRsi90NwvUYvCClwEBavjejBI4LHM+exceLHm/
+ cAbZNkHKZq0i4sMGPwf+apcdVcIkVcGw82VLK+28rIRHWBm80qLEQQzirnklhLouDyey
+ ZKoJeMXEtAYQOnf1ULu2Pbf7fi9gN8ysO29o77ukjxVXZrvWPAp9ii9y6zO7HoJtpg7v
+ HBfZRAzPsLZ9yFRrqHjpKsZLaj7MI+44/XtgAYiHUvM3JANQNLsLJHgCW/yamu1bITd3
+ e7PA==
+X-Gm-Message-State: AOJu0YwhZSU1l2sDQlNk+r7dGL5hBiWSDzk79d4o/XUuGyaYg41+6dqj
+ CUywWTIJ1LvMy4k+dImy58NNcJOKf0PH0Bauyakn/bSGtbOrd444qe3+944ldGWBykxM5CvUhMQ
  =
-X-Google-Smtp-Source: AGHT+IE5JnFNBPWylec5kgvHg/wDsppmB+Bd0EDghGYxzAs/6Y5vlzUvo+UO6E/XCH+AKjQva0g75Q==
-X-Received: by 2002:a05:6e02:1fef:b0:3a7:1cd4:c981 with SMTP id
- e9e14a558f8ab-3a71cd4ca45mr16182335ab.4.1731524029674; 
- Wed, 13 Nov 2024 10:53:49 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEW8E7fQjOCvu3ZCRE9Z3mMiEBzFnPEwZY72VR7ybqxojbg6XInDfOAmg4/98hZDzVpfUsGww==
+X-Received: by 2002:a05:6e02:1fef:b0:3a7:1d03:49b0 with SMTP id
+ e9e14a558f8ab-3a71d034a82mr15025955ab.8.1731524032840; 
+ Wed, 13 Nov 2024 10:53:52 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a6f9890ec4sm30733675ab.75.2024.11.13.10.53.47
+ e9e14a558f8ab-3a6f9890ec4sm30733675ab.75.2024.11.13.10.53.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 10:53:48 -0800 (PST)
+ Wed, 13 Nov 2024 10:53:51 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v4 1/9] sandbox: efi_loader: Correct use of addresses as
- pointers
-Date: Wed, 13 Nov 2024 11:53:32 -0700
-Message-Id: <20241113185340.1661198-2-sjg@chromium.org>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: [PATCH v4 2/9] test: Adjust print_ut test to use unsigned char
+Date: Wed, 13 Nov 2024 11:53:33 -0700
+Message-Id: <20241113185340.1661198-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241113185340.1661198-1-sjg@chromium.org>
 References: <20241113185340.1661198-1-sjg@chromium.org>
@@ -92,132 +92,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The cache-flush function is incorrect which causes a crash in the
-remoteproc tests with arm64.
-
-Fix both problems by using map_sysmem() to convert an address to a
-pointer and map_to_sysmem() to convert a pointer to an address.
-
-Also update the image-loader's cache-flushing logic.
+Since char is unsigned on arm64, this test currently fails. It seems
+better to use unsigned anyway, since 0xff is written into the string at
+the start. Update the terminator-assert to use a character instead of a
+byte.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: 3286d223fd7 ("sandbox: implement invalidate_icache_all()")
-Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
 
 (no changes since v2)
 
 Changes in v2:
-- Drop message about EFI_LOADER
+- Use '\0' instead of 0
 
- arch/sandbox/cpu/cache.c              |  8 +++++++-
- drivers/remoteproc/rproc-elf-loader.c | 18 +++++++++++-------
- lib/efi_loader/efi_image_loader.c     |  3 ++-
- 3 files changed, 20 insertions(+), 9 deletions(-)
+ test/print_ut.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/sandbox/cpu/cache.c b/arch/sandbox/cpu/cache.c
-index c8a5e64214b..96b3da47e8e 100644
---- a/arch/sandbox/cpu/cache.c
-+++ b/arch/sandbox/cpu/cache.c
-@@ -4,12 +4,18 @@
-  */
+diff --git a/test/print_ut.c b/test/print_ut.c
+index f5e607b21a3..7ab79e4617f 100644
+--- a/test/print_ut.c
++++ b/test/print_ut.c
+@@ -242,7 +242,7 @@ PRINT_TEST(print_display_buffer, UTF_CONSOLE);
  
- #include <cpu_func.h>
-+#include <mapmem.h>
- #include <asm/state.h>
- 
- void flush_cache(unsigned long addr, unsigned long size)
+ static int print_hexdump_line(struct unit_test_state *uts)
  {
-+	void *ptr;
-+
-+	ptr = map_sysmem(addr, size);
-+
- 	/* Clang uses (char *) parameters, GCC (void *) */
--	__builtin___clear_cache((void *)addr, (void *)(addr + size));
-+	__builtin___clear_cache(map_sysmem(addr, size), ptr + size);
-+	unmap_sysmem(ptr);
- }
+-	char *linebuf;
++	u8 *linebuf;
+ 	u8 *buf;
+ 	int i;
  
- void invalidate_icache_all(void)
-diff --git a/drivers/remoteproc/rproc-elf-loader.c b/drivers/remoteproc/rproc-elf-loader.c
-index ab1836b3f07..0b3941b7798 100644
---- a/drivers/remoteproc/rproc-elf-loader.c
-+++ b/drivers/remoteproc/rproc-elf-loader.c
-@@ -6,6 +6,7 @@
- #include <dm.h>
- #include <elf.h>
- #include <log.h>
-+#include <mapmem.h>
- #include <remoteproc.h>
- #include <asm/cache.h>
- #include <dm/device_compat.h>
-@@ -180,6 +181,7 @@ int rproc_elf32_load_image(struct udevice *dev, unsigned long addr, ulong size)
- 	for (i = 0; i < ehdr->e_phnum; i++, phdr++) {
- 		void *dst = (void *)(uintptr_t)phdr->p_paddr;
- 		void *src = (void *)addr + phdr->p_offset;
-+		ulong dst_addr;
+@@ -255,10 +255,10 @@ static int print_hexdump_line(struct unit_test_state *uts)
+ 	linebuf = map_sysmem(0x400, BUF_SIZE);
+ 	memset(linebuf, '\xff', BUF_SIZE);
+ 	ut_asserteq(-ENOSPC, hexdump_line(0, buf, 1, 0x10, 0, linebuf, 75));
+-	ut_asserteq(-1, linebuf[0]);
++	ut_asserteq(0xff, linebuf[0]);
+ 	ut_asserteq(0x10, hexdump_line(0, buf, 1, 0x10, 0, linebuf, 76));
+-	ut_asserteq(0, linebuf[75]);
+-	ut_asserteq(-1, linebuf[76]);
++	ut_asserteq('\0', linebuf[75]);
++	ut_asserteq(0xff, linebuf[76]);
  
- 		if (phdr->p_type != PT_LOAD)
- 			continue;
-@@ -195,10 +197,11 @@ int rproc_elf32_load_image(struct udevice *dev, unsigned long addr, ulong size)
- 		if (phdr->p_filesz != phdr->p_memsz)
- 			memset(dst + phdr->p_filesz, 0x00,
- 			       phdr->p_memsz - phdr->p_filesz);
--		flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
--			    roundup((unsigned long)dst + phdr->p_filesz,
-+		dst_addr = map_to_sysmem(dst);
-+		flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
-+			    roundup(dst_addr + phdr->p_filesz,
- 				    ARCH_DMA_MINALIGN) -
--			    rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
-+			    rounddown(dst_addr, ARCH_DMA_MINALIGN));
- 	}
+ 	unmap_sysmem(buf);
  
- 	return 0;
-@@ -377,6 +380,7 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
- 	const struct dm_rproc_ops *ops;
- 	Elf32_Shdr *shdr;
- 	void *src, *dst;
-+	ulong dst_addr;
- 
- 	shdr = rproc_elf32_find_rsc_table(dev, fw_addr, fw_size);
- 	if (!shdr)
-@@ -398,10 +402,10 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
- 		(ulong)dst, *rsc_size);
- 
- 	memcpy(dst, src, *rsc_size);
--	flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
--		    roundup((unsigned long)dst + *rsc_size,
--			    ARCH_DMA_MINALIGN) -
--		    rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
-+	dst_addr = map_to_sysmem(dst);
-+	flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
-+		    roundup(dst_addr + *rsc_size, ARCH_DMA_MINALIGN) -
-+		    rounddown(dst_addr, ARCH_DMA_MINALIGN));
- 
- 	return 0;
- }
-diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
-index 0ddf69a0918..bb58cf1badb 100644
---- a/lib/efi_loader/efi_image_loader.c
-+++ b/lib/efi_loader/efi_image_loader.c
-@@ -13,6 +13,7 @@
- #include <efi_loader.h>
- #include <log.h>
- #include <malloc.h>
-+#include <mapmem.h>
- #include <pe.h>
- #include <sort.h>
- #include <crypto/mscode.h>
-@@ -977,7 +978,7 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
- 	}
- 
- 	/* Flush cache */
--	flush_cache((ulong)efi_reloc,
-+	flush_cache(map_to_sysmem(efi_reloc),
- 		    ALIGN(virt_size, EFI_CACHELINE_SIZE));
- 
- 	/*
 -- 
 2.34.1
 
