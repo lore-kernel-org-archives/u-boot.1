@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2A52D462AA
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 14:24:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 915F5D462AF
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 14:27:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F7F588C0F;
-	Wed, 13 Nov 2024 15:24:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 03C3D88C0F;
+	Wed, 13 Nov 2024 15:27:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YVLRLK7Y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZCPmXWG7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 826D68862E; Wed, 13 Nov 2024 15:24:45 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id E4A8388F94; Wed, 13 Nov 2024 15:27:24 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B37B894D1
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 15:24:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E1C138862E
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 15:27:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-7b1601e853eso447363085a.2
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:24:42 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-432d866f70fso2873805e9.2
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:27:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731507881; x=1732112681; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/4O1Vu4CZjltl6UdIRxfcN1jj2NumeDzyraMh689xSM=;
- b=YVLRLK7YDTiwyI1qcgYqPjDNXNn8OBBEWpd2oPZaWV2OP9VpSbCIegKVZWoMV/D2lq
- AKAiuZyfcFWQqYksFT1RfbH7kx689FklpAdbR3HRXPtNh10mjubVXNxPeLaGN1uu93Fm
- Ee53wOv4O/L/9pa1jnbcq5bc6uxOqSaZdZ/Oc=
+ d=linaro.org; s=google; t=1731508042; x=1732112842; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=T0XBClfxOIAUl6WgiPV1SWrNouiLu9AMs31i0YCJ1FQ=;
+ b=ZCPmXWG7Q75RJ5JSGDHxOAlPiltVC8pYdMEef7I0bIKWYe1uwbK90ap6aPA+11tWlX
+ etc0xM16luUMV3q48FBTaK2RcJ5HCmAwJd+o4UKz20lDiIlo62xqFpobqqspRYllvm26
+ FK6kq2A4aRJu7rZnO2gf3z4vlqeVeRrFz9Ws9qSHmhfd/pL9rgVW9bLh2kCHF1/OVcZo
+ l2qkvCODRDlC3ddRuQ95P9gMri7y9In+M8xZd1eBy3cE+AppbOGkFtaj4SNtVqgyEGvK
+ FMHdsxrmC0tn2gFocj2+3L9sw0IXtI5mR+YAcsB3sn3FKmQhc0hs9PafVhxmVPma/bYx
+ WWIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731507881; x=1732112681;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/4O1Vu4CZjltl6UdIRxfcN1jj2NumeDzyraMh689xSM=;
- b=DZzC3auXMmD8MLe89d75zqRN67OPZj8QgxqyBoJSgUlTCjNyAIR0GdCGyEDzjEB/WG
- VAnDxdHJYQt7y3ZB0m0klQwbQV0z+ybT92UudsxVZVd6EB5DNJ672e/PwSVVssMWYr0A
- IZUzdAzAyDsHPEwiKeyjtHKY6eywjwXKCBd8gae+UdjyVT/R6T2YJ7KT2NDeH60usX5/
- /ANtrjrrXKpSY5jp3/4ShBdmWo6+RVmqRzP75qJdUBYy5Mo9mDloJjBysI/2pc92Kxzm
- LEW8sHqS7gPcO7nLWe4WL4L59DaW8XhtLQeZJJ2nDpXDIS814ElW5++eh/I5HmYyJPnu
- l6sw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU20K+2p8U/zNWXc41ZnF+9J/oD6jL8gaVXcVHOo/P7oz07Nk65SX3hI/d7lOOS2XJqiX9GRDw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx4XyxHDAhsCONoTEHNQMfnjYXdezH06imORjt4DEn+Ma3yOFuB
- EAwAtFLPU4rkom5Wzf3X/Hn6XXSTnlUHCqo6nJF7IwidTXo8qFwb6IAxJvfNqEQ=
-X-Google-Smtp-Source: AGHT+IG767smkf75gObQjQGRwyzINtVUKjWjYnsKSw0b7rM7uQJT3ZeVhlGfPthVlgOFLOr7T9Jk1A==
-X-Received: by 2002:a05:620a:25cc:b0:7ae:5c50:37ab with SMTP id
- af79cd13be357-7b331f210b3mr3099850185a.49.1731507881207; 
- Wed, 13 Nov 2024 06:24:41 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
+ d=1e100.net; s=20230601; t=1731508042; x=1732112842;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=T0XBClfxOIAUl6WgiPV1SWrNouiLu9AMs31i0YCJ1FQ=;
+ b=Dbg9Vdd/K5d3LsdE27omDQhoU3V9Dog+oYsBtFKIZeCRRCEecrXqSIPcGgGkFxO4Ag
+ zR0dPHH2wBR437KNGMTed45BQBIcIBN6wfvjiqMe9bLQpZbrj/5yzb1HlrrnLQszd6lL
+ wWqOWJLaybEBKlDfhjR6Qqji1Fb9Vq5CnTDcOn5Z9geRawbwMDzuoGB5HN92Mf9u9lv9
+ OooWhEQmNnJ94IFnU092HFc/qXgdaRv1RPlrx5LJG8zlQcl3JxavHziSZDy+xUxp0aRK
+ Ma8+UWCyR7p06LpTpodEe1ZKJhix+C7TGVwnmfXDXD505gG8BU4qUgkq17L9Gs7OgM4/
+ y6NA==
+X-Gm-Message-State: AOJu0YzClz8AQTx4bD5yLIIX7s9e+ke0ZT5qq6kIpt5JMxrplHUcJb7m
+ d/iJA6Qi/SVb9+l6+W2ZZ7PsJcdFB6KFL3Ib044BuzixLF3sEZ1h9MlA3iFuRg0=
+X-Google-Smtp-Source: AGHT+IFIp4rP2l9IcRI3ZU1/6V7TA0xztWdpdjKF7GQptiujL4PZWmrtTF6LvdQdpIx1L0bCxBqjSQ==
+X-Received: by 2002:a05:600c:8608:b0:431:46fe:4cc1 with SMTP id
+ 5b1f17b1804b1-432bb99a52emr159929835e9.10.1731508042324; 
+ Wed, 13 Nov 2024 06:27:22 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:be89:2e45:8eeb:41c?
+ ([2a01:e0a:3cb:7bb0:be89:2e45:8eeb:41c])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b32ac2e180sm693989685a.23.2024.11.13.06.24.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 06:24:40 -0800 (PST)
-Date: Wed, 13 Nov 2024 08:24:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Dragan Simic <dsimic@manjaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] mmc: don't print 'MMC:' if there are no MMC devices
-Message-ID: <20241113142437.GM3600562@bill-the-cat>
-References: <20241113053023.1870736-1-caleb.connolly@linaro.org>
+ 5b1f17b1804b1-432d54f70d8sm27442105e9.16.2024.11.13.06.27.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 13 Nov 2024 06:27:22 -0800 (PST)
+Message-ID: <b4855529-50c9-4993-9817-7ca73baad316@linaro.org>
+Date: Wed, 13 Nov 2024 15:27:21 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7aWVmqvkfCiWXO7m"
-Content-Disposition: inline
-In-Reply-To: <20241113053023.1870736-1-caleb.connolly@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] nwt: wget: drop Content-Length processing
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+References: <20241105110849.41348-1-jerome.forissier@linaro.org>
+ <CAC_iWjKhO3FnjbAYujbyp5kdfs7w2GLJ6hoyEtK19nh0UHXe5g@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAC_iWjKhO3FnjbAYujbyp5kdfs7w2GLJ6hoyEtK19nh0UHXe5g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,45 +101,76 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7aWVmqvkfCiWXO7m
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 13, 2024 at 06:30:08AM +0100, Caleb Connolly wrote:
+On 11/11/24 13:47, Ilias Apalodimas wrote:
+> Hi Jerome,
+> 
+> On Tue, 5 Nov 2024 at 13:09, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+>>
+>> We don't do anything with Content-Length except a debug print, and the
+>> strict_strtoul() call is incorrect (it always returns -EINVAL and leaves
+>> content_length to zero due to the presence of trailing characters after
+>> the decimal valuoe of Content-Length). So let's just drop this piece of
+>> code.
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>  net/wget.c | 13 -------------
+>>  1 file changed, 13 deletions(-)
+>>
+>> diff --git a/net/wget.c b/net/wget.c
+>> index 635f82efbb3..361817ace65 100644
+>> --- a/net/wget.c
+>> +++ b/net/wget.c
+>> @@ -26,7 +26,6 @@ static const char bootfile1[] = "GET ";
+>>  static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
+>>  static const char http_eom[] = "\r\n\r\n";
+>>  static const char http_ok[] = "200";
+>> -static const char content_len[] = "Content-Length";
+>>  static const char linefeed[] = "\r\n";
+>>  static struct in_addr web_server_ip;
+>>  static int our_port;
+>> @@ -46,7 +45,6 @@ struct pkt_qd {
+>>  #define PKTQ_SZ (PKTBUFSRX / 4)
+>>  static struct pkt_qd pkt_q[PKTQ_SZ];
+>>  static int pkt_q_idx;
+>> -static unsigned long content_length;
+>>  static unsigned int packets;
+>>
+>>  static unsigned int initial_data_seq_num;
+>> @@ -251,17 +249,6 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+>>                                    "wget: Connected Pkt %p hlen %x\n",
+>>                                    pkt, hlen);
+>>
+>> -                       pos = strstr((char *)pkt, content_len);
+>> -                       if (!pos) {
+>> -                               content_length = -1;
+>> -                       } else {
+>> -                               pos += sizeof(content_len) + 2;
+>> -                               strict_strtoul(pos, 10, &content_length);
+>> -                               debug_cond(DEBUG_WGET,
+>> -                                          "wget: Connected Len %lu\n",
+>> -                                          content_length);
+> 
+> How much work would it be to fix the parsing properly? We could look
+> into that value and drop it if the memory is > our available memory
 
-> It may be the case that MMC support is enabled even though the board
-> we're booting on doesn't have any MMC devices. Move the print over to
-> the print_mmc_devices() function where we can only print it if we
-> actually have MMC devices.
->=20
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+TBH I have not looked into it. This is the legacy stack; lwIP does
+decode and handle the content length properly AFAICT.
 
-I'm not sure I like this. What we do / don't find on startup is part of
-the not-exactly-API. It's true that if we don't print an MMC line at
-all, and we should have MMC, the user (and any scripts that parse
-console output) but now we're also increasing the code size a little bit
-too. I can be convinced this is a good idea, but I'm not there yet.
+Regards,
+-- 
+ Jerome
 
---=20
-Tom
-
---7aWVmqvkfCiWXO7m
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc0tqEACgkQFHw5/5Y0
-tyxvVgv9FVWadsmMGilIAm+KR5GGt6L9+OCzXAsjyCHsajNGC4qfyJx7Ry637IhM
-bYQybEa26bcCfOrrWYQpPPvnRA+f9XxtyN9PDLZtNhC/doPTwoCn6lVQrmbrFU0B
-LqsgTJEpR1NtVqRlgaAD+UxSIXhfaQ2j2hm/xV3UAcWQh0zZVxQGUHH+g1oyOJRS
-Mw0W0h59zuvuq2gM5FyQivz3u6173/n7+vle9EZ23OrpE1WCCE8eyMHXbcP6Y22O
-B+U5IoB1lvpTZX90pL57Wjn8fGN043BPwgOlFRbemI4T0Bz8xE6gycQz2aVtgZXe
-HDZgXh5/KpPgC2tc5SHBYIbPXn3rQ/GaWt/3IIakOcQ0g5Jsl8pyQ7MoeR11LTo0
-SNXSO0TUrI/f+l9TCIHtN3ONesKJ9dQzh1v5EjihopczBFWfPfMJeGmuG2l86Cvh
-HOFu6ulBAjGjaEcpBqeeNrqYJ0pwhuYwBlL+w6cnCVG6mHfqonGdN0CncXbxsinq
-IoMrow5U
-=M4LO
------END PGP SIGNATURE-----
-
---7aWVmqvkfCiWXO7m--
+> 
+> Thanks
+> /Ilias
+>> -                       }
+>> -
+>>                         net_boot_file_size = 0;
+>>
+>>                         if (len > hlen) {
+>> --
+>> 2.40.1
+>>
