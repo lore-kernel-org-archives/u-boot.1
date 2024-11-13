@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA1CD41C00
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 05:04:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B44DD41C02
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 05:06:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 631B08952B;
-	Wed, 13 Nov 2024 06:04:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2B3D688E3F;
+	Wed, 13 Nov 2024 06:06:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vPwWK+oR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wOuNeb/8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5083884D2; Wed, 13 Nov 2024 06:04:38 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 2A9CA8952B; Wed, 13 Nov 2024 06:06:22 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F34B88862E
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:04:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B308884D2
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:06:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-539fb49c64aso9359210e87.0
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 21:04:36 -0800 (PST)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5cedf5fe237so7822729a12.3
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 21:06:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731474276; x=1732079076; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1731474379; x=1732079179; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=sqNZMVeHJ5Kgup1Ckj/aR3vSdS7qrSWvGZ7apZLs7eE=;
- b=vPwWK+oR2mpNJkzQC+grT/4hkqTMeuIlYc4F9S/cP9MRStn8xC3d78OTe4T7oSwoA8
- y5Xicu9Sp/Bf9ZL1jP+SFHZFV5jrqcgbaQpVgLmf/MZFZs/STL4iBf2p4sjutM1ZBQwJ
- h3WayWQJi8HakDRG4UZTy63olGy+sAhoSw5vgT5bk2N4X1wgvuynYvwKSO68ejt73nd8
- uahzDxrTh0Y9wELWNLdh8IsHIK8QTxbdQ6cepi8jJ310FR1DX3qbEo26nXxd2j8mxB3E
- 2p77uHo+bH27YPKy1sgSmaC52GZp8oBSvy/m3MpqiHgPjqogueclAPkCg/ZDCc4ZIg3T
- G2YQ==
+ bh=wAX5Ef2SrOxGF+xYVjbG4OIUse+l2G80GuismvHqiWE=;
+ b=wOuNeb/8rAqdEdyAEJkKG/oCXXewFF3k6Smkmbk/7qlsZRqWzW+jH4/HvT6vwcL7zN
+ aMD7HVYLifbnfwoM2F7CKLIJpQl7SL8NDlEVg7qCcy+zS4B9ntJ5XmbC7avYj5a/QnP/
+ g/KekO7QYaKOFPpgZ3bqwI39AsdN3erkQWID5vad1uUrO+J7hQRXrab135uvVf01Zz7c
+ m9xz5vKvq5+l+/v11ilHivCr9pzsNQlGb8ZFR8jGJadK3PXiBEHg08i81mwz1+bPf8B8
+ PxGr+21/Gn4/o1U8UNql2GnEhXbnalWa9n8LCPVYUf3MGLWl03qIAyCAJULG9M46+Mul
+ x7YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731474276; x=1732079076;
+ d=1e100.net; s=20230601; t=1731474379; x=1732079179;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sqNZMVeHJ5Kgup1Ckj/aR3vSdS7qrSWvGZ7apZLs7eE=;
- b=dLAnbz19/ZxX9VOX0RwQZjSwEJIaEZ/F4Svm6u4DBh+oBAEM5W2dKaaPGUrVUUgERY
- 0q8/6FMTK7lumNBX3xvsxCj5d8hZbel5Unr93JoRjdhZYBiE3m4lm6VxHP+GurfrgJ3c
- s2R53rLhKeVjcmWzDf0qQHiWp6pbimrCP3z4kqVFtCAAxcFp+oB18HfaEspRMFeopY57
- bf4Nj+7L8jco8RKW2X4si8p5J+otEZs5K9DUvem4vd8ePdEiCAMDHH04ZyNYIwLDmqun
- CXTVO20sKB6GQoE3pcUi3z7b1c4L8vfod4IWY/9+2+my2C7/jAaQRXpTS3ttIuQfe0Ia
- CRGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVSvw8hyCH5xUGplT+cpmierpA7y6hWaGxi9Q7U9ZWfVH8FaEI4SKY7YBCxwNAdFH4G7WP8u5E=@lists.denx.de
-X-Gm-Message-State: AOJu0YwkVbkITh+nSlGE67dnqIkderec1ZVqy8s5tyBRwK7an6G4t0li
- 3i8LPVDoroCqslvA6dRFmEJDR8L2GCgUfC3xbijfIoMXhN8faJD/qE4a7GfuOJA=
-X-Google-Smtp-Source: AGHT+IFpxHJli8yU7kNIImfypOhLQYO7sahItmNlZ/7sHZUMtZOE7o3gDRiWbP9Sa3vjq+UxwbTqCw==
-X-Received: by 2002:a05:6512:3a88:b0:533:483f:9562 with SMTP id
- 2adb3069b0e04-53d862ee7b7mr13461433e87.42.1731474276170; 
- Tue, 12 Nov 2024 21:04:36 -0800 (PST)
+ bh=wAX5Ef2SrOxGF+xYVjbG4OIUse+l2G80GuismvHqiWE=;
+ b=Zr/MPrGwD+AnlI3DzTWbB0F/RVQeYu7YvA3H3iz+xch6MhzCKBd7EKt7LvGnqVofaQ
+ 382ZUKrmSomjxmNLKtGaKcl4tOas/7hopIvBlux8G63eNFZSwYim2RTnyVA4BWbtYEDX
+ DyKZrPFQ9wGsdY7KAaAPKoAISCaf6GwGMRfbNifyZmLOzmYMiXeYbcHC86eoXbjt164T
+ wW/6koMJxuyYB3UDPgHrvmCTAjzSdTOs99EAiw6DAZBl2R+oWT2eeG2ByffZMLohdvbA
+ QcNR8O0b4AjpjTfAmQ/lrXBmOvHVjvdKeM5QfcfUbsbQHnMUVuYKYhsJxRvzY0m7RrZb
+ ZpiA==
+X-Gm-Message-State: AOJu0YzzK9lYziyem1oEs1DMLKVVNkO2ob5Gmv9RxrNmb74g9IohySRn
+ /s8gPj7zVlY4FGJNJe2ajLDGK85H+nHwweNlVNwaONIqd0WlW9jq5DMMJUS9Wi4=
+X-Google-Smtp-Source: AGHT+IF5VVz9fb998T6h9p2LwdBce90TtEmd0tJbKc9qzKKvwrEel52xcdD9hFlgj9UjY3CoVHd7Rg==
+X-Received: by 2002:a05:6402:1d4b:b0:5c9:5e43:9480 with SMTP id
+ 4fb4d7f45d1cf-5cf0a310c43mr11753368a12.7.1731474379542; 
+ Tue, 12 Nov 2024 21:06:19 -0800 (PST)
 Received: from lion.caleb.rex.connolly.tech
  ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0a17662sm828002466b.28.2024.11.12.21.04.34
+ 4fb4d7f45d1cf-5cf03c7ce0asm6727970a12.85.2024.11.12.21.06.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 21:04:35 -0800 (PST)
+ Tue, 12 Nov 2024 21:06:18 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sam Day <me@samcday.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: u-boot-qcom@groups.io, Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Subject: [PATCH] mach-snapdragon: configure logging
-Date: Wed, 13 Nov 2024 06:04:17 +0100
-Message-ID: <20241113050431.1848951-1-caleb.connolly@linaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>, Ion Agorria <ion@agorria.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] fastboot: properly handle unknown partition type
+Date: Wed, 13 Nov 2024 06:05:59 +0100
+Message-ID: <20241113050607.1850472-1-caleb.connolly@linaro.org>
 X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -95,40 +91,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set LOG_CATEGORY and pr_fmt. Also fix the time.h include.
+In getvar_partition_type() we attempt to find a filesystem driver for
+the partition (of the list of driver enabled in U-Boot), on failure we
+return the error to fastboot and completely bail out of the operation.
+
+However, this should not be a failure, instead we should just default to
+"raw". This allows commands like "fastboot format:ext4 userdata" to work
+if userdata didn't already have an ext4 partition table (or if FS_EXT4
+is disabled in U-Boot), as failing to determine the current partition
+type is not an error in this case.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/board.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ drivers/fastboot/fb_getvar.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 2ab2ceb51389..bbe9d3de7636 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -5,9 +5,11 @@
-  * Copyright (c) 2024 Linaro Ltd.
-  * Author: Caleb Connolly <caleb.connolly@linaro.org>
-  */
- 
--#include "time.h"
-+#define LOG_CATEGORY LOGC_BOARD
-+#define pr_fmt(fmt) "QCOM: " fmt
-+
- #include <asm/armv8/mmu.h>
- #include <asm/gpio.h>
- #include <asm/io.h>
- #include <asm/psci.h>
-@@ -28,8 +30,9 @@
- #include <malloc.h>
- #include <fdt_support.h>
- #include <usb.h>
- #include <sort.h>
-+#include <time.h>
- 
- #include "qcom-priv.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
+diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
+index 93cbd598e024..9c2ce65a4e5b 100644
+--- a/drivers/fastboot/fb_getvar.c
++++ b/drivers/fastboot/fb_getvar.c
+@@ -229,9 +229,10 @@ static void __maybe_unused getvar_partition_type(char *part_name, char *response
+ 				       response);
+ 	if (r >= 0) {
+ 		r = fs_set_blk_dev_with_part(dev_desc, r);
+ 		if (r < 0)
+-			fastboot_fail("failed to set partition", response);
++			/* If we don't know then just default to raw */
++			fastboot_okay("raw", response);
+ 		else
+ 			fastboot_okay(fs_get_type_name(), response);
+ 	}
+ }
 -- 
 2.47.0
 
