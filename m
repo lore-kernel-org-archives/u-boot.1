@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38D05D597C5
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 02:40:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C27ED597C5
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 02:40:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0592894C9;
-	Wed, 13 Nov 2024 03:40:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 23A18894D8;
+	Wed, 13 Nov 2024 03:40:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="S8AC5+jk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bVwgsuKW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2159E894C9; Wed, 13 Nov 2024 03:40:45 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id 3304088CF1; Wed, 13 Nov 2024 03:40:49 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6272894DA
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 03:40:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00623894D5
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 03:40:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7b161fa1c7bso399877485a.0
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 18:40:40 -0800 (PST)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6cbe53a68b5so46945056d6.1
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 18:40:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731465640; x=1732070440; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731465646; x=1732070446; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6wecKXp06gLDj733zp26REZ3hgpiIcjEQ1GH4JPEJVw=;
- b=S8AC5+jk0SIjW3SBGj87SpMwMhi75qpLSpmclGGu0lUyD0cofI/h+0/0ovqNseZThb
- m+cM/aUbZ3oa4Oyzqlxe6qb90hrfz2S59xcgyJ6F2J86iBzbuoP3wtBrIkpwhapVUid1
- k0zzjCn1HuTQp18eIcB6tCNst9ydMKjpDhNog=
+ bh=GXYdM4nVnNHkdzINiaGJ/3kcSSxp0BHXAUbtkedrUwE=;
+ b=bVwgsuKWP/PNkytGPr9YHdu5tlxLrUiqSYBHHEHuxUccEQIxMOnEy0A5IcB9PdLzPn
+ BqMHrwi+rEY24B6cPvkdAVnCSJpAMiYMT01wmTjjX+C27N/6swoGhtaqOQKsSK9S6BLe
+ lwtycYfWeySdAIw5sMqCBfDwfg5cTa2OZmW+M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731465640; x=1732070440;
+ d=1e100.net; s=20230601; t=1731465646; x=1732070446;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6wecKXp06gLDj733zp26REZ3hgpiIcjEQ1GH4JPEJVw=;
- b=Jmu2EL+W10ZT0hzwkuMAjrq7y3ZZTq4kLpNOZgAuL6Z4hw2oM//Pa9Cc5JB8uqcOcP
- 1jJZAsfUUYXkrNs4oGsZgkFoRMsfvG74gJ/t9t270ieC/hnxxxuCa7XD8PeOmQpCclch
- YX2dfCXr13y0hr71BYZeQUwyLRhQbSXJ2R5ipeHvRqNQp+HzVJToKVI6kG/k02gGOW2X
- 1gay1w3NlCjBaEofkZegrDY117x1O0Vruxy6y/HqundwNf9aWxMCDKELqqnqL5+YPrtF
- VF2ssB7GPLMi0dJnsmAXk/0e8ODqwRa96gWQv7dlpDZNjqdkQ+DsxyGi+ki9vCS0B0V0
- MVNQ==
-X-Gm-Message-State: AOJu0YyDLBzMjSJqgf880PuVTOozEny16yRV8M6Ah3gJs4xPM+byjn/9
- es20+/gKKUdui+f8LiMVKKxqwyNRk9BqrTpllTgzeOjHaVba2cKm5nD0ehhGq1U=
-X-Google-Smtp-Source: AGHT+IEEA5OoexWWZiqDATbc3UrZwesvJr1FEt5Dlt3aeTiM83wkemwq6wkoSDAxvA4fE1yFJidtsA==
-X-Received: by 2002:a05:620a:1792:b0:7b1:15dd:8372 with SMTP id
- af79cd13be357-7b331f2d04cmr2135511985a.60.1731465639707; 
- Tue, 12 Nov 2024 18:40:39 -0800 (PST)
+ bh=GXYdM4nVnNHkdzINiaGJ/3kcSSxp0BHXAUbtkedrUwE=;
+ b=PPfByEwAdZLZ1FvgO3a7ql2paC5mFWplUMmgWuQZGS97fAsFOd0kZGJIpz4nlu/MdX
+ kLOpWVRMwH3FcS7AoQmY7uQpam7D7Fotxw/sSQJFo9necaKOKZA5ShgELrLZW1JKh8pe
+ 6rmU6w1dgQsxohCd7vbNi4yaG2nEWOvWV1MyJpskzDrq3rsnpInJtYP5kNNex2mKbG/R
+ DivYKbt1K7+HnGaT8FwIJcGna+WxcdncwxKwy0xvuwMFtlSgnKOiQ9qtTl62biWjfsC1
+ LlwLvu2dD2yYoOpKWLBOt8m0PM1Y1WBCxGssijeqxQV7IfGeZupJ2U33go1Uxy69ejNa
+ l4fQ==
+X-Gm-Message-State: AOJu0YxvM9t5C7kqOE5onZT8y5Z4wHWicCJuGcd6RpDheD4dd5McCDV5
+ rT2K+2lP8LYnDLrakdbNnpZXAFDIPeC9UHFRAloaojNmaTOCCCbmGvhg2PUOaMA=
+X-Google-Smtp-Source: AGHT+IHKRgPWWbOdPQavnbkbTyot1O9LKKRbXec+67+881IZxiYtur4aNiv7I6kVPfe2FyZ4bO7Ayg==
+X-Received: by 2002:a05:6214:2d46:b0:6cb:f936:f9ce with SMTP id
+ 6a1803df08f44-6d3d03a8960mr58247456d6.41.1731465645850; 
+ Tue, 12 Nov 2024 18:40:45 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b32ac427cfsm649002785a.30.2024.11.12.18.40.37
+ 6a1803df08f44-6d396631480sm78648306d6.113.2024.11.12.18.40.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 18:40:38 -0800 (PST)
-Date: Tue, 12 Nov 2024 20:40:35 -0600
+ Tue, 12 Nov 2024 18:40:44 -0800 (PST)
+Date: Tue, 12 Nov 2024 20:40:42 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Brandon Maier <brandon.maier@collins.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH 3/9] buildman: Support #include files in defconfigs
-Message-ID: <20241113024035.GI3600562@bill-the-cat>
-References: <20241108152350.3686274-1-sjg@chromium.org>
- <20241108152350.3686274-4-sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH RFC v1] Dockerfile: Have "sandbox" build with i386
+ toolchain not x86_64 toolchain
+Message-ID: <20241113024042.GJ3600562@bill-the-cat>
+References: <20241105165357.620796-1-trini@konsulko.com>
+ <CAFLszThU2T2A4DG-=isO6vP=149Lw6jQaB3vs8ggJ2H8CcDwBg@mail.gmail.com>
+ <CAFLszTjYy-wCuOx5Nv-F1uDcVYJEqi2pwTBTws=UHWB0z026ww@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nnAmrhIyemSjkCsI"
+ protocol="application/pgp-signature"; boundary="BLO3JDd7QUl/r64u"
 Content-Disposition: inline
-In-Reply-To: <20241108152350.3686274-4-sjg@chromium.org>
+In-Reply-To: <CAFLszTjYy-wCuOx5Nv-F1uDcVYJEqi2pwTBTws=UHWB0z026ww@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,93 +93,119 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---nnAmrhIyemSjkCsI
+--BLO3JDd7QUl/r64u
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 08, 2024 at 08:23:44AM -0700, Simon Glass wrote:
-
-> This is used by some boards in U-Boot and is a convenient way to deal
-> with common settings where using a Kconfig files is not desirable.
+On Sat, Nov 09, 2024 at 10:34:15AM -0700, Simon Glass wrote:
+> Hi Tom,
 >=20
-> Detect #include files and process them as if they were part of the
-> original file.
+> On Tue, 5 Nov 2024 at 10:03, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Tom,
+> >
+> > On Tue, 5 Nov 2024 at 09:54, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > A long time ago, we had to use "i386" and "x86_64" toolchains for our
+> > > x86 platforms, depending on the target. We then moved to being able to
+> > > use the single "i386" toolchain to support all x86 platforms. At the
+> > > same time, we had been building sandbox with our "x86_64" toolchain in
+> > > CI. When x86 switched to being able to use a single toolchain we did =
+not
+> > > update our CI buildman file to match. Do this now as we want to ensure
+> > > that sandbox is built with the same compiler version the rest of our
+> > > platforms are and not the host one.
+> > >
+> > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > ---
+> > > Cc: Simon Glass <sjg@chromium.org>
+> > >
+> > > I'm posting this as an RFC to start the discussion as when I mentioned
+> > > this to Simon on IRC, he was very much not in agreement.
+> > >
+> > > My main argument is this, sandbox needs to use the same toolchain that
+> > > we compile (virtually) all other platforms with as one of the points =
+is
+> > > to be able to catch warnings and compiler behavior changes as soon as
+> > > possible in our CI. And just like how developers can use
+> > > distribution-provided toolchains today, nothing changes in that regar=
+d,
+> > > we only make CI be more consistent now.
+> >
+> > OK, that makes some sense to me, actually. It isn't the toolchain that
+> > people will be using, but catching things earlier seems good.
+> >
+> > The main concern I have is that we are not testing sandbox on the
+> > toolchain that everyone will be using. But I haven't noticed failures
+> > in CI which I cannot repeat locally, so we can cross that bridge when
+> > we come to it.
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/30
-[snip]
-> +defconfig fragments
-> +-------------------
-> +
-> +Buildman provides some initial support for configuration fragments. It c=
-an scan
-> +these when present in defconfig files and handle the resuiting Kconfig
-> +correctly. Thus it is possible to build a board which has a ``#include``=
- in the
-> +defconfig file.
-> +
-> +For now, Buildman simply includes the files to produce a single output f=
-ile,
-> +using the C preprocessor. It does not call the ``merge_config.sh`` scrip=
-t. The
-> +redefined/redundant logic in that script could fairly easily be repeated=
- in
-> +Buildman, to detect potential problems. For now it is not clear that thi=
-s is
-> +useful.
+> This doesn't seem to work, for a few reasons:
+>=20
+> 1. Buildman doesn't support setting HOSTCC and CC unless using -O to
+> override the toolchain (so the setting in this patch has no effect)
 
-I don't like this logic because the whole point of merge_config.sh is
-that it IS the canonical way to handle Kconfig config files + fragments
-and provides handy feedback like "You expected CONFIG_FOO=3Dy but you
-ended up with '# CONFIG_FOO is not set'". It's frankly an at least small
-problem of our current cpp rule, but calling that for every defconfig
-would be a performance nightmare too.
+That shouldn't matter tho.
 
-> +To specify the C preprocessor to use, set the ``CPP`` environment variab=
-le. The
-> +default is ``cpp``.
+> 2. Using the toolchains from kernel.org gives this error:
+>=20
+> NO_LTO=3D1 make O=3D/tmp/b/sandbox defconfig all
+> HOSTCC=3D/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux=
+/bin/x86_64-linux-x86_64-linux-gcc
+> CC=3D/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin=
+/x86_64-linux-x86_64-linux-gcc
+>  -j30 -s
+> /home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../l=
+ib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
+> cannot find crt1.o: No such file or directory
+> /home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../l=
+ib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
+> cannot find crti.o: No such file or directory
+> /home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../l=
+ib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
+> cannot find -lc: No such file or directory
+> /home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../l=
+ib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
+> cannot find crtn.o: No such file or directory
+> collect2: error: ld returned 1 exit status
+> make[3]: *** [scripts/Makefile.host:95: scripts/basic/fixdep] Error 1
+> make[2]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefil=
+e:503:
+> scripts_basic] Error 2
+> make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefil=
+e:568:
+> __build_one_by_one] Error 2
+> make: *** [Makefile:177: sub-make] Error 2
 
-Uh, I was hoping it would get the correct CPP and flags from the
-Makefile? Otherwise this is going to fall down in some corner cases such
-as I expect clang.
+So yeah, here's the real problem. In the past the kernel.org toolchain
+was (unintentionally I believe) good enough to make user-space programs
+too. That's not the case now, and sandbox is really a userspace program
+and not a bare-metal program.
 
-> +Note that Buildman does not support adding fragments to existing boards,=
- e.g.
-> +like::
-> +
-> +    make qemu_riscv64_defconfig acpi.config
-> +
-> +This is partly because there is no way for Buildman to know which fragme=
-nts are
-> +valid on which boards.
-
-That seems like a really weird deficiency and non-sequitur. I don't know
-why buildman would be attempting any sort of validation beyond syntax
-validation. It's more that we don't have any way to pass additional
-arguments to the "make defconfig" part of the build, yes? And then in
-turn because buildman reads the defconfig itself too, prior to that
-stage?
+So really the current line from the Dockerfile just needs to be removed.
 
 --=20
 Tom
 
---nnAmrhIyemSjkCsI
+--BLO3JDd7QUl/r64u
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc0EaMACgkQFHw5/5Y0
-tywN0Qv+K+jXI5Z1PnkiuP2c085cTct/x6a3nudt/vlqQNA/OhUHQRaTVoNz+oF3
-XMIq/WVpRqBhEyKUndmz/i2jr0W9VMtcaGCf5GkkQ7BB+F2UZg3DlJxYUxIWOK4o
-OZm5dE1BRJc4Wfinl7X+/7MaBfocWRqTeH1PCuxVKjdoJ/NJx+PGdt/lpyY0J9xo
-Vsi2avjps+E3Bnu0RpyitRFN9VNfiKhIuY7+2aSNC/zsMTFxHfH4qJqYH3wEvDNJ
-uXdSj7eyAfkWwOXJYxSCTMNdRYWTOCYZVqL8eAu110zeZcL9Hs9PRn+LuxGC9BUr
-thXT7v8fDKarG1KkmhRU6BvQwKfDHikJn0UxNUVrnYhObjSwbkqV71VX6dwUWc6o
-q1QGvoWG3+c8G9QZ00f6xjdRdQhZOJU59nMGO7r0UMR1tNChmGwlILsDlZameMeg
-UEO6yFjWRQ3CAkw4fI5NyDjzdZa1cunhGUits0xrrQX3nLQwQHDjcvTEwsAPi17g
-iyZ6bvPz
-=o7If
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc0EaoACgkQFHw5/5Y0
+tywHsAv+Iwm7f8R8uRsDIU52ONaMiNvJCGHHdI3z9RMuSa/T0wBV2MLegN7TG+tI
+3OGKMCQ8TPIYClvMW9p4bWslbZd5Zn6iF/EZxpkDCSOSxTYNnC32BRCZ8E7FzrVE
+CLmaxQJWPP0vKWr0bUFKUrhPkoaRXeI/HLM5LU6W0vd+wFhA/8DJrMmQcnBGw08/
+LvE4BGDRjUpspeABb49qMSGY5XCi0EMnC29n4aDXkbCXxQj3BwDpqejnHDE/IzkD
+66tEJ8XRx/9TEjLWzoSflWhlfoZ5wO5LJ8IwLDS/JGN7RQiWwg3M5zl41t+xwyTv
+O2RpOzDqhy3dt3xHANoknBQO3AOlZDuYX/jrpq/jBn2LufxhuzSZhTdM4A6bCxwm
+Lm/qfYErjwTgBY4nzY0tOcBmtOb7ynKlIis9xv3hZiq+HWrl0xZg7t6gQfKnhuUO
+6mvuv2rMprup0hKlNy/QNxk56vwlYkVxGE95zGQsjpEsh12eudGG+jda+vVfltIb
+/3ZEJ/o6
+=brDI
 -----END PGP SIGNATURE-----
 
---nnAmrhIyemSjkCsI--
+--BLO3JDd7QUl/r64u--
