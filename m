@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7582D41C31
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 10:38:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9885DD41C33
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 11:29:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5250789544;
-	Wed, 13 Nov 2024 11:38:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DAD3C8905E;
+	Wed, 13 Nov 2024 12:29:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fK53snFQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gbkac4ZT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8500F89554; Wed, 13 Nov 2024 11:38:38 +0100 (CET)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id 5541A8905E; Wed, 13 Nov 2024 12:29:11 +0100 (CET)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BE0D8953C
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 11:38:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F1ECD8904C
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 12:29:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-7e9e38dd5f1so5095495a12.0
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 02:38:36 -0800 (PST)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-71e61b47c6cso6138110b3a.2
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 03:29:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731494315; x=1732099115; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1731497347; x=1732102147; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0y3DP4eB9cretbmHvtonRFnfeakZrTQzs0Lh0NAeRuU=;
- b=fK53snFQcEFKP9xdiO7Pll9t5sYLcsR626ABa43IvG/Koq9oEkcDZu9wtX6mn9h6Wa
- l+zkXTCaM/gvwgwP5uArQSH2t/vqFVswjXe3oh2b+1dPVxzusASZAaUgR02FL9dqksD0
- wSLP5GGhiHQmM5nnpYmvfx+FYAveA3xxHtoGGBYr8Ih4DkveQpeXa5tb5bJbZNvW0va1
- LmPe35Nb4NdV/cWlPxyF7WDCYVr2gyjZKce4+UX1HeSytbP6IU+eIzvVASUeGxrLfdZK
- /zwriYaz1PJMwY7q5QCw1JICAPcDkws9X9gk56ESBMzY20Np01MlJ5xrfvIoETcqIt3B
- 5OQg==
+ bh=91W9iX7UAyvG/MbT31rKAJzSjCQxpaJYJ5GJfihoSFM=;
+ b=gbkac4ZT9d+o1tFN8AqmtIRS1+HDFmsuDiaYse2XVQQIojB9+PJzEwpmM09Sv275D9
+ ra/U/HHHcdLDjVo/KJPb99YtoCirqy76DWFdq1oULM3bvwHZtD028iVysJuc1loxGnVU
+ UvY7EOXYVxat+AzPvukxJOQogd1XsaIA0OeVPz5Q+nEjwiq0729X4fp4RiLlz2Dz/RMe
+ +9K/innUbVC3Iz2h482QG6EhJN+idIOOn5fmMW5Kbq76ia8t8ZTVtQmb5JoOLfGhwXHo
+ f1tBpEKKRqvZk5f+IO4OzhY485VGdkxcRPnlmn6P41+21VQJnq5URRPJ9p0wUe+FgvpP
+ +GJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731494315; x=1732099115;
+ d=1e100.net; s=20230601; t=1731497347; x=1732102147;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0y3DP4eB9cretbmHvtonRFnfeakZrTQzs0Lh0NAeRuU=;
- b=BS/e/K1FYF2IaAssu2GstCd3WkY3EDz6EERRvJ5MiN+ykhlVv9JO45+ACfGVdo2NKc
- kC9bYdUgX945U3ZpR92kPz1tjcOAjAQAmFom5p3NvBUk6le4h0Y7GnBvMhz4qmSCKjVm
- OSKhgxEuSiTvkgajKrI9FuUP5JsPqQ8qr5pntdVumLZdxqM9Ghc25Ju5ELgHh4cklXrh
- gLmAl70o8fnz31zjyvXGbxGzDYmiYtAx6rA2S4BlusVtubgTSqLlL0niamxx12SG0Ugt
- LJCDlr0cmFUyDQ3oXgCNKyKe5SuPaoCn2YM+N1jemJqd7Gz0SsuVlCe9XVrB2RWo7ery
- e5aA==
-X-Gm-Message-State: AOJu0YxF76OcWuYUAQDYZI52TR5sQQT73zbD1VEtG+JRUhHgL+19WOoG
- XHQpohpVi9kz0FY8IGfru40Ju4Vjeu3cfqmCnCzh2SW3autDg/4OpeystqQtaKekYqigRxT9ohk
- QgpgVfVV/KsGQ8dSqhWcK9a+9rJNQn78NcqBDuLJztuBFaWep
-X-Google-Smtp-Source: AGHT+IHAF1VCJxjC7vMjNQ6QD4NmOPqy41TDeH252Kv3GRMGLwxthuReb8KDZpnSzLOr34E4C+kv60O/ZlJU3Id+OUQ=
-X-Received: by 2002:a17:90b:51d2:b0:2e2:daab:cc69 with SMTP id
- 98e67ed59e1d1-2e9b171f11emr25954386a91.12.1731494314656; Wed, 13 Nov 2024
- 02:38:34 -0800 (PST)
+ bh=91W9iX7UAyvG/MbT31rKAJzSjCQxpaJYJ5GJfihoSFM=;
+ b=G28zZOeXILoRpNcXDOzWs/JOFQD6dWBhMhsq4oa/G8LgL9/xi76izaUGDqI16v670B
+ SpTtVLeezsn9wW3Cb4OIEwypQ77E1RgoKtLQ1OMccye3fEkxobdKDNJMVkHUKsMKTfXx
+ k2nxbqLW5G+oHxZsxbTBC7/XXoTt0Xb8DIenDcGXGHjNmH3VGfNGt5r6pIaKG8cWvusI
+ JBay2AS9osK1tetF7ed4AdkANYtp0YjBEjFCwbdN7EIzgN+nEpoRdkI/OgAb1ImSkDg/
+ vaVIW76/GTAzxH21mtvQ2r6iNdKivhujQbEnjKq5bsGKhi7p6Cdz0HYSRRfJVn7cvtyr
+ 8UNQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVlpY8tjT6hr1Lr+oHEsk2hTxPw4VRC3z/n/C+hfZFP795Ydn/tzgKkVQgVYdR5HTrQl0Cp21M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz1Nmnk0izqFrnS0vrWKtbw4qu/luMN3SEWyXYSMCwlMu48wK7X
+ T9rAm5pubAm+UqWQHct1aTCou5ov2NFuxwm9QUjg1qa/pWsH2p8I3DmWoGoqyiQTDsMgtexBb5W
+ 6TCkRF9hg7TFegssR0hcGPc8+cwdgMQaUrBQ+pA==
+X-Google-Smtp-Source: AGHT+IE2fY2YolCFyTzeiR92s94q8IPDr3a4Zyy2E0BUH39rDf+QrrwaLsXaF2oDY9iJrC0uZM96LhPfq1Wgas912iI=
+X-Received: by 2002:a17:90b:1a8c:b0:2e2:cef9:4d98 with SMTP id
+ 98e67ed59e1d1-2e9b177bad9mr26384571a91.25.1731497347491; Wed, 13 Nov 2024
+ 03:29:07 -0800 (PST)
 MIME-Version: 1.0
-References: <20241111210959.560738-1-adrianox@gmail.com>
- <20241111210959.560738-6-adrianox@gmail.com>
-In-Reply-To: <20241111210959.560738-6-adrianox@gmail.com>
+References: <20241112131830.576864-1-sjg@chromium.org>
+ <CADg8p949qx=irjZKgf9-B4wtCYx1pDj29LFH86YR4T1zyKtAvg@mail.gmail.com>
+In-Reply-To: <CADg8p949qx=irjZKgf9-B4wtCYx1pDj29LFH86YR4T1zyKtAvg@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 13 Nov 2024 12:37:58 +0200
-Message-ID: <CAC_iWjKAM2=HGjoccwQ7QzTABV4dxVypeSZkzSqEraDzVxxipA@mail.gmail.com>
-Subject: Re: [PATCH v3 05/15] efi_loader: add IPv4() to device path to text
- protocol
-To: Adriano Cordova <adrianox@gmail.com>, xypron.glpk@gmx.de, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- jerome.forissier@linaro.org
+Date: Wed, 13 Nov 2024 13:28:31 +0200
+Message-ID: <CAC_iWj+U945S96mE4E3d_bLxQ-9iQhErXBaJW0WCpLB1X=VVqQ@mail.gmail.com>
+Subject: Re: [PATCH] Revert "efi_memory: do not add U-Boot memory to the
+ memory map"
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,71 +90,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Sughosh
 
-On Mon, 11 Nov 2024 at 23:10, Adriano Cordova <adrianox@gmail.com> wrote:
+On Tue, 12 Nov 2024 at 20:46, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> On Tue, 12 Nov 2024 at 18:48, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > A bisect of Ubuntu 2022.04 boot-failure on qemu-x86_64 resulted in this
+> > patch. I am not sure how to investigate it.
+> >
+> > The boot hangs at some point during booting of the install image, before
+> > the Ubuntu logo appears.
+> >
+> > I will sent a series with a script showing how it is run.
+> >
+> > This reverts commit a68c9ac5d8afc51c619c5d3e865fcf147bea90cb.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 >
-> Implement Ipv4() node support in the device path to text protocol.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
-> ---
->
-> (no changes since v2)
->
->  lib/efi_loader/efi_device_path_to_text.c | 23 +++++++++++++++++++++++
->  1 file changed, 23 insertions(+)
->
-> diff --git a/lib/efi_loader/efi_device_path_to_text.c b/lib/efi_loader/efi_device_path_to_text.c
-> index 0c7b30a26e..481a9712d9 100644
-> --- a/lib/efi_loader/efi_device_path_to_text.c
-> +++ b/lib/efi_loader/efi_device_path_to_text.c
-> @@ -8,6 +8,7 @@
->  #include <blk.h>
->  #include <efi_loader.h>
->  #include <malloc.h>
-> +#include <net.h>
->
->  #define MAC_OUTPUT_LEN 22
->  #define UNKNOWN_OUTPUT_LEN 23
-> @@ -170,6 +171,28 @@ static char *dp_msging(char *s, struct efi_device_path *dp)
->
->                 break;
->         }
-> +       case DEVICE_PATH_SUB_TYPE_MSG_IPV4: {
-> +               struct efi_device_path_ipv4 *idp =
-> +                       (struct efi_device_path_ipv4 *)dp;
-> +
-> +               s += sprintf(s, "IPv4(%pI4,", &idp->remote_ip_address);
-> +               switch (idp->protocol) {
-> +               case IPPROTO_TCP:
-> +                       s += sprintf(s, "TCP,");
-> +               case IPPROTO_UDP:
-> +                       s += sprintf(s, "UDP,");
-> +               default:
-> +                       s += sprintf(s, "0x%x,", idp->protocol);
-> +               }
-> +               s += sprintf(s, idp->static_ip_address ? "Static" : "DHCP");
-> +               s += sprintf(s, ",%pI4", &idp->local_ip_address);
-> +               if (idp->dp.length == sizeof(struct efi_device_path_ipv4))
-> +                       s += sprintf(s, ",%pI4,%pI4", &idp->gateway_ip_address,
-> +                                    &idp->subnet_mask);
-> +               s += sprintf(s, ")");
+> This seems to be an issue specific to the x86 architecture. The
+> installation works on arm64 and riscv (confirmed by Heinrich)
+> architectures. I checked the output of the EFI memory map with the
+> above commit against the master branch, and the only difference is
+> that with this revert, the EFI memory map has the u-boot memory region
+> marked as EFI_BOOT_SERVICES_CODE, whereas without this commit, that
+> region is marked as reserved.
 
-How confident are we that the produced device path won't overflow?
-IIRC we only have 512 of space there and sprintf isn't the best tool
-to catch overflows.
+Hmm why? LMB is adding this with EFI_BOOT_SERVICES_CODE  in
+lmb_map_update_notify(). Who's switching it to reserved?
+This is a pretty big change since the memory switches from reusable to
+reserved for the OS.
 
-Thanks
+> I need to look into this in more detail,
+> but it would seem like the x86 kernel (or some efi stub code ?) is
+> expecting some region of memory marked as EFI_BOOT_SERVICES_CODE,
+> which is not the case for other architectures.
+
+Not EFI_BOOT_SERVICES_CODE explicitly, probably just a reusable type of memory.
+
+Cheers
 /Ilias
-> +
-> +               break;
-> +       }
->         case DEVICE_PATH_SUB_TYPE_MSG_USB_CLASS: {
->                 struct efi_device_path_usb_class *ucdp =
->                         (struct efi_device_path_usb_class *)dp;
-> --
-> 2.43.0
+
+
+
 >
+> -sughosh
+>
+> >
+> >  lib/efi_loader/efi_memory.c | 10 ++++++++++
+> >  1 file changed, 10 insertions(+)
+> >
+> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > index d2f5d563f2a..c7400ec9854 100644
+> > --- a/lib/efi_loader/efi_memory.c
+> > +++ b/lib/efi_loader/efi_memory.c
+> > @@ -809,6 +809,16 @@ static void add_u_boot_and_runtime(void)
+> >  {
+> >         unsigned long runtime_start, runtime_end, runtime_pages;
+> >         unsigned long runtime_mask = EFI_PAGE_MASK;
+> > +       unsigned long uboot_start, uboot_pages;
+> > +       unsigned long uboot_stack_size = CONFIG_STACK_SIZE;
+> > +
+> > +       /* Add U-Boot */
+> > +       uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
+> > +                      uboot_stack_size) & ~EFI_PAGE_MASK;
+> > +       uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+> > +                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+> > +       efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
+> > +                             false);
+> >
+> >  #if defined(__aarch64__)
+> >         /*
+> > --
+> > 2.34.1
+> >
