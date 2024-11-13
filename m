@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80282D462D3
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 16:16:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 236CAD462D3
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 16:16:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35397895BF;
-	Wed, 13 Nov 2024 17:16:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9707C895A8;
+	Wed, 13 Nov 2024 17:16:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="RUHanKO6";
+	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="MsNxHU97";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2A59895B7; Wed, 13 Nov 2024 17:16:03 +0100 (CET)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on20723.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::723])
+ id 10CF9895A8; Wed, 13 Nov 2024 17:16:07 +0100 (CET)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on20723.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::723])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 285C989083
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 17:16:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 978E3895B7
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 17:16:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=C.Stoidner@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kP4u/mmccgxn7ebTQt4aI3JzO7aSoxqpPdNsEZOeKRk1psBOsqeSP0YjEJPvEOzlB2KPqhWaVskHNKbJV8EZnt8ni+jmUjqe4mKjbE4y6n4nfuBEKwZcM8vYvDEbW0Gcch7RUfREB4l4s4Vu+r3QOHtJ9UNu2ctHF4uJJVV0MVxGnAjChLuwulMZsIAJJQBzuGMSPiOqWjDF1ENkLrIo4p8BsOdb2jm4Zh+/OuBKCWBjFyWfVPRDYEZq8fEASmWcD9AzEa7tUdxl05/tdFHjDSBr5s3WtiUxaJQ/AI2pVOCGiUhksiXVrYZ7IFjnytPM1vJ4DnL/jwuz6BTtYZjSAQ==
+ b=TwDsgYPNAQ2hAR8v4An3oe1EJwUkQ3YA/sAl1dPTcT2k9fT+gd0S4JH60OGTUcFxWNG/2NDiNvUT498Ilbm0aG5Kb6I1hTG4ocB219939Mkl5ZNgA3b3nyhhdtYJQnQ7GHDpyBPONU4VxtLE+tASpzOl1fyJCcFGCK9n1uGb1wUP8Lexpqkgb9k3rvHDQ5Twx/gLIxnnEBF5qbwjAtD5qA3ltHLHzPCckyOF6WXE0bfgIXVLB2vjRVEXw0mAlVpPgKdNq+0EcxBRi0NrZg865GntgjxDQvtuFj29AVIWlaqXo0KxAXPfcn0ISu4kZLjUQBh8UFcjUndfFaOkYxHECw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=L3XuXPJWmnxrDRbWZcUWRXRf45TfUXA7B839BMAFIi4=;
- b=LvXHx6OiAQmdQE2HHskV1JgIFFTXX++OE7ZRHf5b4ROQF7TM7VsSSnz5S7XJTAjVHew5faW227/wGFoxuxJYDweBauxbyI9KERIEoRabsk7US0fYJ5C8VWZn2WhI20dogCsgJAWNX7Al+mQOicoNnWFrPjL1fl8bYclevEdnOXxqb65CfQFEScgnh9uDYubKas636NZmHKDJHTjXlMKIFHyf514IDhVNMQOy6uOZOdmUBoCS1IVNRuYzapd/fGYlWyl23GZkcmUcqbW6aUlQkeA7cuUY3tIqdteuMzeNhu96RiWndWLO6hgM0YzzO2zE52dk2eS+GfjnePl7lxl0uw==
+ bh=yQGiOY+gEX8hwmnnG9Kp4yFU3f29DDlh7+48cAzTlCM=;
+ b=ZQ8sbk25RiDR6LOINYMQ5CukDMTeYb9s1geBpugNB3QtT+kzTT+BYcFSGQwkvED3iqG5E+GlV1W4ORu2lQzgKQt55XMBhs8uzJCU7R2bGdIffREwh84Ln+FB684edwTLRV1RFp0iT5YX2tY1RsQRsVy0YCFsxvmXQRebOFjJPQ4aWfHUTHkMTdqCT1t32/zZ9BMr1mpKrp9ktVEKC50guy6o1zsCRlQl3vxFy3qF/jLgJHoGxDI63nfB+ATxa7+jgwCYpFTN/WqTphjhOK2lIemSkp/UWp3fXbO/WQ7IfE7nHbc7+zhc+cGJKyDU+CjKz5cSxbNyRW0RjF8SiURMwA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
  dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
@@ -42,18 +42,18 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=phytecmesstechnikgmbh.onmicrosoft.com;
  s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=L3XuXPJWmnxrDRbWZcUWRXRf45TfUXA7B839BMAFIi4=;
- b=RUHanKO6VHzg9X6imVNhKPOgMCF6K3xLvo2kt6grZFbC3rCnx7BQ5h5CZjmjm68zzr0ADcVCLmlFZGtJB/IM1J2WEqH8faAKUTwZAp9pBzY7tP9lmAv2IeDPPtbhf5RG+ZqGac4LJrJ9HDrOkJMbvEudzZd8IjP3ChbSSOI5OTQ=
-Received: from DU7P191CA0011.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:54e::18)
- by DU0P195MB1933.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:3e1::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.17; Wed, 13 Nov
- 2024 16:15:58 +0000
-Received: from DU2PEPF00028D08.eurprd03.prod.outlook.com
- (2603:10a6:10:54e:cafe::e3) by DU7P191CA0011.outlook.office365.com
- (2603:10a6:10:54e::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.16 via Frontend
- Transport; Wed, 13 Nov 2024 16:15:58 +0000
+ bh=yQGiOY+gEX8hwmnnG9Kp4yFU3f29DDlh7+48cAzTlCM=;
+ b=MsNxHU970q/xEv0mOwVP0NOuDHtKx5krnigUWn/NtDi4VStG7xzIpNOf0NY9yUHTp515PbTRzLoIkTM48DzUTTw6b5Jw/vo9S+9beqTVj4AqNiVb6qjCKNkLBLJyuVuLBY1TxWt3Mxnb7Z2TPQFqn2o26YtLtw4r9QDmUge6VNs=
+Received: from DU7PR01CA0001.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:50f::16) by GV1P195MB2053.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:150:89::8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.28; Wed, 13 Nov
+ 2024 16:16:00 +0000
+Received: from DU2PEPF00028D04.eurprd03.prod.outlook.com
+ (2603:10a6:10:50f:cafe::42) by DU7PR01CA0001.outlook.office365.com
+ (2603:10a6:10:50f::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.28 via Frontend
+ Transport; Wed, 13 Nov 2024 16:16:00 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -61,17 +61,17 @@ X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
 Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
  phytec.de discourages use of 91.26.50.189 as permitted sender)
 Received: from Diagnostix.phytec.de (91.26.50.189) by
- DU2PEPF00028D08.mail.protection.outlook.com (10.167.242.168) with Microsoft
+ DU2PEPF00028D04.mail.protection.outlook.com (10.167.242.164) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8158.14 via Frontend Transport; Wed, 13 Nov 2024 16:15:58 +0000
+ 15.20.8158.14 via Frontend Transport; Wed, 13 Nov 2024 16:16:00 +0000
 Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 13 Nov
- 2024 17:00:55 +0100
+ 2024 17:00:56 +0100
 Received: from llp-stoidner.phytec.de (172.25.50.218) by Florix.phytec.de
  (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 13 Nov
- 2024 17:00:55 +0100
+ 2024 17:00:56 +0100
 From: Christoph Stoidner <c.stoidner@phytec.de>
 To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
 CC: Christoph Stoidner <c.stoidner@phytec.de>, Mathieu Othacehe
@@ -80,10 +80,10 @@ CC: Christoph Stoidner <c.stoidner@phytec.de>, Mathieu Othacehe
  <trini@konsulko.com>, Yannic Moog <y.moog@phytec.de>, Primoz Fiser
  <primoz.fiser@norik.com>, Andrej Picej <andrej.picej@norik.com>, Wadim Egorov
  <w.egorov@phytec.de>
-Subject: [PATCH v2 2/3] board: phytec: imx93: Add eeprom-based hardware
- introspection
-Date: Wed, 13 Nov 2024 17:00:36 +0100
-Message-ID: <20241113160037.65679-3-c.stoidner@phytec.de>
+Subject: [PATCH v2 3/3] board: phytec: imx93: Add phyCORE-i.MX 93 support for
+ all SOM variants
+Date: Wed, 13 Nov 2024 17:00:37 +0100
+Message-ID: <20241113160037.65679-4-c.stoidner@phytec.de>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241113160037.65679-1-c.stoidner@phytec.de>
 References: <20241113160037.65679-1-c.stoidner@phytec.de>
@@ -95,50 +95,50 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
  (172.25.0.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D08:EE_|DU0P195MB1933:EE_
-X-MS-Office365-Filtering-Correlation-Id: d09c4f85-86b6-4a7f-92f9-08dd03fe7561
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D04:EE_|GV1P195MB2053:EE_
+X-MS-Office365-Filtering-Correlation-Id: a7ddd7f6-42d4-42f5-9012-08dd03fe7686
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?vV6JlaLfVrVDLdsj2xYsK7iFt+6ypOZWvMs0mJUY+T0dSnjT4YvYv9KLz/Ec?=
- =?us-ascii?Q?v8moDFZHFL1xhdRma9YCiWWqnJZpdbXtiFe7VoPjtu3oBQclXbt/xMaKWIYD?=
- =?us-ascii?Q?xmLhIfVUL6+6KW49JEqY+y3JRFkP1YF5JC29IaCr3cD7aOKk+Q6c+aP1waM7?=
- =?us-ascii?Q?JOrvAXtvp2MGxQaq3+J0n8KYFpJrQKTL/7iK3ZczzzZ6LFZfJFPQU14VdSwd?=
- =?us-ascii?Q?I5mgR5hDfdfh13n92p/TSMhVDpeLodtyISgqNOtcyEMEGuDEIMCcNQgYGrZH?=
- =?us-ascii?Q?kbQDl0lk6l9Bv+86/TKic2m4X2fftgwAXz/LztITCseC9wCgOWHlTaMOqDT7?=
- =?us-ascii?Q?lXG9V0Uzxire41LUm4wkHNvpGdGEnwWwPzyKIT3dvBySFR6srgl+rrxT+ghr?=
- =?us-ascii?Q?UMfq57VUTMkgYxDJlv9ntQ4YfUwajY+avPZbfRF0uHDpBhDVUHOD7lzfGi/v?=
- =?us-ascii?Q?iRw//aZBcgLNfERsEV9MbzLxzoY/O+VRf0Mjz1+82F16dQminzkeWdMm+N89?=
- =?us-ascii?Q?NoYjX502tY91Qr53tf8Z7WP0lRprdTAfmyICps+y9DvzGwrhBURUzNZR3ktb?=
- =?us-ascii?Q?bCDmY3WZ8BBdYak4eux7iqRUr1Xu+8gOVtec3bShgW/NmdZxWVfheDveauIT?=
- =?us-ascii?Q?aY6HtkbdZdOAG1Tc2sivqUzq0hM7j9r3ROkwabVh0VVe496iztzlJyqGHboI?=
- =?us-ascii?Q?OvONwPgwJYGthrk+K8JbxHVuRX4Jt9nP8z1eJllKtPOrm9n378e5SvD1jc5/?=
- =?us-ascii?Q?Yid9uNCNMSIDnTQohSOH4cNaH+lpU0oJ2tCZ6wjo50vB+r+iZtjXvXGP0vKf?=
- =?us-ascii?Q?AzcAbqlIDf2OVhOwKGy37Mz/Pnd/GWTocuTzJrB7gU3oPYPcrQRz9CCBg0uY?=
- =?us-ascii?Q?Js5+ab+UpvFbw85yV9EaOMz+zZILxvudTgPM+cidwonUNxnAlpkKIkY3NoVh?=
- =?us-ascii?Q?2c9akAQt6NFZP6RpBnuMPexoG4NCa0L9VxPzj4/4rIYZd0Ac9ZHpa9nASYPB?=
- =?us-ascii?Q?lhBCbtYxF3WpdgJww6Y9/I2fgby8Yi/YvhEkD/bfBXemg/A1o8jW8UTIeI9f?=
- =?us-ascii?Q?zp/B/d7T8X6XReTLnh5cHFuPJm6s3kDUnfpxzBeuxSNqZDqlJ2bvsI6o5D19?=
- =?us-ascii?Q?8uEgPa21a5RsNfL6BjRUGpCQqR99ljqOi4L4Ntw/DqlaBWMVwx+z/p/fxPj7?=
- =?us-ascii?Q?fsTDuBxR01RWmKuvUJDR3QQ6M+vn9PYdlwUX/iDPLDd+MIH7eXS9xRxuRGFF?=
- =?us-ascii?Q?KWTi8uK30VmNEhIDilPBfb7c4kuo/xN4s/H1UFav4lSgSxrLWvcMe97xyYPZ?=
- =?us-ascii?Q?QzAwNAbx0VhYckUA3FMTb76Qjo/9ONa9vIomL3YDrofLmS8rPwUs9bZB8Kep?=
- =?us-ascii?Q?GLgLrmQ=3D?=
+ ARA:13230040|376014|82310400026|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ir5x7kbn2AVzpX1igk/IRjNh5ocf4kPj5okFPuHvh/GeVwcDREApodNWEVOu?=
+ =?us-ascii?Q?kQitfd4e7Y8HBq3QQjf5dc0RtErT8edJjD6GSca2vmwsC35NE9wC8mgLfzC4?=
+ =?us-ascii?Q?i+aMNSRGoHKaw6SEHph3yGczmoukguEcewxDFPUxbSROX6QZngJ5iNUaiCPb?=
+ =?us-ascii?Q?Z1ucX5+zpFS3LaVgEHea4g4j6gy0zPIBQLWMsN5cQgexaDEDLYdSrO1GH6Fb?=
+ =?us-ascii?Q?JvgYSYQaT5qEy8Pg0yb2HrRbvK40Nkzm9/1kO7IPk50GeL74/YcAXJnzUurr?=
+ =?us-ascii?Q?Z4AGkH+kmXt+SHcHoA7Pv/KX+g8uqrwxJk72jgB+HWhfAfxPFAlWt4fTL9W2?=
+ =?us-ascii?Q?CDdbf1HUd9WyLKrlFcQpNYpHTHP6RIjb9dMa03l9Kbi1Jus85Hq0zy2Tywy2?=
+ =?us-ascii?Q?vQXPlog0I1vA6rIj9/2JOwg90X2eNzdXtL1kAucKZqCV8Wn2+vhMJUQI3EOr?=
+ =?us-ascii?Q?xjfqtJR7hKEOBHBmrLxMIannBfSM7+VVCATW/wfM8D6gmJQH8ZzMwQVZX/Sx?=
+ =?us-ascii?Q?jS22S2taNcPWmE2Jyb46eVmAbKIQGcFNOH07QTZ9jiTgN3cE0H8uSE6maay+?=
+ =?us-ascii?Q?frAsYPiuYvJxcbpdBh9yrNzJX/NCPDcUcMXyP3nIGnmMfL7+RDuhEfM0yhcu?=
+ =?us-ascii?Q?m0ke8pVP8U4RFCsyndeuTQJJYVUmwcErQX92rQ8biLMsX2hCD0qMKpwORAES?=
+ =?us-ascii?Q?yN8GDJfZiZ5NBc03XVXASdGHLv1Bck3Flg22vMB34pzCD+YvRs1z9nkTZbFz?=
+ =?us-ascii?Q?JYvkCOkQ8Ke0lczoYQ1qQl7aKCUEVkusDDftDSgpGMz4TGnCgQBsdt0UZLKB?=
+ =?us-ascii?Q?Dcc7REPA4EEMUtxE5WVRGO2uxgQ5BDmIWGOmDTW6f7VUtxEfmNGo8zpiPouD?=
+ =?us-ascii?Q?yFbDNPrWGDdRf3KeVi5FH+8He0oEHyt5UQ7RYVoJiyqaPEhfZClFUMSGGch6?=
+ =?us-ascii?Q?yW8bzCdIlNF6gNW+14WYZrI7FuxbM/eie+z4r6R98l2Imvjoswk8FDOYzROQ?=
+ =?us-ascii?Q?TvfILdY4LuAPwR41Nf7nENMUHqVNHlM03j6ljBopU39mPaJD4tFAqHVqNWD7?=
+ =?us-ascii?Q?w8ML4QglkvBztLPOXWX3mNoTEZfpS/VS49qOYBMlpDA1ciVCzpLAY+AfBriY?=
+ =?us-ascii?Q?9BBYg2IVganTk+2IbEynngvNjq8oDvtckhCI6LWNivf+bEXiJT19vD55mQ5H?=
+ =?us-ascii?Q?NJkfWEYGBj2If/lAxSL3q4pPBW8DcH+6efZHNtkC0J3IZirwSEsR8hQhR8qq?=
+ =?us-ascii?Q?c3/oeTqcHemfPYPvL9cJGIzYiQ1oQ26SWHzfR2cetdSNq6mOEmSEFM+8eTpc?=
+ =?us-ascii?Q?WM7IfOArwRxEigLWCvaCG7Bv1c/vjnf4VfltPk1/OEpiQH7Uo8oHC6nKymlP?=
+ =?us-ascii?Q?i6ooQEY=3D?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
+ SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2024 16:15:58.1758 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d09c4f85-86b6-4a7f-92f9-08dd03fe7561
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2024 16:16:00.0803 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a7ddd7f6-42d4-42f5-9012-08dd03fe7686
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D08.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D04.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P195MB1933
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1P195MB2053
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,15 +155,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The phyCORE-i.MX 93 is available in various variants. Relevant variant
-options for the spl/u-boot are:
-- with or without HS400 support for the eMMC
-- with 1GB ram chip, or 2GB ram chip
-
-The phyCORE's eeprom contains all information about the existing variant
-options. Add evaluation of the eeprom data to the spl/u-boot to
-enable/disable HS400 and to select the appropriate ram configuration at
-startup.
+The phyCORE-i.MX 93 is available in various variants (e.g. different ram
+sizes, eMMC HS400 yes/no). Enable hardware introspection for the
+imx93-phyboard-segin_defconfig, so that during startup the SOM module
+variant can be detected, and the hardware can be configured accordingly.
+The resulting SPL and u-boot binary shall able to boot each
+phyCORE-i.MX 93 module variant on each carrier board. Finally rename
+imx93-phyboard-segin_defconfig to imx93-phycore_defconfig, to highlight
+its SOM scope.
 
 Signed-off-by: Christoph Stoidner <c.stoidner@phytec.de>
 ---
@@ -179,494 +178,90 @@ Cc: Andrej Picej <andrej.picej@norik.com>
 Cc: Wadim Egorov <w.egorov@phytec.de>
 ---
 Changes in v2:
-- encapsulate handling of feature flag VOLTAGE into own function
-- move definition of enum phytec_imx93_ddr_eeprom_code into header file
+- just rename imx93-phyboard-segin_defconfig and add needed CONFIGs,
+  instead of creating an entirely new second defconfig
+- remove wrong comment from imx93-phyboard-segin-u-boot.dtsi
+- improve commit message
 
- arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi |  19 +++
- arch/arm/mach-imx/imx9/Kconfig                |   2 +
- arch/arm/mach-imx/imx9/soc.c                  |   2 +-
- board/phytec/common/Kconfig                   |   8 ++
- board/phytec/common/Makefile                  |   1 +
- board/phytec/common/imx93_som_detection.c     | 111 ++++++++++++++++++
- board/phytec/common/imx93_som_detection.h     |  51 ++++++++
- board/phytec/phycore_imx93/Kconfig            |  28 +++++
- board/phytec/phycore_imx93/MAINTAINERS        |   5 +-
- board/phytec/phycore_imx93/phycore-imx93.c    |  51 ++++++++
- board/phytec/phycore_imx93/spl.c              |  48 ++++++++
- 11 files changed, 324 insertions(+), 2 deletions(-)
- create mode 100644 board/phytec/common/imx93_som_detection.c
- create mode 100644 board/phytec/common/imx93_som_detection.h
+ arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi               | 6 ++++--
+ board/phytec/phycore_imx93/MAINTAINERS                      | 2 +-
+ ...x93-phyboard-segin_defconfig => imx93-phycore_defconfig} | 4 +++-
+ 3 files changed, 8 insertions(+), 4 deletions(-)
+ rename configs/{imx93-phyboard-segin_defconfig => imx93-phycore_defconfig} (98%)
 
 diff --git a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
-index 6897c91f4d..25c778bb07 100644
+index 25c778bb07..2245461032 100644
 --- a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
 +++ b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
-@@ -305,4 +305,23 @@
- 			};
- 		};
- 	};
-+
-+	eeprom@50 {
-+		bootph-pre-ram;
-+		bootph-some-ram;
-+		compatible = "atmel,24c32";
-+		reg = <0x50>;
-+		pagesize = <32>;
-+		vcc-supply = <&buck4>;
-+	};
-+
-+	eepromid@58 {
-+		bootph-pre-ram;
-+		bootph-some-ram;
-+		compatible = "atmel,24c32";
-+		pagesize = <32>;
-+		reg = <0x58>;
-+		size = <32>;
-+		vcc-supply = <&buck4>;
-+	};
- };
-diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
-index 5c1054138f..2465e31d73 100644
---- a/arch/arm/mach-imx/imx9/Kconfig
-+++ b/arch/arm/mach-imx/imx9/Kconfig
-@@ -45,6 +45,8 @@ config TARGET_PHYCORE_IMX93
- 	bool "phycore_imx93"
- 	select IMX93
- 	select IMX9_LPDDR4X
-+	select OF_BOARD_FIXUP
-+	select OF_BOARD_SETUP
- 
- endchoice
- 
-diff --git a/arch/arm/mach-imx/imx9/soc.c b/arch/arm/mach-imx/imx9/soc.c
-index 7c28fa39e1..237354f507 100644
---- a/arch/arm/mach-imx/imx9/soc.c
-+++ b/arch/arm/mach-imx/imx9/soc.c
-@@ -628,7 +628,7 @@ static int low_drive_freq_update(void *blob)
- 	return 0;
- }
- 
--#ifdef CONFIG_OF_BOARD_FIXUP
-+#if defined(CONFIG_OF_BOARD_FIXUP) && !defined(CONFIG_TARGET_PHYCORE_IMX93)
- #ifndef CONFIG_XPL_BUILD
- int board_fix_fdt(void *fdt)
- {
-diff --git a/board/phytec/common/Kconfig b/board/phytec/common/Kconfig
-index f394ace786..bc5511707a 100644
---- a/board/phytec/common/Kconfig
-+++ b/board/phytec/common/Kconfig
-@@ -19,6 +19,14 @@ config PHYTEC_IMX8M_SOM_DETECTION
- 	  Support of I2C EEPROM based SoM detection. Supported
- 	  for PHYTEC i.MX8MM/i.MX8MP boards
- 
-+config PHYTEC_IMX93_SOM_DETECTION
-+	bool "Support SoM detection for i.MX93 PHYTEC platforms"
-+	depends on ARCH_IMX9 && PHYTEC_SOM_DETECTION
-+	default y
-+	help
-+	  Support of I2C EEPROM based SoM detection. Supported
-+	  for PHYTEC i.MX93 based boards
-+
- config PHYTEC_AM62_SOM_DETECTION
- 	bool "Support SoM detection for AM62x PHYTEC platforms"
- 	depends on (TARGET_PHYCORE_AM62X_A53 || TARGET_PHYCORE_AM62X_R5) && \
-diff --git a/board/phytec/common/Makefile b/board/phytec/common/Makefile
-index cd78f7686f..8126f7356e 100644
---- a/board/phytec/common/Makefile
-+++ b/board/phytec/common/Makefile
-@@ -10,3 +10,4 @@ endif
- obj-y += phytec_som_detection.o phytec_som_detection_blocks.o
- obj-$(CONFIG_ARCH_K3) += am6_som_detection.o k3/
- obj-$(CONFIG_ARCH_IMX8M) += imx8m_som_detection.o
-+obj-$(CONFIG_ARCH_IMX9) += imx93_som_detection.o
-diff --git a/board/phytec/common/imx93_som_detection.c b/board/phytec/common/imx93_som_detection.c
-new file mode 100644
-index 0000000000..a28cdf6b51
---- /dev/null
-+++ b/board/phytec/common/imx93_som_detection.c
-@@ -0,0 +1,111 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
+@@ -2,15 +2,17 @@
+ /*
+  * Copyright (C) 2023 PHYTEC Messtechnik GmbH
+  * Christoph Stoidner <c.stoidner@phytec.de>
 + * Copyright (C) 2024 PHYTEC Messtechnik GmbH
-+ * Author: Primoz Fiser <primoz.fiser@norik.com>
-+ */
-+
-+#include <asm/arch/sys_proto.h>
-+#include <dm/device.h>
-+#include <dm/uclass.h>
-+#include <i2c.h>
-+#include <u-boot/crc.h>
-+
-+#include "imx93_som_detection.h"
-+
-+extern struct phytec_eeprom_data eeprom_data;
-+
-+#if IS_ENABLED(CONFIG_PHYTEC_IMX93_SOM_DETECTION)
-+
-+/* Check if the SoM is actually one of the following products:
-+ * - i.MX93
-+ *
-+ * Returns 0 in case it's a known SoM. Otherwise, returns 1.
-+ */
-+u8 __maybe_unused phytec_imx93_detect(struct phytec_eeprom_data *data)
-+{
-+	u8 som;
-+
-+	if (!data)
-+		data = &eeprom_data;
-+
-+	/* Early API revisions are not supported */
-+	if (!data->valid || data->payload.api_rev < PHYTEC_API_REV2)
-+		return 1;
-+
-+	som = data->payload.data.data_api2.som_no;
-+	debug("%s: som id: %u\n", __func__, som);
-+
-+	if (som == PHYTEC_IMX93_SOM && is_imx93())
-+		return 0;
-+
-+	pr_err("%s: SoM ID does not match. Wrong EEPROM data?\n", __func__);
-+	return 1;
-+}
-+
-+/*
-+ * Filter PHYTEC i.MX93 SoM options by option index
-+ *
-+ * Returns:
-+ *  - option value
-+ *  - PHYTEC_EEPROM_INVAL when the data is invalid
-+ *
-+ */
-+u8 __maybe_unused phytec_imx93_get_opt(struct phytec_eeprom_data *data,
-+				       enum phytec_imx93_option_index idx)
-+{
-+	char *opt;
-+	u8 opt_id;
-+
-+	if (!data)
-+		data = &eeprom_data;
-+
-+	if (!data->valid || data->payload.api_rev < PHYTEC_API_REV2)
-+		return PHYTEC_EEPROM_INVAL;
-+
-+	opt = phytec_get_opt(data);
-+	if (opt)
-+		opt_id = PHYTEC_GET_OPTION(opt[idx]);
-+	else
-+		opt_id = PHYTEC_EEPROM_INVAL;
-+
-+	debug("%s: opt[%d] id: %u\n", __func__, idx, opt_id);
-+	return opt_id;
-+}
-+
-+/*
-+ * Filter PHYTEC i.MX93 SoM voltage
-+ *
-+ * Returns:
-+ *  - PHYTEC_IMX93_VOLTAGE_1V8 or PHYTEC_IMX93_VOLTAGE_3V8
-+ *  - PHYTEC_EEPROM_INVAL when the data is invalid
-+ *
-+ */
-+enum phytec_imx93_voltage __maybe_unused phytec_imx93_get_voltage(struct phytec_eeprom_data *data)
-+{
-+	u8 option = phytec_imx93_get_opt(data, PHYTEC_IMX93_OPT_FEAT);
-+
-+	if (option == PHYTEC_EEPROM_INVAL)
-+		return PHYTEC_IMX93_VOLTAGE_INVALID;
-+	return (option & 0x01) ? PHYTEC_IMX93_VOLTAGE_1V8 : PHYTEC_IMX93_VOLTAGE_3V3;
-+}
-+
-+#else
-+
-+inline u8 __maybe_unused phytec_imx93_detect(struct phytec_eeprom_data *data)
-+{
-+	return 1;
-+}
-+
-+inline u8 __maybe_unused phytec_imx93_get_opt(struct phytec_eeprom_data *data,
-+					      enum phytec_imx93_option_index idx)
-+{
-+	return PHYTEC_EEPROM_INVAL;
-+}
-+
-+inline enum phytec_imx93_voltage __maybe_unused phytec_imx93_get_voltage
-+	(struct phytec_eeprom_data *data)
-+{
-+	return PHYTEC_EEPROM_INVAL;
-+}
-+
-+#endif /* IS_ENABLED(CONFIG_PHYTEC_IMX93_SOM_DETECTION) */
-diff --git a/board/phytec/common/imx93_som_detection.h b/board/phytec/common/imx93_som_detection.h
-new file mode 100644
-index 0000000000..6d3d9283d8
---- /dev/null
-+++ b/board/phytec/common/imx93_som_detection.h
-@@ -0,0 +1,51 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (C) 2024 PHYTEC Messtechnik GmbH
-+ * Author: Primoz Fiser <primoz.fiser@norik.com>
-+ */
-+
-+#ifndef _PHYTEC_IMX93_SOM_DETECTION_H
-+#define _PHYTEC_IMX93_SOM_DETECTION_H
-+
-+#include "phytec_som_detection.h"
-+
-+#define PHYTEC_IMX93_SOM	77
-+
-+enum phytec_imx93_option_index {
-+	PHYTEC_IMX93_OPT_DDR = 0,
-+	PHYTEC_IMX93_OPT_EMMC,
-+	PHYTEC_IMX93_OPT_CPU,
-+	PHYTEC_IMX93_OPT_FREQ,
-+	PHYTEC_IMX93_OPT_NPU,
-+	PHYTEC_IMX93_OPT_DISP,
-+	PHYTEC_IMX93_OPT_ETH,
-+	PHYTEC_IMX93_OPT_FEAT,
-+	PHYTEC_IMX93_OPT_TEMP,
-+	PHYTEC_IMX93_OPT_BOOT,
-+	PHYTEC_IMX93_OPT_LED,
-+	PHYTEC_IMX93_OPT_EEPROM,
-+};
-+
-+enum phytec_imx93_voltage {
-+	PHYTEC_IMX93_VOLTAGE_INVALID = PHYTEC_EEPROM_INVAL,
-+	PHYTEC_IMX93_VOLTAGE_3V3 = 0,
-+	PHYTEC_IMX93_VOLTAGE_1V8,
-+};
-+
-+enum phytec_imx93_ddr_eeprom_code {
-+	PHYTEC_IMX93_DDR_INVALID = PHYTEC_EEPROM_INVAL,
-+	PHYTEC_IMX93_LPDDR4X_512MB = 0,
-+	PHYTEC_IMX93_LPDDR4X_1GB = 1,
-+	PHYTEC_IMX93_LPDDR4X_2GB = 2,
-+	PHYTEC_IMX93_LPDDR4_512MB = 3,
-+	PHYTEC_IMX93_LPDDR4_1GB = 4,
-+	PHYTEC_IMX93_LPDDR4_2GB = 5,
-+};
-+
-+u8 __maybe_unused phytec_imx93_detect(struct phytec_eeprom_data *data);
-+u8 __maybe_unused phytec_imx93_get_opt(struct phytec_eeprom_data *data,
-+				       enum phytec_imx93_option_index idx);
-+enum phytec_imx93_voltage __maybe_unused phytec_imx93_get_voltage
-+	(struct phytec_eeprom_data *data);
-+
-+#endif /* _PHYTEC_IMX93_SOM_DETECTION_H */
-diff --git a/board/phytec/phycore_imx93/Kconfig b/board/phytec/phycore_imx93/Kconfig
-index a70104cb79..09f26e89e3 100644
---- a/board/phytec/phycore_imx93/Kconfig
-+++ b/board/phytec/phycore_imx93/Kconfig
-@@ -10,4 +10,32 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "phycore_imx93"
+  *
+  * Product homepage:
+- * phyBOARD-Segin carrier board is reused for the i.MX93 design.
+- * https://www.phytec.eu/en/produkte/single-board-computer/phyboard-segin-imx6ul/
++   https://www.phytec.de/produkte/system-on-modules/phycore-imx-91-93/
+  */
  
-+config PHYCORE_IMX93_RAM_TYPE_FIX
-+	bool "Set phyCORE-i.MX93 RAM type and size fix instead of detecting"
-+	default false
-+	help
-+	  RAM type and size is being automatically detected with the help
-+	  of the PHYTEC EEPROM introspection data.
-+	  Set RAM type to a fix value instead.
+ #include "imx93-u-boot.dtsi"
+ 
+ / {
++	model = "PHYTEC phyCORE-i.MX93";
 +
-+choice
-+	prompt "phyCORE-i.MX93 RAM type"
-+	depends on PHYCORE_IMX93_RAM_TYPE_FIX
-+	default PHYCORE_IMX93_RAM_TYPE_LPDDR4X_1GB
-+
-+config PHYCORE_IMX93_RAM_TYPE_LPDDR4X_1GB
-+	bool "LPDDR4X 1GB RAM"
-+	help
-+	  Set RAM type fixed to LPDDR4X and RAM size fixed to 1GB
-+	  for phyCORE-i.MX93.
-+
-+config PHYCORE_IMX93_RAM_TYPE_LPDDR4X_2GB
-+	bool "LPDDR4X 2GB RAM"
-+	help
-+	  Set RAM type fixed to LPDDR4X and RAM size fixed to 2GB
-+	  for phyCORE-i.MX93.
-+
-+endchoice
-+
-+source "board/phytec/common/Kconfig"
- endif
+ 	wdt-reboot {
+ 		compatible = "wdt-reboot";
+ 		wdt = <&wdog3>;
 diff --git a/board/phytec/phycore_imx93/MAINTAINERS b/board/phytec/phycore_imx93/MAINTAINERS
-index 9e91a29dc3..cea817ffdc 100644
+index cea817ffdc..718f89a084 100644
 --- a/board/phytec/phycore_imx93/MAINTAINERS
 +++ b/board/phytec/phycore_imx93/MAINTAINERS
-@@ -1,10 +1,13 @@
- phyCORE-i.MX93
--M:	Mathieu Othacehe <m.othacehe@gmail.com>
-+M:      Mathieu Othacehe <m.othacehe@gmail.com>
-+R:      Christoph Stoidner <c.stoidner@phytec.de>
- W:      https://www.phytec.eu/en/produkte/system-on-modules/phycore-imx-91-93/
- S:      Maintained
- F:      arch/arm/dts/imx93-phyboard-segin.dts
- F:      arch/arm/dts/imx93-phycore-som.dtsi
- F:      arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+@@ -9,5 +9,5 @@ F:      arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
  F:      board/phytec/phycore_imx93/
-+F:      board/phytec/common/imx93_som_detection.c
-+F:      board/phytec/common/imx93_som_detection.h
- F:      configs/imx93-phyboard-segin_defconfig
+ F:      board/phytec/common/imx93_som_detection.c
+ F:      board/phytec/common/imx93_som_detection.h
+-F:      configs/imx93-phyboard-segin_defconfig
++F:      configs/imx93-phycore_defconfig
  F:      include/configs/phycore_imx93.h
-diff --git a/board/phytec/phycore_imx93/phycore-imx93.c b/board/phytec/phycore_imx93/phycore-imx93.c
-index 085c8e195a..a55795e060 100644
---- a/board/phytec/phycore_imx93/phycore-imx93.c
-+++ b/board/phytec/phycore_imx93/phycore-imx93.c
-@@ -3,6 +3,7 @@
-  * Copyright (C) 2023 PHYTEC Messtechnik GmbH
-  * Author: Christoph Stoidner <c.stoidner@phytec.de>
-  * Copyright (C) 2024 Mathieu Othacehe <m.othacehe@gmail.com>
-+ * Copyright (C) 2024 PHYTEC Messtechnik GmbH
-  */
- 
- #include <asm/arch-imx9/ccm_regs.h>
-@@ -12,11 +13,21 @@
- #include <asm/global_data.h>
- #include <asm/mach-imx/boot_mode.h>
- #include <env.h>
-+#include <fdt_support.h>
-+
-+#include "../common/imx93_som_detection.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+#define EEPROM_ADDR            0x50
-+
- int board_init(void)
- {
-+	int ret = phytec_eeprom_data_setup(NULL, 2, EEPROM_ADDR);
-+
-+	if (ret)
-+		printf("%s: EEPROM data init failed\n", __func__);
-+
- 	return 0;
- }
- 
-@@ -40,3 +51,43 @@ int board_late_init(void)
- 
- 	return 0;
- }
-+
-+static void emmc_fixup(void *blob, struct phytec_eeprom_data *data)
-+{
-+	enum phytec_imx93_voltage voltage = phytec_imx93_get_voltage(data);
-+	int offset;
-+
-+	if (voltage == PHYTEC_IMX93_VOLTAGE_INVALID)
-+		goto err;
-+
-+	if (voltage == PHYTEC_IMX93_VOLTAGE_1V8) {
-+		offset = fdt_node_offset_by_compat_reg(blob, "fsl,imx93-usdhc",
-+						       0x42850000);
-+		if (offset)
-+			fdt_delprop(blob, offset, "no-1-8-v");
-+		else
-+			goto err;
-+	}
-+
-+	return;
-+err:
-+	printf("Could not detect eMMC VDD-IO. Fall back to default.\n");
-+}
-+
-+int board_fix_fdt(void *blob)
-+{
-+	struct phytec_eeprom_data data;
-+
-+	phytec_eeprom_data_setup(&data, 2, EEPROM_ADDR);
-+
-+	emmc_fixup(blob, &data);
-+
-+	return 0;
-+}
-+
-+int ft_board_setup(void *blob, struct bd_info *bd)
-+{
-+	emmc_fixup(blob, NULL);
-+
-+	return 0;
-+}
-diff --git a/board/phytec/phycore_imx93/spl.c b/board/phytec/phycore_imx93/spl.c
-index 17a8736c73..a4d2aaac32 100644
---- a/board/phytec/phycore_imx93/spl.c
-+++ b/board/phytec/phycore_imx93/spl.c
-@@ -3,6 +3,7 @@
-  * Copyright (C) 2023 PHYTEC Messtechnik GmbH
-  * Author: Christoph Stoidner <c.stoidner@phytec.de>
-  * Copyright (C) 2024 Mathieu Othacehe <m.othacehe@gmail.com>
-+ * Copyright (C) 2024 PHYTEC Messtechnik GmbH
-  */
- 
- #include <asm/arch/clock.h>
-@@ -20,6 +21,8 @@
- #include <power/pca9450.h>
- #include <spl.h>
- 
-+#include "../common/imx93_som_detection.h"
-+
- DECLARE_GLOBAL_DATA_PTR;
- 
- /*
-@@ -27,6 +30,13 @@ DECLARE_GLOBAL_DATA_PTR;
-  * when pca9451a support is added.
-  */
- #define PCA9450_REG_PWRCTRL_TOFF_DEB    BIT(5)
-+#define EEPROM_ADDR            0x50
-+
-+/*
-+ * Prototypes of automatically generated ram config file
-+ */
-+void set_dram_timings_2gb_lpddr4x(void);
-+void set_dram_timings_1gb_lpddr4x_900mhz(void);
- 
- int spl_board_boot_device(enum boot_device boot_dev_spl)
- {
-@@ -46,6 +56,44 @@ void spl_board_init(void)
- 
- void spl_dram_init(void)
- {
-+	int ret;
-+	enum phytec_imx93_ddr_eeprom_code ddr_opt = PHYTEC_IMX93_DDR_INVALID;
-+
-+	/* NOTE: In SPL lpi2c3 is mapped to bus 0 */
-+	ret = phytec_eeprom_data_setup(NULL, 0, EEPROM_ADDR);
-+	if (ret && !IS_ENABLED(CONFIG_PHYCORE_IMX93_RAM_TYPE_FIX))
-+		goto out;
-+
-+	ret = phytec_imx93_detect(NULL);
-+	if (!ret)
-+		phytec_print_som_info(NULL);
-+
-+	if (IS_ENABLED(CONFIG_PHYCORE_IMX93_RAM_TYPE_FIX)) {
-+		if (IS_ENABLED(CONFIG_PHYCORE_IMX93_RAM_TYPE_LPDDR4X_1GB))
-+			ddr_opt = PHYTEC_IMX93_LPDDR4X_1GB;
-+		else if (IS_ENABLED(CONFIG_PHYCORE_IMX93_RAM_TYPE_LPDDR4X_2GB))
-+			ddr_opt = PHYTEC_IMX93_LPDDR4X_2GB;
-+	} else {
-+		ddr_opt = phytec_imx93_get_opt(NULL, PHYTEC_IMX93_OPT_DDR);
-+	}
-+
-+	switch (ddr_opt) {
-+	case PHYTEC_IMX93_LPDDR4X_1GB:
-+		if (is_voltage_mode(VOLT_LOW_DRIVE))
-+			set_dram_timings_1gb_lpddr4x_900mhz();
-+		break;
-+	case PHYTEC_IMX93_LPDDR4X_2GB:
-+		set_dram_timings_2gb_lpddr4x();
-+		break;
-+	default:
-+		goto out;
-+	}
-+	ddr_init(&dram_timing);
-+	return;
-+out:
-+	puts("Could not detect correct RAM type and size. Fall back to default.\n");
-+	if (is_voltage_mode(VOLT_LOW_DRIVE))
-+		set_dram_timings_1gb_lpddr4x_900mhz();
- 	ddr_init(&dram_timing);
- }
- 
+diff --git a/configs/imx93-phyboard-segin_defconfig b/configs/imx93-phycore_defconfig
+similarity index 98%
+rename from configs/imx93-phyboard-segin_defconfig
+rename to configs/imx93-phycore_defconfig
+index 18a4087e4b..cf9800118a 100644
+--- a/configs/imx93-phyboard-segin_defconfig
++++ b/configs/imx93-phycore_defconfig
+@@ -6,13 +6,13 @@ CONFIG_SYS_MALLOC_F_LEN=0x20000
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
+ CONFIG_NR_DRAM_BANKS=2
++CONFIG_PHYTEC_SOM_DETECTION=y
+ CONFIG_ENV_SOURCE_FILE="phycore_imx93"
+ CONFIG_ENV_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0x700000
+ CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="imx93-phyboard-segin"
+-CONFIG_SPL_TEXT_BASE=0x2049A000
+ CONFIG_AHAB_BOOT=y
+ CONFIG_TARGET_PHYCORE_IMX93=y
+ CONFIG_OF_LIBFDT_OVERLAY=y
+@@ -20,6 +20,7 @@ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK=0x20519dd0
++CONFIG_SPL_TEXT_BASE=0x2049A000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x2051a000
+ CONFIG_SPL_BSS_MAX_SIZE=0x2000
+@@ -31,6 +32,7 @@ CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x88000000
+ CONFIG_SYS_MEMTEST_START=0x80000000
+ CONFIG_SYS_MEMTEST_END=0x90000000
+ CONFIG_REMAKE_ELF=y
++# CONFIG_ANDROID_BOOT_IMAGE is not set
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadimage; then run mmcboot; else run netboot; fi; fi;"
 -- 
 2.34.1
 
