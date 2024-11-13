@@ -4,86 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 915F5D462AF
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 14:27:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD897D462B2
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 14:39:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03C3D88C0F;
-	Wed, 13 Nov 2024 15:27:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1D90089049;
+	Wed, 13 Nov 2024 15:39:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZCPmXWG7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jZKkpUwb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4A8388F94; Wed, 13 Nov 2024 15:27:24 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 96E2889170; Wed, 13 Nov 2024 15:39:36 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1C138862E
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 15:27:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D36588CEC
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 15:39:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-432d866f70fso2873805e9.2
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:27:22 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5cf04f75e1aso8283408a12.1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:39:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731508042; x=1732112842; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=T0XBClfxOIAUl6WgiPV1SWrNouiLu9AMs31i0YCJ1FQ=;
- b=ZCPmXWG7Q75RJ5JSGDHxOAlPiltVC8pYdMEef7I0bIKWYe1uwbK90ap6aPA+11tWlX
- etc0xM16luUMV3q48FBTaK2RcJ5HCmAwJd+o4UKz20lDiIlo62xqFpobqqspRYllvm26
- FK6kq2A4aRJu7rZnO2gf3z4vlqeVeRrFz9Ws9qSHmhfd/pL9rgVW9bLh2kCHF1/OVcZo
- l2qkvCODRDlC3ddRuQ95P9gMri7y9In+M8xZd1eBy3cE+AppbOGkFtaj4SNtVqgyEGvK
- FMHdsxrmC0tn2gFocj2+3L9sw0IXtI5mR+YAcsB3sn3FKmQhc0hs9PafVhxmVPma/bYx
- WWIA==
+ d=chromium.org; s=google; t=1731508774; x=1732113574; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pEKIYJjy36b66qsTOWX3KlE2V2AUg8787ImmXlErLIs=;
+ b=jZKkpUwbZ6vuOtUzYdU4LPmUr4Auxhx/DcIB48cllIap1MGMDhgDvVjWL/3ZU9JRRF
+ eDesFzZaM11C1dspnQAQ0aGCgtpWnpuN6vAJE3sa2kK9poDtv97hQdCeABCS1MIABpw/
+ 8j14c9Fnu8/1sBBxXwEMmC7DMFmx9+G64dfjQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731508042; x=1732112842;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=T0XBClfxOIAUl6WgiPV1SWrNouiLu9AMs31i0YCJ1FQ=;
- b=Dbg9Vdd/K5d3LsdE27omDQhoU3V9Dog+oYsBtFKIZeCRRCEecrXqSIPcGgGkFxO4Ag
- zR0dPHH2wBR437KNGMTed45BQBIcIBN6wfvjiqMe9bLQpZbrj/5yzb1HlrrnLQszd6lL
- wWqOWJLaybEBKlDfhjR6Qqji1Fb9Vq5CnTDcOn5Z9geRawbwMDzuoGB5HN92Mf9u9lv9
- OooWhEQmNnJ94IFnU092HFc/qXgdaRv1RPlrx5LJG8zlQcl3JxavHziSZDy+xUxp0aRK
- Ma8+UWCyR7p06LpTpodEe1ZKJhix+C7TGVwnmfXDXD505gG8BU4qUgkq17L9Gs7OgM4/
- y6NA==
-X-Gm-Message-State: AOJu0YzClz8AQTx4bD5yLIIX7s9e+ke0ZT5qq6kIpt5JMxrplHUcJb7m
- d/iJA6Qi/SVb9+l6+W2ZZ7PsJcdFB6KFL3Ib044BuzixLF3sEZ1h9MlA3iFuRg0=
-X-Google-Smtp-Source: AGHT+IFIp4rP2l9IcRI3ZU1/6V7TA0xztWdpdjKF7GQptiujL4PZWmrtTF6LvdQdpIx1L0bCxBqjSQ==
-X-Received: by 2002:a05:600c:8608:b0:431:46fe:4cc1 with SMTP id
- 5b1f17b1804b1-432bb99a52emr159929835e9.10.1731508042324; 
- Wed, 13 Nov 2024 06:27:22 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:be89:2e45:8eeb:41c?
- ([2a01:e0a:3cb:7bb0:be89:2e45:8eeb:41c])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432d54f70d8sm27442105e9.16.2024.11.13.06.27.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Nov 2024 06:27:22 -0800 (PST)
-Message-ID: <b4855529-50c9-4993-9817-7ca73baad316@linaro.org>
-Date: Wed, 13 Nov 2024 15:27:21 +0100
+ d=1e100.net; s=20230601; t=1731508774; x=1732113574;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pEKIYJjy36b66qsTOWX3KlE2V2AUg8787ImmXlErLIs=;
+ b=JINIAlIYtlzVt5ds3ntYqmDkdJv0oyK9rqxEzvRFjWmTDR4AcuywsxQjlCaaKMebV6
+ aGo40oQX38sFgcXtQrMD1n/ZtMKhadMEfAmAfuiEx43ayJPKaNwxdsJQfhlIPjPHDDG0
+ psFLYtYj85P6xblMNUggbdk+pGiZBye7efPp0OjSUvSHVC0Sa94WNnPJ6m/pUxwdez2A
+ GdbHBO7p93Phg0pzvnz8MF8kPWcWt/xAZSCXnljFBlzFscFfq4z8assr5/esl2k6ndAd
+ NqH02jKHzySfvuXq8glctgbY3l6a7aYjSvWVvWoTe5XzjHgGAzNryRuafJbu5X/ObwQ+
+ my0Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWyKq8Wz42s4EIP5V5sKUSp/siVVRHgI2fSkpEfLXb6/xo0oO0g9YAiKdfy96XncyRxgB5X3aw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzUXfYlHl4VrPTKhNWgpc5/M6e5NetiDRJG1+FHyouATXh2N+aO
+ YfLNg7xhx5LIAHMRqUXr6VrlrrKgXed5q7nZnhj73/sziMyVM5LB2FlfRCxzGYHRGKojwYO0lcr
+ KgaweBJHmqs44D5ltGwtsiMzIFtkOMnUAToHs
+X-Google-Smtp-Source: AGHT+IEvtTHavfbI5+Nst7Z/6Gakz/7vcuBZYK1uWz5hPE41+84lhkYbzKXGzwrcszly7FK9EpslpGWkpxMo4+30auo=
+X-Received: by 2002:a17:906:c10f:b0:a9a:8028:45d8 with SMTP id
+ a640c23a62f3a-a9eefe9bb73mr2142410166b.7.1731508773948; Wed, 13 Nov 2024
+ 06:39:33 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] nwt: wget: drop Content-Length processing
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <20241105110849.41348-1-jerome.forissier@linaro.org>
- <CAC_iWjKhO3FnjbAYujbyp5kdfs7w2GLJ6hoyEtK19nh0UHXe5g@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAC_iWjKhO3FnjbAYujbyp5kdfs7w2GLJ6hoyEtK19nh0UHXe5g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
+ <20241031-iommu_apple_dart_ordering-v1-2-8a6877946d6b@jannau.net>
+ <87zfmi4rzy.fsf@bloch.sibelius.xs4all.nl>
+ <4ff61e8e-03c7-42d2-b2fe-8dba1697641f@gmx.de>
+In-Reply-To: <4ff61e8e-03c7-42d2-b2fe-8dba1697641f@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 13 Nov 2024 07:39:22 -0700
+Message-ID: <CAFLszTjDaQGaaL9qM_s+oxNrAkGhunGkbAjyR1giEDgnShUfzw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] efi_loader: remove non vital devices first
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Janne Grunau <j@jannau.net>, kettenis@openbsd.org, trini@konsulko.com, 
+ ilias.apalodimas@linaro.org, u-boot@lists.denx.de, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,77 +88,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
+On Wed, 13 Nov 2024 at 05:52, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 11/1/24 21:29, Mark Kettenis wrote:
+> >> From: Janne Grunau <j@jannau.net>
+> >> Date: Thu, 31 Oct 2024 23:48:02 +0100
+> >>
+> >> DM_FLAG_VITAL marks devices which are essential for the operation of
+> >> other devices. Removing these devices before their users can result in
+> >> hangs or crashes.
+> >> This potentially fixes EFI boot of Renesas rcar3 devices. Their clock
+> >> devices (and with this series the dart iommu) are the only devices
+> >> markes as vital.
+> >> The arm boot code already handles devioce removal in this way.
+> >
+> > There is a typo in that last sentence of the commit message (devioce).
+> > Otherwise:
+> >
+> >> Signed-off-by: Janne Grunau <j@jannau.net>
+> >
+> > Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
+> >
+> >> ---
+> >>   lib/efi_loader/efi_boottime.c | 1 +
+> >>   1 file changed, 1 insertion(+)
+> >>
+> >> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+> >> index 4f52284b4c653c252b0ed6c0c87da8901448d4b4..7db3c95782970f8c06a970a8ee86b1804cd848b6 100644
+> >> --- a/lib/efi_loader/efi_boottime.c
+> >> +++ b/lib/efi_loader/efi_boottime.c
+> >> @@ -2234,6 +2234,7 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
+> >>              if (IS_ENABLED(CONFIG_USB_DEVICE))
+> >>                      udc_disconnect();
+> >>              board_quiesce_devices();
+> >> +            dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL | DM_REMOVE_NON_VITAL);
+> >>              dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
+>
+> Simon's patch 6224dc9ba428 ("arm: Remove vital devices last") addressed
+> the same issue for bootm on arm. But what about about other architectures?
+>
+> This logic should be moved to drivers/core/root.c instead of replicating
+> code.
 
-On 11/11/24 13:47, Ilias Apalodimas wrote:
-> Hi Jerome,
-> 
-> On Tue, 5 Nov 2024 at 13:09, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
->>
->> We don't do anything with Content-Length except a debug print, and the
->> strict_strtoul() call is incorrect (it always returns -EINVAL and leaves
->> content_length to zero due to the presence of trailing characters after
->> the decimal valuoe of Content-Length). So let's just drop this piece of
->> code.
->>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> ---
->>  net/wget.c | 13 -------------
->>  1 file changed, 13 deletions(-)
->>
->> diff --git a/net/wget.c b/net/wget.c
->> index 635f82efbb3..361817ace65 100644
->> --- a/net/wget.c
->> +++ b/net/wget.c
->> @@ -26,7 +26,6 @@ static const char bootfile1[] = "GET ";
->>  static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
->>  static const char http_eom[] = "\r\n\r\n";
->>  static const char http_ok[] = "200";
->> -static const char content_len[] = "Content-Length";
->>  static const char linefeed[] = "\r\n";
->>  static struct in_addr web_server_ip;
->>  static int our_port;
->> @@ -46,7 +45,6 @@ struct pkt_qd {
->>  #define PKTQ_SZ (PKTBUFSRX / 4)
->>  static struct pkt_qd pkt_q[PKTQ_SZ];
->>  static int pkt_q_idx;
->> -static unsigned long content_length;
->>  static unsigned int packets;
->>
->>  static unsigned int initial_data_seq_num;
->> @@ -251,17 +249,6 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
->>                                    "wget: Connected Pkt %p hlen %x\n",
->>                                    pkt, hlen);
->>
->> -                       pos = strstr((char *)pkt, content_len);
->> -                       if (!pos) {
->> -                               content_length = -1;
->> -                       } else {
->> -                               pos += sizeof(content_len) + 2;
->> -                               strict_strtoul(pos, 10, &content_length);
->> -                               debug_cond(DEBUG_WGET,
->> -                                          "wget: Connected Len %lu\n",
->> -                                          content_length);
-> 
-> How much work would it be to fix the parsing properly? We could look
-> into that value and drop it if the memory is > our available memory
+We could have a common helper, but it should not be in driver/core as
+this ordering is more of a policy decision. Unless we can add a
+parameter telling dm exactly what to do...
 
-TBH I have not looked into it. This is the legacy stack; lwIP does
-decode and handle the content length properly AFAICT.
+BTW, Heinrich, this behaviour is exactly what my bootflow_efi() test
+was supposed to check. But since it doesn't have the
+exit-boot-services piece at your request...
 
 Regards,
--- 
- Jerome
-
-> 
-> Thanks
-> /Ilias
->> -                       }
->> -
->>                         net_boot_file_size = 0;
->>
->>                         if (len > hlen) {
->> --
->> 2.40.1
->>
+Simon
