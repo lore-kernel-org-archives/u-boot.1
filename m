@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E66DD597C5
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 02:30:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14C14D597C8
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 02:40:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB38288CEC;
-	Wed, 13 Nov 2024 03:30:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 49DE088E3F;
+	Wed, 13 Nov 2024 03:40:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T4cpgMrV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VYUcbxaT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C80388CF1; Wed, 13 Nov 2024 03:30:22 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id 82792894C9; Wed, 13 Nov 2024 03:40:36 +0100 (CET)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A59A188A3C
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 03:30:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 591B288CF1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 03:40:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-6e5a5a59094so59242677b3.3
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 18:30:19 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-460d1145cd8so48165601cf.3
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 18:40:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731465018; x=1732069818; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6WjVZwrO6w+4zjafpx+DYHqlo8bFe0VkAH8RfTp0wos=;
- b=T4cpgMrVqk0HcktMQZ4rBGiLBTCmxFRECKGOxm7riZDOFWYS53lnM/LOizV4JQbAKy
- Qyp0cH6LQQSWU8nGKMcqLBq1sMm/NXBHlEgZnj4YHpRv/Oq3hM7/n9akWOrOsVmny1HW
- RSxy4fG4l/zENBqxvVrspluIrLtj2qNLVsMU9sBffJ353gKW4tqTHy7ItHXjIta75iqj
- 7AdSyGuu8iejSldS9hhlsxUVykK1sqihlPsaEhRFLCdjDb+fJ7ESMuYEO6q2zlvOPocL
- ABODiXA65aYegd6H8Am2rUStP66A4uNovQMJ6/M5UrGxEyZmWGFgT70aMqg5d1dE9N+4
- jWUQ==
+ d=konsulko.com; s=google; t=1731465633; x=1732070433; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TW8KFaAjA/sx3sGXA7scqqO68RTTP3QlHMRWTbU4pC0=;
+ b=VYUcbxaTrDgfe2zlNz7+yrByxlST7CwCO2C170cC6KirwVX+kQqQDyURB6qezFcIkW
+ NFUmYWm/qme0CmUAGFHhg5VPrz7yYFmaFziw6TGwnDgJ01K4GqURe2lzAjiutwLrY0t9
+ ndsCaAbaY58WfYJSd8vF1BRJuMjKBcGDLeX00=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731465018; x=1732069818;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6WjVZwrO6w+4zjafpx+DYHqlo8bFe0VkAH8RfTp0wos=;
- b=IU72CIf07gnBbh/nqdiPpCKdWyGpceEYcJGSuxiJAClb0lKIUIAh5C1+ToH8B3eO4U
- yWNvMrEVjcg9Kg5RyFYqgzxdDUP3Mh/H5/wwmUnaECwOei7tvqztxismCJJ4Y1eBe0Dd
- fYKYTu0yxnvE6VvccPm0NNA3SDAbFgeYwgNbKvoZjvzM+kog/rGMzoRkN8fTXN61nuOY
- kEYnqLxDbsN6VMsgrHEdVoG8YW2J81jgHo0IzOWuNLwIgBPzJxyVZzUcwJpz8wUz/aYk
- zO24zy/YvOs1ZnjD0e3Osa48zO0xR3Y/nPLu5ZPiOmTT7q6AwIOF1uYgLUsRF/AFeyjF
- GsQQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX6eW/G7PRnDMWuC84x2t9iGUoKyoFLNXOeeLKjAYKjl9DH/BAjCM9sOGay+xo6SIpw4anRGQ8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwVACHmFiET3d6gDbwCMJRmw34qBiXaK7e7UoGWPpLCunetjWxP
- qrW8FVC7RrEConogwj4knYExEPJyy9XyCpEdWNKYU6YAjlGiZmYGzl5yiRi1bgwoLWwKayzObob
- u3BhjQ5bE4/ScgqUoRg9gEqOfJSRoeZ3+ZDjzFA==
-X-Google-Smtp-Source: AGHT+IEjSFBd51/SHWMIrbEBbGdvP2RREP6P6ZuoXfnuvnKBaWVwqBOdQaIrosj2XcQLs8hE8sy4ongp6Z6a1FhZz4w=
-X-Received: by 2002:a05:690c:7308:b0:6e3:3521:88ff with SMTP id
- 00721157ae682-6eaddd9507amr195263597b3.18.1731465018536; Tue, 12 Nov 2024
- 18:30:18 -0800 (PST)
+ d=1e100.net; s=20230601; t=1731465633; x=1732070433;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TW8KFaAjA/sx3sGXA7scqqO68RTTP3QlHMRWTbU4pC0=;
+ b=k0WcTt53+g7YKyjVjQ/f1zgSd7g0/CP3frUGQMUSwbJyTvEkollDgc0ZL1w9Ev6rX4
+ heUgkw+JUYa6TB1OJ5CqW8cxxy4cTwiFFGONwU6OahZlOnEpiewWULCxpa3msUgW4/yf
+ DfIS4nu44b+KFEknTfMvlJaoFgJcrtQWX4Kn/6Rq2PUP8zhGNFxTAK3kc/keYa3CqpO5
+ XIzyeuNOKJtHHb9k87D8/QpfHdpMnCWLdJUhcrwOyzVZ7pPidNpCM9g6JOt/p660g6fL
+ E6eBc5jGHbeFDiovctziKh3tMHMQWNTKj4uaxWYYI7fIkbe1bGjniBHL8M8gRfFlBPcy
+ 2rkw==
+X-Gm-Message-State: AOJu0YzcxFIvsmzqtR+qSZEgOn1g4kpO6OwWdk6HOYI8cAJKBGRaizZH
+ UH4fp/qf3k/kG/Vt307hjxGmir/1Lz9pgS9tOMSwhplqoxbdnkh1fkF7qTO4Lbw=
+X-Google-Smtp-Source: AGHT+IGoWb4UoQRP7FaDNmDQnIDX1kXRd597zoPQpPtSjeeUOylcIEkBdVCpFzideUORgjKd2l8RFg==
+X-Received: by 2002:ac8:590f:0:b0:460:93b6:a4d1 with SMTP id
+ d75a77b69052e-46309388200mr300893341cf.31.1731465633220; 
+ Tue, 12 Nov 2024 18:40:33 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-462ff47c162sm82829081cf.53.2024.11.12.18.40.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Nov 2024 18:40:32 -0800 (PST)
+Date: Tue, 12 Nov 2024 20:40:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 8/9] buildman: Propose a format for extra boards
+Message-ID: <20241113024029.GH3600562@bill-the-cat>
+References: <20241108152350.3686274-1-sjg@chromium.org>
+ <20241108152350.3686274-9-sjg@chromium.org>
 MIME-Version: 1.0
-References: <20241107025831.5459-1-semen.protsenko@linaro.org>
- <CAC_iWjJVRvi2WB5ChTq26KLVdhoACq2FyFqM5jrk5uKM_CZ93A@mail.gmail.com>
-In-Reply-To: <CAC_iWjJVRvi2WB5ChTq26KLVdhoACq2FyFqM5jrk5uKM_CZ93A@mail.gmail.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Tue, 12 Nov 2024 20:30:07 -0600
-Message-ID: <CAPLW+4kuBoprcOXL-rYCWU5w9-Q8X78eE4=7KmnCdDT=4HiaTA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] armv8: Fix get_sctlr() return type
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- David Feng <fenghua@phytium.com.cn>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="SckQUPlNYCKr2fF1"
+Content-Disposition: inline
+In-Reply-To: <20241108152350.3686274-9-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,76 +90,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 11, 2024 at 8:48=E2=80=AFAM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Thu, 7 Nov 2024 at 04:58, Sam Protsenko <semen.protsenko@linaro.org> w=
-rote:
-> >
-> > SCTLR_EL2 is a 64-bit register [1]. Return its value as long (64 bit)
-> > instead of int (32 bit) in get_sctlr() to make sure it's not trimmed.
-> >
-> > [1] https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Reg=
-isters/SCTLR-EL2--System-Control-Register--EL2-?lang=3Den
-> >
-> > Fixes: 0ae7653128c8 ("arm64: core support")
-> > Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> > ---
-> > Changes in v2:
-> >   - None (this patch was introduced in v2)
-> >
-> >  arch/arm/cpu/armv8/cache_v8.c | 2 +-
-> >  arch/arm/include/asm/system.h | 2 +-
-> >  2 files changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v=
-8.c
-> > index e6be6359c5d9..5d6953ffedd1 100644
-> > --- a/arch/arm/cpu/armv8/cache_v8.c
-> > +++ b/arch/arm/cpu/armv8/cache_v8.c
-> > @@ -825,7 +825,7 @@ void dcache_enable(void)
-> >
-> >  void dcache_disable(void)
-> >  {
-> > -       uint32_t sctlr;
-> > +       unsigned long sctlr;
->
-> Although that's correct since it's a 64bit platform, isn't it better
-> to define it as u64 to be sure we'll have at least 64 bits?
->
 
-Thanks for reviewing this! I considered making it uint64_t while
-reworking this bit. This 'sctlr' variable is assigned to get_sctlr()
-return value, and then passed to set_sctlr() as a parameter, both of
-which are 'unsigned long'. So I made 'sctlr' unsigned long too, just
-to match the signatures of mentioned functions. As for get_sctlr(), I
-just followed the style already existed inside and around that
-function. As you said, both u64 and unsigned long are 64-bit long
-types on ARMv8, and that's definitely ARMv8 specific file, so I guess
-that should be fine? In any case, if you have a strong opinion about
-this, please let me know and I'll rework it; both u64 and unsigned
-long look ok to me in this context.
+--SckQUPlNYCKr2fF1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Thanks
-> /Ilias
-> >
-> >         sctlr =3D get_sctlr();
-> >
-> > diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/syste=
-m.h
-> > index 52f6c9b934d7..dbf9ab43e280 100644
-> > --- a/arch/arm/include/asm/system.h
-> > +++ b/arch/arm/include/asm/system.h
-> > @@ -171,7 +171,7 @@ static inline unsigned int current_el(void)
-> >         return 3 & (el >> 2);
-> >  }
-> >
-> > -static inline unsigned int get_sctlr(void)
-> > +static inline unsigned long get_sctlr(void)
-> >  {
-> >         unsigned int el;
-> >         unsigned long val;
-> > --
-> > 2.39.5
-> >
+On Fri, Nov 08, 2024 at 08:23:49AM -0700, Simon Glass wrote:
+
+> It has become more common to use config fragments to extend or adjust
+> the functionality of boards in U-Boot.
+>=20
+> Propose a format for how to deal with this. It is not implemented as
+> yet.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+
+I think that the first problem is that this patch series is an
+inappropriate method and place to start the discussion.
+
+I also think this gets things backwards as the common case is "make",
+not "buildman". We need more defconfig's that are just base +
+fragment(s) if they're important enough to be a combination that needs
+to be tested and work. A board is not a time-expensive part of CI. A
+pytest run is, a new job itself is.
+
+--=20
+Tom
+
+--SckQUPlNYCKr2fF1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc0EZEACgkQFHw5/5Y0
+tyzAlQv/dxm917U0jl1dmUgQbWgJblLW4+DflHwvAlVkiFdjPCokiEaEUo5vSjsW
+p2ARPhfDsWvld137mgQgnwLyhTCb0kcbdLgCkKNtfvgWUGnoTGGeFBx8iMC7tksP
+MTSeTCScL2OcZlm+WOfgFHIXvHG7eL9xeTO2iAhUMkWlmNn26M13ZyTBHtXPGI8m
+vBg1khCzRrc5fQEFdqQ5IBUTlU4GkIpSm2TTpvHOxA2a7kmyJk0LyRXkx+dI2CG2
+tjfLJpGvDG+5Ixw8NjXAQVfWmH8l1hc1Hz5Zh04dU6rYfHg/IvQeFy5hpqTR1c3d
+1Laba7vCKzjbGKWwo+Jz7TfP4rxuWCwzZ5KAxMt5eIz0QrONGzwOgLmIU/TKpR7Q
+9SCVZfcEgVlHfxu7ZK8wHz92HMcQVMFzSO7YZPsfZ5qbTF76qrVh2KxMtI9zK+qp
+8VspJZao6QA0bS3pk+6uOPijVJUvsetmCYhpzsWGdo4rH5TcxlnUKHt+VXoWGKrY
+1ytqDJaO
+=GEHD
+-----END PGP SIGNATURE-----
+
+--SckQUPlNYCKr2fF1--
