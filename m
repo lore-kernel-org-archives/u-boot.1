@@ -4,78 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C27ED597C5
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 02:40:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 439CDD41D4A
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 04:26:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23A18894D8;
-	Wed, 13 Nov 2024 03:40:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 75FF189440;
+	Wed, 13 Nov 2024 05:26:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bVwgsuKW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZkBJJI8j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3304088CF1; Wed, 13 Nov 2024 03:40:49 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id D35D889449; Wed, 13 Nov 2024 05:26:32 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00623894D5
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 03:40:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 524338931D
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 05:26:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6cbe53a68b5so46945056d6.1
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 18:40:46 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a99f646ff1bso955014966b.2
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 20:26:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731465646; x=1732070446; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GXYdM4nVnNHkdzINiaGJ/3kcSSxp0BHXAUbtkedrUwE=;
- b=bVwgsuKWP/PNkytGPr9YHdu5tlxLrUiqSYBHHEHuxUccEQIxMOnEy0A5IcB9PdLzPn
- BqMHrwi+rEY24B6cPvkdAVnCSJpAMiYMT01wmTjjX+C27N/6swoGhtaqOQKsSK9S6BLe
- lwtycYfWeySdAIw5sMqCBfDwfg5cTa2OZmW+M=
+ d=linaro.org; s=google; t=1731471990; x=1732076790; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XhEoDhknTjLyyZUyxs5BQQMbo6Pd92uT7APMuYAtAcE=;
+ b=ZkBJJI8jCT/1LJvkd/Dk7rVfPepn4rOmyjXEr5AQH31VQnvI3QDp2pEKYRid4Hvv8V
+ Z1YlxO+KADt691X9qAnr1esuSHrietmHZSKza1zRVrO19REKIB1qtteowtocvhtgjXF8
+ 5CQBvcioHMN5x5ROE49XP+9VqaErbReCzI8PG1LeCjuXVIb9t4qflqE5LmWWMG1cRlVp
+ nnWIeSKdaEnwURLdGVf3hJ10NTZjxfLmIoilLy5B1aluUa9MIcGBC8iYzio0ZhQaFkE1
+ DxanmhXJKsy06nGn+iLWwBP/lYdmtTjop1QaGU8QNeza3XEM1mapFNJy2q94V4Hk0Aat
+ L6zA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731465646; x=1732070446;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GXYdM4nVnNHkdzINiaGJ/3kcSSxp0BHXAUbtkedrUwE=;
- b=PPfByEwAdZLZ1FvgO3a7ql2paC5mFWplUMmgWuQZGS97fAsFOd0kZGJIpz4nlu/MdX
- kLOpWVRMwH3FcS7AoQmY7uQpam7D7Fotxw/sSQJFo9necaKOKZA5ShgELrLZW1JKh8pe
- 6rmU6w1dgQsxohCd7vbNi4yaG2nEWOvWV1MyJpskzDrq3rsnpInJtYP5kNNex2mKbG/R
- DivYKbt1K7+HnGaT8FwIJcGna+WxcdncwxKwy0xvuwMFtlSgnKOiQ9qtTl62biWjfsC1
- LlwLvu2dD2yYoOpKWLBOt8m0PM1Y1WBCxGssijeqxQV7IfGeZupJ2U33go1Uxy69ejNa
- l4fQ==
-X-Gm-Message-State: AOJu0YxvM9t5C7kqOE5onZT8y5Z4wHWicCJuGcd6RpDheD4dd5McCDV5
- rT2K+2lP8LYnDLrakdbNnpZXAFDIPeC9UHFRAloaojNmaTOCCCbmGvhg2PUOaMA=
-X-Google-Smtp-Source: AGHT+IHKRgPWWbOdPQavnbkbTyot1O9LKKRbXec+67+881IZxiYtur4aNiv7I6kVPfe2FyZ4bO7Ayg==
-X-Received: by 2002:a05:6214:2d46:b0:6cb:f936:f9ce with SMTP id
- 6a1803df08f44-6d3d03a8960mr58247456d6.41.1731465645850; 
- Tue, 12 Nov 2024 18:40:45 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
+ d=1e100.net; s=20230601; t=1731471990; x=1732076790;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XhEoDhknTjLyyZUyxs5BQQMbo6Pd92uT7APMuYAtAcE=;
+ b=TlNr56WjdUEePE4tGzhn4zIn7D0QIRYhTPH59LAaft3autglLQY58IOE3/EtktdJ2U
+ 5/qJHWB5pvKFmiIECvtFk1YHjQUfQ0E9PO7t5Fk8qtjThOCEEqVtF1rxUsRtkbxjAAer
+ nMX/6OgVc8Uy7Vs0hOvwBbtrFs7Rtu9IV/rrtEpGwEl/1UU7h4fwxrkbgBN40yYKCGce
+ A2K8T+rehsryVtsbd06z2O7nB79HFiCdlPJctDFj2IpgO/Rq6EooxNZL3p3GxZ5IKELA
+ MfPp2ud6K6CB/bdTGXgNQaeGFFjFcyT0rLC9GhDCJiRWyG2Qgb5bCWOh0TU6C7bB9kL3
+ nfHA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUY7E+NICu+cX/INRdKqFCd5m1XnEFnaba/dWkd86i87/S1oXyUzUlZQaigYuBPF1ORFl4G4+c=@lists.denx.de
+X-Gm-Message-State: AOJu0YxWa1FxIDwT4mVzoYyWSjdl6JilNuV14H60jzRG40xapMNubQNZ
+ LpamfUin/nA5uQy+zV4VTCf6ap9g7uwrkh3GL3ZOYxwAzbzULae09aigLt1N2x4=
+X-Google-Smtp-Source: AGHT+IH21yZB2ZvkDD+ULtRFJts4sxG2qxh+6gY4nBw/iBA24/+14ZwpX8gIUee/PVpgqhnbg1IV8Q==
+X-Received: by 2002:a17:906:6a25:b0:a9a:3fd8:9c95 with SMTP id
+ a640c23a62f3a-aa1c57ae677mr556108566b.47.1731471989486; 
+ Tue, 12 Nov 2024 20:26:29 -0800 (PST)
+Received: from lion.caleb.rex.connolly.tech
+ ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d396631480sm78648306d6.113.2024.11.12.18.40.44
+ a640c23a62f3a-a9ee06b9d62sm802016766b.0.2024.11.12.20.26.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 18:40:44 -0800 (PST)
-Date: Tue, 12 Nov 2024 20:40:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH RFC v1] Dockerfile: Have "sandbox" build with i386
- toolchain not x86_64 toolchain
-Message-ID: <20241113024042.GJ3600562@bill-the-cat>
-References: <20241105165357.620796-1-trini@konsulko.com>
- <CAFLszThU2T2A4DG-=isO6vP=149Lw6jQaB3vs8ggJ2H8CcDwBg@mail.gmail.com>
- <CAFLszTjYy-wCuOx5Nv-F1uDcVYJEqi2pwTBTws=UHWB0z026ww@mail.gmail.com>
+ Tue, 12 Nov 2024 20:26:28 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: Tony Dinh <mibodhi@gmail.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2] cmd: add a fetch utility
+Date: Wed, 13 Nov 2024 05:22:36 +0100
+Message-ID: <20241113042536.1792150-2-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BLO3JDd7QUl/r64u"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjYy-wCuOx5Nv-F1uDcVYJEqi2pwTBTws=UHWB0z026ww@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,120 +104,317 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add a small utility for displaying some information about U-Boot and the
+hardware it's running on in a similar fashion to the popular neofetch
+tool for Linux [1].
 
---BLO3JDd7QUl/r64u
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+While the output is meant to be useful, it should also be pleasing to
+look at and perhaps entertaining. The ufetch command aims to bring this
+to U-Boot, featuring a colorful ASCII art version of the U-Boot logo.
 
-On Sat, Nov 09, 2024 at 10:34:15AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 5 Nov 2024 at 10:03, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Tom,
-> >
-> > On Tue, 5 Nov 2024 at 09:54, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > A long time ago, we had to use "i386" and "x86_64" toolchains for our
-> > > x86 platforms, depending on the target. We then moved to being able to
-> > > use the single "i386" toolchain to support all x86 platforms. At the
-> > > same time, we had been building sandbox with our "x86_64" toolchain in
-> > > CI. When x86 switched to being able to use a single toolchain we did =
-not
-> > > update our CI buildman file to match. Do this now as we want to ensure
-> > > that sandbox is built with the same compiler version the rest of our
-> > > platforms are and not the host one.
-> > >
-> > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > ---
-> > > Cc: Simon Glass <sjg@chromium.org>
-> > >
-> > > I'm posting this as an RFC to start the discussion as when I mentioned
-> > > this to Simon on IRC, he was very much not in agreement.
-> > >
-> > > My main argument is this, sandbox needs to use the same toolchain that
-> > > we compile (virtually) all other platforms with as one of the points =
-is
-> > > to be able to catch warnings and compiler behavior changes as soon as
-> > > possible in our CI. And just like how developers can use
-> > > distribution-provided toolchains today, nothing changes in that regar=
-d,
-> > > we only make CI be more consistent now.
-> >
-> > OK, that makes some sense to me, actually. It isn't the toolchain that
-> > people will be using, but catching things earlier seems good.
-> >
-> > The main concern I have is that we are not testing sandbox on the
-> > toolchain that everyone will be using. But I haven't noticed failures
-> > in CI which I cannot repeat locally, so we can cross that bridge when
-> > we come to it.
-> >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
->=20
-> This doesn't seem to work, for a few reasons:
->=20
-> 1. Buildman doesn't support setting HOSTCC and CC unless using -O to
-> override the toolchain (so the setting in this patch has no effect)
+[1]: https://en.wikipedia.org/wiki/Neofetch
 
-That shouldn't matter tho.
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+Ephemeral screenshot: https://0x0.st/XkQU.png
 
-> 2. Using the toolchains from kernel.org gives this error:
->=20
-> NO_LTO=3D1 make O=3D/tmp/b/sandbox defconfig all
-> HOSTCC=3D/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux=
-/bin/x86_64-linux-x86_64-linux-gcc
-> CC=3D/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin=
-/x86_64-linux-x86_64-linux-gcc
->  -j30 -s
-> /home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../l=
-ib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
-> cannot find crt1.o: No such file or directory
-> /home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../l=
-ib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
-> cannot find crti.o: No such file or directory
-> /home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../l=
-ib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
-> cannot find -lc: No such file or directory
-> /home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/x86_64-linux/bin/../l=
-ib/gcc/x86_64-linux/13.2.0/../../../../x86_64-linux/bin/ld:
-> cannot find crtn.o: No such file or directory
-> collect2: error: ld returned 1 exit status
-> make[3]: *** [scripts/Makefile.host:95: scripts/basic/fixdep] Error 1
-> make[2]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefil=
-e:503:
-> scripts_basic] Error 2
-> make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefil=
-e:568:
-> __build_one_by_one] Error 2
-> make: *** [Makefile:177: sub-make] Error 2
+Changes since v1:
+ * Rework storage info to be more dynamic
+ * use print_size() helper everywhere
+ * manually walk RAM banks to report memory size correctly
+ * minor formatting changes and fixes
+ * MAINTAINERS entry
+ * V1: https://lore.kernel.org/u-boot/20240808163153.2069650-1-caleb.connolly@linaro.org
+---
+ MAINTAINERS  |   5 ++
+ cmd/Kconfig  |   7 ++
+ cmd/Makefile |   1 +
+ cmd/ufetch.c | 224 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 237 insertions(+)
+ create mode 100644 cmd/ufetch.c
 
-So yeah, here's the real problem. In the past the kernel.org toolchain
-was (unintentionally I believe) good enough to make user-space programs
-too. That's not the case now, and sandbox is really a userspace program
-and not a bare-metal program.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 38c714cf46a6..d1eb164ad590 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1724,8 +1724,13 @@ M:	Heiko Schocher <hs@denx.de>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-ubi.git
+ F:	drivers/mtd/ubi/
+ 
++UFETCH
++M:	Caleb Connolly <caleb.connolly@linaro.org>
++S:	Maintained
++F:	cmd/ufetch.c
++
+ UFS
+ M:	Neil Armstrong <neil.armstrong@linaro.org>
+ M:	Bhupesh Sharma <bhupesh.linux@gmail.com>
+ M:	Neha Malcom Francis <n-francis@ti.com>
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 4fba9fe67034..da736249a3cf 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -175,8 +175,15 @@ config CMD_CPU
+ 	  number of CPUs, type (e.g. manufacturer, architecture, product or
+ 	  internal name) and clock frequency. Other information may be
+ 	  available depending on the CPU driver.
+ 
++config CMD_UFETCH
++	bool "U-Boot fetch"
++	depends on BLK
++	help
++	  Fetch utility for U-Boot (akin to neofetch). Prints information
++	  about U-Boot and the board it is running on in a pleasing format.
++
+ config CMD_FWU_METADATA
+ 	bool "fwu metadata read"
+ 	depends on FWU_MULTI_BANK_UPDATE
+ 	help
+diff --git a/cmd/Makefile b/cmd/Makefile
+index d1f369deec0a..1e6d3128c8ca 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -52,8 +52,9 @@ obj-$(CONFIG_CMD_CONSOLE) += console.o
+ obj-$(CONFIG_CMD_CPU) += cpu.o
+ obj-$(CONFIG_CMD_DATE) += date.o
+ obj-$(CONFIG_CMD_DEMO) += demo.o
+ obj-$(CONFIG_CMD_DM) += dm.o
++obj-$(CONFIG_CMD_UFETCH) += ufetch.o
+ obj-$(CONFIG_CMD_SOUND) += sound.o
+ ifdef CONFIG_POST
+ obj-$(CONFIG_CMD_DIAG) += diag.o
+ endif
+diff --git a/cmd/ufetch.c b/cmd/ufetch.c
+new file mode 100644
+index 000000000000..1bd0565b9f08
+--- /dev/null
++++ b/cmd/ufetch.c
+@@ -0,0 +1,224 @@
++// SPDX-License-Identifier: GPL-2.0
++
++/* Small "fetch" utility for U-Boot */
++
++#ifdef CONFIG_ARM
++#include <asm/system.h>
++#endif
++#include <dm/device.h>
++#include <dm/uclass-internal.h>
++#include <display_options.h>
++#include <mmc.h>
++#include <time.h>
++#include <asm/global_data.h>
++#include <cli.h>
++#include <command.h>
++#include <dm/ofnode.h>
++#include <env.h>
++#include <rand.h>
++#include <vsprintf.h>
++#include <linux/delay.h>
++#include <linux/kernel.h>
++#include <version.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define LINE_WIDTH 40
++#define BLUE "\033[38;5;4m"
++#define YELLOW "\033[38;5;11m"
++#define BOLD "\033[1m"
++#define RESET "\033[0m"
++static const char * const logo_lines[] = {
++	BLUE BOLD "                  ......::......                   ",
++	BLUE BOLD "             ...::::::::::::::::::...              ",
++	BLUE BOLD "          ..::::::::::::::::::::::::::..           ",
++	BLUE BOLD "        .::::.:::::::::::::::...::::.::::.         ",
++	BLUE BOLD "      .::::::::::::::::::::..::::::::::::::.       ",
++	BLUE BOLD "    .::.:::::::::::::::::::" YELLOW "=*%#*" BLUE "::::::::::.::.     ",
++	BLUE BOLD "   .:::::::::::::::::....." YELLOW "*%%*-" BLUE ":....::::::::::.    ",
++	BLUE BOLD "  .:.:::...:::::::::.:-" YELLOW "===##*---==-" BLUE "::::::::::.:.   ",
++	BLUE BOLD " .::::..::::........" YELLOW "-***#****###****-" BLUE "...::::::.:.  ",
++	BLUE BOLD " ::.:.-" YELLOW "+***+=" BLUE "::-" YELLOW "=+**#%%%%%%%%%%%%###*= " BLUE "-::...::::. ",
++	BLUE BOLD ".:.::-" YELLOW "*****###%%%%%%%%%%%%%%%%%%%%%%%%%%#*=" BLUE ":..:::: ",
++	BLUE BOLD ".::" YELLOW "##" BLUE ":" YELLOW "***#%%%%%%#####%%%%%%%####%%%%%####%%%*" BLUE "-.::. ",
++	BLUE BOLD ":.:" YELLOW "#%" BLUE "::" YELLOW "*%%%%%%%#*****##%%%#*****##%%##*****#%%+" BLUE ".::.",
++	BLUE BOLD ".::" YELLOW "**==#%%%%%%%##****#%%%%##****#%%%%#****###%%" BLUE ":.. ",
++	BLUE BOLD "..:" YELLOW "#%" BLUE "::" YELLOW "*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#%%%%%+ " BLUE ".:.",
++	BLUE BOLD " ::" YELLOW "##" BLUE ":" YELLOW "+**#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%* " BLUE "-.:: ",
++	BLUE BOLD " ..::-" YELLOW "#****#%#%%%%%%%%%%%%%%%%%%%%%%%%%%#*=" BLUE "-..::.  ",
++	BLUE BOLD "  ...:=" YELLOW "*****=" BLUE "::-" YELLOW "=+**###%%%%%%%%###**+=  " BLUE "--:...:::  ",
++	BLUE BOLD "   .::.::--:........::::::--::::::......::::::.    ",
++	BLUE BOLD "    .::.....::::::::::...........:::::::::.::.     ",
++	BLUE BOLD "      .::::::::::::::::::::::::::::::::::::.       ",
++	BLUE BOLD "        .::::.::::::::::::::::::::::.::::.         ",
++	BLUE BOLD "          ..::::::::::::::::::::::::::..           ",
++	BLUE BOLD "             ...::::::::::::::::::...              ",
++	BLUE BOLD "                  ......::......                   ",
++};
++
++enum output_lines {
++	FIRST,
++	SECOND,
++	KERNEL,
++	SYSINFO,
++	HOST,
++	UPTIME,
++	IP,
++	CMDS,
++	CONSOLES,
++	DEVICES,
++	FEATURES,
++	RELOCATION,
++	CORES,
++	MEMORY,
++	STORAGE,
++
++	/* Up to 10 storage devices... Should be enough for anyone right? */
++	_LAST_LINE = (STORAGE + 10),
++#define LAST_LINE (_LAST_LINE - 1UL)
++};
++
++static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
++		     char *const argv[])
++{
++	int num_lines = max(LAST_LINE + 1, ARRAY_SIZE(logo_lines));
++	const char *model, *compatible;
++	char *ipaddr;
++	int n_cmds, n_cpus = 0, ret, compatlen;
++	size_t size;
++	ofnode np;
++	struct udevice *dev;
++	struct blk_desc *desc;
++	bool skip_ascii = false;
++
++	if (argc > 1 && strcmp(argv[1], "-n") == 0) {
++		skip_ascii = true;
++		num_lines = LAST_LINE;
++	}
++
++	for (int line = 0; line < num_lines; line++) {
++		if (!skip_ascii) {
++			if (line < ARRAY_SIZE(logo_lines))
++				printf("%s  ", logo_lines[line]);
++			else
++				printf("%*c  ", LINE_WIDTH, ' ');
++		}
++		switch (line) {
++		case FIRST:
++			compatible = ofnode_read_string(ofnode_root(), "compatible");
++			if (!compatible)
++				compatible = "unknown";
++			printf(RESET "%s\n", compatible);
++			compatlen = strlen(compatible);
++			break;
++		case SECOND:
++			for (int j = 0; j < compatlen; j++)
++				putc('-');
++			putc('\n');
++			break;
++		case KERNEL:
++			printf("Kernel:" RESET " %s\n", U_BOOT_VERSION);
++			break;
++		case SYSINFO:
++			printf("Config:" RESET " %s_defconfig\n", CONFIG_SYS_CONFIG_NAME);
++			break;
++		case HOST:
++			model = ofnode_read_string(ofnode_root(), "model");
++			if (model)
++				printf("Host:" RESET " %s\n", model);
++			break;
++		case UPTIME:
++			printf("Uptime:" RESET " %ld seconds\n", get_timer(0) / 1000);
++			break;
++		case IP:
++			ipaddr = env_get("ipvaddr");
++			if (!ipaddr)
++				ipaddr = "none";
++			printf("IP Address:" RESET " %s", ipaddr);
++			ipaddr = env_get("ipv6addr");
++			if (ipaddr)
++				printf(", %s\n", ipaddr);
++			else
++				putc('\n');
++			break;
++		case CMDS:
++			n_cmds = ll_entry_count(struct cmd_tbl, cmd);
++			printf("Commands:" RESET " %d (help)\n", n_cmds);
++			break;
++		case CONSOLES:
++			printf("Consoles:" RESET " %s (%d baud)\n", env_get("stdout"),
++			       gd->baudrate);
++			break;
++		case DEVICES:
++			printf("Devices:" RESET " ");
++			/* TODO: walk the DM tree */
++			printf("Uncountable!\n");
++			break;
++		case FEATURES:
++			printf("Features:" RESET " ");
++			if (IS_ENABLED(CONFIG_NET))
++				printf("Net");
++			if (IS_ENABLED(CONFIG_EFI_LOADER))
++				printf(", EFI");
++			if (IS_ENABLED(CONFIG_CMD_CAT))
++				printf(", cat :3");
++#ifdef CONFIG_ARM
++			switch (current_el()) {
++			case 2:
++				printf(", VMs");
++				break;
++			case 3:
++				printf(", full control!");
++				break;
++			}
++#endif
++			printf("\n");
++			break;
++		case RELOCATION:
++			if (gd->flags & GD_FLG_SKIP_RELOC)
++				printf("Relocated:" RESET " no\n");
++			else
++				printf("Relocated:" RESET " to %#011lx\n", gd->relocaddr);
++			break;
++		case CORES:
++			ofnode_for_each_subnode(np, ofnode_path("/cpus")) {
++				if (ofnode_name_eq(np, "cpu"))
++					n_cpus++;
++			}
++			printf("CPU:" RESET " %d (1 in use)\n", n_cpus);
++			break;
++		case MEMORY:
++			for (int j = 0; j < CONFIG_NR_DRAM_BANKS && gd->bd->bi_dram[j].size; j++)
++				size += gd->bd->bi_dram[j].size;
++			printf("Memory:" RESET " ");
++			print_size(size, "\n");
++			break;
++		case STORAGE:
++		default:
++			ret = uclass_find_device_by_seq(UCLASS_BLK, line - STORAGE, &dev);
++			if (!ret && dev) {
++				desc = dev_get_uclass_plat(dev);
++				size = desc->lba * desc->blksz;
++				printf("%s %d: " RESET, desc->uclass_id == UCLASS_SCSI ? "SCSI" :
++						desc->uclass_id == UCLASS_MMC
++						? "MMC" : "Storage",
++					desc->lun);
++				if (size)
++					print_size(size, "");
++				else
++					printf("No media");
++			}
++			printf("\n");
++		}
++	}
++
++	printf(RESET "\n\n");
++
++	return 0;
++}
++
++U_BOOT_CMD(ufetch, 2, 1, do_ufetch,
++	   "U-Boot fetch utility",
++	   "Print information about your device.\n"
++	   "    -n    Don't print the ASCII logo"
++);
+-- 
+2.47.0
 
-So really the current line from the Dockerfile just needs to be removed.
-
---=20
-Tom
-
---BLO3JDd7QUl/r64u
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc0EaoACgkQFHw5/5Y0
-tywHsAv+Iwm7f8R8uRsDIU52ONaMiNvJCGHHdI3z9RMuSa/T0wBV2MLegN7TG+tI
-3OGKMCQ8TPIYClvMW9p4bWslbZd5Zn6iF/EZxpkDCSOSxTYNnC32BRCZ8E7FzrVE
-CLmaxQJWPP0vKWr0bUFKUrhPkoaRXeI/HLM5LU6W0vd+wFhA/8DJrMmQcnBGw08/
-LvE4BGDRjUpspeABb49qMSGY5XCi0EMnC29n4aDXkbCXxQj3BwDpqejnHDE/IzkD
-66tEJ8XRx/9TEjLWzoSflWhlfoZ5wO5LJ8IwLDS/JGN7RQiWwg3M5zl41t+xwyTv
-O2RpOzDqhy3dt3xHANoknBQO3AOlZDuYX/jrpq/jBn2LufxhuzSZhTdM4A6bCxwm
-Lm/qfYErjwTgBY4nzY0tOcBmtOb7ynKlIis9xv3hZiq+HWrl0xZg7t6gQfKnhuUO
-6mvuv2rMprup0hKlNy/QNxk56vwlYkVxGE95zGQsjpEsh12eudGG+jda+vVfltIb
-/3ZEJ/o6
-=brDI
------END PGP SIGNATURE-----
-
---BLO3JDd7QUl/r64u--
