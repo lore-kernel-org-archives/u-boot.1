@@ -4,86 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85B6CD462B9
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 15:09:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7107D462BF
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 15:09:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E179689417;
-	Wed, 13 Nov 2024 16:09:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 529218959D;
+	Wed, 13 Nov 2024 16:09:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MHUroLSU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WaVbD26c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EA1D89587; Wed, 13 Nov 2024 16:09:19 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 3B8A889021; Wed, 13 Nov 2024 16:09:52 +0100 (CET)
+Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
+ [IPv6:2607:f8b0:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AF9788E3F
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 16:09:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F0158959A
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 16:09:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-aa1e51ce601so327429466b.3
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 07:09:17 -0800 (PST)
+Received: by mail-il1-x135.google.com with SMTP id
+ e9e14a558f8ab-3a6bba54722so27419525ab.2
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 07:09:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731510557; x=1732115357; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wsXyuzXl+RS0QPVE1w0uWGOk5nKeRnU6z1zGB4RY6OM=;
- b=MHUroLSU/So0GZiX6rB3LGvd7KfbDr3f/qJjOykf5BTMxClPw+QK3kOtKT0Mt1PyoM
- e5f9o6ULsadQ1usMgZ/EO2UHpz+w8eZ0cPXVIkNd2ejFHNfX3BxbvEPnPb9qeFztgTVM
- ozy+UnlZcUW1nB8xM35B5QY2XnbBp7WYJ7IBw=
+ d=chromium.org; s=google; t=1731510587; x=1732115387; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=D9W2L6QfAWTCRvwOE+bVEVmBDk+XXSu1iZ9wgwaZyMo=;
+ b=WaVbD26c+ubIrwgQPejjmNyUKqDfrWWUP/yp+dZ8RRGxRbd+/s5ezD8M6drQLd0gLo
+ Oqk8gi7yhSViJHzrjIvU80h0AqWSd6mh/9HEmuOy2DiXWFbQXofPb5v46uF0R3/4bCD3
+ xc7/eUjAka0glyJ4lCJQVjKYJyEq9IB7s3ImM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731510557; x=1732115357;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1731510587; x=1732115387;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wsXyuzXl+RS0QPVE1w0uWGOk5nKeRnU6z1zGB4RY6OM=;
- b=SBtqAve1pkvUT7StJXsg7wPhK/MrIUfSjBUMfnLp9OCps2via4jksRgfIPsYE0IEUn
- FagGeDhInLtdpx5ndXq/m/zz5dQCgUXaGzvi7gUXvEdOzkVa4AjIQbnUxTqiwbV37ZMX
- yZfX3P3SCLuktPTZPEip1bl9CCo6r4eB9LPbtgKiEuKVe0VmQnnb/2gOhLylUpx1ZEGf
- Er5/wjDrZLP+T6XNEPt4YNkFjmQw23WDJ6ot6CnPONJMdc+PTinQ33IFkjV/ODP650Pa
- BX6xd0SreEVhQMGMJXUXuXv/up9tz74ghkExq22K/pSF/kRGGJRQf4ZwV8VmzbKucMKg
- Bmjw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXrGHBQYghxUA/+Mx9J9SDRxL26FfOP+0ZslmiJodjZPxzocWhc3XuwxDxf7J4Ah0I3pfYxUm8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwjvTBjqk6G7nTUHG4VfmfvfFr2jepJ2ihwxWaSZfOxNj0RyVnh
- 8u47AdSwmqGkxo8Bp2PgyLMP8AodGII6djWrXWe8bgoHhOIWYYhaBqgzpJ5+zsXgZ+ba4XWv5zo
- qv+QPAFic24Jprts7K/9TVRVAjowTxuqjRgHIwZxbcEY8UiZyHw==
-X-Google-Smtp-Source: AGHT+IGzJMTmQkX9VLHqqDHHntWEIM7VjMCNJc0eoLdz2nhmu9pZQhAsn8sdvvOjV0GqfPw3mEV55OMDx0HEWeL+P3w=
-X-Received: by 2002:a17:907:2dac:b0:a9e:b471:8308 with SMTP id
- a640c23a62f3a-a9ef001527cmr2089064566b.49.1731510556676; Wed, 13 Nov 2024
- 07:09:16 -0800 (PST)
-MIME-Version: 1.0
-References: <20241110083017.367565-1-ilias.apalodimas@linaro.org>
- <20241110083017.367565-5-ilias.apalodimas@linaro.org>
- <CAFLszThNpU2cNNvU4uT2vkgFKJr7ss=j_UYfXTFXA_b4=LnurA@mail.gmail.com>
- <CAC_iWjKFxtBxEqkkXSOhcRqN4fRRgMcsmFRVYeNZOnR4zERrQQ@mail.gmail.com>
- <CAFLszTjou7yq-psYT3jBU7L8g81+bWUqc9Xj007zqfpfpnP9gg@mail.gmail.com>
- <CAC_iWjJdK6D+inVSMqJ941yvpDvK4j5XufvA1Fije3aqZvm=1g@mail.gmail.com>
-In-Reply-To: <CAC_iWjJdK6D+inVSMqJ941yvpDvK4j5XufvA1Fije3aqZvm=1g@mail.gmail.com>
+ bh=D9W2L6QfAWTCRvwOE+bVEVmBDk+XXSu1iZ9wgwaZyMo=;
+ b=rZD3pGDPJhTchXA8btwbVSXL4w48YOMR+HBCfsJg0z1Mol0N7Q9W3OYM/Q/OxtXjyI
+ juLJ85mMeV6nRiedCDMSIGnHulWzD4n8zR/rjtD/cA+EvqC4k+sXLSrUImvqdvi/pqaP
+ TrbyztxN6QAWluvP27ykPRScoARoKq2A2wdBTbu+vvfPoAcKPDw+OsHimBlkhZvEr+x1
+ JHgqSa47TQKRaecgTehPHSw8K8Vlq9oxe9KO1CPaCYyZPpzSlIV/JH4iKs5GlId3PpI/
+ xm35SwWf9EqmRYjhEKksnTWHPMm0HEsR5e0YsuwFtFeXpDmOSnIUfVuQt+hkMoKR5emj
+ ZecQ==
+X-Gm-Message-State: AOJu0Yz4/gDDDj2XtU5xJ7KOeAcj7oo02/H/ko8jQ8QE95mzUjuLUzVY
+ cYVphmIsGZzl5yxWr+HiJuESvM31hduaKnLRRuoRmlP2trGeh0qicR5KqWacuLFeeMazO+fonvI
+ =
+X-Google-Smtp-Source: AGHT+IFWqswOWGIAFB3Ipo9Zt4zQel308RPcEts7XR5K3rMw4D6w/88JsEH9hHeI7L5vjDhijDN1/Q==
+X-Received: by 2002:a05:6e02:184c:b0:3a4:e452:c42c with SMTP id
+ e9e14a558f8ab-3a6f19c1d84mr198790605ab.6.1731510586786; 
+ Wed, 13 Nov 2024 07:09:46 -0800 (PST)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3a719d6b62fsm2710105ab.18.2024.11.13.07.09.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Nov 2024 07:09:45 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Nov 2024 08:09:05 -0700
-Message-ID: <CAFLszTiG9AMPs7q9QJgD5bP4=QwXVxQrOJqpWARamkPXS8p4wg@mail.gmail.com>
-Subject: Re: [PATCH v3 4/6] net: lwip: Enable https:// support for wget
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: jerome.forissier@linaro.org, Anton.Antonov@arm.com, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Alex Shumsky <alexthreed@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
+ Dragan Simic <dsimic@manjaro.org>, Hans de Goede <hdegoede@redhat.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Janne Grunau <j@jannau.net>, Joe Hershberger <joe.hershberger@ni.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <kettenis@openbsd.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Jonathan Humphreys <j-humphreys@ti.com>,
- Wei Ming Chen <jj251510319013@gmail.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ Michal Simek <michal.simek@amd.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH v5 0/8] bootstd: sunxi: Migrate to standard boot
+Date: Wed, 13 Nov 2024 08:09:30 -0700
+Message-Id: <20241113150938.1534931-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,128 +105,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+This series attempts to migrate all sunxi boards to use standard boot,
+along with a text environment.
 
-On Wed, 13 Nov 2024 at 07:46, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Wed, 13 Nov 2024 at 15:39, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > HI Ilias,
-> >
-> > On Mon, 11 Nov 2024 at 07:20, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > Thanks Simon,
-> > >
-> > > On Mon, 11 Nov 2024 at 15:03, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > On Sun, 10 Nov 2024 at 01:32, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > With the recent changes of lwip & mbedTLS we can now download from
-> > > > > https:// urls instead of just http://.
-> > > > > Adjust our wget lwip version parsing to support both URLs.
-> > > > > While at it adjust the default TCP window for QEMU since https seems to
-> > > > > require at least 16384
-> > > > >
-> > > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > > ---
-> > > > >  cmd/Kconfig      | 19 +++++++++++
-> > > > >  net/lwip/Kconfig |  2 +-
-> > > > >  net/lwip/wget.c  | 86 +++++++++++++++++++++++++++++++++++++++++++-----
-> > > > >  3 files changed, 97 insertions(+), 10 deletions(-)
-> > > >
-> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > Some nits / questions
-> > > >
-> > > > I am not sure what mbedtls_hardware_poll() is,
-> > >
-> > > It's an entropy collector used by mbedTLS to ensure the platform has
-> > > enough entropy.
-> > > It's required if your platform doesn't support standards like the
-> > > /dev/urandom or Windows CryptoAPI.
-> > >
-> > > > but if @len is too
-> > > > short, would it be acceptable to return an error? How many bytes is it
-> > > > requesting in the https case?
-> > >
-> > > If you don't return enough entropy https:// will fail and mbedTLS &
-> > > lwIP will print an error. I think we currently use 128 and the default
-> > > for mbedTLS is 32.
-> >
-> > OK, then the code is quite strange to me. It seems like it should
-> > check that 'len' is large enough.
-> >
-> > But what does 'len' actually mean? Its arguments are not described in
-> > mbedtls. Shouldn't you just pass it on to the dm_rng_read() function?
->
-> The entry point is mbedtls_entropy_func(). mbedtls then calls
-> entropy_gather_internal() which asks for some bytes of entropy and is
-> controlled by a config option (and defaults to 128 for the config we
-> use in U-Boot -- MBEDTLS_ENTROPY_MAX_GATHER). len is actually
-> MBEDTLS_ENTROPY_MAX_GATHER.
->
-> > Why call it with only 8 bytes? It might be more bytes than is
-> > requested (and larger than the buffer), or fewer.
->
-> It doesn't matter because we copy back the correct amount of
-> bytes(what the caller requested). If it's less mbedTLS calls that
-> function until it gathers all requested entropy.
->
-> > It seems that your
-> > function is written with knowledge of the internals of mbedtls.
->
-> Ofc it is. It's a function needed by mbedTLS -- not U-Boot, it
-> requires internal knowledge of it (and is probably part of the ABI,
-> but I'll have to check that).
->
-> What happens in the TLS case is that 64b are required. We either make
-> 8 calls of 8b or make a single call with MBEDTLS_ENTROPY_MAX_GATHER.
->
->  I could rewrite it as
->         uclass_first_device(UCLASS_RNG, &dev);
->         if (!dev) {
->                 log_err("Failed to get an rng device\n");
->                 return ret;
->         }
->
->         rng = malloc(len);
->         if (!rng)
->                 return -ENOMEM;
->
->         ret = dm_rng_read(dev, rng, len);
->         if (ret) {
->                 free(rng);
->                 return ret;
->         }
->
->         memcpy(output, rng, len);
->         *olen = len;
->         free(rng);
->
-> It does the same thing but gets 128b in one go. I don't have a strong
-> opinion on that. Let me know what you prefer
-> The tradeoff seems pretty straightforward. you either gather
-> potentially more entropy than required and call that function once, or
-> you gather exactly what's required on 8b steps -- but call that
-> function multiple times.
->
-> >
-> > BTW mbedtls_hardware_poll() is a strange name as it actually reads
-> > random data, so I think it should be renamed.
->
-> I don't think that can't change as you would break all projects using
-> it, but you can try sending a patch.
+Unfortunately a late-breaking problem has come up with bootmgr. There
+are two ways to fix this, both included in this series:
 
-I am wondering why we can't just do:
+   - Drop bootmgr for sunxi
+   - Change efi_mgr bootmeth back to sandbox-only
 
-ret = dm_rng_read(dev, rng, len);
-if (ret)
-   return ret;
+Based on the mailing-list discussion I have selected the first one and
+marked the second as RFC.
 
-*olen = len;
+Changes in v5:
+- Add new patch to drop bootmgr for sunxi
 
-Regards,
-Simon
+Changes in v4:
+- Reword Kconfig
+- Add a name for the bootflow
+- Drop UUID_GPT_SYSTEM and UUID_GPT_ESP definitions
+- Drop special case for ARM64's devicetree subdir
+- Drop unwanted quotations and indentation in KERNEL_COMPAT path
+
+Changes in v3:
+- Drop wip (work-in-progress) comment in commit
+- Fix 'supressed' typo
+- Use backquotes to highlight DEFAULT_DEVICE_TREE
+
+Changes in v2:
+- Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
+- Put the FEL bootmeth before all other global bootmeths
+- Convert the other DISTRO_DEFAULTS in the Kconfig too
+- Keep BOOTCMD_SUNXI_COMPAT
+- Keep bootcmd_sunxi_compat if OLD_SUNXI_KERNEL_COMPAT is enabled
+
+Simon Glass (8):
+  bootstd: Avoid depending on BLK
+  sunxi: Add a bootmeth for FEL
+  efi_loader: bootstd: Drop bootmgr for sunxi
+  RFC: Revert "bootstd: Make efi_mgr bootmeth work for non-sandbox
+    setups"
+  sunxi: Move to bootstd
+  sunxi: Drop old distro boot variables
+  env: Provide a work-around for unquoting fdtfile
+  sunxi: Move to text environment
+
+ Makefile                                      |   1 +
+ arch/arm/Kconfig                              |  10 +-
+ board/sunxi/sunxi.env                         | 140 +++++++++++
+ boot/Kconfig                                  |  18 +-
+ boot/Makefile                                 |   1 +
+ boot/bootmeth_efi_mgr.c                       |  18 +-
+ boot/bootmeth_fel.c                           |  84 +++++++
+ .../gardena-smart-gateway-mt7688_defconfig    |   1 +
+ doc/usage/environment.rst                     |  12 +
+ include/configs/sunxi-common.h                | 238 ------------------
+ 10 files changed, 261 insertions(+), 262 deletions(-)
+ create mode 100644 board/sunxi/sunxi.env
+ create mode 100644 boot/bootmeth_fel.c
+
+-- 
+2.34.1
+
