@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BD9AD637C4
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 22:20:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EDC0D637CE
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 22:30:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCBCF89198;
-	Wed, 13 Nov 2024 23:20:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E35E989198;
+	Wed, 13 Nov 2024 23:29:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ng9v1WB0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QOc7QylQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E34E8904A; Wed, 13 Nov 2024 23:20:23 +0100 (CET)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id 3F9A3891F1; Wed, 13 Nov 2024 23:29:58 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E919B89198
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 23:20:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0346D890D9
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 23:29:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-2890f273296so3447011fac.2
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 14:20:20 -0800 (PST)
+ spf=pass smtp.mailfrom=andrej.skvortzov@gmail.com
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a9eb3794a04so5860466b.3
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 14:29:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731536419; x=1732141219; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MDLDVCAfKF9AS9d+P/AJXrBNviWc3A5OXlxLcFP9b6w=;
- b=ng9v1WB0x28/gfhRZ+qFrvWPqrHVD80QfY/USM0MAPpJMC93RjKPQUNdGO5TfymZYy
- 1nAbW/PsHc/xY7FzCVn6oKv0crCrG6o1USFB9+V4r9PfF+Dcx2jFL1XrxNn57XDc0ngl
- HkZrLn39FecY2/B214MO7+PNPR5tbPEki1LU4=
+ d=gmail.com; s=20230601; t=1731536995; x=1732141795; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KiFMJ79Dx6WwGVlWS+efbcCvi09vg39bmGOQ2Tfaook=;
+ b=QOc7QylQ2hpblGRZF1GxLE+ZmKCvwmoNqSlJfVGsk/edNuY/Y3HHcEHZbsOeajR9T1
+ jRg7xfqQmjtqVlya0JCvZ17gRVgIQ2KtGCkphQ8//rMh1maG6WPgyM3vmrJFfIuW8jgW
+ uGtRHZK4r7+8voccMD64wbJx5NfsR2+pmy2yPSbKg1aT1hXjzCeYOELHObDnmgbIRL/w
+ xYEfSxUdg7bAOgJr0RvZ3aQqsEER6GWHbu2If/1GnXtCFSU/bPWGbZcd5rpgQbAqQL3m
+ 7IkMCJL06RVVzFY6+Gpi+lfb+oU0+heW9VYEz5tOUq5ODjKqbYq9GEb2XnPSD5bHGgoS
+ Et2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731536419; x=1732141219;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MDLDVCAfKF9AS9d+P/AJXrBNviWc3A5OXlxLcFP9b6w=;
- b=gkULn7FfqIuQ9Y424UZ5hwQscOojoB1lc4GZKWEwZ4vLeJn1+zHjvoAMJEMqr0HiKi
- UyGCDj1+6B3d77g/2mTQco6Cekw8gKF+Axv6StD9HDRuTmbjKmO/rDkmJUaG08Kth43a
- Au4Zk+4o6cB2kcrgq2Heed1sgybqwdYGSDEWIAGXKE77/PTxfPCyRCqGCwakwu9Fjfuk
- F9WoatH7ohwob0kxh/FdX8HQGmgKT3gastY4z0Y8uLPwvxQGfgO2m1hSguwr68ML8+/o
- UGnJSbI+2sGVaI+CIdhQPOv2TZ7/t3qwqXytz1jFZTNH+SM+xgK6NBbac1i7EG0XtJ2Q
- 84/Q==
-X-Gm-Message-State: AOJu0YxJoM88JDjWabE4VwVAhR2lPNxeoA9UoD+l904SjosmuFK843RV
- sRgdQ9rIga978NFR04X48Gh/tavkd2i2FzPkRcyXrqUbrnIf0i64SYxUGj7Te0vnzkc5/bFr9ZG
- Vf6Q=
-X-Google-Smtp-Source: AGHT+IGGw37QwBRgRIsayB0C/TjIrf+AtIF1LooSQYZLrJ2xPpVR1q4V9roALXDXbth2HJLp6O78bg==
-X-Received: by 2002:a05:6870:1e83:b0:288:6a16:fe1 with SMTP id
- 586e51a60fabf-295601116e2mr19216323fac.18.1731536419634; 
- Wed, 13 Nov 2024 14:20:19 -0800 (PST)
-Received: from bill-the-cat ([145.14.135.248])
+ d=1e100.net; s=20230601; t=1731536995; x=1732141795;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KiFMJ79Dx6WwGVlWS+efbcCvi09vg39bmGOQ2Tfaook=;
+ b=s9YJRiLPkGknOp1I9h3eFg/H1CvWdT99FuZNpxv5Ivrk2YOdXo5LRV+zg6/fn8OSEI
+ W6igbqJxLllO2Zux8oMzLa6lHVIBU4Oy7T78Hw5HOHPSlbAu6SBY/f6ABPC3i0446XhD
+ OwVbdf3GgLTKxxnJ2qcss/y4XKQLbr6Y8Gw8WZ0s1d2rVtN9qQ5axRuVYbTpBheJTuXc
+ /6A/P2vBcqYB7+sVXdexppfAzaDucGn0wshvrRlHr97pHsXfLHQasWHSfJKroy+p3a7S
+ L1shAF1HFxxPMuRj7HkYZFUs1DS0s6OoFt+hqSl7UGbj0gkfIj1bY+gSJ159Atyr7K3T
+ oc0Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUQ/vYs2ArksTE1QejeYZomkXB0R+BHRhqkRiKjAIvPKPxh8wMeD4fD78EawpAJWrsISaDK/a0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxEEqPaEC5diVjKx+LIbtVUvPd0/WETWuBAkPDZ71G6ebFMV6G6
+ PTdmfS6AnK68W/91xxBU5shSqWW3i8DCJiLcn+m7GT3tsjGuSQ9o
+X-Google-Smtp-Source: AGHT+IElQHek+iiu5/H1MZzs6NkXfSCJY3KQrts8hF8XvZYeqKmtJlt5Ife6jmbfL9IWD6JcI7lOig==
+X-Received: by 2002:a17:907:3e02:b0:a9e:b378:6c13 with SMTP id
+ a640c23a62f3a-aa1b1058071mr792383066b.17.1731536995186; 
+ Wed, 13 Nov 2024 14:29:55 -0800 (PST)
+Received: from localhost.localdomain ([94.19.228.143])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-295e92afbcbsm1242577fac.40.2024.11.13.14.20.18
+ a640c23a62f3a-a9ee0a17651sm923088966b.38.2024.11.13.14.29.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 14:20:19 -0800 (PST)
-Date: Wed, 13 Nov 2024 16:20:16 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 8/9] buildman: Propose a format for extra boards
-Message-ID: <20241113222016.GZ3600562@bill-the-cat>
-References: <20241108152350.3686274-1-sjg@chromium.org>
- <20241108152350.3686274-9-sjg@chromium.org>
- <20241113024029.GH3600562@bill-the-cat>
- <CAFLszTirek2=_j15W5LCZERTs2TZXawV0o3aGO12dgDJpzTdQw@mail.gmail.com>
+ Wed, 13 Nov 2024 14:29:54 -0800 (PST)
+From: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+To: Hans de Goede <hdegoede@redhat.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Cc: Chen-Yu Tsai <wens@csie.org>, Marco Mattiolo <marco.mattiolo@hotmail.it>,
+ Andrey Skvortsov <andrej.skvortzov@gmail.com>
+Subject: [PATCH] sunxi: pinephone: detect existed magnetometer and fixup dtb
+Date: Thu, 14 Nov 2024 01:28:48 +0300
+Message-ID: <20241113222848.103032-1-andrej.skvortzov@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FTuEmCyWF8dJ3Ghi"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTirek2=_j15W5LCZERTs2TZXawV0o3aGO12dgDJpzTdQw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,69 +96,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In newer 1.2 PinePhone board revisions LIS3MDL magnetometer was replaced by
+AF8133J. They use the same PB1 pin in different modes.
 
---FTuEmCyWF8dJ3Ghi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+LIS3MDL uses it as an gpio input to handle interrupt.
+AF8133J uses it as an gpio output as a reset signal.
 
-On Wed, Nov 13, 2024 at 09:03:35AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 12 Nov 2024 at 19:40, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Nov 08, 2024 at 08:23:49AM -0700, Simon Glass wrote:
-> >
-> > > It has become more common to use config fragments to extend or adjust
-> > > the functionality of boards in U-Boot.
-> > >
-> > > Propose a format for how to deal with this. It is not implemented as
-> > > yet.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> >
-> > I think that the first problem is that this patch series is an
-> > inappropriate method and place to start the discussion.
->=20
-> We had a discussion a year ago but it trailed off.
+It wasn't possible at runtime to enable both device tree
+nodes and detect supported sensor at probe time.
 
-OK. Still an inappropriate place to resurrect it.
+AF8133J has reset pin (PB1) connected to the SoC. By default AF8133J
+is in a reset state and don't respond to probe request on I2C
+bus. Extra code would be needed to handle reset signal. Therefore this
+code uses LIS3MDL magnetometer instead of AF8133J.
 
-> > I also think this gets things backwards as the common case is "make",
-> > not "buildman". We need more defconfig's that are just base +
-> > fragment(s) if they're important enough to be a combination that needs
-> > to be tested and work. A board is not a time-expensive part of CI. A
-> > pytest run is, a new job itself is.
->=20
-> OK, that would work too. It would also avoid the problem of combinatorial
-> explosion. But I am not seeing people actually doing that, with rare
-> exceptions.
+Introducing new dts 1.2b with AF8133J sensor would require probing in
+SPL. That would lead to pulling in into SPL I2C controller driver,
+RSB controller driver, introducing new AXP803 driver to power-up
+sensors for probe. It's working, but SPL is pretty size-constrained on
+A64 and doesn't have much space. Therefore fdt fixup is done in U-Boot
+proper without introducing new board revision and new dts.
 
-I think it's the exception, not the rule, where config fragments are not
-being put to use in a defconfig. And that's possibly because not a lot
-of people seem to know about the #include option, and then when I
-explain it exists to people the next problem is "Oh, I have to do what
-so that buildman also works?".
+Signed-off-by: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+Link: https://lore.kernel.org/all/20240908214718.36316-1-andrej.skvortzov@gmail.com/
+Link: https://lists.denx.de/pipermail/u-boot/2024-February/545700.html
+---
 
---=20
-Tom
+This patch was discussed previously as RFC. [1]
+All relevant kernel device-tree changes are merged. [2]
 
---FTuEmCyWF8dJ3Ghi
-Content-Type: application/pgp-signature; name="signature.asc"
+1. https://lists.denx.de/pipermail/u-boot/2024-February/545700.html
+2. https://lore.kernel.org/all/20240908214718.36316-1-andrej.skvortzov@gmail.com/
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc1JhgACgkQFHw5/5Y0
-tyzFPwwAmP5slXSdduxYrsKbEWBgywerSzNKVQ0TiuHFUMqxhvDL+9y1L/bzladL
-Xy9ZGgQl4knU2noi7F+Vwjj5gM5uPEZ3sLnk/KTU29X4Mz+7F57zTgyDvkfTHgep
-6lB5xbP3gLKwPsh2mDmR76j3bpbYnIaXp8QquaX2ySGkcaikctLw4m3tdzc4QloH
-GpF7J/l3krGiASlC02DompgPWWLNT/JHYqdOGQbzgsDJ7W7p71aRAi+N6MmfDCF9
-4w40uHLw0fSoaziuEct6CVjJ2wlCyugSqSfw/RnedRMwW2s4k3qlV0eiQPBvERTY
-F9NsDCOpziodnUSItrZrbYifLZDShosRaHz0VFtF64x0Z3f2O71mnmnNYPyHwWnb
-oszMuSoBfIa7L/srf+k94raMFAfsqr0YmbWWT83yVg1i7WqrjRoGB8ahKzjPgSfv
-0YpvXIGdqK8NmAQWj3OPwjmci5Yv1QLa1+xqwWpYX0xKiwdmAWNMMVxUFYk0kknr
-1FoxWzrO
-=XeWs
------END PGP SIGNATURE-----
+board/sunxi/board.c         | 23 +++++++++++++++++++++++
+ configs/pinephone_defconfig |  1 +
+ 2 files changed, 24 insertions(+)
 
---FTuEmCyWF8dJ3Ghi--
+diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+index 824c322a0dc..703081b403f 100644
+--- a/board/sunxi/board.c
++++ b/board/sunxi/board.c
+@@ -14,6 +14,7 @@
+ #include <dm.h>
+ #include <env.h>
+ #include <hang.h>
++#include <i2c.h>
+ #include <image.h>
+ #include <init.h>
+ #include <log.h>
+@@ -876,6 +877,27 @@ static void bluetooth_dt_fixup(void *blob)
+ 			   "local-bd-address", bdaddr, ETH_ALEN, 1);
+ }
+ 
++#define PINEPHONE_LIS3MDL_I2C_ADDR	0x1E
++#define PINEPHONE_LIS3MDL_I2C_BUS	1 /* I2C1 */
++
++static	void board_dt_fixup(void *blob)
++{
++	struct udevice *bus, *dev;
++
++	if (IS_ENABLED(CONFIG_PINEPHONE_DT_SELECTION) &&
++	    !fdt_node_check_compatible(blob, 0, "pine64,pinephone-1.2")) {
++		if (!uclass_get_device_by_seq(UCLASS_I2C, PINEPHONE_LIS3MDL_I2C_BUS, &bus)) {
++			dm_i2c_probe(bus, PINEPHONE_LIS3MDL_I2C_ADDR, 0, &dev);
++			fdt_set_status_by_compatible(
++				blob, "st,lis3mdl-magn",
++				dev ? FDT_STATUS_OKAY  : FDT_STATUS_DISABLED);
++			fdt_set_status_by_compatible(
++				blob, "voltafield,af8133j",
++				dev ? FDT_STATUS_DISABLED : FDT_STATUS_OKAY);
++		}
++	}
++}
++
+ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
+ 	int __maybe_unused r;
+@@ -889,6 +911,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 	fdt_fixup_ethernet(blob);
+ 
+ 	bluetooth_dt_fixup(blob);
++	board_dt_fixup(blob);
+ 
+ #ifdef CONFIG_VIDEO_DT_SIMPLEFB
+ 	r = sunxi_simplefb_setup(blob);
+diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
+index 9d39204a439..0f9ab0c4662 100644
+--- a/configs/pinephone_defconfig
++++ b/configs/pinephone_defconfig
+@@ -11,6 +11,7 @@ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+ CONFIG_PINEPHONE_DT_SELECTION=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
++CONFIG_SYS_I2C_MVTWSI=y
+ CONFIG_LED_STATUS=y
+ CONFIG_LED_STATUS_GPIO=y
+ CONFIG_LED_STATUS0=y
+-- 
+2.45.2
+
