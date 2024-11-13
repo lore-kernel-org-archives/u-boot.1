@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 686ABD41C06
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 12:47:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D978D41C3C
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 12:51:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE7D989565;
-	Wed, 13 Nov 2024 13:47:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id B51C188EE0;
+	Wed, 13 Nov 2024 13:51:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="MB9zuqY5";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="guP89qRi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 825918956F; Wed, 13 Nov 2024 13:47:23 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F13AA89579; Wed, 13 Nov 2024 13:51:30 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 807FE8904C
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 13:47:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 315BA88D29
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 13:51:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1731502037; x=1732106837; i=xypron.glpk@gmx.de;
- bh=1VEyqMDt9lRU0ukVpWsqc1lbqOIjs49kxlr/UXwAOJ0=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=MB9zuqY5bpt7flO7kYS2sct8INRrlwwzCrixvo3XzTMUxvuJ1DPAMjkXviDMqxhd
- xoGPAxymLPzjIQcJyYUSlS7QvzC72z5IC28F8oKG4yqXYlNoIODQsQNXyqr7dKS56
- tIRIFcwokhE2mov1Pb0koJqojwXJl0JywdWgia2gePjFTEwUDA9meSh+2kdJKS6S+
- ZS7jVrSvU0rvmi5GB5QMrI4QyAOR5Nxv35qrhXtSa1VJbWFZGdN1vCOVlVoyCOWO8
- lU69QQvlulktLOWxLTtH7+36S4hC5kb0Gz6EqWbqSW5LSb5G4tMvTmCr1zo/N3+nk
- iDDpgrbw7NmqiTbFfA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MTiPv-1tLT6e1AU9-00QN2D; Wed, 13
- Nov 2024 13:47:17 +0100
-Message-ID: <4ff61e8e-03c7-42d2-b2fe-8dba1697641f@gmx.de>
-Date: Wed, 13 Nov 2024 13:47:16 +0100
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-21116b187c4so54788215ad.3
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 04:51:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1731502287; x=1732107087; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=dFgO+gxlS5sfTq08nCBBFiqJ9gtusXT4zdDyN21FUuk=;
+ b=guP89qRiXkFXoFW3tjai8QNGRI8Ctj8AdmZeyo2jJSQWQEtdhhIODzKhE42PcAPbdf
+ NAeBzxDHYE1p/ESODCQoFZlz9zd/wRjJmyvoK6DtlAygl9DyFRIvb+V+55E5Zyjfqk5/
+ tt3L8iRISFteJAAbT+e97I3+YJ2Csbc0piYpli3pQRAmH+k4zv16qLcO3RCCY/dq1UcP
+ 6i/fXP+Ek3G3E/ElxK1UKJmK5yfxWo6dJ/zB791I+K4WJZpezqtE5OtsNazGjk7nVUwy
+ yDpAFlZF6eM716/xcMcOwYN5ELAOZ5Z1SGdO3mRwW5QUHSdyYv+zbBAnkOrG0oKvLLmR
+ +ozg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731502287; x=1732107087;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dFgO+gxlS5sfTq08nCBBFiqJ9gtusXT4zdDyN21FUuk=;
+ b=FQg6kW+tAbvJO1nOVpc61vsgns3BIKiQtejStDovYsw5Ob/AOeA+vx3MoMJotWjOmC
+ LxMZ5TV1gZVrGGAkC4LNaP8o1hvYBuo2RDFNzF9wupnxiEY/V1S9Fhh+emXtFj1YyLo+
+ V0qCQfrjtI5eXZnU5XZ+nTnPZLWMKQHMc7AHtOap6Po4MJFQpedph6comEctcVB4gu+T
+ Ti4uzBgdjmmcR0eKP1UTpeQn/JEDDSsF3H0OObOa44wkM+QE9ritNn+cnPSmQxBsvl8T
+ e0SbSk0qc/b6sinkXVYoLI01Ackt3Z15+uKioPc1t/zTev0DEH4+geu3TGyUY2/fHxxW
+ 5ykA==
+X-Gm-Message-State: AOJu0YyXzbxtsmyyo7XxCKKB9M49poR96CjhCBVNfteje3WgLHAC26zD
+ 7DvXhRdOzTm9i/6Cj8EKsADzD0X724wOI+5lFO62Dlux0XeG5voOeSWr/eUvx8VQ7l/BkiDwLit
+ 2awCgioB/Fj5luTvPTwBRT5aPIIs=
+X-Google-Smtp-Source: AGHT+IEURt/2kREp4ZjoSZGHus/R4br2/eny249PgB7sBf0O4DQKoCpiqnWx4fIhX0F1cUKM0hE7iax+Iz63w/Pi+Pk=
+X-Received: by 2002:a05:6a21:6da7:b0:1d9:21a0:14e0 with SMTP id
+ adf61e73a8af0-1dc229266a9mr27905001637.12.1731502286544; Wed, 13 Nov 2024
+ 04:51:26 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] efi_loader: remove non vital devices first
-To: Simon Glass <sjg@chromium.org>, Janne Grunau <j@jannau.net>
-Cc: kettenis@openbsd.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de, Mark Kettenis <mark.kettenis@xs4all.nl>
-References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
- <20241031-iommu_apple_dart_ordering-v1-2-8a6877946d6b@jannau.net>
- <87zfmi4rzy.fsf@bloch.sibelius.xs4all.nl>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <87zfmi4rzy.fsf@bloch.sibelius.xs4all.nl>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20241111210959.560738-1-adrianox@gmail.com>
+ <20241111210959.560738-9-adrianox@gmail.com>
+ <CAC_iWjJMtqGfON-feNhbWSPHZz9BEzZqbriV6byDmyEbkkazdw@mail.gmail.com>
+In-Reply-To: <CAC_iWjJMtqGfON-feNhbWSPHZz9BEzZqbriV6byDmyEbkkazdw@mail.gmail.com>
+From: =?UTF-8?Q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>
+Date: Wed, 13 Nov 2024 09:51:14 -0300
+Message-ID: <CAMGU2hWyo8O553HW=fJftm0awFHcOrxeVDVsuXcraWKKMBuBGg@mail.gmail.com>
+Subject: Re: [PATCH v3 08/15] efi_loader: device_path: add support for HTTP
+ device path
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
+ jerome.forissier@linaro.org, xypron.glpk@gmx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:pBUyr9NIPtxE4JurAKnnWqR/XlHgOUNgS+MkVW0Zq6XLYabo8cL
- UnYWs7KEIf9V5+VhWrlDA2wq9bpo3TLQuspiivMwze97LFcjKooWsVIkTQWJDGPT0ifvBsW
- 1H9cKyHbaPOBlICJhsMPXlAj8U7MhCzewskMxaF5J8LYL28Nt5SyU97zRs3IH1dznioNxuF
- 6tFlicUcg+H0/4p+oWS5A==
-UI-OutboundReport: notjunk:1;M01:P0:Q/r2oWHgEQg=;K5/RCRgRZYmDV4XE/i6O5G78d1t
- oHRxumAh3z2zQ1ma98grP3ry+f7ryd/kIGDtLVRHBpRL5FTqysU+asaInY9SlVOiVrKLNgKIH
- Dgs/TOYlKgneDqy58WtPQD0DNiC2DwW/TEVmeBwunZ1MUlf+yY2RSUmUH9E3ETsibZXFZTn2U
- xJ6bAS2/qpGwPlIjYMQ4Cuq3mlWG0pFzbu+uPRoHx1x3mKqBjmDW2pFm6TTAp/pC0SSC0nhjw
- qy8Db+yLOW7HznSl57m/kL7/j3sSfVgY+Kpcbf1EJWGNn0WXPdq/6EzRxKmJfjapmkSKFwUFq
- UEyLJCtyD+fHHcIwGWDqFK3bs567C8PF29eiSki/ND+O02ljNAgp/7f0ahu1D06pIqZO55Y73
- rorE8861EcDchP629q5t5dTqz6mMFj8VBI5hQQbEdoQ4hDqg6sIuCeQJQBqTeBbM6o920Jtm8
- BNC6dvsGamQw2kc7Bc7Ou8KByuAMmNAmO4Qz0VJNVpA9YxdhKA5FqXm/CTydVVZEURjqr+KiS
- 8pxCr6ReAorJ92dLpbmBuqXCF+Z7xLLbaoHX3UTbuAtQTUbyj2TnTXTX5Kom6bvUQSIN/YA0q
- LBEYx+sdVMj4TIqcu8PKFXLTC/j3Noh0zHGSfIq6B0qFkgvf/YmojpryozGTifgKVUnvwy3B4
- 0rLGy0z2t1ehKDwN08MzQKaxbsCkQZaz9dJzrc9WSfLhGJhkivAXtYj35kuSgzegFga+OVrx9
- NiDD06GpLZiuaJ26hVW4K/ZJOarxxqQoyJzY70ikA1uWfDgDCMi4NYGtNs9qC0AlPYb1pcwKX
- Wxg+eo0ab2+vSoSztMUyapZ/xKhbIwBCEu0cbreO5dl2ZCTU9Y645PiytFP1ha46pTu6zaD62
- f9X3jCurMJ7USxq16nxFWQa4D8ddIJWT30XN/gZhDyDjqNqCCFG+xCSEF
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,58 +91,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/1/24 21:29, Mark Kettenis wrote:
->> From: Janne Grunau <j@jannau.net>
->> Date: Thu, 31 Oct 2024 23:48:02 +0100
->>
->> DM_FLAG_VITAL marks devices which are essential for the operation of
->> other devices. Removing these devices before their users can result in
->> hangs or crashes.
->> This potentially fixes EFI boot of Renesas rcar3 devices. Their clock
->> devices (and with this series the dart iommu) are the only devices
->> markes as vital.
->> The arm boot code already handles devioce removal in this way.
+El mi=C3=A9, 13 nov 2024 a las 5:16, Ilias Apalodimas (<
+ilias.apalodimas@linaro.org>) escribi=C3=B3:
+
+> On Mon, 11 Nov 2024 at 23:10, Adriano Cordova <adrianox@gmail.com> wrote:
+> >
+> > Add efi_dp_from_http to form a device path from HTTP. The
+> > device path is the concatenation of the device path returned
+> > by efi_dp_from_ipv4 together with an URI node and an END node.
+> >
+> > Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+> > ---
+> >
+> > Changes in v3:
+> > - Moved argument checks in efi_dp_from_http to the beginning of the
+> function
+> >
+> >  include/efi_loader.h             |  1 +
+> >  lib/efi_loader/efi_device_path.c | 55 ++++++++++++++++++++++++++++++++
+> >  2 files changed, 56 insertions(+)
+> >
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index 612bc42816..96b204dfc3 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -872,6 +872,7 @@ struct efi_device_path *efi_dp_part_node(struct
+> blk_desc *desc, int part);
+> >  struct efi_device_path *efi_dp_from_file(const struct efi_device_path
+> *dp,
+> >                                          const char *path);
+> >  struct efi_device_path *efi_dp_from_eth(void);
+> > +struct efi_device_path *efi_dp_from_http(const char *server);
+> >  struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
+> >                                         uint64_t start_address,
+> >                                         size_t size);
+> > diff --git a/lib/efi_loader/efi_device_path.c
+> b/lib/efi_loader/efi_device_path.c
+> > index 82a45da1fa..158f08b9e5 100644
+> > --- a/lib/efi_loader/efi_device_path.c
+> > +++ b/lib/efi_loader/efi_device_path.c
+> > @@ -1012,6 +1012,61 @@ struct efi_device_path *efi_dp_from_ipv4(struct
+> efi_ipv4_address *ip,
+> >         return dp2;
+> >  }
+> >
+> > +struct efi_device_path *efi_dp_from_http(const char *server)
+> > +{
+> > +       struct efi_device_path *dp1, *dp2;
+> > +       struct efi_device_path_uri *uridp;
+> > +       efi_uintn_t uridp_len;
+> > +       char *pos;
+> > +       char tmp[128];
+> > +       struct efi_ipv4_address ip;
+> > +       struct efi_ipv4_address mask;
+> > +
+> > +       if ((server && strlen("http://") + strlen(server) + 1  > 128)
 >
-> There is a typo in that last sentence of the commit message (devioce).
-> Otherwise:
+> sizeof (tmp) instead of 128
 >
->> Signed-off-by: Janne Grunau <j@jannau.net>
+> > +           (!server && IS_ENABLED(CONFIG_NET_LWIP)))
+> > +               return NULL;
+> > +
+> > +       efi_net_get_addr(&ip, &mask, NULL);
+> > +
+> > +       dp1 =3D efi_dp_from_ipv4(&ip, &mask, NULL);
+> > +
+> > +       strcpy(tmp, "http://");
 >
-> Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
+> I've sent this a while back which is close to merging [0]. I am ok
+> with merging http support first, but if it's not too much of a pain
+> can you rebase on top of that and add https:// as well?
 >
->> ---
->>   lib/efi_loader/efi_boottime.c | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottim=
-e.c
->> index 4f52284b4c653c252b0ed6c0c87da8901448d4b4..7db3c95782970f8c06a970a=
-8ee86b1804cd848b6 100644
->> --- a/lib/efi_loader/efi_boottime.c
->> +++ b/lib/efi_loader/efi_boottime.c
->> @@ -2234,6 +2234,7 @@ static efi_status_t EFIAPI efi_exit_boot_services=
-(efi_handle_t image_handle,
->>   		if (IS_ENABLED(CONFIG_USB_DEVICE))
->>   			udc_disconnect();
->>   		board_quiesce_devices();
->> +		dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL | DM_REMOVE_NON_VITAL);
->>   		dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
 
-Simon's patch 6224dc9ba428 ("arm: Remove vital devices last") addressed
-the same issue for bootm on arm. But what about about other architectures?
+For that I'd have to change the wget patches too. I will try to add it in
+the next version,
+otherwise I can send a separated patch.
 
-This logic should be moved to drivers/core/root.c instead of replicating
-code.
 
-Best regards
+> > +
+> > +#if IS_ENABLED(CONFIG_NET_LWIP)
+> > +       if (server) {
+> > +               memcpy(tmp + strlen("http://"), server, strlen(server)
+> + 1);
+> > +       }
+> > +#else
+> > +       if (server) {
+> > +               memcpy(tmp + strlen("http://"), server, strlen(server)
+> + 1);
+> > +       } else {
+> > +               ip_to_string(net_server_ip, tmp + strlen("http://"));
+> > +       }
+> > +#endif
+> > +
+>
+> I think it's easier to read if you rewrite this as
+> if (server)
+>     memcpy(tmp + strlen("http://"), server, strlen(server) + 1);
+> else
+>      if (!IS_ENABLED(CONFIG_NET_LWIP)
+>          ip_to_string(net_server_ip, tmp + strlen("http://"));
+>
+> I agree, but then there is an empty else { } , not sure if that would
+generate a warning.
 
-Heinrich
-
->>   	}
->>
->>
->> --
->> 2.47.0
->>
->>
-
+> +       uridp_len =3D sizeof(struct efi_device_path) + strlen(tmp) + 1;
+> > +       uridp =3D efi_alloc(uridp_len + sizeof(END));
+> > +       if (!uridp) {
+> > +               log_err("Out of memory\n");
+> > +               return NULL;
+> > +       }
+> > +       uridp->dp.type =3D DEVICE_PATH_TYPE_MESSAGING_DEVICE;
+> > +       uridp->dp.sub_type =3D DEVICE_PATH_SUB_TYPE_MSG_URI;
+> > +       uridp->dp.length =3D uridp_len;
+> > +       debug("device path: setting uri device path to %s\n", tmp);
+> > +       memcpy(uridp->uri, tmp, strlen(tmp) + 1);
+> > +
+> > +       pos =3D (char *)uridp + uridp_len;
+> > +       memcpy(pos, &END, sizeof(END));
+> > +
+> > +       dp2 =3D efi_dp_concat(dp1, (const struct efi_device_path *)urid=
+p,
+> 0);
+> > +
+> > +       efi_free_pool(uridp);
+> > +       efi_free_pool(dp1);
+> > +
+> > +       return dp2;
+> > +}
+> > +
+> >  /* Construct a device-path for memory-mapped image */
+> >  struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
+> >                                         uint64_t start_address,
+> > --
+> > 2.43.0
+> >
+>
+> [0]
+> https://lore.kernel.org/u-boot/20241110083017.367565-1-ilias.apalodimas@l=
+inaro.org/
+>
+> Thanks
+> /Ilias
+>
