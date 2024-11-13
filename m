@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2765BD462A7
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 14:14:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2A52D462AA
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 14:24:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B52BD89001;
-	Wed, 13 Nov 2024 15:14:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6F7F588C0F;
+	Wed, 13 Nov 2024 15:24:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YA6f5NPC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YVLRLK7Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13AAD891F1; Wed, 13 Nov 2024 15:14:22 +0100 (CET)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 826D68862E; Wed, 13 Nov 2024 15:24:45 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFF2E89023
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 15:14:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B37B894D1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 15:24:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6d18dff41cdso41656206d6.0
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:14:19 -0800 (PST)
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7b1601e853eso447363085a.2
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:24:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731507259; x=1732112059; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731507881; x=1732112681; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=W7xg/St2RsQ48M03wr4KKSEH6cOWTZciPUvuhGG/HdY=;
- b=YA6f5NPCFRlfSz76RQ1DqQcYG4Y2x2CWdB9gXMCIu52rde3JlEWjTZiQ70CgLHLlsI
- xEAA5gIefCKxPR9pypWoZO4r2Xi7ovtIsNF5wa606Fm6zoDnRA1e+X+89layQzpaQHXY
- m8YCD1/KZMaA9xqu3aihIlRz97aCczFpnwzVM=
+ bh=/4O1Vu4CZjltl6UdIRxfcN1jj2NumeDzyraMh689xSM=;
+ b=YVLRLK7YDTiwyI1qcgYqPjDNXNn8OBBEWpd2oPZaWV2OP9VpSbCIegKVZWoMV/D2lq
+ AKAiuZyfcFWQqYksFT1RfbH7kx689FklpAdbR3HRXPtNh10mjubVXNxPeLaGN1uu93Fm
+ Ee53wOv4O/L/9pa1jnbcq5bc6uxOqSaZdZ/Oc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731507259; x=1732112059;
+ d=1e100.net; s=20230601; t=1731507881; x=1732112681;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=W7xg/St2RsQ48M03wr4KKSEH6cOWTZciPUvuhGG/HdY=;
- b=qdumLv3JVCzQPt7v6KO5AbJjxB7payM7+s9pO+ljDRqKbO9i/RMB0mRUYsXxEKk9GJ
- 9GJ7b6+2Ei29lH2jRWvMXfCklVKvtdgOQDASmo5N5KJLBq87BnJ7jbJk8cHikNVI8L2F
- Jv9yUXZR3Xhf7fM5W7qs1J3g8k4NoOC95FCThH4CMxsNEIfd4ZdMWCGvGYGXoSKI5We0
- sO0oVZbvaPwNUF5X2sy09DtHk5LKFLBk5bVQsWmyqsigV/U7It5CEz3ocAqXxkDZT4Lk
- 6fyO5W0z0Ci4YckdrEZzSVnkthRX7aFCBqNI1JEZ0hL1iqzbqPllIGDCZNBG5KX89k6r
- LRmA==
+ bh=/4O1Vu4CZjltl6UdIRxfcN1jj2NumeDzyraMh689xSM=;
+ b=DZzC3auXMmD8MLe89d75zqRN67OPZj8QgxqyBoJSgUlTCjNyAIR0GdCGyEDzjEB/WG
+ VAnDxdHJYQt7y3ZB0m0klQwbQV0z+ybT92UudsxVZVd6EB5DNJ672e/PwSVVssMWYr0A
+ IZUzdAzAyDsHPEwiKeyjtHKY6eywjwXKCBd8gae+UdjyVT/R6T2YJ7KT2NDeH60usX5/
+ /ANtrjrrXKpSY5jp3/4ShBdmWo6+RVmqRzP75qJdUBYy5Mo9mDloJjBysI/2pc92Kxzm
+ LEW8sHqS7gPcO7nLWe4WL4L59DaW8XhtLQeZJJ2nDpXDIS814ElW5++eh/I5HmYyJPnu
+ l6sw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJn8dkiF/E/9s4cEzSc9SnWAAwxE1xE/yS51+QXj6zwGK2Dpx6dqOzdCSUX5tKyMsMAVeUTxU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzaXqri3khcfF1Ui6lETd51wQ3gC25ToAaF1dZ2LVukKGW5DXE+
- hi3nKNqFyDtQplV4nkeU/6pTe+cECL4i98GHCLPDkylt4rMMVF+Dx6tn4Ti9Oy7B+8Io83Gqda0
- SSJ4=
-X-Google-Smtp-Source: AGHT+IFKNu8RFpUKb82zmFeg078VdB750jdzdO9JqfTChqkxZwxG+7WDOw2JaruFaSuWNkHf270sYQ==
-X-Received: by 2002:a05:6214:419c:b0:6cb:c85c:5654 with SMTP id
- 6a1803df08f44-6d39e166f57mr244471876d6.4.1731507258769; 
- Wed, 13 Nov 2024 06:14:18 -0800 (PST)
+ AJvYcCU20K+2p8U/zNWXc41ZnF+9J/oD6jL8gaVXcVHOo/P7oz07Nk65SX3hI/d7lOOS2XJqiX9GRDw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx4XyxHDAhsCONoTEHNQMfnjYXdezH06imORjt4DEn+Ma3yOFuB
+ EAwAtFLPU4rkom5Wzf3X/Hn6XXSTnlUHCqo6nJF7IwidTXo8qFwb6IAxJvfNqEQ=
+X-Google-Smtp-Source: AGHT+IG767smkf75gObQjQGRwyzINtVUKjWjYnsKSw0b7rM7uQJT3ZeVhlGfPthVlgOFLOr7T9Jk1A==
+X-Received: by 2002:a05:620a:25cc:b0:7ae:5c50:37ab with SMTP id
+ af79cd13be357-7b331f210b3mr3099850185a.49.1731507881207; 
+ Wed, 13 Nov 2024 06:24:41 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d3961df062sm84370036d6.11.2024.11.13.06.14.17
+ af79cd13be357-7b32ac2e180sm693989685a.23.2024.11.13.06.24.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 06:14:18 -0800 (PST)
-Date: Wed, 13 Nov 2024 08:14:15 -0600
+ Wed, 13 Nov 2024 06:24:40 -0800 (PST)
+Date: Wed, 13 Nov 2024 08:24:37 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Dominique Martinet <asmadeus@codewreck.org>
-Cc: Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Qu Wenruo <wqu@suse.com>,
- Dominique Martinet <dominique.martinet@atmark-techno.com>,
- linux-btrfs@vger.kernel.org, u-boot@lists.denx.de
-Subject: Re: [u-boot PATCH] fs: btrfs: hide 'Cannot lookup file' errors on
- 'load'
-Message-ID: <20241113141415.GL3600562@bill-the-cat>
-References: <ZzRAEgQYS46yM7Ct@codewreck.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] mmc: don't print 'MMC:' if there are no MMC devices
+Message-ID: <20241113142437.GM3600562@bill-the-cat>
+References: <20241113053023.1870736-1-caleb.connolly@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lyup+x3+f3wwzdiC"
+ protocol="application/pgp-signature"; boundary="7aWVmqvkfCiWXO7m"
 Content-Disposition: inline
-In-Reply-To: <ZzRAEgQYS46yM7Ct@codewreck.org>
+In-Reply-To: <20241113053023.1870736-1-caleb.connolly@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,55 +102,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---lyup+x3+f3wwzdiC
+--7aWVmqvkfCiWXO7m
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 13, 2024 at 02:58:42PM +0900, Dominique Martinet wrote:
-> Dominique Martinet wrote on Wed, Nov 06, 2024 at 09:56:42AM +0900:
-> > Running commands such as 'load mmc 2:1 $addr $path' when path does not
-> > exists historically do not print any error on filesystems such as ext4
-> > or fat.
-> > Changing the root filesystem to btrfs would make existing boot script
-> > print 'Cannot lookup file xxx' errors, confusing customers wondering if
-> > there is a problem when the mmc load command was used in a if (for
-> > example to load boot.scr conditionally)
->=20
-> Ugh, sorry, I was a bit quick on checking with an updated u-boot on
-> this... our tree is *cough* slightly *cough* old and that was the case
-> at the time, but since somewhere in 2020 there is a warning in fs/fs.c
-> in case load fails.
->=20
-> That doesn't change the fact that this patch is useful to avoid the
-> message being printed twice, but I'll need to update my scripts anyway
-> to use `size` first instead (as a first approximation of `test -e`)
->=20
-> Please let me know if you want me to resend this with an updated commit
-> message; otherwise I'll let this sleep.
+On Wed, Nov 13, 2024 at 06:30:08AM +0100, Caleb Connolly wrote:
 
-Yes, please reword the commit message based on current overall behavior,
-thanks!
+> It may be the case that MMC support is enabled even though the board
+> we're booting on doesn't have any MMC devices. Move the print over to
+> the print_mmc_devices() function where we can only print it if we
+> actually have MMC devices.
+>=20
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+
+I'm not sure I like this. What we do / don't find on startup is part of
+the not-exactly-API. It's true that if we don't print an MMC line at
+all, and we should have MMC, the user (and any scripts that parse
+console output) but now we're also increasing the code size a little bit
+too. I can be convinced this is a good idea, but I'm not there yet.
 
 --=20
 Tom
 
---lyup+x3+f3wwzdiC
+--7aWVmqvkfCiWXO7m
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc0tDcACgkQFHw5/5Y0
-tyzquwv+P0eoEjhBQ+UOy6mWWmsEz0kw+ucwXk4Bjs+hF47kGH0wNw87Uxjd1s3a
-cI6lzx5c+8SZYg7VR6+eSZ5GibhTiFVuHRz6KKM7O/WKDYJb0WuFa/hXTzz7H8Sl
-QSni/1e+6u9XQXcAMD0lulll+gMCdQlhQ+ukt6pWjKVMDA9HcL+0GE+MpgtfV1f9
-g2ouY3r4XbsqRPbXbWc1GAutFk1gNzOeLiiIjNcR16t7zdrblwDQLqQ2q3pWKXhR
-ZiET1+Lk404tke0K6yO3VP527TbFocE3jBQM2OeIBEUoSgWYhJmvV8PiFYom6Itr
-hvcXPuYLSS03rilcIxgv7lkgGHmOH9XxW1VUea1Vh/JD5xvgfjmpuMIPAjqJY78/
-tiI/HQ34RxyO+9cZE12SpuumwEvkb6lI7hAS65PJsJhfwro1wDCd0BIkr6C/TMD4
-Az4xFddsVL0l5Hem7W45GzP+irfHF8/KzyWXrkX/RhxApI+lIID8+SN/Wsi219qh
-YMb5Wmkm
-=q3Gb
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc0tqEACgkQFHw5/5Y0
+tyxvVgv9FVWadsmMGilIAm+KR5GGt6L9+OCzXAsjyCHsajNGC4qfyJx7Ry637IhM
+bYQybEa26bcCfOrrWYQpPPvnRA+f9XxtyN9PDLZtNhC/doPTwoCn6lVQrmbrFU0B
+LqsgTJEpR1NtVqRlgaAD+UxSIXhfaQ2j2hm/xV3UAcWQh0zZVxQGUHH+g1oyOJRS
+Mw0W0h59zuvuq2gM5FyQivz3u6173/n7+vle9EZ23OrpE1WCCE8eyMHXbcP6Y22O
+B+U5IoB1lvpTZX90pL57Wjn8fGN043BPwgOlFRbemI4T0Bz8xE6gycQz2aVtgZXe
+HDZgXh5/KpPgC2tc5SHBYIbPXn3rQ/GaWt/3IIakOcQ0g5Jsl8pyQ7MoeR11LTo0
+SNXSO0TUrI/f+l9TCIHtN3ONesKJ9dQzh1v5EjihopczBFWfPfMJeGmuG2l86Cvh
+HOFu6ulBAjGjaEcpBqeeNrqYJ0pwhuYwBlL+w6cnCVG6mHfqonGdN0CncXbxsinq
+IoMrow5U
+=M4LO
 -----END PGP SIGNATURE-----
 
---lyup+x3+f3wwzdiC--
+--7aWVmqvkfCiWXO7m--
