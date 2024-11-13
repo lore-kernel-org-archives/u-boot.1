@@ -4,86 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 943ABD41C02
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 05:30:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD3CD41C02
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 05:31:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA440890DA;
-	Wed, 13 Nov 2024 06:30:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A011E894BC;
+	Wed, 13 Nov 2024 06:31:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="byii2hdu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Tu27jVx8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BF34890FD; Wed, 13 Nov 2024 06:30:30 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id B6C68894F3; Wed, 13 Nov 2024 06:31:12 +0100 (CET)
+Received: from mail-vk1-xa34.google.com (mail-vk1-xa34.google.com
+ [IPv6:2607:f8b0:4864:20::a34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ABC5890D0
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:30:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0426D890D0
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 06:31:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5cedea84d77so8418326a12.1
- for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 21:30:28 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-50de14e7d8cso2575348e0c.1
+ for <u-boot@lists.denx.de>; Tue, 12 Nov 2024 21:31:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731475828; x=1732080628; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DKrJbpWRaDd1GYUijQZs/ag6OlEvE2Rs3FfpeY/pjOY=;
- b=byii2hducz2T1LkyF7ERaUwWs24y4/DHrQkye79eeIU0tS3svbGEVnvZMT6i6ZHUxt
- 7kUXALQBIedljYD5NZReZrja9tJ0v8GrbwnQWaKf3T/wwWdWV+Umab0EojDDAIVEbkkg
- l0riztPzJa3dBibAOCV9GPCTMXj61Qxj25UkEG5XM51+zQkzR8TjYZQluEujnJsi09ht
- 6GqWSo4TWOMSNazX97Y+qxeEXetHau1lTMooxvh6/WFzwdbtJA3VT+BsoseApDnV3wT7
- NqUxz15ll3NnKzvHJIs1tqWRZds0v0iiJvXxfSlgtQSU34MvA40TErD2jf4S2pUe43pR
- Jrgg==
+ d=linaro.org; s=google; t=1731475869; x=1732080669; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Lx0rE9LYSCQpMaOflU9UbPMG9RKT4wqzOXgFwM6S4Ns=;
+ b=Tu27jVx88R0dogWd/SUmpNpv+TrrHNTYHJ1wCaCmrZtJYLiMi+MsWmomJv9xB/CkLR
+ rjNDKdXIKUqFoYcDSLuQPJMPyHe/DCKCe1RYHqGYioREFDmi+6Ib18WfppB3cMD01iWD
+ 7Z8S5J2Yfq3/Uv+Ey+bVbr5JGC4qrBzxXNCz8EvppKiUiIsnOWNyx4qApfxWZ4NPoorR
+ cxvtFzvBfI0eVbbE7japovotSYJTG8Dk1G6CZG6ShYFxwJ2NDAzu/bIt2sK3kbqFK4bZ
+ n/VlIOyZseGAAc+4m33yBRp/RpkMUzV4AkgoL/OmTJN1wKIpAOSrMs/HaGMcaMTieIQY
+ 6wtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731475828; x=1732080628;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1731475869; x=1732080669;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DKrJbpWRaDd1GYUijQZs/ag6OlEvE2Rs3FfpeY/pjOY=;
- b=TzK+kTrGM3SwdDTzwjzHuV+IUaaMBRCQq0eUDWkvuDKklHfyiL6FhQ4rCsFTyNsVk3
- gaRRy2ScGAjn2fnWbgkTP12+y/grO/Dn0u8YWEnARf9cb89ndkXGb+H9caC8Y0VZ2HIt
- vH8/81zo4CYUJb7nM5O6gybhiLuetOSqaSNCleWfHa2M1ApDVEUpl1DmT12CAx6TFA9I
- Qp3ObMLa2zb3ZOBH87J5Q0t6kxHfrK2MXou6sEM6KYS6b4N5zlSxVDbJEHyAGzhXz2oR
- ZnGItjfhSZTspYTgM5UnE8ZknqHPBQcoy/bHQGyql3W0b6Ijj4pAld/oi+kEbIS+WBUj
- JBaw==
-X-Gm-Message-State: AOJu0YyJxFtXoGAOYtNg2QybBNiM2reXvMOnyXAh7kenSkXygocfDfGh
- iq8QDzRo7aU8HOVqoHh+pDLo3biyOWJgFd5wCpasRL4V/hbIae4TXTim0h7eMlU=
-X-Google-Smtp-Source: AGHT+IECTyaqT1PzHN9SUCivSn7X1YeyOUvZlKtdcaLRtPYHAk/PWUZugDtWQt2j4PeENVN5kuL39w==
-X-Received: by 2002:aa7:dcd7:0:b0:5cf:6450:319f with SMTP id
- 4fb4d7f45d1cf-5cf6450322emr757815a12.8.1731475827852; 
- Tue, 12 Nov 2024 21:30:27 -0800 (PST)
-Received: from lion.caleb.rex.connolly.tech
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cf537fc229sm1334487a12.44.2024.11.12.21.30.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Nov 2024 21:30:26 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Dragan Simic <dsimic@manjaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] mmc: don't print 'MMC:' if there are no MMC devices
-Date: Wed, 13 Nov 2024 06:30:08 +0100
-Message-ID: <20241113053023.1870736-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.47.0
+ bh=Lx0rE9LYSCQpMaOflU9UbPMG9RKT4wqzOXgFwM6S4Ns=;
+ b=JDKMtTx3rIstxKeuF7G1HsmGTIHVq1VfZO9ED0allMKsuyNefIImqubAO1v9S6Kg/L
+ 0irjiHj+6CNSPHbd5+pgxBv8tLJ/9v7OEUd+xGzChEg/NOJTB0t1zFpPPxFrr+x7kt8c
+ 1a+pAEp6OfZ027fTM3PD8LGmbp/QcHNvUCdsVFDrbAAGbrXm0eEha4hpcTlX51rcqICe
+ nvl12tRo8HGHTaZOkrh12mHSvRGps/F5q+v0KoK7MpXQoN89CqBBs/g7tEscvHbbSPBK
+ YMP8CY+aVLkG9LQV+J92e+rwf2ePxaB96UdJs7vyz1OR05yc6k6fonboJRtgCNkuo/+2
+ TeCg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU4EW9J8IEtDBD1t4PaO7TdAplMcMOhhWNEZJddyNVrC+AoTI4zE8Ej+L7CLDfVlLlB7Pavet0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzDwvkgY9asJe9wQLxVRcjvNOR2wo/JMHcDCqw1hFcg73BQA0TP
+ Bx9iW1OsBIbXIlbkrT2XjnSq0K73CQ2qLIAKq8A3txtIV3/boGjZxWYKN/SMjMgHz0mUcpmujM4
+ FgFt/fw4Gpar9k8Zr1y+81wv0ASVTCKhZi7kpQw==
+X-Google-Smtp-Source: AGHT+IH33+UuHCtLaJf/5JJQ1GWzVTa1cYYCnM6WryW/CKZDWRUHVlQglhgtItHWXjEsdMtGFJETsRtg2T19I93JmAk=
+X-Received: by 2002:a05:6102:2ac5:b0:4ad:4ef3:fb0a with SMTP id
+ ada2fe7eead31-4ad4ef3fbd8mr18249137.23.1731475868739; Tue, 12 Nov 2024
+ 21:31:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241113043546.1821062-1-caleb.connolly@linaro.org>
+In-Reply-To: <20241113043546.1821062-1-caleb.connolly@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Wed, 13 Nov 2024 11:00:57 +0530
+Message-ID: <CAFA6WYOuRxgN-F3j0F7vSa3gUAc+0pRKpUFuKS6VYg-U4tX4vA@mail.gmail.com>
+Subject: Re: [PATCH] treewide: remove Qualcomm dt-binding headers that are
+ available upstream
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,76 +90,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It may be the case that MMC support is enabled even though the board
-we're booting on doesn't have any MMC devices. Move the print over to
-the print_mmc_devices() function where we can only print it if we
-actually have MMC devices.
+On Wed, 13 Nov 2024 at 10:06, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> Some dt-binding headers mask the upstream ones which can lead to build
+> failures, or worse: super weird bugs, if they get out of sync.
+>
+> Remove these headers so our devicetree and binding headers will both be
+> in sync with upstream.
+>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+> Build tested with qcom_defconfig, boot tested on SM8250/RB5
+> ---
+>  include/dt-bindings/clock/qcom,camcc-sdm845.h | 116 -----
+>  .../dt-bindings/clock/qcom,dispcc-sdm845.h    |  56 ---
+>  include/dt-bindings/clock/qcom,gcc-msm8916.h  | 179 --------
+>  include/dt-bindings/clock/qcom,gcc-msm8996.h  | 361 ---------------
+>  include/dt-bindings/clock/qcom,gcc-qcs404.h   | 180 --------
+>  include/dt-bindings/clock/qcom,gcc-sdm845.h   | 246 -----------
+>  include/dt-bindings/clock/qcom,gpucc-sdm845.h |  24 -
+>  include/dt-bindings/clock/qcom,lpass-sdm845.h |  15 -
+>  include/dt-bindings/clock/qcom,mmcc-msm8996.h | 295 -------------
+>  include/dt-bindings/clock/qcom,rpmcc.h        | 174 --------
+>  include/dt-bindings/clock/qcom,rpmh.h         |  36 --
+>  .../dt-bindings/clock/qcom,turingcc-qcs404.h  |  15 -
+>  .../dt-bindings/clock/qcom,videocc-sdm845.h   |  35 --
+>  include/dt-bindings/dma/qcom-gpi.h            |  11 -
+>  include/dt-bindings/firmware/qcom,scm.h       |  39 --
+>  include/dt-bindings/iio/qcom,spmi-vadc.h      | 300 -------------
+>  .../dt-bindings/interconnect/qcom,msm8916.h   | 100 -----
+>  .../interconnect/qcom,msm8996-cbf.h           |  12 -
+>  .../dt-bindings/interconnect/qcom,msm8996.h   | 163 -------
+>  .../dt-bindings/interconnect/qcom,osm-l3.h    |  15 -
+>  .../dt-bindings/interconnect/qcom,sdm845.h    | 150 -------
+>  include/dt-bindings/phy/phy-qcom-qmp.h        |  20 -
+>  include/dt-bindings/phy/phy-qcom-qusb2.h      |  37 --
+>  include/dt-bindings/pinctrl/qcom,pmic-gpio.h  | 164 -------
+>  include/dt-bindings/pinctrl/qcom,pmic-mpp.h   | 106 -----
+>  include/dt-bindings/power/qcom-rpmpd.h        | 412 ------------------
+>  .../regulator/qcom,rpmh-regulator.h           |  36 --
+>  include/dt-bindings/reset/qcom,gcc-msm8916.h  | 100 -----
+>  include/dt-bindings/reset/qcom,sdm845-aoss.h  |  17 -
+>  include/dt-bindings/reset/qcom,sdm845-pdc.h   |  22 -
+>  include/dt-bindings/soc/qcom,apr.h            |  28 --
+>  include/dt-bindings/soc/qcom,rpmh-rsc.h       |  14 -
+>  include/dt-bindings/sound/qcom,lpass.h        |  46 --
+>  include/dt-bindings/sound/qcom,q6afe.h        |   9 -
+>  include/dt-bindings/sound/qcom,q6asm.h        |  26 --
+>  .../sound/qcom,q6dsp-lpass-ports.h            | 234 ----------
+>  include/dt-bindings/sound/qcom,wcd9335.h      |  15 -
+>  37 files changed, 3808 deletions(-)
+>  delete mode 100644 include/dt-bindings/clock/qcom,camcc-sdm845.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,dispcc-sdm845.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,gcc-msm8916.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,gcc-msm8996.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,gcc-qcs404.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,gcc-sdm845.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,gpucc-sdm845.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,lpass-sdm845.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,mmcc-msm8996.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,rpmcc.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,rpmh.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,turingcc-qcs404.h
+>  delete mode 100644 include/dt-bindings/clock/qcom,videocc-sdm845.h
+>  delete mode 100644 include/dt-bindings/dma/qcom-gpi.h
+>  delete mode 100644 include/dt-bindings/firmware/qcom,scm.h
+>  delete mode 100644 include/dt-bindings/iio/qcom,spmi-vadc.h
+>  delete mode 100644 include/dt-bindings/interconnect/qcom,msm8916.h
+>  delete mode 100644 include/dt-bindings/interconnect/qcom,msm8996-cbf.h
+>  delete mode 100644 include/dt-bindings/interconnect/qcom,msm8996.h
+>  delete mode 100644 include/dt-bindings/interconnect/qcom,osm-l3.h
+>  delete mode 100644 include/dt-bindings/interconnect/qcom,sdm845.h
+>  delete mode 100644 include/dt-bindings/phy/phy-qcom-qmp.h
+>  delete mode 100644 include/dt-bindings/phy/phy-qcom-qusb2.h
+>  delete mode 100644 include/dt-bindings/pinctrl/qcom,pmic-gpio.h
+>  delete mode 100644 include/dt-bindings/pinctrl/qcom,pmic-mpp.h
+>  delete mode 100644 include/dt-bindings/power/qcom-rpmpd.h
+>  delete mode 100644 include/dt-bindings/regulator/qcom,rpmh-regulator.h
+>  delete mode 100644 include/dt-bindings/reset/qcom,gcc-msm8916.h
+>  delete mode 100644 include/dt-bindings/reset/qcom,sdm845-aoss.h
+>  delete mode 100644 include/dt-bindings/reset/qcom,sdm845-pdc.h
+>  delete mode 100644 include/dt-bindings/soc/qcom,apr.h
+>  delete mode 100644 include/dt-bindings/soc/qcom,rpmh-rsc.h
+>  delete mode 100644 include/dt-bindings/sound/qcom,lpass.h
+>  delete mode 100644 include/dt-bindings/sound/qcom,q6afe.h
+>  delete mode 100644 include/dt-bindings/sound/qcom,q6asm.h
+>  delete mode 100644 include/dt-bindings/sound/qcom,q6dsp-lpass-ports.h
+>  delete mode 100644 include/dt-bindings/sound/qcom,wcd9335.h
+>
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- common/board_r.c         | 1 -
- drivers/mmc/mmc-uclass.c | 4 +++-
- drivers/mmc/mmc_legacy.c | 5 +++++
- 3 files changed, 8 insertions(+), 2 deletions(-)
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
-diff --git a/common/board_r.c b/common/board_r.c
-index 62228a723e12..232a8fd19f03 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -384,9 +384,8 @@ static int initr_onenand(void)
- 
- #ifdef CONFIG_MMC
- static int initr_mmc(void)
- {
--	puts("MMC:   ");
- 	mmc_initialize(gd->bd);
- 	return 0;
- }
- #endif
-diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-index c8db4f811c2f..56fe29249c36 100644
---- a/drivers/mmc/mmc-uclass.c
-+++ b/drivers/mmc/mmc-uclass.c
-@@ -384,9 +384,11 @@ void print_mmc_devices(char separator)
- 	     dev;
- 	     uclass_next_device(&dev), first = false) {
- 		struct mmc *m = mmc_get_mmc_dev(dev);
- 
--		if (!first) {
-+		if (first) {
-+			printf("MMC:  ");
-+		} else {
- 			printf("%c", separator);
- 			if (separator != '\n')
- 				puts(" ");
- 		}
-diff --git a/drivers/mmc/mmc_legacy.c b/drivers/mmc/mmc_legacy.c
-index 8f8ba34be717..f4a049a4a4d4 100644
---- a/drivers/mmc/mmc_legacy.c
-+++ b/drivers/mmc/mmc_legacy.c
-@@ -98,8 +98,9 @@ void print_mmc_devices(char separator)
- {
- 	struct mmc *m;
- 	struct list_head *entry;
- 	char *mmc_type;
-+	bool first = true;
- 
- 	list_for_each(entry, &mmc_devices) {
- 		m = list_entry(entry, struct mmc, link);
- 
-@@ -107,8 +108,12 @@ void print_mmc_devices(char separator)
- 			mmc_type = IS_SD(m) ? "SD" : "eMMC";
- 		else
- 			mmc_type = NULL;
- 
-+		if (first) {
-+			printf("MMC:  ");
-+			first = false;
-+		}
- 		printf("%s: %d", m->cfg->name, m->block_dev.devnum);
- 		if (mmc_type)
- 			printf(" (%s)", mmc_type);
- 
--- 
-2.47.0
-
+-Sumit
