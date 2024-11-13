@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 228B2D637D1
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 23:51:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05C02D637D2
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 23:51:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54B13894E1;
-	Thu, 14 Nov 2024 00:51:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ABF8D8955E;
+	Thu, 14 Nov 2024 00:51:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bo1m/ueg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="orUoNIWv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F2E98904A; Thu, 14 Nov 2024 00:50:59 +0100 (CET)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id 68E178904A; Thu, 14 Nov 2024 00:51:01 +0100 (CET)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 318958904A
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 00:50:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CFCB89390
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 00:50:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-5ee645cf763so50419eaf.2
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 15:50:57 -0800 (PST)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-5ee354637b4so4270074eaf.3
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 15:50:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731541856; x=1732146656; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731541858; x=1732146658; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=omYI/LSMYcjltH3fCISuI1pptN2+5ftRdL7GuBx6hCs=;
- b=bo1m/uegYCWa9ScQBN8z6Y8ZMYEmAOnDliL0aaZYBNLpI4Dk0p10tj2G2/4lwgKiU4
- 6W1pWUN6ixWF/RyG0z8Gxbw1X56y0LKqKx8V2OU8W58wd9Og0dEQbMXIxFRmwBB/KrRY
- 097BwB5EP6TpfyX1ZeTXjhjNPUij4xSfOxj7Y=
+ bh=bmNpw+/B/frmuvV7xvo8lgz598RusbmIJ9gsXYmcLig=;
+ b=orUoNIWvqWCKMXwUVOxqWlDTRMtj4pbyEQvwHUXQeDKZdRACKybPT+PTtKBSX9qK01
+ 1KF9O0Z2qaYocfvLsMH4tSAmYFc4jwyCjvCSU5ck0Pq0mNYfYsLJIuK6RuZQ97sVyUyS
+ FAl/kWHTfSl+DXe2ZxODTP5BzL+ZE8hRjEvos=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731541856; x=1732146656;
+ d=1e100.net; s=20230601; t=1731541858; x=1732146658;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=omYI/LSMYcjltH3fCISuI1pptN2+5ftRdL7GuBx6hCs=;
- b=jdrLaUZmWx8jnAfmtr23RSwZTvxdwW2EzLqeYEF6MCYuOG3dJMGD/ci9E3fTxtqLd8
- TVTDrYnPfYc62VeAC6OzRhfJATGY1TVJkWn7ehA0iA+c6TwAkSGUDHi0WWdKO8L0Ykvf
- eAT7XdS5Pg+weiFhHiN/whiHxQMtTm2BoUt5ags9Kqh2MdMxsc4HMffquGfCTrKYA+6F
- 7mvOqwzD6txghxI1SbAc+EKC/+L/O6mkH2qKNdFBkmtQieUp1B3nbnLs61gQ6uXCxT36
- urQNE7vN7B8IoJwlXOeVdOInUMlJIvMnGF0Du7Den0JWx9KU7Wxy23gI1NBzJ1DLx3yk
- BHCA==
-X-Gm-Message-State: AOJu0YyZKUobHrHlaKJ0wy2FVAVP0/CX7Fn/mDPRyEPO4WmrXP1cTPAr
- y5Ml923LAy94mtlVq3nEsMbaQ5AYmzl0mRuNCSXT++AajLwH6UD27uxLJWlom/0=
-X-Google-Smtp-Source: AGHT+IFzal4BanFxWXUcpFX6BWpXKFnT6pBc8hPzP2V5umFIVYINUJ2CxkxPLmE1Ql//9Nt8lf9wxg==
-X-Received: by 2002:a05:6820:1805:b0:5eb:c72e:e29c with SMTP id
- 006d021491bc7-5ee86a500a2mr6592399eaf.8.1731541855919; 
- Wed, 13 Nov 2024 15:50:55 -0800 (PST)
+ bh=bmNpw+/B/frmuvV7xvo8lgz598RusbmIJ9gsXYmcLig=;
+ b=iiGykfR0hsjkfuR4aq0T8gXaA8dMeE3f0H6HFGwj6jrgbEUV4KeOqqFj+0NFJfRPu8
+ 4ZRLTI+BqiM5nQgPoB2eez/QZmSGo0pBEsmszpa4735TETRYDppD3uynOZiEACv3Kc7s
+ zbUMPrQHFr1ywv/nwI8DteUq77HafAqdajZ76hC7kJ60xHO7cxLhBkqR/TcEe8Q0Ntnb
+ TT30MccbuWIMZ6QrRR8eCo4XASjCIjdBI/XRpOEhhyFEhgtUrMcqCUfXEx2R8/n55dfS
+ /QbmP+5dbg0DEa1a2MQyvMgyzFWsVZVatrp6EJSmd8j7pjeFUNOgPbmcqFALizhecUI5
+ fKLA==
+X-Gm-Message-State: AOJu0YwFbNwhhQmwmfLuu54TpVFcE6o5UYO4Rw0gIrLxAojOBV8cCAmw
+ Kawp4nQe5HRhNKt1nTpv3VCAwpED47hk9FS4TZYU4g7i2U4MmFUEkRhORaO1V1o=
+X-Google-Smtp-Source: AGHT+IFkS7vd0gZwnD9Lz8tr8GK7jUp46zksVA/+UWSsBFAJU/DsM8rvSZYIHwmZl3HcfSHzGHifrA==
+X-Received: by 2002:a05:6870:4687:b0:277:e641:5659 with SMTP id
+ 586e51a60fabf-29560359b9amr18368501fac.35.1731541858055; 
+ Wed, 13 Nov 2024 15:50:58 -0800 (PST)
 Received: from [127.0.1.1] ([145.14.135.248]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5ee4950f85asm3361505eaf.11.2024.11.13.15.50.53
+ 006d021491bc7-5ee4950f85asm3361505eaf.11.2024.11.13.15.50.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 15:50:55 -0800 (PST)
+ Wed, 13 Nov 2024 15:50:57 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Love Kumar <love.kumar@amd.com>, 
- Padmarao Begari <padmarao.begari@amd.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-In-Reply-To: <20241112141326.643128-1-sjg@chromium.org>
-References: <20241112141326.643128-1-sjg@chromium.org>
-Subject: Re: [PATCH v9 00/12] labgrid: Provide an integration with Labgrid
-Message-Id: <173154185387.2076886.4072928083228297159.b4-ty@konsulko.com>
-Date: Wed, 13 Nov 2024 17:50:53 -0600
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Robert Marko <robert.marko@sartura.hr>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+In-Reply-To: <20241102193615.431681-1-sjg@chromium.org>
+References: <20241102193615.431681-1-sjg@chromium.org>
+Subject: Re: [PATCH v3] sandbox: Add a build without CMDLINE
+Message-Id: <173154185604.2076886.3575157670365516444.b4-ty@konsulko.com>
+Date: Wed, 13 Nov 2024 17:50:56 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,16 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 Nov 2024 07:13:14 -0700, Simon Glass wrote:
+On Sat, 02 Nov 2024 13:36:11 -0600, Simon Glass wrote:
 
-> Labgrid provides access to a hardware lab in an automated way. It is
-> possible to boot U-Boot on boards in the lab without physically touching
-> them. It relies on relays, USB UARTs and SD muxes, among other things.
+> Sometimes this breaks, so add a build to keep it working. Since sandbox
+> enables a lot of options, it is a good board to use. The new config is
+> created simply by copying the existing sandbox and turning off CMDLINE
 > 
-> By way of background, about 4 years ago I wrong a thing called Labman[1]
-> which allowed my lab of about 30 devices to be operated remotely, using
-> tbot for the console and build integration. While it worked OK and I
-> used it for many bisects, I didn't take it any further.
+> Once we have tests for non-CMDLINE operation, this can be adjusted to
+> run those tests.
 > 
 > [...]
 
