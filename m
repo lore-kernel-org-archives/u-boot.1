@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E469D637A8
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 18:53:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F849D637A8
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 18:54:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE55988A1B;
-	Wed, 13 Nov 2024 19:53:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0AAF6891B0;
+	Wed, 13 Nov 2024 19:53:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XTh2UwhS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F9yozaDI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2CDA88A1B; Wed, 13 Nov 2024 19:53:50 +0100 (CET)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id B5ACD8934F; Wed, 13 Nov 2024 19:53:53 +0100 (CET)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 320FA88216
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 19:53:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8141C88216
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 19:53:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-3a3c00f2c75so25687255ab.2
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 10:53:48 -0800 (PST)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3a6bc0600f9so26041265ab.1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 10:53:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731524026; x=1732128826; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=E7OYVUulx4i/brhcw10kyYIt8TeQJpB8vdUJ7vkauhA=;
- b=XTh2UwhSNDj1ETRbh1wSsvhF+WRrAUn4aEPModrDwQS5Mje+1QnepPlkO2TkarsmSq
- rQfJ0h8nRddMGj20pLAhKQOqJSEn78KSrDNK8ajnZS8tilu15fC1EuPc9cGe+9hw4M4F
- Gn7V2unNzCdi4C8WBPAxPXCek/DR7f8Od6tnk=
+ d=chromium.org; s=google; t=1731524030; x=1732128830; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P8Eae7xuOnX0JnF3NK03OCCAtA+xmDmYTmUTih0+OyM=;
+ b=F9yozaDI0teNX7cLr4y8YND5ulaMUkmZ8pDR+5mXCNV32wJ4xyr/u6OedpGs3lxHY9
+ xdwx2rUmQ0IYUua5n7nMwNFvv8AE7mz94UVFCC+oYxSfkPWSmnf2Neb9c0VuQUPAKGZ7
+ poMEKVKP/tfv0Omx3rMdEK9hSUak7VkrDOFc8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731524026; x=1732128826;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=E7OYVUulx4i/brhcw10kyYIt8TeQJpB8vdUJ7vkauhA=;
- b=V5Nf3a9PGb9QbK29Vzc+LnfYGyKqq3dmmIlG1WRRtlljhOjwPnvv/r8FXZ03LTOner
- wVJBMeiyuHeWlpOzFVUBAqgTjQd5A5pAVAlSVYH4Et0I9lS5PEeSuOFS7BM6YC3y7gb2
- K/T6Zlapdd+BrpH48MTjU84BjM7JdhGRSgeiEjdZPi7m9kUo92BHiWcbaF8qnsxET3ta
- Ge09pCkbowBcN3AFum0ggXS5Qy82rTQq6CPCnmz1g3j29qiDwci3bR2Ex1ARhinyGUnB
- qo7HhK1skSKrfNUH6d1MAjAXco5bJAy1FWBKZ0ew91f8O9+/fXrG+mmU/YzHwEFUC0WX
- M49A==
-X-Gm-Message-State: AOJu0YxTTa1DNuVTB3mkDCE511WMiJPgjtBhMasF9arNTzqPhVmpVWoz
- OeCoOxaEZSAF8XsiJE/MCpDzv4jci4FyW5dQS8AyH2OCADpdtFF64PG1vKuEkYNl+FBbZiK0FAU
+ d=1e100.net; s=20230601; t=1731524030; x=1732128830;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=P8Eae7xuOnX0JnF3NK03OCCAtA+xmDmYTmUTih0+OyM=;
+ b=pMf9OpOpyPoRHH+469Pil0JoXOHymuOWk8FMU4vw5Lg0rZJmKcdJLzNhmbt1SLf+13
+ XvIQjLDuCR9GgTfVd3o9vWQRAf+LAjNUcJS6qZBuZa3MwBve0LUgdvCeHuNNq4Yx4yKT
+ SXn6MXh65pyP5SfEtgXWpjiAvC0pTf/vNAyN5oDb9YZWv8Jry55cmHD97nCVUIgMbPB4
+ 1tCVmI1E/jkhpj9s5ihPDnSIH+sGuBxpG4VtqfDXsltldvefBX0st8+Fve4Pjmk8VLwq
+ vFMNArdcoYfiNA4sKhX20xi37RwoqPv0YWSIMwNNVFRbTqM2LYbww3UcD2Mv5z1uTj1F
+ qCpw==
+X-Gm-Message-State: AOJu0Yx8vPK+3v/yuy5NKHqrPgkpc/K2JPzhT3RDoN1HP4FY6QJNrPRa
+ eZpnYKS3lx46iLPWm+S2KWW3JLwYb+eTSZov57Ru6VslzFjzHKsLTdVEy/IHpUL5PSyArxnfm+0
  =
-X-Google-Smtp-Source: AGHT+IF2YxBU41UPtxb4i/5ySii8Wi3Ot2DEIuDtmoT/SzBlgxulZ6OwzlTbqLhYRBpjo62n029uVg==
-X-Received: by 2002:a05:6e02:368a:b0:3a7:1de2:1dab with SMTP id
- e9e14a558f8ab-3a71de21e7dmr6225115ab.10.1731524026270; 
- Wed, 13 Nov 2024 10:53:46 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IE5JnFNBPWylec5kgvHg/wDsppmB+Bd0EDghGYxzAs/6Y5vlzUvo+UO6E/XCH+AKjQva0g75Q==
+X-Received: by 2002:a05:6e02:1fef:b0:3a7:1cd4:c981 with SMTP id
+ e9e14a558f8ab-3a71cd4ca45mr16182335ab.4.1731524029674; 
+ Wed, 13 Nov 2024 10:53:49 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a6f9890ec4sm30733675ab.75.2024.11.13.10.53.43
+ e9e14a558f8ab-3a6f9890ec4sm30733675ab.75.2024.11.13.10.53.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 10:53:44 -0800 (PST)
+ Wed, 13 Nov 2024 10:53:48 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v4 0/9] CI: Set up for an arm64 runner
-Date: Wed, 13 Nov 2024 11:53:31 -0700
-Message-Id: <20241113185340.1661198-1-sjg@chromium.org>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v4 1/9] sandbox: efi_loader: Correct use of addresses as
+ pointers
+Date: Wed, 13 Nov 2024 11:53:32 -0700
+Message-Id: <20241113185340.1661198-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241113185340.1661198-1-sjg@chromium.org>
+References: <20241113185340.1661198-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,70 +92,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-All gitlab runners are currently amd64 machines. This series attempts to
-create a docker image which can also support arm64 so that sandbox tests
-can be run on it.
+The cache-flush function is incorrect which causes a crash in the
+remoteproc tests with arm64.
 
-The TARGET_... environment variables for grub could perhaps be adjusted,
-using the new variables, but I have not done that for now.
+Fix both problems by using map_sysmem() to convert an address to a
+pointer and map_to_sysmem() to convert a pointer to an address.
 
-Currently this builds OK on amd64 but fails when built on arm64, in grub
-on arm64-efi:
+Also update the image-loader's cache-flushing logic.
 
-2022.6 gcc -DHAVE_CONFIG_H -I. -I../../..   -D_FILE_OFFSET_BITS=64
-   -MT argp-pvh.o -MD -MP -MF $depbase.Tpo -c -o argp-pvh.o argp-pvh.c &&\
-2022.6 mv -f $depbase.Tpo $depbase.Po
-2023.0 gcc: internal compiler error: Segmentation fault signal terminated program cc1
-2023.0 Please submit a full bug report,
-2023.0 with preprocessed source if appropriate.
-2023.0 See <file:///usr/share/doc/gcc-11/README.Bugs> for instructions.
-2023.0 make[4]: *** [Makefile:1714: argp-pvh.o] Error 4
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: 3286d223fd7 ("sandbox: implement invalidate_icache_all()")
+Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+---
 
-Perhaps this doesn't matter, though, at least for now.
-
-This passes gitlab:
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines
-
-but still fails on arm64:
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/23346
-
-Changes in v4:
-- Leave the 'sudo' in
-
-Changes in v3:
-- Move ARGs to the top
-- Revise documentation to explain a common error and building on arm64
-- Use grub-efi and linux-image-generic for both archs
-- Add patch to install toolchains on arm64 host
-- Drop patches which remove grub and tracing for arm64
+(no changes since v2)
 
 Changes in v2:
 - Drop message about EFI_LOADER
-- Use '\0' instead of 0
-- Update docs also
-- Add comments to the ARG variables
-- Swap order so that amd64 is the exception
 
-Simon Glass (9):
-  sandbox: efi_loader: Correct use of addresses as pointers
-  test: Adjust print_ut test to use unsigned char
-  docker: Support building for multiple architectures
-  docker: Adjust packages for arm64
-  docker: Drop coreboot for arm64
-  docker: Fix LegacyKeyValueFormat warning with PYTHONPATH
-  docker: Install toolchains on arm64 host
-  CI: Add platform variable
-  WIP: CI: Update for arm64
+ arch/sandbox/cpu/cache.c              |  8 +++++++-
+ drivers/remoteproc/rproc-elf-loader.c | 18 +++++++++++-------
+ lib/efi_loader/efi_image_loader.c     |  3 ++-
+ 3 files changed, 20 insertions(+), 9 deletions(-)
 
- .gitlab-ci.yml                        |  3 +-
- arch/sandbox/cpu/cache.c              |  8 ++-
- doc/build/docker.rst                  | 25 ++++++++--
- drivers/remoteproc/rproc-elf-loader.c | 18 ++++---
- lib/efi_loader/efi_image_loader.c     |  3 +-
- test/print_ut.c                       |  8 +--
- tools/docker/Dockerfile               | 72 +++++++++++++++++++--------
- 7 files changed, 98 insertions(+), 39 deletions(-)
-
+diff --git a/arch/sandbox/cpu/cache.c b/arch/sandbox/cpu/cache.c
+index c8a5e64214b..96b3da47e8e 100644
+--- a/arch/sandbox/cpu/cache.c
++++ b/arch/sandbox/cpu/cache.c
+@@ -4,12 +4,18 @@
+  */
+ 
+ #include <cpu_func.h>
++#include <mapmem.h>
+ #include <asm/state.h>
+ 
+ void flush_cache(unsigned long addr, unsigned long size)
+ {
++	void *ptr;
++
++	ptr = map_sysmem(addr, size);
++
+ 	/* Clang uses (char *) parameters, GCC (void *) */
+-	__builtin___clear_cache((void *)addr, (void *)(addr + size));
++	__builtin___clear_cache(map_sysmem(addr, size), ptr + size);
++	unmap_sysmem(ptr);
+ }
+ 
+ void invalidate_icache_all(void)
+diff --git a/drivers/remoteproc/rproc-elf-loader.c b/drivers/remoteproc/rproc-elf-loader.c
+index ab1836b3f07..0b3941b7798 100644
+--- a/drivers/remoteproc/rproc-elf-loader.c
++++ b/drivers/remoteproc/rproc-elf-loader.c
+@@ -6,6 +6,7 @@
+ #include <dm.h>
+ #include <elf.h>
+ #include <log.h>
++#include <mapmem.h>
+ #include <remoteproc.h>
+ #include <asm/cache.h>
+ #include <dm/device_compat.h>
+@@ -180,6 +181,7 @@ int rproc_elf32_load_image(struct udevice *dev, unsigned long addr, ulong size)
+ 	for (i = 0; i < ehdr->e_phnum; i++, phdr++) {
+ 		void *dst = (void *)(uintptr_t)phdr->p_paddr;
+ 		void *src = (void *)addr + phdr->p_offset;
++		ulong dst_addr;
+ 
+ 		if (phdr->p_type != PT_LOAD)
+ 			continue;
+@@ -195,10 +197,11 @@ int rproc_elf32_load_image(struct udevice *dev, unsigned long addr, ulong size)
+ 		if (phdr->p_filesz != phdr->p_memsz)
+ 			memset(dst + phdr->p_filesz, 0x00,
+ 			       phdr->p_memsz - phdr->p_filesz);
+-		flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
+-			    roundup((unsigned long)dst + phdr->p_filesz,
++		dst_addr = map_to_sysmem(dst);
++		flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
++			    roundup(dst_addr + phdr->p_filesz,
+ 				    ARCH_DMA_MINALIGN) -
+-			    rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
++			    rounddown(dst_addr, ARCH_DMA_MINALIGN));
+ 	}
+ 
+ 	return 0;
+@@ -377,6 +380,7 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
+ 	const struct dm_rproc_ops *ops;
+ 	Elf32_Shdr *shdr;
+ 	void *src, *dst;
++	ulong dst_addr;
+ 
+ 	shdr = rproc_elf32_find_rsc_table(dev, fw_addr, fw_size);
+ 	if (!shdr)
+@@ -398,10 +402,10 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
+ 		(ulong)dst, *rsc_size);
+ 
+ 	memcpy(dst, src, *rsc_size);
+-	flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
+-		    roundup((unsigned long)dst + *rsc_size,
+-			    ARCH_DMA_MINALIGN) -
+-		    rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
++	dst_addr = map_to_sysmem(dst);
++	flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
++		    roundup(dst_addr + *rsc_size, ARCH_DMA_MINALIGN) -
++		    rounddown(dst_addr, ARCH_DMA_MINALIGN));
+ 
+ 	return 0;
+ }
+diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+index 0ddf69a0918..bb58cf1badb 100644
+--- a/lib/efi_loader/efi_image_loader.c
++++ b/lib/efi_loader/efi_image_loader.c
+@@ -13,6 +13,7 @@
+ #include <efi_loader.h>
+ #include <log.h>
+ #include <malloc.h>
++#include <mapmem.h>
+ #include <pe.h>
+ #include <sort.h>
+ #include <crypto/mscode.h>
+@@ -977,7 +978,7 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
+ 	}
+ 
+ 	/* Flush cache */
+-	flush_cache((ulong)efi_reloc,
++	flush_cache(map_to_sysmem(efi_reloc),
+ 		    ALIGN(virt_size, EFI_CACHELINE_SIZE));
+ 
+ 	/*
 -- 
 2.34.1
 
