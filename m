@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E199D41C39
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 11:47:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED203D41C04
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 12:33:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 797D289449;
-	Wed, 13 Nov 2024 12:47:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 25C1589577;
+	Wed, 13 Nov 2024 13:33:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ocJc3/Mw";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="e7Oj3b9q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88BFC894AB; Wed, 13 Nov 2024 12:47:05 +0100 (CET)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8BB0B89583; Wed, 13 Nov 2024 13:33:32 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8A5188F8E
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 12:47:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8123589574
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 13:33:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-720b2d8bb8dso4953136b3a.1
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 03:47:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731498421; x=1732103221; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=smmidwOxcivwu06j5bNJP7K8bt+xykkJpw57j0p6Ib0=;
- b=ocJc3/Mw3J8ehXIdur07s9dwXCZXmJewmPUQpHhOjsPQgc1+KhuF0KKPVq7dM/hfMZ
- wEkpQtfMl4Bhwl67lcbE0TETX9Y3L3Vz3dUoHLE+ErjzNPeN6Zo99Fetj3N/5IRRpWOB
- wIEZFuQutRhiYv4KAYUf+QpWqMaohormUzQMdwKspmil4EQiwRGIXtmcNmaxWv5M6qwl
- whesrv5ekyYuIux5d92KtbY3T4eRCP5PkMM7k9k9HkxLT14nWKIM+np/Gk86lcqbr41Z
- Hvcf18RUcaYehI7xjhHHrb7X/KmnRIoCklYp1U4GA92fqCpIM27uuWuab0cynFC/+mw3
- tOLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731498421; x=1732103221;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=smmidwOxcivwu06j5bNJP7K8bt+xykkJpw57j0p6Ib0=;
- b=GUAG+YEDad2vPT8njKkidXaDFFLvwnsLhagRnZAe3FqKwFvwIzeumJ5Z4H5TSLKdXe
- K3i9nm+AzD11eWmHlVkrYMJn3Eu8nJbTGN3X0XtFdsj9ZRAPWTJq15U37TpSJXs1GFbx
- 2wtwDey8NohUgRFUM8qUUrfBPhPemHfIqBAPvFbnxVV52yUtLlI4TwCgoIjPbF5Gv9zJ
- VL/lkkQG4KTcnsJWxS2D4oXoqER6h/VTUdIlmQWYUDENvLm7qDOViSM4IGxCQTu922Ic
- MP/3DapgZ4JqxQCqtFCKErB+8/n/bYglo2M5GuyEGWYXJNRSQ/p+pyVSYPJxOKYVi/Aj
- 9VEA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVvirysoHhY/O1CVqBzyeXhsRsyaIKNwCd0CsLE/UK2Foivjkcw1KX3kHszEZ443+VD9QUdqVo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1gh8n6EyHYz4krouhFYvPulGNrupn77k22YHJ1IhfJPPfA0hT
- M5t0p/EUlsCCEE1Rvp5jSGIBPwEnLkJg1WFsXcd2OUIkz4e9HRYyrP/6FJt48yHW7Azyn0JaqRj
- Eg68biWKgaHObCwJJ6vN+pNR3t4qhiewG15RC/Xep1OoJ51m+q6s=
-X-Google-Smtp-Source: AGHT+IEg57XWtKNyrtGGMoXZT6c0ZhFNz0Lgj8K8wD63AhB/yfQO6M2+IWmv6KYPly2gxCNYGVu2VIqeo+42g7HeheE=
-X-Received: by 2002:a17:90b:38ce:b0:2cb:4e14:fd5d with SMTP id
- 98e67ed59e1d1-2e9b173c84cmr27126125a91.17.1731498421334; Wed, 13 Nov 2024
- 03:47:01 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1731501209; x=1732106009; i=xypron.glpk@gmx.de;
+ bh=zLlBhGLCC5QeUWH+2hde6jM7WV8JO3OMJitPjV1iMjw=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=e7Oj3b9q2gdfqlFZiBCED0BFqheo2UvdWkoakkE/wcafcgwN9BE9IqGdKrPx27jn
+ zkMbuaEvldqeovHp8W5wozY2k09SJ1NnYqqGtoTHzDnkbyV8Wy8QEmVhTubWYYoUc
+ I+0FcMGsry+ta0VE9ZSxUqyReGQg69+zMLqGXKurJ+e8v5N4kRgS+KtJsTf/HS2BO
+ ztqfKkBqUIhfBfm5f4T/GEXOkCjw+BgoRNePhrEreYi4+CqsctbByhn/b4b3vBP68
+ Uv7Giy4hgvhsuh1QYht9QcvEBFKvopVszWQTE1uIYFy6UzHzJJrlvYSk6+4Pu5Tdz
+ iotUYfJS/Xlt7SxPuw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Ma20k-1tEaEO3xuG-00KRZO; Wed, 13
+ Nov 2024 13:33:29 +0100
+Message-ID: <dc1d08c6-45c9-4826-bae4-15bd1216ea7e@gmx.de>
+Date: Wed, 13 Nov 2024 13:33:24 +0100
 MIME-Version: 1.0
-References: <20241107025831.5459-1-semen.protsenko@linaro.org>
- <CAC_iWjJVRvi2WB5ChTq26KLVdhoACq2FyFqM5jrk5uKM_CZ93A@mail.gmail.com>
- <CAPLW+4kuBoprcOXL-rYCWU5w9-Q8X78eE4=7KmnCdDT=4HiaTA@mail.gmail.com>
-In-Reply-To: <CAPLW+4kuBoprcOXL-rYCWU5w9-Q8X78eE4=7KmnCdDT=4HiaTA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 13 Nov 2024 13:46:25 +0200
-Message-ID: <CAC_iWj+i9-jifxC2tndP3Y6m0Sy7b4x91kOGGKQgsXe_CYqFhw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] armv8: Fix get_sctlr() return type
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- David Feng <fenghua@phytium.com.cn>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Revert "efi_memory: do not add U-Boot memory to the
+ memory map"
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
+ <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+References: <20241112131830.576864-1-sjg@chromium.org>
+ <CADg8p949qx=irjZKgf9-B4wtCYx1pDj29LFH86YR4T1zyKtAvg@mail.gmail.com>
+ <CAC_iWj+U945S96mE4E3d_bLxQ-9iQhErXBaJW0WCpLB1X=VVqQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAC_iWj+U945S96mE4E3d_bLxQ-9iQhErXBaJW0WCpLB1X=VVqQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:sId81F3zlr/b6AijqBXIXutPQZcs59CJ/kFwYeuUMgaA494qPU2
+ +qpkrmJ299NVZ4PciLDhXyWIwTUOFAe12vtrfsAYe3lh0BNkfUxJnsYKBmziFsb1tyo/iZz
+ cy5rAlMGQvEnzVBktyJdBFM0wCMXTjlr/kpUigiPy1sf+HsYIansGLy0Tb+7n3glXP7wj63
+ QGdRgGgryJSrXIss4vXVA==
+UI-OutboundReport: notjunk:1;M01:P0:l+47t2hyXYk=;lVbExsZ+9NopJYW/vquGtxNLQ9z
+ gAfjvP2xSOuCF+96ERQzGJUW6cyXczbp7BbPVPmNyiJvfCopBBQsV/NJWD9WlriOkN5FsfiRr
+ noB1k/y1pwc/iatskeoouxUz61R+Gqw5O+A99HQcimREDfrPJpJ755M8Nif4PbsxaSBFMXp5g
+ uLTYt2b621s6tJ5djlE59mA1nV7BoT4dmHHmldFsGdv+kjwDRmaqgP36tNaWxTZ6CfZlnWAAC
+ jsxPJKXrcn9QpTouthh159obs/4fy9autV8AstG6MsNmgbv0RKkWrYJ0EZLfIkkw7f0iFonlG
+ fKyhSGZwo4TrS63kgWvicVEufPwZK6Naz2lt+eJBcvhPfmNS0M8sHqW5mMx0iX0IvP/OMBhNt
+ hTVZBrJEzo6CPL/VYVEOXG/SmTjXTGKKsBy26A7bdR7dUbV2Omxx3hHYs4+Ae06+2QdRILhgy
+ vp1yrlHYXuUgrj6D7HYYWxiEVV7LWGOnDjVmgbGeSUMYkF9G6CtMVucYCRBVtFM5ZsC+PHV1D
+ 9SFSqOEm3MoaD4ZV1GwOg+tcPXIKdZ2npBaa457JqQmlPvCCt6CCuOcJEjGOJ1xP52fhVUpyH
+ SGsfhNyb/o0UJlNPxHsuMMmmRzuoCrTaQsqpWrgYBLx+a+0WlVrp9BbNJ8qU5klmkBjm+4agS
+ J6+OuBYrbSbZn39R91C0fe9+ZCgHwnOVJRVc5Y9t7dhr+NDrBoyO/D4mlkRUO9+L9Ga8RmODH
+ 9dqe75KgeDZA0cR2Q1GmuExPqzKqPetZtIxEyzV3jhB75UQCVdQnjGE4e7RwbULYg1yrRiEOT
+ qqUE/91/t4MyFI0GWde7Oeov0nO8WsjxRJEfP7j+2ZDeN03rrXYeQ8C5xJADAwmDbMWPHhmSS
+ HM8zhXGUjIU9jggypEbsMY5v9cUEQoJhnyqIvjRK8fr8v6L/CJtXNizGx
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,83 +95,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 13 Nov 2024 at 04:30, Sam Protsenko <semen.protsenko@linaro.org> wr=
-ote:
+On 11/13/24 12:28, Ilias Apalodimas wrote:
+> Hi Sughosh
 >
-> On Mon, Nov 11, 2024 at 8:48=E2=80=AFAM Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > On Thu, 7 Nov 2024 at 04:58, Sam Protsenko <semen.protsenko@linaro.org>=
- wrote:
-> > >
-> > > SCTLR_EL2 is a 64-bit register [1]. Return its value as long (64 bit)
-> > > instead of int (32 bit) in get_sctlr() to make sure it's not trimmed.
-> > >
-> > > [1] https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-R=
-egisters/SCTLR-EL2--System-Control-Register--EL2-?lang=3Den
-> > >
-> > > Fixes: 0ae7653128c8 ("arm64: core support")
-> > > Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> > > ---
-> > > Changes in v2:
-> > >   - None (this patch was introduced in v2)
-> > >
-> > >  arch/arm/cpu/armv8/cache_v8.c | 2 +-
-> > >  arch/arm/include/asm/system.h | 2 +-
-> > >  2 files changed, 2 insertions(+), 2 deletions(-)
-> > >
-> > > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache=
-_v8.c
-> > > index e6be6359c5d9..5d6953ffedd1 100644
-> > > --- a/arch/arm/cpu/armv8/cache_v8.c
-> > > +++ b/arch/arm/cpu/armv8/cache_v8.c
-> > > @@ -825,7 +825,7 @@ void dcache_enable(void)
-> > >
-> > >  void dcache_disable(void)
-> > >  {
-> > > -       uint32_t sctlr;
-> > > +       unsigned long sctlr;
-> >
-> > Although that's correct since it's a 64bit platform, isn't it better
-> > to define it as u64 to be sure we'll have at least 64 bits?
-> >
->
-> Thanks for reviewing this! I considered making it uint64_t while
-> reworking this bit. This 'sctlr' variable is assigned to get_sctlr()
-> return value, and then passed to set_sctlr() as a parameter, both of
-> which are 'unsigned long'. So I made 'sctlr' unsigned long too, just
-> to match the signatures of mentioned functions. As for get_sctlr(), I
-> just followed the style already existed inside and around that
-> function. As you said, both u64 and unsigned long are 64-bit long
-> types on ARMv8, and that's definitely ARMv8 specific file, so I guess
-> that should be fine? In any case, if you have a strong opinion about
-> this, please let me know and I'll rework it; both u64 and unsigned
-> long look ok to me in this context.
+> On Tue, 12 Nov 2024 at 20:46, Sughosh Ganu <sughosh.ganu@linaro.org> wro=
+te:
+>>
+>> On Tue, 12 Nov 2024 at 18:48, Simon Glass <sjg@chromium.org> wrote:
+>>>
+>>> A bisect of Ubuntu 2022.04 boot-failure on qemu-x86_64 resulted in thi=
+s
+>>> patch. I am not sure how to investigate it.
+>>>
+>>> The boot hangs at some point during booting of the install image, befo=
+re
+>>> the Ubuntu logo appears.
 
-Yea perhaps I am nitpicking too much
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+I tried to replicate the problem with an Ubuntu 24.04.1 cloud image
+using a 6.8 kernel.
 
+I see efi_exit_boot_services being reached but not
+efi_set_virtual_address_map. The kernel seems to be stuck in an endless
+loop in a virtual address range (0xffffffff????????).
+
+The memory map looks wrong:
+
+=3D> efidebug memmap
+Type             Start            End              Attributes
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+CONVENTIONAL     0000000000000000-00000000000a0000 WB
+RESERVED         00000000000a0000-00000000000f0000 WB
+ACPI RECLAIM MEM 00000000000f0000-00000000000f1000 WB
+RESERVED         00000000000f1000-0000000000100000 WB
+CONVENTIONAL     0000000000100000-000000003dca4000 WB
+BOOT DATA        000000003dca4000-000000003dca6000 WB
+RUNTIME DATA     000000003dca6000-000000003dca7000 WB|RT
+BOOT DATA        000000003dca7000-000000003dca8000 WB
+RUNTIME DATA     000000003dca8000-000000003dcca000 WB|RT
+BOOT DATA        000000003dcca000-000000003ecda000 WB
+RESERVED         000000003ecda000-000000003ece0000 WB
+ACPI RECLAIM MEM 000000003ece0000-000000003ed02000 WB
+RUNTIME DATA     000000003ed02000-000000003ed03000 WB|RT
+RESERVED         000000003ed03000-000000003ef1a000 WB
+RUNTIME CODE     000000003ef1a000-000000003ef1c000 WB|RT
+RESERVED         000000003ef1c000-0000000040000000 WB
+RESERVED         00000000e0000000-00000000f0000000 WB
+
+The relocated U-Boot code should not be marked as EfiReservedMemoryType
+but as EfiServicesCode according to the UEFI specification.
+
+The ACPI table is marked as EfiACPIReclaimMemory but I don't think
+memory in the BIOS memory range should be reclaimable. In the journal on
+my laptop I see
+
+BIOS-provided physical RAM map
+BIOS-e820: [mem 0x00000000000e0000-0x00000000000fffff] reserved
+
+The e820 table is generated from the EFI memory map in setup_e820() of
+the Linux efi stub.
+
+Best regards
+
+Heinrich
+
+>>>
+>>> I will sent a series with a script showing how it is run.
+>>>
+>>> This reverts commit a68c9ac5d8afc51c619c5d3e865fcf147bea90cb.
+>>>
+>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>> ---
+>>
+>> This seems to be an issue specific to the x86 architecture. The
+>> installation works on arm64 and riscv (confirmed by Heinrich)
+>> architectures. I checked the output of the EFI memory map with the
+>> above commit against the master branch, and the only difference is
+>> that with this revert, the EFI memory map has the u-boot memory region
+>> marked as EFI_BOOT_SERVICES_CODE, whereas without this commit, that
+>> region is marked as reserved.
 >
-> > Thanks
-> > /Ilias
-> > >
-> > >         sctlr =3D get_sctlr();
-> > >
-> > > diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/sys=
-tem.h
-> > > index 52f6c9b934d7..dbf9ab43e280 100644
-> > > --- a/arch/arm/include/asm/system.h
-> > > +++ b/arch/arm/include/asm/system.h
-> > > @@ -171,7 +171,7 @@ static inline unsigned int current_el(void)
-> > >         return 3 & (el >> 2);
-> > >  }
-> > >
-> > > -static inline unsigned int get_sctlr(void)
-> > > +static inline unsigned long get_sctlr(void)
-> > >  {
-> > >         unsigned int el;
-> > >         unsigned long val;
-> > > --
-> > > 2.39.5
-> > >
+> Hmm why? LMB is adding this with EFI_BOOT_SERVICES_CODE  in
+> lmb_map_update_notify(). Who's switching it to reserved?
+> This is a pretty big change since the memory switches from reusable to
+> reserved for the OS.
+>
+>> I need to look into this in more detail,
+>> but it would seem like the x86 kernel (or some efi stub code ?) is
+>> expecting some region of memory marked as EFI_BOOT_SERVICES_CODE,
+>> which is not the case for other architectures.
+>
+> Not EFI_BOOT_SERVICES_CODE explicitly, probably just a reusable type of =
+memory.
+>
+> Cheers
+> /Ilias
+>
+>
+>
+>>
+>> -sughosh
+>>
+>>>
+>>>   lib/efi_loader/efi_memory.c | 10 ++++++++++
+>>>   1 file changed, 10 insertions(+)
+>>>
+>>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+>>> index d2f5d563f2a..c7400ec9854 100644
+>>> --- a/lib/efi_loader/efi_memory.c
+>>> +++ b/lib/efi_loader/efi_memory.c
+>>> @@ -809,6 +809,16 @@ static void add_u_boot_and_runtime(void)
+>>>   {
+>>>          unsigned long runtime_start, runtime_end, runtime_pages;
+>>>          unsigned long runtime_mask =3D EFI_PAGE_MASK;
+>>> +       unsigned long uboot_start, uboot_pages;
+>>> +       unsigned long uboot_stack_size =3D CONFIG_STACK_SIZE;
+>>> +
+>>> +       /* Add U-Boot */
+>>> +       uboot_start =3D ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
+>>> +                      uboot_stack_size) & ~EFI_PAGE_MASK;
+>>> +       uboot_pages =3D ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+>>> +                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+>>> +       efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVI=
+CES_CODE,
+>>> +                             false);
+>>>
+>>>   #if defined(__aarch64__)
+>>>          /*
+>>> --
+>>> 2.34.1
+>>>
+
