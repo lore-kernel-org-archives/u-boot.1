@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ED76D637C4
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 21:53:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BD9AD637C4
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 22:20:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5029889544;
-	Wed, 13 Nov 2024 22:53:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BCBCF89198;
+	Wed, 13 Nov 2024 23:20:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ps/4zJ7l";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ng9v1WB0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E053388EE0; Wed, 13 Nov 2024 22:53:49 +0100 (CET)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 1E34E8904A; Wed, 13 Nov 2024 23:20:23 +0100 (CET)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1BC189390
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 22:53:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E919B89198
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 23:20:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3e60966297fso3505216b6e.1
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 13:53:47 -0800 (PST)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-2890f273296so3447011fac.2
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 14:20:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731534826; x=1732139626; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731536419; x=1732141219; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=oY7dXNtapehmqxR0df1yhi4X1u2wFFs5Qwrcpq1MpJU=;
- b=ps/4zJ7loes5LRp6X/Ozawls6SyoR2ZxlnNvhlUtjivy6sXJy754u0HdaFwA91p1oH
- z5mDT/P+0YESDpOkm3umkcqFAUYOLl83KpBv41DNjV3RVqxq9ADsz0o2buoshw4tTWCN
- etP1csi+XgFHdKeat3QpJf5BKt6gDmP6Zbv0k=
+ bh=MDLDVCAfKF9AS9d+P/AJXrBNviWc3A5OXlxLcFP9b6w=;
+ b=ng9v1WB0x28/gfhRZ+qFrvWPqrHVD80QfY/USM0MAPpJMC93RjKPQUNdGO5TfymZYy
+ 1nAbW/PsHc/xY7FzCVn6oKv0crCrG6o1USFB9+V4r9PfF+Dcx2jFL1XrxNn57XDc0ngl
+ HkZrLn39FecY2/B214MO7+PNPR5tbPEki1LU4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731534826; x=1732139626;
+ d=1e100.net; s=20230601; t=1731536419; x=1732141219;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oY7dXNtapehmqxR0df1yhi4X1u2wFFs5Qwrcpq1MpJU=;
- b=U+hwxj4IZE5I87+2hfYrEZHqyvMPReiVoj6W/W8ufh3UFv5BToKUHt4DHC/WuMWdC7
- CfFjbmoUyyQi0vVRhuerl685TWFshWLcUI/e52l1IK9xte40fPwvADmdKY6+4fi4Q22j
- veRngWJpZdMWMRI9g3g1ORylahvugdu/6AnB/SY49x16q0GA+jTclFiiYn6N7x1XRJ2z
- 8/EFBp/+6VNG3Byz5bz7v1sPFoLm0qqa+ysTXfLC9Ww/xoFczUmlu9hhyTCxh5Y8PB59
- 0KD3uyrzrBAbvOB0iW+5JodvDJmiuZtwFgdRiw2cRfM/TLzR9R5OTNSxCq+loFHKkTcP
- 08zQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWBdZlOF6No4K3Wa1ehvnwfky9HIB/PNckDfdqJL2DgUtfTiEuEGAiG5SwrWUWHOH/83Bfurt8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwB5J2cZQ+ETCwDNtTsci4uQSWQPHCiJp9J4bt72etYgUqCtw1m
- 9Qy4cMPvgaQq9MrBNgZgVWiLHZf2iEdGAu7mzZpgusF1Kqq8woskYRD3YaIIw9i2bKSUjEBFfml
- qY9k=
-X-Google-Smtp-Source: AGHT+IHEbMANLuADFLIU0i7DGB/t9EhngQPAjOm9KBt+C83PxpSnbK7BmrEq3N1hQJZjhQLHYVaXEA==
-X-Received: by 2002:a05:6808:120e:b0:3e0:4db9:8c44 with SMTP id
- 5614622812f47-3e79470a35bmr22400194b6e.27.1731534826587; 
- Wed, 13 Nov 2024 13:53:46 -0800 (PST)
+ bh=MDLDVCAfKF9AS9d+P/AJXrBNviWc3A5OXlxLcFP9b6w=;
+ b=gkULn7FfqIuQ9Y424UZ5hwQscOojoB1lc4GZKWEwZ4vLeJn1+zHjvoAMJEMqr0HiKi
+ UyGCDj1+6B3d77g/2mTQco6Cekw8gKF+Axv6StD9HDRuTmbjKmO/rDkmJUaG08Kth43a
+ Au4Zk+4o6cB2kcrgq2Heed1sgybqwdYGSDEWIAGXKE77/PTxfPCyRCqGCwakwu9Fjfuk
+ F9WoatH7ohwob0kxh/FdX8HQGmgKT3gastY4z0Y8uLPwvxQGfgO2m1hSguwr68ML8+/o
+ UGnJSbI+2sGVaI+CIdhQPOv2TZ7/t3qwqXytz1jFZTNH+SM+xgK6NBbac1i7EG0XtJ2Q
+ 84/Q==
+X-Gm-Message-State: AOJu0YxJoM88JDjWabE4VwVAhR2lPNxeoA9UoD+l904SjosmuFK843RV
+ sRgdQ9rIga978NFR04X48Gh/tavkd2i2FzPkRcyXrqUbrnIf0i64SYxUGj7Te0vnzkc5/bFr9ZG
+ Vf6Q=
+X-Google-Smtp-Source: AGHT+IGGw37QwBRgRIsayB0C/TjIrf+AtIF1LooSQYZLrJ2xPpVR1q4V9roALXDXbth2HJLp6O78bg==
+X-Received: by 2002:a05:6870:1e83:b0:288:6a16:fe1 with SMTP id
+ 586e51a60fabf-295601116e2mr19216323fac.18.1731536419634; 
+ Wed, 13 Nov 2024 14:20:19 -0800 (PST)
 Received: from bill-the-cat ([145.14.135.248])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3e7b096b6e0sm921881b6e.14.2024.11.13.13.53.45
+ 586e51a60fabf-295e92afbcbsm1242577fac.40.2024.11.13.14.20.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 13:53:45 -0800 (PST)
-Date: Wed, 13 Nov 2024 15:53:43 -0600
+ Wed, 13 Nov 2024 14:20:19 -0800 (PST)
+Date: Wed, 13 Nov 2024 16:20:16 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] test: str_ut.c depends on CONFIG_STRTO
-Message-ID: <20241113215343.GY3600562@bill-the-cat>
-References: <20241113210646.88937-1-heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 8/9] buildman: Propose a format for extra boards
+Message-ID: <20241113222016.GZ3600562@bill-the-cat>
+References: <20241108152350.3686274-1-sjg@chromium.org>
+ <20241108152350.3686274-9-sjg@chromium.org>
+ <20241113024029.GH3600562@bill-the-cat>
+ <CAFLszTirek2=_j15W5LCZERTs2TZXawV0o3aGO12dgDJpzTdQw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ka+LWdfiQeta4ym3"
+ protocol="application/pgp-signature"; boundary="FTuEmCyWF8dJ3Ghi"
 Content-Disposition: inline
-In-Reply-To: <20241113210646.88937-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAFLszTirek2=_j15W5LCZERTs2TZXawV0o3aGO12dgDJpzTdQw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,39 +94,68 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Ka+LWdfiQeta4ym3
+--FTuEmCyWF8dJ3Ghi
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 13, 2024 at 10:06:46PM +0100, Heinrich Schuchardt wrote:
-
-> The string conversion functions are implemented in lib/strto.c which is
-> only compiled if CONFIG_STRTO=3Dy.
+On Wed, Nov 13, 2024 at 09:03:35AM -0700, Simon Glass wrote:
+> Hi Tom,
 >=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> On Tue, 12 Nov 2024 at 19:40, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Nov 08, 2024 at 08:23:49AM -0700, Simon Glass wrote:
+> >
+> > > It has become more common to use config fragments to extend or adjust
+> > > the functionality of boards in U-Boot.
+> > >
+> > > Propose a format for how to deal with this. It is not implemented as
+> > > yet.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> >
+> > I think that the first problem is that this patch series is an
+> > inappropriate method and place to start the discussion.
+>=20
+> We had a discussion a year ago but it trailed off.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+OK. Still an inappropriate place to resurrect it.
+
+> > I also think this gets things backwards as the common case is "make",
+> > not "buildman". We need more defconfig's that are just base +
+> > fragment(s) if they're important enough to be a combination that needs
+> > to be tested and work. A board is not a time-expensive part of CI. A
+> > pytest run is, a new job itself is.
+>=20
+> OK, that would work too. It would also avoid the problem of combinatorial
+> explosion. But I am not seeing people actually doing that, with rare
+> exceptions.
+
+I think it's the exception, not the rule, where config fragments are not
+being put to use in a defconfig. And that's possibly because not a lot
+of people seem to know about the #include option, and then when I
+explain it exists to people the next problem is "Oh, I have to do what
+so that buildman also works?".
 
 --=20
 Tom
 
---Ka+LWdfiQeta4ym3
+--FTuEmCyWF8dJ3Ghi
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc1H+cACgkQFHw5/5Y0
-tyzRZwv+Ps++cOohLnLtx5ey/i+JpaxDkZGhCcDJWW5mcbEoP56qA8XrfJ9knEM1
-vauOjkpAqjIAY1cYvQZYzv4vGdoIzyWforj0q871y20YF+r8thOKtgjh9HKFbYrH
-vq6IYvSXWVCFYDOD/G3KVYtVkIcrVKwPQdc7Wa/CyY0i9a/OACyCyR7yGW/wfjpQ
-PVd763AscUhtQbjY1Tj/jxJm/xKth8HMNNXAFARvxRLTNhnw+482Cc/rr0O/fdZB
-e7Z199FWOEdZYTDs+1k3851UnqHMBnainqmd4hCJ9JJAiga5g2PYZyn5IVD6yG7Z
-uFzGafLfxrn6gXzakiaEsIGy43/TZTc2GtpTy2a03k21tN4EpcuuJ7zZlc+1+2vR
-teFWC9I1VRkkYGNn1LoZWnMaTTA3goAHX3hCJknpR/0NzI5MxY3MV4Fe4zJN7UWf
-6OkeQCt3lPplG1ely5AnFeK/m1HLgTUUcOAMIC8k2701beJjVJEGde7DlMi9pnJi
-SgfgZxmB
-=eOs8
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc1JhgACgkQFHw5/5Y0
+tyzFPwwAmP5slXSdduxYrsKbEWBgywerSzNKVQ0TiuHFUMqxhvDL+9y1L/bzladL
+Xy9ZGgQl4knU2noi7F+Vwjj5gM5uPEZ3sLnk/KTU29X4Mz+7F57zTgyDvkfTHgep
+6lB5xbP3gLKwPsh2mDmR76j3bpbYnIaXp8QquaX2ySGkcaikctLw4m3tdzc4QloH
+GpF7J/l3krGiASlC02DompgPWWLNT/JHYqdOGQbzgsDJ7W7p71aRAi+N6MmfDCF9
+4w40uHLw0fSoaziuEct6CVjJ2wlCyugSqSfw/RnedRMwW2s4k3qlV0eiQPBvERTY
+F9NsDCOpziodnUSItrZrbYifLZDShosRaHz0VFtF64x0Z3f2O71mnmnNYPyHwWnb
+oszMuSoBfIa7L/srf+k94raMFAfsqr0YmbWWT83yVg1i7WqrjRoGB8ahKzjPgSfv
+0YpvXIGdqK8NmAQWj3OPwjmci5Yv1QLa1+xqwWpYX0xKiwdmAWNMMVxUFYk0kknr
+1FoxWzrO
+=XeWs
 -----END PGP SIGNATURE-----
 
---Ka+LWdfiQeta4ym3--
+--FTuEmCyWF8dJ3Ghi--
