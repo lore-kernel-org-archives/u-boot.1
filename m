@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E319D41C2D
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 10:11:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74849D41C27
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 10:19:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C789989554;
-	Wed, 13 Nov 2024 11:11:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BD56489544;
+	Wed, 13 Nov 2024 11:19:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ET8210+J";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="htbgolRZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 510218904A; Wed, 13 Nov 2024 11:11:45 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id E7A6E89554; Wed, 13 Nov 2024 11:19:34 +0100 (CET)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 757E589558
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 11:11:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9608A891A0
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 11:19:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-2e34a089cd3so5440000a91.3
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 02:11:41 -0800 (PST)
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-7240fa50694so5269960b3a.1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 02:19:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731492700; x=1732097500; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1731493171; x=1732097971; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Hnxyol2WafTSyeHAMoFFjtaf+u5ZuHK5FU3Fned1IB4=;
- b=ET8210+J1W1N48W1zAlPldFYqIHLWKMAQu6FY6/S0mqAXwdl8S4WAjrFARfYjClWOQ
- IdMAo1UrmIIxb83BIFOYzxXmNV4ixtYy28fwUtYkTJY33TZe4aRJW6wMxS001KEgiKJU
- u+76CbbCim7/MFAKv3iC7Vkf/NWYC356LrQmbtDxBA2DTKen5IyJ2igzY1RNWzFMKu/l
- sNlZZI9+aEG1QH7biGovh4BeRgnN+TxA6Cymjp7FT53SD2gHiuOOSsS2MI0CLKS2QU7K
- MjOnZqAroXnUWkwqDbiY+/mO8Bm9thyOI+7S7GX1I37lgrGyw1d06sqD2PIu4f3et7d1
- oS8w==
+ bh=QYblQ4pBvZCn6xh3pYfrkTpIPlbaGOZnWJZObgjfBQ0=;
+ b=htbgolRZYl2cr9oxHeGfSb995YTEpY3YI/2HK9YwE4RczbrgFBBJ2mNNNjIegAcPd3
+ 6cVfodoSdo0WmTb51PZpLrfEL+9ZtA5ANOfG0Emy4GZ8BMpSDHVMKB311qWoLUvIdEF5
+ iXTS5ogXy832SY9O677vL44yS/z6jBzh0SCmqWgHj2TLgBWW2Cw8hq/sBL0HY6m3QYqt
+ DYb/iMmLUgIKXvmMvRYat63kDIUCGJ60VAs25A85iqK4OofSymYS6t00/MSuatfLfuX6
+ nSEMM/A2T9/qNmTTXxWdTMLuhzdU5JbSsEKRkWROqhdk5aJOOzbQT0vFu9IxaYrIeShN
+ lbig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731492700; x=1732097500;
+ d=1e100.net; s=20230601; t=1731493171; x=1732097971;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Hnxyol2WafTSyeHAMoFFjtaf+u5ZuHK5FU3Fned1IB4=;
- b=Pb9PVCUNnR+LMLDcv4K1xh08CmzEYYVDQRrKNbWaidAI3Yq4BH3052WvPklNKiUS/3
- 01poXVgxZ17r0qofY3fdODewi2kQxEEDoIvIGTV83sImWNkDaR9OS4z0DIlLTwcRgDbF
- qCcK8tI0l4Za+EUG4mVup2w7alGPU5RvUNRbNOjbthsZkJ25fc1cxQqiGNjJcltq4JME
- 4BHNrlZbDisdA62jUsaF2yDRnMZDu3fR1nIel3BFYBoiUyYeHy9n0oXU32xZkAsShg/U
- ntjL925yd3SOYzQJrtMOCuBWKSfoL7YdWcFjWdQ4sExqZhVfUDqnad6do6S+0E5LO238
- 9VVQ==
-X-Gm-Message-State: AOJu0YxqYD2WHhzXQljmoUSU7t2UR8NsOXZFvuUZZho38VRNVzX9Zo5a
- 01fyR5z9ZasJdBROsHxlWtOukKSAZXSR5ddDUjGk/wDzlVbv/UeR0EtLd9QTTyahYziTs2cmKpG
- jmGws8SUMoMQU7e3mNLew/RknSmuaGcrilqX69Q==
-X-Google-Smtp-Source: AGHT+IG14DWXuOODWPzcsuQF0Pn/V8SjiDu93mlu6nA0cPBKJqGvt6v9fOQcJqzexrv/T/j+r1OgqrIOfge2yRwZAqE=
-X-Received: by 2002:a17:90b:1d07:b0:2e0:7b2b:f76 with SMTP id
- 98e67ed59e1d1-2e9b1741147mr25844721a91.19.1731492699968; Wed, 13 Nov 2024
- 02:11:39 -0800 (PST)
+ bh=QYblQ4pBvZCn6xh3pYfrkTpIPlbaGOZnWJZObgjfBQ0=;
+ b=JIruUlIBf6SPV5Y2VDa3yVE/TB69Br58AazQUH1whLFuwVh0ok/RCwNuIUBlE3tbqd
+ SsMktUO9Jx3Asx24b0nT7Ln7VWABCI4R0wxe1YIJl9IChiXGJgQAEvWlaJUEaMpIlq0O
+ lu42qb9FJ2caRV8wyJGtIH9kKBKkAFEkK96OY4oeZR0dhao5RnxR9G22eqz/b1OEzVR6
+ i4h6+TsSTUY7SaULntVOaYux0kiuRHtE+AZP5kIUvRztIswS2Wa3o8P0z6dj/36Xc/78
+ Nd6+mhd5aIz6BX0jVl0pS/PZSVI6Pgs+PZZmJdjnZXRqVY3osZAolDtq8me5+HTlqwad
+ 3ZLg==
+X-Gm-Message-State: AOJu0Yyb0u7t35XrJFJ3XLMEQ3IskPE/JEqZsNLwhu0z1PuGfq0OK6JD
+ xNypUukCZQ9iCO2gn3gnPxJ9kTuIM9srlB47GQ2/lQ1iTTZFoR6Q9SmqKlZ2jKbvISKtpRwc2JT
+ XT0if3ahys3SoeCWZl3ly1y3nK7MMU+yHLxM3AQ==
+X-Google-Smtp-Source: AGHT+IH0OOea3NzVq6wtyp5PTqxVGn0hfkvkhJ5bS/9nQaZfEx21IWPNPOoQHN1giOFkscqkpasfwT6igQzI8aXvKq0=
+X-Received: by 2002:a05:6a20:8429:b0:1db:e870:7b19 with SMTP id
+ adf61e73a8af0-1dc70378a59mr3637661637.10.1731493171107; Wed, 13 Nov 2024
+ 02:19:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20241112141105.640189-1-sjg@chromium.org>
- <20241112141105.640189-9-sjg@chromium.org>
-In-Reply-To: <20241112141105.640189-9-sjg@chromium.org>
+References: <20241111210959.560738-1-adrianox@gmail.com>
+ <20241111210959.560738-5-adrianox@gmail.com>
+In-Reply-To: <20241111210959.560738-5-adrianox@gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 13 Nov 2024 12:11:03 +0200
-Message-ID: <CAC_iWjLx6ZBF7sqzPaXS4eWQWLYThZG2eUpwLcccT116h58gzw@mail.gmail.com>
-Subject: Re: [PATCH v3 8/9] CI: Add platform variable
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+Date: Wed, 13 Nov 2024 12:18:54 +0200
+Message-ID: <CAC_iWjLFFEh4gQQ=TGpr4c-rJrR7xUAwE4A2cnir3N2mJ9rZ7Q@mail.gmail.com>
+Subject: Re: [PATCH v3 04/15] efi_loader: device_path: add efi_dp_from_ipv4
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
+ jerome.forissier@linaro.org, xypron.glpk@gmx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,34 +87,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 Nov 2024 at 16:11, Simon Glass <sjg@chromium.org> wrote:
+On Mon, 11 Nov 2024 at 23:10, Adriano Cordova <adrianox@gmail.com> wrote:
 >
-> Add a list of possible platforms that can be used by gitlab runners.
+> Add efi_dp_from_ipv4 to form a device path from an ipv4 address.
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 > ---
 >
 > Changes in v3:
-> - Drop patches which remove grub and tracing for arm64
+> - Removed some unnecessary void* casts.
+> - Changed sizeof(struct efi_device_path_ipv4) to sizeof(*ipv4dp)
+>   in efi_dp_from_ipv4.
 >
->  .gitlab-ci.yml | 1 +
->  1 file changed, 1 insertion(+)
+>  lib/efi_loader/efi_device_path.c | 38 ++++++++++++++++++++++++++++++++
+>  1 file changed, 38 insertions(+)
 >
-> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> index 0aeda53bc2d..e152060b046 100644
-> --- a/.gitlab-ci.yml
-> +++ b/.gitlab-ci.yml
-> @@ -3,6 +3,7 @@
->  variables:
->    DEFAULT_TAG: ""
->    MIRROR_DOCKER: docker.io
-> +  PLATFORM: linux/amd64,linux/arm64
+> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+> index ee387e1dfd..82a45da1fa 100644
+> --- a/lib/efi_loader/efi_device_path.c
+> +++ b/lib/efi_loader/efi_device_path.c
+> @@ -974,6 +974,44 @@ struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
+>         return start;
+>  }
 >
->  default:
->    tags:
+> +struct efi_device_path *efi_dp_from_ipv4(struct efi_ipv4_address *ip,
+> +                                        struct efi_ipv4_address *mask,
+> +                                        struct efi_ipv4_address *srv)
+> +{
+> +       struct efi_device_path *dp1, *dp2;
+> +       efi_uintn_t ipv4dp_len;
+> +       struct efi_device_path_ipv4 *ipv4dp;
+> +       char *pos;
+> +
+> +       ipv4dp_len = sizeof(*ipv4dp);
+> +       ipv4dp = efi_alloc(ipv4dp_len + sizeof(END));
+> +       if (!ipv4dp) {
+> +               log_err("Out of memory\n");
+> +               return NULL;
+> +       }
+> +
+> +       ipv4dp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
+> +       ipv4dp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_IPV4;
+> +       ipv4dp->dp.length = ipv4dp_len;
+> +       ipv4dp->protocol = 6;
+> +       if (ip)
+> +               memcpy(&ipv4dp->local_ip_address, (void *)&ip, 4);
+> +       if (mask)
+> +               memcpy(&ipv4dp->subnet_mask, (void *)&mask, 4);
+> +       if (srv)
+> +               memcpy(&ipv4dp->subnet_mask, (void *)&srv, 4);
+
+The copies above seem wrong.
+Isn't that supposed to be memcpy(&ipv4dp->local_ip_address, ip,
+sizeof(*ip)); etc...
+
+> +       pos = (void *)((uintptr_t)ipv4dp + ipv4dp_len);
+pos = (void *)(uintptr_t)ipv4dp+...
+
+
+> +       memcpy(pos, &END, sizeof(END));
+> +
+> +       dp1 = efi_dp_from_eth();
+> +       dp2 = efi_dp_concat(dp1, (const struct efi_device_path *)ipv4dp, 0);
+> +
+> +       efi_free_pool(ipv4dp);
+> +       efi_free_pool(dp1);
+> +
+> +       return dp2;
+> +}
+> +
+>  /* Construct a device-path for memory-mapped image */
+>  struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
+>                                         uint64_t start_address,
 > --
-> 2.34.1
+> 2.43.0
 >
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Thanks
+/Ilias
