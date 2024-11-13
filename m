@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45944D637A9
-	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 18:54:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6FBDD637A8
+	for <u-boot@archiver.kernel.org>; Wed, 13 Nov 2024 18:54:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A50A98931D;
-	Wed, 13 Nov 2024 19:54:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE7848955E;
+	Wed, 13 Nov 2024 19:54:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jKC8LYFE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KeFLsX9d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5797E8936F; Wed, 13 Nov 2024 19:54:03 +0100 (CET)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id 1843089549; Wed, 13 Nov 2024 19:54:06 +0100 (CET)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C25D788216
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 19:54:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2422489274
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 19:54:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-3a6bfc1dc8eso26747685ab.1
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 10:54:00 -0800 (PST)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3a6be369d23so26426105ab.2
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 10:54:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731524038; x=1732128838; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731524041; x=1732128841; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dIP5+v4nevhOp8XUafozU4jwBnoN0fRKua85r3rxxps=;
- b=jKC8LYFEfSGzNqmoPp41FtaVDzM0UYswEwuujnyQAkgBjCW97cu9BS4nmP43F2ymPZ
- yUjhwzfBwJzNsgEQumQeZp/AykfTOqumAS+CEj2NSk34lLA2CMNQPv0WG5I/I/zmDVkn
- rqJF2JJBZMbqWJnc6mtJtQC2ymlVThMKsWGDI=
+ bh=5ChhiT483sm+1hUiQKs5kyrQgB2IgonH+9xeRHPWdG0=;
+ b=KeFLsX9dKMs7D/l93E+toBJXrYzDeFT6maWLsDBXOQBSd0ECiffzGNECSDm21z8TQv
+ DsVr/n64Mlo9rqMKMBddpFPa3E4CYbr5MdXBBee28FQV5ZNeYo95bBSMVq00rX0UjT9q
+ QGDlhrVUbi+jao2RfaL/j5FEBYXmHJrEWWwng=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731524038; x=1732128838;
+ d=1e100.net; s=20230601; t=1731524041; x=1732128841;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dIP5+v4nevhOp8XUafozU4jwBnoN0fRKua85r3rxxps=;
- b=Fr2Xe+SSVsxIENSg/9iu3zNwNAbzk8zXVaWYYTl9nLn8Ay8PsSJHqSX30Cv5AFHVq0
- /5U2fg6BGxC5ccPRevRXo3f97LRY/FLDtQw2uHYb8I3ePHk96sCuZsT9hUiSjNHuwD7z
- urZET9fh8RkIEwxbGzq76RQxk+JK8e9VXEfnBnEYpOlOerjhY2kR6/nj3TAvv82DcyGS
- WpbzkALfx49F3i+Hp1MaBBav7AGGEL/Ht9ndN3WpZp1G9CTDJuflq8+m+MarQjEMbkQR
- 1qICGQUyBeuKs7HAGaXr8yxeOk8RnZ+YmT+fWplIudv/Cy75MN8ZhBLWiXWeDOOpAYxC
- 4TxQ==
-X-Gm-Message-State: AOJu0YzPpE93mldUIKbCLJV7Ge9fvezn6e4iugf+nYzxCLDbTkEljdoY
- s3jf5bcT4Y6Tx8yDwZW07EqRHoIyWof6C1EXdpb0jldikIbe4OYdPHfPAL2owwQTX1mPpXLQS/M
+ bh=5ChhiT483sm+1hUiQKs5kyrQgB2IgonH+9xeRHPWdG0=;
+ b=KVcvTcsb9Y6JLMvXP3L0rR1uewKZeGQeFs4jsHxc3TGQvJB8WZDjIB0Tf90Wz0R5LG
+ FFsRpdezrZynyNrMq59Ib9zvjgutPtiRhO7fi/5O9mPkmbvJ9qOMGZ4Oyel6DjR5SHf8
+ lyg71Fwx1jAda1OzhQ/U0zWpZoCJAGCSaFE3AKfeLt08tV70AmyYRTDtanKwA6dirQR1
+ zBD/R6ildRbedmlPisYGZ/uMUFZ7D6lxwWn7nIyK3335q54pWNFubDyRLLoTl3cpb8Oe
+ RqvJrLV3qpZYchhduhz9Ii81XuNQUnCDFgpobFmkrsj86vys/9DeVhA+s/c19+pLxhZH
+ EVeQ==
+X-Gm-Message-State: AOJu0YzFfAUy5JYdIF+iAOPy/9CtfXief9jPjP/f1Hld+8ZaTQyHWTiC
+ 1GGwEJAWWvg1O2F1VjmmQdBXRWa6QlbmW559PCmO6Topj2nzIMdcUH9Wf4Y2dg2yVESZkwXCb6g
  =
-X-Google-Smtp-Source: AGHT+IHM5ZQC32KRm3D0JkZzX0LN8Fo5QrqubGZ2aDzvf9cYDwVJ/tZcrJdW7ph2pU8kOl4Buo7h9g==
-X-Received: by 2002:a05:6e02:1886:b0:3a4:e75c:c9d5 with SMTP id
- e9e14a558f8ab-3a6f18d894cmr197604305ab.0.1731524038479; 
- Wed, 13 Nov 2024 10:53:58 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHLsQsjxOkwxNS9fWGW9/ap6joLxUWkv0FbKf2lUOsXndAPEoj5mcWaUocpzshTA++oE89vJg==
+X-Received: by 2002:a05:6e02:1d98:b0:3a7:1c60:7de2 with SMTP id
+ e9e14a558f8ab-3a71c607eb2mr22619495ab.9.1731524041304; 
+ Wed, 13 Nov 2024 10:54:01 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a6f9890ec4sm30733675ab.75.2024.11.13.10.53.56
+ e9e14a558f8ab-3a6f9890ec4sm30733675ab.75.2024.11.13.10.53.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 10:53:57 -0800 (PST)
+ Wed, 13 Nov 2024 10:53:59 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 4/9] docker: Adjust packages for arm64
-Date: Wed, 13 Nov 2024 11:53:35 -0700
-Message-Id: <20241113185340.1661198-5-sjg@chromium.org>
+Subject: [PATCH v4 5/9] docker: Drop coreboot for arm64
+Date: Wed, 13 Nov 2024 11:53:36 -0700
+Message-Id: <20241113185340.1661198-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241113185340.1661198-1-sjg@chromium.org>
 References: <20241113185340.1661198-1-sjg@chromium.org>
@@ -89,72 +89,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The package names are slightly different for arm64 and we don't seem to
-have a linux-image-kvm package. Provide some extra ones for x86
+This isn't needed for sandbox builds and coreboot isn't much used on
+arm64, nor does U-Boot have a build that supports running from coreboot
+on any ARM target.
+
+So drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
-(no changes since v3)
+(no changes since v1)
 
-Changes in v3:
-- Use grub-efi and linux-image-generic for both archs
-
-Changes in v2:
-- Swap order so that amd64 is the exception
-
- tools/docker/Dockerfile | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ tools/docker/Dockerfile | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 7f4b17ab0a4..fd4835e9562 100644
+index fd4835e9562..048a57c5b16 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -44,7 +44,10 @@ RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_
- RUN wget -O - https://github.com/foss-xtensa/toolchain/releases/download/2020.07/x86_64-2020.07-xtensa-dc233c-elf.tar.gz | tar -C /opt -xz
+@@ -258,7 +258,8 @@ RUN mkdir /tmp/trace && \
+     rm -rf /tmp/trace
  
- # Update and install things from apt now
--RUN apt-get update && apt-get install -y \
+ # Build coreboot
+-RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp -xJ && \
 +RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
-+		EXTRA_PACKAGES="grub-efi-ia32-bin libc6-i386"; \
-+	fi; \
-+	apt-get update && apt-get install -y \
- 	automake \
- 	autopoint \
- 	bc \
-@@ -70,13 +73,11 @@ RUN apt-get update && apt-get install -y \
- 	gnu-efi \
- 	gnutls-dev \
- 	graphviz \
--	grub-efi-amd64-bin \
--	grub-efi-ia32-bin \
-+	grub-efi \
- 	help2man \
- 	iasl \
- 	imagemagick \
- 	iputils-ping \
--	libc6-i386 \
- 	libconfuse-dev \
- 	libgit2-dev \
- 	libjson-glib-dev \
-@@ -94,7 +95,7 @@ RUN apt-get update && apt-get install -y \
- 	libtool \
- 	libudev-dev \
- 	libusb-1.0-0-dev \
--	linux-image-kvm \
-+	linux-image-generic \
- 	lzma-alone \
- 	lzop \
- 	mount \
-@@ -131,6 +132,7 @@ RUN apt-get update && apt-get install -y \
- 	xilinx-bootgen \
- 	xxd \
- 	zip \
-+	${EXTRA_PACKAGES} \
- 	&& rm -rf /var/lib/apt/lists/*
++    wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp -xJ && \
+     cd /tmp/coreboot-24.08 && \
+     make crossgcc-i386 CPUS=$(nproc) && \
+     make -C payloads/coreinfo olddefconfig && \
+@@ -269,7 +270,8 @@ RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp
+     make olddefconfig && \
+     make -j $(nproc) && \
+     sudo mkdir /opt/coreboot && \
+-    sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/
++    sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/; \
++    fi
  
- # Make kernels readable for libguestfs tools to work correctly
+ # Create our user/group
+ RUN echo uboot ALL=NOPASSWD: ALL > /etc/sudoers.d/uboot
 -- 
 2.34.1
 
