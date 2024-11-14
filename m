@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2562D637DF
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 03:53:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03407D41C00
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 03:53:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3800E895A3;
-	Thu, 14 Nov 2024 04:53:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8FF0388E31;
+	Thu, 14 Nov 2024 04:53:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kmv5eGOC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bwK6aHh6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A2B2895A9; Thu, 14 Nov 2024 04:53:32 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 650A0895A9; Thu, 14 Nov 2024 04:53:46 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 153188957F
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 04:53:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CDCE88E31
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 04:53:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a99f3a5a44cso16890066b.3
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 19:53:30 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a9ec86a67feso24536366b.1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 19:53:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731556409; x=1732161209; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731556424; x=1732161224; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=01LqUxzmJ0lT7nve/UiBAzVFWWhHm8+EDwPJecP9Rh0=;
- b=kmv5eGOCf2HXVJnGCqB0nR/Ar8qhH0ywPM5m/9YpqTJ+JU7UXbzVzQRl+knE3LuKoH
- zxFe4pKwDjXrDrKP0IsjOyEnsu/yFP5zlEOUVMu1dKMhOsug5gS/f51bn+PIuGbH+Urg
- 2tAMMkVrcWE6QU44ZGCuwt87dz+/SrRfmcr7k=
+ bh=uR+3nSkGy8+C1gPoeoR8KRkLBotswQhCOAj9PuJPwnI=;
+ b=bwK6aHh696nsGTcMf5E+yVvcSklrXGg7bsQ9NQttMC18DVoKWZSc2/aZsnTZzl8mwg
+ fNGz8L07HNL5unYVlfROfBgQvglkn1hUMtpnDx7THQr4uCTTWEYfKgZFoesXy4LsYTUB
+ O5kvvnUxg0k5EkhIsHROoDRJf96lpSza8klyU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731556409; x=1732161209;
+ d=1e100.net; s=20230601; t=1731556424; x=1732161224;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=01LqUxzmJ0lT7nve/UiBAzVFWWhHm8+EDwPJecP9Rh0=;
- b=A15otUW7SPw6usOnfw/0a1GM4/E8rYcQwcjbq3fyHp+faI+noDaK7ztH6tXRfEuGWY
- Asi3VK8yV/FAdSQQszz8i2yskcMQ6PmW7/4pG14xQaYhNOf2oO+79Vit0JRkTeVWEnsR
- kRToCQuJwTuCLRKJVblRiGBiWAa1pKNmpBzwBcQ+3rUcXPAMbOY2OU8cm6NRut5FP9v9
- xEicjhyl6Z/GxE9y46cJ5sntxZtG4n4ZEILPhj1RGEnmcy8AOCa3agdyS7cl/+g1Qabo
- VVTzxgHN47c1V+lDAC0xAbamSeMGB4laC+TPPRKEHqfbLnjHy1PqK3Vy3Icx+foeiECP
- 25Bg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUcUj46BJtWyYgYA1lOvJrU3bl0UBQdFiHc40oDxLRFatwvkRUaSmZ7UaFhqQvowB7b6N/jUVE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzbaMgIVHgo5gFtNQGkTE+sGvtOUEXkUvfsMaDIXoU/lPXBJ3Mz
- IJACdcn27r17IhZdGP1njJoa1G68TDYgvFEYCTFL4LzN+ZnsDWVVz5bT29uyl8Eoefo7pJUpwiD
- H4LRwjOjJE2rLLOK5NLWJ5tjj/pG7I5+MXHce
-X-Google-Smtp-Source: AGHT+IFRlMSJs0AXNSzX6APjzDmTHtfLrBJlBg0LrscIF0BlmPqhokK+2S3S0jyDo7rlQBJ5Dlkn5OPdydenLR53kpY=
-X-Received: by 2002:a17:907:1b21:b0:a99:ff70:3abd with SMTP id
- a640c23a62f3a-a9eeff25d17mr2255595766b.31.1731556409269; Wed, 13 Nov 2024
- 19:53:29 -0800 (PST)
+ bh=uR+3nSkGy8+C1gPoeoR8KRkLBotswQhCOAj9PuJPwnI=;
+ b=OLGx9HRc5vbGo4b1zmJBXEMx356xUluEQ+TRbr3pupzUvnJlIw2NlGoX6bmsITSmHD
+ wMKSaqXWYsJcPTnKG+1jtQemfjxVhFGeHViXxc0Tsfz59CuEnMvW/H4KhRJjn5fZdxX5
+ Xt//dGCBxkjoRNK2JdgFaDbwie2Ur/RKlara120EXsm3dhX/uim7N8juNGMZTybUi3zb
+ KEvNEHBQIYC7bZshteyOUSpnfLvCruvYkOgKBnQstlqvsCWnY8HXPLYlEpBChjRDhpDm
+ IRqlL2yBitGL9AI2U28gakBRQs6sp32N7rPtKEv1cH9hrKrRQRNnGfq6EwX/LiMNSC3U
+ zg+Q==
+X-Gm-Message-State: AOJu0YxEVIiGn9duGmURTzcgDMFcDDm1/Wl7MhpJWIxPRiQdaK91alTi
+ MtyAf/DgBPn7K06jTTStLD9wV9gaLuUnTSmifMPfp7CWPZfuN1gh8KZEYZb6F1nBsXI0o8TYhfS
+ 4x+WJo3JoGlp44FZ+9rDYQuniSF1H11v2ckGB
+X-Google-Smtp-Source: AGHT+IGKVWWs0KJBU8hsI1QkxE4t5oMiV3VkvMC1FtHoYIvYiKjJtFqjbJCqAPkRwfYCNKZuLMAb/Vq2AobsJRgNlSc=
+X-Received: by 2002:a17:907:3e27:b0:a9a:129a:1862 with SMTP id
+ a640c23a62f3a-a9ef0058013mr2096512366b.60.1731556423333; Wed, 13 Nov 2024
+ 19:53:43 -0800 (PST)
 MIME-Version: 1.0
-References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
- <20241031-iommu_apple_dart_ordering-v1-2-8a6877946d6b@jannau.net>
- <87zfmi4rzy.fsf@bloch.sibelius.xs4all.nl>
- <4ff61e8e-03c7-42d2-b2fe-8dba1697641f@gmx.de>
- <CAFLszTjDaQGaaL9qM_s+oxNrAkGhunGkbAjyR1giEDgnShUfzw@mail.gmail.com>
- <5FA71CBD-F9AF-442A-8564-4F663F44BF42@gmx.de>
- <CAFLszTi9As9YFFoWuD9GW6gHpriZSNVCFmq5fKkdCi9jeRuqjQ@mail.gmail.com>
- <C4EB5D10-D037-49BE-BE0A-00BD3D1514FC@gmx.de>
-In-Reply-To: <C4EB5D10-D037-49BE-BE0A-00BD3D1514FC@gmx.de>
+References: <20241113150938.1534931-1-sjg@chromium.org>
+ <20241113150938.1534931-2-sjg@chromium.org>
+ <20241113174707.GR3600562@bill-the-cat>
+In-Reply-To: <20241113174707.GR3600562@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Nov 2024 20:53:17 -0700
-Message-ID: <CAFLszTiaDi7Sbrjsjt42UObz1Nb8SqM8CFBdcTOAXih3pJV3PQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] efi_loader: remove non vital devices first
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Janne Grunau <j@jannau.net>, Mark Kettenis <kettenis@openbsd.org>,
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>
+Date: Wed, 13 Nov 2024 20:53:31 -0700
+Message-ID: <CAFLszTjW2bGPRvUQC9pxvhKixpov8u2GxzzeUYeKo1FNFyuHug@mail.gmail.com>
+Subject: Re: [PATCH v5 1/8] bootstd: Avoid depending on BLK
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,113 +90,242 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Wed, 13 Nov 2024 at 11:45, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Wed, 13 Nov 2024 at 10:47, Tom Rini <trini@konsulko.com> wrote:
 >
-> Am 13. November 2024 17:03:03 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >Hi Heinrich,
+> On Wed, Nov 13, 2024 at 08:09:31AM -0700, Simon Glass wrote:
+>
+> > In principle bootstd can work without block devices, even if it does
+> > require driver model to be enabled in that case.
 > >
-> >On Wed, 13 Nov 2024 at 08:17, Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >wrote:
-> >>
-> >> Am 13. November 2024 15:39:22 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >> >Hi,
-> >> >
-> >> >On Wed, 13 Nov 2024 at 05:52, Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >wrote:
-> >> >>
-> >> >> On 11/1/24 21:29, Mark Kettenis wrote:
-> >> >> >> From: Janne Grunau <j@jannau.net>
-> >> >> >> Date: Thu, 31 Oct 2024 23:48:02 +0100
-> >> >> >>
-> >> >> >> DM_FLAG_VITAL marks devices which are essential for the operation of
-> >> >> >> other devices. Removing these devices before their users can result
-> >in
-> >> >> >> hangs or crashes.
-> >> >> >> This potentially fixes EFI boot of Renesas rcar3 devices. Their
-> >clock
-> >> >> >> devices (and with this series the dart iommu) are the only devices
-> >> >> >> markes as vital.
-> >> >> >> The arm boot code already handles devioce removal in this way.
-> >> >> >
-> >> >> > There is a typo in that last sentence of the commit message
-> >(devioce).
-> >> >> > Otherwise:
-> >> >> >
-> >> >> >> Signed-off-by: Janne Grunau <j@jannau.net>
-> >> >> >
-> >> >> > Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
-> >> >> >
-> >> >> >> ---
-> >> >> >>   lib/efi_loader/efi_boottime.c | 1 +
-> >> >> >>   1 file changed, 1 insertion(+)
-> >> >> >>
-> >> >> >> diff --git a/lib/efi_loader/efi_boottime.c
-> >b/lib/efi_loader/efi_boottime.c
-> >> >> >> index
-> >4f52284b4c653c252b0ed6c0c87da8901448d4b4..7db3c95782970f8c06a970a8ee86b1804cd848b6
-> >100644
-> >> >> >> --- a/lib/efi_loader/efi_boottime.c
-> >> >> >> +++ b/lib/efi_loader/efi_boottime.c
-> >> >> >> @@ -2234,6 +2234,7 @@ static efi_status_t EFIAPI
-> >efi_exit_boot_services(efi_handle_t image_handle,
-> >> >> >>              if (IS_ENABLED(CONFIG_USB_DEVICE))
-> >> >> >>                      udc_disconnect();
-> >> >> >>              board_quiesce_devices();
-> >> >> >> +            dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL |
-> >DM_REMOVE_NON_VITAL);
-> >> >> >>              dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
-> >> >>
-> >> >> Simon's patch 6224dc9ba428 ("arm: Remove vital devices last") addressed
-> >> >> the same issue for bootm on arm. But what about about other
-> >architectures?
-> >> >>
-> >> >> This logic should be moved to drivers/core/root.c instead of
-> >replicating
-> >> >> code.
-> >> >
-> >> >We could have a common helper, but it should not be in driver/core as
-> >> >this ordering is more of a policy decision. Unless we can add a
-> >> >parameter telling dm exactly what to do...
-> >> >
-> >> >BTW, Heinrich, this behaviour is exactly what my bootflow_efi() test
-> >> >was supposed to check. But since it doesn't have the
-> >> >exit-boot-services piece at your request...
-> >> >
-> >> >Regards,
-> >> >Simon
-> >>
-> >>
-> >> Why can't we generally remove non-vital devices first if all are to be
-> >removed?
-> >>
-> >> I cannot see anything device specific here.
+> > The use of a 'depends on BLK' for BOOTSTD conflicts with the way 'BLK'
+> > is now defined, producing recursive errors through multiple different
+> > paths, one of which is this (with Linksprite_pcDuino3 and
+> > BOOTSTD_DEFAULTS enabled):
 > >
-> >No objection to that...but it needs to be in a new function, not become the
-> >default behaviour of dm_remove_devices_flags(), which is supposed to do
-> >what it is told and in one pass.
+> >   arch/arm/Kconfig:7:error: recursive dependency detected!
+> >   arch/arm/Kconfig:7: symbol ARM64 is selected by ARCH_UNIPHIER_V8_MULTI
+> >   arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
+> >      part of choice <choice>
+> >   arch/arm/mach-uniphier/Kconfig:6: choice <choice> contains symbol
+> >      ARCH_UNIPHIER_V8_MULTI
+> >   arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
+> >      part of choice SPL
+> >   arch/arm/mach-stm32mp/Kconfig:3: symbol SPL depends on SUPPORT_SPL
+> >   common/spl/Kconfig:1: symbol SUPPORT_SPL is selected by ASPEED_AST2600
+> >   arch/arm/mach-aspeed/Kconfig:26: symbol ASPEED_AST2600 is part of
+> >      choice <choice>
+> >   arch/arm/mach-aspeed/Kconfig:12: choice <choice> contains symbol
+> >      ASPEED_AST2500
+> >   arch/arm/mach-aspeed/Kconfig:17: symbol ASPEED_AST2500 is part of
+> >      choice DM_RESET
+> >   arch/arm/mach-renesas/Kconfig.rcar3:197: symbol DM_RESET is selected
+> >      by CLK_RCAR_GEN3
+> >   drivers/clk/renesas/Kconfig:53: symbol CLK_RCAR_GEN3 depends on
+> >      CLK_RENESAS
+> >   drivers/clk/renesas/Kconfig:1: symbol CLK_RENESAS depends on CLK
+> >   drivers/clk/Kconfig:3: symbol CLK is selected by IMX8M_POWER_DOMAIN
+> >   drivers/power/domain/Kconfig:35: symbol IMX8M_POWER_DOMAIN depends on
+> >      POWER_DOMAIN
+> >   drivers/power/domain/Kconfig:3: symbol POWER_DOMAIN is selected by
+> >      BCM6318_USBH_PHY
+> >   drivers/phy/Kconfig:83: symbol BCM6318_USBH_PHY depends on PHY
+> >   drivers/phy/Kconfig:4: symbol PHY is selected by USB_EHCI_MX7
+> >   drivers/usb/host/Kconfig:211: symbol USB_EHCI_MX7 depends on USB
+> >   drivers/usb/Kconfig:1: symbol USB is selected by BOOTSTD_DEFAULTS
+> >   boot/Kconfig:455: symbol BOOTSTD_DEFAULTS depends on BOOTSTD
+> >   boot/Kconfig:398: symbol BOOTSTD depends on BLK
+> >   drivers/block/Kconfig:1: symbol BLK is selected by PVBLOCK
+> >   drivers/xen/Kconfig:1: symbol PVBLOCK depends on XEN
+> >   Kconfig:176: symbol XEN depends on ARM64
+> >
+> > We don't want to revert the change to BLK, which has been in place for
+> > a year now. We don't want to select BLK in BOOTSTD since it should
+> > support booting without block devices. The only realistic option is to
+> > remove BOOTSTD's dependency on BLK.
+> >
+> > Disable standard boot on the one board which fails.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v3)
+> >
+> > Changes in v3:
+> > - Drop wip (work-in-progress) comment in commit
+> >
+> > Changes in v2:
+> > - Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
+> >
+> >  boot/Kconfig                                   | 2 +-
+> >  configs/gardena-smart-gateway-mt7688_defconfig | 1 +
+> >  2 files changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/boot/Kconfig b/boot/Kconfig
+> > index 7dd30a030e3..b5433e88f10 100644
+> > --- a/boot/Kconfig
+> > +++ b/boot/Kconfig
+> > @@ -393,7 +393,7 @@ config BOOT_DEFAULTS
+> >  menuconfig BOOTSTD
+> >       bool "Standard boot"
+> >       default y
+> > -     depends on DM && OF_CONTROL && BLK
+> > +     depends on DM && OF_CONTROL
+> >       help
+> >         U-Boot supports a standard way of locating something to boot,
+> >         typically an Operating System such as Linux, provided by a distro such
 >
-> dm_remove_device_flags() makes no specific promises concerning the deletion sequence and its internal working.
+> This ends up being a massive size bloat on all of the boards which did
+> not use BOOTSTD before, and still can't (because there's no appropriate
+> methods). You need to not just disable it on the one board that fails
+> but on everything not currently enabling it, which now does enable it.
 
-Do you mean in the function comment in the header file? We can
-certainly update that.
-
-> But obviously it will fail if non-vital redources are not deleted first.
-
-Either I don't understand that, or I don't agree. Can you give a
-specific example?
-
->
-> Leaving this broken function exported and writing a new one has no user benefit.
-
-This function works fine. It is not broken.
+Looking through the list it is hard to know which boards can't use
+bootstd, nor what the missing methods are. See [1]. I could perhaps
+disable bootstd for all of the boards?
 
 >
-> We could copy the old function to a new static function that we call as needed from the old function name.
+> Or you need to better explain what's going on here, exactly and why
+> depending on BLK here is wrong, for what you're doing.
 
-Yes, that's fine with me. Also, did you see my note about the
-bootflow_efi() test?
+I tried that already. We had quite a long thread about it.
 
 Regards,
 Simon
+
+[1]
+10m50
+3c120
+CMPC885
+CMPCPRO
+M5208EVBE
+M5235EVB_Flash32
+M5235EVB
+M5249EVB
+M5272C3
+M5275EVB
+M5282EVB
+M53017EVB
+M5329AFEE
+M5329BFEE
+M5373EVB
+MCR3000
+MPC8548CDS_36BIT
+MPC8548CDS
+MPC8548CDS_legacy
+SBx81LIFKW
+SBx81LIFXCAT
+amcore
+amd_versal2_mini
+amd_versal2_mini_ospi
+amd_versal2_mini_qspi
+ap121
+ap143
+ap152
+astro_mcf5373l
+axm
+bcm968380gerg_ram
+bcmns
+boston32r2
+boston32r2el
+boston32r6
+boston32r6el
+boston64r2
+boston64r2el
+boston64r6
+boston64r6el
+cobra5272
+cortina_presidio-asic-base
+cortina_presidio-asic-pnand
+crs305-1g-4s-bit
+crs305-1g-4s
+crs326-24g-2s-bit
+crs326-24g-2s
+crs328-4c-20s-4s-bit
+crs328-4c-20s-4s
+eb_cpu5282
+eb_cpu5282_internal
+efi-x86_app32
+efi-x86_app64
+evb-ast2500
+gardena-smart-gateway-at91sam
+gardena-smart-gateway-mt7688
+gxp
+ibex-ast2700
+imgtec_xilfpga
+integratorap_cm720t
+integratorap_cm920t
+integratorap_cm926ejs
+integratorap_cm946es
+integratorcp_cm1136
+integratorcp_cm920t
+integratorcp_cm926ejs
+integratorcp_cm946es
+inteno_xg6846_ram
+kmcoge5ne
+kmeter1
+kmopti2
+kmsupx5
+kmtepr2
+lschlv2
+lsxhl
+maxbcm
+meesc_dataflash
+meesc
+microblaze-generic
+mscc_jr2
+mscc_luton
+mscc_ocelot
+mscc_serval
+mscc_servalt
+mt7620_mt7530_rfb
+mt7628_rfb
+mt7981_rfb
+mt7986_rfb
+mx6memcal
+netgear_cg3100d_ram
+nsim_700
+nsim_700be
+nsim_hs38be
+pg_wcom_expu1
+pg_wcom_expu1_update
+pg_wcom_seli8
+pg_wcom_seli8_update
+r8a77970_eagle
+rcar3_salvator-x
+sagem_f@st1704_ram
+sama5d29_curiosity_mmc1
+sama5d29_curiosity_mmc
+sama5d29_curiosity_qspiflash
+sama7g54_curiosity_mmc
+sama7g54_curiosity_nandflash
+sama7g54_curiosity_qspiflash
+smdkc100
+smegw01
+socfpga_is1
+stm32f429-discovery
+stm32mp25
+stmark2
+tb100
+tbs2910
+th1520_lpi4a
+thunderx_88xx
+tuge1
+tuxx1
+usb_a9263_dataflash
+work_92105
+xilinx_versal_mini
+xilinx_versal_mini_ospi
+xilinx_versal_mini_qspi
+xilinx_versal_net_mini
+xilinx_versal_net_mini_ospi
+xilinx_versal_net_mini_qspi
+xilinx_zynqmp_mini
+xilinx_zynqmp_mini_nand
+xilinx_zynqmp_mini_nand_single
+xilinx_zynqmp_mini_qspi
+xtfpga
+zynq_cse_nand
+zynq_cse_nor
+zynq_cse_qspi
