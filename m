@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70D51D6A224
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 18:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B4A8D6A224
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 18:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B1228964E;
-	Thu, 14 Nov 2024 19:13:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C48F389663;
+	Thu, 14 Nov 2024 19:13:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lm1RcqSB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MAbvP/yb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FF098966D; Thu, 14 Nov 2024 19:13:40 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 71D6E8965A; Thu, 14 Nov 2024 19:13:42 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B4F48965A
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 19:13:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5982A89667
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 19:13:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a9ed7d8d4e0so132549066b.1
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 10:13:38 -0800 (PST)
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2fb5fa911aaso16334191fa.2
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 10:13:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731608014; x=1732212814; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1731608019; x=1732212819; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BmEx3XVW8IO1Qzzy6Z9VS6viU/cZuoymRce+mOCTzUw=;
- b=lm1RcqSBUYi7+Od8I8+FO+RyBOP0tY/Y5NHUxh630zvRYH16N7xOM/KWTtdtLQVWll
- NOL+fQnjZG5tRj0oH7R/QiDYmRI8Wizg6Z98n+Li2vTAFeK7m9ITtjG3XVqc7Qvy4KVT
- ei6+B2yLmZ+mstnPCCFHewZ6glX9m7FNCx3f8E/IgwqzIG9QwhmShHBAYh5IWCN94565
- rcptca1104MA9Liuy3jcGcxs9a+4QqiWOuIn74eCU1TsrsSmBHYAxonLS28x+UdJI8TF
- Qe7odpUCyr75KBlH4Dua2MNu51A4fCYOH/uI5CPRfvdju1ZD/kvE4Z6sVT4bFTW3KUhp
- w3OA==
+ bh=PU+Sl2CmrfGs+yCrJRC1TU60JV2s2M9q5nwUveMU5Jg=;
+ b=MAbvP/yb7t7oYsb6LPpSHrRzkXUkd8ZpYm94LFrKpa3J97M0pGzJzcgoGSYm9HVSPO
+ Ui5QVaOWZ46dnU37jG8NppUi1Lp1IrW9PTboVA8Ua1yJr+wLnT6Xt/coHGr5AvqNgAQp
+ Ia+r/G40swyQqZoLBZcaMHe7EzyJgPe9ITGLK+Rv6yaxmUiaIDG3fQnges3f1JTR5pET
+ +yq3d50bGc+PwM/ewfi080QDmhEuZ47lCoi+NKTXJi+DjQIAcuLystKCX5deFZRFtytA
+ +qFstZzfvJj2CoxXb5akTFZuP6WM9SwvSUEnJI6kcXM8Fjef+9zda3XlEZVpPxhbQKcD
+ npeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731608014; x=1732212814;
+ d=1e100.net; s=20230601; t=1731608019; x=1732212819;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BmEx3XVW8IO1Qzzy6Z9VS6viU/cZuoymRce+mOCTzUw=;
- b=ErMBhXXVU5uHaz8FeiI48yx6biwRxT7g3eKAeOQhA2HyiwiMilS4x/2wxm6GIsh87Y
- cJkjLwQmAU7a40ydEyGHkVr2+jpJFPv0+yQW1q37qtZ3dfaSZD2CcPO6+rhF5kY4Fy5u
- YIf9osIVGDVkWNo2K8gUcynQfzijGPZyIUAkGyjE5tjxqKuuVZPtxmtwalfN1pRuebSC
- rbaoH/FI9tUAZjD9sKlwFxE049WETVNjrXFbtkdz/ppxcxgbR6qXCQFmPnfOEWe7KTkp
- DMtFOC6t5mOdzE/HDerLeTjbxZ6hMRgq5SngeDdF9wcvYEES+tWFgoK+Kjulz2U+nKZE
- VXTg==
-X-Gm-Message-State: AOJu0Yx0AUUUj0HHuaeNXAhyavJOko/PfPPKd4qaRHichZCxmLDgetLF
- /9USjFsD7cWz4RNYJNrJvwH6ybufBHLGhbqy1jp4eDqnO2F2ropwczFXJvx9WaY066X82ZHBr1u
- J
-X-Google-Smtp-Source: AGHT+IGFyNa8Ap1kr9qANWwUnAogRF7X/mLeMv3yeIU6Of1egPoz0QX05GBtYYvuf2sqZDEZ90cTVA==
-X-Received: by 2002:a17:907:2d8a:b0:a99:61d1:348f with SMTP id
- a640c23a62f3a-aa20cdfa633mr315961766b.52.1731608013742; 
- Thu, 14 Nov 2024 10:13:33 -0800 (PST)
+ bh=PU+Sl2CmrfGs+yCrJRC1TU60JV2s2M9q5nwUveMU5Jg=;
+ b=wf8LtSW5lv5aetGBZNuK2aRQsQpkTYOvodJrf50eW7BktfoeTlFCKwn7SHWujeOEuV
+ l80UsAN95f2MHA83059aiwp1H63piboHIekG3I1lkI9fG7RDZdCzhSWxq4Ho2w+r7AvE
+ peSQmT50ERYQahy84AhHQIuHLk7h1V5SWsf3caTUlGMMX1cN3Ry9hPtVnLUR8eAXZubX
+ v/zefgkwhMvfK2dh9VpRcUDLyaMUBAWBYc1kxk2QIxfoqKKCRBqEjKj3CvWP1yuh/BvD
+ 9DM1c16DZafYUo5vvzwHCusG2jVOBC4OGsErHS0M5eto6rmHdBz+4X0+DPvV5VpQUfKW
+ wdAg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUh7eMDb8HYZu3DZr9lYHBdTUH+ovsGUKBRDy7DfL9pkwStUhD9GYTL9wt0UlN7I/TFPo40OWk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxGCy3ixIJF9PtjIIvk1uu3214+rc779j1FRsTVY+y5YipX40Sp
+ ohfJkbEdFozmKIS50L2YsLc22MDt3N4Xf/aEkn44IfwjwriVcszmoxtVGMIoVrkZzj8hxaYnUoe
+ p
+X-Google-Smtp-Source: AGHT+IEhsFmBB4AVJyjencHl3qgMvZDWspE/CPNQJSbD5wJTA5PiCJDpwfzZw3nM80Tll7nbsW0hxA==
+X-Received: by 2002:a2e:a914:0:b0:2f7:7be8:fd89 with SMTP id
+ 38308e7fff4ca-2ff6061066bmr666511fa.6.1731608018878; 
+ Thu, 14 Nov 2024 10:13:38 -0800 (PST)
 Received: from lion.localdomain ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20e0860d5sm89590366b.186.2024.11.14.10.13.31
+ a640c23a62f3a-aa20e0860d5sm89590366b.186.2024.11.14.10.13.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2024 10:13:31 -0800 (PST)
+ Thu, 14 Nov 2024 10:13:34 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-In-Reply-To: <20241012132251.1840147-1-caleb.connolly@linaro.org>
-References: <20241012132251.1840147-1-caleb.connolly@linaro.org>
-Subject: Re: [PATCH] phy: qcom: ufs: add sc7280
-Message-Id: <173160801136.3344230.2625681767206232615.b4-ty@linaro.org>
-Date: Thu, 14 Nov 2024 19:13:31 +0100
+ Julius Lehmann <lehmanju@devpi.de>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+In-Reply-To: <20241002-sm8150-qmp-phy-v1-1-719695ad2f1e@devpi.de>
+References: <20241002-sm8150-qmp-phy-v1-1-719695ad2f1e@devpi.de>
+Subject: Re: [PATCH] phy: qcom: Add SM8150 to QMP UFS PHY driver
+Message-Id: <173160801381.3344230.2336501688352553027.b4-ty@linaro.org>
+Date: Thu, 14 Nov 2024 19:13:33 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,15 +98,15 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Sat, 12 Oct 2024 15:22:05 +0200, Caleb Connolly wrote:
-> Add configuration for the SC7280, copied from Linux 6.11
+On Wed, 02 Oct 2024 20:52:17 +0200, Julius Lehmann wrote:
+> Copy PHY tables over from Linux to support SM8150
 > 
 > 
 
 Applied, thanks!
 
-[1/1] phy: qcom: ufs: add sc7280
-      commit: 6a8be4e2924ab0a978d5175a8c28d92f014df19a
+[1/1] phy: qcom: Add SM8150 to QMP UFS PHY driver
+      commit: bea0812f7038c72043d4a86c25c2a967fdceab48
 
 Best regards,
 -- 
