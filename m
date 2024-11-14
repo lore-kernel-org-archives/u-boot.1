@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53C49D6A221
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 18:13:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D71ED6A221
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 18:13:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B09A189653;
-	Thu, 14 Nov 2024 19:13:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 17B8F89649;
+	Thu, 14 Nov 2024 19:13:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="afWu4ZQQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aJ8ctpI4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F3A789639; Thu, 14 Nov 2024 19:13:24 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 321F489657; Thu, 14 Nov 2024 19:13:26 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E8198964B
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 19:13:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 344C489649
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 19:13:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a9a850270e2so178827566b.0
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 10:13:22 -0800 (PST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-53b13ea6b78so1455170e87.2
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 10:13:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731607997; x=1732212797; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1731608002; x=1732212802; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nMbR3P++0JSi/If5NZ9INTKMyPYQuQ11n1dDhCwQ/w4=;
- b=afWu4ZQQIJcvSgfXvqkV6pOAwXBI3dDc5Tet2DWP1lizjs/dW3Xc0twOiGILK02Hyp
- KMP99Hn5A1E6EQxl4zC0YR4Ytff5zff3SwUUMu8nXJE2O8ygYMW1heY/THG7uN5TuMQb
- 8YV5H6dZJC4qHTnAKXNdTuv+PFFtZRnnxIMNyELZ7PZVluDArRnLCOoYqfcsppApHg2J
- 3KycyjVs/8bEpliFwBRzjoiIW1A06o4k9DQzbJCs3fKAF7VxmHdry/v9zT/3G8a/G+rl
- UgqxveP+E6jVahjPB4etmB9yUrW9HUuXUfcj+RKdl59Z/dvh+uCKSp7itEuZlikTCNZI
- E4Sw==
+ bh=Ic1gIaj9DL6c8hYvCbP/xacYZyEJodOL1rcl6EUHV/w=;
+ b=aJ8ctpI4Fmuz53m0ulH8CGs7QoT2M3YpEtsoVX/94Vnj+Qyr4+WlDttUn10razTvh8
+ lL9J5VMbo/uHnFD4zH2NdX9GauJA2YNWFjWuesuoqBQKJNFlrDGBpRXILX/AnoWctK/z
+ C9skhqzfSzt0buTWmpLOzmHepuq/aSsU4kGwZd6myvg84DOTEx3j4szWbGam3O6bvXc2
+ hmD5SudwkQlhUA82l2Qd3r/zjV+ykktwJFzYttGEkgJbZGxRXxr2ZCUUOXSiVoiW4Um6
+ 5X99tJZ7Os6Vcj0w7kAQtkws31a78wOU+Ek03gyxqLtm5I++eAFrYRSRxV0nQxoY4u+c
+ RV0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731607997; x=1732212797;
+ d=1e100.net; s=20230601; t=1731608002; x=1732212802;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nMbR3P++0JSi/If5NZ9INTKMyPYQuQ11n1dDhCwQ/w4=;
- b=mkm5jF8wOJGvtNW1xklufw+rqPolwe5MfMT7/76XWZ8hHoT8mVjUdyUubQLk2OB2jm
- NQbZQexUsWDD/4HNiKXtvx2z2VvHPam6u5pm9lCy67yUe3pegzafFfJmw84s+1V8ZAB6
- 9ktKyF4FDVPGYO/yImRIX7LWm8TUcA1KzGF2Z4y02wHWXDEr4CauhzARRx926DBVlnJC
- 4l+DKt7OElEFsUfzd7e2ivZTbO21HPYKHU0bk2dltLIJ6U/eLkRxXdm92EW6vCAjGglJ
- EXPFAcZ8w/UjHI7UrtlI/qYFcBxyQGOYtBc69SvUBONRw2SitVdSlHYgRaSttJRdXxl2
- RPrg==
+ bh=Ic1gIaj9DL6c8hYvCbP/xacYZyEJodOL1rcl6EUHV/w=;
+ b=N0s4yPdcABJUgBlbh4mqXncc0XXI7hSEBIyMZedtd4sc79SsophUxXSvJgHyseNLKM
+ HMh3HphqcAiiRLVCnEWoW2dgDknp7R+672FYu34guTVvuhwTWp29s3nYAuM/U8lUVs39
+ gJnQiePTT2SOi0k1vkRS2lYRwyoYxxyrY1DGf4pH/IFEOwMYdZ5Kthfjbq+k1jKoZkvC
+ 6+hdKBHw48tF3TDXgVaLoQ5/ZRS4dsQXkVz6c5feayJrK7zCA+BA5ErcsYLMGyOFMevW
+ ljkz7Es2qHPvP96KrX5pQLjGea7MpKHqSH7AAY24geOM1bE7c14nkAk2cxYloPkCSO7X
+ tKEg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXmG4GbKAhWbWy4jYMe6l/N+7DvtwlH3vRfF38D0zaW2rTnvnGDEHjAHhDO6FyR4nRbUbhOmW8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz+og+EBev7Sx558uHFuCraVHCuGQTiYQeVHMR4/lWfVAo1bLCy
- V6m0Q3eaomAnEj8RltmqgRkhtZFRHJD++N/j6lhVPS1aRopDYlYeWFhOvBXtRrM4vV+XAwtxCny
- Y
-X-Google-Smtp-Source: AGHT+IFesTSyJDi14U8x/luGnsXjJFtGOl1pkRuprA9nirJ3g6uUMoZlxb4v0YMMEUKjhN7QP7pBJg==
-X-Received: by 2002:a17:907:7b9a:b0:a99:8a0e:8710 with SMTP id
- a640c23a62f3a-aa20ccfe85emr309844166b.14.1731607996425; 
- Thu, 14 Nov 2024 10:13:16 -0800 (PST)
+ AJvYcCWO129duOvYykBn770HmpuE8tOFUjIEC9V0rORGjl88YFMFPcIPEzRbWGttrRDO/WJaGNSdFlU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2LKQEpLcRPAp005lWz2SvJ/4YgFgF9i8IAijmQknwzLoDxTO9
+ 3KI/Yo4rcCNVlSIv6ZJAiI9kVMlg8lco0kKBCUSQBFNy2N8oHGPvuVERqkjUXJedjp7jk0LmdCc
+ p
+X-Google-Smtp-Source: AGHT+IGqq7CTb2CSOsB/Xcui/5VXbMhS5HIaB+DibptGHP/IgmqJCvnZV1oCxn1Wq0zUwd24Sbo1UA==
+X-Received: by 2002:a05:6512:ad5:b0:53d:a41c:4ef1 with SMTP id
+ 2adb3069b0e04-53da5c27a6bmr2505597e87.10.1731608002167; 
+ Thu, 14 Nov 2024 10:13:22 -0800 (PST)
 Received: from lion.localdomain ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20e0860d5sm89590366b.186.2024.11.14.10.13.15
+ a640c23a62f3a-aa20e0860d5sm89590366b.186.2024.11.14.10.13.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2024 10:13:15 -0800 (PST)
+ Thu, 14 Nov 2024 10:13:21 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
+To: Sumit Garg <sumit.garg@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20241017-topic-sm8x50-enable-pinconf-v1-1-a70ddf492e87@linaro.org>
-References: <20241017-topic-sm8x50-enable-pinconf-v1-1-a70ddf492e87@linaro.org>
-Subject: Re: [PATCH] qcom_defconfig: enable PINCONF
-Message-Id: <173160799558.3344230.7521012119425222449.b4-ty@linaro.org>
-Date: Thu, 14 Nov 2024 19:13:15 +0100
+In-Reply-To: <20241016-topic-sm8x50-mmc-vqmmc-v1-1-767af5351d37@linaro.org>
+References: <20241016-topic-sm8x50-mmc-vqmmc-v1-1-767af5351d37@linaro.org>
+Subject: Re: [PATCH] mmc: msm_sdhci: enable vqmmc at probe if available
+Message-Id: <173160800099.3344230.2105692050506658447.b4-ty@linaro.org>
+Date: Thu, 14 Nov 2024 19:13:20 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,16 +98,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Thu, 17 Oct 2024 10:04:54 +0200, Neil Armstrong wrote:
-> The SM8550 and SM8650 SoCs requires PINCONF to properly
-> setup SDC pins in order to function correctly.
+On Wed, 16 Oct 2024 11:17:16 +0200, Neil Armstrong wrote:
+> On earlier platforms, the vqmmc regulator was enabled by the
+> previous bootloader, but on the newest (SM8650) it's not
+> and we need vqmmc to be enabled in order to have the card
+> to respond.
 > 
 > 
 
 Applied, thanks!
 
-[1/1] qcom_defconfig: enable PINCONF
-      commit: 748ee6344fd4896ec9370ac9c5f59578aab11a2a
+[1/1] mmc: msm_sdhci: enable vqmmc at probe if available
+      commit: 2d55b9e7319231a72659d620de03a471b92cdef0
 
 Best regards,
 -- 
