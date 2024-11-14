@@ -4,75 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03407D41C00
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 03:53:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90D50D41C00
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 03:53:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FF0388E31;
-	Thu, 14 Nov 2024 04:53:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EB98488FFC;
+	Thu, 14 Nov 2024 04:53:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bwK6aHh6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MLEfK1ph";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 650A0895A9; Thu, 14 Nov 2024 04:53:46 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id B8CB588FFC; Thu, 14 Nov 2024 04:53:54 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CDCE88E31
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 04:53:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 57A568957F
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 04:53:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a9ec86a67feso24536366b.1
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 19:53:44 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-aa2099efdc3so63401266b.1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 19:53:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731556424; x=1732161224; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731556431; x=1732161231; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uR+3nSkGy8+C1gPoeoR8KRkLBotswQhCOAj9PuJPwnI=;
- b=bwK6aHh696nsGTcMf5E+yVvcSklrXGg7bsQ9NQttMC18DVoKWZSc2/aZsnTZzl8mwg
- fNGz8L07HNL5unYVlfROfBgQvglkn1hUMtpnDx7THQr4uCTTWEYfKgZFoesXy4LsYTUB
- O5kvvnUxg0k5EkhIsHROoDRJf96lpSza8klyU=
+ bh=SexHaiB+fkPZQ/9e74XABmbdvtp6ATRVG9toPNteCLg=;
+ b=MLEfK1ph719iQmkSz1Y+W3jYQbHpaW+iiwAtA58ESmW0CocaakCJwwIDKJSFhyPVeR
+ D/QFuhyLl4CzbaONj+sG0B1p4RVekLl5T18tr7cl97TLkkCcXtYdSZ4DpNHiQ5/BgJ6v
+ sK3Al5rOuMjNqib9rjEy1lufJmRvDjFOeFHMU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731556424; x=1732161224;
+ d=1e100.net; s=20230601; t=1731556431; x=1732161231;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uR+3nSkGy8+C1gPoeoR8KRkLBotswQhCOAj9PuJPwnI=;
- b=OLGx9HRc5vbGo4b1zmJBXEMx356xUluEQ+TRbr3pupzUvnJlIw2NlGoX6bmsITSmHD
- wMKSaqXWYsJcPTnKG+1jtQemfjxVhFGeHViXxc0Tsfz59CuEnMvW/H4KhRJjn5fZdxX5
- Xt//dGCBxkjoRNK2JdgFaDbwie2Ur/RKlara120EXsm3dhX/uim7N8juNGMZTybUi3zb
- KEvNEHBQIYC7bZshteyOUSpnfLvCruvYkOgKBnQstlqvsCWnY8HXPLYlEpBChjRDhpDm
- IRqlL2yBitGL9AI2U28gakBRQs6sp32N7rPtKEv1cH9hrKrRQRNnGfq6EwX/LiMNSC3U
- zg+Q==
-X-Gm-Message-State: AOJu0YxEVIiGn9duGmURTzcgDMFcDDm1/Wl7MhpJWIxPRiQdaK91alTi
- MtyAf/DgBPn7K06jTTStLD9wV9gaLuUnTSmifMPfp7CWPZfuN1gh8KZEYZb6F1nBsXI0o8TYhfS
- 4x+WJo3JoGlp44FZ+9rDYQuniSF1H11v2ckGB
-X-Google-Smtp-Source: AGHT+IGKVWWs0KJBU8hsI1QkxE4t5oMiV3VkvMC1FtHoYIvYiKjJtFqjbJCqAPkRwfYCNKZuLMAb/Vq2AobsJRgNlSc=
-X-Received: by 2002:a17:907:3e27:b0:a9a:129a:1862 with SMTP id
- a640c23a62f3a-a9ef0058013mr2096512366b.60.1731556423333; Wed, 13 Nov 2024
- 19:53:43 -0800 (PST)
+ bh=SexHaiB+fkPZQ/9e74XABmbdvtp6ATRVG9toPNteCLg=;
+ b=OFP9M5T/OmbM172lYCBdYGG5deSv3f/3lO91qJ0p7/MhULED17F0ceAyLSVW29gJ0x
+ vQkY30pNlXx/OahW+2I6thBme5KXxH80h25X+Ls4OL5rNtTh9L+gSxacdpjTPgx6b4xN
+ 8id2XDBWLJh6vIoG0JP7kbddNs+VFr/bnYY5Vj8gFWzIq6LrU7O4HY4QpVd7X19s1ruD
+ IkdhyJcBm9XwnKuG3rKvdqqAvrHibvNu73CSIkay/p+W9yKo2K1PlNHLNNj+GhrgD4fv
+ ct+eYCwydBSpXqME24stom+ayhGMmbaLdi3oF1OST2hvV5xABxMH4jUmXOfLJvxIAqjY
+ 9/Fw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU8CcOMnt2fiD3M0lzE1rhXisAlLpH1p9IsyEobClmJ4tBK6sZqwPFnG7aU1f8U6gPLheHhmqc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxP9s4e/5SrxiUgsHRjDbemHRgTqFzU8eOi4xk6surl6HvBbuu1
+ mvGnaimvKfeF2OQx8EzOYe/frSaBETg3IkQ1/Ese7fdUv7n5yxPnFJxEx6vVsVAH59BneJLP9UK
+ NYnL/nT7LQSlxG3DdpbHlL1tXcRnX3d9av6aa
+X-Google-Smtp-Source: AGHT+IExuvglJMou08vU7L65WBoCdKm7n2YoGwoy+hypCU8u6ztktwqP1OsmFVKaWogqCc2n6kWGD9Ozsz06aCsLFeI=
+X-Received: by 2002:a17:907:e92:b0:a99:ee26:f416 with SMTP id
+ a640c23a62f3a-aa2076eb6b3mr174980166b.14.1731556430747; Wed, 13 Nov 2024
+ 19:53:50 -0800 (PST)
 MIME-Version: 1.0
-References: <20241113150938.1534931-1-sjg@chromium.org>
- <20241113150938.1534931-2-sjg@chromium.org>
- <20241113174707.GR3600562@bill-the-cat>
-In-Reply-To: <20241113174707.GR3600562@bill-the-cat>
+References: <20241110083017.367565-1-ilias.apalodimas@linaro.org>
+ <20241110083017.367565-5-ilias.apalodimas@linaro.org>
+ <CAFLszThNpU2cNNvU4uT2vkgFKJr7ss=j_UYfXTFXA_b4=LnurA@mail.gmail.com>
+ <CAC_iWjKFxtBxEqkkXSOhcRqN4fRRgMcsmFRVYeNZOnR4zERrQQ@mail.gmail.com>
+ <CAFLszTjou7yq-psYT3jBU7L8g81+bWUqc9Xj007zqfpfpnP9gg@mail.gmail.com>
+ <CAC_iWjJdK6D+inVSMqJ941yvpDvK4j5XufvA1Fije3aqZvm=1g@mail.gmail.com>
+ <CAFLszTiG9AMPs7q9QJgD5bP4=QwXVxQrOJqpWARamkPXS8p4wg@mail.gmail.com>
+ <CAC_iWjL6BDhRHTYWW25N2v8Aw_MbwTzc+FAX1c6akGKypLKFEA@mail.gmail.com>
+ <CAFLszTiPNMEGFPsbsuagcVooPDb_eawafnb=7hWGaDmNYbrqyg@mail.gmail.com>
+ <CAC_iWjK-8JxM65dZkN1z_wP1Q+o7t4mJ1Xw8QZjzcanWXr98SA@mail.gmail.com>
+In-Reply-To: <CAC_iWjK-8JxM65dZkN1z_wP1Q+o7t4mJ1Xw8QZjzcanWXr98SA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Nov 2024 20:53:31 -0700
-Message-ID: <CAFLszTjW2bGPRvUQC9pxvhKixpov8u2GxzzeUYeKo1FNFyuHug@mail.gmail.com>
-Subject: Re: [PATCH v5 1/8] bootstd: Avoid depending on BLK
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>
+Date: Wed, 13 Nov 2024 20:53:39 -0700
+Message-ID: <CAFLszTgUbx4wXNmR0Fqu-ZxQwT1nvV7aOGiDOzZ-di-w-zQLew@mail.gmail.com>
+Subject: Re: [PATCH v3 4/6] net: lwip: Enable https:// support for wget
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Anton Antonov <Anton.Antonov@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Wei Ming Chen <jj251510319013@gmail.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,242 +105,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ilias,
 
-On Wed, 13 Nov 2024 at 10:47, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 13 Nov 2024 at 09:11, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Wed, Nov 13, 2024 at 08:09:31AM -0700, Simon Glass wrote:
+> On Wed, 13 Nov 2024 at 18:04, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Ilias,
+> >
+> > On Wed, 13 Nov 2024 at 08:11, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > On Wed, 13 Nov 2024 at 17:09, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Ilias,
+> > > >
+> > > > On Wed, 13 Nov 2024 at 07:46, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > On Wed, 13 Nov 2024 at 15:39, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > HI Ilias,
+> > > > > >
+> > > > > > On Mon, 11 Nov 2024 at 07:20, Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >
+> > > > > > > Thanks Simon,
+> > > > > > >
+> > > > > > > On Mon, 11 Nov 2024 at 15:03, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > >
+> > > > > > > > On Sun, 10 Nov 2024 at 01:32, Ilias Apalodimas
+> > > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > > >
+> > > > > > > > > With the recent changes of lwip & mbedTLS we can now download from
+> > > > > > > > > https:// urls instead of just http://.
+> > > > > > > > > Adjust our wget lwip version parsing to support both URLs.
+> > > > > > > > > While at it adjust the default TCP window for QEMU since https seems to
+> > > > > > > > > require at least 16384
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > > > > > > ---
+> > > > > > > > >  cmd/Kconfig      | 19 +++++++++++
+> > > > > > > > >  net/lwip/Kconfig |  2 +-
+> > > > > > > > >  net/lwip/wget.c  | 86 +++++++++++++++++++++++++++++++++++++++++++-----
+> > > > > > > > >  3 files changed, 97 insertions(+), 10 deletions(-)
+> > > > > > > >
+> > > > > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > > > > > >
+> > > > > > > > Some nits / questions
+> > > > > > > >
+> > > > > > > > I am not sure what mbedtls_hardware_poll() is,
+> > > > > > >
+> > > > > > > It's an entropy collector used by mbedTLS to ensure the platform has
+> > > > > > > enough entropy.
+> > > > > > > It's required if your platform doesn't support standards like the
+> > > > > > > /dev/urandom or Windows CryptoAPI.
+> > > > > > >
+> > > > > > > > but if @len is too
+> > > > > > > > short, would it be acceptable to return an error? How many bytes is it
+> > > > > > > > requesting in the https case?
+> > > > > > >
+> > > > > > > If you don't return enough entropy https:// will fail and mbedTLS &
+> > > > > > > lwIP will print an error. I think we currently use 128 and the default
+> > > > > > > for mbedTLS is 32.
+> > > > > >
+> > > > > > OK, then the code is quite strange to me. It seems like it should
+> > > > > > check that 'len' is large enough.
+> > > > > >
+> > > > > > But what does 'len' actually mean? Its arguments are not described in
+> > > > > > mbedtls. Shouldn't you just pass it on to the dm_rng_read() function?
+> > > > >
+> > > > > The entry point is mbedtls_entropy_func(). mbedtls then calls
+> > > > > entropy_gather_internal() which asks for some bytes of entropy and is
+> > > > > controlled by a config option (and defaults to 128 for the config we
+> > > > > use in U-Boot -- MBEDTLS_ENTROPY_MAX_GATHER). len is actually
+> > > > > MBEDTLS_ENTROPY_MAX_GATHER.
+> > > > >
+> > > > > > Why call it with only 8 bytes? It might be more bytes than is
+> > > > > > requested (and larger than the buffer), or fewer.
+> > > > >
+> > > > > It doesn't matter because we copy back the correct amount of
+> > > > > bytes(what the caller requested). If it's less mbedTLS calls that
+> > > > > function until it gathers all requested entropy.
+> > > > >
+> > > > > > It seems that your
+> > > > > > function is written with knowledge of the internals of mbedtls.
+> > > > >
+> > > > > Ofc it is. It's a function needed by mbedTLS -- not U-Boot, it
+> > > > > requires internal knowledge of it (and is probably part of the ABI,
+> > > > > but I'll have to check that).
+> > > > >
+> > > > > What happens in the TLS case is that 64b are required. We either make
+> > > > > 8 calls of 8b or make a single call with MBEDTLS_ENTROPY_MAX_GATHER.
+> > > > >
+> > > > >  I could rewrite it as
+> > > > >         uclass_first_device(UCLASS_RNG, &dev);
+> > > > >         if (!dev) {
+> > > > >                 log_err("Failed to get an rng device\n");
+> > > > >                 return ret;
+> > > > >         }
+> > > > >
+> > > > >         rng = malloc(len);
+> > > > >         if (!rng)
+> > > > >                 return -ENOMEM;
+> > > > >
+> > > > >         ret = dm_rng_read(dev, rng, len);
+> > > > >         if (ret) {
+> > > > >                 free(rng);
+> > > > >                 return ret;
+> > > > >         }
+> > > > >
+> > > > >         memcpy(output, rng, len);
+> > > > >         *olen = len;
+> > > > >         free(rng);
+> > > > >
+> > > > > It does the same thing but gets 128b in one go. I don't have a strong
+> > > > > opinion on that. Let me know what you prefer
+> > > > > The tradeoff seems pretty straightforward. you either gather
+> > > > > potentially more entropy than required and call that function once, or
+> > > > > you gather exactly what's required on 8b steps -- but call that
+> > > > > function multiple times.
+> > > > >
+> > > > > >
+> > > > > > BTW mbedtls_hardware_poll() is a strange name as it actually reads
+> > > > > > random data, so I think it should be renamed.
+> > > > >
+> > > > > I don't think that can't change as you would break all projects using
+> > > > > it, but you can try sending a patch.
+> > > >
+> > > > I am wondering why we can't just do:
+> > > >
+> > > > ret = dm_rng_read(dev, rng, len);
+> > > > if (ret)
+> > > >    return ret;
+> > > >
+> > > > *olen = len;
+> > >
+> > > I am not sure I am following. Do that were?
+> >
+> > Oh, I had that wrong, so very confusing, sorry. Something like this:
+> >
+> > +int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len,
+> > +                         size_t *olen)
+> > +{
+> > +       struct udevice *dev;
+> > +       int ret;
+> > +
+> > +       ret = uclass_get_device(UCLASS_RNG, 0, &dev);
+> > +       if (ret) {
+> > +               log_err("Failed to get an rng: %d\n", ret);
+> > +               return ret;
+> > +       }
+> > +       ret = dm_rng_read(dev, output, len);
+> > +       if (ret)
+> > +               return ret;
+> > +
+> > +       *olen = len;
+> > +
+> > +       return 0;
 >
-> > In principle bootstd can work without block devices, even if it does
-> > require driver model to be enabled in that case.
-> >
-> > The use of a 'depends on BLK' for BOOTSTD conflicts with the way 'BLK'
-> > is now defined, producing recursive errors through multiple different
-> > paths, one of which is this (with Linksprite_pcDuino3 and
-> > BOOTSTD_DEFAULTS enabled):
-> >
-> >   arch/arm/Kconfig:7:error: recursive dependency detected!
-> >   arch/arm/Kconfig:7: symbol ARM64 is selected by ARCH_UNIPHIER_V8_MULTI
-> >   arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
-> >      part of choice <choice>
-> >   arch/arm/mach-uniphier/Kconfig:6: choice <choice> contains symbol
-> >      ARCH_UNIPHIER_V8_MULTI
-> >   arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
-> >      part of choice SPL
-> >   arch/arm/mach-stm32mp/Kconfig:3: symbol SPL depends on SUPPORT_SPL
-> >   common/spl/Kconfig:1: symbol SUPPORT_SPL is selected by ASPEED_AST2600
-> >   arch/arm/mach-aspeed/Kconfig:26: symbol ASPEED_AST2600 is part of
-> >      choice <choice>
-> >   arch/arm/mach-aspeed/Kconfig:12: choice <choice> contains symbol
-> >      ASPEED_AST2500
-> >   arch/arm/mach-aspeed/Kconfig:17: symbol ASPEED_AST2500 is part of
-> >      choice DM_RESET
-> >   arch/arm/mach-renesas/Kconfig.rcar3:197: symbol DM_RESET is selected
-> >      by CLK_RCAR_GEN3
-> >   drivers/clk/renesas/Kconfig:53: symbol CLK_RCAR_GEN3 depends on
-> >      CLK_RENESAS
-> >   drivers/clk/renesas/Kconfig:1: symbol CLK_RENESAS depends on CLK
-> >   drivers/clk/Kconfig:3: symbol CLK is selected by IMX8M_POWER_DOMAIN
-> >   drivers/power/domain/Kconfig:35: symbol IMX8M_POWER_DOMAIN depends on
-> >      POWER_DOMAIN
-> >   drivers/power/domain/Kconfig:3: symbol POWER_DOMAIN is selected by
-> >      BCM6318_USBH_PHY
-> >   drivers/phy/Kconfig:83: symbol BCM6318_USBH_PHY depends on PHY
-> >   drivers/phy/Kconfig:4: symbol PHY is selected by USB_EHCI_MX7
-> >   drivers/usb/host/Kconfig:211: symbol USB_EHCI_MX7 depends on USB
-> >   drivers/usb/Kconfig:1: symbol USB is selected by BOOTSTD_DEFAULTS
-> >   boot/Kconfig:455: symbol BOOTSTD_DEFAULTS depends on BOOTSTD
-> >   boot/Kconfig:398: symbol BOOTSTD depends on BLK
-> >   drivers/block/Kconfig:1: symbol BLK is selected by PVBLOCK
-> >   drivers/xen/Kconfig:1: symbol PVBLOCK depends on XEN
-> >   Kconfig:176: symbol XEN depends on ARM64
-> >
-> > We don't want to revert the change to BLK, which has been in place for
-> > a year now. We don't want to select BLK in BOOTSTD since it should
-> > support booting without block devices. The only realistic option is to
-> > remove BOOTSTD's dependency on BLK.
-> >
-> > Disable standard boot on the one board which fails.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v3)
-> >
-> > Changes in v3:
-> > - Drop wip (work-in-progress) comment in commit
-> >
-> > Changes in v2:
-> > - Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
-> >
-> >  boot/Kconfig                                   | 2 +-
-> >  configs/gardena-smart-gateway-mt7688_defconfig | 1 +
-> >  2 files changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/boot/Kconfig b/boot/Kconfig
-> > index 7dd30a030e3..b5433e88f10 100644
-> > --- a/boot/Kconfig
-> > +++ b/boot/Kconfig
-> > @@ -393,7 +393,7 @@ config BOOT_DEFAULTS
-> >  menuconfig BOOTSTD
-> >       bool "Standard boot"
-> >       default y
-> > -     depends on DM && OF_CONTROL && BLK
-> > +     depends on DM && OF_CONTROL
-> >       help
-> >         U-Boot supports a standard way of locating something to boot,
-> >         typically an Operating System such as Linux, provided by a distro such
+> Yep, that's identical to what I had above without the allocation,
+> which indeed isn't needed.
+> Both of the versions are correct and I ask internally mbedTLS devs if
+> they have a preference.
 >
-> This ends up being a massive size bloat on all of the boards which did
-> not use BOOTSTD before, and still can't (because there's no appropriate
-> methods). You need to not just disable it on the one board that fails
-> but on everything not currently enabling it, which now does enable it.
+> In any case feel free to send this, since Tom picked up the patches already
 
-Looking through the list it is hard to know which boards can't use
-bootstd, nor what the missing methods are. See [1]. I could perhaps
-disable bootstd for all of the boards?
-
->
-> Or you need to better explain what's going on here, exactly and why
-> depending on BLK here is wrong, for what you're doing.
-
-I tried that already. We had quite a long thread about it.
+OK. It will be interesting to see if coverity picks this up.
 
 Regards,
 Simon
-
-[1]
-10m50
-3c120
-CMPC885
-CMPCPRO
-M5208EVBE
-M5235EVB_Flash32
-M5235EVB
-M5249EVB
-M5272C3
-M5275EVB
-M5282EVB
-M53017EVB
-M5329AFEE
-M5329BFEE
-M5373EVB
-MCR3000
-MPC8548CDS_36BIT
-MPC8548CDS
-MPC8548CDS_legacy
-SBx81LIFKW
-SBx81LIFXCAT
-amcore
-amd_versal2_mini
-amd_versal2_mini_ospi
-amd_versal2_mini_qspi
-ap121
-ap143
-ap152
-astro_mcf5373l
-axm
-bcm968380gerg_ram
-bcmns
-boston32r2
-boston32r2el
-boston32r6
-boston32r6el
-boston64r2
-boston64r2el
-boston64r6
-boston64r6el
-cobra5272
-cortina_presidio-asic-base
-cortina_presidio-asic-pnand
-crs305-1g-4s-bit
-crs305-1g-4s
-crs326-24g-2s-bit
-crs326-24g-2s
-crs328-4c-20s-4s-bit
-crs328-4c-20s-4s
-eb_cpu5282
-eb_cpu5282_internal
-efi-x86_app32
-efi-x86_app64
-evb-ast2500
-gardena-smart-gateway-at91sam
-gardena-smart-gateway-mt7688
-gxp
-ibex-ast2700
-imgtec_xilfpga
-integratorap_cm720t
-integratorap_cm920t
-integratorap_cm926ejs
-integratorap_cm946es
-integratorcp_cm1136
-integratorcp_cm920t
-integratorcp_cm926ejs
-integratorcp_cm946es
-inteno_xg6846_ram
-kmcoge5ne
-kmeter1
-kmopti2
-kmsupx5
-kmtepr2
-lschlv2
-lsxhl
-maxbcm
-meesc_dataflash
-meesc
-microblaze-generic
-mscc_jr2
-mscc_luton
-mscc_ocelot
-mscc_serval
-mscc_servalt
-mt7620_mt7530_rfb
-mt7628_rfb
-mt7981_rfb
-mt7986_rfb
-mx6memcal
-netgear_cg3100d_ram
-nsim_700
-nsim_700be
-nsim_hs38be
-pg_wcom_expu1
-pg_wcom_expu1_update
-pg_wcom_seli8
-pg_wcom_seli8_update
-r8a77970_eagle
-rcar3_salvator-x
-sagem_f@st1704_ram
-sama5d29_curiosity_mmc1
-sama5d29_curiosity_mmc
-sama5d29_curiosity_qspiflash
-sama7g54_curiosity_mmc
-sama7g54_curiosity_nandflash
-sama7g54_curiosity_qspiflash
-smdkc100
-smegw01
-socfpga_is1
-stm32f429-discovery
-stm32mp25
-stmark2
-tb100
-tbs2910
-th1520_lpi4a
-thunderx_88xx
-tuge1
-tuxx1
-usb_a9263_dataflash
-work_92105
-xilinx_versal_mini
-xilinx_versal_mini_ospi
-xilinx_versal_mini_qspi
-xilinx_versal_net_mini
-xilinx_versal_net_mini_ospi
-xilinx_versal_net_mini_qspi
-xilinx_zynqmp_mini
-xilinx_zynqmp_mini_nand
-xilinx_zynqmp_mini_nand_single
-xilinx_zynqmp_mini_qspi
-xtfpga
-zynq_cse_nand
-zynq_cse_nor
-zynq_cse_qspi
