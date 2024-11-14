@@ -4,130 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38BBAD637DF
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 04:27:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6070D41C3A
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 04:42:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EF52895B4;
-	Thu, 14 Nov 2024 05:27:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 22D06895B4;
+	Thu, 14 Nov 2024 05:42:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ezoDzq3J";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GQdpH7tS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3013895BD; Thu, 14 Nov 2024 05:27:54 +0100 (CET)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20604.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::604])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A0DE8895B7; Thu, 14 Nov 2024 05:42:31 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8997188606
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 05:27:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D10389587
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 05:42:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s0Ei/t/EYZ8YbLJ7vEdIRYRIdvT4VoniW4AC5/b2PodQSsaWi96vOqLf/iCYEAXTuHIzv22AJ7DG1n8z9QwLHYMe5oGYglUZ70Y6Mg7bC1474dI8WAnHk/tNxYbg8Uhki0lvdjlcF5a4bCtGiOq9CNGqAnbHRuN1ZnJQGFTMTCcGY3QEWzWFY0U4FkeT/JMW+uZ8+KO/qkdmE+PxfgHl6uK1+G22RJut3KU+/NEe+tEEjp8ySnO/zUvqKZkiCAj9QNsA4n9tP+UO1DvBwvvBDaDGBvGTwTEAx2V1Dq6DS0fMZ6nK3zsmsNMnSIx4n7hdARR10TN5xjxfazx8wvDeKA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rlb2bC4KumL22oFwM8h27jzTcWUnxc0aAvcI/rendiU=;
- b=ItcPYR9e5Kdokf7U01F2JaC6C4SfV9lrOo/BUHOaetnEr9Uff2K69tgTx4tckJBX9Xbh+o7h5SYXydu++pAibuMs9yVsuS8qqn8qJBdHdye2bx+bPS+dklFbxWnhHhMU8aniJJIKHhCkXxeTPirBzIkmgGzMj+h0wCP1UygB3Zi7dCxfuUzD/ps7WvLII974VVqH1loSaCYArj6F+sQizOM8pkZmnsrvueHyNZCFGd9xOS4ueiecW2ahY8yXm4RhnzU+D8UjBsTRz7QPKc/T3RhPIuieu6K4kSeZLXh4NyUB/UptwvXSo6sOrDdR+OjpvgG6dw6lpVYYyFUmqkUybg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rlb2bC4KumL22oFwM8h27jzTcWUnxc0aAvcI/rendiU=;
- b=ezoDzq3JvgWBf52t/joK8qOAbEVG0AFCDXNcX+v2opGZKpzlVWYJDZCN72Rqz3mFWHtg3H+NwdVyc3Huz3sPdCmjfFC4Zm/NAW6zbJ9+6JUXxdiqdtxnVqKdVbocZBhfrIHApXXWItkJTqT++1OIiuJEhIsRD5f8XchoVAZ49PE=
-Received: from BYAPR01CA0011.prod.exchangelabs.com (2603:10b6:a02:80::24) by
- SN7PR12MB7787.namprd12.prod.outlook.com (2603:10b6:806:347::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.29; Thu, 14 Nov
- 2024 04:27:49 +0000
-Received: from SJ1PEPF000023D7.namprd21.prod.outlook.com
- (2603:10b6:a02:80:cafe::d) by BYAPR01CA0011.outlook.office365.com
- (2603:10b6:a02:80::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.29 via Frontend
- Transport; Thu, 14 Nov 2024 04:27:48 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SJ1PEPF000023D7.mail.protection.outlook.com (10.167.244.72) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8182.1 via Frontend Transport; Thu, 14 Nov 2024 04:27:48 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 13 Nov
- 2024 22:27:05 -0600
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 13 Nov 2024 22:27:03 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@amd.com>, T Karthik Reddy
- <t.karthik.reddy@xilinx.com>
-Subject: [PATCH] arm64: versal: Enable soft reset support for xspi flashes
-Date: Thu, 14 Nov 2024 09:56:41 +0530
-Message-ID: <20241114042641.22642-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-aa3a79d4d59so5280266b.3
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 20:42:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1731559349; x=1732164149; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wSg/PAp9AVeyaonloU4LD91CCKq0MPSLngfn7h8nUT8=;
+ b=GQdpH7tS/LTECnuOdqSXNtnBMeW+OMJvenxg5NdHo9em+BsczfIFMBg44cykQs/rVQ
+ QQdlPN6O3UgzqRZlahzcS4dOIhe8ueORI1qtO7pwkUeKCarSuT2SpqqmUvEgnQ2HYV8L
+ LdN2u9iuUUdeNeCMiqY4pJrbOua54ZfiZEYzQkgtCTp+C5xSwgAZio7kym/a3vKhRlfu
+ +Epp3vCFG0lIoNnI/cFdw/OuyIzANZwRwBv7FTtjpBbwkxfl1SP6U0o7+3PkSRBPYfpf
+ ptYaYK1eoXRiHSLg/aI0W+f4bkFXObkIK0W4bNcJ2BNXx1EujVnMcZTZpnkK5y4YUylG
+ oIbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731559349; x=1732164149;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wSg/PAp9AVeyaonloU4LD91CCKq0MPSLngfn7h8nUT8=;
+ b=Rj/UcN6+mw/zE1YnJb7gTqBut8tI8+lDFYAG05EFlrxUomKSGTJpgGnx1mOJJluKxo
+ 34e82brTE7/RAGnc9rPjO3y3XppNjiGNnXq+qFMeC/135jB8D9QYo5tHb6RFMwNKm6qQ
+ 2KhgzjoWQR2G7kG28XzPTHGP6Iy00VJCFxPh6p0h3BCk4bIB1uORfkxod2mqvX+iLIWk
+ Ew296/LiXcJT3gSMppm2evEmjOgB3OO9ItwfbxdECMs2krhHejJLHL4PY3A0CR12ObPr
+ T1Fcq7wAAXZFhUS12JENnycBWhbm302XCtQ14bU8Hf4jrQDdSppy4h3T0scBBH6K5Y+p
+ /cOg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXOfSmmjjB3nGxn6LwbFNwglhFVRnrsyLL1CPT/zwvnRvt//y3Sa8GSV/5DdFfNTMSF3QKiXFQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzWsauJ79+thwShf+2Don4non2zo5a8O11aTk0CuxbI5HRcMX11
+ evlZD1mJpvUmYC/NegwGhQRlEyyhMuFGmh6RH8yViSz5W+zRBEFXMHaSV6/lTliZFFG08JPnvkc
+ NM4IFt182gpKWPo5MjxTmuMSL3zU=
+X-Google-Smtp-Source: AGHT+IEPRf7jrQZjb+kvp9B2T9dhizzLFeZMhSYqzBe1XSj0BDR0tquhBSuzUIunKT6ZFg6BMpQohTtAVP+/bhPQhAk=
+X-Received: by 2002:a17:907:1c11:b0:a9e:82d2:3168 with SMTP id
+ a640c23a62f3a-a9eefff1525mr2084086966b.46.1731559348412; Wed, 13 Nov 2024
+ 20:42:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D7:EE_|SN7PR12MB7787:EE_
-X-MS-Office365-Filtering-Correlation-Id: b637f6a3-0813-43c2-f9d5-08dd0464b1fe
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ytfNYJovhaT/zTqqXAhq4IoX5r0ZcZ/L/BIHakAXtQ+KqTujtTa0A6Wf1G5f?=
- =?us-ascii?Q?L+tCRYwavSDvay31iaB/SbxMQhKmXT6pVxst6MqoHFLC3lFU6xBT/shebr4+?=
- =?us-ascii?Q?wZ/EZlJR7gdAYOU+yIlrMProcovZn2i0Br94NZFLfyhOFbuzo1OTO8W87jVg?=
- =?us-ascii?Q?XkLchPRaJsmivq4fRb826A7qcPcMCfr/+ZV3wAj1UhcSOJ2SdjdCuwjIuzoi?=
- =?us-ascii?Q?SJ4GwAx0AJoCcYLsRVA+7/OApjC1JGafOUvNOpH9HWE6Sk1XxPD+mnZ2degx?=
- =?us-ascii?Q?H3sotgC1ZlD6uWs6WAmdAOEVa5/LcS4ZONHcHK5O+VUyUagt0NcuCqDARrJc?=
- =?us-ascii?Q?tQDjl/Fs5Uqq8GCcCR9s5Lr1EtvquPw8TwjMF8d6YI7KUj2iAjcfZgYy5rhI?=
- =?us-ascii?Q?Bfg1GYOIap5iwvu8+F1uf1PvMYxvmflR6DBs3GH9BeJpMqdVneAaeYzX1VS0?=
- =?us-ascii?Q?rb9T/OQWOtEUShbeRKsh/8XZhfYs3DtN6ne7X7b9QmrKGfGtVWZ+s3kGLMoz?=
- =?us-ascii?Q?f7lJEoYmaPmD+EAG4KkOEp5lgm7YK6AYWYmsVuuHFUXIYZMC34ozFwUbY5iG?=
- =?us-ascii?Q?m8CjsHX1gKG+UzW3vRSpLh9+EntdXW+YdyhCAqCvPiWAJstyRHgNhJCBUFYh?=
- =?us-ascii?Q?UMbrnTyUutsNmheqkSZ+yificcuQIMtGBqGMp5tgvA7LsONv+Qkly/OBoNyv?=
- =?us-ascii?Q?+OUk8kaOAU38PLiOrM2hChC3lpI6Xklqf2S5FwJPakvEKWhymkxZaxWEgErD?=
- =?us-ascii?Q?PXT7+ipg3YZATMf5qTaaLAI7bwzLhzvXGsXj3W+bq7Kim9Dn5cI1acDCiW/r?=
- =?us-ascii?Q?1MWWLrjcxLzdScC3FbHVBxcgvZ31I8OiaXo/44B88i3ekGnR7IVFbPuXPw62?=
- =?us-ascii?Q?u/i3lGf6j+Glroy+TYknnHfq+Gupst22/38v2uLM3JpGscRPvneikpkcbIBX?=
- =?us-ascii?Q?/9kiwXa8KTb3gJX8yoGzRBZJpO5R5xZCO+g+m7hIMxH3ezzjNPrpVrZmxcJD?=
- =?us-ascii?Q?cWqiAdYLvlZT+HDUStqkvY1HGBxGGNxpyZ3WtIBrk0RKV+sp9BGO2PPl+igI?=
- =?us-ascii?Q?churC7bDvqZHITjEyjbQXh2nedQ+xr8DIYj5IbFa2y2x1L6700OZ7Lr2Fznd?=
- =?us-ascii?Q?SY04Hvbi5gQRohK7sVMOCQSACMcctxznxRbfn6gcRSTZF8wssF0WE73dua/6?=
- =?us-ascii?Q?E2n8/AeTSZADaxOiO7smlsyvjyWhNL2w5SCfkPdHqafZpbF6FYLOYzwNNAKJ?=
- =?us-ascii?Q?br8mp1XiCZb405DSrdJGvq/lrQahDb6jAjeOk0GMbXmxR9givuRpiW5ouHRx?=
- =?us-ascii?Q?m2JzdYicYbSq5xydg0vnuh63p3sFovwg7FCaehdWXKxkomv1HfSsi/9aF3ck?=
- =?us-ascii?Q?rk1YmIgjsjakCIs5nES7ngW6ZAtxe52oQC00MaTu0njr4V6SZQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2024 04:27:48.4277 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b637f6a3-0813-43c2-f9d5-08dd0464b1fe
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023D7.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7787
+References: <20241111020808.38974-1-hal.feng@starfivetech.com>
+In-Reply-To: <20241111020808.38974-1-hal.feng@starfivetech.com>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Thu, 14 Nov 2024 10:12:12 +0530
+Message-ID: <CANAwSgSDjcDU-BUm7fNGC+GzaCTVVitL_jG6t0QQR0kM70Mfyw@mail.gmail.com>
+Subject: Re: [PATCH v4 00/13] Support OF_UPSTREAM for StarFive JH7110
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>, 
+ E Shattow <lucent@gmail.com>, Conor Dooley <conor.dooley@microchip.com>, 
+ Nam Cao <namcao@linutronix.de>, Bo Gan <ganboing@gmail.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,29 +93,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Activate the xSPI Software Reset support, which will be
-utilized to transition from octal DTR mode to legacy
-mode during shutdown and boot (if enabled).
+Hi Hal,
 
-Signed-off-by: T Karthik Reddy <t.karthik.reddy@xilinx.com>
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- configs/xilinx_versal_virt_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+On Mon, 11 Nov 2024 at 07:53, Hal Feng <hal.feng@starfivetech.com> wrote:
+>
+> This patchset add OF_UPSTREAM support for StarFive JH7110 based boards.
+> All the JH7110 based boards can use the DT from upstreaming linux kernel.
+> The v1.3b board device tree is set as the default device tree. Support
+> CONFIG_MULTI_DTB_FIT and the SPL selects the correct U-Boot dtb using the
+> EEPROM information.
+>
 
-diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
-index f220cc0254..83b907e729 100644
---- a/configs/xilinx_versal_virt_defconfig
-+++ b/configs/xilinx_versal_virt_defconfig
-@@ -99,6 +99,8 @@ CONFIG_MMC_SDHCI_ZYNQ=y
- CONFIG_ZYNQ_SDHCI_MIN_FREQ=100000
- CONFIG_MTD=y
- CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SOFT_RESET=y
-+CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
- CONFIG_SPI_FLASH_GIGADEVICE=y
- CONFIG_SPI_FLASH_ISSI=y
- CONFIG_SPI_FLASH_MACRONIX=y
--- 
-2.17.1
+I am encountering an issue with my Milk-V CM. I am unable to use the
+SD card with the CM4 IO board.
+The onboard SPI switch does not support a boot configuration switch,
+so the default boot is set to eMMC.
 
+Please suggest a method to flash an image onto the eMMC on the CM board.
+
+I have tried the instructions to update the firmware using
+[1] https://milkv.io/docs/mars/compute-module/boot
+
+Thank you so much for your help.
+
+Thanks
+-Anand
+
+--------EEPROM INFO--------
+Vendor : MILK-V
+Product full SN: MARC-V10-2340-D004E016-00000812
+data version: 0x2
+PCB revision: 0xc1
+BOM revision: A
+Ethernet MAC0 address: 6c:cf:39:00:85:6b
+Ethernet MAC1 address: 6c:cf:39:00:85:6c
+--------EEPROM INFO--------
+
+starfive_7110_pcie pcie@940000000: Starfive PCIe bus probed.
+starfive_7110_pcie pcie@9c0000000: Starfive PCIe bus probed.
+In:    serial@10000000
+Out:   serial@10000000
+Err:   serial@10000000
+Net:   Could not fetch index
+Could not fetch index
+eqos_probe_resources() failed: -22
+Could not fetch index
+eqos_probe_resources() failed: -22
+eth1: ethernet@16040000
+starting USB...
+Bus xhci_pci: Register 5000420 NbrPorts 5
+Starting the controller
+USB XHCI 1.00
+scanning bus xhci_pci for devices... Resetting EP 0...
+3 USB Device(s) found
+       scanning usb for storage devices... 1 Storage Device(s) found
+Working FDT set to ff725a10
+Hit any key to stop autoboot:  0
+StarFive # mmc info
+Device: mmc@16010000
+Manufacturer ID: 15
+OEM: 0
+Name: AJTD4R
+Bus Speed: 45333334
+Mode: MMC High Speed (52MHz)
+Rd Block Len: 512
+MMC version 5.1
+High Capacity: Yes
+Capacity: 14.6 GiB
+Bus Width: 8-bit
+Erase Group Size: 512 KiB
+HC WP Group Size: 8 MiB
+User Capacity: 14.6 GiB WRREL
+Boot Capacity: 4 MiB ENH
+RPMB Capacity: 4 MiB ENH
+Boot area 0 is not write protected
+Boot area 1 is not write protected
+StarFive # mmc rescan
+StarFive # mmc rescan
+StarFive #
+StarFive # mmc part
+## Unknown partition table type 0
