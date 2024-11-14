@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3760CD637DF
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 03:37:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD7B0D637DF
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 03:37:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2347C895C1;
+	by phobos.denx.de (Postfix) with ESMTP id 82114895CB;
 	Thu, 14 Nov 2024 04:37:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="iUnRek9c";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="IRs2stw6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 665E7895D1; Thu, 14 Nov 2024 04:37:05 +0100 (CET)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2606::700])
+ id 73933895D5; Thu, 14 Nov 2024 04:37:05 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2071c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::71c])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9442E895D5
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 04:37:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 32C91895C0
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 04:37:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=khzr8LITEzh2398akHxGFImcw8xkh2CfETvbSnfaxQhVc6EjRR1H6FEtguEC/925w/y8u2MeuWloIwwuSGgeXJU6vSKBQgGIwgs0CV+is3gZNTKCiw/56m4KhP37YfJB7EQfEpsLGJBC/3Jy5unf45hFDA3WnMlJ08ghlGW/1MH+OlUEkZgJU01pAIiT9N1TicRo7neCpN/saO4snI6kImm7LIC3mLa47NVGgCTv0kDPc8trIiaIh5ljO7nR4NJTCO4RFF3bkek//8Bed74KS2gccHiqRwVtvkWcTz8/EGIbqPOwSluCqcKNYBciNfZU9P4JDb5CnGubuJ0S3mBXFg==
+ b=ji7DlUZ3SiPBMqEhwtvcJ9vSnwRVt9qOLr1ogRoo6o/WeZLdragActolh/uL4jEVfK/zCgecTBPPG+K6kSGvN0PYKbG3kTLslSUEpjyhlto+OlkxdNI4nfH9mWEex1jiUwhSaOZ3aR7GupONGCPTMO7lU8ALh1lul3w68Gvjl1IQ5Kk0YWDuVI2RfMGxYD/q+nsiZgfXa0vpLw5VfJ2B+Fgxk7GF58MqWpjnBCGDHoUPsn4HX2njoCUWq6Xw+6H4hH90+oEW8d5/42Tbzc9yTrHV/xUff6ZPymLg+mh/5rtqvpnvOnErzxyR0qNiMkmM0dTw827yQl67t22E5sr8Lw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Jn7S94hbnUpkelhdgoJvuqGQMKgGGNzeF+yCVO8xBmw=;
- b=lyQnq8mX9SBufSZI6j2SZbdtHbpEoKvERKIpMscy2UwEEnbQyz6vYOtD8IhJZq5y6XFbaYrHiGzfemR3Hkm0hY9wlTab6ASYk65AIEsIhg6yNZcTrwnqgiVvg+Yx14uvPJPTDhE4yPkNmGDhCfuGdPKMzWi+0jNL34EAa/sTMQ0DNnFbxEVjxYep83pJgkKTc1zhlG3BoXuO1vEZTynO6tNRapjSF1TBg/4K22RZLf5m0u+ToeDd+TKdJVxWsjgB9D5Gn0v2y4vORcK/2kQ2Yru52xwtqQ4Tzz1spK0nS1aKYFcGH6txC+5obbFL1YZ0dPoSYJC8ggsl85ScIngs4Q==
+ bh=62/Ol9X71yYtmZd4mikO6404dH2Sob+9cESn+PsecLY=;
+ b=FIbBUoxRsLp5vaeui6lReFSq0Gk/reA7bVvltYv4MCbrUT/AwmuindINCNicqDhHVm3H5MN46CLa9n4ww2GUUvKzT3iSgP8jdQB8yh/H79qKrHNtaJIA6AjDsVw0txUzuL+c7nGNUNZQPsvqE/fYo/LCYPI3ISmmaVd5D6X4awy3+s1/Rs5x77uNbyyJzWN/3yrXl97+zQwft8OkPyTuYDe8RExAVZojVRpywHO9MSgsJErIRp2S4uRjbcUuX+dqd0Diaz38nhNmmjXzy1Lf8brut/6/LhJLjwSJ8D7ta2SLUJg/PkEoonN5qKUBnefX9//1JOq7sh/0QZpF4m5lYg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Jn7S94hbnUpkelhdgoJvuqGQMKgGGNzeF+yCVO8xBmw=;
- b=iUnRek9cBx1Wb6MtUIf+6X2IzpdUDoAaR5nzkligQcRY+fW+S9hTkBw+xp8pQIToGJxm7MvXaMunGiCQRRG/SfZazOsSBWN7lxI4O7EW+kyN0o+aYJzWk8m7Q4tgapBuRc47xvHVmXvOK+ud9pipG0ZHt+1YEIj0dGQWjgl+R+ASYmriiBiWi+f7pRy3I4bkWEbcgwIBGtrL94fEm1ZKl/FAT1UV5cfPMz+TcggNDfkYOSAAROAobyVuLOO+AZhJ1ZtWGfcR9LH5pQC1Ksqp+6wpcoJkRyCJeLGHk5g1XcZHG7/nQIhpmSE6QH4zaAudoWkIGxuUmUzvEM+DPhAWiA==
+ bh=62/Ol9X71yYtmZd4mikO6404dH2Sob+9cESn+PsecLY=;
+ b=IRs2stw6wftJu4xA8Fgk7XHrg73pA0/h4itIeMbHgR6azHCH3+aavMMrADKcp0XEN038EmxykCfSyfs1aly9Q6hSBv/p7naE9GL/XtXjK5BGaAyInE+XdvSSMFodl8TYUit0ChetfTckEXV8enbgMpzsB4nKlZbtJgnNWP31otQd/QDKt9gd1upNRt1aqVUuUW0fMVWj5iG/Otpaes27SeuRJpkKimPdBrSf7lSbUVGl/yucqXx2dh1f8LFN+GTmNBhgAstxzOeJ9XxSaT6WT97Ynw6czGKCzxjBj+7JR/bGB5ihQdQVBHSk2oBsBSEtue1ZStOxGwYxIRXWX+KoMA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by PAVPR08MB10338.eurprd08.prod.outlook.com (2603:10a6:102:30d::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.28; Thu, 14 Nov
- 2024 03:37:01 +0000
+ 2024 03:37:00 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.8137.027; Thu, 14 Nov 2024
- 03:37:01 +0000
+ 03:36:59 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -65,9 +65,9 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v13 08/10] net/tcp: simplify tcp header filling code
-Date: Thu, 14 Nov 2024 06:36:41 +0300
-Message-ID: <20241114033643.623355-9-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v13 07/10] test/cmd/wget: fix the test
+Date: Thu, 14 Nov 2024 06:36:40 +0300
+Message-ID: <20241114033643.623355-8-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241114033643.623355-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20241114033643.623355-1-mikhail.kshevetskiy@iopsys.eu>
@@ -79,77 +79,77 @@ X-ClientProxiedBy: FR2P281CA0139.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PAVPR08MB10338:EE_
-X-MS-Office365-Filtering-Correlation-Id: 07bdddba-6735-49b7-8617-08dd045d996d
+X-MS-Office365-Filtering-Correlation-Id: 8f10b17b-e382-4d07-b5cb-08dd045d98bc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|366016|376014|52116014|1800799024|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?n3KVA/tyk/IvA/ZPZAb+Aoe+fVHSrAw3FwB8U6b9ypdL7zJCobRlGMEoTU6R?=
- =?us-ascii?Q?adYMcYx37SX0/92wk5hNFSiAOtMh5/95ZJq0AcRMREZi9bbFndnPyzCE5lgY?=
- =?us-ascii?Q?wAwgC3JLXBQzdiHyTx5KE1WZEGrFGNpIptdDZKO0bW6FuT2wpwreh7Tn6R+5?=
- =?us-ascii?Q?IMYf10CgmGLdEFXfO90fbVkmMVi9AgqGLqu0FHn41QLntWrUgFlAW+5sOrma?=
- =?us-ascii?Q?QoBB8Cgu1BEWjFyU/WGNKMm1e7oqHgJDck5p/Pd4nJfUPWZ0rLoqaba/EnWj?=
- =?us-ascii?Q?KEnwwTTKPvDhiAoDqR2cWkkwNmAWlDd6G08U3ibszHFnNMPniHnYsANoqZUq?=
- =?us-ascii?Q?xDBZih0vujSyhVob/4f8v6W50AMLEm+C+Dpdyb28nFoXK/8iCv7jF6/Pqm9n?=
- =?us-ascii?Q?bZNch3ekFpqE4OwZU7U6njfU0vCHqMAP3ovVahc0VeOqbLIlQQ83+hVvueWA?=
- =?us-ascii?Q?4cUBgsHE6Nv7eNTG238a3VABx5AJnbmaMj5e/EWAWrTy8vSAernvVSeQVMIz?=
- =?us-ascii?Q?5OvcnMfUWILOMbA71rPveB0lOrFni7rw0/vY+JUkyGed/bU25DlyQ99eKJUS?=
- =?us-ascii?Q?Uc4YOcRvHFeT0O552bzUl7cavSmKS3aC2Em00acRBPICEbtlpVLavSeufQaH?=
- =?us-ascii?Q?FJ/HXxyPaAH4lV6hy8bdvJja9vKWMfRohCRlAH6RRN2uQuUQIgUjJ9RTVpd5?=
- =?us-ascii?Q?gBs7cJn8IMUO/L5BZqCZiUBIRCr8NcIppLCK9DqaU1FkuInjSqg0LGhiHUlR?=
- =?us-ascii?Q?ckznjRnHc2Xa0Zt99EhlUGYiqVOhfIKXakd1oyxiYPnAWGIB/p/LhY68ZqmM?=
- =?us-ascii?Q?Jdu8I89UUNNOzDQHoUpUORClSM0b/ufRALsEPxEcMiuXDYGANvO7CgNegTjL?=
- =?us-ascii?Q?WUdK/VOYV5crC668hQL0ybV23hwBcIblXE54ZlGY1mjIyCe0X6mYBNKW4YUg?=
- =?us-ascii?Q?j14ZBVVWa/AcAjcqv7ALcKRrOaveL9ir4jC1rO2VKw15DuSakurxnhpppxVq?=
- =?us-ascii?Q?pahrG96bDa0SnRncCyizIntdYuQ7xPzyhp/MHEo3fIgx47kqVQ2aD0XzNzBG?=
- =?us-ascii?Q?Cb6dEtkx2AwU9SPRNg7SwhgyvsPYWU80XdXjpuWhmZh3eQghB61aB2r1vdT0?=
- =?us-ascii?Q?AxbgYukWWu+9tlt8colt3J4gAl5gtmD6+1QKXM6D773yxTaOo3EWHUyx2uFP?=
- =?us-ascii?Q?1jpZVKS5G36TthJHR4/OB/e7DFpWbvH9avtrw1CchVDoLkP2u84+zm46TNRI?=
- =?us-ascii?Q?zGlL0jjw9wO7GMlj+eIK0BMUj73TZCLJJvU5lz48TBp+pQtOUOyxGzMi4zZd?=
- =?us-ascii?Q?YPXUGobSLVBzigYJaQ270hzE+DCQXuIsLlKh6OUHrq1rlUtLA3vXag7vKuuY?=
- =?us-ascii?Q?hyGxXAZWDHJUO3ojA2BNwkpJEhZg?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wznlARIoaMhIAHOZblglYHXtnX8SrZYmL0BeiVbtz9cawIj+CAkcubNmzZex?=
+ =?us-ascii?Q?n32YT8a1LQ59hsakKyJ3gSjK0xSjJmwoJImAWytPuMIqJfRKhvPF2wy5LId4?=
+ =?us-ascii?Q?JAH/uw9z5WAqYBsltQBIhLI9VYXcCJsmxRzxXS+B3cAdT8aE5NhQ5GbPVzap?=
+ =?us-ascii?Q?OCgnpdHf/Bb4PNSRxCRY8bedKnX8k6Agyo7boCfyXsqubzgORp8Jr+PcSGgF?=
+ =?us-ascii?Q?srgMOG1x8nm33Plg3m43pBE70u3swVdKZzCH6kUa5jtjAC7f9X0dL1tNryEs?=
+ =?us-ascii?Q?uVQXdrdf5pG9FFIQUykjacT7WKk5pjMCKU+SVDBnS6HLvb46Y6RyteMABC/c?=
+ =?us-ascii?Q?zw4oH6VAdxEjPIiLs59bJcQFO51B2FszpjXgBZH1y/PStjRMPj8wanY1Fk24?=
+ =?us-ascii?Q?JpOOdQa287cBN4f+X4fSbuFisTkYi3VNu4y+lFO67eVFW2sA84UavBRgaZ1n?=
+ =?us-ascii?Q?N2cCKUXjNQU7hxiE4QGxhpfXVqT7U6Hm0DqeirIs9mUhR62VyT2pcQNhcNkC?=
+ =?us-ascii?Q?eYHaqPBy4jtArJS61lxqAArv5WngzuQpUkhXw/1QQSYp9VuAkGj4NKFadJUk?=
+ =?us-ascii?Q?MBSKe5WBgPi2Qx1vucB8+X3kvzb8vOPOJqyK4ot+RqUjeKKALsTCoPJu0B06?=
+ =?us-ascii?Q?Gq97sa2vVfrwMuvSqKrjl1uC/XTkzV4Mo+ncPvLsoRcFHj1LqOczNlDxfBii?=
+ =?us-ascii?Q?DwSUKj5xXgn70i0t5B21rb2KPiYLsyNMDMx4frzG2xKxb0HBstFo0jKN9Dwx?=
+ =?us-ascii?Q?96Jpy19BUmSt1tLsCUg84bZ1VuF0f9XReqfS3ry54CBq+nPpS+hCbBi0pADm?=
+ =?us-ascii?Q?3w/hNSLHftcZCYuHpPvUAN7+nOFwH0exoTfQLQESZ1NgB6FQy7TSbfkFpBYA?=
+ =?us-ascii?Q?TVeER6w57KaQIXIS3VN4ZEGXIVrOlR8DZM+MoxYxptU85VeFtQEPK5nBnJK4?=
+ =?us-ascii?Q?4Zyt8IZlNBVAi/4Cu87EqvVGSkroXobFVI/NQQB3rog2sWSd3SxUUtEVM5a9?=
+ =?us-ascii?Q?D1VohpxTMbNuNSWhagdvG7ZmT8x/ISHcPBxVFnidxL9i8sLwOpqwH8KJchvx?=
+ =?us-ascii?Q?AUlmN1rmrth3Hsgb2UQHw0AZRZcsYC1BaAmMfxeVLvI9wrPX3UzbWVxC6Gj2?=
+ =?us-ascii?Q?G2unilv1GK+jHl+we9QrNC9cO4Hu6lf4Qm3d5AB4OKhrtNiWyfxwHoKYygeO?=
+ =?us-ascii?Q?fs2UHM+Aimmbjh9NNs0N4NMRJHEhYOP3GBjfyk5suMiyDGj84M2tScXHkLxJ?=
+ =?us-ascii?Q?P3nOA+KZDtkXJkkM+SKi2MEJci+CpIfgixt2kRFjXguVyXdClCndyJBXfPfN?=
+ =?us-ascii?Q?+PcvUpkUe2fjpq2aQQ/bXnHMglioxB4NRgkVoks+Ul69b24VS7kwEZDTL7Dg?=
+ =?us-ascii?Q?NhFsbwA50j+N8wKeUcrbKlREXjkr?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(366016)(376014)(52116014)(1800799024)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?BshrFE6up4Z3EZis1SOVtl9T31A2ybsT/i8N5bqG3s1B0FuMiJ7tm17EVBmV?=
- =?us-ascii?Q?MkZLG2VJ7aTcz+eiVj7rN5ZeW7OO+KHJaR29qti8KFiaBExeCSmOuq1h3ys2?=
- =?us-ascii?Q?1bJmgMARUD40PkfEk66sltL72fZ7zNJFTRy+ttGkqcXPmAgPfPKncF1OGIx0?=
- =?us-ascii?Q?YCD3NwmB0jYvkagf+DVtdPmrxY2sUoF+gFzGWEj7RDluDYpBUyykz6bQKfVu?=
- =?us-ascii?Q?Hw2u8WsOCOMoqG62cuBF7i5C2vjmgXTLV5hmQPb+RG8hZBRBjYYlbmnvOhCh?=
- =?us-ascii?Q?I7wwdb37eVD0IkqjXl8mgKwulLCUyNOiYSgqYF4YWzUj2XNYu2MyWtDS86Vf?=
- =?us-ascii?Q?IFAhG+nIWA2OIhOacm34Cuysunry7Rzl5sZEcCEGFqrFLGmTcOxRGkwOTWj9?=
- =?us-ascii?Q?yN6QyZawm2Tp8NDB3l8PIfJrrMcjM2PAcWTUJftIfFho7bbIjejtYfoOXy3X?=
- =?us-ascii?Q?xpGmL058lUZH/MYSSqcZdJkMdLyUKl+9VYdoIMK8DxRwQO6UPttVYO+saZAH?=
- =?us-ascii?Q?BgxJPgxaNm6MjMPiNRIP40X1hAJBp8nflQmGurbF97/Rjw/oUzzR3tmbKV9v?=
- =?us-ascii?Q?JYN90yssiBGwldzirdp/M+2/s08JDgh05W4tulFxX58bao9juTixxpVDL0Gw?=
- =?us-ascii?Q?63GBMcoxkuF7Ahte7KMCCABLF+TCXPHEp8lGH4TpSt33jFyqh1h7BnMJl+qp?=
- =?us-ascii?Q?/rOBR3v7WX4v63F3B/l5a34MYw+iS3mcGP4vrjpxF4jpcceygfibhxiuSjux?=
- =?us-ascii?Q?oss1LLawsehyFny4MYoYiOlCvpA6JUgFlIdMzGsPfW5aNUXMrlHF0VnkEXbh?=
- =?us-ascii?Q?u1D5iF/ENNOAEBpVOckKmpeRCqytHEyeR8dhTvjHD0FgWBTH9qI5hRV6mCdi?=
- =?us-ascii?Q?8aEkXyZlMaw6CNMA0O2Oh2Dq6TSaGAIqXMalIvVwNJ9szC0Ll9JFzvT8cB4s?=
- =?us-ascii?Q?ydTsTS4ZvIE3/CDDeiLse5UbEMBrxCJNBaywtm39BoSz+5TC7hCMpAg1UG8n?=
- =?us-ascii?Q?+6v5zmZRy4vfbZAm5qlZg74kgxy8SReeMImmZPEWXCAHXiiRJBUKHHiS+htd?=
- =?us-ascii?Q?M+ahvZu6Ihby5pG5mT6+xaIcLLnnlvwWgTCMHiNDquvNrgi1XweWfxQgkENR?=
- =?us-ascii?Q?Q/UbRnjqpleRBYvCfaNKsc702NLv5pXP6TJC0a0VSvRIWrK06Ikm2w/lRvoH?=
- =?us-ascii?Q?tlss0q14lPeb99zw0GoHkLLcXMCn4GeaV88d9r0/K5bmwfiHktME3x3eB43H?=
- =?us-ascii?Q?YMhBfn+UgfkAdfCCXDm1UhfVuDgZY+P88PD3lioz7miJu6eoaY9VXfuzyYIM?=
- =?us-ascii?Q?Gprz8V9+p27RfAAssWwxhkSNVWEyPza7olzU97kEsoO1LcteTCbQoYQkY3c+?=
- =?us-ascii?Q?LN8mOmormdFhin0nSUJdUSKvgUegnJu4/h0Cr6Z0TUegtOGWTxRMQk6bb4qi?=
- =?us-ascii?Q?DLj+la9ucbaCK42bSN/DC+gztt0bqFaJeZaTzR/2cfHbNQxHQWZjG+pBP5N7?=
- =?us-ascii?Q?W4f4C7xTfKMkGTxEYV/cOCwUvRC8PC9vWilfcSh13rQbAiW6XCGyxd1a1uHf?=
- =?us-ascii?Q?u/P2UQ1RNWo0hs26kPBxNvnpronMTWo5effNFKzC1SdWCgLK0g1r0GRO7hwP?=
- =?us-ascii?Q?7Dj4Lp6Jrz56WG6a5/IJovo=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?EyFBFS4F1Z1yodeiqsprzPA7XK8tr6fnHv7Drq8F4Kfcc+Jgc5m5CETbOk1d?=
+ =?us-ascii?Q?w0TGqIHuLhXi18Htb9f3S6awMmsft7aAybfSS/GvzxZ+w+uM91fasTdSd9uJ?=
+ =?us-ascii?Q?nzuWPnM1UIxKdy0bQjy4YDMTqrfLrxRyQbkrmezW5OAKXK2IU0UtG5TUXrjb?=
+ =?us-ascii?Q?g5XI9kl6EQr1DLxb3A+dZJ1woDc1z6CHw4YxwDmOhkNF/8m9QjOqO8/l7UE3?=
+ =?us-ascii?Q?HFvr9JQAWn99FIMWdM4r/CFqEKnMnLMDEcGubL2vfkLuwtoN32x6GrU+89JO?=
+ =?us-ascii?Q?abF7Hf5HDdZyEeCotewQOSXJ/Ne9CLGCPv17f0HS5hHo4CGmuOXLt24klX01?=
+ =?us-ascii?Q?b+4KdfUUa6LR5F5Z38JjRH4yrI+/d1B9FHBtowRE3yMkI5llios18H04431V?=
+ =?us-ascii?Q?AYXroyCwyLjS6U/8YqyYkUtT4fVSo3yomhUASKdxhijmEbbESQ/i8Bb5MWnw?=
+ =?us-ascii?Q?Z9gK9z38puQbbc0Thjkce2Z+56K4spk3hP9AcDAzNcKVz4IPMuB2XLI5FPxf?=
+ =?us-ascii?Q?s2X+Ss9Cx41Gy+EHA5QfZyVhuTt25jA7CyfSetiO18ItigVqp67KdWo+SqvC?=
+ =?us-ascii?Q?ejpSqmUtsUvF85JEsLDZmi3dGTVi6VY8x8w+aZC2WRfv471I8NsIDA/EkNgE?=
+ =?us-ascii?Q?2h3PUOsFGcA/M+j+rI61/PHODJMalW8/PQcGu8PUVUeuwqc0WQfbuOIG6oAQ?=
+ =?us-ascii?Q?sVzN8I4AzrNi36kipkRqMn9UB51N6YMoudJYqiDFXoRCqoiUQCjqntbprNK/?=
+ =?us-ascii?Q?S9wqODCH2xGlzdK5rFoCUfh/Re559TSvV2yP4QopRY8doSl9GTFZDQNjv9/6?=
+ =?us-ascii?Q?BTKUmh+ApuEC7G/j1BWeZlASiOnBJc+ZvZDa4rnrrMD2NkQnjM42czjBIGKQ?=
+ =?us-ascii?Q?139mV+olFWKvb4XlRtZOLLxMTmZCfyy0pCwa0mflreU773+agHNNnD5djo6X?=
+ =?us-ascii?Q?KnJjccsHjKkRBtM+ExAstOf5DiDIlJWMXyAmEoBhbggK7FkcHzUXJUp4Phv4?=
+ =?us-ascii?Q?aCSJ8xjowc4kxN4703G3jYBfwXpIYuKtP88T2eIzjsYtF77fQGMDCCbntA6u?=
+ =?us-ascii?Q?JB0CZ0ymoIu37SvCFsLuPS2vNdii3mFG+MHtJQQ3zQxQj8unbrwgTTdYXuHp?=
+ =?us-ascii?Q?RdqsQB2PCcAwQoI47IN5n3JGNMz5F+JJo2woT8dxI/XkDRAlDWcR/dLpXBuU?=
+ =?us-ascii?Q?mmcvx+M+0PlEO3ck2p8SDJ9tneT7pQdMVbOjCyNh5/1MZDrGgQRGZXfzsw9x?=
+ =?us-ascii?Q?veQuGzifB0zZTdwGuC0tRFLUhbhCFcPN1sUZyJ+W3Gs7/Jop6AjzgQeh3CD9?=
+ =?us-ascii?Q?/Qpon1iov7IRu8aedoxQS/qL9HWIh3RrPYuT25BTzbmZy1L+vGCuXMdxuhvo?=
+ =?us-ascii?Q?eHy/RrbEJvnMOiGJ002ulvWMscOg4iwvu7jHiPvZbJ01BVEIUJt0ddqMjGWN?=
+ =?us-ascii?Q?syGT+aIhSN1yvHLiqLaF8K4NueYzvugvR4GL1vMFYfXJFQ//429lbdMiIJYt?=
+ =?us-ascii?Q?0AmRWQ1wuJFRdZ2/TntsS0ahpGdIPGyy1UFw6YL06IWg3eND74d5xtc2AYnP?=
+ =?us-ascii?Q?uikBkzRt4p3Dgo5RxfPZusWQ+PT4dWfr9U0fwMJMbJzsBHqN+6/3+oRwYJs2?=
+ =?us-ascii?Q?AZ9W+I8gYZaD63B7tZ5YCg4=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 07bdddba-6735-49b7-8617-08dd045d996d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8f10b17b-e382-4d07-b5cb-08dd045d98bc
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2024 03:37:01.0731 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2024 03:36:59.8846 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VSJ+FgxSdwX6aOElWme6SlQFRSmvW9u1+Y1JfFgdqlISOiNyZfSV0F8S0pcawrilkMBi9QYKqsNMiRwJJaN85m8NsJllCvuI1/qpFpUEewM=
+X-MS-Exchange-CrossTenant-UserPrincipalName: Bbn9oSIwoxtlXFhYShZJfvSWKrrKVumjOgrNV4bPZQmCmHgjFh54bokPsui9NCWLYZ8pFkrtPs+8pSg1RJnSIfuWlcgxwQJoytpwyNFXvZk=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB10338
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -167,123 +167,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch:
- * remove useless code,
- * use a special function for pretty printing of tcp flags,
- * simplify the code
+Changes:
+ * update to new tcp stack
+ * fix zero values for ISS and IRS issue (see RFC 9293)
 
-The behavior should not be changed.
+Previously this patch also fix incorrect values for tcp_ack & tcp_seq,
+but the issue was fixed in
+ * dbb6b5a: sandbox: fix wget test failure after fixing wget issue
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- net/tcp.c | 66 +++++++++++++++++++++++++++----------------------------
- 1 file changed, 33 insertions(+), 33 deletions(-)
+ arch/sandbox/include/asm/eth.h |  4 +++
+ test/cmd/wget.c                | 58 ++++++++++++++++------------------
+ 2 files changed, 32 insertions(+), 30 deletions(-)
 
-diff --git a/net/tcp.c b/net/tcp.c
-index 5a4ade01c77..153f5183b25 100644
---- a/net/tcp.c
-+++ b/net/tcp.c
-@@ -563,10 +563,33 @@ void net_set_syn_options(struct tcp_stream *tcp, union tcp_build_pkt *b)
- 	b->ip.end = TCP_O_END;
- }
+diff --git a/arch/sandbox/include/asm/eth.h b/arch/sandbox/include/asm/eth.h
+index f042a5f3b92..083a7371a3f 100644
+--- a/arch/sandbox/include/asm/eth.h
++++ b/arch/sandbox/include/asm/eth.h
+@@ -77,6 +77,8 @@ typedef int sandbox_eth_tx_hand_f(struct udevice *dev, void *pkt,
+  * fake_host_hwaddr - MAC address of mocked machine
+  * fake_host_ipaddr - IP address of mocked machine
+  * disabled - Will not respond
++ * irs - tcp initial receive sequence
++ * iss - tcp initial send sequence
+  * recv_packet_buffer - buffers of the packet returned as received
+  * recv_packet_length - lengths of the packet returned as received
+  * recv_packets - number of packets returned
+@@ -87,6 +89,8 @@ struct eth_sandbox_priv {
+ 	uchar fake_host_hwaddr[ARP_HLEN];
+ 	struct in_addr fake_host_ipaddr;
+ 	bool disabled;
++	u32 irs;
++	u32 iss;
+ 	uchar * recv_packet_buffer[PKTBUFSRX];
+ 	int recv_packet_length[PKTBUFSRX];
+ 	int recv_packets;
+diff --git a/test/cmd/wget.c b/test/cmd/wget.c
+index fe26fee54c9..a90ca4fad8c 100644
+--- a/test/cmd/wget.c
++++ b/test/cmd/wget.c
+@@ -25,8 +25,7 @@
  
-+const char *tcpflags_to_str(char tcpflags, char *buf, int size)
-+{
-+	int i;
-+	static const struct {
-+		int		bit;
-+		const char	*name;
-+	} desc[] = {{TCP_RST, "RST"}, {TCP_SYN, "SYN"}, {TCP_PUSH, "PSH"},
-+		    {TCP_FIN, "FIN"}, {TCP_ACK, "ACK"}};
-+
-+	*buf = '\0';
-+	for (i = 0; i < ARRAY_SIZE(desc); i++) {
-+		if (!(tcpflags & desc[i].bit))
-+			continue;
-+
-+		if (*buf)
-+			strlcat(buf, ",", size);
-+		strlcat(buf, desc[i].name, size);
-+	}
-+
-+	return buf;
-+}
-+
- int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
- 		       u8 action, u32 tcp_seq_num, u32 tcp_ack_num)
- {
- 	union tcp_build_pkt *b = (union tcp_build_pkt *)pkt;
-+	char buf[24];
- 	int pkt_hdr_len;
+ #define SHIFT_TO_TCPHDRLEN_FIELD(x) ((x) << 4)
+ #define LEN_B_TO_DW(x) ((x) >> 2)
+-
+-int net_set_ack_options(union tcp_build_pkt *b);
++#define GET_TCP_HDR_LEN_IN_BYTES(x) ((x) >> 2)
+ 
+ static int sb_arp_handler(struct udevice *dev, void *packet,
+ 			  unsigned int len)
+@@ -64,12 +63,14 @@ static int sb_syn_handler(struct udevice *dev, void *packet,
+ 	eth_send = (void *)priv->recv_packet_buffer[priv->recv_packets];
+ 	memcpy(eth_send->et_dest, eth->et_src, ARP_HLEN);
+ 	memcpy(eth_send->et_src, priv->fake_host_hwaddr, ARP_HLEN);
++	priv->irs = ntohl(tcp->tcp_seq);
++	priv->iss = ~priv->irs; /* just to differ from irs */
+ 	eth_send->et_protlen = htons(PROT_IP);
+ 	tcp_send = (void *)eth_send + ETHER_HDR_SIZE;
+ 	tcp_send->tcp_src = tcp->tcp_dst;
+ 	tcp_send->tcp_dst = tcp->tcp_src;
+-	tcp_send->tcp_seq = htonl(0);
+-	tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + 1);
++	tcp_send->tcp_seq = htonl(priv->iss);
++	tcp_send->tcp_ack = htonl(priv->irs + 1);
+ 	tcp_send->tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(LEN_B_TO_DW(TCP_HDR_SIZE));
+ 	tcp_send->tcp_flags = TCP_SYN | TCP_ACK;
+ 	tcp_send->tcp_win = htons(PKTBUFSRX * TCP_MSS >> TCP_SCALE);
+@@ -104,13 +105,11 @@ static int sb_ack_handler(struct udevice *dev, void *packet,
+ 	void *data;
  	int pkt_len;
- 	int tcp_len;
-@@ -576,55 +599,32 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
- 	 *         4 bits reserved options
- 	 */
- 	b->ip.hdr.tcp_flags = action;
--	pkt_hdr_len = IP_TCP_HDR_SIZE;
- 	b->ip.hdr.tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(LEN_B_TO_DW(TCP_HDR_SIZE));
+ 	int payload_len = 0;
++	u32 tcp_seq, tcp_ack;
++	int tcp_data_len;
+ 	const char *payload1 = "HTTP/1.1 200 OK\r\n"
+ 		"Content-Length: 30\r\n\r\n\r\n"
+ 		"<html><body>Hi</body></html>\r\n";
+-	union tcp_build_pkt *b = (union tcp_build_pkt *)tcp;
+-	const int recv_payload_len = len - net_set_ack_options(b) - IP_HDR_SIZE - ETHER_HDR_SIZE;
+-	static int next_seq;
+-	const int bottom_payload_len = 10;
  
- 	switch (action) {
- 	case TCP_SYN:
- 		debug_cond(DEBUG_DEV_PKT,
--			   "TCP Hdr:SYN (%pI4, %pI4, sq=%u, ak=%u)\n",
--			   &tcp->rhost, &net_ip,
--			   tcp_seq_num, tcp_ack_num);
-+			   "TCP Hdr:%s (%pI4, %pI4, s=%u, a=%u)\n",
-+			   tcpflags_to_str(action, buf, sizeof(buf)),
-+			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
- 		net_set_syn_options(tcp, b);
- 		pkt_hdr_len = IP_TCP_O_SIZE;
- 		break;
--	case TCP_SYN | TCP_ACK:
--	case TCP_ACK:
--		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(tcp, b);
--		b->ip.hdr.tcp_flags = action;
--		debug_cond(DEBUG_DEV_PKT,
--			   "TCP Hdr:ACK (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
--			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num,
--			   action);
--		break;
--	case TCP_FIN:
--		debug_cond(DEBUG_DEV_PKT,
--			   "TCP Hdr:FIN  (%pI4, %pI4, s=%u, a=%u)\n",
--			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
--		payload_len = 0;
--		pkt_hdr_len = IP_TCP_HDR_SIZE;
--		break;
- 	case TCP_RST | TCP_ACK:
- 	case TCP_RST:
- 		debug_cond(DEBUG_DEV_PKT,
--			   "TCP Hdr:RST  (%pI4, %pI4, s=%u, a=%u)\n",
-+			   "TCP Hdr:%s (%pI4, %pI4, s=%u, a=%u)\n",
-+			   tcpflags_to_str(action, buf, sizeof(buf)),
- 			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
-+		pkt_hdr_len = IP_TCP_HDR_SIZE;
- 		break;
--	/* Notify connection closing */
--	case (TCP_FIN | TCP_ACK):
--	case (TCP_FIN | TCP_ACK | TCP_PUSH):
--		debug_cond(DEBUG_DEV_PKT,
--			   "TCP Hdr:FIN ACK PSH(%pI4, %pI4, s=%u, a=%u, A=%x)\n",
--			   &tcp->rhost, &net_ip,
--			   tcp_seq_num, tcp_ack_num, action);
--		fallthrough;
- 	default:
- 		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(tcp, b);
--		b->ip.hdr.tcp_flags = action | TCP_PUSH | TCP_ACK;
- 		debug_cond(DEBUG_DEV_PKT,
--			   "TCP Hdr:dft  (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
--			   &tcp->rhost, &net_ip,
--			   tcp_seq_num, tcp_ack_num, action);
-+			   "TCP Hdr:%s (%pI4, %pI4, s=%u, a=%u)\n",
-+			   tcpflags_to_str(action, buf, sizeof(buf)),
-+			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
-+		break;
+ 	/* Don't allow the buffer to overrun */
+ 	if (priv->recv_packets >= PKTBUFSRX)
+@@ -125,35 +124,32 @@ static int sb_ack_handler(struct udevice *dev, void *packet,
+ 	tcp_send->tcp_dst = tcp->tcp_src;
+ 	data = (void *)tcp_send + IP_TCP_HDR_SIZE;
+ 
+-	if (ntohl(tcp->tcp_seq) == 1 && ntohl(tcp->tcp_ack) == 1 && recv_payload_len == 0) {
+-		// ignore ACK for three-way handshaking
+-		return 0;
+-	} else if (ntohl(tcp->tcp_seq) == 1 && ntohl(tcp->tcp_ack) == 1) {
+-		// recv HTTP request message and reply top half data
+-		tcp_send->tcp_seq = htonl(ntohl(tcp->tcp_ack));
+-		tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + recv_payload_len);
++	tcp_seq = ntohl(tcp->tcp_seq) - priv->irs;
++	tcp_ack = ntohl(tcp->tcp_ack) - priv->iss;
++	tcp_data_len = len - ETHER_HDR_SIZE - IP_HDR_SIZE - GET_TCP_HDR_LEN_IN_BYTES(tcp->tcp_hlen);
+ 
+-		payload_len = strlen(payload1) - bottom_payload_len;
+-		memcpy(data, payload1, payload_len);
+-		tcp_send->tcp_flags = TCP_ACK;
++	if (tcp->tcp_flags & TCP_FIN)
++	    tcp_data_len++;
+ 
+-		next_seq = ntohl(tcp_send->tcp_seq) + payload_len;
+-	} else if (ntohl(tcp->tcp_ack) == next_seq) {
+-		// reply bottom half data
+-		const int top_payload_len = strlen(payload1) - bottom_payload_len;
++	tcp_send->tcp_seq = htonl(ntohl(tcp->tcp_ack));
++	tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + tcp_data_len);
+ 
+-		tcp_send->tcp_seq = htonl(next_seq);
+-		tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + recv_payload_len);
++	if (tcp_seq == 1 && tcp_ack == 1) {
++		if (tcp_data_len == 0) {
++			/* no data, wait for GET request */
++			return -1;
++		}
+ 
+-		payload_len = bottom_payload_len;
+-		memcpy(data, payload1 + top_payload_len, payload_len);
++		/* reply to GET request */
++		payload_len = strlen(payload1);
++		memcpy(data, payload1, payload_len);
+ 		tcp_send->tcp_flags = TCP_ACK;
+-	} else {
+-		// close connection
+-		tcp_send->tcp_seq = htonl(ntohl(tcp->tcp_ack));
+-		tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + 1);
++	} else if (tcp_ack == 1 + strlen(payload1)) {
+ 		payload_len = 0;
+ 		tcp_send->tcp_flags = TCP_ACK | TCP_FIN;
++	} else if (tcp_ack == 2 + strlen(payload1)) {
++		payload_len = 0;
++		tcp_send->tcp_flags = TCP_ACK;
  	}
  
- 	pkt_len	= pkt_hdr_len + payload_len;
+ 	tcp_send->tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(LEN_B_TO_DW(TCP_HDR_SIZE));
+@@ -214,6 +210,8 @@ static int net_test_wget(struct unit_test_state *uts)
+ 	env_set("loadaddr", "0x20000");
+ 	ut_assertok(run_command("wget ${loadaddr} 1.1.2.2:/index.html", 0));
+ 	ut_assert_nextline("HTTP/1.1 200 OK");
++	ut_assert_nextline("Content-Length: 30");
++	ut_assert_nextline("");
+ 	ut_assert_nextline("Packets received 5, Transfer Successful");
+ 	ut_assert_nextline("Bytes transferred = 32 (20 hex)");
+ 
 -- 
 2.45.2
 
