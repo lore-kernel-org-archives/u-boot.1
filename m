@@ -4,201 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C2A2D65C57
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 08:38:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AF46D65C57
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 08:40:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2A308641A;
-	Thu, 14 Nov 2024 09:38:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 5D249895DA;
+	Thu, 14 Nov 2024 09:40:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="rIrxGEBw";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="TuNuCpRj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 384E980AE6; Thu, 14 Nov 2024 09:38:48 +0100 (CET)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20623.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::623])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2446A895D8; Thu, 14 Nov 2024 09:40:00 +0100 (CET)
+Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1068881E7
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 09:38:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AAEA6895D4
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 09:39:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=L2CkJ6MjaM2E40THE6zwlclHmC+kof2keR93AC1x4rHv1Nb+LeoBXAWJcbbCUwNbcXvrzERlaC/cQAqUeZyxUYROxlNBrsgS3U2Kh6wJR/EGXD26zQQLMmSRvQCVqcAzlduuqXz5PHGLhfPqZGXhKIp+CfWqe5YsC7+TBqGuTWvixFvB2X3YmEpnWU3YQ0t8s39i7kYCusv3w9VjrFqATf0BNFHmQf2tLhsKSDOzDD+ZunXfbYsLbA5Z7z+c0W1LiuYRMzF3t488mQzk+gkEyqlMLzQtwGpREdBx7Wp5X00I2Gx05VDCsBkRMKSalZEfcXIDIaQMAz5klIqqUEvHeg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jtrsNDS54WYkLNT9cVMDycs0/bz+5A84px6ml4tll8g=;
- b=JuIAEKvDkEAEuCJzx8sCy2yCM0hm54I+8fSSDQqKC2jeetdlAy7KTKSHmD4qPNU/hw6vxW60JcEnjkp0syeCDF5/pRkO27j3lkYovfF3/hBUK/zL169FueYt5Qm/rSC3WG4LmAN6D+7FSZycKVSBXT6mx3aXaizr23REasYx4WFNHS1xsODY+TPUBhXKRlq/zpqX28YYzq33KOfFOrlJUlf/JE54mdARoXfgdirg02lyyJUmFyLRbDvWzdcy4xqqinqXTJDo8dLMjTGIi9NO7b2WUAjC4NGA1ubW8/y9WxyXTsgTxL04dJ0CRzWktsCYSldIK8dObCa/anxwWCXyFg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jtrsNDS54WYkLNT9cVMDycs0/bz+5A84px6ml4tll8g=;
- b=rIrxGEBw1aK3jA9vYjPkW9oWisefKZcVdQutS/iOo1QdguG5upD2MV23YQX04dh4eNfLWInYkTnynNRhsSiPII/aOo8/wUnfM8nBBTyD5qYLYggK2NCR+BCjbQmkkuO1VUXgkhoWsV6+vl+/MAeQ7CNZMXIJ6ovIIkom0G7i5f4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by CH3PR12MB9022.namprd12.prod.outlook.com (2603:10b6:610:171::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.17; Thu, 14 Nov
- 2024 08:38:41 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%6]) with mapi id 15.20.8158.013; Thu, 14 Nov 2024
- 08:38:41 +0000
-Message-ID: <f0765203-4e47-4131-aabb-b689c6702865@amd.com>
-Date: Thu, 14 Nov 2024 09:38:30 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/1]: bootcount: zynqmp: Add bootcount API
-To: Vasileios Amoiridis <vassilisamir@gmail.com>, trini@konsulko.com,
- hs@denx.de, pro@denx.de, sjg@chromium.org
-Cc: vasileios.amoiridis@cern.ch, u-boot@lists.denx.de
-References: <20241105132744.1572759-1-vassilisamir@gmail.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20241105132744.1572759-1-vassilisamir@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR07CA0212.eurprd07.prod.outlook.com
- (2603:10a6:802:58::15) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ spf=pass smtp.mailfrom=primoz.fiser@norik.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
+ s=default;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=CqsAgOMsrVDuwC4sMo5/ThKdqtaogcMW8Ab6lcbwHuw=; b=TuNuCpRjMiXx3FhbVYC99WQqWv
+ YpmoLLL4TEm/WQkr21YprxXdpmW1bohGdvcG+7HB4qpF0iEqyUAyC0dBexIgoRjo7wMN6MOiiGpi+
+ C2Www36NTHq4XAQISwm62S2ZtKB3yKU13iNQtQAWHytlVz7OYdyREdykhQjI+WEQAOlLgF5kNEUV+
+ nLTbZ2BSmz88diV8s+nzMcf1Yu8dFO9W7J65G0fWGIjwi3nG6EcqIHLyTOj8/hpH1rIDyjx8VorCY
+ v2brWRwpO1iEqHIvSjvB+d4uV77PJix28/gz/KKUsJ90YD1q6nIf+SufoAor/XracG2nJ3HuA6qNA
+ IiLqOmdA==;
+Received: from [89.212.21.243] (port=51042 helo=[192.168.69.116])
+ by cpanel.siel.si with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96.2)
+ (envelope-from <primoz.fiser@norik.com>) id 1tBVOP-00AA18-0k;
+ Thu, 14 Nov 2024 09:39:56 +0100
+Message-ID: <4f65f0a2-d0f7-4b0c-934f-d32c0a36be11@norik.com>
+Date: Thu, 14 Nov 2024 09:39:55 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CH3PR12MB9022:EE_
-X-MS-Office365-Filtering-Correlation-Id: e4389ee8-6a7a-4674-9aee-08dd0487be41
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?OHJqMmxPb3RJWk9nMjlSOVpEZDNPMlBZYlU3bkhiaFNyMFVGaCtDaXkybmJD?=
- =?utf-8?B?aW8xOFl3N1hubGxKaEZFV013SWQyYWxtbml4VGpORDNqUjNWVzBGVFFBZkZX?=
- =?utf-8?B?QTlmYnZRcmVEemRlSCsrS3lXNUFhQTF3UGlsakxrUGI5KytMbFdDMGhFSWtC?=
- =?utf-8?B?RTFOanY5MVQybmpMOHRHNlZEcmFUa212U1dnYjF6QmR1RmJtZ0RGbHNVZHdB?=
- =?utf-8?B?cE85bnR5NXp0RzZKbHB0aUdxdG9QSXZZQ2JMUHhsV1Byd05rSlNWU1FQN2p0?=
- =?utf-8?B?V1FNMzNLbkRDUEFLQlUwUmVuSHFaS1lraXE0bXE2NlE3d2NlMEg1RU12eVdy?=
- =?utf-8?B?eGFFMkE3THp1WE5YcFV6VE5DNkRQWFdMcVhla2JsZzFvdm5Udmw0Rk9xNVdW?=
- =?utf-8?B?TmxNaS9hbUsvUEtXcWN0L3RQME82Y29nbVlTUkxyOG5WVllJQWx6OVVmNmtP?=
- =?utf-8?B?eWNub2h1aitVY0xsUjg3R0cwNncwTUFHZFN4WVg1MERZV0FjQmFCUzJhb1Fk?=
- =?utf-8?B?N2RORUptM0FuVE11WHh2MzNtRGlpcU4vWGEvTjV1ZXN1Q2V1ZGFpeDdMOEFH?=
- =?utf-8?B?TUFhbWMvd0NPK2JYcDBucGVhaTJtN1hBMkVBaTE5b2lMdVk3NHNvS2NVN0Rh?=
- =?utf-8?B?Q00yT3ZNVExpZjlBYjl5TC9xV25aUmEwdVVHanQyODRmZEJlajVEb05MelIv?=
- =?utf-8?B?QUswY21mbkptcUtzYnREQjB1am13aEVpdTZ5SjRYRVdzSXdiMXRQa2ozbHlS?=
- =?utf-8?B?SmhObTIvdlpKWHZSd1Q4OVpBMjFJUnlHb2hkd0xad2U2cDZpcHBYUG90WEd0?=
- =?utf-8?B?QjhIMUtTV3RjbmkxQy9kaFJ4a2dyYnBKQWh3MDZyNXcySVZBais0M1JmU2FH?=
- =?utf-8?B?OHltMFljejVqY0hKYzBFbDZONEVKdXNwQlNlam12dkc2bEIvelMvQ0d3Skdj?=
- =?utf-8?B?KzNvQzhWZytzdjBPUjJUVlUrSHMzMkZTOVJxK09aRXVlSUcwSkROeHpaZ0lR?=
- =?utf-8?B?RVM5dWdMOXppdmhBa0RoZnI2NjBHNG5HT0g2cXhlbTlqUFJHNVZNbWVsYTFW?=
- =?utf-8?B?MERzUFk4elk2US9DTjFxZTFPSENsNWJsUnlObkxwOWR1ZEU4dGx1T0VKTUc2?=
- =?utf-8?B?VFZZUFgrekdmYmxpZmJxNkRPQ1hBWENrM2dPNkZHU212WVJvRUduVTA3cWxh?=
- =?utf-8?B?MDdCWnlib1N3TDV6dlJWcXBUdFhrUm9qNzkrTGJpeUszR1lnbzYxMzRwUFFi?=
- =?utf-8?B?azZvRHlyWmNrekkzeDJmN3BUODRHZ05QWUdIWGdmUURoMDJ5SHo4Sk91ck4w?=
- =?utf-8?B?eFNSL2xLczg1OXdNRHJCQkJnLzY5ZXF4REQvb3dwVjFFWWQ1TzdiNUs0aUkv?=
- =?utf-8?B?bEhROG92RmMyY3Q3ZFdwT3g2SlNhOUVsNlhvdUxqSGFWbWlpYjcweTZwOFJi?=
- =?utf-8?B?RWs5UVBKTEpqZHhNUkYxV2JXMFNnWWg1Q2R2a3dGMi9ybS9qSW5yUE9LTHJI?=
- =?utf-8?B?WWoraXJ5MGtkUmtlaEtnOU5Rbmk4TmMwS08vbzlUQnJURW1KRXBvWFUwR2hJ?=
- =?utf-8?B?Si9zVjcyL2gwVi9hbjNPdFN2UXhsNS9tZjEyM0ZOanBxY3JLbDVBR0xsTDk4?=
- =?utf-8?B?RFIrMlhJcmswV1ZsQ3NDUVlwL3hROTJ5ZjlRL2VqWXpUS1ZsUDhNdlJwZFhW?=
- =?utf-8?B?dExLTkF5bVFmM01TT2Q3d2JxNkl6ZWhIUHRibk9KazdtNk5DbTJPbXBxMXJR?=
- =?utf-8?Q?Evaedov/q0G/kLgSy1C7mznWVyP/DX64k23VFJ9?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SnRacW9Ca3FlZG8xRFhsOStCTXAwbS9tWTFSaDBXSWYyL3lRK2JEZmJRVjVF?=
- =?utf-8?B?dTBQZHRjWTVRbXJRdEVxYW83RUZBL3N2UnQrK2NERm1saFVaalhyTG1QZjRE?=
- =?utf-8?B?MWVaNytvYWpiZWpVTE1OU25QRzFsN3JXemZ1bEhVTk8wRVlTM0R3SGNLa1dh?=
- =?utf-8?B?d2FRQTlWZE5JblUzVTVtcDFyTDNwS2IzVzQzYWlvTkU2YjFuQWNnWDRjWEtn?=
- =?utf-8?B?bEI0cVA0eE1VajZ4QUlEK24vTElRTmtaV2J3NHNaZ0xoNUFVMjB4TzhnUURO?=
- =?utf-8?B?V0dVcE9Mc3UvZ3NVY3ovMFNXQ3JhaUtWclhiN2I0RHFYQTlKR1YyUlhYUkhJ?=
- =?utf-8?B?WUw1RTRmWWJHQmkrSkRxenFrUldFZjhEUDB5UDZWRGcyek5XYzA0NXRBWnpu?=
- =?utf-8?B?UFZkb2RPeHU2dVdkVmpCWm1SakRtM21JNnpraEdhODB2VEN5VysweGdBaEln?=
- =?utf-8?B?REZkd28vMTBUaWJOTjRKY0YwcFIyOGtiQS9LekZHZVBGdzJYQUhZY3dDd29w?=
- =?utf-8?B?N3RyM3ZGUlFsSGtKWnpoSXNWUFV2NExlNjNKOUR5Tkw1anZuM0xJTzBTeXJS?=
- =?utf-8?B?ZnVDZDc4aXgvMS9BRkFNek9ReEFvcTlMZFJxMnNYRVp3YlFmVEpKdFZiSkRC?=
- =?utf-8?B?ZDNSbUx1aWJkdHBHM1FtaDlOYUpSVm9XZXNxcFpvd2ZxZk15ckM5RHhHVk14?=
- =?utf-8?B?bytrZTVadlFCMWxQRnUxTmtoYXFYWFFObUZIQS9KbE44VVVVT0xYSVpQMHRC?=
- =?utf-8?B?SGF2cFNYd3U1YnRieTUvcTZZVWg0dTdUSjBsQjI2dU5mRXhHWjRzNFh3Z0tt?=
- =?utf-8?B?ZnBRaStIRUd5SkJYQmpISHI2V1VLMERSc1Nod1AwNFZLWEhUclZiUkVyU3JH?=
- =?utf-8?B?TVhYRGNvSkQvMC9oMDFQNVN2Wm8vOFRFczFGZjR0R09JK2MzQUVLUWVhc1hT?=
- =?utf-8?B?MFRrWFVZZHFZK2xPZllZL04wT09HYzRIYUhxSUszd0dUNkdZSjdiZytvU2RK?=
- =?utf-8?B?WDRDdlFYY3ZYWk5JcllQM0FubnBzNzNNMVpCczVPRFJ6NW56YWJQa1paQndP?=
- =?utf-8?B?bE40ZTNBTTZLbkNhUjBsUGpldGVoNStGMFFDeURRNkhFNDJ4TWlUR2c3bnVa?=
- =?utf-8?B?Mjg0ZXVVKy8ybjRrbGhsbnJVZDNia1pqMVBNcDhDOENnNG5NWG5qcHFLOWlQ?=
- =?utf-8?B?TEZYbzBBVGVDMnFjNGJEVjlFTmpoU3VzNWFYVHpsTmZYRXAyd2N3bGhDcEJC?=
- =?utf-8?B?QnRCb2M5UGcvUFpYS0NKQnV3M3lTUUREVEY1ZUppRHhOcmUzNklPT2EzWnJt?=
- =?utf-8?B?elJqMnoxS0VVRWY1UkJobllObG9xQkhxSnQyandnTlFFcVNFeEptZkhpSTVS?=
- =?utf-8?B?Tytmd3FtOWhhd1NzLzZoVzEwNXFVSXJSSGZ2VTd5NXhMYit1WGt3WVlnOGVN?=
- =?utf-8?B?Q3Vkem9uaVBXem1QRVBpZkVtMUlMY3lWWGtic0JwaitRNmRDSDlobFFFOHdB?=
- =?utf-8?B?bEJPRHRnWHdrTmRvUlBieDRGM2J1T3NyMGRxSGs2TmZrdkhOeXFjdDltTCtl?=
- =?utf-8?B?dWxmYm9oRTdOay9GcXVjcU5BZEpGUkxSWVFjWEJZTU51Mm4vWU1idG5WOW85?=
- =?utf-8?B?N0NPbEdpUEVRMEE0RkZEQnB1dUxQWGQ1Z0o1c3l3akVGNHJXSUZaT1daWEZa?=
- =?utf-8?B?YmZLRGZVeGJxM0ZFcUUrVnF5VktyRHVxVEhUL0F0dkZ1OEM0YTJLelJxLzdP?=
- =?utf-8?B?SnkzK1JXT25NVlBIS3R5bC8rMnAwdTdvZXo2VWx1S0lLRnVHQjJoRm9yazB2?=
- =?utf-8?B?a3RpcW9PUGtOczBXZ2tnR0x5QzArYmJVRVZRMzdhVWFDQmZ5U0JTTXFNMUJa?=
- =?utf-8?B?S2tkWGFxbEFaSU9HTlV4d1hhdGNNUjRGQ2VrQ2tnc0ZBcXNqaU52MFJOTnh4?=
- =?utf-8?B?b1gzVDVuOWpCeERWWEhDU0VnWFZHUlJ4MTlkY1V3eit2Q0ZZUU5UbUNNUUhj?=
- =?utf-8?B?djljRjI5azBYV2xFOVFzWTFzWTZYSkNDWUFOeiszRk9xalhTLzc2eVJYamJK?=
- =?utf-8?B?SzN3WGpPcW4xMFQ1TGExSzg3Q3JuNGpjWWRxMWtiOUpoQXNMUktzOXVaMVdy?=
- =?utf-8?Q?Ao0oTHz1UuYHGuWBZ40a2MycE?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e4389ee8-6a7a-4674-9aee-08dd0487be41
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2024 08:38:41.8001 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4sEHSrd5lVNc6OAiJlFcSiFWqPPLZBPUZG9l1/V5LCawAfSLqF6hdINxvjfGQzDg
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9022
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/3] board: phytec: imx93: Add phyCORE-i.MX 93 support
+ for all SOM variants
+To: Christoph Stoidner <c.stoidner@phytec.de>, u-boot@lists.denx.de,
+ upstream@lists.phytec.de
+Cc: Mathieu Othacehe <m.othacehe@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Yannic Moog <y.moog@phytec.de>, Andrej Picej <andrej.picej@norik.com>,
+ Wadim Egorov <w.egorov@phytec.de>
+References: <20241113160037.65679-1-c.stoidner@phytec.de>
+ <20241113160037.65679-4-c.stoidner@phytec.de>
+From: Primoz Fiser <primoz.fiser@norik.com>
+Content-Language: en-US
+Autocrypt: addr=primoz.fiser@norik.com; keydata=
+ xjMEZrROOxYJKwYBBAHaRw8BAQdAADVOb5tiLVTUAC9nu/FUl4gj/+4fDLqbc3mk0Vz8riTN
+ JVByaW1veiBGaXNlciA8cHJpbW96LmZpc2VyQG5vcmlrLmNvbT7CiQQTFggAMRYhBK2YFSAH
+ ExsBZLCwJGoLbQEHbnBPBQJmtE47AhsDBAsJCAcFFQgJCgsFFgIDAQAACgkQagttAQducE+T
+ gAD+K4fKlIuvH75fAFwGYG/HT3F9mN64majvqJqvp3gTB9YBAL12gu+cm11m9JMyOyN0l6Os
+ jStsQFghPkzBSDWSDN0NzjgEZrROPBIKKwYBBAGXVQEFAQEHQP2xtEOhbgA+rfzvvcFkV1zK
+ 6ym3/c/OUQObCp50BocdAwEIB8J4BBgWCAAgFiEErZgVIAcTGwFksLAkagttAQducE8FAma0
+ TjwCGwwACgkQagttAQducE8ucAD9F1sXtQD4iA7Qu+SwNUAp/9x7Cqr37CSb2p6hbRmPJP8B
+ AMYR91JYlFmOJ+ScPhQ8/MgFO+V6pa7K2ebk5xYqsCgA
+Organization: Norik systems d.o.o.
+In-Reply-To: <20241113160037.65679-4-c.stoidner@phytec.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel.siel.si
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
+ primoz.fiser@norik.com
+X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -215,33 +101,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Christoph,
 
+this patch doesn't apply anymore on latest master.
 
-On 11/5/24 14:27, Vasileios Amoiridis wrote:
-> From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
-> 
-> Changes in v3:
-> 
-> 	1) Organize correctly headers
-> 	2) Remove redundant "mio" and change "write" to "read"
-> 	3) Add "depends on ARCH_ZYNQMP"
-> 
-> v2: https://lore.kernel.org/u-boot/20241105074917.546887-1-vassilisamir@gmail.com/
-> v1: https://lore.kernel.org/u-boot/20241029185814.7937-1-vassilisamir@gmail.com/
-> 
-> Vasileios Amoiridis (1):
->    drivers: bootcount: Add ZynqMP specific bootcount support
-> 
->   MAINTAINERS                                  |  1 +
->   arch/arm/mach-zynqmp/include/mach/hardware.h |  2 +
->   drivers/bootcount/Kconfig                    |  7 +++
->   drivers/bootcount/Makefile                   |  1 +
->   drivers/bootcount/bootcount_zynqmp.c         | 47 ++++++++++++++++++++
->   5 files changed, 58 insertions(+)
->   create mode 100644 drivers/bootcount/bootcount_zynqmp.c
-> 
-> 
-> base-commit: 56accc56b9aab87ef4809ccc588e1257969cd271
+Can you please rebase for v3?
 
-Applied.
-M
+Then I can test it on the board.
+
+Thanks,
+BR,
+Primoz
+
+On 13. 11. 24 17:00, Christoph Stoidner wrote:
+> The phyCORE-i.MX 93 is available in various variants (e.g. different ram
+> sizes, eMMC HS400 yes/no). Enable hardware introspection for the
+> imx93-phyboard-segin_defconfig, so that during startup the SOM module
+> variant can be detected, and the hardware can be configured accordingly.
+> The resulting SPL and u-boot binary shall able to boot each
+> phyCORE-i.MX 93 module variant on each carrier board. Finally rename
+> imx93-phyboard-segin_defconfig to imx93-phycore_defconfig, to highlight
+> its SOM scope.
+> 
+> Signed-off-by: Christoph Stoidner <c.stoidner@phytec.de>
+> ---
+> Cc: Mathieu Othacehe <m.othacehe@gmail.com>
+> Cc: Christoph Stoidner <c.stoidner@phytec.de>
+> Cc: Stefano Babic <sbabic@denx.de>
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Yannic Moog <y.moog@phytec.de>
+> Cc: Primoz Fiser <primoz.fiser@norik.com>
+> Cc: Andrej Picej <andrej.picej@norik.com>
+> Cc: Wadim Egorov <w.egorov@phytec.de>
+> ---
+> Changes in v2:
+> - just rename imx93-phyboard-segin_defconfig and add needed CONFIGs,
+>   instead of creating an entirely new second defconfig
+> - remove wrong comment from imx93-phyboard-segin-u-boot.dtsi
+> - improve commit message
+> 
+>  arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi               | 6 ++++--
+>  board/phytec/phycore_imx93/MAINTAINERS                      | 2 +-
+>  ...x93-phyboard-segin_defconfig => imx93-phycore_defconfig} | 4 +++-
+>  3 files changed, 8 insertions(+), 4 deletions(-)
+>  rename configs/{imx93-phyboard-segin_defconfig => imx93-phycore_defconfig} (98%)
+> 
+> diff --git a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+> index 25c778bb07..2245461032 100644
+> --- a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+> +++ b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+> @@ -2,15 +2,17 @@
+>  /*
+>   * Copyright (C) 2023 PHYTEC Messtechnik GmbH
+>   * Christoph Stoidner <c.stoidner@phytec.de>
+> + * Copyright (C) 2024 PHYTEC Messtechnik GmbH
+>   *
+>   * Product homepage:
+> - * phyBOARD-Segin carrier board is reused for the i.MX93 design.
+> - * https://www.phytec.eu/en/produkte/single-board-computer/phyboard-segin-imx6ul/
+> +   https://www.phytec.de/produkte/system-on-modules/phycore-imx-91-93/
+>   */
+>  
+>  #include "imx93-u-boot.dtsi"
+>  
+>  / {
+> +	model = "PHYTEC phyCORE-i.MX93";
+> +
+>  	wdt-reboot {
+>  		compatible = "wdt-reboot";
+>  		wdt = <&wdog3>;
+> diff --git a/board/phytec/phycore_imx93/MAINTAINERS b/board/phytec/phycore_imx93/MAINTAINERS
+> index cea817ffdc..718f89a084 100644
+> --- a/board/phytec/phycore_imx93/MAINTAINERS
+> +++ b/board/phytec/phycore_imx93/MAINTAINERS
+> @@ -9,5 +9,5 @@ F:      arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+>  F:      board/phytec/phycore_imx93/
+>  F:      board/phytec/common/imx93_som_detection.c
+>  F:      board/phytec/common/imx93_som_detection.h
+> -F:      configs/imx93-phyboard-segin_defconfig
+> +F:      configs/imx93-phycore_defconfig
+>  F:      include/configs/phycore_imx93.h
+> diff --git a/configs/imx93-phyboard-segin_defconfig b/configs/imx93-phycore_defconfig
+> similarity index 98%
+> rename from configs/imx93-phyboard-segin_defconfig
+> rename to configs/imx93-phycore_defconfig
+> index 18a4087e4b..cf9800118a 100644
+> --- a/configs/imx93-phyboard-segin_defconfig
+> +++ b/configs/imx93-phycore_defconfig
+> @@ -6,13 +6,13 @@ CONFIG_SYS_MALLOC_F_LEN=0x20000
+>  CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>  CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>  CONFIG_NR_DRAM_BANKS=2
+> +CONFIG_PHYTEC_SOM_DETECTION=y
+>  CONFIG_ENV_SOURCE_FILE="phycore_imx93"
+>  CONFIG_ENV_SIZE=0x10000
+>  CONFIG_ENV_OFFSET=0x700000
+>  CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
+>  CONFIG_DM_GPIO=y
+>  CONFIG_DEFAULT_DEVICE_TREE="imx93-phyboard-segin"
+> -CONFIG_SPL_TEXT_BASE=0x2049A000
+>  CONFIG_AHAB_BOOT=y
+>  CONFIG_TARGET_PHYCORE_IMX93=y
+>  CONFIG_OF_LIBFDT_OVERLAY=y
+> @@ -20,6 +20,7 @@ CONFIG_SYS_MONITOR_LEN=524288
+>  CONFIG_SPL_SERIAL=y
+>  CONFIG_SPL_DRIVERS_MISC=y
+>  CONFIG_SPL_STACK=0x20519dd0
+> +CONFIG_SPL_TEXT_BASE=0x2049A000
+>  CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>  CONFIG_SPL_BSS_START_ADDR=0x2051a000
+>  CONFIG_SPL_BSS_MAX_SIZE=0x2000
+> @@ -31,6 +32,7 @@ CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x88000000
+>  CONFIG_SYS_MEMTEST_START=0x80000000
+>  CONFIG_SYS_MEMTEST_END=0x90000000
+>  CONFIG_REMAKE_ELF=y
+> +# CONFIG_ANDROID_BOOT_IMAGE is not set
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_OF_SYSTEM_SETUP=y
+>  CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadimage; then run mmcboot; else run netboot; fi; fi;"
+
+-- 
+Primoz Fiser                    | phone: +386-41-390-545
+<tel:+386-41-390-545> |
+---------------------------------------------------------|
+Norik systems d.o.o.            | https://www.norik.com
+<https://www.norik.com>  |
+Your embedded software partner  | email: info@norik.com
+<mailto:info@norik.com> |
+Slovenia, EU                    | phone: +386-41-540-545
+<tel:+386-41-540-545> |
+
