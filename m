@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF6E4D6A223
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 17:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1643CD6A224
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 18:02:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2310488F62;
-	Thu, 14 Nov 2024 18:52:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 64D6589584;
+	Thu, 14 Nov 2024 19:02:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R75hkk7H";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AlVrNBnw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D83C88DF1; Thu, 14 Nov 2024 18:52:31 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id E9F4289620; Thu, 14 Nov 2024 19:02:51 +0100 (CET)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5025288DF1
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 18:52:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A89578926E
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 19:02:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-aa1f1f2d508so131906666b.2
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 09:52:29 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5ee53b30470so528140eaf.3
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 10:02:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731606749; x=1732211549; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=M9FiEOtp12cU3/axHiz5P5iM7VFB/r58x0JDmOUaEUM=;
- b=R75hkk7Hhezz0fOBwzGb8heMcHu9HXAV8inA/egn2xzfPKOXV8nZWQE1u7HKMh9n3l
- uEUEAoxr1n+hw0hzJwIWiZ2CFBRInH7MvoUnbxbRMOJ/7dvv2nXu9O/h3rjeItNGCbFl
- dgXo4foO+MokxSQjOzu5xU14tYkqKSoRzKtXg=
+ d=konsulko.com; s=google; t=1731607368; x=1732212168; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gGfxJfHsEkAWod/oYXjX6Hh0DPHMjaSnmJTGD2IASYY=;
+ b=AlVrNBnwm5z/7AOwqVAhPO14t/3XAwkcVvtuEeT2J8mzWir+wXZD+pHXkwslDtoU40
+ 9ppVE8yHSYQBa68Twa9OVNzFulh2b5h4YEkpkLBZgkp+huYKGumpjjlr3FAesoLNbZkt
+ HCgo15oJJDJkS0R/qWUiANjZ9HMwJtGFKoXXg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731606749; x=1732211549;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=M9FiEOtp12cU3/axHiz5P5iM7VFB/r58x0JDmOUaEUM=;
- b=WJzfm/dCYJ+eF5SMLgKFMBPCtG5HJaQy7wE00eDigGUvaZMZxLsXxpLWl4+gTiOiVQ
- n/StQBNhEiLEdtbtz/UfS8Ou/FR+hjF0NCH0DUAuSrjve69YNMDhSZuP6KneLrxaXA/0
- mDrAwQOAGUhd6jaGZC2aARQjZ4BDv+zpUKlfyA+pzT7UZgXC8vTOEIfqRo0FFz2OMWqZ
- 5qkEz4hEol66dJQjwbKZZacb3WMGWJAJvcXTtFhzxh6RBD3vpDsNzfsAIb3dUbargORQ
- +Maw2BYFV+Hltf3GQbObZP15KjRcvlDbJ/TWqkHQyXv2ARk4WPRdryYDx7ioHFY2AF1e
- eA6w==
+ d=1e100.net; s=20230601; t=1731607368; x=1732212168;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gGfxJfHsEkAWod/oYXjX6Hh0DPHMjaSnmJTGD2IASYY=;
+ b=r7hSjbzDzEMgk7DOmZTiuX8bneDzHkaBRh0CK75Sqn4kwtyZv1gcPWGAnaCvViYmBE
+ zFxuh0lUzVLqAHdn7lb1/X3oS3Q7f8utclydmspuZUeEroJ2eaXMbBtcMgg46lPSqQrq
+ P53+Df6SQgeOGjrlOeAaU9c43CJc3EbeXwzeO8jGA3cXzbZLqBWk5vCiwcDkrP34sIi5
+ QRn6ntATINIbtu6Rq+GlraTssm/gIS1azaRI6YJCwWjdi+ouQPmgB1ssOhXwdTkoJTzT
+ RO9JCfSeDOe8rXhS3k/olS1zxKYRN9nWES0q0HiHUGfCRVIbkvQ60CvRqxxSQxBF9YiW
+ mZTg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVysNp+pC9sRDmeMd2+mvXhlpXrbTkzTqu5Zpm467ps5Qs4FBNOnF4XS4o/5d+az3Gm0G31OUI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwHkzbWQJ7dWpk67ItvXpjuxoImNyWdHu2kkvFAOY4uQjpwb33Z
- ACjpAT3YRWEjAHr6Mk7UOcrsoAVWqAhuuMwieAJMwge1n1B0nOfWNbreijBNEoTvy8Ytkf/W7BP
- Kw8XmpdjBiypXOe2E+oPewmHxc7uhguMRRoJN
-X-Google-Smtp-Source: AGHT+IEVcw8weku2swR+UcdyUpc8CcZS0pVqOBXQT4w681gi8EO9+LlfQQN478OSngUaqMBfke3QSBrZrcTDNwADp1s=
-X-Received: by 2002:a17:907:94cc:b0:a99:fa01:2b72 with SMTP id
- a640c23a62f3a-a9eeff4446cmr2553736866b.33.1731606748538; Thu, 14 Nov 2024
- 09:52:28 -0800 (PST)
+ AJvYcCXQa7MhumWHAIiUOyCY/BJpvoguOGT8keSPBeze7U8Jy5uMUnisLx2zL5Ntb0JHlNIKJzDRNpM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHL8sH+xdZxIiVa6hv/MJMhrqphCJ8cLVB3+N09H0k8AfXnjLs
+ 3gY6XvagGebcUrT+CP9srdqIpTlM+m93EjUUcLIMvX1CKX3ga06a9Yy6hRPIYas=
+X-Google-Smtp-Source: AGHT+IGvlzbQgEH6rkacu27APXX4XGdjm/Xgmn2FbvasURw1z4w8L9yYCxko5jKAuovDr9HxK8zNBQ==
+X-Received: by 2002:a05:6871:10e:b0:288:4823:fe1b with SMTP id
+ 586e51a60fabf-295ccfd946dmr11905654fac.17.1731607368344; 
+ Thu, 14 Nov 2024 10:02:48 -0800 (PST)
+Received: from bill-the-cat ([145.14.135.248])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-296109c7782sm682518fac.32.2024.11.14.10.02.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Nov 2024 10:02:47 -0800 (PST)
+Date: Thu, 14 Nov 2024 12:02:44 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] mmc: don't print 'MMC:' if there are no MMC devices
+Message-ID: <20241114180244.GK3600562@bill-the-cat>
+References: <20241113053023.1870736-1-caleb.connolly@linaro.org>
+ <20241113142437.GM3600562@bill-the-cat>
+ <5fb2f6ab-c47d-4ea0-83bf-a14d8e737cb1@linaro.org>
 MIME-Version: 1.0
-References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
- <20241031-iommu_apple_dart_ordering-v1-2-8a6877946d6b@jannau.net>
- <87zfmi4rzy.fsf@bloch.sibelius.xs4all.nl>
- <4ff61e8e-03c7-42d2-b2fe-8dba1697641f@gmx.de>
- <CAFLszTjDaQGaaL9qM_s+oxNrAkGhunGkbAjyR1giEDgnShUfzw@mail.gmail.com>
- <5FA71CBD-F9AF-442A-8564-4F663F44BF42@gmx.de>
- <CAFLszTi9As9YFFoWuD9GW6gHpriZSNVCFmq5fKkdCi9jeRuqjQ@mail.gmail.com>
- <C4EB5D10-D037-49BE-BE0A-00BD3D1514FC@gmx.de>
- <CAFLszTiaDi7Sbrjsjt42UObz1Nb8SqM8CFBdcTOAXih3pJV3PQ@mail.gmail.com>
- <20241114142600.GE3600562@bill-the-cat>
-In-Reply-To: <20241114142600.GE3600562@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 14 Nov 2024 10:52:17 -0700
-Message-ID: <CAFLszThOpdOa7VPnDT9=asovzpfhLwqXu0uM1HVR7kfoW+pp4w@mail.gmail.com>
-Subject: Re: [PATCH 2/2] efi_loader: remove non vital devices first
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Janne Grunau <j@jannau.net>, 
- Mark Kettenis <kettenis@openbsd.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="eLBtVxMHpIJoVvNq"
+Content-Disposition: inline
+In-Reply-To: <5fb2f6ab-c47d-4ea0-83bf-a14d8e737cb1@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,133 +103,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Thu, 14 Nov 2024 at 07:26, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Nov 13, 2024 at 08:53:17PM -0700, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Wed, 13 Nov 2024 at 11:45, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >
-> > > Am 13. November 2024 17:03:03 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> > > >Hi Heinrich,
-> > > >
-> > > >On Wed, 13 Nov 2024 at 08:17, Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > >wrote:
-> > > >>
-> > > >> Am 13. November 2024 15:39:22 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> > > >> >Hi,
-> > > >> >
-> > > >> >On Wed, 13 Nov 2024 at 05:52, Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > >wrote:
-> > > >> >>
-> > > >> >> On 11/1/24 21:29, Mark Kettenis wrote:
-> > > >> >> >> From: Janne Grunau <j@jannau.net>
-> > > >> >> >> Date: Thu, 31 Oct 2024 23:48:02 +0100
-> > > >> >> >>
-> > > >> >> >> DM_FLAG_VITAL marks devices which are essential for the operation of
-> > > >> >> >> other devices. Removing these devices before their users can result
-> > > >in
-> > > >> >> >> hangs or crashes.
-> > > >> >> >> This potentially fixes EFI boot of Renesas rcar3 devices. Their
-> > > >clock
-> > > >> >> >> devices (and with this series the dart iommu) are the only devices
-> > > >> >> >> markes as vital.
-> > > >> >> >> The arm boot code already handles devioce removal in this way.
-> > > >> >> >
-> > > >> >> > There is a typo in that last sentence of the commit message
-> > > >(devioce).
-> > > >> >> > Otherwise:
-> > > >> >> >
-> > > >> >> >> Signed-off-by: Janne Grunau <j@jannau.net>
-> > > >> >> >
-> > > >> >> > Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
-> > > >> >> >
-> > > >> >> >> ---
-> > > >> >> >>   lib/efi_loader/efi_boottime.c | 1 +
-> > > >> >> >>   1 file changed, 1 insertion(+)
-> > > >> >> >>
-> > > >> >> >> diff --git a/lib/efi_loader/efi_boottime.c
-> > > >b/lib/efi_loader/efi_boottime.c
-> > > >> >> >> index
-> > > >4f52284b4c653c252b0ed6c0c87da8901448d4b4..7db3c95782970f8c06a970a8ee86b1804cd848b6
-> > > >100644
-> > > >> >> >> --- a/lib/efi_loader/efi_boottime.c
-> > > >> >> >> +++ b/lib/efi_loader/efi_boottime.c
-> > > >> >> >> @@ -2234,6 +2234,7 @@ static efi_status_t EFIAPI
-> > > >efi_exit_boot_services(efi_handle_t image_handle,
-> > > >> >> >>              if (IS_ENABLED(CONFIG_USB_DEVICE))
-> > > >> >> >>                      udc_disconnect();
-> > > >> >> >>              board_quiesce_devices();
-> > > >> >> >> +            dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL |
-> > > >DM_REMOVE_NON_VITAL);
-> > > >> >> >>              dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
-> > > >> >>
-> > > >> >> Simon's patch 6224dc9ba428 ("arm: Remove vital devices last") addressed
-> > > >> >> the same issue for bootm on arm. But what about about other
-> > > >architectures?
-> > > >> >>
-> > > >> >> This logic should be moved to drivers/core/root.c instead of
-> > > >replicating
-> > > >> >> code.
-> > > >> >
-> > > >> >We could have a common helper, but it should not be in driver/core as
-> > > >> >this ordering is more of a policy decision. Unless we can add a
-> > > >> >parameter telling dm exactly what to do...
-> > > >> >
-> > > >> >BTW, Heinrich, this behaviour is exactly what my bootflow_efi() test
-> > > >> >was supposed to check. But since it doesn't have the
-> > > >> >exit-boot-services piece at your request...
-> > > >> >
-> > > >> >Regards,
-> > > >> >Simon
-> > > >>
-> > > >>
-> > > >> Why can't we generally remove non-vital devices first if all are to be
-> > > >removed?
-> > > >>
-> > > >> I cannot see anything device specific here.
-> > > >
-> > > >No objection to that...but it needs to be in a new function, not become the
-> > > >default behaviour of dm_remove_devices_flags(), which is supposed to do
-> > > >what it is told and in one pass.
-> > >
-> > > dm_remove_device_flags() makes no specific promises concerning the deletion sequence and its internal working.
-> >
-> > Do you mean in the function comment in the header file? We can
-> > certainly update that.
->
-> That seems like "fixing" the problem by documenting that things should
-> work in the seemingly broken way.
->
-> > > But obviously it will fail if non-vital redources are not deleted first.
-> >
-> > Either I don't understand that, or I don't agree. Can you give a
-> > specific example?
->
-> The Apple IOMMU? That's what got this thread started.
->
-> > > Leaving this broken function exported and writing a new one has no user benefit.
-> >
-> > This function works fine. It is not broken.
-> >
-> > >
-> > > We could copy the old function to a new static function that we call as needed from the old function name.
-> >
-> > Yes, that's fine with me. Also, did you see my note about the
-> > bootflow_efi() test?
->
-> But since your test passed (I assume) and real platforms are failing and
-> requiring a fix, I'm not sure this is a strong argument? Or did you have
-> a patch in a later series that fixed the problem here as well?
+--eLBtVxMHpIJoVvNq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-My comments were to Heinrich, not this patch. This patch is fine.
+On Wed, Nov 13, 2024 at 03:47:16PM +0100, Caleb Connolly wrote:
+>=20
+>=20
+> On 13/11/2024 15:24, Tom Rini wrote:
+> > On Wed, Nov 13, 2024 at 06:30:08AM +0100, Caleb Connolly wrote:
+> >=20
+> >> It may be the case that MMC support is enabled even though the board
+> >> we're booting on doesn't have any MMC devices. Move the print over to
+> >> the print_mmc_devices() function where we can only print it if we
+> >> actually have MMC devices.
+> >>
+> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> >=20
+> > I'm not sure I like this. What we do / don't find on startup is part of
+> > the not-exactly-API. It's true that if we don't print an MMC line at
+> > all, and we should have MMC, the user (and any scripts that parse
+> > console output) but now we're also increasing the code size a little bit
+> > too. I can be convinced this is a good idea, but I'm not there yet.
+>=20
+> Hmm, fair enough. I'll offer some more context, maybe there's a smarter
+> approach here I'm not seeing.
+>=20
+> The main place this shows up is on Qualcomm boards. Since all Qualcomm
+> armv8 targets are supported with qcom_defconfig (just by adjusting which
+> DTB is used), we can't know at build time whether the board has MMC.
+>=20
+> I guess my thinking behind this patch comes from a bigger picture desire
+> to get UFS and MMC more aligned. The number of devices with UFS is
+> definitely going up, and I would argue that U-Boot's inconsistent
+> treatment of these two storage classes (obviously a result of their
+> relative age and support in the codebase) is really unintuitive and
+> weird for users (nevermind that the "scsi" command is used for UFS
+> devices, cute though it is).
+>=20
+> I'm really wary to open this whole can of worms, since I guess it would
+> require some larger efforts and collaboration to fix. But maybe this
+> patch (or one like it) would be better suited in the context of some
+> larger effort to unify storage backends?
 
-Heinrich, if you want to clean this up, please create a new function
-which does these two steps separately.
+I get it now, thanks. And yeah, this is part of our inconsistency in
+printing information. I'd rather leave things alone here (assuming the
+MMC: printout is reasonable in the case of no devices, similar to how
+the Net: printout is reasonable in that case) and wait for a longer term
+/ high level solution wherein for example as we go down the device tree
+we give some consistent level of information for everything (and more or
+less info depending on verbosity configured perhaps).
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+--=20
+Tom
 
-Regards,
-Simon
+--eLBtVxMHpIJoVvNq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2OzkACgkQFHw5/5Y0
+tyzB2AwAiSWdGQMtP0KDNFEwRHto7avYRSNaFy2PwBE4XSo6M0AGVtr3lYm0VfiV
+ZdSylIkx+4Gn6SvVXBUdAiehw/voVpb3JIN+8U6lp3XYmWQW7uNTYYNbNPYwyuKY
+KmtgRDqt0WI89yWEXUJuEDCyjQcn9H87lyMPfsAaCbSuM9UCYDDjJSy9M7yd7a9n
+jqGYtCVJiaZQg9eS1OAGOcBoEuiYto0i2hKwEtvz4+c/rzOaVpDskEPRbDCVvMin
+6L9TYRJOAMQAnShiIkRU8rXihh48BR5bA+z7lBb7z2nYucK/cnO2LZdFkpd1KTV6
+NVzypeAgbPsW3hLRtq5dehnymurddSsHxtRy6lFt0Dj+h/1JMJpRyBHuQ82pvJhB
+6f9Q4mxrKMs7x/5WcmNtd1TZVw+M2qu6SiEtUkayrn6zFUHjdP78xJhcL6ta+1S4
+UhaLoWjDkohqLR5xNaEbp9PhL1QYRw/YC/An8V5mJ5NBgAvDiEqr8AHLR1UXHpK8
+1c70eTiY
+=75uE
+-----END PGP SIGNATURE-----
+
+--eLBtVxMHpIJoVvNq--
