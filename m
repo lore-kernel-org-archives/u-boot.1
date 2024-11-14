@@ -4,60 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BB58D6A221
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 20:26:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE5D8D6A22C
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 20:34:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89E7E89293;
-	Thu, 14 Nov 2024 21:26:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 6AB0A88E81;
+	Thu, 14 Nov 2024 21:34:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hPAcI7a9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cMbhzpqZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13726892CD; Thu, 14 Nov 2024 21:26:12 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EC77F88DB2; Thu, 14 Nov 2024 21:33:58 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CBCD8926A
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 21:26:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D49C288FC5
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 21:33:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=23b5=SK=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1731615960;
- bh=MtQbXIkzVebpiSxMv6GKkuwNrYF9ctXMgOFGDvCUl0U=;
- b=hPAcI7a93ukMe0+H7Pk6FV3d8EP/AcqmnmZpCR5fX3IvoctHxBpaNWIyPjD9k8wUgO+Y7KNMQ
- 3MIw816TdJKv4Zr07MH7kbFTgY3eBKnzCef0rX36A9Xx7ZJA1fUoB4Y7T+CbPKQXvCPAw1cLxr8
- w+phmUjmZInYY/G5AVYWflXWIvxQQJ1AM033NjKe4MEqnIkPATr94XNjSWfoErPmptLKIwfLFev
- F8i5lobaHJnImFOX7Dghsh5pS17tlq4IxbotU94mjgnr84QXncaHPKLtWTweMVz0/vfebpY1376
- 9Siog248oSrAO+HgVGHjaBr3z05zMJ/wQwJXnNOr+Hog==
-Message-ID: <80ee6e68-cfb5-4144-aa99-88e52420cba9@kwiboo.se>
-Date: Thu, 14 Nov 2024 21:25:52 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7b155cca097so85360585a.1
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 12:33:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1731616434; x=1732221234; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=uvePSZkwyL0pJ9lAgqvvYjxrBhPhUWVMGSHaIvR9QHU=;
+ b=cMbhzpqZFdDYFwVJ/E2fVsXhGVx1WmBtibooADriZ7yrm8bQbrAqKyPWl3F0DzY0R6
+ sVO9xTaDtlU5PRprBDPFrZFVHmepuTr+f9H9QBaA1y7HuUvKldWugOjYQiSBdv/2Ydnc
+ dGv1HqxemlayXcZpg9Gj+rgNlG6ovuFQ6pwFM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731616434; x=1732221234;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uvePSZkwyL0pJ9lAgqvvYjxrBhPhUWVMGSHaIvR9QHU=;
+ b=Lcbf8LWiGHBvIiWtZgcYYjS/atZT/e8FQmRVqZzLvvTQnQJTfrMH7TLm11bi72Efxi
+ rt+j/xVfK7B20kY6MZOTvNAoCvYfvnIZcuSqsbokzUWQwOkikZ8bw8BNscM68EGlYUQ8
+ ECoiW4/pO64mX/ZAuTm9qJEa2XasB27WqvnaZcI46/To8DG4sK6oTIBMEeAefh2mN92Z
+ JqszdzIuVZu/zSM9Y2114QdjDqO9X8KOQQnZt13wKkdqLVHmsI24bMzm9Nmt857u7WH+
+ cJgjZRl1XLpx0Zgl6iET/ZsqIk9Z/JB7bxM9QHvGK3eUXC5Yqj54KoTm1cx5R5o825l0
+ eh4A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVtXhKH9lFy5Qyt82sNOLRhQkpp8BC2r3bC5xWcSX1SkYi1kMlrd8QAviAM5K1rygOPD/KAXno=@lists.denx.de
+X-Gm-Message-State: AOJu0YwGlFxf3ZBFwy4KImXnzRYDbo89T+yp2LxnsIwTBrsunyh19hDd
+ 793KD+Q/XQvm/tD1JuPAFxTR5IgNkHA7ptIlSKGwMkfxhfwJ8/1BowlsSDvTBr8=
+X-Google-Smtp-Source: AGHT+IGjxX9EdfBR9Jf3Z6s8wPV7AMpg8cq2U9Ey8158GAiXFsBo6ZPLI7EY2i3+zG7UlLrGQ+YTgw==
+X-Received: by 2002:a05:620a:4006:b0:7ac:9bdd:6e78 with SMTP id
+ af79cd13be357-7b361fcc567mr78428285a.14.1731616433608; 
+ Thu, 14 Nov 2024 12:33:53 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b35c9acad7sm87845185a.63.2024.11.14.12.33.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Nov 2024 12:33:52 -0800 (PST)
+Date: Thu, 14 Nov 2024 14:33:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Michal Simek <michal.simek@amd.com>,
+ Wolfgang Wegner <w.wegner@astro-kom.de>,
+ Thomas Weber <weber@corscience.de>,
+ Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>,
+ Phil Sutter <phil@nwl.cc>, Siddarth Gore <gores@marvell.com>,
+ Luka Perkov <luka@openwrt.org>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Heiko Schocher <hs@denx.de>,
+ Evgeni Dobrev <evgeni@studio-punkt.com>, Stefan Roese <sr@denx.de>,
+ Ilko Iliev <iliev@ronetix.at>, Dave Purdy <david.c.purdy@gmail.com>,
+ "zdi-disclosures@trendmicro.com" <zdi-disclosures@trendmicro.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: ZDI-CAN-24679: New Vulnerability Report
+Message-ID: <20241114203349.GM3600562@bill-the-cat>
+References: <DM5PR0102MB3477A6AC67623306D970177980AC2@DM5PR0102MB3477.prod.exchangelabs.com>
+ <BYAPR01MB38307E0A0D8A480B35F122F6805B2@BYAPR01MB3830.prod.exchangelabs.com>
+ <20241114145636.GF3600562@bill-the-cat>
+ <868d9f51-0d84-4c22-abdc-95cd60184465@amd.com>
+ <20241114163354.GH3600562@bill-the-cat>
+ <CAJaLiFyw5jba5g=8h6R_aB26wqJvdN9eLvu3T6FJBBpm4LkzhA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] efi_loader: run bootdev_hunt() to find ESP
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Masahisa Kojima <kojima.masahisa@socionext.com>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-References: <20241113195519.49150-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20241113195519.49150-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-ForwardEmail-ID: 67365cd499fd201ad0e4b448
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1Pidz8EjblhDmr4P"
+Content-Disposition: inline
+In-Reply-To: <CAJaLiFyw5jba5g=8h6R_aB26wqJvdN9eLvu3T6FJBBpm4LkzhA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,137 +107,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On 2024-11-13 20:55, Heinrich Schuchardt wrote:
-> Some hard devices need specific routines to scan for block devices,
-> e.g. NVMe (nvme scan), SCSI (scsi start).
-> 
-> Invoke bootdev_hunt() to find all block devices.
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_setup.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
-> 
-> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> index aa59bc7779d..8e0ff16f3eb 100644
-> --- a/lib/efi_loader/efi_setup.c
-> +++ b/lib/efi_loader/efi_setup.c
-> @@ -7,6 +7,7 @@
->  
->  #define LOG_CATEGORY LOGC_EFI
->  
-> +#include <bootdev.h>
->  #include <efi_loader.h>
->  #include <efi_variable.h>
->  #include <log.h>
-> @@ -228,6 +229,13 @@ efi_status_t efi_init_obj_list(void)
->  	 * Probe block devices to find the ESP.
->  	 * efi_disks_register() must be called before efi_init_variables().
->  	 */
-> +	if (CONFIG_IS_ENABLED(BOOTSTD)) {
-> +		int r;
-> +
-> +		r = bootdev_hunt(NULL, 0);
-> +		if (r)
-> +			log_debug("No boot device available\n");
-> +	}
->  	ret = efi_disks_register();
->  	if (ret != EFI_SUCCESS)
->  		goto out;
+--1Pidz8EjblhDmr4P
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This is causing significant slower boot when trying to boot using
-extlinux (or script) from mmc device on Rockchip, this will cause all
-slow devices to be initialized before a quick mmc boot, e.g. pci init,
-usb start and dhcp due to efi_mgr being the global bootmeth.
+On Thu, Nov 14, 2024 at 12:18:49PM -0800, Tony Dinh wrote:
+> Hi Tom,
+> Hi Stefan,
+>=20
+> On Thu, Nov 14, 2024 at 8:33=E2=80=AFAM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Thu, Nov 14, 2024 at 04:07:15PM +0100, Michal Simek wrote:
+> >
+> > > Hi,
+> > >
+> > > On 11/14/24 15:56, Tom Rini wrote:
+> > > > On Thu, Nov 14, 2024 at 04:02:29AM +0000, zdi-disclosures@trendmicr=
+o.com wrote:
+> > > >
+> > > > > Hi,
+> > > > > Do you have any updates to share regarding this vulnerability rep=
+ort?
+> > > >
+> > > > Michal, microblaze-generic is the most active platform that enables
+> > > > FS_JFFS2 by default and so vulnerable here. Can you find some resou=
+rces
+> > > > to look in to fixing this please? Thanks.
+> > >
+> > > We have actually discussed this recently and we have other issues wit=
+h jffs2
+> > > and not going to fix it or recommend to use it.
+> > > JFFS2 should be removed from our configs and it is also not under our=
+ regression.
+> >
+> > Ah OK, thanks. Adding a few more maintainers now then.
+>=20
+> Does this affect only boards that explicitly use CMD_JFFS2? how about
+> boards that have not been converted to bootstd and still use "nand
+> read" like this:
+>=20
+> include/configs/openrd.h
+>=20
+> #define CFG_EXTRA_ENV_SETTINGS  "x_bootargs=3Dconsole=3DttyS0,115200 " \
+>         CONFIG_MTDPARTS_DEFAULT " rw ubi.mtd=3D2,2048\0" \
+>         "x_bootcmd_kernel=3Dnand read 0x6400000 0x100000 0x300000\0"     =
+ \
 
-With this patch applied:
+It's a problem for boards which read from JFFS2 in U-Boot, yes. So in
+the case of the kernel / etc being read from a raw location (or ubi or
+what-have-you), if FS_JFFS2 (or CMD_JFFS2, same list of platforms) is
+disabled the problem goes away. And if we're down to just a few lightly
+used platforms, we can just drop JFFS2 support. Thanks!
 
-  U-Boot 2025.01-rc2 (Nov 14 2024 - 20:09:17 +0000)
-  
-  Model: Radxa ROCK 3B
-  SoC:   RK3568J
-  DRAM:  8 GiB (effective 7.7 GiB)
-  PMIC:  RK809 (on=0x40, off=0x00)
-  Core:  341 devices, 33 uclasses, devicetree: separate
-  MMC:   mmc@fe000000: 2, mmc@fe2b0000: 1, mmc@fe310000: 0
-  Loading Environment from nowhere... OK
-  In:    serial@fe660000
-  Out:   serial@fe660000
-  Err:   serial@fe660000
-  Net:   eth1: ethernet@fe010000, eth0: ethernet@fe2a0000
-  Hit any key to stop autoboot:  0
-  Scanning for bootflows in all bootdevs
-  Seq  Method       State   Uclass    Part  Name                      Filename
-  ---  -----------  ------  --------  ----  ------------------------  ----------------
-  Scanning global bootmeth 'efi_mgr':
-  pcie_dw_rockchip pcie@fe260000: PCIe-0 Link Fail
-  pcie_dw_rockchip pcie@fe280000: PCIe-1 Link Fail
-  ethernet@fe2a0000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
-  phy_startup() failed: -110
-  FAILED: -110
-  ethernet@fe010000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
-  phy_startup() failed: -110
-  FAILED: -110
-  BOOTP broadcast 1
-  BOOTP broadcast 2
-  BOOTP broadcast 3
-  BOOTP broadcast 4
-  BOOTP broadcast 5
-  BOOTP broadcast 6
-  BOOTP broadcast 7
-  BOOTP broadcast 8
-  BOOTP broadcast 9
-  BOOTP broadcast 10
-  BOOTP broadcast 11
-  BOOTP broadcast 12
-  BOOTP broadcast 13
-  BOOTP broadcast 14
-  BOOTP broadcast 15
-  BOOTP broadcast 16
-  BOOTP broadcast 17
-  
-  Retry time exceeded; starting again
-  pcie_dw_rockchip pcie@fe260000: PCIe-0 Link Fail
-  pcie_dw_rockchip pcie@fe280000: PCIe-1 Link Fail
-  pcie_dw_rockchip pcie@fe260000: PCIe-0 Link Fail
-  pcie_dw_rockchip pcie@fe280000: PCIe-1 Link Fail
-  scanning bus for devices...
-  Bus usb@fd000000: Register 2000140 NbrPorts 2
-  Starting the controller
-  USB XHCI 1.10
-  Bus usb@fd800000: USB EHCI 1.00
-  scanning bus usb@fd000000 for devices... 1 USB Device(s) found
-  scanning bus usb@fd800000 for devices... 2 USB Device(s) found
-  No boot device available
-  Card did not respond to voltage select! : -110
-  Cannot persist EFI variables without system partition
-    0  efi_mgr      ready   (none)       0  <NULL>
-  ** Booting bootflow '<NULL>' with efi_mgr
-  Loading Boot0000 'mmc 1' failed
-  Loading Boot0001 'mmc 0' failed
-  EFI boot manager: Cannot load any image
-  Boot failed (err=-14)
-  Scanning bootdev 'mmc@fe2b0000.bootdev':
-    1  extlinux     ready   mmc          1  mmc@fe2b0000.bootdev.part /extlinux/extlinux.conf
-  ** Booting bootflow 'mmc@fe2b0000.bootdev.part_1' with extlinux
-  1:      linux
-  Retrieving file: /Image.gz
-  Retrieving file: /initramfs.cpio.gz
-     Uncompressing Kernel Image to 0
-  ## Flattened Device Tree blob at eded3690
-     Booting using the fdt blob at 0xeded3690
-  Working FDT set to eded3690
-     Loading Ramdisk to ecb0d000, end ecea1d3c ... OK
-     Loading Device Tree to 00000000ecaf5000, end 00000000ecb0c6d7 ... OK
-  Working FDT set to ecaf5000
-  
-  Starting kernel ...
+--=20
+Tom
 
-I guess we can always disable efi_mgr on Rockchip, similar to sunxi, to
-restore pre stdboot behavior.
+--1Pidz8EjblhDmr4P
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Regards,
-Jonas
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2XqkACgkQFHw5/5Y0
+tyxIrwv9GLZGX6cWPq5uazVRtIpVUs1PlMYTOxG5xIB+i/uw9rergj1oAf/Kk29C
+lOmtAef8A/eiHDYfcUQjY1ZvX/Kxj8BsE4QanfchKhLSaHz2x2zIzMpEyKS4dWhf
+Nn3GBoV66d6eFcYL3SyZhSthGuBtcoV+J9NW+E7HUNI2ZkYQaixv+zsG78n6vWNH
+FR+nm+BI/67jbSUhyw6g+hiUl3ZScFPmD4pya2mLg/4vMSIiUii84edPC9T98mlg
+bpfv0ITjJpvWRT92DFLtVQVM7bjFPFRQuZU2v2uMcoGE0/grw7eE7wxqiRGpcGKa
+WkYiwoSH1cZK6gTQZIt22he37y3HoxBDMEZH4nXHLvCIeHpDfuX6KzqYUpEDl6r6
+ItnvIg0MSmzBHwBqq0qezuD1E1s96uv0uZF1qf3ueRP+JYhUwbax9tIcjSejdWZ1
+SjW/DITRQaPJuN2mAfvnY7q8PwDG97TiFaM82panuB7n71NMpHXjZDcvYxDzFGWJ
+R8eWx8DS
+=JUUS
+-----END PGP SIGNATURE-----
+
+--1Pidz8EjblhDmr4P--
