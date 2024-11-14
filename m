@@ -4,84 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43101D68B28
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 14:22:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED705D68B26
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 14:26:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF5F289282;
-	Thu, 14 Nov 2024 15:22:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 64B63895DA;
+	Thu, 14 Nov 2024 15:26:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o9omjWk4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Em1kAmPM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6C1289282; Thu, 14 Nov 2024 15:22:30 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id CC946895EE; Thu, 14 Nov 2024 15:26:07 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E6D788C66
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 15:22:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76D7C89584
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 15:26:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5ee9db85af0so421652eaf.0
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 06:22:27 -0800 (PST)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3e601b6a33aso404799b6e.0
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 06:26:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731594146; x=1732198946; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731594364; x=1732199164; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=atYg/GCAt0vVgFEmfNntwttiVp6ZmZL7RewYWsGzF48=;
- b=o9omjWk4GiHVyYFVemZo7xi23FE7jDQJ/p2JsjQ/wee4HKA0bSITJe1iG873Oo5CgA
- Myo+R26ThRz4T7WxE9BT7X2JYHWy4uIWHwYnA3tTKc69jtlivsmzz1XF3xEfMYBY2dbA
- nPYQawGZhZg+UyOxPy7vaihepxSXiKBqLrZiw=
+ bh=5aRHZP4n70vw54+0lCB/MaLlOruOBPWKczK/Ca+Qb4U=;
+ b=Em1kAmPMGnTmIZ9b8xF5h6yMGSHlAOyUnXj70AFfBJnFXSyeK9hckGtHiAyMJKj1nf
+ FUnDxvTN8+YmS5n+4OqVaIRxuVN5iV6mIGEKkLjHIOpw9qAz0eAQA1jWNvTXB8c+mFxE
+ 2kfAwqkikfs4KnruPXVEBbK7263Bn7Dpp1zJM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731594146; x=1732198946;
+ d=1e100.net; s=20230601; t=1731594364; x=1732199164;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=atYg/GCAt0vVgFEmfNntwttiVp6ZmZL7RewYWsGzF48=;
- b=QZ29xEq11PFtQEQrSSRL/iXHHfnDLg5oggGu7r8OdRwE7algE+DttHQidwBm0gEiPl
- XygfKdeg62Y2IspeH4e8YwOW4wKsHq7igpC9uTgcbIEqer8AuxeKcJ1hV8uNTql+ppVl
- nfpBNgUuJAMrF6u2Q+Ahy7MrQvjEdNpn1/GtMwoy3MVB0XNT2yNs8O54u8cwXr08jNOQ
- if3Tl4LzLLi99wYNl2OAy75cVJZ6YP0H2gCJBKgzD0HY8HiIYxDvMfy8964vJDtzXvqU
- mAhYbbGxucHs/IvxHKRuI84U3hvtQ4tSiHhTpda+oGrHIa5wlYfuWoahMjpMJTPL2/A1
- g3nQ==
-X-Gm-Message-State: AOJu0Yw0w8PntcnwVbJIYIQFoPoVm0Tg40K8OjhVulOWGJy1CrxNFp40
- ijQsnmW0UKHWA7bxJvZpjmt4yvJH+dVyLRld24NP/XqCotPcKWf95xtQ6MNvv7M=
-X-Google-Smtp-Source: AGHT+IG1BO1bEmppw7s5YJ9mXVcXQLOoHLuDeAIU5cN/W1nT91rN5e4uycyCCZq6ig/IAOUUHfAUQA==
-X-Received: by 2002:a05:6870:2e0a:b0:296:116a:4274 with SMTP id
- 586e51a60fabf-296116a87d9mr1141202fac.5.1731594145970; 
- Thu, 14 Nov 2024 06:22:25 -0800 (PST)
+ bh=5aRHZP4n70vw54+0lCB/MaLlOruOBPWKczK/Ca+Qb4U=;
+ b=XBVDbs8N3xlLqxVOpK/lNwvnxT4yrDaY6w6BZpKlfj/QnDVlJwC6WZ9VcQb9+dZ3OF
+ Bk+WG/eccl0Ruks/T8VfFca/TXwCQIR4NT1iehK34AUqTnBnVbnklIFDD/Aoe5faE6Fu
+ d2KH94wVUQnrT6txd0e2WBlwoGGpaomOSFd8EACh/NiD82yLF6MArzI9EWLnpFx4rbO1
+ WSLEBX9t1Di7O1LpKAm6j7iueXHR+9HXZ2GAvv+s7PZU5x9SK1i5D1jH9DpdLAOergxM
+ A9JtP/lbqbMZ82U/o7InmTKqlqC7TziGV1StKk74t5sQSeShvFmtGgKS1NcMK+OqkWKS
+ WNuw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVPk5GjN6U0iUhv3N7IUstVxsUgmjVpQMwq49gR/rZzACi40cyFaiSzke7olH+PbKuFlT0KXjc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyv+Sykl8xQovgFaCbELo4y/XzPco1eLdeNZtFsGZspFh7ffrux
+ q1XUFt/uooFQ0Ki9MmcZ8uDfJTBMClg4lsKbg+XFafvONmqGkaDVNv+rpwGBZS8gMqoCcjO7LaC
+ 7vgg=
+X-Google-Smtp-Source: AGHT+IHligFpqn+mZZ0bswYQ3lCirU6A+sEneZO56Spjr4t7CdEto7b3e/4JOdeQn9abuT7m79lD0A==
+X-Received: by 2002:a05:6871:401:b0:277:f9d5:e85 with SMTP id
+ 586e51a60fabf-295e8dcc8f1mr7078285fac.22.1731594364065; 
+ Thu, 14 Nov 2024 06:26:04 -0800 (PST)
 Received: from bill-the-cat ([145.14.135.248])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-71a6eb451c7sm382661a34.46.2024.11.14.06.22.23
+ 006d021491bc7-5eea0288140sm326813eaf.41.2024.11.14.06.26.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2024 06:22:24 -0800 (PST)
-Date: Thu, 14 Nov 2024 08:22:21 -0600
+ Thu, 14 Nov 2024 06:26:03 -0800 (PST)
+Date: Thu, 14 Nov 2024 08:26:00 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Janne Grunau <j@jannau.net>,
+ Mark Kettenis <kettenis@openbsd.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH v5 1/8] bootstd: Avoid depending on BLK
-Message-ID: <20241114142221.GD3600562@bill-the-cat>
-References: <20241113150938.1534931-1-sjg@chromium.org>
- <20241113150938.1534931-2-sjg@chromium.org>
- <20241113174707.GR3600562@bill-the-cat>
- <CAFLszTjW2bGPRvUQC9pxvhKixpov8u2GxzzeUYeKo1FNFyuHug@mail.gmail.com>
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>
+Subject: Re: [PATCH 2/2] efi_loader: remove non vital devices first
+Message-ID: <20241114142600.GE3600562@bill-the-cat>
+References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
+ <20241031-iommu_apple_dart_ordering-v1-2-8a6877946d6b@jannau.net>
+ <87zfmi4rzy.fsf@bloch.sibelius.xs4all.nl>
+ <4ff61e8e-03c7-42d2-b2fe-8dba1697641f@gmx.de>
+ <CAFLszTjDaQGaaL9qM_s+oxNrAkGhunGkbAjyR1giEDgnShUfzw@mail.gmail.com>
+ <5FA71CBD-F9AF-442A-8564-4F663F44BF42@gmx.de>
+ <CAFLszTi9As9YFFoWuD9GW6gHpriZSNVCFmq5fKkdCi9jeRuqjQ@mail.gmail.com>
+ <C4EB5D10-D037-49BE-BE0A-00BD3D1514FC@gmx.de>
+ <CAFLszTiaDi7Sbrjsjt42UObz1Nb8SqM8CFBdcTOAXih3pJV3PQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9idUsM7CY2NzUZ/T"
+ protocol="application/pgp-signature"; boundary="ntsaXWzuzHa4Zo1/"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjW2bGPRvUQC9pxvhKixpov8u2GxzzeUYeKo1FNFyuHug@mail.gmail.com>
+In-Reply-To: <CAFLszTiaDi7Sbrjsjt42UObz1Nb8SqM8CFBdcTOAXih3pJV3PQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,144 +105,162 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9idUsM7CY2NzUZ/T
+--ntsaXWzuzHa4Zo1/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 13, 2024 at 08:53:31PM -0700, Simon Glass wrote:
-> Hi Tom,
+On Wed, Nov 13, 2024 at 08:53:17PM -0700, Simon Glass wrote:
+> Hi Heinrich,
 >=20
-> On Wed, 13 Nov 2024 at 10:47, Tom Rini <trini@konsulko.com> wrote:
+> On Wed, 13 Nov 2024 at 11:45, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
 > >
-> > On Wed, Nov 13, 2024 at 08:09:31AM -0700, Simon Glass wrote:
+> > Am 13. November 2024 17:03:03 MEZ schrieb Simon Glass <sjg@chromium.org=
+>:
+> > >Hi Heinrich,
+> > >
+> > >On Wed, 13 Nov 2024 at 08:17, Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > >wrote:
+> > >>
+> > >> Am 13. November 2024 15:39:22 MEZ schrieb Simon Glass <sjg@chromium.=
+org>:
+> > >> >Hi,
+> > >> >
+> > >> >On Wed, 13 Nov 2024 at 05:52, Heinrich Schuchardt <xypron.glpk@gmx.=
+de>
+> > >wrote:
+> > >> >>
+> > >> >> On 11/1/24 21:29, Mark Kettenis wrote:
+> > >> >> >> From: Janne Grunau <j@jannau.net>
+> > >> >> >> Date: Thu, 31 Oct 2024 23:48:02 +0100
+> > >> >> >>
+> > >> >> >> DM_FLAG_VITAL marks devices which are essential for the operat=
+ion of
+> > >> >> >> other devices. Removing these devices before their users can r=
+esult
+> > >in
+> > >> >> >> hangs or crashes.
+> > >> >> >> This potentially fixes EFI boot of Renesas rcar3 devices. Their
+> > >clock
+> > >> >> >> devices (and with this series the dart iommu) are the only dev=
+ices
+> > >> >> >> markes as vital.
+> > >> >> >> The arm boot code already handles devioce removal in this way.
+> > >> >> >
+> > >> >> > There is a typo in that last sentence of the commit message
+> > >(devioce).
+> > >> >> > Otherwise:
+> > >> >> >
+> > >> >> >> Signed-off-by: Janne Grunau <j@jannau.net>
+> > >> >> >
+> > >> >> > Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
+> > >> >> >
+> > >> >> >> ---
+> > >> >> >>   lib/efi_loader/efi_boottime.c | 1 +
+> > >> >> >>   1 file changed, 1 insertion(+)
+> > >> >> >>
+> > >> >> >> diff --git a/lib/efi_loader/efi_boottime.c
+> > >b/lib/efi_loader/efi_boottime.c
+> > >> >> >> index
+> > >4f52284b4c653c252b0ed6c0c87da8901448d4b4..7db3c95782970f8c06a970a8ee86=
+b1804cd848b6
+> > >100644
+> > >> >> >> --- a/lib/efi_loader/efi_boottime.c
+> > >> >> >> +++ b/lib/efi_loader/efi_boottime.c
+> > >> >> >> @@ -2234,6 +2234,7 @@ static efi_status_t EFIAPI
+> > >efi_exit_boot_services(efi_handle_t image_handle,
+> > >> >> >>              if (IS_ENABLED(CONFIG_USB_DEVICE))
+> > >> >> >>                      udc_disconnect();
+> > >> >> >>              board_quiesce_devices();
+> > >> >> >> +            dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL |
+> > >DM_REMOVE_NON_VITAL);
+> > >> >> >>              dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
+> > >> >>
+> > >> >> Simon's patch 6224dc9ba428 ("arm: Remove vital devices last") add=
+ressed
+> > >> >> the same issue for bootm on arm. But what about about other
+> > >architectures?
+> > >> >>
+> > >> >> This logic should be moved to drivers/core/root.c instead of
+> > >replicating
+> > >> >> code.
+> > >> >
+> > >> >We could have a common helper, but it should not be in driver/core =
+as
+> > >> >this ordering is more of a policy decision. Unless we can add a
+> > >> >parameter telling dm exactly what to do...
+> > >> >
+> > >> >BTW, Heinrich, this behaviour is exactly what my bootflow_efi() test
+> > >> >was supposed to check. But since it doesn't have the
+> > >> >exit-boot-services piece at your request...
+> > >> >
+> > >> >Regards,
+> > >> >Simon
+> > >>
+> > >>
+> > >> Why can't we generally remove non-vital devices first if all are to =
+be
+> > >removed?
+> > >>
+> > >> I cannot see anything device specific here.
+> > >
+> > >No objection to that...but it needs to be in a new function, not becom=
+e the
+> > >default behaviour of dm_remove_devices_flags(), which is supposed to do
+> > >what it is told and in one pass.
 > >
-> > > In principle bootstd can work without block devices, even if it does
-> > > require driver model to be enabled in that case.
-> > >
-> > > The use of a 'depends on BLK' for BOOTSTD conflicts with the way 'BLK'
-> > > is now defined, producing recursive errors through multiple different
-> > > paths, one of which is this (with Linksprite_pcDuino3 and
-> > > BOOTSTD_DEFAULTS enabled):
-> > >
-> > >   arch/arm/Kconfig:7:error: recursive dependency detected!
-> > >   arch/arm/Kconfig:7: symbol ARM64 is selected by ARCH_UNIPHIER_V8_MU=
-LTI
-> > >   arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
-> > >      part of choice <choice>
-> > >   arch/arm/mach-uniphier/Kconfig:6: choice <choice> contains symbol
-> > >      ARCH_UNIPHIER_V8_MULTI
-> > >   arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
-> > >      part of choice SPL
-> > >   arch/arm/mach-stm32mp/Kconfig:3: symbol SPL depends on SUPPORT_SPL
-> > >   common/spl/Kconfig:1: symbol SUPPORT_SPL is selected by ASPEED_AST2=
-600
-> > >   arch/arm/mach-aspeed/Kconfig:26: symbol ASPEED_AST2600 is part of
-> > >      choice <choice>
-> > >   arch/arm/mach-aspeed/Kconfig:12: choice <choice> contains symbol
-> > >      ASPEED_AST2500
-> > >   arch/arm/mach-aspeed/Kconfig:17: symbol ASPEED_AST2500 is part of
-> > >      choice DM_RESET
-> > >   arch/arm/mach-renesas/Kconfig.rcar3:197: symbol DM_RESET is selected
-> > >      by CLK_RCAR_GEN3
-> > >   drivers/clk/renesas/Kconfig:53: symbol CLK_RCAR_GEN3 depends on
-> > >      CLK_RENESAS
-> > >   drivers/clk/renesas/Kconfig:1: symbol CLK_RENESAS depends on CLK
-> > >   drivers/clk/Kconfig:3: symbol CLK is selected by IMX8M_POWER_DOMAIN
-> > >   drivers/power/domain/Kconfig:35: symbol IMX8M_POWER_DOMAIN depends =
-on
-> > >      POWER_DOMAIN
-> > >   drivers/power/domain/Kconfig:3: symbol POWER_DOMAIN is selected by
-> > >      BCM6318_USBH_PHY
-> > >   drivers/phy/Kconfig:83: symbol BCM6318_USBH_PHY depends on PHY
-> > >   drivers/phy/Kconfig:4: symbol PHY is selected by USB_EHCI_MX7
-> > >   drivers/usb/host/Kconfig:211: symbol USB_EHCI_MX7 depends on USB
-> > >   drivers/usb/Kconfig:1: symbol USB is selected by BOOTSTD_DEFAULTS
-> > >   boot/Kconfig:455: symbol BOOTSTD_DEFAULTS depends on BOOTSTD
-> > >   boot/Kconfig:398: symbol BOOTSTD depends on BLK
-> > >   drivers/block/Kconfig:1: symbol BLK is selected by PVBLOCK
-> > >   drivers/xen/Kconfig:1: symbol PVBLOCK depends on XEN
-> > >   Kconfig:176: symbol XEN depends on ARM64
-> > >
-> > > We don't want to revert the change to BLK, which has been in place for
-> > > a year now. We don't want to select BLK in BOOTSTD since it should
-> > > support booting without block devices. The only realistic option is to
-> > > remove BOOTSTD's dependency on BLK.
-> > >
-> > > Disable standard boot on the one board which fails.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > (no changes since v3)
-> > >
-> > > Changes in v3:
-> > > - Drop wip (work-in-progress) comment in commit
-> > >
-> > > Changes in v2:
-> > > - Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
-> > >
-> > >  boot/Kconfig                                   | 2 +-
-> > >  configs/gardena-smart-gateway-mt7688_defconfig | 1 +
-> > >  2 files changed, 2 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/boot/Kconfig b/boot/Kconfig
-> > > index 7dd30a030e3..b5433e88f10 100644
-> > > --- a/boot/Kconfig
-> > > +++ b/boot/Kconfig
-> > > @@ -393,7 +393,7 @@ config BOOT_DEFAULTS
-> > >  menuconfig BOOTSTD
-> > >       bool "Standard boot"
-> > >       default y
-> > > -     depends on DM && OF_CONTROL && BLK
-> > > +     depends on DM && OF_CONTROL
-> > >       help
-> > >         U-Boot supports a standard way of locating something to boot,
-> > >         typically an Operating System such as Linux, provided by a di=
-stro such
-> >
-> > This ends up being a massive size bloat on all of the boards which did
-> > not use BOOTSTD before, and still can't (because there's no appropriate
-> > methods). You need to not just disable it on the one board that fails
-> > but on everything not currently enabling it, which now does enable it.
+> > dm_remove_device_flags() makes no specific promises concerning the dele=
+tion sequence and its internal working.
 >=20
-> Looking through the list it is hard to know which boards can't use
-> bootstd, nor what the missing methods are. See [1]. I could perhaps
-> disable bootstd for all of the boards?
+> Do you mean in the function comment in the header file? We can
+> certainly update that.
 
-Well, since you cannot have a block device without BLK at this point,
-none of them can use bootstd since there's no methods for whatever flash
-they use?
+That seems like "fixing" the problem by documenting that things should
+work in the seemingly broken way.
 
-> > Or you need to better explain what's going on here, exactly and why
-> > depending on BLK here is wrong, for what you're doing.
+> > But obviously it will fail if non-vital redources are not deleted first.
 >=20
-> I tried that already. We had quite a long thread about it.
+> Either I don't understand that, or I don't agree. Can you give a
+> specific example?
 
-Yes, can you remind me please? I still don't see why this is required
-for sunxi support. And I think this is another good example of where
-your commit message explains your solution, but not the underlying
-problem you're solving. None of the platforms in [1] are ARCH_SUNXI.
+The Apple IOMMU? That's what got this thread started.
+
+> > Leaving this broken function exported and writing a new one has no user=
+ benefit.
+>=20
+> This function works fine. It is not broken.
+>=20
+> >
+> > We could copy the old function to a new static function that we call as=
+ needed from the old function name.
+>=20
+> Yes, that's fine with me. Also, did you see my note about the
+> bootflow_efi() test?
+
+But since your test passed (I assume) and real platforms are failing and
+requiring a fix, I'm not sure this is a strong argument? Or did you have
+a patch in a later series that fixed the problem here as well?
 
 --=20
 Tom
 
---9idUsM7CY2NzUZ/T
+--ntsaXWzuzHa4Zo1/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2B5MACgkQFHw5/5Y0
-tyyb7Qv/aKWY6xMviJhbvzIFdW+5B+KC3RQGBuy5tUet8NW6YRw49N8cL/vzwCWC
-gbwGQCoylXvakUcm19FJAWPn6IiXlfxNb9pBlhwQnuT+bzGTDq9mFn7Jj62c1P0j
-M0n1xkcqGtI5l55MJWG4AHn3NFRF/ojzs5ePH11l1/6bIs1966n4KChnRymmZ/wV
-zdMIMmDZwTnmN49MTaCPvsYEkt5egihBguuQ8W5b/qBaPypty7dXGrVMTwgL/Lk/
-wiRVSOlIH4X6ztyHvCtHsGbVi/umGNMPEZsBBeChtYEl7lFrPkri4qyZmKbq3e1V
-sTkb9z+LDvQwnA8Qpjsi3g47mCJCB7AFyex/ydkOo2wrLlMFziNLJBgejCqcunAy
-FJyqiqGo2VSewA87RQKeRIqklPtyTg0XjAMuz9TkMnP48jSNPHhZp9zP42GENynD
-zsIbBkO1lVGPymKvDkNprdf2g6ERsjYy+t+yJpNbYcWhgitaDhWwLV9FCYHYDp1D
-Cuww4uF3
-=LiLu
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2CHgACgkQFHw5/5Y0
+tyxPEQv6A44fiIHd56bagTvaisgx5FtozDwQGOApVfSnbVvTe4t2qONL2EyuEI47
+J5JVRtB+AZ4GwypBTgHo+Ew59POh2BoJeNT9NqOqNeG5PBiPAmzrVqtCAkX27mv9
+gJOjnoY+EBFsiotwvR+8WJlMGTiU5f2nNXQia7+isCjJcXLEXjYU1y64/VcVeSrk
+qwIuSlim1tB/gNuBmO7i2hAlPJtMHN797PavleVvf4HF3HXI/QJMOcXqg9oNurHC
+Y/E7ADxh/CwJpwion4OBcwjWqCWvmEEDHavbtY6+u48el82KDOHtGMB6N6BtKyZ9
+zKoVgaNRkIhx03nIhbdTrdzPuC7m6yeIJeZ8RK9zKzGrMu6VdMphkFA//SqkTizj
+f7OIBiv2NIq7Drm99UqGRN7eiKQuHynATmnyI8UDO8gStESh2Pl6M7ryaOvfVvvI
+gyxdkU1kaLwsDX6zvYMQQOYZfMPPqCmS166mZyrJKOTLyyKckWN7hc54lEIP4hHv
+FOKs0mIU
+=CZWH
 -----END PGP SIGNATURE-----
 
---9idUsM7CY2NzUZ/T--
+--ntsaXWzuzHa4Zo1/--
