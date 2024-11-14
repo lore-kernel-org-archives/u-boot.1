@@ -4,90 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F824D68B36
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 16:34:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4162D68B37
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 16:34:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 500AE8963B;
-	Thu, 14 Nov 2024 17:34:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AAADD89082;
+	Thu, 14 Nov 2024 17:34:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OpDY2KaF";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VIIZEui3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A136E8963B; Thu, 14 Nov 2024 17:34:02 +0100 (CET)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 231CD89072; Thu, 14 Nov 2024 17:34:05 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EAFB89072
+ by phobos.denx.de (Postfix) with ESMTPS id B60D289639
  for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 17:34:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-5ebc0dbc566so360518eaf.3
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 08:34:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731602039; x=1732206839; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=X+YvYXe7P8W3Q/b0vk8WQGVx8C3b1Xo7Czbi5uPXiCs=;
- b=OpDY2KaFT919rn3W8TkB8+SlEoAfDjhaZHPIES9MkdS988zFewUxkGeCmDHwmr6I6i
- 4ejKfBKu2YD1bOKHXGXjgLckGWhmnGZp6EgET3SpeX3MGh5ihZ/J5iyPcGYVhoivVy1L
- v38G36DrNITOn0Cw0AVbGNDGMDcnCAJFa4uv0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731602039; x=1732206839;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=X+YvYXe7P8W3Q/b0vk8WQGVx8C3b1Xo7Czbi5uPXiCs=;
- b=OZeEmJLqBGBYPO7k/pZ4t5qPC+Mfo6lzzovCZt1rY/T+Dwwtonaa1QTH/JlZ/KBVo9
- ONJ7j1gs1L/CSzzhZ9aYkToNnL4lBSXArsLVELS8o6l0JMy7CyPKnzQrhxYiviqKWyum
- nQFJGY0opFieGjvQrXQQ5Td7klyGRlGCr3myXbBYZJvBxLTSivzR2NZAqFp05vb80nJp
- 6KVD03Q7vXjNsy8Jfgjgf8Ngw0W4a8GmtZVO3YuummfN6NUvHXAIiKJD67gJWuHFz+mP
- GkaPDgCXjNvrAHANYNnlXcR59x52Su3scmd749oI7myKj7wyf8/dxlP5KxRqvusDrz4F
- x5Pw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWuHbeNy+w/LS4U69Dfl+2w7oi+y2U61hyDqFXahT8aal1J7mYv8pooHnT4jTe9NNbkadhE0O4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzlPI/SnOenG80/Fd6wsXRi7TGAtihm4j2ib+GFJG8qGPkn7tub
- Ji7CZnbYNba66LL8m63P4XSv9djnwz36rwprlpMRNsfIb3ek83Pgwy504cIiBJQ=
-X-Google-Smtp-Source: AGHT+IHxSCeSvVRmVh2oxACyN0NUT81cMTYeBCzxK9v0IXWMpV4qzgMocdaqoUGt4VoTTRdbzclY0A==
-X-Received: by 2002:a4a:e914:0:b0:5e5:b5d1:ee19 with SMTP id
- 006d021491bc7-5ee57c71da3mr17700023eaf.8.1731602039128; 
- Thu, 14 Nov 2024 08:33:59 -0800 (PST)
-Received: from bill-the-cat ([145.14.135.248])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5eea00d6539sm423521eaf.5.2024.11.14.08.33.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2024 08:33:58 -0800 (PST)
-Date: Thu, 14 Nov 2024 10:33:54 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>,
- Wolfgang Wegner <w.wegner@astro-kom.de>,
- Thomas Weber <weber@corscience.de>,
- Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>,
- Tony Dinh <mibodhi@gmail.com>, Phil Sutter <phil@nwl.cc>,
- Siddarth Gore <gores@marvell.com>, Luka Perkov <luka@openwrt.org>,
- Holger Brunck <holger.brunck@hitachienergy.com>,
- Heiko Schocher <hs@denx.de>,
- Evgeni Dobrev <evgeni@studio-punkt.com>, Stefan Roese <sr@denx.de>,
- Ilko Iliev <iliev@ronetix.at>, Dave Purdy <david.c.purdy@gmail.com>
-Cc: "zdi-disclosures@trendmicro.com" <zdi-disclosures@trendmicro.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: ZDI-CAN-24679: New Vulnerability Report
-Message-ID: <20241114163354.GH3600562@bill-the-cat>
-References: <DM5PR0102MB3477A6AC67623306D970177980AC2@DM5PR0102MB3477.prod.exchangelabs.com>
- <BYAPR01MB38307E0A0D8A480B35F122F6805B2@BYAPR01MB3830.prod.exchangelabs.com>
- <20241114145636.GF3600562@bill-the-cat>
- <868d9f51-0d84-4c22-abdc-95cd60184465@amd.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1731602036; x=1732206836; i=xypron.glpk@gmx.de;
+ bh=LzucFwjA8LEOdrzIBZrpZlcpqtAmScIz5O6xArWAAgI=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=VIIZEui3m0BjA1+aBT6qGw9BeZDW3hBIUl/fFQlk5Y7n/RvrGrheFtk4jz+xPl+J
+ JcNpFgSidg8I2yjO0BBWAgnYHV9pXPbbQhK5oj0I+H0yzOlqAvNBuAIdEKRj7hHhW
+ Ru8G30fuWTcn4IOX3FEfhiMWJCvvLYL+DigSS5PegQnNNHgoGscYEnmmzjOfuttyC
+ WffY2uUM/vWuhR4i5Hugz2HRT+qntgYXINPJ9rf35NE+WOk2vUtHr7+4DXp3s02jP
+ mjYI8tY2eFVP+QczQ6DJfRP0yo3LFs2orBmEbE7ygNF+aGEM6Cd0qwginwF1e+Kjj
+ wDU9U3yblpkHRMhqqw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N1Obb-1tvj5c4AzT-010OPD; Thu, 14
+ Nov 2024 17:33:56 +0100
+Message-ID: <8bf6fedd-3219-4bb7-9589-fa7647122a82@gmx.de>
+Date: Thu, 14 Nov 2024 17:33:50 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Op4gffea2gHXsU1z"
-Content-Disposition: inline
-In-Reply-To: <868d9f51-0d84-4c22-abdc-95cd60184465@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 00/15] efi_loader: efi http and ipconfig drivers
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jerome.forissier@linaro.org, =?UTF-8?Q?Adriano_C=C3=B3rdova?=
+ <adrianox@gmail.com>
+References: <20241111210959.560738-1-adrianox@gmail.com>
+ <CAC_iWjJ4LjTopsPuVk2za+eetVUZ-2Mofe-PGOgKv49XkJ71Kg@mail.gmail.com>
+ <CAMGU2hVpw=AX7fvbtwztuiZ8TqXvb21JpKZ4m6QCNzMnHdss_w@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAMGU2hVpw=AX7fvbtwztuiZ8TqXvb21JpKZ4m6QCNzMnHdss_w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:JueKJsnWclHcJYlipHvqrmFZFKwx9/B28lEXN5teq3TkXgTTi/W
+ NqEp/DMM2FCWmY7Wj1CHMx09S0Z4s/J3oq0cP8AX3p1xICIr/h2as9jW/XAW6r64E/dFkl7
+ CUlBcITybCe+YftD4dv4Ti3A24O9HOpzO36GIUj3FG519P98hgRgZU8tViCQ+L3R2T7r5WR
+ TsbKnQroME1KonqKX/wTA==
+UI-OutboundReport: notjunk:1;M01:P0:KGoD4GfV/KU=;yabjsihgjdcrGYRfGnKx3Opa1H9
+ XKmfzGLzLssoKo1eSAB3CLEsl+BCdpX+qKEccMPD7SDZr8IL8EjB/P8at23MfEoC86x70MNBT
+ R1xKHv/8Vq/VeP5oOEevXeHvHIPyuUxOhLbv+qQH1II2hWqDh99xSeaq45I1YVRMYVliD++uH
+ NVK3DdvKKC0hjAlo3SIawB+0J3WkmPUSKGOBn6j2slafV2Qndo635ETTsalMulsqK9rhbGney
+ CdbDP5Sxd7My9b4RC22obiMKYsakQFRg5xZFQBTN0M9Ra3zQ4w6crFetPRvHSUq3FfNdG8PW1
+ DDM/yOVABCLReAfTOXutzkFIJ8mlmmfr4BIrrMA0bp1xOwc+6xNh8xvCpAI8D27US2ilc76lB
+ VS7paA+zR8FbTGxU4y0VTMjflT8j/bgsiLuE4E2cFofLrCMBTeARXnYDXvR/E66Oda838/4r3
+ tne6IwmBsDCs0eVxi1A4VTt5THiJVIrVw5wgLnNkKC4gYR+LYIyVscH4w/YGs1wRGmgrfxmRt
+ 2YEaWsJ02WhICSh8zOTfjFRteANYQ1z8QWKbJzuychGFLqTbagX14/jjxqeIREqUuTM4XVwoZ
+ ew0wTMGsl62oDMr1D7Su481wLfx0lD4GEabPa2ZXkWuFKZCGIIALYcmqIkyB3efKA8NbfOS9E
+ jFMKd1fyFsbn2KWyRZeQIW6Dh1IbOt79PvNanCSXj9ceG1gFx37XqSHcw324zPZE1ihs/B23K
+ MuMlTm7Ky7094jOpp3R1GpzY93zrn45buGbBuFrP2y9lbJiH44C7LPi3kLXbfJrybF4rF+bgF
+ kQdH+BsvTxat+tIsq9XLMWyXwOFUaetLF1RNiSXypT9Lu54RJcIZtktCpBHX7NlYfujHoFaRl
+ b9ji0EmX+kLdmdovDdqKgylwFOmyGViX6iOhzzC2fxgA2CV5tBJ2mFBVQ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,54 +94,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/14/24 17:16, Adriano C=C3=B3rdova wrote:
+> Hi Ilias,
+> I have been testing with grub, and with the efi selftest. Here are the
+> steps to test with a riscv grub:
+>
+> 1. Get grubriscv64.efi from e.g. the following .deb package
+> wget http://launchpadlibrarian.net/754414418/grub-efi-riscv64-
+> unsigned_2.12-5ubuntu5.1_riscv64.deb <http://
+> launchpadlibrarian.net/754414418/grub-efi-riscv64-
+> unsigned_2.12-5ubuntu5.1_riscv64.deb>
 
---Op4gffea2gHXsU1z
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+If you are on Debian or Ubuntu you can use
 
-On Thu, Nov 14, 2024 at 04:07:15PM +0100, Michal Simek wrote:
+dpkg -x grub-efi-riscv64-unsigned_2.12-5ubuntu5.1_riscv64.deb target_dir
 
-> Hi,
->=20
-> On 11/14/24 15:56, Tom Rini wrote:
-> > On Thu, Nov 14, 2024 at 04:02:29AM +0000, zdi-disclosures@trendmicro.co=
-m wrote:
-> >=20
-> > > Hi,
-> > > Do you have any updates to share regarding this vulnerability report?
-> >=20
-> > Michal, microblaze-generic is the most active platform that enables
-> > FS_JFFS2 by default and so vulnerable here. Can you find some resources
-> > to look in to fixing this please? Thanks.
->=20
-> We have actually discussed this recently and we have other issues with jf=
-fs2
-> and not going to fix it or recommend to use it.
-> JFFS2 should be removed from our configs and it is also not under our reg=
-ression.
+for extraction.
 
-Ah OK, thanks. Adding a few more maintainers now then.
+On other distros
 
---=20
-Tom
+ar -x grub-efi-riscv64-unsigned_2.12-5ubuntu5.1_riscv64.deb
+mkdir -p target_dir
+tar --zstd -xf data.tar.zst -C target_dir
 
---Op4gffea2gHXsU1z
-Content-Type: application/pgp-signature; name="signature.asc"
+target_dir/usr/lib/grub/riscv64-efi/monolithic/grubnetriscv64.efi
+is the file I am using. That one has all the network modules included.
 
------BEGIN PGP SIGNATURE-----
+Best regards
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2Jm8ACgkQFHw5/5Y0
-tyxSjwv/W3dt/T6KavlTQBIGBTUobVsQB6zfFtTAlbLO+ubySMTuWwNJ242lV+US
-FC0iMaFCU9j7MEiGmVJZTsnJ2RS+DXLKHb07oR7NZHleWZI/VXBgyF3y0yWU0kHV
-bznWOwr9OUYff9NHAhvQEvJgWB8zUDlAasdQuZcowaMcidTfg5VT9khoyeu9pOK+
-+oA9tuYd2MqwSGHSSQCPZXDKIV5BqBxp2qCj8V9bpmo1bTU0KQJI4N3NOmTBU3+V
-11BbW3czIEQIEnUr5M56h7QmWbKTF4xDHecfftzQQpfnEfr1ZGWWKIZ5sIqhtq/c
-n1aBpd7zbs6Cg+9IVuf7uLmrU/Rp9ZI9UkCgHHLol/vRVBk5TjCWTjoyiGS/SqDW
-ksMIsm1OYSjgJk584ZNnIqT90ifHd7yBCAlelAG8VgQ6iRhttEUzMOzxRcKQZF28
-7olX8MAZTyrJDZI3BoC9bZ7UY2OBAAJ0qmjAU5y6rfCKsUoRJdCRRMDkdh7AK8vD
-dTi7C87k
-=lFh2
------END PGP SIGNATURE-----
+Heinrich
 
---Op4gffea2gHXsU1z--
+>
+> 2. Compile U-boot with qemu-riscv64_smode_defconfig. Enable CMD_WGET.
+>
+> 3. Create a tap interface:
+> $ sudo ip tuntap add dev tap0 mode tap
+> $ sudo ip addr add 10.0.0.0/24 <http://10.0.0.0/24>=C2=A0dev tap0
+> $ sudo ip link set dev tap0 up
+>
+> 4. Start an http server in a directory containing grubriscv64.efi and a
+> test file (e.g. a riscv kernel)
+> $=C2=A0=C2=A0sudo python3 -m http.server 80 --bind 10.0.0.0
+>
+> 5. Launch U-boot:
+> $ qemu-system-riscv64 \
+>  =C2=A0 =C2=A0 -machine virt \
+>  =C2=A0 =C2=A0 -nographic \
+>  =C2=A0 =C2=A0 -kernel u-boot \
+>  =C2=A0 =C2=A0 -netdev tap,id=3Dnet0,ifname=3Dtap0,script=3Dno,downscrip=
+t=3Dno \
+>  =C2=A0 =C2=A0 -device virtio-net-device,netdev=3Dnet0
+>
+> 6. Inside U-boot's console
+> =3D> setenv ipaddr 10.0.0.1
+> =3D> setenv netmask 255.255.255.0
+> =3D> wget 10.0.0.0:80/grubriscv64.efi <http://10.0.0.0/grubriscv64.efi>
+> =3D> bootefi=C2=A0$loadaddr
+>
+> 7. Print debug, check address and installed protocols (optional):
+> grub> set debug=3D"peimage,net"
+> grub> net_ls_addr
+> grub> lsefi
+>
+> 8. Download a test file, e.g. a kernel, through http (here Image is a
+> riscv linux kernel):
+> grub> linux (http,10.0.0.0:80)/Image
+>
+> 9. Try boot it:
+> grub> boot
+>
+> Best,
+> Adriano
+>
+> El jue, 14 nov 2024 a las 12:22, Ilias Apalodimas
+> (<ilias.apalodimas@linaro.org <mailto:ilias.apalodimas@linaro.org>>)
+> escribi=C3=B3:
+>
+>     Hi Adriano,
+>
+>     On Mon, 11 Nov 2024 at 23:10, Adriano Cordova <adrianox@gmail.com
+>     <mailto:adrianox@gmail.com>> wrote:
+>
+>         Add support for EFI_HTTP_PROTOCOL,
+>         EFI_HTTP_SERVICE_BINDING_PROTOCOL,
+>         and EFI_IP4_CONFIG2_PROTOCOL.
+>
+>         This series depends on the series 'wget: Expose wget to
+>         applications',
+>         also found at:
+>         https://github.com/0n41rd4/u-boot/commits/http-driver-wget
+>         <https://github.com/0n41rd4/u-boot/commits/http-driver-wget>
+>
+>         The fist two patches of this series are not efi specific and
+>         have also
+>         been sent to the corresponding maintainers, but this series
+>         depends on
+>         them, so they are added here for redundancy. A branch with both
+>         series
+>         of patches, concatenated, is at:
+>         https://github.com/0n41rd4/u-boot/commits/efi-http-driver
+>         <https://github.com/0n41rd4/u-boot/commits/efi-http-driver>
+>
+>
+>     It would help a lot if we had pointers (or an EFI app) using this
+>     protocol to test. Are you using any of that for devel/debugging?
+>
+>     Thanks
+>     /Ilias
+>
+>
+>
+>         Adriano Cordova (13):
+>          =C2=A0 net: net_utils: Move ip_to_string to lib/net_utils.c
+>          =C2=A0 net: wget: let wget_with_dns work with dns disabled
+>          =C2=A0 efi_loader: device_path: add definition of
+>          =C2=A0 =C2=A0 DEVICE_PATH_SUB_TYPE_MSG_IPV4
+>          =C2=A0 efi_loader: device_path: add efi_dp_from_ipv4
+>          =C2=A0 efi_api: add definitions for HTTP and IP4_CONFIG2 protoc=
+ols
+>          =C2=A0 efi_loader: efi_net: add efi_net_set_addr, efi_net_get_a=
+ddr
+>          =C2=A0 efi_loader: device_path: add support for HTTP device pat=
+h
+>          =C2=A0 efi_loader: net: set EFI bootdevice device path to HTTP =
+when
+>         loaded
+>          =C2=A0 =C2=A0 from wget
+>          =C2=A0 efi_loader: net: add support to send http requests and p=
+arse http
+>          =C2=A0 =C2=A0 headers
+>          =C2=A0 efi_loader: efi_net: add EFI_IP4_CONFIG2_PROTOCOL
+>          =C2=A0 efi_loader: efi_net: add EFI_HTTP_PROTOCOL
+>          =C2=A0 efi_selftest: add test for HTTP protocol
+>          =C2=A0 efi_selftest: add test for IPv4 Config2 protocol
+>
+>         Heinrich Schuchardt (2):
+>          =C2=A0 efi_loader: add IPv4() to device path to text protocol
+>          =C2=A0 lib: uuid: display HTTP and IPV4 Config II protocols
+>
+>          =C2=A0include/efi_api.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 220 +++++++++
+>          =C2=A0include/efi_loader.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 42 ++
+>          =C2=A0include/net-common.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 10 +
+>          =C2=A0lib/efi_loader/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 17 +
+>          =C2=A0lib/efi_loader/Makefile=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +
+>          =C2=A0lib/efi_loader/efi_device_path.c=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0|=C2=A0 95 +++-
+>          =C2=A0lib/efi_loader/efi_device_path_to_text.c |=C2=A0 23 +
+>          =C2=A0lib/efi_loader/efi_http.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 | 563 +++++++++++++++
+>         ++++++++
+>          =C2=A0lib/efi_loader/efi_ipconfig.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 | 216 +++++++++
+>          =C2=A0lib/efi_loader/efi_net.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 316 ++++++++++++-
+>          =C2=A0lib/efi_selftest/Makefile=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +
+>          =C2=A0lib/efi_selftest/efi_selftest_http.c=C2=A0 =C2=A0 =C2=A0|=
+ 315 +++++++++++++
+>          =C2=A0lib/efi_selftest/efi_selftest_ipconfig.c | 173 +++++++
+>          =C2=A0lib/net_utils.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 11 +
+>          =C2=A0lib/uuid.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =
+14 +
+>          =C2=A0net/lwip/wget.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A01 +
+>          =C2=A0net/net.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 11=
+ -
+>          =C2=A0net/wget.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =
+39 +-
+>          =C2=A018 files changed, 2038 insertions(+), 32 deletions(-)
+>          =C2=A0create mode 100644 lib/efi_loader/efi_http.c
+>          =C2=A0create mode 100644 lib/efi_loader/efi_ipconfig.c
+>          =C2=A0create mode 100644 lib/efi_selftest/efi_selftest_http.c
+>          =C2=A0create mode 100644 lib/efi_selftest/efi_selftest_ipconfig=
+.c
+>
+>         --
+>         2.43.0
+>
+
