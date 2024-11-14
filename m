@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED705D68B26
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 14:26:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A80E6D68B29
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 14:29:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64B63895DA;
-	Thu, 14 Nov 2024 15:26:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 08AC2895EB;
+	Thu, 14 Nov 2024 15:29:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Em1kAmPM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G1EZHFMg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC946895EE; Thu, 14 Nov 2024 15:26:07 +0100 (CET)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 8474B895C9; Thu, 14 Nov 2024 15:29:26 +0100 (CET)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76D7C89584
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 15:26:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 240EF895AC
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 15:29:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3e601b6a33aso404799b6e.0
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 06:26:05 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2fb56cb61baso5137581fa.1
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 06:29:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731594364; x=1732199164; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5aRHZP4n70vw54+0lCB/MaLlOruOBPWKczK/Ca+Qb4U=;
- b=Em1kAmPMGnTmIZ9b8xF5h6yMGSHlAOyUnXj70AFfBJnFXSyeK9hckGtHiAyMJKj1nf
- FUnDxvTN8+YmS5n+4OqVaIRxuVN5iV6mIGEKkLjHIOpw9qAz0eAQA1jWNvTXB8c+mFxE
- 2kfAwqkikfs4KnruPXVEBbK7263Bn7Dpp1zJM=
+ d=linaro.org; s=google; t=1731594563; x=1732199363; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+ZKQ8GXO8x6Nz17B2GQZy1jFMfkUvyujZeaj0wCbMuI=;
+ b=G1EZHFMgeHYeJZhlV7zI6C+QBp8+Fw1z0oFMZCYnNAUv9sgoz25jvG5rL25pwZRVaI
+ uRmgGApurFUX9vDz25Zylab4YfUIhjdy+tu2/7el5e9DU3pU5dRXDF1yE2TfntsYxStW
+ NM/UbzRuzma1u9eUs3x0yF8MAhVyhhnil94JPpDkbnMd5MEAI2UkjF586b6G6r1ZcEWS
+ MzVRng9kVSG/YoQnPKUPwo/qcQudDNcT3kGnQqXLcuyWb4E1MDLptBDMtvYsQiPEMURQ
+ OHB30UppZtV93tjC+GB5ORWJuagLi9Deb6yCShp7aCJB+zPZoN53sLvxcb2xsKa9/GOv
+ VpQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731594364; x=1732199164;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5aRHZP4n70vw54+0lCB/MaLlOruOBPWKczK/Ca+Qb4U=;
- b=XBVDbs8N3xlLqxVOpK/lNwvnxT4yrDaY6w6BZpKlfj/QnDVlJwC6WZ9VcQb9+dZ3OF
- Bk+WG/eccl0Ruks/T8VfFca/TXwCQIR4NT1iehK34AUqTnBnVbnklIFDD/Aoe5faE6Fu
- d2KH94wVUQnrT6txd0e2WBlwoGGpaomOSFd8EACh/NiD82yLF6MArzI9EWLnpFx4rbO1
- WSLEBX9t1Di7O1LpKAm6j7iueXHR+9HXZ2GAvv+s7PZU5x9SK1i5D1jH9DpdLAOergxM
- A9JtP/lbqbMZ82U/o7InmTKqlqC7TziGV1StKk74t5sQSeShvFmtGgKS1NcMK+OqkWKS
- WNuw==
+ d=1e100.net; s=20230601; t=1731594563; x=1732199363;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+ZKQ8GXO8x6Nz17B2GQZy1jFMfkUvyujZeaj0wCbMuI=;
+ b=qo2g39tEqwuOZMQERjyrGhH09AzIqaVaVtnWJQd+sdgwjHhlNNVVdNVob0a3vrWZwa
+ DXTwe/KOtLWIyYAWgFH1uC/zsyzk0u0qaDRJNrtXNUn3nKM4jW/ZnXFF8MzNYplKBWmd
+ ywrSdm0fHpLuqTXzcYT0rulCBtvwM6EhdhCsWf/Yp/g6NUcvycOcKnJxrgrBCa19+y1b
+ uE8C4j9QNpYkF0AefNrDaBtqglKN4Wdc5GK3XFe+bP8pM2uUIr/KvKMbSiwCA5mySM1H
+ zJ1FrrdJzTyzledGkx6vn03zhyMWCEiKSflyNxMHI1NQrT2rre1PGYeB1f4mPU7hX+0S
+ x66Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVPk5GjN6U0iUhv3N7IUstVxsUgmjVpQMwq49gR/rZzACi40cyFaiSzke7olH+PbKuFlT0KXjc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyv+Sykl8xQovgFaCbELo4y/XzPco1eLdeNZtFsGZspFh7ffrux
- q1XUFt/uooFQ0Ki9MmcZ8uDfJTBMClg4lsKbg+XFafvONmqGkaDVNv+rpwGBZS8gMqoCcjO7LaC
- 7vgg=
-X-Google-Smtp-Source: AGHT+IHligFpqn+mZZ0bswYQ3lCirU6A+sEneZO56Spjr4t7CdEto7b3e/4JOdeQn9abuT7m79lD0A==
-X-Received: by 2002:a05:6871:401:b0:277:f9d5:e85 with SMTP id
- 586e51a60fabf-295e8dcc8f1mr7078285fac.22.1731594364065; 
- Thu, 14 Nov 2024 06:26:04 -0800 (PST)
-Received: from bill-the-cat ([145.14.135.248])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5eea0288140sm326813eaf.41.2024.11.14.06.26.02
+ AJvYcCWnr19dmNSKOEpvlInE0gOd0JLqdHm3f+sW/197B1Rd4a5HHyUPqdt9NlkGd3p0jt9YPgtBLnc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzetyE6l462lyGb+Q0zaWeNYtnJF96D3OFRUZGn6vYDEcbPOqil
+ za6waPmI70DflTs2lWFqF3RynfOykwh3fV8L6E4RA6f0gLXCRO6zI5VBcQANt7c=
+X-Google-Smtp-Source: AGHT+IHfdVrxpANrzAkGpvdPkkCW6PVlULCICoc+dNo6Phlo7RsDc8hjtwJfvCsiNkCIQhYxKHAwDg==
+X-Received: by 2002:a2e:bea0:0:b0:2fb:44ca:801c with SMTP id
+ 38308e7fff4ca-2ff4c633543mr41840251fa.35.1731594562909; 
+ Thu, 14 Nov 2024 06:29:22 -0800 (PST)
+Received: from localhost.localdomain (ppp078087235066.access.hol.gr.
+ [78.87.235.66]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5cf79b89bcesm615806a12.3.2024.11.14.06.29.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2024 06:26:03 -0800 (PST)
-Date: Thu, 14 Nov 2024 08:26:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Janne Grunau <j@jannau.net>,
- Mark Kettenis <kettenis@openbsd.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>
-Subject: Re: [PATCH 2/2] efi_loader: remove non vital devices first
-Message-ID: <20241114142600.GE3600562@bill-the-cat>
-References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
- <20241031-iommu_apple_dart_ordering-v1-2-8a6877946d6b@jannau.net>
- <87zfmi4rzy.fsf@bloch.sibelius.xs4all.nl>
- <4ff61e8e-03c7-42d2-b2fe-8dba1697641f@gmx.de>
- <CAFLszTjDaQGaaL9qM_s+oxNrAkGhunGkbAjyR1giEDgnShUfzw@mail.gmail.com>
- <5FA71CBD-F9AF-442A-8564-4F663F44BF42@gmx.de>
- <CAFLszTi9As9YFFoWuD9GW6gHpriZSNVCFmq5fKkdCi9jeRuqjQ@mail.gmail.com>
- <C4EB5D10-D037-49BE-BE0A-00BD3D1514FC@gmx.de>
- <CAFLszTiaDi7Sbrjsjt42UObz1Nb8SqM8CFBdcTOAXih3pJV3PQ@mail.gmail.com>
+ Thu, 14 Nov 2024 06:29:21 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: jerome.forissier@linaro.org
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH v2] net: lwip: provide entropy to MBed TLS in one go
+Date: Thu, 14 Nov 2024 16:29:15 +0200
+Message-ID: <20241114142917.481564-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ntsaXWzuzHa4Zo1/"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTiaDi7Sbrjsjt42UObz1Nb8SqM8CFBdcTOAXih3pJV3PQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,163 +93,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+We currently provide entropy to mbedTLS using 8b chunks.
+Take into account the 'len' parameter passed by MBed TLS to the entropy
+gathering function instead. Note that the current code works because len
+is always 128 (defined at compile time), therefore mbedtls_hardware_poll()
+is called repeatedly and the buffer is filled correctly. But passing 'len'
+to dm_rng_read() is both better and simpler.
 
---ntsaXWzuzHa4Zo1/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+Suggested-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 
-On Wed, Nov 13, 2024 at 08:53:17PM -0700, Simon Glass wrote:
-> Hi Heinrich,
->=20
-> On Wed, 13 Nov 2024 at 11:45, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
-ote:
-> >
-> > Am 13. November 2024 17:03:03 MEZ schrieb Simon Glass <sjg@chromium.org=
->:
-> > >Hi Heinrich,
-> > >
-> > >On Wed, 13 Nov 2024 at 08:17, Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > >wrote:
-> > >>
-> > >> Am 13. November 2024 15:39:22 MEZ schrieb Simon Glass <sjg@chromium.=
-org>:
-> > >> >Hi,
-> > >> >
-> > >> >On Wed, 13 Nov 2024 at 05:52, Heinrich Schuchardt <xypron.glpk@gmx.=
-de>
-> > >wrote:
-> > >> >>
-> > >> >> On 11/1/24 21:29, Mark Kettenis wrote:
-> > >> >> >> From: Janne Grunau <j@jannau.net>
-> > >> >> >> Date: Thu, 31 Oct 2024 23:48:02 +0100
-> > >> >> >>
-> > >> >> >> DM_FLAG_VITAL marks devices which are essential for the operat=
-ion of
-> > >> >> >> other devices. Removing these devices before their users can r=
-esult
-> > >in
-> > >> >> >> hangs or crashes.
-> > >> >> >> This potentially fixes EFI boot of Renesas rcar3 devices. Their
-> > >clock
-> > >> >> >> devices (and with this series the dart iommu) are the only dev=
-ices
-> > >> >> >> markes as vital.
-> > >> >> >> The arm boot code already handles devioce removal in this way.
-> > >> >> >
-> > >> >> > There is a typo in that last sentence of the commit message
-> > >(devioce).
-> > >> >> > Otherwise:
-> > >> >> >
-> > >> >> >> Signed-off-by: Janne Grunau <j@jannau.net>
-> > >> >> >
-> > >> >> > Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
-> > >> >> >
-> > >> >> >> ---
-> > >> >> >>   lib/efi_loader/efi_boottime.c | 1 +
-> > >> >> >>   1 file changed, 1 insertion(+)
-> > >> >> >>
-> > >> >> >> diff --git a/lib/efi_loader/efi_boottime.c
-> > >b/lib/efi_loader/efi_boottime.c
-> > >> >> >> index
-> > >4f52284b4c653c252b0ed6c0c87da8901448d4b4..7db3c95782970f8c06a970a8ee86=
-b1804cd848b6
-> > >100644
-> > >> >> >> --- a/lib/efi_loader/efi_boottime.c
-> > >> >> >> +++ b/lib/efi_loader/efi_boottime.c
-> > >> >> >> @@ -2234,6 +2234,7 @@ static efi_status_t EFIAPI
-> > >efi_exit_boot_services(efi_handle_t image_handle,
-> > >> >> >>              if (IS_ENABLED(CONFIG_USB_DEVICE))
-> > >> >> >>                      udc_disconnect();
-> > >> >> >>              board_quiesce_devices();
-> > >> >> >> +            dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL |
-> > >DM_REMOVE_NON_VITAL);
-> > >> >> >>              dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
-> > >> >>
-> > >> >> Simon's patch 6224dc9ba428 ("arm: Remove vital devices last") add=
-ressed
-> > >> >> the same issue for bootm on arm. But what about about other
-> > >architectures?
-> > >> >>
-> > >> >> This logic should be moved to drivers/core/root.c instead of
-> > >replicating
-> > >> >> code.
-> > >> >
-> > >> >We could have a common helper, but it should not be in driver/core =
-as
-> > >> >this ordering is more of a policy decision. Unless we can add a
-> > >> >parameter telling dm exactly what to do...
-> > >> >
-> > >> >BTW, Heinrich, this behaviour is exactly what my bootflow_efi() test
-> > >> >was supposed to check. But since it doesn't have the
-> > >> >exit-boot-services piece at your request...
-> > >> >
-> > >> >Regards,
-> > >> >Simon
-> > >>
-> > >>
-> > >> Why can't we generally remove non-vital devices first if all are to =
-be
-> > >removed?
-> > >>
-> > >> I cannot see anything device specific here.
-> > >
-> > >No objection to that...but it needs to be in a new function, not becom=
-e the
-> > >default behaviour of dm_remove_devices_flags(), which is supposed to do
-> > >what it is told and in one pass.
-> >
-> > dm_remove_device_flags() makes no specific promises concerning the dele=
-tion sequence and its internal working.
->=20
-> Do you mean in the function comment in the header file? We can
-> certainly update that.
+Changes since v1:
+- Update the commit message and title and picked up r-b from Jerome
+- v1 can be found here https://lore.kernel.org/u-boot/42870ab3-1621-491f-a221-8ced932ed703@linaro.org/
 
-That seems like "fixing" the problem by documenting that things should
-work in the seemingly broken way.
+ net/lwip/wget.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-> > But obviously it will fail if non-vital redources are not deleted first.
->=20
-> Either I don't understand that, or I don't agree. Can you give a
-> specific example?
+diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+index ba8579899002..4fd552fd306e 100644
+--- a/net/lwip/wget.c
++++ b/net/lwip/wget.c
+@@ -42,7 +42,6 @@ int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len,
+ 			  size_t *olen)
+ {
+ 	struct udevice *dev;
+-	u64 rng = 0;
+ 	int ret;
 
-The Apple IOMMU? That's what got this thread started.
+ 	*olen = 0;
+@@ -52,12 +51,11 @@ int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len,
+ 		log_err("Failed to get an rng: %d\n", ret);
+ 		return ret;
+ 	}
+-	ret = dm_rng_read(dev, &rng, sizeof(rng));
++	ret = dm_rng_read(dev, output, len);
+ 	if (ret)
+ 		return ret;
 
-> > Leaving this broken function exported and writing a new one has no user=
- benefit.
->=20
-> This function works fine. It is not broken.
->=20
-> >
-> > We could copy the old function to a new static function that we call as=
- needed from the old function name.
->=20
-> Yes, that's fine with me. Also, did you see my note about the
-> bootflow_efi() test?
+-	memcpy(output, &rng, len);
+-	*olen = sizeof(rng);
++	*olen = len;
 
-But since your test passed (I assume) and real platforms are failing and
-requiring a fix, I'm not sure this is a strong argument? Or did you have
-a patch in a later series that fixed the problem here as well?
+ 	return 0;
+ }
+--
+2.45.2
 
---=20
-Tom
-
---ntsaXWzuzHa4Zo1/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2CHgACgkQFHw5/5Y0
-tyxPEQv6A44fiIHd56bagTvaisgx5FtozDwQGOApVfSnbVvTe4t2qONL2EyuEI47
-J5JVRtB+AZ4GwypBTgHo+Ew59POh2BoJeNT9NqOqNeG5PBiPAmzrVqtCAkX27mv9
-gJOjnoY+EBFsiotwvR+8WJlMGTiU5f2nNXQia7+isCjJcXLEXjYU1y64/VcVeSrk
-qwIuSlim1tB/gNuBmO7i2hAlPJtMHN797PavleVvf4HF3HXI/QJMOcXqg9oNurHC
-Y/E7ADxh/CwJpwion4OBcwjWqCWvmEEDHavbtY6+u48el82KDOHtGMB6N6BtKyZ9
-zKoVgaNRkIhx03nIhbdTrdzPuC7m6yeIJeZ8RK9zKzGrMu6VdMphkFA//SqkTizj
-f7OIBiv2NIq7Drm99UqGRN7eiKQuHynATmnyI8UDO8gStESh2Pl6M7ryaOvfVvvI
-gyxdkU1kaLwsDX6zvYMQQOYZfMPPqCmS166mZyrJKOTLyyKckWN7hc54lEIP4hHv
-FOKs0mIU
-=CZWH
------END PGP SIGNATURE-----
-
---ntsaXWzuzHa4Zo1/--
