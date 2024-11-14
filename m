@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83823D6A221
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 17:19:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0174AD6A220
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 17:20:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 968F3895C9;
-	Thu, 14 Nov 2024 18:19:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8C8D8895C9;
+	Thu, 14 Nov 2024 18:20:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CV6+mAUc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XLDbvAbr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A6A089607; Thu, 14 Nov 2024 18:19:04 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id E1DB189607; Thu, 14 Nov 2024 18:20:03 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 008A68954C
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 18:19:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4E828954C
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 18:20:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9a4031f69fso144015466b.0
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 09:19:01 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a99eb8b607aso115535966b.2
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 09:20:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731604741; x=1732209541; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1731604801; x=1732209601; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=2WHYEmNstdYnJM/E8T5xjR4XgTwwfo8qEhdIKFE+4zk=;
- b=CV6+mAUc/oKYLo+UvnMhl3IWkxNlSI8oFHN4rU2EPPH4B9209MqHzG1C658XwMRDHD
- 0/sDkaqt5Eo0DxmdS0iJ/NrH7zuNsILDdFfxSB+qmdd15AWp1F8qOC/2nVLVP/O09/8S
- VJIwCrKKRuD9LN/H/Y2+/AvVFRBBFuzFgw1xU3zjsAvr0udFzPF1qv+BnTPfy4/3OYpb
- oQ0RDI3aTDireDkw8LHRMtLlf4JTYkn1UUtkxzMX7zEoaBtCCZFo4S0N3dq5qNbs+8Eg
- B+Cjt+aGwN2BwBh+tOcK5w9MqoKtjXI9JWZ0dDhLDxt6WTbJ1q/oR6l4TT/GwQTr5Vwz
- U+ug==
+ bh=ucEkMN+AtLey75upljsxwLcShzlBwkMiICYd+xWO8as=;
+ b=XLDbvAbrkVuPOO55cXx2LY87Kn6zuUhU0C2azc2xXUqIj8Rd+pKz+4rV1gBDOcQgc6
+ oTxD1vE8Rwh1cBrNk+oZxMh/6Odemb/vRnJ1kEeXhootPpjWCQ9l67xCmusHySjrdwUh
+ ShT0J05Kslqfm7veRA8WcdijJ/7V6Zy9Pv5QTNlWc7oKLzOoOdK/vxX7nnlC3u+91zox
+ MHVAymMpPdd1z7AjLjpMI3hocK9Gj3TaaaeHKTDIyv42iJU51/CW44w+/mfs4O6KsjBC
+ UR5pUaNbqDZwG7nP3CEXIMRPmXItowZFdzZipB1CTAVkWREkHxAo4WoFhzLMr9S4IjXC
+ icJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731604741; x=1732209541;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1731604801; x=1732209601;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2WHYEmNstdYnJM/E8T5xjR4XgTwwfo8qEhdIKFE+4zk=;
- b=kQ1sYjkdXuSmSEnCyW9ZvKUsoX+1okH4QI4TEAL/26KFDEX9Cud/Ta6p4kX70pB2oN
- 69QPpgIC7HoKLBogXHkdO05JRJeJxf/rdfS1vz4exNnEgAXXVsowet47Wej9ZNtY7Mz9
- Bz658MTFJ2HPo5I2CyhjXNhEPaUNwmPIdbAzm6b8t/2Mv43qPpV1sbA1bsKj3SVcyWG6
- J2okzgAi8Wq2vzk3EcmzuiT9A5QP8XAVCVR4RINKw7B6Y8TDjeRuwJcr1iYmeU+7w53n
- DFJeJAJNADRqwPApyxFgL7jKTiikdF+TZ40lXeTGtpe8zGonk/f4gdIZ5ZBGvwoO5h43
- A5LA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVRgbFBvbtTZahck5IqNeOzhMFTCxQwVtEBV52QV918chNMU1hPQlK5s0RzVvUcGs0pFfRA+AM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxAFih325S6Ini3Ek+zHqeMMJvcMNUlun5SUx2/d7vLVqe5CoXy
- VlHq+Y9QhCWCs2urOH64UTSUG9W/2tmNaNqfsTk2wOO0tpqhHcbrJ91u5qBqtn5pXI1uRyP4r6K
- t
-X-Google-Smtp-Source: AGHT+IFWxCTKxxH651rgwcVTK78vpyvf0zVqo0Vh57W8RtHVJF5yywhunCfmzqzOw0t4BqvEQxfMvw==
-X-Received: by 2002:a17:906:eec3:b0:a99:f71a:4305 with SMTP id
- a640c23a62f3a-a9eeff0da96mr2631379866b.18.1731604741509; 
- Thu, 14 Nov 2024 09:19:01 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ bh=ucEkMN+AtLey75upljsxwLcShzlBwkMiICYd+xWO8as=;
+ b=vqqqCPaFR6GkN/sEx2JDrbB7NfsSOv/hg9TU7izSyg8xNGFZBVJLgjlE5AcrxkwFdy
+ sItoOjQrsH77AOeNytN1dESaR0rf8NjTKOIiwLgDdq42kwdl3t3zgOr6da9i/tW3N1mM
+ q1YCjL89e0eIof7pmUuGw22k3lMr9xtFpaxp+aEY6eglN/Q5ijxMpSIETLH8ZaB7Qb/S
+ Mw0nPVpJGbzVw+QYZAUII/IcnCw8nh6UAxkjw6J36KZ3w3pATTy/x5zp0gTtALY07yNz
+ y5SB1Qk2RyLs+edZl2dZaa7W1MbTcElLXganOEDR+a89g7va5M5B2SbPsH40PX6TqKgj
+ dxng==
+X-Gm-Message-State: AOJu0YyOrDegJmQvZM0Djhwp8P1SfZHzhC9L8q9SR1PAzHmyaYMKEqy/
+ 4XGq6SYKLyqIh8pqDqOxn4wgAUso5uzBJt4EAtZJT/BEW/QAGoIXeqyVpDliWW6QPbRFyQNKdwl
+ B6L0=
+X-Google-Smtp-Source: AGHT+IFWBIciHteQ3ifyx98oVFtWeA1Hh+WZ5jXgJjGa3S1aSh1o7US/pKrclS+GO3hkqZdcqniWkg==
+X-Received: by 2002:a17:907:60c8:b0:a9a:46:83ee with SMTP id
+ a640c23a62f3a-a9eefff1531mr2315117866b.48.1731604801223; 
+ Thu, 14 Nov 2024 09:20:01 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:6dc2:e776:8a06:3912?
+ ([2a01:e0a:3cb:7bb0:6dc2:e776:8a06:3912])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20dffd798sm84593966b.93.2024.11.14.09.19.00
+ a640c23a62f3a-aa20e048f12sm83872366b.173.2024.11.14.09.20.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 09:19:00 -0800 (PST)
-Message-ID: <192ea3ec-dc55-464c-9643-048f8e4a988c@linaro.org>
-Date: Thu, 14 Nov 2024 18:18:59 +0100
+ Thu, 14 Nov 2024 09:20:01 -0800 (PST)
+Message-ID: <18ff628e-8322-4554-9b15-f756fb1025c5@linaro.org>
+Date: Thu, 14 Nov 2024 18:19:55 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] gpio: qcom_pmic: add again the quirk to skip GPIO
- configuration on PM8550
+Subject: Re: [PATCH] net: lwip: dhcp: support arguments for TFTP file download
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
+ <trini@konsulko.com>, E Shattow <lucent@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+References: <20241114171002.2073594-1-jerome.forissier@linaro.org>
+ <CAM=mAOmfQWhQ+eLwQ4qXbsiB26Zc9FimJhsp93Xi9MTerMw=GA@mail.gmail.com>
 Content-Language: en-US
-To: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20241016-topic-sm8x50-qcom-pmic-re-add-quirk-v1-1-6d4917d9063f@linaro.org>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20241016-topic-sm8x50-qcom-pmic-re-add-quirk-v1-1-6d4917d9063f@linaro.org>
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAM=mAOmfQWhQ+eLwQ4qXbsiB26Zc9FimJhsp93Xi9MTerMw=GA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -101,92 +101,84 @@ X-Virus-Status: Clean
 
 
 
-On 16/10/2024 11:16, Neil Armstrong wrote:
-> The qcom_pmic code is broken for new PMICs and should be fixed,
-> without the QUIRK the code is broken and the GPIOs don't work
-> anymore on SM8550 and SM8650 platforms.
+On 11/14/24 18:15, Heinrich Schuchardt wrote:
+> Jerome Forissier <jerome.forissier@linaro.org> schrieb am Do., 14. Nov.
+> 2024, 18:10:
 > 
-> Partially revert the revert and only add the quirk on the PM8550
-> PMIC, making the buttons and MMC detect gpio work again.
+>> The dhcp command is supposed to have the following syntax as per
+>> "help dhcp":
+>>
+>>   dhcp [loadAddress] [[hostIPaddr:]bootfilename]
+>>
+>> In other words, any arguments should be passed to an implicit
+>> tftpboot command after the DHCP exchange has occurred.
+>>
+>> Add the missing code to the lwIP version of do_dhcp().
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>  net/lwip/dhcp.c | 27 ++++++++++++++++++++++++++-
+>>  1 file changed, 26 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+>> index 23b56226921..6f987e469d6 100644
+>> --- a/net/lwip/dhcp.c
+>> +++ b/net/lwip/dhcp.c
+>> @@ -111,9 +111,34 @@ static int dhcp_loop(struct udevice *udev)
+>>
+>>  int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>  {
+>> +       int ret;
+>> +
+>>         eth_set_current();
+>>
+>> -       return dhcp_loop(eth_get_dev());
+>> +       ret = dhcp_loop(eth_get_dev());
+>> +       if (ret)
+>> +               return ret;
+>> +
+>> +       if (argc > 1) {
+>> +               int i;
+>> +               char **tftp_argv;
+>> +               struct cmd_tbl cmdtp = {};
+>> +
+>> +               /* Invoke tftpboot with the arguments passed to dhcp */
+>> +               if (argc > 3)
+>> +                       return CMD_RET_FAILURE;
+>> +               tftp_argv = malloc(argc * sizeof(char *));
+>> +               if (!tftp_argv)
+>> +                       return CMD_RET_FAILURE;
+>> +               tftp_argv[0] = "tftpboot";
+>> +               for (i = 1; i < argc; i++)
+>> +                       tftp_argv[i] = argv[i];
+>>
 > 
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Couldn't you just pass the original argv and argc if argc > 1.
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-
-sorry, this slipped by somehow.
-> ---
->  drivers/gpio/qcom_pmic_gpio.c | 21 +++++++++++++++++++--
->  1 file changed, 19 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-> index f2ef4e5ce14..cd9f3926ac4 100644
-> --- a/drivers/gpio/qcom_pmic_gpio.c
-> +++ b/drivers/gpio/qcom_pmic_gpio.c
-> @@ -69,6 +69,17 @@
->  #define REG_EN_CTL             0x46
->  #define REG_EN_CTL_ENABLE      (1 << 7)
->  
-> +/**
-> + * pmic_gpio_match_data - platform specific configuration
-> + *
-> + * @PMIC_MATCH_READONLY: treat all GPIOs as readonly, don't attempt to configure them.
-> + * This is a workaround for an unknown bug on some platforms where trying to write the
-> + * GPIO configuration registers causes the board to hang.
-> + */
-> +enum pmic_gpio_quirks {
-> +	QCOM_PMIC_QUIRK_READONLY = (1 << 0),
-> +};
-> +
->  struct qcom_pmic_gpio_data {
->  	uint32_t pid; /* Peripheral ID on SPMI bus */
->  	bool     lv_mv_type; /* If subtype is GPIO_LV(0x10) or GPIO_MV(0x11) */
-> @@ -117,8 +128,13 @@ static int qcom_gpio_set_direction(struct udevice *dev, unsigned int offset,
->  {
->  	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
->  	uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
-> +	ulong quirks = dev_get_driver_data(dev);
->  	int ret = 0;
->  
-> +	/* Some PMICs don't like their GPIOs being configured */
-> +	if (quirks & QCOM_PMIC_QUIRK_READONLY)
-> +		return 0;
-> +
->  	/* Disable the GPIO */
->  	ret = pmic_clrsetbits(dev->parent, gpio_base + REG_EN_CTL,
->  			      REG_EN_CTL_ENABLE, 0);
-> @@ -262,6 +278,7 @@ static int qcom_gpio_bind(struct udevice *dev)
->  {
->  
->  	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
-> +	ulong quirks = dev_get_driver_data(dev);
->  	struct udevice *child;
->  	struct driver *drv;
->  	int ret;
-> @@ -275,7 +292,7 @@ static int qcom_gpio_bind(struct udevice *dev)
->  	/* Bind the GPIO driver as a child of the PMIC. */
->  	ret = device_bind_with_driver_data(dev, drv,
->  					   dev->name,
-> -					   0, dev_ofnode(dev), &child);
-> +					   quirks, dev_ofnode(dev), &child);
->  	if (ret)
->  		return log_msg_ret("bind", ret);
->  
-> @@ -348,7 +365,7 @@ static const struct udevice_id qcom_gpio_ids[] = {
->  	{ .compatible = "qcom,pms405-gpio" },
->  	{ .compatible = "qcom,pm6125-gpio" },
->  	{ .compatible = "qcom,pm8150-gpio" },
-> -	{ .compatible = "qcom,pm8550-gpio" },
-> +	{ .compatible = "qcom,pm8550-gpio", .data = QCOM_PMIC_QUIRK_READONLY },
->  	{ }
->  };
->  
-> 
-> ---
-> base-commit: d5cab0d6adc26ec1bbd45c2fed101184d04454ae
-> change-id: 20241016-topic-sm8x50-qcom-pmic-re-add-quirk-75b24dd86849
-> 
-> Best regards,
+Ha! Yes. I don't know why I thought tftpboot might be confused by
+the content of argv[0]. It is of course not the case. v2 coming
+shortly, thanks!
 
 -- 
-// Caleb (they/them)
+Jerome
 
+> 
+> Best regards
+> 
+> Heinrich
+> 
+> 
+> +               ret = do_tftpb(&cmdtp, 0, argc, tftp_argv);
+>> +               free(tftp_argv);
+>> +               return ret;
+>> +       }
+>> +
+>> +       return CMD_RET_SUCCESS;
+>>  }
+>>
+>>  int dhcp_run(ulong addr, const char *fname, bool autoload)
+>> --
+>> 2.40.1
+>>
+>>
+> 
