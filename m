@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2471D65C7E
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 17:13:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83AB1D65C7E
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 17:15:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D34589206;
-	Thu, 14 Nov 2024 18:13:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DFBF48954C;
+	Thu, 14 Nov 2024 18:15:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o7o6taFW";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="uz4IMHGv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47F8089241; Thu, 14 Nov 2024 18:13:36 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 46C8189574; Thu, 14 Nov 2024 18:15:40 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E128788AE8
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 18:13:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 217AC8926D
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 18:15:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a9e44654ae3so125230866b.1
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 09:13:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731604413; x=1732209213; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=IbdZzZZhNpVybTPAcGQN4RMW2ONsC7YXU+4rKiVfnTc=;
- b=o7o6taFWAWtv+e/X/tq4Id1yGTD1m/V8EO9FIaTYGYHblEVv7RHqM74y6RMJ+5CRNK
- AWMi+5y9JoT46LhIKMwTREMYEeXa8n2r5FcnTGaqKuEUFBarYxf6OgPLQQErIx9MS/uC
- iAcVvwJVqhZ2vIMH6OH6jIVl2q0/dyDWNIPjmp0IaMrNcdd/+gLr3yOVeNF4T4AbvZ63
- 6VaGp42doFsMI63pT971FbBiQxbjqciST1m/Bua2Vi5v1OXox9b3pv6zdky3h3Is2Wng
- 2MEZzkmlWUjai0bljkFR/nANaqcgey1Xm2gKWtq64R0dKBLJaOUa83ZzRdcnAeUCFihK
- 2bMQ==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
+ [209.85.210.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id B31AD3F2BB
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 17:15:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1731604537;
+ bh=1y84mrfxaLv5zlCO7FWeCzULgLtmQmzYreYNqbyWoug=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=uz4IMHGv5kAj5a1uqjiipturrIwbJWailFMidLOgg5lG7CJUCYrT78gUO0QTZtMOD
+ cPS6KdhaPyhsRLpfgm8UrMFwM7mTFXvHWVr1TULsoeL6LzHIBTM34TlZmtnEm17Ip7
+ Kvx4Io+QljZXqugw389j7biGeZZsE1Mq3+G/I56ZRSdrTuvceIMtK0/RkmRw+HicG+
+ +gRAfkpoe+c2FiZMrs+XVgGjBogcL8I+JkOQf0nVlA8mjvOwEiUXju3TUByttzmrJb
+ sQ8Jz7yKWlGpqjSvNmRMD7y6O+ljoA2EHAU50gdj+O67LxjbqNfS2Hgma/bAYgSYq0
+ aSfoKEocmTjHQ==
+Received: by mail-pf1-f197.google.com with SMTP id
+ d2e1a72fcca58-72065695191so818772b3a.1
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 09:15:37 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731604413; x=1732209213;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IbdZzZZhNpVybTPAcGQN4RMW2ONsC7YXU+4rKiVfnTc=;
- b=j0qOPDtF18O5HT8542VrGvkXYo518sNMln/aqwBL7Yjk5Vsc6Cpsxb6sCZHXfLevVo
- UxK177P9HPTuOO5moB5MR5Gh9IF3RH4hgEwE6NZRDIZ0HQSosZmDHVPk/rBHv0KcwKSo
- DtR54miChizwhvCIsIH3TmKsD6MP5DIOfECrbV+p13dHr3wQ3gNYj+sUeVGD++tRo9V7
- ROhApBP+fkcIhHwO0JiIMxn5vSNLX+3IuY0CW8jaN4Bx6ygF9QpLNSBXGEjhQX+MmGme
- maR2pGS3jNXDFLWn4YPPTSdsEEQ6F9hGZ0ZuRxrcaekNSG7bilR8o6negk0lNVaRvkzI
- DULg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWD20Hfd88e98pockBPxNR/9KLGYbZh3GlPLw0HIKF9Yi8IBda8KrrCuKyvIC8P5G/FucKcY/s=@lists.denx.de
-X-Gm-Message-State: AOJu0YzW50nWvfyzTZsn48/MBmVf3kV0L2qUXFliIMjulnI/oCP9ryqr
- ZukPQEInpaJJQFvFu/wWuNTGou3Q20JqfikV8coV/ojT+neF/GkyfAMdktc2a0m+WLhPOte4oqT
- BYw8=
-X-Google-Smtp-Source: AGHT+IG19AYAdgtWBJbuspJnz893xNJQuIIABDvwFC7yHgeJBDlZZ5h63QihzaOvAHBWDQas8b6CdQ==
-X-Received: by 2002:a17:906:fd83:b0:a9a:49a8:f1fa with SMTP id
- a640c23a62f3a-aa1f80589e0mr689416166b.23.1731604413112; 
- Thu, 14 Nov 2024 09:13:33 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:6dc2:e776:8a06:3912?
- ([2a01:e0a:3cb:7bb0:6dc2:e776:8a06:3912])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20df50ab9sm83705666b.51.2024.11.14.09.13.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 09:13:32 -0800 (PST)
-Message-ID: <8c43d506-bb1b-447d-97ac-8fe789a071fc@linaro.org>
-Date: Thu, 14 Nov 2024 18:13:17 +0100
+ d=1e100.net; s=20230601; t=1731604536; x=1732209336;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1y84mrfxaLv5zlCO7FWeCzULgLtmQmzYreYNqbyWoug=;
+ b=Ft3ROvr/haaR+sB30IeByF1VDS5+UGSDKdELF9Hg1XuperZmv7URXpVnRNi9at/khc
+ UHmHZDuBi3r9LfQPwTS4wgk8iFO3atn+Gvin5VveMLMKwUyE7QCOUE7pV8Ek7m9a0Npc
+ we47tD2W9ApNzJ6EWsAWBWfcmsJXWl/VIa7ADSEY+NrUO4YjKLBKgBMhhdezYlUiZw3i
+ Px3b8OqyILBYhNl5a/kzfJsguWdwB+WHQoDujrC7aBIYN6r3FrKz2YtGq/1B8+zvh1O+
+ +1AMomcTcwBJ0JR55dSD2EvuhMD+BPn1wUFXWRfbVnwZbruCCz2DwlzT3cYj+6k5bvAM
+ uNww==
+X-Gm-Message-State: AOJu0Yxllm21V/UZ0Oan2GIgHXQ3q9vEtFbi/StzgN31nblor0VQd9bO
+ WOKV7HFsVg188qyStHi3j52o2VDPQEW+EMdPP+MG2ChtrqNiwtC1q1PjqpHOQ/yWOwMtFm4Q2i4
+ qOrslLgt1WGPgOADd8fdRynZPqNOJnIk6/PX2x4kE00Q6ZFmt06ZMjdRFmX+mi1R+WOXov8GHQw
+ Wys6xz69ykl6bhtxGOZUO6Zwf6fDVnuwR2ClgncloZJg==
+X-Received: by 2002:a17:90b:314a:b0:2e2:c406:ec8d with SMTP id
+ 98e67ed59e1d1-2e9b17962a1mr32511602a91.31.1731604536298; 
+ Thu, 14 Nov 2024 09:15:36 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHTdNJCLoYyT4Kp+W+um4MX4AftZPChch3QjnD15ZF+kOjzZxdWn8lV7xDa5NtKn2YZYu6/+0cRLSQKbAO5bA4=
+X-Received: by 2002:a17:90b:314a:b0:2e2:c406:ec8d with SMTP id
+ 98e67ed59e1d1-2e9b17962a1mr32511556a91.31.1731604535865; Thu, 14 Nov 2024
+ 09:15:35 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] dhcp fails to download file with CONFIG_NET_LWIP=y
-To: Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: E Shattow <lucent@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <7ae3c2a0-2a9f-413c-8fff-bac18421c335@canonical.com>
- <CANV2PTNScpCfP3vuwHFchR7ZgP5oDGUe1-9Lg5u2v8-cU48Pig@mail.gmail.com>
- <654f78ed-18db-4f77-a732-69ef32c8c7c4@canonical.com>
- <20241113235918.GA3600562@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241113235918.GA3600562@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20241114171002.2073594-1-jerome.forissier@linaro.org>
+In-Reply-To: <20241114171002.2073594-1-jerome.forissier@linaro.org>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Thu, 14 Nov 2024 18:15:24 +0100
+Message-ID: <CAM=mAOmfQWhQ+eLwQ4qXbsiB26Zc9FimJhsp93Xi9MTerMw=GA@mail.gmail.com>
+Subject: Re: [PATCH] net: lwip: dhcp: support arguments for TFTP file download
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, E Shattow <lucent@gmail.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,66 +100,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Jerome Forissier <jerome.forissier@linaro.org> schrieb am Do., 14. Nov.
+2024, 18:10:
+
+> The dhcp command is supposed to have the following syntax as per
+> "help dhcp":
+>
+>   dhcp [loadAddress] [[hostIPaddr:]bootfilename]
+>
+> In other words, any arguments should be passed to an implicit
+> tftpboot command after the DHCP exchange has occurred.
+>
+> Add the missing code to the lwIP version of do_dhcp().
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  net/lwip/dhcp.c | 27 ++++++++++++++++++++++++++-
+>  1 file changed, 26 insertions(+), 1 deletion(-)
+>
+> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+> index 23b56226921..6f987e469d6 100644
+> --- a/net/lwip/dhcp.c
+> +++ b/net/lwip/dhcp.c
+> @@ -111,9 +111,34 @@ static int dhcp_loop(struct udevice *udev)
+>
+>  int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  {
+> +       int ret;
+> +
+>         eth_set_current();
+>
+> -       return dhcp_loop(eth_get_dev());
+> +       ret = dhcp_loop(eth_get_dev());
+> +       if (ret)
+> +               return ret;
+> +
+> +       if (argc > 1) {
+> +               int i;
+> +               char **tftp_argv;
+> +               struct cmd_tbl cmdtp = {};
+> +
+> +               /* Invoke tftpboot with the arguments passed to dhcp */
+> +               if (argc > 3)
+> +                       return CMD_RET_FAILURE;
+> +               tftp_argv = malloc(argc * sizeof(char *));
+> +               if (!tftp_argv)
+> +                       return CMD_RET_FAILURE;
+> +               tftp_argv[0] = "tftpboot";
+> +               for (i = 1; i < argc; i++)
+> +                       tftp_argv[i] = argv[i];
+>
+
+Couldn't you just pass the original argv and argc if argc > 1.
+
+Best regards
+
+Heinrich
 
 
-On 11/14/24 00:59, Tom Rini wrote:
-> On Sat, Nov 09, 2024 at 04:22:26PM +0100, Heinrich Schuchardt wrote:
->> On 11/9/24 16:12, E Shattow wrote:
->>> On Sat, Nov 9, 2024 at 6:20 AM Heinrich Schuchardt
->>> <heinrich.schuchardt@canonical.com> wrote:
->>>>
->>>> Hello Jerome,
->>>>
->>>> Using the old network stack U-Boot's dhcp command can be used to
->>>> download via TFTP. This fails with the lwIP stack:
->>>>
->>>> StarFive # dhcp $kernel_addr_r 192.168.1.103:/vf2/grubriscv64.efi
->>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.... done
->>>> DHCP client bound to address 192.168.1.47 (233 ms)
->>>> StarFive # tftpboot $kernel_addr_r 192.168.1.103:/vf2/grubriscv64.efi
->>>> Using ethernet@16030000 device
->>>> TFTP from server 192.168.1.103; our IP address is 192.168.1.47
->>>> Filename '/vf2/grubriscv64.efi'.
->>>> Load address: 0x40200000
->>>> Loading: #################################################################
->>>>            #################################################################
->>>>            #################################################################
->>>>            #################################################################
->>>>            #########
->>>>            4.1 MiB/s
->>>>
->>>> We should try to provide the old functionality to make the move to lwIP
->>>> seamless.
->>>>
->>>> In the CI QEMU instances we already have
->>>>
->>>> test/py/tests/test_net.py
->>>>
->>>> to test tftpboot. We should add an equivalent dhcp test.
->>>>
->>>> Best regards
->>>>
->>>> Heinrich
->>>
->>> It is useful to have dhcp assignment without the side-effect of trying
->>> to load files. Your script can be updated to:
->>
->> The dhcp command was explicitly built to support booting by retrieving a
->> filename from the DHCP server and then loading it from a TFTP server. The
->> recovery of many routers and IoT devices depends on this feature.
->>
->> There is an environment variable autostart that controls if the file is only
->> loaded or booted.
->>
->> If we want to change the behavior, it should be via a well reviewed patch
->> and not as a side-effect.
-> 
-> Yes, lwIP needs to match the long standing behavior here.
-
-This is an oversight on my part, sorry. I just sent a fix [1].
-
-[1] https://lists.denx.de/pipermail/u-boot/2024-November/571786.html
-
-Thanks,
--- 
-Jerome
++               ret = do_tftpb(&cmdtp, 0, argc, tftp_argv);
+> +               free(tftp_argv);
+> +               return ret;
+> +       }
+> +
+> +       return CMD_RET_SUCCESS;
+>  }
+>
+>  int dhcp_run(ulong addr, const char *fname, bool autoload)
+> --
+> 2.40.1
+>
+>
