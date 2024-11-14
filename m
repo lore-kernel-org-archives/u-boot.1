@@ -4,81 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62071D6A222
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 17:33:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0B09D6A221
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 17:36:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E32E588B9F;
-	Thu, 14 Nov 2024 18:33:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6AE308964B;
+	Thu, 14 Nov 2024 18:36:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="otDfwWcf";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jp9W4b6G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 013FE88001; Thu, 14 Nov 2024 18:33:52 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EEA0F8963D; Thu, 14 Nov 2024 18:35:59 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 029CC88B9F
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 18:33:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E99F8964E
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 18:35:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3e60d3adecbso484494b6e.2
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 09:33:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731605627; x=1732210427; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=B2Yjf4OvbE4LpII9ixFcI9qGlZc9NHDnIJtYhP40X0I=;
- b=otDfwWcfO5w8Qx0zoKrdQIDsbJgF7jXgT/GcGLoB7W+a+TeM/aXJhXbvwA9BsSbgDR
- NTXg/JcDEh30uDHeAvJGh3pEbzUNnHIG8Qd6sqpAgq+1YJn2xQqpuIephtY5/hkVbvaw
- G6QPosUAMLVw4d7/lOkDXNKMKanCtTnLcNCoQ=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id C36013F849
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 17:35:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1731605756;
+ bh=zjDk/cYQiHWd2fFCqscZPVVaABWZpGBk6mvqOCtFcmQ=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=jp9W4b6GuI3VND+alBV+nUcx7RE9HPL/sWWvkPpx5UXTH/wdOOYfQ/NofMw5QmjGC
+ C47JV7F7UYbmzpdWkp44l3hZysfle8gbd0UFYsRqIlfxZkLo9R1W5UrlZLAednVLHn
+ +kiDgh7h5oknJzNZMWqyep6N4NvulKQJ4iWi2eut8lgDoZxI/uyEyyVkeig9xs12bC
+ iqvYMEh3fOJbnPC/cZ7tUSuoVnEi/06qi5cOjCiaKcbF8gou6iFnEu27eN+cPI4zZw
+ ttJ8i/NynLljpTvU7UXjhV0iknVxXSnlJ1zyXifaREVpozSgbaZAaRE/r2l6cVERaU
+ FL/4igIWnDAmQ==
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-2e9e34fb867so1012696a91.0
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 09:35:56 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731605627; x=1732210427;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=B2Yjf4OvbE4LpII9ixFcI9qGlZc9NHDnIJtYhP40X0I=;
- b=WsKAu0pr+xkqxLS1oQfgijU5NJZ6kP2g8GMM0rmNr5pBlZV85ZSVH6A0Bn3gyzXTwa
- 7g2gGGQ5kFKGG6/xjWKzvBYSMf6GK3FjvBtich2KDiDLfk4oZxANUXJwLJ3u1FABdLxx
- 1PfydVEVjYpt3ORdfwaPne798VzTHCJE3FEkW+4ruoyu+zkeuzWrc8p6zfD8frlEYU2N
- fSh7QPYcYzUeJOYHWorpdWGJQyZ24ukadg21HwrpsCSD18rbCMUm7Hp3ZguWSwXgghw6
- HnhhyqwZ+QaBqJo2JlQ2PEQbtSz4gD0XDR4KhFRY5+jW5tXFd4ePObuzZ3pouBCvJL0c
- g5Dg==
-X-Gm-Message-State: AOJu0Yw3cnzBgv8bhQ60rEAWSWPowjmqrjC0y5zhHd7BXlga7ACQBkrW
- lzyPBACavtw4tBKwiW4UDg+4GE5TJwLbxKEu0EkD1wIRUnnFroxmIa5WtvV4VhI=
-X-Google-Smtp-Source: AGHT+IGGyvd8jTzHdA5ymRECoBbi49Wnl9qMFHcpGFNW2xyHNjTwWIAlUu9Rb5Dc6NI1U5PNgqcF8A==
-X-Received: by 2002:a05:6808:1896:b0:3e7:63ce:2025 with SMTP id
- 5614622812f47-3e7b7bf6081mr3289505b6e.37.1731605625124; 
- Thu, 14 Nov 2024 09:33:45 -0800 (PST)
-Received: from bill-the-cat ([145.14.135.248])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3e7b85e6af3sm462773b6e.38.2024.11.14.09.33.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2024 09:33:44 -0800 (PST)
-Date: Thu, 14 Nov 2024 11:33:41 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Holger Brunck <holger.brunck@hitachienergy.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Heiko Schocher <hs@denx.de>, Stefan Roese <sr@denx.de>
-Subject: Re: ZDI-CAN-24679: New Vulnerability Report
-Message-ID: <20241114173341.GI3600562@bill-the-cat>
-References: <DM5PR0102MB3477A6AC67623306D970177980AC2@DM5PR0102MB3477.prod.exchangelabs.com>
- <BYAPR01MB38307E0A0D8A480B35F122F6805B2@BYAPR01MB3830.prod.exchangelabs.com>
- <20241114145636.GF3600562@bill-the-cat>
- <868d9f51-0d84-4c22-abdc-95cd60184465@amd.com>
- <20241114163354.GH3600562@bill-the-cat>
- <DU2PR06MB8334E5B005467C449D9923BEF75B2@DU2PR06MB8334.eurprd06.prod.outlook.com>
+ d=1e100.net; s=20230601; t=1731605755; x=1732210555;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zjDk/cYQiHWd2fFCqscZPVVaABWZpGBk6mvqOCtFcmQ=;
+ b=RQewrrMOeNUFKfoL4Gfj/EQUFlWjLEE1cLvkNEQerH7BvO/PWJbFqg3052n3b+MIaD
+ auCfgv510EJVX9gilkViOD40uffmwWmWWFvTGHvahzmo74ZYC18+pflRRj/rZNYY0Mcp
+ ZoKwi8ygyPgKZAY9OgnFiZR46Tra1okHtINNNSifVuvegS0OiFkuuNnQLYP4tI/iAyg0
+ YAsBQop/qmuks2ftlF/viT4pNzBjNcyaE6ylqaI7EBRzK9vxr5SDJs+sZq5lQcsRwKVk
+ f+GZBdKltmjxVVScQpqdPq2Gh6UERJqdwGblL0xN5p43rZEPv4YyeXVgi0Vf5hmU5u6e
+ 8aMg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZvdh8m/pURhI8+dsudyqJVr64Rrg0kPk77vsBd8XqkEA1V6S5n7w0YmZmCbE1y27bYtPKcEM=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywbz1DEBadHXx6SE6iG5jSLsfQ4ajIrsp3akfY64gVCKT4r4DTy
+ 8XZDx70QG2LFQWmo8H4MY3yiDgwriuR3L/DVjEz5EZ70G8Dg1Dy/lhec8Rig8qx87NS+CQ1Ivqx
+ X+3dKKD/zYtO7U1Ndb0vXwAdYLibXI/DWskeIrek6+xQSjHm0hountvwd9GnH9UXt1jaZTpPX14
+ XuWLewaTxvcSWPzbc4mfJ/UQL5jTSRb2a7rKXvZRwCDQ==
+X-Received: by 2002:a17:90a:dfc4:b0:2ea:1293:7db1 with SMTP id
+ 98e67ed59e1d1-2ea12937f38mr1087488a91.33.1731605755457; 
+ Thu, 14 Nov 2024 09:35:55 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEFSOECu2300UiWGtX/LN9slr4fv91AMkvxDXuAKrJLJ14nbf53F6p9RL8KgZ9DsbHFfSQiOVBJb4CHJ78quRs=
+X-Received: by 2002:a17:90a:dfc4:b0:2ea:1293:7db1 with SMTP id
+ 98e67ed59e1d1-2ea12937f38mr1087468a91.33.1731605755187; Thu, 14 Nov 2024
+ 09:35:55 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1yGeVhqPaK8JlR9+"
-Content-Disposition: inline
-In-Reply-To: <DU2PR06MB8334E5B005467C449D9923BEF75B2@DU2PR06MB8334.eurprd06.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241102163259.305802-1-heinrich.schuchardt@canonical.com>
+ <20241114172654.GA4059396@bill-the-cat>
+In-Reply-To: <20241114172654.GA4059396@bill-the-cat>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Thu, 14 Nov 2024 18:35:44 +0100
+Message-ID: <CAM=mAOmFn0tytht3oK1F59=-nGxuLJmtSr2HpJDyTf=LWKYQOg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] tools: use cryptographically safe RNG
+To: Tom Rini <trini@konsulko.com>
+Cc: Hugo Cornelis <hugo.cornelis@essensium.com>, Simon Glass <sjg@chromium.org>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Alexander Kochetkov <al.kochet@gmail.com>, 
+ Alexander Dahl <ada@thorsis.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,50 +105,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Tom Rini <trini@konsulko.com> schrieb am Do., 14. Nov. 2024, 18:27:
 
---1yGeVhqPaK8JlR9+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Nov 14, 2024 at 05:01:41PM +0000, Holger Brunck wrote:
-> Hi Tom,
->=20
-> > >
-> > > We have actually discussed this recently and we have other issues with
-> > > jffs2 and not going to fix it or recommend to use it.
-> > > JFFS2 should be removed from our configs and it is also not under our
-> > regression.
-> >=20
-> > Ah OK, thanks. Adding a few more maintainers now then.
+> On Sat, Nov 02, 2024 at 05:32:59PM +0100, Heinrich Schuchardt wrote:
+>
+> > The PRNG implementing the random() function only has 2^31 states and
+> > therefore is unsafe to use for cryptography. Use arc4random() instead.
 > >
->=20
-> for all the km PPC boards we can remove the config.=20
->=20
-> Should I prepare a patch?
+> > Fixes: cc34f04efd63 ("tools: image-host.c: use random instead of rand")
+> > Addresses-Coverity-ID: 312953 Calling risky function
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> >  tools/image-host.c | 35 +++--------------------------------
+> >  1 file changed, 3 insertions(+), 32 deletions(-)
+>
+> Now I get:
+> /home/uboot/u-boot/u-boot/tools/image-host.c: In function
+> 'fit_image_setup_cipher':
+> /home/uboot/u-boot/u-boot/tools/image-host.c:439:17: warning: implicit
+> declaration of function 'arc4random_buf' [-Wimplicit-function-declaration]
+>   439 |                 arc4random_buf((void *)info->iv,
+> info->cipher->iv_len);
+>       |                 ^~~~~~~~~~~~~~
+> /usr/bin/ld: tools/image-host.o: in function `fit_image_cipher_data':
+> image-host.c:(.text+0xb41): undefined reference to `arc4random_buf'
+> collect2: error: ld returned 1 exit status
+> make[3]: *** [scripts/Makefile.host:104: tools/dumpimage] Error 1
+>
+> in the docker container. I gather this means arc4random_buf is not as
+> widely available as assumed.
+>
 
-Yes please (and I assume Michal is as well for microblaze-generic),
-thanks!
+glibc 2.36 is required published 2022-08. Ubuntu Jammy is 22.04.
 
---=20
-Tom
+Besr regards
 
---1yGeVhqPaK8JlR9+
-Content-Type: application/pgp-signature; name="signature.asc"
+Heinrich
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2NHUACgkQFHw5/5Y0
-tywhxgwApjo+OnxXXSm+ZwquGXzclchRjA2ya24Ni5EFdluZIyG9gQ4i1TdG+xhA
-35O//91uhgy8GMyXycydomctLPiiyIc3L/6GQpQgx0NdVAv9wFeHajrRMUt3Wkr5
-aiwUG3Lnb4VMz/l3kotHKRpcBathyc6fGMv0DEx4YoZgQe9FG+NlXbAYVIJVzOUF
-K2VWcxZwdoRsSiBzSZ8OkOmoEFLwg1riSitSNee4mpGDCbJVuDqBpggYpe4we9xm
-pYm1pqi/uKkRe//+OLWR2qbFkqLwsZmbjGbdCxcvxVEkvSCzuYhfIEsRgpxXhXmV
-A14CSC/Y31Pw3eP93Q5Y91/a4HdBImfTK5GJjbUPZCQlDajmiN5ClXRwF6IjTQO6
-T2dIxoRHzFPd2PDQfH/G/ueDP3iZW2lGVzy4LinLO3rDBtHKSZXa0kWlN4S1PIqb
-QU580d9YKdHA/D0DqgmwQ2/woJG8HjAlXgFyjZ0F1NfQxrsrSDJed2eXlJE+AerA
-QUJ1bibT
-=t3tH
------END PGP SIGNATURE-----
-
---1yGeVhqPaK8JlR9+--
+> --
+> Tom
+>
