@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF5F5D68B26
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 14:20:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C29E6D68B28
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 14:20:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E536289102;
-	Thu, 14 Nov 2024 15:20:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5489E894C9;
+	Thu, 14 Nov 2024 15:20:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TIwFpBHV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DoASUiGa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA4D288C66; Thu, 14 Nov 2024 15:20:32 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 4A5A789584; Thu, 14 Nov 2024 15:20:47 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87FD489198
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 15:20:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BF2B88C66
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 15:20:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3821e0b2262so296194f8f.1
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 06:20:30 -0800 (PST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43158625112so6513005e9.3
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 06:20:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731594030; x=1732198830; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1731594044; x=1732198844; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9wrAN9aP12uvude0Cj4Ioz5uzvGeQswDUabI0tc/ibg=;
- b=TIwFpBHVoaBg+0HFjWUhLodNMs5J7jy2VniN+TsnEkZ/BuBElHTFEoF7TIKI+zAdrY
- d6rmpH4mLzIqoGYWwAo0TJyUS4RRSEI9sF6PPXi7C3ute8DYmE5IXFp7B3ZysGnXLiWZ
- yaGyYOAgHKMSMGCRKKSe9xvklH28nQaaP8LT8FoKX1AcCvyr2KlR/s09wk+KpU3cd+hR
- JxGPHemjI9eiauTAJXZEdd1TX3physmIjOo/OoNcL5wCb68hhpN6hXNsIBSq9WvQiOrk
- XGYvTJ71ByuzEzN1iPST4bSqO588cGD2ZiDTOY1IdOv8qVQKzgBhYF0nKve2oefV2i16
- iHtQ==
+ bh=T9s26tvoMWoE0LUEf7FGl7DyHYFrTDXHJOPnFUOKpuM=;
+ b=DoASUiGaUGUT180wuXCcfSjbc375HLAYE+7+hRMMDsmEOg/Tqkzy1EO+LDwcMhan33
+ UGzvSAxPJI3tsS1dXwlooJxjtGg2c+MWE+RPVDXo1+eKLaxqsXZ6WMg2jN1ZQXoqsxsb
+ fl4jr+hn2W2XlJZz/qkN2lnErLoD8psH4xGY7AwBgHw44DzmFbT2Bbgk9Tj82d/NzJ/r
+ OeX9Z6pMyA5+aQTS91gupfEaGfcDDjjzChd7vdS6RvBkiw4BSS0qnMRgN7Ylu4nqNTeH
+ fnfxNHDjvGXjE5s7fFxGVjfABtkCD4lkoZkMJyiBzD6mE0RpTjL0a/3+IhcRa5LdAcuH
+ L7Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731594030; x=1732198830;
+ d=1e100.net; s=20230601; t=1731594044; x=1732198844;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9wrAN9aP12uvude0Cj4Ioz5uzvGeQswDUabI0tc/ibg=;
- b=ScC8Do+9wBOBNvmf02OLPItIhzlesarfoaABGnrj2nDqNiiorWs8c2vqdBPaevMQsk
- BAeKWRDSVhqlHGGDUKDkDV1CSz5vug1AjkX1FG/nlJCjVW4Kj95yfsmsW14m1v2bNILw
- TDqhuj8UtSEqVQ7cwjhaboBv1MRnKA6MXnE5W9TNWgqvErnLZaLeMVPcPGNUxBDXE7kQ
- +QdYEBUYb9K5+Zyf14OBqg7tcvIYXnOBwhhUXRpdcNBRF89BooxB/+d5Bc5rx5zBgkY+
- 92QKFrsepjx3EUhFxem6lPXjsIZvr2b9HwqvwCDVbo3wEQ4OXGX1tBQ0BZRXJJCfuFny
- MKEA==
-X-Gm-Message-State: AOJu0Yy37Ju79HpTxFOsF6Hv1xPQ3pLDOLsc8H/67wp37MyQsHaVQCrK
- fNxMe4Bfp0cIAyh9zmNrMH8KL0FDAAqV9qDtFX4r6h70By/grruabETfUfWA55NLFuZ2Zfy07Ye
- j3l0=
-X-Google-Smtp-Source: AGHT+IHJByY+kEwOUJ9HcG+T3ptFpVGBOwDQPrafs/HQyVfr4xZertrhTVickQOkokfe1EFi7GJfeA==
-X-Received: by 2002:a05:6000:270a:b0:382:1c00:d46e with SMTP id
- ffacd0b85a97d-3821c00d795mr988941f8f.37.1731594029582; 
- Thu, 14 Nov 2024 06:20:29 -0800 (PST)
+ bh=T9s26tvoMWoE0LUEf7FGl7DyHYFrTDXHJOPnFUOKpuM=;
+ b=hTUEuEtWvvbT2MQjccsUWXLuSn6s1nSpx22izAxDpVlh6Ib86EMAA/tK9MjsoJbl5B
+ Yut5oemDjXjqQcxPIeKWFDD/28wGaYLmC1LFD9IbEp60od8cgaXQh5Dzk01jXnS/UWhv
+ rcK7QHvPKU/vzj2LVwEqwscH2CDGTy10SXrlhhc4Dr8ZTkWhufINRgDgWJdcrGT69Sn/
+ 51mby2KYMwDSzWc7kbZAa7uZDM9liz7lFzBO5m6kaQd0yMQPUoJ1OnqjANCEn+JcVVXu
+ k6P3PuMNwB7nHDNfkZWxI9hqb+j2kBiEgN6OBqNqbbtSEYQjB1eyz6eASqX+XO4SalAE
+ gByw==
+X-Gm-Message-State: AOJu0YyB+6C24+305GeVw4Lwy2GN8sH7Hrp/9xe7XDv2wJpbtR++ODAe
+ M9+yuPsakhOzuY8Pa+mo83JtWnUN2Lg1Fhs93q6YgSqPTjGWctQVNnkCGzvLoQ1zsLpfANrkvWc
+ /qkE=
+X-Google-Smtp-Source: AGHT+IHV16eaQzOIBD8LJwgoe/UiuLRzYYkLXEUPChPhSIGLXppeRk00SuPmuOmZ15JJ7vLY/BMixQ==
+X-Received: by 2002:a05:6000:400c:b0:37d:50ed:daa8 with SMTP id
+ ffacd0b85a97d-38218502c9dmr2244338f8f.18.1731594044594; 
+ Thu, 14 Nov 2024 06:20:44 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:3895:27b4:20b7:7653])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3821ae2f602sm1581384f8f.90.2024.11.14.06.20.29
+ ffacd0b85a97d-3821adbebe2sm1582047f8f.61.2024.11.14.06.20.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2024 06:20:29 -0800 (PST)
+ Thu, 14 Nov 2024 06:20:44 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
-Subject: [PATCH] doc: cmd: wget: document lwIP syntax
-Date: Thu, 14 Nov 2024 15:20:04 +0100
-Message-Id: <20241114142004.2051240-1-jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] net: lwip: wget: update help string
+Date: Thu, 14 Nov 2024 15:20:40 +0100
+Message-Id: <20241114142040.2051271-1-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,127 +91,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The lwIP version of wget supports a different syntax with a URL,
-in addition to the legacy syntax. Document that.
-
-While we're at it, fix a couple of minor issues in the legacy
-syntax:
-- hostIPaddr can be an IP address or a DNS name
-- path is mandatory
+The lwIP version of wget also supports the legacy syntax. Document it in
+the help string.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- doc/usage/cmd/wget.rst | 71 +++++++++++++++++++++++++++++++++++-------
- 1 file changed, 60 insertions(+), 11 deletions(-)
+ cmd/net-lwip.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/doc/usage/cmd/wget.rst b/doc/usage/cmd/wget.rst
-index b8ca35bb140..5be01a22e47 100644
---- a/doc/usage/cmd/wget.rst
-+++ b/doc/usage/cmd/wget.rst
-@@ -11,29 +11,51 @@ Synopsis
- 
- ::
- 
--    wget address [[hostIPaddr:]path]
-+    wget [address] [host:]path
-+    wget [address] url          # lwIP only
-+
- 
- Description
- -----------
- 
--The wget command is used to download a file from an HTTP server.
-+The wget command is used to download a file from an HTTP(S) server.
-+In order to use HTTPS you will need to compile wget with lwIP support.
-+
-+Legacy syntax
-+~~~~~~~~~~~~~
-+
-+The legacy syntax is supported with the legacy network stack as well as
-+lwIP. It allows only HTTP.
- 
--wget command will use HTTP over TCP to download files from an HTTP server.
- By default the destination port is 80 and the source port is pseudo-random.
--The environment variable *httpdstp* can be used to set the destination port.
-+The environment variable *httpdstp* can be used to set the destination port
-+(legacy nework stack only).
- 
- address
-     memory address for the data downloaded
- 
--hostIPaddr
--    IP address of the HTTP server, defaults to the value of environment
--    variable *serverip*
-+host
-+    IP address or DNS name of the HTTP server, defaults to the value of
-+    environment variable *serverip*.
- 
- path
-     path of the file to be downloaded.
- 
--Example
---------
-+
-+New syntax (lwIP only)
-+~~~~~~~~~~~~~~~~~~~~~~
-+
-+In addition to the syntax described above, wget accepts URLs if the network
-+stack is lwIP.
-+
-+address
-+    memory address for the data downloaded
-+
-+url
-+    HTTP or HTTPS URL, that is: http[s]://<host>[:<port>]/<path>.
-+
-+Example with the legacy network stack
-+-------------------------------------
- 
- In the example the following steps are executed:
- 
-@@ -52,13 +74,40 @@ In the example the following steps are executed:
-     HTTP/1.0 302 Found
-     Packets received 4, Transfer Successful
- 
-+Example with lwIP
-+-----------------
-+
-+In the example the following steps are executed:
-+
-+* setup client network address
-+* download a file from the HTTPS server
-+
-+::
-+
-+   => dhcp
-+   DHCP client bound to address 10.0.2.15 (3 ms)
-+   => wget https://download.rockylinux.org/pub/rocky/9/isos/aarch64/Rocky-9.4-aarch64-minimal.iso
-+   ##########################################################################
-+   ##########################################################################
-+   ##########################################################################
-+   [...]
-+   1694892032 bytes transferred in 492181 ms (3.3 MiB/s)
-+   Bytes transferred = 1694892032 (65060000 hex)
-+
- Configuration
- -------------
- 
- The command is only available if CONFIG_CMD_WGET=y.
-+To enable lwIP support set CONFIG_NET_LWIP=y.
- 
--TCP Selective Acknowledgments can be enabled via CONFIG_PROT_TCP_SACK=y.
--This will improve the download speed.
-+TCP Selective Acknowledgments in the legacy network stack can be enabled via
-+CONFIG_PROT_TCP_SACK=y. This will improve the download speed. Selective
-+Acknowledgments are enabled by default with lwIP.
-+
-+**Note**: U-Boot currently has no way to verify certificates for HTTPS.
-+A place to store the root CA certificates is needed, and then MBed TLS would
-+need to walk the entire chain. Therefore, man-in-the middle attacks are
-+possible and HTTPS should not be relied upon for payload authentication.
- 
- Return value
- ------------
+diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
+index 42f8bd6b259..4dc97c6e184 100644
+--- a/cmd/net-lwip.c
++++ b/cmd/net-lwip.c
+@@ -39,7 +39,8 @@ U_BOOT_CMD(
+ #if defined(CONFIG_CMD_WGET)
+ U_BOOT_CMD(
+ 	wget,   3,      1,      do_wget,
+-	"boot image via network using HTTP protocol",
+-	"[loadAddress] URL"
++	"boot image via network using HTTP/HTTPS protocol",
++	"[loadAddress] url\n"
++	"wget [loadAddress] [host:]path"
+ );
+ #endif
 -- 
 2.40.1
 
