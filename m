@@ -4,70 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51D89D6A228
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 18:55:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7B8BD6A221
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 18:59:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BF5688CF1;
-	Thu, 14 Nov 2024 19:55:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4DA0888B99;
+	Thu, 14 Nov 2024 19:59:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KSqVt7TX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GD4ym6RW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CDDF89651; Thu, 14 Nov 2024 19:55:26 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 4449588CEC; Thu, 14 Nov 2024 19:59:41 +0100 (CET)
+Received: from mail-ua1-x92f.google.com (mail-ua1-x92f.google.com
+ [IPv6:2607:f8b0:4864:20::92f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1767B88CEC
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 19:55:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C689B88606
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 19:59:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2fb51e00c05so16700911fa.0
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 10:55:24 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-851f5d3001fso408161241.1
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 10:59:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731610523; x=1732215323; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zfQ1gvHwMpoqXUlhdrbCeWrmMDGgnfiGxNnumjJpeQ4=;
- b=KSqVt7TXZgQq9zoa2l5LF975sLGYnhc+wCx0qfg8/XBI7e02EEjWM8q3g+rrdyNgdK
- XK29lAwjgo1hhVgKYQCgYs1O6s06ULWumapuY4TSlLlW8leL5wdmWl9oQhmjcmXIv+tK
- y/q1zjTuMOGha8lIputo7KM34sT4h0YMeHY28=
+ d=konsulko.com; s=google; t=1731610777; x=1732215577; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LmyaJTy0P0D0Xkyj/Ucld+TRFm4Kl/uDXkKb7tYsPFc=;
+ b=GD4ym6RWzGHMXntCQnRFgNgeV+Ff6cL9IxGlCF9NnGBKtJ3bJghcsVcUqrowFSpAIF
+ K5uCbe+t89mcY5p3EiAnhtjRr3Iy7Gu2N2B56FQ7DyPhbfFClU+NujTS9OBdDi/RjtKt
+ gfqVkNuGJDnClraHOIJ6azjYbhEX1X9oAVlDY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731610523; x=1732215323;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zfQ1gvHwMpoqXUlhdrbCeWrmMDGgnfiGxNnumjJpeQ4=;
- b=FQmD1cRYuPTKkNQCmUwwiFHrbPhvxMJNyWEFu3zp6TXVFkfHFlI2um5STTaI2fbBEZ
- u7Towvp2H5y3HgdLmZENOncmWkRkTkD2Ca+C76pzxif3PGDYa7FP7LsDMLP0GKZEChyI
- Wt/UEzsonNNCtWjdzsw4bWuNFJ1AcxYm/6lOImsdE6pqdxm1IuLlve4Hvrt+pD4BhFqp
- ITjR6lFi/5CPpHwZTf4SLhXEfTkK+px67QPv2JeKf3YaYeqB9ANTXxZh4XL9kcLPWY5r
- 4gw9x/O4n70UNYanph2QK4pUgqcRSeVk/5OxNdRqbsrHU7EAJjlE8XEj5zy+wiT3tfEx
- VbEQ==
-X-Gm-Message-State: AOJu0YybZxLz3Kul5GHMXObqcoartT/8j9jhcXB8yGgre0FpYJYLToT5
- hUqZL27V3jg0pnLi4GJUq+CBV1y2Mbs2fUbtUpXcuIqQyar+nVbC8zd/RO2gVaGPJpXT5pbp5pe
- 9XZbVT0FZX4B+Irk0HVCUlQFFhWig7dKrrtPH
-X-Google-Smtp-Source: AGHT+IGnOo4wHjGE2yxICZvkZaB3WzzwX5223lFqV1dJ13TpgXxh5uoRm6PExjPe5dmHblZptTqnNUbp0xy8UNK+ZfQ=
-X-Received: by 2002:a05:651c:991:b0:2fa:c0b5:ac8c with SMTP id
- 38308e7fff4ca-2ff606686f2mr1980561fa.21.1731610523183; Thu, 14 Nov 2024
- 10:55:23 -0800 (PST)
+ d=1e100.net; s=20230601; t=1731610777; x=1732215577;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LmyaJTy0P0D0Xkyj/Ucld+TRFm4Kl/uDXkKb7tYsPFc=;
+ b=Y5WrGlEKOM/8Dif1rLiLz5bexTkk9RvbXpTrZnvaHe22B+9Ppl6waBrTc27jEgslWT
+ BhzkxzTdChcrdTqWKk6EvZj1LGpKZSeg8xQ8aSg4YNwu6IZyP4ml7+vunXWMi+8sAQlG
+ rxDu+mDXO6S5VDVzIGQk2cKTMpUZ8aa6Ym7q7LT7KYc482ImHD04ypJyk6ZcMcBclG0e
+ lwoz2GwPR9AVwNWY8SaNVKm7ZCAmWdovssUMRsc/IxjY9sn+dQO+IbAFJeF/bjODroHM
+ 2CDlQHWhJGydzbCeJ1IgXvIFdSNETq1hscIttVWiqhlU6hRvJukEv/zg27ewk8Fm6R3H
+ hayQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU0W7+/jGL3i4Va1lwN/EF8/C+qVDBh/JVUfpByu1ehIav7tJQyPgAEV51dx//M/kACJK5ZfYM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhYJWmTN8LBOoEdPZXyTiLzLkZ9GDv2u3GCRSZPnl0KLEqdFS+
+ C3006MDYkef6Q3iRMmPjQd9DdsHjBG4cLJQ1m7W8XAWLd4LPriAqpPFdxo39Pe0=
+X-Google-Smtp-Source: AGHT+IHCVeJCTCdL5GKp5pegN395jvV0QZcNOEVuLTh492zzOzcKoViKi/ueSlMPot8LqhmcZD8RHQ==
+X-Received: by 2002:a05:6102:50ac:b0:4a4:8fc3:9b7 with SMTP id
+ ada2fe7eead31-4ad62b9073bmr193946137.14.1731610777586; 
+ Thu, 14 Nov 2024 10:59:37 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b35c99d7ebsm78486985a.35.2024.11.14.10.59.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Nov 2024 10:59:36 -0800 (PST)
+Date: Thu, 14 Nov 2024 12:59:33 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Subject: Re: [GIT PULL] Please pull u-boot-amlogic-next-20241113
+Message-ID: <20241114185933.GL3600562@bill-the-cat>
+References: <6d6d1630-838b-460b-ac4f-1c4923bfb40b@linaro.org>
 MIME-Version: 1.0
-References: <20241113195519.49150-1-heinrich.schuchardt@canonical.com>
- <CAFLszThV5a16Q2BqxNn6jX=EavRf--gWESs-4riz_paqgzo9dQ@mail.gmail.com>
- <CAM=mAOkGAfg585Aw7To-egOf3w6bUX4WZMU10F3GN6L9_GN1ig@mail.gmail.com>
-In-Reply-To: <CAM=mAOkGAfg585Aw7To-egOf3w6bUX4WZMU10F3GN6L9_GN1ig@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 14 Nov 2024 11:55:11 -0700
-Message-ID: <CAFLszTjqjB09m04v25Xb7CN8h7CYJjq4tcgqXnjVW7LAxqag1A@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: run bootdev_hunt() to find ESP
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="oK9y9Wdc7YaOm40N"
+Content-Disposition: inline
+In-Reply-To: <6d6d1630-838b-460b-ac4f-1c4923bfb40b@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,86 +91,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On Thu, 14 Nov 2024 at 02:55, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
->
->
-> Simon Glass <sjg@chromium.org> schrieb am Do., 14. Nov. 2024, 04:54:
->>
->> Hi Heinrich,
->>
->> On Wed, 13 Nov 2024 at 12:55, Heinrich Schuchardt
->> <heinrich.schuchardt@canonical.com> wrote:
->> >
->> > Some hard devices need specific routines to scan for block devices,
->> > e.g. NVMe (nvme scan), SCSI (scsi start).
->> >
->> > Invoke bootdev_hunt() to find all block devices.
->> >
->> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> > ---
->> >  lib/efi_loader/efi_setup.c | 8 ++++++++
->> >  1 file changed, 8 insertions(+)
->> >
->> > diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
->> > index aa59bc7779d..8e0ff16f3eb 100644
->> > --- a/lib/efi_loader/efi_setup.c
->> > +++ b/lib/efi_loader/efi_setup.c
->> > @@ -7,6 +7,7 @@
->> >
->> >  #define LOG_CATEGORY LOGC_EFI
->> >
->> > +#include <bootdev.h>
->> >  #include <efi_loader.h>
->> >  #include <efi_variable.h>
->> >  #include <log.h>
->> > @@ -228,6 +229,13 @@ efi_status_t efi_init_obj_list(void)
->> >          * Probe block devices to find the ESP.
->> >          * efi_disks_register() must be called before efi_init_variables().
->> >          */
->> > +       if (CONFIG_IS_ENABLED(BOOTSTD)) {
->> > +               int r;
->> > +
->> > +               r = bootdev_hunt(NULL, 0);
->> > +               if (r)
->> > +                       log_debug("No boot device available\n");
->> > +       }
->> >         ret = efi_disks_register();
->> >         if (ret != EFI_SUCCESS)
->> >                 goto out;
->> > --
->> > 2.45.2
->> >
->>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
->>
->> Can we do this later, e.g. when we need to boot? What specifically
->> needs to scan for block devices? Perhaps a better question is: when is
->> the ESP needed? It would be nice to have that info in the commit
->> message.
->
->
-> The setup routine is only entered if running EFI code like efidebug, eficonfig, bothmeth_efi. So this change does not impact users booting via the legacy entry point of Linux
->
-> The ESP holds file ubootefi.var. We need the contents of the file before reading or updating any EFI variable.
->
-> We further need all block devices to be known in eficonfig, efidebug, bootmeth_efi.
->
+--oK9y9Wdc7YaOm40N
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-OK got it.
+On Wed, Nov 13, 2024 at 06:45:23PM +0100, Neil Armstrong wrote:
 
->>
->> I wonder if we could/should delete efi_disks_register() now?
->
->
-> Does bootdev_hunter probe all block devices? Or could there be any that are only bound but not probed?
->
-> I do not see a BOOTDEV_HUNTER for host, pvblock, and blkmap. Is this an oversight?
+> Hi Tom,
+>=20
+> Here's a small fix for khadas-vim3{l} android config, and a drop of
+> obsolete dtsi and include bindings in favor or the upstream ones.
+>=20
+> Thanks,
+> Neil
+>=20
+> The following changes since commit 56accc56b9aab87ef4809ccc588e1257969cd2=
+71:
+>=20
+>   bios_emulator: fix first argument of pci_{read,write}_config_* function=
+ calls (2024-11-04 18:01:58 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot=
+-amlogic-next-20241113
+>=20
+> for you to fetch changes up to 1cdb4e03e684d94456dee0cc30c935d7e25b263d:
+>=20
+>   dt-bindings: interrupt-controller: remove arm-gic.h from include/ (2024=
+-11-13 17:25:07 +0100)
+>=20
 
-Yes, or at least no one did it.
+Applied to u-boot/next, thanks!
 
-Regards,
-SImon
+--=20
+Tom
+
+--oK9y9Wdc7YaOm40N
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2SI4ACgkQFHw5/5Y0
+tywYUQv6A5GLwvO2YgrKax6PHubBrhnF+OqcJnDUDnkb+oc4y+u5wttgR+jZf3aL
+Zj2KpDGuKzPKYzQS7+ufJW9l7h37IHiEFd7evwLt/LziMu0rRYc0wjxz57ov+6cq
+ZCgakI2th9pjFAR6zj+iRfARVJafAuB/oNL1wS0skzt4tgyPITrR5KA6DkcqB5Je
+lynYPqcQxBM/9J6KDqtKxjqsC9Q3uWHm3NzG/eE+Oe/jYIcOCP2UYdc+Q2AiFYaa
+DaoR4FjB5dQj+vvPiYWtkGd1V9wLPF9hOQy28tQC9fkS0KJ/tSit+LFahbULPYWL
+o05XQ0+aeAUnsgl76lh5CtkJ0iNNM5UqlSfbPDTPKQ/PIRJwk0ZvmV18rx0S8avY
+s2KIlctRRnmrJ3B7RQ2bnaZWr5oJOpQCs+OJg5ZdZdSHNXaypGqP1lT9DtqcnAIn
+WF48Unx8efSx32QQ4YK0eNDPNBFOkZAkqdzSr8u4Nvt0umKcyFu84u9h7956jSot
+QEwZlGMr
+=7nJ7
+-----END PGP SIGNATURE-----
+
+--oK9y9Wdc7YaOm40N--
