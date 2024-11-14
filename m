@@ -4,111 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 780E9D65C70
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 11:05:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34C02D65C70
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 11:07:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11D5589614;
-	Thu, 14 Nov 2024 12:05:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8FEF9895CE;
+	Thu, 14 Nov 2024 12:07:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D/XQGufP";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Kxad1aRx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 070C889574; Thu, 14 Nov 2024 12:05:24 +0100 (CET)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EC19189611; Thu, 14 Nov 2024 12:07:35 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17D6C89618
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 12:05:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFA3989574
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 12:07:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2fb584a8f81so4458941fa.3
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 03:05:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731582321; x=1732187121; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=fgq3d3bBYAfyUWPHqpHV5I0Ycd6zp9RbeJnfrs4O+uM=;
- b=D/XQGufPjC+BcCrnbbu8KgESc0DeeRmEleDw0GWDtWAf53rlLlBDYO0jD/M3pQbqbg
- RQm57dlvto3rHl/aWOE2hcTxR5YnTMbJJrMwHVP8VDpgFSNh2g6vpJwa3+LkbdLI9Z7j
- A1NPMVycUXsbYJGoewApIXfd60PLlEdy7iwGcnDSFecilbejygXFolhjWcQaacS578Vf
- DYSavabuzEPNJ57H84RJ/gLXXpRhEuGYynU9qRssejxogujRh9dXp+o7NGHBDdqaSW4o
- SZF4ApnQX1rkm8SoQBA3SwPgwUlqyy7PplADowkJJWHb8Mo2R+gqjP/81IIS7AdAX4vy
- Fu/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731582321; x=1732187121;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=fgq3d3bBYAfyUWPHqpHV5I0Ycd6zp9RbeJnfrs4O+uM=;
- b=kozxGWcejPvsQNhP/6gtnY8HE7Z6AQXqPQOJrHAsnlcZHWh9IG61ae+QWPWQI25uPo
- 7a0+WEsUN604r2aMrh0PCDNCBGnxmMDO7konXDCtJqtmVbj1OhbTM8S5MER5es/UheyF
- jlmKrHsSRDNzbj0cU2LQvLOthD0YSwTd1VY3Em4PRvZoJphEMHfIwqan3fYKeOhJPw2y
- jo0tE1xtp2tXUAPrW3pQOuz4+AlPMu3bpOZHQNOSM8eSDDuls43uxFwTvjOBm+QchMzv
- OrusKdal/b8Lo694eBoHH9s5DtH/0Wk5qh1Z+5Qf6cPuMw6shvh0i4FmE65XSggmgAhh
- awiQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXKJTwY+vubNLjzU4gbY/QEm1HRvGuNQVVgPMgFIU2ZYx/iRK5biV7P59iGL1LVPhjolrQuY4I=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy5TfE5vWeKIeATfW5eQH+iaOO5rPtT1ScdXMsql4lxDZj2ap8V
- aMRICxOj0s4OiIh6LtSEwXPrEvlipR2bSGeB6zET6WS5mso7D/7FWOY56wnS6oA=
-X-Google-Smtp-Source: AGHT+IEhIfRZdP4tVLUfbKJQ0PCSBljId800bhWeGIHB2uBdSVFu4xTyGs5umd9SR7H+4qpRonl0MA==
-X-Received: by 2002:a05:651c:247:b0:2fb:65c8:b4ca with SMTP id
- 38308e7fff4ca-2ff23daf148mr104370611fa.40.1731582321257; 
- Thu, 14 Nov 2024 03:05:21 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:a62a:6bba:b737:406e?
- ([2a01:e0a:982:cbb0:a62a:6bba:b737:406e])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432dab80821sm16372585e9.23.2024.11.14.03.05.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 03:05:20 -0800 (PST)
-Message-ID: <4577b23d-0bb5-4a5a-b1df-8e244f755df7@linaro.org>
-Date: Thu, 14 Nov 2024 12:05:19 +0100
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1731582452; x=1732187252; i=xypron.glpk@gmx.de;
+ bh=Poft6D7dRdt5HOW2fiG9lFuHi7Vo2rAQENhWYqXcWcE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=Kxad1aRxwX1vdxbnNBYPLF+ERYAd/jodllqWk8n+0gRzqpgiC0hWgHWQRWHtKFnj
+ Aor0SeAEVUEmSB8K/kt9MymOpv7VwuBXOCLaxgJ+AKg0Co1OaDHkizPB+gdi60Z2s
+ XCVZNJdqfZIGXZwwJhLfiDc3RaSOj7JHlGVioPG2kPyfOBwqlF7xzPdeCOuGNFjq6
+ yBpmQ+6rbEJhsp3hNmj1PJWKoqG85Q40Ogy/1G4WmlHTwbu2AoGflJmAy4/Re34TT
+ iSqV1culyg1kAlIcVyAQFJ3yQo/BMUaNOZAd37yFl0oA+bDzxSXYItCMaRzNFMmOY
+ eRRA6NBQCN3NZRm+Wg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MbAci-1tmnG80Ex6-00ZbtO; Thu, 14
+ Nov 2024 12:07:32 +0100
+Message-ID: <076d440e-6667-490a-94f5-cd010fb5da49@gmx.de>
+Date: Thu, 14 Nov 2024 12:07:31 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] iommu: qcom-smmu: allow SID 0
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20241113050214.1845595-1-caleb.connolly@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20241113050214.1845595-1-caleb.connolly@linaro.org>
+Subject: Re: [PATCH v2 09/20] bootm: test: Move test into boot
+To: Simon Glass <sjg@chromium.org>
+Cc: Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
+ <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241102193715.432529-1-sjg@chromium.org>
+ <20241102193715.432529-10-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241102193715.432529-10-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:cdeNypncfCAwB+G/N8HPXzXlkAvQCH31oW7A0zaze40m2CmWY9D
+ I0uw3c/jMsyo0FfnJCUcTSAXxtYTWwXwet0Ctkmp8/U8kXMofXEmx7fijQwYn9yqOQ2UGTU
+ hFJWjbVYzD4WxIiMPekmFCmFSwNtbljjz1Ivfknw+EcvjSluOWp82EyeQb1StWNSnfs8NYb
+ Fp9iWcFDOR7PmBonfFN+A==
+UI-OutboundReport: notjunk:1;M01:P0:MecbvG3m3Yc=;YEUGiEtXrpCiWNzg6nGeQbUkDMJ
+ XMTnneKZti9ffyxaM+c1b+aQgvE4K50Q70T1G2o/cZPRzTSsItpyJG3NL6oG3ZKqSTexA0X8e
+ 5l7GP9e+mSzcgEUTJcOVYuZBYU4/qWNz4t+FAaTtEGyccxpeQ1t/VsuPG4iWQd8t09lwEIsb6
+ 6UuLeF+aEem0OPY1JdgjjS37lzJC5W7LyJ/UP1r3AMgEeekuukJQ0ieb36uFIbF7fJpLD1gTc
+ y66cd7D3L4sQX0gEWW8TRV2burNQFnuyyZQsjLIHSyVLi3IervsAPdo/5OmXDekLfE2AmKKLW
+ zFqiKZVhqeHbE6U14m/vOhILevIyUWSyAoQdkEroxSczatu/qoR0+jtOEtfd3PS+BW7Jmtid1
+ H/FnJZTRubOHMjhVTYbGkrPWSCY4YiT46ErpPuOiy59Bvq/mwvJGg01zisV0hEvnk6w1hHhRU
+ Ymqxef4El+47+4xdcEDhnmN/Hd6SN8Ab+4RZn9fuFYaQJFqoxpkNQdBGBtW+ZndFtOYTVw/ah
+ 0HfrquDLerJ8NvNQ5KD8BjJZWf3dLXRVq5kjd1KxS6Dg9WCFPE/pW/Nn5uCuhGnwniDJC4qIE
+ sVpCWK0bgQICwzq6SN+qwWNJqTX4qOXXbYKAUgQDXvZA2CqogqkpWSccrUwHefuvNXmHovLFr
+ O4fgf9R83rW4GTaDoo1ce65agJw+f0S71k5LbeexW57DEAPfZ3hUq0JwW9lLlswCKg4i2aV1H
+ KnIwutZ/G2YEbOkCH2FFdVT1DBf0BEdJTUCAW8mQXsU5pTqfJ5aQ8ht3MJA4EqUg7DCFXQ4aG
+ 5QLsTspsqbh+udppjWaPrYC9YbtHzQcRfxRv7ERpRlBsJMPNcPXjmkiBxRHRb60me+3OZCtaJ
+ OmfaqOEShYKYPEPj/+8oV153M5o5ry3uVFW1S4bG8wkXZwUSxOjRpo4kV
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,37 +88,67 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 13/11/2024 06:00, Caleb Connolly wrote:
-> It turns out this is a very real stream ID. Who woulda thought?
-> 
-> Drop the 0 check on the SID, there's no reason for it to be there in the first
-> place.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+On 11/2/24 20:36, Simon Glass wrote:
+> This test doesn't belong at the top level. Move it into the boot/
+> directory, to match its implementation.
+>
+> This test is currently dependent on bloblist, but the real dependency is
+> on sandbox, so update that.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->   drivers/iommu/qcom-hyp-smmu.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/iommu/qcom-hyp-smmu.c b/drivers/iommu/qcom-hyp-smmu.c
-> index 1b5a09bb7b39..7e07487ad384 100644
-> --- a/drivers/iommu/qcom-hyp-smmu.c
-> +++ b/drivers/iommu/qcom-hyp-smmu.c
-> @@ -133,9 +133,9 @@ static int get_stream_id(struct udevice *dev)
->   	struct ofnode_phandle_args args;
->   	int count = ofnode_parse_phandle_with_args(node, "iommus",
->   						   "#iommu-cells", 0, 0, &args);
->   
-> -	if (count < 0 || args.args[0] == 0) {
-> +	if (count < 0) {
->   		printf("Error: %s: iommus property not found or wrong number of cells\n",
->   		       __func__);
->   		return -EINVAL;
->   	}
+>
+> Changes in v2:
+> - Make the test dependent on sandbox
+>
+>   test/Makefile           | 3 ---
+>   test/boot/Makefile      | 3 +++
+>   test/{ =3D> boot}/bootm.c | 0
+>   3 files changed, 3 insertions(+), 3 deletions(-)
+>   rename test/{ =3D> boot}/bootm.c (100%)
+>
+> diff --git a/test/Makefile b/test/Makefile
+> index 48d8bc91ae6..4366e495a15 100644
+> --- a/test/Makefile
+> +++ b/test/Makefile
+> @@ -4,9 +4,6 @@
+>
+>   obj-y +=3D test-main.o
+>
+> -ifneq ($(CONFIG_$(XPL_)BLOBLIST),)
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Shouldn't this be CONFIG_$(PHASE_)BLOBLIST, see common/Makefile.
+
+Best regards
+
+Heinrich
+
+> -obj-$(CONFIG_$(XPL_)CMDLINE) +=3D bootm.o
+> -endif
+>   obj-$(CONFIG_$(XPL_)CMDLINE) +=3D cmd/
+>   obj-$(CONFIG_$(XPL_)CMDLINE) +=3D cmd_ut.o
+>   obj-y +=3D dm/
+> diff --git a/test/boot/Makefile b/test/boot/Makefile
+> index d8eded20d4f..63487e8d29e 100644
+> --- a/test/boot/Makefile
+> +++ b/test/boot/Makefile
+> @@ -10,6 +10,9 @@ obj-$(CONFIG_EXPO) +=3D expo.o
+>   obj-$(CONFIG_CEDIT) +=3D cedit.o
+>   endif
+>
+> +ifdef CONFIG_SANDBOX
+> +obj-$(CONFIG_$(XPL_)CMDLINE) +=3D bootm.o
+> +endif
+>   obj-$(CONFIG_MEASURED_BOOT) +=3D measurement.o
+>
+>   ifdef CONFIG_OF_LIVE
+> diff --git a/test/bootm.c b/test/boot/bootm.c
+> similarity index 100%
+> rename from test/bootm.c
+> rename to test/boot/bootm.c
+
