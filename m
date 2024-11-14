@@ -4,96 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40705D41C35
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 05:10:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C6FD41C3A
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 05:11:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78D0C895BE;
-	Thu, 14 Nov 2024 06:10:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 44F49895C1;
+	Thu, 14 Nov 2024 06:11:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cWY38b1r";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="EORGVcdF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF6B0895A9; Thu, 14 Nov 2024 06:10:55 +0100 (CET)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6D334895C2; Thu, 14 Nov 2024 06:11:06 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2060f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::60f])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35A47895BE
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 06:10:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 337CE895C1
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 06:11:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-720cb6ac25aso134541b3a.3
- for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 21:10:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731561052; x=1732165852; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EObtkzHgvcvTODQaAmhzQyep9MB6laaJjbLsqi+YFJE=;
- b=cWY38b1rbOEJxKcQUo6pBAbfk7enIR4Pro4QUn14wIhG3ALcWDYkqBXJLBSAIpntsk
- g0pZPT85qF8pdowxtutHjwZJ6WS3ADXARsC/SgH9kyD/R4uxp8DV5paptDHrfJSP+Fxu
- x4Rxl0p6VAJGFImML4SI+hywbTOtlQz7fbSR+osbCDvT5q8mCUbdq3y/QAhy8jOaCM/Q
- SILMEuj1PLln+JIwZBxZ7rIQQPO79jEMT4VVerD+keL6SUgZg6F1FN6hkeC+EVcuNw2W
- lh5yH0di9xKePQilxE9iN9feGIMzXDZPdzXxe4opX/2vXAWIDdhByz/bgcIsX91K9tNZ
- Gypw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731561052; x=1732165852;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EObtkzHgvcvTODQaAmhzQyep9MB6laaJjbLsqi+YFJE=;
- b=l7HR2EN6aqaw5LqA2QamhSXpN53x/hq/+fYO5cSC2/L7vRNJbNWzxKy35YHuELWXQs
- lTaU7lkvI0QDrhIkDLPrEPLOr/smLmqlkMpynFaXy7PK4+uC4DJpsuglkigG5Yu05QKa
- 53h/Z8uyFBqcZLucIESbABX8eUolHf34vQzudbxDQ4WgAO31KyoBH/YVbfcP64j68vG/
- ImwGCp43XJU5TSwGJiPjM7rh+aiy4BLhxA8SI//IdeGAwlSY/KwY6TCOAqNumHnwmLSD
- vwHnbR9BIyDqJ0WV1bqDbKfpmoV4LZZKUu3gWp8+de1P13dQEZqT5uEGgn6XYTKpEZQ2
- 3V4A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXE31bdUgKnKWIRjwfIUwesoaXTjA1vfZwSXrPWLvUbe70Ke2tZ0en42C/7owbU2KqFTduXblk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxO3Wvgq/5y+jfPIwkiMysJdhPke+npcCSJ31ewG8jlf1oK9fyw
- 8IQHp6AEH0GyQ9YUlflaD49X+4lx4fhQhxUqInJF9Mfr4ZD/2AJCp3pqLAUhBSmy0m6luuzBxtx
- LCKp8TzVjexTrI5Kjwjw0BUQPw73gJ1RX91/7MA==
-X-Google-Smtp-Source: AGHT+IG8Gi/1AuA7nqMtjlpl5wZmMfLRtcIp8MOpA326Q2MlH+D/JrHq/2z3PimvlB/EUFzFGnGS+vsaBnLwpgnhZvI=
-X-Received: by 2002:a05:6a00:138a:b0:71e:79a9:ec47 with SMTP id
- d2e1a72fcca58-7241328a5e0mr31522321b3a.6.1731561051307; Wed, 13 Nov 2024
- 21:10:51 -0800 (PST)
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vu/eKfv8eyw4F54Jd5JWvIsyDbTmklkVdV0Ay8ss0aIiryx7WUhODV0alXpka4VsiH/p7gNlGqChz8uvSuu/VcWltyWethyTulqu7tEcAEhf/zcVoQ+ulrpGlDat5V5YPxJq6XDtm1sweS77KDOszvPIsx6pcT6Z2HfG9zUVwcKFVSfq5Aun/rY2GOtVBksE40o5PuUhAaUKt/MIVLjDy65/TdjDTFM7lK/EVa6qCLW79d9+wLiriJTa5Y4aArBVojWnXuJW2ElHZ3ALxdEJAARI/xUnByD7Qjs2OOGOXQwrt+tFjTjgRXN96sBTkK+MHOBFHnIDLeKOJHyXrfXd7A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OxfwRUVwlTZ81loVEGfxB5s+Y/KtSigwjobCbNkL5x0=;
+ b=Ck/m6TE6aOfxfpUIXlheeZCLeFuxsve2ylt0d3HX0i+VyghHzfXVKiWK/vZbNvsPP6z1dzHpmQWgwmbFxJZy6vDfmYwa2rK532c0YO8lRZybQhzP0IC1+p8odQSA4C3Tw+MI9w0MzjvtN4MQZnP11z+WvxUU9G/zKdwd3F2aDqbwxyfcnQgKjymKjN3iHAn9GPCvZIEe2ngtE71SdlmT3Pa8Pus6zIoeWLf/ObwipfBeTtquXpPUG9h8wGAVZtDxlhmdDkto2bLkt3PbE9ahHRysGoFZjlhGyN1959N7wdmhHo0xBPiU5DO+jgpjTseh8sb102s+U52OWMgZ64VIfg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OxfwRUVwlTZ81loVEGfxB5s+Y/KtSigwjobCbNkL5x0=;
+ b=EORGVcdFm8b4MlV6/Nlt0huiySZ+0FEiUgoQWtiZKjrI1ErDI/hGJGBbR3gQMyfMnPrCo+RQOHwN8ZL0n0DfrNmNzRj2l2kK/6AORhRiamI5bYpylYOt/BUO4++tsKg+YZWd/mUuy6PRKY+V6mV6gkFceyN6UxQzDOvsr02zq5w=
+Received: from SN7PR04CA0095.namprd04.prod.outlook.com (2603:10b6:806:122::10)
+ by IA0PR12MB8301.namprd12.prod.outlook.com (2603:10b6:208:40b::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.17; Thu, 14 Nov
+ 2024 05:10:57 +0000
+Received: from SA2PEPF00003F66.namprd04.prod.outlook.com
+ (2603:10b6:806:122:cafe::fc) by SN7PR04CA0095.outlook.office365.com
+ (2603:10b6:806:122::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.18 via Frontend
+ Transport; Thu, 14 Nov 2024 05:10:57 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SA2PEPF00003F66.mail.protection.outlook.com (10.167.248.41) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8158.14 via Frontend Transport; Thu, 14 Nov 2024 05:10:57 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 13 Nov
+ 2024 23:10:55 -0600
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Wed, 13 Nov 2024 23:10:54 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@amd.com>, Tejas Bhumkar
+ <tejas.arvind.bhumkar@amd.com>
+Subject: [PATCH] arm64: versal: Enable defconfig for Micron octal flashes
+Date: Thu, 14 Nov 2024 10:40:47 +0530
+Message-ID: <20241114051047.13700-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20241110083017.367565-1-ilias.apalodimas@linaro.org>
- <20241110083017.367565-5-ilias.apalodimas@linaro.org>
- <CAFLszThNpU2cNNvU4uT2vkgFKJr7ss=j_UYfXTFXA_b4=LnurA@mail.gmail.com>
- <CAC_iWjKFxtBxEqkkXSOhcRqN4fRRgMcsmFRVYeNZOnR4zERrQQ@mail.gmail.com>
- <CAFLszTjou7yq-psYT3jBU7L8g81+bWUqc9Xj007zqfpfpnP9gg@mail.gmail.com>
- <CAC_iWjJdK6D+inVSMqJ941yvpDvK4j5XufvA1Fije3aqZvm=1g@mail.gmail.com>
- <CAFLszTiG9AMPs7q9QJgD5bP4=QwXVxQrOJqpWARamkPXS8p4wg@mail.gmail.com>
- <CAC_iWjL6BDhRHTYWW25N2v8Aw_MbwTzc+FAX1c6akGKypLKFEA@mail.gmail.com>
- <CAFLszTiPNMEGFPsbsuagcVooPDb_eawafnb=7hWGaDmNYbrqyg@mail.gmail.com>
- <CAC_iWjK-8JxM65dZkN1z_wP1Q+o7t4mJ1Xw8QZjzcanWXr98SA@mail.gmail.com>
- <CAFLszTgUbx4wXNmR0Fqu-ZxQwT1nvV7aOGiDOzZ-di-w-zQLew@mail.gmail.com>
-In-Reply-To: <CAFLszTgUbx4wXNmR0Fqu-ZxQwT1nvV7aOGiDOzZ-di-w-zQLew@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 14 Nov 2024 07:10:15 +0200
-Message-ID: <CAC_iWj+59tJh=iBSTRGw3DCtfQ+aPCeYo_JP2joASZ7bqC5uKQ@mail.gmail.com>
-Subject: Re: [PATCH v3 4/6] net: lwip: Enable https:// support for wget
-To: Simon Glass <sjg@chromium.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Anton Antonov <Anton.Antonov@arm.com>, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Jonathan Humphreys <j-humphreys@ti.com>,
- Wei Ming Chen <jj251510319013@gmail.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003F66:EE_|IA0PR12MB8301:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4d2d7c6a-3a01-4586-170b-08dd046ab8f7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|36860700013|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?n8KYBQ5l11243sLMFjAWoLWjpb2EWAOYt9HE0ZXnPwcxFiNU6j8axZKV7uqk?=
+ =?us-ascii?Q?3B7jsxgqbhSOEDxCE0LGomwYq8TrgZ1vydX3FTFyu2cTGmBgha0N74pfONQ7?=
+ =?us-ascii?Q?0md9bwGQDgnpbuj8UC7H5ERosCNbcs8JT7Frp/+3aR5GYwJrVZwx/nh/yVQR?=
+ =?us-ascii?Q?5b7bR9g7tBwK2GwkXyINw2xFbDetgmBABeJtwNCCZsdcFeqG9yqLgJHfVN2A?=
+ =?us-ascii?Q?QsvxoLQWRzaEDDURbr12hA+zflVzNUHjCFPXFJ5xPMetX5SqXQezrs0l8dHq?=
+ =?us-ascii?Q?jkb7UlYpkobKOrm/n5+d7JCN1kUTtgGq8g052wm6qAvBpOXJNQurcZZ6iIKa?=
+ =?us-ascii?Q?iBH4BHZFGIvoql/fOQEBFrNvC5UBaP9OCRPx9inzYLaeS7tdXeWEqN8fHNQZ?=
+ =?us-ascii?Q?bX0EbpklnBUuZhJS9UQk6d41Br3kNH6x7VXvXQgTYk6qO4i0GpsmSeSyD3OJ?=
+ =?us-ascii?Q?6qVECGNPMksMJWGIi0kKUJxdkEPLJr9MlwedWK5b6o3cP3rpGACktAArBo/n?=
+ =?us-ascii?Q?tMm6+1+phalAVOFkbMEUhNgHy4YbBtKvPLE61TMYbMQ9paL/GniYzfRk/zt1?=
+ =?us-ascii?Q?GrUwJNEFtr9Fq3bLwi+CqUxjtHCneZXo+xyueqyyoBOKOgraoGnLYr6ZwYwI?=
+ =?us-ascii?Q?eY72V97rLW4XRpzn1/jytU1+TZCPTMbu04idJu1esPSl+6KomOQ5jRt/ZqmT?=
+ =?us-ascii?Q?JGy+Rbn+XDjKLPTBTvOFAWKPh/SoqalO5jYYcSNttXfJOIz4ur9RrJZ69+Qe?=
+ =?us-ascii?Q?2gID9Fe4FZu6uZRw2vbwMigW8EsoSzy0mr6nVxjqzC1LMc5hxYhDdhoVRyyl?=
+ =?us-ascii?Q?KkhtbXWrvq5663e3MjHdxtPyuRXPKW+inVor6HQY15cgcSCSuWcI2fLvs+Vu?=
+ =?us-ascii?Q?EC5EmPMVL5vhaB8nOO0vXaEQfztnbqji4J8Mxe/nE96i+RTR9WH7vs9UvfvW?=
+ =?us-ascii?Q?4mgstZbeEg4bmDsk9vN1DINu+R4y6NRl4bAHvLnRNypeG3hMv4nnlBNriv5k?=
+ =?us-ascii?Q?Oxo+n0DayG15aG8TKgOHDg0/xxacDMIiH39rBxfjum3IB1wTxwND2W+n+m9x?=
+ =?us-ascii?Q?ADFeA8hI32Hwt9wrbRKhaXTDkXzznJeQvjG1DtW/nUBXhCu41LTZPAnp1b6Y?=
+ =?us-ascii?Q?fRawGc4sxLb6bU4r7Qb7APE7Md427Tgz/KDbVZJv8MvJA98fXO4Z7+dbUfu2?=
+ =?us-ascii?Q?zyIoD/3J/fD+SKr+VDfqCbWs70qOUiidtAK25CEmS+6DNBZqsdNFH9jmIXUX?=
+ =?us-ascii?Q?X4Hjh2Osjw1tIun94dkutmLNUeWbMGE7NHwOYh5WqbcDo90Px7xMe/zgPE19?=
+ =?us-ascii?Q?gQIhkDP4/gtybiEm8QjrNo+SBlMLjDAYBjkdXjPg7AW+F/zT8IkEPnxHX0F+?=
+ =?us-ascii?Q?3GByPCy9+7mbabH/c9VyHJfqCZ+9WP+1zuNGhaVhee9S6SABAA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2024 05:10:57.1317 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4d2d7c6a-3a01-4586-170b-08dd046ab8f7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003F66.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8301
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,181 +144,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 14 Nov 2024 at 05:53, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Wed, 13 Nov 2024 at 09:11, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > On Wed, 13 Nov 2024 at 18:04, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Ilias,
-> > >
-> > > On Wed, 13 Nov 2024 at 08:11, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > > On Wed, 13 Nov 2024 at 17:09, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi Ilias,
-> > > > >
-> > > > > On Wed, 13 Nov 2024 at 07:46, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >
-> > > > > > On Wed, 13 Nov 2024 at 15:39, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > >
-> > > > > > > HI Ilias,
-> > > > > > >
-> > > > > > > On Mon, 11 Nov 2024 at 07:20, Ilias Apalodimas
-> > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > >
-> > > > > > > > Thanks Simon,
-> > > > > > > >
-> > > > > > > > On Mon, 11 Nov 2024 at 15:03, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > >
-> > > > > > > > > On Sun, 10 Nov 2024 at 01:32, Ilias Apalodimas
-> > > > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > > > >
-> > > > > > > > > > With the recent changes of lwip & mbedTLS we can now download from
-> > > > > > > > > > https:// urls instead of just http://.
-> > > > > > > > > > Adjust our wget lwip version parsing to support both URLs.
-> > > > > > > > > > While at it adjust the default TCP window for QEMU since https seems to
-> > > > > > > > > > require at least 16384
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > > > > > > > ---
-> > > > > > > > > >  cmd/Kconfig      | 19 +++++++++++
-> > > > > > > > > >  net/lwip/Kconfig |  2 +-
-> > > > > > > > > >  net/lwip/wget.c  | 86 +++++++++++++++++++++++++++++++++++++++++++-----
-> > > > > > > > > >  3 files changed, 97 insertions(+), 10 deletions(-)
-> > > > > > > > >
-> > > > > > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > >
-> > > > > > > > > Some nits / questions
-> > > > > > > > >
-> > > > > > > > > I am not sure what mbedtls_hardware_poll() is,
-> > > > > > > >
-> > > > > > > > It's an entropy collector used by mbedTLS to ensure the platform has
-> > > > > > > > enough entropy.
-> > > > > > > > It's required if your platform doesn't support standards like the
-> > > > > > > > /dev/urandom or Windows CryptoAPI.
-> > > > > > > >
-> > > > > > > > > but if @len is too
-> > > > > > > > > short, would it be acceptable to return an error? How many bytes is it
-> > > > > > > > > requesting in the https case?
-> > > > > > > >
-> > > > > > > > If you don't return enough entropy https:// will fail and mbedTLS &
-> > > > > > > > lwIP will print an error. I think we currently use 128 and the default
-> > > > > > > > for mbedTLS is 32.
-> > > > > > >
-> > > > > > > OK, then the code is quite strange to me. It seems like it should
-> > > > > > > check that 'len' is large enough.
-> > > > > > >
-> > > > > > > But what does 'len' actually mean? Its arguments are not described in
-> > > > > > > mbedtls. Shouldn't you just pass it on to the dm_rng_read() function?
-> > > > > >
-> > > > > > The entry point is mbedtls_entropy_func(). mbedtls then calls
-> > > > > > entropy_gather_internal() which asks for some bytes of entropy and is
-> > > > > > controlled by a config option (and defaults to 128 for the config we
-> > > > > > use in U-Boot -- MBEDTLS_ENTROPY_MAX_GATHER). len is actually
-> > > > > > MBEDTLS_ENTROPY_MAX_GATHER.
-> > > > > >
-> > > > > > > Why call it with only 8 bytes? It might be more bytes than is
-> > > > > > > requested (and larger than the buffer), or fewer.
-> > > > > >
-> > > > > > It doesn't matter because we copy back the correct amount of
-> > > > > > bytes(what the caller requested). If it's less mbedTLS calls that
-> > > > > > function until it gathers all requested entropy.
-> > > > > >
-> > > > > > > It seems that your
-> > > > > > > function is written with knowledge of the internals of mbedtls.
-> > > > > >
-> > > > > > Ofc it is. It's a function needed by mbedTLS -- not U-Boot, it
-> > > > > > requires internal knowledge of it (and is probably part of the ABI,
-> > > > > > but I'll have to check that).
-> > > > > >
-> > > > > > What happens in the TLS case is that 64b are required. We either make
-> > > > > > 8 calls of 8b or make a single call with MBEDTLS_ENTROPY_MAX_GATHER.
-> > > > > >
-> > > > > >  I could rewrite it as
-> > > > > >         uclass_first_device(UCLASS_RNG, &dev);
-> > > > > >         if (!dev) {
-> > > > > >                 log_err("Failed to get an rng device\n");
-> > > > > >                 return ret;
-> > > > > >         }
-> > > > > >
-> > > > > >         rng = malloc(len);
-> > > > > >         if (!rng)
-> > > > > >                 return -ENOMEM;
-> > > > > >
-> > > > > >         ret = dm_rng_read(dev, rng, len);
-> > > > > >         if (ret) {
-> > > > > >                 free(rng);
-> > > > > >                 return ret;
-> > > > > >         }
-> > > > > >
-> > > > > >         memcpy(output, rng, len);
-> > > > > >         *olen = len;
-> > > > > >         free(rng);
-> > > > > >
-> > > > > > It does the same thing but gets 128b in one go. I don't have a strong
-> > > > > > opinion on that. Let me know what you prefer
-> > > > > > The tradeoff seems pretty straightforward. you either gather
-> > > > > > potentially more entropy than required and call that function once, or
-> > > > > > you gather exactly what's required on 8b steps -- but call that
-> > > > > > function multiple times.
-> > > > > >
-> > > > > > >
-> > > > > > > BTW mbedtls_hardware_poll() is a strange name as it actually reads
-> > > > > > > random data, so I think it should be renamed.
-> > > > > >
-> > > > > > I don't think that can't change as you would break all projects using
-> > > > > > it, but you can try sending a patch.
-> > > > >
-> > > > > I am wondering why we can't just do:
-> > > > >
-> > > > > ret = dm_rng_read(dev, rng, len);
-> > > > > if (ret)
-> > > > >    return ret;
-> > > > >
-> > > > > *olen = len;
-> > > >
-> > > > I am not sure I am following. Do that were?
-> > >
-> > > Oh, I had that wrong, so very confusing, sorry. Something like this:
-> > >
-> > > +int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len,
-> > > +                         size_t *olen)
-> > > +{
-> > > +       struct udevice *dev;
-> > > +       int ret;
-> > > +
-> > > +       ret = uclass_get_device(UCLASS_RNG, 0, &dev);
-> > > +       if (ret) {
-> > > +               log_err("Failed to get an rng: %d\n", ret);
-> > > +               return ret;
-> > > +       }
-> > > +       ret = dm_rng_read(dev, output, len);
-> > > +       if (ret)
-> > > +               return ret;
-> > > +
-> > > +       *olen = len;
-> > > +
-> > > +       return 0;
-> >
-> > Yep, that's identical to what I had above without the allocation,
-> > which indeed isn't needed.
-> > Both of the versions are correct and I ask internally mbedTLS devs if
-> > they have a preference.
-> >
-> > In any case feel free to send this, since Tom picked up the patches already
->
-> OK. It will be interesting to see if coverity picks this up.
+The Micron MT35 series octal flashes can be activated
+through the configuration option CONFIG_SPI_FLASH_MT35XU.
+To ensure their detection, enable this option in the
+default defconfig for octal flashes.
 
-Pick up what ? There's nothing wrong with the merged code. It does
-gathers entropy in rounds of 8b
+Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ configs/xilinx_versal_virt_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-Thanks
-/Ilias
->
-> Regards,
-> Simon
+diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
+index f220cc0254..fe25b518de 100644
+--- a/configs/xilinx_versal_virt_defconfig
++++ b/configs/xilinx_versal_virt_defconfig
+@@ -104,6 +104,7 @@ CONFIG_SPI_FLASH_ISSI=y
+ CONFIG_SPI_FLASH_MACRONIX=y
+ CONFIG_SPI_FLASH_SPANSION=y
+ CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_MT35XU=y
+ CONFIG_SPI_FLASH_SST=y
+ CONFIG_SPI_FLASH_WINBOND=y
+ # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+-- 
+2.17.1
+
