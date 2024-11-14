@@ -4,71 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E225CD6A221
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 18:07:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD8E7D6A221
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 18:13:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76BD489584;
-	Thu, 14 Nov 2024 19:07:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=hitachienergy.com
+	by phobos.denx.de (Postfix) with ESMTP id 57B1E8964D;
+	Thu, 14 Nov 2024 19:13:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=hitachienergy.com header.i=@hitachienergy.com header.b="FD9kh8in";
-	dkim=pass (2048-bit key; unprotected) header.d=outbound.mailhop.org header.i=@outbound.mailhop.org header.b="DZVC3ztg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d/V3goK7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4721489620; Thu, 14 Nov 2024 19:07:13 +0100 (CET)
-Received: from out-ip0051.fra.mailhop.org (out-ip0051.fra.mailhop.org
- [18.193.30.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D76638964F; Thu, 14 Nov 2024 19:13:23 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 249EB890FC
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 19:07:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=hitachienergy.com
+ by phobos.denx.de (Postfix) with ESMTPS id C8C8C89639
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 19:13:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=holger.brunck@hitachienergy.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5cf8593ca4bso686820a12.1
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 10:13:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hitachienergy.com; s=duo-1630306886989-947ac67a;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc:to:from:
- from; bh=Jpqwo0MrsrJfUKZ03sBnk6olZKCL041R2MsxyMVsu/Y=;
- b=FD9kh8in4DeJt4T0lseNl+hvBuZR1wPkPbM+I0/ZpguU+QOE6OiBAEAshTZ+qruzGYtrSyNPme7fm
- Oe8HTtxySCilsCA9jDo9FKBTtBsgeeEnQAdZxs88zIGn9tuzMia24dy8hK2mJBTEvyBzI35qj+0YY0
- 8YgHEEnAej7ckr/Q=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=outbound.mailhop.org; s=dkim-high;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc:to:from:
- from; bh=Jpqwo0MrsrJfUKZ03sBnk6olZKCL041R2MsxyMVsu/Y=;
- b=DZVC3ztgHaolmtCA/HcMLlCt0TVVOu+kpUI6IR5/zEI8CjRh/uTkKGOOaV2x82f1BZKry3lQgnfcH
- V/Gk0hlL68ozl0pXkcTeWQRSGLsvdfJGnJnTuoxLkLeq/44UP1jTkjU9SQLAQOWW8ebFoLG/Is/X2x
- MsZIC//w9uBbo0ysoRs/w7pr9aXTv6gZM4lDtrYtY/nOebQntGRgG777zORl2wroYwoAPktPwniR0v
- JesAdesgJeUturaST15utNmx73qF7mcd3p0xeXkmP3fNdZOrBC8q9HqhvlTI0M7sWyy4jZSHghyjpv
- Iqod4lbH4YH+MhORuXkOF8vnlMVKdzA==
-X-Originating-IP: 20.62.140.138
-X-MHO-RoutePath: aGVkY3NtdHAwMDAx
-X-MHO-User: 42bfd2ff-a2b3-11ef-b2a8-25ccbfd3c7c9
-X-Report-Abuse-To: https://support.duocircle.com/support/solutions/articles/5000540958-duocircle-standard-smtp-abuse-information
-X-Mail-Handler: DuoCircle Outbound SMTP
-Received: from HPG0000000548.corp.hitachi-powergrids.com (unknown
- [20.62.140.138]) by outbound3.eu.mailhop.org (Halon) with ESMTPSA
- id 42bfd2ff-a2b3-11ef-b2a8-25ccbfd3c7c9;
- Thu, 14 Nov 2024 18:07:08 +0000 (UTC)
-Received: from gitsiv.hitachienergy.com (unknown [10.54.139.14])
- by HPG0000000548.corp.hitachi-powergrids.com (Postfix) with SMTP id A6ACC1605; 
- Thu, 14 Nov 2024 18:07:06 +0000 (UTC)
-Received: from chbrn3-p-dev015.keymile.net (chbrn3-p-dev015.keymile.net
- [172.31.41.201])
- by gitsiv.hitachienergy.com (Postfix) with ESMTP id 2EED261B45FA;
- Thu, 14 Nov 2024 19:07:06 +0100 (CET)
-From: Holger Brunck <holger.brunck@hitachienergy.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Holger Brunck <holger.brunck@hitachienergy.com>
-Subject: [PATCH] km: disable CMD_JFFS2 for all PPC boards
-Date: Thu, 14 Nov 2024 19:06:54 +0100
-Message-ID: <20241114180654.2564945-1-holger.brunck@hitachienergy.com>
-X-Mailer: git-send-email 2.47.0.86.g15030f9556
+ d=linaro.org; s=google; t=1731608001; x=1732212801; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8p59DgOp+Mmqs5+ykuXp8jnHOA/wHzF3uvAU6cvOozE=;
+ b=d/V3goK7mXM4/mBc0jP8SlAY8EFQudzFhvBZLPSZYAl2xhtBXVGvSyL2fLysvzPz4y
+ By50svmwVrmzNvkC5eo6guzQuhfSbovRN+LTrTmnP+3wVXWgOQrTfgsyC5ytvuH3nBxQ
+ elP8NKfiQu3oz2CVvAzS/CC5GNKc0dDsQAFUZhtHh26Ed6xYIhKc+6/ntiQEhRbB0fkg
+ etz//bE7UNaaZLDyVqA2S6cAXmGGdlEJoLY+4nrgzuGL5rJH83HLo2asXLrT103Rvcv6
+ roGuOz2Objw4z37gB+JL/B2yQjAboF3fB9n/Y6/2ftczO0WVchoGEDH8+YxQCyIhHb25
+ 31Ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731608001; x=1732212801;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8p59DgOp+Mmqs5+ykuXp8jnHOA/wHzF3uvAU6cvOozE=;
+ b=Lf/DEyO2mkLsWxQBE2iJO5TS0Tzn2H4k4kYOgkdV/dbBlf28V4zOnxm2g7kxjWqqJU
+ xZ/vtDjgUZceVe6o7EWIcciJfkYtl2dNuq4p1+fSvU3X+B6KjzolF/CMvaNOXLKTrXcb
+ VUV5fFZTgVryM4acmCMs1226DNCJHxB39Xg2kyopCGJcR9q9DE4x7KHkV2hz7kj5yFXf
+ Eq0CTAq7k9IOgphYfL62obHv2tjAbpMJ2rg+6l0z6JtOu0AGEwL/yx2Zlhzsvg9WP0Fb
+ E3chQgeyehuOh1rXB6BVjhZ7PBu0LCJ6Xw5bD/VXcjjwe5+1VGdu8NbdA8nE+ncUSTky
+ dc9w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVmhepxarYIafpqghfzDzeSvqqqC+sH9AYBzilfMcKnX62IRCYj5E9LdNV/TVOMtkkvqaXSbY8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwZm1ZFvqQq+oDOlWl2J0iTDVUIKSLclF7ip0plc6HvEqgCNfgf
+ N9GhFTrC/pq9OaNe3kKxlyn4Yjw2/yN/xZlqy5Lg5TYxQdOBPJoy45NGxUFHV519lUCnvdjcjYz
+ O
+X-Google-Smtp-Source: AGHT+IE8R3ntr8rtFGEHuZKau/LIpYRl38ZyrTy5EN+g+s/nCa781gE4cR81/Cir6dMt9Ao9p2OQZA==
+X-Received: by 2002:a17:907:3d8c:b0:a99:7bc0:bca9 with SMTP id
+ a640c23a62f3a-aa20ccdabfdmr335791766b.3.1731608000912; 
+ Thu, 14 Nov 2024 10:13:20 -0800 (PST)
+Received: from lion.localdomain ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa20e0860d5sm89590366b.186.2024.11.14.10.13.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Nov 2024 10:13:16 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+In-Reply-To: <20241016-topic-sm8x50-bigger-malloc-len-v1-1-361b132ce7d4@linaro.org>
+References: <20241016-topic-sm8x50-bigger-malloc-len-v1-1-361b132ce7d4@linaro.org>
+Subject: Re: [PATCH] ARM: mach-snapdragon: configure a larger default
+ SYS_MALLOC_LEN for fastboot
+Message-Id: <173160799650.3344230.9504275002668727633.b4-ty@linaro.org>
+Date: Thu, 14 Nov 2024 19:13:16 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14-dev
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,110 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't use this feature, we can remove it therefore in the defconfigs.
 
-Signed-off-by: Holger Brunck <holger.brunck@hitachienergy.com>
----
- configs/kmcoge5ne_defconfig | 1 -
- configs/kmeter1_defconfig   | 1 -
- configs/kmopti2_defconfig   | 1 -
- configs/kmsupx5_defconfig   | 1 -
- configs/kmtepr2_defconfig   | 1 -
- configs/tuge1_defconfig     | 1 -
- configs/tuxx1_defconfig     | 1 -
- 7 files changed, 7 deletions(-)
+On Wed, 16 Oct 2024 11:25:32 +0200, Neil Armstrong wrote:
+> Fastboot is very hungry when it flashes larges chunks, and 8MiB
+> is way too small, allocate a much bigger size like other platforms
+> using Fastboot.
+> 
+> 
 
-diff --git a/configs/kmcoge5ne_defconfig b/configs/kmcoge5ne_defconfig
-index 211880bfcaa..6b2fc2ec6e7 100644
---- a/configs/kmcoge5ne_defconfig
-+++ b/configs/kmcoge5ne_defconfig
-@@ -152,7 +152,6 @@ CONFIG_BOOTP_BOOTFILESIZE=3Dy
- CONFIG_CMD_DHCP=3Dy
- CONFIG_CMD_MII=3Dy
- CONFIG_CMD_PING=3Dy
--CONFIG_CMD_JFFS2=3Dy
- CONFIG_CMD_MTDPARTS=3Dy
- CONFIG_MTDIDS_DEFAULT=3D"nor0=3Dboot,nand0=3Dapp"
- CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dboot:768k(u-boot),128k(env),128k(e=
-nvred),-(ubi0);app:-(ubi1);"
-diff --git a/configs/kmeter1_defconfig b/configs/kmeter1_defconfig
-index b69410b4d3d..55e87b0215a 100644
---- a/configs/kmeter1_defconfig
-+++ b/configs/kmeter1_defconfig
-@@ -131,7 +131,6 @@ CONFIG_BOOTP_BOOTFILESIZE=3Dy
- CONFIG_CMD_DHCP=3Dy
- CONFIG_CMD_MII=3Dy
- CONFIG_CMD_PING=3Dy
--CONFIG_CMD_JFFS2=3Dy
- CONFIG_CMD_MTDPARTS=3Dy
- CONFIG_MTDIDS_DEFAULT=3D"nor0=3Dboot"
- CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dboot:768k(u-boot),128k(env),128k(e=
-nvred),-(ubi0);"
-diff --git a/configs/kmopti2_defconfig b/configs/kmopti2_defconfig
-index 28ad18ec32f..df419b01c68 100644
---- a/configs/kmopti2_defconfig
-+++ b/configs/kmopti2_defconfig
-@@ -138,7 +138,6 @@ CONFIG_BOOTP_BOOTFILESIZE=3Dy
- CONFIG_CMD_DHCP=3Dy
- CONFIG_CMD_MII=3Dy
- CONFIG_CMD_PING=3Dy
--CONFIG_CMD_JFFS2=3Dy
- CONFIG_CMD_MTDPARTS=3Dy
- CONFIG_MTDIDS_DEFAULT=3D"nor0=3Dboot"
- CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dboot:768k(u-boot),128k(env),128k(e=
-nvred),-(ubi0);"
-diff --git a/configs/kmsupx5_defconfig b/configs/kmsupx5_defconfig
-index 42ced44f5c1..1436860f1cc 100644
---- a/configs/kmsupx5_defconfig
-+++ b/configs/kmsupx5_defconfig
-@@ -123,7 +123,6 @@ CONFIG_BOOTP_BOOTFILESIZE=3Dy
- CONFIG_CMD_DHCP=3Dy
- CONFIG_CMD_MII=3Dy
- CONFIG_CMD_PING=3Dy
--CONFIG_CMD_JFFS2=3Dy
- CONFIG_CMD_MTDPARTS=3Dy
- CONFIG_MTDIDS_DEFAULT=3D"nor0=3Dboot"
- CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dboot:768k(u-boot),128k(env),128k(e=
-nvred),-(ubi0);"
-diff --git a/configs/kmtepr2_defconfig b/configs/kmtepr2_defconfig
-index 3488e268e7b..cce7a044aee 100644
---- a/configs/kmtepr2_defconfig
-+++ b/configs/kmtepr2_defconfig
-@@ -137,7 +137,6 @@ CONFIG_BOOTP_BOOTFILESIZE=3Dy
- CONFIG_CMD_DHCP=3Dy
- CONFIG_CMD_MII=3Dy
- CONFIG_CMD_PING=3Dy
--CONFIG_CMD_JFFS2=3Dy
- CONFIG_CMD_MTDPARTS=3Dy
- CONFIG_MTDIDS_DEFAULT=3D"nor0=3Dboot"
- CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dboot:768k(u-boot),128k(env),128k(e=
-nvred),-(ubi0);"
-diff --git a/configs/tuge1_defconfig b/configs/tuge1_defconfig
-index 10f60551ab1..d1b771993cf 100644
---- a/configs/tuge1_defconfig
-+++ b/configs/tuge1_defconfig
-@@ -123,7 +123,6 @@ CONFIG_BOOTP_BOOTFILESIZE=3Dy
- CONFIG_CMD_DHCP=3Dy
- CONFIG_CMD_MII=3Dy
- CONFIG_CMD_PING=3Dy
--CONFIG_CMD_JFFS2=3Dy
- CONFIG_CMD_MTDPARTS=3Dy
- CONFIG_MTDIDS_DEFAULT=3D"nor0=3Dboot"
- CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dboot:768k(u-boot),128k(env),128k(e=
-nvred),-(ubi0);"
-diff --git a/configs/tuxx1_defconfig b/configs/tuxx1_defconfig
-index 816ac8ffac8..1dc737e4954 100644
---- a/configs/tuxx1_defconfig
-+++ b/configs/tuxx1_defconfig
-@@ -137,7 +137,6 @@ CONFIG_BOOTP_BOOTFILESIZE=3Dy
- CONFIG_CMD_DHCP=3Dy
- CONFIG_CMD_MII=3Dy
- CONFIG_CMD_PING=3Dy
--CONFIG_CMD_JFFS2=3Dy
- CONFIG_CMD_MTDPARTS=3Dy
- CONFIG_MTDIDS_DEFAULT=3D"nor0=3Dboot"
- CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dboot:768k(u-boot),128k(env),128k(e=
-nvred),-(ubi0);"
---=20
-2.43.5
+Applied, thanks!
+
+[1/1] ARM: mach-snapdragon: configure a larger default SYS_MALLOC_LEN for fastboot
+      commit: 325e210fc0e47871e13a497c2c6883bd9a17ad5d
+
+Best regards,
+-- 
+// Caleb (they/them)
+
 
