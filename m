@@ -4,126 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EB7ED65C50
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 06:54:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C83BED65C52
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 07:04:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4A33895C4;
-	Thu, 14 Nov 2024 07:54:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 4787B88F2A;
+	Thu, 14 Nov 2024 08:04:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="XOcPh55p";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nBrY76SM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF6E8895D0; Thu, 14 Nov 2024 07:54:41 +0100 (CET)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1EB6889045; Thu, 14 Nov 2024 08:04:17 +0100 (CET)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EF1F895C7
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 07:54:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A8E1588F23
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 08:04:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20241114065432epoutp041a6326554b130b798147249afaaa2621~Hw0Ki1UPB2196921969epoutp04-
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 06:54:32 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20241114065432epoutp041a6326554b130b798147249afaaa2621~Hw0Ki1UPB2196921969epoutp04-
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1731567272;
- bh=HjTEcm1VedwRGZ4AOLZyyoerBg0EzpU88GiYgaEerWE=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=XOcPh55p2o/AjDFkArdBqyx3m92ViCVOVo4r1Ys6bzVWInlvlLNvWF3nsKZjP5ey6
- hZdOlCsbKAWqfnswo72nnC6wSa3nkw/pmyrCvW7aLICnqUwXJIkcV6KpLT28QTG3GD
- AFMtNHj7XJOmjkTE6Tjor2lZFcXYlvMMxOzJqU9o=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20241114065432epcas1p4efc4b9676b6a015d87bfaf8124eb8f8f~Hw0KTOn340796207962epcas1p4u;
- Thu, 14 Nov 2024 06:54:32 +0000 (GMT)
-Received: from epsmges1p5.samsung.com (unknown [182.195.36.145]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4XprVb3P3Wz4x9QG; Thu, 14 Nov
- 2024 06:54:31 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
- AC.9F.09398.7AE95376; Thu, 14 Nov 2024 15:54:31 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20241114065431epcas1p399b3f5c9fd30fe0b4e985fd07ad2fb81~Hw0I9NhE90571205712epcas1p3y;
- Thu, 14 Nov 2024 06:54:31 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241114065430epsmtrp2d858d1e452c80b8364d7db34468a864a~Hw0I7YX9p0801408014epsmtrp2E;
- Thu, 14 Nov 2024 06:54:30 +0000 (GMT)
-X-AuditID: b6c32a39-5f9f8700000024b6-97-67359ea70638
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- C8.6B.18937.6AE95376; Thu, 14 Nov 2024 15:54:30 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20241114065430epsmtip2549692182668ca5b49f7baeb09dcf003~Hw0Il_5Je2629126291epsmtip2h;
- Thu, 14 Nov 2024 06:54:30 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Caleb Connolly'" <caleb.connolly@linaro.org>, "'Christian Marangi'"
- <ansuelsmth@gmail.com>, "'Dragan Simic'" <dsimic@manjaro.org>, "'Ilias
- Apalodimas'" <ilias.apalodimas@linaro.org>, "'Jerome Forissier'"
- <jerome.forissier@linaro.org>, "'Jonas Karlman'" <jonas@kwiboo.se>, "'Marek
- Vasut'" <marek.vasut+renesas@mailbox.org>, "'Peng Fan'" <peng.fan@nxp.com>,
- "'Peter Robinson'" <pbrobinson@gmail.com>, "'Rasmus Villemoes'"
- <rasmus.villemoes@prevas.dk>, "'Simon Glass'" <sjg@chromium.org>, "'Sughosh
- Ganu'" <sughosh.ganu@linaro.org>, "'Tom Rini'" <trini@konsulko.com>
-Cc: <u-boot@lists.denx.de>
-In-Reply-To: <20241113053023.1870736-1-caleb.connolly@linaro.org>
-Subject: RE: [PATCH] mmc: don't print 'MMC:' if there are no MMC devices
-Date: Thu, 14 Nov 2024 15:54:30 +0900
-Message-ID: <12cb01db3662$0df6e1e0$29e4a5a0$@samsung.com>
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQJ0CNXr2uE3B/dXATBqetSdIy0i+gHaT+sCsXXe9IA=
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAJsWRmVeSWpSXmKPExsWy7bCmnu7yeabpBpc7JSymnvzGYnGqZRuT
- xYUtyha9Lb+ZLc63Lma3OPnmKotF68o7bBbrVq1hs/ix6gurxc3XDhbftmxjtLh3Tc5i6qTN
- 7BZv93ayO/B5zG64yOKxc9Zddo9XB1axe5yYcInJ4861PWweZ+/sYPTYOXsfk0fD4TWMHhvf
- 7WDymDH7DWMAV1S2TUZqYkpqkUJqXnJ+SmZeuq2Sd3C8c7ypmYGhrqGlhbmSQl5ibqqtkotP
- gK5bZg7QA0oKZYk5pUChgMTiYiV9O5ui/NKSVIWM/OISW6XUgpScAtMCveLE3OLSvHS9vNQS
- K0MDAyNToMKE7IwnS4+zFTyUqJi3pZmlgfG1cBcjB4eEgInEje15XYxcHEICOxgl3rctYYZw
- PjFKtCzfyQLnPLkyi62LkROsY8+nGWwQiZ2MEu03YKpeMko83XmZCaSKTUBP4v+ihWCzRASO
- s0isbJrGCpJgFpCSaDq5ixHE5hRwlDjRcglsrLCAh8S69rdgcRYBVYlD65sYQQ7kFbCU2NWh
- BbFZQeLn02VgY0QErCQ2LHzJDDFSRGJ2ZxvYLgmBHRwSj6+0MkM0uEicefmBEcIWlnh1fAs7
- hC0l8fndXjaIhmZGiaVLDrJCOD2MEv8arkM9aiyxf+lkJpArmAU0Jdbv0ofYxifx7msPKyT0
- eCU62oQgqlUkLr1+yQQz/+6T/6wQtodEx527TJAQmsIocbDzJesERvlZSA6fhbBhASPTKkax
- 1ILi3PTUYsMCU3hcJufnbmIEJ10tyx2M099+0DvEyMTBeIhRgoNZSYT3lLNxuhBvSmJlVWpR
- fnxRaU5q8SFGU2BITmSWEk3OB6b9vJJ4QxNLAxMzI2MTC0MzQyVx3jNXylKFBNITS1KzU1ML
- Uotg+pg4OKUamIw5n18V29rSvCffYfMVXvUwh8oE687J6iyOW/kf/ue8x6OYfN75+GL5TRmK
- rzzWt8g89jqZ+33XlzaGLwVLi74sEv/0JKTQ9YLv+nTpywWcYe0WlgwqgQ5z2r2Mk8s+e8v8
- N3iyd4/c9DV198Pn6nF59FdJv06p2v3CPEe6smU365M7L59XT9p5v0y/4nRl0u0NG6MefYmS
- v7L/lh+LwiWbCq0m1+Yjdu8/7sxr809YoftQXsvC57q99c3YGv94rZ12HBU2t/pLag/37HF2
- +6Ox99PTGR8+KL+6/CS6qdP+lrjp/apPh1pyc8u5davTP7uXRy5btjBP3+nO/crcxq+H1J2W
- 2jmz/8o17XuvxFKckWioxVxUnAgA1PHWakMEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrALMWRmVeSWpSXmKPExsWy7bCSvO6yeabpBm+eGFlMPfmNxeJUyzYm
- iwtblC16W34zW5xvXcxucfLNVRaL1pV32CzWrVrDZvFj1RdWi5uvHSy+bdnGaHHvmpzF1Emb
- 2S3e7u1kd+DzmN1wkcVj56y77B6vDqxi9zgx4RKTx51re9g8zt7Zweixc/Y+Jo+Gw2sYPTa+
- 28HkMWP2G8YArigum5TUnMyy1CJ9uwSujCdLj7MVPJSomLelmaWB8bVwFyMnh4SAicSeTzPY
- uhi5OIQEtjNKHHn/mx0iISXx+elUoAQHkC0scfhwMUTNc0aJa+/2sYDUsAnoSfxftJAZxBYR
- uMgicXI3J4jNDNTbdHIXI0TDJEaJLfcvgjVwCjhKnGi5xAZiCwt4SKxrf8sIYrMIqEocWt/E
- CLKMV8BSYleHFsQNChI/ny5jhZhvJbFh4UtmiPkiErM725gnMArMQuIuYGRcxSiaWlCcm56b
- XGCoV5yYW1yal66XnJ+7iREcKVpBOxiXrf+rd4iRiYPxEKMEB7OSCO8pZ+N0Id6UxMqq1KL8
- +KLSnNTiQ4zSHCxK4rzKOZ0pQgLpiSWp2ampBalFMFkmDk6pBqaFPvxP++a+MX2ZvzrLcknY
- Q7+UG7zejn9tmFXWxUw6teWX9PLPTZ6XnWL826Web0+MDtmy/bxgcA5P8a0nb1Qqn3C5HS19
- /Mlt5nbpzWrnHfacYOR0P/qFsbJN1NfKIj/98tOb2wt7HL/P3FpyIu132oe5mvsTzp3a+vdf
- 8SGTGdUWMoHHJrTW5i84vuSN6r2Kzc3zqwJ9xO0PSLZ92DPXjcu0dM05Lb55JxNenTxpIVKV
- aPlIgkPsrdRODY1t055G+3Z8O2Sq4vJQNExBwuDq9D12SivD5vcV9sy0WBX178HsdrYvyzYf
- C82dxbwhd7fpj5oOw3UOhU/WyW5xDs65qJxW+aWq/sDGJK6W/N9KLMUZiYZazEXFiQBQm/ri
- AwMAAA==
-X-CMS-MailID: 20241114065431epcas1p399b3f5c9fd30fe0b4e985fd07ad2fb81
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241113053033epcas1p2f8d1ef98103f17f5442279ac21a898fc
-References: <CGME20241113053033epcas1p2f8d1ef98103f17f5442279ac21a898fc@epcas1p2.samsung.com>
- <20241113053023.1870736-1-caleb.connolly@linaro.org>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-7ee51d9ae30so168908a12.1
+ for <u-boot@lists.denx.de>; Wed, 13 Nov 2024 23:04:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1731567853; x=1732172653; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4LW+KYF9lxBh5GLuhDCSkHm8BTbJOOlKR2Dd2odvOos=;
+ b=nBrY76SMkcfPZ13KwGEPprFhtUGfQBzh8UxeyoeDH8Fx0UM380HBiGkMZZWx3HW9CQ
+ FqdC29Ls6A7k8ECMvfaQzdQwXmLzQePR/Rrr+B80peDHnycwACFDcMdXi1Qnx23UOXja
+ xR9Tx//yWQ1J0D9480ceI/21ObfSOdfRDeEXf0v19A0fL4z4mosIrjJ6xXk/IFa/0H8z
+ G7+cQ0ienMQWZOSHc4HW68wQRNvm2EagylqgnEe/JNz5IX/1n+wR4Qr/M8AbpeD8WsCu
+ quj7rVjXeo4Oawuy5MHbjehDfetFZcg6J5PrniLSt3pmPdf+x8C73U71oN8uJXjj65Jv
+ qksg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731567853; x=1732172653;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4LW+KYF9lxBh5GLuhDCSkHm8BTbJOOlKR2Dd2odvOos=;
+ b=MDg+Spl049c/kJFGIRwnE0tAa2hktdR8ZF2JoH2ibLnQyMjz/Zf2qE2wIaYwgKGFgV
+ Tf9689lA307cWU9pEwbQRz3/R6SRLBNxa1TlhKQmlQZt3RRUYf6CIxgrRloURtfTAxy/
+ 9xIgg6aKtf19RFhc0YoN1BUoHdDlWYcxApYC/Xb7ZRGLV86ZjBySjZ1JCN8xv/zuDzKr
+ RUDnF/5of7y5HViZ/HQsCavFQFmywZN1Pp07dkGmi2PMP1KR/mHjhbvtvY3Mtry1y1uW
+ a9j7RzMbL/EgIV7TWvdhVkAhgsDS2dVE1hyjjGfnke0DQG0jVvSkr6VuDR31ypsl00t0
+ yCuQ==
+X-Gm-Message-State: AOJu0YzDHIw049kSxq6d2zdlxiQ3lNOyS7toGs2DMoZ7qf59TIEpF2kg
+ sSV5/JbbFOEYzekaHM5Fivel6wLb4kIqrw0SmhNlD6sxxunzzon0qoMy134/pWQqsd2Cp/y+bj/
+ z0gbbRpR6KhtogLSLT7yWe60klPyTqJzE65wRBw==
+X-Google-Smtp-Source: AGHT+IF5BQQEVpGXOoy7Mmt0aDgCiCMaetZStc1mw0gORBEScNmujYSCvab+pGiIS4YawL3kJinkbog9R/7sTHoMQtM=
+X-Received: by 2002:a05:6a21:3e0f:b0:1db:ec5c:cae7 with SMTP id
+ adf61e73a8af0-1dc834d2a30mr1165168637.40.1731567853114; Wed, 13 Nov 2024
+ 23:04:13 -0800 (PST)
+MIME-Version: 1.0
+References: <20241112141105.640189-1-sjg@chromium.org>
+ <20241112141105.640189-2-sjg@chromium.org>
+In-Reply-To: <20241112141105.640189-2-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 14 Nov 2024 09:03:36 +0200
+Message-ID: <CAC_iWjJB4=6Zm8XsgiQcQkUzoDOWnAowzf6C3sVvXNQTv_oByA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/9] sandbox: efi_loader: Correct use of addresses as
+ pointers
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,99 +89,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Simon,
 
-> -----Original Message-----
-> From: Caleb Connolly <caleb.connolly@linaro.org>
-> Sent: Wednesday, November 13, 2024 2:30 PM
-> To: Caleb Connolly <caleb.connolly@linaro.org>; Christian Marangi <ansuelsmth@gmail.com>; Dragan Simic
-> <dsimic@manjaro.org>; Ilias Apalodimas <ilias.apalodimas@linaro.org>; Jaehoon Chung
-> <jh80.chung@samsung.com>; Jerome Forissier <jerome.forissier@linaro.org>; Jonas Karlman
-> <jonas@kwiboo.se>; Marek Vasut <marek.vasut+renesas@mailbox.org>; Peng Fan <peng.fan@nxp.com>; Peter
-> Robinson <pbrobinson@gmail.com>; Rasmus Villemoes <rasmus.villemoes@prevas.dk>; Simon Glass
-> <sjg@chromium.org>; Sughosh Ganu <sughosh.ganu@linaro.org>; Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> Subject: [PATCH] mmc: don't print 'MMC:' if there are no MMC devices
+On Tue, 12 Nov 2024 at 16:11, Simon Glass <sjg@chromium.org> wrote:
 >
-> It may be the case that MMC support is enabled even though the board
-> we're booting on doesn't have any MMC devices. Move the print over to
-> the print_mmc_devices() function where we can only print it if we
-> actually have MMC devices.
+> The cache-flush function is incorrect which causes a crash in the
+> remoteproc tests with arm64.
 >
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Fix both problems by using map_sysmem() to convert an address to a
+> pointer and map_to_sysmem() to convert a pointer to an address.
+>
+> Also update the image-loader's cache-flushing logic.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Fixes: 3286d223fd7 ("sandbox: implement invalidate_icache_all()")
 > ---
->  common/board_r.c         | 1 -
->  drivers/mmc/mmc-uclass.c | 4 +++-
->  drivers/mmc/mmc_legacy.c | 5 +++++
->  3 files changed, 8 insertions(+), 2 deletions(-)
 >
-> diff --git a/common/board_r.c b/common/board_r.c
-> index 62228a723e12..232a8fd19f03 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -384,9 +384,8 @@ static int initr_onenand(void)
+> (no changes since v2)
 >
->  #ifdef CONFIG_MMC
->  static int initr_mmc(void)
+> Changes in v2:
+> - Drop message about EFI_LOADER
+>
+>  arch/sandbox/cpu/cache.c              |  8 +++++++-
+>  drivers/remoteproc/rproc-elf-loader.c | 18 +++++++++++-------
+>  lib/efi_loader/efi_image_loader.c     |  3 ++-
+>  3 files changed, 20 insertions(+), 9 deletions(-)
+>
+> diff --git a/arch/sandbox/cpu/cache.c b/arch/sandbox/cpu/cache.c
+> index c8a5e64214b..96b3da47e8e 100644
+> --- a/arch/sandbox/cpu/cache.c
+> +++ b/arch/sandbox/cpu/cache.c
+> @@ -4,12 +4,18 @@
+>   */
+>
+>  #include <cpu_func.h>
+> +#include <mapmem.h>
+>  #include <asm/state.h>
+>
+>  void flush_cache(unsigned long addr, unsigned long size)
 >  {
-> -	puts("MMC:   ");
->  	mmc_initialize(gd->bd);
->  	return 0;
+> +       void *ptr;
+> +
+> +       ptr = map_sysmem(addr, size);
+> +
+>         /* Clang uses (char *) parameters, GCC (void *) */
+> -       __builtin___clear_cache((void *)addr, (void *)(addr + size));
+> +       __builtin___clear_cache(map_sysmem(addr, size), ptr + size);
+> +       unmap_sysmem(ptr);
 >  }
->  #endif
-> diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-> index c8db4f811c2f..56fe29249c36 100644
-> --- a/drivers/mmc/mmc-uclass.c
-> +++ b/drivers/mmc/mmc-uclass.c
-> @@ -384,9 +384,11 @@ void print_mmc_devices(char separator)
->  	     dev;
->  	     uclass_next_device(&dev), first = false) {
->  		struct mmc *m = mmc_get_mmc_dev(dev);
 >
-> -		if (!first) {
-> +		if (first) {
-> +			printf("MMC:  ");
-> +		} else {
+>  void invalidate_icache_all(void)
+> diff --git a/drivers/remoteproc/rproc-elf-loader.c b/drivers/remoteproc/rproc-elf-loader.c
+> index ab1836b3f07..0b3941b7798 100644
+> --- a/drivers/remoteproc/rproc-elf-loader.c
+> +++ b/drivers/remoteproc/rproc-elf-loader.c
+> @@ -6,6 +6,7 @@
+>  #include <dm.h>
+>  #include <elf.h>
+>  #include <log.h>
+> +#include <mapmem.h>
+>  #include <remoteproc.h>
+>  #include <asm/cache.h>
+>  #include <dm/device_compat.h>
+> @@ -180,6 +181,7 @@ int rproc_elf32_load_image(struct udevice *dev, unsigned long addr, ulong size)
+>         for (i = 0; i < ehdr->e_phnum; i++, phdr++) {
+>                 void *dst = (void *)(uintptr_t)phdr->p_paddr;
+>                 void *src = (void *)addr + phdr->p_offset;
+> +               ulong dst_addr;
+>
+>                 if (phdr->p_type != PT_LOAD)
+>                         continue;
+> @@ -195,10 +197,11 @@ int rproc_elf32_load_image(struct udevice *dev, unsigned long addr, ulong size)
+>                 if (phdr->p_filesz != phdr->p_memsz)
+>                         memset(dst + phdr->p_filesz, 0x00,
+>                                phdr->p_memsz - phdr->p_filesz);
+> -               flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
+> -                           roundup((unsigned long)dst + phdr->p_filesz,
+> +               dst_addr = map_to_sysmem(dst);
+> +               flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
+> +                           roundup(dst_addr + phdr->p_filesz,
+>                                     ARCH_DMA_MINALIGN) -
+> -                           rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
+> +                           rounddown(dst_addr, ARCH_DMA_MINALIGN));
+>         }
+>
+>         return 0;
+> @@ -377,6 +380,7 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
+>         const struct dm_rproc_ops *ops;
+>         Elf32_Shdr *shdr;
+>         void *src, *dst;
+> +       ulong dst_addr;
+>
+>         shdr = rproc_elf32_find_rsc_table(dev, fw_addr, fw_size);
+>         if (!shdr)
+> @@ -398,10 +402,10 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
+>                 (ulong)dst, *rsc_size);
+>
+>         memcpy(dst, src, *rsc_size);
+> -       flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
+> -                   roundup((unsigned long)dst + *rsc_size,
+> -                           ARCH_DMA_MINALIGN) -
+> -                   rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
+> +       dst_addr = map_to_sysmem(dst);
+> +       flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
+> +                   roundup(dst_addr + *rsc_size, ARCH_DMA_MINALIGN) -
+> +                   rounddown(dst_addr, ARCH_DMA_MINALIGN));
+>
+>         return 0;
+>  }
+> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+> index 0ddf69a0918..bb58cf1badb 100644
+> --- a/lib/efi_loader/efi_image_loader.c
+> +++ b/lib/efi_loader/efi_image_loader.c
+> @@ -13,6 +13,7 @@
+>  #include <efi_loader.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> +#include <mapmem.h>
+>  #include <pe.h>
+>  #include <sort.h>
+>  #include <crypto/mscode.h>
+> @@ -977,7 +978,7 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
+>         }
+>
+>         /* Flush cache */
+> -       flush_cache((ulong)efi_reloc,
+> +       flush_cache(map_to_sysmem(efi_reloc),
 
-Frankly, I don't know if it needs to print "MMC; " at here.
-It's already knowing mmc with mmc command. In board_r, To clarify which device is showing "MMC", but not here.
+Shouldn't we now umap that address on the err: tag?
 
-Best Regards,
-Jaehoon Chung
-
->  			printf("%c", separator);
->  			if (separator != '\n')
->  				puts(" ");
->  		}
-> diff --git a/drivers/mmc/mmc_legacy.c b/drivers/mmc/mmc_legacy.c
-> index 8f8ba34be717..f4a049a4a4d4 100644
-> --- a/drivers/mmc/mmc_legacy.c
-> +++ b/drivers/mmc/mmc_legacy.c
-> @@ -98,8 +98,9 @@ void print_mmc_devices(char separator)
->  {
->  	struct mmc *m;
->  	struct list_head *entry;
->  	char *mmc_type;
-> +	bool first = true;
+Thanks
+/Ilias
+>                     ALIGN(virt_size, EFI_CACHELINE_SIZE));
 >
->  	list_for_each(entry, &mmc_devices) {
->  		m = list_entry(entry, struct mmc, link);
->
-> @@ -107,8 +108,12 @@ void print_mmc_devices(char separator)
->  			mmc_type = IS_SD(m) ? "SD" : "eMMC";
->  		else
->  			mmc_type = NULL;
->
-> +		if (first) {
-> +			printf("MMC:  ");
-> +			first = false;
-> +		}
->  		printf("%s: %d", m->cfg->name, m->block_dev.devnum);
->  		if (mmc_type)
->  			printf(" (%s)", mmc_type);
->
+>         /*
 > --
-> 2.47.0
-
-
-
+> 2.34.1
+>
