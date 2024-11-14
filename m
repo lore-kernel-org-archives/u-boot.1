@@ -4,65 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E124AD6A25B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 23:28:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC38D6A25D
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 23:30:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC52789313;
-	Fri, 15 Nov 2024 00:28:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8696B8969D;
+	Fri, 15 Nov 2024 00:30:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LwGOscjo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bixcis+2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 372B089696; Fri, 15 Nov 2024 00:28:03 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id BBF4389695; Fri, 15 Nov 2024 00:30:15 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EA3989313
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 00:28:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 910CE89323
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 00:30:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5cf872ecce7so836752a12.1
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 15:28:01 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-460c2418e37so1292101cf.0
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 15:30:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731626880; x=1732231680; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/wAGS/4F8VnYzPgI8XC5XVI2yJIs/Mqr9vFhvV7rwv4=;
- b=LwGOscjoXt6ysU9oqRguRP2cDtiirjfmodwxAMpYerCTethH33ciBd4Y1RXqhe5QWB
- aTvrmbzC7goHCpGPge0qhKyrO37gNeFdUrEE67DE1oIWRKryZIXnl5vLozT2iZ7rEWpA
- TsHlgkg4CG5NkwyUWXBq4/9LimmuXsS7/fPT8DnRkfIX1ZEdxRYO/tcla6O9inzHYrNe
- A+9QABvuzDL+EAoudwvcd+9ptiuOLRs1twm9+TmDasZ8hCjDrgPdQAARxcgEsEypoZTG
- rjNAZGDCY5W5qUoe8mqCJn0PuvUzdMV1IL7txZqVWTuLg4rHbtIH0eVVGxEMisyj30C/
- gSAw==
+ d=konsulko.com; s=google; t=1731627011; x=1732231811; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pGl/sdg2zK3o+zL11+cd+2YCRdsj6zkaBT440rZNITQ=;
+ b=bixcis+2giayMLcds7T9l6ppt+8FASuPfmT3B+cY48A0nQpJJ/No79wY85x0IFgllW
+ VRKus/MTeL7bM/fEswlQQyPsrxs33nIP1zUSZeZskfjvAVOIRFmZR91Wepsc45MkNYrn
+ G05BSHGv/BFAGoW9UR+KIbje/725uHTOwOYTU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731626880; x=1732231680;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/wAGS/4F8VnYzPgI8XC5XVI2yJIs/Mqr9vFhvV7rwv4=;
- b=Oy82sH6EhkSJZPC3Xrzt5/zbl75Li70Nbd50Php3cgxtXtr2UTEHhI/NlgqpmoivzV
- fiYfcf4qXXdVjAOFYVXYkBdbaR5+0DxvEIIObBoImb3uxvChrLajYJmeUNR3QJiOrN1e
- WwH2nOKuFa1klbGHLDIdsraW+8BUrdNGR8ha8auUFBl/PsdVyYyv6q75y1Lfg5JTay5W
- NkN1xleeBhYCcaysXhab+GnysM5c1cTFfF646qt45Akyyw8oS3CCiIZRwvcNlvkPsZUp
- bRnUqCv/YPWnR7LeQNOROvlYcdnFcDhPSUKXkYcdYUfAA+oWgT+6f3Ofdre64V5uFtsZ
- ehKQ==
+ d=1e100.net; s=20230601; t=1731627011; x=1732231811;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pGl/sdg2zK3o+zL11+cd+2YCRdsj6zkaBT440rZNITQ=;
+ b=eB6tFBQ3DhoEH5vBzJmDpzPIwgZp8MaoJlfupEalA079BeSqyZ2BcZE7nTygv/YD2s
+ aX+r8PwWSP0CC0S4X5XxCLEZtSIibipg1KT9e0JNK4I1scWsX274vOQgySCU/+xSWTVn
+ LKpP5rbREy5AonZAAso/jB4PhiSFnTjcLqSDOVI68LLEBftGz7PIhTA2macWE2geqptA
+ rjlicRxRymZNgiSm8XkCBOny2f2otaY2NSNygzWiKd3CtfZ1JrU2i1kdCEgvJNnLrvXa
+ OZyrGehbqqyFdXGnKq369m2WzkYeqXb4/Iab8x5Zuu/S3k1vDyiyieRPAY8aKJWkY9We
+ V36g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVeD75gh2G7QnyyOYlIiyxAUeHntxXlPBIYJKlthkGw6+UndvXSUK8iUWBPKWkxp105atwub9o=@lists.denx.de
-X-Gm-Message-State: AOJu0YzbacB/uIMH+lZi/B84PAGklGKiyJY+ZyhqSwYtLA4KtppCeXP7
- pDnQpRJ8ez8czwDoPZpCZy5Ahx7NrS6q/dIgDKcUucUlhkh+4G93DwvVOcUEb1elDbO6BMrV7j9
- S3uj1Ypa+wOHB41CAev1QZxtTnjw=
-X-Google-Smtp-Source: AGHT+IFMr6KOhnbjeVmljN2a4zcF4kxXc8NGg/YgL0wpWVE9X6xqA0EPJcUrsupmNFpA+ZjvC3s9JOmElgSvIxb4z+E=
-X-Received: by 2002:a05:6402:518d:b0:5cf:e43:7695 with SMTP id
- 4fb4d7f45d1cf-5cf8fc38890mr253746a12.11.1731626880275; Thu, 14 Nov 2024
- 15:28:00 -0800 (PST)
-MIME-Version: 1.0
+ AJvYcCUIvY+JkA6WwON2XHZqNwasUGJsPuPyXVy0e+zsEIbaeZPKLPH7JreKpnF3mKV7hoy/QHd5Cv0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZvBbayl8TaNdf3YG8+sv24jU6PR2a7t81E1VI/lVSywJV7PHJ
+ LDQwncJq/HT3Qys0S1FIjbUvkPjHBtYXvCNL088X9Q4IwIOBLGCXfeRny0dtQYI=
+X-Google-Smtp-Source: AGHT+IFQKXDFJsiESla+kUWyhxb2hsRDHUXAvVACKWPP69uCQby1gEhMx/s/hNLMMIIpvmqG9IGR8Q==
+X-Received: by 2002:a05:622a:5b9b:b0:462:af30:47d with SMTP id
+ d75a77b69052e-46363b6b7b2mr8002541cf.0.1731627011394; 
+ Thu, 14 Nov 2024 15:30:11 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-4635aa3a2ebsm11834621cf.51.2024.11.14.15.30.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Nov 2024 15:30:10 -0800 (PST)
+Date: Thu, 14 Nov 2024 17:30:05 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Stefan Roese <sr@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Thomas Weber <weber@corscience.de>,
+ Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>,
+ Phil Sutter <phil@nwl.cc>, Siddarth Gore <gores@marvell.com>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Heiko Schocher <hs@denx.de>, Evgeni Dobrev <evgeni@studio-punkt.com>,
+ Ilko Iliev <iliev@ronetix.at>, Dave Purdy <david.c.purdy@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: ZDI-CAN-24679: New Vulnerability Report
+Message-ID: <20241114233005.GN3600562@bill-the-cat>
 References: <DM5PR0102MB3477A6AC67623306D970177980AC2@DM5PR0102MB3477.prod.exchangelabs.com>
  <BYAPR01MB38307E0A0D8A480B35F122F6805B2@BYAPR01MB3830.prod.exchangelabs.com>
  <20241114145636.GF3600562@bill-the-cat>
@@ -70,21 +82,13 @@ References: <DM5PR0102MB3477A6AC67623306D970177980AC2@DM5PR0102MB3477.prod.excha
  <20241114163354.GH3600562@bill-the-cat>
  <CAJaLiFyw5jba5g=8h6R_aB26wqJvdN9eLvu3T6FJBBpm4LkzhA@mail.gmail.com>
  <20241114203349.GM3600562@bill-the-cat>
-In-Reply-To: <20241114203349.GM3600562@bill-the-cat>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Thu, 14 Nov 2024 15:27:48 -0800
-Message-ID: <CAJaLiFz+ja_qChEYg-KPh5uydp6Y_nXGv_9FF61W15pzPcpNMQ@mail.gmail.com>
-Subject: Re: ZDI-CAN-24679: New Vulnerability Report
-To: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
-Cc: Michal Simek <michal.simek@amd.com>, Thomas Weber <weber@corscience.de>, 
- Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>,
- Phil Sutter <phil@nwl.cc>, Siddarth Gore <gores@marvell.com>,
- Holger Brunck <holger.brunck@hitachienergy.com>, 
- Heiko Schocher <hs@denx.de>, Evgeni Dobrev <evgeni@studio-punkt.com>,
- Ilko Iliev <iliev@ronetix.at>, Dave Purdy <david.c.purdy@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAJaLiFz+ja_qChEYg-KPh5uydp6Y_nXGv_9FF61W15pzPcpNMQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ksRTnF4FwkEx+Orb"
+Content-Disposition: inline
+In-Reply-To: <CAJaLiFz+ja_qChEYg-KPh5uydp6Y_nXGv_9FF61W15pzPcpNMQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,98 +105,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-Hi Stefan,
 
-I've trimmed down the CC list a bit.
+--ksRTnF4FwkEx+Orb
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 14, 2024 at 12:33=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Thu, Nov 14, 2024 at 12:18:49PM -0800, Tony Dinh wrote:
-> > Hi Tom,
-> > Hi Stefan,
+On Thu, Nov 14, 2024 at 03:27:48PM -0800, Tony Dinh wrote:
+> Hi Tom,
+> Hi Stefan,
+>=20
+> I've trimmed down the CC list a bit.
+>=20
+> On Thu, Nov 14, 2024 at 12:33=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
+ote:
 > >
-> > On Thu, Nov 14, 2024 at 8:33=E2=80=AFAM Tom Rini <trini@konsulko.com> w=
-rote:
+> > On Thu, Nov 14, 2024 at 12:18:49PM -0800, Tony Dinh wrote:
+> > > Hi Tom,
+> > > Hi Stefan,
 > > >
-> > > On Thu, Nov 14, 2024 at 04:07:15PM +0100, Michal Simek wrote:
-> > >
-> > > > Hi,
+> > > On Thu, Nov 14, 2024 at 8:33=E2=80=AFAM Tom Rini <trini@konsulko.com>=
+ wrote:
 > > > >
-> > > > On 11/14/24 15:56, Tom Rini wrote:
-> > > > > On Thu, Nov 14, 2024 at 04:02:29AM +0000, zdi-disclosures@trendmi=
-cro.com wrote:
-> > > > >
-> > > > > > Hi,
-> > > > > > Do you have any updates to share regarding this vulnerability r=
-eport?
-> > > > >
-> > > > > Michal, microblaze-generic is the most active platform that enabl=
-es
-> > > > > FS_JFFS2 by default and so vulnerable here. Can you find some res=
-ources
-> > > > > to look in to fixing this please? Thanks.
+> > > > On Thu, Nov 14, 2024 at 04:07:15PM +0100, Michal Simek wrote:
 > > > >
-> > > > We have actually discussed this recently and we have other issues w=
-ith jffs2
-> > > > and not going to fix it or recommend to use it.
-> > > > JFFS2 should be removed from our configs and it is also not under o=
-ur regression.
+> > > > > Hi,
+> > > > >
+> > > > > On 11/14/24 15:56, Tom Rini wrote:
+> > > > > > On Thu, Nov 14, 2024 at 04:02:29AM +0000, zdi-disclosures@trend=
+micro.com wrote:
+> > > > > >
+> > > > > > > Hi,
+> > > > > > > Do you have any updates to share regarding this vulnerability=
+ report?
+> > > > > >
+> > > > > > Michal, microblaze-generic is the most active platform that ena=
+bles
+> > > > > > FS_JFFS2 by default and so vulnerable here. Can you find some r=
+esources
+> > > > > > to look in to fixing this please? Thanks.
+> > > > >
+> > > > > We have actually discussed this recently and we have other issues=
+ with jffs2
+> > > > > and not going to fix it or recommend to use it.
+> > > > > JFFS2 should be removed from our configs and it is also not under=
+ our regression.
+> > > >
+> > > > Ah OK, thanks. Adding a few more maintainers now then.
 > > >
-> > > Ah OK, thanks. Adding a few more maintainers now then.
+> > > Does this affect only boards that explicitly use CMD_JFFS2? how about
+> > > boards that have not been converted to bootstd and still use "nand
+> > > read" like this:
+> > >
+> > > include/configs/openrd.h
+> > >
+> > > #define CFG_EXTRA_ENV_SETTINGS  "x_bootargs=3Dconsole=3DttyS0,115200 =
+" \
+> > >         CONFIG_MTDPARTS_DEFAULT " rw ubi.mtd=3D2,2048\0" \
+> > >         "x_bootcmd_kernel=3Dnand read 0x6400000 0x100000 0x300000\0" =
+     \
 > >
-> > Does this affect only boards that explicitly use CMD_JFFS2? how about
-> > boards that have not been converted to bootstd and still use "nand
-> > read" like this:
+> > It's a problem for boards which read from JFFS2 in U-Boot, yes. So in
+> > the case of the kernel / etc being read from a raw location (or ubi or
+> > what-have-you), if FS_JFFS2 (or CMD_JFFS2, same list of platforms) is
+> > disabled the problem goes away. And if we're down to just a few lightly
+> > used platforms, we can just drop JFFS2 support. Thanks!
 > >
-> > include/configs/openrd.h
-> >
-> > #define CFG_EXTRA_ENV_SETTINGS  "x_bootargs=3Dconsole=3DttyS0,115200 " =
-\
-> >         CONFIG_MTDPARTS_DEFAULT " rw ubi.mtd=3D2,2048\0" \
-> >         "x_bootcmd_kernel=3Dnand read 0x6400000 0x100000 0x300000\0"   =
-   \
->
-> It's a problem for boards which read from JFFS2 in U-Boot, yes. So in
-> the case of the kernel / etc being read from a raw location (or ubi or
-> what-have-you), if FS_JFFS2 (or CMD_JFFS2, same list of platforms) is
-> disabled the problem goes away. And if we're down to just a few lightly
-> used platforms, we can just drop JFFS2 support. Thanks!
->
-> --
-> Tom
+> > --
+> > Tom
+>=20
+> I did a survey. Currently, we have 27 boards that use JFFS2. In that,
+> I can take care of 15 boards (1 Armada XP and 14 Kirkwood).
+>=20
+> - 10 boards with trivial changes (just remove JFFS2 from defconfigs)
+>=20
+> configs/dns325_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/dockstar_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/goflexhome_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/guruplug_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/iconnect_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/nas220_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/nsa310s_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/nsa325_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/pogo_v4_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/pogo_e02_defconfig:CONFIG_CMD_JFFS2=3Dy
+>=20
+> - Four boards (actually 2 boards, openrd has 3 variations) need
+> convert to bootstd and remove JFFS2
+>=20
+> configs/openrd_base_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/openrd_client_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/openrd_ultimate_defconfig:CONFIG_CMD_JFFS2=3Dy
+> configs/sheevaplug_defconfig:CONFIG_CMD_JFFS2=3Dy
+>=20
+> - One board needs to remove legacy boot sequence and remove JFFS2
+> (bootstd already done)
+>=20
+> configs/ds414_defconfig:CONFIG_CMD_JFFS2=3Dy
+>=20
+> Hopefully someone will take care of the 12 remaining boards.
 
-I did a survey. Currently, we have 27 boards that use JFFS2. In that,
-I can take care of 15 boards (1 Armada XP and 14 Kirkwood).
+Great, thanks!
 
-- 10 boards with trivial changes (just remove JFFS2 from defconfigs)
+>=20
+> All the best,
+> Tony
 
-configs/dns325_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/dockstar_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/goflexhome_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/guruplug_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/iconnect_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/nas220_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/nsa310s_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/nsa325_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/pogo_v4_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/pogo_e02_defconfig:CONFIG_CMD_JFFS2=3Dy
+--=20
+Tom
 
-- Four boards (actually 2 boards, openrd has 3 variations) need
-convert to bootstd and remove JFFS2
+--ksRTnF4FwkEx+Orb
+Content-Type: application/pgp-signature; name="signature.asc"
 
-configs/openrd_base_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/openrd_client_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/openrd_ultimate_defconfig:CONFIG_CMD_JFFS2=3Dy
-configs/sheevaplug_defconfig:CONFIG_CMD_JFFS2=3Dy
+-----BEGIN PGP SIGNATURE-----
 
-- One board needs to remove legacy boot sequence and remove JFFS2
-(bootstd already done)
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2h/kACgkQFHw5/5Y0
+tyxzRAv/dumQR/y2HPnFHIIyDTyZGFFHNyU9KlhdAvDn0Vsax2qA2oTFFqw7BQi1
+A22xb+BbwsxLcqvC3z2ZNzcj6TH5BNMwSxRtAu9TLjuczf5IlaVKmZPYk6rwo44f
+UbUgn9jMlXPaWsdbyPKT2pF95/ZBHDTiwC0LMUNTYYwV9xrd/2G266xmAbcr8zIJ
+Ru9mdlqZum3u/EV6nZ/6Fy2PqeWTrAX7P7RYR/eVc5pnaH7uZGUoeHnyXr8ucttk
+qf5jddpA/1jPKNa87ehwq4idY9+D2Ad9DnH/Oi+oTf3XarxuvcwbiVF4mTmUku8p
+l/NV+5gviYnosIX+PNuArjUYMt7zSXwUtQo7Lj3JIHyB61WY2U+JzOe4XNO9aBqo
+8CYePAEXyyo3VP4X5bMKCxGCaS31yloOf5MwUW+kqB+RQlmnw0XibaTYeueqinsl
+lb+wHN0kDuSAtUlhmLLXBqHd7ves3FVGvuV/yudo8KJ7Lap+RxT5pB4TKc9tV86z
+sWnsfd2p
+=Lr88
+-----END PGP SIGNATURE-----
 
-configs/ds414_defconfig:CONFIG_CMD_JFFS2=3Dy
-
-Hopefully someone will take care of the 12 remaining boards.
-
-All the best,
-Tony
+--ksRTnF4FwkEx+Orb--
