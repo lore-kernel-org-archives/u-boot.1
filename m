@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E521D6A222
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 17:37:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11766D6A221
+	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 17:39:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 005408963D;
-	Thu, 14 Nov 2024 18:37:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 82E2F88DF1;
+	Thu, 14 Nov 2024 18:39:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZWJcUNp9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a9I0N9BL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1856789649; Thu, 14 Nov 2024 18:37:25 +0100 (CET)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 592FA88ECB; Thu, 14 Nov 2024 18:39:35 +0100 (CET)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B7628962E
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 18:37:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CCC4088DDA
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 18:39:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2fb51e00c05so15350861fa.0
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 09:37:22 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3e600ae1664so417170b6e.2
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 09:39:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731605842; x=1732210642; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Tv+/3qHhYpc1fyWgJST5xLr3hg0MPW0NV9fjne9u/GI=;
- b=ZWJcUNp9ufsyFzzkzSiZ9cdueCDg6AM2CqgodGoKAZOmIy1mOUc/Z/2otx3hgHcF1e
- 3aQkFvpwHC9u6T+ySH9E/R0cxLbmaER1a3Gthmb1GPzRjpMEqLY9Iq1V5lhFcU69XMOB
- mmE7RR8sKs3yDKgE0/MjiNnb8AfsFll4Wy2BO2Def/uiWB75ho+Qr/ZqPZ6qeAYoxLA8
- sWcK4Ahal/IdJAzXw5bLL2EPfo3AcjT+fFjxtjyhXxkuW/FfWsMndE8KxXuOrg9k5+Qs
- DPBiTSGXKOJ14M1SDcUDVak9zsyYO0ZT5AoAjOuw6A1d5LTBJUqioD74Nr4rbgC+k66x
- PuyA==
+ d=konsulko.com; s=google; t=1731605971; x=1732210771; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=4PD+wNDby0aNr6BVVUWBz4GK8cpeiRR6RHb6Bc78h9k=;
+ b=a9I0N9BLkbTskge7jau5AtnP2bYTKwnvGWKlhWu0mJT1dP+I6nshoSFI3APtFe52F7
+ tZaEJBm1gxryB9eMQWhcap5Qt2EMoAS30r1WcCmtyTOPkYV/r7cOycQrLBfnpI+m0/it
+ 6p/aa8btYZ7/pUHXv41c4zRfrwJEqYjMh42+Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731605842; x=1732210642;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Tv+/3qHhYpc1fyWgJST5xLr3hg0MPW0NV9fjne9u/GI=;
- b=r+NHJqh29ZCA18IyF8fW5w6xVP/S3yK13VVcqoCdcCcNSqYyUmAVNBdFBDIkEvy746
- +JVKsLGKI1Zhu9Yb6LXiLkJ40Rbnnrkg/jlio2bBElM8FNhzsMC9a1ck3RvsYjRjSZmx
- S03AH7xByNsv4e+8vKZkoh0RwEtPUoD3ISqMbWE9+XBFup93Kpq0+vZKBsCCI8UUQI1M
- P+LOBjP/C598oIevjb6ulKpFSnWmU2xYWOFiyvV5zEMXhQYbZrxhJlgMdm6xJkrNzDas
- ER9g7PXSU4nbTo+xgDpSZ2p92vQmI6hvOIw3G8K4XHXYqWjoYMyERnNSNlFFwv+OyZ7k
- 3frQ==
+ d=1e100.net; s=20230601; t=1731605971; x=1732210771;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4PD+wNDby0aNr6BVVUWBz4GK8cpeiRR6RHb6Bc78h9k=;
+ b=bzrXgM2wFt4BIX2SND7/yg6DKIuJFVs3//XRIcfQBwvKDFdowOV3t7xH+JlA0LRxym
+ PuwyC4lMIKJKBusMwfHQPxlLvixgtZ10Tyi2RN2kCi/cXFyVjncEOxg3VJduMLF4auNA
+ vBwwefvucAiNfVXdoX8XCPsb8Z2Wn7W+ZaZskhN707Tjf/zdPHiOHSbKDqkj/AbnFXy9
+ ydBZDNQPZD4SLwq+cWhsQd5QA31APSyGZsZs9pJ7tn7vKgb2aojMmdZ3XEoi85TTaIZz
+ KDn6sJ685Rw6v4ysG4yHwoAVMdpaScm5bzieawpuFFcgoaZIkNVK05LEZODC6EeEIkbr
+ NJ8w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWixxiWvSd7G4+slOvp6s6OCDPin3kjICjNY7la86eUUpcPLCYCkKaMb7h7XE8acfQ3R51mlQw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyZAXXPLUdxybItCaLpcKy4BtWt2kXuY5/BjydW9niEBxRpkRef
- ZDIjUkRVKTkZlfhf7jWH5W9L1+wg+pAjRaLWbuoIg+B2BisldkQHPTdaUU90YkDZ8DV4WzhPgKb
- PV0yOqyvqcyf+v563hP5E4IIDa3o=
-X-Google-Smtp-Source: AGHT+IFfK91nNTi2ersghCr8K1cWJhvc6wItyRHCjkyotMJNPvPVlH6lDCwWe2jOBEeXrGtGxHtH0uBfo+qk44Icn9o=
-X-Received: by 2002:a05:651c:1144:b0:2fa:c0b5:ac8c with SMTP id
- 38308e7fff4ca-2ff59036dfemr26250601fa.21.1731605841424; Thu, 14 Nov 2024
- 09:37:21 -0800 (PST)
+ AJvYcCUKXLobbxMMOxHhhotxAyPNISrtvb48+ba2BZgSkeiGnjE82In9uwq5i3cyOg3syJ1+2WS/720=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyx9J6+nYup6/ZQcpI4OPc5/1EB0eZ52abqED9c+yNbM+1GP9N/
+ esKpn7pKnhwh5NBVFUe4zzf7hR1hnZ+vd4yNZ5yXiDJumOD9f9wZu+B3Mn4NlN0=
+X-Google-Smtp-Source: AGHT+IEtnwyrXhmyVTKekMb/YcQH8b4pjTyZ3bdkDYF7SoTG1DlQqLYC1lZyM2xhsifrKK/BRf0HUQ==
+X-Received: by 2002:a05:6808:2743:b0:3e7:ac6a:213c with SMTP id
+ 5614622812f47-3e7ac6a219emr9386433b6e.28.1731605971489; 
+ Thu, 14 Nov 2024 09:39:31 -0800 (PST)
+Received: from bill-the-cat ([145.14.135.248])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3e7b85bc432sm470230b6e.28.2024.11.14.09.39.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Nov 2024 09:39:30 -0800 (PST)
+Date: Thu, 14 Nov 2024 11:39:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Hugo Cornelis <hugo.cornelis@essensium.com>,
+ Simon Glass <sjg@chromium.org>, Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alexander Dahl <ada@thorsis.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/1] tools: use cryptographically safe RNG
+Message-ID: <20241114173927.GJ3600562@bill-the-cat>
+References: <20241102163259.305802-1-heinrich.schuchardt@canonical.com>
+ <20241114172654.GA4059396@bill-the-cat>
+ <CAM=mAOmFn0tytht3oK1F59=-nGxuLJmtSr2HpJDyTf=LWKYQOg@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241111020808.38974-1-hal.feng@starfivetech.com>
- <CANAwSgSDjcDU-BUm7fNGC+GzaCTVVitL_jG6t0QQR0kM70Mfyw@mail.gmail.com>
-In-Reply-To: <CANAwSgSDjcDU-BUm7fNGC+GzaCTVVitL_jG6t0QQR0kM70Mfyw@mail.gmail.com>
-From: E Shattow <lucent@gmail.com>
-Date: Thu, 14 Nov 2024 09:37:10 -0800
-Message-ID: <CANV2PTOkxY0-Xa9d2ctjROHtiM_YSbjR0Z4LpywEduXFFJHL_g@mail.gmail.com>
-Subject: Re: [PATCH v4 00/13] Support OF_UPSTREAM for StarFive JH7110
-To: Anand Moon <linux.amoon@gmail.com>
-Cc: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>, 
- Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>, 
- Rick Chen <rick@andestech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- H Bell <dmoo_dv@protonmail.com>, 
- Conor Dooley <conor.dooley@microchip.com>, Nam Cao <namcao@linutronix.de>, 
- Bo Gan <ganboing@gmail.com>, 
- Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
- Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="u2fL8lh6pCe7gfuD"
+Content-Disposition: inline
+In-Reply-To: <CAM=mAOmFn0tytht3oK1F59=-nGxuLJmtSr2HpJDyTf=LWKYQOg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,175 +98,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anand,
 
-On Wed, Nov 13, 2024 at 8:42=E2=80=AFPM Anand Moon <linux.amoon@gmail.com> =
-wrote:
->
-> Hi Hal,
->
-> On Mon, 11 Nov 2024 at 07:53, Hal Feng <hal.feng@starfivetech.com> wrote:
+--u2fL8lh6pCe7gfuD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Nov 14, 2024 at 06:35:44PM +0100, Heinrich Schuchardt wrote:
+> Tom Rini <trini@konsulko.com> schrieb am Do., 14. Nov. 2024, 18:27:
+>=20
+> > On Sat, Nov 02, 2024 at 05:32:59PM +0100, Heinrich Schuchardt wrote:
 > >
-> > This patchset add OF_UPSTREAM support for StarFive JH7110 based boards.
-> > All the JH7110 based boards can use the DT from upstreaming linux kerne=
-l.
-> > The v1.3b board device tree is set as the default device tree. Support
-> > CONFIG_MULTI_DTB_FIT and the SPL selects the correct U-Boot dtb using t=
-he
-> > EEPROM information.
+> > > The PRNG implementing the random() function only has 2^31 states and
+> > > therefore is unsafe to use for cryptography. Use arc4random() instead.
+> > >
+> > > Fixes: cc34f04efd63 ("tools: image-host.c: use random instead of rand=
+")
+> > > Addresses-Coverity-ID: 312953 Calling risky function
+> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > ---
+> > >  tools/image-host.c | 35 +++--------------------------------
+> > >  1 file changed, 3 insertions(+), 32 deletions(-)
 > >
->
-> I am encountering an issue with my Milk-V CM. I am unable to use the
-> SD card with the CM4 IO board.
-> The onboard SPI switch does not support a boot configuration switch,
-> so the default boot is set to eMMC.
+> > Now I get:
+> > /home/uboot/u-boot/u-boot/tools/image-host.c: In function
+> > 'fit_image_setup_cipher':
+> > /home/uboot/u-boot/u-boot/tools/image-host.c:439:17: warning: implicit
+> > declaration of function 'arc4random_buf' [-Wimplicit-function-declarati=
+on]
+> >   439 |                 arc4random_buf((void *)info->iv,
+> > info->cipher->iv_len);
+> >       |                 ^~~~~~~~~~~~~~
+> > /usr/bin/ld: tools/image-host.o: in function `fit_image_cipher_data':
+> > image-host.c:(.text+0xb41): undefined reference to `arc4random_buf'
+> > collect2: error: ld returned 1 exit status
+> > make[3]: *** [scripts/Makefile.host:104: tools/dumpimage] Error 1
+> >
+> > in the docker container. I gather this means arc4random_buf is not as
+> > widely available as assumed.
+> >
+>=20
+> glibc 2.36 is required published 2022-08. Ubuntu Jammy is 22.04.
 
-Mars CM and Mars CM Lite are not able to boot from eMMC and SD Card.
-There is transistor logic on Mars CM and Mars CM Lite which only
-allows UART or SPI NOR Flash depending on the state of nRPIBOOT.
+Yeah, that's likely (a) too new and (b) strange because:
+https://source.denx.de/u-boot/u-boot/-/jobs/945810 and so is jammy
+22.04.
 
-Perhaps you are thinking of SPI NOR Flash boot of JH7110 which is
-jumping execution to SPI NOR Flash offset 0 where, presumed it is
-where you have U-Boot SPL?
+--=20
+Tom
 
-From then U-Boot SPL may load U-Boot Main payload depending on the
-state of configuration switch, so then UART for UART setting, or SPI
-NOR Flash at 0x100000 offset for SPI NOR Flash setting.
+--u2fL8lh6pCe7gfuD
+Content-Type: application/pgp-signature; name="signature.asc"
 
-U-Boot Main may then execute as normal including SD Card or eMMC. This
-is distinct from the concept of JH7110 zeroth boot loader in mask ROM
-loading from SD Card or eMMC.
+-----BEGIN PGP SIGNATURE-----
 
->
-> Please suggest a method to flash an image onto the eMMC on the CM board.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2Nc8ACgkQFHw5/5Y0
+tyz0nQv/ataG5B4TdcDpbk7HKirrSrzb6JQlsyMC5hC65+AkP1CBYQVdnnG55w9r
+T8mTV8he4DPkSXqA6yShHX07VWo5y247DQcuWCEAMNRB9fRQghnelaDNYsgScy28
+VebCUAOlaUQ0d+zmXgLwZHWafUPM0sRjCB36X6aLyeKHTp1wvoaZmkDyWQt+jgpX
+sU0/eKlkHPYF4Vqi4evYhcjg0sI/pl8AjK8ZeJW8CWmTXscOCe68Me8RGmdo0/Pp
+rCeOqGnphg2GbXM4ZoQPGIukgAAV1tvommR6ce3XefHDLv+8D7ZJUOFB3BzbkxzS
+ceEjeVabRt2dzsBD5VSji5PKBQSR8z2sn2iOW74zxcttFICcnseE57/GZ6qOlKIr
+1G6SGVUm6Y4Kt/dK7MDqEgzEDQetgnOyMfI/HgjFKebutwyP3G8ZPUIJ8hsY5zEF
+2vBaQMnHt7JMmHNAibnd+jWXGIRDanBuTyZPMprf1+OFc+bA4tDL+B+3Mqwpyl/t
+GzF2IXVH
+=7ITa
+-----END PGP SIGNATURE-----
 
-This will not work with the OF_UPSTREAM patch set of topic (yet)
-because simply Mars CM and Mars CM Lite devicetree do not exist
-upstream.
-
-You may use U-Boot stable release v2024.10 as a recovery tool to flash
-U-Boot v2024.10 into SPI NOR Flash which, exclusive of this
-OF_UPSTREAM patch series, has some runtime fix-up adjusting the Milk-V
-Mars devicetree for Mars CM or Mars CM Lite depending on EEPROM
-content.
-
-For that to work you will also need to verify and perhaps adjust the
-EEPROM content of your Mars CM for accuracy per the advisory from
-Milk-V; from what information you have shared you may have a 4GB RAM
-model with 16GB eMMC and if that is accurate then no change to the
-EEPROM content is needed.
-
-When you have for example U-Boot v2024.10 installed to SPI NOR Flash
-and it does have the fix-up at runtime to allow functional eMMC, then
-you may use any of the methods available to that version of U-Boot:
-
-1. You can load data from TFTP to DRAM address for write operation
-onto the eMMC directly but you will have to invent some scripting to
-do the required math between byte counts and block unit offsets.
-2. You can load an OS from TFTP to DRAM and boot; for example the
-Debian debian-installer netinst Linux kernel and initial ramdisk.
-3. There is not any working JH7110 on-CPU USB driver in U-Boot
-v2024.10 so the use of USB (as a reasonable person would attempt) is
-not possible. Patches exist for this and is something that will be
-possible in future but not yet. You will note that if your Mars CM is
-installed to a carrier board that has additionally a VL805 USB
-controller on the PCI bus then USB may actually work because the
-VisionFive2 has this same PCI+VL805 for USB. It is not typical though
-for CM4 carrier boards... but I recall reading that they do exist so
-worth a mention here.
-
->
-> I have tried the instructions to update the firmware using
-> [1] https://milkv.io/docs/mars/compute-module/boot
-
-Milk-V USB flash tool at the link loads a closed-source SPL binary via
-JH7110 UART configuration that postures as a USB endpoint (using the
-JH7110 on-CPU USB function) and the companion software that talks to
-it is "compiled" closed-source python. Make your own conclusion...
-mine is that U-Boot+TFTP is good enough and preferentially it is open
-source.
-
-See:
-
-https://docs.u-boot.org/en/v2024.10/board/starfive/milk-v_mars_cm.html
-
-https://github.com/geerlingguy/sbc-reviews/issues/22#issuecomment-190867661=
-8
-
-https://milkv.io/docs/mars/compute-module/update-eeprom
-
->
-> Thank you so much for your help.
->
-> Thanks
-> -Anand
->
-> --------EEPROM INFO--------
-> Vendor : MILK-V
-> Product full SN: MARC-V10-2340-D004E016-00000812
-> data version: 0x2
-> PCB revision: 0xc1
-> BOM revision: A
-> Ethernet MAC0 address: 6c:cf:39:00:85:6b
-> Ethernet MAC1 address: 6c:cf:39:00:85:6c
-> --------EEPROM INFO--------
->
-> starfive_7110_pcie pcie@940000000: Starfive PCIe bus probed.
-> starfive_7110_pcie pcie@9c0000000: Starfive PCIe bus probed.
-> In:    serial@10000000
-> Out:   serial@10000000
-> Err:   serial@10000000
-> Net:   Could not fetch index
-> Could not fetch index
-> eqos_probe_resources() failed: -22
-> Could not fetch index
-> eqos_probe_resources() failed: -22
-> eth1: ethernet@16040000
-> starting USB...
-> Bus xhci_pci: Register 5000420 NbrPorts 5
-> Starting the controller
-> USB XHCI 1.00
-> scanning bus xhci_pci for devices... Resetting EP 0...
-> 3 USB Device(s) found
->        scanning usb for storage devices... 1 Storage Device(s) found
-> Working FDT set to ff725a10
-> Hit any key to stop autoboot:  0
-> StarFive # mmc info
-> Device: mmc@16010000
-> Manufacturer ID: 15
-> OEM: 0
-> Name: AJTD4R
-> Bus Speed: 45333334
-> Mode: MMC High Speed (52MHz)
-> Rd Block Len: 512
-> MMC version 5.1
-> High Capacity: Yes
-> Capacity: 14.6 GiB
-> Bus Width: 8-bit
-> Erase Group Size: 512 KiB
-> HC WP Group Size: 8 MiB
-> User Capacity: 14.6 GiB WRREL
-> Boot Capacity: 4 MiB ENH
-> RPMB Capacity: 4 MiB ENH
-> Boot area 0 is not write protected
-> Boot area 1 is not write protected
-> StarFive # mmc rescan
-> StarFive # mmc rescan
-> StarFive #
-> StarFive # mmc part
-> ## Unknown partition table type 0
-
-I will say on-topic that although it is a regression in functionality
-for U-Boot from the v2024.10 stable release to apply OF_UPSTREAM
-series, the absence of Mars CM and Mars CM Lite should not be blockers
-for OF_UPSTREAM patch set. It is time to submit these upstream (to
-Linux kernel) which is not our problem here, and besides this there
-are more JH7110 board support devicetree being accepted upstream which
-are not represented here now. The missing functionality will be
-restored after this is done.
-
-All users who want to have working Mars CM and Mars CM Lite should
-stay with U-Boot stable version v2024.10, and to focus on contributing
-with Linux upstream for these boards.
-
--E
+--u2fL8lh6pCe7gfuD--
