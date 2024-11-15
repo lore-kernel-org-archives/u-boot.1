@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1AD6D68BD5
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 20:49:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03AF4D68BD7
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 21:09:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F5D2890C6;
-	Fri, 15 Nov 2024 21:49:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D74A88EF7;
+	Fri, 15 Nov 2024 22:09:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MOS8Tvvk";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nKeZy5aP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82BA38904E; Fri, 15 Nov 2024 21:49:38 +0100 (CET)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id EE25C88F12; Fri, 15 Nov 2024 22:09:40 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15E00890DA
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 21:49:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 60BA188E4B
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 22:09:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6d40e69577dso197836d6.3
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 12:49:36 -0800 (PST)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2e3d523a24dso1857409a91.0
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 13:09:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731703775; x=1732308575; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Yal/VQs41k9KSui3E+G8zmroueZ86UxWXzD1Ipb1foE=;
- b=MOS8TvvkDHYOXxhvtp6dkLkv6/MQBl+xNdN2CagiT4D7qzFAkobFE9vJR9ltyM151e
- z8ct4utWqR7tfD/ERriJf6gMWCMlQKUmX2qnN9eRBM/2APGDh1VV/eUeEjI7oiktyuz/
- 94XkAI8FnuFphZV4AxzzsT5E7y+flsXGyIqOA=
+ d=linaro.org; s=google; t=1731704977; x=1732309777; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=KsEgp3V0AEgbOorImIVy/9an4s7iMqBfynvk8y442ig=;
+ b=nKeZy5aPB7+XElvZQmvd4EcxJZPD/l9UIOJTDO3GGB3RK1HEyH6rsU9+dfr5yxQEB0
+ 85S/KcI1rt7Qj2q94KiSbpbUULTMgDTM+ZW+pNopknaOhtJYfZ0A2JUzLmXfwBtYMAPH
+ s0ehlbtM5TbnVoZhkzOlOcga+KKc40am+K8N47O8qHd3d2FaL0uPm7dUs90gf7sV2V7h
+ Ljo8CbRcGBnzC8adYuMyTvz+sEprc9C4V3I+kSPSBMU/WlOLHG5EXDz4SOLuuuAB2G4X
+ Dv/3sy4k0ddQ2wVZ6LzHQr7/5LBSJq3QJR2k8X2mpNmigSBEN4XGhxOobBB5x/3wJGom
+ 4RqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731703775; x=1732308575;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Yal/VQs41k9KSui3E+G8zmroueZ86UxWXzD1Ipb1foE=;
- b=hyuzARuxKK0oai95VW2qhx8xFtHgI4WNAfW3Y1+8VI7FKhK+ECQyv7LIb2G/5RXR9s
- 2/euF7/LCEZbKdWYOkBMseTRVUIemgsFsMoaH8Qnqnm1XKCT02Hst5mILgaX+hAIMS1k
- XN+ZnMKfG/0YTU7DrPZH6pg7k4p1ufw56ULnvyRBm/b4yL39moD2K0XkYokDP602eUWS
- t0zt/CHKjkVWLpGLpj1/5WwqUi/DjS0sxMTGQHhJM3zS/bzu6iB5RHOTaVMPRf5CniRz
- gOHU83BTwct7/cpJZqafgqMENvsMtmk/1mg8E8GuQzoBN9LVuKmt9InC5Qs2jHPfr+jY
- 0IwA==
-X-Gm-Message-State: AOJu0YxIEoBPZIbU4hlf4XkX9w/UAJdjIYt92nNBebMTg5D6WswXGDRx
- IO8ZvA09LWG9a632LkmvLDYzV9hbYssJ+ac6/fHQ667gidvXW/IUA+Z1yhQ8/RU=
-X-Google-Smtp-Source: AGHT+IHoToCEOieIyNOBKJdBZy50CBMtWqop2UH4mPcIcOkXYL4YJTaRAgRV9IAzKgeyTMH8kOHhjg==
-X-Received: by 2002:ad4:5aaa:0:b0:6d4:b1e:5418 with SMTP id
- 6a1803df08f44-6d40b1e54fdmr15527596d6.33.1731703774892; 
- Fri, 15 Nov 2024 12:49:34 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d40dbfed6bsm880806d6.28.2024.11.15.12.49.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 12:49:34 -0800 (PST)
-Date: Fri, 15 Nov 2024 14:49:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Git commit failed with mbedtls/framework
-Message-ID: <20241115204931.GA3600562@bill-the-cat>
+ d=1e100.net; s=20230601; t=1731704977; x=1732309777;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KsEgp3V0AEgbOorImIVy/9an4s7iMqBfynvk8y442ig=;
+ b=ODWr9CEtWKNhbutCUdYGhwBcRhCHwg19uKFGor0xPWoVyc2q8Cf189ZZXYczcjl/Gf
+ vZMvw2p3NrI+fDsVnofmL5pbPLf2M/DQWYd+wwZJFt4QosrQ2G1d+EIMiTY5Tkm9O2aI
+ Wg43LzthHKd2EESYS3h4Gt4327n2/AZnv/wQwZY52zgzxhH726wkh0UF79Onjp4sNeru
+ zzs3u/Ga5a7k1kAyBfrGPBQ7VD0A8G+CUwSisSY2kbPRvOFtyLGms3Gz3SDXl7XHFlqt
+ N/03WLsNMl5KPWGiMSRpFOin99Kz8GPFMr0l3zyOkqsBSHVGUAEwkApboNQUse1+hF+g
+ iycQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWOE47UhdIHausgj71yH8OQhogYJCMVAu46mpURZAwlUYCmNUlXxcvEeRohm/biCwfC3Arr6uc=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywirzf5BMKyOM2Uv5dBRkWk7uWOVb3hZzm6DYyoqQKyboV4D4sw
+ VwlOVJGuYpEiVllLB7v5venUo+hX8dLSceptQOSjNHkBA7uozRC7k7auN8svrC059UHuD5fTcO3
+ FkkJ5hRzoTk0zfWnTxsKZ/JcEaI70FJxQWHlaNg==
+X-Google-Smtp-Source: AGHT+IHJBxeakPnYZy7G1Ceda4KG62ZLhixj2EyPnnA8jYpkQ0Lp2aVXOicP771ooIpl/C5s4hoo9CJkUKklt+92Ijg=
+X-Received: by 2002:a17:90b:4c03:b0:2e2:bb32:73e0 with SMTP id
+ 98e67ed59e1d1-2ea154f5f73mr5909697a91.12.1731704976721; Fri, 15 Nov 2024
+ 13:09:36 -0800 (PST)
+MIME-Version: 1.0
 References: <CAJaLiFwvFVOKYpAQLSNUqAfVHCsPcxo6g74JGunw8HSQTMCFLA@mail.gmail.com>
  <20241115141748.GS3600562@bill-the-cat>
  <CAJaLiFx35Q8L-kR02GrA1PTd2nY699KMc2fy5fT381Khg5hgxg@mail.gmail.com>
  <CAJaLiFy2oo2fp-08qJni8srUn6RErgGgZs_A3GGPJuD0+=YsOw@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GcbUn7cviTboQm1d"
-Content-Disposition: inline
 In-Reply-To: <CAJaLiFy2oo2fp-08qJni8srUn6RErgGgZs_A3GGPJuD0+=YsOw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 15 Nov 2024 16:09:26 -0500
+Message-ID: <CAEfUkUJOd03fc5VERRPY18LWMomEbYFRnkHSJcFLcdnPq4=8jA@mail.gmail.com>
+Subject: Re: Git commit failed with mbedtls/framework
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,15 +92,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tony
 
---GcbUn7cviTboQm1d
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, 15 Nov 2024 at 15:32, Tony Dinh <mibodhi@gmail.com> wrote:
 
-On Fri, Nov 15, 2024 at 12:32:03PM -0800, Tony Dinh wrote:
 > Hi Tom,
->=20
+>
 > On Fri, Nov 15, 2024 at 11:27=E2=80=AFAM Tony Dinh <mibodhi@gmail.com> wr=
 ote:
 > >
@@ -112,12 +109,13 @@ rote:
 > > > On Thu, Nov 14, 2024 at 08:26:33PM -0800, Tony Dinh wrote:
 > > > > Hi Tom,
 > > > >
-> > > > I am on 2025.01-rc2, and I am trying to commit some files. The error
+> > > > I am on 2025.01-rc2, and I am trying to commit some files. The erro=
+r
 > > > > seems to indicate this framework directory might need some
 > > > > modification. Did I miss something?
 > > > >
-> > > > error: 'lib/mbedtls/external/mbedtls/framework' does not have a com=
-mit
+> > > > error: 'lib/mbedtls/external/mbedtls/framework' does not have a
+> commit
 > > > > checked out
 > > > > fatal: updating files failed
 > > >
@@ -132,31 +130,15 @@ mit
 > > framework @ 3867faa
 > >
 > > I'll stash and repeat it on another clean tree.
->=20
+>
 > I have the same commit error on a brand new tree.
+>
+> I think you are talking about the test framework of MbedTLS's original
+testsuite,
+am I right?
+MbedTLS was ported into U-Boot as a git subtree and that framework is a git
+submodule of original MbedTLS repo which was not included in the porting
+of U-Boot since U-Boot has its own testsuite.
 
-Can you please reply with exactly what you're doing here ('script' may
-be helpful for example) ? Thanks.
-
---=20
-Tom
-
---GcbUn7cviTboQm1d
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc3s9MACgkQFHw5/5Y0
-tyyBAAv9FIHZd59FMxod1XjGLn5iImUrwl4Ozh3PeBOB+1sXlQgRhJrwbHnRd7C+
-5epZMwCeABPtBUHd4CSgkFkvEzdK7KJqfsKL2M7IckTmyKApcAeGc7DOVSuobO+a
-8hYYj42DxBaXrS0WKFFg0P5QzeDAIuo7cTFdF8hPWmYYXltYzWi2sG54+i+ENp6d
-5dN5sDkdWvQxVgWQWFw3PWcfVKI/6Gy0/J7fvAgV6t/7RXi7Vg8NG9uVeC1AVzyD
-8fz+OAO7L4dw/9S3STE8yOGwnTMR/XtQctrSrfd1nMdJYBZFh0zMkVuA/uTZi12d
-6RLwOcLGF4oZEtlzokJyGtYo39eTaGcb8/PLgXD9RWCafsmcQMyUJ1U6lieNDHEu
-0AB6UOdbW1joLDasv2lSzi2jN1v9PEmwI2kdF/u/Swgihs0BxISvtzL14S1p1MNM
-VP1eA2VmiKUSgyzm6c/3K+/eQGeBs4/BWzNfEVWh73rgGxfUh2yg5ZL1D26DvD8E
-kuhW3y/8
-=sneM
------END PGP SIGNATURE-----
-
---GcbUn7cviTboQm1d--
+Regards,
+Raymond
