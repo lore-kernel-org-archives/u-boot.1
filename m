@@ -4,71 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 249B0D6DDE1
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 13:37:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB6F3D6DDE3
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 13:48:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E017892CD;
-	Fri, 15 Nov 2024 14:37:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6B4968933B;
+	Fri, 15 Nov 2024 14:48:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H9CsuYmN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fnDhNJhy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 329C489326; Fri, 15 Nov 2024 14:37:33 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 4895989326; Fri, 15 Nov 2024 14:48:17 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCD5289266
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 14:37:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C05E688B6D
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 14:48:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5cf9cd111ecso354072a12.3
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 05:37:30 -0800 (PST)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-83ab21c26e5so61061339f.1
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 05:48:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731677850; x=1732282650; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VVCteZcVUZ7e0Wx4ZCrsiOz0qq4qY5KhAEKlvIdNKCQ=;
- b=H9CsuYmNriDMZvi2pY8heW4fJ/7oOop4PlDsDn1OU4dqeytGaQxXjly33wRfAe/8BR
- 8ZIHa6ObYum+pCdGuKxt11iQtUNFuxb1Dq7YqvABHhXAMtnLd/ANlXR/+3mpeqZmnw8c
- 2jyqMZL4KBvDVa3MfcV3MtRBYJuTvbNfao/M8=
+ d=chromium.org; s=google; t=1731678492; x=1732283292; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z/SVmmOquWrTWheDBOKDIwyiNYoWq7fxKAi5M0qhde0=;
+ b=fnDhNJhytH0XQmWGvQqCMODJLSGAVHojQ6ccc/Tlb6iouYcV5yBYrWXzMB0bj5uvMB
+ 0ZnnqXMUsFrtRNPKsHjJZpvmoOcF0qrJud37sft+/XWEAZSftr4wlr0eZuy/VHSmcgnW
+ S/IwRFJZGvNmSOPZENAEq3V716JpYAzAccCk8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731677850; x=1732282650;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1731678492; x=1732283292;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VVCteZcVUZ7e0Wx4ZCrsiOz0qq4qY5KhAEKlvIdNKCQ=;
- b=D+6U+NeMMlRT1FdSoAlI5p2ubzA+Za575khyfO7RNFxHk9poHIKGlCxLEb3uRJ7FpT
- HzGaG9d/6b92SK2QoU+fFAF5BGGzThT+8IeaVbdKkrkhq6B/MoHESM2NuFeu+PXDJPvZ
- M+ZB0GUcirORljhd+FHN4JJ9So6lBoHg6YSNwl07534++5hQYDo//eMgde3I4pU5+CqQ
- zpQZaniUJIHqgLY+HwDIfki+CfiXeWYIMtE4AT+gpn+Wz9p7cEqiSt2cdg29nmvRYahG
- /KIC7def1y7qDzQjMRnA6/xlnkMW9+g4b5OVJZ1RhPe9KCzVbu9I+F92sYTG1shW19d1
- FetA==
-X-Gm-Message-State: AOJu0YzUZ4tICxBXKZMlcT1JS0BUnafExR6rmyf56FlQRlIG/5bUjze9
- 3MJ4EJwMsUNBlIE+rvvOdIRhnH2hoB84RRdsa81YMmu9qKLhwMAK/lShen/OZQ3LS01eyafwOxu
- qdXlO/jmXPZD64NRKF//vmi/ZB0rcwpryJgA6m5L7lTCAW3+SCA==
-X-Google-Smtp-Source: AGHT+IFgx842gpUIL/YEQL9FLAT0gin8RyxSdoMj2CoEiPQyVHg1RCeNJdQoc1AfX0fbhGDTMCv/TTZHyTHmpLgMrgM=
-X-Received: by 2002:a17:907:96a4:b0:a9a:9df:5580 with SMTP id
- a640c23a62f3a-aa4834276f6mr245603866b.19.1731677850180; Fri, 15 Nov 2024
- 05:37:30 -0800 (PST)
-MIME-Version: 1.0
-References: <20241108152350.3686274-1-sjg@chromium.org>
- <20241108152350.3686274-9-sjg@chromium.org>
- <20241113024029.GH3600562@bill-the-cat>
- <CAFLszTirek2=_j15W5LCZERTs2TZXawV0o3aGO12dgDJpzTdQw@mail.gmail.com>
- <20241113222016.GZ3600562@bill-the-cat>
-In-Reply-To: <20241113222016.GZ3600562@bill-the-cat>
+ bh=Z/SVmmOquWrTWheDBOKDIwyiNYoWq7fxKAi5M0qhde0=;
+ b=o/Gf8n79Mz4B+P8/qX+TptUCmAgQ7y4b1JiA/3pe5D6kDqCKuZat7OU15AFqAcf2o6
+ TknlqIRV97VzzwZ645jY/195v+Ya7HguD/LZvebf0Z44ZyDiu81fgkhfg1ry6K90f8VQ
+ VuIR3dtjzjliAiza+4i8TQDhQbmC0HDTcnHwF/JTh2yjLwZGq7CxK2ylp0wdp3fvmT4W
+ d4uZVNpK3wh4MTcnqt9jOn/7mcepUyt4PgKJQ7HCCM7XmZxCV6buxj6ibDpR2K7E7B52
+ JAOZVWPTL+AtouqPfP4A0eTXmnFL+GbifsEIg4ozeXXSeNoAXOinZjpdp7/8hfK7TY9M
+ gkIg==
+X-Gm-Message-State: AOJu0Yy0ZOvQXdlgQjuX5eNONpYXtB4BaCjLm9hoPbaKpily/Hs55BM/
+ 9MmulkApPerGFruxhyuOyrF+PBgEPSHqdnTa84T9SCOL0xU4fLbhVpXkV6Sgnwo58yPR9gg7syU
+ =
+X-Google-Smtp-Source: AGHT+IGgrohqlBWEXYH9P3K/WZ2paSpMJBjaU1+g7aO0DRUR5NBnQhESEKY4Wzjjc5dGuXLomYVsjg==
+X-Received: by 2002:a05:6602:6405:b0:835:4cb5:4fa7 with SMTP id
+ ca18e2360f4ac-83e6c301bf2mr372812239f.12.1731678492534; 
+ Fri, 15 Nov 2024 05:48:12 -0800 (PST)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-83e6df91554sm34118439f.9.2024.11.15.05.48.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Nov 2024 05:48:11 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 Nov 2024 06:37:18 -0700
-Message-ID: <CAFLszTivnmnB+1p58sZ_VSZBWpL1Kt7QJ=mnnEvHZswAeEZc0g@mail.gmail.com>
-Subject: Re: [PATCH 8/9] buildman: Propose a format for extra boards
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH v5 0/6] CI: Set up for an arm64 runner
+Date: Fri, 15 Nov 2024 06:48:01 -0700
+Message-Id: <20241115134807.3068947-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,56 +92,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+All gitlab runners are currently amd64 machines. This series attempts to
+create a docker image which can also support arm64 so that sandbox tests
+can be run on it.
 
-On Wed, 13 Nov 2024 at 15:20, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Nov 13, 2024 at 09:03:35AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 12 Nov 2024 at 19:40, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Nov 08, 2024 at 08:23:49AM -0700, Simon Glass wrote:
-> > >
-> > > > It has become more common to use config fragments to extend or adjust
-> > > > the functionality of boards in U-Boot.
-> > > >
-> > > > Propose a format for how to deal with this. It is not implemented as
-> > > > yet.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > I think that the first problem is that this patch series is an
-> > > inappropriate method and place to start the discussion.
-> >
-> > We had a discussion a year ago but it trailed off.
->
-> OK. Still an inappropriate place to resurrect it.
+The TARGET_... environment variables for grub could perhaps be adjusted,
+using the new variables, but I have not done that for now.
 
-What do you suggest? I am trying to solve the problem, not just talk
-about it, so patches are often best for that.
+Currently this builds OK on amd64 but fails when built on arm64, in grub
+on arm64-efi:
 
->
-> > > I also think this gets things backwards as the common case is "make",
-> > > not "buildman". We need more defconfig's that are just base +
-> > > fragment(s) if they're important enough to be a combination that needs
-> > > to be tested and work. A board is not a time-expensive part of CI. A
-> > > pytest run is, a new job itself is.
-> >
-> > OK, that would work too. It would also avoid the problem of combinatorial
-> > explosion. But I am not seeing people actually doing that, with rare
-> > exceptions.
->
-> I think it's the exception, not the rule, where config fragments are not
-> being put to use in a defconfig. And that's possibly because not a lot
-> of people seem to know about the #include option, and then when I
-> explain it exists to people the next problem is "Oh, I have to do what
-> so that buildman also works?".
+2022.6 gcc -DHAVE_CONFIG_H -I. -I../../..   -D_FILE_OFFSET_BITS=64
+   -MT argp-pvh.o -MD -MP -MF $depbase.Tpo -c -o argp-pvh.o argp-pvh.c &&\
+2022.6 mv -f $depbase.Tpo $depbase.Po
+2023.0 gcc: internal compiler error: Segmentation fault signal terminated program cc1
+2023.0 Please submit a full bug report,
+2023.0 with preprocessed source if appropriate.
+2023.0 See <file:///usr/share/doc/gcc-11/README.Bugs> for instructions.
+2023.0 make[4]: *** [Makefile:1714: argp-pvh.o] Error 4
 
-Are you looking for any feature in Buildman for this? This series is
-intended to fix [1]
+Perhaps this doesn't matter, though, at least for now.
 
-Regards,
-Simon
+This passes gitlab:
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines
 
-[1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/30
+but still fails on arm64:
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/23346
+
+Changes in v5:
+- Drop the comment in the gitlab file
+- Add back a final missing sudo
+
+Changes in v4:
+- Leave the 'sudo' in
+
+Changes in v3:
+- Move ARGs to the top
+- Revise documentation to explain a common error and building on arm64
+- Use grub-efi and linux-image-generic for both archs
+- Add patch to install toolchains on arm64 host
+- Drop patches which remove grub and tracing for arm64
+
+Changes in v2:
+- Update docs also
+- Add comments to the ARG variables
+- Swap order so that amd64 is the exception
+
+Simon Glass (6):
+  docker: Support building for multiple architectures
+  docker: Adjust packages for arm64
+  docker: Drop coreboot for arm64
+  docker: Fix LegacyKeyValueFormat warning with PYTHONPATH
+  docker: Install toolchains on arm64 host
+  CI: Add platform variable
+
+ .gitlab-ci.yml          |  1 +
+ doc/build/docker.rst    | 23 ++++++++++++--
+ tools/docker/Dockerfile | 69 ++++++++++++++++++++++++++++-------------
+ 3 files changed, 69 insertions(+), 24 deletions(-)
+
+-- 
+2.34.1
+
