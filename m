@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 460DBD68BCD
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 19:27:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10F8FD68BCD
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 19:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 545838917E;
-	Fri, 15 Nov 2024 20:27:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 10C2889247;
+	Fri, 15 Nov 2024 20:53:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h8vXW/mk";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="rpBVgNgl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07A4789185; Fri, 15 Nov 2024 20:27:41 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 40BA489326; Fri, 15 Nov 2024 20:53:32 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADAE389165
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 20:27:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C71E8922D
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 20:53:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-539f84907caso2410922e87.3
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 11:27:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731698858; x=1732303658; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YY5+IsK0ErvTPoC29HA14gWaEME6M4uQ7gIbt1mykEw=;
- b=h8vXW/mkgrSfT9nMbdoy1RTPNEGGiT9by6DIPCUVpyccE0SEmR8HWWQWKm7v+ZPugT
- kPHwoUpnP9xQ1ESZqIYQxmpGC9raE7vi9rS7ytfzoKKlfHRIusKWw0Yezt3tKeP0GH3o
- TTY3RTQgW5suLOUbNf3cnksrNQRGLn2MHMMlQqKv1ktwyBa9ao65IG6xIm2afWVIXZ87
- EsXaK1TtPgan4DXAzUoJj/3IFTHyaNoOIxA6BEzsKj+myw3q75zJvGpqzHhCCYMEfUjp
- FHu1fwRDG2GhkGkmnA+APNuwk/RKf4vfMF4GxuYNiAPnyaE4IlsDlwtJJ5tFProKjERn
- nchw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731698858; x=1732303658;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YY5+IsK0ErvTPoC29HA14gWaEME6M4uQ7gIbt1mykEw=;
- b=eVh/O+7qN4wdVa8k+BiOpdpioWw+kKqxnqeJk0k9xFcP26GgpYZ7mEQ/J1DQDOGS7k
- 3QV++8C4CQgqYk20kFAttFiT8OEV8BUZCsSsAcjrTAxOVJ4FzRH4O9uoeIisMXrsPerf
- NRxmKQ8dzbcsBCAdte8m2SnD8EGhYvHpikbX9Cdj14Diw1E1tCm6sNEy0sqoVg6Aa+7T
- Izgb3z5QGiQTJ4XlZQC/WZopoLo9O/9BHcONmgkkShY3EBxn2nt62ixEj0kcYPM8qadU
- ZQqyMzk4EqDiMy1Upb1pUDfRezxCuqofOC53MlOxT4B4tY/M3yZY39lJZzWzvCcV0VgB
- 3jsw==
-X-Gm-Message-State: AOJu0YwrtmacEYiSx8nj9zmoXX7X+mh2wANzsskqmBltSlwMVmtQPwPi
- Hf5KOUjycFiNEuzXEcoWx4itKVbUpN1LWwJTf8SDtKsq25PPvHrTyrJl445bnuKlUsBIx15+XVe
- VkrhO1nLSFE/dhgiFphb7uW/939AfRpg/
-X-Google-Smtp-Source: AGHT+IHCoav4V2Z/DQ7s6v7M5ElmBs8+GoZ7gkprE8fnLLRUTGiGuxOoTQ5Q/NOEnP39fk/QwjkySw3a6wkzwfbmCbM=
-X-Received: by 2002:a05:6512:ba4:b0:539:f886:31d6 with SMTP id
- 2adb3069b0e04-53dab291a5cmr2032631e87.2.1731698857496; Fri, 15 Nov 2024
- 11:27:37 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1731700408; x=1732305208; i=xypron.glpk@gmx.de;
+ bh=2Rv6QatBQvsFTVyYJgqcSrd2gzRuM+Klahlo2lnftiY=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=rpBVgNglIMdk+fEbPvwReI0k2SbvoUYzV6YbTWap3C+QaUFh4YMwaWAA75DHZx3t
+ hKCkDUZkjPCSOqPki1vJI3jZ/ngoPUrSb+sSe7BnCwItpI3YEvvQPvihGfES0utyZ
+ MBFAMrBn4zJ5UiAjV0ery90aFRTZ+ds4lVvpcDEFg7q4Gm0mh5h1r3zZj+e4RyG1+
+ ApTKv/lMblJ3X3bHoozTxzXdeBMppjvuKaxMGY1Q9XUKIXiZ/SlcKxURNa0/cOWaY
+ LIRGPDUWegc0Y+Ib1pJ3FkHkMUkt4HkW/mlOwUrfBYAVoc1dlmHnQhNsHKU6uXnWw
+ Vpp5igUgWy6xAW5qxg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MSKuA-1tN50a1bei-00NihW; Fri, 15
+ Nov 2024 20:53:28 +0100
+Date: Fri, 15 Nov 2024 20:53:27 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 2/3] efi_loader: Fix Kconfig logic around OF_LIBFDT
+User-Agent: Thunderbird for Android
+In-Reply-To: <20241115165400.2486914-2-trini@konsulko.com>
+References: <20241115165400.2486914-1-trini@konsulko.com>
+ <20241115165400.2486914-2-trini@konsulko.com>
+Message-ID: <A0E8680F-E204-4A50-BACD-897731EBB9DD@gmx.de>
 MIME-Version: 1.0
-References: <CAJaLiFwvFVOKYpAQLSNUqAfVHCsPcxo6g74JGunw8HSQTMCFLA@mail.gmail.com>
- <20241115141748.GS3600562@bill-the-cat>
-In-Reply-To: <20241115141748.GS3600562@bill-the-cat>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Fri, 15 Nov 2024 11:27:26 -0800
-Message-ID: <CAJaLiFx35Q8L-kR02GrA1PTd2nY699KMc2fy5fT381Khg5hgxg@mail.gmail.com>
-Subject: Re: Git commit failed with mbedtls/framework
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:hMKYDGHcI1w0fNVQO4D+PaIPM0vC0k9qUEmDpXQh2tRAh/auXAw
+ 4ul0bH+KEAmOfRGiLt5cMesz6wkOvalxSORgIH1eRVnhMyvNzuPcA8r/LFsalhu6I41NZAe
+ vWeERhd3CVrGRQx+8bU8RdmGRfxPIlynUaeTNrIH3eA7fRipVCpRtoHdsZ/FgTFaNOH3i4z
+ 0EjPhpEyX69YbCOp13FjA==
+UI-OutboundReport: notjunk:1;M01:P0:gbZtFu9VHds=;hTwwpCn7/XPd+GbYPilZVWmn6OQ
+ E21ZoQTBOdfdNI2tXA4l3R5+d2F8dKDSEW1Xf9zwFxaCkCOb3juDm8+XNPLKwmNBBpFqu7RxL
+ bDaJAdVmRUg5gQhQkLvs+Le81p5mzvvHb11aqnQdS2dAijOPKEjcIYsDJ5oiyMn5oR9sB/OxH
+ gLqz6hHXmdq72fvjvlUvV0cgGuYBW4frcrEiNvKKIP5oyJ/pZlKEz73V0y1L3dqTCDRfvNrJC
+ PSAHe6Sat30kCXSNm7r1U2rsEx+z/xKs6eN7UXbg/ABFS8aPPs1ezmgf1MW3xqIcQuiyb7uXa
+ 9qNv4NFpJ0AY50RjMYTUyoLR2Rzc4Hc+g32kgxS50ju5hdKMAUmwvuj6SXJiBSeHTLOEfeWH+
+ BLjO5uapqIpNeRfw888k4MSmpOC0ilkrlYmHj/MEU8KLlUvVm7m0Q7le7n2QBS3MiRrRgSHR+
+ jjfBXJQV3FK9oM8gUgQwEgvAwwyRlmUUWSlx7xGwJW4wNkClJ6ZCp72u4UuXj6b23h8vgBTv6
+ 7pMbQ0wBmDw+x1P+4qRM/iLKf5/ndX41UBJuxS+5rMyipx0UjbOAG/fhINxCh18bC8xp8YHAr
+ c8EhXcULmWsfRIK4KuAjarNMKx11V+a8D4lvciAJP6tpUM2A9/UMCYqNgq/IBL1D3imujhvQs
+ e/hzwV5nJey06pV9qqS+Bey5a6+2u7iDOTl2EDpena+AB3Qta9Y0uhWqnydf4xQoG/CfxqvpX
+ ZMiyPgCzfY78wd5FaZdBwh1lVHrZ0yBOOJ7DEEXfZ5cvjc2NlZYLyZ5uvojwBaAf39iUXPZv/
+ j9a0AAFGnC6UMzqmeQO70IlUufrOikJQ0e9ITXr0e+heoEAdQH0FA3kTYVS098mw4Mx2vG5Rf
+ yowzJb/BZA/xwMW2CnEq7glJNZaAX/JoARX0ivi9Pwpjs6UEi9p3C5Qlh
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,33 +90,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Fri, Nov 15, 2024 at 6:17=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+Am 15=2E November 2024 17:53:58 MEZ schrieb Tom Rini <trini@konsulko=2Ecom>=
 :
+>Given that OF_LIBFDT is library functionality, the feature of EFI_LOADER
+>needs to select OF_LIBFDT rather than depend on it being already
+>enabled=2E
 >
-> On Thu, Nov 14, 2024 at 08:26:33PM -0800, Tony Dinh wrote:
-> > Hi Tom,
-> >
-> > I am on 2025.01-rc2, and I am trying to commit some files. The error
-> > seems to indicate this framework directory might need some
-> > modification. Did I miss something?
-> >
-> > error: 'lib/mbedtls/external/mbedtls/framework' does not have a commit
-> > checked out
-> > fatal: updating files failed
+>Signed-off-by: Tom Rini <trini@konsulko=2Ecom>
+
+Acked-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+
+>---
+>Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+>Cc: Ilias Apalodimas <ilias=2Eapalodimas@linaro=2Eorg>
+>---
+> lib/efi_loader/Kconfig | 3 ++-
+> 1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> That's odd. You didn't happen to try out some of the previous lwIP
-> iterations on that tree did you?
+>diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+>index 58d49789f12c=2E=2Ef41447f2b45c 100644
+>--- a/lib/efi_loader/Kconfig
+>+++ b/lib/efi_loader/Kconfig
+>@@ -2,7 +2,7 @@ menu "UEFI Support"
+>=20
+> config EFI_LOADER
+> 	bool "Support running UEFI applications"
+>-	depends on OF_LIBFDT && ( \
+>+	depends on ( \
+> 		ARM && (SYS_CPU =3D arm1136 || \
+> 			SYS_CPU =3D arm1176 || \
+> 			SYS_CPU =3D armv7   || \
+>@@ -21,6 +21,7 @@ config EFI_LOADER
+> 	select EVENT_DYNAMIC
+> 	select LIB_UUID
+> 	select LMB
+>+	select OF_LIBFDT
+> 	imply PARTITION_UUIDS
+> 	select REGEX
+> 	imply FAT
 
-No, I did not. The tree is clean with "make mrproper" and on the
-master branch. I just did a git pull and worked on it.
-
-I went and looked at https://github.com/Mbed-TLS/mbedtls.git. The
-framework directory is pointing to a specific commit.
-framework @ 3867faa
-
-I'll stash and repeat it on another clean tree.
-
-All the best,
-Tony
