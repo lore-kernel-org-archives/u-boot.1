@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 127B2D68BCD
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 16:45:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83931D68BCD
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 16:54:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83F728906C;
-	Fri, 15 Nov 2024 17:45:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 064E288D4A;
+	Fri, 15 Nov 2024 17:54:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hfixn2Dg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dwHcPEOC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7BD48908A; Fri, 15 Nov 2024 17:45:45 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 2E30988FA0; Fri, 15 Nov 2024 17:54:06 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED41389045
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 17:45:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 13D5188C4D
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 17:54:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-38221306992so1028418f8f.3
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 08:45:43 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-4609c96b2e5so13496271cf.0
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 08:54:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731689143; x=1732293943; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731689643; x=1732294443; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=JlSBaaktm8T1pIgDyKQOGn7JnJI6qqwwUu7OuvB/rdM=;
- b=hfixn2DgRLQ6d5PYpQPQzhbZUR5TK5pwPYH5G/VYhxk7tTWQHm5m1EGndddQ2IpxBj
- x3BK01J7Uss79wDbE5SHcyWF4gQqEopZA6TH57eV4e5pwueVCynCapxxnShOgW76CUPu
- vWqroXa3dhaWeqGgrm5B6fsxyzCSg6bWh4wGhEGuUc/8u7pG4u3+Z9WFH3oR4lduAOZb
- olWxZ1KfSsSHd4x1D72bcWlH1Tg68PLdg2JVn1OE9aY2gADeW/xmORdQbBlUzXGnDTko
- iAKRmXA2eLtvaOWAqNcte7g30mVwQsGFs4597pMb1VjXZM2uUrEx5+zHrt5dcwRho8C3
- FAbQ==
+ bh=pPNJIaOeCy33fkPRN3OjuVLpZ69SRK8qNS2Qv0KFMi0=;
+ b=dwHcPEOCPiE5xYbO5kn3e7lvAQII/tmQbEAnr2NaDNUL9utZvc9h7qCkH335fm6/vH
+ o6dxJTUmXYQQDrzmRSuZmexp69qBKyYAetK6CYHLCjcEL8uOKKrtkuXRgE22vlwVXAqS
+ 8/4kFLB9Xzj/rKoXGarXUbjfJHUJljztTIDCM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731689143; x=1732293943;
+ d=1e100.net; s=20230601; t=1731689643; x=1732294443;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JlSBaaktm8T1pIgDyKQOGn7JnJI6qqwwUu7OuvB/rdM=;
- b=DCM7I/kR9FdwRFn86oNIgVmHUyEOMU+z+GY/LH5+I4LoawONgWdasDaPyVf/AnNtK8
- UQ6+cC+rlLk6XNlV1deoynDhBVu9/uVquLf2apkN8pJf6pL/9oxEZHhJITK4//hOSMBT
- USOOSMmCSEXdd+BmbgglVGQDXEclwZq/VuBGymKucDcpSd57x4X1PIHcu9Ym+w4ITlA1
- sZjBR3T9CaxTKKg/NQXXUI3a+6hv0eB+Ek2UMwrtMfcmWRUmed0HVrlnTRfALGfWW4fr
- eam0AvMqhncmYg+6eou+N6ofpyXGZBwgYJjgCngTSCPZJFK1CZYQkmuSlnCm2fq+NcgD
- +Jvg==
-X-Gm-Message-State: AOJu0YzOLo/0OP0sIxTIN05y1sD/mDaxU1FNa0atrwYvHONBGbAB+8Cn
- e6B+l0nzX8s2k3sxU38t7svPUs6UxERMcWujXfyxKAkF3DIRIY6GiIAO/1ThOt6J+/Qu3YxCAwU
- FmyQ=
-X-Google-Smtp-Source: AGHT+IFxb3OUgxthcPLhphMbg4zxkxlAJVDCd3iZtXo0/hJuEoieWaLPFMOVEL9zJUepTLOWeAjh9Q==
-X-Received: by 2002:a5d:5f81:0:b0:37d:2edd:b731 with SMTP id
- ffacd0b85a97d-38225a847ebmr2546450f8f.30.1731689143186; 
- Fri, 15 Nov 2024 08:45:43 -0800 (PST)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:e49a:77a4:3a37:4bad])
+ bh=pPNJIaOeCy33fkPRN3OjuVLpZ69SRK8qNS2Qv0KFMi0=;
+ b=vRsQmFAP9HKrlDCTTywZ0aczf1HpB9AA+ruBIWlJh9p4bPa/+gfpso6qYjSc6LVYGA
+ IKNzmsWjl01B05NsEwsaC7VzhYn9Pj8u6FPV0YNj/kIojaOQDNqIZDY3ZjRiLbHNwE6T
+ CRsPvD3POwgnykWcKdM8U6hRCsp+LPkeWMYOTStQiVpnGRrj1b76MDn8WibLUGMIaj95
+ 54WkH+e+ubtR3/IQ2tNmH+nJsao6VL/LMMkFoOkBo/earxh8+kLgPUOKcLW9gWfJdwDQ
+ Ncph3IUdZ+vuhGZOyoVpdvtx+29w0np5WteYTdA+mK7cyxTqTPcj8xSaYkE6Um1i6dvy
+ 0SOA==
+X-Gm-Message-State: AOJu0YwUUcmLB0PPkBUs9LD27Gycjw+LSNT+Z2VohavCvgVLNfu0hnMO
+ AsQWvP5QD5qbFnp4FlJfKobKsR8mbmN8+lv/dBnN4BqbWvEYLaroZOtdn6vylyC7Z5np9jSdUcy
+ UcKE=
+X-Google-Smtp-Source: AGHT+IE4t5NpEQcqevLWtlhrUPe2Z7oFQpaKoIcdCN4UQBi5r2qZEyuhdbhCrXYJkXTvVX61QoPPTw==
+X-Received: by 2002:a05:622a:1e85:b0:463:157e:46a7 with SMTP id
+ d75a77b69052e-46363e35669mr42802521cf.33.1731689642823; 
+ Fri, 15 Nov 2024 08:54:02 -0800 (PST)
+Received: from bill-the-cat.tail58a08.ts.net ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38222c14306sm3262377f8f.21.2024.11.15.08.45.42
+ d75a77b69052e-4635a9f20c7sm20784831cf.23.2024.11.15.08.54.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 08:45:42 -0800 (PST)
-From: Jerome Forissier <jerome.forissier@linaro.org>
+ Fri, 15 Nov 2024 08:54:02 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>
-Subject: [PATCH v2] test/cmd/wget.c: move net_test_wget() to the cmd test suite
-Date: Fri, 15 Nov 2024 17:45:14 +0100
-Message-Id: <20241115164514.2186763-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.40.1
+Cc: Maxim Sloyko <maxims@google.com>
+Subject: [PATCH 1/3] aspeed: Fix Kconfig logic on "DM_REGULATOR" and
+ ASPEED_AST2500
+Date: Fri, 15 Nov 2024 10:53:57 -0600
+Message-ID: <20241115165400.2486914-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,58 +87,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since net_test_wget() is testing a command and is in test/cmd it should
-be in the 'cmd' test suite, not 'lib'.
+It is not the case that we can only pick ASPEED_AST2500 if DM_REGULATOR
+is enabled, but rather choosing ASPEED_AST2500 means we must select
+DM_REGULATOR.
 
-Saving and restoring the values of the environment variables that the
-test manipulates is necessary to avoid a regression when running the
-whole ut test suite. A minimal reproducer is:
-
- $ ./u-boot -T -c "ut cmd net_test_wget; ut dm dm_test_eth_act" | \
-     grep -E "(Test:|Failures:)"
-
-Reported-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- test/cmd/wget.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+Cc: Maxim Sloyko <maxims@google.com>
+---
+ arch/arm/mach-aspeed/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/test/cmd/wget.c b/test/cmd/wget.c
-index fe26fee54c9..7570c065a10 100644
---- a/test/cmd/wget.c
-+++ b/test/cmd/wget.c
-@@ -19,7 +19,7 @@
- #include <dm/test.h>
- #include <dm/device-internal.h>
- #include <dm/uclass-internal.h>
--#include <test/lib.h>
-+#include <test/cmd.h>
- #include <test/test.h>
- #include <test/ut.h>
+diff --git a/arch/arm/mach-aspeed/Kconfig b/arch/arm/mach-aspeed/Kconfig
+index 1e7dc10e170f..9cf60378c118 100644
+--- a/arch/arm/mach-aspeed/Kconfig
++++ b/arch/arm/mach-aspeed/Kconfig
+@@ -16,8 +16,8 @@ choice
  
-@@ -206,6 +206,10 @@ static int sb_http_handler(struct udevice *dev, void *packet,
- 
- static int net_test_wget(struct unit_test_state *uts)
- {
-+	char *prev_ethact = env_get("ethact");
-+	char *prev_ethrotate = env_get("ethrotate");
-+	char *prev_loadaddr = env_get("loadaddr");
-+
- 	sandbox_eth_set_tx_handler(0, sb_http_handler);
- 	sandbox_eth_set_priv(0, uts);
- 
-@@ -223,6 +227,10 @@ static int net_test_wget(struct unit_test_state *uts)
- 	ut_assert_nextline("md5 for 00020000 ... 0002001f ==> 234af48e94b0085060249ecb5942ab57");
- 	ut_assert_console_end();
- 
-+	env_set("ethact", prev_ethact);
-+	env_set("ethrotate", prev_ethrotate);
-+	env_set("loadaddr", prev_loadaddr);
-+
- 	return 0;
- }
--LIB_TEST(net_test_wget, UTF_CONSOLE);
-+CMD_TEST(net_test_wget, UTF_CONSOLE);
+ config ASPEED_AST2500
+ 	bool "Support Aspeed AST2500 SoC"
+-	depends on DM_RESET
+ 	select CPU_ARM1176
++	select DM_RESET
+ 	help
+ 	  The Aspeed AST2500 is a ARM-based SoC with arm1176 CPU.
+ 	  It is used as Board Management Controller on many server boards,
 -- 
-2.40.1
+2.43.0
 
