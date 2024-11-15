@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C261FD6A25C
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 14:21:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C483D65C7E
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 14:21:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32D2A89354;
-	Fri, 15 Nov 2024 15:21:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8EDB4896CA;
+	Fri, 15 Nov 2024 15:21:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IuGz+WW7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Lbt37cP2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 151F0890B1; Fri, 15 Nov 2024 15:21:18 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 6C360896C6; Fri, 15 Nov 2024 15:21:23 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AFB089354
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:21:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D18E3896A5
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:21:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-539fb49c64aso3069333e87.0
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 06:21:15 -0800 (PST)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5cf8593ca4bso1877876a12.1
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 06:21:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731680474; x=1732285274; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731680480; x=1732285280; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HsaQznxKvtS8wUj3Qh5q3J675UKiu0k+kzfXwmHbUKw=;
- b=IuGz+WW77KzY2wWWRcXxek9qoY6qZZ8ZOTXrhyv0Zk8UxaCItfYqT1lrrUUxLGwb9w
- fv2Zrv0qyllOa0GFT9Zh42A8b/IjwbrXFEJSOQifbo1gCCjbVLiDVRsIbqyo3E+brP+W
- Hw7uK2BX6z9z932K6IBpqSDGPU+eyuCsnBV9M=
+ bh=emWwBKmFcC/IN4+OVFD/egPrwu97Pbl9yGUGBAMWlqg=;
+ b=Lbt37cP2yoWyY0yXhDTqzeJywMkf1qZSk4feWr6T+a2QTtE3i8KMhzNgFVrfUZ85lf
+ o7xWJ615UT4eRtvhQkeh79ksX5qiwxmJFVOhN9+zChlhlKih47TQpLsghez0DOk1yYh+
+ jEEovSp5L+xG1hWCIGYmFdMdlyz83aw+vexy8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731680474; x=1732285274;
+ d=1e100.net; s=20230601; t=1731680480; x=1732285280;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HsaQznxKvtS8wUj3Qh5q3J675UKiu0k+kzfXwmHbUKw=;
- b=m9NIziCg+zkhfc++Td41kPXddUUR/dOiwGq91aoRodNpa8g4q1mXY3GXz+K6eE19t9
- CwDNZggXDaGuuw2lRfVjtmyiXXZi7LFY1t1nmpR1YoB8st/Uc5+lH+W19Hed1sdo8GKI
- 7Sgjom7ydQNQzcc0XSXh+EUsDvRdXHdk7CLogUnWpjB3tkycTygw9GHLsUhf4DrHA/fL
- Q8UXN/vauTsfxCWzWBGmFzepBmb7y5JZaLH5jeetB6zdneyCbf6m3QxqW+dIdig+RQl9
- tw0SEGGI0zNJ0dZDg2jGOgaLAe+DBJ5JwhHzQgp/PO402tMxlA2qhSlkiryCXUkQIsB6
- zokQ==
-X-Gm-Message-State: AOJu0YxmGGRpxsmuZ80WAx3DTDBZmK1k5WroAd30yq0hFJrdT8/pEU9S
- atAkMzlOIA5mWi6MJwHGw5LGoit4wG3Oj5/TODGFAC/W4+gMi3WUYMxL/sB4RzkPYi44M010FEC
- JpWn0hpUuQf1FXMchaaEgj+q8DjTNgMkp8wgF
-X-Google-Smtp-Source: AGHT+IGM17+omMXoRzPJur9QOqQHmKE3/wIpzcq+XhrHj/46ky/sLUPlgAxOxCMpdqihJRFCxqII7z6rJcGZQHAC088=
-X-Received: by 2002:a05:6512:3e29:b0:53d:a86e:4200 with SMTP id
- 2adb3069b0e04-53dab2a634emr2159520e87.21.1731680474216; Fri, 15 Nov 2024
- 06:21:14 -0800 (PST)
+ bh=emWwBKmFcC/IN4+OVFD/egPrwu97Pbl9yGUGBAMWlqg=;
+ b=aZ6hoxdtWEJULvdzBG+xcXZ+V7bE8AHwtwZK4aJEyuXGmEdNQwjDq4xnvP0D46m/zS
+ Ro8z3Q5e/0SQbqgPTOP2IypVYrmKkcPcGmaEAP0Mz33si6cbDW3KhHpzdcdAo5sFPUid
+ pZnPb8Ol2rgE3YLaKje4Ff97rKmcBq2Ky3C1HDnUh3xRyik9Rz0qGy7vzQ8G0pDp1RHB
+ bwJ94Fk1w0C61Mh8y3nnL2Vj6ZSS4x/mWv0DaboyKPf1TA7OMCw+AhoW8lMNI5iE/L5p
+ r4fvgemmQEPXljDwxBILztPihmrIAB+q5LZjq4aVzaMprgFAzHkdcrJfSx58dVDLA35R
+ kN6w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVgITMoCe/3cPKk0inlh8q1l6IgWQslbuGgd7vuixC/+Mpk+e5ca7D12bsqvPWiKPMp4IffjJY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw24357uO7eIjQqRF0PlGWCHfj9POWsYCkubNdWWEsG87yDTiIZ
+ Ut0bxDG+c8ZsNUJ0Iec6rg47/L0SnleLtDP3dXMrvDxP1GQlMJb61eIWGlGJB8UnQ/lNNtKiYBO
+ kuh5kdHmSlMu/NObvR7sVgj4Liw2yP/7tXaCs
+X-Google-Smtp-Source: AGHT+IHgaMAcKkeGlsRitpwbLCd8Waj1Pc4CB+XU3GFLVL92paLne17z1tarkh25xuXibec+lswXNxcn8xwCDMuDnLw=
+X-Received: by 2002:a17:906:fd88:b0:a80:f840:9004 with SMTP id
+ a640c23a62f3a-aa4833f60e2mr232848466b.12.1731680480185; Fri, 15 Nov 2024
+ 06:21:20 -0800 (PST)
 MIME-Version: 1.0
-References: <20241030213404.2894247-1-ravi@prevas.dk>
- <87y11mn4sh.fsf@prevas.dk>
-In-Reply-To: <87y11mn4sh.fsf@prevas.dk>
+References: <20241114142004.2051240-1-jerome.forissier@linaro.org>
+ <CAC_iWjL5Uedu+2DnibFBXJveB3qckLUKUwY4B-s1D+Lup-fwkQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjL5Uedu+2DnibFBXJveB3qckLUKUwY4B-s1D+Lup-fwkQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 Nov 2024 07:21:01 -0700
-Message-ID: <CAFLszTga-7sdukCdXJ+KXEtDMbxPYjN+NvviVLvtzO1T8MHkBA@mail.gmail.com>
-Subject: Re: [PATCH 0/3] teach 'env default' to optionally keep runtime
- variables
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Joe Hershberger <joe.hershberger@ni.com>,
- Ravi Minnikanti <rminnikanti@marvell.com>
+Date: Fri, 15 Nov 2024 07:21:04 -0700
+Message-ID: <CAFLszTh79SwMV3kUFeK2-fR8=dU4R3ceRfL=pbi4Lb-G8v+2-g@mail.gmail.com>
+Subject: Re: [PATCH] doc: cmd: wget: document lwIP syntax
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,28 +86,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
-
-On Wed, 13 Nov 2024 at 15:32, Rasmus Villemoes <ravi@prevas.dk> wrote:
+On Thu, 14 Nov 2024 at 07:32, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Wed, Oct 30 2024, Rasmus Villemoes <ravi@prevas.dk> wrote:
+> Hi Jerome
 >
-> > Doing bringup of a board, part of my bootstrap logic is in U-Boot. So
-> > when tweaking that logic, I was bitten by a previous completed
-> > bootstrap having left a copy of the environment on the device, which
-> > was imported and thus overrided the new logic.
-> >
-> > So I thought, "ok, I'll just make sure to put 'env default -a' as the
-> > first part of the bootstrap logic so I'm not bitten again". Alas, my
-> > logic also relies on certain variables that are set by C code
-> > (e.g. for detecting board variant), and doing 'env default -a' also
-> > eliminates those.
-> >
-> > Looking around, the hashtab code already supports a flag that does
-> > exactly what I need, and exposing that is (morally) a one-liner.
-> >
+> +CC Simon, since he asked for an update on the docs
+>
+> On Thu, 14 Nov 2024 at 16:20, Jerome Forissier <jerome.forissier@linaro.org> wrote:
+>>
+>> The lwIP version of wget supports a different syntax with a URL,
+>> in addition to the legacy syntax. Document that.
+>>
+>> While we're at it, fix a couple of minor issues in the legacy
+>> syntax:
+>> - hostIPaddr can be an IP address or a DNS name
+>> - path is mandatory
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>  doc/usage/cmd/wget.rst | 71 +++++++++++++++++++++++++++++++++++-------
+>>  1 file changed, 60 insertions(+), 11 deletions(-)
 
-I didn't see the patch, but can you add a test?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
