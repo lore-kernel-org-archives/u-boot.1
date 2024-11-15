@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8928BD68BCB
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 16:26:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 127B2D68BCD
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 16:45:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF6728906C;
-	Fri, 15 Nov 2024 17:26:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 83F728906C;
+	Fri, 15 Nov 2024 17:45:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B32jdxfC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hfixn2Dg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73B508908A; Fri, 15 Nov 2024 17:26:56 +0100 (CET)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id E7BD48908A; Fri, 15 Nov 2024 17:45:45 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 498FA88ECC
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 17:26:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED41389045
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 17:45:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-460d2571033so13434371cf.1
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 08:26:54 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-38221306992so1028418f8f.3
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 08:45:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731688013; x=1732292813; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QFs4zkLu2pVMuHfNZEy8nB21I4T+y8K4ka7HdWN4llw=;
- b=B32jdxfCaQDuUXgyriJNDmTvKDFeD8A2Ld7iafkv8tLFqknTTNMmHuUNnS6llOq52q
- qZfrN6Uhk/FBC59YEl6JjMMLMDdL2uEKaYQB/233gIaZTkLCTaOle6Ey8oJehjl2j8C+
- DCznewwK6NumzNZSVv0FxL9VIDkbqTXrNU2Ts=
+ d=linaro.org; s=google; t=1731689143; x=1732293943; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JlSBaaktm8T1pIgDyKQOGn7JnJI6qqwwUu7OuvB/rdM=;
+ b=hfixn2DgRLQ6d5PYpQPQzhbZUR5TK5pwPYH5G/VYhxk7tTWQHm5m1EGndddQ2IpxBj
+ x3BK01J7Uss79wDbE5SHcyWF4gQqEopZA6TH57eV4e5pwueVCynCapxxnShOgW76CUPu
+ vWqroXa3dhaWeqGgrm5B6fsxyzCSg6bWh4wGhEGuUc/8u7pG4u3+Z9WFH3oR4lduAOZb
+ olWxZ1KfSsSHd4x1D72bcWlH1Tg68PLdg2JVn1OE9aY2gADeW/xmORdQbBlUzXGnDTko
+ iAKRmXA2eLtvaOWAqNcte7g30mVwQsGFs4597pMb1VjXZM2uUrEx5+zHrt5dcwRho8C3
+ FAbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731688013; x=1732292813;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QFs4zkLu2pVMuHfNZEy8nB21I4T+y8K4ka7HdWN4llw=;
- b=xJ3ev5oCZwLiTxRfBjFMQG7c4p521gC17KOJfGoOQs7BPG5VIB8apOZbUT3BdA50oJ
- 2rc/im8agdn6IbOof6P2hGp4Q+j1TwaddiVpwI8yL9P6wbwLUFroAr9+sGrVYivpHLV7
- FSolAFvoNe+OagmiEsMBD/q7gzYZ4wtW9A8Z2upFEVVGgbjxuHwAhaQ3MezU4FjdpGL6
- vyKgLwISuDVbMzmPJWL5klrNaGBiosQlU9FPlQNYpRGJ829DvfZuV1R70a7aEHFvrD+Y
- A9BFveCzMDJJICaIKkiLg2YGyoCM2ANEp6xH69k0PARVui5fwYeW3hI+ww5d0Ab/BF1h
- MQRw==
-X-Gm-Message-State: AOJu0YycKHOmnkXv/tqbwsz1g5BoOjjOzo3d56feW5egrP0uA+zdHVeL
- tsVGi7Fai5iTdv0sL6eVbD+mfCrhDqkwR7muKOBXLbnpE7G6jbDPtrB5AkC70TrwT4MtUOTLDNF
- OKDs=
-X-Google-Smtp-Source: AGHT+IG0wjtGbS8Thv9djAO66Ubj9v1bcLOXi3rfgG+8HqqvXeF7fTO/tGwuZcvBpuYxRco4sEbXuw==
-X-Received: by 2002:ac8:45d7:0:b0:460:c2f3:9017 with SMTP id
- d75a77b69052e-4636a7d507bmr17091911cf.17.1731688013043; 
- Fri, 15 Nov 2024 08:26:53 -0800 (PST)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.30.219])
+ d=1e100.net; s=20230601; t=1731689143; x=1732293943;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JlSBaaktm8T1pIgDyKQOGn7JnJI6qqwwUu7OuvB/rdM=;
+ b=DCM7I/kR9FdwRFn86oNIgVmHUyEOMU+z+GY/LH5+I4LoawONgWdasDaPyVf/AnNtK8
+ UQ6+cC+rlLk6XNlV1deoynDhBVu9/uVquLf2apkN8pJf6pL/9oxEZHhJITK4//hOSMBT
+ USOOSMmCSEXdd+BmbgglVGQDXEclwZq/VuBGymKucDcpSd57x4X1PIHcu9Ym+w4ITlA1
+ sZjBR3T9CaxTKKg/NQXXUI3a+6hv0eB+Ek2UMwrtMfcmWRUmed0HVrlnTRfALGfWW4fr
+ eam0AvMqhncmYg+6eou+N6ofpyXGZBwgYJjgCngTSCPZJFK1CZYQkmuSlnCm2fq+NcgD
+ +Jvg==
+X-Gm-Message-State: AOJu0YzOLo/0OP0sIxTIN05y1sD/mDaxU1FNa0atrwYvHONBGbAB+8Cn
+ e6B+l0nzX8s2k3sxU38t7svPUs6UxERMcWujXfyxKAkF3DIRIY6GiIAO/1ThOt6J+/Qu3YxCAwU
+ FmyQ=
+X-Google-Smtp-Source: AGHT+IFxb3OUgxthcPLhphMbg4zxkxlAJVDCd3iZtXo0/hJuEoieWaLPFMOVEL9zJUepTLOWeAjh9Q==
+X-Received: by 2002:a5d:5f81:0:b0:37d:2edd:b731 with SMTP id
+ ffacd0b85a97d-38225a847ebmr2546450f8f.30.1731689143186; 
+ Fri, 15 Nov 2024 08:45:43 -0800 (PST)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:e49a:77a4:3a37:4bad])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4635a9f23besm20577331cf.30.2024.11.15.08.26.51
+ ffacd0b85a97d-38222c14306sm3262377f8f.21.2024.11.15.08.45.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 08:26:51 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
+ Fri, 15 Nov 2024 08:45:42 -0800 (PST)
+From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH] docker.rst: Reword slightly around "buildx"
-Date: Fri, 15 Nov 2024 10:26:49 -0600
-Message-ID: <20241115162649.2395503-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241115134807.3068947-2-sjg@chromium.org>
-References: <20241115134807.3068947-2-sjg@chromium.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>
+Subject: [PATCH v2] test/cmd/wget.c: move net_test_wget() to the cmd test suite
+Date: Fri, 15 Nov 2024 17:45:14 +0100
+Message-Id: <20241115164514.2186763-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,34 +91,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Try and be slightly clearer about what "buildx" is, and how to install
-it.
+Since net_test_wget() is testing a command and is in test/cmd it should
+be in the 'cmd' test suite, not 'lib'.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Saving and restoring the values of the environment variables that the
+test manipulates is necessary to avoid a regression when running the
+whole ut test suite. A minimal reproducer is:
+
+ $ ./u-boot -T -c "ut cmd net_test_wget; ut dm dm_test_eth_act" | \
+     grep -E "(Test:|Failures:)"
+
+Reported-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
-I rephrased this slightly to try and be clearer as if you're using the
-docker.io provided packages you need to just install the plugin.
+ test/cmd/wget.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-Cc: Simon Glass <sjg@chromium.org>
----
- doc/build/docker.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/doc/build/docker.rst b/doc/build/docker.rst
-index 5896dd5ac4a6..81b394597ffb 100644
---- a/doc/build/docker.rst
-+++ b/doc/build/docker.rst
-@@ -4,8 +4,8 @@ GitLab CI / U-Boot runner container
- In order to have a reproducible and portable build environment for CI we use a container for building in.  This means that developers can also reproduce the CI environment, to a large degree at least, locally.  This file is located in the tools/docker directory.
+diff --git a/test/cmd/wget.c b/test/cmd/wget.c
+index fe26fee54c9..7570c065a10 100644
+--- a/test/cmd/wget.c
++++ b/test/cmd/wget.c
+@@ -19,7 +19,7 @@
+ #include <dm/test.h>
+ #include <dm/device-internal.h>
+ #include <dm/uclass-internal.h>
+-#include <test/lib.h>
++#include <test/cmd.h>
+ #include <test/test.h>
+ #include <test/ut.h>
  
- The docker image supports both amd64 and arm64. Ensure that the
--'docker-buildx' Debian package is installed (or the equivalent on another
--distribution).
-+`buildx` Docker CLI plugin is installed. This is often available in your
-+distribution via the 'docker-buildx' or 'docker-buildx-plugin' package.
+@@ -206,6 +206,10 @@ static int sb_http_handler(struct udevice *dev, void *packet,
  
- You will need a multi-platform container, otherwise this error is shown::
+ static int net_test_wget(struct unit_test_state *uts)
+ {
++	char *prev_ethact = env_get("ethact");
++	char *prev_ethrotate = env_get("ethrotate");
++	char *prev_loadaddr = env_get("loadaddr");
++
+ 	sandbox_eth_set_tx_handler(0, sb_http_handler);
+ 	sandbox_eth_set_priv(0, uts);
  
+@@ -223,6 +227,10 @@ static int net_test_wget(struct unit_test_state *uts)
+ 	ut_assert_nextline("md5 for 00020000 ... 0002001f ==> 234af48e94b0085060249ecb5942ab57");
+ 	ut_assert_console_end();
+ 
++	env_set("ethact", prev_ethact);
++	env_set("ethrotate", prev_ethrotate);
++	env_set("loadaddr", prev_loadaddr);
++
+ 	return 0;
+ }
+-LIB_TEST(net_test_wget, UTF_CONSOLE);
++CMD_TEST(net_test_wget, UTF_CONSOLE);
 -- 
-2.43.0
+2.40.1
 
