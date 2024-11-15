@@ -4,70 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DBEED6A223
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 14:20:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0ECDD6A223
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 14:20:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10C5A89346;
-	Fri, 15 Nov 2024 15:20:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7649A896BD;
+	Fri, 15 Nov 2024 15:20:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sj0WiRgx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b/GElYiX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C28C8935E; Fri, 15 Nov 2024 15:20:44 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id D8CB28935E; Fri, 15 Nov 2024 15:20:49 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BDB088D29
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:20:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B766F89348
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:20:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a9ed0ec0e92so238468166b.0
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 06:20:42 -0800 (PST)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5cacb76e924so2843078a12.0
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 06:20:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731680441; x=1732285241; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731680447; x=1732285247; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bnijsNiCpeVlNHDsPF7rN2ZiJvKMecQ6+Xwj1tNsn3s=;
- b=Sj0WiRgxsuauaME26NJcjYJ18tftMWF1yluXhAWqPb9yrGLwuUpjYa2B3zWNFV25ei
- 00qWp65rqy3NbD1fiLUrh6vvmHTF/iEs/rKMiFvuh57VHtrX76/JKRXmFKgxHUn6fe5v
- sAqinIqj+123FE3dfmqtBQXgKUgQU3XNE9NYM=
+ bh=PAgyfbh4teeuKvKZ5fiYJDfRyqNCWxqORBk2M3I6iLM=;
+ b=b/GElYiXkA6oY7m/Cxc/p0fwxAs0Ip3wr5h4Xl+RaVBbeg4DxdYBIB57FuuoRCgFLE
+ GEPkmHeIbhRoC7qFErxYUX89tna9tDYn9OKCJizmpx8jVcs0+XxY1zkksfbkI5eBH5E3
+ Y9n8xEALUZtA1czQLQZH3Ssjr1HnM8UAESdn4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731680441; x=1732285241;
+ d=1e100.net; s=20230601; t=1731680447; x=1732285247;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bnijsNiCpeVlNHDsPF7rN2ZiJvKMecQ6+Xwj1tNsn3s=;
- b=MpdG22+PHDI3/RR387qZxSUwHaRqILyheDz/cE9q0OwuvpUwq774DEm8Yetz7OI/y2
- ybniQ95sYgSj7W1mgPn+m+EnW6Oa5D5+StzFUVQ4+wtOlbx/lYp1+FJH58l4UidF1g+2
- 6h/5y4pFlWDzHOtBsGqMCOVD8w+AJ5fcNyZ/qd9q2z485RXsC4SKEY7ET7g01WxbyNNL
- 59FuSnoRvYnW5sa8NB3sxnf2X5YOt/5qV0tSD4dVl9WyY4479yWsDaQh7UIj9OaWeUXm
- TV+rOdrohFS2AlQ2qLhs60GwAU/Q5Urt1PgZSe9CrNk2go4Z/q2ComBLN2yNtnAmXGPi
- IT1g==
+ bh=PAgyfbh4teeuKvKZ5fiYJDfRyqNCWxqORBk2M3I6iLM=;
+ b=k9Ozl3Y70mp/FyqaMhSGIWQKJ5vN8XJGRmBaYHOHAkEI97V5zaNp1+4GYBvlKMZ0ZV
+ lySL3CZmQDQxL9CKqdmEf8sGeQf9BpQ4Ttkjsi/2GHwvZBJ02ji2O8svlJ5taEDp1xg+
+ 0tW8BaHFLvlL75hEITo3owDFYnhyvj9rbz/oQdnyr/j565VAiDd5BwXnnZszPDg/iSxP
+ 8MYjAmtBMywa0I6ZO5wdtjvgpff1LxRGCsOksoI9gqBKsxBA4/SCXEdYI4dyYukD7vEk
+ iIuM9zRwSmaAmqmfyUYZUJhPJrNGpGnJ8Sbfx3Y8gkGXTywQXUHklw5O4UDbk0OdqPUi
+ yIKg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWDR5vxsvtOW4kETk4hKElb5+NMbi7HS8rBS7+CMHFZbX/hK00K6dbmRCEEeRK4bsPZp2Gqgfo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzgyFv3EO62Ro6qZEpBO5K7JQJDgDOWNuSIM383pl4TwgbJQUbA
- GKA2sUo6HejczxiCD72JON4Jx527rAScmrYnHf9pho6+A0E4/H7jBqp3BgSz7g7j9faYTm9LLgX
- xPoDKqtvxtfsDeOURXv8AXTisZXDiOYOnje8h
-X-Google-Smtp-Source: AGHT+IGCdSERClDUzcfvzIFJPexTNNI8X2xfd/fS589UorRpI1eTBSIo+h5kpHTz6i5prEJMGoW/+dBRsaR24rr7T+k=
-X-Received: by 2002:a17:907:3f98:b0:a9e:d539:86c4 with SMTP id
- a640c23a62f3a-aa4833f41cdmr223739466b.9.1731680441482; Fri, 15 Nov 2024
- 06:20:41 -0800 (PST)
+ AJvYcCUMfkab3mhgy6k1WmnYr+YKxhRZjulWdkG8tsvEmOwlgkVDmxKx+4/PCCA53FSt4oZHF0KRp7g=@lists.denx.de
+X-Gm-Message-State: AOJu0YxA3e/i1vQvlzkUGqtM8f0QGqqiftZZIXtkxEnSjh8/hb5j9qfC
+ 8kfZcw+Vd6Cw88sH+YsVu2zzIZFG85yyjXi1Tsmvx3tJRYYXmz2Ku4oBxTNwkemorW7QaNSe6Yy
+ t2Rc9yeVRQssHcjTEo7LKFSwI6DvhvHXj0ikw
+X-Google-Smtp-Source: AGHT+IG6Dpzo6jcdrXxw9Z9irb7pHFeBhweT+IZuo28TG3LkecjzTbxbenbPGotnaWj5ckRr2tSwWjFu+tgyDNr0IcU=
+X-Received: by 2002:a17:907:2d8d:b0:aa1:e0ac:db5 with SMTP id
+ a640c23a62f3a-aa48347e902mr197661866b.26.1731680447115; Fri, 15 Nov 2024
+ 06:20:47 -0800 (PST)
 MIME-Version: 1.0
-References: <20241114142917.481564-1-ilias.apalodimas@linaro.org>
-In-Reply-To: <20241114142917.481564-1-ilias.apalodimas@linaro.org>
+References: <20241110083017.367565-1-ilias.apalodimas@linaro.org>
+ <20241110083017.367565-5-ilias.apalodimas@linaro.org>
+ <CAFLszThNpU2cNNvU4uT2vkgFKJr7ss=j_UYfXTFXA_b4=LnurA@mail.gmail.com>
+ <CAC_iWjKFxtBxEqkkXSOhcRqN4fRRgMcsmFRVYeNZOnR4zERrQQ@mail.gmail.com>
+ <CAFLszTjou7yq-psYT3jBU7L8g81+bWUqc9Xj007zqfpfpnP9gg@mail.gmail.com>
+ <CAC_iWjJdK6D+inVSMqJ941yvpDvK4j5XufvA1Fije3aqZvm=1g@mail.gmail.com>
+ <CAFLszTiG9AMPs7q9QJgD5bP4=QwXVxQrOJqpWARamkPXS8p4wg@mail.gmail.com>
+ <CAC_iWjL6BDhRHTYWW25N2v8Aw_MbwTzc+FAX1c6akGKypLKFEA@mail.gmail.com>
+ <CAFLszTiPNMEGFPsbsuagcVooPDb_eawafnb=7hWGaDmNYbrqyg@mail.gmail.com>
+ <CAC_iWjK-8JxM65dZkN1z_wP1Q+o7t4mJ1Xw8QZjzcanWXr98SA@mail.gmail.com>
+ <CAFLszTgUbx4wXNmR0Fqu-ZxQwT1nvV7aOGiDOzZ-di-w-zQLew@mail.gmail.com>
+ <CAC_iWj+59tJh=iBSTRGw3DCtfQ+aPCeYo_JP2joASZ7bqC5uKQ@mail.gmail.com>
+In-Reply-To: <CAC_iWj+59tJh=iBSTRGw3DCtfQ+aPCeYo_JP2joASZ7bqC5uKQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 Nov 2024 07:20:29 -0700
-Message-ID: <CAFLszTifoqr9AaYVkK=1JtWdqY+2XNpWD=R6nwLxqpWX2i4_8g@mail.gmail.com>
-Subject: Re: [PATCH v2] net: lwip: provide entropy to MBed TLS in one go
+Date: Fri, 15 Nov 2024 07:20:35 -0700
+Message-ID: <CAFLszThSq+U8RqdOg09jEW0EcwbiaE3rwHwtaUshq+qS7DMUpw@mail.gmail.com>
+Subject: Re: [PATCH v3 4/6] net: lwip: Enable https:// support for wget
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: jerome.forissier@linaro.org, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Anton Antonov <Anton.Antonov@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Wei Ming Chen <jj251510319013@gmail.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,28 +107,185 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 14 Nov 2024 at 07:29, Ilias Apalodimas
+Hi Ilias,
+
+On Wed, 13 Nov 2024 at 22:10, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
-> We currently provide entropy to mbedTLS using 8b chunks.
-> Take into account the 'len' parameter passed by MBed TLS to the entropy
-> gathering function instead. Note that the current code works because len
-> is always 128 (defined at compile time), therefore mbedtls_hardware_poll()
-> is called repeatedly and the buffer is filled correctly. But passing 'len'
-> to dm_rng_read() is both better and simpler.
+> On Thu, 14 Nov 2024 at 05:53, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Ilias,
+> >
+> > On Wed, 13 Nov 2024 at 09:11, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > On Wed, 13 Nov 2024 at 18:04, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Ilias,
+> > > >
+> > > > On Wed, 13 Nov 2024 at 08:11, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > On Wed, 13 Nov 2024 at 17:09, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > Hi Ilias,
+> > > > > >
+> > > > > > On Wed, 13 Nov 2024 at 07:46, Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >
+> > > > > > > On Wed, 13 Nov 2024 at 15:39, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > >
+> > > > > > > > HI Ilias,
+> > > > > > > >
+> > > > > > > > On Mon, 11 Nov 2024 at 07:20, Ilias Apalodimas
+> > > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > > >
+> > > > > > > > > Thanks Simon,
+> > > > > > > > >
+> > > > > > > > > On Mon, 11 Nov 2024 at 15:03, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > >
+> > > > > > > > > > On Sun, 10 Nov 2024 at 01:32, Ilias Apalodimas
+> > > > > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > With the recent changes of lwip & mbedTLS we can now download from
+> > > > > > > > > > > https:// urls instead of just http://.
+> > > > > > > > > > > Adjust our wget lwip version parsing to support both URLs.
+> > > > > > > > > > > While at it adjust the default TCP window for QEMU since https seems to
+> > > > > > > > > > > require at least 16384
+> > > > > > > > > > >
+> > > > > > > > > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > > > > > > > > ---
+> > > > > > > > > > >  cmd/Kconfig      | 19 +++++++++++
+> > > > > > > > > > >  net/lwip/Kconfig |  2 +-
+> > > > > > > > > > >  net/lwip/wget.c  | 86 +++++++++++++++++++++++++++++++++++++++++++-----
+> > > > > > > > > > >  3 files changed, 97 insertions(+), 10 deletions(-)
+> > > > > > > > > >
+> > > > > > > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > >
+> > > > > > > > > > Some nits / questions
+> > > > > > > > > >
+> > > > > > > > > > I am not sure what mbedtls_hardware_poll() is,
+> > > > > > > > >
+> > > > > > > > > It's an entropy collector used by mbedTLS to ensure the platform has
+> > > > > > > > > enough entropy.
+> > > > > > > > > It's required if your platform doesn't support standards like the
+> > > > > > > > > /dev/urandom or Windows CryptoAPI.
+> > > > > > > > >
+> > > > > > > > > > but if @len is too
+> > > > > > > > > > short, would it be acceptable to return an error? How many bytes is it
+> > > > > > > > > > requesting in the https case?
+> > > > > > > > >
+> > > > > > > > > If you don't return enough entropy https:// will fail and mbedTLS &
+> > > > > > > > > lwIP will print an error. I think we currently use 128 and the default
+> > > > > > > > > for mbedTLS is 32.
+> > > > > > > >
+> > > > > > > > OK, then the code is quite strange to me. It seems like it should
+> > > > > > > > check that 'len' is large enough.
+> > > > > > > >
+> > > > > > > > But what does 'len' actually mean? Its arguments are not described in
+> > > > > > > > mbedtls. Shouldn't you just pass it on to the dm_rng_read() function?
+> > > > > > >
+> > > > > > > The entry point is mbedtls_entropy_func(). mbedtls then calls
+> > > > > > > entropy_gather_internal() which asks for some bytes of entropy and is
+> > > > > > > controlled by a config option (and defaults to 128 for the config we
+> > > > > > > use in U-Boot -- MBEDTLS_ENTROPY_MAX_GATHER). len is actually
+> > > > > > > MBEDTLS_ENTROPY_MAX_GATHER.
+> > > > > > >
+> > > > > > > > Why call it with only 8 bytes? It might be more bytes than is
+> > > > > > > > requested (and larger than the buffer), or fewer.
+> > > > > > >
+> > > > > > > It doesn't matter because we copy back the correct amount of
+> > > > > > > bytes(what the caller requested). If it's less mbedTLS calls that
+> > > > > > > function until it gathers all requested entropy.
+> > > > > > >
+> > > > > > > > It seems that your
+> > > > > > > > function is written with knowledge of the internals of mbedtls.
+> > > > > > >
+> > > > > > > Ofc it is. It's a function needed by mbedTLS -- not U-Boot, it
+> > > > > > > requires internal knowledge of it (and is probably part of the ABI,
+> > > > > > > but I'll have to check that).
+> > > > > > >
+> > > > > > > What happens in the TLS case is that 64b are required. We either make
+> > > > > > > 8 calls of 8b or make a single call with MBEDTLS_ENTROPY_MAX_GATHER.
+> > > > > > >
+> > > > > > >  I could rewrite it as
+> > > > > > >         uclass_first_device(UCLASS_RNG, &dev);
+> > > > > > >         if (!dev) {
+> > > > > > >                 log_err("Failed to get an rng device\n");
+> > > > > > >                 return ret;
+> > > > > > >         }
+> > > > > > >
+> > > > > > >         rng = malloc(len);
+> > > > > > >         if (!rng)
+> > > > > > >                 return -ENOMEM;
+> > > > > > >
+> > > > > > >         ret = dm_rng_read(dev, rng, len);
+> > > > > > >         if (ret) {
+> > > > > > >                 free(rng);
+> > > > > > >                 return ret;
+> > > > > > >         }
+> > > > > > >
+> > > > > > >         memcpy(output, rng, len);
+> > > > > > >         *olen = len;
+> > > > > > >         free(rng);
+> > > > > > >
+> > > > > > > It does the same thing but gets 128b in one go. I don't have a strong
+> > > > > > > opinion on that. Let me know what you prefer
+> > > > > > > The tradeoff seems pretty straightforward. you either gather
+> > > > > > > potentially more entropy than required and call that function once, or
+> > > > > > > you gather exactly what's required on 8b steps -- but call that
+> > > > > > > function multiple times.
+> > > > > > >
+> > > > > > > >
+> > > > > > > > BTW mbedtls_hardware_poll() is a strange name as it actually reads
+> > > > > > > > random data, so I think it should be renamed.
+> > > > > > >
+> > > > > > > I don't think that can't change as you would break all projects using
+> > > > > > > it, but you can try sending a patch.
+> > > > > >
+> > > > > > I am wondering why we can't just do:
+> > > > > >
+> > > > > > ret = dm_rng_read(dev, rng, len);
+> > > > > > if (ret)
+> > > > > >    return ret;
+> > > > > >
+> > > > > > *olen = len;
+> > > > >
+> > > > > I am not sure I am following. Do that were?
+> > > >
+> > > > Oh, I had that wrong, so very confusing, sorry. Something like this:
+> > > >
+> > > > +int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len,
+> > > > +                         size_t *olen)
+> > > > +{
+> > > > +       struct udevice *dev;
+> > > > +       int ret;
+> > > > +
+> > > > +       ret = uclass_get_device(UCLASS_RNG, 0, &dev);
+> > > > +       if (ret) {
+> > > > +               log_err("Failed to get an rng: %d\n", ret);
+> > > > +               return ret;
+> > > > +       }
+> > > > +       ret = dm_rng_read(dev, output, len);
+> > > > +       if (ret)
+> > > > +               return ret;
+> > > > +
+> > > > +       *olen = len;
+> > > > +
+> > > > +       return 0;
+> > >
+> > > Yep, that's identical to what I had above without the allocation,
+> > > which indeed isn't needed.
+> > > Both of the versions are correct and I ask internally mbedTLS devs if
+> > > they have a preference.
+> > >
+> > > In any case feel free to send this, since Tom picked up the patches already
+> >
+> > OK. It will be interesting to see if coverity picks this up.
 >
-> Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Suggested-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->
-> Changes since v1:
-> - Update the commit message and title and picked up r-b from Jerome
-> - v1 can be found here https://lore.kernel.org/u-boot/42870ab3-1621-491f-a221-8ced932ed703@linaro.org/
->
->  net/lwip/wget.c | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
+> Pick up what ? There's nothing wrong with the merged code. It does
+> gathers entropy in rounds of 8b
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+If len is 40 (say) then this will memcpy() 40 bytes from the 8-byte variable.
 
-Yes this seems better!
+Regards,
+Simon
